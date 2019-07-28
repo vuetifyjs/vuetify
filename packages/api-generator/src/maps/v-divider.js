@@ -2,13 +2,13 @@ module.exports = {
   'v-divider': {
     props: [
       {
-        'name': 'dark',
-        'source': 'themeable'
+        name: 'dark',
+        source: 'themeable',
       },
       {
-        'name': 'light',
-        'source': 'themeable'
-      }
-    ]
-  }
+        name: 'light',
+        source: 'themeable',
+      },
+    ],
+  },
 }

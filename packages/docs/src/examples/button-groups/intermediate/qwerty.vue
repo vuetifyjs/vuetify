@@ -13,6 +13,7 @@
       px-2
       pb-2
       justify-space-between
+      wrap
     >
       <v-btn-toggle
         v-model="formatting"
@@ -55,7 +56,7 @@
     <v-sheet
       color="grey lighten-3"
       tile
-      class="pa-3 text-xs-center"
+      class="pa-4 text-center"
     >
       <v-layout mb-2>
         <v-flex

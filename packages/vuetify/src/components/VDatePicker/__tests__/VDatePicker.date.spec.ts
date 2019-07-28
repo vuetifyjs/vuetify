@@ -504,7 +504,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     expect(icons[1].element.textContent).toBe('check')
   })
 
-  it('should emit update:pickerDate event when tableDate changes', async () => {
+  it('should emit update:picker-date event when tableDate changes', async () => {
     const wrapper = mountFunction({
       propsData: {
         value: '2017-09',
@@ -512,7 +512,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     })
 
     const pickerDate = jest.fn()
-    wrapper.vm.$on('update:pickerDate', pickerDate)
+    wrapper.vm.$on('update:picker-date', pickerDate)
     wrapper.vm.tableDate = '2013-11'
     await wrapper.vm.$nextTick()
     expect(pickerDate).toHaveBeenCalledWith('2013-11')
@@ -538,7 +538,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     })
 
     const update = jest.fn()
-    wrapper.vm.$on('update:pickerDate', update)
+    wrapper.vm.$on('update:picker-date', update)
     await wrapper.vm.$nextTick()
 
     wrapper.setProps({

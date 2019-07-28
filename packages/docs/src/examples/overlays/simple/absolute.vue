@@ -4,7 +4,7 @@
       <v-layout justify-center wrap>
         <v-btn
           color="success"
-          class="mt-5"
+          class="mt-12"
           @click="overlay = !overlay"
         >
           Show Overlay

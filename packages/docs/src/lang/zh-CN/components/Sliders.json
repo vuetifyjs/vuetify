@@ -1,5 +1,4 @@
 {
-  "header": "滑块",
   "headerText": "`v-slider`组件是数字输入的更好的可视化，它用于收集数字用户数据。",
   "examples": {
     "thumb": {
@@ -16,12 +15,11 @@
       "header": "图标",
       "desc": "您可以使用`append-icon`和`prepend-icon`属性将图标添加到滑块。"
     },
-    "editableNumericValue": {
+    "editable-numeric-value": {
       "header": "带有可编辑的数值",
       "desc": "滑块可以与其他组件相结合，以获得更好的显示效果。"
     },
-    "customColors": {
-      "header": "自定义色彩",
+    "custom-colors": {
       "desc": "您可以使用`color`、`track-color`和`thumb-color`属性来设置滑块的颜色。"
     },
     "validation": {
@@ -31,14 +29,22 @@
     "range": {
       "header": "Range"
     },
-    "minMax": {
+    "min-max": {
       "header": "Min & Max values"
+    },
+    "disabled": {
+      "header": "禁用"
     }
   },
   "props": {
     "step": "如果大于0，则为滑块上的点设置步骤间隔",
     "thumbColor": "设置拇指和拇指标签颜色",
-    "thumbLabel": "显示拇指标签",
-    "trackColor": "设置曲目填充色彩"
+    "thumbLabel": "显示拇指标签"
+  },
+  "events": {
+    "change": "Components.Inputs.events.change",
+    "click:append": "Components.Inputs.events['click:append']",
+    "click:prepend": "Components.Inputs.events['click:prepend']",
+    "update:error": "Mixins.Validatable.events['update:error']"
   }
 }

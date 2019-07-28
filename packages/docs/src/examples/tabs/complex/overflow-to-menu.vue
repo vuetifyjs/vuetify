@@ -22,6 +22,7 @@
       <template v-slot:extension>
         <v-tabs
           v-model="currentItem"
+          background-color="transparent"
           fixed-tabs
           slider-color="white"
         >
@@ -41,7 +42,7 @@
             <template v-slot:activator="{ on }">
               <v-btn
                 text
-                class="align-self-center mr-3"
+                class="align-self-center mr-4"
                 v-on="on"
               >
                 more

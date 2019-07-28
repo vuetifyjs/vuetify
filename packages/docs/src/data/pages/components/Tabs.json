@@ -13,6 +13,11 @@
         {
           "type": "usage",
           "value": "usage"
+        },
+        {
+          "type": "alert",
+          "lang": "alert",
+          "value": "warning"
         }
       ]
     },
@@ -47,10 +52,7 @@
           "type": "examples",
           "value": [
             "simple/fixed-tabs",
-            {
-              "file": "simple/center-active",
-              "newIn": "2.0"
-            },
+            "simple/center-active",
             "simple/grow",
             "simple/pagination",
             "simple/icons",

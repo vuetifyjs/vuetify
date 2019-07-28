@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VColorPickerEdit.ts should change mode 1`] = `
-
 <div class="v-color-picker__edit">
   <div class="v-color-picker__input">
     <input type="number"
@@ -48,18 +47,16 @@ exports[`VColorPickerEdit.ts should change mode 1`] = `
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon notranslate material-icons theme--light"
       >
         $vuetify.icons.unfold
       </i>
     </span>
   </button>
 </div>
-
 `;
 
 exports[`VColorPickerEdit.ts should change mode 2`] = `
-
 <div class="v-color-picker__edit">
   <div class="v-color-picker__input">
     <input type="number"
@@ -106,18 +103,16 @@ exports[`VColorPickerEdit.ts should change mode 2`] = `
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon notranslate material-icons theme--light"
       >
         $vuetify.icons.unfold
       </i>
     </span>
   </button>
 </div>
-
 `;
 
 exports[`VColorPickerEdit.ts should change mode 3`] = `
-
 <div class="v-color-picker__edit">
   <div class="v-color-picker__input">
     <input maxlength="9">
@@ -130,18 +125,16 @@ exports[`VColorPickerEdit.ts should change mode 3`] = `
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon notranslate material-icons theme--light"
       >
         $vuetify.icons.unfold
       </i>
     </span>
   </button>
 </div>
-
 `;
 
 exports[`VColorPickerEdit.ts should change mode 4`] = `
-
 <div class="v-color-picker__edit">
   <div class="v-color-picker__input">
     <input type="number"
@@ -188,18 +181,16 @@ exports[`VColorPickerEdit.ts should change mode 4`] = `
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon notranslate material-icons theme--light"
       >
         $vuetify.icons.unfold
       </i>
     </span>
   </button>
 </div>
-
 `;
 
 exports[`VColorPickerEdit.ts should hide mode switch button 1`] = `
-
 <div class="v-color-picker__edit">
   <div class="v-color-picker__input">
     <input type="number"
@@ -242,11 +233,9 @@ exports[`VColorPickerEdit.ts should hide mode switch button 1`] = `
     </span>
   </div>
 </div>
-
 `;
 
 exports[`VColorPickerEdit.ts should render with disabled 1`] = `
-
 <div class="v-color-picker__edit">
   <div class="v-color-picker__input">
     <input type="number"
@@ -298,12 +287,11 @@ exports[`VColorPickerEdit.ts should render with disabled 1`] = `
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon notranslate material-icons theme--light"
       >
         $vuetify.icons.unfold
       </i>
     </span>
   </button>
 </div>
-
 `;

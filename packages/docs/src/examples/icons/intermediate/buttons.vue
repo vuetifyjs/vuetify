@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center">
+  <div class="text-center">
     <div>
       <v-btn class="ma-2" color="primary" dark>Accept
         <v-icon dark right>check_circle</v-icon>

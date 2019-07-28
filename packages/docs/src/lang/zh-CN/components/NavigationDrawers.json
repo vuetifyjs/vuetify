@@ -1,14 +1,9 @@
 {
-  "header": "导航抽屉",
   "headerText": "`v-navigation-drawer`组件是用户将用来浏览应用程序的内容，导航抽屉被预先配置为可以使用或不使用**vue-router**。",
   "examples": {
-    "permanentFloating": {
+    "permanent-floating": {
       "header": "永久浮动抽屉",
       "desc": "导航抽屉可以放置在卡片内并浮在内容背景上。"
-    },
-    "persistent": {
-      "header": "头像",
-      "desc": "由于抽屉支持`v-list`组件，您可以轻松创建自定义的仪表板解决方案。"
     },
     "mini": {
       "header": "迷你",
@@ -17,11 +12,6 @@
     "temporary": {
       "header": "临时的",
       "desc": "临时抽屉位于其应用之上，并使用稀松布（叠加）来使背景变暗。这个抽屉的行为是模仿在移动设备时的持续抽屉。点击抽屉外部会导致关闭。"
-    },
-    "dark": {
-      "header": "暗黑主题",
-      "desc": "Vuetify也支持暗黑的应用程序主题，这不会覆盖具有默认主题的主键，因此在某些情况下，需要手动设置为暗黑主题。",
-      "uninverted": true
     }
   },
   "props": {
@@ -29,7 +19,6 @@
     "disableResizeWatcher": "调整大小时将自动打开/关闭抽屉，具体取决于手机还是桌面",
     "disableRouteWatcher": "当路由改变时禁止打开抽屉导航",
     "floating": "浮动抽屉没有可见的容器（没有右边框）",
-    "hideOverlay": "隐藏叠加层的显示",
     "miniVariantWidth": "指定`mini`属性开期时指定的宽度",
     "miniVariant": "凝结导航抽屉宽度，也接受**.sync**修饰符。这样，抽屉在点击时会重新打开",
     "permanent": "不管屏幕尺寸如何，抽屉都可以看到",

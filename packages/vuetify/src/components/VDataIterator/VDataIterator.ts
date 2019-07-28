@@ -5,7 +5,6 @@ import { VData } from '../VData'
 import VDataFooter from './VDataFooter'
 
 // Mixins
-import mixins from '../../util/mixins'
 import Themeable from '../../mixins/themeable'
 
 // Helpers
@@ -15,7 +14,7 @@ import { PropValidator } from 'vue/types/options'
 import { breaking, removed } from '../../util/console'
 
 /* @vue/component */
-export default mixins(Themeable).extend({
+export default Themeable.extend({
   name: 'v-data-iterator',
 
   props: {
@@ -170,22 +169,10 @@ export default mixins(Themeable).extend({
     createItemProps (item: any) {
       const props = {
         item,
-        select: {
-          props: {
-            value: this.isSelected(item),
-          },
-          on: {
-            input: (v: boolean) => this.select(item, v),
-          },
-        },
-        expand: {
-          props: {
-            value: this.isExpanded(item),
-          },
-          on: {
-            input: (v: boolean) => this.expand(item, v),
-          },
-        },
+        select: (v: boolean) => this.select(item, v),
+        isSelected: this.isSelected(item),
+        expand: (v: boolean) => this.expand(item, v),
+        isExpanded: this.isExpanded(item),
       }
 
       return props
@@ -263,7 +250,7 @@ export default mixins(Themeable).extend({
         this.genItems(props),
         this.genFooter(props),
         getSlot(this, 'footer', outerProps, true),
-      ]) as any
+      ])
     },
   },
 
@@ -278,7 +265,7 @@ export default mixins(Themeable).extend({
         'update:sort-desc': (v: any) => this.$emit('update:sort-desc', v),
         'update:group-by': (v: any) => this.$emit('update:group-by', v),
         'update:group-desc': (v: any) => this.$emit('update:group-desc', v),
-        'pagination': (v: any, old: any) => !deepEqual(v, old) && this.$emit('pagination', v),
+        pagination: (v: any, old: any) => !deepEqual(v, old) && this.$emit('pagination', v),
         'current-items': (v: any[]) => {
           this.internalCurrentItems = v
           this.$emit('current-items', v)

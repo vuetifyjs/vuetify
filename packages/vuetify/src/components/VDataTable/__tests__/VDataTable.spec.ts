@@ -170,7 +170,7 @@ describe('VDataTable.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render virtual table', () => {
+  it.skip('should render virtual table', () => {
     const wrapper = mountFunction({
       propsData: {
         headers: testHeaders,
@@ -197,7 +197,6 @@ describe('VDataTable.ts', () => {
         'update:expanded': expand,
       },
     })
-    // const expand = jest.spyOn(wrapper.vm, 'expand')
 
     expect(wrapper.html()).toMatchSnapshot()
     const expandIcon = wrapper.findAll('.v-data-table__expand-icon').at(0)
@@ -269,7 +268,7 @@ describe('VDataTable.ts', () => {
         itemsPerPage: 5,
       },
       scopedSlots: {
-        'item': props => vm.$createElement('div', [ JSON.stringify(props) ]),
+        item: props => vm.$createElement('div', [JSON.stringify(props)]),
       },
     })
 
@@ -300,7 +299,7 @@ describe('VDataTable.ts', () => {
         groupBy: ['protein'],
       },
       scopedSlots: {
-        group: props => vm.$createElement('div', [ JSON.stringify(props) ]),
+        group: props => vm.$createElement('div', [JSON.stringify(props)]),
       },
     })
 

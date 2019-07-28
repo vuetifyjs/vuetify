@@ -47,6 +47,12 @@ const baseMixins = mixins(
 export default baseMixins.extend({
   name: 'v-navigation-drawer',
 
+  provide (): object {
+    return {
+      isInNav: this.tag === 'nav',
+    }
+  },
+
   directives: {
     ClickOutside,
     Resize,
@@ -56,15 +62,16 @@ export default baseMixins.extend({
   props: {
     bottom: Boolean,
     clipped: Boolean,
-    disableRouteWatcher: Boolean,
     disableResizeWatcher: Boolean,
+    disableRouteWatcher: Boolean,
+    expandOnHover: Boolean,
+    floating: Boolean,
     height: {
       type: [Number, String],
       default (): string {
         return this.app ? '100vh' : '100%'
       },
     },
-    floating: Boolean,
     miniVariant: Boolean,
     miniVariantWidth: {
       type: [Number, String],
@@ -75,13 +82,18 @@ export default baseMixins.extend({
       default: 1264,
     },
     permanent: Boolean,
-    expandOnHover: Boolean,
     right: Boolean,
     src: {
       type: [String, Object],
       default: '',
     } as PropValidator<string | srcObject>,
     stateless: Boolean,
+    tag: {
+      type: String,
+      default (): string {
+        return this.app ? 'nav' : 'aside'
+      },
+    },
     temporary: Boolean,
     touchless: Boolean,
     width: {
@@ -344,7 +356,7 @@ export default baseMixins.extend({
       }
 
       if (this.miniVariant) {
-        on.click = () => this.$emit('update:miniVariant', false)
+        on.click = () => this.$emit('update:mini-variant', false)
       }
 
       if (this.expandOnHover) {
@@ -439,7 +451,7 @@ export default baseMixins.extend({
 
     if (this.src || getSlot(this, 'img')) children.unshift(this.genBackground())
 
-    return h('aside', this.setBackgroundColor(this.color, {
+    return h(this.tag, this.setBackgroundColor(this.color, {
       class: this.classes,
       style: this.styles,
       directives: this.genDirectives(),

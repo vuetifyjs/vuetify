@@ -8,16 +8,35 @@
   .v-tab--disabled
     color: map-get($material, 'tabs')
 
+  .v-tabs-bar
+    background-color: map-get($material, 'cards')
+
   .v-tab
     +states($material)
+
++theme(v-tabs-items) using ($material)
+  background-color: map-get($material, 'cards')
 
 .v-tabs-bar.theme--dark
   .v-tab:not(.v-tab--active):not(.v-tab--disabled)
     opacity: .7
 
+.v-tabs-bar
+  &.primary,
+  &.secondary,
+  &.accent,
+  &.success,
+  &.error,
+  &.warning,
+  &.info
+    .v-tab,
+    .v-tabs-slider
+      color: map-deep-get($material-dark, 'text', 'primary')
+
 // Block
 .v-tabs
   flex: 1 1 auto
+  width: 100%
 
   .v-menu__activator
     height: 100%
@@ -37,8 +56,9 @@
   font-size: 0.875rem
   font-weight: 500
   justify-content: center
+  line-height: normal
   min-width: $tabs-item-min-width
-  max-width: $tabs-item-man-width
+  max-width: $tabs-item-max-width
   outline: none
   padding: $tabs-item-padding
   position: relative
@@ -46,6 +66,10 @@
   text-transform: uppercase
   transition: none
   user-select: none
+
+  // Needs increased specificity
+  &.v-tab
+    color: inherit
 
   &:before
     background-color: currentColor
@@ -64,7 +88,7 @@
 
 .v-tabs-slider
   background-color: currentColor
-  height: $tabs-slider-height
+  height: 100%
   width: 100%
 
   &-wrapper

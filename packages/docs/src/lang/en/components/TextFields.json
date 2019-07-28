@@ -1,5 +1,5 @@
 {
-  "header": "# Text field",
+  "header": "# Text fields",
   "headerText": "Text fields components are used for collecting user provided information.",
   "examples": {
     "usage": {
@@ -78,7 +78,7 @@
       "desc": "Text fields can be used with an alternative solo design."
     },
     "outlined": {
-      "header": "### Outline style",
+      "header": "### Outlined style",
       "desc": "Text fields can be used with an alternative outline design."
     },
     "custom-colors": {
@@ -101,6 +101,7 @@
     "filled": "Applies the alternate filled input style",
     "clearIcon": "Applied when using **clearable** and the input is dirty",
     "counter": "Creates counter for input length; if no number is specified, it defaults to 25. Does not apply any validation.",
+    "dark": "Components.Inputs.props.dark",
     "flat": "Mixins.Soloable.props.flat",
     "fullWidth": "Designates input type as full-width",
     "multiLine": "Turns into textarea",
@@ -129,12 +130,15 @@
     "prepend-inner": "Prepends an item inside input content"
   },
   "events": {
+    "blur": "Emitted when component is no longer focused",
     "change": "Components.Inputs.events.change",
     "click:append": "Components.Inputs.events['click:append']",
     "click:append-outer": "Emitted when appended outer icon is clicked",
     "click:clear": "Emitted when clearable icon clicked",
     "click:prepend": "Components.Inputs.events['click:prepend']",
     "click:prepend-inner": "Emitted when prepended inner icon is clicked",
+    "focus": "Emitted when component is focused",
+    "keydown": "Emitted when the **enter** key is pressed",
     "update:error": "Mixins.Validatable.events['update:error']"
   }
 }

@@ -1,8 +1,6 @@
 {
-  "header": "아바타 (Avatar)",
   "examples": {
     "advanced": {
-      "header": "고급 사용법 (Advanced usage)",
       "desc": "아바타와 다른 컴포넌트를 결합하면 쉽게 아름다운 사용자 인터페이스를 만들 수 있습니다."
     }
   }

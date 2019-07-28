@@ -1,95 +1,119 @@
 {
-  "header": "crwdns26812:0crwdne26812:0",
-  "headerText": "crwdns26814:0crwdne26814:0",
+  "header": "crwdns39546:0crwdne39546:0",
+  "headerText": "crwdns39548:0crwdne39548:0",
   "examples": {
     "usage": {
-      "desc": "crwdns36174:0crwdne36174:0"
+      "desc": "crwdns39550:0crwdne39550:0"
     },
-    "avatarTitleAndAction": {
-      "header": "crwdns26818:0crwdne26818:0",
-      "desc": "crwdns26820:0crwdne26820:0"
+    "avatar-title-and-action": {
+      "header": "crwdns39552:0crwdne39552:0",
+      "desc": "crwdns39554:0crwdne39554:0"
     },
-    "iconTwoLinesAndAction": {
-      "header": "crwdns26822:0crwdne26822:0",
-      "desc": "crwdns26824:0crwdne26824:0"
+    "icon-two-lines-and-action": {
+      "header": "crwdns39556:0crwdne39556:0",
+      "desc": "crwdns39558:0crwdne39558:0"
     },
-    "avatarThreeLines": {
-      "header": "crwdns26826:0crwdne26826:0",
-      "desc": "crwdns26828:0crwdne26828:0"
+    "avatar-three-lines": {
+      "header": "crwdns39560:0crwdne39560:0",
+      "desc": "crwdns39562:0[line-clamp]crwdne39562:0"
     },
-    "avatarSubheaderTitleAndAction": {
-      "header": "crwdns26830:0crwdne26830:0",
-      "desc": "crwdns26832:0crwdne26832:0"
+    "avatar-subheader-title-and-action": {
+      "header": "crwdns39564:0crwdne39564:0",
+      "desc": "crwdns39566:0crwdne39566:0"
     },
-    "subheadingsAndDividers": {
-      "header": "crwdns26834:0crwdne26834:0",
-      "desc": "crwdns26836:0crwdne26836:0"
+    "subheadings-and-dividers": {
+      "header": "crwdns39568:0crwdne39568:0",
+      "desc": "crwdns39570:0crwdne39570:0"
     },
-    "cardList": {
-      "header": "crwdns26838:0crwdne26838:0",
-      "desc": "crwdns26840:0crwdne26840:0"
+    "nested": {
+      "header": "crwdns39572:0crwdne39572:0",
+      "desc": "crwdns39574:0crwdne39574:0"
     },
-    "titleSubtitleActionsAndActionText": {
-      "header": "crwdns26842:0crwdne26842:0",
-      "desc": "crwdns26844:0crwdne26844:0"
+    "card-list": {
+      "header": "crwdns39576:0crwdne39576:0",
+      "desc": "crwdns39578:0crwdne39578:0"
     },
-    "actionTitleAndSubtitle": {
-      "header": "crwdns26846:0crwdne26846:0",
-      "desc": "crwdns26848:0[v-list-item-group]crwdne26848:0"
+    "title-subtitle-actions-and-action-text": {
+      "header": "crwdns39580:0crwdne39580:0",
+      "desc": "crwdns39582:0crwdne39582:0"
     },
-    "expansionLists": {
-      "header": "crwdns26850:0crwdne26850:0",
-      "desc": "crwdns26852:0[v-navigation-drawer]crwdne26852:0"
+    "action-title-and-subtitle": {
+      "header": "crwdns39584:0crwdne39584:0",
+      "desc": "crwdns39586:0[v-list-item-group]crwdne39586:0"
+    },
+    "expansion-lists": {
+      "header": "crwdns39588:0crwdne39588:0",
+      "desc": "crwdns39590:0[v-navigation-drawer]crwdne39590:0"
     },
     "nav": {
-      "header": "crwdns26854:0crwdne26854:0",
-      "desc": "crwdns26856:0crwdne26856:0"
+      "header": "crwdns39592:0crwdne39592:0",
+      "desc": "crwdns39594:0crwdne39594:0"
     },
     "shaped": {
-      "header": "crwdns26858:0crwdne26858:0",
-      "desc": "crwdns26860:0crwdne26860:0"
+      "header": "crwdns39596:0crwdne39596:0",
+      "desc": "crwdns39598:0crwdne39598:0"
     },
     "disabled": {
-      "header": "crwdns36176:0crwdne36176:0",
-      "desc": "crwdns36178:0crwdne36178:0"
+      "header": "crwdns39600:0crwdne39600:0",
+      "desc": "crwdns39602:0crwdne39602:0"
     },
     "dense": {
-      "header": "crwdns36180:0crwdne36180:0",
-      "desc": "crwdns36182:0crwdne36182:0"
+      "header": "crwdns39604:0crwdne39604:0",
+      "desc": "crwdns39606:0crwdne39606:0"
     },
     "flat": {
-      "header": "crwdns36184:0crwdne36184:0",
-      "desc": "crwdns36186:0crwdne36186:0"
+      "header": "crwdns39608:0crwdne39608:0",
+      "desc": "crwdns39610:0crwdne39610:0"
     },
     "rounded": {
-      "header": "crwdns36188:0crwdne36188:0",
-      "desc": "crwdns36190:0crwdne36190:0"
+      "header": "crwdns39612:0crwdne39612:0",
+      "desc": "crwdns39614:0crwdne39614:0"
     }
   },
   "props": {
-    "avatar": "crwdns26862:0crwdne26862:0",
-    "dense": "crwdns26864:0crwdne26864:0",
-    "expand": "crwdns26866:0crwdne26866:0",
-    "flat": "crwdns26868:0crwdne26868:0",
-    "group": "crwdns26870:0crwdne26870:0",
-    "inactive": "crwdns26872:0crwdne26872:0",
-    "link": "crwdns26874:0crwdne26874:0",
-    "nav": "crwdns26876:0[v-navigation-drawer]crwdne26876:0",
-    "noAction": "crwdns26878:0crwdne26878:0",
-    "shaped": "crwdns26880:0crwdne26880:0",
-    "subGroup": "crwdns26882:0crwdne26882:0",
-    "subheader": "crwdns26884:0crwdne26884:0",
-    "threeLine": "crwdns26886:0crwdne26886:0",
-    "twoLine": "crwdns26888:0crwdne26888:0",
-    "value": "crwdns26890:0crwdne26890:0",
+    "avatar": "crwdns33116:0crwdne33116:0",
+    "dense": "crwdns33118:0crwdne33118:0",
+    "disabled": "crwdns39616:0crwdne39616:0",
+    "expand": "crwdns33120:0crwdne33120:0",
+    "flat": "crwdns39618:0crwdne39618:0",
+    "group": "crwdns33122:0crwdne33122:0",
+    "inactive": "crwdns33134:0crwdne33134:0",
+    "link": "crwdns39620:0crwdne39620:0",
+    "nav": "crwdns39622:0[v-navigation-drawer]crwdne39622:0",
+    "noAction": "crwdns33124:0crwdne33124:0",
+    "rounded": "crwdns39624:0crwdne39624:0",
+    "shaped": "crwdns39626:0crwdne39626:0",
+    "subGroup": "crwdns33128:0crwdne33128:0",
+    "subheader": "crwdns33126:0crwdne33126:0",
+    "threeLine": "crwdns39628:0[line-clamp]crwdne39628:0",
+    "twoLine": "crwdns39630:0[line-clamp]crwdne39630:0",
+    "v-list-item": {
+      "color": "crwdns39632:0crwdne39632:0",
+      "disabled": "crwdns39634:0crwdne39634:0",
+      "inputValue": "crwdns39636:0crwdne39636:0",
+      "value": "crwdns39638:0[v-list-item-group]crwdne39638:0"
+    },
     "v-list-item-avatar": {
-      "color": "crwdns26892:0crwdne26892:0"
+      "color": "crwdns39640:0crwdne39640:0",
+      "horizontal": "crwdns39642:0crwdne39642:0"
     },
     "v-list-group": {
-      "activeClass": "crwdns26894:0crwdne26894:0",
-      "appendIcon": "crwdns26896:0crwdne26896:0",
-      "disabled": "crwdns26898:0crwdne26898:0",
-      "prependIcon": "crwdns26900:0crwdne26900:0"
+      "activeClass": "crwdns33140:0crwdne33140:0",
+      "appendIcon": "crwdns33142:0crwdne33142:0",
+      "prependIcon": "crwdns33146:0crwdne33146:0",
+      "ripple": "crwdns39644:0crwdne39644:0",
+      "value": "crwdns39646:0crwdne39646:0"
+    }
+  },
+  "slots": {
+    "v-list-group": {
+      "appendIcon": "crwdns39648:0crwdne39648:0",
+      "prependIcon": "crwdns39650:0crwdne39650:0"
+    }
+  },
+  "events": {
+    "v-list-group": {
+      "click": "crwdns39652:0crwdne39652:0"
     }
   }
 }

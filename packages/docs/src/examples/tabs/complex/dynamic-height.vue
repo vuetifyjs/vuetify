@@ -8,7 +8,7 @@
     >
       <v-text-field
         append-icon="mic"
-        class="mx-3"
+        class="mx-4"
         flat
         hide-details
         label="Search"
@@ -19,6 +19,7 @@
       <v-tabs
         slot="extension"
         v-model="tabs"
+        background-color="transparent"
         centered
       >
         <v-tab

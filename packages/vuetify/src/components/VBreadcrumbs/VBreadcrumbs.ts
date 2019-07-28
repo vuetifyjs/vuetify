@@ -70,7 +70,7 @@ export default mixins(
 
     return h('ul', {
       staticClass: 'v-breadcrumbs',
-      'class': this.classes,
+      class: this.classes,
     }, children)
   },
 })

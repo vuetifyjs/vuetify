@@ -1,0 +1,109 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "alert",
+          "lang": "alert",
+          "value": "warning"
+        },
+        {
+          "type": "heading",
+          "lang": "runnerHeader"
+        },
+        {
+          "type": "text",
+          "lang": "runnerText1"
+        },
+        {
+          "type": "text",
+          "lang": "runnerText2"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "specHeader"
+        },
+        {
+          "type": "text",
+          "lang": "specText1"
+        },
+        {
+          "type": "text",
+          "lang": "specText2"
+        },
+        {
+          "type": "markup",
+          "value": "html_testing_mock_component"
+        },
+        {
+          "type": "text",
+          "lang": "specText3"
+        },
+        {
+          "type": "markup",
+          "value": "js_testing_mock_component_spec"
+        },
+        {
+          "type": "alert",
+          "lang": "specAlert",
+          "value": "info"
+        },
+        {
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "efficiencyHeader"
+            },
+            {
+              "type": "text",
+              "lang": "efficiencyText1"
+            },
+            {
+              "type": "text",
+              "lang": "efficiencyText2"
+            },
+            {
+              "type": "markup",
+              "value": "js_testing_efficiency"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "e2eHeader"
+        },
+        {
+          "type": "text",
+          "lang": "e2eText1"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "getting-started/long-term-support",
+            "getting-started/contributing",
+            "getting-started/consulting-and-support"
+          ]
+        }
+      ]
+    }
+  ]
+}

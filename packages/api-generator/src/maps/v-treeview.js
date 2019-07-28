@@ -1,26 +1,40 @@
-const { VTreeviewScopedProps } = require('../variables')
+const { VTreeviewScopedProps } = require('../helpers/variables')
 
 module.exports = {
   'v-treeview': {
-    scopedSlots: [
+    slots: [
       {
-        name: 'prepend',
-        props: VTreeviewScopedProps
+        name: 'append',
+        props: VTreeviewScopedProps,
       },
       {
         name: 'label',
-        props: VTreeviewScopedProps
+        props: VTreeviewScopedProps,
       },
       {
-        name: 'append',
-        props: VTreeviewScopedProps
-      }
+        name: 'prepend',
+        props: VTreeviewScopedProps,
+      },
     ],
     functions: [
       {
         name: 'updateAll',
-        signature: '(val: boolean): void'
-      }
-    ]
-  }
+        signature: '(val: boolean): void',
+      },
+    ],
+    events: [
+      {
+        name: 'input',
+        value: 'array',
+      },
+      {
+        name: 'update:active',
+        value: 'array',
+      },
+      {
+        name: 'update:open',
+        value: 'array',
+      },
+    ],
+  },
 }

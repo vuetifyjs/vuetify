@@ -15,8 +15,8 @@
     render (h, { props }) {
       return props.children.map(child => {
         if (child.children) {
-          return h('core-tree', {
-            props: { children: child.children },
+          return h('doc-section', {
+            props: { value: child },
           })
         }
 

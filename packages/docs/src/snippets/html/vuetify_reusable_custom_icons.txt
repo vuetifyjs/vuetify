@@ -1,11 +1,15 @@
+<!-- Vue Component -->
+
 <template>
-  <v-icon>$vuetify.icons.product</v-icon>
+  <div>
+    <v-icon>$vuetify.icons.product</v-icon>
 
-  <v-icon v-text="'$vuetify.icons.support'"></v-icon>
+    <v-icon v-text="'$vuetify.icons.support'"></v-icon>
 
-  <v-icon v-html="'$vuetify.icons.steam'"></v-icon>
+    <v-icon v-html="'$vuetify.icons.steam'"></v-icon>
 
-  <v-icon v-text="platform"></v-icon>
+    <v-icon v-text="platform"></v-icon>
+  </div>
 </template>
 
 <script>
@@ -13,14 +17,14 @@
     data: () => ({
       user: {
         name: 'John Leider',
-        platform: 'pc'
-      }
+        platform: 'pc',
+      },
     }),
 
     computed: {
       platform () {
         return '$vuetify.icons.' + this.user.platform
-      }
-    }
+      },
+    },
   }
 </script>

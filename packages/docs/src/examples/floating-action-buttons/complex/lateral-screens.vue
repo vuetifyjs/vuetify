@@ -19,7 +19,7 @@
         <v-tabs
           v-model="tabs"
           align-with-title
-          color="transparent"
+          background-color="transparent"
         >
           <v-tab href="#one">Item One</v-tab>
           <v-tab href="#two">Item Two</v-tab>
@@ -80,9 +80,9 @@
     computed: {
       activeFab () {
         switch (this.tabs) {
-          case 'one': return { 'color': 'success', icon: 'share' }
-          case 'two': return { 'color': 'red', icon: 'edit' }
-          case 'three': return { 'color': 'green', icon: 'keyboard_arrow_up' }
+          case 'one': return { color: 'success', icon: 'share' }
+          case 'two': return { color: 'red', icon: 'edit' }
+          case 'three': return { color: 'green', icon: 'keyboard_arrow_up' }
           default: return {}
         }
       },

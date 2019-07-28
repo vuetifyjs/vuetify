@@ -41,11 +41,11 @@ export default mixins(
         ].includes(val)
       },
     },
-    coloredBorder: Boolean,
     closeLabel: {
       type: String,
       default: '$vuetify.close',
     },
+    coloredBorder: Boolean,
     dense: Boolean,
     dismissible: Boolean,
     icon: {
@@ -211,6 +211,9 @@ export default mixins(
     genAlert (): VNode {
       let data: VNodeData = {
         staticClass: 'v-alert',
+        attrs: {
+          role: 'alert',
+        },
         class: this.classes,
         style: this.styles,
         directives: [{

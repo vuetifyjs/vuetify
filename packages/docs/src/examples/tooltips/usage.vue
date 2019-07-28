@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center d-flex align-center">
+  <div class="text-center d-flex align-center">
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
         <v-btn color="primary" dark v-on="on">Button</v-btn>

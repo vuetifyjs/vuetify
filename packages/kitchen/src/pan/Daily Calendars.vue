@@ -14,13 +14,13 @@
               slot="dayHeader"
               slot-scope="{ date }"
             >
-              <p class="ma-2 text-xs-center">{{ date }}</p>
+              <p class="ma-2 text-center">{{ date }}</p>
             </template>
             <template
               slot="interval"
               slot-scope="{ date, time }"
             >
-              <p class="ma-2 text-xs-center">{{ date }} {{ time }}</p>
+              <p class="ma-2 text-center">{{ date }} {{ time }}</p>
             </template>
           </v-calendar>
         </v-sheet>
@@ -40,13 +40,13 @@
               slot="dayHeader"
               slot-scope="{ date }"
             >
-              <p class="ma-2 text-xs-center">{{ date }}</p>
+              <p class="ma-2 text-center">{{ date }}</p>
             </template>
             <template
               slot="interval"
               slot-scope="{ date, time }"
             >
-              <p class="ma-2 text-xs-center">{{ date }} {{ time }}</p>
+              <p class="ma-2 text-center">{{ date }} {{ time }}</p>
             </template>
           </v-calendar>
         </v-sheet>
@@ -66,13 +66,13 @@
               slot="dayHeader"
               slot-scope="{ date }"
             >
-              <p class="ma-2 text-xs-center">{{ date }}</p>
+              <p class="ma-2 text-center">{{ date }}</p>
             </template>
             <template
               slot="interval"
               slot-scope="{ date, time }"
             >
-              <p class="ma-2 text-xs-center">{{ date }} {{ time }}</p>
+              <p class="ma-2 text-center">{{ date }} {{ time }}</p>
             </template>
           </v-calendar>
         </v-sheet>
@@ -92,13 +92,13 @@
               slot="dayHeader"
               slot-scope="{ date }"
             >
-              <p class="ma-2 text-xs-center">{{ date }}</p>
+              <p class="ma-2 text-center">{{ date }}</p>
             </template>
             <template
               slot="interval"
               slot-scope="{ date, time }"
             >
-              <p class="ma-2 text-xs-center">{{ date }} {{ time }}</p>
+              <p class="ma-2 text-center">{{ date }} {{ time }}</p>
             </template>
           </v-calendar>
         </v-sheet>
@@ -119,13 +119,13 @@
               slot="dayHeader"
               slot-scope="{ date }"
             >
-              <p class="ma-2 text-xs-center">{{ date }}</p>
+              <p class="ma-2 text-center">{{ date }}</p>
             </template>
             <template
               slot="interval"
               slot-scope="{ date, time }"
             >
-              <p class="ma-2 text-xs-center">{{ date }} {{ time }}</p>
+              <p class="ma-2 text-center">{{ date }} {{ time }}</p>
             </template>
           </v-calendar>
         </v-sheet>
@@ -155,13 +155,13 @@
               slot="dayHeader"
               slot-scope="{ date }"
             >
-              <p class="ma-2 text-xs-center">{{ date }}</p>
+              <p class="ma-2 text-center">{{ date }}</p>
             </template>
             <template
               slot="interval"
               slot-scope="{ date, time }"
             >
-              <p class="ma-2 text-xs-center">{{ date }} {{ time }}</p>
+              <p class="ma-2 text-center">{{ date }} {{ time }}</p>
             </template>
           </v-calendar>
         </v-sheet>
@@ -180,13 +180,13 @@
               slot="interval"
               slot-scope="{ date, time, hour }"
             >
-              <p :class="{ 'ma-2': true, 'text-xs-center': true, 'accent--text': hour % 2 }">{{ date }} {{ time }}</p>
+              <p :class="{ 'ma-2': true, 'text-center': true, 'accent--text': hour % 2 }">{{ date }} {{ time }}</p>
             </template>
             <template
               slot="dayHeader"
               slot-scope="{ date, day }"
             >
-              <p :class="{ 'ma-2': true, 'text-xs-center': true, 'accent--text': day % 2 }">{{ date }}</p>
+              <p :class="{ 'ma-2': true, 'text-center': true, 'accent--text': day % 2 }">{{ date }}</p>
             </template>
           </v-calendar>
         </v-sheet>

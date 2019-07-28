@@ -1,19 +1,19 @@
 <template>
-  <v-card flat color="grey lighten-4 pa-5 text-xs-center">
-    <h4 class="font-weight-medium grey--text">
-      Patreon Sponsors
-    </h4>
+  <v-card flat color="grey lighten-4" class="pa-12 text-center">
+    <h3 class="font-weight-medium grey--text text--darken-2">
+      Project Sponsors
+    </h3>
 
-    <supporters-patrons
-      :tier="[1, 2, 3]"
-      class="mb-5"
+    <supporters-sponsors
+      :tier="[0, 1, 2, 3]"
+      class="mb-12"
       dense
       hide-titles
     />
 
-    <h4 class="font-weight-medium grey--text mb-5">
+    <h3 class="font-weight-medium grey--text text--darken-2 mb-12">
       Open Collective Sponsors
-    </h4>
+    </h3>
 
     <supporters-sponsor-btn
       append

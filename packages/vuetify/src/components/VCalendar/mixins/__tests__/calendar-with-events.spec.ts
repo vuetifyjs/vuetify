@@ -101,8 +101,8 @@ describe('calendar-with-events.ts', () => {
 
     expect(wrapper.vm.eventNameFunction).toBeDefined()
     expect(typeof wrapper.vm.eventNameFunction).toBe('function')
-    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12' }, input: { 'Meetup': 'Meetup' } })).toBe('Meetup')
-    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12', hour: 8, minute: 30, hasTime: true }, input: { 'Meetup': 'Meetup' } })).toBe('Meetup')
+    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12' }, input: { Meetup: 'Meetup' } })).toBe('Meetup')
+    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12', hour: 8, minute: 30, hasTime: true }, input: { Meetup: 'Meetup' } })).toBe('Meetup')
 
     wrapper.setProps({
       eventName: 'Conference',
@@ -110,8 +110,8 @@ describe('calendar-with-events.ts', () => {
 
     expect(wrapper.vm.eventNameFunction).toBeDefined()
     expect(typeof wrapper.vm.eventNameFunction).toBe('function')
-    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12' }, input: { 'Conference': 'Conference' } })).toBe('Conference')
-    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12', hour: 8, minute: 30, hasTime: true }, input: { 'Conference': 'Conference' } })).toBe('<strong>8:30a</strong> Conference')
+    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12' }, input: { Conference: 'Conference' } })).toBe('Conference')
+    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12', hour: 8, minute: 30, hasTime: true }, input: { Conference: 'Conference' } })).toBe('<strong>8:30a</strong> Conference')
   })
 
   it('should format time', async () => {
@@ -368,136 +368,5 @@ describe('calendar-with-events.ts', () => {
     })
 
     expect(wrapper.vm.isOverlapping(visualEvents[0], visualEvents[1])).toBeFalsy()
-  })
-
-  it('should get scoped slots', async () => {
-    const wrapper = mount(Mock, {
-      propsData: {
-        events: [
-          {
-            start: '2019-02-12 8:30',
-            end: '2019-02-12 12:00',
-          },
-          {
-            start: '2019-02-11',
-            end: '2019-02-13',
-          },
-        ],
-      },
-    })
-
-    expect(wrapper.vm.getScopedSlots()).not.toEqual({})
-    expect(typeof wrapper.vm.getScopedSlots().day).toBe('function')
-    expect(typeof wrapper.vm.getScopedSlots().dayBody).toBe('function')
-    expect(typeof wrapper.vm.getScopedSlots().dayHeader).toBe('function')
-
-    wrapper.setProps({ events: [] })
-
-    expect(wrapper.vm.getScopedSlots()).toEqual({})
-  })
-
-  it('should generate day header', async () => {
-    const wrapper = mount(Mock, {
-      propsData: {
-        events: [
-          {
-            start: '2019-02-12 8:30',
-            end: '2019-02-12 12:00',
-          },
-          {
-            start: '2019-02-11',
-            end: '2019-02-13',
-          },
-        ],
-      },
-    })
-
-    expect(wrapper.vm.getScopedSlots().dayHeader({
-      ...parseTimestamp('2019-02-13'),
-      index: 0,
-      outside: false,
-    })).toHaveLength(1)
-
-    expect(wrapper.vm.getScopedSlots().dayHeader({
-      ...parseTimestamp('2019-02-13'),
-      index: 0,
-      outside: true,
-    })).toHaveLength(1)
-
-    expect(wrapper.vm.getScopedSlots().dayHeader({
-      ...parseTimestamp('2019-02-13'),
-      index: 1,
-      outside: false,
-    })).toHaveLength(1)
-  })
-
-  it('should generate day body', async () => {
-    const wrapper = mount(Mock, {
-      propsData: {
-        events: [
-          {
-            start: '2019-02-12 8:30',
-            end: '2019-02-12 12:00',
-          },
-          {
-            start: '2019-02-11',
-            end: '2019-02-13',
-          },
-        ],
-      },
-    })
-
-    expect(wrapper.vm.getScopedSlots().dayBody({
-      ...parseTimestamp('2019-02-13'),
-      index: 0,
-      outside: false,
-    })).toHaveLength(1)
-
-    expect(wrapper.vm.getScopedSlots().dayBody({
-      ...parseTimestamp('2019-02-13'),
-      index: 0,
-      outside: true,
-    })).toHaveLength(1)
-
-    expect(wrapper.vm.getScopedSlots().dayBody({
-      ...parseTimestamp('2019-02-13'),
-      index: 1,
-      outside: false,
-    })).toHaveLength(1)
-  })
-
-  it('should generate day', async () => {
-    const wrapper = mount(Mock, {
-      propsData: {
-        events: [
-          {
-            start: '2019-02-12 8:30',
-            end: '2019-02-12 12:00',
-          },
-          {
-            start: '2019-02-11',
-            end: '2019-02-13',
-          },
-        ],
-      },
-    })
-
-    expect(wrapper.vm.getScopedSlots().day({
-      ...parseTimestamp('2019-02-13'),
-      index: 0,
-      outside: false,
-    })).toHaveLength(2)
-
-    expect(wrapper.vm.getScopedSlots().day({
-      ...parseTimestamp('2019-02-13'),
-      index: 0,
-      outside: true,
-    })).toHaveLength(2)
-
-    expect(wrapper.vm.getScopedSlots().day({
-      ...parseTimestamp('2019-02-13'),
-      index: 1,
-      outside: false,
-    })).toHaveLength(2)
   })
 })

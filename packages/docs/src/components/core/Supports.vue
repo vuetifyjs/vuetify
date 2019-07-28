@@ -42,6 +42,11 @@
     data: vm => ({
       supports: [
         {
+          to: 'getting-started/consulting-and-support',
+          icon: 'mdi-vuetify',
+          text: vm.$t('Vuetify.AppDrawer.consulting'),
+        },
+        {
           href: 'https://community.vuetifyjs.com/',
           icon: 'mdi-discord',
           text: vm.$t('Vuetify.AppToolbar.community'),

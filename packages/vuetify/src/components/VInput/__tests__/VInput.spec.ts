@@ -47,10 +47,10 @@ describe('VInput.ts', () => {
       render: h => h('div', slot),
     })
     const wrapper = mountFunction({
-      slots: { 'append': [el('append')] },
+      slots: { append: [el('append')] },
     })
     const wrapper2 = mountFunction({
-      slots: { 'prepend': [el('prepend')] },
+      slots: { prepend: [el('prepend')] },
     })
 
     expect(wrapper.html()).toMatchSnapshot()

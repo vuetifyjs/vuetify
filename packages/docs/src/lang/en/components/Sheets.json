@@ -1,5 +1,5 @@
 {
-  "header": "# Sheet",
+  "header": "# Sheets",
   "headerText": "The `v-sheet` is designed to power other **paper** components within Vuetify. It is meant to be used as a low level component.",
   "examples": {
     "usage": {
@@ -19,7 +19,7 @@
     }
   },
   "props": {
-    "tag": "Specifies a tag",
-    "tile": "Removes the component's border-radius"
+    "tag": "Specify a custom tag used on the root element.",
+    "tile": "Removes the component's border-radius."
   }
 }

@@ -11,7 +11,6 @@
         grid-list-lg
       >
         <v-layout
-          row
           wrap
         >
           <v-flex xs12>
@@ -85,8 +84,9 @@
   }
 </script>
 
-<style lang="sass">
-.e4
-  width: 400px
-  margin: auto
+<style scoped>
+.e4 {
+  width: 400px;
+  margin: auto;
+}
 </style>

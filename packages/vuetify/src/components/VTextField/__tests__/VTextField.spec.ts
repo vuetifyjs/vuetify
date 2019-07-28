@@ -55,18 +55,6 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     expect(keyup).toHaveBeenCalled()
   })
 
-  it('should render aria-label attribute on text field element with label value and no id', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        label: 'Test',
-      },
-      attrs: {},
-    })
-
-    const inputGroup = wrapper.findAll('input').at(0)
-    expect(inputGroup.element.getAttribute('aria-label')).toBe('Test')
-  })
-
   it('should not render aria-label attribute on text field element with no label value or id', () => {
     const wrapper = mountFunction({
       propsData: {

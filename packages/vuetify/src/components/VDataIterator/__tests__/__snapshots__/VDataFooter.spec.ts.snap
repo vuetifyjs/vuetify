@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VDataFooter.ts should render and match snapshot 1`] = `
-
 <div class="v-data-footer">
   <div class="v-data-footer__select">
     Items per page:
@@ -10,12 +9,13 @@ exports[`VDataFooter.ts should render and match snapshot 1`] = `
         <div role="button"
              aria-haspopup="listbox"
              aria-expanded="false"
-             aria-owns="computed-id-2"
+             aria-owns="list-2"
              class="v-input__slot"
         >
           <div class="v-select__slot">
             <div class="v-select__selections">
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
+                     id="input-2"
                      readonly="readonly"
                      type="text"
                      aria-readonly="true"
@@ -24,13 +24,17 @@ exports[`VDataFooter.ts should render and match snapshot 1`] = `
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
-                   class="v-icon mdi mdi-menu-down theme--light"
+                   class="v-icon notranslate mdi mdi-menu-down theme--light"
                 >
                 </i>
               </div>
             </div>
           </div>
           <div class="v-menu">
+            <div class="v-menu__content theme--light "
+                 style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+            >
+            </div>
           </div>
         </div>
       </div>
@@ -46,7 +50,7 @@ exports[`VDataFooter.ts should render and match snapshot 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-chevron-left theme--light"
+           class="v-icon notranslate mdi mdi-chevron-left theme--light"
         >
         </i>
       </span>
@@ -59,18 +63,16 @@ exports[`VDataFooter.ts should render and match snapshot 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-chevron-right theme--light"
+           class="v-icon notranslate mdi mdi-chevron-right theme--light"
         >
         </i>
       </span>
     </button>
   </div>
 </div>
-
 `;
 
 exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 1`] = `
-
 <div class="v-data-footer">
   <div class="v-data-footer__select">
     Items per page:
@@ -79,7 +81,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
         <div role="button"
              aria-haspopup="listbox"
              aria-expanded="false"
-             aria-owns="computed-id-59"
+             aria-owns="list-39"
              class="v-input__slot"
         >
           <div class="v-select__slot">
@@ -88,6 +90,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
                 10
               </div>
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
+                     id="input-39"
                      readonly="readonly"
                      type="text"
                      aria-readonly="true"
@@ -96,13 +99,17 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
-                   class="v-icon mdi mdi-menu-down theme--light"
+                   class="v-icon notranslate mdi mdi-menu-down theme--light"
                 >
                 </i>
               </div>
             </div>
           </div>
           <div class="v-menu">
+            <div class="v-menu__content theme--light "
+                 style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+            >
+            </div>
           </div>
         </div>
       </div>
@@ -118,7 +125,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-page-first theme--light"
+           class="v-icon notranslate mdi mdi-page-first theme--light"
         >
         </i>
       </span>
@@ -129,7 +136,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-chevron-left theme--light"
+           class="v-icon notranslate mdi mdi-chevron-left theme--light"
         >
         </i>
       </span>
@@ -142,7 +149,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-chevron-right theme--light"
+           class="v-icon notranslate mdi mdi-chevron-right theme--light"
         >
         </i>
       </span>
@@ -153,18 +160,16 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-page-last theme--light"
+           class="v-icon notranslate mdi mdi-page-last theme--light"
         >
         </i>
       </span>
     </button>
   </div>
 </div>
-
 `;
 
 exports[`VDataFooter.ts should render in RTL mode 1`] = `
-
 <div class="v-data-footer">
   <div class="v-data-footer__select">
     Items per page:
@@ -173,7 +178,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
         <div role="button"
              aria-haspopup="listbox"
              aria-expanded="false"
-             aria-owns="computed-id-38"
+             aria-owns="list-24"
              class="v-input__slot"
         >
           <div class="v-select__slot">
@@ -182,6 +187,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
                 10
               </div>
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
+                     id="input-24"
                      readonly="readonly"
                      type="text"
                      aria-readonly="true"
@@ -190,13 +196,17 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
-                   class="v-icon mdi mdi-menu-down theme--light"
+                   class="v-icon notranslate mdi mdi-menu-down theme--light"
                 >
                 </i>
               </div>
             </div>
           </div>
           <div class="v-menu">
+            <div class="v-menu__content theme--light "
+                 style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+            >
+            </div>
           </div>
         </div>
       </div>
@@ -212,7 +222,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-page-last theme--light"
+           class="v-icon notranslate mdi mdi-page-last theme--light"
         >
         </i>
       </span>
@@ -223,7 +233,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-chevron-right theme--light"
+           class="v-icon notranslate mdi mdi-chevron-right theme--light"
         >
         </i>
       </span>
@@ -236,7 +246,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-chevron-left theme--light"
+           class="v-icon notranslate mdi mdi-chevron-left theme--light"
         >
         </i>
       </span>
@@ -247,18 +257,16 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-page-first theme--light"
+           class="v-icon notranslate mdi mdi-page-first theme--light"
         >
         </i>
       </span>
     </button>
   </div>
 </div>
-
 `;
 
 exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
-
 <div class="v-data-footer">
   <div class="v-data-footer__select">
     Items per page:
@@ -267,7 +275,7 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
         <div role="button"
              aria-haspopup="listbox"
              aria-expanded="false"
-             aria-owns="computed-id-20"
+             aria-owns="list-13"
              class="v-input__slot"
         >
           <div class="v-select__slot">
@@ -276,6 +284,7 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
                 100
               </div>
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
+                     id="input-13"
                      readonly="readonly"
                      type="text"
                      aria-readonly="true"
@@ -284,13 +293,17 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
-                   class="v-icon mdi mdi-menu-down theme--light"
+                   class="v-icon notranslate mdi mdi-menu-down theme--light"
                 >
                 </i>
               </div>
             </div>
           </div>
           <div class="v-menu">
+            <div class="v-menu__content theme--light "
+                 style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+            >
+            </div>
           </div>
         </div>
       </div>
@@ -306,7 +319,7 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-chevron-left theme--light"
+           class="v-icon notranslate mdi mdi-chevron-left theme--light"
         >
         </i>
       </span>
@@ -320,18 +333,16 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-chevron-right theme--light"
+           class="v-icon notranslate mdi mdi-chevron-right theme--light"
         >
         </i>
       </span>
     </button>
   </div>
 </div>
-
 `;
 
 exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
-
 <div class="v-data-footer">
   <div class="v-data-footer__select">
     Items per page:
@@ -340,7 +351,7 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
         <div role="button"
              aria-haspopup="listbox"
              aria-expanded="false"
-             aria-owns="computed-id-97"
+             aria-owns="list-65"
              class="v-input__slot"
         >
           <div class="v-select__slot">
@@ -349,6 +360,7 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
                 10
               </div>
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
+                     id="input-65"
                      readonly="readonly"
                      type="text"
                      aria-readonly="true"
@@ -357,13 +369,17 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
-                   class="v-icon mdi mdi-menu-down theme--light"
+                   class="v-icon notranslate mdi mdi-menu-down theme--light"
                 >
                 </i>
               </div>
             </div>
           </div>
           <div class="v-menu">
+            <div class="v-menu__content theme--light "
+                 style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+            >
+            </div>
           </div>
         </div>
       </div>
@@ -379,7 +395,7 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-chevron-left theme--light"
+           class="v-icon notranslate mdi mdi-chevron-left theme--light"
         >
         </i>
       </span>
@@ -395,12 +411,11 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-chevron-right theme--light"
+           class="v-icon notranslate mdi mdi-chevron-right theme--light"
         >
         </i>
       </span>
     </button>
   </div>
 </div>
-
 `;

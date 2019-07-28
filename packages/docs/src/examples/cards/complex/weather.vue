@@ -44,7 +44,7 @@
       v-model="time"
       :max="6"
       :tick-labels="labels"
-      class="mx-3"
+      class="mx-4"
       ticks
     ></v-slider>
 
@@ -59,7 +59,7 @@
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-item-icon>
 
-        <v-list-item-subtitle class="text-xs-right">
+        <v-list-item-subtitle class="text-right">
           {{ item.temp }}
         </v-list-item-subtitle>
       </v-list-item>

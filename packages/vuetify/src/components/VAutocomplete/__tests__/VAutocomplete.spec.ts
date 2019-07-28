@@ -53,7 +53,7 @@ describe('VAutocomplete.ts', () => {
     const element = input.element as HTMLInputElement
 
     const update = jest.fn()
-    wrapper.vm.$on('update:searchInput', update)
+    wrapper.vm.$on('update:search-input', update)
 
     element.value = 'test'
     input.trigger('input')
@@ -183,6 +183,7 @@ describe('VAutocomplete.ts', () => {
   it('should not filter text with no items', async () => {
     const wrapper = mountFunction({
       propsData: {
+        eager: true,
         items: ['foo', 'bar'],
       },
     })

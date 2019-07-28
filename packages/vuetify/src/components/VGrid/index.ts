@@ -1,24 +1,26 @@
-import {
-  createSimpleFunctional,
-} from '../../util/helpers'
 import VContainer from './VContainer'
-import VFlex from './VFlex'
+import VCol from './VCol'
+import VRow from './VRow'
+import VSpacer from './VSpacer'
 import VLayout from './VLayout'
-
-const VSpacer = createSimpleFunctional('spacer', 'div', 'v-spacer')
+import VFlex from './VFlex'
 
 export {
   VContainer,
-  VFlex,
-  VLayout,
+  VCol,
+  VRow,
   VSpacer,
+  VLayout,
+  VFlex,
 }
 
 export default {
   $_vuetify_subcomponents: {
     VContainer,
-    VFlex,
-    VLayout,
+    VCol,
+    VRow,
     VSpacer,
+    VLayout,
+    VFlex,
   },
 }

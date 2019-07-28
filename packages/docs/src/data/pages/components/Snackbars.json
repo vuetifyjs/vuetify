@@ -40,7 +40,6 @@
         {
           "type": "examples",
           "value": [
-            "simple/auto-height",
             "simple/multi-line",
             "simple/timeout",
             "simple/vertical"
@@ -55,7 +54,7 @@
           "type": "up-next",
           "value": [
             "components/buttons",
-            "framework/colors",
+            "styles/colors",
             "components/forms"
           ]
         }

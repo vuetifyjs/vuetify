@@ -40,18 +40,18 @@ export default mixins(
     },
     backgroundColor: String,
     grow: Boolean,
-    hideOnScroll: Boolean,
-    horizontal: Boolean,
-    mandatory: Boolean,
     height: {
       type: [Number, String],
       default: 56,
     },
-    shift: Boolean,
+    hideOnScroll: Boolean,
+    horizontal: Boolean,
     inputValue: {
       type: Boolean,
       default: true,
     },
+    mandatory: Boolean,
+    shift: Boolean,
   },
 
   data () {
@@ -97,7 +97,7 @@ export default mixins(
   methods: {
     thresholdMet () {
       this.isActive = !this.isScrollingUp
-      this.$emit('update:inputValue', this.isActive)
+      this.$emit('update:input-value', this.isActive)
     },
     updateApplication (): number {
       return this.$el

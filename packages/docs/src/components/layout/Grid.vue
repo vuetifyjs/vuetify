@@ -1,10 +1,10 @@
 <template>
-  <v-card class="mb-5" outlined>
+  <v-card class="mb-12" outlined>
     <v-simple-table>
-      <caption class="pa-3">Material Design Viewport Breakpoints</caption>
+      <caption class="pa-4">Material Design Viewport Breakpoints</caption>
 
       <thead>
-        <tr class="text-xs-left">
+        <tr class="text-left">
           <th>Device</th>
           <th>Code</th>
           <th>Types</th>
@@ -76,7 +76,7 @@
 
       <tfoot>
         <tr>
-          <td colspan="4" class="text-xs-center">
+          <td colspan="4" class="text-center">
             <small><em class="grey--text">* -16px on Desktop</em></small>
           </td>
         </tr>

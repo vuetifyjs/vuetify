@@ -1,16 +1,15 @@
 {
-  "header": "文本框",
   "headerText": "文本框组件用于收集用户提供的信息。",
   "examples": {
-    "singleLine": {
+    "single-line": {
       "header": "单行亮色主题",
       "desc": "单行文本框的标签不会浮动到焦点或数据之上。"
     },
     "icon": {
-      "header": "带图标",
+      "header": "图标",
       "desc": "图标可以指定为预加或附加。"
     },
-    "characterCounter": {
+    "character-counter": {
       "header": "字符计数器"
     },
     "password": {
@@ -21,7 +20,7 @@
       "header": "验证",
       "desc": "Vuetify包含简单的验证通过使用 `rules` 属性，这个属性接受一个回调函数组，在验证规则时，当前的 v-model 值将被传递给回调函数，这个回调函数必须返回 `ture` 或 `String` 或者错误信息。"
     },
-    "fullWidthWithCharacterCounter": {
+    "full-width-with-character-counter": {
       "header": "带计数器的全宽文本框",
       "desc": "全宽文本框允许你创建一个不限制输入的文本框，在下面的例子中，我们是用 `v-divider` 来分隔文本框。"
     },
@@ -29,11 +28,11 @@
       "header": "提示文本",
       "desc": "在文本框组件使用 `hint` 来设置将提示的文本添加到文本字段下。使用 `persistent-hint` 保持提示文本在文本字段未被聚焦时保持可见性。"
     },
-    "prefixesAndSuffixes": {
+    "prefixes-and-suffixes": {
       "header": "前缀和后缀",
       "desc": " `prefix` 和 `suffix` 属性允许你在文本字段旁添加一段不可修改的文本。"
     },
-    "customValidation": {
+    "custom-validation": {
       "header": "自定义验证",
       "desc": "虽然内置的 `v-form` 组件以及第三方插件比如 [vuelidate](https://github.com/monterail/vuelidate) or [vee-validation](https://github.com/logaretm/vee-validate) 可以帮助你简化验证过程，但你仍可以简单的自行控制它。"
     },
@@ -45,11 +44,10 @@
       "header": "Solo style",
       "desc": "Text-fields can be used with an alternative solo design."
     },
-    "customColors": {
-      "header": "自定义颜色",
+    "custom-colors": {
       "desc": "你可以将文本框的颜色更改为 Material design 调色板中的任何颜色。下面是带验证的自定义表单的示例实现。"
     },
-    "progressBar": {
+    "progress-bar": {
       "header": "进度条",
       "desc": "你可以用一个进度条来替换下划线，你可以使用与文本框具有相同颜色的默认的不确定进度的进度条，你也可以使用 `progress` 插槽来自定义进度条。"
     }
@@ -64,6 +62,17 @@
     "suffix": "显示后缀",
     "textarea": "Textarea 使用备用样式",
     "toggleKeys": "切换输入键值的数组（如果支持切换的话）",
-    "type": "设置输入类型"
+    "type": "设置输入类型",
+    "value": "Components.Inputs.props.value"
+  },
+  "slots": {
+    "append": "Components.Inputs.slots.append",
+    "prepend": "Components.Inputs.slots.prepend"
+  },
+  "events": {
+    "change": "Components.Inputs.events.change",
+    "click:append": "Components.Inputs.events['click:append']",
+    "click:prepend": "Components.Inputs.events['click:prepend']",
+    "update:error": "Mixins.Validatable.events['update:error']"
   }
 }

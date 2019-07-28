@@ -1,5 +1,5 @@
 <template>
-  <v-layout row>
+  <v-layout>
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
         <v-toolbar color="white" flat>
@@ -18,7 +18,7 @@
 
         <v-subheader>May</v-subheader>
         <v-container fluid grid-list-xs>
-          <v-layout row wrap>
+          <v-layout wrap>
             <v-flex
               v-for="i in 6"
               :key="i"
@@ -37,7 +37,7 @@
 
         <v-subheader>June</v-subheader>
         <v-container fluid grid-list-xs>
-          <v-layout row wrap>
+          <v-layout wrap>
             <v-flex
               v-for="i in 6"
               :key="i"
@@ -54,7 +54,7 @@
           </v-layout>
         </v-container>
 
-        <v-footer class="mt-5"></v-footer>
+        <v-footer class="mt-12"></v-footer>
       </v-card>
     </v-flex>
   </v-layout>

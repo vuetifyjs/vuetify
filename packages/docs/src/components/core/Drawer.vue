@@ -9,15 +9,17 @@
       fluid
       pb-0
     >
-      <div class="text-xs-center">
-        <h4 class="body-2 font-weight-bold grey--text">Premiere sponsor</h4>
+      <div class="text-center">
+        <h4 class="title grey--text text--darken-2">Premiere sponsor</h4>
 
-        <span class="d-block mb-3 caption grey--text text--lighten-1">
-          One spot available
-        </span>
+        <supporters-sponsors
+          :tier="[0]"
+          dense
+          hide-titles
+        />
 
         <supporters-sponsor-btn
-          class="mb-4"
+          class="mb-6"
           href="https://www.patreon.com/join/vuetify"
         />
 
@@ -27,7 +29,7 @@
           ref="search"
           v-model="search"
           label="Search"
-          append-icon="search"
+          append-icon="mdi-magnify"
           clearable
           hide-details
           single-line
@@ -37,14 +39,16 @@
       </div>
     </v-container>
 
-    <v-divider class="mt-3" />
+    <v-divider class="mt-4" />
 
-    <v-layout pa-3>
+    <v-layout pa-4>
       <a
-        href="https://vuejobs.com/?utm_source=vuejobs&utm_medium=banner&utm_campaign=linking&ref=vuetifyjs.com"
-        target="_blank"
-        rel="noopener"
+        aria-label="VueJobs"
         class="d-inline-block"
+        href="https://vuejobs.com/?utm_source=vuejobs&utm_medium=banner&utm_campaign=linking&ref=vuetifyjs.com"
+        rel="noopener"
+        target="_blank"
+        title="VueJobs"
         @click="$ga.event('drawer', 'click', 'vuejobs')"
       >
         <v-img
@@ -58,7 +62,7 @@
       </a>
     </v-layout>
     <v-list
-      class="py-0"
+      class="pt-0 pb-7"
       dense
       expand
       nav
