@@ -26,22 +26,26 @@ export default baseMixins.extend({
       validator: (val: string | object) => {
         return ['string', 'object'].includes(typeof val)
       },
-    } as PropValidator<string | HTMLElement>,
+    } as PropValidator<string | HTMLElement | VNode | Element | null>,
     disabled: Boolean,
     internalActivator: Boolean,
     openOnHover: Boolean,
   },
 
   data: () => ({
-    activatorElement: null as null | HTMLElement,
+    activatorElement: null as HTMLElement | null,
     activatorNode: [] as VNode[],
+    events: ['click', 'mouseenter', 'mouseleave'],
   }),
 
   watch: {
-    activator () {
-      this.activatorElement = null
-      this.getActivator()
+    activator: 'resetActivator',
+    activatorElement (val) {
+      if (!val) return
+
+      this.addActivatorEvents()
     },
+    openOnHover: 'resetActivator',
   },
 
   mounted () {
@@ -50,18 +54,27 @@ export default baseMixins.extend({
     if (slotType && ['v-slot', 'normal'].includes(slotType)) {
       consoleError(`The activator slot must be bound, try '<template v-slot:activator="{ on }"><v-btn v-on="on">'`, this)
     }
+
+    this.getActivator()
+  },
+
+  beforeDestroy () {
+    this.removeActivatorEvents()
   },
 
   methods: {
-    getValueProxy (): object {
-      const self = this
-      return {
-        get value () {
-          return self.isActive
-        },
-        set value (isActive: boolean) {
-          self.isActive = isActive
-        },
+    addActivatorEvents () {
+      if (
+        !this.activator ||
+        this.disabled ||
+        !this.activatorElement
+      ) return
+
+      const listeners = this.genActivatorListeners()
+      const keys = Object.keys(listeners)
+
+      for (const key of keys) {
+        (this.activatorElement as any)[`on${key}`] = listeners[key]
       }
     },
     genActivator () {
@@ -73,9 +86,6 @@ export default baseMixins.extend({
       this.activatorNode = node
 
       return node
-    },
-    getContentSlot () {
-      return getSlot(this, 'default', this.getValueProxy(), true)
     },
     genActivatorAttributes () {
       return {
@@ -100,9 +110,7 @@ export default baseMixins.extend({
         }
       } else {
         listeners.click = (e: MouseEvent) => {
-          const activator = this.getActivator(e)
-
-          if (activator) activator.focus()
+          if (this.activatorElement) this.activatorElement.focus()
 
           this.isActive = !this.isActive
         }
@@ -119,18 +127,51 @@ export default baseMixins.extend({
       if (this.activator) {
         const target = this.internalActivator ? this.$el : document
 
-        activator = typeof this.activator === 'string'
-          ? target.querySelector(this.activator)
-          : this.activator
+        if (typeof this.activator === 'string') {
+          activator = target.querySelector(this.activator)
+        } else if ((this.activator as any).$el) {
+          activator = (this.activator as any).$el
+        } else {
+          activator = this.activator
+        }
       } else if (e) {
-        activator = e.currentTarget || e.target
+        activator = (e.currentTarget || e.target) as HTMLElement
       } else if (this.activatorNode.length) {
-        activator = this.activatorNode[0].elm
+        activator = this.activatorNode[0].elm as HTMLElement
       }
 
-      this.activatorElement = activator as HTMLElement
+      this.activatorElement = activator
 
       return this.activatorElement
+    },
+    getContentSlot () {
+      return getSlot(this, 'default', this.getValueProxy(), true)
+    },
+    getValueProxy (): object {
+      const self = this
+      return {
+        get value () {
+          return self.isActive
+        },
+        set value (isActive: boolean) {
+          self.isActive = isActive
+        },
+      }
+    },
+    removeActivatorEvents () {
+      if (
+        !this.activator ||
+        !this.activatorElement
+      ) return
+
+      for (const event of this.events) {
+        (this.activatorElement as any)[`on${event}`] = null
+      }
+    },
+    resetActivator () {
+      this.activatorElement = null
+      this.getActivator()
+      this.addActivatorEvents()
     },
   },
 })
