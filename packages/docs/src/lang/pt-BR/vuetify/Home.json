@@ -2,7 +2,7 @@
   "callout": "Dê um up seu desenvolvimento",
   "features": {
     "community": {
-      "text": "Vuetify vem pronto com 8 modelos pré-fabricados no vue-cli. Do simples HTML ao SSR completo, você estará pronto para desenvolver em minutos.",
+      "text": "Vuetify vem pronto com 8 modelos pré-fabricados no Vue CLI 3. Do simples HTML ao SSR completo, você estará pronto para desenvolver em minutos.",
       "title": "Componentes Auxiliares Semânticos"
     },
     "components": {

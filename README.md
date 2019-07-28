@@ -161,7 +161,7 @@ Harness the power of the [Vuetify community](https://community.vuetifyjs.com) an
 
 Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using polyfills). From mobile📱 to laptop 💻 to desktop 🖥, you can rest assured that your application will work as expected.
 
-Interested in the bleeding edge? Try the vue-cli Webpack SSR (Server side rendered) template and build websites optimized for SEO.
+Interested in the bleeding edge? Try the Vue CLI 3 Webpack SSR (Server side rendered) template and build websites optimized for SEO.
 
 For more information about IE11 and Safari 9+ polyfills, visit our [Quick Start Guide](https://vuetifyjs.com/en/getting-started/quick-start#ie11-safari-9-support)
 
@@ -177,7 +177,7 @@ To get started with Vuetify, you can follow one of these simple set-up instructi
 
 Looking to dive right in with zero setup and downtime? Check out our [CodePen.io One Minute Quickstart](https://template.vuetifyjs.com/)
 
-#### Vue CLI-3 Installation
+#### Vue CLI 3 Installation
 
 Setting up Vuetify with Vue's CLI is really easy 👌.
 
@@ -233,7 +233,7 @@ On the next screen, search for `Vuetify` on the list, select it, and install it 
         </a>
       </td>
       <td>
-       A vue-cli-3 plugin for installing and configuring Vuetify
+       A Vue CLI 3 plugin for installing and configuring Vuetify
       </td>
     </tr>
     <tr>
