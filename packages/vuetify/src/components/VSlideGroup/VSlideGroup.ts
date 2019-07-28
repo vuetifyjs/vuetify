@@ -282,7 +282,12 @@ export const BaseSlideGroup = mixins<options &
         return
       }
 
-      if (this.centerActive) {
+      if (
+        this.selectedIndex === 0 ||
+        (!this.centerActive && !this.isOverflowing)
+      ) {
+        this.scrollOffset = 0
+      } else if (this.centerActive) {
         this.scrollOffset = this.calculateCenteredOffset(
           this.selectedItem.$el as HTMLElement,
           this.widths,
@@ -295,8 +300,6 @@ export const BaseSlideGroup = mixins<options &
           this.$vuetify.rtl,
           this.scrollOffset
         )
-      } else {
-        this.scrollOffset = 0
       }
     },
     calculateUpdatedOffset (selectedElement: HTMLElement, widths: Widths, rtl: boolean, currentScrollOffset: number): number {
@@ -311,7 +314,7 @@ export const BaseSlideGroup = mixins<options &
 
       const totalWidth = widths.wrapper + currentScrollOffset
       const itemOffset = clientWidth + offsetLeft
-      const additionalOffset = clientWidth * 0.3
+      const additionalOffset = clientWidth * 0.4
 
       if (offsetLeft < currentScrollOffset) {
         currentScrollOffset = Math.max(offsetLeft - additionalOffset, 0)

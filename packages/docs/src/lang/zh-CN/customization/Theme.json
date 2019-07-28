@@ -1,0 +1,10 @@
+{
+  "header": "# 主题",
+  "lightAndDarkHeader": "## 明亮和暗黑",
+  "customizingHeader": "## 自定义化",
+  "customizingText1": "默认情况下，Vuetify具有适用于所有组件的标准主题。",
+  "customizingText2": "这也可以很容易地修改。只需简单地将**theme**属性传递给`Vue.use`函数即刻。您可以选择修改全部或仅部分主题属性，其余部分会继承默认配置。",
+  "customizingText3": "您也可以使用预定义的material色彩。",
+  "customizingText4": "在引擎盖下，Vuetify将会根据这些可以在DOM中访问的值生成CSS类。这些类将遵循与其他辅助器类相同的标记，例如`primary`或者`secondary--text`。",
+  "customizingText5": "这些值会在**theme**属性下的**$vuetify**对象示例中可用。这可以让您动态地修改您的主题，Vuetify将在后台重新生成并更新您的主题类，无缝更新您的应用程序。"
+}

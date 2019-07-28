@@ -1,24 +1,11 @@
 {
-  "authorOfVuetify": "Autor de Vuetify",
-  "communityHeader": "Comunidad vibrante",
-  "communityText": "Desarrollar con Vuetify significa que nunca estarás solo. Obtén ayuda inmediatamente del equipo de desarrollo y de otros miembros de la comunidad en el servidor oficial de Discord. Ahí tienes la oportunidad de hablar con individuos talentosos que quieren que tengas éxito en tus esfuerzos. ¿Necesitas soporte premium? Conviértete en un [Patreon backer](https://www.patreon.com/vuetify) (patrocinador en la plataforma) y obtén acceso a los canales de soporte #patron o #elite-patron en Discord.",
-  "comparisonHeader": "Comparación con otros frameworks",
-  "comparisonText": "Vuetify no es el único framework Vue material que existe. Muchos otros desarrolladores talentosos han creado algunas aplicaciones asombrosas bajo la apariencia del spec Material Design de Google. Cada uno ofrece su propio punto de vista acerca del desarrollo y el proceso, sin embargo, hay algunas cosas que distinguen a Vuetify:",
-  "contactMe": "Contáctame",
-  "designHeader": "Principios de diseño",
-  "designText": "Vuetify está desarrollado siguiendo al pie de la letra el spec de Material Design. Cada componente está manualmente creado para darte las mejores posibles herramientas para tu siguiente gran app. El desarrollo no se detiene en los componentes principales (core components) descritos en la spec de Google. Mediante el soporte de los miembros de la comunidad y los patrocinadores, componentes adicionales serán diseñados y puestos a disposición de todos para que los disfruten.",
-  "featuresHeader": "Lo que obtienes:",
-  "featuresList": [
-    "Componentes Semánticos \"Helper\"",
-    "Soporte para SSR y PWA",
-    "8 plantillas para Vue-CLI",
-    "Spoorte vía Chat",
-    "Un Sistema de Transición Modular de Componentes",
-    "Un Framework Sorprendentemente Veloz",
-    "Componentes A La Carta"
-  ],
   "header": "¿Cuál es la diferencia?",
-  "letterFromAuthor": "Siento una profunda humildad en que hayas considerado usar Vuetify como tu próximo Framework de UI. Se ha puesto mucho cuidado en crear el entorno perfecto para que lleves cualquier idea desde su concepción hasta la puesta en producción. Espero con ansiedad que te unas a la comunidad de Vuetify y ¡estoy emocionado por ver las icreíbles interfaces que crearás!",
+  "communityHeader": "Comunidad vibrante",
+  "comparisonHeader": "Comparación con otros frameworks",
+  "featuresList": {
+    "2": "Soporte para SSR y PWA",
+    "4": "Spoorte vía Chat"
+  },
   "questionButton": "Pregunta en la comunidad",
   "questionHeader": "¿Aún tienes dudas?"
 }

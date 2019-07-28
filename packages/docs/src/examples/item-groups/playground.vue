@@ -1,6 +1,6 @@
 <template>
   <v-layout column>
-    <v-layout row wrap justify-space-around>
+    <v-layout wrap justify-space-around>
       <v-switch v-model="mandatory" label="Mandatory"></v-switch>
       <v-switch v-model="multiple" label="Multiple"></v-switch>
       <v-flex xs12>

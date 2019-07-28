@@ -2,7 +2,6 @@
   <div>
     <v-container>
       <v-layout
-        row
         justify-space-around
         wrap
       >

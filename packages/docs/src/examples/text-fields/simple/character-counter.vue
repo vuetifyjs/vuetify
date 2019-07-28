@@ -1,7 +1,7 @@
 <template>
   <v-form>
-    <v-container>
-      <v-layout row wrap>
+    <v-container grid-list-xl>
+      <v-layout wrap>
 
         <v-flex xs12 sm6>
           <v-text-field
@@ -30,7 +30,7 @@
             :rules="rules"
             counter="25"
             filled
-            label="Box"
+            label="Filled"
           ></v-text-field>
         </v-flex>
 

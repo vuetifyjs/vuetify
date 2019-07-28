@@ -2,7 +2,7 @@
   "header": "# Colors",
   "headerText": "Out of the box you get access to all colors in the [Material Design spec](https://material.io/guidelines/style/color.html) through **stylus** and **javascript**. These values can be used within your style sheets, your component files and on actual components via the **color class** system.",
   "classesHeader": "## Classes",
-  "classesText": "Each color from the spec gets converted to a **background** and **text** variant for styling within your application through a class, e.g. `<div class=\"red\">` or `<span class=\"red--text\">`. These class colors are defined [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/stylus/settings/_colors.styl).",
+  "classesText": "Each color from the spec gets converted to a **background** and **text** variant for styling within your application through a class, e.g. `<div class=\"red\">` or `<span class=\"red--text\">`. These class colors are defined [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_colors.scss).",
   "classesText2": "Text colors also support **darken** and **lighten** variants using `text--{lighten|darken}-{n}`",
   "javascriptPackHeader": "## Javascript color pack",
   "javascriptPackText": "Vuetify has an optional javascript color pack that you can import and use within your application. This can also be used to help define your application's theme.",

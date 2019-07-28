@@ -1,0 +1,47 @@
+{
+  "examples": {
+    "playground": {
+      "header": "### Layout playground",
+      "desc": "Thử nghiệm các thuộc tính của layout trong một ví dụ đơn giản."
+    },
+    "offset": {
+      "header": "### Offset"
+    },
+    "order": {
+      "header": "### Sắp xếp"
+    },
+    "direction-and-align": {
+      "header": "### Hướng và căn chỉnh"
+    },
+    "row-column-breakpoint": {
+      "header": "### Hàng and cột breakpoints"
+    },
+    "grow-shrink": {
+      "header": "### Giãn và Co"
+    },
+    "nested-grid": {
+      "header": "### Grid lồng nhau"
+    },
+    "unique-layouts": {
+      "header": "### Bố cục đặc biệt"
+    },
+    "spacer": {
+      "header": "### v-spacer"
+    },
+    "tags": {
+      "header": "### Thẻ Html",
+      "desc": "Đôi khi bạn muốn chỉ định một phần tử layout như là một thẻ đặc biệt, như là thẻ `section` or `li`."
+    }
+  },
+  "props": {
+    "alignCenter": "Canh giữa các phần tử.",
+    "alignContentCenter": "Canh nội dung vào giữa.",
+    "alignContentEnd": "Canh nội dung về cuối.",
+    "alignContentSpaceAround": "Canh nội dung với các khoảng xung quanh.",
+    "alignContentSpaceBetween": "Canh nội dung giữa các khoảng.",
+    "alignContentStart": "Canh nội dung về đầu.",
+    "alignEnd": "Canh các phần tử về cuối.",
+    "alignStart": "Canh các phần tử về đầu.",
+    "d-{type}": "Để chỉ định một thành phần hiển thị như flex/inline-flex/block etc. Cú pháp `d-{type}`. Ví dụ `d-flex`."
+  }
+}

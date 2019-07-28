@@ -3,7 +3,7 @@
     <v-subheader>Min and max default slider</v-subheader>
 
     <v-card-text>
-      <v-layout row>
+      <v-layout>
         <v-flex class="pr-4">
           <v-slider
             v-model="slider"
@@ -30,7 +30,7 @@
     <v-subheader>Min and max range slider</v-subheader>
 
     <v-card-text>
-      <v-layout row>
+      <v-layout>
         <v-flex class="px-4">
           <v-range-slider
             v-model="range"

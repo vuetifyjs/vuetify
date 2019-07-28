@@ -1,77 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VDataFooter.ts should render and match snapshot 1`] = `
-<div class="v-data-footer">
-  <div class="v-data-footer__select">
-    Items per page:
-    <div class="v-input v-input--hide-details theme--light v-text-field v-select">
-      <div class="v-input__control">
-        <div role="button"
-             aria-haspopup="listbox"
-             aria-expanded="false"
-             aria-owns="list-2"
-             class="v-input__slot"
-        >
-          <div class="v-select__slot">
-            <div class="v-select__selections">
-              <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                     id="input-2"
-                     readonly="readonly"
-                     type="text"
-                     aria-readonly="true"
-              >
-            </div>
-            <div class="v-input__append-inner">
-              <div class="v-input__icon v-input__icon--append">
-                <i aria-hidden="true"
-                   class="v-icon notranslate mdi mdi-menu-down theme--light"
-                >
-                </i>
-              </div>
-            </div>
-          </div>
-          <div class="v-menu">
-            <div class="v-menu__content theme--light "
-                 style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
-            >
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="v-data-footer__pagination">
-    2-10 of 100
-  </div>
-  <div class="v-data-footer__icons-before">
-    <button type="button"
-            class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-            aria-label="Previous page"
-    >
-      <span class="v-btn__content">
-        <i aria-hidden="true"
-           class="v-icon notranslate mdi mdi-chevron-left theme--light"
-        >
-        </i>
-      </span>
-    </button>
-  </div>
-  <div class="v-data-footer__icons-after">
-    <button type="button"
-            class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-            aria-label="Next page"
-    >
-      <span class="v-btn__content">
-        <i aria-hidden="true"
-           class="v-icon notranslate mdi mdi-chevron-right theme--light"
-        >
-        </i>
-      </span>
-    </button>
-  </div>
-</div>
-`;
-
 exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 1`] = `
 <div class="v-data-footer">
   <div class="v-data-footer__select">
@@ -81,7 +9,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
         <div role="button"
              aria-haspopup="listbox"
              aria-expanded="false"
-             aria-owns="list-39"
+             aria-owns="list-28"
              class="v-input__slot"
         >
           <div class="v-select__slot">
@@ -90,7 +18,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
                 10
               </div>
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                     id="input-39"
+                     id="input-28"
                      readonly="readonly"
                      type="text"
                      aria-readonly="true"
@@ -178,7 +106,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
         <div role="button"
              aria-haspopup="listbox"
              aria-expanded="false"
-             aria-owns="list-24"
+             aria-owns="list-13"
              class="v-input__slot"
         >
           <div class="v-select__slot">
@@ -187,7 +115,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
                 10
               </div>
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                     id="input-24"
+                     id="input-13"
                      readonly="readonly"
                      type="text"
                      aria-readonly="true"
@@ -275,7 +203,7 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
         <div role="button"
              aria-haspopup="listbox"
              aria-expanded="false"
-             aria-owns="list-13"
+             aria-owns="list-2"
              class="v-input__slot"
         >
           <div class="v-select__slot">
@@ -284,7 +212,7 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
                 100
               </div>
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                     id="input-13"
+                     id="input-2"
                      readonly="readonly"
                      type="text"
                      aria-readonly="true"
@@ -351,7 +279,7 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
         <div role="button"
              aria-haspopup="listbox"
              aria-expanded="false"
-             aria-owns="list-65"
+             aria-owns="list-54"
              class="v-input__slot"
         >
           <div class="v-select__slot">
@@ -360,7 +288,7 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
                 10
               </div>
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                     id="input-65"
+                     id="input-54"
                      readonly="readonly"
                      type="text"
                      aria-readonly="true"

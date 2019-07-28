@@ -2,7 +2,7 @@
   <v-card flat class="py-12">
     <v-card-text>
       <v-container fluid class="pa-0">
-        <v-layout row wrap>
+        <v-layout wrap>
           <v-flex xs12 sm6 class="py-2">
             <p>Exclusive</p>
             <v-btn-toggle v-model="toggle_exclusive">

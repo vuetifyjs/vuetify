@@ -88,32 +88,37 @@
           "value": "js_dynamic_theme"
         },
         {
-          "type": "heading",
-          "lang": "variantsSubheader"
-        },
-        {
-          "type": "text",
-          "lang": "variantsText1"
-        },
-        {
-          "type": "markup",
-          "value": "js_theme_file"
-        },
-        {
-          "type": "text",
-          "lang": "variantsText2"
-        },
-        {
-          "type": "markup",
-          "value": "js_theme_file_import"
-        },
-        {
-          "type": "text",
-          "lang": "variantsText3"
-        },
-        {
-          "type": "markup",
-          "value": "ts_theme_item"
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "variantsSubheader"
+            },
+            {
+              "type": "text",
+              "lang": "variantsText1"
+            },
+            {
+              "type": "markup",
+              "value": "js_theme_file"
+            },
+            {
+              "type": "text",
+              "lang": "variantsText2"
+            },
+            {
+              "type": "markup",
+              "value": "js_theme_file_import"
+            },
+            {
+              "type": "text",
+              "lang": "variantsText3"
+            },
+            {
+              "type": "markup",
+              "value": "ts_theme_item"
+            }
+          ]
         }
       ]
     },
@@ -129,60 +134,80 @@
           "lang": "optionText1"
         },
         {
-          "type": "heading",
-          "lang": "optionHeader2"
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "optionHeader2"
+            },
+            {
+              "type": "text",
+              "lang": "optionText3"
+            },
+            {
+              "type": "markup",
+              "value": "js_minify_theme"
+            }
+          ]
         },
         {
-          "type": "text",
-          "lang": "optionText3"
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "optionHeader3"
+            },
+            {
+              "type": "text",
+              "lang": "optionText4"
+            },
+            {
+              "type": "markup",
+              "value": "js_cache_theme"
+            }
+          ]
         },
         {
-          "type": "markup",
-          "value": "js_minify_theme"
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "optionHeader4"
+            },
+            {
+              "type": "text",
+              "lang": "optionText5"
+            },
+            {
+              "type": "markup",
+              "value": "js_vuetify_custom_properties"
+            },
+            {
+              "type": "markup",
+              "value": "html_vuetify_custom_properties"
+            }
+          ]
         },
         {
-          "type": "heading",
-          "lang": "optionHeader3"
-        },
-        {
-          "type": "text",
-          "lang": "optionText4"
-        },
-        {
-          "type": "markup",
-          "value": "js_cache_theme"
-        },
-        {
-          "type": "heading",
-          "lang": "optionHeader4"
-        },
-        {
-          "type": "text",
-          "lang": "optionText5"
-        },
-        {
-          "type": "markup",
-          "value": "js_vuetify_custom_properties"
-        },
-        {
-          "type": "markup",
-          "value": "html_vuetify_custom_properties"
-        },
-        {
-          "type": "heading",
-          "lang": "optionHeader5"
-        },
-        {
-          "type": "text",
-          "lang": "optionText6"
-        },
-        {
-          "type": "markup",
-          "value": "html_vuetify_csp"
-        },
-        {
-          "type": "markup",
-          "value": "js_vuetify_csp"
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "optionHeader5"
+            },
+            {
+              "type": "text",
+              "lang": "optionText6"
+            },
+            {
+              "type": "markup",
+              "value": "html_vuetify_csp"
+            },
+            {
+              "type": "markup",
+              "value": "js_vuetify_csp"
+            }
+          ]
         }
       ]
     },

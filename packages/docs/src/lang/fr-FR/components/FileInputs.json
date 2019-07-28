@@ -1,0 +1,5 @@
+{
+  "events": {
+    "change": "Components.Inputs.events.change"
+  }
+}

@@ -11,7 +11,7 @@
       >{{ value }}</v-progress-circular>
     </div>
 
-    <v-layout row wrap>
+    <v-layout wrap>
       <v-flex xs12 md3 lg2>
         <v-text-field
           v-model="rotate"

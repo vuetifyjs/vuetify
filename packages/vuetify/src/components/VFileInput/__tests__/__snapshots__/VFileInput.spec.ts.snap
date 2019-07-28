@@ -3,9 +3,7 @@
 exports[`VFileInput.ts should be unclearable 1`] = `
 <div class="v-input v-input--is-readonly theme--light v-text-field v-file-input">
   <div class="v-input__prepend-outer">
-    <div tabindex="0"
-         class="v-input__icon v-input__icon--prepend"
-    >
+    <div class="v-input__icon v-input__icon--prepend">
       <i role="button"
          class="v-icon notranslate v-icon--link material-icons theme--light"
       >
@@ -40,9 +38,7 @@ exports[`VFileInput.ts should be unclearable 1`] = `
 exports[`VFileInput.ts should display file size 1`] = `
 <div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-readonly theme--light v-text-field v-file-input">
   <div class="v-input__prepend-outer">
-    <div tabindex="0"
-         class="v-input__icon v-input__icon--prepend"
-    >
+    <div class="v-input__icon v-input__icon--prepend">
       <i role="button"
          class="v-icon notranslate v-icon--link material-icons theme--light"
       >
@@ -87,9 +83,7 @@ exports[`VFileInput.ts should display file size 1`] = `
 exports[`VFileInput.ts should display file size 2`] = `
 <div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-readonly theme--light v-text-field v-file-input">
   <div class="v-input__prepend-outer">
-    <div tabindex="0"
-         class="v-input__icon v-input__icon--prepend"
-    >
+    <div class="v-input__icon v-input__icon--prepend">
       <i role="button"
          class="v-icon notranslate v-icon--link material-icons theme--light"
       >
@@ -134,9 +128,7 @@ exports[`VFileInput.ts should display file size 2`] = `
 exports[`VFileInput.ts should display total size in counter 1`] = `
 <div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-readonly theme--light v-text-field v-file-input">
   <div class="v-input__prepend-outer">
-    <div tabindex="0"
-         class="v-input__icon v-input__icon--prepend"
-    >
+    <div class="v-input__icon v-input__icon--prepend">
       <i role="button"
          class="v-icon notranslate v-icon--link material-icons theme--light"
       >
@@ -184,9 +176,7 @@ exports[`VFileInput.ts should display total size in counter 1`] = `
 exports[`VFileInput.ts should display total size in counter 2`] = `
 <div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-readonly theme--light v-text-field v-file-input">
   <div class="v-input__prepend-outer">
-    <div tabindex="0"
-         class="v-input__icon v-input__icon--prepend"
-    >
+    <div class="v-input__icon v-input__icon--prepend">
       <i role="button"
          class="v-icon notranslate v-icon--link material-icons theme--light"
       >
@@ -234,9 +224,7 @@ exports[`VFileInput.ts should display total size in counter 2`] = `
 exports[`VFileInput.ts should render 1`] = `
 <div class="v-input v-input--is-readonly theme--light v-text-field v-file-input">
   <div class="v-input__prepend-outer">
-    <div tabindex="0"
-         class="v-input__icon v-input__icon--prepend"
-    >
+    <div class="v-input__icon v-input__icon--prepend">
       <i role="button"
          class="v-icon notranslate v-icon--link material-icons theme--light"
       >
@@ -279,9 +267,7 @@ exports[`VFileInput.ts should render 1`] = `
 exports[`VFileInput.ts should render chips 1`] = `
 <div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-readonly theme--light v-text-field v-file-input">
   <div class="v-input__prepend-outer">
-    <div tabindex="0"
-         class="v-input__icon v-input__icon--prepend"
-    >
+    <div class="v-input__icon v-input__icon--prepend">
       <i role="button"
          class="v-icon notranslate v-icon--link material-icons theme--light"
       >
@@ -330,9 +316,7 @@ exports[`VFileInput.ts should render chips 1`] = `
 exports[`VFileInput.ts should render counter 1`] = `
 <div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-readonly theme--light v-text-field v-file-input">
   <div class="v-input__prepend-outer">
-    <div tabindex="0"
-         class="v-input__icon v-input__icon--prepend"
-    >
+    <div class="v-input__icon v-input__icon--prepend">
       <i role="button"
          class="v-icon notranslate v-icon--link material-icons theme--light"
       >
@@ -380,9 +364,7 @@ exports[`VFileInput.ts should render counter 1`] = `
 exports[`VFileInput.ts should render small chips 1`] = `
 <div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-readonly theme--light v-text-field v-file-input">
   <div class="v-input__prepend-outer">
-    <div tabindex="0"
-         class="v-input__icon v-input__icon--prepend"
-    >
+    <div class="v-input__icon v-input__icon--prepend">
       <i role="button"
          class="v-icon notranslate v-icon--link material-icons theme--light"
       >
@@ -411,6 +393,40 @@ exports[`VFileInput.ts should render small chips 1`] = `
              class="v-icon notranslate v-icon--link material-icons theme--light"
           >
             $vuetify.icons.clear
+          </i>
+        </div>
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages theme--light">
+        <span name="message-transition"
+              tag="div"
+              class="v-messages__wrapper"
+        >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VFileInput.ts should render without icon 1`] = `
+<div class="v-input v-input--is-readonly theme--light v-text-field v-file-input">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-text-field__slot">
+        <div class="v-file-input__text">
+        </div>
+        <input id="input-83"
+               readonly="readonly"
+               type="file"
+        >
+      </div>
+      <div class="v-input__append-inner">
+        <div class="v-input__icon v-input__icon--">
+          <i role="button"
+             class="v-icon notranslate v-icon--link material-icons theme--light"
+          >
           </i>
         </div>
       </div>

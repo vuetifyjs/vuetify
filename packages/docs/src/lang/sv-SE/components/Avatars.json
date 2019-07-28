@@ -1,0 +1,12 @@
+{
+  "header": "# Avatar",
+  "headerText": "`v-avatar` komponenten används vanligtvis för att visa profilbilder. Komponenten möjliggör dig att dynamiskt ändra attribut som storlek och kant på responsiva bilder, ikoner, och text. Det går även att visa avatarer utan någon rund kant via **tile** attributet.",
+  "examples": {
+    "size": {
+      "header": "### Storlek"
+    },
+    "profile": {
+      "header": "### Profilkort"
+    }
+  }
+}

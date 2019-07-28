@@ -11,6 +11,10 @@ module.exports = {
         name: 'change',
         value: 'string',
       },
+      {
+        name: 'keydown',
+        value: 'KeyboardEvent',
+      },
       ...inputEvents,
       ...textEvents,
     ].concat(validatableEvents),

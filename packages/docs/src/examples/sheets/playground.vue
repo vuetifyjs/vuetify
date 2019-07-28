@@ -1,6 +1,6 @@
 <template>
   <v-layout column align-center>
-    <v-layout row wrap justify-space-around>
+    <v-layout wrap justify-space-around>
       <v-slider v-model="width" min="0" max="500" label="Width"></v-slider>
       <v-slider v-model="height" min="0" max="500" label="Height"></v-slider>
       <v-slider v-model="elevation" min="0" max="24" label="Elevation"></v-slider>

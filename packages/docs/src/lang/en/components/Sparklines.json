@@ -43,7 +43,7 @@
     "showLabels": "Show labels below each data point",
     "smooth": "Number of px to use as a corner radius. `true` defaults to 8, `false` is 0",
     "type": "Choose between a trendline or bars",
-    "width": "Width of the SVG trendline or bars",
-    "value": "An array of numbers."
+    "value": "An array of numbers.",
+    "width": "Width of the SVG trendline or bars"
   }
 }
