@@ -1,0 +1,39 @@
+{
+  "header": "crwdns40698:0crwdne40698:0",
+  "headerText": "crwdns40700:0crwdne40700:0",
+  "markupHeader": "crwdns40702:0crwdne40702:0",
+  "markupText": "crwdns40704:0crwdne40704:0",
+  "markupText2": "crwdns40706:0[vue-router]crwdne40706:0",
+  "alert1": "crwdns40708:0crwdne40708:0",
+  "alert2": "crwdns40710:0crwdne40710:0",
+  "componentHeader": "crwdns40712:0crwdne40712:0",
+  "componentText1": "crwdns40714:0crwdne40714:0",
+  "componentText2": [
+    "crwdns40716:0[v-app-bar]crwdne40716:0",
+    "crwdns40718:0[v-bottom-navigation]crwdne40718:0",
+    "crwdns40720:0[v-footer]crwdne40720:0",
+    "crwdns40722:0[v-navigation-drawer]crwdne40722:0",
+    "crwdns40724:0[v-system-bar]crwdne40724:0"
+  ],
+  "componentText3": "crwdns40726:0crwdne40726:0",
+  "componentText4": [
+    "crwdns40728:0crwdne40728:0",
+    "crwdns40730:0crwdne40730:0",
+    "crwdns40732:0crwdne40732:0",
+    "crwdns40734:0crwdne40734:0",
+    "crwdns40736:0crwdne40736:0"
+  ],
+  "componentText5": "crwdns40738:0crwdne40738:0",
+  "componentImg": "crwdns40740:0crwdne40740:0",
+  "appHeader": "crwdns40742:0crwdne40742:0",
+  "appText1": "crwdns40744:0crwdne40744:0",
+  "appText2": "crwdns40746:0$vuetifycrwdne40746:0",
+  "accessibility": {
+    "desc": "crwdns40748:0[TR]crwdne40748:0"
+  },
+  "props": {
+    "v-content": {
+      "tag": "crwdns40750:0crwdne40750:0"
+    }
+  }
+}

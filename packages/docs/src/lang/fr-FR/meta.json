@@ -1,119 +1,59 @@
 {
-  "": {
-    "title": "Framework de composants Vue.js Material",
-    "description": "Vuetify est un framework de développement sémantique pour Vue.js. Construit avec Material Design, il vise à fournir tous les outils nécessaires pour créer de belles applications riches en contenu.",
-    "keywords": "vue, vue 2, vue js, vue.js, material design, composants vue, composants material design, vuetify, vuetify.js"
-  },
   "404": {
     "title": "Oups, 404",
     "description": "Oups, on dirait que ce que vous cherchez n'est pas là !"
   },
   "getting-started/quick-start": {
-    "title": "Démarrage rapide",
-    "description": "Commencez avec Vue et Vuetify en un rien de temps. Supporte vue-cli-3, les projets existants et plus.",
     "keywords": "démarrage rapide, templates vuetify, installer vuetify"
-  },
-  "getting-started/why-vuetify": {
-    "title": "Pourquoi Vuetify ?",
-    "description": "Pourquoi devriez-vous choisir Vuetify par rapport aux autres frameworks Vue.",
-    "keywords": "pourquoi vuetify, pourquoi vue, pourquoi choisir vuetify"
-  },
-  "getting-started/frequently-asked-questions": {
-    "title": "Foire aux questions",
-    "description": "Vous êtes bloqué sur un problème ? Regardez cette foire aux questions.",
-    "keywords": "foire aux questions, faq"
-  },
-  "getting-started/meet-the-team": {
-    "title": "Rencontrez l'équipe",
-    "description": "Rencontrez l'équipe chargée de rendre Vuetify génial. Merci de soutenir Vuetify !",
-    "keywords": "équipe de développement vuetify, vuetify core team"
-  },
-  "getting-started/sponsors-and-backers": {
-    "title": "Sponsors et donateurs",
-    "description": "Contribuez à Vuetify.js en soutenant le développement de nouvelles fonctionnalités",
-    "keywords": "parrainage, donations, support"
-  },
-  "getting-started/contributing": {
-    "title": "Contribuer",
-    "description": "Découvrez comment contribuer au framework Vuetify.",
-    "keywords": "contribuer, demande de fonctionnalité"
-  },
-  "getting-started/roadmap": {
-    "title": "Feuille de route",
-    "description": "Les nouvelles fonctionnalités prévues et à venir pour Vuetify. Nouveaux composants de Vue, nouvelles directives, et bien plus encore !",
-    "keywords": "feuille de route, projets futurs"
-  },
-  "getting-started/consulting-and-support": {
-    "title": "Consultation et support",
-    "description": "Obtenir l'aide et le soutien du créateur de Vuetify, John Leider",
-    "keywords": "consultation, support, aide"
-  },
-  "customization/a-la-carte": {
-    "title": "A la carte",
-    "description": "Préparez-vous à le treeshaking automatique. Utilisez uniquement les composants nécessaires sans tout importer.",
-    "keywords": "à la carte, importation simple de Vuetify, importation de Vuetify, importation de composant"
-  },
-  "components/application": {
-    "title": "Paramètres de l'application",
-    "description": "Vuetify est équipé d'un balisage par défaut qui facilite la création de mises en page pour n'importe quelle application.",
-    "keywords": "mise en page par défaut, balisage par défaut, vu la mise en page par défaut"
-  },
-  "customization/icons": {
-    "title": "Installation des icônes",
-    "description": "Vuetify supporte les icônes personnalisées en utilisant les préfixes et les options globales.",
-    "keywords": "vue, icônes, polices de caractères d'icônes, bibliothèques d'icônes, icônes Vuetify"
-  },
-  "framework/internationalization": {
-    "title": "Internationalisation",
-    "description": "Vuetify prend en charge l'internationalisation linguistique de ses composants.",
-    "keywords": "vue, i18n, langue, internationalisation"
-  },
-  "styles/transitions": {
-    "title": "Transitions",
-    "description": "Créez une application incroyable avec des animations fluides.",
-    "keywords": "animations, transitions"
-  },
-  "styles/scroll": {
-    "title": "Défilement",
-    "description": "En utilisant l'aide goTo, vous pouvez défiler facilement vers n'importe quel emplacement de la page.",
-    "keywords": "défilement, défilement fluide, transitions"
-  },
-  "styles/colors": {
-    "title": "Palette de couleurs Material",
-    "description": "Appliquez facilement n'importe quelle couleur de la palette Material.",
-    "keywords": "couleurs"
-  },
-  "customization/theme": {
-    "title": "Thème de l'application",
-    "description": "Configurez le thème et les couleurs supplémentaires de votre application en un éclair.",
-    "keywords": "thèmes"
-  },
-  "styles/typography": {
-    "title": "Typographie de l'application",
-    "description": "Voir les différents styles de typographie. Des titres aux légendes, avec différents poids et tailles.",
-    "keywords": "typographie, entêtes, titres"
-  },
-  "styles/content": {
-    "keywords": "contenu, html, balisage"
   },
   "getting-started/pre-made-layouts": {
     "title": "Mises en page de l'application"
   },
-  "components/grids": {
-    "title": "Système de grille de mise en page",
-    "description": "Vuetify supporte la grille de conception Material Design en 12 points pour la mise en page de votre application.",
-    "keywords": "grille, mise en page, flex"
+  "getting-started/why-vuetify": {
+    "title": "Pourquoi Vuetify ?"
   },
-  "components/grid-lists": {
-    "title": "Composant de liste sous forme de grille"
+  "getting-started/frequently-asked-questions": {
+    "title": "Foire aux questions",
+    "keywords": "foire aux questions, faq"
   },
-  "components/app-bars": {
-    "keywords": "barres d'outils, barres système, barres d'application"
+  "getting-started/meet-the-team": {
+    "title": "Rencontrez l'équipe",
+    "keywords": "équipe de développement vuetify, vuetify core team"
   },
-  "components/badges": {
-    "title": "Badges"
+  "getting-started/sponsors-and-backers": {
+    "title": "Sponsors et donateurs"
   },
-  "components/banners": {
-    "title": "Bannières"
+  "getting-started/contributing": {
+    "title": "Contribuer",
+    "keywords": "contribuer, demande de fonctionnalité"
+  },
+  "customization/icons": {
+    "title": "Icônes"
+  },
+  "customization/theme": {
+    "description": "Configurez le thème et les couleurs supplémentaires de votre application en un éclair.",
+    "keywords": "thèmes"
+  },
+  "styles/colors": {
+    "title": "Palette de couleurs Material"
+  },
+  "styles/content": {
+    "keywords": "contenu, html, balisage"
+  },
+  "styles/scroll": {
+    "keywords": "défilement, défilement fluide, transitions"
+  },
+  "styles/transitions": {
+    "title": "Transitions"
+  },
+  "styles/typography": {
+    "title": "Typographie de l'application",
+    "keywords": "typographie, entêtes, titres"
+  },
+  "components/api-explorer": {
+    "title": "Explorateur API"
+  },
+  "components/application": {
+    "title": "Paramètres de l'application"
   }
 }

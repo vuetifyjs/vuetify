@@ -31,7 +31,6 @@
           <v-layout
             v-if="item.heading"
             :key="i"
-            row
             align-center
           >
             <v-flex xs6>

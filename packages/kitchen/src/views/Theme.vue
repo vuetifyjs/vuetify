@@ -1,7 +1,7 @@
 <template>
   <v-content>
     <v-layout column>
-      <v-layout row justify-space-around>
+      <v-layout justify-space-around>
         <v-icon
           class="mt-6 ml-6 mr-2"
           :color="$vuetify.theme.primary"
@@ -13,7 +13,7 @@
           label="Primary"
         />
       </v-layout>
-      <v-layout row justify-space-around>
+      <v-layout justify-space-around>
         <v-icon
           class="mt-6 ml-6 mr-2"
           :color="$vuetify.theme.secondary"
@@ -25,7 +25,7 @@
           label="Secondary"
         />
       </v-layout>
-      <v-layout row justify-space-around>
+      <v-layout justify-space-around>
         <v-icon
           class="mt-6 ml-6 mr-2"
           :color="$vuetify.theme.accent"
@@ -37,7 +37,7 @@
           label="Accent"
         />
       </v-layout>
-      <v-layout row justify-space-around>
+      <v-layout justify-space-around>
         <v-icon
           class="mt-6 ml-6 mr-2"
           :color="$vuetify.theme.error"
@@ -49,7 +49,7 @@
           label="Error"
         />
       </v-layout>
-      <v-layout row justify-space-around>
+      <v-layout justify-space-around>
         <v-icon
           class="mt-6 ml-6 mr-2"
           :color="$vuetify.theme.info"
@@ -61,7 +61,7 @@
           label="Info"
         />
       </v-layout>
-      <v-layout row justify-space-around>
+      <v-layout justify-space-around>
         <v-icon
           class="mt-6 ml-6 mr-2"
           :color="$vuetify.theme.success"
@@ -73,7 +73,7 @@
           label="Success"
         />
       </v-layout>
-      <v-layout row justify-space-around>
+      <v-layout justify-space-around>
         <v-icon
           class="mt-6 ml-6 mr-2"
           :color="$vuetify.theme.warning"

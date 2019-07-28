@@ -1,5 +1,4 @@
 {
-  "header": "Button",
   "headerText": "El componente `v-btn` reemplaza el botón html estándar con un diseño de material design y una multitud de opciones. Cualquier clase auxiliar de color puede ser utilizada para alterar el color del texto o del fondo.",
   "examples": {
     "flat": {
@@ -16,8 +15,7 @@
     },
     "dropdown": {
       "header": "Variantes de Button Dropdown",
-      "desc": "Los _button dropdowns_ son selects regulares con estilos adicionales.",
-      "uninverted": true
+      "desc": "Los _button dropdowns_ son selects regulares con estilos adicionales."
     },
     "icon": {
       "header": "Ícono",
@@ -40,7 +38,7 @@
       "desc": "Los _outline buttons_ heredan sus bordes del color aplicado actual."
     },
     "round": {
-      "header": "Round",
+      "header": "Redondo",
       "desc": "Los _rounded buttons_ se comportan de la misma forma que los botones regulares pero tienen bordes redondeados. "
     },
     "block": {
@@ -50,19 +48,7 @@
   },
   "props": {
     "v-btn": {
-      "block": "Expande el botón al 100% del espacio disponible",
-      "depressed": "Quita la sombra al botón",
-      "fab": "Hace el botón redondo",
-      "flat": "Quita el color del fondo del botón",
-      "icon": "Denota al botón como un ícono, redondo y plano",
-      "inputValue": "Controla el estado activo del botón",
-      "large": "Botón de tamaño grande",
-      "loading": "Agrega un ícono animado \"loading\"",
-      "outline": "El botón tendrá un contorno",
-      "outlined": "El botón tendrá un contorno",
-      "round": "El botón será redondeado de los lados",
-      "small": "Botón de tamaño pequeño",
-      "type": "Configura el atributo _type_ del botón"
+      "loading": "Agrega una ícono animado de \"cargando\""
     }
   }
 }

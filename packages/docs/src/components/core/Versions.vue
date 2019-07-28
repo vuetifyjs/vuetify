@@ -60,10 +60,10 @@
       archives () {
         return [
           {
-            icon: 'mdi-rocket',
-            text: 'v2.0.0',
-            subtext: this.$t('Vuetify.AppToolbar.next'),
-            href: 'https://next.vuetifyjs.com',
+            icon: 'mdi-shield-lock',
+            text: 'v1.5.x',
+            subtext: this.$t('Vuetify.AppToolbar.stable'),
+            href: 'https://v15.vuetifyjs.com',
           },
           {
             icon: 'mdi-package',
@@ -73,9 +73,15 @@
           },
           {
             icon: 'mdi-developer-board',
-            text: this.$t('Vuetify.AppToolbar.inDev'),
-            subtext: this.$t('Vuetify.AppToolbar.dev'),
+            text: this.$t('Vuetify.AppToolbar.dev'),
+            subtext: this.$t('Vuetify.AppToolbar.inDev'),
             href: 'https://dev.vuetifyjs.com',
+          },
+          {
+            icon: 'mdi-rocket',
+            text: this.$t('Vuetify.AppToolbar.next'),
+            subtext: this.$t('Vuetify.AppToolbar.inDev'),
+            href: 'https://next.vuetifyjs.com',
           },
         ]
       },

@@ -11,7 +11,6 @@
         grid-list-lg
       >
         <v-layout
-          row
           wrap
         >
           <v-flex xs12>

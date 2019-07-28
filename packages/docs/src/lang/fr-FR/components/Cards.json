@@ -1,11 +1,11 @@
 {
-  "header": "# Cartes",
   "headerText": "Le composant `v-card` est un composant polyvalent qui peut être utilisé pour tout allant d'un simple panneau à une image statique. Le composant **card** a de nombreux composants d'aide pour rendre le balisage aussi facile que possible. Les composants qui n'ont aucune option listée utilisent le composant fonctionnel **Vue's** pour un rendu plus rapide et servent de balisage pour rendre la construction plus facile.",
+  "componentsHeader": "### Composants fonctionnels",
   "examples": {
     "usage": {
       "desc": "Une carte a 3 composantes de base, `v-card-title`, `v-card-text` et `v-card-actions`."
     },
-    "mediaWithText": {
+    "media-with-text": {
       "header": "### Média avec texte",
       "desc": "En utilisant le système de mise en page, nous pouvons ajouter du texte personnalisé n'importe où en arrière-plan."
     },
@@ -17,22 +17,13 @@
       "header": "### Grilles",
       "desc": "À l’aide de listes de la grille, vous pouvez créer de belles mises en page."
     },
-    "customActions": {
+    "custom-actions": {
       "header": "### Actions personnalisées",
       "desc": "Avec une simple condition, vous pouvez facilement ajouter un texte complémentaire qui est caché jusqu'à l’ouverture."
     },
-    "twitterCard": {
+    "twitter-card": {
       "header": "### Carte twitter",
       "desc": "Le composant `v-card` contient plusieurs composants enfants qui vous aident à construire des exemples complexes sans avoir à vous soucier de l'espacement. Cet exemple est composé des composants `v-card-title`, `v-card-text` et `v-card-actions`."
     }
-  },
-  "props": {
-    "flat": "Supprimer l’ombre portée de la carte",
-    "height": "Définissez manuellement la hauteur de la carte",
-    "hover": "Appliquer une élévation plus élevée sur le survol",
-    "img": "Spécifie un fond d'image",
-    "primaryTitle": "Applique le padding spécifique au titre primaire.",
-    "raised": "Spécifie une élévation par défaut plus élevée",
-    "src": "L'image à afficher en arrière-plan."
   }
 }

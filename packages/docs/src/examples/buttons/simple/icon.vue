@@ -2,7 +2,7 @@
   <v-card flat>
     <v-card-text>
       <v-container fluid class="pa-0">
-        <v-layout row wrap>
+        <v-layout wrap>
           <v-flex xs12>
             <p>Normal</p>
           </v-flex>
@@ -32,7 +32,7 @@
           </v-flex>
         </v-layout>
 
-        <v-layout row wrap class="mt-12">
+        <v-layout wrap class="mt-12">
           <v-flex xs12>
             <p>Disabled</p>
           </v-flex>

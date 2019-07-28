@@ -1,5 +1,5 @@
 <template>
-  <v-layout row wrap>
+  <v-layout wrap>
     <v-flex xs12 sm6 class="my-4">
       <v-date-picker v-model="month1" :show-current="false" type="month"></v-date-picker>
     </v-flex>

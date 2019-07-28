@@ -167,7 +167,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -224,7 +223,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -336,7 +334,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -447,7 +444,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -641,7 +637,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -708,7 +703,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -788,7 +782,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -873,7 +866,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -959,7 +951,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -993,7 +984,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -1027,7 +1017,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -1060,7 +1049,7 @@
         Prefixes and suffixes
       </core-title>
       <core-section>
-        <v-layout row>
+        <v-layout>
           <v-flex xs4>
             <v-subheader>Prefix for dollar currency</v-subheader>
           </v-flex>
@@ -1073,7 +1062,7 @@
           </v-flex>
         </v-layout>
 
-        <v-layout row>
+        <v-layout>
           <v-flex xs4>
             <v-subheader>Suffix for weight</v-subheader>
           </v-flex>
@@ -1086,7 +1075,7 @@
           </v-flex>
         </v-layout>
 
-        <v-layout row>
+        <v-layout>
           <v-flex xs4>
             <v-subheader>Suffix for email domain</v-subheader>
           </v-flex>
@@ -1099,7 +1088,7 @@
           </v-flex>
         </v-layout>
 
-        <v-layout row>
+        <v-layout>
           <v-flex xs4>
             <v-subheader>Suffix for time zone</v-subheader>
           </v-flex>

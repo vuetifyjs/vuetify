@@ -66,7 +66,6 @@
 
       <template v-slot:default="props">
         <v-layout
-          row
           wrap
         >
           <v-flex

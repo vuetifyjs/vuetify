@@ -1,7 +1,6 @@
 @import '../../styles/styles.sass'
 
-.container,
-.container-fluid
+.container
   &.grow-shrink-0
     flex-grow: 0
     flex-shrink: 0
@@ -45,11 +44,8 @@
   // https://github.com/vuetifyjs/vuetify/issues/3873
   min-width: 0
 
-  &.row
-    flex-direction: row
-
-    &.reverse
-      flex-direction: row-reverse
+  &.reverse
+    flex-direction: row-reverse
 
   &.column
     flex-direction: column

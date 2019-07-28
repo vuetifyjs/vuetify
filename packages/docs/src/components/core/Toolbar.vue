@@ -8,7 +8,7 @@
     color="primary"
     dark
     fixed
-    height="58"
+    extension-height="40"
   >
     <v-app-bar-nav-icon
       v-if="!isHome"
@@ -60,6 +60,18 @@
       <core-versions />
       <core-locales />
     </v-toolbar-items>
+
+    <template v-if="isHome" v-slot:extension>
+      <v-layout
+        align-center
+        justify-center
+        fill-height
+        white
+        text--primary
+      >
+        Looking for the&nbsp;<a class="primary--text font-weight-bold" href="https://v15.vuetifyjs.com" aria-label="v1.5 documentation">v1.5 documentation</a>?
+      </v-layout>
+    </template>
   </v-app-bar>
 </template>
 
@@ -115,4 +127,5 @@
 
   .v-toolbar__extension
     padding: 0
+    z-index: -1
 </style>

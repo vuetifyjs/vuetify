@@ -11,7 +11,7 @@
         </div>
       </v-flex>
       <v-flex xs12>
-        <v-layout row xs12 wrap>
+        <v-layout xs12 wrap>
           <v-flex xs12 md4>
             <v-radio-group v-model="alignment">
               <v-radio
@@ -82,9 +82,9 @@
     computed: {
       layoutAttributes () {
         return {
-          [this.alignment]: true,
-          [this.justify]: true,
-          [this.flexDirection]: true,
+          [this.alignment]: Number.isNaN(+this.alignment),
+          [this.justify]: Number.isNaN(+this.justify),
+          [this.flexDirection]: Number.isNaN(+this.flexDirection),
           reverse: this.reverse,
           'fill-height': this.fillHeight,
         }

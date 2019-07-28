@@ -1,5 +1,4 @@
 {
-  "header": "# Icônes",
   "headerText": "Le composant `v-icon` fournit un grand nombre de glyphes permettant de fournir un contexte à divers aspects de votre application. Les icônes Vuetify utilisent la bibliothèque de polices Material Icons de Google. Pour une liste de toutes les icônes disponibles, visitez la page officielle [Icons Material](https://materialdesignicons.com/).",
   "examples": {
     "color": {
@@ -16,8 +15,8 @@
     }
   },
   "props": {
+    "dense": "Rend l'icône petite **(20px)",
     "left": "Positionne l'icône à gauche, lorsqu'elle est utilisée à l'intérieur d'un bouton",
-    "right": "Positionne l'icône à droite, lorsqu'elle est utilisée à l'intérieur d'un bouton",
-    "dense": "Rend l'icône petite **(20px)"
+    "right": "Positionne l'icône à droite, lorsqu'elle est utilisée à l'intérieur d'un bouton"
   }
 }
