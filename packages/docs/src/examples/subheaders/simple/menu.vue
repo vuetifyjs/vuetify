@@ -1,5 +1,5 @@
 <template>
-  <v-layout row>
+  <v-layout>
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
         <v-toolbar color="teal" dark>

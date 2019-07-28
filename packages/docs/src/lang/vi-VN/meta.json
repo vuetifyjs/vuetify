@@ -1,1 +1,14 @@
-{}
+{
+  "getting-started/quick-start": {
+    "title": "Bắt đầu nhanh"
+  },
+  "getting-started/consulting-and-support": {
+    "title": "Tư vấn và hỗ trọ"
+  },
+  "customization/icons": {
+    "title": "Icons"
+  },
+  "components/api-explorer": {
+    "title": "API"
+  }
+}

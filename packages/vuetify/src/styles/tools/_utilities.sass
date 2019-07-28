@@ -1,0 +1,49 @@
+=generate-utility($utility, $infix)
+  $values: map-get($utility, values)
+
+  // If the values are a list or string, convert it into a map
+  @if type-of($values) == "string" or type-of(nth($values, 1)) != "list"
+    $values: zip($values, $values)
+
+  @each $value in $values
+    $properties: map-get($utility, property)
+
+    // Multiple properties are possible, for example with vertical or horizontal margins or paddings
+    @if type-of($properties) == 'string'
+      $properties: append((), $properties)
+
+    // Property can be a map, where the key is a mixin to include
+    @if type-of($properties) == 'map'
+      @each $dir in $properties
+        $mixin: nth($dir, 1)
+        // SASS doesn't support dynamic mixin invocation
+        // https://github.com/sass/sass/issues/626
+        @if $mixin == 'ltr'
+          .v-application--is-ltr
+            +generate-utility-body($utility, nth($dir, 2), $value, $infix)
+        @else if $mixin == 'rtl'
+          .v-application--is-rtl
+            +generate-utility-body($utility, nth($dir, 2), $value, $infix)
+        @else
+          @error 'Only RTL and LTR are supported'
+    @else
+      .v-application
+        +generate-utility-body($utility, $properties, $value, $infix)
+
+=generate-utility-body($utility, $properties, $value, $infix)
+  // Use custom class if present
+  $property-class: map-get($utility, class)
+  $property-class: if($property-class, $property-class, nth($properties, 1))
+
+  // Don't prefix if value key is null (eg. with shadow class)
+  $property-class-modifier: if(nth($value, 1), "-" + nth($value, 1), "")
+
+  $value: nth($value, 2)
+
+  .#{$property-class + $infix + $property-class-modifier}
+    @for $i from 1 through length($properties)
+      $property: nth($properties, $i)
+      $val: $value
+      @if type-of($value) == 'list' and length($properties) == length($value)
+        $val: nth($value, $i)
+      #{$property}: $val !important

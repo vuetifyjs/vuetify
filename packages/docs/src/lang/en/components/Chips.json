@@ -81,7 +81,7 @@
     "value": "The value used when a child of a [v-chip-group](/components/chip-groups)."
   },
   "events": {
-    "click": "Emitted when chip is clicked, toggles chip if contained in a chip group",
+    "click": "Emitted when component is clicked, toggles chip if contained in a chip group - Will trigger component to ripple when clicked unless the `.native` modifier is used",
     "click:close": "Emitted when close icon is clicked",
     "update:active": "Emitted when close icon is clicked, sets active to `false`"
   }

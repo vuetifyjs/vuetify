@@ -51,14 +51,16 @@
       </template>
 
       <template v-if="isEnabled('body')" v-slot:body="{ items }">
-        <tr v-for="item in items" :key="item.name">
-          <td>{{ item.name }}</td>
-          <td>CONTENT</td>
-          <td>CONTENT</td>
-          <td>CONTENT</td>
-          <td>CONTENT</td>
-          <td>CONTENT</td>
-        </tr>
+        <tbody>
+          <tr v-for="item in items" :key="item.name">
+            <td>{{ item.name }}</td>
+            <td>CONTENT</td>
+            <td>CONTENT</td>
+            <td>CONTENT</td>
+            <td>CONTENT</td>
+            <td>CONTENT</td>
+          </tr>
+        </tbody>
       </template>
 
       <template v-if="isEnabled('no-data')" v-slot:no-data>
@@ -177,18 +179,18 @@
         items: desserts,
         search: null,
         slots: [
-          'top',
+          'body',
+          'body.append',
+          'body.prepend',
+          'footer',
           'header.data-table-select',
           'header',
           'progress',
           'item.data-table-select',
           'item.<name>',
-          'body.prepend',
-          'body',
-          'body.append',
           'no-data',
           'no-results',
-          'footer',
+          'top',
         ],
         headers: [
           {

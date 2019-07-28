@@ -30,7 +30,7 @@
     </v-stepper>
 
     <v-stepper
-      class="mt-5"
+      class="mt-12"
       non-linear
     >
       <v-stepper-header>
@@ -64,7 +64,7 @@
     </v-stepper>
 
     <v-stepper
-      class="mt-5"
+      class="mt-12"
       non-linear
       value="3"
     >

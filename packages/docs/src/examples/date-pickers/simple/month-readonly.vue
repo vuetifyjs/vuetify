@@ -1,5 +1,5 @@
 <template>
-  <v-layout row justify-center>
+  <v-layout justify-center>
     <v-date-picker v-model="date" type="month" readonly></v-date-picker>
   </v-layout>
 </template>

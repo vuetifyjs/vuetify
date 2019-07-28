@@ -15,6 +15,7 @@ export default {
     namespace: null,
     page: null,
     structure: null,
+    toc: [],
   },
 
   getters: {
@@ -29,6 +30,19 @@ export default {
   },
 
   mutations: {
-    setStructure: set('structure'),
+    pushToc: (state, payload) => {
+      if (state.toc.find(item => item.id === payload.id)) {
+        return
+      }
+
+      state.toc.push(payload)
+    },
+    setStructure: (state, payload) => {
+      set('structure')(state, payload)
+
+      if (payload) {
+        state.toc = []
+      }
+    },
   },
 }

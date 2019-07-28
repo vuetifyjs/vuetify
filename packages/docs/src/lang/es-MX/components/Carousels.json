@@ -1,25 +1,17 @@
 {
-  "header": "Carousel",
   "headerText": "El componente `v-carousel` se utiliza para mostrar grandes cantidades de contenido visual en un timer rotativo.",
   "examples": {
-    "customTransition": {
+    "custom-transition": {
       "header": "Transición personalizada",
       "desc": "También puedes aplicar tu propia transición personalizada."
     },
-    "hideControls": {
+    "hide-controls": {
       "header": "Esconder los controles",
       "desc": "Puedes esconder los controles de la parte inferior con la prop `hide-controls`."
     }
   },
   "props": {
-    "nextIcon": "El ícono a mostrar para forzar la paginación al siguiente elemento",
-    "prevIcon": "El ícono a mostrar para forzar la paginación al elemento anterior",
-    "cycle": "Determina si el carrusel debe hacer mostrar las imágenes en un ciclo",
     "delimiterIcon": "Configura el ícono para el delimitador del carrusel",
-    "hideControls": "Esconde los controles de navegación",
-    "hideDelimiters": "Esconde el panel con los delimitadores del carrusel",
-    "interval": "La duración entre imágenes en el ciclo",
-    "reverseTransition": "Configura la transición reversa",
-    "src": "La ruta a la imagen"
+    "reverseTransition": "Configura la transición reversa"
   }
 }

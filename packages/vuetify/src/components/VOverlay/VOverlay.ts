@@ -34,12 +34,12 @@ export default mixins(
       type: [Number, String],
       default: 0.46,
     },
+    value: {
+      default: true,
+    },
     zIndex: {
       type: [Number, String],
       default: 5,
-    },
-    value: {
-      default: true,
     },
   },
 

@@ -2,8 +2,8 @@
   <v-simple-table height="300px">
     <thead>
       <tr>
-        <th class="text-xs-left">Name</th>
-        <th class="text-xs-left">Calories</th>
+        <th class="text-left">Name</th>
+        <th class="text-left">Calories</th>
       </tr>
     </thead>
     <tbody>

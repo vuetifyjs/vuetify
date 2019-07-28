@@ -1,17 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VDataIterator.ts should hide footer 1`] = `
-
 <div class="v-data-iterator">
   <div>
     No data available
   </div>
 </div>
-
 `;
 
 exports[`VDataIterator.ts should render and match snapshot 1`] = `
-
 <div class="v-data-iterator">
   <div>
     No data available
@@ -91,11 +88,9 @@ exports[`VDataIterator.ts should render and match snapshot 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
-
 <div class="v-data-iterator">
   <div>
     foo
@@ -184,11 +179,9 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataIterator.ts should render valid no-data, loading and no-results states 1`] = `
-
 <div class="v-data-iterator">
   <div>
     No data available
@@ -268,11 +261,9 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataIterator.ts should render valid no-data, loading and no-results states 2`] = `
-
 <div class="v-data-iterator">
   <div>
     Loading items...
@@ -352,11 +343,9 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataIterator.ts should render valid no-data, loading and no-results states 3`] = `
-
 <div class="v-data-iterator">
   <div>
     No matching records found
@@ -436,5 +425,4 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
     </div>
   </div>
 </div>
-
 `;

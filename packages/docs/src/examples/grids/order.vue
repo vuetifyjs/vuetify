@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-layout row>
+    <v-layout>
       <v-flex xs6 order-lg2>
         <v-card dark tile flat color="error">
           <v-card-text>#1</v-card-text>
@@ -12,7 +12,7 @@
         </v-card>
       </v-flex>
     </v-layout>
-    <v-layout row>
+    <v-layout>
       <v-flex xs4 order-md2 order-xs1>
         <v-card dark tile flat color="red lighten-1">
           <v-card-text>#1</v-card-text>
@@ -29,7 +29,7 @@
         </v-card>
       </v-flex>
     </v-layout>
-    <v-layout row wrap>
+    <v-layout wrap>
       <v-flex xs12 sm6 md3 order-md4 order-sm2>
         <v-card dark tile flat color="red darken-2">
           <v-card-text>#1</v-card-text>

@@ -1,5 +1,20 @@
 module.exports = {
   'v-slide-group': {
-    slots: ['default'],
+    events: [
+      {
+        name: 'click:location',
+        value: 'void',
+      },
+    ],
+    slots: [
+      {
+        name: 'next',
+        value: undefined,
+      },
+      {
+        name: 'prev',
+        value: undefined,
+      },
+    ],
   },
 }

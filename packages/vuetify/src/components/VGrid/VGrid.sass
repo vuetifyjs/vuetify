@@ -1,0 +1,37 @@
+@import '../../styles/styles.sass'
+@import './_mixins'
+
+.container
+  +make-container
+  +make-container-max-widths
+
+  &--fluid
+    max-width: 100%
+
+// Row
+//
+// Rows contain and clear the floats of your columns.
+.row
+  +make-row
+
+  &--dense
+    margin-right: -$form-grid-gutter / 2
+    margin-left: -$form-grid-gutter / 2
+
+    > .col,
+    > [class*="col-"]
+      padding: $form-grid-gutter / 2
+
+// Remove the negative margin from default .row, then the horizontal padding
+// from all immediate children columns (to prevent runaway style inheritance).
+.no-gutters
+  margin-right: 0
+  margin-left: 0
+  > .col,
+  > [class*="col-"]
+    padding: 0
+
+// Columns
+//
+// Common styles for small and large grid columns
++make-grid-columns

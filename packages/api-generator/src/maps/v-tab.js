@@ -1,5 +1,14 @@
 module.exports = {
   'v-tab': {
-    slots: ['default'],
+    events: [
+      {
+        name: 'click',
+        value: 'ClickEvent',
+      },
+      {
+        name: 'keydown',
+        value: 'KeyboardEvent',
+      },
+    ],
   },
 }

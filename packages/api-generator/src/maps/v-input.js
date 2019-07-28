@@ -1,4 +1,4 @@
-const { inputEvents, inputSlots } = require('../variables')
+const { inputEvents, inputSlots } = require('../helpers/variables')
 
 module.exports = {
   'v-input': {

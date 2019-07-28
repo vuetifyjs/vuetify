@@ -1,10 +1,8 @@
 {
-  "header": "Icon",
   "headerText": "`v-icon`コンポーネントは、あなたのアプリケーションの様々な場面に応じて多くのアイコンを提供します。Vuetifyのアイコンは、GoogleのMaterial Iconsライブラリを使用します。 全ての利用可能なアイコンのリストは、公式の[Material Icons](https://material.io/icons/)ページをご覧ください。",
   "examples": {
-    "fontAwesome": {
-      "header": "Font Awesome",
-      "desc": "[Font Awesome](http://fontawesome.io/icons/) のアイコンの利用をサポートしています。アイコン名に`fa-`プレフィックスを付与するだけで使用できます。あなたのプロジェクトにFont Awesomeを導入しておく必要があるので注意して下さい。"
+    "font-awesome": {
+      "header": "Font Awesome"
     },
     "color": {
       "header": "色",
@@ -16,7 +14,6 @@
     }
   },
   "props": {
-    "disabled": "Mixins.Input.props.disabled",
     "large": "アイコンのサイズを大 **(36px)** にします。",
     "left": "ボタン内部でアイコンを使用する場合に、アイコンを左に配置します。",
     "medium": "アイコンのサイズを中 **(28px)** にします。",

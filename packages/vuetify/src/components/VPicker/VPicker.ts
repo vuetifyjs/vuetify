@@ -41,7 +41,7 @@ export default mixins(Colorable, Themeable).extend({
     genTitle () {
       return this.$createElement('div', this.setBackgroundColor(this.computedTitleColor, {
         staticClass: 'v-picker__title',
-        'class': {
+        class: {
           'v-picker__title--landscape': this.landscape,
         },
       }), this.$slots.title)
@@ -80,7 +80,7 @@ export default mixins(Colorable, Themeable).extend({
   render (h): VNode {
     return h('div', {
       staticClass: 'v-picker v-card',
-      'class': {
+      class: {
         'v-picker--landscape': this.landscape,
         'v-picker--full-width': this.fullWidth,
         ...this.themeClasses,

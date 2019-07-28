@@ -1,6 +1,6 @@
 <template>
   <v-layout column align-center>
-    <v-layout row wrap justify-space-around>
+    <v-layout wrap justify-space-around>
       <v-switch v-model="editable" class="ma-2" label="Ediatable"></v-switch>
       <v-switch v-model="segmented" class="ma-2" label="Segmented"></v-switch>
       <v-switch v-model="loading" class="ma-2" label="Loading"></v-switch>

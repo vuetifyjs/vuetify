@@ -7,7 +7,7 @@
     <v-card-title>
       <v-icon
         :color="checking ? 'red lighten-2' : 'indigo'"
-        class="mr-5"
+        class="mr-12"
         size="64"
         @click="takePulse"
       >

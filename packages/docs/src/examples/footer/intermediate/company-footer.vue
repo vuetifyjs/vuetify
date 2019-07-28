@@ -5,7 +5,6 @@
   >
     <v-layout
       justify-center
-      row
       wrap
     >
       <v-btn
@@ -21,8 +20,8 @@
       <v-flex
         primary
         lighten-2
-        py-3
-        text-xs-center
+        py-4
+        text-center
         white--text
         xs12
       >

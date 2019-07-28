@@ -71,6 +71,10 @@ export default VTextField.extend({
     } as PropValidator<File | File[]>,
   },
 
+  data: () => ({
+    internalFileInput: null,
+  }),
+
   computed: {
     classes (): object {
       return {
@@ -132,6 +136,7 @@ export default VTextField.extend({
   methods: {
     clearableCallback () {
       this.internalValue = this.isMultiple ? [] : null
+      this.internalFileInput = null
     },
     genChips () {
       if (!this.isDirty) return []
@@ -150,16 +155,16 @@ export default VTextField.extend({
     genInput () {
       const input = VTextField.options.methods.genInput.call(this)
 
-      delete input.data!.domProps!.value
+      input.data!.domProps!.value = this.internalFileInput
 
       return [this.genSelections(), input]
     },
     genPrependSlot () {
+      if (!this.prependIcon) return null
+
       const icon = this.genIcon('prepend', () => {
         this.$refs.input.click()
       })
-
-      icon.data!.attrs = { tabindex: 0 }
 
       return this.genSlot('prepend', 'outer', [icon])
     },
@@ -201,7 +206,7 @@ export default VTextField.extend({
       }, children)
     },
     onInput (e: Event) {
-      const files = [...(e.target as HTMLInputElement).files]
+      const files = [...(e.target as HTMLInputElement).files || []]
 
       this.internalValue = this.isMultiple ? files : files[0]
     },

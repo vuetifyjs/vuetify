@@ -10,25 +10,22 @@
     >
       <!-- Header -->
       <div
-        v-if="header.value !== 'example' || item.example"
+        v-if="!['example', 'props'].includes(header.value) || item.example || item.props"
         class="text-capitalize overline grey--text text--darken-3"
         v-text="header.value"
       />
 
       <!-- Name -->
-      <v-chip
+      <span
         v-if="header.value === 'name'"
-        class="caption"
-        color="primary"
-        label
-        x-small
-        style="height: auto;"
-      >{{ item.name }}</v-chip>
+        class="mono name"
+        v-text="item.name"
+      />
 
       <!-- Type -->
       <span
         v-else-if="header.value === 'type'"
-        class="mono type"
+        class="mono"
         v-text="item.type"
       />
 
@@ -95,7 +92,8 @@
   overflow: hidden
 
   .mono
-    // color: #d63200
+    &.name
+      color: #d63200
 
     // &.example
 

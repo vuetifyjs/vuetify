@@ -1,6 +1,5 @@
 <template>
   <v-layout
-    row
     wrap
     justify-space-around
     align-center

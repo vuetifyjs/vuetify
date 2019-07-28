@@ -3,10 +3,5 @@
     "flat": {
       "header": "フラットボタン"
     }
-  },
-  "props": {
-    "v-list-group": {
-      "disabled": "Mixins.Input.props.disabled"
-    }
   }
 }

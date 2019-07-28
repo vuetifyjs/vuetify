@@ -39,7 +39,7 @@
     },
     "advanced": {
       "header": "### Advanced",
-      "desc": "The expansion panel component provides a rich playground to build truly advanced implementations. Here we take advantage of scoped slots in the `v-expansion-panel-header` component to react to the state of being open or closed by fading content in and out.",
+      "desc": "The expansion panel component provides a rich playground to build truly advanced implementations. Here we take advantage of slots in the `v-expansion-panel-header` component to react to the state of being open or closed by fading content in and out.",
       "uninverted": true
     }
   },
@@ -77,8 +77,8 @@
   },
   "slots": {
     "v-expansion-panel-header": {
-    "actions": "Expansion header actions",
-    "icon": "Slot for custom icon"
+      "actions": "Expansion header actions",
+      "icon": "Slot for custom icon"
     }
   }
 }

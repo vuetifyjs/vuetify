@@ -1,4 +1,4 @@
-const { inputEvents, textEvents, validatableEvents, textFieldSlots } = require('../variables')
+const { inputEvents, textEvents, validatableEvents, textFieldSlots } = require('../helpers/variables')
 
 module.exports = {
   'v-text-field': {
@@ -10,6 +10,18 @@ module.exports = {
       {
         name: 'change',
         value: 'string',
+      },
+      {
+        name: 'blur',
+        value: 'boolean',
+      },
+      {
+        name: 'focus',
+        value: 'boolean',
+      },
+      {
+        name: 'keydown',
+        value: 'KeyboardEvent',
       },
       ...inputEvents,
       ...textEvents,

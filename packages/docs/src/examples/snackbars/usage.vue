@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center ma-2">
+  <div class="text-center ma-2">
     <v-btn dark @click="snackbar = true">Open Snackbar</v-btn>
     <v-snackbar
       v-model="snackbar"

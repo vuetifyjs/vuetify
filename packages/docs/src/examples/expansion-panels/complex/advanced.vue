@@ -70,7 +70,7 @@
 
           <v-divider
             vertical
-            class="mx-3"
+            class="mx-4"
           ></v-divider>
 
           <v-flex xs3>

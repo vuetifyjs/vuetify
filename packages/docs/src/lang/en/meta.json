@@ -11,7 +11,7 @@
   },
   "getting-started/quick-start": {
     "title": "Quick start",
-    "description": "Get started with Vue and Vuetify in no time. Support for vue-cli-3, Webpack, Nuxt and more.",
+    "description": "Get started with Vue and Vuetify in no time. Support for Vue CLI 3, Webpack, Nuxt and more.",
     "keywords": "quick start, vuetify templates, installing vuetify, install vuetify"
   },
   "getting-started/pre-made-layouts": {
@@ -55,7 +55,7 @@
     "keywords": "contribute, contributing, feature request"
   },
   "getting-started/roadmap": {
-    "title": "Roadmap",
+    "title": "The Vuetify Roadmap",
     "description": "The upcoming planned features and new functionality coming to Vuetify. New components, new directives, and much much more!.",
     "keywords": "vuetify roadmap, future plans, new vuetify features"
   },

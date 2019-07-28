@@ -16,7 +16,7 @@
             :key="elevation"
           >
             <v-sheet
-              class="pa-5"
+              class="pa-12"
               color="grey lighten-3"
             >
               <v-sheet
@@ -44,7 +44,7 @@
             :key="color"
           >
             <v-sheet
-              class="pa-5"
+              class="pa-12"
               color="grey lighten-3"
             >
               <v-sheet
@@ -67,7 +67,7 @@
           wrap
         >
           <v-sheet
-            class="pa-5"
+            class="pa-12"
             color="grey lighten-3"
           >
             <v-sheet
@@ -78,7 +78,7 @@
             />
           </v-sheet>
           <v-sheet
-            class="pa-5"
+            class="pa-12"
             color="grey lighten-3"
           >
             <v-sheet
@@ -89,7 +89,7 @@
             />
           </v-sheet>
           <v-sheet
-            class="pa-5"
+            class="pa-12"
             color="grey lighten-3"
           >
             <v-sheet
@@ -100,7 +100,7 @@
             />
           </v-sheet>
           <v-sheet
-            class="pa-5"
+            class="pa-12"
             color="grey lighten-3"
           >
             <v-sheet

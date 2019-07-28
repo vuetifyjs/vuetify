@@ -1,14 +1,11 @@
 {
-  "header": "数据表格",
   "headerText": "`v-data-table` 用于显示表格数据，功能包括排序、搜索、分页、行内编辑、头部提示以及行选择。",
   "examples": {
     "select": {
-      "header": "行选择框",
-      "desc": "使用行选择框能让你进行行选择操作。"
+      "header": "行选择框"
     },
     "expand": {
-      "header": "expand 插槽",
-      "desc": "`v-data-table` 组件还支持行展开，通过使用`expand` 插槽。 另外你可以使用 `expand` 属性来避免你点击另一行的时候已展开的行关闭。"
+      "header": "expand 插槽"
     },
     "headers": {
       "header": "items 和 headers 插槽",
@@ -17,10 +14,6 @@
     "progress": {
       "header": "progress 插槽",
       "desc": "这里也有一个 `progress` 插槽让你可以自定义显示表格的加载状态，默认情况下这是一个`indeterminate` `v-progress-linear`（即不确定进度的线性进度条）。"
-    },
-    "footer": {
-      "header": "footer 插槽",
-      "desc": "如果你还想添加一些额外的功能，比如每列过滤或者搜索，你可以使用 `footer` 插槽。"
     },
     "search": {
       "header": "搜索以及无结果时的 no-result 插槽",
@@ -35,14 +28,13 @@
       "desc": "排序也同样可以通过 `pagination` 属性在外部控制，也必须使用 `.sync` 修饰符。你也可以使用该属性设置默认的排序序列。"
     },
     "server": {
-      "header": "服务端分页和排序",
-      "desc": "如果你从后台加载数据，并希望显示结果之前进行分页和排序，你可以使用 `total-items` 属性。定义这个属性将会禁用内置的分页和排序，并且你需要使用 `pagination` 属性来监听变化。使用 `loading` 属性来显示获取数据时的进度条。"
+      "header": "服务端分页和排序"
     },
     "headerless": {
       "header": "无头表格",
       "desc": "设置 `hide-headers` 属性来创建一个无头表格。"
     },
-    "editdialog": {
+    "edit-dialog": {
       "header": "行内编辑",
       "desc": "使用 `v-edit-dialog` 组件来进行数据表格的行内编辑。 You can block closing the dialog when clicked outside by adding the **persistent** prop."
     },
