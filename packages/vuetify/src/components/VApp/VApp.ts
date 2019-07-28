@@ -34,6 +34,12 @@ export default mixins(
     },
   },
 
+  beforeCreate () {
+    if (!this.$vuetify || (this.$vuetify === this.$root)) {
+      throw new Error('Vuetify is not properly initialized, see https://vuetifyjs.com/getting-started/quick-start#bootstrapping-the-vuetify-object')
+    }
+  },
+
   render (h) {
     const wrapper = h('div', { staticClass: 'v-application--wrap' }, this.$slots.default)
 
