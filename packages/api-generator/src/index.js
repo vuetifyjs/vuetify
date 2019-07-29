@@ -3,6 +3,7 @@ const Vuetify = require('vuetify')
 const fs = require('fs')
 const map = require('./helpers/map')
 const deepmerge = require('./helpers/merge')
+const pkg = require('../package.json')
 
 const hyphenateRE = /\B([A-Z])/g
 function hyphenate (str) {
@@ -263,4 +264,28 @@ components['internationalization'] = map['internationalization']
 
 writeApiFile({ ...components, ...directives }, 'dist/api.js')
 
-writeJsonFile({ ...components, ...directives }, 'dist/web-types.json')
+// Create web-types.json to provide autocomplete in JetBrains IDEs
+const webTypes = {
+  // $schema: "../../schema/web-types.schema.json",
+  framework: "vue",
+  name: "vuetify",
+  version: pkg.version,
+  contributions: {
+    html: {
+      "types-syntax": "typescript",
+      tags: [],
+    }
+  }
+}
+
+const webTypesTags = { ...components, ...directives }
+Object.keys(webTypesTags).forEach(function(key) {
+  const name = key
+  const attributes = webTypesTags[key].props || []
+  const events = webTypesTags[key].events || []
+  const slots = webTypesTags[key].slots || []
+  const tag = { name, attributes, events, slots }
+  webTypes.contributions.html.tags.push(tag);
+});
+
+writeJsonFile(webTypes, 'dist/web-types.json')
