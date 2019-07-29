@@ -50,10 +50,10 @@
   &.v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows) > .v-slide-group__wrapper > .v-tabs-bar__content
     & > .v-tab:first-child,
     & > .v-tabs-slider-wrapper + .v-tab
-      margin-left: $tabs-item-mobile-no-arrows-margin
+      +ltr()
+        margin-left: $tabs-item-mobile-no-arrows-margin
 
       +rtl()
-        margin-left: 0
         margin-right: $tabs-item-mobile-no-arrows-margin
 
   &.v-item-group > *
@@ -111,34 +111,32 @@
 .v-tabs--align-with-title > .v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows) > .v-slide-group__wrapper > .v-tabs-bar__content
   & > .v-tab:first-child,
   & > .v-tabs-slider-wrapper + .v-tab
-    margin-left: $tabs-item-align-with-title-margin
+    +ltr()
+      margin-left: $tabs-item-align-with-title-margin
 
     +rtl()
-      margin-left: 0
       margin-right: $tabs-item-align-with-title-margin
 
 .v-tabs--fixed-tabs,
 .v-tabs--centered
-  .v-tabs-bar__content > *:last-child
-    margin-right: auto
+  +ltr()
+    .v-tabs-bar__content > *:last-child
+      margin-right: auto
 
-  .v-tabs-bar__content > *:first-child:not(.v-tabs-slider-wrapper)
-    margin-left: auto
+    .v-tabs-bar__content > *:first-child:not(.v-tabs-slider-wrapper)
+      margin-left: auto
 
-  .v-tabs-slider-wrapper + *
-    margin-left: auto
+    .v-tabs-slider-wrapper + *
+      margin-left: auto
 
   +rtl()
     .v-tabs-bar__content > *:last-child
-      margin-right: 0
       margin-left: auto
 
     .v-tabs-bar__content > *:first-child:not(.v-tabs-slider-wrapper)
-      margin-left: 0
       margin-right: auto
 
     .v-tabs-slider-wrapper + *
-      margin-left: 0
       margin-right: auto
 
 .v-tabs--fixed-tabs
