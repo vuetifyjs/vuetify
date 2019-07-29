@@ -1,7 +1,7 @@
 {
-  "props": {
-    "v-treeview": {
-      "customFilter": "自定义搜索过滤器"
+  "examples": {
+    "color": {
+      "header": "色彩"
     }
   }
 }

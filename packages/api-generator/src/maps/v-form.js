@@ -19,6 +19,10 @@ module.exports = {
         name: 'input',
         value: 'boolean',
       },
+      {
+        name: 'submit',
+        value: 'event',
+      },
     ],
   },
 }

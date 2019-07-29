@@ -1,4 +1,15 @@
 {
+  "examples": {
+    "right": {
+      "header": "### 右寄せタブ"
+    },
+    "pagination": {
+      "header": "### ページネーション"
+    },
+    "icons": {
+      "header": "### カスタムアイコン"
+    }
+  },
   "props": {
     "reverseTransition": "戻す際のトランジションを設定します。"
   }

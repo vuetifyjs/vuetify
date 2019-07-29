@@ -1,5 +1,4 @@
 {
-  "header": "셀렉트 (Select)",
   "headerText": "셀렉트 필드 컴포넌트는 옵션 목록에서 사용자가 제공하는 정보를 수집하는데 사용됩니다.",
   "examples": {
     "light": {
@@ -14,9 +13,12 @@
       "header": "복수선택 (Multiple)",
       "desc": "multi-select 에서 선택된 항목들을 보여줄때 `v-chip`을 사용할 수 있습니다."
     },
-    "customTextAndValue": {
+    "custom-text-and-value": {
       "header": "항목 텍스트와 값의 커스터마이즈 (Customized item text and value)",
       "desc": "텍스트와 값 필드에 해당하는 항목 배열 내의 특정 속성을 지정할 수 있습니다. 기본값은 **text** 와 **value** 입니다. 이 예제에서는 선택된 아이템의 전체 오브젝트를 반환하는 `return-opject` prop을 사용합니다.."
+    },
+    "disabled": {
+      "header": "비활성화 (Disabled)"
     }
   },
   "props": {
@@ -28,25 +30,20 @@
     "dense": "리스트 항목의 최대 높이를 낮춤",
     "disabled": "인풋(input)을 비활성화",
     "editable": " 편집 버튼을 생성 - [스펙](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
-    "filter": "항목 필터링에 사용되는 함수",
+    "filter": "아이템을 필터링하는데 사용되는 함수",
     "hideSelected": "이미 선택된 셀렉트 메뉴 항목을 보여주지 않음",
     "itemDisabled": "**항목** 의 비활성화(disabled) 값 속성을 설정",
-    "itemText": "**항목** 의 텍스트 값 속성을 설정",
-    "itemValue": "**항목** 의 값 속성을 설정",
     "items": "오브젝트 배열이나 문자열 배열. 오브젝트를 사용하면 text 와 value 필드를 사용. 이는 **item-text** 와 **item-value** 를 사용해서 바꿀 수 있습니다.",
+    "itemText": "**항목** 의 텍스트 값 속성을 설정",
     "minWidth": "셀렉트의 `v-menu` 컨텐츠의 최소 너비를 설정",
     "multiple": "복수 선택이 가능하도록 변경. 값의 배열을 받음(?).",
     "multiLine": "셀렉트 컴포넌트가 포커스 되거나 dirty(?) 할때 레이블이 떠다니도록(float) 만듬.",
-    "noDataText": "데이타가 없을때 보여줄 텍스트",
+    "noDataText": "데이터가 없을때 보여지는 문자열",
     "openOnClear": "**clearable** prop을 사용할때, 일단 한번 클리어되면 현재 상태에 따라 선택 메뉴가 열리거나 열려있게 됩니다. When using the **clearable** prop, once cleared",
     "overflow": "오버플로우 버튼을 생성 - [스펙](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "returnObject": "선택시 **item-value** 로 지정된 값이 아니라 오브젝트가 바로 반환되도록 바꿈.",
     "searchInput": "Bound when using the autocomplete prop. Use the **.sync** modifier to catch user input from the autocomplete search input",
     "tags": "태그 기능. 사용자가 **items** prop에 없는 새로운 값을 만들 수 있게해줌",
     "valueComparator": "Apply a custom value comparator function"
-  },
-  "events": {
-    "change": "Mixins.Input.events.change",
-    "update:error": "Mixins.Input.events.update:error"
   }
 }

@@ -1,12 +1,10 @@
 {
-  "header": "分隔线",
-  "headerText": "`v-divider`组件用来分隔列表的各部分",
   "examples": {
     "inset": {
       "header": "插页分隔线",
       "desc": "插页隔线向右移动72px，这将使他们将列表项分隔。"
     },
-    "dividerListPortrait": {
+    "divider-list-portrait": {
       "header": "Divivders in Portrait View"
     }
   },

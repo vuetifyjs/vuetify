@@ -1,44 +1,45 @@
 {
-  "header": "crwdns25866:0crwdne25866:0",
-  "headerText": "crwdns25868:0crwdne25868:0",
+  "header": "crwdns38672:0crwdne38672:0",
+  "headerText": "crwdns38674:0crwdne38674:0",
   "examples": {
     "usage": {
-      "desc": "crwdns25870:0crwdne25870:0"
+      "desc": "crwdns38676:0crwdne38676:0"
     },
-    "fontAwesome": {
-      "header": "crwdns25872:0crwdne25872:0",
-      "desc": "crwdns25874:0crwdne25874:0"
+    "font-awesome": {
+      "header": "crwdns38678:0crwdne38678:0",
+      "desc": "crwdns38680:0crwdne38680:0"
     },
     "md": {
-      "header": "crwdns25876:0crwdne25876:0",
-      "desc": "crwdns25878:0crwdne25878:0"
+      "header": "crwdns38682:0crwdne38682:0",
+      "desc": "crwdns38684:0crwdne38684:0"
     },
     "color": {
-      "header": "crwdns25880:0crwdne25880:0",
-      "desc": "crwdns25882:0crwdne25882:0"
+      "header": "crwdns32456:0crwdne32456:0",
+      "desc": "crwdns32458:0crwdne32458:0"
     },
     "buttons": {
-      "header": "crwdns25884:0crwdne25884:0",
-      "desc": "crwdns25886:0crwdne25886:0"
+      "header": "crwdns32460:0crwdne32460:0",
+      "desc": "crwdns32462:0crwdne32462:0"
     },
     "clickable": {
-      "header": "crwdns25888:0crwdne25888:0",
-      "desc": "crwdns25890:0crwdne25890:0"
+      "header": "crwdns32464:0crwdne32464:0",
+      "desc": "crwdns32466:0crwdne32466:0"
     },
-    "mdiSvg": {
-      "header": "crwdns25892:0crwdne25892:0",
-      "desc": "crwdns25894:0[here]crwdne25894:0"
+    "mdi-svg": {
+      "header": "crwdns38686:0crwdne38686:0",
+      "desc": "crwdns38688:0[here]crwdne38688:0"
     }
   },
   "props": {
-    "disabled": "crwdns25896:0crwdne25896:0",
-    "large": "crwdns25898:0crwdne25898:0",
-    "left": "crwdns25900:0crwdne25900:0",
-    "medium": "crwdns25902:0crwdne25902:0",
-    "right": "crwdns25904:0crwdne25904:0",
-    "dense": "crwdns25906:0crwdne25906:0",
-    "size": "crwdns25908:0crwdne25908:0",
-    "small": "crwdns25910:0crwdne25910:0",
-    "xLarge": "crwdns25912:0crwdne25912:0"
+    "dense": "crwdns38690:0crwdne38690:0",
+    "disabled": "crwdns38692:0crwdne38692:0",
+    "large": "crwdns32470:0crwdne32470:0",
+    "left": "crwdns32472:0crwdne32472:0",
+    "medium": "crwdns32474:0crwdne32474:0",
+    "right": "crwdns32476:0crwdne32476:0",
+    "size": "crwdns38694:0crwdne38694:0",
+    "small": "crwdns32480:0crwdne32480:0",
+    "tag": "crwdns38696:0crwdne38696:0",
+    "xLarge": "crwdns32482:0crwdne32482:0"
   }
 }

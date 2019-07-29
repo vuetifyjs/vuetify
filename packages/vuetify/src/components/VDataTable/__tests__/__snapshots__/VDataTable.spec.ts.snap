@@ -11,7 +11,7 @@ exports[`VDataTable.ts should render 1`] = `
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="v-data-table__empty-wrapper">
           <td colspan="0">
             No data available
           </td>
@@ -137,7 +137,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="v-data-table__empty-wrapper">
           <td colspan="0">
             Loading items...
           </td>
@@ -343,7 +343,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="v-data-table__empty-wrapper">
           <td colspan="6">
             Loading items...
           </td>

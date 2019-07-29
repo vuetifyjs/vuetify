@@ -6,7 +6,7 @@
 +theme(v-data-table) using ($material)
   tbody
     tr
-      &:hover:not(.v-data-table__expand-row)
+      &:hover:not(.v-data-table__expand-row):not(.v-data-table__empty-wrapper)
         background: map-deep-get($material, 'table', 'hover')
 
       &.expanded
@@ -24,6 +24,10 @@
 
   .v-data-footer
     border-top: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+
+  .v-data-table__empty-wrapper
+    color: map-deep-get($material, 'text', 'disabled')
+    text-align: center
 
 .v-data-table__mobile-row
   display: block

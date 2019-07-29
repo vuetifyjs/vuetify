@@ -1,0 +1,55 @@
+{
+  "header": "crwdns37792:0crwdne37792:0",
+  "headerText": "crwdns37794:0crwdne37794:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns37796:0crwdne37796:0"
+    },
+    "slide-x-transitions": {
+      "header": "crwdns37798:0crwdne37798:0",
+      "desc": "crwdns37800:0crwdne37800:0"
+    },
+    "slide-y-transitions": {
+      "header": "crwdns37802:0crwdne37802:0",
+      "desc": "crwdns37804:0$primarycrwdne37804:0"
+    },
+    "scroll-x-transitions": {
+      "header": "crwdns37806:0crwdne37806:0",
+      "desc": "crwdns37808:0crwdne37808:0"
+    },
+    "scroll-y-transitions": {
+      "header": "crwdns37810:0crwdne37810:0",
+      "desc": "crwdns37812:0crwdne37812:0"
+    },
+    "scale-transition": {
+      "header": "crwdns37814:0crwdne37814:0",
+      "desc": "crwdns37816:0crwdne37816:0"
+    },
+    "fade-transition": {
+      "header": "crwdns37818:0crwdne37818:0",
+      "desc": "crwdns37820:0crwdne37820:0"
+    },
+    "expand-transition": {
+      "header": "crwdns37822:0crwdne37822:0",
+      "desc": "crwdns37824:0crwdne37824:0"
+    },
+    "custom-origin": {
+      "header": "crwdns37826:0crwdne37826:0",
+      "desc": "crwdns37828:0crwdne37828:0"
+    },
+    "todo": {
+      "header": "crwdns37830:0crwdne37830:0",
+      "desc": "crwdns37832:0crwdne37832:0"
+    }
+  },
+  "createYourOwnHeader": "crwdns37834:0crwdne37834:0",
+  "createYourOwnText1": "crwdns37836:0crwdne37836:0",
+  "createYourOwnText2": "crwdns37838:0crwdne37838:0",
+  "props": {
+    "group": "crwdns37840:0crwdne37840:0",
+    "hideOnLeave": "crwdns37842:0crwdne37842:0",
+    "leaveAbsolute": "crwdns37844:0[FLIP]crwdne37844:0",
+    "mode": "crwdns37846:0crwdne37846:0",
+    "origin": "crwdns37848:0crwdne37848:0"
+  }
+}

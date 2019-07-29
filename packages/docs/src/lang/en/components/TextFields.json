@@ -126,12 +126,15 @@
     "prepend-inner": "Prepends an item inside input content"
   },
   "events": {
+    "blur": "Emitted when component is no longer focused",
     "change": "Components.Inputs.events.change",
     "click:append": "Components.Inputs.events['click:append']",
     "click:append-outer": "Emitted when appended outer icon is clicked",
     "click:clear": "Emitted when clearable icon clicked",
     "click:prepend": "Components.Inputs.events['click:prepend']",
     "click:prepend-inner": "Emitted when prepended inner icon is clicked",
+    "focus": "Emitted when component is focused",
+    "keydown": "Emitted when the **enter** key is pressed",
     "update:error": "Mixins.Validatable.events['update:error']"
   }
 }

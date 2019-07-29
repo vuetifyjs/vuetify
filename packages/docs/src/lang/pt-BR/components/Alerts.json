@@ -1,6 +1,1 @@
-{
-  "header": "Alert",
-  "props": {
-    "type": "Especifica um alerta de **success**, **info**, **warning** ou **error**. Usa a cor contextual e um ícone pré-definido."
-  }
-}
+{}

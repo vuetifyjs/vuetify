@@ -1,6 +1,5 @@
 <template>
   <v-layout
-    id="patrons"
     align-center
     tag="section"
     wrap

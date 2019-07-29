@@ -1,25 +1,10 @@
 {
-  "app": "指定组件作为应用程序布局的一部分，用于动态调整内容大小。",
   "auto": "在所选择的元素上居中列表",
   "centered": "将选项卡居中",
   "clearable": "添加输入框清除功能，默认图标是 Material Icons **clear**",
   "falseValue": "设置虚假状态的值",
-  "height": "设置组件高度",
   "id": "设置组件上的DOM id",
-  "max": "设置最大宽度",
-  "maxHeight": "设置内容的最大高度",
-  "maxWidth": "设置内容的最大宽度",
-  "minWidth": "设置内容的最小宽度",
-  "min": "设置最小宽度",
-  "mobileBreakPoint": "设置指定的移动端断点",
-  "overlap": "组件将折叠插槽里的内容",
-  "persistent": "点击外部不会消除对话框",
-  "ripple": "使用`v-ripple`指令",
-  "shift": "不是激活状态时隐藏按钮上的文字",
-  "size": "设置元素的高度和宽度",
+  "persistent": "点击对话框外部不能使其关闭",
   "textColor": "将指定的颜色应用于控件文本",
-  "tile": "删除边框弧度",
-  "trueValue": "设置真值",
-  "value": "控制可见性",
-  "width": "内容的宽度"
+  "trueValue": "设置真值"
 }

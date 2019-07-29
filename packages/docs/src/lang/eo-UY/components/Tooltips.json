@@ -1,27 +1,30 @@
 {
-  "header": "crwdns25666:0crwdne25666:0",
-  "headerText": "crwdns25668:0crwdne25668:0",
+  "header": "crwdns38540:0crwdne38540:0",
+  "headerText": "crwdns38542:0crwdne38542:0",
   "examples": {
     "usage": {
-      "desc": "crwdns25670:0crwdne25670:0"
+      "desc": "crwdns32246:0crwdne32246:0"
     },
     "alignment": {
-      "header": "crwdns25672:0crwdne25672:0",
-      "desc": "crwdns25674:0crwdne25674:0"
+      "header": "crwdns32248:0crwdne32248:0",
+      "desc": "crwdns38544:0crwdne38544:0"
     },
     "visibility": {
-      "header": "crwdns25676:0crwdne25676:0",
-      "desc": "crwdns25678:0crwdne25678:0"
+      "header": "crwdns32252:0crwdne32252:0",
+      "desc": "crwdns32254:0crwdne32254:0"
     }
   },
   "props": {
-    "closeDelay": "crwdns25680:0crwdne25680:0",
-    "dark": "crwdns25682:0crwdne25682:0",
-    "debounce": "crwdns25684:0crwdne25684:0",
-    "disabled": "crwdns25686:0crwdne25686:0",
-    "light": "crwdns25688:0crwdne25688:0",
-    "openDelay": "crwdns25690:0crwdne25690:0",
-    "tag": "crwdns25692:0crwdne25692:0",
-    "transition": "crwdns25694:0crwdne25694:0"
+    "closeDelay": "crwdns32256:0crwdne32256:0",
+    "dark": "crwdns32258:0crwdne32258:0",
+    "debounce": "crwdns32260:0crwdne32260:0",
+    "disabled": "crwdns32262:0crwdne32262:0",
+    "internalActivator": "crwdns38546:0crwdne38546:0",
+    "light": "crwdns32264:0crwdne32264:0",
+    "openDelay": "crwdns38548:0crwdne38548:0",
+    "openOnClick": "crwdns38550:0crwdne38550:0",
+    "openOnHover": "crwdns38552:0crwdne38552:0",
+    "tag": "crwdns32268:0crwdne32268:0",
+    "transition": "crwdns32270:0crwdne32270:0"
   }
 }

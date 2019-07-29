@@ -1,39 +1,39 @@
 {
-  "header": "crwdns26766:0crwdne26766:0",
-  "headerText": "crwdns26768:0crwdne26768:0",
+  "header": "crwdns39500:0crwdne39500:0",
+  "headerText": "crwdns39502:0crwdne39502:0",
   "examples": {
     "usage": {
-      "desc": "crwdns26770:0crwdne26770:0"
+      "desc": "crwdns39504:0crwdne39504:0"
     },
-    "circularColored": {
-      "header": "crwdns26772:0crwdne26772:0",
-      "desc": "crwdns26774:0crwdne26774:0"
+    "circular-colored": {
+      "header": "crwdns39506:0crwdne39506:0",
+      "desc": "crwdns39508:0crwdne39508:0"
     },
-    "circularIndeterminate": {
-      "header": "crwdns26776:0crwdne26776:0",
-      "desc": "crwdns26778:0crwdne26778:0"
+    "circular-indeterminate": {
+      "header": "crwdns39510:0crwdne39510:0",
+      "desc": "crwdns39512:0crwdne39512:0"
     },
-    "circularSizeAndWidth": {
-      "header": "crwdns26780:0crwdne26780:0",
-      "desc": "crwdns26782:0crwdne26782:0"
+    "circular-size-and-width": {
+      "header": "crwdns39514:0crwdne39514:0",
+      "desc": "crwdns39516:0crwdne39516:0"
     },
-    "circularRotate": {
-      "header": "crwdns26784:0crwdne26784:0",
-      "desc": "crwdns26786:0crwdne26786:0"
+    "circular-rotate": {
+      "header": "crwdns39518:0crwdne39518:0",
+      "desc": "crwdns39520:0crwdne39520:0"
     }
   },
   "props": {
-    "active": "crwdns26788:0crwdne26788:0",
-    "backgroundColor": "crwdns26790:0crwdne26790:0",
-    "backgroundOpacity": "crwdns26792:0crwdne26792:0",
-    "bufferValue": "crwdns26794:0crwdne26794:0",
-    "button": "crwdns26796:0crwdne26796:0",
-    "fill": "crwdns26798:0crwdne26798:0",
-    "indeterminate": "crwdns26800:0crwdne26800:0",
-    "query": "crwdns26802:0crwdne26802:0",
-    "rotate": "crwdns26804:0crwdne26804:0",
-    "size": "crwdns26806:0crwdne26806:0",
-    "value": "crwdns26808:0crwdne26808:0",
-    "width": "crwdns26810:0crwdne26810:0"
+    "active": "crwdns39522:0crwdne39522:0",
+    "backgroundColor": "crwdns39524:0crwdne39524:0",
+    "backgroundOpacity": "crwdns39526:0crwdne39526:0",
+    "bufferValue": "crwdns39528:0crwdne39528:0",
+    "button": "crwdns39530:0crwdne39530:0",
+    "fill": "crwdns39532:0crwdne39532:0",
+    "indeterminate": "crwdns39534:0crwdne39534:0",
+    "query": "crwdns39536:0crwdne39536:0",
+    "rotate": "crwdns39538:0crwdne39538:0",
+    "size": "crwdns39540:0crwdne39540:0",
+    "value": "crwdns39542:0crwdne39542:0",
+    "width": "crwdns39544:0crwdne39544:0"
   }
 }
