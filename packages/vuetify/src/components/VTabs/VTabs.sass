@@ -46,6 +46,11 @@
   border-radius: inherit
   height: $tabs-bar-height
 
+  // https://github.com/vuetifyjs/vuetify/issues/6932
+  &.v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows)
+    > .v-slide-group__wrapper > .v-tabs-bar__content > .v-tab:first-of-type
+      margin-left: $tabs-item-mobile-no-arrows-margin
+
   &.v-item-group > *
     cursor: initial
 
@@ -98,8 +103,9 @@
     transition: $primary-transition
 
 // Modifier
-.v-tabs--align-with-title > .v-tabs-bar
-  padding-left: $tabs-item-align-with-title-padding
+.v-tabs--align-with-title > .v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows)
+  > .v-slide-group__wrapper > .v-tabs-bar__content > .v-tab:first-of-type
+    margin-left: $tabs-item-align-with-title-margin
 
 .v-tabs--fixed-tabs,
 .v-tabs--centered

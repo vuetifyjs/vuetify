@@ -147,8 +147,21 @@
   &:focus:before
     opacity: $btn-focus-opacity
 
-.v-btn--absolute
+.v-btn--absolute,
+.v-btn--fixed
   position: absolute
+
+  &.v-btn--right
+    right: map-get($grid-gutters, 'lg')
+
+  &.v-btn--left
+    left: map-get($grid-gutters, 'lg')
+
+  &.v-btn--top
+    top: map-get($grid-gutters, 'lg')
+
+  &.v-btn--bottom
+    bottom: map-get($grid-gutters, 'lg')
 
 .v-btn--block
   display: flex
@@ -208,19 +221,6 @@
 
         &.v-btn--top
           top: -#{$size / 2}px
-
-      &.v-btn--fixed
-        &.v-btn--top
-          top: map-get($grid-gutters, 'lg')
-        &.v-btn--bottom
-          bottom: map-get($grid-gutters, 'lg')
-
-      &.v-btn--absolute,
-      &.v-btn--fixed
-        &.v-btn--left
-          left: map-get($grid-gutters, 'lg')
-        &.v-btn--right
-          right: map-get($grid-gutters, 'lg')
 
 .v-btn--fixed
   position: fixed

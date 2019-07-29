@@ -58,8 +58,6 @@ declare module 'vuetify/lib' {
   const VDataIterator: Component
   const VDataTable: Component
   const VDataTableHeader: Component
-  const VDataTableHeaderDesktop: Component
-  const VDataTableHeaderMobile: Component
   const VDatePicker: Component
   const VDatePickerDateTable: Component
   const VDatePickerHeader: Component
@@ -221,8 +219,6 @@ declare module 'vuetify/lib' {
     VDataIterator,
     VDataTable,
     VDataTableHeader,
-    VDataTableHeaderDesktop,
-    VDataTableHeaderMobile,
     VDatePicker,
     VDatePickerDateTable,
     VDatePickerHeader,

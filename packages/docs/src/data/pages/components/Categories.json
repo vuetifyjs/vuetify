@@ -49,7 +49,7 @@
             ],
             "tables": [
               "paginations",
-              "dataIterator",
+              "dataIterators",
               "dataTables"
             ]
           }
