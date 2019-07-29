@@ -279,7 +279,7 @@ const webTypes = {
 }
 
 const webTypesTags = { ...components, ...directives }
-Object.keys(webTypesTags).forEach(function(key) {
+Object.keys(webTypesTags).forEach(function (key) {
   const name = key
   const attributes = webTypesTags[key].props || []
   const events = webTypesTags[key].events || []
