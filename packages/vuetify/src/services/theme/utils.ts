@@ -44,11 +44,11 @@ export function parse (
  */
 const genBaseColor = (name: string, value: string): string => {
   return `
-.${name} {
+.v-application .${name} {
   background-color: ${value} !important;
   border-color: ${value} !important;
 }
-.${name}--text {
+.v-application .${name}--text {
   color: ${value} !important;
   caret-color: ${value} !important;
 }`
@@ -60,11 +60,11 @@ const genBaseColor = (name: string, value: string): string => {
 const genVariantColor = (name: string, variant: string, value: string): string => {
   const [type, n] = variant.split(/(\d)/, 2)
   return `
-.${name}.${type}-${n} {
+.v-application .${name}.${type}-${n} {
   background-color: ${value} !important;
   border-color: ${value} !important;
 }
-.${name}--text.text--${type}-${n} {
+.v-application .${name}--text.text--${type}-${n} {
   color: ${value} !important;
   caret-color: ${value} !important;
 }`
@@ -84,7 +84,7 @@ export function genStyles (theme: VuetifyParsedTheme, cssVar = false): string {
   let css = ''
 
   const aColor = cssVar ? genColorVariable('anchor') : anchor
-  css += `a { color: ${aColor}; }`
+  css += `.v-application a { color: ${aColor}; }`
   cssVar && (variablesCss += `  ${genColorVariableName('anchor')}: ${anchor};\n`)
 
   for (let i = 0; i < colors.length; ++i) {

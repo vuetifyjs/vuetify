@@ -22,8 +22,8 @@ export default VSheet.extend({
   props: {
     absolute: Boolean,
     bottom: Boolean,
-    dense: Boolean,
     collapse: Boolean,
+    dense: Boolean,
     extended: Boolean,
     extensionHeight: {
       default: 48,
@@ -37,13 +37,13 @@ export default VSheet.extend({
       type: [String, Object],
       default: '',
     } as PropValidator<string | srcObject>,
-    tile: {
-      type: Boolean,
-      default: true,
-    },
     tag: {
       type: String,
       default: 'header',
+    },
+    tile: {
+      type: Boolean,
+      default: true,
     },
   },
 

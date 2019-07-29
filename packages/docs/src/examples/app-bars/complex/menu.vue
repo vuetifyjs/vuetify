@@ -1,5 +1,5 @@
 <template>
-  <v-card class="hide-overflow">
+  <v-card class="overflow-hidden">
     <v-app-bar
       absolute
       color="#6A76AB"
@@ -31,9 +31,16 @@
         <v-icon>favorite</v-icon>
       </v-btn>
 
-      <v-menu bottom left>
+      <v-menu
+        bottom
+        left
+      >
         <template v-slot:activator="{ on }">
-          <v-btn icon color="yellow" v-on="on">
+          <v-btn
+            icon
+            color="yellow"
+            v-on="on"
+          >
             <v-icon>more_vert</v-icon>
           </v-btn>
         </template>
@@ -49,7 +56,10 @@
       </v-menu>
 
       <template v-slot:extension>
-        <v-tabs align-with-title>
+        <v-tabs
+          align-with-title
+          background-color="transparent"
+        >
           <v-tab>Tab 1</v-tab>
           <v-tab>Tab 2</v-tab>
           <v-tab>Tab 3</v-tab>
@@ -58,7 +68,7 @@
     </v-app-bar>
     <v-sheet
       id="scrolling-techniques-4"
-      class="scroll-y"
+      class="overflow-y-auto"
       max-height="600"
     >
       <v-container style="height: 1000px;"></v-container>

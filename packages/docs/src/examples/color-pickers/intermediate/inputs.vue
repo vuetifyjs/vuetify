@@ -1,5 +1,5 @@
 <template>
-  <v-layout row wrap justify-space-around>
+  <v-layout wrap justify-space-around>
     <v-color-picker class="ma-2" hide-inputs></v-color-picker>
     <v-color-picker class="ma-2" hide-mode-switch></v-color-picker>
     <v-layout class="ma-2" column style="flex: 0 0 auto">

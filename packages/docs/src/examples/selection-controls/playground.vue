@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-layout row wrap justify-space-around>
+    <v-layout wrap justify-space-around>
       <v-checkbox v-model="disabled" class="mx-2" label="Disabled"></v-checkbox>
       <v-checkbox v-model="readonly" class="mx-2" label="Read-only"></v-checkbox>
       <v-checkbox v-model="error" class="mx-2" label="Error"></v-checkbox>

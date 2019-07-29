@@ -109,11 +109,12 @@ export default baseMixins.extend<options>().extend({
   },
 
   methods: {
-    click () {
+    click (e: Event) {
       if (this.disabled) return
 
       this.isBooted = true
 
+      this.$emit('click', e)
       this.$nextTick(() => (this.isActive = !this.isActive))
     },
     genIcon (icon: string | false): VNode {

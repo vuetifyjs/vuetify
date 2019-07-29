@@ -5,5 +5,6 @@
     "autoAlias": false,
     "silent": true
   },
-  "version": 1
+  "version": 1,
+  "type": "docker"
 }

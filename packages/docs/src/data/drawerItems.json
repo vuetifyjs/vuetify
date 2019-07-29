@@ -89,6 +89,7 @@
         "children": [
           { "text": "autocompletes", "to": "autocompletes" },
           { "text": "combobox", "to": "combobox" },
+          { "new": true, "text": "fileInputs", "to": "file-inputs" },
           { "text": "forms", "to": "forms" },
           { "text": "inputs", "to": "inputs" },
           { "text": "overflowButtons", "to": "overflow-btns" },
@@ -132,9 +133,9 @@
         "group": "components",
         "text": "tables",
         "children": [
-          { "text": "dataIterators", "to": "data-iterators" },
+          { "updated": true, "text": "dataIterators", "to": "data-iterators" },
           { "new": true, "text": "simpleTables", "to": "simple-tables" },
-          { "text": "dataTables", "to": "data-tables" }
+          { "updated": true, "text": "dataTables", "to": "data-tables" }
         ]
       },
       { "text": "tabs", "to": "tabs" },

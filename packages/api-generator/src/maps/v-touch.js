@@ -4,7 +4,7 @@ module.exports = {
       {
         name: 'value',
         default: '{}',
-        type: 'Object',
+        type: 'object',
       },
     ],
   },

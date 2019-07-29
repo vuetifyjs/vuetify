@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`activatable.ts should render activator slot with hover 1`] = `
-
 <div>
   <button role="button"
           aria-haspopup="true"
@@ -9,11 +8,9 @@ exports[`activatable.ts should render activator slot with hover 1`] = `
   >
   </button>
 </div>
-
 `;
 
 exports[`activatable.ts should render activator slot with listeners 1`] = `
-
 <div>
   <button role="button"
           aria-haspopup="true"
@@ -21,5 +18,4 @@ exports[`activatable.ts should render activator slot with listeners 1`] = `
   >
   </button>
 </div>
-
 `;

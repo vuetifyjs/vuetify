@@ -1,4 +1,5 @@
 // Styles
+import './VCheckbox.sass'
 import '../../styles/components/_selection-controls.sass'
 
 // Components
@@ -40,6 +41,7 @@ export default Selectable.extend({
         ...VInput.options.computed.classes.call(this),
         'v-input--selection-controls': true,
         'v-input--checkbox': true,
+        'v-input--indeterminate': this.inputIndeterminate,
       }
     },
     computedIcon (): string {
@@ -51,11 +53,28 @@ export default Selectable.extend({
         return this.offIcon
       }
     },
+    // Do not return undefined if disabled,
+    // according to spec, should still show
+    // a color when disabled and active
+    validationState (): string | undefined {
+      if (this.disabled && !this.inputIndeterminate) return undefined
+      if (this.hasError && this.shouldValidate) return 'error'
+      if (this.hasSuccess) return 'success'
+      if (this.hasColor) return this.computedColor
+      return undefined
+    },
   },
 
   watch: {
     indeterminate (val) {
       this.inputIndeterminate = val
+    },
+    inputIndeterminate (val) {
+      this.$emit('update:indeterminate', val)
+    },
+    isActive () {
+      if (!this.indeterminate) return
+      this.inputIndeterminate = false
     },
   },
 
@@ -70,8 +89,8 @@ export default Selectable.extend({
             ? 'mixed'
             : this.isActive.toString(),
         }),
-        this.genRipple(this.setTextColor(this.computedColor)),
-        this.$createElement(VIcon, this.setTextColor(this.computedColor, {
+        this.genRipple(this.setTextColor(this.validationState)),
+        this.$createElement(VIcon, this.setTextColor(this.validationState, {
           props: {
             dark: this.dark,
             light: this.light,

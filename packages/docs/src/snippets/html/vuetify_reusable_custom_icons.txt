@@ -1,11 +1,15 @@
+<!-- Vue Component -->
+
 <template>
-  <v-icon>$product</v-icon>
+  <div>
+    <v-icon>$product</v-icon>
 
-  <v-icon v-text="'$support'"></v-icon>
+    <v-icon v-text="'$support'"></v-icon>
 
-  <v-icon v-html="'$steam'"></v-icon>
+    <v-icon v-html="'$steam'"></v-icon>
 
-  <v-icon v-text="platform"></v-icon>
+    <v-icon v-text="platform"></v-icon>
+  </div>
 </template>
 
 <script>
@@ -13,8 +17,8 @@
     data: () => ({
       user: {
         name: 'John Leider',
-        platform: 'pc'
-      }
+        platform: 'pc',
+      },
     }),
 
     computed: {

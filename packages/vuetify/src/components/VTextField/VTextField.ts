@@ -54,10 +54,6 @@ export default baseMixins.extend<options>().extend({
       type: String,
       default: '$clear',
     },
-    color: {
-      type: String,
-      default: 'primary',
-    },
     counter: [Boolean, Number, String],
     filled: Boolean,
     flat: Boolean,
@@ -69,8 +65,8 @@ export default baseMixins.extend<options>().extend({
     prependInnerIcon: String,
     reverse: Boolean,
     rounded: Boolean,
-    singleLine: Boolean,
     shaped: Boolean,
+    singleLine: Boolean,
     solo: Boolean,
     soloInverted: Boolean,
     suffix: String,
@@ -398,7 +394,7 @@ export default baseMixins.extend<options>().extend({
     },
     genAffix (type: 'prefix' | 'suffix') {
       return this.$createElement('div', {
-        'class': `v-text-field__${type}`,
+        class: `v-text-field__${type}`,
         ref: type,
       }, this[type])
     },

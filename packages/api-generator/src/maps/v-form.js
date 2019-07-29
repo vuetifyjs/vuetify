@@ -1,6 +1,5 @@
 module.exports = {
   'v-form': {
-    slots: ['default'],
     functions: [
       {
         name: 'reset',
@@ -19,6 +18,10 @@ module.exports = {
       {
         name: 'input',
         value: 'boolean',
+      },
+      {
+        name: 'submit',
+        value: 'event',
       },
     ],
   },

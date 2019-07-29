@@ -1,5 +1,9 @@
 {
   "props": {
+    "v-app": {
+      "dark": false,
+      "light": false
+    },
     "v-autocomplete": {
       "activator": false,
       "closeOnClick": false,
@@ -13,6 +17,11 @@
       "offsetX": false,
       "offsetY": false,
       "transition": false
+    },
+    "v-bottom-sheet": {
+      "close-delay": false,
+      "open-delay": false,
+      "return-value": false
     },
     "v-combobox": {
       "activator": false,
@@ -30,7 +39,8 @@
     },
     "v-dialog": {
       "close-delay": false,
-      "open-delay": false
+      "open-delay": false,
+      "return-value": false
     },
     "v-overflow-btn": {
       "activator": false,
@@ -45,6 +55,24 @@
       "offsetX": false,
       "offsetY": false,
       "transition": false
+    },
+    "v-checkbox": {
+      "height": false
+    },
+    "v-radio": {
+      "height": false
+    },
+    "v-radio-group": {
+      "color": false,
+      "height": false
+    },
+    "v-switch": {
+      "height": false
+    },
+    "v-window": {
+      "mandatory": false,
+      "max": false,
+      "multiple": false
     }
   }
 }

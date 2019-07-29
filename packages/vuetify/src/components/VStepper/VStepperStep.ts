@@ -15,7 +15,7 @@ import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
-type VuetifyStepperRuleValidator = () => string | false
+type VuetifyStepperRuleValidator = () => string | boolean
 
 const baseMixins = mixins(
   Colorable,
@@ -43,6 +43,7 @@ export default baseMixins.extend<options>().extend({
       type: String,
       default: '$complete',
     },
+    editable: Boolean,
     editIcon: {
       type: String,
       default: '$edit',
@@ -51,7 +52,6 @@ export default baseMixins.extend<options>().extend({
       type: String,
       default: '$error',
     },
-    editable: Boolean,
     rules: {
       type: Array,
       default: () => [],

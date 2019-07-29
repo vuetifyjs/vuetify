@@ -1,7 +1,7 @@
 <template>
   <div
     id="chip-usage-example"
-    class="text-xs-center"
+    class="text-center"
   >
     <v-chip>Default</v-chip>
     <v-chip close>Close</v-chip>

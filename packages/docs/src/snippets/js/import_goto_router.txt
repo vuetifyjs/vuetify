@@ -1,3 +1,5 @@
+// src/router.js
+
 import Router from 'vue-router'
 import goTo from 'vuetify/es5/services/goto'
 
@@ -15,5 +17,5 @@ export default new Router({
   },
   routes: [
     //
-  ]
+  ],
 })

@@ -63,6 +63,7 @@ describe('VSelect.ts', () => {
   it('should disable list items', () => {
     const wrapper = mountFunction({
       propsData: {
+        eager: true,
         items: [{
           text: 'item',
           disabled: true,
@@ -287,6 +288,7 @@ describe('VSelect.ts', () => {
   it('should escape items in menu', async () => {
     const wrapper = mountFunction({
       propsData: {
+        eager: true,
         items: ['<strong>foo</strong>'],
       },
     })
@@ -415,6 +417,7 @@ describe('VSelect.ts', () => {
   it('should use slotted no-data', () => {
     const wrapper = mountFunction({
       propsData: {
+        eager: true,
         items: ['foo'],
       },
       slots: {

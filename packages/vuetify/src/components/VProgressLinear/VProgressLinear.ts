@@ -214,7 +214,7 @@ export default baseMixins.extend({
     const data = {
       staticClass: 'v-progress-linear',
       attrs: {
-        'role': 'progressbar',
+        role: 'progressbar',
         'aria-valuemin': 0,
         'aria-valuemax': this.normalizedBuffer,
         'aria-valuenow': this.indeterminate ? undefined : this.normalizedValue,

@@ -10,7 +10,7 @@ export function genPoints (
   const minValue = Math.min(...values)
 
   const gridX = (maxX - minX) / (totalValues - 1)
-  const gridY = (maxY - minY) / (maxValue - minValue)
+  const gridY = (maxY - minY) / ((maxValue - minValue) || 1)
 
   return values.map((value, index) => {
     return {
@@ -31,8 +31,11 @@ export function genBars (
 ): Bar[] {
   const { minX, maxX, minY, maxY } = boundary
   const totalValues = values.length
-  const maxValue = Math.max(...values)
-  const minValue = Math.min(...values)
+  let maxValue = Math.max(...values)
+  let minValue = Math.min(...values)
+
+  if (minValue > 0) minValue = 0
+  if (maxValue < 0) maxValue = 0
 
   const gridX = maxX / totalValues
   const gridY = (maxY - minY) / (maxValue - minValue)

@@ -2,7 +2,7 @@
   <v-card flat>
     <v-card-text>
       <v-container fluid>
-        <v-layout row wrap>
+        <v-layout wrap>
           <v-flex xs12 sm6 md6>
             <v-radio-group v-model="ex7" column>
               <v-radio

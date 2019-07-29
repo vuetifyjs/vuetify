@@ -17,9 +17,6 @@ import { factory as ToggleableFactory } from '../../mixins/toggleable'
 import Routable from '../../mixins/routable'
 import Sizeable from '../../mixins/sizeable'
 
-// Directives
-import ripple from '../../directives/ripple'
-
 // Utilities
 import { breaking } from '../../util/console'
 
@@ -36,8 +33,6 @@ export default mixins(
   ToggleableFactory('inputValue')
 ).extend({
   name: 'v-chip',
-
-  directives: { ripple },
 
   props: {
     active: {
@@ -180,10 +175,10 @@ export default mixins(
       draggable: this.draggable ? 'true' : undefined,
       tabindex: this.chipGroup && !this.disabled ? 0 : data.attrs!.tabindex,
     }
-    data.directives = [{
+    data.directives!.push({
       name: 'show',
       value: this.active,
-    }]
+    })
     data = this.setBackgroundColor(this.color, data)
 
     const color = this.textColor || (this.outlined && this.color)

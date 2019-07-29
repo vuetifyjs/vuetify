@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VColorPicker.ts should change canvas height 1`] = `
-
 <div class="v-color-picker v-sheet theme--light theme--light"
      style="max-width: 300px;"
 >
@@ -153,11 +152,9 @@ exports[`VColorPicker.ts should change canvas height 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VColorPicker.ts should hide canvas 1`] = `
-
 <div class="v-color-picker v-sheet theme--light theme--light"
      style="max-width: 300px;"
 >
@@ -297,11 +294,9 @@ exports[`VColorPicker.ts should hide canvas 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VColorPicker.ts should hide inputs 1`] = `
-
 <div class="v-color-picker v-sheet theme--light theme--light"
      style="max-width: 300px;"
 >
@@ -400,11 +395,9 @@ exports[`VColorPicker.ts should hide inputs 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VColorPicker.ts should render color picker 1`] = `
-
 <div class="v-color-picker v-sheet theme--light theme--light"
      style="max-width: 300px;"
 >
@@ -556,11 +549,9 @@ exports[`VColorPicker.ts should render color picker 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VColorPicker.ts should show swatches 1`] = `
-
 <div class="v-color-picker v-sheet theme--light theme--light"
      style="max-width: 300px;"
 >
@@ -1530,5 +1521,4 @@ exports[`VColorPicker.ts should show swatches 1`] = `
     </div>
   </div>
 </div>
-
 `;

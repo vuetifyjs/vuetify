@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VSlider.ts should change track styles in rtl 1`] = `
-
 <div class="v-input theme--light v-input__slider">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -45,11 +44,9 @@ exports[`VSlider.ts should change track styles in rtl 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSlider.ts should change track styles in rtl 2`] = `
-
 <div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-input__slider">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -93,11 +90,9 @@ exports[`VSlider.ts should change track styles in rtl 2`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSlider.ts should change track styles in rtl 3`] = `
-
 <div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-disabled theme--light v-input__slider">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -142,11 +137,9 @@ exports[`VSlider.ts should change track styles in rtl 3`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSlider.ts should change track styles in rtl 4`] = `
-
 <div class="v-input theme--light v-input__slider">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -190,11 +183,9 @@ exports[`VSlider.ts should change track styles in rtl 4`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSlider.ts should change track styles in rtl 5`] = `
-
 <div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-input__slider">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -238,11 +229,9 @@ exports[`VSlider.ts should change track styles in rtl 5`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSlider.ts should change track styles in rtl 6`] = `
-
 <div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-disabled theme--light v-input__slider">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -287,11 +276,9 @@ exports[`VSlider.ts should change track styles in rtl 6`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSlider.ts should correctly handle initial value of zero (#7320) 1`] = `
-
 <div class="v-input theme--light v-input__slider">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -335,11 +322,9 @@ exports[`VSlider.ts should correctly handle initial value of zero (#7320) 1`] = 
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSlider.ts should correctly handle setting value to zero (#7320) 1`] = `
-
 <div class="v-input theme--light v-input__slider">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -383,11 +368,9 @@ exports[`VSlider.ts should correctly handle setting value to zero (#7320) 1`] = 
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSlider.ts should display label and have different aria-label 1`] = `
-
 <div class="v-input theme--light v-input__slider">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -439,11 +422,9 @@ exports[`VSlider.ts should display label and have different aria-label 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSlider.ts should match a snapshot 1`] = `
-
 <div class="v-input theme--light v-input__slider">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -487,11 +468,9 @@ exports[`VSlider.ts should match a snapshot 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSlider.ts should render component with thumbLabel and match a snapshot 1`] = `
-
 <div class="v-input theme--light v-input__slider">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -548,11 +527,9 @@ exports[`VSlider.ts should render component with thumbLabel and match a snapshot
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSlider.ts should render component with thumbLabel and match a snapshot 2`] = `
-
 <div class="v-input theme--light v-input__slider">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -609,11 +586,9 @@ exports[`VSlider.ts should render component with thumbLabel and match a snapshot
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSlider.ts should render component with ticks and match a snapshot 1`] = `
-
 <div class="v-input theme--light v-input__slider">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -679,11 +654,9 @@ exports[`VSlider.ts should render component with ticks and match a snapshot 1`] 
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSlider.ts should render component with ticks and match a snapshot 2`] = `
-
 <div class="v-input theme--light v-input__slider">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -749,11 +722,9 @@ exports[`VSlider.ts should render component with ticks and match a snapshot 2`] 
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSlider.ts should render vertical slider 1`] = `
-
 <div class="v-input theme--light v-input__slider v-input__slider--vertical">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -797,11 +768,9 @@ exports[`VSlider.ts should render vertical slider 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSlider.ts should reverse label location when inverse 1`] = `
-
 <div class="v-input theme--light v-input__slider">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -852,11 +821,9 @@ exports[`VSlider.ts should reverse label location when inverse 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSlider.ts should reverse label location when inverse 2`] = `
-
 <div class="v-input theme--light v-input__slider v-input__slider--inverse-label">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -907,5 +874,4 @@ exports[`VSlider.ts should reverse label location when inverse 2`] = `
     </div>
   </div>
 </div>
-
 `;

@@ -27,30 +27,36 @@
             <v-fade-transition>
               <v-overlay
                 absolute
-                opacity="0.3"
-                class="text-xs-center"
+                opacity="0.7"
+                class="text-center"
               >
                 <h2
-                  class="headline mb-5"
+                  class="title mb-6"
                   v-text="layout.name"
                 />
                 <v-btn
                   :aria-label="`Link to layout for ${layout.name}`"
-                  :href="`https://github.com/vuetifyjs/vuetify/tree/master/packages/docs/src${layout.href}.vue`"
+                  :href="layout.href"
                   :title="`Link to layout for ${layout.name}`"
                   class="mx-2"
-                  color="success"
+                  color="indigo"
+                  depressed
                   fab
+                  small
+                  target="_blank"
                 >
                   <v-icon>mdi-open-in-new</v-icon>
                 </v-btn>
                 <v-btn
                   :aria-label="`Link to layout ${layout.name}`"
-                  :href="layout.href"
+                  :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/docs/src${layout.href}.vue`"
                   :title="`Link to code for ${layout.name}`"
                   class="mx-2"
-                  color="success"
+                  color="indigo"
+                  depressed
                   fab
+                  small
+                  target="_blank"
                 >
                   <v-icon>mdi-code-tags</v-icon>
                 </v-btn>
@@ -64,8 +70,11 @@
 </template>
 
 <script>
+  import { getBranch } from '@/util/helpers'
+
   export default {
     data: () => ({
+      branch: null,
       layouts: [
         { name: 'Baseline', href: '/examples/layouts/baseline' },
         { name: 'Baseline Flipped', href: '/examples/layouts/baseline-flipped' },
@@ -78,6 +87,9 @@
         { name: 'Sandbox', href: '/examples/layouts/sandbox' },
       ],
     }),
+    mounted () {
+      this.branch = getBranch()
+    },
     methods: {
       genSrc (name) {
         return `https://cdn.vuetifyjs.com/images/layouts/${name.toLowerCase().replace(' ', '-')}.png`

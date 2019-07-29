@@ -1,5 +1,5 @@
 <template>
-  <v-layout row wrap>
+  <v-layout wrap>
     <v-flex xs11 sm5>
       <v-menu
         ref="menu"

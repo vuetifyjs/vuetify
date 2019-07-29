@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="mx-auto hide-overflow"
+    class="mx-auto overflow-hidden"
     style="max-width: 600px;"
   >
     <v-layout>
@@ -91,7 +91,7 @@
           <v-text-field
             ref="link"
             :label="copied ? 'Link copied' : 'Click to copy link'"
-            class="pa-3"
+            class="pa-4"
             readonly
             value="https://g.co/kgs/nkrK43"
             @click="copy"
@@ -116,7 +116,7 @@
         </template>
       </v-rating>
     </v-card-actions>
-    <div class="pa-3 pt-0 caption">
+    <div class="pa-4 pt-0 caption">
       <em>Portions of the materials used are trademarks and/or copyrighted works of Epic Games, Inc. All rights reserved by Epic. This material is not official and is not endorsed by Epic.</em>
     </div>
   </v-card>

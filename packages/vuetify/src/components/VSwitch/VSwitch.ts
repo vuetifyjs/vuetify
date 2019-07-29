@@ -53,8 +53,17 @@ export default Selectable.extend({
         role: 'switch',
       }
     },
+    // Do not return undefined if disabled,
+    // according to spec, should still show
+    // a color when disabled and active
+    validationState (): string | undefined {
+      if (this.hasError && this.shouldValidate) return 'error'
+      if (this.hasSuccess) return 'success'
+      if (this.hasColor) return this.computedColor
+      return undefined
+    },
     switchData (): VNodeData {
-      return this.setTextColor(this.loading ? undefined : this.computedColor, {
+      return this.setTextColor(this.loading ? undefined : this.validationState, {
         class: this.themeClasses,
       })
     },
@@ -75,7 +84,7 @@ export default Selectable.extend({
           ...this.$attrs,
           ...this.attrs,
         }),
-        this.genRipple(this.setTextColor(this.computedColor, {
+        this.genRipple(this.setTextColor(this.validationState, {
           directives: [{
             name: 'touch',
             value: {

@@ -66,12 +66,12 @@ export default baseMixins.extend({
       type: [Number, String],
       default: 'auto',
     },
+    offsetX: Boolean,
+    offsetY: Boolean,
     openOnClick: {
       type: Boolean,
       default: true,
     },
-    offsetX: Boolean,
-    offsetY: Boolean,
     openOnHover: Boolean,
     origin: {
       type: String,
@@ -301,11 +301,11 @@ export default baseMixins.extend({
           role: 'role' in this.$attrs ? this.$attrs.role : 'menu',
         },
         staticClass: 'v-menu__content',
-        'class': {
+        class: {
           ...this.rootThemeClasses,
           'v-menu__content--auto': this.auto,
           'v-menu__content--fixed': this.activatorFixed,
-          'menuable__content__active': this.isActive,
+          menuable__content__active: this.isActive,
           [this.contentClass.trim()]: true,
         },
         style: this.styles,

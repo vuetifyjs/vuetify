@@ -19,11 +19,11 @@
         >
           <v-flex
             xs12
-            text-xs-center
+            text-center
           >
             <core-toc />
-            <div class="my-3">
-              <supporters-patrons
+            <div class="my-4">
+              <supporters-sponsors
                 :tier="[1]"
                 compact
                 dense
@@ -31,7 +31,7 @@
               />
               <supporters-sponsor-btn
                 small
-                class="mt-3"
+                class="mt-4"
               />
             </div>
           </v-flex>

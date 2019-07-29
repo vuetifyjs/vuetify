@@ -211,7 +211,7 @@ export default BaseItemGroup.extend({
       this.isReverse = this.$vuetify.rtl
 
       /* istanbul ignore if */
-      if (!this.hasActiveItems) return
+      if (!this.hasActiveItems || !this.hasNext) return
 
       const nextIndex = this.getNextIndex(this.internalIndex)
       const item = this.items[nextIndex]
@@ -222,7 +222,7 @@ export default BaseItemGroup.extend({
       this.isReverse = !this.$vuetify.rtl
 
       /* istanbul ignore if */
-      if (!this.hasActiveItems) return
+      if (!this.hasActiveItems || !this.hasPrev) return
 
       const lastIndex = this.getPrevIndex(this.internalIndex)
       const item = this.items[lastIndex]

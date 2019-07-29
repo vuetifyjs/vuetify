@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-layout row justify-space-around>
+    <v-layout justify-space-around>
       <v-icon @click="model--">mdi-minus</v-icon>
       {{ model }}
       <v-icon @click="model++">mdi-plus</v-icon>

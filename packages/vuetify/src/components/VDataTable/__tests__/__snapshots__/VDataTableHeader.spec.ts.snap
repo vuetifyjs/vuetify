@@ -1,14 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VDataTableHeader.ts desktop should render 1`] = `
-
 <thead class="v-data-table-header">
   <tr>
     <th role="columnheader"
         scope="col"
         aria-label="Dessert (100g serving)"
         aria-sort="none"
-        class="text-xs-left"
+        class="text-left"
     >
       <span>
         Dessert (100g serving)
@@ -18,7 +17,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
         scope="col"
         aria-label="Calories: Not sorted. Activate to sort ascending."
         aria-sort="none"
-        class="text-xs-start sortable"
+        class="text-start sortable"
     >
       <span>
         Calories
@@ -34,7 +33,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
         scope="col"
         aria-label="Fat (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
-        class="text-xs-start sortable"
+        class="text-start sortable"
     >
       <span>
         Fat (g)
@@ -50,7 +49,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
         scope="col"
         aria-label="Carbs (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
-        class="text-xs-start sortable"
+        class="text-start sortable"
     >
       <span>
         Carbs (g)
@@ -66,7 +65,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
         scope="col"
         aria-label="Protein (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
-        class="text-xs-start sortable"
+        class="text-start sortable"
     >
       <span>
         Protein (g)
@@ -82,7 +81,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
         scope="col"
         aria-label="Iron (%): Not sorted. Activate to sort ascending."
         aria-sort="none"
-        class="text-xs-start sortable"
+        class="text-start sortable"
     >
       <span>
         Iron (%)
@@ -96,18 +95,16 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
     </th>
   </tr>
 </thead>
-
 `;
 
 exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
-
 <thead class="v-data-table-header">
   <tr>
     <th role="columnheader"
         scope="col"
         aria-label="Dessert (100g serving)"
         aria-sort="none"
-        class="text-xs-left"
+        class="text-left"
     >
       <span>
         Dessert (100g serving)
@@ -117,7 +114,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
         scope="col"
         aria-label="Calories: Not sorted. Activate to sort ascending."
         aria-sort="none"
-        class="text-xs-start sortable"
+        class="text-start sortable"
     >
       <span>
         Calories
@@ -133,7 +130,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
         scope="col"
         aria-label="Fat (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
-        class="text-xs-start sortable"
+        class="text-start sortable"
     >
       <span>
         Fat (g)
@@ -149,7 +146,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
         scope="col"
         aria-label="Carbs (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
-        class="text-xs-start sortable"
+        class="text-start sortable"
     >
       <span>
         Carbs (g)
@@ -165,7 +162,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
         scope="col"
         aria-label="Protein (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
-        class="text-xs-start sortable"
+        class="text-start sortable"
     >
       <span>
         Protein (g)
@@ -181,7 +178,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
         scope="col"
         aria-label="Iron (%): Sorted descending. Activate to remove sorting."
         aria-sort="descending"
-        class="text-xs-start sortable active desc"
+        class="text-start sortable active desc"
     >
       <span>
         Iron (%)
@@ -198,18 +195,16 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
     </th>
   </tr>
 </thead>
-
 `;
 
 exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
-
 <thead class="v-data-table-header">
   <tr>
     <th role="columnheader"
         scope="col"
         aria-label="Dessert (100g serving)"
         aria-sort="none"
-        class="text-xs-left"
+        class="text-left"
     >
       <span>
         Dessert (100g serving)
@@ -222,7 +217,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
         scope="col"
         aria-label="Calories: Not sorted. Activate to sort ascending."
         aria-sort="none"
-        class="text-xs-start sortable"
+        class="text-start sortable"
     >
       <span>
         Calories
@@ -241,7 +236,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
         scope="col"
         aria-label="Fat (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
-        class="text-xs-start sortable"
+        class="text-start sortable"
     >
       <span>
         Fat (g)
@@ -260,7 +255,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
         scope="col"
         aria-label="Carbs (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
-        class="text-xs-start sortable"
+        class="text-start sortable"
     >
       <span>
         Carbs (g)
@@ -279,7 +274,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
         scope="col"
         aria-label="Protein (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
-        class="text-xs-start sortable"
+        class="text-start sortable"
     >
       <span>
         Protein (g)
@@ -298,7 +293,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
         scope="col"
         aria-label="Iron (%): Not sorted. Activate to sort ascending."
         aria-sort="none"
-        class="text-xs-start sortable"
+        class="text-start sortable"
     >
       <span>
         Iron (%)
@@ -315,18 +310,16 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
     </th>
   </tr>
 </thead>
-
 `;
 
 exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
-
 <thead class="v-data-table-header">
   <tr>
     <th role="columnheader"
         scope="col"
         aria-label="Dessert (100g serving)"
         aria-sort="none"
-        class="text-xs-left"
+        class="text-left"
     >
       <span>
         Dessert (100g serving)
@@ -336,7 +329,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
         scope="col"
         aria-label="Calories: Not sorted. Activate to sort ascending."
         aria-sort="none"
-        class="text-xs-start sortable"
+        class="text-start sortable"
     >
       <span>
         Calories
@@ -352,7 +345,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
         scope="col"
         aria-label="Fat (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
-        class="text-xs-start sortable"
+        class="text-start sortable"
     >
       <span>
         Fat (g)
@@ -368,7 +361,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
         scope="col"
         aria-label="Carbs (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
-        class="text-xs-start sortable"
+        class="text-start sortable"
     >
       <span>
         Carbs (g)
@@ -384,7 +377,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
         scope="col"
         aria-label="Protein (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
-        class="text-xs-start sortable"
+        class="text-start sortable"
     >
       <span>
         Protein (g)
@@ -400,7 +393,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
         scope="col"
         aria-label="Iron (%): Sorted descending. Activate to remove sorting."
         aria-sort="descending"
-        class="text-xs-start sortable active desc"
+        class="text-start sortable active desc"
     >
       <span>
         Iron (%)
@@ -414,18 +407,16 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
     </th>
   </tr>
 </thead>
-
 `;
 
 exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
-
 <thead class="v-data-table-header">
   <tr>
     <th role="columnheader"
         scope="col"
         aria-label="Dessert (100g serving)"
         aria-sort="none"
-        class="text-xs-left"
+        class="text-left"
     >
       <span>
         Dessert (100g serving)
@@ -435,7 +426,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
         scope="col"
         aria-label="Calories: Not sorted. Activate to sort ascending."
         aria-sort="none"
-        class="text-xs-start sortable"
+        class="text-start sortable"
     >
       <span>
         Calories
@@ -451,7 +442,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
         scope="col"
         aria-label="Fat (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
-        class="text-xs-start sortable"
+        class="text-start sortable"
     >
       <span>
         Fat (g)
@@ -467,7 +458,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
         scope="col"
         aria-label="Carbs (g): Sorted descending. Activate to remove sorting."
         aria-sort="descending"
-        class="text-xs-start sortable active desc"
+        class="text-start sortable active desc"
     >
       <span>
         Carbs (g)
@@ -483,7 +474,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
         scope="col"
         aria-label="Protein (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
-        class="text-xs-start sortable"
+        class="text-start sortable"
     >
       <span>
         Protein (g)
@@ -499,7 +490,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
         scope="col"
         aria-label="Iron (%): Sorted ascending. Activate to sort descending."
         aria-sort="ascending"
-        class="text-xs-start sortable active asc"
+        class="text-start sortable active asc"
     >
       <span>
         Iron (%)
@@ -513,11 +504,9 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
     </th>
   </tr>
 </thead>
-
 `;
 
 exports[`VDataTableHeader.ts mobile should render 1`] = `
-
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
     <th colspan="6">
@@ -555,6 +544,10 @@ exports[`VDataTableHeader.ts mobile should render 1`] = `
                 </div>
               </div>
               <div class="v-menu">
+                <div class="v-menu__content theme--light "
+                     style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                >
+                </div>
               </div>
             </div>
           </div>
@@ -563,11 +556,9 @@ exports[`VDataTableHeader.ts mobile should render 1`] = `
     </th>
   </tr>
 </thead>
-
 `;
 
 exports[`VDataTableHeader.ts mobile should render with data-table-select header 1`] = `
-
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
     <th colspan="7">
@@ -588,18 +579,18 @@ exports[`VDataTableHeader.ts mobile should render with data-table-select header 
             <div role="button"
                  aria-haspopup="listbox"
                  aria-expanded="false"
-                 aria-owns="list-125"
+                 aria-owns="list-79"
                  class="v-input__slot"
             >
               <div class="v-select__slot">
-                <label for="input-125"
+                <label for="input-79"
                        class="v-label theme--light"
                        style="left: 0px; position: absolute;"
                 >
                   Sort by
                 </label>
                 <div class="v-select__selections">
-                  <input id="input-125"
+                  <input id="input-79"
                          readonly="readonly"
                          type="text"
                          aria-readonly="true"
@@ -616,6 +607,10 @@ exports[`VDataTableHeader.ts mobile should render with data-table-select header 
                 </div>
               </div>
               <div class="v-menu">
+                <div class="v-menu__content theme--light "
+                     style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                >
+                </div>
               </div>
             </div>
           </div>
@@ -624,11 +619,9 @@ exports[`VDataTableHeader.ts mobile should render with data-table-select header 
     </th>
   </tr>
 </thead>
-
 `;
 
 exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
-
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
     <th colspan="6">
@@ -638,11 +631,11 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
             <div role="button"
                  aria-haspopup="listbox"
                  aria-expanded="false"
-                 aria-owns="list-67"
+                 aria-owns="list-51"
                  class="v-input__slot"
             >
               <div class="v-select__slot">
-                <label for="input-67"
+                <label for="input-51"
                        class="v-label v-label--active theme--light"
                        style="left: 0px; position: absolute;"
                 >
@@ -662,7 +655,7 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
                       </div>
                     </span>
                   </span>
-                  <input id="input-67"
+                  <input id="input-51"
                          readonly="readonly"
                          type="text"
                          aria-readonly="true"
@@ -679,6 +672,10 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
                 </div>
               </div>
               <div class="v-menu">
+                <div class="v-menu__content theme--light "
+                     style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                >
+                </div>
               </div>
             </div>
           </div>
@@ -687,11 +684,9 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
     </th>
   </tr>
 </thead>
-
 `;
 
 exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
-
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
     <th colspan="6">
@@ -701,18 +696,18 @@ exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
             <div role="button"
                  aria-haspopup="listbox"
                  aria-expanded="false"
-                 aria-owns="list-52"
+                 aria-owns="list-44"
                  class="v-input__slot"
             >
               <div class="v-select__slot">
-                <label for="input-52"
+                <label for="input-44"
                        class="v-label theme--light"
                        style="left: 0px; position: absolute;"
                 >
                   Sort by
                 </label>
                 <div class="v-select__selections">
-                  <input id="input-52"
+                  <input id="input-44"
                          readonly="readonly"
                          type="text"
                          aria-readonly="true"
@@ -729,6 +724,10 @@ exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
                 </div>
               </div>
               <div class="v-menu">
+                <div class="v-menu__content theme--light "
+                     style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                >
+                </div>
               </div>
             </div>
           </div>
@@ -737,11 +736,9 @@ exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
     </th>
   </tr>
 </thead>
-
 `;
 
 exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
-
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
     <th colspan="6">
@@ -751,11 +748,11 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
             <div role="button"
                  aria-haspopup="listbox"
                  aria-expanded="false"
-                 aria-owns="list-90"
+                 aria-owns="list-60"
                  class="v-input__slot"
             >
               <div class="v-select__slot">
-                <label for="input-90"
+                <label for="input-60"
                        class="v-label v-label--active theme--light"
                        style="left: 0px; position: absolute;"
                 >
@@ -775,7 +772,7 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
                       </div>
                     </span>
                   </span>
-                  <input id="input-90"
+                  <input id="input-60"
                          readonly="readonly"
                          type="text"
                          aria-readonly="true"
@@ -792,6 +789,10 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
                 </div>
               </div>
               <div class="v-menu">
+                <div class="v-menu__content theme--light "
+                     style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                >
+                </div>
               </div>
             </div>
           </div>
@@ -800,11 +801,9 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
     </th>
   </tr>
 </thead>
-
 `;
 
 exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
-
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
     <th colspan="6">
@@ -814,11 +813,11 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
             <div role="button"
                  aria-haspopup="listbox"
                  aria-expanded="false"
-                 aria-owns="list-107"
+                 aria-owns="list-69"
                  class="v-input__slot"
             >
               <div class="v-select__slot">
-                <label for="input-107"
+                <label for="input-69"
                        class="v-label v-label--active theme--light"
                        style="left: 0px; position: absolute;"
                 >
@@ -838,7 +837,7 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
                       </div>
                     </span>
                   </span>
-                  <input id="input-107"
+                  <input id="input-69"
                          readonly="readonly"
                          type="text"
                          aria-readonly="true"
@@ -855,6 +854,10 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
                 </div>
               </div>
               <div class="v-menu">
+                <div class="v-menu__content theme--light "
+                     style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                >
+                </div>
               </div>
             </div>
           </div>
@@ -863,5 +866,4 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
     </th>
   </tr>
 </thead>
-
 `;

@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VListGroup.ts should render component and match snapshot 1`] = `
-
 <div class="v-list-group">
   <div tabindex="0"
        aria-expanded="false"
@@ -21,5 +20,4 @@ exports[`VListGroup.ts should render component and match snapshot 1`] = `
   >
   </div>
 </div>
-
 `;

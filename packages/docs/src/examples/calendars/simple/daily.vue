@@ -9,7 +9,7 @@
           <template v-slot:day-header="{ present }">
             <template
               v-if="present"
-              class="text-xs-center"
+              class="text-center"
             >
               Today
             </template>
@@ -17,7 +17,7 @@
 
           <template v-slot:interval="{ hour }">
             <div
-              class="text-xs-center"
+              class="text-center"
             >
               {{ hour }} o'clock
             </div>

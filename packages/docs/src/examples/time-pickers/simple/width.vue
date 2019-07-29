@@ -5,15 +5,15 @@
         v-model="time"
         type="month"
         width="290"
-        class="mt-3"
+        class="mt-4"
       ></v-time-picker>
     </v-flex>
     <v-time-picker
       v-model="time"
       full-width
-      landscape
+      :landscape="$vuetify.breakpoint.mdAndUp"
       type="month"
-      class="mt-3"
+      class="mt-4"
     ></v-time-picker>
   </v-layout>
 </template>

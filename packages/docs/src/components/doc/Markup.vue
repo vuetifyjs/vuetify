@@ -4,6 +4,7 @@
       v-if="$slots.default || code"
       :language="language"
       :code="code"
+      :inline="inline"
     ><slot /></prism>
 
     <div
@@ -11,7 +12,7 @@
       class="v-markup__edit"
     >
       <a
-        :href="`https://github.com/vuetifyjs/vuetify/tree/master/packages/docs/src/snippets/${file}`"
+        :href="href"
         target="_blank"
         rel="noopener"
         title="Edit code"
@@ -21,7 +22,7 @@
       </a>
     </div>
 
-    <div class="v-markup__copy">
+    <div v-if="!hideCopy" class="v-markup__copy">
       <v-icon
         title="Copy code"
         aria-label="Copy code"
@@ -38,7 +39,7 @@
     </div>
 
     <a
-      v-if="filename"
+      v-if="filename && file"
       :href="href"
       target="_blank"
       rel="noopener"
@@ -50,6 +51,8 @@
 </template>
 
 <script>
+  import { getBranch } from '@/util/helpers'
+
   export default {
     name: 'Markup',
 
@@ -62,6 +65,7 @@
         type: String,
         default: undefined,
       },
+      inline: Boolean,
       value: {
         type: String,
         default: 'markup',
@@ -70,12 +74,14 @@
         type: Boolean,
         default: process.env.NODE_ENV !== 'production',
       },
+      hideCopy: Boolean,
     },
 
     data: vm => ({
       code: null,
       copied: false,
       language: vm.lang,
+      branch: null,
     }),
 
     computed: {
@@ -87,10 +93,7 @@
         return `${folder}/${file}.txt`
       },
       href () {
-        const branch = process.env.NODE_ENV === 'production' ? 'master' : 'dev'
-        const href = `https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/docs/src/snippets`
-
-        return `${href}/${this.file}`
+        return `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/snippets/${this.file}`
       },
       id () {
         if (this.value === 'markup') return
@@ -100,6 +103,7 @@
 
     mounted () {
       this.$nextTick(this.init)
+      this.branch = getBranch()
     },
 
     methods: {
@@ -186,7 +190,7 @@
       color: inherit
       text-decoration: none
 
-  &__filename
+  a.v-markup__filename
     text-decoration: none
     position: absolute
     bottom: 0

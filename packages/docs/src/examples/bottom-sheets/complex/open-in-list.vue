@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center">
+  <div class="text-center">
     <v-bottom-sheet v-model="sheet">
       <template v-slot:activator="{ on }">
         <v-btn

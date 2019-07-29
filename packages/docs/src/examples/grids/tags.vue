@@ -5,7 +5,7 @@
     grid-list-sm
     tag="section"
   >
-    <v-layout row wrap>
+    <v-layout wrap>
       <v-flex tag="h1" class="headline">Lorem Ipsum</v-flex>
       <v-flex d-flex xs12 order-xs5>
         <v-layout column>

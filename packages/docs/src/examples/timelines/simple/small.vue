@@ -1,5 +1,5 @@
 <template>
-  <v-timeline>
+  <v-timeline :dense="$vuetify.breakpoint.smAndDown">
     <v-timeline-item
       color="purple lighten-2"
       fill-dot
@@ -10,7 +10,7 @@
           <v-icon
             dark
             size="42"
-            class="mr-3"
+            class="mr-4"
           >
             mdi-magnify
           </v-icon>
@@ -18,10 +18,14 @@
         </v-card-title>
         <v-container>
           <v-layout>
-            <v-flex xs10>
+            <v-flex xs12 md10>
               Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit.
             </v-flex>
-            <v-flex xs2>
+            <v-flex
+              md2
+              hidden-sm-and-down
+              text-right
+            >
               <v-icon size="64">mdi-calendar-text</v-icon>
             </v-flex>
           </v-layout>
@@ -37,18 +41,18 @@
     >
       <v-card>
         <v-card-title class="amber lighten-1 justify-end">
-          <h2 class="display-1 mr-3 white--text font-weight-light">Title 2</h2>
+          <h2 class="display-1 mr-4 white--text font-weight-light">Title 2</h2>
           <v-icon
             dark
             size="42"
           >mdi-home-outline</v-icon>
         </v-card-title>
         <v-container>
-          <v-layout>
-            <v-flex xs8>
+          <v-layout wrap>
+            <v-flex xs12 md8>
               Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit.
             </v-flex>
-            <v-flex xs4>
+            <v-flex xs12 md4>
               Lorem ipsum dolor sit amet, no nam oblique veritus.
             </v-flex>
           </v-layout>
@@ -64,7 +68,7 @@
       <v-card>
         <v-card-title class="cyan lighten-1">
           <v-icon
-            class="mr-3"
+            class="mr-4"
             dark
             size="42"
           >
@@ -73,11 +77,12 @@
           <h2 class="display-1 white--text font-weight-light">Title 3</h2>
         </v-card-title>
         <v-container>
-          <v-layout>
+          <v-layout wrap>
             <v-flex
               v-for="n in 3"
               :key="n"
-              xs4
+              xs12
+              md4
             >
               Lorem ipsum dolor sit amet, no nam oblique veritus no nam oblique.
             </v-flex>
@@ -94,7 +99,7 @@
     >
       <v-card>
         <v-card-title class="red lighten-1 justify-end">
-          <h2 class="display-1 mr-3 white--text font-weight-light">Title 4</h2>
+          <h2 class="display-1 mr-4 white--text font-weight-light">Title 4</h2>
           <v-icon
             dark
             size="42"
@@ -103,11 +108,11 @@
           </v-icon>
         </v-card-title>
         <v-container>
-          <v-layout>
-            <v-flex xs2>
+          <v-layout wrap>
+            <v-flex md2 hidden-sm-and-down>
               <v-icon size="64">mdi-server-network</v-icon>
             </v-flex>
-            <v-flex xs10>
+            <v-flex xs12 md10>
               Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus.
             </v-flex>
           </v-layout>
@@ -123,7 +128,7 @@
       <v-card>
         <v-card-title class="green lighten-1">
           <v-icon
-            class="mr-3"
+            class="mr-4"
             dark
             size="42"
           >

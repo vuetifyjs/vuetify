@@ -1,8 +1,8 @@
 @mixin heading($material)
   color: map-deep-get($material, 'text', 'primary')
 
-.theme--light.heading
+.v-application .theme--light.heading
   +heading($material-light)
 
-.theme--dark.heading
+.v-application .theme--dark.heading
   +heading($material-dark)

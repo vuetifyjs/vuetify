@@ -1,5 +1,5 @@
 <template>
-  <v-layout row justify-center>
+  <v-layout justify-center>
     <v-btn
       color="primary"
       dark

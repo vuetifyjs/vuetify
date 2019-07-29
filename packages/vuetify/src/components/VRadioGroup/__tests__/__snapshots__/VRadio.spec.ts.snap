@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VRadio.ts should not render aria-label attribute with no label value on input group 1`] = `
-
 <div class="v-radio theme--light">
   <div class="v-input--selection-controls__input">
     <input aria-checked="false"
@@ -19,11 +18,9 @@ exports[`VRadio.ts should not render aria-label attribute with no label value on
     </i>
   </div>
 </div>
-
 `;
 
 exports[`VRadio.ts should render proper input name 1`] = `
-
 <div class="v-radio theme--light">
   <div class="v-input--selection-controls__input">
     <input aria-checked="false"
@@ -42,11 +39,9 @@ exports[`VRadio.ts should render proper input name 1`] = `
     </i>
   </div>
 </div>
-
 `;
 
 exports[`VRadio.ts should render role and aria-checked attributes on input group 1`] = `
-
 <div class="v-radio theme--light">
   <div class="v-input--selection-controls__input">
     <input aria-checked="true"
@@ -64,11 +59,9 @@ exports[`VRadio.ts should render role and aria-checked attributes on input group
     </i>
   </div>
 </div>
-
 `;
 
 exports[`VRadio.ts should use custom icons 1`] = `
-
 <div class="v-radio theme--light">
   <div class="v-input--selection-controls__input">
     <input aria-checked="false"
@@ -86,11 +79,9 @@ exports[`VRadio.ts should use custom icons 1`] = `
     </i>
   </div>
 </div>
-
 `;
 
 exports[`VRadio.ts should use custom icons 2`] = `
-
 <div class="v-radio theme--light">
   <div class="v-input--selection-controls__input">
     <input aria-checked="true"
@@ -108,5 +99,4 @@ exports[`VRadio.ts should use custom icons 2`] = `
     </i>
   </div>
 </div>
-
 `;

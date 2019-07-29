@@ -50,6 +50,7 @@ describe('VCombobox.ts', () => {
     const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
+        eager: true,
         items: [1, 12],
       },
     })

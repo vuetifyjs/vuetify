@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center">
+  <div class="text-center">
     <v-rating v-model="rating"></v-rating>
   </div>
 </template>

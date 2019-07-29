@@ -1,8 +1,7 @@
 <template>
   <v-layout
-    row
     justify-space-around
-    py-5
+    py-12
     wrap
   >
     <v-btn

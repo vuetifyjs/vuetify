@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center">
+  <div class="text-center">
     <v-btn
       v-if="!chip1 && !chip2 && !chip3 && !chip4"
       close

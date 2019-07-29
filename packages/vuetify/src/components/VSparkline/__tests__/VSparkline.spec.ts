@@ -213,4 +213,57 @@ describe('VSparkline.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should render component with trend and equal values and match a snapshot', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: [1, 1, 1],
+        type: 'trend',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render component with label size and match a snapshot', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: [1, 7, 42],
+        showLabels: true,
+        labelSize: 14,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should position labels correctly', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: [1, 7, 42],
+        showLabels: true,
+        lineWidth: 20,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render component with bars and correct bar lengths', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: [1, 2],
+        type: 'bar',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      value: [-1, -2],
+    })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

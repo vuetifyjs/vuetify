@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VSlideGroup.ts should match snapshot in rtl 1`] = `
-
 <div class="v-item-group theme--light v-slide-group">
   <div class="v-slide-group__prev">
     <fade-transition-stub origin="top center 0">
@@ -22,11 +21,9 @@ exports[`VSlideGroup.ts should match snapshot in rtl 1`] = `
     </fade-transition-stub>
   </div>
 </div>
-
 `;
 
 exports[`VSlideGroup.ts should match snapshot in rtl 2`] = `
-
 <div class="v-item-group theme--light v-slide-group">
   <div class="v-slide-group__prev">
     <fade-transition-stub origin="top center 0">
@@ -47,5 +44,4 @@ exports[`VSlideGroup.ts should match snapshot in rtl 2`] = `
     </fade-transition-stub>
   </div>
 </div>
-
 `;

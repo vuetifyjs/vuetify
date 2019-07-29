@@ -19,7 +19,7 @@
     }
   },
   "props": {
-    "tag": "Specifies a tag",
-    "tile": "Removes the component's border-radius"
+    "tag": "Specify a custom tag used on the root element.",
+    "tile": "Removes the component's border-radius."
   }
 }

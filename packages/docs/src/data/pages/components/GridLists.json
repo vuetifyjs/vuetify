@@ -7,6 +7,9 @@
   },
   "children": [
     {
+      "type": "layout-grid"
+    },
+    {
       "type": "section",
       "children": [
         {
@@ -20,7 +23,7 @@
       "children": [
         {
           "type": "api",
-          "lang": "grid",
+          "lang": "grids",
           "value": [
             "v-container",
             "v-layout",

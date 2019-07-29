@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VDatePicker.ts should match snapshot with colored picker & header 1`] = `
-
 <div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title orange darken-1">
     <div class="v-date-picker-title">
@@ -366,11 +365,9 @@ exports[`VDatePicker.ts should match snapshot with colored picker & header 1`] =
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDatePicker.ts should match snapshot with colored picker 1`] = `
-
 <div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title orange darken-1">
     <div class="v-date-picker-title">
@@ -735,11 +732,9 @@ exports[`VDatePicker.ts should match snapshot with colored picker 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDatePicker.ts should match snapshot with dark theme 1`] = `
-
 <div class="v-picker v-card v-picker--date theme--dark">
   <div class="v-picker__title">
     <div class="v-date-picker-title">
@@ -1115,11 +1110,9 @@ exports[`VDatePicker.ts should match snapshot with dark theme 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDatePicker.ts should match snapshot with default settings 1`] = `
-
 <div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title primary">
     <div class="v-date-picker-title">
@@ -1495,11 +1488,9 @@ exports[`VDatePicker.ts should match snapshot with default settings 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDatePicker.ts should match snapshot with year icon 1`] = `
-
 <div class="v-picker__title primary">
   <div class="v-date-picker-title">
     <div class="v-picker__title__btn v-date-picker-title__year">
@@ -1517,7 +1508,6 @@ exports[`VDatePicker.ts should match snapshot with year icon 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDatePicker.ts should render component with min/max props 1`] = `
@@ -3048,7 +3038,6 @@ exports[`VDatePicker.ts should render component with min/max props 3`] = `
 `;
 
 exports[`VDatePicker.ts should render disabled picker 1`] = `
-
 <div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title primary">
     <div class="v-date-picker-title v-date-picker-title--disabled">
@@ -3457,11 +3446,9 @@ exports[`VDatePicker.ts should render disabled picker 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDatePicker.ts should render readonly picker 1`] = `
-
 <div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title primary">
     <div class="v-date-picker-title">
@@ -3837,5 +3824,4 @@ exports[`VDatePicker.ts should render readonly picker 1`] = `
     </div>
   </div>
 </div>
-
 `;

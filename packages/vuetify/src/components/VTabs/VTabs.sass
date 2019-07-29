@@ -8,16 +8,30 @@
   .v-tab--disabled
     color: map-get($material, 'tabs')
 
-  .v-tabs-bar,
-  .v-tabs-items
+  .v-tabs-bar
     background-color: map-get($material, 'cards')
 
   .v-tab
     +states($material)
 
++theme(v-tabs-items) using ($material)
+  background-color: map-get($material, 'cards')
+
 .v-tabs-bar.theme--dark
   .v-tab:not(.v-tab--active):not(.v-tab--disabled)
     opacity: .7
+
+.v-tabs-bar
+  &.primary,
+  &.secondary,
+  &.accent,
+  &.success,
+  &.error,
+  &.warning,
+  &.info
+    .v-tab,
+    .v-tabs-slider
+      color: map-deep-get($material-dark, 'text', 'primary')
 
 // Block
 .v-tabs
@@ -32,6 +46,11 @@
   border-radius: inherit
   height: $tabs-bar-height
 
+  // https://github.com/vuetifyjs/vuetify/issues/6932
+  &.v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows)
+    > .v-slide-group__wrapper > .v-tabs-bar__content > .v-tab:first-of-type
+      margin-left: $tabs-item-mobile-no-arrows-margin
+
   &.v-item-group > *
     cursor: initial
 
@@ -42,8 +61,9 @@
   font-size: 0.875rem
   font-weight: 500
   justify-content: center
+  line-height: normal
   min-width: $tabs-item-min-width
-  max-width: $tabs-item-man-width
+  max-width: $tabs-item-max-width
   outline: none
   padding: $tabs-item-padding
   position: relative
@@ -51,6 +71,10 @@
   text-transform: uppercase
   transition: none
   user-select: none
+
+  // Needs increased specificity
+  &.v-tab
+    color: inherit
 
   &:before
     background-color: currentColor
@@ -69,7 +93,7 @@
 
 .v-tabs-slider
   background-color: currentColor
-  height: $tabs-slider-height
+  height: 100%
   width: 100%
 
   &-wrapper
@@ -79,8 +103,9 @@
     transition: $primary-transition
 
 // Modifier
-.v-tabs--align-with-title > .v-tabs-bar
-  padding-left: $tabs-item-align-with-title-padding
+.v-tabs--align-with-title > .v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows)
+  > .v-slide-group__wrapper > .v-tabs-bar__content > .v-tab:first-of-type
+    margin-left: $tabs-item-align-with-title-margin
 
 .v-tabs--fixed-tabs,
 .v-tabs--centered

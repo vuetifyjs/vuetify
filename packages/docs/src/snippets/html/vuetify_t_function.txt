@@ -1,5 +1,7 @@
+<!-- Vue Component -->
+
 <template>
   <div class="my-component">
-    {{ $vuetify.t('$vuetify.my-component.text') }}
+    {{ $vuetify.lang.t('$vuetify.my-component.text') }}
   </div>
 </template>

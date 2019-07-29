@@ -1,0 +1,9 @@
+{
+  "headerText": "그리드 리스트는 아이템들 사이에 여백을 넣을 수 있도록 도와주는 `v-container`를 위한 애드온입니다.",
+  "examples": {
+    "subheader": {
+      "header": "그리드 리스트 (Grid lists)",
+      "desc": "그리드 리스트는 놀라운 인터페이스를 만들 수 있도록 현재 그리드 구현과 함께 연속적으로(seamlessly) 작동합니다."
+    }
+  }
+}

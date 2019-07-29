@@ -25,7 +25,7 @@ describe('VHover.ts', () => {
     const vm = new Vue()
     const item = props => vm.$createElement('div', {
       staticClass: 'foobar',
-      class: { 'fizzbuzz': props.hover },
+      class: { fizzbuzz: props.hover },
     })
 
     const wrapper = mountFunction({
@@ -54,7 +54,7 @@ describe('VHover.ts', () => {
     const vm = new Vue()
     const item = props => vm.$createElement('div', {
       staticClass: 'foobar',
-      class: { 'fizzbuzz': props.hover },
+      class: { fizzbuzz: props.hover },
     })
 
     const wrapper = mountFunction({
