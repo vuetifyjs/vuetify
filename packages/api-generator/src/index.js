@@ -5,6 +5,15 @@ const map = require('./helpers/map')
 const deepmerge = require('./helpers/merge')
 const pkg = require('../package.json')
 
+const camelizeRE = /-(\w)/g
+const camelize = str => {
+  return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : '')
+}
+
+const capitalize = str => {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
 const hyphenateRE = /\B([A-Z])/g
 function hyphenate (str) {
   return str.replace(hyphenateRE, '-$1').toLowerCase()
@@ -280,7 +289,7 @@ const webTypes = {
 
 const webTypesTags = { ...components, ...directives }
 Object.keys(webTypesTags).forEach(function (key) {
-  const name = key
+  const name = capitalize(camelize(key))
   const attributes = webTypesTags[key].props || []
   const events = webTypesTags[key].events || []
   const slots = webTypesTags[key].slots || []
