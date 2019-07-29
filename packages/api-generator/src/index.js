@@ -267,15 +267,15 @@ writeApiFile({ ...components, ...directives }, 'dist/api.js')
 // Create web-types.json to provide autocomplete in JetBrains IDEs
 const webTypes = {
   // $schema: "../../schema/web-types.schema.json",
-  framework: "vue",
-  name: "vuetify",
+  framework: 'vue',
+  name: 'vuetify',
   version: pkg.version,
   contributions: {
     html: {
-      "types-syntax": "typescript",
+      'types-syntax': 'typescript',
       tags: [],
-    }
-  }
+    },
+  },
 }
 
 const webTypesTags = { ...components, ...directives }
@@ -285,7 +285,7 @@ Object.keys(webTypesTags).forEach(function(key) {
   const events = webTypesTags[key].events || []
   const slots = webTypesTags[key].slots || []
   const tag = { name, attributes, events, slots }
-  webTypes.contributions.html.tags.push(tag);
-});
+  webTypes.contributions.html.tags.push(tag)
+})
 
 writeJsonFile(webTypes, 'dist/web-types.json')
