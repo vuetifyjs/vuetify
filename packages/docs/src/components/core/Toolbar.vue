@@ -69,7 +69,7 @@
         white
         text--primary
       >
-        You can find the 2.0 upgrade guide&nbsp;<a class="primary--text font-weight-bold" href="https://github.com/vuetifyjs/vuetify/releases/tag/v2.0.0">here</a>. Maybe you're looking for the&nbsp;<a class="primary--text font-weight-bold" href="https://v15.vuetifyjs.com" aria-label="v1.5 documentation">v1.5 documentation</a>?
+        Looking for the&nbsp;<a class="primary--text font-weight-bold" href="https://v15.vuetifyjs.com" aria-label="v1.5 documentation">v1.5 documentation</a>?
       </v-layout>
     </template>
   </v-app-bar>
