@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Theme.ts should add fake child element for nuxt ssr support 1`] = `
+exports[`Theme.ts should add fake child element for vue-meta with ssr support 1`] = `
 Object {
   "style": Array [
     Object {

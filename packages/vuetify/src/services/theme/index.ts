@@ -109,14 +109,11 @@ export class Theme extends Service {
   public init (root: Vue, ssrContext?: any): void {
     if (this.disabled) return
 
-    const meta = Boolean((root as any).$meta) // TODO: don't import public types from /src
-    const ssr = Boolean(ssrContext)
-
     /* istanbul ignore else */
-    if (meta) {
-      this.initNuxt(root)
-    } else if (ssr) {
+    if (ssrContext) {
       this.initSSR(ssrContext)
+    } else if (root.$isServer && (root as any).$meta) {
+      this.initVueMeta(root)
     }
 
     this.initTheme()
@@ -178,7 +175,7 @@ export class Theme extends Service {
     document.head.appendChild(this.styleEl)
   }
 
-  private initNuxt (root: Vue) {
+  private initVueMeta (root: Vue) {
     const options = this.options || {}
     root.$children.push(new Vue({
       head: {
