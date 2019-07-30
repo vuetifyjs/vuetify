@@ -17,16 +17,6 @@
       color: map-deep-get($material, 'selection-controls', 'track', 'disabled') !important
 
 .v-input--switch
-  +rtl()
-    .v-input--selection-controls__ripple
-      left: auto
-      right: $switch-ripple-x
-
-    &.v-input--is-dirty
-      .v-input--selection-controls__ripple,
-      .v-input--switch__thumb
-        transform: translate(-$switch-dirty-offset-x, 0)
-
   &__track,
   &__thumb
     background-color: currentColor
@@ -58,16 +48,29 @@
     width: 38px
 
   .v-input--selection-controls__ripple
-    left: $switch-ripple-x
     top: $switch-ripple-top
 
   &.v-input--is-dirty
     &.v-input--is-disabled
       opacity: $switch-disabled-opacity
 
-    .v-input--selection-controls__ripple,
-    .v-input--switch__thumb
-      transform: translate($switch-dirty-offset-x, 0)
+  +ltr()
+    .v-input--selection-controls__ripple
+      left: $switch-ripple-x
+
+    &.v-input--is-dirty
+      .v-input--selection-controls__ripple,
+      .v-input--switch__thumb
+        transform: translate($switch-dirty-offset-x, 0)
+
+  +rtl()
+    .v-input--selection-controls__ripple
+      right: $switch-ripple-x
+
+    &.v-input--is-dirty
+      .v-input--selection-controls__ripple,
+      .v-input--switch__thumb
+        transform: translate(-$switch-dirty-offset-x, 0)
 
   &:not(&--flat):not(&--inset)
     .v-input--switch__thumb
@@ -84,3 +87,23 @@
       left: -4px
       opacity: .32
       top: calc(50% - 14px)
+
+    +ltr()
+      .v-input--selection-controls__ripple,
+      .v-input--switch__thumb
+        transform: translate(0, 0) !important
+
+      &.v-input--is-dirty
+        .v-input--selection-controls__ripple,
+        .v-input--switch__thumb
+          transform: translate(20px, 0) !important
+
+    +rtl()
+      .v-input--selection-controls__ripple,
+      .v-input--switch__thumb
+        transform: translate(-6px, 0) !important
+
+      &.v-input--is-dirty
+        .v-input--selection-controls__ripple,
+        .v-input--switch__thumb
+          transform: translate(-26px, 0) !important
