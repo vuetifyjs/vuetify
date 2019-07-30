@@ -14,7 +14,7 @@ export default {
     },
   },
   dataFooter: {
-    itemsPerPageText: 'Rader per sida:',
+    itemsPerPageText: 'Objekt per sida:',
     itemsPerPageAll: 'Alla',
     nextPage: 'Nästa sida',
     prevPage: 'Föregående sida',
