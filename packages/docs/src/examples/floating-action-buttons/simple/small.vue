@@ -4,16 +4,6 @@
       <v-card>
         <v-toolbar color="light-blue" light extended>
           <v-app-bar-nav-icon></v-app-bar-nav-icon>
-          <v-btn
-            fab
-            color="cyan accent-2"
-            bottom
-            left
-            absolute
-            @click="dialog = !dialog"
-          >
-            <v-icon>add</v-icon>
-          </v-btn>
           <v-toolbar-title class="white--text">My files</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn icon>
@@ -22,6 +12,18 @@
           <v-btn icon>
             <v-icon>view_module</v-icon>
           </v-btn>
+          <template v-slot:extension>
+            <v-btn
+              fab
+              color="cyan accent-2"
+              bottom
+              left
+              absolute
+              @click="dialog = !dialog"
+            >
+              <v-icon>add</v-icon>
+            </v-btn>
+          </template>
         </v-toolbar>
         <v-list two-line subheader>
           <v-subheader inset>Folders</v-subheader>
