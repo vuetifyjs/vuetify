@@ -440,7 +440,7 @@ export default CalendarBase.extend({
             visual.offset = getOffset(visual, visuals)
           })
         }
-        visuals.sort((a, b) => (a.column - b.column) || (a.offset - b.offset))
+        visuals.sort((a, b) => (a.offset - b.offset) || (a.column - b.column))
         return visuals
       }
 
