@@ -4,18 +4,18 @@
       wrap
       justify-space-between
     >
-      <v-flex
+
+    <v-form ref="form">
+    <v-flex
         xs12
         md4
       >
-        <v-form ref="form">
           <v-text-field
             v-model="model"
             :counter="max"
             :rules="rules"
             label="First name"
           ></v-text-field>
-        </v-form>
       </v-flex>
 
       <v-flex
@@ -38,6 +38,8 @@
           label="Value must match"
         ></v-text-field>
       </v-flex>
+      </v-form>
+      
     </v-layout>
   </v-container>
 </template>
