@@ -257,11 +257,20 @@ export const BaseSlideGroup = mixins<options &
       content.style.setProperty('transition', null)
       content.style.setProperty('willChange', null)
 
-      /* istanbul ignore else */
-      if (this.scrollOffset < 0 || !this.isOverflowing) {
-        this.scrollOffset = 0
-      } else if (this.scrollOffset >= maxScrollOffset) {
-        this.scrollOffset = maxScrollOffset
+      if (this.$vuetify.rtl) {
+        /* istanbul ignore else */
+        if (this.scrollOffset > 0 || !this.isOverflowing) {
+          this.scrollOffset = 0
+        } else if (this.scrollOffset <= -maxScrollOffset) {
+          this.scrollOffset = -maxScrollOffset
+        }
+      } else {
+        /* istanbul ignore else */
+        if (this.scrollOffset < 0 || !this.isOverflowing) {
+          this.scrollOffset = 0
+        } else if (this.scrollOffset >= maxScrollOffset) {
+          this.scrollOffset = maxScrollOffset
+        }
       }
     },
     overflowCheck (e: TouchEvent, fn: (e: TouchEvent) => void) {
