@@ -51,9 +51,9 @@ export default baseMixins.extend<options>().extend(
 
   data () {
     return {
-      done: null as null | (() => void),
       isActive: false,
-      wasCancelled: false,
+      wasCancelled: true, // Prevent event wrongly fired during transition.
+      initialHeight: undefined as string | undefined,
     }
   },
 
@@ -74,14 +74,6 @@ export default baseMixins.extend<options>().extend(
     },
   },
 
-  mounted () {
-    this.$el.addEventListener('transitionend', this.onTransitionEnd, false)
-  },
-
-  beforeDestroy () {
-    this.$el.removeEventListener('transitionend', this.onTransitionEnd, false)
-  },
-
   methods: {
     genDefaultSlot () {
       return this.$slots.default
@@ -97,54 +89,60 @@ export default baseMixins.extend<options>().extend(
         on: this.$listeners,
       }, this.showLazyContent(this.genDefaultSlot()))
     },
-    onAfterEnter () {
+    beforeChange (val: boolean) {
+      if (this.windowGroup.$el) {
+        // Cache initial height before any transition event. Both enter/leave window will
+        // have the initial value becuase we don't know which one will enter first.
+        this.initialHeight = convertToUnit(this.windowGroup.$el.clientHeight)
+      }
+    },
+    deactivate () {
+      // This function must be called in all path of the transition.
+      this.wasCancelled = true
+      if (this.windowGroup.activeWindows > 0) {
+        this.windowGroup.activeWindows--
+
+        if (this.windowGroup.activeWindows === 0) {
+          this.windowGroup.internalHeight = undefined
+        }
+      }
+    },
+    onAfterTransition () {
       if (this.wasCancelled) {
-        this.wasCancelled = false
         return
       }
 
-      requestAnimationFrame(() => {
-        this.windowGroup.internalHeight = undefined
-        this.windowGroup.isActive = false
-      })
+      requestAnimationFrame(() => this.deactivate())
     },
-    onBeforeEnter () {
-      this.windowGroup.isActive = true
+    onBeforeTransition () {
+      // Initialize transition state here.
+      this.wasCancelled = false
+      if (this.windowGroup.activeWindows === 0) {
+        this.windowGroup.internalHeight = this.initialHeight
+      }
+      this.windowGroup.activeWindows++
     },
-    onBeforeLeave (el: HTMLElement) {
-      this.windowGroup.internalHeight = convertToUnit(el.clientHeight)
-    },
-    onEnterCancelled () {
-      this.wasCancelled = true
-    },
-    onEnter (el: HTMLElement, done: () => void) {
-      const isBooted = this.windowGroup.isBooted
+    onTransitionCancelled () {
+      if (this.wasCancelled) {
+        return
+      }
 
-      if (isBooted) this.done = done
+      this.deactivate()
+    },
+    onEnter (el: HTMLElement) {
+      if (this.wasCancelled) {
+        return
+      }
 
       this.$nextTick(() => {
-        if (!this.computedTransition) return done()
+        // If cancelled, we should terminate early since transition end event may not fire.
+        if (!this.computedTransition || this.wasCancelled) {
+          return
+        }
 
+        // Set transition target height.
         this.windowGroup.internalHeight = convertToUnit(el.clientHeight)
-
-        // On initial render, there is no transition
-        // Vue leaves a `enter` transition class
-        // if done is called too fast
-        !isBooted && setTimeout(done, 100)
       })
-    },
-    onTransitionEnd (e: TransitionEvent) {
-      // This ensures we only call done
-      // when the element transform
-      // completes
-      if (
-        e.propertyName !== 'transform' ||
-        e.target !== this.$el ||
-        !this.done
-      ) return
-
-      this.done()
-      this.done = null
     },
   },
 
@@ -154,11 +152,16 @@ export default baseMixins.extend<options>().extend(
         name: this.computedTransition,
       },
       on: {
-        afterEnter: this.onAfterEnter,
-        beforeEnter: this.onBeforeEnter,
-        beforeLeave: this.onBeforeLeave,
+        // Same handler for enter/leave windows.
+        beforeEnter: this.onBeforeTransition,
+        afterEnter: this.onAfterTransition,
+        enterCancelled: this.onTransitionCancelled,
+
+        beforeLeave: this.onBeforeTransition,
+        afterLeave: this.onAfterTransition,
+        leaveCancelled: this.onTransitionCancelled,
+
         enter: this.onEnter,
-        enterCancelled: this.onEnterCancelled,
       },
     }, [this.genWindowItem()])
   },

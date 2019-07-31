@@ -54,7 +54,7 @@ describe('VWindowItem.ts', () => {
     const item = wrapper.find(VWindowItem.options)
     // Before enter
     expect(wrapper.vm.isActive).toBeFalsy()
-    item.vm.onBeforeEnter()
+    item.vm.onBeforeTransition()
     expect(wrapper.vm.isActive).toBeTruthy()
 
     // Enter
@@ -65,28 +65,26 @@ describe('VWindowItem.ts', () => {
     expect(wrapper.vm.internalHeight).toBe('0px')
 
     // After enter
-    item.vm.onAfterEnter()
+    item.vm.onAfterTransition()
     await new Promise(resolve => window.requestAnimationFrame(resolve))
     expect(wrapper.vm.internalHeight).toBeUndefined()
     expect(wrapper.vm.isActive).toBeFalsy()
 
-    // Leave
-    item.vm.onBeforeLeave(el)
-    expect(wrapper.vm.internalHeight).toBe('0px')
-
     // Canceling
-    item.vm.onBeforeEnter()
-    item.vm.onEnter(el, () => {})
-    item.vm.onEnterCancelled()
+    item.vm.onBeforeTransition()
+    item.vm.onEnter(el)
+    item.vm.onTransitionCancelled()
 
     expect(item.vm.wasCancelled).toBeTruthy()
+    expect(wrapper.vm.isActive).toBeFalsy()
+
+    // Normal path.
+    item.vm.onBeforeTransition()
     expect(wrapper.vm.isActive).toBeTruthy()
-
-    item.vm.onAfterEnter()
-
+    item.vm.onAfterTransition()
     await new Promise(resolve => window.requestAnimationFrame(resolve))
 
-    expect(wrapper.vm.isActive).toBeTruthy()
+    expect(wrapper.vm.isActive).toBeFalsy()
   })
 
   it('should use custom transition', () => {
@@ -116,67 +114,38 @@ describe('VWindowItem.ts', () => {
     expect(wrapper.vm.computedTransition).toBe('')
   })
 
-  it('should only call done when the transition is on the window-item', () => {
-    const done = jest.fn()
-
-    const wrapper = mountFunction({
-      data: () => ({
-        done,
-        windowGroup: {
-          internalReverse: false,
-          register: () => {},
-          unregister: () => {},
-        },
-      }),
-    })
-
-    // Incorrect property
-    wrapper.vm.onTransitionEnd({
-      propertyName: 'border-color',
-    })
-
-    expect(done).not.toHaveBeenCalled()
-
-    // Incorrect target
-    wrapper.vm.onTransitionEnd({
-      propertyName: 'transform',
-      target: document.createElement('div'),
-    })
-
-    expect(done).not.toHaveBeenCalled()
-
-    // Should work
-    wrapper.vm.onTransitionEnd({
-      propertyName: 'transform',
-      target: wrapper.vm.$el,
-    })
-
-    expect(done).toHaveBeenCalledTimes(1)
-  })
-
-  it('should immediately call done when no transition', async () => {
-    const done = jest.fn()
-
-    const wrapper = mountFunction({
+  it('should not set initial height if no computedTransition', async () => {
+    const heightChanged = jest.fn()
+    const wrapper = mount(VWindow, {
       propsData: {
         transition: false,
         reverseTransition: false,
       },
-      data: () => ({
-        windowGroup: {
-          internalHeight: 0,
-          register: () => {},
-          unregister: () => {},
+      watch: {
+        internalHeight: heightChanged,
+      },
+      slots: {
+        default: [VWindowItem],
+      },
+      mocks: {
+        $vuetify: {
+          rtl: false,
         },
-      }),
+      },
     })
 
+    const item = wrapper.find(VWindowItem.options)
     expect(wrapper.vm.computedTransition).toBeFalsy()
 
-    wrapper.vm.onEnter(wrapper.$el, done)
+    item.vm.beforeChange(true)
+    item.vm.onBeforeTransition()
+    expect(wrapper.vm.isActive).toBeTruthy()
+    expect(heightChanged).toHaveBeenCalledTimes(1)
 
+    item.vm.onEnter(wrapper.$el)
     await new Promise(resolve => requestAnimationFrame(resolve))
+    expect(wrapper.vm.isActive).toBeTruthy()
 
-    expect(done).toHaveBeenCalled()
+    expect(heightChanged).toHaveBeenCalledTimes(1)
   })
 })
