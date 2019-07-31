@@ -9,6 +9,7 @@
               :key="n"
               xs4
               d-flex
+              child-flex
             >
               <v-card flat tile class="d-flex">
                 <v-img
