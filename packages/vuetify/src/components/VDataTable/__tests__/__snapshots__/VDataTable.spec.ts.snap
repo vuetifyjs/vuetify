@@ -54,7 +54,7 @@ exports[`VDataTable.ts should render 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -180,7 +180,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -386,7 +386,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -675,7 +675,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -866,7 +866,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -1155,7 +1155,7 @@ exports[`VDataTable.ts should render with data 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -1339,7 +1339,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -1766,7 +1766,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -2139,7 +2139,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -2343,7 +2343,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -2657,7 +2657,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -2994,7 +2994,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -3331,7 +3331,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -3695,7 +3695,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
