@@ -24,9 +24,7 @@ export default mixins(
   },
 
   props: {
-    choice: Boolean,
     column: Boolean,
-    outlined: Boolean,
   },
 
   computed: {

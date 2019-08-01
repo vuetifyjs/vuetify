@@ -164,6 +164,10 @@ export function getTimeIdentifier (timestamp: VTimestamp): number {
   return timestamp.hour * 100 + timestamp.minute
 }
 
+export function getTimestampIdentifier (timestamp: VTimestamp): number {
+  return getDayIdentifier(timestamp) * 10000 + getTimeIdentifier(timestamp)
+}
+
 export function updateRelative (timestamp: VTimestamp, now: VTimestamp, time = false): VTimestamp {
   let a = getDayIdentifier(now)
   let b = getDayIdentifier(timestamp)
@@ -304,10 +308,12 @@ export function prevDay (timestamp: VTimestamp): VTimestamp {
   return timestamp
 }
 
-export function relativeDays (timestamp: VTimestamp,
-  mover: VTimestampOperation = nextDay, days = 1): VTimestamp {
+export function relativeDays (
+  timestamp: VTimestamp,
+  mover: VTimestampOperation = nextDay,
+  days = 1
+): VTimestamp {
   while (--days >= 0) mover(timestamp)
-
   return timestamp
 }
 
@@ -339,8 +345,14 @@ export function getWeekdaySkips (weekdays: number[]): number[] {
   return skips
 }
 
-export function createDayList (start: VTimestamp, end: VTimestamp, now: VTimestamp,
-  weekdaySkips: number[], max = 42, min = 0): VTimestamp[] {
+export function createDayList (
+  start: VTimestamp,
+  end: VTimestamp,
+  now: VTimestamp,
+  weekdaySkips: number[],
+  max = 42,
+  min = 0
+): VTimestamp[] {
   const stop = getDayIdentifier(end)
   const days: VTimestamp[] = []
   let current = copyTimestamp(start)
@@ -348,7 +360,7 @@ export function createDayList (start: VTimestamp, end: VTimestamp, now: VTimesta
   let stopped = currentIdentifier === stop
 
   if (stop < getDayIdentifier(start)) {
-    return days
+    throw new Error('End date is earlier than start date.')
   }
 
   while ((!stopped || days.length < min) && days.length < max) {
@@ -364,6 +376,8 @@ export function createDayList (start: VTimestamp, end: VTimestamp, now: VTimesta
     days.push(day)
     current = relativeDays(current, nextDay, weekdaySkips[current.weekday])
   }
+
+  if (!days.length) throw new Error('No dates found using specified start date, end date, and weekdays.')
 
   return days
 }

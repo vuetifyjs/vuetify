@@ -21,9 +21,19 @@ export default {
     firstPage: 'עמוד ראשון',
     lastPage: 'עמוד אחרון',
   },
+  datePicker: {
+    itemsSelected: '{0} נבחרו',
+  },
   noDataText: 'אין נתונים זמינים',
   carousel: {
     prev: 'מצג קודם',
     next: 'מצג הבא',
+  },
+  calendar: {
+    moreEvents: '{0} נוספים',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
   },
 }

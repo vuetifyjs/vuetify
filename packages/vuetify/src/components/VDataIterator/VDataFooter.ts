@@ -7,7 +7,7 @@ import VBtn from '../VBtn'
 
 // Types
 import Vue, { VNode, VNodeChildrenArrayContents } from 'vue'
-import { DataOptions, DataPaginaton } from '../VData/VData'
+import { DataOptions, DataPagination } from '../VData/VData'
 import { PropValidator } from 'vue/types/options'
 
 export default Vue.extend({
@@ -21,7 +21,7 @@ export default Vue.extend({
     pagination: {
       type: Object,
       required: true,
-    } as PropValidator<DataPaginaton>,
+    } as PropValidator<DataPagination>,
     itemsPerPageOptions: {
       type: Array,
       default: () => ([5, 10, 15, -1]),
@@ -63,24 +63,10 @@ export default Vue.extend({
         this.pagination.pageStop < 0
     },
     computedItemsPerPageOptions (): any[] {
-      const itemsPerPageOptions = this.itemsPerPageOptions.map(option => {
+      return this.itemsPerPageOptions.map(option => {
         if (typeof option === 'object') return option
         else return this.genItemsPerPageOption(option)
       })
-
-      const customItemsPerPage = !itemsPerPageOptions.find(option => option.value === this.options.itemsPerPage)
-
-      if (customItemsPerPage) {
-        itemsPerPageOptions.push(this.genItemsPerPageOption(this.options.itemsPerPage))
-
-        itemsPerPageOptions.sort((a, b) => {
-          if (a.value === -1) return 1
-          else if (b.value === -1) return -1
-          else return a.value - b.value
-        })
-      }
-
-      return itemsPerPageOptions
     },
   },
 
@@ -110,6 +96,14 @@ export default Vue.extend({
       }
     },
     genItemsPerPageSelect () {
+      let value = this.options.itemsPerPage
+      const computedIPPO = this.computedItemsPerPageOptions
+
+      if (
+        computedIPPO.length > 0 &&
+        !computedIPPO.find(ippo => ippo.value === value)
+      ) value = computedIPPO[0]
+
       return this.$createElement('div', {
         staticClass: 'v-data-footer__select',
       }, [
@@ -120,8 +114,8 @@ export default Vue.extend({
           },
           props: {
             disabled: this.disableItemsPerPage,
-            items: this.computedItemsPerPageOptions,
-            value: this.options.itemsPerPage,
+            items: computedIPPO,
+            value,
             hideDetails: true,
             auto: true,
             minWidth: '75px',
@@ -144,11 +138,11 @@ export default Vue.extend({
 
         children = this.$scopedSlots['page-text']
           ? [this.$scopedSlots['page-text']!({ pageStart, pageStop, itemsLength })]
-          : [`${pageStart}-${pageStop} of ${itemsLength}`]
+          : [this.$vuetify.lang.t('$vuetify.dataIterator.pageText', pageStart, pageStop, itemsLength)]
       }
 
       return this.$createElement('div', {
-        'class': 'v-data-footer__pagination',
+        class: 'v-data-footer__pagination',
       }, children)
     },
     genIcon (click: Function, disabled: boolean, label: string, icon: string): VNode {

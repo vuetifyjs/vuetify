@@ -167,7 +167,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -224,7 +223,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -336,7 +334,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -447,7 +444,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -569,7 +565,7 @@
                 </v-btn>
               </template>
               <v-card>
-                <v-card-text class="pa-4">
+                <v-card-text class="pa-6">
                   <v-btn
                     large
                     flat
@@ -641,7 +637,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -708,7 +703,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -788,7 +782,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -873,7 +866,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -959,7 +951,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -993,7 +984,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -1027,7 +1017,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -1060,7 +1049,7 @@
         Prefixes and suffixes
       </core-title>
       <core-section>
-        <v-layout row>
+        <v-layout>
           <v-flex xs4>
             <v-subheader>Prefix for dollar currency</v-subheader>
           </v-flex>
@@ -1073,7 +1062,7 @@
           </v-flex>
         </v-layout>
 
-        <v-layout row>
+        <v-layout>
           <v-flex xs4>
             <v-subheader>Suffix for weight</v-subheader>
           </v-flex>
@@ -1086,7 +1075,7 @@
           </v-flex>
         </v-layout>
 
-        <v-layout row>
+        <v-layout>
           <v-flex xs4>
             <v-subheader>Suffix for email domain</v-subheader>
           </v-flex>
@@ -1099,7 +1088,7 @@
           </v-flex>
         </v-layout>
 
-        <v-layout row>
+        <v-layout>
           <v-flex xs4>
             <v-subheader>Suffix for time zone</v-subheader>
           </v-flex>
@@ -1112,27 +1101,6 @@
             />
           </v-flex>
         </v-layout>
-      </core-section>
-
-      <core-title>
-        Mask
-      </core-title>
-      <core-section>
-        <v-card>
-          <v-card-text>
-            <v-text-field
-              v-model="mask"
-              label="Mask"
-            />
-          </v-card-text>
-          <v-card-text>
-            <v-text-field
-              v-model="value"
-              :mask="mask"
-              label="Value"
-            />
-          </v-card-text>
-        </v-card>
       </core-section>
 
       <core-title>
@@ -1213,8 +1181,6 @@
       title2: 'Hi,\nI just wanted to check in and see if you had any plans the upcoming weekend. We are thinking of heading up to Napa',
       first: 'John',
       last: 'Doe',
-      mask: 'credit-card',
-      value: '4444444444444444',
       value1: '',
       value2: '',
     }),

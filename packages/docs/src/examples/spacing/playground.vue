@@ -17,7 +17,7 @@
       )
         v-select(
           :items="directions"
-          :label="$t('Framework.Spacing.padding')"
+          :label="$t('Styles.Spacing.padding')"
           class="pr-2"
           v-model="paddingDirection"
         )
@@ -27,8 +27,8 @@
             div() -
 
         v-select(
-          :items="sizes.slice(1)"
-          :label="$t('Framework.Spacing.size')"
+          :items="paddingSizes.slice(1)"
+          :label="$t('Styles.Spacing.size')"
           v-model="paddingSize"
         )
       v-flex(
@@ -38,7 +38,7 @@
       )
         v-select(
           :items="directions"
-          :label="$t('Framework.Spacing.margin')"
+          :label="$t('Styles.Spacing.margin')"
           class="pr-2"
           v-model="marginDirection"
         )
@@ -48,8 +48,8 @@
             div() -
 
         v-select(
-          :items="sizes"
-          :label="$t('Framework.Spacing.size')"
+          :items="marginSizes"
+          :label="$t('Styles.Spacing.size')"
           v-model="marginSize"
         )
       v-flex(
@@ -65,16 +65,21 @@
             class="light-green lighten-3"
           )
             div(
-              class="white text-xs-center"
-              v-text="$t('Framework.Spacing.playgroundText2')"
+              class="white text-center"
+              v-text="$t('Styles.Spacing.playgroundText2')"
             )
 </template>
 
 <script>
   export default {
     data: () => ({
-      directions: ['t', 'b', 'l', 'r', 'x', 'y', 'a'],
-      sizes: ['auto', '0', '1', '2', '3', '4', '5'],
+      directions: ['t', 'b', 'l', 'r', 's', 'e', 'x', 'y', 'a'],
+      paddingSizes: ['auto', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+      marginSizes: [
+        'auto',
+        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12',
+        'n1', 'n2', 'n3', 'n4', 'n5', 'n6', 'n7', 'n8', 'n9', 'n10', 'n11', 'n12',
+      ],
       paddingDirection: 'a',
       paddingSize: '2',
       marginDirection: 'a',

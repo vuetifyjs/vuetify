@@ -13,7 +13,7 @@
       Our blouses are available in 8 colors. You can custom order a built-in arch support for any of the models.
     </v-card-text>
 
-    <v-divider class="mx-3"></v-divider>
+    <v-divider class="mx-4"></v-divider>
 
     <v-card-text>
       <span class="subheading">Select size</span>

@@ -30,15 +30,15 @@
       </v-btn>
       <v-item-group
         v-model="onboarding"
-        class="text-xs-center"
+        class="text-center"
         mandatory
       >
         <v-item
           v-for="n in length"
           :key="`btn-${n}`"
+          v-slot:default="{ active, toggle }"
         >
           <v-btn
-            slot-scope="{ active, toggle }"
             :input-value="active"
             icon
             @click="toggle"
@@ -81,6 +81,6 @@
 
 <codepen-resources lang="json">
   {
-    "css": ["https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css"]
+    "css": ["https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css"]
   }
 </codepen-resources>

@@ -21,9 +21,19 @@ export default {
     firstPage: 'Pierwsza strona',
     lastPage: 'Ostatnia strona',
   },
+  datePicker: {
+    itemsSelected: '{0} dat(y)',
+  },
   noDataText: 'Brak danych',
   carousel: {
     prev: 'Poprzedni obraz',
     next: 'Następny obraz',
+  },
+  calendar: {
+    moreEvents: '{0} więcej',
+  },
+  fileInput: {
+    counter: 'Liczba plików: {0}',
+    counterSize: 'Liczba plików: {0} (łącznie {1})',
   },
 }

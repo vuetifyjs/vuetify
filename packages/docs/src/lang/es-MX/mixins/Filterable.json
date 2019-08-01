@@ -1,5 +1,5 @@
 {
-    "props": {
-        "noDataText": "El texto a mostrar cuando no hay datos."
-    }
+  "props": {
+    "noDataText": "El texto a mostrar cuando no hay datos."
+  }
 }

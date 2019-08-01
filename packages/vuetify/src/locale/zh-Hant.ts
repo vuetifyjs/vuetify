@@ -21,9 +21,19 @@ export default {
     firstPage: '第一頁',
     lastPage: '最後一頁',
   },
+  datePicker: {
+    itemsSelected: '{0}選中',
+  },
   noDataText: '無可用數據',
   carousel: {
     prev: '以前的視覺',
     next: '下一個視覺',
+  },
+  calendar: {
+    moreEvents: '還有{0}個',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
   },
 }

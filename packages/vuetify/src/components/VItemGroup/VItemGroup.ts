@@ -13,7 +13,11 @@ import { consoleWarn } from '../../util/console'
 // Types
 import { VNode } from 'vue/types'
 
-export type GroupableInstance = InstanceType<typeof Groupable> & { to?: any, value?: any }
+export type GroupableInstance = InstanceType<typeof Groupable> & {
+  id?: string
+  to?: any
+  value?: any
+ }
 
 export const BaseItemGroup = mixins(
   Proxyable,
@@ -53,12 +57,13 @@ export const BaseItemGroup = mixins(
         ...this.themeClasses,
       }
     },
+    selectedIndex (): number {
+      return (this.selectedItem && this.items.indexOf(this.selectedItem)) || -1
+    },
     selectedItem (): GroupableInstance | undefined {
       if (this.multiple) return undefined
 
-      return this.items.find((item, index) => {
-        return this.toggleMethod(this.getValue(item, index))
-      })
+      return this.selectedItems[0]
     },
     selectedItems (): GroupableInstance[] {
       return this.items.filter((item, index) => {

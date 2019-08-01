@@ -1,8 +1,7 @@
 <template>
   <v-bottom-navigation
     :value="activeBtn"
-    color="purple"
-    dark
+    color="deep-purple accent-4"
   >
     <v-btn>
       <span>Recents</span>

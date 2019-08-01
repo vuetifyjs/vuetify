@@ -1,25 +1,28 @@
 module.exports = {
   'v-form': {
-    slots: ['default'],
     functions: [
       {
         name: 'reset',
-        signature: '(): void'
+        signature: '(): void',
       },
       {
         name: 'resetValidation',
-        signature: '(): void'
+        signature: '(): void',
       },
       {
         name: 'validate',
-        signature: '(): boolean'
-      }
+        signature: '(): boolean',
+      },
     ],
     events: [
       {
         name: 'input',
-        value: 'boolean'
-      }
-    ]
-  }
+        value: 'boolean',
+      },
+      {
+        name: 'submit',
+        value: 'event',
+      },
+    ],
+  },
 }

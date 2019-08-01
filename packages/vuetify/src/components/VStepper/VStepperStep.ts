@@ -6,7 +6,7 @@ import Colorable from '../../mixins/colorable'
 import { inject as RegistrableInject } from '../../mixins/registrable'
 
 // Directives
-import Ripple from '../../directives/ripple'
+import ripple from '../../directives/ripple'
 
 // Utilities
 import mixins from '../../util/mixins'
@@ -15,7 +15,7 @@ import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
-type VuetifyStepperRuleValidator = () => string | false
+type VuetifyStepperRuleValidator = () => string | boolean
 
 const baseMixins = mixins(
   Colorable,
@@ -29,7 +29,7 @@ interface options extends InstanceType<typeof baseMixins> {
 export default baseMixins.extend<options>().extend({
   name: 'v-stepper-step',
 
-  directives: { Ripple },
+  directives: { ripple },
 
   inject: ['stepClick'],
 
@@ -43,6 +43,7 @@ export default baseMixins.extend<options>().extend({
       type: String,
       default: '$vuetify.icons.complete',
     },
+    editable: Boolean,
     editIcon: {
       type: String,
       default: '$vuetify.icons.edit',
@@ -51,7 +52,6 @@ export default baseMixins.extend<options>().extend({
       type: String,
       default: '$vuetify.icons.error',
     },
-    editable: Boolean,
     rules: {
       type: Array,
       default: () => [],

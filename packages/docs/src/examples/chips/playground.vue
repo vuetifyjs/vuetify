@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="text-xs-center py-4">
+    <div class="text-center py-6">
       <v-chip
         :close-icon="close === 'custom' ? 'mdi-close-outline' : undefined"
         :close="!!close"
@@ -100,7 +100,7 @@
         <v-select
           v-model="variant"
           :items="['outlined', 'label', 'pill', 'filter', 'link']"
-          box
+          filled
           chips
           deletable-chips
           label="Variants"

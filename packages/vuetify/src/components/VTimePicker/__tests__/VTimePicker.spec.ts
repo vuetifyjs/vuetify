@@ -546,9 +546,9 @@ describe('VTimePicker.ts', () => {
     })
 
     it('should calculate allowed seconds/minute/hour callback from array' + useSecondsDesc, async () => { // eslint-disable-line max-statements
-      const allowedHours = [ 9, 10, 12 ]
-      const allowedMinutes = [ 30, 35 ]
-      const allowedSeconds = [ 0, 30 ]
+      const allowedHours = [9, 10, 12]
+      const allowedMinutes = [30, 35]
+      const allowedSeconds = [0, 30]
 
       const wrapper = mountFunction({
         propsData: {

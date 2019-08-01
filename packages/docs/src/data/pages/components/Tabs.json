@@ -13,6 +13,11 @@
         {
           "type": "usage",
           "value": "usage"
+        },
+        {
+          "type": "alert",
+          "lang": "alert",
+          "value": "warning"
         }
       ]
     },
@@ -35,25 +40,31 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "fixedTabs",
-            "right",
-            "content",
-            "dynamicHeight",
-            "iconsAndText",
-            "desktop",
-            "alignWithTitle",
-            "grow",
-            {
-              "file": "centerActive",
-              "newIn": "2.0"
-            },
-            "overflowToMenu",
-            "pagination",
-            "icons",
-            "dynamic",
-            "vertical"
+            "simple/fixed-tabs",
+            "simple/center-active",
+            "simple/grow",
+            "simple/pagination",
+            "simple/icons",
+            "simple/vertical",
+            "intermediate/icons-and-text",
+            "intermediate/right",
+            "intermediate/content",
+            "intermediate/align-with-title",
+            "intermediate/dynamic",
+            "complex/dynamic-height",
+            "complex/desktop",
+            "complex/overflow-to-menu"
           ]
         }
       ]

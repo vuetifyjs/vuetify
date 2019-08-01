@@ -1,0 +1,32 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "alert",
+          "lang": "alert",
+          "value": "info"
+        },
+        {
+          "type": "doc-pre-made-layouts"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/application",
+            "themes/premium",
+            "customization/theme"
+          ]
+        }
+      ]
+    }
+  ]
+}

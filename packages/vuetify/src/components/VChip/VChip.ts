@@ -17,11 +17,8 @@ import { factory as ToggleableFactory } from '../../mixins/toggleable'
 import Routable from '../../mixins/routable'
 import Sizeable from '../../mixins/sizeable'
 
-// Directives
-import Ripple from '../../directives/ripple'
-
 // Utilities
-import { deprecate } from '../../util/console'
+import { breaking } from '../../util/console'
 
 // Types
 import { PropValidator } from 'vue/types/options'
@@ -37,9 +34,11 @@ export default mixins(
 ).extend({
   name: 'v-chip',
 
-  directives: { Ripple },
-
   props: {
+    active: {
+      type: Boolean,
+      default: true,
+    },
     activeClass: {
       type: String,
       default (): string | undefined {
@@ -62,11 +61,8 @@ export default mixins(
     },
     label: Boolean,
     link: Boolean,
-    outline: Boolean,
     outlined: Boolean,
     pill: Boolean,
-    // Used for selects/tagging
-    selected: Boolean,
     tag: {
       type: String,
       default: 'span',
@@ -88,9 +84,9 @@ export default mixins(
         'v-chip--disabled': this.disabled,
         'v-chip--draggable': this.draggable,
         'v-chip--label': this.label,
-        'v-chip--link': this.isClickable,
+        'v-chip--link': this.isLink,
         'v-chip--no-color': !this.color,
-        'v-chip--outlined': this.hasOutline,
+        'v-chip--outlined': this.outlined,
         'v-chip--pill': this.pill,
         'v-chip--removable': this.hasClose,
         ...this.themeClasses,
@@ -99,13 +95,7 @@ export default mixins(
       }
     },
     hasClose (): boolean {
-      return Boolean(
-        this.close ||
-        this.$listeners['click:close']
-      )
-    },
-    hasOutline (): boolean {
-      return this.outline || this.outlined
+      return Boolean(this.close)
     },
     isClickable (): boolean {
       return Boolean(
@@ -113,6 +103,20 @@ export default mixins(
         this.chipGroup
       )
     },
+  },
+
+  created () {
+    const breakingProps = [
+      ['outline', 'outlined'],
+      ['selected', 'input-value'],
+      ['value', 'active'],
+      ['@input', '@active.sync'],
+    ]
+
+    /* istanbul ignore next */
+    breakingProps.forEach(([original, replacement]) => {
+      if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement, this)
+    })
   },
 
   methods: {
@@ -146,6 +150,7 @@ export default mixins(
             e.stopPropagation()
 
             this.$emit('click:close')
+            this.$emit('update:active', false)
           },
         },
       }, this.closeIcon)
@@ -161,11 +166,6 @@ export default mixins(
     },
   },
 
-  created () {
-    if (this.outline) deprecate('outline', 'outlined', this)
-    if (this.selected) deprecate('selected', 'value', this)
-  },
-
   render (h): VNode {
     const children = [this.genContent()]
     let { tag, data } = this.generateRouteLink()
@@ -175,9 +175,13 @@ export default mixins(
       draggable: this.draggable ? 'true' : undefined,
       tabindex: this.chipGroup && !this.disabled ? 0 : data.attrs!.tabindex,
     }
+    data.directives!.push({
+      name: 'show',
+      value: this.active,
+    })
     data = this.setBackgroundColor(this.color, data)
 
-    const color = this.textColor || (this.hasOutline && this.color)
+    const color = this.textColor || (this.outlined && this.color)
 
     return h(tag, this.setTextColor(color, data), children)
   },

@@ -1,14 +1,14 @@
-const shell = require('shelljs')
+const spawn = require('cross-spawn')
 
 let target = process.argv[2]
 const alias = {
   docs: 'vuetifyjs.com',
-  kitchen: '@vuetify/kitchen'
+  kitchen: '@vuetify/kitchen',
 }
 target = alias[target] || target
 
 if (!target) {
-  shell.exec('lerna run dev --scope vuetify --stream')
+  spawn('yarn', ['lerna', 'run', 'dev', '--scope', 'vuetify', '--stream'], { stdio: 'inherit' })
 } else {
-  shell.exec(`lerna run dev --scope ${target} --stream`)
+  spawn('yarn', ['lerna', 'run', 'dev', '--scope', target, '--stream'], { stdio: 'inherit' })
 }

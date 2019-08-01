@@ -1,15 +1,10 @@
 {
-  "header": "# Badge",
-  "headerText": "Компонент `v-badge` может обернуть любой тип контента, чтобы выделить информацию пользователю или просто привлечь внимание к определённому элементу.",
-  "components": ["v-badge"],
   "examples": {
-    "character": {
-      "header": "### Характеристика",
-      "desc": "Любой символ может быть помещён с иконкой."
-    },
     "overlap": {
-      "header": "### Перекрытие",
-      "desc": "Badge будет перекрывать его содержимое при использовании свойства `overlap`"
+      "header": "### Перекрытие"
+    },
+    "visibility": {
+      "header": "### Видимость"
     },
     "inline": {
       "header": "### В одну линию",
@@ -18,15 +13,6 @@
     "icon": {
       "header": "### Иконка",
       "desc": "Иконки поддерживаются только Material Design."
-    },
-    "visibility": {
-      "header": "### Видимость",
-      "desc": "Видимость значков можно контролировать с помощью `v-model`."
     }
-  },
-  "props": {
-    "bottom": "Mixins.Positionable.props.bottom",
-    "left": "Mixins.Positionable.props.left",
-    "transition": "Mixins.Transitionable.props.transition"
   }
 }

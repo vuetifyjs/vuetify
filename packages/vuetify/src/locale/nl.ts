@@ -21,9 +21,19 @@ export default {
     firstPage: 'Eerste pagina',
     lastPage: 'Laatste pagina',
   },
+  datePicker: {
+    itemsSelected: '{0} geselecteerd',
+  },
   noDataText: 'Geen gegevens beschikbaar',
   carousel: {
     prev: 'Vorige visual',
     next: 'Volgende visueel',
+  },
+  calendar: {
+    moreEvents: '{0} meer',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
   },
 }

@@ -21,9 +21,19 @@ export default {
     firstPage: 'Первая страница',
     lastPage: 'Последняя страница',
   },
+  datePicker: {
+    itemsSelected: '{0} выбран',
+  },
   noDataText: 'Отсутствуют данные',
   carousel: {
     prev: 'Предыдущий визуальный',
     next: 'Следующий визуальный',
+  },
+  calendar: {
+    moreEvents: 'Еще {0}',
+  },
+  fileInput: {
+    counter: 'Файлов: {0}',
+    counterSize: 'Файлов: {0} (всего {1})',
   },
 }

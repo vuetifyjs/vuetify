@@ -6,7 +6,7 @@
     <v-toolbar-title>Title</v-toolbar-title>
 
     <v-divider
-      class="mx-3"
+      class="mx-4"
       vertical
     ></v-divider>
 
@@ -14,7 +14,7 @@
 
     <v-spacer></v-spacer>
 
-    <v-toolbar-items>
+    <v-toolbar-items class="hidden-sm-and-down">
       <v-btn text>
         News
       </v-btn>

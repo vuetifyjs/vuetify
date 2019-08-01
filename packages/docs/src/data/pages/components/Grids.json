@@ -1,0 +1,69 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/layout/responsive-layout-grid.html"
+  },
+  "children": [
+    {
+      "type": "layout-grid"
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-container",
+            "v-layout",
+            "v-flex",
+            "v-spacer"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "playground",
+            "offset",
+            "order",
+            "direction-and-align",
+            "row-column-breakpoint",
+            "grow-shrink",
+            "nested-grid",
+            "unique-layouts",
+            "spacer",
+            "tags"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/grid-lists",
+            "customization/breakpoints",
+            "styles/display"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -23,10 +23,10 @@
     .v-btn__loading
       color: map-deep-get($material, 'buttons', 'disabled') !important
 
-    &:not(.v-btn--flat):not(.v-btn--outlined)
+    &:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined)
       background-color: map-deep-get($material, 'buttons', 'focused') !important
 
-  &:not(.v-btn--flat)
+  &:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined)
     background-color: map-get($material, 'app-bar')
 
   &.v-btn--outlined.v-btn--text
@@ -34,6 +34,8 @@
 
   &.v-btn--icon
     color: map-deep-get($material, 'icons', 'active')
+
+  +states($material)
 
 // Block
 .v-btn
@@ -49,6 +51,7 @@
   outline: 0
   position: relative
   text-decoration: none
+  text-indent: $btn-letter-spacing
   text-transform: uppercase
   transition-duration: $btn-transition-duration
   transition-property: box-shadow, transform, opacity
@@ -56,11 +59,6 @@
   user-select: none
   vertical-align: middle
   white-space: nowrap
-
-  &:hover,
-  &:focus
-    &:before
-      opacity: 0.2
 
   &:before
     border-radius: inherit
@@ -86,30 +84,33 @@
       &.v-size--#{$name}
         height: #{$size}px
         min-width: #{round($size * 1.777777777777778)}px // default ratio
-        padding: 0 #{$size / 2}px
+        padding: 0 #{$size / 2.25}px
 
   +rtl()
     .v-icon--left
       margin-left: 8px
-      margin-right: -6px
+      margin-right: -4px
 
     .v-icon--right
-      margin-left: -6px
+      margin-left: -4px
       margin-right: 8px
+
+  > .v-btn__content .v-icon
+    color: inherit
 
 // Elements
 .v-btn__content
   align-items: center
   color: inherit
   display: flex
-  justify-content: center
+  // https://github.com/vuetifyjs/vuetify/issues/7580
+  flex: 1 0 auto
+  justify-content: inherit
+  line-height: normal
   // Fixes bug where IE11 moves
   // button content when clicked
   // https://stackoverflow.com/questions/10305658/prevent-button-from-shifting-during-click-in-ie
   position: relative
-
-  .v-icon
-    color: inherit
 
   .v-icon--left,
   .v-icon--right
@@ -118,12 +119,12 @@
     width: $btn-icon-font-size
 
   .v-icon--left
-    margin-left: -6px
+    margin-left: -4px
     margin-right: 8px
 
   .v-icon--right
     margin-left: 8px
-    margin-right: -6px
+    margin-right: -4px
 
 .v-btn__loader
   align-items: center
@@ -136,15 +137,31 @@
   width: 100%
 
 // Modifiers
-.v-btn--active
-  .v-icon
-    color: inherit
+.v-btn:not(.v-btn--text):not(.v-btn--outlined)
+  &.v-btn--active:before
+    opacity: $btn-active-opacity
 
-  &:before
-    opacity: 0.12
+  &:hover:before
+    opacity: $btn-hover-opacity
 
-.v-btn--absolute
+  &:focus:before
+    opacity: $btn-focus-opacity
+
+.v-btn--absolute,
+.v-btn--fixed
   position: absolute
+
+  &.v-btn--right
+    right: map-get($grid-gutters, 'lg')
+
+  &.v-btn--left
+    left: map-get($grid-gutters, 'lg')
+
+  &.v-btn--top
+    top: map-get($grid-gutters, 'lg')
+
+  &.v-btn--bottom
+    bottom: map-get($grid-gutters, 'lg')
 
 .v-btn--block
   display: flex
@@ -186,7 +203,14 @@
   &.v-btn--absolute
     z-index: 4
 
-  @each $name, $size in $btn-sizes
+  @each $name, $size in $fab-icon-sizes
+    &.v-size--#{$name}
+      .v-icon
+        height: #{$size}px
+        font-size: #{$size}px
+        width: #{$size}px
+
+  @each $name, $size in $fab-sizes
     &.v-size--#{$name}
       height: #{$size}px
       width: #{$size}px
@@ -197,19 +221,6 @@
 
         &.v-btn--top
           top: -#{$size / 2}px
-
-      &.v-btn--fixed
-        &.v-btn--top
-          top: map-get($grid-gutters, 'lg')
-        &.v-btn--bottom
-          bottom: map-get($grid-gutters, 'lg')
-
-      &.v-btn--absolute,
-      &.v-btn--fixed
-        &.v-btn--left
-          left: map-get($grid-gutters, 'lg')
-        &.v-btn--right
-          right: map-get($grid-gutters, 'lg')
 
 .v-btn--fixed
   position: fixed
@@ -236,7 +247,7 @@
 .v-btn--outlined,
 .v-btn--flat,
 .v-btn--text
-  background-color: transparent !important
+  background-color: transparent
 
 .v-btn--round,
 .v-btn--rounded
@@ -248,3 +259,6 @@
 
 .v-btn--rounded
   border-radius: $btn-rounded-border-radius
+
+.v-btn--tile
+  border-radius: 0

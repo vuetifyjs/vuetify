@@ -68,14 +68,14 @@ describe('VSelect.ts', () => {
   })
 
   it('should disable v-list-item', async () => {
+    const selectItem = jest.fn()
     const wrapper = mountFunction({
       propsData: {
+        eager: true,
         items: [{ text: 'foo', disabled: true, id: 0 }],
       },
+      methods: { selectItem },
     })
-
-    const selectItem = jest.fn()
-    wrapper.setMethods({ selectItem })
 
     const el = wrapper.find('.v-list-item')
 
@@ -345,14 +345,14 @@ describe('VSelect.ts', () => {
 
     expect(wrapper.vm.isMenuActive).toBe(false)
 
-    wrapper.setProps({ box: true })
+    wrapper.setProps({ filled: true })
     wrapper.vm.hasMouseDown = true
     wrapper.find('.v-input__slot').trigger('mouseup')
 
     expect(wrapper.vm.isMenuActive).toBe(true)
 
     wrapper.setData({ isMenuActive: false })
-    wrapper.setProps({ box: false, solo: true })
+    wrapper.setProps({ filled: false, solo: true })
     wrapper.vm.hasMouseDown = true
     wrapper.find('.v-input__slot').trigger('mouseup')
 

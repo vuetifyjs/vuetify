@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VColorPicker.ts should change canvas height 1`] = `
-
 <div class="v-color-picker v-sheet theme--light theme--light"
      style="max-width: 300px;"
 >
@@ -29,6 +28,7 @@ exports[`VColorPicker.ts should change canvas height 1`] = `
             <div class="v-input__slot">
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="0"
+                       id="input-15"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -64,6 +64,7 @@ exports[`VColorPicker.ts should change canvas height 1`] = `
             <div class="v-input__slot">
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="1"
+                       id="input-16"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -142,7 +143,7 @@ exports[`VColorPicker.ts should change canvas height 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.unfold
           </i>
@@ -151,11 +152,9 @@ exports[`VColorPicker.ts should change canvas height 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VColorPicker.ts should hide canvas 1`] = `
-
 <div class="v-color-picker v-sheet theme--light theme--light"
      style="max-width: 300px;"
 >
@@ -171,6 +170,7 @@ exports[`VColorPicker.ts should hide canvas 1`] = `
             <div class="v-input__slot">
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="0"
+                       id="input-35"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -206,6 +206,7 @@ exports[`VColorPicker.ts should hide canvas 1`] = `
             <div class="v-input__slot">
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="1"
+                       id="input-36"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -284,7 +285,7 @@ exports[`VColorPicker.ts should hide canvas 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.unfold
           </i>
@@ -293,11 +294,9 @@ exports[`VColorPicker.ts should hide canvas 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VColorPicker.ts should hide inputs 1`] = `
-
 <div class="v-color-picker v-sheet theme--light theme--light"
      style="max-width: 300px;"
 >
@@ -325,6 +324,7 @@ exports[`VColorPicker.ts should hide inputs 1`] = `
             <div class="v-input__slot">
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="0"
+                       id="input-45"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -360,6 +360,7 @@ exports[`VColorPicker.ts should hide inputs 1`] = `
             <div class="v-input__slot">
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="1"
+                       id="input-46"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -394,11 +395,9 @@ exports[`VColorPicker.ts should hide inputs 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VColorPicker.ts should render color picker 1`] = `
-
 <div class="v-color-picker v-sheet theme--light theme--light"
      style="max-width: 300px;"
 >
@@ -426,6 +425,7 @@ exports[`VColorPicker.ts should render color picker 1`] = `
             <div class="v-input__slot">
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="0"
+                       id="input-5"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -461,6 +461,7 @@ exports[`VColorPicker.ts should render color picker 1`] = `
             <div class="v-input__slot">
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="1"
+                       id="input-6"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -539,7 +540,7 @@ exports[`VColorPicker.ts should render color picker 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.unfold
           </i>
@@ -548,11 +549,9 @@ exports[`VColorPicker.ts should render color picker 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VColorPicker.ts should show swatches 1`] = `
-
 <div class="v-color-picker v-sheet theme--light theme--light"
      style="max-width: 300px;"
 >
@@ -580,6 +579,7 @@ exports[`VColorPicker.ts should show swatches 1`] = `
             <div class="v-input__slot">
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="0"
+                       id="input-25"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -615,6 +615,7 @@ exports[`VColorPicker.ts should show swatches 1`] = `
             <div class="v-input__slot">
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="1"
+                       id="input-26"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -693,7 +694,7 @@ exports[`VColorPicker.ts should show swatches 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.unfold
           </i>
@@ -1520,5 +1521,4 @@ exports[`VColorPicker.ts should show swatches 1`] = `
     </div>
   </div>
 </div>
-
 `;

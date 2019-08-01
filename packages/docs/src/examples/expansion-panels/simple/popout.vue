@@ -1,5 +1,5 @@
 <template>
-  <v-layout row justify-center>
+  <v-layout justify-center>
     <v-expansion-panels popout>
       <v-expansion-panel
         v-for="(item,i) in 5"

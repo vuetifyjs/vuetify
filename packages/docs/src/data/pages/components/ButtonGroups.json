@@ -21,7 +21,10 @@
       "children": [
         {
           "type": "api",
-          "value": ["v-btn-toggle"]
+          "value": [
+            "v-btn-toggle",
+            "v-btn"
+          ]
         }
       ]
     },
@@ -34,7 +37,7 @@
             "simple/rounded",
             "simple/mandatory",
             "simple/multiple",
-            "intermediate/appBar",
+            "intermediate/app-bar",
             "intermediate/qwerty"
           ]
         }

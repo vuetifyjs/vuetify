@@ -47,10 +47,10 @@ describe('VInput.ts', () => {
       render: h => h('div', slot),
     })
     const wrapper = mountFunction({
-      slots: { 'append': [el('append')] },
+      slots: { append: [el('append')] },
     })
     const wrapper2 = mountFunction({
-      slots: { 'prepend': [el('prepend')] },
+      slots: { prepend: [el('prepend')] },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -231,5 +231,16 @@ describe('VInput.ts', () => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should not apply attrs to element', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        foo: 'bar',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.attributes()).not.toHaveProperty('foobar')
   })
 })

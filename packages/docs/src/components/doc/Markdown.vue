@@ -74,8 +74,9 @@
 </script>
 
 <style lang="sass">
-h4.markdown > p
-  margin-bottom: 0
+.markdown:last-child p,
+.markdown:last-child
+  margin-bottom: 0 !important
 
 .markdown--link
   text-decoration: none
@@ -87,4 +88,7 @@ h4.markdown > p
     font-size: 14px
     margin-left: 4px
     vertical-align: baseline
+
+.markdown > h4
+  margin: 8px 0
 </style>

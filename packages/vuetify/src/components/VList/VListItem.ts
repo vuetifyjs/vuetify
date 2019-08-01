@@ -14,12 +14,12 @@ import Ripple from '../../directives/ripple'
 // Utilities
 import { keyCodes } from './../../util/helpers'
 import { ExtractVue } from './../../util/mixins'
+import { removed } from '../../util/console'
 
 // Types
 import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import { removed } from '../../util/console'
 
 const baseMixins = mixins(
   Colorable,
@@ -31,6 +31,10 @@ const baseMixins = mixins(
 
 interface options extends ExtractVue<typeof baseMixins> {
   $el: HTMLElement
+  isInGroup: boolean
+  isInList: boolean
+  isInMenu: boolean
+  isInNav: boolean
 }
 
 /* @vue/component */
@@ -42,6 +46,21 @@ export default baseMixins.extend<options>().extend({
   },
 
   inheritAttrs: false,
+
+  inject: {
+    isInGroup: {
+      default: false,
+    },
+    isInList: {
+      default: false,
+    },
+    isInMenu: {
+      default: false,
+    },
+    isInNav: {
+      default: false,
+    },
+  },
 
   props: {
     activeClass: {
@@ -91,7 +110,7 @@ export default baseMixins.extend<options>().extend({
 
   created () {
     /* istanbul ignore next */
-    if ('avatar' in this.$attrs) {
+    if (this.$attrs.hasOwnProperty('avatar')) {
       removed('avatar', this)
     }
   },
@@ -104,6 +123,28 @@ export default baseMixins.extend<options>().extend({
 
       this.to || this.toggle()
     },
+    genAttrs () {
+      const attrs: Record<string, any> = {
+        'aria-disabled': this.disabled ? true : undefined,
+        tabindex: this.isClickable && !this.disabled ? 0 : -1,
+        ...this.$attrs,
+      }
+
+      if (this.$attrs.hasOwnProperty('role')) {
+        // do nothing, role already provided
+      } else if (this.isInNav) {
+        // do nothing, role is inherit
+      } else if (this.isInGroup) {
+        attrs.role = 'listitem'
+        attrs['aria-selected'] = String(this.isActive)
+      } else if (this.isInMenu) {
+        attrs.role = this.isClickable ? 'menuitem' : undefined
+      } else if (this.isInList && !this.isLink) {
+        attrs.role = 'listitem'
+      }
+
+      return attrs
+    },
   },
 
   render (h): VNode {
@@ -111,9 +152,7 @@ export default baseMixins.extend<options>().extend({
 
     data.attrs = {
       ...data.attrs,
-      'aria-selected': String(this.isActive),
-      role: 'listitem',
-      tabindex: tag === 'a' && this.isClickable ? 0 : -1,
+      ...this.genAttrs(),
     }
     data.on = {
       ...data.on,

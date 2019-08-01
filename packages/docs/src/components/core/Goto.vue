@@ -1,7 +1,7 @@
 <template>
   <a
     :class="classes"
-    :href="`#${id}`"
+    :href="`#${internalId}`"
     class="mr-2 d-inline-flex core-goto text--primary"
     @click.prevent="onClick"
   >
@@ -23,10 +23,21 @@
 </template>
 
 <script>
+  // Utilities
+  import kebabCase from 'lodash/kebabCase'
+  import { mapMutations } from 'vuex'
+
   export default {
+    props: {
+      id: {
+        type: String,
+        default: '',
+      },
+    },
+
     data: () => ({
       hover: false,
-      id: '',
+      internalId: '',
       tag: null,
     }),
 
@@ -34,27 +45,36 @@
       classes () {
         return {
           [`tag-${this.tag}`]: true,
-          'mb-4': this.tag === 'H1',
-          'mb-3': this.tag === 'H2',
-          'mb-2': this.tag === 'H3',
+          'mb-2': ['H1', 'H2', 'H3'].includes(this.tag),
         }
       },
     },
 
     mounted () {
-      const goto = this.$el.querySelector('[id]')
+      const goto = this.$el.querySelector('.markdown')
+      // this link isn't resolving
 
       if (!goto) return
 
-      this.tag = goto.tagName
-      this.id = goto.id
+      const element = goto.firstChild
+
+      this.tag = element.tagName
+      this.internalId = this.id || kebabCase(element.innerText)
+
+      if (['H1', 'H2'].includes(this.tag)) {
+        this.pushToc({
+          id: this.internalId,
+          text: element.innerText,
+        })
+      }
     },
 
     methods: {
+      ...mapMutations('documentation', ['pushToc']),
       onClick (e) {
         e.stopPropagation()
 
-        this.$router.push(`#${this.id}`)
+        this.$router.push(`#${this.internalId}`)
       },
     },
   }

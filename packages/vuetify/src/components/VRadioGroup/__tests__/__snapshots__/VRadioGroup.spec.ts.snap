@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VRadioGroup.ts should match snapshot 1`] = `
-
 <div class="v-input theme--light v-input--selection-controls v-input--radio-group v-input--radio-group--column">
   <div class="v-input__control">
     <div class="v-input__slot"
          style="height: auto;"
     >
       <div role="radiogroup"
+           aria-labelledby="input-1"
            class="v-input--radio-group__input"
       >
       </div>
@@ -21,5 +21,4 @@ exports[`VRadioGroup.ts should match snapshot 1`] = `
     </div>
   </div>
 </div>
-
 `;

@@ -4,9 +4,9 @@ import Vue from 'vue'
 // Components
 import VSelect from '../VSelect'
 import {
-  VListTile,
-  VListTileTitle,
-  VListTileContent,
+  VListItem,
+  VListItemTitle,
+  VListItemContent,
 } from '../../VList'
 
 // Utilities
@@ -63,6 +63,7 @@ describe('VSelect.ts', () => {
   it('should disable list items', () => {
     const wrapper = mountFunction({
       propsData: {
+        eager: true,
         items: [{
           text: 'item',
           disabled: true,
@@ -72,7 +73,7 @@ describe('VSelect.ts', () => {
 
     const item = wrapper.find('.v-list-item--disabled')
 
-    expect(item.element.getAttribute('disabled')).toBe('disabled')
+    expect(item.element.tabIndex).toBe(-1)
   })
 
   it('should render v-select correctly when using v-list-item in item scope slot', async () => {
@@ -80,12 +81,12 @@ describe('VSelect.ts', () => {
 
     const vm = new Vue({
       components: {
-        VListTile,
+        VListItem,
       },
     })
-    const itemSlot = ({ item, tile }) => vm.$createElement('v-list-item', {
-      on: tile.on,
-      props: tile.props,
+    const itemSlot = ({ item, attrs, on }) => vm.$createElement('v-list-item', {
+      on,
+      ...attrs,
       class: item.value % 2 === 0 ? '' : 'red lighten-1',
     }, [
       item.text,
@@ -116,8 +117,8 @@ describe('VSelect.ts', () => {
 
     const vm = new Vue({
       components: {
-        VListTileTitle,
-        VListTileContent,
+        VListItemTitle,
+        VListItemContent,
       },
     })
     const itemSlot = ({ item }) => vm.$createElement('v-list-item-content', {
@@ -287,6 +288,7 @@ describe('VSelect.ts', () => {
   it('should escape items in menu', async () => {
     const wrapper = mountFunction({
       propsData: {
+        eager: true,
         items: ['<strong>foo</strong>'],
       },
     })
@@ -415,6 +417,7 @@ describe('VSelect.ts', () => {
   it('should use slotted no-data', () => {
     const wrapper = mountFunction({
       propsData: {
+        eager: true,
         items: ['foo'],
       },
       slots: {

@@ -18,9 +18,9 @@
     "../alacarte.d.ts",
     "../lib.d.ts",
     "alacarte.ts",
-    "plugin.ts",
     "global.ts",
-    "lib.ts"
+    "lib.ts",
+    "presets.ts"
   ],
   "compileOnSave": false
 }

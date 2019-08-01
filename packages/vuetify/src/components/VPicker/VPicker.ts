@@ -19,6 +19,7 @@ export default mixins(Colorable, Themeable).extend({
   props: {
     fullWidth: Boolean,
     landscape: Boolean,
+    noTitle: Boolean,
     transition: {
       type: String,
       default: 'fade-transition',
@@ -40,7 +41,7 @@ export default mixins(Colorable, Themeable).extend({
     genTitle () {
       return this.$createElement('div', this.setBackgroundColor(this.computedTitleColor, {
         staticClass: 'v-picker__title',
-        'class': {
+        class: {
           'v-picker__title--landscape': this.landscape,
         },
       }), this.$slots.title)
@@ -55,7 +56,10 @@ export default mixins(Colorable, Themeable).extend({
     genBody () {
       return this.$createElement('div', {
         staticClass: 'v-picker__body',
-        'class': this.themeClasses,
+        class: {
+          'v-picker__body--no-title': this.noTitle,
+          ...this.themeClasses,
+        },
         style: this.fullWidth ? undefined : {
           width: convertToUnit(this.width),
         },
@@ -66,6 +70,9 @@ export default mixins(Colorable, Themeable).extend({
     genActions () {
       return this.$createElement('div', {
         staticClass: 'v-picker__actions v-card__actions',
+        class: {
+          'v-picker__actions--no-title': this.noTitle,
+        },
       }, this.$slots.actions)
     },
   },
@@ -73,7 +80,7 @@ export default mixins(Colorable, Themeable).extend({
   render (h): VNode {
     return h('div', {
       staticClass: 'v-picker v-card',
-      'class': {
+      class: {
         'v-picker--landscape': this.landscape,
         'v-picker--full-width': this.fullWidth,
         ...this.themeClasses,

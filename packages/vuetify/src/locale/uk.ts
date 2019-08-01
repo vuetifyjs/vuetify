@@ -21,9 +21,19 @@ export default {
     firstPage: 'Перша сторінка',
     lastPage: 'Остання сторінка',
   },
+  datePicker: {
+    itemsSelected: '{0} вибрано',
+  },
   noDataText: 'Немає даних для відображення',
   carousel: {
     prev: 'Попередній візуальний',
     next: 'Наступний візуальнийa',
+  },
+  calendar: {
+    moreEvents: 'Ще {0}',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
   },
 }

@@ -21,9 +21,19 @@ export default {
     firstPage: 'Prva stran',
     lastPage: 'Zadnja stran',
   },
+  datePicker: {
+    itemsSelected: '{0} izbrano/-ih',
+  },
   noDataText: 'Ni podatkov',
   carousel: {
     prev: 'Prejšnji prikaz',
     next: 'Naslednji prikaz',
+  },
+  calendar: {
+    moreEvents: 'Še {0}',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
   },
 }

@@ -23,6 +23,7 @@
           "type": "api",
           "value": [
             "v-data-table",
+            "v-data-footer",
             "v-edit-dialog"
           ]
         }
@@ -34,23 +35,24 @@
         {
           "type": "examples",
           "value": [
-            "slots",
-            "select",
-            "expand",
-            "group",
-            "multiSort",
-            "search",
-            "customizeRows",
-            "customizeFooter",
-            "progress",
-            "footer",
-            "paginate",
-            "sort",
-            "server",
-            "headerless",
-            "editdialog",
-            "crud",
-            "virtualized"
+            "simple/select",
+            "simple/group",
+            "simple/multi-sort",
+            "simple/search",
+            "simple/headerless",
+            "simple/loading",
+            "simple/dense",
+            "simple/footer-props",
+            "intermediate/slots",
+            "intermediate/expand",
+            "intermediate/custom-filter",
+            "intermediate/customize-header",
+            "intermediate/customize-rows",
+            "intermediate/paginate",
+            "intermediate/sort",
+            "intermediate/server",
+            "complex/edit-dialog",
+            "complex/crud"
           ]
         }
       ]
@@ -62,7 +64,7 @@
           "type": "up-next",
           "value": [
             "components/data-iterator",
-            "components/paginations",
+            "components/simple-tables",
             "components/lists"
           ]
         }

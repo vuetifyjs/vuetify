@@ -21,9 +21,19 @@ export default {
     firstPage: 'Pàgina Primera',
     lastPage: 'Pàgina Darrera',
   },
+  datePicker: {
+    itemsSelected: '{0} seleccionats',
+  },
   noDataText: 'Sense dades',
   carousel: {
     prev: 'Visualització prèvia',
     next: 'Següent visual',
+  },
+  calendar: {
+    moreEvents: '{0} més',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
   },
 }

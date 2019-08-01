@@ -37,8 +37,6 @@
   "props": {
     "group": "Создаёт компонент `transition-group`. [Документация Vue](https://ru.vuejs.org/v2/api/#transition-group)",
     "hideOnLeave": "Скрывает исчезающий элемент (нет анимации исчезновения)",
-    "leaveAbsolute": "Абсолютное позиционирование для исчезающего элемента (полезно для [FLIP](https://aerotwist.com/blog/flip-your-animations/))",
-    "mode": "Mixins.Transitionable.props.mode",
-    "origin": "Mixins.Transitionable.props.origin"
+    "leaveAbsolute": "Абсолютное позиционирование для исчезающего элемента (полезно для [FLIP](https://aerotwist.com/blog/flip-your-animations/))"
   }
 }

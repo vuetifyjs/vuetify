@@ -29,9 +29,20 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "contextual"
+            "simple/multi-line",
+            "simple/timeout",
+            "simple/vertical"
           ]
         }
       ]
@@ -43,7 +54,7 @@
           "type": "up-next",
           "value": [
             "components/buttons",
-            "framework/colors",
+            "styles/colors",
             "components/forms"
           ]
         }

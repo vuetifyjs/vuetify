@@ -17,6 +17,12 @@
   .v-list-item__action-text
     color: map-deep-get($material, 'text', 'secondary')
 
+  +states($material)
+
+  &.v-list-item--highlighted
+    &::before
+      opacity: map-deep-get($material, 'states', 'pressed')
+
 // Block
 .v-list-item
   align-items: center
@@ -29,6 +35,9 @@
   position: relative
   text-decoration: none
   user-select: none
+
+  &--disabled
+    pointer-events: none
 
 // Element
 .v-list-item__action
@@ -90,20 +99,21 @@
   align-self: flex-start
   margin: 16px 0
 
+// https://github.com/vuetifyjs/vuetify/issues/7930
+.v-list-item__action,
+.v-list-item__avatar,
+.v-list-item__icon
+  &:last-of-type:not(:only-child)
+    margin-left: 16px
+
 .v-list-item__avatar
   &:first-child
     margin-right: 24px
-
-  &:last-child:not(:only-child)
-    margin-left: 16px
 
 .v-list-item__action,
 .v-list-item__icon
   &:first-child
     margin-right: 32px
-
-  &:last-of-type:not(:only-child)
-    margin-left: 16px
 
 .v-list-item__action,
 .v-list-item__avatar,
@@ -175,21 +185,9 @@
     top: 0
     transition: $primary-transition
 
-  &:hover,
-  &:focus
-    &:before
-      opacity: 0.2
-
 .v-list-item--active
   .v-icon
     color: inherit
-
-  &:before
-    opacity: 0.12
-
-.v-list-item--highlighted
-  &:before
-    opacity: .32
 
 .v-list-item__action--stack
   align-items: flex-end

@@ -21,9 +21,19 @@ export default {
     firstPage: 'Pirmā lapa',
     lastPage: 'Pēdējā lapa',
   },
+  datePicker: {
+    itemsSelected: '{0} izvēlēts',
+  },
   noDataText: 'Nav pieejamu datu',
   carousel: {
     prev: 'Iepriekšējais slaids',
     next: 'Nākamais slaids',
+  },
+  calendar: {
+    moreEvents: 'Vēl {0}',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
   },
 }

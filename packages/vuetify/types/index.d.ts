@@ -17,10 +17,12 @@ import { VuetifyGoToOptions } from './services/goto'
 import { VuetifyIconOptions } from './services/icons'
 import { VuetifyLangOptions } from './services/lang'
 import { VuetifyThemeOptions } from './services/theme'
+import { VuetifyPreset } from './presets'
 
 declare const Vuetify: Vuetify
 export default Vuetify
 export interface Vuetify {
+  new (preset?: Partial<VuetifyPreset>): Vuetify;
   install: PluginFunction<VuetifyUseOptions>
   version: string
 }
@@ -33,17 +35,6 @@ export interface VuetifyUseOptions {
   transitions?: Record<string, VueConstructor>
   directives?: Record<string, DirectiveOptions>
   components?: Record<string, ComponentOrPack>
-  /** @see https://vuetifyjs.com/style/theme */
-  theme?: Partial<VuetifyThemeOptions> | false
-  breakpoint?: Partial<VuetifyBreakpointOptions> | false
-  /**
-   * Override specific icon names. You can also specify your own custom ones that can then be accessed from v-icon
-   *
-   * @example &lt;v-icon&gt;$vuetify.icons.(name)&lt;/v-icon&gt;
-   */
-  icons?: Partial<VuetifyIconOptions>
-  lang?: Partial<VuetifyLangOptions>
-  rtl?: boolean
 }
 
 export interface VuetifyObject extends Vue {

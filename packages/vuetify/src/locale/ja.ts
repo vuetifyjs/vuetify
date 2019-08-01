@@ -21,9 +21,19 @@ export default {
     firstPage: '一ページ目',
     lastPage: '最後のページ',
   },
+  datePicker: {
+    itemsSelected: '{0}日付選択',
+  },
   noDataText: 'データはありません。',
   carousel: {
     prev: '前のビジュアル',
     next: '次のビジュアル',
+  },
+  calendar: {
+    moreEvents: 'さらに{0}',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
   },
 }

@@ -62,13 +62,19 @@
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/framework/a-la-carte</loc>
+       <loc>https://vuetifyjs.com/en/customization/a-la-carte</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/framework/icons</loc>
+       <loc>https://vuetifyjs.com/en/customization/accessibility</loc>
+       <lastmod>2019-01-07</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://vuetifyjs.com/en/customization/icons</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
@@ -80,7 +86,7 @@
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/framework/pre-made-layouts</loc>
+       <loc>https://vuetifyjs.com/en/getting-started/pre-made-layouts</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
@@ -92,31 +98,49 @@
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/framework/grid</loc>
+       <loc>https://vuetifyjs.com/en/components/grids</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/framework/grid-lists</loc>
+       <loc>https://vuetifyjs.com/en/components/grid-lists</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/framework/breakpoints</loc>
+       <loc>https://vuetifyjs.com/en/customization/breakpoints</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/framework/aspect-ratios</loc>
+       <loc>https://vuetifyjs.com/en/customization/i18n</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/framework/spacing</loc>
+       <loc>https://vuetifyjs.com/en/customization/rtl</loc>
+       <lastmod>2019-01-07</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://vuetifyjs.com/en/customization/sass-variables</loc>
+       <lastmod>2019-01-07</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://vuetifyjs.com/en/components/aspect-ratios</loc>
+       <lastmod>2019-01-07</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://vuetifyjs.com/en/styles/spacing</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
@@ -128,13 +152,13 @@
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/framework/display</loc>
+       <loc>https://vuetifyjs.com/en/styles/display</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/framework/elevation</loc>
+       <loc>https://vuetifyjs.com/en/styles/elevation</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
@@ -146,37 +170,37 @@
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/framework/colors</loc>
+       <loc>https://vuetifyjs.com/en/styles/colors</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/framework/theme</loc>
+       <loc>https://vuetifyjs.com/en/customization/theme</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/framework/typography</loc>
+       <loc>https://vuetifyjs.com/en/styles/typography</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/framework/content</loc>
+       <loc>https://vuetifyjs.com/en/styles/content</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/framework/scroll</loc>
+       <loc>https://vuetifyjs.com/en/styles/scroll</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/framework/transitions</loc>
+       <loc>https://vuetifyjs.com/en/styles/transitions</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
@@ -225,6 +249,12 @@
   </url>
   <url>
        <loc>https://vuetifyjs.com/en/components/alerts</loc>
+       <lastmod>2019-01-07</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://vuetifyjs.com/en/components/application</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>

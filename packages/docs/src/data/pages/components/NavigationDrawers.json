@@ -8,6 +8,16 @@
   },
   "children": [
     {
+      "type":"section",
+      "children": [
+        {
+          "type": "alert",
+          "lang": "alert",
+          "value": "error"
+        }
+      ]
+    },
+    {
       "type": "section",
       "children": [
         {
@@ -29,20 +39,26 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "colored",
-            "permanentFloating",
-            "persistent",
-            "mini",
-            "temporary",
-            "dark",
-            "combined",
-            "nested",
-            "right",
-            "background",
-            "bottom-drawer",
-            "expand-on-hover"
+            "simple/colored",
+            "simple/permanent-floating",
+            "simple/mini",
+            "simple/temporary",
+            "simple/right",
+            "simple/expand-on-hover",
+            "intermediate/background",
+            "intermediate/combined",
+            "complex/bottom-drawer"
           ]
         }
       ]
@@ -55,7 +71,7 @@
           "value": [
             "components/lists",
             "components/icons",
-            "framework/pre-made-layouts"
+            "getting-started/pre-made-layouts"
           ]
         }
       ]

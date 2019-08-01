@@ -31,8 +31,8 @@
         {
           "type": "examples",
           "value": [
-            "simple/containCover",
-            "simple/maxHeight",
+            "simple/contain-cover",
+            "simple/max-height",
             "simple/ratio",
             "simple/placeholder",
             "intermediate/gradients",
@@ -47,8 +47,8 @@
         {
           "type": "up-next",
           "value": [
-            "framework/grid-lists",
-            "framework/aspect-ratios",
+            "components/grid-lists",
+            "components/aspect-ratios",
             "components/parallax"
           ]
         }

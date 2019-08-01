@@ -61,7 +61,7 @@ export default Vue.extend({
     if (props.indeterminate) icon = props.indeterminateIcon
     else if (props.value) icon = props.onIcon
 
-    children.push(h(VIcon, Colorable.options.methods.setTextColor(props.color, {
+    children.push(h(VIcon, Colorable.options.methods.setTextColor(props.value && props.color, {
       props: {
         disabled: props.disabled,
         dark: props.dark,
@@ -78,7 +78,9 @@ export default Vue.extend({
       ...data,
       class: classes,
       on: {
-        click: () => {
+        click: (e: MouseEvent) => {
+          e.stopPropagation()
+
           if (data.on && data.on.input && !props.disabled) {
             wrapInArray(data.on.input).forEach(f => f(!props.value))
           }

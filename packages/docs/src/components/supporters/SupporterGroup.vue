@@ -5,8 +5,10 @@
     wrap
   >
     <v-flex
+      v-if="title"
       font-weight-medium
       grey--text
+      text--darken-3
       tag="h4"
       xs12
       v-text="title"
@@ -14,7 +16,7 @@
 
     <template v-for="(item, i) in group">
       <v-flex
-        v-if="i % 4 === 0"
+        v-if="i % 4 === 0 && group.length > 1"
         :key="`divider-${i}`"
         xs12
       />
@@ -24,8 +26,9 @@
         d-flex
         shrink
       >
-        <patron
+        <supporters-sponsor
           :value="item"
+          :x-large="$attrs['x-large']"
           :large="$attrs.large"
           :small="$attrs.small"
         />
@@ -36,10 +39,6 @@
 
 <script>
   export default {
-    components: {
-      Patron: () => import('@/components/supporters/Patron'),
-    },
-
     props: {
       group: {
         type: Array,

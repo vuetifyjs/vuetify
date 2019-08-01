@@ -26,7 +26,15 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
         ...options,
         mocks: {
           $vuetify: {
-            lang: new Lang(),
+            lang: new Lang({
+              locales: {
+                en: {
+                  datePicker: {
+                    itemsSelected: 'i has {0} items',
+                  },
+                },
+              },
+            }),
           },
         },
       })
@@ -190,6 +198,27 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     expect(cb.mock.calls[0][0]).toEqual(
       expect.arrayContaining(['2013-05-07', '2013-05-08', '2013-05-05'])
     )
+  })
+
+  it('should display translated title', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        multiple: true,
+        value: ['2013-05-07'],
+      },
+    })
+
+    expect(wrapper.find('.v-date-picker-title__date').text()).toBe('Tue, May 7')
+
+    wrapper.setProps({
+      value: [],
+    })
+    expect(wrapper.find('.v-date-picker-title__date').text()).toBe('-')
+
+    wrapper.setProps({
+      value: ['2013-05-07', '2013-05-08', '2013-05-09'],
+    })
+    expect(wrapper.find('.v-date-picker-title__date').text()).toBe('i has 3 items')
   })
 
   it('should emit input without unselected dates after click', async () => {
@@ -475,7 +504,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     expect(icons[1].element.textContent).toBe('check')
   })
 
-  it('should emit update:pickerDate event when tableDate changes', async () => {
+  it('should emit update:picker-date event when tableDate changes', async () => {
     const wrapper = mountFunction({
       propsData: {
         value: '2017-09',
@@ -483,7 +512,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     })
 
     const pickerDate = jest.fn()
-    wrapper.vm.$on('update:pickerDate', pickerDate)
+    wrapper.vm.$on('update:picker-date', pickerDate)
     wrapper.vm.tableDate = '2013-11'
     await wrapper.vm.$nextTick()
     expect(pickerDate).toHaveBeenCalledWith('2013-11')
@@ -509,7 +538,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     })
 
     const update = jest.fn()
-    wrapper.vm.$on('update:pickerDate', update)
+    wrapper.vm.$on('update:picker-date', update)
     await wrapper.vm.$nextTick()
 
     wrapper.setProps({

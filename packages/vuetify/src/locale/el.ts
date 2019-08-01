@@ -21,9 +21,19 @@ export default {
     firstPage: 'Πρώτη σελίδα',
     lastPage: 'Τελευταία σελίδα',
   },
+  datePicker: {
+    itemsSelected: '{0} επιλεγμένα',
+  },
   noDataText: 'Χωρίς δεδομένα',
   carousel: {
     prev: 'הקודם חזותי',
     next: 'הבא חזותי',
+  },
+  calendar: {
+    moreEvents: '{0} ακόμη',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
   },
 }

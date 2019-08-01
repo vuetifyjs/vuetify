@@ -21,9 +21,19 @@ export default {
     firstPage: 'Esimene lehekülg',
     lastPage: 'Viimane lehekülg',
   },
+  datePicker: {
+    itemsSelected: '{0} valitud',
+  },
   noDataText: 'Andmed puuduvad',
   carousel: {
     prev: 'Eelmine visuaalne',
     next: 'Järgmine visuaalne',
+  },
+  calendar: {
+    moreEvents: '{0} veel',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
   },
 }

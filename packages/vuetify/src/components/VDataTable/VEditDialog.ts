@@ -74,7 +74,7 @@ export default mixins(Returnable, Themeable).extend({
     },
     genActions (): VNode {
       return this.$createElement('div', {
-        'class': 'v-small-dialog__actions',
+        class: 'v-small-dialog__actions',
       }, [
         this.genButton(this.cancel, this.cancelText),
         this.genButton(() => {

@@ -187,9 +187,9 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
   render (h): VNode {
     const tooltip = h('div', this.setBackgroundColor(this.color, {
       staticClass: 'v-tooltip__content',
-      'class': {
+      class: {
         [this.contentClass]: true,
-        'menuable__content__active': this.isActive,
+        menuable__content__active: this.isActive,
         'v-tooltip__content--fixed': this.activatorFixed,
       },
       style: this.styles,
@@ -203,7 +203,7 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
 
     return h(this.tag, {
       staticClass: 'v-tooltip',
-      'class': this.classes,
+      class: this.classes,
     }, [
       h('transition', {
         props: {

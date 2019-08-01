@@ -1,17 +1,14 @@
 module.exports = {
   'v-menu': {
-    slots: ['activator', 'default'],
-    scopedSlots: [{
-      name: 'activator',
-      props: {
-        on: '{ [eventName]: eventHandler }',
-        value: 'boolean'
-      }
-    }, {
-      name: 'default',
-      props: {
-        value: 'boolean'
-      }
-    }]
-  }
+    slots: [
+      {
+        name: 'activator',
+        props: {
+          attrs: '{ role: string, aria-haspopup: boolean, aria-expanded: string }',
+          on: '{ [eventName]: eventHandler }',
+          value: 'boolean',
+        },
+      },
+    ],
+  },
 }

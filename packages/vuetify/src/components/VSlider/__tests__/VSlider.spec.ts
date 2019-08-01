@@ -248,7 +248,7 @@ describe('VSlider.ts', () => {
 
     const label2 = wrapper2.find('.v-label')
 
-    expect(label2.element.getAttribute('for')).toBeNull()
+    expect(label2.element.getAttribute('for')).toBe(`input-${(wrapper2.vm as any)._uid}`)
   })
 
   it('should deactivate', async () => {

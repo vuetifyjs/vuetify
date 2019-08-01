@@ -21,9 +21,19 @@ export default {
     firstPage: 'صفحه‌ی اول',
     lastPage: 'صفحه‌ی آخر',
   },
+  datePicker: {
+    itemsSelected: '{0} انتخاب شده است',
+  },
   noDataText: 'اطلاعاتی یافت نشد',
   carousel: {
     prev: 'اسلاید قبلی',
     next: 'اسلاید بعدی',
+  },
+  calendar: {
+    moreEvents: '{بیشتر {0',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
   },
 }

@@ -449,7 +449,7 @@
           </div>
         </v-alert>
 
-        <div class="text-xs-center">
+        <div class="text-center">
           <v-btn
             v-if="!alertClosable"
             color="primary"
@@ -481,9 +481,9 @@
       <!-- CSS Transitions -->
       <core-title>Custom transitions</core-title>
       <core-section>
-        <div class="text-xs-center">
+        <div class="text-center">
           <v-btn
-            class="mb-3"
+            class="mb-4"
             color="primary"
             @click="alertTransition = !alertTransition"
           >
@@ -509,7 +509,7 @@
         >
           <template #prepend>
             <v-avatar
-              class="pa-2 mr-3"
+              class="pa-2 mr-4"
               color="white"
               size="64"
             >
@@ -533,7 +533,7 @@
             </v-btn>
           </template>
         </v-alert>
-        <div class="text-xs-center">
+        <div class="text-center">
           <v-btn
             v-if="!alertTransition2"
             color="primary"
@@ -583,7 +583,7 @@
         >
           This is a closable error outline alert.
         </v-alert>
-        <div class="text-xs-center">
+        <div class="text-center">
           <v-btn
             v-if="!alertOutline"
             color="primary"

@@ -46,7 +46,7 @@ describe('VApp.ts', () => {
       },
     })
 
-    const app = wrapper.find('.application')
+    const app = wrapper.find('.v-application')
     expect(app.attributes()['data-app']).toBe('true')
   })
 
@@ -64,7 +64,7 @@ describe('VApp.ts', () => {
         },
       },
     })
-    const app = wrapper.find('.application')
+    const app = wrapper.find('.v-application')
     expect(app.attributes().id).toBe('inspire')
 
     expect(wrapper.html()).toMatchSnapshot()

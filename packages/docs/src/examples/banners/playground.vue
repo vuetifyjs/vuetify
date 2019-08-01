@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-layout
-      row
       wrap
       justify-space-around
     >
@@ -45,7 +44,7 @@
     </v-layout>
 
     <v-sheet
-      class="scroll-y"
+      class="overflow-y-auto"
       max-height="600"
     >
       <v-container style="height: 1500px;">
@@ -61,7 +60,7 @@
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis magnam necessitatibus possimus sapiente laboriosam ducimus atque maxime quibusdam, facilis velit assumenda, quod nisi aliquid corrupti maiores doloribus soluta optio blanditiis.
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis magnam necessitatibus possimus sapiente laboriosam ducimus atque maxime quibusdam, facilis velit assumenda, quod nisi aliquid corrupti maiores doloribus soluta optio blanditiis.
 
-          <template #actions>
+          <template v-slot:actions>
             <v-btn
               text
               color="deep-purple accent-4"
@@ -84,8 +83,8 @@
       color: undefined,
       iconColor: undefined,
       elevation: 4,
-      colors: [ 'red', 'blue', 'teal lighten-2', 'warning lighten-1', 'orange' ],
-      icons: [ 'mdi-access-point-network', 'mdi-plus', 'mdi-minus', 'mdi-network-strength-2-alert', 'mdi-earth' ],
+      colors: ['red', 'blue', 'teal lighten-2', 'warning lighten-1', 'orange'],
+      icons: ['mdi-access-point-network', 'mdi-plus', 'mdi-minus', 'mdi-network-strength-2-alert', 'mdi-earth'],
     }),
   }
 </script>

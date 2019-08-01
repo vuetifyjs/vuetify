@@ -1,17 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VDataIterator.ts should hide footer 1`] = `
-
 <div class="v-data-iterator">
   <div>
     No data available
   </div>
 </div>
-
 `;
 
 exports[`VDataIterator.ts should render and match snapshot 1`] = `
-
 <div class="v-data-iterator">
   <div>
     No data available
@@ -19,33 +16,40 @@ exports[`VDataIterator.ts should render and match snapshot 1`] = `
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Items per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="list-4"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
                 <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                       autocomplete="on"
+                       id="input-4"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon mdi mdi-menu-down theme--light"
+                     class="v-icon notranslate mdi mdi-menu-down theme--light"
                   >
                   </i>
                 </div>
               </div>
             </div>
             <div class="v-menu">
+              <div class="v-menu__content theme--light "
+                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+              >
+              </div>
             </div>
           </div>
         </div>
@@ -55,28 +59,28 @@ exports[`VDataIterator.ts should render and match snapshot 1`] = `
       –
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon mdi mdi-chevron-left theme--light"
+             class="v-icon notranslate mdi mdi-chevron-left theme--light"
           >
           </i>
         </span>
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon mdi mdi-chevron-right theme--light"
+             class="v-icon notranslate mdi mdi-chevron-right theme--light"
           >
           </i>
         </span>
@@ -84,11 +88,9 @@ exports[`VDataIterator.ts should render and match snapshot 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
-
 <div class="v-data-iterator">
   <div>
     foo
@@ -105,33 +107,40 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Items per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="list-18"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
                 <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                       autocomplete="on"
+                       id="input-18"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon mdi mdi-menu-down theme--light"
+                     class="v-icon notranslate mdi mdi-menu-down theme--light"
                   >
                   </i>
                 </div>
               </div>
             </div>
             <div class="v-menu">
+              <div class="v-menu__content theme--light "
+                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+              >
+              </div>
             </div>
           </div>
         </div>
@@ -141,28 +150,28 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
       1-4 of 4
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon mdi mdi-chevron-left theme--light"
+             class="v-icon notranslate mdi mdi-chevron-left theme--light"
           >
           </i>
         </span>
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon mdi mdi-chevron-right theme--light"
+             class="v-icon notranslate mdi mdi-chevron-right theme--light"
           >
           </i>
         </span>
@@ -170,11 +179,9 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataIterator.ts should render valid no-data, loading and no-results states 1`] = `
-
 <div class="v-data-iterator">
   <div>
     No data available
@@ -182,33 +189,40 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Items per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="list-31"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
                 <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                       autocomplete="on"
+                       id="input-31"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon mdi mdi-menu-down theme--light"
+                     class="v-icon notranslate mdi mdi-menu-down theme--light"
                   >
                   </i>
                 </div>
               </div>
             </div>
             <div class="v-menu">
+              <div class="v-menu__content theme--light "
+                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+              >
+              </div>
             </div>
           </div>
         </div>
@@ -218,28 +232,28 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
       –
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon mdi mdi-chevron-left theme--light"
+             class="v-icon notranslate mdi mdi-chevron-left theme--light"
           >
           </i>
         </span>
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon mdi mdi-chevron-right theme--light"
+             class="v-icon notranslate mdi mdi-chevron-right theme--light"
           >
           </i>
         </span>
@@ -247,11 +261,9 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataIterator.ts should render valid no-data, loading and no-results states 2`] = `
-
 <div class="v-data-iterator">
   <div>
     Loading items...
@@ -259,33 +271,40 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Items per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="list-31"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
                 <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                       autocomplete="on"
+                       id="input-31"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon mdi mdi-menu-down theme--light"
+                     class="v-icon notranslate mdi mdi-menu-down theme--light"
                   >
                   </i>
                 </div>
               </div>
             </div>
             <div class="v-menu">
+              <div class="v-menu__content theme--light "
+                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+              >
+              </div>
             </div>
           </div>
         </div>
@@ -295,28 +314,28 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
       –
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon mdi mdi-chevron-left theme--light"
+             class="v-icon notranslate mdi mdi-chevron-left theme--light"
           >
           </i>
         </span>
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon mdi mdi-chevron-right theme--light"
+             class="v-icon notranslate mdi mdi-chevron-right theme--light"
           >
           </i>
         </span>
@@ -324,11 +343,9 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataIterator.ts should render valid no-data, loading and no-results states 3`] = `
-
 <div class="v-data-iterator">
   <div>
     No matching records found
@@ -336,33 +353,40 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Items per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="list-31"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
                 <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                       autocomplete="on"
+                       id="input-31"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon mdi mdi-menu-down theme--light"
+                     class="v-icon notranslate mdi mdi-menu-down theme--light"
                   >
                   </i>
                 </div>
               </div>
             </div>
             <div class="v-menu">
+              <div class="v-menu__content theme--light "
+                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+              >
+              </div>
             </div>
           </div>
         </div>
@@ -372,28 +396,28 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
       –
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon mdi mdi-chevron-left theme--light"
+             class="v-icon notranslate mdi mdi-chevron-left theme--light"
           >
           </i>
         </span>
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon mdi mdi-chevron-right theme--light"
+             class="v-icon notranslate mdi mdi-chevron-right theme--light"
           >
           </i>
         </span>
@@ -401,5 +425,4 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
     </div>
   </div>
 </div>
-
 `;

@@ -1,0 +1,20 @@
+<!-- Vue Component -->
+
+<template>
+  <v-card>
+    <v-card-title>...</v-card-title>
+    <v-card-text>...</v-card-text>
+  </v-card>
+</template>
+
+<script>
+  import { VCard, VCardText, VCardTitle } from 'vuetify/lib'
+
+  export default {
+    components: {
+      VCard,
+      VCardText,
+      VCardTitle,
+    }
+  }
+</script>

@@ -8,9 +8,8 @@
           xs12
           md4
         >
-          <v-item>
+          <v-item v-slot:default="{ active, toggle }">
             <v-card
-              slot-scope="{ active, toggle }"
               :color="active ? 'primary' : ''"
               class="d-flex align-center"
               dark
@@ -20,7 +19,7 @@
               <v-scroll-y-transition>
                 <div
                   v-if="active"
-                  class="display-3 text-xs-center"
+                  class="display-3 flex-grow-1 text-center"
                 >
                   Active
                 </div>

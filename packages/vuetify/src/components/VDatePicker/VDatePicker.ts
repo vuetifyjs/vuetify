@@ -86,6 +86,10 @@ export default mixins(
       type: [Boolean, String],
       default: true,
     },
+    selectedItemsText: {
+      type: String,
+      default: '$vuetify.datePicker.itemsSelected',
+    },
     showWeek: Boolean,
     // Function formatting currently selected date in the picker title
     titleDateFormat: Function as PropValidator<DatePickerFormatter | DatePickerMultipleFormatter | undefined>,
@@ -173,11 +177,17 @@ export default mixins(
       }
     },
     defaultTitleMultipleDateFormatter (): DatePickerMultipleFormatter {
-      if ((this.value as string[]).length < 2) {
-        return dates => dates.length ? this.defaultTitleDateFormatter(dates[0]) : '0 selected'
-      }
+      return dates => {
+        if (!dates.length) {
+          return '-'
+        }
 
-      return dates => `${dates.length} selected`
+        if (dates.length === 1) {
+          return this.defaultTitleDateFormatter(dates[0])
+        }
+
+        return this.$vuetify.lang.t(this.selectedItemsText, [dates.length])
+      }
     },
     defaultTitleDateFormatter (): DatePickerFormatter {
       const titleFormats = {
@@ -205,7 +215,7 @@ export default mixins(
       // compare for example '2000-9' and '2000-10'
       const sanitizeType = this.type === 'month' ? 'year' : 'month'
       this.isReversing = sanitizeDateString(val, sanitizeType) < sanitizeDateString(prev, sanitizeType)
-      this.$emit('update:pickerDate', val)
+      this.$emit('update:picker-date', val)
     },
     pickerDate (val: string | null) {
       if (val) {
@@ -242,7 +252,7 @@ export default mixins(
     this.checkMultipleProp()
 
     if (this.pickerDate !== this.tableDate) {
-      this.$emit('update:pickerDate', this.tableDate)
+      this.$emit('update:picker-date', this.tableDate)
     }
     this.setInputDate()
   },
@@ -319,7 +329,7 @@ export default mixins(
         },
         slot: 'title',
         on: {
-          'update:selectingYear': (value: boolean) => this.activePicker = value ? 'YEAR' : this.type.toUpperCase(),
+          'update:selecting-year': (value: boolean) => this.activePicker = value ? 'YEAR' : this.type.toUpperCase(),
         },
       })
     },
@@ -371,7 +381,7 @@ export default mixins(
         ref: 'table',
         on: {
           input: this.dateClick,
-          tableDate: (value: string) => this.tableDate = value,
+          'update:table-date': (value: string) => this.tableDate = value,
           'click:date': (value: string) => this.$emit('click:date', value),
           'dblclick:date': (value: string) => this.$emit('dblclick:date', value),
         },
@@ -400,7 +410,7 @@ export default mixins(
         ref: 'table',
         on: {
           input: this.monthClick,
-          tableDate: (value: string) => this.tableDate = value,
+          'update:table-date': (value: string) => this.tableDate = value,
           'click:month': (value: string) => this.$emit('click:month', value),
           'dblclick:month': (value: string) => this.$emit('dblclick:month', value),
         },

@@ -24,4 +24,17 @@ describe('VBreadcrumbsItem.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should render component with active & link state and match snapshot', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        link: true,
+      },
+    })
+    wrapper.setData({
+      isActive: true,
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

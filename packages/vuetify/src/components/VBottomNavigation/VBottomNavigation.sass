@@ -9,6 +9,7 @@
   .v-btn:not(.v-btn--active)
     color: map-deep-get($material, 'text', 'secondary') !important
 
+
 // Block
 .v-item-group.v-bottom-navigation
   bottom: 0
@@ -18,8 +19,10 @@
   width: 100%
   +elevation(4)
 
+  .v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined)
+    background-color: transparent
+
   .v-btn
-    background: transparent
     border-radius: 0
     box-shadow: none
     flex: 0 1 auto
@@ -38,7 +41,7 @@
       height: inherit
       opacity: .7
 
-      > .v-icon
+      .v-icon
         margin-bottom: 4px
 
       > *:not(.v-icon)
@@ -54,20 +57,20 @@
         opacity: 1
 
 // Modifier
-.v-bottom-navigation--absolute,
-.v-bottom-navigation--fixed
+.v-item-group.v-bottom-navigation--absolute,
+.v-item-group.v-bottom-navigation--fixed
   z-index: 4
 
-.v-bottom-navigation--absolute
+.v-item-group.v-bottom-navigation--absolute
   position: absolute
 
-.v-bottom-navigation--active
+.v-item-group.v-bottom-navigation--active
   transform: translate(0, 0)
 
-.v-bottom-navigation--fixed
+.v-item-group.v-bottom-navigation--fixed
   position: fixed
 
-.v-bottom-navigation--grow
+.v-item-group.v-bottom-navigation--grow
   .v-btn
     width: 100%
 
@@ -79,7 +82,7 @@
       margin-bottom: 0
       margin-right: 16px
 
-.v-bottom-navigation--shift
+.v-item-group.v-bottom-navigation--shift
   .v-btn .v-btn__content > *:not(.v-icon)
     opacity: 0
     position: absolute

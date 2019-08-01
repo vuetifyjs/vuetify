@@ -1,0 +1,14 @@
+{
+  "header": "# Directive de redimensionnement",
+  "headerText": "La directive `v-resize` peut être utilisée pour appeler des fonctions spécifiques lorsque la fenêtre est redimensionnée.",
+  "examples": {
+    "usage": {
+      "desc": "Redimensionnez votre fenêtre et observez les changements de valeurs.",
+      "uninverted": true
+    }
+  },
+  "options": {
+    "modifiers.quiet": "`v-resize.quiet=\"callback\"` N'invoquera **pas** automatiquement la fonction de rappel fournie lors de la liaison.",
+    "value": "`v-resize=\"callback\"` La fonction à appeler lors du redimensionnement de la fenêtre"
+  }
+}
