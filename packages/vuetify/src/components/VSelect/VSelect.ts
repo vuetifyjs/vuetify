@@ -31,7 +31,7 @@ export const defaultMenuProps = {
   closeOnContentClick: false,
   disableKeys: true,
   openOnClick: false,
-  maxHeight: 300,
+  maxHeight: 304,
 }
 
 // Types
