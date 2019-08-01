@@ -47,7 +47,7 @@ exports[`VDataIterator.ts should render and match snapshot 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -138,7 +138,7 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -220,7 +220,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -302,7 +302,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -384,7 +384,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>

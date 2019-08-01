@@ -127,4 +127,5 @@
 
   .v-toolbar__extension
     padding: 0
+    z-index: -1
 </style>

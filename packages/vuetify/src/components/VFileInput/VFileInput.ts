@@ -160,11 +160,11 @@ export default VTextField.extend({
       return [this.genSelections(), input]
     },
     genPrependSlot () {
+      if (!this.prependIcon) return null
+
       const icon = this.genIcon('prepend', () => {
         this.$refs.input.click()
       })
-
-      icon.data!.attrs = { tabindex: 0 }
 
       return this.genSlot('prepend', 'outer', [icon])
     },
@@ -209,6 +209,14 @@ export default VTextField.extend({
       const files = [...(e.target as HTMLInputElement).files || []]
 
       this.internalValue = this.isMultiple ? files : files[0]
+
+      // Set initialValue here otherwise isFocused
+      // watcher in VTextField will emit a change
+      // event whenever the component is blurred
+      this.initialValue = this.internalValue
+    },
+    onKeyDown (e: KeyboardEvent) {
+      this.$emit('keydown', e)
     },
     truncateText (str: string) {
       if (str.length < Number(this.truncateLength)) return str
