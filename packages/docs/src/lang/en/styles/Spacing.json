@@ -25,17 +25,9 @@
   "sizeText": "The **size** controls the increment of the property in 4px intervals:",
   "sizes": [
     "`auto` - sets the spacing to `auto`",
-    "`n5` - sets the spacing to be negative by `$spacer`",
-    "`n4` - sets the spacing to be negative by `$spacer`",
-    "`n3` - sets the spacing to be negative by `$spacer`",
-    "`n2` - sets the spacing to be negative by `$spacer`",
-    "`n1` - sets the spacing to be negative by `$spacer`",
+    "`n1-12` - sets the spacing to be negative by `$spacer` * 4px",
     "`0` - removes the spacing by setting it to `0`",
-    "`1` - sets the spacing to `$spacer`",
-    "`2` - sets the spacing to `$spacer`",
-    "`3` - sets the spacing to `$spacer`",
-    "`4` - sets the spacing to `$spacer`",
-    "`5` - sets the spacing to `$spacer`"
+    "`1-12` - sets the spacing to `$spacer` * 4px"
   ],
   "horizontalHeader": "Horizontal centering",
   "horizontalText": "For block elements with a designated width, you can apply `.mx-auto` to horizontally center the content.",
