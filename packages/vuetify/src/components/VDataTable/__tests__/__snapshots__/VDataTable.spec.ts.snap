@@ -259,7 +259,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -275,7 +275,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -291,7 +291,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -307,7 +307,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -323,7 +323,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -754,7 +754,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -770,7 +770,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -786,7 +786,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -802,7 +802,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -818,7 +818,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -944,7 +944,7 @@ exports[`VDataTable.ts should render with data 1`] = `
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -960,7 +960,7 @@ exports[`VDataTable.ts should render with data 1`] = `
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -976,7 +976,7 @@ exports[`VDataTable.ts should render with data 1`] = `
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -992,7 +992,7 @@ exports[`VDataTable.ts should render with data 1`] = `
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1008,7 +1008,7 @@ exports[`VDataTable.ts should render with data 1`] = `
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1232,7 +1232,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1248,7 +1248,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1264,7 +1264,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1280,7 +1280,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1416,7 +1416,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1432,7 +1432,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1448,7 +1448,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1464,7 +1464,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1843,7 +1843,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1859,7 +1859,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1875,7 +1875,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1891,7 +1891,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2217,7 +2217,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2233,7 +2233,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2249,7 +2249,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2265,7 +2265,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2281,7 +2281,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2421,7 +2421,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2437,7 +2437,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2453,7 +2453,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2469,7 +2469,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2485,7 +2485,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2748,7 +2748,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2764,7 +2764,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2780,7 +2780,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2796,7 +2796,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2812,7 +2812,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3085,7 +3085,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3101,7 +3101,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3117,7 +3117,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3133,7 +3133,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3149,7 +3149,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3429,7 +3429,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3445,7 +3445,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3461,7 +3461,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3477,7 +3477,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3493,7 +3493,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort

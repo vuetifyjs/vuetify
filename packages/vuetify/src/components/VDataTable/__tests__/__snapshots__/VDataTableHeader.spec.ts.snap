@@ -23,7 +23,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
         Calories
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -39,7 +39,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
         Fat (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -55,7 +55,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
         Carbs (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -71,7 +71,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
         Protein (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -87,7 +87,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
         Iron (%)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -120,7 +120,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
         Calories
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -136,7 +136,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
         Fat (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -152,7 +152,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
         Carbs (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -168,7 +168,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
         Protein (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -184,7 +184,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
         Iron (%)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -223,7 +223,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
         Calories
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -242,7 +242,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
         Fat (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -261,7 +261,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
         Carbs (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -280,7 +280,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
         Protein (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -299,7 +299,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
         Iron (%)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -335,7 +335,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
         Calories
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -351,7 +351,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
         Fat (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -367,7 +367,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
         Carbs (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -383,7 +383,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
         Protein (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -399,7 +399,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
         Iron (%)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -432,7 +432,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
         Calories
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -448,7 +448,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
         Fat (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -464,7 +464,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
         Carbs (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -480,7 +480,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
         Protein (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -496,7 +496,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
         Iron (%)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
         $vuetify.icons.sort
@@ -647,7 +647,7 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
                       Iron (%)
                       <div class="v-chip__close sortable active desc">
                         <i aria-hidden="true"
-                           class="v-icon notranslate material-icons theme--light"
+                           class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                            style="font-size: 18px;"
                         >
                           $vuetify.icons.sort
@@ -764,7 +764,7 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
                       Iron (%)
                       <div class="v-chip__close sortable active desc">
                         <i aria-hidden="true"
-                           class="v-icon notranslate material-icons theme--light"
+                           class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                            style="font-size: 18px;"
                         >
                           $vuetify.icons.sort
@@ -829,7 +829,7 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
                       Iron (%)
                       <div class="v-chip__close sortable active asc">
                         <i aria-hidden="true"
-                           class="v-icon notranslate material-icons theme--light"
+                           class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                            style="font-size: 18px;"
                         >
                           $vuetify.icons.sort
