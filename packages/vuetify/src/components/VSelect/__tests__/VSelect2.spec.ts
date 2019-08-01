@@ -373,6 +373,7 @@ describe('VSelect.ts', () => {
       attachToDocument: true,
       propsData: {
         clearable: true,
+        eager: true,
         items: [1, 2],
         multiple: true,
         resetValue: [2],

@@ -154,6 +154,8 @@ describe('VCombobox.ts', () => {
       propsData: {
         chips: true,
         clearable: true,
+        deletableChips: true,
+        eager: true,
         items: [1, 2],
         resetValue: 2,
         value: 1,
