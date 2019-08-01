@@ -40,14 +40,24 @@
   .v-list-item__avatar,
   .v-list-item__icon
     &:first-child
-      margin-right: 16px
+      +ltr()
+        margin-right: 16px
+      +rtl()
+        margin-left: 16px
 
   .v-list-group__header
-    padding-left: 32px
+    +ltr()
+      padding-left: 32px
+    +rtl()
+      padding-right: 32px
+    
 
   .v-list-group__items
     .v-list-item
-      padding-left: 40px
+      +ltr()
+        padding-left: 40px
+      +rtl()
+        padding-right: 40px
 
   &.v-list-group--active
     .v-list-item__icon.v-list-group__header__prepend-icon .v-icon
@@ -55,20 +65,35 @@
 
 .v-list-group--no-action
   > .v-list-group__items > div > .v-list-item
-    padding-left: 72px
+    +ltr()
+      padding-left: 72px
+    +rtl()
+      padding-right: 72px
 
   &.v-list-group--sub-group
     > .v-list-group__items > div > .v-list-item
-      padding-left: 88px
+      +ltr()
+        padding-left: 88px
+      +rtl()
+        padding-right: 88px
 
 .v-list--dense
   .v-list-group--sub-group .v-list-group__header
-    padding-left: 24px
+    +ltr()
+      padding-left: 24px
+    +rtl()
+      padding-right: 24px
 
   .v-list-group--no-action
     > .v-list-group__items > div > .v-list-item
-      padding-left: 64px
+      +ltr()
+        padding-left: 64px
+      +rtl()
+        padding-right: 64px
 
     &.v-list-group--sub-group
       > .v-list-group__items > div > .v-list-item
-        padding-left: 80px
+        +ltr()
+          padding-left: 80px
+        +rtl()
+          padding-right: 80px
