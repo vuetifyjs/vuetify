@@ -110,10 +110,10 @@ export class Theme extends Service {
     if (this.disabled) return
 
     /* istanbul ignore else */
-    if (ssrContext) {
-      this.initSSR(ssrContext)
-    } else if (root.$isServer && (root as any).$meta) {
+    if ((root as any).$meta) {
       this.initVueMeta(root)
+    } else if (ssrContext) {
+      this.initSSR(ssrContext)
     }
 
     this.initTheme()
@@ -178,15 +178,17 @@ export class Theme extends Service {
   private initVueMeta (root: Vue) {
     const options = this.options || {}
     root.$children.push(new Vue({
-      head: {
-        style: [
-          {
-            cssText: this.generatedStyles,
-            type: 'text/css',
-            id: 'vuetify-theme-stylesheet',
-            nonce: options.cspNonce,
-          },
-        ],
+      head: () => {
+        return {
+          style: [
+            {
+              cssText: this.generatedStyles,
+              type: 'text/css',
+              id: 'vuetify-theme-stylesheet',
+              nonce: options.cspNonce,
+            },
+          ],
+        }
       },
     } as any))
   }

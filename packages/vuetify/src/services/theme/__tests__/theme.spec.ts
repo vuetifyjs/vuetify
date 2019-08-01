@@ -183,17 +183,9 @@ describe('Theme.ts', () => {
     expect(ssrContext.head).toMatchSnapshot()
   })
 
-  it('should add fake child element for vue-meta with ssr support', () => {
+  it('should add fake child element for vue-meta support', () => {
     const theme = new Theme(mock)
     ;(instance as any).$meta = {}
-
-    // $isServer is read only but need to be set for test purpose : https://github.com/vuejs/vue/issues/9232#issuecomment-477914392
-    Object.setPrototypeOf(
-      instance,
-      new Proxy(Object.getPrototypeOf(instance), {
-        get: (target, key, receiver) => key === '$isServer' ? true : Reflect.get(target, key, receiver),
-      })
-    )
 
     expect(instance.$children).toHaveLength(0)
 
@@ -205,7 +197,7 @@ describe('Theme.ts', () => {
     const head = options.head
 
     expect(head).toBeTruthy()
-    expect(head).toMatchSnapshot()
+    expect(head()).toMatchSnapshot()
   })
 
   it('should react to theme changes', async () => {
