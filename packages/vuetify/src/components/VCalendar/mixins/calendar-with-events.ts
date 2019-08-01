@@ -4,6 +4,9 @@ import './calendar-with-events.sass'
 // Types
 import { VNode, VNodeData } from 'vue'
 
+// Directives
+import ripple from '../../../directives/ripple'
+
 // Mixins
 import CalendarBase from './calendar-base'
 
@@ -65,6 +68,10 @@ interface VDayBodySlotScope extends VDaySlotScope {
 /* @vue/component */
 export default CalendarBase.extend({
   name: 'calendar-with-events',
+
+  directives: {
+    ripple,
+  },
 
   props: props.events,
 
