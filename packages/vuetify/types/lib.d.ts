@@ -238,7 +238,7 @@ declare module 'vuetify/lib' {
     VExpansionPanels,
     VFabTransition,
     VFadeTransition,
-	VFileInput,
+    VFileInput,
     VFlex,
     VFooter,
     VForm,
