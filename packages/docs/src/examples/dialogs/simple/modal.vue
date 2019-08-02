@@ -5,7 +5,7 @@
         <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
       </template>
       <v-card>
-        <v-card-title class="headline">Use Google's location service?</v-card-title>
+        <v-card-title class="v-headline">Use Google's location service?</v-card-title>
         <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>

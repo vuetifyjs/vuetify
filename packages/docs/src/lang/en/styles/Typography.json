@@ -8,7 +8,7 @@
     "`.display-3` - Good for `<h2>`",
     "`.display-2` - Good for `<h3>`",
     "`.display-1` - Good for `<h4>`",
-    "`.headline` - Good for `<h5>`",
+    "`.v-headline` - Good for `<h5>`",
     "`.title` - Good for `<h6>`",
     "`.subtitle-1` - Good for supporting text",
     "`.subtitle-2` - Good for supporting text with additional weight",

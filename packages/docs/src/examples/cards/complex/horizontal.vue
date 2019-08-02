@@ -29,7 +29,7 @@
             dark
           >
             <v-card-text class="white--text">
-              <div class="headline mb-2">Unlimited music now</div>
+              <div class="v-headline mb-2">Unlimited music now</div>
               Listen to your favorite artists and albums whenever and wherever, online and offline.
             </v-card-text>
 
@@ -50,7 +50,7 @@
             <v-list-item three-line>
               <v-list-item-content class="align-self-start">
                 <v-list-item-title
-                  class="headline mb-2"
+                  class="v-headline mb-2"
                   v-text="item.title"
                 ></v-list-item-title>
 

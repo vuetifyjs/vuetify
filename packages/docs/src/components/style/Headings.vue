@@ -32,7 +32,7 @@
         ['display-3', 'Light 60sp', '400'],
         ['display-2', 'Regular 48sp', '400'],
         ['display-1', 'Regular 34sp', '400'],
-        ['headline', 'Regular 24sp', '400'],
+        ['v-headline', 'Regular 24sp', '400'],
         ['title', 'Medium 20sp', '500'],
         ['subtitle-1', 'Regular 16sp', '400'],
         ['subtitle-2', 'Medium 14sp', '500'],

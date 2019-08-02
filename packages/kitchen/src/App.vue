@@ -9,7 +9,7 @@
       dir="ltr"
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title class="white--text headline">
+      <v-toolbar-title class="white--text v-headline">
         🍣
         <span class="font-weight-black">
           VUETIFY

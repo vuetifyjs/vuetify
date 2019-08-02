@@ -3,7 +3,7 @@
     <v-flex xs12 sm6 offset-sm3>
       <v-card height="200px">
         <v-card-title class="blue white--text">
-          <span class="headline">Menu</span>
+          <span class="v-headline">Menu</span>
 
           <v-spacer></v-spacer>
 

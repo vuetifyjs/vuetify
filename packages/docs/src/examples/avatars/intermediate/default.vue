@@ -13,7 +13,7 @@
     </v-avatar>
 
     <v-avatar color="red">
-      <span class="white--text headline">CJ</span>
+      <span class="white--text v-headline">CJ</span>
     </v-avatar>
 
   </v-layout>

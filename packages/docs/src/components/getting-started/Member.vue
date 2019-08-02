@@ -95,7 +95,7 @@
       </v-hover>
     </v-avatar>
     <div
-      class="font-weight-light headline"
+      class="font-weight-light v-headline"
       v-text="value.name"
     />
   </div>

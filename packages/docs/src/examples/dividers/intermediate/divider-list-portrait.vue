@@ -3,7 +3,7 @@
     <v-flex xs12 sm8>
       <v-card>
         <v-card-title class="cyan darken-1">
-          <span class="headline white--text">Sarah Mcbeal</span>
+          <span class="v-headline white--text">Sarah Mcbeal</span>
 
           <v-spacer></v-spacer>
 

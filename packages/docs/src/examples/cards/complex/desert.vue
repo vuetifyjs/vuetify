@@ -9,7 +9,7 @@
 
         <v-card-title primary-title>
           <div>
-            <h3 class="headline mb-0">Kangaroo Valley Safari</h3>
+            <h3 class="v-headline mb-0">Kangaroo Valley Safari</h3>
             <div> {{ card_text }} </div>
           </div>
         </v-card-title>

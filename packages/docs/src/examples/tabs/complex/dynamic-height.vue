@@ -41,7 +41,7 @@
       </v-tab-item>
       <v-tab-item>
         <v-card flat>
-          <v-card-title class="headline">An awesome title</v-card-title>
+          <v-card-title class="v-headline">An awesome title</v-card-title>
           <v-card-text>
             <p>
               Duis lobortis massa imperdiet quam. Donec vitae orci sed dolor rutrum auctor. Vestibulum facilisis, purus nec pulvinar iaculis, ligula mi congue nunc, vitae euismod ligula urna in dolor. Praesent congue erat at massa.
@@ -59,7 +59,7 @@
       </v-tab-item>
       <v-tab-item>
         <v-card flat>
-          <v-card-title class="headline">An even better title</v-card-title>
+          <v-card-title class="v-headline">An even better title</v-card-title>
           <v-card-text>
             <p>
               Maecenas ullamcorper, dui et placerat feugiat, eros pede varius nisi, condimentum viverra felis nunc et lorem. Sed hendrerit. Maecenas malesuada. Vestibulum ullamcorper mauris at ligula. Proin faucibus arcu quis ante.

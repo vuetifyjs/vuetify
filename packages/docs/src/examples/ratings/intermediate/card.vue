@@ -9,7 +9,7 @@
       <v-flex xs8>
         <v-card-title primary-title>
           <div>
-            <div class="headline">Halycon Days</div>
+            <div class="v-headline">Halycon Days</div>
             <div>Ellie Goulding</div>
             <div>(2013)</div>
           </div>

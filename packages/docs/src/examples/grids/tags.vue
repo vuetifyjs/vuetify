@@ -6,7 +6,7 @@
     tag="section"
   >
     <v-layout wrap>
-      <v-flex tag="h1" class="headline">Lorem Ipsum</v-flex>
+      <v-flex tag="h1" class="v-headline">Lorem Ipsum</v-flex>
       <v-flex d-flex xs12 order-xs5>
         <v-layout column>
           <v-flex>

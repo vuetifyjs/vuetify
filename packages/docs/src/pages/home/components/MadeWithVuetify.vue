@@ -50,7 +50,7 @@
                       opacity="0.9"
                     >
                       <h3
-                        class="headline mb-2"
+                        class="v-headline mb-2"
                         v-text="feature.title"
                       />
                       <div

@@ -22,7 +22,7 @@
             />
 
             <v-card-title class="align-center">
-              <h2 class="headline mb-0">{{ template.title }}
+              <h2 class="v-headline mb-0">{{ template.title }}
                 <v-chip
                   :color="template.free ? 'blue-grey' : 'indigo'"
                   label

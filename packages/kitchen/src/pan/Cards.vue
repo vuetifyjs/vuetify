@@ -7,7 +7,7 @@
       <core-section center>
         <v-card>
           <v-card-title primary-title>
-            <div class="headline">Unlimited music now</div>
+            <div class="v-headline">Unlimited music now</div>
           </v-card-title>
           <v-card-text>
             Listen to your favorite artists and albums whenever and wherever, online and offline.
@@ -19,7 +19,7 @@
       <core-section center>
         <v-card>
           <v-card-title primary-title>
-            <div class="headline">Card with media</div>
+            <div class="v-headline">Card with media</div>
           </v-card-title>
           <v-card-media>
             <v-img src="http://placekitten.com/1920/1080" />
@@ -34,7 +34,7 @@
       <core-section>
         <v-card>
           <v-card-title primary-title>
-            <div class="headline">Card with media</div>
+            <div class="v-headline">Card with media</div>
           </v-card-title>
           <v-card-media>
             <v-img src="http://placekitten.com/1920/1080" />
@@ -49,7 +49,7 @@
       <core-section center>
         <v-card>
           <v-card-title primary-title>
-            <div class="headline">Unlimited music now</div>
+            <div class="v-headline">Unlimited music now</div>
           </v-card-title>
           <v-card-text>
             Listen to your favorite artists and albums whenever and wherever, online and offline.
@@ -66,7 +66,7 @@
         <v-layout wrap justify-space-around align-center>
           <v-card dark color="success" class="mt-2">
             <v-card-title primary-title>
-              <div class="headline">Unlimited music now</div>
+              <div class="v-headline">Unlimited music now</div>
             </v-card-title>
             <v-card-text>
               Listen to your favorite artists and albums whenever and wherever, online and offline.
@@ -78,7 +78,7 @@
           </v-card>
           <v-card dark color="primary darken-2" class="mt-2">
             <v-card-title primary-title>
-              <div class="headline">Unlimited music now</div>
+              <div class="v-headline">Unlimited music now</div>
             </v-card-title>
             <v-card-text>
               Listen to your favorite artists and albums whenever and wherever, online and offline.
@@ -90,7 +90,7 @@
           </v-card>
           <v-card dark color="teal" class="mt-2">
             <v-card-title primary-title>
-              <div class="headline">Unlimited music now</div>
+              <div class="v-headline">Unlimited music now</div>
             </v-card-title>
             <v-card-text>
               Listen to your favorite artists and albums whenever and wherever, online and offline.
@@ -114,7 +114,7 @@
             <v-container fill-height fluid>
               <v-layout fill-height>
                 <v-flex xs12 align-end flexbox>
-                  <span class="headline">Top 10 Australian beaches</span>
+                  <span class="v-headline">Top 10 Australian beaches</span>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -144,7 +144,7 @@
             <v-container fill-height fluid>
               <v-layout fill-height>
                 <v-flex xs12 align-end flexbox>
-                  <span class="headline">Top 10 Australian beaches</span>
+                  <span class="v-headline">Top 10 Australian beaches</span>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -167,7 +167,7 @@
       <core-section>
         <v-card>
           <v-card-title primary-title>
-            <div class="headline">Unlimited music now</div>
+            <div class="v-headline">Unlimited music now</div>
           </v-card-title>
           <v-card-text>
             Listen to your favorite artists and albums whenever and wherever, online and offline.
@@ -185,7 +185,7 @@
 
           <v-card-title primary-title>
             <div>
-              <div class="headline">Top western road trips</div>
+              <div class="v-headline">Top western road trips</div>
               <span class="grey--text">1,000 miles of wonder</span>
             </div>
           </v-card-title>

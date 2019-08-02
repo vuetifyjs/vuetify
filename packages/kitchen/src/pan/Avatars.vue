@@ -239,7 +239,7 @@
             size="32"
             color="teal"
           >
-            <span class="white--text headline">
+            <span class="white--text v-headline">
               C
             </span>
           </v-avatar>
@@ -247,7 +247,7 @@
             size="64"
             color="teal"
           >
-            <span class="white--text headline">
+            <span class="white--text v-headline">
               C
             </span>
           </v-avatar>
@@ -255,7 +255,7 @@
             size="128"
             color="teal"
           >
-            <span class="white--text headline">
+            <span class="white--text v-headline">
               C
             </span>
           </v-avatar>
@@ -263,7 +263,7 @@
             size="256"
             color="teal"
           >
-            <span class="white--text headline">
+            <span class="white--text v-headline">
               C
             </span>
           </v-avatar>
@@ -278,7 +278,7 @@
             size="32"
             color="red"
           >
-            <span class="white--text headline">
+            <span class="white--text v-headline">
               J
             </span>
           </v-avatar>
@@ -286,7 +286,7 @@
             size="64"
             color="red"
           >
-            <span class="white--text headline">
+            <span class="white--text v-headline">
               J
             </span>
           </v-avatar>
@@ -294,7 +294,7 @@
             size="128"
             color="red"
           >
-            <span class="white--text headline">
+            <span class="white--text v-headline">
               J
             </span>
           </v-avatar>
@@ -302,7 +302,7 @@
             size="256"
             color="red"
           >
-            <span class="white--text headline">
+            <span class="white--text v-headline">
               J
             </span>
           </v-avatar>

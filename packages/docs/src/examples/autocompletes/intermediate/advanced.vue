@@ -39,7 +39,7 @@
       <template v-slot:item="{ item }">
         <v-list-item-avatar
           color="indigo"
-          class="headline font-weight-light white--text"
+          class="v-headline font-weight-light white--text"
         >
           {{ item.name.charAt(0) }}
         </v-list-item-avatar>

@@ -43,7 +43,7 @@
     </v-layout>
     <v-card-title class="align-start">
       <div>
-        <span class="headline">FORTNITE</span>
+        <span class="v-headline">FORTNITE</span>
         <div class="grey--text font-weight-light">Video game</div>
       </div>
       <v-spacer></v-spacer>

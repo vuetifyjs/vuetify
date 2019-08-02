@@ -13,7 +13,7 @@
             large
           >
             <v-card class="elevation-2">
-              <v-card-title class="headline">
+              <v-card-title class="v-headline">
                 Lorem ipsum
               </v-card-title>
               <v-card-text>
@@ -42,7 +42,7 @@
               </span>
             </template>
             <v-card class="elevation-2">
-              <v-card-title class="headline">
+              <v-card-title class="v-headline">
                 Lorem ipsum
               </v-card-title>
               <v-card-text>
@@ -66,7 +66,7 @@
             large
           >
             <v-card class="elevation-2">
-              <v-card-title class="headline">
+              <v-card-title class="v-headline">
                 Lorem ipsum
               </v-card-title>
               <v-card-text>
@@ -90,7 +90,7 @@
             large
           >
             <v-card class="elevation-2">
-              <v-card-title class="headline">
+              <v-card-title class="v-headline">
                 Lorem ipsum
               </v-card-title>
               <v-card-text>
@@ -115,7 +115,7 @@
             :large="n % 2"
           >
             <v-card class="elevation-2">
-              <v-card-title class="headline">
+              <v-card-title class="v-headline">
                 Lorem ipsum
               </v-card-title>
               <v-card-text>
@@ -138,7 +138,7 @@
             color="red lighten-2"
           >
             <v-card class="elevation-2">
-              <v-card-title class="headline">
+              <v-card-title class="v-headline">
                 Lorem ipsum
               </v-card-title>
               <v-card-text>
@@ -162,7 +162,7 @@
             large
           >
             <v-card class="elevation-2">
-              <v-card-title class="headline">
+              <v-card-title class="v-headline">
                 Lorem ipsum
               </v-card-title>
               <v-card-text>
@@ -187,7 +187,7 @@
             :large="n % 2"
           >
             <v-card class="elevation-2">
-              <v-card-title class="headline">
+              <v-card-title class="v-headline">
                 Lorem ipsum
               </v-card-title>
               <v-card-text>

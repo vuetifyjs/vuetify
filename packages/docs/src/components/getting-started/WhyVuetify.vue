@@ -42,7 +42,7 @@
                 >
                   <h2 class="text-uppercase mb-4 text-center">
                     <strong
-                      class="headline font-weight-bold"
+                      class="v-headline font-weight-bold"
                       v-text="philosophy.title"
                     />
                     <div

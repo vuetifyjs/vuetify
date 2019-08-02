@@ -16,7 +16,7 @@
 
       <v-card>
         <v-card-title
-          class="headline grey lighten-2"
+          class="v-headline grey lighten-2"
           primary-title
         >
           Privacy Policy

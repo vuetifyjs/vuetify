@@ -2,7 +2,7 @@
   <v-container>
     <v-layout wrap>
       <v-flex xs12>
-        <h3 ref="radio" class="headline">Target</h3>
+        <h3 ref="radio" class="v-headline">Target</h3>
         <v-radio-group v-model="type" row>
           <v-radio label="Number" value="number"></v-radio>
           <v-radio label="Selector" value="selector"></v-radio>
@@ -13,7 +13,7 @@
         <v-select v-if="type === 'element'" v-model="selected" :items="elements" label="DOMElement"></v-select>
       </v-flex>
       <v-flex xs12>
-        <h3 class="headline">Options</h3>
+        <h3 class="v-headline">Options</h3>
         <v-select v-model="easing" :items="easings" label="Easing"></v-select>
         <v-slider v-model="duration" min="0" max="1000" label="Duration" thumb-label></v-slider>
         <v-slider v-model="offset" min="-500" max="500" label="Offset" thumb-label></v-slider>

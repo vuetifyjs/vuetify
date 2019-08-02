@@ -43,7 +43,7 @@
               height="300px"
             >
               <span
-                class="headline white--text pl-4 pt-4"
+                class="v-headline white--text pl-4 pt-4"
                 v-text="card.title"
               ></span>
             </v-img>

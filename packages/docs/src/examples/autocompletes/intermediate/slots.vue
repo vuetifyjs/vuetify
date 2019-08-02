@@ -52,7 +52,7 @@
           justify-end
           pa-4
         >
-          <h3 class="headline">{{ name }}</h3>
+          <h3 class="v-headline">{{ name }}</h3>
           <span class="grey--text text--lighten-1">{{ title }}</span>
         </v-layout>
       </v-layout>

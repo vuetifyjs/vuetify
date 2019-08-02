@@ -15,7 +15,7 @@
       <span class="title font-weight-light">Twitter</span>
     </v-card-title>
 
-    <v-card-text class="headline font-weight-bold">
+    <v-card-text class="v-headline font-weight-bold">
       "Turns out semicolon-less style is easier and safer in TS because most gotcha edge cases are type invalid as well."
     </v-card-text>
 

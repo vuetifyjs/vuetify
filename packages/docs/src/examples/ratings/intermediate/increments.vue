@@ -4,7 +4,7 @@
     width="300"
   >
     <v-card-title
-      class="headline"
+      class="v-headline"
       primary-title
     >
       Rate Our Framework

@@ -53,7 +53,7 @@
       </core-title>
       <core-section>
         <v-card>
-          <v-card-title class="indigo white--text headline">
+          <v-card-title class="indigo white--text v-headline">
             User Directory
           </v-card-title>
           <v-layout
@@ -110,7 +110,7 @@
                         class="mb-6"
                       />
                     </v-avatar>
-                    <h3 class="headline mb-2">
+                    <h3 class="v-headline mb-2">
                       {{ selected2.name }}
                     </h3>
                     <div class="blue--text mb-2">

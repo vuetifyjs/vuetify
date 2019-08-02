@@ -33,7 +33,7 @@
           <v-layout align-center>
             <strong class="display-4 font-weight-regular mr-6">8</strong>
             <v-layout column justify-end>
-              <div class="headline font-weight-light">Monday</div>
+              <div class="v-headline font-weight-light">Monday</div>
               <div class="text-uppercase font-weight-light">February 2015</div>
             </v-layout>
           </v-layout>
