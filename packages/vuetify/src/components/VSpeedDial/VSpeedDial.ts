@@ -94,6 +94,9 @@ export default mixins(Positionable, Toggleable, Transitionable).extend({
         origin: this.origin,
         tag: 'div',
       },
+      style: {
+        'pointer-events': this.isActive ? undefined : 'none',
+      },
     }, children)
 
     return h('div', data, [this.$slots.activator, list])
