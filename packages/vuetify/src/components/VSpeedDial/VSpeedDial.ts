@@ -46,6 +46,7 @@ export default mixins(Positionable, Toggleable, Transitionable).extend({
         'v-speed-dial--absolute': this.absolute,
         'v-speed-dial--fixed': this.fixed,
         [`v-speed-dial--direction-${this.direction}`]: true,
+        'v-speed-dial--is-active': this.isActive,
       }
     },
   },
@@ -93,9 +94,6 @@ export default mixins(Positionable, Toggleable, Transitionable).extend({
         mode: this.mode,
         origin: this.origin,
         tag: 'div',
-      },
-      style: {
-        'pointer-events': this.isActive ? undefined : 'none',
       },
     }, children)
 
