@@ -127,7 +127,7 @@ export default baseMixins.extend({
       if (this.activator) {
         const target = this.internalActivator ? this.$el : document
 
-        // #foobar
+        // Selector
         if (typeof this.activator === 'string') {
           activator = target.querySelector(this.activator)
         // VNode
