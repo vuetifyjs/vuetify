@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VSpeedDial.ts should render active component and match snapshot 1`] = `
-<div class="v-speed-dial v-speed-dial--direction-top">
+<div class="v-speed-dial v-speed-dial--direction-top v-speed-dial--is-active">
   <span class="v-speed-dial__list">
     <span>
       test
