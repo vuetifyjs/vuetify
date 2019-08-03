@@ -1,9 +1,4 @@
-<p align="center">
-  <a href="https://vuetifyjs.com" target="_blank"><img width="100"src="https://cdn.vuetifyjs.com/images/logos/logo.svg"></a>
-</p>
-<p>This is the packages for the <a href="https://vuetifyjs.com" target="_blank">Vuetify</a>.</p>
-
-# Be a Part of Something Bigger!  
+<p>These are the packages for the <a href="https://vuetifyjs.com" target="_blank">Vuetify</a> monorepo.</p>
 
 ## Packages for the Vuetify
 
