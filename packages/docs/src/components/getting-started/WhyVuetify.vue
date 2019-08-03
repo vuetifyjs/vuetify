@@ -3,7 +3,7 @@
     grid-list-md
     fluid
     pa-0
-    mb-5
+    mb-12
     why-vuetify
   >
     <v-layout wrap>
@@ -34,13 +34,13 @@
               <v-flex
                 pa-0
                 xs12
-                mb-3
+                mb-4
               >
                 <v-layout
                   column
                   ma-0
                 >
-                  <h2 class="text-uppercase mb-3 text-xs-center">
+                  <h2 class="text-uppercase mb-4 text-center">
                     <strong
                       class="headline font-weight-bold"
                       v-text="philosophy.title"
@@ -51,7 +51,7 @@
                     />
                   </h2>
 
-                  <div class="text-xs-center">
+                  <div class="text-center">
                     <doc-markdown :code="philosophy.caption" />
                   </div>
                 </v-layout>
@@ -72,8 +72,8 @@
               <v-flex
                 v-if="philosophy.more || philosophy.to"
                 xs12
-                mt-3
-                text-xs-center
+                mt-4
+                text-center
               >
                 <v-btn
                   :href="philosophy.more"

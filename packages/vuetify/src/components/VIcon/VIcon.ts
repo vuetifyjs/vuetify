@@ -11,6 +11,7 @@ import mixins from '../../util/mixins'
 import { VuetifyIcon, VuetifyIconComponent } from 'vuetify/types/services/icons'
 
 enum SIZE_MAP {
+  xSmall = '12px',
   small = '16px',
   default = '24px',
   medium = '28px',
@@ -62,6 +63,7 @@ const VIcon = mixins(
     },
     getSize (): string | undefined {
       const sizes = {
+        xSmall: this.xSmall,
         small: this.small,
         medium: this.medium,
         large: this.large,

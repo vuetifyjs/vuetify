@@ -1,12 +1,12 @@
 <template>
   <v-card
-    class="pa-5 hidden-sm-and-down"
+    class="pa-12 hidden-sm-and-down"
     flat
   >
     <v-layout
       v-for="(type, i) in typefaces"
       :key="i"
-      my-3
+      my-4
       align-center
       justify-space-between
       wrap
@@ -17,7 +17,7 @@
       />
       <v-flex
         hidden-md-and-down
-        text-xs-right
+        text-right
         text-uppercase
         grey--text
       >
@@ -32,7 +32,7 @@
     data: () => ({
       typefaces: [
         ['Quantum Mechanics', 'display-3', 'Regular'],
-        ['6.626069x10<sup class="display-2 font-weight-light mt-4">-34</sup>', 'd-flex align-start display-4 font-weight-thin', 'Thin'],
+        ['6.626069x10<sup class="display-2 font-weight-light mt-6">-34</sup>', 'd-flex align-start display-4 font-weight-thin', 'Thin'],
         ['One hundred percent cotton bond', 'display-1 font-italic font-weight-bold', 'Bold italic'],
         ['Quasiparticles', 'display-4 font-weight-bold', 'Bold'],
         ['It became the non-relativistic limit of quantum field theory', 'title', 'Condensed'],

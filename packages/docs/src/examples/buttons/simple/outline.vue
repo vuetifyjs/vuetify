@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center">
+  <div class="text-center">
     <v-btn class="ma-2" outlined color="indigo">Outline Button</v-btn>
     <v-btn class="ma-2" outlined fab color="teal">
       <v-icon>list</v-icon>

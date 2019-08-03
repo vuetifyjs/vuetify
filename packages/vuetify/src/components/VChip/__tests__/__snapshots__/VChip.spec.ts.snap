@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VChip.ts should be removable 1`] = `
-
 <span class="v-chip v-chip--no-color v-chip--removable theme--light v-size--default">
   <span class="v-chip__content">
     <i role="button"
@@ -11,14 +10,11 @@ exports[`VChip.ts should be removable 1`] = `
     </i>
   </span>
 </span>
-
 `;
 
 exports[`VChip.ts should have a v-chip class 1`] = `
-
 <span class="v-chip v-chip--no-color theme--light v-size--default">
   <span class="v-chip__content">
   </span>
 </span>
-
 `;

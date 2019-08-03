@@ -23,7 +23,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
@@ -49,12 +48,11 @@
 
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
         >
-          <v-flex text-xs-center>
+          <v-flex text-center>
             <core-title>
               Readonly
             </core-title>
@@ -65,7 +63,7 @@
               readonly
             />
           </v-flex>
-          <v-flex text-xs-center>
+          <v-flex text-center>
             <core-title>
               Disabled
             </core-title>
@@ -76,7 +74,7 @@
               disabled
             />
           </v-flex>
-          <v-flex text-xs-center>
+          <v-flex text-center>
             <core-title>
               Reactive
             </core-title>
@@ -95,7 +93,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
@@ -104,21 +101,21 @@
             v-model="model"
             type="month"
             :landscape="landscape"
-            class="mt-4"
+            class="mt-6"
             color="success"
           />
           <v-date-picker
             v-model="model"
             type="month"
             :landscape="landscape"
-            class="mt-4"
+            class="mt-6"
             color="red lighten-2"
           />
           <v-date-picker
             v-model="model"
             type="month"
             :landscape="landscape"
-            class="mt-4"
+            class="mt-6"
             color="blue"
           />
         </v-layout>
@@ -129,7 +126,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
@@ -138,21 +134,21 @@
             v-model="model"
             type="month"
             :landscape="landscape"
-            class="mt-4"
+            class="mt-6"
             header-color="success"
           />
           <v-date-picker
             v-model="model"
             type="month"
             :landscape="landscape"
-            class="mt-4"
+            class="mt-6"
             header-color="red lighten-2"
           />
           <v-date-picker
             v-model="model"
             type="month"
             :landscape="landscape"
-            class="mt-4"
+            class="mt-6"
             header-color="blue"
           />
         </v-layout>
@@ -163,7 +159,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
@@ -172,7 +167,7 @@
             v-model="model"
             type="month"
             :landscape="landscape"
-            class="mt-4"
+            class="mt-6"
             color="red lighten-2"
             header-color="success"
           />
@@ -180,7 +175,7 @@
             v-model="model"
             type="month"
             :landscape="landscape"
-            class="mt-4"
+            class="mt-6"
             color="error"
             header-color="red lighten-2"
           />
@@ -188,7 +183,7 @@
             v-model="model"
             type="month"
             :landscape="landscape"
-            class="mt-4"
+            class="mt-6"
             color="teal"
             header-color="blue"
           />
@@ -197,12 +192,11 @@
 
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
         >
-          <v-flex text-xs-center>
+          <v-flex text-center>
             <core-title>
               Allowed months: min/max
             </core-title>
@@ -214,7 +208,7 @@
               max="2019-08"
             />
           </v-flex>
-          <v-flex text-xs-center>
+          <v-flex text-center>
             <core-title>
               Allowed dates: function
             </core-title>
@@ -261,7 +255,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
@@ -269,21 +262,21 @@
           <v-date-picker
             v-model="model"
             :landscape="landscape"
-            class="mt-3"
+            class="mt-4"
             type="month"
             width="150"
           />
           <v-date-picker
             v-model="model"
             :landscape="landscape"
-            class="mt-3"
+            class="mt-4"
             type="month"
             width="290"
           />
           <v-date-picker
             v-model="model"
             :landscape="landscape"
-            class="mt-3"
+            class="mt-4"
             type="month"
             width="400"
           />
@@ -295,7 +288,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           align-center
           justify-space-around
@@ -303,7 +295,7 @@
           <v-date-picker
             v-model="model"
             :landscape="landscape"
-            class="mt-3"
+            class="mt-4"
             full-width
             type="month"
           />
@@ -315,11 +307,10 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
         >
-          <div class="mt-3">
+          <div class="mt-4">
             <div class="subheading text-center">
               Defined by array
             </div>
@@ -331,7 +322,7 @@
               event-color="green lighten-1"
             />
           </div>
-          <div class="mt-3">
+          <div class="mt-4">
             <div class="subheading text-center">
               Defined by function
             </div>
@@ -351,7 +342,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
@@ -361,14 +351,14 @@
             :landscape="landscape"
             type="month"
             locale="th"
-            class="mt-3"
+            class="mt-4"
           />
           <v-date-picker
             v-model="model"
             :landscape="landscape"
             type="month"
             locale="sv-se"
-            class="mt-3"
+            class="mt-4"
           />
         </v-layout>
       </core-section>
@@ -392,12 +382,11 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
         >
-          <div class="mt-4">
+          <div class="mt-6">
             <v-date-picker
               v-model="model"
               :landscape="landscape"
@@ -405,7 +394,7 @@
               type="month"
             />
           </div>
-          <div class="mt-4">
+          <div class="mt-6">
             <v-date-picker
               v-model="model"
               :landscape="landscape"

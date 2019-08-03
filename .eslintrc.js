@@ -15,7 +15,8 @@ module.exports = {
     es6: true
   },
   plugins: [
-    '@typescript-eslint'
+    '@typescript-eslint',
+    'vuetify'
   ],
   rules: {
     // allow paren-less arrow functions
@@ -51,6 +52,7 @@ module.exports = {
       'destructuring': 'all',
       'ignoreReadBeforeAssign': true
     }],
+    'no-prototype-builtins': 'off',
 
     // Not in override, these apply to non-.vue files too
     'vue/name-property-casing': 'off',
@@ -84,7 +86,11 @@ module.exports = {
         'vue/valid-v-on': 'off', // This rule doesn't allow empty event listeners
         'vue/no-v-html': 'off',
         'vue/singleline-html-element-content-newline': 'off',
-        'vue/multiline-html-element-content-newline': 'off'
+        'vue/multiline-html-element-content-newline': 'off',
+
+        // 'vuetify/grid-unknown-attributes': 'error',
+        // 'vuetify/no-legacy-grid': 'error',
+        'vuetify/no-deprecated-classes': 'error'
       }
     },
     {

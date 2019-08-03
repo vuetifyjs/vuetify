@@ -52,6 +52,9 @@
     &:after
       display: none
 
+    &:not(:first-child)
+      border-left-width: 0
+
 // Modifiers
 .v-btn-toggle--rounded
   border-radius: $btn-toggle-round-radius

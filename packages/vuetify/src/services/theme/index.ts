@@ -18,8 +18,11 @@ export class Theme extends Service implements ITheme {
   static property = 'theme'
 
   public disabled = false
+
   public options: ITheme['options']
+
   public styleEl?: HTMLStyleElement
+
   public themes: VuetifyThemes = {
     light: {
       primary: '#1976D2',   // blue.darken2
@@ -40,9 +43,11 @@ export class Theme extends Service implements ITheme {
       warning: '#FB8C00',    // amber.base
     },
   }
+
   public defaults: VuetifyThemes = this.themes
 
   private isDark = null as boolean | null
+
   private vueInstance = null as Vue | null
 
   constructor (options: Partial<ITheme> = {}) {
@@ -104,13 +109,10 @@ export class Theme extends Service implements ITheme {
   public init (root: Vue, ssrContext?: any): void {
     if (this.disabled) return
 
-    const meta = Boolean((root as any).$meta) // TODO: don't import public types from /src
-    const ssr = Boolean(ssrContext)
-
     /* istanbul ignore else */
-    if (meta) {
-      this.initNuxt(root)
-    } else if (ssr) {
+    if ((root as any).$meta) {
+      this.initVueMeta(root)
+    } else if (ssrContext) {
       this.initSSR(ssrContext)
     }
 
@@ -173,18 +175,20 @@ export class Theme extends Service implements ITheme {
     document.head.appendChild(this.styleEl)
   }
 
-  private initNuxt (root: Vue) {
+  private initVueMeta (root: Vue) {
     const options = this.options || {}
     root.$children.push(new Vue({
-      head: {
-        style: [
-          {
-            cssText: this.generatedStyles,
-            type: 'text/css',
-            id: 'vuetify-theme-stylesheet',
-            nonce: options.cspNonce,
-          },
-        ],
+      head: () => {
+        return {
+          style: [
+            {
+              cssText: this.generatedStyles,
+              type: 'text/css',
+              id: 'vuetify-theme-stylesheet',
+              nonce: options.cspNonce,
+            },
+          ],
+        }
       },
     } as any))
   }

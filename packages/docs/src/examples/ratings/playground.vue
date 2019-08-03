@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center">
+  <div class="text-center">
     <v-text-field
       v-model="fullIcon"
       color="red darken-4"

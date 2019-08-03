@@ -6,7 +6,7 @@
     flat
     tile
     color="transparent"
-    class="d-inline-flex mx-2"
+    class="mx-2"
     target="_blank"
     rel="noopener"
   >
@@ -15,6 +15,7 @@
       :class="value.dark ? 'black' : ''"
       :height="height"
       :src="`https://cdn.vuetifyjs.com/images/${value.logo}`"
+      class="flex-shrink-1"
       contain
       @click="$ga.event('patrons', 'click', value.name)"
     />

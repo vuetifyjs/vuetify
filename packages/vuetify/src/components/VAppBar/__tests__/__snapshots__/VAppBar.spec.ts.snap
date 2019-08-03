@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AppBar.ts should render with background 1`] = `
-
 <header class="v-sheet v-sheet--tile theme--light v-toolbar v-app-bar"
         style="margin-top: 0px; transform: translateY(0px); left: 0px; right: 0px;"
 >
@@ -24,5 +23,4 @@ exports[`AppBar.ts should render with background 1`] = `
   >
   </div>
 </header>
-
 `;

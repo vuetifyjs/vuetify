@@ -415,11 +415,11 @@ describe('VAutocomplete.ts', () => {
         items: [
           {
             id: 1,
-            labels: { '1033': 'ID 1 English', '1036': 'ID 1 French' },
+            labels: { 1033: 'ID 1 English', 1036: 'ID 1 French' },
           },
           {
             id: 2,
-            labels: { '1033': 'ID 2 English', '1036': 'ID 2 French' },
+            labels: { 1033: 'ID 2 English', 1036: 'ID 2 French' },
           },
         ],
       },

@@ -46,6 +46,7 @@ export default mixins(Positionable, Toggleable, Transitionable).extend({
         'v-speed-dial--absolute': this.absolute,
         'v-speed-dial--fixed': this.fixed,
         [`v-speed-dial--direction-${this.direction}`]: true,
+        'v-speed-dial--is-active': this.isActive,
       }
     },
   },
@@ -53,7 +54,7 @@ export default mixins(Positionable, Toggleable, Transitionable).extend({
   render (h): VNode {
     let children: VNode[] = []
     const data: VNodeData = {
-      'class': this.classes,
+      class: this.classes,
       directives: [{
         name: 'click-outside',
         value: () => (this.isActive = false),
@@ -71,7 +72,7 @@ export default mixins(Positionable, Toggleable, Transitionable).extend({
     if (this.isActive) {
       let btnCount = 0
       children = (this.$slots.default || []).map((b, i) => {
-        if (b.tag && typeof b.componentOptions !== 'undefined' && b.componentOptions.Ctor.options.name === 'v-btn') {
+        if (b.tag && typeof b.componentOptions !== 'undefined' && (b.componentOptions.Ctor.options.name === 'v-btn' || b.componentOptions.Ctor.options.name === 'v-tooltip')) {
           btnCount++
           return h('div', {
             style: {
@@ -87,7 +88,7 @@ export default mixins(Positionable, Toggleable, Transitionable).extend({
     }
 
     const list = h('transition-group', {
-      'class': 'v-speed-dial__list',
+      class: 'v-speed-dial__list',
       props: {
         name: this.transition,
         mode: this.mode,

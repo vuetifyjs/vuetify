@@ -11,9 +11,6 @@
   <a href="https://codecov.io/gh/vuetifyjs/vuetify">
     <img src="https://img.shields.io/codecov/c/github/vuetifyjs/vuetify.svg" alt="Coverage">
   </a>
-  <a href="https://otechie.com/vuetifyjs">
-    <img src="https://api.otechie.com/consultancy/vuetifyjs/badge.svg" alt="Consulting">
-  </a>
   <a href="https://www.npmjs.com/package/vuetify">
     <img src="https://img.shields.io/npm/dt/vuetify.svg" alt="Downloads">
   </a>
@@ -21,9 +18,6 @@
     <img src="https://img.shields.io/npm/dm/vuetify.svg" alt="Downloads">
   </a>
   <br>
-  <a href="https://codebeat.co/projects/github-com-vuetifyjs-vuetify-dev">
-    <img src="https://codebeat.co/badges/b2d1ce87-848b-440e-9d7e-df9883c0cd93" alt="codebeat badge">
-  </a>
   <a href="https://www.npmjs.com/package/vuetify">
     <img src="https://img.shields.io/npm/l/vuetify.svg" alt="License">
   </a>
@@ -53,7 +47,7 @@
 
 <ul>
   <li>
-    <a href="https://www.patreon.com/vuetify">Becoming a sponsor on Patreon</a>
+    <a href="https://github.com/users/johnleider/sponsorship">Becoming a sponsor on Github</a>
     <strong><small>(supports John)</small></strong>
   </li>
   <li>
@@ -69,9 +63,6 @@
   <li>
     <a href="https://vuetifyjs.com/getting-started/consulting-and-support?ref=github">Book time with John</a>
   </li>
-  <li>
-    <a href="https://otechie.com/vuetifyjs">Book time with the Team</a>
-  </li>
 </ul>
 
 <br>
@@ -84,8 +75,8 @@
   <tbody>
     <tr>
       <td>
-        <a href="https://www.fractalindustries.com/?ref=vuetify-github">
-          <img height="70px" src="https://cdn.vuetifyjs.com/images/backers/fractal-industries.png">
+        <a href="https://www.qomplx.com/?ref=vuetify-github">
+          <img height="70px" src="https://cdn.vuetifyjs.com/images/backers/QOMPLX.webp">
         </a>
       </td>
     </tr>
@@ -170,7 +161,7 @@ Harness the power of the [Vuetify community](https://community.vuetifyjs.com) an
 
 Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using polyfills). From mobile📱 to laptop 💻 to desktop 🖥, you can rest assured that your application will work as expected.
 
-Interested in the bleeding edge? Try the vue-cli Webpack SSR (Server side rendered) template and build websites optimized for SEO.
+Interested in the bleeding edge? Try the Vue CLI 3 Webpack SSR (Server side rendered) template and build websites optimized for SEO.
 
 For more information about IE11 and Safari 9+ polyfills, visit our [Quick Start Guide](https://vuetifyjs.com/en/getting-started/quick-start#ie11-safari-9-support)
 
@@ -186,7 +177,7 @@ To get started with Vuetify, you can follow one of these simple set-up instructi
 
 Looking to dive right in with zero setup and downtime? Check out our [CodePen.io One Minute Quickstart](https://template.vuetifyjs.com/)
 
-#### Vue CLI-3 Installation
+#### Vue CLI 3 Installation
 
 Setting up Vuetify with Vue's CLI is really easy 👌.
 
@@ -242,7 +233,7 @@ On the next screen, search for `Vuetify` on the list, select it, and install it 
         </a>
       </td>
       <td>
-       A vue-cli-3 plugin for installing and configuring Vuetify
+       A Vue CLI 3 plugin for installing and configuring Vuetify
       </td>
     </tr>
     <tr>
@@ -312,7 +303,7 @@ For including styles 🎨, you can either place the below styles in your `index.
 
 ```html
 <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
 ```
 Or you can import it to your webpack entry point file. This is _usually_ your `main.js` file.
 
@@ -328,14 +319,14 @@ To use Vuetify in your project by directly importing it through CDNs (Content De
 
 ```html
 <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
 ```
 
 Don't forget to add both Vuetify and the main Vue library to your HTML file before the closing `</body>` tag.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
 ```
 
 ### Community Support

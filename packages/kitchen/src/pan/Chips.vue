@@ -1,5 +1,5 @@
 <template>
-  <v-container text-xs-center>
+  <v-container text-center>
     <v-layout
       column
       variations
@@ -258,7 +258,7 @@
           justify-space-around
           wrap
         >
-          <div class="text-xs-center">
+          <div class="text-center">
             <v-btn
               v-if="!chip1 && !chip2 && !chip3 && !chip4"
               color="primary"

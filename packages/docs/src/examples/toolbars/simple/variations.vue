@@ -1,12 +1,12 @@
 <template>
-  <v-layout row wrap>
+  <v-layout wrap>
     <v-flex
       v-for="(bar, i) in bars"
       :key="i"
       xs12
       sm12
       md6
-      class="my-3"
+      class="my-4"
     >
       <v-card color="grey lighten-4" flat height="200px">
         <v-toolbar :color="bar.class" :dark="bar.dark">
@@ -32,10 +32,10 @@
   export default {
     data: () => ({
       bars: [
-        { 'class': '' },
-        { 'class': '', dark: true },
-        { 'class': 'primary', dark: true },
-        { 'class': 'elevation-0' },
+        { class: '' },
+        { class: '', dark: true },
+        { class: 'primary', dark: true },
+        { class: 'elevation-0' },
       ],
     }),
   }

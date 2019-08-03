@@ -23,7 +23,7 @@
     },
     "active-class": {
       "header": "### Custom active class",
-      "desc": "You can set class which will be added when item is selected."
+      "desc": "You can set a class which will be added when an item is selected."
     }
   },
   "api": {

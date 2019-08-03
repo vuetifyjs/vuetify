@@ -48,9 +48,9 @@ describe('VItemGroup', () => {
         multiple: true,
         value: '',
       },
-    });
+    })
 
-    (expect('Model must be bound to an array if the multiple property is true') as any).toHaveBeenTipped()
+    expect('Model must be bound to an array if the multiple property is true').toHaveBeenTipped()
   })
 
   it('should return the correct value', () => {
@@ -354,5 +354,25 @@ describe('VItemGroup', () => {
     item3.trigger('click')
 
     expect(wrapper.vm.internalValue).toBe(1)
+  })
+
+  it('should have the correct selected index, item and items', () => {
+    const wrapper = mountFunction({
+      slots: {
+        default: [Mock, Mock, Mock],
+      },
+    })
+
+    expect(wrapper.vm.items).toHaveLength(3)
+
+    wrapper.setProps({ value: 1 })
+
+    expect(wrapper.vm.selectedIndex).toBe(1)
+    expect(wrapper.vm.selectedItem).toEqual(wrapper.vm.items[1])
+
+    wrapper.setProps({ value: 2 })
+
+    expect(wrapper.vm.selectedIndex).toBe(2)
+    expect(wrapper.vm.selectedItem).toEqual(wrapper.vm.items[2])
   })
 })

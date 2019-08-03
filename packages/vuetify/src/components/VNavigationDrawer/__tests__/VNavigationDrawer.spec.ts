@@ -294,7 +294,7 @@ describe('VNavigationDrawer', () => {
         miniVariant: true,
       },
       listeners: {
-        'update:miniVariant': update,
+        'update:mini-variant': update,
       },
     })
 

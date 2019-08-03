@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="text-xs-center d-flex pb-3">
+    <div class="text-center d-flex pb-4">
       <v-btn @click="all">all</v-btn>
       <div>{{ panel }}</div>
       <v-btn @click="none">none</v-btn>

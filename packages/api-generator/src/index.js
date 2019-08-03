@@ -2,24 +2,11 @@ const Vue = require('vue')
 const Vuetify = require('vuetify')
 const fs = require('fs')
 const map = require('./helpers/map')
-const deepmerge = require('deepmerge')
+const deepmerge = require('./helpers/merge')
 
 const hyphenateRE = /\B([A-Z])/g
 function hyphenate (str) {
   return str.replace(hyphenateRE, '-$1').toLowerCase()
-}
-
-function arrayMerge (a, b) {
-  const arr = a.slice()
-  for (let i = 0; i < b.length; i++) {
-    const found = a.findIndex(item => item.name === b[i].name)
-    if (found >= 0) {
-      arr[found] = deepmerge(a[found], b[i])
-    } else {
-      arr.push(b[i])
-    }
-  }
-  return arr
 }
 
 Vue.use(Vuetify)
@@ -153,7 +140,7 @@ for (const name in installedComponents) {
   let options = parseComponent(component)
 
   if (map[kebabName]) {
-    options = deepmerge(options, map[kebabName], { arrayMerge })
+    options = deepmerge(options, map[kebabName])
   }
 
   components[kebabName] = options

@@ -1,70 +1,71 @@
 {
-  "header": "crwdns26326:0crwdne26326:0",
-  "headerText": "crwdns26328:0crwdne26328:0",
+  "header": "crwdns39048:0crwdne39048:0",
+  "headerText": "crwdns39050:0crwdne39050:0",
   "examples": {
     "usage": {
-      "desc": "crwdns26330:0crwdne26330:0"
+      "desc": "crwdns39052:0crwdne39052:0"
     },
-    "linearDeterminate": {
-      "header": "crwdns26332:0crwdne26332:0",
-      "desc": "crwdns26334:0crwdne26334:0"
+    "file-loader": {
+      "header": "crwdns39054:0crwdne39054:0",
+      "desc": "crwdns39056:0crwdne39056:0"
     },
-    "linearIndeterminate": {
-      "header": "crwdns26336:0crwdne26336:0",
-      "desc": "crwdns26338:0crwdne26338:0"
+    "linear-buffer": {
+      "header": "crwdns39058:0crwdne39058:0",
+      "desc": "crwdns39060:0crwdne39060:0"
     },
-    "linearBuffer": {
-      "header": "crwdns26340:0crwdne26340:0",
-      "desc": "crwdns26342:0crwdne26342:0"
+    "linear-custom-colors": {
+      "header": "crwdns39062:0crwdne39062:0",
+      "desc": "crwdns39064:0crwdne39064:0"
     },
-    "linearQueryIndeterminateAndDeterminate": {
-      "header": "crwdns26344:0crwdne26344:0",
-      "desc": "crwdns26346:0crwdne26346:0"
+    "linear-determinate": {
+      "header": "crwdns39066:0crwdne39066:0",
+      "desc": "crwdns39068:0crwdne39068:0"
     },
-    "linearCustomHeightAndContextualColors": {
-      "header": "crwdns26348:0crwdne26348:0",
-      "desc": "crwdns26350:0crwdne26350:0"
+    "linear-indeterminate": {
+      "header": "crwdns39070:0crwdne39070:0",
+      "desc": "crwdns39072:0crwdne39072:0"
     },
-    "linearCustomColors": {
-      "header": "crwdns26352:0crwdne26352:0",
-      "desc": "crwdns26354:0crwdne26354:0"
-    },
-    "rounded": {
-      "header": "crwdns35760:0crwdne35760:0",
-      "desc": "crwdns35762:0crwdne35762:0"
+    "linear-query-indeterminate-and-determinate": {
+      "header": "crwdns39074:0crwdne39074:0",
+      "desc": "crwdns39076:0crwdne39076:0"
     },
     "loader": {
-      "header": "crwdns35764:0crwdne35764:0",
-      "desc": "crwdns35766:0crwdne35766:0"
+      "header": "crwdns39078:0crwdne39078:0",
+      "desc": "crwdns39080:0crwdne39080:0"
+    },
+    "rounded": {
+      "header": "crwdns39082:0crwdne39082:0",
+      "desc": "crwdns39084:0crwdne39084:0"
     },
     "stream": {
-      "header": "crwdns35768:0crwdne35768:0",
-      "desc": "crwdns35770:0crwdne35770:0"
+      "header": "crwdns39086:0crwdne39086:0",
+      "desc": "crwdns39088:0crwdne39088:0"
     },
     "striped": {
-      "header": "crwdns35772:0crwdne35772:0",
-      "desc": "crwdns35774:0crwdne35774:0"
+      "header": "crwdns39090:0crwdne39090:0",
+      "desc": "crwdns39092:0crwdne39092:0"
     },
     "slot": {
-      "header": "crwdns35776:0crwdne35776:0",
-      "desc": "crwdns35778:0[v-slider]crwdne35778:0"
+      "header": "crwdns39094:0crwdne39094:0",
+      "desc": "crwdns39096:0[v-slider]crwdne39096:0"
     }
   },
   "props": {
-    "active": "crwdns26356:0crwdne26356:0",
-    "backgroundColor": "crwdns26358:0crwdne26358:0",
-    "backgroundOpacity": "crwdns26360:0crwdne26360:0",
-    "bufferValue": "crwdns26362:0crwdne26362:0",
-    "fill": "crwdns26364:0crwdne26364:0",
-    "indeterminate": "crwdns26366:0crwdne26366:0",
-    "query": "crwdns26368:0crwdne26368:0",
-    "rounded": "crwdns35780:0crwdne35780:0",
-    "size": "crwdns26370:0crwdne26370:0",
-    "stream": "crwdns35782:0crwdne35782:0",
-    "striped": "crwdns35784:0crwdne35784:0",
-    "value": "crwdns26372:0crwdne26372:0"
+    "active": "crwdns39098:0crwdne39098:0",
+    "backgroundColor": "crwdns39100:0crwdne39100:0",
+    "backgroundOpacity": "crwdns39102:0crwdne39102:0",
+    "bufferValue": "crwdns39104:0crwdne39104:0",
+    "fill": "crwdns39106:0crwdne39106:0",
+    "height": "crwdns39108:0crwdne39108:0",
+    "indeterminate": "crwdns39110:0crwdne39110:0",
+    "query": "crwdns39112:0crwdne39112:0",
+    "rounded": "crwdns39114:0crwdne39114:0",
+    "size": "crwdns39116:0crwdne39116:0",
+    "stream": "crwdns39118:0crwdne39118:0",
+    "striped": "crwdns39120:0crwdne39120:0",
+    "value": "crwdns39122:0crwdne39122:0"
   },
   "slots": {
-    "default": "crwdns35786:0crwdne35786:0"
+    "default": "crwdns39124:0crwdne39124:0"
   }
 }

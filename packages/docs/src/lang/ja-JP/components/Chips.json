@@ -1,5 +1,4 @@
 {
-  "header": "Chip",
   "headerText": "`v-chip` コンポーネントは小さな情報の断片を伝えるために使用されます。`close` プロパティを使用すると、Chip はインタラクティブとなり、ユーザーの入力を受け付けられるようになります。",
   "examples": {
     "colored": {
@@ -18,21 +17,17 @@
       "desc": "ラベル Chip は `v-card` の border-radius を使用します。"
     },
     "closable": {
-      "header": "閉じるボタン付きラベル",
-      "uninverted": true
+      "header": "### 閉じるボタン付きラベル"
     },
-    "inSelects": {
-      "header": "Select との組み合わせ",
-      "desc": "Select では、選択された項目を表示するために Chip を使用することができます。",
-      "uninverted": true
+    "in-selects": {
+      "header": "### Select との組み合わせ",
+      "desc": "Select では、選択された項目を表示するために Chip を使用することができます。"
     }
   },
   "props": {
     "close": "閉じるボタンを追加します。",
     "disabled": "Chip を無効化し、選択できないようにします。",
     "label": "丸みを削除します。",
-    "outline": "背景を削除しテキストカラーとボーダーカラーを適用します。",
-    "outlined": "背景を削除しテキストカラーとボーダーカラーを適用します。",
-    "selected": "Chip が選択された状態の色を適用します。 主に `v-select` でハイライト表示するために使用します。"
+    "outlined": "背景を削除しテキストカラーとボーダーカラーを適用します。"
   }
 }

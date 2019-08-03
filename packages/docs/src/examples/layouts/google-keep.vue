@@ -31,7 +31,6 @@
           <v-layout
             v-if="item.heading"
             :key="i"
-            row
             align-center
           >
             <v-flex xs6>
@@ -41,7 +40,7 @@
             </v-flex>
             <v-flex
               xs6
-              class="text-xs-right"
+              class="text-right"
             >
               <v-btn
                 small
@@ -53,7 +52,7 @@
             v-else-if="item.divider"
             :key="i"
             dark
-            class="my-3"
+            class="my-4"
           ></v-divider>
           <v-list-item
             v-else
@@ -146,8 +145,8 @@
   }
 </script>
 
-<style lang="sass">
-#keep
-  .v-navigation-drawer__border
-    display: none
+<style>
+#keep .v-navigation-drawer__border {
+  display: none
+}
 </style>

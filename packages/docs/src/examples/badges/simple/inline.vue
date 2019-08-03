@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center">
+  <div class="text-center">
     <v-badge left>
       <template v-slot:badge>
         <span>2</span>

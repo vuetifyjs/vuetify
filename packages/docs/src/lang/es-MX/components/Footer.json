@@ -1,5 +1,4 @@
 {
-  "header": "Footer",
   "headerText": "El componente `v-footer` se usa para mostrar información general que el usuario podría querer accesar desde cualquier página de tu sitio.",
   "props": {
     "inset": "Posiciona el desplazamiento de la _toolbar_ en el `v-navigation-drawer`"

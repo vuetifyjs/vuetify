@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="hide-overflow mx-auto"
+    class="overflow-hidden mx-auto"
     height="200"
     max-width="500"
   >
@@ -30,7 +30,7 @@
 
     <v-sheet
       id="scroll-area-2"
-      class="scroll-y"
+      class="overflow-y-auto"
       max-height="600"
     >
       <v-container style="height: 1500px;">

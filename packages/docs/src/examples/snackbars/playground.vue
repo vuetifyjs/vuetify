@@ -2,7 +2,7 @@
   <v-card>
     <v-card-text>
       <v-container fluid>
-        <v-layout row wrap>
+        <v-layout wrap>
           <v-flex xs12>
             <v-radio-group v-model="color" row>
               <v-radio
@@ -48,13 +48,6 @@
 
           <v-flex xs12 sm3>
             <v-checkbox
-              v-model="autoHeight"
-              label="Auto Height"
-            ></v-checkbox>
-          </v-flex>
-
-          <v-flex xs12 sm3>
-            <v-checkbox
               v-model="mode"
               label="Multi-line (mobile)"
               value="multi-line"
@@ -72,7 +65,7 @@
           <v-flex xs12 sm4>
             <v-text-field
               v-model="text"
-              class="px-3"
+              class="px-4"
               label="Text"
               type="text"
             ></v-text-field>
@@ -81,7 +74,7 @@
           <v-flex xs12 sm4>
             <v-text-field
               v-model.number="timeout"
-              class="px-3"
+              class="px-4"
               label="Timeout"
               type="number"
             ></v-text-field>
@@ -101,7 +94,6 @@
 
     <v-snackbar
       v-model="snackbar"
-      :auto-height="autoHeight"
       :bottom="y === 'bottom'"
       :color="color"
       :left="x === 'left'"
@@ -127,7 +119,6 @@
   export default {
     data () {
       return {
-        autoHeight: false,
         color: '',
         mode: '',
         snackbar: false,

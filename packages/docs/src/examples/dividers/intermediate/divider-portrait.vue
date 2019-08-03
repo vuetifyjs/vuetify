@@ -1,6 +1,5 @@
 <template>
   <v-layout
-    row
     wrap
   >
     <v-flex
@@ -10,7 +9,7 @@
     >
       <v-card color="grey darken-1">
         <v-card-title>
-          <span class="headline white--text pl-3">Portrait View</span>
+          <span class="headline white--text pl-4">Portrait View</span>
 
           <v-spacer></v-spacer>
 

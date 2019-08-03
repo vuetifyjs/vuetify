@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-layout
-      row
       wrap
       justify-space-around
     >
@@ -45,7 +44,7 @@
     </v-layout>
 
     <v-sheet
-      class="scroll-y"
+      class="overflow-y-auto"
       max-height="600"
     >
       <v-container style="height: 1500px;">

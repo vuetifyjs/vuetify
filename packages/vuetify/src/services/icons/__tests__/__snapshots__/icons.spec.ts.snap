@@ -60,7 +60,7 @@ Object {
   "next": "fa fa-chevron-right",
   "prev": "fa fa-chevron-left",
   "radioOff": "fa fa-circle-o",
-  "radioOn": "fa fa-dot-circle",
+  "radioOn": "fa fa-dot-circle-o",
   "ratingEmpty": "fa fa-star-o",
   "ratingFull": "fa fa-star",
   "ratingHalf": "fa fa-star-half-o",

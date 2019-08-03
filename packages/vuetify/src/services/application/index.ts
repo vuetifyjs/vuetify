@@ -8,11 +8,17 @@ export class Application extends Service implements IApplication {
   static property = 'application'
 
   bar = 0
+
   top = 0
+
   left = 0
+
   insetFooter = 0
+
   right = 0
+
   bottom = 0
+
   footer = 0
 
   application: Dictionary<TargetPropValues> = {

@@ -7,9 +7,9 @@
 
     <v-layout
       align-center
-      pa-3
+      pa-4
     >
-      <span class="mr-3">To</span>
+      <span class="mr-4">To</span>
       <v-menu
         v-model="menu"
         bottom

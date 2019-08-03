@@ -10,6 +10,9 @@
   pointer-events: none
   position: fixed
   right: 8px
+  text-align: left
+  transition-duration: .15s
+  transition-timing-function: map-get($transition, 'linear-out-slow-in')
   z-index: 1000
 
   &--absolute
@@ -27,21 +30,19 @@
     border-radius: 4px
     display: flex
     margin: 0 auto
-    max-width: 672px
-    min-width: 344px
     pointer-events: auto
-    transition-duration: .15s
-    transition-timing-function: map-get($transition, 'linear-out-slow-in')
+    transition: inherit
     transition-property: opacity, transform
+    min-width: 100%
     +elevation(6)
 
   &__content
     align-items: center
     display: flex
-    height: 48px
+    min-height: 48px
     justify-content: space-between
     overflow: hidden
-    padding: 0 16px
+    padding: 8px 16px
     width: 100%
 
     .v-btn.v-btn
@@ -84,12 +85,12 @@
         flex: 0 0 auto
         margin: 0
 
-  &--auto-height &__content
-    height: auto
-
 @media #{map-get($display-breakpoints, 'sm-and-up')}
   .v-snack
     &__wrapper
+      min-width: 344px
+      max-width: 672px
+
       .v-snack--left &
         margin-left: 0
 

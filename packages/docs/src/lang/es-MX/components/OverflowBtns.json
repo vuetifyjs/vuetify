@@ -1,3 +1,10 @@
 {
-  "header": "Overflow Button"
+  "examples": {
+    "disabled": {
+      "header": "Deshabilitado"
+    },
+    "filled": {
+      "desc": "Los text fields pueden ser utilizados con un diseño alternativo de _box design_. Los íconos adjuntos al principio o al final **no están** soportados en este modo."
+    }
+  }
 }

@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VDataTable.ts should render 1`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -12,7 +11,7 @@ exports[`VDataTable.ts should render 1`] = `
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="v-data-table__empty-wrapper">
           <td colspan="0">
             No data available
           </td>
@@ -55,7 +54,7 @@ exports[`VDataTable.ts should render 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -98,11 +97,9 @@ exports[`VDataTable.ts should render 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataTable.ts should render loading state 1`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -140,8 +137,214 @@ exports[`VDataTable.ts should render loading state 1`] = `
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="v-data-table__empty-wrapper">
           <td colspan="0">
+            Loading items...
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="v-data-footer">
+    <div class="v-data-footer__select">
+      Rows per page:
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
+        <div class="v-input__control">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="list-256"
+               class="v-input__slot"
+          >
+            <div class="v-select__slot">
+              <div class="v-select__selections">
+                <div class="v-select__selection v-select__selection--comma">
+                  10
+                </div>
+                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                       id="input-256"
+                       readonly="readonly"
+                       type="text"
+                       aria-readonly="true"
+                >
+              </div>
+              <div class="v-input__append-inner">
+                <div class="v-input__icon v-input__icon--append">
+                  <i aria-hidden="true"
+                     class="v-icon notranslate material-icons theme--light"
+                  >
+                    $vuetify.icons.dropdown
+                  </i>
+                </div>
+              </div>
+            </div>
+            <div class="v-menu">
+              <div class="v-menu__content theme--light "
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+              >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-data-footer__pagination">
+      –
+    </div>
+    <div class="v-data-footer__icons-before">
+      <button type="button"
+              disabled="disabled"
+              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Previous page"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon notranslate material-icons theme--light"
+          >
+            $vuetify.icons.prev
+          </i>
+        </span>
+      </button>
+    </div>
+    <div class="v-data-footer__icons-after">
+      <button type="button"
+              disabled="disabled"
+              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Next page"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon notranslate material-icons theme--light"
+          >
+            $vuetify.icons.next
+          </i>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VDataTable.ts should render loading state 2`] = `
+<div class="v-data-table theme--light">
+  <div class="v-data-table__wrapper">
+    <table>
+      <colgroup>
+        <col class>
+        <col class>
+        <col class>
+        <col class>
+        <col class>
+        <col class>
+      </colgroup>
+      <thead class="v-data-table-header">
+        <tr>
+          <th role="columnheader"
+              scope="col"
+              aria-label="Dessert (100g serving)"
+              aria-sort="none"
+              class="text-left"
+          >
+            <span>
+              Dessert (100g serving)
+            </span>
+          </th>
+          <th role="columnheader"
+              scope="col"
+              aria-label="Calories: Not sorted. Activate to sort ascending."
+              aria-sort="none"
+              class="text-start sortable"
+          >
+            <span>
+              Calories
+            </span>
+            <i aria-hidden="true"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
+               style="font-size: 18px;"
+            >
+              $vuetify.icons.sort
+            </i>
+          </th>
+          <th role="columnheader"
+              scope="col"
+              aria-label="Fat (g): Not sorted. Activate to sort ascending."
+              aria-sort="none"
+              class="text-start sortable"
+          >
+            <span>
+              Fat (g)
+            </span>
+            <i aria-hidden="true"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
+               style="font-size: 18px;"
+            >
+              $vuetify.icons.sort
+            </i>
+          </th>
+          <th role="columnheader"
+              scope="col"
+              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
+              aria-sort="none"
+              class="text-start sortable"
+          >
+            <span>
+              Carbs (g)
+            </span>
+            <i aria-hidden="true"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
+               style="font-size: 18px;"
+            >
+              $vuetify.icons.sort
+            </i>
+          </th>
+          <th role="columnheader"
+              scope="col"
+              aria-label="Protein (g): Not sorted. Activate to sort ascending."
+              aria-sort="none"
+              class="text-start sortable"
+          >
+            <span>
+              Protein (g)
+            </span>
+            <i aria-hidden="true"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
+               style="font-size: 18px;"
+            >
+              $vuetify.icons.sort
+            </i>
+          </th>
+          <th role="columnheader"
+              scope="col"
+              aria-label="Iron (%): Not sorted. Activate to sort ascending."
+              aria-sort="none"
+              class="text-start sortable"
+          >
+            <span>
+              Iron (%)
+            </span>
+            <i aria-hidden="true"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
+               style="font-size: 18px;"
+            >
+              $vuetify.icons.sort
+            </i>
+          </th>
+        </tr>
+      </thead>
+      <thead>
+        <tr class="v-data-table__progress">
+          <th colspan="6"
+              class="column"
+          >
+            <div class="progress">
+              50%
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="v-data-table__empty-wrapper">
+          <td colspan="6">
             Loading items...
           </td>
         </tr>
@@ -183,7 +386,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -226,215 +429,6 @@ exports[`VDataTable.ts should render loading state 1`] = `
     </div>
   </div>
 </div>
-
-`;
-
-exports[`VDataTable.ts should render loading state 2`] = `
-
-<div class="v-data-table theme--light">
-  <div class="v-data-table__wrapper">
-    <table>
-      <colgroup>
-        <col class>
-        <col class>
-        <col class>
-        <col class>
-        <col class>
-        <col class>
-      </colgroup>
-      <thead class="v-data-table-header">
-        <tr>
-          <th role="columnheader"
-              scope="col"
-              aria-label="Dessert (100g serving)"
-              aria-sort="none"
-              class="text-xs-left"
-          >
-            <span>
-              Dessert (100g serving)
-            </span>
-          </th>
-          <th role="columnheader"
-              scope="col"
-              aria-label="Calories: Not sorted. Activate to sort ascending."
-              aria-sort="none"
-              class="text-xs-start sortable"
-          >
-            <span>
-              Calories
-            </span>
-            <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
-               style="font-size: 18px;"
-            >
-              $vuetify.icons.sort
-            </i>
-          </th>
-          <th role="columnheader"
-              scope="col"
-              aria-label="Fat (g): Not sorted. Activate to sort ascending."
-              aria-sort="none"
-              class="text-xs-start sortable"
-          >
-            <span>
-              Fat (g)
-            </span>
-            <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
-               style="font-size: 18px;"
-            >
-              $vuetify.icons.sort
-            </i>
-          </th>
-          <th role="columnheader"
-              scope="col"
-              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
-              aria-sort="none"
-              class="text-xs-start sortable"
-          >
-            <span>
-              Carbs (g)
-            </span>
-            <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
-               style="font-size: 18px;"
-            >
-              $vuetify.icons.sort
-            </i>
-          </th>
-          <th role="columnheader"
-              scope="col"
-              aria-label="Protein (g): Not sorted. Activate to sort ascending."
-              aria-sort="none"
-              class="text-xs-start sortable"
-          >
-            <span>
-              Protein (g)
-            </span>
-            <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
-               style="font-size: 18px;"
-            >
-              $vuetify.icons.sort
-            </i>
-          </th>
-          <th role="columnheader"
-              scope="col"
-              aria-label="Iron (%): Not sorted. Activate to sort ascending."
-              aria-sort="none"
-              class="text-xs-start sortable"
-          >
-            <span>
-              Iron (%)
-            </span>
-            <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
-               style="font-size: 18px;"
-            >
-              $vuetify.icons.sort
-            </i>
-          </th>
-        </tr>
-      </thead>
-      <thead>
-        <tr class="v-data-table__progress">
-          <th colspan="6"
-              class="column"
-          >
-            <div class="progress">
-              50%
-            </div>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td colspan="6">
-            Loading items...
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="v-data-footer">
-    <div class="v-data-footer__select">
-      Rows per page:
-      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
-        <div class="v-input__control">
-          <div role="button"
-               aria-haspopup="listbox"
-               aria-expanded="false"
-               aria-owns="list-296"
-               class="v-input__slot"
-          >
-            <div class="v-select__slot">
-              <div class="v-select__selections">
-                <div class="v-select__selection v-select__selection--comma">
-                  10
-                </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-296"
-                       readonly="readonly"
-                       type="text"
-                       aria-readonly="true"
-                >
-              </div>
-              <div class="v-input__append-inner">
-                <div class="v-input__icon v-input__icon--append">
-                  <i aria-hidden="true"
-                     class="v-icon notranslate material-icons theme--light"
-                  >
-                    $vuetify.icons.dropdown
-                  </i>
-                </div>
-              </div>
-            </div>
-            <div class="v-menu">
-              <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
-              >
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="v-data-footer__pagination">
-      –
-    </div>
-    <div class="v-data-footer__icons-before">
-      <button type="button"
-              disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="Previous page"
-      >
-        <span class="v-btn__content">
-          <i aria-hidden="true"
-             class="v-icon notranslate material-icons theme--light"
-          >
-            $vuetify.icons.prev
-          </i>
-        </span>
-      </button>
-    </div>
-    <div class="v-data-footer__icons-after">
-      <button type="button"
-              disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="Next page"
-      >
-        <span class="v-btn__content">
-          <i aria-hidden="true"
-             class="v-icon notranslate material-icons theme--light"
-          >
-            $vuetify.icons.next
-          </i>
-        </span>
-      </button>
-    </div>
-  </div>
-</div>
-
 `;
 
 exports[`VDataTable.ts should render virtual table 1`] = `
@@ -449,7 +443,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                 scope="col"
                 aria-label="Dessert (100g serving)"
                 aria-sort="none"
-                class="text-xs-left"
+                class="text-left"
             >
               <span>
                 Dessert (100g serving)
@@ -459,7 +453,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                 scope="col"
                 aria-label="Calories: Not sorted. Activate to sort ascending."
                 aria-sort="none"
-                class="text-xs-start sortable"
+                class="text-start sortable"
             >
               <span>
                 Calories
@@ -475,7 +469,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                 scope="col"
                 aria-label="Fat (g): Not sorted. Activate to sort ascending."
                 aria-sort="none"
-                class="text-xs-start sortable"
+                class="text-start sortable"
             >
               <span>
                 Fat (g)
@@ -491,7 +485,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                 scope="col"
                 aria-label="Carbs (g): Not sorted. Activate to sort ascending."
                 aria-sort="none"
-                class="text-xs-start sortable"
+                class="text-start sortable"
             >
               <span>
                 Carbs (g)
@@ -507,7 +501,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                 scope="col"
                 aria-label="Protein (g): Not sorted. Activate to sort ascending."
                 aria-sort="none"
-                class="text-xs-start sortable"
+                class="text-start sortable"
             >
               <span>
                 Protein (g)
@@ -523,7 +517,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                 scope="col"
                 aria-label="Iron (%): Not sorted. Activate to sort ascending."
                 aria-sort="none"
-                class="text-xs-start sortable"
+                class="text-start sortable"
             >
               <span>
                 Iron (%)
@@ -541,102 +535,102 @@ exports[`VDataTable.ts should render virtual table 1`] = `
           <tr style="height: 0px;">
           </tr>
           <tr>
-            <td class="text-xs-left">
+            <td class="text-left">
               Frozen Yogurt
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               159
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               6
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               24
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               4
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               1%
             </td>
           </tr>
           <tr>
-            <td class="text-xs-left">
+            <td class="text-left">
               Ice cream sandwich
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               237
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               9
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               37
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               4.3
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               1%
             </td>
           </tr>
           <tr>
-            <td class="text-xs-left">
+            <td class="text-left">
               Eclair
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               262
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               16
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               23
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               6
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               7%
             </td>
           </tr>
           <tr>
-            <td class="text-xs-left">
+            <td class="text-left">
               Cupcake
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               305
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               3.7
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               67
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               4.3
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               8%
             </td>
           </tr>
           <tr>
-            <td class="text-xs-left">
+            <td class="text-left">
               Gingerbread
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               356
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               16
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               49
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               3.9
             </td>
-            <td class="text-xs-start">
+            <td class="text-start">
               16%
             </td>
           </tr>
@@ -681,7 +675,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -727,7 +721,6 @@ exports[`VDataTable.ts should render virtual table 1`] = `
 `;
 
 exports[`VDataTable.ts should render with body slot 1`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -745,7 +738,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               scope="col"
               aria-label="Dessert (100g serving)"
               aria-sort="none"
-              class="text-xs-left"
+              class="text-left"
           >
             <span>
               Dessert (100g serving)
@@ -755,13 +748,13 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -771,13 +764,13 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -787,13 +780,13 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -803,13 +796,13 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -819,13 +812,13 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -873,7 +866,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -915,11 +908,9 @@ exports[`VDataTable.ts should render with body slot 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataTable.ts should render with data 1`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -937,7 +928,7 @@ exports[`VDataTable.ts should render with data 1`] = `
               scope="col"
               aria-label="Dessert (100g serving)"
               aria-sort="none"
-              class="text-xs-left"
+              class="text-left"
           >
             <span>
               Dessert (100g serving)
@@ -947,13 +938,13 @@ exports[`VDataTable.ts should render with data 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -963,13 +954,13 @@ exports[`VDataTable.ts should render with data 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -979,13 +970,13 @@ exports[`VDataTable.ts should render with data 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -995,13 +986,13 @@ exports[`VDataTable.ts should render with data 1`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1011,13 +1002,13 @@ exports[`VDataTable.ts should render with data 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1027,102 +1018,102 @@ exports[`VDataTable.ts should render with data 1`] = `
       </thead>
       <tbody>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-left">
             Frozen Yogurt
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             159
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             6
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             24
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             4
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             1%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-left">
             Ice cream sandwich
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             237
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             9
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             37
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             4.3
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             1%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-left">
             Eclair
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             262
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             16
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             23
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             6
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             7%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-left">
             Cupcake
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             305
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             3.7
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             67
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             4.3
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             8%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-left">
             Gingerbread
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             356
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             16
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             49
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             3.9
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             16%
           </td>
         </tr>
@@ -1164,7 +1155,7 @@ exports[`VDataTable.ts should render with data 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -1206,11 +1197,9 @@ exports[`VDataTable.ts should render with data 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataTable.ts should render with group scoped slot 1`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -1227,7 +1216,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               scope="col"
               aria-label="Dessert (100g serving)"
               aria-sort="none"
-              class="text-xs-left"
+              class="text-left"
           >
             <span>
               Dessert (100g serving)
@@ -1237,13 +1226,13 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1253,13 +1242,13 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1269,13 +1258,13 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1285,13 +1274,13 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1323,7 +1312,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-259"
+               aria-owns="list-239"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -1332,7 +1321,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-259"
+                       id="input-239"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -1350,7 +1339,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -1392,11 +1381,9 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -1413,7 +1400,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               scope="col"
               aria-label="Dessert (100g serving)"
               aria-sort="none"
-              class="text-xs-left"
+              class="text-left"
           >
             <span>
               Dessert (100g serving)
@@ -1423,13 +1410,13 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1439,13 +1426,13 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1455,13 +1442,13 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1471,13 +1458,13 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1488,7 +1475,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
       <tbody>
         <tr class="v-row-group__header">
           <td colspan="5"
-              class="text-xs-start"
+              class="text-start"
           >
             <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
@@ -1516,19 +1503,19 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-left">
             Frozen Yogurt
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             6
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             24
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             4
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             1%
           </td>
         </tr>
@@ -1539,7 +1526,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         </tr>
         <tr class="v-row-group__header">
           <td colspan="5"
-              class="text-xs-start"
+              class="text-start"
           >
             <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
@@ -1567,19 +1554,19 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-left">
             Ice cream sandwich
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             9
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             37
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             4.3
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             1%
           </td>
         </tr>
@@ -1590,7 +1577,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         </tr>
         <tr class="v-row-group__header">
           <td colspan="5"
-              class="text-xs-start"
+              class="text-start"
           >
             <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
@@ -1618,19 +1605,19 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-left">
             Eclair
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             16
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             23
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             6
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             7%
           </td>
         </tr>
@@ -1641,7 +1628,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         </tr>
         <tr class="v-row-group__header">
           <td colspan="5"
-              class="text-xs-start"
+              class="text-start"
           >
             <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
@@ -1669,19 +1656,19 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-left">
             Cupcake
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             3.7
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             67
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             4.3
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             8%
           </td>
         </tr>
@@ -1692,7 +1679,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         </tr>
         <tr class="v-row-group__header">
           <td colspan="5"
-              class="text-xs-start"
+              class="text-start"
           >
             <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
@@ -1720,19 +1707,19 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-left">
             Gingerbread
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             16
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             49
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             3.9
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             16%
           </td>
         </tr>
@@ -1752,7 +1739,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-181"
+               aria-owns="list-161"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -1761,7 +1748,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-181"
+                       id="input-161"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -1779,7 +1766,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -1821,11 +1808,9 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataTable.ts should render with grouped rows 1`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -1842,7 +1827,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               scope="col"
               aria-label="Dessert (100g serving)"
               aria-sort="none"
-              class="text-xs-left"
+              class="text-left"
           >
             <span>
               Dessert (100g serving)
@@ -1852,13 +1837,13 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1868,13 +1853,13 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1884,13 +1869,13 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1900,13 +1885,13 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1917,7 +1902,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
       <tbody>
         <tr class="v-row-group__header">
           <td colspan="5"
-              class="text-xs-start"
+              class="text-start"
           >
             <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
@@ -1945,42 +1930,42 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-left">
             Jelly bean
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             375
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             0
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             94
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             0%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-left">
             Lollipop
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             392
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             0.2
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             98
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             2%
           </td>
         </tr>
         <tr class="v-row-group__header">
           <td colspan="5"
-              class="text-xs-start"
+              class="text-start"
           >
             <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
@@ -2008,25 +1993,25 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-left">
             Frozen Yogurt
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             159
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             6
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             24
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             1%
           </td>
         </tr>
         <tr class="v-row-group__header">
           <td colspan="5"
-              class="text-xs-start"
+              class="text-start"
           >
             <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
@@ -2054,25 +2039,25 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-left">
             Gingerbread
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             356
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             16
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             49
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             16%
           </td>
         </tr>
         <tr class="v-row-group__header">
           <td colspan="5"
-              class="text-xs-start"
+              class="text-start"
           >
             <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
@@ -2100,19 +2085,19 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-left">
             Ice cream sandwich
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             237
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             9
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             37
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             1%
           </td>
         </tr>
@@ -2127,7 +2112,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-238"
+               aria-owns="list-218"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -2136,7 +2121,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-238"
+                       id="input-218"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -2154,7 +2139,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -2196,11 +2181,9 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataTable.ts should render with item scoped slot 1`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -2218,7 +2201,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               scope="col"
               aria-label="Dessert (100g serving)"
               aria-sort="none"
-              class="text-xs-left"
+              class="text-left"
           >
             <span>
               Dessert (100g serving)
@@ -2228,13 +2211,13 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2244,13 +2227,13 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2260,13 +2243,13 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2276,13 +2259,13 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2292,13 +2275,13 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2308,19 +2291,19 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
       </thead>
       <tbody>
         <div>
-          {"item":{"name":"Frozen Yogurt","calories":159,"fat":6,"carbs":24,"protein":4,"iron":"1%"},"select":{"props":{"value":false},"on":{}},"expand":{"props":{"value":false},"on":{}},"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
+          {"item":{"name":"Frozen Yogurt","calories":159,"fat":6,"carbs":24,"protein":4,"iron":"1%"},"isSelected":false,"isExpanded":false,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
         </div>
         <div>
-          {"item":{"name":"Ice cream sandwich","calories":237,"fat":9,"carbs":37,"protein":4.3,"iron":"1%"},"select":{"props":{"value":false},"on":{}},"expand":{"props":{"value":false},"on":{}},"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
+          {"item":{"name":"Ice cream sandwich","calories":237,"fat":9,"carbs":37,"protein":4.3,"iron":"1%"},"isSelected":false,"isExpanded":false,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
         </div>
         <div>
-          {"item":{"name":"Eclair","calories":262,"fat":16,"carbs":23,"protein":6,"iron":"7%"},"select":{"props":{"value":false},"on":{}},"expand":{"props":{"value":false},"on":{}},"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
+          {"item":{"name":"Eclair","calories":262,"fat":16,"carbs":23,"protein":6,"iron":"7%"},"isSelected":false,"isExpanded":false,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
         </div>
         <div>
-          {"item":{"name":"Cupcake","calories":305,"fat":3.7,"carbs":67,"protein":4.3,"iron":"8%"},"select":{"props":{"value":false},"on":{}},"expand":{"props":{"value":false},"on":{}},"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
+          {"item":{"name":"Cupcake","calories":305,"fat":3.7,"carbs":67,"protein":4.3,"iron":"8%"},"isSelected":false,"isExpanded":false,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
         </div>
         <div>
-          {"item":{"name":"Gingerbread","calories":356,"fat":16,"carbs":49,"protein":3.9,"iron":"16%"},"select":{"props":{"value":false},"on":{}},"expand":{"props":{"value":false},"on":{}},"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
+          {"item":{"name":"Gingerbread","calories":356,"fat":16,"carbs":49,"protein":3.9,"iron":"16%"},"isSelected":false,"isExpanded":false,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
         </div>
       </tbody>
     </table>
@@ -2333,7 +2316,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-203"
+               aria-owns="list-183"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -2342,7 +2325,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-203"
+                       id="input-183"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -2360,7 +2343,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -2402,11 +2385,9 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -2424,7 +2405,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               scope="col"
               aria-label="Dessert (100g serving)"
               aria-sort="none"
-              class="text-xs-left"
+              class="text-left"
           >
             <span>
               Dessert (100g serving)
@@ -2434,13 +2415,13 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2450,13 +2431,13 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2466,13 +2447,13 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2482,13 +2463,13 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2498,13 +2479,13 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2514,22 +2495,22 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
       </thead>
       <tbody>
         <tr class="expanded expanded__row">
-          <td class="text-xs-left">
+          <td class="text-left">
             Frozen Yogurt
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             159
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             6
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             24
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             4
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             1%
           </td>
         </tr>
@@ -2539,22 +2520,22 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
           </div>
         </tr>
         <tr class="expanded expanded__row">
-          <td class="text-xs-left">
+          <td class="text-left">
             Ice cream sandwich
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             237
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             9
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             37
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             4.3
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             1%
           </td>
         </tr>
@@ -2564,22 +2545,22 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
           </div>
         </tr>
         <tr class="expanded expanded__row">
-          <td class="text-xs-left">
+          <td class="text-left">
             Eclair
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             262
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             16
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             23
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             6
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             7%
           </td>
         </tr>
@@ -2589,22 +2570,22 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
           </div>
         </tr>
         <tr class="expanded expanded__row">
-          <td class="text-xs-left">
+          <td class="text-left">
             Cupcake
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             305
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             3.7
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             67
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             4.3
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             8%
           </td>
         </tr>
@@ -2614,22 +2595,22 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
           </div>
         </tr>
         <tr class="expanded expanded__row">
-          <td class="text-xs-left">
+          <td class="text-left">
             Gingerbread
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             356
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             16
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             49
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             3.9
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             16%
           </td>
         </tr>
@@ -2649,7 +2630,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-140"
+               aria-owns="list-120"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -2658,7 +2639,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-140"
+                       id="input-120"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -2676,7 +2657,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -2718,11 +2699,9 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataTable.ts should render with showExpand 1`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -2744,7 +2723,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               aria-label
               aria-sort="none"
               width="1px"
-              class="text-xs-start"
+              class="text-start"
           >
             <span>
             </span>
@@ -2753,7 +2732,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               scope="col"
               aria-label="Dessert (100g serving)"
               aria-sort="none"
-              class="text-xs-left"
+              class="text-left"
           >
             <span>
               Dessert (100g serving)
@@ -2763,13 +2742,13 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2779,13 +2758,13 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2795,13 +2774,13 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2811,13 +2790,13 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2827,13 +2806,13 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2843,137 +2822,137 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
       </thead>
       <tbody>
         <tr>
-          <td class="text-xs-start">
+          <td class="text-start">
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
             </i>
           </td>
-          <td class="text-xs-left">
+          <td class="text-left">
             Frozen Yogurt
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             159
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             6
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             24
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             4
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             1%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-start">
+          <td class="text-start">
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
             </i>
           </td>
-          <td class="text-xs-left">
+          <td class="text-left">
             Ice cream sandwich
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             237
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             9
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             37
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             4.3
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             1%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-start">
+          <td class="text-start">
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
             </i>
           </td>
-          <td class="text-xs-left">
+          <td class="text-left">
             Eclair
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             262
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             16
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             23
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             6
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             7%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-start">
+          <td class="text-start">
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
             </i>
           </td>
-          <td class="text-xs-left">
+          <td class="text-left">
             Cupcake
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             305
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             3.7
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             67
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             4.3
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             8%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-start">
+          <td class="text-start">
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
             </i>
           </td>
-          <td class="text-xs-left">
+          <td class="text-left">
             Gingerbread
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             356
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             16
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             49
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             3.9
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             16%
           </td>
         </tr>
@@ -2988,7 +2967,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-92"
+               aria-owns="list-72"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -2997,7 +2976,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-92"
+                       id="input-72"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -3015,7 +2994,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -3057,11 +3036,9 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataTable.ts should render with showExpand 2`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -3083,7 +3060,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               aria-label
               aria-sort="none"
               width="1px"
-              class="text-xs-start"
+              class="text-start"
           >
             <span>
             </span>
@@ -3092,7 +3069,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               scope="col"
               aria-label="Dessert (100g serving)"
               aria-sort="none"
-              class="text-xs-left"
+              class="text-left"
           >
             <span>
               Dessert (100g serving)
@@ -3102,13 +3079,13 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3118,13 +3095,13 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3134,13 +3111,13 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3150,13 +3127,13 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3166,13 +3143,13 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3182,137 +3159,137 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
       </thead>
       <tbody>
         <tr>
-          <td class="text-xs-start">
+          <td class="text-start">
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
             >
               $vuetify.icons.expand
             </i>
           </td>
-          <td class="text-xs-left">
+          <td class="text-left">
             Frozen Yogurt
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             159
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             6
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             24
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             4
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             1%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-start">
+          <td class="text-start">
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
             </i>
           </td>
-          <td class="text-xs-left">
+          <td class="text-left">
             Ice cream sandwich
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             237
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             9
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             37
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             4.3
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             1%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-start">
+          <td class="text-start">
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
             </i>
           </td>
-          <td class="text-xs-left">
+          <td class="text-left">
             Eclair
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             262
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             16
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             23
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             6
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             7%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-start">
+          <td class="text-start">
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
             </i>
           </td>
-          <td class="text-xs-left">
+          <td class="text-left">
             Cupcake
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             305
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             3.7
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             67
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             4.3
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             8%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-start">
+          <td class="text-start">
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
             </i>
           </td>
-          <td class="text-xs-left">
+          <td class="text-left">
             Gingerbread
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             356
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             16
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             49
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             3.9
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             16%
           </td>
         </tr>
@@ -3327,7 +3304,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-92"
+               aria-owns="list-72"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -3336,7 +3313,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-92"
+                       id="input-72"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -3354,7 +3331,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -3396,11 +3373,9 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataTable.ts should render with showSelect 1`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -3422,7 +3397,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               aria-label
               aria-sort="none"
               width="1px"
-              class="text-xs-start"
+              class="text-start"
           >
             <div class="v-data-table__checkbox v-simple-checkbox">
               <div class="v-input--selection-controls__ripple">
@@ -3438,7 +3413,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               scope="col"
               aria-label="Dessert (100g serving)"
               aria-sort="none"
-              class="text-xs-left"
+              class="text-left"
           >
             <span>
               Dessert (100g serving)
@@ -3448,13 +3423,13 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3464,13 +3439,13 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3480,13 +3455,13 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3496,13 +3471,13 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3512,13 +3487,13 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
+               class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3528,7 +3503,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
       </thead>
       <tbody>
         <tr>
-          <td class="text-xs-start">
+          <td class="text-start">
             <div class="v-data-table__checkbox v-simple-checkbox">
               <div class="v-input--selection-controls__ripple">
               </div>
@@ -3539,27 +3514,27 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               </i>
             </div>
           </td>
-          <td class="text-xs-left">
+          <td class="text-left">
             Frozen Yogurt
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             159
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             6
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             24
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             4
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             1%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-start">
+          <td class="text-start">
             <div class="v-data-table__checkbox v-simple-checkbox">
               <div class="v-input--selection-controls__ripple">
               </div>
@@ -3570,27 +3545,27 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               </i>
             </div>
           </td>
-          <td class="text-xs-left">
+          <td class="text-left">
             Ice cream sandwich
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             237
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             9
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             37
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             4.3
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             1%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-start">
+          <td class="text-start">
             <div class="v-data-table__checkbox v-simple-checkbox">
               <div class="v-input--selection-controls__ripple">
               </div>
@@ -3601,27 +3576,27 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               </i>
             </div>
           </td>
-          <td class="text-xs-left">
+          <td class="text-left">
             Eclair
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             262
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             16
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             23
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             6
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             7%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-start">
+          <td class="text-start">
             <div class="v-data-table__checkbox v-simple-checkbox">
               <div class="v-input--selection-controls__ripple">
               </div>
@@ -3632,27 +3607,27 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               </i>
             </div>
           </td>
-          <td class="text-xs-left">
+          <td class="text-left">
             Cupcake
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             305
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             3.7
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             67
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             4.3
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             8%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-start">
+          <td class="text-start">
             <div class="v-data-table__checkbox v-simple-checkbox">
               <div class="v-input--selection-controls__ripple">
               </div>
@@ -3663,22 +3638,22 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               </i>
             </div>
           </td>
-          <td class="text-xs-left">
+          <td class="text-left">
             Gingerbread
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             356
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             16
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             49
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             3.9
           </td>
-          <td class="text-xs-start">
+          <td class="text-start">
             16%
           </td>
         </tr>
@@ -3693,7 +3668,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-118"
+               aria-owns="list-98"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -3702,7 +3677,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-118"
+                       id="input-98"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -3720,7 +3695,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -3762,5 +3737,4 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
     </div>
   </div>
 </div>
-
 `;

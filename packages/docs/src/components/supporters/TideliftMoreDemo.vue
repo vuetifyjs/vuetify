@@ -1,5 +1,5 @@
 <template>
-  <div class="pa-3">
+  <div class="pa-4">
     <v-btn
       aria-label="Learn more about Tidelift"
       class="ma-1"

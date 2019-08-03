@@ -1,7 +1,7 @@
 <template>
   <v-form>
-    <v-container>
-      <v-layout row wrap>
+    <v-container grid-list-xl>
+      <v-layout wrap>
 
         <v-flex xs12 sm6>
           <v-text-field
@@ -40,7 +40,7 @@
         <v-flex xs12 sm6>
           <v-text-field
             value="John Doe"
-            label="Box"
+            label="Filled"
             filled
             disabled
           ></v-text-field>
@@ -49,7 +49,7 @@
         <v-flex xs12 sm6>
           <v-text-field
             value="John Doe"
-            label="Box"
+            label="Filled"
             filled
             readonly
           ></v-text-field>

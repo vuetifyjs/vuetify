@@ -6,7 +6,7 @@
   >
     <v-slide-group
       v-model="model"
-      class="pa-3"
+      class="pa-4"
       show-arrows
     >
       <v-slide-item
@@ -16,7 +16,7 @@
       >
         <v-card
           :color="active ? 'primary' : 'grey lighten-1'"
-          class="ma-3"
+          class="ma-4"
           height="200"
           width="100"
           @click="toggle"

@@ -3,12 +3,13 @@
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
         <v-container grid-list-sm fluid>
-          <v-layout row wrap>
+          <v-layout wrap>
             <v-flex
               v-for="n in 9"
               :key="n"
               xs4
               d-flex
+              child-flex
             >
               <v-card flat tile class="d-flex">
                 <v-img

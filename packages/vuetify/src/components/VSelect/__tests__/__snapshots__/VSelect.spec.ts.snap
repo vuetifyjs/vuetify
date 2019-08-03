@@ -1,17 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VSelect.ts should escape items in menu 1`] = `
-
 <div id="&amp;lt;strong&amp;gt;foo&amp;lt;/strong&amp;gt;-list-item-111"
      class="v-list-item__title"
 >
   &lt;strong&gt;foo&lt;/strong&gt;
 </div>
-
 `;
 
 exports[`VSelect.ts should only show items if they are in items 1`] = `
-
 <div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
   <div class="v-input__control">
     <div role="button"
@@ -43,7 +40,7 @@ exports[`VSelect.ts should only show items if they are in items 1`] = `
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
-             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+             style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
         >
         </div>
       </div>
@@ -59,11 +56,9 @@ exports[`VSelect.ts should only show items if they are in items 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSelect.ts should only show items if they are in items 2`] = `
-
 <div class="v-input theme--light v-text-field v-select">
   <div class="v-input__control">
     <div role="button"
@@ -92,7 +87,7 @@ exports[`VSelect.ts should only show items if they are in items 2`] = `
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
-             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+             style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
         >
         </div>
       </div>
@@ -108,11 +103,9 @@ exports[`VSelect.ts should only show items if they are in items 2`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSelect.ts should only show items if they are in items 3`] = `
-
 <div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
   <div class="v-input__control">
     <div role="button"
@@ -144,7 +137,7 @@ exports[`VSelect.ts should only show items if they are in items 3`] = `
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
-             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+             style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
         >
         </div>
       </div>
@@ -160,11 +153,9 @@ exports[`VSelect.ts should only show items if they are in items 3`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSelect.ts should only show items if they are in items 4`] = `
-
 <div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
   <div class="v-input__control">
     <div role="button"
@@ -199,7 +190,7 @@ exports[`VSelect.ts should only show items if they are in items 4`] = `
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
-             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+             style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
         >
         </div>
       </div>
@@ -215,11 +206,9 @@ exports[`VSelect.ts should only show items if they are in items 4`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSelect.ts should render v-select correctly when not using scope slot 1`] = `
-
 <div class="v-input theme--light v-text-field v-select">
   <div class="v-input__control">
     <div role="button"
@@ -248,7 +237,7 @@ exports[`VSelect.ts should render v-select correctly when not using scope slot 1
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
-             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+             style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
         >
         </div>
       </div>
@@ -264,11 +253,9 @@ exports[`VSelect.ts should render v-select correctly when not using scope slot 1
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSelect.ts should render v-select correctly when not using v-list-item in item scope slot 1`] = `
-
 <div class="v-input theme--light v-text-field v-select">
   <div class="v-input__control">
     <div role="button"
@@ -297,7 +284,7 @@ exports[`VSelect.ts should render v-select correctly when not using v-list-item 
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
-             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+             style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
         >
         </div>
       </div>
@@ -313,11 +300,9 @@ exports[`VSelect.ts should render v-select correctly when not using v-list-item 
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSelect.ts should render v-select correctly when using v-list-item in item scope slot 1`] = `
-
 <div class="v-input theme--light v-text-field v-select">
   <div class="v-input__control">
     <div role="button"
@@ -346,7 +331,7 @@ exports[`VSelect.ts should render v-select correctly when using v-list-item in i
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
-             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+             style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
         >
         </div>
       </div>
@@ -362,11 +347,9 @@ exports[`VSelect.ts should render v-select correctly when using v-list-item in i
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSelect.ts should use slotted no-data 1`] = `
-
 <div role="listbox"
      id="list-173"
      tabindex="-1"
@@ -387,5 +370,4 @@ exports[`VSelect.ts should use slotted no-data 1`] = `
     </div>
   </div>
 </div>
-
 `;

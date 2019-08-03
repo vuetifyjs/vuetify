@@ -22,7 +22,7 @@
               <v-img
                 :src="`https://cdn.vuetifyjs.com/images/${item.src}`"
                 height="150"
-                class="text-xs-right pa-2"
+                class="text-right pa-2"
                 @click="toggle"
               >
                 <v-btn

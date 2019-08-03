@@ -161,7 +161,7 @@ describe('VCalendarDaily', () => {
         start: '2019-01-29',
         end: '2019-02-04',
         intervalStyle: jest.fn(x => ({
-          'opacity': x.hour / 24,
+          opacity: x.hour / 24,
         })),
       },
     })

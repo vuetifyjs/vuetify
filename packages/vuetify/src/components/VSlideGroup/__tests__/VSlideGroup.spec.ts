@@ -119,11 +119,11 @@ describe('VSlideGroup.ts', () => {
 
     testOffset(10, false, 0)
     testOffset(400, false, 0)
-    testOffset(600, false, 126)
-    testOffset(960, false, 486)
+    testOffset(600, false, 128)
+    testOffset(960, false, 488)
     // RTL
-    testOffset(10, true, -496)
-    testOffset(400, true, -106)
+    testOffset(10, true, -498)
+    testOffset(400, true, -108)
     testOffset(600, true, 0)
     testOffset(960, true, 0)
   })

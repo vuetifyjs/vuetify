@@ -10,6 +10,17 @@ VSelect.props.push({
   example: ItemObject,
 })
 
+VSelect.events.push(
+  {
+    name: 'blur',
+    value: 'boolean',
+  },
+  {
+    name: 'focus',
+    value: 'boolean',
+  },
+)
+
 module.exports = {
   'v-select': VSelect,
 }

@@ -55,27 +55,27 @@
           "type": "alert",
           "lang": "specAlert",
           "value": "info"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "heading",
-          "lang": "efficiencyHeader"
         },
         {
-          "type": "text",
-          "lang": "efficiencyText1"
-        },
-        {
-          "type": "text",
-          "lang": "efficiencyText2"
-        },
-        {
-          "type": "markup",
-          "value": "js_testing_efficiency"
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "efficiencyHeader"
+            },
+            {
+              "type": "text",
+              "lang": "efficiencyText1"
+            },
+            {
+              "type": "text",
+              "lang": "efficiencyText2"
+            },
+            {
+              "type": "markup",
+              "value": "js_testing_efficiency"
+            }
+          ]
         }
       ]
     },
