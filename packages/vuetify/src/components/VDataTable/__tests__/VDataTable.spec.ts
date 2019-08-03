@@ -345,4 +345,19 @@ describe('VDataTable.ts', () => {
 
     expect(fn).toHaveBeenCalled()
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8254
+  it('should pass kebab-case footer props correctly', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: [],
+        items: [],
+        footerProps: {
+          'items-per-page-text': 'Foo:',
+        },
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

@@ -8,7 +8,7 @@ import VDataFooter from './VDataFooter'
 import Themeable from '../../mixins/themeable'
 
 // Helpers
-import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot } from '../../util/helpers'
+import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, camelizeObjectKeys } from '../../util/helpers'
 import { DataProps } from '../VData/VData'
 import { PropValidator } from 'vue/types/options'
 import { breaking, removed } from '../../util/console'
@@ -62,6 +62,9 @@ export default Themeable.extend({
     },
     someItems (): boolean {
       return this.internalCurrentItems.some((i: any) => this.isSelected(i))
+    },
+    sanitizedFooterProps (): object {
+      return camelizeObjectKeys(this.footerProps)
     },
   },
 
@@ -219,7 +222,7 @@ export default Themeable.extend({
 
       const data = {
         props: {
-          ...this.footerProps,
+          ...this.sanitizedFooterProps,
           options: props.options,
           pagination: props.pagination,
         },
