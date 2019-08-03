@@ -23,6 +23,7 @@ export interface DataPagination {
 }
 
 export interface DataProps {
+  originalItemsLength: number
   items: any[]
   pagination: DataPagination
   options: DataOptions
@@ -183,6 +184,7 @@ export default Vue.extend({
         updateOptions: this.updateOptions,
         pagination: this.pagination,
         groupedItems: this.groupedItems,
+        originalItemsLength: this.items.length,
       }
 
       return props

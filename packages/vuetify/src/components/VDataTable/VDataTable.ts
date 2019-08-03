@@ -282,7 +282,7 @@ export default VDataIterator.extend({
       ])
     },
     genItems (items: any[], props: DataProps) {
-      const empty = this.genEmpty(props.pagination.itemsLength)
+      const empty = this.genEmpty(props.originalItemsLength, props.pagination.itemsLength)
       if (empty) return [empty]
 
       return props.groupedItems
