@@ -92,7 +92,7 @@ export default baseMixins.extend<options>().extend({
         ...VInput.options.computed.classes.call(this),
         'v-text-field': true,
         'v-text-field--full-width': this.fullWidth,
-        'v-text-field--prefix': this.prefix,
+        'v-text-field--prefix': this.prefix && !this.hideAffixes,
         'v-text-field--single-line': this.isSingle,
         'v-text-field--solo': this.isSolo,
         'v-text-field--solo-inverted': this.soloInverted,
@@ -160,6 +160,9 @@ export default baseMixins.extend<options>().extend({
     labelValue (): boolean {
       return !this.isSingle &&
         Boolean(this.isFocused || this.isLabelActive || this.placeholder)
+    },
+    hideAffixes (): boolean {
+      return !this.isFocused && !this.isDirty
     },
   },
 
@@ -393,6 +396,8 @@ export default baseMixins.extend<options>().extend({
       ])
     },
     genAffix (type: 'prefix' | 'suffix') {
+      if (this.hideAffixes) return null
+
       return this.$createElement('div', {
         class: `v-text-field__${type}`,
         ref: type,
