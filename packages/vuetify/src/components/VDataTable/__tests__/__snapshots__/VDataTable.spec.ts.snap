@@ -2706,9 +2706,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
-        <col class
-             style="width: 1px;"
-        >
+        <col class>
         <col class>
         <col class>
         <col class>
@@ -2722,8 +2720,8 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               scope="col"
               aria-label
               aria-sort="none"
-              width="1px"
               class="text-start"
+              style="width: 1px; min-width: 1px;"
           >
             <span>
             </span>
@@ -3043,9 +3041,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
-        <col class
-             style="width: 1px;"
-        >
+        <col class>
         <col class>
         <col class>
         <col class>
@@ -3059,8 +3055,8 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               scope="col"
               aria-label
               aria-sort="none"
-              width="1px"
               class="text-start"
+              style="width: 1px; min-width: 1px;"
           >
             <span>
             </span>
@@ -3380,9 +3376,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
-        <col class
-             style="width: 1px;"
-        >
+        <col class>
         <col class>
         <col class>
         <col class>
@@ -3396,8 +3390,8 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               scope="col"
               aria-label
               aria-sort="none"
-              width="1px"
               class="text-start"
+              style="width: 1px; min-width: 1px;"
           >
             <div class="v-data-table__checkbox v-simple-checkbox">
               <div class="v-input--selection-controls__ripple">

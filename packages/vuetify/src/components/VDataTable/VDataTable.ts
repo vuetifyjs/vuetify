@@ -197,9 +197,6 @@ export default VDataIterator.extend({
           class: {
             divider: header.divider,
           },
-          style: {
-            width: header.width,
-          },
         })
       }))
     },
