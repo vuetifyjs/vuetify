@@ -1,6 +1,7 @@
 // Components
 import VSpeedDial from '../VSpeedDial'
 import VBtn from '../../VBtn/VBtn'
+import VTooltip from '../../VTooltip/VTooltip'
 
 // Utilities
 import {
@@ -70,14 +71,15 @@ describe('VSpeedDial.ts', () => {
     expect(wrapper.vm.isActive).toBe(false)
   })
 
-  it('should wrap v-btn component with div tag', () => {
+  it('should wrap v-btn or v-tooltip component with div tag', () => {
     const wrapper = mount(VSpeedDial, {
       slots: {
-        default: [VBtn],
+        default: [VBtn, VTooltip],
       },
       data: () => ({ isActive: true }),
     })
 
     expect(wrapper.findAll('.v-speed-dial__list div button')).toHaveLength(1)
+    expect(wrapper.findAll('.v-speed-dial__list div .v-tooltip')).toHaveLength(1)
   })
 })

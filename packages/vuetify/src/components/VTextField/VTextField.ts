@@ -166,6 +166,9 @@ export default baseMixins.extend<options>().extend({
   watch: {
     labelValue: 'setLabelWidth',
     outlined: 'setLabelWidth',
+    prefix () {
+      this.$nextTick(this.setPrefixWidth)
+    },
     isFocused (val) {
       // Sets validationState from validatable
       this.hasColor = val

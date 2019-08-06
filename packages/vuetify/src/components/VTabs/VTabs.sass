@@ -3,13 +3,13 @@
 @import './_variables.scss'
 
 +theme(v-tabs) using ($material)
-  .v-tab:not(.v-tab--active),
-  .v-tab:not(.v-tab--active) > .v-icon,
-  .v-tab--disabled
-    color: map-get($material, 'tabs')
-
-  .v-tabs-bar
+  > .v-tabs-bar
     background-color: map-get($material, 'cards')
+
+    .v-tab:not(.v-tab--active),
+    .v-tab:not(.v-tab--active) > .v-icon,
+    .v-tab--disabled
+      color: map-get($material, 'tabs')
 
   .v-tab
     +states($material)
@@ -117,8 +117,8 @@
     +rtl()
       margin-right: $tabs-item-align-with-title-margin
 
-.v-tabs--fixed-tabs,
-.v-tabs--centered
+.v-tabs--fixed-tabs > .v-tabs-bar,
+.v-tabs--centered > .v-tabs-bar
   +ltr()
     .v-tabs-bar__content > *:last-child
       margin-right: auto
@@ -139,19 +139,18 @@
     .v-tabs-slider-wrapper + *
       margin-right: auto
 
-.v-tabs--fixed-tabs
+.v-tabs--fixed-tabs > .v-tabs-bar
   .v-tab
     flex: 1 1 auto
     width: 100%
 
-.v-tabs--grow
+.v-tabs--grow > .v-tabs-bar
   .v-tab
     flex: 1 0 auto
     max-width: none
 
-.v-tabs--icons-and-text
-  .v-tabs-bar
-    height: $tabs-icons-and-text-bar-height
+.v-tabs--icons-and-text > .v-tabs-bar
+  height: $tabs-icons-and-text-bar-height
 
   .v-tab
     flex-direction: column-reverse
@@ -159,11 +158,11 @@
     > *:first-child
       margin-bottom: 6px
 
-.v-tabs--overflow
+.v-tabs--overflow > .v-tabs-bar
   .v-tab
     flex: 1 0 auto
 
-.v-tabs--right
+.v-tabs--right > .v-tabs-bar
   .v-tab:first-child,
   .v-tabs-slider-wrapper + .v-tab
     +ltr()

@@ -109,6 +109,7 @@ export default baseMixins.extend({
       left: 0,
       right: 0,
     },
+    stackMinZIndex: 6,
   }),
 
   computed: {

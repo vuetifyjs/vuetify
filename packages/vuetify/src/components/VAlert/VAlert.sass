@@ -97,8 +97,11 @@
   flex: 1 1 auto
 
 .v-alert__dismissible
-  margin-top: -6px
-  margin-bottom: -6px
+  +ltr()
+    margin: -16px -8px -16px 8px
+
+  +rtl()
+    margin: -16px 8px -16px -8px
 
 .v-alert__icon
   align-self: flex-start
