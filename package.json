@@ -19,7 +19,8 @@
     "version": "node scripts/confirm-npm-tag.js",
     "prepare": "node scripts/post-install.js",
     "postversion": "node scripts/post-release-merge.js",
-    "clean": "lerna clean"
+    "clean": "lerna clean",
+    "storybook": "node scripts/storybook.js"
   },
   "engines": {
     "node": ">= 10",
