@@ -12,6 +12,7 @@ export default {
       sortAscending: ': Sakārtots augošā secībā. Aktivizēt, lai sakārtotu dilstošā secībā.',
       sortNone: ': Nav sakārtots. Aktivizēt, lai sakārtotu augošā secībā.',
     },
+    sortBy: 'Sort by',
   },
   dataFooter: {
     itemsPerPageText: 'Rādīt lapā:',
