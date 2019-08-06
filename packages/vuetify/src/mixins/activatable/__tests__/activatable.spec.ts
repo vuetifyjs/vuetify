@@ -133,7 +133,7 @@ describe('activatable.ts', () => {
 
     expect(wrapper.vm.isActive).toBe(false)
     expect(el).toEqual(activatorElement)
-    activatorElement.onclick()
+    activatorElement.dispatchEvent(new Event('click'))
     expect(wrapper.vm.isActive).toBe(true)
 
     wrapper.setProps({ openOnHover: true, value: false })
@@ -141,13 +141,13 @@ describe('activatable.ts', () => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.isActive).toBe(false)
-    activatorElement.onmouseenter()
+    activatorElement.dispatchEvent(new Event('mouseenter'))
 
     await new Promise(resolve => setTimeout(resolve, wrapper.vm.openDelay))
 
     expect(wrapper.vm.isActive).toBe(true)
 
-    activatorElement.onmouseleave()
+    activatorElement.dispatchEvent(new Event('mouseleave'))
     await new Promise(resolve => setTimeout(resolve, wrapper.vm.leaveDelay))
 
     expect(wrapper.vm.isActive).toBe(false)
@@ -160,35 +160,22 @@ describe('activatable.ts', () => {
     el.id = 'foobar'
     document.body.appendChild(el)
 
-    expect(el.onclick).toBeNull()
-    expect(el.onmouseenter).toBeNull()
-    expect(el.onmouseleave).toBeNull()
-
     const wrapper = mountFunction({
       propsData: {
         activator: '#foobar',
       },
     })
 
-    expect(el.onclick).toBeTruthy()
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.listeners).not.toEqual({})
 
     wrapper.destroy()
 
-    expect(el.onclick).toBeNull()
+    await wrapper.vm.$nextTick()
 
-    const wrapper2 = mountFunction({
-      propsData: {
-        activator: '#foobar',
-        openOnHover: true,
-      },
-    })
+    expect(wrapper.vm.listeners).toEqual({})
 
-    expect(el.onmouseenter).toBeTruthy()
-    expect(el.onmouseleave).toBeTruthy()
-
-    wrapper2.destroy()
-
-    expect(el.onmouseenter).toBeNull()
-    expect(el.onmouseleave).toBeNull()
+    document.body.removeChild(el)
   })
 })

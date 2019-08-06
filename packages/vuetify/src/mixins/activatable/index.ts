@@ -36,6 +36,7 @@ export default baseMixins.extend({
     activatorElement: null as HTMLElement | null,
     activatorNode: [] as VNode[],
     events: ['click', 'mouseenter', 'mouseleave'],
+    listeners: {} as Record<string, (e: MouseEvent & KeyboardEvent) => void>,
   }),
 
   watch: {
@@ -70,11 +71,11 @@ export default baseMixins.extend({
         !this.activatorElement
       ) return
 
-      const listeners = this.genActivatorListeners()
-      const keys = Object.keys(listeners)
+      this.listeners = this.genActivatorListeners()
+      const keys = Object.keys(this.listeners)
 
       for (const key of keys) {
-        (this.activatorElement as any)[`on${key}`] = listeners[key]
+        (this.activatorElement as any).addEventListener(key, this.listeners[key])
       }
     },
     genActivator () {
@@ -167,9 +168,13 @@ export default baseMixins.extend({
         !this.activatorElement
       ) return
 
-      for (const event of this.events) {
-        (this.activatorElement as any)[`on${event}`] = null
+      const keys = Object.keys(this.listeners)
+
+      for (const key of keys) {
+        (this.activatorElement as any).removeEventListener(key, this.listeners[key])
       }
+
+      this.listeners = {}
     },
     resetActivator () {
       this.activatorElement = null
