@@ -337,7 +337,7 @@ Frequently asked questions and Gotchas on the [FAQ Guide ❓](https://vuetifyjs.
 
 ### Contributing
 
-Developers interested in contributing should read the [Code of Conduct 👩‍💻👨‍💻](./CODE_OF_CONDUCT.md).
+Developers interested in contributing should read the [Code of Conduct 👩‍💻👨‍💻](./CODE_OF_CONDUCT.md) and the [Contribution Guide](https://vuetifyjs.com/en/getting-started/contributing).
 
 > Please do **not** ask general questions in an issue. Issues are only to report bugs, suggest
   enhancements, or request new features. For general questions and discussions, ask in the [Vuetify Discord Community](https://community.vuetifyjs.com/).
