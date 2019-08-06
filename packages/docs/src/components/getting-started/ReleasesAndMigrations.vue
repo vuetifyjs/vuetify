@@ -1,6 +1,29 @@
 <template>
   <v-container px-0>
-    <doc-markdown :code="migration" />
+    <v-card
+      id="release-notes"
+      outlined
+      class="mb-12"
+      tag="section"
+    >
+      <v-card-title>
+        <doc-subheading>releaseHeader</doc-subheading>
+      </v-card-title>
+      <v-card-text>Coming Soon...</v-card-text>
+    </v-card>
+    <v-card
+      id="migration-guide"
+      outlined
+      class="mb-12"
+      tag="section"
+    >
+      <v-card-title>
+        <doc-subheading>migrationHeader</doc-subheading>
+      </v-card-title>
+      <v-card-text>
+        <doc-markdown :code="migration" />
+      </v-card-text>
+    </v-card>
   </v-container>
 </template>
 
