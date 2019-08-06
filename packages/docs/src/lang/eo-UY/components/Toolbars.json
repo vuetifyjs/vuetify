@@ -1,75 +1,85 @@
 {
-  "header": "crwdns24876:0crwdne24876:0",
-  "headerText": "crwdns24878:0[v-navigation-drawer]crwdnd24878:0[v-card]crwdne24878:0",
+  "header": "crwdns37878:0crwdne37878:0",
+  "headerText": "crwdns37880:0[v-navigation-drawer]crwdnd37880:0[v-card]crwdne37880:0",
+  "buttonMargin": "crwdns37882:0crwdne37882:0",
   "examples": {
     "usage": {
-      "desc": "crwdns24880:0[v-btn]crwdne24880:0"
+      "desc": "crwdns37884:0[v-btn]crwdne37884:0"
     },
-    "columnWidthWithHierarchy": {
-      "header": "crwdns24882:0crwdne24882:0",
-      "desc": "crwdns24884:0crwdne24884:0"
+    "light-and-dark": {
+      "header": "crwdns37886:0crwdne37886:0",
+      "desc": "crwdns37888:0crwdne37888:0"
     },
-    "flexibleAndCard": {
-      "header": "crwdns24886:0crwdne24886:0",
-      "desc": "crwdns24888:0crwdne24888:0"
+    "flexible-and-card": {
+      "header": "crwdns37890:0crwdne37890:0",
+      "desc": "crwdns37892:0crwdne37892:0"
     },
-    "floatingWithSearch": {
-      "header": "crwdns24890:0crwdne24890:0",
-      "desc": "crwdns24892:0crwdne24892:0"
+    "floating-with-search": {
+      "header": "crwdns37894:0crwdne37894:0",
+      "desc": "crwdns37896:0crwdne37896:0"
     },
     "variations": {
-      "header": "crwdns24894:0crwdne24894:0",
-      "desc": "crwdns24896:0crwdne24896:0",
+      "header": "crwdns31586:0crwdne31586:0",
+      "desc": "crwdns37898:0crwdne37898:0",
       "uninverted": true
     },
     "prominent": {
-      "header": "crwdns24900:0crwdne24900:0",
-      "desc": "crwdns24902:0[v-app]crwdne24902:0"
+      "header": "crwdns31592:0crwdne31592:0",
+      "desc": "crwdns37900:0[v-app]crwdne37900:0"
     },
     "dense": {
-      "header": "crwdns24904:0crwdne24904:0",
-      "desc": "crwdns24906:0crwdne24906:0"
+      "header": "crwdns31596:0crwdne31596:0",
+      "desc": "crwdns37902:0crwdne37902:0"
     },
-    "denseProminent": {
-      "header": "crwdns24908:0crwdne24908:0",
-      "desc": "crwdns24910:0crwdne24910:0"
+    "dense-prominent": {
+      "header": "crwdns37904:0crwdne37904:0",
+      "desc": "crwdns37906:0crwdne37906:0"
     },
     "scrolling": {
-      "header": "crwdns24912:0crwdne24912:0",
-      "desc": "crwdns24914:0crwdne24914:0"
+      "header": "crwdns31604:0crwdne31604:0",
+      "desc": "crwdns37908:0crwdne37908:0"
     },
-    "systemBarsStatusWindow": {
-      "header": "crwdns24916:0crwdne24916:0",
-      "desc": "crwdns24918:0crwdne24918:0"
+    "system-bars-status-window": {
+      "header": "crwdns37910:0crwdne37910:0",
+      "desc": "crwdns37912:0crwdne37912:0"
     },
-    "contextualActionBar": {
-      "header": "crwdns24920:0crwdne24920:0",
-      "desc": "crwdns24922:0crwdne24922:0"
+    "contextual-action-bar": {
+      "header": "crwdns37914:0crwdne37914:0",
+      "desc": "crwdns37916:0crwdne37916:0"
     },
     "background": {
-      "header": "crwdns24924:0crwdne24924:0",
-      "desc": "crwdns24926:0[v-img]crwdnd24926:0[v-app-bar]crwdne24926:0"
+      "header": "crwdns37918:0crwdne37918:0",
+      "desc": "crwdns37920:0[v-img]crwdnd37920:0[v-app-bar]crwdne37920:0"
+    },
+    "extended": {
+      "header": "crwdns37922:0crwdne37922:0",
+      "desc": "crwdns37924:0crwdne37924:0"
+    },
+    "extension-height": {
+      "header": "crwdns37926:0crwdne37926:0",
+      "desc": "crwdns37928:0crwdne37928:0"
+    },
+    "collapse": {
+      "header": "crwdns37930:0crwdne37930:0",
+      "desc": "crwdns37932:0crwdne37932:0"
     }
   },
   "props": {
-    "absolute": "crwdns24928:0crwdne24928:0",
-    "bottom": "crwdns24930:0crwdne24930:0",
-    "collapse": "crwdns24932:0crwdne24932:0",
-    "dense": "crwdns24934:0crwdne24934:0",
-    "extended": "crwdns24936:0crwdne24936:0",
-    "extensionHeight": "crwdns24938:0crwdne24938:0",
-    "flat": "crwdns24940:0crwdne24940:0",
-    "floating": "crwdns24942:0crwdne24942:0",
-    "height": "crwdns24944:0crwdne24944:0",
-    "lightsOut": "crwdns24946:0crwdne24946:0",
-    "prominent": "crwdns24948:0crwdne24948:0",
-    "short": "crwdns24950:0crwdne24950:0",
-    "src": "crwdns24952:0crwdne24952:0",
-    "status": "crwdns24954:0crwdne24954:0",
-    "window": "crwdns24956:0crwdne24956:0"
+    "absolute": "crwdns37934:0crwdne37934:0",
+    "bottom": "crwdns37936:0crwdne37936:0",
+    "collapse": "crwdns37938:0crwdne37938:0",
+    "dense": "crwdns37940:0crwdne37940:0",
+    "extended": "crwdns37942:0crwdne37942:0",
+    "extensionHeight": "crwdns37944:0crwdne37944:0",
+    "flat": "crwdns37946:0crwdne37946:0",
+    "floating": "crwdns37948:0crwdne37948:0",
+    "height": "crwdns37950:0crwdne37950:0",
+    "prominent": "crwdns37952:0crwdne37952:0",
+    "short": "crwdns37954:0crwdne37954:0",
+    "src": "crwdns37956:0[v-img]crwdne37956:0"
   },
   "slots": {
-    "extension": "crwdns24958:0crwdne24958:0",
-    "img": "crwdns24960:0crwdne24960:0"
+    "extension": "crwdns37958:0crwdne37958:0",
+    "img": "crwdns37960:0[v-img]crwdne37960:0"
   }
 }

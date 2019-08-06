@@ -65,8 +65,8 @@ export default baseMixins.extend<options>().extend({
     prependInnerIcon: String,
     reverse: Boolean,
     rounded: Boolean,
-    singleLine: Boolean,
     shaped: Boolean,
+    singleLine: Boolean,
     solo: Boolean,
     soloInverted: Boolean,
     suffix: String,
@@ -166,6 +166,9 @@ export default baseMixins.extend<options>().extend({
   watch: {
     labelValue: 'setLabelWidth',
     outlined: 'setLabelWidth',
+    prefix () {
+      this.$nextTick(this.setPrefixWidth)
+    },
     isFocused (val) {
       // Sets validationState from validatable
       this.hasColor = val

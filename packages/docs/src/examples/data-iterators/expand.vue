@@ -9,7 +9,7 @@
       hide-default-footer
     >
       <template v-slot:default="{ items, isExpanded, expand }">
-        <v-layout row wrap>
+        <v-layout wrap>
           <v-flex
             v-for="item in items"
             :key="item.name"

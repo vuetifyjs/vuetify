@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-layout
-      row
       wrap
       justify-center
     >

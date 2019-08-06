@@ -6,7 +6,7 @@
       :footer-props="{ itemsPerPageOptions }"
     >
       <template v-slot:default="props">
-        <v-layout row wrap>
+        <v-layout wrap>
           <v-flex
             v-for="item in props.items"
             :key="item.name"

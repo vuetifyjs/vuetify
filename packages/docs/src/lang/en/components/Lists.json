@@ -113,7 +113,7 @@
   },
   "events": {
     "v-list-group": {
-      "click": "Emitted when component is clicked"
+      "click": "Emitted when component is clicked - Will trigger component to ripple when clicked unless the `.native` modifier is used"
     }
   }
 }

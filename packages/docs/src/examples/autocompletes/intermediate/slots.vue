@@ -58,7 +58,7 @@
       </v-layout>
     </v-img>
     <v-form>
-      <v-container>
+      <v-container grid-list-xl>
         <v-layout wrap>
           <v-flex
             xs12

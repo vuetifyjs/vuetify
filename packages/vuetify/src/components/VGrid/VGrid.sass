@@ -5,30 +5,22 @@
   +make-container
   +make-container-max-widths
 
-// Fluid container
-//
-// Utilizes the mixin meant for fixed width containers, but with 100% width for
-// fluid, full width layouts.
-
-.container-fluid
-  +make-container
+  &--fluid
+    max-width: 100%
 
 // Row
 //
 // Rows contain and clear the floats of your columns.
-
 .row
   +make-row
 
-.form-row
-  display: flex
-  flex-wrap: wrap
-  margin-right: -$form-grid-gutter / 2
-  margin-left: -$form-grid-gutter / 2
+  &--dense
+    margin-right: -$form-grid-gutter / 2
+    margin-left: -$form-grid-gutter / 2
 
-  > .col,
-  > [class*="col-"]
-    padding: $form-grid-gutter / 2
+    > .col,
+    > [class*="col-"]
+      padding: $form-grid-gutter / 2
 
 // Remove the negative margin from default .row, then the horizontal padding
 // from all immediate children columns (to prevent runaway style inheritance).
@@ -42,5 +34,4 @@
 // Columns
 //
 // Common styles for small and large grid columns
-
 +make-grid-columns

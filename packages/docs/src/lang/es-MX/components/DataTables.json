@@ -1,14 +1,11 @@
 {
-  "header": "Data table",
   "headerText": "El componente `v-data-table` se utilizar para mostrar datos tabulares. Sus características incluyen ordenamiento, búsqueda, paginación, edición _inline_, tooltips en los encabezados y selección de filas..",
   "examples": {
     "select": {
-      "header": "Filas seleccionables",
-      "desc": "Las filas seleccionables te permiten llevar a cabo acciones en todas las filas o en filas en particular."
+      "header": "Filas seleccionables"
     },
     "expand": {
-      "header": "Slot: expand",
-      "desc": "El componente `v-data-table` también soporta filas expandibles utilizando el slot `expand`. Por defecto, cuando una fila se expande el resto se cierran. Puedes usar la prop `expand` en `v-data-table` para evitar que las filas expandidas se cierren al hacer click en una fila distinta."
+      "header": "Slot: expand"
     },
     "headers": {
       "header": "Slot: items y headers",
@@ -17,10 +14,6 @@
     "progress": {
       "header": "Slot: progress",
       "desc": "También hay un slot `progress` para cuando quieres personalizar la presentación de los datos en el estado `loading` (cargando) de la tabla. Por default es un estado `indeterminate` de un `v-progress-linear`"
-    },
-    "footer": {
-      "header": "Slot: footer",
-      "desc": "Hay también un slot `footer` para cuando quieres agregar cierta funcionalidad extra a las tablas. Por ejemplo un filtrado por columna o una búsqueda."
     },
     "search": {
       "header": "Búsqueda con un slot personalizado no-results",
@@ -35,14 +28,13 @@
       "desc": "El ordenamiento también puede ser controlado externamente al utilizar la prop `pagination`. Recuerda que debes aplicar el modificador `.sync`. Puedes también utilizar esa prop para configurar la columna ordenada por default."
     },
     "server": {
-      "header": "Paginación y ordenamiento del lado del servidor",
-      "desc": "Si estás cargando datos desde un backend y quieres paginar y ordenar los resultados antes de mostrarlos, puedes utilizar la prop `total-items`. Al definir esta prop estarás deshabilitando el ordenamiento y paginación que vienen con el componente y en su lugar necesitarás utilizar la prop `pagination` para que escuche los cambios. Utilizar la prop `loading` para mosrtar una barra de progreso mientras obtienes los datos."
+      "header": "Paginación y ordenamiento del lado del servidor"
     },
     "headerless": {
       "header": "Tablas sin encabezados",
       "desc": "Agregando la prop `hide-headers` creas una tabla sin encabezados."
     },
-    "editdialog": {
+    "edit-dialog": {
       "header": "Edición Inline",
       "desc": "El componente `v-edit-dialog` se utiliza para la edición _inline_ dentro de los data tables."
     },

@@ -162,6 +162,10 @@ const textFieldSlots = [
     props: undefined,
   },
   {
+    name: 'progress',
+    props: undefined,
+  },
+  {
     name: 'prepend-inner',
     props: undefined,
   },
@@ -209,10 +213,6 @@ const VSelect = {
       props: undefined,
     },
     {
-      name: 'progress',
-      props: undefined,
-    },
-    {
       name: 'selection',
       props: {
         parent: 'VueComponent',
@@ -234,7 +234,7 @@ const VSelect = {
       value: 'any',
     },
     {
-      name: 'update:searchInput',
+      name: 'update:search-input',
       value: 'string',
     },
     ...inputEvents,
@@ -316,6 +316,10 @@ const VSlider = {
     {
       name: 'prepend',
       source: 'v-input',
+    },
+    {
+      name: 'progress',
+      props: undefined,
     },
     {
       name: 'thumb-label',

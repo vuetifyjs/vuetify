@@ -26,7 +26,7 @@
       </v-layout>
     </v-flex>
 
-    <v-layout justify-center row>
+    <v-layout justify-center>
       <v-radio-group row>
         <v-checkbox
           v-model="absolute"

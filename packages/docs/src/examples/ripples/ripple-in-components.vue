@@ -1,6 +1,5 @@
 <template>
   <v-layout
-    row
     justify-space-around
     py-12
     wrap

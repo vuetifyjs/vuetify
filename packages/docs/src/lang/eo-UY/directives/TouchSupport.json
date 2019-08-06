@@ -1,14 +1,14 @@
 {
-  "header": "crwdns23430:0crwdne23430:0",
-  "headerText": "crwdns23432:0crwdne23432:0",
+  "header": "crwdns30194:0crwdne30194:0",
+  "headerText": "crwdns30196:0crwdne30196:0",
   "examples": {
     "usage": {
-      "desc": "crwdns23434:0crwdne23434:0",
+      "desc": "crwdns30198:0crwdne30198:0",
       "uninverted": true
     }
   },
   "options": {
-    "{ move, start, end }": "crwdns23438:0crwdne23438:0",
-    "{ up, down, left, right }": "crwdns23440:0crwdne23440:0"
+    "{ move, start, end }": "crwdns30202:0crwdne30202:0",
+    "{ up, down, left, right }": "crwdns30204:0crwdne30204:0"
   }
 }

@@ -12,6 +12,7 @@ export default {
       sortAscending: ': 오름차순 정렬. 내림차순 정렬을 위해 활성화하세요.',
       sortNone: ': 정렬하지 않음. 오름차순 정렬을 위해 활성화하세요.',
     },
+    sortBy: 'Sort by',
   },
   dataFooter: {
     itemsPerPageText: '페이지 당 항목 수:',

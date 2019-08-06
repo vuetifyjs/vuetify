@@ -179,18 +179,18 @@
         items: desserts,
         search: null,
         slots: [
-          'top',
+          'body',
+          'body.append',
+          'body.prepend',
+          'footer',
           'header.data-table-select',
           'header',
           'progress',
           'item.data-table-select',
           'item.<name>',
-          'body.prepend',
-          'body',
-          'body.append',
           'no-data',
           'no-results',
-          'footer',
+          'top',
         ],
         headers: [
           {

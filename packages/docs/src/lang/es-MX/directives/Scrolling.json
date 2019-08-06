@@ -4,8 +4,7 @@
   "examples": {
     "options": {
       "header": "Desplazamiento con opciones",
-      "desc": "Para una implementación más fina, puedes asignar al objetivo (target) un listener del evento `scroll`",
-      "uninverted": true
+      "desc": "Para una implementación más fina, puedes asignar al objetivo (target) un listener del evento `scroll`"
     }
   }
 }

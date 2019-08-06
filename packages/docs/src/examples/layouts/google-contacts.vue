@@ -10,7 +10,6 @@
           <v-layout
             v-if="item.heading"
             :key="item.heading"
-            row
             align-center
           >
             <v-flex xs6>
@@ -181,7 +180,6 @@
         </v-card-title>
         <v-container grid-list-sm>
           <v-layout
-            row
             wrap
           >
             <v-flex

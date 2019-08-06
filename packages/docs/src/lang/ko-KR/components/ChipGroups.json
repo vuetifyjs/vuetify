@@ -3,5 +3,9 @@
     "multiple": {
       "header": "복수선택 (Multiple)"
     }
+  },
+  "props": {
+    "nextIcon": "\"다음\" 아이콘을 지정",
+    "prevIcon": "\"이전\" 아이콘을 지정"
   }
 }

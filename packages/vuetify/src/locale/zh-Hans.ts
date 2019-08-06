@@ -12,6 +12,7 @@ export default {
       sortAscending: ': Sorted ascending. Activate to sort descending.',
       sortNone: ': Not sorted. Activate to sort ascending.',
     },
+    sortBy: 'Sort by',
   },
   dataFooter: {
     itemsPerPageText: '每页记录数：',

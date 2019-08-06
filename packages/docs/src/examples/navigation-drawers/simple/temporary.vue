@@ -1,5 +1,8 @@
 <template>
-  <v-card height="400">
+  <v-sheet
+    height="400"
+    class="overflow-hidden"
+  >
     <v-container fill-height>
       <v-layout
         align-center
@@ -49,7 +52,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-  </v-card>
+  </v-sheet>
 </template>
 
 <script>

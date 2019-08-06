@@ -1,7 +1,7 @@
 <template>
   <v-form>
-    <v-container>
-      <v-layout row wrap>
+    <v-container grid-list-xl>
+      <v-layout wrap>
 
         <v-flex xs12 sm6>
           <v-text-field
@@ -24,7 +24,7 @@
           <v-text-field
             v-model="message3"
             filled
-            label="Box"
+            label="Filled"
             clearable
           ></v-text-field>
         </v-flex>

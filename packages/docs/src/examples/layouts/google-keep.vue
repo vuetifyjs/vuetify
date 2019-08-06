@@ -31,7 +31,6 @@
           <v-layout
             v-if="item.heading"
             :key="i"
-            row
             align-center
           >
             <v-flex xs6>
@@ -146,8 +145,8 @@
   }
 </script>
 
-<style lang="sass">
-#keep
-  .v-navigation-drawer__border
-    display: none
+<style>
+#keep .v-navigation-drawer__border {
+  display: none
+}
 </style>

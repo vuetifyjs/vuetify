@@ -1,6 +1,6 @@
 <template>
   <v-container grid-list-md text-center fill-height class="pa-4">
-    <v-layout align-center justify-center row wrap fill-height>
+    <v-layout align-center justify-center wrap fill-height>
       <template v-for="(item, i) in items">
         <v-flex
           :key="i"

@@ -58,8 +58,6 @@ declare module 'vuetify/lib' {
   const VDataIterator: Component
   const VDataTable: Component
   const VDataTableHeader: Component
-  const VDataTableHeaderDesktop: Component
-  const VDataTableHeaderMobile: Component
   const VDatePicker: Component
   const VDatePickerDateTable: Component
   const VDatePickerHeader: Component
@@ -163,7 +161,6 @@ declare module 'vuetify/lib' {
   const VTimelineItem: Component
   const VToolbar: Component
   const VToolbarItems: Component
-  const VToolbarSideIcon: Component
   const VToolbarTitle: Component
   const VTooltip: Component
   const VTreeview: Component
@@ -222,8 +219,6 @@ declare module 'vuetify/lib' {
     VDataIterator,
     VDataTable,
     VDataTableHeader,
-    VDataTableHeaderDesktop,
-    VDataTableHeaderMobile,
     VDatePicker,
     VDatePickerDateTable,
     VDatePickerHeader,
@@ -327,7 +322,6 @@ declare module 'vuetify/lib' {
     VTimelineItem,
     VToolbar,
     VToolbarItems,
-    VToolbarSideIcon,
     VToolbarTitle,
     VTooltip,
     VTreeview,

@@ -22,15 +22,12 @@
     "`y` - applies the spacing for both `*-top` and `*-bottom`",
     "`a` - applies the spacing for the property in all directions"
   ],
-  "sizeText": "The **size** controls the increment of the property:",
+  "sizeText": "The **size** controls the increment of the property in 4px intervals:",
   "sizes": [
     "`auto` - sets the spacing to `auto`",
+    "`n1-12` - sets the spacing to be negative by `$spacer` * 4px",
     "`0` - removes the spacing by setting it to `0`",
-    "`1` - sets the spacing to `$spacer * .25`",
-    "`2` - sets the spacing to `$spacer * .5`",
-    "`3` - sets the spacing to `$spacer`",
-    "`4` - sets the spacing to `$spacer * 1.5`",
-    "`5` - sets the spacing to `$spacer * 3`"
+    "`1-12` - sets the spacing to `$spacer` * 4px"
   ],
   "horizontalHeader": "Horizontal centering",
   "horizontalText": "For block elements with a designated width, you can apply `.mx-auto` to horizontally center the content.",

@@ -1,5 +1,9 @@
 {
+  "headerText": "El componente `v-btn-toggle` es un simple envoltorio para `v-item-group` construido específicamente para usarse con `v-btn`.",
   "examples": {
+    "usage": {
+      "desc": "Los _toggle buttons_ te permiten crear un grupo estilizado de botones que pueden ser seleccionados o alternados bajo un solo `v-model`"
+    },
     "multiple": {
       "header": "Múltiple"
     }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-layout row wrap justify-space-around>
+    <v-layout wrap justify-space-around>
       <v-flex xs12>
         <v-slider v-model="steps" label="Steps" min="2" max="20"></v-slider>
       </v-flex>

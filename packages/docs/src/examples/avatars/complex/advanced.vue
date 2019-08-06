@@ -14,7 +14,6 @@
         <v-expansion-panel-header>
           <v-layout
             align-center
-            row
             spacer
           >
             <v-flex xs4 sm2 md1>
