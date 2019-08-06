@@ -163,7 +163,7 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using po
 
 Interested in the bleeding edge? Try the Vue CLI 3 Webpack SSR (Server side rendered) template and build websites optimized for SEO.
 
-For more information about IE11 and Safari 9+ polyfills, visit our [Quick Start Guide](https://vuetifyjs.com/en/getting-started/quick-start#ie11-safari-9-support)
+For more information about IE11 and Safari 9+ polyfills, visit our [Quick Start Guide](https://vuetifyjs.com/getting-started/quick-start#ie11-safari-9-support)
 
 ### Documentation
 
@@ -181,7 +181,7 @@ Looking to dive right in with zero setup and downtime? Check out our [CodePen.io
 
 Setting up Vuetify with Vue's CLI is really easy 👌.
 
-(Unsure of how to install Vue's CLI on your system? Check out the official [Installation Instructions](https://cli.vuejs.org/guide/installation.html) or our [Quick Start Guide](https://vuetifyjs.com/en/getting-started/quick-start))
+(Unsure of how to install Vue's CLI on your system? Check out the official [Installation Instructions](https://cli.vuejs.org/guide/installation.html) or our [Quick Start Guide](https://vuetifyjs.com/getting-started/quick-start))
 
 If you're setting up a new project, first create it using the CLI's `create` command.
 
@@ -337,7 +337,7 @@ Frequently asked questions and Gotchas on the [FAQ Guide ❓](https://vuetifyjs.
 
 ### Contributing
 
-Developers interested in contributing should read the [Code of Conduct 👩‍💻👨‍💻](./CODE_OF_CONDUCT.md) and the [Contribution Guide](https://vuetifyjs.com/en/getting-started/contributing).
+Developers interested in contributing should read the [Code of Conduct 👩‍💻👨‍💻](./CODE_OF_CONDUCT.md) and the [Contribution Guide](https://vuetifyjs.com/getting-started/contributing).
 
 > Please do **not** ask general questions in an issue. Issues are only to report bugs, suggest
   enhancements, or request new features. For general questions and discussions, ask in the [Vuetify Discord Community](https://community.vuetifyjs.com/).
