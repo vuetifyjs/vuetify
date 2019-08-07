@@ -11,9 +11,9 @@
       hide-titles
     />
 
-    <h3 class="font-weight-medium grey--text text--darken-2 mb-12">
+    <!-- <h3 class="font-weight-medium grey--text text--darken-2 mb-12">
       Open Collective Sponsors
-    </h3>
+    </h3> -->
 
     <supporters-sponsor-btn
       append

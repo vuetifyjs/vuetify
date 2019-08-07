@@ -1,6 +1,6 @@
 <template>
   <v-card
-    v-if="featured.length > 0"
+    v-observe.once="init"
     class="text-center py-12"
     flat
   >
@@ -10,6 +10,7 @@
     />
 
     <v-container
+      v-if="featured.length > 0"
       grid-list-xl
       mb-4
     >
@@ -108,22 +109,11 @@
       },
     },
 
-    // TODO: Remove when v-img
-    // supports lazy loading
-    mounted () {
-      window.addEventListener('scroll', this.init, { passive: true })
-    },
-
-    beforeDestroy () {
-      this.removeListener()
-    },
-
     methods: {
-      removeListener () {
-        window.removeEventListener('scroll', this.init, { passive: true })
-      },
-      init () {
-        this.removeListener()
+      init (entries) {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) return
+        }
 
         fetch('https://madewithvuejs.com/api/tag/vuetify', {
           method: 'get',
@@ -133,18 +123,16 @@
           },
         })
           .then(res => res.json())
-          .then(res => {
-            this.featured = this.setFeatured(res)
-          })
+          .then(this.setFeatured)
           .catch(err => console.log(err))
       },
       setFeatured (data) {
-        if (!data) return []
-        const featured = data.data.map(f => {
+        const featured = !data ? [] : data.data.map(f => {
           f.hover = false
           return f
         })
-        return this.shuffle(featured)
+
+        this.featured = this.shuffle(featured)
       },
       shuffle (array) {
         let currentIndex = array.length

@@ -29,10 +29,10 @@ function createRenderer (bundle, options) {
     // for component caching
     cache: new LRU({
       max: 1000,
-      maxAge: 1000 * 60 * 15
+      maxAge: 1000 * 60 * 15,
     }),
     // recommended for performance
-    runInNewContext: false
+    runInNewContext: false,
   }))
 }
 
@@ -51,7 +51,7 @@ if (isProd) {
   renderer = createRenderer(bundle, {
     template,
     clientManifest,
-    shouldPrefetch: () => false
+    shouldPrefetch: () => false,
   })
 } else {
   // In development: setup the dev server with watch and hot-reload,
@@ -66,7 +66,7 @@ if (isProd) {
 }
 
 const serve = (path, cache) => express.static(resolve(path), {
-  maxAge: cache && isProd ? 1000 * 60 * 60 * 24 * 30 : 0
+  maxAge: cache && isProd ? 1000 * 60 * 60 * 24 * 30 : 0,
 })
 
 app.use(express.json())
@@ -118,7 +118,7 @@ function render (req, res) {
   res.setHeader('Content-Type', 'text/html')
   res.setHeader('Server', serverInfo)
   res.cookie('currentLanguage', req.params[0], {
-    maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
+    maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
   })
 
   const handleError = err => {
@@ -142,7 +142,7 @@ function render (req, res) {
     hreflangs: availableLanguages.reduce((acc, lang) => {
       return acc + `<link rel="alternate" hreflang="${lang}" href="https://${req.hostname}/${lang}${req.params[1]}" />`
     }, ''),
-    crowdin: ''
+    crowdin: '',
   }
 
   if (context.lang === 'eo-UY') {
