@@ -103,6 +103,10 @@
     {
       "q": "### How do I get to the v1.5 documentation?",
       "a": "[https://v15.vuetifyjs.com](https://v15.vuetifyjs.com)"
+    },
+    {
+      "q": "### [Vue warn]: Unknown custom element: <v-app>",
+      "a": "Ensure that you have the latest version of [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugin-vuetify) and [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) installed in your **package.json**."
     }
   ]
 }
