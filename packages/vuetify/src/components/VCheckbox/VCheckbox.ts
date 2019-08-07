@@ -5,15 +5,20 @@ import '../../styles/components/_selection-controls.sass'
 // Components
 import VIcon from '../VIcon'
 import VInput from '../VInput'
+import VLabel from '../VLabel'
 
 // Mixins
 import Selectable from '../../mixins/selectable'
+
+// Utilities
+import { getSlot } from '../../util/helpers'
 
 /* @vue/component */
 export default Selectable.extend({
   name: 'v-checkbox',
 
   props: {
+    description: String,
     indeterminate: Boolean,
     indeterminateIcon: {
       type: String,
@@ -53,6 +58,13 @@ export default Selectable.extend({
         return this.offIcon
       }
     },
+    computedId (): string {
+      return VInput.options.computed.computedId.call(this)
+    },
+    hasDescription (): boolean {
+      return (this.description || '').length > 0
+    },
+    hasLabel: VInput.options.computed.hasLabel,
     // Do not return undefined if disabled,
     // according to spec, should still show
     // a color when disabled and active
@@ -96,6 +108,48 @@ export default Selectable.extend({
             light: this.light,
           },
         }), this.computedIcon),
+      ])
+    },
+    genDescription () {
+      if (!this.hasDescription) return null
+
+      return this.$createElement('span', {
+        staticClass: 'v-label--description',
+        class: this.classes,
+      }, getSlot(this, 'description') || this.description)
+    },
+    genLabel () {
+      if (!this.hasLabel) return null
+
+      const label = getSlot(this, 'label') || this.label
+
+      return this.$createElement(VLabel, {
+        on: {
+          click: (e: Event) => {
+            // Prevent label from
+            // causing the input
+            // to focus
+            e.preventDefault()
+
+            this.onChange()
+          },
+        },
+        attrs: {
+          for: this.computedId,
+          color: this.validationState,
+          dark: this.dark,
+          focused: this.hasState,
+          light: this.light,
+        },
+        props: {
+          color: this.validationState,
+        },
+      },
+      [
+        this.$createElement('span', {
+          staticClass: 'v-label--content',
+        }, label),
+        this.genDescription(),
       ])
     },
     genDefaultSlot () {

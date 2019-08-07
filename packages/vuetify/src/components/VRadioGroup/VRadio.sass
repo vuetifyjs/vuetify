@@ -11,7 +11,7 @@
       color: map-deep-get($material, 'buttons', 'disabled') !important
 
 .v-radio
-  align-items: center
+  align-items: baseline
   display: flex
   height: auto
   margin-right: 16px
@@ -19,3 +19,19 @@
 
   &--is-disabled
     pointer-events: none
+
+  .v-input--selection-controls__input
+    align-self: flex-start
+
+  .v-label
+    flex-wrap: wrap
+    flex-direction: column
+
+    .v-label--content
+      align-self: flex-start
+
+    .v-label--description
+      align-self: flex-start
+      display: block
+      font-size: 0.85rem
+      margin: 0.2rem auto

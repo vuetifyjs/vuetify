@@ -40,6 +40,7 @@ export default baseMixins.extend<options>().extend({
 
   props: {
     disabled: Boolean,
+    description: String,
     label: String,
     name: String,
     id: String,
@@ -81,6 +82,9 @@ export default baseMixins.extend<options>().extend({
     computedId (): string {
       return VInput.options.computed.computedId.call(this)
     },
+    hasDescription (): boolean {
+      return (this.description || '').length > 0
+    },
     hasLabel: VInput.options.computed.hasLabel,
     hasState (): boolean {
       return (this.radioGroup || {}).hasState
@@ -110,8 +114,18 @@ export default baseMixins.extend<options>().extend({
       // genInput method is exactly what we need
       return Selectable.options.methods.genInput.call(this, 'radio', args)
     },
+    genDescription () {
+      if (!this.hasDescription) return null
+
+      return this.$createElement('span', {
+        staticClass: 'v-label--description',
+        class: this.classes,
+      }, getSlot(this, 'description') || this.description)
+    },
     genLabel () {
       if (!this.hasLabel) return null
+
+      const label = getSlot(this, 'label') || this.label
 
       return this.$createElement(VLabel, {
         on: {
@@ -125,13 +139,19 @@ export default baseMixins.extend<options>().extend({
           },
         },
         attrs: {
-          for: this.computedId,
-        },
-        props: {
           color: this.validationState,
+          dark: this.dark,
           focused: this.hasState,
+          for: this.computedId,
+          light: this.light,
         },
-      }, getSlot(this, 'label') || this.label)
+      },
+      [
+        this.$createElement('span', {
+          staticClass: 'v-label--content',
+        }, label),
+        this.genDescription(),
+      ])
     },
     genRadio () {
       return this.$createElement('div', {
@@ -171,6 +191,7 @@ export default baseMixins.extend<options>().extend({
     return h('div', data, [
       this.genRadio(),
       this.genLabel(),
+      // this.genDescription(),
     ])
   },
 })

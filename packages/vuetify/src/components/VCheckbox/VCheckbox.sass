@@ -2,6 +2,22 @@
 @import './_variables.scss'
 
 .v-input--checkbox
+  .v-input__slot
+    align-items: flex-start
+
   &.v-input--indeterminate
     &.v-input--is-disabled
       opacity: $checkbox-disabled-opacity
+
+  .v-label
+    flex-wrap: wrap
+    flex-direction: column
+
+    .v-label--content
+      align-self: flex-start
+
+    .v-label--description
+      align-self: flex-start
+      display: block
+      font-size: 0.85rem
+      margin: 0.2rem auto
