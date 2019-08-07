@@ -43,7 +43,6 @@
   border-radius: $btn-border-radius
   display: inline-flex
   flex: 0 0 auto
-  font-size: $btn-font-size
   font-weight: $btn-font-weight
   letter-spacing: $btn-letter-spacing
   justify-content: center
@@ -59,6 +58,10 @@
   user-select: none
   vertical-align: middle
   white-space: nowrap
+
+  @each $name, $size in $btn-font-sizes
+    &.v-size--#{$name}
+      font-size: $size
 
   &:before
     border-radius: inherit
