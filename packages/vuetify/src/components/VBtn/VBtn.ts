@@ -189,6 +189,6 @@ export default baseMixins.extend<options>().extend({
       ? this.value
       : JSON.stringify(this.value)
 
-    return h(tag, setColor(this.color, data), children)
+    return h(tag, this.disabled ? data : setColor(this.color, data), children)
   },
 })
