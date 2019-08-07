@@ -185,11 +185,26 @@
   box-shadow: none
   pointer-events: none
 
+.v-btn--icon,
 .v-btn--fab
   min-height: 0
   min-width: 0
   padding: 0
 
+  @each $name, $size in $fab-icon-sizes
+    &.v-size--#{$name}
+      .v-icon
+        height: #{$size}px
+        font-size: #{$size}px
+        width: #{$size}px
+
+.v-btn--icon
+  @each $name, $size in $btn-sizes
+    &.v-size--#{$name}
+      height: #{$size}px
+      width: #{$size}px
+
+.v-btn--fab
   &.v-btn--contained
     +elevation(6)
 
@@ -202,13 +217,6 @@
   &.v-btn--fixed,
   &.v-btn--absolute
     z-index: 4
-
-  @each $name, $size in $fab-icon-sizes
-    &.v-size--#{$name}
-      .v-icon
-        height: #{$size}px
-        font-size: #{$size}px
-        width: #{$size}px
 
   @each $name, $size in $fab-sizes
     &.v-size--#{$name}
