@@ -1,40 +1,40 @@
 export default {
-  close: 'Close',
+  close: '關閉',
   dataIterator: {
-    pageText: '{0}-{1} 共 {2} 條',
-    noResultsText: '沒有找到匹配記錄',
-    loadingText: 'Loading items...',
+    pageText: '{2} 條中的 {0}~{1} 條',
+    noResultsText: '沒有符合條件的結果',
+    loadingText: '讀取中...',
   },
   dataTable: {
-    itemsPerPageText: '每頁行數：',
+    itemsPerPageText: '每頁列數：',
     ariaLabel: {
-      sortDescending: ': Sorted descending. Activate to remove sorting.',
-      sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.',
+      sortDescending: '：降序排列。點擊以移除排序方式。',
+      sortAscending: '：升序排列。點擊以移除排序方式。',
+      sortNone: '無排序方式。點擊以升序排列。',
     },
-    sortBy: 'Sort by',
+    sortBy: '排序方式',
   },
   dataFooter: {
-    itemsPerPageText: '每頁記錄數：',
+    itemsPerPageText: '每頁項目：',
     itemsPerPageAll: '全部',
     nextPage: '下一頁',
     prevPage: '上一頁',
     firstPage: '第一頁',
-    lastPage: '最後一頁',
+    lastPage: '最後頁',
   },
   datePicker: {
-    itemsSelected: '{0}選中',
+    itemsSelected: '已選擇 {0}',
   },
-  noDataText: '無可用數據',
+  noDataText: '沒有資料',
   carousel: {
-    prev: '以前的視覺',
-    next: '下一個視覺',
+    prev: '上一張',
+    next: '下一張',
   },
   calendar: {
-    moreEvents: '還有{0}個',
+    moreEvents: '還有其他 {0} 項',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counter: '{0} 個檔案',
+    counterSize: '{0} 個檔案（共 {1}）',
   },
 }
