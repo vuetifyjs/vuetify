@@ -26,7 +26,7 @@
   "componentText5": "In a nutshell, that means that `v-system-bar` is always above `v-app-bar`, `v-navigation-drawer` can occupy the left or right side and `v-footer` always sits on top of `v-bottom-navigation`.",
   "componentImg": "Vuetify Application",
   "appHeader": "## Application service",
-  "appText1": "The **application service** is used to configure your Vuetify layout. It communicates with the `v-content` component so that it's able to properly size the applicatoin content. It has a number of properties that can be accessed:",
+  "appText1": "The **application service** is used to configure your Vuetify layout. It communicates with the `v-content` component so that it's able to properly size the application content. It has a number of properties that can be accessed:",
   "appText2": "These values are automatically updated when you add and remove components with the **app** prop. They are **NOT** editable and exist in a _READONLY_ state. You can access these values by referencing the application property on the **$vuetify** object.",
   "accessibility": {
     "desc": "By default, `v-content` is assigned the [TR](https://www.w3.org/TR/html51/) tag of [**main**](https://www.w3.org/TR/html51/grouping-content.html#the-main-element) which denotes that it is the main content area of the `body` of a document or application."
