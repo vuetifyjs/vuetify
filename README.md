@@ -99,9 +99,14 @@
         </a>
       </td>
       <td>
-      <a href="http://resaleai.com/?ref=vuetify-github">
-        <img height="50px" src="https://cdn.vuetifyjs.com/images/backers/resaleai_logo_blue.svg">
-      </a>
+        <a href="http://resaleai.com/?ref=vuetify-github">
+          <img height="50px" src="https://cdn.vuetifyjs.com/images/backers/resaleai_logo_blue.svg">
+        </a>
+      </td>
+      <td>
+        <a href="http://vuemastery.com/?ref=vuetify-github">
+          <img height="50px" src="https://cdn.vuetifyjs.com/images/backers/vuemastery.svg">
+        </a>
       </td>
     </tr>
   </tbody>
