@@ -29,10 +29,10 @@
 </script>
 
 <style lang="sass">
-  #home
-    .v-card
-      border-radius: 6px
+#home
+  .v-card
+    border-radius: 6px
 
-  .mono
-    font-family: 'Roboto Mono', monospace !important
+.mono
+  font-family: 'Roboto Mono', monospace !important
 </style>

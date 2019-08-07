@@ -25,7 +25,6 @@
   import 'prismjs/components/prism-typescript.js'
   import 'prismjs/components/prism-sass.js'
   import 'prismjs/components/prism-scss.js'
-  import 'prismjs/themes/prism-tomorrow.css'
 
   // Utilities
   import kebabCase from 'lodash/kebabCase'

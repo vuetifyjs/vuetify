@@ -8,7 +8,6 @@ import Vuetify from 'vuetify'
 
 // Bootstrap
 import '@/components'
-import '@/directives'
 import '@/plugins'
 import { createStore } from '@/store/index'
 import { createRouter } from '@/router/index'

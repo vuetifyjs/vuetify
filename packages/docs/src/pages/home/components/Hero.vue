@@ -10,7 +10,10 @@
         wrap
       >
         <v-img
-          :class="[$vuetify.breakpoint.mdAndUp ? 'mx-5' : 'mb-3']"
+          :class="{
+            'mx-5': $vuetify.breakpoint.mdAndUp,
+            'mb-3': $vuetify.breakpoint.smAndDown
+          }"
           :height="$vuetify.breakpoint.mdAndUp ? 256 : 135"
           :width="$vuetify.breakpoint.mdAndUp ? 256 : 135"
           class="shrink"
