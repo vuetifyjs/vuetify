@@ -9,7 +9,7 @@ export default {
     itemsPerPageText: '每頁列數：',
     ariaLabel: {
       sortDescending: '：降序排列。點擊以移除排序方式。',
-      sortAscending: '：升序排列。點擊以移除排序方式。',
+      sortAscending: '：升序排列。點擊以降序排列。',
       sortNone: '無排序方式。點擊以升序排列。',
     },
     sortBy: '排序方式',
