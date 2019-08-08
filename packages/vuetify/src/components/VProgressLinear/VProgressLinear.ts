@@ -128,7 +128,8 @@ export default baseMixins.extend({
 
       return {
         opacity: backgroundOpacity,
-        width: convertToUnit(this.normalizedBuffer, '%'),
+        left: convertToUnit(this.normalizedValue, '%'),
+        width: convertToUnit(this.normalizedBuffer - this.normalizedValue, '%'),
       }
     },
     classes (): object {

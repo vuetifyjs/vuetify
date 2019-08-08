@@ -270,4 +270,19 @@ describe('VBtn.ts', () => {
     wrapper.setProps({ value: { foo: 'bar' } })
     expect(wrapper.attributes('value')).toBe('{"foo":"bar"}')
   })
+
+  it('should not add color classes if disabled', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        color: 'primary--text text--darken-2',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      disabled: true,
+    })
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

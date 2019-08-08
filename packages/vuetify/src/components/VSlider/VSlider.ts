@@ -97,6 +97,7 @@ export default mixins<options &
     isFocused: false,
     isActive: false,
     lazyValue: 0,
+    noClick: false, // Prevent click event if dragging took place, hack for #7915
   }),
 
   computed: {
@@ -473,6 +474,7 @@ export default mixins<options &
       this.$emit('end', this.internalValue)
       if (!deepEqual(this.oldValue, this.internalValue)) {
         this.$emit('change', this.internalValue)
+        this.noClick = true
       }
 
       this.isActive = false
@@ -495,6 +497,10 @@ export default mixins<options &
       this.keyPressed = 0
     },
     onSliderClick (e: MouseEvent) {
+      if (this.noClick) {
+        this.noClick = false
+        return
+      }
       const thumb = this.$refs.thumb as HTMLElement
       thumb.focus()
 

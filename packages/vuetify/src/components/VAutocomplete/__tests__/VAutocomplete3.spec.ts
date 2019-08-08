@@ -39,4 +39,34 @@ describe('VAutocomplete.ts', () => {
 
     expect(inputSlot.element.getAttribute('role')).toBe('combobox')
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/7259
+  it('should update search when same item is selected', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo'],
+        value: 'foo',
+      },
+    })
+
+    await wrapper.vm.$nextTick()
+
+    const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
+
+    expect(element.value).toBe('foo')
+
+    input.trigger('focus')
+    input.trigger('click')
+    element.value = 'fo'
+    input.trigger('input')
+
+    const item = wrapper.find('.v-list-item')
+
+    item.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(element.value).toBe('foo')
+  })
 })
