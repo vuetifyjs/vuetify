@@ -25,8 +25,8 @@
           "type": "api",
           "value": [
             "v-container",
-            "v-layout",
-            "v-flex",
+            "v-row",
+            "v-col",
             "v-spacer"
           ]
         }
@@ -36,9 +36,17 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "playground",
             "offset",
             "order",
             "direction-and-align",

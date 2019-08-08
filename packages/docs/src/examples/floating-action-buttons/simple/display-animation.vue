@@ -1,7 +1,7 @@
 <template>
-  <v-container fluid grid-list-lg>
-    <v-layout wrap>
-      <v-flex xs12 sm12 md6 offset-md3>
+  <v-container fluid>
+    <v-row>
+      <v-col cols="12" sm="12" md="6" offset-md="3">
         <v-card>
           <v-toolbar extended>
             <v-app-bar-nav-icon></v-app-bar-nav-icon>
@@ -43,8 +43,8 @@
             </v-fab-transition>
           </v-card-text>
         </v-card>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

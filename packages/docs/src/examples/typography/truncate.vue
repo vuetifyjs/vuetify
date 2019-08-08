@@ -4,14 +4,12 @@
     max-width="300"
   >
     <v-img src="https://cdn.vuetifyjs.com/images/cards/dark-beach.jpg">
-      <v-layout
-        align-end
-        fill-height
-        pa-4
-        white--text
+      <v-row
+        class="fill-height pa-4 white--text"
+        align="end"
       >
         <div class="title font-weight-light">Explore our beaches</div>
-      </v-layout>
+      </v-row>
     </v-img>
     <v-card-title>
       <div class="text-truncate">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>

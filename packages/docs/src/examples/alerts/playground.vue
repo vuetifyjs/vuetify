@@ -19,13 +19,13 @@
         Toggle
       </v-btn>
     </div>
-    <v-layout
-      align-center
-      justify-center
+    <v-row
+      align="center"
+      justify="center"
     >
-      <v-flex
-        xs12
-        md8
+      <v-col
+        cols="12"
+        md="8"
       >
         <v-select
           v-model="variant"
@@ -93,8 +93,8 @@
             label="Dismissible"
           ></v-checkbox>
         </template>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </div>
 </template>
 

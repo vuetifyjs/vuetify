@@ -1,55 +1,55 @@
 <template>
   <v-container fluid>
-    <v-layout>
-      <v-flex xs6 order-lg2>
+    <v-row>
+      <v-col cols="6" order-lg="2">
         <v-card dark tile flat color="error">
           <v-card-text>#1</v-card-text>
         </v-card>
-      </v-flex>
-      <v-flex xs6>
+      </v-col>
+      <v-col cols="6">
         <v-card dark tile flat color="red darken-4">
           <v-card-text>#2</v-card-text>
         </v-card>
-      </v-flex>
-    </v-layout>
-    <v-layout>
-      <v-flex xs4 order-md2 order-xs1>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="4" order-md="2" order="1">
         <v-card dark tile flat color="red lighten-1">
           <v-card-text>#1</v-card-text>
         </v-card>
-      </v-flex>
-      <v-flex xs4 order-md3 order-xs2>
+      </v-col>
+      <v-col cols="4" order-md="3" order="2">
         <v-card dark tile flat color="red lighten-2">
           <v-card-text>#2</v-card-text>
         </v-card>
-      </v-flex>
-      <v-flex xs4 order-md1 order-xs3>
+      </v-col>
+      <v-col cols="4" order-md="1" order="3">
         <v-card dark tile flat color="red darken-1">
           <v-card-text>#3</v-card-text>
         </v-card>
-      </v-flex>
-    </v-layout>
-    <v-layout wrap>
-      <v-flex xs12 sm6 md3 order-md4 order-sm2>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12" sm="6" md="3" order-md="4" order-sm="2">
         <v-card dark tile flat color="red darken-2">
           <v-card-text>#1</v-card-text>
         </v-card>
-      </v-flex>
-      <v-flex xs12 sm6 md3 order-md3 order-sm1>
+      </v-col>
+      <v-col cols="12" sm="6" md="3" order-md="3" order-sm="1">
         <v-card dark tile flat color="deep-orange lighten-1">
           <v-card-text>#2</v-card-text>
         </v-card>
-      </v-flex>
-      <v-flex xs12 sm6 md3 order-md2 order-sm4>
+      </v-col>
+      <v-col cols="12" sm="6" md="3" order-md="2" order-sm="4">
         <v-card dark tile flat color="deep-orange darken-3">
           <v-card-text>#3</v-card-text>
         </v-card>
-      </v-flex>
-      <v-flex xs12 sm6 md3 order-md1 order-sm3>
+      </v-col>
+      <v-col cols="12" sm="6" md="3" order-md="1" order-sm="3">
         <v-card dark tile flat color="deep-orange">
           <v-card-text>#4</v-card-text>
         </v-card>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>

@@ -1,49 +1,99 @@
 <template>
-  <v-container fluid grid-list-md>
-    <v-layout wrap>
-      <v-flex d-flex xs12 sm6 md4>
-        <v-card color="purple" dark>
-          <v-card-title primary class="title">Lorem</v-card-title>
+  <v-container fluid>
+    <v-row dense>
+      <v-col
+        class="d-flex"
+        cols="12"
+        sm="6"
+        md="4"
+      >
+        <v-card
+          color="purple"
+          dark
+          width="100%"
+        >
+          <v-card-title
+            primary
+            class="title"
+          >
+            Lorem
+          </v-card-title>
           <v-card-text>{{ lorem }}</v-card-text>
         </v-card>
-      </v-flex>
-      <v-flex d-flex xs12 sm6 md3>
-        <v-layout wrap>
-          <v-flex d-flex>
-            <v-card color="indigo" dark>
+      </v-col>
+      <v-col
+        class="d-flex"
+        cols="12"
+        sm="6"
+        md="3"
+      >
+        <v-row
+          class="ma-n1"
+          dense
+        >
+          <v-col class="d-flex">
+            <v-card
+              color="indigo"
+              dark
+              width="100%"
+            >
               <v-card-text>{{ lorem.slice(0, 70) }}</v-card-text>
             </v-card>
-          </v-flex>
-          <v-flex d-flex>
-            <v-layout wrap>
-              <v-flex
+          </v-col>
+          <v-col
+            class="d-flex"
+            cols="auto"
+          >
+            <v-row
+              class="ma-n1"
+              dense
+            >
+              <v-col
                 v-for="n in 2"
                 :key="n"
-                d-flex
-                xs12
+                class="d-flex"
+                cols="12"
               >
                 <v-card
                   color="red lighten-2"
                   dark
+                  width="100%"
                 >
                   <v-card-text>{{ lorem.slice(0, 40) }}</v-card-text>
                 </v-card>
-              </v-flex>
-            </v-layout>
-          </v-flex>
-        </v-layout>
-      </v-flex>
-      <v-flex d-flex xs12 sm6 md2 child-flex>
-        <v-card color="green lighten-2" dark>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-col>
+      <v-col
+        class="d-flex"
+        cols="12"
+        sm="6"
+        md="2"
+      >
+        <v-card
+          color="green lighten-2"
+          dark
+        >
           <v-card-text>{{ lorem.slice(0, 90) }}</v-card-text>
         </v-card>
-      </v-flex>
-      <v-flex d-flex xs12 sm6 md3>
-        <v-card color="blue lighten-2" dark>
+      </v-col>
+      <v-col
+        class="d-flex"
+        cols="12"
+        sm="6"
+        md="3"
+      >
+        <v-card
+          color="blue lighten-2"
+          dark
+          width="100%"
+        >
           <v-card-text>{{ lorem.slice(0, 100) }}</v-card-text>
         </v-card>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

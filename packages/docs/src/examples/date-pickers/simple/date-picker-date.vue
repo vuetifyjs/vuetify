@@ -1,21 +1,21 @@
 <template>
-  <v-layout wrap>
-    <v-flex xs12 sm6 class="my-2 px-1">
+  <v-row>
+    <v-col cols="12" sm="6" class="my-2 px-1">
       <v-date-picker
         ref="picker"
         v-model="date"
         :picker-date.sync="pickerDate"
         full-width
       ></v-date-picker>
-    </v-flex>
-    <v-flex xs12 sm6 class="my-2 px-1">
+    </v-col>
+    <v-col cols="12" sm="6" class="my-2 px-1">
       <div class="title">Month news ({{ pickerDate || 'change month...' }})</div>
       <div class="subheading">Change month to see other news</div>
       <ul class="ma-4">
         <li v-for="note in notes" :key="note">{{ note }}</li>
       </ul>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

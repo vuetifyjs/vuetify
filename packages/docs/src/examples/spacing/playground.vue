@@ -1,7 +1,6 @@
 <template lang="pug">
   v-container(
     fluid
-    grid-list-lg
     spacing-playground
     py-0
     px-2

@@ -57,6 +57,7 @@
     "docsearch.js": "^2.6.3",
     "eslint": "^6.1.0",
     "eslint-plugin-json": "^1.4.0",
+    "eslint-plugin-vuetify": "^1.0.0-beta.4",
     "event-source-polyfill": "^1.0.7",
     "fibers": "^4.0.1",
     "file-loader": "^4.1.0",

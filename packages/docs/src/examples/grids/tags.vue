@@ -2,26 +2,25 @@
   <v-container
     id="grid"
     fluid
-    grid-list-sm
     tag="section"
   >
-    <v-layout wrap>
-      <v-flex tag="h1" class="headline">Lorem Ipsum</v-flex>
-      <v-flex d-flex xs12 order-xs5>
-        <v-layout column>
-          <v-flex>
+    <v-row>
+      <v-col tag="h1" class="headline">Lorem Ipsum</v-col>
+      <v-col class="d-flex" cols="12" order="5">
+        <v-row>
+          <v-col>
             <v-card flat>
               <v-card-text>{{ lorem }}</v-card-text>
             </v-card>
-          </v-flex>
-          <v-flex>
+          </v-col>
+          <v-col>
             <v-card flat>
               <v-card-text>{{ lorem }}</v-card-text>
             </v-card>
-          </v-flex>
-        </v-layout>
-      </v-flex>
-    </v-layout>
+          </v-col>
+        </v-row>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

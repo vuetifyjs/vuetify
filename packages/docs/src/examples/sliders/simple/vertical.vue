@@ -1,7 +1,7 @@
 
 <template>
   <v-container>
-    <v-layout>
+    <v-row>
       <v-slider
         v-model="value"
         vertical
@@ -12,7 +12,7 @@
         vertical
         label="Range"
       ></v-range-slider>
-    </v-layout>
+    </v-row>
   </v-container>
 </template>
 

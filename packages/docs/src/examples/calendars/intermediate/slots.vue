@@ -1,6 +1,6 @@
 <template>
-  <v-layout>
-    <v-flex>
+  <v-row>
+    <v-col>
       <v-sheet height="500">
         <v-calendar
           :now="today"
@@ -8,8 +8,8 @@
           color="primary"
         >
           <template v-slot:day="{ present, past, date }">
-            <v-layout
-              fill-height
+            <v-row
+              class="fill-height"
             >
               <template v-if="past && tracked[date]">
                 <v-sheet
@@ -22,12 +22,12 @@
                   tile
                 ></v-sheet>
               </template>
-            </v-layout>
+            </v-row>
           </template>
         </v-calendar>
       </v-sheet>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
