@@ -198,6 +198,7 @@ export class Theme extends Service {
       } else {
         vuetifyStylesheet.cssText = this.generatedStyles
       }
+
       return head
     }
   }
