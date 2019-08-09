@@ -120,8 +120,10 @@ export default VDataIterator.extend({
 
       return headers
     },
-    computedHeadersLength (): number {
-      return this.headersLength || this.computedHeaders.length
+    colspanAttrs (): object | undefined {
+      return this.isMobile ? undefined : {
+        colspan: this.headersLength || this.computedHeaders.length,
+      }
     },
     isMobile (): boolean {
       return this.$vuetify.breakpoint.width < this.mobileBreakpoint
@@ -214,9 +216,7 @@ export default VDataIterator.extend({
 
       const th = this.$createElement('th', {
         staticClass: 'column',
-        attrs: {
-          colspan: this.computedHeadersLength,
-        },
+        attrs: this.colspanAttrs,
       }, [progress])
 
       const tr = this.$createElement('tr', {
@@ -264,9 +264,7 @@ export default VDataIterator.extend({
         staticClass: 'v-data-table__empty-wrapper',
       }, [
         this.$createElement('td', {
-          attrs: {
-            colspan: this.computedHeadersLength,
-          },
+          attrs: this.colspanAttrs,
         }, content),
       ])
     },
@@ -331,9 +329,7 @@ export default VDataIterator.extend({
 
         const column = this.$createElement('td', {
           staticClass: 'text-start',
-          attrs: {
-            colspan: this.computedHeadersLength,
-          },
+          attrs: this.colspanAttrs,
         }, [toggle, `${props.options.groupBy[0]}: ${group}`, remove])
 
         children.unshift(this.$createElement('template', { slot: 'column.header' }, [column]))
