@@ -15,6 +15,11 @@ describe('VProgressLinear.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VProgressLinear, {
+        mocks: {
+          $vuetify: {
+            rtl: false,
+          },
+        },
         ...options,
       })
     }
@@ -70,6 +75,17 @@ describe('VProgressLinear.ts', () => {
       },
     })
 
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render component in RTL mode', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: 33,
+      },
+    })
+
+    wrapper.vm.$vuetify.rtl = true
     expect(wrapper.html()).toMatchSnapshot()
   })
 

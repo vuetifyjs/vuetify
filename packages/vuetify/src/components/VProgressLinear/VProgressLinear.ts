@@ -128,7 +128,7 @@ export default baseMixins.extend({
 
       return {
         opacity: backgroundOpacity,
-        left: convertToUnit(this.normalizedValue, '%'),
+        [this.$vuetify.rtl ? 'right' : 'left']: convertToUnit(this.normalizedValue, '%'),
         width: convertToUnit(this.normalizedBuffer - this.normalizedValue, '%'),
       }
     },
