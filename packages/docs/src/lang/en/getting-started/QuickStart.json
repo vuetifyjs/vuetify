@@ -46,7 +46,7 @@
   "existingText9": "For more information on different support iconfonts and advanced implementations, navigate to the [Icons](/customization/icons) page.",
   "alert2": "*Warning*: While Vuetify attempts to not cause any css collision as much as possible, there is no guarantee that your custom styles will not alter your experience when integrating this framework into your existing project.",
   "edgeHeader": "## Edge support",
-  "edgeText1": "In order to support **modern mode** in vue-cli-3, `vuetify/lib` is not transpiled. You must tell vue-cli to transpile the `vuetify` package. This will be automatically handled in the future by vue-cli-plugin-vuetify pending a bug fix for vue-cli-3.",
+  "edgeText1": "`vuetify/lib` now uses ES6, which can cause some script errors when used with Edge browser (non-chromium). Additionally, in order to support **modern mode** in vue-cli-3, `vuetify/lib` is not transpiled. For these scenarios, you must tell vue-cli to transpile the `vuetify` package. This will be automatically handled in the future by vue-cli-plugin-vuetify pending a bug fix for vue-cli-3.",
   "ie11Header": "## IE11 & Safari 9 support",
   "ie11Text": "Vuetify utilizes features of ES2015/2017 that require the need to use polyfills for **Internet Explorer 11** and **Safari 9/10**. If you are using Vue CLI 3, this is done automatically for you. Otherwise, in your project directory, you can install `babel-polyfill`:",
   "ie11Text1": "Vuetify utilizes features of ES2015/2017 that require the need to use polyfills for **Internet Explorer 11** and **Safari 9/10**. If you are using Vue CLI 3, this is done automatically for you. Otherwise, in your project directory, you can install `babel-polyfill`:",
