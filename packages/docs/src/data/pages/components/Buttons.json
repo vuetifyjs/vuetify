@@ -55,8 +55,8 @@
             "simple/icon",
             "simple/floating",
             "simple/sizing",
-            "simple/outline",
-            "simple/round",
+            "simple/outlined",
+            "simple/rounded",
             "simple/tile",
             "simple/block",
             "intermediate/loaders"

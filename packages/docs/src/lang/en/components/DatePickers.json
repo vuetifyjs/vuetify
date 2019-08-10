@@ -13,7 +13,7 @@
       "header": "### Date pickers - Colors"
     },
     "date-current": {
-      "desc": "By default the current date is displayed using outline button - **show-current** prop allows you to remove the border or select different date to be displayed as the current one.",
+      "desc": "By default the current date is displayed using outlined button - **show-current** prop allows you to remove the border or select different date to be displayed as the current one.",
       "header": "### Date pickers - current date indicator"
     },
     "date-dialog-and-menu": {
@@ -65,7 +65,7 @@
       "header": "### Month pickers - Colors"
     },
     "month-current": {
-      "desc": "By default the current month is displayed using outline button - **show-current** prop allows you to remove the border or select different month to be displayed as the current one.",
+      "desc": "By default the current month is displayed using outlined button - **show-current** prop allows you to remove the border or select different month to be displayed as the current one.",
       "header": "### Month pickers - current month indicator"
     },
     "month-dialog-and-menu": {
