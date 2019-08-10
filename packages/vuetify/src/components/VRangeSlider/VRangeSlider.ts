@@ -218,7 +218,7 @@ export default VSlider.extend({
       if (value == null) return
 
       this.setInternalValue(value)
-      this.$emit('change', value)
+      this.$emit('change', this.internalValue)
     },
     setInternalValue (value: number) {
       this.internalValue = this.internalValue.map((v: number, i: number) => {
