@@ -29,7 +29,7 @@
     },
     "floating": {
       "header": "### Floating",
-      "desc": "Floating buttons are round and usually contain an icon."
+      "desc": "Floating buttons are rounded and usually contain an icon."
     },
     "loaders": {
       "header": "### Loaders",
@@ -39,12 +39,12 @@
       "header": "### Sizing",
       "desc": "Buttons can be given different sizing options to fit a multitude of scenarios."
     },
-    "outline": {
-      "header": "### Outline",
-      "desc": "Outline buttons inherit their borders from the current color applied."
+    "outlined": {
+      "header": "### Outlined",
+      "desc": "Outlined buttons inherit their borders from the current color applied."
     },
-    "round": {
-      "header": "### Round",
+    "rounded": {
+      "header": "### Rounded",
       "desc": "Rounded buttons behave the same as regular buttons but have rounded edges."
     },
     "tile": {

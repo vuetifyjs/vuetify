@@ -58,7 +58,7 @@
         <v-flex xs12 sm6>
           <v-text-field
             value="John Doe"
-            label="Outline"
+            label="Outlined"
             outlined
             disabled
           ></v-text-field>
@@ -67,7 +67,7 @@
         <v-flex xs12 sm6>
           <v-text-field
             value="John Doe"
-            label="Outline"
+            label="Outlined"
             outlined
             readonly
           ></v-text-field>
