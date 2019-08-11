@@ -18,28 +18,8 @@
           "lang": "fontText"
         },
         {
-          "type": "markdown",
-          "lang": "fonts"
-        },
-        {
-          "type": "style-headings"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "heading",
-          "lang": "transformHeader"
-        },
-        {
-          "type": "text",
-          "lang": "transformText"
-        },
-        {
-          "type": "markdown",
-          "lang": "transforms"
+          "type": "example",
+          "value": "font"
         },
         {
           "type": "style-typefaces"
@@ -50,30 +30,9 @@
       "type": "section",
       "children": [
         {
-          "type": "heading",
-          "lang": "wrapHeader"
-        },
-        {
-          "type": "text",
-          "lang": "wrapText"
-        },
-        {
-          "type": "markdown",
-          "lang": "wraps"
-        },
-        {
-          "type": "example",
-          "value": "truncate"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
           "type": "up-next",
           "value": [
-            "styles/alignment",
+            "styles/text",
             "styles/content"
           ]
         }
