@@ -22,6 +22,10 @@
           "value": "font"
         },
         {
+          "type": "heading",
+          "lang": "Generic.Pages.examples"
+        },
+        {
           "type": "style-typefaces"
         }
       ]

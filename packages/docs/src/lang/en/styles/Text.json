@@ -13,19 +13,5 @@
   "weightsHeader": "## Font weights and italics",
   "weightsText1": "Material design, by default, supports **100, 300, 400, 500, 700, 900** font weights and italicized text.",
   "rtlHeader": "## RTL agnostic alignment",
-  "rtlText1": "When using [RTL](/customization/rtl), you may want to keep the alignment regardless of the **rtl** designation.",
-  "howText": "The helper classes apply **text-alignment** to an element. These classes can be applied using the following format `text-{screen}-{alignment}` with `{screen}` being the [viewport size](/styles/display) and `{alignment}` being the text alignment as described below:",
-  "alignments": [
-    "`left` - aligns text to the left",
-    "`right` - aligns text to the right",
-    "`start` - aligns text to the left in LTR mode and to the right in RTL mode",
-    "`end` - aligns text to the right in LTR mode and to the left in RTL mode",
-    "`center` - centers the text",
-    "`justify` - justifies the text"
-  ],
-  "examples": {
-    "example": {
-      "desc": ""
-    }
-  }
+  "rtlText1": "When using [RTL](/customization/rtl), you may want to keep the alignment regardless of the **rtl** designation."
 }
