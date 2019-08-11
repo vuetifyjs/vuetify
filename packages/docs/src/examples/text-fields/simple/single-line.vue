@@ -28,7 +28,7 @@
 
         <v-flex xs12 sm6>
           <v-text-field
-            label="Outline"
+            label="Outlined"
             single-line
             outlined
           ></v-text-field>

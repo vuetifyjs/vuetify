@@ -48,14 +48,14 @@
 
         <v-flex xs12 sm6 md3>
           <v-text-field
-            label="Outline"
+            label="Outlined"
             outlined
           ></v-text-field>
         </v-flex>
 
         <v-flex xs12 sm6 md3>
           <v-text-field
-            label="Outline"
+            label="Outlined"
             placeholder="Placeholder"
             outlined
           ></v-text-field>
