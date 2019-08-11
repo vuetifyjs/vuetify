@@ -109,10 +109,10 @@
     "description": "Setup your application's theme and supplemental colors in a flash.",
     "keywords": "themes"
   },
-  "styles/alignment": {
-    "title": "CSS Alignment helpers",
-    "description": "Alignment helpers assist in modifying your application layout on varying viewport sizes with pre-configured css classes.",
-    "keywords": "alignment helper classes, alignment classes, alignment helpers"
+  "styles/text": {
+    "title": "CSS Text helpers",
+    "description": "Text helpers assist in modifying your application layout on varying viewport sizes with pre-configured css classes.",
+    "keywords": "Text helper classes, text classes, alignment helpers"
   },
   "styles/colors": {
     "title": "Material color palette",

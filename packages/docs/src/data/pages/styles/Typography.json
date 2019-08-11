@@ -31,34 +31,6 @@
       "children": [
         {
           "type": "heading",
-          "lang": "weightsHeader"
-        },
-        {
-          "type": "text",
-          "lang": "weightsText"
-        },
-        {
-          "type": "markdown",
-          "lang": "weights"
-        },
-        {
-          "type": "text",
-          "lang": "italicText"
-        },
-        {
-          "type": "markdown",
-          "lang": "italic"
-        },
-        {
-          "type": "style-weights"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "heading",
           "lang": "transformHeader"
         },
         {

@@ -64,6 +64,7 @@
   "/framework/display": "/styles/display",
   "/framework/elevation": "/styles/elevation",
   "/framework/spacing": "/styles/spacing",
-  "/framework/text-alignment": "/styles/text-alignment",
-  "/framework/transitions": "/styles/transitions"
+  "/framework/text-alignment": "/styles/alignment",
+  "/framework/transitions": "/styles/transitions",
+  "/styles/alignment": "/styles/text"
 }
