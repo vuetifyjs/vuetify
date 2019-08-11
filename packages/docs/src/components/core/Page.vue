@@ -9,29 +9,30 @@
         class="mb-12"
       >
         <v-layout>
-          <v-flex shrink>
-            <doc-heading v-if="structure.title">
+          <v-flex
+            v-if="structure.title"
+            shrink
+          >
+            <doc-heading>
               {{ structure.title }}
             </doc-heading>
           </v-flex>
-          <template v-if="structure.file">
-            <v-spacer />
-            <v-flex
-
-              shrink
-            >
-              <core-file-btn :link="structure.file" :branch="branch" />
-            </v-flex>
-            <v-flex
-              v-if="structure.mdSpec"
-              shrink
-            >
-              <core-spec-btn
-                :link="structure.mdSpec.link"
-                :version="structure.mdSpec.version"
-              />
-            </v-flex>
-          </template>
+          <v-spacer />
+          <v-flex
+            v-if="structure.file"
+            shrink
+          >
+            <core-file-btn :link="structure.file" :branch="branch" />
+          </v-flex>
+          <v-flex
+            v-if="structure.mdSpec"
+            shrink
+          >
+            <core-spec-btn
+              :link="structure.mdSpec.link"
+              :version="structure.mdSpec.version"
+            />
+          </v-flex>
         </v-layout>
         <div v-if="structure.titleText">
           <doc-text class="mb-6">
