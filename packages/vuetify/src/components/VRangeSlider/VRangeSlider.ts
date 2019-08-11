@@ -181,6 +181,11 @@ export default VSlider.extend({
     },
     onSliderClick (e: MouseEvent) {
       if (!this.isActive) {
+        if (this.noClick) {
+          this.noClick = false
+          return
+        }
+
         // It doesn't seem to matter if we focus on the wrong thumb here
         const thumb = this.$refs.thumb_1 as HTMLElement
         thumb.focus()
