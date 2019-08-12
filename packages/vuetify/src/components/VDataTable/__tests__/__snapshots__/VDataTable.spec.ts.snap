@@ -1484,7 +1484,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  remove
+                  $vuetify.icons.minus
                 </i>
               </span>
             </button>
@@ -1496,7 +1496,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  close
+                  $vuetify.icons.close
                 </i>
               </span>
             </button>
@@ -1535,7 +1535,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  remove
+                  $vuetify.icons.minus
                 </i>
               </span>
             </button>
@@ -1547,7 +1547,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  close
+                  $vuetify.icons.close
                 </i>
               </span>
             </button>
@@ -1586,7 +1586,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  remove
+                  $vuetify.icons.minus
                 </i>
               </span>
             </button>
@@ -1598,7 +1598,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  close
+                  $vuetify.icons.close
                 </i>
               </span>
             </button>
@@ -1637,7 +1637,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  remove
+                  $vuetify.icons.minus
                 </i>
               </span>
             </button>
@@ -1649,7 +1649,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  close
+                  $vuetify.icons.close
                 </i>
               </span>
             </button>
@@ -1688,7 +1688,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  remove
+                  $vuetify.icons.minus
                 </i>
               </span>
             </button>
@@ -1700,7 +1700,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  close
+                  $vuetify.icons.close
                 </i>
               </span>
             </button>
@@ -1911,7 +1911,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  remove
+                  $vuetify.icons.minus
                 </i>
               </span>
             </button>
@@ -1923,7 +1923,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  close
+                  $vuetify.icons.close
                 </i>
               </span>
             </button>
@@ -1974,7 +1974,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  remove
+                  $vuetify.icons.minus
                 </i>
               </span>
             </button>
@@ -1986,7 +1986,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  close
+                  $vuetify.icons.close
                 </i>
               </span>
             </button>
@@ -2020,7 +2020,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  remove
+                  $vuetify.icons.minus
                 </i>
               </span>
             </button>
@@ -2032,7 +2032,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  close
+                  $vuetify.icons.close
                 </i>
               </span>
             </button>
@@ -2066,7 +2066,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  remove
+                  $vuetify.icons.minus
                 </i>
               </span>
             </button>
@@ -2078,7 +2078,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  close
+                  $vuetify.icons.close
                 </i>
               </span>
             </button>
