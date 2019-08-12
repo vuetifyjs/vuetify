@@ -15,6 +15,18 @@
         {
           "type": "usage",
           "value": "usage"
+        },
+        {
+          "type": "text",
+          "lang": "usageText2"
+        },
+        {
+          "type": "text",
+          "lang": "usageList"
+        },
+        {
+          "type": "text",
+          "lang": "usageText3"
         }
       ]
     },
@@ -47,13 +59,19 @@
         {
           "type": "examples",
           "value": [
+            "auto",
+            "equal",
+            "one-column-width",
+            "variable-content",
+            "grow-shrink",
+            "row-column-breakpoint",
+            "unique-layouts",
+            "vertical-alignment",
+            "horizontal-alignment",
+            "no-gutters",
             "offset",
             "order",
-            "direction-and-align",
-            "row-column-breakpoint",
-            "grow-shrink",
             "nested-grid",
-            "unique-layouts",
             "spacer",
             "tags"
           ]

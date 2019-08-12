@@ -1,17 +1,21 @@
 <template>
   <v-container class="grey lighten-5">
-    <v-row no-gutters>
+    <v-row
+      v-for="n in 2"
+      :key="n"
+      :class="n === 1 ? 'mb-3' : ''"
+      no-gutters
+    >
       <v-col
-        v-for="n in 3"
-        :key="n"
-        cols="sm"
+        v-for="k in n + 1"
+        :key="k"
       >
         <v-card
           class="pa-2"
           outlined
           tile
         >
-          One of three columns
+          {{ k }} of {{ n + 1 }}
         </v-card>
       </v-col>
     </v-row>

@@ -5,16 +5,18 @@
         <v-row
           :align="alignment"
           :justify="justify"
-          style="min-height: 400px;"
+          class="grey lighten-5"
+          style="min-height: 300px;"
         >
-          <v-sheet
+          <v-card
             v-for="n in 3"
             :key="n"
-            class="ma-3"
-            elevation="5"
-            min-height="75"
-            width="75"
-          ></v-sheet>
+            class="ma-3 pa-6"
+            outlined
+            tile
+          >
+            Column
+          </v-card>
         </v-row>
       </v-col>
       <v-col cols="12">

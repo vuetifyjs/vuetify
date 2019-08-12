@@ -1,32 +1,29 @@
 <template>
   <v-container class="grey lighten-5">
-    <v-row>
+    <v-row no-gutters>
       <v-col
-        v-for="n in 2"
-        :key="n"
-        :sm="n === 1 ? 8 : 4"
+        cols="12"
+        sm="6"
+        md="8"
       >
         <v-card
           class="pa-2"
           outlined
           tile
         >
-          col-{{ n === 1 ? 8 : 4 }}
+          .col-12 .col-sm-6 .col-md-8
         </v-card>
       </v-col>
-    </v-row>
-    <v-row>
       <v-col
-        v-for="n in 3"
-        :key="n"
-        cols="sm"
+        cols="6"
+        md="4"
       >
         <v-card
           class="pa-2"
           outlined
           tile
         >
-          col
+          .col-6 ..col-md-4
         </v-card>
       </v-col>
     </v-row>

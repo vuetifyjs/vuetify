@@ -14,7 +14,7 @@
     </v-row>
     <v-row>
       <v-col cols="4" order-md="2" order="1">
-        <v-card dark tile flat color="red lighten-1">
+        <v-card dark tile flat color="red lighten-5">
           <v-card-text>#1</v-card-text>
         </v-card>
       </v-col>
@@ -36,7 +36,7 @@
         </v-card>
       </v-col>
       <v-col cols="12" sm="6" md="3" order-md="3" order-sm="1">
-        <v-card dark tile flat color="deep-orange lighten-1">
+        <v-card dark tile flat color="deep-orange lighten-5">
           <v-card-text>#2</v-card-text>
         </v-card>
       </v-col>
