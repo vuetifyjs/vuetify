@@ -114,7 +114,7 @@
       "complete": false,
       "title": "v2.3 Release **(Orion)**",
       "caption": "Q1 2020",
-      "text": "Vuetify components will be pre-configurable through framework wide defaults. This will allow you to set global settings such as **no-ripples** or all inputs are of **outline** type and even set all cards to become **tile**s.",
+      "text": "Vuetify components will be pre-configurable through framework wide defaults. This will allow you to set global settings such as **no-ripples** or all inputs are of **outlined** type and even set all cards to become **tile**s.",
       "value": false
     },
     {

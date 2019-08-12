@@ -32,7 +32,7 @@
         <v-flex xs12 sm6>
           <v-text-field
             v-model="message4"
-            label="Outline"
+            label="Outlined"
             outlined
             clearable
           ></v-text-field>

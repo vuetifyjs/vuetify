@@ -4,7 +4,7 @@
   "playgroundHeader": "## Playground",
   "playgroundText1": "Use the playground to get a feel for what the different helper classes can do. For an explanation of how they work, see the **How it works** section below.",
   "playgroundText2": "Use the controls above to try out the different spacing helpers",
-  "howText": "The helper classes apply **margin** or **padding** to an element ranging from _0 to 5_. Each size increment was designed to align with common Material Design spacings. These classes can be applied using the following format `{property}{direction}-{size}`.",
+  "howText": "The helper classes apply **margin** or **padding** to an element ranging from _0 to 12_. Each size increment was designed to align with common Material Design spacings. These classes can be applied using the following format `{property}{direction}-{size}`.",
   "propertyText": "The **property** applies the type of spacing:",
   "properties": [
     "`m` - applies `margin`",

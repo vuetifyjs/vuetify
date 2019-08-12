@@ -20,6 +20,7 @@
   },
   "props": {
     "dark": "Components.Inputs.props.dark",
+    "delimiters": "Accepts an array of strings that will trigger a new tag when typing. Does not replace the normal Tab and Enter keys.",
     "value": "Components.Inputs.props.value"
   },
   "slots": {

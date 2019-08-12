@@ -179,7 +179,7 @@ export default VTextField.extend({
       const children = []
 
       if (this.isDirty && this.$scopedSlots.selection) {
-        this.internalValue.forEach((file: File, index: number) => {
+        this.internalArrayValue.forEach((file: File, index: number) => {
           if (!this.$scopedSlots.selection) return
 
           children.push(
