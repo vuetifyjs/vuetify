@@ -74,6 +74,7 @@ export const BaseSlideGroup = mixins<options &
   },
 
   data: () => ({
+    internalItemsLength: 0,
     isOverflowing: false,
     resizeTimeout: 0,
     startX: 0,
@@ -128,6 +129,15 @@ export const BaseSlideGroup = mixins<options &
     scrollOffset (val) {
       this.$refs.content.style.transform = `translateX(${-val}px)`
     },
+  },
+
+  beforeUpdate () {
+    this.internalItemsLength = (this.$children || []).length
+  },
+
+  updated () {
+    if (this.internalItemsLength === (this.$children.length || [])) return
+    this.setWidths()
   },
 
   methods: {
