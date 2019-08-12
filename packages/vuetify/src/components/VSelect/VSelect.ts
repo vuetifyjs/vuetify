@@ -567,7 +567,10 @@ export default baseMixins.extend<options>().extend({
       }
     },
     onKeyPress (e: KeyboardEvent) {
-      if (this.multiple) return
+      if (
+        this.multiple ||
+        this.readonly
+      ) return
 
       const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
       const now = performance.now()
