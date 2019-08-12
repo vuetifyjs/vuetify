@@ -509,7 +509,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
 exports[`VDataTableHeader.ts mobile should render 1`] = `
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
-    <th colspan="6">
+    <th>
       <div class="v-data-table-header-mobile__wrapper">
         <div class="v-input v-input--hide-details theme--light v-text-field v-select">
           <div class="v-input__control">
@@ -561,7 +561,7 @@ exports[`VDataTableHeader.ts mobile should render 1`] = `
 exports[`VDataTableHeader.ts mobile should render with data-table-select header 1`] = `
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
-    <th colspan="7">
+    <th>
       <div class="v-data-table-header-mobile__wrapper">
         <div class="v-data-table-header-mobile__select">
           <div class="v-data-table__checkbox v-simple-checkbox">
@@ -624,7 +624,7 @@ exports[`VDataTableHeader.ts mobile should render with data-table-select header 
 exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
-    <th colspan="6">
+    <th>
       <div class="v-data-table-header-mobile__wrapper">
         <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
           <div class="v-input__control">
@@ -689,7 +689,7 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
 exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
-    <th colspan="6">
+    <th>
       <div class="v-data-table-header-mobile__wrapper">
         <div class="v-input v-input--hide-details theme--light v-text-field v-select">
           <div class="v-input__control">
@@ -741,7 +741,7 @@ exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
 exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
-    <th colspan="6">
+    <th>
       <div class="v-data-table-header-mobile__wrapper">
         <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
           <div class="v-input__control">
@@ -806,7 +806,7 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
 exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
-    <th colspan="6">
+    <th>
       <div class="v-data-table-header-mobile__wrapper">
         <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
           <div class="v-input__control">
