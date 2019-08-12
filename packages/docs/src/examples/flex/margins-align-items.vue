@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card
-      class="d-flex align-start flex-column mb-3"
+      class="d-flex align-start flex-column mb-6"
       color="grey lighten-2"
       flat
       tile

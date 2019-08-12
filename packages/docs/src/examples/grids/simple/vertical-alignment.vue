@@ -3,11 +3,11 @@
     <v-container
       v-for="align in alignments"
       :key="align"
-      class="grey lighten-5 mb-3"
+      class="grey lighten-5 mb-6"
     >
       <v-row
-        no-gutters
         :align="align"
+        no-gutters
         style="min-height: 150px;"
       >
         <v-col

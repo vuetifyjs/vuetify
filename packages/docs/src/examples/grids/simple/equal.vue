@@ -11,11 +11,11 @@
             Column
           </v-card>
         </v-col>
-        <div
+        <v-responsive
           v-if="n === 2"
-          :key="`divider-${n}`"
-          style="width: 100%;"
-        ></div>
+          :key="`width-${n}`"
+          width="100%"
+        ></v-responsive>
       </template>
     </v-row>
   </v-container>

@@ -36,6 +36,10 @@
       "header": "### Grow and Shrink",
       "desc": "By default, flex components will automatically fill the available space in a row or column. They will also shrink relative to the rest of the flex items in the flex container when a specific size is not designated. You can define the column width of the `v-col` by using the **cols** prop and providing a value from **1 to 12**."
     },
+    "row-column-breakpoint": {
+      "header": "### Row and column breakpoints",
+      "desc": "Dynamically change your layout based upon resolution. **(resize your screen and watch the layout change to a `row` on small breakpoints)**"
+    },
     "vertical-alignment": {
       "header": "### Vertical alignment",
       "desc": "Change the vertical alignment of flex items and their parents using the **align** and **align-self** properties."
@@ -48,17 +52,29 @@
       "header": "### No gutters",
       "desc": "You can remove the negative margins from `v-row` and the padding from its direct `v-col` children using the **no-gutters** property."
     },
+    "wrapping": {
+      "header": "### Column wrapping",
+      "desc": "When more than 12 columns are placed within a given row (that is not using the `.flex-no-wrap` utility class), each group of extra columns will wrap onto a new line."
+    },
+    "order": {
+      "header": "### Order classes",
+      "desc": "You can control the ordering of grid items. As with offsets, you can set different orders for different sizes. Design specialized screen layouts that accommodate to any application."
+    },
+    "order-first-last": {
+      "header": "### Order last / first",
+      "desc": "You can also designate explicitly **first** or **last** which will assign **-1** or **13** values respectively to the `order` CSS property."
+    },
     "offset": {
       "header": "### Offset",
       "desc": "Offsets are useful for compensating for elements that may not be visible yet, or to control the position of content. Just as with breakpoints, you can set an offset for any available sizes. This allows you to fine tune your application layout precisely to your needs."
     },
-    "order": {
-      "header": "### Order",
-      "desc": "You can control the ordering of grid items. As with offsets, you can set different orders for different sizes. Design specialized screen layouts that accommodate to any application."
+    "offset-breakpoint": {
+      "header": "### Offset breakpoint",
+      "desc": "Offset can also be applied on a per breakpoint basis."
     },
-    "row-column-breakpoint": {
-      "header": "### Row and column breakpoints",
-      "desc": "Dynamically change your layout based upon resolution. **(resize your screen and watch the layout change to a `row` on small breakpoints)**"
+    "margin": {
+      "header": "### Margin utilities",
+      "desc": "Using the [auto margin helper utilities](/styles/flex#auto-margins) you can force sibling columns away from each other."
     },
     "nested-grid": {
       "header": "### Nested grid",
@@ -69,7 +85,7 @@
       "desc": "The power and flexibility of the Vuetify grid system allows you to create amazing user interfaces."
     },
     "spacer": {
-      "header": "### v-spacer",
+      "header": "### Spacers",
       "desc": "The `v-spacer` component is useful when you want to fill available space or make space between two components."
     },
     "tags": {

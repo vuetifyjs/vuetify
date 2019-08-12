@@ -3,7 +3,7 @@
     <v-card
       v-for="a in align"
       :key="a"
-      :class="`d-flex align-${a} mb-3`"
+      :class="`d-flex align-${a} mb-6`"
       color="grey lighten-2"
       flat
       height="100"

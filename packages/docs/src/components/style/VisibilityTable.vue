@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="mb-3"
+    class="mb-6"
     outlined
   >
     <v-simple-table>

@@ -1,64 +1,71 @@
 <template>
   <v-container class="grey lighten-5">
     <v-row
-      class="mb-3"
-      justify="center"
+      class="mb-6"
       no-gutters
     >
-      <v-col lg="2">
+      <v-col md="4">
         <v-card
           class="pa-2"
           outlined
           tile
         >
-          1 of 3
+          .col-md-4
         </v-card>
       </v-col>
-      <v-col md="auto">
+      <v-col
+        md="4"
+        offset-md="4"
+      >
         <v-card
           class="pa-2"
           outlined
           tile
         >
-          Variable width content
+          .col-md-4 .offset-md-4
         </v-card>
       </v-col>
-      <v-col lg="2">
+    </v-row>
+    <v-row
+      class="mb-6"
+      no-gutters
+    >
+      <v-col
+        md="3"
+        offset-md="3"
+      >
         <v-card
           class="pa-2"
           outlined
           tile
         >
-          3 of 3
+          .col-md-3 .offset-md-3
+        </v-card>
+      </v-col>
+      <v-col
+        md="3"
+        offset-md="3"
+      >
+        <v-card
+          class="pa-2"
+          outlined
+          tile
+        >
+          .col-md-3 .offset-md-3
         </v-card>
       </v-col>
     </v-row>
     <v-row no-gutters>
-      <v-col>
+      <v-col
+        md="6"
+        offset-md="3"
+      >
         <v-card
           class="pa-2"
           outlined
           tile
         >
-          1 of 3
-        </v-card>
-      </v-col>
-      <v-col md="auto">
-        <v-card
-          class="pa-2"
-          outlined
-          tile
-        >
-          Variable width content
-        </v-card>
-      </v-col>
-      <v-col lg="2">
-        <v-card
-          class="pa-2"
-          outlined
-          tile
-        >
-          3 of 3
+          .col-md-6 .offset-md-3
         </v-card>
       </v-col>
     </v-row>

@@ -59,21 +59,24 @@
         {
           "type": "examples",
           "value": [
-            "auto",
-            "equal",
-            "one-column-width",
-            "variable-content",
-            "grow-shrink",
-            "row-column-breakpoint",
-            "unique-layouts",
-            "vertical-alignment",
-            "horizontal-alignment",
-            "no-gutters",
-            "offset",
-            "order",
-            "nested-grid",
-            "spacer",
-            "tags"
+            "simple/auto",
+            "simple/equal",
+            "simple/one-column-width",
+            "intermediate/variable-content",
+            "intermediate/grow-shrink",
+            "intermediate/row-column-breakpoint",
+            "intermediate/unique-layouts",
+            "simple/vertical-alignment",
+            "simple/horizontal-alignment",
+            "simple/no-gutters",
+            "intermediate/wrapping",
+            "advanced/order",
+            "advanced/order-first-last",
+            "advanced/offset",
+            "advanced/offset-breakpoint",
+            "intermediate/margin",
+            "advanced/nested-grid",
+            "simple/spacer"
           ]
         }
       ]

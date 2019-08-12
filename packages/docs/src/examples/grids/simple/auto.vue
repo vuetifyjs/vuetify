@@ -3,7 +3,7 @@
     <v-row
       v-for="n in 2"
       :key="n"
-      :class="n === 1 ? 'mb-3' : ''"
+      :class="n === 1 ? 'mb-6' : ''"
       no-gutters
     >
       <v-col

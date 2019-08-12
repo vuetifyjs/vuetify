@@ -3,7 +3,7 @@
     <v-card
       v-for="j in justify"
       :key="j"
-      class="d-flex mb-3"
+      class="d-flex mb-6"
       color="grey lighten-2"
       flat
       height="100"
