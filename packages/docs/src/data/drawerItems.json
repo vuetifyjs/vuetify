@@ -67,7 +67,6 @@
       { "text": "expansionPanels", "to": "expansion-panels" },
       { "text": "footer", "to": "footer" },
       { "text": "grid", "to": "grids" },
-      { "text": "gridLists", "to": "grid-lists" },
       {
         "group": "components",
         "text": "groups",
