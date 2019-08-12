@@ -133,6 +133,11 @@
     align-items: flex-start
 
   .v-toolbar__title
-    align-self: flex-end
     font-size: 1.5rem
-    padding-bottom: 6px
+    padding-top: 6px
+
+  &:not(.v-toolbar--bottom)
+    .v-toolbar__title
+      align-self: flex-end
+      padding-bottom: 6px
+      padding-top: 0

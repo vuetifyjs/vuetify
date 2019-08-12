@@ -253,6 +253,7 @@ export default baseMixins.extend({
       const target = e.target as HTMLElement
 
       return this.isActive &&
+        !this._isDestroyed &&
         this.closeOnClick &&
         !this.$refs.content.contains(target)
     },
@@ -441,7 +442,7 @@ export default baseMixins.extend({
     }
 
     return h('div', data, [
-      this.genActivator(),
+      !this.activator && this.genActivator(),
       this.$createElement(ThemeProvider, {
         props: {
           root: true,

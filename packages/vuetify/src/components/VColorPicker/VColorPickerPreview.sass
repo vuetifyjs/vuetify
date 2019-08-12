@@ -32,8 +32,6 @@
     height: 100%
 
 .v-color-picker__hue
-  margin-bottom: 24px
-
   &:not(.v-input--is-disabled)
     background: linear-gradient(to right, #F00 0%, #FF0 16.66%, #0F0 33.33%, #0FF 50%, #00F 66.66%, #F0F 83.33%, #F00 100%)
 
@@ -54,3 +52,7 @@
 
       .v-slider__track-container
         opacity: 0
+
+  &:not(.v-color-picker__preview--hide-alpha)
+    .v-color-picker__hue
+      margin-bottom: 24px

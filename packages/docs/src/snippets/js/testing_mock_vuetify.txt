@@ -1,0 +1,42 @@
+// test/CustomAlert.spec.js
+
+// Libraries
+import Vue from 'vue'
+import Vuetify from 'vuetify'
+
+// Components
+import CustomAlert from '@/components/CustomAlert'
+
+// Utilities
+import {
+  mount,
+  createLocalVue
+} from '@vue/test-utils'
+
+const localVue = createLocalVue()
+localVue.use(Vuetify)
+
+describe('CustomAlert.vue', () => {
+  let vuetify
+
+  beforeEach(() => {
+    vuetify = new Vuetify({
+      mocks: {
+        $vuetify: {
+          lang: {
+            t: (val: string) => val,
+          },
+        },
+      }
+    })
+  })
+
+  it('should have a custom title and match snapshot', () => {
+    const wrapper = mount(CustomAlert, {
+      localVue,
+      vuetify,
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+})
