@@ -74,3 +74,14 @@
     },
   }
 </script>
+<style lang="sass">
+  pre
+    background: #2d2d2d
+    padding: 8px
+    margin: 8px
+
+    code
+      box-shadow: none !important
+      background-color: unset !important
+      color: #ccc !important
+</style>
