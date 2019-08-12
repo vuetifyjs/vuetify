@@ -166,6 +166,9 @@ export default baseMixins.extend<options>().extend({
   watch: {
     labelValue: 'setLabelWidth',
     outlined: 'setLabelWidth',
+    label () {
+      this.$nextTick(this.setLabelWidth)
+    },
     prefix () {
       this.$nextTick(this.setPrefixWidth)
     },
