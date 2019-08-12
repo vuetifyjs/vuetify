@@ -360,7 +360,11 @@ export default VDataIterator.extend({
 
       for (let i = 0; i < items.length; i++) {
         const item = items[i]
-        rows.push(this.$scopedSlots.item!(this.createItemProps(item)))
+        rows.push(this.$scopedSlots.item!({
+          ...this.createItemProps(item),
+          index: i,
+        }))
+
         if (this.isExpanded(item)) {
           rows.push(this.$scopedSlots['expanded-item']!({ item, headers: this.computedHeaders }))
         }
