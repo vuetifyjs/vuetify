@@ -153,6 +153,7 @@
       { "text": "content", "to": "content" },
       { "text": "display", "to": "display" },
       { "text": "elevation", "to": "elevation" },
+      { "text": "flex", "to": "flex" },
       { "text": "float", "to": "float" },
       { "text": "spacing", "to": "spacing" },
       { "text": "text", "to": "text" },
