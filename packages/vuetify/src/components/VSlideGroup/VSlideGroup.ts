@@ -136,7 +136,7 @@ export const BaseSlideGroup = mixins<options &
   },
 
   updated () {
-    if (this.internalItemsLength === (this.$children.length || [])) return
+    if (this.internalItemsLength === (this.$children || []).length) return
     this.setWidths()
   },
 
