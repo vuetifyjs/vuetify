@@ -33,8 +33,8 @@
   export default {
     data () {
       return {
-        model: false
+        model: false,
       }
-    }
+    },
   }
 </script>

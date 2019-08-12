@@ -87,8 +87,8 @@
       return {
         model1: false,
         model2: false,
-        model3: false
+        model3: false,
       }
-    }
+    },
   }
 </script>

@@ -11,7 +11,7 @@
             color="primary"
           >
             <template v-slot:activator="{ on }">
-              <v-sheet v-on="on" class="ma-5" color="warning" width="80" height="80" />
+              <v-sheet class="ma-5" color="warning" width="80" height="80" v-on="on" />
             </template>
             <div>
               <h2>Hey! New feature...</h2>
@@ -41,7 +41,7 @@
             :flat="flat2"
           >
             <template v-slot:activator="{ on }">
-              <v-sheet v-on="on" class="ma-5" color="warning" width="40" height="40" />
+              <v-sheet class="ma-5" color="warning" width="40" height="40" v-on="on" />
             </template>
             <div>
               <h2>Hey! New feature...</h2>
@@ -68,7 +68,7 @@
               highlight-color="blue"
             >
               <template v-slot:activator="{ on }">
-                <v-sheet v-on="on" class="ma-5" color="green" width="40" height="40" />
+                <v-sheet class="ma-5" color="green" width="40" height="40" v-on="on" />
               </template>
               <div>
                 <h2>Hey! New feature...</h2>
@@ -90,7 +90,7 @@
               text-color="warning lighten-2"
             >
               <template v-slot:activator="{ on }">
-                <v-sheet v-on="on" class="ma-5" color="blue" width="80" height="80" />
+                <v-sheet class="ma-5" color="blue" width="80" height="80" v-on="on" />
               </template>
               <div>
                 <h2>Hey! New feature...</h2>
@@ -113,7 +113,7 @@
               text-color="error"
             >
               <template v-slot:activator="{ on }">
-                <v-sheet v-on="on" class="ma-5" color="blue lighten-1" width="120" height="50" />
+                <v-sheet class="ma-5" color="blue lighten-1" width="120" height="50" v-on="on" />
               </template>
               <div>
                 <h2>Hey! New feature...</h2>
@@ -144,7 +144,7 @@
             :elevation="elevation5"
           >
             <template v-slot:activator="{ on }">
-              <v-sheet v-on="on" class="ma-5" color="warning" width="40" height="40" />
+              <v-sheet class="ma-5" color="warning" width="40" height="40" v-on="on" />
             </template>
             <div>
               <h2>Hey! New feature...</h2>
@@ -174,7 +174,7 @@
             :persistent="persistent6"
           >
             <template v-slot:activator="{ on }">
-              <v-sheet v-on="on" class="ma-5" color="warning" width="40" height="40" />
+              <v-sheet class="ma-5" color="warning" width="40" height="40" v-on="on" />
             </template>
             <div>
               <h2>Hey! New feature...</h2>
@@ -204,7 +204,7 @@
             :no-ripple="noRipple8"
           >
             <template v-slot:activator="{ on }">
-              <v-sheet v-on="on" class="ma-5" color="warning" width="40" height="40" />
+              <v-sheet class="ma-5" color="warning" width="40" height="40" v-on="on" />
             </template>
             <div>
               <h2>Hey! New feature...</h2>
@@ -246,7 +246,7 @@
       model6: false,
       model7: false,
       noRipple8: false,
-      model8: false
-    })
+      model8: false,
+    }),
   }
 </script>

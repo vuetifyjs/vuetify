@@ -31,8 +31,8 @@
     data () {
       return {
         model: false,
-        persistent: false
+        persistent: false,
       }
-    }
+    },
   }
 </script>

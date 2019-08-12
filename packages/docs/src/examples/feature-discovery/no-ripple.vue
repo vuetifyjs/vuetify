@@ -28,8 +28,8 @@
     data () {
       return {
         model: false,
-        noRipple: false
+        noRipple: false,
       }
-    }
+    },
   }
 </script>

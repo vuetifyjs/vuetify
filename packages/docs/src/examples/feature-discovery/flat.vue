@@ -28,8 +28,8 @@
     data () {
       return {
         model: false,
-        flat: false
+        flat: false,
       }
-    }
+    },
   }
 </script>

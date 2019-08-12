@@ -5,7 +5,7 @@ import VFeatureDiscovery from '../VFeatureDiscovery'
 import {
   mount,
   Wrapper,
-  MountOptions
+  MountOptions,
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../util/mixins'
 
@@ -25,20 +25,20 @@ describe('FeatureDiscovery.ts', () => {
     wrapper.setData({
       rect: {
         bottom: 100,
-        top: 668
-      }
+        top: 668,
+      },
     })
 
     expect(wrapper.vm.closeConditional()).toBeTruthy()
     wrapper.setProps({
-      persistent: true
+      persistent: true,
     })
     expect(wrapper.vm.closeConditional()).toBeFalsy()
     wrapper.setProps({
-      persistent: false
+      persistent: false,
     })
     wrapper.setData({
-      isActive: false
+      isActive: false,
     })
     expect(wrapper.vm.closeConditional()).toBeFalsy()
   })
@@ -53,8 +53,8 @@ describe('FeatureDiscovery.ts', () => {
   it('should render correctly when flat', () => {
     const wrapper = mountFunction({
       propsData: {
-        flat: true
-      }
+        flat: true,
+      },
     })
 
     expect(wrapper.classes('v-feature-discovery--flat')).toBeTruthy()
@@ -64,13 +64,13 @@ describe('FeatureDiscovery.ts', () => {
   it('should toggle', () => {
     const wrapper = mountFunction({
       propsData: {
-        target: document.body
+        target: document.body,
       },
       computed: {
         internalActive () {
           return this.isActive
-        }
-      }
+        },
+      },
     })
 
     expect(wrapper.classes('v-feature-discovery--active')).toBeTruthy()
@@ -92,7 +92,7 @@ describe('FeatureDiscovery.ts', () => {
 
     expect(spy).toHaveBeenCalledTimes(0)
     wrapper.setProps({
-      target: '#asd'
+      target: '#asd',
     })
     expect(spy).toHaveBeenCalledTimes(1)
   })
@@ -101,8 +101,8 @@ describe('FeatureDiscovery.ts', () => {
     let close = false
     const wrapper = mountFunction({
       methods: {
-        closeConditional: () => close
-      }
+        closeConditional: () => close,
+      },
     })
 
     wrapper.vm.keyPress({ keyCode: 27 } as any)
@@ -117,15 +117,15 @@ describe('FeatureDiscovery.ts', () => {
     let close = false
     const wrapper = mountFunction({
       methods: {
-        closeConditional: () => close
+        closeConditional: () => close,
       },
       scopedSlots: {
         actions: `
           <template slot-scope="{ close }">
             <button id="close" @click="close">Close</button>
           </template>
-        `
-      }
+        `,
+      },
     })
 
     const closeButton = wrapper.find('#close')
@@ -141,16 +141,16 @@ describe('FeatureDiscovery.ts', () => {
   it('should compute base shift', async () => {
     const wrapper1 = mountFunction({
       computed: {
-        computedSize: () => 500
-      }
+        computedSize: () => 500,
+      },
     })
 
     expect(wrapper1.vm.baseShift).toBeCloseTo(132.58, 1)
 
     const wrapper2 = mountFunction({
       computed: {
-        computedSize: () => 100
-      }
+        computedSize: () => 100,
+      },
     })
 
     expect(wrapper2.vm.baseShift).toBeCloseTo(26.51, 1)
@@ -159,16 +159,16 @@ describe('FeatureDiscovery.ts', () => {
   it('should compute left shift', async () => {
     const wrapper = mountFunction({
       computed: {
-        computedSize: () => 500
-      }
+        computedSize: () => 500,
+      },
     })
 
     wrapper.setData({
       rect: {
         left: -100,
         right: 0,
-        width: 100
-      }
+        width: 100,
+      },
     })
     expect(wrapper.vm.leftShift).toBeCloseTo(132.58, 1)
 
@@ -176,8 +176,8 @@ describe('FeatureDiscovery.ts', () => {
       rect: {
         left: 1024,
         right: 1124,
-        width: 100
-      }
+        width: 100,
+      },
     })
     expect(wrapper.vm.leftShift).toBeCloseTo(-132.58, 1)
 
@@ -185,8 +185,8 @@ describe('FeatureDiscovery.ts', () => {
       rect: {
         left: 500,
         right: 600,
-        width: 100
-      }
+        width: 100,
+      },
     })
     expect(wrapper.vm.leftShift).toBe(0)
   })
@@ -194,16 +194,16 @@ describe('FeatureDiscovery.ts', () => {
   it('should compute top shift', async () => {
     const wrapper = mountFunction({
       computed: {
-        computedSize: () => 500
-      }
+        computedSize: () => 500,
+      },
     })
 
     wrapper.setData({
       rect: {
         top: -100,
         bottom: 0,
-        height: 100
-      }
+        height: 100,
+      },
     })
     expect(wrapper.vm.topShift).toBeCloseTo(132.58, 1)
 
@@ -211,8 +211,8 @@ describe('FeatureDiscovery.ts', () => {
       rect: {
         top: 768,
         bottom: 868,
-        height: 100
-      }
+        height: 100,
+      },
     })
     expect(wrapper.vm.topShift).toBeCloseTo(-132.58, 1)
 
@@ -220,8 +220,8 @@ describe('FeatureDiscovery.ts', () => {
       rect: {
         top: 400,
         bottom: 500,
-        height: 100
-      }
+        height: 100,
+      },
     })
     expect(wrapper.vm.topShift).toBe(0)
   })
@@ -232,24 +232,24 @@ describe('FeatureDiscovery.ts', () => {
     wrapper.setData({
       rect: {
         width: 200,
-        height: 100
-      }
+        height: 100,
+      },
     })
     expect(wrapper.vm.rectSize).toBe(200)
 
     wrapper.setData({
       rect: {
         width: 200,
-        height: 200
-      }
+        height: 200,
+      },
     })
     expect(wrapper.vm.rectSize).toBe(200)
 
     wrapper.setData({
       rect: {
         width: 200.1,
-        height: 100
-      }
+        height: 100,
+      },
     })
     expect(wrapper.vm.rectSize).toBe(200.1)
   })
@@ -260,8 +260,8 @@ describe('FeatureDiscovery.ts', () => {
     wrapper.setData({
       rect: {
         width: 200,
-        height: 100
-      }
+        height: 100,
+      },
     })
     expect(wrapper.vm.highlightPadding).toBeCloseTo(57.14, 1)
   })

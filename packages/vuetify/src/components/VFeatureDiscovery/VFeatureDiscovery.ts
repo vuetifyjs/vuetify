@@ -66,7 +66,7 @@ function initDimensions (): Dimensions {
     width: 0,
     height: 0,
     x: 0,
-    y: 0
+    y: 0,
   }
 }
 
@@ -76,7 +76,7 @@ export default baseMixins.extend<options>().extend({
 
   directives: {
     ClickOutside,
-    Resize
+    Resize,
   },
 
   props: {
@@ -84,65 +84,65 @@ export default baseMixins.extend<options>().extend({
     flat: Boolean,
     closeOnClick: {
       type: Boolean,
-      default: true
+      default: true,
     },
     closeOnContentClick: {
       type: Boolean,
-      default: true
+      default: true,
     },
     color: {
       type: String,
-      default: 'primary'
+      default: 'primary',
     },
     disableKeys: Boolean,
     highlightColor: {
       type: String,
-      default: 'white'
+      default: 'white',
     },
     size: {
       default: 700,
       type: [Number, String],
-      validator: (v: string | number) => !isNaN(parseInt(v))
+      validator: (v: string | number) => !isNaN(parseInt(v)),
     },
     contentWidth: {
       type: [Number, String],
       default: 280,
-      validator: (v: string | number) => !isNaN(parseInt(v))
+      validator: (v: string | number) => !isNaN(parseInt(v)),
     },
     positionX: {
       type: Number,
-      default: null
+      default: null,
     } as PropValidator<null | number>,
     positionY: {
       type: Number,
-      default: null
+      default: null,
     } as PropValidator<null | number>,
     value: {
       type: Boolean,
-      default: true
+      default: true,
     },
     noRipple: {
-      type: Boolean
+      type: Boolean,
     },
     textColor: {
       type: String,
-      default: 'white'
+      default: 'white',
     },
     edgeX: {
       type: [Number, String],
       default: 200,
-      validator: (v: string | number) => !isNaN(parseInt(v))
+      validator: (v: string | number) => !isNaN(parseInt(v)),
     },
     edgeY: {
       type: [Number, String],
       default: 144,
-      validator: (v: string | number) => !isNaN(parseInt(v))
+      validator: (v: string | number) => !isNaN(parseInt(v)),
     },
     zIndex: {
       type: [Number, String],
       default: null,
-      validator: (v: string | number) => !isNaN(parseInt(v))
-    } as PropValidator<null | string | number>
+      validator: (v: string | number) => !isNaN(parseInt(v)),
+    } as PropValidator<null | string | number>,
   },
 
   data: () => ({
@@ -152,7 +152,7 @@ export default baseMixins.extend<options>().extend({
     activatorNode: null as null | VNode | VNode[],
     dimensions: {
       activator: initDimensions(),
-      content: initDimensions()
+      content: initDimensions(),
     },
     hasJustFocused: false,
     hasWindow: false,
@@ -164,7 +164,7 @@ export default baseMixins.extend<options>().extend({
     activatorZIndexTimeout: 0,
     minHighlightPadding: 20,
     stackClass: 'v-feature-discovery__content--active',
-    stackMinZIndex: 6
+    stackMinZIndex: 6,
   }),
 
   computed: {
@@ -173,7 +173,7 @@ export default baseMixins.extend<options>().extend({
         'v-feature-discovery--flat': this.flat,
         'v-feature-discovery--active': this.isActive,
         'v-feature-discovery--no-ripple': this.noRipple,
-        ...this.themeClasses
+        ...this.themeClasses,
       }
     },
     hasActivator (): boolean {
@@ -217,7 +217,7 @@ export default baseMixins.extend<options>().extend({
     },
     styles (): object {
       return {
-        zIndex: this.zIndex || this.activeZIndex
+        zIndex: this.zIndex || this.activeZIndex,
       }
     },
     backdropSize (): number {
@@ -273,7 +273,7 @@ export default baseMixins.extend<options>().extend({
         left: convertToUnit(left),
         height: convertToUnit(size),
         width: convertToUnit(size),
-        transformOrigin: `${originLeft} ${originTop}`
+        transformOrigin: `${originLeft} ${originTop}`,
       }
     },
     highlightStyle (): object {
@@ -284,7 +284,7 @@ export default baseMixins.extend<options>().extend({
         top: halfSize,
         left: halfSize,
         height: size,
-        width: size
+        width: size,
       }
     },
     wrapStyle (): object {
@@ -302,14 +302,14 @@ export default baseMixins.extend<options>().extend({
         left: convertToUnit(left),
         height: 'auto',
         width: convertToUnit(this.computedWrapWidth),
-        padding: `0 ${convertToUnit(this.defaultPadding)}`
+        padding: `0 ${convertToUnit(this.defaultPadding)}`,
       }
     },
     attrs (): object {
       return {
-        'aria-hidden': !this.isActive
+        'aria-hidden': !this.isActive,
       }
-    }
+    },
   },
 
   watch: {
@@ -317,7 +317,7 @@ export default baseMixins.extend<options>().extend({
       val ? this.callActivate() : this.callDeactivate()
     },
     positionX: 'updateDimensions',
-    positionY: 'updateDimensions'
+    positionY: 'updateDimensions',
   },
 
   beforeMount () {
@@ -336,7 +336,7 @@ export default baseMixins.extend<options>().extend({
         top: this.positionY || this.absoluteY,
         bottom: this.positionY || this.absoluteY,
         left: this.positionX || this.absoluteX,
-        right: this.positionX || this.absoluteX
+        right: this.positionX || this.absoluteX,
       }
     },
     callActivate () {
@@ -402,7 +402,7 @@ export default baseMixins.extend<options>().extend({
         width: Math.round(rect.width),
         height: Math.round(rect.height),
         x: Math.round(Math.round(rect.left) + Math.round(rect.width) / 2),
-        y: Math.round(Math.round(rect.top) + Math.round(rect.height) / 2)
+        y: Math.round(Math.round(rect.top) + Math.round(rect.height) / 2),
       }
     },
     measure (el: HTMLElement): Dimensions {
@@ -441,7 +441,7 @@ export default baseMixins.extend<options>().extend({
           x,
           y: by,
           r: br,
-          size: 2 * (br + this.defaultPadding)
+          size: 2 * (br + this.defaultPadding),
         }
       }
 
@@ -449,7 +449,7 @@ export default baseMixins.extend<options>().extend({
         x,
         y: cy - content.height,
         r: cr,
-        size: 2 * (cr + this.defaultPadding)
+        size: 2 * (cr + this.defaultPadding),
       }
     },
     sneakPeek (cb: () => void) {
@@ -516,7 +516,7 @@ export default baseMixins.extend<options>().extend({
     genDirectives (): VNodeDirective[] {
       const directives: VNodeDirective[] = [{
         name: 'show',
-        value: this.isContentActive
+        value: this.isContentActive,
       }]
 
       if (this.closeOnClick) {
@@ -525,8 +525,8 @@ export default baseMixins.extend<options>().extend({
           value: () => { this.isActive = false },
           args: {
             closeConditional: this.closeConditional,
-            include: () => [this.$el]
-          }
+            include: () => [this.$el],
+          },
         } as any)
       }
 
@@ -536,7 +536,7 @@ export default baseMixins.extend<options>().extend({
       return this.$createElement('div', this.setBackgroundColor(this.color, {
         staticClass: 'v-feature-discovery__backdrop',
         class: this.elevationClasses,
-        style: this.backdropStyle
+        style: this.backdropStyle,
       }), [])
     },
     genHighlight (): VNode {
@@ -544,8 +544,8 @@ export default baseMixins.extend<options>().extend({
         staticClass: 'v-feature-discovery__highlight',
         style: this.highlightStyle,
         attrs: {
-          'aria-hidden': true
-        }
+          'aria-hidden': true,
+        },
       })))
     },
     genWrap (): VNode {
@@ -553,7 +553,7 @@ export default baseMixins.extend<options>().extend({
         {
           staticClass: 'v-feature-discovery__wrap',
           style: this.wrapStyle,
-          ref: 'content'
+          ref: 'content',
         },
         this.$slots.default
       )
@@ -567,7 +567,7 @@ export default baseMixins.extend<options>().extend({
           'v-feature-discovery__content--fixed': this.activatorFixed,
           'v-feature-discovery__content--flat': this.flat,
           'v-feature-discovery__content--active': this.isActive,
-          'v-feature-discovery__content--no-ripple': this.noRipple
+          'v-feature-discovery__content--no-ripple': this.noRipple,
         },
         style: this.styles,
         directives: this.genDirectives(),
@@ -580,8 +580,8 @@ export default baseMixins.extend<options>().extend({
             if (target.getAttribute('disabled')) return
             if (this.closeOnContentClick) this.isActive = false
           },
-          keydown: this.onKeyDown
-        }
+          keydown: this.onKeyDown,
+        },
       } as VNodeData
 
       return this.$createElement(
@@ -590,7 +590,7 @@ export default baseMixins.extend<options>().extend({
         [
           this.genBackdrop(),
           this.genHighlight(),
-          this.genWrap()
+          this.genWrap(),
         ]
       )
     },
@@ -610,23 +610,23 @@ export default baseMixins.extend<options>().extend({
       // hacky but will revisit in the future
       clearTimeout(this.resizeTimeout)
       this.resizeTimeout = window.setTimeout(this.updateDimensions, 100)
-    }
+    },
   },
 
   render (h): VNode {
     const data = {
       staticClass: 'v-feature-discovery',
       class: {
-        'v-feature-discovery--inline': this.hasActivator
+        'v-feature-discovery--inline': this.hasActivator,
       },
       directives: [{
         arg: '500',
         name: 'resize',
-        value: this.onResize
+        value: this.onResize,
       }],
       on: this.disableKeys ? undefined : {
-        keydown: this.onKeyDown
-      }
+        keydown: this.onKeyDown,
+      },
     }
 
     return h('div', data, [
@@ -635,9 +635,9 @@ export default baseMixins.extend<options>().extend({
         props: {
           root: true,
           light: this.light,
-          dark: this.dark
-        }
-      }, [this.genContent()])
+          dark: this.dark,
+        },
+      }, [this.genContent()]),
     ])
-  }
+  },
 })
