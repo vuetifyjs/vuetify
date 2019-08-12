@@ -283,6 +283,7 @@ export default baseMixins.extend<options>().extend({
     return h('div', this.setTextColor(this.validationState, {
       staticClass: 'v-input',
       class: this.classes,
+      on: this.$listeners,
     }), this.genContent())
   },
 })
