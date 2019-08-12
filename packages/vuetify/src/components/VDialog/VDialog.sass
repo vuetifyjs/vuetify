@@ -20,9 +20,9 @@
 
   > .v-card
     > .v-card__title
-      font-size: 1.25rem
-      font-weight: 500
-      letter-spacing: .0125em
+      font-size: map-deep-get($headings, 'h6', 'size')
+      font-weight: map-deep-get($headings, 'h6', 'weight')
+      letter-spacing: map-deep-get($headings, 'h6', 'letter-spacing')
       padding: 16px 24px 10px
 
     > .v-card__text
