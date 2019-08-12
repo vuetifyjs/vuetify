@@ -166,7 +166,6 @@ export default baseMixins.extend<options>().extend({
     const data = {
       staticClass: 'v-radio',
       class: this.classes,
-      listeners: this.$listeners,
     } as VNodeData
 
     return h('div', data, [
