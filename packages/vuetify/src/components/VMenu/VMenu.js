@@ -199,6 +199,7 @@ export default Vue.extend({
     },
     closeConditional (e) {
       return this.isActive &&
+        !this._isDestroyed &&
         this.closeOnClick &&
         !this.$refs.content.contains(e.target)
     },

@@ -144,7 +144,7 @@ export default {
       // If the dialog content contains
       // the click event, or if the
       // dialog is not active
-      if (!this.isActive || this.$refs.content.contains(e.target)) return false
+      if (this._isDestroyed || !this.isActive || this.$refs.content.contains(e.target)) return false
 
       // If we made it here, the click is outside
       // and is active. If persistent, and the

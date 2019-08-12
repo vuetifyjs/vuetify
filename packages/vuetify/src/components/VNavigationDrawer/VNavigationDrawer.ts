@@ -256,7 +256,7 @@ export default mixins(
       }
     },
     closeConditional () {
-      return this.isActive && this.reactsToClick
+      return this.isActive && !this._isDestroyed && this.reactsToClick
     },
     genDirectives () {
       const directives = [{
