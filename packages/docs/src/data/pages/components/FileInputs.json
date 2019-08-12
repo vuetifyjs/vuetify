@@ -39,6 +39,19 @@
           ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/text-fields",
+            "components/forms",
+            "components/icons"
+          ]
+        }
+      ]
     }
   ]
 }
