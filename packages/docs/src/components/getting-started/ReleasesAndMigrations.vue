@@ -9,7 +9,19 @@
       <v-card-title>
         <doc-subheading>releaseHeader</doc-subheading>
       </v-card-title>
-      <v-card-text>Coming Soon...</v-card-text>
+      <v-card-text>
+        <v-combobox
+          v-model="releaseNotes"
+          :items="releases"
+          item-text="name"
+          label="Select Version"
+          chips
+          clearable
+          outlined
+          solo
+        />
+        <doc-markdown :code="releaseNotes ? releaseNotes.body : ' '" />
+      </v-card-text>
     </v-card>
     <v-card
       id="migration-guide"
@@ -21,7 +33,7 @@
         <doc-subheading>migrationHeader</doc-subheading>
       </v-card-title>
       <v-card-text>
-        <doc-markdown :code="migration" />
+        <doc-markdown :code="migration || ' '" />
       </v-card-text>
     </v-card>
   </v-container>
@@ -32,8 +44,10 @@
 
   export default {
     data: () => ({
-      migration: ' ',
+      migration: undefined,
       branch: undefined,
+      releases: [],
+      releaseNotes: undefined,
     }),
 
     mounted () {
@@ -46,9 +60,16 @@
       })
         .then(res => res.json())
         .then(res => {
-          const { content } = res
-          this.migration = content ? Buffer.from(content, 'base64').toString() : ' '
+          this.migration = res.content ? Buffer.from(res.content, 'base64').toString() : ' '
         })
+        .catch(err => console.log(err))
+
+      fetch(`https://api.github.com/repos/vuetifyjs/vuetify/releases?per_page=100`, {
+        method: 'get',
+        headers: { 'Content-Type': 'application/json' },
+      })
+        .then(res => res.json())
+        .then(res => { this.releases = res })
         .catch(err => console.log(err))
     },
   }
