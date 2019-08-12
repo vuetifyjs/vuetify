@@ -22,7 +22,7 @@ import MobileRow from './MobileRow'
 import ripple from '../../directives/ripple'
 
 // Helpers
-import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots, getSlot, defaultFilter, FilterFn } from '../../util/helpers'
+import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots, getSlot, defaultFilter, FilterFn, camelizeObjectKeys } from '../../util/helpers'
 import { breaking } from '../../util/console'
 
 function filterFn (item: any, search: string | null, filter: FilterFn) {
@@ -138,6 +138,9 @@ export default VDataIterator.extend({
     headersWithoutCustomFilters (): TableHeader[] {
       return this.computedHeaders.filter(header => !header.filter)
     },
+    sanitizedHeaderProps (): object {
+      return camelizeObjectKeys(this.headerProps)
+    },
   },
 
   created () {
@@ -225,7 +228,7 @@ export default VDataIterator.extend({
     genHeaders (props: DataProps) {
       const data = {
         props: {
-          ...this.headerProps,
+          ...this.sanitizedHeaderProps,
           headers: this.computedHeaders,
           options: props.options,
           mobile: this.isMobile,
@@ -461,7 +464,7 @@ export default VDataIterator.extend({
           options: props.options,
           pagination: props.pagination,
           itemsPerPageText: '$vuetify.dataTable.itemsPerPageText',
-          ...this.footerProps,
+          ...this.sanitizedFooterProps,
         },
         on: {
           'update:options': (value: any) => props.updateOptions(value),
