@@ -139,6 +139,11 @@
     "description": "Elevation helper classes allow you to control relative depth, or distance, between two surfaces along the z-axis.",
     "keywords": "elevation helper classes, elevation classes, vuetify elevation"
   },
+  "styles/flex": {
+    "title": "CSS Flex helpers",
+    "description": "Flex helper classes allow you to modify flexbox parents and children.",
+    "keywords": "flex helper classes, flex classes, vuetify flex"
+  },
   "styles/scroll": {
     "title": "Smooth scrolling",
     "description": "Using the goTo helper you can smoothly scroll to any location or component on the page.",
