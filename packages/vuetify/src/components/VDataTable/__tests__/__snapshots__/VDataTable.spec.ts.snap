@@ -68,7 +68,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -83,7 +83,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
