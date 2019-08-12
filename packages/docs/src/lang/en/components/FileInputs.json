@@ -31,7 +31,7 @@
     },
     "custom-icon": {
       "header": "### Custom icons",
-      "desc": "The `v-file-input` has a default prepended icon that can be set on the component or adjusted globally. More information on changing global components can be found on the [customizing icons page](/customizing/icons)."
+      "desc": "The `v-file-input` has a default prepended icon that can be set on the component or adjusted globally. More information on changing global components can be found on the [customizing icons page](/customization/icons)."
     },
     "validation": {
       "header": "### Validation",
