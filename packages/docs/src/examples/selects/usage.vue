@@ -19,7 +19,7 @@
       <v-flex xs12 sm6 d-flex>
         <v-select
           :items="items"
-          label="Outline style"
+          label="Outlined style"
           outlined
         ></v-select>
       </v-flex>

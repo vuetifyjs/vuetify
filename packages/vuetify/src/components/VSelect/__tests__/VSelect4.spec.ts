@@ -253,4 +253,27 @@ describe('VSelect.ts', () => {
     expect(wrapper.vm.internalValue).toBe('Foo')
     expect(wrapper.vm.$refs.menu.listIndex).toBe(-1)
   })
+
+  it('should not change value when typing on readonly field', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+        readonly: true,
+        value: 'Foo',
+      },
+    })
+
+    const input = wrapper.find('input')
+    input.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.internalValue).toBe('Foo')
+
+    input.trigger('keypress', { key: 'b' })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.internalValue).toBe('Foo')
+  })
 })

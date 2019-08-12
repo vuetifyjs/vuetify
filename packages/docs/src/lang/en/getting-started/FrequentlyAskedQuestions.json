@@ -103,6 +103,15 @@
     {
       "q": "### How do I get to the v1.5 documentation?",
       "a": "[https://v15.vuetifyjs.com](https://v15.vuetifyjs.com)"
+    },
+    {
+      "q": "### [Vue warn]: Unknown custom element: <v-app>",
+      "a": "Ensure that you have the latest version of [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugin-vuetify) and [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) installed in your **package.json**."
+    },
+    {
+      "q": "### SCRIPT5022: Expected identifier, string or number",
+      "a": "In order to support **modern mode** in vue-cli-3, `vuetify/lib` is not transpiled. You must tell vue-cli to transpile the `vuetify` package. This will be automatically handled in the future by vue-cli-plugin-vuetify pending a bug fix for vue-cli-3.",
+      "s": "js_transpileDependencies"
     }
   ]
 }

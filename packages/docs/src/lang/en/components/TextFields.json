@@ -75,7 +75,7 @@
     },
     "outlined": {
       "header": "### Outlined style",
-      "desc": "Text fields can be used with an alternative outline design."
+      "desc": "Text fields can be used with an alternative outlined design."
     },
     "custom-colors": {
       "header": "### Custom colors",
@@ -102,7 +102,7 @@
     "fullWidth": "Designates input type as full-width",
     "multiLine": "Turns into textarea",
     "noResize": "Removes the resize handle, only applies to **multi-line** and **textarea** props",
-    "outlined": "Applies the outline style to the input",
+    "outlined": "Applies the outlined style to the input",
     "placeholder": "Sets the input’s placeholder text",
     "prefix": "Displays prefix text",
     "prependInnerIcon": "Prepends an icon inside the component's input, uses the same syntax as `v-icon`",

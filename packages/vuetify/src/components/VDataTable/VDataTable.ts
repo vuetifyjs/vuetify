@@ -200,9 +200,6 @@ export default VDataIterator.extend({
           class: {
             divider: header.divider,
           },
-          style: {
-            width: header.width,
-          },
         })
       }))
     },
@@ -319,7 +316,7 @@ export default VDataIterator.extend({
           on: {
             click: () => this.$set(this.openCache, group, !this.openCache[group]),
           },
-        }, [this.$createElement(VIcon, [isOpen ? 'remove' : 'add'])])
+        }, [this.$createElement(VIcon, [isOpen ? '$vuetify.icons.minus' : '$vuetify.icons.plus'])])
 
         const remove = this.$createElement(VBtn, {
           staticClass: 'ma-0',
@@ -330,7 +327,7 @@ export default VDataIterator.extend({
           on: {
             click: () => props.updateOptions({ groupBy: [], groupDesc: [] }),
           },
-        }, [this.$createElement(VIcon, ['close'])])
+        }, [this.$createElement(VIcon, ['$vuetify.icons.close'])])
 
         const column = this.$createElement('td', {
           staticClass: 'text-start',
@@ -363,7 +360,11 @@ export default VDataIterator.extend({
 
       for (let i = 0; i < items.length; i++) {
         const item = items[i]
-        rows.push(this.$scopedSlots.item!(this.createItemProps(item)))
+        rows.push(this.$scopedSlots.item!({
+          ...this.createItemProps(item),
+          index: i,
+        }))
+
         if (this.isExpanded(item)) {
           rows.push(this.$scopedSlots['expanded-item']!({ item, headers: this.computedHeaders }))
         }

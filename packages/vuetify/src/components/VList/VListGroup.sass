@@ -3,11 +3,12 @@
 @import './_mixins.sass'
 
 // Element
-.v-list-group
+.v-list-group .v-list-group__header
   .v-list-item__icon.v-list-group__header__append-icon
+    align-self: center
+    margin: 0
     min-width: 48px
     justify-content: flex-end
-    margin-left: 0
 
 .v-list-group--sub-group
   align-items: center
@@ -16,7 +17,7 @@
 
 .v-list-group__header
   &.v-list-item--active:not(:hover):not(:focus):before
-    display: none
+    opacity: 0
 
 .v-list-group__items
   flex: 1 1 auto
@@ -50,7 +51,7 @@
       padding-left: 32px
     +rtl()
       padding-right: 32px
-    
+
 
   .v-list-group__items
     .v-list-item

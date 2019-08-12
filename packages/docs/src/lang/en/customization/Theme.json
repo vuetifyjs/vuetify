@@ -26,5 +26,7 @@
   "variantsSubheader": "### Custom theme variants",
   "variantsText1": "While Vuetify automatically generates _lighten_ and _darken_ variants for theme colors, you may want to control this yourself. Simply pass a theme object that contains the variants that you wish to modify. Anything not provided will still be generated for you.",
   "variantsText2": "You can now import your custom theme object and apply it to Vuetify",
-  "variantsText3": "Below is a full list of the overwritable keys on the theme object:"
+  "variantsText3": "Below is a full list of the overwritable keys on the theme object:",
+  "disableSubheader": "### Disable theme",
+  "disableText1": "You can disable theme functionality by using the **disable** property with a value of **true**. This will prevent the creation of the Vuetify stylesheet."
 }

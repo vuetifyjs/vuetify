@@ -12,6 +12,7 @@ export default {
       sortAscending: ': ממוין לפי סדר יורד. לחץ למיון לפי סדר עולה.',
       sortNone: ': לא ממוין. לחץ למיון לפי סדר עולה.',
     },
+    sortBy: 'Sort by',
   },
   dataFooter: {
     itemsPerPageText: 'פריטים לדף:',

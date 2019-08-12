@@ -46,7 +46,7 @@
   "changesText3": "Commit with commitizen using the command `git cz`. From here you will follow through a series of props. Make sure to select the appropiate type (see **Commit Guidelines w/Commitizen** above)",
   "changesText4": "Lastly, `git push` and open a pull request.",
   "changesSubHeader1": "### Pull Requests For Vuetify",
-  "changesText7": "Pull requests related to Vuetify: for bug fixes submit pull requests to `master`, for new features and breaking changes submit pull requests to `dev`.",
+  "changesText7": "Pull requests related to Vuetify:   \n* For **bug fixes** and **documentation updates** submit pull requests to `master`.   \n* For **new features** and **enhancements** submit pull requests to `dev`   \n* For **bugs** and **critical fixes** related to **v1.5/LTS** submit pull requests to `stable`   \n* For any **features** that contain **breaking changes** submit pull requests to `next` ",
   "changesSubHeader2": "### Pull Requests For Docs",
   "changesText8": "For any pull requests related to Vuetify docs, submit your pull request to the `master` branch."
 }

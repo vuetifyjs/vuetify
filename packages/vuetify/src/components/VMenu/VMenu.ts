@@ -441,7 +441,7 @@ export default baseMixins.extend({
     }
 
     return h('div', data, [
-      this.genActivator(),
+      !this.activator && this.genActivator(),
       this.$createElement(ThemeProvider, {
         props: {
           root: true,

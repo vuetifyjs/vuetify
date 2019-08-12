@@ -12,6 +12,7 @@ export default {
       sortAscending: ': صعودی مرتب شده است. فعال‌سازی برای مرتب‌سازی نزولی.',
       sortNone: ': مرتب نشده است. فعال‌سازی برای مرتب‌سازی صعودی.',
     },
+    sortBy: 'Sort by',
   },
   dataFooter: {
     itemsPerPageText: 'ردیف در صفحه:',
