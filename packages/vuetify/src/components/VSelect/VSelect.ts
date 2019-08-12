@@ -305,6 +305,8 @@ export default baseMixins.extend<options>().extend({
     },
     closeConditional (e: Event) {
       return (
+        !this._isDestroyed &&
+
         // Click originates from outside the menu content
         this.content &&
         !this.content.contains(e.target) &&
