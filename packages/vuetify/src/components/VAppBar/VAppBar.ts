@@ -165,9 +165,11 @@ export default baseMixins.extend({
 
       if (this.isActive) return 0
 
-      return this.scrollOffScreen
-        ? -this.computedHeight
-        : -this.computedContentHeight
+      const scrollOffScreen = this.scrollOffScreen
+        ? this.computedHeight
+        : this.computedContentHeight
+
+      return this.bottom ? scrollOffScreen : -scrollOffScreen
     },
     hideShadow (): boolean {
       if (this.elevateOnScroll) {
