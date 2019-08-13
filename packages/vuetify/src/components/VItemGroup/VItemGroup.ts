@@ -17,7 +17,6 @@ export type GroupableInstance = InstanceType<typeof Groupable> & {
   id?: string
   to?: any
   value?: any
-  beforeChange?: (v: boolean) => void // Callback before setting isActive
  }
 
 export const BaseItemGroup = mixins(
@@ -169,12 +168,7 @@ export const BaseItemGroup = mixins(
     updateItem (item: GroupableInstance, index: number) {
       const value = this.getValue(item, index)
 
-      var val = this.toggleMethod(value)
-      // Trigger callback only if value changed.
-      if (val !== item.isActive && item.beforeChange) {
-        item.beforeChange(val)
-      }
-      item.isActive = val
+      item.isActive = this.toggleMethod(value)
     },
     updateItemsState () {
       if (this.mandatory &&

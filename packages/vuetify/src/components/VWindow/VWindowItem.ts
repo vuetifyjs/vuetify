@@ -53,7 +53,6 @@ export default baseMixins.extend<options>().extend(
     return {
       isActive: false,
       inTransition: false,
-      initialHeight: undefined as string | undefined,
     }
   },
 
@@ -89,13 +88,6 @@ export default baseMixins.extend<options>().extend(
         on: this.$listeners,
       }, this.showLazyContent(this.genDefaultSlot()))
     },
-    beforeChange (val: boolean) {
-      if (this.windowGroup.$el) {
-        // Cache initial height before any transition event. Both enter/leave window will
-        // have the initial value becuase we don't know which one will enter first.
-        this.initialHeight = convertToUnit(this.windowGroup.$el.clientHeight)
-      }
-    },
     onAfterTransition () {
       if (!this.inTransition) {
         return
@@ -119,7 +111,8 @@ export default baseMixins.extend<options>().extend(
       // Initialize transition state here.
       this.inTransition = true
       if (this.windowGroup.activeWindows === 0) {
-        this.windowGroup.internalHeight = this.initialHeight
+        // Set initial height for height transition.
+        this.windowGroup.internalHeight = convertToUnit(this.windowGroup.$el.clientHeight)
       }
       this.windowGroup.activeWindows++
     },

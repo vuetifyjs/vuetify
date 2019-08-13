@@ -54,15 +54,16 @@ describe('VWindowItem.ts', () => {
     const item = wrapper.find(VWindowItem.options)
     // Before enter
     expect(wrapper.vm.isActive).toBeFalsy()
+    expect(wrapper.vm.internalHeight).toBeUndefined()
     item.vm.onBeforeTransition()
     expect(wrapper.vm.isActive).toBeTruthy()
+    expect(wrapper.vm.internalHeight).toBe('0px')
 
     // Enter
-    const el = document.createElement('div')
-    expect(wrapper.vm.internalHeight).toBeUndefined()
+    const el = { clientHeight: 50 }
     item.vm.onEnter(el)
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.internalHeight).toBe('0px')
+    expect(wrapper.vm.internalHeight).toBe('50px')
 
     // After enter
     item.vm.onAfterTransition()
@@ -135,7 +136,6 @@ describe('VWindowItem.ts', () => {
     const item = wrapper.find(VWindowItem.options)
     expect(wrapper.vm.computedTransition).toBeFalsy()
 
-    item.vm.beforeChange(true)
     item.vm.onBeforeTransition()
     expect(wrapper.vm.isActive).toBeTruthy()
     expect(heightChanged).toHaveBeenCalledTimes(1)
