@@ -161,6 +161,13 @@ export default VTextField.extend({
 
       input.data!.domProps!.value = this.internalFileInput
 
+      // This solves issue in Safari where
+      // nothing happens when you add file
+      // since for some reason Safari does
+      // not emit the input event. (#7941)
+      delete input.data!.on!.input
+      input.data!.on!.change = this.onInput
+
       return [this.genSelections(), input]
     },
     genPrependSlot () {
