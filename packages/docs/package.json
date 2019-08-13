@@ -5,7 +5,7 @@
   "author": "John Leider <john.j.leider@gmail.com>",
   "version": "2.0.5",
   "scripts": {
-    "dev": "cross-env node server",
+    "dev": "cross-env node --max_old_space_size=4096 server",
     "start": "cross-env NODE_ENV=production node server",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config build/webpack.prod.config.js --no-progress --hide-modules",
     "lint": "eslint --ext .js,.vue,.json src -f codeframe",

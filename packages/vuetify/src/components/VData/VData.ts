@@ -95,17 +95,23 @@ export default Vue.extend({
   },
 
   data () {
+    let internalOptions: DataOptions = {
+      page: this.page,
+      itemsPerPage: this.itemsPerPage,
+      sortBy: wrapInArray(this.sortBy),
+      sortDesc: wrapInArray(this.sortDesc),
+      groupBy: wrapInArray(this.groupBy),
+      groupDesc: wrapInArray(this.groupDesc),
+      mustSort: this.mustSort,
+      multiSort: this.multiSort,
+    }
+
+    if (this.options) {
+      internalOptions = Object.assign(internalOptions, this.options)
+    }
+
     return {
-      internalOptions: {
-        page: this.page,
-        itemsPerPage: this.itemsPerPage,
-        sortBy: wrapInArray(this.sortBy),
-        sortDesc: wrapInArray(this.sortDesc),
-        groupBy: wrapInArray(this.groupBy),
-        groupDesc: wrapInArray(this.groupDesc),
-        mustSort: this.mustSort,
-        multiSort: this.multiSort,
-      } as DataOptions,
+      internalOptions,
     }
   },
 
