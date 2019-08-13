@@ -101,7 +101,6 @@ export default {
         this.hideScroll()
       } else {
         this.removeOverlay()
-        this.unbind()
       }
     },
     fullscreen (val) {
@@ -130,10 +129,6 @@ export default {
     }
   },
 
-  beforeDestroy () {
-    if (typeof window !== 'undefined') this.unbind()
-  },
-
   methods: {
     animateClick () {
       this.animate = false
@@ -149,7 +144,7 @@ export default {
       // If the dialog content contains
       // the click event, or if the
       // dialog is not active
-      if (!this.isActive || this.$refs.content.contains(e.target)) return false
+      if (this._isDestroyed || !this.isActive || this.$refs.content.contains(e.target)) return false
 
       // If we made it here, the click is outside
       // and is active. If persistent, and the
@@ -176,13 +171,6 @@ export default {
     show () {
       !this.fullscreen && !this.hideOverlay && this.genOverlay()
       this.$refs.content.focus()
-      this.bind()
-    },
-    bind () {
-      window.addEventListener('focusin', this.onFocusin)
-    },
-    unbind () {
-      window.removeEventListener('focusin', this.onFocusin)
     },
     onKeydown (e) {
       if (e.keyCode === keyCodes.esc && !this.getOpenDependents().length) {
@@ -195,25 +183,6 @@ export default {
         }
       }
       this.$emit('keydown', e)
-    },
-    onFocusin (e) {
-      const { target } = e
-
-      if (
-        // It isn't the document or the dialog body
-        ![document, this.$refs.content].includes(target) &&
-        // It isn't inside the dialog body
-        !this.$refs.content.contains(target) &&
-        // We're the topmost dialog
-        this.activeZIndex >= this.getMaxZIndex() &&
-        // It isn't inside a dependent element (like a menu)
-        !this.getOpenDependentElements().some(el => el.contains(target))
-        // So we must have focused something outside the dialog and its children
-      ) {
-        // Find and focus the first available element inside the dialog
-        const focusable = this.$refs.content.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
-        focusable.length && focusable[0].focus()
-      }
     },
     getActivator (e) {
       if (this.$refs.activator) {

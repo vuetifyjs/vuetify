@@ -275,6 +275,8 @@ export default VTextField.extend({
     },
     closeConditional (e) {
       return (
+        !this._isDestroyed &&
+
         // Click originates from outside the menu content
         !!this.content &&
         !this.content.contains(e.target) &&
