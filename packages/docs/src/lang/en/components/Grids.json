@@ -46,7 +46,7 @@
     },
     "horizontal-alignment": {
       "header": "### Horizontal alighment",
-      "desc": "Chnage the horizontal alignment of flex items and their parents using the **justify** and **justify-self** properties."
+      "desc": "Change the horizontal alignment of flex items and their parents using the **justify** and **justify-self** properties."
     },
     "no-gutters": {
       "header": "### No gutters",
