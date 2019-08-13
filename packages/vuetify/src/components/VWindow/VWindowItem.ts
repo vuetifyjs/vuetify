@@ -93,11 +93,12 @@ export default baseMixins.extend<options>().extend(
         return
       }
 
-      // This function must be called in all path of the transition.
+      // Finalize transition state.
       this.inTransition = false
       if (this.windowGroup.activeWindows > 0) {
         this.windowGroup.activeWindows--
 
+        // Remove container height if we are out of transition.
         if (this.windowGroup.activeWindows === 0) {
           this.windowGroup.internalHeight = undefined
         }
@@ -117,7 +118,7 @@ export default baseMixins.extend<options>().extend(
       this.windowGroup.activeWindows++
     },
     onTransitionCancelled () {
-      this.onAfterTransition() // Same path as normal transition end.
+      this.onAfterTransition() // This should have the same path as normal transition end.
     },
     onEnter (el: HTMLElement) {
       if (!this.inTransition) {
@@ -125,7 +126,7 @@ export default baseMixins.extend<options>().extend(
       }
 
       this.$nextTick(() => {
-        // If cancelled, we should terminate early since transition end event may not fire.
+        // Do not set height if no transition or cancelled.
         if (!this.computedTransition || !this.inTransition) {
           return
         }
@@ -142,15 +143,17 @@ export default baseMixins.extend<options>().extend(
         name: this.computedTransition,
       },
       on: {
-        // Same handler for enter/leave windows.
+        // Handlers for enter windows.
         beforeEnter: this.onBeforeTransition,
         afterEnter: this.onAfterTransition,
         enterCancelled: this.onTransitionCancelled,
 
+        // Handlers for leave windows.
         beforeLeave: this.onBeforeTransition,
         afterLeave: this.onAfterTransition,
         leaveCancelled: this.onTransitionCancelled,
 
+        // Enter handler for height transition.
         enter: this.onEnter,
       },
     }, [this.genWindowItem()])
