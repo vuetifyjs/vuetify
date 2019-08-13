@@ -19,8 +19,8 @@
       </tbody>
     </v-simple-table>
 
-    <v-layout wrap>
-      <v-flex xs12 md6>
+    <v-row>
+      <v-col cols="12" md="6">
         <v-text-field
           v-model="height"
           class="mx-4"
@@ -32,14 +32,14 @@
           type="number"
           @keydown="false"
         ></v-text-field>
-      </v-flex>
-      <v-flex xs6 md3>
+      </v-col>
+      <v-col cols="6" md="3">
         <v-switch v-model="dense" label="Toggle dense" class="mx-4"></v-switch>
-      </v-flex>
-      <v-flex xs6 md3>
+      </v-col>
+      <v-col cols="6" md="3">
         <v-switch v-model="fixedHeader" label="Toggle fixed-header" class="mx-4"></v-switch>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid grid-list-md>
+  <v-container fluid>
     <v-switch v-model="expand" label="Expand Single Item"></v-switch>
     <v-data-iterator
       :items="items"
@@ -9,14 +9,14 @@
       hide-default-footer
     >
       <template v-slot:default="{ items, isExpanded, expand }">
-        <v-layout wrap>
-          <v-flex
+        <v-row>
+          <v-col
             v-for="item in items"
             :key="item.name"
-            xs12
-            sm6
-            md4
-            lg3
+            cols="12"
+            sm="6"
+            md="4"
+            lg="3"
           >
             <v-card>
               <v-card-title>
@@ -60,8 +60,8 @@
                 </v-list-item>
               </v-list>
             </v-card>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </template>
     </v-data-iterator>
   </v-container>

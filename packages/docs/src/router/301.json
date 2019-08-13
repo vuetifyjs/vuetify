@@ -64,6 +64,7 @@
   "/framework/display": "/styles/display",
   "/framework/elevation": "/styles/elevation",
   "/framework/spacing": "/styles/spacing",
+  "/styles/alignment": "/styles/text",
   "/framework/text-alignment": "/styles/text-alignment",
   "/framework/transitions": "/styles/transitions",
   "/customizing/sandbox": "/customization/sandbox",

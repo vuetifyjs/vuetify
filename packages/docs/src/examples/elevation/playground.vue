@@ -1,9 +1,9 @@
 <template>
   <v-container fluid>
-    <v-layout wrap>
-      <v-flex
-        xs12
-        md4
+    <v-row>
+      <v-col
+        cols="12"
+        md="4"
       >
         <v-slider
           v-model="selected"
@@ -12,11 +12,11 @@
           max="24"
           thumb-label
         ></v-slider>
-      </v-flex>
-      <v-flex
-        xs12
-        md4
-        offset-md3
+      </v-col>
+      <v-col
+        cols="12"
+        md="4"
+        offset-md="3"
       >
         <v-card :elevation="selected">
           <v-card-text>
@@ -25,8 +25,8 @@
             </p>
           </v-card-text>
         </v-card>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

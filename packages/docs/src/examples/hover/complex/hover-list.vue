@@ -1,11 +1,11 @@
 <template>
-  <v-container grid-list-md text-center fill-height class="pa-4">
-    <v-layout align-center justify-center wrap fill-height>
+  <v-container class="pa-4 text-center fill-height">
+    <v-row class="fill-height" align="center" justify="center">
       <template v-for="(item, i) in items">
-        <v-flex
+        <v-col
           :key="i"
-          xs12
-          sm4
+          cols="12"
+          sm="4"
         >
           <v-hover v-slot:default="{ hover }">
             <v-card
@@ -17,10 +17,9 @@
                 height="225px"
               >
                 <v-card-title class="title white--text fill-height">
-                  <v-layout
-                    fill-height
-                    column
-                    justify-space-between
+                  <v-row
+                    class="fill-height"
+                    justify="space-between"
                   >
                     <p class="mt-4 subheading text-left">{{ item.title }}</p>
 
@@ -49,14 +48,14 @@
                         </v-icon>
                       </v-btn>
                     </div>
-                  </v-layout>
+                  </v-row>
                 </v-card-title>
               </v-img>
             </v-card>
           </v-hover>
-        </v-flex>
+        </v-col>
       </template>
-    </v-layout>
+    </v-row>
   </v-container>
 </template>
 

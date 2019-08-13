@@ -1,5 +1,5 @@
 <template>
-  <v-layout justify-center>
+  <v-row justify="center">
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on }">
         <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
@@ -9,43 +9,43 @@
           <span class="headline">User Profile</span>
         </v-card-title>
         <v-card-text>
-          <v-container grid-list-md>
-            <v-layout wrap>
-              <v-flex xs12 sm6 md4>
+          <v-container>
+            <v-row>
+              <v-col cols="12" sm="6" md="4">
                 <v-text-field label="Legal first name*" required></v-text-field>
-              </v-flex>
-              <v-flex xs12 sm6 md4>
+              </v-col>
+              <v-col cols="12" sm="6" md="4">
                 <v-text-field label="Legal middle name" hint="example of helper text only on focus"></v-text-field>
-              </v-flex>
-              <v-flex xs12 sm6 md4>
+              </v-col>
+              <v-col cols="12" sm="6" md="4">
                 <v-text-field
                   label="Legal last name*"
                   hint="example of persistent helper text"
                   persistent-hint
                   required
                 ></v-text-field>
-              </v-flex>
-              <v-flex xs12>
+              </v-col>
+              <v-col cols="12">
                 <v-text-field label="Email*" required></v-text-field>
-              </v-flex>
-              <v-flex xs12>
+              </v-col>
+              <v-col cols="12">
                 <v-text-field label="Password*" type="password" required></v-text-field>
-              </v-flex>
-              <v-flex xs12 sm6>
+              </v-col>
+              <v-col cols="12" sm="6">
                 <v-select
                   :items="['0-17', '18-29', '30-54', '54+']"
                   label="Age*"
                   required
                 ></v-select>
-              </v-flex>
-              <v-flex xs12 sm6>
+              </v-col>
+              <v-col cols="12" sm="6">
                 <v-autocomplete
                   :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
                   label="Interests"
                   multiple
                 ></v-autocomplete>
-              </v-flex>
-            </v-layout>
+              </v-col>
+            </v-row>
           </v-container>
           <small>*indicates required field</small>
         </v-card-text>
@@ -56,7 +56,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template>
-  <v-layout fill-height>
-    <v-flex>
+  <v-row class="fill-height">
+    <v-col>
       <v-sheet height="64">
         <v-toolbar flat color="white">
           <v-btn outlined class="mr-4" @click="setToday">
@@ -99,8 +99,8 @@
           </v-card>
         </v-menu>
       </v-sheet>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

@@ -13,13 +13,13 @@
         :color="colors[i]"
         height="100%"
       >
-        <v-layout
-          align-center
-          fill-height
-          justify-center
+        <v-row
+          class="fill-height"
+          align="center"
+          justify="center"
         >
           <div class="display-3">{{ slide }} Slide</div>
-        </v-layout>
+        </v-row>
       </v-sheet>
     </v-carousel-item>
   </v-carousel>

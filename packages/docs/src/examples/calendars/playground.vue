@@ -1,8 +1,8 @@
 <template>
-  <v-layout wrap>
-    <v-flex
-      sm12
-      lg3
+  <v-row>
+    <v-col
+      sm="12"
+      lg="3"
       class="mb-4 controls"
     >
       <v-btn
@@ -216,10 +216,10 @@
         :items="styleIntervalOptions"
         label="Styling"
       ></v-select>
-    </v-flex>
-    <v-flex
-      sm12
-      lg9
+    </v-col>
+    <v-col
+      sm="12"
+      lg="9"
       class="pl-4"
     >
       <v-sheet height="500">
@@ -272,8 +272,8 @@
           </template>
         </v-calendar>
       </v-sheet>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

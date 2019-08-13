@@ -18,56 +18,12 @@
           "lang": "fontText"
         },
         {
-          "type": "markdown",
-          "lang": "fonts"
+          "type": "example",
+          "value": "font"
         },
-        {
-          "type": "style-headings"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
         {
           "type": "heading",
-          "lang": "weightsHeader"
-        },
-        {
-          "type": "text",
-          "lang": "weightsText"
-        },
-        {
-          "type": "markdown",
-          "lang": "weights"
-        },
-        {
-          "type": "text",
-          "lang": "italicText"
-        },
-        {
-          "type": "markdown",
-          "lang": "italic"
-        },
-        {
-          "type": "style-weights"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "heading",
-          "lang": "transformHeader"
-        },
-        {
-          "type": "text",
-          "lang": "transformText"
-        },
-        {
-          "type": "markdown",
-          "lang": "transforms"
+          "lang": "Generic.Pages.examples"
         },
         {
           "type": "style-typefaces"
@@ -78,30 +34,9 @@
       "type": "section",
       "children": [
         {
-          "type": "heading",
-          "lang": "wrapHeader"
-        },
-        {
-          "type": "text",
-          "lang": "wrapText"
-        },
-        {
-          "type": "markdown",
-          "lang": "wraps"
-        },
-        {
-          "type": "example",
-          "value": "truncate"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
           "type": "up-next",
           "value": [
-            "styles/alignment",
+            "styles/text",
             "styles/content"
           ]
         }

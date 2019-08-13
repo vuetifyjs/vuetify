@@ -1,66 +1,50 @@
 <template>
   <v-container fluid>
-    <v-layout column>
-      <v-flex xs12>
-        <div class="resultContainer">
-          <v-layout v-bind="layoutAttributes">
-            <div class="item elevation-5"></div>
-            <div class="item elevation-5"></div>
-            <div class="item elevation-5"></div>
-          </v-layout>
-        </div>
-      </v-flex>
-      <v-flex xs12>
-        <v-layout xs12 wrap>
-          <v-flex xs12 md4>
-            <v-radio-group v-model="alignment">
-              <v-radio
-                v-for="n in alignmentsAvailable"
-                :key="n"
-                :label="n === '' ? 'Nothing' : n"
-                :value="n"
-              ></v-radio>
-            </v-radio-group>
-          </v-flex>
-          <v-flex xs12 md4>
-            <v-radio-group v-model="justify">
-              <v-radio
-                v-for="n in justifyAvailable"
-                :key="n"
-                :label="n === '' ? 'Nothing' : n"
-                :value="n"
-              ></v-radio>
-            </v-radio-group>
-          </v-flex>
-          <v-flex xs12 md4>
-            <v-layout column>
-              <v-radio-group v-model="flexDirection">
-                <v-checkbox
-                  v-model="reverse"
-                  label="reverse"
-                  hide-details
-                ></v-checkbox>
-                <v-checkbox
-                  v-model="fillHeight"
-                  label="fill-height"
-                  hide-details
-                ></v-checkbox>
-                <v-radio
-                  v-for="n in flexDirectionAvailable"
-                  :key="n"
-                  :label="n === '' ? 'Nothing' : n"
-                  :value="n"
-                ></v-radio>
-              </v-radio-group>
-            </v-layout>
-          </v-flex>
-        </v-layout>
-      </v-flex>
-      <v-flex xs12>
-        <h5>Output:</h5>
-        <code>{{ formatAttributes(layoutAttributes) }}</code>
-      </v-flex>
-    </v-layout>
+    <v-row>
+      <v-col cols="12">
+        <v-row
+          :align="alignment"
+          :justify="justify"
+          class="grey lighten-5"
+          style="min-height: 300px;"
+        >
+          <v-card
+            v-for="n in 3"
+            :key="n"
+            class="ma-3 pa-6"
+            outlined
+            tile
+          >
+            Column
+          </v-card>
+        </v-row>
+      </v-col>
+      <v-col cols="12">
+        <v-row justify="center">
+          <v-col
+            cols="6"
+            md="2"
+          >
+            <v-select
+              v-model="alignment"
+              :items="alignmentsAvailable"
+              label="Align"
+            ></v-select>
+          </v-col>
+
+          <v-col
+            cols="6"
+            md="2"
+          >
+            <v-select
+              v-model="justify"
+              :items="justifyAvailable"
+              label="Justify"
+            ></v-select>
+          </v-col>
+        </v-row>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -68,50 +52,24 @@
   export default {
     data () {
       return {
-        alignmentsAvailable: ['align-center', 'align-end', 'align-space-around', 'align-space-between', 'align-start', ''],
-        alignment: 'align-center',
-        alignmentsContentAvailable: ['align-content-center', 'align-content-end', 'align-content-space-around', 'align-content-space-between', 'align-content-start', ''],
-        justifyAvailable: ['justify-center', 'justify-end', 'justify-space-around', 'justify-space-between', 'justify-start', ''],
-        justify: 'justify-center',
-        reverse: false,
-        flexDirectionAvailable: ['row', 'column', ''],
-        flexDirection: 'row',
-        fillHeight: true,
+        alignmentsAvailable: [
+          'start',
+          'center',
+          'end',
+          'baseline',
+          'stretch',
+        ],
+        alignment: 'center',
+        dense: false,
+        justifyAvailable: [
+          'start',
+          'center',
+          'end',
+          'space-around',
+          'space-between',
+        ],
+        justify: 'center',
       }
     },
-    computed: {
-      layoutAttributes () {
-        return {
-          [this.alignment]: Number.isNaN(+this.alignment),
-          [this.justify]: Number.isNaN(+this.justify),
-          [this.flexDirection]: Number.isNaN(+this.flexDirection),
-          reverse: this.reverse,
-          'fill-height': this.fillHeight,
-        }
-      },
-    },
-    methods: {
-      formatAttributes (attributes) {
-        const attributeArray = []
-        for (const key in attributes) {
-          if (!attributes.hasOwnProperty(key) || key === '' || attributes[key] === false) continue
-          attributeArray.push(key.trim())
-        }
-        return `<v-layout ${attributeArray.join(' ')}/>`
-      },
-    },
-
   }
 </script>
-
-<style scoped>
-  .resultContainer {
-    height: 350px;
-  }
-
-  .item {
-    min-height: 50px;
-    min-width: 80px;
-    margin: 10px;
-  }
-</style>

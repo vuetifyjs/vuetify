@@ -1,7 +1,7 @@
 <template>
-  <v-layout
-    wrap
-    justify-space-around
+  <v-row
+
+    justify="space-around"
   >
     <v-time-picker
       v-model="picker"
@@ -12,7 +12,7 @@
       :landscape="$vuetify.breakpoint.smAndUp"
       no-title
     ></v-time-picker>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

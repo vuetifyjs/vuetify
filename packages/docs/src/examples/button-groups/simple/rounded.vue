@@ -1,9 +1,20 @@
 <template>
-  <v-card flat class="py-12">
+  <v-card
+    flat
+    class="py-12"
+  >
     <v-card-text>
-      <v-layout column align-center>
-        <p>Rounded</p>
-        <v-btn-toggle v-model="toggle_exclusive" rounded>
+      <v-row
+        align="center"
+        justify="center"
+      >
+        <v-col cols="12">
+          <p class="text-center">Rounded</p>
+        </v-col>
+        <v-btn-toggle
+          v-model="toggle_exclusive"
+          rounded
+        >
           <v-btn>
             <v-icon>format_align_left</v-icon>
           </v-btn>
@@ -17,7 +28,7 @@
             <v-icon>format_align_justify</v-icon>
           </v-btn>
         </v-btn-toggle>
-      </v-layout>
+      </v-row>
     </v-card-text>
   </v-card>
 </template>
@@ -30,5 +41,4 @@
       }
     },
   }
-
 </script>

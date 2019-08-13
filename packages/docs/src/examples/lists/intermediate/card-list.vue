@@ -8,10 +8,7 @@
       height="300px"
       dark
     >
-      <v-layout
-        column
-        fill-height
-      >
+      <v-row class="fill-height">
         <v-card-title>
           <v-btn dark icon>
             <v-icon>chevron_left</v-icon>
@@ -33,7 +30,7 @@
         <v-card-title class="white--text pl-12 pt-12">
           <div class="display-1 pl-12 pt-12">Ali Conners</div>
         </v-card-title>
-      </v-layout>
+      </v-row>
     </v-img>
 
     <v-list two-line>

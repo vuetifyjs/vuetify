@@ -66,8 +66,8 @@
         <span class="title">Youtube</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-layout
-        align-center
+      <v-row
+        align="center"
         style="max-width: 650px"
       >
         <v-text-field
@@ -78,16 +78,16 @@
           color="white"
           hide-details
         ></v-text-field>
-      </v-layout>
+      </v-row>
     </v-app-bar>
 
     <v-content>
-      <v-container fill-height>
-        <v-layout
-          justify-center
-          align-center
+      <v-container class="fill-height">
+        <v-row
+          justify="center"
+          align="center"
         >
-          <v-flex shrink>
+          <v-col class="shrink">
             <v-tooltip right>
               <template v-slot:activator="{ on }">
                 <v-btn
@@ -116,8 +116,8 @@
               </template>
               <span>Codepen</span>
             </v-tooltip>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
   </v-app>
