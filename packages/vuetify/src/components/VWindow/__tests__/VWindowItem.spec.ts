@@ -66,7 +66,6 @@ describe('VWindowItem.ts', () => {
 
     // After enter
     item.vm.onAfterTransition()
-    await new Promise(resolve => window.requestAnimationFrame(resolve))
     expect(wrapper.vm.internalHeight).toBeUndefined()
     expect(wrapper.vm.isActive).toBeFalsy()
 
@@ -75,14 +74,13 @@ describe('VWindowItem.ts', () => {
     item.vm.onEnter(el)
     item.vm.onTransitionCancelled()
 
-    expect(item.vm.wasCancelled).toBeTruthy()
+    expect(item.vm.inTransition).toBeFalsy()
     expect(wrapper.vm.isActive).toBeFalsy()
 
     // Normal path.
     item.vm.onBeforeTransition()
     expect(wrapper.vm.isActive).toBeTruthy()
     item.vm.onAfterTransition()
-    await new Promise(resolve => window.requestAnimationFrame(resolve))
 
     expect(wrapper.vm.isActive).toBeFalsy()
   })

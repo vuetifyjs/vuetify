@@ -52,7 +52,7 @@ export default baseMixins.extend<options>().extend(
   data () {
     return {
       isActive: false,
-      wasCancelled: true, // Prevent event wrongly fired during transition.
+      inTransition: false,
       initialHeight: undefined as string | undefined,
     }
   },
@@ -96,9 +96,13 @@ export default baseMixins.extend<options>().extend(
         this.initialHeight = convertToUnit(this.windowGroup.$el.clientHeight)
       }
     },
-    deactivate () {
+    onAfterTransition () {
+      if (!this.inTransition) {
+        return
+      }
+
       // This function must be called in all path of the transition.
-      this.wasCancelled = true
+      this.inTransition = false
       if (this.windowGroup.activeWindows > 0) {
         this.windowGroup.activeWindows--
 
@@ -107,36 +111,29 @@ export default baseMixins.extend<options>().extend(
         }
       }
     },
-    onAfterTransition () {
-      if (this.wasCancelled) {
+    onBeforeTransition () {
+      if (this.inTransition) {
         return
       }
 
-      requestAnimationFrame(() => this.deactivate())
-    },
-    onBeforeTransition () {
       // Initialize transition state here.
-      this.wasCancelled = false
+      this.inTransition = true
       if (this.windowGroup.activeWindows === 0) {
         this.windowGroup.internalHeight = this.initialHeight
       }
       this.windowGroup.activeWindows++
     },
     onTransitionCancelled () {
-      if (this.wasCancelled) {
-        return
-      }
-
-      this.deactivate()
+      this.onAfterTransition() // Same path as normal transition end.
     },
     onEnter (el: HTMLElement) {
-      if (this.wasCancelled) {
+      if (!this.inTransition) {
         return
       }
 
       this.$nextTick(() => {
         // If cancelled, we should terminate early since transition end event may not fire.
-        if (!this.computedTransition || this.wasCancelled) {
+        if (!this.computedTransition || !this.inTransition) {
           return
         }
 
