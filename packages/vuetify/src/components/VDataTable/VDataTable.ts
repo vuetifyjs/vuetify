@@ -126,6 +126,9 @@ export default VDataIterator.extend({
       }
     },
     isMobile (): boolean {
+      // Guard against SSR render (#7410)
+      if (this.$vuetify.breakpoint.width === 0) return false
+
       return this.$vuetify.breakpoint.width < this.mobileBreakpoint
     },
     columnSorters (): Record<string, compareFn> {
