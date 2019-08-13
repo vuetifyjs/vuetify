@@ -1,7 +1,9 @@
 {
   "command": {
     "publish": {
-      "allowBranch": ["stable"],
+      "allowBranch": [
+        "stable"
+      ],
       "message": "chore(release): publish %s"
     },
     "version": {
@@ -9,6 +11,6 @@
     }
   },
   "npmClient": "yarn",
-  "version": "1.5.16",
+  "version": "1.5.17",
   "useWorkspaces": true
 }
