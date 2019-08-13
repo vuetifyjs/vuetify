@@ -202,6 +202,7 @@ describe('AppBar.ts', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/4985
+  // https://github.com/vuetifyjs/vuetify/issues/8337
   it('should scroll toolbar and extension completely off screen', async () => {
     const wrapper = mountFunction({
       propsData: {
@@ -216,9 +217,9 @@ describe('AppBar.ts', () => {
 
     expect(wrapper.vm.computedTransform).toBe(-64)
 
-    wrapper.setProps({ scrollOffScreen: true })
+    wrapper.setProps({ bottom: true, scrollOffScreen: true })
 
-    expect(wrapper.vm.computedTransform).toBe(-112)
+    expect(wrapper.vm.computedTransform).toBe(112)
     expect(wrapper.vm.hideShadow).toBe(true)
 
     wrapper.setProps({ scrollOffScreen: false })

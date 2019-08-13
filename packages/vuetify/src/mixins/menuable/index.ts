@@ -8,8 +8,6 @@ import mixins, { ExtractVue } from '../../util/mixins'
 import { convertToUnit } from '../../util/helpers'
 
 // Types
-import { VNode } from 'vue'
-
 const baseMixins = mixins(
   Stackable,
   Positionable,
@@ -80,7 +78,6 @@ export default baseMixins.extend<options>().extend({
     absoluteY: 0,
     activatedBy: null as EventTarget | null,
     activatorFixed: false,
-    activatorNode: null as null | VNode | VNode[],
     dimensions: {
       activator: {
         top: 0,
