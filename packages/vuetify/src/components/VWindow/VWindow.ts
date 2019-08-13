@@ -60,7 +60,7 @@ export default BaseItemGroup.extend({
     return {
       changedByDelimiters: false,
       internalHeight: undefined as undefined | string,
-      activeWindows: 0 as number,
+      transitionCount: 0, // Number of windows in transition state.
       isBooted: false,
       isReverse: false,
     }
@@ -68,7 +68,7 @@ export default BaseItemGroup.extend({
 
   computed: {
     isActive (): boolean {
-      return this.activeWindows > 0
+      return this.transitionCount > 0
     },
     classes (): object {
       return {

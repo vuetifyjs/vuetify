@@ -95,11 +95,11 @@ export default baseMixins.extend<options>().extend(
 
       // Finalize transition state.
       this.inTransition = false
-      if (this.windowGroup.activeWindows > 0) {
-        this.windowGroup.activeWindows--
+      if (this.windowGroup.transitionCount > 0) {
+        this.windowGroup.transitionCount--
 
         // Remove container height if we are out of transition.
-        if (this.windowGroup.activeWindows === 0) {
+        if (this.windowGroup.transitionCount === 0) {
           this.windowGroup.internalHeight = undefined
         }
       }
@@ -111,11 +111,11 @@ export default baseMixins.extend<options>().extend(
 
       // Initialize transition state here.
       this.inTransition = true
-      if (this.windowGroup.activeWindows === 0) {
+      if (this.windowGroup.transitionCount === 0) {
         // Set initial height for height transition.
         this.windowGroup.internalHeight = convertToUnit(this.windowGroup.$el.clientHeight)
       }
-      this.windowGroup.activeWindows++
+      this.windowGroup.transitionCount++
     },
     onTransitionCancelled () {
       this.onAfterTransition() // This should have the same path as normal transition end.
