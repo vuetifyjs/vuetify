@@ -1,7 +1,6 @@
 export default {
   close: 'Close',
   dataIterator: {
-    pageText: '{0}-{1} din {2}',
     noResultsText: 'Nu au fost găsite înregistrări care să se potrivească',
     loadingText: 'Loading item...',
   },
@@ -21,6 +20,7 @@ export default {
     prevPage: 'Pagina anterioară',
     firstPage: 'Pagina prima',
     lastPage: 'Pagina ultima',
+    pageText: '{0}-{1} din {2}',
   },
   datePicker: {
     itemsSelected: '{0} selectate',

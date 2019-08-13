@@ -1,7 +1,6 @@
 export default {
   close: 'Close',
   dataIterator: {
-    pageText: '{0}-{1} / {2}',
     noResultsText: 'Nincs egyező találat',
     loadingText: 'Loading item...',
   },
@@ -21,6 +20,7 @@ export default {
     prevPage: 'Előző oldal',
     firstPage: 'Első oldal',
     lastPage: 'Utolsó oldal',
+    pageText: '{0}-{1} / {2}',
   },
   datePicker: {
     itemsSelected: '{0} kiválaszta/-ott',

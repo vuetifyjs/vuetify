@@ -1,7 +1,6 @@
 export default {
   close: 'Close',
   dataIterator: {
-    pageText: '{0}-{1} 件目 / {2}件',
     noResultsText: '検索結果が見つかりません。',
     loadingText: 'Loading item...',
   },
@@ -21,6 +20,7 @@ export default {
     prevPage: '前のページ',
     firstPage: '一ページ目',
     lastPage: '最後のページ',
+    pageText: '{0}-{1} 件目 / {2}件',
   },
   datePicker: {
     itemsSelected: '{0}日付選択',

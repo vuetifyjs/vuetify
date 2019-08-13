@@ -1,7 +1,6 @@
 export default {
   close: '關閉',
   dataIterator: {
-    pageText: '{2} 條中的 {0}~{1} 條',
     noResultsText: '沒有符合條件的結果',
     loadingText: '讀取中...',
   },
@@ -21,6 +20,7 @@ export default {
     prevPage: '上一頁',
     firstPage: '第一頁',
     lastPage: '最後頁',
+    pageText: '{2} 條中的 {0}~{1} 條',
   },
   datePicker: {
     itemsSelected: '已選擇 {0}',

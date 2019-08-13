@@ -1,7 +1,6 @@
 export default {
   close: 'Stäng',
   dataIterator: {
-    pageText: '{0}-{1} av {2}',
     noResultsText: 'Inga poster funna',
     loadingText: 'Laddar data...',
   },
@@ -21,6 +20,7 @@ export default {
     prevPage: 'Föregående sida',
     firstPage: 'Första sidan',
     lastPage: 'Sista sidan',
+    pageText: '{0}-{1} av {2}',
   },
   datePicker: {
     itemsSelected: '{0} markerade',

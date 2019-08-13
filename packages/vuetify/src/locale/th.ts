@@ -1,7 +1,6 @@
 export default {
   close: 'Close',
   dataIterator: {
-    pageText: '{0}-{1} จาก {2}',
     noResultsText: 'ไม่พบข้อมูลที่ค้นหา',
     loadingText: 'Loading item...',
   },
@@ -21,6 +20,7 @@ export default {
     prevPage: 'หน้าที่แล้ว',
     firstPage: 'หน้าแรก',
     lastPage: 'หน้าสุดท้าย',
+    pageText: '{0}-{1} จาก {2}',
   },
   datePicker: {
     itemsSelected: 'เลือก {0} วัน',
