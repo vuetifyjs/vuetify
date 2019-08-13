@@ -101,6 +101,11 @@
           "lang": "alignText1"
         },
         {
+          "type": "alert",
+          "lang": "alignAlert1",
+          "value": "info"
+        },
+        {
           "type": "example",
           "value": "flex-align"
         },
