@@ -104,13 +104,15 @@ export default Vue.extend({
         !computedIPPO.find(ippo => ippo.value === value)
       ) value = computedIPPO[0]
 
+      const itemsPerPageText = this.$vuetify.lang.t(this.itemsPerPageText)
+
       return this.$createElement('div', {
         staticClass: 'v-data-footer__select',
       }, [
-        this.$vuetify.lang.t(this.itemsPerPageText),
+        itemsPerPageText,
         this.$createElement(VSelect, {
           attrs: {
-            'aria-label': this.itemsPerPageText,
+            'aria-label': itemsPerPageText,
           },
           props: {
             disabled: this.disableItemsPerPage,

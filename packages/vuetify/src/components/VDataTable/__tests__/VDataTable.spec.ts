@@ -353,7 +353,7 @@ describe('VDataTable.ts', () => {
         headers: [],
         items: [],
         footerProps: {
-          'items-per-page-text': 'Foo:',
+          'items-per-page-text': '$vuetify.dataIterator.loadingText',
         },
       },
     })

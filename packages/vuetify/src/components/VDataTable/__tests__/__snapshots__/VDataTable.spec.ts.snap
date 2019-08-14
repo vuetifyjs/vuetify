@@ -21,7 +21,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      Foo:
+      Loading items...
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -35,7 +35,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="Foo:"
+                <input aria-label="Loading items..."
                        id="input-311"
                        readonly="readonly"
                        type="text"
@@ -134,7 +134,7 @@ exports[`VDataTable.ts should render 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-6"
                        readonly="readonly"
                        type="text"
@@ -260,7 +260,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-256"
                        readonly="readonly"
                        type="text"
@@ -466,7 +466,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-276"
                        readonly="readonly"
                        type="text"
@@ -946,7 +946,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-47"
                        readonly="readonly"
                        type="text"
@@ -1235,7 +1235,7 @@ exports[`VDataTable.ts should render with data 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-26"
                        readonly="readonly"
                        type="text"
@@ -1419,7 +1419,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-239"
                        readonly="readonly"
                        type="text"
@@ -1846,7 +1846,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-161"
                        readonly="readonly"
                        type="text"
@@ -2219,7 +2219,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-218"
                        readonly="readonly"
                        type="text"
@@ -2423,7 +2423,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-183"
                        readonly="readonly"
                        type="text"
@@ -2737,7 +2737,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-120"
                        readonly="readonly"
                        type="text"
@@ -3072,7 +3072,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-72"
                        readonly="readonly"
                        type="text"
@@ -3407,7 +3407,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-72"
                        readonly="readonly"
                        type="text"
@@ -3769,7 +3769,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-98"
                        readonly="readonly"
                        type="text"

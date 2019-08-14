@@ -29,8 +29,10 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
             lang: new Lang({
               locales: {
                 en: {
-                  datePicker: {
-                    itemsSelected: 'i has {0} items',
+                  $vuetify: {
+                    datePicker: {
+                      itemsSelected: 'i has {0} items',
+                    },
                   },
                 },
               },

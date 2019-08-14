@@ -9,22 +9,18 @@ describe('$vuetify.lang', () => {
   })
 
   it('should fall back to en', () => {
-    Object.assign(lang.locales.en, { foo: 'bar', bar: 'baz' })
+    lang.locales.en = Object.assign({}, lang.locales.en, { foo: 'bar', bar: 'baz' })
     lang.locales.foreign = { foo: 'foreignBar' }
     lang.current = 'foreign'
 
-    expect(lang.t('$vuetify.foo')).toBe('foreignBar')
+    expect(lang.t('foo')).toBe('foreignBar')
 
-    expect(lang.t('$vuetify.bar')).toBe('baz')
+    expect(lang.t('bar')).toBe('baz')
     expect('Translation key "bar" not found, falling back to default').toHaveBeenTipped()
 
-    expect(lang.t('$vuetify.baz')).toBe('$vuetify.baz')
+    expect(lang.t('baz')).toBe('baz')
     expect('Translation key "baz" not found, falling back to default').toHaveBeenTipped()
     expect('Translation key "baz" not found in fallback').toHaveBeenWarned()
-  })
-
-  it('should ignore unprefixed strings', () => {
-    expect(lang.t('foo.bar.baz')).toBe('foo.bar.baz')
   })
 
   it('should use a different default', () => {
@@ -35,7 +31,7 @@ describe('$vuetify.lang', () => {
       },
     })
 
-    expect(lang.t('$vuetify.foo')).toBe('foreignBar')
+    expect(lang.t('foo')).toBe('foreignBar')
   })
 
   it('should use a custom translator', () => {
@@ -46,5 +42,20 @@ describe('$vuetify.lang', () => {
     lang.t('$vuetify.foobar', 'fizzbuzz')
 
     expect(translator).toHaveBeenCalledWith('$vuetify.foobar', 'fizzbuzz')
+  })
+
+  it('should override default message', () => {
+    lang = new Lang({
+      current: 'foreign',
+      locales: {
+        foreign: {
+          $vuetify: {
+            dataTable: { sortBy: 'foobar' },
+          },
+        },
+      },
+    })
+
+    expect(lang.t('$vuetify.dataTable.sortBy')).toBe('foobar')
   })
 })
