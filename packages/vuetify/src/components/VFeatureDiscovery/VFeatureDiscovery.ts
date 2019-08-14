@@ -297,7 +297,7 @@ export default baseMixins.extend<options>().extend({
         'aria-hidden': !this.isActive,
       }
     },
-    closeConditional (): boolean {
+    closeable (): boolean {
       return !this.persistent && this.isActive
     },
   },
@@ -343,9 +343,7 @@ export default baseMixins.extend<options>().extend({
       this.updateDimensions()
       this.updateActivatorZIndex()
       // Start the transition
-      requestAnimationFrame(() => {
-        this.startTransition()
-      })
+      requestAnimationFrame(this.startTransition)
     },
     deactivate () {
       this.updateActivatorZIndex()
@@ -396,13 +394,14 @@ export default baseMixins.extend<options>().extend({
       }
     },
     measure (el: HTMLElement): Dimensions {
-      return (!el || !this.hasWindow) ? new Dimensions() : this.getRoundedBoundedClientRect(el)
+      if (!el || !this.hasWindow) return new Dimensions()
+      return this.getRoundedBoundedClientRect(el)
     },
     measureDesktopBackdrop (): CircleObject {
       const content = this.dimensions.content
       const x = content.width / 2 - this.defaultPadding
       // Calculate the circles tangent point A(ax, ay) using cycloid curve
-      // Get hightlight radius with padding
+      // Get highlight radius with padding
       const radius = this.highlightOuterSize / 2
       // Get rolled distance/perimeter
       const diameter = -this.computedWrapOffsetLeft
@@ -494,7 +493,7 @@ export default baseMixins.extend<options>().extend({
         document.documentElement.scrollTop
     },
     onKeyDown (e: KeyboardEvent) {
-      if (this.closeConditional && e.keyCode === keyCodes.esc) {
+      if (this.closeable && e.keyCode === keyCodes.esc) {
         this.isActive = false
         const activator = this.getActivator()
         this.$nextTick(() => activator && (activator as HTMLElement).focus())
@@ -511,7 +510,7 @@ export default baseMixins.extend<options>().extend({
           name: 'click-outside',
           value: () => { this.isActive = false },
           args: {
-            closeConditional: this.closeConditional,
+            closeConditional: this.closeable,
             include: () => [this.$el],
           },
         } as any)

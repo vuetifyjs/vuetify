@@ -19,7 +19,7 @@ describe('FeatureDiscovery.ts', () => {
     }
   })
 
-  it('should get closeConditional', () => {
+  it('should get closeable', () => {
     const wrapper = mountFunction()
 
     wrapper.setData({
@@ -29,18 +29,18 @@ describe('FeatureDiscovery.ts', () => {
       },
     })
 
-    expect(wrapper.vm.closeConditional()).toBeTruthy()
+    expect(wrapper.vm.closeable).toBeTruthy()
     wrapper.setProps({
       persistent: true,
     })
-    expect(wrapper.vm.closeConditional()).toBeFalsy()
+    expect(wrapper.vm.closeable).toBeFalsy()
     wrapper.setProps({
       persistent: false,
     })
     wrapper.setData({
       isActive: false,
     })
-    expect(wrapper.vm.closeConditional()).toBeFalsy()
+    expect(wrapper.vm.closeable).toBeFalsy()
   })
 
   it('should render correctly', () => {
@@ -100,8 +100,8 @@ describe('FeatureDiscovery.ts', () => {
   it('should close on esc', () => {
     let close = false
     const wrapper = mountFunction({
-      methods: {
-        closeConditional: () => close,
+      computed: {
+        closeable: () => close,
       },
     })
 
@@ -116,8 +116,8 @@ describe('FeatureDiscovery.ts', () => {
   it('should close on close method of actions scoped slot', () => {
     let close = false
     const wrapper = mountFunction({
-      methods: {
-        closeConditional: () => close,
+      computed: {
+        closeable: () => close,
       },
       scopedSlots: {
         actions: `
