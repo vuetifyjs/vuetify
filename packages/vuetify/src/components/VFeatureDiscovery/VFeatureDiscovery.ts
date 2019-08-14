@@ -310,6 +310,9 @@ export default baseMixins.extend<options>().extend({
         'aria-hidden': !this.isActive,
       }
     },
+    closeConditional (): boolean {
+      return !this.persistent && this.isActive
+    },
   },
 
   watch: {
@@ -504,14 +507,11 @@ export default baseMixins.extend<options>().extend({
         document.documentElement.scrollTop
     },
     onKeyDown (e: KeyboardEvent) {
-      if (this.closeConditional() && e.keyCode === keyCodes.esc) {
+      if (this.closeConditional && e.keyCode === keyCodes.esc) {
         this.isActive = false
         const activator = this.getActivator()
         this.$nextTick(() => activator && (activator as HTMLElement).focus())
       }
-    },
-    closeConditional (): boolean {
-      return !this.persistent && this.isActive
     },
     genDirectives (): VNodeDirective[] {
       const directives: VNodeDirective[] = [{
