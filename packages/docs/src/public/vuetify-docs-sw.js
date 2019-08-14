@@ -40,7 +40,7 @@ function fromServer (request) {
 
 function fallback () {
   // If both fail, show a generic fallback:
-  return caches.match('/en-US/')
+  return caches.match('/')
 }
 
 function update (request) {
