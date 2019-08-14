@@ -6,7 +6,7 @@
           :align="alignment"
           :justify="justify"
           class="grey lighten-5"
-          style="min-height: 300px;"
+          style="height: 300px;"
         >
           <v-card
             v-for="n in 3"

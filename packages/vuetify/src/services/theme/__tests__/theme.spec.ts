@@ -183,22 +183,21 @@ describe('Theme.ts', () => {
     expect(ssrContext.head).toMatchSnapshot()
   })
 
-  it('should set theme with vue-meta', () => {
+  it('should add fake child element for vue-meta support', () => {
     const theme = new Theme(mock)
-    const anyInstance = instance as any
+    ;(instance as any).$meta = {}
 
-    anyInstance.$meta = () => {}
-    anyInstance.$options.head = {}
+    expect(instance.$children).toHaveLength(0)
 
     theme.init(instance)
 
-    expect(typeof anyInstance.$options.head).toBe('function')
+    expect(instance.$children).toHaveLength(1)
 
-    const head = anyInstance.$options.head()
+    const options = instance.$children[0].$options as any
+    const head = options.head
 
     expect(head).toBeTruthy()
-    expect(head.style).toHaveLength(1)
-    expect(head.style[0].cssText).toMatchSnapshot()
+    expect(head()).toMatchSnapshot()
   })
 
   it('should react to theme changes', async () => {

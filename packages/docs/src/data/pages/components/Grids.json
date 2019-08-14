@@ -27,6 +27,11 @@
         {
           "type": "text",
           "lang": "usageText3"
+        },
+        {
+          "type": "alert",
+          "lang": "usageAlert1",
+          "value": "info"
         }
       ]
     },

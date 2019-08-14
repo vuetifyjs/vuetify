@@ -50,8 +50,6 @@ export class Theme extends Service {
 
   private vueInstance = null as Vue | null
 
-  private vueMeta = false
-
   constructor (options: Partial<VuetifyThemeOptions> = {}) {
     super()
     if (options.disable) {
@@ -77,7 +75,6 @@ export class Theme extends Service {
   // When setting css, check for element
   // and apply new values
   set css (val: string) {
-    if (this.vueMeta) return
     this.checkOrCreateStyleElement() && (this.styleEl!.innerHTML = val)
   }
 
@@ -179,28 +176,21 @@ export class Theme extends Service {
   }
 
   private initVueMeta (root: Vue) {
-    this.vueMeta = true
-
-    const head = (root.$options as any).head
-
-    ;(root.$options as any).head = () => {
-      head.style = head.style || []
-
-      const vuetifyStylesheet = head.style.find((s: any) => s.id === 'vuetify-theme-stylesheet')
-
-      if (!vuetifyStylesheet) {
-        head.style.push({
-          cssText: this.generatedStyles,
-          type: 'text/css',
-          id: 'vuetify-theme-stylesheet',
-          nonce: (this.options && this.options.cspNonce) || undefined,
-        })
-      } else {
-        vuetifyStylesheet.cssText = this.generatedStyles
-      }
-
-      return head
-    }
+    const options = this.options || {}
+    root.$children.push(new Vue({
+      head: () => {
+        return {
+          style: [
+            {
+              cssText: this.generatedStyles,
+              type: 'text/css',
+              id: 'vuetify-theme-stylesheet',
+              nonce: options.cspNonce,
+            },
+          ],
+        }
+      },
+    } as any))
   }
 
   private initSSR (ssrContext?: any) {
