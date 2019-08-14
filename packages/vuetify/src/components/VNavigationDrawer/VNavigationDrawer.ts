@@ -110,6 +110,7 @@ export default baseMixins.extend({
       right: 0,
     },
     stackMinZIndex: 6,
+    isRight: false,
   }),
 
   computed: {
@@ -118,7 +119,7 @@ export default baseMixins.extend({
      * property. Called from applicationable.js
      */
     applicationProperty (): string {
-      return this.right ? 'right' : 'left'
+      return this.isRight ? 'right' : 'left'
     },
     classes (): object {
       return {
@@ -134,7 +135,7 @@ export default baseMixins.extend({
         'v-navigation-drawer--mini-variant': this.miniVariant || (this.expandOnHover && !this.isMouseover),
         'v-navigation-drawer--open': this.isActive,
         'v-navigation-drawer--open-on-hover': this.expandOnHover,
-        'v-navigation-drawer--right': this.right,
+        'v-navigation-drawer--right': this.isRight,
         'v-navigation-drawer--temporary': this.temporary,
         ...this.themeClasses,
       }
@@ -166,7 +167,7 @@ export default baseMixins.extend({
     computedTransform (): number {
       if (this.isActive) return 0
       if (this.isBottom) return 100
-      return this.right ? 100 : -100
+      return this.isRight ? 100 : -100
     },
     computedWidth (): string | number {
       if (
@@ -279,6 +280,14 @@ export default baseMixins.extend({
       }
 
       if (val !== this.isActive) this.isActive = val
+    },
+
+    '$vuetify.rtl' (val) {
+      this.isRight = this.right || val
+    },
+
+    right (val) {
+      this.isRight = val
     },
   },
 
@@ -399,6 +408,7 @@ export default baseMixins.extend({
       } else if (!this.temporary) {
         this.isActive = !this.isMobile
       }
+      this.isRight = this.right || this.$vuetify.rtl
     },
     onRouteChange () {
       if (this.reactsToRoute && this.closeConditional()) {
@@ -406,24 +416,24 @@ export default baseMixins.extend({
       }
     },
     swipeLeft (e: TouchWrapper) {
-      if (this.isActive && this.right) return
+      if (this.isActive && this.isRight) return
       this.calculateTouchArea()
 
       if (Math.abs(e.touchendX - e.touchstartX) < 100) return
-      if (this.right &&
+      if (this.isRight &&
         e.touchstartX >= this.touchArea.right
       ) this.isActive = true
-      else if (!this.right && this.isActive) this.isActive = false
+      else if (!this.isRight && this.isActive) this.isActive = false
     },
     swipeRight (e: TouchWrapper) {
-      if (this.isActive && !this.right) return
+      if (this.isActive && !this.isRight) return
       this.calculateTouchArea()
 
       if (Math.abs(e.touchendX - e.touchstartX) < 100) return
-      if (!this.right &&
+      if (!this.isRight &&
         e.touchstartX <= this.touchArea.left
       ) this.isActive = true
-      else if (this.right && this.isActive) this.isActive = false
+      else if (this.isRight && this.isActive) this.isActive = false
     },
     /**
      * Update the application layout
