@@ -46,28 +46,15 @@ interface CircleObject {
   size: number
 }
 
-interface Dimensions {
-  top: number
-  left: number
-  bottom: number
-  right: number
-  width: number
-  height: number
-  x: number
-  y: number
-}
-
-function initDimensions (): Dimensions {
-  return {
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    width: 0,
-    height: 0,
-    x: 0,
-    y: 0,
-  }
+class Dimensions {
+  top: number = 0
+  left: number = 0
+  bottom: number = 0
+  right: number = 0
+  width: number = 0
+  height: number = 0
+  x: number = 0
+  y: number = 0
 }
 
 /* @vue/component */
@@ -151,8 +138,8 @@ export default baseMixins.extend<options>().extend({
     activatorFixed: false,
     activatorNode: null as null | VNode | VNode[],
     dimensions: {
-      activator: initDimensions(),
-      content: initDimensions(),
+      activator: new Dimensions(),
+      content: new Dimensions(),
     },
     hasJustFocused: false,
     hasWindow: false,
@@ -335,7 +322,7 @@ export default baseMixins.extend<options>().extend({
   methods: {
     absolutePosition (): Dimensions {
       return {
-        ...initDimensions(),
+        ...new Dimensions(),
         top: this.positionY || this.absoluteY,
         bottom: this.positionY || this.absoluteY,
         left: this.positionX || this.absoluteX,
@@ -409,7 +396,7 @@ export default baseMixins.extend<options>().extend({
       }
     },
     measure (el: HTMLElement): Dimensions {
-      return (!el || !this.hasWindow) ? initDimensions() : this.getRoundedBoundedClientRect(el)
+      return (!el || !this.hasWindow) ? new Dimensions() : this.getRoundedBoundedClientRect(el)
     },
     measureDesktopBackdrop (): CircleObject {
       const content = this.dimensions.content
