@@ -5,6 +5,7 @@
 .v-toolbar
   contain: layout
   flex: 1 1 auto
+  max-width: 100%
   // Needs increased specificity
   &.v-sheet
     transition: $toolbar-transition
@@ -97,7 +98,6 @@
 .v-toolbar.v-toolbar--absolute
   position: absolute
   top: 0
-  width: 100%
   z-index: 1
 
 .v-toolbar.v-toolbar--bottom
@@ -110,7 +110,7 @@
 
 .v-toolbar.v-toolbar--collapsed
   border-bottom-right-radius: 24px
-  width: 112px
+  max-width: 112px
 
   .v-toolbar__title,
   .v-toolbar__extension
