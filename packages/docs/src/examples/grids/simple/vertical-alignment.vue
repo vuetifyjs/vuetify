@@ -8,7 +8,7 @@
       <v-row
         :align="align"
         no-gutters
-        style="min-height: 150px;"
+        style="height: 150px;"
       >
         <v-col
           v-for="n in 3"
@@ -28,7 +28,7 @@
     <v-container class="grey lighten-5">
       <v-row
         no-gutters
-        style="min-height: 150px;"
+        style="height: 150px;"
       >
         <v-col
           v-for="align in alignments"

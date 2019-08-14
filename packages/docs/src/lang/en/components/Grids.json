@@ -8,6 +8,7 @@
     "`v-col` is a content holder that must be a direct child of `v-row`."
   ],
   "usageText3": "Ensure that you understand the limitations and [bugs around flexbox](https://github.com/philipwalton/flexbugs), such as the inhability to [utilize certain HTML elements as flex containers](https://github.com/philipwalton/flexbugs#9-some-html-elements-cant-be-flex-containers).",
+  "usageAlert1": "When using the grid system with IE11 you will need to set an explicit `height` as `min-height` will not suffice and cause undesired results.",
   "examples": {
     "usage": {
       "desc": "The Vuetify grid is heavily inspired by the [Bootstrap grid](https://getbootstrap.com/docs/4.0/layout/grid/). It is integrated by using a series of containers, rows, and columns to layout and align content. **If you are new to flexbox**, [Read the CSS Tricks flexbox guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-background) for background, terminology, guidelines, and code snippets."

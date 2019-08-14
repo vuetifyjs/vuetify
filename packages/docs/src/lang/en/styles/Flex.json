@@ -74,6 +74,7 @@
   ],
   "alignHeader": "## Flex align",
   "alignText1": "The `align-items` flex setting can be changed using the flex align classes. This by default will modify the flexbox items on the **x-axis** but is reversed when using `flex-direction: column`, modifying the **y-axis**. Choose from `start`, `end`, `center`, `baseline`, or `stretch` (browser default).",
+  "alignAlert1": "When using flex align with IE11 you will need to set an explicit `height` as `min-height` will not suffice and cause undesired results.",
   "alignText2": "There are also responsive variations for `align-items`.",
   "alignList": [
     "`.align-start`",
