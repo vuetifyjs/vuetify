@@ -123,4 +123,32 @@ test('data-iterable.js', ({ mount }) => {
     expect(callCount).toBe(2)
     expect(selectionChanged).toBeCalledWith([])
   })
+
+  it('should not update selection if totalItems is set', async () => {
+    const items = [{ id: 'foo' }, { id: 'bar' }]
+    let value = []
+
+    const wrapper = dataIterableCmp(value, items)
+
+    let callCount = 0
+    const selectionChanged = jest.fn()
+    // Emulate v-model behaviour
+    wrapper.vm.$on('input', function (newValue) {
+      callCount += 1
+      value = newValue
+      selectionChanged.apply(this, arguments)
+    })
+
+    wrapper.find('.select-me')[0].trigger('click')
+
+    expect(callCount).toBe(1)
+    expect(selectionChanged).toBeCalledWith([items[0]])
+
+    // because totalItems is set,
+    // the selection is not going to be updated
+    wrapper.setProps({ value, items: [items[1]], totalItems: 42 })
+
+    expect(callCount).toBe(1)
+    expect(selectionChanged).toBeCalledWith([items[0]])
+  })
 })
