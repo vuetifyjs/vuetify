@@ -409,7 +409,7 @@ export default baseMixins.extend<options>().extend({
       e && this.$emit('blur', e)
     },
     onClick () {
-      if (this.isFocused || this.disabled) return
+      if (this.isFocused || this.disabled || !this.$refs.input) return
 
       this.$refs.input.focus()
     },
