@@ -5,6 +5,7 @@ import 'es6-promise/auto'
 
 import { createApp, production } from './main'
 import WebFontLoader from 'webfontloader'
+import 'intersection-observer'
 
 if ('serviceWorker' in navigator && production) {
   navigator.serviceWorker.register('/vuetify-docs-sw.js')

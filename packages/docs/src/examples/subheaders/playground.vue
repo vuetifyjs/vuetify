@@ -1,5 +1,5 @@
 <template>
-  <div class="grey lighten-5 pa-3">
+  <div class="grey lighten-5 pa-4">
     <v-layout
       align-center
       justify-center
@@ -38,7 +38,7 @@
       </v-flex>
     </v-layout>
     <v-layout
-      class="mt-5"
+      class="mt-12"
       align-center
       justify-center
     >

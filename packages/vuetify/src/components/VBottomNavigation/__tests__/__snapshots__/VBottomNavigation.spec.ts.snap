@@ -8,7 +8,6 @@ Object {
 `;
 
 exports[`VBottomNavigation.ts should be visible with a true value 2`] = `
-
 <div class="v-bottom-navigation v-item-group theme--light"
      style="height: 56px; transform: none;"
 >
@@ -25,7 +24,6 @@ exports[`VBottomNavigation.ts should be visible with a true value 2`] = `
     </span>
   </button>
 </div>
-
 `;
 
 exports[`VBottomNavigation.ts should be visible with a true value 3`] = `
@@ -36,7 +34,6 @@ Object {
 `;
 
 exports[`VBottomNavigation.ts should be visible with a true value 4`] = `
-
 <div class="v-bottom-navigation v-item-group theme--light"
      style="height: 56px; transform: translateY(100%);"
 >
@@ -53,5 +50,4 @@ exports[`VBottomNavigation.ts should be visible with a true value 4`] = `
     </span>
   </button>
 </div>
-
 `;

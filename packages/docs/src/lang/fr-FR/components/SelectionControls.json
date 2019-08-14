@@ -1,1 +1,6 @@
-{}
+{
+  "events": {
+    "change": "Components.Inputs.events.change",
+    "update:error": "Mixins.Validatable.events['update:error']"
+  }
+}

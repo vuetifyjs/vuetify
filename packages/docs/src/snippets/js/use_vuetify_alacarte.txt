@@ -4,19 +4,19 @@ import Vue from 'vue'
 import Vuetify, {
   VCard,
   VRating,
-  VToolbar
+  VToolbar,
 } from 'vuetify/lib'
-import { ripple } from 'vuetify/lib/directives'
+import { Ripple } from 'vuetify/lib/directives'
 
 Vue.use(Vuetify, {
   components: {
     VCard,
     VRating,
-    VToolbar
+    VToolbar,
   },
   directives: {
-    ripple
-  }
+    Ripple,
+  },
 })
 
 export default new Vuetify({ ... })

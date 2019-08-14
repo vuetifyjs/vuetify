@@ -1,64 +1,50 @@
 {
-  "header": "# 今後の予定",
   "headerText": "Vuetifyは常に開発をしています。私たちは継続的に既存のコードの改善に努力しているだけでなく、アプリケーションをより簡単にビルドできるために新しい機能を追加しています。以下は予定されている機能の暫定的なリストです。これは完全なリストではなく、予告なく変更されることがあります。",
   "roadmapItems": [
     {
       "type": "リリース",
-      "complete": true,
       "title": "アルファ版立ち上げ",
       "caption": "2016年12月",
       "text": "Vuetifyが公式公開されました。40個のコンポーネントで当初公開され、実に46KBでした。"
     },
     {
       "type": "リリース",
-      "complete": true,
       "title": "v1.0 リリース",
       "caption": "2018年2月"
     },
     {
       "type": "リリース",
-      "complete": true,
       "title": "v1.1 リリース",
       "caption": "2018年6月"
     },
     {
       "type": "リリース",
-      "complete": true,
       "title": "v1.2 リリース",
-      "caption": "2018年7月",
-      "text": "`v-img` と `v-rating` と `v-hover` を新規コンポーネントとして追加しました。テーマの伝播システムを改善し、 **colorable** ミックスインの機能の拡張をしました。"
+      "caption": "2018年7月"
     },
     {
       "type": "リリース",
-      "complete": true,
       "title": "v1.3 リリース",
-      "caption": "2018年10月",
-      "text": "`v-treeview` と `v-timeline` と `v-item-group` を新規コンポーネントとして追加しました。 `v-tabs` と `v-carousel` で使われるインターフェースを統一しました。Vuetifyのコンポーネントでツリーシェイキングをサポートする楽なアプリケーションにするために、 **vuetify-loader** を改善しました。"
+      "caption": "2018年10月"
     },
     {
       "type": "リリース",
-      "complete": true,
       "title": "AWS Cognito Vuex モジュール",
-      "caption": "2018年11月",
-      "text": "AWS Cognitoと連携するための、フル機能のVuexモジュールです。認証が必要なウェブサイトに役立ちます。"
+      "caption": "2018年11月"
     },
     {
       "type": "リリース",
-      "complete": true,
       "title": "v1.4 リリース",
       "caption": "2018年12月"
     },
     {
       "type": "リリース",
-      "complete": true,
       "title": "v1.5 リリース",
       "caption": "2019年2月"
     },
     {
       "type": "リリース",
-      "title": "v2.0 リリース **(Arcadia)**",
-      "caption": "2019年Q2",
-      "value": true
+      "title": "v2.0 リリース **(Arcadia)**"
     },
     {
       "type": "リリース",
@@ -68,8 +54,10 @@
     {
       "type": "リリース",
       "title": "v2.2 リリース **(Tigris)**",
-      "caption": "2019年Q4",
-      "text": "Vuetifyのプリセットの紹介です。全体的なマテリアルデザインの学習や、ユーザがカスタマイズできることを含みます。Googleの学習についての詳細については、 [こちら](https://material.io/design/material-studies/about-our-material-studies.html) をご覧ください。"
+      "caption": "2019年Q4"
+    },
+    {
+      "type": "リリース"
     },
     {
       "type": "サイト",

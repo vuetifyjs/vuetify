@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center">
+  <div class="text-center">
     <v-btn
       :disabled="dialog"
       :loading="dialog"

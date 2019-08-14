@@ -19,7 +19,7 @@
   "installFA": "### Install Font Awesome 5 Icons",
   "installFAText1": "The easiest way to get started with **FontAwesome** is to use a cdn. Within the head of your main `index.html` place this snippet:",
   "installFAText2": "To install locally you can pull in the [Free](https://fontawesome.com/) version of **FontAwesome** using your preferred package manager:",
-  "installFAText3": "Within your main entry point, simply import the package's **all.css**. If you are using a configured webpack project, you will need to setup support for `.css` files using the webpack [css loader](https://github.com/webpack-contrib/css-loader). If you are already using [vue-cli-3](https://cli.vuejs.org/), this is done for you automatically.",
+  "installFAText3": "Within your main entry point, simply import the package's **all.css**. If you are using a configured webpack project, you will need to setup support for `.css` files using the webpack [css loader](https://github.com/webpack-contrib/css-loader). If you are already using [Vue CLI 3](https://cli.vuejs.org/), this is done for you automatically.",
   "installFA4": "### Install Font Awesome 4 Icons",
   "installFA4Text1": "Same as above. Installing FontAwesome through cdn is the easiest way to check it out within your project:",
   "installFA4Text2": "Installing FontAwesome**4** is the same as its newer version, just from a different repository. You will be targeting the `font-awesome` repo as opposed to `@fortawesome` one.",
@@ -38,6 +38,11 @@
   "componentIconsHeader": "## Component icons",
   "componentIconsText1": "Instead of provided icon fonts presets you can use your own component icons. You also can switch icons that are used in Vuetify component with your own.",
   "componentIconsText2": "If you want your SVG icon to inherit colors and scale correctly - be sure add the following css to it:",
+  "usingMissingMaterialIconsHeader": "## Using missing Material Icons",
+  "usingMissingMaterialIconsText1": "Some material icons are missing by default. For example, `person` and `person_outline` are available, but `visibility_outline` isn't, while `visibility` is. To use missing material icons, include the font below (remove another material font if already registered).",
+  "usingMissingMaterialIconsText2": "You can add your custom component. Let me assume it is **@/components/MaterialIcon.vue**.",
+  "usingMissingMaterialIconsText3": "Then you need to register the exact material icons you want.",
+  "usingMissingMaterialIconsText4": "Finally you can use the material icons like this.",
   "customFASvg": "### Custom Font Awesome Pro Icons",
   "customFASvgText1": "You can utilize component icons with Font Awesome Pro to select individual icon weights:"
 }

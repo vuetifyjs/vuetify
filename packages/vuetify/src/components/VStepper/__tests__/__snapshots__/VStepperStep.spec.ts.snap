@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VStepperStep.ts should accept a custom color 1`] = `
-
 <div class="v-stepper__step v-stepper__step--inactive v-stepper__step--complete">
   <span class="v-stepper__step__step pink">
     <i aria-hidden="true"
@@ -12,11 +11,9 @@ exports[`VStepperStep.ts should accept a custom color 1`] = `
   <div class="v-stepper__label">
   </div>
 </div>
-
 `;
 
 exports[`VStepperStep.ts should accept a custom css color 1`] = `
-
 <div class="v-stepper__step v-stepper__step--inactive v-stepper__step--complete">
   <span class="v-stepper__step__step"
         style="background-color: rgb(170, 187, 204); border-color: #aabbcc;"
@@ -29,5 +26,4 @@ exports[`VStepperStep.ts should accept a custom css color 1`] = `
   <div class="v-stepper__label">
   </div>
 </div>
-
 `;

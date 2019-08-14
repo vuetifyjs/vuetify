@@ -24,7 +24,7 @@
       ></v-img>
     </v-layout>
     <v-divider dark></v-divider>
-    <v-card-actions class="pa-3">
+    <v-card-actions class="pa-4">
       Rate this album
       <v-spacer></v-spacer>
       <span class="grey--text text--lighten-2 caption mr-2">

@@ -5,7 +5,7 @@
   >
     <v-layout wrap>
       <v-flex
-        mb-3
+        mb-4
         xs12
       >
         <v-text-field
@@ -19,7 +19,7 @@
       </v-flex>
       <v-flex
         xs12
-        mb-5
+        mb-12
       >
         <v-data-iterator
           :items="gotchas"
@@ -29,12 +29,15 @@
           disable-pagination
         >
           <template v-slot:item="{ item: gotcha, index }">
-            <div class="mb-5">
-              <core-goto :id="`question-${index + 1}`">
+            <section
+              :id="gotcha.id"
+              class="mb-12"
+            >
+              <core-goto :id="gotcha.id">
                 <doc-markdown :code="gotcha.q" />
               </core-goto>
               <v-card
-                class="pa-3"
+                class="pa-4"
                 outlined
               >
                 <doc-markdown :code="gotcha.a" />
@@ -47,10 +50,10 @@
                 <doc-markup
                   v-if="gotcha.s"
                   :value="gotcha.s"
-                  class="mb-0 mt-3"
+                  class="mb-0 mt-4"
                 />
               </v-card>
-            </div>
+            </section>
           </template>
         </v-data-iterator>
       </v-flex>
@@ -59,6 +62,9 @@
 </template>
 
 <script>
+  // Utilities
+  import kebabCase from 'lodash/kebabCase'
+
   export default {
     name: 'FrequentlyAskedQuestions',
 
@@ -68,7 +74,11 @@
 
     computed: {
       gotchas () {
-        return this.$t('GettingStarted.FrequentlyAskedQuestions.gotchas')
+        return this.$t('GettingStarted.FrequentlyAskedQuestions.gotchas').map(faq => {
+          return Object.assign({}, faq, {
+            id: kebabCase(faq.q),
+          })
+        })
       },
       filtered () {
         if (!this.search) return this.gotchas

@@ -1,73 +1,72 @@
 {
   "examples": {
-    "dateAllowedDates": {
+    "date-allowed-dates": {
       "header": "Date pickers - Allowed dates"
     },
-    "dateBirthday": {
+    "date-birthday": {
       "header": "Date pickers - birthday picker"
     },
-    "dateColorable": {
+    "date-colorable": {
       "header": "Date pickers - Colors"
     },
-    "dateCurrent": {
+    "date-current": {
       "header": "Date pickers - current date indicator"
     },
-    "dateDialogAndMenu": {
+    "date-dialog-and-menu": {
       "header": "Date pickers - In dialog and menu"
     },
-    "dateEvents": {
+    "date-events": {
       "desc": "You can specify events using arrays, objects, and functions. To change the default color of the event use **event-color** prop.",
       "header": "Date pickers - Events"
     },
-    "dateFormatting": {
+    "date-formatting": {
       "header": "Date pickers - formatting date"
     },
-    "dateIcons": {
+    "date-icons": {
       "header": "Date pickers - icons"
     },
-    "dateInternationalization": {
+    "date-internationalization": {
       "header": "Date pickers - Internationalization"
     },
-    "datePickerDate": {
+    "date-picker-date": {
       "header": "Date pickers - react to disaplyed month/year change"
     },
-    "dateReadonly": {
+    "date-readonly": {
       "header": "Date pickers - read only"
     },
-    "dateWidth": {
+    "date-width": {
       "header": "Date pickers - Setting picker width"
     },
-    "monthAllowedMonths": {
+    "month-allowed-months": {
       "desc": "You can specify allowed months using arrays, objects, and functions.",
       "header": "Month pickers - Allowed months"
     },
-    "monthColorable": {
+    "month-colorable": {
       "header": "Month pickers - Colors"
     },
-    "monthCurrent": {
+    "month-current": {
       "header": "Month pickers - current month indicator"
     },
-    "monthDialogAndMenu": {
+    "month-dialog-and-menu": {
       "header": "Month pickers - In dialog and menu"
     },
-    "monthEvents": {
+    "month-events": {
       "desc": "You can specify events using arrays, objects, and functions. To change the default color of the event use **event-color** prop."
     },
-    "monthIcons": {
+    "month-icons": {
       "header": "Month pickers - icons"
     },
-    "monthInternationalization": {
+    "month-internationalization": {
       "header": "Month pickers - Internationalization"
     },
-    "monthLight": {
+    "month-light": {
       "header": "Month pickers"
     },
-    "monthReadonly": {
+    "month-readonly": {
       "header": "Month pickers - read only"
     },
-    "monthWidth": {
+    "month-width": {
       "header": "Month pickers - Setting picker width"
     }
-  },
-  "header": "Date/month picker"
+  }
 }

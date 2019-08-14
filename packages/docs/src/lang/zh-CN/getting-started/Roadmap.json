@@ -1,4 +1,57 @@
 {
-  "header": "即将到来",
-  "headerText": "Vuetify始终在开发中。我们一直致力于改进现有的代码库，并且增加新的特性和功能，使得构建应用程序更加轻松。以下是计划功能的暂定清单，这不是一个详尽的清单，可能随时会更改，恕不另行通知。"
+  "headerText": "Vuetify始终在开发中。我们一直致力于改进现有的代码库，并且增加新的特性和功能，使得构建应用程序更加轻松。以下是计划功能的暂定清单，这不是一个详尽的清单，可能随时会更改，恕不另行通知。",
+  "roadmapItems": [
+    {
+      "type": "发布",
+      "complete": true,
+      "title": "Alpha 版本",
+      "caption": "2016年12月",
+      "text": "Vuetify向公众发布了。整个框架有40个组件，总大小高达46kb。"
+    },
+    {
+      "type": "发布",
+      "complete": true,
+      "title": "v1.0 版本",
+      "caption": "2018年2月"
+    },
+    {
+      "type": "发布",
+      "complete": true,
+      "title": "v1.1 版本",
+      "caption": "2018年6月"
+    },
+    {
+      "type": "发布",
+      "complete": true,
+      "title": "v1.2 版本",
+      "caption": "2018年7月"
+    },
+    {
+      "type": "发布",
+      "complete": true,
+      "title": "v1.3 版本",
+      "caption": "2018年10月"
+    },
+    {
+      "type": "发布"
+    },
+    {
+      "type": "发布"
+    },
+    {
+      "type": "发布"
+    },
+    {
+      "type": "发布"
+    },
+    {
+      "type": "发布"
+    },
+    {
+      "type": "发布"
+    },
+    {
+      "type": "发布"
+    }
+  ]
 }

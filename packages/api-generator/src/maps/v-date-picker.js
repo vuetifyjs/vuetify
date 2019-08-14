@@ -5,31 +5,29 @@ module.exports = {
         name: 'input',
         value: 'string',
       },
-    ],
-    functions: [
       {
-        name: 'titleDateFormat',
-        signature: '(date: string, locale: string): string',
+        name: 'change',
+        value: 'string',
       },
       {
-        name: 'dayFormat',
-        signature: '(date: string, locale: string): string',
+        name: 'update:picker-date',
+        value: 'string',
       },
       {
-        name: 'headerDateFormat',
-        signature: '(date: string, locale: string): string',
+        name: 'click:date',
+        value: 'string',
       },
       {
-        name: 'monthFormat',
-        signature: '(date: string, locale: string): string',
+        name: 'click:month',
+        value: 'string',
       },
       {
-        name: 'yearFormat',
-        signature: '(date: string, locale: string): string',
+        name: 'dblclick:date',
+        value: 'string',
       },
       {
-        name: 'allowedDates',
-        signature: '(date: string): boolean',
+        name: 'dblclick:month',
+        value: 'string',
       },
     ],
   },

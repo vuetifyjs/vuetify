@@ -1,3 +1,5 @@
+<!-- App.vue -->
+
 <template>
   <v-app>
     ...
@@ -9,7 +11,7 @@
     methods: {
       changeRTL () {
         this.$vuetify.rtl = true
-      }
-    }
+      },
+    },
   }
 </script>

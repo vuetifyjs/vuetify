@@ -40,28 +40,10 @@ describe('VDataFooter.ts', () => {
     }
   })
 
-  it('should render and match snapshot', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        options: {
-          page: 4,
-        },
-        pagination: {
-          page: 4,
-          pageStart: 1,
-          pageStop: 10,
-          pageCount: 10,
-          itemsLength: 100,
-        },
-      },
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
   it('should render with custom itemsPerPage', () => {
     const wrapper = mountFunction({
       propsData: {
+        itemsPerPageOptions: [100],
         options: {
           page: 4,
           itemsPerPage: 100,

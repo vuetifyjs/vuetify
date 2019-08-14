@@ -3,7 +3,7 @@
     <v-flex xs12>
       <v-layout align-center column>
         <v-btn
-          class="mt-5"
+          class="mt-12"
           color="primary"
           @click="overlay = !overlay"
         >
@@ -26,7 +26,7 @@
       </v-layout>
     </v-flex>
 
-    <v-layout justify-center row>
+    <v-layout justify-center>
       <v-radio-group row>
         <v-checkbox
           v-model="absolute"
@@ -34,7 +34,7 @@
         ></v-checkbox>
         <v-checkbox
           v-model="overlay"
-          class="mx-4"
+          class="mx-6"
           label="value"
         ></v-checkbox>
         <v-text-field

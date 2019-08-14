@@ -1,57 +1,36 @@
 {
-  "header": "Toolbar (Barra de ferramentas)",
   "headerText": "O componente `v-toolbar` é fundamental para qualquer interface, pelo fato de geralmente ser a principal fonte de navegação do site. O componente barra de ferramentas (toolbar) trabalha bem em conjunto com o navigation drawer para esconder links e também apresenta um ativador para abrir o sidebar (menu lateral) em dispositivos móveis.",
   "examples": {
-    "usage": {
-      "desc": "Uma barra de ferramentas (toolbar) é um container flexível que pode ser utilizado em diversas maneiras. Por padrão, a barra de ferramentas possui 64px de altura em desktops, 56px de altura em dispositivos móveis na vertical (modo retrato) e 48px de altura em dispositivos móveis na horizontal (modo paisagem). Existe um número de componentes de auxílio disponíveis para serem usados com a barra de ferramentas. Estes são `v-app-bar-nav-icon`, `v-toolbar-title` e `v-toolbar-items`."
-    },
-    "columnWidthWithHierarchy": {
-      "header": "Largura da coluna com hierarquia",
+    "light-and-dark": {
       "desc": "Barras de ferramentas (toolbars) possuem 2 variantes, clara e escura. Barras de ferramentas claras possuem botões de cor escura e texto escuro, ao passo que barras de ferramentas escuras possuem botões de cor branca e texto branco."
     },
-    "flexibleAndCard": {
+    "flexible-and-card": {
       "header": "Barra de ferramentas flexível (flexible toolbar) e barra de ferramentas cartão (toolbar card)",
       "desc": "Com poucos estilos customizados, você pode facilmente criar suas incríveis interfaces de usuários."
     },
-    "floatingWithSearch": {
-      "header": "Flutuante com pesquisa",
-      "desc": "Uma barra de ferramentas (toolbar) flutuante pode ser colocada sobre o conteúdo que ela referencia."
+    "floating-with-search": {
+      "header": "Flutuante com pesquisa"
     },
     "variations": {
       "header": "Variações",
-      "desc": "Uma barra de aplicativos (app-bar) possui múltiplas variações que podem ser aplicadas com temas e classes de auxílio. Estes variam entre temas claros e escuros, coloridos e transparentes.",
-      "uninverted": true
+      "desc": "Uma barra de aplicativos (app-bar) possui múltiplas variações que podem ser aplicadas com temas e classes de auxílio. Estes variam entre temas claros e escuros, coloridos e transparentes."
     },
     "prominent": {
-      "header": "Barras de ferramentas proeminentes (prominent toolbars)",
-      "desc": "Barras de ferramentas proeminentes adicionam um slot onde você pode colocar elementos dentro da área extendida. Haverá uma trava para 64px de altura no conteúdo e áreas de extensão."
+      "header": "Barras de ferramentas proeminentes (prominent toolbars)"
     },
     "dense": {
       "header": "Barras de ferramentas densas (dense toolbars)",
       "desc": "Barras de ferramentas densas têm sua altura reduzida para 48px. Isto também é o comportamento padrão para dispositivos móveis na horizontal (modo paisagem)."
     },
-    "denseProminent": {
-      "header": "Barras de ferramentas densas e proeminentes",
-      "desc": "Você pode combinar ambas para extender a uma variante menor da barra de ferramentas (toolbar)."
+    "dense-prominent": {
+      "header": "Barras de ferramentas densas e proeminentes"
     },
     "scrolling": {
-      "header": "Técnicas de rolagem",
-      "desc": "Uma barra de ferramentas (toolbar) pode ser escondida ao rolar a tela. Aqui nós demonstramos como você pode especificar o alvo da rolagem ('window' é o padrão). Tenha em mente que para este exemplo, existe uma marcação especial que não será requerida em sua aplicação."
+      "header": "Técnicas de rolagem"
     },
-    "systemBarsStatusWindow": {
+    "system-bars-status-window": {
       "header": "Barras do sistema - status/janela",
       "desc": "Barras do sistema (system bars) são úteis para ícones de notificação em dispositivos móveis e desktop. Para exemplos ao vivo, vá até os layouts pré-definidos."
     }
-  },
-  "props": {
-    "dense": "Reduz a altura do conteúdo e extensão da barra de ferramentas (toolbar)",
-    "extended": "Força a barra de ferramentas (toolbar) a gerar uma extensão sem a utilização de um slot",
-    "flat": "Remove a box-shadow da barra de ferramentas (toolbar)",
-    "floating": "Faz com que a barra de ferramentas (toolbar) flutue em linha",
-    "height": "Designa uma altura específica para a barra de ferramentas (toolbar)",
-    "lightsOut": "Reduz a opacidade da barra do sistema",
-    "prominent": "Aumenta a altura do conteúdo e extensão da barra de ferramentas (toolbar)",
-    "status": "Reduz a altura da barra do sistema",
-    "window": "Aumenta a altura da barra do sistema"
   }
 }

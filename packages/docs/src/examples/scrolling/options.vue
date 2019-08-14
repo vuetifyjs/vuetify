@@ -7,7 +7,7 @@
     <v-container
       id="scroll-target"
       style="max-height: 400px"
-      class="scroll-y"
+      class="overflow-y-auto"
     >
       <v-layout
         v-scroll:#scroll-target="onScroll"

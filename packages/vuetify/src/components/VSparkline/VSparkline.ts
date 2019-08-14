@@ -101,6 +101,10 @@ export default mixins<options &
       type: Array as Prop<SparklineItem[]>,
       default: () => ([]),
     },
+    labelSize: {
+      type: [Number, String],
+      default: 7,
+    },
     lineWidth: {
       type: [String, Number],
       default: 4,
@@ -109,11 +113,11 @@ export default mixins<options &
       type: [String, Number],
       default: 8,
     },
+    showLabels: Boolean,
     smooth: {
       type: [Boolean, Number, String],
       default: false,
     },
-    showLabels: Boolean,
     type: {
       type: String,
       default: 'trend',
@@ -126,10 +130,6 @@ export default mixins<options &
     width: {
       type: [Number, String],
       default: 300,
-    },
-    labelSize: {
-      type: [Number, String],
-      default: 7,
     },
   },
 
@@ -301,7 +301,7 @@ export default mixins<options &
           textAnchor: 'middle',
           dominantBaseline: 'mathematical',
           fill: this.color || 'currentColor',
-        },
+        } as object, // TODO: TS 3.5 is too eager with the array type here
       }, children)
     },
     genPath () {
@@ -409,7 +409,7 @@ export default mixins<options &
         },
       }), [
         this.genGradient(),
-        this.hasLabels && this.genLabels(-2),
+        this.hasLabels && this.genLabels(-(this._lineWidth / 2)),
         this.genPath(),
       ])
     },

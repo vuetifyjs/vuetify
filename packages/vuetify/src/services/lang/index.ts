@@ -42,7 +42,9 @@ export class Lang extends Service {
   static property = 'lang'
 
   public locales: Record<string, VuetifyLocale>
+
   public current: string
+
   private translator: ((key: string, ...params: any[]) => string) | undefined
 
   constructor (options: Partial<VuetifyLangOptions> = {}) {

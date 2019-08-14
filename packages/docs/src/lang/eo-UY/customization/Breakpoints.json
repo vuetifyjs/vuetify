@@ -1,0 +1,47 @@
+{
+  "header": "crwdns37126:0crwdne37126:0",
+  "headerText": "crwdns37128:0crwdne37128:0",
+  "components": [
+    "crwdns37130:0crwdne37130:0",
+    "crwdns37132:0crwdne37132:0",
+    "crwdns37134:0crwdne37134:0",
+    "crwdns37136:0crwdne37136:0"
+  ],
+  "toc": [
+    {
+      "text": "crwdns37138:0crwdne37138:0",
+      "href": "crwdns37140:0crwdne37140:0"
+    },
+    {
+      "text": "crwdns37142:0crwdne37142:0",
+      "href": "crwdns37144:0crwdne37144:0"
+    },
+    {
+      "text": "crwdns37146:0crwdne37146:0",
+      "href": "crwdns37148:0crwdne37148:0"
+    },
+    {
+      "text": "crwdns37150:0crwdne37150:0",
+      "href": "crwdns37152:0crwdne37152:0"
+    },
+    {
+      "text": "crwdns37154:0crwdne37154:0",
+      "href": "crwdns37156:0crwdne37156:0"
+    },
+    {
+      "text": "crwdns37158:0crwdne37158:0",
+      "href": "crwdns37160:0crwdne37160:0"
+    },
+    {
+      "text": "crwdns37162:0crwdne37162:0",
+      "href": "crwdns37164:0crwdne37164:0"
+    }
+  ],
+  "breakpointHeader": "crwdns37166:0crwdne37166:0",
+  "breakpointText1": "crwdns37168:0$vuetifycrwdne37168:0",
+  "breakpointHeader1a": "crwdns37170:0crwdne37170:0",
+  "breakpointText1a": "crwdns37172:0crwdne37172:0",
+  "breakpointText2": "crwdns37174:0crwdne37174:0",
+  "breakpointText3": "crwdns37176:0[v-resize]crwdne37176:0",
+  "customizeThresholdsText1": "crwdns37178:0$gridcrwdne37178:0"
+}

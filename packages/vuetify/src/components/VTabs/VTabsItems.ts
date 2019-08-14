@@ -22,6 +22,9 @@ export default VWindow.extend({
         'v-tabs-items': true,
       }
     },
+    isDark (): boolean {
+      return this.rootIsDark
+    },
   },
 
   methods: {

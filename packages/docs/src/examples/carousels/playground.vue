@@ -1,11 +1,11 @@
 <template>
   <div>
-    <v-layout row justify-space-around>
+    <v-layout justify-space-around>
       <v-icon @click="model--">mdi-minus</v-icon>
       {{ model }}
       <v-icon @click="model++">mdi-plus</v-icon>
     </v-layout>
-    <v-layout row wrap justify-space-around>
+    <v-layout wrap justify-space-around>
       <v-switch v-model="showArrows" label="Show arrows"></v-switch>
       <v-switch v-model="hideDelimiters" label="Hide delimiters"></v-switch>
       <v-switch v-model="cycle" label="Cycle"></v-switch>

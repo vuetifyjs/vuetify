@@ -18,7 +18,7 @@
   "chips": "Chip",
   "chipsText": "Presents a list of items as a set of small, tactile entities.",
   "dataIterators": "Data iterators",
-  "dataIteratorText": "Allows the user to configure how tabular data is displayed.",
+  "dataIteratorsText": "Allows the user to configure how tabular data is displayed.",
   "dataTables": "Table",
   "dataTablesText": "A configurable component for displaying tabular data",
   "datePickers": "Datepicker",

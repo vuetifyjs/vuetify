@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center">
+  <div class="text-center">
     <v-avatar tile color="blue">
       <v-icon dark>alarm</v-icon>
     </v-avatar>

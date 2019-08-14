@@ -16,6 +16,20 @@ $btn-sizes: (
   'large': 44,
   'x-large': 52
 ) !default;
+$fab-sizes: (
+  'x-small': 32,
+  'small': 40,
+  'default': 56,
+  'large': 64,
+  'x-large': 72
+) !default;
+$fab-icon-sizes: (
+  'x-small': 18,
+  'small': 24,
+  'default': 24,
+  'large': 28,
+  'x-large': 32
+) !default;
 $btn-transition-duration: 0.28s !default;
 $btn-transition-fn: map-get($transition, 'fast-out-slow-in') !default;
 $btn-transition: opacity 0.2s map-get($transition, 'ease-in-out') !default;

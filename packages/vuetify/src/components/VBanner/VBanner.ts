@@ -99,7 +99,7 @@ export default mixins(
             color: this.iconColor,
             size: 28,
           },
-        }, [ this.icon ])
+        }, [this.icon])
       } else {
         content = this.$slots.icon
       }

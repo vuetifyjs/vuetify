@@ -1,15 +1,14 @@
 module.exports = {
   'v-sheet': {
-    slots: ['default'],
     props: [
       {
         name: 'tag',
-        type: 'String',
+        type: 'string',
         default: 'div',
       },
       {
         name: 'tile',
-        type: 'Boolean',
+        type: 'boolean',
       },
     ],
   },

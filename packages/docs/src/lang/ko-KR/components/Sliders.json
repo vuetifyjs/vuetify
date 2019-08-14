@@ -1,5 +1,4 @@
 {
-  "header": "슬라이더 (Slider)",
   "headerText": "`v-slider` 컴포넌트는 숫자 입력을 위한 더 나은 시각화를 제공합니다. 사용의 숫자형 데이터를 수집하기 위해 사용도비니다.",
   "examples": {
     "usage": {
@@ -20,12 +19,11 @@
       "header": "아이콘 (Icons)",
       "desc": "`append-icon`과 `prepend-icon` prop을 이용하여 슬라이더에 아이콘을 추가할 수 있습니다."
     },
-    "editableNumericValue": {
+    "editable-numeric-value": {
       "header": "수정가능한 숫자값 (With an editable numeric value)",
       "desc": "슬라이더는 더 낳은 표현을 위해 다른 컴포넌트와 결합될 수 있습니다."
     },
-    "customColors": {
-      "header": "사용자지정 생상 (Custom colors)",
+    "custom-colors": {
       "desc": "`color`, `track-color`와 `thumb-color` prop들을 이용해 슬라이더의 색상을 정의할 수 있습니다."
     },
     "validation": {
@@ -35,8 +33,11 @@
     "range": {
       "header": "Range"
     },
-    "minMax": {
+    "min-max": {
       "header": "Min & Max values"
+    },
+    "disabled": {
+      "header": "비활성화 (Disabled)"
     }
   },
   "props": {

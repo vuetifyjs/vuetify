@@ -1,6 +1,6 @@
 <template>
   <v-container fluid grid-list-lg>
-    <v-layout row wrap>
+    <v-layout wrap>
       <v-flex xs12>
         <v-subheader class="pl-0">Show thumb when using slider</v-subheader>
         <v-slider

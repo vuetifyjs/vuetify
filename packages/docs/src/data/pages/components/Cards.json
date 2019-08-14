@@ -13,6 +13,14 @@
         {
           "type": "usage",
           "value": "usage"
+        },
+        {
+          "type": "heading",
+          "lang": "componentsHeader"
+        },
+        {
+          "type": "text",
+          "lang": "componentsList"
         }
       ]
     },

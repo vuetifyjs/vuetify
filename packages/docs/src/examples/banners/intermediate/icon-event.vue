@@ -7,7 +7,7 @@
     >
       mdi-wifi-strength-alert-outline
     </v-icon>
-    Unbale to verify your Internet connection
+    Unable to verify your Internet connection
 
     <template v-slot:actions>
       <v-btn

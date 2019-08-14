@@ -57,7 +57,7 @@ export default mixins(
 
     return h('span', {
       staticClass: 'v-badge',
-      'class': this.classes,
+      class: this.classes,
     }, [
       this.$slots.default,
       this.transition ? h('transition', {

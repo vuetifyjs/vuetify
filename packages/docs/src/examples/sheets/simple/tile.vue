@@ -8,7 +8,7 @@
         md4
       >
         <v-sheet
-          class="pa-5"
+          class="pa-12"
           color="grey lighten-3"
         >
           <div></div>

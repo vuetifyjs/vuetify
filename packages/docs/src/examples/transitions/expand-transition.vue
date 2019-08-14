@@ -6,7 +6,7 @@
   >
     <v-flex shrink>
       <v-btn
-        class="my-3"
+        class="ma-2"
         color="primary"
         @click="expand = !expand"
       >
@@ -23,11 +23,11 @@
       </v-expand-transition>
     </v-flex>
 
-    <div class="mx-3 hidden-sm-and-down"></div>
+    <div class="mx-4 hidden-sm-and-down"></div>
 
     <v-flex shrink>
       <v-btn
-        class="my-3"
+        class="ma-2"
         color="secondary"
         @click="expand2 = !expand2"
       >
