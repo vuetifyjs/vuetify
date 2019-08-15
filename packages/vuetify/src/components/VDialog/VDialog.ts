@@ -158,7 +158,7 @@ export default baseMixins.extend({
       if (this._isDestroyed ||
         !this.isActive ||
         this.$refs.content.contains(target) ||
-        (this.overlay && this.overlay.$el !== target.parentElement)
+        (this.overlay && target && this.overlay.$el !== target.parentElement)
       ) return false
 
       // If we made it here, the click is outside
