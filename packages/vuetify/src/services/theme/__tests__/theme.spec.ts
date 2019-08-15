@@ -187,18 +187,21 @@ describe('Theme.ts', () => {
     const theme = new Theme(mock)
     const anyInstance = instance as any
 
-    anyInstance.$meta = () => {}
-    anyInstance.$options.head = {}
+    anyInstance.$meta = () => ({
+      getOptions: () => ({ keyName: 'metaInfo' }),
+    })
 
-    theme.init(instance)
+    theme.init(anyInstance)
 
-    expect(typeof anyInstance.$options.head).toBe('function')
+    const metaKeyName = anyInstance.$meta().getOptions().keyName
 
-    const head = anyInstance.$options.head()
+    expect(typeof anyInstance.$options[metaKeyName]).toBe('function')
 
-    expect(head).toBeTruthy()
-    expect(head.style).toHaveLength(1)
-    expect(head.style[0].cssText).toMatchSnapshot()
+    const metaInfo = anyInstance.$options[metaKeyName]()
+
+    expect(metaInfo).toBeTruthy()
+    expect(metaInfo.style).toHaveLength(1)
+    expect(metaInfo.style[0].cssText).toMatchSnapshot()
   })
 
   it('should react to theme changes', async () => {
