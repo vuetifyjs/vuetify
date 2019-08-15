@@ -1,6 +1,6 @@
 {
   "header": "# Breakpoints",
-  "headerText": "Vuetify has a 12 point grid system. Built using <kbd>flex-box</kbd>, the grid is used to layout an application's content.  It contains 5 types of media breakpoints that are used for targeting specific screen sizes or orientations. The props for grid components are actually classes that are derived from their defined properties. This allows you to easily specify these helper classes as props, while still providing the classes to be used anywhere.",
+  "headerText": "With Vuetify you can control the layout of your application depending on the window size. That can be achieved for example by using specific [grid](/components/grids) props or helper classes (i.e. [display](/styles/display)) that will target particular breakpoint. Vuetify provides 5 predefined breakpoints defined as described below, but you can easily change them to meet your needs.",
   "components": [
     "v-container",
     "v-layout",
