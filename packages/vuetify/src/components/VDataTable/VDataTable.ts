@@ -474,7 +474,10 @@ export default VDataIterator.extend({
       ]
 
       if (!this.hideDefaultFooter) {
-        children.push(this.$createElement(VDataFooter, data))
+        children.push(this.$createElement(VDataFooter, {
+          ...data,
+          scopedSlots: getPrefixedScopedSlots('footer.', this.$scopedSlots),
+        }))
       }
 
       return children
