@@ -33,7 +33,7 @@ export default Vue.extend({
       } else if (regularSlot) {
         children.push(regularSlot)
       } else {
-        children.push(value)
+        children.push(String(value))
       }
 
       return h('td', {

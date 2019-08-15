@@ -36,6 +36,31 @@ describe('Table Row', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render non-string values', () => {
+    const wrapper = mountFunction({
+      context: {
+        props: {
+          headers: [
+            { value: 'string' },
+            { value: 'number' },
+            { value: 'array' },
+            { value: 'boolean' },
+            { value: 'object' },
+          ],
+          item: {
+            string: 'string',
+            number: 12.34,
+            array: [1, 2],
+            boolean: false,
+            object: { foo: 'bar' },
+          },
+        },
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it.skip('should render with regular slots', () => {
     const wrapper = mountFunction({
       context: {
