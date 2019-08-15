@@ -172,6 +172,10 @@ export default baseMixins.extend({
       return this.bottom ? scrollOffScreen : -scrollOffScreen
     },
     hideShadow (): boolean {
+      if (this.elevateOnScroll && this.isExtended) {
+        return this.currentScroll < this.computedScrollThreshold
+      }
+
       if (this.elevateOnScroll) {
         return this.currentScroll === 0 ||
           this.computedTransform < 0

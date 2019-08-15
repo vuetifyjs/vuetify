@@ -248,4 +248,32 @@ describe('AppBar.ts', () => {
     expect(wrapper.vm.computedTransform).toBe(0)
     expect(wrapper.vm.hideShadow).toBe(false)
   })
+
+  it('should show shadow when hide-on-scroll and elevate-on-scroll and extended are all true', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        hideOnScroll: true,
+        elevateOnScroll: true,
+        extended: true,
+      },
+    })
+
+    expect(wrapper.vm.computedTransform).toBe(0)
+    expect(wrapper.vm.hideShadow).toBe(true)
+
+    await scrollWindow(1000)
+
+    expect(wrapper.vm.computedTransform).toBe(-64)
+    expect(wrapper.vm.hideShadow).toBe(false)
+
+    await scrollWindow(600)
+
+    expect(wrapper.vm.computedTransform).toBe(0)
+    expect(wrapper.vm.hideShadow).toBe(false)
+
+    await scrollWindow(0)
+
+    expect(wrapper.vm.computedTransform).toBe(0)
+    expect(wrapper.vm.hideShadow).toBe(true)
+  })
 })
