@@ -1,8 +1,8 @@
 {
   "header": "# SASS variables",
   "headerText": "Starting with version **2.0**, Vuetify is built using **SASS/SCSS**. Using the data option in your `vue.config.js`, we can also pass in custom variables. A list of available variables is located in each components' folder. In order to build the SASS file, you will need to configure your application to support [SASS](https://sass-lang.com/dart-sass) and [Fibers](https://github.com/laverdet/node-fibers).",
-  "sassAlert1": "SCSS is used for variable files to support maps using indented syntax.",
-  "sassHeader2": "## Setup vue.config.js",
+  "sassAlert1": "Note: SCSS/SASS variables are only supported using [A-la-carte installation](/customization/a-la-carte).",
+  "sassHeader2": "## Setup",
   "sassText2": "In the command line, run:",
   "sassText3": "This will setup the dependencies needed to import and parse SASS/SCSS files. Once installed, create a folder called `sass` in your src directory (or appropriate assets directory) with a file named `main.scss`. Keep in mind many of the Vuetify variables are using [SASS Lists](https://sass-lang.com/documentation/file.SASS_REFERENCE.html#lists) and must be updated with [map-merge](https://sass-lang.com/documentation/Sass/Script/Functions.html#map_merge-instance_method) as demonstrated below:",
   "sassText3a": "Now setup your **vue.config.js** file to load the file through the data option of the sass loader:",

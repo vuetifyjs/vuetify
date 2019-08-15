@@ -76,6 +76,7 @@ declare module 'vuetify/lib' {
   const VExpansionPanels: Component
   const VFabTransition: Component
   const VFadeTransition: Component
+  const VFileInput: Component
   const VFlex: Component
   const VFooter: Component
   const VForm: Component
@@ -237,6 +238,7 @@ declare module 'vuetify/lib' {
     VExpansionPanels,
     VFabTransition,
     VFadeTransition,
+    VFileInput,
     VFlex,
     VFooter,
     VForm,

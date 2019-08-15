@@ -67,7 +67,6 @@
       { "text": "expansionPanels", "to": "expansion-panels" },
       { "text": "footer", "to": "footer" },
       { "text": "grid", "to": "grids" },
-      { "text": "gridLists", "to": "grid-lists" },
       {
         "group": "components",
         "text": "groups",
@@ -153,8 +152,10 @@
       { "text": "content", "to": "content" },
       { "text": "display", "to": "display" },
       { "text": "elevation", "to": "elevation" },
+      { "text": "flex", "to": "flex" },
+      { "text": "float", "to": "float" },
       { "text": "spacing", "to": "spacing" },
-      { "text": "textAlignment", "to": "alignment" },
+      { "text": "text", "to": "text" },
       { "text": "typography", "to": "typography" },
       { "text": "transitions", "to": "transitions" },
       { "text": "scroll", "to": "scroll" }

@@ -1,20 +1,20 @@
 <template>
-  <v-layout column>
-    <v-layout wrap justify-space-around>
-      <v-flex xs12>
+  <v-row>
+    <v-row justify="space-around">
+      <v-col cols="12">
         <v-slider v-model="errorCount" label="Max error count" min="0" max="4"></v-slider>
-      </v-flex>
+      </v-col>
       <v-switch v-model="success" class="ma-2" label="Success"></v-switch>
       <v-switch v-model="error" class="ma-2" label="Error"></v-switch>
       <v-switch v-model="hideDetails" class="ma-2" label="Hide details"></v-switch>
       <v-switch v-model="persistentHint" class="ma-2" label="Persistent hint"></v-switch>
-      <v-flex xs12>
-        <v-layout wrap justify-space-around>
+      <v-col cols="12">
+        <v-row justify="space-around">
           <v-btn color="success" @click="success = true; error = false;">Success</v-btn>
           <v-btn color="error" @click="success = false; error = true;">Error</v-btn>
-        </v-layout>
-      </v-flex>
-    </v-layout>
+        </v-row>
+      </v-col>
+    </v-row>
     <v-input
       :messages="['Messages']"
       :success="success"
@@ -32,7 +32,7 @@
     >
       Default Slot
     </v-input>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

@@ -148,7 +148,6 @@ describe('validatable.ts', () => {
     const validate = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        readonly: true,
         validateOnBlur: true,
       },
       methods: { validate },
@@ -162,21 +161,21 @@ describe('validatable.ts', () => {
 
     await focusBlur(wrapper)
 
-    expect(validate).toHaveBeenCalledTimes(1)
+    expect(validate).toHaveBeenCalledTimes(2)
 
     // Disabled - no validation
-    wrapper.setProps({ readonly: false, disabled: true })
+    wrapper.setProps({ disabled: true })
 
     await focusBlur(wrapper)
 
-    expect(validate).toHaveBeenCalledTimes(1)
+    expect(validate).toHaveBeenCalledTimes(2)
 
     // Validation!
     wrapper.setProps({ disabled: false })
 
     await focusBlur(wrapper)
 
-    expect(validate).toHaveBeenCalledTimes(2)
+    expect(validate).toHaveBeenCalledTimes(3)
   })
 
   it('should have success', () => {

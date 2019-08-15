@@ -7,13 +7,13 @@
       stateless
     >
       <v-img :aspect-ratio="16/9" src="https://cdn.vuetifyjs.com/images/parallax/material.jpg">
-        <v-layout pa-2 column fill-height class="lightbox white--text">
+        <v-row class="lightbox white--text pa-2 fill-height">
           <v-spacer></v-spacer>
-          <v-flex shrink>
+          <v-col class="shrink">
             <div class="subheading">Jonathan Lee</div>
             <div class="body-1">heyfromjonathan@gmail.com</div>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-img>
 
       <v-list>

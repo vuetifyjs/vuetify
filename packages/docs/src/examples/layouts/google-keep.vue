@@ -28,26 +28,26 @@
         class="grey lighten-4"
       >
         <template v-for="(item, i) in items">
-          <v-layout
+          <v-row
             v-if="item.heading"
             :key="i"
-            align-center
+            align="center"
           >
-            <v-flex xs6>
+            <v-col cols="6">
               <v-subheader v-if="item.heading">
                 {{ item.heading }}
               </v-subheader>
-            </v-flex>
-            <v-flex
-              xs6
+            </v-col>
+            <v-col
+              cols="6"
               class="text-right"
             >
               <v-btn
                 small
                 text
               >edit</v-btn>
-            </v-flex>
-          </v-layout>
+            </v-col>
+          </v-row>
           <v-divider
             v-else-if="item.divider"
             :key="i"
@@ -75,14 +75,13 @@
     <v-content>
       <v-container
         fluid
-        fill-height
-        class="grey lighten-4"
+        class="grey lighten-4 fill-height"
       >
-        <v-layout
-          justify-center
-          align-center
+        <v-row
+          justify="center"
+          align="center"
         >
-          <v-flex shrink>
+          <v-col class="shrink">
             <v-tooltip right>
               <template v-slot:activator="{ on }">
                 <v-btn
@@ -111,8 +110,8 @@
               </template>
               <span>Codepen</span>
             </v-tooltip>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
   </v-app>

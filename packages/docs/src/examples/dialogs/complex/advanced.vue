@@ -1,8 +1,7 @@
 <template>
   <div>
-    <v-layout
-      justify-center
-      wrap
+    <v-row
+      justify="center"
     >
       <v-btn
         color="primary"
@@ -255,7 +254,7 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-    </v-layout>
+    </v-row>
   </div>
 </template>
 

@@ -14,7 +14,7 @@
   "optionHeader": "## Options",
   "optionText1": "Vuetify generates theme styles at run-time for SPA's and server side for SSR applications. The generated styles will be placed in a `<style>` tag with the **id** of **vuetify-theme-stylesheet**.",
   "optionHeader2": "### Minification",
-  "optionText3": "For SSR applications, you can pass a callback function to **$vuetify.options.minifyTheme** to reduce the initial page size. When using this option, it is recommended to also use **themeCache**.",
+  "optionText3": "For SSR applications, you can pass a callback function to **$vuetify.theme.options.minifyTheme** to reduce the initial page size. When using this option, it is recommended to also use **themeCache**.",
   "optionHeader3": "### Caching",
   "optionText4": "A custom caching object can be provided (works in tandem with **minifyTheme**) to increase SSR efficiency. The object must contain a **get** and a **set** method. Below is an example using [LRU cache](https://www.npmjs.com/package/lru-cache).",
   "optionHeader4": "### Custom Properties",

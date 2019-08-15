@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid grid-list-md>
+  <v-container fluid>
     <v-data-iterator
       :items="items"
       :items-per-page.sync="itemsPerPage"
@@ -17,14 +17,14 @@
       </template>
 
       <template v-slot:default="props">
-        <v-layout wrap>
-          <v-flex
+        <v-row>
+          <v-col
             v-for="item in props.items"
             :key="item.name"
-            xs12
-            sm6
-            md4
-            lg3
+            cols="12"
+            sm="6"
+            md="4"
+            lg="3"
           >
             <v-card>
               <v-card-title class="subheading font-weight-bold">{{ item.name }}</v-card-title>
@@ -68,8 +68,8 @@
                 </v-list-item>
               </v-list>
             </v-card>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </template>
 
       <template v-slot:footer>

@@ -1,7 +1,7 @@
 <template>
-  <v-layout wrap justify-space-around align-center>
+  <v-row justify="space-around" align="center">
     <v-time-picker v-model="picker" scrollable></v-time-picker>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

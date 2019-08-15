@@ -1,7 +1,7 @@
 <template>
   <v-card flat>
     <v-container fluid>
-      <v-layout child-flex wrap>
+      <v-row class="child-flex">
         <div>
           <v-toolbar>
             <v-btn icon class="hidden-xs-only">
@@ -31,7 +31,7 @@
             </v-btn>
           </v-toolbar>
         </div>
-      </v-layout>
+      </v-row>
     </v-container>
   </v-card>
 </template>
