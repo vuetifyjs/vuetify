@@ -1,0 +1,143 @@
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+
+// Block
+.v-toolbar
+  contain: layout
+  flex: 1 1 auto
+  max-width: 100%
+  // Needs increased specificity
+  &.v-sheet
+    transition: $toolbar-transition
+
+  +elevation(4)
+
+  .v-input
+    padding-top: 0
+    margin-top: 0
+
+// Element
+.v-toolbar__content,
+.v-toolbar__extension
+  padding: $toolbar-content-padding-y $toolbar-content-padding-x
+
+  .v-btn.v-btn--icon.v-size--default
+    height: $toolbar-btn-icon-size
+    width: $toolbar-btn-icon-size
+
+  > .v-btn.v-btn--icon
+    &:first-child
+      margin-left: -#{$toolbar-btn-icon-size / 4}
+
+      + .v-toolbar__title
+        padding-left: $toolbar-title-padding
+
+    &:last-child
+      margin-right: -#{$toolbar-btn-icon-size / 4}
+
+    +rtl()
+      &:first-child
+        margin-right: -#{$toolbar-btn-icon-size / 4}
+
+        + .v-toolbar__title
+          padding-right: $toolbar-title-padding
+
+      &:last-child
+        margin-left: -#{$toolbar-btn-icon-size / 4}
+
+  > .v-tabs
+    height: inherit
+    margin-top: -#{$toolbar-content-padding-y}
+    margin-bottom: -#{$toolbar-content-padding-y}
+
+    .v-tabs-bar
+      height: inherit
+
+    &:first-child
+      margin-left: -#{$toolbar-content-padding-x}
+
+    &:last-child
+      margin-right: -#{$toolbar-content-padding-x}
+
+.v-toolbar__content,
+.v-toolbar__extension
+  align-items: center
+  display: flex
+  position: relative
+  z-index: 0
+
+.v-toolbar__image
+  border-radius: inherit
+  position: absolute
+  top: 0
+  bottom: 0
+  width: 100%
+  z-index: 0
+  contain: strict
+
+  .v-image
+    border-radius: inherit
+
+.v-toolbar__items
+  display: flex
+  height: inherit
+
+  > .v-btn
+    border-radius: 0
+    height: 100% !important
+    max-height: none
+
+.v-toolbar__title
+  font-size: 1.25rem
+  line-height: 1.5
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+
+// Modifier
+.v-toolbar.v-toolbar--absolute
+  position: absolute
+  top: 0
+  z-index: 1
+
+.v-toolbar.v-toolbar--bottom
+  top: initial
+  bottom: 0
+
+.v-toolbar.v-toolbar--collapse
+  .v-toolbar__title
+    white-space: nowrap
+
+.v-toolbar.v-toolbar--collapsed
+  border-bottom-right-radius: 24px
+  max-width: 112px
+
+  .v-toolbar__title,
+  .v-toolbar__extension
+    display: none
+
+.v-toolbar--dense
+  .v-toolbar__content,
+  .v-toolbar__extension
+    padding-top: 0
+    padding-bottom: 0
+
+.v-toolbar--flat
+  +elevation(0)
+
+.v-toolbar--floating
+  display: inline-flex
+
+.v-toolbar--prominent
+  .v-toolbar__content
+    align-items: flex-start
+
+  .v-toolbar__title
+    font-size: 1.5rem
+    padding-top: 6px
+
+  &:not(.v-toolbar--bottom)
+    .v-toolbar__title
+      align-self: flex-end
+      padding-bottom: 6px
+      padding-top: 0

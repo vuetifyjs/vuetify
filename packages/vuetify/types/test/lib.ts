@@ -5,8 +5,11 @@ import Vuetify, {
   VCard,
   VCardText,
   directives,
-  colors
 } from 'vuetify/lib'
+
+Vuetify.install(Vue)
+
+Vuetify.install(Vue, {})
 
 Vuetify.install(Vue, {
   components: {
@@ -15,8 +18,4 @@ Vuetify.install(Vue, {
     VCardText
   },
   directives,
-  theme: {
-    primary: colors.green,
-    secondary: colors.blueGrey.base
-  }
 })

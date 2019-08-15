@@ -1,20 +1,37 @@
 {
-  "header": "crwdns11230:0crwdne11230:0",
-  "headerText": "crwdns11232:0crwdne11232:0",
+  "header": "crwdns39310:0crwdne39310:0",
+  "headerText": "crwdns39312:0crwdne39312:0",
   "examples": {
     "usage": {
-      "desc": "crwdns11234:0crwdne11234:0"
+      "desc": "crwdns32980:0crwdne32980:0"
     },
     "inset": {
-      "header": "crwdns11236:0crwdne11236:0",
-      "desc": "crwdns11238:0crwdne11238:0"
+      "header": "crwdns39314:0crwdne39314:0",
+      "desc": "crwdns39316:0crwdne39316:0"
+    },
+    "persistent": {
+      "header": "crwdns39318:0crwdne39318:0",
+      "desc": "crwdns39320:0crwdne39320:0"
+    },
+    "model": {
+      "header": "crwdns39322:0crwdne39322:0",
+      "desc": "crwdns39324:0crwdne39324:0"
+    },
+    "open-in-list": {
+      "header": "crwdns39326:0crwdne39326:0",
+      "desc": "crwdns39328:0crwdne39328:0"
+    },
+    "player": {
+      "header": "crwdns39330:0crwdne39330:0",
+      "desc": "crwdns39332:0crwdne39332:0"
     }
   },
   "props": {
-    "disabled": "crwdns11240:0crwdne11240:0",
-    "hideOverlay": "crwdns11242:0crwdne11242:0",
-    "inset": "crwdns11244:0crwdne11244:0",
-    "lazy": "crwdns11246:0crwdne11246:0",
-    "maxWidth": "crwdns11248:0crwdne11248:0"
+    "eager": "crwdns39334:0crwdne39334:0",
+    "hideOverlay": "crwdns39336:0crwdne39336:0",
+    "inset": "crwdns39338:0crwdne39338:0",
+    "internalActivator": "crwdns39340:0crwdne39340:0",
+    "openOnHover": "crwdns39342:0crwdne39342:0",
+    "maxWidth": "crwdns39344:0crwdne39344:0"
   }
 }

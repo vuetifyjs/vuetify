@@ -12,6 +12,7 @@ import '@/plugins'
 import { createStore } from '@/store/index'
 import { createRouter } from '@/router/index'
 import { createI18n } from '@/i18n/index'
+import { createVuetify } from '@/vuetify/index'
 import { sync } from 'vuex-router-sync'
 
 // Application
@@ -22,12 +23,13 @@ Vue.config.performance = process.env.NODE_ENV === 'development'
 // Expose a factory function that creates a fresh set of store, router,
 // app instances on each call (which is called for each SSR request)
 export async function createApp ({
-  start = () => {}
+  start = () => {},
 } = {}, ssrContext) {
   // create store and router instances
   const store = createStore()
   const router = createRouter()
   const i18n = createI18n(ssrContext, router)
+  const vuetify = createVuetify(ssrContext)
 
   store.state.app.currentVersion = Vuetify.version
 
@@ -43,7 +45,8 @@ export async function createApp ({
     store,
     ssrContext,
     i18n,
-    render: h => h(App)
+    vuetify,
+    render: h => h(App),
   })
 
   // expose the app, the router and the store.

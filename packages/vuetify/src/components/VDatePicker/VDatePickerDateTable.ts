@@ -20,18 +20,18 @@ export default mixins(
   props: {
     firstDayOfWeek: {
       type: [String, Number],
-      default: 0
+      default: 0,
     },
     showWeek: Boolean,
-    weekdayFormat: Function as PropValidator<DatePickerFormatter | undefined>
+    weekdayFormat: Function as PropValidator<DatePickerFormatter | undefined>,
   },
 
   computed: {
     formatter (): DatePickerFormatter {
-      return this.format || createNativeLocaleFormatter(this.locale, { day: 'numeric', timeZone: 'UTC' }, { start: 8, length: 2 })
+      return this.format || createNativeLocaleFormatter(this.currentLocale, { day: 'numeric', timeZone: 'UTC' }, { start: 8, length: 2 })
     },
     weekdayFormatter (): DatePickerFormatter | undefined {
-      return this.weekdayFormat || createNativeLocaleFormatter(this.locale, { weekday: 'narrow', timeZone: 'UTC' })
+      return this.weekdayFormat || createNativeLocaleFormatter(this.currentLocale, { weekday: 'narrow', timeZone: 'UTC' })
     },
     weekDays (): string[] {
       const first = parseInt(this.firstDayOfWeek, 10)
@@ -39,7 +39,7 @@ export default mixins(
       return this.weekdayFormatter
         ? createRange(7).map(i => this.weekdayFormatter!(`2017-01-${first + i + 15}`)) // 2017-01-15 is Sunday
         : createRange(7).map(i => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][(i + first) % 7])
-    }
+    },
   },
 
   methods: {
@@ -76,8 +76,8 @@ export default mixins(
     genWeekNumber (weekNumber: number) {
       return this.$createElement('td', [
         this.$createElement('small', {
-          staticClass: 'v-date-picker-table--date__week'
-        }, String(weekNumber).padStart(2, '0'))
+          staticClass: 'v-date-picker-table--date__week',
+        }, String(weekNumber).padStart(2, '0')),
       ])
     },
     genTBody () {
@@ -94,7 +94,7 @@ export default mixins(
         const date = `${this.displayedYear}-${pad(this.displayedMonth + 1)}-${pad(day)}`
 
         rows.push(this.$createElement('td', [
-          this.genButton(date, true, 'date', this.formatter)
+          this.genButton(date, true, 'date', this.formatter),
         ]))
 
         if (rows.length % (this.showWeek ? 8 : 7) === 0) {
@@ -112,13 +112,13 @@ export default mixins(
     },
     genTR (children: VNodeChildren) {
       return [this.$createElement('tr', children)]
-    }
+    },
   },
 
   render (): VNode {
     return this.genTable('v-date-picker-table v-date-picker-table--date', [
       this.genTHead(),
-      this.genTBody()
+      this.genTBody(),
     ], this.calculateTableDate)
-  }
+  },
 })

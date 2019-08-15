@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VBanner.ts should render component with actions 1`] = `
+<div class="v-banner v-sheet v-sheet--tile theme--light">
+  <div class="v-banner__wrapper">
+    <div class="v-banner__content">
+      <div class="v-banner__text">
+        Hello, World!
+      </div>
+    </div>
+    <div class="v-banner__actions">
+      <div>
+        <button>
+          OK
+        </button>
+        <button>
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VBanner.ts should render component with content 1`] = `
+<div class="v-banner v-sheet v-sheet--tile theme--light">
+  <div class="v-banner__wrapper">
+    <div class="v-banner__content">
+      <div class="v-banner__text">
+        Hello, World!
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VBanner.ts should render component with icon 1`] = `
+<div class="v-banner v-sheet v-sheet--tile theme--light v-banner--has-icon">
+  <div class="v-banner__wrapper">
+    <div class="v-banner__content">
+      <div class="v-avatar v-banner__icon"
+           style="height: 40px; min-width: 40px; width: 40px;"
+      >
+        <i aria-hidden="true"
+           class="v-icon notranslate mdi mdi-plus theme--light"
+           style="font-size: 28px;"
+        >
+        </i>
+      </div>
+      <div class="v-banner__text">
+        Hello, World!
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VBanner.ts should render component with icon slot 1`] = `
+<div class="v-banner v-sheet v-sheet--tile theme--light v-banner--has-icon">
+  <div class="v-banner__wrapper">
+    <div class="v-banner__content">
+      <div class="v-avatar v-banner__icon"
+           style="height: 40px; min-width: 40px; width: 40px;"
+      >
+        <span>
+          icon
+        </span>
+      </div>
+      <div class="v-banner__text">
+        Hello, World!
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VBanner.ts should render sinle-line component with content 1`] = `
+<div class="v-banner v-sheet v-sheet--tile theme--light">
+  <div class="v-banner__wrapper">
+    <div class="v-banner__content">
+      <div class="v-banner__text">
+        Hello, World!
+      </div>
+    </div>
+  </div>
+</div>
+`;

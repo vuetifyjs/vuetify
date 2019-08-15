@@ -1,30 +1,50 @@
 {
-  "header": "crwdns11178:0crwdne11178:0",
-  "headerText": "crwdns11180:0crwdne11180:0",
+  "header": "crwdns40792:0crwdne40792:0",
+  "headerText": "crwdns40794:0crwdne40794:0",
   "examples": {
     "usage": {
-      "desc": "crwdns11182:0crwdne11182:0"
+      "desc": "crwdns40796:0crwdne40796:0"
+    },
+    "bottom": {
+      "header": "crwdns40798:0crwdne40798:0",
+      "desc": "crwdns40800:0crwdne40800:0"
+    },
+    "left": {
+      "header": "crwdns40802:0crwdne40802:0",
+      "desc": "crwdns40804:0crwdne40804:0"
     },
     "overlap": {
-      "header": "crwdns11184:0crwdne11184:0",
-      "desc": "crwdns11186:0crwdne11186:0"
-    },
-    "inline": {
-      "header": "crwdns11188:0crwdne11188:0",
-      "desc": "crwdns11190:0crwdne11190:0"
-    },
-    "icon": {
-      "header": "crwdns11192:0crwdne11192:0",
-      "desc": "crwdns11194:0crwdne11194:0"
+      "header": "crwdns34352:0crwdne34352:0",
+      "desc": "crwdns40806:0crwdne40806:0"
     },
     "visibility": {
-      "header": "crwdns11196:0crwdne11196:0",
-      "desc": "crwdns11198:0crwdne11198:0"
+      "header": "crwdns34364:0crwdne34364:0",
+      "desc": "crwdns40808:0crwdne40808:0"
+    },
+    "inline": {
+      "header": "crwdns34356:0crwdne34356:0",
+      "desc": "crwdns34358:0crwdne34358:0"
+    },
+    "icon": {
+      "header": "crwdns34360:0crwdne34360:0",
+      "desc": "crwdns34362:0crwdne34362:0"
+    },
+    "hover": {
+      "header": "crwdns40810:0crwdne40810:0",
+      "desc": "crwdns40812:0crwdne40812:0"
+    },
+    "dynamic": {
+      "header": "crwdns40814:0crwdne40814:0",
+      "desc": "crwdns40816:0crwdne40816:0"
     }
   },
   "props": {
-    "bottom": "crwdns11200:0crwdne11200:0",
-    "left": "crwdns11202:0crwdne11202:0",
-    "transition": "crwdns11204:0crwdne11204:0"
+    "bottom": "crwdns34368:0crwdne34368:0",
+    "left": "crwdns34370:0crwdne34370:0",
+    "overlap": "crwdns40818:0crwdne40818:0",
+    "transition": "crwdns34372:0crwdne34372:0"
+  },
+  "slots": {
+    "badge": "crwdns40820:0crwdne40820:0"
   }
 }

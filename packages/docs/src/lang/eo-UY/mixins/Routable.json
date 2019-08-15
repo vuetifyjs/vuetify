@@ -1,15 +1,17 @@
 {
   "props": {
-    "activeClass": "crwdns15716:0crwdne15716:0",
-    "append": "crwdns15718:0crwdne15718:0",
-    "disabled": "crwdns15720:0crwdne15720:0",
-    "exact": "crwdns15722:0crwdne15722:0",
-    "exactActiveClass": "crwdns15724:0crwdne15724:0",
-    "href": "crwdns15726:0crwdne15726:0",
-    "nuxt": "crwdns15728:0crwdne15728:0",
-    "replace": "crwdns15730:0crwdne15730:0",
-    "to": "crwdns15732:0crwdne15732:0",
-    "tag": "crwdns15734:0crwdne15734:0",
-    "target": "crwdns15736:0crwdne15736:0"
+    "activeClass": "crwdns37392:0crwdne37392:0",
+    "append": "crwdns37394:0crwdne37394:0",
+    "disabled": "crwdns37396:0crwdne37396:0",
+    "exact": "crwdns37398:0crwdne37398:0",
+    "exactActiveClass": "crwdns37400:0crwdne37400:0",
+    "href": "crwdns37402:0crwdne37402:0",
+    "link": "crwdns37404:0crwdne37404:0",
+    "nuxt": "crwdns37406:0crwdne37406:0",
+    "replace": "crwdns37408:0crwdne37408:0",
+    "ripple": "crwdns37410:0crwdne37410:0",
+    "to": "crwdns37412:0crwdne37412:0",
+    "tag": "crwdns37414:0crwdne37414:0",
+    "target": "crwdns37416:0crwdne37416:0"
   }
 }

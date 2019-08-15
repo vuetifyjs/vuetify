@@ -19,15 +19,20 @@
         >
           <v-flex
             xs12
-            text-xs-center
+            text-center
           >
             <core-toc />
-            <div class="my-3">
-              <supporters-patrons
+            <div class="my-4">
+              <supporters-sponsors
                 :tier="[1]"
                 compact
+                dense
+                hide-titles
               />
-              <supporters-sponsor-btn small />
+              <supporters-sponsor-btn
+                small
+                class="mt-4"
+              />
             </div>
           </v-flex>
 
@@ -48,7 +53,7 @@
 
   // Utilities
   import {
-    mapState
+    mapState,
   } from 'vuex'
 
   export default {
@@ -58,7 +63,7 @@
 
     data: () => ({
       timeout: null,
-      viewport: null
+      viewport: null,
     }),
 
     computed: {
@@ -72,12 +77,12 @@
           this.name &&
           this.name !== 'home/Home'
         )
-      }
+      },
     },
 
     watch: {
       path: 'setViewport',
-      isBooted: 'setViewport'
+      isBooted: 'setViewport',
     },
 
     methods: {
@@ -85,7 +90,7 @@
         const { xsOnly, smOnly } = this.$vuetify.breakpoint
 
         this.viewport = xsOnly ? 'xs' : smOnly ? 'sm' : 'md'
-      }
-    }
+      },
+    },
   }
 </script>

@@ -1,0 +1,431 @@
+@import '../../styles/styles.sass'
+
++theme(v-text-field) using ($material)
+  & > .v-input__control > .v-input__slot:before
+    border-color: map-get($material, 'input-bottom-line')
+
+  &:not(.v-input--has-state) > .v-input__control > .v-input__slot:hover:before
+    border-color: map-deep-get($material, 'text', 'primary')
+
+  &.v-input--is-disabled > .v-input__control > .v-input__slot:before
+    border-image: repeating-linear-gradient(to right, #{map-deep-get($material, 'text', 'disabled')} 0px, #{map-deep-get($material, 'text', 'disabled')} 2px, transparent 2px, transparent 4px) 1 repeat
+
+  &.v-input--is-disabled
+    .v-text-field__prefix,
+    .v-text-field__suffix
+      color: map-deep-get($material, 'text', 'disabled')
+
+  &__prefix,
+  &__suffix
+    color: map-deep-get($material, 'text', 'secondary')
+
+  &--solo > .v-input__control > .v-input__slot
+    background: map-get($material, 'cards')
+
+  &--solo-inverted.v-text-field--solo
+    & > .v-input__control > .v-input__slot
+      background: map-deep-get($material, 'inputs', 'solo-inverted')
+
+    &.v-input--is-focused > .v-input__control > .v-input__slot
+      background: map-deep-get($material, 'inputs', 'solo-inverted-focused')
+
+      .v-label,
+      input
+          color: map-deep-get($material, 'inputs', 'solo-inverted-focused-text')
+
+  &--filled
+    & > .v-input__control > .v-input__slot
+      background: map-deep-get($material, 'text-fields', 'filled')
+
+    .v-text-field__prefix,
+    .v-text-field__suffix
+      max-height: 32px
+      margin-top: 20px
+
+    &:not(.v-input--is-focused) > .v-input__control > .v-input__slot:hover
+      background: map-deep-get($material, 'text-fields', 'filled-hover')
+
+  &--outlined
+    fieldset
+      border-color: map-deep-get($material, 'text-fields', 'outlined')
+
+    &:not(.v-input--is-focused):not(.v-input--has-state):hover
+      fieldset
+        border-color: map-deep-get($material, 'text-fields', 'outlined-hover')
+
+.v-text-field
+  padding-top: $text-field-active-label-height
+  margin-top: $input-top-spacing - $text-field-active-label-height
+
+  input
+    flex: 1 1 auto
+    line-height: 20px
+    padding: 8px 0 8px
+    max-width: 100%
+    min-width: 0px
+    width: 100%
+
+    &[type=text]::-ms-clear
+      display: none
+
+  .v-input__prepend-inner,
+  .v-input__append-inner
+    align-self: flex-start
+    display: inline-flex
+    margin-top: 4px
+    line-height: 1
+    user-select: none
+
+  .v-input__prepend-inner
+    margin-right: auto
+    padding-right: 4px
+
+    +rtl()
+      padding-right: 0
+      padding-left: 4px
+
+  .v-input__append-inner
+    margin-left: auto
+    padding-left: 4px
+
+    +rtl()
+      padding-left: 0
+      padding-right: 4px
+
+  .v-counter
+    margin-left: 8px
+    white-space: nowrap
+
+    +rtl()
+      margin-left: 0
+      margin-right: 8px
+
+  .v-label
+    max-width: 90%
+    overflow: hidden
+    text-overflow: ellipsis
+    top: 6px // equal to the margin top of icons
+    transform-origin: top left
+    white-space: nowrap
+    pointer-events: none
+
+    &--active
+      max-width: 133%
+      transform: translateY(-18px) scale(.75)
+
+  & > .v-input__control > .v-input__slot
+    cursor: text
+    transition: background $primary-transition
+
+    &:before,
+    &:after
+      bottom: -1px // Needed for browser autocomplete styles
+      content: ''
+      left: 0
+      position: absolute
+      transition: $primary-transition
+      width: 100%
+
+    &:before
+      border-style: solid
+      border-width: thin 0 0 0
+
+    &:after
+      border-color: currentColor
+      border-style: solid
+      border-width: thin 0 thin 0
+      transform: scaleX(0)
+
+  &__details
+    display: flex
+    flex: 1 0 auto
+    max-width: 100%
+    min-height: 14px
+    overflow: hidden
+
+  &__prefix,
+  &__suffix
+    align-self: center
+    cursor: default
+    transition: color $primary-transition
+    white-space: nowrap
+
+  &__prefix
+    text-align: right
+    padding-right: 4px
+
+    +rtl()
+      padding-right: 0
+      padding-left: 4px
+
+  &__suffix
+    padding-left: 4px
+    white-space: nowrap
+
+    +rtl()
+      padding-left: 0
+      padding-right: 4px
+
+  &--reverse
+    .v-text-field__prefix
+      text-align: left
+      padding-right: 0
+      padding-left: 4px
+
+      +rtl()
+        padding-right: 4px
+        padding-left: 0
+
+    .v-text-field__suffix
+      padding-left: 0
+      padding-right: 4px
+
+      +rtl()
+        padding-left: 4px
+        padding-right: 0
+
+  & > .v-input__control > .v-input__slot > .v-text-field__slot
+    display: flex
+    flex: 1 1 auto
+    position: relative
+
+  &:not(.v-text-field--is-booted)
+    .v-label,
+    legend
+      transition: none
+
+  &--filled,
+  &--full-width,
+  &--outlined
+    position: relative
+
+    & > .v-input__control > .v-input__slot
+      align-items: stretch
+      min-height: 56px
+
+  &--filled,
+  &--full-width
+    input
+      margin-top: 22px
+
+    &.v-text-field--single-line
+      input
+        margin-top: 12px
+
+    .v-label
+      top: 18px
+
+      &--active
+        transform: translateY(-6px) scale(.75)
+
+  &--filled > .v-input__control > .v-input__slot
+    border-top-left-radius: 4px
+    border-top-right-radius: 4px
+
+  &.v-text-field--enclosed
+    margin: 0
+    padding: 0
+
+    &.v-text-field--single-line
+      .v-text-field__prefix,
+      .v-text-field__suffix
+        margin-top: 0
+
+    &:not(.v-text-field--filled)
+      .v-progress-linear__background
+        display: none
+
+    .v-input__prepend-outer,
+    .v-input__prepend-inner,
+    .v-input__append-inner,
+    .v-input__append-outer
+      margin-top: 16px
+
+    .v-text-field__details,
+    & > .v-input__control > .v-input__slot
+      padding: 0 12px
+
+    .v-text-field__details
+      margin-bottom: 8px
+
+  &--reverse
+    input
+      text-align: right
+
+    .v-label
+      transform-origin: top right
+
+    & > .v-input__control > .v-input__slot,
+    .v-text-field__slot
+      flex-direction: row-reverse
+
+  &--solo,
+  &--outlined,
+  &--full-width,
+  &--rounded
+    & > .v-input__control > .v-input__slot
+      &:before,
+      &:after
+        display: none
+
+  &--outlined
+    margin-bottom: 16px
+    transition: border $primary-transition
+
+    .v-label
+      top: 18px
+
+      &--active
+        transform: translateY(-24px) scale(.75)
+
+    fieldset
+      border-style: solid
+      border-width: 1px
+      bottom: 0
+      left: 0
+      padding-left: 8px
+      pointer-events: none
+      position: absolute
+      right: 0
+      top: -5px
+      transition-duration: 0.3s
+      transition-property: border, border-width
+      transition-timing-function: map-get($transition, 'fast-in-fast-out')
+
+      +rtl()
+        padding-left: 0
+        padding-right: 8px
+
+    legend
+      line-height: 11px
+      padding: 0
+      text-align: left
+      transition: width $primary-transition
+
+      +rtl()
+        text-align: right
+
+    &.v-text-field--rounded
+      legend
+        margin-left: 12px
+
+        +rtl()
+          margin-left: 0
+          margin-right: 12px
+
+    & > .v-input__control > .v-input__slot
+      background: transparent !important
+
+    .v-text-field__prefix
+      max-height: 32px
+
+    .v-input__prepend-outer,
+    .v-input__append-outer
+      margin-top: 18px // 2px for border
+
+    &.v-input--is-focused,
+    &.v-input--has-state
+      fieldset
+        border-color: currentColor
+        border-width: 2px
+
+  &--solo,
+  &--outlined
+    border-radius: 4px
+
+    fieldset,
+    .v-input__control,
+    .v-input__slot
+      border-radius: inherit
+
+    .v-text-field__slot
+      align-items: center
+
+  &--rounded
+    border-radius: 28px
+
+    &.v-text-field--outlined
+      fieldset
+        border-radius: 28px
+
+    > .v-input__control > .v-input__slot
+      border-radius: 28px
+      padding: 0 24px !important
+
+  &--shaped
+    &.v-text-field--outlined
+      fieldset
+        border-radius: 16px 16px 0 0
+
+    > .v-input__control > .v-input__slot
+      border-top-left-radius: 16px
+      border-top-right-radius: 16px
+
+  &.v-text-field--solo
+    .v-label
+      top: calc(50% - 10px)
+
+    .v-input__control
+      min-height: 48px
+      padding: 0
+
+    &:not(.v-text-field--solo-flat) > .v-input__control > .v-input__slot
+      +elevation(2)
+
+    .v-input__append-inner,
+    .v-input__prepend-inner
+      align-self: center
+      margin-top: 0
+
+    .v-input__prepend-outer,
+    .v-input__append-outer
+      margin-top: 12px
+
+  &.v-input--is-focused > .v-input__control > .v-input__slot:after
+    transform: scaleX(1)
+
+  &.v-input--has-state > .v-input__control > .v-input__slot:before
+    border-color: currentColor
+
+  +rtl()
+    .v-label
+      transform-origin: top right
+
+    .v-counter
+      margin-left: 0
+      margin-right: 8px
+
+    &--enclosed
+      .v-input__append-outer
+        margin-left: 0
+        margin-right: 16px
+
+      .v-input__prepend-outer
+        margin-left: 16px
+        margin-right: 0
+
+    &--reverse
+      input
+        text-align: left
+
+      .v-label
+        transform-origin: top left
+
+    &__prefix
+      text-align: left
+      padding-right: 0
+      padding-left: 4px
+
+    &__suffix
+      padding-left: 0
+      padding-right: 4px
+
+    &--reverse
+      .v-text-field__prefix
+        text-align: right
+        padding-left: 0
+        padding-right: 4px
+
+      .v-text-field__suffix
+        padding-left: 0
+        padding-right: 4px

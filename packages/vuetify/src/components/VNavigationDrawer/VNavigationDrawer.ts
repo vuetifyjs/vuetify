@@ -1,8 +1,12 @@
 // Styles
-import '../../stylus/components/_navigation-drawer.styl'
+import './VNavigationDrawer.sass'
+
+// Components
+import VImg, { srcObject } from '../VImg/VImg'
 
 // Mixins
 import Applicationable from '../../mixins/applicationable'
+import Colorable from '../../mixins/colorable'
 import Dependent from '../../mixins/dependent'
 import Overlayable from '../../mixins/overlayable'
 import SSRBootable from '../../mixins/ssr-bootable'
@@ -14,69 +18,98 @@ import Resize from '../../directives/resize'
 import Touch, { TouchWrapper } from '../../directives/touch'
 
 // Utilities
-import { convertToUnit } from '../../util/helpers'
+import { convertToUnit, getSlot } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
-// TYpes
-import { VNode } from 'vue/types/vnode'
+// Types
+import { VNode, VNodeDirective } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
-export default mixins(
+const baseMixins = mixins(
   Applicationable('left', [
+    'isActive',
+    'isMobile',
     'miniVariant',
+    'expandOnHover',
+    'permanent',
     'right',
-    'width'
+    'temporary',
+    'width',
   ]),
+  Colorable,
   Dependent,
   Overlayable,
   SSRBootable,
   Themeable
+)
+
 /* @vue/component */
-).extend({
+export default baseMixins.extend({
   name: 'v-navigation-drawer',
+
+  provide (): object {
+    return {
+      isInNav: this.tag === 'nav',
+    }
+  },
 
   directives: {
     ClickOutside,
     Resize,
-    Touch
+    Touch,
   },
 
   props: {
+    bottom: Boolean,
     clipped: Boolean,
-    disableRouteWatcher: Boolean,
     disableResizeWatcher: Boolean,
+    disableRouteWatcher: Boolean,
+    expandOnHover: Boolean,
+    floating: Boolean,
     height: {
       type: [Number, String],
-      default: '100%'
+      default (): string {
+        return this.app ? '100vh' : '100%'
+      },
     },
-    floating: Boolean,
     miniVariant: Boolean,
     miniVariantWidth: {
       type: [Number, String],
-      default: 80
+      default: 80,
     },
     mobileBreakPoint: {
       type: [Number, String],
-      default: 1264
+      default: 1264,
     },
     permanent: Boolean,
     right: Boolean,
+    src: {
+      type: [String, Object],
+      default: '',
+    } as PropValidator<string | srcObject>,
     stateless: Boolean,
+    tag: {
+      type: String,
+      default (): string {
+        return this.app ? 'nav' : 'aside'
+      },
+    },
     temporary: Boolean,
     touchless: Boolean,
     width: {
       type: [Number, String],
-      default: 300
+      default: 256,
     },
-    value: { required: false } as PropValidator<any>
+    value: { required: false } as PropValidator<any>,
   },
 
   data: () => ({
-    isActive: false,
+    isMouseover: false,
     touchArea: {
       left: 0,
-      right: 0
-    }
+      right: 0,
+    },
+    stackMinZIndex: 6,
   }),
 
   computed: {
@@ -87,115 +120,130 @@ export default mixins(
     applicationProperty (): string {
       return this.right ? 'right' : 'left'
     },
-    calculatedTransform (): number {
-      if (this.isActive) return 0
-
-      return this.right
-        ? this.calculatedWidth
-        : -this.calculatedWidth
-    },
-    calculatedWidth (): number {
-      return parseInt(
-        this.miniVariant
-          ? this.miniVariantWidth
-          : this.width
-      )
-    },
     classes (): object {
       return {
         'v-navigation-drawer': true,
         'v-navigation-drawer--absolute': this.absolute,
+        'v-navigation-drawer--bottom': this.bottom,
         'v-navigation-drawer--clipped': this.clipped,
         'v-navigation-drawer--close': !this.isActive,
         'v-navigation-drawer--fixed': !this.absolute && (this.app || this.fixed),
         'v-navigation-drawer--floating': this.floating,
         'v-navigation-drawer--is-mobile': this.isMobile,
-        'v-navigation-drawer--mini-variant': this.miniVariant,
+        'v-navigation-drawer--is-mouseover': this.isMouseover,
+        'v-navigation-drawer--mini-variant': this.miniVariant || (this.expandOnHover && !this.isMouseover),
         'v-navigation-drawer--open': this.isActive,
+        'v-navigation-drawer--open-on-hover': this.expandOnHover,
         'v-navigation-drawer--right': this.right,
         'v-navigation-drawer--temporary': this.temporary,
-        ...this.themeClasses
+        ...this.themeClasses,
       }
     },
-    hasApp (): boolean {
-      return this.app &&
-        (!this.isMobile && !this.temporary)
-    },
-    isMobile (): boolean {
-      return !this.stateless &&
-        !this.permanent &&
-        !this.temporary &&
-        this.$vuetify.breakpoint.width < parseInt(this.mobileBreakPoint, 10)
-    },
-    marginTop (): number {
-      if (!this.hasApp) return 0
-
-      let marginTop = this.$vuetify.application.bar
-
-      marginTop += this.clipped
-        ? this.$vuetify.application.top
-        : 0
-
-      return marginTop
-    },
-    maxHeight (): number | null {
+    computedMaxHeight (): number | null {
       if (!this.hasApp) return null
 
-      const maxHeight = (
+      const computedMaxHeight = (
         this.$vuetify.application.bottom +
         this.$vuetify.application.footer +
         this.$vuetify.application.bar
       )
 
-      if (!this.clipped) return maxHeight
+      if (!this.clipped) return computedMaxHeight
 
-      return maxHeight + this.$vuetify.application.top
+      return computedMaxHeight + this.$vuetify.application.top
+    },
+    computedTop (): number {
+      if (!this.hasApp) return 0
+
+      let computedTop = this.$vuetify.application.bar
+
+      computedTop += this.clipped
+        ? this.$vuetify.application.top
+        : 0
+
+      return computedTop
+    },
+    computedTransform (): number {
+      if (this.isActive) return 0
+      if (this.isBottom) return 100
+      return this.right ? 100 : -100
+    },
+    computedWidth (): string | number {
+      if (
+        (this.expandOnHover && !this.isMouseover) ||
+        this.miniVariant
+      ) return this.miniVariantWidth
+
+      return this.width
+    },
+    hasApp (): boolean {
+      return (
+        this.app &&
+        (!this.isMobile && !this.temporary)
+      )
+    },
+    isBottom (): boolean {
+      return this.bottom && this.isMobile
+    },
+    isMobile (): boolean {
+      return (
+        !this.stateless &&
+        !this.permanent &&
+        this.$vuetify.breakpoint.width < parseInt(this.mobileBreakPoint, 10)
+      )
     },
     reactsToClick (): boolean {
-      return !this.stateless &&
+      return (
+        !this.stateless &&
         !this.permanent &&
         (this.isMobile || this.temporary)
+      )
     },
     reactsToMobile (): boolean {
-      return !this.disableResizeWatcher &&
-        !this.stateless &&
+      return (
+        this.app &&
+        !this.disableResizeWatcher &&
         !this.permanent &&
+        !this.stateless &&
         !this.temporary
+      )
+    },
+    reactsToResize (): boolean {
+      return !this.disableResizeWatcher && !this.stateless
     },
     reactsToRoute (): boolean {
-      return !this.disableRouteWatcher &&
+      return (
+        !this.disableRouteWatcher &&
         !this.stateless &&
         (this.temporary || this.isMobile)
-    },
-    resizeIsDisabled (): boolean {
-      return this.disableResizeWatcher || this.stateless
+      )
     },
     showOverlay (): boolean {
-      return this.isActive &&
+      return (
+        this.isActive &&
         (this.isMobile || this.temporary)
+      )
     },
     styles (): object {
+      const translate = this.isBottom ? 'translateY' : 'translateX'
       const styles = {
         height: convertToUnit(this.height),
-        marginTop: `${this.marginTop}px`,
-        maxHeight: this.maxHeight != null ? `calc(100% - ${+this.maxHeight}px)` : undefined,
-        transform: `translateX(${this.calculatedTransform}px)`,
-        width: `${this.calculatedWidth}px`
+        top: !this.isBottom ? convertToUnit(this.computedTop) : 'auto',
+        maxHeight: this.computedMaxHeight != null
+          ? `calc(100% - ${convertToUnit(this.computedMaxHeight)})`
+          : undefined,
+        transform: `${translate}(${convertToUnit(this.computedTransform, '%')})`,
+        width: convertToUnit(this.computedWidth),
       }
 
       return styles
-    }
+    },
   },
 
   watch: {
-    $route () {
-      if (this.reactsToRoute && this.closeConditional()) {
-        this.isActive = false
-      }
-    },
+    $route: 'onRouteChange',
     isActive (val) {
       this.$emit('input', val)
-      this.callUpdate()
     },
     /**
      * When mobile changes, adjust the active state
@@ -208,37 +256,30 @@ export default mixins(
         this.removeOverlay()
 
       if (prev == null ||
-        this.resizeIsDisabled ||
+        !this.reactsToResize ||
         !this.reactsToMobile
       ) return
 
       this.isActive = !val
-      this.callUpdate()
     },
     permanent (val) {
       // If enabling prop enable the drawer
-      if (val) {
-        this.isActive = true
-      }
-      this.callUpdate()
+      if (val) this.isActive = true
     },
     showOverlay (val) {
       if (val) this.genOverlay()
       else this.removeOverlay()
     },
-    temporary () {
-      this.callUpdate()
-    },
     value (val) {
       if (this.permanent) return
 
-      // TODO: referring to this directly causes type errors
-      // all over the place for some reason
-      const _this = this as any
-      if (val == null) return _this.init()
+      if (val == null) {
+        this.init()
+        return
+      }
 
       if (val !== this.isActive) this.isActive = val
-    }
+    },
   },
 
   beforeMount () {
@@ -247,42 +288,107 @@ export default mixins(
 
   methods: {
     calculateTouchArea () {
-      if (!this.$el.parentNode) return
-      const parentRect = (this.$el.parentNode as Element).getBoundingClientRect()
+      const parent = this.$el.parentNode as Element
+
+      if (!parent) return
+
+      const parentRect = parent.getBoundingClientRect()
 
       this.touchArea = {
         left: parentRect.left + 50,
-        right: parentRect.right - 50
+        right: parentRect.right - 50,
       }
     },
     closeConditional () {
-      return this.isActive && this.reactsToClick
+      return this.isActive && !this._isDestroyed && this.reactsToClick
     },
-    genDirectives () {
+    genAppend () {
+      return this.genPosition('append')
+    },
+    genBackground () {
+      const props = {
+        height: '100%',
+        width: '100%',
+        src: this.src,
+      }
+
+      const image = this.$scopedSlots.img
+        ? this.$scopedSlots.img(props)
+        : this.$createElement(VImg, { props })
+
+      return this.$createElement('div', {
+        staticClass: 'v-navigation-drawer__image',
+      }, [image])
+    },
+    genDirectives (): VNodeDirective[] {
       const directives = [{
         name: 'click-outside',
         value: () => (this.isActive = false),
         args: {
           closeConditional: this.closeConditional,
-          include: this.getOpenDependentElements
-        }
+          include: this.getOpenDependentElements,
+        },
       }]
 
-      !this.touchless && directives.push({
-        name: 'touch',
-        value: {
-          parent: true,
-          left: this.swipeLeft,
-          right: this.swipeRight
-        }
-      } as any)
+      if (!this.touchless && !this.stateless) {
+        directives.push({
+          name: 'touch',
+          value: {
+            parent: true,
+            left: this.swipeLeft,
+            right: this.swipeRight,
+          },
+        } as any)
+      }
 
       return directives
     },
-    /**
-     * Sets state before mount to avoid
-     * entry transitions in SSR
-     */
+    genListeners () {
+      const on: Record<string, (e: Event) => void> = {
+        transitionend: (e: Event) => {
+          if (e.target !== e.currentTarget) return
+          this.$emit('transitionend', e)
+
+          // IE11 does not support new Event('resize')
+          const resizeEvent = document.createEvent('UIEvents')
+          resizeEvent.initUIEvent('resize', true, false, window, 0)
+          window.dispatchEvent(resizeEvent)
+        },
+      }
+
+      if (this.miniVariant) {
+        on.click = () => this.$emit('update:mini-variant', false)
+      }
+
+      if (this.expandOnHover) {
+        on.mouseenter = () => (this.isMouseover = true)
+        on.mouseleave = () => (this.isMouseover = false)
+      }
+
+      return on
+    },
+    genPosition (name: 'prepend' | 'append') {
+      const slot = getSlot(this, name)
+
+      if (!slot) return slot
+
+      return this.$createElement('div', {
+        staticClass: `v-navigation-drawer__${name}`,
+      }, slot)
+    },
+    genPrepend () {
+      return this.genPosition('prepend')
+    },
+    genContent () {
+      return this.$createElement('div', {
+        staticClass: 'v-navigation-drawer__content',
+      }, this.$slots.default)
+    },
+    genBorder () {
+      return this.$createElement('div', {
+        staticClass: 'v-navigation-drawer__border',
+      })
+    },
     init () {
       if (this.permanent) {
         this.isActive = true
@@ -294,15 +400,10 @@ export default mixins(
         this.isActive = !this.isMobile
       }
     },
-    swipeRight (e: TouchWrapper) {
-      if (this.isActive && !this.right) return
-      this.calculateTouchArea()
-
-      if (Math.abs(e.touchendX - e.touchstartX) < 100) return
-      if (!this.right &&
-        e.touchstartX <= this.touchArea.left
-      ) this.isActive = true
-      else if (this.right && this.isActive) this.isActive = false
+    onRouteChange () {
+      if (this.reactsToRoute && this.closeConditional()) {
+        this.isActive = false
+      }
     },
     swipeLeft (e: TouchWrapper) {
       if (this.isActive && this.right) return
@@ -314,44 +415,48 @@ export default mixins(
       ) this.isActive = true
       else if (!this.right && this.isActive) this.isActive = false
     },
+    swipeRight (e: TouchWrapper) {
+      if (this.isActive && !this.right) return
+      this.calculateTouchArea()
+
+      if (Math.abs(e.touchendX - e.touchstartX) < 100) return
+      if (!this.right &&
+        e.touchstartX <= this.touchArea.left
+      ) this.isActive = true
+      else if (this.right && this.isActive) this.isActive = false
+    },
     /**
      * Update the application layout
      */
     updateApplication () {
-      return !this.isActive ||
+      if (
+        !this.isActive ||
+        this.isMobile ||
         this.temporary ||
-        this.isMobile
-        ? 0
-        : this.calculatedWidth
-    }
+        !this.$el
+      ) return 0
+
+      const width = Number(this.computedWidth)
+
+      return isNaN(width) ? this.$el.clientWidth : width
+    },
   },
 
   render (h): VNode {
-    const data = {
-      'class': this.classes,
+    const children = [
+      this.genPrepend(),
+      this.genContent(),
+      this.genAppend(),
+      this.genBorder(),
+    ]
+
+    if (this.src || getSlot(this, 'img')) children.unshift(this.genBackground())
+
+    return h(this.tag, this.setBackgroundColor(this.color, {
+      class: this.classes,
       style: this.styles,
       directives: this.genDirectives(),
-      on: {
-        click: () => {
-          if (!this.miniVariant) return
-
-          this.$emit('update:miniVariant', false)
-        },
-        transitionend: (e: Event) => {
-          if (e.target !== e.currentTarget) return
-          this.$emit('transitionend', e)
-
-          // IE11 does not support new Event('resize')
-          const resizeEvent = document.createEvent('UIEvents')
-          resizeEvent.initUIEvent('resize', true, false, window, 0)
-          window.dispatchEvent(resizeEvent)
-        }
-      }
-    }
-
-    return h('aside', data, [
-      this.$slots.default,
-      h('div', { 'class': 'v-navigation-drawer__border' })
-    ])
-  }
+      on: this.genListeners(),
+    }), children)
+  },
 })

@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VCarousel",
   "children": [
     {
       "type": "section",
@@ -8,6 +9,14 @@
         {
           "type": "usage",
           "value": "usage"
+        },
+        {
+          "type": "heading",
+          "lang": "subComponentsHeader"
+        },
+        {
+          "type": "text",
+          "lang": "subComponentsList"
         }
       ]
     },
@@ -27,12 +36,23 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "customTransition",
-            "customIcons",
-            "hideControls",
-            "hideDelimiters"
+            "simple/cycle",
+            "simple/custom-transition",
+            "simple/custom-icons",
+            "simple/hide-controls",
+            "simple/hide-delimiters",
+            "intermediate/model"
           ]
         }
       ]

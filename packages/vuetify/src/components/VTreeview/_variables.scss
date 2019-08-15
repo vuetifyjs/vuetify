@@ -1,0 +1,13 @@
+$treeview-transition: .2s map-get($transition, 'linear-out-slow-in') !default;
+$treeview-node-x-margin: 26px !default;
+$treeview-node-padding-end: 8px !default;
+$treeview-leaf-node-x-margin: 26px !default;
+$treeview-direct-leaf-node-margin-start: 16px !default;
+$treeview-direct-leaf-node-padding-start: 8px !default;
+$treeview-leaf-node-padding-start: 24px !default;
+$treeview-label-font-size: inherit !default;
+$treeview-label-margin-start: 6px !default;
+$treeview-label-icon-padding-end: 8px !default;
+$treeview-node-height: 48px !default;
+$treeview-node-height-dense: 40px !default;
+$treeview-node-shaped-margin: 8px !default;

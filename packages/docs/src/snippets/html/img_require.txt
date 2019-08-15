@@ -1,5 +1,11 @@
-// Incorrect
-<v-img src="../path/to/img" />
+<!-- Vue Component -->
 
-// Correct
-<v-img :src="require('../path/to/img')" />
+<template>
+  <div>
+    <!-- Incorrect -->
+    <v-img src="../path/to/img" />
+
+    <!-- Correct -->
+    <v-img :src="require('../path/to/img')" />
+  </div>
+</template>

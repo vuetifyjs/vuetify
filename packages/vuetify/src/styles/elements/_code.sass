@@ -1,0 +1,21 @@
+.v-application
+  code, kbd
+    display: inline-block
+    border-radius: $code-kbd-border-radius
+    white-space: pre-wrap
+    font-size: $code-kbd-font-size
+    font-weight: $code-kbd-font-weight
+
+    &:after,
+    &:before
+      content: "\00a0"
+      letter-spacing: -1px
+
+  code
+    background-color: map-get($grey, 'lighten-4')
+    color: $code-color
+    +elevation(1)
+
+  kbd
+    background: map-get($grey, 'darken-2')
+    color: map-get($shades, 'white')

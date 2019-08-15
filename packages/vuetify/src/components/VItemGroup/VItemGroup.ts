@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_item-group.styl'
+import './VItemGroup.sass'
 
 // Mixins
 import Groupable from '../../mixins/groupable'
@@ -13,7 +13,11 @@ import { consoleWarn } from '../../util/console'
 // Types
 import { VNode } from 'vue/types'
 
-type GroupableInstance = InstanceType<typeof Groupable> & { value?: any }
+export type GroupableInstance = InstanceType<typeof Groupable> & {
+  id?: string
+  to?: any
+  value?: any
+ }
 
 export const BaseItemGroup = mixins(
   Proxyable,
@@ -24,14 +28,14 @@ export const BaseItemGroup = mixins(
   props: {
     activeClass: {
       type: String,
-      default: 'v-item--active'
+      default: 'v-item--active',
     },
     mandatory: Boolean,
     max: {
       type: [Number, String],
-      default: null
+      default: null,
     },
-    multiple: Boolean
+    multiple: Boolean,
   },
 
   data () {
@@ -42,15 +46,24 @@ export const BaseItemGroup = mixins(
       internalLazyValue: this.value !== undefined
         ? this.value
         : this.multiple ? [] : undefined,
-      items: [] as GroupableInstance[]
+      items: [] as GroupableInstance[],
     }
   },
 
   computed: {
     classes (): Record<string, boolean> {
       return {
-        ...this.themeClasses
+        'v-item-group': true,
+        ...this.themeClasses,
       }
+    },
+    selectedIndex (): number {
+      return (this.selectedItem && this.items.indexOf(this.selectedItem)) || -1
+    },
+    selectedItem (): GroupableInstance | undefined {
+      if (this.multiple) return undefined
+
+      return this.selectedItems[0]
     },
     selectedItems (): GroupableInstance[] {
       return this.items.filter((item, index) => {
@@ -58,6 +71,8 @@ export const BaseItemGroup = mixins(
       })
     },
     selectedValues (): any[] {
+      if (this.internalValue == null) return []
+
       return Array.isArray(this.internalValue)
         ? this.internalValue
         : [this.internalValue]
@@ -73,14 +88,14 @@ export const BaseItemGroup = mixins(
       }
 
       return () => false
-    }
+    },
   },
 
   watch: {
     internalValue () {
       // https://github.com/vuetifyjs/vuetify/issues/5352
       this.$nextTick(this.updateItemsState)
-    }
+    },
   },
 
   created () {
@@ -90,20 +105,25 @@ export const BaseItemGroup = mixins(
   },
 
   methods: {
+    genData (): object {
+      return {
+        class: this.classes,
+      }
+    },
     getValue (item: GroupableInstance, i: number): unknown {
       return item.value == null || item.value === ''
         ? i
         : item.value
     },
-    onClick (item: GroupableInstance, index: number) {
+    onClick (item: GroupableInstance) {
       this.updateInternalValue(
-        this.getValue(item, index)
+        this.getValue(item, this.items.indexOf(item))
       )
     },
     register (item: GroupableInstance) {
       const index = this.items.push(item) - 1
 
-      item.$on('change', () => this.onClick(item, index))
+      item.$on('change', () => this.onClick(item))
 
       // If no value provided and mandatory,
       // assign first registered item
@@ -170,10 +190,20 @@ export const BaseItemGroup = mixins(
     updateMandatory (last?: boolean) {
       if (!this.items.length) return
 
-      const index = last ? this.items.length - 1 : 0
+      const items = this.items.slice()
+
+      if (last) items.reverse()
+
+      const item = items.find(item => !item.disabled)
+
+      // If no tabs are available
+      // aborts mandatory value
+      if (!item) return
+
+      const index = this.items.indexOf(item)
 
       this.updateInternalValue(
-        this.getValue(this.items[index], index)
+        this.getValue(item, index)
       )
     },
     updateMultiple (value: any) {
@@ -212,15 +242,12 @@ export const BaseItemGroup = mixins(
       if (this.mandatory && isSame) return
 
       this.internalValue = isSame ? undefined : value
-    }
+    },
   },
 
   render (h): VNode {
-    return h('div', {
-      staticClass: 'v-item-group',
-      class: this.classes
-    }, this.$slots.default)
-  }
+    return h('div', this.genData(), this.$slots.default)
+  },
 })
 
 export default BaseItemGroup.extend({
@@ -228,7 +255,7 @@ export default BaseItemGroup.extend({
 
   provide (): object {
     return {
-      itemGroup: this
+      itemGroup: this,
     }
-  }
+  },
 })

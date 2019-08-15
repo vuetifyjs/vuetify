@@ -1,31 +1,33 @@
 // Styles
-import '../../stylus/components/_buttons.styl'
+import './VBtn.sass'
 
-// Types
-import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
-import mixins, { ExtractVue } from '../../util/mixins'
-import { RippleOptions } from '../../directives/ripple'
+// Extensions
+import VSheet from '../VSheet'
 
 // Components
 import VProgressCircular from '../VProgressCircular'
 
 // Mixins
-import Colorable from '../../mixins/colorable'
 import { factory as GroupableFactory } from '../../mixins/groupable'
+import { factory as ToggleableFactory } from '../../mixins/toggleable'
 import Positionable from '../../mixins/positionable'
 import Routable from '../../mixins/routable'
-import Themeable from '../../mixins/themeable'
-import { factory as ToggleableFactory } from '../../mixins/toggleable'
+import Sizeable from '../../mixins/sizeable'
 
 // Utilities
-import { getObjectValueByPath } from '../../util/helpers'
+import mixins, { ExtractVue } from '../../util/mixins'
+import { breaking } from '../../util/console'
+
+// Types
+import { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
+import { RippleOptions } from '../../directives/ripple'
 
 const baseMixins = mixins(
-  Colorable,
+  VSheet,
   Routable,
   Positionable,
-  Themeable,
+  Sizeable,
   GroupableFactory('btnToggle'),
   ToggleableFactory('inputValue')
   /* @vue/component */
@@ -40,130 +42,153 @@ export default baseMixins.extend<options>().extend({
   props: {
     activeClass: {
       type: String,
-      default: 'v-btn--active'
-    },
+      default (): string | undefined {
+        if (!this.btnToggle) return ''
+
+        return this.btnToggle.activeClass
+      },
+    } as any as PropValidator<string>,
     block: Boolean,
     depressed: Boolean,
     fab: Boolean,
-    flat: Boolean,
     icon: Boolean,
-    large: Boolean,
     loading: Boolean,
-    outline: Boolean,
-    ripple: {
-      type: [Boolean, Object],
-      default: null
-    },
-    round: Boolean,
-    small: Boolean,
+    outlined: Boolean,
+    rounded: Boolean,
     tag: {
       type: String,
-      default: 'button'
+      default: 'button',
     },
+    text: Boolean,
     type: {
       type: String,
-      default: 'button'
+      default: 'button',
     },
-    value: null as any as PropValidator<any>
+    value: null as any as PropValidator<any>,
   },
+
+  data: () => ({
+    proxyClass: 'v-btn--active',
+  }),
 
   computed: {
     classes (): any {
       return {
         'v-btn': true,
-        [this.activeClass]: this.isActive,
+        ...Routable.options.computed.classes.call(this),
         'v-btn--absolute': this.absolute,
         'v-btn--block': this.block,
         'v-btn--bottom': this.bottom,
+        'v-btn--contained': this.contained,
+        'v-btn--depressed': (this.depressed) || this.outlined,
         'v-btn--disabled': this.disabled,
-        'v-btn--flat': this.flat,
-        'v-btn--floating': this.fab,
+        'v-btn--fab': this.fab,
         'v-btn--fixed': this.fixed,
+        'v-btn--flat': this.isFlat,
         'v-btn--icon': this.icon,
-        'v-btn--large': this.large,
         'v-btn--left': this.left,
-        'v-btn--loader': this.loading,
-        'v-btn--outline': this.outline,
-        'v-btn--depressed': (this.depressed && !this.flat) || this.outline,
+        'v-btn--loading': this.loading,
+        'v-btn--outlined': this.outlined,
         'v-btn--right': this.right,
-        'v-btn--round': this.round,
+        'v-btn--round': this.isRound,
+        'v-btn--rounded': this.rounded,
         'v-btn--router': this.to,
-        'v-btn--small': this.small,
+        'v-btn--text': this.text,
+        'v-btn--tile': this.tile,
         'v-btn--top': this.top,
-        ...this.themeClasses
+        ...this.themeClasses,
+        ...this.groupClasses,
+        ...this.elevationClasses,
+        ...this.sizeableClasses,
       }
+    },
+    contained (): boolean {
+      return Boolean(
+        !this.isFlat &&
+        !this.depressed &&
+        // Contained class only adds elevation
+        // is not needed if user provides value
+        !this.elevation
+      )
     },
     computedRipple (): RippleOptions | boolean {
       const defaultRipple = this.icon || this.fab ? { circle: true } : true
       if (this.disabled) return false
-      else return this.ripple !== null ? this.ripple : defaultRipple
-    }
+      else return this.ripple != null ? this.ripple : defaultRipple
+    },
+    isFlat (): boolean {
+      return Boolean(
+        this.icon ||
+        this.text ||
+        this.outlined
+      )
+    },
+    isRound (): boolean {
+      return Boolean(
+        this.icon ||
+        this.fab
+      )
+    },
+    styles (): object {
+      return {
+        ...this.measurableStyles,
+      }
+    },
   },
 
-  watch: {
-    '$route': 'onRouteChange'
+  created () {
+    const breakingProps = [
+      ['flat', 'text'],
+      ['outline', 'outlined'],
+      ['round', 'rounded'],
+    ]
+
+    /* istanbul ignore next */
+    breakingProps.forEach(([original, replacement]) => {
+      if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement, this)
+    })
   },
 
   methods: {
-    // Prevent focus to match md spec
     click (e: MouseEvent): void {
-      !this.fab &&
-      e.detail &&
-      this.$el.blur()
-
       this.$emit('click', e)
 
       this.btnToggle && this.toggle()
     },
     genContent (): VNode {
-      return this.$createElement(
-        'div',
-        { 'class': 'v-btn__content' },
-        this.$slots.default
-      )
+      return this.$createElement('span', {
+        staticClass: 'v-btn__content',
+      }, this.$slots.default)
     },
     genLoader (): VNode {
       return this.$createElement('span', {
-        class: 'v-btn__loading'
+        class: 'v-btn__loader',
       }, this.$slots.loader || [this.$createElement(VProgressCircular, {
         props: {
           indeterminate: true,
           size: 23,
-          width: 2
-        }
+          width: 2,
+        },
       })])
     },
-    onRouteChange () {
-      if (!this.to || !this.$refs.link) return
-
-      const path = `_vnode.data.class.${this.activeClass}`
-
-      this.$nextTick(() => {
-        if (getObjectValueByPath(this.$refs.link, path)) {
-          this.toggle()
-        }
-      })
-    }
   },
 
   render (h): VNode {
-    const setColor = (!this.outline && !this.flat && !this.disabled) ? this.setBackgroundColor : this.setTextColor
-    const { tag, data } = this.generateRouteLink(this.classes)
     const children = [
       this.genContent(),
-      this.loading && this.genLoader()
+      this.loading && this.genLoader(),
     ]
+    const setColor = !this.isFlat ? this.setBackgroundColor : this.setTextColor
+    const { tag, data } = this.generateRouteLink()
 
-    if (tag === 'button') data.attrs!.type = this.type
-
+    if (tag === 'button') {
+      data.attrs!.type = this.type
+      data.attrs!.disabled = this.disabled
+    }
     data.attrs!.value = ['string', 'number'].includes(typeof this.value)
       ? this.value
       : JSON.stringify(this.value)
 
-    if (this.btnToggle) {
-      data.ref = 'link'
-    }
-
-    return h(tag, setColor(this.color, data), children)
-  }
+    return h(tag, this.disabled ? data : setColor(this.color, data), children)
+  },
 })

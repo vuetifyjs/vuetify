@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center">
+  <div class="text-center">
     <v-rating v-model="rating"></v-rating>
   </div>
 </template>
@@ -7,7 +7,7 @@
 <script>
   export default {
     data: () => ({
-      rating: 3
-    })
+      rating: 3,
+    }),
   }
 </script>

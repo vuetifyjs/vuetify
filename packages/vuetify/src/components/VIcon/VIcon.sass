@@ -1,0 +1,53 @@
+// Imports
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+
+// Theme
++theme(v-icon) using ($material)
+  color: map-deep-get($material, 'icons', 'active')
+
+  &--disabled
+    color: map-deep-get($material, 'icons', 'inactive') !important
+
+// Increased specificity to overwrite
+// iconfont css interference
+.v-icon.v-icon
+  align-items: center
+  display: inline-flex
+  font-feature-settings: 'liga'
+  font-size: $icon-size
+  justify-content: center
+  letter-spacing: normal
+  line-height: 1
+  text-indent: 0
+  transition: $primary-transition
+  vertical-align: middle
+  user-select: none
+
+.v-icon
+  &--right
+    margin-left: map-get($grid-gutters, 'md')
+  &--left
+    margin-right: map-get($grid-gutters, 'md')
+
+  &.v-icon.v-icon--link
+    cursor: pointer
+
+  &--disabled
+    pointer-events: none
+    opacity: .6
+
+  &--is-component
+    height: $icon-size
+    width: $icon-size
+
+  &--svg
+    height: $icon-size
+    width: $icon-size
+    fill: currentColor
+
+  &--dense
+    font-size: $icon-size-dense
+
+    &--is-component
+      height: $icon-size-dense

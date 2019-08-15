@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <v-layout row wrap>
-      <v-flex xs12>
+    <v-row>
+      <v-col cols="12">
         <h3 ref="radio" class="headline">Target</h3>
         <v-radio-group v-model="type" row>
           <v-radio label="Number" value="number"></v-radio>
@@ -11,22 +11,22 @@
         <v-text-field v-if="type === 'number'" v-model="number" type="number" label="Number"></v-text-field>
         <v-text-field v-if="type === 'selector'" v-model="selector" label="Selector"></v-text-field>
         <v-select v-if="type === 'element'" v-model="selected" :items="elements" label="DOMElement"></v-select>
-      </v-flex>
-      <v-flex xs12>
+      </v-col>
+      <v-col cols="12">
         <h3 class="headline">Options</h3>
         <v-select v-model="easing" :items="easings" label="Easing"></v-select>
         <v-slider v-model="duration" min="0" max="1000" label="Duration" thumb-label></v-slider>
         <v-slider v-model="offset" min="-500" max="500" label="Offset" thumb-label></v-slider>
-      </v-flex>
-      <v-flex>
+      </v-col>
+      <v-col>
         <v-btn ref="button" color="primary" block @click="$vuetify.goTo(target, options)">scroll</v-btn>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
-  import * as easings from 'vuetify/es5/util/easing-patterns'
+  import * as easings from 'vuetify/es5/services/goto/easing-patterns'
 
   export default {
     data () {
@@ -39,7 +39,7 @@
         duration: 300,
         offset: 0,
         easing: 'easeInOutCubic',
-        easings: Object.keys(easings)
+        easings: Object.keys(easings),
       }
     },
     computed: {
@@ -52,14 +52,14 @@
         return {
           duration: this.duration,
           offset: this.offset,
-          easing: this.easing
+          easing: this.easing,
         }
       },
       element () {
         if (this.selected === 'Button') return this.$refs.button
         else if (this.selected === 'Radio group') return this.$refs.radio
-      }
-    }
+      },
+    },
   }
 </script>
 

@@ -1,40 +1,51 @@
 module.exports = {
   verbose: false,
+  testEnvironment: 'jest-environment-jsdom-fourteen',
   roots: [
     '<rootDir>/src',
-    '<rootDir>/test/unit',
-    '<rootDir>/test/integration'
+  ],
+  setupFilesAfterEnv: [
+    '<rootDir>/test/index.ts',
   ],
   moduleFileExtensions: [
     'ts',
-    'js'
+    'js',
   ],
   moduleDirectories: [
-    'node_modules'
+    'node_modules',
   ],
   moduleNameMapper: {
     '^@/test$': '<rootDir>/test/index.js',
     '^@/test/(.*)$': '<rootDir>/test/$1',
-    '^@/(.*)$': '<rootDir>/src/$1'
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '\\.(css|sass|scss)$': 'identity-obj-proxy',
   },
   transform: {
     '\\.(styl)$': 'jest-css-modules',
-    '.*\\.(j|t)s$': 'ts-jest'
+    '\\.(sass|scss)$': 'jest-css-modules',
+    '.*\\.(j|t)s$': 'ts-jest',
   },
-  mapCoverage: true,
   collectCoverageFrom: [
     'src/**/*.{js,ts,tsx}',
-    '!**/*.d.ts'
+    '!**/*.d.ts',
   ],
   transformIgnorePatterns: [
-    'node_modules/(?!vue-router)'
+    'node_modules/(?!vue-router)',
   ],
   snapshotSerializers: [
-    'jest-serializer-html'
+    'jest-serializer-html',
+  ],
+  testMatch: [
+    // Default
+    '**/test/**/*.js',
+    '**/__tests__/**/*.spec.js',
+    '**/__tests__/**/*.spec.ts',
   ],
   globals: {
     'ts-jest': {
-      'useBabelrc': true
-    }
-  }
+      babelConfig: true,
+      tsConfig: '<rootDir>/tsconfig.test.json',
+      diagnostics: false,
+    },
+  },
 }

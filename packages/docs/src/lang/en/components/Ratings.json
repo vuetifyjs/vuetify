@@ -18,8 +18,8 @@
       "desc": "A rating can have 3 defined icons, **full-icon**, **half-icon** (with the **half-increments** prop) and **empty-icon**."
     },
     "slots": {
-      "header": "### Scoped slots",
-      "desc": "A scoped slot is provided to give you even more freedom in how you display the rating."
+      "header": "### Slots",
+      "desc": "Slots are provided to give you even more freedom in how you display the rating."
     },
     "card": {
       "header": "### Card ratings",
@@ -28,6 +28,10 @@
     "advanced": {
       "header": "### Advanced usage",
       "desc": "The `v-rating` component fits right in with existing components. Build truly complex examples with rich features and beautiful designs."
+    },
+    "colors": {
+      "header": "### Colors",
+      "desc": "The `v-rating` component can be colored as you want, you can set both selected and not selected colors."
     }
   },
   "props": {
@@ -41,5 +45,11 @@
     "length": "The amount of ratings to show",
     "readonly": "Removes all hover effects and pointer events",
     "value": "The rating value"
+  },
+  "slots": {
+    "item": "The slot for rendered items"
+  },
+  "events": {
+    "input": "Emits the rating number when this value changes"
   }
 }

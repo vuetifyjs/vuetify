@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VSheet",
   "children": [
     {
       "type": "section",
@@ -24,9 +25,20 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "elevation"
+            "simple/elevation",
+            "simple/tile",
+            "intermediate/colors-sizes"
           ]
         }
       ]
@@ -37,9 +49,9 @@
         {
           "type": "up-next",
           "value": [
-            "framework/colors",
-            "framework/elevation",
-            "framework/grid"
+            "components/cards",
+            "components/grids",
+            "styles/elevation"
           ]
         }
       ]

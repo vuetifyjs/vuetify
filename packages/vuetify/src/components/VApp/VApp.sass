@@ -1,0 +1,43 @@
+@import '../../styles/styles.sass'
+
+// Theme
++theme(v-application) using ($material)
+  background: map-get($material, 'background')
+  color: map-deep-get($material, 'text', 'primary')
+
+  .text
+    &--primary
+      color: map-deep-get($material, 'text', 'primary') !important
+
+    &--secondary
+      color: map-deep-get($material, 'text', 'secondary') !important
+
+    &--disabled
+      color: map-deep-get($material, 'text', 'disabled') !important
+
+.v-application
+  display: flex
+
+  a
+    cursor: pointer
+
+  &--is-rtl
+    direction: rtl
+
+  &--wrap
+    flex: 1 1 auto
+    backface-visibility: hidden
+    display: flex
+    flex-direction: column
+    min-height: 100vh
+    max-width: 100%
+    position: relative
+
+// Firefox overrides
+@-moz-document url-prefix()
+  @media print
+    .v-application
+      display: block
+
+      &--wrap
+        display: block

@@ -1,7 +1,12 @@
 // src/plugins/vuetify.js
 
-Vue.use(Vuetify, {
-  options: {
-    cspNonce: 'dQw4w9WgXcQ'
-  }
+import Vue from 'vue'
+import Vuetify from 'vuetify/lib'
+
+export default new Vuetify({
+  theme: {
+    options: {
+      cspNonce: 'dQw4w9WgXcQ',
+    },
+  },
 })

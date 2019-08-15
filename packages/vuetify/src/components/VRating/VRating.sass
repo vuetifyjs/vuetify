@@ -1,0 +1,21 @@
+@import '../../styles/styles.sass'
+
+.v-rating
+  max-width: 100%
+  white-space: nowrap
+
+  .v-icon
+    padding: 0.5rem
+    border-radius: 50%
+    user-select: none
+
+    +rtl()
+      transform: scaleX(-1)
+
+  &--readonly
+    .v-icon
+      pointer-events: none
+
+  &--dense
+    .v-icon
+      padding: 0.1rem

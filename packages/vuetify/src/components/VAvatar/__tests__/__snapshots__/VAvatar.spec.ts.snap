@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VAvatar should have an v-avatar class 1`] = `
+<div class="v-avatar"
+     style="height: 48px; min-width: 48px; width: 48px;"
+>
+</div>
+`;

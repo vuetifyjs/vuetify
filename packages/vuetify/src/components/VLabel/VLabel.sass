@@ -1,0 +1,14 @@
+@import '../../styles/styles.sass'
+
+// Theme
++theme(v-label) using ($material)
+  color: map-deep-get($material, 'text', 'secondary')
+
+  &--is-disabled
+    color: map-deep-get($material, 'text', 'disabled')
+
+.v-label
+  font-size: 16px
+  line-height: 1
+  min-height: 8px
+  transition: .3s map-get($transition, 'swing')

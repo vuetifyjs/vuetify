@@ -1,6 +1,5 @@
 {
   "props": {
-    "activator": "Designate a custom activator when the activator slot is not used. String can be any valid querySelector and Object can be any valid Node",
     "allowOverflow": "Removes overflow re-positioning for the content",
     "inputActivator": "Sets a new activator target for the detached element. Use when placing detachable items in `v-input` slots",
     "maxWidth": "Sets the maximum width for the content",

@@ -16,7 +16,7 @@
       </v-fade-transition>
     </v-text-field>
 
-    <h2 class="display-1 success--text pl-3">
+    <h2 class="display-1 success--text pl-4">
       Tasks:&nbsp;
       <v-fade-transition leave-absolute>
         <span :key="`tasks-${tasks.length}`">
@@ -25,19 +25,19 @@
       </v-fade-transition>
     </h2>
 
-    <v-divider class="mt-3"></v-divider>
+    <v-divider class="mt-4"></v-divider>
 
-    <v-layout
-      my-1
-      align-center
+    <v-row
+      class="my-1"
+      align="center"
     >
-      <strong class="mx-3 info--text text--darken-3">
+      <strong class="mx-4 info--text text--darken-3">
         Remaining: {{ remainingTasks }}
       </strong>
 
       <v-divider vertical></v-divider>
 
-      <strong class="mx-3 black--text">
+      <strong class="mx-4 black--text">
         Completed: {{ completedTasks }}
       </strong>
 
@@ -47,9 +47,9 @@
         :value="progress"
         class="mr-2"
       ></v-progress-circular>
-    </v-layout>
+    </v-row>
 
-    <v-divider class="mb-3"></v-divider>
+    <v-divider class="mb-4"></v-divider>
 
     <v-card v-if="tasks.length > 0">
       <v-slide-y-transition
@@ -63,8 +63,8 @@
             :key="`${i}-divider`"
           ></v-divider>
 
-          <v-list-tile :key="`${i}-${task.text}`">
-            <v-list-tile-action>
+          <v-list-item :key="`${i}-${task.text}`">
+            <v-list-item-action>
               <v-checkbox
                 v-model="task.done"
                 color="info darken-3"
@@ -72,12 +72,12 @@
                 <template v-slot:label>
                   <div
                     :class="task.done && 'grey--text' || 'text--primary'"
-                    class="ml-3"
+                    class="ml-4"
                     v-text="task.text"
                   ></div>
                 </template>
               </v-checkbox>
-            </v-list-tile-action>
+            </v-list-item-action>
 
             <v-spacer></v-spacer>
 
@@ -89,7 +89,7 @@
                 check
               </v-icon>
             </v-scroll-x-transition>
-          </v-list-tile>
+          </v-list-item>
         </template>
       </v-slide-y-transition>
     </v-card>
@@ -102,14 +102,14 @@
       tasks: [
         {
           done: false,
-          text: 'Foobar'
+          text: 'Foobar',
         },
         {
           done: false,
-          text: 'Fizzbuzz'
-        }
+          text: 'Fizzbuzz',
+        },
       ],
-      task: null
+      task: null,
     }),
 
     computed: {
@@ -121,18 +121,18 @@
       },
       remainingTasks () {
         return this.tasks.length - this.completedTasks
-      }
+      },
     },
 
     methods: {
       create () {
         this.tasks.push({
           done: false,
-          text: this.task
+          text: this.task,
         })
 
         this.task = null
-      }
-    }
+      },
+    },
   }
 </script>

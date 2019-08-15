@@ -1,8 +1,8 @@
 <template>
-  <v-layout wrap mb-5>
+  <v-layout wrap mb-12>
     <v-flex
       xs12
-      mb-5
+      mb-12
     >
       <v-autocomplete
         v-model="selected"
@@ -16,7 +16,7 @@
       >
         <template v-slot:selection="props">
           <v-chip
-            :selected="props.selected"
+            :value="props.selected"
             color="primary"
             class="white--text"
             label
@@ -29,28 +29,31 @@
           </v-chip>
         </template>
         <template v-slot:item="props">
-          <v-list-tile-action>
+          <v-list-item-action>
             <v-icon v-text="props.item.icon" />
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="props.item.text" />
-            <v-list-tile-sub-title v-text="props.item.subtext" />
-          </v-list-tile-content>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title
+              :id="props.attrs['aria-labelledby']"
+              v-text="props.item.text"
+            />
+            <v-list-item-subtitle v-text="props.item.subtext" />
+          </v-list-item-content>
         </template>
       </v-autocomplete>
     </v-flex>
     <v-flex
       v-if="!selected"
       xs12
-      text-xs-center
+      text-center
       grey--text
     >
-      <h3
+      <h2
         class="display-1"
         v-text="$t('Components.ApiExplorer.search')"
       />
       <div v-text="$t('Components.ApiExplorer.or')" />
-      <h3
+      <h2
         class="display-1"
         v-text="$t('Components.ApiExplorer.browseCategories')"
       />
@@ -85,26 +88,26 @@
       ProvideProvider: {
         provide () {
           return {
-            namespace: this.namespace,
-            page: this.page
+            overrideNamespace: this.namespace,
+            overridePage: this.page,
           }
         },
 
         props: {
           namespace: {
             type: String,
-            default: ''
+            default: '',
           },
           page: {
             type: String,
-            default: ''
-          }
+            default: '',
+          },
         },
 
         render (h) {
           return h('div', [this.$slots.default])
-        }
-      }
+        },
+      },
     },
 
     data: () => ({
@@ -113,15 +116,15 @@
         'v-ripple',
         'v-touch',
         'v-scroll',
-        'v-resize'
+        'v-resize',
       ],
       grid: [
         'v-container',
         'v-layout',
         'v-flex',
-        'v-spacer'
+        'v-spacer',
       ],
-      search: ''
+      search: '',
     }),
 
     computed: {
@@ -163,13 +166,13 @@
         return this.selected
           ? pluralize(upperFirst(camelCase(str)))
           : undefined
-      }
+      },
     },
 
     watch: {
       currentProxy (val) {
         this.current = (val || {}).text
-      }
+      },
     },
 
     methods: {
@@ -202,7 +205,7 @@
         }
 
         return { icon, namespace, subtext, text }
-      }
-    }
+      },
+    },
   }
 </script>

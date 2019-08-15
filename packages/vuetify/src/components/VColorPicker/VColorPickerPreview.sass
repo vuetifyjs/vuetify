@@ -1,0 +1,58 @@
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+
+.v-color-picker
+  .v-input__slider
+    border-radius: 5px
+
+    .v-slider
+      margin: 0
+
+.v-color-picker__alpha:not(.v-input--is-disabled)
+  .v-slider
+    border-radius: 5px
+    background: $color-picker-checkerboard
+
+.v-color-picker__sliders
+  display: flex
+  flex: 1 0 auto
+  flex-direction: column
+
+.v-color-picker__dot
+  position: relative
+  height: 30px
+  margin-right: 24px
+  width: 30px
+  background: $color-picker-checkerboard
+  border-radius: 50%
+  overflow: hidden
+
+  > div
+    width: 100%
+    height: 100%
+
+.v-color-picker__hue
+  &:not(.v-input--is-disabled)
+    background: linear-gradient(to right, #F00 0%, #FF0 16.66%, #0F0 33.33%, #0FF 50%, #00F 66.66%, #F0F 83.33%, #F00 100%)
+
+.v-color-picker__track
+  position: relative
+  width: 100%
+
+.v-color-picker__preview
+  align-items: center
+  display: flex
+
+  .v-slider
+    min-height: 10px
+
+    &:not(.v-slider--disabled)
+      .v-slider__thumb
+        +elevation(3)
+
+      .v-slider__track-container
+        opacity: 0
+
+  &:not(.v-color-picker__preview--hide-alpha)
+    .v-color-picker__hue
+      margin-bottom: 24px

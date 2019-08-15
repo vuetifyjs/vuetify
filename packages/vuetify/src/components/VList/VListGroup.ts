@@ -1,12 +1,20 @@
+// Styles
+import './VListGroup.sass'
+
 // Components
 import VIcon from '../VIcon'
 import VList from './VList'
+import VListItem from './VListItem'
+import VListItemIcon from './VListItemIcon'
 
 // Mixins
 import Bootable from '../../mixins/bootable'
+import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
-import { Registrable, inject as RegistrableInject } from '../../mixins/registrable'
-import { Route } from 'vue-router'
+import { inject as RegistrableInject } from '../../mixins/registrable'
+
+// Directives
+import ripple from '../../directives/ripple'
 
 // Transitions
 import { VExpandTransition } from '../transitions'
@@ -15,95 +23,78 @@ import { VExpandTransition } from '../transitions'
 import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
-import Vue, { VNode } from 'vue'
+import { VNode } from 'vue'
+import { Route } from 'vue-router'
+
+const baseMixins = mixins(
+  Bootable,
+  Colorable,
+  RegistrableInject('list'),
+  Toggleable
+)
 
 type VListInstance = InstanceType<typeof VList>
 
-interface options extends Vue {
+interface options extends ExtractVue<typeof baseMixins> {
   list: VListInstance
-  listClick: Function
+  $refs: {
+    group: HTMLElement
+  }
   $route: Route
 }
 
-export default mixins<options &
-/* eslint-disable indent */
-  ExtractVue<[
-    typeof Bootable,
-    typeof Toggleable,
-    Registrable<'list'>
-  ]>
-/* eslint-enable indent */
->(
-  Bootable,
-  RegistrableInject('list', 'v-list-group', 'v-list'),
-  Toggleable
-  /* @vue/component */
-).extend({
+export default baseMixins.extend<options>().extend({
   name: 'v-list-group',
 
-  inject: ['listClick'],
+  directives: { ripple },
 
   props: {
     activeClass: {
       type: String,
-      default: 'primary--text'
+      default: '',
     },
     appendIcon: {
       type: String,
-      default: '$vuetify.icons.expand'
+      default: '$vuetify.icons.expand',
+    },
+    color: {
+      type: String,
+      default: 'primary',
     },
     disabled: Boolean,
     group: String,
     noAction: Boolean,
     prependIcon: String,
-    subGroup: Boolean
+    ripple: {
+      type: [Boolean, Object],
+      default: true,
+    },
+    subGroup: Boolean,
   },
 
-  data: () => ({
-    groups: []
-  }),
-
   computed: {
-    groupClasses (): object {
+    classes (): object {
       return {
-        'v-list__group--active': this.isActive,
-        'v-list__group--disabled': this.disabled
+        'v-list-group--active': this.isActive,
+        'v-list-group--disabled': this.disabled,
+        'v-list-group--no-action': this.noAction,
+        'v-list-group--sub-group': this.subGroup,
       }
     },
-    headerClasses (): object {
-      return {
-        'v-list__group__header--active': this.isActive,
-        'v-list__group__header--sub-group': this.subGroup
-      }
-    },
-    itemsClasses (): object {
-      return {
-        'v-list__group__items--no-action': this.noAction
-      }
-    }
   },
 
   watch: {
-    isActive (val) {
+    isActive (val: boolean) {
+      /* istanbul ignore else */
       if (!this.subGroup && val) {
-        this.listClick(this._uid)
+        this.list && this.list.listClick(this._uid)
       }
     },
-    $route (to) {
-      const isActive = this.matchRoute(to.path)
-
-      if (this.group) {
-        if (isActive && this.isActive !== isActive) {
-          this.listClick(this._uid)
-        }
-
-        this.isActive = isActive
-      }
-    }
+    $route: 'onRouteChange',
   },
 
-  mounted () {
-    this.list.register(this)
+  created () {
+    this.list && this.list.register(this)
 
     if (this.group &&
       this.$route &&
@@ -114,58 +105,71 @@ export default mixins<options &
   },
 
   beforeDestroy () {
-    this.list.unregister(this._uid)
+    this.list && this.list.unregister(this)
   },
 
   methods: {
     click (e: Event) {
       if (this.disabled) return
 
-      this.$emit('click', e)
+      this.isBooted = true
 
-      this.isActive = !this.isActive
+      this.$emit('click', e)
+      this.$nextTick(() => (this.isActive = !this.isActive))
     },
     genIcon (icon: string | false): VNode {
       return this.$createElement(VIcon, icon)
     },
-    genAppendIcon () {
+    genAppendIcon (): VNode | null {
       const icon = !this.subGroup ? this.appendIcon : false
 
       if (!icon && !this.$slots.appendIcon) return null
 
-      return this.$createElement('div', {
-        staticClass: 'v-list__group__header__append-icon'
+      return this.$createElement(VListItemIcon, {
+        staticClass: 'v-list-group__header__append-icon',
       }, [
-        this.$slots.appendIcon || this.genIcon(icon)
+        this.$slots.appendIcon || this.genIcon(icon),
       ])
     },
-    genGroup () {
-      return this.$createElement('div', {
-        staticClass: 'v-list__group__header',
-        class: this.headerClasses,
+    genHeader (): VNode {
+      return this.$createElement(VListItem, {
+        staticClass: 'v-list-group__header',
+        attrs: {
+          'aria-expanded': String(this.isActive),
+          role: 'button',
+        },
+        class: {
+          [this.activeClass]: this.isActive,
+        },
+        props: {
+          inputValue: this.isActive,
+        },
+        directives: [{
+          name: 'ripple',
+          value: this.ripple,
+        }],
         on: {
           ...this.$listeners,
-          click: this.click
+          click: this.click,
         },
-        ref: 'item'
       }, [
         this.genPrependIcon(),
         this.$slots.activator,
-        this.genAppendIcon()
+        this.genAppendIcon(),
       ])
     },
-    genItems () {
+    genItems (): VNode {
       return this.$createElement('div', {
-        staticClass: 'v-list__group__items',
-        class: this.itemsClasses,
+        staticClass: 'v-list-group__items',
         directives: [{
           name: 'show',
-          value: this.isActive
+          value: this.isActive,
         }],
-        ref: 'group'
-      }, this.showLazyContent(this.$slots.default))
+      }, this.showLazyContent([
+        this.$createElement('div', this.$slots.default),
+      ]))
     },
-    genPrependIcon () {
+    genPrependIcon (): VNode | null {
       const icon = this.prependIcon
         ? this.prependIcon
         : this.subGroup
@@ -174,31 +178,43 @@ export default mixins<options &
 
       if (!icon && !this.$slots.prependIcon) return null
 
-      return this.$createElement('div', {
-        staticClass: 'v-list__group__header__prepend-icon',
-        'class': {
-          [this.activeClass]: this.isActive
-        }
+      return this.$createElement(VListItemIcon, {
+        staticClass: 'v-list-group__header__prepend-icon',
       }, [
-        this.$slots.prependIcon || this.genIcon(icon)
+        this.$slots.prependIcon || this.genIcon(icon),
       ])
     },
+    onRouteChange (to: Route) {
+      /* istanbul ignore if */
+      if (!this.group) return
+
+      const isActive = this.matchRoute(to.path)
+
+      /* istanbul ignore else */
+      if (isActive && this.isActive !== isActive) {
+        this.list && this.list.listClick(this._uid)
+      }
+
+      this.isActive = isActive
+    },
     toggle (uid: number) {
-      this.isActive = this._uid === uid
+      const isActive = this._uid === uid
+
+      if (isActive) this.isBooted = true
+      this.$nextTick(() => (this.isActive = isActive))
     },
     matchRoute (to: string) {
-      if (!this.group) return false
       return to.match(this.group) !== null
-    }
+    },
   },
 
   render (h): VNode {
-    return h('div', {
-      staticClass: 'v-list__group',
-      class: this.groupClasses
-    }, [
-      this.genGroup(),
-      h(VExpandTransition, [this.genItems()])
+    return h('div', this.setTextColor(this.isActive && this.color, {
+      staticClass: 'v-list-group',
+      class: this.classes,
+    }), [
+      this.genHeader(),
+      h(VExpandTransition, [this.genItems()]),
     ])
-  }
+  },
 })

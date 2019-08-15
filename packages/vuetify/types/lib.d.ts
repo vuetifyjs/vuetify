@@ -14,10 +14,14 @@ declare module 'vuetify/lib' {
   }
   const VAlert: Component
   const VApp: Component
+  const VAppBar: Component
+  const VAppBarNavIcon: Component
   const VAutocomplete: Component
   const VAvatar: Component
   const VBadge: Component
+  const VBanner: Component
   const VBottomNav: Component
+  const VBottomNavigation: Component
   const VBottomSheet: Component
   const VBottomSheetTransition: Component
   const VBreadcrumbs: Component
@@ -25,6 +29,10 @@ declare module 'vuetify/lib' {
   const VBreadcrumbsItem: Component
   const VBtn: Component
   const VBtnToggle: Component
+  const VCalendar: Component
+  const VCalendarDaily: Component
+  const VCalendarMonthly: Component
+  const VCalendarWeekly: Component
   const VCard: Component
   const VCardActions: Component
   const VCardMedia: Component
@@ -36,12 +44,20 @@ declare module 'vuetify/lib' {
   const VCarouselTransition: Component
   const VCheckbox: Component
   const VChip: Component
+  const VChipGroup: Component
+  const VColorPicker: Component
+  const VColorPickerCanvas: Component
+  const VColorPickerPreview: Component
+  const VColorPickerSwatches: Component
   const VCombobox: Component
   const VContainer: Component
   const VContent: Component
   const VCounter: Component
+  const VData: Component
+  const VDataFooter: Component
   const VDataIterator: Component
   const VDataTable: Component
+  const VDataTableHeader: Component
   const VDatePicker: Component
   const VDatePickerDateTable: Component
   const VDatePickerHeader: Component
@@ -56,8 +72,11 @@ declare module 'vuetify/lib' {
   const VExpandTransition: Component
   const VExpansionPanel: Component
   const VExpansionPanelContent: Component
+  const VExpansionPanelHeader: Component
+  const VExpansionPanels: Component
   const VFabTransition: Component
   const VFadeTransition: Component
+  const VFileInput: Component
   const VFlex: Component
   const VFooter: Component
   const VForm: Component
@@ -67,23 +86,26 @@ declare module 'vuetify/lib' {
   const VInput: Component
   const VItem: Component
   const VItemGroup: Component
-  const VJumbotron: Component
   const VLabel: Component
   const VLayout: Component
   const VList: Component
   const VListGroup: Component
-  const VListTile: Component
-  const VListTileAction: Component
-  const VListTileActionText: Component
-  const VListTileAvatar: Component
-  const VListTileContent: Component
-  const VListTileSubTitle: Component
-  const VListTileTitle: Component
+  const VListItem: Component
+  const VListItemAction: Component
+  const VListItemActionText: Component
+  const VListItemAvatar: Component
+  const VListItemContent: Component
+  const VListItemGroup: Component
+  const VListItemIcon: Component
+  const VListItemSubtitle: Component
+  const VListItemTitle: Component
   const VMenu: Component
   const VMenuTransition: Component
   const VMessages: Component
+  const VMobileRow: Component
   const VNavigationDrawer: Component
   const VOverflowBtn: Component
+  const VOverlay: Component
   const VPagination: Component
   const VParallax: Component
   const VPicker: Component
@@ -94,13 +116,19 @@ declare module 'vuetify/lib' {
   const VRangeSlider: Component
   const VRating: Component
   const VResponsive: Component
-  const VRowExpandTransition: Component
+  const VRow: Component
+  const VRowGroup: Component
   const VScaleTransition: Component
   const VScrollXReverseTransition: Component
   const VScrollXTransition: Component
   const VScrollYReverseTransition: Component
   const VScrollYTransition: Component
   const VSelect: Component
+  const VSheet: Component
+  const VSimpleCheckbox: Component
+  const VSimpleTable: Component
+  const VSlideGroup: Component
+  const VSlideItem: Component
   const VSlideXReverseTransition: Component
   const VSlideXTransition: Component
   const VSlideYReverseTransition: Component
@@ -134,11 +162,11 @@ declare module 'vuetify/lib' {
   const VTimelineItem: Component
   const VToolbar: Component
   const VToolbarItems: Component
-  const VToolbarSideIcon: Component
   const VToolbarTitle: Component
   const VTooltip: Component
   const VTreeview: Component
   const VTreeviewNode: Component
+  const VVirtualTable: Component
   const VWindow: Component
   const VWindowItem: Component
 
@@ -148,10 +176,14 @@ declare module 'vuetify/lib' {
     directives,
     VAlert,
     VApp,
+    VAppBar,
+    VAppBarNavIcon,
     VAutocomplete,
     VAvatar,
     VBadge,
+    VBanner,
     VBottomNav,
+    VBottomNavigation,
     VBottomSheet,
     VBottomSheetTransition,
     VBreadcrumbs,
@@ -159,6 +191,10 @@ declare module 'vuetify/lib' {
     VBreadcrumbsItem,
     VBtn,
     VBtnToggle,
+    VCalendar,
+    VCalendarDaily,
+    VCalendarMonthly,
+    VCalendarWeekly,
     VCard,
     VCardActions,
     VCardMedia,
@@ -170,12 +206,20 @@ declare module 'vuetify/lib' {
     VCarouselTransition,
     VCheckbox,
     VChip,
+    VChipGroup,
+    VColorPicker,
+    VColorPickerCanvas,
+    VColorPickerPreview,
+    VColorPickerSwatches,
     VCombobox,
     VContainer,
     VContent,
     VCounter,
+    VData,
+    VDataFooter,
     VDataIterator,
     VDataTable,
+    VDataTableHeader,
     VDatePicker,
     VDatePickerDateTable,
     VDatePickerHeader,
@@ -190,8 +234,11 @@ declare module 'vuetify/lib' {
     VExpandTransition,
     VExpansionPanel,
     VExpansionPanelContent,
+    VExpansionPanelHeader,
+    VExpansionPanels,
     VFabTransition,
     VFadeTransition,
+    VFileInput,
     VFlex,
     VFooter,
     VForm,
@@ -201,23 +248,26 @@ declare module 'vuetify/lib' {
     VInput,
     VItem,
     VItemGroup,
-    VJumbotron,
     VLabel,
     VLayout,
     VList,
     VListGroup,
-    VListTile,
-    VListTileAction,
-    VListTileActionText,
-    VListTileAvatar,
-    VListTileContent,
-    VListTileSubTitle,
-    VListTileTitle,
+    VListItem,
+    VListItemAction,
+    VListItemActionText,
+    VListItemAvatar,
+    VListItemContent,
+    VListItemGroup,
+    VListItemIcon,
+    VListItemSubtitle,
+    VListItemTitle,
     VMenu,
     VMenuTransition,
     VMessages,
+    VMobileRow,
     VNavigationDrawer,
     VOverflowBtn,
+    VOverlay,
     VPagination,
     VParallax,
     VPicker,
@@ -228,13 +278,19 @@ declare module 'vuetify/lib' {
     VRangeSlider,
     VRating,
     VResponsive,
-    VRowExpandTransition,
+    VRow,
+    VRowGroup,
     VScaleTransition,
     VScrollXReverseTransition,
     VScrollXTransition,
     VScrollYReverseTransition,
     VScrollYTransition,
     VSelect,
+    VSheet,
+    VSimpleCheckbox,
+    VSimpleTable,
+    VSlideGroup,
+    VSlideItem,
     VSlideXReverseTransition,
     VSlideXTransition,
     VSlideYReverseTransition,
@@ -268,11 +324,11 @@ declare module 'vuetify/lib' {
     VTimelineItem,
     VToolbar,
     VToolbarItems,
-    VToolbarSideIcon,
     VToolbarTitle,
     VTooltip,
     VTreeview,
     VTreeviewNode,
+    VVirtualTable,
     VWindow,
     VWindowItem
   }

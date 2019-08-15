@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VCard",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/cards.html"
+  },
   "children": [
     {
       "type": "section",
@@ -8,6 +13,14 @@
         {
           "type": "usage",
           "value": "usage"
+        },
+        {
+          "type": "heading",
+          "lang": "componentsHeader"
+        },
+        {
+          "type": "text",
+          "lang": "componentsList"
         }
       ]
     },
@@ -15,16 +28,10 @@
       "type": "section",
       "children": [
         {
-          "type": "alert",
-          "lang": "cardMediaWarning",
-          "value": "warning"
-        },
-        {
           "type": "api",
           "value": [
             "v-card",
             "v-card-actions",
-            "v-card-media",
             "v-card-text",
             "v-card-title"
           ]
@@ -35,13 +42,28 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "mediaWithText",
-            "horizontal",
-            "grids",
-            "customActions",
-            "twitterCard"
+            "simple/outlined",
+            "intermediate/intermediate",
+            "intermediate/info-card",
+            "intermediate/media-with-text",
+            "intermediate/grids",
+            "complex/horizontal",
+            "complex/custom-actions",
+            "complex/twitter-card",
+            "complex/loading",
+            "complex/weather",
+            "complex/advanced"
           ]
         }
       ]
@@ -54,7 +76,7 @@
           "value": [
             "components/buttons",
             "components/images",
-            "framework/typography"
+            "styles/typography"
           ]
         }
       ]

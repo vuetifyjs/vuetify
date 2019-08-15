@@ -1,0 +1,109 @@
+@import '../../styles/styles.sass'
+@import './_variables.sass'
+
+// Theme
++theme(v-input--switch) using ($material)
+  .v-input--switch__thumb
+    color: map-deep-get($material, 'selection-controls', 'thumb', 'inactive')
+
+  .v-input--switch__track
+    color: map-deep-get($material, 'selection-controls', 'track', 'inactive')
+
+  &.v-input--is-disabled:not(.v-input--is-dirty)
+    .v-input--switch__thumb
+      color: map-deep-get($material, 'selection-controls', 'thumb', 'disabled') !important
+
+    .v-input--switch__track
+      color: map-deep-get($material, 'selection-controls', 'track', 'disabled') !important
+
+.v-input--switch
+  &__track,
+  &__thumb
+    background-color: currentColor
+    pointer-events: none
+    transition: inherit
+
+  &__track
+    border-radius: $switch-track-border-radius
+    width: $switch-track-width
+    height: $switch-track-height
+    left: $switch-track-x
+    position: absolute
+    opacity: $switch-track-opacity
+    right: $switch-track-x
+    top: $switch-track-top
+
+  &__thumb
+    border-radius: 50%
+    top: $switch-thumb-top
+    height: $switch-thumb-height
+    position: relative
+    width: $switch-thumb-width
+    display: flex
+    justify-content: center
+    align-items: center
+    transition: $primary-transition
+
+  .v-input--selection-controls__input
+    width: 38px
+
+  .v-input--selection-controls__ripple
+    top: $switch-ripple-top
+
+  &.v-input--is-dirty
+    &.v-input--is-disabled
+      opacity: $switch-disabled-opacity
+
+  +ltr()
+    .v-input--selection-controls__ripple
+      left: $switch-ripple-x
+
+    &.v-input--is-dirty
+      .v-input--selection-controls__ripple,
+      .v-input--switch__thumb
+        transform: translate($switch-dirty-offset-x, 0)
+
+  +rtl()
+    .v-input--selection-controls__ripple
+      right: $switch-ripple-x
+
+    &.v-input--is-dirty
+      .v-input--selection-controls__ripple,
+      .v-input--switch__thumb
+        transform: translate(-$switch-dirty-offset-x, 0)
+
+  &:not(&--flat):not(&--inset)
+    .v-input--switch__thumb
+      +elevation($switch-thumb-elevation)
+
+  &--inset
+    .v-input--switch__track,
+    .v-input--selection-controls__input
+      width: 48px
+
+    .v-input--switch__track
+      border-radius: 14px
+      height: 28px
+      left: -4px
+      opacity: .32
+      top: calc(50% - 14px)
+
+    +ltr()
+      .v-input--selection-controls__ripple,
+      .v-input--switch__thumb
+        transform: translate(0, 0) !important
+
+      &.v-input--is-dirty
+        .v-input--selection-controls__ripple,
+        .v-input--switch__thumb
+          transform: translate(20px, 0) !important
+
+    +rtl()
+      .v-input--selection-controls__ripple,
+      .v-input--switch__thumb
+        transform: translate(-6px, 0) !important
+
+      &.v-input--is-dirty
+        .v-input--selection-controls__ripple,
+        .v-input--switch__thumb
+          transform: translate(-26px, 0) !important

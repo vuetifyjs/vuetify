@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VDivider should render component and match snapshot 1`] = `
+<hr role="separator"
+    aria-orientation="horizontal"
+    class="v-divider theme--light"
+>
+`;

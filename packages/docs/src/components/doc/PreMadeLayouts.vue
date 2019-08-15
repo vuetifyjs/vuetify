@@ -4,86 +4,96 @@
     grid-list-xl
     pa-0
   >
-    <v-layout wrap>
+    <v-layout
+      align-center
+      fill-height
+      justify-center
+      wrap
+    >
       <v-flex
-        v-for="layout in layouts"
-        :key="layout.name"
+        v-for="(layout, i) in layouts"
+        :key="i"
         xs12
-        sm4
+        sm6
+        md4
       >
-        <v-hover>
-          <v-card slot-scope="{ hover }">
-            <v-img
-              :src="genSrc(layout.name)"
-              :aspect-ratio="16/9"
-              width="100%"
-            />
-            <v-sheet
-              :color="hover ? 'rgba(0, 0, 0, 0.52)' : 'transparent'"
-              class="transition-swing"
-              dark
-              style="position: absolute; top: 0; left: 0; right: 0; bottom: 0;"
-              height="100%"
-              width="100%"
-            >
-              <v-layout
-                v-if="hover"
-                layout
-                align-center
-                justify-center
-                fill-height
-                ma-0
+        <v-card>
+          <v-img
+            :alt="layout.name"
+            :src="genSrc(layout.name)"
+            :aspect-ratio="16/9"
+            width="100%"
+          >
+            <v-fade-transition>
+              <v-overlay
+                absolute
+                opacity="0.7"
+                class="text-center"
               >
-                <a
-                  :href="`https://github.com/vuetifyjs/vuetify/tree/master/packages/docs/src${layout.href}.vue`"
-                  class="text-decoration-none mx-2"
-                  target="_blank"
-                  rel="noopener"
-                  title="Source code"
-                >
-                  <v-icon>mdi-code-tags</v-icon>
-                </a>
-                <a
+                <h2
+                  class="title mb-6"
+                  v-text="layout.name"
+                />
+                <v-btn
+                  :aria-label="`Link to layout for ${layout.name}`"
                   :href="layout.href"
-                  class="text-decoration-none mx-2"
+                  :title="`Link to layout for ${layout.name}`"
+                  class="mx-2"
+                  color="indigo"
+                  depressed
+                  fab
+                  small
                   target="_blank"
-                  rel="noopener"
-                  title="Demo"
                 >
                   <v-icon>mdi-open-in-new</v-icon>
-                </a>
-              </v-layout>
-            </v-sheet>
-          </v-card>
-        </v-hover>
-        <div
-          class="text-xs-center caption"
-          v-text="layout.name"
-        />
+                </v-btn>
+                <v-btn
+                  :aria-label="`Link to layout ${layout.name}`"
+                  :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/docs/src${layout.href}.vue`"
+                  :title="`Link to code for ${layout.name}`"
+                  class="mx-2"
+                  color="indigo"
+                  depressed
+                  fab
+                  small
+                  target="_blank"
+                >
+                  <v-icon>mdi-code-tags</v-icon>
+                </v-btn>
+              </v-overlay>
+            </v-fade-transition>
+          </v-img>
+        </v-card>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
+  import { getBranch } from '@/util/helpers'
+
   export default {
     data: () => ({
+      branch: null,
       layouts: [
         { name: 'Baseline', href: '/examples/layouts/baseline' },
-        { name: 'Baseline Flipped', href: '/examples/layouts/baselineFlipped' },
+        { name: 'Baseline Flipped', href: '/examples/layouts/baseline-flipped' },
         { name: 'Centered', href: '/examples/layouts/centered' },
         { name: 'Complex', href: '/examples/layouts/complex' },
         { name: 'Dark', href: '/examples/layouts/dark' },
-        { name: 'Google Contacts', href: '/examples/layouts/googleContacts' },
-        { name: 'Google Keep', href: '/examples/layouts/googleKeep' },
-        { name: 'Google Youtube', href: '/examples/layouts/googleYoutube' },
-        { name: 'Sandbox', href: '/examples/layouts/sandbox' }
-      ]
+        { name: 'Google Contacts', href: '/examples/layouts/google-contacts' },
+        { name: 'Google Keep', href: '/examples/layouts/google-keep' },
+        { name: 'Google Youtube', href: '/examples/layouts/google-youtube' },
+        { name: 'Sandbox', href: '/examples/layouts/sandbox' },
+      ],
     }),
+    mounted () {
+      this.branch = getBranch()
+    },
     methods: {
       genSrc (name) {
         return `https://cdn.vuetifyjs.com/images/layouts/${name.toLowerCase().replace(' ', '-')}.png`
-      }
-    }
+      },
+    },
   }
 </script>

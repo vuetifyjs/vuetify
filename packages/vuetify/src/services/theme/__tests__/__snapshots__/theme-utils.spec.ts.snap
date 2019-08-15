@@ -1,0 +1,231 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`theme-utilities.ts should generate css vars 1`] = `
+":root {
+  --v-anchor-base: #c42742;
+  --v-primary-base: #c42742;
+  --v-primary-lighten5: #2c0447;
+  --v-primary-lighten4: #cfa854;
+  --v-primary-lighten3: #dd88cc;
+  --v-primary-lighten2: #b49921;
+  --v-primary-lighten1: #f899c7;
+  --v-primary-darken1: #0169dc;
+  --v-primary-darken2: #c28fd0;
+  --v-primary-darken3: #fbe002;
+  --v-primary-darken4: #33303a;
+}
+
+.v-application a { color: var(--v-anchor-base); }
+.v-application .primary {
+  background-color: var(--v-primary-base) !important;
+  border-color: var(--v-primary-base) !important;
+}
+.v-application .primary--text {
+  color: var(--v-primary-base) !important;
+  caret-color: var(--v-primary-base) !important;
+}
+.v-application .primary.lighten-5 {
+  background-color: var(--v-primary-lighten5) !important;
+  border-color: var(--v-primary-lighten5) !important;
+}
+.v-application .primary--text.text--lighten-5 {
+  color: var(--v-primary-lighten5) !important;
+  caret-color: var(--v-primary-lighten5) !important;
+}
+.v-application .primary.lighten-4 {
+  background-color: var(--v-primary-lighten4) !important;
+  border-color: var(--v-primary-lighten4) !important;
+}
+.v-application .primary--text.text--lighten-4 {
+  color: var(--v-primary-lighten4) !important;
+  caret-color: var(--v-primary-lighten4) !important;
+}
+.v-application .primary.lighten-3 {
+  background-color: var(--v-primary-lighten3) !important;
+  border-color: var(--v-primary-lighten3) !important;
+}
+.v-application .primary--text.text--lighten-3 {
+  color: var(--v-primary-lighten3) !important;
+  caret-color: var(--v-primary-lighten3) !important;
+}
+.v-application .primary.lighten-2 {
+  background-color: var(--v-primary-lighten2) !important;
+  border-color: var(--v-primary-lighten2) !important;
+}
+.v-application .primary--text.text--lighten-2 {
+  color: var(--v-primary-lighten2) !important;
+  caret-color: var(--v-primary-lighten2) !important;
+}
+.v-application .primary.lighten-1 {
+  background-color: var(--v-primary-lighten1) !important;
+  border-color: var(--v-primary-lighten1) !important;
+}
+.v-application .primary--text.text--lighten-1 {
+  color: var(--v-primary-lighten1) !important;
+  caret-color: var(--v-primary-lighten1) !important;
+}
+.v-application .primary.darken-1 {
+  background-color: var(--v-primary-darken1) !important;
+  border-color: var(--v-primary-darken1) !important;
+}
+.v-application .primary--text.text--darken-1 {
+  color: var(--v-primary-darken1) !important;
+  caret-color: var(--v-primary-darken1) !important;
+}
+.v-application .primary.darken-2 {
+  background-color: var(--v-primary-darken2) !important;
+  border-color: var(--v-primary-darken2) !important;
+}
+.v-application .primary--text.text--darken-2 {
+  color: var(--v-primary-darken2) !important;
+  caret-color: var(--v-primary-darken2) !important;
+}
+.v-application .primary.darken-3 {
+  background-color: var(--v-primary-darken3) !important;
+  border-color: var(--v-primary-darken3) !important;
+}
+.v-application .primary--text.text--darken-3 {
+  color: var(--v-primary-darken3) !important;
+  caret-color: var(--v-primary-darken3) !important;
+}
+.v-application .primary.darken-4 {
+  background-color: var(--v-primary-darken4) !important;
+  border-color: var(--v-primary-darken4) !important;
+}
+.v-application .primary--text.text--darken-4 {
+  color: var(--v-primary-darken4) !important;
+  caret-color: var(--v-primary-darken4) !important;
+}"
+`;
+
+exports[`theme-utilities.ts should generate styles 1`] = `
+".v-application a { color: #c42742; }
+.v-application .primary {
+  background-color: #c42742 !important;
+  border-color: #c42742 !important;
+}
+.v-application .primary--text {
+  color: #c42742 !important;
+  caret-color: #c42742 !important;
+}
+.v-application .primary.lighten-5 {
+  background-color: #2c0447 !important;
+  border-color: #2c0447 !important;
+}
+.v-application .primary--text.text--lighten-5 {
+  color: #2c0447 !important;
+  caret-color: #2c0447 !important;
+}
+.v-application .primary.lighten-4 {
+  background-color: #cfa854 !important;
+  border-color: #cfa854 !important;
+}
+.v-application .primary--text.text--lighten-4 {
+  color: #cfa854 !important;
+  caret-color: #cfa854 !important;
+}
+.v-application .primary.lighten-3 {
+  background-color: #dd88cc !important;
+  border-color: #dd88cc !important;
+}
+.v-application .primary--text.text--lighten-3 {
+  color: #dd88cc !important;
+  caret-color: #dd88cc !important;
+}
+.v-application .primary.lighten-2 {
+  background-color: #b49921 !important;
+  border-color: #b49921 !important;
+}
+.v-application .primary--text.text--lighten-2 {
+  color: #b49921 !important;
+  caret-color: #b49921 !important;
+}
+.v-application .primary.lighten-1 {
+  background-color: #f899c7 !important;
+  border-color: #f899c7 !important;
+}
+.v-application .primary--text.text--lighten-1 {
+  color: #f899c7 !important;
+  caret-color: #f899c7 !important;
+}
+.v-application .primary.darken-1 {
+  background-color: #0169dc !important;
+  border-color: #0169dc !important;
+}
+.v-application .primary--text.text--darken-1 {
+  color: #0169dc !important;
+  caret-color: #0169dc !important;
+}
+.v-application .primary.darken-2 {
+  background-color: #c28fd0 !important;
+  border-color: #c28fd0 !important;
+}
+.v-application .primary--text.text--darken-2 {
+  color: #c28fd0 !important;
+  caret-color: #c28fd0 !important;
+}
+.v-application .primary.darken-3 {
+  background-color: #fbe002 !important;
+  border-color: #fbe002 !important;
+}
+.v-application .primary--text.text--darken-3 {
+  color: #fbe002 !important;
+  caret-color: #fbe002 !important;
+}
+.v-application .primary.darken-4 {
+  background-color: #33303a !important;
+  border-color: #33303a !important;
+}
+.v-application .primary--text.text--darken-4 {
+  color: #33303a !important;
+  caret-color: #33303a !important;
+}"
+`;
+
+exports[`theme-utilities.ts should parse a theme or theme item 1`] = `
+Object {
+  "anchor": "#000000",
+  "primary": Object {
+    "base": "#000000",
+    "darken1": "#000000",
+    "darken2": "#000000",
+    "darken3": "#000000",
+    "darken4": "#000000",
+    "lighten1": "#1b1b1b",
+    "lighten2": "#303030",
+    "lighten3": "#474747",
+    "lighten4": "#5e5e5e",
+    "lighten5": "#777777",
+  },
+  "secondary": Object {
+    "base": "#ffffff",
+    "darken1": "#e2e2e2",
+    "darken2": "#c6c6c6",
+    "darken3": "#ababab",
+    "darken4": "#919191",
+    "lighten1": "#ffffff",
+    "lighten2": "#ffffff",
+    "lighten3": "#ffffff",
+    "lighten4": "#ffffff",
+    "lighten5": "#ffffff",
+  },
+}
+`;
+
+exports[`theme-utilities.ts should parse a theme or theme item 2`] = `
+Object {
+  "anchor": "#c42742",
+  "primary": Object {
+    "base": "#c42742",
+    "darken1": "#0169dc",
+    "darken2": "#c28fd0",
+    "darken3": "#fbe002",
+    "darken4": "#33303a",
+    "lighten1": "#f899c7",
+    "lighten2": "#b49921",
+    "lighten3": "#dd88cc",
+    "lighten4": "#cfa854",
+    "lighten5": "#2c0447",
+  },
+}
+`;

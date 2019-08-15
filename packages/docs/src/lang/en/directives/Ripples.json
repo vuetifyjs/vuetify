@@ -6,7 +6,7 @@
       "desc": "Basic ripple functionality can be enabled just by using `v-ripple` directive on a component or an HTML element",
       "uninverted": true
     },
-    "customColor": {
+    "custom-color": {
       "header": "### Custom color",
       "desc": "Using a helper class, you can change the color of the ripple.",
       "uninverted": true
@@ -16,7 +16,7 @@
       "desc": "When a `center` option is used ripple will always originate from the center of the target.",
       "uninverted": true
     },
-    "rippleInComponents": {
+    "ripple-in-components": {
       "header": "### Ripple in components",
       "desc": "Some components provide the `ripple` prop that allows you to controll the ripple effect. You can turn it off or customize the behaviour by using `class` or `center` options.",
       "uninverted": true

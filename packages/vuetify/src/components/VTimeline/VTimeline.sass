@@ -1,0 +1,161 @@
+// Imports
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+@import './_mixins.sass'
+
+// Theme
++theme(v-timeline) using ($material)
+  &::before
+    background: map-get($material, 'dividers')
+
+  .v-timeline-item
+    &__dot
+      background: map-get($material, 'cards')
+
+    .v-card
+      &::before
+        border-right-color: $shadow-key-ambient-opacity
+
+// Elements
+.v-timeline
+  padding-top: $timeline-item-padding
+  position: relative
+
+  &:before
+    bottom: 0
+    content: ''
+    height: 100%
+    position: absolute
+    top: 0
+    width: $timeline-line-width
+
+.v-timeline-item
+  display: flex
+  padding-bottom: $timeline-item-padding
+
+.v-timeline-item__body
+  position: relative
+  height: 100%
+  flex: 1 1 auto
+
+.v-timeline-item__divider
+  position: relative
+  min-width: $timeline-divider-width
+  display: flex
+  align-items: center
+  justify-content: center
+
+.v-timeline-item__dot
+  z-index: 2
+  border-radius: 50%
+  +elevation(1)
+  +timeline-dots($timeline-dot-regular-size, $timeline-inner-dot-regular-size)
+
+  &--small
+    +timeline-dots($timeline-dot-small-size, $timeline-inner-dot-small-size)
+
+  &--large
+    +timeline-dots($timeline-dot-large-size, $timeline-inner-dot-large-size)
+
+.v-timeline-item__inner-dot
+  border-radius: 50%
+  display: flex
+  justify-content: center
+  align-items: center
+
+.v-timeline-item__opposite
+  flex: 1 1 auto
+  align-self: center
+  max-width: calc(#{$timeline-divider-center} - #{$timeline-divider-width / 2})
+
+// Before/after directions
+.v-timeline:not(.v-timeline--dense):not(.v-timeline--reverse)
+  .v-timeline-item
+    &:nth-child(odd):not(.v-timeline-item--before), &--after
+      +timeline-item-align(left)
+      +timeline-wedge-align(left)
+      .v-timeline-item__body
+        max-width: calc(#{100% - $timeline-divider-center} - #{$timeline-divider-width / 2})
+
+    &:nth-child(even):not(.v-timeline-item--after), &--before
+      +timeline-item-align(right)
+      +timeline-wedge-align(right)
+      .v-timeline-item__body
+        max-width: calc(#{$timeline-divider-center} - #{$timeline-divider-width / 2})
+
+// Wedge
+.v-timeline-item__body
+  > .v-card:not(.v-card--flat)
+    &:before, &:after
+      content: ''
+      position: absolute
+      border-top: $timeline-wedge-size solid transparent
+      border-bottom: $timeline-wedge-size solid transparent
+      border-right: $timeline-wedge-size solid black
+      top: calc(50% - #{$timeline-wedge-size})
+
+    &:after
+      border-right-color: inherit
+
+    &:before
+      top: calc(50% - #{$timeline-wedge-size} + 2px)
+
+// Modifiers
+.v-timeline--align-top
+  .v-timeline-item__dot
+    align-self: start
+
+  .v-timeline-item__body
+    > .v-card
+      &:before
+        top: calc(0% + #{$timeline-wedge-size} + 2px)
+
+      &:after
+        top: calc(0% + #{$timeline-wedge-size})
+
+.v-timeline:not(.v-timeline--dense):not(.v-timeline--reverse)
+  +timeline-line-align($timeline-divider-center, left, right)
+
+.v-timeline--reverse:not(.v-timeline--dense)
+  +timeline-line-align($timeline-divider-center, right, left)
+
+  .v-timeline-item
+    &:nth-child(odd):not(.v-timeline-item--after), &--before
+      +timeline-item-align(right)
+      +timeline-wedge-align(right)
+      .v-timeline-item__body
+        max-width: calc(#{100% - $timeline-divider-center} - #{$timeline-divider-width / 2})
+
+    &:nth-child(even):not(.v-timeline-item--before), &--after
+      +timeline-item-align(left)
+      +timeline-wedge-align(left)
+      .v-timeline-item__body
+        max-width: calc(#{$timeline-divider-center} - #{$timeline-divider-width / 2})
+
+.v-timeline--reverse.v-timeline--dense
+  +timeline-line-align($timeline-divider-width / 2, right, left)
+
+.v-timeline--dense:not(.v-timeline--reverse)
+  +timeline-line-align($timeline-divider-width / 2, left, right)
+
+.v-timeline--dense
+  .v-timeline-item
+    flex-direction: row-reverse !important
+    +timeline-wedge-align(left)
+
+  .v-timeline-item__body
+    max-width: calc(100% - #{$timeline-divider-width})
+
+  .v-timeline-item__opposite
+    display: none
+
+.v-timeline--reverse.v-timeline--dense
+  .v-timeline-item
+    flex-direction: row !important
+    +timeline-wedge-align(right)
+
+.v-timeline-item--fill-dot
+  .v-timeline-item__inner-dot
+    height: inherit
+    margin: 0
+    width: inherit

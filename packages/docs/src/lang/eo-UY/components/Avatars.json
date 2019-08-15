@@ -1,17 +1,33 @@
 {
-  "header": "crwdns11164:0crwdne11164:0",
-  "headerText": "crwdns11166:0crwdne11166:0",
+  "header": "crwdns40036:0crwdne40036:0",
+  "headerText": "crwdns40038:0crwdne40038:0",
   "examples": {
     "usage": {
-      "desc": "crwdns11168:0crwdne11168:0"
+      "desc": "crwdns40040:0crwdne40040:0"
+    },
+    "size": {
+      "header": "crwdns40042:0crwdne40042:0",
+      "desc": "crwdns40044:0crwdne40044:0"
+    },
+    "tile": {
+      "header": "crwdns40046:0crwdne40046:0",
+      "desc": "crwdns40048:0crwdne40048:0"
+    },
+    "default": {
+      "header": "crwdns40050:0crwdne40050:0",
+      "desc": "crwdns40052:0crwdne40052:0"
+    },
+    "profile": {
+      "header": "crwdns40054:0crwdne40054:0",
+      "desc": "crwdns40056:0crwdne40056:0"
     },
     "advanced": {
-      "header": "crwdns11170:0crwdne11170:0",
-      "desc": "crwdns11172:0crwdne11172:0"
-    },
-    "iconAndText": {
-      "header": "crwdns11174:0crwdne11174:0",
-      "desc": "crwdns11176:0crwdne11176:0"
+      "header": "crwdns33598:0crwdne33598:0",
+      "desc": "crwdns33600:0crwdne33600:0"
     }
+  },
+  "props": {
+    "left": "crwdns40058:0[v-chip]crwdnd40058:0[v-btn]crwdne40058:0",
+    "right": "crwdns40060:0[v-chip]crwdnd40060:0[v-btn]crwdne40060:0"
   }
 }

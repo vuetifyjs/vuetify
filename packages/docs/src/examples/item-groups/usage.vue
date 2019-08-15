@@ -1,16 +1,15 @@
 <template>
   <v-item-group>
-    <v-container grid-list-md>
-      <v-layout wrap>
-        <v-flex
+    <v-container>
+      <v-row>
+        <v-col
           v-for="n in 3"
           :key="n"
-          xs12
-          md4
+          cols="12"
+          md="4"
         >
-          <v-item>
+          <v-item v-slot:default="{ active, toggle }">
             <v-card
-              slot-scope="{ active, toggle }"
               :color="active ? 'primary' : ''"
               class="d-flex align-center"
               dark
@@ -20,15 +19,15 @@
               <v-scroll-y-transition>
                 <div
                   v-if="active"
-                  class="display-3 text-xs-center"
+                  class="display-3 flex-grow-1 text-center"
                 >
                   Active
                 </div>
               </v-scroll-y-transition>
             </v-card>
           </v-item>
-        </v-flex>
-      </v-layout>
+        </v-col>
+      </v-row>
     </v-container>
   </v-item-group>
 </template>

@@ -1,39 +1,45 @@
 {
-  "header": "crwdns12404:0crwdne12404:0",
-  "headerText": "crwdns12406:0crwdne12406:0",
+  "header": "crwdns38672:0crwdne38672:0",
+  "headerText": "crwdns38674:0crwdne38674:0",
   "examples": {
     "usage": {
-      "desc": "crwdns12408:0crwdne12408:0"
+      "desc": "crwdns38676:0crwdne38676:0"
     },
-    "fontAwesome": {
-      "header": "crwdns12410:0crwdne12410:0",
-      "desc": "crwdns12412:0crwdne12412:0"
+    "font-awesome": {
+      "header": "crwdns38678:0crwdne38678:0",
+      "desc": "crwdns38680:0crwdne38680:0"
     },
-    "mdi": {
-      "header": "crwdns12414:0crwdne12414:0",
-      "desc": "crwdns12416:0crwdne12416:0"
+    "md": {
+      "header": "crwdns38682:0crwdne38682:0",
+      "desc": "crwdns38684:0crwdne38684:0"
     },
     "color": {
-      "header": "crwdns12418:0crwdne12418:0",
-      "desc": "crwdns12420:0crwdne12420:0"
+      "header": "crwdns32456:0crwdne32456:0",
+      "desc": "crwdns32458:0crwdne32458:0"
     },
     "buttons": {
-      "header": "crwdns12422:0crwdne12422:0",
-      "desc": "crwdns12424:0crwdne12424:0"
+      "header": "crwdns32460:0crwdne32460:0",
+      "desc": "crwdns32462:0crwdne32462:0"
     },
     "clickable": {
-      "header": "crwdns12426:0crwdne12426:0",
-      "desc": "crwdns12428:0crwdne12428:0"
+      "header": "crwdns32464:0crwdne32464:0",
+      "desc": "crwdns32466:0crwdne32466:0"
+    },
+    "mdi-svg": {
+      "header": "crwdns38686:0crwdne38686:0",
+      "desc": "crwdns38688:0[here]crwdne38688:0"
     }
   },
   "props": {
-    "disabled": "crwdns12430:0crwdne12430:0",
-    "large": "crwdns12432:0crwdne12432:0",
-    "left": "crwdns12434:0crwdne12434:0",
-    "medium": "crwdns12436:0crwdne12436:0",
-    "right": "crwdns12438:0crwdne12438:0",
-    "size": "crwdns12440:0crwdne12440:0",
-    "small": "crwdns12442:0crwdne12442:0",
-    "xLarge": "crwdns12444:0crwdne12444:0"
+    "dense": "crwdns38690:0crwdne38690:0",
+    "disabled": "crwdns38692:0crwdne38692:0",
+    "large": "crwdns32470:0crwdne32470:0",
+    "left": "crwdns32472:0crwdne32472:0",
+    "medium": "crwdns32474:0crwdne32474:0",
+    "right": "crwdns32476:0crwdne32476:0",
+    "size": "crwdns38694:0crwdne38694:0",
+    "small": "crwdns32480:0crwdne32480:0",
+    "tag": "crwdns38696:0crwdne38696:0",
+    "xLarge": "crwdns32482:0crwdne32482:0"
   }
 }

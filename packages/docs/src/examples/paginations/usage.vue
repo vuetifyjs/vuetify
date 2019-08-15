@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center">
+  <div class="text-center">
     <v-pagination
       v-model="page"
       :length="6"
@@ -11,8 +11,8 @@
   export default {
     data () {
       return {
-        page: 1
+        page: 1,
       }
-    }
+    },
   }
 </script>

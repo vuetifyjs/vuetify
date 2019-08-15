@@ -1,87 +1,100 @@
 {
-  "header": "crwdns12972:0crwdne12972:0",
-  "headerText": "crwdns12974:0crwdne12974:0",
+  "header": "crwdns33638:0crwdne33638:0",
+  "headerText": "crwdns33640:0crwdne33640:0",
   "examples": {
     "usage": {
-      "desc": "crwdns12976:0crwdne12976:0"
+      "desc": "crwdns33642:0crwdne33642:0"
     },
-    "checkboxesBoolean": {
-      "header": "crwdns12978:0crwdne12978:0",
-      "desc": "crwdns12980:0crwdne12980:0"
+    "checkboxes-boolean": {
+      "header": "crwdns40074:0crwdne40074:0",
+      "desc": "crwdns40076:0crwdne40076:0"
     },
-    "checkboxesArray": {
-      "header": "crwdns12982:0crwdne12982:0",
-      "desc": "crwdns12984:0crwdne12984:0"
+    "checkboxes-array": {
+      "header": "crwdns40078:0crwdne40078:0",
+      "desc": "crwdns40080:0crwdne40080:0"
     },
-    "checkboxesStates": {
-      "header": "crwdns12986:0crwdne12986:0",
-      "desc": "crwdns12988:0crwdne12988:0"
+    "checkboxes-states": {
+      "header": "crwdns40082:0crwdne40082:0",
+      "desc": "crwdns40084:0crwdne40084:0"
     },
-    "checkboxesColors": {
-      "header": "crwdns12990:0crwdne12990:0",
-      "desc": "crwdns12992:0crwdne12992:0"
+    "checkboxes-colors": {
+      "header": "crwdns40086:0crwdne40086:0",
+      "desc": "crwdns40088:0crwdne40088:0"
     },
-    "checkboxesInlineTexfield": {
-      "header": "crwdns12994:0crwdne12994:0",
-      "desc": "crwdns12996:0crwdne12996:0"
+    "checkboxes-inline-texfield": {
+      "header": "crwdns40090:0crwdne40090:0",
+      "desc": "crwdns40092:0crwdne40092:0"
     },
-    "radiosDefault": {
-      "header": "crwdns12998:0crwdne12998:0",
-      "desc": "crwdns13000:0crwdne13000:0"
+    "radios-default": {
+      "header": "crwdns40094:0crwdne40094:0",
+      "desc": "crwdns40096:0crwdne40096:0"
     },
-    "radiosDirection": {
-      "header": "crwdns13002:0crwdne13002:0",
-      "desc": "crwdns13004:0crwdne13004:0"
+    "radios-direction": {
+      "header": "crwdns40098:0crwdne40098:0",
+      "desc": "crwdns40100:0crwdne40100:0"
     },
-    "radiosColors": {
-      "header": "crwdns13006:0crwdne13006:0",
-      "desc": "crwdns13008:0crwdne13008:0"
+    "radios-colors": {
+      "header": "crwdns40102:0crwdne40102:0",
+      "desc": "crwdns40104:0crwdne40104:0"
     },
-    "switchesBoolean": {
-      "header": "crwdns13010:0crwdne13010:0",
-      "desc": "crwdns13012:0crwdne13012:0"
+    "switches-boolean": {
+      "header": "crwdns40106:0crwdne40106:0",
+      "desc": "crwdns40108:0crwdne40108:0"
     },
-    "switchesArray": {
-      "header": "crwdns13014:0crwdne13014:0",
-      "desc": "crwdns13016:0crwdne13016:0"
+    "switches-array": {
+      "header": "crwdns40110:0crwdne40110:0",
+      "desc": "crwdns40112:0crwdne40112:0"
     },
-    "switchesStates": {
-      "header": "crwdns13018:0crwdne13018:0",
-      "desc": "crwdns13020:0crwdne13020:0"
+    "switches-states": {
+      "header": "crwdns40114:0crwdne40114:0",
+      "desc": "crwdns40116:0crwdne40116:0"
     },
-    "switchesColors": {
-      "header": "crwdns13022:0crwdne13022:0",
-      "desc": "crwdns13024:0crwdne13024:0"
+    "switches-colors": {
+      "header": "crwdns40118:0crwdne40118:0",
+      "desc": "crwdns40120:0crwdne40120:0"
     },
-    "labelSlot": {
-      "header": "crwdns13026:0crwdne13026:0",
-      "desc": "crwdns13028:0crwdne13028:0"
+    "switches-flat": {
+      "header": "crwdns40122:0crwdne40122:0",
+      "desc": "crwdns40124:0crwdne40124:0"
+    },
+    "switches-inset": {
+      "header": "crwdns40126:0crwdne40126:0",
+      "desc": "crwdns40128:0crwdne40128:0"
+    },
+    "label-slot": {
+      "header": "crwdns40130:0crwdne40130:0",
+      "desc": "crwdns40132:0crwdne40132:0"
     }
   },
   "props": {
-    "column": "crwdns13030:0crwdne13030:0",
-    "mandatory": "crwdns13032:0crwdne13032:0",
-    "name": "crwdns13034:0crwdne13034:0",
-    "onIcon": "crwdns13036:0crwdne13036:0",
-    "offIcon": "crwdns13038:0crwdne13038:0",
-    "row": "crwdns13040:0crwdne13040:0",
-    "indeterminate": "crwdns13042:0crwdne13042:0",
-    "indeterminateIcon": "crwdns13044:0crwdne13044:0",
-    "inputValue": "crwdns13046:0crwdne13046:0",
-    "multiple": "crwdns13048:0crwdne13048:0",
-    "value": "crwdns13050:0crwdne13050:0",
+    "column": "crwdns33696:0crwdne33696:0",
+    "dark": "crwdns40134:0crwdne40134:0",
+    "flat": "crwdns40136:0crwdne40136:0",
+    "indeterminate": "crwdns33708:0crwdne33708:0",
+    "indeterminateIcon": "crwdns33710:0crwdne33710:0",
+    "inputValue": "crwdns33712:0crwdne33712:0",
+    "inset": "crwdns40138:0crwdne40138:0",
+    "loading": "crwdns40140:0crwdne40140:0",
+    "mandatory": "crwdns33698:0crwdne33698:0",
+    "multiple": "crwdns33714:0crwdne33714:0",
+    "name": "crwdns33700:0crwdne33700:0",
+    "offIcon": "crwdns33704:0crwdne33704:0",
+    "onIcon": "crwdns33702:0crwdne33702:0",
+    "row": "crwdns33706:0crwdne33706:0",
+    "value": "crwdns33716:0crwdne33716:0",
     "v-radio": {
-      "disabled": "crwdns13052:0crwdne13052:0",
-      "label": "crwdns13054:0crwdne13054:0",
-      "readonly": "crwdns13056:0crwdne13056:0"
+      "disabled": "crwdns33718:0crwdne33718:0",
+      "label": "crwdns33720:0crwdne33720:0",
+      "readonly": "crwdns33722:0crwdne33722:0"
     }
   },
   "slots": {
-    "append": "crwdns13058:0crwdne13058:0",
-    "prepend": "crwdns13060:0crwdne13060:0"
+    "append": "crwdns33724:0crwdne33724:0",
+    "prepend": "crwdns33726:0crwdne33726:0"
   },
   "events": {
-    "change": "crwdns13062:0crwdne13062:0",
-    "update:error": "crwdns13064:0crwdne13064:0"
+    "change": "crwdns33728:0crwdne33728:0",
+    "update:indeterminate": "crwdns40142:0crwdne40142:0",
+    "update:error": "crwdns33730:0crwdne33730:0"
   }
 }

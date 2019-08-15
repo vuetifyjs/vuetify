@@ -1,4 +1,8 @@
+import marked from 'marked'
+
 // Make this dynamic
 import '@/plugins/no-ssr'
-import '@/plugins/rollbar'
-import '@/plugins/vuetify'
+
+marked.setOptions({
+  headerIds: false,
+})

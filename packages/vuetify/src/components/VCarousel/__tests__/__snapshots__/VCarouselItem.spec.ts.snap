@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VCarouselItem.ts should render component and match snapshot 1`] = `
+<div class="v-window-item"
+     style="display: none;"
+>
+</div>
+`;
+
+exports[`VCarouselItem.ts should throw warning when not used inside v-carousel 1`] = `
+<div class="v-window-item"
+     style="display: none;"
+>
+</div>
+`;

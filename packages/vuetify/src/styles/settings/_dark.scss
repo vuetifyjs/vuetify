@@ -1,0 +1,108 @@
+$material-dark: (
+  'status-bar': (
+    'regular': map-get($shades, 'black'),
+    'lights-out': rgba(map-get($shades, 'black'), 0.2)
+  ),
+  'app-bar': map-get($grey, 'darken-4'),
+  'background': #303030,
+  'calendar': (
+    'background-color': #303030,
+    'outside-background-color': #202020,
+    'line-color': map-get($grey, 'base'),
+    'interval-color': map-get($grey, 'lighten-3'),
+    'interval-line-color': map-get($grey, 'darken-2'),
+    'text-color': map-get($shades, 'white'),
+    'past-color': rgba(map-get($shades, 'white'), .50)
+  ),
+  'cards': map-get($grey, 'darken-3'),
+  'chips': #555,
+  'dividers': rgba(map-get($shades, 'white'), 0.12),
+  'text': (
+    'theme': map-get($shades, 'white'),
+    'primary': map-get($shades, 'white'),
+    'secondary': rgba(map-get($shades, 'white'), 0.7),
+    'disabled': rgba(map-get($shades, 'white'), 0.5),
+    'link': map-get($blue, 'accent-1'),
+    'link-hover': map-get($grey, 'lighten-3')
+  ),
+  'icons': (
+    'active': map-get($shades, 'white'),
+    'inactive': rgba(map-get($shades, 'white'), 0.5)
+  ),
+  'inputs': (
+    'box': map-get($shades, 'white'),
+    'solo-inverted': rgba(map-get($shades, 'white'), 0.16),
+    'solo-inverted-focused': map-get($shades, 'white'),
+    'solo-inverted-focused-text': map-get(map-get($material-light, 'text'), 'primary')
+  ),
+  'buttons': (
+    'disabled': rgba(map-get($shades, 'white'), 0.3),
+    'focused': rgba(map-get($shades, 'white'), 0.12),
+    'focused-alt': rgba(map-get($shades, 'white'), 0.1),
+    'pressed': rgba(#ccc, 0.25)
+  ),
+  'expansion-panels': (
+    'focus': #494949
+  ),
+  'selection-controls': (
+    'thumb': (
+      'inactive': map-get($grey, 'lighten-1'),
+      'disabled': map-get($grey, 'darken-3')
+    ),
+    'track': (
+      'inactive': rgba(map-get($shades, 'white'), 0.3),
+      'disabled': rgba(map-get($shades, 'white'), 0.1)
+    )
+  ),
+  'slider': (
+    'active': rgba(map-get($shades, 'white'), 0.3),
+    'inactive': rgba(map-get($shades, 'white'), 0.2),
+    'disabled': rgba(map-get($shades, 'white'), 0.2),
+    'discrete': map-get($shades, 'white')
+  ),
+  'states': (
+    'hover': 0.08,
+    'focus': 0.24,
+    'selected': 0.16,
+    'activated': 0.24,
+    'pressed': 0.32,
+    'dragged': 0.16
+  ),
+  'tabs': rgba(map-get($shades, 'white'), 0.6),
+  'toggle-buttons': (
+    'color': map-get($shades, 'white')
+  ),
+  'text-fields': (
+    'filled': rgba(map-get($shades, 'black'), 0.1),
+    'filled-hover': rgba(map-get($shades, 'black'), 0.2)
+  ),
+  'input-bottom-line': rgba(map-get($shades, 'white'), 0.7),
+  'stepper': (
+    'active': rgba(map-get($shades, 'white'), 1),
+    'completed': rgba(map-get($shades, 'white'), 0.87),
+    'hover': rgba(map-get($shades, 'white'), 0.75)
+  ),
+  'table': (
+    'active': #505050,
+    'hover': map-get($grey, 'darken-2'),
+    'group': map-get($grey, 'darken-2')
+  ),
+  'picker': (
+    'body': map-get($grey, 'darken-3'),
+    'clock': map-get($grey, 'darken-2'),
+    'indeterminateTime': map-get($grey, 'darken-1'),
+    'title': map-get($grey, 'darken-2')
+  ),
+  'color-picker': (
+    'checkerboard': rgba(map-get($shades, 'white'), 0.12)
+  ),
+  'bg-color': #303030,
+  'fg-color': map-get($shades, 'white'),
+  'text-color': map-get($shades, 'white'),
+  'primary-text-percent': 1,
+  'secondary-text-percent': 0.7,
+  'disabledORhints-text-percent': 0.5,
+  'divider-percent': 0.12,
+  'active-icon-percent': 1,
+  'inactive-icon-percent': 0.5
+) !default;

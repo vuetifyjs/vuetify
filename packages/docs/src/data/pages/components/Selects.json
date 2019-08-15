@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VSelect",
   "children": [
     {
       "type": "section",
@@ -8,6 +9,11 @@
         {
           "type": "usage",
           "value": "usage"
+        },
+        {
+          "type": "alert",
+          "lang": "objectAlert",
+          "value": "error"
         }
       ]
     },
@@ -24,12 +30,8 @@
       "type": "section",
       "children": [
         {
-          "type": "supplemental",
-          "value": [
-            {
-              "type": "components-mask-table"
-            }
-          ]
+          "type": "playground",
+          "value": "playground"
         }
       ]
     },
@@ -39,12 +41,15 @@
         {
           "type": "examples",
           "value": [
-            "light",
-            "icons",
-            "multiple",
-            "customTextAndValue",
-            "slots",
-            "selectionAppearance"
+            "simple/disabled",
+            "simple/readonly",
+            "simple/light",
+            "simple/icons",
+            "simple/multiple",
+            "simple/custom-text-and-value",
+            "intermediate/menu-props",
+            "intermediate/slots",
+            "intermediate/selection-appearance"
           ]
         }
       ]

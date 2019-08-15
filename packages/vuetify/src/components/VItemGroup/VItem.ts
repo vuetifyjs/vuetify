@@ -6,18 +6,26 @@ import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
 
 // Types
+import Vue from 'vue'
 import { VNode, ScopedSlotChildren } from 'vue/types/vnode'
 
-export default mixins(
-  GroupableFactory('itemGroup', 'v-item', 'v-item-group')
-  /* @vue/component */
-).extend({
-  name: 'v-item',
-
+/* @vue/component */
+export const BaseItem = Vue.extend({
   props: {
+    activeClass: String,
     value: {
-      required: false
-    }
+      required: false,
+    },
+  },
+
+  data: () => ({
+    isActive: false,
+  }),
+
+  methods: {
+    toggle () {
+      this.isActive = !this.isActive
+    },
   },
 
   render (): VNode {
@@ -33,7 +41,7 @@ export default mixins(
     if (this.$scopedSlots.default) {
       element = this.$scopedSlots.default({
         active: this.isActive,
-        toggle: this.toggle
+        toggle: this.toggle,
       })
     }
 
@@ -48,9 +56,16 @@ export default mixins(
     }
 
     element.data = this._b(element.data || {}, element.tag!, {
-      class: { [this.activeClass]: this.isActive }
+      class: { [this.activeClass]: this.isActive },
     })
 
     return element
-  }
+  },
+})
+
+export default mixins(
+  BaseItem,
+  GroupableFactory('itemGroup', 'v-item', 'v-item-group')
+).extend({
+  name: 'v-item',
 })

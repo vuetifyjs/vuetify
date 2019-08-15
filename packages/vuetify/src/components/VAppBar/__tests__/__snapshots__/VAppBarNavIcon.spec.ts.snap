@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppBarNavIcon.ts should render correctly 1`] = `
+<button type="button"
+        class="v-app-bar__nav-icon v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
+>
+  <span class="v-btn__content">
+    <i aria-hidden="true"
+       class="v-icon notranslate material-icons theme--light"
+    >
+      $vuetify.icons.menu
+    </i>
+  </span>
+</button>
+`;

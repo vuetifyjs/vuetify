@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section id="material-colors">
     <doc-heading>colorHeader</doc-heading>
     <doc-text>colorText</doc-text>
 
@@ -17,11 +17,13 @@
         <v-flex
           v-for="(color, key) in computedColors"
           :key="key"
-          xs6
-          md4
+          xs12
+          md6
+          lg4
         >
           <v-card
             :color="key"
+            outlined
             tile
           >
             <v-card-text>
@@ -32,16 +34,16 @@
             v-for="(subColor, key2) in color"
             :key="key2"
             :color="`${key} ${convertToClass(key2)}`"
-            :class="getColorClass(key2)"
             tile
+            flat
           >
-            <v-card-text>
+            <v-card-text :class="getColorClass(key2)">
               <v-layout>
                 <v-flex xs8 caption>
                   <span v-if="key !== 'shades'">{{ key }}&nbsp;</span>
                   <span v-if="key2 !== 'base'">{{ key2.replace(/(.*)(\d)/, '$1-$2') }}</span>
                 </v-flex>
-                <v-flex xs4 text-xs-right>
+                <v-flex xs4 text-right>
                   <span v-if="subColor !== 'transparent'" v-text="subColor.toUpperCase()" />
                 </v-flex>
               </v-layout>
@@ -50,7 +52,7 @@
         </v-flex>
       </v-layout>
     </v-container>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -61,7 +63,7 @@
   export default {
     data: () => ({
       colors,
-      search: ''
+      search: '',
     }),
 
     computed: {
@@ -78,7 +80,7 @@
         })
 
         return colors
-      }
+      },
     },
 
     methods: {
@@ -100,7 +102,7 @@
         ) return 'black--text'
 
         return 'white--text'
-      }
-    }
+      },
+    },
   }
 </script>

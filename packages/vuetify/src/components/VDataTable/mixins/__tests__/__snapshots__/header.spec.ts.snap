@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VDataTable/header.ts should generate select 1`] = `
+<div>
+  <div class="v-data-table__checkbox v-simple-checkbox">
+    <div class="v-input--selection-controls__ripple">
+    </div>
+    <i aria-hidden="true"
+       class="v-icon notranslate material-icons theme--light"
+    >
+      $vuetify.icons.checkboxOff
+    </i>
+  </div>
+</div>
+`;
+
+exports[`VDataTable/header.ts should generate select 2`] = `
+<div>
+  <div class="v-data-table__checkbox v-simple-checkbox">
+    <div class="v-input--selection-controls__ripple">
+    </div>
+    <i aria-hidden="true"
+       class="v-icon notranslate material-icons theme--light"
+    >
+      $vuetify.icons.checkboxOn
+    </i>
+  </div>
+</div>
+`;
+
+exports[`VDataTable/header.ts should generate select 3`] = `
+<div>
+  <div class="v-data-table__checkbox v-simple-checkbox">
+    <div class="v-input--selection-controls__ripple">
+    </div>
+    <i aria-hidden="true"
+       class="v-icon notranslate material-icons theme--light"
+    >
+      $vuetify.icons.checkboxIndeterminate
+    </i>
+  </div>
+</div>
+`;
+
+exports[`VDataTable/header.ts should generate select scoped slot 1`] = `
+<div>
+  <div class="test">
+    {"props":{"value":false,"indeterminate":false},"on":{}}
+  </div>
+</div>
+`;
+
+exports[`VDataTable/header.ts should generate select scoped slot 2`] = `
+<div>
+  <div class="test">
+    {"props":{"value":true,"indeterminate":false},"on":{}}
+  </div>
+</div>
+`;
+
+exports[`VDataTable/header.ts should generate select scoped slot 3`] = `
+<div>
+  <div class="test">
+    {"props":{"value":false,"indeterminate":true},"on":{}}
+  </div>
+</div>
+`;
+
+exports[`VDataTable/header.ts should generate sort icon 1`] = `
+<i aria-hidden="true"
+   class="v-icon notranslate v-data-table-header__icon mdi mdi-sort theme--light"
+   style="font-size: 18px;"
+>
+</i>
+`;

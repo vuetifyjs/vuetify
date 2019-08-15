@@ -1,0 +1,42 @@
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+
+// Block
+.v-app-bar
+  +bootable()
+
+// Modifier
+.v-app-bar.v-app-bar--fixed
+  position: fixed
+  top: 0
+  z-index: 5
+
+.v-app-bar.v-app-bar--hide-shadow
+  +elevation(0)
+
+.v-app-bar--fade-img-on-scroll
+  .v-toolbar__image .v-image__image
+    transition: $app-bar-transition
+
+.v-app-bar.v-toolbar--prominent.v-app-bar--shrink-on-scroll
+  .v-toolbar__content
+    will-change: height
+
+  .v-toolbar__image
+    will-change: opacity
+
+  &.v-app-bar--collapse-on-scroll
+    .v-toolbar__extension
+      display: none
+
+  &.v-app-bar--is-scrolled
+    .v-toolbar__title
+      padding-top: $app-bar-scrolled-title-padding-bottom
+
+    &:not(.v-app-bar--bottom)
+      .v-toolbar__title
+        padding-bottom: $app-bar-scrolled-title-padding-bottom
+
+.v-app-bar.v-app-bar--shrink-on-scroll
+  .v-toolbar__title
+    font-size: inherit

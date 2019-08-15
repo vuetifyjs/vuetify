@@ -4,6 +4,7 @@ import VTimePickerClock from './VTimePickerClock'
 
 // Mixins
 import Picker from '../../mixins/picker'
+import PickerButton from '../../mixins/picker-button'
 
 // Utils
 import { createRange } from '../../util/helpers'
@@ -18,40 +19,49 @@ const rangeHours24 = createRange(24)
 const rangeHours12am = createRange(12)
 const rangeHours12pm = rangeHours12am.map(v => v + 12)
 const range60 = createRange(60)
-const selectingTimes: {
-  hour: 1
-  minute: 2
-  second: 3
-} = { hour: 1, minute: 2, second: 3 }
+enum SelectingTimes {
+  Hour = 1,
+  Minute = 2,
+  Second = 3
+}
 const selectingNames = { 1: 'hour', 2: 'minute', 3: 'second' }
-export { selectingTimes }
+export { SelectingTimes }
 
 type Period = 'am' | 'pm'
+type AllowFunction = (val: number) => boolean
 
 export default mixins(
-  Picker
+  Picker,
+  PickerButton
 /* @vue/component */
 ).extend({
   name: 'v-time-picker',
 
   props: {
-    allowedHours: Function,
-    allowedMinutes: Function,
-    allowedSeconds: Function,
+    allowedHours: {
+      type: [Function, Array],
+    } as PropValidator<AllowFunction | number[]>,
+    allowedMinutes: {
+      type: [Function, Array],
+    } as PropValidator<AllowFunction | number[]>,
+    allowedSeconds: {
+      type: [Function, Array],
+    } as PropValidator<AllowFunction | number[]>,
     disabled: Boolean,
     format: {
       type: String,
       default: 'ampm',
       validator (val) {
         return ['ampm', '24hr'].includes(val)
-      }
+      },
     } as PropValidator<'ampm' | '24hr'>,
     min: String,
     max: String,
     readonly: Boolean,
     scrollable: Boolean,
     useSeconds: Boolean,
-    value: null as any as PropValidator<any>
+    value: null as any as PropValidator<any>,
+    ampmInTitle: Boolean,
   },
 
   data () {
@@ -63,37 +73,45 @@ export default mixins(
       lazyInputMinute: null as number | null,
       lazyInputSecond: null as number | null,
       period: 'am' as Period,
-      selecting: selectingTimes.hour as 1 | 2 | 3
+      selecting: SelectingTimes.Hour,
     }
   },
 
   computed: {
     selectingHour: {
-      get () {
-        return this.selecting === selectingTimes.hour
+      get (): boolean {
+        return this.selecting === SelectingTimes.Hour
       },
       set (v: boolean) {
-        this.selecting = selectingTimes.hour
-      }
+        this.selecting = SelectingTimes.Hour
+      },
     },
     selectingMinute: {
-      get () {
-        return this.selecting === selectingTimes.minute
+      get (): boolean {
+        return this.selecting === SelectingTimes.Minute
       },
       set (v: boolean) {
-        this.selecting = selectingTimes.minute
-      }
+        this.selecting = SelectingTimes.Minute
+      },
     },
     selectingSecond: {
-      get () {
-        return this.selecting === selectingTimes.second
+      get (): boolean {
+        return this.selecting === SelectingTimes.Second
       },
       set (v: boolean) {
-        this.selecting = selectingTimes.second
-      }
+        this.selecting = SelectingTimes.Second
+      },
     },
-    isAllowedHourCb () {
-      if (!this.min && !this.max) return this.allowedHours
+    isAllowedHourCb (): AllowFunction {
+      let cb: AllowFunction
+
+      if (this.allowedHours instanceof Array) {
+        cb = (val: number) => (this.allowedHours as number[]).includes(val)
+      } else {
+        cb = this.allowedHours
+      }
+
+      if (!this.min && !this.max) return cb
 
       const minHour = this.min ? Number(this.min.split(':')[0]) : 0
       const maxHour = this.max ? Number(this.max.split(':')[0]) : 23
@@ -101,13 +119,21 @@ export default mixins(
       return (val: number) => {
         return val >= minHour * 1 &&
           val <= maxHour * 1 &&
-          (!this.allowedHours || this.allowedHours(val))
+          (!cb || cb(val))
       }
     },
-    isAllowedMinuteCb () {
-      const isHourAllowed = !this.allowedHours || this.allowedHours(this.inputHour)
+    isAllowedMinuteCb (): AllowFunction {
+      let cb: AllowFunction
+
+      const isHourAllowed = !this.isAllowedHourCb || this.inputHour === null || this.isAllowedHourCb(this.inputHour)
+      if (this.allowedMinutes instanceof Array) {
+        cb = (val: number) => (this.allowedMinutes as number[]).includes(val)
+      } else {
+        cb = this.allowedMinutes
+      }
+
       if (!this.min && !this.max) {
-        return isHourAllowed ? this.allowedMinutes : () => false
+        return isHourAllowed ? cb : () => false
       }
 
       const [minHour, minMinute] = this.min ? this.min.split(':').map(Number) : [0, 0]
@@ -120,14 +146,27 @@ export default mixins(
         return time >= minTime &&
           time <= maxTime &&
           isHourAllowed &&
-          (!this.allowedMinutes || this.allowedMinutes(val))
+          (!cb || cb(val))
       }
     },
-    isAllowedSecondCb () {
-      const isHourAllowed = !this.allowedHours || this.allowedHours(this.inputHour)
-      const isMinuteAllowed = !this.allowedMinutes || this.allowedMinutes(this.inputMinute)
+    isAllowedSecondCb (): AllowFunction {
+      let cb: AllowFunction
+
+      const isHourAllowed = !this.isAllowedHourCb || this.inputHour === null || this.isAllowedHourCb(this.inputHour)
+      const isMinuteAllowed = isHourAllowed &&
+        (!this.isAllowedMinuteCb ||
+          this.inputMinute === null ||
+          this.isAllowedMinuteCb(this.inputMinute)
+        )
+
+      if (this.allowedSeconds instanceof Array) {
+        cb = (val: number) => (this.allowedSeconds as number[]).includes(val)
+      } else {
+        cb = this.allowedSeconds
+      }
+
       if (!this.min && !this.max) {
-        return isHourAllowed && isMinuteAllowed ? this.allowedSeconds : () => false
+        return isMinuteAllowed ? cb : () => false
       }
 
       const [minHour, minMinute, minSecond] = this.min ? this.min.split(':').map(Number) : [0, 0, 0]
@@ -139,21 +178,22 @@ export default mixins(
         const time = 3600 * this.inputHour! + 60 * this.inputMinute! + val
         return time >= minTime &&
           time <= maxTime &&
-          isHourAllowed && isMinuteAllowed &&
-          (!this.allowedSeconds || this.allowedSeconds(val))
+          isMinuteAllowed &&
+          (!cb || cb(val))
       }
     },
-    isAmPm () {
+    isAmPm (): boolean {
       return this.format === 'ampm'
-    }
+    },
   },
 
   watch: {
-    value: 'setInputData'
+    value: 'setInputData',
   },
 
   mounted () {
     this.setInputData(this.value)
+    this.$on('update:period', this.setPeriod)
   },
 
   methods: {
@@ -202,9 +242,9 @@ export default mixins(
       return hour % 12 + (period === 'pm' ? 12 : 0)
     },
     onInput (value: number) {
-      if (this.selecting === selectingTimes.hour) {
+      if (this.selecting === SelectingTimes.Hour) {
         this.inputHour = this.isAmPm ? this.convert12to24(value, this.period) : value
-      } else if (this.selecting === selectingTimes.minute) {
+      } else if (this.selecting === SelectingTimes.Minute) {
         this.inputMinute = value
       } else {
         this.inputSecond = value
@@ -214,12 +254,12 @@ export default mixins(
     onChange (value: number) {
       this.$emit(`click:${selectingNames[this.selecting]}`, value)
 
-      const emitChange = this.selecting === (this.useSeconds ? selectingTimes.second : selectingTimes.minute)
+      const emitChange = this.selecting === (this.useSeconds ? SelectingTimes.Second : SelectingTimes.Minute)
 
-      if (this.selecting === selectingTimes.hour) {
-        this.selecting = selectingTimes.minute
-      } else if (this.useSeconds && this.selecting === selectingTimes.minute) {
-        this.selecting = selectingTimes.second
+      if (this.selecting === SelectingTimes.Hour) {
+        this.selecting = SelectingTimes.Minute
+      } else if (this.useSeconds && this.selecting === SelectingTimes.Minute) {
+        this.selecting = SelectingTimes.Second
       }
 
       if (this.inputHour === this.lazyInputHour &&
@@ -257,48 +297,59 @@ export default mixins(
       return this.$createElement(VTimePickerClock, {
         props: {
           allowedValues:
-            this.selecting === selectingTimes.hour
+            this.selecting === SelectingTimes.Hour
               ? this.isAllowedHourCb
-              : (this.selecting === selectingTimes.minute
+              : (this.selecting === SelectingTimes.Minute
                 ? this.isAllowedMinuteCb
                 : this.isAllowedSecondCb),
           color: this.color,
           dark: this.dark,
           disabled: this.disabled,
-          double: this.selecting === selectingTimes.hour && !this.isAmPm,
-          format: this.selecting === selectingTimes.hour
+          double: this.selecting === SelectingTimes.Hour && !this.isAmPm,
+          format: this.selecting === SelectingTimes.Hour
             ? (this.isAmPm ? this.convert24to12 : (val: number) => val)
             : (val: number) => pad(val, 2),
           light: this.light,
-          max: this.selecting === selectingTimes.hour ? (this.isAmPm && this.period === 'am' ? 11 : 23) : 59,
-          min: this.selecting === selectingTimes.hour && this.isAmPm && this.period === 'pm' ? 12 : 0,
+          max: this.selecting === SelectingTimes.Hour ? (this.isAmPm && this.period === 'am' ? 11 : 23) : 59,
+          min: this.selecting === SelectingTimes.Hour && this.isAmPm && this.period === 'pm' ? 12 : 0,
           readonly: this.readonly,
           scrollable: this.scrollable,
           size: Number(this.width) - ((!this.fullWidth && this.landscape) ? 80 : 20),
-          step: this.selecting === selectingTimes.hour ? 1 : 5,
-          value: this.selecting === selectingTimes.hour
+          step: this.selecting === SelectingTimes.Hour ? 1 : 5,
+          value: this.selecting === SelectingTimes.Hour
             ? this.inputHour
-            : (this.selecting === selectingTimes.minute
+            : (this.selecting === SelectingTimes.Minute
               ? this.inputMinute
-              : this.inputSecond)
+              : this.inputSecond),
         },
         on: {
           input: this.onInput,
-          change: this.onChange
+          change: this.onChange,
         },
-        ref: 'clock'
+        ref: 'clock',
       })
+    },
+    genClockAmPm () {
+      return this.$createElement('div', this.setTextColor(this.color || 'primary', {
+        staticClass: 'v-time-picker-clock__ampm',
+      }), [
+        this.genPickerButton('period', 'am', 'AM', this.disabled || this.readonly),
+        this.genPickerButton('period', 'pm', 'PM', this.disabled || this.readonly),
+      ])
     },
     genPickerBody () {
       return this.$createElement('div', {
         staticClass: 'v-time-picker-clock__container',
-        key: this.selecting
-      }, [this.genClock()])
+        key: this.selecting,
+      }, [
+        !this.ampmInTitle && this.isAmPm && this.genClockAmPm(),
+        this.genClock(),
+      ])
     },
     genPickerTitle () {
       return this.$createElement(VTimePickerTitle, {
         props: {
-          ampm: this.isAmPm,
+          ampm: this.ampmInTitle && this.isAmPm,
           disabled: this.disabled,
           hour: this.inputHour,
           minute: this.inputMinute,
@@ -306,19 +357,19 @@ export default mixins(
           period: this.period,
           readonly: this.readonly,
           useSeconds: this.useSeconds,
-          selecting: this.selecting
+          selecting: this.selecting,
         },
         on: {
           'update:selecting': (value: 1 | 2 | 3) => (this.selecting = value),
-          'update:period': this.setPeriod
+          'update:period': this.setPeriod,
         },
         ref: 'title',
-        slot: 'title'
+        slot: 'title',
       })
-    }
+    },
   },
 
   render (): VNode {
     return this.genPicker('v-picker--time')
-  }
+  },
 })

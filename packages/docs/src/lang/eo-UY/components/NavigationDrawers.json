@@ -1,61 +1,78 @@
 {
-  "header": "crwdns12710:0crwdne12710:0",
-  "headerText": "crwdns12712:0crwdne12712:0",
+  "header": "crwdns40288:0crwdne40288:0",
+  "headerText": "crwdns40290:0crwdne40290:0",
   "examples": {
     "usage": {
-      "desc": "crwdns12714:0crwdne12714:0"
+      "desc": "crwdns40292:0[v-list]crwdne40292:0"
     },
-    "permanentClipped": {
-      "header": "crwdns12716:0crwdne12716:0",
-      "desc": "crwdns12718:0crwdne12718:0"
+    "colored": {
+      "header": "crwdns40294:0crwdne40294:0",
+      "desc": "crwdns40296:0crwdne40296:0"
     },
-    "permanentFloating": {
-      "header": "crwdns12720:0crwdne12720:0",
-      "desc": "crwdns12722:0crwdne12722:0"
-    },
-    "persistent": {
-      "header": "crwdns12724:0crwdne12724:0",
-      "desc": "crwdns12726:0crwdne12726:0"
+    "permanent-floating": {
+      "header": "crwdns40298:0crwdne40298:0",
+      "desc": "crwdns40300:0crwdne40300:0"
     },
     "mini": {
-      "header": "crwdns12728:0crwdne12728:0",
-      "desc": "crwdns12730:0crwdne12730:0"
+      "header": "crwdns33898:0crwdne33898:0",
+      "desc": "crwdns40302:0crwdne40302:0"
     },
     "temporary": {
-      "header": "crwdns12732:0crwdne12732:0",
-      "desc": "crwdns12734:0crwdne12734:0"
-    },
-    "dark": {
-      "header": "crwdns12736:0crwdne12736:0",
-      "desc": "crwdns12738:0crwdne12738:0",
-      "uninverted": true
+      "header": "crwdns33902:0crwdne33902:0",
+      "desc": "crwdns40304:0crwdne40304:0"
     },
     "combined": {
-      "header": "crwdns12742:0crwdne12742:0",
-      "desc": "crwdns12744:0crwdne12744:0"
+      "header": "crwdns33912:0crwdne33912:0",
+      "desc": "crwdns40306:0crwdne40306:0"
     },
-    "nested": {
-      "header": "crwdns12746:0crwdne12746:0",
-      "desc": "crwdns12748:0crwdne12748:0"
+    "right": {
+      "header": "crwdns40308:0crwdne40308:0",
+      "desc": "crwdns40310:0crwdne40310:0"
+    },
+    "background": {
+      "header": "crwdns40312:0crwdne40312:0",
+      "desc": "crwdns40314:0crwdne40314:0"
+    },
+    "bottom-drawer": {
+      "header": "crwdns40316:0crwdne40316:0",
+      "desc": "crwdns40318:0crwdne40318:0"
+    },
+    "expand-on-hover": {
+      "header": "crwdns40320:0crwdne40320:0",
+      "desc": "crwdns40322:0crwdne40322:0"
     }
   },
   "props": {
-    "absolute": "crwdns12750:0crwdne12750:0",
-    "clipped": "crwdns12752:0crwdne12752:0",
-    "disableResizeWatcher": "crwdns12754:0crwdne12754:0",
-    "disableRouteWatcher": "crwdns12756:0crwdne12756:0",
-    "fixed": "crwdns12758:0crwdne12758:0",
-    "floating": "crwdns12760:0crwdne12760:0",
-    "hideOverlay": "crwdns12762:0crwdne12762:0",
-    "miniVariantWidth": "crwdns12764:0crwdne12764:0",
-    "miniVariant": "crwdns12766:0crwdne12766:0",
-    "permanent": "crwdns12768:0crwdne12768:0",
-    "right": "crwdns12770:0crwdne12770:0",
-    "stateless": "crwdns12772:0crwdne12772:0",
-    "temporary": "crwdns12774:0crwdne12774:0",
-    "touchless": "crwdns12776:0crwdne12776:0"
+    "absolute": "crwdns33920:0crwdne33920:0",
+    "bottom": "crwdns40324:0crwdne40324:0",
+    "clipped": "crwdns33922:0crwdne33922:0",
+    "disableResizeWatcher": "crwdns33924:0crwdne33924:0",
+    "disableRouteWatcher": "crwdns33926:0crwdne33926:0",
+    "expandOnHover": "crwdns40326:0crwdne40326:0",
+    "fixed": "crwdns33928:0crwdne33928:0",
+    "floating": "crwdns33930:0crwdne33930:0",
+    "hideOverlay": "crwdns33932:0crwdne33932:0",
+    "height": "crwdns40328:0crwdne40328:0",
+    "miniVariantWidth": "crwdns33934:0crwdne33934:0",
+    "miniVariant": "crwdns33936:0crwdne33936:0",
+    "permanent": "crwdns33938:0crwdne33938:0",
+    "right": "crwdns33940:0crwdne33940:0",
+    "src": "crwdns40330:0crwdne40330:0",
+    "stateless": "crwdns33942:0crwdne33942:0",
+    "tag": "crwdns40332:0crwdne40332:0",
+    "temporary": "crwdns33944:0crwdne33944:0",
+    "touchless": "crwdns33946:0crwdne33946:0",
+    "value": "crwdns40334:0crwdne40334:0",
+    "width": "crwdns40336:0crwdne40336:0"
   },
   "events": {
-    "update:miniVariant": "crwdns12778:0crwdne12778:0"
-  }
+    "transitionend": "crwdns40338:0crwdne40338:0",
+    "update:mini-variant": "crwdns40340:0crwdne40340:0"
+  },
+  "slots": {
+    "append": "crwdns40342:0crwdne40342:0",
+    "img": "crwdns40344:0crwdne40344:0",
+    "prepend": "crwdns40346:0crwdne40346:0"
+  },
+  "alert": "crwdns40348:0crwdne40348:0"
 }

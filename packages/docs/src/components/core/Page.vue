@@ -1,24 +1,45 @@
 <template>
   <v-container
     v-if="structure !== false"
-    :id="composite"
-    class="page"
+    page
   >
     <template v-if="structure">
-      <doc-heading v-if="structure.title">
-        {{ structure.title }}
-      </doc-heading>
-      <div
-        v-if="structure.titleText"
-        class="mb-5"
+      <section
+        :id="id"
+        class="mb-12"
       >
-        <doc-text
-          v-if="structure.titleText"
-          class="mb-4"
-        >
-          {{ structure.titleText }}
-        </doc-text>
-      </div>
+        <v-layout>
+          <v-flex
+            v-if="structure.title"
+            shrink
+          >
+            <doc-heading>
+              {{ structure.title }}
+            </doc-heading>
+          </v-flex>
+          <v-spacer />
+          <v-flex
+            v-if="structure.file"
+            shrink
+          >
+            <core-file-btn :link="structure.file" :branch="branch" />
+          </v-flex>
+          <v-flex
+            v-if="structure.mdSpec"
+            shrink
+          >
+            <core-spec-btn
+              :link="structure.mdSpec.link"
+              :version="structure.mdSpec.version"
+            />
+          </v-flex>
+        </v-layout>
+        <div v-if="structure.titleText">
+          <doc-text class="mb-6">
+            {{ structure.titleText }}
+          </doc-text>
+        </div>
+      </section>
 
       <component
         :is="getComponent(child.type)"
@@ -27,7 +48,7 @@
         :value="child"
       />
 
-      <doc-contribution />
+      <doc-contribution :branch="branch" />
     </template>
   </v-container>
   <not-found v-else />
@@ -36,33 +57,49 @@
 <script>
   // Utilities
   import {
-    mapState
+    mapGetters,
+    mapState,
   } from 'vuex'
-  import { getComponent } from '@/util/helpers'
+  import { getComponent, getBranch } from '@/util/helpers'
+  import kebabCase from 'lodash/kebabCase'
 
   export default {
     components: {
-      NotFound: () => import('@/pages/general/404')
+      NotFound: () => import('@/pages/general/404'),
     },
 
     data: () => ({
-      timeout: null
+      timeout: null,
+      branch: null,
     }),
 
     computed: {
+      ...mapGetters('documentation', [
+        'namespace',
+        'page',
+      ]),
       ...mapState('documentation', ['structure']),
       ...mapState('route', ['params']),
       composite () {
         return `${this.params.namespace}-${this.params.page}`
-      }
+      },
+      id () {
+        if (!this.structure) return
+
+        return kebabCase(this.$t(
+          `${this.namespace}.${this.page}.${this.structure.title}`
+        ))
+      },
     },
 
     watch: {
-      '$route.path': 'init'
+      '$route.path': 'init',
     },
 
     mounted () {
       this.init()
+
+      this.branch = getBranch()
     },
 
     methods: {
@@ -111,17 +148,17 @@
         }
 
         this.$router.push(href)
-      }
-    }
+      },
+    },
   }
 </script>
 
-<style lang="stylus">
-  .page
-    max-width: 1185px;
+<style lang="sass">
+.page
+  max-width: 1185px
 
-  #components-navigation-drawers
-    .v-sheet,
-    .v-card
-      overflow: hidden;
+#components-navigation-drawers
+  .v-sheet,
+  .v-card
+    overflow: hidden
 </style>

@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VButton",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/buttons.html"
+  },
   "children": [
     {
       "type": "section",
@@ -27,19 +32,34 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "alert",
+          "lang": "alert",
+          "value": "warning"
+        },
+        {
           "type": "examples",
           "value": [
-            "flat",
-            "raised",
-            "depressed",
-            "dropdown",
-            "icon",
-            "floating",
-            "loaders",
-            "sizing",
-            "outline",
-            "round",
-            "block"
+            "simple/flat",
+            "simple/raised",
+            "simple/depressed",
+            "simple/dropdown",
+            "simple/icon",
+            "simple/floating",
+            "simple/sizing",
+            "simple/outlined",
+            "simple/rounded",
+            "simple/tile",
+            "simple/block",
+            "intermediate/loaders"
           ]
         }
       ]

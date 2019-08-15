@@ -3,11 +3,12 @@
     bottom
     left
     offset-y
+    max-height="calc(100% - 16px)"
   >
     <template #activator="{ on: menu }">
       <v-btn
         :aria-label="$t('Vuetify.AppToolbar.translations')"
-        flat
+        text
         style="min-width: 48px"
         v-on="menu"
       >
@@ -21,15 +22,15 @@
     </template>
     <v-list
       dense
-      light
+      nav
     >
-      <v-list-tile
+      <v-list-item
         v-for="language in languages"
         :key="language.locale"
         avatar
         @click="translateI18n(language)"
       >
-        <v-list-tile-avatar
+        <v-list-item-avatar
           tile
           size="24px"
         >
@@ -39,9 +40,9 @@
             :src="`https://cdn.vuetifyjs.com/images/flags/${language.country}.png`"
             width="24px"
           />
-        </v-list-tile-avatar>
-        <v-list-tile-title v-text="language.name" />
-      </v-list-tile>
+        </v-list-item-avatar>
+        <v-list-item-title v-text="language.name" />
+      </v-list-item>
     </v-list>
   </v-menu>
 </template>
@@ -52,14 +53,14 @@
 
   export default {
     data: () => ({
-      languages
+      languages,
     }),
 
     computed: {
       currentLanguage () {
         const locale = this.$i18n.locale
         return this.languages.find(l => l.alternate === locale || l.locale === locale)
-      }
+      },
     },
 
     methods: {
@@ -76,7 +77,7 @@
 
         this.$router.replace({ params: { lang } })
         document.cookie = `currentLanguage=${lang};path=/;max-age=${60 * 60 * 24 * 7}` // expires in 7 days
-      }
-    }
+      },
+    },
   }
 </script>

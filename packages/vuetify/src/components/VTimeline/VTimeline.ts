@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_timeline.styl'
+import './VTimeline.sass'
 
 // Types
 import { VNode } from 'vue'
@@ -14,9 +14,14 @@ export default mixins(
 ).extend({
   name: 'v-timeline',
 
+  provide (): object {
+    return { timeline: this }
+  },
+
   props: {
     alignTop: Boolean,
-    dense: Boolean
+    dense: Boolean,
+    reverse: Boolean,
   },
 
   computed: {
@@ -24,15 +29,16 @@ export default mixins(
       return {
         'v-timeline--align-top': this.alignTop,
         'v-timeline--dense': this.dense,
-        ...this.themeClasses
+        'v-timeline--reverse': this.reverse,
+        ...this.themeClasses,
       }
-    }
+    },
   },
 
   render (h): VNode {
     return h('div', {
       staticClass: 'v-timeline',
-      'class': this.classes
+      class: this.classes,
     }, this.$slots.default)
-  }
+  },
 })

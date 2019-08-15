@@ -1,7 +1,7 @@
 <template>
   <v-timeline
     id="roadmap"
-    class="mb-5"
+    class="mb-12"
     dense
   >
     <template v-for="(item, i) in items">
@@ -34,9 +34,9 @@
           @click.native="item.value = !item.value"
         >
           <v-card-title class="py-0 pr-2">
-            <span
+            <doc-markdown
               class="body-2"
-              v-text="item.title"
+              :code="item.title"
             />
             <v-spacer />
             <v-btn
@@ -45,7 +45,7 @@
               :input-value="item.value"
               :ripple="false"
               class="font-weight-light ma-0"
-              flat
+              text
             >
               <span
                 class="mr-2"
@@ -60,6 +60,15 @@
             <div v-if="(index != null && index >= i) || item.value">
               <v-card-text>
                 <doc-markdown :code="item.text" />
+
+                <template v-if="item.features">
+                  <div class="mt-4" />
+
+                  <template v-for="(features, key, index) in item.features">
+                    <doc-markdown :key="`title-${index}`" :code="key" />
+                    <doc-markdown :key="`list-${index}`" :code="features" />
+                  </template>
+                </template>
               </v-card-text>
             </div>
           </v-expand-transition>
@@ -73,25 +82,25 @@
   const types = {
     release: {
       icon: 'mdi-package-variant-closed',
-      color: 'indigo lighten-1'
+      color: 'indigo lighten-1',
     },
     packages: {
       icon: 'mdi-server-network',
       color: 'red lighten-2',
-      small: true
+      small: true,
     },
     site: {
       icon: 'mdi-content-cut',
       color: 'blue-grey',
-      small: true
-    }
+      small: true,
+    },
   }
 
   export default {
     data: () => ({
       index: null,
       interval: null,
-      items: []
+      items: [],
     }),
 
     mounted () {
@@ -99,15 +108,18 @@
         const type = types[item.type]
         return {
           ...type,
-          ...item
+          ...item,
         }
       }).reverse()
-    }
+    },
   }
 </script>
 
-<style lang="stylus">
-  #roadmap .v-timeline-item__body
-    p
-      margin: 0
+<style lang="sass">
+#roadmap
+  .v-timeline-item__body p
+    margin: 0
+
+  .markdown > h3
+    margin-bottom: 8px
 </style>

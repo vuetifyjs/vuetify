@@ -19,12 +19,12 @@ export default mixins(
   props: {
     disabled: {
       type: Boolean,
-      default: false
+      default: false,
     },
     value: {
       type: Boolean,
-      default: undefined
-    }
+      default: undefined,
+    },
   },
 
   methods: {
@@ -33,7 +33,7 @@ export default mixins(
     },
     onMouseLeave () {
       this.runDelay('close')
-    }
+    },
   },
 
   render (): VNode {
@@ -45,10 +45,9 @@ export default mixins(
 
     let element: VNode | ScopedSlotChildren
 
+    /* istanbul ignore else */
     if (this.$scopedSlots.default) {
       element = this.$scopedSlots.default({ hover: this.isActive })
-    } else if (this.$slots.default && this.$slots.default.length === 1) {
-      element = this.$slots.default[0]
     }
 
     if (Array.isArray(element) && element.length === 1) {
@@ -65,10 +64,10 @@ export default mixins(
       element.data = element.data || {}
       this._g(element.data, {
         mouseenter: this.onMouseEnter,
-        mouseleave: this.onMouseLeave
+        mouseleave: this.onMouseLeave,
       })
     }
 
     return element
-  }
+  },
 })

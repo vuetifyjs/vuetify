@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VSwitch.ts should render element with loader and match the snapshot 1`] = `
+<div class="v-input v-input--is-loading theme--light v-input--selection-controls v-input--switch">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-input--selection-controls__input">
+        <input aria-checked="false"
+               id="input-22"
+               role="switch"
+               type="checkbox"
+               aria-disabled="false"
+               value
+        >
+        <div class="v-input--selection-controls__ripple">
+        </div>
+        <div class="v-input--switch__track theme--light">
+        </div>
+        <div class="v-input--switch__thumb theme--light">
+          <div role="progressbar"
+               aria-valuemin="0"
+               aria-valuemax="100"
+               class="v-progress-circular v-progress-circular--indeterminate primary--text"
+               style="height: 16px; width: 16px;"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 viewbox="22.857142857142858 22.857142857142858 45.714285714285715 45.714285714285715"
+                 style="transform: rotate(0deg);"
+            >
+              <circle fill="transparent"
+                      cx="45.714285714285715"
+                      cy="45.714285714285715"
+                      r="20"
+                      stroke-width="5.714285714285714"
+                      stroke-dasharray="125.664"
+                      stroke-dashoffset="125.66370614359172px"
+                      class="v-progress-circular__overlay"
+              >
+              </circle>
+            </svg>
+            <div class="v-progress-circular__info">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
+    </div>
+  </div>
+</div>
+`;

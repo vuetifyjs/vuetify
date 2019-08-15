@@ -4,6 +4,7 @@
       v-if="$slots.default || code"
       :language="language"
       :code="code"
+      :inline="inline"
     ><slot /></prism>
 
     <div
@@ -11,21 +12,23 @@
       class="v-markup__edit"
     >
       <a
-        :href="`https://github.com/vuetifyjs/vuetify/tree/master/packages/docs/src/snippets/${file}`"
+        :href="href"
         target="_blank"
         rel="noopener"
         title="Edit code"
+        aria-label="Edit code"
       >
         <v-icon>mdi-pencil</v-icon>
       </a>
     </div>
 
-    <div class="v-markup__copy">
+    <div v-if="!hideCopy" class="v-markup__copy">
       <v-icon
         title="Copy code"
+        aria-label="Copy code"
         @click="copyMarkup"
       >
-        content_copy
+        mdi-content-copy
       </v-icon>
       <v-slide-x-transition>
         <span
@@ -36,7 +39,7 @@
     </div>
 
     <a
-      v-if="filename"
+      v-if="filename && file"
       :href="href"
       target="_blank"
       rel="noopener"
@@ -48,32 +51,37 @@
 </template>
 
 <script>
+  import { getBranch } from '@/util/helpers'
+
   export default {
     name: 'Markup',
 
     components: {
-      Prism: () => import('vue-prism-component')
+      Prism: () => import('vue-prism-component'),
     },
 
     props: {
       lang: {
         type: String,
-        default: undefined
+        default: undefined,
       },
+      inline: Boolean,
       value: {
         type: String,
-        default: 'markup'
+        default: 'markup',
       },
       filename: {
         type: Boolean,
-        default: process.env.NODE_ENV !== 'production'
-      }
+        default: process.env.NODE_ENV !== 'production',
+      },
+      hideCopy: Boolean,
     },
 
     data: vm => ({
       code: null,
       copied: false,
-      language: vm.lang
+      language: vm.lang,
+      branch: null,
     }),
 
     computed: {
@@ -85,19 +93,17 @@
         return `${folder}/${file}.txt`
       },
       href () {
-        const branch = process.env.NODE_ENV === 'production' ? 'master' : 'dev'
-        const href = `https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/docs/src/snippets`
-
-        return `${href}/${this.file}`
+        return `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/snippets/${this.file}`
       },
       id () {
         if (this.value === 'markup') return
         return 'markup-' + this.value.replace(/_/g, '-')
-      }
+      },
     },
 
     mounted () {
       this.$nextTick(this.init)
+      this.branch = getBranch()
     },
 
     methods: {
@@ -120,109 +126,109 @@
       parseRaw (res) {
         this.language = this.lang || this.value.split('_').shift()
         this.code = res.default.trim()
-      }
-    }
+      },
+    },
   }
 </script>
 
-<style lang="stylus">
-  .v-markup
-    align-items: center
-    box-shadow: none
-    display: flex
-    border-radius: 2px
+<style lang="sass">
+.v-markup
+  align-items: center
+  box-shadow: none
+  display: flex
+  border-radius: 4px
+  position: relative
+  overflow-x: auto
+  overflow-y: hidden
+  margin-bottom: 16px
+  background: #2d2d2d
+  color: #fff
+
+  pre, code
+    margin: 0
+    background: transparent
+    font-family: 'Inconsolata', monospace
+    font-weight: 300
+    font-size: 15px
+    line-height: 1.55
+
+  code
     position: relative
+    box-shadow: none
     overflow-x: auto
     overflow-y: hidden
-    margin-bottom: 16px
-    background: #2d2d2d
-    color: #fff
+    word-break: break-word
+    flex-wrap: wrap
+    align-items: center
+    vertical-align: middle
+    white-space: pre-wrap
 
-    pre, code
-      margin: 0
-      background: transparent
-      font-family: 'Inconsolata', monospace
-      font-weight: 300
-      font-size: 15px
-      line-height: 1.55
+    &:before
+      display: none
 
-    code
-      position: relative
-      box-shadow: none
-      overflow-x: auto
-      overflow-y: hidden
-      word-break: break-word
-      flex-wrap: wrap
-      align-items: center
-      vertical-align: middle
-      white-space: pre-wrap
+  &__copied
+    position: absolute
+    top: 12px
+    right: 75px
 
-      &:before
-        display: none
+  &__copy,
+  &__edit
+    position: absolute
+    top: 0
+    cursor: pointer
+    width: 25px
+    height: 25px
+    z-index: 1
 
-    &__copied
-      position: absolute
-      top: 12px
-      right: 100px
+  &__copy
+    right: 0
 
-    &__copy,
-    &__edit
-      position: absolute
-      top: 0px
-      cursor: pointer
-      width: 25px
-      height: 25px
-      z-index: 1
+  &__edit
+    right: 36px
 
-    &__copy
-      right: 0
-
-    &__edit
-      right: 36px
-
-      > a
-        color: inherit
-        text-decoration: none
-
-    &__filename
+    > a
+      color: inherit
       text-decoration: none
-      position: absolute
-      bottom: 0
-      right: 0
-      padding: 8px 12px 8px 8px
-      font-size: 12px
-      color: rgba(#fff, .56)
 
-    &:after
-      position: absolute
-      right: 10px
-      transition: opacity .2s ease-in
-      content: attr(data-lang)
-      color: rgba(#000, 0.3)
-      font-size: 1rem
-      font-weight: 700
-      top: 5px
+  a.v-markup__filename
+    text-decoration: none
+    position: absolute
+    bottom: 0
+    right: 0
+    padding: 8px 12px 8px 8px
+    font-size: 12px
+    color: rgba(#fff, .56)
 
-    &:hover
-      .v-markup__copy,
-      .v-markup__edit
-        .v-icon
-          opacity: 1
+  &:after
+    position: absolute
+    right: 10px
+    transition: opacity .2s ease-in
+    content: attr(data-lang)
+    color: rgba(#000, 0.3)
+    font-size: 1rem
+    font-weight: 700
+    top: 5px
 
-        &:after
-          opacity: 0
-
+  &:hover
     .v-markup__copy,
     .v-markup__edit
       .v-icon
-        color: inherit
-        position: absolute
-        right: 0
-        transition: opacity .2s ease-in
-        font-size: 1.5rem
+        opacity: 1
+
+      &:after
         opacity: 0
-        top: 0
-        width: 50px
-        height: 50px
-        z-index: 4
+
+  .v-markup__copy,
+  .v-markup__edit
+    .v-icon
+      color: inherit
+      position: absolute
+      right: 0
+      transition: opacity .2s ease-in
+      font-size: 1.5rem
+      opacity: 0
+      top: 0
+      width: 50px
+      height: 50px
+      z-index: 4
 </style>

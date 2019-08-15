@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VAlert",
   "children": [
     {
       "type": "section",
@@ -24,13 +25,38 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "closable",
-            "icon",
-            "transition",
-            "outline"
+            "simple/type",
+            "simple/border",
+            "simple/colored-border",
+            "simple/dense",
+            "simple/dismissible",
+            "simple/icon",
+            "simple/outlined",
+            "simple/prominent",
+            "simple/text",
+            "simple/transition",
+            "complex/twitter"
           ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "accessibility",
+          "value": "accessibility"
         }
       ]
     },

@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_dividers.styl'
+import './VDivider.sass'
 
 // Types
 import { VNode } from 'vue'
@@ -12,19 +12,28 @@ export default Themeable.extend({
 
   props: {
     inset: Boolean,
-    vertical: Boolean
+    vertical: Boolean,
   },
 
   render (h): VNode {
+    // WAI-ARIA attributes
+    let orientation
+    if (!this.$attrs.role || this.$attrs.role === 'separator') {
+      orientation = this.vertical ? 'vertical' : 'horizontal'
+    }
     return h('hr', {
       class: {
         'v-divider': true,
         'v-divider--inset': this.inset,
         'v-divider--vertical': this.vertical,
-        ...this.themeClasses
+        ...this.themeClasses,
       },
-      attrs: this.$attrs,
-      on: this.$listeners
+      attrs: {
+        role: 'separator',
+        'aria-orientation': orientation,
+        ...this.$attrs,
+      },
+      on: this.$listeners,
     })
-  }
+  },
 })

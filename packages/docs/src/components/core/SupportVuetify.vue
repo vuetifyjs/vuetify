@@ -1,46 +1,54 @@
 <template>
   <v-card
-    class="mb-5"
-    href="https://www.patreon.com/vuetify"
+    aria-label="Support the Development of Vuetify"
+    class="mb-12"
+    href="https://github.com/users/johnleider/sponsorship"
     rel="noopener"
     target="_blank"
+    elevation="16"
   >
     <v-card-text>
-      <v-layout row wrap>
+      <v-layout wrap>
         <v-flex
           :style="{ order: $vuetify.breakpoint.xs ? '2' : '1' }"
           d-flex
           pl-1
           xs10
         >
-          <v-layout align-center row wrap>
+          <v-layout align-center wrap>
             <v-flex
               display-1
-              mr-4
-              patreon
+              mr-6
+              support
               d-flex
               xs12
               sm6
             >
-              PATREON
+              <v-icon x-large class="mr-3">mdi-github-circle</v-icon>
+              GITHUB
             </v-flex>
-            <v-flex hidden-xs-only patreon-bar mr-4 />
-            <v-flex hidden-sm-and-up patreon-bar-horizontal mr-4 />
-            <v-flex xs12 sm6 display-1 patreon-caption pb-1>
-              Support Vuetify
+            <v-flex hidden-xs-only support-bar mr-6 />
+            <v-flex hidden-sm-and-up support-bar-horizontal mr-6 />
+            <v-flex xs12 sm6 display-1 support-caption>
+              Sponsor the project
             </v-flex>
           </v-layout>
         </v-flex>
         <v-flex
           :style="{ order: $vuetify.breakpoint.xs ? '1' : '2' }"
           align-center
-          text-xs-center
+          text-center
           xs2
           d-flex
         >
           <v-layout align-center>
             <v-flex xs12>
-              <img class="logo" src="https://cdn.vuetifyjs.com/images/logos/logo.svg" width="50px" alt="">
+              <v-img
+                class="logo"
+                src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
+                width="50px"
+                alt="Vuetify Logo"
+              />
             </v-flex>
           </v-layout>
         </v-flex>
@@ -49,27 +57,26 @@
   </v-card>
 </template>
 
-<style lang="stylus" scoped>
-  .patreon {
-    color: #052D49;
-    flex: 0 0 auto;
-    font-weight: 900;
-    letter-spacing: 6px !important;
-  }
+<style lang="sass" scoped>
+.support
+  color: #052D49
+  flex: 0 0 auto
+  font-weight: 900
+  letter-spacing: 6px !important
 
-  .patreon-bar {
-    background-color: #052D49;
-    height: 80px;
-    flex: 0 1 6px;
-  }
+  .v-icon
+    color: inherit
 
-  .patreon-bar-horizontal {
-    border-bottom: 6px solid #052D49;
-    width: 100%;
-    flex-shrink: 1;
-  }
+.support-bar
+  background-color: #052D49
+  height: 80px
+  flex: 0 1 6px
 
-  .patreon-caption {
-    color: #052D49;
-  }
+.support-bar-horizontal
+  border-bottom: 6px solid #052D49
+  width: 100%
+  flex-shrink: 1
+
+.support-caption
+  color: #052D49
 </style>

@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VDivider",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/dividers.html"
+  },
   "children": [
     {
       "type": "section",
@@ -24,15 +29,32 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "lightAndDark",
-            "inset",
-            "subheaders",
-            "dividerList",
-            "dividerListPortrait",
-            "vertical"
+            "simple/inset",
+            "simple/vertical",
+            "simple/vertical-inset",
+            "intermediate/subheaders",
+            "intermediate/divider-list-portrait"
           ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "accessibility",
+          "value": "accessibility"
         }
       ]
     },

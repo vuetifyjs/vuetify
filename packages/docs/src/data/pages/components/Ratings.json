@@ -1,16 +1,14 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VRating",
   "children": [
     {
       "type": "section",
       "children": [
         {
           "type": "usage",
-          "value": {
-            "file": "usage",
-            "newIn": "1.2"
-          }
+          "value": "usage"
         }
       ]
     },
@@ -27,32 +25,24 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            {
-              "file": "sizes",
-              "newIn": "1.2"
-            },
-            {
-              "file": "length",
-              "newIn": "1.2"
-            },
-            {
-              "file": "increments",
-              "newIn": "1.2"
-            },
-            {
-              "file": "slots",
-              "newIn": "1.2"
-            },
-            {
-              "file": "card",
-              "newIn": "1.2"
-            },
-            {
-              "file": "advanced",
-              "newIn": "1.2"
-            }
+            "simple/sizes",
+            "simple/colors",
+            "simple/length",
+            "intermediate/increments",
+            "intermediate/slots",
+            "intermediate/card",
+            "complex/advanced"
           ]
         }
       ]

@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_steppers.styl'
+import './VStepper.sass'
 
 // Components
 import VStepperStep from './VStepperStep'
@@ -7,81 +7,83 @@ import VStepperContent from './VStepperContent'
 
 // Mixins
 import { provide as RegistrableProvide } from '../../mixins/registrable'
+import Proxyable from '../../mixins/proxyable'
 import Themeable from '../../mixins/themeable'
 
-// Util
+// Utilities
 import mixins from '../../util/mixins'
+import { breaking } from '../../util/console'
 
 // Types
 import { VNode } from 'vue'
 
+const baseMixins = mixins(
+  RegistrableProvide('stepper'),
+  Proxyable,
+  Themeable
+)
+
 type VStepperStepInstance = InstanceType<typeof VStepperStep>
 type VStepperContentInstance = InstanceType<typeof VStepperContent>
 
-export default mixins(
-  RegistrableProvide('stepper'),
-  Themeable
 /* @vue/component */
-).extend({
+export default baseMixins.extend({
   name: 'v-stepper',
 
   provide (): object {
     return {
       stepClick: this.stepClick,
-      isVertical: this.vertical
+      isVertical: this.vertical,
     }
   },
 
   props: {
-    nonLinear: Boolean,
     altLabels: Boolean,
+    nonLinear: Boolean,
     vertical: Boolean,
-    value: [Number, String]
   },
 
   data () {
     return {
-      inputValue: null as any,
       isBooted: false,
       steps: [] as VStepperStepInstance[],
       content: [] as VStepperContentInstance[],
-      isReverse: false
+      isReverse: false,
     }
   },
 
   computed: {
     classes (): object {
       return {
-        'v-stepper': true,
         'v-stepper--is-booted': this.isBooted,
         'v-stepper--vertical': this.vertical,
         'v-stepper--alt-labels': this.altLabels,
         'v-stepper--non-linear': this.nonLinear,
-        ...this.themeClasses
+        ...this.themeClasses,
       }
-    }
+    },
   },
 
   watch: {
-    inputValue (val, prev) {
-      this.isReverse = Number(val) < Number(prev)
-      for (let index = this.steps.length; --index >= 0;) {
-        this.steps[index].toggle(this.inputValue)
-      }
-      for (let index = this.content.length; --index >= 0;) {
-        this.content[index].toggle(this.inputValue, this.isReverse)
-      }
+    internalValue (val, oldVal) {
+      this.isReverse = Number(val) < Number(oldVal)
 
-      this.$emit('input', this.inputValue)
-      prev && (this.isBooted = true)
+      oldVal && (this.isBooted = true)
+
+      this.updateView()
     },
-    value () {
-      this.$nextTick(() => (this.inputValue = this.value))
+  },
+
+  created () {
+    /* istanbul ignore next */
+    if (this.$listeners.input) {
+      breaking('@input', '@change', this)
     }
   },
 
   mounted () {
-    this.inputValue = this.value || this.steps[0].step || 1
+    this.internalLazyValue = this.value || (this.steps[0] || {}).step || 1
+    this.updateView()
   },
 
   methods: {
@@ -102,13 +104,22 @@ export default mixins(
       }
     },
     stepClick (step: string | number) {
-      this.$nextTick(() => (this.inputValue = step))
-    }
+      this.$nextTick(() => (this.internalValue = step))
+    },
+    updateView () {
+      for (let index = this.steps.length; --index >= 0;) {
+        this.steps[index].toggle(this.internalValue as any)
+      }
+      for (let index = this.content.length; --index >= 0;) {
+        this.content[index].toggle(this.internalValue as any, this.isReverse)
+      }
+    },
   },
 
   render (h): VNode {
     return h('div', {
-      'class': this.classes
+      staticClass: 'v-stepper',
+      class: this.classes,
     }, this.$slots.default)
-  }
+  },
 })

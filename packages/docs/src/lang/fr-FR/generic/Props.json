@@ -1,0 +1,12 @@
+{
+  "auto": "Centre la liste sur l'élément sélectionné",
+  "centered": "Centre les onglets",
+  "clearable": "Ajoute la fonctionnalité de nettoyage du champ, l'icône par défaut est **clear** de Material Design",
+  "falseValue": "Définit la valeur pour l’état évalué à faux",
+  "fullWidth": "Force la largeur à 100%",
+  "fixedTabs": "`v-tabs-item` min-width 160px (72px mobile), max-width 264px",
+  "id": "Définit l'identifiant DOM sur le composant",
+  "singleLine": "Le label ne se déplace pas dans l'état focus / sale",
+  "textColor": "Applique une couleur spécifiée au texte du contrôle",
+  "trueValue": "Définit la valeur pour l’état évalué à vrai"
+}

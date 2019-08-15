@@ -1,0 +1,877 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VSlider.ts should change track styles in rtl 1`] = `
+<div class="v-input theme--light v-input__slider">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider v-slider--horizontal theme--light">
+        <input value="0"
+               id="input-91"
+               readonly="readonly"
+               tabindex="-1"
+        >
+        <div class="v-slider__track-container">
+          <div class="v-slider__track-background primary lighten-3"
+               style="right: 0px;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 0%;"
+          >
+          </div>
+        </div>
+        <div role="slider"
+             tabindex="0"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-valuenow="0"
+             aria-readonly="false"
+             aria-orientation="horizontal"
+             class="v-slider__thumb-container primary--text"
+             style="left: 0%;"
+        >
+          <div class="v-slider__thumb primary">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VSlider.ts should change track styles in rtl 2`] = `
+<div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-input__slider">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider v-slider--horizontal theme--light">
+        <input value="50"
+               id="input-91"
+               readonly="readonly"
+               tabindex="-1"
+        >
+        <div class="v-slider__track-container">
+          <div class="v-slider__track-background primary lighten-3"
+               style="right: 0px;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 50%;"
+          >
+          </div>
+        </div>
+        <div role="slider"
+             tabindex="0"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-valuenow="50"
+             aria-readonly="false"
+             aria-orientation="horizontal"
+             class="v-slider__thumb-container primary--text"
+             style="left: 50%;"
+        >
+          <div class="v-slider__thumb primary">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VSlider.ts should change track styles in rtl 3`] = `
+<div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-disabled theme--light v-input__slider">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider v-slider--horizontal v-slider--disabled theme--light">
+        <input value="50"
+               id="input-91"
+               readonly="readonly"
+               tabindex="-1"
+               disabled="disabled"
+        >
+        <div class="v-slider__track-container">
+          <div class="v-slider__track-background"
+               style="right: 0px;"
+          >
+          </div>
+          <div class="v-slider__track-fill"
+               style="left: 0px; width: 50%;"
+          >
+          </div>
+        </div>
+        <div role="slider"
+             tabindex="-1"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-valuenow="50"
+             aria-readonly="false"
+             aria-orientation="horizontal"
+             class="v-slider__thumb-container"
+             style="left: 50%;"
+        >
+          <div class="v-slider__thumb">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VSlider.ts should change track styles in rtl 4`] = `
+<div class="v-input theme--light v-input__slider">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider v-slider--horizontal theme--light">
+        <input value="0"
+               id="input-91"
+               readonly="readonly"
+               tabindex="-1"
+        >
+        <div class="v-slider__track-container">
+          <div class="v-slider__track-background primary lighten-3"
+               style="left: 0px;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 0%; right: 0px;"
+          >
+          </div>
+        </div>
+        <div role="slider"
+             tabindex="0"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-valuenow="0"
+             aria-readonly="false"
+             aria-orientation="horizontal"
+             class="v-slider__thumb-container primary--text"
+             style="left: 100%;"
+        >
+          <div class="v-slider__thumb primary">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VSlider.ts should change track styles in rtl 5`] = `
+<div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-input__slider">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider v-slider--horizontal theme--light">
+        <input value="50"
+               id="input-91"
+               readonly="readonly"
+               tabindex="-1"
+        >
+        <div class="v-slider__track-container">
+          <div class="v-slider__track-background primary lighten-3"
+               style="left: 0px;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 50%; right: 0px;"
+          >
+          </div>
+        </div>
+        <div role="slider"
+             tabindex="0"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-valuenow="50"
+             aria-readonly="false"
+             aria-orientation="horizontal"
+             class="v-slider__thumb-container primary--text"
+             style="left: 50%;"
+        >
+          <div class="v-slider__thumb primary">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VSlider.ts should change track styles in rtl 6`] = `
+<div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-disabled theme--light v-input__slider">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider v-slider--horizontal v-slider--disabled theme--light">
+        <input value="50"
+               id="input-91"
+               readonly="readonly"
+               tabindex="-1"
+               disabled="disabled"
+        >
+        <div class="v-slider__track-container">
+          <div class="v-slider__track-background"
+               style="left: 0px;"
+          >
+          </div>
+          <div class="v-slider__track-fill"
+               style="left: 0px; width: 50%; right: 0px;"
+          >
+          </div>
+        </div>
+        <div role="slider"
+             tabindex="-1"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-valuenow="50"
+             aria-readonly="false"
+             aria-orientation="horizontal"
+             class="v-slider__thumb-container"
+             style="left: 50%;"
+        >
+          <div class="v-slider__thumb">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VSlider.ts should correctly handle initial value of zero (#7320) 1`] = `
+<div class="v-input theme--light v-input__slider">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider v-slider--horizontal theme--light">
+        <input value="0"
+               id="input-111"
+               readonly="readonly"
+               tabindex="-1"
+        >
+        <div class="v-slider__track-container">
+          <div class="v-slider__track-background primary lighten-3"
+               style="right: 0px;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 50%;"
+          >
+          </div>
+        </div>
+        <div role="slider"
+             tabindex="0"
+             aria-valuemin="-20"
+             aria-valuemax="20"
+             aria-valuenow="0"
+             aria-readonly="false"
+             aria-orientation="horizontal"
+             class="v-slider__thumb-container primary--text"
+             style="left: 50%;"
+        >
+          <div class="v-slider__thumb primary">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VSlider.ts should correctly handle setting value to zero (#7320) 1`] = `
+<div class="v-input theme--light v-input__slider">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider v-slider--horizontal theme--light">
+        <input value="0"
+               id="input-115"
+               readonly="readonly"
+               tabindex="-1"
+        >
+        <div class="v-slider__track-container">
+          <div class="v-slider__track-background primary lighten-3"
+               style="right: 0px;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 50%;"
+          >
+          </div>
+        </div>
+        <div role="slider"
+             tabindex="0"
+             aria-valuemin="-20"
+             aria-valuemax="20"
+             aria-valuenow="0"
+             aria-readonly="false"
+             aria-orientation="horizontal"
+             class="v-slider__thumb-container primary--text"
+             style="left: 50%;"
+        >
+          <div class="v-slider__thumb primary">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VSlider.ts should display label and have different aria-label 1`] = `
+<div class="v-input theme--light v-input__slider">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <label for="input-95"
+             class="v-label theme--light"
+             style="left: 0px; position: relative;"
+      >
+        foo
+      </label>
+      <div class="v-slider v-slider--horizontal theme--light">
+        <input value="0"
+               id="input-95"
+               readonly="readonly"
+               tabindex="-1"
+               aria-label="bar"
+        >
+        <div class="v-slider__track-container">
+          <div class="v-slider__track-background primary lighten-3"
+               style="right: 0px;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 0%;"
+          >
+          </div>
+        </div>
+        <div role="slider"
+             tabindex="0"
+             aria-label="bar"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-valuenow="0"
+             aria-readonly="false"
+             aria-orientation="horizontal"
+             class="v-slider__thumb-container primary--text"
+             style="left: 0%;"
+        >
+          <div class="v-slider__thumb primary">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VSlider.ts should match a snapshot 1`] = `
+<div class="v-input theme--light v-input__slider">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider v-slider--horizontal theme--light">
+        <input value="0"
+               id="input-1"
+               readonly="readonly"
+               tabindex="-1"
+        >
+        <div class="v-slider__track-container">
+          <div class="v-slider__track-background primary lighten-3"
+               style="right: 0px;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 0%;"
+          >
+          </div>
+        </div>
+        <div role="slider"
+             tabindex="0"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-valuenow="0"
+             aria-readonly="false"
+             aria-orientation="horizontal"
+             class="v-slider__thumb-container primary--text"
+             style="left: 0%;"
+        >
+          <div class="v-slider__thumb primary">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VSlider.ts should render component with thumbLabel and match a snapshot 1`] = `
+<div class="v-input theme--light v-input__slider">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider v-slider--horizontal theme--light">
+        <input value="0"
+               id="input-13"
+               readonly="readonly"
+               tabindex="-1"
+        >
+        <div class="v-slider__track-container">
+          <div class="v-slider__track-background primary lighten-3"
+               style="right: 0px;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 0%;"
+          >
+          </div>
+        </div>
+        <div role="slider"
+             tabindex="0"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-valuenow="0"
+             aria-readonly="false"
+             aria-orientation="horizontal"
+             class="v-slider__thumb-container v-slider__thumb-container--show-label primary--text"
+             style="left: 0%;"
+        >
+          <div class="v-slider__thumb primary">
+          </div>
+          <div class="v-slider__thumb-label-container"
+               style="display: none;"
+          >
+            <div class="v-slider__thumb-label primary"
+                 style="height: 32px; width: 32px; transform: translateY(-20%) translateY(-12px) translateX(-50%) rotate(45deg);"
+            >
+              <div>
+                <span>
+                  0
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VSlider.ts should render component with thumbLabel and match a snapshot 2`] = `
+<div class="v-input theme--light v-input__slider">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider v-slider--horizontal theme--light">
+        <input value="0"
+               id="input-13"
+               readonly="readonly"
+               tabindex="-1"
+        >
+        <div class="v-slider__track-container">
+          <div class="v-slider__track-background primary lighten-3"
+               style="right: 0px;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 0%;"
+          >
+          </div>
+        </div>
+        <div role="slider"
+             tabindex="0"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-valuenow="0"
+             aria-readonly="false"
+             aria-orientation="horizontal"
+             class="v-slider__thumb-container v-slider__thumb-container--show-label primary--text"
+             style="left: 0%;"
+        >
+          <div class="v-slider__thumb primary">
+          </div>
+          <div class="v-slider__thumb-label-container"
+               style
+          >
+            <div class="v-slider__thumb-label primary"
+                 style="height: 32px; width: 32px; transform: translateY(-20%) translateY(-12px) translateX(-50%) rotate(45deg);"
+            >
+              <div>
+                <span>
+                  0
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VSlider.ts should render component with ticks and match a snapshot 1`] = `
+<div class="v-input theme--light v-input__slider">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider v-slider--horizontal theme--light">
+        <input value="0"
+               id="input-9"
+               readonly="readonly"
+               tabindex="-1"
+        >
+        <div class="v-slider__track-container">
+          <div class="v-slider__track-background primary lighten-3"
+               style="right: 0px;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 0%;"
+          >
+          </div>
+        </div>
+        <div class="v-slider__ticks-container">
+          <span class="v-slider__tick"
+                style="width: 2px; height: 2px;"
+          >
+          </span>
+          <span class="v-slider__tick"
+                style="width: 2px; height: 2px;"
+          >
+          </span>
+          <span class="v-slider__tick"
+                style="width: 2px; height: 2px;"
+          >
+          </span>
+          <span class="v-slider__tick"
+                style="width: 2px; height: 2px;"
+          >
+          </span>
+          <span class="v-slider__tick"
+                style="width: 2px; height: 2px;"
+          >
+          </span>
+        </div>
+        <div role="slider"
+             tabindex="0"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-valuenow="0"
+             aria-readonly="false"
+             aria-orientation="horizontal"
+             class="v-slider__thumb-container primary--text"
+             style="left: 0%;"
+        >
+          <div class="v-slider__thumb primary">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VSlider.ts should render component with ticks and match a snapshot 2`] = `
+<div class="v-input theme--light v-input__slider">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider v-slider--horizontal theme--light">
+        <input value="0"
+               id="input-9"
+               readonly="readonly"
+               tabindex="-1"
+        >
+        <div class="v-slider__track-container">
+          <div class="v-slider__track-background primary lighten-3"
+               style="right: 0px;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 0%;"
+          >
+          </div>
+        </div>
+        <div class="v-slider__ticks-container v-slider__ticks-container--always-show">
+          <span class="v-slider__tick"
+                style="width: 2px; height: 2px;"
+          >
+          </span>
+          <span class="v-slider__tick"
+                style="width: 2px; height: 2px;"
+          >
+          </span>
+          <span class="v-slider__tick"
+                style="width: 2px; height: 2px;"
+          >
+          </span>
+          <span class="v-slider__tick"
+                style="width: 2px; height: 2px;"
+          >
+          </span>
+          <span class="v-slider__tick"
+                style="width: 2px; height: 2px;"
+          >
+          </span>
+        </div>
+        <div role="slider"
+             tabindex="0"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-valuenow="0"
+             aria-readonly="false"
+             aria-orientation="horizontal"
+             class="v-slider__thumb-container primary--text"
+             style="left: 0%;"
+        >
+          <div class="v-slider__thumb primary">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VSlider.ts should render vertical slider 1`] = `
+<div class="v-input theme--light v-input__slider v-input__slider--vertical">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider v-slider--vertical theme--light">
+        <input value="0"
+               id="input-5"
+               readonly="readonly"
+               tabindex="-1"
+        >
+        <div class="v-slider__track-container">
+          <div class="v-slider__track-background primary lighten-3"
+               style="top: 0px;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="bottom: 0px; height: 0%;"
+          >
+          </div>
+        </div>
+        <div role="slider"
+             tabindex="0"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-valuenow="0"
+             aria-readonly="false"
+             aria-orientation="vertical"
+             class="v-slider__thumb-container primary--text"
+             style="top: 100%;"
+        >
+          <div class="v-slider__thumb primary">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VSlider.ts should reverse label location when inverse 1`] = `
+<div class="v-input theme--light v-input__slider">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <label for="input-87"
+             class="v-label theme--light"
+             style="left: 0px; position: relative;"
+      >
+        foo
+      </label>
+      <div class="v-slider v-slider--horizontal theme--light">
+        <input value="0"
+               id="input-87"
+               readonly="readonly"
+               tabindex="-1"
+        >
+        <div class="v-slider__track-container">
+          <div class="v-slider__track-background primary lighten-3"
+               style="right: 0px;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 0%;"
+          >
+          </div>
+        </div>
+        <div role="slider"
+             tabindex="0"
+             aria-label="foo"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-valuenow="0"
+             aria-readonly="false"
+             aria-orientation="horizontal"
+             class="v-slider__thumb-container primary--text"
+             style="left: 0%;"
+        >
+          <div class="v-slider__thumb primary">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VSlider.ts should reverse label location when inverse 2`] = `
+<div class="v-input theme--light v-input__slider v-input__slider--inverse-label">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider v-slider--horizontal theme--light">
+        <input value="0"
+               id="input-87"
+               readonly="readonly"
+               tabindex="-1"
+        >
+        <div class="v-slider__track-container">
+          <div class="v-slider__track-background primary lighten-3"
+               style="right: 0px;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 0%;"
+          >
+          </div>
+        </div>
+        <div role="slider"
+             tabindex="0"
+             aria-label="foo"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-valuenow="0"
+             aria-readonly="false"
+             aria-orientation="horizontal"
+             class="v-slider__thumb-container primary--text"
+             style="left: 0%;"
+        >
+          <div class="v-slider__thumb primary">
+          </div>
+        </div>
+      </div>
+      <label for="input-87"
+             class="v-label theme--light"
+             style="left: 0px; position: relative;"
+      >
+        foo
+      </label>
+    </div>
+    <div class="v-messages theme--light">
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
+    </div>
+  </div>
+</div>
+`;

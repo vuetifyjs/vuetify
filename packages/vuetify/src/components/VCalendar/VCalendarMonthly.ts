@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_calendar-weekly.styl'
+import './VCalendarWeekly.sass'
 
 // Mixins
 import VCalendarWeekly from './VCalendarWeekly'
@@ -20,7 +20,7 @@ export default VCalendarWeekly.extend({
     },
     parsedEnd (): VTimestamp {
       return getEndOfMonth(parseTimestamp(this.end) as VTimestamp)
-    }
-  }
+    },
+  },
 
 })

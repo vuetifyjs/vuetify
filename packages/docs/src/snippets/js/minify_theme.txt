@@ -1,9 +1,18 @@
-Vue.use(Vuetify, {
-  options: {
-    minifyTheme: function (css) {
-      return process.env.NODE_ENV === 'production'
-        ? css.replace(/[\s|\r\n|\r|\n]/g, '')
-        : css
-    }
-  }
+// src/plugins/vuetify.js
+
+import Vue from 'vue'
+import Vuetify from 'vuetify/lib'
+
+Vue.use(Vuetify)
+
+export default new Vuetify({
+  theme: {
+    options: {
+      minifyTheme: function (css) {
+        return process.env.NODE_ENV === 'production'
+          ? css.replace(/[\s|\r\n|\r|\n]/g, '')
+          : css
+      },
+    },
+  },
 })

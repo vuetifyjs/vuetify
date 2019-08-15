@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VCombobox",
   "children": [
     {
       "type": "section",
@@ -8,6 +9,11 @@
         {
           "type": "usage",
           "value": "usage"
+        },
+        {
+          "type": "alert",
+          "lang": "Components.Selects.objectAlert",
+          "value": "error"
         }
       ]
     },
@@ -24,12 +30,8 @@
       "type": "section",
       "children": [
         {
-          "type": "supplemental",
-          "value": [
-            {
-              "type": "components-mask-table"
-            }
-          ]
+          "type": "playground",
+          "value": "playground"
         }
       ]
     },
@@ -38,7 +40,11 @@
       "children": [
         {
           "type": "examples",
-          "value": [ "noData", "advanced", "comboboxMultiple" ]
+          "value": [
+            "simple/combobox-multiple",
+            "intermediate/no-data",
+            "intermediate/advanced"
+          ]
         }
       ]
     },

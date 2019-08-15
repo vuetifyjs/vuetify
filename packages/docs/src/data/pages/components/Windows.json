@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VWindow",
   "children": [
     {
       "type": "section",
@@ -27,10 +28,21 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "onboarding",
-            "account"
+            "simple/vertical",
+            "simple/reverse",
+            "simple/onboarding",
+            "complex/account"
           ]
         }
       ]

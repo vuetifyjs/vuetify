@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VSelectList.ts should display falsy items 1`] = `
+<div class="v-select-list v-card theme--light">
+  <div role="listbox"
+       tabindex="-1"
+       class="v-list v-sheet v-sheet--tile theme--light"
+  >
+    <div tabindex="0"
+         aria-selected="false"
+         aria-labelledby="0-list-item-29"
+         role="option"
+         class="v-list-item v-list-item--link theme--light"
+    >
+      <div class="v-list-item__content">
+        <div id="0-list-item-29"
+             class="v-list-item__title"
+        >
+          0
+        </div>
+      </div>
+    </div>
+    <div tabindex="0"
+         aria-selected="false"
+         aria-labelledby="null-list-item-29"
+         role="option"
+         class="v-list-item v-list-item--link theme--light"
+    >
+      <div class="v-list-item__content">
+        <div id="null-list-item-29"
+             class="v-list-item__title"
+        >
+          null
+        </div>
+      </div>
+    </div>
+    <div tabindex="0"
+         aria-selected="false"
+         aria-labelledby="false-list-item-29"
+         role="option"
+         class="v-list-item v-list-item--link theme--light"
+    >
+      <div class="v-list-item__content">
+        <div id="false-list-item-29"
+             class="v-list-item__title"
+        >
+          false
+        </div>
+      </div>
+    </div>
+    <div tabindex="0"
+         aria-selected="false"
+         aria-labelledby="undefined-list-item-29"
+         role="option"
+         class="v-list-item v-list-item--link theme--light"
+    >
+      <div class="v-list-item__content">
+        <div id="undefined-list-item-29"
+             class="v-list-item__title"
+        >
+          undefined
+        </div>
+      </div>
+    </div>
+    <div tabindex="0"
+         aria-selected="false"
+         aria-labelledby="-list-item-29"
+         role="option"
+         class="v-list-item v-list-item--link theme--light"
+    >
+      <div class="v-list-item__content">
+        <div id="-list-item-29"
+             class="v-list-item__title"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VSelectList.ts should display no-data-text when item slot is provided 1`] = `
+<div class="v-select-list v-card theme--light">
+  <div role="listbox"
+       tabindex="-1"
+       class="v-list v-sheet v-sheet--tile theme--light"
+  >
+    <div tabindex="-1"
+         class="v-list-item theme--light"
+    >
+      <div class="v-list-item__content">
+        <div id="undefined-list-item-10"
+             class="v-list-item__title"
+        >
+          undefined
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VSelectList.ts should generate children 1`] = `
+<div class="v-select-list v-card theme--light">
+  <div role="listbox"
+       tabindex="-1"
+       class="v-list v-sheet v-sheet--tile theme--light"
+  >
+    <div class="v-subheader theme--light">
+      true
+    </div>
+    <hr role="separator"
+        aria-orientation="horizontal"
+        class="v-divider theme--light"
+    >
+    <div tabindex="0"
+         aria-selected="false"
+         aria-labelledby="foo-list-item-14"
+         role="option"
+         class="v-list-item v-list-item--link theme--light"
+    >
+      <div class="v-list-item__content">
+        <div id="foo-list-item-14"
+             class="v-list-item__title"
+        >
+          foo
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

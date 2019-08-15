@@ -1,0 +1,85 @@
+@import '../../styles/styles.sass'
+
+// Theme
++theme(v-pagination) using ($material)
+  .v-pagination__item
+    background: map-get($material, 'cards')
+    color: map-deep-get($material, 'text', 'primary')
+    min-width: 34px
+    padding: 0 5px
+    width: auto
+
+    &--active
+      color: map-deep-get($material, 'text', 'theme')
+
+  .v-pagination__navigation
+    background: map-get($material, 'cards')
+
+.v-pagination
+  align-items: center
+  display: inline-flex
+  list-style-type: none
+  justify-content: center
+  margin: 0
+  max-width: 100%
+  width: 100%
+
+  &#{&}
+    padding-left: 0
+
+  > li
+    align-items: center
+    display: flex
+
+  &--circle
+    .v-pagination__item,
+    .v-pagination__more,
+    .v-pagination__navigation
+      border-radius: 50%
+
+  &--disabled
+    pointer-events: none
+    opacity: .6
+
+  &__item
+    +elevation(2)
+    border-radius: 4px
+    font-size: 14px
+    background: transparent
+    height: 34px
+    width: 34px
+    margin: .3rem
+    text-decoration: none
+    transition: .3s map-get($transition, 'linear-out-slow-in')
+
+    &--active
+      +elevation(4)
+
+  &__navigation
+    +elevation(2)
+    display: inline-flex
+    justify-content: center
+    align-items: center
+    text-decoration: none
+    height: 2rem
+
+    border-radius: 4px
+    width: 2rem
+    margin: .3rem 10px
+
+    .v-icon
+      font-size: 2rem
+      transition: $secondary-transition
+      vertical-align: middle
+
+    &--disabled
+      opacity: .6
+      pointer-events: none
+
+  &__more
+    margin: .3rem
+    display: inline-flex
+    align-items: flex-end
+    justify-content: center
+    height: 2rem
+    width: 2rem

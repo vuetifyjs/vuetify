@@ -1,0 +1,70 @@
+// Imports
+@import '../../styles/styles.sass'
+
+// Block
+.v-data-footer
+  display: flex
+  flex-wrap: wrap
+  justify-content: flex-end
+  align-items: center
+  font-size: 12px
+
+  .v-btn
+    color: inherit
+
+// Elements
+.v-data-footer__icons-before
+  .v-btn:last-child
+    +ltr()
+      margin-right: 7px
+
+    +rtl()
+      margin-left: 7px
+
+.v-data-footer__icons-after
+  .v-btn:first-child
+    +ltr()
+      margin-left: 7px
+
+    +rtl()
+      margin-right: 7px
+
+.v-data-footer__pagination
+  display: block
+  text-align: center
+
+  +ltr()
+    margin: 0 32px 0 24px
+
+  +rtl()
+    margin: 0 24px 0 32px
+
+.v-data-footer__select
+  display: flex
+  align-items: center
+  flex: 0 0 0
+  justify-content: flex-end
+  white-space: nowrap
+
+  +ltr()
+    margin-right: 14px
+
+  +rtl()
+    margin-left: 14px
+
+  .v-select
+    flex: 0 1 0
+    padding: 0
+    position: initial
+
+    +ltr()
+      margin: 13px 0 13px 34px
+
+    +rtl()
+      margin: 13px 34px 13px 0
+
+  .v-select__selections
+    flex-wrap: nowrap
+
+    .v-select__selection--comma
+      font-size: 12px

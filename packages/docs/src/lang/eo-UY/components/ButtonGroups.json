@@ -1,21 +1,41 @@
 {
-  "header": "crwdns11280:0crwdne11280:0",
-  "headerText": "crwdns11282:0crwdne11282:0",
+  "header": "crwdns41012:0crwdne41012:0",
+  "headerText": "crwdns34816:0crwdne34816:0",
   "examples": {
     "usage": {
-      "desc": "crwdns11284:0crwdne11284:0"
+      "desc": "crwdns34818:0crwdne34818:0"
     },
-    "appBar": {
-      "header": "crwdns11286:0crwdne11286:0",
-      "desc": "crwdns11288:0crwdne11288:0"
+    "app-bar": {
+      "header": "crwdns41014:0crwdne41014:0",
+      "desc": "crwdns41016:0crwdne41016:0"
+    },
+    "qwerty": {
+      "header": "crwdns41018:0crwdne41018:0",
+      "desc": "crwdns41020:0crwdne41020:0"
+    },
+    "rounded": {
+      "header": "crwdns41022:0crwdne41022:0",
+      "desc": "crwdns41024:0crwdne41024:0"
+    },
+    "mandatory": {
+      "header": "crwdns41026:0crwdne41026:0",
+      "desc": "crwdns41028:0crwdne41028:0"
+    },
+    "multiple": {
+      "header": "crwdns41030:0crwdne41030:0",
+      "desc": "crwdns41032:0crwdne41032:0"
     }
   },
+  "api": {
+    "v-btn": "crwdns41034:0crwdne41034:0"
+  },
   "props": {
-    "activeClass": "crwdns11290:0crwdne11290:0",
-    "mandatory": "crwdns11292:0crwdne11292:0",
-    "multiple": "crwdns11294:0crwdne11294:0"
+    "activeClass": "crwdns41036:0crwdne41036:0",
+    "mandatory": "crwdns41038:0crwdne41038:0",
+    "multiple": "crwdns41040:0crwdne41040:0",
+    "rounded": "crwdns41042:0crwdne41042:0"
   },
   "events": {
-    "change": "crwdns11296:0crwdne11296:0"
+    "change": "crwdns34830:0crwdne34830:0"
   }
 }

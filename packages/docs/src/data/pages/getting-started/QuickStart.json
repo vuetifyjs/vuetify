@@ -77,64 +77,6 @@
       "children": [
         {
           "type": "heading",
-          "lang": "existingHeader"
-        },
-        {
-          "type": "text",
-          "lang": "existingText1"
-        },
-        {
-          "type": "text",
-          "lang": "existingText2"
-        },
-        {
-          "type": "markup",
-          "value": "bash_yarn_install_vuetify"
-        },
-        {
-          "type": "text",
-          "lang": "existingText3"
-        },
-        {
-          "type": "markup",
-          "value": "js_use_vuetify"
-        },
-        {
-          "type": "text",
-          "lang": "existingText4"
-        },
-        {
-          "type": "markup",
-          "value": "js_import_vuetify_css"
-        },
-        {
-          "type": "markup",
-          "value": "stylus_import_vuetify_css"
-        },
-        {
-          "type": "text",
-          "lang": "existingText5"
-        },
-        {
-          "type": "markup",
-          "value": "html_material_font"
-        },
-        {
-          "type": "text",
-          "lang": "existingText6"
-        },
-        {
-          "type": "alert",
-          "lang": "alert2",
-          "value": "error"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "heading",
           "lang": "uiHeader"
         },
         {
@@ -170,6 +112,188 @@
       "children": [
         {
           "type": "heading",
+          "lang": "existingHeader"
+        },
+        {
+          "type": "text",
+          "lang": "existingText1"
+        },
+        {
+          "type": "alert",
+          "lang": "existingAlert",
+          "value": "info"
+        },
+        {
+          "type": "text",
+          "lang": "existingText2"
+        },
+        {
+          "type": "markup",
+          "value": "bash_yarn_install_vuetify"
+        },
+        {
+          "type": "text",
+          "lang": "existingText3"
+        },
+        {
+          "type": "alert",
+          "lang": "alert2",
+          "value": "error"
+        },
+        {
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "existingHeader3a"
+            },
+            {
+              "type": "text",
+              "lang": "existingText3a"
+            },
+            {
+              "type": "markup",
+              "value": "js_use_vuetify_loader"
+            },
+            {
+              "type": "text",
+              "lang": "existingText3a1"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "existingHeader3b"
+            },
+            {
+              "type": "text",
+              "lang": "existingText3b"
+            },
+            {
+              "type": "markup",
+              "value": "js_use_vuetify_alacarte"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "existingHeader3c"
+            },
+            {
+              "type": "text",
+              "lang": "existingText3c"
+            },
+            {
+              "type": "markup",
+              "value": "js_use_vuetify"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "webpackHeader1"
+            },
+            {
+              "type": "text",
+              "lang": "webpackText1"
+            },
+            {
+              "type": "markup",
+              "value": "bash_yarn_install_sass"
+            },
+            {
+              "type": "text",
+              "lang": "webpackText2"
+            },
+            {
+              "type": "markup",
+              "value": "js_webpack_sass"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "existingHeader4"
+        },
+        {
+          "type": "text",
+          "lang": "existingText4"
+        },
+        {
+          "type": "markup",
+          "value": "js_vue_options_vuetify"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "existingHeader5"
+        },
+        {
+          "type": "text",
+          "lang": "existingText5"
+        },
+        {
+          "type": "markup",
+          "value": "html_material_font"
+        },
+        {
+          "type": "text",
+          "lang": "existingText6"
+        },
+        {
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "existingHeader7"
+            },
+            {
+              "type": "text",
+              "lang": "existingText7"
+            },
+            {
+              "type": "markup",
+              "value": "bash_yarn_install_mdi"
+            },
+            {
+              "type": "text",
+              "lang": "existingText8"
+            },
+            {
+              "type": "markup",
+              "value": "js_import_mdi"
+            },
+            {
+              "type": "text",
+              "lang": "existingText9"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
           "lang": "cdnHeader"
         },
         {
@@ -179,6 +303,23 @@
         {
           "type": "markup",
           "value": "html_cdn_quickstart"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "edgeHeader"
+        },
+        {
+          "type": "text",
+          "lang": "edgeText1"
+        },
+        {
+          "type": "markup",
+          "value": "js_transpileDependencies"
         }
       ]
     },
@@ -224,10 +365,6 @@
         {
           "type": "markup",
           "value": "js_vue_config_preset"
-        },
-        {
-          "type": "text",
-          "lang": "ie11Text5"
         },
         {
           "type": "alert",

@@ -5,63 +5,31 @@
     "icon": "mdi-speedometer",
     "children": [
       { "text": "quickStart", "to": "quick-start" },
+      { "text": "preMadeLayouts", "to": "pre-made-layouts" },
+      { "new": true, "text": "testing", "to": "unit-testing" },
       { "text": "whyVuetify", "to": "why-vuetify" },
       { "text": "faq", "to": "frequently-asked-questions" },
       { "text": "meetTheTeam", "to": "meet-the-team" },
       { "text": "sponsorsAndBackers", "to": "sponsors-and-backers" },
+      { "new": true, "text": "lts", "to": "long-term-support" },
       { "text": "contributing", "to": "contributing" },
       { "updated": true, "text": "roadmap", "to": "roadmap" },
-      { "text": "consulting", "to": "consulting-and-support" }
+      { "help": true, "text": "consulting", "to": "consulting-and-support" }
     ]
   },
   {
-    "group": "framework",
-    "text": "frameworkOptions",
-    "icon": "mdi-buffer",
+    "group": "customization",
+    "text": "customization",
+    "icon": "mdi-cogs",
     "children": [
+      { "new": true, "text": "accessibility", "to": "accessibility" },
       { "text": "aLaCarte", "to": "a-la-carte" },
-      { "text": "grid", "to": "grid" },
-      { "text": "gridLists", "to": "grid-lists" },
+      { "text": "breakpoints", "to": "breakpoints" },
       { "text": "icons", "to": "icons" },
       { "text": "i18n", "to": "internationalization" },
-      {
-        "group": "framework",
-        "text": "layout",
-        "children": [
-          { "text": "defaultMarkup", "to": "default-markup"},
-          { "text": "aspectRatios", "to": "aspect-ratios" },
-          { "text": "breakpoints", "to": "breakpoints" },
-          { "text": "preMadeLayouts", "to": "pre-made-layouts" }
-        ]
-      },
-      {
-        "group": "framework",
-        "text": "stylesAndThemes",
-        "children": [
-          { "text": "colors", "to": "colors" },
-          { "text": "content", "to": "content" },
-          { "text": "theme", "to": "theme" },
-          { "text": "typography", "to": "typography" }
-        ]
-      },
-      {
-        "group": "framework",
-        "text": "helperClasses",
-        "children": [
-          { "text": "display", "to": "display" },
-          { "text": "elevation", "to": "elevation" },
-          { "text": "spacing", "to": "spacing" },
-          { "text": "textAlignment", "to": "alignment" }
-        ]
-      },
-      {
-        "group": "framework",
-        "text": "motion",
-        "children": [
-          { "text": "scroll", "to": "scroll", "updated": true },
-          { "text": "transitions", "to": "transitions" }
-        ]
-      }
+      { "new": true, "text": "rtl", "to": "rtl" },
+      { "new": true, "text": "sass-variables", "to": "sass-variables" },
+      { "text": "theme", "to": "theme" }
     ]
   },
   {
@@ -71,29 +39,43 @@
     "children": [
       { "text": "apiExplorer", "subtext": "browseAllComponents", "to": "api-explorer" },
       { "text": "alerts", "to": "alerts" },
+      { "text": "application", "to": "application" },
+      { "text": "aspectRatios", "to": "aspect-ratios" },
       { "text": "avatars", "to": "avatars" },
       { "text": "badges", "to": "badges" },
+      { "new": true, "text": "banners", "to": "banners" },
+      {
+        "group": "components",
+        "text": "bars",
+        "children": [
+          { "new": true, "text": "appBars", "to": "app-bars" },
+          { "text": "toolbars", "to": "toolbars" },
+          { "text": "systemBars", "to": "system-bars" }
+        ]
+      },
       { "text": "bottomNavigation", "to": "bottom-navigation" },
       { "text": "bottomSheets", "to": "bottom-sheets" },
       { "text": "breadcrumbs", "to": "breadcrumbs" },
       { "text": "buttons", "to": "buttons" },
       { "text": "fabs", "to": "floating-action-buttons" },
-      { "text": "calendars", "to": "calendars", "new": true },
+      { "text": "calendars", "to": "calendars" },
       { "text": "cards", "to": "cards" },
       { "text": "carousels", "to": "carousels" },
       { "text": "chips", "to": "chips" },
-      { "text": "dataIterator", "to": "data-iterator" },
-      { "text": "dataTables", "to": "data-tables" },
       { "text": "dialogs", "to": "dialogs" },
       { "text": "dividers", "to": "dividers" },
       { "text": "expansionPanels", "to": "expansion-panels" },
       { "text": "footer", "to": "footer" },
+      { "text": "grid", "to": "grids" },
       {
         "group": "components",
         "text": "groups",
         "children": [
           { "text": "buttonGroups", "to": "button-groups" },
+          { "new": true, "text": "chipGroups", "to": "chip-groups" },
           { "text": "itemGroups", "to": "item-groups" },
+          { "new": true, "text": "listItemGroups", "to": "list-item-groups" },
+          { "new": true, "text": "slideGroups", "to": "slide-groups" },
           { "text": "windows", "to": "windows" }
         ]
       },
@@ -106,6 +88,7 @@
         "children": [
           { "text": "autocompletes", "to": "autocompletes" },
           { "text": "combobox", "to": "combobox" },
+          { "new": true, "text": "fileInputs", "to": "file-inputs" },
           { "text": "forms", "to": "forms" },
           { "text": "inputs", "to": "inputs" },
           { "text": "overflowButtons", "to": "overflow-btns" },
@@ -116,32 +99,66 @@
           { "text": "textFields", "to": "text-fields" }
         ]
       },
-      { "text": "jumbotrons", "to": "jumbotrons", "deprecated": true },
       { "text": "lists", "to": "lists" },
       { "text": "menus", "to": "menus" },
       { "text": "navigationDrawers", "to": "navigation-drawers" },
+      { "new": true, "text": "overlays", "to": "overlays" },
       { "text": "paginations", "to": "paginations" },
       { "text": "parallax", "to": "parallax" },
       {
         "group": "components",
         "text": "pickers",
         "children": [
+          { "new": true, "text": "colorPickers", "to": "color-pickers" },
           { "text": "datePickers", "to": "date-pickers" },
           { "text": "timePickers", "to": "time-pickers" }
         ]
       },
-      { "text": "progress", "to": "progress" },
+      {
+        "group": "components",
+        "text": "progress",
+        "children": [
+          { "text": "progressCircular", "to": "progress-circular" },
+          { "text": "progressLinear", "to": "progress-linear" }
+        ]
+      },
       { "text": "ratings", "to": "ratings" },
       { "text": "sheets", "to": "sheets" },
       { "text": "snackbars", "to": "snackbars" },
-      { "text": "sparklines", "to": "sparklines", "updated": true },
+      { "text": "sparklines", "to": "sparklines" },
       { "text": "steppers", "to": "steppers" },
       { "text": "subheaders", "to": "subheaders" },
+      {
+        "group": "components",
+        "text": "tables",
+        "children": [
+          { "updated": true, "text": "dataIterators", "to": "data-iterators" },
+          { "new": true, "text": "simpleTables", "to": "simple-tables" },
+          { "updated": true, "text": "dataTables", "to": "data-tables" }
+        ]
+      },
       { "text": "tabs", "to": "tabs" },
       { "text": "timelines", "to": "timelines" },
-      { "text": "toolbars", "to": "toolbars" },
       { "text": "tooltips", "to": "tooltips" },
-      { "text": "treeview", "to": "treeview", "updated": true }
+      { "text": "treeview", "to": "treeview" }
+    ]
+  },
+  {
+    "group": "styles",
+    "text": "styles",
+    "icon": "mdi-palette",
+    "children": [
+      { "text": "colors", "to": "colors" },
+      { "text": "content", "to": "content" },
+      { "text": "display", "to": "display" },
+      { "text": "elevation", "to": "elevation" },
+      { "text": "flex", "to": "flex" },
+      { "text": "float", "to": "float" },
+      { "text": "spacing", "to": "spacing" },
+      { "text": "text", "to": "text" },
+      { "text": "typography", "to": "typography" },
+      { "text": "transitions", "to": "transitions" },
+      { "text": "scroll", "to": "scroll" }
     ]
   },
   {
@@ -157,8 +174,7 @@
   },
   {
     "text": "premiumThemes",
-    "icon": "mdi-palette",
-    "to": "themes/premium",
-    "updated": true
+    "icon": "mdi-vuetify",
+    "to": "themes/premium"
   }
 ]

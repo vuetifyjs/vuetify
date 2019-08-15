@@ -1,21 +1,5 @@
-import ClickOutside from './click-outside'
-import Resize from './resize'
-import Ripple from './ripple'
-import Scroll from './scroll'
-import Touch from './touch'
-
-export {
-  ClickOutside,
-  Ripple,
-  Resize,
-  Scroll,
-  Touch
-}
-
-export default {
-  ClickOutside,
-  Ripple,
-  Resize,
-  Scroll,
-  Touch
-}
+export { default as ClickOutside } from './click-outside'
+export { default as Resize } from './resize'
+export { default as Ripple } from './ripple'
+export { default as Scroll } from './scroll'
+export { default as Touch } from './touch'

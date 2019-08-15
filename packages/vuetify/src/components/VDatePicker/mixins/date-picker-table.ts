@@ -1,10 +1,11 @@
-import '../../../stylus/components/_date-picker-table.styl'
+import '../VDatePickerTable.sass'
 
 // Directives
 import Touch, { TouchWrapper } from '../../../directives/touch'
 
 // Mixins
 import Colorable from '../../../mixins/colorable'
+import Localable from '../../../mixins/localable'
 import Themeable from '../../../mixins/themeable'
 
 // Utils
@@ -21,6 +22,7 @@ type CalculateTableDateFunction = (v: number) => string
 
 export default mixins(
   Colorable,
+  Localable,
   Themeable
 /* @vue/component */
 ).extend({
@@ -33,29 +35,25 @@ export default mixins(
     format: Function as PropValidator<DatePickerFormatter | undefined>,
     events: {
       type: [Array, Function, Object],
-      default: () => null
+      default: () => null,
     } as any as PropValidator<DateEvents>,
     eventColor: {
       type: [Array, Function, Object, String],
-      default: () => 'warning'
+      default: () => 'warning',
     } as any as PropValidator<DateEventColors>,
-    locale: {
-      type: String,
-      default: 'en-us'
-    },
     min: String,
     max: String,
     readonly: Boolean,
     scrollable: Boolean,
     tableDate: {
       type: String,
-      required: true
+      required: true,
     },
-    value: [String, Array]
+    value: [String, Array],
   },
 
   data: () => ({
-    isReversing: false
+    isReversing: false,
   }),
 
   computed: {
@@ -67,26 +65,26 @@ export default mixins(
     },
     displayedYear (): number {
       return Number(this.tableDate.split('-')[0])
-    }
+    },
   },
 
   watch: {
     tableDate (newVal: string, oldVal: string) {
       this.isReversing = newVal < oldVal
-    }
+    },
   },
 
   methods: {
     genButtonClasses (isAllowed: boolean, isFloating: boolean, isSelected: boolean, isCurrent: boolean) {
       return {
+        'v-size--default': !isFloating,
         'v-btn--active': isSelected,
-        'v-btn--flat': !isSelected,
-        'v-btn--icon': isSelected && isAllowed && isFloating,
-        'v-btn--floating': isFloating,
-        'v-btn--depressed': !isFloating && isSelected,
-        'v-btn--disabled': !isAllowed || (this.disabled && isSelected),
-        'v-btn--outline': isCurrent && !isSelected,
-        ...this.themeClasses
+        'v-btn--flat': !isAllowed || this.disabled,
+        'v-btn--text': isSelected === isCurrent,
+        'v-btn--rounded': isFloating,
+        'v-btn--disabled': !isAllowed || this.disabled,
+        'v-btn--outlined': isCurrent && !isSelected,
+        ...this.themeClasses,
       }
     },
     genButtonEvents (value: string, isAllowed: boolean, mouseEventType: string) {
@@ -97,7 +95,7 @@ export default mixins(
           isAllowed && !this.readonly && this.$emit('input', value)
           this.$emit(`click:${mouseEventType}`, value)
         },
-        dblclick: () => this.$emit(`dblclick:${mouseEventType}`, value)
+        dblclick: () => this.$emit(`dblclick:${mouseEventType}`, value),
       }
     },
     genButton (value: string, isFloating: boolean, mouseEventType: string, formatter: DatePickerFormatter) {
@@ -109,19 +107,19 @@ export default mixins(
 
       return this.$createElement('button', setColor(color, {
         staticClass: 'v-btn',
-        'class': this.genButtonClasses(isAllowed, isFloating, isSelected, isCurrent),
+        class: this.genButtonClasses(isAllowed, isFloating, isSelected, isCurrent),
         attrs: {
-          type: 'button'
+          type: 'button',
         },
         domProps: {
-          disabled: this.disabled || !isAllowed
+          disabled: this.disabled || !isAllowed,
         },
-        on: this.genButtonEvents(value, isAllowed, mouseEventType)
+        on: this.genButtonEvents(value, isAllowed, mouseEventType),
       }), [
         this.$createElement('div', {
-          staticClass: 'v-btn__content'
+          staticClass: 'v-btn__content',
         }, [formatter(value)]),
-        this.genEvents(value)
+        this.genEvents(value),
       ])
     },
     getEventColors (date: string) {
@@ -159,40 +157,40 @@ export default mixins(
       const eventColors = this.getEventColors(date)
 
       return eventColors.length ? this.$createElement('div', {
-        staticClass: 'v-date-picker-table__events'
+        staticClass: 'v-date-picker-table__events',
       }, eventColors.map(color => this.$createElement('div', this.setBackgroundColor(color)))) : null
     },
     wheel (e: WheelEvent, calculateTableDate: CalculateTableDateFunction) {
       e.preventDefault()
-      this.$emit('tableDate', calculateTableDate(e.deltaY))
+      this.$emit('update:table-date', calculateTableDate(e.deltaY))
     },
     touch (value: number, calculateTableDate: CalculateTableDateFunction) {
-      this.$emit('tableDate', calculateTableDate(value))
+      this.$emit('update:table-date', calculateTableDate(value))
     },
     genTable (staticClass: string, children: VNodeChildren, calculateTableDate: CalculateTableDateFunction) {
       const transition = this.$createElement('transition', {
-        props: { name: this.computedTransition }
+        props: { name: this.computedTransition },
       }, [this.$createElement('table', { key: this.tableDate }, children)])
 
       const touchDirective = {
         name: 'touch',
         value: {
           left: (e: TouchWrapper) => (e.offsetX < -15) && this.touch(1, calculateTableDate),
-          right: (e: TouchWrapper) => (e.offsetX > 15) && this.touch(-1, calculateTableDate)
-        }
+          right: (e: TouchWrapper) => (e.offsetX > 15) && this.touch(-1, calculateTableDate),
+        },
       }
 
       return this.$createElement('div', {
         staticClass,
         class: {
           'v-date-picker-table--disabled': this.disabled,
-          ...this.themeClasses
+          ...this.themeClasses,
         },
         on: (!this.disabled && this.scrollable) ? {
-          wheel: (e: WheelEvent) => this.wheel(e, calculateTableDate)
+          wheel: (e: WheelEvent) => this.wheel(e, calculateTableDate),
         } : undefined,
-        directives: [touchDirective]
+        directives: [touchDirective],
       }, [transition])
-    }
-  }
+    },
+  },
 })

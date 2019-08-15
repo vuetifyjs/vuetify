@@ -1,0 +1,114 @@
+@import '../../styles/styles.sass'
+
+/* Theme */
++theme(v-input) using ($material)
+  &:not(.v-input--is-disabled)
+    input,
+    textarea
+      color: map-deep-get($material, 'text', 'primary')
+
+  input::placeholder,
+  textarea::placeholder
+    color: map-deep-get($material, 'text', 'disabled')
+
+  &--is-disabled
+    .v-label,
+    input,
+    textarea
+      color: map-deep-get($material, 'text', 'disabled')
+
+.v-input
+  align-items: flex-start
+  display: flex
+  flex: 1 1 auto
+  font-size: 16px
+  letter-spacing: normal
+  text-align: left
+
+  .v-progress-linear
+    top: calc(100% - 1px)
+    left: 0
+
+  input
+    max-height: 32px
+
+  input,
+  textarea
+    // Remove Firefox red outline
+    &:invalid
+      box-shadow: none
+
+    &:focus,
+    &:active
+      outline: none
+
+  .v-label
+    height: 20px
+    line-height: 20px
+
+  &__append-outer,
+  &__prepend-outer
+    display: inline-flex
+    margin-bottom: 4px
+    margin-top: 4px
+    line-height: 1
+
+    .v-icon
+      user-select: none
+
+  &__append-outer
+    +ltr()
+      margin-left: 9px
+    +rtl()
+      margin-right: 9px
+
+  &__prepend-outer
+    +ltr()
+      margin-right: 9px
+    +rtl()
+      margin-left: 9px
+
+  &__control
+    display: flex
+    flex-direction: column
+    height: auto
+    flex-grow: 1
+    flex-wrap: wrap
+    width: 100% // For IE11
+
+  &__icon
+    align-items: center
+    display: inline-flex
+    height: 24px
+    flex: 1 0 auto
+    justify-content: center
+    min-width: 24px
+    width: 24px
+
+    &--clear
+      border-radius: 50%
+
+  &__slot
+    align-items: center
+    color: inherit
+    display: flex
+    margin-bottom: 8px
+    min-height: inherit
+    position: relative
+    transition: $primary-transition
+    width: 100%
+
+  &--is-disabled:not(.v-input--is-readonly)
+    pointer-events: none
+
+  &--is-loading > .v-input__control > .v-input__slot
+    &:before,
+    &:after
+      display: none
+
+  &--hide-details > .v-input__control > .v-input__slot
+    margin-bottom: 0
+
+  &--has-state
+    &.error--text .v-label
+      animation: v-shake .6s map-get($transition, 'swing')

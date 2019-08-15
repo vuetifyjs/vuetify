@@ -1,266 +1,168 @@
 // Styles
-import '../../stylus/components/_toolbar.styl'
+import './VToolbar.sass'
 
-// Mixins
-import Applicationable from '../../mixins/applicationable'
-import Colorable from '../../mixins/colorable'
-import Themeable from '../../mixins/themeable'
-import SSRBootable from '../../mixins/ssr-bootable'
+// Extensions
+import VSheet from '../VSheet/VSheet'
 
-// Directives
-import Scroll from '../../directives/scroll'
-import { deprecate } from '../../util/console'
+// Components
+import VImg, { srcObject } from '../VImg/VImg'
+
+// Utilities
+import { convertToUnit, getSlot } from '../../util/helpers'
+import { breaking } from '../../util/console'
 
 // Types
-import mixins from '../../util/mixins'
 import { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
-export default mixins(
-  Applicationable('top', [
-    'clippedLeft',
-    'clippedRight',
-    'computedHeight',
-    'invertedScroll',
-    'manualScroll'
-  ]),
-  Colorable,
-  SSRBootable,
-  Themeable
 /* @vue/component */
-).extend({
+export default VSheet.extend({
   name: 'v-toolbar',
 
-  directives: { Scroll },
-
   props: {
-    card: Boolean,
-    clippedLeft: Boolean,
-    clippedRight: Boolean,
+    absolute: Boolean,
+    bottom: Boolean,
+    collapse: Boolean,
     dense: Boolean,
     extended: Boolean,
     extensionHeight: {
+      default: 48,
       type: [Number, String],
-      validator: (v: any) => !isNaN(parseInt(v))
     },
     flat: Boolean,
     floating: Boolean,
-    height: {
-      type: [Number, String],
-      validator: (v: any) => !isNaN(parseInt(v))
-    },
-    invertedScroll: Boolean,
-    manualScroll: Boolean,
     prominent: Boolean,
-    scrollOffScreen: Boolean,
-    /* @deprecated */
-    scrollToolbarOffScreen: Boolean,
-    scrollTarget: String,
-    scrollThreshold: {
-      type: Number,
-      default: 300
+    short: Boolean,
+    src: {
+      type: [String, Object],
+      default: '',
+    } as PropValidator<string | srcObject>,
+    tag: {
+      type: String,
+      default: 'header',
     },
-    tabs: Boolean
+    tile: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   data: () => ({
-    activeTimeout: null,
-    currentScroll: 0,
-    heights: {
-      mobileLandscape: 48,
-      mobile: 56,
-      desktop: 64,
-      dense: 48
-    },
-    isActive: true,
     isExtended: false,
-    isScrollingUp: false,
-    previousScroll: 0,
-    savedScroll: 0,
-    target: null as Element | null
   }),
 
   computed: {
-    canScroll (): boolean {
-      // TODO: remove
-      if (this.scrollToolbarOffScreen) {
-        deprecate('scrollToolbarOffScreen', 'scrollOffScreen', this)
+    computedHeight (): number {
+      const height = this.computedContentHeight
 
-        return true
-      }
+      if (!this.isExtended) return height
 
-      return this.scrollOffScreen || this.invertedScroll
+      const extensionHeight = parseInt(this.extensionHeight)
+
+      return this.isCollapsed
+        ? height
+        : height + (!isNaN(extensionHeight) ? extensionHeight : 0)
     },
     computedContentHeight (): number {
       if (this.height) return parseInt(this.height)
-      if (this.dense) return this.heights.dense
-
-      if (this.prominent ||
-        this.$vuetify.breakpoint.mdAndUp
-      ) return this.heights.desktop
-
-      if (this.$vuetify.breakpoint.smAndDown &&
-        this.$vuetify.breakpoint.width >
-        this.$vuetify.breakpoint.height
-      ) return this.heights.mobileLandscape
-
-      return this.heights.mobile
-    },
-    computedExtensionHeight (): number {
-      if (this.tabs) return 48
-      if (this.extensionHeight) return parseInt(this.extensionHeight)
-
-      return this.computedContentHeight
-    },
-    computedHeight (): number {
-      if (!this.isExtended) return this.computedContentHeight
-
-      return this.computedContentHeight + this.computedExtensionHeight
-    },
-    computedMarginTop (): number {
-      if (!this.app) return 0
-
-      return this.$vuetify.application.bar
+      if (this.isProminent && this.dense) return 96
+      if (this.isProminent && this.short) return 112
+      if (this.isProminent) return 128
+      if (this.dense) return 48
+      if (this.short || this.$vuetify.breakpoint.smAndDown) return 56
+      return 64
     },
     classes (): object {
       return {
+        ...VSheet.options.computed.classes.call(this),
         'v-toolbar': true,
-        'elevation-0': this.flat || (
-          !this.isActive &&
-          !this.tabs &&
-          this.canScroll
-        ),
         'v-toolbar--absolute': this.absolute,
-        'v-toolbar--card': this.card,
-        'v-toolbar--clipped': this.clippedLeft || this.clippedRight,
+        'v-toolbar--bottom': this.bottom,
+        'v-toolbar--collapse': this.collapse,
+        'v-toolbar--collapsed': this.isCollapsed,
         'v-toolbar--dense': this.dense,
         'v-toolbar--extended': this.isExtended,
-        'v-toolbar--fixed': !this.absolute && (this.app || this.fixed),
+        'v-toolbar--flat': this.flat,
         'v-toolbar--floating': this.floating,
-        'v-toolbar--prominent': this.prominent,
-        ...this.themeClasses
+        'v-toolbar--prominent': this.isProminent,
       }
     },
-    computedPaddingLeft (): number {
-      if (!this.app || this.clippedLeft) return 0
-
-      return this.$vuetify.application.left
+    isCollapsed (): boolean {
+      return this.collapse
     },
-    computedPaddingRight (): number {
-      if (!this.app || this.clippedRight) return 0
-
-      return this.$vuetify.application.right
-    },
-    computedTransform (): number {
-      return !this.isActive
-        ? this.canScroll
-          ? -this.computedContentHeight
-          : -this.computedHeight
-        : 0
-    },
-    currentThreshold (): number {
-      return Math.abs(this.currentScroll - this.savedScroll)
+    isProminent (): boolean {
+      return this.prominent
     },
     styles (): object {
-      return {
-        marginTop: `${this.computedMarginTop}px`,
-        paddingRight: `${this.computedPaddingRight}px`,
-        paddingLeft: `${this.computedPaddingLeft}px`,
-        transform: `translateY(${this.computedTransform}px)`
-      }
-    }
-  },
-
-  watch: {
-    currentThreshold (val: number) {
-      if (this.invertedScroll) {
-        this.isActive = this.currentScroll > this.scrollThreshold
-        return
-      }
-
-      if (val < this.scrollThreshold ||
-        !this.isBooted
-      ) return
-
-      this.isActive = this.isScrollingUp
-      this.savedScroll = this.currentScroll
+      return this.measurableStyles
     },
-    isActive () {
-      this.savedScroll = 0
-    },
-    invertedScroll (val: boolean) {
-      this.isActive = !val
-    },
-    manualScroll (val: boolean) {
-      this.isActive = !val
-    },
-    isScrollingUp () {
-      this.savedScroll = this.savedScroll || this.currentScroll
-    }
   },
 
   created () {
-    if (this.invertedScroll ||
-      this.manualScroll
-    ) this.isActive = false
-  },
+    const breakingProps = [
+      ['app', '<v-app-bar app>'],
+      ['manual-scroll', '<v-app-bar :value="false">'],
+      ['clipped-left', '<v-app-bar clipped-left>'],
+      ['clipped-right', '<v-app-bar clipped-right>'],
+      ['inverted-scroll', '<v-app-bar inverted-scroll>'],
+      ['scroll-off-screen', '<v-app-bar scroll-off-screen>'],
+      ['scroll-target', '<v-app-bar scroll-target>'],
+      ['scroll-threshold', '<v-app-bar scroll-threshold>'],
+      ['card', '<v-app-bar flat>'],
+    ]
 
-  mounted () {
-    if (this.scrollTarget) {
-      this.target = document.querySelector(this.scrollTarget)
-    }
+    /* istanbul ignore next */
+    breakingProps.forEach(([original, replacement]) => {
+      if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement, this)
+    })
   },
 
   methods: {
-    onScroll () {
-      if (!this.canScroll ||
-        this.manualScroll ||
-        typeof window === 'undefined'
-      ) return
+    genBackground () {
+      const props = {
+        height: convertToUnit(this.computedHeight),
+        src: this.src,
+      }
 
-      this.currentScroll = this.target
-        ? this.target.scrollTop
-        : window.pageYOffset
+      const image = this.$scopedSlots.img
+        ? this.$scopedSlots.img({ props })
+        : this.$createElement(VImg, { props })
 
-      this.isScrollingUp = this.currentScroll < this.previousScroll
-
-      this.previousScroll = this.currentScroll
+      return this.$createElement('div', {
+        staticClass: 'v-toolbar__image',
+      }, [image])
     },
-    updateApplication (): number {
-      return this.invertedScroll || this.manualScroll
-        ? 0
-        : this.computedHeight
-    }
+    genContent () {
+      return this.$createElement('div', {
+        staticClass: 'v-toolbar__content',
+        style: {
+          height: convertToUnit(this.computedContentHeight),
+        },
+      }, getSlot(this))
+    },
+    genExtension () {
+      return this.$createElement('div', {
+        staticClass: 'v-toolbar__extension',
+        style: {
+          height: convertToUnit(this.extensionHeight),
+        },
+      }, getSlot(this, 'extension'))
+    },
   },
 
   render (h): VNode {
-    this.isExtended = this.extended || !!this.$slots.extension
+    this.isExtended = this.extended || !!this.$scopedSlots.extension
 
-    const children = []
+    const children = [this.genContent()]
     const data = this.setBackgroundColor(this.color, {
-      'class': this.classes,
+      class: this.classes,
       style: this.styles,
-      on: this.$listeners
+      on: this.$listeners,
     })
 
-    data.directives = [{
-      arg: this.scrollTarget,
-      name: 'scroll',
-      value: this.onScroll
-    }]
+    if (this.isExtended) children.push(this.genExtension())
+    if (this.src || this.$scopedSlots.img) children.unshift(this.genBackground())
 
-    children.push(h('div', {
-      staticClass: 'v-toolbar__content',
-      style: { height: `${this.computedContentHeight}px` },
-      ref: 'content'
-    }, this.$slots.default))
-
-    if (this.isExtended) {
-      children.push(h('div', {
-        staticClass: 'v-toolbar__extension',
-        style: { height: `${this.computedExtensionHeight}px` }
-      }, this.$slots.extension))
-    }
-
-    return h('nav', data, children)
-  }
+    return h(this.tag, data, children)
+  },
 })

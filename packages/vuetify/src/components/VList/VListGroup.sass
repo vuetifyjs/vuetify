@@ -1,0 +1,100 @@
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+@import './_mixins.sass'
+
+// Element
+.v-list-group .v-list-group__header
+  .v-list-item__icon.v-list-group__header__append-icon
+    align-self: center
+    margin: 0
+    min-width: 48px
+    justify-content: flex-end
+
+.v-list-group--sub-group
+  align-items: center
+  display: flex
+  flex-wrap: wrap
+
+.v-list-group__header
+  &.v-list-item--active:not(:hover):not(:focus):before
+    opacity: 0
+
+.v-list-group__items
+  flex: 1 1 auto
+
+.v-list-group--active > .v-list-group__header
+  > .v-list-group__header__append-icon .v-icon
+    transform: rotate(-180deg)
+
+  &.v-list-group__header--sub-group
+    > .v-list-group__header__prepend-icon .v-icon
+      transform: rotate(-180deg)
+
+
+  .v-list-item,
+  .v-list-item__content,
+  .v-list-group__header__prepend-icon .v-icon
+    color: inherit
+
+.v-list-group--sub-group
+  .v-list-item__action,
+  .v-list-item__avatar,
+  .v-list-item__icon
+    &:first-child
+      +ltr()
+        margin-right: 16px
+      +rtl()
+        margin-left: 16px
+
+  .v-list-group__header
+    +ltr()
+      padding-left: 32px
+    +rtl()
+      padding-right: 32px
+
+
+  .v-list-group__items
+    .v-list-item
+      +ltr()
+        padding-left: 40px
+      +rtl()
+        padding-right: 40px
+
+  &.v-list-group--active
+    .v-list-item__icon.v-list-group__header__prepend-icon .v-icon
+      transform: rotate(-180deg)
+
+.v-list-group--no-action
+  > .v-list-group__items > div > .v-list-item
+    +ltr()
+      padding-left: 72px
+    +rtl()
+      padding-right: 72px
+
+  &.v-list-group--sub-group
+    > .v-list-group__items > div > .v-list-item
+      +ltr()
+        padding-left: 88px
+      +rtl()
+        padding-right: 88px
+
+.v-list--dense
+  .v-list-group--sub-group .v-list-group__header
+    +ltr()
+      padding-left: 24px
+    +rtl()
+      padding-right: 24px
+
+  .v-list-group--no-action
+    > .v-list-group__items > div > .v-list-item
+      +ltr()
+        padding-left: 64px
+      +rtl()
+        padding-right: 64px
+
+    &.v-list-group--sub-group
+      > .v-list-group__items > div > .v-list-item
+        +ltr()
+          padding-left: 80px
+        +rtl()
+          padding-right: 80px

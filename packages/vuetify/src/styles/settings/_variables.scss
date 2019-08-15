@@ -1,0 +1,179 @@
+$color-pack: true !default;
+
+$body-font-family: 'Roboto', sans-serif !default;
+$font-size-root: 16px !default;
+$line-height-root: 1.5 !default;
+
+$spacer: 4px !default;
+
+$spacers: ();
+@for $i from 0 through 12 {
+  $spacers: map-merge($spacers, ($i: $spacer * $i))
+}
+$negative-spacers: ();
+@for $i from 1 through 12 {
+  $negative-spacers: map-merge($negative-spacers, ("n" + $i: -$spacer * $i))
+}
+
+$grid-breakpoints: (
+  'xs': 0,
+  'sm': 600px,
+  'md': 960px,
+  'lg': 1280px - 16px,
+  'xl': 1920px - 16px
+) !default;
+$grid-gutter: $spacer * 6 !default;
+$form-grid-gutter: $spacer * 2 !default;
+$grid-columns: 12 !default;
+
+$container-padding-x: $grid-gutter / 2 !default;
+
+$grid-gutters: (
+  'xs': $grid-gutter / 12,
+  'sm': $grid-gutter / 6,
+  'md': $grid-gutter / 3,
+  'lg': $grid-gutter * 2/3,
+  'xl': $grid-gutter
+) !default;
+
+$container-max-widths: (
+  'md': map-get($grid-breakpoints, 'md'),
+  'lg': map-get($grid-breakpoints, 'lg'),
+  'xl': map-get($grid-breakpoints, 'xl')
+) !default;
+
+$display-breakpoints: (
+  'print-only': 'only print',
+  'screen-only': 'only screen',
+  'xs-only': 'only screen and (max-width: #{map-get($grid-breakpoints, 'sm') - 1})',
+  'sm-only': 'only screen and (min-width: #{map-get($grid-breakpoints, 'sm')}) and (max-width: #{map-get($grid-breakpoints, 'md') - 1})',
+  'sm-and-down': 'only screen and (max-width: #{map-get($grid-breakpoints, 'md') - 1})',
+  'sm-and-up': 'only screen and (min-width: #{map-get($grid-breakpoints, 'sm')})',
+  'md-only': 'only screen and (min-width: #{map-get($grid-breakpoints, 'md')}) and (max-width: #{map-get($grid-breakpoints, 'lg') - 1})',
+  'md-and-down': 'only screen and (max-width: #{map-get($grid-breakpoints, 'lg') - 1})',
+  'md-and-up': 'only screen and (min-width: #{map-get($grid-breakpoints, 'md')})',
+  'lg-only': 'only screen and (min-width: #{map-get($grid-breakpoints, 'lg')}) and (max-width: #{map-get($grid-breakpoints, 'xl') - 1})',
+  'lg-and-down': 'only screen and (max-width: #{map-get($grid-breakpoints, 'xl') - 1})',
+  'lg-and-up': 'only screen and (min-width: #{map-get($grid-breakpoints, 'lg')})',
+  'xl-only': 'only screen and (min-width: #{map-get($grid-breakpoints, 'xl')})'
+) !default;
+
+$font-weights: (
+  'thin': 100,
+  'light': 300,
+  'regular': 400,
+  'medium': 500,
+  'bold': 700,
+  'black': 900
+) !default;
+
+$heading-font-family: $body-font-family !default;
+
+$headings: (
+  'h1': (
+    'size': 6rem,
+    'weight': 300,
+    'line-height': 6rem,
+    'letter-spacing': -.015625em,
+    'font-family': $heading-font-family
+  ),
+  'h2': (
+    'size': 3.75rem,
+    'weight': 300,
+    'line-height': 3.75rem,
+    'letter-spacing': -.0083333333em,
+    'font-family': $heading-font-family
+  ),
+  'h3': (
+    'size': 3rem,
+    'weight': 400,
+    'line-height': 3.125rem,
+    'letter-spacing': normal,
+    'font-family': $heading-font-family
+  ),
+  'h4': (
+    'size': 2.125rem,
+    'weight': 400,
+    'line-height': 2.5rem,
+    'letter-spacing': .0073529412em,
+    'font-family': $heading-font-family
+  ),
+  'h5': (
+    'size': 1.5rem,
+    'weight': 400,
+    'line-height': 2rem,
+    'letter-spacing': normal,
+    'font-family': $heading-font-family
+  ),
+  'h6': (
+    'size': 1.25rem,
+    'weight': 500,
+    'line-height': 2rem,
+    'letter-spacing': .0125em,
+    'font-family': $heading-font-family
+  ),
+  'subtitle-1': (
+    'size': 1rem,
+    'weight': 400,
+    'line-height': 1.75rem,
+    'letter-spacing': .009375em
+  ),
+  'subtitle-2': (
+    'size': .875rem,
+    'weight': 500,
+    'line-height': 1.375rem,
+    'letter-spacing': .0071428571em
+  ),
+  'body-2': (
+    'size': .875rem,
+    'weight': 400,
+    'letter-spacing': .0178571429em,
+    'line-height': 1.25rem
+  ),
+  'body-1': (
+    'size': 1rem,
+    'weight': 400,
+    'letter-spacing': .03125em,
+    'line-height': 1.5rem
+  ),
+  'caption': (
+    'size': .75rem,
+    'weight': 400,
+    'letter-spacing': .0333333333em,
+    'line-height': 1.25rem
+  ),
+  'overline': (
+    'size': .625rem,
+    'weight': 400,
+    'letter-spacing': .1666666667em,
+    'line-height': 1rem
+  )
+) !default;
+
+$transition: (
+  'fast-out-slow-in': cubic-bezier(0.4, 0, 0.2, 1),
+  'linear-out-slow-in': cubic-bezier(0, 0, 0.2, 1),
+  'fast-out-linear-in': cubic-bezier(0.4, 0, 1, 1),
+  'ease-in-out': cubic-bezier(0.4, 0, 0.6, 1),
+  'fast-in-fast-out': cubic-bezier(0.25, 0.8, 0.25, 1),
+  'swing': cubic-bezier(0.25, 0.8, 0.5, 1)
+) !default;
+$primary-transition: 0.3s map-get($transition, 'swing') !default;
+$secondary-transition: 0.2s map-get($transition, 'ease-in-out') !default;
+
+/** Ripples */
+$ripple-animation-transition-in: transform 0.25s map-get($transition, 'fast-out-slow-in'), opacity 0.1s map-get($transition, 'fast-out-slow-in') !default;
+$ripple-animation-transition-out: opacity 0.3s map-get($transition, 'fast-out-slow-in') !default;
+$ripple-animation-visible-opacity: 0.15 !default;
+
+/** Elements */
+$bootable-transition: 0.2s map-get($transition, 'fast-out-slow-in') !default;
+$blockquote-font-size: 18px !default;
+$blockquote-font-weight: 300 !default;
+$code-color: #bd4147 !default;
+$code-kbd-border-radius: 3px !default;
+$code-kbd-font-size: 85% !default;
+$code-kbd-font-weight: 900 !default;
+
+$input-top-spacing: 16px !default;
+$text-field-active-label-height: 12px !default;

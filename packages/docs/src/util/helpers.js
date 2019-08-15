@@ -16,6 +16,7 @@ export function goTo (id) {
 export function getComponent (type) {
   switch (type) {
     case 'alert': return 'doc-alert'
+    case 'accessibility': return 'doc-accessibility'
     case 'api': return 'doc-api'
     case 'checklist': return 'doc-checklist'
     case 'example': return 'doc-example'
@@ -26,6 +27,7 @@ export function getComponent (type) {
     case 'markup': return 'doc-markup'
     case 'markdown': return 'doc-markdown'
     case 'parameters': return 'doc-parameters'
+    case 'playground': return 'doc-playground'
     case 'section': return 'doc-section'
     case 'supplemental': return 'doc-supplemental'
     case 'tree': return 'doc-tree'
@@ -78,4 +80,10 @@ export function genChip (item) {
   if (item.new) return 'new'
   if (item.updated) return 'updated'
   if (item.deprecated) return 'deprecated'
+  if (item.help) return 'help'
+}
+
+export function getBranch () {
+  const branch = window ? window.location.hostname.split('.')[0] : 'master'
+  return ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
 }

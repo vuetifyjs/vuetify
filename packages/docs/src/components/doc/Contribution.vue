@@ -7,7 +7,7 @@
     <div class="hidden-sm-and-down">
       <span class="hidden-md-and-up">&nbsp;—&nbsp;</span>
       <span
-        class="pr-5"
+        class="pr-12"
         v-html="contributionGuide"
       />
     </div>
@@ -18,15 +18,21 @@
   // Utilities
   import {
     mapGetters,
-    mapState
+    mapState,
   } from 'vuex'
   import { parseLink } from '@/util/helpers'
 
   export default {
+    props: {
+      branch: {
+        type: String,
+        default: 'master',
+      },
+    },
     computed: {
       ...mapGetters('documentation', [
         'namespace',
-        'page'
+        'page',
       ]),
       ...mapState('route', ['params']),
       contributionGuide () {
@@ -40,16 +46,16 @@
       },
       contributionLanguageLink () {
         const file = `${this.params.namespace}/${this.page}.json`
-        return `https://github.com/vuetifyjs/vuetify/tree/master/packages/docs/src/lang/${this.params.lang}/${file}`
+        return `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/lang/${this.params.lang}/${file}`
       },
       contributionPageLink () {
         const file = `${this.params.namespace}/${this.page}.json`
-        return `https://github.com/vuetifyjs/vuetify/tree/master/packages/docs/src/data/pages/${file}`
-      }
+        return `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/data/pages/${file}`
+      },
     },
 
     methods: {
-      parseLink
-    }
+      parseLink,
+    },
   }
 </script>

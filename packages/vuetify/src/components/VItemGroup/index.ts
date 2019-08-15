@@ -3,12 +3,12 @@ import VItemGroup from './VItemGroup'
 
 export {
   VItem,
-  VItemGroup
+  VItemGroup,
 }
 
 export default {
   $_vuetify_subcomponents: {
     VItem,
-    VItemGroup
-  }
+    VItemGroup,
+  },
 }

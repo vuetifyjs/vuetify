@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VContent.ts should work 1`] = `
+<main class="v-content"
+      style="padding: 88px 256px 136px 256px;"
+>
+  <div class="v-content__wrap">
+  </div>
+</main>
+`;

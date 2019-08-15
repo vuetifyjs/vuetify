@@ -1,55 +1,65 @@
 {
-  "header": "crwdns11106:0crwdne11106:0",
-  "headerText": "crwdns11108:0crwdne11108:0",
-  "supplemental": [
-    "crwdns11110:0crwdne11110:0"
-  ],
+  "header": "crwdns38516:0crwdne38516:0",
+  "headerText": "crwdns32170:0crwdne32170:0",
   "examples": {
     "usage": {
-      "desc": "crwdns11112:0crwdne11112:0"
+      "desc": "crwdns32174:0crwdne32174:0"
     },
     "api": {
-      "header": "crwdns11114:0crwdne11114:0",
-      "desc": "crwdns11116:0crwdne11116:0"
+      "header": "crwdns32176:0crwdne32176:0",
+      "desc": "crwdns32178:0crwdne32178:0"
     },
-    "scopedSlots": {
-      "header": "crwdns11118:0crwdne11118:0",
-      "desc": "crwdns11120:0crwdne11120:0"
+    "slots": {
+      "header": "crwdns38518:0crwdne38518:0",
+      "desc": "crwdns38520:0crwdne38520:0"
     },
     "customFilter": {
-      "header": "crwdns11122:0crwdne11122:0",
-      "desc": "crwdns11124:0crwdne11124:0"
+      "header": "crwdns32184:0crwdne32184:0",
+      "desc": "crwdns32186:0crwdne32186:0"
     },
     "asynchronous": {
-      "header": "crwdns11126:0crwdne11126:0",
-      "desc": "crwdns11128:0crwdne11128:0"
+      "header": "crwdns32188:0crwdne32188:0",
+      "desc": "crwdns32190:0crwdne32190:0"
     },
     "advanced": {
-      "header": "crwdns11130:0crwdne11130:0",
-      "desc": "crwdns11132:0crwdne11132:0"
+      "header": "crwdns32192:0crwdne32192:0",
+      "desc": "crwdns38522:0crwdne38522:0"
+    },
+    "stateSelector": {
+      "header": "crwdns38524:0crwdne38524:0",
+      "desc": "crwdns38526:0crwdne38526:0"
     }
   },
   "props": {
-    "allowOverflow": "crwdns11134:0crwdne11134:0",
-    "autoSelectFirst": "crwdns11136:0crwdne11136:0",
-    "filter": "crwdns11138:0[example]crwdne11138:0",
-    "noFilter": "crwdns11140:0crwdne11140:0",
-    "hideNoData": "crwdns11142:0crwdne11142:0"
+    "allowOverflow": "crwdns32196:0crwdne32196:0",
+    "autoSelectFirst": "crwdns32198:0crwdne32198:0",
+    "dark": "crwdns38528:0crwdne38528:0",
+    "filled": "crwdns38530:0crwdne38530:0",
+    "filter": "crwdns32200:0[example]crwdne32200:0",
+    "hideNoData": "crwdns32204:0crwdne32204:0",
+    "noFilter": "crwdns32202:0crwdne32202:0",
+    "searchInput": "crwdns38532:0crwdne38532:0",
+    "value": "crwdns32206:0crwdne32206:0"
   },
   "slots": {
-    "append": "crwdns11144:0crwdne11144:0",
-    "item": "crwdns11146:0crwdne11146:0",
-    "no-data": "crwdns11148:0crwdne11148:0",
-    "prepend": "crwdns11150:0crwdne11150:0",
-    "selection": "crwdns11152:0crwdne11152:0"
-  },
-  "scopedSlots": {
-    "item": "crwdns11154:0crwdne11154:0",
-    "selection": "crwdns11156:0crwdne11156:0"
+    "append": "crwdns32208:0crwdne32208:0",
+    "append-item": "crwdns32216:0crwdne32216:0",
+    "append-outer": "crwdns32210:0crwdne32210:0",
+    "item": "crwdns38534:0crwdne38534:0",
+    "no-data": "crwdns32218:0crwdne32218:0",
+    "prepend": "crwdns32212:0crwdne32212:0",
+    "prepend-inner": "crwdns32214:0crwdne32214:0",
+    "prepend-item": "crwdns32220:0crwdne32220:0",
+    "selection": "crwdns38536:0crwdne38536:0"
   },
   "events": {
-    "change": "crwdns11158:0crwdne11158:0",
-    "update:error": "crwdns11160:0crwdne11160:0",
-    "update:searchInput": "crwdns11162:0crwdne11162:0"
+    "change": "crwdns32226:0crwdne32226:0",
+    "click:append": "crwdns32228:0crwdne32228:0",
+    "click:append-outer": "crwdns32230:0crwdne32230:0",
+    "click:clear": "crwdns32232:0crwdne32232:0",
+    "click:prepend": "crwdns32234:0crwdne32234:0",
+    "click:prepend-inner": "crwdns32236:0crwdne32236:0",
+    "update:error": "crwdns32238:0crwdne32238:0",
+    "update:search-input": "crwdns38538:0crwdne38538:0"
   }
 }

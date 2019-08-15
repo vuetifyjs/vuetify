@@ -1,5 +1,5 @@
 {
-  "header": "# Item Groups",
+  "header": "# Item groups",
   "headerText": "The `v-item-group` provides the ability to create a group of selectable items out of any component. This is the baseline functionality for components such as `v-tabs` and `v-carousel`.",
   "examples": {
     "usage": {
@@ -8,11 +8,22 @@
     "post": {
       "header": "### Chips",
       "desc": "Easily hook up a custom chip group."
+    },
+    "toggle-pictures": {
+      "header": "### Custom groups",
+      "desc": "Icons can be used as toggle buttons when they allow selection, or deselection, of a single choice, such as marking an item as a favorite."
+    },
+    "multiple": {
+      "header": "### Multiple",
+      "desc": "Item groups can have multiple items selected."
+    },
+    "mandatory": {
+      "header": "### Mandatory",
+      "desc": "**mandatory** item groups must have at least 1 item selected."
+    },
+    "active-class": {
+      "header": "### With active class",
+      "desc": "**activeClass** property allows you to set custom CSS class on active items."
     }
-  },
-  "props": {
-    "activeClass": "CSS Class to apply when active",
-    "mandatory": "Forces a value to always be selected",
-    "multiple": "Allows for multiple selections. Model used must be an `Array`"
   }
 }

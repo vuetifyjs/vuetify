@@ -1,8 +1,7 @@
 <template>
-  <div>
-    <v-checkbox v-model="landscape" label="Landscape"></v-checkbox>
-    <v-time-picker v-model="picker" :landscape="landscape"></v-time-picker>
-  </div>
+  <v-row justify="center">
+    <v-time-picker v-model="picker"></v-time-picker>
+  </v-row>
 </template>
 
 <script>
@@ -10,8 +9,7 @@
     data () {
       return {
         picker: null,
-        landscape: false
       }
-    }
+    },
   }
 </script>

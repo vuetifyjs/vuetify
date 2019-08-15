@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VBreadcrumbs.ts should have breadcrumbs classes 1`] = `
+<ul class="v-breadcrumbs theme--light">
+</ul>
+`;
+
+exports[`VBreadcrumbs.ts should render items without slot 1`] = `
+<ul class="v-breadcrumbs theme--light">
+  <li>
+    <div class="v-breadcrumbs__item">
+      a
+    </div>
+  </li>
+  <li class="v-breadcrumbs__divider">
+    /
+  </li>
+  <li>
+    <div class="v-breadcrumbs__item">
+      b
+    </div>
+  </li>
+  <li class="v-breadcrumbs__divider">
+    /
+  </li>
+  <li>
+    <div class="v-breadcrumbs__item">
+      c
+    </div>
+  </li>
+  <li class="v-breadcrumbs__divider">
+    /
+  </li>
+  <li>
+    <div class="v-breadcrumbs__item">
+      d
+    </div>
+  </li>
+</ul>
+`;
+
+exports[`VBreadcrumbs.ts should use a custom divider slot 1`] = `
+<ul class="v-breadcrumbs theme--light">
+  <li>
+    <div class="v-breadcrumbs__item">
+      a
+    </div>
+  </li>
+  <li class="v-breadcrumbs__divider">
+    /divider/
+  </li>
+  <li>
+    <div class="v-breadcrumbs__item">
+      b
+    </div>
+  </li>
+  <li class="v-breadcrumbs__divider">
+    /divider/
+  </li>
+  <li>
+    <div class="v-breadcrumbs__item">
+      c
+    </div>
+  </li>
+  <li class="v-breadcrumbs__divider">
+    /divider/
+  </li>
+  <li>
+    <div class="v-breadcrumbs__item">
+      d
+    </div>
+  </li>
+</ul>
+`;
+
+exports[`VBreadcrumbs.ts should use slot to render items if present 1`] = `
+<ul class="v-breadcrumbs theme--light">
+  <li>
+    <div class="v-breadcrumbs__item">
+      A
+    </div>
+  </li>
+  <li class="v-breadcrumbs__divider">
+    /
+  </li>
+  <li>
+    <div class="v-breadcrumbs__item">
+      B
+    </div>
+  </li>
+  <li class="v-breadcrumbs__divider">
+    /
+  </li>
+  <li>
+    <div class="v-breadcrumbs__item">
+      C
+    </div>
+  </li>
+  <li class="v-breadcrumbs__divider">
+    /
+  </li>
+  <li>
+    <div class="v-breadcrumbs__item">
+      D
+    </div>
+  </li>
+</ul>
+`;

@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VForm",
   "children": [
     {
       "type": "section",
@@ -24,12 +25,21 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "rules",
-            "validationWithSubmitAndClear",
-            "vuelidate",
-            "veeValidate"
+            "simple/rules",
+            "simple/validation-with-submit-and-clear",
+            "intermediate/vuelidate",
+            "intermediate/vee-validate"
           ]
         }
       ]

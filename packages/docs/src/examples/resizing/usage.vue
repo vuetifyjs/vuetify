@@ -1,8 +1,8 @@
 <template>
-  <v-layout v-resize="onResize" column align-center justify-center>
+  <v-row v-resize="onResize" align="center" justify="center">
     <v-subheader>Window Size</v-subheader>
     {{ windowSize }}
-  </v-layout>
+  </v-row>
 </template>
 
 <script>
@@ -10,8 +10,8 @@
     data: () => ({
       windowSize: {
         x: 0,
-        y: 0
-      }
+        y: 0,
+      },
     }),
 
     mounted () {
@@ -21,7 +21,7 @@
     methods: {
       onResize () {
         this.windowSize = { x: window.innerWidth, y: window.innerHeight }
-      }
-    }
+      },
+    },
   }
 </script>

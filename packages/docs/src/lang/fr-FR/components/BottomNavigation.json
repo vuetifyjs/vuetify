@@ -1,0 +1,20 @@
+{
+  "header": "# Barre de navigation inférieure",
+  "headerText": "`v-bottom-navigation` est une alternative à `sidebar` (la barre latérale), principalement utilisé sur mobile en deux variantes, icônes et texte, et shift.",
+  "examples": {
+    "usage": {
+      "desc": "Bien que `v-bottom-nav` est censé être utilisé avec `vue-router`, vous pouvez aussi changer l'état des boutons en utilisant le prop `active.sync`. Vous pouvez changer la valeur d'un bouton en utilisant son attribut `value`."
+    },
+    "color": {
+      "header": "### Couleurs"
+    },
+    "toggle": {
+      "header": "### Basculement",
+      "desc": "Comme sur d'autres composants Vuetify, vous pouvez contrôler l'état d'affichage avec `v-model`."
+    }
+  },
+  "props": {
+    "absolute": "Mixins.Positionable.props.absolute",
+    "fixed": "Mixins.Positionable.props.fixed"
+  }
+}

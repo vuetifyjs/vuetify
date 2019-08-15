@@ -1,0 +1,16 @@
+@import '../../styles/styles.sass'
+
+.v-responsive
+  position: relative
+  overflow: hidden
+  flex: 1 0 auto
+  max-width: 100%
+  display: flex
+
+  &__content
+    flex: 1 0 0px
+    max-width: 100%
+
+  &__sizer
+    transition: padding-bottom 0.2s map-get($transition, 'swing')
+    flex: 0 0 0px

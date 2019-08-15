@@ -14,7 +14,8 @@ export default {
     newIn,
     namespace: null,
     page: null,
-    structure: null
+    structure: null,
+    toc: [],
   },
 
   getters: {
@@ -25,10 +26,23 @@ export default {
     page (state, getters, rootState) {
       if (!rootState || !rootState.route || !rootState.route.params) return undefined
       return upperFirst(camelCase(rootState.route.params.page))
-    }
+    },
   },
 
   mutations: {
-    setStructure: set('structure')
-  }
+    pushToc: (state, payload) => {
+      if (state.toc.find(item => item.id === payload.id)) {
+        return
+      }
+
+      state.toc.push(payload)
+    },
+    setStructure: (state, payload) => {
+      set('structure')(state, payload)
+
+      if (payload) {
+        state.toc = []
+      }
+    },
+  },
 }

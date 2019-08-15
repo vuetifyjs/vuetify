@@ -1,0 +1,215 @@
+// Imports
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+
++theme(v-tabs) using ($material)
+  > .v-tabs-bar
+    background-color: map-get($material, 'cards')
+
+    .v-tab:not(.v-tab--active),
+    .v-tab:not(.v-tab--active) > .v-icon,
+    .v-tab--disabled
+      color: map-get($material, 'tabs')
+
+  .v-tab
+    +states($material)
+
++theme(v-tabs-items) using ($material)
+  background-color: map-get($material, 'cards')
+
+.v-tabs-bar.theme--dark
+  .v-tab:not(.v-tab--active):not(.v-tab--disabled)
+    opacity: .7
+
+.v-tabs-bar
+  &.primary,
+  &.secondary,
+  &.accent,
+  &.success,
+  &.error,
+  &.warning,
+  &.info
+    .v-tab,
+    .v-tabs-slider
+      color: map-deep-get($material-dark, 'text', 'primary')
+
+// Block
+.v-tabs
+  flex: 1 1 auto
+  width: 100%
+
+  .v-menu__activator
+    height: 100%
+
+// Element
+.v-tabs-bar
+  border-radius: inherit
+  height: $tabs-bar-height
+
+  // https://github.com/vuetifyjs/vuetify/issues/6932
+  &.v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows) > .v-slide-group__wrapper > .v-tabs-bar__content
+    & > .v-tab:first-child,
+    & > .v-tabs-slider-wrapper + .v-tab
+      +ltr()
+        margin-left: $tabs-item-mobile-no-arrows-margin
+
+      +rtl()
+        margin-right: $tabs-item-mobile-no-arrows-margin
+
+  &.v-item-group > *
+    cursor: initial
+
+.v-tab
+  align-items: center
+  display: flex
+  flex: 0 1 auto
+  font-size: 0.875rem
+  font-weight: 500
+  justify-content: center
+  line-height: normal
+  min-width: $tabs-item-min-width
+  max-width: $tabs-item-max-width
+  outline: none
+  padding: $tabs-item-padding
+  position: relative
+  text-decoration: none
+  text-transform: uppercase
+  transition: none
+  user-select: none
+
+  // Needs increased specificity
+  &.v-tab
+    color: inherit
+
+  &:before
+    background-color: currentColor
+    bottom: 0
+    content: ''
+    left: 0
+    opacity: 0
+    pointer-events: none
+    position: absolute
+    right: 0
+    top: 0
+    transition: $primary-transition
+
+  &:not(.v-tab-disabled)
+    cursor: pointer
+
+.v-tabs-slider
+  background-color: currentColor
+  height: 100%
+  width: 100%
+
+  &-wrapper
+    bottom: 0
+    margin: 0 !important
+    position: absolute
+    transition: $primary-transition
+
+// Modifier
+.v-tabs--align-with-title > .v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows) > .v-slide-group__wrapper > .v-tabs-bar__content
+  & > .v-tab:first-child,
+  & > .v-tabs-slider-wrapper + .v-tab
+    +ltr()
+      margin-left: $tabs-item-align-with-title-margin
+
+    +rtl()
+      margin-right: $tabs-item-align-with-title-margin
+
+.v-tabs--fixed-tabs > .v-tabs-bar,
+.v-tabs--centered > .v-tabs-bar
+  +ltr()
+    .v-tabs-bar__content > *:last-child
+      margin-right: auto
+
+    .v-tabs-bar__content > *:first-child:not(.v-tabs-slider-wrapper)
+      margin-left: auto
+
+    .v-tabs-slider-wrapper + *
+      margin-left: auto
+
+  +rtl()
+    .v-tabs-bar__content > *:last-child
+      margin-left: auto
+
+    .v-tabs-bar__content > *:first-child:not(.v-tabs-slider-wrapper)
+      margin-right: auto
+
+    .v-tabs-slider-wrapper + *
+      margin-right: auto
+
+.v-tabs--fixed-tabs > .v-tabs-bar
+  .v-tab
+    flex: 1 1 auto
+    width: 100%
+
+.v-tabs--grow > .v-tabs-bar
+  .v-tab
+    flex: 1 0 auto
+    max-width: none
+
+.v-tabs--icons-and-text > .v-tabs-bar
+  height: $tabs-icons-and-text-bar-height
+
+  .v-tab
+    flex-direction: column-reverse
+
+    > *:first-child
+      margin-bottom: 6px
+
+.v-tabs--overflow > .v-tabs-bar
+  .v-tab
+    flex: 1 0 auto
+
+.v-tabs--right > .v-tabs-bar
+  .v-tab:first-child,
+  .v-tabs-slider-wrapper + .v-tab
+    +ltr()
+      margin-left: auto
+
+    +rtl()
+      margin-right: auto
+
+  .v-tab:last-child
+    +ltr()
+      margin-right: 0
+
+    +rtl()
+      margin-left: 0
+
+.v-tabs--vertical
+  display: flex
+
+  & > .v-tabs-bar
+    height: auto
+
+    .v-tabs-bar__content
+      flex-direction: column
+
+    .v-tab
+      height: $tabs-item-vertical-height
+
+    .v-tabs-slider
+      height: 100%
+
+  & > .v-window
+    flex: 1 1 auto
+
+  &.v-tabs--icons-and-text
+    & > .v-tabs-bar
+      .v-tab
+        height: $tabs-item-vertical-icons-and-text-height
+
+.v-tab--active
+  color: inherit
+
+  &.v-tab:not(:focus)::before
+    opacity: 0
+
+  .v-icon
+    color: inherit
+
+.v-tab--disabled
+  pointer-events: none
+  opacity: .5

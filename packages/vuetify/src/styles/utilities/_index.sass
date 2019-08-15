@@ -1,0 +1,24 @@
+@import './_display.sass'
+@import './_text.sass'
+@import './_transition.sass'
+
+// Utilities
+@each $breakpoint in map-keys($grid-breakpoints)
+  // Generate media query if needed
+  +media-breakpoint-up($breakpoint)
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints)
+
+    // Loop over each utility property
+    @each $key, $utility in $utilities
+      // The utility can be disabled with `false`, thus check if the utility is a map first
+      // Only proceed if responsive media queries are enabled or if it's the base media query
+      @if type-of($utility) == "map" and (map-get($utility, responsive) or $infix == "")
+        +generate-utility($utility, $infix)
+
+// Print utilities
+@media print
+  @each $key, $utility in $utilities
+    // The utility can be disabled with `false`, thus check if the utility is a map first
+    // Then check if the utility needs print styles
+    @if type-of($utility) == "map" and map-get($utility, print) == true
+      +generate-utility($utility, "-print")

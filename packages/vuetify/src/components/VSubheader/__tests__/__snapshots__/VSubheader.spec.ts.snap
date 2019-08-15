@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VSubheader.ts should be dark 1`] = `
+<div class="v-subheader theme--dark">
+</div>
+`;
+
+exports[`VSubheader.ts should be inset 1`] = `
+<div class="v-subheader v-subheader--inset theme--light">
+</div>
+`;
+
+exports[`VSubheader.ts should be light 1`] = `
+<div class="v-subheader theme--light">
+</div>
+`;
+
+exports[`VSubheader.ts should have custom class 1`] = `
+<div class="v-subheader foo theme--light">
+</div>
+`;

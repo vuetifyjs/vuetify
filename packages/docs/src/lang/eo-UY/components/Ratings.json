@@ -1,45 +1,55 @@
 {
-  "header": "crwdns12922:0crwdne12922:0",
-  "headerText": "crwdns12924:0crwdne12924:0",
+  "header": "crwdns32996:0crwdne32996:0",
+  "headerText": "crwdns32998:0crwdne32998:0",
   "examples": {
     "usage": {
-      "desc": "crwdns12926:0crwdne12926:0"
+      "desc": "crwdns33000:0crwdne33000:0"
     },
     "sizes": {
-      "header": "crwdns12928:0crwdne12928:0",
-      "desc": "crwdns12930:0crwdne12930:0"
+      "header": "crwdns33002:0crwdne33002:0",
+      "desc": "crwdns33004:0crwdne33004:0"
     },
     "length": {
-      "header": "crwdns12932:0crwdne12932:0",
-      "desc": "crwdns12934:0crwdne12934:0"
+      "header": "crwdns33006:0crwdne33006:0",
+      "desc": "crwdns33008:0crwdne33008:0"
     },
     "increments": {
-      "header": "crwdns12936:0crwdne12936:0",
-      "desc": "crwdns12938:0crwdne12938:0"
+      "header": "crwdns33010:0crwdne33010:0",
+      "desc": "crwdns33012:0crwdne33012:0"
     },
     "slots": {
-      "header": "crwdns12940:0crwdne12940:0",
-      "desc": "crwdns12942:0crwdne12942:0"
+      "header": "crwdns39346:0crwdne39346:0",
+      "desc": "crwdns39348:0crwdne39348:0"
     },
     "card": {
-      "header": "crwdns12944:0crwdne12944:0",
-      "desc": "crwdns12946:0crwdne12946:0"
+      "header": "crwdns33018:0crwdne33018:0",
+      "desc": "crwdns33020:0crwdne33020:0"
     },
     "advanced": {
-      "header": "crwdns12948:0crwdne12948:0",
-      "desc": "crwdns12950:0crwdne12950:0"
+      "header": "crwdns33022:0crwdne33022:0",
+      "desc": "crwdns33024:0crwdne33024:0"
+    },
+    "colors": {
+      "header": "crwdns39350:0crwdne39350:0",
+      "desc": "crwdns39352:0crwdne39352:0"
     }
   },
   "props": {
-    "backgroundColor": "crwdns12952:0crwdne12952:0",
-    "dense": "crwdns12954:0crwdne12954:0",
-    "emptyIcon": "crwdns12956:0crwdne12956:0",
-    "fullIcon": "crwdns12958:0crwdne12958:0",
-    "halfIcon": "crwdns12960:0crwdne12960:0",
-    "halfIncrements": "crwdns12962:0crwdne12962:0",
-    "hover": "crwdns12964:0crwdne12964:0",
-    "length": "crwdns12966:0crwdne12966:0",
-    "readonly": "crwdns12968:0crwdne12968:0",
-    "value": "crwdns12970:0crwdne12970:0"
+    "backgroundColor": "crwdns33026:0crwdne33026:0",
+    "dense": "crwdns33028:0crwdne33028:0",
+    "emptyIcon": "crwdns33030:0crwdne33030:0",
+    "fullIcon": "crwdns33032:0crwdne33032:0",
+    "halfIcon": "crwdns33034:0crwdne33034:0",
+    "halfIncrements": "crwdns33036:0crwdne33036:0",
+    "hover": "crwdns33038:0crwdne33038:0",
+    "length": "crwdns33040:0crwdne33040:0",
+    "readonly": "crwdns33042:0crwdne33042:0",
+    "value": "crwdns33044:0crwdne33044:0"
+  },
+  "slots": {
+    "item": "crwdns39354:0crwdne39354:0"
+  },
+  "events": {
+    "input": "crwdns39356:0crwdne39356:0"
   }
 }

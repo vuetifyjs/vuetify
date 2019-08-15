@@ -1,7 +1,8 @@
-import '../../stylus/components/_date-picker-years.styl'
+import './VDatePickerYears.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Localable from '../../mixins/localable'
 
 // Utils
 import { createNativeLocaleFormatter } from './util'
@@ -19,37 +20,35 @@ interface options extends Vue {
 export default mixins<options &
 /* eslint-disable indent */
   ExtractVue<[
-    typeof Colorable
+    typeof Colorable,
+    typeof Localable
   ]>
 /* eslint-enable indent */
 >(
-  Colorable
+  Colorable,
+  Localable
 /* @vue/component */
 ).extend({
   name: 'v-date-picker-years',
 
   props: {
     format: Function as PropValidator<DatePickerFormatter | undefined>,
-    locale: {
-      type: String,
-      default: 'en-us'
-    },
     min: [Number, String],
     max: [Number, String],
     readonly: Boolean,
-    value: [Number, String]
+    value: [Number, String],
   },
 
   data () {
     return {
-      defaultColor: 'primary'
+      defaultColor: 'primary',
     }
   },
 
   computed: {
     formatter (): DatePickerFormatter {
-      return this.format || createNativeLocaleFormatter(this.locale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 })
-    }
+      return this.format || createNativeLocaleFormatter(this.currentLocale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 })
+    },
   },
 
   mounted () {
@@ -71,10 +70,10 @@ export default mixins<options &
 
       return this.$createElement('li', this.setTextColor(color, {
         key: year,
-        'class': { active },
+        class: { active },
         on: {
-          click: () => this.$emit('input', year)
-        }
+          click: () => this.$emit('input', year),
+        },
       }), formatted)
     },
 
@@ -89,13 +88,13 @@ export default mixins<options &
       }
 
       return children
-    }
+    },
   },
 
   render (): VNode {
     return this.$createElement('ul', {
       staticClass: 'v-date-picker-years',
-      ref: 'years'
+      ref: 'years',
     }, this.genYearItems())
-  }
+  },
 })

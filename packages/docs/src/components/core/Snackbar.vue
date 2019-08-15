@@ -15,7 +15,7 @@
       <v-icon
         v-if="computedIcon"
         dark
-        class="mr-3"
+        class="mr-4"
       >
         {{ computedIcon }}
       </v-icon>
@@ -28,7 +28,7 @@
         :color="computedColor"
         :ripple="false"
         v-bind="bind"
-        :flat="snackbar.color !== 'store'"
+        :text="snackbar.color !== 'store'"
         dark
         depressed
         @click="onClick"
@@ -40,7 +40,7 @@
         :ripple="false"
         :aria-label="$t('Vuetify.Snackbar.close')"
         icon
-        class="ml-3"
+        class="ml-4"
         @click="markViewed"
       >
         <v-icon>clear</v-icon>
@@ -52,7 +52,7 @@
 <script>
   import {
     mapMutations,
-    mapState
+    mapState,
   } from 'vuex'
 
   export default {
@@ -64,7 +64,7 @@
           return {
             href: this.snackbar.href,
             target: '_blank',
-            rel: 'noopener'
+            rel: 'noopener',
           }
         }
 
@@ -93,8 +93,8 @@
         },
         set (val) {
           this.setValue(val)
-        }
-      }
+        },
+      },
     },
 
     watch: {
@@ -105,7 +105,7 @@
         if (localStorage.getItem(this.snackbar.id)) return
 
         this.snack = true
-      }
+      },
     },
 
     async created () {
@@ -119,7 +119,7 @@
       //   }
       // }).then(res => res.json())
 
-      if (notify) this.setSnackbar(notify)
+      if (notify.href) this.setSnackbar(notify)
     },
 
     methods: {
@@ -137,8 +137,8 @@
 
         this.snackbar.handler &&
           this.snackbar.handler()
-      }
-    }
+      },
+    },
   }
 </script>
 

@@ -1,41 +1,43 @@
-import '../../stylus/components/_progress-circular.styl'
+// Styles
+import './VProgressCircular.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
-import mixins from '../../util/mixins'
+
+// Utils
+import { convertToUnit } from '../../util/helpers'
 
 // Types
-import { CreateElement, VNode, VNodeChildrenArrayContents } from 'vue'
+import { VNode, VNodeChildren } from 'vue'
 
 /* @vue/component */
-export default mixins(Colorable).extend({
+export default Colorable.extend({
   name: 'v-progress-circular',
 
   props: {
     button: Boolean,
-
     indeterminate: Boolean,
-
     rotate: {
       type: [Number, String],
-      default: 0
+      default: 0,
     },
-
     size: {
       type: [Number, String],
-      default: 32
+      default: 32,
     },
-
     width: {
       type: [Number, String],
-      default: 4
+      default: 4,
     },
-
     value: {
       type: [Number, String],
-      default: 0
-    }
+      default: 0,
+    },
   },
+
+  data: () => ({
+    radius: 20,
+  }),
 
   computed: {
     calculatedSize (): number {
@@ -49,7 +51,7 @@ export default mixins(Colorable).extend({
     classes (): object {
       return {
         'v-progress-circular--indeterminate': this.indeterminate,
-        'v-progress-circular--button': this.button
+        'v-progress-circular--button': this.button,
       }
     },
 
@@ -63,10 +65,6 @@ export default mixins(Colorable).extend({
       }
 
       return parseFloat(this.value)
-    },
-
-    radius (): number {
-      return 20
     },
 
     strokeDashArray (): number {
@@ -83,25 +81,25 @@ export default mixins(Colorable).extend({
 
     styles (): object {
       return {
-        height: `${this.calculatedSize}px`,
-        width: `${this.calculatedSize}px`
+        height: convertToUnit(this.calculatedSize),
+        width: convertToUnit(this.calculatedSize),
       }
     },
 
     svgStyles (): object {
       return {
-        transform: `rotate(${Number(this.rotate)}deg)`
+        transform: `rotate(${Number(this.rotate)}deg)`,
       }
     },
 
     viewBoxSize (): number {
       return this.radius / (1 - Number(this.width) / +this.size)
-    }
+    },
   },
 
   methods: {
-    genCircle (h: CreateElement, name: string, offset: string | number): VNode {
-      return h('circle', {
+    genCircle (name: string, offset: string | number): VNode {
+      return this.$createElement('circle', {
         class: `v-progress-circular__${name}`,
         attrs: {
           fill: 'transparent',
@@ -110,41 +108,46 @@ export default mixins(Colorable).extend({
           r: this.radius,
           'stroke-width': this.strokeWidth,
           'stroke-dasharray': this.strokeDashArray,
-          'stroke-dashoffset': offset
-        }
+          'stroke-dashoffset': offset,
+        },
       })
     },
-    genSvg (h: CreateElement): VNode {
+    genSvg (): VNode {
       const children = [
-        this.indeterminate || this.genCircle(h, 'underlay', 0),
-        this.genCircle(h, 'overlay', this.strokeDashOffset)
-      ] as VNodeChildrenArrayContents
+        this.indeterminate || this.genCircle('underlay', 0),
+        this.genCircle('overlay', this.strokeDashOffset),
+      ] as VNodeChildren
 
-      return h('svg', {
+      return this.$createElement('svg', {
         style: this.svgStyles,
         attrs: {
           xmlns: 'http://www.w3.org/2000/svg',
-          viewBox: `${this.viewBoxSize} ${this.viewBoxSize} ${2 * this.viewBoxSize} ${2 * this.viewBoxSize}`
-        }
+          viewBox: `${this.viewBoxSize} ${this.viewBoxSize} ${2 * this.viewBoxSize} ${2 * this.viewBoxSize}`,
+        },
       }, children)
-    }
+    },
+    genInfo (): VNode {
+      return this.$createElement('div', {
+        staticClass: 'v-progress-circular__info',
+      }, this.$slots.default)
+    },
   },
 
   render (h): VNode {
-    const info = h('div', { staticClass: 'v-progress-circular__info' }, this.$slots.default)
-    const svg = this.genSvg(h)
-
     return h('div', this.setTextColor(this.color, {
       staticClass: 'v-progress-circular',
       attrs: {
-        'role': 'progressbar',
+        role: 'progressbar',
         'aria-valuemin': 0,
         'aria-valuemax': 100,
-        'aria-valuenow': this.indeterminate ? undefined : this.normalizedValue
+        'aria-valuenow': this.indeterminate ? undefined : this.normalizedValue,
       },
       class: this.classes,
       style: this.styles,
-      on: this.$listeners
-    }), [svg, info])
-  }
+      on: this.$listeners,
+    }), [
+      this.genSvg(),
+      this.genInfo(),
+    ])
+  },
 })

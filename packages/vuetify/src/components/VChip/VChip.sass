@@ -1,0 +1,202 @@
+// Imports
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+
+// Theme
+.v-chip:not(.v-chip--outlined)
+  &.primary,
+  &.secondary,
+  &.accent,
+  &.success,
+  &.error,
+  &.warning,
+  &.info
+    color: map-deep-get($material-dark, 'text', 'primary')
+
++theme(v-chip) using ($material)
+  border-color: map-get($material, 'dividers')
+  color: map-deep-get($material, 'text', 'primary')
+
+  &:not(.v-chip--active)
+    background: map-get($material, 'chips')
+
+  +states($material)
+
+// Block
+.v-chip
+  align-items: center
+  cursor: default
+  display: inline-flex
+  line-height: 20px
+  outline: none
+  padding: 0 12px
+  position: relative
+  text-decoration: none
+  transition-duration: $chip-transition-duration
+  transition-property: box-shadow, opacity
+  transition-timing-function: $chip-transition-fn
+  vertical-align: middle
+
+  &:before
+    background-color: currentColor
+    bottom: 0
+    border-radius: inherit
+    content: ''
+    left: 0
+    opacity: 0
+    position: absolute
+    pointer-events: none
+    right: 0
+    top: 0
+
+  // Important is needed to account for new avatar structure
+  .v-avatar
+    height: $chip-avatar-size !important
+    min-width: $chip-avatar-size !important
+    width: $chip-avatar-size !important
+
+  .v-icon
+    font-size: $chip-icon-size
+
+  .v-avatar,
+  .v-icon
+    &--left
+      margin-left: $chip-icon-margin-before
+      margin-right: $chip-icon-margin-after
+
+    &--right
+      margin-left: $chip-icon-margin-after
+      margin-right: $chip-icon-margin-before
+
+    +rtl()
+      &--left
+        margin-left: $chip-icon-margin-after
+        margin-right: $chip-icon-margin-before
+
+      &--right
+        margin-left: $chip-icon-margin-before
+        margin-right: $chip-icon-margin-after
+
+  &:not(.v-chip--no-color)
+    .v-icon
+      color: inherit
+
+// Elements
+.v-chip__close.v-icon
+  font-size: $chip-close-size
+  max-height: $chip-close-size
+  max-width: $chip-close-size
+  user-select: none
+
+  &.v-icon--right
+    margin-right: $chip-icon-right-margin-after
+
+    +rtl()
+      margin-left: $chip-icon-right-margin-after
+      margin-right: $chip-icon-right-margin-before
+
+  &:hover,
+  &:focus,
+  &:active
+    opacity: .72
+
+.v-chip__content
+  align-items: center
+  display: inline-flex
+  height: 100%
+
+// Modifiers
+.v-chip--active
+  .v-icon
+    color: inherit
+
+.v-chip--link
+  &::before
+    transition: opacity $primary-transition
+
+  &:focus::before
+    opacity: $chip-link-focus-opacity
+
+.v-chip--clickable
+  cursor: pointer
+
+  &:active
+    +elevation(2)
+
+.v-chip--disabled
+  opacity: .4
+  pointer-events: none
+  user-select: none
+
+.v-chip__filter
+  // TODO: Figure out why the absence
+  // of this breaks the transition
+  max-width: 24px
+
+  // Increase specificity to
+  // overwrite theme style
+  &.v-icon
+    color: inherit
+
+  &.expand-x-transition-leave-active,
+  &.expand-x-transition-enter
+    margin: 0
+
+.v-chip--pill
+  .v-chip__filter
+    margin-right: $chip-pill-filter-margin
+
+  .v-avatar
+    height: $chip-pill-avatar-size !important
+    width: $chip-pill-avatar-size !important
+
+  .v-avatar
+    &--left
+      margin-left: $chip-pill-avatar-margin-before
+
+    &--right
+      margin-right: $chip-pill-avatar-margin-before
+
+    +rtl()
+      &--left
+        margin-left: chip-pill-avatar-margin-after
+        margin-right: $chip-pill-avatar-margin-before
+
+      &--right
+        margin-left: $chip-pill-avatar-margin-before
+        margin-right: chip-pill-avatar-margin-after
+
+.v-chip--label
+  border-radius: $chip-label-border-radius !important
+
+.v-chip.v-chip--outlined
+  border-width: $icon-outlined-border-width
+  border-style: solid
+
+  &:not(.v-chip--active):before
+    opacity: 0
+
+  &.v-chip--active:before
+    opacity: 0.08
+
+  .v-icon
+    color: inherit
+
+  // Needs increased specificity
+  &.v-chip.v-chip
+    background-color: transparent !important
+
+// Needs increased specificity
+// to overwrite theme color
+.v-chip.v-chip--selected
+  background: transparent
+
+  &:after
+    opacity: .28
+
+.v-chip
+  @each $name, $size in $icon-sizes
+    &.v-size--#{$name}
+      border-radius: #{map-get($size, 'height') / 2}px
+      font-size: #{map-get($size, 'font-size')}px
+      height: #{map-get($size, 'height')}px

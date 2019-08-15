@@ -15,7 +15,7 @@
     <v-stepper-items>
       <v-stepper-content step="1">
         <v-card
-          class="mb-5"
+          class="mb-12"
           color="grey lighten-1"
           height="200px"
         ></v-card>
@@ -27,12 +27,12 @@
           Continue
         </v-btn>
 
-        <v-btn flat>Cancel</v-btn>
+        <v-btn text>Cancel</v-btn>
       </v-stepper-content>
 
       <v-stepper-content step="2">
         <v-card
-          class="mb-5"
+          class="mb-12"
           color="grey lighten-1"
           height="200px"
         ></v-card>
@@ -44,12 +44,12 @@
           Continue
         </v-btn>
 
-        <v-btn flat>Cancel</v-btn>
+        <v-btn text>Cancel</v-btn>
       </v-stepper-content>
 
       <v-stepper-content step="3">
         <v-card
-          class="mb-5"
+          class="mb-12"
           color="grey lighten-1"
           height="200px"
         ></v-card>
@@ -61,7 +61,7 @@
           Continue
         </v-btn>
 
-        <v-btn flat>Cancel</v-btn>
+        <v-btn text>Cancel</v-btn>
       </v-stepper-content>
     </v-stepper-items>
   </v-stepper>
@@ -71,8 +71,8 @@
   export default {
     data () {
       return {
-        e1: 0
+        e1: 0,
       }
-    }
+    },
   }
 </script>

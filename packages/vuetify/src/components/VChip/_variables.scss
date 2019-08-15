@@ -1,0 +1,38 @@
+$chip-avatar-size: 24px !default;
+$chip-close-size: 18px !default;
+$chip-icon-margin-after: 8px !default;
+$chip-icon-margin-before: -6px !default;
+$chip-icon-right-margin-after: -4px !default;
+$chip-icon-right-margin-before: 8px !default;
+$chip-icon-size: 24px !default;
+$chip-label-border-radius: 4px !default;
+$chip-link-focus-opacity: 0.32 !default;
+$chip-pill-avatar-margin-after: 8px !default;
+$chip-pill-avatar-margin-before: -12px !default;
+$chip-pill-avatar-size: 32px !default;
+$chip-pill-filter-margin: 0 16px 0 0 !default;
+$chip-transition-duration: 0.28s !default;
+$chip-transition-fn: map-get($transition, 'fast-out-slow-in') !default;
+$icon-outlined-border-width: thin !default;
+$icon-sizes: (
+  'x-small': (
+    'font-size': 10,
+    'height': 16
+  ),
+  'small': (
+    'font-size': 12,
+    'height': 24
+  ),
+  'default': (
+    'font-size': 14,
+    'height': 32
+  ),
+  'large': (
+    'font-size': 16,
+    'height': 54
+  ),
+  'x-large': (
+    'font-size': 18,
+    'height': 66
+  )
+) !default;

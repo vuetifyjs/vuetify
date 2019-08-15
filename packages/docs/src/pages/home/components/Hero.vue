@@ -1,9 +1,8 @@
 <template>
   <v-responsive
-    class="white--text py-5"
+    class="white--text py-12"
     style="background: linear-gradient(to bottom, #1867c0, #5CBBF6)"
   >
-    <tidelift />
     <v-container>
       <v-layout
         align-center
@@ -12,8 +11,8 @@
       >
         <v-img
           :class="{
-            'mr-5': $vuetify.breakpoint.mdAndUp,
-            'mb-3': $vuetify.breakpoint.smAndDown
+            'mx-5': $vuetify.breakpoint.mdAndUp,
+            'mb-6': $vuetify.breakpoint.smAndDown
           }"
           :height="$vuetify.breakpoint.mdAndUp ? 256 : 135"
           :width="$vuetify.breakpoint.mdAndUp ? 256 : 135"
@@ -21,17 +20,22 @@
           contain
           src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-300.png"
         />
-        <div class="text-xs-center text-lg-left">
+        <div
+          class="text-center text-lg-left"
+          :style="`flex: 0 1 ${$vuetify.breakpoint.mdAndDown ? '100%' : 'auto'}`"
+        >
           <h1
             :class="$vuetify.breakpoint.smAndDown && 'display-1' || 'display-3'"
-            class="font-weight-light mb-4"
+            class="font-weight-light mb-6 mx-4"
             v-html="$vuetify.breakpoint.smAndUp ? $t('Vuetify.Home.callout') : 'Vuetify.js'"
           />
           <v-layout
-            justify-center
+            :justify-center="$vuetify.breakpoint.mdAndDown"
+            pa-4
             wrap
           >
             <v-btn
+              :block="$vuetify.breakpoint.xsOnly"
               :to="{
                 name: 'Documentation',
                 params: {
@@ -40,24 +44,28 @@
                   page: 'quick-start'
                 }
               }"
-              class="primary--text ml-0"
+              class="primary--text ma-2"
               color="white"
               large
             >
               {{ $t('Vuetify.Home.getStarted') }}
             </v-btn>
             <v-btn
+              :block="$vuetify.breakpoint.xsOnly"
+              class="ma-2"
               color="white"
               href="https://github.com/vuetifyjs/vuetify"
               large
-              outline
+              outlined
             >
               <v-icon left>mdi-github-circle</v-icon>
               Github
             </v-btn>
             <v-btn
-              color="grey lighten-3 mr-0"
-              outline
+              :block="$vuetify.breakpoint.xsOnly"
+              class="ma-2"
+              color="grey lighten-3"
+              outlined
               href="https://community.vuetifyjs.com"
               large
               rel="noopener"
@@ -72,6 +80,8 @@
     </v-container>
 
     <feature />
+
+    <tidelift />
   </v-responsive>
 </template>
 
@@ -79,7 +89,7 @@
   export default {
     components: {
       Feature: () => import('./Feature'),
-      Tidelift: () => import('./Tidelift')
-    }
+      Tidelift: () => import('./Tidelift'),
+    },
   }
 </script>

@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VToolbar",
+  "mdSpec": {
+    "version": "1",
+    "link": "https://material.io/archive/guidelines/components/toolbars.html"
+  },
   "children": [
     {
       "type": "section",
@@ -8,6 +13,11 @@
         {
           "type": "usage",
           "value": "usage"
+        },
+        {
+          "type": "alert",
+          "lang": "buttonMargin",
+          "value": "warning"
         }
       ]
     },
@@ -18,8 +28,18 @@
           "type": "api",
           "value": [
             "v-toolbar",
-            "v-system-bar"
+            "v-toolbar-title",
+            "v-toolbar-items"
           ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "playground",
+          "value": "playground"
         }
       ]
     },
@@ -29,18 +49,17 @@
         {
           "type": "examples",
           "value": [
-            "appBar",
-            "appBarItems",
-            "appBarExtension",
-            "columnWidthWithHierarchy",
-            "flexibleAndCard",
-            "floatingWithSearch",
-            "variations",
-            "prominent",
-            "dense",
-            "scrolling",
-            "appBarMenu",
-            "systemBarsStatusWindow"
+            "simple/prominent",
+            "simple/dense",
+            "simple/light-and-dark",
+            "simple/variations",
+            "simple/background",
+            "simple/extended",
+            "simple/extension-height",
+            "simple/collapse",
+            "intermediate/flexible-and-card",
+            "intermediate/floating-with-search",
+            "intermediate/contextual-action-bar"
           ]
         }
       ]

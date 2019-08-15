@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VSimpleTable.ts should render 1`] = `
+<div class="v-data-table theme--light">
+  <div class="v-data-table__wrapper">
+    <table>
+      <tr>
+        <th>
+          Foo
+        </th>
+        <th>
+          Bar
+        </th>
+      </tr>
+      <tr>
+        <td>
+          baz
+        </td>
+        <td>
+          qux
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+`;
+
+exports[`VSimpleTable.ts should render with custom height 1`] = `
+<div class="v-data-table v-data-table--fixed-height theme--light">
+  <div class="v-data-table__wrapper"
+       style="height: 1000px;"
+  >
+    <table>
+      <tr>
+        <th>
+          Foo
+        </th>
+        <th>
+          Bar
+        </th>
+      </tr>
+      <tr>
+        <td>
+          baz
+        </td>
+        <td>
+          qux
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+`;
+
+exports[`VSimpleTable.ts should render with custom wrapper 1`] = `
+<div class="v-data-table theme--light">
+  <table>
+    <tr>
+      <th>
+        Foo
+      </th>
+      <th>
+        Bar
+      </th>
+    </tr>
+    <tr>
+      <td>
+        baz
+      </td>
+      <td>
+        qux
+      </td>
+    </tr>
+  </table>
+</div>
+`;
+
+exports[`VSimpleTable.ts should render with top & bottom slots 1`] = `
+<div class="v-data-table theme--light">
+  <div class="top">
+    Header
+  </div>
+  <div class="v-data-table__wrapper">
+    <table>
+    </table>
+  </div>
+  <div class="bottom">
+    Footer
+  </div>
+</div>
+`;

@@ -1,72 +1,81 @@
 <template>
   <div>
     <doc-heading>Generic.Pages.api</doc-heading>
-    <v-card>
+    <v-card outlined>
+      <v-toolbar
+        class="px-2 py-3"
+        color="primary"
+        dark
+        flat
+        height="auto"
+      >
+        <v-layout wrap>
+          <v-flex xs12 md4>
+            <v-select
+              v-model="current"
+              :items="value"
+              :class="$vuetify.breakpoint.mdAndUp ? '' : 'mb-6'"
+              label="Available Component(s)"
+              outlined
+              :menu-props="{offsetY: true, contentClass: 'primary'}"
+              prepend-inner-icon="mdi-view-dashboard"
+              hide-details
+            />
+          </v-flex>
+          <v-flex xs12 md4 offset-md4>
+            <v-text-field
+              v-model="search"
+              type="search"
+              clearable
+              append-icon="search"
+              label="Search..."
+              outlined
+              hide-details
+              single-line
+            />
+          </v-flex>
+        </v-layout>
+      </v-toolbar>
       <v-tabs
         v-model="tab"
+        background-color="transparent"
+        :vertical="$vuetify.breakpoint.smAndUp"
         :slider-color="computedTabs.length ? 'primary' : 'transparent'"
-        color="grey lighten-3"
       >
         <v-tab
           v-for="(tab, i) in computedTabs"
           :key="`tab-${i}`"
-          :href="`#${tab}`"
+          :class="[$vuetify.breakpoint.smAndUp && 'justify-start']"
         >
           {{ tab.replace(/([A-Z])/g, ' $1') }}
         </v-tab>
-      </v-tabs>
 
-      <v-card-text>
-        <v-layout justify-space-between>
-          <v-flex
-            xs12
-            sm4
-          >
-            <v-select
-              v-model="current"
-              :items="value"
-              :disabled="value.length < 2"
-              hide-details
-              single-line
-              menu-props="auto"
-            />
-          </v-flex>
-
-          <v-flex xs12 sm4>
-            <v-text-field
-              v-model="search"
-              append-icon="search"
-              label="Search..."
-              single-line
-              hide-details
-            />
-          </v-flex>
-        </v-layout>
-      </v-card-text>
-
-      <v-tabs-items
-        v-model="tab"
-        touchless
-        class="white"
-      >
-        <v-tab-item
-          v-for="(tab, i) in computedTabs"
-          :key="`tab-item-${i}`"
-          :value="tab"
-          lazy
+        <v-tabs-items
+          :key="current"
+          v-model="tab"
+          touchless
+          class="white overflow-hidden"
         >
-          <v-card flat>
-            <doc-parameters
-              :headers="headers[tab]"
-              :items="component[tab]"
-              :lang="lang"
-              :search="search"
-              :target="current"
-              :type="tab"
-            />
-          </v-card>
-        </v-tab-item>
-      </v-tabs-items>
+          <v-tab-item
+            v-for="(tab, i) in computedTabs"
+            :key="`tab-item-${i}`"
+            class="overflow-y-auto"
+            eager
+            style="max-height: 800px;"
+          >
+            <v-card flat>
+              <doc-parameters
+                :headers="headers[tab]"
+                :items="component[tab]"
+                :lang="lang"
+                :search="search"
+                :target="current"
+                :type="tab"
+              />
+            </v-card>
+          </v-tab-item>
+        </v-tabs-items>
+      </v-tabs>
     </v-card>
   </div>
 </template>
@@ -78,28 +87,36 @@
   const propProps = [
     {
       value: 'name',
-      class: 'xs6 sm3 lg2'
-    },
-    {
-      value: 'default',
-      class: 'xs6 sm3 text-xs-right'
+      class: 'xs6 md3',
     },
     {
       value: 'type',
-      class: 'xs6 ml-auto sm4 text-sm-right'
-    }
+      class: 'xs6 md2 text-xs-right',
+    },
+    {
+      value: 'default',
+      class: 'xs12 md7 text-md-right',
+    },
+    {
+      value: 'description',
+      class: 'xs12 mt-2',
+    },
+    {
+      value: 'example',
+      class: 'xs12 mt-2',
+    },
   ]
 
   export default {
     props: {
       lang: {
         type: String,
-        default: ''
+        default: '',
       },
       value: {
         type: Array,
-        default: () => ([])
-      }
+        default: () => ([]),
+      },
     },
 
     data: vm => ({
@@ -110,54 +127,57 @@
         slots: [
           {
             value: 'name',
-            class: 'left'
-          }
-        ],
-        scopedSlots: [
+            class: 'xs12',
+          },
           {
-            value: 'name',
-            class: 'xs3'
+            value: 'description',
+            type: 'markdown',
+            class: 'xs12 mt-2',
           },
           {
             value: 'props',
-            class: 'xs9'
-          }
+            class: 'xs12 mt-2',
+          },
         ],
         events: [
           {
             value: 'name',
-            class: ''
+            class: 'xs12',
+          },
+          {
+            value: 'description',
+            class: 'xs12 mt-2',
           },
           {
             value: 'value',
-            class: 'text-xs-right'
-          }
+            class: 'xs12 mt-2',
+          },
         ],
         functions: [
           {
             value: 'name',
-            class: ''
+            class: 'xs12',
           },
           {
             value: 'signature',
-            class: 'text-xs-right'
-          }
+            class: 'xs12 mt-2',
+          },
         ],
         functional: [
           {
             value: 'name',
-            class: ''
+            class: 'xs12',
           },
           {
             value: 'description',
-            class: 'text-xs-right'
-          }
+            class: 'xs12 mt-2',
+          },
         ],
-        options: [...propProps]
+        options: [...propProps],
       },
       search: null,
       tab: null,
-      tabs: ['api', 'props', 'slots', 'scopedSlots', 'params', 'events', 'functions', 'functional', 'options']
+      tabs: ['api', 'props', 'slots', 'params', 'events', 'functions', 'functional', 'options'],
     }),
 
     computed: {
@@ -170,12 +190,12 @@
 
         return {
           ...component,
-          ...(api[this.current] || {})
+          ...(api[this.current] || {}),
         }
       },
       computedTabs () {
         return this.tabs.filter(tab => (this.component[tab] || []).length > 0)
-      }
+      },
     },
 
     watch: {
@@ -192,7 +212,7 @@
         }
 
         this.tab = ''
-      }
-    }
+      },
+    },
   }
 </script>

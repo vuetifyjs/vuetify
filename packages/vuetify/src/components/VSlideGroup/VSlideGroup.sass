@@ -1,0 +1,47 @@
+// Imports
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+
+// Block
+.v-slide-group
+  display: flex
+
+  // Needed increased specificity
+  // to overwrite v-tabs pointer
+  // replacement
+  &.v-item-group
+    > .v-slide-group__next,
+    > .v-slide-group__prev
+      cursor: pointer
+
+.v-slide-item
+  display: inline-flex
+  flex: 0 1 auto
+
+// Element
+.v-slide-group__next,
+.v-slide-group__prev
+  align-items: center
+  display: flex
+  flex: 0 1 $slide-group-prev-basis
+  justify-content: center
+  min-width: $slide-group-prev-basis
+
+.v-slide-group__content
+  display: flex
+  flex: 1 0 auto
+  position: relative
+  transition: $primary-transition
+  white-space: nowrap
+
+.v-slide-group__wrapper
+  contain: content
+  display: flex
+  flex: 1 1 auto
+  overflow: hidden
+
+// Modifiers
+.v-slide-group__next,
+.v-slide-group__prev
+  &--disabled
+    pointer-events: none

@@ -1,18 +1,19 @@
 {
-  "header": "# Text field",
+  "header": "# Text fields",
   "headerText": "Text fields components are used for collecting user provided information.",
-  "supplemental": [
-    "MaskTable"
-  ],
   "examples": {
     "usage": {
       "desc": "A simple text field with placeholder and/or label."
     },
-    "singleLine": {
+    "single-line": {
       "header": "### Single line",
       "desc": "Single line text fields do not float their label on focus or with data."
     },
-    "disabledAndReadonly": {
+    "shaped": {
+      "header": "### Shaped",
+      "desc": "`shaped` text fields are rounded if they're `outlined` and have higher `border-radius` if `filled`."
+    },
+    "disabled-and-readonly": {
       "header": "### Disabled and readonly",
       "desc": "Text fields can be `disabled` or `readonly`."
     },
@@ -24,21 +25,21 @@
       "header": "### Clearable",
       "desc": "When `clearable`, you can customize the clear icon with `clear-icon`."
     },
-    "iconEvents": {
+    "icon-events": {
       "header": "### Icon events",
       "desc": "`click:prepend`, `click:append`, `click:append-outer`, and `click:clear` will be emitted when you click on the respective icon. Note that these events will not be fired if the slot is used instead. "
     },
-    "iconSlots": {
+    "icon-slots": {
       "header": "### Icon slots",
       "desc": "Instead of using prepend / append / append-outer icons you can use slots to extend input's functionality."
     },
-    "labelSlot": {
+    "label-slot": {
       "header": "### Label slot",
       "desc": "Text field label can be defined in `label` slot - that will allow to use HTML content"
     },
-    "characterCounter": {
+    "character-counter": {
       "header": "### Character counter",
-      "desc": "Use a `counter` prop to inform a user of the character limit. The counter does not perform any validation by itself. You will need to pair it with either the internal validation system, or a 3rd party library. You can use it on regular, box or outline text fields."
+      "desc": "Use a `counter` prop to inform a user of the character limit. The counter does not perform any validation by itself. You will need to pair it with either the internal validation system, or a 3rd party library. You can use it on regular, box or outlined text fields."
     },
     "password": {
       "header": "### Password input",
@@ -48,7 +49,7 @@
       "header": "### Validation",
       "desc": "Vuetify includes simple validation through the `rules` prop. The prop accepts an array of callbacks. While validating rules, the current v-model value will be passed to the callback. This callback should return either `true` or a `String`, the error message."
     },
-    "fullWidthWithCharacterCounter": {
+    "full-width-with-character-counter": {
       "header": "### Full-width text field with character counter",
       "desc": "Full width text fields allow you to create boundless inputs. In this example, we use a `v-divider` to separate the fields."
     },
@@ -56,11 +57,11 @@
       "header": "### Hint text",
       "desc": "The `hint` property on text fields adds the provided string beneath the text field. Using `persistent-hint` keeps the hint visible when the text field is not focused. Hint prop is **not** supported in solo mode."
     },
-    "prefixesAndSuffixes": {
+    "prefixes-and-suffixes": {
       "header": "### Prefixes & suffixes",
       "desc": "The `prefix` and `suffix` properties allows you to prepend and append inline non-modifiable text next to the text field."
     },
-    "customValidation": {
+    "custom-validation": {
       "header": "### Custom validation",
       "desc": "While the built in `v-form` or 3rd party plugin such as [vuelidate](https://github.com/monterail/vuelidate) or [vee-validation](https://github.com/logaretm/vee-validate) can help streamline your validation process, you can choose to simply control it yourself."
     },
@@ -72,19 +73,19 @@
       "header": "### Solo style",
       "desc": "Text fields can be used with an alternative solo design."
     },
-    "outline": {
-      "header": "### Outline style",
-      "desc": "Text fields can be used with an alternative outline design."
+    "outlined": {
+      "header": "### Outlined style",
+      "desc": "Text fields can be used with an alternative outlined design."
     },
-    "customColors": {
+    "custom-colors": {
       "header": "### Custom colors",
       "desc": "You can optionally change a text field into any color in the Material design palette. Below is an example implementation of a custom form with validation."
     },
     "masks": {
-      "header": "### Masks",
-      "desc": "Text fields can validate against character masks. Using either a pre-made or custom rules, you can optionally format and validate specific character sets. Note that **masks work only with text fields**, using them with date/number/file etc inputs may end up in unexpected behaviour or exception."
+      "header": "### Masks (using vue-the-mask)",
+      "desc": "You can add masking functionality using a 3rd party library such as vue-the-mask."
     },
-    "progressBar": {
+    "progress-bar": {
       "header": "### Progress bar",
       "desc": "You can display a progress bar instead of the bottom line. You can use the default indeterminate progress having same color as the text field or designate a custom one using the `progress` slot"
     }
@@ -93,19 +94,20 @@
     "appendOuterIcon": "Appends an icon to the outside the component's input, uses same syntax as `v-icon`",
     "autoGrow": "Auto-grows the input. This option requires the use of **v-model**",
     "autofocus": "Enables autofocus",
-    "box": "Applies the alternate box input style",
-    "browserAutocomplete": "Configures the default `<input>` autocomplete attribute",
+    "filled": "Applies the alternate filled input style",
     "clearIcon": "Applied when using **clearable** and the input is dirty",
     "counter": "Creates counter for input length; if no number is specified, it defaults to 25. Does not apply any validation.",
+    "dark": "Components.Inputs.props.dark",
     "flat": "Mixins.Soloable.props.flat",
     "fullWidth": "Designates input type as full-width",
     "multiLine": "Turns into textarea",
     "noResize": "Removes the resize handle, only applies to **multi-line** and **textarea** props",
-    "outline": "Applies the outline style to the input",
+    "outlined": "Applies the outlined style to the input",
     "placeholder": "Sets the input’s placeholder text",
     "prefix": "Displays prefix text",
     "prependInnerIcon": "Prepends an icon inside the component's input, uses the same syntax as `v-icon`",
     "reverse": "Reverses the input orientation",
+    "rounded": "Adds a border radius to the input",
     "rows": "Controls the number of rows in a textarea",
     "rowHeight": "Designate a custom _row-height_. Used for determining input height when using **multi-line** or **textarea** props",
     "solo": "Mixins.Soloable.props.solo",
@@ -114,7 +116,8 @@
     "textarea": "Textarea text field with alternate style",
     "toggleKeys": "Array of key codes that will toggle the input (if it supports toggling)",
     "type": "Sets input type",
-    "value": "Components.Inputs.props.value"
+    "value": "Components.Inputs.props.value",
+    "shaped": "Round if `outlined` and increase `border-radius` if `filled`. Must be used with either `outlined` or `filled`"
   },
   "slots": {
     "append": "Components.Inputs.slots.append",
@@ -123,12 +126,15 @@
     "prepend-inner": "Prepends an item inside input content"
   },
   "events": {
+    "blur": "Emitted when component is no longer focused",
     "change": "Components.Inputs.events.change",
     "click:append": "Components.Inputs.events['click:append']",
     "click:append-outer": "Emitted when appended outer icon is clicked",
     "click:clear": "Emitted when clearable icon clicked",
     "click:prepend": "Components.Inputs.events['click:prepend']",
     "click:prepend-inner": "Emitted when prepended inner icon is clicked",
+    "focus": "Emitted when component is focused",
+    "keydown": "Emitted when **any** key is pressed, Text-field must be focused",
     "update:error": "Mixins.Validatable.events['update:error']"
   }
 }

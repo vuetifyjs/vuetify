@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VListItemAvatar.ts should render component and match snapshot 1`] = `
+<div class="v-avatar v-list-item__avatar"
+     style="height: 40px; min-width: 40px; width: 40px;"
+>
+</div>
+`;

@@ -6,14 +6,17 @@ import 'es6-promise/auto'
 import { createApp } from './main'
 import WebFontLoader from 'webfontloader'
 
+import 'intersection-observer'
+
 // async load fonts
 WebFontLoader.load({
   google: {
     families: [
       'Roboto:100,300,400,500,700,900',
-      'Roboto+Mono:500'
-    ]
-  }
+      'Roboto+Mono:500',
+      'Material+Icons',
+    ],
+  },
 })
 
 createApp({
@@ -43,10 +46,10 @@ createApp({
           if (c.asyncData) {
             return c.asyncData({
               store,
-              route: to
+              route: to,
             })
           }
-        })
+        }),
       ]).finally(next)
     })
 
@@ -56,5 +59,5 @@ createApp({
       // actually mount to DOM
       app.$mount('#app')
     })
-  }
+  },
 })

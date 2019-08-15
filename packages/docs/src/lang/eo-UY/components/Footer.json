@@ -1,26 +1,35 @@
 {
-  "header": "crwdns12296:0crwdne12296:0",
-  "headerText": "crwdns12298:0crwdne12298:0",
+  "header": "crwdns38698:0crwdne38698:0",
+  "headerText": "crwdns32486:0crwdne32486:0",
   "examples": {
     "usage": {
-      "desc": "crwdns12300:0crwdne12300:0"
+      "desc": "crwdns38700:0crwdne38700:0"
     },
-    "companyFooter": {
-      "header": "crwdns12302:0crwdne12302:0",
-      "desc": "crwdns12304:0crwdne12304:0"
+    "absolute": {
+      "header": "crwdns38702:0crwdne38702:0",
+      "desc": "crwdns38704:0crwdne38704:0"
     },
-    "indigoFooter": {
-      "header": "crwdns12306:0crwdne12306:0",
-      "desc": "crwdns12308:0crwdne12308:0"
+    "padless": {
+      "header": "crwdns38706:0crwdne38706:0",
+      "desc": "crwdns38708:0crwdne38708:0"
     },
-    "tealFooter": {
-      "header": "crwdns12310:0crwdne12310:0",
-      "desc": "crwdns12312:0crwdne12312:0"
+    "company-footer": {
+      "header": "crwdns38710:0crwdne38710:0",
+      "desc": "crwdns38712:0crwdne38712:0"
+    },
+    "indigo-footer": {
+      "header": "crwdns38714:0crwdne38714:0",
+      "desc": "crwdns38716:0crwdne38716:0"
+    },
+    "teal-footer": {
+      "header": "crwdns38718:0crwdne38718:0",
+      "desc": "crwdns38720:0crwdne38720:0"
     }
   },
   "props": {
-    "absolute": "crwdns12314:0crwdne12314:0",
-    "fixed": "crwdns12316:0crwdne12316:0",
-    "inset": "crwdns12318:0crwdne12318:0"
+    "absolute": "crwdns32502:0crwdne32502:0",
+    "fixed": "crwdns32504:0crwdne32504:0",
+    "inset": "crwdns32506:0crwdne32506:0",
+    "padless": "crwdns38722:0crwdne38722:0"
   }
 }

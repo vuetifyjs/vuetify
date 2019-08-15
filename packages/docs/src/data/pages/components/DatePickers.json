@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VDatePicker",
+  "mdSpec": {
+    "version": "1",
+    "link": "https://material.io/archive/guidelines/components/pickers.html#pickers-date-pickers"
+  },
   "children": [
     {
       "type": "section",
@@ -24,32 +29,41 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "dateColorable",
-            "dateDialogAndMenu",
-            "dateFormatting",
-            "dateFormattingMomentDatefns",
-            "dateAllowedDates",
-            "dateMultiple",
-            "dateWidth",
-            "dateBirthday",
-            "datePickerDate",
-            "dateEvents",
-            "dateInternationalization",
-            "dateIcons",
-            "dateReadonly",
-            "dateCurrent",
-            "monthLight",
-            "monthColorable",
-            "monthDialogAndMenu",
-            "monthAllowedMonths",
-            "monthMultiple",
-            "monthWidth",
-            "monthInternationalization",
-            "monthIcons",
-            "monthReadonly",
-            "monthCurrent"
+            "simple/date-colorable",
+            "simple/date-allowed-dates",
+            "simple/date-width",
+            "simple/date-picker-date",
+            "simple/date-internationalization",
+            "simple/date-icons",
+            "simple/date-readonly",
+            "simple/date-current",
+            "simple/month-light",
+            "simple/month-colorable",
+            "simple/month-allowed-months",
+            "simple/month-multiple",
+            "simple/month-width",
+            "simple/month-internationalization",
+            "simple/month-icons",
+            "simple/month-readonly",
+            "simple/month-current",
+            "intermediate/date-dialog-and-menu",
+            "intermediate/date-formatting",
+            "intermediate/date-formatting-moment-datefns",
+            "intermediate/date-multiple",
+            "intermediate/date-birthday",
+            "intermediate/date-events",
+            "intermediate/month-dialog-and-menu"
           ]
         }
       ]

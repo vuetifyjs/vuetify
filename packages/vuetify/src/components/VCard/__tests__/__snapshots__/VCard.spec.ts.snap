@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VCard.vue should render a card with custom height 1`] = `
+<div class="v-card v-sheet theme--light"
+     style="height: 400px;"
+>
+</div>
+`;
+
+exports[`VCard.vue should render a flat card 1`] = `
+<div class="v-card v-card--flat v-sheet theme--light">
+</div>
+`;
+
+exports[`VCard.vue should render a raised card 1`] = `
+<div class="v-card v-card--raised v-sheet theme--light">
+</div>
+`;
+
+exports[`VCard.vue should render card with img 1`] = `
+<div class="v-card v-sheet theme--light">
+</div>
+`;
+
+exports[`VCard.vue should render card, which is link 1`] = `
+<div tabindex="0"
+     class="v-card v-card--link v-sheet theme--light"
+>
+</div>
+`;
+
+exports[`VCard.vue should render component and match snapshot 1`] = `
+<div class="v-card v-sheet theme--light">
+</div>
+`;
+
+exports[`VCard.vue should render loading card 1`] = `
+<div class="v-card v-card--loading v-card--disabled v-sheet theme--light">
+  <div class="v-card__progress">
+    <div role="progressbar"
+         aria-valuemin="0"
+         aria-valuemax="100"
+         class="v-progress-linear v-progress-linear--absolute theme--light"
+         style="height: 4px;"
+    >
+      <div class="v-progress-linear__background primary"
+           style="opacity: 0.3; left: 0%; width: 100%;"
+      >
+      </div>
+      <div class="v-progress-linear__buffer">
+      </div>
+      <div class="v-progress-linear__indeterminate v-progress-linear__indeterminate--active">
+        <div class="v-progress-linear__indeterminate long primary">
+        </div>
+        <div class="v-progress-linear__indeterminate short primary">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

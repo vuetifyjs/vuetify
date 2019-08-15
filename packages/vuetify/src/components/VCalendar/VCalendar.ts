@@ -5,7 +5,7 @@
 import { VNode, Component } from 'vue'
 
 // Mixins
-import CalendarBase from './mixins/calendar-base'
+import CalendarWithEvents from './mixins/calendar-with-events'
 
 // Util
 import props from './util/props'
@@ -16,6 +16,7 @@ import {
   VTimestamp,
   VTime,
   parseTimestamp,
+  validateTimestamp,
   relativeDays,
   nextDay,
   prevDay,
@@ -24,7 +25,7 @@ import {
   updateWeekday,
   updateRelative,
   getStartOfMonth,
-  getEndOfMonth
+  getEndOfMonth,
 } from './util/timestamp'
 
 // Calendars
@@ -41,29 +42,29 @@ interface VCalendarRenderProps {
 }
 
 /* @vue/component */
-export default CalendarBase.extend({
+export default CalendarWithEvents.extend({
   name: 'v-calendar',
 
   props: {
     ...props.calendar,
     ...props.weeks,
-    ...props.intervals
+    ...props.intervals,
   },
 
   data: () => ({
     lastStart: null as VTimestamp | null,
-    lastEnd: null as VTimestamp | null
+    lastEnd: null as VTimestamp | null,
   }),
 
   computed: {
     parsedValue (): VTimestamp {
-      return parseTimestamp(this.value) ||
-        this.parsedStart ||
-        this.times.today
+      return (validateTimestamp(this.value)
+        ? parseTimestamp(this.value)
+        : (this.parsedStart || this.times.today)) as VTimestamp
     },
     renderProps (): VCalendarRenderProps {
       const around = this.parsedValue
-      let component: any = 'div'
+      let component: any = null
       let maxDays = this.maxDays
       let start = around
       let end = around
@@ -99,14 +100,24 @@ export default CalendarBase.extend({
           start = this.parsedStart || around
           end = this.parsedEnd
           break
+        default:
+          throw new Error(this.type + ' is not a valid Calendar type')
       }
 
       return { component, start, end, maxDays }
-    }
+    },
   },
 
   watch: {
-    renderProps: 'checkChange'
+    renderProps: 'checkChange',
+  },
+
+  mounted () {
+    this.updateEventVisibility()
+  },
+
+  updated () {
+    this.updateEventVisibility()
   },
 
   methods: {
@@ -135,7 +146,9 @@ export default CalendarBase.extend({
             relativeDays(moved, mover, DAYS_IN_WEEK)
             break
           case 'day':
-            mover(moved)
+            const index = moved.weekday
+            const days = forward ? this.weekdaySkips[index] : this.weekdaySkipsReverse[index]
+            relativeDays(moved, mover, days)
             break
           case '4day':
             relativeDays(moved, mover, 4)
@@ -179,7 +192,7 @@ export default CalendarBase.extend({
       } else {
         return false
       }
-    }
+    },
   },
 
   render (h): VNode {
@@ -187,12 +200,20 @@ export default CalendarBase.extend({
 
     return h(component, {
       staticClass: 'v-calendar',
+      class: {
+        'v-calendar-events': !this.noEvents,
+      },
       props: {
         ...this.$props,
         start: start.date,
         end: end.date,
-        maxDays
+        maxDays,
       },
+      directives: [{
+        modifiers: { quiet: true },
+        name: 'resize',
+        value: this.updateEventVisibility,
+      }],
       on: {
         ...this.$listeners,
         'click:date': (day: VTimestamp) => {
@@ -202,9 +223,9 @@ export default CalendarBase.extend({
           if (this.$listeners['click:date']) {
             this.$emit('click:date', day)
           }
-        }
+        },
       },
-      scopedSlots: this.$scopedSlots
+      scopedSlots: this.getScopedSlots(),
     })
-  }
+  },
 })

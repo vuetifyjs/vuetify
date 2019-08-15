@@ -14,3 +14,7 @@ lerna-debug.log
 
 # Istanbul coverage
 coverage/
+
+# cypress
+cypress/screenshots
+cypress/videos 

@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VMenu",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/menus.html"
+  },
   "children": [
     {
       "type": "section",
@@ -24,15 +29,29 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "absolute",
-            "absoluteWithoutActivator",
-            "menuActivatorTooltip",
-            "hover",
-            "menus",
-            "customTransition",
-            "popover"
+            "simple/absolute",
+            "simple/menu-activator-tooltip",
+            "simple/hover",
+            "simple/custom-transition",
+            "simple/disabled",
+            "simple/offset-x",
+            "simple/offset-y",
+            "simple/close-on-click",
+            "simple/close-on-content-click",
+            "intermediate/absolute-without-activator",
+            "intermediate/menus",
+            "intermediate/popover"
           ]
         }
       ]
@@ -45,7 +64,7 @@
           "value": [
             "components/dialogs",
             "components/tooltips",
-            "framework/transitions"
+            "styles/transitions"
           ]
         }
       ]

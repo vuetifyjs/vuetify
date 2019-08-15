@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VDialog",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/dialogs.html"
+  },
   "children": [
     {
       "type": "section",
@@ -26,14 +31,14 @@
         {
           "type": "examples",
           "value": [
-            "withoutActivator",
-            "modal",
-            "fullscreen",
-            "form",
-            "scrollable",
-            "overflowed",
-            "advanced",
-            "loader"
+            "simple/without-activator",
+            "simple/modal",
+            "simple/scrollable",
+            "simple/overflowed",
+            "intermediate/form",
+            "intermediate/loader",
+            "intermediate/fullscreen",
+            "complex/advanced"
           ]
         }
       ]

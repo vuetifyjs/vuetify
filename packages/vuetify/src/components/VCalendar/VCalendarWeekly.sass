@@ -1,0 +1,84 @@
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+
+// Theme
++theme(v-calendar-weekly) using ($material)
+  background-color: map-deep-get($material, 'calendar', 'background-color')
+
+  .v-calendar-weekly__head-weekday
+    border-right: map-deep-get($material, 'calendar', 'line-color') 1px solid
+    color: map-deep-get($material, 'calendar', 'text-color')
+
+    &.v-past
+      color: map-deep-get($material, 'calendar', 'past-color')
+
+    &.v-outside
+      background-color: map-deep-get($material, 'calendar', 'outside-background-color')
+
+  .v-calendar-weekly__day
+    border-right: map-deep-get($material, 'calendar', 'line-color') 1px solid
+    border-bottom: map-deep-get($material, 'calendar', 'line-color') 1px solid
+    color: map-deep-get($material, 'calendar', 'text-color')
+
+    &.v-outside
+      background-color: map-deep-get($material, 'calendar', 'outside-background-color')
+
+.v-calendar-weekly
+  width: 100%
+  height: 100%
+  display: flex
+  flex-direction: column
+
+.v-calendar-weekly__head
+  display: flex
+  user-select: none
+
+.v-calendar-weekly__head-weekday
+  flex: 1 0 20px
+  user-select: none
+  padding: $calendar-weekly-weekday-padding
+  font-size: $calendar-weekly-weekday-font-size
+  overflow: hidden
+  text-align: center
+  text-overflow: ellipsis
+  text-transform: uppercase
+  white-space: nowrap
+
+.v-calendar-weekly__week
+  display: flex
+  flex: 1
+  height: 0
+
+.v-calendar-weekly__day
+  flex: 1
+  width: 0
+  overflow: hidden
+  user-select: none
+  position: relative
+  padding: $calendar-weekly-day-padding
+
+  &.v-present
+    .v-calendar-weekly__day-month
+      color: currentColor
+
+.v-calendar-weekly__day-label
+  text-decoration: none
+  user-select: none
+  cursor: pointer
+  box-shadow: none
+  text-align: center
+  margin: $calendar-weekly-day-label-margin
+
+  .v-btn
+    font-size: $calendar-weekly-day-label-font-size
+    text-transform: none
+
+.v-calendar-weekly__day-month
+  position: absolute
+  text-decoration: none
+  user-select: none
+  box-shadow: none
+  top: 0
+  left: $calendar-weekly-day-month-left
+  height: $calendar-weekly-day-label-size
+  line-height: $calendar-weekly-day-label-size

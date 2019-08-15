@@ -1,0 +1,139 @@
+@import '../../styles/styles.sass'
+
+// Theme
++theme(v-card) using ($material)
+  background-color: map-get($material, 'cards')
+  color: map-deep-get($material, 'text', 'primary')
+
+  > .v-card__text
+    color: map-deep-get($material, 'text', 'secondary')
+
+  &.v-card--outlined
+    border: 1px solid map-get($material, 'dividers')
+
+// Block
+.v-card
+  max-width: 100%
+  outline: none
+  overflow-wrap: break-word
+  text-decoration: none
+  transition-property: box-shadow, opacity
+  white-space: normal
+  word-break: break-word
+  +elevation(2)
+
+  > *:first-child:not(.v-btn):not(.v-chip),
+  > .v-card__progress + *:not(.v-btn):not(.v-chip)
+    border-top-left-radius: inherit
+    border-top-right-radius: inherit
+
+  > *:last-child:not(.v-btn):not(.v-chip)
+    border-bottom-left-radius: inherit
+    border-bottom-right-radius: inherit
+
+// Element
+.v-card__progress
+  top: 0
+  left: 0
+  right: 0
+  overflow: hidden
+
+.v-card__title
+  align-items: center
+  display: flex
+  flex-wrap: wrap
+  font-size: map-deep-get($headings, 'h5', 'size')
+  font-weight: map-deep-get($headings, 'h5', 'weight')
+  letter-spacing: map-deep-get($headings, 'h5', 'letter-spacing')
+  line-height: map-deep-get($headings, 'h5', 'line-height')
+  padding: 16px 16px 8px
+
+  + .v-card__text
+    padding-top: 0
+
+.v-card__text
+  font-size: map-deep-get($headings, 'subtitle-2', 'size')
+  line-height: map-deep-get($headings, 'subtitle-2', 'line-height')
+  letter-spacing: map-deep-get($headings, 'subtitle-2', 'letter-spacing')
+  padding: 16px
+  width: 100%
+
+.v-card__actions
+  align-items: center
+  display: flex
+  padding: 8px
+
+  .v-btn.v-btn
+    padding: 0 8px
+
+    // Buttons have reduced padding in card actions per spec
+    // and need to compensate the icon margins accordingly
+    +ltr()
+      + .v-btn
+        margin-left: 8px
+
+      .v-icon--left
+        margin-left: 4px
+
+      .v-icon--right
+        margin-right: 4px
+
+    +rtl()
+      + .v-btn
+        margin-right: 8px
+
+      .v-icon--left
+        margin-right: 4px
+
+      .v-icon--right
+        margin-left: 4px
+
+// Modifier
+.v-card--flat
+  +elevation(0)
+
+.v-card--hover
+  cursor: pointer
+  transition: box-shadow .4s cubic-bezier(.25, .8, .25, 1)
+
+  &:hover
+    +elevation(8)
+
+.v-card--link
+  cursor: pointer
+
+  // https://github.com/vuetifyjs/vuetify/issues/3925
+  .v-chip
+    cursor: pointer
+
+  &:focus:before
+    opacity: 0.08
+
+  &:before
+    background: currentColor
+    bottom: 0
+    content: ''
+    left: 0
+    opacity: 0
+    pointer-events: none
+    position: absolute
+    right: 0
+    top: 0
+    transition: .2s opacity map-get($transition, 'fast-in-slow-out')
+
+.v-card--disabled
+  pointer-events: none
+  user-select: none
+
+  > *:not(.v-card__progress)
+    opacity: 0.6
+    transition: inherit
+
+.v-card--loading
+  overflow: hidden
+
+.v-card--outlined
+  box-shadow: none
+
+.v-card--raised
+  +elevation(8)

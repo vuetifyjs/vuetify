@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VCarousel.ts should generate vertical delimiters 1`] = `
+<div class="v-window v-item-group theme--dark v-carousel v-carousel--vertical-delimiters"
+     style="height: 500px;"
+>
+  <div class="v-window__container">
+  </div>
+  <div class="v-carousel__controls"
+       style="left: 0px;"
+  >
+    <div class="v-item-group theme--dark">
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VCarousel.ts should generate vertical delimiters 2`] = `
+<div class="v-window v-item-group theme--dark v-carousel v-carousel--vertical-delimiters"
+     style="height: 500px;"
+>
+  <div class="v-window__container">
+  </div>
+  <div class="v-carousel__controls"
+       style="left: 0px;"
+  >
+    <div class="v-item-group theme--dark">
+    </div>
+  </div>
+</div>
+`;

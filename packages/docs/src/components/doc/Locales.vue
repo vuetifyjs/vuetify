@@ -1,14 +1,14 @@
 <template>
-  <div class="ml-3">
-    <p>
-      <span
-        v-for="({localeCode, localeName, localeNativeName}, index) in localeNames"
+  <div class="ml-4 mb-6">
+    <ul>
+      <li
+        v-for="({ localeCode, localeName, localeNativeName }) in localeNames"
         :key="localeCode"
       >
-        {{ index ? ', ' : '' }} <strong>{{ localeCode }}</strong>
+        <strong>{{ localeCode }}</strong>
         - {{ localeName }} {{ localeNativeName ? ` (${localeNativeName})` : '' }}
-      </span>
-    </p>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -24,11 +24,11 @@
         const array = Object.keys(locales).map(localeCode => ({
           localeCode,
           localeName: ISO6391.getName(localeCode.substr(0, 2)),
-          localeNativeName: localeCode === 'en' ? '' : ISO6391.getNativeName(localeCode.substr(0, 2))
+          localeNativeName: localeCode === 'en' ? '' : ISO6391.getNativeName(localeCode.substr(0, 2)),
         }))
         array.sort((a, b) => (a.localeCode < b.localeCode ? -1 : (a.localeCode > b.localeCode ? 1 : 0)))
         return array
-      }
-    }
+      },
+    },
   }
 </script>

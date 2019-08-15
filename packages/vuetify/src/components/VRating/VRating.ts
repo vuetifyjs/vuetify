@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_rating.styl'
+import './VRating.sass'
 
 // Components
 import VIcon from '../VIcon'
@@ -41,43 +41,44 @@ export default mixins(
   props: {
     backgroundColor: {
       type: String,
-      default: 'accent'
+      default: 'accent',
     },
     color: {
       type: String,
-      default: 'primary'
+      default: 'primary',
     },
+    clearable: Boolean,
     dense: Boolean,
     emptyIcon: {
       type: String,
-      default: '$vuetify.icons.ratingEmpty'
+      default: '$vuetify.icons.ratingEmpty',
     },
     fullIcon: {
       type: String,
-      default: '$vuetify.icons.ratingFull'
+      default: '$vuetify.icons.ratingFull',
     },
     halfIcon: {
       type: String,
-      default: '$vuetify.icons.ratingHalf'
+      default: '$vuetify.icons.ratingHalf',
     },
     halfIncrements: Boolean,
+    hover: Boolean,
     length: {
       type: [Number, String],
-      default: 5
+      default: 5,
     },
-    clearable: Boolean,
     readonly: Boolean,
-    hover: Boolean,
+    size: [Number, String],
     value: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
 
   data () {
     return {
       hoverIndex: -1,
-      internalValue: this.value
+      internalValue: this.value,
     }
   },
 
@@ -87,7 +88,7 @@ export default mixins(
 
       return [{
         name: 'ripple',
-        value: { circle: true }
+        value: { circle: true },
       } as VNodeDirective]
     },
     iconProps (): object {
@@ -98,7 +99,7 @@ export default mixins(
         light,
         small,
         size,
-        xLarge
+        xLarge,
       } = this.$props
 
       return {
@@ -108,12 +109,12 @@ export default mixins(
         light,
         size,
         small,
-        xLarge
+        xLarge,
       }
     },
     isHovering (): boolean {
       return this.hover && this.hoverIndex >= 0
-    }
+    },
   },
 
   watch: {
@@ -122,7 +123,7 @@ export default mixins(
     },
     value (val) {
       this.internalValue = val
-    }
+    },
   },
 
   methods: {
@@ -144,7 +145,7 @@ export default mixins(
         value: this.internalValue,
         click: this.createClickFn(i),
         isFilled: Math.floor(this.internalValue) > i,
-        isHovered: Math.floor(this.hoverIndex) > i
+        isHovered: Math.floor(this.hoverIndex) > i,
       }
 
       if (this.halfIncrements) {
@@ -155,7 +156,9 @@ export default mixins(
       return props
     },
     genHoverIndex (e: MouseEvent, i: number) {
-      return i + (this.isHalfEvent(e) ? 0.5 : 1)
+      let isHalf = this.isHalfEvent(e)
+      if (this.$vuetify.rtl) isHalf = !isHalf
+      return i + (isHalf ? 0.5 : 1)
     },
     getIconName (props: ItemSlotProps): string {
       const isFull = this.isHovering ? props.isHovered : props.isFilled
@@ -194,7 +197,7 @@ export default mixins(
       if (this.$scopedSlots.item) return this.$scopedSlots.item(props)
 
       const listeners: Record<string, Function> = {
-        click: props.click
+        click: props.click,
       }
 
       if (this.hover) {
@@ -209,9 +212,9 @@ export default mixins(
       return this.$createElement(VIcon, this.setTextColor(this.getColor(props), {
         directives: this.directives,
         props: this.iconProps,
-        on: listeners
+        on: listeners,
       }), [this.getIconName(props)])
-    }
+    },
   },
 
   render (h): VNode {
@@ -221,8 +224,8 @@ export default mixins(
       staticClass: 'v-rating',
       class: {
         'v-rating--readonly': this.readonly,
-        'v-rating--dense': this.dense
-      }
+        'v-rating--dense': this.dense,
+      },
     }, children)
-  }
+  },
 })

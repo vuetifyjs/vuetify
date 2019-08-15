@@ -1,6 +1,10 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/selection-controls.html"
+  },
   "children": [
     {
       "type": "section",
@@ -24,21 +28,32 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "checkboxesBoolean",
-            "checkboxesArray",
-            "checkboxesStates",
-            "checkboxesColors",
-            "checkboxesInlineTexfield",
-            "radiosDefault",
-            "radiosDirection",
-            "radiosColors",
-            "switchesBoolean",
-            "switchesArray",
-            "switchesStates",
-            "switchesColors",
-            "labelSlot"
+            "simple/checkboxes-boolean",
+            "simple/checkboxes-array",
+            "simple/checkboxes-states",
+            "simple/checkboxes-colors",
+            "intermediate/checkboxes-inline-texfield",
+            "simple/radios-default",
+            "simple/radios-direction",
+            "simple/radios-colors",
+            "simple/switches-boolean",
+            "simple/switches-array",
+            "simple/switches-states",
+            "simple/switches-colors",
+            "simple/switches-flat",
+            "simple/switches-inset",
+            "intermediate/label-slot"
           ]
         }
       ]

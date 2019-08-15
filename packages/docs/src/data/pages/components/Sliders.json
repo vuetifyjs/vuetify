@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VSlider",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/sliders.html"
+  },
   "children": [
     {
       "type": "section",
@@ -27,19 +32,30 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "thumb",
-            "customThumb",
-            "ticks",
-            "discrete",
-            "icons",
-            "editableNumericValue",
-            "customColors",
-            "validation",
-            "range",
-            "minMax",
-            "metronome"
+            "simple/min-max",
+            "simple/disabled",
+            "simple/readonly",
+            "simple/icons",
+            "simple/vertical",
+            "simple/thumb",
+            "simple/inverse-label",
+            "simple/custom-thumb",
+            "simple/ticks",
+            "simple/custom-colors",
+            "simple/range",
+            "intermediate/validation",
+            "intermediate/metronome"
           ]
         }
       ]

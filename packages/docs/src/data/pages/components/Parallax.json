@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VParallax",
   "children": [
     {
       "type": "section",
@@ -26,8 +27,8 @@
         {
           "type": "examples",
           "value": [
-            "content",
-            "customHeight"
+            "simple/content",
+            "simple/custom-height"
           ]
         }
       ]
@@ -38,7 +39,7 @@
         {
           "type": "up-next",
           "value": [
-            "framework/aspect-ratios",
+            "components/aspect-ratios",
             "components/cards",
             "components/images"
           ]

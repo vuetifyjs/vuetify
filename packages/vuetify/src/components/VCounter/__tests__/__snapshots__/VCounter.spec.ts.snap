@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VCounter.ts should render component 1`] = `
+<div class="v-counter theme--light">
+  5 / 10
+</div>
+`;

@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VData.ts should render data through default scoped slot 1`] = `
+<div>
+  <div>
+    foo
+  </div>
+  <div>
+    bar
+  </div>
+</div>
+`;
+
+exports[`VData.ts should toggle grouping 1`] = `
+<div id="wrapper">
+  <div>
+    c
+  </div>
+  <div>
+    a
+  </div>
+  <div>
+    d
+  </div>
+  <div>
+    b
+  </div>
+</div>
+`;
+
+exports[`VData.ts should toggle grouping 2`] = `
+<div id="wrapper">
+  <div>
+    bar
+  </div>
+  <div>
+    foo
+  </div>
+</div>
+`;
+
+exports[`VData.ts should toggle sorting 1`] = `
+<div id="wrapper">
+  <div>
+    c
+  </div>
+  <div>
+    a
+  </div>
+  <div>
+    d
+  </div>
+  <div>
+    b
+  </div>
+</div>
+`;
+
+exports[`VData.ts should toggle sorting 2`] = `
+<div id="wrapper">
+  <div>
+    a
+  </div>
+  <div>
+    b
+  </div>
+  <div>
+    c
+  </div>
+  <div>
+    d
+  </div>
+</div>
+`;
+
+exports[`VData.ts should toggle sorting 3`] = `
+<div id="wrapper">
+  <div>
+    d
+  </div>
+  <div>
+    c
+  </div>
+  <div>
+    b
+  </div>
+  <div>
+    a
+  </div>
+</div>
+`;
+
+exports[`VData.ts should toggle sorting on multiple properties 1`] = `
+<div id="wrapper">
+  <div>
+    foo-c
+  </div>
+  <div>
+    bar-a
+  </div>
+  <div>
+    foo-d
+  </div>
+  <div>
+    bar-b
+  </div>
+</div>
+`;
+
+exports[`VData.ts should toggle sorting on multiple properties 2`] = `
+<div id="wrapper">
+  <div>
+    bar-a
+  </div>
+  <div>
+    bar-b
+  </div>
+  <div>
+    foo-c
+  </div>
+  <div>
+    foo-d
+  </div>
+</div>
+`;

@@ -2,26 +2,39 @@ import { createSimpleFunctional } from '../../util/helpers'
 
 import VList from './VList'
 import VListGroup from './VListGroup'
-import VListTile from './VListTile'
-import VListTileAction from './VListTileAction'
-import VListTileAvatar from './VListTileAvatar'
+import VListItem from './VListItem'
+import VListItemGroup from './VListItemGroup'
+import VListItemAction from './VListItemAction'
+import VListItemAvatar from './VListItemAvatar'
+import VListItemIcon from './VListItemIcon'
 
-export { VList, VListGroup, VListTile, VListTileAction, VListTileAvatar }
-export const VListTileActionText = createSimpleFunctional('v-list__tile__action-text', 'span')
-export const VListTileContent = createSimpleFunctional('v-list__tile__content', 'div')
-export const VListTileTitle = createSimpleFunctional('v-list__tile__title', 'div')
-export const VListTileSubTitle = createSimpleFunctional('v-list__tile__sub-title', 'div')
+export const VListItemActionText = createSimpleFunctional('v-list-item__action-text', 'span')
+export const VListItemContent = createSimpleFunctional('v-list-item__content', 'div')
+export const VListItemTitle = createSimpleFunctional('v-list-item__title', 'div')
+export const VListItemSubtitle = createSimpleFunctional('v-list-item__subtitle', 'div')
+
+export {
+  VList,
+  VListGroup,
+  VListItem,
+  VListItemAction,
+  VListItemAvatar,
+  VListItemIcon,
+  VListItemGroup,
+}
 
 export default {
   $_vuetify_subcomponents: {
     VList,
     VListGroup,
-    VListTile,
-    VListTileAction,
-    VListTileActionText,
-    VListTileAvatar,
-    VListTileContent,
-    VListTileSubTitle,
-    VListTileTitle
-  }
+    VListItem,
+    VListItemAction,
+    VListItemActionText,
+    VListItemAvatar,
+    VListItemContent,
+    VListItemGroup,
+    VListItemIcon,
+    VListItemSubtitle,
+    VListItemTitle,
+  },
 }

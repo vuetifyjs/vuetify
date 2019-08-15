@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center">
+  <div class="text-center">
     <v-dialog
       v-model="dialog"
       width="500"
@@ -32,7 +32,7 @@
           <v-spacer></v-spacer>
           <v-btn
             color="primary"
-            flat
+            text
             @click="dialog = false"
           >
             I accept
@@ -47,8 +47,8 @@
   export default {
     data () {
       return {
-        dialog: false
+        dialog: false,
       }
-    }
+    },
   }
 </script>

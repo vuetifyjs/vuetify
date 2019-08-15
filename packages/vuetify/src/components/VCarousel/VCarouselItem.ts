@@ -4,8 +4,18 @@ import VWindowItem from '../VWindow/VWindowItem'
 // Components
 import { VImg } from '../VImg'
 
+// Utilities
+import mixins from '../../util/mixins'
+import Routable from '../../mixins/routable'
+
+// Types
+const baseMixins = mixins(
+  VWindowItem,
+  Routable
+)
+
 /* @vue/component */
-export default VWindowItem.extend({
+export default baseMixins.extend({
   name: 'v-carousel-item',
 
   inheritAttrs: false,
@@ -17,16 +27,26 @@ export default VWindowItem.extend({
           staticClass: 'v-carousel__item',
           props: {
             ...this.$attrs,
-            height: this.windowGroup.internalHeight
+            height: this.windowGroup.internalHeight,
           },
-          on: this.$listeners
-        }, this.$slots.default)
+          on: this.$listeners,
+        }, this.$slots.default),
       ]
+    },
+    genWindowItem () {
+      const { tag, data } = this.generateRouteLink()
+
+      data.staticClass = 'v-window-item'
+      data.directives!.push({
+        name: 'show',
+        value: this.isActive,
+      })
+
+      return this.$createElement(tag, data, this.showLazyContent(this.genDefaultSlot()))
     },
     onBeforeEnter () { /* noop */ },
     onEnter () { /* noop */ },
     onAfterEnter () { /* noop */ },
-    onBeforeLeave () { /* noop */ },
-    onEnterCancelled () { /* noop */ }
-  }
+    onEnterCancelled () { /* noop */ },
+  },
 })

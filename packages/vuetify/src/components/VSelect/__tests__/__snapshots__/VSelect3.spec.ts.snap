@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VSelect.ts should add color to selected index 1`] = `
+<div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
+  <div class="v-input__control">
+    <div role="button"
+         aria-haspopup="listbox"
+         aria-expanded="false"
+         aria-owns="list-119"
+         class="v-input__slot"
+    >
+      <div class="v-select__slot">
+        <div class="v-select__selections">
+          <div class="v-select__selection v-select__selection--comma">
+            foo
+          </div>
+          <input id="input-119"
+                 readonly="readonly"
+                 type="text"
+                 aria-readonly="true"
+          >
+        </div>
+        <div class="v-input__append-inner">
+          <div class="v-input__icon v-input__icon--append">
+            <i aria-hidden="true"
+               class="v-icon notranslate material-icons theme--light"
+            >
+              $vuetify.icons.dropdown
+            </i>
+          </div>
+        </div>
+      </div>
+      <div class="v-menu">
+        <div class="v-menu__content theme--light "
+             style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+        >
+        </div>
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages theme--light">
+        <span name="message-transition"
+              tag="div"
+              class="v-messages__wrapper"
+        >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;

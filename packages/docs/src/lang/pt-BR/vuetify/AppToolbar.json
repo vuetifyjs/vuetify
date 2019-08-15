@@ -1,77 +1,8 @@
 {
-  "backToDocs": "Voltar para a documentação",
-  "cart": "Carrinho",
-  "docs": "Doc",
   "documentation": "Documentação",
-  "support": "Suporte",
-  "supports": [
-    {
-      "href": "https://community.vuetifyjs.com/",
-      "text": "Chat",
-      "icon": "mdi-discord"
-    },
-    {
-      "href": "https://issues.vuetifyjs.com",
-      "text": "Criar uma Issue",
-      "icon": "mdi-alert-octagon"
-    },
-    {
-      "href": "https://github.com/vuetifyjs/vuetify/issues",
-      "text": "Lista de Issues GitHub",
-      "icon": "mdi-github-face"
-    },
-    {
-      "href": "https://stackoverflow.com/search?q=vuetify",
-      "text": "Stack overflow",
-      "icon": "mdi-stack-overflow"
-    }
-  ],
   "ecosystem": "Ecossistema",
-  "ecosystems": [
-    {
-      "href": "https://www.reddit.com/r/vuetifyjs/",
-      "text": "Reddit",
-      "icon": "mdi-reddit"
-    },
-    {
-      "href": "https://medium.com/vuetify",
-      "text": "Publicações no Medium",
-      "icon": "mdi-medium"
-    },
-    {
-      "href": "https://github.com/vuetifyjs/awesome-vuetify",
-      "text": "Awesome Vuetify",
-      "icon": "mdi-creation"
-    },
-    {
-      "href": "https://template.vuetifyjs.com",
-      "text": "Template no Codepen",
-      "icon": "mdi-codepen"
-    },
-    {
-      "href": "https://github.com/vuetifyjs/vuetify/releases",
-      "text": "Últimos Lançamentos",
-      "icon": "mdi-format-list-checks"
-    }
-  ],
   "quickLinks": "Links",
   "social": "Mídia Social",
-  "socials": [
-    {
-      "href": "https://github.com/vuetifyjs/vuetify",
-      "text": "Github",
-      "icon": "mdi-github-box"
-    },
-    {
-      "href": "https://twitter.com/vuetifyjs",
-      "text": "Twitter",
-      "icon": "mdi-twitter-box"
-    },
-    {
-      "href": "https://www.facebook.com/vuetifyjs",
-      "text": "Facebook",
-      "icon": "mdi-facebook-box"
-    }
-  ],
-  "store": "Loja"
+  "store": "Loja",
+  "support": "Suporte"
 }

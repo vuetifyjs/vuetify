@@ -1,4 +1,4 @@
-import '../../stylus/components/_pagination.styl'
+import './VPagination.sass'
 
 import VIcon from '../VIcon'
 
@@ -25,27 +25,27 @@ export default mixins(Colorable, Themeable).extend({
     length: {
       type: Number,
       default: 0,
-      validator: (val: number) => val % 1 === 0
+      validator: (val: number) => val % 1 === 0,
     },
-    totalVisible: [Number, String],
     nextIcon: {
       type: String,
-      default: '$vuetify.icons.next'
+      default: '$vuetify.icons.next',
     },
     prevIcon: {
       type: String,
-      default: '$vuetify.icons.prev'
+      default: '$vuetify.icons.prev',
     },
+    totalVisible: [Number, String],
     value: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
 
   data () {
     return {
       maxButtons: 0,
-      selected: null as number | null
+      selected: null as number | null,
     }
   },
 
@@ -55,12 +55,15 @@ export default mixins(Colorable, Themeable).extend({
         'v-pagination': true,
         'v-pagination--circle': this.circle,
         'v-pagination--disabled': this.disabled,
-        ...this.themeClasses
+        ...this.themeClasses,
       }
     },
 
     items (): (string | number)[] {
-      const maxLength = parseInt(this.totalVisible, 10) || this.maxButtons
+      const totalVisible = parseInt(this.totalVisible, 10)
+      const maxLength = totalVisible > this.maxButtons
+        ? this.maxButtons
+        : totalVisible || this.maxButtons
       if (this.length <= maxLength) {
         return this.range(1, this.length)
       }
@@ -84,16 +87,16 @@ export default mixins(Colorable, Themeable).extend({
         return [
           ...this.range(1, left),
           '...',
-          ...this.range(right, this.length)
+          ...this.range(right, this.length),
         ]
       }
-    }
+    },
   },
 
   watch: {
     value () {
       this.init()
-    }
+    },
   },
 
   mounted () {
@@ -141,13 +144,13 @@ export default mixins(Colorable, Themeable).extend({
         h('button', {
           staticClass: 'v-pagination__navigation',
           class: {
-            'v-pagination__navigation--disabled': disabled
+            'v-pagination__navigation--disabled': disabled,
           },
           attrs: {
-            type: 'button'
+            type: 'button',
           },
-          on: disabled ? {} : { click: fn }
-        }, [h(VIcon, [icon])])
+          on: disabled ? {} : { click: fn },
+        }, [h(VIcon, [icon])]),
       ])
     },
     genItem (h: CreateElement, i: string | number): VNode {
@@ -155,39 +158,39 @@ export default mixins(Colorable, Themeable).extend({
       return h('button', this.setBackgroundColor(color, {
         staticClass: 'v-pagination__item',
         class: {
-          'v-pagination__item--active': i === this.value
+          'v-pagination__item--active': i === this.value,
         },
         attrs: {
-          type: 'button'
+          type: 'button',
         },
         on: {
-          click: () => this.$emit('input', i)
-        }
+          click: () => this.$emit('input', i),
+        },
       }), [i.toString()])
     },
     genItems (h: CreateElement): VNode[] {
       return this.items.map((i, index) => {
         return h('li', { key: index }, [
-          isNaN(Number(i)) ? h('span', { class: 'v-pagination__more' }, [i.toString()]) : this.genItem(h, i)
+          isNaN(Number(i)) ? h('span', { class: 'v-pagination__more' }, [i.toString()]) : this.genItem(h, i),
         ])
       })
-    }
+    },
   },
 
   render (h): VNode {
     const children = [
       this.genIcon(h, this.$vuetify.rtl ? this.nextIcon : this.prevIcon, this.value <= 1, this.previous),
       this.genItems(h),
-      this.genIcon(h, this.$vuetify.rtl ? this.prevIcon : this.nextIcon, this.value >= this.length, this.next)
+      this.genIcon(h, this.$vuetify.rtl ? this.prevIcon : this.nextIcon, this.value >= this.length, this.next),
     ]
 
     return h('ul', {
       directives: [{
         modifiers: { quiet: true },
         name: 'resize',
-        value: this.onResize
+        value: this.onResize,
       }],
-      class: this.classes
+      class: this.classes,
     }, children)
-  }
+  },
 })

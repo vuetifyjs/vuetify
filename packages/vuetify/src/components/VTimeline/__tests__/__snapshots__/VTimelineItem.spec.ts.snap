@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VTimelineItem.ts should conditionally render an icon or icon slot 1`] = `
+<div class="v-timeline-item theme--light">
+  <div class="v-timeline-item__body">
+  </div>
+  <div class="v-timeline-item__divider">
+    <div class="v-timeline-item__dot">
+      <div class="v-timeline-item__inner-dot primary">
+        <div>
+          foo
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTimelineItem.ts should conditionally render an icon or icon slot 2`] = `
+<div class="v-timeline-item theme--light">
+  <div class="v-timeline-item__body">
+  </div>
+  <div class="v-timeline-item__divider">
+    <div class="v-timeline-item__dot">
+      <div class="v-timeline-item__inner-dot primary">
+        <i aria-hidden="true"
+           class="v-icon notranslate material-icons theme--dark"
+        >
+          foo
+        </i>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTimelineItem.ts should conditionally render dot 1`] = `
+<div class="v-timeline-item theme--light">
+  <div class="v-timeline-item__body">
+  </div>
+  <div class="v-timeline-item__divider">
+  </div>
+</div>
+`;
+
+exports[`VTimelineItem.ts should conditionally render dot 2`] = `
+<div class="v-timeline-item theme--light">
+  <div class="v-timeline-item__body">
+  </div>
+  <div class="v-timeline-item__divider">
+    <div class="v-timeline-item__dot">
+      <div class="v-timeline-item__inner-dot primary">
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTimelineItem.ts should render opposite slot 1`] = `
+<div class="v-timeline-item theme--light">
+  <div class="v-timeline-item__body">
+  </div>
+  <div class="v-timeline-item__divider">
+    <div class="v-timeline-item__dot">
+      <div class="v-timeline-item__inner-dot primary">
+      </div>
+    </div>
+  </div>
+  <div class="v-timeline-item__opposite">
+    <div>
+      foo
+    </div>
+  </div>
+</div>
+`;

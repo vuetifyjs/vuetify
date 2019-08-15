@@ -1,13 +1,16 @@
 <template>
-  <figure class="mb-4">
-    <v-img
-      :src="computedValue"
-      class="mb-2"
-    />
+  <figure class="mb-6 text-center">
+    <v-sheet color="transparent">
+      <v-img
+        :src="computedValue"
+        class="d-inline-block"
+        style="max-width: 100%;"
+      />
+    </v-sheet>
 
     <figcaption
       v-if="$slots.default"
-      class="caption text-xs-center"
+      class="caption text-center"
     >
       <doc-markdown><slot /></doc-markdown>
     </figcaption>
@@ -19,8 +22,8 @@
     props: {
       value: {
         type: String,
-        default: undefined
-      }
+        default: undefined,
+      },
     },
 
     computed: {
@@ -32,7 +35,7 @@
         }
 
         return `https://cdn.vuetifyjs.com/images/${this.value}`
-      }
-    }
+      },
+    },
   }
 </script>

@@ -1,0 +1,115 @@
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+
+.v-snack
+  align-items: center
+  color: $snackbar-color
+  display: flex
+  font-size: 14px
+  left: 8px
+  pointer-events: none
+  position: fixed
+  right: 8px
+  text-align: left
+  transition-duration: .15s
+  transition-timing-function: map-get($transition, 'linear-out-slow-in')
+  z-index: 1000
+
+  &--absolute
+    position: absolute
+
+  &--top
+    top: 8px
+
+  &--bottom
+    bottom: 8px
+
+  &__wrapper
+    align-items: center
+    background-color: $snackbar-background-color
+    border-radius: 4px
+    display: flex
+    margin: 0 auto
+    pointer-events: auto
+    transition: inherit
+    transition-property: opacity, transform
+    min-width: 100%
+    +elevation(6)
+
+  &__content
+    align-items: center
+    display: flex
+    min-height: 48px
+    justify-content: space-between
+    overflow: hidden
+    padding: 8px 16px
+    width: 100%
+
+    .v-btn.v-btn
+      color: $snackbar-color
+      flex: 0 0 auto
+      height: auto
+      margin: 0 -8px 0 24px
+      min-width: auto
+      padding: 8px
+      width: auto
+
+      &__content
+        margin: -2px
+
+      +rtl()
+        margin: 0 24px 0 -8px
+
+      &::before
+        display: none
+
+  &--multi-line &__content
+    height: auto
+    min-height: 68px
+
+  &--vertical &__content
+    // https://stackoverflow.com/questions/35111090/text-in-a-flex-container-doesnt-wrap-in-ie11
+    align-items: stretch
+    flex-direction: column
+    height: auto
+    padding: 16px 16px 8px
+
+    .v-btn
+      &.v-btn // Higher specificity
+        align-self: flex-end
+        justify-self: flex-end
+        margin-left: 0
+        margin-top: 18px
+
+      &__content
+        flex: 0 0 auto
+        margin: 0
+
+@media #{map-get($display-breakpoints, 'sm-and-up')}
+  .v-snack
+    &__wrapper
+      min-width: 344px
+      max-width: 672px
+
+      .v-snack--left &
+        margin-left: 0
+
+      .v-snack--right &
+        margin-right: 0
+
+    &__content .v-btn:first-of-type
+      margin-left: 42px
+
+      +rtl()
+        margin-left: 0
+        margin-right: 42px
+
+.v-snack-transition
+  &-enter
+    .v-snack__wrapper
+      transform: scale(.8)
+
+  &-enter,
+  &-leave-to
+    .v-snack__wrapper
+      opacity: 0

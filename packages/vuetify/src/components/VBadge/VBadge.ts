@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_badges.styl'
+import './VBadge.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
@@ -23,16 +23,16 @@ export default mixins(
   props: {
     color: {
       type: String,
-      default: 'primary'
+      default: 'primary',
     },
     overlap: Boolean,
     transition: {
       type: String,
-      default: 'fab-transition'
+      default: 'fab-transition',
     },
     value: {
-      default: true
-    }
+      default: true,
+    },
   },
 
   computed: {
@@ -40,9 +40,9 @@ export default mixins(
       return {
         'v-badge--bottom': this.bottom,
         'v-badge--left': this.left,
-        'v-badge--overlap': this.overlap
+        'v-badge--overlap': this.overlap,
       }
-    }
+    },
   },
 
   render (h): VNode {
@@ -51,22 +51,22 @@ export default mixins(
       attrs: this.$attrs,
       directives: [{
         name: 'show',
-        value: this.isActive
-      }]
+        value: this.isActive,
+      }],
     }), this.$slots.badge)]
 
     return h('span', {
       staticClass: 'v-badge',
-      'class': this.classes
+      class: this.classes,
     }, [
       this.$slots.default,
-      h('transition', {
+      this.transition ? h('transition', {
         props: {
           name: this.transition,
           origin: this.origin,
-          mode: this.mode
-        }
-      }, badge)
+          mode: this.mode,
+        },
+      }, badge) : badge,
     ])
-  }
+  },
 })

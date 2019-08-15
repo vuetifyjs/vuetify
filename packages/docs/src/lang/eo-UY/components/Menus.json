@@ -1,54 +1,87 @@
 {
-  "header": "crwdns12642:0crwdne12642:0",
-  "headerText": "crwdns12644:0crwdne12644:0",
+  "header": "crwdns40642:0crwdne40642:0",
+  "headerText": "crwdns34274:0crwdne34274:0",
   "examples": {
     "usage": {
-      "desc": "crwdns12646:0crwdne12646:0",
+      "desc": "crwdns34276:0crwdne34276:0",
       "uninverted": true
     },
     "absolute": {
-      "header": "crwdns12650:0crwdne12650:0",
-      "desc": "crwdns12652:0crwdne12652:0",
+      "header": "crwdns34280:0crwdne34280:0",
+      "desc": "crwdns34282:0crwdne34282:0",
       "uninverted": true
     },
-    "absoluteWithoutActivator": {
-      "header": "crwdns12656:0crwdne12656:0",
-      "desc": "crwdns12658:0crwdne12658:0",
+    "disabled": {
+      "header": "crwdns40644:0crwdne40644:0",
+      "desc": "crwdns40646:0crwdne40646:0",
+      "uninverted": true
+    },
+    "offset-x": {
+      "header": "crwdns40650:0crwdne40650:0",
+      "desc": "crwdns40652:0crwdne40652:0",
+      "uninverted": true
+    },
+    "offset-y": {
+      "header": "crwdns40656:0crwdne40656:0",
+      "desc": "crwdns40658:0crwdne40658:0",
+      "uninverted": true
+    },
+    "close-on-click": {
+      "header": "crwdns40662:0crwdne40662:0",
+      "desc": "crwdns40664:0crwdne40664:0",
+      "uninverted": true
+    },
+    "close-on-content-click": {
+      "header": "crwdns40668:0crwdne40668:0",
+      "desc": "crwdns40670:0crwdne40670:0",
+      "uninverted": true
+    },
+    "absolute-without-activator": {
+      "header": "crwdns40674:0crwdne40674:0",
+      "desc": "crwdns40676:0crwdne40676:0",
+      "uninverted": true
+    },
+    "menu-activator-tooltip": {
+      "header": "crwdns40680:0crwdne40680:0",
+      "desc": "crwdns40682:0crwdne40682:0",
       "uninverted": true
     },
     "hover": {
-      "header": "crwdns12662:0crwdne12662:0",
-      "desc": "crwdns12664:0crwdne12664:0",
+      "header": "crwdns34298:0crwdne34298:0",
+      "desc": "crwdns34300:0crwdne34300:0",
       "uninverted": true
     },
     "menus": {
-      "header": "crwdns12668:0crwdne12668:0",
-      "desc": "crwdns12670:0crwdne12670:0",
+      "header": "crwdns34304:0crwdne34304:0",
+      "desc": "crwdns34306:0crwdne34306:0",
       "uninverted": true
     },
-    "customTransition": {
-      "header": "crwdns12674:0crwdne12674:0",
-      "desc": "crwdns12676:0[here]crwdne12676:0",
+    "custom-transition": {
+      "header": "crwdns40686:0crwdne40686:0",
+      "desc": "crwdns40688:0[here]crwdne40688:0",
       "uninverted": true
     },
     "popover": {
-      "header": "crwdns12680:0crwdne12680:0",
-      "desc": "crwdns12682:0crwdne12682:0",
+      "header": "crwdns34316:0crwdne34316:0",
+      "desc": "crwdns34318:0crwdne34318:0",
       "uninverted": true
     }
   },
   "props": {
-    "closeOnClick": "crwdns12686:0crwdne12686:0",
-    "closeOnContentClick": "crwdns12688:0crwdne12688:0",
-    "dark": "crwdns12690:0crwdne12690:0",
-    "light": "crwdns12692:0crwdne12692:0",
-    "disabled": "crwdns12694:0crwdne12694:0",
-    "disableKeys": "crwdns12696:0crwdne12696:0",
-    "offsetX": "crwdns12698:0crwdne12698:0",
-    "offsetY": "crwdns12700:0crwdne12700:0",
-    "openOnClick": "crwdns12702:0crwdne12702:0",
-    "openOnHover": "crwdns12704:0crwdne12704:0",
-    "origin": "crwdns12706:0crwdne12706:0",
-    "transition": "crwdns12708:0crwdne12708:0"
+    "closeOnClick": "crwdns34322:0crwdne34322:0",
+    "closeOnContentClick": "crwdns34324:0crwdne34324:0",
+    "dark": "crwdns34326:0crwdne34326:0",
+    "light": "crwdns34328:0crwdne34328:0",
+    "disabled": "crwdns34330:0crwdne34330:0",
+    "disableKeys": "crwdns34332:0crwdne34332:0",
+    "internalActivator": "crwdns40692:0crwdne40692:0",
+    "offsetX": "crwdns34334:0crwdne34334:0",
+    "offsetY": "crwdns34336:0crwdne34336:0",
+    "maxHeight": "crwdns40694:0crwdne40694:0",
+    "openOnClick": "crwdns34338:0crwdne34338:0",
+    "openOnHover": "crwdns34340:0crwdne34340:0",
+    "origin": "crwdns34342:0crwdne34342:0",
+    "returnValue": "crwdns40696:0crwdne40696:0",
+    "transition": "crwdns34344:0crwdne34344:0"
   }
 }

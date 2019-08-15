@@ -1,19 +1,39 @@
 {
-  "header": "# Button Groups",
+  "header": "# Button groups",
   "headerText": "The `v-btn-toggle` component is a simple wrapper for `v-item-group` built specifically to work with `v-btn`.",
   "examples": {
     "usage": {
       "desc": "Toggle buttons allow you to create a styled group of buttons that can selected or toggled under a single `v-model`"
     },
-    "appBar": {
+    "app-bar": {
       "header": "### In toolbar",
       "desc": "Easily integrate customized button solutions with a `v-toolbar`"
+    },
+    "qwerty": {
+      "header": "### Selected action",
+      "desc": "Group similar actions and design your own WYSIWYG component."
+    },
+    "rounded": {
+      "header": "### Rounded buttons",
+      "desc": "You can make `VBtnToggle` rounded using the `rounded` prop."
+    },
+    "mandatory": {
+      "header": "### Mandatory",
+      "desc": "`mandatory` `VBtnToggle` always has value."
+    },
+    "multiple": {
+      "header": "### Multiple",
+      "desc": "`multiple` `VBtnToggle` allows user to select multiple variants and returns value as an array."
     }
   },
+  "api": {
+    "v-btn": "Components.Buttons"
+  },
   "props": {
-    "activeClass": "Components.ItemGroups.props.activeClass",
-    "mandatory": "Components.ItemGroups.props.mandatory",
-    "multiple": "Components.ItemGroups.props.multiple"
+    "activeClass": "Mixins.BaseItemGroup.props.activeClass",
+    "mandatory": "Mixins.BaseItemGroup.props.mandatory",
+    "multiple": "Mixins.BaseItemGroup.props.multiple",
+    "rounded": "Round edge buttons"
   },
   "events": {
     "change": "Components.Inputs.events.change"

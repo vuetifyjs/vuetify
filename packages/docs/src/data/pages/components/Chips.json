@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VChip",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/chips.html"
+  },
   "children": [
     {
       "type": "section",
@@ -24,14 +29,31 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "colored",
-            "icon",
-            "outline",
-            "label",
-            "closable",
-            "inSelects"
+            "simple/colored",
+            "simple/icon",
+            "simple/outlined",
+            "simple/label",
+            "simple/sizes",
+            "simple/draggable",
+            "simple/filter",
+            "simple/no-ripple",
+            "intermediate/closable",
+            "intermediate/action-chips",
+            "intermediate/in-selects",
+            "complex/photos",
+            "complex/filtering",
+            "complex/expandable"
           ]
         }
       ]

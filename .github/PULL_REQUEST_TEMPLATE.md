@@ -34,7 +34,7 @@ Testing and markup sections can be removed for documentation changes
 - [ ] Bug fix (non-breaking change which fixes an issue)
 - [ ] New feature (non-breaking change which adds functionality)
 - [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
-- [ ] Improvement/refactoring (non-breaking change that doesn't add any feature but make things better)
+- [ ] Improvement/refactoring (non-breaking change that doesn't add any features but makes things better)
 
 ## Checklist:
 <!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
@@ -42,4 +42,5 @@ Testing and markup sections can be removed for documentation changes
 - [ ] The PR title is no longer than 64 characters.
 - [ ] The PR is submitted to the correct branch (`master` for bug fixes and documentation updates, `dev` for new features and breaking changes).
 - [ ] My code follows the code style of this project.
-- [ ] I've added relevant changes to the documentation (applies to new features and breaking changes in core library) 
+- [ ] I've added relevant changes to the documentation (applies to new features and breaking changes in core library)
+- [ ] I've added new examples to the kitchen (applies to new features and breaking changes in core library)

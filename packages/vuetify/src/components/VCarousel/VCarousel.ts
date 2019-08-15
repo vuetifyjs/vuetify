@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_carousel.styl'
+import './VCarousel.sass'
 
 // Extensions
 import VWindow from '../VWindow/VWindow'
@@ -7,6 +7,7 @@ import VWindow from '../VWindow/VWindow'
 // Components
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
+import VProgressLinear from '../VProgressLinear'
 
 // Mixins
 // TODO: Move this into core components v2.0
@@ -14,72 +15,78 @@ import ButtonGroup from '../../mixins/button-group'
 
 // Utilities
 import { convertToUnit } from '../../util/helpers'
-import { deprecate } from '../../util/console'
+import { breaking } from '../../util/console'
 
 // Types
 import { VNode } from 'vue'
-import { VNodeDirective } from 'vue/types/vnode'
+import { PropValidator } from 'vue/types/options'
 
 export default VWindow.extend({
   name: 'v-carousel',
 
   props: {
-    cycle: {
+    continuous: {
       type: Boolean,
-      default: true
+      default: true,
     },
+    cycle: Boolean,
     delimiterIcon: {
       type: String,
-      default: '$vuetify.icons.delimiter'
+      default: '$vuetify.icons.delimiter',
     },
     height: {
       type: [Number, String],
-      default: 500
+      default: 500,
     },
-    hideControls: Boolean,
     hideDelimiters: Boolean,
+    hideDelimiterBackground: Boolean,
     interval: {
       type: [Number, String],
       default: 6000,
-      validator: (value: string | number) => value > 0
+      validator: (value: string | number) => value > 0,
     },
     mandatory: {
       type: Boolean,
-      default: true
+      default: true,
     },
-    nextIcon: {
-      type: [Boolean, String],
-      default: '$vuetify.icons.next'
+    progress: Boolean,
+    progressColor: String,
+    showArrows: {
+      type: Boolean,
+      default: true,
     },
-    prevIcon: {
-      type: [Boolean, String],
-      default: '$vuetify.icons.prev'
-    }
+    verticalDelimiters: {
+      type: String,
+      default: undefined,
+    } as PropValidator<'' | 'left' | 'right'>,
   },
 
   data () {
     return {
-      changedByDelimiters: false,
       internalHeight: this.height,
-      slideTimeout: undefined as number | undefined
+      slideTimeout: undefined as number | undefined,
     }
   },
 
   computed: {
+    classes (): object {
+      return {
+        ...VWindow.options.computed.classes.call(this),
+        'v-carousel': true,
+        'v-carousel--hide-delimiter-background': this.hideDelimiterBackground,
+        'v-carousel--vertical-delimiters': this.isVertical,
+      }
+    },
     isDark (): boolean {
       return this.dark || !this.light
-    }
+    },
+    isVertical (): boolean {
+      return this.verticalDelimiters != null
+    },
   },
 
   watch: {
-    internalValue (val) {
-      this.restartTimeout()
-      /* @deprecate */
-      /* istanbul ignore else */
-      if (!this.$listeners['input']) return
-
-      this.$emit('input', val)
-    },
+    internalValue: 'restartTimeout',
     interval: 'restartTimeout',
     height (val, oldVal) {
       if (val === oldVal || !val) return
@@ -92,72 +99,34 @@ export default VWindow.extend({
         clearTimeout(this.slideTimeout)
         this.slideTimeout = undefined
       }
+    },
+  },
+
+  created () {
+    /* istanbul ignore next */
+    if (this.$attrs.hasOwnProperty('hide-controls')) {
+      breaking('hide-controls', ':show-arrows="false"', this)
     }
   },
 
   mounted () {
-    /* @deprecate */
-    /* istanbul ignore next */
-    if (this.$listeners['input']) {
-      deprecate('@input', '@change', this)
-    }
     this.startTimeout()
   },
 
   methods: {
+    genControlIcons () {
+      if (this.isVertical) return null
+
+      return VWindow.options.methods.genControlIcons.call(this)
+    },
     genDelimiters (): VNode {
       return this.$createElement('div', {
-        staticClass: 'v-carousel__controls'
+        staticClass: 'v-carousel__controls',
+        style: {
+          left: this.verticalDelimiters === 'left' && this.isVertical ? 0 : 'auto',
+          right: this.verticalDelimiters === 'right' ? 0 : 'auto',
+        },
       }, [this.genItems()])
-    },
-    genIcon (
-      direction: 'prev' | 'next',
-      icon: string,
-      fn: () => void
-    ): VNode {
-      return this.$createElement('div', {
-        staticClass: `v-carousel__${direction}`
-      }, [
-        this.$createElement(VBtn, {
-          props: {
-            icon: true
-          },
-          attrs: {
-            'aria-label': this.$vuetify.t(`$vuetify.carousel.${direction}`)
-          },
-          on: {
-            click: () => {
-              this.changedByDelimiters = true
-              fn()
-            }
-          }
-        }, [
-          this.$createElement(VIcon, {
-            props: { 'size': '46px' }
-          }, icon)
-        ])
-      ])
-    },
-    genIcons (): VNode[] {
-      const icons = []
-
-      const prevIcon = this.$vuetify.rtl
-        ? this.nextIcon
-        : this.prevIcon
-
-      if (prevIcon && typeof prevIcon === 'string') {
-        icons.push(this.genIcon('prev', prevIcon, this.prev))
-      }
-
-      const nextIcon = this.$vuetify.rtl
-        ? this.prevIcon
-        : this.nextIcon
-
-      if (nextIcon && typeof nextIcon === 'string') {
-        icons.push(this.genIcon('next', nextIcon, this.next))
-      }
-
-      return icons
     },
     genItems (): VNode {
       const length = this.items.length
@@ -165,18 +134,16 @@ export default VWindow.extend({
 
       for (let i = 0; i < length; i++) {
         const child = this.$createElement(VBtn, {
-          class: {
-            'v-carousel__controls__item': true
-          },
+          staticClass: 'v-carousel__controls__item',
           props: {
             icon: true,
             small: true,
-            value: this.getValue(this.items[i], i)
-          }
+            value: this.getValue(this.items[i], i),
+          },
         }, [
           this.$createElement(VIcon, {
-            props: { size: 18 }
-          }, this.delimiterIcon)
+            props: { size: 18 },
+          }, this.delimiterIcon),
         ])
 
         children.push(child)
@@ -184,65 +151,52 @@ export default VWindow.extend({
 
       return this.$createElement(ButtonGroup, {
         props: {
-          value: this.internalValue
+          value: this.internalValue,
         },
         on: {
           change: (val: any) => {
             this.internalValue = val
-          }
-        }
+          },
+        },
       }, children)
+    },
+    genProgress () {
+      return this.$createElement(VProgressLinear, {
+        staticClass: 'v-carousel__progress',
+        props: {
+          color: this.progressColor,
+          value: (this.internalIndex + 1) / this.items.length * 100,
+        },
+      })
     },
     restartTimeout () {
       this.slideTimeout && clearTimeout(this.slideTimeout)
       this.slideTimeout = undefined
 
-      const raf = requestAnimationFrame || setTimeout
-      raf(this.startTimeout)
+      window.requestAnimationFrame(this.startTimeout)
     },
     startTimeout () {
       if (!this.cycle) return
 
       this.slideTimeout = window.setTimeout(this.next, +this.interval > 0 ? +this.interval : 6000)
     },
-    updateReverse (val: number, oldVal: number) {
-      if (this.changedByDelimiters) {
-        this.changedByDelimiters = false
-        return
-      }
-
-      VWindow.options.methods.updateReverse.call(this, val, oldVal)
-    }
   },
 
   render (h): VNode {
-    const children = []
-    const data = {
-      staticClass: 'v-window v-carousel',
-      style: {
-        height: convertToUnit(this.height)
-      },
-      directives: [] as VNodeDirective[]
-    }
+    const render = VWindow.options.render.call(this, h)
 
-    if (!this.touchless) {
-      data.directives.push({
-        name: 'touch',
-        value: {
-          left: this.next,
-          right: this.prev
-        }
-      } as VNodeDirective)
-    }
+    render.data!.style = `height: ${convertToUnit(this.height)};`
 
-    if (!this.hideControls) {
-      children.push(this.genIcons())
-    }
-
+    /* istanbul ignore else */
     if (!this.hideDelimiters) {
-      children.push(this.genDelimiters())
+      render.children!.push(this.genDelimiters())
     }
 
-    return h('div', data, [this.genContainer(), children])
-  }
+    /* istanbul ignore else */
+    if (this.progress || this.progressColor) {
+      render.children!.push(this.genProgress())
+    }
+
+    return render
+  },
 })

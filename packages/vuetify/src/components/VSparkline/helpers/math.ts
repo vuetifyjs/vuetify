@@ -26,6 +26,6 @@ export function moveTo (to: Point, from: Point, radius: number) {
 
   return {
     x: from.x + unitVector.x * radius,
-    y: from.y + unitVector.y * radius
+    y: from.y + unitVector.y * radius,
   }
 }

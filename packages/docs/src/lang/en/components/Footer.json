@@ -1,19 +1,27 @@
 {
-  "header": "# Footer",
+  "header": "# Footers",
   "headerText": "The `v-footer` component is used for displaying general information that a user might want to access from any page within your site.",
   "examples": {
     "usage": {
-      "desc": "The footer component is just a basic container."
+      "desc": "The `v-footer` component in it's simplest form is a container."
     },
-    "companyFooter": {
+    "absolute": {
+      "header": "### Absolute Footer",
+      "desc": "The `absolute` prop positions footers absolutely at the bottom of their parent container."
+    },
+    "padless": {
+      "header": "### Padless Footer",
+      "desc": "The `padless` prop removes all default padding from the footer component."
+    },
+    "company-footer": {
       "header": "### Company Footer",
       "desc": "The footer component as a basic company footer with links."
     },
-    "indigoFooter": {
+    "indigo-footer": {
       "header": "### Indigo Footer",
       "desc": "The footer component with Indigo background color and social media icons and button."
     },
-    "tealFooter": {
+    "teal-footer": {
       "header": "### Teal Footer",
       "desc": "The footer component with a Teal color header and columns and rows of links."
     }
@@ -21,6 +29,7 @@
   "props": {
     "absolute": "Mixins.Positionable.props.absolute",
     "fixed": "Mixins.Positionable.props.fixed",
-    "inset": "Positions the toolbar offset from an application `v-navigation-drawer`"
+    "inset": "Positions the toolbar offset from an application `v-navigation-drawer`",
+    "padless": "Remove all padding from the footer"
   }
 }

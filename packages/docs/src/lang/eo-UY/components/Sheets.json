@@ -1,17 +1,25 @@
 {
-  "header": "crwdns13182:0crwdne13182:0",
-  "headerText": "crwdns13184:0crwdne13184:0",
+  "header": "crwdns38198:0crwdne38198:0",
+  "headerText": "crwdns31980:0crwdne31980:0",
   "examples": {
     "usage": {
-      "desc": "crwdns13186:0crwdne13186:0"
+      "desc": "crwdns38200:0crwdne38200:0"
     },
     "elevation": {
-      "header": "crwdns13188:0crwdne13188:0",
-      "desc": "crwdns13190:0crwdne13190:0"
+      "header": "crwdns31984:0crwdne31984:0",
+      "desc": "crwdns31986:0crwdne31986:0"
+    },
+    "tile": {
+      "header": "crwdns38202:0crwdne38202:0",
+      "desc": "crwdns38204:0crwdne38204:0"
+    },
+    "colors-sizes": {
+      "header": "crwdns38206:0crwdne38206:0",
+      "desc": "crwdns38208:0crwdne38208:0"
     }
   },
   "props": {
-    "tag": "crwdns13192:0crwdne13192:0",
-    "tile": "crwdns13194:0crwdne13194:0"
+    "tag": "crwdns38210:0crwdne38210:0",
+    "tile": "crwdns38212:0crwdne38212:0"
   }
 }

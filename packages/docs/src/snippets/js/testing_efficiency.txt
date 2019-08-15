@@ -1,0 +1,21 @@
+// test/CustomCard.spec.js
+
+describe('CustomCard.vue', () => {
+  const mountFunction = options => {
+    return mount(CustomCard, {
+      localVue,
+      vuetify,
+      ...options,
+    })
+  }
+
+  it('should have a custom title and match snapshot', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        title: 'Fizzbuzz',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+})

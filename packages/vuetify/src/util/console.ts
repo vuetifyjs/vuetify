@@ -3,7 +3,7 @@ function createMessage (message: string, vm?: any, parent?: any): string | void 
     vm = {
       _isVue: true,
       $parent: parent,
-      $options: vm
+      $options: vm,
     }
   }
 
@@ -35,7 +35,13 @@ export function consoleError (message: string, vm?: any, parent?: any): void {
 }
 
 export function deprecate (original: string, replacement: string, vm?: any, parent?: any) {
-  consoleWarn(`'${original}' is deprecated, use '${replacement}' instead`, vm, parent)
+  consoleWarn(`[UPGRADE] '${original}' is deprecated, use '${replacement}' instead.`, vm, parent)
+}
+export function breaking (original: string, replacement: string, vm?: any, parent?: any) {
+  consoleError(`[BREAKING] '${original}' has been removed, use '${replacement}' instead. For more information, see the upgrade guide https://github.com/vuetifyjs/vuetify/releases/tag/v2.0.0#user-content-upgrade-guide`, vm, parent)
+}
+export function removed (original: string, vm?: any, parent?: any) {
+  consoleWarn(`[REMOVED] '${original}' has been removed. You can safely omit it.`, vm, parent)
 }
 
 /**
@@ -71,7 +77,7 @@ function formatComponentName (vm: any, includeFile?: boolean): string {
 
 function generateComponentTrace (vm: any): string {
   if (vm._isVue && vm.$parent) {
-    const tree = []
+    const tree: any[] = []
     let currentRecursiveSequence = 0
     while (vm) {
       if (tree.length > 0) {

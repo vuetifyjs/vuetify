@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VPagination",
   "children": [
     {
       "type": "section",
@@ -24,13 +25,22 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "long",
-            "limit",
-            "round",
-            "icons",
-            "disabled"
+            "simple/long",
+            "simple/limit",
+            "simple/circle",
+            "simple/icons",
+            "simple/disabled"
           ]
         }
       ]

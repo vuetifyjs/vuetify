@@ -1,0 +1,100 @@
+@import '../../styles/styles.sass'
+@import './_variables.sass'
+
+.v-window
+  &__container
+    position: relative
+    transition: $window-transition
+
+    &--is-active
+      overflow: hidden
+
+  &__prev,
+  &__next
+    background: rgba(0, 0, 0, .3)
+    border-radius: 50%
+    position: absolute
+    margin: 0 16px
+    top: calc(50% - 20px)
+    z-index: 1
+
+    .v-btn:hover
+      background: none
+
+  &__prev
+    +ltr()
+      left: 0
+    +rtl()
+      right: 0
+
+  &__next
+    +ltr()
+      right: 0
+    +rtl()
+      left: 0
+
+  &--show-arrows-on-hover
+    overflow: hidden
+
+    .v-window__next,
+    .v-window__prev
+      transition: .2s transform map-get($transition, 'swing')
+
+    .v-window__prev
+      +ltr()
+        transform: translateX(-200%)
+      +rtl()
+        transform: translateX(200%)
+
+    .v-window__next
+      +ltr()
+        transform: translateX(200%)
+      +rtl()
+        transform: translateX(-200%)
+
+    &:hover
+      .v-window__next,
+      .v-window__prev
+        transform: translateX(0)
+
+  &-x-transition,
+  &-x-reverse-transition,
+  &-y-transition,
+  &-y-reverse-transition
+    &-enter-active,
+    &-leave-active
+      transition: $window-transition
+
+    &-leave,
+    &-leave-to
+      position: absolute !important
+      top: 0
+      width: 100%
+
+  &-x-transition
+    &-enter
+      transform: translateX(100%)
+
+    &-leave-to
+      transform: translateX(-100%)
+
+  &-x-reverse-transition
+    &-enter
+      transform: translateX(-100%)
+
+    &-leave-to
+      transform: translateX(100%)
+
+  &-y-transition
+    &-enter
+      transform: translateY(100%)
+
+    &-leave-to
+      transform: translateY(-100%)
+
+  &-y-reverse-transition
+    &-enter
+      transform: translateY(-100%)
+
+    &-leave-to
+      transform: translateY(100%)

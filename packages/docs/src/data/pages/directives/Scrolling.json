@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "directives/scroll",
   "children": [
     {
       "type": "section",
@@ -35,7 +36,7 @@
         {
           "type": "up-next",
           "value": [
-            "framework/scroll",
+            "styles/scroll",
             "directives/touch-support"
           ]
         }

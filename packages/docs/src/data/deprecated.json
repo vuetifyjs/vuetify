@@ -1,46 +1,13 @@
 {
   "props": {
-    "v-text-field": {
-      "textarea": "1.1",
-      "append-icon-cb": false,
-      "append-outer-icon-cb": false,
-      "prepend-icon-cb": false,
-      "prepend-inner-icon-cb": false,
-      "clear-icon-cb": false
-    },
-    "v-textarea": {
-      "append-icon-cb": false,
-      "append-outer-icon-cb": false,
-      "prepend-icon-cb": false,
-      "prepend-inner-icon-cb": false,
-      "clear-icon-cb": false
-    },
-    "v-select": {
-      "autocomplete": "1.1",
-      "search-input": false,
-      "filter": false,
-      "combobox": "1.1",
-      "tags": "1.1",
-      "editable": "1.1",
-      "overflow": "1.1",
-      "segmented": "1.1",
-      "multi-line": "1.1",
-      "append-icon-cb": false,
-      "append-outer-icon-cb": false,
-      "prepend-icon-cb": false,
-      "prepend-inner-icon-cb": false,
-      "clear-icon-cb": false
-    },
-    "v-breadcrumbs": {
-      "justify-center": "1.2",
-      "justify-end": "1.2"
+    "v-app": {
+      "dark": false,
+      "light": false
     },
     "v-autocomplete": {
       "activator": false,
       "closeOnClick": false,
       "closeOnContentClick": false,
-      "combobox": false,
-      "delimiters": false,
       "nudgeBottom": false,
       "nudgeLeft": false,
       "nudgeRight": false,
@@ -48,19 +15,17 @@
       "nudgeWidth": false,
       "offsetX": false,
       "offsetY": false,
-      "transition": false,
-      "append-icon-cb": false,
-      "append-outer-icon-cb": false,
-      "prepend-icon-cb": false,
-      "prepend-inner-icon-cb": false,
-      "clear-icon-cb": false
+      "transition": false
+    },
+    "v-bottom-sheet": {
+      "close-delay": false,
+      "open-delay": false,
+      "return-value": false
     },
     "v-combobox": {
       "activator": false,
       "closeOnClick": false,
       "closeOnContentClick": false,
-      "combobox": false,
-      "delimiters": false,
       "nudgeBottom": false,
       "nudgeLeft": false,
       "nudgeRight": false,
@@ -68,18 +33,17 @@
       "nudgeWidth": false,
       "offsetX": false,
       "offsetY": false,
-      "transition": false,
-      "append-icon-cb": false,
-      "append-outer-icon-cb": false,
-      "prepend-icon-cb": false,
-      "prepend-inner-icon-cb": false,
-      "clear-icon-cb": false
+      "transition": false
+    },
+    "v-dialog": {
+      "close-delay": false,
+      "open-delay": false,
+      "return-value": false
     },
     "v-overflow-btn": {
       "activator": false,
       "closeOnClick": false,
       "closeOnContentClick": false,
-      "combobox": false,
       "delimiters": false,
       "nudgeBottom": false,
       "nudgeLeft": false,
@@ -90,20 +54,23 @@
       "offsetY": false,
       "transition": false
     },
-    "v-input": {
-      "append-icon-cb": false,
-      "prepend-icon-cb": false
+    "v-checkbox": {
+      "height": false
     },
-    "v-slider": {
-      "append-icon-cb": false,
-      "prepend-icon-cb": false
+    "v-radio": {
+      "height": false
     },
-    "v-range-slider": {
-      "append-icon-cb": false,
-      "prepend-icon-cb": false
+    "v-radio-group": {
+      "color": false,
+      "height": false
     },
-    "v-data-iterator": {
-      "loading": false
+    "v-switch": {
+      "height": false
+    },
+    "v-window": {
+      "mandatory": false,
+      "max": false,
+      "multiple": false
     }
   }
 }

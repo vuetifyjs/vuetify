@@ -1,114 +1,158 @@
 {
-  "header": "crwdns11780:0crwdne11780:0",
-  "headerText": "crwdns11782:0crwdne11782:0",
+  "header": "crwdns38802:0crwdne38802:0",
+  "headerText": "crwdns32578:0crwdne32578:0",
   "examples": {
     "usage": {
-      "desc": "crwdns11784:0crwdne11784:0"
+      "desc": "crwdns38804:0crwdne38804:0"
     },
-    "noData": {
-      "header": "crwdns11786:0crwdne11786:0",
-      "desc": "crwdns11788:0crwdne11788:0"
-    },
-    "headers": {
-      "header": "crwdns11790:0crwdne11790:0",
-      "desc": "crwdns11792:0crwdne11792:0"
-    },
-    "headerCell": {
-      "header": "crwdns11794:0crwdne11794:0",
-      "desc": "crwdns11796:0crwdne11796:0"
-    },
-    "progress": {
-      "header": "crwdns11798:0crwdne11798:0",
-      "desc": "crwdns11800:0crwdne11800:0"
-    },
-    "footer": {
-      "header": "crwdns11802:0crwdne11802:0",
-      "desc": "crwdns11804:0crwdne11804:0"
-    },
-    "expand": {
-      "header": "crwdns11806:0crwdne11806:0",
-      "desc": "crwdns11808:0crwdne11808:0"
-    },
-    "pageText": {
-      "header": "crwdns11810:0crwdne11810:0",
-      "desc": "crwdns11812:0crwdne11812:0"
+    "slots": {
+      "header": "crwdns38806:0crwdne38806:0",
+      "desc": "crwdns38808:0crwdne38808:0"
     },
     "select": {
-      "header": "crwdns11814:0crwdne11814:0",
-      "desc": "crwdns11816:0crwdne11816:0"
+      "header": "crwdns32610:0crwdne32610:0",
+      "desc": "crwdns38810:0crwdne38810:0"
+    },
+    "expand": {
+      "header": "crwdns38812:0crwdne38812:0",
+      "desc": "crwdns38814:0crwdne38814:0"
+    },
+    "group": {
+      "header": "crwdns38816:0crwdne38816:0",
+      "desc": "crwdns38818:0crwdne38818:0"
+    },
+    "dense": {
+      "header": "crwdns38820:0crwdne38820:0",
+      "desc": "crwdns38822:0crwdne38822:0"
+    },
+    "loading": {
+      "header": "crwdns38824:0crwdne38824:0",
+      "desc": "crwdns38826:0crwdne38826:0"
+    },
+    "headers": {
+      "header": "crwdns32586:0crwdne32586:0",
+      "desc": "crwdns32588:0crwdne32588:0"
+    },
+    "footer-props": {
+      "header": "crwdns38828:0crwdne38828:0",
+      "desc": "crwdns38830:0crwdne38830:0"
+    },
+    "multi-sort": {
+      "header": "crwdns38832:0crwdne38832:0",
+      "desc": "crwdns38834:0crwdne38834:0"
+    },
+    "customize-header": {
+      "header": "crwdns38836:0crwdne38836:0",
+      "desc": "crwdns38838:0crwdne38838:0"
+    },
+    "customize-rows": {
+      "header": "crwdns38840:0crwdne38840:0",
+      "desc": "crwdns38842:0crwdne38842:0"
+    },
+    "progress": {
+      "header": "crwdns32594:0crwdne32594:0",
+      "desc": "crwdns32596:0crwdne32596:0"
     },
     "search": {
-      "header": "crwdns11818:0crwdne11818:0",
-      "desc": "crwdns11820:0crwdne11820:0"
-    },
-    "customIcons": {
-      "header": "crwdns11822:0crwdne11822:0",
-      "desc": "crwdns11824:0crwdne11824:0"
+      "header": "crwdns38844:0crwdne38844:0",
+      "desc": "crwdns32616:0crwdne32616:0"
     },
     "paginate": {
-      "header": "crwdns11826:0crwdne11826:0",
-      "desc": "crwdns11828:0crwdne11828:0"
+      "header": "crwdns32622:0crwdne32622:0",
+      "desc": "crwdns38846:0crwdne38846:0"
     },
     "sort": {
-      "header": "crwdns11830:0crwdne11830:0",
-      "desc": "crwdns11832:0crwdne11832:0"
+      "header": "crwdns32626:0crwdne32626:0",
+      "desc": "crwdns38848:0crwdne38848:0"
     },
     "server": {
-      "header": "crwdns11834:0crwdne11834:0",
-      "desc": "crwdns11836:0crwdne11836:0"
+      "header": "crwdns32630:0crwdne32630:0",
+      "desc": "crwdns38850:0crwdne38850:0"
     },
     "headerless": {
-      "header": "crwdns11838:0crwdne11838:0",
-      "desc": "crwdns11840:0crwdne11840:0"
+      "header": "crwdns32634:0crwdne32634:0",
+      "desc": "crwdns38852:0crwdne38852:0"
     },
-    "editdialog": {
-      "header": "crwdns11842:0crwdne11842:0",
-      "desc": "crwdns11844:0crwdne11844:0"
+    "edit-dialog": {
+      "header": "crwdns38854:0crwdne38854:0",
+      "desc": "crwdns38856:0crwdne38856:0"
     },
     "crud": {
-      "header": "crwdns11846:0crwdne11846:0",
-      "desc": "crwdns11848:0crwdne11848:0"
+      "header": "crwdns32642:0crwdne32642:0",
+      "desc": "crwdns38858:0crwdne38858:0"
+    },
+    "virtualized": {
+      "header": "crwdns38860:0crwdne38860:0",
+      "desc": "crwdns38862:0crwdne38862:0"
+    },
+    "custom-filter": {
+      "header": "crwdns38864:0crwdne38864:0",
+      "desc": "crwdns38866:0crwdne38866:0"
     }
   },
   "props": {
     "v-edit-dialog": {
-      "cancelText": "crwdns11850:0crwdne11850:0",
-      "lazy": "crwdns11852:0crwdne11852:0",
-      "large": "crwdns11854:0crwdne11854:0",
-      "saveText": "crwdns11856:0crwdne11856:0",
-      "transition": "crwdns11858:0crwdne11858:0"
+      "cancelText": "crwdns32646:0crwdne32646:0",
+      "eager": "crwdns38868:0crwdne38868:0",
+      "large": "crwdns32650:0crwdne32650:0",
+      "saveText": "crwdns32652:0crwdne32652:0",
+      "transition": "crwdns32654:0crwdne32654:0"
     },
     "v-data-table": {
-      "headerKey": "crwdns11860:0crwdne11860:0",
-      "headerText": "crwdns11862:0crwdne11862:0",
-      "headers": "crwdns11864:0crwdne11864:0",
-      "headersLength": "crwdns11866:0crwdne11866:0",
-      "hideHeaders": "crwdns11868:0crwdne11868:0",
-      "sortIcon": "crwdns11870:0crwdne11870:0",
-      "nextIcon": "crwdns11872:0crwdne11872:0",
-      "prevIcon": "crwdns11874:0crwdne11874:0"
-    }
-  },
-  "scopedSlots": {
-    "v-data-table": {
-      "headerCell": "crwdns11876:0crwdne11876:0",
-      "headers": "crwdns11878:0crwdne11878:0"
+      "calculateWidths": "crwdns38870:0crwdne38870:0",
+      "caption": "crwdns38872:0crwdne38872:0",
+      "dense": "crwdns38874:0crwdne38874:0",
+      "expandIcon": "crwdns38876:0crwdne38876:0",
+      "fixedHeader": "crwdns38878:0crwdne38878:0",
+      "headerProps": "crwdns38880:0crwdne38880:0",
+      "headers": "crwdns38882:0crwdne38882:0",
+      "headersLength": "crwdns32662:0crwdne32662:0",
+      "height": "crwdns38884:0crwdne38884:0",
+      "hideDefaultHeader": "crwdns38886:0crwdne38886:0",
+      "mobileBreakpoint": "crwdns38888:0crwdne38888:0",
+      "showSelect": "crwdns38890:0crwdne38890:0",
+      "showExpand": "crwdns38892:0crwdne38892:0",
+      "showGroupBy": "crwdns38894:0crwdne38894:0",
+      "virtualRows": "crwdns38896:0crwdne38896:0"
     }
   },
   "slots": {
+    "v-data-table": {
+      "body": "crwdns38898:0crwdne38898:0",
+      "body.append": "crwdns38900:0crwdne38900:0",
+      "body.prepend": "crwdns38902:0crwdne38902:0",
+      "expanded-item": "crwdns38904:0crwdne38904:0",
+      "footer": "crwdns38906:0crwdne38906:0",
+      "footer.page-text": "crwdns38908:0crwdne38908:0",
+      "group": "crwdns38910:0crwdne38910:0",
+      "group.header": "crwdns38912:0crwdne38912:0",
+      "group.summary": "crwdns38914:0crwdne38914:0",
+      "header": "crwdns38916:0crwdne38916:0",
+      "header.<name>": "crwdns38918:0crwdne38918:0",
+      "header.data-table-select": "crwdns38920:0crwdne38920:0",
+      "item": "crwdns38922:0crwdne38922:0",
+      "item.data-table-select": "crwdns38924:0crwdne38924:0",
+      "item.data-table-expand": "crwdns38926:0crwdne38926:0",
+      "item.<name>": "crwdns38928:0crwdne38928:0",
+      "loading": "crwdns38930:0crwdne38930:0",
+      "no-data": "crwdns38932:0crwdne38932:0",
+      "no-results": "crwdns38934:0crwdne38934:0",
+      "progress": "crwdns38936:0crwdne38936:0",
+      "top": "crwdns38938:0crwdne38938:0"
+    },
     "v-edit-dialog": {
-      "input": "crwdns11880:0crwdne11880:0"
+      "input": "crwdns32680:0crwdne32680:0"
     }
   },
   "events": {
     "v-edit-dialog": {
-      "cancel": "crwdns11882:0crwdne11882:0",
-      "close": "crwdns11884:0crwdne11884:0",
-      "open": "crwdns11886:0crwdne11886:0",
-      "save": "crwdns11888:0crwdne11888:0"
+      "cancel": "crwdns32682:0crwdne32682:0",
+      "close": "crwdns32684:0crwdne32684:0",
+      "open": "crwdns32686:0crwdne32686:0",
+      "save": "crwdns32688:0crwdne32688:0"
     },
     "v-data-table": {
-      "update:pagination": "crwdns11890:0crwdne11890:0"
+      "click:row": "crwdns38940:0crwdne38940:0"
     }
   }
 }

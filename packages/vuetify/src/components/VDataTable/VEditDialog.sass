@@ -1,0 +1,22 @@
+@import '../../styles/styles.sass'
+
++theme(v-small-dialog) using ($material)
+  &__menu-content,
+  &__actions
+    background: map-get($material, 'cards')
+
+.v-small-dialog
+  display: block
+
+  &__activator
+    cursor: pointer
+    &__content
+      display: inline-block
+
+  &__content
+    padding: 0 16px
+
+  &__actions
+    padding: 8px
+    text-align: right
+    white-space: pre

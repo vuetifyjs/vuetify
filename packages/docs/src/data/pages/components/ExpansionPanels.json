@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VExpansionPanels",
+  "mdSpec": {
+    "version": "1",
+    "link": "https://material.io/archive/guidelines/components/expansion-panels.html"
+  },
   "children": [
     {
       "type": "section",
@@ -17,7 +22,9 @@
         {
           "type": "api",
           "value": [
+            "v-expansion-panels",
             "v-expansion-panel",
+            "v-expansion-panel-header",
             "v-expansion-panel-content"
           ]
         }
@@ -27,15 +34,26 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "expand",
-            "external",
-            "disabledAndReadonly",
-            "popout",
-            "customIcons",
-            "iconSlot",
-            "focusable"
+            "simple/disabled",
+            "simple/readonly",
+            "simple/popout",
+            "simple/inset",
+            "simple/accordion",
+            "simple/focusable",
+            "intermediate/external",
+            "intermediate/custom-icons",
+            "complex/advanced"
           ]
         }
       ]

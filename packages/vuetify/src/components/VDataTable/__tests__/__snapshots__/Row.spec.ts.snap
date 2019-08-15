@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Table Row should render without slots 1`] = `
+<tr>
+  <td class="text-start">
+    0.68
+  </td>
+  <td class="text-start">
+    0.65
+  </td>
+</tr>
+`;

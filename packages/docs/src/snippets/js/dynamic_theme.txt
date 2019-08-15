@@ -1,1 +1,5 @@
-this.$vuetify.theme.primary = '#4caf50'
+// Light theme
+this.$vuetify.theme.themes.light.primary = '#4caf50'
+
+// Dark theme
+this.$vuetify.theme.themes.dark.primary = '#4caf50'

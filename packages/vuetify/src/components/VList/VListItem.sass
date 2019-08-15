@@ -1,0 +1,247 @@
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+
+// Theme
++theme(v-list-item) using ($material)
+  &--disabled
+    color: map-deep-get($material, 'text', 'disabled')
+
+  &:not(.v-list-item--active):not(.v-list-item--disabled)
+    color: map-deep-get($material, 'text', 'primary') !important
+
+  .v-list-item__mask
+    color: map-deep-get($material, 'text', 'disabled')
+    background: map-deep-get($material, 'expansion-panels', 'focus')
+
+  .v-list-item__subtitle,
+  .v-list-item__action-text
+    color: map-deep-get($material, 'text', 'secondary')
+
+  +states($material)
+
+  &.v-list-item--highlighted
+    &::before
+      opacity: map-deep-get($material, 'states', 'pressed')
+
+// Block
+.v-list-item
+  align-items: center
+  display: flex
+  flex: 1 1 100%
+  letter-spacing: normal
+  min-height: $list-item-min-height
+  outline: none
+  padding: 0 16px
+  position: relative
+  text-decoration: none
+  user-select: none
+
+  &--disabled
+    pointer-events: none
+
+// Element
+.v-list-item__action
+  align-self: center
+  margin: 12px 0
+
+  // Remove all margins when used
+  // in an item action. If user
+  // wants this they can not
+  // use this component
+  .v-input,
+  .v-input__control,
+  .v-input__slot,
+  .v-input--selection-controls__input
+    margin: 0 !important
+
+  .v-input
+    padding: 0
+
+    .v-messages
+      display: none
+
+.v-list-item__action-text
+  font-size: map-deep-get($headings, 'caption', 'size')
+
+.v-list-item__avatar
+  align-self: center
+  justify-content: flex-start
+  margin-bottom: $list-item-avatar-margin-y
+  margin-top: $list-item-avatar-margin-y
+
+  &.v-list-item__avatar--horizontal
+    margin-bottom: 8px
+    margin-top: 8px
+
+    &:first-child
+      +ltr()
+        margin-left: $list-item-avatar-horizontal-margin-x
+      +rtl()
+        margin-right: $list-item-avatar-horizontal-margin-x
+
+    &:last-child
+      +ltr()
+        margin-left: $list-item-avatar-horizontal-margin-x
+      +rtl()
+        margin-right: $list-item-avatar-horizontal-margin-x
+
+.v-list-item__content
+  align-items: center
+  align-self: center
+  display: flex
+  flex-wrap: wrap
+  flex: 1 1
+  overflow: hidden
+  padding: 12px 0
+
+  > *
+    line-height: 1.1
+    flex: 1 0 100%
+
+    &:not(:last-child)
+      margin-bottom: 2px
+
+.v-list-item__icon
+  align-self: flex-start
+  margin: 16px 0
+
+// https://github.com/vuetifyjs/vuetify/issues/7930
+.v-list-item__action,
+.v-list-item__avatar,
+.v-list-item__icon
+  &:last-of-type:not(:only-child)
+    +ltr()
+      margin-left: 16px
+    +rtl()
+      margin-right: 16px
+
+.v-list-item__avatar
+  &:first-child
+    +ltr()
+      margin-right: 24px
+    +rtl()
+      margin-left: 24px
+
+.v-list-item__action,
+.v-list-item__icon
+  &:first-child
+    +ltr()
+      margin-right: 32px
+    +rtl()
+      margin-left: 32px
+
+.v-list-item__action,
+.v-list-item__avatar,
+.v-list-item__icon
+  display: inline-flex
+  min-width: 24px
+
+// Increased specificity to beat
+// out default typography rules
+// line height plays a role in
+// proper element sizing
+.v-list-item .v-list-item__title,
+.v-list-item .v-list-item__subtitle
+  line-height: 1.2
+
+.v-list-item__title,
+.v-list-item__subtitle
+  flex: 1 1 100%
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+
+.v-list-item__title
+  align-self: center
+  font-size: $list-item-title-font-size
+
+  > .v-badge
+    margin-top: 16px
+
+.v-list-item__subtitle
+  font-size: $list-item-subtitle-font-size
+
+// Modifier
+.v-list-item--dense,
+.v-list--dense .v-list-item
+  min-height: 40px
+
+  .v-list-item__icon
+    margin-top: 8px
+    margin-bottom: 8px
+
+  .v-list-item__content
+    padding: 8px 0
+
+  .v-list-item__title,
+  .v-list-item__subtitle
+    font-size: $list-item-dense-title-font-size
+    font-weight: $list-item-dense-title-font-weight
+    line-height: 1rem
+
+  &.v-list-item--two-line
+    min-height: 60px
+
+  &.v-list-item--three-line
+    min-height: 76px
+
+.v-list-item--link
+  cursor: pointer
+
+  &:before
+    background-color: currentColor
+    bottom: 0
+    content: ''
+    left: 0
+    opacity: 0
+    pointer-events: none
+    position: absolute
+    right: 0
+    top: 0
+    transition: $primary-transition
+
+.v-list-item--active
+  .v-icon
+    color: inherit
+
+.v-list-item__action--stack
+  align-items: flex-end
+  align-self: stretch
+  justify-content: space-between
+  white-space: nowrap
+  flex-direction: column
+
+.v-list--two-line .v-list-item,
+.v-list--three-line .v-list-item,
+.v-list-item--two-line,
+.v-list-item--three-line
+  .v-list-item__avatar:not(.v-list-item__avatar--horizontal),
+  .v-list-item__icon
+    margin-bottom: $list-item-icon-margin-y
+    margin-top: $list-item-icon-margin-y
+
+.v-list--two-line .v-list-item,
+.v-list-item--two-line
+  min-height: $list-item-two-line-min-height
+
+  .v-list-item__icon
+    margin-bottom: 32px
+
+.v-list--three-line .v-list-item,
+.v-list-item--three-line
+  min-height: $list-item-three-line-min-height
+
+  .v-list-item__avatar,
+  .v-list-item__action
+    align-self: flex-start
+    margin-top: 16px
+    margin-bottom: 16px
+
+  .v-list-item__content
+    align-self: stretch
+
+  .v-list-item__subtitle
+    white-space: initial
+    -webkit-line-clamp: 2
+    -webkit-box-orient: vertical
+    display: -webkit-box

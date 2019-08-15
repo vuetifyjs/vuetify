@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_treeview.styl'
+import './VTreeview.sass'
 
 // Types
 import { VNode, VNodeChildrenArrayContents } from 'vue'
@@ -16,14 +16,14 @@ import { provide as RegistrableProvide } from '../../mixins/registrable'
 import {
   arrayDiff,
   deepEqual,
-  getObjectValueByPath
+  getObjectValueByPath,
 } from '../../util/helpers'
 import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
 import {
   filterTreeItems,
   FilterTreeItemFunction,
-  filterTreeItem
+  filterTreeItem,
 } from './util/filterTreeItems'
 
 type VTreeviewNodeInstance = InstanceType<typeof VTreeviewNode>
@@ -56,37 +56,43 @@ export default mixins(
   props: {
     active: {
       type: Array,
-      default: () => ([])
+      default: () => ([]),
     } as PropValidator<NodeArray>,
+    dense: Boolean,
+    filter: Function as PropValidator<FilterTreeItemFunction>,
+    hoverable: Boolean,
     items: {
       type: Array,
-      default: () => ([])
+      default: () => ([]),
     } as PropValidator<any[]>,
-    hoverable: Boolean,
     multipleActive: Boolean,
     open: {
       type: Array,
-      default: () => ([])
+      default: () => ([]),
     } as PropValidator<NodeArray>,
     openAll: Boolean,
     returnObject: {
       type: Boolean,
-      default: false // TODO: Should be true in next major
+      default: false, // TODO: Should be true in next major
     },
+    search: String,
+    selectionType: {
+      type: String,
+      default: 'leaf',
+      validator: (v: string) => ['leaf', 'independent'].includes(v),
+    } as PropValidator<'leaf' | 'independent'>,
     value: {
       type: Array,
-      default: () => ([])
+      default: () => ([]),
     } as PropValidator<NodeArray>,
-    search: String,
-    filter: Function as PropValidator<FilterTreeItemFunction>,
-    ...VTreeviewNodeProps
+    ...VTreeviewNodeProps,
   },
 
   data: () => ({
-    nodes: {} as Record<string | number, NodeState>,
-    selectedCache: new Set() as NodeCache,
     activeCache: new Set() as NodeCache,
-    openCache: new Set() as NodeCache
+    nodes: {} as Record<string | number, NodeState>,
+    openCache: new Set() as NodeCache,
+    selectedCache: new Set() as NodeCache,
   }),
 
   computed: {
@@ -108,7 +114,7 @@ export default mixins(
       }
 
       return excluded
-    }
+    },
   },
 
   watch: {
@@ -136,7 +142,7 @@ export default mixins(
         // with dynamic children
         if (!deepEqual(oldSelectedCache, [...this.selectedCache])) this.emitSelected()
       },
-      deep: true
+      deep: true,
     },
     active (value: (string | number | any)[]) {
       this.handleNodeCacheWatcher(value, this.activeCache, this.updateActive, this.emitActive)
@@ -146,15 +152,13 @@ export default mixins(
     },
     open (value: (string | number | any)[]) {
       this.handleNodeCacheWatcher(value, this.openCache, this.updateOpen, this.emitOpen)
-    }
+    },
   },
 
   created () {
     this.buildTree(this.items)
     this.value.forEach(key => this.updateSelected(key, true))
-    this.emitSelected()
     this.active.forEach(key => this.updateActive(key, true))
-    this.emitActive()
   },
 
   mounted () {
@@ -195,14 +199,14 @@ export default mixins(
         const key = getObjectValueByPath(item, this.itemKey)
         const children = getObjectValueByPath(item, this.itemChildren, [])
         const oldNode = this.nodes.hasOwnProperty(key) ? this.nodes[key] : {
-          isSelected: false, isIndeterminate: false, isActive: false, isOpen: false, vnode: null
+          isSelected: false, isIndeterminate: false, isActive: false, isOpen: false, vnode: null,
         } as NodeState
 
         const node: any = {
           vnode: oldNode.vnode,
           parent,
           children: children.map((c: any) => getObjectValueByPath(c, this.itemKey)),
-          item
+          item,
         }
 
         this.buildTree(children, key)
@@ -295,6 +299,9 @@ export default mixins(
       const key = getObjectValueByPath(node.item, this.itemKey)
       if (this.nodes[key]) this.nodes[key].vnode = null
     },
+    isParent (key: string | number) {
+      return this.nodes[key].children && this.nodes[key].children.length
+    },
     updateActive (key: string | number, isActive: boolean) {
       if (!this.nodes.hasOwnProperty(key)) return
 
@@ -321,23 +328,30 @@ export default mixins(
 
       const changed = new Map()
 
-      const descendants = [key, ...this.getDescendants(key)]
-      descendants.forEach(descendant => {
-        this.nodes[descendant].isSelected = isSelected
-        this.nodes[descendant].isIndeterminate = false
-        changed.set(descendant, isSelected)
-      })
+      if (this.selectionType !== 'independent') {
+        const descendants = [key, ...this.getDescendants(key)]
+        descendants.forEach(descendant => {
+          this.nodes[descendant].isSelected = isSelected
+          this.nodes[descendant].isIndeterminate = false
+          changed.set(descendant, isSelected)
+        })
 
-      const parents = this.getParents(key)
-      parents.forEach(parent => {
-        this.nodes[parent] = this.calculateState(this.nodes[parent], this.nodes)
-        changed.set(parent, this.nodes[parent].isSelected)
-      })
-
-      const all = [key, ...descendants, ...parents]
-      all.forEach(this.updateVnodeState)
+        const parents = this.getParents(key)
+        parents.forEach(parent => {
+          this.nodes[parent] = this.calculateState(this.nodes[parent], this.nodes)
+          changed.set(parent, this.nodes[parent].isSelected)
+        })
+      } else {
+        this.nodes[key].isSelected = isSelected
+        this.nodes[key].isIndeterminate = false
+        changed.set(key, isSelected)
+      }
 
       for (const [key, value] of changed.entries()) {
+        this.updateVnodeState(key)
+
+        if (this.selectionType === 'leaf' && this.isParent(key)) continue
+
         value === true ? this.selectedCache.add(key) : this.selectedCache.delete(key)
       }
     },
@@ -369,7 +383,7 @@ export default mixins(
     },
     isExcluded (key: string | number) {
       return !!this.search && this.excludedItems.has(key)
-    }
+    },
   },
 
   render (h): VNode {
@@ -382,8 +396,9 @@ export default mixins(
       staticClass: 'v-treeview',
       class: {
         'v-treeview--hoverable': this.hoverable,
-        ...this.themeClasses
-      }
+        'v-treeview--dense': this.dense,
+        ...this.themeClasses,
+      },
     }, children)
-  }
+  },
 })

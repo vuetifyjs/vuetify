@@ -1,6 +1,10 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/buttons-floating-action-button.html"
+  },
   "children": [
     {
       "type": "section",
@@ -29,10 +33,10 @@
         {
           "type": "examples",
           "value": [
-            "small",
-            "displayAnimation",
-            "lateralScreens",
-            "speedDial"
+            "simple/small",
+            "simple/display-animation",
+            "intermediate/speed-dial",
+            "complex/lateral-screens"
           ]
         }
       ]
@@ -45,7 +49,7 @@
           "value": [
             "components/buttons",
             "components/icons",
-            "framework/transitions"
+            "styles/transitions"
           ]
         }
       ]

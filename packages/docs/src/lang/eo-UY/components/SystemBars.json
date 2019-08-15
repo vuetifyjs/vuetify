@@ -1,0 +1,30 @@
+{
+  "header": "crwdns38276:0crwdne38276:0",
+  "headerText": "crwdns38278:0crwdne38278:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns38280:0crwdne38280:0"
+    },
+    "color": {
+      "header": "crwdns38282:0crwdne38282:0",
+      "desc": "crwdns38284:0crwdne38284:0"
+    },
+    "window": {
+      "header": "crwdns38286:0crwdne38286:0",
+      "desc": "crwdns38288:0crwdne38288:0"
+    },
+    "themes": {
+      "header": "crwdns38290:0crwdne38290:0",
+      "desc": "crwdns38292:0crwdne38292:0"
+    },
+    "lights-out": {
+      "header": "crwdns38294:0crwdne38294:0",
+      "desc": "crwdns38296:0crwdne38296:0"
+    }
+  },
+  "props": {
+    "height": "crwdns38298:0crwdne38298:0",
+    "lightsOut": "crwdns38300:0crwdne38300:0",
+    "window": "crwdns38302:0crwdne38302:0"
+  }
+}

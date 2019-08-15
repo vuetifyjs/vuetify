@@ -4,14 +4,15 @@ import {
   VueConstructor,
   ComponentOptions,
   FunctionalComponentOptions,
-  VNodeData
+  VNodeData,
 } from 'vue'
 import { CombinedVueInstance, Vue } from 'vue/types/vue'
 import {
   RecordPropsDefinition,
   ThisTypedComponentOptionsWithArrayProps,
-  ThisTypedComponentOptionsWithRecordProps
+  ThisTypedComponentOptionsWithRecordProps,
 } from 'vue/types/options'
+import { MetaInfo } from 'vue-meta/types'
 import { TouchStoredHandlers } from './directives/touch'
 
 declare global {
@@ -39,6 +40,7 @@ declare global {
       class?: string
       circle?: boolean
       touched?: boolean
+      isTouch?: boolean
     }
     _onScroll?: {
       callback: EventListenerOrEventListenerObject
@@ -73,6 +75,12 @@ declare module 'vue/types/vnode' {
   }
 }
 
+declare module 'vue/types/options' {
+  interface ComponentOptions<V extends Vue> {
+    head?: MetaInfo | (() => MetaInfo)
+  }
+}
+
 declare module 'vue/types/vue' {
   export type OptionsVue<Instance extends Vue, Data, Methods, Computed, Props, Options = {}> = VueConstructor<
     CombinedVueInstance<Instance, Data, Methods, Computed, Props> & Vue,
@@ -84,7 +92,13 @@ declare module 'vue/types/vue' {
     _isDestroyed: boolean
 
     /** bindObjectProps */
-    _b (data: VNodeData, tag: string, value: Dictionary<any> | Dictionary<any>[], asProp?: boolean, isSync?: boolean): VNodeData
+    _b (
+      data: VNodeData,
+      tag: string,
+      value: Dictionary<any> | Dictionary<any>[],
+      asProp?: boolean,
+      isSync?: boolean
+    ): VNodeData
 
     /** bindObjectListeners */
      _g (data: VNodeData, value: {}): VNodeData
@@ -113,6 +127,8 @@ declare module 'vue/types/vue' {
     version: string
     /* eslint-disable-next-line camelcase */
     $_vuetify_subcomponents?: Record<string, VueConstructor>
+    /* eslint-disable-next-line camelcase */
+    $_vuetify_installed?: true
     options: Options
 
     extend<Data, Methods, Computed, Options, PropNames extends string = never> (options?: ThisTypedComponentOptionsWithArrayProps<V, Data, Methods, Computed, PropNames> & Options): OptionsVue<V, Data, Methods, Computed, Record<PropNames, any>, Options>

@@ -1,0 +1,11 @@
+{
+  "examples": {
+    "multiple": {
+      "header": "Múltiple"
+    }
+  },
+  "props": {
+    "nextIcon": "Especifica el ícono para _siguiente_",
+    "prevIcon": "Especifica el ícono para _anterior_"
+  }
+}

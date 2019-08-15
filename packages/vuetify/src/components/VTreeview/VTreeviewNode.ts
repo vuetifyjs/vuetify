@@ -6,18 +6,24 @@ import VTreeviewNode from './VTreeviewNode'
 
 // Mixins
 import { inject as RegistrableInject } from '../../mixins/registrable'
+import Colorable from '../../mixins/colorable'
 
 // Utils
-import mixins from '../../util/mixins'
+import mixins, { ExtractVue } from '../../util/mixins'
 import { getObjectValueByPath } from '../../util/helpers'
 import { PropValidator } from 'vue/types/options'
 
 // Types
-import Vue, { VNode } from 'vue'
+import { VNode } from 'vue'
 
 type VTreeViewInstance = InstanceType<typeof VTreeview>
 
-interface options extends Vue {
+const baseMixins = mixins(
+  Colorable,
+  RegistrableInject('treeview')
+)
+
+interface options extends ExtractVue<typeof baseMixins> {
   treeview: VTreeViewInstance
 }
 
@@ -25,80 +31,91 @@ export const VTreeviewNodeProps = {
   activatable: Boolean,
   activeClass: {
     type: String,
-    default: 'v-treeview-node--active'
+    default: 'v-treeview-node--active',
   },
-  selectable: Boolean,
-  selectedColor: {
+  color: {
     type: String,
-    default: 'accent'
-  },
-  indeterminateIcon: {
-    type: String,
-    default: '$vuetify.icons.checkboxIndeterminate'
-  },
-  onIcon: {
-    type: String,
-    default: '$vuetify.icons.checkboxOn'
-  },
-  offIcon: {
-    type: String,
-    default: '$vuetify.icons.checkboxOff'
+    default: 'primary',
   },
   expandIcon: {
     type: String,
-    default: '$vuetify.icons.subgroup'
+    default: '$vuetify.icons.subgroup',
   },
-  loadingIcon: {
+  indeterminateIcon: {
     type: String,
-    default: '$vuetify.icons.loading'
-  },
-  itemKey: {
-    type: String,
-    default: 'id'
-  },
-  itemText: {
-    type: String,
-    default: 'name'
+    default: '$vuetify.icons.checkboxIndeterminate',
   },
   itemChildren: {
     type: String,
-    default: 'children'
+    default: 'children',
+  },
+  itemDisabled: {
+    type: String,
+    default: 'disabled',
+  },
+  itemKey: {
+    type: String,
+    default: 'id',
+  },
+  itemText: {
+    type: String,
+    default: 'name',
   },
   loadChildren: Function as PropValidator<(item: any) => Promise<void>>,
+  loadingIcon: {
+    type: String,
+    default: '$vuetify.icons.loading',
+  },
+  offIcon: {
+    type: String,
+    default: '$vuetify.icons.checkboxOff',
+  },
+  onIcon: {
+    type: String,
+    default: '$vuetify.icons.checkboxOn',
+  },
   openOnClick: Boolean,
-  transition: Boolean
+  rounded: Boolean,
+  selectable: Boolean,
+  selectedColor: {
+    type: String,
+    default: 'accent',
+  },
+  shaped: Boolean,
+  transition: Boolean,
 }
 
-export default mixins<options>(
-  RegistrableInject('treeview')
-  /* @vue/component */
-).extend({
+/* @vue/component */
+export default baseMixins.extend<options>().extend({
   name: 'v-treeview-node',
 
   inject: {
     treeview: {
-      default: null
-    }
+      default: null,
+    },
   },
 
   props: {
     item: {
       type: Object,
-      default: () => null
+      default: () => null,
     },
-    ...VTreeviewNodeProps
+    ...VTreeviewNodeProps,
   },
 
   data: () => ({
+    hasLoaded: false,
+    isActive: false, // Node is selected (row)
+    isIndeterminate: false, // Node has at least one selected child
+    isLoading: false,
     isOpen: false, // Node is open/expanded
     isSelected: false, // Node is selected (checkbox)
-    isIndeterminate: false, // Node has at least one selected child
-    isActive: false, // Node is selected (row)
-    isLoading: false,
-    hasLoaded: false
   }),
 
   computed: {
+    disabled (): string {
+      return getObjectValueByPath(this.item, this.itemDisabled)
+    },
     key (): string {
       return getObjectValueByPath(this.item, this.itemKey)
     },
@@ -115,7 +132,7 @@ export default mixins<options>(
         selected: this.isSelected,
         indeterminate: this.isIndeterminate,
         active: this.isActive,
-        open: this.isOpen
+        open: this.isOpen,
       }
     },
     computedIcon (): string {
@@ -125,7 +142,7 @@ export default mixins<options>(
     },
     hasChildren (): boolean {
       return !!this.children && (!!this.children.length || !!this.loadChildren)
-    }
+    },
   },
 
   created () {
@@ -163,18 +180,18 @@ export default mixins<options>(
 
       return this.$createElement('div', {
         slot: 'label',
-        staticClass: 'v-treeview-node__label'
+        staticClass: 'v-treeview-node__label',
       }, children)
     },
     genContent () {
       const children = [
         this.$scopedSlots.prepend && this.$scopedSlots.prepend(this.scopedProps),
         this.genLabel(),
-        this.$scopedSlots.append && this.$scopedSlots.append(this.scopedProps)
+        this.$scopedSlots.append && this.$scopedSlots.append(this.scopedProps),
       ]
 
       return this.$createElement('div', {
-        staticClass: 'v-treeview-node__content'
+        staticClass: 'v-treeview-node__content',
       }, children)
     },
     genToggle () {
@@ -182,28 +199,32 @@ export default mixins<options>(
         staticClass: 'v-treeview-node__toggle',
         class: {
           'v-treeview-node__toggle--open': this.isOpen,
-          'v-treeview-node__toggle--loading': this.isLoading
+          'v-treeview-node__toggle--loading': this.isLoading,
         },
         slot: 'prepend',
         on: {
           click: (e: MouseEvent) => {
+            if (this.disabled) return
+
             e.stopPropagation()
 
             if (this.isLoading) return
 
             this.checkChildren().then(() => this.open())
-          }
-        }
+          },
+        },
       }, [this.isLoading ? this.loadingIcon : this.expandIcon])
     },
     genCheckbox () {
       return this.$createElement(VIcon, {
         staticClass: 'v-treeview-node__checkbox',
         props: {
-          color: this.isSelected ? this.selectedColor : undefined
+          color: this.isSelected ? this.selectedColor : undefined,
         },
         on: {
           click: (e: MouseEvent) => {
+            if (this.disabled) return
+
             e.stopPropagation()
 
             if (this.isLoading) return
@@ -218,8 +239,8 @@ export default mixins<options>(
                 this.treeview.emitSelected()
               })
             })
-          }
-        }
+          },
+        },
       }, [this.computedIcon])
     },
     genNode (): VNode {
@@ -228,13 +249,15 @@ export default mixins<options>(
       if (this.selectable) children.unshift(this.genCheckbox())
       if (this.hasChildren) children.unshift(this.genToggle())
 
-      return this.$createElement('div', {
+      return this.$createElement('div', this.setTextColor(this.isActive && this.color, {
         staticClass: 'v-treeview-node__root',
         class: {
-          [this.activeClass]: this.isActive
+          [this.activeClass]: this.isActive,
         },
         on: {
           click: () => {
+            if (this.disabled) return
+
             if (this.openOnClick && this.children) {
               this.open()
             } else if (this.activatable) {
@@ -242,9 +265,9 @@ export default mixins<options>(
               this.treeview.updateActive(this.key, this.isActive)
               this.treeview.emitActive()
             }
-          }
-        }
-      }, children)
+          },
+        },
+      }), children)
     },
     genChild (item: any): VNode {
       return this.$createElement(VTreeviewNode, {
@@ -255,6 +278,7 @@ export default mixins<options>(
           item,
           selectable: this.selectable,
           selectedColor: this.selectedColor,
+          color: this.color,
           expandIcon: this.expandIcon,
           indeterminateIcon: this.indeterminateIcon,
           offIcon: this.offIcon,
@@ -262,12 +286,15 @@ export default mixins<options>(
           loadingIcon: this.loadingIcon,
           itemKey: this.itemKey,
           itemText: this.itemText,
+          itemDisabled: this.itemDisabled,
           itemChildren: this.itemChildren,
           loadChildren: this.loadChildren,
           transition: this.transition,
-          openOnClick: this.openOnClick
+          openOnClick: this.openOnClick,
+          rounded: this.rounded,
+          shaped: this.shaped,
         },
-        scopedSlots: this.$scopedSlots
+        scopedSlots: this.$scopedSlots,
       })
     },
     genChildrenWrapper (): any {
@@ -276,12 +303,12 @@ export default mixins<options>(
       const children = [this.children.map(this.genChild)]
 
       return this.$createElement('div', {
-        staticClass: 'v-treeview-node__children'
+        staticClass: 'v-treeview-node__children',
       }, children)
     },
     genTransition () {
       return this.$createElement(VExpandTransition, [this.genChildrenWrapper()])
-    }
+    },
   },
 
   render (h): VNode {
@@ -295,9 +322,15 @@ export default mixins<options>(
       class: {
         'v-treeview-node--leaf': !this.hasChildren,
         'v-treeview-node--click': this.openOnClick,
+        'v-treeview-node--disabled': this.disabled,
+        'v-treeview-node--rounded': this.rounded,
+        'v-treeview-node--shaped': this.shaped,
         'v-treeview-node--selected': this.isSelected,
-        'v-treeview-node--excluded': this.treeview.isExcluded(this.key)
-      }
+        'v-treeview-node--excluded': this.treeview.isExcluded(this.key),
+      },
+      attrs: {
+        'aria-expanded': String(this.isOpen),
+      },
     }, children)
-  }
+  },
 })

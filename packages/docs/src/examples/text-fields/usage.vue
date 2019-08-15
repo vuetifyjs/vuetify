@@ -1,67 +1,67 @@
 <template>
   <v-form>
     <v-container>
-      <v-layout row wrap>
+      <v-row>
 
-        <v-flex xs12 sm6 md3>
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
             label="Regular"
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6 md3>
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
             label="Regular"
             placeholder="Placeholder"
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6 md3>
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
             label="Solo"
             solo
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6 md3>
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
             label="Solo"
             placeholder="Placeholder"
             solo
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6 md3>
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
-            label="Box"
-            box
+            label="Filled"
+            filled
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6 md3>
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
-            label="Box"
+            label="Filled"
             placeholder="Placeholder"
-            box
+            filled
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6 md3>
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
-            label="Outline"
-            outline
+            label="Outlined"
+            outlined
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6 md3>
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
-            label="Outline"
+            label="Outlined"
             placeholder="Placeholder"
-            outline
+            outlined
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-      </v-layout>
+      </v-row>
     </v-container>
   </v-form>
 </template>
