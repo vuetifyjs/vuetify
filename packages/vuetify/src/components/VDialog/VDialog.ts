@@ -155,11 +155,10 @@ export default baseMixins.extend({
       // the click event, or if the
       // dialog is not active, or if the overlay
       // is the same element as the target
-      if (
-        this._isDestroyed ||
+      if (this._isDestroyed ||
         !this.isActive ||
         this.$refs.content.contains(target) ||
-        !this.overlay.$el.contains(target)
+        (this.overlay && target && !this.overlay.$el.contains(target))
       ) return false
 
       // If we made it here, the click is outside
@@ -167,8 +166,14 @@ export default baseMixins.extend({
       // click is on the overlay, animate
       this.$emit('click:outside')
 
-      if (this.persistent) {
-        if (!this.noClickAnimation) this.animateClick()
+      if (this.persistent && this.overlay) {
+        if (
+          !this.noClickAnimation &&
+          (
+            this.overlay.$el === target ||
+            this.overlay.$el.contains(target)
+          )
+        ) this.animateClick()
 
         return false
       }
