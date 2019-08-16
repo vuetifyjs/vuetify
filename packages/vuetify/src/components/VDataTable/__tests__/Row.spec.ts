@@ -46,6 +46,8 @@ describe('Table Row', () => {
             { value: 'array' },
             { value: 'boolean' },
             { value: 'object' },
+            { value: 'undefined' },
+            { value: 'null' },
           ],
           item: {
             string: 'string',
@@ -53,6 +55,7 @@ describe('Table Row', () => {
             array: [1, 2],
             boolean: false,
             object: { foo: 'bar' },
+            null: null,
           },
         },
       },
