@@ -17,6 +17,10 @@ exports[`Table Row should render non-string values 1`] = `
   <td class="text-start">
     [object Object]
   </td>
+  <td class="text-start">
+  </td>
+  <td class="text-start">
+  </td>
 </tr>
 `;
 

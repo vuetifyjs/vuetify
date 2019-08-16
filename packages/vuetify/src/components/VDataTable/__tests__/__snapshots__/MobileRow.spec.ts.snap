@@ -47,6 +47,22 @@ exports[`MobileRow should render non-string values 1`] = `
       </div>
     </div>
   </td>
+  <td class="v-data-table__mobile-row">
+    <div class="v-data-table__mobile-row__wrapper">
+      <div class="v-data-table__mobile-row__header">
+      </div>
+      <div class="v-data-table__mobile-row__cell">
+      </div>
+    </div>
+  </td>
+  <td class="v-data-table__mobile-row">
+    <div class="v-data-table__mobile-row__wrapper">
+      <div class="v-data-table__mobile-row__header">
+      </div>
+      <div class="v-data-table__mobile-row__cell">
+      </div>
+    </div>
+  </td>
 </tr>
 `;
 
