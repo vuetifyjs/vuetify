@@ -161,6 +161,13 @@ export default VTextField.extend({
 
       input.data!.domProps!.value = this.internalFileInput
 
+      // This solves an issue in Safari where
+      // nothing happens when adding a file
+      // do to the input event not firing
+      // https://github.com/vuetifyjs/vuetify/issues/7941
+      delete input.data!.on!.input
+      input.data!.on!.change = this.onInput
+
       return [this.genSelections(), input]
     },
     genPrependSlot () {

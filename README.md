@@ -307,15 +307,25 @@ Vue.use(Vuetify) // Add Vuetify as a plugin
 For including styles 🎨, you can either place the below styles in your `index.html` (if using the CLI) or directly at your app's entry point.
 
 ```html
-<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
 <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
 ```
 Or you can import it to your webpack entry point file. This is _usually_ your `main.js` file.
 
 ```javascript
-import 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons'
+import 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900'
+import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/dist/vuetify.min.css'
 ```
+
+Don't forget to install Material Design Icons as a dependency:
+```bash
+yarn add @mdi/font -D
+# OR
+npm install @mdi/font -D
+```
+
 For more information, please visit the <a href="https://vuetifyjs.com/getting-started/quick-start">quick-start guide</a>.
 
 #### Manual Installation Through CDN
@@ -323,7 +333,8 @@ For more information, please visit the <a href="https://vuetifyjs.com/getting-st
 To use Vuetify in your project by directly importing it through CDNs (Content Delivery Networks), add the following code to the `<head>` of your HTML document.
 
 ```html
-<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
 <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
 ```
 

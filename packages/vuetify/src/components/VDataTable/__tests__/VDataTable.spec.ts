@@ -382,4 +382,20 @@ describe('VDataTable.ts', () => {
       page: 2,
     }))
   })
+
+  it('should render footer.page-text slot content', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: [],
+        items: [{}],
+      },
+      scopedSlots: {
+        'footer.page-text' ({ pageStart, pageStop }) {
+          return this.$createElement('div', [`foo ${pageStart} bar ${pageStop}`])
+        },
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
