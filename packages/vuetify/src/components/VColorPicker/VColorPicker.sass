@@ -1,4 +1,5 @@
 @import '../../styles/styles.sass'
+@import './_variables.scss'
 
 +theme(v-color-picker) using ($material)
   .v-color-picker__input input
@@ -14,6 +15,7 @@
 .v-color-picker
   align-self: flex-start
   contain: content
+  +border-radius($color-picker-border-radius)
   +elevation(2)
 
 // Element

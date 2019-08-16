@@ -1,5 +1,5 @@
 $btn-active-opacity: 0.18 !default;
-$btn-border-radius: 4px !default;
+$btn-border-radius: $border-radius-root !default;
 $btn-focus-opacity: 0.24 !default;
 $btn-font-weight: 500 !default;
 $btn-hover-opacity: 0.08 !default;

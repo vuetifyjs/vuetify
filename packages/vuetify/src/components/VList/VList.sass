@@ -17,6 +17,7 @@
 +theme(v-list) using ($material)
   background: map-get($material, 'cards')
   color: map-deep-get($material, 'text','primary')
+  +border-radius($list-border-radius)
 
   .v-list--disabled
     color: map-deep-get($material, 'text', 'disabled')
@@ -28,9 +29,7 @@
 // Block
 .v-list
   padding: 8px 0
-
-  &.v-sheet
-    position: static
+  position: static
 
 // Modifier
 .v-list--disabled

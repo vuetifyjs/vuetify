@@ -40,7 +40,6 @@
 // Block
 .v-btn
   align-items: center
-  border-radius: $btn-border-radius
   display: inline-flex
   flex: 0 0 auto
   font-weight: $btn-font-weight
@@ -58,6 +57,7 @@
   user-select: none
   vertical-align: middle
   white-space: nowrap
+  +border-radius($btn-border-radius)
 
   @each $name, $size in $btn-font-sizes
     &.v-size--#{$name}

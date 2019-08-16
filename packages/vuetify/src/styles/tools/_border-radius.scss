@@ -1,0 +1,26 @@
+@mixin border-radius(
+  $top-left,
+  $top-right: null,
+  $bottom-right: null,
+  $bottom-left: null
+) {
+  border-top-left-radius: $top-left;
+
+  @if $top-right {
+    border-top-right-radius: $top-right;
+  } @else {
+    border-top-right-radius: $top-left;
+  }
+
+  @if $bottom-right {
+    border-bottom-right-radius: $bottom-right;
+  } @else {
+    border-bottom-right-radius: $top-left;
+  }
+
+  @if $bottom-left {
+    border-bottom-left-radius: $bottom-left;
+  } @else {
+    border-bottom-left-radius: $top-left;
+  }
+}
