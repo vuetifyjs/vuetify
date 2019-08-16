@@ -3462,7 +3462,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
         </tr>
       </thead>
       <tbody>
-        <tr class="expanded expanded__row">
+        <tr class="v-data-table__expanded v-data-table__expanded__row">
           <td class="text-left">
             Frozen Yogurt
           </td>
@@ -3482,12 +3482,12 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
             1%
           </td>
         </tr>
-        <tr class="expanded expanded__content">
+        <tr class="v-data-table__expanded v-data-table__expanded__content">
           <div>
             expanded
           </div>
         </tr>
-        <tr class="expanded expanded__row">
+        <tr class="v-data-table__expanded v-data-table__expanded__row">
           <td class="text-left">
             Ice cream sandwich
           </td>
@@ -3507,12 +3507,12 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
             1%
           </td>
         </tr>
-        <tr class="expanded expanded__content">
+        <tr class="v-data-table__expanded v-data-table__expanded__content">
           <div>
             expanded
           </div>
         </tr>
-        <tr class="expanded expanded__row">
+        <tr class="v-data-table__expanded v-data-table__expanded__row">
           <td class="text-left">
             Eclair
           </td>
@@ -3532,12 +3532,12 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
             7%
           </td>
         </tr>
-        <tr class="expanded expanded__content">
+        <tr class="v-data-table__expanded v-data-table__expanded__content">
           <div>
             expanded
           </div>
         </tr>
-        <tr class="expanded expanded__row">
+        <tr class="v-data-table__expanded v-data-table__expanded__row">
           <td class="text-left">
             Cupcake
           </td>
@@ -3557,12 +3557,12 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
             8%
           </td>
         </tr>
-        <tr class="expanded expanded__content">
+        <tr class="v-data-table__expanded v-data-table__expanded__content">
           <div>
             expanded
           </div>
         </tr>
-        <tr class="expanded expanded__row">
+        <tr class="v-data-table__expanded v-data-table__expanded__row">
           <td class="text-left">
             Gingerbread
           </td>
@@ -3582,7 +3582,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
             16%
           </td>
         </tr>
-        <tr class="expanded expanded__content">
+        <tr class="v-data-table__expanded v-data-table__expanded__content">
           <div>
             expanded
           </div>

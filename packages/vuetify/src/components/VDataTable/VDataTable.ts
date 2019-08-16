@@ -389,11 +389,11 @@ export default VDataIterator.extend({
     genDefaultExpandedRow (item: any): VNode {
       const isExpanded = this.isExpanded(item)
       const classes = {
-        'expanded expanded__row': isExpanded,
+        'v-data-table__expanded v-data-table__expanded__row': isExpanded,
       }
       const headerRow = this.genDefaultSimpleRow(item, classes)
       const expandedRow = this.$createElement('tr', {
-        staticClass: 'expanded expanded__content',
+        staticClass: 'v-data-table__expanded v-data-table__expanded__content',
       }, [this.$scopedSlots['expanded-item']!({ item, headers: this.computedHeaders })])
 
       return this.$createElement(RowGroup, {
@@ -443,7 +443,7 @@ export default VDataIterator.extend({
         key: getObjectValueByPath(item, this.itemKey),
         class: {
           ...classes,
-          selected: data.isSelected,
+          'v-data-table__selected': data.isSelected,
         },
         props: {
           headers: this.computedHeaders,
