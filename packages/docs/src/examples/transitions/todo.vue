@@ -27,9 +27,9 @@
 
     <v-divider class="mt-4"></v-divider>
 
-    <v-layout
-      my-1
-      align-center
+    <v-row
+      class="my-1"
+      align="center"
     >
       <strong class="mx-4 info--text text--darken-3">
         Remaining: {{ remainingTasks }}
@@ -47,7 +47,7 @@
         :value="progress"
         class="mr-2"
       ></v-progress-circular>
-    </v-layout>
+    </v-row>
 
     <v-divider class="mb-4"></v-divider>
 

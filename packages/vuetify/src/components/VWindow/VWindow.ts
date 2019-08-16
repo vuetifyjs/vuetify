@@ -139,10 +139,7 @@ export default BaseItemGroup.extend({
         staticClass: `v-window__${direction}`,
       }, [
         this.$createElement(VBtn, {
-          props: {
-            icon: true,
-            small: true,
-          },
+          props: { icon: true },
           attrs: {
             'aria-label': this.$vuetify.lang.t(`$vuetify.carousel.${direction}`),
           },

@@ -1,12 +1,9 @@
 <template>
-  <v-container
-    grid-list-xl
-    fluid
-  >
-    <v-layout wrap>
-      <v-flex
-        xs12
-        sm6
+  <v-container fluid>
+    <v-row>
+      <v-col
+        cols="12"
+        sm="6"
       >
         <v-text-field
           v-model="label"
@@ -20,11 +17,11 @@
           v-model="placeholder"
           label="Placeholder"
         ></v-text-field>
-      </v-flex>
-      <v-flex xs12></v-flex>
-      <v-flex
-        xs12
-        md6
+      </v-col>
+      <v-col cols="12"></v-col>
+      <v-col
+        cols="12"
+        md="6"
       >
         <v-switch
           v-model="shaped"
@@ -81,7 +78,7 @@
           label="Flat (requires Solo)"
           :disabled="!solo"
         ></v-switch>
-        <v-layout>
+        <v-row>
           <v-switch
             v-model="counterEn"
             class="ma-0 mr-2 ml-1"
@@ -91,11 +88,11 @@
             v-model="counter"
             :disabled="!counterEn"
           ></v-slider>
-        </v-layout>
-      </v-flex>
-      <v-flex
-        xs12
-        md6
+        </v-row>
+      </v-col>
+      <v-col
+        cols="12"
+        md="6"
       >
         <v-sheet
           elevation="12"
@@ -122,8 +119,8 @@
             Value: {{ model }}
           </div>
         </v-sheet>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

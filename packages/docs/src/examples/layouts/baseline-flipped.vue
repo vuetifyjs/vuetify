@@ -37,14 +37,14 @@
 
     <v-content>
       <v-container
+        class="fill-height"
         fluid
-        fill-height
       >
-        <v-layout
-          justify-center
-          align-center
+        <v-row
+          justify="center"
+          align="center"
         >
-          <v-flex text-center>
+          <v-col class="text-center">
             <v-tooltip left>
               <template v-slot:activator="{ on }">
                 <v-btn
@@ -74,8 +74,8 @@
               </template>
               <span>Codepen</span>
             </v-tooltip>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
 

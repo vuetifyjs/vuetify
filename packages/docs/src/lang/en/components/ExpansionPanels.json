@@ -52,7 +52,7 @@
       "inset": "Makes the expansion-panel open with a inset style",
       "popout": "Makes the expansion-panel open with an popout style",
       "readonly": "Makes the entire expansion-panel read only.",
-      "value": "Controls the opened/closed state of content in the expansion-panel. Corresponds to a zero-based index of the currently opened content. If `expand` prop is used then it is an array of booleans where the index corresponds to the index of the content."
+      "value": "Controls the opened/closed state of content in the expansion-panel. Corresponds to a zero-based index of the currently opened content. If the `multiple` prop (previously `expand` in 1.5.x) is used then it is an array of numbers where each entry corresponds to the index of the opened content.  The index order is not relevant."
     },
     "v-expansion-panel": {
       "disabled": "Disables the expansion-panel content",

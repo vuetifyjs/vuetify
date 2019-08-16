@@ -9,14 +9,14 @@
     "`p` - применяет `padding`"
   ],
   "directionText": "Параметр _direction_ обозначает сторону, к которой относится свойство:",
-  "directions": {
-    "0": "`t` - применяет свойство для `margin-top` или `padding-top`",
-    "1": "`b` - применяет свойство для `margin-bottom` или `padding-bottom`",
-    "2": "`l` - применяет свойство для `margin-left` или `padding-left`",
-    "3": "`r` - применяет свойство для `margin-right` или `padding-right`",
-    "6": "`x` - применяет свойство для оба `*-left` и `*-right`",
-    "7": "`y` - применяет свойство для оба `*-top` и `*-bottom`"
-  },
+  "directions": [
+    "`t` - применяет свойство для `margin-top` или `padding-top`",
+    "`b` - применяет свойство для `margin-bottom` или `padding-bottom`",
+    "`l` - применяет свойство для `margin-left` или `padding-left`",
+    "`r` - применяет свойство для `margin-right` или `padding-right`",
+    "`x` - применяет свойство для оба `*-left` и `*-right`",
+    "`y` - применяет свойство для оба `*-top` и `*-bottom`"
+  ],
   "sizeText": "_size_ управляет приращением свойства:",
   "sizes": [
     "`0` - удаляет свойство для `margin` или `padding` установив его на `0`",

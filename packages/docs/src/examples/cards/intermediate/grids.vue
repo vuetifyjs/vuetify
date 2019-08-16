@@ -21,14 +21,11 @@
     </v-toolbar>
 
     <v-container
+      class="pa-2"
       fluid
-      grid-list-md
-      pa-2
     >
-      <v-layout
-        wrap
-      >
-        <v-flex
+      <v-row>
+        <v-col
           v-for="card in cards"
           :key="card.title"
           v-bind="{ [`xs${card.flex}`]: true }"
@@ -62,8 +59,8 @@
               </v-btn>
             </v-card-actions>
           </v-card>
-        </v-flex>
-      </v-layout>
+        </v-col>
+      </v-row>
     </v-container>
   </v-card>
 </template>

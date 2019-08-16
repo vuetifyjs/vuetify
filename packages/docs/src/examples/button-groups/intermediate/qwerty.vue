@@ -5,15 +5,14 @@
   >
     <v-textarea
       v-model="value"
-      full-width
       auto-grow
+      full-width
       rows="2"
     ></v-textarea>
-    <v-layout
-      px-2
-      pb-2
-      justify-space-between
-      wrap
+
+    <v-row
+      class="px-2 pb-2 ma-0"
+      justify="space-between"
     >
       <v-btn-toggle
         v-model="formatting"
@@ -29,8 +28,8 @@
           <v-icon>mdi-format-underline</v-icon>
         </v-btn>
         <v-btn color="white">
-          <v-layout column>
-            <v-icon>mdi-format-color-text</v-icon>
+          <v-row justify="center">
+            <v-icon class="cols 12">mdi-format-color-text</v-icon>
             <v-sheet
               tile
               style="margin-top: -4px;"
@@ -38,7 +37,7 @@
               width="26"
               color="purple"
             ></v-sheet>
-          </v-layout>
+          </v-row>
         </v-btn>
       </v-btn-toggle>
       <v-btn-toggle v-model="alignment">
@@ -52,33 +51,31 @@
           <v-icon>mdi-format-align-right</v-icon>
         </v-btn>
       </v-btn-toggle>
-    </v-layout>
+    </v-row>
     <v-sheet
+      class="pa-4 text-center"
       color="grey lighten-3"
       tile
-      class="pa-4 text-center"
     >
-      <v-layout mb-2>
-        <v-flex
+      <v-row
+        class="mb-2"
+        dense
+      >
+        <v-col
           v-for="n in numbers"
           :key="n"
-          caption
-          grey--text
-          text--darken-1
+          class="caption grey--text text--darken-1"
           v-text="n"
-        ></v-flex>
-      </v-layout>
-      <v-layout>
-        <v-flex
+        ></v-col>
+      </v-row>
+      <v-row dense>
+        <v-col
           v-for="l in letters"
           :key="l"
-          title
-          grey--text
-          font-weight-regular
-          text--darken-2
+          class="title grey--text font-weight-regular text--darken-2"
           v-text="l"
-        ></v-flex>
-      </v-layout>
+        ></v-col>
+      </v-row>
     </v-sheet>
   </v-card>
 </template>

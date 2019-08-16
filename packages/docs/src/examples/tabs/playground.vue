@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-layout
-      wrap
-      justify-space-around
+    <v-row
+
+      justify="space-around"
     >
       <v-switch
         v-model="icons"
@@ -30,15 +30,15 @@
         class="mx-2"
         label="Right"
       ></v-switch>
-      <v-flex xs12>
+      <v-col cols="12">
         <v-slider
           v-model="tabs"
           min="0"
           max="10"
           label="Tabs number"
         ></v-slider>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
 
     <v-tabs
       v-model="tab"

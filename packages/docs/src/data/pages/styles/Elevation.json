@@ -10,12 +10,28 @@
       "type": "section",
       "children": [
         {
-          "type": "heading",
-          "lang": "playgroundHeader"
-        },
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
         {
-          "type": "example",
+          "type": "playground",
           "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "simple/dynamic"
+          ]
         }
       ]
     },

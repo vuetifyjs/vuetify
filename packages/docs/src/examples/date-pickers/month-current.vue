@@ -1,12 +1,12 @@
 <template>
-  <v-layout wrap>
-    <v-flex xs12 sm6 class="my-4">
+  <v-row>
+    <v-col cols="12" sm="6" class="my-4">
       <v-date-picker v-model="month1" :show-current="false" type="month"></v-date-picker>
-    </v-flex>
-    <v-flex xs12 sm6 class="my-4">
+    </v-col>
+    <v-col cols="12" sm="6" class="my-4">
       <v-date-picker v-model="month2" type="month" show-current="2013-07"></v-date-picker>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

@@ -1,15 +1,14 @@
 <template>
-  <v-layout>
-    <v-flex xs12 sm6 offset-sm3>
+  <v-row>
+    <v-col cols="12" sm="6" offset-sm="3">
       <v-card>
-        <v-container grid-list-sm fluid>
-          <v-layout wrap>
-            <v-flex
+        <v-container fluid>
+          <v-row>
+            <v-col
               v-for="n in 9"
               :key="n"
-              xs4
-              d-flex
-              child-flex
+              class="d-flex child-flex"
+              cols="4"
             >
               <v-card flat tile class="d-flex">
                 <v-img
@@ -19,21 +18,20 @@
                   class="grey lighten-2"
                 >
                   <template v-slot:placeholder>
-                    <v-layout
-                      fill-height
-                      align-center
-                      justify-center
-                      ma-0
+                    <v-row
+                      class="fill-height ma-0"
+                      align="center"
+                      justify="center"
                     >
                       <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                    </v-layout>
+                    </v-row>
                   </template>
                 </v-img>
               </v-card>
-            </v-flex>
-          </v-layout>
+            </v-col>
+          </v-row>
         </v-container>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
