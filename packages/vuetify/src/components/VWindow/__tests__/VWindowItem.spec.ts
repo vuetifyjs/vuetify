@@ -146,4 +146,36 @@ describe('VWindowItem.ts', () => {
 
     expect(heightChanged).toHaveBeenCalledTimes(1)
   })
+
+  it('should increase and decrease transition count correctly', () => {
+    const wrapper = mount(VWindow, {
+      slots: {
+        default: [VWindowItem, VWindowItem, VWindowItem],
+      },
+    })
+
+    const items = wrapper.vm.items
+    expect(items).toHaveLength(3)
+
+    expect(wrapper.vm.transitionCount).toBe(0)
+    expect(wrapper.vm.isActive).toBeFalsy()
+    items[0].onBeforeTransition()
+    expect(wrapper.vm.transitionCount).toBe(1)
+    expect(wrapper.vm.isActive).toBeTruthy()
+    items[1].onBeforeTransition()
+    expect(wrapper.vm.transitionCount).toBe(2)
+    expect(wrapper.vm.isActive).toBeTruthy()
+    items[0].onTransitionCancelled()
+    expect(wrapper.vm.transitionCount).toBe(1)
+    expect(wrapper.vm.isActive).toBeTruthy()
+    items[2].onBeforeTransition()
+    expect(wrapper.vm.transitionCount).toBe(2)
+    expect(wrapper.vm.isActive).toBeTruthy()
+    items[1].onAfterTransition()
+    expect(wrapper.vm.transitionCount).toBe(1)
+    expect(wrapper.vm.isActive).toBeTruthy()
+    items[2].onAfterTransition()
+    expect(wrapper.vm.transitionCount).toBe(0)
+    expect(wrapper.vm.isActive).toBeFalsy()
+  })
 })
