@@ -1,6 +1,6 @@
 <template>
-  <v-layout>
-    <v-flex xs12 sm6 offset-sm3>
+  <v-row>
+    <v-col cols="12" sm="6" offset-sm="3">
       <v-card>
         <v-toolbar color="white" flat>
           <v-btn icon light>
@@ -17,12 +17,12 @@
         </v-toolbar>
 
         <v-subheader>May</v-subheader>
-        <v-container fluid grid-list-xs>
-          <v-layout wrap>
-            <v-flex
+        <v-container fluid>
+          <v-row>
+            <v-col
               v-for="i in 6"
               :key="i"
-              xs4
+              cols="4"
             >
               <img
                 :src="`https://randomuser.me/api/portraits/men/${i + 20}.jpg`"
@@ -31,17 +31,17 @@
                 height="100%"
                 width="100%"
               >
-            </v-flex>
-          </v-layout>
+            </v-col>
+          </v-row>
         </v-container>
 
         <v-subheader>June</v-subheader>
-        <v-container fluid grid-list-xs>
-          <v-layout wrap>
-            <v-flex
+        <v-container fluid>
+          <v-row>
+            <v-col
               v-for="i in 6"
               :key="i"
-              xs4
+              cols="4"
             >
               <img
                 :src="`https://randomuser.me/api/portraits/women/${i + 5}.jpg`"
@@ -50,12 +50,12 @@
                 height="100%"
                 width="100%"
               >
-            </v-flex>
-          </v-layout>
+            </v-col>
+          </v-row>
         </v-container>
 
         <v-footer class="mt-12"></v-footer>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>

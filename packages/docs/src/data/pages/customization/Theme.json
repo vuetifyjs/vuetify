@@ -119,6 +119,23 @@
               "value": "ts_theme_item"
             }
           ]
+        },
+        {
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "disableSubheader"
+            },
+            {
+              "type": "text",
+              "lang": "disableText1"
+            },
+            {
+              "type": "markup",
+              "value": "js_vuetify_use_disable_theme"
+            }
+          ]
         }
       ]
     },

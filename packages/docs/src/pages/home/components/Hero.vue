@@ -12,7 +12,7 @@
         <v-img
           :class="{
             'mx-5': $vuetify.breakpoint.mdAndUp,
-            'mb-3': $vuetify.breakpoint.smAndDown
+            'mb-6': $vuetify.breakpoint.smAndDown
           }"
           :height="$vuetify.breakpoint.mdAndUp ? 256 : 135"
           :width="$vuetify.breakpoint.mdAndUp ? 256 : 135"

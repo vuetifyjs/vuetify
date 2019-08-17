@@ -1,48 +1,43 @@
 <template>
   <v-card
-    tile
-    max-width="534"
     class="mx-auto"
+    max-width="434"
+    tile
   >
-    <v-layout>
-      <v-flex shrink>
-        <v-avatar
-          class="profile"
-          :size="$vuetify.breakpoint.smAndUp ? 164 : 128"
-          color="grey"
-          tile
+    <v-img
+      height="100%"
+      src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg"
+    >
+      <v-row
+        align="end"
+        class="fill-height"
+      >
+        <v-col
+          align-self="start"
+          class="pa-0"
+          cols="12"
         >
-          <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
-        </v-avatar>
-      </v-flex>
-      <v-flex>
-        <v-img
-          height="100%"
-          src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg"
-        >
-          <v-layout
-            align-end
-            fill-height
+          <v-avatar
+            class="profile"
+            color="grey"
+            size="164"
+            tile
           >
-            <v-list-item
-              dark
-              color="rgba(0, 0, 0, .4)"
-            >
-              <v-list-item-content>
-                <v-list-item-title class="title">Marcus Obrien</v-list-item-title>
-                <v-list-item-subtitle>Network Engineer</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </v-layout>
-        </v-img>
-      </v-flex>
-    </v-layout>
+            <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
+          </v-avatar>
+        </v-col>
+        <v-col class="py-0">
+          <v-list-item
+            color="rgba(0, 0, 0, .4)"
+            dark
+          >
+            <v-list-item-content>
+              <v-list-item-title class="title">Marcus Obrien</v-list-item-title>
+              <v-list-item-subtitle>Network Engineer</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-col>
+      </v-row>
+    </v-img>
   </v-card>
 </template>
-
-<style>
-.profile {
-  position: absolute;
-  z-index: 1;
-}
-</style>

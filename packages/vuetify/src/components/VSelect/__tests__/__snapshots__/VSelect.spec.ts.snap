@@ -40,7 +40,7 @@ exports[`VSelect.ts should only show items if they are in items 1`] = `
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
-             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+             style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
         >
         </div>
       </div>
@@ -87,7 +87,7 @@ exports[`VSelect.ts should only show items if they are in items 2`] = `
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
-             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+             style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
         >
         </div>
       </div>
@@ -137,7 +137,7 @@ exports[`VSelect.ts should only show items if they are in items 3`] = `
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
-             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+             style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
         >
         </div>
       </div>
@@ -190,7 +190,7 @@ exports[`VSelect.ts should only show items if they are in items 4`] = `
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
-             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+             style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
         >
         </div>
       </div>
@@ -237,7 +237,7 @@ exports[`VSelect.ts should render v-select correctly when not using scope slot 1
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
-             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+             style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
         >
         </div>
       </div>
@@ -284,7 +284,7 @@ exports[`VSelect.ts should render v-select correctly when not using v-list-item 
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
-             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+             style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
         >
         </div>
       </div>
@@ -331,7 +331,7 @@ exports[`VSelect.ts should render v-select correctly when using v-list-item in i
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
-             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+             style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
         >
         </div>
       </div>

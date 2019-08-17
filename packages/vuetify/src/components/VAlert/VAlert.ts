@@ -103,6 +103,7 @@ export default mixins(
         props: {
           color,
           icon: true,
+          small: true,
         },
         attrs: {
           'aria-label': this.$vuetify.lang.t(this.closeLabel),

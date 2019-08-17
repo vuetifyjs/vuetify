@@ -14,7 +14,7 @@
             <v-select
               v-model="current"
               :items="value"
-              :class="$vuetify.breakpoint.mdAndUp ? '' : 'mb-3'"
+              :class="$vuetify.breakpoint.mdAndUp ? '' : 'mb-6'"
               label="Available Component(s)"
               outlined
               :menu-props="{offsetY: true, contentClass: 'primary'}"
@@ -43,9 +43,8 @@
         :slider-color="computedTabs.length ? 'primary' : 'transparent'"
       >
         <v-tab
-          v-for="(tab) in computedTabs"
-          :key="`tab-${tab}`"
-          :href="`#${tab}`"
+          v-for="(tab, i) in computedTabs"
+          :key="`tab-${i}`"
           :class="[$vuetify.breakpoint.smAndUp && 'justify-start']"
         >
           {{ tab.replace(/([A-Z])/g, ' $1') }}
@@ -60,7 +59,6 @@
           <v-tab-item
             v-for="(tab, i) in computedTabs"
             :key="`tab-item-${i}`"
-            :value="tab"
             class="overflow-y-auto"
             eager
             style="max-height: 800px;"

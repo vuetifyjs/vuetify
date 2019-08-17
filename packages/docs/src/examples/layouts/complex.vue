@@ -54,14 +54,14 @@
 
     <v-content>
       <v-container
+        class="fill-height"
         fluid
-        fill-height
       >
-        <v-layout
-          justify-center
-          align-center
+        <v-row
+          justify="center"
+          align="center"
         >
-          <v-flex shrink>
+          <v-col class="shrink">
             <v-tooltip right>
               <template v-slot:activator="{ on }">
                 <v-btn
@@ -90,8 +90,8 @@
               </template>
               <span>Codepen</span>
             </v-tooltip>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
 

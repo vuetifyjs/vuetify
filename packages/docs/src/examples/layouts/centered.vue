@@ -2,17 +2,17 @@
   <v-app id="inspire">
     <v-content>
       <v-container
+        class="fill-height"
         fluid
-        fill-height
       >
-        <v-layout
-          align-center
-          justify-center
+        <v-row
+          align="center"
+          justify="center"
         >
-          <v-flex
-            xs12
-            sm8
-            md4
+          <v-col
+            cols="12"
+            sm="8"
+            md="4"
           >
             <v-card class="elevation-12">
               <v-toolbar
@@ -74,8 +74,8 @@
                 <v-btn color="primary">Login</v-btn>
               </v-card-actions>
             </v-card>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
   </v-app>

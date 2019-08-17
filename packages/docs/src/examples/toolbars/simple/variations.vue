@@ -1,11 +1,11 @@
 <template>
-  <v-layout wrap>
-    <v-flex
+  <v-row>
+    <v-col
       v-for="(bar, i) in bars"
       :key="i"
-      xs12
-      sm12
-      md6
+      cols="12"
+      sm="12"
+      md="6"
       class="my-4"
     >
       <v-card color="grey lighten-4" flat height="200px">
@@ -24,8 +24,8 @@
           </v-btn>
         </v-toolbar>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

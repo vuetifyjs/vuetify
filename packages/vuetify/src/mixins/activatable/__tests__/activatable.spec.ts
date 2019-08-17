@@ -14,6 +14,9 @@ import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
 describe('activatable.ts', () => {
   const Mock = Activatable.extend({
+    data: () => ({
+      isActive: false,
+    }),
     render: h => h('div'),
   })
   type Instance = InstanceType<typeof Mock>
@@ -111,5 +114,68 @@ describe('activatable.ts', () => {
     })
 
     expect(`The activator slot must be bound, try '<template v-slot:activator="{ on }"><v-btn v-on="on">'`).toHaveBeenWarned()
+  })
+
+  it('should bind listeners to custom activator', async () => {
+    const el = document.createElement('button')
+    el.id = 'foobar'
+    document.body.appendChild(el)
+
+    const wrapper = mountFunction({
+      propsData: {
+        activator: '#foobar',
+      },
+    })
+
+    const activatorElement = wrapper.vm.activatorElement as any
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isActive).toBe(false)
+    expect(el).toEqual(activatorElement)
+    activatorElement.dispatchEvent(new Event('click'))
+    expect(wrapper.vm.isActive).toBe(true)
+
+    wrapper.setProps({ openOnHover: true, value: false })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isActive).toBe(false)
+    activatorElement.dispatchEvent(new Event('mouseenter'))
+
+    await new Promise(resolve => setTimeout(resolve, wrapper.vm.openDelay))
+
+    expect(wrapper.vm.isActive).toBe(true)
+
+    activatorElement.dispatchEvent(new Event('mouseleave'))
+    await new Promise(resolve => setTimeout(resolve, wrapper.vm.leaveDelay))
+
+    expect(wrapper.vm.isActive).toBe(false)
+
+    document.body.removeChild(el)
+  })
+
+  it('should remove listeners on custom activator', async () => {
+    const el = document.createElement('button')
+    el.id = 'foobar'
+    document.body.appendChild(el)
+
+    const wrapper = mountFunction({
+      propsData: {
+        activator: '#foobar',
+      },
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.listeners).not.toEqual({})
+
+    wrapper.destroy()
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.listeners).toEqual({})
+
+    document.body.removeChild(el)
   })
 })

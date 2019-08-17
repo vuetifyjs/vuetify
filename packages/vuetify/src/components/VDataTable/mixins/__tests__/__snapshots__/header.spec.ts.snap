@@ -68,7 +68,7 @@ exports[`VDataTable/header.ts should generate select scoped slot 3`] = `
 
 exports[`VDataTable/header.ts should generate sort icon 1`] = `
 <i aria-hidden="true"
-   class="v-icon notranslate mdi mdi-sort theme--light"
+   class="v-icon notranslate v-data-table-header__icon mdi mdi-sort theme--light"
    style="font-size: 18px;"
 >
 </i>

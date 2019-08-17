@@ -14,7 +14,7 @@
   "optionHeader": "## Options",
   "optionText1": "Vuetify generates theme styles at run-time for SPA's and server side for SSR applications. The generated styles will be placed in a `<style>` tag with the **id** of **vuetify-theme-stylesheet**.",
   "optionHeader2": "### Minification",
-  "optionText3": "For SSR applications, you can pass a callback function to **$vuetify.options.minifyTheme** to reduce the initial page size. When using this option, it is recommended to also use **themeCache**.",
+  "optionText3": "For SSR applications, you can pass a callback function to **$vuetify.theme.options.minifyTheme** to reduce the initial page size. When using this option, it is recommended to also use **themeCache**.",
   "optionHeader3": "### Caching",
   "optionText4": "A custom caching object can be provided (works in tandem with **minifyTheme**) to increase SSR efficiency. The object must contain a **get** and a **set** method. Below is an example using [LRU cache](https://www.npmjs.com/package/lru-cache).",
   "optionHeader4": "### Custom Properties",
@@ -26,5 +26,7 @@
   "variantsSubheader": "### Custom theme variants",
   "variantsText1": "While Vuetify automatically generates _lighten_ and _darken_ variants for theme colors, you may want to control this yourself. Simply pass a theme object that contains the variants that you wish to modify. Anything not provided will still be generated for you.",
   "variantsText2": "You can now import your custom theme object and apply it to Vuetify",
-  "variantsText3": "Below is a full list of the overwritable keys on the theme object:"
+  "variantsText3": "Below is a full list of the overwritable keys on the theme object:",
+  "disableSubheader": "### Disable theme",
+  "disableText1": "You can disable theme functionality by using the **disable** property with a value of **true**. This will prevent the creation of the Vuetify stylesheet."
 }

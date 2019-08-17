@@ -139,9 +139,7 @@ export default BaseItemGroup.extend({
         staticClass: `v-window__${direction}`,
       }, [
         this.$createElement(VBtn, {
-          props: {
-            icon: true,
-          },
+          props: { icon: true },
           attrs: {
             'aria-label': this.$vuetify.lang.t(`$vuetify.carousel.${direction}`),
           },
@@ -153,7 +151,7 @@ export default BaseItemGroup.extend({
           },
         }, [
           this.$createElement(VIcon, {
-            props: { size: 40 },
+            props: { large: true },
           }, icon),
         ]),
       ])

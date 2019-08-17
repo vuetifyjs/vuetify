@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap justify-space-around>
+  <v-row justify="space-around">
     <v-date-picker
       v-model="picker"
       type="month"
@@ -10,7 +10,7 @@
       type="month"
       locale="sv-se"
     ></v-date-picker>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

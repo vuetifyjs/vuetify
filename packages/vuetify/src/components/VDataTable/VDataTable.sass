@@ -6,17 +6,11 @@
 +theme(v-data-table) using ($material)
   tbody
     tr
-      &:hover:not(.v-data-table__expand-row):not(.v-data-table__empty-wrapper)
+      &:hover:not(.v-data-table__expand-row)
         background: map-deep-get($material, 'table', 'hover')
 
-      &.expanded
-        border-bottom: 0
-
-        &.expanded__row
+      &.expanded.expanded__row
           background: map-deep-get($material, 'table', 'active')
-
-        &.expanded__content
-          box-shadow: inset 0px 4px 8px -5px rgba(50, 50, 50, 0.75), inset 0px -4px 8px -5px rgba(50, 50, 50, 0.75)
 
   .v-row-group
     &__header, &__summary
@@ -27,7 +21,18 @@
 
   .v-data-table__empty-wrapper
     color: map-deep-get($material, 'text', 'disabled')
-    text-align: center
+
+.v-data-table
+  tbody
+    tr
+      &.expanded
+        border-bottom: 0
+
+        &.expanded__content
+          box-shadow: inset 0px 4px 8px -5px rgba(50, 50, 50, 0.75), inset 0px -4px 8px -5px rgba(50, 50, 50, 0.75)
+
+.v-data-table__empty-wrapper
+  text-align: center
 
 .v-data-table__mobile-row
   display: block

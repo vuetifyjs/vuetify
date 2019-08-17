@@ -24,19 +24,17 @@
 
     <v-content>
       <v-container fluid>
-        <v-layout
-          align-center
-          justify-center
+        <v-row
+          align="center"
+          justify="center"
         >
-          <v-flex xs10>
+          <v-col cols="10">
             <v-card>
               <v-card-text>
-                <v-layout
-                  wrap
-                >
-                  <v-flex
-                    xs12
-                    md6
+                <v-row>
+                  <v-col
+                    cols="12"
+                    md="6"
                   >
                     <span>Scheme</span>
                     <v-switch
@@ -44,10 +42,10 @@
                       primary
                       label="Dark"
                     ></v-switch>
-                  </v-flex>
-                  <v-flex
-                    xs12
-                    md6
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    md="6"
                   >
                     <span>Drawer</span>
                     <v-radio-group
@@ -77,10 +75,10 @@
                       label="Mini"
                       primary
                     ></v-switch>
-                  </v-flex>
-                  <v-flex
-                    xs12
-                    md6
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    md="6"
                   >
                     <span>Footer</span>
                     <v-switch
@@ -88,8 +86,8 @@
                       label="Inset"
                       primary
                     ></v-switch>
-                  </v-flex>
-                </v-layout>
+                  </v-col>
+                </v-row>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -100,8 +98,8 @@
                 >Submit</v-btn>
               </v-card-actions>
             </v-card>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
 

@@ -166,7 +166,7 @@ exports[`VFileInput.ts should display total size in counter 1`] = `
         </span>
       </div>
       <div class="v-counter theme--light">
-        2 files (3.1 MB in total)
+        0 files (3.1 MB in total)
       </div>
     </div>
   </div>
@@ -214,7 +214,7 @@ exports[`VFileInput.ts should display total size in counter 2`] = `
         </span>
       </div>
       <div class="v-counter theme--light">
-        2 files (3.1 MB in total)
+        0 files (3.1 MB in total)
       </div>
     </div>
   </div>
@@ -354,7 +354,7 @@ exports[`VFileInput.ts should render counter 1`] = `
         </span>
       </div>
       <div class="v-counter theme--light">
-        1 files
+        0 files
       </div>
     </div>
   </div>

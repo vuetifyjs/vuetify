@@ -31,7 +31,7 @@ exports[`VOverflowBtn.js should use default autocomplete selections 1`] = `
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light v-autocomplete__content"
-             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+             style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
         >
         </div>
       </div>
@@ -80,7 +80,7 @@ exports[`VOverflowBtn.js should use default autocomplete selections 2`] = `
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light v-autocomplete__content"
-             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+             style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
         >
         </div>
       </div>

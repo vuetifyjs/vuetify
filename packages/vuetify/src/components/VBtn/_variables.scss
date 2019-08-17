@@ -1,7 +1,6 @@
 $btn-active-opacity: 0.18 !default;
 $btn-border-radius: 4px !default;
 $btn-focus-opacity: 0.24 !default;
-$btn-font-size: .875rem !default;
 $btn-font-weight: 500 !default;
 $btn-hover-opacity: 0.08 !default;
 $btn-letter-spacing: .0892857143em !default;
@@ -15,6 +14,13 @@ $btn-sizes: (
   'default': 36,
   'large': 44,
   'x-large': 52
+) !default;
+$btn-font-sizes: (
+  'x-small': .625rem,
+  'small': .75rem,
+  'default': .875rem,
+  'large': 1rem,
+  'x-large': 1.125rem
 ) !default;
 $fab-sizes: (
   'x-small': 32,
