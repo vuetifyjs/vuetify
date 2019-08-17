@@ -1,7 +1,7 @@
 <template>
   <v-layout>
     <div>
-      Edit this <span v-html="contributionPageGithub" /> | <span v-html="contributionLanguageGithub" /> on Github
+      Edit this <span v-html="contributionPageGithub" /> on Github OR <span @click="changeLanguageEoUy" v-html="contributionLanguageCrowdin " />
     </div>
     <v-spacer class="hidden-sm-and-down" />
     <div class="hidden-sm-and-down">
@@ -38,15 +38,12 @@
       contributionGuide () {
         return this.parseLink('', 'Contribution Guide', `/${this.params.lang}/getting-started/contributing`)
       },
-      contributionLanguageGithub () {
-        return this.parseLink('', 'language', this.contributionLanguageLink)
+      contributionLanguageCrowdin () {
+        const link = `./${this.params.namespace}/${this.params.page}`
+        return this.parseLink('', 'language in crowdin', link)
       },
       contributionPageGithub () {
         return this.parseLink('', 'page', this.contributionPageLink)
-      },
-      contributionLanguageLink () {
-        const file = `${this.params.namespace}/${this.page}.json`
-        return `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/lang/${this.params.lang}/${file}`
       },
       contributionPageLink () {
         const file = `${this.params.namespace}/${this.page}.json`
@@ -56,6 +53,17 @@
 
     methods: {
       parseLink,
+      changeLanguageEoUy () {
+        const lang = 'eo-UY';
+        // If we're switching in or out of translating
+        // then we need to force a reload to make sure
+        // that crowdin script is loaded (or unloaded)
+        setTimeout(() => {
+          this.$router.go()
+        }, 1000)
+        this.$router.replace({ params: { lang } })
+        document.cookie = `currentLanguage=${lang};path=/;max-age=${60 * 60 * 24 * 7}` // expires in 7 days
+      },
     },
   }
 </script>
