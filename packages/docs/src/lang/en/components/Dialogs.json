@@ -50,7 +50,7 @@
     "fullWidth": "Forces the dialog to expand 100% of available width.",
     "fullscreen": "Changes layout for fullscreen display.",
     "hideOverlay": "Hides the display of the overlay.",
-    "internalActivator": "Designates whether the supplied **activator** prop is inside the component.",
+    "internalActivator": "Detaches the menu content inside of the component as opposed to the document.",
     "eager": "Mixins.Bootable.props.eager",
     "light": "Mixins.Themeable.props.light",
     "maxWidth": "Mixins.Measurable.props.maxWidth",
@@ -58,6 +58,7 @@
     "openOnHover": "Designates whether component should activate when its activator is hovered.",
     "origin": "Mixins.Transitionable.props.origin",
     "persistent": "Clicking outside of the element will not deactivate it.",
+    "retainFocus": "Tab focus will return to the first child of the dialog by default. Disable this when using external tools that require focus such as TinyMCE or vue-clipboard.",
     "scrollable": "When set to true, expects a `v-card` and a `v-card-text` component with a designated height. For more information, check out the [scrollabe example](/components/dialogs#scrollable).",
     "transition": "Mixins.Transitionable.props.transition",
     "width": "Mixins.Measurable.props.width"

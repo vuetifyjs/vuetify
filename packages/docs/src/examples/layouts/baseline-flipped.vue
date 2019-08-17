@@ -2,9 +2,8 @@
   <v-app id="inspire">
     <v-navigation-drawer
       v-model="drawer"
-      fixed
-      right
       app
+      right
     >
       <v-list dense>
         <v-list-item @click="">
@@ -25,50 +24,79 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar color="cyan" dark fixed app>
+
+    <v-app-bar
+      app
+      color="cyan"
+      dark
+    >
       <v-spacer></v-spacer>
       <v-toolbar-title>Application</v-toolbar-title>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-    </v-toolbar>
+    </v-app-bar>
+
     <v-content>
-      <v-container fluid fill-height>
-        <v-layout justify-center align-center>
-          <v-flex text-xs-center>
+      <v-container
+        class="fill-height"
+        fluid
+      >
+        <v-row
+          justify="center"
+          align="center"
+        >
+          <v-col class="text-center">
             <v-tooltip left>
               <template v-slot:activator="{ on }">
-                <v-btn :href="source" icon large target="_blank" v-on="on">
-                  <v-icon large>code</v-icon>
+                <v-btn
+                  :href="source"
+                  icon
+                  large
+                  target="_blank"
+                  v-on="on"
+                >
+                  <v-icon large>mdi-code-tags</v-icon>
                 </v-btn>
               </template>
               <span>Source</span>
             </v-tooltip>
+
             <v-tooltip right>
               <template v-slot:activator="{ on }">
-                <v-btn icon large href="https://codepen.io/johnjleider/pen/BYqXgr" target="_blank" v-on="on">
+                <v-btn
+                  icon
+                  large
+                  href="https://codepen.io/johnjleider/pen/WVbPgz"
+                  target="_blank"
+                  v-on="on"
+                >
                   <v-icon large>mdi-codepen</v-icon>
                 </v-btn>
               </template>
               <span>Codepen</span>
             </v-tooltip>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
-    <v-footer color="cyan" app>
+
+    <v-footer
+      color="cyan"
+      app
+    >
       <v-spacer></v-spacer>
-      <span class="white--text">&copy; 2017</span>
+      <span class="white--text">&copy; 2019</span>
     </v-footer>
   </v-app>
 </template>
 
 <script>
   export default {
-    data: () => ({
-      drawer: null,
-    }),
 
     props: {
       source: String,
     },
+    data: () => ({
+      drawer: null,
+    }),
   }
 </script>

@@ -1,7 +1,7 @@
 <template>
-  <v-layout justify-center>
+  <v-row justify="center">
     <v-time-picker v-model="picker"></v-time-picker>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

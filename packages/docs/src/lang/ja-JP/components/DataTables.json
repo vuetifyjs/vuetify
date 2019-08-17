@@ -1,14 +1,11 @@
 {
-  "header": "Data table",
   "headerText": "`v-data-table` コンポーネントは表形式のデータを表示するために使われます。ソート、検索、ページネーション、インライン編集、ヘッダーツールチップ、行の選択 などの機能を含んでいます。",
   "examples": {
     "select": {
-      "header": "選択可能な行",
-      "desc": "選択可能な行を使用することで、特定の行及びすべての行に対してアクションを実行することができます。"
+      "header": "選択可能な行"
     },
     "expand": {
-      "header": "スロット: expand",
-      "desc": "`v-data-table` コンポーネントは `expand` スロットを使用して行の折りたたみを可能にします。`expand` prop を使用して他の行をクリックした際に行を閉じる動作を止めることができます。"
+      "header": "スロット: expand"
     },
     "headers": {
       "header": "スロット: items と headers",
@@ -17,10 +14,6 @@
     "progress": {
       "header": "スロット: progress",
       "desc": "`progress` スロットは、Data Table のローディング状態の表示をカスタマイズする際に使用します。デフォルトでは `indeterminate` が設定された `v-progress-linear` が使用されます。"
-    },
-    "footer": {
-      "header": "スロット: footer",
-      "desc": "`footer` スロットは、例えばカラムのフィルタや検索など、テーブルに拡張機能を持たせたい場合に使用します。"
     },
     "search": {
       "header": "no-results スロットを使用した検索",
@@ -35,14 +28,13 @@
       "desc": "`pagination` prop を使用することで外部からソートも制御できます。 使用するには `.sync` modifier を適用する必要があります。 prop でデフォルトでソートに使用するカラムを設定することもできます。"
     },
     "server": {
-      "header": "サーバーサイドでのページネーションとソート",
-      "desc": "バックエンドから情報を読み込んでおり、結果を表示する前にページネーションとソートを適用する必要がある場合には、 `total-items` prop を使用することができます。 この prop を使用すると、標準のページネーションとソートは無効化されるため、変化を検知するには代わりに `pagination` prop を使用する必要があります。 `loading` prop を使用するとデータを取得している間にプログレスバーを表示することができます。"
+      "header": "サーバーサイドでのページネーションとソート"
     },
     "headerless": {
       "header": "ヘッダー無しテーブル",
       "desc": "`hide-headers` prop を設定するとヘッダーなしのテーブルを作成することができます。"
     },
-    "editdialog": {
+    "edit-dialog": {
       "header": "インライン編集",
       "desc": "`v-edit-dialog` コンポーネントは Data table 内部でインライン編集する際に使用します。"
     },

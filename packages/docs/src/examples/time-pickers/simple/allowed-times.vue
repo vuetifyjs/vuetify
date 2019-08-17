@@ -1,10 +1,10 @@
 <template>
-  <v-layout row wrap justify-space-around>
+  <v-row justify="space-around">
     <v-time-picker
       v-model="time"
       :allowed-hours="allowedHours"
       :allowed-minutes="allowedMinutes"
-      class="mt-3"
+      class="mt-4"
       format="24hr"
       scrollable
       min="9:30"
@@ -13,10 +13,10 @@
     <v-time-picker
       v-model="timeStep"
       :allowed-minutes="allowedStep"
-      class="mt-3"
+      class="mt-4"
       format="24hr"
     ></v-time-picker>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

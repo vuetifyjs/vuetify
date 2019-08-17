@@ -12,6 +12,7 @@ export default {
       sortAscending: ': Ordenado crescente. Ative para ordenar decrescente.',
       sortNone: ': Não ordenado. Ative para ordenar crescente.',
     },
+    sortBy: 'Sort by',
   },
   dataFooter: {
     itemsPerPageText: 'Itens por página:',
@@ -31,5 +32,9 @@ export default {
   },
   calendar: {
     moreEvents: 'Mais {0}',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
   },
 }

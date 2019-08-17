@@ -55,27 +55,60 @@
           "type": "alert",
           "lang": "specAlert",
           "value": "info"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "heading",
-          "lang": "efficiencyHeader"
         },
         {
-          "type": "text",
-          "lang": "efficiencyText1"
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "efficiencyHeader"
+            },
+            {
+              "type": "text",
+              "lang": "efficiencyText1"
+            },
+            {
+              "type": "text",
+              "lang": "efficiencyText2"
+            },
+            {
+              "type": "markup",
+              "value": "js_testing_efficiency"
+            }
+          ]
         },
         {
-          "type": "text",
-          "lang": "efficiencyText2"
-        },
-        {
-          "type": "markup",
-          "value": "js_testing_efficiency"
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "mockHeader"
+            },
+            {
+              "type": "text",
+              "lang": "mockText1"
+            },
+            {
+              "type": "markup",
+              "value": "js_testing_mock_vuetify"
+            },
+            {
+              "type": "text",
+              "lang": "mockText2"
+            },
+            {
+              "type": "markup",
+              "value": "js_testing_mock_vuetify_services"
+            },
+            {
+              "type": "text",
+              "lang": "mockText3"
+            },
+            {
+              "type": "text",
+              "lang": "mockList"
+            }
+          ]
         }
       ]
     },

@@ -14,14 +14,14 @@
           color="transparent"
           height="200"
         >
-          <v-layout
-            align-center
-            justify-center
-            fill-height
+          <v-row
+            class="fill-height"
+            align="center"
+            justify="center"
             tag="v-card-text"
           >
             Transparent themed, for background-imaged slides. Background color black added for demonstration purposes.
-          </v-layout>
+          </v-row>
         </v-card>
       </v-window-item>
     </v-window>
@@ -35,7 +35,7 @@
       </v-btn>
       <v-item-group
         v-model="onboarding"
-        class="text-xs-center"
+        class="text-center"
         mandatory
       >
         <v-item

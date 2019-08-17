@@ -24,11 +24,15 @@ export default mixins(header).extend({
         scope: 'col',
         'aria-label': header.text || '',
         'aria-sort': 'none',
+      }
+
+      const styles = {
         width: header.width,
+        minWidth: header.width,
       }
 
       const classes = [
-        `text-xs-${header.align || 'start'}`,
+        `text-${header.align || 'start'}`,
         ...wrapInArray(header.class),
       ]
 
@@ -77,6 +81,7 @@ export default mixins(header).extend({
       return this.$createElement('th', {
         attrs,
         class: classes,
+        style: styles,
         on: listeners,
       }, children)
     },

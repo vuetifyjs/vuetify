@@ -31,7 +31,11 @@
 
   &.v-app-bar--is-scrolled
     .v-toolbar__title
-      padding-bottom: $app-bar-scrolled-title-padding-bottom
+      padding-top: $app-bar-scrolled-title-padding-bottom
+
+    &:not(.v-app-bar--bottom)
+      .v-toolbar__title
+        padding-bottom: $app-bar-scrolled-title-padding-bottom
 
 .v-app-bar.v-app-bar--shrink-on-scroll
   .v-toolbar__title

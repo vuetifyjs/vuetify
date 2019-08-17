@@ -54,6 +54,10 @@ export default baseMixins.extend({
       default: 'center center',
     },
     persistent: Boolean,
+    retainFocus: {
+      type: Boolean,
+      default: true,
+    },
     scrollable: Boolean,
     transition: {
       type: [String, Boolean],
@@ -150,16 +154,20 @@ export default baseMixins.extend({
       // If the dialog content contains
       // the click event, or if the
       // dialog is not active
-      if (!this.isActive || this.$refs.content.contains(target)) return false
+      if (this._isDestroyed || !this.isActive || this.$refs.content.contains(target)) return false
 
       // If we made it here, the click is outside
       // and is active. If persistent, and the
       // click is on the overlay, animate
       this.$emit('click:outside')
 
-      if (this.persistent) {
-        if (!this.noClickAnimation &&
-          this.overlay === target
+      if (this.persistent && this.overlay) {
+        if (
+          !this.noClickAnimation &&
+          (
+            this.overlay.$el === target ||
+            this.overlay.$el.contains(target)
+          )
         ) this.animateClick()
 
         return false
@@ -200,7 +208,7 @@ export default baseMixins.extend({
       this.$emit('keydown', e)
     },
     onFocusin (e: Event) {
-      if (!e) return
+      if (!e || !this.retainFocus) return
 
       const target = e.target as HTMLElement
 
@@ -226,7 +234,7 @@ export default baseMixins.extend({
   render (h): VNode {
     const children = []
     const data = {
-      'class': this.classes,
+      class: this.classes,
       ref: 'dialog',
       directives: [
         {
@@ -265,7 +273,7 @@ export default baseMixins.extend({
     }
 
     children.push(h('div', {
-      'class': this.contentClasses,
+      class: this.contentClasses,
       attrs: {
         role: 'document',
         tabindex: 0,

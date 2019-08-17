@@ -13,8 +13,8 @@
       "header": "### Limit",
       "desc": "You can also manually set the maximum number of visible page buttons with the `total-visible` prop."
     },
-    "round": {
-      "header": "### Round",
+    "circle": {
+      "header": "### Circle",
       "desc": "The `circle` prop gives you an alternate style for pagination buttons."
     },
     "icons": {
@@ -33,7 +33,7 @@
   "props": {
     "circle": "Shape pagination elements as circles",
     "disabled": "Disables component",
-    "length": "The length of the paginator",
+    "length": "The length of the pagination component",
     "nextIcon": "Specify the icon to use for the next icon",
     "prevIcon": "Specify the icon to use for the prev icon",
     "totalVisible": "Specify the max total visible pagination numbers",

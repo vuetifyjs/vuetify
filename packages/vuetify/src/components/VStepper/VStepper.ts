@@ -38,8 +38,8 @@ export default baseMixins.extend({
   },
 
   props: {
-    nonLinear: Boolean,
     altLabels: Boolean,
+    nonLinear: Boolean,
     vertical: Boolean,
   },
 

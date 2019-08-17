@@ -1,8 +1,8 @@
 <template>
-  <v-layout row wrap>
-    <v-flex
-      xs12
-      sm6
+  <v-row>
+    <v-col
+      cols="12"
+      sm="6"
     >
       <v-hover
         v-slot:default="{ hover }"
@@ -14,16 +14,16 @@
           height="350"
           max-width="350"
         >
-          <v-card-text class="font-weight-medium mt-5 text-xs-center subtitle-1">
+          <v-card-text class="font-weight-medium mt-12 text-center subtitle-1">
             Open Delay (Mouse enter)
           </v-card-text>
         </v-card>
       </v-hover>
-    </v-flex>
+    </v-col>
 
-    <v-flex
-      xs12
-      sm6
+    <v-col
+      cols="12"
+      sm="6"
     >
       <v-hover
         v-slot:default="{ hover }"
@@ -35,11 +35,11 @@
           height="350"
           max-width="350"
         >
-          <v-card-text class="font-weight-medium mt-5 text-xs-center subtitle-1">
+          <v-card-text class="font-weight-medium mt-12 text-center subtitle-1">
             Close Delay (Mouse leave)
           </v-card-text>
         </v-card>
       </v-hover>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>

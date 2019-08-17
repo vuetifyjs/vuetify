@@ -12,6 +12,7 @@ export default {
       sortAscending: ': Упорядочено во восходящей. Активируйте для упорядочивания по ниcходящей.',
       sortNone: ': Не упорядочено. Активируйте для упорядочивания по восходящей.',
     },
+    sortBy: 'Сортировать по',
   },
   dataFooter: {
     itemsPerPageText: 'Записей на странице:',
@@ -31,5 +32,9 @@ export default {
   },
   calendar: {
     moreEvents: 'Еще {0}',
+  },
+  fileInput: {
+    counter: 'Файлов: {0}',
+    counterSize: 'Файлов: {0} (всего {1})',
   },
 }

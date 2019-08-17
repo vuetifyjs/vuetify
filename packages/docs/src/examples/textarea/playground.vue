@@ -1,12 +1,9 @@
 <template>
-  <v-container
-    fluid
-    grid-list-xl
-  >
-    <v-layout wrap>
-      <v-flex
-        sm6
-        xs12
+  <v-container fluid>
+    <v-row>
+      <v-col
+        sm="6"
+        cols="12"
       >
         <v-text-field
           v-model="label"
@@ -20,12 +17,13 @@
           v-model="placeholder"
           label="Placeholder"
         ></v-text-field>
-      </v-flex>
+      </v-col>
 
-      <v-flex xs12 sm6>
+      <v-col cols="12" sm="6">
         <v-text-field
           v-model="rowHeight"
-          class="mx-3"
+          :disabled="!autoGrow"
+          class="mx-4"
           label="Row height - px"
           max="500"
           min="1"
@@ -35,7 +33,7 @@
         ></v-text-field>
         <v-text-field
           v-model="rows"
-          class="mx-3"
+          class="mx-4"
           label="Rows"
           max="50"
           min="1"
@@ -43,11 +41,11 @@
           style="width: 125px"
           type="number"
         ></v-text-field>
-      </v-flex>
+      </v-col>
 
-      <v-flex xs12></v-flex>
+      <v-col cols="12"></v-col>
 
-      <v-flex xs12 md6>
+      <v-col cols="12" md="6">
         <v-switch
           v-model="autoGrow"
           class="ma-1"
@@ -105,15 +103,15 @@
           class="ma-1"
           label="Solo"
         ></v-switch>
-      </v-flex>
+      </v-col>
 
-      <v-flex
-        xs12
-        md6
+      <v-col
+        cols="12"
+        md="6"
       >
         <v-sheet
           elevation="12"
-          class="pa-5"
+          class="pa-12"
         >
           <v-textarea
             v-model="model"
@@ -136,12 +134,12 @@
             :single-line="singleLine"
             :solo="solo"
           ></v-textarea>
-          <div class="mt-5 text-xs-center">
+          <div class="mt-12 text-center">
             Value: {{ model }}
           </div>
         </v-sheet>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -150,7 +148,7 @@
     data: () => ({
       autoGrow: false,
       autofocus: true,
-      clearable: '',
+      clearable: false,
       counter: 0,
       filled: false,
       flat: false,

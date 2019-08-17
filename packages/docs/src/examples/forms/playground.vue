@@ -1,9 +1,9 @@
 <template>
-  <v-layout column align-center>
-    <v-layout row wrap justify-space-around>
-      <v-switch v-model="valid" class="ma-3" label="Valid" readonly></v-switch>
-      <v-switch v-model="lazy" class="ma-3" label="Lazy"></v-switch>
-    </v-layout>
+  <v-row align="center">
+    <v-row justify="space-around">
+      <v-switch v-model="valid" class="ma-4" label="Valid" readonly></v-switch>
+      <v-switch v-model="lazy" class="ma-4" label="Lazy"></v-switch>
+    </v-row>
     <v-form
       ref="form"
       v-model="valid"
@@ -42,7 +42,7 @@
       <v-btn
         :disabled="!valid"
         color="success"
-        class="mr-3"
+        class="mr-4"
         @click="validate"
       >
         Validate
@@ -50,7 +50,7 @@
 
       <v-btn
         color="error"
-        class="mr-3"
+        class="mr-4"
         @click="reset"
       >
         Reset Form
@@ -63,7 +63,7 @@
         Reset Validation
       </v-btn>
     </v-form>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

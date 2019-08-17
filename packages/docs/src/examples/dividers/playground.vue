@@ -1,5 +1,5 @@
 <template>
-  <div class="grey lighten-5 pa-3">
+  <div class="grey lighten-5 pa-4">
     <v-toolbar
       v-if="variant === 'vertical'"
       color="gray"
@@ -7,7 +7,7 @@
       <v-toolbar-title>Title</v-toolbar-title>
 
       <v-divider
-        class="mx-3"
+        class="mx-4"
         :inset="inset"
         vertical
       ></v-divider>
@@ -37,8 +37,8 @@
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
     </v-toolbar>
 
-    <v-layout v-else row>
-      <v-flex xs12 sm6 offset-sm3>
+    <v-row v-else>
+      <v-col cols="12" sm="6" offset-sm="3">
         <v-card>
           <v-list>
             <v-list-item @click="">
@@ -104,16 +104,16 @@
             </v-list-item>
           </v-list>
         </v-card>
-      </v-flex>
-    </v-layout>
-    <v-layout
-      class="mt-5"
-      align-center
-      justify-center
+      </v-col>
+    </v-row>
+    <v-row
+      class="mt-12"
+      align="center"
+      justify="center"
     >
-      <v-flex
-        xs12
-        md8
+      <v-col
+        cols="12"
+        md="8"
       >
         <v-select
           v-model="variant"
@@ -130,8 +130,8 @@
             light
           ></v-checkbox>
         </template>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </div>
 </template>
 

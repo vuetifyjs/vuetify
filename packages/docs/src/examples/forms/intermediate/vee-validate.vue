@@ -37,7 +37,7 @@
       required
     ></v-checkbox>
 
-    <v-btn class="mr-3" @click="submit">submit</v-btn>
+    <v-btn class="mr-4" @click="submit">submit</v-btn>
     <v-btn @click="clear">clear</v-btn>
   </form>
 </template>
@@ -103,6 +103,6 @@
 
 <codepen-resources lang="json">
   {
-    "js": ["https://cdn.jsdelivr.net/npm/vee-validate@latest/dist/vee-validate.js"]
+    "js": ["https://cdn.jsdelivr.net/npm/vee-validate@2.x/dist/vee-validate.js"]
   }
 </codepen-resources>

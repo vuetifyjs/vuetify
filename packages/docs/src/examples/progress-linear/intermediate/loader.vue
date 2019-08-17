@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="mx-auto mt-4"
+    class="mx-auto mt-6"
     width="344"
   >
     <v-system-bar>
@@ -37,15 +37,15 @@
     </v-toolbar>
 
     <v-container style="height: 282px;">
-      <v-layout
-        align-center
-        justify-center
-        fill-height
+      <v-row
+        class="fill-height"
+        align="center"
+        justify="center"
       >
         <v-scale-transition>
           <div
             v-if="!loading"
-            class="text-xs-center"
+            class="text-center"
           >
             <v-btn
               color="primary"
@@ -53,7 +53,7 @@
             >Start loading</v-btn>
           </div>
         </v-scale-transition>
-      </v-layout>
+      </v-row>
     </v-container>
   </v-card>
 </template>

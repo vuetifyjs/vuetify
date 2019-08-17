@@ -94,7 +94,6 @@ export function createRouter () {
     router,
     autoTracking: {
       page: process.env.NODE_ENV !== 'development',
-      pageviewOnLoad: false,
     },
     debug: process.env.DEBUG ? {
       enabled: true,

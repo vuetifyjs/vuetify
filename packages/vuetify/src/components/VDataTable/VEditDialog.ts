@@ -74,7 +74,7 @@ export default mixins(Returnable, Themeable).extend({
     },
     genActions (): VNode {
       return this.$createElement('div', {
-        'class': 'v-small-dialog__actions',
+        class: 'v-small-dialog__actions',
       }, [
         this.genButton(this.cancel, this.cancelText),
         this.genButton(() => {
@@ -122,10 +122,14 @@ export default mixins(Returnable, Themeable).extend({
       },
       scopedSlots: {
         activator: ({ on }) => {
-          return h('span', {
+          return h('div', {
             staticClass: 'v-small-dialog__activator',
             on,
-          }, this.$slots.default)
+          }, [
+            h('span', {
+              staticClass: 'v-small-dialog__activator__content',
+            }, this.$slots.default),
+          ])
         },
       },
     }, [

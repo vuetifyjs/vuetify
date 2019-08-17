@@ -67,7 +67,6 @@
       { "text": "expansionPanels", "to": "expansion-panels" },
       { "text": "footer", "to": "footer" },
       { "text": "grid", "to": "grids" },
-      { "text": "gridLists", "to": "grid-lists" },
       {
         "group": "components",
         "text": "groups",
@@ -89,6 +88,7 @@
         "children": [
           { "text": "autocompletes", "to": "autocompletes" },
           { "text": "combobox", "to": "combobox" },
+          { "new": true, "text": "fileInputs", "to": "file-inputs" },
           { "text": "forms", "to": "forms" },
           { "text": "inputs", "to": "inputs" },
           { "text": "overflowButtons", "to": "overflow-btns" },
@@ -132,9 +132,9 @@
         "group": "components",
         "text": "tables",
         "children": [
-          { "text": "dataIterators", "to": "data-iterators" },
+          { "updated": true, "text": "dataIterators", "to": "data-iterators" },
           { "new": true, "text": "simpleTables", "to": "simple-tables" },
-          { "text": "dataTables", "to": "data-tables" }
+          { "updated": true, "text": "dataTables", "to": "data-tables" }
         ]
       },
       { "text": "tabs", "to": "tabs" },
@@ -152,8 +152,10 @@
       { "text": "content", "to": "content" },
       { "text": "display", "to": "display" },
       { "text": "elevation", "to": "elevation" },
+      { "text": "flex", "to": "flex" },
+      { "text": "float", "to": "float" },
       { "text": "spacing", "to": "spacing" },
-      { "text": "textAlignment", "to": "alignment" },
+      { "text": "text", "to": "text" },
       { "text": "typography", "to": "typography" },
       { "text": "transitions", "to": "transitions" },
       { "text": "scroll", "to": "scroll" }

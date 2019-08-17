@@ -193,8 +193,8 @@
           This is an error alert.
         </v-alert>
       </core-section>
-      <!-- Dense outline -->
-      <core-title>Dense outline</core-title>
+      <!-- Dense outlined -->
+      <core-title>Dense outlined</core-title>
       <core-section>
         <v-alert
           type="success"
@@ -298,8 +298,8 @@
           This is an error alert.
         </v-alert>
       </core-section>
-      <!-- Prominent outline -->
-      <core-title>Prominent outline</core-title>
+      <!-- Prominent outlined -->
+      <core-title>Prominent outlined</core-title>
       <core-section>
         <v-alert
           type="success"
@@ -449,7 +449,7 @@
           </div>
         </v-alert>
 
-        <div class="text-xs-center">
+        <div class="text-center">
           <v-btn
             v-if="!alertClosable"
             color="primary"
@@ -481,9 +481,9 @@
       <!-- CSS Transitions -->
       <core-title>Custom transitions</core-title>
       <core-section>
-        <div class="text-xs-center">
+        <div class="text-center">
           <v-btn
-            class="mb-3"
+            class="mb-4"
             color="primary"
             @click="alertTransition = !alertTransition"
           >
@@ -509,7 +509,7 @@
         >
           <template #prepend>
             <v-avatar
-              class="pa-2 mr-3"
+              class="pa-2 mr-4"
               color="white"
               size="64"
             >
@@ -533,7 +533,7 @@
             </v-btn>
           </template>
         </v-alert>
-        <div class="text-xs-center">
+        <div class="text-center">
           <v-btn
             v-if="!alertTransition2"
             color="primary"
@@ -545,8 +545,8 @@
         </div>
       </core-section>
 
-      <!-- Closable with outline -->
-      <core-title>Closable with outline</core-title>
+      <!-- Closable with outlined -->
+      <core-title>Closable with outlined</core-title>
       <core-section>
         <v-alert
           v-model="alertOutline"
@@ -554,7 +554,7 @@
           color="success"
           outlined
         >
-          This is a closable success outline alert.
+          This is a closable success outlined alert.
         </v-alert>
 
         <v-alert
@@ -563,7 +563,7 @@
           color="info"
           outlined
         >
-          This is a closable info outline alert.
+          This is a closable info outlined alert.
         </v-alert>
 
         <v-alert
@@ -572,7 +572,7 @@
           color="warning"
           outlined
         >
-          This is a closable warning outline alert.
+          This is a closable warning outlined alert.
         </v-alert>
 
         <v-alert
@@ -581,9 +581,9 @@
           color="error"
           outlined
         >
-          This is a closable error outline alert.
+          This is a closable error outlined alert.
         </v-alert>
-        <div class="text-xs-center">
+        <div class="text-center">
           <v-btn
             v-if="!alertOutline"
             color="primary"
@@ -595,8 +595,8 @@
         </div>
       </core-section>
 
-      <!-- Custom icons with outline -->
-      <core-title>Custom icons with outline</core-title>
+      <!-- Custom icons with outlined -->
+      <core-title>Custom icons with outlined</core-title>
       <core-section>
         <v-alert
           :value="true"

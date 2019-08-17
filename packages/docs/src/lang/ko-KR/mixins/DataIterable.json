@@ -20,11 +20,9 @@
   },
   "slots": {
     "footer": "추가 풋터(exra footer)를 위한 슬롯",
-    "noData": "아이템이 없을때 보여짐 (takes precedence over `no-results`)",
-    "noResults": "필터링된 아이템이 없을때 보여짐"
-  },
-  "scopedSlots": {
     "items": "아이템들의 렌더링 방식을 지정하는 슬롯",
+    "noData": "아이템이 없을때 보여짐 (takes precedence over `no-results`)",
+    "noResults": "필터링된 아이템이 없을때 보여짐",
     "pageText": "페이지네이션 컨트롤의 페이지 텍스트 구역을 커스터마이즈."
   }
 }

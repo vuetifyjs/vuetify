@@ -1,5 +1,16 @@
 module.exports = {
   'v-card': {
-    slots: ['default'],
+    events: [
+      {
+        name: 'click',
+        value: 'void',
+      },
+    ],
+    slots: [
+      {
+        name: 'progress',
+        props: undefined,
+      },
+    ],
   },
 }

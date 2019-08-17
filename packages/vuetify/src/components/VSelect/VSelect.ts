@@ -31,7 +31,7 @@ export const defaultMenuProps = {
   closeOnContentClick: false,
   disableKeys: true,
   openOnClick: false,
-  maxHeight: 300,
+  maxHeight: 304,
 }
 
 // Types
@@ -74,10 +74,15 @@ export default baseMixins.extend<options>().extend({
     clearable: Boolean,
     deletableChips: Boolean,
     dense: Boolean,
+    eager: Boolean,
     hideSelected: Boolean,
     items: {
       type: Array,
       default: () => [],
+    },
+    itemColor: {
+      type: String,
+      default: 'primary',
     },
     itemDisabled: {
       type: [String, Array, Function],
@@ -181,7 +186,7 @@ export default baseMixins.extend<options>().extend({
         },
         props: {
           action: this.multiple,
-          color: this.color,
+          color: this.itemColor,
           dense: this.dense,
           hideSelected: this.hideSelected,
           items: this.virtualizedItems,
@@ -226,6 +231,7 @@ export default baseMixins.extend<options>().extend({
 
       return {
         ...defaultMenuProps,
+        eager: this.eager,
         value: this.menuCanShow && this.isMenuActive,
         nudgeBottom: normalisedProps.offsetY ? 1 : 0, // convert to int
         ...normalisedProps,
@@ -299,6 +305,8 @@ export default baseMixins.extend<options>().extend({
     },
     closeConditional (e: Event) {
       return (
+        !this._isDestroyed &&
+
         // Click originates from outside the menu content
         this.content &&
         !this.content.contains(e.target) &&
@@ -561,7 +569,10 @@ export default baseMixins.extend<options>().extend({
       }
     },
     onKeyPress (e: KeyboardEvent) {
-      if (this.multiple) return
+      if (
+        this.multiple ||
+        this.readonly
+      ) return
 
       const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
       const now = performance.now()
@@ -640,7 +651,7 @@ export default baseMixins.extend<options>().extend({
       }
     },
     onMouseUp (e: MouseEvent) {
-      if (this.hasMouseDown) {
+      if (this.hasMouseDown && e.which !== 3) {
         const appendInner = this.$refs['append-inner']
 
         // If append inner is present

@@ -1,12 +1,30 @@
-import { mount } from '@vue/test-utils'
+// Mixins
 import Elevatable from '../'
 
+// Utilities
+import {
+  mount,
+  Wrapper,
+} from '@vue/test-utils'
+
+const Component = Elevatable.extend({
+  render: h => h('div'),
+})
+
 describe('elevatable.ts', () => {
+  type Instance = InstanceType<typeof Component>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount(Component, {
+        ...options,
+      })
+    }
+  })
+
   it('generate elevation classes', () => {
-    const wrapper = mount({
-      mixins: [Elevatable],
-      render: h => h('div'),
-    })
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.computedElevation).toBeUndefined()
     expect(wrapper.vm.elevationClasses).toEqual({})
@@ -21,6 +39,12 @@ describe('elevatable.ts', () => {
     expect(wrapper.vm.computedElevation).toBe('12')
     expect(wrapper.vm.elevationClasses).toEqual({
       'elevation-12': true,
+    })
+
+    wrapper.setProps({ elevation: 0 })
+    expect(wrapper.vm.computedElevation).toBe(0)
+    expect(wrapper.vm.elevationClasses).toEqual({
+      'elevation-0': true,
     })
   })
 })

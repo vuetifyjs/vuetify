@@ -1,12 +1,11 @@
 {
-  "header": "Stepper",
   "headerText": "El componente `v-stepper` muestra el progreso en pasos numerados.",
   "examples": {
     "editable": {
       "header": "Pasos editables",
       "desc": "Un paso editable puede ser seleccionado por un usuario en cualquier punto y lo llevará hasta ese paso."
     },
-    "nonEditable": {
+    "non-editable": {
       "header": "Pasos no editables",
       "desc": "Los pasos no editables obligan al usuario a llevar un proceso lineal."
     },
@@ -26,11 +25,11 @@
       "header": "Steppers lineales",
       "desc": "Los steppers lineales siempre moverán al usuario a través del camino que tú decidas."
     },
-    "nonLinear": {
+    "non-linear": {
       "header": "Steppers no lineales",
       "desc": "Los steppers no lineales permitirán al usuario que se mueva en tu proceso de cualquier manera que ellos elijan."
     },
-    "alternateLabels": {
+    "alternate-labels": {
       "header": "Etiquetas alternativas",
       "desc": "Los steppers también tienen un estilo de etiqueta alternativa que coloca el título debajo del paso mismo."
     },
@@ -38,11 +37,11 @@
       "header": "Estado de error multi línea",
       "desc": "Un estado de error puede ser mostrado para notificar al usuario de alguna acción que debe llevarse a cabo."
     },
-    "alternateError": {
+    "alternate-error": {
       "header": "Estado de error multi línea con etiqueta alternativa",
       "desc": "El estado de error también puede ser aplicado al estilo de la etiqueta alternativa."
     },
-    "verticalError": {
+    "vertical-error": {
       "header": "Estado de error multi línea vertical",
       "desc": "El mismo estado también aplica para los steppers verticales."
     },

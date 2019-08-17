@@ -91,7 +91,7 @@ export default VSelect.extend({
       set (val: any) {
         this.lazySearch = val
 
-        this.$emit('update:searchInput', val)
+        this.$emit('update:search-input', val)
       },
     },
     isAnyValueAllowed (): boolean {
@@ -344,6 +344,10 @@ export default VSelect.extend({
       // interfers with native up/down behavior
       // instead activate the menu
       this.activateMenu()
+    },
+    selectItem (item: object) {
+      VSelect.options.methods.selectItem.call(this, item)
+      this.setSearch()
     },
     setSelectedItems () {
       VSelect.options.methods.setSelectedItems.call(this)

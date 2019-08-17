@@ -7,16 +7,13 @@
     <v-card-title>
       <v-icon
         :color="checking ? 'red lighten-2' : 'indigo'"
-        class="mr-5"
+        class="mr-12"
         size="64"
         @click="takePulse"
       >
         mdi-heart-pulse
       </v-icon>
-      <v-layout
-        column
-        align-start
-      >
+      <v-row align="start">
         <div class="caption grey--text text-uppercase">
           Heart rate
         </div>
@@ -27,7 +24,7 @@
           ></span>
           <strong v-if="avg">BPM</strong>
         </div>
-      </v-layout>
+      </v-row>
 
       <v-spacer></v-spacer>
 

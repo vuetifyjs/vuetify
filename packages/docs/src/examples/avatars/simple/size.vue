@@ -1,5 +1,5 @@
 <template>
-  <v-layout justify-space-around wrap>
+  <v-row justify="space-around">
 
     <v-avatar color="indigo" size="36">
       <span class="white--text headline">36</span>
@@ -13,5 +13,5 @@
       <span class="white--text headline">62</span>
     </v-avatar>
 
-  </v-layout>
+  </v-row>
 </template>

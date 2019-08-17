@@ -231,7 +231,7 @@ describe('VDatePickerDateTable.ts', () => {
     })
 
     const tableDate = jest.fn()
-    wrapper.vm.$on('tableDate', tableDate)
+    wrapper.vm.$on('update:table-date', tableDate)
 
     wrapper.trigger('wheel')
     expect(tableDate).toHaveBeenCalledWith('2005-06')
@@ -245,7 +245,7 @@ describe('VDatePickerDateTable.ts', () => {
     })
 
     const tableDate = jest.fn()
-    wrapper.vm.$on('tableDate', tableDate)
+    wrapper.vm.$on('update:table-date', tableDate)
 
     wrapper.trigger('wheel')
     expect(tableDate).not.toHaveBeenCalled()
@@ -260,7 +260,7 @@ describe('VDatePickerDateTable.ts', () => {
     })
 
     const tableDate = jest.fn()
-    wrapper.vm.$on('tableDate', tableDate)
+    wrapper.vm.$on('update:table-date', tableDate)
 
     wrapper.trigger('touchstart')
     wrapper.trigger('touchend')
@@ -275,7 +275,7 @@ describe('VDatePickerDateTable.ts', () => {
     })
 
     const tableDate = jest.fn()
-    wrapper.vm.$on('tableDate', tableDate)
+    wrapper.vm.$on('update:table-date', tableDate)
 
     wrapper.vm.touch(1, wrapper.vm.calculateTableDate)
     expect(tableDate).toHaveBeenCalledWith('2005-06')

@@ -3,10 +3,9 @@
     color="primary lighten-1"
     padless
   >
-    <v-layout
-      justify-center
-      row
-      wrap
+    <v-row
+      justify="center"
+      no-gutters
     >
       <v-btn
         v-for="link in links"
@@ -18,17 +17,13 @@
       >
         {{ link }}
       </v-btn>
-      <v-flex
-        primary
-        lighten-2
-        py-3
-        text-xs-center
-        white--text
-        xs12
+      <v-col
+        class="primary lighten-2 py-4 text-center white--text"
+        cols="12"
       >
         {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-footer>
 </template>
 

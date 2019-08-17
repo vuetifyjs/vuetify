@@ -8,7 +8,7 @@ import VDataFooter from './VDataFooter'
 import Themeable from '../../mixins/themeable'
 
 // Helpers
-import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot } from '../../util/helpers'
+import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, camelizeObjectKeys } from '../../util/helpers'
 import { DataProps } from '../VData/VData'
 import { PropValidator } from 'vue/types/options'
 import { breaking, removed } from '../../util/console'
@@ -62,6 +62,9 @@ export default Themeable.extend({
     },
     someItems (): boolean {
       return this.internalCurrentItems.some((i: any) => this.isSelected(i))
+    },
+    sanitizedFooterProps (): object {
+      return camelizeObjectKeys(this.footerProps)
     },
   },
 
@@ -169,22 +172,10 @@ export default Themeable.extend({
     createItemProps (item: any) {
       const props = {
         item,
-        select: {
-          props: {
-            value: this.isSelected(item),
-          },
-          on: {
-            input: (v: boolean) => this.select(item, v),
-          },
-        },
-        expand: {
-          props: {
-            value: this.isExpanded(item),
-          },
-          on: {
-            input: (v: boolean) => this.expand(item, v),
-          },
-        },
+        select: (v: boolean) => this.select(item, v),
+        isSelected: this.isSelected(item),
+        expand: (v: boolean) => this.expand(item, v),
+        isExpanded: this.isExpanded(item),
       }
 
       return props
@@ -231,7 +222,7 @@ export default Themeable.extend({
 
       const data = {
         props: {
-          ...this.footerProps,
+          ...this.sanitizedFooterProps,
           options: props.options,
           pagination: props.pagination,
         },
@@ -262,7 +253,7 @@ export default Themeable.extend({
         this.genItems(props),
         this.genFooter(props),
         getSlot(this, 'footer', outerProps, true),
-      ]) as any
+      ])
     },
   },
 
@@ -277,7 +268,7 @@ export default Themeable.extend({
         'update:sort-desc': (v: any) => this.$emit('update:sort-desc', v),
         'update:group-by': (v: any) => this.$emit('update:group-by', v),
         'update:group-desc': (v: any) => this.$emit('update:group-desc', v),
-        'pagination': (v: any, old: any) => !deepEqual(v, old) && this.$emit('pagination', v),
+        pagination: (v: any, old: any) => !deepEqual(v, old) && this.$emit('pagination', v),
         'current-items': (v: any[]) => {
           this.internalCurrentItems = v
           this.$emit('current-items', v)

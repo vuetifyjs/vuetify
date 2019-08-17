@@ -50,7 +50,12 @@
         {
           "type": "text",
           "lang": "comparisonText"
-        },
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
         {
           "type": "heading",
           "lang": "featuresHeader"

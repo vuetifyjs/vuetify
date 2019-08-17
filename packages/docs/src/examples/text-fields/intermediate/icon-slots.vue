@@ -1,8 +1,8 @@
 <template>
   <v-form>
     <v-container>
-      <v-layout row wrap>
-        <v-flex xs12>
+      <v-row>
+        <v-col cols="12">
           <v-text-field
             v-model="message"
             outlined
@@ -43,16 +43,16 @@
                   </v-btn>
                 </template>
                 <v-card>
-                  <v-card-text class="pa-4">
+                  <v-card-text class="pa-6">
                     <v-btn large flat color="primary" @click="clickMe"><v-icon left>mdi-target</v-icon>Click me</v-btn>
                   </v-card-text>
                 </v-card>
               </v-menu>
             </template>
           </v-text-field>
-        </v-flex>
+        </v-col>
 
-      </v-layout>
+      </v-row>
     </v-container>
   </v-form>
 </template>

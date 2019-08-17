@@ -1,46 +1,44 @@
 <template>
   <v-card
-    class="mx-auto hide-overflow"
+    class="mx-auto overflow-hidden"
     style="max-width: 600px;"
   >
-    <v-layout>
-      <v-flex xs6 d-flex>
+    <v-row>
+      <v-col class="d-flex" cols="6">
         <v-img
           src="https://cdn.vuetifyjs.com/images/ratings/fortnite1.png"
         ></v-img>
-      </v-flex>
-      <v-flex xs6>
+      </v-col>
+      <v-col cols="6">
         <v-container
-          grid-list-md
-          pa-0
-          pl-2
+          class="pa-0 pl-2"
           style="margin: -4px 0"
         >
-          <v-layout wrap>
-            <v-flex xs7 d-flex>
+          <v-row>
+            <v-col class="d-flex" cols="7">
               <v-img
                 src="https://cdn.vuetifyjs.com/images/ratings/fortnite2.png"
               ></v-img>
-            </v-flex>
-            <v-flex xs5 d-flex>
+            </v-col>
+            <v-col class="d-flex" cols="5">
               <v-img
                 src="https://cdn.vuetifyjs.com/images/ratings/fortnite3.png"
               ></v-img>
-            </v-flex>
-            <v-flex xs5 d-flex>
+            </v-col>
+            <v-col class="d-flex" cols="5">
               <v-img
                 src="https://cdn.vuetifyjs.com/images/ratings/fortnite4.png"
               ></v-img>
-            </v-flex>
-            <v-flex xs7 d-flex>
+            </v-col>
+            <v-col class="d-flex" cols="7">
               <v-img
                 src="https://cdn.vuetifyjs.com/images/ratings/fortnite5.png"
               ></v-img>
-            </v-flex>
-          </v-layout>
+            </v-col>
+          </v-row>
         </v-container>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
     <v-card-title class="align-start">
       <div>
         <span class="headline">FORTNITE</span>
@@ -91,7 +89,7 @@
           <v-text-field
             ref="link"
             :label="copied ? 'Link copied' : 'Click to copy link'"
-            class="pa-3"
+            class="pa-4"
             readonly
             value="https://g.co/kgs/nkrK43"
             @click="copy"
@@ -116,7 +114,7 @@
         </template>
       </v-rating>
     </v-card-actions>
-    <div class="pa-3 pt-0 caption">
+    <div class="pa-4 pt-0 caption">
       <em>Portions of the materials used are trademarks and/or copyrighted works of Epic Games, Inc. All rights reserved by Epic. This material is not official and is not endorsed by Epic.</em>
     </div>
   </v-card>

@@ -13,22 +13,21 @@
       <div class="display-1 mb-2">Welcome Home...</div>
       <div class="title font-weight-regular grey--text">Monday, 12:30 PM, Mostly Sunny</div>
     </v-card-title>
-    <v-layout
-      align-center
-      px-3
-      grey--text
+    <v-row
+      class="px-4 grey--text"
+      align="center"
     >
       <v-avatar
         size="24"
-        class="mr-3"
+        class="mr-4"
       >
         <v-img src="https://cdn.vuetifyjs.com/images/weather/part-cloud-48px.png" contain></v-img>
       </v-avatar>
 
       <span>81° / 62°</span>
-    </v-layout>
+    </v-row>
 
-    <v-divider class="mt-4 mx-3"></v-divider>
+    <v-divider class="mt-6 mx-4"></v-divider>
 
     <v-card-text>
       <v-chip

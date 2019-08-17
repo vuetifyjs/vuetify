@@ -4,12 +4,12 @@
       :headers="headers"
       :items="desserts"
       :page.sync="page"
-      :items-per-page="5"
+      :items-per-page="itemsPerPage"
       hide-default-footer
       class="elevation-1"
       @page-count="pageCount = $event"
     ></v-data-table>
-    <div class="text-xs-center pt-2">
+    <div class="text-center pt-2">
       <v-pagination v-model="page" :length="pageCount"></v-pagination>
       <v-text-field
         :value="itemsPerPage"
@@ -17,7 +17,7 @@
         type="number"
         min="-1"
         max="15"
-        @input="itemsPerPage = $event"
+        @input="itemsPerPage = parseInt($event, 10)"
       ></v-text-field>
     </div>
   </div>

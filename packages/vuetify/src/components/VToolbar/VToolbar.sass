@@ -5,6 +5,7 @@
 .v-toolbar
   contain: layout
   flex: 1 1 auto
+  max-width: 100%
   // Needs increased specificity
   &.v-sheet
     transition: $toolbar-transition
@@ -20,7 +21,7 @@
 .v-toolbar__extension
   padding: $toolbar-content-padding-y $toolbar-content-padding-x
 
-  .v-btn.v-btn--icon
+  .v-btn.v-btn--icon.v-size--default
     height: $toolbar-btn-icon-size
     width: $toolbar-btn-icon-size
 
@@ -62,6 +63,8 @@
 .v-toolbar__extension
   align-items: center
   display: flex
+  position: relative
+  z-index: 0
 
 .v-toolbar__image
   border-radius: inherit
@@ -69,7 +72,7 @@
   top: 0
   bottom: 0
   width: 100%
-  z-index: -1
+  z-index: 0
   contain: strict
 
   .v-image
@@ -95,7 +98,6 @@
 .v-toolbar.v-toolbar--absolute
   position: absolute
   top: 0
-  width: 100%
   z-index: 1
 
 .v-toolbar.v-toolbar--bottom
@@ -108,7 +110,7 @@
 
 .v-toolbar.v-toolbar--collapsed
   border-bottom-right-radius: 24px
-  width: 112px
+  max-width: 112px
 
   .v-toolbar__title,
   .v-toolbar__extension
@@ -131,6 +133,11 @@
     align-items: flex-start
 
   .v-toolbar__title
-    align-self: flex-end
     font-size: 1.5rem
-    padding-bottom: 6px
+    padding-top: 6px
+
+  &:not(.v-toolbar--bottom)
+    .v-toolbar__title
+      align-self: flex-end
+      padding-bottom: 6px
+      padding-top: 0

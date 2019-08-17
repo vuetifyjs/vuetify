@@ -12,9 +12,9 @@
         Item {{ n }}
       </v-tab>
     </v-tabs>
-    <v-card-text class="text-xs-center">
+    <v-card-text class="text-center">
       <v-btn text @click="length--">Remove Tab</v-btn>
-      <v-divider class="mx-3" vertical></v-divider>
+      <v-divider class="mx-4" vertical></v-divider>
       <v-btn text @click="length++">Add Tab</v-btn>
     </v-card-text>
   </v-card>

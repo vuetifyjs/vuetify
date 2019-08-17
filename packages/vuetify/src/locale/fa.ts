@@ -12,6 +12,7 @@ export default {
       sortAscending: ': صعودی مرتب شده است. فعال‌سازی برای مرتب‌سازی نزولی.',
       sortNone: ': مرتب نشده است. فعال‌سازی برای مرتب‌سازی صعودی.',
     },
+    sortBy: 'Sort by',
   },
   dataFooter: {
     itemsPerPageText: 'ردیف در صفحه:',
@@ -31,5 +32,9 @@ export default {
   },
   calendar: {
     moreEvents: '{بیشتر {0',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
   },
 }

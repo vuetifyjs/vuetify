@@ -1,21 +1,21 @@
 <template>
-  <v-layout column align-stretch>
-    <v-flex align-self-center>
+  <v-row align="stretch">
+    <v-col align-self="center">
       <v-time-picker
         v-model="time"
         type="month"
         width="290"
-        class="mt-3"
+        class="mt-4"
       ></v-time-picker>
-    </v-flex>
+    </v-col>
     <v-time-picker
       v-model="time"
+      :landscape="$vuetify.breakpoint.mdAndUp"
+      class="mt-4"
       full-width
-      landscape
       type="month"
-      class="mt-3"
     ></v-time-picker>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

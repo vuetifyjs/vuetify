@@ -1,12 +1,12 @@
 <template>
-  <v-layout
-    justify-center
-    wrap
+  <v-row
+    justify="center"
+
     style="min-height: 160px;"
   >
-    <v-flex shrink>
+    <v-col class="shrink">
       <v-btn
-        class="my-3"
+        class="ma-2"
         color="primary"
         @click="expand = !expand"
       >
@@ -21,13 +21,13 @@
           class="mx-auto"
         ></v-card>
       </v-expand-transition>
-    </v-flex>
+    </v-col>
 
-    <div class="mx-3 hidden-sm-and-down"></div>
+    <div class="mx-4 hidden-sm-and-down"></div>
 
-    <v-flex shrink>
+    <v-col class="shrink">
       <v-btn
-        class="my-3"
+        class="ma-2"
         color="secondary"
         @click="expand2 = !expand2"
       >
@@ -42,8 +42,8 @@
           class="mx-auto"
         ></v-card>
       </v-expand-x-transition>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

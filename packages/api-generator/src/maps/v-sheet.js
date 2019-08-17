@@ -1,6 +1,5 @@
 module.exports = {
   'v-sheet': {
-    slots: ['default'],
     props: [
       {
         name: 'tag',

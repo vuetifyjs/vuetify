@@ -12,6 +12,7 @@ export default {
       sortAscending: ': Sorted ascending. Activate to sort descending.',
       sortNone: ': Not sorted. Activate to sort ascending.',
     },
+    sortBy: 'Sort by',
   },
   dataFooter: {
     itemsPerPageText: 'Predmetov na stran:',
@@ -31,5 +32,9 @@ export default {
   },
   calendar: {
     moreEvents: 'Še {0}',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
   },
 }

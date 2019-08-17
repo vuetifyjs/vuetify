@@ -1,10 +1,10 @@
 <template>
-  <v-layout column align-center justify-center>
+  <v-row align="center" justify="center">
     <v-card height="300" width="250">
-      <v-layout justify-center wrap>
+      <v-row justify="center">
         <v-btn
           color="success"
-          class="mt-5"
+          class="mt-12"
           @click="overlay = !overlay"
         >
           Show Overlay
@@ -21,9 +21,9 @@
             Hide Overlay
           </v-btn>
         </v-overlay>
-      </v-layout>
+      </v-row>
     </v-card>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

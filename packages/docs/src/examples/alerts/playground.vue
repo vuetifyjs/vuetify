@@ -1,15 +1,15 @@
 <template>
-  <div class="grey lighten-5 pa-3">
+  <div class="grey lighten-5 pa-4">
     <v-alert
       v-model="show"
       v-bind="localAttrs"
       :dismissible="dismissible"
       :type="type"
-      class="mb-3"
+      class="mb-4"
     >
       This is a {{ type }} alert.
     </v-alert>
-    <div class="text-xs-center">
+    <div class="text-center">
       <v-btn
         v-if="!show"
         color="primary"
@@ -19,13 +19,13 @@
         Toggle
       </v-btn>
     </div>
-    <v-layout
-      align-center
-      justify-center
+    <v-row
+      align="center"
+      justify="center"
     >
-      <v-flex
-        xs12
-        md8
+      <v-col
+        cols="12"
+        md="8"
       >
         <v-select
           v-model="variant"
@@ -93,8 +93,8 @@
             label="Dismissible"
           ></v-checkbox>
         </template>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </div>
 </template>
 

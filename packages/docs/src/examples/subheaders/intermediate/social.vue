@@ -21,21 +21,19 @@
     <v-container
       v-for="type in types"
       :key="type"
+      class="grey lighten-4"
       fluid
-      grid-list-md
-      grey
-      lighten-4
     >
       <v-subheader>{{ type }}</v-subheader>
 
-      <v-layout row wrap>
+      <v-row>
         <v-spacer></v-spacer>
-        <v-flex
+        <v-col
           v-for="card in cards"
           :key="card"
-          xs12
-          sm6
-          md4
+          cols="12"
+          sm="6"
+          md="4"
         >
           <v-card>
             <v-img
@@ -43,7 +41,7 @@
               height="300px"
             >
               <span
-                class="headline white--text pl-3 pt-3"
+                class="headline white--text pl-4 pt-4"
                 v-text="card.title"
               ></span>
             </v-img>
@@ -62,8 +60,8 @@
               </v-btn>
             </v-card-actions>
           </v-card>
-        </v-flex>
-      </v-layout>
+        </v-col>
+      </v-row>
     </v-container>
   </v-card>
 </template>

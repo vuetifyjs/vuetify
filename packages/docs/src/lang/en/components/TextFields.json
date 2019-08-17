@@ -75,7 +75,7 @@
     },
     "outlined": {
       "header": "### Outlined style",
-      "desc": "Text fields can be used with an alternative outline design."
+      "desc": "Text fields can be used with an alternative outlined design."
     },
     "custom-colors": {
       "header": "### Custom colors",
@@ -97,11 +97,12 @@
     "filled": "Applies the alternate filled input style",
     "clearIcon": "Applied when using **clearable** and the input is dirty",
     "counter": "Creates counter for input length; if no number is specified, it defaults to 25. Does not apply any validation.",
+    "dark": "Components.Inputs.props.dark",
     "flat": "Mixins.Soloable.props.flat",
     "fullWidth": "Designates input type as full-width",
     "multiLine": "Turns into textarea",
     "noResize": "Removes the resize handle, only applies to **multi-line** and **textarea** props",
-    "outlined": "Applies the outline style to the input",
+    "outlined": "Applies the outlined style to the input",
     "placeholder": "Sets the input’s placeholder text",
     "prefix": "Displays prefix text",
     "prependInnerIcon": "Prepends an icon inside the component's input, uses the same syntax as `v-icon`",
@@ -125,12 +126,15 @@
     "prepend-inner": "Prepends an item inside input content"
   },
   "events": {
+    "blur": "Emitted when component is no longer focused",
     "change": "Components.Inputs.events.change",
     "click:append": "Components.Inputs.events['click:append']",
     "click:append-outer": "Emitted when appended outer icon is clicked",
     "click:clear": "Emitted when clearable icon clicked",
     "click:prepend": "Components.Inputs.events['click:prepend']",
     "click:prepend-inner": "Emitted when prepended inner icon is clicked",
+    "focus": "Emitted when component is focused",
+    "keydown": "Emitted when **any** key is pressed, Text-field must be focused",
     "update:error": "Mixins.Validatable.events['update:error']"
   }
 }

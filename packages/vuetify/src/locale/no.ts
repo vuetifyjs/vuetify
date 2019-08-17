@@ -12,6 +12,7 @@ export default {
       sortAscending: ': Sortert stigende. Aktiver for å sortere synkende.',
       sortNone: ': Ikke sortert. Aktiver for å sortere stigende.',
     },
+    sortBy: 'Sort by',
   },
   dataFooter: {
     itemsPerPageText: 'Elementer per side:',
@@ -31,5 +32,9 @@ export default {
   },
   calendar: {
     moreEvents: '{0} mer',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
   },
 }

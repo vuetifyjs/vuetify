@@ -170,7 +170,7 @@ describe('VDataTable.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render virtual table', () => {
+  it.skip('should render virtual table', () => {
     const wrapper = mountFunction({
       propsData: {
         headers: testHeaders,
@@ -197,7 +197,6 @@ describe('VDataTable.ts', () => {
         'update:expanded': expand,
       },
     })
-    // const expand = jest.spyOn(wrapper.vm, 'expand')
 
     expect(wrapper.html()).toMatchSnapshot()
     const expandIcon = wrapper.findAll('.v-data-table__expand-icon').at(0)
@@ -269,7 +268,7 @@ describe('VDataTable.ts', () => {
         itemsPerPage: 5,
       },
       scopedSlots: {
-        'item': props => vm.$createElement('div', [JSON.stringify(props)]),
+        item: props => vm.$createElement('div', [JSON.stringify(props)]),
       },
     })
 
@@ -345,5 +344,58 @@ describe('VDataTable.ts', () => {
     await wrapper.vm.$nextTick()
 
     expect(fn).toHaveBeenCalled()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8254
+  it('should pass kebab-case footer props correctly', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: [],
+        items: [],
+        footerProps: {
+          'items-per-page-text': 'Foo:',
+        },
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8266
+  it('should use options prop for initial values', () => {
+    const fn = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+        options: {
+          page: 2,
+          itemsPerPage: 5,
+        },
+      },
+      listeners: {
+        'update:options': fn,
+      },
+    })
+
+    expect(fn).toHaveBeenCalledWith(expect.objectContaining({
+      page: 2,
+    }))
+  })
+
+  it('should render footer.page-text slot content', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: [],
+        items: [{}],
+      },
+      scopedSlots: {
+        'footer.page-text' ({ pageStart, pageStop }) {
+          return this.$createElement('div', [`foo ${pageStart} bar ${pageStop}`])
+        },
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

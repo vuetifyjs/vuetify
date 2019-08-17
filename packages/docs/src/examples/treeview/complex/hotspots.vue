@@ -9,8 +9,8 @@
       <v-toolbar-title>Local hotspots</v-toolbar-title>
     </v-toolbar>
 
-    <v-layout>
-      <v-flex>
+    <v-row>
+      <v-col>
         <v-card-text>
           <v-treeview
             v-model="tree"
@@ -27,19 +27,19 @@
           >
           </v-treeview>
         </v-card-text>
-      </v-flex>
+      </v-col>
 
       <v-divider vertical></v-divider>
 
-      <v-flex
-        xs12
-        md6
+      <v-col
+        cols="12"
+        md="6"
       >
         <v-card-text>
           <div
             v-if="tree.length === 0"
             key="title"
-            class="title font-weight-light grey--text pa-3 text-xs-center"
+            class="title font-weight-light grey--text pa-4 text-center"
           >
             Select your favorite breweries
           </div>
@@ -61,8 +61,8 @@
             </v-chip>
           </v-scroll-x-transition>
         </v-card-text>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
 
     <v-divider></v-divider>
 

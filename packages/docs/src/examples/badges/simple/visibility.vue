@@ -1,11 +1,9 @@
 <template>
-  <v-container fluid class="text-xs-center">
-    <v-layout
-      justify-space-between
-      row
-      wrap
+  <v-container fluid class="text-center">
+    <v-row
+      justify="space-between"
     >
-      <v-flex xs12>
+      <v-col cols="12">
         <v-btn
           color="indigo"
           class="white--text"
@@ -13,9 +11,9 @@
         >
           Toggle
         </v-btn>
-      </v-flex>
+      </v-col>
 
-      <v-flex xs12 class="mt-5">
+      <v-col cols="12" class="mt-12">
         <v-badge
           v-model="show"
           color="cyan"
@@ -39,8 +37,8 @@
           </template>
           <v-icon large color="grey">mail</v-icon>
         </v-badge>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

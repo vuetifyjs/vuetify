@@ -1,12 +1,10 @@
 <template>
-  <v-layout
-    justify-center
-    wrap
+  <v-row
+    justify="center"
   >
     <v-btn
       v-bind="options"
-      class="mt-5"
-      dark
+      class="mt-12"
     >
       <v-icon
         v-if="hasIcon"
@@ -18,40 +16,59 @@
       <span v-else>
         {{ text }}
       </span>
-      <template v-if="customLoad" v-slot:loader>
+      <template
+        v-if="customLoad"
+        v-slot:loader
+      >
         Loading...
       </template>
     </v-btn>
 
-    <v-flex xs12>
-      <v-container grid-list-md>
-        <v-slider v-model="minWidth" label="Min width" min="10" max="300"></v-slider>
-        <v-slider v-model="minHeight" label="Min height" min="10" max="300"></v-slider>
-        <v-slider v-model="elevation" label="Elevation" min="0" max="24"></v-slider>
-        <v-layout wrap>
-          <v-flex
-            xs12
-            md4
+    <v-col cols="12">
+      <v-container>
+        <v-slider
+          v-model="minWidth"
+          label="Min width"
+          min="10"
+          max="300"
+        ></v-slider>
+        <v-slider
+          v-model="minHeight"
+          label="Min height"
+          min="10"
+          max="300"
+        ></v-slider>
+        <v-slider
+          v-model="elevation"
+          label="Elevation"
+          min="0"
+          max="24"
+          clearable
+        ></v-slider>
+        <v-row>
+          <v-col
+            cols="12"
+            md="4"
           >
             <v-select
               v-model="size"
               :items="sizes"
               label="Size"
             ></v-select>
-          </v-flex>
-          <v-flex
-            xs12
-            md4
+          </v-col>
+          <v-col
+            cols="12"
+            md="4"
           >
             <v-select
               v-model="color"
               :items="colors"
               label="Color"
             ></v-select>
-          </v-flex>
-          <v-flex
-            xs12
-            md4
+          </v-col>
+          <v-col
+            cols="12"
+            md="4"
           >
             <v-select
               v-model="type"
@@ -59,29 +76,29 @@
               label="Type"
               multiple
             ></v-select>
-          </v-flex>
-          <v-flex xs4>
+          </v-col>
+          <v-col cols="4">
             <v-checkbox
               v-model="disabled"
               label="Disabled"
             ></v-checkbox>
-          </v-flex>
-          <v-flex xs4>
+          </v-col>
+          <v-col cols="4">
             <v-checkbox
               v-model="loading"
               label="Loading"
             ></v-checkbox>
-          </v-flex>
-          <v-flex xs4>
+          </v-col>
+          <v-col cols="4">
             <v-checkbox
               v-model="customLoad"
               label="Custom loader"
             ></v-checkbox>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -91,7 +108,7 @@
       size: 'medium',
       sizes: ['x-small', 'small', 'medium', 'large', 'x-large'],
       type: [],
-      types: ['block', 'depressed', 'fab', 'outlined', 'round', 'text'],
+      types: ['block', 'depressed', 'fab', 'outlined', 'rounded', 'text'],
       text: 'Customize me',
       minWidth: undefined,
       minHeight: undefined,
@@ -133,6 +150,19 @@
       },
       colors () {
         return Object.keys(this.$vuetify.theme.themes.dark)
+      },
+    },
+    watch: {
+      type (val) {
+        if (
+          val.includes('depressed') ||
+          val.includes('outlined') ||
+          val.includes('text')
+        ) {
+          this.elevation = 0
+        } else {
+          this.elevation = 2
+        }
       },
     },
   }

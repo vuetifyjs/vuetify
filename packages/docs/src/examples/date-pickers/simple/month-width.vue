@@ -1,19 +1,19 @@
 <template>
-  <v-layout row wrap justify-space-around>
+  <v-row justify="space-around">
     <v-date-picker
       v-model="date"
       type="month"
       width="290"
-      class="mt-3"
+      class="mt-4"
     ></v-date-picker>
     <v-date-picker
       v-model="date"
       full-width
-      landscape
+      :landscape="$vuetify.breakpoint.smAndUp"
       type="month"
-      class="mt-3"
+      class="mt-4"
     ></v-date-picker>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

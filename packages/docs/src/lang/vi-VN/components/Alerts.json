@@ -1,1 +1,20 @@
-{}
+{
+  "examples": {
+    "border": {
+      "header": "### Border"
+    },
+    "colored-border": {
+      "header": "### Màu sắc đường viền"
+    },
+    "transition": {
+      "header": "### Hiệu ứng"
+    },
+    "type": {
+      "header": "### Loại"
+    }
+  },
+  "props": {
+    "icon": "Thiết lập icon.",
+    "prominent": "Tăng chiều cao của cảnh báo để tăng sự chú ý."
+  }
+}

@@ -1,7 +1,7 @@
 <template>
-  <div class="pa-3 grey lighten-4">
-    <v-layout row>
-      <v-flex xs12 sm6 offset-sm3>
+  <div class="pa-4 grey lighten-4">
+    <v-row>
+      <v-col cols="12" sm="6" offset-sm="3">
         <v-hover
           v-slot:default="{ hover }"
           :open-delay="openDelay"
@@ -15,19 +15,19 @@
             max-width="350"
             class="mx-auto"
           >
-            <v-card-text class="my-3 text-xs-center title">Hover over me!</v-card-text>
+            <v-card-text class="my-4 text-center title">Hover over me!</v-card-text>
           </v-card>
         </v-hover>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
 
-    <v-layout
-      align-center
-      justify-center
+    <v-row
+      align="center"
+      justify="center"
     >
-      <v-flex
-        xs12
-        md6
+      <v-col
+        cols="12"
+        md="6"
       >
         <v-radio-group row>
           <v-checkbox
@@ -59,8 +59,8 @@
           max="1000"
           thumb-label
         ></v-slider>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </div>
 </template>
 

@@ -1,9 +1,9 @@
 <template>
-  <v-layout justify-center wrap>
-    <v-flex xs12>
-      <v-layout align-center column>
+  <v-row justify="center">
+    <v-col cols="12">
+      <v-row align="center">
         <v-btn
-          class="mt-5"
+          class="mt-12"
           color="primary"
           @click="overlay = !overlay"
         >
@@ -23,10 +23,10 @@
             Hide Overlay
           </v-btn>
         </v-overlay>
-      </v-layout>
-    </v-flex>
+      </v-row>
+    </v-col>
 
-    <v-layout justify-center row>
+    <v-row justify="center">
       <v-radio-group row>
         <v-checkbox
           v-model="absolute"
@@ -34,7 +34,7 @@
         ></v-checkbox>
         <v-checkbox
           v-model="overlay"
-          class="mx-4"
+          class="mx-6"
           label="value"
         ></v-checkbox>
         <v-text-field
@@ -58,8 +58,8 @@
           @keydown="false"
         ></v-text-field>
       </v-radio-group>
-    </v-layout>
-  </v-layout>
+    </v-row>
+  </v-row>
 </template>
 
 <script>

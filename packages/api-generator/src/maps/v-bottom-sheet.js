@@ -1,7 +1,6 @@
 module.exports = {
   'v-bottom-sheet': {
-    slots: ['default'],
-    scopedSlots: [
+    slots: [
       {
         name: 'activator',
         props: {

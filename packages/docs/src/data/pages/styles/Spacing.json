@@ -64,6 +64,18 @@
       "type": "section",
       "children": [
         {
+          "type": "examples",
+          "value": [
+            "simple/horizontal",
+            "intermediate/negative-margin"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "up-next",
           "value": [
             "styles/alignment",

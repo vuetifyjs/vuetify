@@ -9,17 +9,30 @@
       &:hover:not(.v-data-table__expand-row)
         background: map-deep-get($material, 'table', 'hover')
 
+      &.expanded.expanded__row
+          background: map-deep-get($material, 'table', 'active')
+
+  .v-row-group
+    &__header, &__summary
+      background: map-deep-get($material, 'table', 'group')
+
+  .v-data-footer
+    border-top: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+
+  .v-data-table__empty-wrapper
+    color: map-deep-get($material, 'text', 'disabled')
+
+.v-data-table
+  tbody
+    tr
       &.expanded
         border-bottom: 0
-
-        &.expanded__row
-          background: map-deep-get($material, 'table', 'active')
 
         &.expanded__content
           box-shadow: inset 0px 4px 8px -5px rgba(50, 50, 50, 0.75), inset 0px -4px 8px -5px rgba(50, 50, 50, 0.75)
 
-  .v-data-footer
-    border-top: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+.v-data-table__empty-wrapper
+  text-align: center
 
 .v-data-table__mobile-row
   display: block
@@ -56,7 +69,6 @@
 
 .v-row-group
   &__header, &__summary
-    background: lightgrey // TOOD: theme
 
     td
       height: 35px

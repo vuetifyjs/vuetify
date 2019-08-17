@@ -1,104 +1,103 @@
 <template>
   <div>
-    <v-layout
-      row
-      wrap
-      justify-center
+    <v-row
+
+      justify="center"
     >
-      <v-flex
-        xs6
-        md4
+      <v-col
+        cols="6"
+        md="4"
       >
         <v-select
           v-model="color"
           label="Color"
           :items="colors"
         ></v-select>
-      </v-flex>
-      <v-flex xs12></v-flex>
-      <v-flex
-        xs3
-        md2
+      </v-col>
+      <v-col cols="12"></v-col>
+      <v-col
+        cols="3"
+        md="2"
       >
         <v-switch
           v-model="elevateOnScroll"
           label="Elevate-on-scroll"
         ></v-switch>
-      </v-flex>
-      <v-flex
-        xs3
-        md2
+      </v-col>
+      <v-col
+        cols="3"
+        md="2"
       >
         <v-switch
           v-model="hideOnScroll"
           label="Hide-on-scroll"
         ></v-switch>
-      </v-flex>
-      <v-flex
-        xs3
-        md2
+      </v-col>
+      <v-col
+        cols="3"
+        md="2"
       >
         <v-switch
           v-model="fadeOnScroll"
           label="Fade-on-scroll"
         ></v-switch>
-      </v-flex>
-      <v-flex
-        xs3
-        md2
+      </v-col>
+      <v-col
+        cols="3"
+        md="2"
       >
         <v-switch
           v-model="fadeImgOnScroll"
           label="Fade-img-on-scroll"
         ></v-switch>
-      </v-flex>
-      <v-flex
-        xs3
-        md2
+      </v-col>
+      <v-col
+        cols="3"
+        md="2"
       >
         <v-switch
           v-model="invertedScroll"
           label="Inverted scroll"
         ></v-switch>
-      </v-flex>
-      <v-flex
-        xs3
-        md2
+      </v-col>
+      <v-col
+        cols="3"
+        md="2"
       >
         <v-switch
           v-model="collapse"
           label="Collapse"
         ></v-switch>
-      </v-flex>
-      <v-flex
-        xs3
-        md2
+      </v-col>
+      <v-col
+        cols="3"
+        md="2"
       >
         <v-switch
           v-model="collapseOnScroll"
           label="Collapse-on-scroll"
         ></v-switch>
-      </v-flex>
-      <v-flex
-        xs3
-        md2
+      </v-col>
+      <v-col
+        cols="3"
+        md="2"
       >
         <v-switch
           v-model="shrinkOnScroll"
           label="Shrink-on-scroll"
         ></v-switch>
-      </v-flex>
-      <v-flex
-        xs3
-        md2
+      </v-col>
+      <v-col
+        cols="3"
+        md="2"
       >
         <v-switch
           v-model="extended"
           label="Extended"
         ></v-switch>
-      </v-flex>
-    </v-layout>
-    <v-card class="hide-overflow">
+      </v-col>
+    </v-row>
+    <v-card class="overflow-hidden">
       <v-app-bar
         absolute
         dark
@@ -126,7 +125,7 @@
       </v-app-bar>
       <v-sheet
         id="playground-example"
-        class="scroll-y"
+        class="overflow-y-auto"
         max-height="600"
       >
         <v-container style="height: 1500px;">

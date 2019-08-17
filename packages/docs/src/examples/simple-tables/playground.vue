@@ -7,8 +7,8 @@
     >
       <thead>
         <tr>
-          <th class="text-xs-left">Name</th>
-          <th class="text-xs-left">Calories</th>
+          <th class="text-left">Name</th>
+          <th class="text-left">Calories</th>
         </tr>
       </thead>
       <tbody>
@@ -19,11 +19,11 @@
       </tbody>
     </v-simple-table>
 
-    <v-layout row wrap>
-      <v-flex xs4>
+    <v-row>
+      <v-col cols="12" md="6">
         <v-text-field
           v-model="height"
-          class="mx-3"
+          class="mx-4"
           label="Height - px"
           max="500"
           min="1"
@@ -32,14 +32,14 @@
           type="number"
           @keydown="false"
         ></v-text-field>
-      </v-flex>
-      <v-flex xs4>
-        <v-switch v-model="dense" label="Toggle dense" class="mx-3"></v-switch>
-      </v-flex>
-      <v-flex xs4>
-        <v-switch v-model="fixedHeader" label="Toggle fixed-header" class="mx-3"></v-switch>
-      </v-flex>
-    </v-layout>
+      </v-col>
+      <v-col cols="6" md="3">
+        <v-switch v-model="dense" label="Toggle dense" class="mx-4"></v-switch>
+      </v-col>
+      <v-col cols="6" md="3">
+        <v-switch v-model="fixedHeader" label="Toggle fixed-header" class="mx-4"></v-switch>
+      </v-col>
+    </v-row>
   </div>
 </template>
 

@@ -21,7 +21,7 @@ const icons: VuetifyIcons = {
   menu: 'fa fa-bars',
   subgroup: 'fa fa-caret-down',
   dropdown: 'fa fa-caret-down',
-  radioOn: 'fa fa-dot-circle',
+  radioOn: 'fa fa-dot-circle-o',
   radioOff: 'fa fa-circle-o',
   edit: 'fa fa-pencil',
   ratingEmpty: 'fa fa-star-o',
@@ -31,6 +31,9 @@ const icons: VuetifyIcons = {
   first: 'fa fa-step-backward',
   last: 'fa fa-step-forward',
   unfold: 'fa fa-angle-double-down',
+  file: 'fa fa-paperclip',
+  plus: 'fa fa-plus',
+  minus: 'fa fa-minus',
 }
 
 export default icons

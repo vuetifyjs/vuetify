@@ -33,6 +33,7 @@ export default {
     VListItemAvatar,
     VListItemContent,
     VListItemGroup,
+    VListItemIcon,
     VListItemSubtitle,
     VListItemTitle,
   },

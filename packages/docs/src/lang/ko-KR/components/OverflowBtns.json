@@ -1,1 +1,10 @@
-{}
+{
+  "examples": {
+    "disabled": {
+      "header": "비활성화 (Disabled)"
+    },
+    "filled": {
+      "desc": "텍스트 필드는 대체 박스 디자인과 함께 사용될 수 있습니다. Append 나 prepend 아이콘 prop들은 이 모드를 지원하지 \"않습니다\"."
+    }
+  }
+}

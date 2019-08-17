@@ -4,6 +4,9 @@ import './calendar-with-events.sass'
 // Types
 import { VNode, VNodeData } from 'vue'
 
+// Directives
+import ripple from '../../../directives/ripple'
+
 // Mixins
 import CalendarBase from './calendar-base'
 
@@ -65,6 +68,10 @@ interface VDayBodySlotScope extends VDaySlotScope {
 /* @vue/component */
 export default CalendarBase.extend({
   name: 'calendar-with-events',
+
+  directives: {
+    ripple,
+  },
 
   props: props.events,
 
@@ -364,19 +371,19 @@ export default CalendarBase.extend({
       }
 
       const getOffset: VEventVisualGetOffset = (visual, visuals) => {
-        let offset = indexToOffset[ visual.event.index ]
+        let offset = indexToOffset[visual.event.index]
         if (offset === -1) {
           let min = Number.MAX_SAFE_INTEGER
           let max = -1
           visuals.forEach(other => {
-            const otherOffset = indexToOffset[ other.event.index ]
+            const otherOffset = indexToOffset[other.event.index]
             if (otherOffset !== -1) {
               min = Math.min(min, otherOffset)
               max = Math.max(max, otherOffset)
             }
           })
           offset = min > 0 && max !== -1 ? min - 1 : max + 1
-          indexToOffset[ visual.event.index ] = offset
+          indexToOffset[visual.event.index] = offset
         }
         return offset
       }
@@ -409,9 +416,9 @@ export default CalendarBase.extend({
           visuals.forEach(visual => {
             if (visual.columnCount === -1) {
               visuals.forEach(other => {
-                const otherOffset = indexToOffset[ other.event.index ]
+                const otherOffset = indexToOffset[other.event.index]
                 if (otherOffset !== -1 && other.event.endTimestampIdentifier <= visual.event.startTimestampIdentifier) {
-                  indexToOffset[ other.event.index ] = -1
+                  indexToOffset[other.event.index] = -1
                 }
               })
               visual.offset = getOffset(visual, visuals)
@@ -440,7 +447,7 @@ export default CalendarBase.extend({
             visual.offset = getOffset(visual, visuals)
           })
         }
-        visuals.sort((a, b) => (a.column - b.column) || (a.offset - b.offset))
+        visuals.sort((a, b) => (a.offset - b.offset) || (a.column - b.column))
         return visuals
       }
 

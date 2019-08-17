@@ -12,6 +12,7 @@ export default {
       sortAscending: ': Sorted ascending. Activate to sort descending.',
       sortNone: ': Not sorted. Activate to sort ascending.',
     },
+    sortBy: 'Sort by',
   },
   dataFooter: {
     itemsPerPageText: 'Kirjeid leheküljel:',
@@ -31,5 +32,9 @@ export default {
   },
   calendar: {
     moreEvents: '{0} veel',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
   },
 }

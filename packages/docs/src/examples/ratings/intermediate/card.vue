@@ -5,8 +5,8 @@
     dark
     style="max-width: 400px;"
   >
-    <v-layout justify-space-between>
-      <v-flex xs8>
+    <v-row justify="space-between">
+      <v-col cols="8">
         <v-card-title primary-title>
           <div>
             <div class="headline">Halycon Days</div>
@@ -14,7 +14,7 @@
             <div>(2013)</div>
           </div>
         </v-card-title>
-      </v-flex>
+      </v-col>
       <v-img
         class="shrink ma-2"
         contain
@@ -22,9 +22,9 @@
         src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
         style="flex-basis: 125px"
       ></v-img>
-    </v-layout>
+    </v-row>
     <v-divider dark></v-divider>
-    <v-card-actions class="pa-3">
+    <v-card-actions class="pa-4">
       Rate this album
       <v-spacer></v-spacer>
       <span class="grey--text text--lighten-2 caption mr-2">

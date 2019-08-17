@@ -46,7 +46,7 @@
           </v-toolbar-items>
         </v-toolbar>
       </core-section>
-      <core-section class="mt-5">
+      <core-section class="mt-12">
         <v-toolbar color="success">
           <v-app-bar-nav-icon />
           <v-toolbar-title>Title</v-toolbar-title>
@@ -80,7 +80,6 @@
           </v-toolbar>
 
           <v-layout
-            row
             pb-2
           >
             <v-flex
@@ -125,7 +124,7 @@
       </core-title>
       <core-section>
         <v-card
-          class="pa-3"
+          class="pa-4"
           flat
           height="300px"
           img="https://cdn.vuetifyjs.com/images/toolbar/map.jpg"
@@ -156,7 +155,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -165,7 +163,7 @@
             xs12
             sm12
             md6
-            class="my-3"
+            class="my-4"
           >
             <v-card
               color="grey lighten-4"
@@ -302,10 +300,10 @@
 
     data: () => ({
       bars: [
-        { 'class': '' },
-        { 'class': '', dark: true },
-        { 'class': 'primary', dark: true },
-        { 'class': 'elevation-0' },
+        { class: '' },
+        { class: '', dark: true },
+        { class: 'primary', dark: true },
+        { class: 'elevation-0' },
       ],
       items: [
         'All', 'Family', 'Friends', 'Coworkers',

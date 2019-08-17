@@ -27,7 +27,7 @@ export function parseEvent (input: VEventInput, index: number, startProperty: st
   }
 
   const start: VTimestamp = parseTimestamp(input[startProperty]) as VTimestamp
-  const end: VTimestamp = (input[ endProperty ] ? parseTimestamp(input[ endProperty ]) : start) as VTimestamp
+  const end: VTimestamp = (input[endProperty] ? parseTimestamp(input[endProperty]) : start) as VTimestamp
   const startIdentifier: number = getDayIdentifier(start)
   const startTimestampIdentifier: number = getTimestampIdentifier(start)
   const endIdentifier: number = getDayIdentifier(end)

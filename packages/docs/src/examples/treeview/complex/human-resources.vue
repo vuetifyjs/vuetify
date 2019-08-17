@@ -3,7 +3,7 @@
     class="mx-auto"
     max-width="500"
   >
-    <v-sheet class="pa-3 primary lighten-2">
+    <v-sheet class="pa-4 primary lighten-2">
       <v-text-field
         v-model="search"
         label="Search Company Directory"

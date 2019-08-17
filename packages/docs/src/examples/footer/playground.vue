@@ -8,13 +8,13 @@
         flat
         tile
         width="100%"
-        class="red lighten-1 text-xs-center"
+        class="red lighten-1 text-center"
       >
         <v-card-text>
           <v-btn
             v-for="icon in icons"
             :key="icon"
-            class="mx-3"
+            class="mx-4"
             icon
           >
             <v-icon size="24px">{{ icon }}</v-icon>
@@ -29,14 +29,14 @@
       </v-card>
     </v-footer>
 
-    <v-layout
-      align-center
-      justify-center
-      class="ma-5"
+    <v-row
+      align="center"
+      justify="center"
+      class="ma-12"
     >
-      <v-flex
-        xs12
-        md8
+      <v-col
+        cols="12"
+        md="8"
       >
 
         <v-select
@@ -51,8 +51,8 @@
           hide-details
           label="Padless"
         ></v-checkbox>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-card>
 </template>
 

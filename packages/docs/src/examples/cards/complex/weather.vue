@@ -12,18 +12,18 @@
     </v-list-item>
 
     <v-card-text>
-      <v-layout align-center>
-        <v-flex xs6 display-3>
+      <v-row align="center">
+        <v-col class="display-3" cols="6">
           23&deg;C
-        </v-flex>
-        <v-flex xs6>
+        </v-col>
+        <v-col cols="6">
           <v-img
-            src="http://cdn.vuetifyjs.com/images/cards/sun.png"
+            src="https://cdn.vuetifyjs.com/images/cards/sun.png"
             alt="Sunny image"
             width="92"
           ></v-img>
-        </v-flex>
-      </v-layout>
+        </v-col>
+      </v-row>
     </v-card-text>
 
     <v-list-item>
@@ -44,7 +44,7 @@
       v-model="time"
       :max="6"
       :tick-labels="labels"
-      class="mx-3"
+      class="mx-4"
       ticks
     ></v-slider>
 
@@ -59,7 +59,7 @@
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-item-icon>
 
-        <v-list-item-subtitle class="text-xs-right">
+        <v-list-item-subtitle class="text-right">
           {{ item.temp }}
         </v-list-item-subtitle>
       </v-list-item>

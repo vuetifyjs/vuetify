@@ -1,12 +1,11 @@
 {
-  "header": "步骤线",
   "headerText": "`v-stepper` 组件用于显示步骤进度。",
   "examples": {
     "editable": {
       "header": "可编辑步骤",
       "desc": "用户随时可以选择可编辑的步骤并将跳转到该步。"
     },
-    "nonEditable": {
+    "non-editable": {
       "header": "不可编辑步骤",
       "desc": "不可编辑步骤（Non-editable steps）强制用户在整个流程中进行线性处理。"
     },
@@ -26,11 +25,11 @@
       "header": "线性步骤",
       "desc": "线性步骤始终沿着你定义的路径移动。"
     },
-    "nonLinear": {
+    "non-linear": {
       "header": "非线性步骤",
       "desc": "非线性步骤可以让用户按照自己选择路线在流程中移动。"
     },
-    "alternateLabels": {
+    "alternate-labels": {
       "header": "备用标签",
       "desc": "步骤组件也有一个放置在步骤下方的备用标签样式。"
     },
@@ -38,11 +37,11 @@
       "header": "多行表示的错误状态",
       "desc": "可以显示错误状态来通知用户必须采取的一些行动。"
     },
-    "alternateError": {
+    "alternate-error": {
       "header": "备用标签样式的多行错误状态显示",
       "desc": "错误状态的显示同样可以应用于备用标签样式。"
     },
-    "verticalError": {
+    "vertical-error": {
       "header": "垂直的多行错误状态显示",
       "desc": "同样的，错误状态也可以应用于垂直的步骤。"
     },

@@ -27,7 +27,6 @@ export default mixins(Colorable, Themeable).extend({
       default: 0,
       validator: (val: number) => val % 1 === 0,
     },
-    totalVisible: [Number, String],
     nextIcon: {
       type: String,
       default: '$vuetify.icons.next',
@@ -36,6 +35,7 @@ export default mixins(Colorable, Themeable).extend({
       type: String,
       default: '$vuetify.icons.prev',
     },
+    totalVisible: [Number, String],
     value: {
       type: Number,
       default: 0,
@@ -60,7 +60,10 @@ export default mixins(Colorable, Themeable).extend({
     },
 
     items (): (string | number)[] {
-      const maxLength = parseInt(this.totalVisible, 10) || this.maxButtons
+      const totalVisible = parseInt(this.totalVisible, 10)
+      const maxLength = totalVisible > this.maxButtons
+        ? this.maxButtons
+        : totalVisible || this.maxButtons
       if (this.length <= maxLength) {
         return this.range(1, this.length)
       }

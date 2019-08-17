@@ -1,36 +1,35 @@
 <template>
-  <v-container grid-list-xl>
-    <v-layout wrap>
-      <v-flex
-        xs12
-        md4
+  <v-container>
+    <v-row>
+      <v-col
+        cols="12"
+        md="4"
       >
         <v-btn
           v-for="t in types"
           :key="t"
-          class="my-3"
+          class="my-4"
           block
           @click="type = t"
         >{{ t }}</v-btn>
-      </v-flex>
-      <v-flex
-        d-flex
-        justify-center
+      </v-col>
+      <v-col
+        class="d-flex justify-center"
       >
         <v-color-picker v-model="color"></v-color-picker>
-      </v-flex>
-      <v-flex
-        xs12
-        md4
+      </v-col>
+      <v-col
+        cols="12"
+        md="4"
       >
         <v-sheet
           dark
-          class="pa-3"
+          class="pa-4"
         >
           <pre>{{ showColor }}</pre>
         </v-sheet>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

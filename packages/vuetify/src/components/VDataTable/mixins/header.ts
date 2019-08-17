@@ -17,7 +17,6 @@ export interface TableHeader {
   class?: string | string[]
   width?: string | number
   filter?: (value: any, search: string | null, item: any) => boolean
-  filterExclusive?: boolean
   sort?: compareFn
 }
 
@@ -85,6 +84,7 @@ export default mixins<options>().extend({
     },
     genSortIcon () {
       return this.$createElement(VIcon, {
+        staticClass: 'v-data-table-header__icon',
         props: {
           size: 18,
         },

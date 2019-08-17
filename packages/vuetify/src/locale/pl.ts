@@ -12,6 +12,7 @@ export default {
       sortAscending: ': Sortowanie rosnąco. Kliknij aby zmienić.',
       sortNone: ': Bez sortowania. Kliknij aby posortować rosnąco.',
     },
+    sortBy: 'Sortuj według',
   },
   dataFooter: {
     itemsPerPageText: 'Pozycji na stronie:',
@@ -31,5 +32,9 @@ export default {
   },
   calendar: {
     moreEvents: '{0} więcej',
+  },
+  fileInput: {
+    counter: 'Liczba plików: {0}',
+    counterSize: 'Liczba plików: {0} (łącznie {1})',
   },
 }

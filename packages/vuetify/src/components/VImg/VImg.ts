@@ -25,18 +25,18 @@ export default VResponsive.extend({
   props: {
     alt: String,
     contain: Boolean,
-    src: {
-      type: [String, Object],
-      default: '',
-    } as PropValidator<string | srcObject>,
     gradient: String,
     lazySrc: String,
-    srcset: String,
-    sizes: String,
     position: {
       type: String,
       default: 'center center',
     },
+    sizes: String,
+    src: {
+      type: [String, Object],
+      default: '',
+    } as PropValidator<string | srcObject>,
+    srcset: String,
     transition: {
       type: [Boolean, String],
       default: 'fade-transition',

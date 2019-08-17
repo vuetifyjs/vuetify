@@ -1,7 +1,7 @@
 {
-  "props": {
-    "v-treeview": {
-      "customFilter": "Filtro de búsqueda personalizado."
+  "examples": {
+    "color": {
+      "header": "Color"
     }
   }
 }

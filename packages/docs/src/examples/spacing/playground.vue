@@ -1,7 +1,6 @@
 <template lang="pug">
   v-container(
     fluid
-    grid-list-lg
     spacing-playground
     py-0
     px-2
@@ -27,7 +26,7 @@
             div() -
 
         v-select(
-          :items="sizes.slice(1)"
+          :items="paddingSizes.slice(1)"
           :label="$t('Styles.Spacing.size')"
           v-model="paddingSize"
         )
@@ -48,7 +47,7 @@
             div() -
 
         v-select(
-          :items="sizes"
+          :items="marginSizes"
           :label="$t('Styles.Spacing.size')"
           v-model="marginSize"
         )
@@ -65,7 +64,7 @@
             class="light-green lighten-3"
           )
             div(
-              class="white text-xs-center"
+              class="white text-center"
               v-text="$t('Styles.Spacing.playgroundText2')"
             )
 </template>
@@ -74,7 +73,12 @@
   export default {
     data: () => ({
       directions: ['t', 'b', 'l', 'r', 's', 'e', 'x', 'y', 'a'],
-      sizes: ['auto', '0', '1', '2', '3', '4', '5'],
+      paddingSizes: ['auto', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+      marginSizes: [
+        'auto',
+        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12',
+        'n1', 'n2', 'n3', 'n4', 'n5', 'n6', 'n7', 'n8', 'n9', 'n10', 'n11', 'n12',
+      ],
       paddingDirection: 'a',
       paddingSize: '2',
       marginDirection: 'a',

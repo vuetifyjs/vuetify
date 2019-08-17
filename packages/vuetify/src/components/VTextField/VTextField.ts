@@ -54,10 +54,6 @@ export default baseMixins.extend<options>().extend({
       type: String,
       default: '$vuetify.icons.clear',
     },
-    color: {
-      type: String,
-      default: 'primary',
-    },
     counter: [Boolean, Number, String],
     filled: Boolean,
     flat: Boolean,
@@ -69,8 +65,8 @@ export default baseMixins.extend<options>().extend({
     prependInnerIcon: String,
     reverse: Boolean,
     rounded: Boolean,
-    singleLine: Boolean,
     shaped: Boolean,
+    singleLine: Boolean,
     solo: Boolean,
     soloInverted: Boolean,
     suffix: String,
@@ -170,6 +166,12 @@ export default baseMixins.extend<options>().extend({
   watch: {
     labelValue: 'setLabelWidth',
     outlined: 'setLabelWidth',
+    label () {
+      this.$nextTick(this.setLabelWidth)
+    },
+    prefix () {
+      this.$nextTick(this.setPrefixWidth)
+    },
     isFocused (val) {
       // Sets validationState from validatable
       this.hasColor = val
@@ -398,7 +400,7 @@ export default baseMixins.extend<options>().extend({
     },
     genAffix (type: 'prefix' | 'suffix') {
       return this.$createElement('div', {
-        'class': `v-text-field__${type}`,
+        class: `v-text-field__${type}`,
         ref: type,
       }, this[type])
     },
@@ -407,7 +409,7 @@ export default baseMixins.extend<options>().extend({
       e && this.$emit('blur', e)
     },
     onClick () {
-      if (this.isFocused || this.disabled) return
+      if (this.isFocused || this.disabled || !this.$refs.input) return
 
       this.$refs.input.focus()
     },

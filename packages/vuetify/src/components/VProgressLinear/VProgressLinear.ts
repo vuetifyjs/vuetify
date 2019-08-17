@@ -128,7 +128,8 @@ export default baseMixins.extend({
 
       return {
         opacity: backgroundOpacity,
-        width: convertToUnit(this.normalizedBuffer, '%'),
+        left: convertToUnit(this.normalizedValue, '%'),
+        width: convertToUnit(this.normalizedBuffer - this.normalizedValue, '%'),
       }
     },
     classes (): object {
@@ -214,7 +215,7 @@ export default baseMixins.extend({
     const data = {
       staticClass: 'v-progress-linear',
       attrs: {
-        'role': 'progressbar',
+        role: 'progressbar',
         'aria-valuemin': 0,
         'aria-valuemax': this.normalizedBuffer,
         'aria-valuenow': this.indeterminate ? undefined : this.normalizedValue,

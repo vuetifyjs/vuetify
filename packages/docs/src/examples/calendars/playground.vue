@@ -1,9 +1,9 @@
 <template>
-  <v-layout wrap>
-    <v-flex
-      sm12
-      lg3
-      class="mb-3 controls"
+  <v-row>
+    <v-col
+      sm="12"
+      lg="3"
+      class="mb-4 controls"
     >
       <v-btn
         fab
@@ -14,9 +14,7 @@
         color="primary"
         @click="$refs.calendar.prev()"
       >
-        <v-icon dark>
-          keyboard_arrow_left
-        </v-icon>
+        <v-icon dark>mdi-chevron-left</v-icon>
       </v-btn>
       <v-btn
         fab
@@ -27,11 +25,7 @@
         color="primary"
         @click="$refs.calendar.next()"
       >
-        <v-icon
-          dark
-        >
-          keyboard_arrow_right
-        </v-icon>
+        <v-icon dark>mdi-chevron-right</v-icon>
       </v-btn>
       <br><br><br>
       <v-select
@@ -216,11 +210,11 @@
         :items="styleIntervalOptions"
         label="Styling"
       ></v-select>
-    </v-flex>
-    <v-flex
-      sm12
-      lg9
-      class="pl-3"
+    </v-col>
+    <v-col
+      sm="12"
+      lg="9"
+      class="pl-4"
     >
       <v-sheet height="500">
         <v-calendar
@@ -272,8 +266,8 @@
           </template>
         </v-calendar>
       </v-sheet>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -387,11 +381,11 @@
     }),
     computed: {
       intervalStyle () {
-        return stylings[ this.styleInterval ].bind(this)
+        return stylings[this.styleInterval].bind(this)
       },
       hasIntervals () {
         return this.type in {
-          'week': 1, 'day': 1, '4day': 1, 'custom-daily': 1,
+          week: 1, day: 1, '4day': 1, 'custom-daily': 1,
         }
       },
       hasEnd () {

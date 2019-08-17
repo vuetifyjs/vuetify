@@ -1,8 +1,5 @@
 <template>
-  <v-container
-    fluid
-    grid-list-md
-  >
+  <v-container fluid>
     <v-data-iterator
       :items="items"
       :items-per-page.sync="itemsPerPage"
@@ -27,53 +24,52 @@
             prepend-inner-icon="search"
             label="Search"
           ></v-text-field>
-          <v-spacer></v-spacer>
-          <v-select
-            v-model="sortBy"
-            flat
-            solo-inverted
-            hide-details
-            :items="keys"
-            prepend-inner-icon="search"
-            label="Sort by"
-          ></v-select>
-          <v-spacer></v-spacer>
-          <v-btn-toggle
-            v-model="sortDesc"
-            mandatory
-          >
-            <v-btn
-              large
-              depressed
-              color="blue"
-              :value="false"
+          <template v-if="$vuetify.breakpoint.mdAndUp">
+            <v-spacer></v-spacer>
+            <v-select
+              v-model="sortBy"
+              flat
+              solo-inverted
+              hide-details
+              :items="keys"
+              prepend-inner-icon="search"
+              label="Sort by"
+            ></v-select>
+            <v-spacer></v-spacer>
+            <v-btn-toggle
+              v-model="sortDesc"
+              mandatory
             >
-              <v-icon>arrow_upward</v-icon>
-            </v-btn>
-            <v-btn
-              large
-              depressed
-              color="blue"
-              :value="true"
-            >
-              <v-icon>arrow_downward</v-icon>
-            </v-btn>
-          </v-btn-toggle>
+              <v-btn
+                large
+                depressed
+                color="blue"
+                :value="false"
+              >
+                <v-icon>arrow_upward</v-icon>
+              </v-btn>
+              <v-btn
+                large
+                depressed
+                color="blue"
+                :value="true"
+              >
+                <v-icon>arrow_downward</v-icon>
+              </v-btn>
+            </v-btn-toggle>
+          </template>
         </v-toolbar>
       </template>
 
       <template v-slot:default="props">
-        <v-layout
-          row
-          wrap
-        >
-          <v-flex
+        <v-row>
+          <v-col
             v-for="item in props.items"
             :key="item.name"
-            xs12
-            sm6
-            md4
-            lg3
+            cols="12"
+            sm="6"
+            md="4"
+            lg="3"
           >
             <v-card>
               <v-card-title class="subheading font-weight-bold">{{ item.name }}</v-card-title>
@@ -91,17 +87,12 @@
                 </v-list-item>
               </v-list>
             </v-card>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </template>
 
       <template v-slot:footer>
-        <v-toolbar
-          flat
-          dense
-          color="transparent"
-          class="mt-2"
-        >
+        <v-row class="mt-2" align="center" justify="center">
           <span class="grey--text">Items per page</span>
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
@@ -130,7 +121,7 @@
           <v-spacer></v-spacer>
 
           <span
-            class="mr-3
+            class="mr-4
             grey--text"
           >
             Page {{ page }} of {{ numberOfPages }}
@@ -153,7 +144,7 @@
           >
             <v-icon>keyboard_arrow_right</v-icon>
           </v-btn>
-        </v-toolbar>
+        </v-row>
       </template>
     </v-data-iterator>
   </v-container>
