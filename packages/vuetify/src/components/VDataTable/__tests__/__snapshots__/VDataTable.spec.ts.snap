@@ -47,7 +47,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
                   <i aria-hidden="true"
                      class="v-icon notranslate material-icons theme--light"
                   >
-                    $vuetify.icons.dropdown
+                    $dropdown
                   </i>
                 </div>
               </div>
@@ -75,7 +75,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            $vuetify.icons.prev
+            $prev
           </i>
         </span>
       </button>
@@ -90,7 +90,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            $vuetify.icons.next
+            $next
           </i>
         </span>
       </button>
@@ -189,7 +189,7 @@ exports[`VDataTable.ts should render 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            $vuetify.icons.next
+            $next
           </i>
         </span>
       </button>
@@ -242,7 +242,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
                   <i aria-hidden="true"
                      class="v-icon notranslate material-icons theme--light"
                   >
-                    $vuetify.icons.dropdown
+                    $dropdown
                   </i>
                 </div>
               </div>
@@ -272,7 +272,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            $vuetify.icons.prev
+            $prev
           </i>
         </span>
       </button>
@@ -1681,7 +1681,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  $vuetify.icons.minus
+                  $minus
                 </i>
               </span>
             </button>
@@ -1693,7 +1693,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  $vuetify.icons.close
+                  $close
                 </i>
               </span>
             </button>
@@ -1732,7 +1732,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  $vuetify.icons.minus
+                  $minus
                 </i>
               </span>
             </button>
@@ -1744,7 +1744,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  $vuetify.icons.close
+                  $close
                 </i>
               </span>
             </button>
@@ -1783,7 +1783,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  $vuetify.icons.minus
+                  $minus
                 </i>
               </span>
             </button>
@@ -1795,7 +1795,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  $vuetify.icons.close
+                  $close
                 </i>
               </span>
             </button>
@@ -1834,7 +1834,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  $vuetify.icons.minus
+                  $minus
                 </i>
               </span>
             </button>
@@ -1846,7 +1846,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  $vuetify.icons.close
+                  $close
                 </i>
               </span>
             </button>
@@ -1885,7 +1885,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  $vuetify.icons.minus
+                  $minus
                 </i>
               </span>
             </button>
@@ -1897,7 +1897,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  $vuetify.icons.close
+                  $close
                 </i>
               </span>
             </button>
@@ -2108,7 +2108,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  $vuetify.icons.minus
+                  $minus
                 </i>
               </span>
             </button>
@@ -2120,7 +2120,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  $vuetify.icons.close
+                  $close
                 </i>
               </span>
             </button>
@@ -2171,7 +2171,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  $vuetify.icons.minus
+                  $minus
                 </i>
               </span>
             </button>
@@ -2183,7 +2183,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  $vuetify.icons.close
+                  $close
                 </i>
               </span>
             </button>
@@ -2217,7 +2217,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  $vuetify.icons.minus
+                  $minus
                 </i>
               </span>
             </button>
@@ -2229,7 +2229,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  $vuetify.icons.close
+                  $close
                 </i>
               </span>
             </button>
@@ -2263,7 +2263,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  $vuetify.icons.minus
+                  $minus
                 </i>
               </span>
             </button>
@@ -2275,7 +2275,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  $vuetify.icons.close
+                  $close
                 </i>
               </span>
             </button>

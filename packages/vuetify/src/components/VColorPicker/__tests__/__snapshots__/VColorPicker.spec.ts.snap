@@ -496,7 +496,7 @@ exports[`VColorPicker.ts should not show alpha controls if given hex value witho
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            $vuetify.icons.unfold
+            $unfold
           </i>
         </span>
       </button>
