@@ -99,6 +99,8 @@ export default Vue.extend({
       let value = this.options.itemsPerPage
       const computedIPPO = this.computedItemsPerPageOptions
 
+      if (computedIPPO.length === 1) return null
+
       if (
         computedIPPO.length > 0 &&
         !computedIPPO.find(ippo => ippo.value === value)
