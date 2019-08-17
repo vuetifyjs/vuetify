@@ -3,7 +3,7 @@
     <div>
       Edit this
       <span v-html="contributionPageGithub" />
-      on Github OR
+      on Github | Translate on
       <span @click="changeLanguageEoUy" v-html="contributionLanguageCrowdin" />
     </div>
     <v-spacer class="hidden-sm-and-down" />
@@ -42,8 +42,7 @@
         return this.parseLink('', 'Contribution Guide', `/${this.params.lang}/getting-started/contributing`)
       },
       contributionLanguageCrowdin () {
-        const link = `./${this.params.namespace}/${this.params.page}`
-        return this.parseLink('', 'language in crowdin', link)
+        return this.parseLink('', 'Crowdin', `/${this.params.namespace}/${this.params.page}`)
       },
       contributionPageGithub () {
         return this.parseLink('', 'page', this.contributionPageLink)
