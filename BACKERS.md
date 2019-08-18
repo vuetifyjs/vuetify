@@ -120,3 +120,4 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Sean Kimball
 - MEHMET SAGLAM
 - Mark Couvaras
+- [quickytools](https://www.quickytools.com/)
