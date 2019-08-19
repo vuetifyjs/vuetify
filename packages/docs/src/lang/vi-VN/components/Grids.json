@@ -1,47 +1,37 @@
 {
+  "header": "# Hệ thống lưới",
   "examples": {
     "playground": {
       "header": "### Layout playground",
       "desc": "Thử nghiệm các thuộc tính của layout trong một ví dụ đơn giản."
     },
-    "offset": {
-      "header": "### Offset"
-    },
-    "order": {
-      "header": "### Sắp xếp"
-    },
-    "direction-and-align": {
-      "header": "### Hướng và căn chỉnh"
-    },
-    "row-column-breakpoint": {
-      "header": "### Hàng and cột breakpoints"
-    },
     "grow-shrink": {
       "header": "### Giãn và Co"
     },
+    "row-column-breakpoint": {
+      "header": "### Hàng and cột breakpoints",
+      "desc": "Tự động thay đổi bố cục dựa trên độ phân giải. **( thay đổi kích thước màn hình và xem bố cục thay dổi thành `row` trên độ phân giải nhỏ)**"
+    },
+    "order": {
+      "desc": "Bạn có thể sắp xếp các phần tử trong lưới. Tương tự Offsets, bạn có thể sắp xếp vị trí khác nhau cho từng kích thước (độ phân giải) khác nhau."
+    },
+    "offset": {
+      "header": "### Offset"
+    },
     "nested-grid": {
-      "header": "### Grid lồng nhau"
+      "header": "### Grid lồng nhau",
+      "desc": "Lưới có thể lồng nhau, tương tự như các frameworks khác nhằm tạo ra các bố cục theo ý muốn."
     },
     "unique-layouts": {
-      "header": "### Bố cục đặc biệt"
+      "header": "### Bố cục đặc biệt",
+      "desc": "Sức mạnh và sự linh hoạt của hệ thống lưới Vuetify giúp cho việc xây dựng giao diện trở nên dễ dàng."
     },
     "spacer": {
-      "header": "### v-spacer"
+      "desc": "Component `v-spacer` rất hữu ích khi bạn muốn lấp đầy khoảng trống hoặc tạo khoảng trống giữa 2 component."
     },
     "tags": {
       "header": "### Thẻ Html",
       "desc": "Đôi khi bạn muốn chỉ định một phần tử layout như là một thẻ đặc biệt, như là thẻ `section` or `li`."
     }
-  },
-  "props": {
-    "alignCenter": "Canh giữa các phần tử.",
-    "alignContentCenter": "Canh nội dung vào giữa.",
-    "alignContentEnd": "Canh nội dung về cuối.",
-    "alignContentSpaceAround": "Canh nội dung với các khoảng xung quanh.",
-    "alignContentSpaceBetween": "Canh nội dung giữa các khoảng.",
-    "alignContentStart": "Canh nội dung về đầu.",
-    "alignEnd": "Canh các phần tử về cuối.",
-    "alignStart": "Canh các phần tử về đầu.",
-    "d-{type}": "Để chỉ định một thành phần hiển thị như flex/inline-flex/block etc. Cú pháp `d-{type}`. Ví dụ `d-flex`."
   }
 }

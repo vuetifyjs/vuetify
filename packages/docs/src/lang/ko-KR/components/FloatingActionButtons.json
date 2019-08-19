@@ -1,6 +1,5 @@
 {
   "header": "버튼 : 플로팅 액션 버튼 (Buttons: Floating Action Button)",
-  "headerText": "`v-btn` 컴포넌트는 플로팅 액션버튼에 사용됩니다. 이는 어플리케이션에 주요 액션 포인트를 제공합니다. `v-speed-dial` 컴포넌트와 결합하면 사용자가 사용할 수 있는 기능들을 다양한 그룹으로 만들 수 있습니다.",
   "examples": {
     "small": {
       "header": "작은 버튼 (Small variant)",

@@ -1,6 +1,10 @@
 {
+  "header": "# Nút",
   "headerText": "Component `v-btn` thay thế nút mặc định của html thành nút theo chuẩn material design và nhiều lựa chọn. Mọi lớp màu hỗ trợ đều có thể sử dụng để thay thế màu nền hoặc màu chữ.",
   "examples": {
+    "usage": {
+      "desc": "Button cơ bản được định nghĩa là một nút gồm chữ in hoa, đổ bóng nhẹ, hiệu ứng di chuột và hiệu ứng gợn khi kích."
+    },
     "flat": {
       "header": "### Flat",
       "desc": "Nút dạng `flat` không có đổ bóng và màu nền. Chỉ khi di chuột vào nút thì nút mới hiển thị."
@@ -23,8 +27,7 @@
       "desc": "Có thể sử dụng Icon như nội dung chính của nút."
     },
     "floating": {
-      "header": "### Floating",
-      "desc": "Nút dạng `Floating` có hình tròn và thường có một icon."
+      "header": "### Floating"
     },
     "loaders": {
       "header": "### Loaders",
@@ -34,13 +37,8 @@
       "header": "### Sizing",
       "desc": "Các nút có nhiều kích cỡ khác nhau để phù hợp với nhiều tình huống."
     },
-    "outline": {
-      "header": "### Outline",
-      "desc": "Nút dạng `outline` kế thừa viền và màu của nút."
-    },
-    "round": {
-      "header": "### Round",
-      "desc": "Nút dạng `rounded` có hành vi tương tự nút mặc định nhưng hai cạnh bên được bo tròn."
+    "tile": {
+      "desc": "Nút dạng `tile` giống như nút mặc định nhưng không bo các góc."
     },
     "block": {
       "header": "### Block",
@@ -49,7 +47,16 @@
   },
   "props": {
     "v-btn": {
+      "block": "Mở rộng nút thành chiều dài 100%.",
+      "depressed": "Loại bỏ đổ bóng của nút.",
+      "fab": "Nút dạng tròn như floating-action-button - _round_.",
+      "icon": "Xác định nút dạng icon, bo tròn và phẳng_",
+      "inputValue": "Xác định giá trị khi nút được chọn.",
+      "left": "Canh trái nút. Sử dùng kèm với thuộc tính **absolute** hoặc **fixed**.",
       "loading": "Thêm hiệu ứng biểu tượng loading",
+      "outlined": "Nút dạng viền, màu nền sẽ thành trong suốt.",
+      "right": "Canh phải nút. Sử dùng kèm với thuộc tính **absolute** hoặc **fixed**.",
+      "text": "Chỉ hiển thị chữ. Tắt nền và viền.",
       "type": "Thiết lập kiểu của nút"
     }
   },

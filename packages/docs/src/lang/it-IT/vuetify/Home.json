@@ -1,1 +1,10 @@
-{}
+{
+  "features": {
+    "community": {
+      "text": "Quando ci si imbatte in un problema, si ha bisogno di supporto immediato. Vuetify offre supporto sulla nostra grandissima comunità Discord.",
+      "title": "Comunità vivace"
+    }
+  },
+  "getHelp": "Ottieni aiuto",
+  "getStarted": "Per iniziare"
+}
