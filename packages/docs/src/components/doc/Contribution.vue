@@ -55,7 +55,9 @@
 
     methods: {
       parseLink,
-      changeLanguageEoUy () {
+      changeLanguageEoUy (e) {
+        // the anchor href doesn't fire
+        e.preventDefault()
         const lang = 'eo-UY'
         // If we're switching in or out of translating
         // then we need to force a reload to make sure
