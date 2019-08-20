@@ -21,7 +21,7 @@
   "scopedText5": "When providing a `v-list-item` component in a slot, the aria attributes are passed through the **attrs** data property and can be bound with `v-bind`.",
   "scopedText6": "In order to properly associate a label with the correct _option_ you will need to bind `attrs.id` to the `aria-labelled-by` on your `v-list-item-title`. This will ensure that the text is properly associated. Keep in mind, this is done automatically for you if you are not using slots.",
   "resourcesHeader": "## Additional Resources",
-  "resourcesText1": "While Vuetify attempts to make a11y as easy as posisble in your application, there are times where additional information is needed. Below you can find a list of helpful resources.",
+  "resourcesText1": "While Vuetify attempts to make a11y as easy as possible in your application, there are times where additional information is needed. Below you can find a list of helpful resources.",
   "resourcesText2": [
     "[W3C Web Accessibility Initiative](https://www.w3.org/WAI/)",
     "[WAI-ARIA Authoring Practices](https://www.w3.org/TR/wai-aria-practices-1.1/)",
