@@ -1,1 +1,6 @@
-{}
+{
+  "props": {
+    "dark": "Áp dụng giao diện tối. Xem thêm tại [dark themes](https://material.io/design/color/dark-theme.html).",
+    "light": "Giao diện sáng."
+  }
+}

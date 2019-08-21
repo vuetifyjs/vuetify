@@ -7,94 +7,111 @@
   "resetSearch": "crwdns35324:0crwdne35324:0",
   "gotchas": [
     {
-      "q": "crwdns41470:0crwdne41470:0",
-      "a": "crwdns41472:0[template]crwdnd41472:0[community]crwdne41472:0"
+      "q": "crwdns42650:0crwdne42650:0",
+      "a": "crwdns42652:0crwdne42652:0"
     },
     {
-      "q": "crwdns41474:0$attrscrwdnd41474:0$listenerscrwdne41474:0",
-      "a": "crwdns41476:0crwdne41476:0"
+      "q": "crwdns42654:0$materialcrwdne42654:0",
+      "a": "crwdns42656:0crwdne42656:0"
     },
     {
-      "q": "crwdns35334:0crwdne35334:0",
-      "a": "crwdns35336:0crwdne35336:0"
+      "q": "crwdns42658:0crwdne42658:0",
+      "a": "crwdns42660:0[template]crwdnd42660:0[community]crwdne42660:0"
     },
     {
-      "q": "crwdns35338:0crwdne35338:0",
-      "a": "crwdns41478:0crwdne41478:0"
+      "q": "crwdns42662:0$attrscrwdnd42662:0$listenerscrwdne42662:0",
+      "a": "crwdns42664:0crwdne42664:0"
     },
     {
-      "q": "crwdns35342:0crwdne35342:0",
-      "a": "crwdns41480:0[Application]crwdne41480:0"
+      "q": "crwdns42666:0crwdne42666:0",
+      "a": "crwdns42668:0crwdne42668:0"
     },
     {
-      "q": "crwdns35346:0crwdne35346:0",
-      "a": "crwdns41482:0crwdne41482:0"
+      "q": "crwdns42670:0crwdne42670:0",
+      "a": "crwdns42672:0crwdne42672:0"
     },
     {
-      "q": "crwdns35350:0crwdne35350:0",
-      "a": "crwdns41484:0{ overflow-y: auto }crwdne41484:0"
+      "q": "crwdns42674:0crwdne42674:0",
+      "a": "crwdns42676:0[Application]crwdne42676:0"
     },
     {
-      "q": "crwdns35354:0crwdne35354:0",
-      "a": "crwdns35356:0crwdne35356:0"
+      "q": "crwdns42678:0crwdne42678:0",
+      "a": "crwdns42680:0crwdne42680:0"
     },
     {
-      "q": "crwdns35358:0crwdne35358:0",
-      "a": "crwdns35360:0[documentation]crwdne35360:0"
+      "q": "crwdns42682:0crwdne42682:0",
+      "a": "crwdns42684:0{ overflow-y: auto }crwdne42684:0"
     },
     {
-      "q": "crwdns35362:0crwdne35362:0",
-      "a": "crwdns35364:0crwdne35364:0",
-      "s": "crwdns35366:0crwdne35366:0"
+      "q": "crwdns42686:0crwdne42686:0",
+      "a": "crwdns42688:0crwdne42688:0"
     },
     {
-      "q": "crwdns41486:0crwdne41486:0",
-      "a": "crwdns41488:0crwdne41488:0"
+      "q": "crwdns42690:0crwdne42690:0",
+      "a": "crwdns42692:0[documentation]crwdne42692:0"
     },
     {
-      "q": "crwdns35376:0crwdne35376:0",
-      "a": "crwdns35378:0crwdne35378:0",
-      "s": "crwdns35380:0crwdne35380:0"
+      "q": "crwdns42694:0crwdne42694:0",
+      "a": "crwdns42696:0crwdne42696:0",
+      "s": "crwdns42698:0crwdne42698:0"
     },
     {
-      "q": "crwdns35382:0crwdne35382:0",
-      "a": "crwdns35384:0[vue.config.js]crwdnd35384:0[vue-loader]crwdne35384:0",
-      "s": "crwdns35386:0crwdne35386:0"
+      "q": "crwdns42700:0crwdne42700:0",
+      "a": "crwdns42702:0crwdne42702:0"
     },
     {
-      "q": "crwdns35388:0crwdne35388:0",
-      "a": "crwdns35390:0crwdne35390:0",
+      "q": "crwdns42704:0crwdne42704:0",
+      "a": "crwdns42706:0crwdne42706:0",
+      "s": "crwdns42708:0crwdne42708:0"
+    },
+    {
+      "q": "crwdns42710:0crwdne42710:0",
+      "a": "crwdns42712:0[vue.config.js]crwdnd42712:0[vue-loader]crwdne42712:0",
+      "s": "crwdns42714:0crwdne42714:0"
+    },
+    {
+      "q": "crwdns42716:0crwdne42716:0",
+      "a": "crwdns42718:0crwdne42718:0",
       "a2": [
-        "crwdns41490:0[v2.0.0]crwdne41490:0",
-        "crwdns41492:0[v1.5.0]crwdne41492:0",
-        "crwdns41494:0[v1.4.0]crwdne41494:0",
-        "crwdns41496:0[v1.3.0]crwdne41496:0",
-        "crwdns41498:0[v1.2.0]crwdne41498:0",
-        "crwdns41500:0[v1.1.0]crwdne41500:0",
-        "crwdns41502:0[v1.0.0]crwdne41502:0",
-        "crwdns41504:0[v0.17.0]crwdne41504:0",
-        "crwdns41506:0[v0.16.0]crwdne41506:0",
-        "crwdns41508:0[v0.15.0]crwdne41508:0",
-        "crwdns41510:0[v0.14.0]crwdne41510:0",
-        "crwdns41512:0[v0.13.0]crwdne41512:0",
-        "crwdns41514:0[v0.12.0]crwdne41514:0"
+        "crwdns42720:0[v2.0.0]crwdne42720:0",
+        "crwdns42722:0[v1.5.0]crwdne42722:0",
+        "crwdns42724:0[v1.4.0]crwdne42724:0",
+        "crwdns42726:0[v1.3.0]crwdne42726:0",
+        "crwdns42728:0[v1.2.0]crwdne42728:0",
+        "crwdns42730:0[v1.1.0]crwdne42730:0",
+        "crwdns42732:0[v1.0.0]crwdne42732:0",
+        "crwdns42734:0[v0.17.0]crwdne42734:0",
+        "crwdns42736:0[v0.16.0]crwdne42736:0",
+        "crwdns42738:0[v0.15.0]crwdne42738:0",
+        "crwdns42740:0[v0.14.0]crwdne42740:0",
+        "crwdns42742:0[v0.13.0]crwdne42742:0",
+        "crwdns42744:0[v0.12.0]crwdne42744:0"
       ]
     },
     {
-      "q": "crwdns35414:0crwdne35414:0",
-      "a": "crwdns35416:0crwdne35416:0"
+      "q": "crwdns42746:0crwdne42746:0",
+      "a": "crwdns42748:0crwdne42748:0"
     },
     {
-      "q": "crwdns35418:0crwdne35418:0",
-      "a": "crwdns41516:0[limitations]crwdne41516:0"
+      "q": "crwdns42750:0crwdne42750:0",
+      "a": "crwdns42752:0[limitations]crwdne42752:0"
     },
     {
-      "q": "crwdns41518:0crwdne41518:0",
-      "a": "crwdns41520:0crwdne41520:0"
+      "q": "crwdns42754:0crwdne42754:0",
+      "a": "crwdns42756:0crwdne42756:0"
     },
     {
-      "q": "crwdns41522:0crwdne41522:0",
-      "a": "crwdns41524:0crwdne41524:0"
+      "q": "crwdns42758:0crwdne42758:0",
+      "a": "crwdns42760:0crwdne42760:0"
+    },
+    {
+      "q": "crwdns42762:0crwdne42762:0",
+      "a": "crwdns42764:0[vue-cli-plugin-vuetify]crwdnd42764:0[vuetify-loader]crwdne42764:0"
+    },
+    {
+      "q": "crwdns42766:0crwdne42766:0",
+      "a": "crwdns42768:0crwdne42768:0",
+      "s": "crwdns42770:0crwdne42770:0"
     }
   ]
 }

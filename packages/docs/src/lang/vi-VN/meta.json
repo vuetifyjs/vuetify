@@ -1,14 +1,52 @@
 {
+  "404": {
+    "title": "Không tìm thấy",
+    "description": "Xin lỗi, xem ra thứ bạn đang tìm không có ở đây!"
+  },
   "getting-started/quick-start": {
     "title": "Bắt đầu nhanh"
+  },
+  "getting-started/why-vuetify": {
+    "title": "Tại sao dùng Vuetify?"
+  },
+  "getting-started/frequently-asked-questions": {
+    "title": "Câu hỏi thường gặp"
+  },
+  "getting-started/meet-the-team": {
+    "title": "Các thành viên",
+    "keywords": "đội ngũ phát triển, đội ngũ chính"
+  },
+  "getting-started/sponsors-and-backers": {
+    "title": "Nhà tài trợ và ủng hộ"
+  },
+  "getting-started/contributing": {
+    "title": "Đóng góp"
   },
   "getting-started/consulting-and-support": {
     "title": "Tư vấn và hỗ trọ"
   },
+  "customization/breakpoints": {
+    "title": "Điểm ngắt"
+  },
   "customization/icons": {
     "title": "Icons"
   },
+  "customization/theme": {
+    "title": "Chủ đề"
+  },
+  "styles/transitions": {
+    "title": "Hiệu ứng"
+  },
+  "framework/sandbox": {
+    "title": "Thử Nghiệm"
+  },
   "components/api-explorer": {
     "title": "API"
+  },
+  "components/aspect-ratios": {
+    "title": "Tỷ lệ khung hình"
+  },
+  "directives/touch-support": {
+    "title": "Hỗ trợ cảm ứng"
   }
 }

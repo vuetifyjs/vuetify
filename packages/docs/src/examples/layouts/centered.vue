@@ -21,7 +21,7 @@
                 flat
               >
                 <v-toolbar-title>Login form</v-toolbar-title>
-                <v-spacer></v-spacer>
+                <div class="flex-grow-1"></div>
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
                     <v-btn
@@ -70,7 +70,7 @@
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <v-spacer></v-spacer>
+                <div class="flex-grow-1"></div>
                 <v-btn color="primary">Login</v-btn>
               </v-card-actions>
             </v-card>

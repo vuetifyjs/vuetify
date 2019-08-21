@@ -5,7 +5,7 @@
         <v-toolbar color="indigo" dark>
           <v-app-bar-nav-icon></v-app-bar-nav-icon>
           <v-toolbar-title>Manage</v-toolbar-title>
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
           <v-btn icon>
             <v-icon>more_vert</v-icon>
           </v-btn>

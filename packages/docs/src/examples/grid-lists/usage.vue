@@ -4,7 +4,7 @@
       <v-card>
         <v-card-actions>
           <v-select v-model="size" :items="items" label="Size"></v-select>
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
         </v-card-actions>
         <v-container v-bind="{ [`grid-list-${size}`]: true }" fluid>
           <v-row>
