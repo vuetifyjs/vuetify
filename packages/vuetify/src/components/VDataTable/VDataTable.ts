@@ -86,7 +86,7 @@ export default VDataIterator.extend({
     customFilter: {
       type: Function,
       default: searchTableItems,
-    } as PropValidator<(items: any[], search: string, locale: string,
+    } as unknown as PropValidator<(items: any[], search: string | null, locale: string,
        exclusiveHeaders: TableHeader[], nonExclusiveHeaders: TableHeader[]) => any[]>,
   },
 
