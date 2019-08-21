@@ -1,18 +1,18 @@
 export default {
-  close: 'Close',
+  close: 'Sluiten',
   dataIterator: {
     pageText: '{0}-{1} van {2}',
     noResultsText: 'Geen overeenkomende resultaten gevonden',
-    loadingText: 'Loading item...',
+    loadingText: 'Items aan het laden...',
   },
   dataTable: {
     itemsPerPageText: 'Rijen per pagina:',
     ariaLabel: {
-      sortDescending: ': Sorted descending. Activate to remove sorting.',
-      sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.',
+      sortDescending: ': Aflopend gesorteerd. Activeer om de sortering te verwijderen.',
+      sortAscending: ': Oplopend gesorteerd. Activeer om aflopend te sorteren.',
+      sortNone: ': Niet gesorterrd. Activeer om oplopend te sorteren.',
     },
-    sortBy: 'Sort by',
+    sortBy: 'Sorteer volgens',
   },
   dataFooter: {
     itemsPerPageText: 'Aantal per pagina:',
@@ -27,14 +27,14 @@ export default {
   },
   noDataText: 'Geen gegevens beschikbaar',
   carousel: {
-    prev: 'Vorige visual',
-    next: 'Volgende visueel',
+    prev: 'Vorig beeld',
+    next: 'Volgend beeld',
   },
   calendar: {
     moreEvents: '{0} meer',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counter: '{0} bestanden',
+    counterSize: '{0} bestanden ({1} in totaal)',
   },
 }
