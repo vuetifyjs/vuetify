@@ -12,7 +12,7 @@ export interface Application {
   right: number
   bottom: number
   footer: number
-  application: Dictionary<TargetPropValues>
+  application: Record<string, TargetPropValues>
 
   register (
     uid: number,
