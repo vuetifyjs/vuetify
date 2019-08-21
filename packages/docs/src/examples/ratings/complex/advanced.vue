@@ -44,7 +44,7 @@
         <span class="headline">FORTNITE</span>
         <div class="grey--text font-weight-light">Video game</div>
       </div>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <v-dialog
         v-model="dialog"
         width="400"
@@ -57,7 +57,7 @@
         <v-card>
           <v-card-title>
             <span class="title font-weight-bold">Share</span>
-            <v-spacer></v-spacer>
+            <div class="flex-grow-1"></div>
             <v-btn
               class="mx-0"
               icon
@@ -100,7 +100,7 @@
     <v-divider></v-divider>
     <v-card-actions>
       <span class="pl-2 grey--text text--darken-2 font-weight-light caption">16,544 reviews</span>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <v-rating
         v-model="rating"
         length="10"

@@ -7,7 +7,7 @@
             <v-icon>arrow_back</v-icon>
           </v-btn>
           <v-toolbar-title>Albums</v-toolbar-title>
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
           <v-btn icon>
             <v-icon>search</v-icon>
           </v-btn>

@@ -9,7 +9,7 @@
 
           <v-toolbar-title class="grey--text text--darken-4">Albums</v-toolbar-title>
 
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
 
           <v-btn icon light>
             <v-icon color="grey darken-2">search</v-icon>

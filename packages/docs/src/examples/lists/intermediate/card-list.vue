@@ -14,7 +14,7 @@
             <v-icon>chevron_left</v-icon>
           </v-btn>
 
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
 
           <v-btn dark icon class="mr-4">
             <v-icon>edit</v-icon>
@@ -25,7 +25,7 @@
           </v-btn>
         </v-card-title>
 
-        <v-spacer></v-spacer>
+        <div class="flex-grow-1"></div>
 
         <v-card-title class="white--text pl-12 pt-12">
           <div class="display-1 pl-12 pt-12">Ali Conners</div>
