@@ -1,6 +1,5 @@
 {
   "header": "Botones: Floating Action Button",
-  "headerText": "El componente `v-btn`  puede ser usado como un FAB. Esto provee a la aplicación de un punto de acción principal. Combinado con el componente `v-speed-dial` puedes crear una variedad de funciones disponibles para tus usuarios.",
   "examples": {
     "small": {
       "header": "Variante _small_",

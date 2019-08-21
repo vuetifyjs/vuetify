@@ -1,1 +1,3 @@
-{}
+{
+  "default": "デフォルトの Vue slot"
+}

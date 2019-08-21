@@ -97,7 +97,7 @@
         label="Search"
         class="hidden-sm-and-down"
       ></v-text-field>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <v-btn icon>
         <v-icon>apps</v-icon>
       </v-btn>
@@ -236,7 +236,7 @@
             text
             color="primary"
           >More</v-btn>
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
           <v-btn
             text
             color="primary"

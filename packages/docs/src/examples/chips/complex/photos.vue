@@ -10,7 +10,7 @@
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-toolbar-title>Photo Info</v-toolbar-title>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <v-btn
         icon
         @click="$refs.search.focus()"
@@ -79,7 +79,7 @@
     <v-divider></v-divider>
 
     <v-card-actions>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <v-btn
         :disabled="!selected.length"
         :loading="loading"

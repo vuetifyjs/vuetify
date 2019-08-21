@@ -62,7 +62,7 @@
         <v-divider class="mt-12"></v-divider>
         <v-card-actions>
           <v-btn text>Cancel</v-btn>
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
           <v-slide-x-reverse-transition>
             <v-tooltip
               v-if="formHasErrors"
