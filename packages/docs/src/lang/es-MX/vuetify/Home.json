@@ -2,7 +2,7 @@
   "callout": "Aumenta la potencia de tu desarrollo con el poder de Vue y de Material Design",
   "features": {
     "community": {
-      "text": "Vuetify viene preparado con 8 plantillas prefabricadas para el Vue CLI 3. Desde html sencillo hasta SSR (Server Side Rendering | Renderizado del Lado del Servidor) estás listo para trabajar en minutos.",
+      "text": "Vuetify viene preparado con 8 plantillas prefabricadas para el vue-cli. Desde html sencillo hasta SSR (Server Side Rendering | Renderizado del Lado del Servidor) estás listo para trabajar en minutos.",
       "title": "Componentes Semánticos \"Helper\""
     },
     "components": {
@@ -10,7 +10,6 @@
       "title": "Componentes Semánticos de Material"
     },
     "scaffolding": {
-      "text": "Cuando te encuentras con una piedra en el camino, necesitas ayuda inmediata. Vuetify te ofrece soporte via chat en nuestro servidor dentro de una creciente comunidad en Discord.",
       "title": "Una Comunidad Vibrante"
     }
   },

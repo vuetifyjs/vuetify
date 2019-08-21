@@ -1,9 +1,9 @@
 {
   "header": "crwdns41156:0crwdne41156:0",
-  "headerText": "crwdns41158:0[vue-test-utils]crwdne41158:0",
+  "headerText": "crwdns42600:0[vue-test-utils]crwdne42600:0",
   "alert": "crwdns41160:0$attrscrwdnd41160:0$listenerscrwdne41160:0",
   "runnerHeader": "crwdns41162:0crwdne41162:0",
-  "runnerText1": "crwdns41164:0crwdne41164:0",
+  "runnerText1": "crwdns42602:0crwdne42602:0",
   "runnerText2": [
     "crwdns41166:0[Jest]crwdne41166:0",
     "crwdns41168:0[Mocha]crwdne41168:0",
@@ -18,6 +18,18 @@
   "efficiencyHeader": "crwdns41184:0crwdne41184:0",
   "efficiencyText1": "crwdns41186:0[DRYing]crwdnd41186:0%27crwdne41186:0",
   "efficiencyText2": "crwdns41188:0crwdne41188:0",
+  "mockHeader": "crwdns42604:0crwdne42604:0",
+  "mockText1": "crwdns42606:0$vuetifycrwdne42606:0",
+  "mockText2": "crwdns42608:0crwdne42608:0",
+  "mockText3": "crwdns42610:0crwdne42610:0",
+  "mockList": [
+    "crwdns42612:0[application]crwdne42612:0",
+    "crwdns42614:0[breakpoint]crwdne42614:0",
+    "crwdns42616:0[goto]crwdne42616:0",
+    "crwdns42618:0[icons]crwdne42618:0",
+    "crwdns42620:0[lang]crwdne42620:0",
+    "crwdns42622:0[theme]crwdne42622:0"
+  ],
   "e2eHeader": "crwdns41190:0crwdne41190:0",
   "e2eText1": "crwdns41192:0[community]crwdne41192:0"
 }

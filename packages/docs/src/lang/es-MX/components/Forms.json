@@ -16,7 +16,6 @@
     "lazyValidation": "Si se habilita, **value** siempre será _true_ a menos que haya errores de validación visibles. Puedes llamar `validate()` para ejecutar manualmente la validación"
   },
   "functions": {
-    "reset": "Reinicia la validación para todos los inputs",
     "validate": "Valida todos los inputs y regresa un resultado"
   }
 }

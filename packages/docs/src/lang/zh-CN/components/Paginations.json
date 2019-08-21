@@ -8,9 +8,6 @@
       "header": "限制",
       "desc": "您可以用`total-visible`属性手动设置可见页面按钮的最大数量。"
     },
-    "round": {
-      "header": "圆形"
-    },
     "icons": {
       "header": "图标"
     },

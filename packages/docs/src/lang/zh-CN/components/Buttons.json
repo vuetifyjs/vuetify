@@ -1,4 +1,5 @@
 {
+  "header": "# 按钮",
   "headerText": "`v-btn`组件用一个material design主题和多个选项来替换标准的html按钮。任何色彩辅助类都可以用来改变背景或文字的颜色。",
   "examples": {
     "flat": {
@@ -22,8 +23,7 @@
       "desc": "图标可作为按钮的主要内容。"
     },
     "floating": {
-      "header": "浮动",
-      "desc": "浮动按钮是圆形的，通常包含一个图标。"
+      "header": "浮动"
     },
     "loaders": {
       "header": "加载器",
@@ -33,13 +33,8 @@
       "header": "大小",
       "desc": "按钮可以被设置不同的尺寸选项以适应多种方案。"
     },
-    "outline": {
-      "header": "轮廓",
-      "desc": "轮廓按钮从当前色彩应用继承他们的边框颜色。"
-    },
-    "round": {
-      "header": "圆形",
-      "desc": "圆角按钮的行为与常规按钮相同，但具有圆角边缘。"
+    "outlined": {
+      "header": "### 轮廓"
     },
     "block": {
       "header": "块状",
