@@ -7,6 +7,7 @@
     <v-flex>
       <v-container
         fluid
+        grid-list-xl
         pa-0
       >
         <supporter-group

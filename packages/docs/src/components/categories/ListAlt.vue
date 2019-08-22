@@ -1,6 +1,7 @@
 <template>
   <v-container
     pa-0
+    grid-list-xl
     fluid
   >
     <v-layout wrap>

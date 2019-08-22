@@ -1,6 +1,7 @@
 <template>
   <v-container
     fluid
+    grid-list-xl
     pa-0
     mb-12
     why-vuetify
@@ -21,6 +22,7 @@
           style="border-radius: 6px; min-height: 350px;"
         >
           <v-container
+            grid-list-xl
             fill-height
           >
             <v-layout

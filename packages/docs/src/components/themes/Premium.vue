@@ -2,6 +2,7 @@
   <section id="premium-themes">
     <v-container
       pa-0
+      grid-list-xl
       fluid
     >
       <v-layout wrap>
