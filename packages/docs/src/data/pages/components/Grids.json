@@ -92,7 +92,7 @@
         {
           "type": "up-next",
           "value": [
-            "components/grid-lists",
+            "styles/flex",
             "customization/breakpoints",
             "styles/display"
           ]
