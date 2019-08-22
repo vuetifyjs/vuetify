@@ -41,7 +41,7 @@
         Completed: {{ completedTasks }}
       </strong>
 
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
 
       <v-progress-circular
         :value="progress"
@@ -79,7 +79,7 @@
               </v-checkbox>
             </v-list-item-action>
 
-            <v-spacer></v-spacer>
+            <div class="flex-grow-1"></div>
 
             <v-scroll-x-transition>
               <v-icon

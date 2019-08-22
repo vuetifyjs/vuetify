@@ -23,7 +23,7 @@
         <v-icon>mdi-plus</v-icon>
       </v-btn>
 
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
 
       <v-btn icon>
         <v-icon>mdi-share-variant</v-icon>

@@ -30,7 +30,7 @@
         ></v-time-picker>
       </v-menu>
     </v-col>
-    <v-spacer></v-spacer>
+    <div class="flex-grow-1"></div>
     <v-col cols="11" sm="5">
       <v-dialog
         ref="dialog"
@@ -54,7 +54,7 @@
           v-model="time"
           full-width
         >
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
           <v-btn text color="primary" @click="modal2 = false">Cancel</v-btn>
           <v-btn text color="primary" @click="$refs.dialog.save(time)">OK</v-btn>
         </v-time-picker>

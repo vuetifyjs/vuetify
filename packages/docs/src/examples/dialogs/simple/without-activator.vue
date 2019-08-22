@@ -20,7 +20,7 @@
         </v-card-text>
 
         <v-card-actions>
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
 
           <v-btn
             color="green darken-1"

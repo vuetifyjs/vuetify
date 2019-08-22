@@ -26,7 +26,7 @@
     <v-divider dark></v-divider>
     <v-card-actions class="pa-4">
       Rate this album
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <span class="grey--text text--lighten-2 caption mr-2">
         ({{ rating }})
       </span>

@@ -23,7 +23,7 @@
             <v-row class="mb-4" align="center">
               <v-avatar color="grey" class="mr-4"></v-avatar>
               <strong class="title">Title {{ n }}</strong>
-              <v-spacer></v-spacer>
+              <div class="flex-grow-1"></div>
               <v-btn icon>
                 <v-icon>mdi-account</v-icon>
               </v-btn>

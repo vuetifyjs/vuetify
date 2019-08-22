@@ -9,7 +9,7 @@
         <v-card-title>
           <span class="headline white--text pl-4">Portrait View</span>
 
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
 
           <v-btn
             dark

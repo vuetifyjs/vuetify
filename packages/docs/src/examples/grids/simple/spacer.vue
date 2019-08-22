@@ -11,7 +11,7 @@
         </v-card>
       </v-col>
 
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
 
       <v-col>
         <v-card
@@ -38,7 +38,7 @@
         </v-card>
       </v-col>
 
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
 
       <v-col>
         <v-card
@@ -50,7 +50,7 @@
         </v-card>
       </v-col>
 
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
 
       <v-col md="5">
         <v-card

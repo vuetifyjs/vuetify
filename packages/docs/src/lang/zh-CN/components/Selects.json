@@ -34,7 +34,6 @@
     "filter": "用于过滤条目的功能",
     "hideSelected": "不要在选择菜单中显示已选择的项",
     "itemDisabled": " 禁用 **items** 的属性值",
-    "items": "可以是一个对象数组或字符窜数组，当使用对象时，会查找文本和值字段，这可以使用 **item-text** 和 **item-value** 属性来改变。",
     "itemText": "设置**items**'属性的文本值",
     "minWidth": "Mixins.Menuable.props.minWidth",
     "multiple": "多选，接受数组作为值",
