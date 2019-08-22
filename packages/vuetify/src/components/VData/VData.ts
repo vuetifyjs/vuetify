@@ -339,7 +339,9 @@ export default Vue.extend({
       this.internalOptions = {
         ...this.internalOptions,
         ...options,
-        page: Math.max(1, Math.min(options.page || this.internalOptions.page, this.pageCount)),
+        page: this.serverItemsLength < 0
+          ? Math.max(1, Math.min(options.page || this.internalOptions.page, this.pageCount))
+          : options.page || this.internalOptions.page,
       }
     },
     sortItems (items: any[]) {
