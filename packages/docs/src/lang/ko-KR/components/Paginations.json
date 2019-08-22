@@ -8,9 +8,6 @@
       "header": "제한 (Limit)",
       "desc": "`total-visible` prop을 이용해서 표시되는 페이지 버튼의 개수를 수동으로 지정할 수 있습니다."
     },
-    "round": {
-      "header": "둥근 버튼 (Round)"
-    },
     "icons": {
       "header": "아이콘 (Icons)"
     },

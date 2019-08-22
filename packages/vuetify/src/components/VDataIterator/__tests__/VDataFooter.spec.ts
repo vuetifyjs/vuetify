@@ -173,4 +173,26 @@ describe('VDataFooter.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should disable last page button if no items', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        options: {
+          page: 1,
+          itemsPerPage: 10,
+        },
+        pagination: {
+          page: 1,
+          itemsPerPage: 10,
+          pageStart: 0,
+          pageStop: 0,
+          pageCount: 0,
+          itemsLength: 0,
+        },
+        showFirstLastPage: true,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

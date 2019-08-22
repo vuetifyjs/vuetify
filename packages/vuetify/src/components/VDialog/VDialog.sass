@@ -18,6 +18,16 @@
   > *
     width: 100%
 
+  > .v-card
+    > .v-card__title
+      font-size: map-deep-get($headings, 'h6', 'size')
+      font-weight: map-deep-get($headings, 'h6', 'weight')
+      letter-spacing: map-deep-get($headings, 'h6', 'letter-spacing')
+      padding: 16px 24px 10px
+
+    > .v-card__text
+      padding: 0 24px 20px
+
 // Element
 .v-dialog__content
   align-items: center

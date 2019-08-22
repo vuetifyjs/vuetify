@@ -1,17 +1,17 @@
 <template>
-  <v-layout>
-    <v-flex xs12 sm6 offset-sm3>
+  <v-row>
+    <v-col cols="12" sm="6" offset-sm="3">
       <v-card>
         <v-card-actions>
           <v-select v-model="size" :items="items" label="Size"></v-select>
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
         </v-card-actions>
         <v-container v-bind="{ [`grid-list-${size}`]: true }" fluid>
-          <v-layout wrap>
-            <v-flex
+          <v-row>
+            <v-col
               v-for="n in 9"
               :key="n"
-              xs4
+              cols="4"
             >
               <v-card flat tile>
                 <v-img
@@ -19,12 +19,12 @@
                   height="150px"
                 ></v-img>
               </v-card>
-            </v-flex>
-          </v-layout>
+            </v-col>
+          </v-row>
         </v-container>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

@@ -27,7 +27,6 @@
       <v-list-item
         v-for="language in languages"
         :key="language.locale"
-        avatar
         @click="translateI18n(language)"
       >
         <v-list-item-avatar

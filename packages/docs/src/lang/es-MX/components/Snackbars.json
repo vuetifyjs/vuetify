@@ -1,5 +1,4 @@
 {
-  "headerText": "El componente `v-snackbar` se utiliza para mostrar un mensaje rápido al usuario. Los snackbars tienen soporte para posicionamiento, tiempo de espera antes de quitarse y _callbacks_",
   "examples": {
     "contextual": {
       "desc": "Puedes también aplicar un color al snackbar para que vaya mejor con tu implementación."

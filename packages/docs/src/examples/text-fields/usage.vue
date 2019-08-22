@@ -1,67 +1,67 @@
 <template>
   <v-form>
-    <v-container grid-list-xl>
-      <v-layout wrap>
+    <v-container>
+      <v-row>
 
-        <v-flex xs12 sm6 md3>
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
             label="Regular"
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6 md3>
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
             label="Regular"
             placeholder="Placeholder"
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6 md3>
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
             label="Solo"
             solo
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6 md3>
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
             label="Solo"
             placeholder="Placeholder"
             solo
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6 md3>
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
             label="Filled"
             filled
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6 md3>
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
             label="Filled"
             placeholder="Placeholder"
             filled
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6 md3>
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
-            label="Outline"
+            label="Outlined"
             outlined
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6 md3>
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
-            label="Outline"
+            label="Outlined"
             placeholder="Placeholder"
             outlined
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-      </v-layout>
+      </v-row>
     </v-container>
   </v-form>
 </template>

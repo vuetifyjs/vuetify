@@ -127,4 +127,14 @@ describe('VColorPicker.ts', () => {
 
     expect(fn).toHaveBeenLastCalledWith({ r: 255, g: 0, b: 255, a: 1 })
   })
+
+  it('should not show alpha controls if given hex value without alpha', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: '#00FF00',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

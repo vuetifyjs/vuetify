@@ -1,8 +1,9 @@
 {
+  "becomeSponsor": "Vuetify 지원하기",
   "callout": "개발을 한단계 높이세요",
   "features": {
     "community": {
-      "text": "Vuetify엔 미리 만들어진 8 개의 Vue CLI 3 템플릿이 준비되어 있습니다. 간단한 HTML에서 본격적인 SSR에 이르기까지 단 몇 분이면 시작할 수 있습니다.",
+      "text": "Vuetify엔 미리 만들어진 8 개의 vue-cli 템플릿이 준비되어 있습니다. 간단한 HTML에서 본격적인 SSR에 이르기까지 단 몇 분이면 시작할 수 있습니다.",
       "title": "준비된 프로젝트 템플릿"
     },
     "components": {
@@ -10,11 +11,10 @@
       "title": "시맨틱 머티리얼 컴포넌트"
     },
     "scaffolding": {
-      "text": "난관에 부딪혔을때, 여러분은 바로 도움이 필요합니다. Vuetify 는 디스코드에 있는 나날이 커가는 커뮤니티에서 채팅 지원을 받으세요.",
       "title": "활발한 커뮤니티"
     }
   },
-  "getHelp": "도움",
+  "getHelp": "지원",
   "getStarted": "시작하기",
   "madeWithVuetify": "Vueify 를 사용한 프로젝트들",
   "materialDesign": "머티리얼 디자인",
