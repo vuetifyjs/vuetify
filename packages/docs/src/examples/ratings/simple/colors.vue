@@ -1,5 +1,5 @@
 <template>
-  <v-layout column align-center>
+  <v-row align="center">
     <v-rating
       v-model="rating"
       background-color="purple lighten-3"
@@ -30,7 +30,7 @@
       background-color="indigo lighten-3"
       color="indigo"
     ></v-rating>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

@@ -17,8 +17,10 @@ const localVue = createLocalVue()
 localVue.use(Vuetify)
 
 describe('CustomCard.vue', () => {
+  let vuetify
+
   beforeEach(() => {
-    const vuetify = new Vuetify(...)
+    vuetify = new Vuetify(...)
   })
 
   it('should have a custom title and match snapshot', () => {

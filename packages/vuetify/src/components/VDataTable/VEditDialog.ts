@@ -122,10 +122,14 @@ export default mixins(Returnable, Themeable).extend({
       },
       scopedSlots: {
         activator: ({ on }) => {
-          return h('span', {
+          return h('div', {
             staticClass: 'v-small-dialog__activator',
             on,
-          }, this.$slots.default)
+          }, [
+            h('span', {
+              staticClass: 'v-small-dialog__activator__content',
+            }, this.$slots.default),
+          ])
         },
       },
     }, [

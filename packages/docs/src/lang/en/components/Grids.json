@@ -1,56 +1,92 @@
 {
   "header": "# Grid system",
-  "headerText": "Vuetify has a 12 point grid system. Built using <kbd>flex-box</kbd>, the grid is used to layout an application's content.  It contains 5 types of media breakpoints that are used for targeting specific screen sizes or orientations. The props for grid components are actually classes that are derived from their defined properties. This allows you to easily specify these helper classes as props, while still providing the classes to be used anywhere.",
-  "components": [
-    "v-container', 'v-layout', 'v-flex', 'v-spacer"
+  "headerText": "Vuetify comes with a 12 point grid system built using <kbd>flex-box</kbd>. The grid is used to create specific layouts within an application's content.  It contains 5 types of media breakpoints that are used for targeting specific screen sizes or orientations, **xs**, **sm**, **md**, **lg** and **xl**. These resolutions are defined below in the Viewport Breakpoints table and can be modified by customizing the [Breakpoint service](/customization/breakpoints).",
+  "usageText2": "In the example above, we created three equal-width columns on small, medium, large and extra large devices. The parent `v-container` to center the inner `v-col`s.",
+  "usageList": [
+    "`v-container` provides the ability to center and horizontally pad your site's contents. You can also use the **fluid** prop to fully extend the container across all viewport and device sizes.",
+    "`v-row` is a wrapper component for `v-col`. It utilizes flex properties to control the layout and flow of its inner columns. It uses a standard gutter of **24px**. This can be reduced with the **dense** prop or removed completely with **no-gutters**.",
+    "`v-col` is a content holder that must be a direct child of `v-row`."
   ],
+  "usageText3": "Ensure that you understand the limitations and [bugs around flexbox](https://github.com/philipwalton/flexbugs), such as the inhability to [utilize certain HTML elements as flex containers](https://github.com/philipwalton/flexbugs#9-some-html-elements-cant-be-flex-containers).",
+  "usageAlert1": "When using the grid system with IE11 you will need to set an explicit `height` as `min-height` will not suffice and cause undesired results.",
   "examples": {
     "usage": {
-      "desc": "The `v-container` can be used for a center focused page, or given the `fluid` prop to extend its full width. `v-layout` is used for separating sections and contains the `v-flex`. The structure of your layout will be as follows, **v-container** &raquo; **v-layout** &raquo; **v-flex**. Each part of the grid chain is a flex-box element. The final, `v-flex`, automatically sets its children to have <kbd>flex: 1 1 auto</kbd>.<br>For convenience reasons, these components automatically transform attributes into classes. Allowing you to write `<v-layout pa-4 mb-2></v-layout>` instead of `<v-layout class=\"pa-4 mb-2\"></v-layout>`. The only exception are [data attributes](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes) which are left as-is.",
-      "uninverted": true
+      "desc": "The Vuetify grid is heavily inspired by the [Bootstrap grid](https://getbootstrap.com/docs/4.0/layout/grid/). It is integrated by using a series of containers, rows, and columns to layout and align content. **If you are new to flexbox**, [Read the CSS Tricks flexbox guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-background) for background, terminology, guidelines, and code snippets."
     },
     "playground": {
       "header": "### Layout playground",
-      "desc": "Test the layout props in a simple playground.",
-      "uninverted": true
+      "desc": "Test the layout props in a simple playground."
     },
-    "offset": {
-      "header": "### Offset",
-      "desc": "Offsets are useful for compensating for elements that may not be visible yet, or to control the position of content. Just as with breakpoints, you can set an offset for any available sizes. This allows you to fine tune your application layout precisely to your needs.",
-      "uninverted": true
+    "auto": {
+      "header": "### Auto sizing columns",
+      "desc": "Columns will automatically take up an equal amount of space within their parent container. This can be modified using the **cols** prop. You can also utilize the **sm**, **md**, **lg**, and **xl** props to further define how the column will be sized in different viewport sizes."
     },
-    "order": {
-      "header": "### Order",
-      "desc": "You can control the ordering of grid items. As with offsets, you can set different orders for different sizes. Design specialized screen layouts that accommodate to any application.",
-      "uninverted": true
+    "equal": {
+      "header": "### Equal width columns",
+      "desc": "You can break equal width columns into multiple lines. While there are workarounds for older browser versions, there was a [Safari flexbox bug](https://github.com/philipwalton/flexbugs#11-min-and-max-size-declarations-are-ignored-when-wrapping-flex-items). This shouldn't be necessary if you're up-to-date."
     },
-    "direction-and-align": {
-      "header": "### Direction and Align",
-      "desc": "Designate the direction and alignment in a variety of ways. All of the available <kbd>flex-box</kbd> api is available through intuitive helper props.",
-      "uninverted": true
+    "one-column-width": {
+      "header": "### One column width",
+      "desc": "When using the auto-layout, you can define the width of only one column and still have its siblings to automatically resize around it."
     },
-    "row-column-breakpoint": {
-      "header": "### Row and column breakpoints",
-      "desc": "Dynamically change your layout based upon resolution. **(resize your screen and watch the layout change to a `row` on small breakpoints)**",
-      "uninverted": true
+    "variable-content": {
+      "header": "### Variable content width",
+      "desc": "Assigning breakpoint width for columns can be configured to resize based upon the nature width of their content."
     },
     "grow-shrink": {
       "header": "### Grow and Shrink",
-      "desc": "By default, flex components will automatically fill the available space in a row or column. They will also shrink relative to the rest of the flex items in the flex container when there isn't enough space in the row or column. To disable the grow behavior, use the `shrink` attribute. To disable the shrink behavior, use the `grow` attribute. To disable both the grow and shrink behavior, use the `grow-shrink-0` attribute.",
-      "uninverted": true
+      "desc": "By default, flex components will automatically fill the available space in a row or column. They will also shrink relative to the rest of the flex items in the flex container when a specific size is not designated. You can define the column width of the `v-col` by using the **cols** prop and providing a value from **1 to 12**."
+    },
+    "row-column-breakpoint": {
+      "header": "### Row and column breakpoints",
+      "desc": "Dynamically change your layout based upon resolution. **(resize your screen and watch the layout change to a `row` on small breakpoints)**"
+    },
+    "vertical-alignment": {
+      "header": "### Vertical alignment",
+      "desc": "Change the vertical alignment of flex items and their parents using the **align** and **align-self** properties."
+    },
+    "horizontal-alignment": {
+      "header": "### Horizontal alignment",
+      "desc": "Change the horizontal alignment of flex items and their parents using the **justify** and **justify-self** properties."
+    },
+    "no-gutters": {
+      "header": "### No gutters",
+      "desc": "You can remove the negative margins from `v-row` and the padding from its direct `v-col` children using the **no-gutters** property."
+    },
+    "wrapping": {
+      "header": "### Column wrapping",
+      "desc": "When more than 12 columns are placed within a given row (that is not using the `.flex-no-wrap` utility class), each group of extra columns will wrap onto a new line."
+    },
+    "order": {
+      "header": "### Order classes",
+      "desc": "You can control the ordering of grid items. As with offsets, you can set different orders for different sizes. Design specialized screen layouts that accommodate to any application."
+    },
+    "order-first-last": {
+      "header": "### Order last / first",
+      "desc": "You can also designate explicitly **first** or **last** which will assign **-1** or **13** values respectively to the `order` CSS property."
+    },
+    "offset": {
+      "header": "### Offset",
+      "desc": "Offsets are useful for compensating for elements that may not be visible yet, or to control the position of content. Just as with breakpoints, you can set an offset for any available sizes. This allows you to fine tune your application layout precisely to your needs."
+    },
+    "offset-breakpoint": {
+      "header": "### Offset breakpoint",
+      "desc": "Offset can also be applied on a per breakpoint basis."
+    },
+    "margin": {
+      "header": "### Margin utilities",
+      "desc": "Using the [auto margin helper utilities](/styles/flex#auto-margins) you can force sibling columns away from each other."
     },
     "nested-grid": {
       "header": "### Nested grid",
-      "desc": "Grids can be nested, similar to other frameworks, in order to achieve very custom layouts.",
-      "uninverted": true
+      "desc": "Grids can be nested, similar to other frameworks, in order to achieve very custom layouts."
     },
     "unique-layouts": {
       "header": "### Unique layouts",
-      "desc": "The power and flexibility of the Vuetify grid system allows you to create amazing user interfaces.",
-      "uninverted": true
+      "desc": "The power and flexibility of the Vuetify grid system allows you to create amazing user interfaces."
     },
     "spacer": {
-      "header": "### v-spacer",
+      "header": "### Spacers",
       "desc": "The `v-spacer` component is useful when you want to fill available space or make space between two components."
     },
     "tags": {
@@ -59,44 +95,46 @@
     }
   },
   "props": {
-    "tag": "Mixins.Routable.props.tag",
-    "alignBaseline": "Align items to the baseline.",
-    "alignCenter": "Align items to the center.",
-    "alignContentCenter": "Align content to the center.",
-    "alignContentEnd": "Align content to the end.",
-    "alignContentSpaceAround": "Align content to the space around.",
-    "alignContentSpaceBetween": "Align content to the space between.",
-    "alignContentStart": "Align content to the start.",
-    "alignEnd": "Align items to the end.",
-    "alignStart": "Align items to the start.",
-    "d-{type}": "Specify to display an element as flex/inline-flex/block etc. Syntax is `d-{type}`. For example `d-flex`.",
-    "fillHeight": "Make sure that col element height is filled with parent and child. Important for Safari/Firefox if children is column element.",
-    "justifyCenter": "Justify content to the center.",
-    "justifyEnd": "Justify content to the end.",
-    "justifySpaceAround": "Justify content to the space around.",
-    "justifySpaceBetween": "Justify content to the space between.",
-    "justifyStart": "Justify content to the start.",
+    "tag": "Components.Sheets.props.tag",
     "v-container": {
-      "grid-list-{xs through xl}": "Sets the gutter between grid list items ranging from 2px to 24px",
-      "fluid": "Removes viewport size breakpoints"
+      "fluid": "Removes viewport maximum-width size breakpoints"
     },
-    "v-flex": {
-      "alignSelfStart": "Apply `align-self: start`\n\n[MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/align-self)",
-      "alignSelfEnd": "Apply `align-self: end`\n\n[MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/align-self)",
-      "alignSelfCenter": "Apply `align-self: center`\n\n[MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/align-self)",
-      "alignSelfBaseline": "Apply `align-self: baseline`\n\n[MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/align-self)",
-      "grow": "Apply `flex-grow: 1`\n\n[MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow)",
-      "shrink": "Apply `flex-shrink: 1`\n\n[MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink)",
-      "grow-shrink-0": "Apply `flex-grow: 0` and `flex-shrink: 0`\n\n[MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow)",
-      "offset-(size)(0-12)": "offset-xs: extra small, offset-sm: small, offset-md: medium, offset-lg: large, offset-xl: extra large. Example: offset-xs3",
-      "order-(size)(1-12)": "order-xs: extra small, order-sm: small, order-md: medium, order-lg: large, order-xl: extra large. Example: order-xs3",
-      "(size)(1-12)": "xs: extra small, sm: small, md: medium, lg: large, xl: extra large - 1 through 12"
+    "v-col": {
+      "alignSelf": "Applies the [align-items](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) css property. Available options are **start**, **center**, **end**, **auto**, **baseline** and **stretch**.",
+      "cols": "Sets the default number of columns the component extends. Available options are **1 -> 12** and **auto**.",
+      "sm": "Changes the number of columns on small and greater breakpoints.",
+      "md": "Changes the number of columns on medium and greater breakpoints.",
+      "lg": "Changes the number of columns on large and greater breakpoints.",
+      "xl": "Changes the number of columns on extra large and greater breakpoints.",
+      "offset": "Sets the default offset for the column.",
+      "offsetSm": "Changes the offset of the component on small and greater breakpoints.",
+      "offsetMd": "Changes the offset of the component on medium and greater breakpoints.",
+      "offsetLg": "Changes the offset of the component on large and greater breakpoints.",
+      "offsetXl": "Changes the offset of the component on extra large and greater breakpoints.",
+      "order": "Sets the default [order](https://developer.mozilla.org/en-US/docs/Web/CSS/order) for the column.",
+      "orderSm": "Changes the order of the component on small and greater breakpoints.",
+      "orderMd": "Changes the order of the component on medium and greater breakpoints.",
+      "orderLg": "Changes the order of the component on large and greater breakpoints.",
+      "orderXl": "Changes the order of the component on extra large and greater breakpoints."
     },
-    "v-layout": {
-      "row": "Sets flex direction to row",
-      "column": "Sets flex direction to column",
-      "reverse": "Reverses the currently selected direction (column, row).",
-      "wrap": "Allows children to wrap within the container if the elements use more than 100%."
+    "v-row": {
+      "align": "Applies the [align-items](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) css property. Available options are **start**, **center**, **end**, **space-between**, **space-around** and **stretch**.",
+      "alignSm": "Changes the **align-items** property on small and greater breakpoints.",
+      "alignMd": "Changes the **align-items** property on medium and greater breakpoints.",
+      "alignLg": "Changes the **align-items** property on large and greater breakpoints.",
+      "alignXl": "Changes the **align-items** property on extra large and greater breakpoints.",
+      "alignContent": "Applies the [align-content](https://developer.mozilla.org/en-US/docs/Web/CSS/align-content) css property. Available options are **start**, **center**, **end**, **space-between**, **space-around** and **stretch**.",
+      "alignContentSm": "Changes the **align-content** property on small and greater breakpoints.",
+      "alignContentMd": "Changes the **align-content** property on medium and greater breakpoints.",
+      "alignContentLg": "Changes the **align-content** property on large and greater breakpoints.",
+      "alignContentXl": "Changes the **align-content** property on extra large and greater breakpoints.",
+      "dense": "Reduces the gutter between `v-col`s.",
+      "justify": "Applies the [justify-content](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content) css property. Available options are **start**, **center**, **end**, **space-between** and **space-around**.",
+      "justifySm": "Changes the **justify-content** property on small and greater breakpoints.",
+      "justifyMd": "Changes the **justify-content** property on medium and greater breakpoints.",
+      "justifyLg": "Changes the **justify-content** property on large and greater breakpoints.",
+      "justifyXl": "Changes the **justify-content** property on extra large and greater breakpoints.",
+      "noGutters": "Removes the gutter between `v-col`s."
     }
   }
 }

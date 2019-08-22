@@ -2,7 +2,7 @@
   "header": "# Icons",
   "headerText": "Vuetify comes bootstrapped with support for Material Design Icons, Material Icons, Font Awesome 4 and Font Awesome 5. By default, applications will default to use [Material Design Icons](https://materialdesignicons.com/).",
   "usageText1": "In order to change your font library, add the `iconfont` option during instantiation.",
-  "usageText2": "Using a predefined option will prefill defaults based upon the selected preset. This will overwrite the defaults of components that have default **icon** values. For more information, view the default [icon preset values](https://github.com/vuetifyjs/vuetify/blob/dev/packages/vuetify/src/components/Vuetify/mixins/icons.ts).",
+  "usageText2": "Using a predefined option will prefill defaults based upon the selected preset. This will overwrite the defaults of components that have default **icon** values. For more information, view the default [icon preset values](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/icons/presets).",
   "installHeader": "## Installing iconfonts",
   "installText1": "You are required to include the specified icon library (even if using default). This can be done by including a CDN link or importing the icon library into your application",
   "installMD": "### Install Material Icons",

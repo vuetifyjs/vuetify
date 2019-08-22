@@ -1,11 +1,11 @@
 <template>
-  <v-layout>
-    <v-flex xs12 sm6 offset-sm3>
+  <v-row>
+    <v-col cols="12" sm="6" offset-sm="3">
       <v-card height="200px">
         <v-card-title class="blue white--text">
           <span class="headline">Menu</span>
 
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
 
           <v-menu bottom left>
             <template v-slot:activator="{ on }">
@@ -32,8 +32,8 @@
 
         <v-card-text>Lorem Ipsum</v-card-text>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

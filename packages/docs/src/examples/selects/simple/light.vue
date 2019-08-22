@@ -1,14 +1,10 @@
 <template>
   <v-card>
-    <v-container
-      fluid
-      grid-list-xl
-    >
-      <v-layout
-        align-center
-        wrap
+    <v-container fluid>
+      <v-row
+        align="center"
       >
-        <v-flex xs12 sm6>
+        <v-col cols="12" sm="6">
           <v-select
             v-model="value"
             :items="items"
@@ -17,8 +13,8 @@
             label="Chips"
             multiple
           ></v-select>
-        </v-flex>
-        <v-flex xs12 sm6>
+        </v-col>
+        <v-col cols="12" sm="6">
           <v-select
             v-model="value"
             :items="items"
@@ -27,8 +23,8 @@
             label="Chips"
             multiple
           ></v-select>
-        </v-flex>
-        <v-flex xs12 sm6>
+        </v-col>
+        <v-col cols="12" sm="6">
           <v-select
             v-model="value"
             :items="items"
@@ -37,8 +33,8 @@
             multiple
             outlined
           ></v-select>
-        </v-flex>
-        <v-flex xs12 sm6>
+        </v-col>
+        <v-col cols="12" sm="6">
           <v-select
             v-model="value"
             :items="items"
@@ -47,8 +43,8 @@
             multiple
             solo
           ></v-select>
-        </v-flex>
-      </v-layout>
+        </v-col>
+      </v-row>
     </v-container>
   </v-card>
 </template>

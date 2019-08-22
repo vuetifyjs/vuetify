@@ -156,7 +156,9 @@ export default mixins(
       return props
     },
     genHoverIndex (e: MouseEvent, i: number) {
-      return i + (this.isHalfEvent(e) ? 0.5 : 1)
+      let isHalf = this.isHalfEvent(e)
+      if (this.$vuetify.rtl) isHalf = !isHalf
+      return i + (isHalf ? 0.5 : 1)
     },
     getIconName (props: ItemSlotProps): string {
       const isFull = this.isHovering ? props.isHovered : props.isFilled

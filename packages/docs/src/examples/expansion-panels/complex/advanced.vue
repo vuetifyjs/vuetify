@@ -2,9 +2,12 @@
   <v-expansion-panels>
     <v-expansion-panel>
       <v-expansion-panel-header v-slot="{ open }">
-        <v-layout>
-          <v-flex xs4>Trip name</v-flex>
-          <v-flex xs8 class="text--secondary">
+        <v-row no-gutters>
+          <v-col cols="4">Trip name</v-col>
+          <v-col
+            cols="8"
+            class="text--secondary"
+          >
             <v-fade-transition leave-absolute>
               <span
                 v-if="open"
@@ -19,8 +22,8 @@
                 {{ trip.name }}
               </span>
             </v-fade-transition>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-text-field
@@ -32,10 +35,10 @@
 
     <v-expansion-panel>
       <v-expansion-panel-header v-slot="{ open }">
-        <v-layout>
-          <v-flex xs4>Location</v-flex>
-          <v-flex
-            xs8
+        <v-row no-gutters>
+          <v-col cols="4">Location</v-col>
+          <v-col
+            cols="8"
             class="text--secondary"
           >
             <v-fade-transition leave-absolute>
@@ -52,13 +55,13 @@
                 {{ trip.location }}
               </span>
             </v-fade-transition>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-expansion-panel-header>
       <v-expansion-panel-content>
-        <v-layout>
-          <v-spacer></v-spacer>
-          <v-flex xs5>
+        <v-row no-gutters>
+          <div class="flex-grow-1"></div>
+          <v-col cols="5">
             <v-select
               v-model="trip.location"
               :items="locations"
@@ -66,22 +69,22 @@
               flat
               solo
             ></v-select>
-          </v-flex>
+          </v-col>
 
           <v-divider
             vertical
             class="mx-4"
           ></v-divider>
 
-          <v-flex xs3>
+          <v-col cols="3">
             Select your destination of choice
             <br>
             <a href="javascript:void(0)">Learn more</a>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
 
         <v-card-actions>
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
           <v-btn
             text
             color="secondary"
@@ -100,58 +103,74 @@
 
     <v-expansion-panel>
       <v-expansion-panel-header v-slot="{ open }">
-        <v-layout>
-          <v-flex xs4>Start and end dates</v-flex>
-          <v-flex
-            xs8
+        <v-row no-gutters>
+          <v-col cols="4">Start and end dates</v-col>
+          <v-col
+            cols="8"
             class="text--secondary"
           >
             <v-fade-transition leave-absolute>
               <span v-if="open">When do you want to travel?</span>
-              <v-layout
+              <v-row
                 v-else
+                no-gutters
                 style="width: 100%"
               >
-                <v-flex xs6>Start date: {{ trip.start || 'Not set' }}</v-flex>
-                <v-flex xs6>End date: {{ trip.end || 'Not set' }}</v-flex>
-              </v-layout>
+                <v-col cols="6">Start date: {{ trip.start || 'Not set' }}</v-col>
+                <v-col cols="6">End date: {{ trip.end || 'Not set' }}</v-col>
+              </v-row>
             </v-fade-transition>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-expansion-panel-header>
       <v-expansion-panel-content>
-        <v-layout justify-space-around>
-          <v-flex xs3>
+        <v-row
+          justify="space-around"
+          no-gutters
+        >
+          <v-col cols="3">
             <v-menu
               ref="startMenu"
               :close-on-content-click="false"
-              :return-value.sync="date"
+              :return-value.sync="trip.start"
               offset-y
               full-width
               min-width="290px"
             >
               <template v-slot:activator="{ on }">
                 <v-text-field
-                  v-model="trip.start"
+                  v-model="date"
                   label="Start date"
                   prepend-icon="event"
                   readonly
                   v-on="on"
                 ></v-text-field>
               </template>
-              <v-date-picker v-model="trip.start" no-title scrollable>
-                <v-spacer></v-spacer>
-                <v-btn text color="primary" @click="$refs.startMenu.isActive = false">Cancel</v-btn>
-                <v-btn text color="primary" @click="$refs.startMenu.save(date)">OK</v-btn>
+              <v-date-picker
+                v-model="trip.start"
+                no-title
+                scrollable
+              >
+                <div class="flex-grow-1"></div>
+                <v-btn
+                  text
+                  color="primary"
+                  @click="$refs.startMenu.isActive = false"
+                >Cancel</v-btn>
+                <v-btn
+                  text
+                  color="primary"
+                  @click="$refs.startMenu.save(date)"
+                >OK</v-btn>
               </v-date-picker>
             </v-menu>
-          </v-flex>
+          </v-col>
 
-          <v-flex xs3>
+          <v-col cols="3">
             <v-menu
               ref="endMenu"
               :close-on-content-click="false"
-              :return-value.sync="date"
+              :return-value.sync="trip.end"
               offset-y
               full-width
               min-width="290px"
@@ -166,11 +185,11 @@
                 ></v-text-field>
               </template>
               <v-date-picker
-                v-model="trip.end"
+                v-model="date"
                 no-title
                 scrollable
               >
-                <v-spacer></v-spacer>
+                <div class="flex-grow-1"></div>
                 <v-btn
                   text
                   color="primary"
@@ -187,8 +206,8 @@
                 </v-btn>
               </v-date-picker>
             </v-menu>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-expansion-panel-content>
     </v-expansion-panel>
   </v-expansion-panels>

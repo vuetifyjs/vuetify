@@ -50,6 +50,7 @@ export default Vue.extend({
   props: {
     color: Object as PropValidator<VColorPickerColor>,
     disabled: Boolean,
+    hideAlpha: Boolean,
     hideModeSwitch: Boolean,
     mode: {
       type: String,
@@ -118,11 +119,11 @@ export default Vue.extend({
       switch (this.internalMode) {
         case 'hexa': {
           const hex = this.color.hexa
-          const value = hex.endsWith('FF') ? hex.substr(0, 7) : hex
+          const value = this.hideAlpha && hex.endsWith('FF') ? hex.substr(0, 7) : hex
           return this.genInput(
             'hex',
             {
-              maxlength: 9,
+              maxlength: this.hideAlpha ? 7 : 9,
               disabled: this.disabled,
             },
             value,
@@ -135,7 +136,8 @@ export default Vue.extend({
           )
         }
         default: {
-          return this.currentMode.inputs!.map(([target, max, type]) => {
+          const inputs = this.hideAlpha ? this.currentMode.inputs!.slice(0, -1) : this.currentMode.inputs!
+          return inputs.map(([target, max, type]) => {
             const value = this.color[this.internalMode as keyof VColorPickerColor] as any
             return this.genInput(
               target,

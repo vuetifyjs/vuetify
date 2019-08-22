@@ -69,7 +69,7 @@
     },
     "activeClass": "crwdns40238:0crwdne40238:0",
     "alignWithTitle": "crwdns33850:0crwdne33850:0",
-    "backgroundColor": "crwdns40240:0crwdne40240:0",
+    "backgroundColor": "crwdns42420:0crwdne42420:0",
     "centerActive": "crwdns40242:0crwdne40242:0",
     "cycle": "crwdns33852:0crwdne33852:0",
     "dark": "crwdns40244:0crwdne40244:0",
@@ -85,11 +85,16 @@
     "right": "crwdns33866:0crwdne33866:0",
     "showArrows": "crwdns40252:0crwdne40252:0",
     "sliderColor": "crwdns33870:0crwdne33870:0",
+    "sliderSize": "crwdns42422:0crwdne42422:0",
     "touchless": "crwdns33872:0crwdne33872:0",
     "transition": "crwdns33874:0crwdne33874:0",
     "vertical": "crwdns40254:0crwdne40254:0"
   },
   "events": {
+    "v-tab": {
+      "click": "crwdns42424:0crwdne42424:0",
+      "keydown": "crwdns42426:0crwdne42426:0"
+    },
     "v-tabs": {
       "change": "crwdns33876:0crwdne33876:0"
     },

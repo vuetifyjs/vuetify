@@ -3,8 +3,7 @@
   "headerText": "Update your layout without creating new classes. Spacing helpers are useful for modifying the padding and margin of an element.",
   "playgroundHeader": "## Playground",
   "playgroundText1": "Use the playground to get a feel for what the different helper classes can do. For an explanation of how they work, see the **How it works** section below.",
-  "playgroundText2": "Use the controls above to try out the different spacing helpers",
-  "howText": "The helper classes apply **margin** or **padding** to an element ranging from _0 to 5_. Each size increment was designed to align with common Material Design spacings. These classes can be applied using the following format `{property}{direction}-{size}`.",
+  "howText": "The helper classes apply **margin** or **padding** to an element ranging from _0 to 12_. Each size increment was designed to align with common Material Design spacings. These classes can be applied using the following format `{property}{direction}-{size}`.",
   "propertyText": "The **property** applies the type of spacing:",
   "properties": [
     "`m` - applies `margin`",
@@ -12,34 +11,55 @@
   ],
   "directionText": "The **direction** designates the side the property applies to:",
   "directions": [
-    "`t` - applies the spacing for `*-top`",
-    "`b` - applies the spacing for `*-bottom`",
-    "`l` - applies the spacing for `*-left`",
-    "`r` - applies the spacing for `*-right`",
-    "`s` - applies the spacing for `*-left` (in LTR mode) and for `*-right` (in RTL mode)",
-    "`e` - applies the spacing for `*-right` (in LTR mode) and for `*-left` (in RTL mode)",
+    "`t` - applies the spacing for `margin-top` and `padding-top`",
+    "`b` - applies the spacing for `margin-bottom` and `padding-bottom`",
+    "`l` - applies the spacing for `margin-left` and `padding-left`",
+    "`r` - applies the spacing for `margin-right` and `padding-right`",
+    "`s` - applies the spacing for `margin-left`/`padding-left` _(in LTR mode)_ and `margin-right`/`padding-right` _(in RTL mode)_",
+    "`e` - applies the spacing for `margin-right`/`padding-right` _(in LTR mode)_ and `margin-left`/`padding-left` _(in RTL mode)_",
     "`x` - applies the spacing for both `*-left` and `*-right`",
     "`y` - applies the spacing for both `*-top` and `*-bottom`",
     "`a` - applies the spacing for the property in all directions"
   ],
   "sizeText": "The **size** controls the increment of the property in 4px intervals:",
   "sizes": [
-    "`auto` - sets the spacing to `auto`",
-    "`n5` - sets the spacing to be negative by `$spacer`",
-    "`n4` - sets the spacing to be negative by `$spacer`",
-    "`n3` - sets the spacing to be negative by `$spacer`",
-    "`n2` - sets the spacing to be negative by `$spacer`",
-    "`n1` - sets the spacing to be negative by `$spacer`",
-    "`0` - removes the spacing by setting it to `0`",
-    "`1` - sets the spacing to `$spacer`",
-    "`2` - sets the spacing to `$spacer`",
-    "`3` - sets the spacing to `$spacer`",
-    "`4` - sets the spacing to `$spacer`",
-    "`5` - sets the spacing to `$spacer`"
+    "`0` - eliminates all `margin` or `padding` by setting it to `0`",
+    "`1` - sets `margin` or `padding` to 4px",
+    "`2` - sets `margin` or `padding` to 8px",
+    "`3` - sets `margin` or `padding` to 12px",
+    "`4` - sets `margin` or `padding` to 16px",
+    "`5` - sets `margin` or `padding` to 20px",
+    "`6` - sets `margin` or `padding` to 24px",
+    "`7` - sets `margin` or `padding` to 28px",
+    "`8` - sets `margin` or `padding` to 32px",
+    "`9` - sets `margin` or `padding` to 36px",
+    "`10` - sets `margin` or `padding` to 40px",
+    "`11` - sets `margin` or `padding` to 44px",
+    "`12` - sets `margin` or `padding` to 48px",
+    "`n1` - sets negative `margin` to 4px",
+    "`n2` - sets negative `margin` to 8px",
+    "`n3` - sets negative `margin` to 12px",
+    "`n4` - sets negative `margin` to 16px",
+    "`n5` - sets negative `margin` to 20px",
+    "`n6` - sets negative `margin` to 24px",
+    "`n7` - sets negative `margin` to 28px",
+    "`n8` - sets negative `margin` to 32px",
+    "`n9` - sets negative `margin` to 36px",
+    "`n10` - sets negative `margin` to 40px",
+    "`n11` - sets negative `margin` to 44px",
+    "`n12` - sets negative `margin` to 48px",
+    "`auto` - sets the spacing to `auto`"
   ],
   "horizontalHeader": "Horizontal centering",
   "horizontalText": "For block elements with a designated width, you can apply `.mx-auto` to horizontally center the content.",
-  "margin": "Margin",
-  "padding": "Padding",
-  "size": "Size"
+  "examples": {
+    "horizontal": {
+      "header": "### Horizontal",
+      "desc": "Using the margin helper classes you can easily center content horizontally."
+    },
+    "negative-margin": {
+      "header": "### Negative margin",
+      "desc": "Margin can also be applied negatively at the same **1 to 12** intervals."
+    }
+  }
 }

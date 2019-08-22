@@ -1,9 +1,9 @@
 <template>
-  <v-layout
-    align-center
-    justify-center
+  <v-row
+    align="center"
+    justify="center"
   >
-    <v-flex xs12>
+    <v-col cols="12">
       <v-hover v-slot:default="{ hover }">
         <v-card
           :elevation="hover ? 12 : 2"
@@ -14,6 +14,6 @@
           <v-card-text class="my-4 text-center title">Hover over me!</v-card-text>
         </v-card>
       </v-hover>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
