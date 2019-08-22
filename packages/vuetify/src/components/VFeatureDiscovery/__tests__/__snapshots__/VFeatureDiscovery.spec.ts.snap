@@ -1,140 +1,113 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FeatureDiscovery.ts should render correctly 1`] = `
-
-<div aria-hidden="true"
-     class="v-feature-discovery v-feature-discovery--lr-shifted theme--light"
-     style="left: -164.3826898599915px; top: -164.3826898599915px; height: 700px; width: 700px;"
->
-  <div class="v-feature-discovery__backdrop primary"
-       style="transform-origin: calc(50% - 185.6173101400085px) calc(50% - 185.6173101400085px); justify-content: flex-end; padding-right: 15%;"
+exports[`FeatureDiscovery.ts should change color 1`] = `
+<div class="v-feature-discovery">
+  <div class="v-feature-discovery__content theme--light"
+       style="z-index: 0; color: rgb(254, 254, 254); caret-color: #fefefe; display: none;"
   >
-    <div class="v-feature-discovery__content white--text"
-         style="justify-content: flex-end;"
+    <div class="v-feature-discovery__backdrop red darken-2"
+         style="top: -142.44998779892558px; left: -142.44998779892558px; height: 284.89997559785115px; width: 284.89997559785115px; transform-origin: calc(50% - 0px) calc(50% - 0px);"
     >
-      <div class="v-feature-discovery__wrapper">
-        <div class="v-feature-discovery__title">
-        </div>
-        <div class="v-feature-discovery__text">
-        </div>
-      </div>
-      <div class="v-feature-discovery__actions">
-      </div>
     </div>
-  </div>
-  <div aria-hidden="true"
-       class="v-feature-discovery__highlight white primary--text"
-       style="height: 0px; width: 0px;"
-  >
-    <div class="v-feature-discovery__target">
+    <div aria-hidden="true"
+         class="v-feature-discovery__highlight warning lighten-1 red--text text--darken-2"
+         style="top: -44px; left: -44px; height: 88px; width: 88px;"
+    >
+    </div>
+    <div class="v-feature-discovery__wrap"
+         style="top: -64px; left: -40px; height: auto; width: 360px; padding: 0px 40px;"
+    >
     </div>
   </div>
 </div>
-
 `;
 
-exports[`FeatureDiscovery.ts should render correctly when flat 1`] = `
-
-<div aria-hidden="true"
-     class="v-feature-discovery v-feature-discovery--flat v-feature-discovery--lr-shifted theme--light"
-     style="left: -164.3826898599915px; top: -164.3826898599915px; height: 700px; width: 700px;"
->
-  <div class="v-feature-discovery__backdrop primary"
-       style="transform-origin: calc(50% - 185.6173101400085px) calc(50% - 185.6173101400085px); justify-content: flex-end; padding-right: 15%;"
+exports[`FeatureDiscovery.ts should render 1`] = `
+<div class="v-feature-discovery">
+  <div class="v-feature-discovery__content theme--light white--text"
+       style="z-index: 0; display: none;"
   >
-    <div class="v-feature-discovery__content white--text"
-         style="justify-content: flex-end;"
+    <div class="v-feature-discovery__backdrop primary"
+         style="top: -142.44998779892558px; left: -142.44998779892558px; height: 284.89997559785115px; width: 284.89997559785115px; transform-origin: calc(50% - 0px) calc(50% - 0px);"
     >
-      <div class="v-feature-discovery__wrapper">
-        <div class="v-feature-discovery__title">
-        </div>
-        <div class="v-feature-discovery__text">
-        </div>
-      </div>
-      <div class="v-feature-discovery__actions">
-      </div>
     </div>
-  </div>
-  <div aria-hidden="true"
-       class="v-feature-discovery__highlight white primary--text"
-       style="height: 0px; width: 0px;"
-  >
-    <div class="v-feature-discovery__target">
+    <div aria-hidden="true"
+         class="v-feature-discovery__highlight white primary--text"
+         style="top: -44px; left: -44px; height: 88px; width: 88px;"
+    >
+    </div>
+    <div class="v-feature-discovery__wrap"
+         style="top: -64px; left: -40px; height: auto; width: 360px; padding: 0px 40px;"
+    >
     </div>
   </div>
 </div>
-
 `;
 
-exports[`FeatureDiscovery.ts should toggle 1`] = `
-
-<div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--lr-shifted theme--light"
-     style="left: -164.3826898599915px; top: -164.3826898599915px; height: 700px; width: 700px;"
->
-  <div class="v-feature-discovery__backdrop primary"
-       style="transform-origin: calc(50% - 185.6173101400085px) calc(50% - 185.6173101400085px); justify-content: flex-end; padding-right: 15%;"
+exports[`FeatureDiscovery.ts should render component w/o ripple 1`] = `
+<div class="v-feature-discovery">
+  <div class="v-feature-discovery__content theme--light v-feature-discovery__content--no-ripple white--text"
+       style="z-index: 0; display: none;"
   >
-    <div class="v-feature-discovery__content white--text"
-         style="justify-content: flex-end;"
+    <div class="v-feature-discovery__backdrop primary"
+         style="top: -142.44998779892558px; left: -142.44998779892558px; height: 284.89997559785115px; width: 284.89997559785115px; transform-origin: calc(50% - 0px) calc(50% - 0px);"
     >
-      <div class="v-feature-discovery__wrapper">
-        <div class="v-feature-discovery__title">
-        </div>
-        <div class="v-feature-discovery__text">
-        </div>
-      </div>
-      <div class="v-feature-discovery__actions">
-      </div>
     </div>
-  </div>
-  <div aria-hidden="true"
-       class="v-feature-discovery__highlight white primary--text"
-       style="height: 0px; width: 0px;"
-  >
-    <div class="v-feature-discovery__target">
-      <body style="display: block;"
-            class="primary--text"
-      >
-      </body>
+    <div aria-hidden="true"
+         class="v-feature-discovery__highlight white primary--text"
+         style="top: -44px; left: -44px; height: 88px; width: 88px;"
+    >
+    </div>
+    <div class="v-feature-discovery__wrap"
+         style="top: -64px; left: -40px; height: auto; width: 360px; padding: 0px 40px;"
+    >
     </div>
   </div>
 </div>
-
 `;
 
-exports[`FeatureDiscovery.ts should toggle 2`] = `
-
-<div class="v-feature-discovery v-feature-discovery--lr-shifted theme--light"
-     style="left: -164.3826898599915px; top: -164.3826898599915px; height: 700px; width: 700px;"
-     aria-hidden="true"
->
-  <div class="v-feature-discovery__backdrop primary"
-       style="transform-origin: calc(50% - 185.6173101400085px) calc(50% - 185.6173101400085px); justify-content: flex-end; padding-right: 15%;"
+exports[`FeatureDiscovery.ts should render flat component 1`] = `
+<div class="v-feature-discovery">
+  <div class="v-feature-discovery__content theme--light v-feature-discovery__content--flat white--text"
+       style="z-index: 0; display: none;"
   >
-    <div class="v-feature-discovery__content white--text"
-         style="justify-content: flex-end;"
+    <div class="v-feature-discovery__backdrop primary"
+         style="top: -142.44998779892558px; left: -142.44998779892558px; height: 284.89997559785115px; width: 284.89997559785115px; transform-origin: calc(50% - 0px) calc(50% - 0px);"
     >
-      <div class="v-feature-discovery__wrapper">
-        <div class="v-feature-discovery__title">
-        </div>
-        <div class="v-feature-discovery__text">
-        </div>
-      </div>
-      <div class="v-feature-discovery__actions">
-      </div>
     </div>
-  </div>
-  <div aria-hidden="true"
-       class="v-feature-discovery__highlight white primary--text"
-       style="height: 0px; width: 0px;"
-  >
-    <div class="v-feature-discovery__target">
-      <body style="display: block;"
-            class="primary--text"
-      >
-      </body>
+    <div aria-hidden="true"
+         class="v-feature-discovery__highlight white primary--text"
+         style="top: -44px; left: -44px; height: 88px; width: 88px;"
+    >
+    </div>
+    <div class="v-feature-discovery__wrap"
+         style="top: -64px; left: -40px; height: auto; width: 360px; padding: 0px 40px;"
+    >
     </div>
   </div>
 </div>
+`;
 
+exports[`FeatureDiscovery.ts should render with activator and activate 1`] = `
+<div class="v-feature-discovery v-feature-discovery--inline">
+  <button id="foo">
+  </button>
+  <div class="v-feature-discovery__content theme--light white--text"
+       style="z-index: 0; display: none;"
+  >
+    <div class="v-feature-discovery__backdrop primary"
+         style="top: -142.44998779892558px; left: -142.44998779892558px; height: 284.89997559785115px; width: 284.89997559785115px; transform-origin: calc(50% - 0px) calc(50% - 0px);"
+    >
+    </div>
+    <div aria-hidden="true"
+         class="v-feature-discovery__highlight white primary--text"
+         style="top: -44px; left: -44px; height: 88px; width: 88px;"
+    >
+    </div>
+    <div class="v-feature-discovery__wrap"
+         style="top: -64px; left: -40px; height: auto; width: 360px; padding: 0px 40px;"
+    >
+    </div>
+  </div>
+</div>
 `;
