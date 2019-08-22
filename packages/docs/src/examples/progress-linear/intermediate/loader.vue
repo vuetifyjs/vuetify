@@ -4,7 +4,7 @@
     width="344"
   >
     <v-system-bar>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <v-icon>mdi-square</v-icon>
       <v-icon>mdi-circle</v-icon>
       <v-icon>mdi-triangle</v-icon>
@@ -25,7 +25,7 @@
         color="deep-purple accent-4"
       ></v-progress-linear>
 
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
 
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>

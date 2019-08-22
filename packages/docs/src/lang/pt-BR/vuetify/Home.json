@@ -1,21 +1,25 @@
 {
-  "callout": "Dê um up seu desenvolvimento",
+  "becomeSponsor": "Apoie o Vuetify",
+  "callout": "Framework de Componentes<br>Material Design",
   "features": {
     "community": {
-      "text": "Vuetify vem pronto com 8 modelos pré-fabricados no Vue CLI 3. Do simples HTML ao SSR completo, você estará pronto para desenvolver em minutos.",
-      "title": "Componentes Auxiliares Semânticos"
+      "text": "Quando você se depara com um obstáculo, você precisa de assistência imediata. Vuetify oferece um suporte em nossa enorme comunidade no Discord.",
+      "title": "Comunidade Vibrante"
     },
     "components": {
-      "text": "Esteja preparado para um conjunto de componentes especializados à sua disposição. Com mais de 80 no total, existe uma solução para qualquer aplicação.",
+      "text": "Esteja preparado para um conjunto de componentes especializados à sua disposição. Com mais de 80 no total, existe uma solução para qualquer situação.",
       "title": "Componentes do Material Semânticos"
     },
     "scaffolding": {
-      "text": "Quando você se depara com um obstáculo, você precisa de assistência imediata. Vuetify oferece um chat de suporte em nossa crescente comunidade no Discord.",
-      "title": "Comunidade Vibrante"
+      "title": "Estruturas Prontas de Projetos"
     }
   },
   "getHelp": "Obter ajuda",
   "getStarted": "Começar",
-  "madeWithVuetify": "Projects Made With Vuetify",
-  "proudlySponsoredBy": "Patrocinadores no Patreon"
+  "github": "Github",
+  "madeWithVuetify": "Projetos feitos com/para o Vuetify",
+  "materialDesign": "Material Design",
+  "mit": "Licença MIT",
+  "proudlySponsoredBy": "Patrocinadores no Patreon",
+  "whyVuetify": "Por que Vuetify?"
 }

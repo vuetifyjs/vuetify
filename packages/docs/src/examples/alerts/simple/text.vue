@@ -17,7 +17,7 @@
         no-gutters
       >
         <v-col class="grow">Proin magna. Vivamus in erat ut urna cursus vestibulum. Etiam imperdiet imperdiet orci.</v-col>
-        <v-spacer></v-spacer>
+        <div class="flex-grow-1"></div>
         <v-col class="shrink">
           <v-btn
             color="info"

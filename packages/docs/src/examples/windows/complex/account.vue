@@ -66,7 +66,7 @@
       >
         Back
       </v-btn>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <v-btn
         :disabled="step === 3"
         color="primary"

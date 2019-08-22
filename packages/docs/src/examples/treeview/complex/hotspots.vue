@@ -74,7 +74,7 @@
         Reset
       </v-btn>
 
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
 
       <v-btn
         class="white--text"

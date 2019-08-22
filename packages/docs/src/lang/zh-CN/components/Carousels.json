@@ -10,8 +10,7 @@
       "desc": "您也可以更改轮播分隔符的图标。"
     },
     "hide-controls": {
-      "header": "隐藏控件",
-      "desc": "您可以使用`hide-controls`属性隐藏控件。"
+      "header": "隐藏控件"
     }
   },
   "props": {

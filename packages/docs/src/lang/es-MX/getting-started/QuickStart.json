@@ -1,8 +1,6 @@
 {
   "header": "Inicio rápido",
   "headerText": "Usa uno de los paquetes de Vue CLI de Vuetify _(basados en los ejemplos oficiales)_ para iniciar con tu proyecto en un instante. Vuetify tiene soporte para **SSR** (server-side rendering), **SPA** (single page application), **PWA** (progressive web application) y páginas estándar de **HTML** ",
-  "vueCliHeader": "Instalar mediante Vue CLI 3",
-  "vueCliText1": "Vue CLI 3 es la herramienta cli (interfaz de línea de comandos) de nueva generación hecha para ayudarte a iniciar de una forma mucho más sencilla que antes. Cuando comienzas una app con Vue CLI 3 también podrás obtener las actualizaciones oficiales de webpack y los cambios en las configuraciones, así como actualizaciones de Vuetify sin tener que pasar por un proceso arduo de actualización.",
   "vueCliText4": "Una vez que la cli ha sido instalado, puedes generar un nuevo scaffold de proyecto. Selecciona la _instalaión default_ a menos que tengas paquetes específicos que necesites incluír (p.ej. _vuex_ or _vue-router_). Esto creará un nuevo proyecto de Vue que está listo con tus opciones seleccionadas.",
   "vueCliText5": "Ahora que ya tienes un proyecto instanciado, puedes agregar el **[paquete de Vuetify](https://github.com/vuetifyjs/vue-cli-plugin-vuetify)** usando la cli.",
   "vueCliText7": "Después de la instalación, puedes correr el script `dev` que se encuentra en el archivo `package.json`. Esto iniciará un servidor de desarrollo local en **https://localhost:8080**.",
@@ -13,10 +11,7 @@
   "existingText1": "Para incluir Vuetify en un proyecto existente, debes instalar su _paquete de npm_. Puedes usar ya sea `npm`o `yarn` para llevarlo a cabo. Ambos son administradores de paquetes que te permitirán controlar qué recursos están disponibles para tu aplicación.",
   "alert2": "*Advertencia*: Aunque Vuetify intenta no causar cualquier colisión de css tanto como sea posible, no hay ninguna garantía de que tus estilos personalizados no alterarán tu experiencia cuando integres este framework en tu proyecto existente.",
   "ie11Header": "Soporte para IE11 y Safari 9",
-  "ie11Text": "Vuetify utiliza características de ES2015/2017 qu requieren polyfills para **Internet Explorer 11** y **Safari 9/10**. Si estás usando Vue CLI 3, esto se hace automáticamente por tí. De otra forma, en tu carpeta del proyecto  puedes instalar `babel-polyfill`:",
-  "ie11Text1": "Vuetify utiliza características de ES2015/2017 qu requieren polyfills para **Internet Explorer 11** y **Safari 9/10**. Si estás usando Vue CLI 3, esto se hace automáticamente por tí. De otra forma, en tu carpeta del proyecto  puedes instalar `babel-polyfill`:",
   "ie11Text2": "Se recomienda que uses `babel-preset-env` con el polyfill correspondiente para asegurar que sólo se agregan los polyfills necesarios a tu aplicación. Para mayor información acerca de `babel-present-env`, [visita la documentación](https://babeljs.io/docs/en/next/babel-preset-env.html)",
-  "ie11Text3": "Una vez instalado, agrega el preset a tu archivo `.babelrc` o al archivo `babel.config.js`",
   "ie11Text4": "Debido al soporte limitado de Internet Explorer para las etiquetas `<template>`, debes enviar elementos del DOM completamente compilados al navegador. Esto puede lograrse ya sea compilando tu código de Vue de antemano o creando componentes \"helper\" para reemplazar los elementos del DOM. Por ejemplo, si se envía lo siguiente directamente a IE, fallará: ",
   "browserSupport": {
     "supported": "Soportado",

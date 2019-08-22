@@ -30,7 +30,7 @@
       color="cyan"
       dark
     >
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <v-toolbar-title>Application</v-toolbar-title>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
     </v-app-bar>
@@ -83,7 +83,7 @@
       color="cyan"
       app
     >
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <span class="white--text">&copy; 2019</span>
     </v-footer>
   </v-app>

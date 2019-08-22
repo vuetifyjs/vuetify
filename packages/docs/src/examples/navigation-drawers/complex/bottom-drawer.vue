@@ -15,7 +15,7 @@
 
       <v-toolbar-title>My files</v-toolbar-title>
 
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
 
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>

@@ -8,8 +8,6 @@
   "existingText1": "Vuetify를 기존 프로젝트에 적용하려면 Vuetify를 node_modules에 반드시 설치해야 합니다. 이를 위해 `npm` 이나 `yarn`을 사용할 수 있습니다. 이 두 패키지 매니져는 당신의 어플리케이션에 사용되는 리소스를 관리할 수 있도록 해줍니다.",
   "alert2": "경고: Vuetify 는 css 충돌을 최대한 줄이려고 노력하지만, Vuetify 를 기존의 프로젝트의 추가할때 당신의 커스텀 스타일들과 문제를 만들지 않을 거라고 보장하지는 못합니다.",
   "ie11Header": "IE11 & Safari 9 지원",
-  "ie11Text": "프로젝트 디렉토리에 `babel-polyfill`을 설치하고 메인 엔트리에서 import 하세요",
-  "ie11Text1": "프로젝트 디렉토리에 `babel-polyfill`을 설치하고 메인 엔트리에서 import 하세요",
   "ie11Text2": "인터넷 익스플로러 `<template>` 태그를 제대로 지원하지 못하기 때문에 항상 완전히 컴파일된 DOM 요소들을 브라우져로 보내야 합니다. This can be done by either building your Vue code in advance or by creating helper components to replace the dom elements. For instance, if sent directly to IE, this will fail:",
   "browserSupport": {
     "supported": "지원됨",

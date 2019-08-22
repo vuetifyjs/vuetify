@@ -75,7 +75,7 @@
     },
     "outlined": {
       "header": "crwdns39958:0crwdne39958:0",
-      "desc": "crwdns39960:0crwdne39960:0"
+      "desc": "crwdns42404:0crwdne42404:0"
     },
     "custom-colors": {
       "header": "crwdns39962:0crwdne39962:0",
@@ -102,7 +102,7 @@
     "fullWidth": "crwdns39978:0crwdne39978:0",
     "multiLine": "crwdns33494:0crwdne33494:0",
     "noResize": "crwdns33496:0crwdne33496:0",
-    "outlined": "crwdns39980:0crwdne39980:0",
+    "outlined": "crwdns42406:0crwdne42406:0",
     "placeholder": "crwdns33500:0crwdne33500:0",
     "prefix": "crwdns33502:0crwdne33502:0",
     "prependInnerIcon": "crwdns33504:0crwdne33504:0",
@@ -126,12 +126,15 @@
     "prepend-inner": "crwdns33532:0crwdne33532:0"
   },
   "events": {
+    "blur": "crwdns42408:0crwdne42408:0",
     "change": "crwdns33534:0crwdne33534:0",
     "click:append": "crwdns33536:0crwdne33536:0",
     "click:append-outer": "crwdns33538:0crwdne33538:0",
     "click:clear": "crwdns33540:0crwdne33540:0",
     "click:prepend": "crwdns33542:0crwdne33542:0",
     "click:prepend-inner": "crwdns33544:0crwdne33544:0",
+    "focus": "crwdns42410:0crwdne42410:0",
+    "keydown": "crwdns42412:0crwdne42412:0",
     "update:error": "crwdns33546:0crwdne33546:0"
   }
 }

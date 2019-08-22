@@ -10,7 +10,7 @@
     >
       <v-icon>mdi-account</v-icon>
       <v-toolbar-title class="font-weight-light">User Profile</v-toolbar-title>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <v-btn
         color="purple darken-3"
         fab
@@ -38,7 +38,7 @@
     </v-card-text>
     <v-divider></v-divider>
     <v-card-actions>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <v-btn
         :disabled="!isEditing"
         color="success"
