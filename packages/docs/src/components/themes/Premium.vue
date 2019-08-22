@@ -3,7 +3,6 @@
     <v-container
       pa-0
       fluid
-      grid-list-xl
     >
       <v-layout wrap>
         <v-flex

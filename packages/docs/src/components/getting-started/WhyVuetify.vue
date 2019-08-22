@@ -1,6 +1,5 @@
 <template>
   <v-container
-    grid-list-md
     fluid
     pa-0
     mb-12
@@ -22,7 +21,6 @@
           style="border-radius: 6px; min-height: 350px;"
         >
           <v-container
-            grid-list-xl
             fill-height
           >
             <v-layout

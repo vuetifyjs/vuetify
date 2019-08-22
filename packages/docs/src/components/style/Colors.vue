@@ -12,7 +12,7 @@
       single-line
     />
 
-    <v-container fluid pa-0 grid-list-xl>
+    <v-container fluid pa-0>
       <v-layout wrap>
         <v-flex
           v-for="(color, key) in computedColors"

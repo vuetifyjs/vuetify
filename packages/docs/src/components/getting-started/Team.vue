@@ -1,5 +1,5 @@
 <template>
-  <v-container grid-list-xl>
+  <v-container>
     <v-layout
       justify-center
       wrap
