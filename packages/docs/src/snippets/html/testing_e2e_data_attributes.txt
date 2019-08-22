@@ -1,0 +1,7 @@
+<template>
+    <!-- Vuetify component with data-cy -->
+    <v-text-field v-model="name" data-cy="name-input" />
+
+    <!-- HTML render output -->
+    <input data-cy="name-input" id="input-120" type="text">
+</template>
