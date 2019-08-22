@@ -9,5 +9,5 @@ export interface VuetifyPreset {
   breakpoint?: Partial<Breakpoint>
   icons?: Partial<Icons>
   locale?: Partial<Lang>
-  theme?: Partial<Theme>
+  theme?: { [P in keyof Theme]?: Partial<Theme[P]> }
 }

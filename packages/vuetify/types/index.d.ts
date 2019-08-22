@@ -1,4 +1,4 @@
-import Vue, { Component, PluginFunction, PluginObject, VueConstructor, DirectiveFunction, DirectiveOptions } from 'vue'
+import Vue, { Component, PluginFunction, VueConstructor, DirectiveOptions } from 'vue'
 import './lib'
 import './alacarte'
 import './colors'
@@ -6,13 +6,12 @@ import './colors'
 // Services
 import { Application } from './services/application'
 import { Breakpoint } from './services/breakpoint'
-// import { Goto } from '../src/services/goto'
 import { Icons } from './services/icons'
 import { Lang } from './services/lang'
 import { Theme } from './services/theme'
 
 // Service Options
-import { VuetifyGoToOptions } from './services/goto'
+import { GoToOptions } from './services/goto'
 import { VuetifyPreset } from './presets'
 
 declare const Vuetify: Vuetify
@@ -20,6 +19,7 @@ export default Vuetify
 export interface Vuetify {
   install: PluginFunction<VuetifyUseOptions>
   version: string
+  framework: Framework
   new (preset?: Partial<VuetifyPreset>): Vuetify
 }
 
@@ -33,9 +33,9 @@ export interface VuetifyUseOptions {
   components?: Record<string, ComponentOrPack>
 }
 
-export interface VuetifyObject extends Vue {
+export interface Framework {
   readonly breakpoint: Breakpoint
-  readonly goTo: <T extends string | number | HTMLElement | Vue>(target: T, options?: VuetifyGoToOptions) => Promise<T>
+  readonly goTo: <T extends string | number | HTMLElement | Vue>(target: T, options?: GoToOptions) => Promise<T>
   application: Application
   theme: Theme
   icons: Icons
@@ -45,7 +45,7 @@ export interface VuetifyObject extends Vue {
 
 declare module 'vue/types/vue' {
   export interface Vue {
-    $vuetify: VuetifyObject
+    $vuetify: Framework
   }
 }
 

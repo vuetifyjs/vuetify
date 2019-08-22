@@ -6,7 +6,7 @@ Vue.component('breakpoint', {
     const numbers: number[] = [
       this.$vuetify.breakpoint.height,
       this.$vuetify.breakpoint.width,
-      this.$vuetify.breakpoint.scrollbarWidth,
+      this.$vuetify.breakpoint.scrollBarWidth,
     ]
     const objects: Object[] = [
       this.$vuetify.breakpoint.thresholds,

@@ -57,4 +57,4 @@ export interface VuetifyParsedThemeItem {
   darken4: string
 }
 
-export type VuetifyThemeItem = VuetifyParsedThemeItem | string | number | undefined
+export type VuetifyThemeItem = Partial<VuetifyParsedThemeItem> | string | number | undefined

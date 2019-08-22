@@ -31,5 +31,5 @@ export interface Breakpoint {
   xs: boolean
   xsOnly: boolean
   thresholds: BreakpointThresholds
-  scrollbarWidth: number
+  scrollBarWidth: number
 }

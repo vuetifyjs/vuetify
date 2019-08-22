@@ -14,12 +14,12 @@ import {
   Theme as ITheme,
 } from 'vuetify/types/services/theme'
 
-export class Theme extends Service implements ITheme {
+export class Theme extends Service {
   static property = 'theme'
 
   public disabled = false
 
-  public options: ITheme['options']
+  public options!: ITheme['options']
 
   public styleEl?: HTMLStyleElement
 
@@ -58,13 +58,10 @@ export class Theme extends Service implements ITheme {
       return
     }
 
-    this.options = {
-      ...this.options,
-      ...options.options,
-    }
+    this.options = options.options!
 
     this.dark = Boolean(options.dark)
-    const themes = options.themes || {}
+    const themes = options.themes || {} as never
 
     this.themes = {
       dark: this.fillVariant(themes.dark, true),
