@@ -2,8 +2,8 @@
   <section id="premium-themes">
     <v-container
       pa-0
-      grid-list-xl
       fluid
+      grid-list-xl
     >
       <v-layout wrap>
         <v-flex

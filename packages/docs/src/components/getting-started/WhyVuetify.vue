@@ -1,7 +1,7 @@
 <template>
   <v-container
+    grid-list-md
     fluid
-    grid-list-xl
     pa-0
     mb-12
     why-vuetify
