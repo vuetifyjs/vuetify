@@ -74,6 +74,13 @@
           github: 'sh7dm',
           avatar: 'accessoriesType=Blank&avatarStyle=Transparent&clotheColor=Heather&clotheType=Hoodie&eyeType=Default&eyebrowType=Default&facialHairType=Blank&graphicType=Bear&hairColor=BrownDark&mouthType=Smile&skinColor=Pale&topType=ShortHairShortFlat',
         },
+        {
+          title: 'core',
+          name: 'Eugene Plotnikov',
+          github: 'bad4iz',
+          twitter: '@bad4iz',
+          avatar: 'accessoriesType=Blank&avatarStyle=Transparent&topType=NoHair&accessoriesType=Blank&facialHairType=Blank&clotheType=GraphicShirt&clotheColor=Red&graphicType=SkullOutline&eyeType=Wink&eyebrowType=Default&mouthType=Tongue&skinColor=Light',
+        },
       ],
     }),
   }
