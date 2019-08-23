@@ -3,9 +3,7 @@
   "version": "2.0.10",
   "private": true,
   "scripts": {
-    "deploy": "now && now alias",
     "dev": "vue-cli-service serve",
-    "build": "vue-cli-service build --silent",
     "lint": "eslint --ext .js,.vue src",
     "lint:fix": "yarn lint --fix",
     "cypress:run": "cypress run",
