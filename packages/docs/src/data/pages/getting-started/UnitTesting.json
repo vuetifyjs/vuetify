@@ -122,6 +122,18 @@
         {
           "type": "text",
           "lang": "e2eText1"
+        },
+        {
+          "type": "text",
+          "lang": "e2eText2"
+        },
+        {
+          "type": "markup",
+          "value": "html_testing_e2e_data_attributes"
+        },
+        {
+          "type": "markup",
+          "value": "js_testing_e2e_data_attributes"
         }
       ]
     },

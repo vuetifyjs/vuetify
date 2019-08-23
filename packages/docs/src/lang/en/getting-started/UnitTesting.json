@@ -31,5 +31,6 @@
     "[theme](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/theme)"
   ],
   "e2eHeader": "## E2E tests",
-  "e2eText1": "Guide coming soon. If you would like to help contribute to this section, please contact a developer in our [community](https://community.vuetifyjs.com)."
+  "e2eText1": "Vuetify passes the `data-*` attributes from components to the relevant HTML elements, which allows E2E test framework to locate them easily.",
+  "e2eText2": "For example, [Cypress](https://docs.cypress.io/guides/references/best-practices.html#How-It-Works) recommends to add `data-cy` attributes to make it easy to target elements."
 }
