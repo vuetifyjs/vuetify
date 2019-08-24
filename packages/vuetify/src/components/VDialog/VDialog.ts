@@ -186,8 +186,10 @@ export default baseMixins.extend({
     },
     show () {
       !this.fullscreen && !this.hideOverlay && this.genOverlay()
-      this.$refs.content.focus()
-      this.bind()
+      this.$nextTick(() => {
+        this.$refs.content.focus()
+        this.bind()
+      })
     },
     bind () {
       window.addEventListener('focusin', this.onFocusin)
