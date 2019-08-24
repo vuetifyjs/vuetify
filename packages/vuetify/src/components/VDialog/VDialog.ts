@@ -276,7 +276,7 @@ export default baseMixins.extend({
       class: this.contentClasses,
       attrs: {
         role: 'document',
-        tabindex: 0,
+        tabindex: this.isActive ? 0 : undefined,
         ...this.getScopeIdAttrs(),
       },
       on: {
