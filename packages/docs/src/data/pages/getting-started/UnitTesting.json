@@ -29,6 +29,23 @@
       "children": [
         {
           "type": "heading",
+          "lang": "setupHeading"
+        },
+        {
+          "type": "text",
+          "lang": "setupText1"
+        },
+        {
+          "type": "markup",
+          "value": "js_testing_vue_setup"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
           "lang": "specHeader"
         },
         {
