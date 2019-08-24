@@ -5,7 +5,7 @@
     width="250px"
   >
     <v-card-text>
-      zoom out screen to see
+      Adjust screen size to see spacing changes
     </v-card-text>
   </v-card>
 </template>
