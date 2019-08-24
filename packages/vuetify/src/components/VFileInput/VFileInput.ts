@@ -12,6 +12,7 @@ import { PropValidator } from 'vue/types/options'
 
 // Utilities
 import { humanReadableFileSize, wrapInArray } from '../../util/helpers'
+import { consoleError } from '../../util/console'
 
 export default VTextField.extend({
   name: 'v-file-input',
@@ -42,7 +43,7 @@ export default VTextField.extend({
     },
     readonly: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     showSize: {
       type: [Boolean, Number],
@@ -70,10 +71,6 @@ export default VTextField.extend({
       },
     } as PropValidator<File | File[]>,
   },
-
-  data: () => ({
-    internalFileInput: null,
-  }),
 
   computed: {
     classes (): object {
@@ -137,10 +134,19 @@ export default VTextField.extend({
     },
   },
 
+  watch: {
+    readonly: {
+      handler (v) {
+        if (v === true) consoleError('readonly is not supported on <v-file-input>', this)
+      },
+      immediate: true,
+    },
+  },
+
   methods: {
     clearableCallback () {
       this.internalValue = this.isMultiple ? [] : null
-      this.internalFileInput = null
+      this.$refs.input.value = ''
     },
     genChips () {
       if (!this.isDirty) return []
@@ -159,7 +165,10 @@ export default VTextField.extend({
     genInput () {
       const input = VTextField.options.methods.genInput.call(this)
 
-      input.data!.domProps!.value = this.internalFileInput
+      // We should not be setting value
+      // programmatically on the input
+      // when it is using type="file"
+      delete input.data!.domProps!.value
 
       // This solves an issue in Safari where
       // nothing happens when adding a file
