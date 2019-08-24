@@ -2,7 +2,7 @@
   <v-responsive
     class="white--text py-5"
     style="background: linear-gradient(to bottom, #1867c0, #5CBBF6)"
-    min-height="100vh"
+    min-height="50vh"
   >
     <tidelift />
     <v-container>

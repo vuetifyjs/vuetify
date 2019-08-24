@@ -6,7 +6,6 @@
     dark
     height="auto"
     min-height="50vh"
-    absolute
   >
     <v-container>
       <v-layout wrap>
