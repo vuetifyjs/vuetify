@@ -80,7 +80,7 @@
       large
       outlined
       rounded
-      to="premium-themes"
+      to="themes/premium"
     >
       <span class="caption font-weight-bold">
         {{ $t("Vuetify.Home.seeMoreThemes") }}
