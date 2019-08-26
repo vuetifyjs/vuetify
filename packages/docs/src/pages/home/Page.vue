@@ -9,6 +9,8 @@
 
         <sponsors />
 
+        <premium-themes />
+
         <made-with-vuetify />
       </v-container>
     </v-content>
@@ -22,6 +24,7 @@
     components: {
       Hero: () => import('./components/Hero'),
       MadeWithVuetify: () => import('./components/MadeWithVuetify'),
+      PremiumThemes: () => import('./components/PremiumThemes'),
       Sponsors: () => import('./components/Sponsors'),
       HomeFooter: () => import('./components/Footer'),
     },
