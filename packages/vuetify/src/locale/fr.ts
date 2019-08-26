@@ -1,26 +1,26 @@
 export default {
-  close: 'Close',
+  close: 'Fermer',
   dataIterator: {
     pageText: '{0}-{1} de {2}',
     noResultsText: 'Aucun enregistrement correspondant trouvé',
-    loadingText: 'Loading item...',
+    loadingText: "Chargement de l'élément...",
   },
   dataTable: {
     itemsPerPageText: 'Lignes par page:',
     ariaLabel: {
-      sortDescending: ': Sorted descending. Activate to remove sorting.',
-      sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.',
+      sortDescending: ': Tri décroissant. Activer pour supprimer le tri.',
+      sortAscending: ': Tri croissant. Activer pour trier par ordre décroissant.',
+      sortNone: ': Non trié. Activer pour trier par ordre croissant.',
     },
-    sortBy: 'Sort by',
+    sortBy: 'Trier par',
   },
   dataFooter: {
     itemsPerPageText: 'Élements par page:',
     itemsPerPageAll: 'Tous',
     nextPage: 'Page suivante',
     prevPage: 'Page précédente',
-    firstPage: 'Page première',
-    lastPage: 'Page Dernière',
+    firstPage: 'Première page',
+    lastPage: 'Dernière page',
   },
   datePicker: {
     itemsSelected: '{0} sélectionnés',
@@ -34,7 +34,7 @@ export default {
     moreEvents: '{0} plus',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counter: '{0} fichiers',
+    counterSize: '{0} fichiers ({1} au total)',
   },
 }
