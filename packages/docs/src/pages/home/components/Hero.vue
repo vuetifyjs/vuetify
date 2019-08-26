@@ -45,7 +45,7 @@
                   large
                   v-on="on"
                 >
-                  <v-icon left>mdi-vimeo</v-icon>
+                  <v-icon left>mdi-play-circle</v-icon>
                   {{ $t('Vuetify.Home.whyVuetify') }}
                 </v-btn>
 
