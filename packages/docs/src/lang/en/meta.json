@@ -609,7 +609,7 @@
     "description": "A layout sandbox where you can try different variations of layout setups.",
     "keywords": "template, pre-made, vuetify layout, sandbox"
   },
-  "themes/premium-themes": {
+  "themes/premium": {
     "title": "Premium & free themes",
     "description": "Vuetify offers numerous pre-build starter and premium themes. Kickstart your next application today, no design skills needed.",
     "keywords": "vuetify themes, pre-built material themes, premium themes"

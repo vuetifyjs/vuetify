@@ -80,7 +80,7 @@
       large
       outlined
       rounded
-      to="themes/premium-themes"
+      to="premium-themes"
     >
       <span class="caption font-weight-bold">
         {{ $t("Vuetify.Home.seeMoreThemes") }}
@@ -96,20 +96,20 @@
     data: vm => ({
       themes: [
         {
-          title: vm.$t('Themes.PremiumThemes.templates.dashboard-pro.title'),
-          description: vm.$t('Themes.PremiumThemes.templates.dashboard-pro.description'),
+          title: vm.$t('Themes.Premium.templates.dashboard-pro.title'),
+          description: vm.$t('Themes.Premium.templates.dashboard-pro.description'),
           src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-admin-dashboard-pro.jpg',
           url: 'https://www.creative-tim.com/product/vuetify-material-dashboard-pro',
         },
         {
-          title: vm.$t('Themes.PremiumThemes.templates.material-kit.title'),
-          description: vm.$t('Themes.PremiumThemes.templates.material-kit.description'),
+          title: vm.$t('Themes.Premium.templates.material-kit.title'),
+          description: vm.$t('Themes.Premium.templates.material-kit.description'),
           src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-material-kit.png',
           url: 'https://store.vuetifyjs.com/product/material-kit-theme',
         },
         {
-          title: vm.$t('Themes.PremiumThemes.templates.alpha.title'),
-          description: vm.$t('Themes.PremiumThemes.templates.alpha.description'),
+          title: vm.$t('Themes.Premium.templates.alpha.title'),
+          description: vm.$t('Themes.Premium.templates.alpha.description'),
           src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-alpha-theme.png',
           url: 'https://store.vuetifyjs.com/product/vuetify-alpha-theme',
         },

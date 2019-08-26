@@ -175,7 +175,7 @@
   {
     "text": "premiumThemes",
     "icon": "mdi-vuetify",
-    "to": "themes/premium-themes",
+    "to": "themes/premium",
     "updated": true
   }
 ]

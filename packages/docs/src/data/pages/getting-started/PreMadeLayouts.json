@@ -22,7 +22,7 @@
           "type": "up-next",
           "value": [
             "components/application",
-            "themes/premium-themes",
+            "themes/premium",
             "customization/theme"
           ]
         }

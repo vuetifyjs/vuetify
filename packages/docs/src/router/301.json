@@ -72,6 +72,5 @@
   "/customizing/breakpoints": "/customization/breakpoints",
   "/customizing/theme": "/customization/theme",
   "/customizing/icons": "/customization/icons",
-  "/customizing/i18n": "/customization/internationalization",
-  "/themes/premium": "/themes/premium-themes"
+  "/customizing/i18n": "/customization/internationalization"
 }
