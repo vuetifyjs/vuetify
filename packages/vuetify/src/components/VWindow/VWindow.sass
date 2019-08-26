@@ -3,6 +3,7 @@
 
 .v-window
   &__container
+    height: inherit
     position: relative
     transition: $window-transition
 
@@ -18,28 +19,20 @@
     top: calc(50% - 20px)
     z-index: 1
 
-    .v-btn
-      margin: 0
-      height: auto
-      width: auto
-
-      &:hover
-        background: none
+    .v-btn:hover
+      background: none
 
   &__prev
-    left: 0
-
-  &__next
-    right: 0
-
-  +rtl()
-    &__prev
-      left: auto
+    +ltr()
+      left: 0
+    +rtl()
       right: 0
 
-    &__next
+  &__next
+    +ltr()
+      right: 0
+    +rtl()
       left: 0
-      right: auto
 
   &--show-arrows-on-hover
     overflow: hidden
@@ -49,10 +42,16 @@
       transition: .2s transform map-get($transition, 'swing')
 
     .v-window__prev
-      transform: translateX(-200%)
+      +ltr()
+        transform: translateX(-200%)
+      +rtl()
+        transform: translateX(200%)
 
     .v-window__next
-      transform: translateX(200%)
+      +ltr()
+        transform: translateX(200%)
+      +rtl()
+        transform: translateX(-200%)
 
     &:hover
       .v-window__next,

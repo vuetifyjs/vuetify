@@ -1,13 +1,13 @@
 <template>
-  <v-layout justify-center>
-    <v-flex xs12 sm8 md6>
+  <v-row justify="center">
+    <v-col cols="12" sm="8" md="6">
       <v-card>
         <v-toolbar color="orange lighten-1" dark>
           <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
           <v-toolbar-title>Message Board</v-toolbar-title>
 
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
 
           <v-btn icon>
             <v-icon>search</v-icon>
@@ -47,8 +47,8 @@
           </template>
         </v-list>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

@@ -29,14 +29,14 @@
       </v-card>
     </v-footer>
 
-    <v-layout
-      align-center
-      justify-center
+    <v-row
+      align="center"
+      justify="center"
       class="ma-12"
     >
-      <v-flex
-        xs12
-        md8
+      <v-col
+        cols="12"
+        md="8"
       >
 
         <v-select
@@ -51,8 +51,8 @@
           hide-details
           label="Padless"
         ></v-checkbox>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-card>
 </template>
 

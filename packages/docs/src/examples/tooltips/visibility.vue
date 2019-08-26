@@ -1,15 +1,14 @@
 <template>
   <v-container fluid class="text-center">
-    <v-layout
-      flex
-      justify-space-between
-      wrap
+    <v-row
+      class="flex"
+      justify="space-between"
     >
-      <v-flex xs12>
+      <v-col cols="12">
         <v-btn @click="show = !show">toggle</v-btn>
-      </v-flex>
+      </v-col>
 
-      <v-flex xs12 class="mt-12">
+      <v-col cols="12" class="mt-12">
         <v-tooltip v-model="show" top>
           <template v-slot:activator="{ on }">
             <v-btn icon v-on="on">
@@ -18,8 +17,8 @@
           </template>
           <span>Programmatic tooltip</span>
         </v-tooltip>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

@@ -2,8 +2,8 @@
   <v-card flat>
     <v-card-text>
       <v-container fluid>
-        <v-layout wrap>
-          <v-flex xs12 sm6 md6>
+        <v-row>
+          <v-col cols="12" sm="6" md="6">
             <v-radio-group v-model="ex7" column>
               <v-radio
                 label="red"
@@ -36,8 +36,8 @@
                 value="orange darken-3"
               ></v-radio>
             </v-radio-group>
-          </v-flex>
-          <v-flex xs12 sm6 md6>
+          </v-col>
+          <v-col cols="12" sm="6" md="6">
             <v-radio-group v-model="ex8" column>
               <v-radio
                 label="primary"
@@ -70,8 +70,8 @@
                 value="error"
               ></v-radio>
             </v-radio-group>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-card-text>
   </v-card>

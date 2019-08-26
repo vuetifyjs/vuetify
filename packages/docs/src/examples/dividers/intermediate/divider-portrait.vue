@@ -1,17 +1,15 @@
 <template>
-  <v-layout
-    wrap
-  >
-    <v-flex
-      xs12
-      sm6
-      offset-sm3
+  <v-row>
+    <v-col
+      cols="12"
+      sm="6"
+      offset-sm="3"
     >
       <v-card color="grey darken-1">
         <v-card-title>
           <span class="headline white--text pl-4">Portrait View</span>
 
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
 
           <v-btn
             dark
@@ -94,6 +92,6 @@
           height="200px"
         ></v-img>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>

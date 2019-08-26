@@ -16,7 +16,6 @@
     "lazyValidation": "**value** 는 검사 에러(validation error) 가 표시될때 까지 **vallue** 가 무조건 _true_가 됩니다. 검사를 수동으로 호출하려면 여전히 `validate()` 함수를 호출할 수 있습니다."
   },
   "functions": {
-    "reset": "모든 인풋의 검사를 리셋합니다.=",
     "validate": "모든 인풋을 검사하고 결과를 리턴합니다."
   }
 }

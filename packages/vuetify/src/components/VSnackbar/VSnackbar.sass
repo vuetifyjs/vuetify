@@ -30,11 +30,10 @@
     border-radius: $snackbar-border-radius
     display: flex
     margin: 0 auto
-    max-width: 672px
-    min-width: 344px
     pointer-events: auto
     transition: inherit
     transition-property: opacity, transform
+    min-width: 100%
     +elevation(6)
 
   &__content
@@ -89,6 +88,9 @@
 @media #{map-get($display-breakpoints, 'sm-and-up')}
   .v-snack
     &__wrapper
+      min-width: 344px
+      max-width: 672px
+
       .v-snack--left &
         margin-left: 0
 

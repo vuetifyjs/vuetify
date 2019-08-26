@@ -31,8 +31,16 @@
     }
   },
   "props": {
+    "centerActive": "crwdns42568:0crwdne42568:0",
     "nextIcon": "crwdns40572:0crwdne40572:0",
     "prevIcon": "crwdns40574:0crwdne40574:0",
     "showArrows": "crwdns40576:0crwdne40576:0"
+  },
+  "events": {
+    "click:location": "crwdns42570:0crwdne42570:0"
+  },
+  "slots": {
+    "next": "crwdns42572:0crwdne42572:0",
+    "prev": "crwdns42574:0crwdne42574:0"
   }
 }

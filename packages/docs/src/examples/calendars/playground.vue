@@ -1,8 +1,8 @@
 <template>
-  <v-layout wrap>
-    <v-flex
-      sm12
-      lg3
+  <v-row>
+    <v-col
+      sm="12"
+      lg="3"
       class="mb-4 controls"
     >
       <v-btn
@@ -14,9 +14,7 @@
         color="primary"
         @click="$refs.calendar.prev()"
       >
-        <v-icon dark>
-          keyboard_arrow_left
-        </v-icon>
+        <v-icon dark>mdi-chevron-left</v-icon>
       </v-btn>
       <v-btn
         fab
@@ -27,11 +25,7 @@
         color="primary"
         @click="$refs.calendar.next()"
       >
-        <v-icon
-          dark
-        >
-          keyboard_arrow_right
-        </v-icon>
+        <v-icon dark>mdi-chevron-right</v-icon>
       </v-btn>
       <br><br><br>
       <v-select
@@ -85,7 +79,7 @@
           no-title
           scrollable
         >
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
           <v-btn
             text
             color="primary"
@@ -128,7 +122,7 @@
           no-title
           scrollable
         >
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
           <v-btn
             text
             color="primary"
@@ -170,7 +164,7 @@
           no-title
           scrollable
         >
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
           <v-btn
             text
             color="primary"
@@ -216,10 +210,10 @@
         :items="styleIntervalOptions"
         label="Styling"
       ></v-select>
-    </v-flex>
-    <v-flex
-      sm12
-      lg9
+    </v-col>
+    <v-col
+      sm="12"
+      lg="9"
       class="pl-4"
     >
       <v-sheet height="500">
@@ -272,8 +266,8 @@
           </template>
         </v-calendar>
       </v-sheet>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

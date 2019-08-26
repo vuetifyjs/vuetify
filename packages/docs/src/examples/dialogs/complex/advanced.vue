@@ -1,8 +1,7 @@
 <template>
   <div>
-    <v-layout
-      justify-center
-      wrap
+    <v-row
+      justify="center"
     >
       <v-btn
         color="primary"
@@ -69,7 +68,7 @@
               <v-icon>close</v-icon>
             </v-btn>
             <v-toolbar-title>Settings</v-toolbar-title>
-            <v-spacer></v-spacer>
+            <div class="flex-grow-1"></div>
             <v-toolbar-items>
               <v-btn
                 dark
@@ -220,7 +219,7 @@
         <v-card>
           <v-card-title>
             <span>Dialog 3</span>
-            <v-spacer></v-spacer>
+            <div class="flex-grow-1"></div>
             <v-menu
               bottom
               left
@@ -255,7 +254,7 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-    </v-layout>
+    </v-row>
   </div>
 </template>
 

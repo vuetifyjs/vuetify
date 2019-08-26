@@ -8,7 +8,7 @@
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-toolbar-title>Page title</v-toolbar-title>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <v-btn icon>
         <v-icon>search</v-icon>
       </v-btn>

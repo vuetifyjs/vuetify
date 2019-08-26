@@ -3,13 +3,13 @@
 @import './_variables.scss'
 
 +theme(v-tabs) using ($material)
-  .v-tab:not(.v-tab--active),
-  .v-tab:not(.v-tab--active) > .v-icon,
-  .v-tab--disabled
-    color: map-get($material, 'tabs')
-
-  .v-tabs-bar
+  > .v-tabs-bar
     background-color: map-get($material, 'cards')
+
+    .v-tab:not(.v-tab--active),
+    .v-tab:not(.v-tab--active) > .v-icon,
+    .v-tab--disabled
+      color: map-get($material, 'tabs')
 
   .v-tab
     +states($material)
@@ -47,9 +47,14 @@
   height: $tabs-bar-height
 
   // https://github.com/vuetifyjs/vuetify/issues/6932
-  &.v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows)
-    > .v-slide-group__wrapper > .v-tabs-bar__content > .v-tab:first-of-type
-      margin-left: $tabs-item-mobile-no-arrows-margin
+  &.v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows) > .v-slide-group__wrapper > .v-tabs-bar__content
+    & > .v-tab:first-child,
+    & > .v-tabs-slider-wrapper + .v-tab
+      +ltr()
+        margin-left: $tabs-item-mobile-no-arrows-margin
+
+      +rtl()
+        margin-right: $tabs-item-mobile-no-arrows-margin
 
   &.v-item-group > *
     cursor: initial
@@ -103,47 +108,49 @@
     transition: $primary-transition
 
 // Modifier
-.v-tabs--align-with-title > .v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows)
-  > .v-slide-group__wrapper > .v-tabs-bar__content > .v-tab:first-of-type
-    margin-left: $tabs-item-align-with-title-margin
+.v-tabs--align-with-title > .v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows) > .v-slide-group__wrapper > .v-tabs-bar__content
+  & > .v-tab:first-child,
+  & > .v-tabs-slider-wrapper + .v-tab
+    +ltr()
+      margin-left: $tabs-item-align-with-title-margin
 
-.v-tabs--fixed-tabs,
-.v-tabs--centered
-  .v-tabs-bar__content > *:last-child
-    margin-right: auto
+    +rtl()
+      margin-right: $tabs-item-align-with-title-margin
 
-  .v-tabs-bar__content > *:first-child:not(.v-tabs-slider-wrapper)
-    margin-left: auto
+.v-tabs--fixed-tabs > .v-tabs-bar,
+.v-tabs--centered > .v-tabs-bar
+  +ltr()
+    .v-tabs-bar__content > *:last-child
+      margin-right: auto
 
-  .v-tabs-slider-wrapper + *
-    margin-left: auto
+    .v-tabs-bar__content > *:first-child:not(.v-tabs-slider-wrapper)
+      margin-left: auto
+
+    .v-tabs-slider-wrapper + *
+      margin-left: auto
 
   +rtl()
     .v-tabs-bar__content > *:last-child
-      margin-right: 0
       margin-left: auto
 
     .v-tabs-bar__content > *:first-child:not(.v-tabs-slider-wrapper)
-      margin-left: 0
       margin-right: auto
 
     .v-tabs-slider-wrapper + *
-      margin-left: 0
       margin-right: auto
 
-.v-tabs--fixed-tabs
+.v-tabs--fixed-tabs > .v-tabs-bar
   .v-tab
     flex: 1 1 auto
     width: 100%
 
-.v-tabs--grow
+.v-tabs--grow > .v-tabs-bar
   .v-tab
     flex: 1 0 auto
     max-width: none
 
-.v-tabs--icons-and-text
-  .v-tabs-bar
-    height: $tabs-icons-and-text-bar-height
+.v-tabs--icons-and-text > .v-tabs-bar
+  height: $tabs-icons-and-text-bar-height
 
   .v-tab
     flex-direction: column-reverse
@@ -151,17 +158,25 @@
     > *:first-child
       margin-bottom: 6px
 
-.v-tabs--overflow
+.v-tabs--overflow > .v-tabs-bar
   .v-tab
     flex: 1 0 auto
 
-.v-tabs--right
+.v-tabs--right > .v-tabs-bar
   .v-tab:first-child,
   .v-tabs-slider-wrapper + .v-tab
-    margin-left: auto
+    +ltr()
+      margin-left: auto
+
+    +rtl()
+      margin-right: auto
 
   .v-tab:last-child
-    margin-right: 0
+    +ltr()
+      margin-right: 0
+
+    +rtl()
+      margin-left: 0
 
 .v-tabs--vertical
   display: flex

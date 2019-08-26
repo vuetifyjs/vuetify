@@ -23,7 +23,7 @@
         <v-icon>mdi-plus</v-icon>
       </v-btn>
 
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
 
       <v-btn icon>
         <v-icon>mdi-share-variant</v-icon>
@@ -39,28 +39,26 @@
     </v-toolbar>
 
     <v-container style="height: 400px;">
-      <v-layout
-        align-content-center
-        justify-center
-        fill-height
-        wrap
+      <v-row
+        class="fill-height"
+        align-content="center"
+        justify="center"
       >
-        <v-flex
-          xs12
-          subtitle-1
-          text-center
+        <v-col
+          class="subtitle-1 text-center"
+          cols="12"
         >
           Getting your files
-        </v-flex>
-        <v-flex xs6>
+        </v-col>
+        <v-col cols="6">
           <v-progress-linear
             color="deep-purple accent-4"
             indeterminate
             rounded
             height="6"
           ></v-progress-linear>
-        </v-flex>
-      </v-layout>
+        </v-col>
+      </v-row>
     </v-container>
   </v-card>
 </template>

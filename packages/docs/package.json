@@ -3,16 +3,16 @@
   "description": "A Vue.js project",
   "private": true,
   "author": "John Leider <john.j.leider@gmail.com>",
-  "version": "2.0.2",
+  "version": "2.0.10",
   "scripts": {
-    "dev": "cross-env node server",
+    "dev": "cross-env node --max_old_space_size=4096 server",
     "start": "cross-env NODE_ENV=production node server",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config build/webpack.prod.config.js --no-progress --hide-modules",
     "lint": "eslint --ext .js,.vue,.json src -f codeframe",
     "lint:fix": "yarn lint --fix"
   },
   "dependencies": {
-    "@vuetify/api-generator": "^2.0.2",
+    "@vuetify/api-generator": "^2.0.10",
     "babel-polyfill": "^6.26.0",
     "chokidar": "^3.0.2",
     "compression": "^1.7.4",
@@ -39,7 +39,7 @@
     "vue-router": "^3.0.7",
     "vue-server-renderer": "^2.6.10",
     "vuelidate": "^0.7.4",
-    "vuetify": "^2.0.2",
+    "vuetify": "^2.0.10",
     "vuex": "^3.1.1",
     "vuex-router-sync": "^5.0.0",
     "webfontloader": "^1.6.28"
@@ -57,6 +57,7 @@
     "docsearch.js": "^2.6.3",
     "eslint": "^6.1.0",
     "eslint-plugin-json": "^1.4.0",
+    "eslint-plugin-vuetify": "^1.0.0-beta.4",
     "event-source-polyfill": "^1.0.7",
     "fibers": "^4.0.1",
     "file-loader": "^4.1.0",

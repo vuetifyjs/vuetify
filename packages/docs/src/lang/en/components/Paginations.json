@@ -13,8 +13,8 @@
       "header": "### Limit",
       "desc": "You can also manually set the maximum number of visible page buttons with the `total-visible` prop."
     },
-    "round": {
-      "header": "### Round",
+    "circle": {
+      "header": "### Circle",
       "desc": "The `circle` prop gives you an alternate style for pagination buttons."
     },
     "icons": {

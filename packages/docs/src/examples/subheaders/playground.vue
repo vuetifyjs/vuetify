@@ -1,13 +1,13 @@
 <template>
   <div class="grey lighten-5 pa-4">
-    <v-layout
-      align-center
-      justify-center
+    <v-row
+      align="center"
+      justify="center"
     >
-      <v-flex
-        xs12
-        md8
-        sm4
+      <v-col
+        cols="12"
+        md="8"
+        sm="4"
       >
         <v-card>
           <v-subheader :inset="inset">Subheader</v-subheader>
@@ -35,16 +35,16 @@
             </template>
           </v-list>
         </v-card>
-      </v-flex>
-    </v-layout>
-    <v-layout
+      </v-col>
+    </v-row>
+    <v-row
       class="mt-12"
-      align-center
-      justify-center
+      align="center"
+      justify="center"
     >
-      <v-flex
-        xs12
-        md8
+      <v-col
+        cols="12"
+        md="8"
       >
         <template>
           <v-checkbox
@@ -54,8 +54,8 @@
             light
           ></v-checkbox>
         </template>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </div>
 </template>
 

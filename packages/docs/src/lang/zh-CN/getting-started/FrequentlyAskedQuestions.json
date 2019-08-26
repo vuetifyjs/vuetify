@@ -3,43 +3,5 @@
   "question": "提问:",
   "answer": "回答",
   "noResultsFound": "没找到结果",
-  "resetSearch": "重置搜索",
-  "gotchas": {
-    "0": {
-      "q": "请问有带router的codepen模版吗？",
-      "a": "有，[在这](https://codepen.io/zikeji/pen/ypeQNm)."
-    },
-    "2": {
-      "q": "我的应用程序看起来不正确。",
-      "a": "Vuetify必须使用`v-app`组件。它应该包装您的整个应用程序，并且是许多框架功能的中心点。如果由于某种原因您不能使用这个元素，您可以通过属性和类来模仿它，只需在可用的最上层元素（不包括body）以及**application application--{light|dark}** 类中将`data-app`属性设置为true。"
-    },
-    "3": {
-      "q": "暗黑和亮白主题不能正常工作。"
-    },
-    "4": {
-      "q": "菜单/对话框/导航抽屉无法正确打开。"
-    },
-    "5": {
-      "q": "即使我的内容没有垂直移除，滚动条依然显示。"
-    },
-    "6": {
-      "q": "如何垂直居中？"
-    },
-    "7": {
-      "q": "我不在 _/home_ 页面， _/_ 链接却会被激活。",
-      "a": "将**exact**添加到指向绝对路径 /。欲了解更多信息，你可以访问官方Vue路由[文档](https://router.vuejs.org/en/api/router-link.html)."
-    },
-    "8": {
-      "q": "我的页面在手机上没有响应式",
-      "a": "将`<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui\">`添加到index.html文件的`<head>`节点中。"
-    },
-    "9": {
-      "q": "我怎么使用Font Awesome图片和Material Design图标(mdi)?",
-      "a": "您必须添加字体到您的index.html文件或者其他的方式导入到您的项目中<br>**MDI**: [Material Design Icons](https://materialdesignicons.com/getting-started)<br>**FA**: [Font Awesome](http://fontawesome.io/get-started/)"
-    },
-    "11": {
-      "q": "使用相对路径的图片在`v-card`中不起作用",
-      "a": "Vue加载器会自动将相对路径转换未require函数。不幸的是，当涉及到自定义组件时，情况并非如此。您可以使用`require`来避开这个问题。\n\n`<v-card :src=\"require('path/to/img/img.jpg')\">`"
-    }
-  }
+  "resetSearch": "重置搜索"
 }

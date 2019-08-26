@@ -1,8 +1,8 @@
 <template>
-  <v-layout wrap>
-    <v-flex
-      xs12
-      sm6
+  <v-row>
+    <v-col
+      cols="12"
+      sm="6"
     >
       <v-hover
         v-slot:default="{ hover }"
@@ -19,11 +19,11 @@
           </v-card-text>
         </v-card>
       </v-hover>
-    </v-flex>
+    </v-col>
 
-    <v-flex
-      xs12
-      sm6
+    <v-col
+      cols="12"
+      sm="6"
     >
       <v-hover
         v-slot:default="{ hover }"
@@ -40,6 +40,6 @@
           </v-card-text>
         </v-card>
       </v-hover>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>

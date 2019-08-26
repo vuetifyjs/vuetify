@@ -2,5 +2,6 @@
   "header": "Component API Overview",
   "headerText": "マテリアルデザイン仕様のすべてのコンポーネントをすばやく検索できます。コンポーネントを選んでそのAPIと使用例を確認しましょう。",
   "search": "検索",
-  "select": "コンポーネントを選択"
+  "select": "コンポーネントを選択",
+  "browseCategories": "カテゴリを閲覧"
 }

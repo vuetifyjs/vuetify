@@ -8,9 +8,6 @@
       "header": "Límite",
       "desc": "También puedes configurar manualmente el número máximo de botones de páginas visibles con la prop `total-visible`."
     },
-    "round": {
-      "header": "Redondo"
-    },
     "icons": {
       "header": "Íconos"
     },
