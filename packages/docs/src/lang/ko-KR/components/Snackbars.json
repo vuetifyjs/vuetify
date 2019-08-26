@@ -1,5 +1,4 @@
 {
-  "headerText": "`v-snackbar` 컴포넌트는 사용자에게 퀵 메시지를 표여주기 위해 사용됩니다. 스낵바는 위치지정, 제거 지연(removal delay), 콜백(callback) 등을 지원합니다.",
   "examples": {
     "contextual": {
       "desc": "당신의 구현에 더 적합한 색상을 적용할 수 있습니다."

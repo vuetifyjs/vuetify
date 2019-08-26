@@ -1,11 +1,11 @@
 <template>
-  <v-layout column align-center>
-    <v-layout wrap justify-space-around>
+  <v-row align="center">
+    <v-row justify="space-around">
       <v-switch v-model="autorun" class="ma-2" label="Automatic switching"></v-switch>
       <v-switch v-model="showArrows" class="ma-2" label="Show arrows"></v-switch>
       <v-switch v-model="vertical" class="ma-2" label="Vertical"></v-switch>
       <v-switch v-model="reverse" class="ma-2" label="Reverse"></v-switch>
-    </v-layout>
+    </v-row>
 
     <v-window
       v-model="window"
@@ -20,14 +20,14 @@
       >
         <v-card flat>
           <v-card-text>
-            <v-layout align-center mb-4>
+            <v-row class="mb-4" align="center">
               <v-avatar color="grey" class="mr-4"></v-avatar>
               <strong class="title">Title {{ n }}</strong>
-              <v-spacer></v-spacer>
+              <div class="flex-grow-1"></div>
               <v-btn icon>
                 <v-icon>mdi-account</v-icon>
               </v-btn>
-            </v-layout>
+            </v-row>
 
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -44,7 +44,7 @@
         </v-card>
       </v-window-item>
     </v-window>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

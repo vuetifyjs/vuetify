@@ -67,5 +67,8 @@
     "img": "crwdns39276:0[v-img]crwdne39276:0",
     "outlined": "crwdns39278:0crwdne39278:0",
     "raised": "crwdns39280:0crwdne39280:0"
+  },
+  "events": {
+    "click": "crwdns42388:0crwdne42388:0"
   }
 }

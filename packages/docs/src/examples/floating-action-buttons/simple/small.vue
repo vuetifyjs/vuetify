@@ -1,11 +1,11 @@
 <template>
-  <v-layout>
-    <v-flex xs12 sm6 offset-sm3>
+  <v-row>
+    <v-col cols="12" sm="6" offset-sm="3">
       <v-card>
         <v-toolbar color="light-blue" light extended>
           <v-app-bar-nav-icon></v-app-bar-nav-icon>
           <v-toolbar-title class="white--text">My files</v-toolbar-title>
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
           <v-btn icon>
             <v-icon>search</v-icon>
           </v-btn>
@@ -65,14 +65,14 @@
               <small class="grey--text">* This doesn't actually save.</small>
             </v-card-text>
             <v-card-actions>
-              <v-spacer></v-spacer>
+              <div class="flex-grow-1"></div>
               <v-btn text color="primary" @click="dialog = false">Submit</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

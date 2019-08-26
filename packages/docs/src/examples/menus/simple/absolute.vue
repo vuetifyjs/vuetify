@@ -1,7 +1,7 @@
 <template>
-  <v-layout
-    d-flex
-    justify-center
+  <v-row
+    class="d-flex"
+    justify="center"
   >
     <v-menu
       v-model="showMenu"
@@ -29,7 +29,7 @@
         </v-list-item>
       </v-list>
     </v-menu>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

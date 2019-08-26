@@ -1,1 +1,27 @@
-{}
+{
+  "404": {
+    "title": "Ops, 404"
+  },
+  "getting-started/why-vuetify": {
+    "title": "Por que Vuetify?"
+  },
+  "getting-started/meet-the-team": {
+    "title": "Conheça a equipe"
+  },
+  "customization/accessibility": {
+    "title": "Acessibilidade"
+  },
+  "customization/icons": {
+    "title": "Ícones"
+  },
+  "customization/internationalization": {
+    "title": "Internacionalização (i18n)"
+  },
+  "customization/theme": {
+    "title": "Tema",
+    "keywords": "temas"
+  },
+  "styles/transitions": {
+    "title": "Transições"
+  }
+}

@@ -83,13 +83,17 @@ export default VTextField.extend({
       }
     },
     counterValue (): string {
-      if (!this.showSize) return this.$vuetify.lang.t(this.counterString, this.lazyValue.length)
+      const fileCount = (this.isMultiple && this.lazyValue)
+        ? this.lazyValue.length
+        : (this.lazyValue instanceof File) ? 1 : 0
+
+      if (!this.showSize) return this.$vuetify.lang.t(this.counterString, fileCount)
 
       const bytes = this.internalArrayValue.reduce((size: number, file: File) => size + file.size, 0)
 
       return this.$vuetify.lang.t(
         this.counterSizeString,
-        this.lazyValue.length,
+        fileCount,
         humanReadableFileSize(bytes, this.base === 1024)
       )
     },
@@ -156,6 +160,13 @@ export default VTextField.extend({
       const input = VTextField.options.methods.genInput.call(this)
 
       input.data!.domProps!.value = this.internalFileInput
+
+      // This solves an issue in Safari where
+      // nothing happens when adding a file
+      // do to the input event not firing
+      // https://github.com/vuetifyjs/vuetify/issues/7941
+      delete input.data!.on!.input
+      input.data!.on!.change = this.onInput
 
       return [this.genSelections(), input]
     },

@@ -4,7 +4,7 @@
     width="344"
   >
     <v-system-bar>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <v-icon>mdi-square</v-icon>
       <v-icon>mdi-circle</v-icon>
       <v-icon>mdi-triangle</v-icon>
@@ -25,7 +25,7 @@
         color="deep-purple accent-4"
       ></v-progress-linear>
 
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
 
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
@@ -37,10 +37,10 @@
     </v-toolbar>
 
     <v-container style="height: 282px;">
-      <v-layout
-        align-center
-        justify-center
-        fill-height
+      <v-row
+        class="fill-height"
+        align="center"
+        justify="center"
       >
         <v-scale-transition>
           <div
@@ -53,7 +53,7 @@
             >Start loading</v-btn>
           </div>
         </v-scale-transition>
-      </v-layout>
+      </v-row>
     </v-container>
   </v-card>
 </template>

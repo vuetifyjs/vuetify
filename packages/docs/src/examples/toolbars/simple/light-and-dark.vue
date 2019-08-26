@@ -1,7 +1,7 @@
 <template>
   <v-card flat>
     <v-container fluid>
-      <v-layout child-flex wrap>
+      <v-row class="child-flex">
         <div>
           <v-toolbar>
             <v-btn icon class="hidden-xs-only">
@@ -10,7 +10,7 @@
 
             <v-toolbar-title>Title</v-toolbar-title>
 
-            <v-spacer></v-spacer>
+            <div class="flex-grow-1"></div>
 
             <v-btn icon class="hidden-xs-only">
               <v-icon>search</v-icon>
@@ -20,7 +20,7 @@
 
         <div style="flex-basis: 20%">
           <v-toolbar dark>
-            <v-spacer></v-spacer>
+            <div class="flex-grow-1"></div>
 
             <v-btn icon>
               <v-icon>reply</v-icon>
@@ -31,7 +31,7 @@
             </v-btn>
           </v-toolbar>
         </div>
-      </v-layout>
+      </v-row>
     </v-container>
   </v-card>
 </template>

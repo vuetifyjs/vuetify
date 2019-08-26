@@ -46,7 +46,6 @@
   justify-content: center
 
 .v-timeline-item__dot
-  position: absolute
   z-index: 2
   border-radius: 50%
   +elevation(1)
@@ -54,11 +53,9 @@
 
   &--small
     +timeline-dots($timeline-dot-small-size, $timeline-inner-dot-small-size)
-    top: 8px
 
   &--large
     +timeline-dots($timeline-dot-large-size, $timeline-inner-dot-large-size)
-    top: -8px
 
 .v-timeline-item__inner-dot
   border-radius: 50%

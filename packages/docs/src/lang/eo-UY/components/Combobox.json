@@ -20,6 +20,7 @@
   },
   "props": {
     "dark": "crwdns40588:0crwdne40588:0",
+    "delimiters": "crwdns42576:0crwdne42576:0",
     "value": "crwdns34122:0crwdne34122:0"
   },
   "slots": {

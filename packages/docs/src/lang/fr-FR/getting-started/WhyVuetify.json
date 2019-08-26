@@ -1,3 +1,37 @@
 {
-  "support": "Support"
+  "header": "# Quelle est la différence ?",
+  "headerText": "Vuetify est le framework Material #1 et est en développement depuis 2016. L'objectif du projet est de fournir aux utilisateurs tout ce qui est nécessaire pour construire des applications web riches et engageantes en utilisant la spécification Material Design et Vue. Il accomplit cela avec un cycle de mise à jour régulier, un Support à long terme **(LTS)** pour les versions précédentes, un engagement communautaire réactif, un vaste écosystème de ressources et un dévouement aux composants de qualité.",
+  "community": "Communauté",
+  "communityCaption": "Préparez-vous à profiter de l’une des communautés les plus actives de l’écosystème de Vue. Coincé sur un problème ? Obtenez de l'aide immédiatement. Vous avez trouvé un bug ? Vous voulez parler de Firebase ? Vous voulez créer quelque chose d'incroyable ? Faites-le nous savoir. Les **mainteneurs** répondent et réagissent aux problèmes au fur et à mesure qu'ils surviennent. Soyez rassurés en sachant que nous sommes là pour vous aider.",
+  "communityHeader": "## Aide active",
+  "communityText": "Développer avec Vuetify signifie que vous ne serez jamais seul. Obtenez immédiatement l'aide de l'équipe de développement et des autres membres de la communauté sur le serveur officiel Discord. Saisissez l’occasion de parler à des personnes talentueuses du monde entier qui souhaitent que vos efforts aboutissent. Vous avez besoin d'aide et voulez supporter le projet ? Devenez un [parrain sur Patreon](https://www.patreon.com/vuetify) et accédez aux chaînes de support privées ou [réservez du temps](/getting-started/consulting-and-support) avec l'auteur.",
+  "comparisonHeader": "## Comparaison avec les autres frameworks",
+  "comparisonText": "Vuetify n'est pas le seul framework de composants Vue. Beaucoup d'autres développeurs talentueux ont créé des projets incroyables pour aider les utilisateurs au développement. Il vous appartient au final de décider de ce que sont vos paramètres de réussite. Bien que ce ne soit pas une liste exhaustive, c'est ainsi que Vuetify se distingue des autres bibliothèques :",
+  "continuous": "Continues",
+  "core": "Principes fondamentaux",
+  "designHeader": "## Spécification du design",
+  "designText": "Vuetify est développé exactement selon les [spécifications Material Design](https://material.io/guidelines/). Chaque composant est fait main pour vous apporter les meilleurs outils possible d'IU pour votre prochaine merveilleuse application. Le développement ne s'arrête pas aux composants de base présentés dans la spec de Google. Grâce aux support des membres de notre communauté et de nos [sponsors](/getting-started/sponsors-and-backers), nous avons ajouté plus de 15 nouveaux composants y compris [calendars](/components/calendars), [color pickers](/components/color-pickers), [treeview](/components/treeview) et bien plus.",
+  "featuresHeader": "## Points importants",
+  "featuresList": {
+    "0": "[Communauté Vibrante](https://community.vuetifyjs.com) avec plus de 1k utilisateurs simultanés",
+    "1": "Mises à jour hebdomadaires (**chaque mardi**)",
+    "2": "Treeshaking automatique avec [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader)",
+    "3": "API de composants étendue",
+    "4": "Prise en charge SSR, PWA et application mobile",
+    "6": "Prise en charge de l'Accessibilité **(a11y)**",
+    "7": "Prise en charge de l'internationalisation **(i18n)**",
+    "8": "Prise en charge du RTL **(bidirectionalité)**",
+    "9": "Support professionnel et consulting de l'auteur",
+    "10": "Prise en charge des entreprises via Tidelift",
+    "11": "Thèmes Premium & Gratuits"
+  },
+  "material": "Material",
+  "professional": "Professionel",
+  "support": "Support",
+  "supportCaption": "Vous avez besoin d'un forfait pour un support personnalisé ? L'auteur de Vuetify, John Leider, fournit des services de consultation et de soutien pour aider avec tout cas d'utilisation que vous avez créé pendant la construction de votre application.",
+  "toolkit": "Outils",
+  "toolkitCaption": "Vuetify est construit à partir de zéro pour être sémantique. Facile à apprendre, facile à retenir &mdash; que vous développiez votre propre application ou que vous intégriez un nouveau développeur, cela signifie que les composants et propriétés Vuetify _écrits comme l'on parle_ facilitent grandement le développement.",
+  "updates": "Mises à jour",
+  "updatesCaption": "Vuetify a un cycle de mise à jour régulier, vous permettant de mettre la main sur des corrections de bugs et des améliorations plus souvent. L’équipe de développement s’engage à vous fournir la meilleure expérience possible.",
+  "vibrant": "Vibrante"
 }

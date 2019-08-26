@@ -1,29 +1,29 @@
 <template>
-  <v-layout
-    wrap
-    justify-space-around
+  <v-row
+
+    justify="space-around"
   >
-    <v-flex xs12>
+    <v-col cols="12">
       <v-slider
         v-model="min"
         min="-100"
         max="100"
         label="Min"
       ></v-slider>
-    </v-flex>
-    <v-flex xs12>
+    </v-col>
+    <v-col cols="12">
       <v-slider
         v-model="max"
         min="-100"
         max="100"
         label="Max"
       ></v-slider>
-    </v-flex>
+    </v-col>
     <v-switch v-model="disabled" class="ma-2" label="Disabled"></v-switch>
     <v-switch v-model="readonly" class="ma-2" label="Readonly"></v-switch>
     <v-switch v-model="vertical" class="ma-2" label="Vertical"></v-switch>
     <v-switch v-model="range" class="ma-2" label="Range"></v-switch>
-    <v-flex xs12>
+    <v-col cols="12">
       <v-slider
         v-if="!range"
         v-model="volume"
@@ -47,8 +47,8 @@
         :vertical="vertical"
         label="Volume"
       ></v-range-slider>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

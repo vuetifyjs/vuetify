@@ -300,7 +300,7 @@ export default baseMixins.extend({
       }
     },
     closeConditional () {
-      return this.isActive && this.reactsToClick
+      return this.isActive && !this._isDestroyed && this.reactsToClick
     },
     genAppend () {
       return this.genPosition('append')

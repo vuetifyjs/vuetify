@@ -1,1 +1,9 @@
-{}
+{
+  "header": "# Breakpoints",
+  "breakpointHeader": "## Objet du service Breakpoint",
+  "breakpointText1": "Vuetify convertit les breakpoints disponibles en un objet accessible depuis votre application. Cela vous permettra d'assigner / d'appliquer des propriétés et des attributs spécifiques en fonction de la taille de la fenêtre d'affichage. L'objet est disponible par `$vuetify.breakpoint`.",
+  "breakpointHeader1a": "## Utilisation",
+  "breakpointText2": "Essayons un exemple réel. Vous avez un composant `v-dialog` que vous souhaitez convertir en dialogue **plein écran** sur les appareils mobiles. Normalement, vous devez lier des observateurs pour la taille de la fenêtre et / ou vérifier chaque fois que la page est chargée.",
+  "breakpointText3": "Cela fait beaucoup de boilerplate à écrire. Même si vous choisissez d'utiliser la directive intégrée [v-resize](/directives/resizing), vous devrez toujours définir une méthode de redimensionnement. Avec l'objet **breakpoint**, vous pouvez complètement ignorer cette logique et reprendre la construction de votre application.",
+  "customizeThresholdsText1": "Vous pouvez définir vos propres seuils de breakpoints en pixels, mais il s'agit actuellement d'un processus en deux étapes : 1. Pour mettre à jour les styles, vous devez remplacer les variables SASS `$grid-breakpoints` (veuillez consulter [SASS variables](/customization/sass-variables)). 2. Pour utiliser les mêmes valeurs du côté JavaScript, vous devez les transmettre lors du bootstrap de l'application, de la manière suivante :"
+}

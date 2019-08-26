@@ -26,12 +26,16 @@
 
   tbody
     tr
-      &:not(:last-child)
-        border-bottom: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+      &:not(:last-child) td
+        &:not(.v-data-table__mobile-row)
+          border-bottom: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+
+        &:last-child
+          border-bottom: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
 
       &.active
         background: map-deep-get($material, 'table', 'active')
-        
+
       &:hover
         background: map-deep-get($material, 'table', 'hover')
 
@@ -39,7 +43,7 @@
 .v-data-table
   table
     width: 100%
-    border-collapse: collapse
+    border-spacing: 0
 
   td, th
     padding: 0 16px
@@ -111,10 +115,3 @@
     tr:nth-child(2)
       th
         top: $data-table-dense-header-height
-
-.v-data-table--mobile
-  tr, td, th
-    display: block
-
-  td, th
-    padding: 14px

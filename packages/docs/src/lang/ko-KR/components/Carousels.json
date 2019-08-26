@@ -10,8 +10,7 @@
       "desc": "캐러셀의 구분자와 이전/다음 아이콘을 바꿀 수 있습니다."
     },
     "hide-controls": {
-      "header": "컨트롤 숨기기 (Hide controls)",
-      "desc": "하단의 컨트롤을 숨기려면 `hide-controls` prop 을 사용합니다.(이것도 오타같습니다. 실제론 좌우 전환 컨트롤을 숨깁니다. 델리미터를 숨기는 건 `hide-delemiters` 입니다.)"
+      "header": "컨트롤 숨기기 (Hide controls)"
     }
   },
   "props": {

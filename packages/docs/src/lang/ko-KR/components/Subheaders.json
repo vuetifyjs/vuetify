@@ -14,8 +14,5 @@
       "header": "서브헤더와 소셜 미디어 (Subheaders with social media)",
       "desc": "서브헤더를 이용한 소셜미디어 인터렉션"
     }
-  },
-  "props": {
-    "inset": "들여쓰기(indentation)를 추가 (72px)"
   }
 }
