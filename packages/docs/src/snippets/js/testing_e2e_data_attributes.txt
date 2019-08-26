@@ -1,8 +1,8 @@
 // cypress/integration/test.spec.js
 
-describe("Test With Attribute", () => {
-  it("Find by data-cy", () => {
-    cy.visit("/")
-    cy.get("[data-cy=name-input]").type("Zak")  // Find element using data-cy
-  });
-});
+describe('Test With Attribute', () => {
+  it('Find by data-cy', () => {
+    cy.visit('/')
+    cy.get('[data-cy=name-input]').type('Zak')  // Find element using data-cy
+  })
+})
