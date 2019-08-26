@@ -34,6 +34,44 @@
             pa-4
             wrap
           >
+
+            <v-dialog v-model="dialog" max-width="888">
+              <template v-slot:activator="{ attrs, on }">
+                <v-btn
+                  v-bind="attrs"
+                  :block="$vuetify.breakpoint.xsOnly"
+                  class="primary--text ma-2"
+                  color="white"
+                  large
+                  v-on="on"
+                >
+                  <v-icon left>mdi-play-circle</v-icon>
+                  {{ $t('Vuetify.Home.whyVuetify') }}
+                </v-btn>
+
+              </template>
+
+              <v-sheet v-if="dialog">
+                <iframe
+                  src="https://player.vimeo.com/video/350834301"
+                  height="500"
+                  width="100%"
+                  frameborder="0"
+                  allow="autoplay; fullscreen"
+                  allowfullscreen
+                />
+
+                <div class="pt-3 pb-4 text-center">
+                  Video by <a
+                    href="https://www.vuemastery.com/"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Vue Mastery</a>. Watch Vue Mastery’s free <a href="https://www.vuemastery.com/courses/beautify-with-vuetify/getting-started-with-vuetify/">Beautify with Vuetify course</a>.
+                </div>
+              </v-sheet>
+            </v-dialog>
+
             <v-btn
               :block="$vuetify.breakpoint.xsOnly"
               :to="{
@@ -44,35 +82,24 @@
                   page: 'quick-start'
                 }
               }"
-              class="primary--text ma-2"
-              color="white"
+              color="grey lighten-3"
+              class="ma-2"
               large
+              outlined
             >
               {{ $t('Vuetify.Home.getStarted') }}
             </v-btn>
+
             <v-btn
               :block="$vuetify.breakpoint.xsOnly"
               class="ma-2"
-              color="white"
+              color="grey lighten-3"
               href="https://github.com/vuetifyjs/vuetify"
               large
               outlined
             >
               <v-icon left>mdi-github-circle</v-icon>
               Github
-            </v-btn>
-            <v-btn
-              :block="$vuetify.breakpoint.xsOnly"
-              class="ma-2"
-              color="grey lighten-3"
-              outlined
-              href="https://community.vuetifyjs.com"
-              large
-              rel="noopener"
-              target="_blank"
-            >
-              <v-icon left>mdi-discord</v-icon>
-              {{ $t('Vuetify.Home.getHelp') }}
             </v-btn>
           </v-layout>
         </div>
@@ -87,9 +114,15 @@
 
 <script>
   export default {
+    name: 'HomeHero',
+
     components: {
       Feature: () => import('./Feature'),
       Tidelift: () => import('./Tidelift'),
     },
+
+    data: () => ({
+      dialog: false,
+    }),
   }
 </script>
