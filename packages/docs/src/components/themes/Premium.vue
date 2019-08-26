@@ -31,7 +31,7 @@
                 small
                 text-color="white"
               >
-                {{ $t(`Themes.Premium.${template.free || !template.price ? 'free' : 'premium'}`) }}
+                {{ $t(`Themes.PremiumThemes.${template.free || !template.price ? 'free' : 'premium'}`) }}
               </v-chip>
             </h2>
             <v-spacer />
@@ -66,7 +66,7 @@
                       <v-icon color="primary">mdi-eye</v-icon>
                     </v-btn>
                   </template>
-                  <span v-text="$t('Themes.Premium.viewDemo')" />
+                  <span v-text="$t('Themes.PremiumThemes.viewDemo')" />
                 </v-tooltip>
               </template>
               <v-list v-if="template.demoUrl.length > 1">
@@ -99,7 +99,7 @@
               rel="noopener"
               @click="$ga.event('themes', 'click', template.title)"
             >
-              {{ $t(`Themes.Premium.${template.price ? 'buyNow' : 'downloadNow'}`) }}
+              {{ $t(`Themes.PremiumThemes.${template.price ? 'buyNow' : 'downloadNow'}`) }}
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -113,24 +113,24 @@
     data: vm => ({
       templates: [
         {
-          title: vm.$t('Themes.Premium.templates.dashboard-pro.title'),
-          description: vm.$t('Themes.Premium.templates.dashboard-pro.description'),
+          title: vm.$t('Themes.PremiumThemes.templates.dashboard-pro.title'),
+          description: vm.$t('Themes.PremiumThemes.templates.dashboard-pro.description'),
           src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-admin-dashboard-pro.jpg',
           price: '$79',
           url: 'https://www.creative-tim.com/product/vuetify-material-dashboard-pro',
           demoUrl: ['https://demos.creative-tim.com/vuetify-material-dashboard-pro/'],
         },
         {
-          title: vm.$t('Themes.Premium.templates.material-kit.title'),
-          description: vm.$t('Themes.Premium.templates.material-kit.description'),
+          title: vm.$t('Themes.PremiumThemes.templates.material-kit.title'),
+          description: vm.$t('Themes.PremiumThemes.templates.material-kit.description'),
           src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-material-kit.png',
           price: '$55',
           url: 'https://store.vuetifyjs.com/product/material-kit-theme',
           demoUrl: ['https://material-kit.vuetifyjs.com'],
         },
         {
-          title: vm.$t('Themes.Premium.templates.alpha.title'),
-          description: vm.$t('Themes.Premium.templates.alpha.description'),
+          title: vm.$t('Themes.PremiumThemes.templates.alpha.title'),
+          description: vm.$t('Themes.PremiumThemes.templates.alpha.description'),
           src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-alpha-theme.png',
           price: '$25',
           url: 'https://store.vuetifyjs.com/product/vuetify-alpha-theme',
@@ -142,32 +142,32 @@
           ],
         },
         {
-          title: vm.$t('Themes.Premium.templates.dashboard.title'),
-          description: vm.$t('Themes.Premium.templates.dashboard.description'),
+          title: vm.$t('Themes.PremiumThemes.templates.dashboard.title'),
+          description: vm.$t('Themes.PremiumThemes.templates.dashboard.description'),
           src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-admin-dashboard.jpg',
           free: true,
           url: 'https://www.creative-tim.com/product/vuetify-material-dashboard',
           demoUrl: ['https://demos.creative-tim.com/vuetify-material-dashboard/#/dashboard'],
         },
         {
-          title: vm.$t('Themes.Premium.templates.freelancer.title'),
-          description: vm.$t('Themes.Premium.templates.freelancer.description'),
+          title: vm.$t('Themes.PremiumThemes.templates.freelancer.title'),
+          description: vm.$t('Themes.PremiumThemes.templates.freelancer.description'),
           src: 'https://cdn.vuetifyjs.com/images/starter/freelancer.png',
           free: true,
           url: 'https://github.com/vuetifyjs/theme-freelancer',
           demoUrl: [],
         },
         {
-          title: vm.$t('Themes.Premium.templates.parallax.title'),
-          description: vm.$t('Themes.Premium.templates.parallax.description'),
+          title: vm.$t('Themes.PremiumThemes.templates.parallax.title'),
+          description: vm.$t('Themes.PremiumThemes.templates.parallax.description'),
           src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-parallax-starter.png',
           free: true,
           url: 'https://github.com/vuetifyjs/parallax-starter',
           demoUrl: ['/themes/parallax-starter'],
         },
         {
-          title: vm.$t('Themes.Premium.templates.blog.title'),
-          description: vm.$t('Themes.Premium.templates.blog.description'),
+          title: vm.$t('Themes.PremiumThemes.templates.blog.title'),
+          description: vm.$t('Themes.PremiumThemes.templates.blog.description'),
           src: 'https://cdn.vuetifyjs.com/images/starter/blog.png',
           free: true,
           url: 'https://github.com/vuetifyjs/theme-blog',
