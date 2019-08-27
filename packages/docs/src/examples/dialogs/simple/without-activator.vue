@@ -1,5 +1,5 @@
 <template>
-  <v-layout justify-center>
+  <v-row justify="center">
     <v-btn
       color="primary"
       dark
@@ -20,7 +20,7 @@
         </v-card-text>
 
         <v-card-actions>
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
 
           <v-btn
             color="green darken-1"
@@ -40,7 +40,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

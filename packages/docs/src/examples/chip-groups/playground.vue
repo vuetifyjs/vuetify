@@ -15,7 +15,7 @@
       <span class="subheading">Filter your files</span>
     </v-card-title>
     <v-card-text>
-      <v-layout wrap justify-space-around>
+      <v-row justify="space-around">
         <v-switch
           v-model="column"
           label="Column"
@@ -28,7 +28,7 @@
           v-model="multiple"
           label="Multiple"
         ></v-switch>
-      </v-layout>
+      </v-row>
       <span class="subheading">Filter by Tags</span>
       <v-chip-group
         :multiple="multiple"

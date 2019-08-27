@@ -32,6 +32,7 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - [blokt](https://blokt.com/)
 - [Loomio](https://www.loomio.org/)
 - Hannes Kochniß
+- [EduBirdie](https://edubirdie.com/)
 
 ### $20+
 - Michael Marti
@@ -119,3 +120,4 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Sean Kimball
 - MEHMET SAGLAM
 - Mark Couvaras
+- [quickytools](https://www.quickytools.com/)

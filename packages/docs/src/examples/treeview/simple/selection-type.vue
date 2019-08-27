@@ -1,8 +1,8 @@
 <template>
   <v-container>
     <v-select v-model="selectionType" :items="['leaf', 'independent']" label="Selection type"></v-select>
-    <v-layout>
-      <v-flex>
+    <v-row>
+      <v-col>
         <v-treeview
           v-model="selection"
           :items="items"
@@ -11,9 +11,9 @@
           return-object
           open-all
         ></v-treeview>
-      </v-flex>
+      </v-col>
       <v-divider vertical></v-divider>
-      <v-flex xs6 pa-6>
+      <v-col class="pa-6" cols="6">
         <template v-if="!selection.length">
           No nodes selected.
         </template>
@@ -22,8 +22,8 @@
             {{ node.name }}
           </div>
         </template>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
 
   </v-container>
 </template>

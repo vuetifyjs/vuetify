@@ -15,6 +15,23 @@
         {
           "type": "usage",
           "value": "usage"
+        },
+        {
+          "type": "text",
+          "lang": "usageText2"
+        },
+        {
+          "type": "text",
+          "lang": "usageList"
+        },
+        {
+          "type": "text",
+          "lang": "usageText3"
+        },
+        {
+          "type": "alert",
+          "lang": "usageAlert1",
+          "value": "info"
         }
       ]
     },
@@ -25,8 +42,8 @@
           "type": "api",
           "value": [
             "v-container",
-            "v-layout",
-            "v-flex",
+            "v-row",
+            "v-col",
             "v-spacer"
           ]
         }
@@ -36,18 +53,35 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "playground",
-            "offset",
-            "order",
-            "direction-and-align",
-            "row-column-breakpoint",
-            "grow-shrink",
-            "nested-grid",
-            "unique-layouts",
-            "spacer",
-            "tags"
+            "simple/auto",
+            "simple/equal",
+            "simple/one-column-width",
+            "intermediate/variable-content",
+            "intermediate/grow-shrink",
+            "intermediate/row-column-breakpoint",
+            "intermediate/unique-layouts",
+            "simple/vertical-alignment",
+            "simple/horizontal-alignment",
+            "simple/no-gutters",
+            "intermediate/wrapping",
+            "advanced/order",
+            "advanced/order-first-last",
+            "advanced/offset",
+            "advanced/offset-breakpoint",
+            "intermediate/margin",
+            "advanced/nested-grid",
+            "simple/spacer"
           ]
         }
       ]

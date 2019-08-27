@@ -1,11 +1,11 @@
 <template>
-  <v-layout justify-center>
-    <v-flex xs12 sm8>
+  <v-row justify="center">
+    <v-col cols="12" sm="8">
       <v-card>
         <v-card-title class="cyan darken-1">
           <span class="headline white--text">Sarah Mcbeal</span>
 
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
 
           <v-btn dark icon>
             <v-icon>chevron_left</v-icon>
@@ -81,6 +81,6 @@
           height="200px"
         ></v-img>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>

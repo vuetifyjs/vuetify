@@ -22,7 +22,7 @@ import MobileRow from './MobileRow'
 import ripple from '../../directives/ripple'
 
 // Helpers
-import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots, getSlot, defaultFilter, FilterFn } from '../../util/helpers'
+import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots, getSlot, defaultFilter, FilterFn, camelizeObjectKeys } from '../../util/helpers'
 import { breaking } from '../../util/console'
 
 function filterFn (item: any, search: string | null, filter: FilterFn) {
@@ -120,10 +120,16 @@ export default VDataIterator.extend({
 
       return headers
     },
-    computedHeadersLength (): number {
-      return this.headersLength || this.computedHeaders.length
+    colspanAttrs (): object | undefined {
+      return this.isMobile ? undefined : {
+        colspan: this.headersLength || this.computedHeaders.length,
+      }
     },
     isMobile (): boolean {
+      // Guard against SSR render
+      // https://github.com/vuetifyjs/vuetify/issues/7410
+      if (this.$vuetify.breakpoint.width === 0) return false
+
       return this.$vuetify.breakpoint.width < this.mobileBreakpoint
     },
     columnSorters (): Record<string, compareFn> {
@@ -137,6 +143,18 @@ export default VDataIterator.extend({
     },
     headersWithoutCustomFilters (): TableHeader[] {
       return this.computedHeaders.filter(header => !header.filter)
+    },
+    sanitizedHeaderProps (): Record<string, any> {
+      return camelizeObjectKeys(this.headerProps)
+    },
+    computedItemsPerPage (): number {
+      const itemsPerPage = this.options && this.options.itemsPerPage ? this.options.itemsPerPage : this.itemsPerPage
+      if (this.sanitizedFooterProps.itemsPerPageOptions && !this.sanitizedFooterProps.itemsPerPageOptions.includes(itemsPerPage)) {
+        const firstOption = this.sanitizedFooterProps.itemsPerPageOptions[0]
+        return typeof firstOption === 'object' ? firstOption.value : firstOption
+      }
+
+      return itemsPerPage
     },
   },
 
@@ -197,9 +215,6 @@ export default VDataIterator.extend({
           class: {
             divider: header.divider,
           },
-          style: {
-            width: header.width,
-          },
         })
       }))
     },
@@ -214,9 +229,7 @@ export default VDataIterator.extend({
 
       const th = this.$createElement('th', {
         staticClass: 'column',
-        attrs: {
-          colspan: this.computedHeadersLength,
-        },
+        attrs: this.colspanAttrs,
       }, [progress])
 
       const tr = this.$createElement('tr', {
@@ -228,7 +241,7 @@ export default VDataIterator.extend({
     genHeaders (props: DataProps) {
       const data = {
         props: {
-          ...this.headerProps,
+          ...this.sanitizedHeaderProps,
           headers: this.computedHeaders,
           options: props.options,
           mobile: this.isMobile,
@@ -264,9 +277,7 @@ export default VDataIterator.extend({
         staticClass: 'v-data-table__empty-wrapper',
       }, [
         this.$createElement('td', {
-          attrs: {
-            colspan: this.computedHeadersLength,
-          },
+          attrs: this.colspanAttrs,
         }, content),
       ])
     },
@@ -316,7 +327,7 @@ export default VDataIterator.extend({
           on: {
             click: () => this.$set(this.openCache, group, !this.openCache[group]),
           },
-        }, [this.$createElement(VIcon, [isOpen ? 'remove' : 'add'])])
+        }, [this.$createElement(VIcon, [isOpen ? '$vuetify.icons.minus' : '$vuetify.icons.plus'])])
 
         const remove = this.$createElement(VBtn, {
           staticClass: 'ma-0',
@@ -327,13 +338,11 @@ export default VDataIterator.extend({
           on: {
             click: () => props.updateOptions({ groupBy: [], groupDesc: [] }),
           },
-        }, [this.$createElement(VIcon, ['close'])])
+        }, [this.$createElement(VIcon, ['$vuetify.icons.close'])])
 
         const column = this.$createElement('td', {
           staticClass: 'text-start',
-          attrs: {
-            colspan: this.computedHeadersLength,
-          },
+          attrs: this.colspanAttrs,
         }, [toggle, `${props.options.groupBy[0]}: ${group}`, remove])
 
         children.unshift(this.$createElement('template', { slot: 'column.header' }, [column]))
@@ -360,7 +369,11 @@ export default VDataIterator.extend({
 
       for (let i = 0; i < items.length; i++) {
         const item = items[i]
-        rows.push(this.$scopedSlots.item!(this.createItemProps(item)))
+        rows.push(this.$scopedSlots.item!({
+          ...this.createItemProps(item),
+          index: i,
+        }))
+
         if (this.isExpanded(item)) {
           rows.push(this.$scopedSlots['expanded-item']!({ item, headers: this.computedHeaders }))
         }
@@ -460,7 +473,7 @@ export default VDataIterator.extend({
           options: props.options,
           pagination: props.pagination,
           itemsPerPageText: '$vuetify.dataTable.itemsPerPageText',
-          ...this.footerProps,
+          ...this.sanitizedFooterProps,
         },
         on: {
           'update:options': (value: any) => props.updateOptions(value),
@@ -474,7 +487,10 @@ export default VDataIterator.extend({
       ]
 
       if (!this.hideDefaultFooter) {
-        children.push(this.$createElement(VDataFooter, data))
+        children.push(this.$createElement(VDataFooter, {
+          ...data,
+          scopedSlots: getPrefixedScopedSlots('footer.', this.$scopedSlots),
+        }))
       }
 
       return children
@@ -526,6 +542,7 @@ export default VDataIterator.extend({
         ...this.$props,
         customFilter: this.customFilterWithColumns,
         customSort: this.customSortWithHeaders,
+        itemsPerPage: this.computedItemsPerPage,
       },
       on: {
         'update:options': (v: DataOptions, old: DataOptions) => {

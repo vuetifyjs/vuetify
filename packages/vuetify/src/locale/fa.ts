@@ -12,7 +12,7 @@ export default {
       sortAscending: ': صعودی مرتب شده است. فعال‌سازی برای مرتب‌سازی نزولی.',
       sortNone: ': مرتب نشده است. فعال‌سازی برای مرتب‌سازی صعودی.',
     },
-    sortBy: 'Sort by',
+    sortBy: 'مرتب‌سازی براساس',
   },
   dataFooter: {
     itemsPerPageText: 'ردیف در صفحه:',
@@ -34,7 +34,7 @@ export default {
     moreEvents: '{بیشتر {0',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counter: '{0} پرونده',
+    counterSize: '{0} پرونده ({1} در کل)',
   },
 }

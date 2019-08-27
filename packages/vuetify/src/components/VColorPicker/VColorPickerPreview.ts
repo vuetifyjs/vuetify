@@ -18,6 +18,7 @@ export default Vue.extend({
   props: {
     color: Object as PropValidator<VColorPickerColor>,
     disabled: Boolean,
+    hideAlpha: Boolean,
   },
 
   methods: {
@@ -47,7 +48,7 @@ export default Vue.extend({
         staticClass: 'v-color-picker__sliders',
       }, [
         this.genHue(),
-        this.genAlpha(),
+        !this.hideAlpha && this.genAlpha(),
       ])
     },
     genDot (): VNode {
@@ -92,6 +93,9 @@ export default Vue.extend({
   render (h): VNode {
     return h('div', {
       staticClass: 'v-color-picker__preview',
+      class: {
+        'v-color-picker__preview--hide-alpha': this.hideAlpha,
+      },
     }, [
       this.genDot(),
       this.genSliders(),

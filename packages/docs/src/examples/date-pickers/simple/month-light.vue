@@ -1,8 +1,8 @@
 <template>
-  <v-layout column align-center>
+  <v-row align="center">
     <v-checkbox v-model="landscape" label="Landscape"></v-checkbox>
     <v-date-picker v-model="picker" :landscape="landscape" type="month"></v-date-picker>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

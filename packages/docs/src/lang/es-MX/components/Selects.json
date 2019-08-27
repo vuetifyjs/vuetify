@@ -34,7 +34,6 @@
     "filter": "La función que se utiliza para filtrar los elementos.",
     "hideSelected": "No mostrar elementos en las opciones que ya hayan sido seleccionados",
     "itemDisabled": "Determina si el elemento está deshabilitado",
-    "items": "Puede ser un arreglo de objetos o un arreglo de strings. Cuando se usan objetos, buscará por campos _text_ y _field_. Esto puede cambiarse usando las props `item-text` y `item-value`",
     "itemText": "Configura el texto del elemento",
     "minWidth": "Mixins.Menuable.props.minWidth",
     "multiple": "Cambia a múltiple. Acepta un arreglo.",
