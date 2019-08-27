@@ -14,13 +14,12 @@ import {
 } from '@vue/test-utils'
 
 const localVue = createLocalVue()
-localVue.use(Vuetify)
 
 describe('CustomCard.vue', () => {
   let vuetify
 
   beforeEach(() => {
-    vuetify = new Vuetify(...)
+    vuetify = new Vuetify()
   })
 
   it('should have a custom title and match snapshot', () => {

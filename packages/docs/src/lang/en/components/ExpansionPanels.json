@@ -77,8 +77,7 @@
   },
   "slots": {
     "v-expansion-panel-header": {
-      "actions": "Expansion header actions",
-      "icon": "Slot for custom icon"
+      "actions": "Expansion header actions"
     }
   }
 }
