@@ -6,7 +6,7 @@
   >
     <v-btn>
       <span>Video</span>
-      <v-icon>ondemand_video</v-icon>
+      <v-icon>mdi-television-play</v-icon>
     </v-btn>
 
     <v-btn>
@@ -16,12 +16,12 @@
 
     <v-btn>
       <span>Book</span>
-      <v-icon>book</v-icon>
+      <v-icon>mdi-book</v-icon>
     </v-btn>
 
     <v-btn>
       <span>Image</span>
-      <v-icon>image</v-icon>
+      <v-icon>mdi-image</v-icon>
     </v-btn>
   </v-bottom-navigation>
 </template>
