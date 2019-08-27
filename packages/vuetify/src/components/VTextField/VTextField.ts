@@ -10,6 +10,7 @@ import VLabel from '../VLabel'
 
 // Mixins
 import Loadable from '../../mixins/loadable'
+import Sizeable from '../../mixins/sizeable'
 
 // Directives
 import ripple from '../../directives/ripple'
@@ -24,7 +25,8 @@ import { VNode } from 'vue/types'
 
 const baseMixins = mixins(
   VInput,
-  Loadable
+  Loadable,
+  Sizeable
 )
 interface options extends InstanceType<typeof baseMixins> {
   $refs: {
@@ -105,6 +107,7 @@ export default baseMixins.extend<options>().extend({
         'v-text-field--placeholder': this.placeholder,
         'v-text-field--rounded': this.rounded,
         'v-text-field--shaped': this.shaped,
+        ...this.sizeableClasses,
       }
     },
     counterValue (): number {
