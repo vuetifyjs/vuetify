@@ -1,4 +1,5 @@
 @import '../../styles/styles.sass'
+@import './_variables.scss'
 
 +theme(v-text-field) using ($material)
   & > .v-input__control > .v-input__slot:before
@@ -429,3 +430,11 @@
       .v-text-field__suffix
         padding-left: 0
         padding-right: 4px
+
+.v-text-field
+  @each $name, $size in $field-sizes
+
+    // WIP here :)
+
+    &.v-size--#{$name} > .v-input__control > .v-input__slot
+      min-height: #{map-get($size, 'height')}px
