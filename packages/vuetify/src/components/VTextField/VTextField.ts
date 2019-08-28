@@ -396,12 +396,16 @@ export default baseMixins.extend<options>().extend({
       ])
     },
     genAffix (type: 'prefix' | 'suffix') {
-      if (this.hideAffixes) return null
-
-      return this.$createElement('div', {
-        class: `v-text-field__${type}`,
-        ref: type,
-      }, this[type])
+      return this.$createElement('transition', {
+        props: {
+          name: type === 'prefix' ? 'slide-x-transition' : 'slide-x-reverse-transition',
+        },
+      }, [
+        this.hideAffixes ? null : this.$createElement('div', {
+          class: `v-text-field__${type}`,
+          ref: type,
+        }, this[type]),
+      ])
     },
     onBlur (e?: Event) {
       this.isFocused = false
