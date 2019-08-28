@@ -6,7 +6,7 @@
     >
       <template v-slot:badge>
         <v-icon dark>
-          done
+          mdi-check
         </v-icon>
       </template>
       <span>Badge w/ Left Prop</span>

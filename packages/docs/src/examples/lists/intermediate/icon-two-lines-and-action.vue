@@ -14,11 +14,11 @@
       <div class="flex-grow-1"></div>
 
       <v-btn icon>
-        <v-icon>search</v-icon>
+        <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
       <v-btn icon>
-        <v-icon>view_module</v-icon>
+        <v-icon>mdi-view-module</v-icon>
       </v-btn>
     </v-toolbar>
 
@@ -44,7 +44,7 @@
 
         <v-list-item-action>
           <v-btn icon>
-            <v-icon color="grey lighten-1">info</v-icon>
+            <v-icon color="grey lighten-1">mdi-information</v-icon>
           </v-btn>
         </v-list-item-action>
       </v-list-item>
@@ -72,7 +72,7 @@
 
         <v-list-item-action>
           <v-btn icon>
-            <v-icon color="grey lighten-1">info</v-icon>
+            <v-icon color="grey lighten-1">mdi-information</v-icon>
           </v-btn>
         </v-list-item-action>
       </v-list-item>

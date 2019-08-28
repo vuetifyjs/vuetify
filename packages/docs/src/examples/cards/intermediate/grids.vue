@@ -16,7 +16,7 @@
       <div class="flex-grow-1"></div>
 
       <v-btn icon>
-        <v-icon>search</v-icon>
+        <v-icon>mdi-magnify</v-icon>
       </v-btn>
     </v-toolbar>
 
@@ -47,15 +47,15 @@
               <div class="flex-grow-1"></div>
 
               <v-btn icon>
-                <v-icon>favorite</v-icon>
+                <v-icon>mdi-heart</v-icon>
               </v-btn>
 
               <v-btn icon>
-                <v-icon>bookmark</v-icon>
+                <v-icon>mdi-bookmark</v-icon>
               </v-btn>
 
               <v-btn icon>
-                <v-icon>share</v-icon>
+                <v-icon>mdi-share-variant</v-icon>
               </v-btn>
             </v-card-actions>
           </v-card>

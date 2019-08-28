@@ -62,7 +62,7 @@
 <script>
   export default {
     data: () => ({
-      icons: ['fast_rewind', 'play_arrow', 'fast_forward'],
+      icons: ['mdi-rewind', 'mdi-play', 'mdi-fast-forward'],
       items: [
         {
           title: 'New Releases',

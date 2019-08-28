@@ -46,7 +46,7 @@
                 color="blue"
                 :value="false"
               >
-                <v-icon>arrow_upward</v-icon>
+                <v-icon>mdi-arrow-up</v-icon>
               </v-btn>
               <v-btn
                 large
@@ -54,7 +54,7 @@
                 color="blue"
                 :value="true"
               >
-                <v-icon>arrow_downward</v-icon>
+                <v-icon>mdi-arrow-down</v-icon>
               </v-btn>
             </v-btn-toggle>
           </template>
@@ -104,7 +104,7 @@
                 v-on="on"
               >
                 {{ itemsPerPage }}
-                <v-icon>keyboard_arrow_down</v-icon>
+                <v-icon>mdi-chevron-down</v-icon>
               </v-btn>
             </template>
             <v-list>
@@ -133,7 +133,7 @@
             class="mr-1"
             @click="formerPage"
           >
-            <v-icon>keyboard_arrow_left</v-icon>
+            <v-icon>mdi-chevron-left</v-icon>
           </v-btn>
           <v-btn
             fab
@@ -142,7 +142,7 @@
             class="ml-1"
             @click="nextPage"
           >
-            <v-icon>keyboard_arrow_right</v-icon>
+            <v-icon>mdi-chevron-right</v-icon>
           </v-btn>
         </v-row>
       </template>

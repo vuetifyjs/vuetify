@@ -18,17 +18,17 @@
         <div class="text-center">
           <div class="my-2">
             <v-btn color="primary" fab small dark>
-              <v-icon>edit</v-icon>
+              <v-icon>mdi-pencil</v-icon>
             </v-btn>
           </div>
           <div class="my-2">
             <v-btn color="warning" fab dark>
-              <v-icon>account_circle</v-icon>
+              <v-icon>mdi-account-circle</v-icon>
             </v-btn>
           </div>
           <div class="my-2">
             <v-btn color="error" fab large dark>
-              <v-icon>alarm</v-icon>
+              <v-icon>mdi-alarm</v-icon>
             </v-btn>
           </div>
         </div>
