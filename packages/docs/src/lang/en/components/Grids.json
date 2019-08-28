@@ -1,6 +1,7 @@
 {
   "header": "# Grid system",
   "headerText": "Vuetify comes with a 12 point grid system built using <kbd>flex-box</kbd>. The grid is used to create specific layouts within an application's content.  It contains 5 types of media breakpoints that are used for targeting specific screen sizes or orientations, **xs**, **sm**, **md**, **lg** and **xl**. These resolutions are defined below in the Viewport Breakpoints table and can be modified by customizing the [Breakpoint service](/customization/breakpoints).",
+  "headerAlert1": "1.x grid system has been deprecated in favor of the 2.x grid system. Documentation for 1.x grids can be found in the [v1.5 docs](https://v15.vuetifyjs.com/framework/grid)",
   "usageText2": "In the example above, we created three equal-width columns on small, medium, large and extra large devices. The parent `v-container` to center the inner `v-col`s.",
   "usageList": [
     "`v-container` provides the ability to center and horizontally pad your site's contents. You can also use the **fluid** prop to fully extend the container across all viewport and device sizes. Maintains previous 1.x functionality in which props are passed through as classes on `v-container` allowing for the application of helper classes (such as `ma-#`/`pa-#`/`fill-height`) to easily be applied",

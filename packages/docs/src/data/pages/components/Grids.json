@@ -7,6 +7,16 @@
   },
   "children": [
     {
+      "type": "section",
+      "children": [
+        {
+          "type": "alert",
+          "lang": "headerAlert1",
+          "value": "info"
+        }
+      ]
+    },
+    {
       "type": "layout-grid"
     },
     {
@@ -92,7 +102,7 @@
         {
           "type": "up-next",
           "value": [
-            "components/grid-lists",
+            "styles/flex",
             "customization/breakpoints",
             "styles/display"
           ]
