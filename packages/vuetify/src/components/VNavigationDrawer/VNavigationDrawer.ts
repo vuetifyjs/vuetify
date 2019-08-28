@@ -131,7 +131,7 @@ export default baseMixins.extend({
         'v-navigation-drawer--floating': this.floating,
         'v-navigation-drawer--is-mobile': this.isMobile,
         'v-navigation-drawer--is-mouseover': this.isMouseover,
-        'v-navigation-drawer--mini-variant': this.miniVariant || (this.expandOnHover && !this.isMouseover),
+        'v-navigation-drawer--mini-variant': (this.miniVariant && !this.expandOnHover) || (this.expandOnHover && !this.isMouseover),
         'v-navigation-drawer--open': this.isActive,
         'v-navigation-drawer--open-on-hover': this.expandOnHover,
         'v-navigation-drawer--right': this.right,
@@ -171,7 +171,7 @@ export default baseMixins.extend({
     computedWidth (): string | number {
       if (
         (this.expandOnHover && !this.isMouseover) ||
-        this.miniVariant
+        (this.miniVariant && !this.expandOnHover)
       ) return this.miniVariantWidth
 
       return this.width
@@ -279,6 +279,12 @@ export default baseMixins.extend({
       }
 
       if (val !== this.isActive) this.isActive = val
+    },
+    expandOnHover (val) {
+      this.updateMiniVariant(val)
+    },
+    isMouseover (val) {
+      this.updateMiniVariant(!val)
     },
   },
 
@@ -439,6 +445,9 @@ export default baseMixins.extend({
       const width = Number(this.computedWidth)
 
       return isNaN(width) ? this.$el.clientWidth : width
+    },
+    updateMiniVariant (val: boolean) {
+      if (this.miniVariant !== val) this.$emit('update:mini-variant', val)
     },
   },
 
