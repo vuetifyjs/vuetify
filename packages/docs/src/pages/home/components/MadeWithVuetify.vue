@@ -11,7 +11,6 @@
     />
 
     <v-container
-      grid-list-xl
       mb-4
     >
       <v-layout
