@@ -76,7 +76,6 @@ export default baseMixins.extend<options>().extend({
     link: Boolean,
     selectable: {
       type: Boolean,
-      default: false,
     },
     tag: {
       type: String,
