@@ -30,17 +30,17 @@
 
       <core-title>Size displaying</core-title>
       <core-section>
-        <v-file-input display-size />
+        <v-file-input show-size />
       </core-section>
 
       <core-title>Size displaying & multiple</core-title>
       <core-section>
-        <v-file-input display-size multiple />
+        <v-file-input show-size multiple />
       </core-section>
 
       <core-title>Size displaying & counter</core-title>
       <core-section>
-        <v-file-input display-size multiple counter />
+        <v-file-input show-size multiple counter />
       </core-section>
 
       <core-title>Non-deletable</core-title>
@@ -80,7 +80,7 @@
 
       <core-title>Validation (2 MB limit)</core-title>
       <core-section>
-        <v-file-input display-size :rules="rules" />
+        <v-file-input show-size :rules="rules" />
       </core-section>
     </v-layout>
   </v-container>
