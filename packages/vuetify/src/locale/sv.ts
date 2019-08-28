@@ -12,6 +12,7 @@ export default {
       sortAscending: ': Sorterat stigande. Aktivera för sortering fallande.',
       sortNone: ': Osorterat. Aktivera för sortering stigande.',
     },
+    sortBy: 'Sort by',
   },
   dataFooter: {
     itemsPerPageText: 'Objekt per sida:',
