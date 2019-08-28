@@ -43,7 +43,7 @@
           <v-list>
             <v-list-item @click="">
               <v-list-item-action>
-                <v-icon>move_to_inbox</v-icon>
+                <v-icon>mdi-inbox-arrow-down</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>I'm a list item</v-list-item-title>
@@ -52,7 +52,7 @@
 
             <v-list-item @click="">
               <v-list-item-action>
-                <v-icon>move_to_inbox</v-icon>
+                <v-icon>mdi-inbox-arrow-down</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>I'm a list item</v-list-item-title>
@@ -61,7 +61,7 @@
 
             <v-list-item @click="">
               <v-list-item-action>
-                <v-icon>move_to_inbox</v-icon>
+                <v-icon>mdi-inbox-arrow-down</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>I'm a list item</v-list-item-title>
@@ -74,7 +74,7 @@
 
             <v-list-item @click="">
               <v-list-item-action>
-                <v-icon>folder</v-icon>
+                <v-icon>mdi-folder</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>I'm a list item</v-list-item-title>
@@ -85,7 +85,7 @@
 
             <v-list-item @click="">
               <v-list-item-action>
-                <v-icon>folder</v-icon>
+                <v-icon>mdi-folder</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>I'm a list item</v-list-item-title>
@@ -96,7 +96,7 @@
 
             <v-list-item @click="">
               <v-list-item-action>
-                <v-icon>folder</v-icon>
+                <v-icon>mdi-folder</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>I'm a list item</v-list-item-title>

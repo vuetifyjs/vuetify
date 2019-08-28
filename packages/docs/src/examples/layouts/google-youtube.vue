@@ -41,13 +41,13 @@
           @click=""
         >
           <v-list-item-action>
-            <v-icon color="grey darken-1">add_circle_outline</v-icon>
+            <v-icon color="grey darken-1">mdi-plus-circle-outline</v-icon>
           </v-list-item-action>
           <v-list-item-title class="grey--text text--darken-1">Browse Channels</v-list-item-title>
         </v-list-item>
         <v-list-item @click="">
           <v-list-item-action>
-            <v-icon color="grey darken-1">settings</v-icon>
+            <v-icon color="grey darken-1">mdi-settings</v-icon>
           </v-list-item-action>
           <v-list-item-title class="grey--text text--darken-1">Manage Subscriptions</v-list-item-title>
         </v-list-item>

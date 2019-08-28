@@ -67,7 +67,7 @@
           icon
           @click.stop.prevent="edit(index, item)"
         >
-          <v-icon>{{ editing !== item ? 'edit' : 'check' }}</v-icon>
+          <v-icon>{{ editing !== item ? 'mdi-pencil' : 'mdi-check' }}</v-icon>
         </v-btn>
       </v-list-item-action>
     </template>
