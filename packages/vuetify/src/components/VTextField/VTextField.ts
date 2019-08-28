@@ -55,6 +55,8 @@ export default baseMixins.extend<options>().extend({
       default: '$vuetify.icons.clear',
     },
     counter: [Boolean, Number, String],
+    displayPrefix: Boolean,
+    displaySuffix: Boolean,
     filled: Boolean,
     flat: Boolean,
     fullWidth: Boolean,
@@ -396,12 +398,14 @@ export default baseMixins.extend<options>().extend({
       ])
     },
     genAffix (type: 'prefix' | 'suffix') {
+      const hideMe = type === 'prefix' ? !this.displayPrefix : !this.displaySuffix
+
       return this.$createElement('transition', {
         props: {
           name: type === 'prefix' ? 'slide-x-transition' : 'slide-x-reverse-transition',
         },
       }, [
-        this.hideAffixes ? null : this.$createElement('div', {
+        this.hideAffixes && hideMe ? null : this.$createElement('div', {
           class: `v-text-field__${type}`,
           ref: type,
         }, this[type]),
