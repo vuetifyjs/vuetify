@@ -33,8 +33,6 @@
   "formsText": "Controls that collect and validate user input.",
   "form": "Forms",
   "formText": "Manage user provided data.",
-  "gridLists": "Grid list",
-  "gridListsText": "A flexible structure for presenting content items in a grid.",
   "icons": "Icon",
   "iconsText": "Renders a specified icon.",
   "inputs": "Input",
