@@ -1,6 +1,6 @@
 <template>
   <v-responsive class="text-center pb-6">
-    <v-container>
+    <v-container grid-list-xl>
       <v-layout justify-center wrap>
         <v-flex v-for="(feature, i) in computedFeatures" :key="i" d-flex shrink>
           <v-card class="elevation-12 overflow-hidden text-center mx-auto" light max-width="350px">
