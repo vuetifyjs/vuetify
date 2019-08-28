@@ -131,7 +131,7 @@ export default baseMixins.extend({
         'v-navigation-drawer--floating': this.floating,
         'v-navigation-drawer--is-mobile': this.isMobile,
         'v-navigation-drawer--is-mouseover': this.isMouseover,
-        'v-navigation-drawer--mini-variant': (this.miniVariant && !this.expandOnHover) || (this.expandOnHover && !this.isMouseover),
+        'v-navigation-drawer--mini-variant': this.isMiniVariant || (this.expandOnHover && !this.isMouseover),
         'v-navigation-drawer--open': this.isActive,
         'v-navigation-drawer--open-on-hover': this.expandOnHover,
         'v-navigation-drawer--right': this.right,
@@ -171,7 +171,7 @@ export default baseMixins.extend({
     computedWidth (): string | number {
       if (
         (this.expandOnHover && !this.isMouseover) ||
-        (this.miniVariant && !this.expandOnHover)
+        this.isMiniVariant
       ) return this.miniVariantWidth
 
       return this.width
@@ -184,6 +184,9 @@ export default baseMixins.extend({
     },
     isBottom (): boolean {
       return this.bottom && this.isMobile
+    },
+    isMiniVariant (): boolean {
+      return !this.expandOnHover && this.miniVariant
     },
     isMobile (): boolean {
       return (
