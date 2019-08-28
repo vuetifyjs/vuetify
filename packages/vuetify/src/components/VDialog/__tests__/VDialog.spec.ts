@@ -324,4 +324,18 @@ describe('VDialog.ts', () => {
     content.trigger('keydown.esc')
     expect(wrapper.vm.isActive).toBe(false)
   })
+
+  it('should only set tabindex if active', () => {
+    const wrapper = mountFunction()
+
+    const content = wrapper.find('.v-dialog__content')
+
+    expect(content.html()).toMatchSnapshot()
+    expect(content.element.tabIndex).toBe(-1)
+
+    wrapper.setData({ isActive: true })
+
+    expect(content.element.tabIndex).toBe(0)
+    expect(content.html()).toMatchSnapshot()
+  })
 })
