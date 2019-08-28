@@ -674,6 +674,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     expect(setPrefixWidth).toHaveBeenCalledTimes(2)
   })
 
+  // https://github.com/vuetifyjs/vuetify/pull/8724
   it('should fire events in correct order when clear icon is clicked and input is not focused', async () => {
     const calls: string[] = []
     const change = jest.fn(() => calls.push('change'))
