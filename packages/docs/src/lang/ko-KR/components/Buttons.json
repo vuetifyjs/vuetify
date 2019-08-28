@@ -21,8 +21,7 @@
       "desc": "아이콘은 버튼의 주요 컨텐츠로 사용될 수 있습니다."
     },
     "floating": {
-      "header": "플로팅 (Floating)",
-      "desc": "플로팅 버튼(Floating buttons)은 둥글고 보통 아이콘을 포함합니다."
+      "header": "플로팅 (Floating)"
     },
     "loaders": {
       "header": "로더 (Loaders)",
@@ -31,14 +30,6 @@
     "sizing": {
       "header": "크기조절 (Sizing)",
       "desc": "여러 시나리오에 따른 다양한 크기 옵션이 있습니다."
-    },
-    "outline": {
-      "header": "테두리 강조 (Outline)",
-      "desc": "테두리가 강조된 버튼(Outline buttons)의 테두리(border) 색은 현재 적용된 색에서 상속됩니다."
-    },
-    "round": {
-      "header": "둥근 버튼 (Round)",
-      "desc": "둥근 버튼(Rounded buttons)은 둥근 모서리를 가지고 있을 뿐 보통 버튼과 똑같이 작동합니다."
     },
     "block": {
       "header": "블럭 (Block)",

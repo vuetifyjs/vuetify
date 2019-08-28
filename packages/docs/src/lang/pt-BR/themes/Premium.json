@@ -1,1 +1,7 @@
-{}
+{
+  "templates": {
+    "parallax": {
+      "title": "Paralaxe"
+    }
+  }
+}

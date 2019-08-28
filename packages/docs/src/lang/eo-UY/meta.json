@@ -11,7 +11,7 @@
   },
   "getting-started/quick-start": {
     "title": "crwdns36258:0crwdne36258:0",
-    "description": "crwdns36260:0crwdne36260:0",
+    "description": "crwdns41542:0crwdne41542:0",
     "keywords": "crwdns29580:0crwdne29580:0"
   },
   "getting-started/pre-made-layouts": {
@@ -109,10 +109,10 @@
     "description": "crwdns36356:0crwdne36356:0",
     "keywords": "crwdns36358:0crwdne36358:0"
   },
-  "styles/alignment": {
-    "title": "crwdns36360:0crwdne36360:0",
-    "description": "crwdns36362:0crwdne36362:0",
-    "keywords": "crwdns36364:0crwdne36364:0"
+  "styles/text": {
+    "title": "crwdns41544:0crwdne41544:0",
+    "description": "crwdns41546:0crwdne41546:0",
+    "keywords": "crwdns41548:0crwdne41548:0"
   },
   "styles/colors": {
     "title": "crwdns36366:0crwdne36366:0",
@@ -129,10 +129,20 @@
     "description": "crwdns36380:0crwdne36380:0",
     "keywords": "crwdns36382:0crwdne36382:0"
   },
+  "styles/float": {
+    "title": "crwdns41550:0crwdne41550:0",
+    "description": "crwdns41552:0crwdne41552:0",
+    "keywords": "crwdns41554:0crwdne41554:0"
+  },
   "styles/elevation": {
     "title": "crwdns36384:0crwdne36384:0",
     "description": "crwdns36386:0crwdne36386:0",
     "keywords": "crwdns36388:0crwdne36388:0"
+  },
+  "styles/flex": {
+    "title": "crwdns41556:0crwdne41556:0",
+    "description": "crwdns41558:0crwdne41558:0",
+    "keywords": "crwdns41560:0crwdne41560:0"
   },
   "styles/scroll": {
     "title": "crwdns36390:0crwdne36390:0",

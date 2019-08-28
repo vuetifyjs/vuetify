@@ -29,14 +29,14 @@
         src="https://cdn.vuetifyjs.com/images/cards/forest.jpg"
         gradient="to top, rgba(0,0,0,.44), rgba(0,0,0,.44)"
       >
-        <v-container fill-height>
-          <v-layout align-center>
+        <v-container class="fill-height">
+          <v-row align="center">
             <strong class="display-4 font-weight-regular mr-6">8</strong>
-            <v-layout column justify-end>
+            <v-row justify="end">
               <div class="headline font-weight-light">Monday</div>
               <div class="text-uppercase font-weight-light">February 2015</div>
-            </v-layout>
-          </v-layout>
+            </v-row>
+          </v-row>
         </v-container>
       </v-img>
     </v-card>
@@ -49,26 +49,26 @@
           color="pink"
           small
         >
-          <v-layout pt-1>
-            <v-flex xs3>
+          <v-row class="pt-1">
+            <v-col cols="3">
               <strong>5pm</strong>
-            </v-flex>
-            <v-flex>
+            </v-col>
+            <v-col>
               <strong>New Icon</strong>
               <div class="caption">Mobile App</div>
-            </v-flex>
-          </v-layout>
+            </v-col>
+          </v-row>
         </v-timeline-item>
 
         <v-timeline-item
           color="teal lighten-3"
           small
         >
-          <v-layout wrap pt-1>
-            <v-flex xs3>
+          <v-row class="pt-1">
+            <v-col cols="3">
               <strong>3-4pm</strong>
-            </v-flex>
-            <v-flex>
+            </v-col>
+            <v-col>
               <strong>Design Stand Up</strong>
               <div class="caption mb-2">Hangouts</div>
               <v-avatar>
@@ -87,37 +87,37 @@
                   src="https://avataaars.io/?avatarStyle=Circle&topType=LongHairMiaWallace&accessoriesType=Sunglasses&hairColor=BlondeGolden&facialHairType=Blank&clotheType=BlazerSweater&eyeType=Surprised&eyebrowType=RaisedExcited&mouthType=Smile&skinColor=Pale"
                 ></v-img>
               </v-avatar>
-            </v-flex>
-          </v-layout>
+            </v-col>
+          </v-row>
         </v-timeline-item>
 
         <v-timeline-item
           color="pink"
           small
         >
-          <v-layout pt-1>
-            <v-flex xs3>
+          <v-row class="pt-1">
+            <v-col cols="3">
               <strong>12pm</strong>
-            </v-flex>
-            <v-flex>
+            </v-col>
+            <v-col>
               <strong>Lunch break</strong>
-            </v-flex>
-          </v-layout>
+            </v-col>
+          </v-row>
         </v-timeline-item>
 
         <v-timeline-item
           color="teal lighten-3"
           small
         >
-          <v-layout pt-1>
-            <v-flex xs3>
+          <v-row class="pt-1">
+            <v-col cols="3">
               <strong>9-11am</strong>
-            </v-flex>
-            <v-flex>
+            </v-col>
+            <v-col>
               <strong>Finish Home Screen</strong>
               <div class="caption">Web App</div>
-            </v-flex>
-          </v-layout>
+            </v-col>
+          </v-row>
         </v-timeline-item>
       </v-timeline>
     </v-card-text>

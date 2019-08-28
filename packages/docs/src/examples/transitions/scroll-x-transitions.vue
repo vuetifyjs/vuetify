@@ -1,7 +1,6 @@
 <template>
-  <v-layout
-    justify-center
-    wrap
+  <v-row
+    justify="center"
   >
     <v-menu transition="scroll-y-transition">
       <template v-slot:activator="{ on }">
@@ -30,5 +29,5 @@
         </v-list-item>
       </v-list>
     </v-menu>
-  </v-layout>
+  </v-row>
 </template>

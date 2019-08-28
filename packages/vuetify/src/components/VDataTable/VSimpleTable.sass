@@ -14,7 +14,6 @@
   &.v-data-table--fixed-header
     thead th
       background: map-get($material, 'cards')
-      border-bottom: 0px !important
       box-shadow: inset 0 -1px 0 rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
 
   thead
@@ -27,26 +26,38 @@
 
   tbody
     tr
-      &:not(:last-child)
-        border-bottom: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+      &:not(:last-child) td
+        &:not(.v-data-table__mobile-row)
+          border-bottom: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+
+        &:last-child
+          border-bottom: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
 
       &.active
         background: map-deep-get($material, 'table', 'active')
+
+      &:hover
+        background: map-deep-get($material, 'table', 'hover')
 
 // Block
 .v-data-table
   table
     width: 100%
-    border-collapse: collapse
+    border-spacing: 0
 
   td, th
     padding: 0 16px
 
   th
-    text-align: left
     user-select: none
     font-size: 12px
     height: $data-table-regular-header-height
+
+    +ltr()
+      text-align: left
+
+    +rtl()
+      text-align: right
 
   td
     font-size: 14px
@@ -82,6 +93,7 @@
 
   thead
     th
+      border-bottom: 0px !important
       position: sticky
       top: 0
       z-index: 2
@@ -91,18 +103,15 @@
         top: $data-table-regular-header-height
 
   // Account for scroll bar
-  .v-table__header, .v-data-footer
-    margin-right: $data-table-scroll-bar-width
+  .v-data-footer
+    +ltr()
+      margin-right: $data-table-scroll-bar-width
+
+    +rtl()
+      margin-left: $data-table-scroll-bar-width
 
 .v-data-table--fixed.v-data-table--dense
   thead
     tr:nth-child(2)
       th
         top: $data-table-dense-header-height
-
-.v-data-table--mobile
-  tr, td, th
-    display: block
-
-  td, th
-    padding: 14px

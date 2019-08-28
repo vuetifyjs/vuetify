@@ -40,7 +40,7 @@
     <v-divider></v-divider>
 
     <v-card-actions>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <v-btn
         color="success"
         depressed

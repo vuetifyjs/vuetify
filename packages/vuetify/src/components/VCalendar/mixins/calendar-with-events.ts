@@ -4,6 +4,9 @@ import './calendar-with-events.sass'
 // Types
 import { VNode, VNodeData } from 'vue'
 
+// Directives
+import ripple from '../../../directives/ripple'
+
 // Mixins
 import CalendarBase from './calendar-base'
 
@@ -65,6 +68,10 @@ interface VDayBodySlotScope extends VDaySlotScope {
 /* @vue/component */
 export default CalendarBase.extend({
   name: 'calendar-with-events',
+
+  directives: {
+    ripple,
+  },
 
   props: props.events,
 
@@ -440,7 +447,7 @@ export default CalendarBase.extend({
             visual.offset = getOffset(visual, visuals)
           })
         }
-        visuals.sort((a, b) => (a.column - b.column) || (a.offset - b.offset))
+        visuals.sort((a, b) => (a.offset - b.offset) || (a.column - b.column))
         return visuals
       }
 

@@ -21,8 +21,8 @@
     min-width: $badge-width
     padding: 0 4px
     position: absolute
-    right: -($badge-width)
-    top: -($badge-height / 2)
+    right: $badge-right
+    top: $badge-top
     transition: $primary-transition
 
     .v-icon
@@ -45,18 +45,18 @@
 
   &--left
     .v-badge__badge
-      left: -($badge-width)
+      left: $badge-right
       right: initial
 
   &--bottom
     .v-badge__badge
-      bottom: -($badge-height / 2)
+      bottom: $badge-top
       top: initial
 
   +rtl()
     &__badge
       right: initial
-      left: -($badge-width)
+      left: $badge-right
 
     &--overlap
       .v-badge__badge
@@ -70,5 +70,5 @@
 
     &--left
       .v-badge__badge
-        right: -($badge-width)
+        right: $badge-right
         left: initial

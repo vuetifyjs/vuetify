@@ -1,6 +1,12 @@
 {
+  "": {
+    "title": "Vue Material Design 컴포넌트 프레임워크"
+  },
   "getting-started/quick-start": {
     "keywords": "quick start, vuetify templates, get started"
+  },
+  "getting-started/consulting-and-support": {
+    "title": "컨설팅과 지원"
   },
   "customization/theme": {
     "description": "Setup your custom application theme by changing a few variables."

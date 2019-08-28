@@ -13,10 +13,7 @@
       >
         mdi-heart-pulse
       </v-icon>
-      <v-layout
-        column
-        align-start
-      >
+      <v-row align="start">
         <div class="caption grey--text text-uppercase">
           Heart rate
         </div>
@@ -27,9 +24,9 @@
           ></span>
           <strong v-if="avg">BPM</strong>
         </div>
-      </v-layout>
+      </v-row>
 
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
 
       <v-btn icon class="align-self-start" size="28">
         <v-icon>mdi-arrow-right-thick</v-icon>

@@ -9,14 +9,14 @@
           color="grey"
           height="200"
         >
-          <v-layout
-            align-center
-            justify-center
-            fill-height
+          <v-row
+            class="fill-height"
+            align="center"
+            justify="center"
             tag="v-card-text"
           >
             <h1 style="font-size: 5rem;" class="white--text">Slide {{ n }}</h1>
-          </v-layout>
+          </v-row>
         </v-card>
       </v-window-item>
     </v-window>

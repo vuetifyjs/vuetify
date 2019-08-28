@@ -65,10 +65,16 @@ const DataTableExpandedItemScopedProps = {
   headers: 'TableHeader[]',
 }
 
+const DataTableBodyScopedProps = {
+  ...DataDefaultScopedSlotProps,
+  headers: 'TableHeader[]',
+  isMobile: 'boolean',
+}
+
 const DataTableSlots = [
-  { name: 'body.append', props: DataDefaultScopedSlotProps },
-  { name: 'body.prepend', props: DataDefaultScopedSlotProps },
-  { name: 'body', props: DataDefaultScopedSlotProps },
+  { name: 'body.append', props: DataTableBodyScopedProps },
+  { name: 'body.prepend', props: DataTableBodyScopedProps },
+  { name: 'body', props: DataTableBodyScopedProps },
   { name: 'footer', props: DataDefaultScopedSlotProps },
   { name: 'footer.page-text', props: DataFooterPageTextScopedProps },
   { name: 'header', props: DataTableHeaderScopedProps },
@@ -79,7 +85,7 @@ const DataTableSlots = [
   { name: 'group', props: DataDefaultScopedSlotProps },
   { name: 'group.header', props: DataDefaultScopedSlotProps },
   { name: 'group.summary', props: DataDefaultScopedSlotProps },
-  { name: 'item', props: DataTableItemScopedProps },
+  { name: 'item', props: { ...DataTableItemScopedProps, index: 'number' } },
   { name: 'item.data-table-select', props: DataTableItemScopedProps },
   { name: 'item.data-table-expand', props: DataTableItemScopedProps },
   { name: 'item.<name>', props: DataTableItemColumnScopedProps },

@@ -23,7 +23,6 @@
   "props": {
     "allowOverflow": "Permet au menu de déborder hors de l'écran",
     "autoSelectFirst": "Lors de la recherche, la première option sera toujours mise en évidence",
-    "filter": "L'algorithme de filtrage utilisé lors de la recherche. [example]\n(https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/components/VAutocomplete/VAutocomplete.js#L35)",
     "hideNoData": "Masque le menu lorsqu'il n'y a pas d'options à afficher. Utile pour empêcher le menu de s'ouvrir avant que les résultats ne soient récupérés de manière asynchrone. Il a également l'effet d'ouvrir le menu lorsque le tableau `items` change, s'il n'est pas déjà ouvert.",
     "noFilter": "Ne pas appliquer le filtrage lors de la recherche. Utile lorsque les données sont filtrées côté serveur",
     "value": "Components.Inputs.props.value"

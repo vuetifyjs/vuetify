@@ -10,56 +10,6 @@
       "children": [
         {
           "type": "heading",
-          "lang": "visibilityHeader"
-        },
-        {
-          "type": "text",
-          "lang": "visibilityText"
-        },
-        {
-          "type": "text",
-          "lang": "breakpointText"
-        },
-        {
-          "type": "markdown",
-          "lang": "breakpoints"
-        },
-        {
-          "type": "text",
-          "lang": "conditionText"
-        },
-        {
-          "type": "markdown",
-          "lang": "conditions"
-        },
-        {
-          "type": "text",
-          "lang": "mediaText"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "heading",
-          "lang": "overflowHeader"
-        },
-        {
-          "type": "text",
-          "lang": "overflowText"
-        },
-        {
-          "type": "markdown",
-          "lang": "overflows"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "heading",
           "lang": "displayHeader"
         },
         {
@@ -68,7 +18,27 @@
         },
         {
           "type": "markdown",
+          "lang": "displayFormats"
+        },
+        {
+          "type": "text",
+          "lang": "displayText2"
+        },
+        {
+          "type": "markdown",
           "lang": "displays"
+        },
+        {
+          "type": "text",
+          "lang": "displayText3"
+        },
+        {
+          "type": "example",
+          "value": "display-inline"
+        },
+        {
+          "type": "example",
+          "value": "display-block"
         }
       ]
     },
@@ -77,15 +47,43 @@
       "children": [
         {
           "type": "heading",
-          "lang": "Generic.Pages.examples"
+          "lang": "visibilityHeader"
         },
         {
           "type": "text",
-          "lang": "exampleText"
+          "lang": "visibilityText"
+        },
+        {
+          "type": "style-visibility-table"
         },
         {
           "type": "example",
-          "value": "hidden-elements"
+          "value": "visibility"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "printHeader"
+        },
+        {
+          "type": "text",
+          "lang": "printText1"
+        },
+        {
+          "type": "text",
+          "lang": "printOptions"
+        },
+        {
+          "type": "text",
+          "lang": "printText2"
+        },
+        {
+          "type": "example",
+          "value": "print"
         }
       ]
     },

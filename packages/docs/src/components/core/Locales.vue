@@ -3,6 +3,7 @@
     bottom
     left
     offset-y
+    max-height="calc(100% - 16px)"
   >
     <template #activator="{ on: menu }">
       <v-btn
@@ -26,7 +27,6 @@
       <v-list-item
         v-for="language in languages"
         :key="language.locale"
-        avatar
         @click="translateI18n(language)"
       >
         <v-list-item-avatar

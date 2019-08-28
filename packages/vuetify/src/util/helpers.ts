@@ -506,3 +506,12 @@ export function humanReadableFileSize (bytes: number, binary = false): string {
   }
   return `${bytes.toFixed(1)} ${prefix[unit]}B`
 }
+
+export function camelizeObjectKeys (obj: Record<string, any> | null | undefined) {
+  if (!obj) return {}
+
+  return Object.keys(obj).reduce((o: any, key: string) => {
+    o[camelize(key)] = obj[key]
+    return o
+  }, {})
+}

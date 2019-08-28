@@ -12,6 +12,7 @@ export default {
       sortAscending: ': Sortert stigende. Aktiver for å sortere synkende.',
       sortNone: ': Ikke sortert. Aktiver for å sortere stigende.',
     },
+    sortBy: 'Sort by',
   },
   dataFooter: {
     itemsPerPageText: 'Elementer per side:',

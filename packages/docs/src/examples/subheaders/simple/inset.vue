@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs12 sm6 offset-sm3>
+  <v-col cols="12" sm="6" offset-sm="3">
     <v-card>
       <v-subheader :inset="inset">Subheader</v-subheader>
 
@@ -27,7 +27,7 @@
         </template>
       </v-list>
     </v-card>
-  </v-flex>
+  </v-col>
 </template>
 
 <script>
