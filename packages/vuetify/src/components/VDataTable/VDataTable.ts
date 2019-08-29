@@ -22,18 +22,7 @@ import MobileRow from './MobileRow'
 import ripple from '../../directives/ripple'
 
 // Helpers
-import {
-  deepEqual,
-  getObjectValueByPath,
-  compareFn,
-  getPrefixedScopedSlots,
-  getSlot,
-  defaultFilter,
-  FilterFn,
-  camelizeObjectKeys,
-  customFilter,
-  CustomFilterFn,
-} from '../../util/helpers'
+import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots, getSlot, defaultFilter, FilterFn, camelizeObjectKeys, customFilter, CustomFilterFn } from '../../util/helpers'
 import { breaking } from '../../util/console'
 
 function filterFn (item: any, search: string | null, filter: FilterFn) {

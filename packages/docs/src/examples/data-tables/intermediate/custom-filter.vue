@@ -140,11 +140,11 @@
       },
     },
     methods: {
-      filterOnlyCapsText (value, search, item) {
-        return value != null &&
-          search != null &&
-          typeof value === 'string' &&
-          value.toString().toLocaleUpperCase().indexOf(search) !== -1
+      filterOnlyCapsText (search, item) {
+        return search != null &&
+          item != null &&
+          typeof search === 'string' &&
+          item.name.toString().toLocaleUpperCase().indexOf(search) !== -1
       },
     },
   }
