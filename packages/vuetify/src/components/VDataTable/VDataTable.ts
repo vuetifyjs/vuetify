@@ -22,7 +22,18 @@ import MobileRow from './MobileRow'
 import ripple from '../../directives/ripple'
 
 // Helpers
-import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots, getSlot, defaultFilter, FilterFn, camelizeObjectKeys } from '../../util/helpers'
+import {
+  deepEqual,
+  getObjectValueByPath,
+  compareFn,
+  getPrefixedScopedSlots,
+  getSlot,
+  defaultFilter,
+  FilterFn,
+  camelizeObjectKeys,
+  customFilter,
+  CustomFilterFn,
+} from '../../util/helpers'
 import { breaking } from '../../util/console'
 
 function filterFn (item: any, search: string | null, filter: FilterFn) {
@@ -32,17 +43,24 @@ function filterFn (item: any, search: string | null, filter: FilterFn) {
   }
 }
 
+function customFilterFn (item: any, search: string | null, filter: CustomFilterFn) {
+  return (header: TableHeader) => {
+    const value = getObjectValueByPath(item, header.value)
+    return header.filter ? header.filter(value, search, item) : filter(search, item)
+  }
+}
+
 function searchTableItems (
   items: any[],
   search: string | null,
   headersWithCustomFilters: TableHeader[],
   headersWithoutCustomFilters: TableHeader[],
-  customFilter: FilterFn
+  customFilter: CustomFilterFn
 ) {
   let filtered = items
   search = typeof search === 'string' ? search.trim() : null
   if (search && headersWithoutCustomFilters.length) {
-    filtered = items.filter(item => headersWithoutCustomFilters.some(filterFn(item, search, customFilter)))
+    filtered = items.filter(item => headersWithoutCustomFilters.some(customFilterFn(item, search, customFilter)))
   }
 
   if (headersWithCustomFilters.length) {
@@ -88,8 +106,8 @@ export default VDataIterator.extend({
     },
     customFilter: {
       type: Function,
-      default: defaultFilter,
-    } as PropValidator<typeof defaultFilter>,
+      default: customFilter,
+    } as PropValidator<typeof customFilter>,
   },
 
   data () {

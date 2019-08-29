@@ -421,6 +421,15 @@ export function sortItems (
 
 export type FilterFn = (value: any, search: string | null, item: any) => boolean
 
+export type CustomFilterFn = (search: string | null, item: any) => boolean
+
+export function customFilter (search: string | null, itemValue: any) {
+  return itemValue != null &&
+    search != null &&
+    typeof itemValue !== 'boolean' &&
+    itemValue.toString().toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) !== -1
+}
+
 export function defaultFilter (value: any, search: string | null, item: any) {
   return value != null &&
     search != null &&
