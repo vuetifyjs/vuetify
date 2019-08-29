@@ -428,12 +428,48 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
   it('should have prefix and suffix', () => {
     const wrapper = mountFunction({
       propsData: {
+        displayPrefix: true,
+        prefix: '$',
+        displaySuffix: true,
+        suffix: '.com',
+      },
+    })
+
+    expect(wrapper.findAll('.v-text-field__prefix')).toHaveLength(1);
+    expect(wrapper.findAll('.v-text-field__suffix')).toHaveLength(1);
+  })
+
+  it('should have prefix and suffix only when focused/dirty', () => {
+    const wrapper = mountFunction({
+      propsData: {
         prefix: '$',
         suffix: '.com',
       },
     })
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.findAll('.v-text-field__prefix').wrappers).toHaveLength(0)
+    expect(wrapper.findAll('.v-text-field__suffix').wrappers).toHaveLength(0)
+    expect(wrapper.vm.hideAffixes).toBeTruthy()
+
+    wrapper.vm.focus()
+
+    expect(wrapper.findAll('.v-text-field__prefix').wrappers).toHaveLength(1)
+    expect(wrapper.findAll('.v-text-field__suffix').wrappers).toHaveLength(1)
+    expect(wrapper.vm.hideAffixes).toBeFalsy()
+
+    wrapper.vm.blur()
+
+    expect(wrapper.findAll('.v-text-field__prefix').wrappers).toHaveLength(0)
+    expect(wrapper.findAll('.v-text-field__suffix').wrappers).toHaveLength(0)
+    expect(wrapper.vm.hideAffixes).toBeTruthy()
+
+    wrapper.setProps({
+      value: 'test',
+    })
+
+    expect(wrapper.findAll('.v-text-field__prefix')).toHaveLength(1)
+    expect(wrapper.findAll('.v-text-field__suffix')).toHaveLength(1)
+    expect(wrapper.vm.hideAffixes).toBeFalsy()
   })
 
   it('should use a custom clear callback', async () => {
