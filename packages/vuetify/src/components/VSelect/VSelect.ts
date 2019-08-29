@@ -73,6 +73,14 @@ export default baseMixins.extend<options>().extend({
     chips: Boolean,
     clearable: Boolean,
     deletableChips: Boolean,
+    displayPrefix: {
+      type: Boolean,
+      default: true,
+    },
+    displaySuffix: {
+      type: Boolean,
+      default: true,
+    },
     dense: Boolean,
     eager: Boolean,
     hideSelected: Boolean,
