@@ -553,6 +553,12 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     wrapper.setProps({ counter: '50' })
 
     expect(counter.element.innerHTML).toBe('9 / 50')
+
+    wrapper.setProps({
+      counterLength: (value?: string): number => (value || '').replace(/ba/g, '').length,
+    })
+
+    expect(counter.element.innerHTML).toBe('7 / 50')
   })
 
   it('should set bad input on input', () => {
