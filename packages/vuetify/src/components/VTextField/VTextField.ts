@@ -55,6 +55,7 @@ export default baseMixins.extend<options>().extend({
       default: '$vuetify.icons.clear',
     },
     counter: [Boolean, Number, String],
+    counterLength: Function,
     filled: Boolean,
     flat: Boolean,
     fullWidth: Boolean,
@@ -108,6 +109,9 @@ export default baseMixins.extend<options>().extend({
       }
     },
     counterValue (): number {
+      if (typeof this.counterLength === 'function') {
+        return this.counterLength(this.internalValue)
+      }
       return (this.internalValue || '').toString().length
     },
     internalValue: {
