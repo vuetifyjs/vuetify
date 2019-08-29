@@ -435,8 +435,8 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
       },
     })
 
-    expect(wrapper.findAll('.v-text-field__prefix')).toHaveLength(1);
-    expect(wrapper.findAll('.v-text-field__suffix')).toHaveLength(1);
+    expect(wrapper.findAll('.v-text-field__prefix')).toHaveLength(1)
+    expect(wrapper.findAll('.v-text-field__suffix')).toHaveLength(1)
   })
 
   it('should have prefix and suffix only when focused/dirty', () => {
