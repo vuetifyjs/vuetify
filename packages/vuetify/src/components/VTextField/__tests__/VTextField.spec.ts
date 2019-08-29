@@ -531,6 +531,30 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     expect(counter.element.innerHTML).toBe('0 / 50')
   })
 
+  it('should use counter length function', async () => {
+    const wrapper = mountFunction({
+      attrs: {
+        maxlength: 25,
+      },
+      propsData: {
+        counter: true,
+        counterLength: (value?: string): number => (value || '').replace(/\s/g, '').length,
+      },
+    })
+
+    const counter = wrapper.find('.v-counter')
+
+    expect(counter.element.innerHTML).toBe('0 / 25')
+
+    wrapper.setProps({ value: 'foo bar baz' })
+
+    expect(counter.element.innerHTML).toBe('9 / 25')
+
+    wrapper.setProps({ counter: '50' })
+
+    expect(counter.element.innerHTML).toBe('9 / 50')
+  })
+
   it('should set bad input on input', () => {
     const wrapper = mountFunction()
 
