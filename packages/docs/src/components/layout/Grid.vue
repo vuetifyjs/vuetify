@@ -15,7 +15,7 @@
       <tbody>
         <tr>
           <td>
-            <v-icon left>phone_iphone</v-icon>
+            <v-icon left>mdi-cellphone-iphone</v-icon>
             <span>Extra small</span>
           </td>
           <td>
@@ -27,7 +27,7 @@
 
         <tr>
           <td>
-            <v-icon left>tablet</v-icon>
+            <v-icon left>mdi-tablet</v-icon>
             <span>Small</span>
           </td>
           <td>
@@ -39,7 +39,7 @@
 
         <tr>
           <td>
-            <v-icon left>laptop</v-icon>
+            <v-icon left>mdi-laptop</v-icon>
             <span>Medium</span>
           </td>
           <td>
@@ -51,7 +51,7 @@
 
         <tr>
           <td>
-            <v-icon left>desktop_windows</v-icon>
+            <v-icon left>mdi-monitor</v-icon>
             <span>Large</span>
           </td>
           <td>
@@ -63,7 +63,7 @@
 
         <tr>
           <td>
-            <v-icon left>tv</v-icon>
+            <v-icon left>mdi-television</v-icon>
             <span>Extra large</span>
           </td>
           <td>

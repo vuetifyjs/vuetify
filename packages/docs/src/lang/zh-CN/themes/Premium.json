@@ -1,5 +1,4 @@
 {
-  "headerText": "Vuetify提供**免费**和**高级**预制主题，旨在让您在快速入门。您可通过Vue CLI 3安装免费主题，也可以方便地下载源代码。",
   "buy": "资料和演示",
   "free": "免费",
   "live": "在线预览",
@@ -8,8 +7,7 @@
   "viewDemo": "查看演示",
   "templates": {
     "alpha": {
-      "title": "Alpha主题",
-      "description": "完整的主题体验，包括强化的Vue CLI 3、完整的文档、5个自定义组件，还有更多精彩等你发现！"
+      "title": "Alpha主题"
     },
     "dashboard": {
       "title": "Material风格面板",

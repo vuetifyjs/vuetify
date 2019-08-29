@@ -153,8 +153,13 @@ export default baseMixins.extend({
       const target = e.target as HTMLElement
       // If the dialog content contains
       // the click event, or if the
-      // dialog is not active
-      if (this._isDestroyed || !this.isActive || this.$refs.content.contains(target)) return false
+      // dialog is not active, or if the overlay
+      // is the same element as the target
+      if (this._isDestroyed ||
+        !this.isActive ||
+        this.$refs.content.contains(target) ||
+        (this.overlay && target && !this.overlay.$el.contains(target))
+      ) return false
 
       // If we made it here, the click is outside
       // and is active. If persistent, and the
@@ -186,8 +191,10 @@ export default baseMixins.extend({
     },
     show () {
       !this.fullscreen && !this.hideOverlay && this.genOverlay()
-      this.$refs.content.focus()
-      this.bind()
+      this.$nextTick(() => {
+        this.$refs.content.focus()
+        this.bind()
+      })
     },
     bind () {
       window.addEventListener('focusin', this.onFocusin)
@@ -276,7 +283,7 @@ export default baseMixins.extend({
       class: this.contentClasses,
       attrs: {
         role: 'document',
-        tabindex: 0,
+        tabindex: this.isActive ? 0 : undefined,
         ...this.getScopeIdAttrs(),
       },
       on: {

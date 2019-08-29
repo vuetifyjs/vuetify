@@ -13,7 +13,7 @@
             <v-icon small>mdi-chevron-right</v-icon>
           </v-btn>
           <v-toolbar-title>{{ title }}</v-toolbar-title>
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
           <v-menu bottom right>
             <template v-slot:activator="{ on }">
               <v-btn
@@ -76,7 +76,7 @@
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
-              <v-spacer></v-spacer>
+              <div class="flex-grow-1"></div>
               <v-btn icon>
                 <v-icon>mdi-heart</v-icon>
               </v-btn>

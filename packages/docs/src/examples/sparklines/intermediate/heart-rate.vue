@@ -26,7 +26,7 @@
         </div>
       </v-row>
 
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
 
       <v-btn icon class="align-self-start" size="28">
         <v-icon>mdi-arrow-right-thick</v-icon>

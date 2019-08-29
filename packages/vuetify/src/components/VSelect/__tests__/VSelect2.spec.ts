@@ -408,6 +408,7 @@ describe('VSelect.ts', () => {
     expect(wrapper.vm.isMenuActive).toBe(true)
   })
 
+  /* eslint-disable-next-line max-statements */
   it('should react to different key down', async () => {
     const wrapper = mountFunction({
       propsData: {
@@ -420,7 +421,10 @@ describe('VSelect.ts', () => {
     const event = new Event('keydown')
     event.keyCode = keyCodes.tab
 
+    wrapper.vm.$refs.input.focus()
     wrapper.vm.onKeyDown(event)
+
+    await new Promise(resolve => window.requestAnimationFrame(resolve))
 
     expect(blur).toHaveBeenCalled()
     expect(wrapper.vm.isMenuActive).toBe(false)

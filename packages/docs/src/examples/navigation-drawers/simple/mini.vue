@@ -16,7 +16,7 @@
           icon
           @click.stop="mini = !mini"
         >
-          <v-icon>chevron_left</v-icon>
+          <v-icon>mdi-chevron-left</v-icon>
         </v-btn>
       </v-list-item>
 

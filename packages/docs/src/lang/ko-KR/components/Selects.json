@@ -33,7 +33,6 @@
     "filter": "아이템을 필터링하는데 사용되는 함수",
     "hideSelected": "이미 선택된 셀렉트 메뉴 항목을 보여주지 않음",
     "itemDisabled": "**항목** 의 비활성화(disabled) 값 속성을 설정",
-    "items": "오브젝트 배열이나 문자열 배열. 오브젝트를 사용하면 text 와 value 필드를 사용. 이는 **item-text** 와 **item-value** 를 사용해서 바꿀 수 있습니다.",
     "itemText": "**항목** 의 텍스트 값 속성을 설정",
     "minWidth": "셀렉트의 `v-menu` 컨텐츠의 최소 너비를 설정",
     "multiple": "복수 선택이 가능하도록 변경. 값의 배열을 받음(?).",

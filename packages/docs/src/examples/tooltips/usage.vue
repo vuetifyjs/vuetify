@@ -9,7 +9,7 @@
 
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
-        <v-icon color="primary" dark v-on="on">home</v-icon>
+        <v-icon color="primary" dark v-on="on">mdi-home</v-icon>
       </template>
       <span>Tooltip</span>
     </v-tooltip>

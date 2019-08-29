@@ -11,10 +11,10 @@
 
       <v-toolbar-title>Settings</v-toolbar-title>
 
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
 
       <v-btn icon>
-        <v-icon>search</v-icon>
+        <v-icon>mdi-magnify</v-icon>
       </v-btn>
     </v-toolbar>
 

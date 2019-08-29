@@ -90,7 +90,7 @@
                 </v-row>
               </v-card-text>
               <v-card-actions>
-                <v-spacer></v-spacer>
+                <div class="flex-grow-1"></div>
                 <v-btn text>Cancel</v-btn>
                 <v-btn
                   text

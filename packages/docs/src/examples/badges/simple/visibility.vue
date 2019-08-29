@@ -35,7 +35,7 @@
           <template v-slot:badge>
             <span>6</span>
           </template>
-          <v-icon large color="grey">mail</v-icon>
+          <v-icon large color="grey">mdi-email</v-icon>
         </v-badge>
       </v-col>
     </v-row>

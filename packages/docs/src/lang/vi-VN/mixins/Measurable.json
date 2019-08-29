@@ -1,1 +1,10 @@
-{}
+{
+  "props": {
+    "height": "Chiều cao.",
+    "maxHeight": "Thiết lập chiều cao tối đa.",
+    "minHeight": "Thiết lập chiều cao tối thiểu.",
+    "maxWidth": "Thiết lập chiều dài tối đa.",
+    "minWidth": "Thiết lập chiều dài tối thiểu.",
+    "width": "Chiều dài."
+  }
+}

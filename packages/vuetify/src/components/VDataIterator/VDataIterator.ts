@@ -63,7 +63,7 @@ export default Themeable.extend({
     someItems (): boolean {
       return this.internalCurrentItems.some((i: any) => this.isSelected(i))
     },
-    sanitizedFooterProps (): object {
+    sanitizedFooterProps (): Record<string, any> {
       return camelizeObjectKeys(this.footerProps)
     },
   },

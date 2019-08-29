@@ -61,13 +61,13 @@
       >
         {{ item.text }}
       </v-chip>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <v-list-item-action @click.stop>
         <v-btn
           icon
           @click.stop.prevent="edit(index, item)"
         >
-          <v-icon>{{ editing !== item ? 'edit' : 'check' }}</v-icon>
+          <v-icon>{{ editing !== item ? 'mdi-pencil' : 'mdi-check' }}</v-icon>
         </v-btn>
       </v-list-item-action>
     </template>
