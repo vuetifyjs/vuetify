@@ -20,7 +20,7 @@ describe('VFlex.ts', () => {
     }
   })
 
-  it('should work', () => {
+  it.skip('should work', () => {
     const wrapper = mountFunction()
 
     expect(wrapper.html()).toMatchSnapshot()
