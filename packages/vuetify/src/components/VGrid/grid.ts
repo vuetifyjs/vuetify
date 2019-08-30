@@ -1,6 +1,9 @@
 // Types
 import Vue, { VNode } from 'vue'
 
+// Utilities
+import { deprecate } from '../../util/console'
+
 export default function VGrid (name: string) {
   /* @vue/component */
   return Vue.extend({
@@ -17,6 +20,13 @@ export default function VGrid (name: string) {
     },
 
     render (h, { props, data, children }): VNode {
+      if (name === 'layout') {
+        deprecate('v-layout', 'v-row')
+      }
+      if (name === 'flex') {
+        deprecate('v-flex', 'v-col')
+      }
+
       data.staticClass = (`${name} ${data.staticClass || ''}`).trim()
 
       const { attrs } = data
