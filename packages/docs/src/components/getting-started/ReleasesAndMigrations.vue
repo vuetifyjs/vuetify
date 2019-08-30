@@ -74,7 +74,7 @@
     },
   }
 </script>
-<style lang="sass">
+<style lang="sass" scoped>
   pre
     background: #2d2d2d
     padding: 8px
