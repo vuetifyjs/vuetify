@@ -187,10 +187,13 @@ export default Vue.extend({
 
       return props
     },
+    computedOptions (): DataOptions {
+      return { ...this.options } as DataOptions
+    },
   },
 
   watch: {
-    options: {
+    computedOptions: {
       handler (options: DataOptions, old: DataOptions) {
         if (deepEqual(options, old)) return
 
