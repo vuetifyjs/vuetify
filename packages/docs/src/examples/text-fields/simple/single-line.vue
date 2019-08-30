@@ -1,40 +1,40 @@
 <template>
   <v-form>
-    <v-container grid-list-xl>
-      <v-layout wrap>
+    <v-container>
+      <v-row>
 
-        <v-flex xs12 sm6>
+        <v-col cols="12" sm="6">
           <v-text-field
             label="Regular"
             single-line
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6>
+        <v-col cols="12" sm="6">
           <v-text-field
             label="Solo"
             single-line
             solo
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6>
+        <v-col cols="12" sm="6">
           <v-text-field
             label="Filled"
             single-line
             filled
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6>
+        <v-col cols="12" sm="6">
           <v-text-field
             label="Outlined"
             single-line
             outlined
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-      </v-layout>
+      </v-row>
     </v-container>
   </v-form>
 </template>

@@ -1,6 +1,6 @@
 <template>
-  <v-layout column :align-center="!fullWidth">
-    <v-layout wrap justify-space-around>
+  <v-row align="center">
+    <v-row justify="space-around">
       <v-switch v-model="disabled" class="mx-2" label="Disabled"></v-switch>
       <v-switch v-model="readonly" class="mx-2" label="Readonly"></v-switch>
       <v-switch v-model="landscape" class="mx-2" label="Landscape"></v-switch>
@@ -17,7 +17,7 @@
           24h
         </v-btn>
       </v-btn-toggle>
-    </v-layout>
+    </v-row>
     <v-time-picker
       v-model="picker"
       class="mt-2"
@@ -31,7 +31,7 @@
       :no-title="noTitle"
       :scrollable="scrollable"
     ></v-time-picker>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

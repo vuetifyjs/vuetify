@@ -2,8 +2,8 @@
   <v-card flat>
     <v-card-text>
       <v-container fluid>
-        <v-layout wrap>
-          <v-flex xs12 sm4 md4>
+        <v-row>
+          <v-col cols="12" sm="4" md="4">
             <v-switch
               v-model="ex11"
               label="red"
@@ -18,8 +18,8 @@
               value="red darken-3"
               hide-details
             ></v-switch>
-          </v-flex>
-          <v-flex xs12 sm4 md4>
+          </v-col>
+          <v-col cols="12" sm="4" md="4">
             <v-switch
               v-model="ex11"
               label="indigo"
@@ -34,8 +34,8 @@
               value="indigo darken-3"
               hide-details
             ></v-switch>
-          </v-flex>
-          <v-flex xs12 sm4 md4>
+          </v-col>
+          <v-col cols="12" sm="4" md="4">
             <v-switch
               v-model="ex11"
               label="orange"
@@ -50,11 +50,11 @@
               value="orange darken-3"
               hide-details
             ></v-switch>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
 
-        <v-layout wrap class="mt-12">
-          <v-flex xs12 sm4 md4>
+        <v-row class="mt-12">
+          <v-col cols="12" sm="4" md="4">
             <v-switch
               v-model="ex11"
               label="primary"
@@ -69,8 +69,8 @@
               value="secondary"
               hide-details
             ></v-switch>
-          </v-flex>
-          <v-flex xs12 sm4 md4>
+          </v-col>
+          <v-col cols="12" sm="4" md="4">
             <v-switch
               v-model="ex11"
               label="success"
@@ -85,8 +85,8 @@
               value="info"
               hide-details
             ></v-switch>
-          </v-flex>
-          <v-flex xs12 sm4 md4>
+          </v-col>
+          <v-col cols="12" sm="4" md="4">
             <v-switch
               v-model="ex11"
               label="warning"
@@ -101,8 +101,8 @@
               value="error"
               hide-details
             ></v-switch>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-card-text>
   </v-card>

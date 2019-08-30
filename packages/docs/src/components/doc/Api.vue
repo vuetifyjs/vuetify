@@ -14,7 +14,7 @@
             <v-select
               v-model="current"
               :items="value"
-              :class="$vuetify.breakpoint.mdAndUp ? '' : 'mb-3'"
+              :class="$vuetify.breakpoint.mdAndUp ? '' : 'mb-6'"
               label="Available Component(s)"
               outlined
               :menu-props="{offsetY: true, contentClass: 'primary'}"
@@ -27,7 +27,7 @@
               v-model="search"
               type="search"
               clearable
-              append-icon="search"
+              append-icon="mdi-magnify"
               label="Search..."
               outlined
               hide-details

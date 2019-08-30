@@ -2,6 +2,9 @@
   "header": "动效",
   "headerText": "流畅的动画有助于给用户界面带来很棒的感觉。使用Vue的过渡系统和可复用的功能组件，您可以轻松地控制应用程序的动画效果。大多数组件可以通过`transition`属性来改变他们的过渡。",
   "examples": {
+    "usage": {
+      "desc": "Vuetify附带了10多个自定义css动画，可应用于众多组件或您自己的自定义的组件"
+    },
     "slide-x-transitions": {
       "header": "X轴滑动过渡",
       "desc": "滑动x过渡可沿水平方向移动。"
@@ -25,5 +28,8 @@
   },
   "createYourOwnHeader": "创建您自己的",
   "createYourOwnText1": "您可以用Vuetify的过渡辅助器函数来创建您自己的自定义的过渡效果，这个函数会返回一个可以导入到Vue的对象。使用Vue的 [函数式组件](https://vuejs.org/v2/guide/render-function.html#Functional-Components) 配置将确保您的过渡效果尽可能高效。只需要导入函数：",
-  "createYourOwnText2": "其中`createSimpleTransition`函数接受1个参数，即名称。这将是您可以与您的样式挂钩的名称。这是一个展示`v-fade-transition`的示例："
+  "createYourOwnText2": "其中`createSimpleTransition`函数接受1个参数，即名称。这将是您可以与您的样式挂钩的名称。这是一个展示`v-fade-transition`的示例：",
+  "props": {
+    "group": "创建`transition-group`组件 [vue docs](https://vuejs.org/v2/api/#transition-group)"
+  }
 }

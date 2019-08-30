@@ -1,16 +1,16 @@
 <template>
   <div>
-    <v-layout justify-space-around wrap>
-      <v-flex xs12>
+    <v-row justify="space-around">
+      <v-col cols="12">
         <v-select v-model="divider" :items="dividers" label="Divider"></v-select>
-      </v-flex>
+      </v-col>
       <v-switch v-model="large" label="Large"></v-switch>
       <v-switch v-model="customDiv" label="Custom divider"></v-switch>
-    </v-layout>
+    </v-row>
 
     <v-breadcrumbs :items="items" :large="large" :divider="divider">
       <template v-if="customDiv" v-slot:divider>
-        <v-icon>chevron_right</v-icon>
+        <v-icon>mdi-chevron-right</v-icon>
       </template>
     </v-breadcrumbs>
   </div>

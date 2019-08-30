@@ -126,6 +126,10 @@ export default VDataIterator.extend({
       }
     },
     isMobile (): boolean {
+      // Guard against SSR render
+      // https://github.com/vuetifyjs/vuetify/issues/7410
+      if (this.$vuetify.breakpoint.width === 0) return false
+
       return this.$vuetify.breakpoint.width < this.mobileBreakpoint
     },
     columnSorters (): Record<string, compareFn> {
@@ -140,8 +144,17 @@ export default VDataIterator.extend({
     headersWithoutCustomFilters (): TableHeader[] {
       return this.computedHeaders.filter(header => !header.filter)
     },
-    sanitizedHeaderProps (): object {
+    sanitizedHeaderProps (): Record<string, any> {
       return camelizeObjectKeys(this.headerProps)
+    },
+    computedItemsPerPage (): number {
+      const itemsPerPage = this.options && this.options.itemsPerPage ? this.options.itemsPerPage : this.itemsPerPage
+      if (this.sanitizedFooterProps.itemsPerPageOptions && !this.sanitizedFooterProps.itemsPerPageOptions.includes(itemsPerPage)) {
+        const firstOption = this.sanitizedFooterProps.itemsPerPageOptions[0]
+        return typeof firstOption === 'object' ? firstOption.value : firstOption
+      }
+
+      return itemsPerPage
     },
   },
 
@@ -474,7 +487,10 @@ export default VDataIterator.extend({
       ]
 
       if (!this.hideDefaultFooter) {
-        children.push(this.$createElement(VDataFooter, data))
+        children.push(this.$createElement(VDataFooter, {
+          ...data,
+          scopedSlots: getPrefixedScopedSlots('footer.', this.$scopedSlots),
+        }))
       }
 
       return children
@@ -526,6 +542,7 @@ export default VDataIterator.extend({
         ...this.$props,
         customFilter: this.customFilterWithColumns,
         customSort: this.customSortWithHeaders,
+        itemsPerPage: this.computedItemsPerPage,
       },
       on: {
         'update:options': (v: DataOptions, old: DataOptions) => {

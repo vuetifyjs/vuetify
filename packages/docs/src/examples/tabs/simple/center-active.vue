@@ -1,7 +1,6 @@
 <template>
   <v-card>
     <v-tabs
-      v-model="tab"
       background-color="deep-purple accent-4"
       center-active
       dark
@@ -29,13 +28,3 @@
     </v-tabs>
   </v-card>
 </template>
-
-<script>
-  export default {
-    data () {
-      return {
-        tab: null,
-      }
-    },
-  }
-</script>

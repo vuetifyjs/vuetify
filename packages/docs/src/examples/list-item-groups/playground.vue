@@ -1,14 +1,14 @@
 <template>
   <div>
-    <v-layout wrap justify-space-around>
+    <v-row justify="space-around">
       <v-switch v-model="multiple" class="mx-2" label="Multiple"></v-switch>
       <v-switch v-model="mandatory" class="mx-2" label="Mandatory"></v-switch>
       <v-switch v-model="flat" class="mx-2" label="Flat"></v-switch>
       <v-switch v-model="dense" class="mx-2" label="Dense"></v-switch>
-      <v-flex xs12>
+      <v-col cols="12">
         <v-slider v-model="count" min="0" max="25" label="Items count"></v-slider>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
 
     <v-card
       class="mx-auto"

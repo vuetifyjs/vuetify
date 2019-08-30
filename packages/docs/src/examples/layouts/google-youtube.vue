@@ -41,13 +41,13 @@
           @click=""
         >
           <v-list-item-action>
-            <v-icon color="grey darken-1">add_circle_outline</v-icon>
+            <v-icon color="grey darken-1">mdi-plus-circle-outline</v-icon>
           </v-list-item-action>
           <v-list-item-title class="grey--text text--darken-1">Browse Channels</v-list-item-title>
         </v-list-item>
         <v-list-item @click="">
           <v-list-item-action>
-            <v-icon color="grey darken-1">settings</v-icon>
+            <v-icon color="grey darken-1">mdi-settings</v-icon>
           </v-list-item-action>
           <v-list-item-title class="grey--text text--darken-1">Manage Subscriptions</v-list-item-title>
         </v-list-item>
@@ -65,9 +65,9 @@
       <v-toolbar-title class="mr-12 align-center">
         <span class="title">Youtube</span>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-layout
-        align-center
+      <div class="flex-grow-1"></div>
+      <v-row
+        align="center"
         style="max-width: 650px"
       >
         <v-text-field
@@ -78,16 +78,16 @@
           color="white"
           hide-details
         ></v-text-field>
-      </v-layout>
+      </v-row>
     </v-app-bar>
 
     <v-content>
-      <v-container fill-height>
-        <v-layout
-          justify-center
-          align-center
+      <v-container class="fill-height">
+        <v-row
+          justify="center"
+          align="center"
         >
-          <v-flex shrink>
+          <v-col class="shrink">
             <v-tooltip right>
               <template v-slot:activator="{ on }">
                 <v-btn
@@ -116,8 +116,8 @@
               </template>
               <span>Codepen</span>
             </v-tooltip>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
   </v-app>

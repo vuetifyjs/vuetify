@@ -65,7 +65,7 @@
       return h(this.tag, {
         staticClass: 'markdown',
         class: {
-          'mb-3': wantsList,
+          'mb-6': wantsList,
         },
         domProps: { innerHTML: marked(code) },
       })

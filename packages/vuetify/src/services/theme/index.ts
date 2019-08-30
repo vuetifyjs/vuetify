@@ -181,15 +181,16 @@ export class Theme extends Service {
   private initVueMeta (root: Vue) {
     this.vueMeta = true
 
-    const head = (root.$options as any).head
+    const metaKeyName = (root as any).$meta().getOptions().keyName
+    const metaInfo = (root.$options as any)[metaKeyName] || {}
 
-    ;(root.$options as any).head = () => {
-      head.style = head.style || []
+    ;(root.$options as any)[metaKeyName] = () => {
+      metaInfo.style = metaInfo.style || []
 
-      const vuetifyStylesheet = head.style.find((s: any) => s.id === 'vuetify-theme-stylesheet')
+      const vuetifyStylesheet = metaInfo.style.find((s: any) => s.id === 'vuetify-theme-stylesheet')
 
       if (!vuetifyStylesheet) {
-        head.style.push({
+        metaInfo.style.push({
           cssText: this.generatedStyles,
           type: 'text/css',
           id: 'vuetify-theme-stylesheet',
@@ -199,7 +200,7 @@ export class Theme extends Service {
         vuetifyStylesheet.cssText = this.generatedStyles
       }
 
-      return head
+      return metaInfo
     }
   }
 

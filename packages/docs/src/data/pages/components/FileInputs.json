@@ -1,7 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
-  "file": "components/VAutocomplete",
+  "file": "components/VFileInput",
   "children": [
     {
       "type": "section",

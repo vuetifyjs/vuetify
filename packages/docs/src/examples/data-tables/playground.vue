@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-layout wrap justify-space-around>
+    <v-row justify="space-around">
       <v-switch v-model="dense" class="mx-2" label="Dense"></v-switch>
       <v-switch v-model="loading" class="mx-2" label="Loading"></v-switch>
       <v-switch v-model="disableSort" class="mx-2" label="Disable sort"></v-switch>
@@ -34,7 +34,7 @@
           :value="header.value"
         >Group by {{ header.text }}</v-btn>
       </v-btn-toggle>
-    </v-layout>
+    </v-row>
 
     <v-data-table
       :headers="headers"

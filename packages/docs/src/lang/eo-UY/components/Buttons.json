@@ -29,7 +29,7 @@
     },
     "floating": {
       "header": "crwdns34402:0crwdne34402:0",
-      "desc": "crwdns34404:0crwdne34404:0"
+      "desc": "crwdns42582:0crwdne42582:0"
     },
     "loaders": {
       "header": "crwdns34406:0crwdne34406:0",
@@ -39,13 +39,13 @@
       "header": "crwdns34410:0crwdne34410:0",
       "desc": "crwdns34412:0crwdne34412:0"
     },
-    "outline": {
-      "header": "crwdns34414:0crwdne34414:0",
-      "desc": "crwdns34416:0crwdne34416:0"
+    "outlined": {
+      "header": "crwdns42584:0crwdne42584:0",
+      "desc": "crwdns42586:0crwdne42586:0"
     },
-    "round": {
-      "header": "crwdns34418:0crwdne34418:0",
-      "desc": "crwdns34420:0crwdne34420:0"
+    "rounded": {
+      "header": "crwdns42588:0crwdne42588:0",
+      "desc": "crwdns42590:0crwdne42590:0"
     },
     "tile": {
       "header": "crwdns40828:0crwdne40828:0",

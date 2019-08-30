@@ -1,7 +1,7 @@
 <template>
   <v-container fluid class="pa-0">
-    <v-layout wrap align-center>
-      <v-flex xs12 sm6>
+    <v-row align="center">
+      <v-col cols="12" sm="6">
         <div class="text-center">
           <div class="my-2">
             <v-btn small color="primary" dark>Small Button</v-btn>
@@ -13,26 +13,26 @@
             <v-btn color="error" dark large>Large Button</v-btn>
           </div>
         </div>
-      </v-flex>
-      <v-flex xs12 sm6>
+      </v-col>
+      <v-col cols="12" sm="6">
         <div class="text-center">
           <div class="my-2">
             <v-btn color="primary" fab small dark>
-              <v-icon>edit</v-icon>
+              <v-icon>mdi-pencil</v-icon>
             </v-btn>
           </div>
           <div class="my-2">
             <v-btn color="warning" fab dark>
-              <v-icon>account_circle</v-icon>
+              <v-icon>mdi-account-circle</v-icon>
             </v-btn>
           </div>
           <div class="my-2">
             <v-btn color="error" fab large dark>
-              <v-icon>alarm</v-icon>
+              <v-icon>mdi-alarm</v-icon>
             </v-btn>
           </div>
         </div>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
