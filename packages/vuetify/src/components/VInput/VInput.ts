@@ -49,6 +49,7 @@ export default baseMixins.extend<options>().extend({
     persistentHint: Boolean,
     prependIcon: String,
     value: null as any as PropType<any>,
+    dense: Boolean,
   },
 
   data () {
@@ -69,6 +70,7 @@ export default baseMixins.extend<options>().extend({
         'v-input--is-focused': this.isFocused,
         'v-input--is-loading': this.loading !== false && this.loading !== undefined,
         'v-input--is-readonly': this.readonly,
+        'v-input--dense': this.dense,
         ...this.themeClasses,
       }
     },
