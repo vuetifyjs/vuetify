@@ -5,8 +5,8 @@
   "usageText2": "In the example above, we created three equal-width columns on small, medium, large and extra large devices. The parent `v-container` to center the inner `v-col`s.",
   "usageList": [
     "`v-container` provides the ability to center and horizontally pad your site's contents. You can also use the **fluid** prop to fully extend the container across all viewport and device sizes. Maintains previous 1.x functionality in which props are passed through as classes on `v-container` allowing for the application of helper classes (such as `ma-#`/`pa-#`/`fill-height`) to easily be applied",
-    "`v-row` is a wrapper component for `v-col`. It utilizes flex properties to control the layout and flow of its inner columns. It uses a standard gutter of **24px**. This can be reduced with the **dense** prop or removed completely with **no-gutters**.",
-    "`v-col` is a content holder that must be a direct child of `v-row`."
+    "`v-row` is a wrapper component for `v-col`. It utilizes flex properties to control the layout and flow of its inner columns. It uses a standard gutter of **24px**. This can be reduced with the **dense** prop or removed completely with **no-gutters**. This is the 2.x replacement for `v-layout` in 1.x.",
+    "`v-col` is a content holder that must be a direct child of `v-row`. This is the 2.x replacement for `v-flex` in 1.x."
   ],
   "usageText3": "Ensure that you understand the limitations and [bugs around flexbox](https://github.com/philipwalton/flexbugs), such as the inhability to [utilize certain HTML elements as flex containers](https://github.com/philipwalton/flexbugs#9-some-html-elements-cant-be-flex-containers).",
   "usageAlert1": "When using the grid system with IE11 you will need to set an explicit `height` as `min-height` will not suffice and cause undesired results.",
