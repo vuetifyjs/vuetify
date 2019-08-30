@@ -429,3 +429,60 @@
       .v-text-field__suffix
         padding-left: 0
         padding-right: 4px
+
+  &.v-input--dense
+    .v-label
+      margin-top: 3px
+
+    &.v-text-field--enclosed
+      .v-text-field__details
+        margin-top: 0px
+        margin-bottom: 4px
+
+    .v-input__prepend-outer,
+    .v-input__prepend-inner,
+    .v-input__append-inner,
+    .v-input__append-outer
+        margin-top: 8px
+
+    &.v-text-field--solo
+      .v-input__control
+        min-height: 38px
+      .v-label
+        margin-top: 2px
+
+      .v-input__prepend-outer,
+      .v-input__append-outer
+        margin-top: 5px
+
+      .v-input__prepend-inner,
+      .v-input__append-inner
+        margin-top: 2px
+
+      .v-input__control > .v-input__slot
+        min-height: 36px
+
+        &.v-label--active
+          font-size: 15px
+
+      fieldset
+        padding-left: 6px
+
+
+    &.v-text-field--filled,
+    &.v-text-field--outlined,
+    &.v-text-field--full-width
+      .v-label
+        top: 8px
+
+      & > .v-input__control > .v-input__slot
+        min-height: 40px
+
+    &.v-text-field--outlined
+      .v-label--active
+        top: 14px
+
+    &.v-text-field--single-line
+      input
+        margin-top: 3px
+      
