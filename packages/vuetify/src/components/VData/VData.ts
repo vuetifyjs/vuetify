@@ -188,7 +188,7 @@ export default Vue.extend({
       return props
     },
     computedOptions (): DataOptions {
-      return Object.assign({}, this.options) as DataOptions
+      return { ...this.options } as DataOptions
     },
   },
 
