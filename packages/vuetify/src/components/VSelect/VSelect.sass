@@ -128,3 +128,20 @@
       // the end of the container
       > input
         align-self: flex-end
+
+  &.v-input--dense
+    & > .v-input__control > .v-input__slot 
+      min-height: 38px !important
+
+      .v-select__selections
+        padding: 4px 0
+
+    &:not(.v-text-field--single-line)
+      &.v-text-field--box,
+      &.v-text-field--enclosed
+        .v-select__selections
+          min-height: 44px
+
+        &.v-select--chips--small
+          .v-select__selections
+            min-height: 42px
