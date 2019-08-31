@@ -1,4 +1,5 @@
 @import '../../styles/styles.sass'
+@import './_variables.scss'
 
 .v-menu
   display: block
@@ -18,7 +19,7 @@
   &__content
     position: absolute
     display: inline-block
-    border-radius: 2px
+    border-radius: $menu-content-border-radius
     max-width: 80%
     overflow-y: auto
     overflow-x: hidden
