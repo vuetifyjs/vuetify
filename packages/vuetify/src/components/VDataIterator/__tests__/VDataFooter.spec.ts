@@ -27,6 +27,8 @@ describe('VDataFooter.ts', () => {
 
     mountFunction = (options?: MountOptions<Instance>) => {
       return mount(VDataFooter, {
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
         mocks: {
           $vuetify: {
             lang: new Lang(),

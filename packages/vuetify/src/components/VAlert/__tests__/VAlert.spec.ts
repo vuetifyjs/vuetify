@@ -18,6 +18,8 @@ describe('VAlert.ts', () => {
     mountFunction = (options = {}) => {
       return mount(VAlert, {
         ...options,
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
         mocks: {
           $vuetify: {
             lang: {

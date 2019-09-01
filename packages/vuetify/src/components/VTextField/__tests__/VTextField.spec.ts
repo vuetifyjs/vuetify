@@ -13,6 +13,8 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
   beforeEach(() => {
     mountFunction = (options?: MountOptions<Instance>) => {
       return mount(VTextField, {
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
         mocks: {
           $vuetify: {
             rtl: false,

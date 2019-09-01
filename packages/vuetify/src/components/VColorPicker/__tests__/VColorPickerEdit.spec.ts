@@ -11,7 +11,11 @@ describe('VColorPickerEdit.ts', () => {
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {
     mountFunction = (options?: MountOptions<Instance>) => {
-      return mount(VColorPickerEdit, options)
+      return mount(VColorPickerEdit, {
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
+        ...options,
+      })
     }
   })
 

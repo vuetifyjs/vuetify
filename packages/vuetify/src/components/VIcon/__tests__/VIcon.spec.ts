@@ -20,6 +20,8 @@ describe('VIcon', () => {
 
     mountFunction = (ctx = {}, name = 'add') => {
       return mount(VIcon, {
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
         localVue,
         context: Object.assign({
           children: [name],

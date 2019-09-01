@@ -33,6 +33,8 @@ describe('VCard.vue', () => {
 
   it('should render card, which is link', () => {
     const wrapper = mountFunction({
+      // https://github.com/vuejs/vue-test-utils/issues/1130
+      sync: false,
       listeners: {
         click: () => {},
       },
@@ -74,6 +76,8 @@ describe('VCard.vue', () => {
   it('should render a card with custom height', () => {
     const heightpx = '400px'
     const wrapper = mountFunction({
+      // https://github.com/vuejs/vue-test-utils/issues/1130
+      sync: false,
       propsData: {
         height: heightpx,
       },

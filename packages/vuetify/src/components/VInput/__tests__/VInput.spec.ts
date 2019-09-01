@@ -10,7 +10,11 @@ describe('VInput.ts', () => {
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {
     mountFunction = (options?: MountOptions<Instance>) => {
-      return mount(VInput, options)
+      return mount(VInput, {
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
+        ...options,
+      })
     }
   })
 
