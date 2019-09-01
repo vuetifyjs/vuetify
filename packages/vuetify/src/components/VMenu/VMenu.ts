@@ -338,7 +338,15 @@ export default baseMixins.extend({
       return this.$createElement(
         'div',
         options,
-        this.showLazyContent(this.getContentSlot())
+        this.showLazyContent([
+          this.$createElement(ThemeProvider, {
+            props: {
+              root: true,
+              light: this.light,
+              dark: this.dark,
+            },
+          }, [this.getContentSlot()]),
+        ])
       )
     },
     getTiles () {
@@ -443,13 +451,7 @@ export default baseMixins.extend({
 
     return h('div', data, [
       !this.activator && this.genActivator(),
-      this.$createElement(ThemeProvider, {
-        props: {
-          root: true,
-          light: this.light,
-          dark: this.dark,
-        },
-      }, [this.genTransition()]),
+      this.genTransition(),
     ])
   },
 })
