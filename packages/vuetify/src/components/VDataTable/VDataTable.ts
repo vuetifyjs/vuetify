@@ -149,7 +149,12 @@ export default VDataIterator.extend({
     },
     computedItemsPerPage (): number {
       const itemsPerPage = this.options && this.options.itemsPerPage ? this.options.itemsPerPage : this.itemsPerPage
-      if (this.sanitizedFooterProps.itemsPerPageOptions && !this.sanitizedFooterProps.itemsPerPageOptions.includes(itemsPerPage)) {
+      if (
+        this.sanitizedFooterProps.itemsPerPageOptions &&
+        !this.sanitizedFooterProps.itemsPerPageOptions.find((item: number | { value: number }) => {
+          return typeof item === 'number' ? item === itemsPerPage : item.value === itemsPerPage
+        })
+      ) {
         const firstOption = this.sanitizedFooterProps.itemsPerPageOptions[0]
         return typeof firstOption === 'object' ? firstOption.value : firstOption
       }
