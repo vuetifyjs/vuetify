@@ -269,7 +269,15 @@ export default baseMixins.extend({
 
     children.push(this.genActivator())
 
-    let dialog = h('div', data, this.showLazyContent(this.getContentSlot()))
+    let dialog = h('div', data, this.showLazyContent([
+      this.$createElement(ThemeProvider, {
+        props: {
+          root: true,
+          light: this.light,
+          dark: this.dark,
+        },
+      }, [this.getContentSlot()]),
+    ]))
     if (this.transition) {
       dialog = h('transition', {
         props: {
@@ -292,15 +300,7 @@ export default baseMixins.extend({
       },
       style: { zIndex: this.activeZIndex },
       ref: 'content',
-    }, [
-      this.$createElement(ThemeProvider, {
-        props: {
-          root: true,
-          light: this.light,
-          dark: this.dark,
-        },
-      }, [dialog]),
-    ]))
+    }, [dialog]))
 
     return h('div', {
       staticClass: 'v-dialog__container',
