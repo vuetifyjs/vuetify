@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card
-      class="d-flex flex-no-wrap py-3"
+      class="d-flex flex-nowrap py-3"
       color="grey lighten-2"
       flat
       tile
