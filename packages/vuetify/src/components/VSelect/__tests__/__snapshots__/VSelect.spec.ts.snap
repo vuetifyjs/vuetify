@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VSelect.ts should escape items in menu 1`] = `
-<div id="&amp;lt;strong&amp;gt;foo&amp;lt;/strong&amp;gt;-list-item-111"
+<div id="&amp;lt;strong&amp;gt;foo&amp;lt;/strong&amp;gt;-list-item-102"
      class="v-list-item__title"
 >
   &lt;strong&gt;foo&lt;/strong&gt;
@@ -14,7 +14,7 @@ exports[`VSelect.ts should only show items if they are in items 1`] = `
     <div role="button"
          aria-haspopup="listbox"
          aria-expanded="false"
-         aria-owns="list-72"
+         aria-owns="list-67"
          class="v-input__slot"
     >
       <div class="v-select__slot">
@@ -22,7 +22,7 @@ exports[`VSelect.ts should only show items if they are in items 1`] = `
           <div class="v-select__selection v-select__selection--comma">
             foo
           </div>
-          <input id="input-72"
+          <input id="input-67"
                  readonly="readonly"
                  type="text"
                  aria-readonly="true"
@@ -64,12 +64,12 @@ exports[`VSelect.ts should only show items if they are in items 2`] = `
     <div role="button"
          aria-haspopup="listbox"
          aria-expanded="false"
-         aria-owns="list-72"
+         aria-owns="list-67"
          class="v-input__slot"
     >
       <div class="v-select__slot">
         <div class="v-select__selections">
-          <input id="input-72"
+          <input id="input-67"
                  readonly="readonly"
                  type="text"
                  aria-readonly="true"
@@ -111,7 +111,7 @@ exports[`VSelect.ts should only show items if they are in items 3`] = `
     <div role="button"
          aria-haspopup="listbox"
          aria-expanded="false"
-         aria-owns="list-72"
+         aria-owns="list-67"
          class="v-input__slot"
     >
       <div class="v-select__slot">
@@ -119,7 +119,7 @@ exports[`VSelect.ts should only show items if they are in items 3`] = `
           <div class="v-select__selection v-select__selection--comma">
             bar
           </div>
-          <input id="input-72"
+          <input id="input-67"
                  readonly="readonly"
                  type="text"
                  aria-readonly="true"
@@ -161,7 +161,7 @@ exports[`VSelect.ts should only show items if they are in items 4`] = `
     <div role="button"
          aria-haspopup="listbox"
          aria-expanded="false"
-         aria-owns="list-72"
+         aria-owns="list-67"
          class="v-input__slot"
     >
       <div class="v-select__slot">
@@ -172,7 +172,7 @@ exports[`VSelect.ts should only show items if they are in items 4`] = `
           <div class="v-select__selection v-select__selection--comma">
             bar
           </div>
-          <input id="input-72"
+          <input id="input-67"
                  readonly="readonly"
                  type="text"
                  aria-readonly="true"
@@ -214,12 +214,12 @@ exports[`VSelect.ts should render v-select correctly when not using scope slot 1
     <div role="button"
          aria-haspopup="listbox"
          aria-expanded="false"
-         aria-owns="list-38"
+         aria-owns="list-35"
          class="v-input__slot"
     >
       <div class="v-select__slot">
         <div class="v-select__selections">
-          <input id="input-38"
+          <input id="input-35"
                  readonly="readonly"
                  type="text"
                  aria-readonly="true"
@@ -261,12 +261,12 @@ exports[`VSelect.ts should render v-select correctly when not using v-list-item 
     <div role="button"
          aria-haspopup="listbox"
          aria-expanded="false"
-         aria-owns="list-30"
+         aria-owns="list-28"
          class="v-input__slot"
     >
       <div class="v-select__slot">
         <div class="v-select__selections">
-          <input id="input-30"
+          <input id="input-28"
                  readonly="readonly"
                  type="text"
                  aria-readonly="true"
@@ -308,12 +308,12 @@ exports[`VSelect.ts should render v-select correctly when using v-list-item in i
     <div role="button"
          aria-haspopup="listbox"
          aria-expanded="false"
-         aria-owns="list-21"
+         aria-owns="list-20"
          class="v-input__slot"
     >
       <div class="v-select__slot">
         <div class="v-select__selections">
-          <input id="input-21"
+          <input id="input-20"
                  readonly="readonly"
                  type="text"
                  aria-readonly="true"
@@ -351,18 +351,18 @@ exports[`VSelect.ts should render v-select correctly when using v-list-item in i
 
 exports[`VSelect.ts should use slotted no-data 1`] = `
 <div role="listbox"
-     id="list-173"
+     id="list-157"
      tabindex="-1"
      class="v-list v-sheet v-sheet--tile theme--light"
 >
   <div tabindex="0"
        aria-selected="false"
-       aria-labelledby="foo-list-item-178"
+       aria-labelledby="foo-list-item-162"
        role="option"
        class="v-list-item v-list-item--link theme--light"
   >
     <div class="v-list-item__content">
-      <div id="foo-list-item-178"
+      <div id="foo-list-item-162"
            class="v-list-item__title"
       >
         foo
