@@ -7,10 +7,10 @@
           <v-toolbar-title class="white--text">My files</v-toolbar-title>
           <div class="flex-grow-1"></div>
           <v-btn icon>
-            <v-icon>search</v-icon>
+            <v-icon>mdi-magnify</v-icon>
           </v-btn>
           <v-btn icon>
-            <v-icon>view_module</v-icon>
+            <v-icon>mdi-view-module</v-icon>
           </v-btn>
           <template v-slot:extension>
             <v-btn
@@ -21,7 +21,7 @@
               absolute
               @click="dialog = !dialog"
             >
-              <v-icon>add</v-icon>
+              <v-icon>mdi-plus</v-icon>
             </v-btn>
           </template>
         </v-toolbar>
@@ -37,7 +37,7 @@
             </v-list-item-content>
             <v-list-item-action>
               <v-btn icon>
-                <v-icon color="grey lighten-1">info</v-icon>
+                <v-icon color="grey lighten-1">mdi-information</v-icon>
               </v-btn>
             </v-list-item-action>
           </v-list-item>
@@ -53,7 +53,7 @@
             </v-list-item-content>
             <v-list-item-action>
               <v-btn icon ripple>
-                <v-icon color="grey lighten-1">info</v-icon>
+                <v-icon color="grey lighten-1">mdi-information</v-icon>
               </v-btn>
             </v-list-item-action>
           </v-list-item>

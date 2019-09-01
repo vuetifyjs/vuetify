@@ -11,6 +11,16 @@
       "type": "section",
       "children": [
         {
+          "type": "alert",
+          "lang": "alert1",
+          "value": "info"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "usage",
           "value": "usage"
         }
@@ -77,8 +87,8 @@
         {
           "type": "up-next",
           "value": [
-            "components/avatars",
-            "components/icons",
+            "components/item-groups",
+            "components/list-item-groups",
             "components/subheaders"
           ]
         }

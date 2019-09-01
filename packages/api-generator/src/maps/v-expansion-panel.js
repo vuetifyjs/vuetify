@@ -17,10 +17,6 @@ module.exports = {
         name: 'actions',
         props: undefined,
       },
-      {
-        name: 'icon',
-        props: undefined,
-      },
     ],
     events: [
       {

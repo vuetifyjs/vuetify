@@ -55,7 +55,6 @@
     "justifySpaceBetween": "Выравнять контент space between.",
     "justifyStart": "Выравнять контент start.",
     "v-container": {
-      "grid-list-{xs through xl}": "Устанавливает gutter между элементами списка сетки в диапазоне от 2 до 24 пикселей",
       "fluid": "Удаляет контрольные точки размера viewport"
     },
     "v-layout": {

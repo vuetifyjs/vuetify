@@ -3,6 +3,9 @@
 
 // Theme
 +theme(v-list-item) using ($material)
+  &--active
+    color: map-deep-get($material, 'text', 'primary')
+
   &--disabled
     color: map-deep-get($material, 'text', 'disabled')
 

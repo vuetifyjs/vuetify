@@ -6,7 +6,7 @@
     <v-list>
       <v-list-item>
         <v-list-item-icon>
-          <v-icon>home</v-icon>
+          <v-icon>mdi-home</v-icon>
         </v-list-item-icon>
 
         <v-list-item-title>Home</v-list-item-title>
