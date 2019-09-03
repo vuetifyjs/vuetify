@@ -2,9 +2,9 @@
 import { Service } from '../service'
 
 // Types
-import { VuetifyBreakpointOptions } from 'vuetify/types/services/breakpoint'
+import { BreakpointOptions, Breakpoint as IBreakpoint } from 'vuetify/types/services/breakpoint'
 
-export class Breakpoint extends Service {
+export class Breakpoint extends Service implements IBreakpoint {
   public static property = 'breakpoint'
 
   // Public
@@ -53,19 +53,19 @@ export class Breakpoint extends Service {
     lg: 1920,
   }
 
-  public scrollbarWidth = 16
+  public scrollBarWidth = 16
 
   private resizeTimeout = 0
 
-  constructor (options: Partial<VuetifyBreakpointOptions> = {}) {
+  constructor (options: Partial<BreakpointOptions> = {}) {
     super()
     this.thresholds = {
       ...this.thresholds,
       ...options.thresholds,
     }
-    this.scrollbarWidth = (
+    this.scrollBarWidth = (
       options.scrollBarWidth ||
-      this.scrollbarWidth
+      this.scrollBarWidth
     )
     this.init()
   }
@@ -100,9 +100,9 @@ export class Breakpoint extends Service {
 
     const xs = width < this.thresholds.xs
     const sm = width < this.thresholds.sm && !xs
-    const md = width < (this.thresholds.md - this.scrollbarWidth) && !(sm || xs)
-    const lg = width < (this.thresholds.lg - this.scrollbarWidth) && !(md || sm || xs)
-    const xl = width >= (this.thresholds.lg - this.scrollbarWidth)
+    const md = width < (this.thresholds.md - this.scrollBarWidth) && !(sm || xs)
+    const lg = width < (this.thresholds.lg - this.scrollBarWidth) && !(md || sm || xs)
+    const xl = width >= (this.thresholds.lg - this.scrollBarWidth)
 
     this.height = height
     this.width = width
