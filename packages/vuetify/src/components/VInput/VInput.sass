@@ -57,10 +57,16 @@
       user-select: none
 
   &__append-outer
-    margin-left: 9px
+    +ltr()
+      margin-left: 9px
+    +rtl()
+      margin-right: 9px
 
   &__prepend-outer
-    margin-right: 9px
+    +ltr()
+      margin-right: 9px
+    +rtl()
+      margin-left: 9px
 
   &__control
     display: flex

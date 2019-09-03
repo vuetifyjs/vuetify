@@ -12,7 +12,7 @@
         vertical
       ></v-divider>
 
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
 
       <v-toolbar-items>
         <v-btn text>
@@ -37,8 +37,8 @@
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
     </v-toolbar>
 
-    <v-layout v-else>
-      <v-flex xs12 sm6 offset-sm3>
+    <v-row v-else>
+      <v-col cols="12" sm="6" offset-sm="3">
         <v-card>
           <v-list>
             <v-list-item @click="">
@@ -104,16 +104,16 @@
             </v-list-item>
           </v-list>
         </v-card>
-      </v-flex>
-    </v-layout>
-    <v-layout
+      </v-col>
+    </v-row>
+    <v-row
       class="mt-12"
-      align-center
-      justify-center
+      align="center"
+      justify="center"
     >
-      <v-flex
-        xs12
-        md8
+      <v-col
+        cols="12"
+        md="8"
       >
         <v-select
           v-model="variant"
@@ -130,8 +130,8 @@
             light
           ></v-checkbox>
         </template>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </div>
 </template>
 

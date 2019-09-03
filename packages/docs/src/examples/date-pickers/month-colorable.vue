@@ -1,12 +1,12 @@
 <template>
-  <v-layout wrap>
-    <v-flex md12 lg6>
+  <v-row>
+    <v-col md="12" lg="6">
       <v-date-picker v-model="picker" type="month" color="green lighten-1"></v-date-picker>
-    </v-flex>
-    <v-flex md12 lg6 class="hidden-xs-only">
+    </v-col>
+    <v-col md="12" lg="6" class="hidden-xs-only">
       <v-date-picker v-model="picker2" type="month" color="green lighten-1" header-color="primary"></v-date-picker>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

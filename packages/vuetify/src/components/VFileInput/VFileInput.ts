@@ -83,13 +83,17 @@ export default VTextField.extend({
       }
     },
     counterValue (): string {
-      if (!this.showSize) return this.$vuetify.lang.t(this.counterString, this.lazyValue.length)
+      const fileCount = (this.isMultiple && this.lazyValue)
+        ? this.lazyValue.length
+        : (this.lazyValue instanceof File) ? 1 : 0
+
+      if (!this.showSize) return this.$vuetify.lang.t(this.counterString, fileCount)
 
       const bytes = this.internalArrayValue.reduce((size: number, file: File) => size + file.size, 0)
 
       return this.$vuetify.lang.t(
         this.counterSizeString,
-        this.lazyValue.length,
+        fileCount,
         humanReadableFileSize(bytes, this.base === 1024)
       )
     },
@@ -157,6 +161,13 @@ export default VTextField.extend({
 
       input.data!.domProps!.value = this.internalFileInput
 
+      // This solves an issue in Safari where
+      // nothing happens when adding a file
+      // do to the input event not firing
+      // https://github.com/vuetifyjs/vuetify/issues/7941
+      delete input.data!.on!.input
+      input.data!.on!.change = this.onInput
+
       return [this.genSelections(), input]
     },
     genPrependSlot () {
@@ -179,7 +190,7 @@ export default VTextField.extend({
       const children = []
 
       if (this.isDirty && this.$scopedSlots.selection) {
-        this.internalValue.forEach((file: File, index: number) => {
+        this.internalArrayValue.forEach((file: File, index: number) => {
           if (!this.$scopedSlots.selection) return
 
           children.push(
@@ -209,6 +220,14 @@ export default VTextField.extend({
       const files = [...(e.target as HTMLInputElement).files || []]
 
       this.internalValue = this.isMultiple ? files : files[0]
+
+      // Set initialValue here otherwise isFocused
+      // watcher in VTextField will emit a change
+      // event whenever the component is blurred
+      this.initialValue = this.internalValue
+    },
+    onKeyDown (e: KeyboardEvent) {
+      this.$emit('keydown', e)
     },
     truncateText (str: string) {
       if (str.length < Number(this.truncateLength)) return str

@@ -1,44 +1,44 @@
 <template>
   <v-form>
-    <v-container grid-list-xl>
-      <v-layout wrap>
+    <v-container>
+      <v-row>
 
-        <v-flex xs12 sm6>
+        <v-col cols="12" sm="6">
           <v-text-field
             v-model="message1"
             label="Regular"
             clearable
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6>
+        <v-col cols="12" sm="6">
           <v-text-field
             v-model="message2"
             solo
             label="Solo"
             clearable
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6>
+        <v-col cols="12" sm="6">
           <v-text-field
             v-model="message3"
             filled
             label="Filled"
             clearable
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6>
+        <v-col cols="12" sm="6">
           <v-text-field
             v-model="message4"
-            label="Outline"
+            label="Outlined"
             outlined
             clearable
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-      </v-layout>
+      </v-row>
     </v-container>
   </v-form>
 </template>

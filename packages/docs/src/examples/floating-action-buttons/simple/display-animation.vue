@@ -1,24 +1,26 @@
 <template>
-  <v-container fluid grid-list-lg>
-    <v-layout wrap>
-      <v-flex xs12 sm12 md6 offset-md3>
+  <v-container fluid>
+    <v-row>
+      <v-col cols="12" sm="12" md="6" offset-md="3">
         <v-card>
           <v-toolbar extended>
             <v-app-bar-nav-icon></v-app-bar-nav-icon>
-            <v-fab-transition>
-              <v-btn
-                v-show="!hidden"
-                color="pink"
-                fab
-                dark
-                small
-                absolute
-                bottom
-                left
-              >
-                <v-icon>add</v-icon>
-              </v-btn>
-            </v-fab-transition>
+            <template v-slot:extension>
+              <v-fab-transition>
+                <v-btn
+                  v-show="!hidden"
+                  color="pink"
+                  fab
+                  dark
+                  small
+                  absolute
+                  bottom
+                  left
+                >
+                  <v-icon>add</v-icon>
+                </v-btn>
+              </v-fab-transition>
+            </template>
           </v-toolbar>
           <v-card-text style="height: 300px;" class="grey lighten-5 text-center">
             <v-btn color="primary" @click="hidden = !hidden">
@@ -41,8 +43,8 @@
             </v-fab-transition>
           </v-card-text>
         </v-card>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

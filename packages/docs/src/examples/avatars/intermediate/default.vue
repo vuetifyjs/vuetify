@@ -1,5 +1,5 @@
 <template>
-  <v-layout justify-space-around wrap>
+  <v-row justify="space-around">
 
     <v-avatar color="indigo">
       <v-icon dark>account_circle</v-icon>
@@ -16,5 +16,5 @@
       <span class="white--text headline">CJ</span>
     </v-avatar>
 
-  </v-layout>
+  </v-row>
 </template>

@@ -80,7 +80,7 @@
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/framework/internationalization</loc>
+       <loc>https://vuetifyjs.com/en/customization/internationalization</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
@@ -99,12 +99,6 @@
   </url>
   <url>
        <loc>https://vuetifyjs.com/en/components/grids</loc>
-       <lastmod>2019-01-07</lastmod>
-       <changefreq>daily</changefreq>
-       <priority>0.8000</priority>
-  </url>
-  <url>
-       <loc>https://vuetifyjs.com/en/components/grid-lists</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
@@ -146,7 +140,7 @@
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/framework/alignment</loc>
+       <loc>https://vuetifyjs.com/en/styles/text</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
@@ -500,7 +494,13 @@
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/components/progress</loc>
+       <loc>https://vuetifyjs.com/en/components/progress-circular</loc>
+       <lastmod>2019-01-07</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://vuetifyjs.com/en/components/progress-linear</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>

@@ -11,9 +11,9 @@
       <v-icon dark>check_circle</v-icon>
     </v-snackbar>
     <v-form ref="form" @submit.prevent="submit">
-      <v-container grid-list-xl fluid>
-        <v-layout wrap>
-          <v-flex xs12 sm6>
+      <v-container fluid>
+        <v-row>
+          <v-col cols="12" sm="6">
             <v-text-field
               v-model="form.first"
               :rules="rules.name"
@@ -21,8 +21,8 @@
               label="First name"
               required
             ></v-text-field>
-          </v-flex>
-          <v-flex xs12 sm6>
+          </v-col>
+          <v-col cols="12" sm="6">
             <v-text-field
               v-model="form.last"
               :rules="rules.name"
@@ -30,8 +30,8 @@
               label="Last name"
               required
             ></v-text-field>
-          </v-flex>
-          <v-flex xs12>
+          </v-col>
+          <v-col cols="12">
             <v-textarea
               v-model="form.bio"
               color="teal"
@@ -42,8 +42,8 @@
                 </div>
               </template>
             </v-textarea>
-          </v-flex>
-          <v-flex xs12 sm6>
+          </v-col>
+          <v-col cols="12" sm="6">
             <v-select
               v-model="form.favoriteAnimal"
               :items="animals"
@@ -52,8 +52,8 @@
               label="Favorite animal"
               required
             ></v-select>
-          </v-flex>
-          <v-flex xs12 sm6>
+          </v-col>
+          <v-col cols="12" sm="6">
             <v-slider
               v-model="form.age"
               :rules="rules.age"
@@ -64,8 +64,8 @@
               max="100"
               thumb-label
             ></v-slider>
-          </v-flex>
-          <v-flex xs12>
+          </v-col>
+          <v-col cols="12">
             <v-checkbox
               v-model="form.terms"
               color="green"
@@ -79,12 +79,12 @@
                 </div>
               </template>
             </v-checkbox>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
       <v-card-actions>
         <v-btn text @click="resetForm">Cancel</v-btn>
-        <v-spacer></v-spacer>
+        <div class="flex-grow-1"></div>
         <v-btn
           :disabled="!formIsValid"
           text
@@ -100,7 +100,7 @@
           {{ content }}
         </v-card-text>
         <v-card-actions>
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
           <v-btn
             text
             color="purple"
@@ -116,7 +116,7 @@
           {{ content }}
         </v-card-text>
         <v-card-actions>
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
           <v-btn
             text
             color="purple"

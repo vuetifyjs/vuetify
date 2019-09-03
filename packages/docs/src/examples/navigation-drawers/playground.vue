@@ -1,19 +1,13 @@
 <template>
-  <v-layout
-    column
-    align-stretch
-  >
-    <v-layout
-      wrap
-      justify-space-around
-    >
-      <v-flex xs12>
+  <v-row align="stretch">
+    <v-row justify="space-around">
+      <v-col cols="12">
         <v-select
           v-model="color"
           :items="colors"
           label="Color"
         ></v-select>
-      </v-flex>
+      </v-col>
 
       <v-switch
         v-model="drawer"
@@ -44,7 +38,7 @@
         class="ma-2"
         label="Right"
       ></v-switch>
-    </v-layout>
+    </v-row>
 
     <v-card
       height="400"
@@ -93,7 +87,7 @@
         </v-list>
       </v-navigation-drawer>
     </v-card>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

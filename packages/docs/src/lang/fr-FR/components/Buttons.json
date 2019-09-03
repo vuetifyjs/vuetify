@@ -22,8 +22,7 @@
       "desc": "Les icônes peuvent être utilisées pour le contenu primaire d'un bouton."
     },
     "floating": {
-      "header": "### Flottant",
-      "desc": "Les boutons flottants sont ronds et contiennent généralement une icône."
+      "header": "### Flottant"
     },
     "loaders": {
       "header": "### Chargements",
@@ -32,13 +31,6 @@
     "sizing": {
       "header": "### Taille",
       "desc": "Les boutons peuvent être dotés de différentes options de tailles pour s'adapter à une multitude de scénarios."
-    },
-    "outline": {
-      "header": "### Alertes avec bordures",
-      "desc": "Les contours de boutons héritent leurs bordures de la couleur appliquée."
-    },
-    "round": {
-      "desc": "Les boutons arrondis se comportent comme des boutons réguliers mais ont des bords arrondis."
     },
     "block": {
       "header": "### Bloc",

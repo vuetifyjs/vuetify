@@ -19,11 +19,11 @@
     },
     "size": {
       "header": "### Size displaying",
-      "desc": "The displayed size of the selected file(s) can be configured with the **display-size** property. Display sizes can be either _1024_ (the default used when providing **true**) or _1000_."
+      "desc": "The displayed size of the selected file(s) can be configured with the **show-size** property. Display sizes can be either _1024_ (the default used when providing **true**) or _1000_."
     },
     "counter": {
       "header": "### Counter",
-      "desc": "When using the **display-size** property along with **counter**, the total number of files and size will be displayed under the input."
+      "desc": "When using the **show-size** property along with **counter**, the total number of files and size will be displayed under the input."
     },
     "selection": {
       "header": "### Selection slot",
@@ -31,7 +31,7 @@
     },
     "custom-icon": {
       "header": "### Custom icons",
-      "desc": "The `v-file-input` has a default prepended icon that can be set on the component or adjusted globally. More information on changing global components can be found on the [customizing icons page](/customizing/icons)."
+      "desc": "The `v-file-input` has a default prepended icon that can be set on the component or adjusted globally. More information on changing global components can be found on the [customizing icons page](/customization/icons)."
     },
     "validation": {
       "header": "### Validation",
@@ -45,7 +45,7 @@
   "props": {
     "accept": "One or more [unique file type specifiers](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#Unique_file_type_specifiers) describing file types to allow.",
     "chips": "Components.Selects.props.chips",
-    "counterSizeString": "The text displayed when using the **counter** and **display-size** props. Can also be customized globally on the [internationalization page](/customization/internationalization).",
+    "counterSizeString": "The text displayed when using the **counter** and **show-size** props. Can also be customized globally on the [internationalization page](/customization/internationalization).",
     "counterString": "The text displayed when using the **counter** prop. Can also be customized globally on the [internationalization page](/customization/internationalization).",
     "multiple": "Adds the **multiple** attribute to the input, allowing multiple file selections.",
     "showSize": "Sets the displayed size of selected file(s). When using **true** will default to _1000_ displaying (**kB, MB, GB**) while _1024_ will display (**KiB, MiB, GiB**).",

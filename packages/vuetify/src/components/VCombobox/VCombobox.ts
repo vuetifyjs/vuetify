@@ -154,7 +154,7 @@ export default VAutocomplete.extend({
       if (this.editingIndex > -1) {
         this.updateEditing()
       } else {
-        VSelect.options.methods.selectItem.call(this, item)
+        VAutocomplete.options.methods.selectItem.call(this, item)
       }
     },
     setSelectedItems () {

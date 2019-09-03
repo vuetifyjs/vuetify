@@ -9,6 +9,9 @@
     border-radius: 50%
     user-select: none
 
+    +rtl()
+      transform: scaleX(-1)
+
   &--readonly
     .v-icon
       pointer-events: none

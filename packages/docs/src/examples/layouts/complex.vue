@@ -26,7 +26,7 @@
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Toolbar</v-toolbar-title>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <v-app-bar-nav-icon @click.stop="drawerRight = !drawerRight"></v-app-bar-nav-icon>
     </v-app-bar>
 
@@ -54,14 +54,14 @@
 
     <v-content>
       <v-container
+        class="fill-height"
         fluid
-        fill-height
       >
-        <v-layout
-          justify-center
-          align-center
+        <v-row
+          justify="center"
+          align="center"
         >
-          <v-flex shrink>
+          <v-col class="shrink">
             <v-tooltip right>
               <template v-slot:activator="{ on }">
                 <v-btn
@@ -90,8 +90,8 @@
               </template>
               <span>Codepen</span>
             </v-tooltip>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
 
@@ -108,7 +108,7 @@
       class="white--text"
     >
       <span>Vuetify</span>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <span>&copy; 2019</span>
     </v-footer>
   </v-app>

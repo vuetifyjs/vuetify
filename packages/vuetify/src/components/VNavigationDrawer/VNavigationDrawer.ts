@@ -109,6 +109,7 @@ export default baseMixins.extend({
       left: 0,
       right: 0,
     },
+    stackMinZIndex: 6,
   }),
 
   computed: {
@@ -299,7 +300,7 @@ export default baseMixins.extend({
       }
     },
     closeConditional () {
-      return this.isActive && this.reactsToClick
+      return this.isActive && !this._isDestroyed && this.reactsToClick
     },
     genAppend () {
       return this.genPosition('append')

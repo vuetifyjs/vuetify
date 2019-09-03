@@ -345,6 +345,10 @@ export default VSelect.extend({
       // instead activate the menu
       this.activateMenu()
     },
+    selectItem (item: object) {
+      VSelect.options.methods.selectItem.call(this, item)
+      this.setSearch()
+    },
     setSelectedItems () {
       VSelect.options.methods.setSelectedItems.call(this)
 

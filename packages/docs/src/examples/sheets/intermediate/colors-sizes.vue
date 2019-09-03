@@ -1,13 +1,12 @@
 <template>
-  <v-container grid-list-xl>
-    <v-layout
-      flex-child
-      wrap
+  <v-container>
+    <v-row
+      class="flex-child"
     >
-      <v-flex
-        xs12
-        md4
-        d-flex
+      <v-col
+        class="d-flex"
+        cols="12"
+        md="4"
       >
         <v-sheet
           class="d-flex"
@@ -18,15 +17,15 @@
             #1: (3r x 2c)
           </sheet-footer>
         </v-sheet>
-      </v-flex>
+      </v-col>
 
-      <v-flex
-        xs12
-        md4
-        d-flex
+      <v-col
+        class="d-flex"
+        cols="12"
+        md="4"
       >
-        <v-layout wrap>
-          <v-flex xs6>
+        <v-row>
+          <v-col cols="6">
             <v-sheet
               class="d-flex"
               color="green lighten-3"
@@ -36,8 +35,8 @@
                 #2: (1r x 1c)
               </sheet-footer>
             </v-sheet>
-          </v-flex>
-          <v-flex xs6>
+          </v-col>
+          <v-col cols="6">
             <v-sheet
               class="d-flex"
               color="yellow lighten-3"
@@ -47,8 +46,8 @@
                 #3: (1r x 1c)
               </sheet-footer>
             </v-sheet>
-          </v-flex>
-          <v-flex xs12>
+          </v-col>
+          <v-col cols="12">
 
             <v-sheet
               class="d-flex"
@@ -59,12 +58,12 @@
                 #5: (2r x 2c)
               </sheet-footer>
             </v-sheet>
-          </v-flex>
-        </v-layout>
-      </v-flex>
-      <v-flex
-        xs6
-        md2
+          </v-col>
+        </v-row>
+      </v-col>
+      <v-col
+        cols="6"
+        md="2"
       >
         <v-sheet
           class="d-flex"
@@ -75,11 +74,11 @@
             #4: (2r x 1c)
           </sheet-footer>
         </v-sheet>
-      </v-flex>
-      <v-flex
-        xs6
-        md2
-        d-flex
+      </v-col>
+      <v-col
+        class="d-flex"
+        cols="6"
+        md="2"
       >
         <v-sheet
           class="d-flex mt-auto"
@@ -90,8 +89,8 @@
             #6: (2r x 1c)
           </sheet-footer>
         </v-sheet>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
