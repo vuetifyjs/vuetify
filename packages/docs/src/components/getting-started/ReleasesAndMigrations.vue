@@ -52,9 +52,7 @@
 
     mounted () {
       this.branch = getBranch()
-      // replace with this when ready to push pr
-      // fetch(`https://api.github.com/repos/vuetifyjs/vuetify/contents/MIGRATION.md?ref=${this.branch}`, {
-      fetch(`https://api.github.com/repos/vuetifyjs/vuetify/contents/MIGRATION.md?ref=feat/migration-page`, {
+      fetch(`https://api.github.com/repos/vuetifyjs/vuetify/contents/MIGRATION.md?ref=${this.branch}`, {
         method: 'get',
         headers: { 'Content-Type': 'application/json' },
       })
