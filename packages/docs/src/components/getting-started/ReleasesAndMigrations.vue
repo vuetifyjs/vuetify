@@ -33,7 +33,7 @@
         <doc-subheading>migrationHeader</doc-subheading>
       </v-card-title>
       <v-card-text>
-        <doc-markdown :code="migration || ' '" />
+        <doc-markdown class="migration-markdown" :code="migration || ' '" />
       </v-card-text>
     </v-card>
   </v-container>
@@ -75,8 +75,8 @@
   }
 </script>
 <style lang="sass" scoped>
-  pre
-    background: #2d2d2d
+  ::v-deep pre
+    background: #2d2d2d !important
     padding: 8px
     margin: 8px
 
