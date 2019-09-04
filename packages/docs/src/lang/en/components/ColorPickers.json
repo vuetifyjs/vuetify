@@ -11,7 +11,7 @@
     },
     "swatches": {
       "header": "### Swatches",
-      "desc": "Using the `show-swatches` prop you can display an array of color swatches that users can pick from. It is also possible to customize what colors are shown using the `swatches` prop. You can also set the max height of the swatches section with the `swatches-max-height` prop."
+      "desc": "Using the `show-swatches` prop you can display an array of color swatches that users can pick from. It is also possible to customize what colors are shown using the `swatches` prop. This prop accepts a wwo-dimensional array, where the first dimension defines a column, and second dimension defines the swatches from top to bottom by providing rgba hex strings. You can also set the max height of the swatches section with the `swatches-max-height` prop."
     },
     "inputs": {
       "header": "### Inputs",
@@ -33,7 +33,7 @@
       "hideModeSwitch": "Hides mode switch",
       "mode": "Sets mode of inputs. Available modes are 'rgba', 'hsla', and 'hexa'. Can be synced with the `.sync` modifier.",
       "showSwatches": "Displays color swatches",
-      "swatches": "Sets the available color swatches to select from",
+      "swatches": "Sets the available color swatches to select from - This prop only accepts rgba hex strings",
       "swatchesMaxHeight": "Sets the maximum height of the swatches section",
       "value": "Current color. This can be either a string representing a hex color, or an object representing a RGBA, HSLA, or HSVA value",
       "width": "Sets the width of the color picker"
