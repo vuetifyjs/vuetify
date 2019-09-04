@@ -96,6 +96,7 @@ export const BaseSlideGroup = mixins<options &
       return {
         ...BaseItemGroup.options.computed.classes.call(this),
         'v-slide-group': true,
+        'v-slide-group--is-overflowing': this.isOverflowing,
       }
     },
     hasAffixes (): Boolean {

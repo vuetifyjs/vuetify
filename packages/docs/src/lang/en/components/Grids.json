@@ -56,7 +56,7 @@
     },
     "wrapping": {
       "header": "### Column wrapping",
-      "desc": "When more than 12 columns are placed within a given row (that is not using the `.flex-no-wrap` utility class), each group of extra columns will wrap onto a new line."
+      "desc": "When more than 12 columns are placed within a given row (that is not using the `.flex-nowrap` utility class), each group of extra columns will wrap onto a new line."
     },
     "order": {
       "header": "### Order classes",

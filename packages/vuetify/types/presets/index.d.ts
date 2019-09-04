@@ -1,13 +1,13 @@
-import { VuetifyBreakpointOptions } from 'vuetify/types/services/breakpoint'
-import { VuetifyIconOptions } from 'vuetify/types/services/icons'
-import { VuetifyLangOptions } from 'vuetify/types/services/lang'
-import { VuetifyThemeOptions } from 'vuetify/types/services/theme'
+import { Breakpoint } from 'vuetify/types/services/breakpoint'
+import { Icons } from 'vuetify/types/services/icons'
+import { Lang } from 'vuetify/types/services/lang'
+import { Theme } from 'vuetify/types/services/theme'
 
 export interface VuetifyPreset {
   [name: string]: any
 
-  breakpoint?: VuetifyBreakpointOptions
-  locale?: VuetifyLangOptions
-  icons?: VuetifyIconOptions
-  theme?: VuetifyThemeOptions
+  breakpoint?: Partial<Breakpoint>
+  icons?: Partial<Icons>
+  locale?: Partial<Lang>
+  theme?: { [P in keyof Theme]?: Partial<Theme[P]> }
 }

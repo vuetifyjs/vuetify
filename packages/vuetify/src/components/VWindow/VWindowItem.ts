@@ -98,8 +98,12 @@ export default baseMixins.extend<options>().extend(
       if (this.windowGroup.transitionCount > 0) {
         this.windowGroup.transitionCount--
 
-        // Remove container height if we are out of transition.
-        if (this.windowGroup.transitionCount === 0) {
+        // Remove container height if we are out of transition
+        // and window group allows its height to be modified
+        if (
+          this.windowGroup.transitionCount === 0 &&
+          !this.windowGroup.noHeightReset
+        ) {
           this.windowGroup.internalHeight = undefined
         }
       }

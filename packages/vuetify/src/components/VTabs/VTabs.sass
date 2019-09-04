@@ -47,7 +47,7 @@
   height: $tabs-bar-height
 
   // https://github.com/vuetifyjs/vuetify/issues/6932
-  &.v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows) > .v-slide-group__wrapper > .v-tabs-bar__content
+  &.v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows) > .v-slide-group__wrapper > .v-tabs-bar__content
     & > .v-tab:first-child,
     & > .v-tabs-slider-wrapper + .v-tab
       +ltr()

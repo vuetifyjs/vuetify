@@ -28,7 +28,7 @@
         <v-col
           v-for="card in cards"
           :key="card.title"
-          v-bind="{ [`xs${card.flex}`]: true }"
+          :cols="card.flex"
         >
           <v-card>
             <v-img

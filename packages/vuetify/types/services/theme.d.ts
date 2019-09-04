@@ -1,24 +1,22 @@
-import { Theme } from '../../src/services/theme'
-
-export interface VuetifyThemeOptions {
-  dark?: boolean
-  disable?: boolean
-  default?: string | false
-  options?: {
+export interface Theme {
+  dark: boolean
+  disable: boolean
+  default: string | false
+  options: {
     /** @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#Unsafe_inline_script */
     cspNonce?: string | null
     customProperties?: boolean
     minifyTheme?: ((css: string) => string) | null
     themeCache?: VuetifyThemeCache
   }
-  themes?: {
-    dark?: Partial<VuetifyThemeVariant>
-    light?: Partial<VuetifyThemeVariant>
+  themes: {
+    dark: Partial<VuetifyThemeVariant>
+    light: Partial<VuetifyThemeVariant>
   }
 }
 
 export interface VuetifyThemes {
-  dark: VuetifyThemeVariant,
+  dark: VuetifyThemeVariant
   light: VuetifyThemeVariant
 }
 
@@ -59,4 +57,4 @@ export interface VuetifyParsedThemeItem {
   darken4: string
 }
 
-export type VuetifyThemeItem = VuetifyParsedThemeItem | string | number | undefined
+export type VuetifyThemeItem = Partial<VuetifyParsedThemeItem> | string | number | undefined
