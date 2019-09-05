@@ -46,15 +46,16 @@
   border-radius: inherit
   height: $tabs-bar-height
 
-  // https://github.com/vuetifyjs/vuetify/issues/6932
-  &.v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows) > .v-slide-group__wrapper > .v-tabs-bar__content
-    & > .v-tab:first-child,
-    & > .v-tabs-slider-wrapper + .v-tab
-      +ltr()
-        margin-left: $tabs-item-mobile-no-arrows-margin
+  &:not(.v-slide-group--has-affixes)
+    .v-slide-group__prev,
+    .v-slide-group__next
+      display: none
 
-      +rtl()
-        margin-right: $tabs-item-mobile-no-arrows-margin
+  // https://github.com/vuetifyjs/vuetify/issues/6932
+  &.v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows):not(.v-slide-group--has-affixes)
+    .v-slide-group__prev
+      display: initial
+      visibility: hidden
 
   &.v-item-group > *
     cursor: initial
@@ -109,7 +110,7 @@
     z-index: 1
 
 // Modifier
-.v-tabs--align-with-title > .v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows) > .v-slide-group__wrapper > .v-tabs-bar__content
+.v-tabs--align-with-title > .v-tabs-bar:not(.v-tabs-bar--show-arrows) > .v-slide-group__wrapper > .v-tabs-bar__content
   & > .v-tab:first-child,
   & > .v-tabs-slider-wrapper + .v-tab
     +ltr()
