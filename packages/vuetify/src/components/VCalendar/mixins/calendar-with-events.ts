@@ -145,8 +145,8 @@ export default CalendarBase.extend({
         for (let i = 0; i <= last; i++) {
           if (!hide) {
             const eventBounds = events[i].getBoundingClientRect()
-            hide = eventBounds.bottom + eventHeight > parentBounds.bottom && i !== last ||
-                   events[i].style.display === "none"
+            hide = (eventBounds.bottom + eventHeight > parentBounds.bottom && i !== last) ||
+                   events[i].style.display === 'none'
           }
           if (hide) {
             const id = events[i].getAttribute('data-event') as string
