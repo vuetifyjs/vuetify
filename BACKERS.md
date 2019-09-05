@@ -15,6 +15,7 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - [Clearblue Technologies](http://www.clearbluetechnologies.com/) <!-- Mark Windrim -->
 - [DigitalMaas](https://www.digitalmaas.com/) <!-- Scott Francis -->
 - [Asolvi](http://asolvi.com/) <!-- Sverre Dreier -->
+- [Quanted Square](https://analytics.quantedsquare.com/)
 
 ### $50+
 - [Xavier Escoté](http://www.deister.net/)
