@@ -16,6 +16,7 @@ import ClickOutside from '../../directives/click-outside'
 import { convertToUnit, keyCodes } from '../../util/helpers'
 import ThemeProvider from '../../util/ThemeProvider'
 import mixins from '../../util/mixins'
+import { removed } from '../../util/console'
 
 // Types
 import { VNode } from 'vue'
@@ -42,7 +43,6 @@ export default baseMixins.extend({
     dark: Boolean,
     disabled: Boolean,
     fullscreen: Boolean,
-    fullWidth: Boolean,
     light: Boolean,
     maxWidth: {
       type: [String, Number],
@@ -125,6 +125,13 @@ export default baseMixins.extend({
         this.genOverlay()
       }
     },
+  },
+
+  created () {
+    /* istanbul ignore next */
+    if (this.$attrs.hasOwnProperty('full-width')) {
+      removed('full-width', this)
+    }
   },
 
   beforeMount () {
@@ -309,9 +316,6 @@ export default baseMixins.extend({
     return h('div', {
       staticClass: 'v-dialog__container',
       attrs: { role: 'dialog' },
-      style: {
-        display: (!this.hasActivator || this.fullWidth) ? 'block' : 'inline-block',
-      },
     }, children)
   },
 })
