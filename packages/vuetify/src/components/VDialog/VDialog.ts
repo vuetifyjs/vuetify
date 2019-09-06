@@ -298,7 +298,6 @@ export default baseMixins.extend({
         ...this.getScopeIdAttrs(),
       },
       on: {
-        ...this.$listeners,
         keydown: this.onKeydown,
       },
       style: { zIndex: this.activeZIndex },
