@@ -244,12 +244,22 @@ describe('VPagination.ts', () => {
     expect(wrapper.vm.items).toHaveLength(10)
   })
 
-  it('should return length when maxButtons is less than 1', () => {
+  it('should return length when maxButtons is less than 0', () => {
     const wrapper = mountFunction({
       data: () => ({ maxButtons: -3 }),
       propsData: { length: 4 },
     })
 
     expect(wrapper.vm.items).toEqual([1, 2, 3, 4])
+  })
+
+  it('should return 2 items before mounted hook', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        length: 50,
+      },
+    })
+
+    expect(wrapper.vm.items).toHaveLength(2)
   })
 })
