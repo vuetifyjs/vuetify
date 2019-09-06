@@ -22,6 +22,10 @@
 .v-select
   position: relative // For **attach** prop
 
+  &:not(.v-select--is-multi).v-text-field--single-line
+    .v-select__selections
+      flex-wrap: nowrap
+
   & > .v-input__control > .v-input__slot
     cursor: pointer
 
@@ -102,22 +106,26 @@
   &__selections
     align-items: center
     display: flex
-    flex: 1 1 auto
+    flex: 1 1
     flex-wrap: wrap
     line-height: 18px
+    max-width: 100%
+    min-width: 0
 
   &__selection
     max-width: 90%
 
     &--comma
-      align-items: center
-      display: inline-flex
       margin: 7px 4px 7px 0
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
 
   &__slot
     position: relative
     align-items: center
     display: flex
+    max-width: 100%
     width: 100%
 
   &:not(.v-text-field--single-line):not(.v-text-field--outlined)

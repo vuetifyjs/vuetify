@@ -138,6 +138,7 @@ export default baseMixins.extend<options>().extend({
         'v-select--chips': this.hasChips,
         'v-select--chips--small': this.smallChips,
         'v-select--is-menu-active': this.isMenuActive,
+        'v-select--is-multi': this.multiple,
       }
     },
     /* Used by other components to overwrite */
