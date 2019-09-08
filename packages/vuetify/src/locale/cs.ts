@@ -12,7 +12,7 @@ export default {
       sortAscending: ': Řazeno vzestupně. Aktivováním se bude řadit sestupně.',
       sortNone: ': Neseřazeno. Aktivováním se bude řadit vzestupně.',
     },
-    sortBy: 'Sort by',
+    sortBy: 'Řadit dle',
   },
   dataFooter: {
     itemsPerPageText: 'Položek na stránku:',
