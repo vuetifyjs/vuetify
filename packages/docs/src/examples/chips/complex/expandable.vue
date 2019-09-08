@@ -5,9 +5,9 @@
   >
     <v-system-bar></v-system-bar>
 
-    <v-layout
-      align-center
-      pa-4
+    <v-row
+      class="px-6 py-3"
+      align="center"
     >
       <span class="mr-4">To</span>
       <v-menu
@@ -58,7 +58,7 @@
           </v-list>
         </v-card>
       </v-menu>
-    </v-layout>
+    </v-row>
 
     <v-divider></v-divider>
 

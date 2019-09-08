@@ -1,4 +1,5 @@
 {
+  "becomeSponsor": "Supporter Vuetify",
   "callout": "Framework de composants<br>Material Design",
   "features": {
     "community": {
@@ -10,7 +11,6 @@
       "title": "Composants sémantiques Material"
     },
     "scaffolding": {
-      "text": "Vuetify supporte l'avenir de la technologie Vue à travers son plugin Vue CLI 3. Avec une seule commande, vous êtes prêt à construire votre prochaine super idée.",
       "title": "Projets prêts à l'emploi"
     }
   },

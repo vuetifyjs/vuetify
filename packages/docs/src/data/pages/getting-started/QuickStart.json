@@ -311,6 +311,23 @@
       "children": [
         {
           "type": "heading",
+          "lang": "edgeHeader"
+        },
+        {
+          "type": "text",
+          "lang": "edgeText1"
+        },
+        {
+          "type": "markup",
+          "value": "js_transpileDependencies"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
           "lang": "ie11Header"
         },
         {

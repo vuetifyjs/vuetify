@@ -188,7 +188,7 @@ exports[`VTextField.ts should render component with async loading and custom pro
            style="height: 7px;"
       >
         <div class="v-progress-linear__background orange"
-             style="opacity: 0.3; width: 100%;"
+             style="opacity: 0.3; left: 0%; width: 100%;"
         >
         </div>
         <div class="v-progress-linear__buffer">
@@ -230,7 +230,7 @@ exports[`VTextField.ts should render component with async loading and match snap
            style="height: 2px;"
       >
         <div class="v-progress-linear__background primary"
-             style="opacity: 0.3; width: 100%;"
+             style="opacity: 0.3; left: 0%; width: 100%;"
         >
         </div>
         <div class="v-progress-linear__buffer">

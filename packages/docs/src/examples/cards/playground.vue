@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-layout wrap justify-space-around>
+    <v-row justify="space-around">
       <v-switch v-model="flat" label="Flat"></v-switch>
       <v-switch v-model="outlined" label="Outlined"></v-switch>
       <v-switch v-model="raised" label="Raised"></v-switch>
@@ -10,7 +10,7 @@
       <v-slider v-model="elevation" label="Elevation" min="0" max="24"></v-slider>
       <v-slider v-model="width" label="Width" min="210" max="1000"></v-slider>
       <v-slider v-model="height" label="Height" min="320" max="1000"></v-slider>
-    </v-layout>
+    </v-row>
 
     <v-card
       class="mx-auto"

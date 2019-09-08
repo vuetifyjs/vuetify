@@ -68,7 +68,6 @@
     border-radius: 4px
 
 .v-list--shaped
-  padding-right: 8px
   +list-shaped($list-item-min-height)
 
   &.v-list--two-line
@@ -77,9 +76,10 @@
   &.v-list--three-line
     +list-shaped($list-item-three-line-min-height)
 
+  +ltr()
+    padding-right: 8px
   +rtl()
     padding-left: 8px
-    padding-right: 0
 
 .v-list--rounded
   padding: 8px

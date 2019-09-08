@@ -85,10 +85,12 @@
     "vertical": "crwdns40406:0crwdne40406:0"
   },
   "events": {
+    "blur": "crwdns42428:0crwdne42428:0",
     "change": "crwdns34090:0crwdne34090:0",
     "click:append": "crwdns34092:0crwdne34092:0",
     "click:prepend": "crwdns34094:0crwdne34094:0",
     "end": "crwdns34096:0crwdne34096:0",
+    "focus": "crwdns42430:0crwdne42430:0",
     "start": "crwdns34098:0crwdne34098:0",
     "update:error": "crwdns34100:0crwdne34100:0"
   },

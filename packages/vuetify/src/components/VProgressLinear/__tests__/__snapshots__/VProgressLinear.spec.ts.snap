@@ -9,7 +9,7 @@ exports[`VProgressLinear.ts should render component and match snapshot 1`] = `
      style="height: 4px;"
 >
   <div class="v-progress-linear__background primary"
-       style="opacity: 0.3; width: 100%;"
+       style="opacity: 0.3; left: 33%; width: 67%;"
   >
   </div>
   <div class="v-progress-linear__buffer">
@@ -30,7 +30,7 @@ exports[`VProgressLinear.ts should render component with buffer value and match 
      style="height: 4px;"
 >
   <div class="v-progress-linear__background primary"
-       style="opacity: 0.3; width: 80%;"
+       style="opacity: 0.3; left: 33%; width: 47%;"
   >
   </div>
   <div class="v-progress-linear__buffer"
@@ -53,7 +53,7 @@ exports[`VProgressLinear.ts should render component with buffer value and match 
      style="height: 4px;"
 >
   <div class="v-progress-linear__background primary"
-       style="opacity: 0.3; width: 0%;"
+       style="opacity: 0.3; left: 33%; width: -33%;"
   >
   </div>
   <div class="v-progress-linear__buffer"
@@ -76,7 +76,7 @@ exports[`VProgressLinear.ts should render component with buffer value and value 
      style="height: 4px;"
 >
   <div class="v-progress-linear__background primary"
-       style="opacity: 0.3; width: 80%;"
+       style="opacity: 0.3; left: 90%; width: -10%;"
   >
   </div>
   <div class="v-progress-linear__buffer"
@@ -99,7 +99,7 @@ exports[`VProgressLinear.ts should render component with color and background co
      style="height: 4px;"
 >
   <div class="v-progress-linear__background blue"
-       style="opacity: 1; width: 100%;"
+       style="opacity: 1; left: 33%; width: 67%;"
   >
   </div>
   <div class="v-progress-linear__buffer">
@@ -120,7 +120,7 @@ exports[`VProgressLinear.ts should render component with color and background co
      style="height: 4px;"
 >
   <div class="v-progress-linear__background blue"
-       style="opacity: 0.5; width: 100%;"
+       style="opacity: 0.5; left: 33%; width: 67%;"
   >
   </div>
   <div class="v-progress-linear__buffer">
@@ -141,7 +141,7 @@ exports[`VProgressLinear.ts should render component with color and background op
      style="height: 4px;"
 >
   <div class="v-progress-linear__background orange"
-       style="opacity: 0.5; width: 100%;"
+       style="opacity: 0.5; left: 33%; width: 67%;"
   >
   </div>
   <div class="v-progress-linear__buffer">
@@ -162,7 +162,7 @@ exports[`VProgressLinear.ts should render component with color and match snapsho
      style="height: 4px;"
 >
   <div class="v-progress-linear__background orange"
-       style="opacity: 0.3; width: 100%;"
+       style="opacity: 0.3; left: 33%; width: 67%;"
   >
   </div>
   <div class="v-progress-linear__buffer">
@@ -183,7 +183,7 @@ exports[`VProgressLinear.ts should render component with css color and match sna
      style="height: 4px;"
 >
   <div class="v-progress-linear__background"
-       style="opacity: 0.3; width: 100%; background-color: rgb(51, 102, 153); border-color: #336699;"
+       style="opacity: 0.3; left: 33%; width: 67%; background-color: rgb(51, 102, 153); border-color: #336699;"
   >
   </div>
   <div class="v-progress-linear__buffer">
@@ -204,7 +204,7 @@ exports[`VProgressLinear.ts should render default slot content 1`] = `
      style="height: 4px;"
 >
   <div class="v-progress-linear__background primary"
-       style="opacity: 0.3; width: 80%;"
+       style="opacity: 0.3; left: 90%; width: -10%;"
   >
   </div>
   <div class="v-progress-linear__buffer"
@@ -232,7 +232,7 @@ exports[`VProgressLinear.ts should render inactive component and match snapshot 
      style="height: 0px;"
 >
   <div class="v-progress-linear__background primary"
-       style="opacity: 0.3; width: 100%;"
+       style="opacity: 0.3; left: 33%; width: 67%;"
   >
   </div>
   <div class="v-progress-linear__buffer"
@@ -254,7 +254,7 @@ exports[`VProgressLinear.ts should render indeterminate progress and match snaps
      style="height: 4px;"
 >
   <div class="v-progress-linear__background primary"
-       style="opacity: 0.3; width: 100%;"
+       style="opacity: 0.3; left: 0%; width: 100%;"
   >
   </div>
   <div class="v-progress-linear__buffer">
@@ -276,7 +276,7 @@ exports[`VProgressLinear.ts should render indeterminate progress with query prop
      style="height: 4px;"
 >
   <div class="v-progress-linear__background primary"
-       style="opacity: 0.3; width: 100%;"
+       style="opacity: 0.3; left: 0%; width: 100%;"
   >
   </div>
   <div class="v-progress-linear__buffer">

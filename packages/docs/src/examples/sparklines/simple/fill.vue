@@ -12,14 +12,14 @@
 
     <v-divider></v-divider>
 
-    <v-layout wrap>
-      <v-flex
-        xs12
-        md6
+    <v-row>
+      <v-col
+        cols="12"
+        md="6"
       >
-        <v-layout fill-height align-center>
+        <v-row class="fill-height" align="center">
           <v-item-group v-model="gradient" mandatory>
-            <v-layout>
+            <v-row>
               <v-item
                 v-for="(gradient, i) in gradients"
                 :key="i"
@@ -40,14 +40,14 @@
                   @click.native="toggle"
                 ></v-card>
               </v-item>
-            </v-layout>
+            </v-row>
           </v-item-group>
-        </v-layout>
-      </v-flex>
+        </v-row>
+      </v-col>
 
-      <v-flex
-        xs12
-        md6
+      <v-col
+        cols="12"
+        md="6"
       >
         <v-slider
           v-model="width"
@@ -57,17 +57,17 @@
           step="0.1"
           thumb-label
         ></v-slider>
-      </v-flex>
+      </v-col>
 
-      <v-flex xs6>
-        <v-layout fill-height align-center>
+      <v-col cols="6">
+        <v-row class="fill-height" align="center">
           <v-switch v-model="fill" label="Filled"></v-switch>
-        </v-layout>
-      </v-flex>
+        </v-row>
+      </v-col>
 
-      <v-flex
-        xs12
-        md6
+      <v-col
+        cols="12"
+        md="6"
       >
         <v-slider
           v-model="radius"
@@ -76,12 +76,12 @@
           max="25"
           thumb-label
         ></v-slider>
-      </v-flex>
+      </v-col>
 
-      <v-flex
-        xs12
-        md6
-        offset-md6
+      <v-col
+        cols="12"
+        md="6"
+        offset-md="6"
       >
         <v-slider
           v-model="padding"
@@ -90,8 +90,8 @@
           max="25"
           thumb-label
         ></v-slider>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

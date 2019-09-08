@@ -1,17 +1,18 @@
 export default {
-  close: 'Close',
+  close: 'סגור',
   dataIterator: {
     pageText: '{0}-{1} מתוך {2}',
     noResultsText: 'לא נמצאו תוצאות מתאימות',
-    loadingText: 'Loading item...',
+    loadingText: 'טוען פריט...',
   },
   dataTable: {
     itemsPerPageText: 'שורות לעמוד:',
     ariaLabel: {
-      sortDescending: ': Sorted descending. Activate to remove sorting.',
-      sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.',
+      sortDescending: ': ממוין לפי סדר עולה. לחץ להספקת המיון.',
+      sortAscending: ': ממוין לפי סדר יורד. לחץ למיון לפי סדר עולה.',
+      sortNone: ': לא ממוין. לחץ למיון לפי סדר עולה.',
     },
+    sortBy: 'Sort by',
   },
   dataFooter: {
     itemsPerPageText: 'פריטים לדף:',
@@ -33,7 +34,7 @@ export default {
     moreEvents: '{0} נוספים',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counter: '{0} קבצים',
+    counterSize: '{0} קבצים ({1} בסך הכל)',
   },
 }

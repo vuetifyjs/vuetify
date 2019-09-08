@@ -21,8 +21,7 @@
       "desc": "Ícones podem ser usados para o contúdo principal de um botão."
     },
     "floating": {
-      "header": "Flutuante",
-      "desc": "Botões flutuantes são redondos e geralmente contêm um ícone."
+      "header": "Flutuante"
     },
     "loaders": {
       "header": "Carregamento",
@@ -31,13 +30,6 @@
     "sizing": {
       "header": "Dimensionamento",
       "desc": "Botões podem receber diferentes opções de tamanhos para se adequarem a uma infinidade de cenários."
-    },
-    "outline": {
-      "header": "Contorno",
-      "desc": "Botões com contorno herdam suas bordas da cor atual aplicada."
-    },
-    "round": {
-      "desc": "Botões arredondados comportam da mesma maneira que botões comuns, mas possuem cantos arredondadas."
     },
     "block": {
       "header": "Bloco",

@@ -1,10 +1,10 @@
 <template>
   <div>
-    <v-layout justify-space-around>
+    <v-row justify="space-around">
       <v-icon @click="model--">mdi-minus</v-icon>
       {{ model }}
       <v-icon @click="model++">mdi-plus</v-icon>
-    </v-layout>
+    </v-row>
     <v-carousel v-model="model">
       <v-carousel-item
         v-for="(color, i) in colors"
@@ -15,13 +15,13 @@
           height="100%"
           tile
         >
-          <v-layout
-            align-center
-            fill-height
-            justify-center
+          <v-row
+            class="fill-height"
+            align="center"
+            justify="center"
           >
             <div class="display-3">Slide {{ i + 1 }}</div>
-          </v-layout>
+          </v-row>
         </v-sheet>
       </v-carousel-item>
     </v-carousel>

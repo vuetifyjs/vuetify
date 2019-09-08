@@ -1,7 +1,6 @@
 <template>
-  <v-layout
-    justify-center
-    wrap
+  <v-row
+    justify="center"
   >
     <v-btn
       v-bind="options"
@@ -25,8 +24,8 @@
       </template>
     </v-btn>
 
-    <v-flex xs12>
-      <v-container grid-list-md>
+    <v-col cols="12">
+      <v-container>
         <v-slider
           v-model="minWidth"
           label="Min width"
@@ -46,30 +45,30 @@
           max="24"
           clearable
         ></v-slider>
-        <v-layout wrap>
-          <v-flex
-            xs12
-            md4
+        <v-row>
+          <v-col
+            cols="12"
+            md="4"
           >
             <v-select
               v-model="size"
               :items="sizes"
               label="Size"
             ></v-select>
-          </v-flex>
-          <v-flex
-            xs12
-            md4
+          </v-col>
+          <v-col
+            cols="12"
+            md="4"
           >
             <v-select
               v-model="color"
               :items="colors"
               label="Color"
             ></v-select>
-          </v-flex>
-          <v-flex
-            xs12
-            md4
+          </v-col>
+          <v-col
+            cols="12"
+            md="4"
           >
             <v-select
               v-model="type"
@@ -77,29 +76,29 @@
               label="Type"
               multiple
             ></v-select>
-          </v-flex>
-          <v-flex xs4>
+          </v-col>
+          <v-col cols="4">
             <v-checkbox
               v-model="disabled"
               label="Disabled"
             ></v-checkbox>
-          </v-flex>
-          <v-flex xs4>
+          </v-col>
+          <v-col cols="4">
             <v-checkbox
               v-model="loading"
               label="Loading"
             ></v-checkbox>
-          </v-flex>
-          <v-flex xs4>
+          </v-col>
+          <v-col cols="4">
             <v-checkbox
               v-model="customLoad"
               label="Custom loader"
             ></v-checkbox>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

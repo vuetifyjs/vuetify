@@ -13,7 +13,7 @@
 
       <v-toolbar-title>Discover</v-toolbar-title>
 
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
 
       <v-btn icon>
         <v-icon>search</v-icon>
@@ -21,14 +21,11 @@
     </v-toolbar>
 
     <v-container
+      class="pa-2"
       fluid
-      grid-list-md
-      pa-2
     >
-      <v-layout
-        wrap
-      >
-        <v-flex
+      <v-row>
+        <v-col
           v-for="card in cards"
           :key="card.title"
           v-bind="{ [`xs${card.flex}`]: true }"
@@ -47,7 +44,7 @@
             </v-img>
 
             <v-card-actions>
-              <v-spacer></v-spacer>
+              <div class="flex-grow-1"></div>
 
               <v-btn icon>
                 <v-icon>favorite</v-icon>
@@ -62,8 +59,8 @@
               </v-btn>
             </v-card-actions>
           </v-card>
-        </v-flex>
-      </v-layout>
+        </v-col>
+      </v-row>
     </v-container>
   </v-card>
 </template>

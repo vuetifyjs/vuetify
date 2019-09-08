@@ -1,6 +1,6 @@
 <template>
-  <v-layout>
-    <v-flex>
+  <v-row>
+    <v-col>
       <v-sheet height="400">
         <v-calendar
           ref="calendar"
@@ -39,8 +39,8 @@
           </template>
         </v-calendar>
       </v-sheet>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

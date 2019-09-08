@@ -8,8 +8,6 @@
   "existingText1": "Para incluir o Vuetify em um projeto existente, você deve inseri-lo em seu node_modules. Você pode usar `npm` ou `yarn` para realizar esta tarefa. Estes são ambos gerenciadores de pacotes nos quais permitem que você controle quais recursos estarão disponíveis na sua aplicação.",
   "alert2": "*Aviso*: Embora o Vuetify tenta ao máximo não causar qualquer colisão no CSS, não há garantia de que seus estilos personalizados não alterem sua experiência ao integrar este framework em seu projeto existente.",
   "ie11Header": "Suporte ao IE11 e Safari 9",
-  "ie11Text": "No diretório de seu projeto, instale o `babel-polyfill` e importe-o em sua entrada principal:",
-  "ie11Text1": "No diretório de seu projeto, instale o `babel-polyfill` e importe-o em sua entrada principal:",
   "ie11Text2": "Devido ao suporte limitado do Internet Explorer para tags `<template>`, você deve enviar elementos do dom totalmente compilados para o navegador. Isso pode ser feito tanto construindo antecipamente seu código Vue quanto criando componentes auxiliares para substituir os elementos do DOM. Por exemplo, se for enviado diretamente para o IE, isso falhará:",
   "browserSupport": {
     "supported": "Suportado",

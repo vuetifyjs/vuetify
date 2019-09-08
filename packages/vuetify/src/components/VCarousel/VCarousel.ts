@@ -152,6 +152,7 @@ export default VWindow.extend({
       return this.$createElement(ButtonGroup, {
         props: {
           value: this.internalValue,
+          mandatory: this.mandatory,
         },
         on: {
           change: (val: any) => {

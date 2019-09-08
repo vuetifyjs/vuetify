@@ -67,6 +67,7 @@
     "click:clear": "crwdns33778:0crwdne33778:0",
     "click:prepend": "crwdns33780:0crwdne33780:0",
     "click:prepend-inner": "crwdns33782:0crwdne33782:0",
+    "keydown": "crwdns42418:0crwdne42418:0",
     "update:error": "crwdns33784:0crwdne33784:0"
   }
 }

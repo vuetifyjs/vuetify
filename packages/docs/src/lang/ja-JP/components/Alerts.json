@@ -4,5 +4,8 @@
     "icon": {
       "header": "アイコン"
     }
+  },
+  "props": {
+    "border": "ボーダーを表示します。**top** | **right** | **bottom** | **left** のいずれかの値を受け付けます。"
   }
 }

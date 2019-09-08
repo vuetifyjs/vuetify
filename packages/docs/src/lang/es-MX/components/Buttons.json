@@ -22,8 +22,7 @@
       "desc": "Los íconos pueden ser usados como el contenido principal de un botón."
     },
     "floating": {
-      "header": "Floating",
-      "desc": "Los _floating buttons_ son redondos y generalmente contienen un ícono."
+      "header": "Floating"
     },
     "loaders": {
       "header": "Loaders",
@@ -32,14 +31,6 @@
     "sizing": {
       "header": "Tamaños",
       "desc": "Los botones pueden obtener diferentes tamaños para poder ser usados en una multitud de escenarios."
-    },
-    "outline": {
-      "header": "Outline",
-      "desc": "Los _outline buttons_ heredan sus bordes del color aplicado actual."
-    },
-    "round": {
-      "header": "Redondo",
-      "desc": "Los _rounded buttons_ se comportan de la misma forma que los botones regulares pero tienen bordes redondeados. "
     },
     "block": {
       "header": "Block",

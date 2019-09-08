@@ -14,7 +14,7 @@
   "optionHeader": "crwdns36974:0crwdne36974:0",
   "optionText1": "crwdns36976:0crwdne36976:0",
   "optionHeader2": "crwdns36978:0crwdne36978:0",
-  "optionText3": "crwdns36980:0$vuetifycrwdne36980:0",
+  "optionText3": "crwdns41562:0$vuetifycrwdne41562:0",
   "optionHeader3": "crwdns36982:0crwdne36982:0",
   "optionText4": "crwdns36984:0crwdne36984:0",
   "optionHeader4": "crwdns36986:0crwdne36986:0",
@@ -26,5 +26,7 @@
   "variantsSubheader": "crwdns36998:0crwdne36998:0",
   "variantsText1": "crwdns37000:0crwdne37000:0",
   "variantsText2": "crwdns37002:0crwdne37002:0",
-  "variantsText3": "crwdns37004:0crwdne37004:0"
+  "variantsText3": "crwdns37004:0crwdne37004:0",
+  "disableSubheader": "crwdns41564:0crwdne41564:0",
+  "disableText1": "crwdns41566:0crwdne41566:0"
 }
