@@ -144,7 +144,7 @@ export const BaseSlideGroup = mixins<options &
 
   methods: {
     genNext (): VNode | null {
-      if (!this.hasAffixes) return null
+      if (!this.hasNext) return null
 
       const slot = this.$scopedSlots.next
         ? this.$scopedSlots.next({})
@@ -152,9 +152,6 @@ export const BaseSlideGroup = mixins<options &
 
       return this.$createElement('div', {
         staticClass: 'v-slide-group__next',
-        class: {
-          'v-slide-group__next--disabled': !this.hasNext,
-        },
         on: {
           click: () => this.onAffixClick('next'),
         },
@@ -201,15 +198,14 @@ export const BaseSlideGroup = mixins<options &
     },
     // Always generate prev for scrollable hint
     genPrev (): VNode | null {
+      if (!this.hasPrev) return null
+
       const slot = this.$scopedSlots.prev
         ? this.$scopedSlots.prev({})
         : this.$slots.prev || this.__cachedPrev
 
       return this.$createElement('div', {
         staticClass: 'v-slide-group__prev',
-        class: {
-          'v-slide-group__prev--disabled': !this.hasPrev,
-        },
         on: {
           click: () => this.onAffixClick('prev'),
         },
