@@ -5,14 +5,14 @@
   .v-input__append-outer
     margin-top: $margin-top
 
-@mixin prepend-outer-margin-top($margin-top)
+@mixin outer-margin-top($margin-top)
   .v-input__prepend-outer,
   .v-input__append-outer
     margin-top: $margin-top
 
-@mixin label-position($top, $transY)
+@mixin label-position($top, $translateY, $scale: .75)
   .v-label
     top: $top
 
     &--active
-      transform: translateY($transY) scale(.75)
+      transform: translateY($translateY) scale($scale)
