@@ -129,16 +129,16 @@ export default mixins(
   },
 
   computed: {
-    internalMultiple (): boolean {
+    isMultiple (): boolean {
       return this.multiple || this.range
     },
     lastValue (): string | null {
-      return this.internalMultiple ? (this.value as string[])[(this.value as string[]).length - 1] : (this.value as string | null)
+      return this.isMultiple ? (this.value as string[])[(this.value as string[]).length - 1] : (this.value as string | null)
     },
     selectedMonths (): string | string[] | undefined {
       if (!this.value || !this.value.length || this.type === 'month') {
         return this.value
-      } else if (this.internalMultiple) {
+      } else if (this.isMultiple) {
         return (this.value as string[]).map(val => val.substr(0, 7))
       } else {
         return (this.value as string).substr(0, 7)
@@ -178,7 +178,7 @@ export default mixins(
       return {
         year: this.yearFormat || createNativeLocaleFormatter(this.currentLocale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 }),
         titleDate: this.titleDateFormat ||
-          (this.internalMultiple ? this.defaultTitleMultipleDateFormatter : this.defaultTitleDateFormatter),
+          (this.isMultiple ? this.defaultTitleMultipleDateFormatter : this.defaultTitleDateFormatter),
       }
     },
     defaultTitleMultipleDateFormatter (): DatePickerMultipleFormatter {
@@ -235,9 +235,9 @@ export default mixins(
       this.checkMultipleProp()
       this.setInputDate()
 
-      if (!this.internalMultiple && this.value && !this.pickerDate) {
+      if (!this.isMultiple && this.value && !this.pickerDate) {
         this.tableDate = sanitizeDateString(this.inputDate, this.type === 'month' ? 'year' : 'month')
-      } else if (this.internalMultiple && (this.value as string[]).length && !(oldValue as string[]).length && !this.pickerDate) {
+      } else if (this.isMultiple && (this.value as string[]).length && !(oldValue as string[]).length && !this.pickerDate) {
         this.tableDate = sanitizeDateString(this.inputDate, this.type === 'month' ? 'year' : 'month')
       }
     },
@@ -245,10 +245,10 @@ export default mixins(
       this.activePicker = type.toUpperCase()
 
       if (this.value && this.value.length) {
-        const output = (this.internalMultiple ? (this.value as string[]) : [this.value as string])
+        const output = (this.isMultiple ? (this.value as string[]) : [this.value as string])
           .map((val: string) => sanitizeDateString(val, type))
           .filter(this.isDateAllowed)
-        this.$emit('input', this.internalMultiple ? output : output[0])
+        this.$emit('input', this.isMultiple ? output : output[0])
       }
     },
   },
@@ -285,9 +285,9 @@ export default mixins(
     checkMultipleProp () {
       if (this.value == null) return
       const valueType = this.value.constructor.name
-      const expected = this.internalMultiple ? 'Array' : 'String'
+      const expected = this.isMultiple ? 'Array' : 'String'
       if (valueType !== expected) {
-        consoleWarn(`Value must be ${this.internalMultiple ? 'an' : 'a'} ${expected}, got ${valueType}`, this)
+        consoleWarn(`Value must be ${this.isMultiple ? 'an' : 'a'} ${expected}, got ${valueType}`, this)
       }
     },
     isDateAllowed (value: string) {
@@ -301,7 +301,7 @@ export default mixins(
         this.tableDate = `${value}-${pad((this.tableMonth || 0) + 1)}`
       }
       this.activePicker = 'MONTH'
-      if (this.reactive && !this.readonly && !this.internalMultiple && this.isDateAllowed(this.inputDate)) {
+      if (this.reactive && !this.readonly && !this.isMultiple && this.isDateAllowed(this.inputDate)) {
         this.$emit('input', this.inputDate)
       }
     },
@@ -315,7 +315,7 @@ export default mixins(
 
         this.tableDate = value
         this.activePicker = 'DATE'
-        if (this.reactive && !this.readonly && !this.internalMultiple && this.isDateAllowed(this.inputDate)) {
+        if (this.reactive && !this.readonly && !this.isMultiple && this.isDateAllowed(this.inputDate)) {
           this.$emit('input', this.inputDate)
         }
       } else {
@@ -337,7 +337,7 @@ export default mixins(
           selectingYear: this.activePicker === 'YEAR',
           year: this.formatters.year(this.value ? `${this.inputYear}` : this.tableDate),
           yearIcon: this.yearIcon,
-          value: this.internalMultiple ? (this.value as string[])[0] : this.value,
+          value: this.isMultiple ? (this.value as string[])[0] : this.value,
         },
         slot: 'title',
         on: {
