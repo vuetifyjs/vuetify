@@ -390,13 +390,12 @@
       </core-section>
 
       <core-title>
-        Select range {{ dateRange }}
+        Select range
       </core-title>
       <core-section center>
         <v-date-picker
           v-model="dateRange"
-          select-range
-          multiple
+          range
         />
       </core-section>
     </v-layout>

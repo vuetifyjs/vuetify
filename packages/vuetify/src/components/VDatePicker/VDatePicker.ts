@@ -79,6 +79,7 @@ export default mixins(
       type: String,
       default: '$vuetify.icons.prev',
     },
+    range: Boolean,
     reactive: Boolean,
     readonly: Boolean,
     scrollable: Boolean,
@@ -90,8 +91,6 @@ export default mixins(
       type: String,
       default: '$vuetify.datePicker.itemsSelected',
     },
-    // Allow select date with range, must be used together with multiple
-    selectRange: Boolean,
     showWeek: Boolean,
     // Function formatting currently selected date in the picker title
     titleDateFormat: Function as PropValidator<DatePickerFormatter | DatePickerMultipleFormatter | undefined>,
@@ -122,7 +121,7 @@ export default mixins(
           return this.pickerDate
         }
 
-        const date = (this.multiple ? (this.value as string[])[(this.value as string[]).length - 1] : this.value) ||
+        const date = (this.multiple || this.range ? (this.value as string[])[(this.value as string[]).length - 1] : this.value) ||
           `${now.getFullYear()}-${now.getMonth() + 1}`
         return sanitizeDateString(date as string, this.type === 'date' ? 'month' : 'year')
       })(),
@@ -130,13 +129,16 @@ export default mixins(
   },
 
   computed: {
+    internalMultiple (): boolean {
+      return this.multiple || this.range
+    },
     lastValue (): string | null {
-      return this.multiple ? (this.value as string[])[(this.value as string[]).length - 1] : (this.value as string | null)
+      return this.internalMultiple ? (this.value as string[])[(this.value as string[]).length - 1] : (this.value as string | null)
     },
     selectedMonths (): string | string[] | undefined {
       if (!this.value || !this.value.length || this.type === 'month') {
         return this.value
-      } else if (this.multiple) {
+      } else if (this.internalMultiple) {
         return (this.value as string[]).map(val => val.substr(0, 7))
       } else {
         return (this.value as string).substr(0, 7)
@@ -175,7 +177,8 @@ export default mixins(
     formatters (): Formatters {
       return {
         year: this.yearFormat || createNativeLocaleFormatter(this.currentLocale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 }),
-        titleDate: this.titleDateFormat || (this.multiple ? this.defaultTitleMultipleDateFormatter : this.defaultTitleDateFormatter),
+        titleDate: this.titleDateFormat ||
+          (this.internalMultiple ? this.defaultTitleMultipleDateFormatter : this.defaultTitleDateFormatter),
       }
     },
     defaultTitleMultipleDateFormatter (): DatePickerMultipleFormatter {
@@ -232,9 +235,9 @@ export default mixins(
       this.checkMultipleProp()
       this.setInputDate()
 
-      if (!this.multiple && this.value && !this.pickerDate) {
+      if (!this.internalMultiple && this.value && !this.pickerDate) {
         this.tableDate = sanitizeDateString(this.inputDate, this.type === 'month' ? 'year' : 'month')
-      } else if (this.multiple && (this.value as string[]).length && !(oldValue as string[]).length && !this.pickerDate) {
+      } else if (this.internalMultiple && (this.value as string[]).length && !(oldValue as string[]).length && !this.pickerDate) {
         this.tableDate = sanitizeDateString(this.inputDate, this.type === 'month' ? 'year' : 'month')
       }
     },
@@ -242,10 +245,10 @@ export default mixins(
       this.activePicker = type.toUpperCase()
 
       if (this.value && this.value.length) {
-        const output = (this.multiple ? (this.value as string[]) : [this.value as string])
+        const output = (this.internalMultiple ? (this.value as string[]) : [this.value as string])
           .map((val: string) => sanitizeDateString(val, type))
           .filter(this.isDateAllowed)
-        this.$emit('input', this.multiple ? output : output[0])
+        this.$emit('input', this.internalMultiple ? output : output[0])
       }
     },
   },
@@ -261,7 +264,7 @@ export default mixins(
 
   methods: {
     emitInput (newInput: string) {
-      if (this.multiple && this.selectRange && this.value) {
+      if (this.range && this.value) {
         this.value.length === 2
           ? this.$emit('input', [newInput])
           : this.$emit('input', [...this.value, newInput])
@@ -282,9 +285,9 @@ export default mixins(
     checkMultipleProp () {
       if (this.value == null) return
       const valueType = this.value.constructor.name
-      const expected = this.multiple ? 'Array' : 'String'
+      const expected = this.internalMultiple ? 'Array' : 'String'
       if (valueType !== expected) {
-        consoleWarn(`Value must be ${this.multiple ? 'an' : 'a'} ${expected}, got ${valueType}`, this)
+        consoleWarn(`Value must be ${this.internalMultiple ? 'an' : 'a'} ${expected}, got ${valueType}`, this)
       }
     },
     isDateAllowed (value: string) {
@@ -298,7 +301,7 @@ export default mixins(
         this.tableDate = `${value}-${pad((this.tableMonth || 0) + 1)}`
       }
       this.activePicker = 'MONTH'
-      if (this.reactive && !this.readonly && !this.multiple && this.isDateAllowed(this.inputDate)) {
+      if (this.reactive && !this.readonly && !this.internalMultiple && this.isDateAllowed(this.inputDate)) {
         this.$emit('input', this.inputDate)
       }
     },
@@ -312,7 +315,7 @@ export default mixins(
 
         this.tableDate = value
         this.activePicker = 'DATE'
-        if (this.reactive && !this.readonly && !this.multiple && this.isDateAllowed(this.inputDate)) {
+        if (this.reactive && !this.readonly && !this.internalMultiple && this.isDateAllowed(this.inputDate)) {
           this.$emit('input', this.inputDate)
         }
       } else {
@@ -334,7 +337,7 @@ export default mixins(
           selectingYear: this.activePicker === 'YEAR',
           year: this.formatters.year(this.value ? `${this.inputYear}` : this.tableDate),
           yearIcon: this.yearIcon,
-          value: this.multiple ? (this.value as string[])[0] : this.value,
+          value: this.internalMultiple ? (this.value as string[])[0] : this.value,
         },
         slot: 'title',
         on: {
@@ -367,7 +370,7 @@ export default mixins(
     genDateTable () {
       let proxyValue = this.value
 
-      if (this.multiple && this.selectRange && this.value && this.value.length === 2) {
+      if (this.range && this.value && this.value.length === 2) {
         proxyValue = []
         const [rangeFrom, rangeTo] = [this.value[0], this.value[1]].map(x => new Date(`${x}T00:00:00+00:00`)).sort((a, b) => a > b ? 1 : -1)
         const diffDays = Math.ceil((rangeTo.getTime() - rangeFrom.getTime()) / (1000 * 60 * 60 * 24))

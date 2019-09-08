@@ -638,8 +638,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const cb = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        multiple: true,
-        selectRange: true,
+        range: true,
         value: ['2019-01-01', '2019-01-02'],
       },
     })
