@@ -651,7 +651,6 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     )
 
     wrapper.findAll('.v-date-picker-table--date tbody tr+tr td button').at(2).trigger('click')
-    console.log(JSON.stringify(cb.mock.calls))
     expect(cb.mock.calls[0][0][0]).toBe('2019-01-06')
     expect(cb.mock.calls[1][0][0]).toBe('2019-01-08')
   })
