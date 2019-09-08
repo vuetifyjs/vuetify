@@ -40,6 +40,7 @@ export default baseMixins.extend<options>().extend({
       type: String,
       default: '',
     },
+    dense: Boolean,
     height: [Number, String],
     hideDetails: Boolean,
     hint: String,
@@ -49,7 +50,6 @@ export default baseMixins.extend<options>().extend({
     persistentHint: Boolean,
     prependIcon: String,
     value: null as any as PropType<any>,
-    dense: Boolean,
   },
 
   data () {
