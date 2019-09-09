@@ -16,9 +16,8 @@
       dates: ['2019-09-10', '2019-09-20'],
     }),
     computed: {
-      dateRangeText: {
-        set: val => { },
-        get: () => this.dates.join(' ~ '),
+      dateRangeText () {
+        return this.dates.join(' ~ ')
       },
     },
   }
