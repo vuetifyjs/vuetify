@@ -133,15 +133,7 @@ export default Themeable.extend({
 
   methods: {
     toggleSelectAll (value: boolean): void {
-      const selection = Object.assign({}, this.selection)
-
-      this.internalCurrentItems.forEach((item: any) => {
-        const key = getObjectValueByPath(item, this.itemKey)
-        if (value) selection[key] = item
-        else delete selection[key]
-      })
-
-      this.selection = selection
+      this.internalCurrentItems.forEach((item: any) => this.select(item, value))
     },
     isSelected (item: any): boolean {
       return !!this.selection[getObjectValueByPath(item, this.itemKey)] || false
