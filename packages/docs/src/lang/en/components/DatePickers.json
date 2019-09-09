@@ -45,7 +45,7 @@
       "header": "### Date pickers - Mutiple"
     },
     "date-range": {
-      "desc": "Date picker can select date range with the `range` property. When using `range` property date picker expects its model to be an array of length 2 or empty.",
+      "desc": "Date picker can select date range with the `range` prop. When using `range` prop date picker expects its model to be an array of length 2 or empty.",
       "header": "### Date pickers - Range"
     },
     "date-picker-date": {
