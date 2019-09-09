@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VSlideGroup.ts should match snapshot in rtl 1`] = `
-<div class="v-item-group theme--light v-slide-group">
+<div class="v-item-group theme--light v-slide-group v-slide-group--has-affixes">
   <div class="v-slide-group__prev">
     <fade-transition-stub origin="top center 0">
       <vuecomponent-stub>
@@ -24,7 +24,7 @@ exports[`VSlideGroup.ts should match snapshot in rtl 1`] = `
 `;
 
 exports[`VSlideGroup.ts should match snapshot in rtl 2`] = `
-<div class="v-item-group theme--light v-slide-group">
+<div class="v-item-group theme--light v-slide-group v-slide-group--has-affixes">
   <div class="v-slide-group__prev">
     <fade-transition-stub origin="top center 0">
       <vuecomponent-stub>

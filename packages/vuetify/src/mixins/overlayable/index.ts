@@ -2,7 +2,12 @@
 import VOverlay from '../../components/VOverlay'
 
 // Utilities
-import { keyCodes, addOnceEventListener, addPassiveEventListener } from '../../util/helpers'
+import {
+  keyCodes,
+  addOnceEventListener,
+  addPassiveEventListener,
+  getZIndex,
+} from '../../util/helpers'
 
 // Types
 import Vue from 'vue'
@@ -79,6 +84,8 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
 
         if (this.activeZIndex !== undefined) {
           this.overlay.zIndex = String(this.activeZIndex - 1)
+        } else if (this.$el) {
+          this.overlay.zIndex = getZIndex(this.$el)
         }
 
         this.overlay.value = true

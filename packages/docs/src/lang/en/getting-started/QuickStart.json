@@ -35,6 +35,7 @@
   "webpackHeader1": "### Webpack installation",
   "webpackText1": "When using webpack, you have the ability to setup your application with either of the above options (**Full** or **A-la-carte install**). However, you will need to configure add a webpack rule (or modify an existing one) for sass files. You can start by installing the necessary dependencies:",
   "webpackText2": "Once installed, locate your `webpack.config.js` file and copy the snippet below into the **rules** array. If you have an existing **sass** rule configured, you may need to apply some or all of the changes below. If you are you looking to utilize the **vuetify-loader** as well, you can find more information on setting it up with webpack on the [A-la-carte](/customization/a-la-carte#vueconfigjs-installation) page.",
+  "webpackText3": "If you are using version [v8](https://github.com/webpack-contrib/sass-loader/releases/tag/v8.0.0) of the [sass-loader](https://github.com/webpack-contrib/sass-loader), you will need to change your options object.",
   "existingHeader4": "## Bootstrapping the Vuetify Object",
   "existingText4": "Once you have setup your initial Vuetify options in your `src/plugins/vuetify.js` file, you must then pass that object into your main Vue instance options. This install process is similar to **vue-router** and **vuex**",
   "existingHeader5": "## Font Installation",

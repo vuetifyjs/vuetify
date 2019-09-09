@@ -36,5 +36,5 @@
   }
 
   // Scrollbar
-  scrollbarWidth: number
+  scrollBarWidth: number
 }

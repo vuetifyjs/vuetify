@@ -1,11 +1,11 @@
 <template>
-  <v-container class="pa-4 text-center fill-height">
+  <v-container class="pa-4 text-center">
     <v-row class="fill-height" align="center" justify="center">
       <template v-for="(item, i) in items">
         <v-col
           :key="i"
           cols="12"
-          sm="4"
+          md="4"
         >
           <v-hover v-slot:default="{ hover }">
             <v-card
@@ -16,9 +16,9 @@
                 :src="item.img"
                 height="225px"
               >
-                <v-card-title class="title white--text fill-height">
+                <v-card-title class="title white--text">
                   <v-row
-                    class="fill-height"
+                    class="fill-height flex-column"
                     justify="space-between"
                   >
                     <p class="mt-4 subheading text-left">{{ item.title }}</p>

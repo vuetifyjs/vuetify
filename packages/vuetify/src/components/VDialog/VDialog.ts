@@ -16,6 +16,7 @@ import ClickOutside from '../../directives/click-outside'
 import { convertToUnit, keyCodes } from '../../util/helpers'
 import ThemeProvider from '../../util/ThemeProvider'
 import mixins from '../../util/mixins'
+import { removed } from '../../util/console'
 
 // Types
 import { VNode } from 'vue'
@@ -42,7 +43,6 @@ export default baseMixins.extend({
     dark: Boolean,
     disabled: Boolean,
     fullscreen: Boolean,
-    fullWidth: Boolean,
     light: Boolean,
     maxWidth: {
       type: [String, Number],
@@ -127,6 +127,13 @@ export default baseMixins.extend({
     },
   },
 
+  created () {
+    /* istanbul ignore next */
+    if (this.$attrs.hasOwnProperty('full-width')) {
+      removed('full-width', this)
+    }
+  },
+
   beforeMount () {
     this.$nextTick(() => {
       this.isBooted = this.isActive
@@ -153,8 +160,13 @@ export default baseMixins.extend({
       const target = e.target as HTMLElement
       // If the dialog content contains
       // the click event, or if the
-      // dialog is not active
-      if (this._isDestroyed || !this.isActive || this.$refs.content.contains(target)) return false
+      // dialog is not active, or if the overlay
+      // is the same element as the target
+      if (this._isDestroyed ||
+        !this.isActive ||
+        this.$refs.content.contains(target) ||
+        (this.overlay && target && !this.overlay.$el.contains(target))
+      ) return false
 
       // If we made it here, the click is outside
       // and is active. If persistent, and the
@@ -210,7 +222,11 @@ export default baseMixins.extend({
       this.$emit('keydown', e)
     },
     onFocusin (e: Event) {
-      if (!e || !this.retainFocus) return
+      if (
+        !e ||
+        e.target === document.activeElement ||
+        !this.retainFocus
+      ) return
 
       const target = e.target as HTMLElement
 
@@ -299,9 +315,6 @@ export default baseMixins.extend({
     return h('div', {
       staticClass: 'v-dialog__container',
       attrs: { role: 'dialog' },
-      style: {
-        display: (!this.hasActivator || this.fullWidth) ? 'block' : 'inline-block',
-      },
     }, children)
   },
 })

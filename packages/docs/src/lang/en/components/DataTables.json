@@ -71,7 +71,7 @@
     },
     "headerless": {
       "header": "### Remove default header and footer",
-      "desc": "You can apply the `hide-default-headers` and `hide-default-footer` props to remove the default header and footer respectively."
+      "desc": "You can apply the `hide-default-header` and `hide-default-footer` props to remove the default header and footer respectively."
     },
     "edit-dialog": {
       "header": "### Inline Editing",
