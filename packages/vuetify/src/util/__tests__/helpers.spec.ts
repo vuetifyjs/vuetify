@@ -7,7 +7,7 @@ import {
   getSlotType,
   arrayDiff,
   getObjectValueByPath,
-  humanReadableFileSize,
+  humanReadableFileSize, customFilter,
 } from '../helpers'
 
 describe('helpers', () => {
@@ -294,5 +294,15 @@ describe('helpers', () => {
 
     expect(humanReadableFileSize(1000000000)).toBe('1.0 GB')
     expect(humanReadableFileSize(2000000000)).toBe('2.0 GB')
+  })
+
+  it('customFilter should match a string no matter if it is upper- or lowercase', () => {
+    expect(customFilter('test', 'test')).toBe(true)
+    expect(customFilter('test', 'TEST')).toBe(true)
+    expect(customFilter('TEST', 'test')).toBe(true)
+    expect(customFilter('TEST', 'testeewr')).toBe(true)
+    expect(customFilter('TEST', 'tefdsagtestfsadf')).toBe(true)
+    expect(customFilter('TEST', 'tefdsagstfsadf')).toBe(false)
+    expect(customFilter('tefdsagstfsadf', 'TEST')).toBe(false)
   })
 })
