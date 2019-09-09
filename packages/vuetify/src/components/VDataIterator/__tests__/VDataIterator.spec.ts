@@ -168,6 +168,7 @@ describe('VDataIterator.ts', () => {
 
   it('should select all', async () => {
     const input = jest.fn()
+    const itemSelected = jest.fn()
     const items = [
       { id: 'foo' },
       { id: 'bar' },
@@ -179,6 +180,7 @@ describe('VDataIterator.ts', () => {
       },
       listeners: {
         input,
+        'item-selected': itemSelected,
       },
       scopedSlots: {
         header (props) {
@@ -200,6 +202,7 @@ describe('VDataIterator.ts', () => {
     await wrapper.vm.$nextTick()
 
     expect(input).toHaveBeenCalledWith(items)
+    expect(itemSelected).toHaveBeenCalledTimes(2)
   })
 
   it('should update expansion from the outside', async () => {
