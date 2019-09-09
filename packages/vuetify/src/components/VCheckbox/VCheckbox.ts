@@ -67,7 +67,8 @@ export default Selectable.extend({
 
   watch: {
     indeterminate (val) {
-      this.inputIndeterminate = val
+      // https://github.com/vuetifyjs/vuetify/issues/8270
+      this.$nextTick(() => (this.inputIndeterminate = val))
     },
     inputIndeterminate (val) {
       this.$emit('update:indeterminate', val)

@@ -137,6 +137,12 @@
           <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/brightree.svg">
         </a>
       </td>
+      </td>
+      <td>
+        <a href="https://analytics.quantedsquare.com/?ref=vuetify-github">
+          <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/quanted-square.svg">
+        </a>
+      </td>
     </tr>
   </tbody>
 </table>

@@ -186,7 +186,7 @@ export default mixins(
           return this.defaultTitleDateFormatter(dates[0])
         }
 
-        return this.$vuetify.lang.t(this.selectedItemsText, [dates.length])
+        return this.$vuetify.lang.t(this.selectedItemsText, dates.length)
       }
     },
     defaultTitleDateFormatter (): DatePickerFormatter {

@@ -9,9 +9,9 @@ import * as ThemeUtils from './utils'
 import Vue from 'vue'
 import {
   VuetifyParsedTheme,
-  VuetifyThemeOptions,
   VuetifyThemes,
   VuetifyThemeVariant,
+  Theme as ITheme,
 } from 'vuetify/types/services/theme'
 
 export class Theme extends Service {
@@ -19,7 +19,7 @@ export class Theme extends Service {
 
   public disabled = false
 
-  public options: VuetifyThemeOptions['options']
+  public options!: ITheme['options']
 
   public styleEl?: HTMLStyleElement
 
@@ -52,7 +52,7 @@ export class Theme extends Service {
 
   private vueMeta = false
 
-  constructor (options: Partial<VuetifyThemeOptions> = {}) {
+  constructor (options: Partial<ITheme> = {}) {
     super()
     if (options.disable) {
       this.disabled = true
@@ -60,13 +60,10 @@ export class Theme extends Service {
       return
     }
 
-    this.options = {
-      ...this.options,
-      ...options.options,
-    }
+    this.options = options.options!
 
     this.dark = Boolean(options.dark)
-    const themes = options.themes || {}
+    const themes = options.themes || {} as never
 
     this.themes = {
       dark: this.fillVariant(themes.dark, true),

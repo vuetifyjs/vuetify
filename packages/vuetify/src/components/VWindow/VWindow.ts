@@ -60,6 +60,7 @@ export default BaseItemGroup.extend({
     return {
       changedByDelimiters: false,
       internalHeight: undefined as undefined | string,
+      noHeightReset: false,
       transitionCount: 0, // Number of windows in transition state.
       isBooted: false,
       isReverse: false,
