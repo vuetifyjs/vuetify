@@ -71,6 +71,7 @@ export const BaseSlideGroup = mixins<options &
       default: '$vuetify.icons.prev',
     },
     showArrows: Boolean,
+    steps: Boolean,
   },
 
   data: () => ({
@@ -227,6 +228,8 @@ export const BaseSlideGroup = mixins<options &
             start: (e: TouchEvent) => this.overflowCheck(e, this.onTouchStart),
             move: (e: TouchEvent) => this.overflowCheck(e, this.onTouchMove),
             end: (e: TouchEvent) => this.overflowCheck(e, this.onTouchEnd),
+            left: (e: TouchEvent) => this.calculateStepOffset(e, 'left'),
+            right: (e: TouchEvent) => this.calculateStepOffset(e, 'right'),
           },
         }],
         ref: 'wrapper',
@@ -238,6 +241,30 @@ export const BaseSlideGroup = mixins<options &
         (direction === 'prev' ? -1 : 1) * widths.wrapper
 
       return sign * Math.max(Math.min(newAbosluteOffset, widths.content - widths.wrapper), 0)
+    },
+    calculateStepOffset (e: TouchEvent, direction: 'right' | 'left') {
+      if (!this.isOverflowing || !this.steps) return
+
+      const { content, wrapper } = this.$refs
+      const maxScrollOffset = content.clientWidth - wrapper.clientWidth
+      const oneItemWidth = content.clientWidth / this.internalItemsLength
+      const offsetWithoutRest = this.scrollOffset - (this.scrollOffset % oneItemWidth)
+
+      if (this.$vuetify.rtl) {
+        /* istanbul ignore else */
+        if (direction === 'right' && this.scrollOffset > -maxScrollOffset) {
+          this.scrollOffset = offsetWithoutRest + -oneItemWidth
+        } else if (direction === 'left') {
+          this.scrollOffset = offsetWithoutRest
+        }
+      } else {
+        /* istanbul ignore else */
+        if (direction === 'left' && this.scrollOffset < maxScrollOffset) {
+          this.scrollOffset = offsetWithoutRest + oneItemWidth
+        } else if (direction === 'right') {
+          this.scrollOffset = offsetWithoutRest
+        }
+      }
     },
     onAffixClick (location: 'prev' | 'next') {
       this.$emit(`click:${location}`)
