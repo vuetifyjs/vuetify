@@ -36,6 +36,8 @@ export default mixins(
       return {
         ...BaseSlideGroup.options.computed.classes.call(this),
         'v-tabs-bar': true,
+        'v-tabs-bar--is-mobile': this.isMobile,
+        'v-tabs-bar--show-arrows': this.showArrows,
         ...this.themeClasses,
       }
     },

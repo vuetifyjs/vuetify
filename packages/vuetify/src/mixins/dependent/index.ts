@@ -1,13 +1,14 @@
 import Vue from 'vue'
 
 import mixins from '../../util/mixins'
+import { VOverlay } from '../../components/VOverlay'
 
 interface options extends Vue {
   $el: HTMLElement
   $refs: {
     content: HTMLElement
   }
-  overlay?: HTMLElement
+  overlay?: InstanceType<typeof VOverlay>
 }
 
 interface DependentInstance extends Vue {
@@ -71,7 +72,7 @@ export default mixins<options>().extend({
     getClickableDependentElements (): HTMLElement[] {
       const result = [this.$el]
       if (this.$refs.content) result.push(this.$refs.content)
-      if (this.overlay) result.push(this.overlay)
+      if (this.overlay) result.push(this.overlay.$el as HTMLElement)
       result.push(...this.getOpenDependentElements())
 
       return result

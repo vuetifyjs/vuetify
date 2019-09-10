@@ -31,7 +31,7 @@ export const defaultMenuProps = {
   closeOnContentClick: false,
   disableKeys: true,
   openOnClick: false,
-  maxHeight: 300,
+  maxHeight: 304,
 }
 
 // Types
@@ -305,6 +305,8 @@ export default baseMixins.extend<options>().extend({
     },
     closeConditional (e: Event) {
       return (
+        !this._isDestroyed &&
+
         // Click originates from outside the menu content
         this.content &&
         !this.content.contains(e.target) &&
@@ -567,7 +569,10 @@ export default baseMixins.extend<options>().extend({
       }
     },
     onKeyPress (e: KeyboardEvent) {
-      if (this.multiple) return
+      if (
+        this.multiple ||
+        this.readonly
+      ) return
 
       const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
       const now = performance.now()
@@ -647,7 +652,7 @@ export default baseMixins.extend<options>().extend({
       }
     },
     onMouseUp (e: MouseEvent) {
-      if (this.hasMouseDown) {
+      if (this.hasMouseDown && e.which !== 3) {
         const appendInner = this.$refs['append-inner']
 
         // If append inner is present

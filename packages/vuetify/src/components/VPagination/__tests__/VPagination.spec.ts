@@ -223,4 +223,24 @@ describe('VPagination.ts', () => {
 
     expect(pagination.vm.maxButtons).toBe(-3)
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/7947
+  it('should never show more than the max number of allowed buttons', () => {
+    const wrapper = mountFunction({
+      data: () => ({
+        maxButtons: 4,
+      }),
+
+      propsData: {
+        length: 40,
+        totalVisible: 10,
+      },
+    })
+
+    expect(wrapper.vm.items).toHaveLength(4)
+
+    wrapper.setData({ maxButtons: 12 })
+
+    expect(wrapper.vm.items).toHaveLength(10)
+  })
 })

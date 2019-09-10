@@ -16,24 +16,19 @@ export default Colorable.extend({
 
   props: {
     button: Boolean,
-
     indeterminate: Boolean,
-
     rotate: {
       type: [Number, String],
       default: 0,
     },
-
     size: {
       type: [Number, String],
       default: 32,
     },
-
     width: {
       type: [Number, String],
       default: 4,
     },
-
     value: {
       type: [Number, String],
       default: 0,

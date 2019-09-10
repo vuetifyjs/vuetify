@@ -13,7 +13,7 @@ export interface DataOptions {
   mustSort: boolean
 }
 
-export interface DataPaginaton {
+export interface DataPagination {
   page: number
   itemsPerPage: number
   pageStart: number
@@ -24,7 +24,7 @@ export interface DataPaginaton {
 
 export interface DataProps {
   items: any[]
-  pagination: DataPaginaton
+  pagination: DataPagination
   options: DataOptions
   updateOptions: (obj: any) => void
   sort: (value: string) => void
@@ -95,17 +95,23 @@ export default Vue.extend({
   },
 
   data () {
+    let internalOptions: DataOptions = {
+      page: this.page,
+      itemsPerPage: this.itemsPerPage,
+      sortBy: wrapInArray(this.sortBy),
+      sortDesc: wrapInArray(this.sortDesc),
+      groupBy: wrapInArray(this.groupBy),
+      groupDesc: wrapInArray(this.groupDesc),
+      mustSort: this.mustSort,
+      multiSort: this.multiSort,
+    }
+
+    if (this.options) {
+      internalOptions = Object.assign(internalOptions, this.options)
+    }
+
     return {
-      internalOptions: {
-        page: this.page,
-        itemsPerPage: this.itemsPerPage,
-        sortBy: wrapInArray(this.sortBy),
-        sortDesc: wrapInArray(this.sortDesc),
-        groupBy: wrapInArray(this.groupBy),
-        groupDesc: wrapInArray(this.groupDesc),
-        mustSort: this.mustSort,
-        multiSort: this.multiSort,
-      } as DataOptions,
+      internalOptions,
     }
   },
 
@@ -132,7 +138,7 @@ export default Vue.extend({
     isGrouped (): boolean {
       return !!this.internalOptions.groupBy.length
     },
-    pagination (): DataPaginaton {
+    pagination (): DataPagination {
       return {
         page: this.internalOptions.page,
         itemsPerPage: this.internalOptions.itemsPerPage,
@@ -211,8 +217,11 @@ export default Vue.extend({
     itemsPerPage (itemsPerPage: number) {
       this.updateOptions({ itemsPerPage })
     },
-    'internalOptions.itemsPerPage' (itemsPerPage: number) {
-      this.$emit('update:items-per-page', itemsPerPage)
+    'internalOptions.itemsPerPage': {
+      handler (itemsPerPage: number) {
+        this.$emit('update:items-per-page', itemsPerPage)
+      },
+      immediate: true,
     },
     sortBy (sortBy: string | string[]) {
       this.updateOptions({ sortBy: wrapInArray(sortBy) })
@@ -330,7 +339,9 @@ export default Vue.extend({
       this.internalOptions = {
         ...this.internalOptions,
         ...options,
-        page: Math.max(1, Math.min(options.page || this.internalOptions.page, this.pageCount)),
+        page: this.serverItemsLength < 0
+          ? Math.max(1, Math.min(options.page || this.internalOptions.page, this.pageCount))
+          : options.page || this.internalOptions.page,
       }
     },
     sortItems (items: any[]) {

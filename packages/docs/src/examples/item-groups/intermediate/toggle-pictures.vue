@@ -3,20 +3,17 @@
     max-width="400"
     class="mx-auto"
   >
-    <v-container
-      grid-list-sm
-      pa-1
-    >
+    <v-container class="pa-1">
       <v-item-group
         v-model="selected"
         multiple
       >
-        <v-layout wrap>
-          <v-flex
+        <v-row>
+          <v-col
             v-for="(item, i) in items"
             :key="i"
-            xs12
-            md6
+            cols="12"
+            md="6"
           >
             <v-item v-slot:default="{ active, toggle }">
               <v-img
@@ -35,8 +32,8 @@
                 </v-btn>
               </v-img>
             </v-item>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-item-group>
     </v-container>
   </v-card>

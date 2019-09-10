@@ -1,5 +1,5 @@
 <template>
-  <v-layout justify-center wrap>
+  <v-row justify="center">
     <v-menu transition="slide-x-transition">
       <template v-slot:activator="{ on }">
         <v-btn color="primary" class="ma-2" v-on="on">
@@ -35,5 +35,5 @@
         </v-list-item>
       </v-list>
     </v-menu>
-  </v-layout>
+  </v-row>
 </template>

@@ -2,48 +2,45 @@
   "header": "选择控件",
   "headerText": "选择控制组件允许用户使用选择项，这些组件必须和 `v-model` 属性一起使用，因为他们无法保持自己的状态。",
   "examples": {
-    "checkboxesBoolean": {
+    "checkboxes-boolean": {
       "header": "复选框 - 布尔值"
     },
-    "checkboxesArray": {
+    "checkboxes-array": {
       "header": "复选框 - 数组"
     },
-    "checkboxesStates": {
+    "checkboxes-states": {
       "header": "复选框 - 状态"
     },
-    "checkboxesColors": {
+    "checkboxes-colors": {
       "header": "复选框 - 色彩",
       "desc": "复选框可以设置颜色通过使用 `color` 属性，颜色可以是任何内置的颜色或者其上下文名称。"
     },
-    "checkboxesInlineTexfield": {
+    "checkboxes-inline-texfield": {
       "header": "复选框 - 和文本框内联"
     },
-    "radiosDefault": {
+    "radios-default": {
       "header": "单选框 - 默认"
     },
-    "radiosDirection": {
+    "radios-direction": {
       "header": "单选框 - 方向",
       "desc": "单选框组可以作为一行或者一列的形式，通过使用 column 或者 row 属性设置，默认是使用列的方式。"
     },
-    "radiosColors": {
+    "radios-colors": {
       "header": "单选框 - 颜色",
       "desc": "单选框也是可以通过 `color` 属性使用内置的颜色来设置色彩。"
     },
-    "switchesBoolean": {
+    "switches-boolean": {
       "header": "开关 - 布尔值"
     },
-    "switchesArray": {
+    "switches-array": {
       "header": "开关 - 数组"
     },
-    "switchesStates": {
+    "switches-states": {
       "header": "开关 - 状态"
     },
-    "switchesColors": {
+    "switches-colors": {
       "header": "开关 - 颜色",
       "desc": "开关也可以通过 `color` 属性使用内置的颜色来设置色彩。"
-    },
-    "labelSlot": {
-      "header": "Label slot"
     }
   },
   "props": {
@@ -54,5 +51,9 @@
     "name": "设置组件的 name 属性",
     "row": "单选框行显示",
     "value": "设置选择控件组件的值"
+  },
+  "events": {
+    "change": "Components.Inputs.events.change",
+    "update:error": "Mixins.Validatable.events['update:error']"
   }
 }

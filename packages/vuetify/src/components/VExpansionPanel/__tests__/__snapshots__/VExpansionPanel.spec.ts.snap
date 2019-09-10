@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VExpansionPanel should hide actions and match snapshot 1`] = `
-
 <div aria-expanded="false"
      class="v-expansion-panel"
 >
@@ -14,11 +13,9 @@ exports[`VExpansionPanel should hide actions and match snapshot 1`] = `
   >
   </div>
 </div>
-
 `;
 
 exports[`VExpansionPanel should hide actions and match snapshot 2`] = `
-
 <div aria-expanded="false"
      class="v-expansion-panel"
 >
@@ -38,5 +35,4 @@ exports[`VExpansionPanel should hide actions and match snapshot 2`] = `
   >
   </div>
 </div>
-
 `;

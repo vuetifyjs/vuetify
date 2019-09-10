@@ -2,6 +2,9 @@
 
 You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.patreon.com/vuetify)
 
+### $1500+
+- [QOMPLX](https://www.qomplx.com/)
+
 ### $500+
 - [LMAX Exchange](https://www.lmax.com/)
 - [Intygrate](http://intygrate.com/)
@@ -12,7 +15,6 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - [Clearblue Technologies](http://www.clearbluetechnologies.com/) <!-- Mark Windrim -->
 - [DigitalMaas](https://www.digitalmaas.com/) <!-- Scott Francis -->
 - [Asolvi](http://asolvi.com/) <!-- Sverre Dreier -->
-- [Fractal Industries](https://www.fractalindustries.com/)
 
 ### $50+
 - [Xavier Escoté](http://www.deister.net/)
@@ -30,6 +32,7 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - [blokt](https://blokt.com/)
 - [Loomio](https://www.loomio.org/)
 - Hannes Kochniß
+- [EduBirdie](https://edubirdie.com/)
 
 ### $20+
 - Michael Marti
@@ -117,3 +120,4 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Sean Kimball
 - MEHMET SAGLAM
 - Mark Couvaras
+- [quickytools](https://www.quickytools.com/)

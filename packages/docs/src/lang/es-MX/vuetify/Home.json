@@ -1,5 +1,4 @@
 {
-  "becomeSponsor": "Conviértete en un Patrocinador",
   "callout": "Aumenta la potencia de tu desarrollo con el poder de Vue y de Material Design",
   "features": {
     "community": {
@@ -11,7 +10,6 @@
       "title": "Componentes Semánticos de Material"
     },
     "scaffolding": {
-      "text": "Cuando te encuentras con una piedra en el camino, necesitas ayuda inmediata. Vuetify te ofrece soporte via chat en nuestro servidor dentro de una creciente comunidad en Discord.",
       "title": "Una Comunidad Vibrante"
     }
   },

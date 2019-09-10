@@ -38,7 +38,7 @@ export default mixins(
   render (h): VNode {
     return h('div', {
       staticClass: 'v-timeline',
-      'class': this.classes,
+      class: this.classes,
     }, this.$slots.default)
   },
 })

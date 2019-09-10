@@ -1,9 +1,9 @@
 {
-  "color": "info",
+  "color": "green",
   "close": true,
-  "id": "version2",
-  "text": "Go to Docs",
-  "msg": "🎉 **Version 2** is coming soon! 🎉",
-  "href": "https://next.vuetifyjs.com",
+  "id": "dashboard-pro",
+  "text": "Buy Now",
+  "msg": "🎉 Vuetify Material Dashboard **PRO** is now available 🎉",
+  "href": "https://www.creative-tim.com/product/vuetify-material-dashboard-pro",
   "timeout": 0
 }

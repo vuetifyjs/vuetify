@@ -1,23 +1,24 @@
 {
   "props": {
-    "items": "The array of items to display",
-    "options": "A combined object for options. See example below for definition",
-    "sortBy": "Changes which item property (or properties) should be used for sort order. Can be used with `.sync` modifier",
-    "sortDesc": "Changes which direction sorting is done. Can be used with `.sync` modifier",
+    "customFilter": "Function to filter items",
     "customSort": "Function used to sort items",
+    "disableFiltering": "Disables filtering completely",
+    "disablePagination": "Disables pagination completely",
+    "disableSort": "Disables sorting completely",
+    "groupDesc": "Changes which direction grouping is done. Can be used with `.sync` modifier",
+    "groupBy": "Changes which item property should be used for grouping items. Can be used with `.sync` modifier",
+    "itemKey": "The field on each item object that designates a unique key. The value of this property has to be unique for each item.",
+    "items": "The array of items to display",
+    "itemsPerPage": "Changes how many items per page should be visible. Can be used with `.sync` modifier",
+    "locale": "Sets the locale of component. Used for translating internal text strings.",
     "mustSort": "If `true` then one can not disable sorting, it will always switch between ascending and descending",
     "multiSort": "If `true` then one can sort on multiple properties",
+    "options": "A combined object for options. See example below for definition",
     "page": "Changes which page of items is displayed. Can be used with `.sync` modifier",
-    "itemsPerPage": "Changes how many items per page should be visible. Can be used with `.sync` modifier",
-    "groupBy": "Changes which item property should be used for grouping items. Can be used with `.sync` modifier",
-    "groupDesc": "Changes which direction grouping is done. Can be used with `.sync` modifier",
-    "locale": "Sets the locale of component. Used for translating internal text strings.",
-    "disableSort": "Disables sorting completely",
-    "disablePagination": "Disables pagination completely",
-    "disableFiltering": "Disables filtering completely",
     "search": "Text input used to filter items",
-    "customFilter": "Function to filter items",
-    "serverItemsLength": "Used only when data is provided by a server. Should be set to the total amount of items available on server so that pagination works correctly"
+    "serverItemsLength": "Used only when data is provided by a server. Should be set to the total amount of items available on server so that pagination works correctly",
+    "sortBy": "Changes which item property (or properties) should be used for sort order. Can be used with `.sync` modifier",
+    "sortDesc": "Changes which direction sorting is done. Can be used with `.sync` modifier"
   },
   "slots": {
     "default": "The default slot. Use this to render your items"

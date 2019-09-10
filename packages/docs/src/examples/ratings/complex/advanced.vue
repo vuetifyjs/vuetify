@@ -3,50 +3,48 @@
     class="mx-auto overflow-hidden"
     style="max-width: 600px;"
   >
-    <v-layout>
-      <v-flex xs6 d-flex>
+    <v-row>
+      <v-col class="d-flex" cols="6">
         <v-img
           src="https://cdn.vuetifyjs.com/images/ratings/fortnite1.png"
         ></v-img>
-      </v-flex>
-      <v-flex xs6>
+      </v-col>
+      <v-col cols="6">
         <v-container
-          grid-list-md
-          pa-0
-          pl-2
+          class="pa-0 pl-2"
           style="margin: -4px 0"
         >
-          <v-layout wrap>
-            <v-flex xs7 d-flex>
+          <v-row>
+            <v-col class="d-flex" cols="7">
               <v-img
                 src="https://cdn.vuetifyjs.com/images/ratings/fortnite2.png"
               ></v-img>
-            </v-flex>
-            <v-flex xs5 d-flex>
+            </v-col>
+            <v-col class="d-flex" cols="5">
               <v-img
                 src="https://cdn.vuetifyjs.com/images/ratings/fortnite3.png"
               ></v-img>
-            </v-flex>
-            <v-flex xs5 d-flex>
+            </v-col>
+            <v-col class="d-flex" cols="5">
               <v-img
                 src="https://cdn.vuetifyjs.com/images/ratings/fortnite4.png"
               ></v-img>
-            </v-flex>
-            <v-flex xs7 d-flex>
+            </v-col>
+            <v-col class="d-flex" cols="7">
               <v-img
                 src="https://cdn.vuetifyjs.com/images/ratings/fortnite5.png"
               ></v-img>
-            </v-flex>
-          </v-layout>
+            </v-col>
+          </v-row>
         </v-container>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
     <v-card-title class="align-start">
       <div>
         <span class="headline">FORTNITE</span>
         <div class="grey--text font-weight-light">Video game</div>
       </div>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <v-dialog
         v-model="dialog"
         width="400"
@@ -59,7 +57,7 @@
         <v-card>
           <v-card-title>
             <span class="title font-weight-bold">Share</span>
-            <v-spacer></v-spacer>
+            <div class="flex-grow-1"></div>
             <v-btn
               class="mx-0"
               icon
@@ -102,7 +100,7 @@
     <v-divider></v-divider>
     <v-card-actions>
       <span class="pl-2 grey--text text--darken-2 font-weight-light caption">16,544 reviews</span>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <v-rating
         v-model="rating"
         length="10"

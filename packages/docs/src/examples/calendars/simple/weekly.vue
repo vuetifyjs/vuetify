@@ -1,6 +1,6 @@
 <template>
-  <v-layout>
-    <v-flex>
+  <v-row>
+    <v-col>
       <v-sheet height="400">
         <v-calendar
           ref="calendar"
@@ -39,8 +39,8 @@
           </template>
         </v-calendar>
       </v-sheet>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -70,25 +70,27 @@
   }
 </script>
 
-<style lang="sass" scoped>
-.my-event
-  overflow: hidden
-  text-overflow: ellipsis
-  white-space: nowrap
-  border-radius: 2px
-  background-color: #1867c0
-  color: #ffffff
-  border: 1px solid #1867c0
-  font-size: 12px
-  padding: 3px
-  cursor: pointer
-  margin-bottom: 1px
-  left: 4px
-  margin-right: 8px
-  position: relative
+<style scoped>
+.my-event {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 2px;
+  background-color: #1867c0;
+  color: #ffffff;
+  border: 1px solid #1867c0;
+  font-size: 12px;
+  padding: 3px;
+  cursor: pointer;
+  margin-bottom: 1px;
+  left: 4px;
+  margin-right: 8px;
+  position: relative;
+}
 
-  &.with-time
-    position: absolute
-    right: 4px
-    margin-right: 0px
+.my-event.with-time {
+  position: absolute;
+  right: 4px;
+  margin-right: 0px;
+}
 </style>

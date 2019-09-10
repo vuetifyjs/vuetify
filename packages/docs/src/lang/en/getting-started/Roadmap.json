@@ -68,14 +68,14 @@
     },
     {
       "type": "release",
-      "complete": false,
+      "complete": true,
       "title": "v2.0 Release **(Arcadia)**",
-      "caption": "Q2 2019",
+      "caption": "July 2019",
       "text": "A complete rebuild of the framework core. Improving the layout and theme systems, platform integration, accessibility, RTL and performance. Update all components to the [Material Design 2](https://material.io/design/) specification. Add additional functionality to multiple existing components and setup v1.5 for [Long-term Support](/getting-started/long-term-support).",
       "features": {
         "#### Highlights": [
           "Complete update to Material Design 2",
-          "Fully updated to Typescript",
+          "Converted from Javascript to Typescript",
           "Converted from Stylus to Sass",
           "Converted from avoriaz to vue-test-utils"
         ],
@@ -84,35 +84,37 @@
           "v-banner",
           "v-chip-group",
           "v-color-picker",
+          "v-file-input",
           "v-list-item-group",
           "v-overlay",
-          "v-simple-table"
+          "v-simple-table",
+          "v-slide-group"
         ]
       },
-      "value": true
+      "value": false
     },
     {
       "type": "release",
       "complete": false,
       "title": "v2.1 Release **(Vanguard)**",
       "caption": "Q3 2019",
-      "text": "A maintenance cycle to work on bugs from the v2.0 release. This includes performance issues, incorrect or missing a11y and RTL and general fixes. This will allow the team to catch up on the backlog of tasks that have accumulated over the 6 month development cycle of the previous release.",
-      "value": false
+      "text": "A maintenance cycle to work on bugs from the v2.0 release. This includes performance issues, incorrect or missing a11y, RTL, regressions and general fixes. This will allow the team to catch up on the backlog of tasks that have accumulated over the 8 month development cycle of the previous release.",
+      "value": true
     },
     {
       "type": "release",
       "complete": false,
       "title": "v2.2 Release **(Tigris)**",
       "caption": "Q4 2019",
-      "text": "Vuetify components will be pre-configurable through framework wide defaults. This will allow you to set global settings such as **no-ripples** or all inputs are of **outline** type and even set all cards to become **tile**s.",
+      "text": "The introduction of Vuetify Presets. Will include the entire Material Design Studies collection and be _user customizable_. For more information on Google's studies, please [navigate here](https://material.io/design/material-studies/about-our-material-studies.html).",
       "value": false
     },
     {
       "type": "release",
       "complete": false,
-      "title": "v2.2 Release **(Orion)**",
+      "title": "v2.3 Release **(Orion)**",
       "caption": "Q1 2020",
-      "text": "The introduction of Vuetify Presets. Will include the entire Material Design Studies collection and be _user customizable_. For more information on Google's studies, please [navigate here](https://material.io/design/material-studies/about-our-material-studies.html).",
+      "text": "Vuetify components will be pre-configurable through framework wide defaults. This will allow you to set global settings such as **no-ripples** or all inputs are of **outlined** type and even set all cards to become **tile**s.",
       "value": false
     },
     {

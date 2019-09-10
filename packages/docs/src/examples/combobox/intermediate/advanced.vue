@@ -61,7 +61,7 @@
       >
         {{ item.text }}
       </v-chip>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <v-list-item-action @click.stop>
         <v-btn
           icon

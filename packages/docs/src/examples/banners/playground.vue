@@ -1,9 +1,8 @@
 <template>
   <div>
-    <v-layout
-      row
-      wrap
-      justify-space-around
+    <v-row
+
+      justify="space-around"
     >
       <v-switch
         v-model="sticky"
@@ -42,7 +41,7 @@
         style="width: 100%;"
         clearable
       ></v-slider>
-    </v-layout>
+    </v-row>
 
     <v-sheet
       class="overflow-y-auto"

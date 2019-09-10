@@ -1,9 +1,7 @@
 <template>
   <v-container fluid class="text-center">
-    <v-layout
-      justify-center
-      row
-      wrap
+    <v-row
+      justify="center"
     >
       <v-badge
         v-model="show"
@@ -20,7 +18,7 @@
           @mouseout="show = false"
         >shopping_cart</v-icon>
       </v-badge>
-    </v-layout>
+    </v-row>
   </v-container>
 </template>
 

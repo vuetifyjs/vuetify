@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VAlert.ts should be dismissible 1`] = `
-
 <div role="alert"
      class="v-alert v-sheet theme--light"
      style="display: none;"
@@ -10,7 +9,7 @@ exports[`VAlert.ts should be dismissible 1`] = `
     <div class="v-alert__content">
     </div>
     <button type="button"
-            class="v-alert__dismissible v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
+            class="v-alert__dismissible v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
             aria-label="$vuetify.close"
     >
       <span class="v-btn__content">
@@ -23,11 +22,9 @@ exports[`VAlert.ts should be dismissible 1`] = `
     </button>
   </div>
 </div>
-
 `;
 
 exports[`VAlert.ts should be open by default 1`] = `
-
 <div role="alert"
      class="v-alert v-sheet theme--light"
 >
@@ -36,11 +33,9 @@ exports[`VAlert.ts should be open by default 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VAlert.ts should be open by default 2`] = `
-
 <div role="alert"
      class="v-alert v-sheet theme--light"
      style="display: none;"
@@ -50,11 +45,9 @@ exports[`VAlert.ts should be open by default 2`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VAlert.ts should have a close icon 1`] = `
-
 <div role="alert"
      class="v-alert v-sheet theme--light"
 >
@@ -62,7 +55,7 @@ exports[`VAlert.ts should have a close icon 1`] = `
     <div class="v-alert__content">
     </div>
     <button type="button"
-            class="v-alert__dismissible v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
+            class="v-alert__dismissible v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
             aria-label="$vuetify.close"
     >
       <span class="v-btn__content">
@@ -75,5 +68,4 @@ exports[`VAlert.ts should have a close icon 1`] = `
     </button>
   </div>
 </div>
-
 `;

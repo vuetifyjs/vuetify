@@ -52,6 +52,7 @@ module.exports = {
       'destructuring': 'all',
       'ignoreReadBeforeAssign': true
     }],
+    'no-prototype-builtins': 'off',
 
     // Not in override, these apply to non-.vue files too
     'vue/name-property-casing': 'off',

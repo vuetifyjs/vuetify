@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VSelectList.ts should display falsy items 1`] = `
-
 <div class="v-select-list v-card theme--light">
   <div role="listbox"
        tabindex="-1"
@@ -78,11 +77,9 @@ exports[`VSelectList.ts should display falsy items 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSelectList.ts should display no-data-text when item slot is provided 1`] = `
-
 <div class="v-select-list v-card theme--light">
   <div role="listbox"
        tabindex="-1"
@@ -101,11 +98,9 @@ exports[`VSelectList.ts should display no-data-text when item slot is provided 1
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSelectList.ts should generate children 1`] = `
-
 <div class="v-select-list v-card theme--light">
   <div role="listbox"
        tabindex="-1"
@@ -134,5 +129,4 @@ exports[`VSelectList.ts should generate children 1`] = `
     </div>
   </div>
 </div>
-
 `;

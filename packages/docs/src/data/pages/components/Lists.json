@@ -28,6 +28,7 @@
             "v-list-item-action",
             "v-list-item-avatar",
             "v-list-item-content",
+            "v-list-item-icon",
             "v-list-item-title",
             "v-list-item-subtitle",
             "v-list-item-action-text"

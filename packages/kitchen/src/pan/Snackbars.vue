@@ -8,7 +8,7 @@
         <v-card>
           <v-card-text>
             <v-container fluid>
-              <v-layout row wrap justify-space-around>
+              <v-layout wrap justify-space-around>
                 <v-flex xs12 sm3>
                   <v-checkbox
                     v-model="x1"
@@ -85,7 +85,7 @@
         <v-card>
           <v-card-text>
             <v-container fluid>
-              <v-layout row wrap justify-space-around>
+              <v-layout wrap justify-space-around>
                 <v-flex xs12 sm4>
                   <v-text-field
                     v-model.number="timeout2"
@@ -135,7 +135,7 @@
         <v-card>
           <v-card-text>
             <v-container fluid>
-              <v-layout row wrap justify-space-around>
+              <v-layout wrap justify-space-around>
                 <v-flex xs12 sm3>
                   <v-checkbox
                     v-model="mode3"
@@ -194,7 +194,7 @@
         <v-card>
           <v-card-text>
             <v-container fluid>
-              <v-layout row wrap justify-space-around>
+              <v-layout wrap justify-space-around>
                 <v-flex xs12 sm6>
                   <v-radio-group v-model="color4" row>
                     <v-radio
