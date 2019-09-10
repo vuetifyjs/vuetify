@@ -12,6 +12,7 @@ export default {
       sortAscending: ': Išrikiuota didėjimo tvarka. Suaktyvinkite, jei norite rikiuoti mažėjimo tvarka.',
       sortNone: ': Nerikiuota. Suaktyvinkite, jei norite rikiuoti didėjimo tvarka.',
     },
+    sortBy: 'Sort by',
   },
   dataFooter: {
     itemsPerPageText: 'Įrašai per puslapį:',
