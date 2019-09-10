@@ -26,6 +26,11 @@ describe('VCard.vue', () => {
       propsData: {
         loading: true,
       },
+      mocks: {
+        $vuetify: {
+          rtl: false,
+        },
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
