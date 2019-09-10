@@ -83,9 +83,13 @@ describe('VProgressLinear.ts', () => {
       propsData: {
         value: 33,
       },
+      mocks: {
+        $vuetify: {
+          rtl: true,
+        },
+      },
     })
 
-    wrapper.vm.$vuetify.rtl = true
     expect(wrapper.html()).toMatchSnapshot()
   })
 

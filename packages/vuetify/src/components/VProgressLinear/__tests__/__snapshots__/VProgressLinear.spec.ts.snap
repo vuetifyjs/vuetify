@@ -30,7 +30,7 @@ exports[`VProgressLinear.ts should render component in RTL mode 1`] = `
      style="height: 4px;"
 >
   <div class="v-progress-linear__background primary"
-       style="opacity: 0.3; width: 67%; right: 33%;"
+       style="opacity: 0.3; right: 33%; width: 67%;"
   >
   </div>
   <div class="v-progress-linear__buffer">
