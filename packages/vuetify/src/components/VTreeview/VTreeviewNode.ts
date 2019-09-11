@@ -146,11 +146,11 @@ export default baseMixins.extend<options>().extend({
   },
 
   created () {
-    this.treeview.register(this)
+    (this.treeview as any).register(this)
   },
 
   beforeDestroy () {
-    this.treeview.unregister(this)
+    (this.treeview as any).unregister(this)
   },
 
   methods: {

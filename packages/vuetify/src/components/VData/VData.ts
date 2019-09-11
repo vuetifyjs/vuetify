@@ -56,7 +56,7 @@ export default Vue.extend({
     },
     customSort: {
       type: Function as any as PropType<typeof sortItems>,
-      default: sortItems,
+      default: () => sortItems,
     },
     mustSort: Boolean,
     multiSort: Boolean,
@@ -86,7 +86,7 @@ export default Vue.extend({
     search: String,
     customFilter: {
       type: Function as any as PropType<typeof searchItems>,
-      default: searchItems,
+      default: () => searchItems,
     },
     serverItemsLength: {
       type: Number,

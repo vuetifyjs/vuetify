@@ -80,7 +80,7 @@ export default function (expandedParentClass = '', x = false) {
 
   function resetStyles (el: HTMLExpandElement) {
     const size = el._initialStyle[sizeProperty]
-    el.style.overflow = el._initialStyle.overflow
+    el.style.overflow = el._initialStyle.overflow!
     if (size != null) el.style[sizeProperty] = size
     delete el._initialStyle
   }

@@ -41,7 +41,7 @@ export default mixins<options &
     double: Boolean,
     format: {
       type: Function,
-      default: (val: string | number) => val,
+      default: () => (val: string | number) => val,
     },
     max: {
       type: Number,

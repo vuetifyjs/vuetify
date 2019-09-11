@@ -68,6 +68,7 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
 
     wrapper.find('.v-treeview-node__checkbox').trigger('click')
     await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
 
     expect(fn).toHaveBeenCalledTimes(1)
     expect(fn).toHaveBeenCalledWith([3, 2])
@@ -90,6 +91,7 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
 
     wrapper.findAll('.v-treeview-node__checkbox').at(2).trigger('click')
     await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
 
     expect(fn).toHaveBeenCalledTimes(1)
     expect(fn).toHaveBeenCalledWith([3])
@@ -109,6 +111,7 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
     wrapper.vm.$on('input', fn)
 
     wrapper.find('.v-treeview-node__checkbox').trigger('click')
+    await wrapper.vm.$nextTick()
     await wrapper.vm.$nextTick()
 
     expect(fn).toHaveBeenCalledTimes(1)
@@ -603,6 +606,7 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
     expect(active).toHaveBeenCalledWith([items[0]])
 
     wrapper.find('.v-treeview-node__checkbox').trigger('click')
+    await wrapper.vm.$nextTick()
     await wrapper.vm.$nextTick()
 
     expect(selected).toHaveBeenCalledTimes(1)
