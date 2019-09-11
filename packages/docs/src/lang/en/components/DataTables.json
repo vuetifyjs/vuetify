@@ -7,7 +7,7 @@
     },
     "slots": {
       "header": "### Slots",
-      "desc": "The `v-data-table` provides a large number of slots for customizing the table. This example showcases some of these slots and what you can do withe each. It is important to note some slot (eg: `item`/`body`/`header`) will completely takes over the internal rendering of the component which will require you to re-implement functionalities such as selection and expansion. Slots will override each other based on the following hierarchy: `body` > `header`/`item`/`footer` > `item.<name>`/`header.<name>`."
+      "desc": "The `v-data-table` provides a large number of slots for customizing the table. This example showcases some of these slots and what you can do withe each. It is important to note some slot (eg: `item`/`body`/`header`) will completely takes over the internal rendering of the component which will require you to re-implement functionalities such as selection and expansion. Some slots will override each other such as: `body` > `item` > `item.<name>` and `header`/`header.<name>`."
     },
     "select": {
       "header": "### Selectable rows",
