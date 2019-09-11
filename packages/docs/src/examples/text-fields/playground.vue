@@ -81,7 +81,7 @@
         <v-switch
           v-model="dense"
           class="ma-1"
-          label="Desne"
+          label="Dense"
         ></v-switch>
         <v-row>
           <v-switch
