@@ -9,9 +9,9 @@ import * as ThemeUtils from './utils'
 import Vue from 'vue'
 import {
   VuetifyParsedTheme,
-  VuetifyThemeOptions,
   VuetifyThemes,
   VuetifyThemeVariant,
+  Theme as ITheme,
 } from 'vuetify/types/services/theme'
 
 export class Theme extends Service {
@@ -19,7 +19,7 @@ export class Theme extends Service {
 
   public disabled = false
 
-  public options: VuetifyThemeOptions['options']
+  public options!: ITheme['options']
 
   public styleEl?: HTMLStyleElement
 
@@ -52,7 +52,7 @@ export class Theme extends Service {
 
   private vueMeta = false
 
-  constructor (options: Partial<VuetifyThemeOptions> = {}) {
+  constructor (options: Partial<ITheme> = {}) {
     super()
     if (options.disable) {
       this.disabled = true
@@ -60,13 +60,10 @@ export class Theme extends Service {
       return
     }
 
-    this.options = {
-      ...this.options,
-      ...options.options,
-    }
+    this.options = options.options!
 
     this.dark = Boolean(options.dark)
-    const themes = options.themes || {}
+    const themes = options.themes || {} as never
 
     this.themes = {
       dark: this.fillVariant(themes.dark, true),
@@ -178,13 +175,14 @@ export class Theme extends Service {
     document.head.appendChild(this.styleEl)
   }
 
-  private initVueMeta (root: Vue) {
+  private initVueMeta (root: any) {
     this.vueMeta = true
 
-    const metaKeyName = (root as any).$meta().getOptions().keyName
-    const metaInfo = (root.$options as any)[metaKeyName] || {}
+    const meta = root.$meta()
+    const metaKeyName = typeof meta.getOptions === 'function' ? meta.getOptions().keyName : 'metaInfo'
+    const metaInfo = root.$options[metaKeyName] || {}
 
-    ;(root.$options as any)[metaKeyName] = () => {
+    root.$options[metaKeyName] = () => {
       metaInfo.style = metaInfo.style || []
 
       const vuetifyStylesheet = metaInfo.style.find((s: any) => s.id === 'vuetify-theme-stylesheet')

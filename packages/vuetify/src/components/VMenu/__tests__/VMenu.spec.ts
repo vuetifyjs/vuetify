@@ -31,7 +31,6 @@ describe('VMenu.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         value: false,
-        fullWidth: true,
       },
       scopedSlots: {
         activator: '<button v-on="props.on"></button>',

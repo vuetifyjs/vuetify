@@ -217,6 +217,14 @@
             {
               "type": "markup",
               "value": "js_webpack_sass"
+            },
+            {
+              "type": "text",
+              "lang": "webpackText3"
+            },
+            {
+              "type": "markup",
+              "value": "js_webpack_sass8"
             }
           ]
         }

@@ -1,7 +1,7 @@
 // Types
 import { Component } from 'vue'
 
-export interface VuetifyIconOptions {
+export interface Icons {
   /**
    * Select a base icon font to use. Note that none of these are included, you must install them yourself
    *

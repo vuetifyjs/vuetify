@@ -156,7 +156,7 @@ exports[`VSelect.ts should only show items if they are in items 3`] = `
 `;
 
 exports[`VSelect.ts should only show items if they are in items 4`] = `
-<div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
+<div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select v-select--is-multi">
   <div class="v-input__control">
     <div role="button"
          aria-haspopup="listbox"

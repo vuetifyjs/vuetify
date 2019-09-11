@@ -7,6 +7,10 @@
   "resetSearch": "Reset search",
   "gotchas": [
     {
+      "q": "### Are there examples on how the v2 grid compares to v1.5?",
+      "a": "Yes, you can [view grid examples here](https://gist.github.com/johnleider/207f63c9d30fb77042a0bb0258c5ab32)."
+    },
+    {
       "q": "### Error: Cannot find module 'node-sass'",
       "a": "Ensure that your `@vue/cli packages` located in `package.json` are at least **^3.5.0**."
     },

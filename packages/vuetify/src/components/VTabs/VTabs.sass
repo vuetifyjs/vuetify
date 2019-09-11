@@ -47,14 +47,10 @@
   height: $tabs-bar-height
 
   // https://github.com/vuetifyjs/vuetify/issues/6932
-  &.v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows) > .v-slide-group__wrapper > .v-tabs-bar__content
-    & > .v-tab:first-child,
-    & > .v-tabs-slider-wrapper + .v-tab
-      +ltr()
-        margin-left: $tabs-item-mobile-no-arrows-margin
-
-      +rtl()
-        margin-right: $tabs-item-mobile-no-arrows-margin
+  &.v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows):not(.v-slide-group--has-affixes)
+    .v-slide-group__prev
+      display: initial
+      visibility: hidden
 
   &.v-item-group > *
     cursor: initial
@@ -72,10 +68,12 @@
   outline: none
   padding: $tabs-item-padding
   position: relative
+  text-align: center
   text-decoration: none
   text-transform: uppercase
   transition: none
   user-select: none
+  white-space: normal
 
   // Needs increased specificity
   &.v-tab
@@ -109,7 +107,7 @@
     z-index: 1
 
 // Modifier
-.v-tabs--align-with-title > .v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows) > .v-slide-group__wrapper > .v-tabs-bar__content
+.v-tabs--align-with-title > .v-tabs-bar:not(.v-tabs-bar--show-arrows) > .v-slide-group__wrapper > .v-tabs-bar__content
   & > .v-tab:first-child,
   & > .v-tabs-slider-wrapper + .v-tab
     +ltr()

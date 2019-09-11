@@ -94,7 +94,10 @@ export default VSheet.extend({
       return this.prominent
     },
     styles (): object {
-      return this.measurableStyles
+      return {
+        ...this.measurableStyles,
+        height: convertToUnit(this.computedHeight),
+      }
     },
   },
 
