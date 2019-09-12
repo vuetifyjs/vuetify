@@ -106,8 +106,8 @@
 <script>
   export default {
     data: () => ({
-      today: '2019-01-08',
-      focus: '2019-01-08',
+      today: '2019-12-01',
+      focus: '2019-12-01',
       type: 'month',
       typeToLabel: {
         month: 'Month',
@@ -281,6 +281,9 @@
           timeZone: 'UTC', month: 'long',
         })
       },
+    },
+    mounted () {
+      this.$refs.calendar.move(1)
     },
     methods: {
       viewDay ({ date }) {
