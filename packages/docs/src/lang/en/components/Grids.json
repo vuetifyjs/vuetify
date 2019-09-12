@@ -40,7 +40,7 @@
     },
     "row-column-breakpoint": {
       "header": "### Row and column breakpoints",
-      "desc": "Dynamically change your layout based upon resolution. **(resize your screen and watch the layout change to a `row` on small breakpoints)**"
+      "desc": "Dynamically change your layout based upon resolution. **(resize your screen and watch the top `row` layout change on sm, md, and lg breakpoints)**"
     },
     "vertical-alignment": {
       "header": "### Vertical alignment",
