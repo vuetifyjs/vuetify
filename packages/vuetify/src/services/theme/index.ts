@@ -175,13 +175,14 @@ export class Theme extends Service {
     document.head.appendChild(this.styleEl)
   }
 
-  private initVueMeta (root: Vue) {
+  private initVueMeta (root: any) {
     this.vueMeta = true
 
-    const metaKeyName = (root as any).$meta().getOptions().keyName
-    const metaInfo = (root.$options as any)[metaKeyName] || {}
+    const meta = root.$meta()
+    const metaKeyName = typeof meta.getOptions === 'function' ? meta.getOptions().keyName : 'metaInfo'
+    const metaInfo = root.$options[metaKeyName] || {}
 
-    ;(root.$options as any)[metaKeyName] = () => {
+    root.$options[metaKeyName] = () => {
       metaInfo.style = metaInfo.style || []
 
       const vuetifyStylesheet = metaInfo.style.find((s: any) => s.id === 'vuetify-theme-stylesheet')
