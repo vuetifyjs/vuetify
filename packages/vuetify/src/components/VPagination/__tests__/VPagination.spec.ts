@@ -34,7 +34,6 @@ describe('VPagination.ts', () => {
         value: 2,
       },
     })
-    jest.runAllTimers()
 
     await wrapper.vm.$nextTick()
 
@@ -74,7 +73,6 @@ describe('VPagination.ts', () => {
         value: 2,
       },
     })
-    jest.runAllTimers()
 
     await wrapper.vm.$nextTick()
 
@@ -95,7 +93,6 @@ describe('VPagination.ts', () => {
         value: 1,
       },
     })
-    jest.runAllTimers()
 
     expect(wrapper.html()).toMatchSnapshot()
   })
@@ -108,11 +105,11 @@ describe('VPagination.ts', () => {
       },
     })
 
-    jest.runAllTimers()
+    await wrapper.vm.$nextTick()
     expect(wrapper.vm.selected).toBe(1)
 
     wrapper.setProps({ value: 2 })
-    jest.runAllTimers()
+    await wrapper.vm.$nextTick()
     expect(wrapper.vm.selected).toBe(2)
   })
 
@@ -122,7 +119,6 @@ describe('VPagination.ts', () => {
         length: 100,
       },
     })
-    jest.runAllTimers()
 
     await wrapper.vm.$nextTick()
 
@@ -137,7 +133,6 @@ describe('VPagination.ts', () => {
         value: 50,
       },
     })
-    jest.runAllTimers()
 
     await wrapper.vm.$nextTick()
 
@@ -155,7 +150,6 @@ describe('VPagination.ts', () => {
     const maxLength = wrapper.vm.totalVisible
     const left = Math.floor(maxLength / 2)
     wrapper.setProps({ value: left })
-    jest.runAllTimers()
 
     await wrapper.vm.$nextTick()
 
@@ -175,7 +169,6 @@ describe('VPagination.ts', () => {
     const left = Math.floor(maxLength / 2)
     const right = wrapper.vm.length - left + 1 + even
     wrapper.setProps({ value: right })
-    jest.runAllTimers()
 
     await wrapper.vm.$nextTick()
 
@@ -191,7 +184,6 @@ describe('VPagination.ts', () => {
         totalVisible: 10,
       },
     })
-    jest.runAllTimers()
 
     await wrapper.vm.$nextTick()
 

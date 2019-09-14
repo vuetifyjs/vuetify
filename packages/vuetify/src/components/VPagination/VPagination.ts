@@ -105,12 +105,11 @@ export default mixins(Colorable, Themeable).extend({
   },
 
   methods: {
-    init () {
+    async init () {
       this.selected = null
-
-      this.$nextTick(this.onResize)
-      // TODO: Change this (f75dee3a, cbdf7caa)
-      setTimeout(() => (this.selected = this.value), 100)
+      await this.$nextTick()
+      this.selected = this.value
+      this.onResize()
     },
     onResize () {
       const width = this.$el && this.$el.parentElement
