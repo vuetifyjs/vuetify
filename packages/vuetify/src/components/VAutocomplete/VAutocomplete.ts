@@ -33,7 +33,7 @@ export default VSelect.extend({
     },
     filter: {
       type: Function,
-      default: () => (item: any, queryText: string, itemText: string) => {
+      default: (item: any, queryText: string, itemText: string) => {
         return itemText.toLocaleLowerCase().indexOf(queryText.toLocaleLowerCase()) > -1
       },
     },
