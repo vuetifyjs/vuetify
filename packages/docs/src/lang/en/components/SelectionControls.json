@@ -93,7 +93,9 @@
     "prepend": "Components.Selects.slots.prepend"
   },
   "events": {
+    "blur": "Components.Inputs.events.blur",
     "change": "Components.Inputs.events.change",
+    "focus": "Emitted when the input is focused",
     "update:indeterminate": "The **indeterminate.sync** event.",
     "update:error": "Mixins.Validatable.events['update:error']"
   }
