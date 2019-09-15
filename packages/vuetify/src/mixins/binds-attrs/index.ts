@@ -26,6 +26,7 @@ export default Vue.extend({
     attrs$: {} as Dictionary<string>,
     listeners$: {} as Dictionary<Function | Function[]>,
   }),
+
   watch: {
     // Work around unwanted re-renders: https://github.com/vuejs/vue/issues/10115
     // Make sure to use `attrs$` instead of `$attrs` (confusing right?)
