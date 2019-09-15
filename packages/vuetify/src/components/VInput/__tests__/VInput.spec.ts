@@ -61,7 +61,7 @@ describe('VInput.ts', () => {
     expect(wrapper2.html()).toMatchSnapshot()
   })
 
-  it('should generate an icon and match snapshot', () => {
+  it('should generate an icon and match snapshot', async () => {
     const wrapper = mountFunction({
       propsData: {
         prependIcon: 'list',
@@ -74,6 +74,8 @@ describe('VInput.ts', () => {
       prependIcon: undefined,
       appendIcon: 'list',
     })
+
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
   })
@@ -119,7 +121,7 @@ describe('VInput.ts', () => {
     expect(click).toHaveBeenCalled()
   })
 
-  it('should accept a custom height', () => {
+  it('should accept a custom height', async () => {
     const wrapper = mountFunction()
 
     const inputWrapper = wrapper.find('.v-input__slot')
@@ -127,12 +129,14 @@ describe('VInput.ts', () => {
     expect(wrapper.vm.height).toBeUndefined()
 
     wrapper.setProps({ height: 10 })
+    await wrapper.vm.$nextTick()
     expect(inputWrapper.element.style.height).toBe('10px')
     wrapper.setProps({ height: '20px' })
+    await wrapper.vm.$nextTick()
     expect(inputWrapper.element.style.height).toBe('20px')
   })
 
-  it('should update lazyValue when value is updated', () => {
+  it('should update lazyValue when value is updated', async () => {
     const wrapper = mountFunction({
       propsData: {
         value: 'foo',
@@ -142,6 +146,7 @@ describe('VInput.ts', () => {
     expect(wrapper.vm.lazyValue).toBe('foo')
 
     wrapper.setProps({ value: 'bar' })
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.lazyValue).toBe('bar')
   })
@@ -180,6 +185,7 @@ describe('VInput.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({ errorMessages: 'required', error: false })
+    await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
   })
 
