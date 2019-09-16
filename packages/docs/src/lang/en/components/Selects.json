@@ -100,6 +100,7 @@
     "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
     "focus": "Emitted when component is focused",
     "update:error": "Mixins.Validatable.events['update:error']",
+    "update:list-index": "Emitted when menu item is selected using keyboard arrows",
     "update:search-input": "The `search-input.sync` event"
   }
 }
