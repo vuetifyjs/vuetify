@@ -21,7 +21,7 @@
       "header": "### Checkboxes - Colors",
       "desc": "Checkboxes can be colored by using any of the builtin colors and contextual names using the `color` prop."
     },
-    "checkboxes-inline-texfield": {
+    "checkboxes-inline-textfield": {
       "header": "### Checkboxes - Inline with a textfield",
       "desc": ""
     },
