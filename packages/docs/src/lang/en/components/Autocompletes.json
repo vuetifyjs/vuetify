@@ -28,6 +28,10 @@
     "stateSelector": {
       "header": "### State selector",
       "desc": "Using a combination of `v-autocomplete` slots and transitions, you can create a stylish toggleable autocomplete field such as this state selector."
+    },
+    "dense": {
+      "header": "### Dense",
+      "desc": "You can use `dense` prop to reduce autocomplete height and lower max height of list items."
     }
   },
   "props": {
