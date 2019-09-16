@@ -16,6 +16,10 @@
     "combobox-multiple": {
       "header": "### Multiple combobox",
       "desc": "Previously known as **tags** - user is allowed to enter more than 1 value"
+    },
+    "dense": {
+      "header": "### Dense",
+      "desc": "You can use `dense` prop to reduce combobox height and lower max height of list items."
     }
   },
   "props": {
