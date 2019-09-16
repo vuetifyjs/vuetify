@@ -56,7 +56,7 @@
                 <v-tooltip bottom>
                   <template #activator="{ on: tooltip }">
                     <v-btn
-                      :href="template.demoUrl.length === 1 ? `${template.demoUrl[0]}?ref=vuetifyjs.com${template.query}` : undefined"
+                      :href="template.demoUrl.length === 1 ? `${template.demoUrl[0]}?ref=vuetifyjs.com${template.query || ''}` : undefined"
                       icon
                       target="_blank"
                       rel="noopener"
@@ -73,7 +73,7 @@
                 <v-list-item
                   v-for="([title, demo], i) in template.demoUrl"
                   :key="i"
-                  :href="`${demo}?ref=vuetifyjs.com${template.query}`"
+                  :href="`${demo}?ref=vuetifyjs.com${template.query || ''}`"
                   target="_blank"
                   rel="noopener"
                 >
@@ -91,7 +91,7 @@
 
             <v-btn
               :color="template.price ? 'success' : 'indigo'"
-              :href="`${template.url}?ref=vuetifyjs.com${template.query}`"
+              :href="`${template.url}?ref=vuetifyjs.com${template.query || ''}`"
               :outlined="!template.price"
               dark
               min-width="100"
@@ -120,6 +120,14 @@
           url: 'https://www.creative-tim.com/product/vuetify-material-dashboard-pro',
           demoUrl: ['https://demos.creative-tim.com/vuetify-material-dashboard-pro/'],
           query: '&partner=116160',
+        },
+        {
+          title: vm.$t('Themes.Premium.templates.shopify-e-commerce.title'),
+          description: vm.$t('Themes.Premium.templates.shopify-e-commerce.description'),
+          src: 'https://cdn.vuetifyjs.com/images/starter/shopify-e-commerce.png',
+          price: '$99',
+          url: 'https://store.vuetifyjs.com/product/shopify-e-commerce-theme',
+          demoUrl: ['https://store-beta.vuetifyjs.com'],
         },
         {
           title: vm.$t('Themes.Premium.templates.material-kit.title'),
