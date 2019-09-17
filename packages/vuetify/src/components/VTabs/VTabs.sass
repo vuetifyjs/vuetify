@@ -41,6 +41,10 @@
   .v-menu__activator
     height: 100%
 
+  &:not(.v-tabs--vertical)
+    .v-tab
+      white-space: normal
+
 // Element
 .v-tabs-bar
   border-radius: inherit
@@ -73,7 +77,6 @@
   text-transform: uppercase
   transition: none
   user-select: none
-  white-space: normal
 
   // Needs increased specificity
   &.v-tab
