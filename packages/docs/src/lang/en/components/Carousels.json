@@ -1,6 +1,10 @@
 {
   "header": "# Carousels",
   "headerText": "The `v-carousel` component is used to display large numbers of visual content on a rotating timer.",
+  "subComponentsHeader": "### Sub-components",
+  "subComponentsList": [
+    "`v-carousel-item`: The image container used by `v-carousel`. Extends `v-window-item`, is routable, and uses `v-img` in its default slot."
+  ],
   "examples": {
     "usage": {
       "desc": "The `v-carousel` component expands upon `v-window` by providing additional features targeted at displaying images."
@@ -23,7 +27,7 @@
     },
     "hide-controls": {
       "header": "### Hide controls",
-      "desc": "You can hide the carousel navigation controls with `:show-arrow=\"false\"`."
+      "desc": "You can hide the carousel navigation controls with `:show-arrows=\"false\"`."
     },
     "model": {
       "header": "### `v-model` control",

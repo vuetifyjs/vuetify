@@ -81,7 +81,7 @@
     "value": "crwdns39216:0[v-chip-group]crwdne39216:0"
   },
   "events": {
-    "click": "crwdns39218:0crwdne39218:0",
+    "click": "crwdns42386:0crwdne42386:0",
     "click:close": "crwdns39220:0crwdne39220:0",
     "update:active": "crwdns39222:0crwdne39222:0"
   }

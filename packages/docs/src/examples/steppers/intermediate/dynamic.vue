@@ -2,18 +2,11 @@
   <div>
     <v-card class="mb-4">
       <v-card-text>
-        <div>{{ typeof steps }}</div>
-
-        <v-text-field
-          :value="steps"
-          hint="This demo has a maximum of 6 steps"
+        <v-select
+          v-model="steps"
+          :items="[2, 3, 4, 5, 6]"
           label="# of steps"
-          max="6"
-          min="1"
-          persistent-hint
-          type="number"
-          @input="onInput"
-        ></v-text-field>
+        ></v-select>
       </v-card-text>
     </v-card>
     <v-stepper v-model="e1">
@@ -79,9 +72,6 @@
     },
 
     methods: {
-      onInput (val) {
-        this.steps = parseInt(val)
-      },
       nextStep (n) {
         if (n === this.steps) {
           this.e1 = 1

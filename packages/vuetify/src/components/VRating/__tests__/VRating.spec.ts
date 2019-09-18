@@ -8,6 +8,7 @@ import VRating from '../VRating'
 import {
   mount,
   Wrapper,
+  MountOptions,
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../util/mixins'
 
@@ -16,8 +17,13 @@ describe('VRating.ts', () => {
   let mountFunction: (options?: object) => Wrapper<Instance>
 
   beforeEach(() => {
-    mountFunction = (options = {}) => {
+    mountFunction = (options: MountOptions<Instance>) => {
       return mount(VRating, {
+        mocks: {
+          $vuetify: {
+            rtl: false,
+          },
+        },
         ...options,
       })
     }
@@ -167,6 +173,35 @@ describe('VRating.ts', () => {
         getBoundingClientRect: () => ({ width: 10, left: 0 }),
       },
     }, 1)).toBe(2)
+  })
+
+  it('should check for half event in rtl', () => {
+    const wrapper = mountFunction({
+      mocks: {
+        $vuetify: {
+          rtl: true,
+        },
+      },
+    })
+
+    const event = new MouseEvent('hover')
+    expect(wrapper.vm.genHoverIndex(event, 1)).toBe(1.5)
+
+    wrapper.setProps({ halfIncrements: true })
+
+    expect(wrapper.vm.genHoverIndex({
+      pageX: 0,
+      target: {
+        getBoundingClientRect: () => ({ width: 10, left: 0 }),
+      },
+    }, 1)).toBe(2)
+
+    expect(wrapper.vm.genHoverIndex({
+      pageX: 6,
+      target: {
+        getBoundingClientRect: () => ({ width: 10, left: 0 }),
+      },
+    }, 1)).toBe(1.5)
   })
 
   it('should render a scoped slot', () => {

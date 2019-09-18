@@ -10,8 +10,7 @@
       "desc": "Você também pode alterar o ícone do delimitador do carrossel e os ícones anterior/próximo."
     },
     "hide-controls": {
-      "header": "Ocultar controles",
-      "desc": "Você pode ocultar os controles inferiores com a propriedade `hide-controls`."
+      "header": "Ocultar controles"
     }
   },
   "props": {

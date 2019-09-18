@@ -154,16 +154,20 @@ export default baseMixins.extend({
       // If the dialog content contains
       // the click event, or if the
       // dialog is not active
-      if (!this.isActive || this.$refs.content.contains(target)) return false
+      if (this._isDestroyed || !this.isActive || this.$refs.content.contains(target)) return false
 
       // If we made it here, the click is outside
       // and is active. If persistent, and the
       // click is on the overlay, animate
       this.$emit('click:outside')
 
-      if (this.persistent) {
-        if (!this.noClickAnimation &&
-          this.overlay === target
+      if (this.persistent && this.overlay) {
+        if (
+          !this.noClickAnimation &&
+          (
+            this.overlay.$el === target ||
+            this.overlay.$el.contains(target)
+          )
         ) this.animateClick()
 
         return false

@@ -10,18 +10,18 @@
       <v-toolbar-title>
         <span class="subheading">METRONOME</span>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <v-btn icon>
         <v-icon>mdi-share-variant</v-icon>
       </v-btn>
     </v-toolbar>
 
     <v-card-text>
-      <v-layout
-        justify-space-between
-        mb-4
+      <v-row
+        class="mb-4"
+        justify="space-between"
       >
-        <v-flex text-left>
+        <v-col class="text-left">
           <span
             class="display-3 font-weight-light"
             v-text="bpm"
@@ -38,8 +38,8 @@
               size="12"
             ></v-avatar>
           </v-fade-transition>
-        </v-flex>
-        <v-flex text-right>
+        </v-col>
+        <v-col class="text-right">
           <v-btn
             :color="color"
             dark
@@ -51,8 +51,8 @@
               {{ isPlaying ? 'mdi-pause' : 'mdi-play' }}
             </v-icon>
           </v-btn>
-        </v-flex>
-      </v-layout>
+        </v-col>
+      </v-row>
 
       <v-slider
         v-model="bpm"

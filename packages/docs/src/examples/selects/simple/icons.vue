@@ -1,10 +1,10 @@
 <template>
   <v-container fluid>
-    <v-layout wrap align-center>
-      <v-flex xs6>
+    <v-row align="center">
+      <v-col cols="6">
         <v-subheader>Prepended icon</v-subheader>
-      </v-flex>
-      <v-flex xs6>
+      </v-col>
+      <v-col cols="6">
         <v-select
           v-model="e1"
           :items="states"
@@ -14,11 +14,11 @@
           prepend-icon="map"
           single-line
         ></v-select>
-      </v-flex>
-      <v-flex xs6>
+      </v-col>
+      <v-col cols="6">
         <v-subheader>Appended icon</v-subheader>
-      </v-flex>
-      <v-flex xs6>
+      </v-col>
+      <v-col cols="6">
         <v-select
           v-model="e2"
           :items="states"
@@ -28,8 +28,8 @@
           label="Select"
           single-line
         ></v-select>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

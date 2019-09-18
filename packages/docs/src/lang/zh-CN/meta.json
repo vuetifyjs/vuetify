@@ -4,6 +4,7 @@
     "description": "哎呀，好像你要找的东西不存在了！"
   },
   "getting-started/quick-start": {
+    "title": "快速开始",
     "keywords": "快速启动，vuetify模板，安装vuetify"
   },
   "getting-started/why-vuetify": {
@@ -33,8 +34,17 @@
   "customization/icons": {
     "title": "图标"
   },
+  "customization/theme": {
+    "title": "主题"
+  },
   "styles/scroll": {
     "keywords": "滚动，滚动，平滑滚动，过渡"
+  },
+  "styles/transitions": {
+    "title": "过渡"
+  },
+  "framework/sandbox": {
+    "title": "沙箱"
   },
   "components/api-explorer": {
     "title": "API 浏览器"
@@ -44,5 +54,8 @@
   },
   "components/aspect-ratios": {
     "title": "长宽比"
+  },
+  "components/grids": {
+    "title": "栅格系统"
   }
 }

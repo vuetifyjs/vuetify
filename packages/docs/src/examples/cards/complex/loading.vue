@@ -11,7 +11,7 @@
 
     <v-card-title>Cafe Badilico</v-card-title>
     <v-card-text>
-      <v-layout align-center>
+      <v-row align="center">
         <v-rating
           :value="4.5"
           color="amber"
@@ -22,7 +22,7 @@
         ></v-rating>
 
         <div class="grey--text ml-4">4.5 (413)</div>
-      </v-layout>
+      </v-row>
 
       <div class="my-4 subtitle-1 black--text">
         $ • Italian, Cafe

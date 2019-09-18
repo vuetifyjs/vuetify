@@ -1,21 +1,34 @@
 <template>
-  <v-layout column>
-    <v-layout wrap justify-space-around>
-      <v-switch v-model="mandatory" label="Mandatory"></v-switch>
-      <v-switch v-model="multiple" label="Multiple"></v-switch>
-      <v-flex xs12>
-        <v-select v-model="type" :items="types" label="Item type"></v-select>
-      </v-flex>
-    </v-layout>
+  <v-container>
+    <v-row justify="space-around">
+      <v-switch
+        v-model="mandatory"
+        label="Mandatory"
+      ></v-switch>
+      <v-switch
+        v-model="multiple"
+        label="Multiple"
+      ></v-switch>
+      <v-col cols="12">
+        <v-select
+          v-model="type"
+          :items="types"
+          label="Item type"
+        ></v-select>
+      </v-col>
+    </v-row>
 
-    <v-item-group :mandatory="mandatory" :multiple="multiple">
-      <v-container grid-list-md>
-        <v-layout wrap>
-          <v-flex
+    <v-item-group
+      :mandatory="mandatory"
+      :multiple="multiple"
+    >
+      <v-container class="pa-0">
+        <v-row>
+          <v-col
             v-for="n in 3"
             :key="n"
-            xs12
-            md4
+            cols="12"
+            md="4"
           >
             <v-item v-slot:default="{ active, toggle }">
               <v-card
@@ -52,11 +65,11 @@
                 </v-btn>
               </v-img>
             </v-item>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-item-group>
-  </v-layout>
+  </v-container>
 </template>
 
 <script>

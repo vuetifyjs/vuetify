@@ -153,8 +153,7 @@ export default CalendarBase.extend({
       return this.$createElement(VBtn, {
         props: {
           color,
-          fab: !hasMonth,
-          rounded: hasMonth,
+          fab: true,
           depressed: true,
           small: true,
         },

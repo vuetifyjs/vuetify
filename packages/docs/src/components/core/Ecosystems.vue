@@ -3,7 +3,7 @@
     bottom
     left
     offset-y
-    max-height="700"
+    max-height="calc(100% - 16px)"
   >
     <template #activator="{ on: menu }">
       <v-btn

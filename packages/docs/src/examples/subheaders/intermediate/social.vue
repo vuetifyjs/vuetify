@@ -11,7 +11,7 @@
 
       <v-toolbar-title>Application</v-toolbar-title>
 
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
 
       <v-btn icon>
         <v-icon>search</v-icon>
@@ -21,21 +21,19 @@
     <v-container
       v-for="type in types"
       :key="type"
+      class="grey lighten-4"
       fluid
-      grid-list-md
-      grey
-      lighten-4
     >
       <v-subheader>{{ type }}</v-subheader>
 
-      <v-layout wrap>
-        <v-spacer></v-spacer>
-        <v-flex
+      <v-row>
+        <div class="flex-grow-1"></div>
+        <v-col
           v-for="card in cards"
           :key="card"
-          xs12
-          sm6
-          md4
+          cols="12"
+          sm="6"
+          md="4"
         >
           <v-card>
             <v-img
@@ -62,8 +60,8 @@
               </v-btn>
             </v-card-actions>
           </v-card>
-        </v-flex>
-      </v-layout>
+        </v-col>
+      </v-row>
     </v-container>
   </v-card>
 </template>

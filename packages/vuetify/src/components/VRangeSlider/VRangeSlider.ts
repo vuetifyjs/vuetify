@@ -161,39 +161,51 @@ export default VSlider.extend({
           const onFocus = (e: Event) => {
             this.isFocused = true
             this.activeThumb = index
+
+            this.$emit('focus', e)
+          }
+
+          const onBlur = (e: Event) => {
+            this.isFocused = false
+            this.activeThumb = null
+
+            this.$emit('blur', e)
           }
 
           const valueWidth = this.inputWidth[index]
           const isActive = this.isActive && this.activeThumb === index
           const isFocused = this.isFocused && this.activeThumb === index
 
-          return this.genThumbContainer(value, valueWidth, isActive, isFocused, onDrag, onFocus, `thumb_${index}`)
+          return this.genThumbContainer(value, valueWidth, isActive, isFocused, onDrag, onFocus, onBlur, `thumb_${index}`)
         }),
       ]
     },
-    onFocus (index: number) {
-      this.isFocused = true
-      this.activeThumb = index
-    },
-    onBlur () {
-      this.isFocused = false
-      this.activeThumb = null
-    },
     onSliderClick (e: MouseEvent) {
       if (!this.isActive) {
-        // It doesn't seem to matter if we focus on the wrong thumb here
-        const thumb = this.$refs.thumb_1 as HTMLElement
-        thumb.focus()
+        if (this.noClick) {
+          this.noClick = false
+          return
+        }
 
-        this.onMouseMove(e, true)
+        const { value, isInsideTrack } = this.parseMouseMove(e)
+
+        if (isInsideTrack) {
+          this.activeThumb = this.getIndexOfClosestValue(this.internalValue, value)
+          const refName = `thumb_${this.activeThumb}`
+          const thumbRef = this.$refs[refName] as HTMLElement
+          thumbRef.focus()
+        }
+
+        this.setInternalValue(value)
+
         this.$emit('change', this.internalValue)
       }
     },
-    onMouseMove (e: MouseEvent, trackClick = false) {
+    onMouseMove (e: MouseEvent) {
       const { value, isInsideTrack } = this.parseMouseMove(e)
 
       if (isInsideTrack) {
-        if (trackClick) this.activeThumb = this.getIndexOfClosestValue(this.internalValue, value)
+        this.activeThumb = this.getIndexOfClosestValue(this.internalValue, value)
       }
 
       this.setInternalValue(value)
@@ -206,7 +218,7 @@ export default VSlider.extend({
       if (value == null) return
 
       this.setInternalValue(value)
-      this.$emit('change', value)
+      this.$emit('change', this.internalValue)
     },
     setInternalValue (value: number) {
       this.internalValue = this.internalValue.map((v: number, i: number) => {

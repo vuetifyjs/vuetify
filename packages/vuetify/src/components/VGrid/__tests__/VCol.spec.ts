@@ -140,6 +140,19 @@ describe('layout > col', () => {
     expect(wrapper.classes()).toHaveLength(2)
   })
 
+  it('should apply ".justify-self-*" class with "justify-self" prop', async () => {
+    const wrapper = mount(VCol, {
+      propsData: {
+        justifySelf: 'center',
+      },
+    })
+
+    expect(wrapper.is('div')).toBe(true)
+    expect(wrapper.classes()).toContain('col')
+    expect(wrapper.classes()).toContain('justify-self-center')
+    expect(wrapper.classes()).toHaveLength(2)
+  })
+
   it('should cache classes', () => {
     const wrapper = mount(VCol)
     const wrapper2 = mount(VCol)

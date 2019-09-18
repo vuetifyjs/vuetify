@@ -1,11 +1,11 @@
 <template>
   <v-container fluid>
-    <v-layout wrap align-center>
-      <v-flex xs6>
+    <v-row align="center">
+      <v-col cols="6">
         <v-subheader>Custom items</v-subheader>
-      </v-flex>
+      </v-col>
 
-      <v-flex xs6>
+      <v-col cols="6">
         <v-select
           v-model="select"
           :hint="`${select.state}, ${select.abbr}`"
@@ -17,8 +17,8 @@
           return-object
           single-line
         ></v-select>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

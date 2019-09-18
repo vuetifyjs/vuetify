@@ -1,6 +1,6 @@
 <template>
-  <v-layout justify-center>
-    <v-flex xs12 sm10 md8 lg6>
+  <v-row justify="center">
+    <v-col cols="12" sm="10" md="8" lg="6">
       <v-card ref="form">
         <v-card-text>
           <v-text-field
@@ -62,7 +62,7 @@
         <v-divider class="mt-12"></v-divider>
         <v-card-actions>
           <v-btn text>Cancel</v-btn>
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
           <v-slide-x-reverse-transition>
             <v-tooltip
               v-if="formHasErrors"
@@ -84,8 +84,8 @@
           <v-btn color="primary" text @click="submit">Submit</v-btn>
         </v-card-actions>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
