@@ -1,10 +1,10 @@
 <template>
   <v-footer padless>
-    <v-flex
-      text-center
-      xs12
+    <v-col
+      class="text-center"
+      cols="12"
     >
       {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
-    </v-flex>
+    </v-col>
   </v-footer>
 </template>

@@ -1,6 +1,6 @@
 <template>
-  <v-layout column align-center>
-    <v-layout wrap justify-space-around>
+  <v-row align="center">
+    <v-row justify="space-around">
       <v-switch v-model="disabled" class="ma-2" label="Disabled"></v-switch>
       <v-switch v-model="absolute" class="ma-2" label="Absolute"></v-switch>
       <v-switch v-model="openOnHover" class="ma-2" label="Open on hover"></v-switch>
@@ -9,7 +9,7 @@
       <v-switch v-model="offsetX" label="X offset"></v-switch>
       <v-switch v-model="offsetY" label="Y offset"></v-switch>
       <v-switch v-model="value" class="ma-2" label="Value"></v-switch>
-    </v-layout>
+    </v-row>
 
     <v-menu
       v-model="value"
@@ -40,7 +40,7 @@
         </v-list-item>
       </v-list>
     </v-menu>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

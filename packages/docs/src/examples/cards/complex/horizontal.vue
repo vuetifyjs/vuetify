@@ -10,7 +10,7 @@
 
       <v-toolbar-title>My Music</v-toolbar-title>
 
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
 
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
@@ -20,10 +20,9 @@
     <v-container
       class="pa-2"
       fluid
-      grid-list-md
     >
-      <v-layout column>
-        <v-flex>
+      <v-row>
+        <v-col>
           <v-card
             color="#385F73"
             dark
@@ -37,9 +36,9 @@
               <v-btn text>Listen Now</v-btn>
             </v-card-actions>
           </v-card>
-        </v-flex>
+        </v-col>
 
-        <v-flex
+        <v-col
           v-for="(item, i) in items"
           :key="i"
         >
@@ -65,8 +64,8 @@
               </v-list-item-avatar>
             </v-list-item>
           </v-card>
-        </v-flex>
-      </v-layout>
+        </v-col>
+      </v-row>
     </v-container>
   </v-card>
 </template>

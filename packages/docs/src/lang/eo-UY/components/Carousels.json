@@ -1,6 +1,10 @@
 {
   "header": "crwdns38128:0crwdne38128:0",
   "headerText": "crwdns31912:0crwdne31912:0",
+  "subComponentsHeader": "crwdns42350:0crwdne42350:0",
+  "subComponentsList": [
+    "crwdns42352:0crwdne42352:0"
+  ],
   "examples": {
     "usage": {
       "desc": "crwdns38130:0crwdne38130:0"
@@ -23,7 +27,7 @@
     },
     "hide-controls": {
       "header": "crwdns38148:0crwdne38148:0",
-      "desc": "crwdns38150:0crwdne38150:0"
+      "desc": "crwdns42354:0crwdne42354:0"
     },
     "model": {
       "header": "crwdns38152:0crwdne38152:0",

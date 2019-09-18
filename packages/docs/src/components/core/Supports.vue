@@ -1,10 +1,9 @@
 <template>
   <v-menu
-    attach
     bottom
     left
     offset-y
-    max-height="500"
+    max-height="calc(100% - 16px)"
   >
     <template #activator="{ on: menu }">
       <v-btn

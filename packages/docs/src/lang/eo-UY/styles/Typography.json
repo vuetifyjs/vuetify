@@ -2,45 +2,5 @@
   "header": "crwdns37598:0crwdne37598:0",
   "headerText": "crwdns37600:0crwdne37600:0",
   "fontHeader": "crwdns37602:0crwdne37602:0",
-  "fontText": "crwdns37604:0crwdne37604:0",
-  "fonts": [
-    "crwdns37606:0crwdne37606:0",
-    "crwdns37608:0crwdne37608:0",
-    "crwdns37610:0crwdne37610:0",
-    "crwdns37612:0crwdne37612:0",
-    "crwdns37614:0crwdne37614:0",
-    "crwdns37616:0crwdne37616:0",
-    "crwdns37618:0crwdne37618:0",
-    "crwdns37620:0crwdne37620:0",
-    "crwdns37622:0crwdne37622:0",
-    "crwdns37624:0crwdne37624:0",
-    "crwdns37626:0crwdne37626:0",
-    "crwdns37628:0crwdne37628:0"
-  ],
-  "italic": "crwdns37630:0crwdne37630:0",
-  "italicText": "crwdns37632:0crwdne37632:0",
-  "transformHeader": "crwdns37634:0crwdne37634:0",
-  "transformText": "crwdns37636:0crwdne37636:0",
-  "transforms": [
-    "crwdns37638:0crwdne37638:0",
-    "crwdns37640:0crwdne37640:0",
-    "crwdns37642:0crwdne37642:0",
-    "crwdns37644:0crwdne37644:0"
-  ],
-  "weightsHeader": "crwdns37646:0crwdne37646:0",
-  "weightsText": "crwdns37648:0crwdne37648:0",
-  "weights": [
-    "crwdns37650:0crwdne37650:0",
-    "crwdns37652:0crwdne37652:0",
-    "crwdns37654:0crwdne37654:0",
-    "crwdns37656:0crwdne37656:0",
-    "crwdns37658:0crwdne37658:0",
-    "crwdns37660:0crwdne37660:0"
-  ],
-  "wrapHeader": "crwdns37662:0crwdne37662:0",
-  "wrapText": "crwdns37664:0crwdne37664:0",
-  "wraps": [
-    "crwdns37666:0crwdne37666:0",
-    "crwdns37668:0crwdne37668:0"
-  ]
+  "fontText": "crwdns37604:0crwdne37604:0"
 }

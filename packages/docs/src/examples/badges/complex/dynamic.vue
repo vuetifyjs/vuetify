@@ -1,8 +1,7 @@
 <template>
   <v-container fluid class="text-center">
-    <v-layout
-      justify-space-around
-      wrap
+    <v-row
+      justify="space-around"
     >
       <div>
         <v-btn
@@ -29,7 +28,7 @@
         </template>
         <v-icon large>mail</v-icon>
       </v-badge>
-    </v-layout>
+    </v-row>
   </v-container>
 </template>
 

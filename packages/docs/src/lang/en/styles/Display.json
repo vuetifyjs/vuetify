@@ -1,40 +1,40 @@
 {
   "header": "# Display",
   "headerText": "The display helpers allow you to control the display of content. This includes being conditionally visible based upon the current viewport, or the actual element display type.",
-
-  "visibilityHeader": "## Visibility",
-  "visibilityText": "Conditionally display an element based upon the current **viewport**. These classes can be applied using the following format `hidden-{breakpoint}-{condition}`",
-  "breakpointText": "The _breakpoint_ sets the viewport size:",
-  "breakpoints": [
-    "`xs` - extra small devices",
-    "`sm` - small devices",
-    "`md` - medium devices",
-    "`lg` - large devices",
-    "`xl` - extra large"
-  ],
-  "conditionText": "The _condition_ applies the class base on:",
-  "conditions": [
-    "`only` - hide the element only on `xs` through `xl` breakpoints",
-    "`and-down` - hide the element on the specified breakpoint and down `sm` through `lg` breakpoints",
-    "`and-up` - hide the element on the specified breakpoint and up `sm` through `lg` breakpoints"
-  ],
-  "mediaText": "Additionally, **media types** can be targeted using the `only` condition. Both `hidden-screen-only` and `hidden-print-only` are currently supported.",
   "displayHeader": "## Display",
-  "displayText": "Specify the elements `display` property. These classes can be applied using the following format `d-{display}`.",
-  "displays": [
-    "`d-inline-flex` - sets the element display property to `inline-flex`",
-    "`d-flex` - sets the element display property to `flex`",
-    "`d-inline-block` - sets the element display property to `inline-block`",
-    "`d-block` - sets the element display property to `block`",
-    "`d-inline` - sets the element display property to `inline`",
-    "`d-none` - sets the element display property to `none`"
+  "displayText": "Specify the elements `display` property. These classes can be applied to all breakpoints, from `xs` to `xl` and have no specified breakpoint.",
+  "displayFormats": [
+    "`.d-{value}` for `xs`",
+    "`.d-{breakpoint}-{value}` for `sm`, `md`, `lg` and `xl`"
   ],
-  "exampleText": "Resize your screen to see the elements conditionally hide.",
-  "overflowHeader": "## Overflow",
-  "overflowText": "Set the overflow for an element with `overflow-{axis}-hidden` or simply `overflow-hidden`.",
-  "overflows": [
-    "`overflow-hidden` - hide overflow on both the x and y axis",
-    "`overflow-y-hidden` - hide overflow on the y axis",
-    "`overflow-x-hidden` - hide overflow on the x axis"
-  ]
+  "displayText2": "The _value_ propety is one of:",
+  "displays": [
+    "`none`",
+    "`inline`",
+    "`inline-block`",
+    "`block`",
+    "`table`",
+    "`table-cell`",
+    "`table-row`",
+    "`flex`",
+    "`inline-flex`"
+  ],
+  "displayText3": "When setting a specific breakpoint for a display helper class, it will apply to all screen widths from the designation and up. For example, `d-lg-flex` will apply to `lg` and `xl` size screens.",
+  "visibilityHeader": "## Visibility",
+  "visibilityText": "Conditionally display an element based upon the current **viewport**. Breakpoint utility classes always apply from the bottom up. That means if you have `.d-none`, it will apply to all breakpoints. However, `.d-md-none` will apply to only `md` and up.",
+  "printHeader": "## Display in print",
+  "printText1": "You can also change the display property when printing.",
+  "printOptions": [
+    "`.d-print-none`",
+    "`.d-print-inline`",
+    "`.d-print-inline-block`",
+    "`.d-print-block`",
+    "`.d-print-table`",
+    "`.d-print-table-row`",
+    "`.d-print-table-cell`",
+    "`.d-print-flex`",
+    "`.d-print-inline-flex`"
+  ],
+  "printText2": "Print utility classes can also be combined with none print display utilities.",
+  "exampleText": "Resize your screen to see the elements conditionally hide."
 }

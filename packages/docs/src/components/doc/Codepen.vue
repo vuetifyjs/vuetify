@@ -18,14 +18,14 @@
 
   const cssResources = [
     'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900',
-    'https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css',
+    'https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css',
     'https://fonts.googleapis.com/css?family=Material+Icons',
     `https://cdn.jsdelivr.net/npm/vuetify@${version}/dist/vuetify.min.css`,
   ]
 
   const jsResources = [
     'https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js',
-    'https://cdn.jsdelivr.net/npm/vue/dist/vue.js',
+    'https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js',
     `https://cdn.jsdelivr.net/npm/vuetify@${version}/dist/vuetify.min.js`,
   ]
 

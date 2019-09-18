@@ -26,8 +26,11 @@
     "lazyValidation": "crwdns33628:0crwdne33628:0",
     "value": "crwdns33630:0crwdne33630:0"
   },
+  "events": {
+    "submit": "crwdns42414:0crwdne42414:0"
+  },
   "functions": {
-    "reset": "crwdns33632:0crwdne33632:0",
+    "reset": "crwdns42416:0crwdne42416:0",
     "resetValidation": "crwdns40072:0crwdne40072:0",
     "validate": "crwdns33636:0crwdne33636:0"
   }

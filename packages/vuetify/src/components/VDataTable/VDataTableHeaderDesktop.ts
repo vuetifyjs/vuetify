@@ -2,7 +2,7 @@
 import { VNode } from 'vue'
 import mixins from '../../util/mixins'
 import header, { TableHeader } from './mixins/header'
-import { wrapInArray } from '../../util/helpers'
+import { wrapInArray, convertToUnit } from '../../util/helpers'
 
 export default mixins(header).extend({
   name: 'v-data-table-header-desktop',
@@ -24,7 +24,11 @@ export default mixins(header).extend({
         scope: 'col',
         'aria-label': header.text || '',
         'aria-sort': 'none',
-        width: header.width,
+      }
+
+      const styles = {
+        width: convertToUnit(header.width),
+        minWidth: convertToUnit(header.width),
       }
 
       const classes = [
@@ -77,6 +81,7 @@ export default mixins(header).extend({
       return this.$createElement('th', {
         attrs,
         class: classes,
+        style: styles,
         on: listeners,
       }, children)
     },

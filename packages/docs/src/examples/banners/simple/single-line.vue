@@ -3,7 +3,7 @@
     <v-system-bar></v-system-bar>
     <v-toolbar flat>
       <v-toolbar-title>My Document</v-toolbar-title>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <div>
         <v-switch
           v-model="sticky"
