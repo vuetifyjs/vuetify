@@ -28,6 +28,11 @@ describe('VStepperContent.ts', () => {
     mountFunction = (options = {}) => {
       return mount(VStepperContent, {
         localVue,
+        mocks: {
+          $vuetify: {
+            rtl: false,
+          },
+        },
         ...options,
       })
     }
@@ -35,11 +40,6 @@ describe('VStepperContent.ts', () => {
 
   it('should set height to auto', async () => {
     const wrapper = mountFunction({
-      mocks: {
-        $vuetify: {
-          rtl: false,
-        },
-      },
       attachToDocument: true,
       propsData: { step: 0 },
       provide: {
@@ -62,11 +62,6 @@ describe('VStepperContent.ts', () => {
 
   it('should use reverse transition', () => {
     const wrapper = mountFunction({
-      mocks: {
-        $vuetify: {
-          rtl: false,
-        },
-      },
       propsData: { step: 1 },
       provide: {
         isVertical: false,
@@ -106,11 +101,6 @@ describe('VStepperContent.ts', () => {
 
   it('should accept a custom height', async () => {
     const wrapper = mountFunction({
-      mocks: {
-        $vuetify: {
-          rtl: false,
-        },
-      },
       attachToDocument: true,
       propsData: {
         step: 1,
@@ -169,11 +159,6 @@ describe('VStepperContent.ts', () => {
 
   it('should toggle isActive state', () => {
     const wrapper = mountFunction({
-      mocks: {
-        $vuetify: {
-          rtl: false,
-        },
-      },
       propsData: { step: 1 },
       provide: {
         isVertical: false,
@@ -202,11 +187,6 @@ describe('VStepperContent.ts', () => {
 
   it('should set height', async () => {
     const wrapper = mountFunction({
-      mocks: {
-        $vuetify: {
-          rtl: false,
-        },
-      },
       attachToDocument: true,
       propsData: { step: 1 },
       provide: {
@@ -240,11 +220,6 @@ describe('VStepperContent.ts', () => {
 
   it('should set height only if isActive', async () => {
     const wrapper = mountFunction({
-      mocks: {
-        $vuetify: {
-          rtl: false,
-        },
-      },
       attachToDocument: true,
       propsData: { step: 1 },
       provide: {
@@ -274,11 +249,6 @@ describe('VStepperContent.ts', () => {
 
   it('should reset height', async () => {
     const wrapper = mountFunction({
-      mocks: {
-        $vuetify: {
-          rtl: false,
-        },
-      },
       propsData: { step: 1 },
       provide: {
         isVertical: false,
@@ -317,11 +287,6 @@ describe('VStepperContent.ts', () => {
 
   it('should tip when not used with v-stepper', () => {
     const wrapper = mountFunction({
-      mocks: {
-        $vuetify: {
-          rtl: false,
-        },
-      },
       propsData: { step: 1 },
       provide: {
         isVertical: false,
