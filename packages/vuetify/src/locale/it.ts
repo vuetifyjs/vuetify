@@ -1,18 +1,18 @@
 export default {
-  close: 'Close',
+  close: 'Chiudi',
   dataIterator: {
     pageText: '{0}-{1} di {2}',
     noResultsText: 'Nessun risultato trovato',
-    loadingText: 'Loading item...',
+    loadingText: 'Caricamento in corso...',
   },
   dataTable: {
     itemsPerPageText: 'Righe per pagina:',
     ariaLabel: {
-      sortDescending: ': Sorted descending. Activate to remove sorting.',
-      sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.',
+      sortDescending: ': Ordinati in ordine decrescente. Attiva per rimuovere l\'ordinamento.',
+      sortAscending: ': Ordinati in ordine crescente. Attiva per ordinare in ordine decrescente.',
+      sortNone: ': Non ordinato. Attiva per ordinare in ordine crescente.',
     },
-    sortBy: 'Sort by',
+    sortBy: 'Ordina per',
   },
   dataFooter: {
     itemsPerPageText: 'Elementi per pagina:',
@@ -27,14 +27,14 @@ export default {
   },
   noDataText: 'Nessun elemento disponibile',
   carousel: {
-    prev: 'Precedente visivo',
-    next: 'Next visual',
+    prev: 'Vista precedente',
+    next: 'Prossima vista',
   },
   calendar: {
     moreEvents: '{0} di più',
   },
   fileInput: {
     counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counterSize: '{0} files ({1} in totale)',
   },
 }

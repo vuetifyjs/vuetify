@@ -190,6 +190,10 @@
           "lang": "wrapText1"
         },
         {
+          "type": "text",
+          "lang": "wrapList1"
+        },
+        {
           "type": "example",
           "value": "flex-nowrap"
         },
@@ -207,7 +211,7 @@
         },
         {
           "type": "text",
-          "lang": "wrapList"
+          "lang": "wrapList2"
         }
       ]
     },
