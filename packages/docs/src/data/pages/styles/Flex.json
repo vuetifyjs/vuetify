@@ -280,6 +280,35 @@
           "lang": "alignContentList"
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "growShrinkHeader"
+        },
+        {
+          "type": "text",
+          "lang": "growShrinkText1"
+        },
+        {
+          "type": "text",
+          "lang": "growShrinkList1"
+        },
+        {
+          "type": "example",
+          "value": "grow-shrink"
+        },
+        {
+          "type": "text",
+          "lang": "growShrinkText2"
+        },
+        {
+          "type": "text",
+          "lang": "growShrinkList2"
+        }
+      ]
     }
   ]
 }
