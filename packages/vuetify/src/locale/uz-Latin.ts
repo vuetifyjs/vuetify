@@ -6,7 +6,7 @@ export default {
       loadingText: 'Yozib olinmoqda...',
     },
     dataTable: {
-      itemsPerPageText: 'Bir saxifadagi satrlar:',
+      itemsPerPageText: 'Har bir saxifadagi satrlar:',
       ariaLabel: {
         sortDescending: ': Kamayish tartibida saralangan. Ko\'tarilish tartibda saralashni faollashtirish..',
         sortAscending: ': Ko\'tarilish tartibida saralangan. Kamayish tartibda saralashni faollashtirish.',
@@ -15,7 +15,7 @@ export default {
       sortBy: 'Saralash',
     },
     dataFooter: {
-      itemsPerPageText: 'Bir saxifadagi yozuvlar:',
+      itemsPerPageText: 'Har bir saxifadagi yozuvlar:',
       itemsPerPageAll: 'Barchasi',
       nextPage: 'Keyingi saxifa',
       prevPage: 'Oldingi saxifa',
