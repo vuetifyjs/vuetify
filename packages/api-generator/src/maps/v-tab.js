@@ -2,6 +2,10 @@ module.exports = {
   'v-tab': {
     events: [
       {
+        name: 'change',
+        value: 'void',
+      },
+      {
         name: 'click',
         value: 'ClickEvent',
       },
