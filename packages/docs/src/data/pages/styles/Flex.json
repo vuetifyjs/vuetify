@@ -276,6 +276,23 @@
           "lang": "alignContentList"
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "growShrinkHeader"
+        },
+        {
+          "type": "text",
+          "lang": "growShrinkText1"
+        },
+        {
+          "type": "example",
+          "value": "grow-shrink"
+        }
+      ]
     }
   ]
 }

@@ -38,10 +38,6 @@
       "header": "### Grow and Shrink",
       "desc": "By default, flex components will automatically fill the available space in a row or column. They will also shrink relative to the rest of the flex items in the flex container when a specific size is not designated. You can define the column width of the `v-col` by using the **cols** prop and providing a value from **1 to 12**."
     },
-    "grow-shrink-classes": {
-      "header": "### Grow and Shrink classes",
-      "desc": "Vuetify has helper classes for applying grow and shrink manually. These can also be applied using breakpoints."
-    },
     "row-column-breakpoint": {
       "header": "### Row and column breakpoints",
       "desc": "Dynamically change your layout based upon resolution. **(resize your screen and watch the top `row` layout change on sm, md, and lg breakpoints)**"

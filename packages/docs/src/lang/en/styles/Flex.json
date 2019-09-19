@@ -277,5 +277,7 @@
     "`align-xl-content-space-between`",
     "`align-xl-content-space-around`",
     "`align-xl-content-stretch`"
-  ]
+  ],
+  "growShrinkHeader": "## Grow and Shrink classes",
+  "growShrinkText1": "Vuetify has helper classes for applying grow and shrink manually. These can also be applied using breakpoints."
 }

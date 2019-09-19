@@ -79,7 +79,6 @@
             "simple/one-column-width",
             "intermediate/variable-content",
             "intermediate/grow-shrink",
-            "intermediate/grow-shrink-classes",
             "intermediate/row-column-breakpoint",
             "intermediate/unique-layouts",
             "simple/vertical-alignment",
