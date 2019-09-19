@@ -107,8 +107,7 @@ export default mixins(Colorable, Themeable).extend({
   methods: {
     init () {
       this.selected = null
-
-      this.$nextTick(this.onResize)
+      this.onResize()
       // TODO: Change this (f75dee3a, cbdf7caa)
       setTimeout(() => (this.selected = this.value), 100)
     },
@@ -116,7 +115,9 @@ export default mixins(Colorable, Themeable).extend({
       const width = this.$el && this.$el.parentElement
         ? this.$el.parentElement.clientWidth
         : window.innerWidth
-
+      if (!width) {
+        this.$nextTick(this.onResize)
+      }
       this.maxButtons = Math.floor((width - 96) / 42)
     },
     next (e: Event) {
