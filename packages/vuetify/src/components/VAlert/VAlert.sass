@@ -10,9 +10,12 @@
 
 // Block
 .v-alert
+  display: block
   font-size: $alert-font-size
   margin-bottom: $alert-margin
   padding: $alert-padding
+  position: relative
+  +elevationTransition()
 
   > .v-icon,
   > .v-alert__content

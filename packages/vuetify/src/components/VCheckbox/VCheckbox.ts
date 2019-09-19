@@ -19,13 +19,13 @@ export default Selectable.extend({
       type: String,
       default: '$vuetify.icons.checkboxIndeterminate',
     },
-    onIcon: {
-      type: String,
-      default: '$vuetify.icons.checkboxOn',
-    },
     offIcon: {
       type: String,
       default: '$vuetify.icons.checkboxOff',
+    },
+    onIcon: {
+      type: String,
+      default: '$vuetify.icons.checkboxOn',
     },
   },
 
