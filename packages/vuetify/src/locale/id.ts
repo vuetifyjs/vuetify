@@ -37,4 +37,8 @@ export default {
     counter: '{0} berkas',
     counterSize: '{0} berkas (dari total {1})',
   },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
+  },
 }

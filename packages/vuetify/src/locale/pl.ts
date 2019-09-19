@@ -37,4 +37,8 @@ export default {
     counter: 'Liczba plików: {0}',
     counterSize: 'Liczba plików: {0} (łącznie {1})',
   },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
+  },
 }

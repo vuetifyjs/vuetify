@@ -37,4 +37,8 @@ export default {
     counter: '{0} ملفات',
     counterSize: '{0} ملفات ({1} في المجموع)',
   },
+  timePicker: {
+    am: 'صباحاً',
+    pm: 'مساءً',
+  },
 }
