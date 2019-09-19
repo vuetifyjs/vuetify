@@ -279,5 +279,28 @@
     "`align-xl-content-stretch`"
   ],
   "growShrinkHeader": "## Grow and Shrink classes",
-  "growShrinkText1": "Vuetify has helper classes for applying grow and shrink manually. These can also be applied using breakpoints."
+  "growShrinkText1": "Vuetify has helper classes for applying grow and shrink manually. These can also be applied using breakpoints. `grow-0` prevents element from growing bigger when there's available space, but `grow-1` allows growth. `shrink-0` prevents element's shrinking with the lack of space, `shrink-1` makes it shrink.",
+  "growShrinkText2": "There are also responsive variations for `flex-grow-x` and `flex-shrink-x`.",
+  "growShrinkList": [
+    "`flex-grow-0`",
+    "`flex-sm-grow-0`",
+    "`flex-md-grow-0`",
+    "`flex-lg-grow-0`",
+    "`flex-xl-grow-0`",
+    "`flex-grow-1`",
+    "`flex-sm-grow-1`",
+    "`flex-md-grow-1`",
+    "`flex-lg-grow-1`",
+    "`flex-xl-grow-1`",
+    "`flex-shrink-0`",
+    "`flex-sm-shrink-0`",
+    "`flex-md-shrink-0`",
+    "`flex-lg-shrink-0`",
+    "`flex-xl-shrink-0`",
+    "`flex-shrink-1`",
+    "`flex-sm-shrink-1`",
+    "`flex-md-shrink-1`",
+    "`flex-lg-shrink-1`",
+    "`flex-xl-shrink-1`"
+  ]
 }

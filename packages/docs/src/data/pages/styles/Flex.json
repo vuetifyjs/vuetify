@@ -291,6 +291,14 @@
         {
           "type": "example",
           "value": "grow-shrink"
+        },
+        {
+          "type": "text",
+          "lang": "growShrinkText2"
+        },
+        {
+          "type": "text",
+          "lang": "growShrinkList"
         }
       ]
     }
