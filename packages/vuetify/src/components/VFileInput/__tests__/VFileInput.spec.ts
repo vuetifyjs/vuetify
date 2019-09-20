@@ -231,4 +231,68 @@ describe('VFileInput.ts', () => {
 
     expect(change).not.toHaveBeenCalled()
   })
+
+  it('should truncate to length <= 1', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        'truncate-length': 1,
+        'value': [
+          {
+            name: 'testFile15Chars',
+            size: 1,
+          }
+        ],
+      },
+    })
+
+    expect(wrapper.find('.v-file-input__text').text()).toBe("…")
+  })
+
+  it('should truncate to length <= 2', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        'truncate-length': 2,
+        'value': [
+          {
+            name: 'testFile15Chars',
+            size: 1,
+          }
+        ],
+      },
+    })
+
+    expect(wrapper.find('.v-file-input__text').text()).toBe("…")
+  })
+
+  it('should truncate to length <= 3', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        'truncate-length': 3,
+        'value': [
+          {
+            name: 'testFile15Chars',
+            size: 1,
+          }
+        ],
+      },
+    })
+
+    expect(wrapper.find('.v-file-input__text').text()).toBe("t…s")
+  })
+
+  it('should truncate to length <= 10', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        'truncate-length': 10,
+        'value': [
+          {
+            name: 'testFile15Chars',
+            size: 1,
+          }
+        ],
+      },
+    })
+
+    expect(wrapper.find('.v-file-input__text').text()).toBe("test…hars")
+  })
 })
