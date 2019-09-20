@@ -40,6 +40,10 @@
     "advanced": {
       "header": "### Complex selection slots",
       "desc": "The flexibility of the selection slot allows you accomodate complex use-cases. In this example we show the first 2 selections as chips while adding a number indicator for the remaining amount."
+    },
+    "dense": {
+      "header": "### Dense",
+      "desc": "You can reduces the file input height with `dense` prop."
     }
   },
   "props": {

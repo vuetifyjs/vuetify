@@ -42,6 +42,7 @@
           "type": "examples",
           "value": [
             "simple/combobox-multiple",
+            "simple/dense",
             "intermediate/no-data",
             "intermediate/advanced"
           ]

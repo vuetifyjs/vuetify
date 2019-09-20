@@ -17,6 +17,10 @@
       "header": "### Disabled and readonly",
       "desc": "Text fields can be `disabled` or `readonly`."
     },
+    "dense": {
+      "header": "### Dense",
+      "desc": "You can reduces the text field height with `dense` prop."
+    },
     "icon": {
       "header": "### Icons",
       "desc": "You can add icons to the text field with `prepend-icon`, `append-icon` and `append-outer-icon` props."

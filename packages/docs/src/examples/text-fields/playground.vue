@@ -78,6 +78,11 @@
           label="Flat (requires Solo)"
           :disabled="!solo"
         ></v-switch>
+        <v-switch
+          v-model="dense"
+          class="ma-1"
+          label="Dense"
+        ></v-switch>
         <v-row>
           <v-switch
             v-model="counterEn"
@@ -114,6 +119,7 @@
             :loading="loading"
             :flat="flat"
             :counter="counterEn ? counter : false"
+            :dense="dense"
           ></v-text-field>
           <div class="mt-12 text-center">
             Value: {{ model }}
@@ -143,6 +149,7 @@
       flat: false,
       counterEn: false,
       counter: 0,
+      dense: false,
     }),
   }
 </script>

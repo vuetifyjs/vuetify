@@ -34,6 +34,10 @@
       "header": "### Disabled",
       "desc": "You cannot use disabled `v-select`."
     },
+    "dense": {
+      "header": "### Dense",
+      "desc": "You can use `dense` prop to reduce the field height and lower max height of list items."
+    },
     "readonly": {
       "header": "### Read-only",
       "desc": "You cannot use read-only `v-select`, but it looks default."
@@ -53,7 +57,6 @@
     "dark": "Components.Inputs.props.dark",
     "debounceSearch": "Debounces the search input value being emitted",
     "deletableChips": "Adds a remove icon to selected chips",
-    "dense": "Lowers max height of list items",
     "disabled": "Disables the input",
     "eager": "Mixins.Bootable.props.eager",
     "editable": " Creates an editable button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
