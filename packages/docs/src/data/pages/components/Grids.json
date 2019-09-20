@@ -72,6 +72,23 @@
       "type": "section",
       "children": [
         {
+          "type": "heading",
+          "lang": "migrationHeader"
+        },
+        {
+          "type": "text",
+          "lang": "migrationText1"
+        },
+        {
+          "type": "text",
+          "lang": "migrationText2"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
             "simple/auto",
@@ -93,23 +110,6 @@
             "advanced/nested-grid",
             "simple/spacer"
           ]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "header",
-          "lang": "migrationHeader"
-        },
-        {
-          "type": "text",
-          "lang": "migrationText1"
-        },
-        {
-          "type": "text",
-          "lang": "migrationText2"
         }
       ]
     },
