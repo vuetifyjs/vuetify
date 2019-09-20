@@ -1,9 +1,8 @@
+## Migrating from v1.5.x to v2.0.x
+
 Version 2 contains non backwards compatible breaking changes. This includes previously deprecated functionality from v1.x.x. These breaking changes are noted in the console for the corresponding components.
 
-The existing grid is still operational and has an [eslint plugin](https://github.com/vuetifyjs/eslint-plugin-vuetify) to help with migration. This plugin can also be used to help upgrade to the **new grid**.
-
-<details open>
-<summary>Upgrade now!</summary>
+The existing grid is still operational and has an [eslint plugin](https://github.com/vuetifyjs/eslint-plugin-vuetify) to help with migration. This plugin can also be used to help upgrade to the [**new grid**](https://vuetifyjs.com/components/grids).
 
 ### Bootstrap
 Vuetify must now be instantiated and passed to the initial Vue instance. This is similar to how **vue-router** and **vuex** are bootstrapped.
@@ -756,7 +755,6 @@ _Developer notes: The tabs-items component does not have to be provided and is o
 
 <v-text-field filled></v-text-field>
 ```
-</details>
 
 #### `v-text-field`, `v-select`, `v-textarea`, `v-autocomplete`, `v-combobox`, `v-btn`, `v-alert`
 * The **outline** prop is now **outlined**
@@ -776,7 +774,6 @@ _Developer notes: The tabs-items component does not have to be provided and is o
 <v-autocomplete outlined></v-autocomplete>
 <v-alert outlined></v-alert>
 ```
-</details>
 
 #### `v-toolbar`
 * All existing scrolling techniques and `app` functionality has been deprecated and moved to `v-app-bar`.
