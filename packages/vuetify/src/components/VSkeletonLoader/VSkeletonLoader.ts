@@ -112,9 +112,9 @@ export default mixins(
       else if (type.indexOf(',') > -1) return this.mapBones(type)
       // Array of values - e.g. 'paragraph@4'
       else if (type.indexOf('@') > -1) return this.genBones(type)
-      // Array of values - e.g. 'card@2
+      // Array of values - e.g. 'card@2'
       else if (bone.indexOf(',') > -1) children = this.mapBones(bone)
-      // Array of values - e.g. 'list-item@2
+      // Array of values - e.g. 'list-item@2'
       else if (bone.indexOf('@') > -1) children = this.genBones(bone)
       // Single value - e.g. 'card-heading'
       else if (bone) children.push(this.genSkeleton(bone))
