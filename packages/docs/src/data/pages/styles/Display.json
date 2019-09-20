@@ -59,6 +59,22 @@
         {
           "type": "example",
           "value": "visibility"
+        },
+        {
+          "type": "text",
+          "lang": "lateralDisplayText"
+        },
+        {
+          "type": "text",
+          "lang": "conditionText"
+        },
+        {
+          "type": "markdown",
+          "lang": "conditions"
+        },
+        {
+          "type": "text",
+          "lang": "mediaText"
         }
       ]
     },

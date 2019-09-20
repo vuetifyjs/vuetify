@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VSelect.ts should be clearable with prop, dirty and multi select 1`] = `
-<div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
+<div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select v-select--is-multi">
   <div class="v-input__control">
     <div role="button"
          aria-haspopup="listbox"

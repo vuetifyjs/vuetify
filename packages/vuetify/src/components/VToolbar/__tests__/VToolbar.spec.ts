@@ -88,4 +88,16 @@ describe('VToolbar.ts', () => {
 
     expect(wrapper.vm.extensionHeight).toBe(48)
   })
+
+  it('should set height equal to both height and extensionHeight', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        height: 112,
+        extended: true,
+        extensionHeight: 64,
+      },
+    })
+
+    expect((wrapper.vm.styles as any).height).toBe('176px')
+  })
 })

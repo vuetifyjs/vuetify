@@ -159,7 +159,7 @@ export default baseMixins.extend({
     computedTransform (): number {
       if (
         !this.canScroll ||
-        (this.elevateOnScroll && this.currentScroll === 0)
+        (this.elevateOnScroll && this.currentScroll === 0 && this.isActive)
       ) return 0
 
       if (this.isActive) return 0

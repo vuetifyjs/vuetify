@@ -21,6 +21,10 @@
       "title": "Material Dashboard Pro",
       "description": "Vuetify Material Dashboard PRO is a beautiful theme built over Vuetify, Vuex and Vuejs. Vuetify Material Dashboard PRO is the official Vuejs version of the Original Material Dashboard PRO."
     },
+    "shopify-e-commerce": {
+      "title": "Shopify E-commerce",
+      "description": "A handcrafted Vuetify e-commerce application built on top of Shopify. Meticulous tweaks for optimal performance, user experience and accessibility make this theme stand out as a must have for anyone selling or wanting to sell with Shopify."
+    },
     "freelancer": {
       "title": "Freelancer",
       "description": "A single page Material inspired theme for Freelancers."

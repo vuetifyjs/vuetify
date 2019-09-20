@@ -96,6 +96,7 @@ export const BaseSlideGroup = mixins<options &
       return {
         ...BaseItemGroup.options.computed.classes.call(this),
         'v-slide-group': true,
+        'v-slide-group--has-affixes': this.hasAffixes,
         'v-slide-group--is-overflowing': this.isOverflowing,
       }
     },
@@ -198,9 +199,8 @@ export const BaseSlideGroup = mixins<options &
         },
       }, (this as any)[`${icon}Icon`])
     },
+    // Always generate prev for scrollable hint
     genPrev (): VNode | null {
-      if (!this.hasAffixes) return null
-
       const slot = this.$scopedSlots.prev
         ? this.$scopedSlots.prev({})
         : this.$slots.prev || this.__cachedPrev
