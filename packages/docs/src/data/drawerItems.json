@@ -142,6 +142,7 @@
       },
       { "text": "ratings", "to": "ratings" },
       { "text": "sheets", "to": "sheets" },
+      { "new": true, "text": "skeletonLoaders", "to": "skeleton-loaders" },
       { "text": "snackbars", "to": "snackbars" },
       { "text": "sparklines", "to": "sparklines" },
       { "text": "steppers", "to": "steppers" },

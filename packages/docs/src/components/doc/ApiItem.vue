@@ -51,6 +51,14 @@
         value="example"
       >{{ item.signature }}</doc-markup>
 
+      <!-- Options -->
+      <doc-markup
+        v-else-if="header.value === 'example' && item.options"
+        :filename="false"
+        lang="json"
+        value="example"
+      >{{ item.options }}</doc-markup>
+
       <!-- Example -->
       <doc-markup
         v-else-if="header.value === 'example' && item.example"
