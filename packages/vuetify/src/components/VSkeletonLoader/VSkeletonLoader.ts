@@ -105,10 +105,10 @@ export default mixins(
       type = type || this.type || ''
       const bone = this.rootTypes[type] || ''
 
-      // Do nothing
+      // End of recursion, do nothing
       /* eslint-disable-next-line no-empty, brace-style */
       if (type === bone) {}
-      // End of recursion - e.g. 'heading, paragraph, text@2'
+      // Array of values - e.g. 'heading, paragraph, text@2'
       else if (type.indexOf(',') > -1) return this.mapBones(type)
       // Array of values - e.g. 'paragraph@4'
       else if (type.indexOf('@') > -1) return this.genBones(type)
