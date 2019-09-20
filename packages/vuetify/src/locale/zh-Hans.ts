@@ -37,4 +37,8 @@ export default {
     counter: '{0} 个文件',
     counterSize: '{0} 个文件（共 {1}）',
   },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
+  },
 }

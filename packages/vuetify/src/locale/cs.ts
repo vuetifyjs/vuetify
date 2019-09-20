@@ -37,4 +37,8 @@ export default {
     counter: '{0} souborů',
     counterSize: '{0} souborů ({1} celkem)',
   },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
+  },
 }

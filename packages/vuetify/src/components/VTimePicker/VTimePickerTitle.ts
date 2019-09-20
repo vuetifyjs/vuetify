@@ -60,8 +60,8 @@ export default mixins(
       return this.$createElement('div', {
         staticClass: 'v-time-picker-title__ampm',
       }, [
-        this.genPickerButton('period', 'am', 'am', this.disabled || this.readonly),
-        this.genPickerButton('period', 'pm', 'pm', this.disabled || this.readonly),
+        this.genPickerButton('period', 'am', this.$vuetify.lang.t('$vuetify.timePicker.am'), this.disabled || this.readonly),
+        this.genPickerButton('period', 'pm', this.$vuetify.lang.t('$vuetify.timePicker.pm'), this.disabled || this.readonly),
       ])
     },
   },

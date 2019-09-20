@@ -37,4 +37,8 @@ export default {
     counter: 'Файлов: {0}',
     counterSize: 'Файлов: {0} (всего {1})',
   },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
+  },
 }
