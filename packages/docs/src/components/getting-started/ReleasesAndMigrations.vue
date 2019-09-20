@@ -116,4 +116,8 @@
       box-shadow: none !important
       background-color: unset !important
       color: #ccc !important
+
+  ::v-deep .migration-markdown
+    h4, h3, p, pre, ul
+      margin-bottom: 16px !important
 </style>
