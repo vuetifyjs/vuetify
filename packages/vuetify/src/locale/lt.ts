@@ -37,4 +37,8 @@ export default {
     counter: '{0} failų',
     counterSize: '{0} failų ({1} iš viso)',
   },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
+  },
 }
