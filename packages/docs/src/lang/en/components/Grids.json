@@ -137,5 +137,8 @@
       "justifyXl": "Changes the **justify-content** property on extra large and greater breakpoints.",
       "noGutters": "Removes the gutter between `v-col`s."
     }
-  }
+  },
+  "migrationHeader": "## Migration from v1.5 grid system",
+  "migrationText1": "v1.5 grid system was deprecated in favor of a new bootstrap-style one.",
+  "migrationText2": "First of all, `v-layout` should be replaced with `v-row`, its `justify-x` props should be replaced with `justify=\"x\"` props, same thing with other props. `d-{type}` props should be moved into classes. `column` can be achieved by using `flex-column` or `flex-column-reverse` classes."
 }
