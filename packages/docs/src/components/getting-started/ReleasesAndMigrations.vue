@@ -8,7 +8,7 @@
       <v-autocomplete
         v-model="releaseNotes"
         :items="releases"
-        label="Select Label"
+        label="Select Release Version"
         item-text="name"
         solo
         prepend-inner-icon="mdi-database-search"
@@ -38,7 +38,7 @@
               :id="props.attrs['aria-labelledby']"
               v-text="props.item.name"
             />
-            <v-list-item-subtitle v-text="`published: ${new Date(props.item.published_at).toDateString()}`" />
+            <v-list-item-subtitle v-text="`Published: ${new Date(props.item.published_at).toDateString()}`" />
           </v-list-item-content>
         </template>
       </v-autocomplete>
