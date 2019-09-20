@@ -74,6 +74,9 @@ export default baseMixins.extend<options>().extend({
     dense: Boolean,
     inactive: Boolean,
     link: Boolean,
+    selectable: {
+      type: Boolean,
+    },
     tag: {
       type: String,
       default: 'div',
@@ -95,6 +98,7 @@ export default baseMixins.extend<options>().extend({
         'v-list-item--dense': this.dense,
         'v-list-item--disabled': this.disabled,
         'v-list-item--link': this.isClickable && !this.inactive,
+        'v-list-item--selectable': this.selectable,
         'v-list-item--three-line': this.threeLine,
         'v-list-item--two-line': this.twoLine,
         ...this.themeClasses,
