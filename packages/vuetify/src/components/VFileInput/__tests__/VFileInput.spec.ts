@@ -233,7 +233,7 @@ describe('VFileInput.ts', () => {
   })
 
   it('should truncate correctly', () => {
-    const fifteenCharFile = { name: 'testFile15Chars', size: 1}
+    const fifteenCharFile = { name: 'testFile15Chars', size: 1 }
     const wrapper = mountFunction({
       propsData: {
         truncateLength: 1,
