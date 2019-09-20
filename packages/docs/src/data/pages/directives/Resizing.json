@@ -29,7 +29,7 @@
           "value": [
             "customization/breakpoints",
             "components/grids",
-            "components/grid-lists"
+            "styles/flex"
           ]
         }
       ]

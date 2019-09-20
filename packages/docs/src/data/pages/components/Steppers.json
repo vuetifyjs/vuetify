@@ -67,7 +67,7 @@
         {
           "type": "up-next",
           "value": [
-            "customization/tabs",
+            "components/tabs",
             "components/buttons",
             "components/windows"
           ]

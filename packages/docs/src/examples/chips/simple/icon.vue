@@ -6,7 +6,7 @@
       text-color="white"
     >
       <v-avatar left>
-        <v-icon>account_circle</v-icon>
+        <v-icon>mdi-account-circle</v-icon>
       </v-avatar>
       Ranee
     </v-chip>
@@ -17,7 +17,7 @@
       text-color="white"
     >
       Premium
-      <v-icon right>star</v-icon>
+      <v-icon right>mdi-star</v-icon>
     </v-chip>
 
     <v-chip
@@ -26,7 +26,7 @@
       text-color="white"
     >
       1 Year
-      <v-icon right>cake</v-icon>
+      <v-icon right>mdi-cake-variant</v-icon>
     </v-chip>
 
     <v-chip
@@ -51,7 +51,7 @@
       @click:close="close"
     >
       <v-avatar left>
-        <v-icon>check_circle</v-icon>
+        <v-icon>mdi-checkbox-marked-circle</v-icon>
       </v-avatar>
       Confirmed
     </v-chip>
@@ -65,7 +65,7 @@
       @click:close="close"
     >
       <v-avatar left>
-        <v-icon>check_circle</v-icon>
+        <v-icon>mdi-checkbox-marked-circle</v-icon>
       </v-avatar>
       Confirmed
     </v-chip>

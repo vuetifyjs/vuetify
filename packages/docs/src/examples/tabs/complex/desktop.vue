@@ -8,11 +8,11 @@
       <div class="flex-grow-1"></div>
 
       <v-btn icon>
-        <v-icon>search</v-icon>
+        <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
       <v-btn icon>
-        <v-icon>more_vert</v-icon>
+        <v-icon>mdi-dots-vertical</v-icon>
       </v-btn>
 
       <template v-slot:extension>
@@ -25,21 +25,21 @@
             href="#mobile-tabs-5-1"
             class="primary--text"
           >
-            <v-icon>phone</v-icon>
+            <v-icon>mdi-phone</v-icon>
           </v-tab>
 
           <v-tab
             href="#mobile-tabs-5-2"
             class="primary--text"
           >
-            <v-icon>favorite</v-icon>
+            <v-icon>mdi-heart</v-icon>
           </v-tab>
 
           <v-tab
             href="#mobile-tabs-5-3"
             class="primary--text"
           >
-            <v-icon>account_box</v-icon>
+            <v-icon>mdi-account-box</v-icon>
           </v-tab>
         </v-tabs>
       </template>

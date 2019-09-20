@@ -12,11 +12,11 @@
       <div class="flex-grow-1"></div>
 
       <v-btn icon>
-        <v-icon>search</v-icon>
+        <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
       <v-btn icon>
-        <v-icon>more_vert</v-icon>
+        <v-icon>mdi-dots-vertical</v-icon>
       </v-btn>
 
       <template v-slot:extension>

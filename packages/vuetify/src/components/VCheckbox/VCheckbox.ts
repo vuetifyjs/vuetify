@@ -19,13 +19,13 @@ export default Selectable.extend({
       type: String,
       default: '$vuetify.icons.checkboxIndeterminate',
     },
-    onIcon: {
-      type: String,
-      default: '$vuetify.icons.checkboxOn',
-    },
     offIcon: {
       type: String,
       default: '$vuetify.icons.checkboxOff',
+    },
+    onIcon: {
+      type: String,
+      default: '$vuetify.icons.checkboxOn',
     },
   },
 
@@ -67,7 +67,8 @@ export default Selectable.extend({
 
   watch: {
     indeterminate (val) {
-      this.inputIndeterminate = val
+      // https://github.com/vuetifyjs/vuetify/issues/8270
+      this.$nextTick(() => (this.inputIndeterminate = val))
     },
     inputIndeterminate (val) {
       this.$emit('update:indeterminate', val)

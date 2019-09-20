@@ -1,7 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
-  "file": "components/VExpansionPanels",
+  "file": "components/VExpansionPanel",
   "mdSpec": {
     "version": "1",
     "link": "https://material.io/archive/guidelines/components/expansion-panels.html"

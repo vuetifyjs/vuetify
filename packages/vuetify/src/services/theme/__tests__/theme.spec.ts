@@ -183,21 +183,42 @@ describe('Theme.ts', () => {
     expect(ssrContext.head).toMatchSnapshot()
   })
 
-  it('should add fake child element for vue-meta support', () => {
+  it('should set theme with vue-meta@1', () => {
     const theme = new Theme(mock)
-    ;(instance as any).$meta = {}
+    const anyInstance = instance as any
 
-    expect(instance.$children).toHaveLength(0)
+    anyInstance.$meta = () => ({})
 
-    theme.init(instance)
+    theme.init(anyInstance)
 
-    expect(instance.$children).toHaveLength(1)
+    expect(typeof anyInstance.$options['metaInfo']).toBe('function')
 
-    const options = instance.$children[0].$options as any
-    const head = options.head
+    const metaInfo = anyInstance.$options['metaInfo']()
 
-    expect(head).toBeTruthy()
-    expect(head()).toMatchSnapshot()
+    expect(metaInfo).toBeTruthy()
+    expect(metaInfo.style).toHaveLength(1)
+    expect(metaInfo.style[0].cssText).toMatchSnapshot()
+  })
+
+  it('should set theme with vue-meta@2', () => {
+    const theme = new Theme(mock)
+    const anyInstance = instance as any
+
+    anyInstance.$meta = () => ({
+      getOptions: () => ({ keyName: 'metaInfo' }),
+    })
+
+    theme.init(anyInstance)
+
+    const metaKeyName = anyInstance.$meta().getOptions().keyName
+
+    expect(typeof anyInstance.$options[metaKeyName]).toBe('function')
+
+    const metaInfo = anyInstance.$options[metaKeyName]()
+
+    expect(metaInfo).toBeTruthy()
+    expect(metaInfo.style).toHaveLength(1)
+    expect(metaInfo.style[0].cssText).toMatchSnapshot()
   })
 
   it('should react to theme changes', async () => {

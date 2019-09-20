@@ -5,10 +5,10 @@
       color="pink"
       dark
     >
-      <v-icon>arrow_back</v-icon>
+      <v-icon>mdi-arrow-left</v-icon>
       <v-toolbar-title>Compose</v-toolbar-title>
       <div class="flex-grow-1"></div>
-      <v-icon>send</v-icon>
+      <v-icon>mdi-send</v-icon>
     </v-toolbar>
     <v-form>
       <v-autocomplete

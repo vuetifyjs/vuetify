@@ -29,7 +29,6 @@ const baseMixins = mixins(
     'clippedLeft',
     'clippedRight',
     'computedHeight',
-    'computedTransform',
     'invertedScroll',
     'isExtended',
     'isProminent',
@@ -160,7 +159,7 @@ export default baseMixins.extend({
     computedTransform (): number {
       if (
         !this.canScroll ||
-        (this.elevateOnScroll && this.currentScroll === 0)
+        (this.elevateOnScroll && this.currentScroll === 0 && this.isActive)
       ) return 0
 
       if (this.isActive) return 0
@@ -213,6 +212,20 @@ export default baseMixins.extend({
 
   watch: {
     canScroll: 'onScroll',
+    computedTransform () {
+      // Normally we do not want the v-app-bar
+      // to update the application top value
+      // to avoid screen jump. However, in
+      // this situation, we must so that
+      // the clipped drawer can update
+      // its top value when scrolled
+      if (
+        !this.canScroll ||
+        (!this.clippedLeft && !this.clippedRight)
+      ) return
+
+      this.callUpdate()
+    },
     invertedScroll (val: boolean) {
       this.isActive = !val
     },

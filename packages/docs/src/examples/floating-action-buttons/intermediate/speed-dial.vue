@@ -51,8 +51,8 @@
           dark
           fab
         >
-          <v-icon v-if="fab">close</v-icon>
-          <v-icon v-else>account_circle</v-icon>
+          <v-icon v-if="fab">mdi-close</v-icon>
+          <v-icon v-else>mdi-account-circle</v-icon>
         </v-btn>
       </template>
       <v-btn
@@ -61,7 +61,7 @@
         small
         color="green"
       >
-        <v-icon>edit</v-icon>
+        <v-icon>mdi-pencil</v-icon>
       </v-btn>
       <v-btn
         fab
@@ -69,7 +69,7 @@
         small
         color="indigo"
       >
-        <v-icon>add</v-icon>
+        <v-icon>mdi-plus</v-icon>
       </v-btn>
       <v-btn
         fab
@@ -77,7 +77,7 @@
         small
         color="red"
       >
-        <v-icon>delete</v-icon>
+        <v-icon>mdi-delete</v-icon>
       </v-btn>
     </v-speed-dial>
   </v-card>

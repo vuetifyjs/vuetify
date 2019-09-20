@@ -1,6 +1,7 @@
 {
   "header": "# Lists",
   "headerText": "The `v-list` component is used to display information. It can contain an avatar, content, actions, subheaders and much more. Lists present content in a way that makes it easy to identify a specific item in a collection. They provide a consistent styling for organizing groups of text and images.",
+  "alert1": "If you are looking for stateful list items, please check out [v-list-item-group](/components/list-item-groups).",
   "examples": {
     "usage": {
       "desc": "Lists come in three main variations. **single-line** (default), **two-line** and **three-line**. The line declaration specifies the minimum height of the item and can also be controlled from `v-list` with the same prop."
@@ -39,11 +40,11 @@
     },
     "action-title-and-subtitle": {
       "header": "### Action with title and sub-title",
-      "desc": "A **three-line** list with actions. Utilizing [v-list-item-group](/components/list-item-groups), easily connect actions to your tiles."
+      "desc": "A **three-line** list with actions. Utilizing **[v-list-item-group](/components/list-item-groups)**, easily connect actions to your tiles."
     },
     "expansion-lists": {
       "header": "### Expansion Lists",
-      "desc": "A list can contain a group of items which will display on click. Expansion lists are also used within the [v-navigation-drawer](/components/navigation-drawers) component."
+      "desc": "A list can contain a group of items which will display on click. Expansion lists are also used within the **[v-navigation-drawer](/components/navigation-drawers)** component."
     },
     "nav": {
       "header": "### Navigation lists",
@@ -79,7 +80,7 @@
     "group": "Assign a route namespace. Accepts a string or regexp for determining active state",
     "inactive": "If set, the list tile will not be rendered as a link even if it has to/href prop or @click handler",
     "link": "Applies `v-list-item` hover styles. Useful when using the item as an _activator_.",
-    "nav": "An alternative styling that reduces `v-list-item` width and rounds the corners. Typically used with [v-navigation-drawer](/components/navigation-drawers)",
+    "nav": "An alternative styling that reduces `v-list-item` width and rounds the corners. Typically used with **[v-navigation-drawer](/components/navigation-drawers)**",
     "noAction": "Removes left padding assigned for action icons from group items",
     "rounded": "Rounds the `v-list-item` edges",
     "shaped": "Provides an alternative active style for `v-list-item`.",

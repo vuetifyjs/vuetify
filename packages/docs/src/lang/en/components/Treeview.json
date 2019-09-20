@@ -91,12 +91,12 @@
       "openAll": "When `true` will cause all branch nodes to be opened when component is mounted",
       "openOnClick": "When `true` will cause nodes to be opened by clicking anywhere on it, instead of only opening by clicking on expand icon. When using this prop with `activatable` you will be unable to mark nodes with children as active.",
       "returnObject": "When `true` will make `v-model`, `active.sync` and `open.sync` return the complete object instead of just the key",
-      "rounded": "Provides an alternative active style for `v-treeview` node. Only visible when `activatable` is `true`.",
+      "rounded": "Provides an alternative active style for `v-treeview` node. Only visible when `activatable` is `true` and should not be used in conjunction with the `shaped` prop.",
       "search": "The search model for filtering results",
       "selectable": "Will render a checkbox next to each node allowing them to be selected",
       "selectedColor": "The color of the selection checkbox",
       "selectionType": "Controls how the treeview selects nodes. There are two modes available: 'leaf' and 'independent'",
-      "shaped": "Provides an alternative active style for `v-treeview` node. Only visible when `activatable` is `true` and should not be used in conjunction with the `shaped` prop.",
+      "shaped": "Provides an alternative active style for `v-treeview` node. Only visible when `activatable` is `true` and should not be used in conjunction with the `rounded` prop.",
       "transition": "Applies a transition when nodes are opened and closed",
       "value": "Allows one to control which nodes are selected. The array consists of the `item-key` of each selected item. Is used with `@input` event to allow for `v-model` binding."
     }

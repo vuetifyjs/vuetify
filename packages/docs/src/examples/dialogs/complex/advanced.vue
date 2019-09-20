@@ -65,7 +65,7 @@
               dark
               @click="dialog = false"
             >
-              <v-icon>close</v-icon>
+              <v-icon>mdi-close</v-icon>
             </v-btn>
             <v-toolbar-title>Settings</v-toolbar-title>
             <div class="flex-grow-1"></div>
@@ -89,7 +89,7 @@
                   icon
                   v-on="on"
                 >
-                  <v-icon>more_vert</v-icon>
+                  <v-icon>mdi-dots-vertical</v-icon>
                 </v-btn>
               </template>
               <v-list>
@@ -229,7 +229,7 @@
                   icon
                   v-on="on"
                 >
-                  <v-icon>more_vert</v-icon>
+                  <v-icon>mdi-dots-vertical</v-icon>
                 </v-btn>
               </template>
               <v-list>

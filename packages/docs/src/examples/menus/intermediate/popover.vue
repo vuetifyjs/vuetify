@@ -34,7 +34,7 @@
                 icon
                 @click="fav = !fav"
               >
-                <v-icon>favorite</v-icon>
+                <v-icon>mdi-heart</v-icon>
               </v-btn>
             </v-list-item-action>
           </v-list-item>
