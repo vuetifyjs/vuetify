@@ -108,6 +108,7 @@ export default mixins(Colorable, Themeable).extend({
     init () {
       this.selected = null
       this.onResize()
+
       // TODO: Change this (f75dee3a, cbdf7caa)
       setTimeout(() => (this.selected = this.value), 100)
     },
