@@ -107,18 +107,25 @@ export default mixins(Colorable, Themeable).extend({
   methods: {
     init () {
       this.selected = null
-      this.onResize()
 
+      this.$nextTick(this.onResize)
       // TODO: Change this (f75dee3a, cbdf7caa)
       setTimeout(() => (this.selected = this.value), 100)
     },
     onResize () {
-      const width = this.$el && this.$el.parentElement
-        ? this.$el.parentElement.clientWidth
-        : window.innerWidth
-      if (!width) {
-        this.$nextTick(this.onResize)
+      let width
+      if (this.$el && this.$el.parentElement) {
+        if (Object.values(this.$el.parentElement.classList).includes('v-expansion-panel-content__wrap')) {
+          width = this.$el.parentElement.parentElement && this.$el.parentElement.parentElement.parentElement
+            ? this.$el.parentElement.parentElement.parentElement.clientWidth
+            : 0
+        } else {
+          width = this.$el.parentElement.clientWidth
+        }
+      } else {
+        width = window.innerWidth
       }
+
       this.maxButtons = Math.floor((width - 96) / 42)
     },
     next (e: Event) {
