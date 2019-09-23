@@ -549,6 +549,11 @@
     "description": "The window component is a wrapper container that allows transitioning between content. It serves as the baseline for tabs and carousels.",
     "keywords": "windows, vuetify window component, vue window component"
   },
+  "directives/intersect": {
+    "title": "Intersection observer directive",
+    "description": "The intersectino observer directive utilizes the Intersection observer API. It allows you to determine when elements are visible on the screen.",
+    "keywords": "intersect, vuetify intersect directive, intersection observer directive"
+  },
   "directives/resizing": {
     "title": "Resizing directive",
     "description": "The resize directive provides the ability to conditionally invoke functions when the screen is resized.",
