@@ -40,9 +40,9 @@
         {
           "type": "up-next",
           "value": [
-            "customization/breakpoints",
-            "components/grids",
-            "styles/flex"
+            "components/cards",
+            "components/images",
+            "components/api-explorer"
           ]
         }
       ]
