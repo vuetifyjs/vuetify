@@ -275,7 +275,7 @@ writeApiFile({ ...components, ...directives }, 'dist/api.js')
 
 // Create web-types.json to provide autocomplete in JetBrains IDEs
 const webTypes = {
-  // $schema: "../../schema/web-types.schema.json",
+  $schema: "https://raw.githubusercontent.com/JetBrains/web-types/master/schema/web-types.json",
   framework: 'vue',
   name: 'vuetify',
   version: pkg.version,
