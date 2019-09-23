@@ -2,19 +2,19 @@
 import { Service } from '../service'
 
 // Types
-import { VuetifyIconOptions } from 'vuetify/types/services/icons'
+import { Icons as IIcons } from 'vuetify/types/services/icons'
 
 // Presets
 import presets from './presets'
 
-export class Icons extends Service {
+export class Icons extends Service implements IIcons {
   static property = 'icons'
 
-  public iconfont: VuetifyIconOptions['iconfont'] = 'mdi'
+  public iconfont: IIcons['iconfont'] = 'mdi'
 
-  public values: VuetifyIconOptions['values'] = presets[this.iconfont]
+  public values: IIcons['values'] = presets[this.iconfont]
 
-  constructor (options: Partial<VuetifyIconOptions> = {}) {
+  constructor (options: Partial<IIcons> = {}) {
     super()
     if (options.iconfont) this.iconfont = options.iconfont
 

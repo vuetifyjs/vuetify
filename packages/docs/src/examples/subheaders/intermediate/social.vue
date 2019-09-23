@@ -11,10 +11,10 @@
 
       <v-toolbar-title>Application</v-toolbar-title>
 
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
 
       <v-btn icon>
-        <v-icon>search</v-icon>
+        <v-icon>mdi-magnify</v-icon>
       </v-btn>
     </v-toolbar>
 
@@ -27,7 +27,7 @@
       <v-subheader>{{ type }}</v-subheader>
 
       <v-row>
-        <v-spacer></v-spacer>
+        <div class="flex-grow-1"></div>
         <v-col
           v-for="card in cards"
           :key="card"

@@ -1,11 +1,8 @@
 @import '../../styles/styles.sass'
+@import './_variables.scss'
 
 .v-menu
-  display: block
-  vertical-align: middle
-
-  &--inline
-    display: inline-block
+  display: inline
 
   &__activator
     align-items: center
@@ -18,7 +15,7 @@
   &__content
     position: absolute
     display: inline-block
-    border-radius: 2px
+    border-radius: $menu-content-border-radius
     max-width: 80%
     overflow-y: auto
     overflow-x: hidden

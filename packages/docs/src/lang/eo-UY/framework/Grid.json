@@ -77,7 +77,6 @@
     "justifySpaceBetween": "crwdns24324:0crwdne24324:0",
     "justifyStart": "crwdns24326:0crwdne24326:0",
     "v-container": {
-      "grid-list-{xs through xl}": "crwdns24328:0crwdne24328:0",
       "fluid": "crwdns24330:0crwdne24330:0"
     },
     "v-flex": {

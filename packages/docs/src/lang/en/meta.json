@@ -44,6 +44,11 @@
     "description": "Help support Vuetify by backing the project. This helps with the maintenance of existing features and the development of new ones.",
     "keywords": "sponsor, backer, donations, patron, supporting vuetify, vuetify support"
   },
+  "getting-started/releases-and-migrations": {
+    "title": "Releases and migrations",
+    "description": "Stay up to date with the latest release notes. The migration guides will also help you migrate applications though major releases.",
+    "keywords": "migration, releases, upgrading vuetify"
+  },
   "getting-started/long-term-support": {
     "title": "Long-term support",
     "description": "Vuetify provides long-term support to the last major release for 12 months for critical bugs and security vulnerabilities.",
@@ -343,11 +348,6 @@
     "title": "Grid system",
     "description": "Vuetify supports the 12 point Material Design grid for laying out and controlling breakpoints for your application.",
     "keywords": "grids, vuetify grid component, layout component, flex component"
-  },
-  "components/grid-lists": {
-    "title": "Grid list component",
-    "description": "Grid lists allow you to specify the gutter used when separating grid items.",
-    "keywords": "grid lists, vuetify grid list component, vue grid list component"
   },
   "components/file-inputs": {
     "title": "File input component",

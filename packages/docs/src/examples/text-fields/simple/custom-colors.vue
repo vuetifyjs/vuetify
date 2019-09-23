@@ -8,7 +8,7 @@
       color="success"
     >
       <span>Registration successful!</span>
-      <v-icon dark>check_circle</v-icon>
+      <v-icon dark>mdi-checkbox-marked-circle</v-icon>
     </v-snackbar>
     <v-form ref="form" @submit.prevent="submit">
       <v-container fluid>
@@ -84,7 +84,7 @@
       </v-container>
       <v-card-actions>
         <v-btn text @click="resetForm">Cancel</v-btn>
-        <v-spacer></v-spacer>
+        <div class="flex-grow-1"></div>
         <v-btn
           :disabled="!formIsValid"
           text
@@ -100,7 +100,7 @@
           {{ content }}
         </v-card-text>
         <v-card-actions>
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
           <v-btn
             text
             color="purple"
@@ -116,7 +116,7 @@
           {{ content }}
         </v-card-text>
         <v-card-actions>
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
           <v-btn
             text
             color="purple"

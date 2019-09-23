@@ -27,6 +27,8 @@ describe('VDataFooter.ts', () => {
 
     mountFunction = (options?: MountOptions<Instance>) => {
       return mount(VDataFooter, {
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
         mocks: {
           $vuetify: {
             lang: new Lang(),
@@ -168,6 +170,28 @@ describe('VDataFooter.ts', () => {
           itemsLength: 100,
         },
         showCurrentPage: true,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should disable last page button if no items', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        options: {
+          page: 1,
+          itemsPerPage: 10,
+        },
+        pagination: {
+          page: 1,
+          itemsPerPage: 10,
+          pageStart: 0,
+          pageStop: 0,
+          pageCount: 0,
+          itemsLength: 0,
+        },
+        showFirstLastPage: true,
       },
     })
 

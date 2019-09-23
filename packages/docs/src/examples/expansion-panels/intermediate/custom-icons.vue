@@ -27,7 +27,7 @@
         <v-expansion-panel-header disable-icon-rotate>
           Item
           <template v-slot:actions>
-            <v-icon color="teal">done</v-icon>
+            <v-icon color="teal">mdi-check</v-icon>
           </template>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
@@ -39,7 +39,7 @@
         <v-expansion-panel-header disable-icon-rotate>
           Item
           <template v-slot:actions>
-            <v-icon color="error">error</v-icon>
+            <v-icon color="error">mdi-alert-circle</v-icon>
           </template>
         </v-expansion-panel-header>
         <v-expansion-panel-content>

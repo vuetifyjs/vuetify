@@ -11,6 +11,7 @@
       { "text": "faq", "to": "frequently-asked-questions" },
       { "text": "meetTheTeam", "to": "meet-the-team" },
       { "text": "sponsorsAndBackers", "to": "sponsors-and-backers" },
+      { "new": true, "text": "releasesAndMigrations", "to": "releases-and-migrations" },
       { "new": true, "text": "lts", "to": "long-term-support" },
       { "text": "contributing", "to": "contributing" },
       { "updated": true, "text": "roadmap", "to": "roadmap" },
@@ -30,6 +31,24 @@
       { "new": true, "text": "rtl", "to": "rtl" },
       { "new": true, "text": "sass-variables", "to": "sass-variables" },
       { "text": "theme", "to": "theme" }
+    ]
+  },
+  {
+    "group": "styles",
+    "text": "styles",
+    "icon": "mdi-palette",
+    "children": [
+      { "text": "colors", "to": "colors" },
+      { "text": "content", "to": "content" },
+      { "text": "display", "to": "display" },
+      { "text": "elevation", "to": "elevation" },
+      { "text": "flex", "to": "flex" },
+      { "text": "float", "to": "float" },
+      { "text": "spacing", "to": "spacing" },
+      { "text": "text", "to": "text" },
+      { "text": "typography", "to": "typography" },
+      { "text": "transitions", "to": "transitions" },
+      { "text": "scroll", "to": "scroll" }
     ]
   },
   {
@@ -144,24 +163,6 @@
     ]
   },
   {
-    "group": "styles",
-    "text": "styles",
-    "icon": "mdi-palette",
-    "children": [
-      { "text": "colors", "to": "colors" },
-      { "text": "content", "to": "content" },
-      { "text": "display", "to": "display" },
-      { "text": "elevation", "to": "elevation" },
-      { "text": "flex", "to": "flex" },
-      { "text": "float", "to": "float" },
-      { "text": "spacing", "to": "spacing" },
-      { "text": "text", "to": "text" },
-      { "text": "typography", "to": "typography" },
-      { "text": "transitions", "to": "transitions" },
-      { "text": "scroll", "to": "scroll" }
-    ]
-  },
-  {
     "group": "directives",
     "text": "directives",
     "icon": "mdi-function",
@@ -175,6 +176,7 @@
   {
     "text": "premiumThemes",
     "icon": "mdi-vuetify",
-    "to": "themes/premium"
+    "to": "themes/premium",
+    "updated": true
   }
 ]

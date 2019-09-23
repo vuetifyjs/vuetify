@@ -7,6 +7,10 @@
   "resetSearch": "Reset search",
   "gotchas": [
     {
+      "q": "### Are there examples on how the v2 grid compares to v1.5?",
+      "a": "Yes, you can [view grid examples here](https://gist.github.com/johnleider/207f63c9d30fb77042a0bb0258c5ab32)."
+    },
+    {
       "q": "### Error: Cannot find module 'node-sass'",
       "a": "Ensure that your `@vue/cli packages` located in `package.json` are at least **^3.5.0**."
     },
@@ -112,6 +116,11 @@
       "q": "### SCRIPT5022: Expected identifier, string or number",
       "a": "In order to support **modern mode** in vue-cli-3, `vuetify/lib` is not transpiled. You must tell vue-cli to transpile the `vuetify` package. This will be automatically handled in the future by vue-cli-plugin-vuetify pending a bug fix for vue-cli-3.",
       "s": "js_transpileDependencies"
+    },
+    {
+      "q": "### When adding typescript - Error: Could not find a declaration file for module 'vuetify/lib'",
+      "a": "Add the following to tsconfig file:",
+      "s": "json_tsconfig_types"
     }
   ]
 }

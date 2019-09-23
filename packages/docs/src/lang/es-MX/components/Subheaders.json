@@ -10,8 +10,5 @@
       "header": "Subheaders de menús",
       "desc": "Utilizar un subheader puede ayudar a separar los diferentes tipos de acciones."
     }
-  },
-  "props": {
-    "inset": "Añade indentación (72px)"
   }
 }

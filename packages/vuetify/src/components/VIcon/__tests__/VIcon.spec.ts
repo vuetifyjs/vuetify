@@ -20,6 +20,8 @@ describe('VIcon', () => {
 
     mountFunction = (ctx = {}, name = 'add') => {
       return mount(VIcon, {
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
         localVue,
         context: Object.assign({
           children: [name],
@@ -296,12 +298,14 @@ describe('VIcon', () => {
       expect(wrapper.text()).toBe('add')
     })
 
-    it('should render an svg icon', () => {
+    it('should render an svg icon', async () => {
       const wrapper = mountFunction({}, 'M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z')
 
       expect(wrapper.html()).toMatchSnapshot()
 
       wrapper.setProps({ large: true })
+
+      await wrapper.vm.$nextTick()
 
       expect(wrapper.html()).toMatchSnapshot()
     })

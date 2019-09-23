@@ -97,12 +97,12 @@
         label="Search"
         class="hidden-sm-and-down"
       ></v-text-field>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <v-btn icon>
-        <v-icon>apps</v-icon>
+        <v-icon>mdi-apps</v-icon>
       </v-btn>
       <v-btn icon>
-        <v-icon>notifications</v-icon>
+        <v-icon>mdi-bell</v-icon>
       </v-btn>
       <v-btn
         icon
@@ -168,7 +168,7 @@
       right
       @click="dialog = !dialog"
     >
-      <v-icon>add</v-icon>
+      <v-icon>mdi-plus</v-icon>
     </v-btn>
     <v-dialog
       v-model="dialog"
@@ -236,7 +236,7 @@
             text
             color="primary"
           >More</v-btn>
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
           <v-btn
             text
             color="primary"

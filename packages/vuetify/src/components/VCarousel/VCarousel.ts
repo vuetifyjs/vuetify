@@ -64,6 +64,7 @@ export default VWindow.extend({
   data () {
     return {
       internalHeight: this.height,
+      noHeightReset: true,
       slideTimeout: undefined as number | undefined,
     }
   },
@@ -152,6 +153,7 @@ export default VWindow.extend({
       return this.$createElement(ButtonGroup, {
         props: {
           value: this.internalValue,
+          mandatory: this.mandatory,
         },
         on: {
           change: (val: any) => {

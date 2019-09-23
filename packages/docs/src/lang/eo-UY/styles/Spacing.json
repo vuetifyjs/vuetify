@@ -4,7 +4,7 @@
   "playgroundHeader": "crwdns37674:0crwdne37674:0",
   "playgroundText1": "crwdns37676:0crwdne37676:0",
   "playgroundText2": "crwdns37678:0crwdne37678:0",
-  "howText": "crwdns37680:0{property}crwdnd37680:0{direction}crwdnd37680:0{size}crwdne37680:0",
+  "howText": "crwdns41612:0{property}crwdnd41612:0{direction}crwdnd41612:0{size}crwdne41612:0",
   "propertyText": "crwdns37682:0crwdne37682:0",
   "properties": [
     "crwdns37684:0crwdne37684:0",
@@ -12,29 +12,58 @@
   ],
   "directionText": "crwdns37688:0crwdne37688:0",
   "directions": [
-    "crwdns37690:0crwdne37690:0",
-    "crwdns37692:0crwdne37692:0",
-    "crwdns37694:0crwdne37694:0",
-    "crwdns37696:0crwdne37696:0",
-    "crwdns37698:0crwdne37698:0",
-    "crwdns37700:0crwdne37700:0",
+    "crwdns41614:0crwdne41614:0",
+    "crwdns41616:0crwdne41616:0",
+    "crwdns41618:0crwdne41618:0",
+    "crwdns41620:0crwdne41620:0",
+    "crwdns41622:0crwdne41622:0",
+    "crwdns41624:0crwdne41624:0",
     "crwdns37702:0crwdne37702:0",
     "crwdns37704:0crwdne37704:0",
     "crwdns37706:0crwdne37706:0"
   ],
-  "sizeText": "crwdns37708:0crwdne37708:0",
+  "sizeText": "crwdns41626:0crwdne41626:0",
   "sizes": [
-    "crwdns37710:0crwdne37710:0",
-    "crwdns37712:0crwdne37712:0",
-    "crwdns37714:0$spacercrwdne37714:0",
-    "crwdns37716:0$spacercrwdne37716:0",
-    "crwdns37718:0$spacercrwdne37718:0",
-    "crwdns37720:0$spacercrwdne37720:0",
-    "crwdns37722:0$spacercrwdne37722:0"
+    "crwdns41628:0crwdne41628:0",
+    "crwdns41630:0crwdne41630:0",
+    "crwdns41632:0crwdne41632:0",
+    "crwdns41634:0crwdne41634:0",
+    "crwdns41636:0crwdne41636:0",
+    "crwdns41638:0crwdne41638:0",
+    "crwdns41640:0crwdne41640:0",
+    "crwdns41642:0crwdne41642:0",
+    "crwdns41644:0crwdne41644:0",
+    "crwdns41646:0crwdne41646:0",
+    "crwdns41648:0crwdne41648:0",
+    "crwdns41650:0crwdne41650:0",
+    "crwdns41652:0crwdne41652:0",
+    "crwdns41654:0crwdne41654:0",
+    "crwdns41656:0crwdne41656:0",
+    "crwdns41658:0crwdne41658:0",
+    "crwdns41660:0crwdne41660:0",
+    "crwdns41662:0crwdne41662:0",
+    "crwdns41664:0crwdne41664:0",
+    "crwdns41666:0crwdne41666:0",
+    "crwdns41668:0crwdne41668:0",
+    "crwdns41670:0crwdne41670:0",
+    "crwdns41672:0crwdne41672:0",
+    "crwdns41674:0crwdne41674:0",
+    "crwdns41676:0crwdne41676:0",
+    "crwdns41678:0crwdne41678:0"
   ],
   "horizontalHeader": "crwdns37724:0crwdne37724:0",
   "horizontalText": "crwdns37726:0crwdne37726:0",
   "margin": "crwdns37728:0crwdne37728:0",
   "padding": "crwdns37730:0crwdne37730:0",
-  "size": "crwdns37732:0crwdne37732:0"
+  "size": "crwdns37732:0crwdne37732:0",
+  "examples": {
+    "horizontal": {
+      "header": "crwdns41680:0crwdne41680:0",
+      "desc": "crwdns41682:0crwdne41682:0"
+    },
+    "negative-margin": {
+      "header": "crwdns41684:0crwdne41684:0",
+      "desc": "crwdns41686:0crwdne41686:0"
+    }
+  }
 }

@@ -1,1 +1,21 @@
-{}
+{
+  "header": "# Tests unitaires",
+  "alert": "Vuetify utilise Typescript et doit actuellement importer et étendre l'objet Vue. Cela a le potentiel dans certaines applications pour générer un avertissement **$attrs** ou **$listeners** est en lecture seule. Il y a en ce moment une [discussion Github](https://github.com/vuetifyjs/vuetify/issues/4068) avec de potentiels contournements dans une variété de cas d'utilisation. Si vous avez des questions supplémentaires, veuillez nous rejoindre dans notre [communauté en ligne](https://community.vuetifyjs.com).",
+  "runnerHeader": "## Mise en place du lanceur de tests",
+  "runnerText2": [
+    "[Jest](https://github.com/vuejs/vue-test-utils-jest-example)",
+    "[Mocha](https://github.com/vuejs/vue-test-utils-mocha-webpack-example)",
+    "[tape](https://github.com/eddyerburgh/vue-test-utils-tape-example)",
+    "[AVA](https://github.com/eddyerburgh/vue-test-utils-ava-example)"
+  ],
+  "specHeader": "## Tests de Spec",
+  "specText1": "La création de tests unitaires dans Vuetify est similaire à **vuex** et **vue-router** en ce sens que vous utiliserez l'objet Vuetify dans une instance **localVue** et passerez une instance aux options de la fonction mount.",
+  "specText2": "Créons un exemple de cas d'utilisation de test que nous pourrions trouver dans notre application.",
+  "specText3": "Dans l'exemple ci-dessus, nous avons créé un composant personnalisé avec un prop **title** et un `v-btn` qui émet un event personnalisé lorsque cliqué. Nous voulons maintenant créer des tests qui assurent que ce comportement fonctionne correctement et continue à le faire après des changements futurs. Les exemples ci-dessous sont créés avec le lanceur de tests [Jest](https://jestjs.io/).",
+  "specAlert": "Si vous êtes coincé et avez des questions supplémentaires sur les tests ou besoin d'aide en général, veuillez nous rejoindre dans notre [communauté en ligne](https://community.vuetifyjs.com).",
+  "efficiencyHeader": "### Tester efficacement",
+  "efficiencyText1": "Lorsque vous écrivez des tests, vous vous retrouverez souvent à répéter les mêmes choses. Dans ce cas, il est avantageux de créer des fonctions d'aide pour réduire la duplication de chaque test unitaire. Fondamentalement, appliquer le principe [DRY](https://fr.wikipedia.org/wiki/Don%27t_repeat_yourself) à notre code.",
+  "efficiencyText2": "L'une des duplications de code les plus courantes dans les tests unitaires sont les fonctions mount. Cela peut facilement être réduit en une fonction réutilisable pour chaque lancement.",
+  "e2eHeader": "## Tests E2E",
+  "e2eText1": "Guide à venir. Si vous souhaitez contribuer à cette section, veuillez contacter un développeur dans notre [communauté](https://community.vuetifyjs.com)."
+}

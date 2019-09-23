@@ -13,7 +13,7 @@
       label
       text-color="white"
     >
-      <v-icon left>label</v-icon>
+      <v-icon left>mdi-label</v-icon>
       Tags
     </v-chip>
 

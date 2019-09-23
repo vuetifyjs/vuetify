@@ -60,7 +60,7 @@
       </v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-row no-gutters>
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
           <v-col cols="5">
             <v-select
               v-model="trip.location"
@@ -84,7 +84,7 @@
         </v-row>
 
         <v-card-actions>
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
           <v-btn
             text
             color="secondary"
@@ -139,7 +139,7 @@
             >
               <template v-slot:activator="{ on }">
                 <v-text-field
-                  v-model="date"
+                  v-model="trip.start"
                   label="Start date"
                   prepend-icon="event"
                   readonly
@@ -147,11 +147,11 @@
                 ></v-text-field>
               </template>
               <v-date-picker
-                v-model="trip.start"
+                v-model="date"
                 no-title
                 scrollable
               >
-                <v-spacer></v-spacer>
+                <div class="flex-grow-1"></div>
                 <v-btn
                   text
                   color="primary"
@@ -189,7 +189,7 @@
                 no-title
                 scrollable
               >
-                <v-spacer></v-spacer>
+                <div class="flex-grow-1"></div>
                 <v-btn
                   text
                   color="primary"

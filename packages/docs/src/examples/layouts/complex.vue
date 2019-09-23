@@ -9,7 +9,7 @@
       <v-list dense>
         <v-list-item @click.stop="right = !right">
           <v-list-item-action>
-            <v-icon>exit_to_app</v-icon>
+            <v-icon>mdi-exit-to-app</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Open Temporary Drawer</v-list-item-title>
@@ -26,7 +26,7 @@
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Toolbar</v-toolbar-title>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <v-app-bar-nav-icon @click.stop="drawerRight = !drawerRight"></v-app-bar-nav-icon>
     </v-app-bar>
 
@@ -37,7 +37,7 @@
       <v-list dense>
         <v-list-item @click.stop="left = !left">
           <v-list-item-action>
-            <v-icon>exit_to_app</v-icon>
+            <v-icon>mdi-exit-to-app</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Open Temporary Drawer</v-list-item-title>
@@ -108,7 +108,7 @@
       class="white--text"
     >
       <span>Vuetify</span>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <span>&copy; 2019</span>
     </v-footer>
   </v-app>

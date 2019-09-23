@@ -190,7 +190,7 @@ export default Vue.extend({
 
         after.push(this.genIcon(
           this.onLastPage,
-          this.options.page === this.pagination.pageCount || this.options.itemsPerPage === -1,
+          this.options.page >= this.pagination.pageCount || this.options.itemsPerPage === -1,
           this.$vuetify.lang.t('$vuetify.dataFooter.lastPage'),
           this.$vuetify.rtl ? this.firstIcon : this.lastIcon
         ))

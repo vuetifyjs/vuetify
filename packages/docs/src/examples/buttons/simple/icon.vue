@@ -9,25 +9,25 @@
 
           <v-col cols="12" sm="3">
             <v-btn text icon color="pink">
-              <v-icon>favorite</v-icon>
+              <v-icon>mdi-heart</v-icon>
             </v-btn>
           </v-col>
 
           <v-col cols="12" sm="3">
             <v-btn text icon color="indigo">
-              <v-icon>star</v-icon>
+              <v-icon>mdi-star</v-icon>
             </v-btn>
           </v-col>
 
           <v-col cols="12" sm="3">
             <v-btn text icon color="green">
-              <v-icon>cached</v-icon>
+              <v-icon>mdi-cached</v-icon>
             </v-btn>
           </v-col>
 
           <v-col cols="12" sm="3">
             <v-btn text icon color="deep-orange">
-              <v-icon>thumb_up</v-icon>
+              <v-icon>mdi-thumb-up</v-icon>
             </v-btn>
           </v-col>
         </v-row>
@@ -39,25 +39,25 @@
 
           <v-col cols="12" sm="3">
             <v-btn icon disabled>
-              <v-icon>favorite</v-icon>
+              <v-icon>mdi-heart</v-icon>
             </v-btn>
           </v-col>
 
           <v-col cols="12" sm="3">
             <v-btn icon disabled>
-              <v-icon>star</v-icon>
+              <v-icon>mdi-star</v-icon>
             </v-btn>
           </v-col>
 
           <v-col cols="12" sm="3">
             <v-btn icon disabled>
-              <v-icon>cached</v-icon>
+              <v-icon>mdi-cached</v-icon>
             </v-btn>
           </v-col>
 
           <v-col cols="12" sm="3">
             <v-btn icon disabled>
-              <v-icon>thumb_up</v-icon>
+              <v-icon>mdi-thumb-up</v-icon>
             </v-btn>
           </v-col>
         </v-row>

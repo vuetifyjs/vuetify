@@ -1,3 +1,4 @@
+/* eslint-disable no-new */
 import Vue from 'vue'
 import Vuetify, { colors } from 'vuetify/lib'
 import { VuetifyParsedTheme } from '../services/theme'
@@ -29,7 +30,7 @@ new Vuetify({
 
 new Vuetify({
   icons: {
-    iconfont: 'fa'
+    iconfont: 'fa',
   },
 })
 
@@ -46,7 +47,7 @@ new Vuetify({
   locale: {
     locales: {
       foo: {
-        'bar': 'baz',
+        bar: 'baz',
       },
     },
   },
@@ -57,7 +58,7 @@ new Vuetify({
     current: 'foo',
     locales: {
       foo: {
-        'bar': 'baz',
+        bar: 'baz',
       },
     },
   },
@@ -68,7 +69,7 @@ new Vuetify({
     current: 'foo',
     locales: {
       foo: {
-        'bar': 'baz',
+        bar: 'baz',
       },
     },
     t: (key: string) => key,
@@ -80,7 +81,7 @@ new Vuetify({
     current: 'foo',
     locales: {
       foo: {
-        'bar': 'baz',
+        bar: 'baz',
       },
     },
     t: (key: string, ...params: Array<string | number>) => key,
@@ -112,7 +113,20 @@ new Vuetify({
 new Vuetify({
   theme: {
     themes: {
+      light: {
+        primary: '#bada55',
+      },
+    },
+  },
+})
+
+new Vuetify({
+  theme: {
+    themes: {
       dark: {
+        primary: {
+          base: '#bada55',
+        },
         success: '#012345',
       },
       light: {
@@ -132,7 +146,7 @@ new Vuetify({
         get: (parsedTheme: VuetifyParsedTheme) => '',
         set: (parsedTheme: VuetifyParsedTheme, css: string) => {},
       },
-    }
+    },
   },
 })
 

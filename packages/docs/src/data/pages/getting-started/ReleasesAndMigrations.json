@@ -1,0 +1,27 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "getting-started-releases-and-migrations"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "getting-started/long-term-support",
+            "getting-started/contributing",
+            "getting-started/roadmap"
+          ]
+        }
+      ]
+    }
+  ]
+}
