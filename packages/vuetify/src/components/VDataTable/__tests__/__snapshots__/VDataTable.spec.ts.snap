@@ -107,7 +107,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class>
           <td class="text-left">
             Jelly bean
           </td>
@@ -127,7 +127,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
             0%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Lollipop
           </td>
@@ -147,7 +147,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
             2%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Honeycomb
           </td>
@@ -167,7 +167,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
             45%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Donut
           </td>
@@ -187,7 +187,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
             22%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             KitKat
           </td>
@@ -610,7 +610,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
             0%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Lollipop
           </td>
@@ -630,7 +630,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
             2%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Honeycomb
           </td>
@@ -650,7 +650,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
             45%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Donut
           </td>
@@ -670,7 +670,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
             22%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             KitKat
           </td>
@@ -980,7 +980,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class>
         </tr>
       </tbody>
     </table>
