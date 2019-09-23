@@ -101,10 +101,7 @@ export default Vue.extend({
 
       if (computedIPPO.length <= 1) return null
 
-      if (
-        computedIPPO.length > 0 &&
-        !computedIPPO.find(ippo => ippo.value === value)
-      ) value = computedIPPO[0]
+      if (!computedIPPO.find(ippo => ippo.value === value)) value = computedIPPO[0]
 
       return this.$createElement('div', {
         staticClass: 'v-data-footer__select',
