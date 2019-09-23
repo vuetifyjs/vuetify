@@ -35,8 +35,7 @@
     background: map-get($material, 'cards')
 
 .v-skeleton-loader
-  border-radius: 4px
-  overflow: hidden
+  border-radius: $skeleton-loader-border-radius
   position: relative
   vertical-align: top
 
@@ -48,7 +47,21 @@
       display: inline-block
 
       &:first-child
-        margin-right: 12px
+        +ltr()
+          margin-right: 12px
+
+        +rtl()
+          margin-left: 12px
+
+
+  .v-skeleton-loader__list-item,
+  .v-skeleton-loader__list-item-avatar,
+  .v-skeleton-loader__list-item-text,
+  .v-skeleton-loader__list-item-two-line,
+  .v-skeleton-loader__list-item-avatar-two-line,
+  .v-skeleton-loader__list-item-three-line,
+  .v-skeleton-loader__list-item-avatar-three-line
+    border-radius: $skeleton-loader-border-radius
 
   .v-skeleton-loader__actions,
   .v-skeleton-loader__article,
@@ -81,7 +94,11 @@
 
   &__article
     .v-skeleton-loader__heading
-      margin: 16px 0 8px 16px
+      +ltr()
+        margin: 16px 0 8px 16px
+
+      +rtl()
+        margin: 16px 8px 0 16px
 
     .v-skeleton-loader__paragraph
       padding: 16px
@@ -96,18 +113,18 @@
     position: relative
 
     &::after
-      animation: loading 1.5s infinite
+      animation: $skeleton-loader-loading-animation
       content: ''
       height: 100%
       left: 0
       position: absolute
       right: 0
       top: 0
-      transform: translateX(-100%)
+      transform: $skeleton-loader-loading-transform
       z-index: 1
 
   &__button
-    border-radius: 4px
+    border-radius: $skeleton-loader-button-border-radius
     height: 36px
     width: 64px
 
@@ -119,12 +136,12 @@
     padding: 16px
 
   &__chip
-    border-radius: 16px
+    border-radius: $skeleton-loader-chip-border-radius
     height: 32px
     width: 96px
 
   &__date-picker
-    border-radius: inherit
+    border-radius: $skeleton-loader-date-picker-border-radius
 
     .v-skeleton-loader__list-item:first-child
       .v-skeleton-loader__text
@@ -172,11 +189,11 @@
       width: 456px
 
   &__divider
-    border-radius: 1px
+    border-radius: $skeleton-loader-divider-border-radius
     height: 2px
 
   &__heading
-    border-radius: 12px
+    border-radius: $skeleton-loader-heading-border-radius
     height: 24px
     width: 45%
 
@@ -231,7 +248,11 @@
     padding: 0 16px
 
     .v-skeleton-loader__avatar
-      margin-right: 16px
+      +ltr()
+        margin-right: 16px
+
+      +rtl()
+        margin-left: 16px
 
     .v-skeleton-loader__text:last-child,
     .v-skeleton-loader__text:only-child
@@ -320,7 +341,7 @@
       margin-bottom: 0
 
   &__text
-    border-radius: 6px
+    border-radius: $skeleton-loader-text-border-radius
     flex: 1 0 auto
     height: 12px
     margin-bottom: 6px
@@ -328,6 +349,9 @@
   &--boilerplate
     .v-skeleton-loader__bone:after
       display: none
+
+  &--is-loading
+    overflow: hidden
 
   &--tile
     border-radius: 0

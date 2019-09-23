@@ -36,7 +36,8 @@
         {
           "type": "examples",
           "value": [
-            "complex/boilerplate"
+            "complex/boilerplate",
+            "intermediate/implementation"
           ]
         }
       ]

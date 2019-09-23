@@ -11,6 +11,10 @@
     "boilerplate": {
       "header": "### Boilerplate component",
       "desc": "The `v-skeleton-loader` can be used as boilerplate designs when creating mockups. Mix and match various pre-defined options or create your own unique implementations."
+    },
+    "implementation": {
+      "header": "### Implementation methods",
+      "desc": "There are 2 ways that you can utilize the `v-skeleton-component`. The **default slot** or a **v-if** conditional. The built in slot is the most convenient and easiest to use, but generates an extra div once rendered. If the extra div is an issue in your setup, you can utilize a **v-if** conditional with a Vuetify [transition component](/styles/transitions) or a custom one."
     }
   },
   "props": {

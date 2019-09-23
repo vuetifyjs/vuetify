@@ -11,28 +11,22 @@ import mixins from '../../util/mixins'
 
 // Types
 import { VNode } from 'vue'
+import { getSlot } from '../../util/helpers'
 
 /* @vue/component */
 export default mixins(
   Elevatable,
   Measurable,
-  Themeable
+  Themeable,
 ).extend({
   name: 'VSkeletonLoader',
 
   props: {
-    boilerplate: {
-      type: Boolean,
-      default: false,
-    },
-    tile: {
-      type: Boolean,
-      default: false,
-    },
-    type: {
-      type: String,
-      default: '',
-    },
+    boilerplate: Boolean,
+    loading: Boolean,
+    tile: Boolean,
+    transition: String,
+    type: String,
     types: {
       type: Object,
       default: () => ({}),
@@ -40,13 +34,30 @@ export default mixins(
   },
 
   computed: {
+    attrs (): object {
+      if (!this.isLoading) return this.$attrs
+
+      return !this.boilerplate ? {
+        'aria-busy': true,
+        'aria-live': 'polite',
+        role: 'alert',
+        ...this.$attrs,
+      } : {}
+    },
     classes (): object {
       return {
         'v-skeleton-loader--boilerplate': this.boilerplate,
+        'v-skeleton-loader--is-loading': this.isLoading,
         'v-skeleton-loader--tile': this.tile,
         ...this.themeClasses,
         ...this.elevationClasses,
       }
+    },
+    isLoading (): boolean {
+      return Boolean(
+        !getSlot(this) ||
+        this.loading
+      )
     },
     rootTypes (): Record<string, string> {
       return {
@@ -94,13 +105,15 @@ export default mixins(
     genBones (bone: string): VNode[] {
       // e.g. 'text@3'
       const [type, length] = bone.split('@') as [string, number]
-      const generator = () => this.genSkeleton(type)
+      const generator = () => this.genStructure(type)
 
       // Generate a length array based upon
       // value after @ in the bone string
       return Array.from({ length }).map(generator)
     },
-    genSkeleton (type?: string): any {
+    // Fix type when this is merged
+    // https://github.com/microsoft/TypeScript/pull/33050
+    genStructure (type?: string): any {
       let children = []
       type = type || this.type || ''
       const bone = this.rootTypes[type] || ''
@@ -117,28 +130,48 @@ export default mixins(
       // Array of values - e.g. 'list-item@2'
       else if (bone.indexOf('@') > -1) children = this.genBones(bone)
       // Single value - e.g. 'card-heading'
-      else if (bone) children.push(this.genSkeleton(bone))
+      else if (bone) children.push(this.genStructure(bone))
 
       return [this.genBone(type, children)]
     },
+    genSkeleton () {
+      const children = []
+      const slot = getSlot(this)
+
+      if (!this.isLoading) children.push(slot)
+      else children.push(this.genStructure())
+
+      if (!this.transition) return children
+
+      return this.$createElement('transition', {
+        props: {
+          name: this.transition,
+        },
+        // Only show transition when
+        // content has been loaded
+        on: {
+          enter: (el: HTMLElement) => {
+            if (this.isLoading) el.style.transition = 'none'
+          },
+          beforeLeave: (el: HTMLElement) => {
+            el.style.display = 'none'
+          },
+        },
+      }, children)
+    },
     mapBones (bones: string) {
-      // Remove spaces and return array of skeletons
-      return bones.replace(/\s/g, '').split(',').map(this.genSkeleton)
+      // Remove spaces and return array of structures
+      return bones.replace(/\s/g, '').split(',').map(this.genStructure)
     },
   },
 
   render (h): VNode {
     return h('div', {
       staticClass: 'v-skeleton-loader',
-      attrs: !this.boilerplate ? {
-        'aria-busy': true,
-        'aria-live': 'polite',
-        role: 'alert',
-        ...this.$attrs,
-      } : {},
+      attrs: this.attrs,
       on: this.$listeners,
       class: this.classes,
-      style: this.measurableStyles,
+      style: this.isLoading ? this.measurableStyles : undefined,
     }, [this.genSkeleton()])
   },
 })

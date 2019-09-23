@@ -1,7 +1,7 @@
 <template>
   <v-sheet
     :color="`grey ${theme.isDark ? 'darken-2' : 'lighten-4'}`"
-    class="px-3 pt-3 pb-12"
+    class="px-3 pt-3 pb-3"
   >
     <v-skeleton-loader
       class="mx-auto"
