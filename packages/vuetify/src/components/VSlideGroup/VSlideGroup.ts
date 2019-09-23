@@ -59,7 +59,7 @@ export const BaseSlideGroup = mixins<options &
     centerActive: Boolean,
     nextIcon: {
       type: String,
-      default: '$next',
+      default: 'v-next',
     },
     mobileBreakPoint: {
       type: [Number, String],
@@ -68,7 +68,7 @@ export const BaseSlideGroup = mixins<options &
     },
     prevIcon: {
       type: String,
-      default: '$prev',
+      default: 'v-prev',
     },
     showArrows: Boolean,
   },

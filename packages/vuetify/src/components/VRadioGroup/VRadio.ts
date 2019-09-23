@@ -47,11 +47,11 @@ export default baseMixins.extend<options>().extend({
     name: String,
     offIcon: {
       type: String,
-      default: '$radioOff',
+      default: 'v-radioOff',
     },
     onIcon: {
       type: String,
-      default: '$radioOn',
+      default: 'v-radioOn',
     },
     readonly: Boolean,
     value: {

@@ -36,11 +36,11 @@ export default BaseItemGroup.extend({
     },
     nextIcon: {
       type: [Boolean, String],
-      default: '$next',
+      default: 'v-next',
     },
     prevIcon: {
       type: [Boolean, String],
-      default: '$prev',
+      default: 'v-prev',
     },
     reverse: {
       type: Boolean,

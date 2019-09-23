@@ -57,7 +57,7 @@ export default baseMixins.extend<options>().extend({
     },
     appendIcon: {
       type: String,
-      default: '$expand',
+      default: 'v-expand',
     },
     color: {
       type: String,
@@ -175,7 +175,7 @@ export default baseMixins.extend<options>().extend({
       const icon = this.prependIcon
         ? this.prependIcon
         : this.subGroup
-          ? '$subgroup'
+          ? 'v-subgroup'
           : false
 
       if (!icon && !this.$slots.prependIcon) return null

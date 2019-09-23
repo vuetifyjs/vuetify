@@ -51,15 +51,15 @@ export default mixins(
     dense: Boolean,
     emptyIcon: {
       type: String,
-      default: '$ratingEmpty',
+      default: 'v-ratingEmpty',
     },
     fullIcon: {
       type: String,
-      default: '$ratingFull',
+      default: 'v-ratingFull',
     },
     halfIcon: {
       type: String,
-      default: '$ratingHalf',
+      default: 'v-ratingHalf',
     },
     halfIncrements: Boolean,
     hover: Boolean,

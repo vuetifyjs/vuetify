@@ -64,12 +64,12 @@ export default baseMixins.extend<options>().extend({
     },
     nextIcon: {
       type: String,
-      default: '$next',
+      default: 'v-next',
     },
     optional: Boolean,
     prevIcon: {
       type: String,
-      default: '$prev',
+      default: 'v-prev',
     },
     right: Boolean,
     showArrows: Boolean,

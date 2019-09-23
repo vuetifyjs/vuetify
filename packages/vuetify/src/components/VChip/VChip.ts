@@ -50,14 +50,14 @@ export default mixins(
     close: Boolean,
     closeIcon: {
       type: String,
-      default: '$delete',
+      default: 'v-delete',
     },
     disabled: Boolean,
     draggable: Boolean,
     filter: Boolean,
     filterIcon: {
       type: String,
-      default: '$complete',
+      default: 'v-complete',
     },
     label: Boolean,
     link: Boolean,

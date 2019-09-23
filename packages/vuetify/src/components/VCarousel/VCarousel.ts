@@ -32,7 +32,7 @@ export default VWindow.extend({
     cycle: Boolean,
     delimiterIcon: {
       type: String,
-      default: '$delimiter',
+      default: 'v-delimiter',
     },
     height: {
       type: [Number, String],

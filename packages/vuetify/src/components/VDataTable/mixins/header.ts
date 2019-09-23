@@ -52,7 +52,7 @@ export default mixins<options>().extend({
     },
     sortIcon: {
       type: String,
-      default: '$sort',
+      default: 'v-sort',
     },
     everyItem: Boolean,
     someItems: Boolean,

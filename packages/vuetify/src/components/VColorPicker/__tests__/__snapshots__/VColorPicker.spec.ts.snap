@@ -145,7 +145,7 @@ exports[`VColorPicker.ts should change canvas height 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            $unfold
+            v-unfold
           </i>
         </span>
       </button>

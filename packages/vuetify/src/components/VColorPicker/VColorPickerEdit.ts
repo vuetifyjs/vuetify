@@ -176,7 +176,7 @@ export default Vue.extend({
           click: this.changeMode,
         },
       }, [
-        this.$createElement(VIcon, '$unfold'),
+        this.$createElement(VIcon, 'v-unfold'),
       ])
     },
   },

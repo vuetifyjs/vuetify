@@ -72,12 +72,12 @@ export default mixins(
     multiple: Boolean,
     nextIcon: {
       type: String,
-      default: '$next',
+      default: 'v-next',
     },
     pickerDate: String,
     prevIcon: {
       type: String,
-      default: '$prev',
+      default: 'v-prev',
     },
     reactive: Boolean,
     readonly: Boolean,

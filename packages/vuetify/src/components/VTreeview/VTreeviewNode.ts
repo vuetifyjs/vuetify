@@ -39,11 +39,11 @@ export const VTreeviewNodeProps = {
   },
   expandIcon: {
     type: String,
-    default: '$subgroup',
+    default: 'v-subgroup',
   },
   indeterminateIcon: {
     type: String,
-    default: '$checkboxIndeterminate',
+    default: 'v-checkboxIndeterminate',
   },
   itemChildren: {
     type: String,
@@ -64,15 +64,15 @@ export const VTreeviewNodeProps = {
   loadChildren: Function as PropValidator<(item: any) => Promise<void>>,
   loadingIcon: {
     type: String,
-    default: '$loading',
+    default: 'v-loading',
   },
   offIcon: {
     type: String,
-    default: '$checkboxOff',
+    default: 'v-checkboxOff',
   },
   onIcon: {
     type: String,
-    default: '$checkboxOn',
+    default: 'v-checkboxOn',
   },
   openOnClick: Boolean,
   rounded: Boolean,

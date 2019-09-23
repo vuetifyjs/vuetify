@@ -30,15 +30,15 @@ export default Vue.extend({
     indeterminate: Boolean,
     indeterminateIcon: {
       type: String,
-      default: '$checkboxIndeterminate',
+      default: 'v-checkboxIndeterminate',
     },
     onIcon: {
       type: String,
-      default: '$checkboxOn',
+      default: 'v-checkboxOn',
     },
     offIcon: {
       type: String,
-      default: '$checkboxOff',
+      default: 'v-checkboxOff',
     },
   },
 

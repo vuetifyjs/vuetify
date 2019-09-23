@@ -39,7 +39,7 @@ export default VTextField.extend({
     placeholder: String,
     prependIcon: {
       type: String,
-      default: '$file',
+      default: 'v-file',
     },
     readonly: {
       type: Boolean,

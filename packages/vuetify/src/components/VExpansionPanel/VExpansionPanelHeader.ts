@@ -34,7 +34,7 @@ export default baseMixins.extend<options>().extend({
     disableIconRotate: Boolean,
     expandIcon: {
       type: String,
-      default: '$expand',
+      default: 'v-expand',
     },
     hideActions: Boolean,
     ripple: {

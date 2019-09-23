@@ -114,7 +114,7 @@ export default mixins(
       }, [
         this.$createElement(VIcon, {
           props: { color },
-        }, '$cancel'),
+        }, 'v-cancel'),
       ])
     },
     __cachedIcon (): VNode | null {
@@ -149,10 +149,10 @@ export default mixins(
       if (typeof this.icon === 'string' && this.icon) return this.icon
 
       switch (this.type) {
-        case 'info': return '$info'
-        case 'error': return '$error'
-        case 'success': return '$success'
-        case 'warning': return '$warning'
+        case 'info': return 'v-info'
+        case 'error': return 'v-error'
+        case 'success': return 'v-success'
+        case 'warning': return 'v-warning'
         default: return false
       }
     },
