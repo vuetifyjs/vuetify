@@ -5,6 +5,10 @@ module.exports = {
     slots: inputSlots.concat(['label']),
     events: [
       {
+        name: 'change',
+        value: 'any',
+      },
+      {
         name: 'update:indeterminate',
         value: 'boolean',
       },
