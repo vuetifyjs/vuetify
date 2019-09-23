@@ -44,6 +44,12 @@
        <priority>0.8000</priority>
   </url>
   <url>
+       <loc>https://vuetifyjs.com/en/getting-started/releases-and-migrations</loc>
+       <lastmod>2019-09-20</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
        <loc>https://vuetifyjs.com/en/getting-started/contributing</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>

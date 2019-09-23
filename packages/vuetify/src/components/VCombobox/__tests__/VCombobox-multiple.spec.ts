@@ -17,7 +17,8 @@ describe('VCombobox.ts', () => {
 
     mountFunction = (options = {}) => {
       return mount(VCombobox, {
-        ...options,
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
         mocks: {
           $vuetify: {
             lang: {
@@ -28,6 +29,7 @@ describe('VCombobox.ts', () => {
             },
           },
         },
+        ...options,
       })
     }
   })

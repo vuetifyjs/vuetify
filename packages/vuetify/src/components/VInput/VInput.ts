@@ -7,6 +7,7 @@ import VLabel from '../VLabel'
 import VMessages from '../VMessages'
 
 // Mixins
+import BindsAttrs from '../../mixins/binds-attrs'
 import Validatable from '../../mixins/validatable'
 
 // Utilities
@@ -20,6 +21,7 @@ import { VNode, VNodeData, PropType } from 'vue'
 import mixins from '../../util/mixins'
 
 const baseMixins = mixins(
+  BindsAttrs,
   Validatable
 )
 
@@ -157,7 +159,7 @@ export default baseMixins.extend<options>().extend({
           disabled: this.disabled,
           light: this.light,
         },
-        on: !(this.$listeners[eventName] || cb)
+        on: !(this.listeners$[eventName] || cb)
           ? undefined
           : {
             click: (e: Event) => {

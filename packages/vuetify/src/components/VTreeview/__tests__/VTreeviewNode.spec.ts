@@ -56,7 +56,11 @@ describe('VTreeViewNode.ts', () => {
     }
 
     mountFunction = (options?: MountOptions<Instance>) => {
-      return mount(VTreeviewNode, options)
+      return mount(VTreeviewNode, {
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
+        ...options,
+      })
     }
   })
 
@@ -74,6 +78,8 @@ describe('VTreeViewNode.ts', () => {
 
   it('should use scoped slots', () => {
     const wrapper = mount(Mock, {
+      // https://github.com/vuejs/vue-test-utils/issues/1130
+      sync: false,
       provide: { treeview },
     })
 
@@ -91,6 +97,8 @@ describe('VTreeViewNode.ts', () => {
 
   it('should use label slot', () => {
     const wrapper = mount(MockScopedLabel, {
+      // https://github.com/vuejs/vue-test-utils/issues/1130
+      sync: false,
       provide: { treeview },
     })
 
@@ -111,6 +119,8 @@ describe('VTreeViewNode.ts', () => {
         },
       }),
     }, {
+      // https://github.com/vuejs/vue-test-utils/issues/1130
+      sync: false,
       provide: { treeview },
     })
 

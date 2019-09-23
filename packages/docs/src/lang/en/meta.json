@@ -44,6 +44,11 @@
     "description": "Help support Vuetify by backing the project. This helps with the maintenance of existing features and the development of new ones.",
     "keywords": "sponsor, backer, donations, patron, supporting vuetify, vuetify support"
   },
+  "getting-started/releases-and-migrations": {
+    "title": "Releases and migrations",
+    "description": "Stay up to date with the latest release notes. The migration guides will also help you migrate applications though major releases.",
+    "keywords": "migration, releases, upgrading vuetify"
+  },
   "getting-started/long-term-support": {
     "title": "Long-term support",
     "description": "Vuetify provides long-term support to the last major release for 12 months for critical bugs and security vulnerabilities.",
