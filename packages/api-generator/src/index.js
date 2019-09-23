@@ -146,7 +146,7 @@ for (const name in installedComponents) {
   components[kebabName] = options
 }
 
-for (const key of ['Ripple', 'Resize', 'Scroll', 'Touch']) {
+for (const key of ['Intersect', 'Ripple', 'Resize', 'Scroll', 'Touch']) {
   if (!installedDirectives[key]) continue
 
   const lowerCaseVersion = key.toLowerCase()

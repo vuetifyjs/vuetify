@@ -1,0 +1,22 @@
+<template>
+  <v-card v-intersect="onIntersect">
+    <v-card-title>Card title</v-card-title>
+
+    <v-card-text>
+      Nulla neque dolor, sagittis eget, iaculis quis, molestie non, velit.
+    </v-card-text>
+  </v-card>
+</template>
+
+<script>
+  export default {
+    methods: {
+      onIntersect (entries, observer) {
+        // Will be invoked on DOM mount and when the element is intersected
+
+        // More information on what these params do on
+        // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+      }
+    }
+  }
+</script>

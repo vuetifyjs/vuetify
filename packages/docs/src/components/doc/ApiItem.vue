@@ -59,6 +59,12 @@
         value="example"
       >{{ item.options }}</doc-markup>
 
+      <!-- Snippet -->
+      <doc-markup
+        v-else-if="header.value === 'example' && item.snippet"
+        :value="item.snippet"
+      />
+
       <!-- Example -->
       <doc-markup
         v-else-if="header.value === 'example' && item.example"
