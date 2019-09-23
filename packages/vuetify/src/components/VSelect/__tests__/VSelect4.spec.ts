@@ -20,6 +20,7 @@ describe('VSelect.ts', () => {
       el = document.createElement('div')
       el.setAttribute('data-app', 'true')
       document.body.appendChild(el)
+
       return mount(VSelect, {
         // https://github.com/vuejs/vue-test-utils/issues/1130
         sync: false,
@@ -281,5 +282,27 @@ describe('VSelect.ts', () => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.internalValue).toBe('Foo')
+  })
+
+  it('should emit listIndex event when navigated by keyboard', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo', 'bar'],
+      },
+    })
+
+    const listIndexUpdate = jest.fn()
+    wrapper.vm.$on('update:list-index', listIndexUpdate)
+
+    const input = wrapper.find('input')
+    const slot = wrapper.find('.v-input__slot')
+    slot.trigger('click')
+
+    input.trigger('keydown.down')
+    await wrapper.vm.$nextTick()
+    expect(listIndexUpdate).toHaveBeenCalledWith(0)
+    input.trigger('keydown.down')
+    await wrapper.vm.$nextTick()
+    expect(listIndexUpdate).toHaveBeenCalledWith(1)
   })
 })
