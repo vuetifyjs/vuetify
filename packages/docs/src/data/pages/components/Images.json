@@ -47,7 +47,7 @@
         {
           "type": "up-next",
           "value": [
-            "components/grid-lists",
+            "components/grids",
             "components/aspect-ratios",
             "components/parallax"
           ]

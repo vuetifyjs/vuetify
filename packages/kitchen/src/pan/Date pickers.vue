@@ -20,7 +20,6 @@
       <main-header>Date pickers</main-header>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
@@ -59,7 +58,6 @@
 
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
@@ -102,7 +100,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
@@ -133,7 +130,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
@@ -164,7 +160,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
@@ -195,7 +190,6 @@
 
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
@@ -256,7 +250,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
@@ -288,7 +281,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
@@ -307,7 +299,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
         >
@@ -341,7 +332,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
@@ -381,7 +371,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
         >

@@ -147,7 +147,7 @@ export default VAutocomplete.extend({
       if (this.editingIndex > -1) {
         this.updateEditing()
       } else {
-        VSelect.options.methods.selectItem.call(this, item)
+        VAutocomplete.options.methods.selectItem.call(this, item)
       }
     },
     setSelectedItems () {
@@ -160,7 +160,7 @@ export default VAutocomplete.extend({
       }
     },
     setValue (value?: any) {
-      VSelect.options.methods.setValue.call(this, value || this.internalSearch)
+      VSelect.options.methods.setValue.call(this, value != null ? value : this.internalSearch)
     },
     updateEditing () {
       const value = this.internalValue.slice()

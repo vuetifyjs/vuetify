@@ -31,7 +31,7 @@ export const defaultMenuProps = {
   closeOnContentClick: false,
   disableKeys: true,
   openOnClick: false,
-  maxHeight: 300,
+  maxHeight: 304,
 }
 
 // Types
@@ -138,6 +138,7 @@ export default baseMixins.extend<options>().extend({
         'v-select--chips': this.hasChips,
         'v-select--chips--small': this.smallChips,
         'v-select--is-menu-active': this.isMenuActive,
+        'v-select--is-multi': this.multiple,
       }
     },
     /* Used by other components to overwrite */
@@ -190,11 +191,11 @@ export default baseMixins.extend<options>().extend({
           dense: this.dense,
           hideSelected: this.hideSelected,
           items: this.virtualizedItems,
+          itemDisabled: this.itemDisabled,
+          itemText: this.itemText,
+          itemValue: this.itemValue,
           noDataText: this.$vuetify.lang.t(this.noDataText),
           selectedItems: this.selectedItems,
-          itemDisabled: this.itemDisabled,
-          itemValue: this.itemValue,
-          itemText: this.itemText,
         },
         on: {
           select: this.selectItem,
@@ -305,6 +306,8 @@ export default baseMixins.extend<options>().extend({
     },
     closeConditional (e: Event) {
       return (
+        !this._isDestroyed &&
+
         // Click originates from outside the menu content
         this.content &&
         !this.content.contains(e.target) &&
@@ -567,7 +570,10 @@ export default baseMixins.extend<options>().extend({
       }
     },
     onKeyPress (e: KeyboardEvent) {
-      if (this.multiple) return
+      if (
+        this.multiple ||
+        this.readonly
+      ) return
 
       const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
       const now = performance.now()

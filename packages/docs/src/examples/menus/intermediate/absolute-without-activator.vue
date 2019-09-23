@@ -1,13 +1,14 @@
 <template>
   <div>
-    <v-layout flex justify-center>
+    <v-row class="flex" justify="center">
       <v-card
+        :ripple="false"
         class="portrait"
         img="https://cdn.vuetifyjs.com/images/cards/girl.jpg"
         height="300px"
-        @contextmenu="show"
+        @click="show"
       ></v-card>
-    </v-layout>
+    </v-row>
 
     <v-menu
       v-model="showMenu"
@@ -57,9 +58,10 @@
   }
 </script>
 
-<style lang="sass" scoped>
-.portrait.v-card
-  margin: 0 auto
-  max-width: 600px
-  width: 100%
+<style scoped>
+.portrait.v-card {
+  margin: 0 auto;
+  max-width: 600px;
+  width: 100%;
+}
 </style>

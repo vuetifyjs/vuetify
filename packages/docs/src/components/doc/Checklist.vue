@@ -7,7 +7,7 @@
         </v-list-item-title>
       </v-list-item-content>
       <v-list-item-icon>
-        <v-icon color="success">check</v-icon>
+        <v-icon color="success">mdi-check</v-icon>
       </v-list-item-icon>
     </v-list-item>
   </v-list>

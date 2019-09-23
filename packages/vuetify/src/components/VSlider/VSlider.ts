@@ -49,30 +49,17 @@ export default mixins<options &
   props: {
     disabled: Boolean,
     inverseLabel: Boolean,
-    min: {
-      type: [Number, String],
-      default: 0,
-    },
     max: {
       type: [Number, String],
       default: 100,
     },
+    min: {
+      type: [Number, String],
+      default: 0,
+    },
     step: {
       type: [Number, String],
       default: 1,
-    },
-    ticks: {
-      type: [Boolean, String],
-      default: false,
-      validator: v => typeof v === 'boolean' || v === 'always',
-    } as PropValidator<boolean | 'always'>,
-    tickLabels: {
-      type: Array,
-      default: () => ([]),
-    } as PropValidator<string[]>,
-    tickSize: {
-      type: [Number, String],
-      default: 2,
     },
     thumbColor: String,
     thumbLabel: {
@@ -83,6 +70,19 @@ export default mixins<options &
     thumbSize: {
       type: [Number, String],
       default: 32,
+    },
+    tickLabels: {
+      type: Array,
+      default: () => ([]),
+    } as PropValidator<string[]>,
+    ticks: {
+      type: [Boolean, String],
+      default: false,
+      validator: v => typeof v === 'boolean' || v === 'always',
+    } as PropValidator<boolean | 'always'>,
+    tickSize: {
+      type: [Number, String],
+      default: 2,
     },
     trackColor: String,
     trackFillColor: String,
@@ -97,6 +97,7 @@ export default mixins<options &
     isFocused: false,
     isActive: false,
     lazyValue: 0,
+    noClick: false, // Prevent click event if dragging took place, hack for #7915
   }),
 
   computed: {
@@ -275,7 +276,8 @@ export default mixins<options &
           this.isActive,
           this.isFocused,
           this.onThumbMouseDown,
-          this.onFocus
+          this.onFocus,
+          this.onBlur,
         ),
       ]
     },
@@ -361,6 +363,7 @@ export default mixins<options &
       isFocused: boolean,
       onDrag: Function,
       onFocus: Function,
+      onBlur: Function,
       ref = 'thumb'
     ): VNode {
       const children = [this.genThumb()]
@@ -390,7 +393,7 @@ export default mixins<options &
         },
         on: {
           focus: onFocus,
-          blur: this.onBlur,
+          blur: onBlur,
           keydown: this.onKeyDown,
           keyup: this.onKeyUp,
           touchstart: onDrag,
@@ -473,6 +476,7 @@ export default mixins<options &
       this.$emit('end', this.internalValue)
       if (!deepEqual(this.oldValue, this.internalValue)) {
         this.$emit('change', this.internalValue)
+        this.noClick = true
       }
 
       this.isActive = false
@@ -495,6 +499,10 @@ export default mixins<options &
       this.keyPressed = 0
     },
     onSliderClick (e: MouseEvent) {
+      if (this.noClick) {
+        this.noClick = false
+        return
+      }
       const thumb = this.$refs.thumb as HTMLElement
       thumb.focus()
 

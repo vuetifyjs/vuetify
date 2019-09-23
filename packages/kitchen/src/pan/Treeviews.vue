@@ -176,7 +176,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           justify-space-around
         >
           <v-flex>

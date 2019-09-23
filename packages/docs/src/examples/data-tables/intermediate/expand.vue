@@ -3,7 +3,7 @@
   <v-data-table
     :headers="headers"
     :items="desserts"
-    :single-expand="expand"
+    :single-expand="singleExpand"
     :expanded.sync="expanded"
     item-key="name"
     show-expand
@@ -12,10 +12,8 @@
     <template v-slot:top>
       <v-toolbar flat color="white">
         <v-toolbar-title>Expandable Table</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-btn color="primary" dark @click="expand = !expand">
-          {{ expand ? 'Close' : 'Keep' }} other rows
-        </v-btn>
+        <div class="flex-grow-1"></div>
+        <v-switch v-model="singleExpand" label="Single expand" class="mt-2"></v-switch>
       </v-toolbar>
     </template>
     <template v-slot:expanded-item="{ headers }">
@@ -29,7 +27,7 @@
     data () {
       return {
         expanded: [],
-        expand: false,
+        singleExpand: false,
         headers: [
           {
             text: 'Dessert (100g serving)',

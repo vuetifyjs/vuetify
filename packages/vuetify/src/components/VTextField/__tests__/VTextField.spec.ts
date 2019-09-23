@@ -659,4 +659,18 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
 
     expect(focus).toHaveBeenCalledTimes(1)
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8268
+  it('should recalculate prefix width on prefix change', async () => {
+    const setPrefixWidth = jest.fn()
+    const wrapper = mountFunction({
+      methods: { setPrefixWidth },
+    })
+
+    wrapper.setProps({ prefix: 'foobar' })
+
+    await wrapper.vm.$nextTick()
+
+    expect(setPrefixWidth).toHaveBeenCalledTimes(2)
+  })
 })

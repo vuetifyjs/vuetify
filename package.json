@@ -25,9 +25,10 @@
     "yarn": ">= 1.12.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^1.12.0",
-    "@typescript-eslint/parser": "^1.12.0",
+    "@typescript-eslint/eslint-plugin": "^1.13.0",
+    "@typescript-eslint/parser": "^1.13.0",
     "babel-jest": "^24.8.0",
+    "cross-spawn": "^6.0.5",
     "eslint": "^6.1.0",
     "eslint-config-standard": "^13.0.1",
     "eslint-plugin-import": "^2.18.2",
@@ -36,7 +37,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^5.2.3",
-    "eslint-plugin-vuetify": "^1.0.0-beta.1",
+    "eslint-plugin-vuetify": "^1.0.0-beta.4",
     "husky": "^3.0.1",
     "inquirer": "^6.5.0",
     "jest": "^24.8.0",
@@ -44,7 +45,7 @@
     "jest-css-modules": "^2.1.0",
     "jest-environment-jsdom-fourteen": "^0.1.0",
     "jest-serializer-html": "^7.0.0",
-    "lerna": "^3.16.1",
+    "lerna": "^3.16.2",
     "semver": "^6.2.0",
     "shelljs": "^0.8.3",
     "ts-jest": "^24.0.2",
@@ -54,7 +55,7 @@
     "vue": "^2.6.10",
     "vue-loader": "^15.7.1",
     "vue-template-compiler": "^2.6.10",
-    "webpack": "^4.36.1",
+    "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6",
     "webpack-merge": "^4.2.1"
   }

@@ -3,6 +3,7 @@
     bottom
     left
     offset-y
+    max-height="calc(100% - 16px)"
   >
     <template #activator="{ on: menu }">
       <v-btn
@@ -11,7 +12,7 @@
         style="min-width: 48px"
         v-on="menu"
       >
-        <v-icon v-if="currentLanguage.locale === 'eo-UY'">language</v-icon>
+        <v-icon v-if="currentLanguage.locale === 'eo-UY'">mdi-web</v-icon>
         <v-img
           v-else
           :src="`https://cdn.vuetifyjs.com/images/flags/${currentLanguage.country}.png`"
@@ -26,14 +27,13 @@
       <v-list-item
         v-for="language in languages"
         :key="language.locale"
-        avatar
         @click="translateI18n(language)"
       >
         <v-list-item-avatar
           tile
           size="24px"
         >
-          <v-icon v-if="language.locale === 'eo-UY'">language</v-icon>
+          <v-icon v-if="language.locale === 'eo-UY'">mdi-web</v-icon>
           <v-img
             v-else
             :src="`https://cdn.vuetifyjs.com/images/flags/${language.country}.png`"

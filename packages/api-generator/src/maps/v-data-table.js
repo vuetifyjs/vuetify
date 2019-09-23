@@ -1,6 +1,6 @@
 const deepmerge = require('../helpers/merge')
 const { DataDefaultScopedSlotProps, DataOptions } = require('./v-data')
-const { DataIteratorEvents, DataIteratorProps, DataIteratorItemScopedProps } = require('./v-data-iterator')
+const { DataIteratorEvents, DataIteratorProps, DataIteratorSlots, DataIteratorItemScopedProps } = require('./v-data-iterator')
 const { DataFooterPageTextScopedProps } = require('./v-data-footer')
 
 const TableHeader = {
@@ -11,8 +11,8 @@ const TableHeader = {
   'divider?': 'boolean',
   'class?': 'string | string[]',
   'width?': 'string | number',
-  'filter?': '(value: any, search: string, item: any): boolean',
-  'sort?': '(a: any, b: any): number',
+  'filter?': '(value: any, search: string, item: any) => boolean',
+  'sort?': '(a: any, b: any) => number',
 }
 
 const DataTableEvents = [
@@ -65,9 +65,23 @@ const DataTableExpandedItemScopedProps = {
   headers: 'TableHeader[]',
 }
 
+const DataTableBodyScopedProps = {
+  ...DataDefaultScopedSlotProps,
+  headers: 'TableHeader[]',
+  isMobile: 'boolean',
+}
+
+const DataGroupHeaderScopedProps = {
+  group: DataDefaultScopedSlotProps.group,
+  groupedBy: DataOptions.groupBy,
+  items: 'any[]',
+  headers: 'TableHeader[]',
+}
+
 const DataTableSlots = [
-  { name: 'body.prepend', props: DataDefaultScopedSlotProps },
-  { name: 'body', props: DataDefaultScopedSlotProps },
+  { name: 'body.append', props: DataTableBodyScopedProps },
+  { name: 'body.prepend', props: DataTableBodyScopedProps },
+  { name: 'body', props: DataTableBodyScopedProps },
   { name: 'footer', props: DataDefaultScopedSlotProps },
   { name: 'footer.page-text', props: DataFooterPageTextScopedProps },
   { name: 'header', props: DataTableHeaderScopedProps },
@@ -76,9 +90,9 @@ const DataTableSlots = [
   { name: 'top', props: DataDefaultScopedSlotProps },
   { name: 'progress', props: DataDefaultScopedSlotProps },
   { name: 'group', props: DataDefaultScopedSlotProps },
-  { name: 'group.header', props: DataDefaultScopedSlotProps },
+  { name: 'group.header', props: DataGroupHeaderScopedProps },
   { name: 'group.summary', props: DataDefaultScopedSlotProps },
-  { name: 'item', props: DataTableItemScopedProps },
+  { name: 'item', props: { ...DataTableItemScopedProps, index: 'number' } },
   { name: 'item.data-table-select', props: DataTableItemScopedProps },
   { name: 'item.data-table-expand', props: DataTableItemScopedProps },
   { name: 'item.<name>', props: DataTableItemColumnScopedProps },
@@ -95,10 +109,10 @@ module.exports = {
       },
       {
         name: 'customFilter',
-        default: '(value: any, search: string | null, item: any): boolean',
+        default: '(value: any, search: string | null, item: any) => boolean',
       },
     ]),
-    slots: DataTableSlots,
+    slots: deepmerge(DataTableSlots, DataIteratorSlots),
     events: DataTableEvents,
   },
   TableHeader,

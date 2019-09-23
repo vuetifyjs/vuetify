@@ -11,9 +11,6 @@
   <a href="https://codecov.io/gh/vuetifyjs/vuetify">
     <img src="https://img.shields.io/codecov/c/github/vuetifyjs/vuetify.svg" alt="Coverage">
   </a>
-  <a href="https://otechie.com/vuetifyjs">
-    <img src="https://api.otechie.com/consultancy/vuetifyjs/badge.svg" alt="Consulting">
-  </a>
   <a href="https://www.npmjs.com/package/vuetify">
     <img src="https://img.shields.io/npm/dt/vuetify.svg" alt="Downloads">
   </a>
@@ -21,10 +18,7 @@
     <img src="https://img.shields.io/npm/dm/vuetify.svg" alt="Downloads">
   </a>
   <br>
-  <a href="https://codebeat.co/projects/github-com-vuetifyjs-vuetify-dev">
-    <img src="https://codebeat.co/badges/b2d1ce87-848b-440e-9d7e-df9883c0cd93" alt="codebeat badge">
-  </a>
-  <a href="https://www.npmjs.com/package/vuetify">
+  <a href="https://github.com/vuetifyjs/vuetify/blob/master/LICENSE.md">
     <img src="https://img.shields.io/npm/l/vuetify.svg" alt="License">
   </a>
   <a href="https://app.zenhub.com/workspace/o/vuetifyjs/vuetify/boards">
@@ -53,7 +47,7 @@
 
 <ul>
   <li>
-    <a href="https://www.patreon.com/vuetify">Becoming a sponsor on Patreon</a>
+    <a href="https://github.com/users/johnleider/sponsorship">Becoming a sponsor on Github</a>
     <strong><small>(supports John)</small></strong>
   </li>
   <li>
@@ -69,9 +63,6 @@
   <li>
     <a href="https://vuetifyjs.com/getting-started/consulting-and-support?ref=github">Book time with John</a>
   </li>
-  <li>
-    <a href="https://otechie.com/vuetifyjs">Book time with the Team</a>
-  </li>
 </ul>
 
 <br>
@@ -84,8 +75,8 @@
   <tbody>
     <tr>
       <td>
-        <a href="https://www.fractalindustries.com/?ref=vuetify-github">
-          <img height="70px" src="https://cdn.vuetifyjs.com/images/backers/fractal-industries.png">
+        <a href="https://www.qomplx.com/?ref=vuetify-github">
+          <img height="70px" src="https://cdn.vuetifyjs.com/images/backers/QOMPLX.webp">
         </a>
       </td>
     </tr>
@@ -108,9 +99,14 @@
         </a>
       </td>
       <td>
-      <a href="http://resaleai.com/?ref=vuetify-github">
-        <img height="50px" src="https://cdn.vuetifyjs.com/images/backers/resaleai_logo_blue.svg">
-      </a>
+        <a href="http://resaleai.com/?ref=vuetify-github">
+          <img height="50px" src="https://cdn.vuetifyjs.com/images/backers/resaleai_logo_blue.svg">
+        </a>
+      </td>
+      <td>
+        <a href="http://vuemastery.com/?ref=vuetify-github">
+          <img height="50px" src="https://cdn.vuetifyjs.com/images/backers/vuemastery.svg">
+        </a>
       </td>
     </tr>
   </tbody>
@@ -139,6 +135,12 @@
       <td>
         <a href="https://www.brightree.com/?ref=vuetify-github">
           <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/brightree.svg">
+        </a>
+      </td>
+      </td>
+      <td>
+        <a href="https://analytics.quantedsquare.com/?ref=vuetify-github">
+          <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/quanted-square.svg">
         </a>
       </td>
     </tr>
@@ -170,9 +172,9 @@ Harness the power of the [Vuetify community](https://community.vuetifyjs.com) an
 
 Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using polyfills). From mobile📱 to laptop 💻 to desktop 🖥, you can rest assured that your application will work as expected.
 
-Interested in the bleeding edge? Try the vue-cli Webpack SSR (Server side rendered) template and build websites optimized for SEO.
+Interested in the bleeding edge? Try the Vue CLI 3 Webpack SSR (Server side rendered) template and build websites optimized for SEO.
 
-For more information about IE11 and Safari 9+ polyfills, visit our [Quick Start Guide](https://vuetifyjs.com/en/getting-started/quick-start#ie11-safari-9-support)
+For more information about IE11 and Safari 9+ polyfills, visit our [Quick Start Guide](https://vuetifyjs.com/getting-started/quick-start#ie11-safari-9-support)
 
 ### Documentation
 
@@ -186,11 +188,11 @@ To get started with Vuetify, you can follow one of these simple set-up instructi
 
 Looking to dive right in with zero setup and downtime? Check out our [CodePen.io One Minute Quickstart](https://template.vuetifyjs.com/)
 
-#### Vue CLI-3 Installation
+#### Vue CLI 3 Installation
 
 Setting up Vuetify with Vue's CLI is really easy 👌.
 
-(Unsure of how to install Vue's CLI on your system? Check out the official [Installation Instructions](https://cli.vuejs.org/guide/installation.html) or our [Quick Start Guide](https://vuetifyjs.com/en/getting-started/quick-start))
+(Unsure of how to install Vue's CLI on your system? Check out the official [Installation Instructions](https://cli.vuejs.org/guide/installation.html) or our [Quick Start Guide](https://vuetifyjs.com/getting-started/quick-start))
 
 If you're setting up a new project, first create it using the CLI's `create` command.
 
@@ -242,7 +244,7 @@ On the next screen, search for `Vuetify` on the list, select it, and install it 
         </a>
       </td>
       <td>
-       A vue-cli-3 plugin for installing and configuring Vuetify
+       A Vue CLI 3 plugin for installing and configuring Vuetify
       </td>
     </tr>
     <tr>
@@ -311,15 +313,25 @@ Vue.use(Vuetify) // Add Vuetify as a plugin
 For including styles 🎨, you can either place the below styles in your `index.html` (if using the CLI) or directly at your app's entry point.
 
 ```html
-<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
+<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
 ```
 Or you can import it to your webpack entry point file. This is _usually_ your `main.js` file.
 
 ```javascript
-import 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons'
+import 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900'
+import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/dist/vuetify.min.css'
 ```
+
+Don't forget to install Material Design Icons as a dependency:
+```bash
+yarn add @mdi/font -D
+# OR
+npm install @mdi/font -D
+```
+
 For more information, please visit the <a href="https://vuetifyjs.com/getting-started/quick-start">quick-start guide</a>.
 
 #### Manual Installation Through CDN
@@ -327,15 +339,16 @@ For more information, please visit the <a href="https://vuetifyjs.com/getting-st
 To use Vuetify in your project by directly importing it through CDNs (Content Delivery Networks), add the following code to the `<head>` of your HTML document.
 
 ```html
-<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
+<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
 ```
 
 Don't forget to add both Vuetify and the main Vue library to your HTML file before the closing `</body>` tag.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
 ```
 
 ### Community Support
@@ -346,7 +359,7 @@ Frequently asked questions and Gotchas on the [FAQ Guide ❓](https://vuetifyjs.
 
 ### Contributing
 
-Developers interested in contributing should read the [Code of Conduct 👩‍💻👨‍💻](./CODE_OF_CONDUCT.md).
+Developers interested in contributing should read the [Code of Conduct 👩‍💻👨‍💻](./CODE_OF_CONDUCT.md) and the [Contribution Guide](https://vuetifyjs.com/getting-started/contributing).
 
 > Please do **not** ask general questions in an issue. Issues are only to report bugs, suggest
   enhancements, or request new features. For general questions and discussions, ask in the [Vuetify Discord Community](https://community.vuetifyjs.com/).

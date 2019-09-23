@@ -1,37 +1,45 @@
 {
-  "header": "crwdns27132:0crwdne27132:0",
-  "headerText": "crwdns27134:0crwdne27134:0",
+  "header": "crwdns33324:0crwdne33324:0",
+  "headerText": "crwdns39840:0crwdne39840:0",
   "examples": {
     "usage": {
-      "desc": "crwdns27136:0crwdne27136:0"
+      "desc": "crwdns33328:0crwdne33328:0"
     },
     "onboarding": {
-      "header": "crwdns27138:0crwdne27138:0",
-      "desc": "crwdns27140:0crwdne27140:0"
+      "header": "crwdns33330:0crwdne33330:0",
+      "desc": "crwdns33332:0crwdne33332:0"
     },
     "vertical": {
-      "header": "crwdns36192:0crwdne36192:0",
-      "desc": "crwdns36194:0crwdne36194:0"
+      "header": "crwdns39842:0crwdne39842:0",
+      "desc": "crwdns39844:0crwdne39844:0"
     },
     "reverse": {
-      "header": "crwdns36196:0crwdne36196:0",
-      "desc": "crwdns36198:0crwdne36198:0"
+      "header": "crwdns39846:0crwdne39846:0",
+      "desc": "crwdns39848:0crwdne39848:0"
     },
     "account": {
-      "header": "crwdns27142:0crwdne27142:0",
-      "desc": "crwdns27144:0crwdne27144:0"
+      "header": "crwdns33334:0crwdne33334:0",
+      "desc": "crwdns39850:0crwdne39850:0"
     }
   },
   "props": {
-    "activeClass": "crwdns27146:0crwdne27146:0",
-    "disabled": "crwdns27148:0crwdne27148:0",
-    "mandatory": "crwdns27150:0crwdne27150:0",
-    "multiple": "crwdns27152:0crwdne27152:0",
-    "reverse": "crwdns27154:0crwdne27154:0",
-    "reverseTransition": "crwdns27156:0crwdne27156:0",
-    "touch": "crwdns27158:0crwdne27158:0",
-    "touchless": "crwdns27160:0crwdne27160:0",
-    "transition": "crwdns27162:0crwdne27162:0",
-    "vertical": "crwdns27164:0crwdne27164:0"
+    "activeClass": "crwdns39852:0crwdne39852:0",
+    "continuous": "crwdns39854:0crwdne39854:0",
+    "nextIcon": "crwdns39856:0crwdne39856:0",
+    "prevIcon": "crwdns39858:0crwdne39858:0",
+    "reverse": "crwdns33346:0crwdne33346:0",
+    "reverseTransition": "crwdns39860:0crwdne39860:0",
+    "showArrows": "crwdns39862:0crwdne39862:0",
+    "showArrowsOnHover": "crwdns39864:0crwdne39864:0",
+    "touch": "crwdns39866:0crwdne39866:0",
+    "touchless": "crwdns39868:0crwdne39868:0",
+    "transition": "crwdns39870:0crwdne39870:0",
+    "vertical": "crwdns39872:0crwdne39872:0",
+    "v-window-item": {
+      "disabled": "crwdns39874:0crwdne39874:0",
+      "reverse-transition": "crwdns39876:0crwdne39876:0",
+      "transition": "crwdns39878:0crwdne39878:0",
+      "value": "crwdns39880:0crwdne39880:0"
+    }
   }
 }

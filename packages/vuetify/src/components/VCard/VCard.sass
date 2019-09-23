@@ -5,7 +5,7 @@
   background-color: map-get($material, 'cards')
   color: map-deep-get($material, 'text', 'primary')
 
-  .v-card__text
+  > .v-card__text
     color: map-deep-get($material, 'text', 'secondary')
 
   &.v-card--outlined
@@ -13,10 +13,15 @@
 
 // Block
 .v-card
+  display: block
   max-width: 100%
   outline: none
   text-decoration: none
   transition-property: box-shadow, opacity
+  overflow-wrap: break-word
+  position: relative
+  white-space: normal
+  +elevationTransition()
   +elevation(2)
 
   > *:first-child:not(.v-btn):not(.v-chip),
@@ -44,6 +49,7 @@
   letter-spacing: map-deep-get($headings, 'h5', 'letter-spacing')
   line-height: map-deep-get($headings, 'h5', 'line-height')
   padding: 16px 16px 8px
+  word-break: break-all
 
   + .v-card__text
     padding-top: 0
@@ -60,15 +66,30 @@
   display: flex
   padding: 8px
 
-  .v-btn.v-size--default
+  .v-btn.v-btn
     padding: 0 8px
 
-    + .v-btn
-      margin-left: 8px
+    // Buttons have reduced padding in card actions per spec
+    // and need to compensate the icon margins accordingly
+    +ltr()
+      + .v-btn
+        margin-left: 8px
 
-      +rtl()
-        margin-left: 0
+      .v-icon--left
+        margin-left: 4px
+
+      .v-icon--right
+        margin-right: 4px
+
+    +rtl()
+      + .v-btn
         margin-right: 8px
+
+      .v-icon--left
+        margin-right: 4px
+
+      .v-icon--right
+        margin-left: 4px
 
 // Modifier
 .v-card--flat

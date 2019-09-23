@@ -1,22 +1,22 @@
 <template>
   <v-container fluid>
-    <v-layout wrap>
-      <v-flex xs12>
+    <v-row>
+      <v-col cols="12">
         <v-combobox
           v-model="select"
           :items="items"
           label="Select a favorite activity or create a new one"
         ></v-combobox>
-      </v-flex>
-      <v-flex xs12>
+      </v-col>
+      <v-col cols="12">
         <v-combobox
           v-model="select"
           :items="items"
           chips
           label="I use chips"
         ></v-combobox>
-      </v-flex>
-      <v-flex xs12>
+      </v-col>
+      <v-col cols="12">
         <v-combobox
           v-model="select"
           :items="items"
@@ -39,16 +39,16 @@
             </v-chip>
           </template>
         </v-combobox>
-      </v-flex>
-      <v-flex xs12>
+      </v-col>
+      <v-col cols="12">
         <v-combobox
           v-model="select"
           chips
           label="I'm readonly"
           readonly
         ></v-combobox>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

@@ -7,27 +7,26 @@
     >
       <v-list dense>
         <template v-for="item in items">
-          <v-layout
+          <v-row
             v-if="item.heading"
             :key="item.heading"
-            row
-            align-center
+            align="center"
           >
-            <v-flex xs6>
+            <v-col cols="6">
               <v-subheader v-if="item.heading">
                 {{ item.heading }}
               </v-subheader>
-            </v-flex>
-            <v-flex
-              xs6
+            </v-col>
+            <v-col
+              cols="6"
               class="text-center"
             >
               <a
                 href="#!"
                 class="body-2 black--text"
               >EDIT</a>
-            </v-flex>
-          </v-layout>
+            </v-col>
+          </v-row>
           <v-list-group
             v-else-if="item.children"
             :key="item.text"
@@ -98,12 +97,12 @@
         label="Search"
         class="hidden-sm-and-down"
       ></v-text-field>
-      <v-spacer></v-spacer>
+      <div class="flex-grow-1"></div>
       <v-btn icon>
-        <v-icon>apps</v-icon>
+        <v-icon>mdi-apps</v-icon>
       </v-btn>
       <v-btn icon>
-        <v-icon>notifications</v-icon>
+        <v-icon>mdi-bell</v-icon>
       </v-btn>
       <v-btn
         icon
@@ -122,12 +121,12 @@
     </v-app-bar>
     <v-content>
       <v-container
+        class="fill-height"
         fluid
-        fill-height
       >
-        <v-layout
-          align-center
-          justify-center
+        <v-row
+          align="center"
+          justify="center"
         >
           <v-tooltip right>
             <template v-slot:activator="{ on }">
@@ -157,7 +156,7 @@
             </template>
             <span>Codepen</span>
           </v-tooltip>
-        </v-layout>
+        </v-row>
       </v-container>
     </v-content>
     <v-btn
@@ -169,7 +168,7 @@
       right
       @click="dialog = !dialog"
     >
-      <v-icon>add</v-icon>
+      <v-icon>mdi-plus</v-icon>
     </v-btn>
     <v-dialog
       v-model="dialog"
@@ -179,17 +178,13 @@
         <v-card-title class="grey darken-2">
           Create contact
         </v-card-title>
-        <v-container grid-list-sm>
-          <v-layout
-            row
-            wrap
-          >
-            <v-flex
-              xs12
-              align-center
-              justify-space-between
+        <v-container>
+          <v-row>
+            <v-col
+              class="align-center justify-space-between"
+              cols="12"
             >
-              <v-layout align-center>
+              <v-row align="center">
                 <v-avatar
                   size="40px"
                   class="mr-4"
@@ -202,46 +197,46 @@
                 <v-text-field
                   placeholder="Name"
                 ></v-text-field>
-              </v-layout>
-            </v-flex>
-            <v-flex xs6>
+              </v-row>
+            </v-col>
+            <v-col cols="6">
               <v-text-field
                 prepend-icon="business"
                 placeholder="Company"
               ></v-text-field>
-            </v-flex>
-            <v-flex xs6>
+            </v-col>
+            <v-col cols="6">
               <v-text-field
                 placeholder="Job title"
               ></v-text-field>
-            </v-flex>
-            <v-flex xs12>
+            </v-col>
+            <v-col cols="12">
               <v-text-field
                 prepend-icon="mail"
                 placeholder="Email"
               ></v-text-field>
-            </v-flex>
-            <v-flex xs12>
+            </v-col>
+            <v-col cols="12">
               <v-text-field
                 type="tel"
                 prepend-icon="phone"
                 placeholder="(000) 000 - 0000"
               ></v-text-field>
-            </v-flex>
-            <v-flex xs12>
+            </v-col>
+            <v-col cols="12">
               <v-text-field
                 prepend-icon="notes"
                 placeholder="Notes"
               ></v-text-field>
-            </v-flex>
-          </v-layout>
+            </v-col>
+          </v-row>
         </v-container>
         <v-card-actions>
           <v-btn
             text
             color="primary"
           >More</v-btn>
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
           <v-btn
             text
             color="primary"

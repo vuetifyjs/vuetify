@@ -8,7 +8,7 @@
       <v-list dense>
         <v-list-item @click="">
           <v-list-item-action>
-            <v-icon>dashboard</v-icon>
+            <v-icon>mdi-view-dashboard</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Dashboard</v-list-item-title>
@@ -16,7 +16,7 @@
         </v-list-item>
         <v-list-item @click="">
           <v-list-item-action>
-            <v-icon>settings</v-icon>
+            <v-icon>mdi-settings</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Settings</v-list-item-title>
@@ -35,14 +35,14 @@
 
     <v-content>
       <v-container
+        class="fill-height"
         fluid
-        fill-height
       >
-        <v-layout
-          align-center
-          justify-center
+        <v-row
+          align="center"
+          justify="center"
         >
-          <v-flex shrink>
+          <v-col class="shrink">
             <v-tooltip right>
               <template v-slot:activator="{ on }">
                 <v-btn
@@ -71,8 +71,8 @@
               </template>
               <span>Codepen</span>
             </v-tooltip>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
 

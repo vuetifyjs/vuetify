@@ -1,5 +1,4 @@
 {
-  "header": "Chip",
   "headerText": "El componente `v-chip` se utiliza para transmitir pequeñas porciones de información. Al utilizar la prop `close`, el chip se vuelve interactivo, permitiendo que el usuario interactúe con él..",
   "examples": {
     "colored": {
@@ -18,21 +17,17 @@
       "desc": "Las etiquetas de los chips utilizan el border-radius de `v-card`."
     },
     "closable": {
-      "header": "Cerrable",
-      "uninverted": true
+      "header": "Cerrable"
     },
-    "inSelects": {
+    "in-selects": {
       "header": "Uso en selects",
-      "desc": "Los _selects_ pueden usar chips para mostrar selecciones de datos.",
-      "uninverted": true
+      "desc": "Los _selects_ pueden usar chips para mostrar selecciones de datos."
     }
   },
   "props": {
     "close": "Agrega el botón _quitar_",
     "disabled": "Deshabilita el chip, haciéndolo no-seleccionable",
     "label": "Quita los círculos en los extremos",
-    "outline": "Quita el fondo y aplica un color de borde y de texto",
-    "outlined": "Quita el fondo y aplica un color de borde y de texto",
-    "selected": "Aplica un color de selección al chip. Principalmente utilizado para resaltar texto en un `v-select`"
+    "outlined": "Quita el fondo y aplica un color de borde y de texto"
   }
 }

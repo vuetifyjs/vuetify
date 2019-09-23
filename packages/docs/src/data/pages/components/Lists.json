@@ -11,6 +11,16 @@
       "type": "section",
       "children": [
         {
+          "type": "alert",
+          "lang": "alert1",
+          "value": "info"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "usage",
           "value": "usage"
         }
@@ -28,6 +38,7 @@
             "v-list-item-action",
             "v-list-item-avatar",
             "v-list-item-content",
+            "v-list-item-icon",
             "v-list-item-title",
             "v-list-item-subtitle",
             "v-list-item-action-text"
@@ -76,8 +87,8 @@
         {
           "type": "up-next",
           "value": [
-            "components/avatars",
-            "components/icons",
+            "components/item-groups",
+            "components/list-item-groups",
             "components/subheaders"
           ]
         }

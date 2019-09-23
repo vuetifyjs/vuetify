@@ -49,7 +49,7 @@
     fieldset
       border-color: map-deep-get($material, 'text-fields', 'outlined')
 
-    &:not(.v-input--is-focused):not(.v-input--has-state):hover
+    &:not(.v-input--is-focused):not(.v-input--has-state) > .v-input__control > .v-input__slot:hover
       fieldset
         border-color: map-deep-get($material, 'text-fields', 'outlined-hover')
 
@@ -314,7 +314,7 @@
           margin-right: 12px
 
     & > .v-input__control > .v-input__slot
-      background: transparent !important
+      background: transparent
 
     .v-text-field__prefix
       max-height: 32px

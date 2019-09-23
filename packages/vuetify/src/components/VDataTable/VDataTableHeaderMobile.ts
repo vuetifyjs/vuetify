@@ -8,6 +8,13 @@ import { wrapInArray } from '../../util/helpers'
 export default mixins(header).extend({
   name: 'v-data-table-header-mobile',
 
+  props: {
+    sortByText: {
+      type: String,
+      default: '$vuetify.dataTable.sortBy',
+    },
+  },
+
   methods: {
     genSortChip (props: any) {
       const children: VNodeChildrenArrayContents = [props.item.text]
@@ -37,14 +44,16 @@ export default mixins(header).extend({
       }, children)
     },
     genSortSelect () {
+      const sortHeaders = this.headers.filter(h => h.sortable !== false && h.value !== 'data-table-select')
+
       return this.$createElement(VSelect, {
         props: {
-          label: 'Sort by',
-          items: this.headers.filter(h => h.value !== 'data-table-select'),
+          label: this.$vuetify.lang.t(this.sortByText),
+          items: sortHeaders,
           hideDetails: true,
           multiple: this.options.multiSort,
           value: this.options.multiSort ? this.options.sortBy : this.options.sortBy[0],
-          disabled: this.disableSort,
+          disabled: sortHeaders.length === 0 || this.disableSort,
         },
         on: {
           change: (v: string | string[]) => this.$emit('sort', v),
@@ -74,11 +83,7 @@ export default mixins(header).extend({
 
     children.push(this.genSortSelect())
 
-    const th = h('th', {
-      attrs: {
-        colspan: this.headers.length,
-      },
-    }, [h('div', { staticClass: 'v-data-table-header-mobile__wrapper' }, children)])
+    const th = h('th', [h('div', { staticClass: 'v-data-table-header-mobile__wrapper' }, children)])
 
     const tr = h('tr', [th])
 

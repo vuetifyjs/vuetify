@@ -400,18 +400,27 @@ export function sortItems (
         [sortA, sortB] = [sortB, sortA]
       }
 
-      if (customSorters && customSorters[sortKey]) return customSorters[sortKey](sortA, sortB)
+      if (customSorters && customSorters[sortKey]) {
+        const customResult = customSorters[sortKey](sortA, sortB)
+
+        if (!customResult) continue
+
+        return customResult
+      }
 
       // Check if both cannot be evaluated
       if (sortA === null && sortB === null) {
-        return 0
+        continue
       }
 
       [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
 
       if (sortA !== sortB) {
-        if (!isNaN(sortA) && !isNaN(sortB)) return Number(sortA) - Number(sortB)
-        return sortA.localeCompare(sortB, locale)
+        const sortResult = (!isNaN(sortA) && !isNaN(sortB))
+          ? Number(sortA) - Number(sortB)
+          : sortA.localeCompare(sortB, locale)
+
+        if (sortResult) return sortResult
       }
     }
 
@@ -505,4 +514,13 @@ export function humanReadableFileSize (bytes: number, binary = false): string {
     ++unit
   }
   return `${bytes.toFixed(1)} ${prefix[unit]}B`
+}
+
+export function camelizeObjectKeys (obj: Record<string, any> | null | undefined) {
+  if (!obj) return {}
+
+  return Object.keys(obj).reduce((o: any, key: string) => {
+    o[camelize(key)] = obj[key]
+    return o
+  }, {})
 }

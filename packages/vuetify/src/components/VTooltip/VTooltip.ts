@@ -26,10 +26,6 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
       type: [Number, String],
       default: 0,
     },
-    debounce: {
-      type: [Number, String],
-      default: 0,
-    },
     disabled: Boolean,
     fixed: {
       type: Boolean,

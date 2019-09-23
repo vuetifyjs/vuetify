@@ -65,8 +65,8 @@ export default baseMixins.extend<options>().extend({
     prependInnerIcon: String,
     reverse: Boolean,
     rounded: Boolean,
-    singleLine: Boolean,
     shaped: Boolean,
+    singleLine: Boolean,
     solo: Boolean,
     soloInverted: Boolean,
     suffix: String,
@@ -166,6 +166,12 @@ export default baseMixins.extend<options>().extend({
   watch: {
     labelValue: 'setLabelWidth',
     outlined: 'setLabelWidth',
+    label () {
+      this.$nextTick(this.setLabelWidth)
+    },
+    prefix () {
+      this.$nextTick(this.setPrefixWidth)
+    },
     isFocused (val) {
       // Sets validationState from validatable
       this.hasColor = val
@@ -218,7 +224,6 @@ export default baseMixins.extend<options>().extend({
       window.requestAnimationFrame(() => {
         this.$refs.input && this.$refs.input.blur()
       })
-      this.onBlur(e)
     },
     clearableCallback () {
       this.internalValue = null
@@ -403,7 +408,7 @@ export default baseMixins.extend<options>().extend({
       e && this.$emit('blur', e)
     },
     onClick () {
-      if (this.isFocused || this.disabled) return
+      if (this.isFocused || this.disabled || !this.$refs.input) return
 
       this.$refs.input.focus()
     },

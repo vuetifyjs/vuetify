@@ -1,7 +1,7 @@
 <template>
-  <v-container fluid grid-list-lg>
-    <v-layout row wrap>
-      <v-flex xs12 sm12 md6>
+  <v-container fluid>
+    <v-row>
+      <v-col cols="12" sm="12" md="6">
         <v-card>
           <v-toolbar>
             <v-app-bar-nav-icon></v-app-bar-nav-icon>
@@ -16,31 +16,33 @@
               right
               color="pink"
             >
-              <v-icon>add</v-icon>
+              <v-icon>mdi-plus</v-icon>
             </v-btn>
           </v-card-text>
         </v-card>
-      </v-flex>
-      <v-flex xs12 sm12 md6>
+      </v-col>
+      <v-col cols="12" sm="12" md="6">
         <v-card>
           <v-toolbar extended>
             <v-app-bar-nav-icon></v-app-bar-nav-icon>
-            <v-btn
-              color="pink"
-              dark
-              small
-              absolute
-              bottom
-              left
-              fab
-            >
-              <v-icon>add</v-icon>
-            </v-btn>
+            <template v-slot:extension>
+              <v-btn
+                color="pink"
+                dark
+                small
+                absolute
+                bottom
+                left
+                fab
+              >
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+            </template>
           </v-toolbar>
           <v-card-text style="height: 236px;" class="grey lighten-5"></v-card-text>
           <v-card-text style="height: 100px; position: relative"></v-card-text>
         </v-card>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>

@@ -1,9 +1,4 @@
 {
-  "examples": {
-    "dark": {
-      "uninverted": true
-    }
-  },
   "props": {
     "hideOverlay": "Masquer l’affichage de la superposition"
   }

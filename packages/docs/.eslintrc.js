@@ -1,6 +1,7 @@
 module.exports = {
   plugins: [
-    'json'
+    'json',
+    'vuetify'
   ],
   globals: {
     docsearch: true
@@ -18,7 +19,10 @@ module.exports = {
           },
           'svg': 'always',
           'math': 'always'
-        }]
+        }],
+        'vuetify/no-deprecated-classes': 'error',
+        'vuetify/grid-unknown-attributes': 'error',
+        'vuetify/no-legacy-grid': 'error',
       }
     },
     {

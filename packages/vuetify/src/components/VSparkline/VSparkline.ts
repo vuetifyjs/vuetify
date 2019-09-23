@@ -101,6 +101,10 @@ export default mixins<options &
       type: Array as Prop<SparklineItem[]>,
       default: () => ([]),
     },
+    labelSize: {
+      type: [Number, String],
+      default: 7,
+    },
     lineWidth: {
       type: [String, Number],
       default: 4,
@@ -109,11 +113,11 @@ export default mixins<options &
       type: [String, Number],
       default: 8,
     },
+    showLabels: Boolean,
     smooth: {
       type: [Boolean, Number, String],
       default: false,
     },
-    showLabels: Boolean,
     type: {
       type: String,
       default: 'trend',
@@ -126,10 +130,6 @@ export default mixins<options &
     width: {
       type: [Number, String],
       default: 300,
-    },
-    labelSize: {
-      type: [Number, String],
-      default: 7,
     },
   },
 

@@ -19,8 +19,8 @@
         />
 
         <supporters-sponsor-btn
-          class="mb-6 mt-4"
-          href="https://www.patreon.com/join/vuetify"
+          class="mb-6"
+          href="https://github.com/users/johnleider/sponsorship"
         />
 
         <v-text-field
@@ -62,7 +62,7 @@
       </a>
     </v-layout>
     <v-list
-      class="py-0"
+      class="pt-0 pb-7"
       dense
       expand
       nav

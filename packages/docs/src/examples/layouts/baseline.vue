@@ -7,7 +7,7 @@
       <v-list dense>
         <v-list-item @click="">
           <v-list-item-action>
-            <v-icon>home</v-icon>
+            <v-icon>mdi-home</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Home</v-list-item-title>
@@ -15,7 +15,7 @@
         </v-list-item>
         <v-list-item @click="">
           <v-list-item-action>
-            <v-icon>contact_mail</v-icon>
+            <v-icon>mdi-contact-mail</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Contact</v-list-item-title>
@@ -35,14 +35,14 @@
 
     <v-content>
       <v-container
+        class="fill-height"
         fluid
-        fill-height
       >
-        <v-layout
-          align-center
-          justify-center
+        <v-row
+          align="center"
+          justify="center"
         >
-          <v-flex text-center>
+          <v-col class="text-center">
             <v-tooltip left>
               <template v-slot:activator="{ on }">
                 <v-btn
@@ -72,8 +72,8 @@
               </template>
               <span>Codepen</span>
             </v-tooltip>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
     <v-footer

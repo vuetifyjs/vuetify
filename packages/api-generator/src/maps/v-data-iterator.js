@@ -41,9 +41,9 @@ const DataIteratorScopedSlots = [
     props: {
       ...DataDefaultScopedSlotProps,
       isSelected: '(item: any) => boolean',
-      select: '(item: any, value: boolean): void',
+      select: '(item: any, value: boolean) => void',
       isExpanded: '(item: any) => boolean',
-      expand: '(item: any, value: boolean): void',
+      expand: '(item: any, value: boolean) => void',
     },
     source: 'data-iterator',
   },

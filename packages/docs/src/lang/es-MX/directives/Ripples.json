@@ -2,10 +2,9 @@
   "header": "Directiva ripple (ondulaciones)",
   "headerText": "La directiva `v-ripple` se usa para mostrar una acción de un usuario. Puede ser aplicada a cualquier elemento de nivel de bloque (block level). Muchos componentes vienen con la directiva ripple integrada. Tal es el caso de `v-btn`, `v-tabs-item` y muchos más.",
   "examples": {
-    "customColor": {
+    "custom-color": {
       "header": "Color personalizado",
-      "desc": "Usando una clase auxiliar, puedes cambiar el color del ripple.",
-      "uninverted": true
+      "desc": "Usando una clase auxiliar, puedes cambiar el color del ripple."
     }
   }
 }

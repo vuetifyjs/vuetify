@@ -1,43 +1,40 @@
 <template>
-  <v-layout
-    row
-    wrap
-  >
-    <v-flex
-      xs12
-      sm6
-      offset-sm3
+  <v-row>
+    <v-col
+      cols="12"
+      sm="6"
+      offset-sm="3"
     >
       <v-card color="grey darken-1">
         <v-card-title>
           <span class="headline white--text pl-4">Portrait View</span>
 
-          <v-spacer></v-spacer>
+          <div class="flex-grow-1"></div>
 
           <v-btn
             dark
             icon
           >
-            <v-icon>chevron_left</v-icon>
+            <v-icon>mdi-chevron-left</v-icon>
           </v-btn>
           <v-btn
             dark
             icon
           >
-            <v-icon>edit</v-icon>
+            <v-icon>mdi-pencil</v-icon>
           </v-btn>
           <v-btn
             dark
             icon
           >
-            <v-icon>more_vert</v-icon>
+            <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </v-card-title>
 
         <v-list class="grey darken-1">
           <v-list-item>
             <v-list-item-action>
-              <v-icon color="white">phone</v-icon>
+              <v-icon color="white">mdi-phone</v-icon>
             </v-list-item-action>
 
             <v-list-item-content>
@@ -53,7 +50,7 @@
 
           <v-list-item>
             <v-list-item-action>
-              <v-icon color="white">phone</v-icon>
+              <v-icon color="white">mdi-phone</v-icon>
             </v-list-item-action>
 
             <v-list-item-content>
@@ -69,7 +66,7 @@
 
           <v-list-item>
             <v-list-item-action>
-              <v-icon color="white">mail</v-icon>
+              <v-icon color="white">mdi-email</v-icon>
             </v-list-item-action>
 
             <v-list-item-content>
@@ -81,7 +78,7 @@
 
           <v-list-item>
             <v-list-item-action>
-              <v-icon color="white">location_on</v-icon>
+              <v-icon color="white">mdi-map-marker</v-icon>
             </v-list-item-action>
 
             <v-list-item-content>
@@ -95,6 +92,6 @@
           height="200px"
         ></v-img>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>

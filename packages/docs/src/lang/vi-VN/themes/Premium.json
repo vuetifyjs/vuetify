@@ -1,1 +1,16 @@
-{}
+{
+  "buy": "Thông tin và trình diễn",
+  "free": "Miễn phí",
+  "live": "Xem trực tiếp",
+  "premium": "Trả phí",
+  "downloadNow": "Tải xuống",
+  "viewDemo": "Xem thử",
+  "templates": {
+    "freelancer": {
+      "title": "Freelancer"
+    },
+    "parallax": {
+      "title": "Parallax"
+    }
+  }
+}

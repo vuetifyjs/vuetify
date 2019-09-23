@@ -8,7 +8,7 @@
         {
           "type": "alert",
           "lang": "sassAlert1",
-          "value": "info"
+          "value": "warning"
         },
         {
           "type": "heading",
@@ -63,6 +63,14 @@
         {
           "type": "text",
           "lang": "sfcText1"
+        },
+        {
+          "type": "text",
+          "lang": "sfcText2"
+        },
+        {
+          "type": "text",
+          "lang": "sfcText3"
         },
         {
           "type": "markup",

@@ -1,9 +1,9 @@
 {
-  "color": "info",
+  "color": "green",
   "close": true,
-  "id": "version2",
-  "text": "Go to Docs",
-  "msg": "🎉 **Version 2** is coming soon! 🎉",
-  "href": "https://next.vuetifyjs.com",
+  "id": "new-store",
+  "text": "Check it Out",
+  "msg": "💖 New Vuetify Store in Beta 🛒",
+  "href": "https://store-beta.vuetifyjs.com/",
   "timeout": 0
 }

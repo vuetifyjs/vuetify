@@ -16,7 +16,7 @@
       color="red darken-4"
       label="Empty icon"
     ></v-text-field>
-    <v-layout wrap>
+    <v-row>
       <v-switch
         v-model="halfIncrements"
         class="ma-2"
@@ -41,7 +41,7 @@
         color="red darken-4"
         label="Dense"
       ></v-switch>
-    </v-layout>
+    </v-row>
     <v-slider
       v-model="length"
       color="red darken-4"
