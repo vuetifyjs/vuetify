@@ -439,7 +439,7 @@ describe('VDataTable.ts', () => {
           { text: 'Protein (g)', value: 'protein' },
           { text: 'Iron (%)', value: 'iron' },
         ],
-      }
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -468,7 +468,7 @@ describe('VDataTable.ts', () => {
           { text: 'Protein (g)', value: 'protein' },
           { text: 'Iron (%)', value: 'iron' },
         ],
-      }
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
