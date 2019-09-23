@@ -1,25 +1,29 @@
 // Directives
 import Intersect from '../'
 
+export function IntersectionObserverMock () {
+  (global as any).IntersectionObserver = class IntersectionObserver {
+    callback: (entries: any, observer: any) => {}
+
+    constructor (callback, options) {
+      this.callback = callback
+    }
+
+    observe () {
+      this.callback([], this)
+      return null
+    }
+
+    unobserve () {
+      this.callback = undefined
+      return null
+    }
+  }
+}
+
 describe('resize.ts', () => {
   beforeEach(() => {
-    (global as any).IntersectionObserver = class IntersectionObserver {
-      callback: (entries: any, observer: any) => {}
-
-      constructor (callback, options) {
-        this.callback = callback
-      }
-
-      observe () {
-        this.callback([], this)
-        return null
-      }
-
-      unobserve () {
-        this.callback = undefined
-        return null
-      }
-    }
+    IntersectionObserverMock()
   })
 
   it('should bind event on inserted', () => {

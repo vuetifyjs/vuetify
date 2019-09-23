@@ -384,6 +384,11 @@
     "description": "The item group components provides the ability to create a group of selectable items out of any component.",
     "keywords": "item groups, vuetify item group component, vue item group component"
   },
+  "components/lazy": {
+    "title": "Lazy component",
+    "description": "The lazy component allows you to dynamically render content based upon the user's viewport.",
+    "keywords": "lazy loading"
+  },
   "components/lists": {
     "title": "List component",
     "description": "The list component is a continous group of text, images and icons that may contain primary or supplemental actions.",

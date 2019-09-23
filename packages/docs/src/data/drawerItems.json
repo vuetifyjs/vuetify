@@ -118,6 +118,7 @@
           { "text": "textFields", "to": "text-fields" }
         ]
       },
+      { "new": true, "text": "lazy", "to": "lazy" },
       { "text": "lists", "to": "lists" },
       { "text": "menus", "to": "menus" },
       { "text": "navigationDrawers", "to": "navigation-drawers" },
