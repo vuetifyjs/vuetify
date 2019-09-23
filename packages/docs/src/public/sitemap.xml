@@ -518,6 +518,12 @@
        <priority>0.8000</priority>
   </url>
   <url>
+       <loc>https://vuetifyjs.com/en/components/skeleton-loaders</loc>
+       <lastmod>2019-09-19</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
        <loc>https://vuetifyjs.com/en/components/snackbars</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
