@@ -141,8 +141,10 @@ export default mixins(
       if (!this.isLoading) children.push(slot)
       else children.push(this.genStructure())
 
+      /* istanbul ignore else */
       if (!this.transition) return children
 
+      /* istanbul ignore next */
       return this.$createElement('transition', {
         props: {
           name: this.transition,

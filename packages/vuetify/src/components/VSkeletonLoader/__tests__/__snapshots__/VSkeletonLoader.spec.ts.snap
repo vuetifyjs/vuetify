@@ -1,5 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VSkeletonLoader.ts should dynamically render content 1`] = `
+<div class="v-skeleton-loader theme--light">
+  <div>
+    foobar
+  </div>
+</div>
+`;
+
+exports[`VSkeletonLoader.ts should dynamically render content 2`] = `
+<div class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
+     aria-busy="true"
+     aria-live="polite"
+     role="alert"
+>
+  <div class="v-skeleton-loader__ v-skeleton-loader__bone">
+  </div>
+</div>
+`;
+
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 1`] = `
 <div aria-busy="true"
      aria-live="polite"

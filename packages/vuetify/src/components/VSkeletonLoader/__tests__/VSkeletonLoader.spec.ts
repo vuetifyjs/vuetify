@@ -38,4 +38,47 @@ describe('VSkeletonLoader.ts', () => {
       expect(iteration.html()).toMatchSnapshot()
     }
   })
+
+  it('should dynamically render content', () => {
+    const wrapper = mountFunction({
+      slots: {
+        default: '<div>foobar</div>',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ loading: true })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should have the correct a11y attributes when loading', () => {
+    const wrapper = mountFunction({
+      propsData: { loading: true },
+      slots: {
+        // Add a default slot to allow
+        // toggling the loading prop
+        default: '<div>foobar</div>',
+      },
+    })
+
+    expect(wrapper.element.getAttribute('aria-busy')).toBe('true')
+    expect(wrapper.element.getAttribute('aria-live')).toBe('polite')
+    expect(wrapper.element.getAttribute('role')).toBe('alert')
+
+    wrapper.setProps({ loading: false })
+
+    expect(wrapper.element.getAttribute('aria-busy')).toBeNull()
+    expect(wrapper.element.getAttribute('aria-live')).toBeNull()
+    expect(wrapper.element.getAttribute('role')).toBeNull()
+  })
+
+  it('should not render aria attributes when using boilerplate', () => {
+    const wrapper = mountFunction({
+      propsData: { boilerplate: true },
+    })
+
+    expect(wrapper.vm.attrs).toEqual({})
+  })
 })
