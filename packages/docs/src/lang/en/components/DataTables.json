@@ -7,7 +7,7 @@
     },
     "slots": {
       "header": "### Slots",
-      "desc": "The `v-data-table` provides a large number of slots for customizing the table. This example showcases some of these slots and what you can do withe each."
+      "desc": "The `v-data-table` provides a large number of slots for customizing the table. This example showcases some of these slots and what you can do with each. It is important to note some slot (eg: `item`/`body`/`header`) will completely takes over the internal rendering of the component which will require you to re-implement functionalities such as selection and expansion. Some slots will override each other such as: `body` > `item` > `item.<name>` and `header`/`header.<name>`."
     },
     "select": {
       "header": "### Selectable rows",
@@ -71,7 +71,7 @@
     },
     "headerless": {
       "header": "### Remove default header and footer",
-      "desc": "You can apply the `hide-default-headers` and `hide-default-footer` props to remove the default header and footer respectively."
+      "desc": "You can apply the `hide-default-header` and `hide-default-footer` props to remove the default header and footer respectively."
     },
     "edit-dialog": {
       "header": "### Inline Editing",
@@ -94,7 +94,7 @@
     "v-edit-dialog": {
       "cancelText": "Sets the default text for the cancel button when using the **large** prop",
       "eager": "Mixins.Bootable.props.eager",
-      "large": "Attachs a submit and cancel button to the dialog",
+      "large": "Attaches a submit and cancel button to the dialog",
       "saveText": "Sets the default text for the save button when using the **large** prop",
       "transition": "Mixins.Transitionable.props.transition"
     },
@@ -146,9 +146,9 @@
   },
   "events": {
     "v-edit-dialog": {
-      "cancel": "Emits when editting is canceled",
+      "cancel": "Emits when editing is canceled",
       "close": "Emits when edit-dialog close button is pressed",
-      "open": "Emits when editting is opened",
+      "open": "Emits when editing is opened",
       "save": "Emits when edit-dialog save button is pressed"
     },
     "v-data-table": {

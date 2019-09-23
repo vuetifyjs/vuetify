@@ -46,7 +46,7 @@
         icon
         @click="markViewed"
       >
-        <v-icon>clear</v-icon>
+        <v-icon>mdi-close</v-icon>
       </v-btn>
     </v-row>
   </v-snackbar>
@@ -83,10 +83,10 @@
       computedIcon () {
         switch (this.snackbar.color) {
           case 'store': return 'mdi-cart'
-          case 'success': return 'check'
-          case 'info': return 'info'
-          case 'warning': return 'warning'
-          case 'error': return 'error'
+          case 'success': return 'mdi-check'
+          case 'info': return 'mdi-information'
+          case 'warning': return 'mdi-alert'
+          case 'error': return 'mdi-alert-circle'
           default: return false
         }
       },

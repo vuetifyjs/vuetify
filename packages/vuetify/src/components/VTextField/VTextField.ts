@@ -136,7 +136,7 @@ export default baseMixins.extend<options>().extend({
       return this.isDirty || dirtyTypes.includes(this.type)
     },
     isSingle (): boolean {
-      return this.isSolo || this.singleLine || this.fullWidth
+      return this.isSolo || this.singleLine || this.fullWidth || (this.dense && !this.outlined)
     },
     isSolo (): boolean {
       return this.solo || this.soloInverted
@@ -224,7 +224,6 @@ export default baseMixins.extend<options>().extend({
       window.requestAnimationFrame(() => {
         this.$refs.input && this.$refs.input.blur()
       })
-      this.onBlur(e)
     },
     clearableCallback () {
       this.internalValue = null

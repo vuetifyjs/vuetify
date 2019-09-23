@@ -33,6 +33,7 @@
             "simple/size",
             "simple/counter",
             "simple/custom-icon",
+            "simple/dense",
             "intermediate/selection",
             "intermediate/validation",
             "complex/advanced"

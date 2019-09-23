@@ -37,4 +37,8 @@ export default {
     counter: '{0} bestanden',
     counterSize: '{0} bestanden ({1} in totaal)',
   },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
+  },
 }

@@ -17,7 +17,7 @@
     "`.d-xl-inline-flex`"
   ],
   "directionHeader": "## Flex direction",
-  "directionText1": "By default, `d-flex` applies `flex-direction: row` and can generally be omitted. However, there may be situations where you need to exlicitly define it.",
+  "directionText1": "By default, `d-flex` applies `flex-direction: row` and can generally be omitted. However, there may be situations where you need to explicitly define it.",
   "directionText2": "The `flex-column` and `flex-column-reverse` utility classes can be used to change the orientation of the flexbox container. Keep in mind that **IE11** and **Safari** may have issues with the column direction.",
   "directionText3": "There are also responsive variations for `flex-direction`.",
   "directionList": [
@@ -142,24 +142,26 @@
   "marginText1": "Using the margin helper classes in a flexbox container, you can control the positioning of flex items on the **x-axis** or **y-axis** when using `flex-row` or `flex-column` respectively.",
   "marginAlert": "**IE11** does not properly support auto margins on flex items that have a parent with a non-default `justify-content` value. [See this StackOverflow answer](https://stackoverflow.com/a/37535548) for more details.",
   "marginSubheader": "### Using align-items",
-  "marginText2": "Mixing `flex-direction: column` and `align-items`, you can utililize `.mt-auto` and `.mb-auto` helper classes to adjust flex item positioning.",
+  "marginText2": "Mixing `flex-direction: column` and `align-items`, you can utilize `.mt-auto` and `.mb-auto` helper classes to adjust flex item positioning.",
   "wrapHeader": "## Flex wrap",
-  "wrapText1": "By default, `.d-flex` applies `flex-wrap: wrap`. This can be modified using by using the flex-wrap helper classes.",
-  "wrapText2": "There are also responsive variations for `flex-wrap`.",
-  "wrapList": [
-    "`.flex-no-wrap`",
+  "wrapText1": "By default `.d-flex` does not provide any wrapping (behaves similarly to `flex-wrap: nowrap`). This can be modified by applying flex-wrap helper classes in the format `flex-{condition}` where condition can be `nowrap`, `wrap`, or `wrap-reverse`.",
+  "wrapList1": [
+    "`.flex-nowrap`",
     "`.flex-wrap`",
-    "`.flex-wrap-reverse`",
-    "`.flex-sm-no-wrap`",
+    "`.flex-wrap-reverse`"
+  ],
+  "wrapText2": "These helper classes can also be applied in the format `flex-{breakpoint}-{condition}` to create more responsive variations based on breakpoints. The following combinations are available:",
+  "wrapList2": [
+    "`.flex-sm-nowrap`",
     "`.flex-sm-wrap`",
     "`.flex-sm-wrap-reverse`",
-    "`.flex-md-no-wrap`",
+    "`.flex-md-nowrap`",
     "`.flex-md-wrap`",
     "`.flex-md-wrap-reverse`",
-    "`.flex-lg-no-wrap`",
+    "`.flex-lg-nowrap`",
     "`.flex-lg-wrap`",
     "`.flex-lg-wrap-reverse`",
-    "`.flex-xl-no-wrap`",
+    "`.flex-xl-nowrap`",
     "`.flex-xl-wrap`",
     "`.flex-xl-wrap-reverse`"
   ],
@@ -277,5 +279,33 @@
     "`align-xl-content-space-between`",
     "`align-xl-content-space-around`",
     "`align-xl-content-stretch`"
+  ],
+  "growShrinkHeader": "##Flex grow and shrink",
+  "growShrinkText1": "Vuetify has helper classes for applying grow and shrink manually. These can be applied by adding the helper class in the format `flex-{condition}-{value}`, where condition can be either `grow` or `shrink` and value can be either `0` or `1`. The condition `grow` will permit an element to grow to fill available space, whereas `shrink` will permit an element to shrink down to only the space needs for its contents. However, this will only happen if the element must shrink to fit their container such as a container resize or being effected by a `flex-grow-1`. The value `0` will prevent the condition from occuring whereas `1` will permit the condition. The following classes are available:",
+  "growShrinkList1": [
+    "`flex-grow-0`",
+    "`flex-grow-1`",
+    "`flex-shrink-0`",
+    "`flex-shrink-1`"
+  ],
+  "growShrinkAlert1": "When using `flex-grow-1` in conjunction with `flex-shrink-0` the pre",
+  "growShrinkText2": "These helper classes can also be applied in the format `flex-{breakpoint}-{condition}-{state}` to create more responsive variations based on breakpoints. The following combinations are available:",
+  "growShrinkList2": [
+    "`flex-sm-grow-0`",
+    "`flex-md-grow-0`",
+    "`flex-lg-grow-0`",
+    "`flex-xl-grow-0`",
+    "`flex-sm-grow-1`",
+    "`flex-md-grow-1`",
+    "`flex-lg-grow-1`",
+    "`flex-xl-grow-1`",
+    "`flex-sm-shrink-0`",
+    "`flex-md-shrink-0`",
+    "`flex-lg-shrink-0`",
+    "`flex-xl-shrink-0`",
+    "`flex-sm-shrink-1`",
+    "`flex-md-shrink-1`",
+    "`flex-lg-shrink-1`",
+    "`flex-xl-shrink-1`"
   ]
 }

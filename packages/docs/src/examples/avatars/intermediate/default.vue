@@ -2,7 +2,7 @@
   <v-row justify="space-around">
 
     <v-avatar color="indigo">
-      <v-icon dark>account_circle</v-icon>
+      <v-icon dark>mdi-account-circle</v-icon>
     </v-avatar>
 
     <v-avatar>

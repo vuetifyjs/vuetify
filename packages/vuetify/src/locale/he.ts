@@ -12,7 +12,7 @@ export default {
       sortAscending: ': ממוין לפי סדר יורד. לחץ למיון לפי סדר עולה.',
       sortNone: ': לא ממוין. לחץ למיון לפי סדר עולה.',
     },
-    sortBy: 'Sort by',
+    sortBy: 'סדר לפי',
   },
   dataFooter: {
     itemsPerPageText: 'פריטים לדף:',
@@ -36,5 +36,9 @@ export default {
   fileInput: {
     counter: '{0} קבצים',
     counterSize: '{0} קבצים ({1} בסך הכל)',
+  },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
   },
 }

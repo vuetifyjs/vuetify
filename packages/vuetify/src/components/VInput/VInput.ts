@@ -40,6 +40,7 @@ export default baseMixins.extend<options>().extend({
       type: String,
       default: '',
     },
+    dense: Boolean,
     height: [Number, String],
     hideDetails: Boolean,
     hint: String,
@@ -69,6 +70,7 @@ export default baseMixins.extend<options>().extend({
         'v-input--is-focused': this.isFocused,
         'v-input--is-loading': this.loading !== false && this.loading !== undefined,
         'v-input--is-readonly': this.readonly,
+        'v-input--dense': this.dense,
         ...this.themeClasses,
       }
     },

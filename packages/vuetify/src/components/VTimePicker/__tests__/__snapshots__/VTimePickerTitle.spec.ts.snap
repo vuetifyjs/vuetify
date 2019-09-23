@@ -15,10 +15,10 @@ exports[`VTimePickerTitle.ts should render component in 12hr 1`] = `
   </div>
   <div class="v-time-picker-title__ampm">
     <div class="v-picker__title__btn">
-      am
+      AM
     </div>
     <div class="v-picker__title__btn v-picker__title__btn--active">
-      pm
+      PM
     </div>
   </div>
 </div>
@@ -45,10 +45,10 @@ exports[`VTimePickerTitle.ts should render component in 12hr. with useSeconds 1`
   </div>
   <div class="v-time-picker-title__ampm">
     <div class="v-picker__title__btn">
-      am
+      AM
     </div>
     <div class="v-picker__title__btn v-picker__title__btn--active">
-      pm
+      PM
     </div>
   </div>
 </div>
@@ -145,10 +145,10 @@ exports[`VTimePickerTitle.ts should render disabled component 1`] = `
   </div>
   <div class="v-time-picker-title__ampm">
     <div class="v-picker__title__btn v-picker__title__btn--readonly">
-      am
+      AM
     </div>
     <div class="v-picker__title__btn v-picker__title__btn--active v-picker__title__btn--readonly">
-      pm
+      PM
     </div>
   </div>
 </div>
@@ -175,10 +175,10 @@ exports[`VTimePickerTitle.ts should render disabled component. with useSeconds 1
   </div>
   <div class="v-time-picker-title__ampm">
     <div class="v-picker__title__btn v-picker__title__btn--readonly">
-      am
+      AM
     </div>
     <div class="v-picker__title__btn v-picker__title__btn--active v-picker__title__btn--readonly">
-      pm
+      PM
     </div>
   </div>
 </div>

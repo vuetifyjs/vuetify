@@ -203,7 +203,10 @@
     top: 0
     transition: $primary-transition
 
-.v-list-item--active
+// https://github.com/vuetifyjs/vuetify/issues/8327
+.v-list .v-list-item--active
+  color: inherit
+
   .v-icon
     color: inherit
 

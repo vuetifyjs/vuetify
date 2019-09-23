@@ -38,7 +38,7 @@
   pointer-events: none
   position: fixed
   top: 0
-  transition: .2s map-get($transition, 'fast-in-fast-out')
+  transition: .2s map-get($transition, 'fast-in-fast-out'), z-index 1ms
   width: 100%
   z-index: 6
   outline: none
@@ -50,8 +50,7 @@
     cursor: pointer
 
 .v-dialog__container
-  display: inline-block
-  vertical-align: middle
+  display: inline
 
 // Modifier
 .v-dialog--animated

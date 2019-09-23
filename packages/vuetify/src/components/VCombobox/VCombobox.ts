@@ -167,7 +167,7 @@ export default VAutocomplete.extend({
       }
     },
     setValue (value?: any) {
-      VSelect.options.methods.setValue.call(this, value || this.internalSearch)
+      VSelect.options.methods.setValue.call(this, value != null ? value : this.internalSearch)
     },
     updateEditing () {
       const value = this.internalValue.slice()

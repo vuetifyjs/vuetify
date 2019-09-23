@@ -276,4 +276,29 @@ describe('VCombobox.ts', () => {
 
     expect(selectItem).toHaveBeenCalledWith('foo')
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8476
+  it('should properly compare falsey values when setting', async () => {
+    const wrapper = mountFunction()
+
+    wrapper.vm.setValue(0)
+    expect(wrapper.vm.internalValue).toBe(0)
+
+    wrapper.vm.setValue('')
+    expect(wrapper.vm.internalValue).toBe('')
+
+    wrapper.vm.setValue(null)
+    expect(wrapper.vm.internalValue).toBeUndefined()
+
+    wrapper.vm.setValue(undefined)
+    expect(wrapper.vm.internalValue).toBeUndefined()
+
+    wrapper.setData({ lazySearch: 'foo' })
+
+    wrapper.vm.setValue(null)
+    expect(wrapper.vm.internalValue).toBe('foo')
+
+    wrapper.vm.setValue(undefined)
+    expect(wrapper.vm.internalValue).toBe('foo')
+  })
 })

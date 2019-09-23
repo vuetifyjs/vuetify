@@ -1,6 +1,6 @@
 {
   "name": "@vuetify/kitchen",
-  "version": "2.0.11",
+  "version": "2.0.18",
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve",
@@ -12,7 +12,7 @@
   "dependencies": {
     "sass-loader": "^7.1.0",
     "vue-router": "^3.0.7",
-    "vuetify": "^2.0.11"
+    "vuetify": "^2.0.18"
   },
   "devDependencies": {
     "@applitools/eyes-cypress": "^3.6.40",

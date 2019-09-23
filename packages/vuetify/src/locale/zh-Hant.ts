@@ -37,4 +37,8 @@ export default {
     counter: '{0} 個檔案',
     counterSize: '{0} 個檔案（共 {1}）',
   },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
+  },
 }

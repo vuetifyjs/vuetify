@@ -40,16 +40,16 @@ export default baseMixins.extend<options>().extend({
 
   props: {
     disabled: Boolean,
+    id: String,
     label: String,
     name: String,
-    id: String,
-    onIcon: {
-      type: String,
-      default: '$vuetify.icons.radioOn',
-    },
     offIcon: {
       type: String,
       default: '$vuetify.icons.radioOff',
+    },
+    onIcon: {
+      type: String,
+      default: '$vuetify.icons.radioOn',
     },
     readonly: Boolean,
     value: {

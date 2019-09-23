@@ -13,12 +13,15 @@
 
 // Block
 .v-card
+  display: block
   max-width: 100%
   outline: none
   text-decoration: none
   transition-property: box-shadow, opacity
-  word-break: break-word
   overflow-wrap: break-word
+  position: relative
+  white-space: normal
+  +elevationTransition()
   +elevation(2)
 
   > *:first-child:not(.v-btn):not(.v-chip),
@@ -46,6 +49,7 @@
   letter-spacing: map-deep-get($headings, 'h5', 'letter-spacing')
   line-height: map-deep-get($headings, 'h5', 'line-height')
   padding: 16px 16px 8px
+  word-break: break-all
 
   + .v-card__text
     padding-top: 0

@@ -24,7 +24,7 @@
       color="deep-purple accent-4"
       outlined
     >
-      <v-icon left>build</v-icon>
+      <v-icon left>mdi-wrench</v-icon>
       Update Settings
     </v-chip>
 

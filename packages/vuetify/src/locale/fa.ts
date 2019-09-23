@@ -37,4 +37,8 @@ export default {
     counter: '{0} پرونده',
     counterSize: '{0} پرونده ({1} در کل)',
   },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
+  },
 }

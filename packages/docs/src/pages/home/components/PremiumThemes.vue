@@ -23,13 +23,13 @@
           :key="i"
           xs12
           sm6
-          md4
+          :md4="themes.length % 2 !== 0"
         >
           <v-hover>
             <template v-slot:default="{ hover }">
               <v-card
                 :title="`Link to ${theme.title}`"
-                :href="`${theme.url}?ref=vuetifyjs.com`"
+                :href="`${theme.url}?ref=vuetifyjs.com${theme.query || ''}`"
                 class="v-card--mwvjs"
                 elevation="24"
                 target="_blank"
@@ -100,6 +100,13 @@
           description: vm.$t('Themes.Premium.templates.dashboard-pro.description'),
           src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-admin-dashboard-pro.jpg',
           url: 'https://www.creative-tim.com/product/vuetify-material-dashboard-pro',
+          query: '&partner=116160',
+        },
+        {
+          title: vm.$t('Themes.Premium.templates.shopify-e-commerce.title'),
+          description: vm.$t('Themes.Premium.templates.shopify-e-commerce.description'),
+          src: 'https://cdn.vuetifyjs.com/images/starter/shopify-e-commerce.png',
+          url: 'https://store.vuetifyjs.com/product/shopify-e-commerce-theme',
         },
         {
           title: vm.$t('Themes.Premium.templates.material-kit.title'),

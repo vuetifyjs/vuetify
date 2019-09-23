@@ -27,7 +27,7 @@
               v-model="search"
               type="search"
               clearable
-              append-icon="search"
+              append-icon="mdi-magnify"
               label="Search..."
               outlined
               hide-details
