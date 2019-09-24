@@ -53,6 +53,10 @@ describe('VTreeViewNode.ts', () => {
       register: jest.fn(),
       unregister: jest.fn(),
       isExcluded: () => false,
+      updateActive: () => {},
+      emitActive: () => {},
+      updateOpen: () => {},
+      emitOpen: () => {},
     }
 
     mountFunction = (options?: MountOptions<Instance>) => {
@@ -123,6 +127,62 @@ describe('VTreeViewNode.ts', () => {
       sync: false,
       provide: { treeview },
     })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  const singleRootWithEmptyChildrens = { id: 1, name: 'Child', children: [] }
+  it('should be able to have active children with empty array', () => {
+    const wrapper = mountFunction({
+      provide: { treeview },
+      propsData: {
+        item: singleRootWithEmptyChildrens,
+        activatable: true,
+        openOnClick: true,
+      },
+    })
+
+    expect(wrapper.vm.isActive).toBe(false)
+    const selectedLeaf = wrapper.find('.v-treeview-node__root')
+    selectedLeaf.trigger('click')
+    expect(wrapper.vm.isActive).toBe(true)
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should not be able to have active children with empty array when loadChildren is specified', () => {
+    const wrapper = mountFunction({
+      provide: { treeview },
+      propsData: {
+        item: singleRootWithEmptyChildrens,
+        activatable: true,
+        openOnClick: true,
+        loadChildren: () => {},
+      },
+    })
+
+    expect(wrapper.vm.isActive).toBe(false)
+    const selectedLeaf = wrapper.find('.v-treeview-node__root')
+    selectedLeaf.trigger('click')
+    expect(wrapper.vm.isActive).toBe(false)
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should not be able to have active children with empty array when disabled', () => {
+    const wrapper = mountFunction({
+      provide: { treeview },
+      propsData: {
+        item: { ...singleRootWithEmptyChildrens, disabled: true },
+        activatable: true,
+        openOnClick: true,
+      },
+    })
+
+    expect(wrapper.vm.isActive).toBe(false)
+    const selectedLeaf = wrapper.find('.v-treeview-node__root')
+    selectedLeaf.trigger('click')
+    expect(wrapper.vm.isActive).toBe(false)
 
     expect(wrapper.html()).toMatchSnapshot()
   })
