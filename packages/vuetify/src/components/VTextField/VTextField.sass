@@ -1,5 +1,6 @@
 @import '../../styles/styles.sass'
 @import './_mixins.sass'
+@import './_variables.scss'
 
 +theme(v-text-field) using ($material)
   & > .v-input__control > .v-input__slot:before
@@ -344,7 +345,7 @@
 
   &--solo,
   &--outlined
-    border-radius: 4px
+    border-radius: $text-field-border-radius
 
     fieldset,
     .v-input__control,

@@ -15,5 +15,5 @@ $calendar-weekly-day-label-margin: 4px 0 0 0 !default;
 $calendar-weekly-day-month-left: 36px !default;
 
 $calendar-event-bottom-space: 1px !default;
-$calendar-event-border-radius: 4px !default;
+$calendar-event-border-radius: $border-radius-root !default;
 $calendar-event-font-size: 12px !default;
