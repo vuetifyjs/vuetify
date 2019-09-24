@@ -17,15 +17,15 @@ export default Selectable.extend({
     indeterminate: Boolean,
     indeterminateIcon: {
       type: String,
-      default: 'v-checkboxIndeterminate',
+      default: '$checkboxIndeterminate',
     },
     offIcon: {
       type: String,
-      default: 'v-checkboxOff',
+      default: '$checkboxOff',
     },
     onIcon: {
       type: String,
-      default: 'v-checkboxOn',
+      default: '$checkboxOn',
     },
   },
 

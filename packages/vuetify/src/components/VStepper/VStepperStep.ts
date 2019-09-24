@@ -41,16 +41,16 @@ export default baseMixins.extend<options>().extend({
     complete: Boolean,
     completeIcon: {
       type: String,
-      default: 'v-complete',
+      default: '$complete',
     },
     editable: Boolean,
     editIcon: {
       type: String,
-      default: 'v-edit',
+      default: '$edit',
     },
     errorIcon: {
       type: String,
-      default: 'v-error',
+      default: '$error',
     },
     rules: {
       type: Array,

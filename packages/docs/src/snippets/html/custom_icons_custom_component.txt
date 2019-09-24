@@ -12,7 +12,7 @@
     props: {
       icon: {
         type: String,
-        default: 'v-cancel'
+        default: '$cancel'
       }
     }
   }

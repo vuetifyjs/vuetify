@@ -33,11 +33,11 @@ export default mixins(
     max: String,
     nextIcon: {
       type: String,
-      default: 'v-next',
+      default: '$next',
     },
     prevIcon: {
       type: String,
-      default: 'v-prev',
+      default: '$prev',
     },
     readonly: Boolean,
     value: {

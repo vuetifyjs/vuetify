@@ -64,7 +64,7 @@ export default baseMixins.extend<options>().extend({
   props: {
     appendIcon: {
       type: String,
-      default: 'v-dropdown',
+      default: '$dropdown',
     },
     attach: {
       default: false,

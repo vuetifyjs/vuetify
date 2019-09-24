@@ -84,7 +84,7 @@ export default VDataIterator.extend({
     headersLength: Number,
     expandIcon: {
       type: String,
-      default: 'v-expand',
+      default: '$expand',
     },
     customFilter: {
       type: Function,
@@ -327,7 +327,7 @@ export default VDataIterator.extend({
           on: {
             click: () => this.$set(this.openCache, group, !this.openCache[group]),
           },
-        }, [this.$createElement(VIcon, [isOpen ? 'v-minus' : 'v-plus'])])
+        }, [this.$createElement(VIcon, [isOpen ? '$minus' : '$plus'])])
 
         const remove = this.$createElement(VBtn, {
           staticClass: 'ma-0',
@@ -338,7 +338,7 @@ export default VDataIterator.extend({
           on: {
             click: () => props.updateOptions({ groupBy: [], groupDesc: [] }),
           },
-        }, [this.$createElement(VIcon, ['v-close'])])
+        }, [this.$createElement(VIcon, ['$close'])])
 
         const column = this.$createElement('td', {
           staticClass: 'text-start',

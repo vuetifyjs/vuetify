@@ -818,7 +818,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
                   <i aria-hidden="true"
                      class="v-icon notranslate material-icons theme--light"
                   >
-                    v-dropdown
+                    $dropdown
                   </i>
                 </div>
               </div>
@@ -846,7 +846,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-prev
+            $prev
           </i>
         </span>
       </button>
@@ -861,7 +861,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-next
+            $next
           </i>
         </span>
       </button>
@@ -917,7 +917,7 @@ exports[`VDataTable.ts should render 1`] = `
                   <i aria-hidden="true"
                      class="v-icon notranslate material-icons theme--light"
                   >
-                    v-dropdown
+                    $dropdown
                   </i>
                 </div>
               </div>
@@ -945,7 +945,7 @@ exports[`VDataTable.ts should render 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-prev
+            $prev
           </i>
         </span>
       </button>
@@ -960,7 +960,7 @@ exports[`VDataTable.ts should render 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-next
+            $next
           </i>
         </span>
       </button>
@@ -1013,7 +1013,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
                   <i aria-hidden="true"
                      class="v-icon notranslate material-icons theme--light"
                   >
-                    v-dropdown
+                    $dropdown
                   </i>
                 </div>
               </div>
@@ -1043,7 +1043,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-prev
+            $prev
           </i>
         </span>
       </button>
@@ -1058,7 +1058,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-next
+            $next
           </i>
         </span>
       </button>
@@ -1141,7 +1141,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
                   <i aria-hidden="true"
                      class="v-icon notranslate material-icons theme--light"
                   >
-                    v-dropdown
+                    $dropdown
                   </i>
                 </div>
               </div>
@@ -1169,7 +1169,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-prev
+            $prev
           </i>
         </span>
       </button>
@@ -1184,7 +1184,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-next
+            $next
           </i>
         </span>
       </button>
@@ -1230,7 +1230,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -1246,7 +1246,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -1262,7 +1262,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -1278,7 +1278,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -1294,7 +1294,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
         </tr>
@@ -1347,7 +1347,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
                   <i aria-hidden="true"
                      class="v-icon notranslate material-icons theme--light"
                   >
-                    v-dropdown
+                    $dropdown
                   </i>
                 </div>
               </div>
@@ -1375,7 +1375,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-prev
+            $prev
           </i>
         </span>
       </button>
@@ -1390,7 +1390,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-next
+            $next
           </i>
         </span>
       </button>
@@ -1430,7 +1430,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                  class="v-icon notranslate material-icons theme--light"
                  style="font-size: 18px;"
               >
-                v-sort
+                $sort
               </i>
             </th>
             <th role="columnheader"
@@ -1446,7 +1446,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                  class="v-icon notranslate material-icons theme--light"
                  style="font-size: 18px;"
               >
-                v-sort
+                $sort
               </i>
             </th>
             <th role="columnheader"
@@ -1462,7 +1462,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                  class="v-icon notranslate material-icons theme--light"
                  style="font-size: 18px;"
               >
-                v-sort
+                $sort
               </i>
             </th>
             <th role="columnheader"
@@ -1478,7 +1478,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                  class="v-icon notranslate material-icons theme--light"
                  style="font-size: 18px;"
               >
-                v-sort
+                $sort
               </i>
             </th>
             <th role="columnheader"
@@ -1494,7 +1494,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                  class="v-icon notranslate material-icons theme--light"
                  style="font-size: 18px;"
               >
-                v-sort
+                $sort
               </i>
             </th>
           </tr>
@@ -1636,7 +1636,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                   <i aria-hidden="true"
                      class="v-icon notranslate material-icons theme--light"
                   >
-                    v-dropdown
+                    $dropdown
                   </i>
                 </div>
               </div>
@@ -1664,7 +1664,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-prev
+            $prev
           </i>
         </span>
       </button>
@@ -1678,7 +1678,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-next
+            $next
           </i>
         </span>
       </button>
@@ -1725,7 +1725,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -1741,7 +1741,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -1757,7 +1757,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -1773,7 +1773,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -1789,7 +1789,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
         </tr>
@@ -1827,7 +1827,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
                   <i aria-hidden="true"
                      class="v-icon notranslate material-icons theme--light"
                   >
-                    v-dropdown
+                    $dropdown
                   </i>
                 </div>
               </div>
@@ -1855,7 +1855,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-prev
+            $prev
           </i>
         </span>
       </button>
@@ -1869,7 +1869,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-next
+            $next
           </i>
         </span>
       </button>
@@ -1915,7 +1915,7 @@ exports[`VDataTable.ts should render with data 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -1931,7 +1931,7 @@ exports[`VDataTable.ts should render with data 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -1947,7 +1947,7 @@ exports[`VDataTable.ts should render with data 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -1963,7 +1963,7 @@ exports[`VDataTable.ts should render with data 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -1979,7 +1979,7 @@ exports[`VDataTable.ts should render with data 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
         </tr>
@@ -2116,7 +2116,7 @@ exports[`VDataTable.ts should render with data 1`] = `
                   <i aria-hidden="true"
                      class="v-icon notranslate material-icons theme--light"
                   >
-                    v-dropdown
+                    $dropdown
                   </i>
                 </div>
               </div>
@@ -2144,7 +2144,7 @@ exports[`VDataTable.ts should render with data 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-prev
+            $prev
           </i>
         </span>
       </button>
@@ -2158,7 +2158,7 @@ exports[`VDataTable.ts should render with data 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-next
+            $next
           </i>
         </span>
       </button>
@@ -2203,7 +2203,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -2219,7 +2219,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -2235,7 +2235,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -2251,7 +2251,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
         </tr>
@@ -2300,7 +2300,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
                   <i aria-hidden="true"
                      class="v-icon notranslate material-icons theme--light"
                   >
-                    v-dropdown
+                    $dropdown
                   </i>
                 </div>
               </div>
@@ -2328,7 +2328,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-prev
+            $prev
           </i>
         </span>
       </button>
@@ -2342,7 +2342,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-next
+            $next
           </i>
         </span>
       </button>
@@ -2387,7 +2387,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -2403,7 +2403,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -2419,7 +2419,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -2435,7 +2435,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
         </tr>
@@ -2452,7 +2452,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  v-minus
+                  $minus
                 </i>
               </span>
             </button>
@@ -2464,7 +2464,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  v-close
+                  $close
                 </i>
               </span>
             </button>
@@ -2503,7 +2503,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  v-minus
+                  $minus
                 </i>
               </span>
             </button>
@@ -2515,7 +2515,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  v-close
+                  $close
                 </i>
               </span>
             </button>
@@ -2554,7 +2554,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  v-minus
+                  $minus
                 </i>
               </span>
             </button>
@@ -2566,7 +2566,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  v-close
+                  $close
                 </i>
               </span>
             </button>
@@ -2605,7 +2605,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  v-minus
+                  $minus
                 </i>
               </span>
             </button>
@@ -2617,7 +2617,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  v-close
+                  $close
                 </i>
               </span>
             </button>
@@ -2656,7 +2656,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  v-minus
+                  $minus
                 </i>
               </span>
             </button>
@@ -2668,7 +2668,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                 v-close
+                  $close
                 </i>
               </span>
             </button>
@@ -2727,7 +2727,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                   <i aria-hidden="true"
                      class="v-icon notranslate material-icons theme--light"
                   >
-                    v-dropdown
+                    $dropdown
                   </i>
                 </div>
               </div>
@@ -2755,7 +2755,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-prev
+            $prev
           </i>
         </span>
       </button>
@@ -2769,7 +2769,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-next
+            $next
           </i>
         </span>
       </button>
@@ -2814,7 +2814,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -2830,7 +2830,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -2846,7 +2846,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -2862,7 +2862,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
         </tr>
@@ -2879,7 +2879,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  v-minus
+                  $minus
                 </i>
               </span>
             </button>
@@ -2891,7 +2891,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  v-close
+                  $close
                 </i>
               </span>
             </button>
@@ -2942,7 +2942,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  v-minus
+                  $minus
                 </i>
               </span>
             </button>
@@ -2954,7 +2954,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  v-close
+                  $close
                 </i>
               </span>
             </button>
@@ -2988,7 +2988,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  v-minus
+                  $minus
                 </i>
               </span>
             </button>
@@ -3000,7 +3000,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  v-close
+                  $close
                 </i>
               </span>
             </button>
@@ -3034,7 +3034,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  v-minus
+                  $minus
                 </i>
               </span>
             </button>
@@ -3046,7 +3046,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <i aria-hidden="true"
                    class="v-icon notranslate material-icons theme--light"
                 >
-                  v-close
+                  $close
                 </i>
               </span>
             </button>
@@ -3100,7 +3100,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                   <i aria-hidden="true"
                      class="v-icon notranslate material-icons theme--light"
                   >
-                    v-dropdown
+                    $dropdown
                   </i>
                 </div>
               </div>
@@ -3128,7 +3128,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-prev
+            $prev
           </i>
         </span>
       </button>
@@ -3142,7 +3142,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-next
+            $next
           </i>
         </span>
       </button>
@@ -3188,7 +3188,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -3204,7 +3204,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -3220,7 +3220,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -3236,7 +3236,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -3252,7 +3252,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
         </tr>
@@ -3304,7 +3304,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
                   <i aria-hidden="true"
                      class="v-icon notranslate material-icons theme--light"
                   >
-                    v-dropdown
+                    $dropdown
                   </i>
                 </div>
               </div>
@@ -3332,7 +3332,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-prev
+            $prev
           </i>
         </span>
       </button>
@@ -3346,7 +3346,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-next
+            $next
           </i>
         </span>
       </button>
@@ -3392,7 +3392,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -3408,7 +3408,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -3424,7 +3424,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -3440,7 +3440,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -3456,7 +3456,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
         </tr>
@@ -3618,7 +3618,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
                   <i aria-hidden="true"
                      class="v-icon notranslate material-icons theme--light"
                   >
-                    v-dropdown
+                    $dropdown
                   </i>
                 </div>
               </div>
@@ -3646,7 +3646,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-prev
+            $prev
           </i>
         </span>
       </button>
@@ -3660,7 +3660,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-next
+            $next
           </i>
         </span>
       </button>
@@ -3717,7 +3717,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -3733,7 +3733,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -3749,7 +3749,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -3765,7 +3765,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -3781,7 +3781,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
         </tr>
@@ -3792,7 +3792,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
-              v-expand
+              $expand
             </i>
           </td>
           <td class="text-left">
@@ -3819,7 +3819,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
-              v-expand
+              $expand
             </i>
           </td>
           <td class="text-left">
@@ -3846,7 +3846,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
-              v-expand
+              $expand
             </i>
           </td>
           <td class="text-left">
@@ -3873,7 +3873,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
-              v-expand
+              $expand
             </i>
           </td>
           <td class="text-left">
@@ -3900,7 +3900,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
-              v-expand
+              $expand
             </i>
           </td>
           <td class="text-left">
@@ -3953,7 +3953,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
                   <i aria-hidden="true"
                      class="v-icon notranslate material-icons theme--light"
                   >
-                    v-dropdown
+                    $dropdown
                   </i>
                 </div>
               </div>
@@ -3981,7 +3981,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-prev
+            $prev
           </i>
         </span>
       </button>
@@ -3995,7 +3995,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-next
+            $next
           </i>
         </span>
       </button>
@@ -4052,7 +4052,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -4068,7 +4068,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -4084,7 +4084,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -4100,7 +4100,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -4116,7 +4116,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
         </tr>
@@ -4127,7 +4127,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
             >
-              v-expand
+              $expand
             </i>
           </td>
           <td class="text-left">
@@ -4154,7 +4154,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
-              v-expand
+              $expand
             </i>
           </td>
           <td class="text-left">
@@ -4181,7 +4181,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
-              v-expand
+              $expand
             </i>
           </td>
           <td class="text-left">
@@ -4208,7 +4208,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
-              v-expand
+              $expand
             </i>
           </td>
           <td class="text-left">
@@ -4235,7 +4235,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
-              v-expand
+              $expand
             </i>
           </td>
           <td class="text-left">
@@ -4288,7 +4288,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
                   <i aria-hidden="true"
                      class="v-icon notranslate material-icons theme--light"
                   >
-                    v-dropdown
+                    $dropdown
                   </i>
                 </div>
               </div>
@@ -4316,7 +4316,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-prev
+            $prev
           </i>
         </span>
       </button>
@@ -4330,7 +4330,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-next
+            $next
           </i>
         </span>
       </button>
@@ -4367,7 +4367,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               <i aria-hidden="true"
                  class="v-icon notranslate material-icons theme--light"
               >
-                v-checkboxOff
+                $checkboxOff
               </i>
             </div>
           </th>
@@ -4394,7 +4394,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -4410,7 +4410,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -4426,7 +4426,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -4442,7 +4442,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
           <th role="columnheader"
@@ -4458,7 +4458,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $sort
             </i>
           </th>
         </tr>
@@ -4472,7 +4472,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               <i aria-hidden="true"
                  class="v-icon notranslate material-icons theme--light"
               >
-                v-checkboxOff
+                $checkboxOff
               </i>
             </div>
           </td>
@@ -4503,7 +4503,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               <i aria-hidden="true"
                  class="v-icon notranslate material-icons theme--light"
               >
-                v-checkboxOff
+                $checkboxOff
               </i>
             </div>
           </td>
@@ -4534,7 +4534,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               <i aria-hidden="true"
                  class="v-icon notranslate material-icons theme--light"
               >
-                v-checkboxOff
+                $checkboxOff
               </i>
             </div>
           </td>
@@ -4565,7 +4565,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               <i aria-hidden="true"
                  class="v-icon notranslate material-icons theme--light"
               >
-                v-checkboxOff
+                $checkboxOff
               </i>
             </div>
           </td>
@@ -4596,7 +4596,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               <i aria-hidden="true"
                  class="v-icon notranslate material-icons theme--light"
               >
-                v-checkboxOff
+                $checkboxOff
               </i>
             </div>
           </td>
@@ -4650,7 +4650,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
                   <i aria-hidden="true"
                      class="v-icon notranslate material-icons theme--light"
                   >
-                    v-dropdown
+                    $dropdown
                   </i>
                 </div>
               </div>
@@ -4678,7 +4678,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-prev
+            $prev
           </i>
         </span>
       </button>
@@ -4692,7 +4692,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-next
+            $next
           </i>
         </span>
       </button>

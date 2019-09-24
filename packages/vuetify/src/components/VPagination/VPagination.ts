@@ -29,11 +29,11 @@ export default mixins(Colorable, Themeable).extend({
     },
     nextIcon: {
       type: String,
-      default: 'v-next',
+      default: '$next',
     },
     prevIcon: {
       type: String,
-      default: 'v-prev',
+      default: '$prev',
     },
     totalVisible: [Number, String],
     value: {

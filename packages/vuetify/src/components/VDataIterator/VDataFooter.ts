@@ -28,19 +28,19 @@ export default Vue.extend({
     } as PropValidator<any[]>,
     prevIcon: {
       type: String,
-      default: 'v-prev',
+      default: '$prev',
     },
     nextIcon: {
       type: String,
-      default: 'v-next',
+      default: '$next',
     },
     firstIcon: {
       type: String,
-      default: 'v-first',
+      default: '$first',
     },
     lastIcon: {
       type: String,
-      default: 'v-last',
+      default: '$last',
     },
     itemsPerPageText: {
       type: String,

@@ -2,11 +2,11 @@
 
 <template>
   <div>
-    <v-icon>v-product</v-icon>
+    <v-icon>$product</v-icon>
 
-    <v-icon v-text="'v-support'"></v-icon>
+    <v-icon v-text="'$support'"></v-icon>
 
-    <v-icon v-html="'v-steam'"></v-icon>
+    <v-icon v-html="'$steam'"></v-icon>
 
     <v-icon v-text="platform"></v-icon>
   </div>
@@ -23,7 +23,7 @@
 
     computed: {
       platform () {
-        return 'v-' + this.user.platform
+        return '$' + this.user.platform
       }
     }
   }
