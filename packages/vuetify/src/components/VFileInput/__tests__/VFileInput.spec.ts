@@ -233,4 +233,34 @@ describe('VFileInput.ts', () => {
 
     expect(change).not.toHaveBeenCalled()
   })
+
+  it('should truncate correctly', () => {
+    const fifteenCharFile = { name: 'testFile15Chars', size: 1 }
+    const wrapper = mountFunction({
+      propsData: {
+        truncateLength: 1,
+        value: fifteenCharFile,
+      },
+    })
+
+    expect(wrapper.find('.v-file-input__text').text()).toBe('…')
+
+    wrapper.setProps({
+      truncateLength: 2,
+    })
+
+    expect(wrapper.find('.v-file-input__text').text()).toBe('…')
+
+    wrapper.setProps({
+      truncateLength: 3,
+    })
+
+    expect(wrapper.find('.v-file-input__text').text()).toBe('t…s')
+
+    wrapper.setProps({
+      truncateLength: 10,
+    })
+
+    expect(wrapper.find('.v-file-input__text').text()).toBe('test…hars')
+  })
 })
