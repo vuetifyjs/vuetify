@@ -884,7 +884,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class>
           <td class="text-left">
             Frozen Yogurt
           </td>
@@ -904,7 +904,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
             1%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Ice cream sandwich
           </td>
@@ -924,7 +924,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
             1%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Eclair
           </td>
@@ -944,7 +944,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
             7%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Cupcake
           </td>
@@ -964,7 +964,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
             8%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Gingerbread
           </td>
@@ -984,7 +984,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
             16%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Jelly bean
           </td>
@@ -1004,7 +1004,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
             0%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Lollipop
           </td>
@@ -1024,7 +1024,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
             2%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Honeycomb
           </td>
@@ -1044,7 +1044,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
             45%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Donut
           </td>
@@ -1064,7 +1064,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
             22%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             KitKat
           </td>
@@ -1483,7 +1483,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class>
           <td class="text-left">
             Honeycomb
           </td>
@@ -1503,7 +1503,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
             45%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Donut
           </td>
@@ -1523,7 +1523,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
             22%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             KitKat
           </td>
@@ -1739,7 +1739,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class>
           <td class="text-left">
             Frozen Yogurt
           </td>
@@ -1759,7 +1759,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
             1%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Ice cream sandwich
           </td>
@@ -1779,7 +1779,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
             1%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Eclair
           </td>
@@ -1799,7 +1799,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
             7%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Cupcake
           </td>
@@ -1819,7 +1819,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
             8%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Gingerbread
           </td>
@@ -1839,7 +1839,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
             16%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Jelly bean
           </td>
@@ -1859,7 +1859,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
             0%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Lollipop
           </td>
@@ -1879,7 +1879,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
             2%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Honeycomb
           </td>
@@ -1899,7 +1899,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
             45%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Donut
           </td>
@@ -1919,7 +1919,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
             22%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             KitKat
           </td>
