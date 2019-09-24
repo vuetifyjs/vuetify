@@ -112,6 +112,7 @@ const testItems = [
   },
 ]
 
+/* eslint-disable max-statements */
 describe('VDataTable.ts', () => {
   type Instance = InstanceType<typeof VDataTable>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
