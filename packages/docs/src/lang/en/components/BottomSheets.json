@@ -28,7 +28,6 @@
   },
   "props": {
     "eager": "Mixins.Bootable.props.eager",
-    "hideOverlay": "Components.Dialogs.props.hideOverlay",
     "inset": "Reduces the sheet content maximum width to 70%.",
     "internalActivator": "Components.Dialogs.props.internalActivator",
     "openOnHover": "Components.Dialogs.props.openOnHover",
