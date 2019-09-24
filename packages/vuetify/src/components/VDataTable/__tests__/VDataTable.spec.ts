@@ -529,4 +529,24 @@ describe('VDataTable.ts', () => {
       itemsPerPage: 5,
     }))
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8817
+  it('should handle object when checking if it should default to first option in itemsPerPageOptions', async () => {
+    const itemsPerPage = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+        itemsPerPage: -1,
+        footerProps: {
+          itemsPerPageOptions: [5, 6, { text: 'All', value: -1 }],
+        },
+      },
+      listeners: {
+        'update:items-per-page': itemsPerPage,
+      },
+    })
+
+    expect(itemsPerPage).toHaveBeenCalledWith(-1)
+  })
 })

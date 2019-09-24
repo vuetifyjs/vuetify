@@ -45,7 +45,7 @@ describe('VDataFooter.ts', () => {
   it('should render with custom itemsPerPage', () => {
     const wrapper = mountFunction({
       propsData: {
-        itemsPerPageOptions: [100],
+        itemsPerPageOptions: [50, 100],
         options: {
           page: 4,
           itemsPerPage: 100,

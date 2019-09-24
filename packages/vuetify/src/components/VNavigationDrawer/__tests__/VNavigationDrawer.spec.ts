@@ -10,7 +10,7 @@ import {
 
 beforeEach(() => resizeWindow(1920, 1080))
 
-describe('VNavigationDrawer', () => {
+describe('VNavigationDrawer', () => { // eslint-disable-line max-statements
   type Instance = InstanceType<typeof VNavigationDrawer>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 
@@ -301,6 +301,76 @@ describe('VNavigationDrawer', () => {
     wrapper.trigger('click')
 
     expect(update).toHaveBeenCalled()
+  })
+
+  it('should open on mouseenter when mini-variant = true and expand-on-hover = true', async () => {
+    const update = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        miniVariant: true,
+        expandOnHover: true,
+      },
+      listeners: {
+        'update:mini-variant': update,
+      },
+    })
+
+    wrapper.trigger('mouseenter')
+    await wrapper.vm.$nextTick()
+
+    expect(update).toHaveBeenCalledWith(false)
+    expect(wrapper.classes('v-navigation-drawer--open-on-hover')).toBe(true)
+    expect(wrapper.classes('v-navigation-drawer--mini-variant')).toBe(false)
+  })
+
+  it('should emit `update:mini-variant` when mouseenter/mouseleave', async () => {
+    const calls: string[] = []
+    const update = jest.fn(val => calls.push(val))
+    const wrapper = mountFunction({
+      propsData: {
+        miniVariant: true,
+        expandOnHover: true,
+      },
+      listeners: {
+        'update:mini-variant': (value: boolean) => {
+          wrapper.setProps({ miniVariant: value })
+          update(value)
+        },
+      },
+    })
+
+    wrapper.trigger('mouseenter')
+    await wrapper.vm.$nextTick()
+
+    wrapper.trigger('mouseleave')
+    await wrapper.vm.$nextTick()
+
+    expect(calls).toEqual([false, true])
+  })
+
+  it('should emit `update:mini-variant` when expandOnHover has been changed', async () => {
+    const calls: string[] = []
+    const update = jest.fn(val => calls.push(val))
+    const wrapper = mountFunction({
+      propsData: {
+        miniVariant: false,
+        expandOnHover: false,
+      },
+      listeners: {
+        'update:mini-variant': (value: boolean) => {
+          wrapper.setProps({ miniVariant: value })
+          update(value)
+        },
+      },
+    })
+
+    wrapper.setProps({ expandOnHover: true })
+    await wrapper.vm.$nextTick()
+
+    wrapper.setProps({ expandOnHover: false })
+    await wrapper.vm.$nextTick()
+
+    expect(calls).toEqual([true, false])
   })
 
   it('should react to open / close from touch events', async () => {
