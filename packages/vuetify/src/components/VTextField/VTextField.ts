@@ -289,7 +289,7 @@ export default baseMixins.extend<options>().extend({
     genCounter () {
       if (this.counter === false || this.counter == null) return null
 
-      const max = this.counter === true ? this.$attrs.maxlength : this.counter
+      const max = this.counter === true ? this.attrs$.maxlength : this.counter
 
       return this.$createElement(VCounter, {
         props: {
@@ -351,7 +351,7 @@ export default baseMixins.extend<options>().extend({
       }, [span])
     },
     genInput () {
-      const listeners = Object.assign({}, this.$listeners)
+      const listeners = Object.assign({}, this.listeners$)
       delete listeners['change'] // Change should not be bound externally
 
       return this.$createElement('input', {
@@ -360,7 +360,7 @@ export default baseMixins.extend<options>().extend({
           value: this.lazyValue,
         },
         attrs: {
-          ...this.$attrs,
+          ...this.attrs$,
           autofocus: this.autofocus,
           disabled: this.disabled,
           id: this.computedId,

@@ -18,6 +18,8 @@ describe('VToolbar.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VToolbar, {
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
         mocks: {
           $vuetify: {
             breakpoint: {},

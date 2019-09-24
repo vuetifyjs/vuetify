@@ -6,11 +6,8 @@
 +theme(v-data-table) using ($material)
   tbody
     tr
-      &:hover:not(.v-data-table__expand-row)
-        background: map-deep-get($material, 'table', 'hover')
-
-      &.expanded.expanded__row
-          background: map-deep-get($material, 'table', 'active')
+      &.v-data-table__selected
+        background: map-deep-get($material, 'table', 'active')
 
   .v-row-group
     &__header, &__summary
@@ -25,11 +22,11 @@
 .v-data-table
   tbody
     tr
-      &.expanded
+      &.v-data-table__expanded
         border-bottom: 0
 
-        &.expanded__content
-          box-shadow: inset 0px 4px 8px -5px rgba(50, 50, 50, 0.75), inset 0px -4px 8px -5px rgba(50, 50, 50, 0.75)
+      &.v-data-table__expanded__content
+        box-shadow: inset 0px 4px 8px -5px rgba(50, 50, 50, 0.75), inset 0px -4px 8px -5px rgba(50, 50, 50, 0.75)
 
 .v-data-table__empty-wrapper
   text-align: center
@@ -48,24 +45,6 @@
 
   &__cell
     text-align: right
-
-.v-data-table__expand
-  &-row
-    border: none !important
-
-  &-col
-    padding: 0 !important
-    height: 0px !important
-
-    &--expanded
-      border-bottom: 1px solid rgba(0,0,0,0.12) // TODO: theme
-
-  &-content
-    transition: height $primary-transition
-
-    > .card
-      border-radius: 0
-      box-shadow: none
 
 .v-row-group
   &__header, &__summary
