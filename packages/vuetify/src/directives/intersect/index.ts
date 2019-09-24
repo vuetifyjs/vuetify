@@ -8,7 +8,7 @@ function inserted (el: HTMLElement, binding: ObserveVNodeDirective) {
   const modifiers = binding.modifiers || /* istanbul ignore next */ {}
   const callback = binding.value!
   const callbackWrapper = (
-    entries: IntersectionObserverEntry[],
+    entries: IntersectionObserverEntry[] = [],
     observer: IntersectionObserver
   ) => {
     /* istanbul ignore if */
@@ -17,9 +17,15 @@ function inserted (el: HTMLElement, binding: ObserveVNodeDirective) {
     // If is not quiet or has already been
     // initted, invoke the user callback
     if (
-      !modifiers.quiet ||
-      el._observe.init
-    ) callback && callback(entries, observer)
+      callback && (
+        !modifiers.quiet ||
+        el._observe.init
+      )
+    ) {
+      const isIntersecting = Boolean(entries.find(entry => entry.isIntersecting))
+
+      callback(entries, observer, isIntersecting)
+    }
 
     // If has already been initted and
     // has the once modifier, unbind

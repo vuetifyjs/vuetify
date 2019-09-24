@@ -8,14 +8,11 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-import { IntersectionObserverMock } from '../../../directives/intersect/__tests__/intersect.spec'
-
 describe('VLazy.ts', () => {
   type Instance = InstanceType<typeof VLazy>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 
   beforeEach(() => {
-    IntersectionObserverMock()
     mountFunction = (options = {}) => {
       return mount(VLazy, {
         ...options,
