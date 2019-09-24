@@ -73,7 +73,6 @@ export default baseMixins.extend<options>().extend({
     chips: Boolean,
     clearable: Boolean,
     deletableChips: Boolean,
-    dense: Boolean,
     eager: Boolean,
     hideSelected: Boolean,
     items: {
@@ -138,6 +137,7 @@ export default baseMixins.extend<options>().extend({
         'v-select--chips': this.hasChips,
         'v-select--chips--small': this.smallChips,
         'v-select--is-menu-active': this.isMenuActive,
+        'v-select--is-multi': this.multiple,
       }
     },
     /* Used by other components to overwrite */
@@ -190,11 +190,11 @@ export default baseMixins.extend<options>().extend({
           dense: this.dense,
           hideSelected: this.hideSelected,
           items: this.virtualizedItems,
+          itemDisabled: this.itemDisabled,
+          itemText: this.itemText,
+          itemValue: this.itemValue,
           noDataText: this.$vuetify.lang.t(this.noDataText),
           selectedItems: this.selectedItems,
-          itemDisabled: this.itemDisabled,
-          itemValue: this.itemValue,
-          itemText: this.itemText,
         },
         on: {
           select: this.selectItem,
@@ -608,7 +608,10 @@ export default baseMixins.extend<options>().extend({
       // If menu is active, allow default
       // listIndex change from menu
       if (this.isMenuActive && keyCode !== keyCodes.tab) {
-        menu.changeListIndex(e)
+        this.$nextTick(() => {
+          menu.changeListIndex(e)
+          this.$emit('update:list-index', menu.listIndex)
+        })
       }
 
       // If menu is not active, up and down can do

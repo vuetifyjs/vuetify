@@ -44,6 +44,11 @@
     "description": "Help support Vuetify by backing the project. This helps with the maintenance of existing features and the development of new ones.",
     "keywords": "sponsor, backer, donations, patron, supporting vuetify, vuetify support"
   },
+  "getting-started/releases-and-migrations": {
+    "title": "Releases and migrations",
+    "description": "Stay up to date with the latest release notes. The migration guides will also help you migrate applications though major releases.",
+    "keywords": "migration, releases, upgrading vuetify"
+  },
   "getting-started/long-term-support": {
     "title": "Long-term support",
     "description": "Vuetify provides long-term support to the last major release for 12 months for critical bugs and security vulnerabilities.",
@@ -344,11 +349,6 @@
     "description": "Vuetify supports the 12 point Material Design grid for laying out and controlling breakpoints for your application.",
     "keywords": "grids, vuetify grid component, layout component, flex component"
   },
-  "components/grid-lists": {
-    "title": "Grid list component",
-    "description": "Grid lists allow you to specify the gutter used when separating grid items.",
-    "keywords": "grid lists, vuetify grid list component, vue grid list component"
-  },
   "components/file-inputs": {
     "title": "File input component",
     "description": "The file input component is a specialized input that provides a clean interface for selecting files, showing detailed selection information and upload progress.",
@@ -383,6 +383,11 @@
     "title": "Item group component",
     "description": "The item group components provides the ability to create a group of selectable items out of any component.",
     "keywords": "item groups, vuetify item group component, vue item group component"
+  },
+  "components/lazy": {
+    "title": "Lazy component",
+    "description": "The lazy component allows you to dynamically render content based upon the user's viewport.",
+    "keywords": "lazy loading"
   },
   "components/lists": {
     "title": "List component",
@@ -453,6 +458,11 @@
     "title": "Sheet component",
     "description": "The sheet component is the default paper element in Vuetify and serves as the baseline for many Material Design implementations.",
     "keywords": "sheets, vuetify sheet component, vue sheet component"
+  },
+  "components/skeleton-loaders": {
+    "title": "Skeleton loaders component",
+    "description": "The v-skeleton-loader component is a versatile tool that can fill many roles within a project. At its heart, the component provides an indication to the user that something is coming but not yet available.",
+    "keywords": "skeleton-loader, material loader, bar loader"
   },
   "components/simple-tables": {
     "title": "Simple table component",
@@ -543,6 +553,11 @@
     "title": "Window component",
     "description": "The window component is a wrapper container that allows transitioning between content. It serves as the baseline for tabs and carousels.",
     "keywords": "windows, vuetify window component, vue window component"
+  },
+  "directives/intersect": {
+    "title": "Intersection observer directive",
+    "description": "The intersectino observer directive utilizes the Intersection observer API. It allows you to determine when elements are visible on the screen.",
+    "keywords": "intersect, vuetify intersect directive, intersection observer directive"
   },
   "directives/resizing": {
     "title": "Resizing directive",

@@ -1,4 +1,5 @@
 @import '../../styles/styles.sass'
+@import './_variables.scss'
 
 // Theme
 +theme(v-card) using ($material)
@@ -13,13 +14,16 @@
 
 // Block
 .v-card
+  border-radius: $card-border-radius
+  display: block
   max-width: 100%
   outline: none
-  overflow-wrap: break-word
   text-decoration: none
   transition-property: box-shadow, opacity
+  overflow-wrap: break-word
+  position: relative
   white-space: normal
-  word-break: break-word
+  +elevationTransition()
   +elevation(2)
 
   > *:first-child:not(.v-btn):not(.v-chip),
@@ -47,6 +51,7 @@
   letter-spacing: map-deep-get($headings, 'h5', 'letter-spacing')
   line-height: map-deep-get($headings, 'h5', 'line-height')
   padding: 16px 16px 8px
+  word-break: break-all
 
   + .v-card__text
     padding-top: 0
@@ -137,3 +142,6 @@
 
 .v-card--raised
   +elevation(8)
+
+.v-card--shaped
+  border-radius: $card-shaped-border-radius $card-border-radius

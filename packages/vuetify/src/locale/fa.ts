@@ -1,7 +1,6 @@
 export default {
   close: 'بستن',
   dataIterator: {
-    pageText: '{0} تا {1} از {2}',
     noResultsText: 'نتیجه‌ای یافت نشد',
     loadingText: 'در حال بارگذاری...',
   },
@@ -12,7 +11,7 @@ export default {
       sortAscending: ': صعودی مرتب شده است. فعال‌سازی برای مرتب‌سازی نزولی.',
       sortNone: ': مرتب نشده است. فعال‌سازی برای مرتب‌سازی صعودی.',
     },
-    sortBy: 'Sort by',
+    sortBy: 'مرتب‌سازی براساس',
   },
   dataFooter: {
     itemsPerPageText: 'ردیف در صفحه:',
@@ -21,6 +20,7 @@ export default {
     prevPage: 'صفحه‌ی قبل',
     firstPage: 'صفحه‌ی اول',
     lastPage: 'صفحه‌ی آخر',
+    pageText: '{0} تا {1} از {2}',
   },
   datePicker: {
     itemsSelected: '{0} انتخاب شده است',
@@ -34,7 +34,11 @@ export default {
     moreEvents: '{بیشتر {0',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counter: '{0} پرونده',
+    counterSize: '{0} پرونده ({1} در کل)',
+  },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
   },
 }

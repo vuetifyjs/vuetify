@@ -11,11 +11,11 @@ import { VNode } from 'vue/types'
 export default Vue.extend({
   name: 'v-tabs-slider',
 
+  functional: true,
+
   props: {
     color: String,
   },
-
-  functional: true,
 
   render (h, { props }): VNode {
     return h('div', Colorable.options.methods.setBackgroundColor(props.color, {

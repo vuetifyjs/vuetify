@@ -136,7 +136,7 @@ export default baseMixins.extend<options>().extend({
       return this.isDirty || dirtyTypes.includes(this.type)
     },
     isSingle (): boolean {
-      return this.isSolo || this.singleLine || this.fullWidth
+      return this.isSolo || this.singleLine || this.fullWidth || (this.dense && !this.outlined)
     },
     isSolo (): boolean {
       return this.solo || this.soloInverted
@@ -224,11 +224,10 @@ export default baseMixins.extend<options>().extend({
       window.requestAnimationFrame(() => {
         this.$refs.input && this.$refs.input.blur()
       })
-      this.onBlur(e)
     },
     clearableCallback () {
-      this.internalValue = null
-      this.$nextTick(() => this.$refs.input && this.$refs.input.focus())
+      this.$refs.input && this.$refs.input.focus()
+      this.$nextTick(() => this.internalValue = null)
     },
     genAppendSlot () {
       const slot = []
@@ -290,7 +289,7 @@ export default baseMixins.extend<options>().extend({
     genCounter () {
       if (this.counter === false || this.counter == null) return null
 
-      const max = this.counter === true ? this.$attrs.maxlength : this.counter
+      const max = this.counter === true ? this.attrs$.maxlength : this.counter
 
       return this.$createElement(VCounter, {
         props: {
@@ -352,7 +351,7 @@ export default baseMixins.extend<options>().extend({
       }, [span])
     },
     genInput () {
-      const listeners = Object.assign({}, this.$listeners)
+      const listeners = Object.assign({}, this.listeners$)
       delete listeners['change'] // Change should not be bound externally
 
       return this.$createElement('input', {
@@ -361,7 +360,7 @@ export default baseMixins.extend<options>().extend({
           value: this.lazyValue,
         },
         attrs: {
-          ...this.$attrs,
+          ...this.attrs$,
           autofocus: this.autofocus,
           disabled: this.disabled,
           id: this.computedId,
@@ -406,7 +405,7 @@ export default baseMixins.extend<options>().extend({
     },
     onBlur (e?: Event) {
       this.isFocused = false
-      e && this.$emit('blur', e)
+      e && this.$nextTick(() => this.$emit('blur', e))
     },
     onClick () {
       if (this.isFocused || this.disabled || !this.$refs.input) return

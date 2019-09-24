@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VSelect.ts should escape items in menu 1`] = `
-<div id="&amp;lt;strong&amp;gt;foo&amp;lt;/strong&amp;gt;-list-item-111"
+<div id="&amp;lt;strong&amp;gt;foo&amp;lt;/strong&amp;gt;-list-item-95"
      class="v-list-item__title"
 >
   &lt;strong&gt;foo&lt;/strong&gt;
@@ -156,7 +156,7 @@ exports[`VSelect.ts should only show items if they are in items 3`] = `
 `;
 
 exports[`VSelect.ts should only show items if they are in items 4`] = `
-<div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
+<div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select v-select--is-multi">
   <div class="v-input__control">
     <div role="button"
          aria-haspopup="listbox"
@@ -351,18 +351,18 @@ exports[`VSelect.ts should render v-select correctly when using v-list-item in i
 
 exports[`VSelect.ts should use slotted no-data 1`] = `
 <div role="listbox"
-     id="list-173"
+     id="list-157"
      tabindex="-1"
      class="v-list v-sheet v-sheet--tile theme--light"
 >
   <div tabindex="0"
        aria-selected="false"
-       aria-labelledby="foo-list-item-178"
+       aria-labelledby="foo-list-item-162"
        role="option"
        class="v-list-item v-list-item--link theme--light"
   >
     <div class="v-list-item__content">
-      <div id="foo-list-item-178"
+      <div id="foo-list-item-162"
            class="v-list-item__title"
       >
         foo

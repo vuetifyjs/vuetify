@@ -52,6 +52,9 @@
   ],
   "horizontalHeader": "Horizontal centering",
   "horizontalText": "For block elements with a designated width, you can apply `.mx-auto` to horizontally center the content.",
+  "breakpointHeader": "## With breakpoints",
+  "breakpointText": "Vuetify comes with a 12 point grid system built using Flexbox. Spacing is used to create specific layouts within an application's content. It consists of 5 media breakpoints used to target specific screen sizes or orientations: **xs**, **sm**, **md**, **lg** and **xl**. The default resolutions are defined below in the *Viewport Breakpoints* table and can be modified by customizing the [breakpoint service config](/customization/breakpoints).",
+  "breakpointHowText": "The helper classes apply **margin** or **padding** at a given breakpoint. These classes can be applied using the following format: `{property}{direction}-{breakpoint}-{size}`.",
   "examples": {
     "horizontal": {
       "header": "### Horizontal",
@@ -60,6 +63,10 @@
     "negative-margin": {
       "header": "### Negative margin",
       "desc": "Margin can also be applied negatively at the same **1 to 12** intervals."
+    },
+    "breakpoint-md": {
+      "header": "### With breakpoint",
+      "desc": "Spacing with `md` and `lg` breakpoints"
     }
   }
 }

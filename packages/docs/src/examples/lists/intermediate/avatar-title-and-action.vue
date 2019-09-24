@@ -14,11 +14,11 @@
       <div class="flex-grow-1"></div>
 
       <v-btn icon>
-        <v-icon>search</v-icon>
+        <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
       <v-btn icon>
-        <v-icon>more_vert</v-icon>
+        <v-icon>mdi-dots-vertical</v-icon>
       </v-btn>
     </v-toolbar>
     <v-list>
@@ -28,7 +28,7 @@
         @click=""
       >
         <v-list-item-icon>
-          <v-icon v-if="item.icon" color="pink">star</v-icon>
+          <v-icon v-if="item.icon" color="pink">mdi-star</v-icon>
         </v-list-item-icon>
 
         <v-list-item-content>

@@ -134,12 +134,11 @@
               :close-on-content-click="false"
               :return-value.sync="trip.start"
               offset-y
-              full-width
               min-width="290px"
             >
               <template v-slot:activator="{ on }">
                 <v-text-field
-                  v-model="date"
+                  v-model="trip.start"
                   label="Start date"
                   prepend-icon="event"
                   readonly
@@ -147,7 +146,7 @@
                 ></v-text-field>
               </template>
               <v-date-picker
-                v-model="trip.start"
+                v-model="date"
                 no-title
                 scrollable
               >
@@ -172,7 +171,6 @@
               :close-on-content-click="false"
               :return-value.sync="trip.end"
               offset-y
-              full-width
               min-width="290px"
             >
               <template v-slot:activator="{ on }">

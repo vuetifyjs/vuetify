@@ -18,9 +18,3 @@
     },
   }
 </script>
-
-<codepen-resources lang="json">
-  {
-    "css": ["https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css"]
-  }
-</codepen-resources>

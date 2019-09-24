@@ -10,7 +10,7 @@
 
     <v-breadcrumbs :items="items" :large="large" :divider="divider">
       <template v-if="customDiv" v-slot:divider>
-        <v-icon>chevron_right</v-icon>
+        <v-icon>mdi-chevron-right</v-icon>
       </template>
     </v-breadcrumbs>
   </div>

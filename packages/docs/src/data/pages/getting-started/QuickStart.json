@@ -207,6 +207,11 @@
               "lang": "webpackText1"
             },
             {
+              "type": "alert",
+              "lang": "webpackAlert",
+              "value": "info"
+            },
+            {
               "type": "markup",
               "value": "bash_yarn_install_sass"
             },
@@ -217,6 +222,14 @@
             {
               "type": "markup",
               "value": "js_webpack_sass"
+            },
+            {
+              "type": "text",
+              "lang": "webpackText3"
+            },
+            {
+              "type": "markup",
+              "value": "js_webpack_sass8"
             }
           ]
         }

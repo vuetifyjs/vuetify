@@ -1,0 +1,18 @@
+@mixin prepend-append-margin-top($margin-top)
+  .v-input__prepend-outer,
+  .v-input__prepend-inner,
+  .v-input__append-inner,
+  .v-input__append-outer
+    margin-top: $margin-top
+
+@mixin outer-margin-top($margin-top)
+  .v-input__prepend-outer,
+  .v-input__append-outer
+    margin-top: $margin-top
+
+@mixin label-position($top, $translateY, $scale: .75)
+  .v-label
+    top: $top
+
+    &--active
+      transform: translateY($translateY) scale($scale)

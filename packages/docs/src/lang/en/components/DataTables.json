@@ -7,7 +7,7 @@
     },
     "slots": {
       "header": "### Slots",
-      "desc": "The `v-data-table` provides a large number of slots for customizing the table. This example showcases some of these slots and what you can do withe each."
+      "desc": "The `v-data-table` provides a large number of slots for customizing the table. This example showcases some of these slots and what you can do with each. It is important to note some slot (eg: `item`/`body`/`header`) will completely takes over the internal rendering of the component which will require you to re-implement functionalities such as selection and expansion. Some slots will override each other such as: `body` > `item` > `item.<name>` and `header`/`header.<name>`."
     },
     "select": {
       "header": "### Selectable rows",
@@ -71,7 +71,7 @@
     },
     "headerless": {
       "header": "### Remove default header and footer",
-      "desc": "You can apply the `hide-default-headers` and `hide-default-footer` props to remove the default header and footer respectively."
+      "desc": "You can apply the `hide-default-header` and `hide-default-footer` props to remove the default header and footer respectively."
     },
     "edit-dialog": {
       "header": "### Inline Editing",
@@ -88,13 +88,17 @@
     "custom-filter": {
       "header": "### Custom filtering",
       "desc": "You can override the default filtering used with `search` prop by supplying a function to the `custom-filter` prop. If you need to customize the filtering of a specific column, you can supply a function to the `filter` property on header items. The signature is `(value: any, search: string | null, item: any) => boolean`. This function will always be run even if `search` prop has not been provided. Thus you need to make sure to exit early with a value of `true` if filter should not be applied."
+    },
+    "filterable-columns": {
+      "header": "### Filterable columns",
+      "desc": "You can easily disable specific columns from being included when searching through table rows by setting the property `filterable` to false on the header item(s). In the example below the dessert name column is no longer searchable."
     }
   },
   "props": {
     "v-edit-dialog": {
       "cancelText": "Sets the default text for the cancel button when using the **large** prop",
       "eager": "Mixins.Bootable.props.eager",
-      "large": "Attachs a submit and cancel button to the dialog",
+      "large": "Attaches a submit and cancel button to the dialog",
       "saveText": "Sets the default text for the save button when using the **large** prop",
       "transition": "Mixins.Transitionable.props.transition"
     },
@@ -146,9 +150,9 @@
   },
   "events": {
     "v-edit-dialog": {
-      "cancel": "Emits when editting is canceled",
+      "cancel": "Emits when editing is canceled",
       "close": "Emits when edit-dialog close button is pressed",
-      "open": "Emits when editting is opened",
+      "open": "Emits when editing is opened",
       "save": "Emits when edit-dialog save button is pressed"
     },
     "v-data-table": {

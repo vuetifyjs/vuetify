@@ -40,7 +40,6 @@
     divider: 'mdi-view-headline',
     expansionPanel: 'mdi-view-day',
     forms: 'mdi-format-list-bulleted-type',
-    gridList: 'mdi-view-dashboard',
     icon: 'mdi-material-design',
     input: 'mdi-format-title',
     list: 'mdi-format-list-numbered',

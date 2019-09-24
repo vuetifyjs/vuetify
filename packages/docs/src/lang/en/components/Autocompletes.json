@@ -28,6 +28,10 @@
     "stateSelector": {
       "header": "### State selector",
       "desc": "Using a combination of `v-autocomplete` slots and transitions, you can create a stylish toggleable autocomplete field such as this state selector."
+    },
+    "dense": {
+      "header": "### Dense",
+      "desc": "You can use `dense` prop to reduce autocomplete height and lower max height of list items."
     }
   },
   "props": {
@@ -60,6 +64,7 @@
     "click:prepend": "Components.Inputs.events['click:prepend']",
     "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
     "update:error": "Mixins.Validatable.events['update:error']",
+    "update:list-index": "Components.Selects.events['update:list-index']",
     "update:search-input": "The `search-input.sync` event"
   }
 }

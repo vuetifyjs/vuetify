@@ -23,6 +23,7 @@ export interface DataPagination {
 }
 
 export interface DataProps {
+  originalItemsLength: number
   items: any[]
   pagination: DataPagination
   options: DataOptions
@@ -183,14 +184,18 @@ export default Vue.extend({
         updateOptions: this.updateOptions,
         pagination: this.pagination,
         groupedItems: this.groupedItems,
+        originalItemsLength: this.items.length,
       }
 
       return props
     },
+    computedOptions (): DataOptions {
+      return { ...this.options } as DataOptions
+    },
   },
 
   watch: {
-    options: {
+    computedOptions: {
       handler (options: DataOptions, old: DataOptions) {
         if (deepEqual(options, old)) return
 
@@ -217,8 +222,11 @@ export default Vue.extend({
     itemsPerPage (itemsPerPage: number) {
       this.updateOptions({ itemsPerPage })
     },
-    'internalOptions.itemsPerPage' (itemsPerPage: number) {
-      this.$emit('update:items-per-page', itemsPerPage)
+    'internalOptions.itemsPerPage': {
+      handler (itemsPerPage: number) {
+        this.$emit('update:items-per-page', itemsPerPage)
+      },
+      immediate: true,
     },
     sortBy (sortBy: string | string[]) {
       this.updateOptions({ sortBy: wrapInArray(sortBy) })
@@ -336,7 +344,9 @@ export default Vue.extend({
       this.internalOptions = {
         ...this.internalOptions,
         ...options,
-        page: Math.max(1, Math.min(options.page || this.internalOptions.page, this.pageCount)),
+        page: this.serverItemsLength < 0
+          ? Math.max(1, Math.min(options.page || this.internalOptions.page, this.pageCount))
+          : options.page || this.internalOptions.page,
       }
     },
     sortItems (items: any[]) {

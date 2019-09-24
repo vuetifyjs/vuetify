@@ -17,6 +17,8 @@ describe('VMenu.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VMenu, {
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
         ...options,
         mocks: {
           $vuetify: {
@@ -31,7 +33,6 @@ describe('VMenu.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         value: false,
-        fullWidth: true,
       },
       scopedSlots: {
         activator: '<button v-on="props.on"></button>',

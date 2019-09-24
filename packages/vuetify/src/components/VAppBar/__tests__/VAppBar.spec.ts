@@ -276,4 +276,21 @@ describe('AppBar.ts', () => {
     expect(wrapper.vm.computedTransform).toBe(0)
     expect(wrapper.vm.hideShadow).toBe(true)
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8583
+  it('when scroll position is 0, v-model should be able to be control visibility regardless of other props', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        elevateOnScroll: true,
+      },
+    })
+
+    expect(wrapper.vm.isActive).toBe(true)
+    expect(wrapper.vm.computedTransform).toBe(0)
+
+    wrapper.setProps({ value: false })
+
+    expect(wrapper.vm.isActive).toBe(false)
+    expect(wrapper.vm.computedTransform).not.toBe(0)
+  })
 })

@@ -11,23 +11,23 @@
     </div>
 
     <v-bottom-navigation
+      v-model="activeBtn"
       :input-value="showNav"
-      :value="activeBtn"
       color="indigo"
     >
       <v-btn>
         <span>Recents</span>
-        <v-icon>history</v-icon>
+        <v-icon>mdi-history</v-icon>
       </v-btn>
 
       <v-btn>
         <span>Favorites</span>
-        <v-icon>favorite</v-icon>
+        <v-icon>mdi-heart</v-icon>
       </v-btn>
 
       <v-btn>
         <span>Nearby</span>
-        <v-icon>place</v-icon>
+        <v-icon>mdi-map-marker</v-icon>
       </v-btn>
     </v-bottom-navigation>
   </div>

@@ -14,11 +14,11 @@
       <div class="flex-grow-1"></div>
 
       <v-btn icon>
-        <v-icon>search</v-icon>
+        <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
       <v-btn icon>
-        <v-icon>check_circle</v-icon>
+        <v-icon>mdi-checkbox-marked-circle</v-icon>
       </v-btn>
     </v-toolbar>
 

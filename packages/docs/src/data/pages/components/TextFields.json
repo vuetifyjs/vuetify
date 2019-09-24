@@ -43,6 +43,7 @@
             "simple/single-line",
             "simple/shaped",
             "simple/disabled-and-readonly",
+            "simple/dense",
             "simple/icon",
             "simple/clearable",
             "simple/character-counter",

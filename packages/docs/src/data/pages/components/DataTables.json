@@ -43,6 +43,7 @@
             "simple/loading",
             "simple/dense",
             "simple/footer-props",
+            "simple/filterable-columns",
             "intermediate/slots",
             "intermediate/expand",
             "intermediate/custom-filter",
@@ -67,6 +68,15 @@
             "components/simple-tables",
             "components/lists"
           ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "doc-theme-ad",
+          "value": "dashboard-pro"
         }
       ]
     }

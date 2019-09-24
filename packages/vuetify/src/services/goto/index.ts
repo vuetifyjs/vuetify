@@ -9,15 +9,15 @@ import {
 } from './util'
 
 // Types
-import { VuetifyGoToOptions, VuetifyGoToTarget } from 'vuetify/types/services/goto'
+import { GoToOptions, VuetifyGoToTarget } from 'vuetify/types/services/goto'
 
 import { VuetifyServiceContract } from 'vuetify/types/services'
 
 export default function goTo (
   _target: VuetifyGoToTarget,
-  _settings: Partial<VuetifyGoToOptions> = {}
+  _settings: Partial<GoToOptions> = {}
 ): Promise<number> {
-  const settings: VuetifyGoToOptions = {
+  const settings: GoToOptions = {
     container: (document.scrollingElement as HTMLElement | null) || document.body || document.documentElement,
     duration: 500,
     offset: 0,
@@ -39,7 +39,14 @@ export default function goTo (
   }
 
   const startTime = performance.now()
-  const targetLocation = getOffset(_target) - settings.offset!
+
+  let targetLocation: number
+  if (typeof _target === 'number') {
+    targetLocation = getOffset(_target) - settings.offset!
+  } else {
+    targetLocation = getOffset(_target) - getOffset(container) - settings.offset!
+  }
+
   const startLocation = container.scrollTop
   if (targetLocation === startLocation) return Promise.resolve(targetLocation)
 

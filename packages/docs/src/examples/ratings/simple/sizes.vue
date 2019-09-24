@@ -1,5 +1,5 @@
 <template>
-  <v-row align="center">
+  <div class="text-center">
     <v-rating
       v-model="rating"
       background-color="purple lighten-3"
@@ -35,7 +35,7 @@
       color="indigo"
       size="64"
     ></v-rating>
-  </v-row>
+  </div>
 </template>
 
 <script>

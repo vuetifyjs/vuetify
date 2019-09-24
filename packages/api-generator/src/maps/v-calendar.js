@@ -30,6 +30,10 @@ module.exports = {
     ],
     functions: [
       {
+        name: 'checkChange',
+        signature: '(): void',
+      },
+      {
         name: 'updateTimes',
         signature: '(): void',
       },

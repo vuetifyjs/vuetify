@@ -7,6 +7,16 @@
       "type": "section",
       "children": [
         {
+          "type": "alert",
+          "lang": "headerAlert1",
+          "value": "info"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "usage",
           "value": "usage"
         }
