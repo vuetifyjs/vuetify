@@ -37,7 +37,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $vuetify.icons.sort
             </i>
           </th>
           <th role="columnheader"
@@ -53,7 +53,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $vuetify.icons.sort
             </i>
           </th>
           <th role="columnheader"
@@ -69,7 +69,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $vuetify.icons.sort
             </i>
           </th>
           <th role="columnheader"
@@ -85,7 +85,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $vuetify.icons.sort
             </i>
           </th>
           <th role="columnheader"
@@ -101,7 +101,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $vuetify.icons.sort
             </i>
           </th>
         </tr>
@@ -238,7 +238,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
                   <i aria-hidden="true"
                      class="v-icon notranslate material-icons theme--light"
                   >
-                    v-dropdown
+                    $vuetify.icons.dropdown
                   </i>
                 </div>
               </div>
@@ -265,7 +265,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-prev
+            $vuetify.icons.prev
           </i>
         </span>
       </button>
@@ -280,7 +280,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-next
+            $vuetify.icons.next
           </i>
         </span>
       </button>
@@ -326,7 +326,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $vuetify.icons.sort
             </i>
           </th>
           <th role="columnheader"
@@ -342,7 +342,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $vuetify.icons.sort
             </i>
           </th>
           <th role="columnheader"
@@ -358,7 +358,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $vuetify.icons.sort
             </i>
           </th>
           <th role="columnheader"
@@ -374,7 +374,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $vuetify.icons.sort
             </i>
           </th>
           <th role="columnheader"
@@ -390,7 +390,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $vuetify.icons.sort
             </i>
           </th>
         </tr>
@@ -432,7 +432,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                   <i aria-hidden="true"
                      class="v-icon notranslate material-icons theme--light"
                   >
-                    v-dropdown
+                    $vuetify.icons.dropdown
                   </i>
                 </div>
               </div>
@@ -459,7 +459,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-prev
+            $vuetify.icons.prev
           </i>
         </span>
       </button>
@@ -474,7 +474,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-next
+            $vuetify.icons.next
           </i>
         </span>
       </button>
@@ -520,7 +520,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $vuetify.icons.sort
             </i>
           </th>
           <th role="columnheader"
@@ -536,7 +536,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $vuetify.icons.sort
             </i>
           </th>
           <th role="columnheader"
@@ -552,7 +552,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $vuetify.icons.sort
             </i>
           </th>
           <th role="columnheader"
@@ -568,7 +568,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $vuetify.icons.sort
             </i>
           </th>
           <th role="columnheader"
@@ -584,7 +584,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                style="font-size: 18px;"
             >
-              v-sort
+              $vuetify.icons.sort
             </i>
           </th>
         </tr>
@@ -721,7 +721,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                   <i aria-hidden="true"
                      class="v-icon notranslate material-icons theme--light"
                   >
-                    v-dropdown
+                    $vuetify.icons.dropdown
                   </i>
                 </div>
               </div>
@@ -748,7 +748,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-prev
+            $vuetify.icons.prev
           </i>
         </span>
       </button>
@@ -762,7 +762,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            v-next
+            $vuetify.icons.next
           </i>
         </span>
       </button>
