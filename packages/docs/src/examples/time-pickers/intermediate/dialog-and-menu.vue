@@ -9,7 +9,6 @@
         :return-value.sync="time"
         transition="scale-transition"
         offset-y
-        full-width
         max-width="290px"
         min-width="290px"
       >
@@ -37,7 +36,6 @@
         v-model="modal2"
         :return-value.sync="time"
         persistent
-        full-width
         width="290px"
       >
         <template v-slot:activator="{ on }">
