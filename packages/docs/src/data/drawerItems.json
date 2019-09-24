@@ -6,15 +6,15 @@
     "children": [
       { "text": "quickStart", "to": "quick-start" },
       { "text": "preMadeLayouts", "to": "pre-made-layouts" },
-      { "new": true, "text": "testing", "to": "unit-testing" },
+      { "text": "testing", "to": "unit-testing" },
       { "text": "whyVuetify", "to": "why-vuetify" },
       { "text": "faq", "to": "frequently-asked-questions" },
       { "text": "meetTheTeam", "to": "meet-the-team" },
       { "text": "sponsorsAndBackers", "to": "sponsors-and-backers" },
       { "new": true, "text": "releasesAndMigrations", "to": "releases-and-migrations" },
-      { "new": true, "text": "lts", "to": "long-term-support" },
+      { "text": "lts", "to": "long-term-support" },
       { "text": "contributing", "to": "contributing" },
-      { "updated": true, "text": "roadmap", "to": "roadmap" },
+      { "text": "roadmap", "to": "roadmap" },
       { "help": true, "text": "consulting", "to": "consulting-and-support" }
     ]
   },
@@ -23,13 +23,13 @@
     "text": "customization",
     "icon": "mdi-cogs",
     "children": [
-      { "new": true, "text": "accessibility", "to": "accessibility" },
+      { "text": "accessibility", "to": "accessibility" },
       { "text": "aLaCarte", "to": "a-la-carte" },
       { "text": "breakpoints", "to": "breakpoints" },
       { "text": "icons", "to": "icons" },
       { "text": "i18n", "to": "internationalization" },
-      { "new": true, "text": "rtl", "to": "rtl" },
-      { "new": true, "text": "sass-variables", "to": "sass-variables" },
+      { "text": "rtl", "to": "rtl" },
+      { "text": "sass-variables", "to": "sass-variables" },
       { "text": "theme", "to": "theme" }
     ]
   },
@@ -62,12 +62,12 @@
       { "text": "aspectRatios", "to": "aspect-ratios" },
       { "text": "avatars", "to": "avatars" },
       { "text": "badges", "to": "badges" },
-      { "new": true, "text": "banners", "to": "banners" },
+      { "text": "banners", "to": "banners" },
       {
         "group": "components",
         "text": "bars",
         "children": [
-          { "new": true, "text": "appBars", "to": "app-bars" },
+          { "text": "appBars", "to": "app-bars" },
           { "text": "toolbars", "to": "toolbars" },
           { "text": "systemBars", "to": "system-bars" }
         ]
@@ -91,10 +91,10 @@
         "text": "groups",
         "children": [
           { "text": "buttonGroups", "to": "button-groups" },
-          { "new": true, "text": "chipGroups", "to": "chip-groups" },
+          { "text": "chipGroups", "to": "chip-groups" },
           { "text": "itemGroups", "to": "item-groups" },
-          { "new": true, "text": "listItemGroups", "to": "list-item-groups" },
-          { "new": true, "text": "slideGroups", "to": "slide-groups" },
+          { "text": "listItemGroups", "to": "list-item-groups" },
+          { "text": "slideGroups", "to": "slide-groups" },
           { "text": "windows", "to": "windows" }
         ]
       },
@@ -107,7 +107,7 @@
         "children": [
           { "text": "autocompletes", "to": "autocompletes" },
           { "text": "combobox", "to": "combobox" },
-          { "new": true, "text": "fileInputs", "to": "file-inputs" },
+          { "text": "fileInputs", "to": "file-inputs" },
           { "text": "forms", "to": "forms" },
           { "text": "inputs", "to": "inputs" },
           { "text": "overflowButtons", "to": "overflow-btns" },
@@ -122,14 +122,14 @@
       { "text": "lists", "to": "lists" },
       { "text": "menus", "to": "menus" },
       { "text": "navigationDrawers", "to": "navigation-drawers" },
-      { "new": true, "text": "overlays", "to": "overlays" },
+      { "text": "overlays", "to": "overlays" },
       { "text": "paginations", "to": "paginations" },
       { "text": "parallax", "to": "parallax" },
       {
         "group": "components",
         "text": "pickers",
         "children": [
-          { "new": true, "text": "colorPickers", "to": "color-pickers" },
+          { "text": "colorPickers", "to": "color-pickers" },
           { "text": "datePickers", "to": "date-pickers" },
           { "text": "timePickers", "to": "time-pickers" }
         ]
@@ -153,8 +153,8 @@
         "group": "components",
         "text": "tables",
         "children": [
-          { "updated": true, "text": "dataIterators", "to": "data-iterators" },
-          { "new": true, "text": "simpleTables", "to": "simple-tables" },
+          { "text": "dataIterators", "to": "data-iterators" },
+          { "text": "simpleTables", "to": "simple-tables" },
           { "updated": true, "text": "dataTables", "to": "data-tables" }
         ]
       },
