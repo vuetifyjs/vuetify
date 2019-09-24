@@ -1,7 +1,6 @@
 export default {
   close: 'Close',
   dataIterator: {
-    pageText: '{0}-{1} od {2}',
     noResultsText: 'Nisu pronađeni odgovarajući zapisi',
     loadingText: 'Loading item...',
   },
@@ -21,6 +20,7 @@ export default {
     prevPage: 'Prethodna stranica',
     firstPage: 'Prva stranica',
     lastPage: 'Zadnja stranica',
+    pageText: '{0}-{1} od {2}',
   },
   datePicker: {
     itemsSelected: '{0} odabrano',

@@ -1,7 +1,6 @@
 export default {
   close: '关闭',
   dataIterator: {
-    pageText: '{0}-{1} 共 {2}',
     noResultsText: '没有符合条件的结果',
     loadingText: '加载中……',
   },
@@ -21,6 +20,7 @@ export default {
     prevPage: '上一页',
     firstPage: '首页',
     lastPage: '尾页',
+    pageText: '{0}-{1} 共 {2}',
   },
   datePicker: {
     itemsSelected: '已选择 {0}',

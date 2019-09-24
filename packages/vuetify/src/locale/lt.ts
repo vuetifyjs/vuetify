@@ -1,7 +1,6 @@
 export default {
   close: 'Uždaryti',
   dataIterator: {
-    pageText: '{0}-{1} iš {2}',
     noResultsText: 'Nerasta atitinkančių įrašų',
     loadingText: 'Kraunama...',
   },
@@ -21,6 +20,7 @@ export default {
     prevPage: 'Ankstesnis puslapis',
     firstPage: 'Pirmas puslapis',
     lastPage: 'Paskutinis puslapis',
+    pageText: '{0}-{1} iš {2}',
   },
   datePicker: {
     itemsSelected: '{0} pasirinkta',

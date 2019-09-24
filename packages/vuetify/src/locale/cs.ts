@@ -1,7 +1,6 @@
 export default {
   close: 'Zavřít',
   dataIterator: {
-    pageText: '{0}-{1} z {2}',
     noResultsText: 'Nenalezeny žádné záznamy',
     loadingText: 'Načítám položky...',
   },
@@ -21,6 +20,7 @@ export default {
     prevPage: 'Předchozí strana',
     firstPage: 'První strana',
     lastPage: 'Poslední strana',
+    pageText: '{0}-{1} z {2}',
   },
   datePicker: {
     itemsSelected: '{0} vybráno',

@@ -1,7 +1,6 @@
 export default {
   close: 'Close',
   dataIterator: {
-    pageText: '{0}-{1} van {2}',
     noResultsText: 'Geen ooreenstemmende resultate is gevind nie',
     loadingText: 'Loading item...',
   },
@@ -21,6 +20,7 @@ export default {
     prevPage: 'Vorige bladsy',
     firstPage: 'Eerste bladsy',
     lastPage: 'Laaste bladsy',
+    pageText: '{0}-{1} van {2}',
   },
   datePicker: {
     itemsSelected: '{0} gekies',

@@ -1,7 +1,6 @@
 export default {
   close: 'Lukk',
   dataIterator: {
-    pageText: '{0}-{1} av {2}',
     noResultsText: 'Fant ingen matchende elementer.',
     loadingText: 'Laster elementer...',
   },
@@ -21,6 +20,7 @@ export default {
     prevPage: 'Forrige side',
     firstPage: 'Første side',
     lastPage: 'Siste side',
+    pageText: '{0}-{1} av {2}',
   },
   datePicker: {
     itemsSelected: '{0} valgt',

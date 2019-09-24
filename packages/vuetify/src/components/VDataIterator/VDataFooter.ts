@@ -54,6 +54,10 @@ export default Vue.extend({
     showCurrentPage: Boolean,
     disablePagination: Boolean,
     disableItemsPerPage: Boolean,
+    pageText: {
+      type: String,
+      default: '$vuetify.dataFooter.pageText',
+    },
   },
 
   computed: {
@@ -138,7 +142,7 @@ export default Vue.extend({
 
         children = this.$scopedSlots['page-text']
           ? [this.$scopedSlots['page-text']!({ pageStart, pageStop, itemsLength })]
-          : [this.$vuetify.lang.t('$vuetify.dataIterator.pageText', pageStart, pageStop, itemsLength)]
+          : [this.$vuetify.lang.t(this.pageText, pageStart, pageStop, itemsLength)]
       }
 
       return this.$createElement('div', {

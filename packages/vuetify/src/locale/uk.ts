@@ -1,7 +1,6 @@
 export default {
   close: 'Close',
   dataIterator: {
-    pageText: '{0}-{1} з {2}',
     noResultsText: 'В результаті пошуку нічого не знайдено',
     loadingText: 'Loading item...',
   },
@@ -21,6 +20,7 @@ export default {
     prevPage: 'Попередня сторінка',
     firstPage: 'Перша сторінка',
     lastPage: 'Остання сторінка',
+    pageText: '{0}-{1} з {2}',
   },
   datePicker: {
     itemsSelected: '{0} вибрано',
