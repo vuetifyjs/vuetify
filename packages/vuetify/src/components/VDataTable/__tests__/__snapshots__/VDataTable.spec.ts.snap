@@ -107,7 +107,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class>
           <td class="text-left">
             Jelly bean
           </td>
@@ -127,7 +127,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
             0%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Lollipop
           </td>
@@ -147,7 +147,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
             2%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Honeycomb
           </td>
@@ -167,7 +167,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
             45%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Donut
           </td>
@@ -187,7 +187,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
             22%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             KitKat
           </td>
@@ -610,7 +610,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
             0%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Lollipop
           </td>
@@ -630,7 +630,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
             2%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Honeycomb
           </td>
@@ -650,7 +650,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
             45%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Donut
           </td>
@@ -670,7 +670,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
             22%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             KitKat
           </td>
@@ -980,7 +980,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class>
         </tr>
       </tbody>
     </table>
@@ -1985,7 +1985,7 @@ exports[`VDataTable.ts should render with data 1`] = `
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class>
           <td class="text-left">
             Frozen Yogurt
           </td>
@@ -2005,7 +2005,7 @@ exports[`VDataTable.ts should render with data 1`] = `
             1%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Ice cream sandwich
           </td>
@@ -2025,7 +2025,7 @@ exports[`VDataTable.ts should render with data 1`] = `
             1%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Eclair
           </td>
@@ -2045,7 +2045,7 @@ exports[`VDataTable.ts should render with data 1`] = `
             7%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Cupcake
           </td>
@@ -2065,7 +2065,7 @@ exports[`VDataTable.ts should render with data 1`] = `
             8%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Gingerbread
           </td>
@@ -2470,7 +2470,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </button>
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Frozen Yogurt
           </td>
@@ -2521,7 +2521,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </button>
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Ice cream sandwich
           </td>
@@ -2572,7 +2572,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </button>
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Eclair
           </td>
@@ -2623,7 +2623,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </button>
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Cupcake
           </td>
@@ -2674,7 +2674,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </button>
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Gingerbread
           </td>
@@ -2897,7 +2897,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             </button>
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Jelly bean
           </td>
@@ -2914,7 +2914,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             0%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Lollipop
           </td>
@@ -2960,7 +2960,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             </button>
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Frozen Yogurt
           </td>
@@ -3006,7 +3006,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             </button>
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Gingerbread
           </td>
@@ -3052,7 +3052,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             </button>
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-left">
             Ice cream sandwich
           </td>
@@ -3462,7 +3462,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
         </tr>
       </thead>
       <tbody>
-        <tr class="expanded expanded__row">
+        <tr class="v-data-table__expanded v-data-table__expanded__row">
           <td class="text-left">
             Frozen Yogurt
           </td>
@@ -3482,12 +3482,12 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
             1%
           </td>
         </tr>
-        <tr class="expanded expanded__content">
+        <tr class="v-data-table__expanded v-data-table__expanded__content">
           <div>
             expanded
           </div>
         </tr>
-        <tr class="expanded expanded__row">
+        <tr class="v-data-table__expanded v-data-table__expanded__row">
           <td class="text-left">
             Ice cream sandwich
           </td>
@@ -3507,12 +3507,12 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
             1%
           </td>
         </tr>
-        <tr class="expanded expanded__content">
+        <tr class="v-data-table__expanded v-data-table__expanded__content">
           <div>
             expanded
           </div>
         </tr>
-        <tr class="expanded expanded__row">
+        <tr class="v-data-table__expanded v-data-table__expanded__row">
           <td class="text-left">
             Eclair
           </td>
@@ -3532,12 +3532,12 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
             7%
           </td>
         </tr>
-        <tr class="expanded expanded__content">
+        <tr class="v-data-table__expanded v-data-table__expanded__content">
           <div>
             expanded
           </div>
         </tr>
-        <tr class="expanded expanded__row">
+        <tr class="v-data-table__expanded v-data-table__expanded__row">
           <td class="text-left">
             Cupcake
           </td>
@@ -3557,12 +3557,12 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
             8%
           </td>
         </tr>
-        <tr class="expanded expanded__content">
+        <tr class="v-data-table__expanded v-data-table__expanded__content">
           <div>
             expanded
           </div>
         </tr>
-        <tr class="expanded expanded__row">
+        <tr class="v-data-table__expanded v-data-table__expanded__row">
           <td class="text-left">
             Gingerbread
           </td>
@@ -3582,7 +3582,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
             16%
           </td>
         </tr>
-        <tr class="expanded expanded__content">
+        <tr class="v-data-table__expanded v-data-table__expanded__content">
           <div>
             expanded
           </div>
@@ -3787,7 +3787,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class>
           <td class="text-start">
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
@@ -3814,7 +3814,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
             1%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-start">
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
@@ -3841,7 +3841,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
             1%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-start">
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
@@ -3868,7 +3868,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
             7%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-start">
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
@@ -3895,7 +3895,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
             8%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-start">
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
@@ -4122,7 +4122,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class>
           <td class="text-start">
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
@@ -4149,7 +4149,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
             1%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-start">
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
@@ -4176,7 +4176,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
             1%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-start">
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
@@ -4203,7 +4203,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
             7%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-start">
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
@@ -4230,7 +4230,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
             8%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-start">
             <i role="button"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
@@ -4464,7 +4464,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class>
           <td class="text-start">
             <div class="v-data-table__checkbox v-simple-checkbox">
               <div class="v-input--selection-controls__ripple">
@@ -4495,7 +4495,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
             1%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-start">
             <div class="v-data-table__checkbox v-simple-checkbox">
               <div class="v-input--selection-controls__ripple">
@@ -4526,7 +4526,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
             1%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-start">
             <div class="v-data-table__checkbox v-simple-checkbox">
               <div class="v-input--selection-controls__ripple">
@@ -4557,7 +4557,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
             7%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-start">
             <div class="v-data-table__checkbox v-simple-checkbox">
               <div class="v-input--selection-controls__ripple">
@@ -4588,7 +4588,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
             8%
           </td>
         </tr>
-        <tr>
+        <tr class>
           <td class="text-start">
             <div class="v-data-table__checkbox v-simple-checkbox">
               <div class="v-input--selection-controls__ripple">

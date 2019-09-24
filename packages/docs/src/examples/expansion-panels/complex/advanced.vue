@@ -134,7 +134,6 @@
               :close-on-content-click="false"
               :return-value.sync="trip.start"
               offset-y
-              full-width
               min-width="290px"
             >
               <template v-slot:activator="{ on }">
@@ -172,7 +171,6 @@
               :close-on-content-click="false"
               :return-value.sync="trip.end"
               offset-y
-              full-width
               min-width="290px"
             >
               <template v-slot:activator="{ on }">
