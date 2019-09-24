@@ -394,9 +394,12 @@ export default VDataIterator.extend({
     },
     genDefaultExpandedRow (item: any): VNode {
       const isExpanded = this.isExpanded(item)
-      const headerRow = this.genDefaultSimpleRow(item, isExpanded ? 'expanded expanded__row' : null)
+      const classes = {
+        'v-data-table__expanded v-data-table__expanded__row': isExpanded,
+      }
+      const headerRow = this.genDefaultSimpleRow(item, classes)
       const expandedRow = this.$createElement('tr', {
-        staticClass: 'expanded expanded__content',
+        staticClass: 'v-data-table__expanded v-data-table__expanded__content',
       }, [this.$scopedSlots['expanded-item']!({ item, headers: this.computedHeaders })])
 
       return this.$createElement(RowGroup, {
@@ -408,7 +411,7 @@ export default VDataIterator.extend({
         this.$createElement('template', { slot: 'row.content' }, [expandedRow]),
       ])
     },
-    genDefaultSimpleRow (item: any, classes: string | string[] | object | null = null): VNode {
+    genDefaultSimpleRow (item: any, classes: Record<string, boolean> = {}): VNode {
       const scopedSlots = getPrefixedScopedSlots('item.', this.$scopedSlots)
 
       const data = this.createItemProps(item)
@@ -444,7 +447,10 @@ export default VDataIterator.extend({
 
       return this.$createElement(this.isMobile ? MobileRow : Row, {
         key: getObjectValueByPath(item, this.itemKey),
-        class: classes,
+        class: {
+          ...classes,
+          'v-data-table__selected': data.isSelected,
+        },
         props: {
           headers: this.computedHeaders,
           item,
