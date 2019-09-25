@@ -333,8 +333,8 @@ export default mixins(
       return this.$createElement('div', this.setTextColor(this.color || 'primary', {
         staticClass: 'v-time-picker-clock__ampm',
       }), [
-        this.genPickerButton('period', 'am', 'AM', this.disabled || this.readonly),
-        this.genPickerButton('period', 'pm', 'PM', this.disabled || this.readonly),
+        this.genPickerButton('period', 'am', this.$vuetify.lang.t('$vuetify.timePicker.am'), this.disabled || this.readonly),
+        this.genPickerButton('period', 'pm', this.$vuetify.lang.t('$vuetify.timePicker.pm'), this.disabled || this.readonly),
       ])
     },
     genPickerBody () {

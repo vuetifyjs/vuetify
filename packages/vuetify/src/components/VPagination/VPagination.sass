@@ -1,4 +1,5 @@
 @import '../../styles/styles.sass'
+@import './_variables.scss'
 
 // Theme
 +theme(v-pagination) using ($material)
@@ -43,7 +44,7 @@
 
   &__item
     +elevation(2)
-    border-radius: 4px
+    border-radius: $pagination-border-radius
     font-size: 14px
     background: transparent
     height: 34px
@@ -57,13 +58,12 @@
 
   &__navigation
     +elevation(2)
+    border-radius: $pagination-border-radius
     display: inline-flex
     justify-content: center
     align-items: center
     text-decoration: none
     height: 2rem
-
-    border-radius: 4px
     width: 2rem
     margin: .3rem 10px
 

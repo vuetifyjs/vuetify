@@ -70,7 +70,8 @@
       "rounded": "Applies a large border radius on the button.",
       "text": "Makes the background transparent.",
       "type": "Set the button's **type** attribute",
-      "value": "Mixins.Groupable.props.value"
+      "value": "Mixins.Groupable.props.value",
+      "retainFocusOnClick": "Don't blur on click."
     },
     "v-btn-toggle": {
       "rounded": "Applies a large border radius on the buttons."

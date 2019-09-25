@@ -139,10 +139,10 @@ export default VDataIterator.extend({
       }, {})
     },
     headersWithCustomFilters (): TableHeader[] {
-      return this.computedHeaders.filter(header => header.filter)
+      return this.computedHeaders.filter(header => header.filter && (!header.hasOwnProperty('filterable') || header.filterable === true))
     },
     headersWithoutCustomFilters (): TableHeader[] {
-      return this.computedHeaders.filter(header => !header.filter)
+      return this.computedHeaders.filter(header => !header.filter && (!header.hasOwnProperty('filterable') || header.filterable === true))
     },
     sanitizedHeaderProps (): Record<string, any> {
       return camelizeObjectKeys(this.headerProps)

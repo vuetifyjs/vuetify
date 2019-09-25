@@ -142,6 +142,7 @@ export default Themeable.extend({
       })
 
       this.selection = selection
+      this.$emit('toggle-select-all', { value })
     },
     isSelected (item: any): boolean {
       return !!this.selection[getObjectValueByPath(item, this.itemKey)] || false

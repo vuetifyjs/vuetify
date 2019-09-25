@@ -47,6 +47,7 @@
           "value": [
             "simple/api",
             "simple/customFilter",
+            "simple/dense",
             "intermediate/slots",
             "intermediate/asynchronous",
             "intermediate/advanced",

@@ -27,6 +27,7 @@
 
 // Block
 .v-list
+  border-radius: $list-border-radius
   display: block
   padding: 8px 0
   position: static
@@ -65,7 +66,7 @@
 
   .v-list-item,
   .v-list-item:before
-    border-radius: 4px
+    border-radius: $list-border-radius
 
 .v-list--shaped
   +list-shaped($list-item-min-height)

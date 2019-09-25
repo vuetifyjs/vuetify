@@ -22,8 +22,15 @@ describe('VBtnToggle.ts', () => {
     }
   })
 
-  it('should work', () => {
-    const wrapper = mountFunction()
-    expect(wrapper).toBeTruthy()
+  it('should not apply background color with group', () => {
+    const wrapper = mountFunction({
+      propsData: { backgroundColor: 'primary' },
+    })
+
+    expect(wrapper.element.classList.contains('primary')).toBeTruthy()
+
+    wrapper.setProps({ group: true })
+
+    expect(wrapper.element.classList.contains('primary')).toBeFalsy()
   })
 })

@@ -55,13 +55,17 @@ export class Lang extends Service implements ILang {
   }
 
   public t (key: string, ...params: any[]) {
-    if (!key.startsWith(LANG_PREFIX)) return key
+    if (!key.startsWith(LANG_PREFIX)) return this.replace(key, params)
 
     if (this.translator) return this.translator(key, ...params)
 
     const translation = getTranslation(this.locales[this.current], key)
 
-    return translation.replace(/\{(\d+)\}/g, (match: string, index: string) => {
+    return this.replace(translation, params)
+  }
+
+  private replace (str: string, params: any[]) {
+    return str.replace(/\{(\d+)\}/g, (match: string, index: string) => {
       /* istanbul ignore next */
       return String(params[+index])
     })

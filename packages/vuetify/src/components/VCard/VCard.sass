@@ -1,4 +1,5 @@
 @import '../../styles/styles.sass'
+@import './_variables.scss'
 
 // Theme
 +theme(v-card) using ($material)
@@ -13,6 +14,7 @@
 
 // Block
 .v-card
+  border-radius: $card-border-radius
   display: block
   max-width: 100%
   outline: none
@@ -140,3 +142,6 @@
 
 .v-card--raised
   +elevation(8)
+
+.v-card--shaped
+  border-radius: $card-shaped-border-radius $card-border-radius

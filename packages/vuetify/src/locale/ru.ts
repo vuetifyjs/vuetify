@@ -1,7 +1,6 @@
 export default {
   close: 'Закрыть',
   dataIterator: {
-    pageText: '{0}-{1} из {2}',
     noResultsText: 'Не найдено подходящих записей',
     loadingText: 'Запись загружается...',
   },
@@ -21,6 +20,7 @@ export default {
     prevPage: 'Предыдущая страница',
     firstPage: 'Первая страница',
     lastPage: 'Последняя страница',
+    pageText: '{0}-{1} из {2}',
   },
   datePicker: {
     itemsSelected: '{0} выбран',
@@ -36,5 +36,9 @@ export default {
   fileInput: {
     counter: 'Файлов: {0}',
     counterSize: 'Файлов: {0} (всего {1})',
+  },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
   },
 }

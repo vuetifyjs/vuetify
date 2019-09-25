@@ -5,7 +5,7 @@ $chip-icon-margin-before: -6px !default;
 $chip-icon-right-margin-after: -4px !default;
 $chip-icon-right-margin-before: 8px !default;
 $chip-icon-size: 24px !default;
-$chip-label-border-radius: 4px !default;
+$chip-label-border-radius: $border-radius-root !default;
 $chip-link-focus-opacity: 0.32 !default;
 $chip-pill-avatar-margin-after: 8px !default;
 $chip-pill-avatar-margin-before: -12px !default;

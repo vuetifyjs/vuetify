@@ -90,7 +90,10 @@ describe('VImg.ts', () => {
 
   it('should emit errors', () => {
     const wrapper = mountFunction({
-      propsData: { src: LOAD_FAILURE_SRC },
+      propsData: {
+        eager: true,
+        src: LOAD_FAILURE_SRC,
+      },
     })
 
     const error = jest.fn()

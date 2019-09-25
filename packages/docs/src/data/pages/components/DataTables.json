@@ -43,6 +43,7 @@
             "simple/loading",
             "simple/dense",
             "simple/footer-props",
+            "simple/filterable-columns",
             "intermediate/slots",
             "intermediate/expand",
             "intermediate/custom-filter",
