@@ -139,7 +139,7 @@ export default baseMixins.extend<options>().extend({
         attrs['aria-selected'] = String(this.isActive)
       } else if (this.isInMenu) {
         attrs.role = this.isClickable ? 'menuitem' : undefined
-      } else if (this.isInList && !this.isLink) {
+      } else if (this.isInList) {
         attrs.role = 'listitem'
       }
 

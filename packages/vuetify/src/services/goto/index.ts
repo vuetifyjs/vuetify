@@ -39,7 +39,14 @@ export default function goTo (
   }
 
   const startTime = performance.now()
-  const targetLocation = getOffset(_target) - settings.offset!
+
+  let targetLocation: number
+  if (typeof _target === 'number') {
+    targetLocation = getOffset(_target) - settings.offset!
+  } else {
+    targetLocation = getOffset(_target) - getOffset(container) - settings.offset!
+  }
+
   const startLocation = container.scrollTop
   if (targetLocation === startLocation) return Promise.resolve(targetLocation)
 

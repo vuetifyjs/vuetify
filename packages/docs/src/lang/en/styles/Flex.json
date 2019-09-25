@@ -280,7 +280,7 @@
     "`align-xl-content-space-around`",
     "`align-xl-content-stretch`"
   ],
-  "growShrinkHeader": "##Flex grow and shrink",
+  "growShrinkHeader": "## Flex grow and shrink",
   "growShrinkText1": "Vuetify has helper classes for applying grow and shrink manually. These can be applied by adding the helper class in the format `flex-{condition}-{value}`, where condition can be either `grow` or `shrink` and value can be either `0` or `1`. The condition `grow` will permit an element to grow to fill available space, whereas `shrink` will permit an element to shrink down to only the space needs for its contents. However, this will only happen if the element must shrink to fit their container such as a container resize or being effected by a `flex-grow-1`. The value `0` will prevent the condition from occuring whereas `1` will permit the condition. The following classes are available:",
   "growShrinkList1": [
     "`flex-grow-0`",
