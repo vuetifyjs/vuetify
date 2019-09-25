@@ -1,20 +1,21 @@
 // Imports
 @import '../../styles/styles.sass'
-@import './_variables.sass'
+@import './_variables.scss'
 
 // Theme
 +theme(v-btn-toggle) using ($material)
-  background: map-get($material, 'cards')
-  color: map-deep-get($material, 'text', 'primary')
+  &:not(.v-btn-toggle--group)
+    background: map-get($material, 'cards')
+    color: map-deep-get($material, 'text', 'primary')
 
-  .v-btn.v-btn
-    border-color: map-get($material, 'dividers') !important
+    .v-btn.v-btn
+      border-color: map-get($material, 'dividers') !important
 
-    &:focus:not(:active)
-      border-color: map-deep-get($material, 'buttons', 'disabled')
+      &:focus:not(:active)
+        border-color: map-deep-get($material, 'buttons', 'disabled')
 
-    .v-icon
-      color: map-deep-get($material, 'toggle-buttons', 'color')
+      .v-icon
+        color: map-deep-get($material, 'toggle-buttons', 'color')
 
 // Block
 .v-btn-toggle
@@ -22,24 +23,15 @@
   display: inline-flex
   max-width: 100%
 
-  > .v-btn
-    opacity: $btn-toggle-btn-opacity
-
-    &--active
-      color: inherit
-      opacity: 1
-
-    &.v-size--default
-      height: $btn-toggle-btn-height
-      min-height: 0
-      min-width: $btn-toggle-btn-width
-      padding: $btn-toggle-btn-padding
-
   > .v-btn.v-btn
+    background-color: transparent !important
     border-radius: 0
     border-style: solid
     border-width: thin
     box-shadow: none
+    box-shadow: none
+    opacity: $btn-toggle-btn-opacity
+    padding: $btn-toggle-btn-padding
 
     &:first-child
       border-top-left-radius: inherit
@@ -49,12 +41,46 @@
       border-top-right-radius: inherit
       border-bottom-right-radius: inherit
 
+    &--active
+      color: inherit
+      opacity: 1
+
     &:after
       display: none
 
     &:not(:first-child)
       border-left-width: 0
 
-// Modifiers
+  &:not(.v-btn-toggle--dense)
+    .v-btn.v-btn.v-size--default
+      height: $btn-toggle-btn-height
+      min-height: 0
+      min-width: $btn-toggle-btn-width
+
+.v-btn-toggle--borderless
+  > .v-btn.v-btn
+    border-width: 0
+
+.v-btn-toggle--dense
+  > .v-btn.v-btn
+    padding: 0 8px
+
+.v-btn-toggle--group
+  border-radius: 0
+
+  > .v-btn.v-btn
+    border-color: transparent
+    margin: 4px
+    min-width: auto
+
+    &:not(.v-btn--active)
+      color: initial
+
 .v-btn-toggle--rounded
-  border-radius: $btn-toggle-round-radius
+  border-radius: $btn-toggle-round-border-radius
+
+.v-btn-toggle--shaped
+  border-radius: $btn-toggle-shaped-border-radius $btn-toggle-border-radius
+
+.v-btn-toggle--tile
+  border-radius: 0
