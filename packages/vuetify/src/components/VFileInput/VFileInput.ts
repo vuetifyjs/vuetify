@@ -142,7 +142,7 @@ export default VTextField.extend({
       immediate: true,
     },
     value: {
-      handler(v) {
+      handler (v) {
         const value = this.isMultiple ? v : v ? [v] : []
         if (!deepEqual(value, this.$refs.input.files)) {
           // When the input value is changed programatically, clear the
