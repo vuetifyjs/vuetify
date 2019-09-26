@@ -147,14 +147,9 @@ export default mixins(
     computedIcon (): string | boolean {
       if (this.icon === false) return false
       if (typeof this.icon === 'string' && this.icon) return this.icon
+      if (!['error', 'info', 'sucess', 'warning'].includes(this.type)) return false
 
-      switch (this.type) {
-        case 'info': return '$info'
-        case 'error': return '$error'
-        case 'success': return '$success'
-        case 'warning': return '$warning'
-        default: return false
-      }
+      return `$${this.type}`
     },
     hasColoredIcon (): boolean {
       return (
