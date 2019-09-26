@@ -544,6 +544,7 @@ Data table (and iterator) have been rewritten from the ground up to be both easi
 #### Shared
 * **disable-initial-sort** has been removed. Neither component initially sorts data anymore. Use **sort-by** (or **options**) prop to sort.
 * **filter** prop has been removed. Instead use **custom-filter**. This was done in an effort to make custom filtering less confusing.
+  * The signature for **custom-filter** has changed from `(items: object[], search: string, filter: Filter): object[]` to `(value: any, search: string, item: any) => boolean`
 * **pagination** prop has been removed. Instead use the separate props such as **page**, **sort-by**, etc. If you want to provide a single object you can use the new **options** prop instead. **NOTE**: The **options** prop has a different object structure than **pagination**. Check API docs for details.
 * **total-items** prop has been renamed to **server-items-length**
 * **hide-actions** prop has been renamed to **hide-default-footer**. Also it no longer changes the visible items per page
