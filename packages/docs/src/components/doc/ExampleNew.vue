@@ -7,14 +7,15 @@
 
     <v-row no-gutters>
       <v-col cols="12" md="9">
-        <div class="d-flex">
+        <div class="d-flex grey lighten-3">
           <v-tabs
             v-model="tab"
+            background-color="transparent"
             class="pl-0 pl-md-6"
             color="primary"
           >
             <v-tab
-              v-for="(t) in tabs"
+              v-for="(t) in value.tabs"
               :key="t"
               :value="t"
               v-text="t"
@@ -26,11 +27,10 @@
 
         <div v-if="component" class="d-flex child-flex">
           <v-sheet
-            color="grey lighten-5"
             height="300"
             tile
           >
-            <div class="fill-height" data-app="true">
+            <div class="fill-height pa-6" data-app="true">
               <component :is="component" :attrs="attrs$" />
             </div>
           </v-sheet>
@@ -44,7 +44,7 @@
 
       <v-col cols="12" md="3">
         <v-responsive
-          class="title font-weight-regular d-flex align-center px-3"
+          class="title font-weight-regular d-flex align-center px-3 grey lighten-3"
           height="48"
         >
           Options
@@ -54,7 +54,7 @@
 
         <v-responsive max-height="300" class="overflow-y-auto py-3">
           <v-col
-            v-for="(v1, boolean, i) in booleans"
+            v-for="(v1, boolean, i) in booleans || {}"
             :key="`col-1-${i}`"
             cols="12"
             class="pb-0"
@@ -75,28 +75,27 @@
           </v-col>
 
           <v-col
-            v-for="(v2, slider, i) in sliders"
+            v-for="(slider, i) in value.sliders || []"
             :key="`col-2-${i}`"
             cols="12"
             class="pb-0"
           >
             <v-slider
-              v-model="sliders[slider]"
+              v-model="sliders[slider.prop]"
+              v-bind="slider.attrs"
               hide-details
-              min="0"
-              max="24"
             >
               <template v-slot:label>
                 <span
                   class="text-capitalize"
-                  v-text="slider"
+                  v-text="slider.label"
                 />
               </template>
             </v-slider>
           </v-col>
 
           <v-col
-            v-for="(select, i) in value.selects"
+            v-for="(select, i) in value.selects || []"
             :key="`col-3-${i}`"
             cols="12"
             class="pb-0"
@@ -104,9 +103,9 @@
             <v-select
               v-model="selects[select.prop]"
               v-bind="select.attrs"
+              :hide-details="i + 1 !== (value.selects || []).length"
               clearable
               dense
-              :hide-details="i + 1 !== value.selects.length"
               filled
             >
               <template v-slot:label>
@@ -165,7 +164,7 @@
         selects: setupData(this.value.selects),
         sliders: setupData(this.value.sliders),
         tab: 0,
-        tabs: this.value.tabs,
+        tabs: setupData(this.value.tabs),
       }
     },
 
@@ -176,7 +175,9 @@
       attrs$ () {
         const attrs = {}
 
-        attrs[this.tabs[this.tab]] = true
+        if ((this.value.tabs || []).length > 0) {
+          attrs[this.value.tabs[this.tab]] = true
+        }
 
         this.parseAttrs(this.booleans, attrs)
         this.parseAttrs(this.sliders, attrs)
@@ -197,7 +198,7 @@
       importComponent () {
         return import(
           /* webpackChunkName: "playgrounds" */
-          `../../examples/buttons/playground.vue`
+          `../../examples/${this.file}/playground.vue`
         )
           .then(comp => (this.component = comp.default))
       },
