@@ -10,13 +10,15 @@
 
 // Block
 .v-alert
-  border-radius: $alert-border-radius
   display: block
   font-size: $alert-font-size
   margin-bottom: $alert-margin
   padding: $alert-padding
   position: relative
   +elevationTransition()
+
+  &:not(.v-sheet--tile)
+    border-radius: $alert-border-radius
 
   > .v-icon,
   > .v-alert__content
