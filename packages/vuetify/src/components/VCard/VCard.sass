@@ -14,7 +14,6 @@
 
 // Block
 .v-card
-  border-radius: $card-border-radius
   display: block
   max-width: 100%
   outline: none
@@ -25,6 +24,9 @@
   white-space: normal
   +elevationTransition()
   +elevation(2)
+
+  &:not(.v-sheet--tile)
+    border-radius: $card-border-radius
 
   > *:first-child:not(.v-btn):not(.v-chip),
   > .v-card__progress + *:not(.v-btn):not(.v-chip)
