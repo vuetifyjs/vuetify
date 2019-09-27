@@ -2,6 +2,7 @@ export default {
   close: 'Sulge',
   dataIterator: {
     pageText: '{0}-{1} {2}st',
+    singlePageText: '{0} {1}st',
     noResultsText: 'Vastavaid kirjeid ei leitud',
     loadingText: 'Andmeid laaditakse...',
   },

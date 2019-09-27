@@ -2,6 +2,7 @@ export default {
   close: 'Close',
   dataIterator: {
     pageText: '{0}-{1} of {2}',
+    singlePageText: '{0} of {1}',
     noResultsText: 'No matching records found',
     loadingText: 'Loading items...',
   },

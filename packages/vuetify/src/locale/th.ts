@@ -2,6 +2,7 @@ export default {
   close: 'Close',
   dataIterator: {
     pageText: '{0}-{1} จาก {2}',
+    singlePageText: '{0} จาก {1}',
     noResultsText: 'ไม่พบข้อมูลที่ค้นหา',
     loadingText: 'Loading item...',
   },

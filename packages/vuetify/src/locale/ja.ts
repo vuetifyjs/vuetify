@@ -2,6 +2,7 @@ export default {
   close: 'Close',
   dataIterator: {
     pageText: '{0}-{1} 件目 / {2}件',
+    singlePageText: '{0} 件目 / {1}件',
     noResultsText: '検索結果が見つかりません。',
     loadingText: 'Loading item...',
   },

@@ -2,6 +2,7 @@ export default {
   close: 'Lukk',
   dataIterator: {
     pageText: '{0}-{1} av {2}',
+    singlePageText: '{0} av {1}',
     noResultsText: 'Fant ingen matchende elementer.',
     loadingText: 'Laster elementer...',
   },

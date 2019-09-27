@@ -2,6 +2,7 @@ export default {
   close: 'إغلاق',
   dataIterator: {
     pageText: '{0}-{1} من {2}',
+    singlePageText: '{0} من {1}',
     noResultsText: 'لا توجد سجلات مطابقة',
     loadingText: 'تحميل العنصر...',
   },

@@ -2,6 +2,7 @@ export default {
   close: 'Fechar',
   dataIterator: {
     pageText: '{0}-{1} de {2}',
+    singlePageText: '{0} de {1}',
     noResultsText: 'Nenhum dado encontrado',
     loadingText: 'Carregando itens...',
   },

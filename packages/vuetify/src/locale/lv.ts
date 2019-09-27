@@ -2,6 +2,7 @@ export default {
   close: 'Aizvērt',
   dataIterator: {
     pageText: '{0}-{1} no {2}',
+    singlePageText: '{0} no {1}',
     noResultsText: 'Nekas netika atrasts',
     loadingText: 'Ielādē...',
   },

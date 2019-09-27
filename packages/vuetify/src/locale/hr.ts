@@ -2,6 +2,7 @@ export default {
   close: 'Close',
   dataIterator: {
     pageText: '{0}-{1} od {2}',
+    singlePageText: '{0} od {1}',
     noResultsText: 'Nisu pronađeni odgovarajući zapisi',
     loadingText: 'Loading item...',
   },

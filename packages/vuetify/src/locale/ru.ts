@@ -2,6 +2,7 @@ export default {
   close: 'Закрыть',
   dataIterator: {
     pageText: '{0}-{1} из {2}',
+    singlePageText: '{0} из {1}',
     noResultsText: 'Не найдено подходящих записей',
     loadingText: 'Запись загружается...',
   },

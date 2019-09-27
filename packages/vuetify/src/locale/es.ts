@@ -2,6 +2,7 @@ export default {
   close: 'Cerrar',
   dataIterator: {
     pageText: '{0}-{1} de {2}',
+    singlePageText: '{0} de {1}',
     noResultsText: 'Ningún elemento coincide con la búsqueda',
     loadingText: 'Cargando...',
   },

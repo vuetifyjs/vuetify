@@ -2,6 +2,7 @@ export default {
   close: '關閉',
   dataIterator: {
     pageText: '{2} 條中的 {0}~{1} 條',
+    singlePageText: '{1} 條中的 {0} 條',
     noResultsText: '沒有符合條件的結果',
     loadingText: '讀取中...',
   },

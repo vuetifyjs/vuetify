@@ -2,6 +2,7 @@ export default {
   close: 'Tutup',
   dataIterator: {
     pageText: '{0}-{1} dari {2}',
+    singlePageText: '{0} dari {1}',
     noResultsText: 'Tidak ditemukan catatan yang cocok',
     loadingText: 'Memuat data...',
   },

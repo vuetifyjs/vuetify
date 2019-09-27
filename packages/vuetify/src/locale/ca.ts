@@ -2,6 +2,7 @@ export default {
   close: 'Close',
   dataIterator: {
     pageText: '{0}-{1} de {2}',
+    singlePageText: '{0} de {1}',
     noResultsText: 'Sense dades per mostrar',
     loadingText: 'Loading item...',
   },

@@ -2,6 +2,7 @@ export default {
   close: 'Close',
   dataIterator: {
     pageText: '{0}-{1} van {2}',
+    singlePageText: '{0} van {1}',
     noResultsText: 'Geen ooreenstemmende resultate is gevind nie',
     loadingText: 'Loading item...',
   },

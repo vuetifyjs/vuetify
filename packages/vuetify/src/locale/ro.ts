@@ -2,6 +2,7 @@ export default {
   close: 'Close',
   dataIterator: {
     pageText: '{0}-{1} din {2}',
+    singlePageText: '{0} din {1}',
     noResultsText: 'Nu au fost găsite înregistrări care să se potrivească',
     loadingText: 'Loading item...',
   },

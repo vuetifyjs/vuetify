@@ -1,7 +1,7 @@
 export default {
   close: 'Zapri',
   dataIterator: {
-    pageText: '{0}-{1} od {2}',
+    pageText: '{0} od {1}',
     noResultsText: 'Ni iskanega zapisa',
     loadingText: 'Nalaganje...',
   },

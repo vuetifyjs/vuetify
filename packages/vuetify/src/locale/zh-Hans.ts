@@ -2,6 +2,7 @@ export default {
   close: '关闭',
   dataIterator: {
     pageText: '{0}-{1} 共 {2}',
+    singlePageText: '{0} 共 {1}',
     noResultsText: '没有符合条件的结果',
     loadingText: '加载中……',
   },

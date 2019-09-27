@@ -2,6 +2,7 @@ export default {
   close: 'بستن',
   dataIterator: {
     pageText: '{0} تا {1} از {2}',
+    singlePageText: '{0} از {1}',
     noResultsText: 'نتیجه‌ای یافت نشد',
     loadingText: 'در حال بارگذاری...',
   },

@@ -2,6 +2,7 @@ export default {
   close: 'Close',
   dataIterator: {
     pageText: '{0}-{1} з {2}',
+    singlePageText: '{0} з {1}',
     noResultsText: 'В результаті пошуку нічого не знайдено',
     loadingText: 'Loading item...',
   },

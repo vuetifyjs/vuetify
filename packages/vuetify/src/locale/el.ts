@@ -2,6 +2,7 @@ export default {
   close: 'Close',
   dataIterator: {
     pageText: '{0}-{1} από {2}',
+    singlePageText: '{0} από {1}',
     noResultsText: 'Δε βρέθηκαν αποτελέσματα',
     loadingText: 'Loading item...',
   },

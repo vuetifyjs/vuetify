@@ -2,6 +2,7 @@ export default {
   close: 'סגור',
   dataIterator: {
     pageText: '{0}-{1} מתוך {2}',
+    singlePageText: '{0} מתוך {1}',
     noResultsText: 'לא נמצאו תוצאות מתאימות',
     loadingText: 'טוען פריט...',
   },

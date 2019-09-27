@@ -2,6 +2,7 @@ export default {
   close: 'Close',
   dataIterator: {
     pageText: '{0}-{1} / {2}',
+    singlePageText: '{0} / {1}',
     noResultsText: 'Nincs egyező találat',
     loadingText: 'Loading item...',
   },
