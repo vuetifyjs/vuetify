@@ -372,12 +372,10 @@ export default mixins(
 
       if (this.range && this.value && this.value.length === 2) {
         proxyValue = []
-        const [rangeFrom, rangeTo] = [this.value[0], this.value[1]].map(x => x.substr(0, 10)).sort().map(x => new Date(x))
-        if (this.$data.rangeCache) {
-          const c = this.$data.rangeCache
-          if (c.from.getTime() === rangeFrom.getTime() && c.to.getTime() === rangeTo.getTime()) {
-            proxyValue = c.dates
-          }
+        const [rangeFrom, rangeTo] = [...this.value].map(x => x.substr(0, 10)).sort().map(x => new Date(x))
+        const c = this.$data.rangeCache
+        if (this.$data.rangeCache && c.from.getTime() === rangeFrom.getTime() && c.to.getTime() === rangeTo.getTime()) {
+          proxyValue = c.dates
         } else {
           const diffDays = Math.ceil((rangeTo.getTime() - rangeFrom.getTime()) / 864e5)
           const current = new Date(+rangeFrom)
