@@ -1,9 +1,9 @@
 export default {
   close: 'Zatvori',
   dataIterator: {
+    pageText: '{0}-{1} od {2}',
     noResultsText: 'Nisu pronađene odgovarajuće stavke',
     loadingText: 'Učitavanje...',
-    pageText: '{0}-{1} od {2}',
   },
   dataTable: {
     itemsPerPageText: 'Redaka po stranici:',
@@ -36,9 +36,5 @@ export default {
   fileInput: {
     counter: 'Odabranih datoteka: {0}',
     counterSize: 'Odabranih datoteka: {0} ({1} ukupno)',
-  },
-  timePicker: {
-    am: 'AM',
-    pm: 'PM',
   },
 }
