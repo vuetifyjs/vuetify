@@ -22,6 +22,7 @@ export default {
     firstPage: 'עמוד ראשון',
     lastPage: 'עמוד אחרון',
     pageText: '{0}-{1} מתוך {2}',
+    singlePageText: '{0} מתוך {1}',
   },
   datePicker: {
     itemsSelected: '{0} נבחרו',

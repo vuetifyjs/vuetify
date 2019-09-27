@@ -22,6 +22,7 @@ export default {
     firstPage: 'İlk sayfa',
     lastPage: 'Son sayfa',
     pageText: '{0} - {1} arası, Toplam: {2} kayıt',
+    singlePageText: '{0} arası, Toplam: {1} kayıt',
   },
   datePicker: {
     itemsSelected: '{0} öge seçildi',

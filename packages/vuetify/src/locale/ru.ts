@@ -22,6 +22,7 @@ export default {
     firstPage: 'Первая страница',
     lastPage: 'Последняя страница',
     pageText: '{0}-{1} из {2}',
+    singlePageText: '{0} из {1}',
   },
   datePicker: {
     itemsSelected: '{0} выбран',

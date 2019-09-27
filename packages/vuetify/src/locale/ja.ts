@@ -22,6 +22,7 @@ export default {
     firstPage: '一ページ目',
     lastPage: '最後のページ',
     pageText: '{0}-{1} 件目 / {2}件',
+    singlePageText: '{0} 件目 / {1}件',
   },
   datePicker: {
     itemsSelected: '{0}日付選択',

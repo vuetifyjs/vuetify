@@ -22,6 +22,7 @@ export default {
     firstPage: 'صفحه‌ی اول',
     lastPage: 'صفحه‌ی آخر',
     pageText: '{0} تا {1} از {2}',
+    singlePageText: '{0} از {1}',
   },
   datePicker: {
     itemsSelected: '{0} انتخاب شده است',

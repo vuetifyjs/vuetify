@@ -22,6 +22,7 @@ export default {
     firstPage: '首页',
     lastPage: '尾页',
     pageText: '{0}-{1} 共 {2}',
+    singlePageText: '{0} 共 {1}',
   },
   datePicker: {
     itemsSelected: '已选择 {0}',

@@ -58,6 +58,10 @@ export default Vue.extend({
       type: String,
       default: '$vuetify.dataFooter.pageText',
     },
+    singlePageText: {
+      type: String,
+      default: '$vuetify.dataFooter.singlePageText',
+    },
   },
 
   computed: {
@@ -141,7 +145,9 @@ export default Vue.extend({
 
         children = this.$scopedSlots['page-text']
           ? [this.$scopedSlots['page-text']!({ pageStart, pageStop, itemsLength })]
-          : [this.$vuetify.lang.t(this.pageText, pageStart, pageStop, itemsLength)]
+          : this.options.itemsPerPage === 1
+            ? [this.$vuetify.lang.t(this.singlePageText, pageStart, itemsLength)]
+            : [this.$vuetify.lang.t(this.pageText, pageStart, pageStop, itemsLength)]
       }
 
       return this.$createElement('div', {

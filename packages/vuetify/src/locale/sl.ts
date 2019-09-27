@@ -22,6 +22,7 @@ export default {
     firstPage: 'Prva stran',
     lastPage: 'Zadnja stran',
     pageText: '{0}-{1} od {2}',
+    singlePageText: '{0} od {1}',
   },
   datePicker: {
     itemsSelected: '{0} izbrano/-ih',
