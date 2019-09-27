@@ -22,6 +22,7 @@ export default {
     firstPage: 'Halaman pertama',
     lastPage: 'Halaman terakhir',
     pageText: '{0}-{1} dari {2}',
+    singlePageText: '{0} dari {1}',
   },
   datePicker: {
     itemsSelected: '{0} dipilih',

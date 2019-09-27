@@ -22,6 +22,7 @@ export default {
     firstPage: '첫 페이지',
     lastPage: '마지막 페이지',
     pageText: '{2} 중 {0}-{1}',
+    singlePageText: '{1} 중 {0}',
   },
   datePicker: {
     itemsSelected: '{0} 선택됨',

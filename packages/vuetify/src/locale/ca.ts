@@ -22,6 +22,7 @@ export default {
     firstPage: 'Primera pàgina',
     lastPage: 'Última pàgina',
     pageText: '{0}-{1} de {2}',
+    singlePageText: '{0} de {1}',
   },
   datePicker: {
     itemsSelected: '{0} seleccionats',

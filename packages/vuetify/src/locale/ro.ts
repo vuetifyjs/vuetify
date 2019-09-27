@@ -22,6 +22,7 @@ export default {
     firstPage: 'Pagina prima',
     lastPage: 'Pagina ultima',
     pageText: '{0}-{1} din {2}',
+    singlePageText: '{0} din {1}',
   },
   datePicker: {
     itemsSelected: '{0} selectate',

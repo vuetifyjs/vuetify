@@ -22,6 +22,7 @@ export default {
     firstPage: 'Esimene lehekülg',
     lastPage: 'Viimane lehekülg',
     pageText: '{0}-{1} {2}st',
+    singlePageText: '{0} {1}st',
   },
   datePicker: {
     itemsSelected: '{0} valitud',

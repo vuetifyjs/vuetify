@@ -22,6 +22,7 @@ export default {
     firstPage: 'Pirmas puslapis',
     lastPage: 'Paskutinis puslapis',
     pageText: '{0}-{1} iš {2}',
+    singlePageText: '{0} iš {1}',
   },
   datePicker: {
     itemsSelected: '{0} pasirinkta',

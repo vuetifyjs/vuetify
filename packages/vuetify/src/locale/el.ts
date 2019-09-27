@@ -22,6 +22,7 @@ export default {
     firstPage: 'Πρώτη σελίδα',
     lastPage: 'Τελευταία σελίδα',
     pageText: '{0}-{1} από {2}',
+    singlePageText: '{0} από {1}',
   },
   datePicker: {
     itemsSelected: '{0} επιλεγμένα',

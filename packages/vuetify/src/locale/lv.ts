@@ -22,6 +22,7 @@ export default {
     firstPage: 'Pirmā lapa',
     lastPage: 'Pēdējā lapa',
     pageText: '{0}-{1} no {2}',
+    singlePageText: '{0} no {1}',
   },
   datePicker: {
     itemsSelected: '{0} izvēlēts',

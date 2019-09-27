@@ -22,6 +22,7 @@ export default {
     firstPage: 'Első oldal',
     lastPage: 'Utolsó oldal',
     pageText: '{0}-{1} / {2}',
+    singlePageText: '{0} / {1}',
   },
   datePicker: {
     itemsSelected: '{0} kiválaszta/-ott',

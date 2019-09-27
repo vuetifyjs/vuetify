@@ -16,6 +16,7 @@ export default {
   },
   dataFooter: {
     pageText: '{0}-{1} of {2}',
+    singlePageText: '{0} of {1}',
     itemsPerPageText: 'Items per page:',
     itemsPerPageAll: 'All',
     nextPage: 'Next page',

@@ -22,6 +22,7 @@ export default {
     firstPage: 'První strana',
     lastPage: 'Poslední strana',
     pageText: '{0}-{1} z {2}',
+    singlePageText: '{0} z {1}',
   },
   datePicker: {
     itemsSelected: '{0} vybráno',

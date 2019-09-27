@@ -198,4 +198,26 @@ describe('VDataFooter.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should render with itemsPerPage of one', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        itemsPerPageOptions: [50, 100],
+        options: {
+          page: 2,
+          itemsPerPage: 1,
+        },
+        pagination: {
+          page: 2,
+          itemsPerPage: 1,
+          pageStart: 1,
+          pageStop: 1,
+          pageCount: 100,
+          itemsLength: 100,
+        },
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

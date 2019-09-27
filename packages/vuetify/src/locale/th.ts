@@ -22,6 +22,7 @@ export default {
     firstPage: 'หน้าแรก',
     lastPage: 'หน้าสุดท้าย',
     pageText: '{0}-{1} จาก {2}',
+    singlePageText: '{0} จาก {1}',
   },
   datePicker: {
     itemsSelected: 'เลือก {0} วัน',

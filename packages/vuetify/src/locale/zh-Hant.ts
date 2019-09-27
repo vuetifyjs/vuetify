@@ -22,6 +22,7 @@ export default {
     firstPage: '第一頁',
     lastPage: '最後頁',
     pageText: '{2} 條中的 {0}~{1} 條',
+    singlePageText: '{1} 條中的 {0} 條',
   },
   datePicker: {
     itemsSelected: '已選擇 {0}',
