@@ -141,16 +141,15 @@ export default VTextField.extend({
       },
       immediate: true,
     },
-    value: {
-      handler (v) {
-        const value = this.isMultiple ? v : v ? [v] : []
-        if (!deepEqual(value, this.$refs.input.files)) {
-          // When the input value is changed programatically, clear the
-          // internal input's value so that the `onInput` handler
-          // can be triggered again if the user selects the exact
-          // same files.
-          this.$refs.input.value = ''
-        }
+    value (v) {
+      const value = this.isMultiple ? v : v ? [v] : []
+      if (!deepEqual(value, this.$refs.input.files)) {
+        // When the input value is changed programatically, clear the
+        // internal input's value so that the `onInput` handler
+        // can be triggered again if the user re-selects the exact
+        // same file(s). Ideally, `input.files` should be
+        // manipulated directly but that property is readonly.
+        this.$refs.input.value = ''
       },
     },
   },
