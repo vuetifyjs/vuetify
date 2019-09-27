@@ -120,6 +120,35 @@ function parseMixins (component) {
   return mixins.sort((a, b) => a > b)
 }
 
+function parseVariables () {
+  const variables = {}
+  const rootDir = './../vuetify/src/components/'
+  const comps = fs.readFileSync(`${rootDir}index.ts`, 'utf8')
+  const folders = comps
+    .trim()
+    .replace(/export\s\*\sfrom\s'.\//g, '')
+    .split(`'\n`)
+  folders.forEach(folder => {
+    const variableFile = `${rootDir}${folder}/_variables.scss`
+    if (fs.existsSync(variableFile)) {
+      const varFile = fs.readFileSync(variableFile, 'utf8')
+      const vars = varFile.replace(/\s\s+/g, ' ').split(';\n')
+      const varValues = []
+      vars.forEach(varString => {
+        const varArr = varString.split(': ')
+        if (varArr.length === 2) {
+          varValues.push({
+            name: varArr[0].trim(),
+            default: varArr[1].trim(),
+          })
+        }
+      })
+      variables[hyphenate(folder)] = varValues
+    }
+  })
+  return variables
+}
+
 const components = {}
 const directives = {}
 
@@ -249,12 +278,15 @@ const fakeComponents = ts => {
   }).join('\n')
 }
 
+const variables = parseVariables()
+
 if (!fs.existsSync('dist')) {
   fs.mkdirSync('dist', 0o755)
 }
 
 writeJsonFile(tags, 'dist/tags.json')
 writeJsonFile(attributes, 'dist/attributes.json')
+writeJsonFile(variables, 'dist/variables.json')
 writePlainFile(fakeComponents(false), 'dist/fakeComponents.js')
 writePlainFile(fakeComponents(true), 'dist/fakeComponents.ts')
 
