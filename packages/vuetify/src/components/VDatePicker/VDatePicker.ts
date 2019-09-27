@@ -372,11 +372,21 @@ export default mixins(
 
       if (this.range && this.value && this.value.length === 2) {
         proxyValue = []
-        const [rangeFrom, rangeTo] = [this.value[0], this.value[1]].map(x => new Date(`${x}T00:00:00+00:00`)).sort((a, b) => a > b ? 1 : -1)
-        const diffDays = Math.ceil((rangeTo.getTime() - rangeFrom.getTime()) / (1000 * 60 * 60 * 24))
-        for (let i = 0; i <= diffDays; i++) {
-          const current = new Date(+rangeFrom + i * 864e5)
+        const [rangeFrom, rangeTo] = [this.value[0], this.value[1]].map(x => x.substr(0, 10)).sort().map(x => new Date(x))
+        if (this.$data.rangeCache) {
+          const c = this.$data.rangeCache
+          if (c.from.getTime() === rangeFrom.getTime() && c.to.getTime() === rangeTo.getTime()) {
+            proxyValue = c.dates
+          }
+        } else {
+          const diffDays = Math.ceil((rangeTo.getTime() - rangeFrom.getTime()) / 864e5)
+          const current = new Date(+rangeFrom)
           proxyValue.push(current.toISOString().substring(0, 10))
+          for (let i = 0; i < diffDays; i++) {
+            current.setDate(current.getDate() + 1)
+            proxyValue.push(current.toISOString().substring(0, 10))
+          }
+          this.$data.rangeCache = { from: rangeFrom, to: rangeTo, dates: proxyValue }
         }
       }
 
