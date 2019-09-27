@@ -9,7 +9,7 @@ export default {
     ariaLabel: {
       sortDescending: ': Sortirano silazno. Odaberite za uklanjanje sortiranja.',
       sortAscending: ': Sortirano uzlazno. Odaberite za sortirati silazno.',
-      sortNone: ': Sortirano silazno. Odaberite za sortirati uzlazno.',
+      sortNone: ': Nije sortirano. Odaberite za sortirati uzlazno.',
     },
     sortBy: 'Sortirajte po',
   },
