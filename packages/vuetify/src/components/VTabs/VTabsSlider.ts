@@ -1,24 +1,18 @@
-// Libraries
-import Vue from 'vue'
-
 // Mixins
 import Colorable from '../../mixins/colorable'
+
+// Utilities
+import mixins from '../../util/mixins'
 
 // Types
 import { VNode } from 'vue/types'
 
 /* @vue/component */
-export default Vue.extend({
+export default mixins(Colorable).extend({
   name: 'v-tabs-slider',
 
-  functional: true,
-
-  props: {
-    color: String,
-  },
-
-  render (h, { props }): VNode {
-    return h('div', Colorable.options.methods.setBackgroundColor(props.color, {
+  render (h): VNode {
+    return h('div', this.setBackgroundColor(this.color, {
       staticClass: 'v-tabs-slider',
     }))
   },
