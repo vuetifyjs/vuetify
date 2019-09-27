@@ -368,26 +368,6 @@ export default mixins(
       })
     },
     genDateTable () {
-      let proxyValue = this.value
-
-      if (this.range && this.value && this.value.length === 2) {
-        proxyValue = []
-        const [rangeFrom, rangeTo] = [...this.value].map(x => x.substr(0, 10)).sort().map(x => new Date(x))
-        const c = this.$data.rangeCache
-        if (this.$data.rangeCache && c.from.getTime() === rangeFrom.getTime() && c.to.getTime() === rangeTo.getTime()) {
-          proxyValue = c.dates
-        } else {
-          const diffDays = Math.ceil((rangeTo.getTime() - rangeFrom.getTime()) / 864e5)
-          const current = new Date(+rangeFrom)
-          proxyValue.push(current.toISOString().substring(0, 10))
-          for (let i = 0; i < diffDays; i++) {
-            current.setDate(current.getDate() + 1)
-            proxyValue.push(current.toISOString().substring(0, 10))
-          }
-          this.$data.rangeCache = { from: rangeFrom, to: rangeTo, dates: proxyValue }
-        }
-      }
-
       return this.$createElement(VDatePickerDateTable, {
         props: {
           allowedDates: this.allowedDates,
@@ -403,11 +383,12 @@ export default mixins(
           locale: this.locale,
           min: this.min,
           max: this.max,
+          range: this.range,
           readonly: this.readonly,
           scrollable: this.scrollable,
           showWeek: this.showWeek,
           tableDate: `${pad(this.tableYear, 4)}-${pad(this.tableMonth + 1)}`,
-          value: proxyValue,
+          value: this.value,
           weekdayFormat: this.weekdayFormat,
         },
         ref: 'table',
