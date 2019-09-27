@@ -59,9 +59,6 @@
   padding-top: $text-field-active-label-height
   margin-top: $input-top-spacing - $text-field-active-label-height
 
-  &.v-input--dense
-    padding-top: 0px
-
   input
     flex: 1 1 auto
     line-height: 20px
@@ -69,6 +66,13 @@
     max-width: 100%
     min-width: 0px
     width: 100%
+
+  &.v-input--dense
+    padding-top: 0
+
+    &:not(.v-text-field--outlined):not(.v-text-field--solo)
+      input
+        padding: 4px 0 8px
 
     &[type=text]::-ms-clear
       display: none
@@ -208,8 +212,14 @@
       align-items: stretch
       min-height: 56px
 
-    &.v-input--dense > .v-input__control > .v-input__slot
-      min-height: 40px
+    &.v-input--dense
+      > .v-input__control > .v-input__slot
+        min-height: 44px
+
+      &.v-text-field--single-line,
+      &.v-text-field--outlined
+        > .v-input__control > .v-input__slot
+          min-height: 40px
 
   &--filled,
   &--full-width
@@ -218,7 +228,7 @@
 
     &.v-input--dense
       input
-        margin-top: 18px
+        margin-top: 20px
 
     &.v-text-field--single-line
       input
@@ -226,7 +236,7 @@
 
       &.v-input--dense
         input
-          margin-top: 5px
+          margin-top: 6px
 
     .v-label
       top: 18px
@@ -235,8 +245,8 @@
         transform: translateY(-6px) scale(.75)
 
     &.v-input--dense
-      .v-label
-        top: 16px
+      .v-label--active
+        transform: translateY(-10px) scale(.75)
 
       &.v-text-field--single-line
         .v-label
@@ -263,6 +273,9 @@
 
     &.v-input--dense:not(.v-text-field--solo)
       +prepend-append-margin-top(14px)
+
+      &.v-text-field--single-line
+        +prepend-append-margin-top(9px)
 
       &.v-text-field--outlined
         +prepend-append-margin-top(7px)
