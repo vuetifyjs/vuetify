@@ -3,6 +3,7 @@ export default {
   dataIterator: {
     noResultsText: 'Nisu pronađene odgovarajuće stavke',
     loadingText: 'Učitavanje...',
+    pageText: '{0}-{1} od {2}',
   },
   dataTable: {
     itemsPerPageText: 'Redaka po stranici:',
@@ -20,7 +21,6 @@ export default {
     prevPage: 'Prethodna stranica',
     firstPage: 'Prva stranica',
     lastPage: 'Posljednja stranica',
-    pageText: '{0}-{1} od {2}',
   },
   datePicker: {
     itemsSelected: '{0} odabrano',
