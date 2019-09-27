@@ -27,6 +27,8 @@ describe('VDataFooter.ts', () => {
 
     mountFunction = (options?: MountOptions<Instance>) => {
       return mount(VDataFooter, {
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
         mocks: {
           $vuetify: {
             lang: new Lang(),
@@ -43,7 +45,7 @@ describe('VDataFooter.ts', () => {
   it('should render with custom itemsPerPage', () => {
     const wrapper = mountFunction({
       propsData: {
-        itemsPerPageOptions: [100],
+        itemsPerPageOptions: [50, 100],
         options: {
           page: 4,
           itemsPerPage: 100,

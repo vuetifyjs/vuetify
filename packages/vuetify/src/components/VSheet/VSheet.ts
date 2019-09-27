@@ -2,6 +2,7 @@
 import './VSheet.sass'
 
 // Mixins
+import BindsAttrs from '../../mixins/binds-attrs'
 import Colorable from '../../mixins/colorable'
 import Elevatable from '../../mixins/elevatable'
 import Measurable from '../../mixins/measurable'
@@ -15,6 +16,7 @@ import { VNode } from 'vue'
 
 /* @vue/component */
 export default mixins(
+  BindsAttrs,
   Colorable,
   Elevatable,
   Measurable,
@@ -48,7 +50,7 @@ export default mixins(
     const data = {
       class: this.classes,
       style: this.styles,
-      on: this.$listeners,
+      on: this.listeners$,
     }
 
     return h(

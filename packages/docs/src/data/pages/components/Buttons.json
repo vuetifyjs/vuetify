@@ -32,8 +32,59 @@
       "type": "section",
       "children": [
         {
-          "type": "playground",
-          "value": "playground"
+          "type": "playground-new",
+          "value": {
+            "booleans": [
+              "disabled",
+              "loading",
+              "block"
+            ],
+            "sliders": [
+              {
+                "prop": "elevation",
+                "attrs": {
+                  "min": 0,
+                  "max": 24
+                }
+              }
+            ],
+            "selects": [
+              {
+                "prop": "color",
+                "label": "Colors",
+                "attrs": {
+                  "items": [
+                    "deep-purple accent-4",
+                    "primary",
+                    "secondary",
+                    "accent"
+                  ]
+                }
+              },
+              {
+                "prop": "size",
+                "label": "Sizes",
+                "attrs": {
+                  "items": [
+                    "x-small",
+                    "small",
+                    "large",
+                    "x-large"
+                  ]
+                }
+              }
+            ],
+            "tabs": [
+              "raised",
+              "depressed",
+              "outlined",
+              "rounded",
+              "text",
+              "fab",
+              "icon",
+              "tile"
+            ]
+          }
         }
       ]
     },

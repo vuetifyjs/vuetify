@@ -183,14 +183,14 @@ export default Themeable.extend({
     genEmptyWrapper (content: VNodeChildren) {
       return this.$createElement('div', content)
     },
-    genEmpty (itemsLength: number) {
-      if (itemsLength <= 0 && this.loading) {
+    genEmpty (originalItemsLength: number, filteredItemsLength: number) {
+      if (originalItemsLength === 0 && this.loading) {
         const loading = this.$slots['loading'] || this.$vuetify.lang.t(this.loadingText)
         return this.genEmptyWrapper(loading)
-      } else if (itemsLength <= 0 && !this.items.length) {
+      } else if (originalItemsLength === 0) {
         const noData = this.$slots['no-data'] || this.$vuetify.lang.t(this.noDataText)
         return this.genEmptyWrapper(noData)
-      } else if (itemsLength <= 0 && this.search) {
+      } else if (filteredItemsLength === 0) {
         const noResults = this.$slots['no-results'] || this.$vuetify.lang.t(this.noResultsText)
         return this.genEmptyWrapper(noResults)
       }
@@ -198,7 +198,7 @@ export default Themeable.extend({
       return null
     },
     genItems (props: DataProps) {
-      const empty = this.genEmpty(props.pagination.itemsLength)
+      const empty = this.genEmpty(props.originalItemsLength, props.pagination.itemsLength)
       if (empty) return [empty]
 
       if (this.$scopedSlots.default) {

@@ -18,6 +18,8 @@ describe('VOverflowBtn.js', () => {
     mountFunction = (options = {}) => {
       return mount(VOverflowBtn, {
         ...options,
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
         mocks: {
           $vuetify: {
             lang: {

@@ -49,9 +49,5 @@ export default baseMixins.extend({
 
       return this.$createElement(tag, data, this.showLazyContent(this.genDefaultSlot()))
     },
-    onBeforeEnter () { /* noop */ },
-    onEnter () { /* noop */ },
-    onAfterEnter () { /* noop */ },
-    onEnterCancelled () { /* noop */ },
   },
 })

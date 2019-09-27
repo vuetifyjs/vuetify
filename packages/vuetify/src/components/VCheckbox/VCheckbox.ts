@@ -85,7 +85,7 @@ export default Selectable.extend({
         staticClass: 'v-input--selection-controls__input',
       }, [
         this.genInput('checkbox', {
-          ...this.$attrs,
+          ...this.attrs$,
           'aria-checked': this.inputIndeterminate
             ? 'mixed'
             : this.isActive.toString(),
