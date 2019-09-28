@@ -1,6 +1,7 @@
 import '../../stylus/components/_progress-circular.styl'
 
 // Mixins
+import BindsAttrs from '../../mixins/binds-attrs'
 import Colorable from '../../mixins/colorable'
 import mixins from '../../util/mixins'
 
@@ -8,7 +9,7 @@ import mixins from '../../util/mixins'
 import { CreateElement, VNode, VNodeChildrenArrayContents } from 'vue'
 
 /* @vue/component */
-export default mixins(Colorable).extend({
+export default mixins(BindsAttrs, Colorable).extend({
   name: 'v-progress-circular',
 
   props: {
@@ -144,7 +145,7 @@ export default mixins(Colorable).extend({
       },
       class: this.classes,
       style: this.styles,
-      on: this.$listeners
+      on: this.listeners$
     }), [svg, info])
   }
 })

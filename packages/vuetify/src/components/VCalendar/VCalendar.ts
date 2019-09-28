@@ -5,6 +5,7 @@
 import { VNode, Component } from 'vue'
 
 // Mixins
+import BindsAttrs from '../../mixins/binds-attrs'
 import CalendarBase from './mixins/calendar-base'
 
 // Util
@@ -31,6 +32,7 @@ import {
 import VCalendarMonthly from './VCalendarMonthly'
 import VCalendarDaily from './VCalendarDaily'
 import VCalendarWeekly from './VCalendarWeekly'
+import mixins from '../../util/mixins'
 
 // Types
 interface VCalendarRenderProps {
@@ -41,7 +43,7 @@ interface VCalendarRenderProps {
 }
 
 /* @vue/component */
-export default CalendarBase.extend({
+export default mixins(BindsAttrs, CalendarBase).extend({
   name: 'v-calendar',
 
   props: {
@@ -194,12 +196,12 @@ export default CalendarBase.extend({
         maxDays
       },
       on: {
-        ...this.$listeners,
+        ...this.listeners$,
         'click:date': (day: VTimestamp) => {
-          if (this.$listeners['input']) {
+          if (this.listeners$['input']) {
             this.$emit('input', day.date)
           }
-          if (this.$listeners['click:date']) {
+          if (this.listeners$['click:date']) {
             this.$emit('click:date', day)
           }
         }

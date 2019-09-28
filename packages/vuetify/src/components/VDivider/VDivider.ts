@@ -5,9 +5,11 @@ import '../../stylus/components/_dividers.styl'
 import { VNode } from 'vue'
 
 // Mixins
+import BindsAttrs from '../../mixins/binds-attrs'
 import Themeable from '../../mixins/themeable'
+import mixins from '../../util/mixins'
 
-export default Themeable.extend({
+export default mixins(BindsAttrs, Themeable).extend({
   name: 'v-divider',
 
   props: {
@@ -23,8 +25,8 @@ export default Themeable.extend({
         'v-divider--vertical': this.vertical,
         ...this.themeClasses
       },
-      attrs: this.$attrs,
-      on: this.$listeners
+      attrs: this.attrs$,
+      on: this.listeners$
     })
   }
 })

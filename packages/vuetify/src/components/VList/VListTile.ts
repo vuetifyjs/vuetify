@@ -1,4 +1,5 @@
 // Mixins
+import BindsAttrs from '../../mixins/binds-attrs'
 import Colorable from '../../mixins/colorable'
 import Routable from '../../mixins/routable'
 import Toggleable from '../../mixins/toggleable'
@@ -13,6 +14,7 @@ import { VNode } from 'vue'
 
 /* @vue/component */
 export default mixins(
+  BindsAttrs,
   Colorable,
   Routable,
   Toggleable,
@@ -77,7 +79,7 @@ export default mixins(
       }
     }
 
-    data.attrs = Object.assign({}, data.attrs, this.$attrs)
+    data.attrs = Object.assign({}, data.attrs, this.attrs$)
     return h('div', this.setTextColor(!this.disabled && this.isActive && this.color, {
       class: this.listClasses,
       attrs: {

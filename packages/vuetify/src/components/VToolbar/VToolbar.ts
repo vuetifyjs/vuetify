@@ -2,6 +2,7 @@
 import '../../stylus/components/_toolbar.styl'
 
 // Mixins
+import BindsAttrs from '../../mixins/binds-attrs'
 import Applicationable from '../../mixins/applicationable'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
@@ -23,6 +24,7 @@ export default mixins(
     'invertedScroll',
     'manualScroll'
   ]),
+  BindsAttrs,
   Colorable,
   SSRBootable,
   Themeable
@@ -239,7 +241,7 @@ export default mixins(
     const data = this.setBackgroundColor(this.color, {
       'class': this.classes,
       style: this.styles,
-      on: this.$listeners
+      on: this.listeners$
     })
 
     data.directives = [{

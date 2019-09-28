@@ -2,6 +2,7 @@
 import '../../stylus/components/_badges.styl'
 
 // Mixins
+import BindsAttrs from '../../mixins/binds-attrs'
 import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
 import { factory as PositionableFactory } from '../../mixins/positionable'
@@ -12,6 +13,7 @@ import { VNode } from 'vue'
 import mixins from '../../util/mixins'
 
 export default mixins(
+  BindsAttrs,
   Colorable,
   Toggleable,
   PositionableFactory(['left', 'bottom']),
@@ -48,7 +50,7 @@ export default mixins(
   render (h): VNode {
     const badge = this.$slots.badge && [h('span', this.setBackgroundColor(this.color, {
       staticClass: 'v-badge__badge',
-      attrs: this.$attrs,
+      attrs: this.attrs$,
       directives: [{
         name: 'show',
         value: this.isActive

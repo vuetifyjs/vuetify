@@ -45,8 +45,8 @@ export default {
 
       const data = {
         'class': this.contentClass,
-        attrs: this.$attrs,
-        on: this.$listeners,
+        attrs: this.attrs$,
+        on: this.listeners$,
         props: this.contentProps
       }
 

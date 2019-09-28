@@ -1,6 +1,7 @@
 import '../../stylus/components/_responsive.styl'
 
 // Mixins
+import BindsAttrs from '../../mixins/binds-attrs'
 import Measurable, { NumberOrNumberString } from '../../mixins/measurable'
 
 // Types
@@ -10,7 +11,7 @@ import { VNode } from 'vue'
 import mixins from '../../util/mixins'
 
 /* @vue/component */
-export default mixins(Measurable).extend({
+export default mixins(Measurable, BindsAttrs).extend({
   name: 'v-responsive',
 
   props: {
@@ -48,7 +49,7 @@ export default mixins(Measurable).extend({
     return h('div', {
       staticClass: 'v-responsive',
       style: this.measurableStyles,
-      on: this.$listeners
+      on: this.listeners$
     }, [
       this.__cachedSizer,
       this.genContent()

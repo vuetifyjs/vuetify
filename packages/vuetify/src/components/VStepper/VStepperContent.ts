@@ -5,6 +5,7 @@ import {
 } from '../transitions'
 
 // Mixins
+import BindsAttrs from '../../mixins/binds-attrs'
 import { Registrable, inject as RegistrableInject } from '../../mixins/registrable'
 
 // Helpers
@@ -26,11 +27,13 @@ interface options extends Vue {
 export default mixins<options &
 /* eslint-disable indent */
   ExtractVue<[
-    Registrable<'stepper'>
+    Registrable<'stepper'>,
+    typeof BindsAttrs
   ]>
 /* eslint-enable indent */
 >(
-  RegistrableInject('stepper', 'v-stepper-content', 'v-stepper')
+  RegistrableInject('stepper', 'v-stepper-content', 'v-stepper'),
+  BindsAttrs
 /* @vue/component */
 ).extend({
   name: 'v-stepper-content',
@@ -170,7 +173,7 @@ export default mixins<options &
     const content = h('div', contentData, [wrapper])
 
     return h(this.computedTransition, {
-      on: this.$listeners
+      on: this.listeners$
     }, [content])
   }
 })

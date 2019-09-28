@@ -3,6 +3,7 @@ import VIcon from '../VIcon'
 import VList from './VList'
 
 // Mixins
+import BindsAttrs from '../../mixins/binds-attrs'
 import Bootable from '../../mixins/bootable'
 import Toggleable from '../../mixins/toggleable'
 import { Registrable, inject as RegistrableInject } from '../../mixins/registrable'
@@ -28,12 +29,14 @@ interface options extends Vue {
 export default mixins<options &
 /* eslint-disable indent */
   ExtractVue<[
+    typeof BindsAttrs,
     typeof Bootable,
     typeof Toggleable,
     Registrable<'list'>
   ]>
 /* eslint-enable indent */
 >(
+  BindsAttrs,
   Bootable,
   RegistrableInject('list', 'v-list-group', 'v-list'),
   Toggleable
@@ -144,7 +147,7 @@ export default mixins<options &
         staticClass: 'v-list__group__header',
         class: this.headerClasses,
         on: {
-          ...this.$listeners,
+          ...this.listeners$,
           click: this.click
         },
         ref: 'item'

@@ -16,10 +16,10 @@ export default VWindowItem.extend({
         this.$createElement(VImg, {
           staticClass: 'v-carousel__item',
           props: {
-            ...this.$attrs,
+            ...this.attrs$,
             height: this.windowGroup.internalHeight
           },
-          on: this.$listeners
+          on: this.listeners$
         }, this.$slots.default)
       ]
     },

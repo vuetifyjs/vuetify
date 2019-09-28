@@ -2,6 +2,7 @@
 import '../../stylus/components/_subheaders.styl'
 
 // Mixins
+import BindsAttrs from '../../mixins/binds-attrs'
 import Themeable from '../../mixins/themeable'
 import mixins from '../../util/mixins'
 
@@ -9,6 +10,7 @@ import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 
 export default mixins(
+  BindsAttrs,
   Themeable
   /* @vue/component */
 ).extend({
@@ -25,8 +27,8 @@ export default mixins(
         'v-subheader--inset': this.inset,
         ...this.themeClasses
       },
-      attrs: this.$attrs,
-      on: this.$listeners
+      attrs: this.attrs$,
+      on: this.listeners$
     }, this.$slots.default)
   }
 })
