@@ -48,11 +48,13 @@
         </v-col>
         <v-row
           class="pa-4"
-          align="start"
-          justify="end"
+          align="center"
+          justify="center"
         >
-          <h3 class="headline">{{ name }}</h3>
-          <span class="grey--text text--lighten-1">{{ title }}</span>
+          <v-col class="text-center">
+            <h3 class="headline">{{ name }}</h3>
+            <span class="grey--text text--lighten-1">{{ title }}</span>
+          </v-col>
         </v-row>
       </v-row>
     </v-img>
