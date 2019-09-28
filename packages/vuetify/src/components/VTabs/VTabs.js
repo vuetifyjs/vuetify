@@ -114,7 +114,7 @@ export default BaseItemGroup.extend({
     // painted
     init () {
       /* istanbul ignore next */
-      if (this.$listeners['input']) {
+      if (this.listeners$['input']) {
         deprecate('@input', '@change', this)
       }
     },

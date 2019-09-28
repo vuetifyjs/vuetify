@@ -419,20 +419,20 @@ export default VTextField.extend({
       // TODO: remove (2.0)
       const inheritedProps = Object.keys(VMenu.options.props)
 
-      const deprecatedProps = Object.keys(this.$attrs).reduce((acc, attr) => {
+      const deprecatedProps = Object.keys(this.attrs$).reduce((acc, attr) => {
         if (inheritedProps.includes(camelize(attr))) acc.push(attr)
         return acc
       }, [])
 
       for (const prop of deprecatedProps) {
-        props[camelize(prop)] = this.$attrs[prop]
+        props[camelize(prop)] = this.attrs$[prop]
       }
 
       if (process.env.NODE_ENV !== 'production') {
         if (deprecatedProps.length) {
           const multiple = deprecatedProps.length > 1
           let replacement = deprecatedProps.reduce((acc, p) => {
-            acc[camelize(p)] = this.$attrs[p]
+            acc[camelize(p)] = this.attrs$[p]
             return acc
           }, {})
           const props = deprecatedProps.map(p => `'${p}'`).join(', ')

@@ -22,7 +22,6 @@ import { VNodeDirective } from 'vue/types/vnode'
 
 export default VWindow.extend({
   name: 'v-carousel',
-
   props: {
     cycle: {
       type: Boolean,

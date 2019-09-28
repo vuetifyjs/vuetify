@@ -6,6 +6,7 @@ import VIcon from '../VIcon'
 import VLabel from '../VLabel'
 
 // Mixins
+import BindsAttrs from '../../mixins/binds-attrs'
 import Colorable from '../../mixins/colorable'
 import Rippleable from '../../mixins/rippleable'
 import Themeable from '../../mixins/themeable'
@@ -19,6 +20,7 @@ export default {
   name: 'v-radio',
 
   mixins: [
+    BindsAttrs,
     Colorable,
     Rippleable,
     RegistrableInject('radio', 'v-radio', 'v-radio-group'),
@@ -118,7 +120,7 @@ export default {
         this.genInput('radio', {
           name: this.radio.name || (this.radio._uid ? 'v-radio-' + this.radio._uid : false),
           value: this.value,
-          ...this.$attrs
+          ...this.attrs$
         }),
         this.genRipple(this.setTextColor(this.computedColor)),
         this.$createElement(VIcon, this.setTextColor(this.computedColor, {

@@ -5,9 +5,11 @@ import Toggleable from '../../mixins/toggleable'
 import { factory as PositionableFactory } from '../../mixins/positionable'
 
 import mixins from '../../util/mixins'
+import BindsAttrs from '../../mixins/binds-attrs'
 import { VNode } from 'vue'
 
 export default mixins(
+  BindsAttrs,
   Colorable,
   Toggleable,
   PositionableFactory(['absolute', 'top', 'bottom', 'left', 'right'])
@@ -77,7 +79,7 @@ export default mixins(
       h('div', {
         staticClass: 'v-snack',
         class: this.classes,
-        on: this.$listeners
+        on: this.listeners$
       }, [
         h('div', this.setBackgroundColor(this.color, {
           staticClass: 'v-snack__wrapper'

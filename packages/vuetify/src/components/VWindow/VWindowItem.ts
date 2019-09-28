@@ -2,6 +2,7 @@
 import VWindow from './VWindow'
 
 // Mixins
+import BindsAttrs from '../../mixins/binds-attrs'
 import Bootable from '../../mixins/bootable'
 import { factory as GroupableFactory } from '../../mixins/groupable'
 
@@ -23,8 +24,9 @@ interface options extends Vue {
   windowGroup: VBaseWindow
 }
 
-export default mixins<options & ExtractVue<[typeof Bootable]>>(
+export default mixins<options & ExtractVue<[typeof Bootable, typeof BindsAttrs]>>(
   Bootable,
+  BindsAttrs,
   GroupableFactory('windowGroup', 'v-window-item', 'v-window')
   /* @vue/component */
 ).extend({
@@ -140,7 +142,7 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
         name: 'show',
         value: this.isActive
       }],
-      on: this.$listeners
+      on: this.listeners$
     }, this.showLazyContent(this.genDefaultSlot()))
 
     return h('transition', {

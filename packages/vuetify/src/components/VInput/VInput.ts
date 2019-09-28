@@ -9,6 +9,7 @@ import VMessages from '../VMessages'
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
+import BindsAttrs from '../../mixins/binds-attrs'
 import Validatable from '../../mixins/validatable'
 
 // Utilities
@@ -31,13 +32,15 @@ export default mixins<options &
   ExtractVue<[
     typeof Colorable,
     typeof Themeable,
-    typeof Validatable
+    typeof Validatable,
+    typeof BindsAttrs
   ]>
 /* eslint-enable indent */
 >(
   Colorable,
   Themeable,
-  Validatable
+  Validatable,
+  BindsAttrs
   /* @vue/component */
 ).extend({
   name: 'v-input',
@@ -176,7 +179,7 @@ export default mixins<options &
           disabled: this.disabled,
           light: this.light
         },
-        on: !(this.$listeners[eventName] || cb)
+        on: !(this.listeners$[eventName] || cb)
           ? undefined
           : {
             click: (e: Event) => {
@@ -227,7 +230,7 @@ export default mixins<options &
           color: this.validationState,
           dark: this.dark,
           focused: this.hasState,
-          for: this.$attrs.id,
+          for: this.attrs$.id,
           light: this.light
         }
       }, this.$slots.label || this.label)

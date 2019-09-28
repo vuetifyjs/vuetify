@@ -8,12 +8,13 @@ import mixins from '../../util/mixins'
 import VIcon from '../VIcon'
 
 // Mixins
+import BindsAttrs from '../../mixins/binds-attrs'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 import Toggleable from '../../mixins/toggleable'
 
 /* @vue/component */
-export default mixins(Colorable, Themeable, Toggleable).extend({
+export default mixins(BindsAttrs, Colorable, Themeable, Toggleable).extend({
   name: 'v-chip',
 
   props: {
@@ -81,7 +82,7 @@ export default mixins(Colorable, Themeable, Toggleable).extend({
         name: 'show',
         value: this.isActive
       }],
-      on: this.$listeners
+      on: this.listeners$
     })
 
     const color = this.textColor || (this.outline && this.color)

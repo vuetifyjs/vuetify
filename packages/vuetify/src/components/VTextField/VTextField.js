@@ -264,7 +264,7 @@ export default VInput.extend({
       return this.genSlot('append', 'inner', [
         this.genIcon(
           icon,
-          (!this.$listeners['click:clear'] && this.clearIconCb) || this.clearableCallback,
+          (!this.listeners$['click:clear'] && this.clearIconCb) || this.clearableCallback,
           false
         )
       ])
@@ -272,7 +272,7 @@ export default VInput.extend({
     genCounter () {
       if (this.counter === false || this.counter == null) return null
 
-      const max = this.counter === true ? this.$attrs.maxlength : this.counter
+      const max = this.counter === true ? this.attrs$.maxlength : this.counter
 
       return this.$createElement(VCounter, {
         props: {
@@ -308,12 +308,12 @@ export default VInput.extend({
         }
       }
 
-      if (this.$attrs.id) data.props.for = this.$attrs.id
+      if (this.attrs$.id) data.props.for = this.attrs$.id
 
       return this.$createElement(VLabel, data, this.$slots.label || this.label)
     },
     genInput () {
-      const listeners = Object.assign({}, this.$listeners)
+      const listeners = Object.assign({}, this.listeners$)
       delete listeners['change'] // Change should not be bound externally
 
       const data = {
@@ -322,8 +322,8 @@ export default VInput.extend({
           value: this.maskText(this.lazyValue)
         },
         attrs: {
-          'aria-label': (!this.$attrs || !this.$attrs.id) && this.label, // Label `for` will be set if we have an id
-          ...this.$attrs,
+          'aria-label': (!this.attrs$ || !this.attrs$.id) && this.label, // Label `for` will be set if we have an id
+          ...this.attrs$,
           autofocus: this.autofocus,
           disabled: this.disabled,
           readonly: this.readonly,

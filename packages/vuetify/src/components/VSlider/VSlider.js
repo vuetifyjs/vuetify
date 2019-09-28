@@ -247,14 +247,14 @@ export default VInput.extend({
           'aria-label': this.label,
           name: this.name,
           role: 'slider',
-          tabindex: this.disabled ? -1 : this.$attrs.tabindex,
+          tabindex: this.disabled ? -1 : this.attrs$.tabindex,
           value: this.internalValue,
           readonly: true,
           'aria-readonly': String(this.readonly),
           'aria-valuemin': this.min,
           'aria-valuemax': this.max,
           'aria-valuenow': this.internalValue,
-          ...this.$attrs
+          ...this.attrs$
         },
         on: this.genListeners(),
         ref: 'input'

@@ -1,5 +1,6 @@
 import '../../stylus/components/_icons.styl'
 // Mixins
+import BindsAttrs from '../../mixins/binds-attrs'
 import Colorable from '../../mixins/colorable'
 import Sizeable from '../../mixins/sizeable'
 import Themeable from '../../mixins/themeable'
@@ -23,6 +24,7 @@ function isFontAwesome5 (iconType: string): boolean {
 }
 
 const VIcon = mixins(
+  BindsAttrs,
   Colorable,
   Sizeable,
   Themeable
@@ -62,14 +64,14 @@ const VIcon = mixins(
         class: {
           'v-icon--disabled': this.disabled,
           'v-icon--left': this.left,
-          'v-icon--link': this.$listeners.click || this.$listeners['!click'],
+          'v-icon--link': this.listeners$.click || this.listeners$['!click'],
           'v-icon--right': this.right
         },
         attrs: {
           'aria-hidden': true,
-          ...this.$attrs
+          ...this.attrs$
         },
-        on: this.$listeners
+        on: this.listeners$
       }
 
       return data

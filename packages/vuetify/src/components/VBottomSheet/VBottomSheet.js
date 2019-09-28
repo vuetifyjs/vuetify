@@ -35,7 +35,7 @@ export default {
         ...this.$props
       },
       on: {
-        ...this.$listeners
+        ...this.listeners$
       },
       props: {
         contentClass,

@@ -2,6 +2,7 @@
 import '../../stylus/components/_parallax.styl'
 
 // Mixins
+import BindsAttrs from '../../mixins/binds-attrs'
 import Translatable from '../../mixins/translatable'
 
 // Types
@@ -16,7 +17,7 @@ interface options extends Vue {
 }
 
 /* @vue/component */
-export default mixins<options & ExtractVue<typeof Translatable>>(Translatable).extend({
+export default mixins<options & ExtractVue<[typeof BindsAttrs, typeof Translatable]>>(Translatable, BindsAttrs).extend({
   name: 'v-parallax',
 
   props: {
@@ -102,7 +103,7 @@ export default mixins<options & ExtractVue<typeof Translatable>>(Translatable).e
       style: {
         height: `${this.height}px`
       },
-      on: this.$listeners
+      on: this.listeners$
     }, [container, content])
   }
 })

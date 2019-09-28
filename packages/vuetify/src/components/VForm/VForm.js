@@ -1,13 +1,14 @@
 // Styles
 import '../../stylus/components/_forms.styl'
 
+import BindsAttrs from '../../mixins/binds-attrs'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 /* @vue/component */
 export default {
   name: 'v-form',
 
-  mixins: [RegistrableProvide('form')],
+  mixins: [BindsAttrs, RegistrableProvide('form')],
 
   inheritAttrs: false,
 
@@ -119,7 +120,7 @@ export default {
       staticClass: 'v-form',
       attrs: Object.assign({
         novalidate: true
-      }, this.$attrs),
+      }, this.attrs$),
       on: {
         submit: e => this.$emit('submit', e)
       }

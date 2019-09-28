@@ -1,6 +1,7 @@
 import '../../stylus/components/_progress-linear.styl'
 
 // Mixins
+import BindsAttrs from '../../mixins/binds-attrs'
 import Colorable from '../../mixins/colorable'
 
 // Helpers
@@ -16,7 +17,7 @@ import {
 } from '../transitions'
 
 /* @vue/component */
-export default mixins(Colorable).extend({
+export default mixins(BindsAttrs, Colorable).extend({
   name: 'v-progress-linear',
 
   props: {
@@ -176,7 +177,7 @@ export default mixins(Colorable).extend({
       style: {
         height: convertToUnit(this.height)
       },
-      on: this.$listeners
+      on: this.listeners$
     }, [
       background,
       bar,
