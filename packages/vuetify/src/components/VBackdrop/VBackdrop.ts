@@ -49,6 +49,7 @@ export default mixins(
       attributes: true,
       childList: true,
       subtree: true,
+      characterData: true,
     })
   },
 
