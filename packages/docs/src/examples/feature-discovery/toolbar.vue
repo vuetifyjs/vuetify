@@ -22,7 +22,7 @@
       </v-btn>
     </v-toolbar>
 
-    <v-layout class="my-4" row justify-space-around align-center>
+    <v-row class="my-4" justify="space-around" align="center">
       <v-btn color="green" large @click="model1 = !model1">Toggle 1</v-btn>
       <v-feature-discovery
         v-model="model1"
@@ -77,7 +77,7 @@
           <v-btn class="mx-1" outline color="white" @click="close">Lesser action</v-btn>
         </template>
       </v-feature-discovery>
-    </v-layout>
+    </v-row>
   </div>
 </template>
 

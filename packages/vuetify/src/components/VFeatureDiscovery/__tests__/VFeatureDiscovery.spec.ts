@@ -124,7 +124,7 @@ describe('FeatureDiscovery.ts', () => {
     wrapper.setData({
       isActive: true,
     })
-    wrapper.vm.updateDimensions = jest.fn()
+    jest.spyOn(wrapper.vm, 'updateDimensions')
 
     wrapper.vm.onResize()
     jest.runAllTimers()

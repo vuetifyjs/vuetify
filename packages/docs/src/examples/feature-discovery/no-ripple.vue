@@ -1,5 +1,5 @@
 <template>
-  <v-layout row justify-space-between align-center>
+  <v-row justify="space-between" align="center">
     <v-switch v-model="noRipple" label="No ripple"></v-switch>
     <v-btn id="target6" color="green" large @click="model = !model">Toggle</v-btn>
     <v-feature-discovery
@@ -20,7 +20,7 @@
         <v-btn class="mx-1" outline color="white" @click="close">Lesser action</v-btn>
       </template>
     </v-feature-discovery>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

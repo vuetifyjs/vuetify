@@ -1,5 +1,5 @@
 <template>
-  <v-layout row justify-space-between align-center>
+  <v-row justify="space-between" align="center">
     <div>
       <v-switch v-model="persistent" label="Persistent"></v-switch>
       <v-switch v-model="model" label="Model"></v-switch>
@@ -23,7 +23,7 @@
         <v-btn class="mx-1" outline color="white" @click="close">Lesser action</v-btn>
       </template>
     </v-feature-discovery>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

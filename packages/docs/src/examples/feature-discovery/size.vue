@@ -1,5 +1,5 @@
 <template>
-  <v-layout row justify-center align-center>
+  <v-row justify="center" align="center">
     <v-btn id="target8" color="green" large @click="model = !model">Toggle</v-btn>
     <v-feature-discovery
       v-model="model"
@@ -19,7 +19,7 @@
         <v-btn class="mx-1" outline color="white" @click="close">Lesser action</v-btn>
       </template>
     </v-feature-discovery>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>
