@@ -72,7 +72,7 @@
 
     provide () {
       return {
-        id: this.id
+        id: this.id,
       }
     },
 
