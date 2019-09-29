@@ -17,6 +17,14 @@
   import kebabCase from 'lodash/kebabCase'
 
   export default {
+    name: 'DocSection',
+
+    provide () {
+      return {
+        id: this.id,
+      }
+    },
+
     props: {
       value: {
         type: Object,
