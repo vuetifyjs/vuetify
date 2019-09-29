@@ -11,41 +11,6 @@ module.exports = {
         default: 'undefined',
         type: 'function',
       },
-      {
-        name: 'attributeFilter',
-        default: 'undefined',
-        type: 'string[]',
-      },
-      {
-        name: 'attributeOldValue',
-        default: 'false',
-        type: 'boolean',
-      },
-      {
-        name: 'attributes',
-        default: 'true',
-        type: 'boolean',
-      },
-      {
-        name: 'characterData',
-        default: 'true',
-        type: 'boolean',
-      },
-      {
-        name: 'characterDataOldValue',
-        default: 'false',
-        type: 'boolean',
-      },
-      {
-        name: 'childList',
-        default: 'true',
-        type: 'boolean',
-      },
-      {
-        name: 'subtree',
-        default: 'false',
-        type: 'boolean',
-      },
     ],
   },
 }

@@ -12,13 +12,6 @@
   },
   "options": {
     "modifiers.once": "Will only invoke the provided user callback once, then directive will be unbound.",
-    "value": "The function to invoke when the target element is updated.",
-    "attributeFilter": "An array of specific attribute names to be monitored.",
-    "attributeOldValue": "Set to true to record the previous value of any attribute that changes when monitoring the node or nodes for attribute changes.",
-    "attributes": "Set to true to watch for changes to the value of attributes.",
-    "characterData": "Set to true to monitor the specified target node or subtree for changes to the character data.",
-    "characterDataOldValue": "Set to true to record the previous value of a node's text whenever the text changes.",
-    "childList": "Set to true to monitor the target node (and, if subtree is true, its descendants) for the addition of new child nodes or removal of existing child nodes.",
-    "subtree": "Set to true to extend monitoring to the entire subtree of nodes rooted at target."
+    "value": "The function to invoke when the target element is updated."
   }
 }
