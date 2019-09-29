@@ -25,6 +25,17 @@
       "type": "section",
       "children": [
         {
+          "type": "examples",
+          "value": [
+            "simple/once"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "up-next",
           "value": [
             "components/sheets",
