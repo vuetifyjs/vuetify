@@ -35,6 +35,7 @@ export function getComponent (type) {
     case 'up-next': return 'doc-up-next'
     case 'usage': return 'doc-usage'
     case 'locales': return 'doc-locales'
+    case 'variable-api': return 'doc-variable-api'
     default: return type
   }
 }

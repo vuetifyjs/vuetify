@@ -48,6 +48,7 @@
           if (child.type === 'playground' || child.type === 'playground-new') return 'playground'
           if (child.type === 'up-next') return 'up-next'
           if (child.type === 'usage') return 'usage'
+          if (child.type === 'variable-api') return 'variable-api'
         }
 
         if (!lang) return undefined
