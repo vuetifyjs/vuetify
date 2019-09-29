@@ -1,5 +1,6 @@
 export { ClickOutside } from './click-outside'
 export { Intersect } from './intersect'
+export { Mutate } from './mutate'
 export { Resize } from './resize'
 export { Ripple } from './ripple'
 export { Scroll } from './scroll'
