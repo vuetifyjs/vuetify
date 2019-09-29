@@ -224,6 +224,15 @@ describe('VPagination.ts', () => {
     expect(pagination.vm.maxButtons).toBe(-3)
   })
 
+  it('should check the parent class list and return the appropriate ancestor count for obtaining container width', () => {
+    const wrapper = mount({
+      functional: true,
+      render: h => h('div', { attrs: { class: 'v-expansion-panel-content__wrap' } }, [h(VPagination)]),
+    })
+    const pagination = wrapper.find(VPagination.options)
+    expect(pagination.vm.checkParent()).toBe(3)
+  })
+
   // https://github.com/vuetifyjs/vuetify/issues/7947
   it('should never show more than the max number of allowed buttons', () => {
     const wrapper = mountFunction({
