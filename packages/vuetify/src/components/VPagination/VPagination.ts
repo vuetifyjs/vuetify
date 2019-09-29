@@ -115,18 +115,39 @@ export default mixins(Colorable, Themeable).extend({
     onResize () {
       let width
       if (this.$el && this.$el.parentElement) {
-        if (Object.values(this.$el.parentElement.classList).includes('v-expansion-panel-content__wrap')) {
-          width = this.$el.parentElement.parentElement && this.$el.parentElement.parentElement.parentElement
-            ? this.$el.parentElement.parentElement.parentElement.clientWidth
-            : 0
-        } else {
-          width = this.$el.parentElement.clientWidth
-        }
+        width = this.getContainerWidth(this.checkParent())
       } else {
         width = window.innerWidth
       }
-
       this.maxButtons = Math.floor((width - 96) / 42)
+    },
+    checkParent () {
+      if (!this.$el || !this.$el.parentElement) {
+        return 0
+      }
+      // set parent classes as keys in this object
+      // that require looking to a more distant ancestor for clientWidth
+      // along with the number of generations back in the DOM tree to go
+      const classToAncestorCount: { [k: string]: number } = {
+        'v-expansion-panel-content__wrap': 3,
+      }
+      const classList = Object.values(this.$el.parentElement.classList)
+      let ancestorCount = 1
+      for (const c of classList) {
+        if (classToAncestorCount[c]) {
+          ancestorCount = classToAncestorCount[c]
+          break
+        }
+      }
+      return ancestorCount
+    },
+    getContainerWidth (ancestorCount: number) {
+      let container = this.$el
+      while (ancestorCount > 0 && container && container.parentElement) {
+        container = container.parentElement
+        ancestorCount--
+      }
+      return container.clientWidth
     },
     next (e: Event) {
       e.preventDefault()
