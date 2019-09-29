@@ -25,6 +25,7 @@ export default mixins(
       default: 4,
       validator: v => !isNaN(Number(v)),
     },
+    flat: Boolean,
   },
 
   data: () => ({
@@ -32,6 +33,12 @@ export default mixins(
     collapsedHeight: 0,
     observer: null as MutationObserver | null,
   }),
+
+  computed: {
+    computedElevation (): string | number | undefined {
+      return this.flat ? undefined : this.elevation
+    },
+  },
 
   mounted () {
     this.measure()
