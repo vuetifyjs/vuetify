@@ -6,7 +6,7 @@
       "desc": "Update content of `v-sheet` using text field and watch the mutations counter."
     },
     "once": {
-      "header": "## `.once` modifier",
+      "header": "### `.once` modifier",
       "desc": "When `v-mutate` is applied with `.once` modifier, it'll unbind itself from element after first mutation."
     }
   },
