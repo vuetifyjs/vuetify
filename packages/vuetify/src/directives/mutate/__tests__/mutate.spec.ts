@@ -4,13 +4,17 @@ import Mutate from '../'
 (global as any).MutationObserver = class { // Mock MutationObserver
   _callback: Function
 
+  _observe = jest.fn()
+
   constructor (callback) {
     this._callback = callback
   }
 
   disconnect () {}
 
-  observe () {}
+  observe (_, options) {
+    this._observe(options)
+  }
 
   trigger (evts: MutationRecord[]) { // Trigger this manually in tests
     this._callback(evts, this)
@@ -73,5 +77,54 @@ describe('mutate.ts', () => {
     expect((el as any)._mutate).toBeFalsy()
 
     document.body.removeChild(el)
+  })
+
+  it('should work with object value', () => {
+    const callback = jest.fn()
+    const el = document.createElement('div')
+    document.body.appendChild(el)
+
+    Mutate.inserted(el, {
+      value: {
+        handler: callback,
+        options: {
+          attributes: false,
+          subtree: true,
+        },
+      },
+    } as any)
+
+    ;(el as any)._mutate.observer.trigger([{}])
+
+    expect(callback).toHaveBeenCalledTimes(1)
+    expect((el as any)._mutate.observer._observe).toHaveBeenLastCalledWith({ attributes: false, subtree: true })
+
+    document.body.removeChild(el)
+
+    Mutate.unbind(el)
+  })
+
+  it('should work with observer modifiers', () => {
+    const callback = jest.fn()
+    const el = document.createElement('div')
+    document.body.appendChild(el)
+
+    Mutate.inserted(el, {
+      value: callback,
+      modifiers: {
+        attr: true,
+        child: true,
+        sub: true,
+      },
+    } as any)
+
+    ;(el as any)._mutate.observer.trigger([{}])
+
+    expect(callback).toHaveBeenCalledTimes(1)
+    expect((el as any)._mutate.observer._observe).toHaveBeenLastCalledWith({ attributes: true, childList: true, subtree: true })
+
+    document.body.removeChild(el)
+
+    Mutate.unbind(el)
   })
 })
