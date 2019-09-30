@@ -226,8 +226,8 @@ export default baseMixins.extend<options>().extend({
       })
     },
     clearableCallback () {
-      this.internalValue = null
-      this.$nextTick(() => this.$refs.input && this.$refs.input.focus())
+      this.$refs.input && this.$refs.input.focus()
+      this.$nextTick(() => this.internalValue = null)
     },
     genAppendSlot () {
       const slot = []
@@ -405,7 +405,7 @@ export default baseMixins.extend<options>().extend({
     },
     onBlur (e?: Event) {
       this.isFocused = false
-      e && this.$emit('blur', e)
+      e && this.$nextTick(() => this.$emit('blur', e))
     },
     onClick () {
       if (this.isFocused || this.disabled || !this.$refs.input) return

@@ -64,8 +64,16 @@
   import kebabCase from 'lodash/kebabCase'
 
   export default {
+    name: 'CorePage',
+
     components: {
       NotFound: () => import('@/pages/general/404'),
+    },
+
+    provide () {
+      return {
+        id: this.id,
+      }
     },
 
     data: () => ({

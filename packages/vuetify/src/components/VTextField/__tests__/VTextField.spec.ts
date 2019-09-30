@@ -692,4 +692,48 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
 
     expect(setPrefixWidth).toHaveBeenCalledTimes(2)
   })
+
+  // https://github.com/vuetifyjs/vuetify/pull/8724
+  it('should fire events in correct order when clear icon is clicked and input is not focused', async () => {
+    const calls: string[] = []
+    const change = jest.fn(() => calls.push('change'))
+    const blur = jest.fn(() => calls.push('blur'))
+    const focus = jest.fn(() => calls.push('focus'))
+    const input = jest.fn(() => calls.push('input'))
+
+    const component = {
+      render (h) {
+        return h(VTextField, {
+          on: {
+            change,
+            blur,
+            focus,
+            input,
+          },
+          props: {
+            value: 'test',
+            clearable: true,
+          },
+        })
+      },
+    }
+    const wrapper = mount(component)
+
+    const inputElement = wrapper.findAll('input').at(0)
+    const clearIcon = wrapper.find('.v-input__icon--clear .v-icon')
+
+    clearIcon.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    inputElement.trigger('blur')
+    await wrapper.vm.$nextTick()
+
+    expect(calls).toEqual([
+      'focus',
+      'input',
+      'change',
+      'blur',
+    ])
+    expect(inputElement.element.value).toBe('')
+  })
 })

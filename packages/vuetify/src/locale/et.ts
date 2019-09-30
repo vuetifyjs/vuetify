@@ -1,18 +1,18 @@
 export default {
-  close: 'Close',
+  close: 'Sulge',
   dataIterator: {
     pageText: '{0}-{1} {2}st',
     noResultsText: 'Vastavaid kirjeid ei leitud',
-    loadingText: 'Loading item...',
+    loadingText: 'Andmeid laaditakse...',
   },
   dataTable: {
     itemsPerPageText: 'Ridu leheküljel:',
     ariaLabel: {
-      sortDescending: ': Sorted descending. Activate to remove sorting.',
-      sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.',
+      sortDescending: ': Kahanevalt sorteeritud. Vajuta uuesti sorteerimise eemaldamiseks.',
+      sortAscending: ': Kasvavalt sorteeritud. Vajuta uuesti, et sorteerida kahanevalt.',
+      sortNone: ': Ei ole sorteeritud. Vajuta kasvavalt sorteerimiseks.',
     },
-    sortBy: 'Sort by',
+    sortBy: 'Sorteerimise alus',
   },
   dataFooter: {
     itemsPerPageText: 'Kirjeid leheküljel:',
@@ -34,7 +34,7 @@ export default {
     moreEvents: '{0} veel',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counter: '{0} faili',
+    counterSize: '{0} faili (kokku {1})',
   },
 }

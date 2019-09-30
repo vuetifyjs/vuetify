@@ -54,20 +54,20 @@ describe('VWindowItem.ts', () => {
     const item = wrapper.find(VWindowItem.options)
     // Before enter
     expect(wrapper.vm.isActive).toBeFalsy()
-    expect(wrapper.vm.internalHeight).toBeUndefined()
+    expect(wrapper.vm.transitionHeight).toBeUndefined()
     item.vm.onBeforeTransition()
     expect(wrapper.vm.isActive).toBeTruthy()
-    expect(wrapper.vm.internalHeight).toBe('0px')
+    expect(wrapper.vm.transitionHeight).toBe('0px')
 
     // Enter
     const el = { clientHeight: 50 }
     item.vm.onEnter(el)
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.internalHeight).toBe('50px')
+    expect(wrapper.vm.transitionHeight).toBe('50px')
 
     // After enter
     item.vm.onAfterTransition()
-    expect(wrapper.vm.internalHeight).toBeUndefined()
+    expect(wrapper.vm.transitionHeight).toBeUndefined()
     expect(wrapper.vm.isActive).toBeFalsy()
 
     // Canceling
@@ -121,7 +121,7 @@ describe('VWindowItem.ts', () => {
         reverseTransition: false,
       },
       watch: {
-        internalHeight: heightChanged,
+        transitionHeight: heightChanged,
       },
       slots: {
         default: [VWindowItem],

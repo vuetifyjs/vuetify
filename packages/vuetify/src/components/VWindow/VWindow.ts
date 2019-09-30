@@ -59,8 +59,8 @@ export default BaseItemGroup.extend({
   data () {
     return {
       changedByDelimiters: false,
-      internalHeight: undefined as undefined | string,
-      noHeightReset: false,
+      internalHeight: undefined as undefined | string, // This can be fixed by child class.
+      transitionHeight: undefined as undefined | string, // Intermediate height during transition.
       transitionCount: 0, // Number of windows in transition state.
       isBooted: false,
       isReverse: false,
@@ -130,7 +130,7 @@ export default BaseItemGroup.extend({
           'v-window__container--is-active': this.isActive,
         },
         style: {
-          height: this.internalHeight,
+          height: this.internalHeight || this.transitionHeight,
         },
       }, children)
     },

@@ -64,7 +64,6 @@ export default VWindow.extend({
   data () {
     return {
       internalHeight: this.height,
-      noHeightReset: true,
       slideTimeout: undefined as number | undefined,
     }
   },

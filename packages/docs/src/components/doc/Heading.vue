@@ -1,11 +1,11 @@
 <template functional>
-  <core-goto class="core-goto--heading">
-    <doc-markdown v-bind="$attrs"><slot /></doc-markdown>
-  </core-goto>
+  <core-goto class="core-goto--heading"><slot /></core-goto>
 </template>
 
 <script>
   export default {
+    name: 'DocHeading',
+
     inheritAttrs: false,
   }
 </script>
