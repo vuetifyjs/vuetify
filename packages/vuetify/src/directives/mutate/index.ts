@@ -9,15 +9,32 @@ function inserted (el: HTMLElement, binding: MutateVNodeDirective) {
   const value = binding.value!
   let callback = (mutations: MutationRecord[]) => {}
   let options = {
-    attributes: modifiers.attr,
-    childList: modifiers.child,
-    subtree: modifiers.sub,
-    characterData: modifiers.char,
+    attributes: modifiers.attr || false,
+    childList: modifiers.child || false,
+    subtree: modifiers.sub || false,
+    characterData: modifiers.char || false,
+  }
+
+  if (Object.keys(modifiers).filter(x => (
+    x === 'attr' ||
+    x === 'child' ||
+    x === 'sub' ||
+    x === 'char'
+  )).length === 0) { // There are no option modifiers
+    options = {
+      attributes: true,
+      childList: true,
+      subtree: true,
+      characterData: true,
+    }
   }
 
   if (typeof value === 'object') {
     callback = value.handler
-    options = value.options || options
+    options = {
+      ...options,
+      ...value.options,
+    }
   } else {
     callback = value
   }
