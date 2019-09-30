@@ -559,6 +559,11 @@
     "description": "The intersection observer directive utilizes the Intersection observer API. It allows you to determine when elements are visible on the screen.",
     "keywords": "intersect, vuetify intersect directive, intersection observer directive"
   },
+  "directives/mutate": {
+    "title": "Mutation observer directive",
+    "description": "The mutation observer directive utilizes the Mutation observer API. It allows you to determine when elements are updated.",
+    "keywords": "mutate, vuetify mutate directive, mutation observer directive"
+  },
   "directives/resizing": {
     "title": "Resizing directive",
     "description": "The resize directive provides the ability to conditionally invoke functions when the screen is resized.",

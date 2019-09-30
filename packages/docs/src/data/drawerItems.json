@@ -170,6 +170,7 @@
     "icon": "mdi-function",
     "children": [
       { "new": true, "text": "intersect", "to": "intersect" },
+      { "new": true, "text": "mutate", "to": "mutate" },
       { "text": "resizing", "to": "resizing" },
       { "text": "ripples", "to": "ripples" },
       { "text": "scrolling", "to": "scrolling" },

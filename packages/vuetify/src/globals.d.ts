@@ -46,6 +46,9 @@ declare global {
       init: boolean
       observer: IntersectionObserver
     }
+    _mutate?: {
+      observer: MutationObserver
+    }
     _onScroll?: {
       callback: EventListenerOrEventListenerObject
       options: boolean | AddEventListenerOptions

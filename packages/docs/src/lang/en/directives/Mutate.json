@@ -1,0 +1,21 @@
+{
+  "header": "# Mutation observer",
+  "headerText": "The `v-mutate` directive utilizes the [Mutation Observer API](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver). It provides an easy to use interface for detecting when elements are updated.",
+  "examples": {
+    "usage": {
+      "desc": "By default the `v-mutate` directive will enable all available options in the [Mutation Observer API](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver). This can be modified in one of two ways. You can either pass in object with keys for **handler** and **options** or use the _modifier_ property of the directive, `v-mutate.attr.sub=\"onMutate\"`"
+    },
+    "once": {
+      "header": "### Modifiers",
+      "desc": "The `v-mutate` directive accepts modifiers for all of the available options in the [Mutation Observer API](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver). For brevity, abbreviations are used—**attr** (attributes), **child** (childList), **sub** (subtree) and **char** (characterData)."
+    }
+  },
+  "options": {
+    "modifiers.once": "Will only invoke the provided user callback once, then directive will be unbound.",
+    "modifiers.attr": "Sets the value of [attributes](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/attributes) to true.",
+    "modifiers.child": "Sets the value of [attributes](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/childList) to true.",
+    "modifiers.char": "Sets the value of [attributes](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/characterData) to true.",
+    "modifiers.sub": "Sets the value of [subtree](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/observe#Parameters) to true.",
+    "value": "The function to invoke when the target element is updated."
+  }
+}
