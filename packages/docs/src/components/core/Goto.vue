@@ -35,6 +35,7 @@
 
     inject: {
       id: {
+        type: String,
         default: '',
       },
     },
@@ -50,7 +51,8 @@
       ]),
       ...mapState('route', ['params']),
       href () {
-        return `#${kebabCase(this.id)}`
+        const id = this.id || this.$attrs.id
+        return `#${kebabCase(id)}`
       },
     },
 
