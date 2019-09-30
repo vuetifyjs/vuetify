@@ -8,7 +8,7 @@ exports[`VDataTable/header.ts should generate select 1`] = `
     <i aria-hidden="true"
        class="v-icon notranslate material-icons theme--light"
     >
-      $vuetify.icons.checkboxOff
+      $checkboxOff
     </i>
   </div>
 </div>
@@ -22,7 +22,7 @@ exports[`VDataTable/header.ts should generate select 2`] = `
     <i aria-hidden="true"
        class="v-icon notranslate material-icons theme--light"
     >
-      $vuetify.icons.checkboxOn
+      $checkboxOn
     </i>
   </div>
 </div>
@@ -36,7 +36,7 @@ exports[`VDataTable/header.ts should generate select 3`] = `
     <i aria-hidden="true"
        class="v-icon notranslate material-icons theme--light"
     >
-      $vuetify.icons.checkboxIndeterminate
+      $checkboxIndeterminate
     </i>
   </div>
 </div>
