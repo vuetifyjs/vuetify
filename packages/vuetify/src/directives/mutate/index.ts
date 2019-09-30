@@ -11,7 +11,7 @@ function inserted (el: HTMLElement, binding: MutateVNodeDirective) {
   const callback = isObject ? value.handler : value
   const { once, ...modifierKeys } = modifiers
   const hasModifiers = Object.keys(modifierKeys).length > 0
-  const hasOptions = isObject && value.object
+  const hasOptions = isObject && value.options
 
   // Options take top priority
   const options = hasOptions ? value.options : hasModifiers
