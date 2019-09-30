@@ -6,7 +6,21 @@ interface MutateVNodeDirective extends VNodeDirective {
 
 function inserted (el: HTMLElement, binding: MutateVNodeDirective) {
   const modifiers = binding.modifiers || /* istanbul ignore next */ {}
-  const callback = binding.value!
+  const value = binding.value!
+  let callback = (mutations: MutationRecord[]) => {}
+  let options = {
+    attributes: modifiers.attr,
+    childList: modifiers.child,
+    subtree: modifiers.sub,
+    characterData: modifiers.char,
+  }
+
+  if (typeof value === 'object') {
+    callback = value.handler
+    options = value.options || options
+  } else {
+    callback = value
+  }
 
   const callbackWrapper = (mutations: MutationRecord[]) => {
     /* istanbul ignore if */
@@ -19,13 +33,7 @@ function inserted (el: HTMLElement, binding: MutateVNodeDirective) {
   }
 
   const observer = new MutationObserver(callbackWrapper)
-  observer.observe(el, {
-    attributes: true,
-    childList: true,
-    subtree: true,
-    characterData: true,
-    ...(binding.options || {}),
-  })
+  observer.observe(el, options)
 
   el._mutate = { observer }
 }
