@@ -21,9 +21,9 @@
       "header": "crwdns40086:0crwdne40086:0",
       "desc": "crwdns40088:0crwdne40088:0"
     },
-    "checkboxes-inline-texfield": {
-      "header": "crwdns40090:0crwdne40090:0",
-      "desc": "crwdns40092:0crwdne40092:0"
+    "checkboxes-inline-textfield": {
+      "header": "crwdns43110:0crwdne43110:0",
+      "desc": "crwdns43112:0crwdne43112:0"
     },
     "radios-default": {
       "header": "crwdns40094:0crwdne40094:0",
@@ -93,7 +93,9 @@
     "prepend": "crwdns33726:0crwdne33726:0"
   },
   "events": {
+    "blur": "crwdns43114:0crwdne43114:0",
     "change": "crwdns33728:0crwdne33728:0",
+    "focus": "crwdns43116:0crwdne43116:0",
     "update:indeterminate": "crwdns40142:0crwdne40142:0",
     "update:error": "crwdns33730:0crwdne33730:0"
   }

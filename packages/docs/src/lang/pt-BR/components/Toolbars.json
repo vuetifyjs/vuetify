@@ -13,7 +13,8 @@
     },
     "variations": {
       "header": "Variações",
-      "desc": "Uma barra de aplicativos (app-bar) possui múltiplas variações que podem ser aplicadas com temas e classes de auxílio. Estes variam entre temas claros e escuros, coloridos e transparentes."
+      "desc": "Uma barra de aplicativos (app-bar) possui múltiplas variações que podem ser aplicadas com temas e classes de auxílio. Estes variam entre temas claros e escuros, coloridos e transparentes.",
+      "uninverted": true
     },
     "prominent": {
       "header": "Barras de ferramentas proeminentes (prominent toolbars)"

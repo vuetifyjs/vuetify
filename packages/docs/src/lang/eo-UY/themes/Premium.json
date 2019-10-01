@@ -2,6 +2,7 @@
   "header": "crwdns41540:0crwdne41540:0",
   "headerText": "crwdns42772:0crwdne42772:0",
   "buy": "crwdns35552:0crwdne35552:0",
+  "buyNow": "crwdns43320:0crwdne43320:0",
   "free": "crwdns35554:0crwdne35554:0",
   "live": "crwdns35556:0crwdne35556:0",
   "premium": "crwdns35558:0crwdne35558:0",
@@ -13,8 +14,16 @@
       "description": "crwdns42774:0crwdne42774:0"
     },
     "dashboard": {
-      "title": "crwdns35568:0crwdne35568:0",
+      "title": "crwdns43322:0crwdne43322:0",
       "description": "crwdns35570:0crwdne35570:0"
+    },
+    "dashboard-pro": {
+      "title": "crwdns43324:0crwdne43324:0",
+      "description": "crwdns43326:0crwdne43326:0"
+    },
+    "shopify-e-commerce": {
+      "title": "crwdns43328:0crwdne43328:0",
+      "description": "crwdns43330:0crwdne43330:0"
     },
     "freelancer": {
       "title": "crwdns35572:0crwdne35572:0",

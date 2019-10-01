@@ -10,7 +10,6 @@
       "title": "Alpha主题"
     },
     "dashboard": {
-      "title": "Material风格面板",
       "description": "Vuetify的Vuetify风格面板是一个以Vuetify，Vuex和Vuejs打造的精美的材料包。该材料包将帮助你立即开始开发面板。"
     },
     "material-kit": {

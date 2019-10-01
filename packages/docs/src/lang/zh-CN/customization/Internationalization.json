@@ -1,1 +1,19 @@
-{}
+{
+  "header": "# 国际化 (i18n)",
+  "headerText": "Vuifiefy支持组件的语言国际化 (i18n)。当启动应用程序时，您可以指定可用的区域和当前活动的区域选项 **current** 选项。 ** lang **服务还支持与[vue-i18n](＃vue-i18n)轻松集成。",
+  "gettingStarted": "快速入门",
+  "gettingStartedText": "要设置可用的语言环境或当前语言环境，请在安装Vuetify时提供`lang`选项。 提供的`locales`属性将与现有的语言环境合并。 您可以在运行时通过Vue实例上的`$vuetify`对象更改语言环境。",
+  "availableLocalesText": "目前, Vuetify 提供以下语言的翻译:",
+  "createTranslation": "## 创建翻译",
+  "createTranslationText": "若要创建自己的翻译, 请使用下面的代码或复制并重命名 `vuetify/src/locale/en.ts` 文件到您的项目并进行更改。",
+  "customComponents": "## 自定义组件",
+  "customComponentsText": "如果要构建需要国际化引擎的自定义Vuetify组件，可以使用`t`函数，该函数是`$vuetify.lang` API的一部分。",
+  "api": {
+    "current": "当前本地化:",
+    "locales": "可用区域",
+    "t": "内部使用的翻译函数"
+  },
+  "vueI18nHeader": "## Vue i18n",
+  "vueI18nText1": "如果您使用的是vue-i18n软件包，则可以非常轻松地将其与Vuetify集成。 这使您可以将所有翻译保存在一个位置。 只需在messages中为$vuetify创建一个条目，并添加相应的语言更改。 然后通过提供自定义翻译功能将vue-i18n应用到Vuetify（如下例所示）。 有关所有可用键的完整列表，[在此处导航]（#create-translation）。",
+  "vueI18nText2": "一个重要注意事项是，在使用外部本地化插件时，如果当前语言环境不存在本地化，vuetify不会自动默认使用英语。 因此，请确保为插件提供尽可能完整的本地化。"
+}

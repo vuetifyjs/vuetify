@@ -7,7 +7,7 @@
     },
     "color": {
       "header": "crwdns38946:0crwdne38946:0",
-      "desc": "crwdns38948:0crwdne38948:0"
+      "desc": "crwdns43022:0crwdne43022:0"
     },
     "grow": {
       "header": "crwdns38950:0crwdne38950:0",
@@ -23,7 +23,7 @@
     },
     "toggle": {
       "header": "crwdns32702:0crwdne32702:0",
-      "desc": "crwdns32704:0crwdne32704:0"
+      "desc": "crwdns43024:0crwdne43024:0"
     },
     "hide-on-scroll": {
       "header": "crwdns38962:0crwdne38962:0",
@@ -48,7 +48,7 @@
     "value": "crwdns38986:0[v-btn]crwdne38986:0"
   },
   "events": {
-    "change": "crwdns38988:0crwdne38988:0",
+    "change": "crwdns43026:0crwdne43026:0",
     "update:input-value": "crwdns38990:0crwdne38990:0"
   }
 }

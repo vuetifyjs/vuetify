@@ -28,7 +28,6 @@
   },
   "props": {
     "eager": "crwdns39334:0crwdne39334:0",
-    "hideOverlay": "crwdns39336:0crwdne39336:0",
     "inset": "crwdns39338:0crwdne39338:0",
     "internalActivator": "crwdns39340:0crwdne39340:0",
     "openOnHover": "crwdns39342:0crwdne39342:0",

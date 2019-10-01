@@ -1,1 +1,4 @@
-{}
+{
+  "testing": "ユニットテスト",
+  "whyVuetify": "Vuetifyを選ぶ理由"
+}

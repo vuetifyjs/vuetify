@@ -1,1 +1,11 @@
-{}
+{
+  "examples": {
+    "usage": {
+      "uninverted": true
+    },
+    "options": {
+      "header": "### Rolar com opções",
+      "uninverted": true
+    }
+  }
+}
