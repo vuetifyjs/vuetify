@@ -30,11 +30,14 @@ function inserted (el: HTMLElement, binding: MutateVNodeDirective) {
       characterData: true,
     }
 
-  const observer = new MutationObserver((mutations: MutationRecord[]) => {
+  const observer = new MutationObserver((
+    mutationsList: MutationRecord[],
+    observer: MutationObserver
+  ) => {
     /* istanbul ignore if */
     if (!el._mutate) return // Just in case, should never fire
 
-    callback(mutations)
+    callback(mutationsList, observer)
 
     // If has the once modifier, unbind
     once && unbind(el)
