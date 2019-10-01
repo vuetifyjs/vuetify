@@ -314,6 +314,12 @@ export default baseMixins.extend({
 
     return h('div', {
       staticClass: 'v-dialog__container',
+      class: {
+        'v-dialog__container--attached':
+          this.attach === '' ||
+          this.attach === true ||
+          this.attach === 'attach',
+      },
       attrs: { role: 'dialog' },
     }, children)
   },
