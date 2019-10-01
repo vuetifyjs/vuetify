@@ -110,7 +110,7 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
         'v-tooltip--right': this.right,
         'v-tooltip--bottom': this.bottom,
         'v-tooltip--left': this.left,
-        'v-menu--attached':
+        'v-tooltip--attached':
           this.attach === '' ||
           this.attach === true ||
           this.attach === 'attach',
