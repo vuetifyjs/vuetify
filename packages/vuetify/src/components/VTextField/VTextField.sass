@@ -59,9 +59,6 @@
   padding-top: $text-field-active-label-height
   margin-top: $input-top-spacing - $text-field-active-label-height
 
-  &.v-input--dense
-    padding-top: 0px
-
   input
     flex: 1 1 auto
     line-height: 20px
@@ -69,6 +66,13 @@
     max-width: 100%
     min-width: 0px
     width: 100%
+
+  &.v-input--dense
+    padding-top: 0
+
+    &:not(.v-text-field--outlined):not(.v-text-field--solo)
+      input
+        padding: 4px 0 8px
 
     &[type=text]::-ms-clear
       display: none
@@ -208,13 +212,23 @@
       align-items: stretch
       min-height: 56px
 
-    &.v-input--dense > .v-input__control > .v-input__slot
-      min-height: 38px
+    &.v-input--dense
+      > .v-input__control > .v-input__slot
+        min-height: 44px
+
+      &.v-text-field--single-line,
+      &.v-text-field--outlined
+        > .v-input__control > .v-input__slot
+          min-height: 40px
 
   &--filled,
   &--full-width
     input
       margin-top: 22px
+
+    &.v-input--dense
+      input
+        margin-top: 20px
 
     &.v-text-field--single-line
       input
@@ -222,7 +236,7 @@
 
       &.v-input--dense
         input
-          margin-top: 3px
+          margin-top: 6px
 
     .v-label
       top: 18px
@@ -231,8 +245,12 @@
         transform: translateY(-6px) scale(.75)
 
     &.v-input--dense
-      .v-label
-        top: 10px
+      .v-label--active
+        transform: translateY(-10px) scale(.75)
+
+      &.v-text-field--single-line
+        .v-label
+          top: 11px
 
   &--filled > .v-input__control > .v-input__slot
     border-top-left-radius: 4px
@@ -254,7 +272,13 @@
     +prepend-append-margin-top(16px)
 
     &.v-input--dense:not(.v-text-field--solo)
-      +prepend-append-margin-top(7px)
+      +prepend-append-margin-top(14px)
+
+      &.v-text-field--single-line
+        +prepend-append-margin-top(9px)
+
+      &.v-text-field--outlined
+        +prepend-append-margin-top(7px)
 
     .v-text-field__details,
     & > .v-input__control > .v-input__slot
@@ -290,7 +314,7 @@
     +label-position(18px, -24px)
 
     &.v-input--dense
-      +label-position(9px, -16px)
+      +label-position(10px, -16px)
 
     fieldset
       border-style: solid
@@ -384,7 +408,7 @@
       padding: 0
 
     &.v-input--dense > .v-input__control
-      min-height: 36px
+      min-height: 38px
 
     &:not(.v-text-field--solo-flat) > .v-input__control > .v-input__slot
       +elevation(2)
