@@ -1,24 +1,14 @@
 <template>
-  <v-card v-intersect.once="onIntersect">
-    <v-card-title>Card title</v-card-title>
-
-    <v-card-text>
-      Nulla neque dolor, sagittis eget, iaculis quis, molestie non, velit.
-    </v-card-text>
-  </v-card>
+  <v-card v-intersect.once="onIntersect">...</v-card>
 </template>
 
 <script>
   export default {
     methods: {
-      onIntersect (entries, observer) {
-        // Will be invoked once at mount and once when it intersects
-        // After the intersection the callback unbinds
-        // Can be used with the quiet modifier
-
-        // More information on what these params do on
-        // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
-      }
+      // Will be invoked once at mount and once when it intersects
+      // After the intersection the callback unbinds
+      // Can be used with the quiet modifier
+      onIntersect (entries, observer, isIntersecting) {}
     }
   }
 </script>
