@@ -34,7 +34,7 @@ export default {
     moreEvents: '{0} mer',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counter: '{0} filer',
+    counterSize: '{0} filer ({1} totalt)',
   },
 }
