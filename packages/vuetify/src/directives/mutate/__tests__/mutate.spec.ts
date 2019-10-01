@@ -24,33 +24,33 @@ import Mutate from '../'
 describe('mutate.ts', () => {
   it('should bind event on inserted', () => {
     const callback = jest.fn()
-    const el = document.createElement('div')
+    const el = document.createElement('div') as any
     document.body.appendChild(el)
 
     Mutate.inserted(el, {
       value: callback,
     } as any)
 
-    expect((el as any)._mutate).toBeTruthy()
+    expect(el._mutate).toBeTruthy()
     expect(callback).not.toHaveBeenCalled()
 
     document.body.removeChild(el)
 
     Mutate.unbind(el)
 
-    expect((el as any)._mutate).toBeFalsy()
+    expect(el._mutate).toBeFalsy()
   })
 
   it('should fire event on mutation', () => {
     const callback = jest.fn()
-    const el = document.createElement('div')
+    const el = document.createElement('div') as any
     document.body.appendChild(el)
 
     Mutate.inserted(el, {
       value: callback,
     } as any)
 
-    ;(el as any)._mutate.observer.trigger([{}])
+    el._mutate.observer.trigger([{}])
 
     expect(callback).toHaveBeenCalledTimes(1)
 
@@ -61,7 +61,7 @@ describe('mutate.ts', () => {
 
   it('should fire event once', () => {
     const callback = jest.fn()
-    const el = document.createElement('div')
+    const el = document.createElement('div') as any
     document.body.appendChild(el)
 
     Mutate.inserted(el, {
@@ -71,33 +71,33 @@ describe('mutate.ts', () => {
       },
     } as any)
 
-    ;(el as any)._mutate.observer.trigger([{}])
+    el._mutate.observer.trigger([{}])
 
     expect(callback).toHaveBeenCalledTimes(1)
-    expect((el as any)._mutate).toBeFalsy()
+    expect(el._mutate).toBeFalsy()
 
     document.body.removeChild(el)
   })
 
   it('should work with object value', () => {
     const callback = jest.fn()
-    const el = document.createElement('div')
+    const el = document.createElement('div') as any
     document.body.appendChild(el)
 
     Mutate.inserted(el, {
       value: {
-        handler: callback,
         options: {
           attributes: false,
           subtree: true,
         },
+        handler: callback,
       },
     } as any)
 
-    ;(el as any)._mutate.observer.trigger([{}])
+    el._mutate.observer.trigger([{}])
 
     expect(callback).toHaveBeenCalledTimes(1)
-    expect((el as any)._mutate.observer._observe).toHaveBeenLastCalledWith({ attributes: false, subtree: true })
+    expect(el._mutate.observer._observe).toHaveBeenLastCalledWith({ attributes: false, subtree: true })
 
     document.body.removeChild(el)
 
@@ -106,7 +106,7 @@ describe('mutate.ts', () => {
 
   it('should work with observer modifiers', () => {
     const callback = jest.fn()
-    const el = document.createElement('div')
+    const el = document.createElement('div') as any
     document.body.appendChild(el)
 
     Mutate.inserted(el, {
@@ -118,10 +118,10 @@ describe('mutate.ts', () => {
       },
     } as any)
 
-    ;(el as any)._mutate.observer.trigger([{}])
+    el._mutate.observer.trigger([{}])
 
     expect(callback).toHaveBeenCalledTimes(1)
-    expect((el as any)._mutate.observer._observe).toHaveBeenLastCalledWith({ attributes: true, childList: true, subtree: true })
+    expect(el._mutate.observer._observe).toHaveBeenLastCalledWith({ attributes: true, childList: true, subtree: true })
 
     document.body.removeChild(el)
 

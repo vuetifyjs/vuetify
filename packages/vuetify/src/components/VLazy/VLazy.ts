@@ -68,8 +68,10 @@ export default mixins(Toggleable).extend({
       attrs: this.$attrs,
       directives: [{
         name: 'intersect',
-        options: this.options,
-        value: this.onObserve,
+        value: {
+          handler: this.onObserve,
+          options: this.options,
+        },
       }] as any,
       on: this.$listeners,
       style: this.styles,
