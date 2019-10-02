@@ -12,7 +12,7 @@ export default Vue.extend({
       return this.elevation
     },
     elevationClasses (): Record<string, boolean> {
-      if (!this.computedElevation) return {}
+      if (!this.computedElevation && this.computedElevation !== 0) return {}
 
       return { [`elevation-${this.computedElevation}`]: true }
     }
