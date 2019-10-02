@@ -101,6 +101,16 @@ describe('VListItem.ts', () => {
     expect(wrapper.classes('v-list-item--link')).toBe(true)
   })
 
+  it('should have --selectable class if the selectable property is true', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        selectable: true,
+      },
+    })
+
+    expect(wrapper.classes('v-list-item--selectable')).toBe(true)
+  })
+
   it('should react to keydown.enter', () => {
     const click = jest.fn()
     const wrapper = mountFunction({

@@ -31,8 +31,7 @@
       "header": "服务端分页和排序"
     },
     "headerless": {
-      "header": "无头表格",
-      "desc": "设置 `hide-headers` 属性来创建一个无头表格。"
+      "header": "无头表格"
     },
     "edit-dialog": {
       "header": "行内编辑",
@@ -46,7 +45,6 @@
   "props": {
     "v-edit-dialog": {
       "cancelText": "为取消按钮设置默认文本，当使用了 `large` 属性时（即有提交和取消按钮的对话框）。",
-      "large": "附加一个提交和取消按钮到对话框",
       "saveText": "为保存按钮设置默认文本，当使用了 `large` 属性时。"
     },
     "v-data-table": {

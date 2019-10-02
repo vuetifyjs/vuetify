@@ -1,1 +1,7 @@
-{}
+{
+  "examples": {
+    "dense": {
+      "header": "### Denso"
+    }
+  }
+}

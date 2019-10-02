@@ -10,8 +10,7 @@
       "desc": "Usando `v-flex`, você pode criar cartões horizontais personalizados. use a propriedade `contain` para encolher o `v-card-media` para caber dentro da área, em vez de cobrí-la."
     },
     "grids": {
-      "header": "Grades",
-      "desc": "Usando listas de grade você pode criar belos layouts."
+      "header": "Grades"
     },
     "custom-actions": {
       "header": "Ações personalizadas",

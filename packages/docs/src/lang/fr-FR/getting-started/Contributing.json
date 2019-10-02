@@ -46,6 +46,7 @@
   "changesText3": "Commitez avec commitizen en utilisant la commande `git cz`. De là, vous suivrez une série de choix. Assurez-vous de sélectionner le type approprié (voir **Lignes directrices de modifications avec Commitizen** ci-dessus)",
   "changesText4": "Enfin, `git push` et ouvrez une demande de fusion.",
   "changesSubHeader1": "### Demandes de fusion pour Vuetify",
+  "changesText7": "Requêtes de Pull liées à Vuetify :   \n* Pour **bug fixes** et **documentation updates** soumettre les demandes de pull au `master`.   \n* Pour **new features** et **enhancements** soumettre les demandes de pull au `dev`   \n* Pour **bugs** et **critical fixes** liés à **v1.5/LTS** soumettre les demandes de pull au `stable`   \n* Pour toute **features** contenant **breaking changes** soumettre les demandes de pull au `next` ",
   "changesSubHeader2": "### Demandes du fusion pour la documentation",
   "changesText8": "Pour toute demande de fusion liée à la documentation de Vuetify, soumettez votre demande d'extraction à la branche `master`."
 }

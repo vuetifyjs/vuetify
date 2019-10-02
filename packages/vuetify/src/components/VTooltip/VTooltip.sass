@@ -2,7 +2,10 @@
 @import ./_variables
 
 .v-tooltip
-  display: inline
+  display: none
+
+  &--attached
+    display: inline
 
   &__content
     background: $tooltip-background-color
@@ -17,7 +20,7 @@
     width: auto
     opacity: 1
     pointer-events: none
-    
+
     &--fixed
       position: fixed
 

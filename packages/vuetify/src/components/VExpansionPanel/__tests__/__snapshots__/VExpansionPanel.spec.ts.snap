@@ -26,7 +26,7 @@ exports[`VExpansionPanel should hide actions and match snapshot 2`] = `
       <i aria-hidden="true"
          class="v-icon notranslate material-icons theme--light"
       >
-        $vuetify.icons.expand
+        $expand
       </i>
     </div>
   </button>

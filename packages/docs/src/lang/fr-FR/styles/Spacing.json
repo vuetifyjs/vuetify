@@ -1,3 +1,65 @@
 {
-  "header": "# Espacement"
+  "header": "# Espacement",
+  "headerText": "Met à jour votre mise en page sans créer de nouvelles classes. Les assistants d'espacement sont utiles pour modifier le padding et la marge d'un élément.",
+  "playgroundHeader": "## Terrain de jeux",
+  "playgroundText1": "Utilisez le terrain de jeu pour voir ce que les différentes classes d'aide peuvent faire. Pour une explication de leur fonctionnement, voir la section **Comment ça fonctionne** ci-dessous.",
+  "howText": "Les classes d'aide appliquent **marge** ou **padding** à un élément allant de _0 à 12_. Chaque taille a été conçue pour s'aligner sur des espaces de conception de matériaux communs. Ces classes peuvent être appliquées au format suivant `{property}{direction}-{size}`.",
+  "propertyText": "La **propriété** applique le type d'espacement :",
+  "properties": [
+    "`m` - applique `marge`",
+    "`p` - applique `padding`"
+  ],
+  "directionText": "La **direction** désigne le côté de la propriété à :",
+  "directions": [
+    "`t` - applique l'espacement pour `marge-top` et `padding-top`",
+    "`b` - applique l'espacement pour `Marge-bottom` et `padding-bottom`",
+    "`l` - applique l'espacement pour `marge-gauche` et `padding-left`",
+    "`r` - applique l'espacement pour `marge-droite` et `padding-right`",
+    "`s` - applique l'espacement pour `marge-gauche`/`padding-left` _(en mode LTR)_ et `marge-right`/`padding-right` _(en mode RTL)_",
+    "`e` - applique l'espacement pour `marge-droite`/`padding-right` _(en mode LTR)_ et `marge-left`/`padding-left` _(en mode RTL)_",
+    "`x` - applique l'espacement pour `*-left` et `*-right`",
+    "`y` - applique l'espacement pour `*-top` et `*-bottom`",
+    "`a` - applique l'espacement de la propriété dans toutes les directions"
+  ],
+  "sizeText": "La **taille** contrôle l'incrément de la propriété en intervalles 4px :",
+  "sizes": [
+    "`0` - élimine toutes les `marges` ou `padding` en le définissant à `0`",
+    "`1` - définit `marge` ou `padding` à 4px",
+    "`2` - définit `marge` ou `padding` à 8px",
+    "`3` - définit `marge` ou `padding` à 12px",
+    "`4` - définit `marge` ou `padding` à 16px",
+    "`5` - définit `marge` ou `padding` à 20px",
+    "`6` - définit `marge` ou `padding` à 24px",
+    "`7` - définit `marge` ou `padding` à 28px",
+    "`8` - définit `marge` ou `padding` à 32px",
+    "`9` - définit `marge` ou `padding` à 36px",
+    "`10` - définit `marge` ou `padding` à 40px",
+    "`11` - définit `marge` ou `padding` à 44px",
+    "`12` - définit `marge` ou `padding` à 48px",
+    "`n1` - définit la `marge` négative à 4px",
+    "`n2` - définit la `marge` négative à 8px",
+    "`n3` - définit la `marge` négative à 12px",
+    "`n4` - définit la `marge` négative à 16px",
+    "`n5` - définit la `marge` négative à 20px",
+    "`n6` - définit la `marge` négative à 24px",
+    "`n7` - définit la `marge` négative à 28px",
+    "`n8` - définit la `marge` négative à 32px",
+    "`n9` - définit la `marge` négative à 36px",
+    "`n10` - définit la `marge` négative à 40px",
+    "`n11` - définit la `marge` négative à 44px",
+    "`n12` - définit la `marge` négative à 48px",
+    "`auto` - définit l'espacement à `auto`"
+  ],
+  "horizontalHeader": "Centrage horizontal",
+  "horizontalText": "Pour les éléments de bloc avec une largeur désignée, vous pouvez appliquer `.mx-auto` au centre horizontal du contenu.",
+  "examples": {
+    "horizontal": {
+      "header": "## Horizontal",
+      "desc": "En utilisant les classes d'aide à la marge, vous pouvez facilement centrer le contenu horizontalement."
+    },
+    "negative-margin": {
+      "header": "### Marge négative",
+      "desc": "La marge peut également être appliquée négativement à la même fréquence **1 à 12** ."
+    }
+  }
 }

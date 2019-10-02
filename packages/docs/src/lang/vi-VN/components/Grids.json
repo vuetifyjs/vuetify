@@ -9,8 +9,7 @@
       "header": "### Giãn và Co"
     },
     "row-column-breakpoint": {
-      "header": "### Hàng and cột breakpoints",
-      "desc": "Tự động thay đổi bố cục dựa trên độ phân giải. **( thay đổi kích thước màn hình và xem bố cục thay dổi thành `row` trên độ phân giải nhỏ)**"
+      "header": "### Hàng and cột breakpoints"
     },
     "order": {
       "desc": "Bạn có thể sắp xếp các phần tử trong lưới. Tương tự Offsets, bạn có thể sắp xếp vị trí khác nhau cho từng kích thước (độ phân giải) khác nhau."

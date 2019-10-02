@@ -1,7 +1,17 @@
 {
-  "header": "支持Vuetify的开发",
+  "header": "# 支持 Vuetify 的开发",
+  "headerText": "Vuetify 是一个基于 [MIT license](https://opensource.org/licenses/MIT) 的开源项目。它将会一直免费。但是我们需要花费大量时间来维护框架核心和所有补充功能。一次性捐助者、Github 赞助者、公司和特殊赞助商的捐赠来支持我们在完成了 Material Design spec 之后，也可以继续开发额外的功能。你可以通过以下方式支持 Vuetify 的开源项目：",
   "affiliatesHeader": "接入商:",
+  "openCollective": "### Open Collective",
+  "openCollectiveBlurb": "Open Collective 是每月直接支持核心开发团队",
+  "sponsors": "### 赞助商",
+  "github": "### Github",
+  "githubBlurb": "赞助者每月直接支持作者 John Leider。",
   "serviceSponsorsHeader": "服务赞助商：",
+  "tidelift": "### Tidelift",
+  "tideliftBlurb": "要获得 Vuetify 企业支持，请使用 Tidelift 订阅。",
+  "oneTime": "### 一次性捐助",
+  "oneTimeBlurb": "Vuetify 感谢通过以下途径收到的任何一次性捐款：",
   "questionHeader": "还有其他问题吗？",
   "questionButton": "联系我们"
 }

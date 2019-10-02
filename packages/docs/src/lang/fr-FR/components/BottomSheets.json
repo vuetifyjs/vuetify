@@ -1,4 +1,5 @@
 {
+  "header": "# Pop-up basse",
   "headerText": "La feuille en bas est une version modifiée `v-dialog` qui glisse du bas de l'écran, similaire à `v-bottom-navigation`. Alors qu'un composant de navigation en bas est pour les boutons et spécifiques au niveau d'action de l'application, une feuille en bas peut contenir n'importe quoi.",
   "examples": {
     "usage": {
