@@ -1,17 +1,17 @@
 export default {
-  close: 'Close',
+  close: 'Kapat',
   dataIterator: {
-    noResultsText: 'Eşleşen Veri Bulunamadı',
-    loadingText: 'Loading item...',
+    noResultsText: 'Eşleşen veri bulunamadı',
+    loadingText: 'Yükleniyor... Lütfen bekleyin.',
   },
   dataTable: {
     itemsPerPageText: 'Sayfa başına satır:',
     ariaLabel: {
-      sortDescending: ': Sorted descending. Activate to remove sorting.',
-      sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.',
+      sortDescending: ': Z den A ya sıralı. Sıralamayı kaldırmak için etkinleştir.',
+      sortAscending: ': A dan Z ye sıralı. Z den A ya sıralamak için etkinleştir.',
+      sortNone: ': Sıralı değil. A dan Z ye sıralamak için etkinleştir.',
     },
-    sortBy: 'Sort by',
+    sortBy: 'Sırala',
   },
   dataFooter: {
     itemsPerPageText: 'Sayfa başına satır:',
@@ -20,12 +20,12 @@ export default {
     prevPage: 'Önceki sayfa',
     firstPage: 'İlk sayfa',
     lastPage: 'Son sayfa',
-    pageText: '{0}-{1} de {2}',
+    pageText: '{0} - {1} arası, Toplam: {2} kayıt',
   },
   datePicker: {
-    itemsSelected: '{0} seçildi',
+    itemsSelected: '{0} öge seçildi',
   },
-  noDataText: 'Uygun veri yok',
+  noDataText: 'Bu görünümde veri yok.',
   carousel: {
     prev: 'Önceki görsel',
     next: 'Sonraki görsel',
@@ -34,8 +34,8 @@ export default {
     moreEvents: '{0} tane daha',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counter: '{0} dosya',
+    counterSize: '{0} dosya (toplamda {1})',
   },
   timePicker: {
     am: 'AM',
