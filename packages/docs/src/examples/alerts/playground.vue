@@ -5,14 +5,22 @@
       justify="center"
     >
       <v-alert
+        v-model="alert"
         v-bind="{
           ...attrs,
-          color: attrs.color || (!attrs.type ? 'deep-purple accent-4' : undefined),
-          dark: !attrs['colored-border']
+          color: attrs.color || (attrs.type ? attrs.type : 'blue lighten-2'),
+          value: alert
         }"
       >
         Donec elit libero, sodales nec, volutpat a, suscipit non, turpis. In auctor lobortis lacus.
       </v-alert>
+      <v-btn
+        v-if="!alert"
+        color="primary"
+        @click="alert = true"
+      >
+        Reset
+      </v-btn>
     </v-row>
   </v-container>
 </template>
@@ -25,5 +33,8 @@
         default: () => ({}),
       },
     },
+    data: () => ({
+      alert: true,
+    }),
   }
 </script>
