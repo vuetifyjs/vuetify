@@ -10,7 +10,7 @@
     },
     "boilerplate": {
       "header": "### Boilerplate component",
-      "desc": "The `v-skeleton-loader` can be used as boilerplate designs when creating mockups. Mix and match various pre-defined options or create your own unique implementations."
+      "desc": "The `v-skeleton-loader` can be used as boilerplate designs when creating mockups. Mix and match various pre-defined options or create your own unique implementations. In this example, we are extending the `v-skeleton-loader` into a new component called `v-boilerplate` for use as a functional boilerplate component."
     },
     "implementation": {
       "header": "### Implementation methods",
