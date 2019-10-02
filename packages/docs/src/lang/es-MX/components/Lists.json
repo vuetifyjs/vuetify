@@ -29,12 +29,10 @@
       "desc": "Una lista puede contener una pila dentro de una acción. _Ripple_ y las props del _router_ pueden pasarse al componente principal v-list, al v-list-item o como una propiedad en el arreglo de elementos que compondrán la lista."
     },
     "action-title-and-subtitle": {
-      "header": "Acción con título y subtítulo",
-      "desc": "Una lista puede contener hasta 3 líneas.."
+      "header": "Acción con título y subtítulo"
     },
     "expansion-lists": {
-      "header": "Listas de expansión",
-      "desc": "Una lista puede contener un grupo de elementos que se mostrarán al hacer click. Las listas de expansión también se usan en el componente de `navigation drawer`."
+      "header": "Listas de expansión"
     },
     "flat": {
       "header": "Flat"

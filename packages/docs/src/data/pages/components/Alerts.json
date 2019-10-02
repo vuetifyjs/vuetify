@@ -25,8 +25,54 @@
       "type": "section",
       "children": [
         {
-          "type": "playground",
-          "value": "playground"
+          "type": "playground-new",
+          "value": {
+            "booleans": [
+              "dismissible"
+            ],
+            "sliders": [
+              {
+                "prop": "elevation",
+                "label": "Elevation",
+                "attrs": {
+                  "min": 0,
+                  "max": 24
+                }
+              }
+            ],
+            "tabs": [
+              "normal",
+              "dense",
+              "prominent",
+              "outlined",
+              "text",
+              "tile"
+            ],
+            "selects": [
+              {
+                "prop": "icon",
+                "label": "Icon",
+                "attrs": {
+                  "items": [
+                    "mdi-vuetify",
+                    "mdi-account"
+                  ]
+                }
+              },
+              {
+                "prop": "type",
+                "label": "Type",
+                "attrs": {
+                  "items": [
+                    "success",
+                    "info",
+                    "warning",
+                    "error"
+                  ]
+                }
+              }
+            ]
+          }
         }
       ]
     },

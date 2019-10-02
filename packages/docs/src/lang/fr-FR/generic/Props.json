@@ -6,7 +6,11 @@
   "fullWidth": "Force la largeur à 100%",
   "fixedTabs": "`v-tabs-item` min-width 160px (72px mobile), max-width 264px",
   "id": "Définit l'identifiant DOM sur le composant",
+  "mobileBreakPoint": "Définit le point d'arrêt mobile désigné pour le composant. Cela appliquera des styles alternatifs pour les appareils mobiles.",
+  "persistent": "Cliquer à l'extérieur ne supprimera pas la boîte de dialogue",
   "singleLine": "Le label ne se déplace pas dans l'état focus / sale",
+  "size": "Définit la hauteur et la largeur du composant.",
   "textColor": "Applique une couleur spécifiée au texte du contrôle",
+  "tile": "Components.Sheets.props.tile",
   "trueValue": "Définit la valeur pour l’état évalué à vrai"
 }

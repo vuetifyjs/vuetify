@@ -1,4 +1,7 @@
 {
+  "": {
+    "title": "Framework de composants Material Design"
+  },
   "404": {
     "title": "Oups, 404",
     "description": "Oups, on dirait que ce que vous cherchez n'est pas là !"
@@ -29,7 +32,7 @@
     "keywords": "contribuer, demande de fonctionnalité"
   },
   "getting-started/consulting-and-support": {
-    "title": "Consulting et support"
+    "title": "Conseils et support"
   },
   "customization/breakpoints": {
     "title": "Breakpoints"
@@ -61,10 +64,19 @@
     "title": "Typographie de l'application",
     "keywords": "typographie, entêtes, titres"
   },
+  "framework/sandbox": {
+    "title": "Sandbox"
+  },
   "components/api-explorer": {
     "title": "Explorateur API"
   },
   "components/application": {
     "title": "Paramètres de l'application"
+  },
+  "components/aspect-ratios": {
+    "title": "Ratio d'affichage"
+  },
+  "components/file-inputs": {
+    "title": "Composant de lecture de fichier"
   }
 }

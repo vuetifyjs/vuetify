@@ -66,6 +66,13 @@ export default VAutocomplete.extend({
 
       this.updateMenuDimensions()
     },
+    genInput () {
+      const input = VAutocomplete.options.methods.genInput.call(this)
+
+      input.data!.on!.paste = this.onPaste
+
+      return input
+    },
     genChipSelection (item: object, index: number) {
       const chip = VSelect.options.methods.genChipSelection.call(this, item, index)
 
@@ -220,6 +227,15 @@ export default VAutocomplete.extend({
 
       this.selectItem(this.internalSearch)
       this.internalSearch = null
+    },
+    onPaste (event: ClipboardEvent) {
+      if (!this.multiple || this.searchIsDirty) return
+
+      const pastedItemText = event.clipboardData!.getData('text/vnd.vuetify.autocomplete.item+plain')
+      if (pastedItemText && this.findExistingIndex(pastedItemText as any) === -1) {
+        event.preventDefault()
+        VSelect.options.methods.selectItem.call(this, pastedItemText as any)
+      }
     },
   },
 })

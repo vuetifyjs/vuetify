@@ -25,7 +25,6 @@
     "combobox": "Единственный вариант выбора **tags**",
     "debounceSearch": "Дескриптор выбранного входного значения поиска",
     "deletableChips": "Добавляет значок удаления в выбранный _chips_",
-    "dense": "Уменьшает максимальную высоту элементов списка",
     "disabled": "Отключает ввод",
     "editable": "Создаёт редактируемую кнопку - [спецификация](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "filter": "Функция, используемая для фильтрации элементов",

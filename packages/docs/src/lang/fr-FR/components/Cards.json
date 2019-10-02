@@ -1,6 +1,10 @@
 {
   "headerText": "Le composant `v-card` est un composant polyvalent qui peut être utilisé pour tout allant d'un simple panneau à une image statique. Le composant **card** a de nombreux composants d'aide pour rendre le balisage aussi facile que possible. Les composants qui n'ont aucune option listée utilisent le composant fonctionnel **Vue's** pour un rendu plus rapide et servent de balisage pour rendre la construction plus facile.",
   "componentsHeader": "### Composants fonctionnels",
+  "componentsList": [
+    "`v-card-actions`: le conteneur utilisé pour placer ** actions ** pour une carte, telles que [v-btn] (/ components / buttons) ou [v-menu] (/ components / menus). Applique également _special margin_ aux boutons afin qu’ils s’alignent correctement avec les autres zones de contenu de la carte.",
+    "v-card-text`: principalement utilisé pour ** le contenu du texte ** dans une carte. Applique un remplissage pour le texte, réduit sa taille de police à 0,875 trame et change sa couleur en gris.\n "
+  ],
   "examples": {
     "usage": {
       "desc": "Une carte a 3 composantes de base, `v-card-title`, `v-card-text` et `v-card-actions`."
@@ -9,13 +13,16 @@
       "header": "### Média avec texte",
       "desc": "En utilisant le système de mise en page, nous pouvons ajouter du texte personnalisé n'importe où en arrière-plan."
     },
+    "outlined": {
+      "header": "### Cartes décrites",
+      "desc": "Une carte ** décrite ** a une élévation de 0 et contient une bordure souple."
+    },
     "horizontal": {
       "header": "### Cartes horizontales",
       "desc": "En utilisant `v-flex`, vous pouvez créer des cartes horizontales personnalisées. Utilisez la propriété `contain` pour réduire le `v-img` pour s'intégrer dans le conteneur, au lieu de recouvrir."
     },
     "grids": {
-      "header": "### Grilles",
-      "desc": "À l’aide de listes de la grille, vous pouvez créer de belles mises en page."
+      "header": "### Grilles"
     },
     "custom-actions": {
       "header": "### Actions personnalisées",

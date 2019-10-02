@@ -1,1 +1,12 @@
-{}
+{
+  "header": "# Ratio d'affichage",
+  "headerText": "Le composant `v-responsive` peut être utilisé pour corriger n'importe quelle section à un ratio d'aspect spécifique",
+  "examples": {
+    "ratios": {
+      "desc": "Spécifier un rapport d'affichage personnalisé"
+    }
+  },
+  "props": {
+    "aspectRatio": "Définit un ratio d'aspect de base, calculé comme largeur/hauteur. Cela ne fixe qu'une hauteur **minimum** et le composant peut toujours croître si il a beaucoup de contenu."
+  }
+}

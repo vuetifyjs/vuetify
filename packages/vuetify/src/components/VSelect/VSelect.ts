@@ -64,7 +64,7 @@ export default baseMixins.extend<options>().extend({
   props: {
     appendIcon: {
       type: String,
-      default: '$vuetify.icons.dropdown',
+      default: '$dropdown',
     },
     attach: {
       default: false,
@@ -73,7 +73,6 @@ export default baseMixins.extend<options>().extend({
     chips: Boolean,
     clearable: Boolean,
     deletableChips: Boolean,
-    dense: Boolean,
     eager: Boolean,
     hideSelected: Boolean,
     items: {

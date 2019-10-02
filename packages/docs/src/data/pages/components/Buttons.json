@@ -42,6 +42,7 @@
             "sliders": [
               {
                 "prop": "elevation",
+                "label": "Elevation",
                 "attrs": {
                   "min": 0,
                   "max": 24

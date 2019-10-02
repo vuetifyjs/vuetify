@@ -9,8 +9,7 @@
       "header": "长大"
     },
     "toggle": {
-      "header": "开关",
-      "desc": "与其它Vuetify组件一样，您可以使用`v-model`来控制显示状态。"
+      "header": "开关"
     }
   }
 }

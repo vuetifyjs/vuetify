@@ -31,8 +31,7 @@
       "header": "서버사이드 페이지네이트와 검색 (Paginate and sort server-side)"
     },
     "headerless": {
-      "header": "헤더가 없는 테이블 (Headerless tables)",
-      "desc": "`hide-headers` prop은 헤더가 없는 테이블을 만듭니다."
+      "header": "헤더가 없는 테이블 (Headerless tables)"
     },
     "edit-dialog": {
       "header": "인라인 편집 (Inline Editing)",
@@ -46,7 +45,6 @@
   "props": {
     "v-edit-dialog": {
       "cancelText": "**large** prop을 사용할때 나오는 취소(cancel) 버튼의 기본 텍스트를 설정",
-      "large": "대화찰(dialog)에 서브밋(submit)과 취소(cancel) 버튼을 추가합니다.",
       "saveText": "**large** prop을 사용할때 나오는 저장(save) 버튼의 기본 텍스트를 설정"
     },
     "v-data-table": {

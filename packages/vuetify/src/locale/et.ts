@@ -1,7 +1,6 @@
 export default {
   close: 'Sulge',
   dataIterator: {
-    pageText: '{0}-{1} {2}st',
     noResultsText: 'Vastavaid kirjeid ei leitud',
     loadingText: 'Andmeid laaditakse...',
   },
@@ -21,6 +20,7 @@ export default {
     prevPage: 'Eelmine lehekülg',
     firstPage: 'Esimene lehekülg',
     lastPage: 'Viimane lehekülg',
+    pageText: '{0}-{1} {2}st',
   },
   datePicker: {
     itemsSelected: '{0} valitud',
@@ -36,5 +36,9 @@ export default {
   fileInput: {
     counter: '{0} faili',
     counterSize: '{0} faili (kokku {1})',
+  },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
   },
 }

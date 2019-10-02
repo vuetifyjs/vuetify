@@ -40,6 +40,10 @@
     "segmented": {
       "header": "### Segmented",
       "desc": "`segmented` `v-overflow-btn` has and additional divider between the content and the icon"
+    },
+    "dense": {
+      "header": "### Dense",
+      "desc": "You can use `dense` prop to reduce overflow button height and lower max height of list items."
     }
   },
   "props": {
