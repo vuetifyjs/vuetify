@@ -214,8 +214,8 @@
     methods: {
       importComponent () {
         return import(
-          /* webpackChunkName: "playgrounds" */
-          `../../examples/${this.file}/playground.vue`
+          /* webpackChunkName: "usages" */
+          `../../usages/${this.file}.vue`
         )
           .then(comp => (this.component = comp.default))
       },
