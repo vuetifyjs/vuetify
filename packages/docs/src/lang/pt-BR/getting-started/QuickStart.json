@@ -7,7 +7,7 @@
   "vueCliText3": "**Dica**: Se você já tem **Vue CLI** instalado, você pode verificar se está na versão mais recente digitando <kbd>vue --version</kbd> em seu terminal.",
   "vueCliText4": "Uma vez que o cli está instalado, você pode gerar um novo esqueleto de projeto. Selecione a _instalação padrão_ a menos que você tenha pacotes específicos que você precisa incluir (ex.: _vuex_ ou _vue-router_). Isto irá criar um novo projeto Vue que está pronto para funcionar com suas opções selecionadas.",
   "vueCliText5": "Agora que você tem um projeto instanciado, você pode adicionar o [pacote Vuetify](https://github.com/vuetifyjs/vue-cli-plugin-vuetify) usando a cli.",
-  "vueCliText6": "Isto irá fornecer-lhe um conjunto de opções para personalizar sua instalação. A predefinição padrão tem [a-la-carte](//customization/a-la-carte) já habilitado para você.",
+  "vueCliText6": "Isto irá fornecer-lhe um conjunto de opções para personalizar sua instalação. A predefinição padrão tem [a-la-carte](/customization/a-la-carte) já habilitado para você.",
   "vueCliText7": "Após a instalação, simplesmente execute <kbd>yarn serve</kbd> ou <kbd>npm run serve</kbd> para iniciar sua aplicação.",
   "uiHeader": "## Instalação Vue UI",
   "uiText1": "Vuetify também pode ser instalado usando **Vue UI**, a nova aplicação visual para _@vue/cli_. Certifique-se de que você tenha a versão mais recente do Vue CLI instalada, e depois digite em seu terminal:",
