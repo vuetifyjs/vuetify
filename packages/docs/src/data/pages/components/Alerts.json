@@ -7,25 +7,7 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "usage"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "api",
-          "value": ["v-alert"]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "playground-new",
+          "type": "usage-new",
           "value": {
             "booleans": [
               "colored-border",
@@ -100,6 +82,15 @@
               }
             ]
           }
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": ["v-alert"]
         }
       ]
     },
