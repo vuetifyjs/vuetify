@@ -137,7 +137,8 @@ export default VResponsive.extend({
       observer?: IntersectionObserver,
       isIntersecting?: boolean
     ) {
-      if (!isIntersecting && !this.eager) return
+      // if (!isIntersecting && !this.eager) return
+      if (entries && entries.length && observer && !isIntersecting && !this.eager) return
 
       if (this.normalisedSrc.lazySrc) {
         const lazyImg = new Image()
