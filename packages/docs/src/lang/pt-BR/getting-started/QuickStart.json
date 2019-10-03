@@ -6,6 +6,8 @@
   "newHeader": "Novas aplicações",
   "existingHeader": "Aplicações existentes",
   "existingText1": "Para incluir o Vuetify em um projeto existente, você deve inseri-lo em seu node_modules. Você pode usar `npm` ou `yarn` para realizar esta tarefa. Estes são ambos gerenciadores de pacotes nos quais permitem que você controle quais recursos estarão disponíveis na sua aplicação.",
+  "existingHeader3a": "### instalação padrão",
+  "existingText3a": "Existem três maneiras pelas quais você pode instalar o Vuetify. A primeira (e recomendada) maneira é utilizar o [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) ou o que chamamos de **A-la-carte**. Isso garantirá que sua aplicação utilize apenas os recursos e estilos do Vuetify necessários, reduzindo significativamente o tamanho compilado e a configuração que você verá em um novo projeto vue-cli-3. Lembre-se de que, ao importar de `vuetify/lib`, os estilos necessários são importados _automaticamente_ para você.",
   "alert2": "*Aviso*: Embora o Vuetify tenta ao máximo não causar qualquer colisão no CSS, não há garantia de que seus estilos personalizados não alterem sua experiência ao integrar este framework em seu projeto existente.",
   "ie11Header": "Suporte ao IE11 e Safari 9",
   "ie11Text2": "Devido ao suporte limitado do Internet Explorer para tags `<template>`, você deve enviar elementos do dom totalmente compilados para o navegador. Isso pode ser feito tanto construindo antecipamente seu código Vue quanto criando componentes auxiliares para substituir os elementos do DOM. Por exemplo, se for enviado diretamente para o IE, isso falhará:",
