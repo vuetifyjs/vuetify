@@ -17,7 +17,6 @@ function makeWatcher (property: string): ThisType<Vue> & WatchOptionsWithHandler
         this.$set(this.$data[property], attr, val[attr])
       }
     },
-    immediate: true,
   }
 }
 
@@ -32,5 +31,14 @@ export default Vue.extend({
     // Make sure to use `attrs$` instead of `$attrs` (confusing right?)
     $attrs: makeWatcher('attrs$'),
     $listeners: makeWatcher('listeners$'),
+  },
+  
+  created () {
+    for (const attr in $attrs) {
+      this.$set(this.attrs$, attr, $attrs[attr])
+    }
+    for (const attr in $listeners) {
+      this.$set(this.listeners$, attr, $listeners[attr])
+    }
   },
 })
