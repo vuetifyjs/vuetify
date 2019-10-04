@@ -44,6 +44,10 @@
       "desc": "crwdns38594:0crwdne38594:0",
       "header": "crwdns38596:0crwdne38596:0"
     },
+    "date-range": {
+      "desc": "crwdns43000:0crwdne43000:0",
+      "header": "crwdns43002:0crwdne43002:0"
+    },
     "date-picker-date": {
       "desc": "crwdns38598:0crwdne38598:0",
       "header": "crwdns38600:0crwdne38600:0"
@@ -122,6 +126,7 @@
     "nextIcon": "crwdns32402:0crwdne32402:0",
     "pickerDate": "crwdns32404:0crwdne32404:0",
     "prevIcon": "crwdns32406:0crwdne32406:0",
+    "range": "crwdns43004:0crwdne43004:0",
     "reactive": "crwdns32408:0crwdne32408:0",
     "readonly": "crwdns32410:0crwdne32410:0",
     "scrollable": "crwdns32412:0crwdne32412:0",

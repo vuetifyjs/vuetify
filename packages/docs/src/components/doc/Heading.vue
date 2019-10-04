@@ -1,4 +1,4 @@
-<template functional>
+<template>
   <core-goto class="core-goto--heading"><slot /></core-goto>
 </template>
 
@@ -7,6 +7,21 @@
     name: 'DocHeading',
 
     inheritAttrs: false,
+
+    provide () {
+      if (!this.id) return
+
+      return {
+        id: this.id,
+      }
+    },
+
+    props: {
+      id: {
+        type: String,
+        default: undefined,
+      },
+    },
   }
 </script>
 

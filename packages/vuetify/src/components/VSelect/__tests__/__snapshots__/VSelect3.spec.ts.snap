@@ -25,7 +25,7 @@ exports[`VSelect.ts should add color to selected index 1`] = `
             <i aria-hidden="true"
                class="v-icon notranslate material-icons theme--light"
             >
-              $vuetify.icons.dropdown
+              $dropdown
             </i>
           </div>
         </div>

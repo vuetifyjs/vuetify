@@ -10,8 +10,7 @@
       "desc": "`v-flex`를 이용해 커스텀 수평 카드를 만들 수 있습니다. `v-card-media`가 컨테이너를 덮지 않고 딱 맞게 들어갈 수 있도록 `contain` 속성(property)를 사용해서 크기를 줄이세요(shrink)."
     },
     "grids": {
-      "header": "그리드 (Grids)",
-      "desc": "그리드 리스트(grids)를 사용하면 아름다운 레이아웃을 만들 수 있습니다.Using grids, you can create beautiful layouts."
+      "header": "그리드 (Grids)"
     },
     "custom-actions": {
       "header": "커스텀 액션 (Custom Actions)",

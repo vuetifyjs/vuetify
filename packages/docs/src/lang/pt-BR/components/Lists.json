@@ -1,5 +1,8 @@
 {
   "examples": {
+    "dense": {
+      "header": "### Denso"
+    },
     "flat": {
       "header": "Plano"
     }

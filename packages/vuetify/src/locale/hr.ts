@@ -1,7 +1,6 @@
 export default {
   close: 'Zatvori',
   dataIterator: {
-    pageText: '{0}-{1} od {2}',
     noResultsText: 'Nisu pronađene odgovarajuće stavke',
     loadingText: 'Učitavanje...',
   },
@@ -21,6 +20,7 @@ export default {
     prevPage: 'Prethodna stranica',
     firstPage: 'Prva stranica',
     lastPage: 'Posljednja stranica',
+    pageText: '{0}-{1} od {2}',
   },
   datePicker: {
     itemsSelected: '{0} odabrano',
@@ -36,5 +36,9 @@ export default {
   fileInput: {
     counter: 'Odabranih datoteka: {0}',
     counterSize: 'Odabranih datoteka: {0} ({1} ukupno)',
+  },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
   },
 }

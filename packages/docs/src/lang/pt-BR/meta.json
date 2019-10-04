@@ -1,27 +1,297 @@
 {
+  "": {
+    "description": "Vuetify é um framework de componentes Material Design para Vue.js. Ele visa fornecer todas as ferramentas necessárias para criar aplicações ricas com lindos conteúdos.",
+    "keywords": "vue, componentes de material design, componentes vue, componentes de material design, vuetify, vuetify.js, framework de componente"
+  },
   "404": {
-    "title": "Ops, 404"
+    "title": "Ops, 404",
+    "description": "Ops, parece que o que você está procurando não está aqui!"
+  },
+  "getting-started/quick-start": {
+    "title": "Inicio rápido",
+    "description": "Comece rapidamente com Vue e Vuetify. Suporte para Vue CLI 3, Webpack, Nuxt e muito mais.",
+    "keywords": "início rápido, templates vuetify, instalando vuetify, instalar vuetify"
+  },
+  "getting-started/pre-made-layouts": {
+    "title": "Layouts de aplicação",
+    "description": "Selecione de uma multiplicidade de layouts do Vuetify Material Design construídos para ajudar a iniciar rapidamente seu aplicativo.",
+    "keywords": "layouts pré-definidos, layouts, layout de aplicação, layouts de material design"
+  },
+  "getting-started/unit-testing": {
+    "title": "Testes de unidade",
+    "description": "Aprenda a criar testes unitários com vue-test-utils e componentes Vuetify em seu aplicativo Vue.",
+    "keywords": "teste de unidade vuetify, testando vuetify, testes de especificações vuetify"
   },
   "getting-started/why-vuetify": {
-    "title": "Por que Vuetify?"
+    "title": "Por que Vuetify?",
+    "description": "Vuetify tem uma comunidade extremamente ativa, fornece componentes Material Design fáceis de usar e é constantemente atualizado.",
+    "keywords": "por que vuetify, por que escolher o vuetify, melhor framework vue, melhor framework ui"
+  },
+  "getting-started/frequently-asked-questions": {
+    "title": "Perguntas frequentes",
+    "description": "Preso em um problema? Confira as perguntas mais frequentes da comunidade Vuetify.",
+    "keywords": "perguntas frequentes, faq"
   },
   "getting-started/meet-the-team": {
-    "title": "Conheça a equipe"
+    "title": "Conheça a equipe",
+    "description": "Conheça a equipe responsável pela construção do Vuetify. Estes são os principais indivíduos que conduzem a visão do framework.",
+    "keywords": "vuetify time desenvolvimento, vuetify time principal"
+  },
+  "getting-started/sponsors-and-backers": {
+    "title": "Patrocinadores e apoiadores",
+    "description": "Ajude o Vuetify apoiando o projeto. Isso ajuda com a manutenção de recursos existentes e o desenvolvimento de novos.",
+    "keywords": "patrocinador, apoiador, doações, patrono, ajudando o vuetify, suporte vuetify"
+  },
+  "getting-started/long-term-support": {
+    "title": "Suporte a longo prazo",
+    "description": "Vuetify fornece suporte a longo prazo para a última versão major durante 12 meses para bugs críticos e vulnerabilidades de segurança.",
+    "keywords": "lts, suporte a longo prazo"
+  },
+  "getting-started/contributing": {
+    "title": "Contribuindo",
+    "description": "Contribuir para open souce ajuda os desenvolvedores a acessarem ferramentas incríveis gratuitamente. Saiba como você pode ajudar no desenvolvimento do framework Vuetify.",
+    "keywords": "contribuir, contribuindo, solicitar recurso"
+  },
+  "getting-started/roadmap": {
+    "title": "O Cronograma Vuetify",
+    "description": "Os próximos recursos planejados e novas funcionalidades chegando ao Vuetify. Novos componentes, novas diretivas e muito, muito mais!.",
+    "keywords": "cronograma vuetify, planos futuros, novos recursos vuetify"
+  },
+  "getting-started/consulting-and-support": {
+    "title": "Consultoria e suporte",
+    "description": "Obtenha ajuda profissional, apoio e orientação ao seu aplicativo Vuetify pelo criador, John Leider.",
+    "keywords": "consultoria vuetify, suporte vuetify, ajuda vuetify"
+  },
+  "getting-started/enterprise": {
+    "title": "Vuetify para empresas",
+    "description": "Obtenha as ferramentas que você precisa continuamente catalogar e entenda o software de código aberto que seu aplicativo precisa com a assinatura Tidelift.",
+    "keywords": "vuetify empresa, tidelift empresa, tidelift vuetify"
   },
   "customization/accessibility": {
-    "title": "Acessibilidade"
+    "title": "Acessibilidade",
+    "description": "Veja exemplos e as vantagens de ter apoio à acessibilidade (a11y) em componentes Vuetify.",
+    "keywords": "a11y, acessibilidade, usabilidade"
+  },
+  "customization/a-la-carte": {
+    "title": "A-la-carte (treeshaking)",
+    "description": "A La Carte fornece treeshaking automático através do vuetify-loader. Use apenas os recursos de que você precisa e reduza drasticamente o tamanho do seu pacote.",
+    "keywords": "à la carte, a-la-carte, importação individual vuetify, importação vuetify, importação de componente, reduzir tamanho do vuetify"
+  },
+  "customization/breakpoints": {
+    "title": "Pontos de interrupção",
+    "description": "Acesse o sistema de grid Vuetify dentro de componentes usando o serviço de Breakpoint.",
+    "keywords": "breakpoints, breakpoints de grade"
   },
   "customization/icons": {
-    "title": "Ícones"
+    "title": "Ícones",
+    "description": "Vuetify suporta Material Design Icons, Font awesome e outras bibliotecas de ícones através de prefixos e opções globais.",
+    "keywords": "componente de ícone vue, iconfont, bibliotecas de ícones, ícones vuetify"
   },
   "customization/internationalization": {
-    "title": "Internacionalização (i18n)"
+    "title": "Internacionalização (i18n)",
+    "description": "Vuetify suporta a Internacionalização de idioma (i18n) de uma ampla variedade de localidades e integra facilmente o vue-i18n.",
+    "keywords": "i18n, idioma, internacionalização"
+  },
+  "customization/rtl": {
+    "title": "RTL (bidirecionalidade)",
+    "description": "Vuetify é configurável e compatível com idiomas RTL.",
+    "keywords": "rtl, direita para esquerda, bidirecionalidade"
+  },
+  "customization/sass-variables": {
+    "title": "Variáveis SASS",
+    "description": "Personalize os estilos internos do Vuetify modificando as variávels SASS.",
+    "keywords": "variavéis sass, variáveis scss, modificando os estilos do Vuetify"
   },
   "customization/theme": {
     "title": "Tema",
+    "description": "Configure o tema da sua aplicação e cores adicionais rapidamente.",
     "keywords": "temas"
+  },
+  "styles/text": {
+    "title": "Texto CSS auxiliares",
+    "description": "Textos auxiliares ajudam a modificar o layout da sua aplicação em diferentes tamanhos de telas com classes css pré-configuradas."
+  },
+  "styles/colors": {
+    "title": "Paleta de cores do Material Design",
+    "description": "Aprenda sobre as cores do Material Design. Use o pacote de cor do javascript diretamente na sua aplicação.",
+    "keywords": "cores, cores do material design, pacote de cores vuetify, classes de cores material"
+  },
+  "styles/content": {
+    "title": "Estilos de conteúdo",
+    "keywords": "content, html, markup"
+  },
+  "styles/display": {
+    "title": "Ajuda de exibição CSS"
+  },
+  "styles/scroll": {
+    "title": "Rolagem suave"
+  },
+  "styles/spacing": {
+    "title": "Ajuda de Espaçamento CSS"
   },
   "styles/transitions": {
     "title": "Transições"
+  },
+  "styles/typography": {
+    "title": "Tipografia da aplicação",
+    "keywords": "tipografia, cabeçalhos, títulos"
+  },
+  "framework/sandbox": {
+    "title": "Sandbox"
+  },
+  "components/api-explorer": {
+    "title": "Explorador de API",
+    "description": "Pesquisar na API de componentes Vuetify ou navegar em categorias comuns."
+  },
+  "components/categories/forms": {
+    "title": "Categoria de formulários",
+    "description": "Uma coleção de componentes Vuetify que são comumente usados ao criar formulários."
+  },
+  "components/categories/navigation": {
+    "title": "Categoria de navegação"
+  },
+  "components/categories/layout": {
+    "title": "Categoria de layout",
+    "description": "Componentes de Vuetify que são úteis quando se constroem layouts",
+    "keywords": "categoria de layout, componentes de layout vuetify"
+  },
+  "components/categories/buttons": {
+    "title": "Botões e Categorias de indicadores"
+  },
+  "components/categories/modals": {
+    "title": "Categoria de Popups & Modais"
+  },
+  "components/categories/tables": {
+    "title": "Categoria de tabelas"
+  },
+  "components/alerts": {
+    "title": "Componentes de Alerta"
+  },
+  "components/application": {
+    "title": "Serviço de aplicação"
+  },
+  "components/app-bars": {
+    "title": "Componentes para barra de apps",
+    "keywords": "barras de apps, componente da barra de aplicativos vuetify, componente da barra de aplicativos vue"
+  },
+  "components/aspect-ratios": {
+    "title": "Proporção"
+  },
+  "components/autocompletes": {
+    "title": "Componente para Autocompletar"
+  },
+  "components/avatars": {
+    "title": "Componente para Avatares"
+  },
+  "components/badges": {
+    "title": "Componente para Emblemas",
+    "description": "O componente de emblema é um pequeno descritor de status para elementos. Isso geralmente contém um número pequeno ou um pequeno conjunto de caracteres."
+  },
+  "components/banners": {
+    "title": "Componente para Emblemas"
+  },
+  "components/calendars": {
+    "title": "Componente para calendário"
+  },
+  "components/cards": {
+    "title": "Componente para Cards"
+  },
+  "components/buttons": {
+    "title": "Componente para Botões"
+  },
+  "components/carousels": {
+    "title": "Componente de carrossel"
+  },
+  "components/chips": {
+    "title": "Componente Chip"
+  },
+  "components/color-pickers": {
+    "title": "Componente de selecionador de cores"
+  },
+  "components/combobox": {
+    "title": "Componente de Combobox"
+  },
+  "components/dividers": {
+    "title": "Componente para Divisores"
+  },
+  "components/data-tables": {
+    "title": "Componente para tabela de dados"
+  },
+  "components/dialogs": {
+    "title": "Componente para Diálogos"
+  },
+  "components/footer": {
+    "title": "Componentes do footer"
+  },
+  "components/grids": {
+    "title": "Sistema de grade"
+  },
+  "components/file-inputs": {
+    "title": "Componentes para entrada de arquivos"
+  },
+  "components/forms": {
+    "title": "Componentes para formulários"
+  },
+  "components/icons": {
+    "title": "Componente de ícone"
+  },
+  "components/images": {
+    "title": "Componentes para imagens"
+  },
+  "components/inputs": {
+    "title": "Componente de entrada"
+  },
+  "components/lists": {
+    "title": "Componente de lista"
+  },
+  "components/menus": {
+    "title": "Componente de menu"
+  },
+  "components/overlays": {
+    "title": "Componente de sobreposição"
+  },
+  "components/paginations": {
+    "title": "Componente de paginação",
+    "description": "O componente de paginação é usado para separar conjuntos longos de dados, de modo a que seja mais fácil para um usuário consumir informações.",
+    "keywords": "paginação, componente de paginação vuetify, componente paginação do vue"
+  },
+  "components/progress-linear": {
+    "title": "Componente linear de progresso"
+  },
+  "components/ratings": {
+    "title": "Componente de classificação em estrela"
+  },
+  "components/sliders": {
+    "title": "Componente de Slider"
+  },
+  "components/steppers": {
+    "title": "Componente Stepper"
+  },
+  "components/tabs": {
+    "title": "Componente de abas"
+  },
+  "components/timelines": {
+    "title": "Componente de Linha do Tempo"
+  },
+  "components/toolbars": {
+    "title": "Componente de barra de ferramentas"
+  },
+  "components/tooltips": {
+    "title": "Componente para Dicas"
+  },
+  "components/treeview": {
+    "title": "Componente de visualização em árvore"
+  },
+  "components/windows": {
+    "title": "Componente de janela"
+  },
+  "examples/layouts/baseline": {
+    "title": "Exemplo básico de layout"
+  },
+  "examples/layouts/dark": {
+    "title": "Exemplo de layout escuro"
+  },
+  "examples/layouts/sandbox": {
+    "title": "Layout sandbox"
   }
 }

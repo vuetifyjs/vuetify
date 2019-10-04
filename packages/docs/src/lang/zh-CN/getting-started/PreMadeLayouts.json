@@ -1,3 +1,5 @@
 {
-  "header": "# 布局"
+  "header": "# 布局",
+  "headerText": "布局系统是每个应用程序的核心。下面的几个例子展示了在定制应用程序的外观时可能存在的众多可能性。",
+  "alert": "如果您正在寻找有关这些模板结构的附加信息，请参阅 [Application page](/components/application) 。"
 }

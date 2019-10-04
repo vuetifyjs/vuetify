@@ -9,8 +9,10 @@
       "header": "### Couleurs"
     },
     "toggle": {
-      "header": "### Basculement",
-      "desc": "Comme sur d'autres composants Vuetify, vous pouvez contrôler l'état d'affichage avec `v-model`."
+      "header": "### Basculement"
+    },
+    "scroll-threshold": {
+      "header": "### Seuil de défilement"
     }
   },
   "props": {

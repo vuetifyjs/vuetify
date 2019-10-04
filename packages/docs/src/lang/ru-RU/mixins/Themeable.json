@@ -1,1 +1,5 @@
-{}
+{
+  "props": {
+    "dark": "Применить в компоненте тёмную тему. Вы можете найти больше информации в документации Material Design для [тёмных тем оформления] (https://material.io/design/color/dark-theme.html)."
+  }
+}

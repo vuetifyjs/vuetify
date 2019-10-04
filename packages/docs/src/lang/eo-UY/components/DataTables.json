@@ -7,7 +7,7 @@
     },
     "slots": {
       "header": "crwdns38806:0crwdne38806:0",
-      "desc": "crwdns38808:0crwdne38808:0"
+      "desc": "crwdns43008:0crwdne43008:0"
     },
     "select": {
       "header": "crwdns32610:0crwdne32610:0",
@@ -71,7 +71,7 @@
     },
     "headerless": {
       "header": "crwdns32634:0crwdne32634:0",
-      "desc": "crwdns38852:0crwdne38852:0"
+      "desc": "crwdns43010:0crwdne43010:0"
     },
     "edit-dialog": {
       "header": "crwdns38854:0crwdne38854:0",
@@ -88,13 +88,17 @@
     "custom-filter": {
       "header": "crwdns38864:0crwdne38864:0",
       "desc": "crwdns38866:0crwdne38866:0"
+    },
+    "filterable-columns": {
+      "header": "crwdns43012:0crwdne43012:0",
+      "desc": "crwdns43014:0crwdne43014:0"
     }
   },
   "props": {
     "v-edit-dialog": {
       "cancelText": "crwdns32646:0crwdne32646:0",
       "eager": "crwdns38868:0crwdne38868:0",
-      "large": "crwdns32650:0crwdne32650:0",
+      "large": "crwdns43016:0crwdne43016:0",
       "saveText": "crwdns32652:0crwdne32652:0",
       "transition": "crwdns32654:0crwdne32654:0"
     },
@@ -146,9 +150,9 @@
   },
   "events": {
     "v-edit-dialog": {
-      "cancel": "crwdns32682:0crwdne32682:0",
+      "cancel": "crwdns43018:0crwdne43018:0",
       "close": "crwdns32684:0crwdne32684:0",
-      "open": "crwdns32686:0crwdne32686:0",
+      "open": "crwdns43020:0crwdne43020:0",
       "save": "crwdns32688:0crwdne32688:0"
     },
     "v-data-table": {

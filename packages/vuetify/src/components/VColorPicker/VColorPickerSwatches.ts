@@ -67,7 +67,7 @@ export default mixins(Themeable).extend({
             dark: contrastRatio(this.color.rgba, white) > 2 && this.color.alpha > 0.5,
             light: contrastRatio(this.color.rgba, black) > 2 && this.color.alpha > 0.5,
           },
-        }, '$vuetify.icons.success'),
+        }, '$success'),
       ])
 
       return this.$createElement('div', {

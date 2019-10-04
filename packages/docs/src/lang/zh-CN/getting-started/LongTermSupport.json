@@ -1,1 +1,25 @@
-{}
+{
+  "header": "# 长期支持",
+  "headerText": "作为一个组件框架，我们知道许多使用 Vuetify 的项目都有开发周期，这是升级到最新版本的阻力。为了给开发人员和业务人员带来安心，我们提供了 **长期支持** 最新的 _重大_ 版本。这意味着在每个 _重大_ 发行版中，您都可以放心地知道，在一个新的主要发行版之后的 **12 个月** 内，你现有的版本将会获得针对关键的 bug 和安全漏洞进行更新。",
+  "2header": "## Vuetify 2.0",
+  "2text": "这是最新版 Vuetify，基于 Material Design 2 specification。它包含了 v1.5 之上的多个改进，包括并且是最新特性和功能的推荐版本。这个版本是积极维护的，并且有一个 [roadmap](/getting-started/roadmap) 规划即将到来的功能。",
+  "2features": [
+    "**7 个新组件**",
+    "**完成对 MD2 Specification 的升级**",
+    "**完整 Typescript 支持**",
+    "**改进 accessibility 和 RTL 支持**",
+    "**许多错误修复，QOL 更改和性能改进**"
+  ],
+  "2upgrade": "准备从 v1.5 更新到此版本？请查阅可用的 [upgrade guide](https://github.com/vuetifyjs/vuetify/releases/tag/v2.0.0#user-content-upgrade-guide)。",
+  "15header": "## Vuetify 1.5 LTS",
+  "15text": "这是基于 Material Design 1 specification 的最新 LTS 版本。LTS代表长期支持——这意味着支持 12个月，直到 2020年7月，提供免费的安全更新和关键的 bug 修复。",
+  "15text2": "准备更新到 v1.5？请查阅可用的更新指南：",
+  "15versions": [
+    "[Vuetify v1.5](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0)",
+    "[Vuetify v1.4](https://github.com/vuetifyjs/vuetify/releases/tag/v1.4.0)",
+    "[Vuetify v1.3](https://github.com/vuetifyjs/vuetify/releases/tag/v1.3.0)",
+    "[Vuetify v1.2](https://github.com/vuetifyjs/vuetify/releases/tag/v1.2.0)",
+    "[Vuetify v1.1](https://github.com/vuetifyjs/vuetify/releases/tag/v1.1.0)"
+  ],
+  "15text3": "如果您有任何其他问题，请加入我们的 [Discord community](https://community.vuetifyjs.com).。"
+}

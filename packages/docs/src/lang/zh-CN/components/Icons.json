@@ -1,5 +1,4 @@
 {
-  "headerText": "`v-icon`组件提供了大量的字形来为应用程序的各个方面提供上下文。Vuetify图标利用Google的Material图标字体库。有关所有可用图标的列表，请访问官方的[Material Icons](https://material.io/icons/)页面。",
   "examples": {
     "font-awesome": {
       "header": "Font Awesome"

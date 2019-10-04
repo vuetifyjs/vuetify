@@ -1,3 +1,26 @@
 {
-  "header": "Data iterators"
+  "header": "# Data iterators",
+  "headerText": "`v-data-iterator` コンポーネントはデータを表示するために使用され、`v-data-table` コンポーネントと主要な機能を共有します。ソート、検索、ページネーション、選択の機能を含みます。",
+  "examples": {
+    "slots": {
+      "desc": "`v-data-iterator`はその他のコンテンツの追加するためのheaderとfooterのslotを持っています。"
+    },
+    "expand": {
+      "desc": "`v-data-iterator` は選択されているか、ちょうど`v-data-table`のように拡大されているかの状態を持っています。このサンプルではデフォルトslotで`isExpanded`メソッドとに`expand`を使えるようになっています。"
+    },
+    "filter": {
+      "header": "### フィルター",
+      "desc": "オーダー、フィルター、ページネーションが、それぞれのプロパティを使うことで外部からコントロールできます。"
+    }
+  },
+  "props": {
+    "v-data-iterator": {
+      "expanded": "拡張されたitemsのarrayです。 `.sync` 修飾子と一緒に使うことができます。",
+      "footerProps": "詳細は、`v-data-footer` APIを参照してください。",
+      "hideDefaultFooter": "デフォルトのfooterを隠します。",
+      "itemKey": "各itemでユニークキーとして使われるプロパティ。",
+      "loading": "もし`true`にして、itemsが設定されなかった場合、ローディングテキストが表示されます。",
+      "loadingText": "`loading`がtrueで、itemsが何も設定されなかった場合に表示されるテキスト。"
+    }
+  }
 }

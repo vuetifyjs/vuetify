@@ -1,5 +1,17 @@
 {
+  "buttons": "按钮和指示器",
+  "buttonsText": "按钮、触发器、状态与进度指示器",
+  "forms": "表单组件",
+  "formsText": "用于收集和校验用户输入的组件",
   "form": "表单",
+  "layout": "布局",
+  "layoutText": "提供内容展示的基本样式排布",
   "menus": "菜单",
+  "modals": "弹出消息与对话框",
+  "modalsText": "可以动态展示与隐藏的浮动组件",
+  "navigation": "导航",
+  "navigationText": "菜单、导航栏和工具栏等导航组件",
+  "tables": "数据表格",
+  "tablesText": "用来展示与交互表格中数据的工具",
   "tabs": "选项卡"
 }

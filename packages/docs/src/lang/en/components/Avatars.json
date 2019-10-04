@@ -1,10 +1,8 @@
 {
   "header": "# Avatars",
   "headerText": "The `v-avatar` component is typically used to display circular user profile pictures. This component will allow you to dynamically size and add a border radius of responsive images, icons, and text. A **tile** variation is available for displaying an avatar without border radius.",
+  "usageText": "Avatars in their simplest form display content within a circular container.",
   "examples": {
-    "usage": {
-      "desc": "Avatars in their simplest form display content within a circular container."
-    },
     "size": {
       "header": "### Size",
       "desc": "The `size` prop allows you to define the height and width of `v-avatar`. This prop scales both evenly with an aspect ratio of 1. `height` and `width` props will override this prop."

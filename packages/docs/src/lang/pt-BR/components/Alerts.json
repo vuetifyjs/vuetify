@@ -1,1 +1,47 @@
-{}
+{
+  "header": "# Alertas",
+  "headerText": "O componente `v-alert` é usado para transmitir informações importantes ao usuário através dos ícones e cores de tipos contextuais de uso. Estes tipos padrão aparecem em 4 variações: **success**, **info**, **warning** e **error**. Ícones padrões são atribuídos para ajudar a representar diferentes ações cada tipo. Muitas partes de um alerta como `border`, `icon` e `color` também podem ser personalizados para se adequar a quase qualquer situação.",
+  "examples": {
+    "usage": {
+      "desc": "Alertas em sua forma mais simples são [folhas de papel](/componentes/sheets) planas que exibem uma mensagem."
+    },
+    "border": {
+      "header": "### Borda",
+      "desc": "A propriedade *borda** adiciona uma borda simples a um dos 4 lados do alerta. Isso pode ser combinado com propriedades como **color**, **dark** e **type** para fornecer destaques únicos ao alerta."
+    },
+    "colored-border": {
+      "header": "### Borda Colorida",
+      "desc": "A propriedade **color-border** remove o fundo do alerta para acentuar a propriedade **border**. Se um **type** for definido, ele usará a cor padrão dos tipos. Se nenhuma **color** ou **type** for definida, a cor será padrão para a cor invertida do tema aplicado (preto para light e branco/cinza para dark)."
+    },
+    "dense": {
+      "header": "### Denso",
+      "desc": "A propriedade **dense** diminui a altura do alerta para criar um estilo simples e compacto. Quando combinado com a propriedade **border**, a espessura da borda será diminuída para ficar consistente com o estilo."
+    },
+    "dismissible": {
+      "header": "### Dispensável",
+      "desc": "A propriedade **dismissible** adiciona um botão \"fechar\" no fim do componente de alerta. Clicar neste botão irá definir seu valor como `false` e ocultará o alerta. Você pode restaurar o alerta vinculando **v-model** e definí-lo como `true`. O ícone de fechar tem um `aria-label` aplicado automaticamente que pode ser alterado modificando a propriedade **close-label** ou alterando o valor **close** no seu locale. Para mais informações sobre como modificar as configurações globais de localização, acesse a [página de Internacionalização](/customization/internationalization)."
+    },
+    "icon": {
+      "header": "### Ícone",
+      "desc": "A propriedade **icon** permite que você adicione um ícone no início do componente de alerta. Se um **type** for fornecido, isso irá substituir o ícone padrão do tipo. Além disso, colocar a propriedade **icon** como _false_ irá remover o ícone completamente."
+    },
+    "outlined": {
+      "header": "### Contorno"
+    },
+    "prominent": {
+      "header": "### Prominente"
+    },
+    "text": {
+      "header": "### Texto"
+    },
+    "transition": {
+      "header": "### Transição"
+    },
+    "type": {
+      "header": "### Tipo"
+    },
+    "twitter": {
+      "header": "### Alerta do Twitter"
+    }
+  }
+}

@@ -1,1 +1,39 @@
-{}
+{
+  "header": "# Affichage",
+  "headerText": "Les aides à l’affichage vous permettent de contrôler l’affichage du contenu. Cela inclut la visibilité conditionnelle en fonction de la fenêtre d'affichage actuelle ou du type d'affichage de l'élément actuel.",
+  "displayHeader": "## Affichage",
+  "displayText": "Spécifiez les propriétés des éléments `display`. Ces classes peuvent être appliquées à tous les points d'arrêt, de `xs` à `xl` et n'ont pas de point d'arrêt spécifié.",
+  "displayFormats": [
+    "`.d-{value}` pour `xs`",
+    "`.d-{breakpoint}-{value}` pour `sm`, `md`, `lg` et `xl`"
+  ],
+  "displays": [
+    "``none``",
+    "`inline`",
+    "`inline-block`",
+    "`block`",
+    "`table`",
+    "`table-cell`",
+    "`table-row`",
+    "`flex`",
+    "`inline-flex`"
+  ],
+  "displayText3": "Lors de la configuration d'un point de rupture spécifique pour une classe d'aide à l'affichage, il s'appliquera à toutes les largeurs d'écran de la désignation et de la liste. Par exemple, `d-lg-flex` s'appliquera aux écrans de taille `lg` et `xl`.",
+  "visibilityHeader": "## Visibilité",
+  "visibilityText": "Affiche un élément basé sur le **viewport**. Les classes d'utilitaires Breakpoint s'appliquent toujours de bas en haut. Cela signifie que si vous avez `.d-none`, il s'appliquera à tous les points d'arrêt. Cependant, `.d-md-none` s'appliquera à `md` et à haut.",
+  "printHeader": "## Afficher en impression",
+  "printText1": "Vous pouvez également modifier la propriété d'affichage lors de l'impression.",
+  "printOptions": [
+    "`.d-print-none`",
+    "`.d-print-inline`",
+    "`.d-print-inline-block`",
+    "`.d-print-block`",
+    "`.d-print-table`",
+    "`.d-print-table-row`",
+    "`.d-print-table-cell`",
+    "`.d-print-flex`",
+    "`.d-print-inline-flex`"
+  ],
+  "printText2": "Les classes d'utilitaires d'impression peuvent également être combinées avec des utilitaires d'affichage sans impression.",
+  "exampleText": "Redimensionnez votre écran pour voir les éléments masqués sous conditions."
+}
