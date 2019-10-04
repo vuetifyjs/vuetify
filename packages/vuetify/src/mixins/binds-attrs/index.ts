@@ -6,7 +6,7 @@ import Vue, { WatchHandler } from 'vue'
  */
 
 function makeWatcher (property: string): ThisType<Vue> & WatchHandler<any> {
-  return function (val, oldVal): ThisType<Vue> {
+  return function (this: Vue, val, oldVal) {
     for (const attr in oldVal) {
       if (!Object.prototype.hasOwnProperty.call(val, attr)) {
         this.$delete(this.$data[property], attr)
