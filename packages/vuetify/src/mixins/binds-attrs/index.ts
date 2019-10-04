@@ -34,11 +34,11 @@ export default Vue.extend({
   },
   
   created () {
-    for (const attr in $attrs) {
-      this.$set(this.attrs$, attr, $attrs[attr])
+    for (const attr in this.$attrs) {
+      this.$set(this.attrs$, attr, this.$attrs[attr])
     }
-    for (const attr in $listeners) {
-      this.$set(this.listeners$, attr, $listeners[attr])
+    for (const attr in this.$listeners) {
+      this.$set(this.listeners$, attr, this.$listeners[attr])
     }
   },
 })
