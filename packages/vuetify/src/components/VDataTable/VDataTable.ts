@@ -318,7 +318,6 @@ export default VDataIterator.extend({
       const children: VNodeChildren = [
         this.$createElement('template', { slot: 'row.content' }, this.genDefaultRows(items, props)),
       ]
-                       
       const toggleFn = () => this.$set(this.openCache, group, !this.openCache[group])
       const removeFn = () => props.updateOptions({ groupBy: [], groupDesc: [] })
 
