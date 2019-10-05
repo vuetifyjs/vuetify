@@ -15,8 +15,7 @@
       "desc": "Sử dụng `v-flex`, bạn có thể tạo card dạng ngang. Sử dụng thuộc tính `contain` để shrink `v-img` component vừa với hình ảnh, thay vì dùng covering."
     },
     "grids": {
-      "header": "### Dạng lưới",
-      "desc": "Với dạng lưới, bạn có thể tạo ra các thiết kế tuyệt vời."
+      "header": "### Dạng lưới"
     }
   },
   "cardMediaWarning": "`v-card-media` không dùng được nữa, hãy sử dụng `v-img`.",

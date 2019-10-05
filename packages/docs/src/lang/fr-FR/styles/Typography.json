@@ -1,1 +1,6 @@
-{}
+{
+  "header": "# Typographie",
+  "headerText": "La typographie d'une application est tout aussi importante que ses fonctionnalités. Vuetify.js utilise la police Roboto de Material Design. Chaque taille d'en-tête a également une classe d'aide correspondante pour attribuer un style identique à d'autres éléments.",
+  "fontHeader": "## Tailles de police",
+  "fontText": "Les classes d'aide de typographie vous permettent de styliser facilement du texte en fonction du dimensionnement Material Design."
+}

@@ -31,8 +31,7 @@
       "header": "サーバーサイドでのページネーションとソート"
     },
     "headerless": {
-      "header": "ヘッダー無しテーブル",
-      "desc": "`hide-headers` prop を設定するとヘッダーなしのテーブルを作成することができます。"
+      "header": "ヘッダー無しテーブル"
     },
     "edit-dialog": {
       "header": "インライン編集",
@@ -46,7 +45,6 @@
   "props": {
     "v-edit-dialog": {
       "cancelText": "**large** prop を使用した際に表示されるキャンセルボタンのデフォルトテキストを設定します。",
-      "large": "ダイアログの送信ボタンとキャンセルボタンに適用されます。",
       "saveText": "**large** prop を使用した際に表示される保存ボタンのデフォルトテキストを設定します。"
     },
     "v-data-table": {

@@ -17,7 +17,6 @@
   "props": {
     "disableResizeWatcher": "모바일과 데스크탑에서 서랍의 크기가 재조정 될 경우 자동으로 서랍을 열거나 닫습니다.",
     "disableRouteWatcher": "라우트가 변경될때 서랍을 열지 않습니다.",
-    "hideOverlay": "오버레이 표시 숨기기",
     "miniVariantWidth": "`mini` 프롭이 활성화 될때, 너비를 지정",
     "miniVariant": "밀집된 탐색 서랍 너비. **.sync** 변경자 사용 가능. 서랍을 클릭하면 서랍이 다시 열림",
     "permanent": "스크린 크기와 상관없이 서랍을 보이게 만듬",

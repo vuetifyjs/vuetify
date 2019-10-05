@@ -47,6 +47,7 @@
           "value": [
             "simple/counter",
             "simple/disabled",
+            "simple/dense",
             "simple/editable",
             "simple/filled",
             "simple/hint",

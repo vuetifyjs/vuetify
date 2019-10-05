@@ -29,12 +29,10 @@
       "desc": "列表组件可以包含一个操作栈。波纹效果和路由属性也可以应用到 v-list 甚至 v-list-item中，或者作为列表项数组的一个属性。"
     },
     "action-title-and-subtitle": {
-      "header": "操作和标题以及副标题的组合",
-      "desc": "一个列表项最多包含3行。"
+      "header": "操作和标题以及副标题的组合"
     },
     "expansion-lists": {
-      "header": "可展开的列表",
-      "desc": "一个列表项可以包含一组在点击时展开的项，可展开的列表也可以在 `navigation drawer` 组件中使用。"
+      "header": "可展开的列表"
     },
     "flat": {
       "header": "扁平"

@@ -1,4 +1,5 @@
 {
+  "header": "# Vuetify 路线图",
   "headerText": "Vuetify始终在开发中。我们一直致力于改进现有的代码库，并且增加新的特性和功能，使得构建应用程序更加轻松。以下是计划功能的暂定清单，这不是一个详尽的清单，可能随时会更改，恕不另行通知。",
   "roadmapItems": [
     {
@@ -6,52 +7,107 @@
       "complete": true,
       "title": "Alpha 版本",
       "caption": "2016年12月",
-      "text": "Vuetify向公众发布了。整个框架有40个组件，总大小高达46kb。"
+      "text": "Vuetify向公众发布了。整个框架有40个组件，总大小低至46kb。"
     },
     {
       "type": "发布",
       "complete": true,
       "title": "v1.0 版本",
-      "caption": "2018年2月"
+      "caption": "2018年2月",
+      "text": "官方 v1.0 正式版发布。在18个月的时间和 Kael 的工作，我们发布了第一个 **主要** 版本。这包括许多全新的组件、特性和功能。查阅官方的 [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.0.0)。"
     },
     {
       "type": "发布",
       "complete": true,
       "title": "v1.1 版本",
-      "caption": "2018年6月"
+      "caption": "2018年6月",
+      "text": "重构 inputs 和 selection controls。将 `v-select` 之类的组件抽象为新的实现，`v-autocomplete`、 `v-combobox` ，以实现范围更广、测试更容易的功能。这个版本也标志着 **RTL** 语言获得官方支持。查阅官方 [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.1.0)。"
     },
     {
       "type": "发布",
       "complete": true,
       "title": "v1.2 版本",
-      "caption": "2018年7月"
+      "caption": "2018年7月",
+      "text": "添加了新组件 `v-img`, `v-rating` 和 `v-hover`。改进了主题系统，扩展了HEX \n 和 RGBA 等需要使用的颜色的组件功能。Als 增加了许多新的语言环境。查阅官方 [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.2.0)。"
     },
     {
       "type": "发布",
       "complete": true,
       "title": "v1.3 版本",
-      "caption": "2018年10月"
+      "caption": "2018年10月",
+      "text": "添加了新组件 `v-treeview`, `v-timeline` and `v-item-group`。统一 `v-tabs` 和 `v-carousel` 的接口。改进 **vuetify-loader** 以支持 Vuetify 组件的 tree-shaking。查阅官方 [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.3.0)。"
     },
     {
-      "type": "发布"
+      "type": "发布",
+      "complete": true,
+      "title": "AWS Cognito Vuex Module",
+      "caption": "2018年12月",
+      "text": "与 AWS Cognito 交互的功能齐全的 Vuex module。适用于需要身份验证的网站。查阅更多信息 [AWS Cognito](https://aws.amazon.com/cognito/dev-resources/)。"
     },
     {
-      "type": "发布"
+      "type": "发布",
+      "complete": true,
+      "title": "v1.4 发布",
+      "caption": "2018年12月",
+      "text": "添加了新组件 `v-sparkline` 并将 `v-toolbar` 抽象为多个组件，以便维护和测试。重新构建整个文档，使贡献者和团队维护更加容易。查阅官方 [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.4.0)。"
     },
     {
-      "type": "发布"
+      "type": "发布",
+      "complete": true,
+      "title": "v1.5 发布",
+      "caption": "2019年2月",
+      "text": "添加了新组件 `v-calendar`。 使用新 **bar** 和 **fill** 属性，改进了 `v-sparkline` 的功能。 改进了 `v-treeview` 并为 LTS 做好了准备。 查阅 [Long-term Support Page](/getting-started/long-term-support) 以获取有关 LTS 的更多信息。 点击此处查看官方 [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0)。"
     },
     {
-      "type": "发布"
+      "type": "发布",
+      "complete": true,
+      "title": "v2.0 发布 **(Arcadia)**",
+      "caption": "2019年7月",
+      "text": "一个完整的重建框架核心。改进布局和主题系统、平台集成、可访问性、RTL和性能。更新所有组件到 [Material Design 2](https://material.io/design/) 规范。向多个现有组件添加附加功能，并为 v1.5 提供 [Long-term Support](/getting-started/long-term-support)。",
+      "features": {
+        "#### Highlights": [
+          "完成 Material Design 2 的更新",
+          "将 Javascript 转换为 Typescript",
+          "将 Stylus 转换为 Sass",
+          "将 avoriaz 转换为 vue-test-utils"
+        ],
+        "#### New Components": [
+          "v-app-bar",
+          "v-banner",
+          "v-chip-group",
+          "v-color-picker",
+          "v-file-input",
+          "v-list-item-group",
+          "v-overlay",
+          "v-simple-table",
+          "v-slide-group"
+        ]
+      }
     },
     {
-      "type": "发布"
+      "type": "发布",
+      "title": "v2.1 发布 **(Vanguard)**",
+      "caption": "Q3 2019",
+      "text": "从 v2.0 版本开始的 bug 维护周期。这包括性能问题、不正确或缺少a11y、RTL、回归和一般修复。这将允许团队解决在前一个版本的 8 个月开发周期中的任务积压。",
+      "value": true
     },
     {
-      "type": "发布"
+      "type": "发布",
+      "title": "v2.2 发布 **(Tigris)**",
+      "caption": "Q4 2019",
+      "text": "Vuetify 预设的介绍。这将包括整个 Material Design Studies collection和 _用户客制化_。有关 Google's studies 的更多信息，请 [navigate here](https://material.io/design/material-studies/about-our-material-studies.html)。"
     },
     {
-      "type": "发布"
+      "type": "发布",
+      "title": "v2.3 发布 **(Orion)**",
+      "caption": "Q1 2020",
+      "text": "Vuetify 组件将通过框架范围的默认值进行预配置。这将允许您设置全局设置，例如 **no-ripples** 或所有 inputs 都是 **outlined** 类型，甚至将所有卡片设置为 **tile**。"
+    },
+    {
+      "type": "网站",
+      "title": "Vuetify Snips",
+      "caption": "待定",
+      "text": "致力于创建和分享 Vuetify代码片段的网站。"
     }
   ]
 }

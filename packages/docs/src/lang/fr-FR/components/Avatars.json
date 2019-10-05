@@ -1,8 +1,29 @@
 {
+  "header": "# Avatars",
   "examples": {
+    "size": {
+      "header": "### Taille",
+      "desc": "La prop`size` vous permet de définir la hauteur et la largeur de `v-avatar`. Cette taille de prop est égale à un ratio d'aspect de 1. `height` et `width` les props vont écraser cette prop."
+    },
+    "tile": {
+      "header": "### Tuile",
+      "desc": "La prop`tile` supprime le rayon de bordure de v-avatar vous laissant un simple avatar carré."
+    },
+    "default": {
+      "header": "### Champ par défaut",
+      "desc": "L'emplacement par défaut `v-avatar` accepte le composant `v-icon`, une image ou un texte. Mélangez et associez les avec d'autres props pour créer quelque chose d'unique."
+    },
+    "profile": {
+      "header": "### Carte de profil",
+      "desc": "En utilisant la prop **tile** nous pouvons créer une carte de profil épurée."
+    },
     "advanced": {
       "header": "### Usage avancé",
       "desc": "La combinaison d'un avatar avec d'autres composants vous permet de construire de belles interfaces utilisatrices directement hors de la boîte."
     }
+  },
+  "props": {
+    "left": "Signifie que l'avatar est sur la gauche d'un composant. Ceci est branché par des composants tels que [v-chip](/components/chips) et [v-btn](/components/boutons).",
+    "right": "Signifie que l'avatar est sur le côté droit d'un composant. Il est branché par des composants tels que [v-chip](/components/chips) et [v-btn](/components/boutons)."
   }
 }

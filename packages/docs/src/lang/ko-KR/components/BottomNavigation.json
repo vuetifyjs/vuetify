@@ -9,8 +9,7 @@
       "header": "Grow"
     },
     "toggle": {
-      "header": "토글 (Toggle)",
-      "desc": "다른 Vuetify 컴포넌트들 처럼, `v-model` 로 표시 상태를 조절할 수 있습니다."
+      "header": "토글 (Toggle)"
     }
   }
 }

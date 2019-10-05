@@ -1,1 +1,28 @@
-{}
+{
+  "header": "Flottant",
+  "headerText": "Applique un flotteur personnalisé sur n'importe quel point d'arrêt avec des utilitaires flottants réactifs.",
+  "overviewHeader": "## Vue d'ensemble",
+  "overviewText1": "Les classes d'utilitaires flottants appliquent float en fonction de la taille actuelle du port de vue en utilisant la [propriété flottante CSS](https://developer.mozilla.org/fr-US/docs/Web/CSS/float).",
+  "classesHeader": "## Classes",
+  "classesText1": "Activer facilement un float avec une classe :",
+  "responsiveHeader": "Adaptatif",
+  "responsiveText1": "Les floats peuvent également être appliquées sur une base par point de rupture (point de vue).",
+  "responsiveText2": "Voici une liste de toutes les classes de support disponibles :",
+  "responsiveClasses": [
+    "`.float-left`",
+    "`.float-right`",
+    "`.float-none`",
+    "`.float-sm-left`",
+    "`.float-sm-right`",
+    "`.float-sm-none`",
+    "`.float-md-left`",
+    "`.float-md-right`",
+    "`.float-md-none`",
+    "`.float-lg-left`",
+    "`.float-lg-right`",
+    "`.float-lg-none`",
+    "`.float-xl-left`",
+    "`.float-xl-right`",
+    "`.float-xl-none`"
+  ]
+}

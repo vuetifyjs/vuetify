@@ -3,6 +3,7 @@ $color-pack: true !default;
 $body-font-family: 'Roboto', sans-serif !default;
 $font-size-root: 16px !default;
 $line-height-root: 1.5 !default;
+$border-radius-root: 4px !default;
 
 $spacer: 4px !default;
 
@@ -37,9 +38,9 @@ $grid-gutters: (
 ) !default;
 
 $container-max-widths: (
-  'md': map-get($grid-breakpoints, 'md'),
-  'lg': map-get($grid-breakpoints, 'lg'),
-  'xl': map-get($grid-breakpoints, 'xl')
+  'md': map-get($grid-breakpoints, 'md') * 0.9375,
+  'lg': map-get($grid-breakpoints, 'lg') * 0.9375,
+  'xl': map-get($grid-breakpoints, 'xl') * 0.9375
 ) !default;
 
 $display-breakpoints: (

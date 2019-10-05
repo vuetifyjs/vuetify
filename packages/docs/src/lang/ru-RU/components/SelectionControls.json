@@ -12,9 +12,6 @@
       "header": "### Checkboxes - Цвета",
       "desc": "Checkboxes могут быть окрашены с использованием любого из встроенных цветов и контекстных имён с помощью свойства `color`."
     },
-    "checkboxes-inline-texfield": {
-      "header": "### Checkboxes - в одну линию с текстовым полем"
-    },
     "radios-default": {
       "header": "### Radio - по умолчанию",
       "desc": "Radio-группы по умолчанию обязательны. Это можно изменить с помощью свойства `mandatory`."

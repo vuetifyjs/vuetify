@@ -285,4 +285,24 @@ describe('VBtn.ts', () => {
     })
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should retain focus when clicked', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        retainFocusOnClick: true,
+      },
+    })
+    const event = new MouseEvent('click', { detail: 1 })
+    const blur = jest.fn()
+
+    wrapper.element.blur = blur
+    wrapper.element.dispatchEvent(event)
+
+    expect(blur).not.toHaveBeenCalled()
+
+    wrapper.setProps({ retainFocusOnClick: false })
+    wrapper.element.dispatchEvent(event)
+
+    expect(blur).toHaveBeenCalled()
+  })
 })

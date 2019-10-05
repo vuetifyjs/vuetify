@@ -17,6 +17,9 @@
   position: relative
   +elevationTransition()
 
+  &:not(.v-sheet--tile)
+    border-radius: $alert-border-radius
+
   > .v-icon,
   > .v-alert__content
     margin-right: $alert-margin
@@ -123,6 +126,7 @@
 
 .v-alert__wrapper
   align-items: center
+  border-radius: inherit
   display: flex
 
 // Modifiers

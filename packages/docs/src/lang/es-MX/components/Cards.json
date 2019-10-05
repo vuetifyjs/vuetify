@@ -10,8 +10,7 @@
       "desc": "Usando `v-flex`, puedes crear cards personalizadas horizontales. Utiliza la propiedad `contain` para hacer que `v-card-media` se encoja y quepa en el contenedor, en lugar de cubrirlo.."
     },
     "grids": {
-      "header": "Grids",
-      "desc": "Al utilizar grids puedes crear distribuciones bellas."
+      "header": "Grids"
     },
     "custom-actions": {
       "header": "Acciones personalizadas",

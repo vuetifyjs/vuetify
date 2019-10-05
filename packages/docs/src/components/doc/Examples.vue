@@ -7,7 +7,7 @@
       :id="example.id"
       :key="i"
     >
-      <doc-heading>{{ example.header }}</doc-heading>
+      <doc-heading :id="example.id">{{ example.header }}</doc-heading>
       <doc-text>{{ example.desc }}</doc-text>
       <doc-example
         :key="i"

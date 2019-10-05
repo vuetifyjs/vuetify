@@ -60,6 +60,7 @@ $material-dark: (
     'disabled': rgba(map-get($shades, 'white'), 0.2),
     'discrete': map-get($shades, 'white')
   ),
+  'skeleton': linear-gradient(90deg, transparent, rgba(255, 255, 255, .05), transparent),
   'states': (
     'hover': 0.08,
     'focus': 0.24,

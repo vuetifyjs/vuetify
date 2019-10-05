@@ -1,0 +1,11 @@
+<template>
+  <div v-mutate.char="onMutate">...</div>
+</template>
+
+<script>
+  export default {
+    methods: {
+      onMutate (mutationsList, observer) {}
+    }
+  }
+</script>

@@ -1,12 +1,15 @@
 {
+  "header": "# 断点",
+  "headerText": "使用Vuetify您可以根据窗口的尺寸设定应用的布局。例如，我们可以使用特定的[grid](/components/grids)属性或者与指定的断点相关的助手类(例如[display](styles/display))设定布局。Vuetify提供了5个预先定义的断点，你也可以根据自己的需要修改他们。",
   "toc": {
     "2": {
       "text": "API"
     }
   },
   "breakpointHeader": "## Breakpoint object",
-  "breakpointText1": "Vuetify将可用的断点转换为应用程序内的可访问对象。这将允许您根据视野大小分配/应用特定的属性和特性。该对象可以从一下位置被访问：",
+  "breakpointText1": "Vuetify将有效的断点转换为应用程序内的可访问对象。这将允许您根据视口的大小应用特定的属性和特性。您可以通过`$vuetify.breakpoint`访问这个对象。",
   "breakpointHeader1a": "## 使用",
   "breakpointText2": "该对象包含与您已经习惯使用的栅格系统相同的语义属性。让我们尝试一个真实世界的例子。您有一个`v-dialog`组件，您想要在移动设备上转换成一个**全屏**对话框。通常情况下，您需要将视野大小绑定在观察者上，和/或在页面加载时进行检查。",
-  "breakpointText3": "这是很多的样板文字。即使您选择使用内置的[v-resize](/directives/resizing)指令，仍然必须定义调整大小的方法。使用**断点**对象，您可以完全跳过这个逻辑并重新构建您的应用程序。"
+  "breakpointText3": "这是很多的样板文字。即使您选择使用内置的[v-resize](/directives/resizing)指令，仍然必须定义调整大小的方法。使用**断点**对象，您可以完全跳过这个逻辑并重新构建您的应用程序。",
+  "customizeThresholdsText1": "你可以定义自己的断点阈值像素，这需要两个步骤：1，覆盖`$grid-breakpoint`样式变量(参见[SASS变量](/customization/sass-variables))。2，在应用初始化的时候，在javascript侧必须传递同样的值。"
 }

@@ -88,6 +88,10 @@
     "custom-filter": {
       "header": "### Custom filtering",
       "desc": "You can override the default filtering used with `search` prop by supplying a function to the `custom-filter` prop. If you need to customize the filtering of a specific column, you can supply a function to the `filter` property on header items. The signature is `(value: any, search: string | null, item: any) => boolean`. This function will always be run even if `search` prop has not been provided. Thus you need to make sure to exit early with a value of `true` if filter should not be applied."
+    },
+    "filterable-columns": {
+      "header": "### Filterable columns",
+      "desc": "You can easily disable specific columns from being included when searching through table rows by setting the property `filterable` to false on the header item(s). In the example below the dessert name column is no longer searchable."
     }
   },
   "props": {

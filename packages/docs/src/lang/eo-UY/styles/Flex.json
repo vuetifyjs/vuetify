@@ -17,7 +17,7 @@
     "crwdns41818:0crwdne41818:0"
   ],
   "directionHeader": "crwdns41820:0crwdne41820:0",
-  "directionText1": "crwdns41822:0crwdne41822:0",
+  "directionText1": "crwdns42896:0crwdne42896:0",
   "directionText2": "crwdns41824:0crwdne41824:0",
   "directionText3": "crwdns41826:0crwdne41826:0",
   "directionList": [
@@ -73,7 +73,7 @@
     "crwdns41922:0crwdne41922:0"
   ],
   "alignHeader": "crwdns41924:0crwdne41924:0",
-  "alignText1": "crwdns41926:0crwdne41926:0",
+  "alignText1": "crwdns42898:0crwdne42898:0",
   "alignAlert1": "crwdns41928:0crwdne41928:0",
   "alignText2": "crwdns41930:0crwdne41930:0",
   "alignList": [
@@ -142,26 +142,28 @@
   "marginText1": "crwdns42050:0crwdne42050:0",
   "marginAlert": "crwdns42052:0crwdne42052:0",
   "marginSubheader": "crwdns42054:0crwdne42054:0",
-  "marginText2": "crwdns42056:0crwdne42056:0",
+  "marginText2": "crwdns42900:0crwdne42900:0",
   "wrapHeader": "crwdns42058:0crwdne42058:0",
-  "wrapText1": "crwdns42060:0crwdne42060:0",
-  "wrapText2": "crwdns42062:0crwdne42062:0",
-  "wrapList": [
-    "crwdns42064:0crwdne42064:0",
-    "crwdns42066:0crwdne42066:0",
-    "crwdns42068:0crwdne42068:0",
-    "crwdns42070:0crwdne42070:0",
-    "crwdns42072:0crwdne42072:0",
-    "crwdns42074:0crwdne42074:0",
-    "crwdns42076:0crwdne42076:0",
-    "crwdns42078:0crwdne42078:0",
-    "crwdns42080:0crwdne42080:0",
-    "crwdns42082:0crwdne42082:0",
-    "crwdns42084:0crwdne42084:0",
-    "crwdns42086:0crwdne42086:0",
-    "crwdns42088:0crwdne42088:0",
-    "crwdns42090:0crwdne42090:0",
-    "crwdns42092:0crwdne42092:0"
+  "wrapText1": "crwdns42902:0{condition}crwdne42902:0",
+  "wrapList1": [
+    "crwdns42904:0crwdne42904:0",
+    "crwdns42906:0crwdne42906:0",
+    "crwdns42908:0crwdne42908:0"
+  ],
+  "wrapText2": "crwdns42910:0{breakpoint}crwdnd42910:0{condition}crwdne42910:0",
+  "wrapList2": [
+    "crwdns42912:0crwdne42912:0",
+    "crwdns42914:0crwdne42914:0",
+    "crwdns42916:0crwdne42916:0",
+    "crwdns42918:0crwdne42918:0",
+    "crwdns42920:0crwdne42920:0",
+    "crwdns42922:0crwdne42922:0",
+    "crwdns42924:0crwdne42924:0",
+    "crwdns42926:0crwdne42926:0",
+    "crwdns42928:0crwdne42928:0",
+    "crwdns42930:0crwdne42930:0",
+    "crwdns42932:0crwdne42932:0",
+    "crwdns42934:0crwdne42934:0"
   ],
   "orderHeader": "crwdns42094:0crwdne42094:0",
   "orderText1": "crwdns42096:0crwdne42096:0",
@@ -277,5 +279,33 @@
     "crwdns42310:0crwdne42310:0",
     "crwdns42312:0crwdne42312:0",
     "crwdns42314:0crwdne42314:0"
+  ],
+  "growShrinkHeader": "crwdns42936:0crwdne42936:0",
+  "growShrinkText1": "crwdns42938:0{condition}crwdnd42938:0{value}crwdne42938:0",
+  "growShrinkList1": [
+    "crwdns42940:0crwdne42940:0",
+    "crwdns42942:0crwdne42942:0",
+    "crwdns42944:0crwdne42944:0",
+    "crwdns42946:0crwdne42946:0"
+  ],
+  "growShrinkAlert1": "crwdns42948:0crwdne42948:0",
+  "growShrinkText2": "crwdns42950:0{breakpoint}crwdnd42950:0{condition}crwdnd42950:0{state}crwdne42950:0",
+  "growShrinkList2": [
+    "crwdns42952:0crwdne42952:0",
+    "crwdns42954:0crwdne42954:0",
+    "crwdns42956:0crwdne42956:0",
+    "crwdns42958:0crwdne42958:0",
+    "crwdns42960:0crwdne42960:0",
+    "crwdns42962:0crwdne42962:0",
+    "crwdns42964:0crwdne42964:0",
+    "crwdns42966:0crwdne42966:0",
+    "crwdns42968:0crwdne42968:0",
+    "crwdns42970:0crwdne42970:0",
+    "crwdns42972:0crwdne42972:0",
+    "crwdns42974:0crwdne42974:0",
+    "crwdns42976:0crwdne42976:0",
+    "crwdns42978:0crwdne42978:0",
+    "crwdns42980:0crwdne42980:0",
+    "crwdns42982:0crwdne42982:0"
   ]
 }
