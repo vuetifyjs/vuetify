@@ -183,7 +183,24 @@ describe('Theme.ts', () => {
     expect(ssrContext.head).toMatchSnapshot()
   })
 
-  it('should set theme with vue-meta', () => {
+  it('should set theme with vue-meta@1', () => {
+    const theme = new Theme(mock)
+    const anyInstance = instance as any
+
+    anyInstance.$meta = () => ({})
+
+    theme.init(anyInstance)
+
+    expect(typeof anyInstance.$options['metaInfo']).toBe('function')
+
+    const metaInfo = anyInstance.$options['metaInfo']()
+
+    expect(metaInfo).toBeTruthy()
+    expect(metaInfo.style).toHaveLength(1)
+    expect(metaInfo.style[0].cssText).toMatchSnapshot()
+  })
+
+  it('should set theme with vue-meta@2', () => {
     const theme = new Theme(mock)
     const anyInstance = instance as any
 

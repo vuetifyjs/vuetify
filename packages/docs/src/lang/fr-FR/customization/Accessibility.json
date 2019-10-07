@@ -2,8 +2,7 @@
   "header": "Accessibilité",
   "headerText": "L'accessibilité Web **(a11y abrégé)**, est la pratique inclusive de s'assurer qu'il n'y a pas d'obstacles qui empêchent l'interaction ou l'accès avec les sites Web du monde entier par les personnes handicapées. Les composants Vuetify sont construits de manière à fournir une interaction avec le clavier pour chaque interaction à la souris et utilise les éléments sémantiques HTML5 lorsqu'ils sont applicables.",
   "accessibilityHeader": "## Accessibilité Material Design",
-  "accessibilityText": "Google fournit un aperçu détaillé de la façon dont leurs composants sont créés avec a11y en tête. Ils fournissent également des exemples de la façon dont vous pouvez vous assurer que vous utilisez les meilleures pratiques lors de la création d'applications (au-delà de ce qui est supporté par défaut par Vuetify). Vous pouvez trouver plus d'informations sur [implémenter l'accessibilité](https://material.io/design/usability/accessibilité.html) sur le site de la spécification.",
-  "activatorHeader": "## Activator slots",
+  "activatorHeader": "## Emplacements d'activation",
   "activatorText1": "Vuetify utilise des slots activateurs pour de nombreux composants comme `v-menu`, `v-dialog` et plus. Dans certains cas, ces éléments activateurs devraient avoir des attributs spécifiques a11y qui les associent à leur contenu correspondant. Pour y parvenir, nous passons les options nécessaires via les slots scope.",
   "activatorText2": "Lorsque l'élément activateur est rendu, il contiendra maintenant les attributs a11y liés :",
   "focusHeader1": "## Gestion des Focus et interactions clavier",
@@ -20,7 +19,6 @@
   "scopedText5": "Lorsque vous fournissez un composant `v-list-item` dans un slot, les attributs aria sont passés par la propriété de données **attrs** et peuvent être liés avec `v-bind`.",
   "scopedText6": "Afin d'associer correctement un label à la bonne _option_ vous devrez lier `attrs.id` au `aria-labelled-by` sur votre `v-list-item-title`. Cela vous assurera que le texte est correctement associé. Gardez en tête que cela est fait automatiquement pour vous si vous n'utilisez pas de slots.",
   "resourcesHeader": "4. Ressources complémentaires",
-  "resourcesText1": "Bien que Vuetify tente de rendre a11y aussi facile que possible dans votre application, il y a des moments où des informations supplémentaires sont nécessaires. Vous trouverez ci-dessous une liste de ressources utiles.",
   "resourcesText2": [
     "[Initiative d'accessibilité Web du W3C](https://www.w3.org/WAI/)",
     "[Pratiques de rédaction WAI-ARIA](https://www.w3.org/TR/wai-aria-practices-1.1/)",

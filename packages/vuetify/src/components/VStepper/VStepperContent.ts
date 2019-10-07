@@ -57,7 +57,10 @@ export default baseMixins.extend<options>().extend({
 
   computed: {
     computedTransition (): FunctionalComponentOptions {
-      return this.isReverse
+      // Fix for #8978
+      const reverse = this.$vuetify.rtl ? !this.isReverse : this.isReverse
+
+      return reverse
         ? VTabReverseTransition
         : VTabTransition
     },

@@ -8,6 +8,7 @@ const TableHeader = {
   value: 'string',
   'align?': '\'start\' | \'center\' | \'end\'',
   'sortable?': 'boolean',
+  'filterable?': 'boolean',
   'divider?': 'boolean',
   'class?': 'string | string[]',
   'width?': 'string | number',
@@ -71,6 +72,13 @@ const DataTableBodyScopedProps = {
   isMobile: 'boolean',
 }
 
+const DataGroupHeaderScopedProps = {
+  group: DataDefaultScopedSlotProps.group,
+  groupedBy: DataOptions.groupBy,
+  items: 'any[]',
+  headers: 'TableHeader[]',
+}
+
 const DataTableSlots = [
   { name: 'body.append', props: DataTableBodyScopedProps },
   { name: 'body.prepend', props: DataTableBodyScopedProps },
@@ -83,7 +91,7 @@ const DataTableSlots = [
   { name: 'top', props: DataDefaultScopedSlotProps },
   { name: 'progress', props: DataDefaultScopedSlotProps },
   { name: 'group', props: DataDefaultScopedSlotProps },
-  { name: 'group.header', props: DataDefaultScopedSlotProps },
+  { name: 'group.header', props: DataGroupHeaderScopedProps },
   { name: 'group.summary', props: DataDefaultScopedSlotProps },
   { name: 'item', props: { ...DataTableItemScopedProps, index: 'number' } },
   { name: 'item.data-table-select', props: DataTableItemScopedProps },

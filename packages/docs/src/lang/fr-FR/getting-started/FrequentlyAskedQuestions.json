@@ -1,4 +1,8 @@
 {
   "header": "# Foire Aux Questions",
-  "headerText": "Coincé sur un problème particulier ? Vérifiez certains de ces pièges courants avant de créer un ticket. Si vous ne trouvez toujours pas ce que vous cherchez, soumettez une [issue](https://issues.vuetifyjs.com) sur github ou demandez à la communauté sur [community](https://community.vuetifyjs.com)."
+  "headerText": "Coincé sur un problème particulier ? Vérifiez certains de ces pièges courants avant de créer un ticket. Si vous ne trouvez toujours pas ce que vous cherchez, soumettez une [issue](https://issues.vuetifyjs.com) sur github ou demandez à la communauté sur [community](https://community.vuetifyjs.com).",
+  "question": "Question :",
+  "answer": "Réponse",
+  "noResultsFound": "Aucun résultat trouvé",
+  "resetSearch": "Réinitialiser la recherche"
 }

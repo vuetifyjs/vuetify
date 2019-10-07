@@ -7,7 +7,7 @@
     "`.d-{value}` for `xs`",
     "`.d-{breakpoint}-{value}` for `sm`, `md`, `lg` and `xl`"
   ],
-  "displayText2": "The _value_ propety is one of:",
+  "displayText2": "The _value_ property is one of:",
   "displays": [
     "`none`",
     "`inline`",
@@ -22,6 +22,14 @@
   "displayText3": "When setting a specific breakpoint for a display helper class, it will apply to all screen widths from the designation and up. For example, `d-lg-flex` will apply to `lg` and `xl` size screens.",
   "visibilityHeader": "## Visibility",
   "visibilityText": "Conditionally display an element based upon the current **viewport**. Breakpoint utility classes always apply from the bottom up. That means if you have `.d-none`, it will apply to all breakpoints. However, `.d-md-none` will apply to only `md` and up.",
+  "lateralDisplayText": "Additionally you can also display an element based upon the current **viewport** using lateral display helper classes. These classes can be applied using the following format `hidden-{breakpoint}-{condition}`",
+  "conditionText": "The _condition_ applies the class base on:",
+  "conditions": [
+    "`only` - hide the element only on `xs` through `xl` breakpoints",
+    "`and-down` - hide the element on the specified breakpoint and down `sm` through `lg` breakpoints",
+    "`and-up` - hide the element on the specified breakpoint and up `sm` through `lg` breakpoints"
+  ],
+  "mediaText": "Additionally, **media types** can be targeted using the `only` condition. Both `hidden-screen-only` and `hidden-print-only` are currently supported.",
   "printHeader": "## Display in print",
   "printText1": "You can also change the display property when printing.",
   "printOptions": [

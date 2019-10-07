@@ -62,6 +62,7 @@
     "weekdays": "Specifies which days of the week to display. To display Monday through Friday only, a value of `[1, 2, 3, 4, 5]` can be used. To display a week starting on Monday a value of `[1, 2, 3, 4, 5, 6, 0]` can be used."
   },
   "functions": {
+    "checkChange": "Checks for change in start and end dates. Updates and emits a change event if they have changed.",
     "formatTime": "A utility function to take a timestamp object (at least has hour and minute properties) and generates a time as a string.",
     "getFormatter": "A utility function given options to pass to Intl.DateTimeFormat and returns a function which can be given a Date to format as a string.",
     "minutesToPixels": "Converts minutes to a pixel value on the y-axis for the `day` view. If the view is not `day` then -1 is returned.",

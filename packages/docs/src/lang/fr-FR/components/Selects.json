@@ -1,4 +1,9 @@
 {
+  "examples": {
+    "dense": {
+      "header": "### Dense"
+    }
+  },
   "props": {
     "value": "Components.Inputs.props.value"
   },

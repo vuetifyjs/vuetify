@@ -2,6 +2,9 @@
   "examples": {
     "filled": {
       "desc": "Text-fields podem ser usados com um design em caixa alternativo. As props de ícones append e prepend **não** são suportadas neste modo."
+    },
+    "dense": {
+      "header": "### Denso"
     }
   }
 }

@@ -1,0 +1,7 @@
+// tsconfig.json
+
+{
+  "compilerOptions": {
+    "types": ["vuetify"]
+  }
+}

@@ -11,7 +11,8 @@
       "title": "Composants sémantiques Material"
     },
     "scaffolding": {
-      "title": "Projets prêts à l'emploi"
+      "text": "Vuetify supporte le futur de Vue via son plugin sur Vue CLI 3. Avec une seule commande, vous êtes prêt à développer votre prochaine bonne idée.",
+      "title": "Des projets prêts à l'emploi"
     }
   },
   "getHelp": "Obtenir de l'aide",

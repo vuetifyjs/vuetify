@@ -28,7 +28,6 @@
     "combobox": "在单选中 **tags** 的一个变种",
     "debounceSearch": "去除搜索框正在 emitted 的值",
     "deletableChips": "添加一个去除图标的到选定的小纸片（chips）",
-    "dense": "减小列表的最大高度",
     "disabled": "禁用输入",
     "editable": " 创建一个可编辑按钮 - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "filter": "用于过滤条目的功能",

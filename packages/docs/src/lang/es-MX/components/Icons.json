@@ -1,5 +1,4 @@
 {
-  "headerText": "El componente `v-icon` provee de una gran colección de símbolos que dan contexto a varios aspectos de tu aplicación. Los íconos de vuetify utilizan la librería de fuentes Material Icons. Para ver la lista de todos los íconos disponibles, visita la página oficial de [Material Icons](https://material.io/icons/).",
   "examples": {
     "font-awesome": {
       "header": "Font Awesome"

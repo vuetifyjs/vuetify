@@ -1,9 +1,20 @@
 {
+  "header": "# Défilement",
   "headerText": "Vous pouvez déclencher par programmation le défilement dans votre application à l’aide de la méthode `goTo` trouvée dans l’objet `$vuetify`. Cette méthode prend en charge différents types de sélecteurs de cibles et d’options, notamment le défilement régulier à l’aide des fonctions d’accélération intégrées.",
   "firstHeader": "## Premier",
   "secondHeader": "## Second",
   "thirdHeader": "## Troisième",
   "loremIpsum": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur ?",
+  "examples": {
+    "usage": {
+      "desc": "La méthode `goTo` prend deux paramètres `target` et `options`. `target` peut être soit un espacement en pixels en haut de la page, un sélecteur css valide, soit une référence d'élément. `options` est un objet qui inclut `duration`, `easing` ,`container`, et `offset`."
+    }
+  },
+  "components": [
+    "$vuetify"
+  ],
+  "routerHeading": "## Utilisation avec routeur",
+  "routerText1": "La fonction **goTo** peut être importée et invoquée individuellement n'importe où. Ceci est particulièrement utile lors de l'accrochage jusqu'à [vue-router](https://router.vuejs.org/).",
   "functions": {
     "goTo": "Défiler jusqu'à l'emplacement cible, en utilisant les options fournies"
   }

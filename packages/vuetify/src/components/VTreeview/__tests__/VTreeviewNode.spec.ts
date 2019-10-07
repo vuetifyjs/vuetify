@@ -56,7 +56,11 @@ describe('VTreeViewNode.ts', () => {
     }
 
     mountFunction = (options?: MountOptions<Instance>) => {
-      return mount(VTreeviewNode, options)
+      return mount(VTreeviewNode, {
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
+        ...options,
+      })
     }
   })
 
@@ -65,15 +69,17 @@ describe('VTreeViewNode.ts', () => {
       provide: { treeview },
     })
 
-    expect(wrapper.vm.computedIcon).toBe('$vuetify.icons.checkboxOff')
+    expect(wrapper.vm.computedIcon).toBe('$checkboxOff')
 
     wrapper.setData({ isIndeterminate: true })
 
-    expect(wrapper.vm.computedIcon).toBe('$vuetify.icons.checkboxIndeterminate')
+    expect(wrapper.vm.computedIcon).toBe('$checkboxIndeterminate')
   })
 
   it('should use scoped slots', () => {
     const wrapper = mount(Mock, {
+      // https://github.com/vuejs/vue-test-utils/issues/1130
+      sync: false,
       provide: { treeview },
     })
 
@@ -91,6 +97,8 @@ describe('VTreeViewNode.ts', () => {
 
   it('should use label slot', () => {
     const wrapper = mount(MockScopedLabel, {
+      // https://github.com/vuejs/vue-test-utils/issues/1130
+      sync: false,
       provide: { treeview },
     })
 
@@ -111,6 +119,8 @@ describe('VTreeViewNode.ts', () => {
         },
       }),
     }, {
+      // https://github.com/vuejs/vue-test-utils/issues/1130
+      sync: false,
       provide: { treeview },
     })
 

@@ -438,6 +438,12 @@ export default baseMixins.extend({
   render (h): VNode {
     const data = {
       staticClass: 'v-menu',
+      class: {
+        'v-menu--attached':
+          this.attach === '' ||
+          this.attach === true ||
+          this.attach === 'attach',
+      },
       directives: [{
         arg: '500',
         name: 'resize',

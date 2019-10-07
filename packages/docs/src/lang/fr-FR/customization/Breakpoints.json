@@ -1,5 +1,13 @@
 {
   "header": "# Breakpoints",
+  "toc": {
+    "0": {
+      "text": "Introduction"
+    },
+    "2": {
+      "text": "API"
+    }
+  },
   "breakpointHeader": "## Objet du service Breakpoint",
   "breakpointText1": "Vuetify convertit les breakpoints disponibles en un objet accessible depuis votre application. Cela vous permettra d'assigner / d'appliquer des propriétés et des attributs spécifiques en fonction de la taille de la fenêtre d'affichage. L'objet est disponible par `$vuetify.breakpoint`.",
   "breakpointHeader1a": "## Utilisation",

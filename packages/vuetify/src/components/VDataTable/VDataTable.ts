@@ -91,7 +91,7 @@ export default VDataIterator.extend({
     headersLength: Number,
     expandIcon: {
       type: String,
-      default: '$vuetify.icons.expand',
+      default: '$expand',
     },
     customFilter: {
       type: Function,
@@ -146,18 +146,24 @@ export default VDataIterator.extend({
       }, {})
     },
     headersWithCustomFilters (): TableHeader[] {
-      return this.computedHeaders.filter(header => header.filter)
+      return this.computedHeaders.filter(header => header.filter && (!header.hasOwnProperty('filterable') || header.filterable === true))
     },
     headersWithoutCustomFilters (): TableHeader[] {
-      return this.computedHeaders.filter(header => !header.filter)
+      return this.computedHeaders.filter(header => !header.filter && (!header.hasOwnProperty('filterable') || header.filterable === true))
     },
     sanitizedHeaderProps (): Record<string, any> {
       return camelizeObjectKeys(this.headerProps)
     },
     computedItemsPerPage (): number {
       const itemsPerPage = this.options && this.options.itemsPerPage ? this.options.itemsPerPage : this.itemsPerPage
-      if (this.sanitizedFooterProps.itemsPerPageOptions && !this.sanitizedFooterProps.itemsPerPageOptions.includes(itemsPerPage)) {
-        const firstOption = this.sanitizedFooterProps.itemsPerPageOptions[0]
+      const { itemsPerPageOptions } = this.sanitizedFooterProps
+      if (
+        itemsPerPageOptions &&
+        !itemsPerPageOptions.find((item: number | { value: number }) => {
+          return typeof item === 'number' ? item === itemsPerPage : item.value === itemsPerPage
+        })
+      ) {
+        const firstOption = itemsPerPageOptions[0]
         return typeof firstOption === 'object' ? firstOption.value : firstOption
       }
 
@@ -289,7 +295,7 @@ export default VDataIterator.extend({
       ])
     },
     genItems (items: any[], props: DataProps) {
-      const empty = this.genEmpty(props.pagination.itemsLength)
+      const empty = this.genEmpty(props.originalItemsLength, props.pagination.itemsLength)
       if (empty) return [empty]
 
       return props.groupedItems
@@ -334,7 +340,7 @@ export default VDataIterator.extend({
           on: {
             click: () => this.$set(this.openCache, group, !this.openCache[group]),
           },
-        }, [this.$createElement(VIcon, [isOpen ? '$vuetify.icons.minus' : '$vuetify.icons.plus'])])
+        }, [this.$createElement(VIcon, [isOpen ? '$minus' : '$plus'])])
 
         const remove = this.$createElement(VBtn, {
           staticClass: 'ma-0',
@@ -345,7 +351,7 @@ export default VDataIterator.extend({
           on: {
             click: () => props.updateOptions({ groupBy: [], groupDesc: [] }),
           },
-        }, [this.$createElement(VIcon, ['$vuetify.icons.close'])])
+        }, [this.$createElement(VIcon, ['$close'])])
 
         const column = this.$createElement('td', {
           staticClass: 'text-start',
@@ -395,9 +401,12 @@ export default VDataIterator.extend({
     },
     genDefaultExpandedRow (item: any): VNode {
       const isExpanded = this.isExpanded(item)
-      const headerRow = this.genDefaultSimpleRow(item, isExpanded ? 'expanded expanded__row' : null)
+      const classes = {
+        'v-data-table__expanded v-data-table__expanded__row': isExpanded,
+      }
+      const headerRow = this.genDefaultSimpleRow(item, classes)
       const expandedRow = this.$createElement('tr', {
-        staticClass: 'expanded expanded__content',
+        staticClass: 'v-data-table__expanded v-data-table__expanded__content',
       }, [this.$scopedSlots['expanded-item']!({ item, headers: this.computedHeaders })])
 
       return this.$createElement(RowGroup, {
@@ -409,7 +418,7 @@ export default VDataIterator.extend({
         this.$createElement('template', { slot: 'row.content' }, [expandedRow]),
       ])
     },
-    genDefaultSimpleRow (item: any, classes: string | string[] | object | null = null): VNode {
+    genDefaultSimpleRow (item: any, classes: Record<string, boolean> = {}): VNode {
       const scopedSlots = getPrefixedScopedSlots('item.', this.$scopedSlots)
 
       const data = this.createItemProps(item)
@@ -445,7 +454,10 @@ export default VDataIterator.extend({
 
       return this.$createElement(this.isMobile ? MobileRow : Row, {
         key: getObjectValueByPath(item, this.itemKey),
-        class: classes,
+        class: {
+          ...classes,
+          'v-data-table__selected': data.isSelected,
+        },
         props: {
           headers: this.computedHeaders,
           item,

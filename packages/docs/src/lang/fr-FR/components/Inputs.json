@@ -1,4 +1,14 @@
 {
+  "props": {
+    "appendIcon": "Ajoute une icône au composant, utilise la même syntaxe que `v-icon`",
+    "backgroundColor": "Modifie la couleur de fond de l'entrée",
+    "hideDetails": "Masque l'indice, erreurs de validation",
+    "height": "Définit la hauteur de l'entrée",
+    "hint": "Texte d'indice",
+    "label": "Définit l'étiquette d'entrée",
+    "persistentHint": "Force l'indice à toujours être visible",
+    "prependIcon": "Ajoute une icône au composant, utilise la même syntaxe que `v-icon`"
+  },
   "slots": {
     "label": "Remplace le label par défaut"
   }

@@ -1,0 +1,15 @@
+{
+  "header": "crwdns43028:0crwdne43028:0",
+  "headerText": "crwdns43030:0crwdne43030:0",
+  "lazyAlert": "crwdns43032:0[v-intersect]crwdnd43032:0[Polyfill]crwdne43032:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns43034:0crwdne43034:0"
+    }
+  },
+  "props": {
+    "minHeight": "crwdns43036:0crwdne43036:0",
+    "options": "crwdns43038:0crwdne43038:0",
+    "transition": "crwdns43040:0crwdne43040:0"
+  }
+}

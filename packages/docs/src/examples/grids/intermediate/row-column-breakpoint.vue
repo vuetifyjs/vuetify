@@ -7,14 +7,16 @@
       <v-col
         v-for="n in 2"
         :key="n"
-        :sm="n === 1 ? 8 : 4"
+        :lg="cols[n - 1]"
+        :md="6"
+        :sm="cols[n - 1]"
       >
         <v-card
           class="pa-2"
           outlined
           tile
         >
-          col-{{ n === 1 ? 8 : 4 }}
+          col-{{ cols[n - 1] }}
         </v-card>
       </v-col>
     </v-row>
@@ -35,3 +37,14 @@
     </v-row>
   </v-container>
 </template>
+
+<script>
+  export default {
+    computed: {
+      cols () {
+        const { lg, sm } = this.$vuetify.breakpoint
+        return lg ? [3, 9] : sm ? [9, 3] : [6, 6]
+      },
+    },
+  }
+</script>

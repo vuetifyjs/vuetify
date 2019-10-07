@@ -1,4 +1,5 @@
 @import '../../styles/styles.sass'
+@import './_variables.scss'
 
 // Theme
 +theme(v-card) using ($material)
@@ -13,13 +14,19 @@
 
 // Block
 .v-card
+  display: block
   max-width: 100%
   outline: none
   text-decoration: none
   transition-property: box-shadow, opacity
   overflow-wrap: break-word
+  position: relative
   white-space: normal
+  +elevationTransition()
   +elevation(2)
+
+  &:not(.v-sheet--tile)
+    border-radius: $card-border-radius
 
   > *:first-child:not(.v-btn):not(.v-chip),
   > .v-card__progress + *:not(.v-btn):not(.v-chip)
@@ -137,3 +144,6 @@
 
 .v-card--raised
   +elevation(8)
+
+.v-card--shaped
+  border-radius: $card-shaped-border-radius $card-border-radius
