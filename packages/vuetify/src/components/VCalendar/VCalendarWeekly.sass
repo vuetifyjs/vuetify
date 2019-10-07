@@ -60,6 +60,9 @@
   user-select: none
   position: relative
   padding: $calendar-weekly-day-padding
+  // https://github.com/vuetifyjs/vuetify/issues/9058
+  // https://bugzilla.mozilla.org/show_bug.cgi?id=1114904
+  min-width: 0
 
   &.v-present
     .v-calendar-weekly__day-month

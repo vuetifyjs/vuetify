@@ -72,12 +72,12 @@ export default mixins(
     multiple: Boolean,
     nextIcon: {
       type: String,
-      default: '$vuetify.icons.next',
+      default: '$next',
     },
     pickerDate: String,
     prevIcon: {
       type: String,
-      default: '$vuetify.icons.prev',
+      default: '$prev',
     },
     range: Boolean,
     reactive: Boolean,

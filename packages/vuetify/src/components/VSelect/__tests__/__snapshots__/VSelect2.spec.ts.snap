@@ -25,7 +25,7 @@ exports[`VSelect.ts should be clearable with prop, dirty and multi select 1`] = 
             <i role="button"
                class="v-icon notranslate v-icon--link material-icons theme--light"
             >
-              $vuetify.icons.clear
+              $clear
             </i>
           </div>
         </div>
@@ -34,7 +34,7 @@ exports[`VSelect.ts should be clearable with prop, dirty and multi select 1`] = 
             <i aria-hidden="true"
                class="v-icon notranslate material-icons theme--light"
             >
-              $vuetify.icons.dropdown
+              $dropdown
             </i>
           </div>
         </div>
@@ -84,7 +84,7 @@ exports[`VSelect.ts should be clearable with prop, dirty and single select 1`] =
             <i role="button"
                class="v-icon notranslate v-icon--link material-icons theme--light"
             >
-              $vuetify.icons.clear
+              $clear
             </i>
           </div>
         </div>
@@ -93,7 +93,7 @@ exports[`VSelect.ts should be clearable with prop, dirty and single select 1`] =
             <i aria-hidden="true"
                class="v-icon notranslate material-icons theme--light"
             >
-              $vuetify.icons.dropdown
+              $dropdown
             </i>
           </div>
         </div>
@@ -143,7 +143,7 @@ exports[`VSelect.ts should use scoped slot for selection generation 1`] = `
             <i aria-hidden="true"
                class="v-icon notranslate material-icons theme--light"
             >
-              $vuetify.icons.dropdown
+              $dropdown
             </i>
           </div>
         </div>

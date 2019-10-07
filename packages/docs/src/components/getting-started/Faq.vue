@@ -33,9 +33,7 @@
               :id="gotcha.id"
               class="mb-12"
             >
-              <core-goto :id="gotcha.id">
-                <doc-markdown :code="gotcha.q" />
-              </core-goto>
+              <core-goto :id="gotcha.id" :code="gotcha.q" />
               <v-card
                 class="pa-4"
                 outlined

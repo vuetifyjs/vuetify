@@ -51,15 +51,15 @@ export default mixins(
     dense: Boolean,
     emptyIcon: {
       type: String,
-      default: '$vuetify.icons.ratingEmpty',
+      default: '$ratingEmpty',
     },
     fullIcon: {
       type: String,
-      default: '$vuetify.icons.ratingFull',
+      default: '$ratingFull',
     },
     halfIcon: {
       type: String,
-      default: '$vuetify.icons.ratingHalf',
+      default: '$ratingHalf',
     },
     halfIncrements: Boolean,
     hover: Boolean,
