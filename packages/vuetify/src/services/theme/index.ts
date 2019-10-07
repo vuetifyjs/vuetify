@@ -179,6 +179,22 @@ export class Theme extends Service {
     this.vueMeta = true
 
     const meta = root.$meta()
+
+    const metaAdd = typeof meta.addApp === 'function'
+    if (metaAdd) {
+      const { set } = root.$meta().addApp('vuetify')
+
+      set({
+        style: [{
+          cssText: this.generatedStyles,
+          type: 'text/css',
+          id: 'vuetify-theme-stylesheet',
+          nonce: (this.options && this.options.cspNonce) || undefined,
+        }],
+      })
+      return
+    }
+
     const metaKeyName = typeof meta.getOptions === 'function' ? meta.getOptions().keyName : 'metaInfo'
     const metaInfo = root.$options[metaKeyName] || {}
 
