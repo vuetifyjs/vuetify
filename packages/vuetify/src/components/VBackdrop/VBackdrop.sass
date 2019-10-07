@@ -3,8 +3,10 @@
   position: relative
 
 // Element
-.v-backdrop__front, .v-backdrop__back
+.v-backdrop__content, .v-backdrop__front, .v-backdrop__back
   width: 100%
   position: absolute
-  overflow: auto
   transition: all .3s
+
+.v-backdrop__content, .v-backdrop__back
+  overflow: auto

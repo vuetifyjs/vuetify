@@ -88,7 +88,6 @@ export default mixins(
         class: this.elevationClasses,
         style: {
           transform: `translateY(${this.frontShift}px)`,
-          'max-height': `calc(100vh - ${this.frontShift}px)`,
         },
       }, [
         this.$createElement('div', {
@@ -101,7 +100,14 @@ export default mixins(
         }, [
           this.$slots.subheader,
         ]),
-        this.$slots.default,
+        this.$createElement('div', {
+          staticClass: 'v-backdrop__content',
+          style: {
+            'max-height': `calc(100vh - ${this.frontShift + this.subheaderHeight}px)`,
+          },
+        }, [
+          this.$slots.default,
+        ]),
       ]),
     ])
   },
