@@ -357,7 +357,6 @@ export default baseMixins.extend<options>().extend({
 
             this.selectedIndex = index
           },
-          focus,
           'click:close': () => this.onChipInput(item),
         },
         key: JSON.stringify(this.getValue(item)),
