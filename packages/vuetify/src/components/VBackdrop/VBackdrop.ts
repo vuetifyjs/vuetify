@@ -8,6 +8,9 @@ import Toggleable from '../../mixins/toggleable'
 // Components
 import VSheet from '../VSheet'
 
+// Directives
+import { Mutate } from '../../directives/mutate'
+
 // Types
 import mixins from '../../util/mixins'
 import Vue, { VNode } from 'vue'
@@ -18,6 +21,8 @@ export default mixins(
   /* @vue/component */
 ).extend({
   name: 'v-backdrop',
+
+  directives: { Mutate },
 
   props: {
     elevation: {
@@ -31,7 +36,6 @@ export default mixins(
   data: () => ({
     activeHeight: 0,
     collapsedHeight: 0,
-    observer: null as MutationObserver | null,
   }),
 
   computed: {
@@ -42,31 +46,14 @@ export default mixins(
 
   mounted () {
     this.measure()
-
-    this.observer = new MutationObserver(this.measure)
-
-    this.observer.observe((this.$refs.back as Vue).$el, {
-      attributes: true,
-      childList: true,
-      subtree: true,
-      characterData: true,
-    })
-  },
-
-  beforeDestroy () {
-    this.observer && this.observer.disconnect()
   },
 
   methods: {
     measure () {
       if (this.isActive) {
-        this.$nextTick(function () {
-          this.activeHeight = (this.$refs.back as Vue).$el.getBoundingClientRect().height
-        })
+        this.activeHeight = (this.$refs.back as Vue).$el.getBoundingClientRect().height
       } else {
-        this.$nextTick(function () {
-          this.collapsedHeight = (this.$refs.back as Vue).$el.getBoundingClientRect().height
-        })
+        this.collapsedHeight = (this.$refs.back as Vue).$el.getBoundingClientRect().height
       }
     },
   },
@@ -78,6 +65,10 @@ export default mixins(
       this.$createElement(VSheet, {
         staticClass: 'v-backdrop__back',
         ref: 'back',
+        directives: [{
+          name: 'mutate',
+          value: this.measure,
+        }],
       }, [
         this.isActive ? this.$slots.back : this.$slots.collapsed,
       ]),
