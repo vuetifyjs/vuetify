@@ -36,25 +36,33 @@ export default mixins(
   data: () => ({
     activeHeight: 0,
     collapsedHeight: 0,
+    subheaderHeight: 0,
   }),
 
   computed: {
     computedElevation (): string | number | undefined {
       return this.flat ? undefined : this.elevation
     },
+    frontShift (): number {
+      return this.isActive ? this.activeHeight : this.collapsedHeight
+    },
   },
 
   mounted () {
-    this.measure()
+    this.measureBack()
+    this.measureSubheader()
   },
 
   methods: {
-    measure () {
+    measureBack () {
       if (this.isActive) {
         this.activeHeight = (this.$refs.back as Vue).$el.getBoundingClientRect().height
       } else {
         this.collapsedHeight = (this.$refs.back as Vue).$el.getBoundingClientRect().height
       }
+    },
+    measureSubheader () {
+      this.subheaderHeight = (this.$refs.subheader as Element).getBoundingClientRect().height
     },
   },
 
@@ -67,8 +75,11 @@ export default mixins(
         ref: 'back',
         directives: [{
           name: 'mutate',
-          value: this.measure,
+          value: this.measureBack,
         }],
+        style: {
+          'max-height': `calc(100vh - ${this.subheaderHeight}px)`,
+        },
       }, [
         this.isActive ? this.$slots.back : this.$slots.collapsed,
       ]),
@@ -76,9 +87,20 @@ export default mixins(
         staticClass: 'v-backdrop__front',
         class: this.elevationClasses,
         style: {
-          transform: `translateY(${this.isActive ? this.activeHeight : this.collapsedHeight}px)`,
+          transform: `translateY(${this.frontShift}px)`,
+          'max-height': `calc(100vh - ${this.frontShift}px)`,
         },
       }, [
+        this.$createElement('div', {
+          staticClass: 'v-backdrop__subheader',
+          ref: 'subheader',
+          directives: [{
+            name: 'mutate',
+            value: this.measureSubheader,
+          }],
+        }, [
+          this.$slots.subheader,
+        ]),
         this.$slots.default,
       ]),
     ])
