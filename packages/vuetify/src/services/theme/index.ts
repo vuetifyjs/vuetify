@@ -182,7 +182,7 @@ export class Theme extends Service {
 
     const metaAdd = typeof meta.addApp === 'function'
     if (metaAdd) {
-      const { set } = root.$meta().addApp('vuetify')
+      const { set } = meta.addApp('vuetify')
 
       set({
         style: [{
