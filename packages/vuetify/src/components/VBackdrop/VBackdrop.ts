@@ -15,6 +15,9 @@ import { Mutate } from '../../directives/mutate'
 import mixins from '../../util/mixins'
 import Vue, { VNode } from 'vue'
 
+// Utils
+import { convertToUnit } from '../../util/helpers'
+
 export default mixins(
   Elevatable,
   Toggleable,
@@ -55,22 +58,18 @@ export default mixins(
 
   methods: {
     measureBack () {
+      const height = (this.$refs.back as Vue).$el.getBoundingClientRect().height
       if (this.isActive) {
-        this.activeHeight = (this.$refs.back as Vue).$el.getBoundingClientRect().height
+        this.activeHeight = height
       } else {
-        this.collapsedHeight = (this.$refs.back as Vue).$el.getBoundingClientRect().height
+        this.collapsedHeight = height
       }
     },
     measureSubheader () {
       this.subheaderHeight = (this.$refs.subheader as Element).getBoundingClientRect().height
     },
-  },
-
-  render (): VNode {
-    return this.$createElement('div', {
-      class: 'v-backdrop',
-    }, [
-      this.$createElement(VSheet, {
+    genBack () {
+      return this.$createElement(VSheet, {
         staticClass: 'v-backdrop__back',
         ref: 'back',
         directives: [{
@@ -78,16 +77,16 @@ export default mixins(
           value: this.measureBack,
         }],
         style: {
-          'max-height': `calc(100vh - ${this.subheaderHeight}px)`,
+          'max-height': `calc(100vh - ${convertToUnit(this.subheaderHeight)})`,
         },
-      }, [
-        this.isActive ? this.$slots.back : this.$slots.collapsed,
-      ]),
-      this.$createElement(VSheet, {
+      }, this.isActive ? this.$slots.back : this.$slots.collapsed)
+    },
+    genFront () {
+      return this.$createElement(VSheet, {
         staticClass: 'v-backdrop__front',
         class: this.elevationClasses,
         style: {
-          transform: `translateY(${this.frontShift}px)`,
+          transform: `translateY(${convertToUnit(this.frontShift)})`,
         },
       }, [
         this.$createElement('div', {
@@ -97,18 +96,23 @@ export default mixins(
             name: 'mutate',
             value: this.measureSubheader,
           }],
-        }, [
-          this.$slots.subheader,
-        ]),
+        }, this.$slots.subheader),
         this.$createElement('div', {
           staticClass: 'v-backdrop__content',
           style: {
-            'max-height': `calc(100vh - ${this.frontShift + this.subheaderHeight}px)`,
+            'max-height': `calc(100vh - ${convertToUnit(this.frontShift + this.subheaderHeight)})`,
           },
-        }, [
-          this.$slots.default,
-        ]),
-      ]),
+        }, this.$slots.default),
+      ])
+    },
+  },
+
+  render (): VNode {
+    return this.$createElement('div', {
+      staticClass: 'v-backdrop',
+    }, [
+      this.genBack(),
+      this.genFront(),
     ])
   },
 })
