@@ -1,29 +1,31 @@
 <template>
   <v-expansion-panels>
     <v-expansion-panel>
-      <v-expansion-panel-header v-slot="{ open }">
-        <v-row no-gutters>
-          <v-col cols="4">Trip name</v-col>
-          <v-col
-            cols="8"
-            class="text--secondary"
-          >
-            <v-fade-transition leave-absolute>
-              <span
-                v-if="open"
-                key="0"
-              >
-                Enter a name for the trip
-              </span>
-              <span
-                v-else
-                key="1"
-              >
-                {{ trip.name }}
-              </span>
-            </v-fade-transition>
-          </v-col>
-        </v-row>
+      <v-expansion-panel-header>
+        <template v-slot:default="{ open }">
+          <v-row no-gutters>
+            <v-col cols="4">Trip name</v-col>
+            <v-col
+              cols="8"
+              class="text--secondary"
+            >
+              <v-fade-transition leave-absolute>
+                <span
+                  v-if="open"
+                  key="0"
+                >
+                  Enter a name for the trip
+                </span>
+                <span
+                  v-else
+                  key="1"
+                >
+                  {{ trip.name }}
+                </span>
+              </v-fade-transition>
+            </v-col>
+          </v-row>
+        </template>
       </v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-text-field
