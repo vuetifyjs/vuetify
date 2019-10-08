@@ -106,6 +106,7 @@ export default mixins(
           staticClass: 'v-backdrop__content',
           style: {
             'max-height': `calc(100vh - ${convertToUnit(this.frontShift + this.subheaderHeight)})`,
+            overflow: this.isActive ? 'hidden' : 'auto',
           },
         }, [
           this.$slots.default,
