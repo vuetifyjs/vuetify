@@ -159,6 +159,7 @@ export class Theme extends Service {
   // Generate the style element
   // if applicable
   private genStyleElement (): void {
+    /* istanbul ignore if */
     if (typeof document === 'undefined') return
 
     /* istanbul ignore next */
@@ -178,23 +179,23 @@ export class Theme extends Service {
   private initVueMeta (root: any) {
     this.vueMeta = true
 
+    const style = {
+      cssText: this.generatedStyles,
+      type: 'text/css',
+      id: 'vuetify-theme-stylesheet',
+      nonce: (this.options || {}).cspNonce,
+    }
     const meta = root.$meta()
+    // Is using v2.3 of vue-meta
+    // https://github.com/nuxt/vue-meta/releases/tag/v2.3.0
+    const hasMeta23 = typeof meta.addApp === 'function'
 
-    const metaAdd = typeof meta.addApp === 'function'
-    if (metaAdd) {
+    if (hasMeta23) {
       const { set } = root.$meta({
         tagIDKeyName: 'vuetify',
       }).addApp('vuetify')
 
-      set({
-        style: [{
-          cssText: this.generatedStyles,
-          type: 'text/css',
-          id: 'vuetify-theme-stylesheet',
-          nonce: (this.options && this.options.cspNonce) || undefined,
-        }],
-      })
-      return
+      return set({ style: [style] })
     }
 
     const metaKeyName = typeof meta.getOptions === 'function' ? meta.getOptions().keyName : 'metaInfo'
@@ -206,12 +207,7 @@ export class Theme extends Service {
       const vuetifyStylesheet = metaInfo.style.find((s: any) => s.id === 'vuetify-theme-stylesheet')
 
       if (!vuetifyStylesheet) {
-        metaInfo.style.push({
-          cssText: this.generatedStyles,
-          type: 'text/css',
-          id: 'vuetify-theme-stylesheet',
-          nonce: (this.options && this.options.cspNonce) || undefined,
-        })
+        metaInfo.style.push(style)
       } else {
         vuetifyStylesheet.cssText = this.generatedStyles
       }
