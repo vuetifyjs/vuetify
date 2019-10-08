@@ -13,6 +13,7 @@
           <span>Completed</span>
         </template>
       </v-timeline-item>
+
       <v-timeline-item
         v-else-if="index == null || index >= i"
         :key="i"
@@ -27,18 +28,21 @@
             v-text="item.caption"
           />
         </template>
+
         <v-card
           :class="`elevation-${item.value ? 8 : 1}`"
-          :hover="!item.complete"
+          :hover="!item.complete && !item.value"
           class="py-2"
-          @click.native="item.value = !item.value"
+          @click.native="item.value = true"
         >
           <v-card-title class="py-0 pr-2">
             <doc-markdown
               class="body-2"
               :code="item.title"
             />
+
             <v-spacer />
+
             <v-btn
               :color="item.value ? 'primary' : ''"
               :disabled="item.complete"
@@ -46,16 +50,19 @@
               :ripple="false"
               class="font-weight-light ma-0"
               text
+              @click="item.value = !item.value"
             >
               <span
                 class="mr-2"
                 v-text="item.caption"
               />
+
               <v-icon small>
                 mdi-calendar
               </v-icon>
             </v-btn>
           </v-card-title>
+
           <v-expand-transition>
             <div v-if="(index != null && index >= i) || item.value">
               <v-card-text>
