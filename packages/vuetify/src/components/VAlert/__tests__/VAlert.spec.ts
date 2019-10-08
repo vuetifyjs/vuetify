@@ -178,4 +178,20 @@ describe('VAlert.ts', () => {
 
     expect(wrapper.vm.isActive).toBe(false)
   })
+
+  it('should have --link class when href/to prop present or link prop is used', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        href: '/home',
+      },
+    })
+
+    expect(wrapper.classes('v-alert--link')).toBe(true)
+
+    wrapper.setProps({ href: undefined, to: '/foo' })
+    expect(wrapper.classes('v-alert--link')).toBe(true)
+
+    wrapper.setProps({ to: undefined, link: true })
+    expect(wrapper.classes('v-alert--link')).toBe(true)
+  })
 })

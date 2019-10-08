@@ -9,6 +9,7 @@ import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 
 // Mixins
+import Routable from '../../mixins/routable'
 import Toggleable from '../../mixins/toggleable'
 import Themeable from '../../mixins/themeable'
 import Transitionable from '../../mixins/transitionable'
@@ -24,6 +25,7 @@ import { VNode } from 'vue/types'
 /* @vue/component */
 export default mixins(
   VSheet,
+  Routable,
   Toggleable,
   Transitionable
 ).extend({
@@ -55,6 +57,7 @@ export default mixins(
         return typeof val === 'string' || val === false
       },
     },
+    link: Boolean,
     outlined: Boolean,
     prominent: Boolean,
     text: Boolean,
@@ -127,9 +130,11 @@ export default mixins(
     },
     classes (): object {
       const classes: Record<string, boolean> = {
+        ...Routable.options.computed.classes.call(this),
         ...VSheet.options.computed.classes.call(this),
         'v-alert--border': Boolean(this.border),
         'v-alert--dense': this.dense,
+        'v-alert--link': this.isClickable,
         'v-alert--outlined': this.outlined,
         'v-alert--prominent': this.prominent,
         'v-alert--text': this.text,
@@ -205,25 +210,21 @@ export default mixins(
       }, this.$slots.default)
     },
     genAlert (): VNode {
-      let data: VNodeData = {
-        staticClass: 'v-alert',
-        attrs: {
-          role: 'alert',
-        },
-        class: this.classes,
-        style: this.styles,
-        directives: [{
-          name: 'show',
-          value: this.isActive,
-        }],
-      }
+      const { tag, data } = this.generateRouteLink()
+
+      data.staticClass = 'v-alert'
+      data.attrs!.role = 'alert'
+      data.directives!.push({
+        name: 'show',
+        value: this.isActive,
+      })
 
       if (!this.coloredBorder) {
         const setColor = this.hasText ? this.setTextColor : this.setBackgroundColor
-        data = setColor(this.computedColor, data)
+        return this.$createElement(tag, setColor(this.computedColor, data), [this.genWrapper()])
       }
 
-      return this.$createElement('div', data, [this.genWrapper()])
+      return this.$createElement(tag, data, [this.genWrapper()])
     },
     /** @public */
     toggle () {

@@ -15,6 +15,7 @@
   margin-bottom: $alert-margin
   padding: $alert-padding
   position: relative
+  text-decoration: none
   +elevationTransition()
 
   &:not(.v-sheet--tile)
@@ -137,6 +138,24 @@
   .v-alert__border
     border-width: $alert-dense-border-width
 
+.v-alert--link
+  cursor: pointer
+
+  &:focus:before
+    opacity: 0.08
+
+  &:before
+    background: currentColor
+    bottom: 0
+    content: ''
+    left: 0
+    opacity: 0
+    pointer-events: none
+    position: absolute
+    right: 0
+    top: 0
+    transition: .2s opacity map-get($transition, 'fast-in-slow-out')
+    
 .v-alert--outlined
   background: transparent !important
   border: $alert-outline !important
