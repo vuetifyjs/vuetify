@@ -15,7 +15,7 @@
     },
     "expand": {
       "header": "### Expandable rows",
-      "desc": "The `show-expand` prop will render an expand icon on each default row. You can customize this with the `item.data-table-expand` slot. You can also switch between allowing multiple expanded rows at the same time or just one with the `single-expand` prop. The expanded rows are available on the synced prop `expanded.sync`"
+      "desc": "The `show-expand` prop will render an expand icon on each default row. You can customize this with the `item.data-table-expand` slot. The position of this slot can be customized by adding a column with `value: 'data-table-expand'` to the headers array. You can also switch between allowing multiple expanded rows at the same time or just one with the `single-expand` prop. The expanded rows are available on the synced prop `expanded.sync`"
     },
     "group": {
       "header": "### Grouped rows",
