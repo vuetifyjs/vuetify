@@ -130,7 +130,9 @@ function isRippleEnabled (value: any): value is true {
   return typeof value === 'undefined' || !!value
 }
 
-function rippleShow (e: MouseEvent | TouchEvent) {
+const rippleDelayTimeout: number = 50;
+
+function rippleShow(e: MouseEvent | TouchEvent) {
   const value: RippleOptions = {}
   const element = e.currentTarget as HTMLElement
   if (!element || !element._ripple || element._ripple.touched) return
@@ -148,19 +150,56 @@ function rippleShow (e: MouseEvent | TouchEvent) {
   if (element._ripple.class) {
     value.class = element._ripple.class
   }
-  ripples.show(e, element, value)
+  element._ripple.showRequested = true
+  if (element._ripple.showTimer) {
+    window.clearTimeout(element._ripple.showTimer)
+  }
+  element._ripple.showTimer = window.setTimeout(() => {
+    if (element._ripple && element._ripple.showRequested) {
+      element._ripple.showRequested = false
+      ripples.show(e, element, value)
+    }
+  }, rippleDelayTimeout)
 }
 
-function rippleHide (e: Event) {
-  const element = e.currentTarget as HTMLElement | null
-  if (!element) return
+function rippleCancelShow(e: MouseEvent | TouchEvent) {
+  const element = e.currentTarget as HTMLElement | undefined
+  if (!element || !element._ripple) return
+  if (!isTouchEvent(e)) {
+    // It's possible for touch events to fire
+    // as mouse events on Android/iOS, this
+    // will skip the event call if it has
+    // already been registered as touch
+    if (element._ripple.isTouch) return
+  }
 
-  window.setTimeout(() => {
-    if (element._ripple) {
-      element._ripple.touched = false
-    }
-  })
-  ripples.hide(element)
+  if (element._ripple.showRequested) {
+    element._ripple.showRequested = false
+  } else {
+    rippleHide(e)
+  }
+}
+
+function rippleHide(e: Event) {
+  const element = e.currentTarget as HTMLElement | null
+  if (!element || !element._ripple) return
+
+  const hideTheRipple = () => {
+    window.setTimeout(() => {
+      if (element._ripple) {
+        element._ripple.touched = false
+      }
+    })
+    ripples.hide(element)
+  }
+
+  if (element._ripple.showRequested) {
+    setTimeout(() => {
+      hideTheRipple()
+    }, rippleDelayTimeout)
+  } else {
+    hideTheRipple()
+  }
 }
 
 function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boolean) {
@@ -183,10 +222,12 @@ function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boo
   if (enabled && !wasEnabled) {
     el.addEventListener('touchstart', rippleShow, { passive: true })
     el.addEventListener('touchend', rippleHide, { passive: true })
+    el.addEventListener('touchmove', rippleCancelShow, { passive: true })
     el.addEventListener('touchcancel', rippleHide)
 
     el.addEventListener('mousedown', rippleShow)
     el.addEventListener('mouseup', rippleHide)
+    el.addEventListener('mousemove', rippleCancelShow)
     el.addEventListener('mouseleave', rippleHide)
     // Anchor tags can be dragged, causes other hides to fail - #1537
     el.addEventListener('dragstart', rippleHide, { passive: true })
@@ -197,10 +238,12 @@ function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boo
 
 function removeListeners (el: HTMLElement) {
   el.removeEventListener('mousedown', rippleShow)
-  el.removeEventListener('touchstart', rippleHide)
+  el.removeEventListener('touchstart', rippleShow)
   el.removeEventListener('touchend', rippleHide)
+  el.removeEventListener('touchmove', rippleCancelShow)
   el.removeEventListener('touchcancel', rippleHide)
   el.removeEventListener('mouseup', rippleHide)
+  el.removeEventListener('mousemove', rippleCancelShow)
   el.removeEventListener('mouseleave', rippleHide)
   el.removeEventListener('dragstart', rippleHide)
 }

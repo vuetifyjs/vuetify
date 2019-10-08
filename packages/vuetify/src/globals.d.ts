@@ -41,6 +41,8 @@ declare global {
       circle?: boolean
       touched?: boolean
       isTouch?: boolean
+      showRequested?: boolean
+      showTimer?: number
     }
     _observe?: {
       init: boolean
