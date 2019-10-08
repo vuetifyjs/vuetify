@@ -88,6 +88,9 @@ export default mixins(
         style: {
           transform: `translateY(${convertToUnit(this.frontShift)})`,
         },
+        on: {
+          click: () => this.isActive = false,
+        },
       }, [
         this.$createElement('div', {
           staticClass: 'v-backdrop__subheader',
@@ -102,7 +105,16 @@ export default mixins(
           style: {
             'max-height': `calc(100vh - ${convertToUnit(this.frontShift + this.subheaderHeight)})`,
           },
-        }, this.$slots.default),
+        }, [
+          this.$slots.default,
+          this.$createElement('div', {
+            staticClass: 'v-backdrop__overlay',
+            style: {
+              opacity: this.isActive ? 0.5 : 0,
+              'pointer-events': this.isActive ? 'auto' : 'none',
+            },
+          }),
+        ]),
       ])
     },
   },
