@@ -31,7 +31,7 @@
 
         <v-card
           :class="`elevation-${item.value ? 8 : 1}`"
-          :hover="!item.complete && !item.value"
+          :hover="!item.value"
           class="py-2"
           @click.native="item.value = true"
         >
@@ -45,12 +45,11 @@
 
             <v-btn
               :color="item.value ? 'primary' : ''"
-              :disabled="item.complete"
               :input-value="item.value"
               :ripple="false"
               class="font-weight-light ma-0"
               text
-              @click="item.value = !item.value"
+              @click.stop="item.value = !item.value"
             >
               <span
                 class="mr-2"
