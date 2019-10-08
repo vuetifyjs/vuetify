@@ -1,0 +1,31 @@
+// src/sass/variables.scss
+
+// Any component modifications must be imported
+@import '~vuetify/src/components/VBtn/_variables.scss';
+@import '~vuetify/src/components/VList/_variables.scss';
+
+$font-size-root: 14px;
+$fab-icon-sizes: map-deep-set($fab-icon-sizes, 'small', 20);
+$btn-font-sizes: map-deep-set($btn-font-sizes, 'default', 1rem);
+$btn-font-sizes: map-deep-set($btn-font-sizes, 'large', 1rem);
+$btn-sizes: map-deep-set($btn-sizes, 'default', 41);
+$btn-sizes: map-deep-set($btn-sizes, 'large', 54);
+$btn-letter-spacing: 0;
+$btn-font-weight: 400;
+$list-item-title-font-size: 0.929rem;
+$list-item-dense-title-font-size: 0.929rem;
+$list-item-dense-title-font-weight: initial;
+
+// Example of nested object updates
+$headings: map-deep-set($headings, 'h1 size', 3.3125rem);
+$headings: map-deep-set($headings, 'h1 line-height', 1.15em);
+$headings: map-deep-set($headings, 'h2 size', 2.25rem);
+$headings: map-deep-set($headings, 'h2 line-height', 1.5em);
+$headings: map-deep-set($headings, 'h3 size', 1.5625rem);
+$headings: map-deep-set($headings, 'h3 line-height', 1.4em);
+$headings: map-deep-set($headings, 'h4 size', 1.125rem);
+$headings: map-deep-set($headings, 'h4 line-height', 1.4em);
+$headings: map-deep-set($headings, 'h5 size', 1.0625rem);
+$headings: map-deep-set($headings, 'h6 size', .75rem);
+$headings: map-deep-set($headings, 'subtitle-2 size', 1rem);
+$headings: map-deep-set($headings, 'overline letter-spacing', 0);

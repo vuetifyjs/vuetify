@@ -1,2 +1,3 @@
-$ vue add vuetify
-$ vue invoke vuetify
+$ yarn add vuetify
+// OR
+$ npm install vuetify

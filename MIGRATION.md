@@ -262,7 +262,7 @@ this.$vuetify.lang.t(...)
 ```
 
 ### Grid
-The grid has been rebuilt modeled after bootstrap. The existing grid still works and needs some slight modifications. [Kael](https://github.com/orgs/vuetifyjs/people/KaelWD) has created an eslint plugin to help with this process.
+The grid has been rebuilt modeled after bootstrap. The existing grid still works and needs some slight modifications. [Kael](https://github.com/KaelWD) has created an eslint plugin to help with this process.
 * [eslint-plugin-vuetify](https://github.com/vuetifyjs/eslint-plugin-vuetify) **to fix most of these for you**
 * Spacing helpers have changed to represent the number of 4px intervals from 0-12 (0-48px)
     * eg. px-7 is 7 * 4 = 28px
