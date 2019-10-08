@@ -156,9 +156,10 @@ export default VSelect.extend({
     internalValue: 'setSearch',
     isFocused (val) {
       if (val) {
-        this.$refs.input &&
-          this.$refs.input.select()
+        document.addEventListener('copy', this.onCopy)
+        this.$refs.input && this.$refs.input.select()
       } else {
+        document.removeEventListener('copy', this.onCopy)
         this.updateSelf()
       }
     },
@@ -389,16 +390,6 @@ export default VSelect.extend({
     },
     hasItem (item: any) {
       return this.selectedValues.indexOf(this.getValue(item)) > -1
-    },
-    onFocus () {
-      if (!this.isFocused) {
-        document.addEventListener('copy', this.onCopy)
-      }
-      VTextField.options.methods.onFocus.call(this)
-    },
-    onBlur () {
-      document.removeEventListener('copy', this.onCopy)
-      VSelect.options.methods.onBlur.call(this)
     },
     onCopy (event: ClipboardEvent) {
       if (this.selectedIndex === -1) return
