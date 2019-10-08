@@ -54,6 +54,8 @@ export default mixins(
   mounted () {
     this.measureBack()
     this.measureSubheader()
+
+    window.addEventListener('resize', this.measureBack)
   },
 
   methods: {
