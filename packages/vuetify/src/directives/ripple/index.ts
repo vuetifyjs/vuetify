@@ -130,9 +130,9 @@ function isRippleEnabled (value: any): value is true {
   return typeof value === 'undefined' || !!value
 }
 
-const rippleDelayTimeout: number = 50;
+const rippleDelayTimeout: number = 50
 
-function rippleShow(e: MouseEvent | TouchEvent) {
+function rippleShow (e: MouseEvent | TouchEvent) {
   const value: RippleOptions = {}
   const element = e.currentTarget as HTMLElement
   if (!element || !element._ripple || element._ripple.touched) return
@@ -162,7 +162,7 @@ function rippleShow(e: MouseEvent | TouchEvent) {
   }, rippleDelayTimeout)
 }
 
-function rippleCancelShow(e: MouseEvent | TouchEvent) {
+function rippleCancelShow (e: MouseEvent | TouchEvent) {
   const element = e.currentTarget as HTMLElement | undefined
   if (!element || !element._ripple) return
   if (!isTouchEvent(e)) {
@@ -180,7 +180,7 @@ function rippleCancelShow(e: MouseEvent | TouchEvent) {
   }
 }
 
-function rippleHide(e: Event) {
+function rippleHide (e: Event) {
   const element = e.currentTarget as HTMLElement | null
   if (!element || !element._ripple) return
 
