@@ -23,12 +23,16 @@
           "lang": "setupText2"
         },
         {
+          "type": "text",
+          "lang": "setupText3"
+        },
+        {
           "type": "markup",
           "value": "sass_import_vuetify_css"
         },
         {
           "type": "text",
-          "lang": "setupText3"
+          "lang": "setupText4"
         },
         {
           "type": "markup",
@@ -36,7 +40,7 @@
         },
         {
           "type": "text",
-          "lang": "setupText4"
+          "lang": "setupText5"
         }
       ]
     },
