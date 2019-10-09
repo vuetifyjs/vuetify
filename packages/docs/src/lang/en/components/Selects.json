@@ -58,6 +58,7 @@
     "debounceSearch": "Debounces the search input value being emitted",
     "deletableChips": "Adds a remove icon to selected chips",
     "disabled": "Disables the input",
+    "disableLookup": "Disables keyboard lookup",
     "eager": "Mixins.Bootable.props.eager",
     "editable": " Creates an editable button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "filter": "The function used for filtering items",

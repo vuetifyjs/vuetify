@@ -73,6 +73,7 @@ export default baseMixins.extend<options>().extend({
     chips: Boolean,
     clearable: Boolean,
     deletableChips: Boolean,
+    disableLookup: Boolean,
     eager: Boolean,
     hideSelected: Boolean,
     items: {
@@ -571,7 +572,8 @@ export default baseMixins.extend<options>().extend({
     onKeyPress (e: KeyboardEvent) {
       if (
         this.multiple ||
-        this.readonly
+        this.readonly ||
+        this.disableLookup
       ) return
 
       const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
