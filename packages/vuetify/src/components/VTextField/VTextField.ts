@@ -13,6 +13,7 @@ import Loadable from '../../mixins/loadable'
 
 // Directives
 import ripple from '../../directives/ripple'
+import intersect from '../../directives/intersect'
 
 // Utilities
 import { convertToUnit, keyCodes } from '../../util/helpers'
@@ -42,7 +43,7 @@ const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', '
 export default baseMixins.extend<options>().extend({
   name: 'v-text-field',
 
-  directives: { ripple },
+  directives: { ripple, intersect },
 
   inheritAttrs: false,
 
@@ -84,6 +85,7 @@ export default baseMixins.extend<options>().extend({
     initialValue: null,
     isBooted: false,
     isClearing: false,
+    isVisible: false,
   }),
 
   computed: {
@@ -180,6 +182,13 @@ export default baseMixins.extend<options>().extend({
         this.initialValue = this.lazyValue
       } else if (this.initialValue !== this.lazyValue) {
         this.$emit('change', this.lazyValue)
+      }
+    },
+    isVisible (val) {
+      if (val) {
+        this.setLabelWidth()
+        this.setPrefixWidth()
+        this.setPrependWidth()
       }
     },
     value (val) {
@@ -374,6 +383,14 @@ export default baseMixins.extend<options>().extend({
           focus: this.onFocus,
           keydown: this.onKeyDown,
         }),
+        directives: [
+          {
+            name: 'intersect',
+            value: {
+              handler: this.onObserve,
+            },
+          },
+        ],
         ref: 'input',
       })
     },
@@ -447,6 +464,10 @@ export default baseMixins.extend<options>().extend({
       if (this.hasMouseDown) this.focus()
 
       VInput.options.methods.onMouseUp.call(this, e)
+    },
+    onObserve (entries: IntersectionObserverEntry[], observer: IntersectionObserver, isIntersecting: boolean) {
+      if (this.isVisible) return
+      this.isVisible = isIntersecting
     },
     setLabelWidth () {
       if (!this.outlined || !this.$refs.label) return
