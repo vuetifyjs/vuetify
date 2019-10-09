@@ -33,6 +33,7 @@ export default baseMixins.extend({
   },
 
   data: () => ({
+    // Do not use this directly, call getActivator() instead
     activatorElement: null as HTMLElement | null,
     activatorNode: [] as VNode[],
     events: ['click', 'mouseenter', 'mouseleave'],
@@ -41,11 +42,6 @@ export default baseMixins.extend({
 
   watch: {
     activator: 'resetActivator',
-    activatorElement (val) {
-      if (!val) return
-
-      this.addActivatorEvents()
-    },
     openOnHover: 'resetActivator',
   },
 
@@ -55,8 +51,6 @@ export default baseMixins.extend({
     if (slotType && ['v-slot', 'normal'].includes(slotType)) {
       consoleError(`The activator slot must be bound, try '<template v-slot:activator="{ on }"><v-btn v-on="on">'`, this)
     }
-
-    this.getActivator()
   },
 
   beforeDestroy () {
@@ -68,14 +62,14 @@ export default baseMixins.extend({
       if (
         !this.activator ||
         this.disabled ||
-        !this.activatorElement
+        !this.getActivator()
       ) return
 
       this.listeners = this.genActivatorListeners()
       const keys = Object.keys(this.listeners)
 
       for (const key of keys) {
-        (this.activatorElement as any).addEventListener(key, this.listeners[key])
+        this.getActivator()!.addEventListener(key, this.listeners[key] as any)
       }
     },
     genActivator () {
@@ -111,7 +105,8 @@ export default baseMixins.extend({
         }
       } else {
         listeners.click = (e: MouseEvent) => {
-          if (this.activatorElement) this.activatorElement.focus()
+          const activator = this.getActivator(e)
+          if (activator) activator.focus()
 
           this.isActive = !this.isActive
         }
@@ -128,20 +123,30 @@ export default baseMixins.extend({
       if (this.activator) {
         const target = this.internalActivator ? this.$el : document
 
-        // Selector
         if (typeof this.activator === 'string') {
+          // Selector
           activator = target.querySelector(this.activator)
-        // VNode
         } else if ((this.activator as any).$el) {
+          // Component (ref)
           activator = (this.activator as any).$el
-        // HTMLElement | Element
         } else {
+          // HTMLElement | Element
           activator = this.activator
         }
       } else if (e) {
         activator = (e.currentTarget || e.target) as HTMLElement
       } else if (this.activatorNode.length) {
-        activator = this.activatorNode[0].elm as HTMLElement
+        const vm = this.activatorNode[0].componentInstance
+        if (
+          vm &&
+          vm.$options.mixins && //                         Activatable is indirectly used via Menuable
+          vm.$options.mixins.some((m: any) => m.options && ['activatable', 'menuable'].includes(m.options.name))
+        ) {
+          // Activator is actually another activatible component, use its activator
+          activator = (vm as any).getActivator()
+        } else {
+          activator = this.activatorNode[0].elm as HTMLElement
+        }
       }
 
       this.activatorElement = activator
