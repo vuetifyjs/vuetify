@@ -48,7 +48,11 @@
       margin-top: 16px
 
     .v-input__append-inner
-      padding-left: 12px
+      +ltr()
+        padding-left: 12px
+
+      +rtl()
+        padding-right: 12px
 
   &--auto-grow
     textarea
