@@ -283,7 +283,8 @@ export default VSelect.extend({
 
       input.data = input.data || {}
       input.data.attrs = input.data.attrs || {}
-      input.data.attrs.autocomplete = 'off'
+      input.data.attrs.autocomplete = input.data.attrs.autocomplete || 'disabled'
+
       input.data.domProps = input.data.domProps || {}
       input.data.domProps.value = this.internalSearch
 
