@@ -1,4 +1,4 @@
-## Migrating from v1.5.x to v2.0.x
+### Migrating from v1.5.x to v2.0.x
 
 Version 2 contains non backwards compatible breaking changes. This includes previously deprecated functionality from v1.x.x. These breaking changes are noted in the console for the corresponding components.
 
