@@ -1,20 +1,30 @@
 // src/sass/variables.scss
 
-// Any component modifications must be imported
-@import '~vuetify/src/components/VBtn/_variables.scss';
-@import '~vuetify/src/components/VList/_variables.scss';
-
+// Globals
+$border-radius-root: 6px;
 $font-size-root: 14px;
-$fab-icon-sizes: map-deep-set($fab-icon-sizes, 'small', 20);
-$btn-font-sizes: map-deep-set($btn-font-sizes, 'default', 1rem);
-$btn-font-sizes: map-deep-set($btn-font-sizes, 'large', 1rem);
-$btn-sizes: map-deep-set($btn-sizes, 'default', 41);
-$btn-sizes: map-deep-set($btn-sizes, 'large', 54);
+
+// Any component modifications must be imported
+// Variables must come before the import
+// while lists must come after
 $btn-letter-spacing: 0;
 $btn-font-weight: 400;
 $list-item-title-font-size: 0.929rem;
 $list-item-dense-title-font-size: 0.929rem;
 $list-item-dense-title-font-weight: initial;
+
+@import '~vuetify/src/components/VBtn/_variables.scss';
+@import '~vuetify/src/components/VList/_variables.scss';
+
+$fab-icon-sizes: map-deep-set($fab-icon-sizes, 'small', 20);
+$btn-font-sizes: map-deep-set($btn-font-sizes, 'default', 1rem);
+$btn-font-sizes: map-deep-set($btn-font-sizes, 'large', 1rem);
+$btn-sizes: map-deep-set($btn-sizes, 'default', 41);
+$btn-sizes: map-deep-set($btn-sizes, 'large', 54);
+
+----------------------------------------------------------------
+
+// src/sass/lists.scss
 
 // Example of nested object updates
 $headings: map-deep-set($headings, 'h1' 'size', 3.3125rem);
