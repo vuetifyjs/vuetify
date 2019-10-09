@@ -136,15 +136,17 @@ export default baseMixins.extend({
           activator = this.activator
         }
       } else if (e) {
+        // Activated by a click event
         activator = (e.currentTarget || e.target) as HTMLElement
       } else if (this.activatorNode.length) {
+        // Last resort, use the contents of the activator slot
         const vm = this.activatorNode[0].componentInstance
         if (
           vm &&
           vm.$options.mixins && //                         Activatable is indirectly used via Menuable
           vm.$options.mixins.some((m: any) => m.options && ['activatable', 'menuable'].includes(m.options.name))
         ) {
-          // Activator is actually another activatible component, use its activator
+          // Activator is actually another activatible component, use its activator (#8846)
           activator = (vm as any).getActivator()
         } else {
           activator = this.activatorNode[0].elm as HTMLElement
