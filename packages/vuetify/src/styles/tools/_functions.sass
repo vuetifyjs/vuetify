@@ -49,15 +49,20 @@
 @function breakpoint-infix($name, $breakpoints: $grid-breakpoints)
   @return if(breakpoint-min($name, $breakpoints) == null, "", "-#{$name}")
 
-// https://gist.github.com/pentzzsolt/4949bbd7691d43d00616dc4f1451cae9#file-non-destructive-map-merge-4-scss
+// Adapted from https://gist.github.com/pentzzsolt/4949bbd7691d43d00616dc4f1451cae9#file-non-destructive-map-merge-4-scss
 @function map-deep-merge($parent-map, $child-map)
   $result: $parent-map
 
   @each $key, $value in $child-map
-    @if (not map-has-key($result, $key)) or (type-of(map-get($result, $key)) != type-of($value)) or (not (type-of(map-get($result, $key)) == map and type-of($value) == map))
-      $result: map-merge($result, ($key: $value))
+    $parent-has-key: map-has-key($result, $key)
+    $parent-value: map-get($result, $key)
+    $parent-type: type-of($parent-value)
+    $value-type: type-of($value)
+
+    @if (not $parent-has-key) or ($parent-type != $value-type) or (not ($parent-type == map and $value-type == map))
+      $result: map-merge($result, ( $key: $value ))
 
     @else
-      $result: map-merge($result, ($key: map-deep-merge(map-get($result, $key), $value)))
+      $result: map-merge($result, ( $key: map-deep-merge($parent-value, $value) ))
 
   @return $result
