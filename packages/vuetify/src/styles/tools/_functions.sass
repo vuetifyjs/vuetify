@@ -49,6 +49,7 @@
 @function breakpoint-infix($name, $breakpoints: $grid-breakpoints)
   @return if(breakpoint-min($name, $breakpoints) == null, "", "-#{$name}")
 
+// https://gist.github.com/pentzzsolt/4949bbd7691d43d00616dc4f1451cae9#file-non-destructive-map-merge-4-scss
 @function map-deep-merge($parent-map, $child-map)
   $result: $parent-map
 
@@ -57,6 +58,6 @@
       $result: map-merge($result, ($key: $value))
 
     @else
-      $result: map-merge($result, ($key: non-destructive-map-merge(map-get($result, $key), $value)))
+      $result: map-merge($result, ($key: map-deep-merge(map-get($result, $key), $value)))
 
   @return $result
