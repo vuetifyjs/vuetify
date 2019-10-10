@@ -4,70 +4,50 @@
 $border-radius-root: 6px;
 $font-size-root: 14px;
 
-// Any component modifications must be imported
 // Variables must come before the import
-// while lists must come after
 $btn-letter-spacing: 0;
 $btn-font-weight: 400;
 $list-item-title-font-size: 0.929rem;
 $list-item-dense-title-font-size: 0.929rem;
 $list-item-dense-title-font-weight: initial;
-
-@import '~vuetify/src/components/VBtn/_variables.scss';
-@import '~vuetify/src/components/VList/_variables.scss';
-
 $fab-icon-sizes: map-merge($fab-icon-sizes, ( small: 20 ));
 $btn-font-sizes: map-merge($btn-font-sizes, ( default: 1rem, large: 1rem ));
 $btn-sizes: map-merge($btn-sizes, ( default: 41, large: 54 ));
 
-----------------------------------------------------------------
-
-// src/sass/lists.scss
-
-// Example of nested object updates
-$headings: map-merge($headings, (
-  'h1': map-merge(
-    map-get($headings, 'h1'),
-    (
-      'size': 3.3125rem,
-      'line-height': 1.15em
-    )
+$headings: (
+  'h1': (
+    'size': 3.3125rem,
+    'line-height': 1.15em
   ),
-  'h2': map-merge(
-    map-get($headings, 'h2'),
-    (
-      'size': 2.25rem,
-      'line-height': 1.5em
-    )
+  'h2': (
+    'size': 2.25rem,
+    'line-height': 1.5em
   ),
-  'h3': map-merge(
-    map-get($headings, 'h3'),
-    (
-      'size': 1.5625rem,
-      'line-height': 1.4em
-    )
+  'h3': (
+    'size': 1.5625rem,
+    'line-height': 1.4em
   ),
-  'h4': map-merge(
-    map-get($headings, 'h4'),
+  'h4': (
     (
       'size': 1.125rem,
       'line-height': 1.4em
     )
   ),
-  'h5': map-merge(
-    map-get($headings, 'h5'),
-    ( 'size': 1.0625rem )
+  'h5': (
+    'size': 1.0625rem
   ),
-  'h6': map-merge(
-    map-get($headings, 'h6'),
-    ( 'size': .75rem )
+  'h6': (
+    'size': .75rem
   ),
-  'subtitle-2': map-merge(
-    map-get($headings, 'subtitle-2'),
-    ( 'size': 1rem )
+  'subtitle-2': (
+    'size': 1rem
   ),
-  overline: map-merge(
-    map-get($headings, 'overline'),
-    ( 'letter-spacing': 0 )
+  'overline': (
+    'letter-spacing': 0
   )
-));
+)
+
+// Any component modifications must be imported at the bottom
+
+@import '~vuetify/src/components/VBtn/_variables.scss';
+@import '~vuetify/src/components/VList/_variables.scss';
