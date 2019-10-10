@@ -209,6 +209,7 @@ export default baseMixins.extend<options>().extend({
     this.setLabelWidth()
     this.setPrefixWidth()
     this.setPrependWidth()
+    this.initIntersectionObserver()
     requestAnimationFrame(() => (this.isBooted = true))
   },
 
@@ -402,6 +403,17 @@ export default baseMixins.extend<options>().extend({
         class: `v-text-field__${type}`,
         ref: type,
       }, this[type])
+    },
+    initIntersectionObserver () {
+      let callback = (entries, o) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.setLabelWidth()
+          }
+        })
+      }
+      this.intersectionObserver = new IntersectionObserver(callback)
+      this.intersectionObserver.observe(this.$el)
     },
     onBlur (e?: Event) {
       this.isFocused = false
