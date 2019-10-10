@@ -175,7 +175,7 @@ $headings: map-deep-merge(
   $headings
 );
 
-$transitions: () !default;
+$transition: () !default;
 $transition: map-deep-merge(
   (
     'fast-out-slow-in': cubic-bezier(0.4, 0, 0.2, 1),
@@ -185,7 +185,7 @@ $transition: map-deep-merge(
     'fast-in-fast-out': cubic-bezier(0.25, 0.8, 0.25, 1),
     'swing': cubic-bezier(0.25, 0.8, 0.5, 1)
   ),
-  $transitions
+  $transition
 );
 $primary-transition: 0.3s map-get($transition, 'swing') !default;
 $secondary-transition: 0.2s map-get($transition, 'ease-in-out') !default;
