@@ -405,6 +405,12 @@ export default baseMixins.extend<options>().extend({
       }, this[type])
     },
     initIntersectionObserver () {
+      if (!('IntersectionObserver' in window &&
+            'IntersectionObserverEntry' in window &&
+            'intersectionRatio' in window.IntersectionObserverEntry.prototype)) {
+        return
+      }
+
       let callback = (entries, o) => {
         entries.forEach(entry => {
           if (entry.intersectionRatio > 0) {
