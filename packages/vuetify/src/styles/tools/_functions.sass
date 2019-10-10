@@ -53,16 +53,18 @@
 @function map-deep-merge($parent-map, $child-map)
   $result: $parent-map
 
-  @each $key, $value in $child-map
+  @each $key, $child in $child-map
     $parent-has-key: map-has-key($result, $key)
     $parent-value: map-get($result, $key)
     $parent-type: type-of($parent-value)
-    $value-type: type-of($value)
+    $child-type: type-of($child)
+    $parent-is-map: $parent-type == map
+    $child-is-map: $child-type == map
 
-    @if (not $parent-has-key) or ($parent-type != $value-type) or (not ($parent-type == map and $value-type == map))
-      $result: map-merge($result, ( $key: $value ))
+    @if (not $parent-has-key) or ($parent-type != $child-type) or (not ($parent-is-map and $child-is-map))
+      $result: map-merge($result, ( $key: $child ))
 
     @else
-      $result: map-merge($result, ( $key: map-deep-merge($parent-value, $value) ))
+      $result: map-merge($result, ( $key: map-deep-merge($parent-value, $child) ))
 
   @return $result
