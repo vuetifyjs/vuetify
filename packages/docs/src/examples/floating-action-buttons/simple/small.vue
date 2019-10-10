@@ -5,7 +5,7 @@
         <v-toolbar color="light-blue" light extended>
           <v-app-bar-nav-icon></v-app-bar-nav-icon>
           <v-toolbar-title class="white--text">My files</v-toolbar-title>
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
           <v-btn icon>
             <v-icon>mdi-magnify</v-icon>
           </v-btn>
@@ -65,7 +65,7 @@
               <small class="grey--text">* This doesn't actually save.</small>
             </v-card-text>
             <v-card-actions>
-              <div class="flex-grow-1"></div>
+              <v-spacer></v-spacer>
               <v-btn text color="primary" @click="dialog = false">Submit</v-btn>
             </v-card-actions>
           </v-card>

@@ -8,7 +8,7 @@
 
       <v-toolbar-title>Page title</v-toolbar-title>
 
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
 
       <v-btn icon>
         <v-icon>mdi-heart</v-icon>
