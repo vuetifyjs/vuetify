@@ -25,7 +25,7 @@ export default {
   datePicker: {
     itemsSelected: '{0} 선택됨',
   },
-  noDataText: '이용할 수 없습니다',
+  noDataText: '데이터가 없습니다.',
   carousel: {
     prev: '이전 화면',
     next: '다음 화면',
