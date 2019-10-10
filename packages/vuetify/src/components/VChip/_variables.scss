@@ -14,25 +14,30 @@ $chip-pill-filter-margin: 0 16px 0 0 !default;
 $chip-transition-duration: 0.28s !default;
 $chip-transition-fn: map-get($transition, 'fast-out-slow-in') !default;
 $icon-outlined-border-width: thin !default;
-$icon-sizes: (
-  'x-small': (
-    'font-size': 10,
-    'height': 16
+
+$icon-sizes: () !default;
+$icon-sizes: map-deep-merge(
+  (
+    'x-small': (
+      'font-size': 10,
+      'height': 16
+    ),
+    'small': (
+      'font-size': 12,
+      'height': 24
+    ),
+    'default': (
+      'font-size': 14,
+      'height': 32
+    ),
+    'large': (
+      'font-size': 16,
+      'height': 54
+    ),
+    'x-large': (
+      'font-size': 18,
+      'height': 66
+    )
   ),
-  'small': (
-    'font-size': 12,
-    'height': 24
-  ),
-  'default': (
-    'font-size': 14,
-    'height': 32
-  ),
-  'large': (
-    'font-size': 16,
-    'height': 54
-  ),
-  'x-large': (
-    'font-size': 18,
-    'height': 66
-  )
-) !default;
+  $icon-sizes
+);
