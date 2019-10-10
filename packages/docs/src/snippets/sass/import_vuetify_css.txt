@@ -1,26 +1,28 @@
-// src/sass/main.scss
+// src/sass/variables.scss
 
-// Any changes to a default variable must be
-// declared above the initial style import
+// Globals
+$border-radius-root: 6px;
 $font-size-root: 14px;
 
-// Required for modifying core defaults
-@import '~vuetify/src/styles/styles.sass';
-
 // Any component modifications must be imported
+// Variables must come before the import
+// while lists must come after
+$btn-letter-spacing: 0;
+$btn-font-weight: 400;
+$list-item-title-font-size: 0.929rem;
+$list-item-dense-title-font-size: 0.929rem;
+$list-item-dense-title-font-weight: initial;
+
 @import '~vuetify/src/components/VBtn/_variables.scss';
+@import '~vuetify/src/components/VList/_variables.scss';
 
 $fab-icon-sizes: map-merge($fab-icon-sizes, ( small: 20 ));
 $btn-font-sizes: map-merge($btn-font-sizes, ( default: 1rem, large: 1rem ));
 $btn-sizes: map-merge($btn-sizes, ( default: 41, large: 54 ));
-$btn-letter-spacing: 0;
-$btn-font-weight: 400;
 
-@import '~vuetify/src/components/VList/_variables.scss';
+----------------------------------------------------------------
 
-$list-item-title-font-size: 0.929rem;
-$list-item-dense-title-font-size: 0.929rem;
-$list-item-dense-title-font-weight: initial;
+// src/sass/lists.scss
 
 // Example of nested object updates
 $headings: map-merge($headings, (

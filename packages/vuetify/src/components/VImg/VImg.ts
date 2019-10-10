@@ -125,7 +125,8 @@ export default VResponsive.extend({
 
   watch: {
     src () {
-      if (!this.isLoading) this.init()
+      // Force re-init when src changes
+      if (!this.isLoading) this.init(undefined, undefined, true)
       else this.loadImage()
     },
     '$vuetify.breakpoint.width': 'getSrc',
