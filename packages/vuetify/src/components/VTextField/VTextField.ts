@@ -407,7 +407,7 @@ export default baseMixins.extend<options>().extend({
     initIntersectionObserver () {
       let callback = (entries, o) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
+          if (entry.intersectionRatio > 0) {
             this.setLabelWidth()
           }
         })
