@@ -84,6 +84,7 @@ export default baseMixins.extend<options>().extend({
     initialValue: null,
     isBooted: false,
     isClearing: false,
+    intersectionObserver: {} as IntersectionObserver,
   }),
 
   computed: {
@@ -411,8 +412,8 @@ export default baseMixins.extend<options>().extend({
         return
       }
 
-      let callback = (entries, o) => {
-        entries.forEach(entry => {
+      const callback: IntersectionObserverCallback = (entries: IntersectionObserverEntry[], o: IntersectionObserver) => {
+        entries.forEach((entry: IntersectionObserverEntry) => {
           if (entry.intersectionRatio > 0) {
             this.setLabelWidth()
           }
