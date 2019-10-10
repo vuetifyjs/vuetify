@@ -11,7 +11,7 @@
       <v-card-title class="teal">
         <strong class="subheading">Get connected with us on social networks!</strong>
 
-        <div class="flex-grow-1"></div>
+        <v-spacer></v-spacer>
 
         <v-btn
           v-for="icon in icons"

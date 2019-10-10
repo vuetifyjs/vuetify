@@ -141,7 +141,7 @@
         hide-details
         label="Auto Update"
       ></v-switch>
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
       <v-btn
         :disabled="autoUpdate"
         :loading="isUpdating"
