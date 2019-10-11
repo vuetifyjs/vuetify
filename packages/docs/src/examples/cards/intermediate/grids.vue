@@ -1,9 +1,20 @@
 <template>
   <v-card
     class="mx-auto"
-    max-width="400"
+    max-width="500"
   >
-    <v-system-bar color="indigo darken-2"></v-system-bar>
+    <v-system-bar
+      color="indigo darken-2"
+      dark
+    >
+      <v-spacer></v-spacer>
+
+      <v-icon>mdi-window-minimize</v-icon>
+
+      <v-icon>mdi-window-maximize</v-icon>
+
+      <v-icon>mdi-close</v-icon>
+    </v-system-bar>
 
     <v-toolbar
       color="indigo"
@@ -13,18 +24,15 @@
 
       <v-toolbar-title>Discover</v-toolbar-title>
 
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
 
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
     </v-toolbar>
 
-    <v-container
-      class="pa-2"
-      fluid
-    >
-      <v-row>
+    <v-container fluid>
+      <v-row dense>
         <v-col
           v-for="card in cards"
           :key="card.title"
@@ -33,18 +41,15 @@
           <v-card>
             <v-img
               :src="card.src"
-              class="white--text"
-              height="200px"
+              class="white--text align-end"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+              height="200px"
             >
-              <v-card-title
-                class="fill-height align-end"
-                v-text="card.title"
-              ></v-card-title>
+              <v-card-title v-text="card.title"></v-card-title>
             </v-img>
 
             <v-card-actions>
-              <div class="flex-grow-1"></div>
+              <v-spacer></v-spacer>
 
               <v-btn icon>
                 <v-icon>mdi-heart</v-icon>

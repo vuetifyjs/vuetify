@@ -368,10 +368,6 @@
           "value": "info"
         },
         {
-          "type": "markup",
-          "value": "js_transpileDependencies"
-        },
-        {
           "type": "text",
           "lang": "ie11Text6"
         },

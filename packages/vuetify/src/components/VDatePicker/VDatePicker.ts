@@ -368,18 +368,6 @@ export default mixins(
       })
     },
     genDateTable () {
-      let proxyValue = this.value
-
-      if (this.range && this.value && this.value.length === 2) {
-        proxyValue = []
-        const [rangeFrom, rangeTo] = [this.value[0], this.value[1]].map(x => new Date(`${x}T00:00:00+00:00`)).sort((a, b) => a > b ? 1 : -1)
-        const diffDays = Math.ceil((rangeTo.getTime() - rangeFrom.getTime()) / (1000 * 60 * 60 * 24))
-        for (let i = 0; i <= diffDays; i++) {
-          const current = new Date(+rangeFrom + i * 864e5)
-          proxyValue.push(current.toISOString().substring(0, 10))
-        }
-      }
-
       return this.$createElement(VDatePickerDateTable, {
         props: {
           allowedDates: this.allowedDates,
@@ -395,11 +383,12 @@ export default mixins(
           locale: this.locale,
           min: this.min,
           max: this.max,
+          range: this.range,
           readonly: this.readonly,
           scrollable: this.scrollable,
           showWeek: this.showWeek,
           tableDate: `${pad(this.tableYear, 4)}-${pad(this.tableMonth + 1)}`,
-          value: proxyValue,
+          value: this.value,
           weekdayFormat: this.weekdayFormat,
         },
         ref: 'table',
