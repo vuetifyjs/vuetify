@@ -19,28 +19,12 @@
           "lang": "setupText1"
         },
         {
-          "type": "text",
-          "lang": "setupText2"
-        },
-        {
-          "type": "text",
-          "lang": "setupText3"
-        },
-        {
           "type": "markup",
           "value": "sass_import_vuetify_css"
         },
         {
           "type": "text",
-          "lang": "setupText4"
-        },
-        {
-          "type": "markup",
-          "value": "sass_import_vuetify_css_helper_functions"
-        },
-        {
-          "type": "text",
-          "lang": "setupText5"
+          "lang": "setupText2"
         }
       ]
     },
