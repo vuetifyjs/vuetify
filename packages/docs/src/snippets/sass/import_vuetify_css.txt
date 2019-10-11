@@ -36,10 +36,8 @@ $headings: (
     'line-height': 1.4em
   ),
   'h4': (
-    (
-      'size': 1.125rem,
-      'line-height': 1.4em
-    )
+    'size': 1.125rem,
+    'line-height': 1.4em
   ),
   'h5': (
     'size': 1.0625rem
