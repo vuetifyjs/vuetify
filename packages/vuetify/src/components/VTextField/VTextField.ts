@@ -408,7 +408,7 @@ export default baseMixins.extend<options>().extend({
     initIntersectionObserver () {
       if (!('IntersectionObserver' in window &&
             'IntersectionObserverEntry' in window &&
-            'intersectionRatio' in window.IntersectionObserverEntry.prototype)) {
+            'intersectionRatio' in window['IntersectionObserverEntry']['prototype'])) {
         return
       }
 
