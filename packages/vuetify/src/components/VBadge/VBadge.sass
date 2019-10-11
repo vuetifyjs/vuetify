@@ -4,12 +4,13 @@
 
 .v-badge
   display: inline-block
-  line-height: 1
+  // line-height: 1
   position: relative
 
   &__badge
     align-items: center
     border-radius: $badge-border-radius
+    bottom: auto
     color: $badge-color
     display: inline-flex
     flex-direction: row
@@ -18,57 +19,82 @@
     height: $badge-height
     justify-content: center
     line-height: normal
-    min-width: $badge-width
+    min-width: $badge-min-width
     padding: 0 4px
     position: absolute
-    right: $badge-right
-    top: $badge-top
+    top: 0
     transition: $primary-transition
 
     .v-icon
       font-size: $badge-font-size
 
-  &--overlap
-    .v-badge__badge
-      top: -8px
-      right: -8px
+    +ltr()
+      left: auto
+      right: 0
+      transform: translate(75%, -75%)
 
-    &.v-badge--left
-      .v-badge__badge
-        left: -8px
-        right: initial
+    +rtl()
+      left: 0
+      right: auto
+      transform: translate(-75%, -75%)
 
-    &.v-badge--bottom
-      .v-badge__badge
-        bottom: -8px
-        top: initial
+  &--left .v-badge__badge
+    +ltr()
+      left: 0
+      right: auto
+      transform: translate(-75%, -75%)
 
-  &--left
-    .v-badge__badge
-      left: $badge-right
-      right: initial
+    +rtl()
+      left: auto
+      right: 0
+      transform: translate(75%, -75%)
 
   &--bottom
     .v-badge__badge
-      bottom: $badge-top
-      top: initial
+      bottom: 0
+      top: auto
 
-  +rtl()
-    &__badge
-      right: initial
-      left: $badge-right
+      +ltr()
+        transform: translate(75%, 75%)
 
-    &--overlap
+      +rtl()
+        transform: translate(-75%, 75%)
+
+    &.v-badge--left
       .v-badge__badge
-        right: initial
-        left: -8px
+        +ltr()
+          transform: translate(-75%, 75%)
+
+        +rtl()
+          transform: translate(75%, 75%)
+
+  &--overlap
+    .v-badge__badge
+      +ltr()
+        transform: translate(50%, -50%)
+
+      +rtl()
+        transform: translate(50%, 50%)
+
+    &.v-badge--left .v-badge__badge
+      +ltr()
+        transform: translate(-50%, -50%)
+
+      +rtl()
+        transform: translate(-50%, 50%)
+
+    &.v-badge--bottom
+      .v-badge__badge
+        +ltr()
+          transform: translate(50%, 50%)
+
+        +rtl()
+          transform: translate(-50%, -50%)
 
       &.v-badge--left
         .v-badge__badge
-          right: -8px
-          left: initial
+          +ltr()
+            transform: translate(-50%, 50%)
 
-    &--left
-      .v-badge__badge
-        right: $badge-right
-        left: initial
+          +rtl()
+            transform: translate(50%, 50%)
