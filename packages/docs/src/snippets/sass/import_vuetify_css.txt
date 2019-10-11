@@ -10,9 +10,17 @@ $btn-font-weight: 400;
 $list-item-title-font-size: 0.929rem;
 $list-item-dense-title-font-size: 0.929rem;
 $list-item-dense-title-font-weight: initial;
-$fab-icon-sizes: map-merge($fab-icon-sizes, ( small: 20 ));
-$btn-font-sizes: map-merge($btn-font-sizes, ( default: 1rem, large: 1rem ));
-$btn-sizes: map-merge($btn-sizes, ( default: 41, large: 54 ));
+$fab-icon-sizes: (
+  'small': 20
+);
+$btn-font-sizes: (
+  'default': 1rem,
+  'large': 1rem
+);
+$btn-sizes: (
+  'default': 41,
+  'large': 54
+);
 
 $headings: (
   'h1': (
