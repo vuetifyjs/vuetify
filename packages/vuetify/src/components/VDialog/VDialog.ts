@@ -174,14 +174,7 @@ export default baseMixins.extend({
       this.$emit('click:outside')
 
       if (this.persistent) {
-        if (
-          this.overlay &&
-          !this.noClickAnimation &&
-          (
-            this.overlay.$el === target ||
-            this.overlay.$el.contains(target)
-          )
-        ) this.animateClick()
+        !this.noClickAnimation && this.animateClick()
 
         return false
       }
