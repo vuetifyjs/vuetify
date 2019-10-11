@@ -16,6 +16,8 @@
   import { mapGetters } from 'vuex'
 
   export default {
+    name: 'DocUsageNew',
+
     props: {
       value: {
         type: [Object, String],
