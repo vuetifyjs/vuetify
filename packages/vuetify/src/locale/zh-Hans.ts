@@ -29,6 +29,9 @@ export default {
   carousel: {
     prev: '上一张',
     next: '下一张',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: '还有 {0} 项',
