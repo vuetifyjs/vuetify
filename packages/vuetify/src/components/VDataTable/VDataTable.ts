@@ -25,28 +25,31 @@ import ripple from '../../directives/ripple'
 import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots, getSlot, defaultFilter, FilterFn, camelizeObjectKeys } from '../../util/helpers'
 import { breaking } from '../../util/console'
 
-function filterFn (item: any, search: string | null, locale: string) {
+function filterFn (item: any, search: string | null, filter: FilterFn) {
   return (header: TableHeader) => {
     const value = getObjectValueByPath(item, header.value)
-    return header.filter ? header.filter(value, search, item) : defaultFilter(value, search, locale)
+    return header.filter ? header.filter(value, search, item) : filter(value, search, item)
   }
 }
 
 function searchTableItems (
   items: any[],
   search: string | null,
-  locale: string,
   headersWithCustomFilters: TableHeader[],
   headersWithoutCustomFilters: TableHeader[],
   customFilter: FilterFn
 ) {
   let filtered = items
   search = typeof search === 'string' ? search.trim() : null
-  if (search) {
-    filtered = items.filter(item => headersWithoutCustomFilters.some(filterFn(item, search, locale)))
+  if (search && headersWithoutCustomFilters.length) {
+    filtered = items.filter(item => headersWithoutCustomFilters.some(filterFn(item, search, customFilter)))
   }
 
-  return filtered.filter(item => headersWithCustomFilters.every(filterFn(item, search, locale)))
+  if (headersWithCustomFilters.length) {
+    filtered = filtered.filter(item => headersWithCustomFilters.every(filterFn(item, search, defaultFilter)))
+  }
+
+  return filtered
 }
 
 /* @vue/component */
@@ -85,9 +88,8 @@ export default VDataIterator.extend({
     },
     customFilter: {
       type: Function,
-      default: searchTableItems,
-    } as unknown as PropValidator<(items: any[], search: string | null, locale: string,
-       exclusiveHeaders: TableHeader[], nonExclusiveHeaders: TableHeader[]) => any[]>,
+      default: defaultFilter,
+    } as PropValidator<typeof defaultFilter>,
   },
 
   data () {
@@ -197,8 +199,8 @@ export default VDataIterator.extend({
     calcWidths () {
       this.widths = Array.from(this.$el.querySelectorAll('th')).map(e => e.clientWidth)
     },
-    customFilterWithColumns (items: any[], search: string, locale: string) {
-      return this.customFilter(items, search, locale, this.headersWithCustomFilters, this.headersWithoutCustomFilters)
+    customFilterWithColumns (items: any[], search: string) {
+      return searchTableItems(items, search, this.headersWithCustomFilters, this.headersWithoutCustomFilters, this.customFilter)
     },
     customSortWithHeaders (items: any[], sortBy: string[], sortDesc: boolean[], locale: string) {
       return this.customSort(items, sortBy, sortDesc, locale, this.columnSorters)
