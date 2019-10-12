@@ -190,19 +190,19 @@ describe('VRangeSlider.ts', () => {
   })
   it('should not change to another handle', async () => {
     const setInternalValue = jest.fn()
-    const mockParseMouseMoveResult = { value : 1, isInsideTrack : true}
+    const mockParseMouseMoveResult = { value: 1, isInsideTrack: true }
     const wrapper = mountFunction({
       methods: { parseMouseMove: e => mockParseMouseMoveResult, setInternalValue },
       propsData: {
         min: 0,
         max: 1,
-        value: [0, 1]
-      }
+        value: [0, 1],
+      },
     })
     wrapper.setData({ activeThumb: 0 })
     wrapper.vm.onMouseMove(null)
-    
-    expect(wrapper.vm.activeThumb).toBe(0)
-    expect(setInternalValue).toBeCalledWith(1)
+
+    expect(wrapper.vm.activeThumb).toEqual(0)
+    expect(setInternalValue).toHaveBeenCalledWith(1)
   })
 })
