@@ -387,8 +387,6 @@ export function sortItems (
 ) {
   if (sortBy === null || !sortBy.length) return items
 
-  const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
-  const numericCollator = new Intl.Collator(locale, { numeric: true, usage: 'sort' })
   return items.sort((a, b) => {
     for (let i = 0; i < sortBy.length; i++) {
       const sortKey = sortBy[i]
@@ -416,8 +414,8 @@ export function sortItems (
       [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
 
       if (sortA !== sortB) {
-        if (!isNaN(sortA) && !isNaN(sortB)) numericCollator.compare(sortA, sortB)
-        return stringCollator.compare(sortA, sortB)
+        if (!isNaN(sortA) && !isNaN(sortB)) return new Intl.Collator(locale, { numeric: true, usage: 'sort' }).compare(sortA, sortB)
+        return new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' }).compare(sortA, sortB)
       }
     }
 
@@ -427,27 +425,19 @@ export function sortItems (
 
 export type FilterFn = (value: any, search: string | null, item: any) => boolean
 
-export function defaultFilter (value: any, search: string | null, locale: string) {
-  if (value != null && search != null && typeof value !== 'boolean') {
-    const valueLength = value.length
-    const searchLength = search.length
-    const collator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'search' })
-    for (let i = 0; i <= valueLength - searchLength; i++) {
-      var subString = value.substring(i, searchLength + i)
-      if (collator.compare(subString, search) === 0) {
-        return true
-      }
-    }
-  }
-  return false
+export function defaultFilter (value: any, search: string | null, item: any) {
+  return value != null &&
+    search != null &&
+    typeof value !== 'boolean' &&
+    value.toString().toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) !== -1
 }
 
-export function searchItems (items: any[], search: string, locale: string) {
+export function searchItems (items: any[], search: string) {
   if (!search) return items
   search = search.toString().toLowerCase()
   if (search.trim() === '') return items
 
-  return items.filter(item => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search, locale)))
+  return items.filter(item => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search, item)))
 }
 
 /**
