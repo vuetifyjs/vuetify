@@ -78,7 +78,7 @@ export default mixins(header).extend({
       }, [this.genSelectAll()]))
     }
 
-    const sortHeaders:TableHeader[] = this.headers.filter(h => h.sortable !== false && h.value !== 'data-table-select')
+    const sortHeaders: TableHeader[] = this.headers.filter(h => h.sortable !== false && h.value !== 'data-table-select')
     if (!this.disableSort && sortHeaders.length) {
       children.push(this.genSortSelect(sortHeaders))
     }
