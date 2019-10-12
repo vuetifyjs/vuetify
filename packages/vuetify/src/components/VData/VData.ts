@@ -153,7 +153,7 @@ export default Vue.extend({
       let items = this.items.slice()
 
       if (!this.disableFiltering && this.serverItemsLength <= 0) {
-        items = this.customFilter(items, this.search, this.locale)
+        items = this.customFilter(items, this.search)
       }
 
       return items
