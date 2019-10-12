@@ -32,7 +32,7 @@ export default VWindow.extend({
     cycle: Boolean,
     delimiterIcon: {
       type: String,
-      default: '$vuetify.icons.delimiter',
+      default: '$delimiter',
     },
     height: {
       type: [Number, String],
@@ -64,7 +64,6 @@ export default VWindow.extend({
   data () {
     return {
       internalHeight: this.height,
-      noHeightReset: true,
       slideTimeout: undefined as number | undefined,
     }
   },

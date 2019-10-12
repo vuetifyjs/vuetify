@@ -7,4 +7,6 @@ Vue.use(Vuetify, {
   components: { VLayout },
 })
 
-export default new Vuetify({ ... })
+const opts = {}
+
+export default new Vuetify(opts)

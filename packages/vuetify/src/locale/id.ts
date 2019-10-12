@@ -1,26 +1,26 @@
 export default {
-  close: 'Close',
+  close: 'Tutup',
   dataIterator: {
-    pageText: '{0}-{1} dari {2}',
     noResultsText: 'Tidak ditemukan catatan yang cocok',
-    loadingText: 'Loading item...',
+    loadingText: 'Memuat data...',
   },
   dataTable: {
-    itemsPerPageText: 'Baris setiap halaman:',
+    itemsPerPageText: 'Baris per halaman:',
     ariaLabel: {
-      sortDescending: ': Sorted descending. Activate to remove sorting.',
-      sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.',
+      sortDescending: ': Diurutkan kebawah. Aktifkan untuk menghapus penyortiran.',
+      sortAscending: ': Diurutkan keatas. Aktifkan untuk mengurutkan kebawah.',
+      sortNone: ': Tidak diurutkan. Aktifkan untuk mengurutkan keatas.',
     },
-    sortBy: 'Sort by',
+    sortBy: 'Urutkan berdasar',
   },
   dataFooter: {
-    itemsPerPageText: 'Item setiap halaman:',
+    itemsPerPageText: 'Item per halaman:',
     itemsPerPageAll: 'Semua',
     nextPage: 'Halaman selanjutnya',
     prevPage: 'Halaman sebelumnya',
     firstPage: 'Halaman pertama',
     lastPage: 'Halaman terakhir',
+    pageText: '{0}-{1} dari {2}',
   },
   datePicker: {
     itemsSelected: '{0} dipilih',
@@ -34,7 +34,11 @@ export default {
     moreEvents: '{0} lagi',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counter: '{0} berkas',
+    counterSize: '{0} berkas (dari total {1})',
+  },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
   },
 }

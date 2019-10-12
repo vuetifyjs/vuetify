@@ -1,168 +1,31 @@
 <template>
-  <v-row
-    justify="center"
-  >
-    <v-btn
-      v-bind="options"
-      class="mt-12"
+  <v-container class="fill-height">
+    <v-row
+      align="center"
+      justify="center"
     >
-      <v-icon
-        v-if="hasIcon"
-        :left="type.includes('icon-left')"
-        :right="type.includes('icon-right')"
+      <v-btn
+        v-bind="{
+          ...attrs,
+          color: attrs.color || 'deep-purple accent-4',
+          [attrs.size]: true
+        }"
+        class="white--text"
       >
-        mdi-plus
-      </v-icon>
-      <span v-else>
-        {{ text }}
-      </span>
-      <template
-        v-if="customLoad"
-        v-slot:loader
-      >
-        Loading...
-      </template>
-    </v-btn>
+        <v-icon v-if="attrs.fab || attrs.icon">mdi-account</v-icon>
 
-    <v-col cols="12">
-      <v-container>
-        <v-slider
-          v-model="minWidth"
-          label="Min width"
-          min="10"
-          max="300"
-        ></v-slider>
-        <v-slider
-          v-model="minHeight"
-          label="Min height"
-          min="10"
-          max="300"
-        ></v-slider>
-        <v-slider
-          v-model="elevation"
-          label="Elevation"
-          min="0"
-          max="24"
-          clearable
-        ></v-slider>
-        <v-row>
-          <v-col
-            cols="12"
-            md="4"
-          >
-            <v-select
-              v-model="size"
-              :items="sizes"
-              label="Size"
-            ></v-select>
-          </v-col>
-          <v-col
-            cols="12"
-            md="4"
-          >
-            <v-select
-              v-model="color"
-              :items="colors"
-              label="Color"
-            ></v-select>
-          </v-col>
-          <v-col
-            cols="12"
-            md="4"
-          >
-            <v-select
-              v-model="type"
-              :items="types"
-              label="Type"
-              multiple
-            ></v-select>
-          </v-col>
-          <v-col cols="4">
-            <v-checkbox
-              v-model="disabled"
-              label="Disabled"
-            ></v-checkbox>
-          </v-col>
-          <v-col cols="4">
-            <v-checkbox
-              v-model="loading"
-              label="Loading"
-            ></v-checkbox>
-          </v-col>
-          <v-col cols="4">
-            <v-checkbox
-              v-model="customLoad"
-              label="Custom loader"
-            ></v-checkbox>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-col>
-  </v-row>
+        <span v-else>Click Me</span>
+      </v-btn>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
   export default {
-    data: () => ({
-      color: 'primary',
-      size: 'medium',
-      sizes: ['x-small', 'small', 'medium', 'large', 'x-large'],
-      type: [],
-      types: ['block', 'depressed', 'fab', 'outlined', 'rounded', 'text'],
-      text: 'Customize me',
-      minWidth: undefined,
-      minHeight: undefined,
-      elevation: 2,
-      loading: false,
-      customLoad: false,
-      disabled: false,
-    }),
-
-    computed: {
-      hasIcon () {
-        return Boolean(
-          this.type.includes('fab') ||
-            this.type.includes('icon-left') ||
-            this.type.includes('icon-right')
-        )
-      },
-      options () {
-        const options = {
-          color: this.color,
-          [this.size]: true,
-          elevation: this.elevation,
-          loading: this.loading,
-          disabled: this.disabled,
-        }
-
-        if (this.type) {
-          for (const type of this.type) options[type] = true
-        }
-
-        if (this.minWidth) {
-          options.minWidth = this.minWidth
-        }
-        if (this.minHeight) {
-          options.minHeight = this.minHeight
-        }
-
-        return options
-      },
-      colors () {
-        return Object.keys(this.$vuetify.theme.themes.dark)
-      },
-    },
-    watch: {
-      type (val) {
-        if (
-          val.includes('depressed') ||
-          val.includes('outlined') ||
-          val.includes('text')
-        ) {
-          this.elevation = 0
-        } else {
-          this.elevation = 2
-        }
+    props: {
+      attrs: {
+        type: Object,
+        default: () => ({}),
       },
     },
   }

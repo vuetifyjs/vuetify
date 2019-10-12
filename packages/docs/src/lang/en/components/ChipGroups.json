@@ -41,6 +41,6 @@
     "nextIcon": "Specify the icon to use for the next icon",
     "prependIcon": "This icon used in the prepend slot (if shown)",
     "prevIcon": "Specify the icon to use for the prev icon",
-    "showArrows": "Force the display of the pagination errors"
+    "showArrows": "Force the display of the pagination arrows"
   }
 }

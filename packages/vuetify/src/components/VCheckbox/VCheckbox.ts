@@ -17,15 +17,15 @@ export default Selectable.extend({
     indeterminate: Boolean,
     indeterminateIcon: {
       type: String,
-      default: '$vuetify.icons.checkboxIndeterminate',
-    },
-    onIcon: {
-      type: String,
-      default: '$vuetify.icons.checkboxOn',
+      default: '$checkboxIndeterminate',
     },
     offIcon: {
       type: String,
-      default: '$vuetify.icons.checkboxOff',
+      default: '$checkboxOff',
+    },
+    onIcon: {
+      type: String,
+      default: '$checkboxOn',
     },
   },
 
@@ -85,7 +85,7 @@ export default Selectable.extend({
         staticClass: 'v-input--selection-controls__input',
       }, [
         this.genInput('checkbox', {
-          ...this.$attrs,
+          ...this.attrs$,
           'aria-checked': this.inputIndeterminate
             ? 'mixed'
             : this.isActive.toString(),

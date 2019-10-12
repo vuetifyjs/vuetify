@@ -31,7 +31,7 @@
   "reusableText1": "Vuetify va _automatiquement_ fusionner toutes les strings d'icônes fournies dans l'ensemble des presets disponibles. Cela vous permet de créer des strings personnalisées qui peuvent être utilisées dans votre application en référençant simplement les **icônes globales**.",
   "reusableText2": "Ceci peut vous aider à garantir que votre application utilise toujours une icône spécifique donnée pour une string fournie. Voici quelques manières d'utiliser `<v-icon>` avec ce système.",
   "customComponentHeader": "## Composants personnalisés",
-  "customComponentText1": "Vous pouvez utiliser les mêmes strings d'icônes dans vos propres composants personnalisés. Chaque fois **$vuetify.icons** est passé par _v-text_, _v-html_ ou par texte, `<v-icon>` va chercher cette valeur spécifiée. Cela vous permet de créer des solutions personnalisées faciles à construire et faciles à gérer.",
+  "customComponentText1": "Vous pouvez utiliser les mêmes strings d'icônes dans vos propres composants personnalisés. Chaque fois que **$vuetify.icons** (ou raccourci **$**) est passé par _v-text_, _v-html_ ou par texte, `<v-icon>` va chercher cette valeur spécifiée. Cela vous permet de créer des solutions personnalisées faciles à construire et faciles à gérer.",
   "componentIconsHeader": "## Composants icônes",
   "componentIconsText1": "Au lieu des presets de polices d'icônes fournies, vous pouvez utiliser vos propres composants icônes. Vous pouvez aussi changer les icônes utilisées dans le composant Vuetify avec les vôtres.",
   "componentIconsText2": "Si vous voulez que vos icônes SVG héritent correctement des couleurs et de l'échelle - assurez-vous d'y ajouter le css suivant :",

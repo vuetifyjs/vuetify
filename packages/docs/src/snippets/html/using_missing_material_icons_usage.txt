@@ -3,12 +3,12 @@
     label="password"
     :append-icon="
       pwShow
-        ? '$vuetify.icons.visibility_outline'
-        : '$vuetify.icons.visibility_off_outline'
+        ? '$visibility_outline'
+        : '$visibility_off_outline'
     "
     @click:append="pwShow = !pwShow"
     :type="pwShow ? 'text' : 'password'"
   />
 
 <!-- using directly as an icon component -->
-<v-icon>$vuetify.icons.visibility_outline</v-icon>
+<v-icon>$visibility_outline</v-icon>

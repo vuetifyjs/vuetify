@@ -21,7 +21,7 @@
       "header": "### Checkboxes - Colors",
       "desc": "Checkboxes can be colored by using any of the builtin colors and contextual names using the `color` prop."
     },
-    "checkboxes-inline-texfield": {
+    "checkboxes-inline-textfield": {
       "header": "### Checkboxes - Inline with a textfield",
       "desc": ""
     },
@@ -93,7 +93,9 @@
     "prepend": "Components.Selects.slots.prepend"
   },
   "events": {
+    "blur": "Components.Inputs.events.blur",
     "change": "Components.Inputs.events.change",
+    "focus": "Emitted when the input is focused",
     "update:indeterminate": "The **indeterminate.sync** event.",
     "update:error": "Mixins.Validatable.events['update:error']"
   }

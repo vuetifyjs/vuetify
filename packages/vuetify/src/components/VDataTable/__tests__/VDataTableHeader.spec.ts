@@ -45,6 +45,8 @@ describe('VDataTableHeader.ts', () => {
         mountFunction = (options?: MountOptions<Instance>) => {
           return mount(VDataTableHeader, {
             ...options,
+            // https://github.com/vuejs/vue-test-utils/issues/1130
+            sync: false,
             propsData: {
               headers: testHeaders,
               mobile: isMobile,

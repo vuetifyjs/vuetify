@@ -17,6 +17,14 @@
   import kebabCase from 'lodash/kebabCase'
 
   export default {
+    name: 'DocSection',
+
+    provide () {
+      return {
+        id: this.id,
+      }
+    },
+
     props: {
       value: {
         type: Object,
@@ -45,7 +53,7 @@
           if (child.type === 'accessibility') return 'accessibility'
           if (child.type === 'api') return 'api'
           if (child.type === 'examples') return 'examples'
-          if (child.type === 'playground') return 'playground'
+          if (child.type === 'playground' || child.type === 'playground-new') return 'playground'
           if (child.type === 'up-next') return 'up-next'
           if (child.type === 'usage') return 'usage'
         }

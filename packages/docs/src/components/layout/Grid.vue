@@ -46,7 +46,7 @@
             <strong>md</strong>
           </td>
           <td>large tablet to laptop</td>
-          <td>960px &gt; &lt; 1264*</td>
+          <td>960px &gt; &lt; 1264px*</td>
         </tr>
 
         <tr>
@@ -58,7 +58,7 @@
             <strong>lg</strong>
           </td>
           <td>desktop</td>
-          <td>1264 &gt; &lt; 1904px*</td>
+          <td>1264px* &gt; &lt; 1904px*</td>
         </tr>
 
         <tr>

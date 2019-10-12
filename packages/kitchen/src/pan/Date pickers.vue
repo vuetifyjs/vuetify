@@ -388,6 +388,16 @@
           />
         </v-layout>
       </core-section>
+
+      <core-title>
+        Select range
+      </core-title>
+      <core-section center>
+        <v-date-picker
+          v-model="dateRange"
+          range
+        />
+      </core-section>
     </v-layout>
   </v-container>
 </template>
@@ -402,6 +412,7 @@
       model: '2019-01-16',
       modelMM: '2019-01-16',
       landscape: false,
+      dateRange: [],
     }),
 
     methods: {

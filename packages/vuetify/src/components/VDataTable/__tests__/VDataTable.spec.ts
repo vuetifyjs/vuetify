@@ -112,6 +112,7 @@ const testItems = [
   },
 ]
 
+/* eslint-disable max-statements */
 describe('VDataTable.ts', () => {
   type Instance = InstanceType<typeof VDataTable>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
@@ -422,6 +423,76 @@ describe('VDataTable.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should not search column with filterable set to false', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: testItems,
+        headers: [
+          {
+            text: 'Dessert (100g serving)',
+            align: 'left',
+            filterable: false,
+            value: 'name',
+          },
+          { text: 'Calories', value: 'calories' },
+          { text: 'Fat (g)', value: 'fat' },
+          { text: 'Carbs (g)', value: 'carbs' },
+          { text: 'Protein (g)', value: 'protein' },
+          { text: 'Iron (%)', value: 'iron' },
+        ],
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      search: 'cup',
+    })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should not search column with filterable set to false and has filter function', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: testItems,
+        headers: [
+          {
+            text: 'Dessert (100g serving)',
+            align: 'left',
+            value: 'name',
+          },
+          { text: 'Calories', value: 'calories', filter: v => v > 400 },
+          { text: 'Fat (g)', value: 'fat' },
+          { text: 'Carbs (g)', value: 'carbs' },
+          { text: 'Protein (g)', value: 'protein' },
+          { text: 'Iron (%)', value: 'iron' },
+        ],
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      headers: [
+        {
+          text: 'Dessert (100g serving)',
+          align: 'left',
+          value: 'name',
+        },
+        { text: 'Calories', value: 'calories', filter: v => v > 400, filterable: false },
+        { text: 'Fat (g)', value: 'fat' },
+        { text: 'Carbs (g)', value: 'carbs' },
+        { text: 'Protein (g)', value: 'protein' },
+        { text: 'Iron (%)', value: 'iron' },
+      ],
+    })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   // https://github.com/vuetifyjs/vuetify/issues/8359
   it('should limit page to current page count if not using server-items-length', async () => {
     const wrapper = mountFunction({
@@ -435,6 +506,7 @@ describe('VDataTable.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
   // https://github.com/vuetifyjs/vuetify/issues/8184
   it('should default to first option in itemsPerPageOptions if it does not include itemsPerPage', async () => {
     const itemsPerPage = jest.fn()
@@ -457,5 +529,25 @@ describe('VDataTable.ts', () => {
     expect(options).toHaveBeenCalledWith(expect.objectContaining({
       itemsPerPage: 5,
     }))
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8817
+  it('should handle object when checking if it should default to first option in itemsPerPageOptions', async () => {
+    const itemsPerPage = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+        itemsPerPage: -1,
+        footerProps: {
+          itemsPerPageOptions: [5, 6, { text: 'All', value: -1 }],
+        },
+      },
+      listeners: {
+        'update:items-per-page': itemsPerPage,
+      },
+    })
+
+    expect(itemsPerPage).toHaveBeenCalledWith(-1)
   })
 })

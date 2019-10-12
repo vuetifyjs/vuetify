@@ -49,7 +49,6 @@
     "dark": "Mixins.Themeable.props.dark",
     "fullWidth": "Forces the dialog to expand 100% of available width.",
     "fullscreen": "Changes layout for fullscreen display.",
-    "hideOverlay": "Hides the display of the overlay.",
     "internalActivator": "Detaches the menu content inside of the component as opposed to the document.",
     "eager": "Mixins.Bootable.props.eager",
     "light": "Mixins.Themeable.props.light",

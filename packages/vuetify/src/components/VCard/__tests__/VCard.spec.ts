@@ -11,7 +11,11 @@ describe('VCard.vue', () => {
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {
     mountFunction = (options?: MountOptions<Instance>) => {
-      return mount(VCard, options)
+      return mount(VCard, {
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
+        ...options,
+      })
     }
   })
 
@@ -33,6 +37,8 @@ describe('VCard.vue', () => {
 
   it('should render card, which is link', () => {
     const wrapper = mountFunction({
+      // https://github.com/vuejs/vue-test-utils/issues/1130
+      sync: false,
       listeners: {
         click: () => {},
       },
@@ -71,9 +77,11 @@ describe('VCard.vue', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render a card with custom height', () => {
+  it('should render a card with custom height', async () => {
     const heightpx = '400px'
     const wrapper = mountFunction({
+      // https://github.com/vuejs/vue-test-utils/issues/1130
+      sync: false,
       propsData: {
         height: heightpx,
       },
@@ -85,6 +93,7 @@ describe('VCard.vue', () => {
     wrapper.setProps({
       height: 401,
     })
+    await wrapper.vm.$nextTick()
     expect(wrapper.element.style.height).toBe('401px')
   })
 })
