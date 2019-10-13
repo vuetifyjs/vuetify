@@ -12,7 +12,7 @@
         vertical
       ></v-divider>
 
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
 
       <v-toolbar-items>
         <v-btn text>

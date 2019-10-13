@@ -12,7 +12,7 @@
     <template v-slot:top>
       <v-toolbar flat color="white">
         <v-toolbar-title>Expandable Table</v-toolbar-title>
-        <div class="flex-grow-1"></div>
+        <v-spacer></v-spacer>
         <v-switch v-model="singleExpand" label="Single expand" class="mt-2"></v-switch>
       </v-toolbar>
     </template>
