@@ -1,5 +1,9 @@
+// Styles
+import './VSparkline.sass'
+
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Themeable from '../../mixins/themeable'
 
 // Utilities
 import mixins, { ExtractVue } from '../../util/mixins'
@@ -52,11 +56,13 @@ interface options extends Vue {
 export default mixins<options &
 /* eslint-disable indent */
   ExtractVue<[
-    typeof Colorable
+    typeof Colorable,
+    typeof Themeable
   ]>
 /* eslint-enable indent */
 >(
-  Colorable
+  Colorable,
+  Themeable,
 ).extend({
   name: 'VSparkline',
 
@@ -138,6 +144,12 @@ export default mixins<options &
   }),
 
   computed: {
+    classes (): object {
+      return {
+        'v-sparkline': true,
+        ...this.themeClasses,
+      }
+    },
     parsedPadding (): number {
       return Number(this.padding)
     },
@@ -346,6 +358,7 @@ export default mixins<options &
           display: 'block',
           viewBox: `0 0 ${this.totalWidth} ${this.totalHeight}`,
         },
+        class: this.classes,
       }, [
         this.genGradient(),
         this.genClipPath(bars, offsetX, this._lineWidth, 'sparkline-bar-' + this._uid),
@@ -407,6 +420,7 @@ export default mixins<options &
           'stroke-width': this._lineWidth || 1,
           viewBox: `0 0 ${this.width} ${this.totalHeight}`,
         },
+        class: this.classes,
       }), [
         this.genGradient(),
         this.hasLabels && this.genLabels(-(this._lineWidth / 2)),

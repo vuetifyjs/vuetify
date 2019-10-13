@@ -27,7 +27,7 @@
 
         <div v-if="component" class="d-flex child-flex">
           <v-sheet
-            height="300"
+            min-height="300"
             tile
             :dark="dark"
           >
@@ -155,14 +155,14 @@
         return acc
       }
 
-      acc[cur.prop] = null
+      acc[cur.prop] = cur.value
 
       return acc
     }, {})
   }
 
   export default {
-    name: 'ExampleNew',
+    name: 'DocUsageExampleNew',
 
     props: {
       value: {

@@ -29,6 +29,9 @@ export default {
   carousel: {
     prev: '이전 화면',
     next: '다음 화면',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: '{0} 더보기',

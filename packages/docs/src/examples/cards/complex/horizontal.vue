@@ -3,9 +3,23 @@
     max-width="400"
     class="mx-auto"
   >
-    <v-system-bar color="pink darken-2"></v-system-bar>
+    <v-system-bar
+      color="pink darken-2"
+      dark
+    >
+      <v-spacer></v-spacer>
 
-    <v-app-bar dark color="pink">
+      <v-icon>mdi-window-minimize</v-icon>
+
+      <v-icon>mdi-window-maximize</v-icon>
+
+      <v-icon>mdi-close</v-icon>
+    </v-system-bar>
+
+    <v-app-bar
+      dark
+      color="pink"
+    >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>My Music</v-toolbar-title>
@@ -17,20 +31,16 @@
       </v-btn>
     </v-app-bar>
 
-    <v-container
-      class="pa-2"
-      fluid
-    >
-      <v-row>
-        <v-col>
+    <v-container>
+      <v-row dense>
+        <v-col cols="12">
           <v-card
             color="#385F73"
             dark
           >
-            <v-card-text class="white--text">
-              <div class="headline mb-2">Unlimited music now</div>
-              Listen to your favorite artists and albums whenever and wherever, online and offline.
-            </v-card-text>
+            <v-card-title class="headline">Unlimited music now</v-card-title>
+
+            <v-card-subtitle>Listen to your favorite artists and albums whenever and wherever, online and offline.</v-card-subtitle>
 
             <v-card-actions>
               <v-btn text>Listen Now</v-btn>
@@ -41,28 +51,30 @@
         <v-col
           v-for="(item, i) in items"
           :key="i"
+          cols="12"
         >
           <v-card
             :color="item.color"
             dark
           >
-            <v-list-item three-line>
-              <v-list-item-content class="align-self-start">
-                <v-list-item-title
-                  class="headline mb-2"
+            <div class="d-flex flex-no-wrap justify-space-between">
+              <div>
+                <v-card-title
+                  class="headline"
                   v-text="item.title"
-                ></v-list-item-title>
+                ></v-card-title>
 
-                <v-list-item-subtitle v-text="item.artist"></v-list-item-subtitle>
-              </v-list-item-content>
+                <v-card-subtitle v-text="item.artist"></v-card-subtitle>
+              </div>
 
-              <v-list-item-avatar
+              <v-avatar
+                class="ma-3"
                 size="125"
                 tile
               >
                 <v-img :src="item.src"></v-img>
-              </v-list-item-avatar>
-            </v-list-item>
+              </v-avatar>
+            </div>
           </v-card>
         </v-col>
       </v-row>

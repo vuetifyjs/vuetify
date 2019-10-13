@@ -1,6 +1,7 @@
 {
   "header": "# Cards",
   "headerText": "The `v-card` component is a versatile component that can be used for anything from a panel to a static image. The **card** component has numerous helper components to make markup as easy as possible. Components that have no listed options use **Vue's** functional component option for faster rendering and serve as markup sugar to make building easier.",
+  "usageText": "A card has 4 basic components, `v-card-title`, `v-card-subtitle`, `v-card-text` and `v-card-actions`.",
   "componentsHeader": "### Functional components",
   "componentsList": [
     "`v-card-actions`: The container used for placing **actions** for a card, such as [v-btn](/components/buttons) or [v-menu](/components/menus). Also applies _special margin_ to buttons so that they properly line up with other card content areas.",
@@ -8,9 +9,6 @@
     "`v-card-title`: Provides a default **font-size** and **padding** for card titles. Font-size can be overwritten with typography classes, (/styles/typography)."
   ],
   "examples": {
-    "usage": {
-      "desc": "A card has 3 basic components, `v-card-title`, `v-card-text` and `v-card-actions`."
-    },
     "info-card": {
       "header": "### Information card",
       "desc": "Cards are entry points to more detailed information. To keep things concise, ensure to limit the number of actions the user can take."
