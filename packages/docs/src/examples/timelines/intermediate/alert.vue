@@ -7,7 +7,7 @@
       class="blue-grey white--text"
     >
       <span class="title">Logs</span>
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
       <v-btn
         :outlined="interval == null"
         :color="interval == null ? 'white' : 'primary'"

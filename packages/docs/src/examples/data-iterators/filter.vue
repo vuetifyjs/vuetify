@@ -25,7 +25,7 @@
             label="Search"
           ></v-text-field>
           <template v-if="$vuetify.breakpoint.mdAndUp">
-            <div class="flex-grow-1"></div>
+            <v-spacer></v-spacer>
             <v-select
               v-model="sortBy"
               flat
@@ -35,7 +35,7 @@
               prepend-inner-icon="search"
               label="Sort by"
             ></v-select>
-            <div class="flex-grow-1"></div>
+            <v-spacer></v-spacer>
             <v-btn-toggle
               v-model="sortDesc"
               mandatory
@@ -118,7 +118,7 @@
             </v-list>
           </v-menu>
 
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
 
           <span
             class="mr-4

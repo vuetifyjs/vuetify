@@ -62,7 +62,7 @@
       </v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-row no-gutters>
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
           <v-col cols="5">
             <v-select
               v-model="trip.location"
@@ -86,7 +86,7 @@
         </v-row>
 
         <v-card-actions>
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
           <v-btn
             text
             color="secondary"
@@ -152,7 +152,7 @@
                 no-title
                 scrollable
               >
-                <div class="flex-grow-1"></div>
+                <v-spacer></v-spacer>
                 <v-btn
                   text
                   color="primary"
@@ -189,7 +189,7 @@
                 no-title
                 scrollable
               >
-                <div class="flex-grow-1"></div>
+                <v-spacer></v-spacer>
                 <v-btn
                   text
                   color="primary"
