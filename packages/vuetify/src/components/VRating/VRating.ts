@@ -99,6 +99,7 @@ export default mixins(
         light,
         small,
         size,
+        xSmall,
         xLarge,
       } = this.$props
 
@@ -109,6 +110,7 @@ export default mixins(
         light,
         size,
         small,
+        xSmall,
         xLarge,
       }
     },
