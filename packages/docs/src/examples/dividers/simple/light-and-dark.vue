@@ -5,7 +5,7 @@
         <v-toolbar color="indigo" dark>
           <v-app-bar-nav-icon></v-app-bar-nav-icon>
           <v-toolbar-title>Manage</v-toolbar-title>
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
           <v-btn icon>
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>

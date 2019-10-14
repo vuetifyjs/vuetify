@@ -135,6 +135,9 @@ export default VWindow.extend({
       for (let i = 0; i < length; i++) {
         const child = this.$createElement(VBtn, {
           staticClass: 'v-carousel__controls__item',
+          attrs: {
+            'aria-label': this.$vuetify.lang.t('$vuetify.carousel.ariaLabel.delimiter', i + 1, length),
+          },
           props: {
             icon: true,
             small: true,

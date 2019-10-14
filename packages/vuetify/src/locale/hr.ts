@@ -29,6 +29,9 @@ export default {
   carousel: {
     prev: 'Prethodno',
     next: 'Sljedeće',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: 'Još {0}',

@@ -46,7 +46,7 @@
       </v-list>
     </v-expand-transition>
     <v-card-actions>
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
       <v-btn
         :disabled="!model"
         color="grey darken-3"
