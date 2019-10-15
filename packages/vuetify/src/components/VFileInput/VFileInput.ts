@@ -150,7 +150,7 @@ export default VTextField.extend({
         // same file(s). Ideally, `input.files` should be
         // manipulated directly but that property is readonly.
         this.$refs.input.value = ''
-      },
+      }
     },
   },
 
