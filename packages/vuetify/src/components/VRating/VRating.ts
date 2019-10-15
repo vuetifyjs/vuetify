@@ -94,22 +94,24 @@ export default mixins(
     iconProps (): object {
       const {
         dark,
-        medium,
         large,
         light,
+        medium,
         small,
         size,
         xLarge,
+        xSmall,
       } = this.$props
 
       return {
         dark,
-        medium,
         large,
         light,
+        medium,
         size,
         small,
         xLarge,
+        xSmall,
       }
     },
     isHovering (): boolean {
