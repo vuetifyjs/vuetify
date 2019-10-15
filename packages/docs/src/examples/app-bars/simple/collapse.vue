@@ -12,7 +12,7 @@
 
       <v-toolbar-title>Collapsing Bar</v-toolbar-title>
 
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
 
       <v-checkbox
         v-model="collapseOnScroll"

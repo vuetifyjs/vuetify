@@ -1,5 +1,7 @@
+@import '../tools/_functions.sass';
+
 $utilities: () !default;
-$utilities: map-merge(
+$utilities: map-deep-merge(
   (
     // Display utilities
     "overflow": (
