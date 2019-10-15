@@ -6,7 +6,8 @@ import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
 // Components
-import { VBreadcrumbsDivider, VBreadcrumbsItem } from '.'
+import VBreadcrumbsItem from './VBreadcrumbsItem'
+import VBreadcrumbsDivider from './VBreadcrumbsDivider'
 
 // Mixins
 import Themeable from '../../mixins/themeable'
