@@ -222,7 +222,7 @@ export default VSelect.extend({
     changeSelectedIndex (keyCode: number) {
       // Do not allow changing of selectedIndex
       // when search is dirty
-      if (this.searchIsDirty) return
+      if (this.searchIsDirty || !this.multiple) return
 
       if (![
         keyCodes.backspace,
