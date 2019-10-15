@@ -159,6 +159,7 @@ export default baseMixins.extend<options>().extend({
     minHighlightPadding: 20,
     stackClass: 'v-feature-discovery__content--active',
     stackMinZIndex: 6,
+    observer: null as MutationObserver | null,
   }),
 
   computed: {
@@ -322,8 +323,20 @@ export default baseMixins.extend<options>().extend({
   },
 
   mounted () {
-    this.updateDimensions()
+    this.observer = new MutationObserver(this.updateDimensions)
+
+    this.observer.observe(this.$refs.content, {
+      attributes: true,
+      childList: true,
+      subtree: true,
+      characterData: true,
+    })
+
     this.isActive && this.activate()
+  },
+
+  beforeDestroy () {
+    this.observer && this.observer.disconnect()
   },
 
   methods: {
@@ -404,6 +417,9 @@ export default baseMixins.extend<options>().extend({
       if (!el || !this.hasWindow) return new Dimensions()
       return this.getRoundedBoundedClientRect(el)
     },
+    measureContent () {
+      this.dimensions.content = this.measure(this.$refs.content)
+    },
     measureDesktopBackdrop (): CircleObject {
       const content = this.dimensions.content
       const x = content.width / 2 - this.defaultPadding
@@ -482,10 +498,7 @@ export default baseMixins.extend<options>().extend({
         if (activator) this.dimensions.activator = this.measure(activator)
       }
 
-      // Display and hide to get dimensions
-      this.sneakPeek(() => {
-        this.dimensions.content = this.measure(this.$refs.content)
-      })
+      this.dimensions.content = this.measure(this.$refs.content)
     },
     getOffsetLeft () {
       if (!this.hasWindow) return 0
