@@ -2,7 +2,6 @@
 import { VExpandTransition } from '../transitions'
 import { VIcon } from '../VIcon'
 import VTreeview from './VTreeview'
-import VTreeviewNode from './VTreeviewNode'
 
 // Mixins
 import { inject as RegistrableInject } from '../../mixins/registrable'
@@ -86,7 +85,7 @@ export const VTreeviewNodeProps = {
 }
 
 /* @vue/component */
-export default baseMixins.extend<options>().extend({
+const component = baseMixins.extend<options>().extend({
   name: 'v-treeview-node',
 
   inject: {
@@ -270,7 +269,7 @@ export default baseMixins.extend<options>().extend({
       }), children)
     },
     genChild (item: any): VNode {
-      return this.$createElement(VTreeviewNode, {
+      return this.$createElement(component, {
         key: getObjectValueByPath(item, this.itemKey),
         props: {
           activatable: this.activatable,
@@ -334,3 +333,5 @@ export default baseMixins.extend<options>().extend({
     }, children)
   },
 })
+
+export default component
