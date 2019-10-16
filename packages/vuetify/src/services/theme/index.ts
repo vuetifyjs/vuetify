@@ -186,7 +186,6 @@ export class Theme extends Service {
   private initVueMeta (root: any) {
     this.vueMeta = root.$meta()
     if (this.isVueMeta23) {
-      this.applyVueMeta23()
       return
     }
 
