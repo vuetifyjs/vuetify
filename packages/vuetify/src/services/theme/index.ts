@@ -52,6 +52,8 @@ export class Theme extends Service {
 
   private vueMeta = null as any | null
 
+  private hasMeta = null as boolean | null
+
   constructor (options: Partial<ITheme> = {}) {
     super()
     if (options.disable) {
@@ -182,13 +184,13 @@ export class Theme extends Service {
   }
 
   private initVueMeta (root: any) {
-    this.vueMeta = root.$meta
+    this.vueMeta = root.$meta()
     if (this.isVueMeta23) {
       this.applyVueMeta23()
       return
     }
 
-    const metaKeyName = typeof this.vueMeta().getOptions === 'function' ? this.vueMeta().getOptions().keyName : 'metaInfo'
+    const metaKeyName = typeof this.vueMeta.getOptions === 'function' ? this.vueMeta.getOptions().keyName : 'metaInfo'
     const metaInfo = root.$options[metaKeyName] || {}
 
     root.$options[metaKeyName] = () => {
@@ -212,10 +214,12 @@ export class Theme extends Service {
   }
 
   private applyVueMeta23 () {
-    const { set } = this.vueMeta({
-      tagIDKeyName: 'vuetify',
-    }).addApp('vuetify')
+    const { set, remove } = this.vueMeta.addApp('vuetify')
 
+    // remove the old style sheet first
+    if (this.hasMeta) {
+      remove()
+    }
     set({
       style: [{
         cssText: this.generatedStyles,
@@ -224,6 +228,7 @@ export class Theme extends Service {
         nonce: (this.options || {}).cspNonce,
       }],
     })
+    this.hasMeta = true
   }
 
   private initSSR (ssrContext?: any) {
@@ -298,6 +303,6 @@ export class Theme extends Service {
   // Is using v2.3 of vue-meta
   // https://github.com/nuxt/vue-meta/releases/tag/v2.3.0
   get isVueMeta23 (): boolean {
-    return typeof this.vueMeta().addApp === 'function'
+    return typeof this.vueMeta.addApp === 'function'
   }
 }
