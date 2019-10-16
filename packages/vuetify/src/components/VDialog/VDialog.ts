@@ -222,11 +222,9 @@ export default baseMixins.extend({
       this.$emit('keydown', e)
     },
     onFocusin (e: Event) {
-      if (
-        !e ||
-        e.target === document.activeElement ||
-        !this.retainFocus
-      ) return
+      if (!e || !this.retainFocus) {
+        return
+      }
 
       const target = e.target as HTMLElement
 
