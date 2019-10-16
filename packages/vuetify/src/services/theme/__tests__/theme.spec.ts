@@ -278,5 +278,10 @@ describe('Theme.ts', () => {
     theme.init(instance)
 
     expect(set).toHaveBeenCalled()
+
+    theme.init(instance)
+
+    expect(remove).toHaveBeenCalled()
+    expect(set).toHaveBeenCalledTimes(2)
   })
 })
