@@ -267,9 +267,10 @@ describe('Theme.ts', () => {
   it('should use vue-meta@2.3 functionality', () => {
     const theme = new Theme(mock)
     const set = jest.fn()
+    const remove = jest.fn()
 
     const $meta = () => ({
-      addApp: () => ({ set }),
+      addApp: () => ({ set, remove }),
     })
 
     ;(instance as any).$meta = $meta as any
