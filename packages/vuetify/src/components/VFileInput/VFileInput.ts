@@ -64,6 +64,10 @@ export default VTextField.extend({
       type: String,
       default: 'file',
     },
+    dragArea: {
+      type: String,
+      default: null,
+    },
     value: {
       default: () => [],
       validator: val => {
@@ -141,6 +145,26 @@ export default VTextField.extend({
       },
       immediate: true,
     },
+  },
+
+  mounted () {
+    if (this.dragArea) {
+      var dropArea = document.getElementById(this.dragArea)
+      if (dropArea) {
+        dropArea.addEventListener('dragenter', e => { this.$emit('drag-enter', e) }, false)
+        dropArea.addEventListener('dragleave', e => { this.$emit('drag-leave', e) }, false)
+        dropArea.addEventListener('dragover', e => { e.preventDefault() }, false)
+        dropArea.addEventListener('drop', e => {
+          e.preventDefault()
+          const dataTransfer = e.dataTransfer
+          if (dataTransfer) {
+            this.internalValue = this.isMultiple ? [...dataTransfer.files] : dataTransfer.files[0]
+          }
+        }, false)
+      } else {
+        consoleError('drag-area element not found, please make sure that an element with id ' + this.dragArea + ' exists', this)
+      }
+    }
   },
 
   methods: {
