@@ -3,6 +3,9 @@
     "usage": {
       "uninverted": true
     },
+    "outlined": {
+      "header": "### Contour"
+    },
     "closable": {
       "header": "### Refermable",
       "uninverted": true

@@ -1,40 +1,47 @@
 export default {
-  close: 'Close',
+  close: 'Zatvori',
   dataIterator: {
-    pageText: '{0}-{1} od {2}',
-    noResultsText: 'Nisu pronađeni odgovarajući zapisi',
-    loadingText: 'Loading item...',
+    noResultsText: 'Nisu pronađene odgovarajuće stavke',
+    loadingText: 'Učitavanje...',
   },
   dataTable: {
-    itemsPerPageText: 'Redova po stranici:',
+    itemsPerPageText: 'Redaka po stranici:',
     ariaLabel: {
-      sortDescending: ': Sorted descending. Activate to remove sorting.',
-      sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.',
+      sortDescending: ': Sortirano silazno. Odaberite za uklanjanje sortiranja.',
+      sortAscending: ': Sortirano uzlazno. Odaberite za silazno sortiranje.',
+      sortNone: ': Nije sortirano. Odaberite za uzlazno sortiranje.',
     },
-    sortBy: 'Sort by',
+    sortBy: 'Sortirajte po',
   },
   dataFooter: {
-    itemsPerPageText: 'Stavaka po stranici:',
-    itemsPerPageAll: 'Svi',
+    itemsPerPageText: 'Stavki po stranici:',
+    itemsPerPageAll: 'Sve',
     nextPage: 'Sljedeća stranica',
     prevPage: 'Prethodna stranica',
     firstPage: 'Prva stranica',
-    lastPage: 'Zadnja stranica',
+    lastPage: 'Posljednja stranica',
+    pageText: '{0}-{1} od {2}',
   },
   datePicker: {
     itemsSelected: '{0} odabrano',
   },
   noDataText: 'Nema dostupnih podataka',
   carousel: {
-    prev: 'Prethodna slika',
-    next: 'Sljedeća vizuala',
+    prev: 'Prethodno',
+    next: 'Sljedeće',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: 'Još {0}',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counter: 'Odabranih datoteka: {0}',
+    counterSize: 'Odabranih datoteka: {0} ({1} ukupno)',
+  },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
   },
 }

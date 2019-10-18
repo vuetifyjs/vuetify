@@ -11,28 +11,7 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "usage"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "api",
-          "value": [
-            "v-btn",
-            "v-btn-toggle"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "playground-new",
+          "type": "usage-new",
           "value": {
             "booleans": [
               "disabled",
@@ -42,6 +21,7 @@
             "sliders": [
               {
                 "prop": "elevation",
+                "label": "Elevation",
                 "attrs": {
                   "min": 0,
                   "max": 24
@@ -85,6 +65,18 @@
               "tile"
             ]
           }
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-btn",
+            "v-btn-toggle"
+          ]
         }
       ]
     },

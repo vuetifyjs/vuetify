@@ -52,7 +52,7 @@ export default baseMixins.extend<options>().extend({
     clearable: Boolean,
     clearIcon: {
       type: String,
-      default: '$vuetify.icons.clear',
+      default: '$clear',
     },
     counter: [Boolean, Number, String],
     filled: Boolean,
@@ -451,7 +451,7 @@ export default baseMixins.extend<options>().extend({
     setLabelWidth () {
       if (!this.outlined || !this.$refs.label) return
 
-      this.labelWidth = this.$refs.label.offsetWidth * 0.75 + 6
+      this.labelWidth = this.$refs.label.scrollWidth * 0.75 + 6
     },
     setPrefixWidth () {
       if (!this.$refs.prefix) return

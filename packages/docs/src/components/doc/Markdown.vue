@@ -1,12 +1,17 @@
 <script>
   // Utilities
+  import kebabCase from 'lodash/kebabCase'
   import marked from 'marked'
   import { parseLink } from '@/util/helpers'
-  // Utilities
   import {
     mapGetters,
+    mapMutations,
     mapState,
   } from 'vuex'
+
+  marked.setOptions({
+    headerIds: false,
+  })
 
   export default {
     props: {
@@ -32,11 +37,15 @@
       ...mapState('route', ['params']),
     },
 
-    render (h) {
+    methods: {
+      ...mapMutations('documentation', ['pushToc']),
+    },
+
+    render (h, context) {
       let code = this.code || this.source
 
       if (!this.code) {
-        if (this.$slots.default) {
+        if ((this.$slots.default || []).length > 0) {
           code = this.$slots.default[0].text.trim()
         }
 
@@ -55,19 +64,26 @@
       // Probably wants to make a list
       const wantsList = Array.isArray(code)
 
-      if (wantsList) {
-        code = code.map(c => `- ${c}\n`).join('')
-      }
+      if (wantsList) code = code.map(c => `- ${c}\n`).join('')
 
       // Convert markdown links
       code = code.replace(/\[([^\]]*)\]\(([^)]*)\)/g, parseLink)
 
+      const innerHTML = marked(code)
+      const heading = innerHTML.slice(1, 3)
+
+      if (['h1', 'h2', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(heading)) {
+        const index = innerHTML.indexOf('</')
+        const text = innerHTML.slice(4, index)
+        const id = kebabCase(text)
+
+        if (['h1', 'h2'].includes(heading)) this.pushToc({ id, text })
+      }
+
       return h(this.tag, {
         staticClass: 'markdown',
-        class: {
-          'mb-6': wantsList,
-        },
-        domProps: { innerHTML: marked(code) },
+        class: { 'mb-6': wantsList },
+        domProps: { innerHTML },
       })
     },
   }

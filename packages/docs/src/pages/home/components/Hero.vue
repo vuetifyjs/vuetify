@@ -35,7 +35,10 @@
             wrap
           >
 
-            <v-dialog v-model="dialog" max-width="888">
+            <v-dialog
+              v-model="dialog"
+              max-width="888"
+            >
               <template v-slot:activator="{ attrs, on }">
                 <v-btn
                   v-bind="attrs"

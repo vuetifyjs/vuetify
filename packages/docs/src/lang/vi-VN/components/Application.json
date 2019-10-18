@@ -1,7 +1,5 @@
 {
-  "headerText": "Trong Vuetify, component `v-app` và thuộc tính **app** của các component như `v-navigation-drawer`, `v-app-bar`, `v-footer`,... được sử dụng để giúp hệ thống xử lý kích thước phù hợp đối với component `<v-content>`. Điều này giúp bạn tạo ra một giao diện đồng nhất mà không phải bận tâm khi thay đổi kích kích thước của bố cục. Component `v-app` là **BẮT BUỘC** phải có trong mọi ứng dụng. Nó liên kết với rất nhiều component, chức năng và tính năng của Vuetify. Nó sẽ di truyền thuộc tính mặc định như _thuộc tính_ (**dark/light**) đến các component con, đồng thời đảm bảo tính tương thích giữa các trình duyệt với nhau.",
   "markupHeader": "## Quy ước mặc định vị trí",
   "markupText": "Đây là một ví dụ theo quy ước các vị trí mặc định của component chính trong Vuetify. Bạn có thể đặt các phần tử bố cục bất kì nơi nào kèm với thuộc tính **app**. Điểm chính của các component này là `v-content`. Nó sẽ tính toán linh động kích thước theo cấu trúc bạn đã chỉ định trong component **app**. Bạn có thể sử dụng kết hợp nhiều component khác như `v-bottom-navigation`.",
-  "markupText2": "Nếu sử dụng [vue-router](https://router.vuejs.org/), bạn cần phải đặt nó bên trong thẻ `v-content`.",
-  "alert1": "Để ứng dụng hoạt động đúng, bạn **phải** bọc nó trong component `v-app`. Component này đảm bảo tính **tương thích giữa các trình duyệt**. Có thể đặt nó **bất kì chỗ nào** trong thẻ body nhưng bắt buộc phải là thẻ cha của mọi thẻ trong component Vuetify."
+  "markupText2": "Nếu sử dụng [vue-router](https://router.vuejs.org/), bạn cần phải đặt nó bên trong thẻ `v-content`."
 }

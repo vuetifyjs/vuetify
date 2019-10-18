@@ -7,7 +7,7 @@
     "crwdns41690:0{value}crwdne41690:0",
     "crwdns41692:0{breakpoint}crwdnd41692:0{value}crwdne41692:0"
   ],
-  "displayText2": "crwdns41694:0crwdne41694:0",
+  "displayText2": "crwdns42882:0crwdne42882:0",
   "displays": [
     "crwdns41696:0crwdne41696:0",
     "crwdns41698:0crwdne41698:0",
@@ -22,6 +22,14 @@
   "displayText3": "crwdns41714:0crwdne41714:0",
   "visibilityHeader": "crwdns37738:0crwdne37738:0",
   "visibilityText": "crwdns41716:0crwdne41716:0",
+  "lateralDisplayText": "crwdns42884:0{breakpoint}crwdnd42884:0{condition}crwdne42884:0",
+  "conditionText": "crwdns42886:0crwdne42886:0",
+  "conditions": [
+    "crwdns42888:0crwdne42888:0",
+    "crwdns42890:0crwdne42890:0",
+    "crwdns42892:0crwdne42892:0"
+  ],
+  "mediaText": "crwdns42894:0crwdne42894:0",
   "printHeader": "crwdns41718:0crwdne41718:0",
   "printText1": "crwdns41720:0crwdne41720:0",
   "printOptions": [

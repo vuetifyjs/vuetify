@@ -34,6 +34,8 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
 
   props: {
     hideOverlay: Boolean,
+    overlayColor: String,
+    overlayOpacity: [Number, String],
   },
 
   data () {
@@ -44,6 +46,8 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
 
   watch: {
     hideOverlay (value) {
+      if (!this.isActive) return
+
       if (value) this.removeOverlay()
       else this.genOverlay()
     },
@@ -59,6 +63,8 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
         propsData: {
           absolute: this.absolute,
           value: false,
+          color: this.overlayColor,
+          opacity: this.overlayOpacity,
         },
       })
 

@@ -1,7 +1,6 @@
 export default {
   close: '닫기',
   dataIterator: {
-    pageText: '{2} 중 {0}-{1}',
     noResultsText: '일치하는 항목이 없습니다.',
     loadingText: '불러오는 중...',
   },
@@ -21,14 +20,18 @@ export default {
     prevPage: '이전 페이지',
     firstPage: '첫 페이지',
     lastPage: '마지막 페이지',
+    pageText: '{2} 중 {0}-{1}',
   },
   datePicker: {
     itemsSelected: '{0} 선택됨',
   },
-  noDataText: '이용할 수 없습니다',
+  noDataText: '데이터가 없습니다.',
   carousel: {
     prev: '이전 화면',
     next: '다음 화면',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: '{0} 더보기',
@@ -36,5 +39,9 @@ export default {
   fileInput: {
     counter: '{0} files',
     counterSize: '{0} files ({1} in total)',
+  },
+  timePicker: {
+    am: '오전',
+    pm: '오후',
   },
 }

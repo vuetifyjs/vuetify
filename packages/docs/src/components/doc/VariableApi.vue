@@ -11,7 +11,10 @@
         height="auto"
       >
         <v-layout wrap>
-          <v-flex xs12 md4>
+          <v-flex
+            xs12
+            md4
+          >
             <v-autocomplete
               v-model="selectedComponent"
               :items="components"
@@ -23,7 +26,11 @@
               hide-details
             />
           </v-flex>
-          <v-flex xs12 md4 offset-md4>
+          <v-flex
+            xs12
+            md4
+            offset-md4
+          >
             <v-text-field
               v-model="search"
               type="search"

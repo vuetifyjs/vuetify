@@ -22,7 +22,10 @@
             v-if="structure.file"
             shrink
           >
-            <core-file-btn :link="structure.file" :branch="branch" />
+            <core-file-btn
+              :link="structure.file"
+              :branch="branch"
+            />
           </v-flex>
           <v-flex
             v-if="structure.mdSpec"
@@ -64,8 +67,16 @@
   import kebabCase from 'lodash/kebabCase'
 
   export default {
+    name: 'CorePage',
+
     components: {
       NotFound: () => import('@/pages/general/404'),
+    },
+
+    provide () {
+      return {
+        id: this.id,
+      }
     },
 
     data: () => ({

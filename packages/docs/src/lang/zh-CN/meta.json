@@ -8,7 +8,7 @@
     "keywords": "快速启动，vuetify模板，安装vuetify"
   },
   "getting-started/why-vuetify": {
-    "title": "为什么选择Vuetify？"
+    "title": "为什么选择 Vuetify？"
   },
   "getting-started/frequently-asked-questions": {
     "title": "常见问题！",
@@ -47,7 +47,7 @@
     "title": "沙箱"
   },
   "components/api-explorer": {
-    "title": "API 浏览器"
+    "title": "API 概览"
   },
   "components/application": {
     "title": "应用程序服务"

@@ -1,1 +1,21 @@
-{}
+{
+  "header": "# App Bars",
+  "headerText": "`v-app-bar` コンポーネントは、サイトナビゲーションの主なソースであるため、グラフィカルユーザーインターフェイス（GUI）にとって極めて重要です。アプリバーコンポーネントは、[v-navigation-drawer](/components/navigation-drawers) と連携して、アプリケーションでサイトナビゲーションを提供します。",
+  "examples": {
+    "usage": {
+      "desc": "`v-app-bar` コンポーネントは、アプリケーション全体のアクションと情報に対して使用します。"
+    },
+    "prominent": {
+      "desc": "「prominent」プロップを持つ「v-app-bar」は、ユーザーが下にスクロールするときに高さを縮小することを選択できます。これにより、ユーザーがコンテンツをスクロールしているときに、表示スペースを少なくするためのスムーズな移行が提供されます。シュリンクの高さには、**圧縮された**（48px）サイズと **短い**（56px）サイズの2つのオプションがあります。"
+    },
+    "inverted-scroll": {
+      "desc": "**inverted-scroll** プロパティを使用すると、ユーザーが指定されたしきい値を超えるまでバーが非表示になります。しきい値を超えると、ユーザーがしきい値を超えてスクロールアップするまで「v-app-bar」が表示され続けます。 **scroll-threshold** 値が指定されていない場合、デフォルト値_0_が使用されます。"
+    }
+  },
+  "props": {
+    "clippedLeft": "v-navigation-drawerをapp-barの下の左側に配置します。",
+    "clippedRight": "v-navigation-drawerをapp-barの下の右側に配置します。",
+    "hideOnScroll": "スクロール時にこのapp-barを隠しますが、`extension`slot は表示したままにします。",
+    "scrollOffScreen": "スクロール時に app-bar を隠します。`extension` slotも表示しません。"
+  }
+}

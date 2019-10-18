@@ -42,6 +42,13 @@ declare global {
       touched?: boolean
       isTouch?: boolean
     }
+    _observe?: {
+      init: boolean
+      observer: IntersectionObserver
+    }
+    _mutate?: {
+      observer: MutationObserver
+    }
     _onScroll?: {
       callback: EventListenerOrEventListenerObject
       options: boolean | AddEventListenerOptions

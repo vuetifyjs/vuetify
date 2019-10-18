@@ -84,7 +84,7 @@ export default VDataIterator.extend({
     headersLength: Number,
     expandIcon: {
       type: String,
-      default: '$vuetify.icons.expand',
+      default: '$expand',
     },
     customFilter: {
       type: Function,
@@ -139,10 +139,10 @@ export default VDataIterator.extend({
       }, {})
     },
     headersWithCustomFilters (): TableHeader[] {
-      return this.computedHeaders.filter(header => header.filter)
+      return this.computedHeaders.filter(header => header.filter && (!header.hasOwnProperty('filterable') || header.filterable === true))
     },
     headersWithoutCustomFilters (): TableHeader[] {
-      return this.computedHeaders.filter(header => !header.filter)
+      return this.computedHeaders.filter(header => !header.filter && (!header.hasOwnProperty('filterable') || header.filterable === true))
     },
     sanitizedHeaderProps (): Record<string, any> {
       return camelizeObjectKeys(this.headerProps)
@@ -318,10 +318,12 @@ export default VDataIterator.extend({
       const children: VNodeChildren = [
         this.$createElement('template', { slot: 'row.content' }, this.genDefaultRows(items, props)),
       ]
+      const toggleFn = () => this.$set(this.openCache, group, !this.openCache[group])
+      const removeFn = () => props.updateOptions({ groupBy: [], groupDesc: [] })
 
       if (this.$scopedSlots['group.header']) {
         children.unshift(this.$createElement('template', { slot: 'column.header' }, [
-          this.$scopedSlots['group.header']!({ group, groupBy: props.options.groupBy, items, headers: this.computedHeaders }),
+          this.$scopedSlots['group.header']!({ group, groupBy: props.options.groupBy, items, headers: this.computedHeaders, toggle: toggleFn, remove: removeFn }),
         ]))
       } else {
         const toggle = this.$createElement(VBtn, {
@@ -331,9 +333,9 @@ export default VDataIterator.extend({
             small: true,
           },
           on: {
-            click: () => this.$set(this.openCache, group, !this.openCache[group]),
+            click: toggleFn,
           },
-        }, [this.$createElement(VIcon, [isOpen ? '$vuetify.icons.minus' : '$vuetify.icons.plus'])])
+        }, [this.$createElement(VIcon, [isOpen ? '$minus' : '$plus'])])
 
         const remove = this.$createElement(VBtn, {
           staticClass: 'ma-0',
@@ -342,9 +344,9 @@ export default VDataIterator.extend({
             small: true,
           },
           on: {
-            click: () => props.updateOptions({ groupBy: [], groupDesc: [] }),
+            click: removeFn,
           },
-        }, [this.$createElement(VIcon, ['$vuetify.icons.close'])])
+        }, [this.$createElement(VIcon, ['$close'])])
 
         const column = this.$createElement('td', {
           staticClass: 'text-start',

@@ -31,8 +31,7 @@
       "header": "Paginación y ordenamiento del lado del servidor"
     },
     "headerless": {
-      "header": "Tablas sin encabezados",
-      "desc": "Agregando la prop `hide-headers` creas una tabla sin encabezados."
+      "header": "Tablas sin encabezados"
     },
     "edit-dialog": {
       "header": "Edición Inline",
@@ -46,7 +45,6 @@
   "props": {
     "v-edit-dialog": {
       "cancelText": "Configura el texto default para el botón de cancelar cuando se utiliza la prop **large**",
-      "large": "Agrega botones de _submit_ y _cancel_ al diálogo.",
       "saveText": "Configura el texto default para el botón de guardar cuando se usa la prop **large**"
     },
     "v-data-table": {

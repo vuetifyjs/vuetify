@@ -1,4 +1,12 @@
 {
   "header": "调整指令",
-  "headerText": "当调整窗口大小时，`v-resize`指令可用于调用指定的函数。"
+  "headerText": "当调整窗口大小时，`v-resize`指令可用于调用指定的函数。",
+  "examples": {
+    "usage": {
+      "desc": "调整您的浏览器窗口大小并观察值的变化.."
+    }
+  },
+  "options": {
+    "value": "`v-resize=\"callback\"` 浏览器窗口发生改变时触发该函数。"
+  }
 }

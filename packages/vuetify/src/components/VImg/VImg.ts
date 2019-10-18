@@ -1,4 +1,8 @@
+// Styles
 import './VImg.sass'
+
+// Directives
+import intersect from '../../directives/intersect'
 
 // Types
 import { VNode } from 'vue'
@@ -22,11 +26,24 @@ export interface srcObject {
 export default VResponsive.extend({
   name: 'v-img',
 
+  directives: { intersect },
+
   props: {
     alt: String,
     contain: Boolean,
+    eager: Boolean,
     gradient: String,
     lazySrc: String,
+    options: {
+      type: Object,
+      // For more information on types, navigate to:
+      // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+      default: () => ({
+        root: undefined,
+        rootMargin: undefined,
+        threshold: undefined,
+      }),
+    },
     position: {
       type: String,
       default: 'center center',
@@ -94,6 +111,7 @@ export default VResponsive.extend({
         key: +this.isLoading,
       })
 
+      /* istanbul ignore if */
       if (!this.transition) return image
 
       return this.$createElement('transition', {
@@ -107,18 +125,21 @@ export default VResponsive.extend({
 
   watch: {
     src () {
-      if (!this.isLoading) this.init()
+      // Force re-init when src changes
+      if (!this.isLoading) this.init(undefined, undefined, true)
       else this.loadImage()
     },
     '$vuetify.breakpoint.width': 'getSrc',
   },
 
-  mounted () {
-    this.init()
-  },
-
   methods: {
-    init () {
+    init (
+      entries?: IntersectionObserverEntry[],
+      observer?: IntersectionObserver,
+      isIntersecting?: boolean
+    ) {
+      if (!isIntersecting && !this.eager) return
+
       if (this.normalisedSrc.lazySrc) {
         const lazyImg = new Image()
         lazyImg.src = this.normalisedSrc.lazySrc
@@ -207,7 +228,10 @@ export default VResponsive.extend({
         if (!this.transition) return placeholder[0]
 
         return this.$createElement('transition', {
-          attrs: { name: this.transition },
+          props: {
+            appear: true,
+            name: this.transition,
+          },
         }, placeholder)
       }
     },
@@ -217,6 +241,12 @@ export default VResponsive.extend({
     const node = VResponsive.options.render.call(this, h)
 
     node.data!.staticClass += ' v-image'
+
+    node.data!.directives = [{
+      name: 'intersect',
+      options: this.options,
+      value: this.init,
+    } as any]
 
     node.data!.attrs = {
       role: this.alt ? 'img' : undefined,

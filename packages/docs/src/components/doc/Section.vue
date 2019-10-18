@@ -13,10 +13,18 @@
   import {
     mapGetters,
   } from 'vuex'
-
+  import marked from 'marked'
   import kebabCase from 'lodash/kebabCase'
 
   export default {
+    name: 'DocSection',
+
+    provide () {
+      return {
+        id: this.id,
+      }
+    },
+
     props: {
       value: {
         type: Object,
@@ -45,9 +53,9 @@
           if (child.type === 'accessibility') return 'accessibility'
           if (child.type === 'api') return 'api'
           if (child.type === 'examples') return 'examples'
-          if (child.type === 'playground' || child.type === 'playground-new') return 'playground'
+          if (child.type === 'playground') return 'playground'
           if (child.type === 'up-next') return 'up-next'
-          if (child.type === 'usage') return 'usage'
+          if (child.type === 'usage' || child.type === 'usage-new') return 'usage'
           if (child.type === 'variable-api') return 'variable-api'
         }
 
@@ -57,7 +65,11 @@
           ? lang
           : `${this.namespace}.${this.page}.${lang}`
 
-        return kebabCase(this.$t(str))
+        const innerHTML = marked(this.$t(str))
+        const index = innerHTML.indexOf('</')
+        const text = innerHTML.slice(4, index)
+
+        return kebabCase(text)
       },
     },
   }

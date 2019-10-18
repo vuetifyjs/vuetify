@@ -20,7 +20,7 @@
         {{ selection.length ? `${selection.length} selected` : 'Photos' }}
       </v-toolbar-title>
 
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
 
       <v-scale-transition>
         <v-btn

@@ -1,4 +1,3 @@
-@import '../../styles/styles.sass'
 @import './_variables.scss'
 
 // Block
@@ -43,14 +42,11 @@
   z-index: 6
   outline: none
 
-.v-dialog__activator
-  cursor: pointer
-
-  *
-    cursor: pointer
-
 .v-dialog__container
-  display: inline
+  display: none
+
+  &--attached
+    display: inline
 
 // Modifier
 .v-dialog--animated

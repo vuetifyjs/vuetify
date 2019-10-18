@@ -64,7 +64,7 @@ export default baseMixins.extend<options>().extend({
   props: {
     appendIcon: {
       type: String,
-      default: '$vuetify.icons.dropdown',
+      default: '$dropdown',
     },
     attach: {
       default: false,
@@ -73,7 +73,6 @@ export default baseMixins.extend<options>().extend({
     chips: Boolean,
     clearable: Boolean,
     deletableChips: Boolean,
-    dense: Boolean,
     eager: Boolean,
     hideSelected: Boolean,
     items: {
@@ -358,14 +357,13 @@ export default baseMixins.extend<options>().extend({
 
             this.selectedIndex = index
           },
-          focus,
           'click:close': () => this.onChipInput(item),
         },
         key: JSON.stringify(this.getValue(item)),
       }, this.getText(item))
     },
     genCommaSelection (item: object, index: number, last: boolean) {
-      const color = index === this.selectedIndex && this.color
+      const color = index === this.selectedIndex && this.computedColor
       const isDisabled = (
         this.disabled ||
         this.getDisabled(item)
