@@ -9,7 +9,21 @@
           "type": "alert",
           "lang": "sassAlert1",
           "value": "warning"
-        },
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "variable-api",
+          "value": "variableApiDesc"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
         {
           "type": "heading",
           "lang": "setupHeading"
@@ -25,15 +39,6 @@
         {
           "type": "text",
           "lang": "setupText2"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "variable-api",
-          "value": "variableApiDesc"
         }
       ]
     },
