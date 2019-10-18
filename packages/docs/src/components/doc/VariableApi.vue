@@ -107,25 +107,23 @@
     },
 
     data: vm => ({
+      components: [],
       search: '',
       selectedComponent: '',
       variables: [],
     }),
 
-    computed: {
-      components () {
-        console.log(variableApi)
-        return Object.keys(variableApi) || []
-      },
-    },
-
     watch: {
       selectedComponent (component) {
-        console.log(component)
         this.variables = (variableApi && variableApi[component])
           ? variableApi[component]
           : []
       },
+    },
+
+    mounted () {
+      this.components = Object.keys(variableApi) || []
+      this.selectedComponent = 'globals'
     },
   }
 </script>

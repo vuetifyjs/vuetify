@@ -120,6 +120,28 @@ function parseMixins (component) {
   return mixins.sort((a, b) => a > b)
 }
 
+function processVariableFile (dir, folder) {
+  const variableFile = `${dir}${folder}/_variables.scss`
+  if (fs.existsSync(variableFile)) {
+    const varFile = fs.readFileSync(variableFile, 'utf8')
+    const vars = varFile
+      .replace(/^@import\s'\.\.\/\.\.\/styles\/styles\.sass';\s/g, '')
+      .replace(/\s\s+/g, ' ')
+      .split(';\n')
+    const varValues = []
+    vars.forEach(varString => {
+      const varArr = varString.split(': ')
+      if (varArr.length === 2) {
+        varValues.push({
+          name: varArr[0].trim(),
+          default: varArr[1].trim(),
+        })
+      }
+    })
+    return varValues
+  }
+}
+
 function parseVariables () {
   const variables = {}
   const rootDir = './../vuetify/src/components/'
@@ -129,23 +151,11 @@ function parseVariables () {
     .replace(/export\s\*\sfrom\s'.\//g, '')
     .split(`'\n`)
   folders.forEach(folder => {
-    const variableFile = `${rootDir}${folder}/_variables.scss`
-    if (fs.existsSync(variableFile)) {
-      const varFile = fs.readFileSync(variableFile, 'utf8')
-      const vars = varFile.replace(/\s\s+/g, ' ').split(';\n')
-      const varValues = []
-      vars.forEach(varString => {
-        const varArr = varString.split(': ')
-        if (varArr.length === 2) {
-          varValues.push({
-            name: varArr[0].trim(),
-            default: varArr[1].trim(),
-          })
-        }
-      })
-      variables[hyphenate(folder)] = varValues
-    }
+    variables[hyphenate(folder)] = processVariableFile(rootDir, folder)
   })
+  const globalDir = './../vuetify/src/styles/'
+
+  variables.globals = processVariableFile(globalDir, 'settings')
   return variables
 }
 
