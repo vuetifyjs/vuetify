@@ -154,7 +154,7 @@
 
 ### Introduction
 
-Vuetify is a Material Design Component Framework for the Vue framework. We believe that you shouldn't need design skills to create beautiful Vue applications. Vuetify takes the pain out of development by providing everything you need:
+Vuetify is a Material Design Component Framework for the Vue framework. We believe that you shouldn't need design skills to build beautiful Vue applications. Vuetify takes the pain out of development by providing everything you need:
 
 - Over 100 beautiful hand crafted Material Components
 - Powerful and unique directives for customizing user experiences
