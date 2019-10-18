@@ -65,7 +65,7 @@ export class Breakpoint extends Service implements IBreakpoint {
     }
     this.scrollBarWidth = (
       options.scrollBarWidth ||
-      this.scrollBarWidth
+      (options.scrollBarWidth === 0 ? 0 : this.scrollBarWidth)
     )
     this.init()
   }
