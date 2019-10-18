@@ -29,11 +29,11 @@ export default mixins(Colorable, Themeable).extend({
     },
     nextIcon: {
       type: String,
-      default: '$vuetify.icons.next',
+      default: '$next',
     },
     prevIcon: {
       type: String,
-      default: '$vuetify.icons.prev',
+      default: '$prev',
     },
     totalVisible: [Number, String],
     value: {

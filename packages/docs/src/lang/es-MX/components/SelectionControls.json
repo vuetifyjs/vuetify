@@ -15,9 +15,6 @@
       "header": "Checkboxes - Colors",
       "desc": "Puedes cambiar el color de los checkboxes si usas cualquiera de los colores prefabricados y los nombres contextuales en la prop `color`."
     },
-    "checkboxes-inline-texfield": {
-      "header": "Checkboxes - En línea con un campo de texto"
-    },
     "radios-default": {
       "header": "Radios - Default",
       "desc": "Los Radio-groups son obligatorios por default. Puedes cambiar esto con la prop `mandatory`."

@@ -145,7 +145,7 @@ exports[`VColorPicker.ts should change canvas height 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            $vuetify.icons.unfold
+            $unfold
           </i>
         </span>
       </button>
@@ -287,7 +287,7 @@ exports[`VColorPicker.ts should hide canvas 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            $vuetify.icons.unfold
+            $unfold
           </i>
         </span>
       </button>
@@ -496,7 +496,7 @@ exports[`VColorPicker.ts should not show alpha controls if given hex value witho
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            $vuetify.icons.unfold
+            $unfold
           </i>
         </span>
       </button>
@@ -650,7 +650,7 @@ exports[`VColorPicker.ts should render color picker 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            $vuetify.icons.unfold
+            $unfold
           </i>
         </span>
       </button>
@@ -804,7 +804,7 @@ exports[`VColorPicker.ts should show swatches 1`] = `
           <i aria-hidden="true"
              class="v-icon notranslate material-icons theme--light"
           >
-            $vuetify.icons.unfold
+            $unfold
           </i>
         </span>
       </button>

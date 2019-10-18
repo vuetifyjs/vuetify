@@ -7,7 +7,7 @@ exports[`VFileInput.ts should be unclearable 1`] = `
       <i role="button"
          class="v-icon notranslate v-icon--link material-icons theme--light"
       >
-        $vuetify.icons.file
+        $file
       </i>
     </div>
   </div>
@@ -41,7 +41,7 @@ exports[`VFileInput.ts should display file size 1`] = `
       <i role="button"
          class="v-icon notranslate v-icon--link material-icons theme--light"
       >
-        $vuetify.icons.file
+        $file
       </i>
     </div>
   </div>
@@ -60,7 +60,7 @@ exports[`VFileInput.ts should display file size 1`] = `
           <i role="button"
              class="v-icon notranslate v-icon--link material-icons theme--light"
           >
-            $vuetify.icons.clear
+            $clear
           </i>
         </div>
       </div>
@@ -85,7 +85,7 @@ exports[`VFileInput.ts should display file size 2`] = `
       <i role="button"
          class="v-icon notranslate v-icon--link material-icons theme--light"
       >
-        $vuetify.icons.file
+        $file
       </i>
     </div>
   </div>
@@ -104,7 +104,7 @@ exports[`VFileInput.ts should display file size 2`] = `
           <i role="button"
              class="v-icon notranslate v-icon--link material-icons theme--light"
           >
-            $vuetify.icons.clear
+            $clear
           </i>
         </div>
       </div>
@@ -129,7 +129,7 @@ exports[`VFileInput.ts should display total size in counter 1`] = `
       <i role="button"
          class="v-icon notranslate v-icon--link material-icons theme--light"
       >
-        $vuetify.icons.file
+        $file
       </i>
     </div>
   </div>
@@ -148,7 +148,7 @@ exports[`VFileInput.ts should display total size in counter 1`] = `
           <i role="button"
              class="v-icon notranslate v-icon--link material-icons theme--light"
           >
-            $vuetify.icons.clear
+            $clear
           </i>
         </div>
       </div>
@@ -176,7 +176,7 @@ exports[`VFileInput.ts should display total size in counter 2`] = `
       <i role="button"
          class="v-icon notranslate v-icon--link material-icons theme--light"
       >
-        $vuetify.icons.file
+        $file
       </i>
     </div>
   </div>
@@ -195,7 +195,7 @@ exports[`VFileInput.ts should display total size in counter 2`] = `
           <i role="button"
              class="v-icon notranslate v-icon--link material-icons theme--light"
           >
-            $vuetify.icons.clear
+            $clear
           </i>
         </div>
       </div>
@@ -223,7 +223,7 @@ exports[`VFileInput.ts should render 1`] = `
       <i role="button"
          class="v-icon notranslate v-icon--link material-icons theme--light"
       >
-        $vuetify.icons.file
+        $file
       </i>
     </div>
   </div>
@@ -265,7 +265,7 @@ exports[`VFileInput.ts should render chips 1`] = `
       <i role="button"
          class="v-icon notranslate v-icon--link material-icons theme--light"
       >
-        $vuetify.icons.file
+        $file
       </i>
     </div>
   </div>
@@ -288,7 +288,7 @@ exports[`VFileInput.ts should render chips 1`] = `
           <i role="button"
              class="v-icon notranslate v-icon--link material-icons theme--light"
           >
-            $vuetify.icons.clear
+            $clear
           </i>
         </div>
       </div>
@@ -313,7 +313,7 @@ exports[`VFileInput.ts should render counter 1`] = `
       <i role="button"
          class="v-icon notranslate v-icon--link material-icons theme--light"
       >
-        $vuetify.icons.file
+        $file
       </i>
     </div>
   </div>
@@ -332,7 +332,7 @@ exports[`VFileInput.ts should render counter 1`] = `
           <i role="button"
              class="v-icon notranslate v-icon--link material-icons theme--light"
           >
-            $vuetify.icons.clear
+            $clear
           </i>
         </div>
       </div>
@@ -360,7 +360,7 @@ exports[`VFileInput.ts should render small chips 1`] = `
       <i role="button"
          class="v-icon notranslate v-icon--link material-icons theme--light"
       >
-        $vuetify.icons.file
+        $file
       </i>
     </div>
   </div>
@@ -383,7 +383,7 @@ exports[`VFileInput.ts should render small chips 1`] = `
           <i role="button"
              class="v-icon notranslate v-icon--link material-icons theme--light"
           >
-            $vuetify.icons.clear
+            $clear
           </i>
         </div>
       </div>

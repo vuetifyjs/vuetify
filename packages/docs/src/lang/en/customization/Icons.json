@@ -34,7 +34,7 @@
   "reusableText1": "Vuetify will _automatically_ merge any icon strings provided into the pool of available presets. This allows you to create custom strings that can be utilized in your application by simply referencing the **global icons**.",
   "reusableText2": "This can help ensure your application is always using a specific icon given a provided string. Here are a few ways that you can use `<v-icon>` with this system.",
   "customComponentHeader": "## Custom components",
-  "customComponentText1": "You can utilize the same icon strings in your own custom components. Any time **$vuetify.icons** is passed in through _v-text_, _v-html_ or as text, `<v-icon>` will look up that specified value. This allows you to create customized solutions that are easy to build and easy to manage.",
+  "customComponentText1": "You can utilize the same icon strings in your own custom components. Any time **$vuetify.icons** (or shortcut **$**) is passed in through _v-text_, _v-html_ or as text, `<v-icon>` will look up that specified value. This allows you to create customized solutions that are easy to build and easy to manage.",
   "componentIconsHeader": "## Component icons",
   "componentIconsText1": "Instead of provided icon fonts presets you can use your own component icons. You also can switch icons that are used in Vuetify component with your own.",
   "componentIconsText2": "If you want your SVG icon to inherit colors and scale correctly - be sure add the following css to it:",

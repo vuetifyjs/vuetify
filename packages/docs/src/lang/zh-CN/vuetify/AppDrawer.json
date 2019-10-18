@@ -1,7 +1,7 @@
 {
   "accessibility": "无障碍 (a11y)",
   "alerts": "提示框",
-  "apiExplorer": "API 浏览器",
+  "apiExplorer": "API 概览",
   "application": "应用程序",
   "aspectRatios": "长宽比",
   "autocompletes": "自动补全",
@@ -43,8 +43,8 @@
   "forms": "表单",
   "frameworkOptions": "框架版本",
   "gettingStarted": "入门指南",
-  "grid": "栅格",
   "groups": "组",
+  "grid": "栅格",
   "hover": "悬停",
   "i18n": "国际化 (i18n)",
   "icons": "图标",
@@ -52,6 +52,7 @@
   "inputs": "输入",
   "inputsAndControls": "表单和控制",
   "itemGroups": "项目组",
+  "layout": "布局",
   "lists": "列表",
   "lts": "长期支持",
   "meetTheTeam": "认识开发团队",
@@ -84,5 +85,5 @@
   "transitions": "过渡",
   "treeview": "树形视图",
   "typography": "排版",
-  "whyVuetify": "为什么选择Vuetify？"
+  "whyVuetify": "为什么选择 Vuetify？"
 }

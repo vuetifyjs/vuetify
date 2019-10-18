@@ -2,22 +2,22 @@
 
 You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.patreon.com/vuetify)
 
-### $1500+
+### Premiere
 - [QOMPLX](https://www.qomplx.com/)
 
-### $500+
+### Diamond
 - [LMAX Exchange](https://www.lmax.com/)
 - [Intygrate](http://intygrate.com/)
 - [Resale AI](http://resaleai.com/)
 
-### $250+
+### Platinum
 - [rateGenius](https://application.rategenius.com/) <!-- Ravi Alamuri -->
 - [Clearblue Technologies](http://www.clearbluetechnologies.com/) <!-- Mark Windrim -->
 - [DigitalMaas](https://www.digitalmaas.com/) <!-- Scott Francis -->
 - [Asolvi](http://asolvi.com/) <!-- Sverre Dreier -->
 - [Quanted Square](https://analytics.quantedsquare.com/)
 
-### $50+
+### Gold
 - [Xavier Escoté](http://www.deister.net/)
 - [Cycloid](https://www.cycloid.io/)
 - [Zweidenker](http://zweidenker.de) <!-- Christian Denker -->
@@ -49,7 +49,7 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Working Group Two
 - Kyle Lawhorn
 - Jason Frueh
-- Austin Ginder
+- [Austin Ginder](https://austinginder.com/)
 - Brad Stewart
 
 ### $10+

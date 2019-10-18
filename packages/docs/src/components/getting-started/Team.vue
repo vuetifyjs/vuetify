@@ -31,9 +31,9 @@
         },
         {
           title: 'operations',
-          name: 'Ranee Leider',
-          email: 'ranee@vuetifyjs.com',
-          avatar: 'avatarStyle=Transparent&topType=LongHairStraight&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Surprised&eyebrowType=DefaultNatural&mouthType=Smile&skinColor=Light',
+          name: 'Heather Hill',
+          email: 'heather@vuetifyjs.com',
+          avatar: 'avatarStyle=Transparent&topType=LongHairStraight2&accessoriesType=Blank&hairColor=Brown&facialHairType=Blank&clotheType=ShirtVNeck&clotheColor=Pink&eyeType=Hearts&eyebrowType=Default&mouthType=Tongue&skinColor=Light',
         },
         {
           title: 'keeper',

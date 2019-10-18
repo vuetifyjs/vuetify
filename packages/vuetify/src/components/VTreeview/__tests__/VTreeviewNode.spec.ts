@@ -53,10 +53,18 @@ describe('VTreeViewNode.ts', () => {
       register: jest.fn(),
       unregister: jest.fn(),
       isExcluded: () => false,
+      updateActive: () => {},
+      emitActive: () => {},
+      updateOpen: () => {},
+      emitOpen: () => {},
     }
 
     mountFunction = (options?: MountOptions<Instance>) => {
-      return mount(VTreeviewNode, options)
+      return mount(VTreeviewNode, {
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
+        ...options,
+      })
     }
   })
 
@@ -65,15 +73,17 @@ describe('VTreeViewNode.ts', () => {
       provide: { treeview },
     })
 
-    expect(wrapper.vm.computedIcon).toBe('$vuetify.icons.checkboxOff')
+    expect(wrapper.vm.computedIcon).toBe('$checkboxOff')
 
     wrapper.setData({ isIndeterminate: true })
 
-    expect(wrapper.vm.computedIcon).toBe('$vuetify.icons.checkboxIndeterminate')
+    expect(wrapper.vm.computedIcon).toBe('$checkboxIndeterminate')
   })
 
   it('should use scoped slots', () => {
     const wrapper = mount(Mock, {
+      // https://github.com/vuejs/vue-test-utils/issues/1130
+      sync: false,
       provide: { treeview },
     })
 
@@ -91,6 +101,8 @@ describe('VTreeViewNode.ts', () => {
 
   it('should use label slot', () => {
     const wrapper = mount(MockScopedLabel, {
+      // https://github.com/vuejs/vue-test-utils/issues/1130
+      sync: false,
       provide: { treeview },
     })
 
@@ -111,8 +123,66 @@ describe('VTreeViewNode.ts', () => {
         },
       }),
     }, {
+      // https://github.com/vuejs/vue-test-utils/issues/1130
+      sync: false,
       provide: { treeview },
     })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  const singleRootWithEmptyChildrens = { id: 1, name: 'Child', children: [] }
+  it('should be able to have active children with empty array', () => {
+    const wrapper = mountFunction({
+      provide: { treeview },
+      propsData: {
+        item: singleRootWithEmptyChildrens,
+        activatable: true,
+        openOnClick: true,
+      },
+    })
+
+    expect(wrapper.vm.isActive).toBe(false)
+    const selectedLeaf = wrapper.find('.v-treeview-node__root')
+    selectedLeaf.trigger('click')
+    expect(wrapper.vm.isActive).toBe(true)
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should not be able to have active children with empty array when loadChildren is specified', () => {
+    const wrapper = mountFunction({
+      provide: { treeview },
+      propsData: {
+        item: singleRootWithEmptyChildrens,
+        activatable: true,
+        openOnClick: true,
+        loadChildren: () => {},
+      },
+    })
+
+    expect(wrapper.vm.isActive).toBe(false)
+    const selectedLeaf = wrapper.find('.v-treeview-node__root')
+    selectedLeaf.trigger('click')
+    expect(wrapper.vm.isActive).toBe(false)
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should not be able to have active children with empty array when disabled', () => {
+    const wrapper = mountFunction({
+      provide: { treeview },
+      propsData: {
+        item: { ...singleRootWithEmptyChildrens, disabled: true },
+        activatable: true,
+        openOnClick: true,
+      },
+    })
+
+    expect(wrapper.vm.isActive).toBe(false)
+    const selectedLeaf = wrapper.find('.v-treeview-node__root')
+    selectedLeaf.trigger('click')
+    expect(wrapper.vm.isActive).toBe(false)
 
     expect(wrapper.html()).toMatchSnapshot()
   })

@@ -13,7 +13,7 @@
     </v-card-text>
 
     <v-card-actions>
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
       <v-icon
         large
         @click="next"

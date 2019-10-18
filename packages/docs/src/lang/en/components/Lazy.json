@@ -1,0 +1,15 @@
+{
+  "header": "# Lazy loading",
+  "headerText": "The `v-lazy` component is used to dynamically load components based upon an elements visiblity.",
+  "lazyAlert": "The `v-lazy` component uses the [v-intersect](/directives/intersect) directive which requires a [Polyfill](/directives/intersect#polyfill) in order to work on IE11.",
+  "examples": {
+    "usage": {
+      "desc": "The `v-lazy` component by default will not render its contents until it has been intersected. Scroll down and watch the element render as you go past it."
+    }
+  },
+  "props": {
+    "minHeight": "Mixins.Measurable.props.minHeight",
+    "options": "Options that are passed to the [Intersection observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) constructor.",
+    "transition": "Mixins.Transitionable.props.transition"
+  }
+}

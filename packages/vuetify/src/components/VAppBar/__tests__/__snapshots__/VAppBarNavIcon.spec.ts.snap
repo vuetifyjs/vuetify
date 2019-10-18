@@ -8,7 +8,7 @@ exports[`AppBarNavIcon.ts should render correctly 1`] = `
     <i aria-hidden="true"
        class="v-icon notranslate material-icons theme--light"
     >
-      $vuetify.icons.menu
+      $menu
     </i>
   </span>
 </button>

@@ -64,7 +64,9 @@ exports[`VInput.ts should be in an error state 2`] = `
   <div class="v-input__control">
     <div class="v-input__slot">
     </div>
-    <div class="v-messages theme--light error--text">
+    <div class="v-messages theme--light error--text"
+         role="alert"
+    >
       <span name="message-transition"
             tag="div"
             class="v-messages__wrapper"

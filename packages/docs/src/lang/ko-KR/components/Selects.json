@@ -27,7 +27,6 @@
     "combobox": "**태그** 를 위한 단일 셀렉션의 한 종류",
     "debounceSearch": "검색 인풋 값이 들어올때 디바운스(Debounces)",
     "deletableChips": "선택된 칩(chip)에 삭제(remove) 아이콘을 추가",
-    "dense": "리스트 항목의 최대 높이를 낮춤",
     "disabled": "인풋(input)을 비활성화",
     "editable": " 편집 버튼을 생성 - [스펙](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "filter": "아이템을 필터링하는데 사용되는 함수",

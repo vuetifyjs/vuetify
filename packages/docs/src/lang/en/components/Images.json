@@ -34,6 +34,7 @@
     "alt": "Alternate text for screen readers. Leave empty for decorative images",
     "aspectRatio": "Calculated as `width/height`, so for a 1920x1080px image this will be `1.7778`. Will be calculated automatically if omitted",
     "contain": "Prevents the image from being cropped if it doesn't fit",
+    "eager": "Mixins.Bootable.props.eager",
     "gradient": "Overlays a gradient onto the image. Only supports [linear-gradient](https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient) syntax, anything else should be done with classes (see examples)",
     "lazySrc": "Something to show while waiting for the main image to load, typically a small base64-encoded thumbnail. Has a slight blur filter applied.\n\nUse [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) to generate automatically",
     "position": "Overrides the default to change which parts get cropped off. Uses the same syntax as [`background-position`](https://developer.mozilla.org/en-US/docs/Web/CSS/background-position)",

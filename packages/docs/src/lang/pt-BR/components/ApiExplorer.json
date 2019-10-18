@@ -1,1 +1,9 @@
-{}
+{
+  "header": "# Visão geral da API de componentes",
+  "headerText": "Pesquise rapidamente e navegue por todos os componentes Material e muito mais! Selecione um componente e veja rapidamente sua API e o exemplo de como usar",
+  "search": "Procurar",
+  "searchText": "Selecione um componente para visualizar sua API",
+  "select": "Procurar por um componente",
+  "or": "OU",
+  "browseCategories": "Navegar pelas categorias"
+}

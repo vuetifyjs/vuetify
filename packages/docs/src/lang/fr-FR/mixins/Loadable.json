@@ -1,1 +1,5 @@
-{}
+{
+  "props": {
+    "loaderHeight": "Spécifie la hauteur de l'espace de chargement"
+  }
+}

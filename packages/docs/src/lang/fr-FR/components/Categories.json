@@ -1,6 +1,20 @@
 {
   "autocompletes": "Auto-complétion",
   "autocompletesText": "Suggère les options lors de la saisie.",
+  "buttons": "Boutons & Indicateurs",
+  "buttonsText": "Boutons, bascules, état et indicateurs de progression",
+  "dataIterators": "Itérateurs de données",
+  "forms": "Contrôles de formulaires",
+  "formsText": "Contrôles qui collectent et valident les saisies de l'utilisateur.",
   "form": "Formulaires",
-  "menus": "Menu"
+  "layout": "Mise en page",
+  "layoutText": "Les blocs de construction essentiels pour présenter votre contenu.",
+  "menus": "Menu",
+  "modals": "Popups & Modaux",
+  "modalsText": "Composants flottants qui peuvent être dynamiquement affichés ou cachés.",
+  "navigation": "Navigation",
+  "navigationText": "Menus, navigation drawers et barres d'outils qui organisent votre contenu",
+  "tables": "Tableaux de données",
+  "tablesText": "Outils pour afficher et interagir avec les données tabulaires.",
+  "tabs": "Tabulations"
 }

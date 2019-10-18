@@ -1,1 +1,10 @@
-{}
+{
+  "props": {
+    "disabled": "Désactive le champ",
+    "error": "Place le champ dans un état d'erreur manuel",
+    "errorCount": "Le nombre total d'erreurs devant s'afficher en même temps",
+    "errorMessages": "Insère l'entrée dans un état d'erreur et passe par des messages d'erreur personnalisés. Il sera combiné avec toutes les validations qui se produisent à partir du prop **rules** Ce champ ne déclenchera pas la validation",
+    "messages": "Affiche une liste de messages ou un message si vous utilisez une chaîne de caractères",
+    "rules": "Accepte un tableau de fonctions qui prennent une valeur d'entrée comme argument et retourne soit `true` / `false` ou une `string` avec un message d'erreur"
+  }
+}

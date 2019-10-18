@@ -11,7 +11,7 @@
 
       <v-toolbar-title>Topics</v-toolbar-title>
 
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
 
       <v-btn icon>
         <v-icon>mdi-dots-vertical</v-icon>

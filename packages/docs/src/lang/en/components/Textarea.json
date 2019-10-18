@@ -3,7 +3,7 @@
   "headerText": "Textarea components are used for collecting large amounts of textual data.",
   "examples": {
     "usage": {
-      "desc": "`v-textarea` in it's simplest form is a multi-line text-field, useful for larger amounts of text."
+      "desc": "`v-textarea` in its simplest form is a multi-line text-field, useful for larger amounts of text."
     },
     "icon": {
       "header": "### Icons",
@@ -11,7 +11,7 @@
     },
     "auto-grow": {
       "header": "### Auto grow",
-      "desc": "When using the `auto-grow` prop, textarea's will automatically increase in size when the contained text exceeds it's size."
+      "desc": "When using the `auto-grow` prop, textarea's will automatically increase in size when the contained text exceeds its size."
     },
     "background-color": {
       "header": "### Background color",

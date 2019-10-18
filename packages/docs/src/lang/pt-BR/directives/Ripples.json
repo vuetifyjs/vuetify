@@ -1,1 +1,16 @@
-{}
+{
+  "examples": {
+    "usage": {
+      "uninverted": true
+    },
+    "custom-color": {
+      "uninverted": true
+    },
+    "center": {
+      "uninverted": true
+    },
+    "ripple-in-components": {
+      "uninverted": true
+    }
+  }
+}

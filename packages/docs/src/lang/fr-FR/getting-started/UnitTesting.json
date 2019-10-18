@@ -1,7 +1,9 @@
 {
   "header": "# Tests unitaires",
+  "headerText": "Les tests unitaires sont une partie importante (et parfois ignorée) du développement d'applications. Ils nous aident à sécuriser nos processus et nos flux de travail, en veillant à ce que les parties les plus critiques de nos projets soient protégées contre les erreurs accidentelles ou les surbrillances dans notre développement. C'est pourquoi Vue a son propre utilitaire de test appelé [vue-test-utils](https://vue-test-utils.vuejs.org/). Il fournit des fonctionnalités utiles pour interagir avec les composants Vue et travaille avec de nombreux lanceurs de test populaires.",
   "alert": "Vuetify utilise Typescript et doit actuellement importer et étendre l'objet Vue. Cela a le potentiel dans certaines applications pour générer un avertissement **$attrs** ou **$listeners** est en lecture seule. Il y a en ce moment une [discussion Github](https://github.com/vuetifyjs/vuetify/issues/4068) avec de potentiels contournements dans une variété de cas d'utilisation. Si vous avez des questions supplémentaires, veuillez nous rejoindre dans notre [communauté en ligne](https://community.vuetifyjs.com).",
   "runnerHeader": "## Mise en place du lanceur de tests",
+  "runnerText1": "Vous trouverez d'autres informations sur la façon de configurer un lancement de test avec Vue CLI 3 sur la [documentation officielle](https://vue-test-utils.vuejs.org/guides/getting-started.html). En un coup d'oeil, Vue CLI 3 a commencé des dépôts pour les lanceurs de test suivants :",
   "runnerText2": [
     "[Jest](https://github.com/vuejs/vue-test-utils-jest-example)",
     "[Mocha](https://github.com/vuejs/vue-test-utils-mocha-webpack-example)",
@@ -16,6 +18,6 @@
   "efficiencyHeader": "### Tester efficacement",
   "efficiencyText1": "Lorsque vous écrivez des tests, vous vous retrouverez souvent à répéter les mêmes choses. Dans ce cas, il est avantageux de créer des fonctions d'aide pour réduire la duplication de chaque test unitaire. Fondamentalement, appliquer le principe [DRY](https://fr.wikipedia.org/wiki/Don%27t_repeat_yourself) à notre code.",
   "efficiencyText2": "L'une des duplications de code les plus courantes dans les tests unitaires sont les fonctions mount. Cela peut facilement être réduit en une fonction réutilisable pour chaque lancement.",
-  "e2eHeader": "## Tests E2E",
-  "e2eText1": "Guide à venir. Si vous souhaitez contribuer à cette section, veuillez contacter un développeur dans notre [communauté](https://community.vuetifyjs.com)."
+  "mockText1": "Beaucoup de composants de Vuetify utilisent l'objet `$vuetify` global pour obtenir des paramètres tels que des informations par défaut sur le texte ou le point d'arrêt. Lorsque vous testez ces composants, vous devrez fournir un objet mock `vue-test-utils`.",
+  "e2eHeader": "## Tests E2E"
 }

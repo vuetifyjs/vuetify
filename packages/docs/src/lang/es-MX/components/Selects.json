@@ -28,7 +28,6 @@
     "combobox": "La variante de selección simple de **tags**",
     "debounceSearch": "Retrasa el tiempo entre valores emitidos desde la búsqueda",
     "deletableChips": "Agrega un ícono de _quitar_ a los chips seleccionados",
-    "dense": "Reduce la altura máxima de los elementos de la lista",
     "disabled": "Deshabilita el input",
     "editable": " Crea un botón editable- [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "filter": "La función que se utiliza para filtrar los elementos.",

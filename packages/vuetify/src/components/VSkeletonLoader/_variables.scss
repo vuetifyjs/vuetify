@@ -1,0 +1,11 @@
+@import '../../styles/styles.sass';
+
+$skeleton-loader-border-radius: $border-radius-root !default;
+$skeleton-loader-button-border-radius: $border-radius-root !default;
+$skeleton-loader-chip-border-radius: 16px !default;
+$skeleton-loader-date-picker-border-radius: inherit !default;
+$skeleton-loader-divider-border-radius: 1px !default;
+$skeleton-loader-heading-border-radius: 12px !default;
+$skeleton-loader-text-border-radius: 6px !default;
+$skeleton-loader-loading-animation: loading 1.5s infinite !default;
+$skeleton-loader-loading-transform: translateX(-100%) !default;

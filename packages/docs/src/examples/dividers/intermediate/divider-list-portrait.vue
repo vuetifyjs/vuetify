@@ -5,7 +5,7 @@
         <v-card-title class="cyan darken-1">
           <span class="headline white--text">Sarah Mcbeal</span>
 
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
 
           <v-btn dark icon>
             <v-icon>mdi-chevron-left</v-icon>

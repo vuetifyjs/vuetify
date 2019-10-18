@@ -62,6 +62,7 @@
     "weekdays": "crwdns34606:0crwdne34606:0"
   },
   "functions": {
+    "checkChange": "crwdns43146:0crwdne43146:0",
     "formatTime": "crwdns40938:0crwdne40938:0",
     "getFormatter": "crwdns40940:0crwdne40940:0",
     "minutesToPixels": "crwdns34662:0crwdne34662:0",

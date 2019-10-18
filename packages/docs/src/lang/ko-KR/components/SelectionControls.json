@@ -15,9 +15,6 @@
       "header": "체크박스 - 색깔",
       "desc": "`color` prop를 이용하면 체크박스를 어떠한 내장 색(builtin colors) 이나 contextual 이름에 대응 하는 색으로 만들 수 있습니다."
     },
-    "checkboxes-inline-texfield": {
-      "header": "체크박스 - textfield 를 이용한 Inline"
-    },
     "radios-default": {
       "header": "라디오 - 기본",
       "desc": "기본적으로는 라디오그룹이 반드시 필요합니다. 하지만 `mandatory` prop 을 사용해 바꿀 수 있습니다."

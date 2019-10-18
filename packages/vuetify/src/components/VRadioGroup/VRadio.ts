@@ -8,6 +8,7 @@ import VIcon from '../VIcon'
 import VInput from '../VInput'
 
 // Mixins
+import BindsAttrs from '../../mixins/binds-attrs'
 import Colorable from '../../mixins/colorable'
 import { factory as GroupableFactory } from '../../mixins/groupable'
 import Rippleable from '../../mixins/rippleable'
@@ -22,6 +23,7 @@ import { VNode, VNodeData } from 'vue'
 import mixins from '../../util/mixins'
 
 const baseMixins = mixins(
+  BindsAttrs,
   Colorable,
   Rippleable,
   GroupableFactory('radioGroup'),
@@ -45,11 +47,11 @@ export default baseMixins.extend<options>().extend({
     name: String,
     offIcon: {
       type: String,
-      default: '$vuetify.icons.radioOff',
+      default: '$radioOff',
     },
     onIcon: {
       type: String,
-      default: '$vuetify.icons.radioOn',
+      default: '$radioOn',
     },
     readonly: Boolean,
     value: {
@@ -140,7 +142,7 @@ export default baseMixins.extend<options>().extend({
         this.genInput({
           name: this.computedName,
           value: this.value,
-          ...this.$attrs,
+          ...this.attrs$,
         }),
         this.genRipple(this.setTextColor(this.validationState)),
         this.$createElement(VIcon, this.setTextColor(this.validationState, {}), this.computedIcon),

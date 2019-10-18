@@ -1,13 +1,14 @@
 {
   "header": "crwdns40410:0crwdne40410:0",
   "headerText": "crwdns42432:0crwdne42432:0",
+  "headerAlert1": "crwdns43120:0crwdne43120:0",
   "usageText2": "crwdns42434:0crwdne42434:0",
   "usageList": [
-    "crwdns42436:0crwdne42436:0",
-    "crwdns42438:0crwdne42438:0",
-    "crwdns42440:0crwdne42440:0"
+    "crwdns43122:0crwdne43122:0",
+    "crwdns43124:0crwdne43124:0",
+    "crwdns43126:0crwdne43126:0"
   ],
-  "usageText3": "crwdns42442:0crwdne42442:0",
+  "usageText3": "crwdns43128:0crwdne43128:0",
   "usageAlert1": "crwdns42444:0crwdne42444:0",
   "examples": {
     "usage": {
@@ -39,7 +40,7 @@
     },
     "row-column-breakpoint": {
       "header": "crwdns40444:0crwdne40444:0",
-      "desc": "crwdns40446:0crwdne40446:0"
+      "desc": "crwdns43130:0crwdne43130:0"
     },
     "vertical-alignment": {
       "header": "crwdns42466:0crwdne42466:0",
@@ -55,7 +56,7 @@
     },
     "wrapping": {
       "header": "crwdns42478:0crwdne42478:0",
-      "desc": "crwdns42480:0crwdne42480:0"
+      "desc": "crwdns43132:0crwdne43132:0"
     },
     "order": {
       "header": "crwdns42482:0crwdne42482:0",

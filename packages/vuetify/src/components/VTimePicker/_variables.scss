@@ -1,3 +1,5 @@
+@import '../../styles/styles.sass';
+
 $time-picker-title-color: map-get($shades, 'white') !default;
 $time-picker-title-btn-height: 70px !default;
 $time-picker-landscape-title-btn-height: 55px !default;

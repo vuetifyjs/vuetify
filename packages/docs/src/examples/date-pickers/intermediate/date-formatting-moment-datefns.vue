@@ -5,7 +5,6 @@
         <v-menu
           v-model="menu1"
           :close-on-content-click="false"
-          full-width
           max-width="290"
         >
           <template v-slot:activator="{ on }">
@@ -28,7 +27,6 @@
         <v-menu
           v-model="menu2"
           :close-on-content-click="false"
-          full-width
           max-width="290"
         >
           <template v-slot:activator="{ on }">

@@ -14,7 +14,7 @@
         label="Search"
         prepend-inner-icon="search"
       ></v-text-field>
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
     </v-app-bar>
 
     <v-navigation-drawer

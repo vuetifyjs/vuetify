@@ -12,8 +12,7 @@
       "header": "Grow"
     },
     "toggle": {
-      "header": "Alternar",
-      "desc": "Como con otros componentes de Vuetify, puedes controlar el estado visible con `v-model`."
+      "header": "Alternar"
     }
   }
 }
