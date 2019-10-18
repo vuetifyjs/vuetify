@@ -71,8 +71,14 @@
                   <div class="mt-4" />
 
                   <template v-for="(features, key, index) in item.features">
-                    <doc-markdown :key="`title-${index}`" :code="key" />
-                    <doc-markdown :key="`list-${index}`" :code="features" />
+                    <doc-markdown
+                      :key="`title-${index}`"
+                      :code="key"
+                    />
+                    <doc-markdown
+                      :key="`list-${index}`"
+                      :code="features"
+                    />
                   </template>
                 </template>
               </v-card-text>
