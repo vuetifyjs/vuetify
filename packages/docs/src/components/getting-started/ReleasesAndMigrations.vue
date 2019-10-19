@@ -93,6 +93,7 @@
   import { getBranch } from '@/util/helpers'
   // Utilities
   import { mapState } from 'vuex'
+  import { sortBy } from 'lodash'
 
   export default {
     data: () => ({
@@ -105,8 +106,14 @@
     computed: {
       ...mapState('app', ['currentVersion']),
       releases () {
-        const v1 = this.githubReleases.filter(release => release.name && release.name.substring(0, 3) === 'v1.')
-        const v2 = this.githubReleases.filter(release => release.name && release.name.substring(0, 3) === 'v2.')
+        const v1 = sortBy(
+          this.githubReleases.filter(release => release.name && release.name.substring(0, 3) === 'v1.'),
+          ['published_at']
+        ).reverse()
+        const v2 = sortBy(
+          this.githubReleases.filter(release => release.name && release.name.substring(0, 3) === 'v2.'),
+          ['published_at']
+        ).reverse()
         if (v1.length > 0) {
           v1.unshift({ header: 'v1.x' })
         }
