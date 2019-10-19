@@ -52,8 +52,6 @@ export class Theme extends Service {
 
   private vueMeta = null as any | null
 
-  private hasMeta = null as boolean | null
-
   constructor (options: Partial<ITheme> = {}) {
     super()
     if (options.disable) {
@@ -213,12 +211,8 @@ export class Theme extends Service {
   }
 
   private applyVueMeta23 () {
-    const { set, remove } = this.vueMeta.addApp('vuetify')
+    const { set } = this.vueMeta.addApp('vuetify')
 
-    // remove the old style sheet first
-    if (this.hasMeta) {
-      remove()
-    }
     set({
       style: [{
         cssText: this.generatedStyles,
@@ -227,7 +221,6 @@ export class Theme extends Service {
         nonce: (this.options || {}).cspNonce,
       }],
     })
-    this.hasMeta = true
   }
 
   private initSSR (ssrContext?: any) {

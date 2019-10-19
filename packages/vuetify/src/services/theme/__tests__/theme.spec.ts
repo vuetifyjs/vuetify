@@ -267,10 +267,9 @@ describe('Theme.ts', () => {
   it('should use vue-meta@2.3 functionality', () => {
     const theme = new Theme(mock)
     const set = jest.fn()
-    const remove = jest.fn()
 
     const $meta = () => ({
-      addApp: () => ({ set, remove }),
+      addApp: () => ({ set }),
     })
 
     ;(instance as any).$meta = $meta as any
@@ -278,10 +277,5 @@ describe('Theme.ts', () => {
     theme.init(instance)
 
     expect(set).toHaveBeenCalled()
-
-    theme.init(instance)
-
-    expect(remove).toHaveBeenCalled()
-    expect(set).toHaveBeenCalledTimes(2)
   })
 })
