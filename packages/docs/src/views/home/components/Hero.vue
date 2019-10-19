@@ -2,7 +2,6 @@
   <base-section
     id="home-hero"
     class="white--text py-4 py-md-12"
-    style="background: linear-gradient(to bottom, #1867c0, #5CBBF6)"
   >
     <v-container class="pa-0">
       <v-row align="center">
@@ -16,7 +15,9 @@
           >
             <base-heading>Vuetify.Home.callout</base-heading>
 
-            <base-text class="mb-12">Vuetify.Home.text</base-text>
+            <base-text dark>Vuetify.Home.text</base-text>
+
+            <div class="py-4" />
 
             <base-btn
               :block="$vuetify.breakpoint.smAndDown"
@@ -25,7 +26,12 @@
               color="white"
               x-large
             >
-              <v-icon left>mdi-speedometer</v-icon>
+              <v-icon
+                left
+                size="20"
+              >
+                mdi-speedometer
+              </v-icon>
 
               {{ $t('Vuetify.Home.getStarted') }}
             </base-btn>
@@ -38,7 +44,12 @@
               outlined
               x-large
             >
-              <v-icon left>mdi-github-face</v-icon>
+              <v-icon
+                left
+                size="20"
+              >
+                mdi-github-face
+              </v-icon>
 
               Github
             </v-btn>
@@ -53,13 +64,15 @@
             class="v-card--hero"
             color="black"
           >
-            <iframe
-              allow="autoplay; fullscreen"
-              allowfullscreen
-              class="v-card--hero__iframe"
-              frameborder="0"
-              src="https://player.vimeo.com/video/350834301"
-            />
+            <v-lazy min-height="300">
+              <iframe
+                allow="autoplay; fullscreen"
+                allowfullscreen
+                class="v-card--hero__iframe"
+                frameborder="0"
+                src="https://player.vimeo.com/video/350834301"
+              />
+            </v-lazy>
           </base-card>
 
           <div class="caption pt-3 pb-4 text-center grey--text text--lighten-4">
@@ -88,6 +101,8 @@
 
 <style lang="sass">
   #home-hero
+    background: linear-gradient(to bottom, #1867c0, #5CBBF6)
+
     a
       color: inherit
       text-decoration: none

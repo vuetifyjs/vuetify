@@ -2,6 +2,12 @@
   <div class="text-center home-cards">
     <base-subheading>{{ heading }}</base-subheading>
 
+    <base-text
+      v-if="subheading"
+      class="mx-auto"
+      max-width="600"
+    >{{ subheading }}</base-text>
+
     <v-container class="pa-0 mb-6">
       <v-row
         align="center"
@@ -47,10 +53,12 @@
                             class="headline mb-2"
                             v-text="card.title"
                           />
+
                           <div
                             class="overline grey--text mb-12 px-6"
                             v-text="card.description"
                           />
+
                           <v-btn
                             :aria-label="`Link to ${card.title}`"
                             color="success"
@@ -99,11 +107,16 @@
         type: String,
         default: undefined,
       },
+      subheading: {
+        type: String,
+        default: undefined,
+      },
     },
   }
 </script>
 
 <style lang="sass">
   .v-card--mwvjs:focus .v-overlay
+    border-radius: inherit !important
     display: flex !important
 </style>

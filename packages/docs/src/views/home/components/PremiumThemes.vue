@@ -5,6 +5,7 @@
   >
     <home-cards
       heading="Vuetify.Home.premiumThemes"
+      subheading="Vuetify.Home.premiumThemesText"
       :cards="themes"
       :value="isLoading"
     />

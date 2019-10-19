@@ -3,13 +3,14 @@
     id="home-made-with-vuetify"
     v-intersect.once="{
       options: {
-        rootMargin: '200px 0px 0px 0px'
+        rootMargin: '400px 0px 0px 0px'
       },
       handler: init
     }"
   >
     <home-cards
       heading="Vuetify.Home.madeWithVuetify"
+      subheading="Vuetify.Home.madeWithVuetifyText"
       :cards="featured"
       :value="!featured.length"
     />

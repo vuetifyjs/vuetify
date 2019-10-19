@@ -5,6 +5,13 @@
   >
     <base-subheading>Vuetify.Home.whyVuetify</base-subheading>
 
+    <base-text
+      class="mx-auto"
+      max-width="650"
+    >
+      Vuetify.Home.whyVuetifyText
+    </base-text>
+
     <v-row justify="center">
       <v-col
         v-for="(feature, i) in computedFeatures"
@@ -15,7 +22,7 @@
         <v-card
           class="elevation-12 overflow-hidden text-center mx-auto"
           light
-          max-width="350px"
+          max-width="375px"
         >
           <v-img
             :alt="feature.title"
@@ -26,7 +33,7 @@
 
           <v-card-text>
             <h2
-              class="subtitle-1 font-weight-bold mb-2 text--primary"
+              class="title font-weight-regular mb-2 text--primary"
               v-text="feature.title"
             />
 

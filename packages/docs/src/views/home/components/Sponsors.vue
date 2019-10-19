@@ -5,10 +5,15 @@
   >
     <v-sheet
       class="pa-12"
-      color="grey lighten-4"
+      color="grey lighten-5"
       tag="v-container"
     >
       <base-subheading>Vuetify.Home.proudlySponsoredBy</base-subheading>
+
+      <base-text
+        class="mx-auto"
+        max-width="600"
+      >Vuetify.Home.proundlySponsoredByText</base-text>
 
       <supporters-sponsors
         :tier="[0, 1, 2, 3]"
@@ -16,8 +21,6 @@
         dense
         hide-titles
       />
-
-      <base-subheading>Vuetify.Home.openCollective</base-subheading>
 
       <supporters-sponsor-btn
         append

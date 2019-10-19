@@ -19,12 +19,16 @@
   "getHelp": "Get Help",
   "getStarted": "Get Started",
   "github": "Github",
-  "madeWithVuetify": "Projects Made With/For Vuetify",
+  "madeWithVuetify": "Projects Made With Vuetify",
+  "madeWithVuetifyText": "A collection of projects made with Vuetify. See what others are creating in the ecosystem.",
   "materialDesign": "Material Design",
   "mit": "MIT License",
   "openCollective": "Open Collective",
   "premiumThemes": "Premium Themes",
+  "premiumThemesText": "Take your project to the next level with premium themes from our official store — all built with Vuetify.",
   "proudlySponsoredBy": "Project Sponsors",
+  "proundlySponsoredByText": "The continued development and maintainenance is made possible by these generous sponsors:",
   "seeMoreThemes": "See More Themes",
-  "whyVuetify": "Why Vuetify?"
+  "whyVuetify": "Why Vuetify?",
+  "whyVuetifyText": "Building applications with Vue has never been easier. Vuetify supercharges your development process with all of the tools you need."
 }

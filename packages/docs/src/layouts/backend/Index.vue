@@ -10,7 +10,7 @@
 
 <script>
   export default {
-    name: 'Backend',
+    name: 'LayoutsBackend',
 
     components: {
       BackendAppBar: () => import('./AppBar'),
