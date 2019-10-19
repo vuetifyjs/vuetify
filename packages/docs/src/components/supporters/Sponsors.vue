@@ -1,6 +1,5 @@
 <template>
   <v-container
-    id="home-sponsors"
     class="pa-0"
     fluid
     tag="section"

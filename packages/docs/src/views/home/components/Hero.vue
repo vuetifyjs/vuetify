@@ -71,6 +71,7 @@
                 class="v-card--hero__iframe"
                 frameborder="0"
                 src="https://player.vimeo.com/video/350834301"
+                title="Vue Mastery Vuetify Course"
               />
             </v-lazy>
           </base-card>

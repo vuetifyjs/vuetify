@@ -3,7 +3,7 @@
     id="home-made-with-vuetify"
     v-intersect.once="{
       options: {
-        rootMargin: '400px 0px 0px 0px'
+        rootMargin: '1000px 1000px 1000px 1000px'
       },
       handler: init
     }"
@@ -53,13 +53,32 @@
       },
     },
 
+    watch: {
+      featured (val) {
+      },
+    },
+
     methods: {
       init (
         entries,
         observer,
-        isVisible
+        isVisible,
       ) {
         if (!isVisible) return
+
+        const storage = localStorage.getItem('vuetify__featured__projects') || '{}'
+        const featured = JSON.parse(storage)
+        // Cache for 24hrs
+        const cacheTime = 24 * 60 * 60 * 1000
+
+        if (
+          featured.updatedAt &&
+          (featured.updatedAt + cacheTime) > Date.now()
+        ) {
+          this.featured = featured.featured
+
+          return
+        }
 
         fetch('https://madewithvuejs.com/api/tag/vuetify', {
           method: 'get',
@@ -86,6 +105,13 @@
         })
 
         this.featured = this.shuffle(featured).slice(0, 4)
+
+        const storage = {
+          updatedAt: Date.now(),
+          featured: this.featured,
+        }
+
+        localStorage.setItem('vuetify__featured__projects', JSON.stringify(storage))
       },
       shuffle (array) {
         let currentIndex = array.length
