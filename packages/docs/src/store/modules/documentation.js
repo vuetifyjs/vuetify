@@ -1,121 +1,38 @@
-import deprecatedIn from '@/data/deprecated'
-import newIn from '@/data/new'
-
 // Utilities
-import { set } from '@/util/vuex'
 import camelCase from 'lodash/camelCase'
 import upperFirst from 'lodash/upperFirst'
+import { make } from 'vuex-pathify'
+
+const state = {
+  deprecatedIn: require('@/data/deprecated.json'),
+  newIn: require('@/data/new.json'),
+  namespace: null,
+  page: null,
+  structure: null,
+  toc: [],
+  templates: require('@/data/templates.json'),
+}
+
+const mutations = make.mutations(state)
 
 export default {
   namespaced: true,
-
-  state: {
-    deprecatedIn,
-    newIn,
-    namespace: null,
-    page: null,
-    structure: null,
-    toc: [],
-    templates: {
-      'dashboard-pro': {
-        title: 'Material Dashboard Pro',
-        description: 'Vuetify Material Dashboard PRO is a beautiful theme built over Vuetify, Vuex and Vuejs. Vuetify Material Dashboard PRO is the official Vuejs version of the Original Material Dashboard PRO.',
-        src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-admin-dashboard-pro.jpg',
-        price: '$79',
-        url: 'https://www.creative-tim.com/product/vuetify-material-dashboard-pro',
-        demoUrl: ['https://demos.creative-tim.com/vuetify-material-dashboard-pro/'],
-        query: '&partner=116160',
-      },
-      'shopify-e-commerce': {
-        title: 'Shopify E-commerce',
-        description: 'A handcrafted Vuetify e-commerce application built on top of Shopify. Meticulous tweaks for optimal performance, user experience and accessibility make this theme stand out as a must have for anyone selling or wanting to sell with Shopify.',
-        src: 'https://cdn.vuetifyjs.com/images/starter/shopify-e-commerce.png',
-        price: '$99',
-        url: 'https://store.vuetifyjs.com/product/shopify-e-commerce-theme',
-        demoUrl: ['https://store-beta.vuetifyjs.com'],
-      },
-      'material-kit': {
-        title: 'Material Kit',
-        description: 'A complete set of Material Inspired themes built with Vuetify on top of Vue CLI 3.',
-        src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-material-kit.png',
-        price: '$55',
-        url: 'https://store.vuetifyjs.com/product/material-kit-theme',
-        demoUrl: ['https://material-kit.vuetifyjs.com'],
-      },
-      'alpha-theme': {
-        title: 'Alpha Theme',
-        description: 'Complete theme experience including enhanced Vue CLI 3, full documentation, 5 custom components and much more!',
-        src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-alpha-theme.png',
-        price: '$25',
-        url: 'https://store.vuetifyjs.com/product/vuetify-alpha-theme',
-        demoUrl: [
-          ['Construction', 'https://alpha-construction.vuetifyjs.com'],
-          ['Creative', 'https://alpha-creative.vuetifyjs.com'],
-          ['SaaS', 'https://alpha-saas.vuetifyjs.com'],
-          ['Ecommerce', 'https://alpha-ecommerce.vuetifyjs.com'],
-        ],
-      },
-      dashboard: {
-        title: 'Material Dashboard Free',
-        description: 'Vuetify Material Dashboard is a beautiful resource built over Vuetify, Vuex and Vuejs. It will help you get started developing dashboards in no time.',
-        src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-admin-dashboard.jpg',
-        free: true,
-        url: 'https://www.creative-tim.com/product/vuetify-material-dashboard',
-        demoUrl: ['https://demos.creative-tim.com/vuetify-material-dashboard/#/dashboard'],
-        query: '&partner=116160',
-      },
-      freelance: {
-        title: 'Freelancer',
-        description: 'A single page Material inspired theme for Freelancers.',
-        src: 'https://cdn.vuetifyjs.com/images/starter/freelancer.png',
-        free: true,
-        url: 'https://github.com/vuetifyjs/theme-freelancer',
-        demoUrl: [],
-      },
-      parallax: {
-        title: 'Parallax',
-        description: 'This beautiful single page parallax is a great home page for any application.',
-        src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-parallax-starter.png',
-        free: true,
-        url: 'https://github.com/vuetifyjs/parallax-starter',
-        demoUrl: ['/themes/parallax-starter'],
-      },
-      blog: {
-        title: 'Blog',
-        description: 'A simple template that features a clean interface for creating a blog or blog-like application.',
-        src: 'https://cdn.vuetifyjs.com/images/starter/blog.png',
-        free: true,
-        url: 'https://github.com/vuetifyjs/theme-blog',
-        demoUrl: ['https://free-blog.vuetifyjs.com'],
-      },
-    },
-  },
+  state,
+  mutations,
 
   getters: {
+    themes (state) {
+      return Object.values(state.templates)
+    },
     namespace (state, getters, rootState) {
-      if (!rootState || !rootState.route || !rootState.route.params) return undefined
-      return upperFirst(camelCase(rootState.route.params.namespace))
+      return (!rootState || !rootState.route || !rootState.route.params)
+        ? undefined
+        : upperFirst(camelCase(rootState.route.params.namespace))
     },
     page (state, getters, rootState) {
-      if (!rootState || !rootState.route || !rootState.route.params) return undefined
-      return upperFirst(camelCase(rootState.route.params.page))
-    },
-  },
-
-  mutations: {
-    pushToc: (state, payload) => {
-      if (state.toc.find(item => item.id === payload.id)) {
-        return
-      }
-
-      state.toc.push(payload)
-    },
-    setStructure: (state, payload) => {
-      set('structure')(state, payload)
-
-      if (payload) {
-        state.toc = []
-      }
+      return (!rootState || !rootState.route || !rootState.route.params)
+        ? undefined
+        : upperFirst(camelCase(rootState.route.params.page))
     },
   },
 }

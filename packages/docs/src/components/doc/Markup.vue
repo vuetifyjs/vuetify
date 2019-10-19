@@ -63,7 +63,10 @@
     name: 'Markup',
 
     components: {
-      Prism: () => import('vue-prism-component'),
+      Prism: () => import(
+        /* webpackChunkName: "prism" */
+        'vue-prism-component'
+      ),
     },
 
     props: {
@@ -125,7 +128,10 @@
       init () {
         if (this.$slots.default || !this.value) return
 
-        import(`@/snippets/${this.file}`)
+        import(
+          /* webpackChunkName: "snippets" */
+          `@/snippets/${this.file}`
+        )
           .then(this.parseRaw)
           .catch(err => console.log(err))
       },

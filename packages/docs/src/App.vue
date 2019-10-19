@@ -1,9 +1,5 @@
 <template>
-  <v-app>
-    <router-view />
-
-    <core-toolbar v-if="hasToolbar" />
-  </v-app>
+  <router-view />
 </template>
 
 <script>
@@ -12,13 +8,14 @@
 
   // Utilities
   import { waitForReadystate } from '@/util/helpers'
-  import { mapState } from 'vuex'
 
   import languages from '@/data/i18n/languages.json'
 
   const fallbackLocale = languages.find(lang => lang.fallback === true).locale
 
   export default {
+    name: 'App',
+
     mixins: [Meta],
 
     data: () => ({
@@ -27,13 +24,8 @@
     }),
 
     computed: {
-      ...mapState('app', ['isLoading']),
-      ...mapState('route', ['hash', 'name']),
       languageIsValid () {
         return this.availableLocales.includes(this.$route.params.lang)
-      },
-      hasToolbar () {
-        return this.languageIsValid && this.name !== 'Layouts'
       },
     },
 
@@ -42,12 +34,12 @@
     },
 
     async mounted () {
-      if (!this.hash) return
+      if (!this.$route.hash) return
 
       await this.$nextTick()
       await waitForReadystate()
 
-      this.$vuetify.goTo(this.hash)
+      this.$vuetify.goTo(this.$route.hash)
     },
   }
 </script>

@@ -36,7 +36,8 @@ module.exports = {
     {
       files: [
         'src/components/**/*.vue',
-        'src/pages/**/*.vue'
+        'src/pages/**/*.vue',
+        'src/views/**/*.vue',
       ],
       rules: {
         'indent': 'off',

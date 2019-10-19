@@ -1,44 +1,46 @@
 <template>
-  <v-layout
-    align-center
-    justify-center
-    wrap
+  <v-row
+    align="center"
+    justify="center"
+    class="ma-0"
+    dense
   >
-    <v-flex
+    <v-col
       v-if="title"
-      font-weight-medium
-      grey--text
-      text--darken-3
+      class="font-weight-medium grey--text text--darken-3"
+      cols="12"
       tag="h4"
-      xs12
       v-text="title"
     />
 
     <template v-for="(item, i) in group">
-      <v-flex
+      <v-col
         v-if="i % 4 === 0 && group.length > 1"
         :key="`divider-${i}`"
-        xs12
+        cols="12"
       />
 
-      <v-flex
+      <v-col
         :key="i"
-        d-flex
-        shrink
+        class="d-flex shrink"
       >
         <supporters-sponsor
-          :value="item"
-          :x-large="$attrs['x-large']"
           :large="$attrs.large"
           :small="$attrs.small"
+          :value="item"
+          :x-large="$attrs['x-large']"
         />
-      </v-flex>
+      </v-col>
     </template>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>
   export default {
+    name: 'SupportersSupporterGroup',
+
+    inheritAttrs: false,
+
     props: {
       group: {
         type: Array,

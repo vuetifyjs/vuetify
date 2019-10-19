@@ -8,35 +8,39 @@
         :id="id"
         class="mb-12"
       >
-        <v-layout>
-          <v-flex
+        <v-row>
+          <v-col
             v-if="structure.title"
-            shrink
+            class="shrink"
           >
             <doc-heading>
               {{ structure.title }}
             </doc-heading>
-          </v-flex>
+          </v-col>
+
           <v-spacer />
-          <v-flex
+
+          <v-col
             v-if="structure.file"
-            shrink
+            class="shrink"
           >
             <core-file-btn
               :link="structure.file"
               :branch="branch"
             />
-          </v-flex>
-          <v-flex
+          </v-col>
+
+          <v-col
             v-if="structure.mdSpec"
-            shrink
+            class="shrink"
           >
             <core-spec-btn
               :link="structure.mdSpec.link"
               :version="structure.mdSpec.version"
             />
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
+
         <div v-if="structure.titleText">
           <doc-text class="mb-6">
             {{ structure.titleText }}
@@ -67,7 +71,7 @@
   import kebabCase from 'lodash/kebabCase'
 
   export default {
-    name: 'CorePage',
+    name: 'Documentation',
 
     components: {
       NotFound: () => import(
@@ -168,11 +172,8 @@
 </script>
 
 <style lang="sass">
-.page
-  max-width: 1185px
-
-#components-navigation-drawers
-  .v-sheet,
-  .v-card
-    overflow: hidden
+  #components-navigation-drawers
+    .v-sheet,
+    .v-card
+      overflow: hidden
 </style>

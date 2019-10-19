@@ -1,75 +1,70 @@
 <template>
-  <v-layout
-    align-center
+  <v-container
+    id="home-sponsors"
+    class="pa-0"
+    fluid
     tag="section"
-    wrap
   >
-    <v-flex>
-      <v-container
-        fluid
-        grid-list-md
-        pa-0
-      >
-        <supporter-group
-          v-if="tier.includes(0)"
-          :group="supporters['Premiere']"
-          :title="!hideTitles ? 'Premiere' : undefined"
-          :class="classes"
-          :x-large="!compact"
-        />
+    <supporter-group
+      v-if="tier.includes(0)"
+      :group="supporters['Premiere']"
+      :title="!hideTitles ? 'Premiere' : undefined"
+      :class="classes"
+      :x-large="!compact"
+    />
 
-        <supporter-group
-          v-if="tier.includes(1)"
-          :group="supporters['Diamond']"
-          :title="!hideTitles ? 'Diamond' : undefined"
-          :class="classes"
-          :large="!compact"
-        />
+    <supporter-group
+      v-if="tier.includes(1)"
+      :group="supporters['Diamond']"
+      :title="!hideTitles ? 'Diamond' : undefined"
+      :class="classes"
+      :large="!compact"
+    />
 
-        <supporter-group
-          v-if="tier.includes(2)"
-          :group="supporters['Platinum']"
-          :title="!hideTitles ? 'Platinum' : undefined"
-          :class="classes"
-        />
+    <supporter-group
+      v-if="tier.includes(2)"
+      :group="supporters['Platinum']"
+      :title="!hideTitles ? 'Platinum' : undefined"
+      :class="classes"
+    />
 
-        <supporter-group
-          v-if="tier.includes(3)"
-          :group="supporters['Gold']"
-          :title="!hideTitles ? 'Gold' : undefined"
-          :class="classes"
-          small
-        />
+    <supporter-group
+      v-if="tier.includes(3)"
+      :group="supporters['Gold']"
+      :title="!hideTitles ? 'Gold' : undefined"
+      :class="classes"
+      small
+    />
 
-        <supporter-group
-          v-if="tier.includes(4)"
-          :group="supporters.affiliate"
-          :title="!hideTitles ? 'Affiliate' : undefined"
-          :class="classes"
-          small
-        />
+    <supporter-group
+      v-if="tier.includes(4)"
+      :group="supporters.affiliate"
+      :title="!hideTitles ? 'Affiliate' : undefined"
+      :class="classes"
+      small
+    />
 
-        <supporter-group
-          v-if="tier.includes(5)"
-          :group="supporters.service"
-          :title="!hideTitles ? 'Service' : undefined"
-          small
-        />
-      </v-container>
-    </v-flex>
-  </v-layout>
+    <supporter-group
+      v-if="tier.includes(5)"
+      :group="supporters.service"
+      :title="!hideTitles ? 'Service' : undefined"
+      small
+    />
+  </v-container>
 </template>
 
 <script>
   // Utilities
   import {
-    mapMutations,
-    mapState,
-  } from 'vuex'
+    sync,
+  } from 'vuex-pathify'
 
   export default {
     components: {
-      SupporterGroup: () => import('@/components/supporters/SupporterGroup'),
+      SupporterGroup: () => import(
+        /* webpackChunkName: "supportergroup" */
+        '@/components/supporters/SupporterGroup'
+      ),
     },
 
     props: {
@@ -92,7 +87,7 @@
     },
 
     computed: {
-      ...mapState('app', ['supporters']),
+      ...sync('supporters/supporters'),
       classes () {
         return {
           'mb-0': this.dense,
@@ -101,14 +96,8 @@
       },
     },
 
-    async created () {
-      const supporters = require('@/data/api/supporters.json')
-
-      if (supporters) this.setSupporters(supporters)
-    },
-
-    methods: {
-      ...mapMutations('app', ['setSupporters']),
+    created () {
+      this.supporters = require('@/data/api/supporters.json') || {}
     },
   }
 </script>

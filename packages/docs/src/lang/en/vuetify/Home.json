@@ -1,6 +1,7 @@
 {
   "becomeSponsor": "Support Vuetify",
-  "callout": "Material Design<br>Component Framework",
+  "callout": "Material Design Component Framework",
+  "text": "Vuetify is a Vue UI Library with beautifully handcrafted Material Components. No design skills required — everything you need to create amazing applications is at your fingertips.",
   "features": {
     "community": {
       "text": "When you run into a roadblock, you need assistance right away. Vuetify offers support in our massive community on Discord.",
@@ -21,8 +22,9 @@
   "madeWithVuetify": "Projects Made With/For Vuetify",
   "materialDesign": "Material Design",
   "mit": "MIT License",
+  "openCollective": "Open Collective",
   "premiumThemes": "Premium Themes",
-  "proudlySponsoredBy": "Patreon Sponsors",
+  "proudlySponsoredBy": "Project Sponsors",
   "seeMoreThemes": "See More Themes",
   "whyVuetify": "Why Vuetify?"
 }

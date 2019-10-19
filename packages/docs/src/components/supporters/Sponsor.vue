@@ -51,8 +51,8 @@
         return 40
       },
       width () {
-        if (this.xLarge) return 205
-        if (this.large) return 175
+        if (this.xLarge) return 170
+        if (this.large) return 155
         if (this.small) return 115
         return 140
       },

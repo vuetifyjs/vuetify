@@ -41,13 +41,13 @@
     "vuelidate": "^0.7.4",
     "vuetify": "^2.1.5",
     "vuex": "^3.1.1",
+    "vuex-pathify": "^1.4.0",
     "vuex-router-sync": "^5.0.0",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
-    "@mdi/font": "^3.8.95",
     "@mdi/js": "^3.8.95",
     "autoprefixer": "^9.6.1",
     "babel-loader": "^8.0.6",

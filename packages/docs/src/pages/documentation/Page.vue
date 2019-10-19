@@ -47,7 +47,7 @@
       structure = false
     }
 
-    store.commit('documentation/setStructure', structure)
+    store.commit('documentation/SET_STRUCTURE', structure)
   }
 
   export default {
