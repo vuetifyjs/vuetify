@@ -13,6 +13,7 @@
         v-on="menu"
       >
         <v-icon v-if="currentLanguage.locale === 'eo-UY'">mdi-web</v-icon>
+
         <v-img
           v-else
           :src="`https://cdn.vuetifyjs.com/images/flags/${currentLanguage.country}.png`"
@@ -20,6 +21,7 @@
         />
       </v-btn>
     </template>
+
     <v-list
       dense
       nav
@@ -34,6 +36,7 @@
           size="24px"
         >
           <v-icon v-if="language.locale === 'eo-UY'">mdi-web</v-icon>
+
           <v-img
             v-else
             :src="`https://cdn.vuetifyjs.com/images/flags/${language.country}.png`"
@@ -51,6 +54,8 @@
   import languages from '@/data/i18n/languages.json'
 
   export default {
+    name: 'BaseLocalesMenu',
+
     data: () => ({
       languages,
     }),

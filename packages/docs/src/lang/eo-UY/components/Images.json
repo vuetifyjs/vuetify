@@ -1,32 +1,32 @@
 {
-  "header": "crwdns39282:0crwdne39282:0",
-  "headerText": "crwdns32936:0[vuetify-loader]crwdne32936:0",
+  "heading": "crwdns39282:0crwdne39282:0",
+  "headingText": "crwdns32936:0[vuetify-loader]crwdne32936:0",
   "examples": {
     "usage": {
       "desc": "crwdns39284:0crwdne39284:0"
     },
     "contain-cover": {
-      "header": "crwdns39286:0crwdne39286:0",
+      "heading": "crwdns39286:0crwdne39286:0",
       "desc": "crwdns39288:0crwdne39288:0"
     },
     "max-height": {
-      "header": "crwdns39290:0crwdne39290:0",
+      "heading": "crwdns39290:0crwdne39290:0",
       "desc": "crwdns39292:0crwdne39292:0"
     },
     "ratio": {
-      "header": "crwdns32948:0crwdne32948:0",
+      "heading": "crwdns32948:0crwdne32948:0",
       "desc": "crwdns39294:0crwdne39294:0"
     },
     "gradients": {
-      "header": "crwdns32952:0crwdne32952:0",
+      "heading": "crwdns32952:0crwdne32952:0",
       "desc": "crwdns32954:0crwdne32954:0"
     },
     "grid": {
-      "header": "crwdns39296:0crwdne39296:0",
+      "heading": "crwdns39296:0crwdne39296:0",
       "desc": "crwdns39298:0crwdne39298:0"
     },
     "placeholder": {
-      "header": "crwdns39300:0crwdne39300:0",
+      "heading": "crwdns39300:0crwdne39300:0",
       "desc": "crwdns39302:0crwdne39302:0"
     }
   },

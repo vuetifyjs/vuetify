@@ -1,47 +1,47 @@
 {
-  "header": "# Nút",
-  "headerText": "Component `v-btn` thay thế nút mặc định của html thành nút theo chuẩn material design và nhiều lựa chọn. Mọi lớp màu hỗ trợ đều có thể sử dụng để thay thế màu nền hoặc màu chữ.",
+  "heading": "# Nút",
+  "headingText": "Component `v-btn` thay thế nút mặc định của html thành nút theo chuẩn material design và nhiều lựa chọn. Mọi lớp màu hỗ trợ đều có thể sử dụng để thay thế màu nền hoặc màu chữ.",
   "examples": {
     "usage": {
       "desc": "Button cơ bản được định nghĩa là một nút gồm chữ in hoa, đổ bóng nhẹ, hiệu ứng di chuột và hiệu ứng gợn khi kích."
     },
     "flat": {
-      "header": "### Flat",
+      "heading": "### Flat",
       "desc": "Nút dạng `flat` không có đổ bóng và màu nền. Chỉ khi di chuột vào nút thì nút mới hiển thị."
     },
     "raised": {
-      "header": "### Raised",
+      "heading": "### Raised",
       "desc": "Nút dạng `Raised ` có hộp đổ bóng tăng cường khi được click. Đây là kiểu mặc định."
     },
     "depressed": {
-      "header": "### Depressed",
+      "heading": "### Depressed",
       "desc": "Nút dạng `Depressed` vẫn có màu nền nhưng không có đổ bóng."
     },
     "dropdown": {
-      "header": "### Button Dropdown Variants",
+      "heading": "### Button Dropdown Variants",
       "desc": "Button dropdowns are regular selects with additional styling.",
       "uninverted": true
     },
     "icon": {
-      "header": "### Icon",
+      "heading": "### Icon",
       "desc": "Có thể sử dụng Icon như nội dung chính của nút."
     },
     "floating": {
-      "header": "### Floating"
+      "heading": "### Floating"
     },
     "loaders": {
-      "header": "### Loaders",
+      "heading": "### Loaders",
       "desc": "Sử dụng thuộc tính `loading` có thể thông báo cho người dùng biết tiến trình đang được xử lý. Hành vi mặc định là sử dụng component `v-progress-circular` nhưng bạn có thể tùy biến nó."
     },
     "sizing": {
-      "header": "### Sizing",
+      "heading": "### Sizing",
       "desc": "Các nút có nhiều kích cỡ khác nhau để phù hợp với nhiều tình huống."
     },
     "tile": {
       "desc": "Nút dạng `tile` giống như nút mặc định nhưng không bo các góc."
     },
     "block": {
-      "header": "### Block",
+      "heading": "### Block",
       "desc": "Nút dạng `block` có chiều dài 100%."
     }
   },

@@ -1,6 +1,6 @@
 {
-  "header": "# 不同之处是什么？",
-  "headerText": "Vuetify 是 #1 材料框架，自 2016 年以来一直在持续开发中。该项目的目标是为用户提供使用 Material Design specification 和 Vue 用来构建丰富且引人入胜的 web 应用程序。Vuetify 通过一致的更新周期、对以前版本的长期支持 **(LTS)** 、反应迅速的社区参与、巨大的资源生态系统和对高质量组件的贡献来实现这一点。",
+  "heading": "# 不同之处是什么？",
+  "headingText": "Vuetify 是 #1 材料框架，自 2016 年以来一直在持续开发中。该项目的目标是为用户提供使用 Material Design specification 和 Vue 用来构建丰富且引人入胜的 web 应用程序。Vuetify 通过一致的更新周期、对以前版本的长期支持 **(LTS)** 、反应迅速的社区参与、巨大的资源生态系统和对高质量组件的贡献来实现这一点。",
   "community": "社区",
   "communityCaption": "准备好享受 Vue 生态系统中最活跃的社区之一。有一个问题吗? 马上寻求帮助。找到一个 bug? 想谈谈 Firebase 吗? 创造了一些令人惊叹的项目吗? 快来让我们知道。**核心** 团队将对这些问题做出反馈。我们是你坚强的后盾。",
   "communityHeader": "## 充满活力的社区",

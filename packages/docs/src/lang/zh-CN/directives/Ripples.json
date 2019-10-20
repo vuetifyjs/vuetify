@@ -1,9 +1,9 @@
 {
-  "header": "波纹指令",
-  "headerText": "`v-ripple`指令被用于显示用户的操作。它可以应用于任何块级元素。许多组件都带有内置的波纹指令，比如`v-btn`、`v-tabs-item`等等。",
+  "heading": "波纹指令",
+  "headingText": "`v-ripple`指令被用于显示用户的操作。它可以应用于任何块级元素。许多组件都带有内置的波纹指令，比如`v-btn`、`v-tabs-item`等等。",
   "examples": {
     "custom-color": {
-      "header": "自定义色彩",
+      "heading": "自定义色彩",
       "desc": "您可以使用辅助器类改变波纹的颜色。"
     }
   }

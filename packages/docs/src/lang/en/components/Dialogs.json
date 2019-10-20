@@ -1,47 +1,47 @@
 {
-  "header": "# Dialogs",
-  "headerText": "The `v-dialog` component inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks. Use dialogs sparingly because they are interruptive.",
+  "heading": "# Dialogs",
+  "headingText": "The `v-dialog` component inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks. Use dialogs sparingly because they are interruptive.",
   "examples": {
     "usage": {
       "desc": "A dialog contains two slots, one for its activator and one for its content (default). Good for Privacy Policies."
     },
     "without-activator": {
-      "header": "### Without activator",
+      "heading": "### Without activator",
       "desc": "If for some reason you are unable to use the activator slot, be sure to add the `.stop` modifier to the event that triggers the dialog.",
       "uninverted": true
     },
     "modal": {
-      "header": "### Modal",
+      "heading": "### Modal",
       "desc": "Similar to a Simple Dialog, except that it's not dismissed when touching outside.",
       "uninverted": true
     },
     "fullscreen": {
-      "header": "### Fullscreen",
+      "heading": "### Fullscreen",
       "desc": "Due to limited space, full-screen dialogs may be more appropriate for mobile devices than dialogs used on devices with larger screens.",
       "uninverted": true
     },
     "form": {
-      "header": "### Form",
+      "heading": "### Form",
       "desc": "Just a simple example of a form in a dialog.",
       "uninverted": true
     },
     "scrollable": {
-      "header": "### Scrollable",
+      "heading": "### Scrollable",
       "desc": "Example of a dialog with scrollable content.",
       "uninverted": true
     },
     "overflowed": {
-      "header": "### Overflowed",
+      "heading": "### Overflowed",
       "desc": "Modals that do not fit within the available window space will scroll the container.",
       "uninverted": true
     },
     "advanced": {
-      "header": "### Nested dialogs",
+      "heading": "### Nested dialogs",
       "desc": "Dialogs can be nested: you can open one dialog from another.",
       "uninverted": true
     },
     "loader": {
-      "header": "### Loader",
+      "heading": "### Loader",
       "desc": "The `v-dialog` component makes it easy to create a customized loading experience for your application."
     }
   },

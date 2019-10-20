@@ -1,44 +1,44 @@
 {
-  "headerText": "El componente `v-data-table` se utilizar para mostrar datos tabulares. Sus características incluyen ordenamiento, búsqueda, paginación, edición _inline_, tooltips en los encabezados y selección de filas..",
+  "headingText": "El componente `v-data-table` se utilizar para mostrar datos tabulares. Sus características incluyen ordenamiento, búsqueda, paginación, edición _inline_, tooltips en los encabezados y selección de filas..",
   "examples": {
     "select": {
-      "header": "Filas seleccionables"
+      "heading": "Filas seleccionables"
     },
     "expand": {
-      "header": "Slot: expand"
+      "heading": "Slot: expand"
     },
     "headers": {
-      "header": "Slot: items y headers",
+      "heading": "Slot: items y headers",
       "desc": "Los slots `items` y `headers` pueden aceptar ya sea una colección de etiquetas <kbd>td/th</kbd>, o si quieres controlar toda la fila, una etiqueta <kbd>tr</kbd>."
     },
     "progress": {
-      "header": "Slot: progress",
+      "heading": "Slot: progress",
       "desc": "También hay un slot `progress` para cuando quieres personalizar la presentación de los datos en el estado `loading` (cargando) de la tabla. Por default es un estado `indeterminate` de un `v-progress-linear`"
     },
     "search": {
-      "header": "Búsqueda con un slot personalizado no-results",
+      "heading": "Búsqueda con un slot personalizado no-results",
       "desc": "La tabla expone una prop `search` que te permite filtar tus datos.."
     },
     "paginate": {
-      "header": "Paginación externa",
+      "heading": "Paginación externa",
       "desc": "La paginación puede ser controlada externamente al utilizar la prop `pagination`. Recuerda que debes aplicar el modificador `.sync`."
     },
     "sort": {
-      "header": "Ordenamiento externo.",
+      "heading": "Ordenamiento externo.",
       "desc": "El ordenamiento también puede ser controlado externamente al utilizar la prop `pagination`. Recuerda que debes aplicar el modificador `.sync`. Puedes también utilizar esa prop para configurar la columna ordenada por default."
     },
     "server": {
-      "header": "Paginación y ordenamiento del lado del servidor"
+      "heading": "Paginación y ordenamiento del lado del servidor"
     },
     "headerless": {
-      "header": "Tablas sin encabezados"
+      "heading": "Tablas sin encabezados"
     },
     "edit-dialog": {
-      "header": "Edición Inline",
+      "heading": "Edición Inline",
       "desc": "El componente `v-edit-dialog` se utiliza para la edición _inline_ dentro de los data tables."
     },
     "crud": {
-      "header": "CRUD Actions",
+      "heading": "CRUD Actions",
       "desc": "Un data-table con acciones de Crear, Leer, Actualizar y Borrar (CRUD en inglés) que utiliza un componente `v-dialog` para editar cada fila"
     }
   },

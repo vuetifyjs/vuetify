@@ -6,7 +6,7 @@ const state = {
   currentVersion: null,
   isLoading: false,
   releases: [],
-  supporters: {},
+  supporters: require('@/data/api/supporters.json'),
 }
 
 const mutations = make.mutations(state)

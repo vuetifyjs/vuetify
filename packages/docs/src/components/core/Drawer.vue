@@ -77,12 +77,12 @@
           v-else-if="item.divider"
           :key="`divider-${i}`"
         />
-        <core-group
+        <base-group
           v-else-if="item.group"
           :key="`group-${i}`"
           :item="item"
         />
-        <core-item
+        <base-item
           v-else
           :key="`item-${i}`"
           :chip="genChip(item)"

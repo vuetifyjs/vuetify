@@ -1,13 +1,13 @@
 {
-  "header": "副标题",
-  "headerText": "`v-subheader`组件由于分隔列表的各部分。",
+  "heading": "副标题",
+  "headingText": "`v-subheader`组件由于分隔列表的各部分。",
   "examples": {
     "grid": {
-      "header": "栅格副标题",
+      "heading": "栅格副标题",
       "desc": "一个副标题可以添加上下文到用户正在看的东西。"
     },
     "menu": {
-      "header": "菜单副标题",
+      "heading": "菜单副标题",
       "desc": "使用副标题可以帮助分离不同类型的操作。"
     }
   }

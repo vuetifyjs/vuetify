@@ -1,44 +1,44 @@
 {
-  "header": "crwdns38724:0crwdne38724:0",
-  "headerText": "crwdns38726:0crwdne38726:0",
+  "heading": "crwdns38724:0crwdne38724:0",
+  "headingText": "crwdns38726:0crwdne38726:0",
   "examples": {
     "usage": {
       "desc": "crwdns38728:0crwdne38728:0"
     },
     "external": {
-      "header": "crwdns32520:0crwdne32520:0",
+      "heading": "crwdns32520:0crwdne32520:0",
       "desc": "crwdns38730:0crwdne38730:0"
     },
     "disabled": {
-      "header": "crwdns38732:0crwdne38732:0",
+      "heading": "crwdns38732:0crwdne38732:0",
       "desc": "crwdns38734:0crwdne38734:0"
     },
     "readonly": {
-      "header": "crwdns38736:0crwdne38736:0",
+      "heading": "crwdns38736:0crwdne38736:0",
       "desc": "crwdns38738:0crwdne38738:0"
     },
     "popout": {
-      "header": "crwdns38740:0crwdne38740:0",
+      "heading": "crwdns38740:0crwdne38740:0",
       "desc": "crwdns38742:0crwdne38742:0"
     },
     "inset": {
-      "header": "crwdns38744:0crwdne38744:0",
+      "heading": "crwdns38744:0crwdne38744:0",
       "desc": "crwdns38746:0crwdne38746:0"
     },
     "accordion": {
-      "header": "crwdns38748:0crwdne38748:0",
+      "heading": "crwdns38748:0crwdne38748:0",
       "desc": "crwdns38750:0crwdne38750:0"
     },
     "custom-icons": {
-      "header": "crwdns38752:0crwdne38752:0",
+      "heading": "crwdns38752:0crwdne38752:0",
       "desc": "crwdns38754:0crwdne38754:0"
     },
     "focusable": {
-      "header": "crwdns32542:0crwdne32542:0",
+      "heading": "crwdns32542:0crwdne32542:0",
       "desc": "crwdns32544:0crwdne32544:0"
     },
     "advanced": {
-      "header": "crwdns38756:0crwdne38756:0",
+      "heading": "crwdns38756:0crwdne38756:0",
       "desc": "crwdns38758:0crwdne38758:0",
       "uninverted": true
     }

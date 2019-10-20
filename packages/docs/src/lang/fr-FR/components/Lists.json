@@ -1,10 +1,10 @@
 {
   "examples": {
     "dense": {
-      "header": "### Dense"
+      "heading": "### Dense"
     },
     "flat": {
-      "header": "### Plat"
+      "heading": "### Plat"
     }
   }
 }

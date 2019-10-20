@@ -11,7 +11,7 @@
       <base-subheading>Vuetify.Home.proudlySponsoredBy</base-subheading>
 
       <base-text
-        class="mx-auto"
+        class="mx-auto mb-6"
         max-width="600"
       >Vuetify.Home.proundlySponsoredByText</base-text>
 

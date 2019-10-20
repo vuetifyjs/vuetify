@@ -1,44 +1,44 @@
 {
-  "header": "crwdns40144:0crwdne40144:0",
-  "headerText": "crwdns33734:0crwdne33734:0",
+  "heading": "crwdns40144:0crwdne40144:0",
+  "headingText": "crwdns33734:0crwdne33734:0",
   "examples": {
     "usage": {
       "desc": "crwdns40146:0crwdne40146:0"
     },
     "icon": {
-      "header": "crwdns40148:0crwdne40148:0",
+      "heading": "crwdns40148:0crwdne40148:0",
       "desc": "crwdns40150:0crwdne40150:0"
     },
     "auto-grow": {
-      "header": "crwdns40152:0crwdne40152:0",
+      "heading": "crwdns40152:0crwdne40152:0",
       "desc": "crwdns40154:0crwdne40154:0"
     },
     "background-color": {
-      "header": "crwdns40156:0crwdne40156:0",
+      "heading": "crwdns40156:0crwdne40156:0",
       "desc": "crwdns40158:0crwdne40158:0"
     },
     "browser-autocomplete": {
-      "header": "crwdns40160:0crwdne40160:0",
+      "heading": "crwdns40160:0crwdne40160:0",
       "desc": "crwdns40162:0crwdne40162:0"
     },
     "clearable": {
-      "header": "crwdns40164:0crwdne40164:0",
+      "heading": "crwdns40164:0crwdne40164:0",
       "desc": "crwdns40166:0crwdne40166:0"
     },
     "counter": {
-      "header": "crwdns40168:0crwdne40168:0",
+      "heading": "crwdns40168:0crwdne40168:0",
       "desc": "crwdns40170:0crwdne40170:0"
     },
     "no-resize": {
-      "header": "crwdns40172:0crwdne40172:0",
+      "heading": "crwdns40172:0crwdne40172:0",
       "desc": "crwdns40174:0crwdne40174:0"
     },
     "rows": {
-      "header": "crwdns40176:0crwdne40176:0",
+      "heading": "crwdns40176:0crwdne40176:0",
       "desc": "crwdns40178:0crwdne40178:0"
     },
     "signup-box": {
-      "header": "crwdns40180:0crwdne40180:0",
+      "heading": "crwdns40180:0crwdne40180:0",
       "desc": "crwdns40182:0crwdne40182:0"
     }
   },

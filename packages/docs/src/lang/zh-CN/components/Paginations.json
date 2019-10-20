@@ -1,18 +1,18 @@
 {
-  "headerText": "`v-pagination`组件用于分隔长的数据集，以便用户更容易地使用信息。根据提供的长度，分页组件将自动缩放。要维护当前页面，只需提供一个v-model标签。",
+  "headingText": "`v-pagination`组件用于分隔长的数据集，以便用户更容易地使用信息。根据提供的长度，分页组件将自动缩放。要维护当前页面，只需提供一个v-model标签。",
   "examples": {
     "long": {
-      "header": "长的"
+      "heading": "长的"
     },
     "limit": {
-      "header": "限制",
+      "heading": "限制",
       "desc": "您可以用`total-visible`属性手动设置可见页面按钮的最大数量。"
     },
     "icons": {
-      "header": "图标"
+      "heading": "图标"
     },
     "disabled": {
-      "header": "禁用"
+      "heading": "禁用"
     }
   }
 }

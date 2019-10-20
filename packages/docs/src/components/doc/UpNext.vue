@@ -14,7 +14,7 @@
           md4
         >
           <v-card outlined>
-            <core-item
+            <base-item
               :to="link.link"
               :avatar="link.icon"
               :avatar-color="link.color"
@@ -26,7 +26,7 @@
               <v-list-item-action>
                 <v-icon>mdi-arrow-right</v-icon>
               </v-list-item-action>
-            </core-item>
+            </base-item>
           </v-card>
         </v-flex>
       </v-layout>

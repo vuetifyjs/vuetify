@@ -1,44 +1,44 @@
 {
-  "header": "# Expansion panels",
-  "headerText": "The `v-expansion-panel` component is useful for reducing vertical space with large amounts of information. The default functionality of the component is to only display one expansion-panel body at a time; however, with the `multiple` property, the expansion-panel can remain open until explicitly closed.",
+  "heading": "# Expansion panels",
+  "headingText": "The `v-expansion-panel` component is useful for reducing vertical space with large amounts of information. The default functionality of the component is to only display one expansion-panel body at a time; however, with the `multiple` property, the expansion-panel can remain open until explicitly closed.",
   "examples": {
     "usage": {
       "desc": "Expansion panels in their simplest form display a list of expandable items."
     },
     "external": {
-      "header": "### External control",
+      "heading": "### External control",
       "desc": "Expansion panels can be controlled externally by modifying the `v-model`. Its value corresponds to a zero-based index of the currently opened expansion panel content. If `multiple` prop is used then it is an array containing the indices of the open items."
     },
     "disabled": {
-      "header": "### Disabled",
+      "heading": "### Disabled",
       "desc": "Both the expansion-panel and its content can be disabled using the `disabled` prop."
     },
     "readonly": {
-      "header": "### Readonly",
+      "heading": "### Readonly",
       "desc": "`readonly` prop does the same thing as `disabled`, but it doesn't touch styles."
     },
     "popout": {
-      "header": "### Popout",
+      "heading": "### Popout",
       "desc": "The expansion-panel also has **popout** design. With it, expansion-panel is enlargened when activated."
     },
     "inset": {
-      "header": "### Inset",
+      "heading": "### Inset",
       "desc": "**inset** expansion-panel becomes smaller when activated."
     },
     "accordion": {
-      "header": "### Accordion",
+      "heading": "### Accordion",
       "desc": "**accordion** expansion-panel hasn't got margins around active panel."
     },
     "custom-icons": {
-      "header": "### Custom icon",
+      "heading": "### Custom icon",
       "desc": "Expand action icon can be customized with `expand-icon` prop or the `actions` slot."
     },
     "focusable": {
-      "header": "### Focusable",
+      "heading": "### Focusable",
       "desc": "The expansion-panel headers can be made focusable with the prop `focusable`."
     },
     "advanced": {
-      "header": "### Advanced",
+      "heading": "### Advanced",
       "desc": "The expansion panel component provides a rich playground to build truly advanced implementations. Here we take advantage of slots in the `v-expansion-panel-header` component to react to the state of being open or closed by fading content in and out.",
       "uninverted": true
     }

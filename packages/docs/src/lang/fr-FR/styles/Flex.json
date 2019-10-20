@@ -1,6 +1,6 @@
 {
-  "header": "# Flex",
-  "headerText": "Contrôlez la mise en place de conteneurs flex avec alignement, justification et plus avec les utilitaires flexbox réactifs.",
+  "heading": "# Flex",
+  "headingText": "Contrôlez la mise en place de conteneurs flex avec alignement, justification et plus avec les utilitaires flexbox réactifs.",
   "flexHeader": "## Activer flexbox",
   "flexText1": "En utilisant les utilitaires `display`, vous pouvez transformer n'importe quel élément en un conteneur flexbox transformant **direct children elements** en objets flex. En utilisant des utilitaires de propriétés flex supplémentaires, vous pouvez personnaliser leur interaction encore plus loin.",
   "flexText2": "Vous pouvez également personnaliser les utilitaires flex pour s'appliquer en fonction de différents points d'arrêt.",

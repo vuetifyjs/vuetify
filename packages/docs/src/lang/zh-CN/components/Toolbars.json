@@ -1,35 +1,35 @@
 {
-  "headerText": "`v-toolbar`组件对于任何GUI都很重要，因为它通常是网站导航的主要来源。工具栏组件可以与导航抽屉一起很好地工作，用于隐藏链接并呈现激活器以在移动设备上打开侧边栏。",
+  "headingText": "`v-toolbar`组件对于任何GUI都很重要，因为它通常是网站导航的主要来源。工具栏组件可以与导航抽屉一起很好地工作，用于隐藏链接并呈现激活器以在移动设备上打开侧边栏。",
   "examples": {
     "light-and-dark": {
       "desc": "工具栏有两个变种，明亮和暗黑。明亮工具栏有深色的按钮和黑暗的文字，而暗黑工具栏有白色的按钮和白色的文字。"
     },
     "flexible-and-card": {
-      "header": "灵活的工具栏和卡片工具栏",
+      "heading": "灵活的工具栏和卡片工具栏",
       "desc": "通过一些自定义样式，您可以轻松创建令人惊叹的用户界面。"
     },
     "floating-with-search": {
-      "header": "搜索时浮动"
+      "heading": "搜索时浮动"
     },
     "variations": {
-      "header": "变体",
+      "heading": "变体",
       "desc": "一个应用程序栏有多个可以应用主题和辅助类的变种，范围从明亮和暗黑的主题、色彩和透明度。"
     },
     "prominent": {
-      "header": "突出的工具栏"
+      "heading": "突出的工具栏"
     },
     "dense": {
-      "header": "密集的工具栏",
+      "heading": "密集的工具栏",
       "desc": "密集工具栏降低其高度未48px,这也是移动设备横向定位的默认行为。"
     },
     "dense-prominent": {
-      "header": "密集突出的工具栏"
+      "heading": "密集突出的工具栏"
     },
     "scrolling": {
-      "header": "滚动屏幕"
+      "heading": "滚动屏幕"
     },
     "system-bars-status-window": {
-      "header": "系统栏——状态/窗口",
+      "heading": "系统栏——状态/窗口",
       "desc": "系统栏对于移动设备和桌面上的通知图标很有用，对于现场示例，请前往预定义的布局。"
     }
   }

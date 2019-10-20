@@ -11,7 +11,7 @@
   import { getBranch } from '@/util/helpers'
 
   export default {
-    name: 'Layouts',
+    name: 'LayoutsPage',
 
     components: {
       NotFound: () => import('@/pages/general/404'),

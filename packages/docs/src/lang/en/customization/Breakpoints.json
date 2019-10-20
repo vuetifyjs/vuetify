@@ -1,6 +1,6 @@
 {
-  "header": "# Breakpoints",
-  "headerText": "With Vuetify you can control the layout of your application depending on the window size. That can be achieved for example by using specific [grid](/components/grids) props or helper classes (i.e. [display](/styles/display)) that will target particular breakpoint. Vuetify provides 5 predefined breakpoints defined as described below, but you can easily change them to meet your needs.",
+  "heading": "# Breakpoints",
+  "headingText": "With Vuetify you can control the layout of your application depending on the window size. That can be achieved for example by using specific [grid](/components/grids) props or helper classes (i.e. [display](/styles/display)) that will target particular breakpoint. Vuetify provides 5 predefined breakpoints defined as described below, but you can easily change them to meet your needs.",
   "components": [
     "v-container",
     "v-layout",

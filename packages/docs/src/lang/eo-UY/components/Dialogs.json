@@ -1,47 +1,47 @@
 {
-  "header": "crwdns40860:0crwdne40860:0",
-  "headerText": "crwdns34498:0crwdne34498:0",
+  "heading": "crwdns40860:0crwdne40860:0",
+  "headingText": "crwdns34498:0crwdne34498:0",
   "examples": {
     "usage": {
       "desc": "crwdns34500:0crwdne34500:0"
     },
     "without-activator": {
-      "header": "crwdns40862:0crwdne40862:0",
+      "heading": "crwdns40862:0crwdne40862:0",
       "desc": "crwdns40864:0crwdne40864:0",
       "uninverted": true
     },
     "modal": {
-      "header": "crwdns34508:0crwdne34508:0",
+      "heading": "crwdns34508:0crwdne34508:0",
       "desc": "crwdns34510:0crwdne34510:0",
       "uninverted": true
     },
     "fullscreen": {
-      "header": "crwdns34514:0crwdne34514:0",
+      "heading": "crwdns34514:0crwdne34514:0",
       "desc": "crwdns34516:0crwdne34516:0",
       "uninverted": true
     },
     "form": {
-      "header": "crwdns34520:0crwdne34520:0",
+      "heading": "crwdns34520:0crwdne34520:0",
       "desc": "crwdns34522:0crwdne34522:0",
       "uninverted": true
     },
     "scrollable": {
-      "header": "crwdns34526:0crwdne34526:0",
+      "heading": "crwdns34526:0crwdne34526:0",
       "desc": "crwdns34528:0crwdne34528:0",
       "uninverted": true
     },
     "overflowed": {
-      "header": "crwdns34532:0crwdne34532:0",
+      "heading": "crwdns34532:0crwdne34532:0",
       "desc": "crwdns34534:0crwdne34534:0",
       "uninverted": true
     },
     "advanced": {
-      "header": "crwdns40868:0crwdne40868:0",
+      "heading": "crwdns40868:0crwdne40868:0",
       "desc": "crwdns40870:0crwdne40870:0",
       "uninverted": true
     },
     "loader": {
-      "header": "crwdns34544:0crwdne34544:0",
+      "heading": "crwdns34544:0crwdne34544:0",
       "desc": "crwdns34546:0crwdne34546:0"
     }
   },

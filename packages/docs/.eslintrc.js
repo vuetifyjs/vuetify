@@ -36,6 +36,7 @@ module.exports = {
     {
       files: [
         'src/components/**/*.vue',
+        'src/layouts/**/*.vue',
         'src/pages/**/*.vue',
         'src/views/**/*.vue',
       ],

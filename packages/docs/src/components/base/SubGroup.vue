@@ -1,5 +1,5 @@
 <template>
-  <core-group
+  <base-group
     :item="item"
     sub-group
   />

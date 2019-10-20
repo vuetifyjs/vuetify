@@ -1,6 +1,6 @@
 {
-  "header": "# Icônes",
-  "headerText": "Vuetify est fourni avec la prise en charge de Material Icons, Material Design Icons, de Font Awesome 4 et de Font Awesome 5. Par défaut, les applications utiliseront [Material Design Icons](https://materialdesignicons.com/).",
+  "heading": "# Icônes",
+  "headingText": "Vuetify est fourni avec la prise en charge de Material Icons, Material Design Icons, de Font Awesome 4 et de Font Awesome 5. Par défaut, les applications utiliseront [Material Design Icons](https://materialdesignicons.com/).",
   "usageText1": "Afin de changer votre bibliothèque de polices, ajoutez l'option `iconfont` lors de l'instanciation.",
   "installHeader": "## Installation de polices d'icônes",
   "installText1": "Vous devez inclure la bibliothèque d'icônes spécifiée (même si vous utilisez l'option par défaut). Cela peut être fait en incluant un lien CDN ou en important la bibliothèque d'icônes dans votre application",

@@ -1,6 +1,6 @@
 {
-  "header": "# Quelle est la différence ?",
-  "headerText": "Vuetify est le framework Material #1 et est en développement depuis 2016. L'objectif du projet est de fournir aux utilisateurs tout ce qui est nécessaire pour construire des applications web riches et engageantes en utilisant la spécification Material Design et Vue. Il accomplit cela avec un cycle de mise à jour régulier, un Support à long terme **(LTS)** pour les versions précédentes, un engagement communautaire réactif, un vaste écosystème de ressources et un dévouement aux composants de qualité.",
+  "heading": "# Quelle est la différence ?",
+  "headingText": "Vuetify est le framework Material #1 et est en développement depuis 2016. L'objectif du projet est de fournir aux utilisateurs tout ce qui est nécessaire pour construire des applications web riches et engageantes en utilisant la spécification Material Design et Vue. Il accomplit cela avec un cycle de mise à jour régulier, un Support à long terme **(LTS)** pour les versions précédentes, un engagement communautaire réactif, un vaste écosystème de ressources et un dévouement aux composants de qualité.",
   "community": "Communauté",
   "communityCaption": "Préparez-vous à profiter de l’une des communautés les plus actives de l’écosystème de Vue. Coincé sur un problème ? Obtenez de l'aide immédiatement. Vous avez trouvé un bug ? Vous voulez parler de Firebase ? Vous voulez créer quelque chose d'incroyable ? Faites-le nous savoir. Les **mainteneurs** répondent et réagissent aux problèmes au fur et à mesure qu'ils surviennent. Soyez rassurés en sachant que nous sommes là pour vous aider.",
   "communityHeader": "## Aide active",

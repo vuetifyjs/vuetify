@@ -1,26 +1,26 @@
 {
-  "headerText": "Le composant `v-autocomplete` offre des fonctionnalités simples et flexibles. Ceci est utile pour la recherche de grands ensembles de données ou même pour les requêtes dynamiques d'information à partir d'une API.",
+  "headingText": "Le composant `v-autocomplete` offre des fonctionnalités simples et flexibles. Ceci est utile pour la recherche de grands ensembles de données ou même pour les requêtes dynamiques d'information à partir d'une API.",
   "examples": {
     "usage": {
       "desc": "Le composant d'auto-complétion hérite de `v-select` et ajoute la capacité de filtrer les éléments."
     },
     "api": {
-      "header": "### Recherche d'une API",
+      "heading": "### Recherche d'une API",
       "desc": "Branchez facilement les données dynamiques et créez une expérience unique. La liste de propriétés expansive de v-autocomplete`permet de régler facilement tous les aspects de l'entrée."
     },
     "customFilter": {
-      "header": "### Filtres personnalisés en auto-complétion",
+      "heading": "### Filtres personnalisés en auto-complétion",
       "desc": "La propriété `filter` peut être utilisée pour que chaque élément puissent être filtrer en suivant sa propre logique. Dans cet exemple nous filtrons des éléments par leur nom"
     },
     "asynchronous": {
-      "header": "### Éléments asynchrones",
+      "heading": "### Éléments asynchrones",
       "desc": "Parfois vous avez besoin de récupérer des données externes via une requête de recherche. Utilisez la propriété `search-input` avec le modificateur **.sync** quand vous utilisez la propriété `autocomplete`. On peut également utiliser la nouvelle propriété `cache-items`. Ceci gardera une unique liste de tous les éléments qui ont été passés à la propriété `items` et est **REQUIRED** lors de l'utilisation d’éléments asynchrones et de la propriété **multiple**."
     },
     "advanced": {
-      "header": "### Emplacements avancés"
+      "heading": "### Emplacements avancés"
     },
     "dense": {
-      "header": "### Dense"
+      "heading": "### Dense"
     }
   },
   "props": {

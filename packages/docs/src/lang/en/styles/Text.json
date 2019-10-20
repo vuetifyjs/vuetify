@@ -1,6 +1,6 @@
 {
-  "header": "# Text",
-  "headerText": "Control text alignment, wrapping, overflow, transforms and more.",
+  "heading": "# Text",
+  "headingText": "Control text alignment, wrapping, overflow, transforms and more.",
   "alignmentHeader": "## Text alignment",
   "alignmentText1": "Alignment helper classes allow you to easily re-align text.",
   "alignmentText2": "There are also available alignment classes that support responsive displays.",

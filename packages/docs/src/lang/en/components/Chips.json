@@ -1,67 +1,67 @@
 {
-  "header": "# Chips",
-  "headerText": "The `v-chip` component is used to convey small pieces of information. Using the `close` property, the chip becomes interactive, allowing user interaction. This component is used by the [v-chip-group](/components/chip-groups) for advanced selection options.",
+  "heading": "# Chips",
+  "headingText": "The `v-chip` component is used to convey small pieces of information. Using the `close` property, the chip becomes interactive, allowing user interaction. This component is used by the [v-chip-group](/components/chip-groups) for advanced selection options.",
   "examples": {
     "usage": {
       "desc": "Chips come in the following variations: Default, closeable, filter, outlined, pill. The default slot of `v-chip` will also accept avatars and icons alongside text.",
       "uninverted": true
     },
     "colored": {
-      "header": "### Colored",
+      "heading": "### Colored",
       "desc": "Any color from the Material Design palette can be used to change a chips color."
     },
     "icon": {
-      "header": "### Icon",
+      "heading": "### Icon",
       "desc": "Chips can use text or any icon available in the Material Icons font library."
     },
     "outlined": {
-      "header": "### Outlined",
+      "heading": "### Outlined",
       "desc": "Outlined chips inherit their border color from the current text color."
     },
     "label": {
-      "header": "### Label",
+      "heading": "### Label",
       "desc": "Label chips use the `v-card` border-radius."
     },
     "closable": {
-      "header": "### Closable",
+      "heading": "### Closable",
       "desc": "Closable chips can be controlled with a v-model. You can also listen to the `click:close` event if you want to know when a chip has been closed.",
       "uninverted": true
     },
     "in-selects": {
-      "header": "### In selects",
+      "heading": "### In selects",
       "desc": "Selects can use chips to display the selected data. Try adding your own tags below.",
       "uninverted": true
     },
     "photos": {
-      "header": "### Custom lists",
+      "heading": "### Custom lists",
       "desc": "In this example we opt to use a customized list instead of [v-autocomplete](/components/autocompletes). This allows us to always display the options available while still providing the same functionality of search and selection."
     },
     "action-chips": {
-      "header": "### Action chips",
+      "heading": "### Action chips",
       "desc": "Chips can be used as actionable items. Provided with a _click_ event, the chip becomes interactive and can invoke methods."
     },
     "filtering": {
-      "header": "### Additional filtering",
+      "heading": "### Additional filtering",
       "desc": "Chips are great for providing supplementary actions to a particular task. In this instance, we are searching a list of items and collecting a subset of information to display available keywords."
     },
     "expandable": {
-      "header": "### Expandable",
+      "heading": "### Expandable",
       "desc": "Chips can be combined with `v-menu` to enable a specific set of actions for a chip."
     },
     "sizes": {
-      "header": "### Sizes",
+      "heading": "### Sizes",
       "desc": "`v-chip` component can have various sizes from `x-small` to `x-large`."
     },
     "draggable": {
-      "header": "### Draggable",
+      "heading": "### Draggable",
       "desc": "`draggable` `v-chip` component can be dragged by mouse."
     },
     "filter": {
-      "header": "### Filter",
+      "heading": "### Filter",
       "desc": "`v-chip` component has `filter` option which shows an additional icon to you if chip is active. It can be customized using `filter-icon`."
     },
     "no-ripple": {
-      "header": "### No ripple",
+      "heading": "### No ripple",
       "desc": "`v-chip` can be rendered without ripple if `ripple` prop is set to `false`."
     }
   },

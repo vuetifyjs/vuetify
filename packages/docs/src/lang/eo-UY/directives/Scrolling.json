@@ -1,13 +1,13 @@
 {
-  "header": "crwdns30206:0crwdne30206:0",
-  "headerText": "crwdns30208:0crwdne30208:0",
+  "heading": "crwdns30206:0crwdne30206:0",
+  "headingText": "crwdns30208:0crwdne30208:0",
   "examples": {
     "usage": {
       "desc": "crwdns30210:0crwdne30210:0",
       "uninverted": true
     },
     "options": {
-      "header": "crwdns30214:0crwdne30214:0",
+      "heading": "crwdns30214:0crwdne30214:0",
       "desc": "crwdns30216:0crwdne30216:0",
       "uninverted": true
     }

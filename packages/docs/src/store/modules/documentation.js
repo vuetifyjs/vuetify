@@ -5,6 +5,7 @@ import { make } from 'vuex-pathify'
 
 const state = {
   deprecatedIn: require('@/data/deprecated.json'),
+  links: require('@/data/drawerItems.json'),
   newIn: require('@/data/new.json'),
   namespace: null,
   page: null,

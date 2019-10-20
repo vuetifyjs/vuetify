@@ -1,16 +1,16 @@
 {
-  "headerText": "`v-footer`用于显示用户可能希望从站点内的所有页面访问到的公共信息。",
+  "headingText": "`v-footer`用于显示用户可能希望从站点内的所有页面访问到的公共信息。",
   "examples": {
     "company-footer": {
-      "header": "公司页脚",
+      "heading": "公司页脚",
       "desc": "使用 footer 组件制作一个包含一些页面链接的公司页脚。"
     },
     "indigo-footer": {
-      "header": "靛蓝色页脚",
+      "heading": "靛蓝色页脚",
       "desc": "使用 footer 组件制作一个靛蓝背景以及包含一些社交媒体图标按钮的页脚。"
     },
     "teal-footer": {
-      "header": "蓝绿色页脚",
+      "heading": "蓝绿色页脚",
       "desc": "使用 footer 组件制作一个蓝绿色顶部以及几个行列链接的页脚。"
     }
   },

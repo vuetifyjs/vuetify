@@ -5,9 +5,11 @@
   import { parseLink } from '@/util/helpers'
   import {
     mapGetters,
-    mapMutations,
     mapState,
   } from 'vuex'
+  import {
+    sync,
+  } from 'vuex-pathify'
 
   marked.setOptions({
     headerIds: false,
@@ -35,10 +37,7 @@
         'page',
       ]),
       ...mapState('route', ['params']),
-    },
-
-    methods: {
-      ...mapMutations('documentation', ['pushToc']),
+      toc: sync('documentation/toc'),
     },
 
     render (h, context) {
@@ -77,7 +76,15 @@
         const text = innerHTML.slice(4, index)
         const id = kebabCase(text)
 
-        if (['h1', 'h2'].includes(heading)) this.pushToc({ id, text })
+        console.log('here', heading)
+        console.log('what', this.toc.find(t => t.id === id))
+        if (
+          ['h1', 'h2'].includes(heading) &&
+          !this.toc.find(t => t.id === id)
+        ) {
+          console.log('hi asdfasdfasdf asdf')
+          this.toc.push({ id, text })
+        }
       }
 
       return h(this.tag, {
@@ -90,21 +97,21 @@
 </script>
 
 <style lang="sass">
-.markdown:last-child p,
-.markdown:last-child
-  margin-bottom: 0 !important
+  .markdown:last-child p,
+  .markdown:last-child
+    margin-bottom: 0 !important
 
-.markdown--link
-  text-decoration: none
+  .markdown--link
+    text-decoration: none
 
-  &:hover
-    opacity: 0.8
+    &:hover
+      opacity: 0.8
 
-  .v-icon
-    font-size: 14px
-    margin-left: 4px
-    vertical-align: baseline
+    .v-icon
+      font-size: 14px
+      margin-left: 4px
+      vertical-align: baseline
 
-.markdown > h4
-  margin: 8px 0
+  .markdown > h4
+    margin: 8px 0
 </style>

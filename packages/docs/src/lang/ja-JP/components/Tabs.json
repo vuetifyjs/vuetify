@@ -1,13 +1,13 @@
 {
   "examples": {
     "right": {
-      "header": "### 右寄せタブ"
+      "heading": "### 右寄せタブ"
     },
     "pagination": {
-      "header": "### ページネーション"
+      "heading": "### ページネーション"
     },
     "icons": {
-      "header": "### カスタムアイコン"
+      "heading": "### カスタムアイコン"
     }
   },
   "props": {

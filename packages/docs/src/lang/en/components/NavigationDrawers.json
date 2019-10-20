@@ -1,44 +1,44 @@
 {
-  "header": "# Navigation drawers",
-  "headerText": "The `v-navigation-drawer` component is what your users will utilize to navigate through the application. The navigation-drawer is pre-configured to work with or without **vue-router** right out the box. For the purpose of display, some examples are wrapped in a `v-card` element. Within your application you will generally place the `v-navigation-drawer` as a direct child of `v-app`.",
+  "heading": "# Navigation drawers",
+  "headingText": "The `v-navigation-drawer` component is what your users will utilize to navigate through the application. The navigation-drawer is pre-configured to work with or without **vue-router** right out the box. For the purpose of display, some examples are wrapped in a `v-card` element. Within your application you will generally place the `v-navigation-drawer` as a direct child of `v-app`.",
   "examples": {
     "usage": {
       "desc": "The navigation drawer is primarily used to house links to the pages in your application. Using `null` as the starting value for its `v-model` will initialize the drawer as closed on mobile and as open on desktop. It is common to pair drawers with the [v-list](/components/lists) component using the **nav** property."
     },
     "colored": {
-      "header": "### Colored drawer",
+      "heading": "### Colored drawer",
       "desc": "Navigation drawers can be customized to fit any application's design. Here we apply a custom background color and an appended content area using the **append** slot."
     },
     "permanent-floating": {
-      "header": "### Permanent floating drawer",
+      "heading": "### Permanent floating drawer",
       "desc": "By default, a navigation drawer has a 1px right border that separates it from content. In this example we want to detach the drawer from the left side and let it float on its own. The **floating** property removes the right border (or left if using **right**)."
     },
     "mini": {
-      "header": "### Mini",
+      "heading": "### Mini",
       "desc": "When using the **mini-variant** prop, the drawer will shrink (default 80px) and hide everything inside of `v-list` except the first element. In this example we use the **.sync** modifier that allows us to tie the expanding/contracting of the drawer programmatically."
     },
     "temporary": {
-      "header": "### Temporary",
+      "heading": "### Temporary",
       "desc": "A temporary drawer sits above its application and uses a scrim (overlay) to darken the background. This drawer behavior is mimicked by default when on mobile. Clicking outside of the drawer will cause it to close."
     },
     "combined": {
-      "header": "### Combined drawers",
+      "heading": "### Combined drawers",
       "desc": "In this example we define a custom width to accommodate our nested drawer. Using `v-layout` we ensure that the drawer and list stack horizontally next to each other."
     },
     "right": {
-      "header": "### Right positioned",
+      "heading": "### Right positioned",
       "desc": "Navigation drawers can also be positioned on the right side of your application (or an element). This is also useful for creating a side-sheet with auxillary information that may not have any navigation links. When using **RTL** you must explicitly define **right** for your drawer."
     },
     "background": {
-      "header": "### Backgrounds",
+      "heading": "### Backgrounds",
       "desc": "Apply a custom background to your drawer. If you need to customize `v-img`'s properties you can use the **img** slot."
     },
     "bottom-drawer": {
-      "header": "### Bottom drawer",
+      "heading": "### Bottom drawer",
       "desc": "Using the **bottom** prop, we are able to relocate our drawer on mobile devices to come from the bottom of the screen. This is an alternative style and only activates once the **mobile-break-point** is met."
     },
     "expand-on-hover": {
-      "header": "### Expand on hover",
+      "heading": "### Expand on hover",
       "desc": "Places the component in **mini-variant** mode and expands once hovered. Does not alter the content area. Width can be controlled with the **mini-variant-width** property."
     }
   },

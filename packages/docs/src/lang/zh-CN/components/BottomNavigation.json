@@ -1,15 +1,15 @@
 {
-  "header": "底部导航",
-  "headerText": "`v-bottom-navigation`组件是一个侧边栏的替代方案。它主要用于移动端，并有两个变种，图标+文本和转变。",
+  "heading": "底部导航",
+  "headingText": "`v-bottom-navigation`组件是一个侧边栏的替代方案。它主要用于移动端，并有两个变种，图标+文本和转变。",
   "examples": {
     "color": {
-      "header": "色彩"
+      "heading": "色彩"
     },
     "grow": {
-      "header": "长大"
+      "heading": "长大"
     },
     "toggle": {
-      "header": "开关"
+      "heading": "开关"
     }
   }
 }

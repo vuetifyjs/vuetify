@@ -1,16 +1,16 @@
 {
-  "header": "# Icônes",
+  "heading": "# Icônes",
   "examples": {
     "color": {
-      "header": "### Couleurs",
+      "heading": "### Couleurs",
       "desc": "En utilisant les utilitaires de couleur, vous pouvez changer la couleur d'une icône à partir des thèmes sombres et clairs standards."
     },
     "buttons": {
-      "header": "### Boutons",
+      "heading": "### Boutons",
       "desc": "Les icônes peuvent être utilisées à l'intérieur des boutons pour accentuer l'action."
     },
     "clickable": {
-      "header": "### Cliquable",
+      "heading": "### Cliquable",
       "desc": "Lier n’importe quel événement click à « v-icon » changera automatiquement le curseur en pointeur."
     }
   },

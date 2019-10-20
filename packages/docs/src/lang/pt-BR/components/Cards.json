@@ -1,19 +1,19 @@
 {
-  "headerText": "O componente `v-card` é um componente versátil que pode ser usado para qualquer coisa, desde um painel até uma imagem estática. O componente **card** possui inúmeros componentes auxiliares para tornar a marcação tão fácil quanto possível. Componentes que não possuem opções listadas usam componente funcional do **Vue** para uma renderização mais rápida e servem como facilitadores na construção da marcação.",
+  "headingText": "O componente `v-card` é um componente versátil que pode ser usado para qualquer coisa, desde um painel até uma imagem estática. O componente **card** possui inúmeros componentes auxiliares para tornar a marcação tão fácil quanto possível. Componentes que não possuem opções listadas usam componente funcional do **Vue** para uma renderização mais rápida e servem como facilitadores na construção da marcação.",
   "examples": {
     "media-with-text": {
-      "header": "Mídia com texto",
+      "heading": "Mídia com texto",
       "desc": "Usando o sistema de layout, podemos adicionar texto personalizado em qualquer lugar dentro do plano de fundo."
     },
     "horizontal": {
-      "header": "Cartões horizontais",
+      "heading": "Cartões horizontais",
       "desc": "Usando `v-flex`, você pode criar cartões horizontais personalizados. use a propriedade `contain` para encolher o `v-card-media` para caber dentro da área, em vez de cobrí-la."
     },
     "grids": {
-      "header": "Grades"
+      "heading": "Grades"
     },
     "custom-actions": {
-      "header": "Ações personalizadas",
+      "heading": "Ações personalizadas",
       "desc": "Com um simples condicional você pode facilmente adicionar texto suplementar que fica escondido até que seja aberto."
     }
   }

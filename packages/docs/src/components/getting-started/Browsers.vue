@@ -1,15 +1,12 @@
 <template>
   <v-list class="transparent py-0">
-    <v-layout
-      wrap
-    >
-      <v-flex
+    <v-row dense>
+      <v-col
         v-for="browser in browsers"
         :key="browser.title"
-        px-0
-        xs12
-        sm6
-        md4
+        cols="12"
+        sm="6"
+        md="4"
       >
         <v-list-item>
           <v-list-item-avatar
@@ -18,22 +15,29 @@
             <v-icon
               v-if="typeof browser.icon === 'string'"
               dark
-            >mdi-{{ browser.icon }}</v-icon>
+            >
+              mdi-{{ browser.icon }}
+            </v-icon>
+
             <v-icon
               v-for="icon in browser.icon"
               v-else
               :key="icon"
               class="browser-icon--split"
               dark
-            >mdi-{{ icon }}</v-icon>
+            >
+              mdi-{{ icon }}
+            </v-icon>
           </v-list-item-avatar>
+
           <v-list-item-content>
             <v-list-item-title>{{ browser.title }}</v-list-item-title>
+
             <v-list-item-subtitle><span>{{ $t(getBrowserSupport(browser)) }}</span></v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-list>
 </template>
 
@@ -61,11 +65,11 @@
 </script>
 
 <style lang="sass">
-.browser-icon--split
-  position: absolute
+  .browser-icon--split
+    position: absolute
 
-  &:nth-child(1)
-    clip: rect(0px 21px 40px 0px)
-  &:nth-child(2)
-    clip: rect(0px 40px 40px 22px)
+    &:nth-child(1)
+      clip: rect(0px 21px 40px 0px)
+    &:nth-child(2)
+      clip: rect(0px 40px 40px 22px)
 </style>

@@ -1,6 +1,6 @@
 {
-  "header": "# 国际化 (i18n)",
-  "headerText": "Vuifiefy支持组件的语言国际化 (i18n)。当启动应用程序时，您可以指定可用的区域和当前活动的区域选项 **current** 选项。 ** lang **服务还支持与[vue-i18n](＃vue-i18n)轻松集成。",
+  "heading": "# 国际化 (i18n)",
+  "headingText": "Vuifiefy支持组件的语言国际化 (i18n)。当启动应用程序时，您可以指定可用的区域和当前活动的区域选项 **current** 选项。 ** lang **服务还支持与[vue-i18n](＃vue-i18n)轻松集成。",
   "gettingStarted": "快速入门",
   "gettingStartedText": "要设置可用的语言环境或当前语言环境，请在安装Vuetify时提供`lang`选项。 提供的`locales`属性将与现有的语言环境合并。 您可以在运行时通过Vue实例上的`$vuetify`对象更改语言环境。",
   "availableLocalesText": "目前, Vuetify 提供以下语言的翻译:",

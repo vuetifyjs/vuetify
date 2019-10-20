@@ -2,21 +2,26 @@
   <v-menu
     bottom
     left
-    offset-y
     max-height="calc(100% - 16px)"
+    offset-y
+    transition="slide-y-transition"
   >
-    <template #activator="{ on: menu }">
+    <template v-slot:activator="{ attrs, on }">
       <v-btn
         :aria-label="$t('Vuetify.AppToolbar.ecosystem')"
         text
-        style="min-width: 48px"
-        v-on="menu"
+        v-bind="attrs"
+        v-on="on"
       >
-        <span
-          class="hidden-sm-and-down mr-1"
-          v-text="$t('Vuetify.AppToolbar.ecosystem')"
-        />
-        <v-icon class="hidden-sm-and-down">mdi-menu-down</v-icon>
+        <base-nav-text>Vuetify.AppToolbar.ecosystem</base-nav-text>
+
+        <v-icon
+          class="hidden-sm-and-down"
+          right
+        >
+          mdi-menu-down
+        </v-icon>
+
         <v-icon class="hidden-md-and-up">mdi-earth</v-icon>
       </v-btn>
     </template>
@@ -26,16 +31,20 @@
       nav
     >
       <v-subheader v-text="$t('Vuetify.AppToolbar.quickLinks')" />
-      <core-item
+
+      <base-item
         v-for="ecosystem in ecosystems"
         :key="ecosystem.text"
         v-bind="ecosystem"
         no-markdown
         @click="$ga.event('toolbar', 'click', 'ecosystems', ecosystem.text)"
       />
+
       <v-divider />
+
       <v-subheader v-text="$t('Vuetify.AppToolbar.social')" />
-      <core-item
+
+      <base-item
         v-for="social in socials"
         :key="social.text"
         v-bind="social"

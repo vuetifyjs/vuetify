@@ -1,7 +1,6 @@
 <template>
   <v-container
     class="pa-0"
-    fluid
     tag="section"
   >
     <supporter-group
@@ -86,17 +85,13 @@
     },
 
     computed: {
-      ...sync('supporters/supporters'),
+      supporters: sync('app/supporters'),
       classes () {
         return {
           'mb-0': this.dense,
           'mb-5': !this.dense,
         }
       },
-    },
-
-    created () {
-      this.supporters = require('@/data/api/supporters.json') || {}
     },
   }
 </script>

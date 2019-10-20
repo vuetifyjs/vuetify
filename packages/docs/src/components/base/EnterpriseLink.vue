@@ -7,7 +7,7 @@
     :to="path"
     @click="$ga.event('toolbar', 'click', 'enterprise')"
   >
-    <span v-text="$t('Vuetify.AppToolbar.enterprise')" />
+    <base-nav-text>Vuetify.AppToolbar.enterprise</base-nav-text>
   </v-btn>
 </template>
 

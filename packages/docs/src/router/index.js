@@ -24,8 +24,8 @@ const routes = root([
   layout('', 'Frontend', [
     route('', 'Home'),
   ]),
-  layout(':namespace/:page/:section?', 'Backend', [
-    route('', 'Documentation'),
+  layout(':namespace/:page/:section?', 'Documentation', [
+    route('', 'Page'),
   ]),
 ])
 

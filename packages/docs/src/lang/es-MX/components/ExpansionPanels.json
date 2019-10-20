@@ -1,11 +1,11 @@
 {
-  "headerText": "El componente `v-expansion-panel` es útil para reducir el espacio vertical cuando hay grandes cantidades de información. La funcionalidad default es que el componente sólo despliega un contenido de _expansion-panel_ a la vez. Sin embargo, con la prop `expandable`, el _expansion-panel_ puede permanecer abierto hasta que sea explicitamente cerrado por el usuario.",
+  "headingText": "El componente `v-expansion-panel` es útil para reducir el espacio vertical cuando hay grandes cantidades de información. La funcionalidad default es que el componente sólo despliega un contenido de _expansion-panel_ a la vez. Sin embargo, con la prop `expandable`, el _expansion-panel_ puede permanecer abierto hasta que sea explicitamente cerrado por el usuario.",
   "examples": {
     "disabled": {
-      "header": "Deshabilitado"
+      "heading": "Deshabilitado"
     },
     "focusable": {
-      "header": "Enfocable",
+      "heading": "Enfocable",
       "desc": "Los encabezados de _expansion panel_ pueden ser enfocables al usar la prop `focusable`."
     }
   },

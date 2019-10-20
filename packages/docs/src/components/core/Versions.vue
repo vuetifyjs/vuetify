@@ -25,7 +25,7 @@
         nav
       >
         <v-subheader v-text="$t('Vuetify.AppToolbar.documentation')" />
-        <core-item
+        <base-item
           v-for="(archive, i) in archives"
           :key="`archives-${i}`"
           v-bind="archive"
@@ -34,7 +34,7 @@
         />
         <v-divider />
         <v-subheader v-text="$t('Vuetify.AppToolbar.releases')" />
-        <core-item
+        <base-item
           v-for="(release, i) in releases"
           :key="`releases-${i}`"
           v-bind="release"

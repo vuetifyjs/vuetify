@@ -1,68 +1,68 @@
 {
-  "header": "crwdns40350:0crwdne40350:0",
-  "headerText": "crwdns34022:0crwdne34022:0",
+  "heading": "crwdns40350:0crwdne40350:0",
+  "headingText": "crwdns34022:0crwdne34022:0",
   "examples": {
     "usage": {
       "desc": "crwdns34024:0crwdne34024:0"
     },
     "thumb": {
-      "header": "crwdns34026:0crwdne34026:0",
+      "heading": "crwdns34026:0crwdne34026:0",
       "desc": "crwdns34028:0crwdne34028:0"
     },
     "custom-thumb": {
-      "header": "crwdns40352:0crwdne40352:0",
+      "heading": "crwdns40352:0crwdne40352:0",
       "desc": "crwdns40354:0crwdne40354:0"
     },
     "ticks": {
-      "header": "crwdns34034:0crwdne34034:0",
+      "heading": "crwdns34034:0crwdne34034:0",
       "desc": "crwdns34036:0crwdne34036:0"
     },
     "discrete": {
-      "header": "crwdns34038:0crwdne34038:0",
+      "heading": "crwdns34038:0crwdne34038:0",
       "desc": "crwdns34040:0crwdne34040:0"
     },
     "icons": {
-      "header": "crwdns34042:0crwdne34042:0",
+      "heading": "crwdns34042:0crwdne34042:0",
       "desc": "crwdns34044:0crwdne34044:0"
     },
     "editable-numeric-value": {
-      "header": "crwdns40356:0crwdne40356:0",
+      "heading": "crwdns40356:0crwdne40356:0",
       "desc": "crwdns40358:0crwdne40358:0"
     },
     "custom-colors": {
-      "header": "crwdns40360:0crwdne40360:0",
+      "heading": "crwdns40360:0crwdne40360:0",
       "desc": "crwdns40362:0crwdne40362:0"
     },
     "validation": {
-      "header": "crwdns34054:0crwdne34054:0",
+      "heading": "crwdns34054:0crwdne34054:0",
       "desc": "crwdns34056:0crwdne34056:0"
     },
     "range": {
-      "header": "crwdns34058:0crwdne34058:0",
+      "heading": "crwdns34058:0crwdne34058:0",
       "desc": "crwdns34060:0crwdne34060:0"
     },
     "min-max": {
-      "header": "crwdns40364:0crwdne40364:0",
+      "heading": "crwdns40364:0crwdne40364:0",
       "desc": "crwdns40366:0crwdne40366:0"
     },
     "metronome": {
-      "header": "crwdns40368:0crwdne40368:0",
+      "heading": "crwdns40368:0crwdne40368:0",
       "desc": "crwdns40370:0crwdne40370:0"
     },
     "vertical": {
-      "header": "crwdns40372:0crwdne40372:0",
+      "heading": "crwdns40372:0crwdne40372:0",
       "desc": "crwdns40374:0crwdne40374:0"
     },
     "disabled": {
-      "header": "crwdns40376:0crwdne40376:0",
+      "heading": "crwdns40376:0crwdne40376:0",
       "desc": "crwdns40378:0crwdne40378:0"
     },
     "readonly": {
-      "header": "crwdns40380:0crwdne40380:0",
+      "heading": "crwdns40380:0crwdne40380:0",
       "desc": "crwdns40382:0crwdne40382:0"
     },
     "inverse-label": {
-      "header": "crwdns40384:0crwdne40384:0",
+      "heading": "crwdns40384:0crwdne40384:0",
       "desc": "crwdns40386:0crwdne40386:0"
     }
   },

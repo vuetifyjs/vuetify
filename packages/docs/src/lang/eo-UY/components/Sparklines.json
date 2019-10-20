@@ -1,28 +1,28 @@
 {
-  "header": "crwdns38304:0crwdne38304:0",
-  "headerText": "crwdns32086:0crwdne32086:0",
+  "heading": "crwdns38304:0crwdne38304:0",
+  "headingText": "crwdns32086:0crwdne32086:0",
   "examples": {
     "usage": {
       "desc": "crwdns38306:0crwdne38306:0"
     },
     "playground": {
-      "header": "crwdns32088:0crwdne32088:0",
+      "heading": "crwdns32088:0crwdne32088:0",
       "desc": "crwdns32090:0crwdne32090:0"
     },
     "heart-rate": {
-      "header": "crwdns38308:0crwdne38308:0",
+      "heading": "crwdns38308:0crwdne38308:0",
       "desc": "crwdns38310:0crwdne38310:0"
     },
     "dashboard-card": {
-      "header": "crwdns38312:0crwdne38312:0",
+      "heading": "crwdns38312:0crwdne38312:0",
       "desc": "crwdns38314:0crwdne38314:0"
     },
     "sales-card": {
-      "header": "crwdns38316:0crwdne38316:0",
+      "heading": "crwdns38316:0crwdne38316:0",
       "desc": "crwdns38318:0crwdne38318:0"
     },
     "fill": {
-      "header": "crwdns32104:0crwdne32104:0",
+      "heading": "crwdns32104:0crwdne32104:0",
       "desc": "crwdns32106:0crwdne32106:0"
     }
   },

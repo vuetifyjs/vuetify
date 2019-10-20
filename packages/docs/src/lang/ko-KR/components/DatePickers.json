@@ -2,85 +2,85 @@
   "examples": {
     "date-allowed-dates": {
       "desc": "배열, 오브젝트, 함수를 이용하여 선택 가능한 날짜를 정할 수 있습니다.",
-      "header": "Date pickers - 특정 날짜 허용 (Allowed dates)"
+      "heading": "Date pickers - 특정 날짜 허용 (Allowed dates)"
     },
     "date-birthday": {
       "desc": "기본적으로 년도를 먼저 선택하고, 월/일로 줄여나간 후 날짜를 선택하면 종료되는 방법으로 완벽한 생년월일 선택기를 만들 수 있습니다.",
-      "header": "Date pickers - 생년월일 선택기 (birthday picker)"
+      "heading": "Date pickers - 생년월일 선택기 (birthday picker)"
     },
     "date-colorable": {
       "desc": "날짜 선택기의 색은 `color` 와 `head-color` prop으로 설정할 수 있습니다. `if-header-color` prop이 없으면 `color` prop의 값이 사용됩니다.",
-      "header": "Date pickers - 색상 (Colors)"
+      "heading": "Date pickers - 색상 (Colors)"
     },
     "date-current": {
-      "header": "Date pickers - 오늘 날짜 표시 (current date indicator)"
+      "heading": "Date pickers - 오늘 날짜 표시 (current date indicator)"
     },
     "date-dialog-and-menu": {
-      "header": "Date pickers - 대화창과 메뉴에서 사용하기 (In dialog and menu)"
+      "heading": "Date pickers - 대화창과 메뉴에서 사용하기 (In dialog and menu)"
     },
     "date-events": {
       "desc": "배열, 오브젝트, 함수를 사용해서 이벤트를 지정할 수 있습니다. 기본 색깔을 바꾸려면 **event-color** prop을 사용합니다.",
-      "header": "Date pickers - 이벤트 (Events)"
+      "heading": "Date pickers - 이벤트 (Events)"
     },
     "date-formatting": {
-      "header": "Date pickers - formatting date"
+      "heading": "Date pickers - formatting date"
     },
     "date-icons": {
       "desc": "선택기에서 사용하는 아이콘을 바꿀 수 있습니다.",
-      "header": "Date pickers - 아이콘 (icons)"
+      "heading": "Date pickers - 아이콘 (icons)"
     },
     "date-internationalization": {
       "desc": "자바스크립트의 Date 오브젝트를 통해 국제화를 지원합니다. `locale` prop에 BCP 47 언어 태그를 지정하고 `first-day-of-week` prop으로 한 주의 시작 요일을 설정하세요.",
-      "header": "Date pickers - 국제화 (Internationalization)"
+      "heading": "Date pickers - 국제화 (Internationalization)"
     },
     "date-picker-date": {
-      "header": "Date pickers - react to disaplyed month/year change"
+      "heading": "Date pickers - react to disaplyed month/year change"
     },
     "date-readonly": {
       "desc": "**readonly** prop은 날짜 선택을 비활성화 합니다.",
-      "header": "Date pickers - 읽기전용 (read only)"
+      "heading": "Date pickers - 읽기전용 (read only)"
     },
     "date-width": {
       "desc": "피커의 너비를 지정하거나 전체 너비로 만들 수도 있습니다.",
-      "header": "Date pickers - 너비 조절 (Setting picker width)"
+      "heading": "Date pickers - 너비 조절 (Setting picker width)"
     },
     "month-allowed-months": {
       "desc": "배열, 오브젝트, 함수를 이용하여 선택 가능한 달를 정할 수 있습니다.",
-      "header": "Month pickers - 특정 달 허용 (Allowed dates)"
+      "heading": "Month pickers - 특정 달 허용 (Allowed dates)"
     },
     "month-colorable": {
       "desc": "Month picker의 색은 `color` 와 `head-color` prop으로 설정할 수 있습니다. `if-header-color` prop이 없으면 `color` prop의 값이 사용됩니다.",
-      "header": "Month pickers - 색상 (Colors)"
+      "heading": "Month pickers - 색상 (Colors)"
     },
     "month-current": {
-      "header": "Month pickers - 현재 월 표시 (current month indicator)"
+      "heading": "Month pickers - 현재 월 표시 (current month indicator)"
     },
     "month-dialog-and-menu": {
-      "header": "Month pickers - 대화창과 메뉴에서 사용하기 (In dialog and menu)"
+      "heading": "Month pickers - 대화창과 메뉴에서 사용하기 (In dialog and menu)"
     },
     "month-events": {
       "desc": "배열, 오브젝트, 함수를 사용해서 이벤트를 지정할 수 있습니다. 기본 색깔을 바꾸려면 **event-color** prop을 사용합니다."
     },
     "month-icons": {
       "desc": "선택기에서 사용하는 아이콘을 바꿀 수 있습니다.",
-      "header": "Month pickers - 아이콘 (icons)"
+      "heading": "Month pickers - 아이콘 (icons)"
     },
     "month-internationalization": {
       "desc": "자바스크립트의 Date 오브젝트를 통해 국제화를 지원합니다. `locale` prop에 BCP 47 언어 태그를 지정하고 `first-day-of-week` prop으로 한 주의 시작 요일을 설정하세요.",
-      "header": "Month pickers - 국제화 (Internationalization)"
+      "heading": "Month pickers - 국제화 (Internationalization)"
     },
     "month-light": {
       "desc": "Month pickers 는 세로(portrait) 와 가로(landscape0) 두 방향의 변형이 있습니다. 기본 모드는 세로입니다.",
-      "header": "월 선택기 (Month pickers)"
+      "heading": "월 선택기 (Month pickers)"
     },
     "month-readonly": {
       "desc": "**readonly** prop은 날짜 선택을 비활성화 합니다.",
-      "header": "Month pickers - 읽기전용 (read only)"
+      "heading": "Month pickers - 읽기전용 (read only)"
     },
     "month-width": {
       "desc": "피커의 너비를 지정하거나 전체 너비로 만들 수도 있습니다.",
-      "header": "Month pickers - 너비 조절 (Setting picker width)"
+      "heading": "Month pickers - 너비 조절 (Setting picker width)"
     }
   },
-  "headerText": "`v-date-picker`는 여러 다른 Vuetify 컴포넌트에서 쓰일 수 있는 독립적 컴포넌트입니다.\n 이 컴포넌트는 날짜/월을 선택할 수 있는 시각적 표현을 제공합니다."
+  "headingText": "`v-date-picker`는 여러 다른 Vuetify 컴포넌트에서 쓰일 수 있는 독립적 컴포넌트입니다.\n 이 컴포넌트는 날짜/월을 선택할 수 있는 시각적 표현을 제공합니다."
 }

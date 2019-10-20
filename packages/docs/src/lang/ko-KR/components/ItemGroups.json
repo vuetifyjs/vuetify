@@ -1,7 +1,7 @@
 {
   "examples": {
     "multiple": {
-      "header": "복수선택 (Multiple)"
+      "heading": "복수선택 (Multiple)"
     }
   }
 }

@@ -1,9 +1,9 @@
 {
-  "header": "Bottom nav",
-  "headerText": "O `v-bottom-navigation` é uma alternativa à barra lateral. É usado principalmente em dispositivos móveis e tem duas variações: ícones e textos, e deslocamento.",
+  "heading": "Bottom nav",
+  "headingText": "O `v-bottom-navigation` é uma alternativa à barra lateral. É usado principalmente em dispositivos móveis e tem duas variações: ícones e textos, e deslocamento.",
   "examples": {
     "toggle": {
-      "header": "Alternância"
+      "heading": "Alternância"
     }
   }
 }

@@ -1,40 +1,40 @@
 {
-  "header": "crwdns39986:0crwdne39986:0",
-  "headerText": "crwdns33550:0crwdne33550:0",
+  "heading": "crwdns39986:0crwdne39986:0",
+  "headingText": "crwdns33550:0crwdne33550:0",
   "examples": {
     "usage": {
       "desc": "crwdns33552:0crwdne33552:0"
     },
     "loading": {
-      "header": "crwdns39988:0crwdne39988:0",
+      "heading": "crwdns39988:0crwdne39988:0",
       "desc": "crwdns39990:0crwdne39990:0"
     },
     "success": {
-      "header": "crwdns39992:0crwdne39992:0",
+      "heading": "crwdns39992:0crwdne39992:0",
       "desc": "crwdns39994:0crwdne39994:0"
     },
     "error": {
-      "header": "crwdns39996:0crwdne39996:0",
+      "heading": "crwdns39996:0crwdne39996:0",
       "desc": "crwdns39998:0crwdne39998:0"
     },
     "multi-error": {
-      "header": "crwdns40000:0crwdne40000:0",
+      "heading": "crwdns40000:0crwdne40000:0",
       "desc": "crwdns40002:0crwdne40002:0"
     },
     "rules": {
-      "header": "crwdns40004:0crwdne40004:0",
+      "heading": "crwdns40004:0crwdne40004:0",
       "desc": "crwdns40006:0crwdne40006:0"
     },
     "slot-events": {
-      "header": "crwdns40008:0crwdne40008:0",
+      "heading": "crwdns40008:0crwdne40008:0",
       "desc": "crwdns40010:0crwdne40010:0"
     },
     "slots": {
-      "header": "crwdns40012:0crwdne40012:0",
+      "heading": "crwdns40012:0crwdne40012:0",
       "desc": "crwdns40014:0crwdne40014:0"
     },
     "hint": {
-      "header": "crwdns40016:0crwdne40016:0",
+      "heading": "crwdns40016:0crwdne40016:0",
       "desc": "crwdns40018:0crwdne40018:0"
     }
   },

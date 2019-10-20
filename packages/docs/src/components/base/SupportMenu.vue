@@ -2,30 +2,37 @@
   <v-menu
     bottom
     left
-    offset-y
     max-height="calc(100% - 16px)"
+    offset-y
+    transition="slide-y-transition"
   >
-    <template #activator="{ on: menu }">
+    <template v-slot:activator="{ on: menu }">
       <v-btn
         :aria-label="$t('Vuetify.AppToolbar.support')"
         text
         style="min-width: 48px"
         v-on="menu"
       >
-        <span
-          class="hidden-sm-and-down mr-1"
-          v-text="$t('Vuetify.AppToolbar.support')"
-        />
-        <v-icon class="hidden-sm-and-down">mdi-menu-down</v-icon>
+        <base-nav-text class="hidden-sm-and-down">Vuetify.AppToolbar.support</base-nav-text>
+
+        <v-icon
+          class="hidden-sm-and-down"
+          right
+        >
+          mdi-menu-down
+        </v-icon>
+
         <v-icon class="hidden-md-and-up">mdi-comment-question</v-icon>
       </v-btn>
     </template>
+
     <v-list
       dense
       nav
     >
       <v-subheader v-text="$t('Vuetify.AppToolbar.getHelp')" />
-      <core-item
+
+      <base-item
         v-for="support in supports"
         :key="support.text"
         v-bind="support"
@@ -38,6 +45,8 @@
 
 <script>
   export default {
+    name: 'BaseSupportMenu',
+
     data: vm => ({
       supports: [
         {

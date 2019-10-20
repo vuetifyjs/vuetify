@@ -1,16 +1,16 @@
 {
-  "headerText": "`v-carousel`组件用于在旋转的计时器上显示大量的可视内容。",
+  "headingText": "`v-carousel`组件用于在旋转的计时器上显示大量的可视内容。",
   "examples": {
     "custom-transition": {
-      "header": "自定义过渡",
+      "heading": "自定义过渡",
       "desc": "您也可以应用您自己的自定义过渡。"
     },
     "custom-icons": {
-      "header": "自定义分隔符",
+      "heading": "自定义分隔符",
       "desc": "您也可以更改轮播分隔符的图标。"
     },
     "hide-controls": {
-      "header": "隐藏控件"
+      "heading": "隐藏控件"
     }
   },
   "props": {

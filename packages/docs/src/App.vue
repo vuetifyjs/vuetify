@@ -44,12 +44,19 @@
   }
 </script>
 
-<style>
-  .text-decoration-none {
-    text-decoration: none;
-  }
+<style lang="sass">
+  .text-decoration-none
+    text-decoration: none
 
-  .wf-loading .material-icons {
-    display: none;
-  }
+  .wf-loading .material-icons
+    display: none
+
+  .v-application code
+    box-shadow: none
+    color: #c0341d
+    background-color: #fbe5e1
+
+  .v-application kbd > code
+    background: transparent
+    color: inherit
 </style>

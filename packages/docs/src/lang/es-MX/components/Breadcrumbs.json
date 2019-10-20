@@ -1,8 +1,8 @@
 {
-  "header": "Breadcrumbs",
+  "heading": "Breadcrumbs",
   "examples": {
     "icon-dividers": {
-      "header": "Divisores de íconos",
+      "heading": "Divisores de íconos",
       "desc": "Para la variante de íconos, los breadcrumbs pueden ser utilizados con cualquier ícono de Material Design."
     }
   }

@@ -24,80 +24,47 @@
 </script>
 
 <style lang="sass">
-#ad__container
   #carbonads
-    a
-      color: #000
-      display: inline-block
-      text-decoration: none
-
-      &.carbon-poweredby
-        color: rgba(#000, .87)
-        text-transform: uppercase
-        letter-spacing: 1px
-        font-size: 9px !important
-        max-width: 42px
-
-  .v-system-bar
-    > div
-      flex: 1 1 100%
-
     .carbon-wrap
       display: flex
 
-    .carbon-img
-      > img
-        max-width: 39px !important
-        min-height: 30px
+      img
+        margin-bottom: -6px
 
-  .v-system-bar,
-  .v-bottom-navigation
-    #carbonads
-      height: 100%
+    .carbon-text,
+    .carbon-poweredby
+      max-width: 200px
+      padding: 0 0 0 16px
+      text-decoration: none
 
-      > span
-        display: flex
-        height: 100%
-
-    .carbon-img
-      > img
-        margin-right: 8px
-        height: 100%
-        vertical-align: middle
-
-  .v-system-bar #carbonads
     .carbon-text
-      font-size: 10px
-      padding-right: 8px
-
-    .carbon-wrap
-      flex: 1 1 70%
-
-  .v-bottom-navigation #carbonads
-    padding: 0 16px
-
-    > span
-      align-items: center
-      justify-content: space-between
-
-  .v-navigation-drawer #carbonads
-    display: flex
-    justify-content: center
-    z-index: 3
-    margin-bottom: 48px
-
-    > span
-      background: rgba(#000, .03)
-      display: inline-block
-      padding: 8px
-      max-width: 146px
+      color: #333
+      font-size: 0.875rem
 
     .carbon-poweredby
-      white-space: nowrap
+      color: rgba(0, 0, 0, .56)
+      font-size: 0.75rem
+      position: absolute
+      right: 16px
+      bottom: 16px
 
-    a
-      &.carbon-text
-        display: block
-        font-size: 12px
-        margin-bottom: .5em
+    // a
+    //   color: #000
+    //   display: inline-block
+    //   text-decoration: none
+
+    //   &.carbon-poweredby
+    //     color: rgba(#000, .87)
+    //     text-transform: uppercase
+    //     letter-spacing: 1px
+    //     font-size: 9px !important
+    //     max-width: 42px
+
+    //   &.carbon-text
+    //     display: block
+    //     font-size: 12px
+    //     margin-bottom: .5em
+
+    // .carbon-poweredby
+    //   white-space: nowrap
 </style>

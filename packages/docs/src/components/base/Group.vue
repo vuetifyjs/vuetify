@@ -13,12 +13,12 @@
       </v-list-item-content>
     </template>
     <template v-for="(child, i) in children">
-      <core-sub-group
+      <base-sub-group
         v-if="child.group != null"
         :key="`sub-group-${i}`"
         :item="child"
       />
-      <core-item
+      <base-item
         v-else
         :key="`item-${i}`"
         :chip="genChip(child)"

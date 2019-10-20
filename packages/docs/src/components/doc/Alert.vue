@@ -3,6 +3,7 @@
     :type="value"
     border="left"
     class="app-alert mb-4"
+    text
     value
   >
     <doc-markdown><slot /></doc-markdown>
@@ -25,8 +26,10 @@
 <style lang="sass">
 .app-alert
   a
-    color: #fff
-    text-decoration: underline
+    font-weight: 500
+
+    &:hover
+      text-decoration: underline
 
   p
     margin: 0 !important

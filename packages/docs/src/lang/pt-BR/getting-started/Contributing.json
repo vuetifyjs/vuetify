@@ -1,6 +1,6 @@
 {
-  "header": "Seja parte de algo grandioso!",
-  "headerText": "Vuetify tornou-se possível pelo fato de ter uma comunidade incrível que envia issues, cria pull requests e fornece um feedback inestimável. É nosso trabalho permitir que você crie aplicativos incríveis. Muitas vezes, você encontra algo que pode ser melhorado. Talvez você encontre um bug ou tenha uma ideia de funcionalidades adicionais. Isso é ótimo! É tão fácil como clonar o repositório do Vuetify para começar a trabalhar em um ambiente de desenvolvimento.",
+  "heading": "Seja parte de algo grandioso!",
+  "headingText": "Vuetify tornou-se possível pelo fato de ter uma comunidade incrível que envia issues, cria pull requests e fornece um feedback inestimável. É nosso trabalho permitir que você crie aplicativos incríveis. Muitas vezes, você encontra algo que pode ser melhorado. Talvez você encontre um bug ou tenha uma ideia de funcionalidades adicionais. Isso é ótimo! É tão fácil como clonar o repositório do Vuetify para começar a trabalhar em um ambiente de desenvolvimento.",
   "issue1": "A lista de issues deste repositório é exclusivamente para lista de erros e solicitações de recursos. As issues não conformes serão fechadas imediatamente.",
   "issue2": "Para perguntas gerais, junte-se à [comunidade](https://chat.vuetifyjs.com).",
   "issue3": "Tente procurar por seu problema, ele pode ter sido respondido.",

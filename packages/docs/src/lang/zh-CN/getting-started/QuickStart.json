@@ -1,6 +1,6 @@
 {
-  "header": "# 快速入门",
-  "headerText": "使用其中一个 Vuetify Vue CLI 安装包 _(基于官方示例)_ 立即开始您的项目。 Vuetify 支持 **SSR**（服务端渲染）,**SPA**（单页应用程序）,**PWA**（渐进式Web应用程序）和标准 **HTML** 页面。",
+  "heading": "# 快速入门",
+  "headingText": "使用其中一个 Vuetify Vue CLI 安装包 _(基于官方示例)_ 立即开始您的项目。 Vuetify 支持 **SSR**（服务端渲染）,**SPA**（单页应用程序）,**PWA**（渐进式Web应用程序）和标准 **HTML** 页面。",
   "vueCliHeader": "## Vue CLI 3 安装",
   "vueCliText1": "Vue CLI 3 是下一代 cli 工具，目标是更容易地入门。当你使用 Vue CLI 3 启动应用程序时，你可以很轻松的获得官方 webpack 的更新、配置更改，以及 Vuetify 更新。",
   "vueCliText2": "如何使用 Vue CLI 3，请查阅 [官方文档](https://cli.vuejs.org/zh/guide/)",

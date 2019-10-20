@@ -1,43 +1,43 @@
 {
-  "header": "Mouvement",
-  "headerText": "Les animations douces aident à rendre l'UI agréable. En utilisant le système de transition de Vue et les composants fonctionnels réutilisables, vous pouvez facilement contrôler le mouvement de votre application. La plupart des composants peuvent avoir leur transition modifiée à travers le <code>transition</code> prop.",
+  "heading": "Mouvement",
+  "headingText": "Les animations douces aident à rendre l'UI agréable. En utilisant le système de transition de Vue et les composants fonctionnels réutilisables, vous pouvez facilement contrôler le mouvement de votre application. La plupart des composants peuvent avoir leur transition modifiée à travers le <code>transition</code> prop.",
   "examples": {
     "usage": {
       "desc": "Vuetify est possède plus de 10 animations css personnalisées qui peuvent être appliquées à de nombreux composants ou votre propre cas d'utilisation personnalisé"
     },
     "slide-x-transitions": {
-      "header": "### Slide X Transitions",
+      "heading": "### Slide X Transitions",
       "desc": "Les transitions Slide x se déplacent sur l'axe horizontal."
     },
     "slide-y-transitions": {
-      "header": "### Slide Y Transitions",
+      "heading": "### Slide Y Transitions",
       "desc": "Les animations utilisent l'application <code>$primary-transition</code>."
     },
     "scroll-x-transitions": {
-      "header": "### Transitions Scroll X",
+      "heading": "### Transitions Scroll X",
       "desc": "Les transitions de Scroll X se poursuivent le long de l'axe horizontal."
     },
     "scroll-y-transitions": {
-      "header": "### Transitions de défilement Y",
+      "heading": "### Transitions de défilement Y",
       "desc": "Les transitions de défilement Y se poursuivent le long de l'axe vertical."
     },
     "scale-transition": {
-      "header": "### transition d'échelle"
+      "heading": "### transition d'échelle"
     },
     "fade-transition": {
-      "header": "### Transition fondu",
+      "heading": "### Transition fondu",
       "desc": "Un autre exemple de transition en fondu se trouve sur le composant Carousel."
     },
     "expand-transition": {
-      "header": "### Transition par expansion",
+      "heading": "### Transition par expansion",
       "desc": "La transition d'expansion est utilisée dans les groupes d'extension et de liste. Il y a aussi une version horizontale disponible avec `v-expansion-x-transition`."
     },
     "custom-origin": {
-      "header": "### Origine personnalisée",
+      "heading": "### Origine personnalisée",
       "desc": "Contrôlez l'origine de transition en codant avec un simple prop."
     },
     "todo": {
-      "header": "### Todo list",
+      "heading": "### Todo list",
       "desc": "En utilisant plusieurs transitions personnalisées, il est facile d'apporter une simple liste de todo à vie!"
     }
   },

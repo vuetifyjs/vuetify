@@ -1,6 +1,6 @@
 {
-  "header": "# Thèmes",
-  "headerText": "Modifiez facilement les couleurs de votre application programmatiquement. Reconstruisez la feuille de style par défaut et personnalisez divers aspects du framework pour vos besoins particuliers.",
+  "heading": "# Thèmes",
+  "headingText": "Modifiez facilement les couleurs de votre application programmatiquement. Reconstruisez la feuille de style par défaut et personnalisez divers aspects du framework pour vos besoins particuliers.",
   "lightAndDarkHeader": "## Clair et sombre",
   "lightAndDarkText1": "Vuetify supporte les variantes **light** et **dark** de la spec Material Design. Cette désignation commence au composant racine de l'application, `v-app` et est supportée par la majorité des composants. Par défaut, votre application utilisera le thème **light** mais cela peut être facilement changé en ajoutant l'option **dark** dans le service de thème.",
   "lightAndDarkText2": "Lorsque vous désignez un composant comme light ou dark, tous ses enfants hériteront et appliqueront le même si vous ne le spécifiez pas autrement. Vous pouvez activer ou désactiver manuellement **dark** en changeant `this.$vuetify.theme.dark` en **true** ou **false**.",

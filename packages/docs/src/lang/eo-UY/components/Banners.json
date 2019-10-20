@@ -1,28 +1,28 @@
 {
-  "header": "crwdns40752:0crwdne40752:0",
-  "headerText": "crwdns40754:0crwdne40754:0",
+  "heading": "crwdns40752:0crwdne40752:0",
+  "headingText": "crwdns40754:0crwdne40754:0",
   "examples": {
     "usage": {
       "desc": "crwdns40756:0crwdne40756:0"
     },
     "single-line": {
-      "header": "crwdns40758:0crwdne40758:0",
+      "heading": "crwdns40758:0crwdne40758:0",
       "desc": "crwdns40760:0crwdne40760:0"
     },
     "two-line": {
-      "header": "crwdns40762:0crwdne40762:0",
+      "heading": "crwdns40762:0crwdne40762:0",
       "desc": "crwdns40764:0crwdne40764:0"
     },
     "icon-slot": {
-      "header": "crwdns40766:0crwdne40766:0",
+      "heading": "crwdns40766:0crwdne40766:0",
       "desc": "crwdns40768:0crwdne40768:0"
     },
     "icon-event": {
-      "header": "crwdns40770:0crwdne40770:0",
+      "heading": "crwdns40770:0crwdne40770:0",
       "desc": "crwdns40772:0crwdne40772:0"
     },
     "actions-slots": {
-      "header": "crwdns40774:0crwdne40774:0",
+      "heading": "crwdns40774:0crwdne40774:0",
       "desc": "crwdns40776:0crwdne40776:0"
     }
   },

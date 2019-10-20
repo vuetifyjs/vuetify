@@ -1,11 +1,11 @@
 {
   "examples": {
     "single-line": {
-      "header": "### Ligne unique",
+      "heading": "### Ligne unique",
       "desc": "Les champs de texte en ligne unique ne flottent pas leur étiquette sur la cible ou avec les données."
     },
     "dense": {
-      "header": "### Dense"
+      "heading": "### Dense"
     }
   },
   "props": {
