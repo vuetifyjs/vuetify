@@ -51,12 +51,12 @@
   .wf-loading .material-icons
     display: none
 
-  .v-application code
+  .v-application .markdown code
     box-shadow: none
     color: #c0341d
     background-color: #fbe5e1
 
-  .v-application kbd > code
+  .v-application .markdown kbd > code
     background: transparent
     color: inherit
 </style>

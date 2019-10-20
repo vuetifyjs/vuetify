@@ -39,6 +39,10 @@
   export default {
     name: 'HomeMadeWithVuetify',
 
+    provide: {
+      id: 'home-made-with-vuetify',
+    },
+
     components: {
       HomeCards: () => import('./Cards'),
     },

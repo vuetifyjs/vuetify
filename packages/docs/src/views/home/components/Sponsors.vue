@@ -8,7 +8,7 @@
       color="grey lighten-5"
       tag="v-container"
     >
-      <base-subheading>Vuetify.Home.proudlySponsoredBy</base-subheading>
+      <base-heading>Vuetify.Home.proudlySponsoredBy</base-heading>
 
       <base-text
         class="mx-auto mb-6"
@@ -34,6 +34,10 @@
 <script>
   export default {
     name: 'HomeSponsors',
+
+    provide: {
+      id: 'home-sponsors',
+    },
   }
 </script>
 

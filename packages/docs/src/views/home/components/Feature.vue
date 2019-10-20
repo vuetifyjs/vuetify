@@ -3,7 +3,7 @@
     id="home-feature"
     class="text-center"
   >
-    <base-subheading>Vuetify.Home.whyVuetify</base-subheading>
+    <base-heading>Vuetify.Home.whyVuetify</base-heading>
 
     <base-text
       class="mx-auto"
@@ -51,6 +51,10 @@
 <script>
   export default {
     name: 'HomeFeature',
+
+    provide: {
+      id: 'home-feature',
+    },
 
     data: () => ({
       // TODO: Move this to somewhere in data

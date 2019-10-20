@@ -1,6 +1,8 @@
 <template>
   <v-content>
-    <router-view />
+    <v-responsive min-height="100vh">
+      <router-view />
+    </v-responsive>
   </v-content>
 </template>
 

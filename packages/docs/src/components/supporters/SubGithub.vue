@@ -6,7 +6,7 @@
     wrap
   >
     <v-flex xs12>
-      <doc-heading goto="one-time-donation">github</doc-heading>
+      <base-heading goto="one-time-donation">github</base-heading>
     </v-flex>
 
     <v-flex

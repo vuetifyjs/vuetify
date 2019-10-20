@@ -2071,11 +2071,6 @@
     npmlog "^4.1.2"
     write-file-atomic "^2.3.0"
 
-"@mdi/font@^3.8.95":
-  version "3.8.95"
-  resolved "https://registry.yarnpkg.com/@mdi/font/-/font-3.8.95.tgz#772094ed7046b126457b1f3b8c82e26b209e71e8"
-  integrity sha512-KR6TBdVYV3p1ZOM+Ge45Kk3P8yHfSGt3YOryVlkEKdO3vMiPjRaaDcQsdogGxVl8FcXsAt/Gz8MoXObbOF1Pzg==
-
 "@mdi/js@^3.8.95":
   version "3.8.95"
   resolved "https://registry.yarnpkg.com/@mdi/js/-/js-3.8.95.tgz#bc25ef11c475fdc6368dab1588e1ee93f724f286"

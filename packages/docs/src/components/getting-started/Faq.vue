@@ -33,7 +33,7 @@
               :id="gotcha.id"
               class="mb-12"
             >
-              <core-goto
+              <base-goto
                 :id="gotcha.id"
                 :code="gotcha.q"
               />

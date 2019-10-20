@@ -1,23 +1,11 @@
 <template>
   <section
     v-if="structure !== false"
-    :id="id"
+    :id="page"
   >
-    <base-heading>heading</base-heading>
-
-    <base-text>headingText</base-text>
-
-    <v-card
-      class="pa-4 d-inline-block my-6"
-      color="grey lighten-3"
-      flat
-    >
-      <ad-carbon />
-    </v-card>
-
     <component
       :is="getComponent(child.type)"
-      v-for="(child, i) in structure.children"
+      v-for="(child, i) in structure"
       :key="`${id}-${i}`"
       :value="child"
     />
@@ -29,6 +17,7 @@
 <script>
   // Utilities
   import {
+    get,
     sync,
   } from 'vuex-pathify'
   import kebabCase from 'lodash/kebabCase'
@@ -75,13 +64,11 @@
     computed: {
       namespace: sync('route/params@namespace'),
       page: sync('route/params@page'),
-      structure: sync('documentation/structure'),
+      structure: get('documentation/structure'),
       id () {
         if (!this.structure) return ''
 
-        return kebabCase(this.$t(
-          `${this.namespace}.${this.page}`
-        ))
+        return this.page
       },
       text () {
         if (!this.structure) return ''

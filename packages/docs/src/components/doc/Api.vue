@@ -1,6 +1,6 @@
 <template>
   <div>
-    <doc-heading>Generic.Pages.api</doc-heading>
+    <base-heading>Generic.Pages.api</base-heading>
     <v-card outlined>
       <v-toolbar
         class="px-2 py-3"

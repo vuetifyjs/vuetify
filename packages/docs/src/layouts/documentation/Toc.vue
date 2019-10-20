@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer
+    v-scroll="onScroll"
     app
     clipped
     floating
@@ -12,25 +13,27 @@
         <h3 class="grey--text text--darken-3 body-1">Contents</h3>
       </li>
 
-      <li
-        v-for="(item, i) in toc"
-        :key="i"
-        :class="{
-          'primary--text': activeIndex === i,
-          'text--disabled': activeIndex !== i
-        }"
-        :style="{
-          borderColor: activeIndex === i ? 'currentColor' : undefined
-        }"
-        class="mb-2 documentation-toc__link"
-      >
-        <a
-          :href="`#${item.id}`"
-          class="d-block"
-          @click.stop.prevent="goTo(`#${item.id}`)"
-          v-html="item.text"
-        />
-      </li>
+      <template v-for="(item, i) in toc">
+        <li
+          v-if="item.visible"
+          :key="i"
+          :class="{
+            'primary--text': activeIndex === i,
+            'text--disabled': activeIndex !== i
+          }"
+          :style="{
+            borderColor: activeIndex === i ? 'currentColor' : undefined
+          }"
+          class="mb-2 documentation-toc__link"
+        >
+          <a
+            :href="`#${item.id}`"
+            class="d-block"
+            @click.stop.prevent="goTo(`#${item.id}`)"
+            v-html="item.text"
+          />
+        </li>
+      </template>
     </ul>
   </v-navigation-drawer>
 </template>
@@ -38,8 +41,9 @@
   // Utilities
   import { goTo } from '@/util/helpers'
   import {
-    sync,
+    get,
   } from 'vuex-pathify'
+  import kebabCase from 'lodash/kebabCase'
 
   export default {
     data: () => ({
@@ -48,7 +52,28 @@
     }),
 
     computed: {
-      toc: sync('documentation/toc'),
+      headings: get('documentation/headings'),
+      namespace: get('documentation/namespace'),
+      page: get('documentation/page'),
+      toc () {
+        const t = string => this.$t(`${this.namespace}.${this.page}.${string}`)
+
+        return this.headings
+          .map(h => {
+            const translation = t(h)
+            let text = translation.split(' ')
+
+            text.shift()
+            text = text.join(' ')
+
+            return {
+              id: kebabCase(text),
+              text,
+              visible: translation.indexOf('###') === -1,
+            }
+          })
+          .filter(h => h.visible)
+      },
     },
 
     methods: {
@@ -96,7 +121,7 @@
 
     li
       border-left: 2px solid transparent
-      padding-left: 8px
+      padding: 0 24px 0 8px
 
     li a
       color: inherit

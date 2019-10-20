@@ -1,6 +1,6 @@
 <template>
   <div>
-    <doc-heading>Generic.Pages.upNext</doc-heading>
+    <base-heading>Generic.Pages.upNext</base-heading>
     <v-container
       fluid
       grid-list-xl

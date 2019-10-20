@@ -1,6 +1,6 @@
 <template>
   <div class="text-center home-cards">
-    <base-subheading>{{ heading }}</base-subheading>
+    <base-heading>{{ heading }}</base-heading>
 
     <base-text
       v-if="subheading"

@@ -26,6 +26,7 @@
 <style lang="sass">
 .app-alert
   a
+    color: inherit
     font-weight: 500
 
     &:hover

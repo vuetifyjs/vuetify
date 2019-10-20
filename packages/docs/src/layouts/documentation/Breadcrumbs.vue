@@ -1,28 +1,20 @@
 <template>
   <v-breadcrumbs
-    :items="items"
+    :items="breadcrumbs"
     class="px-0 py-5"
   />
 </template>
 <script>
+  // Utilities
+  import {
+    get,
+  } from 'vuex-pathify'
+
   export default {
     name: 'DocumentationBreadcrumbs',
 
-    data: () => ({
-      items: [
-        {
-          text: 'Documentation',
-          disabled: true,
-        },
-        {
-          text: 'Getting started',
-          disabled: true,
-        },
-        {
-          text: 'Quick start',
-          href: '#',
-        },
-      ],
-    }),
+    computed: {
+      breadcrumbs: get('documentation/breadcrumbs'),
+    }
   }
 </script>

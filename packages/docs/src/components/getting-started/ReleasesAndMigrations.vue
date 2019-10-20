@@ -8,7 +8,7 @@
       mb-12
     >
       <section id="release-notes">
-        <doc-heading id="release-notes">releaseHeader</doc-heading>
+        <base-heading id="release-notes">releaseHeader</base-heading>
         <v-autocomplete
           v-model="releaseNotes"
           :items="releases"
@@ -72,7 +72,7 @@
       mb-12
     >
       <section id="migration-guide">
-        <doc-heading id="migration-guide">migrationHeader</doc-heading>
+        <base-heading id="migration-guide">migrationHeader</base-heading>
 
         <v-card
           outlined

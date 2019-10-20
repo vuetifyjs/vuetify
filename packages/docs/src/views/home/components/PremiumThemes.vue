@@ -33,6 +33,10 @@
   export default {
     name: 'HomePremiumThemes',
 
+    provide: {
+      id: 'home-premium-themes',
+    },
+
     components: {
       HomeCards: () => import('./Cards'),
     },

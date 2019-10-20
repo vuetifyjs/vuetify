@@ -1,24 +1,32 @@
+<template>
+  <v-card
+    class="pa-4 d-inline-block"
+    color="grey lighten-3"
+    flat
+    min-height="133"
+    min-width="362"
+  >
+    <div id="carbonads"><!-- Ad --></div>
+  </v-card>
+</template>
+
 <script>
-  import Script from './Script'
-
   export default {
-    extends: Script,
+    name: 'AdCarbon',
 
-    props: {
-      scriptId: {
-        type: String,
-        default: '_carbonads_js',
-      },
-      src: {
-        type: String,
-        default: '//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuetifyjscom',
-      },
-    },
+    mounted () {
+      // Do nothing on ssr
+      if (this.$ssrContext) return
 
-    methods: {
-      serve () {
-        window._carbonads && window._carbonads.refresh()
-      },
+      const script = document.createElement('script')
+
+      script.type = 'text/javascript'
+      script.id = '_carbonads_js'
+      script.src = '//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuetifyjscom'
+
+      this.$el && this.$el.append(script)
+
+      this.isLoading = false
     },
   }
 </script>
@@ -37,6 +45,9 @@
       padding: 0 0 0 16px
       text-decoration: none
 
+    .carbon-img img
+      border-radius: 4px 0 0 4px
+
     .carbon-text
       color: #333
       font-size: 0.875rem
@@ -47,24 +58,4 @@
       position: absolute
       right: 16px
       bottom: 16px
-
-    // a
-    //   color: #000
-    //   display: inline-block
-    //   text-decoration: none
-
-    //   &.carbon-poweredby
-    //     color: rgba(#000, .87)
-    //     text-transform: uppercase
-    //     letter-spacing: 1px
-    //     font-size: 9px !important
-    //     max-width: 42px
-
-    //   &.carbon-text
-    //     display: block
-    //     font-size: 12px
-    //     margin-bottom: .5em
-
-    // .carbon-poweredby
-    //   white-space: nowrap
 </style>

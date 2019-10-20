@@ -1,5 +1,8 @@
 <template>
-  <v-list class="transparent py-0">
+  <v-list
+    class="py-0"
+    color="grey lighten-3"
+  >
     <v-row dense>
       <v-col
         v-for="browser in browsers"

@@ -1,14 +1,9 @@
 <script>
   // Utilities
-  import kebabCase from 'lodash/kebabCase'
   import marked from 'marked'
   import { parseLink } from '@/util/helpers'
   import {
-    mapGetters,
-    mapState,
-  } from 'vuex'
-  import {
-    sync,
+    get,
   } from 'vuex-pathify'
 
   marked.setOptions({
@@ -32,12 +27,8 @@
     },
 
     computed: {
-      ...mapGetters('documentation', [
-        'namespace',
-        'page',
-      ]),
-      ...mapState('route', ['params']),
-      toc: sync('documentation/toc'),
+      namespace: get('documentation/namespace'),
+      page: get('documentation/page'),
     },
 
     render (h, context) {
@@ -69,23 +60,6 @@
       code = code.replace(/\[([^\]]*)\]\(([^)]*)\)/g, parseLink)
 
       const innerHTML = marked(code)
-      const heading = innerHTML.slice(1, 3)
-
-      if (['h1', 'h2', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(heading)) {
-        const index = innerHTML.indexOf('</')
-        const text = innerHTML.slice(4, index)
-        const id = kebabCase(text)
-
-        console.log('here', heading)
-        console.log('what', this.toc.find(t => t.id === id))
-        if (
-          ['h1', 'h2'].includes(heading) &&
-          !this.toc.find(t => t.id === id)
-        ) {
-          console.log('hi asdfasdfasdf asdf')
-          this.toc.push({ id, text })
-        }
-      }
 
       return h(this.tag, {
         staticClass: 'markdown',
@@ -114,4 +88,13 @@
 
   .markdown > h4
     margin: 8px 0
+
+  .markdown code
+    box-shadow: none !important
+    color: #c0341d !important
+    background-color: #fbe5e1 !important
+
+  .markdown kbd > code
+    background: transparent !important
+    color: inherit !important
 </style>

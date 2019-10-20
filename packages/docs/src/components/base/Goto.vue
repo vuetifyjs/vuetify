@@ -31,7 +31,7 @@
   } from 'vuex'
 
   export default {
-    name: 'CoreGoto',
+    name: 'BaseGoto',
 
     inject: {
       id: {

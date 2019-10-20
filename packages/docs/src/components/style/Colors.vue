@@ -1,6 +1,6 @@
 <template>
   <section id="material-colors">
-    <doc-heading>colorHeader</doc-heading>
+    <base-heading>colorHeader</base-heading>
     <doc-text>colorText</doc-text>
 
     <v-text-field

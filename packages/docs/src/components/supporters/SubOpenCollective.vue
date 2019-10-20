@@ -6,7 +6,7 @@
     wrap
   >
     <v-flex xs12>
-      <doc-heading>openCollective</doc-heading>
+      <base-heading>openCollective</base-heading>
     </v-flex>
 
     <v-flex

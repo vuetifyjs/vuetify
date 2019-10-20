@@ -1,13 +1,13 @@
 <template>
   <div>
-    <doc-heading>Generic.Pages.examples</doc-heading>
+    <base-heading>Generic.Pages.examples</base-heading>
     <div />
     <section
       v-for="(example, i) in examples"
       :id="example.id"
       :key="i"
     >
-      <doc-heading :id="example.id">{{ example.header }}</doc-heading>
+      <base-heading :id="example.id">{{ example.header }}</base-heading>
       <doc-text>{{ example.desc }}</doc-text>
       <doc-example
         :key="i"

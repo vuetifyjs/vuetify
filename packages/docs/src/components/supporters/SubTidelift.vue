@@ -6,7 +6,7 @@
     wrap
   >
     <v-flex xs12>
-      <doc-heading>tidelift</doc-heading>
+      <base-heading>tidelift</base-heading>
     </v-flex>
 
     <v-flex

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <doc-heading>Generic.Pages.usage</doc-heading>
+    <base-heading>Generic.Pages.usage</base-heading>
 
     <doc-text>{{ `${namespace}.${page}.usageText` }}</doc-text>
 

@@ -13,7 +13,9 @@
             class="overflow-visible"
             max-width="550"
           >
-            <base-heading>Vuetify.Home.callout</base-heading>
+            <base-title class="home-hero__title mb-4">
+              <doc-markdown>Vuetify.Home.callout</doc-markdown>
+            </base-title>
 
             <base-text dark>Vuetify.Home.text</base-text>
 
@@ -107,6 +109,9 @@
     a
       color: inherit
       text-decoration: none
+
+  .home-hero__title
+    line-height: 1.2
 
   .v-card--hero
     background: #000
