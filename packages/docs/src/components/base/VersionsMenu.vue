@@ -11,9 +11,8 @@
         text
         v-on="menu"
       >
-        <base-nav-text v-text="version" />
         <span
-          class="text-lowercase mr-1"
+          class="subtitle-1 text-capitalize font-weight-light"
           v-text="version"
         />
 
@@ -27,6 +26,7 @@
         nav
       >
         <v-subheader v-text="$t('Vuetify.AppToolbar.documentation')" />
+
         <base-item
           v-for="(archive, i) in archives"
           :key="`archives-${i}`"

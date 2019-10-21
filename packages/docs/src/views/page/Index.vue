@@ -32,6 +32,8 @@
 
     store.commit('documentation/SET_STRUCTURE', null)
 
+    await new Promise(resolve => setTimeout(resolve, 0))
+
     let structure
 
     try {

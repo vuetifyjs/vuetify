@@ -8,9 +8,7 @@
         <documentation-breadcrumbs />
 
         <v-responsive min-height="90vh">
-          <v-fade-transition hide-on-leave>
-            <router-view :key="$route.path" />
-          </v-fade-transition>
+          <router-view />
         </v-responsive>
 
         <documentation-contribution />
