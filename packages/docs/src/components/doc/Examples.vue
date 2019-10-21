@@ -17,6 +17,11 @@
         :key="i"
         :value="value[i]"
       />
+
+      <ad-card
+        v-if="examples.length > 3 && i === 2"
+        :key="`ad-${i}`"
+      />
     </section>
   </section>
 </template>
@@ -24,8 +29,9 @@
 <script>
   // Utilities
   import {
-    mapGetters,
-  } from 'vuex'
+    get,
+  } from 'vuex-pathify'
+
   import kebabCase from 'lodash/kebabCase'
 
   export default {
@@ -37,10 +43,8 @@
     },
 
     computed: {
-      ...mapGetters('documentation', [
-        'namespace',
-        'page',
-      ]),
+      namespace: get('documentation/namespace'),
+      page: get('documentation/page'),
       examples () {
         return this.value.map(example => {
           const path = example === Object(example) ? example.file : example

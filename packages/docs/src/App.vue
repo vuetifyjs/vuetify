@@ -31,6 +31,12 @@
       },
     },
 
+    watch: {
+      '$route.path' () {
+        window.scrollTo(0, 0)
+      },
+    },
+
     created () {
       if (!this.languageIsValid) this.$router.push(`/${fallbackLocale}`)
     },

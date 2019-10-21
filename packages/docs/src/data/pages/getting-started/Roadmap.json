@@ -5,12 +5,7 @@
     {
       "type": "section",
       "children": [
-        {
-          "type": "getting-started-roadmap"
-        },
-        {
-          "type": "core-support-vuetify"
-        }
+        { "type": "getting-started-roadmap" }
       ]
     }
   ]

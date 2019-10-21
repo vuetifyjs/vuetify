@@ -1,36 +1,45 @@
 <template>
   <v-card
-    :class="isLoading && 'documentation-ad--is-loading'"
-    class="px-4 pt-4 mt-4 mb-8 documentation-ad transition-swing"
-    color="grey lighten-3"
+    class="px-4 pt-4 my-8 documentation-ad-entry"
     flat
     height="133"
+    outlined
     width="362"
     style="padding-bottom: 10px;"
   >
-    <div id="carbonads"><!-- Ad --></div>
+    <div :id="id"><!-- Ad --></div>
   </v-card>
 </template>
 
 <script>
   export default {
-    name: 'AdCarbon',
+    name: 'AdEntry',
+
+    props: {
+      id: {
+        type: String,
+        default: 'carbonads',
+      },
+      scriptId: {
+        type: String,
+        default: '_carbonads_js',
+      },
+    },
 
     data: () => ({
-      isLoading: true,
       script: null,
     }),
 
     mounted () {
       // Do nothing on ssr
       if (this.$ssrContext) return
+      if (document.getElementById(this.scriptId)) return
 
       const script = document.createElement('script')
 
       script.type = 'text/javascript'
-      script.id = '_carbonads_js'
+      script.id = this.scriptId
       script.src = '//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuetifyjscom'
-      script.onload = () => (this.isLoading = false)
 
       this.$el && this.$el.append(script)
 
@@ -44,7 +53,7 @@
 </script>
 
 <style lang="sass">
-  .documentation-ad
+  .documentation-ad-entry
     opacity: 1
 
     &--is-active

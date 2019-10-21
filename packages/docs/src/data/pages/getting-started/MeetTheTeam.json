@@ -5,12 +5,7 @@
     {
       "type": "section",
       "children": [
-        {
-          "type": "getting-started-team"
-        },
-        {
-          "type": "core-support-vuetify"
-        }
+        { "type": "getting-started-team" }
       ]
     }
   ]

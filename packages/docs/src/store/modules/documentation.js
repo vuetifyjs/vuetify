@@ -3,6 +3,17 @@ import camelCase from 'lodash/camelCase'
 import upperFirst from 'lodash/upperFirst'
 import { make } from 'vuex-pathify'
 
+function addHeadingAndAd (children) {
+  children.splice(0, 0, {
+    type: 'section',
+    children: [
+      { type: 'heading', lang: 'heading' },
+      { type: 'base-text', lang: 'headingText' },
+      { type: 'ad-entry' },
+    ],
+  })
+}
+
 function getHeadings (children, toc = []) {
   for (const child of children) {
     if (child.children) {
@@ -30,6 +41,12 @@ function getHeadings (children, toc = []) {
   }
 
   return toc
+}
+
+function addFooterAd (children) {
+  if (!children.length) return
+
+  children[children.length - 1].children.push({ type: 'ad-exit' })
 }
 
 const state = {
@@ -73,25 +90,13 @@ const getters = {
       ? undefined
       : upperFirst(camelCase(rootState.route.params.page))
   },
-  structure (state) {
-    const children = ((state.structure || {}).children || []).slice()
+  structure (state, getters, rootState) {
+    const children = JSON.parse(JSON.stringify((state.structure || {}).children || []))
 
     if (!children.length) return children
 
-    children.splice(0, 0, {
-      children: [
-        {
-          lang: 'heading',
-          type: 'heading',
-        },
-        {
-          lang: 'headingText',
-          type: 'base-text',
-        },
-        { type: 'ad-carbon' },
-      ],
-      type: 'section',
-    })
+    addHeadingAndAd(children)
+    addFooterAd(children)
 
     return children
   },
