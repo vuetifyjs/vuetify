@@ -1,6 +1,9 @@
 <template>
   <v-list class="checklist">
-    <v-list-item v-for="(item, index) in items" :key="index">
+    <v-list-item
+      v-for="(item, index) in items"
+      :key="index"
+    >
       <v-list-item-content>
         <v-list-item-title>
           <doc-markdown :code="item" />

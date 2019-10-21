@@ -22,7 +22,10 @@
             v-if="structure.file"
             shrink
           >
-            <core-file-btn :link="structure.file" :branch="branch" />
+            <core-file-btn
+              :link="structure.file"
+              :branch="branch"
+            />
           </v-flex>
           <v-flex
             v-if="structure.mdSpec"
