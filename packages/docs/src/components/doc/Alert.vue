@@ -2,8 +2,8 @@
   <v-alert
     :type="value"
     border="left"
-    class="app-alert mb-4"
-    text
+    class="app-alert mb-4 grey lighten-3"
+    colored-border
     value
   >
     <doc-markdown><slot /></doc-markdown>
@@ -26,7 +26,6 @@
 <style lang="sass">
 .app-alert
   a
-    color: inherit
     font-weight: 500
 
     &:hover
