@@ -7,8 +7,7 @@
     color="transparent"
     right
   >
-
-    <ul class="py-8 documentation-toc">
+    <ul class="pt-8 mb-6 documentation-toc">
       <li class="mb-2">
         <h3 class="grey--text text--darken-3 body-1">Contents</h3>
       </li>
@@ -18,13 +17,14 @@
           v-if="item.visible"
           :key="i"
           :class="{
+            'mb-2': i + 1 !== toc.length,
             'primary--text': activeIndex === i,
             'text--disabled': activeIndex !== i
           }"
           :style="{
             borderColor: activeIndex === i ? 'currentColor' : undefined
           }"
-          class="mb-2 documentation-toc__link"
+          class="documentation-toc__link"
         >
           <a
             :href="`#${item.id}`"
@@ -35,6 +35,14 @@
         </li>
       </template>
     </ul>
+
+    <div class="pl-5">
+      <supporters-supporter-group
+        :group="supporters['Diamond']"
+        compact
+        justify="start"
+      />
+    </div>
   </v-navigation-drawer>
 </template>
 <script>
@@ -42,10 +50,13 @@
   import { goTo } from '@/util/helpers'
   import {
     get,
+    sync,
   } from 'vuex-pathify'
   import kebabCase from 'lodash/kebabCase'
 
   export default {
+    name: 'DocumentationToc',
+
     data: () => ({
       activeIndex: 0,
       currentOffset: 0,
@@ -55,12 +66,15 @@
       headings: get('documentation/headings'),
       namespace: get('documentation/namespace'),
       page: get('documentation/page'),
+      supporters: sync('app/supporters'),
       toc () {
         const t = string => this.$t(`${this.namespace}.${this.page}.${string}`)
 
         return this.headings
           .map(h => {
-            const translation = t(h)
+            const translation = h.indexOf('.') > -1
+              ? this.$t(h)
+              : t(h)
             let text = translation.split(' ')
 
             text.shift()
@@ -129,4 +143,8 @@
       font-weight: 400
       text-decoration: none
       transition: color .1s ease-in
+
+    .supporter-group
+        justify-content: flex-start !important
+        margin-left: 20px !important
 </style>

@@ -11,9 +11,22 @@ function getHeadings (children, toc = []) {
       continue
     }
 
-    if (child.type !== 'heading') continue
+    if (
+      ![
+        'accessibility',
+        'api',
+        'examples',
+        'heading',
+        'up-next',
+        'usage-new',
+      ].includes(child.type)
+    ) continue
 
-    toc.push(child.lang)
+    if (child.type === 'heading') {
+      toc.push(child.lang)
+    } else {
+      toc.push(`Generic.Pages.${camelCase(child.type)}`)
+    }
   }
 
   return toc
@@ -37,10 +50,6 @@ const getters = {
     if (!rootState.route) return []
 
     return [
-      {
-        text: 'Documentation',
-        disabled: true,
-      },
       {
         text: upperFirst(rootState.route.params.namespace.split('-').join(' ')),
         disabled: true,

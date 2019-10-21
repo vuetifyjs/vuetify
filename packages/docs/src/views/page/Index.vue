@@ -1,7 +1,8 @@
 <template>
   <section
     v-if="structure !== false"
-    :id="page"
+    :id="`${namespace}.${page}`"
+    class="page"
   >
     <component
       :is="getComponent(child.type)"
@@ -94,3 +95,8 @@
     },
   }
 </script>
+
+<style lang="sass">
+  .page > section:first-child
+    margin-bottom: 0 !important
+</style>

@@ -3,96 +3,98 @@
     id="home-hero"
     class="white--text py-4 py-md-12"
   >
-    <v-container class="pa-0">
-      <v-row align="center">
-        <v-col
-          cols="12"
-          md="7"
-        >
-          <v-responsive
-            class="overflow-visible"
-            max-width="550"
+    <v-responsive min-height="30vh">
+      <v-container class="pa-0">
+        <v-row align="center">
+          <v-col
+            cols="12"
+            md="7"
           >
-            <base-title class="home-hero__title mb-4">
-              <doc-markdown>Vuetify.Home.callout</doc-markdown>
-            </base-title>
-
-            <base-text dark>Vuetify.Home.text</base-text>
-
-            <div class="py-4" />
-
-            <base-btn
-              :block="$vuetify.breakpoint.smAndDown"
-              :to="`/${$route.params.lang}/getting-started/quick-start`"
-              class="primary--text my-6"
-              color="white"
-              x-large
+            <v-responsive
+              class="overflow-visible"
+              max-width="550"
             >
-              <v-icon
-                left
-                size="20"
+              <base-title class="home-hero__title mb-4">
+                <doc-markdown>Vuetify.Home.callout</doc-markdown>
+              </base-title>
+
+              <base-text dark>Vuetify.Home.text</base-text>
+
+              <div class="py-4" />
+
+              <base-btn
+                :block="$vuetify.breakpoint.smAndDown"
+                :to="`/${$route.params.lang}/getting-started/quick-start`"
+                class="primary--text my-6"
+                color="white"
+                x-large
               >
-                mdi-speedometer
-              </v-icon>
+                <v-icon
+                  left
+                  size="20"
+                >
+                  mdi-speedometer
+                </v-icon>
 
-              {{ $t('Vuetify.Home.getStarted') }}
-            </base-btn>
+                {{ $t('Vuetify.Home.getStarted') }}
+              </base-btn>
 
-            <v-btn
-              :block="$vuetify.breakpoint.smAndDown"
-              class="my-6 ma-md-6"
-              color="white"
-              min-width="187"
-              outlined
-              x-large
-            >
-              <v-icon
-                left
-                size="20"
+              <v-btn
+                :block="$vuetify.breakpoint.smAndDown"
+                class="my-6 ma-md-6"
+                color="white"
+                min-width="187"
+                outlined
+                x-large
               >
-                mdi-github-face
-              </v-icon>
+                <v-icon
+                  left
+                  size="20"
+                >
+                  mdi-github-face
+                </v-icon>
 
-              Github
-            </v-btn>
-          </v-responsive>
-        </v-col>
+                Github
+              </v-btn>
+            </v-responsive>
+          </v-col>
 
-        <v-col
-          cols="12"
-          md="5"
-        >
-          <base-card
-            class="v-card--hero"
-            color="black"
+          <v-col
+            cols="12"
+            md="5"
           >
-            <v-lazy min-height="300">
-              <iframe
-                allow="autoplay; fullscreen"
-                allowfullscreen
-                class="v-card--hero__iframe"
-                frameborder="0"
-                src="https://player.vimeo.com/video/350834301"
-                title="Vue Mastery Vuetify Course"
-              />
-            </v-lazy>
-          </base-card>
-
-          <div class="caption pt-3 pb-4 text-center grey--text text--lighten-4">
-            Video by
-            <a
-              href="https://www.vuemastery.com/"
-              target="_blank"
-              rel="noopener"
+            <base-card
+              class="v-card--hero"
+              color="black"
             >
-              Vue Mastery
-            </a>.
+              <v-lazy min-height="300">
+                <iframe
+                  allow="autoplay; fullscreen"
+                  allowfullscreen
+                  class="v-card--hero__iframe"
+                  frameborder="0"
+                  src="https://player.vimeo.com/video/350834301"
+                  title="Vue Mastery Vuetify Course"
+                />
+              </v-lazy>
+            </base-card>
 
-            Watch Vue Mastery’s free <a href="https://www.vuemastery.com/courses/beautify-with-vuetify/getting-started-with-vuetify/">Vuetify lesson</a>.
-          </div>
-        </v-col>
-      </v-row>
-    </v-container>
+            <div class="caption pt-3 pb-4 text-center grey--text text--lighten-4">
+              Video by
+              <a
+                href="https://www.vuemastery.com/"
+                target="_blank"
+                rel="noopener"
+              >
+                Vue Mastery
+              </a>.
+
+              Watch Vue Mastery’s free <a href="https://www.vuemastery.com/courses/beautify-with-vuetify/getting-started-with-vuetify/">Vuetify lesson</a>.
+            </div>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-responsive>
   </base-section>
 </template>
 

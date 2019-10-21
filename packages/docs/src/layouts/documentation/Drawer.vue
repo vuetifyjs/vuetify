@@ -7,7 +7,7 @@
   >
     <v-container>
       <div class="text-center">
-        <supporter-group
+        <supporters-supporter-group
           :group="supporters['Premiere']"
           large
           title="Premiere sponsors"
@@ -71,13 +71,6 @@
 
   export default {
     name: 'DocumentationDrawer',
-
-    components: {
-      SupporterGroup: () => import(
-        /* webpackChunkName: "supportergroup" */
-        '@/components/supporters/SupporterGroup'
-      ),
-    },
 
     computed: {
       ...sync('app/*'),

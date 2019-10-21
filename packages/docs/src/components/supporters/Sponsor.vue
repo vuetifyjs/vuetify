@@ -2,7 +2,7 @@
   <v-card
     :aria-label="`Supporter ${value.name}`"
     :href="value.href"
-    class="mx-2"
+    class="mx-2 pa-2"
     color="transparent"
     flat
     rel="noopener"

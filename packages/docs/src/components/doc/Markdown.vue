@@ -75,7 +75,7 @@
   .markdown:last-child
     margin-bottom: 0 !important
 
-  .markdown--link
+  .markdown .markdown--link
     text-decoration: none
 
     &:hover

@@ -16,6 +16,7 @@
       prepend-inner-icon="mdi-magnify"
       rounded
       @blur="onBlur"
+      @keydown.esc="onEsc"
     />
   </v-responsive>
 </template>
@@ -25,14 +26,13 @@
     name: 'DocumentationSearch',
 
     data: () => ({
-      label: `Search ("s" to focus)`,
+      label: `Search ("/" to focus)`,
       search: '',
       docSearch: {},
       isSearching: false,
     }),
 
     watch: {
-
       isSearching (val) {
         this.$refs.toolbar.isScrolling = !val
         if (val) {
@@ -43,8 +43,8 @@
       },
       search (val) {
         if (!val) {
-          this.docSearch.autocomplete.autocomplete.close()
-          this.docSearch.autocomplete.autocomplete.setVal('')
+          // this.docSearch.autocomplete.autocomplete.close()
+          // this.docSearch.autocomplete.autocomplete.setVal('')
         }
       },
     },
@@ -54,7 +54,7 @@
         e = e || window.event
 
         if (
-          e.keyCode === 83 &&
+          e.keyCode === 191 &&
           e.target !== this.$refs.search.$refs.input
         ) {
           e.preventDefault()
@@ -74,8 +74,8 @@
 
     beforeDestroy () {
       document.onkeydown = null
-      this.docSearch.autocomplete.autocomplete.close()
-      this.docSearch.autocomplete.autocomplete.setVal('')
+      // this.docSearch.autocomplete.autocomplete.close()
+      // this.docSearch.autocomplete.autocomplete.setVal('')
     },
 
     methods: {
@@ -84,25 +84,30 @@
         this.docSearch = docsearch({
           apiKey: '259d4615e283a1bbaa3313b4eff7881c',
           autocompleteOptions: {
-            appendTo: '#app',
+            appendTo: '#documentation-app-bar',
             hint: false,
-            debug: true,
+            debug: process.env.NODE_ENV === 'development',
           },
           indexName: 'vuetifyjs',
           inputSelector: '#search',
           handleSelected (input, event, suggestion) {
             const url = suggestion.url
             const loc = url.split('.com')
+
             vm.search = ''
             vm.isSearching = false
             vm.$router.push(loc.pop())
+            this.onEsc()
           },
         })
       },
       onBlur () {
-        this.$nextTick(() => {
-          this.search = ''
-        })
+        // this.$nextTick(() => {
+        //   this.search = ''
+        // })
+      },
+      onEsc () {
+        this.$refs.search.blur()
       },
     },
   }
@@ -120,11 +125,19 @@
     width: 100%
 
   #app
-    .algolia-autocomplete > span
-      left: -16px !important
-      top: 18px !important
-      @include elevation(6)
+    .algolia-autocomplete
+      a
+        text-decoration: none !important
 
-      .ds-dataset-1
-        border: none !important
+      > span
+        left: -36px !important
+        top: 0 !important
+        @include elevation(8)
+
+        &:before,
+        &:after
+          display: none
+
+        .ds-dataset-1
+          border: none !important
 </style>

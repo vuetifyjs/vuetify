@@ -5,6 +5,7 @@
     clipped-right
     color="primary"
     dark
+    id="documentation-app-bar"
   >
     <base-vuetify-logo />
 

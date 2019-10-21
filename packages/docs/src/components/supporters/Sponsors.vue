@@ -3,7 +3,7 @@
     class="pa-0"
     tag="section"
   >
-    <supporter-group
+    <supporters-supporter-group
       v-if="tier.includes(0)"
       :group="supporters['Premiere']"
       :title="!hideTitles ? 'Premiere' : undefined"
@@ -11,7 +11,7 @@
       :x-large="!compact"
     />
 
-    <supporter-group
+    <supporters-supporter-group
       v-if="tier.includes(1)"
       :group="supporters['Diamond']"
       :title="!hideTitles ? 'Diamond' : undefined"
@@ -19,14 +19,14 @@
       :large="!compact"
     />
 
-    <supporter-group
+    <supporters-supporter-group
       v-if="tier.includes(2)"
       :group="supporters['Platinum']"
       :title="!hideTitles ? 'Platinum' : undefined"
       :class="classes"
     />
 
-    <supporter-group
+    <supporters-supporter-group
       v-if="tier.includes(3)"
       :group="supporters['Gold']"
       :title="!hideTitles ? 'Gold' : undefined"
@@ -34,7 +34,7 @@
       small
     />
 
-    <supporter-group
+    <supporters-supporter-group
       v-if="tier.includes(4)"
       :group="supporters.affiliate"
       :title="!hideTitles ? 'Affiliate' : undefined"
@@ -42,7 +42,7 @@
       small
     />
 
-    <supporter-group
+    <supporters-supporter-group
       v-if="tier.includes(5)"
       :group="supporters.service"
       :title="!hideTitles ? 'Service' : undefined"
@@ -58,13 +58,6 @@
   } from 'vuex-pathify'
 
   export default {
-    components: {
-      SupporterGroup: () => import(
-        /* webpackChunkName: "supportergroup" */
-        '@/components/supporters/SupporterGroup'
-      ),
-    },
-
     props: {
       compact: {
         type: Boolean,

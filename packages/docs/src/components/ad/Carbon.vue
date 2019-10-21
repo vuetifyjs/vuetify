@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="pa-4 d-inline-block"
+    class="pa-4 d-inline-block mt-3 mb-4"
     color="grey lighten-3"
     flat
     min-height="133"

@@ -1,37 +1,34 @@
 <template>
-  <div>
-    <base-heading>Generic.Pages.upNext</base-heading>
-    <v-container
-      fluid
-      grid-list-xl
-      pa-0
-    >
-      <v-layout wrap>
-        <v-flex
-          v-for="(link, i) in links"
-          :key="i"
-          xs12
-          md4
-        >
-          <v-card outlined>
-            <base-item
-              :to="link.link"
-              :avatar="link.icon"
-              :avatar-color="link.color"
-              :text="link.target"
-              :subtext="link.section"
-              no-markdown
-              @click.native="$ga.event('up-next', 'click', link.target, $route.path)"
-            >
-              <v-list-item-action>
-                <v-icon>mdi-arrow-right</v-icon>
-              </v-list-item-action>
-            </base-item>
-          </v-card>
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </div>
+  <section id="up-next">
+    <base-heading id="up-next">Generic.Pages.upNext</base-heading>
+
+    <doc-markdown>Generic.Pages.upNextText</doc-markdown>
+
+    <v-row>
+      <v-col
+        v-for="(link, i) in links"
+        :key="i"
+        cols="12"
+        md="4"
+      >
+        <v-card outlined>
+          <base-item
+            :to="link.link"
+            :avatar="link.icon"
+            :avatar-color="link.color"
+            :text="link.target"
+            :subtext="link.section"
+            no-markdown
+            @click.native="$ga.event('up-next', 'click', link.target, $route.path)"
+          >
+            <v-list-item-action>
+              <v-icon>mdi-arrow-right</v-icon>
+            </v-list-item-action>
+          </base-item>
+        </v-card>
+      </v-col>
+    </v-row>
+  </section>
 </template>
 
 <script>

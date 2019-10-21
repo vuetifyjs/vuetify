@@ -1,9 +1,10 @@
 <template>
   <v-row
-    align="center"
-    justify="center"
-    class="ma-0"
-    dense
+    :align="$attrs.align || 'center'"
+    :justify="$attrs.justify || 'center'"
+    class="ma-0 supporter-group"
+    no-gutters
+    v-bind="$attrs"
   >
     <v-col
       v-if="title"
