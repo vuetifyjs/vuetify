@@ -24,7 +24,10 @@
           </v-layout>
         </v-flex>
         <v-flex xs12>
-          <v-layout justify-center mb-4>
+          <v-layout
+            justify-center
+            mb-4
+          >
             <a
               v-for="(social, i) in socials"
               :key="i"

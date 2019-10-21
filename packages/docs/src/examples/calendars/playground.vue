@@ -79,7 +79,7 @@
           no-title
           scrollable
         >
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
           <v-btn
             text
             color="primary"
@@ -122,7 +122,7 @@
           no-title
           scrollable
         >
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
           <v-btn
             text
             color="primary"
@@ -164,7 +164,7 @@
           no-title
           scrollable
         >
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
           <v-btn
             text
             color="primary"

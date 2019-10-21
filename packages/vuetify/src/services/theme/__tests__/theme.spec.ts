@@ -263,4 +263,19 @@ describe('Theme.ts', () => {
     expect(theme.generatedStyles).toMatchSnapshot()
     expect(spy).toHaveBeenCalledTimes(3)
   })
+
+  it('should use vue-meta@2.3 functionality', () => {
+    const theme = new Theme(mock)
+    const set = jest.fn()
+
+    const $meta = () => ({
+      addApp: () => ({ set }),
+    })
+
+    ;(instance as any).$meta = $meta as any
+
+    theme.init(instance)
+
+    expect(set).toHaveBeenCalled()
+  })
 })

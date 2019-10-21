@@ -12,7 +12,7 @@
 
     <span class="subheading">My Home</span>
 
-    <div class="flex-grow-1"></div>
+    <v-spacer></v-spacer>
 
     <v-toolbar-items class="hidden-sm-and-down">
       <v-btn text>

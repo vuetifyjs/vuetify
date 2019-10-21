@@ -1,5 +1,4 @@
 // Imports
-@import '../../styles/styles.sass'
 @import './_variables.scss'
 
 // Theme
@@ -24,7 +23,6 @@
   max-width: 100%
 
   > .v-btn.v-btn
-    background-color: transparent !important
     border-radius: 0
     border-style: solid
     border-width: thin
@@ -69,12 +67,10 @@
   border-radius: 0
 
   > .v-btn.v-btn
+    background-color: transparent !important
     border-color: transparent
     margin: 4px
     min-width: auto
-
-    &:not(.v-btn--active)
-      color: initial
 
 .v-btn-toggle--rounded
   border-radius: $btn-toggle-round-border-radius

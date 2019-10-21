@@ -20,7 +20,8 @@
 
         <v-col cols="12" sm="6" md="4">
           <v-text-field
-            placeholder="Filled & Rounded"
+            label="Filled"
+            placeholder="Dense & Rounded"
             filled
             rounded
             dense

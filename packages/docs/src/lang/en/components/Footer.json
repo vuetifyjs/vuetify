@@ -3,7 +3,7 @@
   "headerText": "The `v-footer` component is used for displaying general information that a user might want to access from any page within your site.",
   "examples": {
     "usage": {
-      "desc": "The `v-footer` component in it's simplest form is a container."
+      "desc": "The `v-footer` component in its simplest form is a container."
     },
     "absolute": {
       "header": "### Absolute Footer",

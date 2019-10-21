@@ -244,6 +244,35 @@ describe('VPagination.ts', () => {
     expect(wrapper.vm.items).toHaveLength(10)
   })
 
+  it('should never show more than the number of total visible buttons', () => {
+    const wrapper = mountFunction({
+      data: () => ({
+        maxButtons: 0,
+      }),
+
+      propsData: {
+        length: 5,
+        totalVisible: undefined,
+      },
+    })
+
+    expect(wrapper.vm.items).toHaveLength(5)
+
+    wrapper.setProps({ length: 40 })
+
+    wrapper.setData({ maxButtons: 0 })
+    wrapper.setProps({ totalVisible: 10 })
+    expect(wrapper.vm.items).toHaveLength(10)
+
+    wrapper.setData({ maxButtons: 11 })
+    wrapper.setProps({ totalVisible: undefined })
+    expect(wrapper.vm.items).toHaveLength(11)
+
+    wrapper.setData({ maxButtons: 12 })
+    wrapper.setProps({ totalVisible: 13 })
+    expect(wrapper.vm.items).toHaveLength(12)
+  })
+
   it('should return length when maxButtons is less than 1', () => {
     const wrapper = mountFunction({
       data: () => ({ maxButtons: -3 }),

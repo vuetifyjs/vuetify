@@ -156,9 +156,10 @@ export default VSelect.extend({
     internalValue: 'setSearch',
     isFocused (val) {
       if (val) {
-        this.$refs.input &&
-          this.$refs.input.select()
+        document.addEventListener('copy', this.onCopy)
+        this.$refs.input && this.$refs.input.select()
       } else {
+        document.removeEventListener('copy', this.onCopy)
         this.updateSelf()
       }
     },
@@ -221,7 +222,7 @@ export default VSelect.extend({
     changeSelectedIndex (keyCode: number) {
       // Do not allow changing of selectedIndex
       // when search is dirty
-      if (this.searchIsDirty) return
+      if (this.searchIsDirty || !this.multiple) return
 
       if (![
         keyCodes.backspace,
@@ -282,6 +283,8 @@ export default VSelect.extend({
 
       input.data = input.data || {}
       input.data.attrs = input.data.attrs || {}
+      input.data.attrs.autocomplete = input.data.attrs.autocomplete || 'disabled'
+
       input.data.domProps = input.data.domProps || {}
       input.data.domProps.value = this.internalSearch
 
@@ -389,16 +392,6 @@ export default VSelect.extend({
     },
     hasItem (item: any) {
       return this.selectedValues.indexOf(this.getValue(item)) > -1
-    },
-    onFocus () {
-      if (!this.isFocused) {
-        document.addEventListener('copy', this.onCopy)
-      }
-      VTextField.options.methods.onFocus.call(this)
-    },
-    onBlur () {
-      document.removeEventListener('copy', this.onCopy)
-      VSelect.options.methods.onBlur.call(this)
     },
     onCopy (event: ClipboardEvent) {
       if (this.selectedIndex === -1) return

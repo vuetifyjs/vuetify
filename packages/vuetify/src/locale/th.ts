@@ -1,17 +1,17 @@
 export default {
-  close: 'Close',
+  close: 'ปิด',
   dataIterator: {
     noResultsText: 'ไม่พบข้อมูลที่ค้นหา',
-    loadingText: 'Loading item...',
+    loadingText: 'กำลังโหลดข้อมูล... กรุณารอสักครู่',
   },
   dataTable: {
     itemsPerPageText: 'แถวต่อหน้า:',
     ariaLabel: {
-      sortDescending: ': Sorted descending. Activate to remove sorting.',
-      sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.',
+      sortDescending: ': เรียงลำดับจากมากไปน้อย กดเพื่อปิดการเรียงลำดับ',
+      sortAscending: ': เรียงจากน้อยไปมาก กดเพื่อเรียงลำดับจากมากไปน้อย',
+      sortNone: ': ไม่ได้จัดเรียง กดเพื่อเรียงลำดับจากน้อยไปมาก',
     },
-    sortBy: 'Sort by',
+    sortBy: 'จัดเรียงตาม',
   },
   dataFooter: {
     itemsPerPageText: 'รายการต่อหน้า:',
@@ -29,13 +29,16 @@ export default {
   carousel: {
     prev: 'ภาพก่อนหน้า',
     next: 'ภาพต่อไป',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: 'อีก {0}',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counter: '{0} ไฟล์',
+    counterSize: '{0} ไฟล์ (รวม {1})',
   },
   timePicker: {
     am: 'AM',

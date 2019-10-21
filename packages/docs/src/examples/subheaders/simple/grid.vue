@@ -9,7 +9,7 @@
 
           <v-toolbar-title class="grey--text text--darken-4">Albums</v-toolbar-title>
 
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
 
           <v-btn icon light>
             <v-icon color="grey darken-2">mdi-magnify</v-icon>

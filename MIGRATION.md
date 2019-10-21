@@ -1,4 +1,4 @@
-## Migrating from v1.5.x to v2.0.x
+### Migrating from v1.5.x to v2.0.x
 
 Version 2 contains non backwards compatible breaking changes. This includes previously deprecated functionality from v1.x.x. These breaking changes are noted in the console for the corresponding components.
 
@@ -125,7 +125,7 @@ The following components are now **lazy** by default. This means they will not r
   * `v-dialog`
   * `v-bottom-sheet`
 
-`vuetify/lib` is now compiled to **es6**. This means supporting IE requires [`transpileDependencies`](https://cli.vuejs.org/config/#transpiledependencies) or similar to be used, along with `@babel/polyfill`
+`vuetify/lib` is now compiled to **es6**. This means supporting IE requires [`transpileDependencies`](https://cli.vuejs.org/config/#transpiledependencies) or similar to be used, along with `@babel/polyfill`. Transpile dependencies are automatically added when using vue-cli-3. If you have an older version, you can simple add 'vuetify' to the list.
 
 ### Theme
 Now supports dark/light theme variants. The _dark_ property has been moved into the theme property. Will dynamically change when toggling **$vuetify.theme.dark**. If only using one variant, you only need to define its colors.
@@ -262,7 +262,7 @@ this.$vuetify.lang.t(...)
 ```
 
 ### Grid
-The grid has been rebuilt modeled after bootstrap. The existing grid still works and needs some slight modifications. [Kael](https://github.com/orgs/vuetifyjs/people/KaelWD) has created an eslint plugin to help with this process.
+The grid has been rebuilt modeled after bootstrap. The existing grid still works and needs some slight modifications. [Kael](https://github.com/KaelWD) has created an eslint plugin to help with this process.
 * [eslint-plugin-vuetify](https://github.com/vuetifyjs/eslint-plugin-vuetify) **to fix most of these for you**
 * Spacing helpers have changed to represent the number of 4px intervals from 0-12 (0-48px)
     * eg. px-7 is 7 * 4 = 28px
