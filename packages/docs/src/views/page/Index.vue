@@ -79,11 +79,14 @@
     },
 
     watch: {
-      '$route.path' () {
-        this.load({
-          store: this.$store,
-          route: this.$route,
-        })
+      '$route.path': {
+        immediate: true,
+        handler () {
+          this.load({
+            store: this.$store,
+            route: this.$route,
+          })
+        },
       },
     },
 
@@ -97,6 +100,8 @@
 </script>
 
 <style lang="sass">
-  .page > section:first-child
-    margin-bottom: 0 !important
+  .page > section
+    &:first-child,
+    &:last-child
+      margin-bottom: 0 !important
 </style>

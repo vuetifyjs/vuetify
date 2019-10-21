@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer
+    id="documentation-toc"
     v-scroll="onScroll"
     app
     clipped
@@ -36,10 +37,14 @@
       </template>
     </ul>
 
-    <div class="pl-5">
+    <div
+      v-if="structure"
+      class="pl-5"
+    >
       <supporters-supporter-group
         :group="supporters['Diamond']"
         compact
+        title="Diamond Sponsors"
         justify="start"
       />
     </div>
@@ -66,6 +71,7 @@
       headings: get('documentation/headings'),
       namespace: get('documentation/namespace'),
       page: get('documentation/page'),
+      structure: sync('documentation/structure'),
       supporters: sync('app/supporters'),
       toc () {
         const t = string => this.$t(`${this.namespace}.${this.page}.${string}`)
@@ -126,6 +132,10 @@
 </script>
 
 <style lang="sass">
+  #documentation-toc
+    .supporter-group__title
+      padding-left: 14px
+
   .documentation-toc
     list-style-type: none !important
     margin: 0

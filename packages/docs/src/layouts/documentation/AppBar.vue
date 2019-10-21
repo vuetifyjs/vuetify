@@ -1,11 +1,11 @@
 <template>
   <v-app-bar
+    id="documentation-app-bar"
     app
     clipped-left
     clipped-right
     color="primary"
     dark
-    id="documentation-app-bar"
   >
     <base-vuetify-logo />
 
@@ -20,6 +20,8 @@
     <base-ecosystems-menu />
 
     <base-support-menu />
+
+    <base-versions-menu />
 
     <base-locales-menu />
   </v-app-bar>
