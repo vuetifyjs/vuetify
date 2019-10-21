@@ -147,7 +147,7 @@ export default mixins(
     computedIcon (): string | boolean {
       if (this.icon === false) return false
       if (typeof this.icon === 'string' && this.icon) return this.icon
-      if (!['error', 'info', 'sucess', 'warning'].includes(this.type)) return false
+      if (!['error', 'info', 'success', 'warning'].includes(this.type)) return false
 
       return `$${this.type}`
     },

@@ -29,6 +29,9 @@ export default {
   carousel: {
     prev: 'Forrige bilde',
     next: 'Neste bilde',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: '{0} mer',

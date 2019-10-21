@@ -29,6 +29,9 @@ export default {
   carousel: {
     prev: 'Önceki görsel',
     next: 'Sonraki görsel',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: '{0} tane daha',

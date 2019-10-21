@@ -1,53 +1,89 @@
 <template>
-  <v-layout wrap mb-12>
-    <doc-subheading>releaseHeader</doc-subheading>
+  <v-layout
+    wrap
+    mb-12
+  >
     <v-flex
       xs12
       mb-12
     >
-      <v-autocomplete
-        v-model="releaseNotes"
-        :items="releases"
-        label="Select Release Version"
-        item-text="name"
-        solo
-        prepend-inner-icon="mdi-database-search"
-        clearable
-        chips
-        return-object
-      >
-        <template v-slot:selection="props">
-          <v-chip
-            :value="props.selected"
-            color="primary"
-            class="white--text"
-            label
+      <section id="release-notes">
+        <doc-heading id="release-notes">releaseHeader</doc-heading>
+        <v-autocomplete
+          v-model="releaseNotes"
+          :items="releases"
+          label="Select Release Version"
+          item-text="name"
+          solo
+          prepend-inner-icon="mdi-database-search"
+          clearable
+          chips
+          return-object
+          hide-details
+        >
+          <template v-slot:selection="props">
+            <v-chip
+              :value="props.selected"
+              color="primary"
+              class="white--text"
+              label
+            >
+              <v-icon left>
+                mdi-tag
+              </v-icon>
+
+              <span v-text="props.item.name" />
+            </v-chip>
+          </template>
+
+          <template v-slot:item="props">
+            <v-list-item-action>
+              <v-icon>mdi-tag</v-icon>
+            </v-list-item-action>
+
+            <v-list-item-content>
+              <v-list-item-title
+                :id="props.attrs['aria-labelledby']"
+                v-text="props.item.name"
+              />
+
+              <v-list-item-subtitle v-text="`Published: ${new Date(props.item.published_at).toDateString()}`" />
+            </v-list-item-content>
+          </template>
+        </v-autocomplete>
+
+        <v-expand-transition>
+          <v-card
+            v-if="releaseNotes"
+            outlined
+            class="pa-4 mt-3"
           >
-            <v-icon left>
-              mdi-tag
-            </v-icon>
-            <span v-text="props.item.name" />
-          </v-chip>
-        </template>
-        <template v-slot:item="props">
-          <v-list-item-action>
-            <v-icon>mdi-tag</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title
-              :id="props.attrs['aria-labelledby']"
-              v-text="props.item.name"
+            <doc-markdown
+              class="migration-markdown"
+              :code="releaseNotes ? releaseNotes.body : ' '"
             />
-            <v-list-item-subtitle v-text="`Published: ${new Date(props.item.published_at).toDateString()}`" />
-          </v-list-item-content>
-        </template>
-      </v-autocomplete>
-      <doc-markdown :code="releaseNotes ? releaseNotes.body : ' '" />
+          </v-card>
+        </v-expand-transition>
+      </section>
     </v-flex>
 
-    <v-flex>
-      <doc-subheading>migrationHeader</doc-subheading>
-      <doc-markdown class="migration-markdown" :code="migration || ' '" />
+    <v-flex
+      xs12
+      mb-12
+    >
+      <section id="migration-guide">
+        <doc-heading id="migration-guide">migrationHeader</doc-heading>
+
+        <v-card
+          outlined
+          class="pa-4"
+        >
+          <doc-markdown
+            class="migration-markdown"
+            :code="migration || ' '"
+          />
+        </v-card>
+      </section>
     </v-flex>
   </v-layout>
 
@@ -57,6 +93,7 @@
   import { getBranch } from '@/util/helpers'
   // Utilities
   import { mapState } from 'vuex'
+  import { sortBy } from 'lodash'
 
   export default {
     data: () => ({
@@ -69,8 +106,14 @@
     computed: {
       ...mapState('app', ['currentVersion']),
       releases () {
-        const v1 = this.githubReleases.filter(release => release.name && release.name.substring(0, 3) === 'v1.')
-        const v2 = this.githubReleases.filter(release => release.name && release.name.substring(0, 3) === 'v2.')
+        const v1 = sortBy(
+          this.githubReleases.filter(release => release.name && release.name.substring(0, 3) === 'v1.'),
+          ['published_at']
+        ).reverse()
+        const v2 = sortBy(
+          this.githubReleases.filter(release => release.name && release.name.substring(0, 3) === 'v2.'),
+          ['published_at']
+        ).reverse()
         if (v1.length > 0) {
           v1.unshift({ header: 'v1.x' })
         }
@@ -109,15 +152,22 @@
 <style lang="sass" scoped>
   ::v-deep pre
     background: #2d2d2d !important
-    padding: 8px
-    margin: 8px
+    border-radius: 4px
+    margin: 16px
+    padding: 16px
 
     code
-      box-shadow: none !important
+      background: transparent
       background-color: unset !important
+      box-shadow: none !important
       color: #ccc !important
+      font-family: "Inconsolata", monospace
+      font-weight: 300
+      font-size: 15px
+      line-height: 1.55
 
   ::v-deep .migration-markdown
-    h4, h3, p, pre, ul
+    h1, h2, h3, h4, h5, p, pre, ul
       margin-bottom: 16px !important
+
 </style>

@@ -24,7 +24,7 @@
               <v-list-item-subtitle>Fitz & The Trantrums</v-list-item-subtitle>
             </v-list-item-content>
 
-            <div class="flex-grow-1"></div>
+            <v-spacer></v-spacer>
 
             <v-list-item-icon>
               <v-btn icon>

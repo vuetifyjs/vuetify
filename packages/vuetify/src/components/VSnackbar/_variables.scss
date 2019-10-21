@@ -1,3 +1,5 @@
+@import '../../styles/styles.sass';
+
 $snackbar-color: map-get($shades, 'white') !default;
 $snackbar-background-color: #323232 !default;
 $snackbar-border-radius: $border-radius-root !default;

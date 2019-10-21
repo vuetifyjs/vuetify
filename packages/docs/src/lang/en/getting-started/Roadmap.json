@@ -95,19 +95,34 @@
     },
     {
       "type": "release",
-      "complete": false,
+      "complete": true,
       "title": "v2.1 Release **(Vanguard)**",
       "caption": "Q3 2019",
       "text": "A maintenance cycle to work on bugs from the v2.0 release. This includes performance issues, incorrect or missing a11y, RTL, regressions and general fixes. This will allow the team to catch up on the backlog of tasks that have accumulated over the 8 month development cycle of the previous release.",
-      "value": true
+      "features": {
+        "#### Highlights": [
+          "2 New Components",
+          "2 New Directives",
+          "Lazy loading support for `v-img`"
+        ],
+        "#### New Components": [
+          "v-lazy",
+          "v-skeleton-loader"
+        ],
+        "#### New Directives": [
+          "v-intersect",
+          "v-mutate"
+        ]
+      },
+      "value": false
     },
     {
       "type": "release",
       "complete": false,
       "title": "v2.2 Release **(Tigris)**",
       "caption": "Q4 2019",
-      "text": "The introduction of Vuetify Presets. Will include the entire Material Design Studies collection and be _user customizable_. For more information on Google's studies, please [navigate here](https://material.io/design/material-studies/about-our-material-studies.html).",
-      "value": false
+      "text": "The introduction of Vuetify Presets. Will include the entire Material Design Studies collection and be _user customizable_. Will streamline the process for altering the default styles for the framework. Thousands of SASS variables will be added and a lookup tree for finding variables will put into the documentation. For more information on Google's studies, please [navigate here](https://material.io/design/material-studies/about-our-material-studies.html).",
+      "value": true
     },
     {
       "type": "release",

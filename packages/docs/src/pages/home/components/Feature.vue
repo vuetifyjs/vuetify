@@ -1,9 +1,21 @@
 <template>
   <v-responsive class="text-center pb-6">
     <v-container grid-list-xl>
-      <v-layout justify-center wrap>
-        <v-flex v-for="(feature, i) in computedFeatures" :key="i" d-flex shrink>
-          <v-card class="elevation-12 overflow-hidden text-center mx-auto" light max-width="350px">
+      <v-layout
+        justify-center
+        wrap
+      >
+        <v-flex
+          v-for="(feature, i) in computedFeatures"
+          :key="i"
+          d-flex
+          shrink
+        >
+          <v-card
+            class="elevation-12 overflow-hidden text-center mx-auto"
+            light
+            max-width="350px"
+          >
             <v-img
               :alt="feature.title"
               :aspect-ratio="2.6"
@@ -11,8 +23,14 @@
               width="100%"
             />
             <v-card-text>
-              <h2 class="subtitle-1 font-weight-bold mb-2 text--primary" v-text="feature.title" />
-              <p class="mb-2" v-text="feature.text" />
+              <h2
+                class="subtitle-1 font-weight-bold mb-2 text--primary"
+                v-text="feature.title"
+              />
+              <p
+                class="mb-2"
+                v-text="feature.text"
+              />
             </v-card-text>
           </v-card>
         </v-flex>

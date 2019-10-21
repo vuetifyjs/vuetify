@@ -4,7 +4,7 @@ exports[`VSparkline.ts should position labels correctly 1`] = `
 <svg display="block"
      stroke-width="20"
      viewbox="0 0 300 85.5"
-     class="primary--text"
+     class="v-sparkline theme--light primary--text"
 >
   <defs>
     <linearGradient id="35"
@@ -52,7 +52,7 @@ exports[`VSparkline.ts should render component and match a snapshot 1`] = `
 <svg display="block"
      stroke-width="4"
      viewbox="0 0 300 75"
-     class="primary--text"
+     class="v-sparkline theme--light primary--text"
 >
   <defs>
     <linearGradient id="1"
@@ -79,6 +79,7 @@ exports[`VSparkline.ts should render component and match a snapshot 1`] = `
 exports[`VSparkline.ts should render component with bars and auto-line-width and match a snapshot 1`] = `
 <svg display="block"
      viewbox="0 0 300 75"
+     class="v-sparkline theme--light"
 >
   <defs>
     <linearGradient id="21"
@@ -135,6 +136,7 @@ exports[`VSparkline.ts should render component with bars and auto-line-width and
 exports[`VSparkline.ts should render component with bars and auto-line-width with custom padding and match a snapshot 1`] = `
 <svg display="block"
      viewbox="0 0 300 75"
+     class="v-sparkline theme--light"
 >
   <defs>
     <linearGradient id="27"
@@ -191,6 +193,7 @@ exports[`VSparkline.ts should render component with bars and auto-line-width wit
 exports[`VSparkline.ts should render component with bars and correct bar lengths 1`] = `
 <svg display="block"
      viewbox="0 0 300 75"
+     class="v-sparkline theme--light"
 >
   <defs>
     <linearGradient id="37"
@@ -239,6 +242,7 @@ exports[`VSparkline.ts should render component with bars and correct bar lengths
 exports[`VSparkline.ts should render component with bars and correct bar lengths 2`] = `
 <svg display="block"
      viewbox="0 0 300 75"
+     class="v-sparkline theme--light"
 >
   <defs>
     <linearGradient id="37"
@@ -287,6 +291,7 @@ exports[`VSparkline.ts should render component with bars and correct bar lengths
 exports[`VSparkline.ts should render component with bars and custom label size and match a snapshot 1`] = `
 <svg display="block"
      viewbox="0 0 300 97.5"
+     class="v-sparkline theme--light"
 >
   <defs>
     <linearGradient id="29"
@@ -363,6 +368,7 @@ exports[`VSparkline.ts should render component with bars and custom label size a
 exports[`VSparkline.ts should render component with bars and custom padding and match a snapshot 1`] = `
 <svg display="block"
      viewbox="0 0 300 75"
+     class="v-sparkline theme--light"
 >
   <defs>
     <linearGradient id="25"
@@ -419,6 +425,7 @@ exports[`VSparkline.ts should render component with bars and custom padding and 
 exports[`VSparkline.ts should render component with bars and gradient and match a snapshot 1`] = `
 <svg display="block"
      viewbox="0 0 300 75"
+     class="v-sparkline theme--light"
 >
   <defs>
     <linearGradient id="17"
@@ -483,6 +490,7 @@ exports[`VSparkline.ts should render component with bars and gradient and match 
 exports[`VSparkline.ts should render component with bars and labels and match a snapshot 1`] = `
 <svg display="block"
      viewbox="0 0 300 85.5"
+     class="v-sparkline theme--light"
 >
   <defs>
     <linearGradient id="19"
@@ -559,6 +567,7 @@ exports[`VSparkline.ts should render component with bars and labels and match a 
 exports[`VSparkline.ts should render component with bars and line width and match a snapshot 1`] = `
 <svg display="block"
      viewbox="0 0 300 75"
+     class="v-sparkline theme--light"
 >
   <defs>
     <linearGradient id="23"
@@ -615,6 +624,7 @@ exports[`VSparkline.ts should render component with bars and line width and matc
 exports[`VSparkline.ts should render component with bars and match a snapshot 1`] = `
 <svg display="block"
      viewbox="0 0 300 75"
+     class="v-sparkline theme--light"
 >
   <defs>
     <linearGradient id="13"
@@ -671,6 +681,7 @@ exports[`VSparkline.ts should render component with bars and match a snapshot 1`
 exports[`VSparkline.ts should render component with bars and negative and match a snapshot 1`] = `
 <svg display="block"
      viewbox="0 0 300 75"
+     class="v-sparkline theme--light"
 >
   <defs>
     <linearGradient id="15"
@@ -736,7 +747,7 @@ exports[`VSparkline.ts should render component with gradient and match a snapsho
 <svg display="block"
      stroke-width="4"
      viewbox="0 0 300 75"
-     class="primary--text"
+     class="v-sparkline theme--light primary--text"
 >
   <defs>
     <linearGradient id="9"
@@ -772,7 +783,7 @@ exports[`VSparkline.ts should render component with label size and match a snaps
 <svg display="block"
      stroke-width="4"
      viewbox="0 0 300 96"
-     class="primary--text"
+     class="v-sparkline theme--light primary--text"
 >
   <defs>
     <linearGradient id="33"
@@ -820,7 +831,7 @@ exports[`VSparkline.ts should render component with line width and match a snaps
 <svg display="block"
      stroke-width="42"
      viewbox="0 0 300 75"
-     class="primary--text"
+     class="v-sparkline theme--light primary--text"
 >
   <defs>
     <linearGradient id="7"
@@ -848,7 +859,7 @@ exports[`VSparkline.ts should render component with padding and match a snapshot
 <svg display="block"
      stroke-width="4"
      viewbox="0 0 300 75"
-     class="primary--text"
+     class="v-sparkline theme--light primary--text"
 >
   <defs>
     <linearGradient id="3"
@@ -876,7 +887,7 @@ exports[`VSparkline.ts should render component with string labels and match a sn
 <svg display="block"
      stroke-width="4"
      viewbox="0 0 300 85.5"
-     class="primary--text"
+     class="v-sparkline theme--light primary--text"
 >
   <defs>
     <linearGradient id="11"
@@ -924,7 +935,7 @@ exports[`VSparkline.ts should render component with string labels and match a sn
 <svg display="block"
      stroke-width="4"
      viewbox="0 0 300 85.5"
-     class="primary--text"
+     class="v-sparkline theme--light primary--text"
 >
   <defs>
     <linearGradient id="11"
@@ -972,7 +983,7 @@ exports[`VSparkline.ts should render component with string labels and match a sn
 <svg display="block"
      stroke-width="4"
      viewbox="0 0 300 85.5"
-     class="primary--text"
+     class="v-sparkline theme--light primary--text"
 >
   <defs>
     <linearGradient id="11"
@@ -1020,7 +1031,7 @@ exports[`VSparkline.ts should render component with trend and equal values and m
 <svg display="block"
      stroke-width="4"
      viewbox="0 0 300 75"
-     class="primary--text"
+     class="v-sparkline theme--light primary--text"
 >
   <defs>
     <linearGradient id="31"
@@ -1048,7 +1059,7 @@ exports[`VSparkline.ts should render smooth component and match a snapshot 1`] =
 <svg display="block"
      stroke-width="4"
      viewbox="0 0 300 75"
-     class="primary--text"
+     class="v-sparkline theme--light primary--text"
 >
   <defs>
     <linearGradient id="5"
