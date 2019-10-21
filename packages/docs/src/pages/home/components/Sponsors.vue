@@ -1,5 +1,9 @@
 <template>
-  <v-card flat color="grey lighten-4" class="pa-12 text-center">
+  <v-card
+    flat
+    color="grey lighten-4"
+    class="pa-12 text-center"
+  >
     <h3 class="font-weight-medium grey--text text--darken-2">
       Project Sponsors
     </h3>

@@ -6,7 +6,10 @@
   >
 
     <v-row no-gutters>
-      <v-col cols="12" md="9">
+      <v-col
+        cols="12"
+        md="9"
+      >
         <div class="d-flex grey lighten-3">
           <v-tabs
             v-model="tab"
@@ -25,14 +28,23 @@
           <v-divider vertical />
         </div>
 
-        <div v-if="component" class="d-flex child-flex">
+        <div
+          v-if="component"
+          class="d-flex child-flex"
+        >
           <v-sheet
             min-height="300"
             tile
             :dark="dark"
           >
-            <div class="fill-height pa-6" data-app="true">
-              <component :is="component" :attrs="attrs$" />
+            <div
+              class="fill-height pa-6"
+              data-app="true"
+            >
+              <component
+                :is="component"
+                :attrs="attrs$"
+              />
             </div>
           </v-sheet>
 
@@ -43,7 +55,10 @@
         </div>
       </v-col>
 
-      <v-col cols="12" md="3">
+      <v-col
+        cols="12"
+        md="3"
+      >
         <div class="d-flex grey lighten-3">
           <v-responsive
             class="title font-weight-regular align-center px-3"
@@ -71,7 +86,10 @@
 
         <v-divider />
 
-        <v-responsive max-height="300" class="overflow-y-auto py-3">
+        <v-responsive
+          max-height="300"
+          class="overflow-y-auto py-3"
+        >
           <v-col
             v-for="(v1, boolean, i) in booleans || {}"
             :key="`col-1-${i}`"

@@ -36,7 +36,11 @@
             </h2>
             <v-spacer />
 
-            <div v-if="template.price" class="headline font-weight-bold primary--text" v-text="template.price" />
+            <div
+              v-if="template.price"
+              class="headline font-weight-bold primary--text"
+              v-text="template.price"
+            />
           </v-card-title>
 
           <v-divider />
