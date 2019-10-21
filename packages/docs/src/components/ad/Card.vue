@@ -26,7 +26,7 @@
           />
         </v-list-item-avatar>
 
-        <v-list-item-content>
+        <v-list-item-content class="align-self-center">
           <v-list-item-title v-text="activeTemplate.title" />
 
           <v-list-item-subtitle v-text="activeTemplate.description" />

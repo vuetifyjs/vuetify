@@ -101,20 +101,18 @@ export function createRouter () {
     // ],
   })
 
-  if (process.env.VUE_APP_GOOGLE_ANALYTICS) {
-    Vue.use(VueAnalytics, {
-      id: 'UA-75262397-3',
-      router,
-      autoTracking: {
-        page: process.env.NODE_ENV !== 'development',
-      },
-      debug: process.env.DEBUG ? {
-        enabled: true,
-        trace: false,
-        sendHitTask: true,
-      } : false,
-    })
-  }
+  Vue.use(VueAnalytics, {
+    id: 'UA-75262397-3',
+    router,
+    autoTracking: {
+      page: process.env.NODE_ENV !== 'development',
+    },
+    debug: process.env.DEBUG ? {
+      enabled: true,
+      trace: false,
+      sendHitTask: true,
+    } : false,
+  })
 
   return router
 }
