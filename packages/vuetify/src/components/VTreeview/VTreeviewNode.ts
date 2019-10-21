@@ -334,4 +334,4 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
   },
 })
 
-export default component
+export default VTreeviewNode
