@@ -298,7 +298,7 @@ export class Theme extends Service {
 
   // Is using v2.3 of vue-meta
   // https://github.com/nuxt/vue-meta/releases/tag/v2.3.0
-  get isVueMeta23 (): boolean {
+  private get isVueMeta23 (): boolean {
     return typeof this.vueMeta.addApp === 'function'
   }
 }
