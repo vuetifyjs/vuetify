@@ -25,18 +25,18 @@
 <script>
   // Utilities
   import {
-    mapState,
-  } from 'vuex'
+    sync,
+  } from 'vuex-pathify'
 
   export default {
-    name: 'AppFab',
+    name: 'DocumentationFab',
 
     data: () => ({
       fab: false,
     }),
 
     computed: {
-      ...mapState('snackbar', ['value']),
+      ...sync('snackbar/*'),
     },
 
     methods: {

@@ -6,7 +6,7 @@
   >
     <v-hover v-model="hover">
       <v-layout align-center>
-        <doc-markdown v-bind="$attrs"><slot /></doc-markdown>
+        <base-markdown v-bind="$attrs"><slot /></base-markdown>
 
         <v-fade-transition hide-on-leave>
           <v-icon

@@ -2,7 +2,7 @@
   <section id="examples">
     <base-heading id="examples">Generic.Pages.examples</base-heading>
 
-    <doc-markdown>Generic.Pages.examplesText</doc-markdown>
+    <base-markdown>Generic.Pages.examplesText</base-markdown>
 
     <section
       v-for="(example, i) in examples"

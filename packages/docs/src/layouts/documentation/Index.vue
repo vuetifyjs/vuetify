@@ -9,6 +9,8 @@
     <documentation-toc />
 
     <documentation-footer />
+
+    <documentation-fab />
   </v-app>
 </template>
 
@@ -19,9 +21,10 @@
     components: {
       DocumentationAppBar: () => import('./AppBar'),
       DocumentationDrawer: () => import('./Drawer'),
-      DocumentationView: () => import('./View'),
+      DocumentationFab: () => import('./Fab'),
       DocumentationFooter: () => import('./Footer'),
       DocumentationToc: () => import('./Toc'),
+      DocumentationView: () => import('./View'),
     },
   }
 </script>

@@ -7,7 +7,7 @@
     ]"
     :style="measurableStyles"
   >
-    <doc-markdown><slot /></doc-markdown>
+    <base-markdown><slot /></base-markdown>
   </div>
 </template>
 

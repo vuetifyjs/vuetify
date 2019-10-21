@@ -1,6 +1,6 @@
 <template>
   <span class="subtitle-1 text-capitalize font-weight-light">
-    <doc-markdown><slot /></doc-markdown>
+    <base-markdown><slot /></base-markdown>
   </span>
 </template>
 

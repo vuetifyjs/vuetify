@@ -7,11 +7,13 @@
   >
     <v-container>
       <div class="text-center">
-        <supporters-supporter-group
-          :group="supporters['Premiere']"
-          large
-          title="Premiere sponsors"
-        />
+        <v-responsive min-height="64">
+          <supporters-supporter-group
+            :group="supporters['Premiere']"
+            large
+            title="Premiere sponsors"
+          />
+        </v-responsive>
 
         <supporters-sponsor-btn
           class="mt-4"

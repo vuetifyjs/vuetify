@@ -2,7 +2,7 @@
   <section id="up-next">
     <base-heading id="up-next">Generic.Pages.upNext</base-heading>
 
-    <doc-markdown>Generic.Pages.upNextText</doc-markdown>
+    <base-markdown>Generic.Pages.upNextText</base-markdown>
 
     <v-row>
       <v-col

@@ -19,7 +19,7 @@
       xs12
       mb-4
     >
-      <doc-markdown>openCollectiveBlurb</doc-markdown>
+      <base-markdown>openCollectiveBlurb</base-markdown>
     </v-flex>
 
     <v-flex

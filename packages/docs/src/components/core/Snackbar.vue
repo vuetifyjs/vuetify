@@ -20,7 +20,7 @@
         {{ computedIcon }}
       </v-icon>
 
-      <doc-markdown
+      <base-markdown
         :code="snackbar.msg"
         class="snack-markdown"
       />

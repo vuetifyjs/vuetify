@@ -25,7 +25,7 @@ export function getComponent (type) {
     case 'img': return 'doc-img'
     case 'text': return 'doc-text'
     case 'markup': return 'doc-markup'
-    case 'markdown': return 'doc-markdown'
+    case 'markdown': return 'base-markdown'
     case 'parameters': return 'doc-parameters'
     case 'playground': return 'doc-playground'
     case 'section': return 'doc-section'

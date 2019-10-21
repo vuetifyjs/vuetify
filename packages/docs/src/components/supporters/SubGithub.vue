@@ -19,7 +19,7 @@
       xs12
       mb-4
     >
-      <doc-markdown>githubBlurb</doc-markdown>
+      <base-markdown>githubBlurb</base-markdown>
     </v-flex>
 
     <v-flex

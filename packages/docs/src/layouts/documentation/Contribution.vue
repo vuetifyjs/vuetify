@@ -1,57 +1,44 @@
 <template>
-  <v-layout>
-    <div>
-      Edit this
-      <span v-html="contributionPageGithub" />
-      on Github | Translate on
-      <span
-        @click="changeLanguageEoUy"
-        v-html="contributionLanguageCrowdin"
-      />
-    </div>
-    <v-spacer class="hidden-sm-and-down" />
-    <div class="hidden-sm-and-down">
-      <span class="hidden-md-and-up">&nbsp;—&nbsp;</span>
-      <span
-        class="pr-12"
-        v-html="contributionGuide"
-      />
-    </div>
-  </v-layout>
+  <div class="py-4">
+    Caught a mistake or want to <strong v-html="contributionGuide" /> to the documentation?
+    <strong v-html="contributionPageGithub" />
+  </div>
 </template>
 
 <script>
   // Utilities
   import {
-    mapGetters,
-    mapState,
-  } from 'vuex'
+    get,
+  } from 'vuex-pathify'
+
   import { parseLink } from '@/util/helpers'
 
   export default {
+    name: 'DocumentationContribution',
+
     props: {
       branch: {
         type: String,
         default: 'master',
       },
     },
+
     computed: {
-      ...mapGetters('documentation', [
-        'namespace',
-        'page',
-      ]),
-      ...mapState('route', ['params']),
+      lang: get('route/params@lang'),
+      namespace: get('route/params@namespace'),
+      page: get('route/params@page'),
       contributionGuide () {
-        return this.parseLink('', 'Contribution Guide', `/${this.params.lang}/getting-started/contributing`)
+        return this.parseLink('', 'contribute', `/${this.lang}/getting-started/contributing`)
       },
       contributionLanguageCrowdin () {
-        return this.parseLink('', 'Crowdin', `/${this.params.namespace}/${this.params.page}`)
+        return this.parseLink('', 'Crowdin', `/${this.namespace}/${this.page}`)
       },
       contributionPageGithub () {
-        return this.parseLink('', 'page', this.contributionPageLink)
+        return this.parseLink('', 'Edit this page on GitHub!', this.contributionPageLink)
       },
       contributionPageLink () {
-        const file = `${this.params.namespace}/${this.page}.json`
+        const file = `${this.namespace}/${this.page}.json`
+
         return `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/data/pages/${file}`
       },
     },
@@ -61,14 +48,18 @@
       changeLanguageEoUy (e) {
         // the anchor href doesn't fire
         e.preventDefault()
+
         const lang = 'eo-UY'
+
         // If we're switching in or out of translating
         // then we need to force a reload to make sure
         // that crowdin script is loaded (or unloaded)
         setTimeout(() => {
           this.$router.go()
         }, 1000)
+
         this.$router.replace({ params: { lang } })
+
         document.cookie = `currentLanguage=${lang};path=/;max-age=${60 * 60 * 24 * 7}` // expires in 7 days
       },
     },

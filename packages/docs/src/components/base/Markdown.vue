@@ -11,6 +11,8 @@
   })
 
   export default {
+    name: 'BaseMarkdown',
+
     props: {
       code: {
         type: [Array, String],
@@ -75,11 +77,12 @@
   .markdown:last-child
     margin-bottom: 0 !important
 
-  .markdown .markdown--link
+  .markdown--link
     text-decoration: none
+    font-weight: 500
 
     &:hover
-      opacity: 0.8
+      text-decoration: underline
 
     .v-icon
       font-size: 14px

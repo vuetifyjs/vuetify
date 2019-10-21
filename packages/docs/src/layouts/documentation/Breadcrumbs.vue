@@ -15,6 +15,6 @@
 
     computed: {
       breadcrumbs: get('documentation/breadcrumbs'),
-    }
+    },
   }
 </script>

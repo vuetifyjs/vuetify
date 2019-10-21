@@ -12,9 +12,9 @@
       dense
       flat
       hide-details
-      solo-inverted
       prepend-inner-icon="mdi-magnify"
       rounded
+      solo-inverted
       @blur="onBlur"
       @keydown.esc="onEsc"
     />
@@ -43,8 +43,8 @@
       },
       search (val) {
         if (!val) {
-          // this.docSearch.autocomplete.autocomplete.close()
-          // this.docSearch.autocomplete.autocomplete.setVal('')
+          this.docSearch.autocomplete.autocomplete.close()
+          this.docSearch.autocomplete.autocomplete.setVal('')
         }
       },
     },
@@ -74,8 +74,8 @@
 
     beforeDestroy () {
       document.onkeydown = null
-      // this.docSearch.autocomplete.autocomplete.close()
-      // this.docSearch.autocomplete.autocomplete.setVal('')
+      this.docSearch.autocomplete.autocomplete.close()
+      this.docSearch.autocomplete.autocomplete.setVal('')
     },
 
     methods: {
@@ -97,14 +97,12 @@
             vm.search = ''
             vm.isSearching = false
             vm.$router.push(loc.pop())
-            this.onEsc()
+            vm.onEsc()
           },
         })
       },
       onBlur () {
-        // this.$nextTick(() => {
-        //   this.search = ''
-        // })
+        this.$nextTick(() => (this.search = ''))
       },
       onEsc () {
         this.$refs.search.blur()
@@ -125,6 +123,9 @@
     width: 100%
 
   #app
+    .algolia-docsearch-suggestion--title
+      margin-bottom: 0
+
     .algolia-autocomplete
       a
         text-decoration: none !important

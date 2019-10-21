@@ -2,19 +2,21 @@
   <v-menu
     bottom
     left
-    offset-y
     max-height="500"
+    offset-y
   >
-    <template #activator="{ on: menu }">
+    <template v-slot:activator="{ on: menu }">
       <v-btn
         class="hidden-md-and-down"
         text
         v-on="menu"
       >
+        <base-nav-text v-text="version" />
         <span
           class="text-lowercase mr-1"
           v-text="version"
         />
+
         <v-icon class="hidden-sm-and-down">mdi-menu-down</v-icon>
       </v-btn>
     </template>
@@ -32,8 +34,11 @@
           no-markdown
           @click="$ga.event('toolbar', 'click', 'versions', archive.text)"
         />
+
         <v-divider />
+
         <v-subheader v-text="$t('Vuetify.AppToolbar.releases')" />
+
         <base-item
           v-for="(release, i) in releases"
           :key="`releases-${i}`"
@@ -49,14 +54,14 @@
 <script>
   // Utilities
   import {
-    mapState,
-  } from 'vuex'
+    sync,
+  } from 'vuex-pathify'
 
   export default {
+    name: 'BaseVersionsMenu',
+
     computed: {
-      ...mapState('app', [
-        'currentVersion',
-      ]),
+      currentVersion: sync('app/currentVersion'),
       archives () {
         return [
           {

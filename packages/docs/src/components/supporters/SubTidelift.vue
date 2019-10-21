@@ -19,7 +19,7 @@
       xs12
       mb-4
     >
-      <doc-markdown>tideliftBlurb</doc-markdown>
+      <base-markdown>tideliftBlurb</base-markdown>
     </v-flex>
 
     <v-flex

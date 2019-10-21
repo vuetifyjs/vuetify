@@ -2,7 +2,7 @@
   <div>
     <base-heading>Generic.Pages.api</base-heading>
 
-    <doc-markdown>Generic.Pages.apiText</doc-markdown>
+    <base-markdown>Generic.Pages.apiText</base-markdown>
 
     <v-card outlined>
       <v-toolbar

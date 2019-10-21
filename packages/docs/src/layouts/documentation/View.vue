@@ -7,7 +7,13 @@
       <v-container>
         <documentation-breadcrumbs />
 
-        <router-view />
+        <v-responsive min-height="90vh">
+          <v-fade-transition hide-on-leave>
+            <router-view :key="$route.path" />
+          </v-fade-transition>
+        </v-responsive>
+
+        <documentation-contribution />
       </v-container>
     </v-responsive>
   </v-content>
@@ -19,6 +25,7 @@
 
     components: {
       DocumentationBreadcrumbs: () => import('./Breadcrumbs'),
+      DocumentationContribution: () => import('./Contribution'),
     },
   }
 </script>

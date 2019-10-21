@@ -36,7 +36,7 @@
           @click.native="item.value = true"
         >
           <v-card-title class="py-0 pr-2">
-            <doc-markdown
+            <base-markdown
               class="body-2"
               :code="item.title"
             />
@@ -65,17 +65,17 @@
           <v-expand-transition>
             <div v-if="(index != null && index >= i) || item.value">
               <v-card-text>
-                <doc-markdown :code="item.text" />
+                <base-markdown :code="item.text" />
 
                 <template v-if="item.features">
                   <div class="mt-4" />
 
                   <template v-for="(features, key, index) in item.features">
-                    <doc-markdown
+                    <base-markdown
                       :key="`title-${index}`"
                       :code="key"
                     />
-                    <doc-markdown
+                    <base-markdown
                       :key="`list-${index}`"
                       :code="features"
                     />

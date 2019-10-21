@@ -58,7 +58,7 @@
             outlined
             class="pa-4 mt-3"
           >
-            <doc-markdown
+            <base-markdown
               class="migration-markdown"
               :code="releaseNotes ? releaseNotes.body : ' '"
             />
@@ -78,7 +78,7 @@
           outlined
           class="pa-4"
         >
-          <doc-markdown
+          <base-markdown
             class="migration-markdown"
             :code="migration || ' '"
           />

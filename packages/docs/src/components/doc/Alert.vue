@@ -6,7 +6,7 @@
     colored-border
     value
   >
-    <doc-markdown><slot /></doc-markdown>
+    <base-markdown><slot /></base-markdown>
   </v-alert>
 </template>
 
@@ -25,12 +25,6 @@
 
 <style lang="sass">
 .app-alert
-  a
-    font-weight: 500
-
-    &:hover
-      text-decoration: underline
-
   p
     margin: 0 !important
 </style>

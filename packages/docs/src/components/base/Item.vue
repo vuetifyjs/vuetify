@@ -3,6 +3,7 @@
     :to="path"
     v-bind="customAttrs"
     class="v-list-item--doc"
+    color="primary"
     ripple
     v-on="$listeners"
   >
@@ -15,31 +16,40 @@
         v-text="avatar"
       />
     </v-list-item-avatar>
+
     <v-list-item-icon v-else-if="icon">
       <v-icon v-text="icon" />
     </v-list-item-icon>
+
     <v-list-item-content>
       <v-list-item-title>
         <span
           v-if="noMarkdown"
           v-text="text"
         />
-        <doc-markdown v-else>{{ text }}</doc-markdown>
+
+        <base-markdown v-else>{{ text }}</base-markdown>
       </v-list-item-title>
+
       <v-list-item-subtitle v-if="subtext">
         <span
           v-if="noMarkdown"
           v-text="subtext"
         />
-        <doc-markdown v-else>{{ subtext }}</doc-markdown>
+
+        <base-markdown v-else>{{ subtext }}</base-markdown>
       </v-list-item-subtitle>
     </v-list-item-content>
+
     <v-chip
       v-if="chip"
       :color="chipColor"
       x-small
       text-color="white"
-    >{{ chip }}</v-chip>
+    >
+      {{ chip }}
+    </v-chip>
+
     <slot />
   </v-list-item>
 </template>

@@ -16,7 +16,7 @@
       v-if="$slots.default"
       class="caption text-center"
     >
-      <doc-markdown><slot /></doc-markdown>
+      <base-markdown><slot /></base-markdown>
     </figcaption>
   </figure>
 </template>

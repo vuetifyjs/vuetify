@@ -8,7 +8,7 @@
     <template v-slot:activator>
       <v-list-item-content class="v-list-group__activator">
         <v-list-item-title>
-          <doc-markdown>{{ item.text }}</doc-markdown>
+          <base-markdown>{{ item.text }}</base-markdown>
         </v-list-item-title>
       </v-list-item-content>
     </template>

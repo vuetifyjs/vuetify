@@ -5,8 +5,10 @@
       class="float-left mb-12"
     >
       <base-heading>subHeader</base-heading>
-      <doc-markdown>subText1</doc-markdown>
-      <doc-markdown>subText2</doc-markdown>
+
+      <base-markdown>subText1</base-markdown>
+
+      <base-markdown>subText2</base-markdown>
 
       <supporters-tidelift-more-demo />
     </v-responsive>
@@ -19,8 +21,10 @@
 
     <div style="clear: both;">
       <base-heading>depHeader</base-heading>
-      <doc-markdown>depText1</doc-markdown>
-      <doc-markdown>depText2</doc-markdown>
+
+      <base-markdown>depText1</base-markdown>
+
+      <base-markdown>depText2</base-markdown>
 
       <supporters-tidelift-more-demo />
     </div>

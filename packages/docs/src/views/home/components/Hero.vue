@@ -15,7 +15,7 @@
               max-width="550"
             >
               <base-title class="home-hero__title mb-4">
-                <doc-markdown>Vuetify.Home.callout</doc-markdown>
+                <base-markdown>Vuetify.Home.callout</base-markdown>
               </base-title>
 
               <base-text dark>Vuetify.Home.text</base-text>

@@ -1,10 +1,12 @@
 <template>
   <v-card
-    class="pa-4 d-inline-block mt-3 mb-4"
+    :class="isLoading && 'documentation-ad--is-loading'"
+    class="px-4 pt-4 mt-4 mb-8 documentation-ad transition-swing"
     color="grey lighten-3"
     flat
-    min-height="133"
-    min-width="362"
+    height="133"
+    width="362"
+    style="padding-bottom: 10px;"
   >
     <div id="carbonads"><!-- Ad --></div>
   </v-card>
@@ -13,6 +15,11 @@
 <script>
   export default {
     name: 'AdCarbon',
+
+    data: () => ({
+      isLoading: true,
+      script: null,
+    }),
 
     mounted () {
       // Do nothing on ssr
@@ -23,21 +30,28 @@
       script.type = 'text/javascript'
       script.id = '_carbonads_js'
       script.src = '//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuetifyjscom'
+      script.onload = () => (this.isLoading = false)
 
       this.$el && this.$el.append(script)
 
-      this.isLoading = false
+      this.script = script
+    },
+
+    beforeDestroy () {
+      this.script && this.$el && this.$el.removeChild(this.script)
     },
   }
 </script>
 
 <style lang="sass">
-  #carbonads
+  .documentation-ad
+    opacity: 1
+
+    &--is-active
+      opacity: 0
+
     .carbon-wrap
       display: flex
-
-      img
-        margin-bottom: -6px
 
     .carbon-text,
     .carbon-poweredby

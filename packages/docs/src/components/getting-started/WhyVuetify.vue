@@ -52,7 +52,7 @@
                   </h2>
 
                   <div class="text-center">
-                    <doc-markdown :code="philosophy.caption" />
+                    <base-markdown :code="philosophy.caption" />
                   </div>
                 </v-layout>
               </v-flex>

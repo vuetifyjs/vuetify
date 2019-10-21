@@ -8,7 +8,7 @@
   >
     <v-col
       v-if="title"
-      class="font-weight-medium grey--text text--darken-3"
+      class="body-1 grey--text text--darken-3 supporter-group__title"
       cols="12"
       tag="h4"
       v-text="title"

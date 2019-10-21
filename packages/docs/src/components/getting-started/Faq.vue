@@ -41,9 +41,9 @@
                 class="pa-4"
                 outlined
               >
-                <doc-markdown :code="gotcha.a" />
+                <base-markdown :code="gotcha.a" />
 
-                <doc-markdown
+                <base-markdown
                   v-if="gotcha.a2"
                   :code="gotcha.a2"
                 />

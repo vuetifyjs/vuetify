@@ -19,7 +19,7 @@
       xs12
       mb-4
     >
-      <doc-markdown>oneTimeBlurb</doc-markdown>
+      <base-markdown>oneTimeBlurb</base-markdown>
     </v-flex>
 
     <v-flex
