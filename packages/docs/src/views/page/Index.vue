@@ -81,15 +81,7 @@
     },
 
     watch: {
-      '$route.path': {
-        immediate: true,
-        handler () {
-          this.load({
-            store: this.$store,
-            route: this.$route,
-          })
-        },
-      },
+      '$route.path': 'onRouteChange',
     },
 
     asyncData: load,
@@ -97,6 +89,12 @@
     methods: {
       getComponent,
       load,
+      onRouteChange () {
+        this.load({
+          store: this.$store,
+          route: this.$route,
+        })
+      },
     },
   }
 </script>

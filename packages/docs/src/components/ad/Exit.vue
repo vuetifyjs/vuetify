@@ -1,5 +1,8 @@
 <template>
-  <v-responsive v-show="isVisible !== false" min-height="61">
+  <v-responsive
+    v-show="isVisible !== false"
+    min-height="61"
+  >
     <div
       v-show="isVisible"
       class="documentation-ad-exit"
@@ -61,6 +64,8 @@
 
         // Sometimes ad doesn't load
         await new Promise(resolve => setTimeout(resolve, 500))
+
+        if (!this.$refs.exit) return
 
         this.isVisible = this.$refs.exit.children.length > 0
       },

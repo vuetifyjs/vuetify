@@ -36,7 +36,10 @@
         </v-col>
 
         <v-col cols="12">
-          <v-responsive max-width="400" class="mx-auto">
+          <v-responsive
+            class="mx-auto"
+            max-width="400"
+          >
             <v-form
               action="https://www.getrevue.co/profile/vuetify/add_subscriber"
               method="post"
