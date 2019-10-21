@@ -4,6 +4,7 @@
     left
     offset-y
     max-height="calc(100% - 16px)"
+    transition="slide-y-transition"
   >
     <template #activator="{ on: menu }">
       <v-btn
