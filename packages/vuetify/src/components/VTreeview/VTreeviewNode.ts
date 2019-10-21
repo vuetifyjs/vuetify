@@ -269,7 +269,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
       }), children)
     },
     genChild (item: any): VNode {
-      return this.$createElement(component, {
+      return this.$createElement(VTreeviewNode, {
         key: getObjectValueByPath(item, this.itemKey),
         props: {
           activatable: this.activatable,
