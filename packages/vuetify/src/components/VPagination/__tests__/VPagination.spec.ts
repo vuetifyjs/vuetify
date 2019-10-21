@@ -247,16 +247,30 @@ describe('VPagination.ts', () => {
   it('should never show more than the number of total visible buttons', () => {
     const wrapper = mountFunction({
       data: () => ({
-        maxButtons: 0
+        maxButtons: 0,
       }),
 
       propsData: {
-        length: 40,
-        totalVisible: 10,
+        length: 5,
+        totalVisible: undefined,
       },
     })
 
-    expect(wrapper.vm.items).toEqual([1, 2, 3, 4, 5, "...", 37, 38, 39, 40])
+    expect(wrapper.vm.items).toHaveLength(5)
+
+    wrapper.setProps({ length: 40 })
+
+    wrapper.setData({ maxButtons: 0 })
+    wrapper.setProps({ totalVisible: 10 })
+    expect(wrapper.vm.items).toHaveLength(10)
+
+    wrapper.setData({ maxButtons: 11 })
+    wrapper.setProps({ totalVisible: undefined })
+    expect(wrapper.vm.items).toHaveLength(11)
+
+    wrapper.setData({ maxButtons: 12 })
+    wrapper.setProps({ totalVisible: 13 })
+    expect(wrapper.vm.items).toHaveLength(12)
   })
 
   it('should return length when maxButtons is less than 1', () => {
