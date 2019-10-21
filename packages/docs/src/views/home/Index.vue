@@ -13,7 +13,7 @@
 
     <home-premium-themes />
 
-    <home-made-with-vuetify />
+    <home-made-with-vuetify /> -->
   </section>
 </template>
 

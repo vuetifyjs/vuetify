@@ -21,9 +21,9 @@
           min-width="48"
           text
         >
-          <base-nav-text v-if="$vuetify.breakpoint.mdAndUp">Vuetify.AppToolbar.documentation</base-nav-text>
+          <base-nav-text class="hidden-sm-and-down">Vuetify.AppToolbar.documentation</base-nav-text>
 
-          <v-icon v-else>mdi-file-document-box</v-icon>
+          <v-icon class="hidden-md-and-up">mdi-file-document-box</v-icon>
         </v-btn>
 
         <base-store-link />
