@@ -12,7 +12,7 @@
     <v-img
       :alt="value.name"
       :class="value.dark ? 'black' : ''"
-      :src="`https://cdn.vuetifyjs.com/images/${value.logo}`"
+      :src="src"
       :width="width"
       class="flex-shrink-1"
       contain
@@ -43,6 +43,13 @@
     },
 
     computed: {
+      src () {
+        const cdn = 'https://cdn.vuetifyjs.com/images/'
+
+        return `${cdn}${!this.$vuetify.theme.dark
+          ? this.value.logo
+          : this.value.darkLogo || this.value.logo}`
+      },
       width () {
         if (this.xLarge) return 175
         if (this.large) return 155
