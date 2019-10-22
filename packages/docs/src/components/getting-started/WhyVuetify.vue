@@ -18,7 +18,7 @@
           :color="philosophy.color"
           class="mx-auto"
           dark
-          elevation="6"
+          outlined
           style="border-radius: 6px; min-height: 350px;"
         >
           <v-container

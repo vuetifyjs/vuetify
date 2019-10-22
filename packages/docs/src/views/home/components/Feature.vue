@@ -12,7 +12,14 @@
       Vuetify.Home.whyVuetifyText
     </base-text>
 
-    <v-row justify="center">
+    <v-container class="pa-0 mb-6">
+      <base-comparison />
+    </v-container>
+
+    <v-row
+      class="mb-6"
+      justify="center"
+    >
       <v-col
         v-for="(feature, i) in computedFeatures"
         :key="i"
@@ -20,9 +27,10 @@
         class="d-flex"
       >
         <v-card
-          class="elevation-12 overflow-hidden text-center mx-auto"
+          class="overflow-hidden text-center mx-auto"
+          elevation="12"
           light
-          max-width="375px"
+          max-width="380px"
         >
           <v-img
             :alt="feature.title"

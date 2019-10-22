@@ -1,6 +1,4 @@
 {
-  "title": "header",
-  "titleText": "headerText",
   "children": [
     {
       "type": "section",
@@ -61,8 +59,11 @@
           "lang": "featuresHeader"
         },
         {
-          "type": "checklist",
-          "value": "featuresList"
+          "type": "base-comparison",
+          "value": {
+            "outlined": true,
+            "elevation": 0
+          }
         }
       ]
     },

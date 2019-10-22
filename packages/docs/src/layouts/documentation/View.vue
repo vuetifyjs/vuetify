@@ -1,13 +1,16 @@
 <template>
   <v-content>
     <v-responsive
-      class="mx-auto"
+      class="mx-auto overflow-visible"
       max-width="1024"
     >
       <v-container>
         <documentation-breadcrumbs />
 
-        <v-responsive min-height="90vh">
+        <v-responsive
+          class="overflow-visible"
+          min-height="90vh"
+        >
           <router-view />
         </v-responsive>
 
