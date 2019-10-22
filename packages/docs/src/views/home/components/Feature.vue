@@ -27,6 +27,10 @@
         class="d-flex"
       >
         <v-card
+          :href="feature.href"
+          :to="feature.to "
+          rel="noopener noreferrer"
+          target="_blank"
           class="overflow-hidden text-center mx-auto"
           elevation="12"
           light
@@ -66,23 +70,28 @@
 
     data: () => ({
       // TODO: Move this to somewhere in data
-      features: [
-        {
-          key: 'community',
-          src: 'feature3.png',
-        },
-        {
-          key: 'components',
-          src: 'feature2.png',
-        },
-        {
-          key: 'scaffolding',
-          src: 'feature1.png',
-        },
-      ],
     }),
 
     computed: {
+      features () {
+        return [
+          {
+            key: 'community',
+            src: 'feature3.png',
+            href: 'https://community.vuetiyfjs.com',
+          },
+          {
+            key: 'components',
+            src: 'feature2.png',
+            to: `${this.$route.params.lang}/components/api-explorer`,
+          },
+          {
+            key: 'scaffolding',
+            src: 'feature1.png',
+            href: 'https://github.com/vuetifyjs/vue-cli-plugin-vuetify-cli',
+          },
+        ]
+      },
       computedFeatures () {
         return this.features.map(feature => ({
           text: this.$t(`Vuetify.Home.features.${feature.key}.text`),

@@ -1,47 +1,49 @@
 <template>
-  <v-list
-    class="py-0"
-    color="grey lighten-3"
-  >
-    <v-row dense>
-      <v-col
-        v-for="browser in browsers"
-        :key="browser.title"
-        cols="12"
-        sm="6"
-        md="4"
-      >
-        <v-list-item>
-          <v-list-item-avatar
-            :color="browser.supported ? browser.supported === 'polyfill' ? 'warning' : 'success' : 'error'"
-          >
-            <v-icon
-              v-if="typeof browser.icon === 'string'"
-              dark
+  <v-card outlined>
+    <v-list
+      class="py-0"
+      color="transparent"
+    >
+      <v-row dense>
+        <v-col
+          v-for="browser in browsers"
+          :key="browser.title"
+          cols="12"
+          sm="6"
+          md="4"
+        >
+          <v-list-item>
+            <v-list-item-avatar
+              :color="browser.supported ? browser.supported === 'polyfill' ? 'warning' : 'success' : 'error'"
             >
-              mdi-{{ browser.icon }}
-            </v-icon>
+              <v-icon
+                v-if="typeof browser.icon === 'string'"
+                dark
+              >
+                mdi-{{ browser.icon }}
+              </v-icon>
 
-            <v-icon
-              v-for="icon in browser.icon"
-              v-else
-              :key="icon"
-              class="browser-icon--split"
-              dark
-            >
-              mdi-{{ icon }}
-            </v-icon>
-          </v-list-item-avatar>
+              <v-icon
+                v-for="icon in browser.icon"
+                v-else
+                :key="icon"
+                class="browser-icon--split"
+                dark
+              >
+                mdi-{{ icon }}
+              </v-icon>
+            </v-list-item-avatar>
 
-          <v-list-item-content>
-            <v-list-item-title>{{ browser.title }}</v-list-item-title>
+            <v-list-item-content>
+              <v-list-item-title>{{ browser.title }}</v-list-item-title>
 
-            <v-list-item-subtitle><span>{{ $t(getBrowserSupport(browser)) }}</span></v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </v-col>
-    </v-row>
-  </v-list>
+              <v-list-item-subtitle><span>{{ $t(getBrowserSupport(browser)) }}</span></v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-col>
+      </v-row>
+    </v-list>
+  </v-card>
 </template>
 
 <script>
