@@ -1,22 +1,20 @@
 <template>
   <v-menu
-    bottom
-    left
     max-height="500"
     offset-y
+    right
+    top
+    transition="slide-y-reverse-transition"
   >
-    <template v-slot:activator="{ on: menu }">
+    <template v-slot:activator="{ attrs, on }">
       <v-btn
-        class="hidden-md-and-down"
+        class="text--secondary text-lowercase"
+        rounded
         text
-        v-on="menu"
+        v-bind="attrs"
+        v-on="on"
       >
-        <span
-          class="subtitle-1 text-capitalize font-weight-light"
-          v-text="version"
-        />
-
-        <v-icon class="hidden-sm-and-down">mdi-menu-down</v-icon>
+        <span v-text="version" />
       </v-btn>
     </template>
 

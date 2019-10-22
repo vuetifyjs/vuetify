@@ -1,9 +1,10 @@
 <template>
   <div
-    class="font-weight-light grey--text mb-3"
+    class="font-weight-light mb-3"
     :class="[
       $vuetify.breakpoint.smAndDown ? 'subtitle-1' : 'title',
-      dark ? 'text--lighten-4' : 'text--darken-3'
+      dark ? 'text--lighten-4' : 'text--darken-3',
+      $vuetify.theme.dark ? undefined : 'grey--text'
     ]"
     :style="measurableStyles"
   >

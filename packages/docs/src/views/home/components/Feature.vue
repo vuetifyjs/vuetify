@@ -33,7 +33,6 @@
           target="_blank"
           class="overflow-hidden text-center mx-auto"
           elevation="12"
-          light
           max-width="380px"
         >
           <v-img
@@ -45,7 +44,7 @@
 
           <v-card-text>
             <h2
-              class="title font-weight-regular mb-2 text--primary"
+              class="title font-weight-regular text--primary mb-2"
               v-text="feature.title"
             />
 

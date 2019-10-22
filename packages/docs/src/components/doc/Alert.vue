@@ -1,8 +1,9 @@
 <template>
   <v-alert
+    :class="$vuetify.theme.dark ? undefined : 'grey lighten-3'"
     :type="value"
     border="left"
-    class="app-alert mb-4 grey lighten-3"
+    class="app-alert mb-4"
     colored-border
     value
   >

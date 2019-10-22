@@ -20,10 +20,6 @@
     <base-ecosystems-menu />
 
     <base-support-menu />
-
-    <base-versions-menu />
-
-    <base-locales-menu />
   </v-app-bar>
 </template>
 

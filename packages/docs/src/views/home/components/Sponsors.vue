@@ -4,8 +4,8 @@
     class="text-center"
   >
     <v-sheet
+      :color="$vuetify.theme.dark ? undefined : 'grey lighten-5'"
       class="pa-12"
-      color="grey lighten-5"
       tag="v-container"
     >
       <base-heading>Vuetify.Home.proudlySponsoredBy</base-heading>

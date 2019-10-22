@@ -5,6 +5,7 @@
   >
     <div
       v-show="isVisible"
+      :class="$vuetify.theme.dark ? 'exit--dark' : undefined"
       class="documentation-ad-exit"
     >
       <v-divider class="mt-4 mb-7" />
@@ -95,4 +96,8 @@
 
     .native-text
       color: rgba(0, 0, 0, .87)
+
+    &.exit--dark
+      .native-text
+        color: #FFFFFF
 </style>

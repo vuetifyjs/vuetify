@@ -1,7 +1,7 @@
 <template>
   <section
     id="home"
-    class="white"
+    :class="!$vuetify.theme.dark && 'white'"
   >
     <home-hero />
 
@@ -13,7 +13,7 @@
 
     <home-premium-themes />
 
-    <home-made-with-vuetify /> -->
+    <home-made-with-vuetify />
   </section>
 </template>
 

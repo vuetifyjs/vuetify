@@ -6,7 +6,7 @@
     outlined
   >
     <v-toolbar
-      color="grey lighten-3"
+      :color="$vuetify.theme.dark ? 'grey darken-4' : 'grey lighten-3'"
       dense
       flat
     >
@@ -16,6 +16,7 @@
         small
       >
         <v-icon left>mdi-star</v-icon>
+
         <span>New in <strong>{{ newIn }}</strong></span>
       </v-chip>
 
@@ -128,8 +129,8 @@
             >
               <div :class="($vuetify.breakpoint.smAndUp) ? 'v-example__container' : ''">
                 <doc-markup
-                  :value="file"
                   :filename="false"
+                  :value="file"
                   class="mb-0"
                 >{{ parsed[section] }}</doc-markup>
               </div>

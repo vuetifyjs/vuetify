@@ -1,24 +1,25 @@
 <template>
   <v-menu
-    bottom
-    left
-    offset-y
     max-height="calc(100% - 16px)"
-    transition="slide-y-transition"
+    offset-y
+    right
+    top
+    transition="slide-y-reverse-transition"
   >
-    <template #activator="{ on: menu }">
+    <template v-slot:activator="{ attrs, on }">
       <v-btn
         :aria-label="$t('Vuetify.AppToolbar.translations')"
-        text
-        style="min-width: 48px"
-        v-on="menu"
+        class="text--secondary text-capitalize mr-3"
+        icon
+        v-bind="attrs"
+        v-on="on"
       >
         <v-icon v-if="currentLanguage.locale === 'eo-UY'">mdi-web</v-icon>
 
         <v-img
           v-else
           :src="`https://cdn.vuetifyjs.com/images/flags/${currentLanguage.country}.png`"
-          width="26px"
+          max-width="22px"
         />
       </v-btn>
     </template>

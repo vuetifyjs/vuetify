@@ -1,7 +1,9 @@
 <template>
-  <div
+  <v-card
     :id="id"
+    :color="$vuetify.theme.dark ? undefined : 'grey darken-4'"
     class="v-markup"
+    outlined
   >
     <prism
       v-if="$slots.default || code"
@@ -54,7 +56,7 @@
     >
       <span v-text="file" />
     </a>
-  </div>
+  </v-card>
 </template>
 
 <script>
@@ -271,10 +273,6 @@
       padding: 1em
       margin: .5em 0
       overflow: auto
-
-    :not(pre) > code[class*="language-"],
-    pre[class*="language-"]
-      background: #2d2d2d
 
     :not(pre) > code[class*="language-"]
       padding: .1em

@@ -2,6 +2,7 @@
   <base-section
     id="home-hero"
     class="white--text py-4 py-md-12"
+    :class="$vuetify.theme.dark && 'theme--dark'"
   >
     <v-responsive min-height="30vh">
       <v-container class="pa-0">
@@ -107,6 +108,9 @@
 <style lang="sass">
   #home-hero
     background: linear-gradient(to bottom, #1867c0, #5CBBF6)
+
+    &.theme--dark
+      background: linear-gradient(to bottom, #2196F3, #5CBBF6)
 
     a
       color: inherit

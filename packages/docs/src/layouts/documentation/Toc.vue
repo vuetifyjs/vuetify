@@ -4,13 +4,14 @@
     v-scroll="onScroll"
     app
     clipped
-    floating
     color="transparent"
-    right
+    :right="!$vuetify.rtl"
   >
     <ul class="pt-8 mb-6 documentation-toc">
       <li class="mb-2">
-        <h3 class="grey--text text--darken-3 body-1">Contents</h3>
+        <h3 class="body-1 text--primary">
+          Contents
+        </h3>
       </li>
 
       <template v-for="(item, i) in toc">

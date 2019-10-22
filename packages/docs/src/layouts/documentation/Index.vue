@@ -8,8 +8,6 @@
 
     <documentation-toc />
 
-    <documentation-footer />
-
     <documentation-fab />
   </v-app>
 </template>
@@ -22,7 +20,6 @@
       DocumentationAppBar: () => import('./AppBar'),
       DocumentationDrawer: () => import('./Drawer'),
       DocumentationFab: () => import('./Fab'),
-      DocumentationFooter: () => import('./Footer'),
       DocumentationToc: () => import('./Toc'),
       DocumentationView: () => import('./View'),
     },

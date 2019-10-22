@@ -4,10 +4,11 @@
     :width="300"
     app
     clipped
+    :right="$vuetify.rtl"
   >
     <v-container>
       <div class="text-center">
-        <v-responsive min-height="64">
+        <v-responsive min-height="81">
           <supporters-supporter-group
             :group="supporters['Premiere']"
             large
@@ -60,6 +61,20 @@
         />
       </template>
     </v-list>
+
+    <template v-slot:append>
+      <v-divider />
+
+      <div class="px-4 py-2 d-flex">
+        <base-locales-menu />
+
+        <base-versions-menu />
+
+        <v-spacer />
+
+        <base-theme-toggle />
+      </div>
+    </template>
   </v-navigation-drawer>
 </template>
 

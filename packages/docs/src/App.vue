@@ -39,6 +39,10 @@
 
     created () {
       if (!this.languageIsValid) this.$router.push(`/${fallbackLocale}`)
+
+      if (this.$ssrContext) return
+
+      this.$vuetify.theme.dark = localStorage.getItem('vuetify__documentation__theme') === 'true'
     },
 
     async mounted () {

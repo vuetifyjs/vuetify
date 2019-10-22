@@ -84,7 +84,7 @@
     &:hover
       text-decoration: underline
 
-    .v-icon
+    .v-icon.v-icon
       font-size: 14px
       margin-left: 4px
       vertical-align: baseline

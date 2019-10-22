@@ -28,9 +28,9 @@
 
         <base-store-link />
 
-        <base-support-menu />
-
         <base-ecosystems-menu />
+
+        <base-support-menu />
 
         <base-locales-menu />
       </v-toolbar-items>

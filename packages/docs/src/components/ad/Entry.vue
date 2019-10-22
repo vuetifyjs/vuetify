@@ -1,5 +1,6 @@
 <template>
   <v-card
+    :class="$vuetify.theme.dark ? 'entry--dark' : undefined"
     class="px-4 pt-4 my-8 documentation-ad-entry"
     flat
     height="133"
@@ -81,4 +82,9 @@
       position: absolute
       right: 16px
       bottom: 16px
+
+    &.entry--dark
+      .carbon-poweredby,
+      .carbon-text
+        color: #FFFFFF
 </style>
