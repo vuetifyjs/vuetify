@@ -9,6 +9,7 @@
     aria-label="Vuetify Home Page"
     class="d-flex align-center"
     title="Vuetify Home Page"
+    @click.native="$vuetify.goTo(0)"
   >
     <v-img
       alt="Vuetify Logo"

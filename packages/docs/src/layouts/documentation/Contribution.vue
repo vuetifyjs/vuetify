@@ -1,5 +1,5 @@
 <template>
-  <div class="py-4">
+  <div class="py-4 mb-12">
     Caught a mistake or want to <strong v-html="contributionGuide" /> to the documentation?
     <strong v-html="contributionPageGithub" />
   </div>

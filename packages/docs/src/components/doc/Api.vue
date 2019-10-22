@@ -11,7 +11,7 @@
         flat
         height="auto"
       >
-        <v-container>
+        <v-container class="px-0">
           <v-row no-gutters>
             <v-col
               cols="12"

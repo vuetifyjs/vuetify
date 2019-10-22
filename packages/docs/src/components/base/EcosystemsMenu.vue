@@ -13,7 +13,7 @@
         v-bind="attrs"
         v-on="on"
       >
-        <base-nav-text>Vuetify.AppToolbar.ecosystem</base-nav-text>
+        <base-nav-text class="hidden-sm-and-down">Vuetify.AppToolbar.ecosystem</base-nav-text>
 
         <v-icon
           class="hidden-sm-and-down"

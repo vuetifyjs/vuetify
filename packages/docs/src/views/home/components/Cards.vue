@@ -32,7 +32,7 @@
                     :title="`Link to ${card.title}`"
                     class="v-card--mwvjs mx-auto"
                     width="450"
-                    max-width="calc(100% - 32px)"
+                    max-width="100%"
                     rel="noopener"
                     target="_blank"
                     @click="$ga.event('home', 'click', 'card', card.title)"

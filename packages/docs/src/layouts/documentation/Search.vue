@@ -1,6 +1,6 @@
 <template>
   <v-responsive
-    class="mr-6"
+    class="mr-0 mr-md-6 hidden-sm-and-down"
     max-width="250"
   >
     <v-text-field

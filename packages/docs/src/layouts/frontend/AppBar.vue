@@ -16,14 +16,13 @@
         <v-btn
           :aria-label="$t('Vuetify.AppToolbar.documentation')"
           :to="`/${$route.params.lang}/getting-started/quick-start`"
-          class="hidden-xs-only"
           exact
           min-width="48"
           text
         >
           <base-nav-text class="hidden-sm-and-down">Vuetify.AppToolbar.documentation</base-nav-text>
 
-          <v-icon class="hidden-md-and-up">mdi-file-document-box</v-icon>
+          <v-icon class="hidden-md-and-up">mdi-speedometer</v-icon>
         </v-btn>
 
         <base-store-link />

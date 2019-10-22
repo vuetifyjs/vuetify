@@ -7,6 +7,11 @@
     color="primary"
     dark
   >
+    <v-app-bar-nav-icon
+      class="hidden-md-and-up"
+      @click="drawer = !drawer"
+    />
+
     <base-vuetify-logo />
 
     <v-spacer />
@@ -24,11 +29,20 @@
 </template>
 
 <script>
+  // Utilities
+  import {
+    sync,
+  } from 'vuex-pathify'
+
   export default {
     name: 'DocumentationAppBar',
 
     components: {
       DocumentationSearch: () => import('./Search'),
+    },
+
+    computed: {
+      drawer: sync('app/drawer'),
     },
   }
 </script>

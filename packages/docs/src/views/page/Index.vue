@@ -1,7 +1,7 @@
 <template>
   <section
     v-if="structure !== false"
-    :id="`${namespace}.${page}`"
+    :id="`${namespace}-${page}`"
     class="page"
   >
     <component
