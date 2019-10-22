@@ -76,6 +76,41 @@
       "type": "section",
       "children": [
         {
+          "type": "heading",
+          "lang": "breakpointHeader"
+        },
+        {
+          "type": "text",
+          "lang": "breakpointText"
+        },
+        {
+          "type": "layout-grid"
+        },
+        {
+          "type": "heading",
+          "lang": "Generic.Pages.howItWorks"
+        },
+        {
+          "type": "text",
+          "lang": "breakpointHowText"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "simple/breakpoint-md"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "up-next",
           "value": [
             "styles/alignment",

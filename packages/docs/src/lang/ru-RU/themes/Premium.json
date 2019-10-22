@@ -10,7 +10,6 @@
       "title": "Тема Alpha"
     },
     "dashboard": {
-      "title": "Тема Material Dashboard",
       "description": "Material Dashboard — это красивый шаблон для Vuetify, Vuex и Vuejs. Он поможет в быстрой разработке панели управления."
     },
     "parallax": {

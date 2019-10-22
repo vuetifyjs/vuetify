@@ -7,10 +7,10 @@
 
           <v-toolbar-title>Manage</v-toolbar-title>
 
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
 
           <v-btn icon>
-            <v-icon>more_vert</v-icon>
+            <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </v-toolbar>
 

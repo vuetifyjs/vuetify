@@ -18,8 +18,10 @@ module.exports = {
         props: undefined,
       },
       {
-        name: 'icon',
-        props: undefined,
+        name: 'default',
+        props: {
+          open: 'boolean',
+        },
       },
     ],
     events: [

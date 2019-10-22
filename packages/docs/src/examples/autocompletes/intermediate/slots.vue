@@ -31,7 +31,7 @@
                 icon
                 v-on="on"
               >
-                <v-icon>more_vert</v-icon>
+                <v-icon>mdi-dots-vertical</v-icon>
               </v-btn>
             </template>
             <v-list>
@@ -48,11 +48,13 @@
         </v-col>
         <v-row
           class="pa-4"
-          align="start"
-          justify="end"
+          align="center"
+          justify="center"
         >
-          <h3 class="headline">{{ name }}</h3>
-          <span class="grey--text text--lighten-1">{{ title }}</span>
+          <v-col class="text-center">
+            <h3 class="headline">{{ name }}</h3>
+            <span class="grey--text text--lighten-1">{{ title }}</span>
+          </v-col>
         </v-row>
       </v-row>
     </v-img>
@@ -139,7 +141,7 @@
         hide-details
         label="Auto Update"
       ></v-switch>
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
       <v-btn
         :disabled="autoUpdate"
         :loading="isUpdating"

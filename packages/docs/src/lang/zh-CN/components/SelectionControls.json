@@ -15,9 +15,6 @@
       "header": "复选框 - 色彩",
       "desc": "复选框可以设置颜色通过使用 `color` 属性，颜色可以是任何内置的颜色或者其上下文名称。"
     },
-    "checkboxes-inline-texfield": {
-      "header": "复选框 - 和文本框内联"
-    },
     "radios-default": {
       "header": "单选框 - 默认"
     },

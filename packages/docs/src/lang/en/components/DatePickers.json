@@ -44,6 +44,10 @@
       "desc": "Date picker can now select multiple dates with the `multiple` prop. If using `multiple` then date picker expects its model to be an array.",
       "header": "### Date pickers - Mutiple"
     },
+    "date-range": {
+      "desc": "Date picker can select date range with the `range` prop. When using `range` prop date picker expects its model to be an array of length 2 or empty.",
+      "header": "### Date pickers - Range"
+    },
     "date-picker-date": {
       "desc": "You can watch the `pickerDate` which is the displayed month/year (depending on the picker type and active view) to perform some action when it changes.",
       "header": "### Date pickers - react to displayed month/year change"
@@ -122,6 +126,7 @@
     "nextIcon": "Sets the icon for next month/year button",
     "pickerDate": "Displayed year/month",
     "prevIcon": "Sets the icon for previous month/year button",
+    "range": "Allow the selection of date range",
     "reactive": "Updates the picker model when changing months/years automatically",
     "readonly": "Makes the picker readonly (doesnt't allow to select new date)",
     "scrollable": "Allows changing displayed month with mouse scroll",

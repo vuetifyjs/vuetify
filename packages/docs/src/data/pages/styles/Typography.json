@@ -18,8 +18,7 @@
           "lang": "fontText"
         },
         {
-          "type": "example",
-          "value": "font"
+          "type": "style-font"
         },
         {
           "type": "heading",

@@ -33,6 +33,7 @@ export function getComponent (type) {
     case 'tree': return 'doc-tree'
     case 'up-next': return 'doc-up-next'
     case 'usage': return 'doc-usage'
+    case 'usage-new': return 'doc-usage-new'
     case 'locales': return 'doc-locales'
     default: return type
   }

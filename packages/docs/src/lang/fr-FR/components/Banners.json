@@ -1,1 +1,41 @@
-{}
+{
+  "header": "# Bannières",
+  "headerText": "Le composant `v-banner` est utilisé comme message intermédiaire interruptif pour l'utilisateur avec des actions 1-2. Il est disponible en 2 variantes, **monoline** et **multi-ligne** (implicitement). Ces icônes peuvent être utilisées avec votre message et vos actions.",
+  "examples": {
+    "usage": {
+      "desc": "Les bannières peuvent avoir 1-2 lignes de texte, d'actions et d'icône."
+    },
+    "single-line": {
+      "header": "### Ligne unique (bureau)"
+    },
+    "two-line": {
+      "header": "### Deux lignes (mobile)",
+      "desc": "**Deux lignes** VBanner peut stocker plus de données, l'utiliser pour les gros messages."
+    },
+    "icon-slot": {
+      "header": "### Champ d'icône",
+      "desc": "Le champ d'icône vous permet de contrôler explicitement le contenu et les fonctionnalités qui y sont contenues."
+    },
+    "icon-event": {
+      "header": "### Événement de clic d'icône",
+      "desc": "VBanner émet l'événement `click:icon` sur le clic d'icône, même avec un emplacement d'icône personnalisé."
+    },
+    "actions-slots": {
+      "header": "### Emplacement des actions",
+      "desc": "le champ `actions` possède la fonction `dismiss` dans son champ d'application, vous pouvez l'utiliser pour facilement rejeter la bannière."
+    }
+  },
+  "props": {
+    "icon": "Désigne une icône spécifique.",
+    "iconColor": "Indique une couleur d'icône spécifique.",
+    "singleLine": "Force la bannière à tenir sur une seule ligne.",
+    "sticky": "Applique **position: sticky** au composant (**Evergreen browsers only**). Vous pouvez trouver plus d'informations sur la [documentation MDN pour la position autocollante](https://developer.mozilla.org/fr-US/docs/Web/CSS/position)."
+  },
+  "slots": {
+    "actions": "L'emplacement utilisé pour le contenu de l'action comme un [v-btn](/components/button). La fonction **dismiss** dans cette zone de créneaux, lorsqu'elle est appelée, fermera la bannière.",
+    "icon": "L'emplacement utilisé pour le contenu de l'icône."
+  },
+  "functions": {
+    "toggle": "Mixins.Toggleable.props.value"
+  }
+}

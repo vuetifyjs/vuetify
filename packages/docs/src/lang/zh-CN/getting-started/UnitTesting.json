@@ -1,1 +1,34 @@
-{}
+{
+  "header": "# 单元测试",
+  "headerText": "单元测试是开发应用程序的一个重要（有时被忽略）部分。它们有助于我们的开发流程，确保我们项目的最关键部分不受开发过程中意外错误或疏忽的影响。因此，Vue有自己的测试程序 [vue-test-utils](https://vue-test-utils.vuejs.org/)。它提供了与 Vue 组件交互的功能，并与许多流行的测试框架一起使用。",
+  "alert": "Vuetify 使用 Typescript，目前必须导入和继承 Vue 对象。在某些应用程序中，这可能会生成一个 **$attrs** 或 **$listeners** 只读警告。目前有一个正在进行的 [Github 讨论](https://github.com/vuetifyjs/vuetify/issues/4068)，为各种测试用例提供潜在的解决方案。如果你还有额外的问题，请加入我们的 [在线社区](https://community.vuetifyjs.com)。",
+  "runnerHeader": "## 测试环境设置",
+  "runnerText1": "关于如何使用 Vue CLI 3 设置测试环境的信息可以在 [官方文档](https://vue-test-utils.vuejs.org/guides/getting-started.html) 中找到。Vue CLI 3 已经为以下测试环境启动了存储库：",
+  "runnerText2": [
+    "[Jest](https://github.com/vuejs/vue-test-utils-jest-example)",
+    "[Mocha](https://github.com/vuejs/vue-test-utils-mocha-webpack-example)",
+    "[tape](https://github.com/eddyerburgh/vue-test-utils-tape-example)",
+    "[AVA](https://github.com/eddyerburgh/vue-test-utils-ava-example)"
+  ],
+  "specHeader": "## 规范测试",
+  "specText1": "在 Vuetify 中创建类似于 **vuex** 和 **vue-router** 的单元测试，因为您将在**localVue** 实例中使用 Vuetify 对象，并将实例传递给 mount 函数。",
+  "specText2": "让我们创建一个在应用程序中的测试用例示例。",
+  "specText3": "在上面的例子中，我们创建了一个自定义组件 **title** prop 和 `v-btn`，当单击它时，它触发一个自定义事件。现在，我们想要创建测试以确保该行为正常工作，并且在将来的更改中也能这样运行。下面的示例是使用 [Jest](https://jestjs.io/) 测试环境创建的。",
+  "specAlert": "如果你遇到有关测试或者一般问题并且需要帮助，请访问我们的 [在线社区](https://community.vuetifyjs.com)。",
+  "efficiencyHeader": "### 测试效率",
+  "efficiencyText1": "在编写测试时，您经常会发现自己在重复同样的事情。在这种情况下，创建助手函数来减少每个测试的重复。[DRYing](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)",
+  "efficiencyText2": "在单元测试中编写的最常见的重复代码之一是 mount 函数。这可以很容易地编写为可重用函数。",
+  "mockHeader": "### Mocking Vuetify",
+  "mockText1": "Vuetify 的许多组件都使用全局 `$vuetify` 对象来生成默认文本或断点信息等设置。在测试这些组件时，需要使用一个模拟对象来提供 `vue-test-utils`。",
+  "mockText2": "请记住，你 **只需要存根** 正在使用的服务。例如 **lang** 或**application**。除此之外你也可以手动导入这些服务。",
+  "mockText3": "所有可用服务的完整列表如下：",
+  "mockList": [
+    "[application](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/application)",
+    "[breakpoint](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/breakpoint)",
+    "[goto](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/goto)",
+    "[icons](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/icons)",
+    "[lang](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/lang)",
+    "[theme](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/theme)"
+  ],
+  "e2eHeader": "## E2E 测试"
+}

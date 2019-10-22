@@ -75,7 +75,6 @@
         "reverse": "Invierte la dirección seleccionada actual (column, row).",
         "wrap": "Permite que los hijos \"salten de línea\" dentro del contenedor si los elementos ocupan más del 100%.",
         "v-container": {
-            "grid-list-{xs through xl}": "Configura el espacio entre elementos del grid list en un rango de 2px to 24px",
             "fluid": "Quita los breakpoints de tamaño del viewport"
         },
         "v-flex": {

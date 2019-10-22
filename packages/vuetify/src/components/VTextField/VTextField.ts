@@ -52,7 +52,7 @@ export default baseMixins.extend<options>().extend({
     clearable: Boolean,
     clearIcon: {
       type: String,
-      default: '$vuetify.icons.clear',
+      default: '$clear',
     },
     counter: [Boolean, Number, String],
     filled: Boolean,
@@ -224,11 +224,10 @@ export default baseMixins.extend<options>().extend({
       window.requestAnimationFrame(() => {
         this.$refs.input && this.$refs.input.blur()
       })
-      this.onBlur(e)
     },
     clearableCallback () {
-      this.internalValue = null
-      this.$nextTick(() => this.$refs.input && this.$refs.input.focus())
+      this.$refs.input && this.$refs.input.focus()
+      this.$nextTick(() => this.internalValue = null)
     },
     genAppendSlot () {
       const slot = []
@@ -290,7 +289,7 @@ export default baseMixins.extend<options>().extend({
     genCounter () {
       if (this.counter === false || this.counter == null) return null
 
-      const max = this.counter === true ? this.$attrs.maxlength : this.counter
+      const max = this.counter === true ? this.attrs$.maxlength : this.counter
 
       return this.$createElement(VCounter, {
         props: {
@@ -352,7 +351,7 @@ export default baseMixins.extend<options>().extend({
       }, [span])
     },
     genInput () {
-      const listeners = Object.assign({}, this.$listeners)
+      const listeners = Object.assign({}, this.listeners$)
       delete listeners['change'] // Change should not be bound externally
 
       return this.$createElement('input', {
@@ -361,7 +360,7 @@ export default baseMixins.extend<options>().extend({
           value: this.lazyValue,
         },
         attrs: {
-          ...this.$attrs,
+          ...this.attrs$,
           autofocus: this.autofocus,
           disabled: this.disabled,
           id: this.computedId,
@@ -406,7 +405,7 @@ export default baseMixins.extend<options>().extend({
     },
     onBlur (e?: Event) {
       this.isFocused = false
-      e && this.$emit('blur', e)
+      e && this.$nextTick(() => this.$emit('blur', e))
     },
     onClick () {
       if (this.isFocused || this.disabled || !this.$refs.input) return
@@ -452,7 +451,7 @@ export default baseMixins.extend<options>().extend({
     setLabelWidth () {
       if (!this.outlined || !this.$refs.label) return
 
-      this.labelWidth = this.$refs.label.offsetWidth * 0.75 + 6
+      this.labelWidth = this.$refs.label.scrollWidth * 0.75 + 6
     },
     setPrefixWidth () {
       if (!this.$refs.prefix) return

@@ -81,8 +81,8 @@ export default Selectable.extend({
         staticClass: 'v-input--selection-controls__input',
       }, [
         this.genInput('checkbox', {
-          ...this.$attrs,
           ...this.attrs,
+          ...this.attrs$,
         }),
         this.genRipple(this.setTextColor(this.validationState, {
           directives: [{

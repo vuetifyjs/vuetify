@@ -30,7 +30,12 @@ export default baseMixins.extend({
             height: this.windowGroup.internalHeight,
           },
           on: this.$listeners,
-        }, this.$slots.default),
+        }, [
+          this.$slots.default,
+          this.$createElement('template', {
+            slot: 'placeholder',
+          }, this.$slots.placeholder),
+        ]),
       ]
     },
     genWindowItem () {
@@ -44,9 +49,5 @@ export default baseMixins.extend({
 
       return this.$createElement(tag, data, this.showLazyContent(this.genDefaultSlot()))
     },
-    onBeforeEnter () { /* noop */ },
-    onEnter () { /* noop */ },
-    onAfterEnter () { /* noop */ },
-    onEnterCancelled () { /* noop */ },
   },
 })

@@ -15,7 +15,6 @@ import {
 } from '@vue/test-utils'
 
 const localVue = createLocalVue()
-localVue.use(Vuetify)
 
 describe('CustomNavigationDrawer.vue', () => {
   let vuetify

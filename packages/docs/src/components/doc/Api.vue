@@ -10,7 +10,10 @@
         height="auto"
       >
         <v-layout wrap>
-          <v-flex xs12 md4>
+          <v-flex
+            xs12
+            md4
+          >
             <v-select
               v-model="current"
               :items="value"
@@ -22,12 +25,16 @@
               hide-details
             />
           </v-flex>
-          <v-flex xs12 md4 offset-md4>
+          <v-flex
+            xs12
+            md4
+            offset-md4
+          >
             <v-text-field
               v-model="search"
               type="search"
               clearable
-              append-icon="search"
+              append-icon="mdi-magnify"
               label="Search..."
               outlined
               hide-details

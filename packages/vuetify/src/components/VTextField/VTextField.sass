@@ -1,4 +1,5 @@
-@import '../../styles/styles.sass'
+@import './_mixins.sass'
+@import './_variables.scss'
 
 +theme(v-text-field) using ($material)
   & > .v-input__control > .v-input__slot:before
@@ -49,7 +50,7 @@
     fieldset
       border-color: map-deep-get($material, 'text-fields', 'outlined')
 
-    &:not(.v-input--is-focused):not(.v-input--has-state):hover
+    &:not(.v-input--is-focused):not(.v-input--has-state) > .v-input__control > .v-input__slot:hover
       fieldset
         border-color: map-deep-get($material, 'text-fields', 'outlined-hover')
 
@@ -64,6 +65,13 @@
     max-width: 100%
     min-width: 0px
     width: 100%
+
+  &.v-input--dense
+    padding-top: 0
+
+    &:not(.v-text-field--outlined):not(.v-text-field--solo)
+      input
+        padding: 4px 0 8px
 
     &[type=text]::-ms-clear
       display: none
@@ -203,20 +211,53 @@
       align-items: stretch
       min-height: 56px
 
+    &.v-input--dense
+      > .v-input__control > .v-input__slot
+        min-height: 44px
+
+      &.v-text-field--single-line,
+      &.v-text-field--outlined,
+      &.v-text-field--outlined.v-text-field--filled
+        > .v-input__control > .v-input__slot
+          min-height: 40px
+
   &--filled,
   &--full-width
     input
       margin-top: 22px
 
+    &.v-input--dense
+      input
+        margin-top: 20px
+
+      &.v-text-field--outlined
+        input
+          margin-top: 0
+
     &.v-text-field--single-line
       input
         margin-top: 12px
+
+      &.v-input--dense
+        input
+          margin-top: 6px
 
     .v-label
       top: 18px
 
       &--active
         transform: translateY(-6px) scale(.75)
+
+    &.v-input--dense
+      .v-label
+        top: 17px
+
+        &--active
+          transform: translateY(-10px) scale(.75)
+
+      &.v-text-field--single-line
+        .v-label
+          top: 11px
 
   &--filled > .v-input__control > .v-input__slot
     border-top-left-radius: 4px
@@ -235,11 +276,16 @@
       .v-progress-linear__background
         display: none
 
-    .v-input__prepend-outer,
-    .v-input__prepend-inner,
-    .v-input__append-inner,
-    .v-input__append-outer
-      margin-top: 16px
+    +prepend-append-margin-top(16px)
+
+    &.v-input--dense:not(.v-text-field--solo)
+      +prepend-append-margin-top(14px)
+
+      &.v-text-field--single-line
+        +prepend-append-margin-top(9px)
+
+      &.v-text-field--outlined
+        +prepend-append-margin-top(7px)
 
     .v-text-field__details,
     & > .v-input__control > .v-input__slot
@@ -272,11 +318,10 @@
     margin-bottom: 16px
     transition: border $primary-transition
 
-    .v-label
-      top: 18px
+    +label-position(18px, -24px)
 
-      &--active
-        transform: translateY(-24px) scale(.75)
+    &.v-input--dense
+      +label-position(10px, -16px)
 
     fieldset
       border-style: solid
@@ -331,7 +376,7 @@
 
   &--solo,
   &--outlined
-    border-radius: 4px
+    border-radius: $text-field-border-radius
 
     fieldset,
     .v-input__control,
@@ -369,6 +414,9 @@
       min-height: 48px
       padding: 0
 
+    &.v-input--dense > .v-input__control
+      min-height: 38px
+
     &:not(.v-text-field--solo-flat) > .v-input__control > .v-input__slot
       +elevation(2)
 
@@ -377,9 +425,10 @@
       align-self: center
       margin-top: 0
 
-    .v-input__prepend-outer,
-    .v-input__append-outer
-      margin-top: 12px
+    +outer-margin-top(12px)
+
+    &.v-input--dense
+      +outer-margin-top(7px)
 
   &.v-input--is-focused > .v-input__control > .v-input__slot:after
     transform: scaleX(1)

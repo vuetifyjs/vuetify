@@ -1,5 +1,4 @@
 // Imports
-@import '../../styles/styles.sass'
 @import './_variables.scss'
 
 // Theme
@@ -10,9 +9,15 @@
 
 // Block
 .v-alert
+  display: block
   font-size: $alert-font-size
   margin-bottom: $alert-margin
   padding: $alert-padding
+  position: relative
+  +elevationTransition()
+
+  &:not(.v-sheet--tile)
+    border-radius: $alert-border-radius
 
   > .v-icon,
   > .v-alert__content
@@ -120,6 +125,7 @@
 
 .v-alert__wrapper
   align-items: center
+  border-radius: inherit
   display: flex
 
 // Modifiers
@@ -168,5 +174,6 @@
     left: 0
     opacity: 0.12
     position: absolute
+    pointer-events: none
     right: 0
     top: 0

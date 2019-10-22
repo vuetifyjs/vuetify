@@ -1,1 +1,10 @@
-{}
+{
+  "props": {
+    "customFilter": "Itemをfilterするための関数",
+    "customSort": "Itemsをsortするために使われる関数",
+    "disableFiltering": "Filterを完全に無効化します。",
+    "disablePagination": "Paginationを完全に無効化します。",
+    "disableSort": "Sortingを完全に無効化します。",
+    "items": "表示されるitemsのarray。"
+  }
+}

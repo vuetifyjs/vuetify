@@ -2,7 +2,7 @@
   <v-card>
     <v-card-title>
       Nutrition
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
       <v-text-field
         v-model="search"
         append-icon="search"

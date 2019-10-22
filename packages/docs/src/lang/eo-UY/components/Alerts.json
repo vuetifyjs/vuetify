@@ -1,10 +1,8 @@
 {
   "header": "crwdns38326:0crwdne38326:0",
   "headerText": "crwdns38328:0crwdne38328:0",
+  "usage": "crwdns38330:0crwdne38330:0",
   "examples": {
-    "usage": {
-      "desc": "crwdns38330:0crwdne38330:0"
-    },
     "border": {
       "header": "crwdns38332:0crwdne38332:0",
       "desc": "crwdns38334:0crwdne38334:0"

@@ -14,7 +14,6 @@ import {
 } from '@vue/test-utils'
 
 const localVue = createLocalVue()
-localVue.use(Vuetify)
 
 describe('CustomAlert.vue', () => {
   let vuetify

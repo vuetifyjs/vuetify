@@ -18,6 +18,7 @@ import Resize from '../../directives/resize'
 import mixins from '../../util/mixins'
 import { convertToUnit, keyCodes } from '../../util/helpers'
 import ThemeProvider from '../../util/ThemeProvider'
+import { removed } from '../../util/console'
 
 // Types
 import { VNode, VNodeDirective, VNodeData } from 'vue'
@@ -61,7 +62,6 @@ export default baseMixins.extend({
     },
     disabled: Boolean,
     disableKeys: Boolean,
-    fullWidth: Boolean,
     maxHeight: {
       type: [Number, String],
       default: 'auto',
@@ -177,6 +177,13 @@ export default baseMixins.extend({
       prev in this.tiles &&
         this.tiles[prev].classList.remove('v-list-item--highlighted')
     },
+  },
+
+  created () {
+    /* istanbul ignore next */
+    if (this.$attrs.hasOwnProperty('full-width')) {
+      removed('full-width', this)
+    }
   },
 
   mounted () {
@@ -432,7 +439,10 @@ export default baseMixins.extend({
     const data = {
       staticClass: 'v-menu',
       class: {
-        'v-menu--inline': !this.fullWidth && (this.$slots.activator || this.$scopedSlots.activator),
+        'v-menu--attached':
+          this.attach === '' ||
+          this.attach === true ||
+          this.attach === 'attach',
       },
       directives: [{
         arg: '500',

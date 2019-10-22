@@ -7,9 +7,8 @@
       stateless
     >
       <v-img :aspect-ratio="16/9" src="https://cdn.vuetifyjs.com/images/parallax/material.jpg">
-        <v-row class="lightbox white--text pa-2 fill-height">
-          <div class="flex-grow-1"></div>
-          <v-col class="shrink">
+        <v-row align="end" class="lightbox white--text pa-2 fill-height">
+          <v-col>
             <div class="subheading">Jonathan Lee</div>
             <div class="body-1">heyfromjonathan@gmail.com</div>
           </v-col>

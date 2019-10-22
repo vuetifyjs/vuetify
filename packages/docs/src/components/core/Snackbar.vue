@@ -7,45 +7,48 @@
     }"
     :timeout="snackbar.timeout"
     bottom
-    right
   >
-    <v-layout
-      align-center
+    <v-row
+      align="center"
+      class="mx-0"
     >
       <v-icon
         v-if="computedIcon"
-        dark
         class="mr-4"
+        dark
       >
         {{ computedIcon }}
       </v-icon>
+
       <doc-markdown
         :code="snackbar.msg"
         class="snack-markdown"
       />
+
       <v-spacer />
+
       <v-btn
-        :color="computedColor"
         :ripple="false"
-        v-bind="bind"
-        :text="snackbar.color !== 'store'"
-        dark
+        class="text--primary"
+        color="white"
         depressed
+        v-bind="bind"
         @click="onClick"
       >
         {{ snackbar.text }}
       </v-btn>
+
       <v-btn
         v-if="snackbar.close"
-        :ripple="false"
         :aria-label="$t('Vuetify.Snackbar.close')"
-        icon
+        :ripple="false"
         class="ml-4"
+        icon
         @click="markViewed"
       >
-        <v-icon>clear</v-icon>
+        <v-icon>mdi-close</v-icon>
       </v-btn>
-    </v-layout>
+    </v-row>
   </v-snackbar>
 </template>
 
@@ -80,10 +83,10 @@
       computedIcon () {
         switch (this.snackbar.color) {
           case 'store': return 'mdi-cart'
-          case 'success': return 'check'
-          case 'info': return 'info'
-          case 'warning': return 'warning'
-          case 'error': return 'error'
+          case 'success': return 'mdi-check'
+          case 'info': return 'mdi-information'
+          case 'warning': return 'mdi-alert'
+          case 'error': return 'mdi-alert-circle'
           default: return false
         }
       },

@@ -11,7 +11,11 @@ describe('VColorPickerEdit.ts', () => {
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {
     mountFunction = (options?: MountOptions<Instance>) => {
-      return mount(VColorPickerEdit, options)
+      return mount(VColorPickerEdit, {
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
+        ...options,
+      })
     }
   })
 
@@ -97,7 +101,7 @@ describe('VColorPickerEdit.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should change mode', () => {
+  it('should change mode', async () => {
     const wrapper = mountFunction({
       propsData: {
         color: fromRGBA({ r: 0, g: 0, b: 0, a: 0 }),
@@ -108,17 +112,21 @@ describe('VColorPickerEdit.ts', () => {
     const changeMode = wrapper.find('.v-btn')
 
     changeMode.trigger('click')
+    await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
 
     changeMode.trigger('click')
+    await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
 
     changeMode.trigger('click')
+    await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({
       mode: 'hsla',
     })
+    await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
   })
 

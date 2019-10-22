@@ -7,7 +7,7 @@
     },
     "color": {
       "header": "### Color",
-      "desc": "The `color` prop applys a color to the background the bottom navigation. It is recommended to use the `light` and `dark` props to properly contrast text color."
+      "desc": "The `color` prop applies a color to the background the bottom navigation. It is recommended to use the `light` and `dark` props to properly contrast text color."
     },
     "grow": {
       "header": "### Grow",
@@ -23,7 +23,7 @@
     },
     "toggle": {
       "header": "### Toggle",
-      "desc": "As with other Vuetify components, you can control the display state with `v-model`."
+      "desc": "The display state of `v-bottom-navigation` can be toggled using the `input-value` prop. You can also control the currently active button using `v-model`."
     },
     "hide-on-scroll": {
       "header": "### Hide on scroll",
@@ -48,7 +48,7 @@
     "value": "Holds the value of the currently active [v-btn](/components/buttons). If the button has no value supplied, its index will be used instead.."
   },
   "events": {
-    "change": "The value of currently selected button. If no value is assigne, will be the current index of the button.",
+    "change": "The value of currently selected button. If no value is assigned, will be the current index of the button.",
     "update:input-value": "The event used for `input-value.sync`."
   }
 }

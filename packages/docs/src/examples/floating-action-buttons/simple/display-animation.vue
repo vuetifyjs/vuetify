@@ -17,7 +17,7 @@
                   bottom
                   left
                 >
-                  <v-icon>add</v-icon>
+                  <v-icon>mdi-plus</v-icon>
                 </v-btn>
               </v-fab-transition>
             </template>
@@ -38,7 +38,7 @@
                 right
                 fab
               >
-                <v-icon>add</v-icon>
+                <v-icon>mdi-plus</v-icon>
               </v-btn>
             </v-fab-transition>
           </v-card-text>

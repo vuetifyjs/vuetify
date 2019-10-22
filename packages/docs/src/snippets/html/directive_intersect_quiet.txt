@@ -1,0 +1,12 @@
+<template>
+  <v-card v-intersect.quiet="onIntersect">...</v-card>
+</template>
+
+<script>
+  export default {
+    methods: {
+      // Will only be called once the element is intersected
+      onIntersect (entries, observer, isIntersecting) {}
+    }
+  }
+</script>

@@ -3,6 +3,7 @@
   "headerText": "La directive `v-ripple` est utilisée pour montrer l'action d'un utilisateur. Elle peut être appliquée à n'importe quel élément de niveau bloc. La directive ripple est intégrée à de nombreux composants, tels que `v-btn`, `v-tabs-item` et bien d'autres.",
   "examples": {
     "usage": {
+      "desc": "Les fonctionnalités de ripple basiques peuvent être activées en utilisant la directive `v-ripple` sur un composant ou un élément HTML",
       "uninverted": true
     },
     "custom-color": {
@@ -11,10 +12,18 @@
       "uninverted": true
     },
     "center": {
+      "header": "### Ondulation Centrées",
+      "desc": "Quand une option `center` est utilisée ripple va toujours provenir du centre de la cible.",
       "uninverted": true
     },
     "ripple-in-components": {
+      "header": "### Ripple dans les composants",
+      "desc": "Certains composants fournissent la prop `ripple` qui vous permet de contrôler l'effet ripple. Vous pouvez l'éteindre ou personnaliser le comportement en utilisant les options `class` ou `center`.",
       "uninverted": true
     }
+  },
+  "options": {
+    "class": "`v-ripple=\"{ \"class\": 'my-class' }\"` Applique une classe personnalisée à l'ondulation, utilisée pour changer de couleur",
+    "center": "`v-ripple=\"{ \"center\": true }\"` Force l'ondulation à provenir du centre de la cible"
   }
 }

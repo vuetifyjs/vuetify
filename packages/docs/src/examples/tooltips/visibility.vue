@@ -12,7 +12,7 @@
         <v-tooltip v-model="show" top>
           <template v-slot:activator="{ on }">
             <v-btn icon v-on="on">
-              <v-icon color="grey lighten-1">shopping_cart</v-icon>
+              <v-icon color="grey lighten-1">mdi-cart</v-icon>
             </v-btn>
           </template>
           <span>Programmatic tooltip</span>

@@ -54,6 +54,7 @@ export default baseMixins.extend<options>().extend({
     icon: Boolean,
     loading: Boolean,
     outlined: Boolean,
+    retainFocusOnClick: Boolean,
     rounded: Boolean,
     tag: {
       type: String,
@@ -151,6 +152,7 @@ export default baseMixins.extend<options>().extend({
 
   methods: {
     click (e: MouseEvent): void {
+      !this.retainFocusOnClick && !this.fab && e.detail && this.$el.blur()
       this.$emit('click', e)
 
       this.btnToggle && this.toggle()

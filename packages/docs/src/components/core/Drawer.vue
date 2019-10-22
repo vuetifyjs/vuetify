@@ -20,7 +20,7 @@
 
         <supporters-sponsor-btn
           class="mb-6"
-          href="https://www.patreon.com/join/vuetify"
+          href="https://github.com/users/johnleider/sponsorship"
         />
 
         <v-text-field

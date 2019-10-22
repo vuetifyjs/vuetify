@@ -15,7 +15,12 @@ Vuetify.install(Vue, {
   components: {
     VBtn,
     VCard,
-    VCardText
+    VCardText,
   },
   directives,
+})
+
+/* eslint-disable-next-line no-new */
+new Vue({
+  vuetify: new Vuetify(),
 })

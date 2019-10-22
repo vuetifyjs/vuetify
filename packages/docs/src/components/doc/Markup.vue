@@ -1,5 +1,8 @@
 <template>
-  <div :id="id" class="v-markup">
+  <div
+    :id="id"
+    class="v-markup"
+  >
     <prism
       v-if="$slots.default || code"
       :language="language"
@@ -22,7 +25,10 @@
       </a>
     </div>
 
-    <div v-if="!hideCopy" class="v-markup__copy">
+    <div
+      v-if="!hideCopy"
+      class="v-markup__copy"
+    >
       <v-icon
         title="Copy code"
         aria-label="Copy code"

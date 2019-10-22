@@ -12,7 +12,7 @@
         style="min-width: 48px"
         v-on="menu"
       >
-        <v-icon v-if="currentLanguage.locale === 'eo-UY'">language</v-icon>
+        <v-icon v-if="currentLanguage.locale === 'eo-UY'">mdi-web</v-icon>
         <v-img
           v-else
           :src="`https://cdn.vuetifyjs.com/images/flags/${currentLanguage.country}.png`"
@@ -33,7 +33,7 @@
           tile
           size="24px"
         >
-          <v-icon v-if="language.locale === 'eo-UY'">language</v-icon>
+          <v-icon v-if="language.locale === 'eo-UY'">mdi-web</v-icon>
           <v-img
             v-else
             :src="`https://cdn.vuetifyjs.com/images/flags/${language.country}.png`"

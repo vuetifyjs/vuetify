@@ -2,6 +2,7 @@
   <v-card
     v-if="featured.length > 0"
     class="text-center py-12"
+    color="grey lighten-4"
     flat
   >
     <h3

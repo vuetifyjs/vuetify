@@ -26,7 +26,7 @@
         <template v-slot:badge>
           <span v-if="messages > 0">{{ messages }}</span>
         </template>
-        <v-icon large>mail</v-icon>
+        <v-icon large>mdi-email</v-icon>
       </v-badge>
     </v-row>
   </v-container>

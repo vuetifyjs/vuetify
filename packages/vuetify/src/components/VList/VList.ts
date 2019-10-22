@@ -98,7 +98,7 @@ export default VSheet.extend<options>().extend({
       style: this.styles,
       attrs: {
         role: this.isInNav || this.isInMenu ? undefined : 'list',
-        ...this.$attrs,
+        ...this.attrs$,
       },
     }
 

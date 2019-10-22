@@ -71,6 +71,9 @@
       "mandatory": false,
       "max": false,
       "multiple": false
+    },
+    "v-file-input": {
+      "readonly": false
     }
   }
 }

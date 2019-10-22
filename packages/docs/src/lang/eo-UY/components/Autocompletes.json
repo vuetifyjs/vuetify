@@ -28,6 +28,10 @@
     "stateSelector": {
       "header": "crwdns38524:0crwdne38524:0",
       "desc": "crwdns38526:0crwdne38526:0"
+    },
+    "dense": {
+      "header": "crwdns42992:0crwdne42992:0",
+      "desc": "crwdns42994:0crwdne42994:0"
     }
   },
   "props": {
@@ -60,6 +64,7 @@
     "click:prepend": "crwdns32234:0crwdne32234:0",
     "click:prepend-inner": "crwdns32236:0crwdne32236:0",
     "update:error": "crwdns32238:0crwdne32238:0",
+    "update:list-index": "crwdns42996:0crwdne42996:0",
     "update:search-input": "crwdns38538:0crwdne38538:0"
   }
 }

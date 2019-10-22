@@ -1,12 +1,40 @@
 {
-  "header": "不同之处是什么？",
-  "communityHeader": "充满活力的社区",
-  "comparisonHeader": "对比其它框架",
-  "featuresList": {
-    "2": "SSR和PWA支持",
-    "4": "即时聊天支持"
-  },
+  "header": "# 不同之处是什么？",
+  "headerText": "Vuetify 是 #1 材料框架，自 2016 年以来一直在持续开发中。该项目的目标是为用户提供使用 Material Design specification 和 Vue 用来构建丰富且引人入胜的 web 应用程序。Vuetify 通过一致的更新周期、对以前版本的长期支持 **(LTS)** 、反应迅速的社区参与、巨大的资源生态系统和对高质量组件的贡献来实现这一点。",
+  "community": "社区",
+  "communityCaption": "准备好享受 Vue 生态系统中最活跃的社区之一。有一个问题吗? 马上寻求帮助。找到一个 bug? 想谈谈 Firebase 吗? 创造了一些令人惊叹的项目吗? 快来让我们知道。**核心** 团队将对这些问题做出反馈。我们是你坚强的后盾。",
+  "communityHeader": "## 充满活力的社区",
+  "communityText": "用 Vuetify 开发意味着你不是一个人在战斗。立即从开发团队和官方 Discord 服务器中的其他社区成员那里获得帮助。有机会与来自世界各地的有才能的人交谈来帮助你成功。需要帮助，想要支持这个项目?成为 [Patreon backer](https://www.patreon.com/vuetify) 就能够访问的私人支持频道或 [schedule time](/getting-started/consulting-and-support)。",
+  "comparisonHeader": "## 对比其它框架",
+  "comparisonText": "Vuetify 并不是唯一能够选择的的 Vue 组件框架。许多其他有才华的开发人员已经创建了令人惊叹的项目来帮助用户进行开发。最终由你来决定你的度量标准是什么。以下有一个不详尽的列表，来展示 Vuetify 与其他库的区别：",
+  "continuous": "持续",
+  "core": "## 核心原则",
+  "designHeader": "## 设计规范",
+  "designText": "Vuetify 完全按照 [Material Design specification](https://material.io/guidelines/) 开发。每个组件都是纯手工打造,为你的下一代程序带来最好的 UI 体验。我们的开发并未局限在核心组件上。通过社区成员和我们的 [sponsors](/getting-started/sponsors-and-backers) 的支持，我们增加了超过15个新组件包括 [calendars](/components/calendars)，[color pickers](/components/color-pickers)，[treeview](/components/treeview) 等等。",
+  "featuresHeader": "## 亮点",
+  "featuresList": [
+    "[Vibrant Community](https://community.vuetifyjs.com) 拥有超过一千个用户",
+    "每周 (**周二**) 更新",
+    "SSR和PWA支持",
+    "广泛的组件API",
+    "SSR, PWA 和 Mobile App 支持",
+    "Vue CLI 3 支持",
+    "辅助功能 **(a11y)** 支持",
+    "国际化 **(i18n)** 支持",
+    "RTL **(bidirectionality)** 支持",
+    "作者专业的咨询支持",
+    "通过 Tidelift 提供企业支持",
+    "付费和免费主题"
+  ],
+  "material": "Material",
   "questionButton": "向社区提问",
   "questionHeader": "仍有疑问?",
-  "support": "支持"
+  "professional": "专业",
+  "support": "支持",
+  "supportCaption": "需要定制的支持计划? Vuetify 的作者 John Leider 提供咨询和支持服务，提供各种使用案例以帮助您在构建应用程序。",
+  "toolkit": "工具包",
+  "toolkitCaption": "Vuetify 是一个语义化框架。易于学习，易于记忆&mdash;这意味着无论您是在开发自己的应用程序还是刚刚上手，Vuetify的 _即写即说_ 组件和属性都使开发变得轻松。",
+  "updates": "更新",
+  "updatesCaption": "Vuetify 有一个一致的更新周期，允许您更快速地获得 bug 修复和框架增强。开发团队致力于为您提供最好的体验。",
+  "vibrant": "充满活力"
 }

@@ -23,6 +23,7 @@
   flex: 1 1 auto
   font-size: 16px
   letter-spacing: normal
+  max-width: 100%
   text-align: left
 
   .v-progress-linear
@@ -74,6 +75,7 @@
     height: auto
     flex-grow: 1
     flex-wrap: wrap
+    min-width: 0
     width: 100% // For IE11
 
   &__icon
@@ -97,6 +99,9 @@
     position: relative
     transition: $primary-transition
     width: 100%
+
+  &--dense > .v-input__control > .v-input__slot
+    margin-bottom: 4px
 
   &--is-disabled:not(.v-input--is-readonly)
     pointer-events: none

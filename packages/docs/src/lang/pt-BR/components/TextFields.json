@@ -8,6 +8,9 @@
       "header": "Tema claro em linha única",
       "desc": "Text-fields em linha única não possuem seu label flutuando quando estiver focado ou com dados."
     },
+    "dense": {
+      "header": "### Denso"
+    },
     "icon": {
       "desc": "Ícones podem ser especificados como prepended ou appended."
     },

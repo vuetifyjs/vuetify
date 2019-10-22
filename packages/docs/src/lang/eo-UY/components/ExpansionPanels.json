@@ -77,8 +77,7 @@
   },
   "slots": {
     "v-expansion-panel-header": {
-      "actions": "crwdns38798:0crwdne38798:0",
-      "icon": "crwdns38800:0crwdne38800:0"
+      "actions": "crwdns38798:0crwdne38798:0"
     }
   }
 }

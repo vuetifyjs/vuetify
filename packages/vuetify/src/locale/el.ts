@@ -1,7 +1,6 @@
 export default {
   close: 'Close',
   dataIterator: {
-    pageText: '{0}-{1} από {2}',
     noResultsText: 'Δε βρέθηκαν αποτελέσματα',
     loadingText: 'Loading item...',
   },
@@ -21,6 +20,7 @@ export default {
     prevPage: 'Προηγούμενη σελίδα',
     firstPage: 'Πρώτη σελίδα',
     lastPage: 'Τελευταία σελίδα',
+    pageText: '{0}-{1} από {2}',
   },
   datePicker: {
     itemsSelected: '{0} επιλεγμένα',
@@ -29,6 +29,9 @@ export default {
   carousel: {
     prev: 'הקודם חזותי',
     next: 'הבא חזותי',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: '{0} ακόμη',
@@ -36,5 +39,9 @@ export default {
   fileInput: {
     counter: '{0} files',
     counterSize: '{0} files ({1} in total)',
+  },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
   },
 }

@@ -252,32 +252,6 @@ describe('VDialog.ts', () => {
     expect(wrapper.vm.isActive).toBe(false)
   })
 
-  // https://github.com/vuetifyjs/vuetify/issues/6115
-  it('should have activator', () => {
-    const wrapper = mountFunction()
-    expect(wrapper.vm.hasActivator).toBe(false)
-    expect(wrapper.element.style.display).toBe('block')
-
-    const wrapper2 = mountFunction({
-      scopedSlots: {
-        activator: '<div></div>',
-      },
-    })
-    expect(wrapper2.element.style.display).toBe('inline-block')
-    expect(wrapper2.vm.hasActivator).toBe(true)
-
-    const wrapper3 = mountFunction({
-      scopedSlots: {
-        activator () {
-          return this.$createElement('span')
-        },
-      },
-    })
-    const dialog = wrapper3.find(VDialog)
-    expect(wrapper2.element.style.display).toBe('inline-block')
-    expect(dialog.vm.hasActivator).toBe(true)
-  })
-
   // https://github.com/vuetifyjs/vuetify/issues/5533
   it('should emit click:outside', async () => {
     const input = jest.fn()
@@ -323,5 +297,19 @@ describe('VDialog.ts', () => {
     const content = wrapper.find('.v-dialog__content')
     content.trigger('keydown.esc')
     expect(wrapper.vm.isActive).toBe(false)
+  })
+
+  it('should only set tabindex if active', () => {
+    const wrapper = mountFunction()
+
+    const content = wrapper.find('.v-dialog__content')
+
+    expect(content.html()).toMatchSnapshot()
+    expect(content.element.tabIndex).toBe(-1)
+
+    wrapper.setData({ isActive: true })
+
+    expect(content.element.tabIndex).toBe(0)
+    expect(content.html()).toMatchSnapshot()
   })
 })

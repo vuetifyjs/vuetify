@@ -1,4 +1,4 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 +theme(v-stepper) using ($material)
   background: map-get($material, 'bg-color')
@@ -55,7 +55,7 @@
       border-left: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
 
 .v-stepper
-  border-radius: 4px
+  border-radius: $stepper-border-radius
   overflow: hidden
   position: relative
   +elevation(2)
@@ -88,7 +88,7 @@
     width: 24px
     transition: .3s map-get($transition, 'fast-in-fast-out')
 
-    .v-icon
+    .v-icon.v-icon
       font-size: 18px
 
   &__step

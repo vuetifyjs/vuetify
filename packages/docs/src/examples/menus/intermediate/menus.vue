@@ -5,7 +5,7 @@
         <v-card-title class="blue white--text">
           <span class="headline">Menu</span>
 
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
 
           <v-menu bottom left>
             <template v-slot:activator="{ on }">
@@ -14,7 +14,7 @@
                 icon
                 v-on="on"
               >
-                <v-icon>more_vert</v-icon>
+                <v-icon>mdi-dots-vertical</v-icon>
               </v-btn>
             </template>
 

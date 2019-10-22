@@ -1,7 +1,6 @@
 export default {
-  close: 'Close',
+  close: 'Fechar',
   dataIterator: {
-    pageText: '{0}-{1} de {2}',
     noResultsText: 'Nenhum dado encontrado',
     loadingText: 'Carregando itens...',
   },
@@ -12,29 +11,37 @@ export default {
       sortAscending: ': Ordenado crescente. Ative para ordenar decrescente.',
       sortNone: ': Não ordenado. Ative para ordenar crescente.',
     },
-    sortBy: 'Sort by',
+    sortBy: 'Ordenar por',
   },
   dataFooter: {
     itemsPerPageText: 'Itens por página:',
     itemsPerPageAll: 'Todos',
     nextPage: 'Próxima página',
     prevPage: 'Página anterior',
-    firstPage: 'Página primeira',
-    lastPage: 'Página última',
+    firstPage: 'Primeira página',
+    lastPage: 'Última página',
+    pageText: '{0}-{1} de {2}',
   },
   datePicker: {
-    itemsSelected: '{0} selecionados',
+    itemsSelected: '{0} selecionado(s)',
   },
   noDataText: 'Não há dados disponíveis',
   carousel: {
     prev: 'Visão anterior',
     next: 'Próxima visão',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: 'Mais {0}',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counter: '{0} arquivo(s)',
+    counterSize: '{0} arquivo(s) ({1} no total)',
+  },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
   },
 }

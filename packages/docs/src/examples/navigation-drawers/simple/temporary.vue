@@ -2,6 +2,7 @@
   <v-sheet
     height="400"
     class="overflow-hidden"
+    style="position: relative;"
   >
     <v-container class="fill-height">
       <v-row

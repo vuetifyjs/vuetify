@@ -1,7 +1,6 @@
 export default {
   close: 'Schließen',
   dataIterator: {
-    pageText: '{0}-{1} von {2}',
     noResultsText: 'Keine Elemente gefunden',
     loadingText: 'Lade Elemente...',
   },
@@ -21,6 +20,7 @@ export default {
     prevPage: 'Vorherige Seite',
     firstPage: 'Erste Seite',
     lastPage: 'Letzte Seite',
+    pageText: '{0}-{1} von {2}',
   },
   datePicker: {
     itemsSelected: '{0} ausgewählt',
@@ -29,6 +29,9 @@ export default {
   carousel: {
     prev: 'Vorheriges Bild',
     next: 'Nächstes Bild',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: '{0} mehr',
@@ -36,5 +39,9 @@ export default {
   fileInput: {
     counter: '{0} Dateien',
     counterSize: '{0} Dateien ({1} gesamt)',
+  },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
   },
 }

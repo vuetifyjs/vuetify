@@ -1,20 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VSelect.ts should add color to selected index 1`] = `
-<div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
+<div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select v-select--is-multi">
   <div class="v-input__control">
     <div role="button"
          aria-haspopup="listbox"
          aria-expanded="false"
-         aria-owns="list-119"
+         aria-owns="list-63"
          class="v-input__slot"
     >
       <div class="v-select__slot">
         <div class="v-select__selections">
-          <div class="v-select__selection v-select__selection--comma">
+          <div class="v-select__selection v-select__selection--comma primary--text">
             foo
           </div>
-          <input id="input-119"
+          <input id="input-63"
                  readonly="readonly"
                  type="text"
                  aria-readonly="true"
@@ -25,7 +25,7 @@ exports[`VSelect.ts should add color to selected index 1`] = `
             <i aria-hidden="true"
                class="v-icon notranslate material-icons theme--light"
             >
-              $vuetify.icons.dropdown
+              $dropdown
             </i>
           </div>
         </div>

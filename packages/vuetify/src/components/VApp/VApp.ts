@@ -35,7 +35,7 @@ export default mixins(
   },
 
   beforeCreate () {
-    if (!this.$vuetify || (this.$vuetify === this.$root)) {
+    if (!this.$vuetify || (this.$vuetify === this.$root as any)) {
       throw new Error('Vuetify is not properly initialized, see https://vuetifyjs.com/getting-started/quick-start#bootstrapping-the-vuetify-object')
     }
   },
