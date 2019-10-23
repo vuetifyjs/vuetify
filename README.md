@@ -171,6 +171,122 @@ Vuetify is expansive, powerful and provides tools required for large, robust app
 
 Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [polyfills](https://vuetifyjs.com/getting-started/quick-start#ie-11-amp-safari-9-support)). Components are designed for a minimum width of _320px_.
 
+### Vuetify Ecosystem
+
+<table>
+  <thead>
+    <tr>
+      <th>Project</th>
+      <th>Version</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/vue-cli-preset-vuetify">vue-cli-preset-vuetify</a>
+      </td>
+      <td>
+        n/a
+      </td>
+      <td>
+       A Vue CLI 3 preset for Vuetify
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify">vue-cli-plugin-vuetify</a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify">
+          <img src="https://img.shields.io/npm/v/vue-cli-plugin-vuetify.svg" alt="Version">
+        </a>
+      </td>
+      <td>
+       A Vue CLI 3 plugin for installing and configuring Vuetify
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify-cli">vue-cli-plugin-vuetify-cli</a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-cli">
+          <img src="https://img.shields.io/npm/v/vue-cli-plugin-vuetify-cli.svg" alt="Version">
+        </a>
+      </td>
+      <td>
+       A Vue CLI 3 plugin for Scaffolding Vuetify projects
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify-essentials">vue-cli-plugin-vuetify-essentials</a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-essentials">
+          <img src="https://img.shields.io/npm/v/vue-cli-plugin-vuetify-essentials.svg" alt="Version">
+        </a>
+      </td>
+      <td>
+       A Vue CLI 3 plugin for installing the `vue-cli-preset-vuetify` plugin
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/vuetify-loader">vuetify-loader</a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/vuetify-loader">
+          <img src="https://img.shields.io/npm/v/vuetify-loader.svg" alt="Version">
+        </a>
+      </td>
+      <td>
+       A webpack plugin for treeshaking and progressive image support
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/eslint-config-vuetify">eslint-config-vuetify</a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/eslint-config-vuetify">
+          <img src="https://img.shields.io/npm/v/eslint-config-vuetify.svg" alt="Version">
+        </a>
+      </td>
+      <td>
+       An opinionated eslint-config for Vuetify
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/eslint-plugin-vuetify">eslint-plugin-vuetify</a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/eslint-plugin-vuetify">
+          <img src="https://img.shields.io/npm/v/eslint-plugin-vuetify.svg" alt="Version">
+        </a>
+      </td>
+      <td>
+       An opinionated eslint-plugin for Vuetify
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/vuex/tree/master/packages/cognito-module/">vuex-cognito-module</a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/@vuetify/vuex-cognito-module">
+          <img src="https://img.shields.io/npm/v/@vuetify/vuex-cognito-module.svg" alt="Version">
+        </a>
+      </td>
+      <td>
+       A <a href="https://vuex.vuejs.org/">Vuex</a> module for <a href="https://aws.amazon.com/cognito/">AWS Cognito</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 ### Documentation
 
 To check out the [component api explorer](https://vuetifyjs.com/components/api-explorer) and docs, visit [vuetifyjs.com](https://vuetifyjs.com).
