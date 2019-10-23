@@ -111,5 +111,6 @@
   "vetur": {
     "tags": "dist/json/tags.json",
     "attributes": "dist/json/attributes.json"
-  }
+  },
+  "web-types": "dist/json/web-types.json"
 }
