@@ -102,12 +102,15 @@
     },
 
     watch: {
-      toc (val) {
-        if (!val.length) return
+      toc: {
+        immediate: true,
+        handler (val) {
+          if (!val.length) return
 
-        this.$nextTick(() => {
-          this.internalToc = this.toc.slice()
-        })
+          this.$nextTick(() => {
+            this.internalToc = this.toc.slice()
+          })
+        },
       },
     },
 
