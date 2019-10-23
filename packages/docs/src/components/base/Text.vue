@@ -14,8 +14,8 @@
 
 <script>
   // Mixins
-  import Measurable from 'vuetify/lib/mixins/measurable'
-  import Themeable from 'vuetify/lib/mixins/themeable'
+  import Measurable from 'vuetify/es5/mixins/measurable'
+  import Themeable from 'vuetify/es5/mixins/themeable'
 
   export default {
     name: 'BaseText',

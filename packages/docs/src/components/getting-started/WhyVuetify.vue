@@ -1,97 +1,90 @@
 <template>
   <v-container
-    grid-list-md
+    id="why-vuetify"
     fluid
-    pa-0
-    mb-12
-    why-vuetify
+    class="mb-12 pa-0"
   >
-    <v-layout wrap>
-      <v-flex
+    <v-row>
+      <v-col
         v-for="(philosophy, i) in philosophies"
         :key="i"
-        d-flex
-        xs12
-        lg6
+        class="d-flex"
+        cols="12"
+        lg="6"
       >
         <v-card
           :color="philosophy.color"
           class="mx-auto"
           dark
           outlined
-          style="border-radius: 6px; min-height: 350px;"
+          min-height="350"
+          width="100%"
         >
-          <v-container
-            grid-list-xl
-            fill-height
+          <v-row
+            align="center"
+            class="ma-0"
+            justify="space-between"
           >
-            <v-layout
-              justify-space-between
-              align-center
-              wrap
-              ma-0
+            <v-col
+              pa-0
+              cols="12"
+              mb-4
             >
-              <v-flex
-                pa-0
-                xs12
-                mb-4
+              <v-row
+                class="ma-0"
+                no-gutters
               >
-                <v-layout
-                  column
-                  ma-0
-                >
-                  <h2 class="text-uppercase mb-4 text-center">
-                    <strong
-                      class="headline font-weight-bold"
-                      v-text="philosophy.title"
-                    />
-                    <div
-                      class="font-weight-thin display-1"
-                      v-text="philosophy.subtitle"
-                    />
-                  </h2>
+                <h2 class="text-uppercase mb-4 text-center">
+                  <strong
+                    class="headline font-weight-bold"
+                    v-text="philosophy.title"
+                  />
 
-                  <div class="text-center">
-                    <base-markdown :code="philosophy.caption" />
-                  </div>
-                </v-layout>
-              </v-flex>
+                  <div
+                    class="font-weight-thin display-1"
+                    v-text="philosophy.subtitle"
+                  />
+                </h2>
 
-              <v-flex
-                hidden-xs-only
-                xs12
+                <div class="text-center">
+                  <base-markdown :code="philosophy.caption" />
+                </div>
+              </v-row>
+            </v-col>
+
+            <v-col
+              hidden-xs-only
+              cols="12"
+            >
+              <v-img
+                :src="philosophy.src"
+                :aspect-ratio="16/9"
+                class="elevation-6 mx-auto"
+                width="275"
+              />
+            </v-col>
+
+            <v-col
+              v-if="philosophy.more || philosophy.to"
+              cols="12"
+              class="mt-4 text-center"
+            >
+              <v-btn
+                :href="philosophy.more"
+                :rel="philosophy.more && 'noopener'"
+                :target="philosophy.more && '_blank'"
+                :to="philosophy.to"
+                color="white"
+                outlined
+                small
               >
-                <v-img
-                  :src="philosophy.src"
-                  :aspect-ratio="16/9"
-                  class="elevation-6 mx-auto"
-                  width="275"
-                />
-              </v-flex>
-
-              <v-flex
-                v-if="philosophy.more || philosophy.to"
-                xs12
-                mt-4
-                text-center
-              >
-                <v-btn
-                  :href="philosophy.more"
-                  :rel="philosophy.more && 'noopener'"
-                  :target="philosophy.more && '_blank'"
-                  :to="philosophy.to"
-                  color="white"
-                  outlined
-                  small
-                >
-                  Details
-                </v-btn>
-              </v-flex>
-            </v-layout>
-          </v-container>
+                Details
+              </v-btn>
+            </v-col>
+          </v-row>
         </v-card>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

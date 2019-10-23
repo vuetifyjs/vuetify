@@ -9,7 +9,7 @@
 
 <script>
   // Components
-  import Themeable from 'vuetify/lib/mixins/themeable'
+  import Themeable from 'vuetify/es5/mixins/themeable'
 
   export default {
     name: 'BaseTitle',

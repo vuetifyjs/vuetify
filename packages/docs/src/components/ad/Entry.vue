@@ -42,7 +42,7 @@
       script.id = this.scriptId
       script.src = '//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuetifyjscom'
 
-      this.$el && this.$el.append(script)
+      this.$el && this.$el.appendChild(script)
 
       this.script = script
     },

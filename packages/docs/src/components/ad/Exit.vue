@@ -46,7 +46,7 @@
       script.src = '//m.servedby-buysellads.com/monetization.js'
       script.onload = this.onLoad
 
-      this.$el && this.$el.append(script)
+      this.$el && this.$el.appendChild(script)
 
       this.script = script
     },
