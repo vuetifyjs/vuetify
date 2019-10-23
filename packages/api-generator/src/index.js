@@ -297,7 +297,13 @@ Object.keys(components).forEach(function (key) {
   const attributes = mapArray(components[key].props, transformAttribute)
   const events = mapArray(components[key].events, transformEvent)
   const slots = mapArray(components[key].slots, transformSlot)
-  const tag = { name, attributes, events, slots }
+  const tag = {
+    name,
+    source: { module: './src/components/index.ts', symbol: name },
+    attributes,
+    events,
+    slots,
+  }
   webTypes.contributions.html.tags.push(tag)
 
   function mapArray (arr, mapper) {
