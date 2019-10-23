@@ -26,6 +26,8 @@ describe('VChip.ts', () => {
 
     mountFunction = (options = {}) => {
       return mount(VChip, {
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
         localVue,
         router,
         ...options,
@@ -68,7 +70,7 @@ describe('VChip.ts', () => {
     expect(wrapper.element.classList).toContain('green--text')
   })
 
-  it('should render a disabled chip', () => {
+  it('should render a disabled chip', async () => {
     const wrapper = mountFunction({
       propsData: {
         disabled: true,
@@ -80,6 +82,7 @@ describe('VChip.ts', () => {
     wrapper.setProps({
       close: true,
     })
+    await wrapper.vm.$nextTick()
     expect(wrapper.findAll('.v-chip__close')).toHaveLength(1)
   })
 
@@ -151,6 +154,8 @@ describe('VChip.ts', () => {
 
     // Simulate active.sync behavior
     wrapper.setProps({ active: false })
+
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.isVisible()).toBe(false)
   })

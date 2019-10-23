@@ -18,6 +18,9 @@
     },
     "advanced": {
       "header": "### Emplacements avancés"
+    },
+    "dense": {
+      "header": "### Dense"
     }
   },
   "props": {

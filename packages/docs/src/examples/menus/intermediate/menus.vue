@@ -5,7 +5,7 @@
         <v-card-title class="blue white--text">
           <span class="headline">Menu</span>
 
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
 
           <v-menu bottom left>
             <template v-slot:activator="{ on }">

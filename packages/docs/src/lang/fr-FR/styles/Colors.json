@@ -1,3 +1,16 @@
 {
-  "header": "# Couleurs"
+  "header": "# Couleurs",
+  "headerText": "Vous avez directement accès à toutes les couleurs dans les [spécifications Material Design](https://material.io/guidelines/style/color.html) via **stylus** et **JavaScript**. Ces valeurs peuvent être utilisées dans vos feuilles de style, vos fichiers de composants et sur des composants réels via le système de **classes de couleur**.",
+  "classesHeader": "## Classes",
+  "classesText": "Chaque couleur de la spécification est convertie en une variante **background** et **text** pour styliser au sein de votre application via une classe, par exemple : `<div class=\"red\">` ou `<span class =\"red-text\">`. Ces classes de couleurs sont définies [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_colors.scss).",
+  "classesText2": "Les couleurs du texte supportent également les variantes **darken** et **lighten** en utilisant `text--{lighten|darken}-{n}`",
+  "javascriptPackHeader": "## Pack de couleurs JavaScript",
+  "javascriptPackText": "Vuetify a un pack de couleurs JavaScript facultatif que vous pouvez importer et utiliser dans votre application. Ceci peut également être utilisé pour aider à définir le thème de votre application.",
+  "sassPackHeader": "## Pack de couleurs Sass",
+  "sassPackText": "Bien que pratique, le pack de couleurs augmente la taille d'exportation CSS d'environ 30 Ko. Certains projets peuvent nécessiter uniquement les classes fournies par défaut, créées au moment de l'exécution à partir du bootstrap de Vuetify. Pour désactiver cette fonctionnalité, vous devez manuellement importer et créer le fichier **stylus** principal. Cela nécessitera un [loader stylus](https://github.com/webpack-contrib/sass-loader) et une entrée de fichier `.styl`.",
+  "sassPackText2": "Votre fichier `main.sass` créé devra ensuite être inclus dans votre projet.",
+  "alert": "Vous **devez** définir la configuration de votre webpack pour utiliser `sass'. Si vous utilisez un [pre-made template](/getting-started/quick-start#new-applications), cela sera déjà fait pour vous.",
+  "sassPackText3": "Cela peut également être fait dans votre fichier principal **App.vue**. N'oubliez pas qu'en fonction de la configuration de votre projet, cela _ augmentera_ les temps de construction, car chaque fois que votre fichier d'entrée est mis à jour, les fichiers stylus sont régénérés.",
+  "colorHeader": "## Couleurs de matériaux",
+  "colorText": "Ci-dessous, une liste de la palette de couleurs de design de matériaux regroupée par couleur principale"
 }

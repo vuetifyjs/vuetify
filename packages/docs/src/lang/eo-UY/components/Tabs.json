@@ -92,6 +92,7 @@
   },
   "events": {
     "v-tab": {
+      "change": "crwdns43118:0crwdne43118:0",
       "click": "crwdns42424:0crwdne42424:0",
       "keydown": "crwdns42426:0crwdne42426:0"
     },

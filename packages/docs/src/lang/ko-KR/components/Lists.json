@@ -29,12 +29,10 @@
       "desc": "리스트는 액션안에 스택(stack)을 포함할 수 있습니다. A list can contain a stack within an action. Ripple and router props can be passed through the main v-list, to the v-list-item or as a property in the items array."
     },
     "action-title-and-subtitle": {
-      "header": "액션과 타이틀/서브타이틀 (Action with title and sub-title)",
-      "desc": "리스트는 3줄까지 포함할 수 있습니다."
+      "header": "액션과 타이틀/서브타이틀 (Action with title and sub-title)"
     },
     "expansion-lists": {
-      "header": "확장 리스트 (Expansion Lists)",
-      "desc": "리스트는 클릭할때 보여지는 아이템 그룹을 가질 수 있습니다. 확장리스는 또한 `네비게이션 서랍(navigation drawer)` 컴포넌트 안에서도 사용됩니다."
+      "header": "확장 리스트 (Expansion Lists)"
     },
     "flat": {
       "header": "플랫 (Flat)"

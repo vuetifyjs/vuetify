@@ -1,7 +1,6 @@
 export default {
   close: 'Close',
   dataIterator: {
-    pageText: '{0}-{1} din {2}',
     noResultsText: 'Nu au fost găsite înregistrări care să se potrivească',
     loadingText: 'Loading item...',
   },
@@ -21,6 +20,7 @@ export default {
     prevPage: 'Pagina anterioară',
     firstPage: 'Pagina prima',
     lastPage: 'Pagina ultima',
+    pageText: '{0}-{1} din {2}',
   },
   datePicker: {
     itemsSelected: '{0} selectate',
@@ -29,6 +29,9 @@ export default {
   carousel: {
     prev: 'Anterior vizual',
     next: 'Următorul vizual',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: '{0} mai mult',
@@ -36,5 +39,9 @@ export default {
   fileInput: {
     counter: '{0} files',
     counterSize: '{0} files ({1} in total)',
+  },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
   },
 }

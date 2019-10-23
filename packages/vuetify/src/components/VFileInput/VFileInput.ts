@@ -39,7 +39,7 @@ export default VTextField.extend({
     placeholder: String,
     prependIcon: {
       type: String,
-      default: '$vuetify.icons.file',
+      default: '$file',
     },
     readonly: {
       type: Boolean,
@@ -240,7 +240,8 @@ export default VTextField.extend({
     },
     truncateText (str: string) {
       if (str.length < Number(this.truncateLength)) return str
-      return `${str.slice(0, 10)}…${str.slice(-10)}`
+      const charsKeepOneSide = Math.floor((Number(this.truncateLength) - 1) / 2)
+      return `${str.slice(0, charsKeepOneSide)}…${str.slice(str.length - charsKeepOneSide)}`
     },
   },
 })

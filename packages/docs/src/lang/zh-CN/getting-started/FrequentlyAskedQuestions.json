@@ -1,5 +1,6 @@
 {
-  "header": "经常问的问题",
+  "header": "# 常见问题",
+  "headerText": "有一个问题?在创建问题表之前，请检查一些常见的错误。如果你仍然找不到解决办法，你可以在 Github 上提交一个 [issue](https://issues.vuetifyjs.com) 或者在我们的 [community](https://community.vuetifyjs.com) 进行询问。",
   "question": "提问:",
   "answer": "回答",
   "noResultsFound": "没找到结果",

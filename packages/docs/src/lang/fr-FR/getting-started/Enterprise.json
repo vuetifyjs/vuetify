@@ -1,1 +1,15 @@
-{}
+{
+  "header": "# Vuetify pour entreprises",
+  "subHeader": "### Disponible dans le cadre de l'abonnement Tidelift",
+  "subText1": "Vuetify et les développeurs de milliers d'autres packages travaillent avec Tidelift pour fournir un abonnement d'entreprise qui couvre tous les logiciels libres que vous utilisez.",
+  "subText2": "Si vous voulez la flexibilité de l'open source et la confiance des logiciels de qualité commerciale, c'est pour vous.",
+  "depHeader": "### L'abonnement Tidelift gère vos dépendances pour vous",
+  "depText1": [
+    "Obtenez les outils dont vous avez besoin pour cataloguer et comprendre le logiciel open source dont dépend votre application.",
+    "Votre abonnement aide à payer les responsables de la communauté open source et maintenir les packages que vous utilisez afin qu'ils répondent à vos standards",
+    "Traiter les problèmes de manière proactive, avec des outils qui analysent les nouveaux problèmes de sécurité, de licence et de maintenance, et alertent nos responsables Open Source pour qu'ils puissent les résoudre en votre nom.",
+    "Mesurez et améliorez la santé de vos dépendances open source - ce qui améliore la santé de votre application - et obtenez une courte liste de mesures à fort impact que votre équipe peut prendre pour les améliorer encore plus.",
+    "Obtenez des garanties commerciales qui ne sont pas offertes gratuitement avec les logiciels libres, comme l'indemnisation de la propriété intellectuelle et le soutien dans le cadre d'un contrat de niveau de service. Vous attendez ces garanties des logiciels propriétaires, et vous pouvez les obtenir en utilisant l'open source."
+  ],
+  "depText2": "Le résultat final ? Toutes les fonctionnalités que vous attendez d'un logiciel de qualité commerciale, pour l'ensemble des logiciels libres que vous utilisez. Cela signifie moins de temps à se débattre avec des quiz ésotériques open source, et plus de temps à construire vos propres applications - et votre entreprise."
+}

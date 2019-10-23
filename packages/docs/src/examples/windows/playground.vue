@@ -23,7 +23,7 @@
             <v-row class="mb-4" align="center">
               <v-avatar color="grey" class="mr-4"></v-avatar>
               <strong class="title">Title {{ n }}</strong>
-              <div class="flex-grow-1"></div>
+              <v-spacer></v-spacer>
               <v-btn icon>
                 <v-icon>mdi-account</v-icon>
               </v-btn>
@@ -69,6 +69,6 @@
 
 <codepen-resources lang="json">
   {
-    "css": ["https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css"]
+    "css": ["https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"]
   }
 </codepen-resources>

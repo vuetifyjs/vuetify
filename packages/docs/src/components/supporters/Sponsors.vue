@@ -12,31 +12,31 @@
       >
         <supporter-group
           v-if="tier.includes(0)"
-          :group="supporters['1500']"
-          :title="!hideTitles ? '$1500/mo' : undefined"
+          :group="supporters['Premiere']"
+          :title="!hideTitles ? 'Premiere' : undefined"
           :class="classes"
           :x-large="!compact"
         />
 
         <supporter-group
           v-if="tier.includes(1)"
-          :group="supporters['500']"
-          :title="!hideTitles ? '$500/mo' : undefined"
+          :group="supporters['Diamond']"
+          :title="!hideTitles ? 'Diamond' : undefined"
           :class="classes"
           :large="!compact"
         />
 
         <supporter-group
           v-if="tier.includes(2)"
-          :group="supporters['250']"
-          :title="!hideTitles ? '$250/mo' : undefined"
+          :group="supporters['Platinum']"
+          :title="!hideTitles ? 'Platinum' : undefined"
           :class="classes"
         />
 
         <supporter-group
           v-if="tier.includes(3)"
-          :group="supporters['50']"
-          :title="!hideTitles ? '$50/mo' : undefined"
+          :group="supporters['Gold']"
+          :title="!hideTitles ? 'Gold' : undefined"
           :class="classes"
           small
         />

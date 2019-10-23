@@ -25,7 +25,7 @@
             label="Search"
           ></v-text-field>
           <template v-if="$vuetify.breakpoint.mdAndUp">
-            <div class="flex-grow-1"></div>
+            <v-spacer></v-spacer>
             <v-select
               v-model="sortBy"
               flat
@@ -35,7 +35,7 @@
               prepend-inner-icon="search"
               label="Sort by"
             ></v-select>
-            <div class="flex-grow-1"></div>
+            <v-spacer></v-spacer>
             <v-btn-toggle
               v-model="sortDesc"
               mandatory
@@ -80,10 +80,9 @@
                 <v-list-item
                   v-for="(key, index) in filteredKeys"
                   :key="index"
-                  :color="sortBy === key ? `blue lighten-4` : `white`"
                 >
-                  <v-list-item-content>{{ key }}:</v-list-item-content>
-                  <v-list-item-content class="align-end">{{ item[key.toLowerCase()] }}</v-list-item-content>
+                  <v-list-item-content :class="{ 'blue--text': sortBy === key }">{{ key }}:</v-list-item-content>
+                  <v-list-item-content class="align-end" :class="{ 'blue--text': sortBy === key }">{{ item[key.toLowerCase()] }}</v-list-item-content>
                 </v-list-item>
               </v-list>
             </v-card>
@@ -118,7 +117,7 @@
             </v-list>
           </v-menu>
 
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
 
           <span
             class="mr-4

@@ -1,7 +1,6 @@
 export default {
   close: 'Aizvērt',
   dataIterator: {
-    pageText: '{0}-{1} no {2}',
     noResultsText: 'Nekas netika atrasts',
     loadingText: 'Ielādē...',
   },
@@ -21,6 +20,7 @@ export default {
     prevPage: 'Iepriekšējā lapa',
     firstPage: 'Pirmā lapa',
     lastPage: 'Pēdējā lapa',
+    pageText: '{0}-{1} no {2}',
   },
   datePicker: {
     itemsSelected: '{0} izvēlēts',
@@ -29,6 +29,9 @@ export default {
   carousel: {
     prev: 'Iepriekšējais slaids',
     next: 'Nākamais slaids',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: 'Vēl {0}',
@@ -36,5 +39,9 @@ export default {
   fileInput: {
     counter: '{0} files',
     counterSize: '{0} files ({1} in total)',
+  },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
   },
 }

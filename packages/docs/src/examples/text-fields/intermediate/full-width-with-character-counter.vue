@@ -7,7 +7,7 @@
     >
       <v-icon>mdi-arrow-left</v-icon>
       <v-toolbar-title>Compose</v-toolbar-title>
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
       <v-icon>mdi-send</v-icon>
     </v-toolbar>
     <v-form>

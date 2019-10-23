@@ -4,7 +4,10 @@
       Edit this
       <span v-html="contributionPageGithub" />
       on Github | Translate on
-      <span @click="changeLanguageEoUy" v-html="contributionLanguageCrowdin" />
+      <span
+        @click="changeLanguageEoUy"
+        v-html="contributionLanguageCrowdin"
+      />
     </div>
     <v-spacer class="hidden-sm-and-down" />
     <div class="hidden-sm-and-down">

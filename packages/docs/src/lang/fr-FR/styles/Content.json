@@ -1,1 +1,12 @@
-{}
+{
+  "header": "# Contenu",
+  "headerText": "Vuetify a un style personnalisé pour plusieurs éléments standard.",
+  "blockquoteHeader": "## Bloc de citation",
+  "paragraphsHeader": "## Paragraphes",
+  "codeHeader": "## Code",
+  "codeText": "Exemple d'un élément `<code>`.",
+  "variablesHeader": "## Variables",
+  "variablesText": "<var>v</var> = <var>u</var> * <var>e</var>",
+  "userInputHeader": "## Entrée d'utilisateur",
+  "userInputText": "Pour installer Vuetify, tapez <kbd>npm install vuetify</kbd> dans votre console. Une fois terminé, tapez <kbd>cd `<project name>`</kbd> et exécutez <kbd>npm install</kbd>"
+}

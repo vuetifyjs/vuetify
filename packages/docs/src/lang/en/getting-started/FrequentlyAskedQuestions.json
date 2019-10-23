@@ -114,8 +114,7 @@
     },
     {
       "q": "### SCRIPT5022: Expected identifier, string or number",
-      "a": "In order to support **modern mode** in vue-cli-3, `vuetify/lib` is not transpiled. You must tell vue-cli to transpile the `vuetify` package. This will be automatically handled in the future by vue-cli-plugin-vuetify pending a bug fix for vue-cli-3.",
-      "s": "js_transpileDependencies"
+      "a": "In order to support **modern mode** in vue-cli-3, `vuetify/lib` is not transpiled. You must tell vue-cli to transpile the `vuetify` package. This is configured automatically when installing the Vuetify cli plugin. If you are using an older version, simple add 'vuetify' to your `vue.config.js` **transpileDependencies** array."
     },
     {
       "q": "### When adding typescript - Error: Could not find a declaration file for module 'vuetify/lib'",

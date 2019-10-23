@@ -19,11 +19,11 @@
     },
     "size": {
       "header": "crwdns39390:0crwdne39390:0",
-      "desc": "crwdns39392:0crwdne39392:0"
+      "desc": "crwdns43070:0crwdne43070:0"
     },
     "counter": {
       "header": "crwdns39394:0crwdne39394:0",
-      "desc": "crwdns39396:0crwdne39396:0"
+      "desc": "crwdns43072:0crwdne43072:0"
     },
     "selection": {
       "header": "crwdns39398:0crwdne39398:0",
@@ -40,12 +40,16 @@
     "advanced": {
       "header": "crwdns39410:0crwdne39410:0",
       "desc": "crwdns39412:0crwdne39412:0"
+    },
+    "dense": {
+      "header": "crwdns43074:0crwdne43074:0",
+      "desc": "crwdns43076:0crwdne43076:0"
     }
   },
   "props": {
     "accept": "crwdns39414:0crwdne39414:0",
     "chips": "crwdns39416:0crwdne39416:0",
-    "counterSizeString": "crwdns39418:0crwdne39418:0",
+    "counterSizeString": "crwdns43078:0crwdne43078:0",
     "counterString": "crwdns39420:0crwdne39420:0",
     "multiple": "crwdns39422:0crwdne39422:0",
     "showSize": "crwdns39424:0crwdne39424:0",

@@ -1,7 +1,6 @@
 export default {
   close: 'Close',
   dataIterator: {
-    pageText: '{0}-{1} з {2}',
     noResultsText: 'В результаті пошуку нічого не знайдено',
     loadingText: 'Loading item...',
   },
@@ -21,6 +20,7 @@ export default {
     prevPage: 'Попередня сторінка',
     firstPage: 'Перша сторінка',
     lastPage: 'Остання сторінка',
+    pageText: '{0}-{1} з {2}',
   },
   datePicker: {
     itemsSelected: '{0} вибрано',
@@ -29,6 +29,9 @@ export default {
   carousel: {
     prev: 'Попередній візуальний',
     next: 'Наступний візуальнийa',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: 'Ще {0}',
@@ -36,5 +39,9 @@ export default {
   fileInput: {
     counter: '{0} files',
     counterSize: '{0} files ({1} in total)',
+  },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
   },
 }

@@ -13,6 +13,7 @@
           <span>Completed</span>
         </template>
       </v-timeline-item>
+
       <v-timeline-item
         v-else-if="index == null || index >= i"
         :key="i"
@@ -27,35 +28,40 @@
             v-text="item.caption"
           />
         </template>
+
         <v-card
           :class="`elevation-${item.value ? 8 : 1}`"
-          :hover="!item.complete"
+          :hover="!item.value"
           class="py-2"
-          @click.native="item.value = !item.value"
+          @click.native="item.value = true"
         >
           <v-card-title class="py-0 pr-2">
             <doc-markdown
               class="body-2"
               :code="item.title"
             />
+
             <v-spacer />
+
             <v-btn
               :color="item.value ? 'primary' : ''"
-              :disabled="item.complete"
               :input-value="item.value"
               :ripple="false"
               class="font-weight-light ma-0"
               text
+              @click.stop="item.value = !item.value"
             >
               <span
                 class="mr-2"
                 v-text="item.caption"
               />
+
               <v-icon small>
                 mdi-calendar
               </v-icon>
             </v-btn>
           </v-card-title>
+
           <v-expand-transition>
             <div v-if="(index != null && index >= i) || item.value">
               <v-card-text>
@@ -65,8 +71,14 @@
                   <div class="mt-4" />
 
                   <template v-for="(features, key, index) in item.features">
-                    <doc-markdown :key="`title-${index}`" :code="key" />
-                    <doc-markdown :key="`list-${index}`" :code="features" />
+                    <doc-markdown
+                      :key="`title-${index}`"
+                      :code="key"
+                    />
+                    <doc-markdown
+                      :key="`list-${index}`"
+                      :code="features"
+                    />
                   </template>
                 </template>
               </v-card-text>

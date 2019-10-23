@@ -1,10 +1,8 @@
 {
   "header": "# Alerts",
   "headerText": "The `v-alert` component is used to convey important information to the user through the use contextual types icons and color. These default types come in in 4 variations: **success**, **info**, **warning**, and **error**. Default icons are assigned which help represent different actions each type portrays. Many parts of an alert such as `border`, `icon`, and `color` can also be customized to fit almost any situation.",
+  "usageText": "Alerts in their simplest form are a flat [sheets of paper](/components/sheets) that display a message.",
   "examples": {
-    "usage": {
-      "desc": "Alerts in their simplest form are a flat [sheets of paper](/components/sheets) that display a message."
-    },
     "border": {
       "header": "### Border",
       "desc": "The **border** prop adds a simple border to one of the 4 sides of the alert. This can be combined props like with **color**, **dark**, and **type** to provide unique accents to the alert."

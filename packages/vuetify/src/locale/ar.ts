@@ -1,7 +1,6 @@
 export default {
   close: 'إغلاق',
   dataIterator: {
-    pageText: '{0}-{1} من {2}',
     noResultsText: 'لا توجد سجلات مطابقة',
     loadingText: 'تحميل العنصر...',
   },
@@ -21,6 +20,7 @@ export default {
     prevPage: 'الصفحة السابقة',
     firstPage: 'الصفحة الأولى',
     lastPage: 'الصفحة الأخيرة',
+    pageText: '{0}-{1} من {2}',
   },
   datePicker: {
     itemsSelected: '{0} مختارة',
@@ -29,6 +29,9 @@ export default {
   carousel: {
     prev: 'البصري السابق',
     next: 'البصري التالي',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: '{0} أكثر',
@@ -36,5 +39,9 @@ export default {
   fileInput: {
     counter: '{0} ملفات',
     counterSize: '{0} ملفات ({1} في المجموع)',
+  },
+  timePicker: {
+    am: 'صباحاً',
+    pm: 'مساءً',
   },
 }

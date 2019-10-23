@@ -10,8 +10,7 @@
       "desc": "使用`v-flex`，您可以创建自定义的水平卡片。使用`contain`属性来缩小`v-card-media`以适应容器内部，而不是覆盖。"
     },
     "grids": {
-      "header": "栅格",
-      "desc": "使用栅格列表，您可以创建漂亮的布局。"
+      "header": "栅格"
     },
     "custom-actions": {
       "header": "自定义操作",

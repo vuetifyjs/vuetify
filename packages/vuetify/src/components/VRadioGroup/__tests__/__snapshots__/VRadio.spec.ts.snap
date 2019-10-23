@@ -14,7 +14,7 @@ exports[`VRadio.ts should not render aria-label attribute with no label value on
     <i aria-hidden="true"
        class="v-icon notranslate material-icons theme--light"
     >
-      $vuetify.icons.radioOff
+      $radioOff
     </i>
   </div>
 </div>
@@ -35,7 +35,7 @@ exports[`VRadio.ts should render proper input name 1`] = `
     <i aria-hidden="true"
        class="v-icon notranslate material-icons theme--light"
     >
-      $vuetify.icons.radioOff
+      $radioOff
     </i>
   </div>
 </div>
@@ -55,7 +55,7 @@ exports[`VRadio.ts should render role and aria-checked attributes on input group
     <i aria-hidden="true"
        class="v-icon notranslate material-icons theme--light accent--text"
     >
-      $vuetify.icons.radioOn
+      $radioOn
     </i>
   </div>
 </div>

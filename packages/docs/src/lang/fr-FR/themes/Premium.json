@@ -1,4 +1,6 @@
 {
+  "header": "# Thèmes Premium & gratuits",
+  "headerText": "Vuetify offre des thèmes pré-faits **gratuits** et **premium** conçus pour vous lancer en un éclair. Des thèmes gratuits sont disponibles pour installer à travers Vue CLI 3 ou vous pouvez simplement télécharger la source.",
   "buy": "Informations et démos",
   "free": "Gratuit",
   "live": "Aperçu en direct",
@@ -7,14 +9,27 @@
   "viewDemo": "Voir la démo",
   "templates": {
     "alpha": {
-      "title": "Thème Alpha"
+      "title": "Thème Alpha",
+      "description": "Expérience de thème complète, incluant une version améliorée de vue-cli 3, une documentation complète, 5 composants exclusifs et bien plus !"
     },
     "dashboard": {
-      "title": "Tableau de bord Material",
       "description": "Vuetify Material Dashboard est une belle ressource construite avec Vuetify, Vuex et Vuejs. Cela vous aidera à commencer à développer des tableaux de bord en un rien de temps."
     },
+    "freelancer": {
+      "title": "Freelance",
+      "description": "Un thème d'une page inspiré du matériel pour les freelancers."
+    },
+    "material-kit": {
+      "title": "Material Kit",
+      "description": "Un ensemble complet de thèmes Inspirés de matériaux construits avec Vuetify et Vue CLI 3."
+    },
+    "parallax": {
+      "title": "Parallaxe",
+      "description": "Cette magnifique parallaxe d'une seule page est une excellente page d'accueil pour n'importe quelle application."
+    },
     "blog": {
-      "title": "Blog"
+      "title": "Blog",
+      "description": "Un modèle simple qui présente une interface propre pour créer un blog ou une application de type blog."
     }
   }
 }

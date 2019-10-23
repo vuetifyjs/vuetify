@@ -8,7 +8,6 @@
         :return-value.sync="date"
         transition="scale-transition"
         offset-y
-        full-width
         max-width="290px"
         min-width="290px"
       >
@@ -27,20 +26,19 @@
           no-title
           scrollable
         >
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
           <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
           <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
         </v-date-picker>
       </v-menu>
     </v-col>
-    <div class="flex-grow-1"></div>
+    <v-spacer></v-spacer>
     <v-col cols="11" sm="5">
       <v-dialog
         ref="dialog"
         v-model="modal"
         :return-value.sync="date"
         persistent
-        full-width
         width="290px"
       >
         <template v-slot:activator="{ on }">
@@ -53,7 +51,7 @@
           ></v-text-field>
         </template>
         <v-date-picker v-model="date" type="month" scrollable>
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
           <v-btn text color="primary" @click="modal = false">Cancel</v-btn>
           <v-btn text color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
         </v-date-picker>

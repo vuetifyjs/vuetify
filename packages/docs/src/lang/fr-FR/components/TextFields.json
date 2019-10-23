@@ -1,5 +1,27 @@
 {
+  "examples": {
+    "single-line": {
+      "header": "### Ligne unique",
+      "desc": "Les champs de texte en ligne unique ne flottent pas leur étiquette sur la cible ou avec les données."
+    },
+    "dense": {
+      "header": "### Dense"
+    }
+  },
   "props": {
+    "appendOuterIcon": "Ajoute une icône à l'entrée du composant, utilise la même syntaxe que `v-icon`",
+    "autofocus": "Active autofocus",
+    "filled": "Applique le style d'entrée remplie a la place",
+    "clearIcon": "Appliqué lors de l'utilisation de **clearable** et l'entrée est sale",
+    "counter": "Crée le compteur pour la longueur de l'entrée; si aucun numéro n'est spécifié, il est par défaut à 25. Ne s'applique à aucune validation.",
+    "flat": "Mixins.Soloable.props.flat",
+    "fullWidth": "Indique le type d'entrée comme prenant la largeur complète",
+    "outlined": "Applique le style décrit à l'entrée",
+    "placeholder": "Définit le texte du marqueur de l'entrée",
+    "prefix": "Affiche le texte du préfixe",
+    "prependInnerIcon": "Ajoute une icône dans l'entrée du composant, utilise la même syntaxe que `v-icon`",
+    "reverse": "Inverse l'orientation de l'entrée",
+    "rounded": "Ajoute un rayon de bordure à l'entrée",
     "value": "Components.Inputs.props.value"
   },
   "slots": {

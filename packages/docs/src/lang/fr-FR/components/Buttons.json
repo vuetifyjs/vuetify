@@ -32,6 +32,9 @@
       "header": "### Taille",
       "desc": "Les boutons peuvent être dotés de différentes options de tailles pour s'adapter à une multitude de scénarios."
     },
+    "outlined": {
+      "header": "### Contour"
+    },
     "block": {
       "header": "### Bloc",
       "desc": "Les blocs de boutons s'étendent sur la largeur totale disponible."
@@ -39,7 +42,8 @@
   },
   "props": {
     "v-btn": {
-      "loading": "Ajoute un chargement d'animation de l’icône"
+      "loading": "Ajoute un chargement d'animation de l’icône",
+      "outlined": "Rends le fond transparent et applique une bordure mince."
     }
   },
   "events": {

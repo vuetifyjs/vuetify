@@ -1,0 +1,12 @@
+@import '../../styles/styles.sass';
+
+$card-border-radius: $border-radius-root !default;
+$card-shaped-border-radius: 24px !default;
+$card-title-font-size: map-deep-get($headings, 'h6', 'size') !default;
+$card-title-font-weight: map-deep-get($headings, 'h6', 'weight') !default;
+$card-title-letter-spacing: map-deep-get($headings, 'h6', 'letter-spacing') !default;
+$card-title-line-height: map-deep-get($headings, 'h6', 'line-height') !default;
+$card-text-font-size: map-deep-get($headings, 'subtitle-2', 'size') !default;
+$card-text-font-weight: 400 !default;
+$card-text-letter-spacing: map-deep-get($headings, 'subtitle-2', 'line-height') !default;
+$card-text-line-height: map-deep-get($headings, 'subtitle-2', 'letter-spacing') !default;

@@ -1,5 +1,4 @@
 {
-  "headerText": "`v-icon`コンポーネントは、あなたのアプリケーションの様々な場面に応じて多くのアイコンを提供します。Vuetifyのアイコンは、GoogleのMaterial Iconsライブラリを使用します。 全ての利用可能なアイコンのリストは、公式の[Material Icons](https://material.io/icons/)ページをご覧ください。",
   "examples": {
     "font-awesome": {
       "header": "Font Awesome"

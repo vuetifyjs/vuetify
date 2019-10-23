@@ -14,7 +14,7 @@
         class="mb-2"
       >
         <a
-          :href="item.target"
+          :href="`#${item.id}`"
           :class="{
             'primary--text': activeIndex === i,
             'grey--text': activeIndex !== i
@@ -24,7 +24,7 @@
           }"
           class="d-block body-2"
           @click.stop.prevent="goTo(`#${item.id}`)"
-          v-text="item.text"
+          v-html="item.text"
         />
       </li>
     </ul>

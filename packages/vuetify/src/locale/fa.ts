@@ -1,7 +1,6 @@
 export default {
   close: 'بستن',
   dataIterator: {
-    pageText: '{0} تا {1} از {2}',
     noResultsText: 'نتیجه‌ای یافت نشد',
     loadingText: 'در حال بارگذاری...',
   },
@@ -21,6 +20,7 @@ export default {
     prevPage: 'صفحه‌ی قبل',
     firstPage: 'صفحه‌ی اول',
     lastPage: 'صفحه‌ی آخر',
+    pageText: '{0} تا {1} از {2}',
   },
   datePicker: {
     itemsSelected: '{0} انتخاب شده است',
@@ -29,6 +29,9 @@ export default {
   carousel: {
     prev: 'اسلاید قبلی',
     next: 'اسلاید بعدی',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: '{بیشتر {0',
@@ -36,5 +39,9 @@ export default {
   fileInput: {
     counter: '{0} پرونده',
     counterSize: '{0} پرونده ({1} در کل)',
+  },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
   },
 }

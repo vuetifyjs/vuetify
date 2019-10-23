@@ -28,19 +28,19 @@ export default Vue.extend({
     } as PropValidator<any[]>,
     prevIcon: {
       type: String,
-      default: '$vuetify.icons.prev',
+      default: '$prev',
     },
     nextIcon: {
       type: String,
-      default: '$vuetify.icons.next',
+      default: '$next',
     },
     firstIcon: {
       type: String,
-      default: '$vuetify.icons.first',
+      default: '$first',
     },
     lastIcon: {
       type: String,
-      default: '$vuetify.icons.last',
+      default: '$last',
     },
     itemsPerPageText: {
       type: String,
@@ -54,6 +54,10 @@ export default Vue.extend({
     showCurrentPage: Boolean,
     disablePagination: Boolean,
     disableItemsPerPage: Boolean,
+    pageText: {
+      type: String,
+      default: '$vuetify.dataFooter.pageText',
+    },
   },
 
   computed: {
@@ -99,10 +103,9 @@ export default Vue.extend({
       let value = this.options.itemsPerPage
       const computedIPPO = this.computedItemsPerPageOptions
 
-      if (
-        computedIPPO.length > 0 &&
-        !computedIPPO.find(ippo => ippo.value === value)
-      ) value = computedIPPO[0]
+      if (computedIPPO.length <= 1) return null
+
+      if (!computedIPPO.find(ippo => ippo.value === value)) value = computedIPPO[0]
 
       return this.$createElement('div', {
         staticClass: 'v-data-footer__select',
@@ -138,7 +141,7 @@ export default Vue.extend({
 
         children = this.$scopedSlots['page-text']
           ? [this.$scopedSlots['page-text']!({ pageStart, pageStop, itemsLength })]
-          : [this.$vuetify.lang.t('$vuetify.dataIterator.pageText', pageStart, pageStop, itemsLength)]
+          : [this.$vuetify.lang.t(this.pageText, pageStart, pageStop, itemsLength)]
       }
 
       return this.$createElement('div', {

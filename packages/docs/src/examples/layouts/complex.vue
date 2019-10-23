@@ -26,7 +26,7 @@
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Toolbar</v-toolbar-title>
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
       <v-app-bar-nav-icon @click.stop="drawerRight = !drawerRight"></v-app-bar-nav-icon>
     </v-app-bar>
 
@@ -108,7 +108,7 @@
       class="white--text"
     >
       <span>Vuetify</span>
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
       <span>&copy; 2019</span>
     </v-footer>
   </v-app>

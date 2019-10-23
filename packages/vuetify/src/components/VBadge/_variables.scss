@@ -1,3 +1,5 @@
+@import '../../styles/styles.sass';
+
 $badge-border-radius: 11px !default;
 $badge-color: map-get($shades, 'white') !default;
 $badge-font-family: $body-font-family !default;

@@ -1,6 +1,5 @@
 {
   "header": "# Icônes",
-  "headerText": "Le composant `v-icon` fournit un grand nombre de glyphes permettant de fournir un contexte à divers aspects de votre application. Les icônes Vuetify utilisent la bibliothèque de polices Material Icons de Google. Pour une liste de toutes les icônes disponibles, visitez la page officielle [Icons Material](https://materialdesignicons.com/).",
   "examples": {
     "color": {
       "header": "### Couleurs",

@@ -62,7 +62,7 @@
         >
           {{ item.text }}
         </v-chip>
-        <div class="flex-grow-1"></div>
+        <v-spacer></v-spacer>
         <v-list-item-action @click.stop>
           <v-btn
             icon

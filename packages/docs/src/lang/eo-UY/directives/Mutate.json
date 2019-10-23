@@ -1,0 +1,21 @@
+{
+  "header": "crwdns42824:0crwdne42824:0",
+  "headerText": "crwdns42826:0crwdne42826:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns42828:0crwdne42828:0"
+    },
+    "once": {
+      "header": "crwdns42830:0crwdne42830:0",
+      "desc": "crwdns42832:0crwdne42832:0"
+    }
+  },
+  "options": {
+    "modifiers.once": "crwdns42834:0crwdne42834:0",
+    "modifiers.attr": "crwdns42836:0[attributes]crwdne42836:0",
+    "modifiers.child": "crwdns42838:0[childList]crwdne42838:0",
+    "modifiers.char": "crwdns42840:0[characterData]crwdne42840:0",
+    "modifiers.sub": "crwdns42842:0[subtree]crwdne42842:0",
+    "value": "crwdns42844:0crwdne42844:0"
+  }
+}

@@ -1,1 +1,17 @@
-{}
+{
+  "getting-started/quick-start": {
+    "title": "Hızlı Başlangıç"
+  },
+  "getting-started/consulting-and-support": {
+    "title": "Danışmanlık ve Destek"
+  },
+  "customization/icons": {
+    "title": "İkonlar"
+  },
+  "components/api-explorer": {
+    "title": "API gezgini"
+  },
+  "components/aspect-ratios": {
+    "title": "En-boy oranları"
+  }
+}
