@@ -3,22 +3,14 @@ import Router from 'vue-router'
 import VueAnalytics from 'vue-analytics'
 import scrollBehavior from './scroll-behavior'
 // import redirects from './301.json'
-// import languages from '@/data/i18n/languages.json'
 import {
-  // getLanguageCookie,
   layout,
   root,
-  // redirect,
+  redirectLang,
   route,
 } from './util'
 
 Vue.use(Router)
-
-// language regex:
-// /^[a-z]{2,3}(?:-[a-zA-Z]{4})?(?:-[A-Z]{2,3})?$/
-// /^[a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3}$/
-// const languageRegex = /^\/([a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3})(?:\/.*)?$/
-// const fallbackLocale = languages.find(lang => lang.fallback === true).locale
 
 const routes = root([
   layout('', 'Frontend', [
@@ -26,7 +18,9 @@ const routes = root([
   ]),
   layout(':namespace/:page/:section?', 'Documentation', [
     route('', 'Page'),
+    redirectLang('/404'),
   ]),
+  redirectLang(),
 ])
 
 export function createRouter () {

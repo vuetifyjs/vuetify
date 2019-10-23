@@ -2,53 +2,55 @@
   <v-navigation-drawer
     id="documentation-toc"
     v-scroll="onScroll"
+    :floating="structure === false"
+    :right="!$vuetify.rtl"
     app
     clipped
     color="transparent"
-    :right="!$vuetify.rtl"
   >
-    <ul class="pt-8 mb-6 documentation-toc">
-      <li class="mb-2">
-        <h3 class="body-1 text--primary">
-          Contents
-        </h3>
-      </li>
-
-      <template v-for="(item, i) in toc">
-        <li
-          v-if="item.visible"
-          :key="i"
-          :class="{
-            'mb-2': i + 1 !== toc.length,
-            'primary--text': activeIndex === i,
-            'text--disabled': activeIndex !== i
-          }"
-          :style="{
-            borderColor: activeIndex === i ? 'currentColor' : undefined
-          }"
-          class="documentation-toc__link"
-        >
-          <a
-            :href="`#${item.id}`"
-            class="d-block"
-            @click.stop.prevent="goTo(`#${item.id}`)"
-            v-html="item.text"
-          />
+    <template v-if="structure !== false">
+      <ul class="pt-8 mb-6 documentation-toc">
+        <li class="mb-2">
+          <h3 class="body-1 text--primary">
+            Contents
+          </h3>
         </li>
-      </template>
-    </ul>
 
-    <div
-      v-if="structure"
-      class="pl-5"
-    >
-      <supporters-supporter-group
-        :group="supporters['Diamond']"
-        compact
-        title="Diamond Sponsors"
-        justify="start"
-      />
-    </div>
+        <template v-for="(item, i) in internalToc">
+          <li
+            v-if="item.visible"
+            :key="i"
+            :class="{
+              'mb-2': i + 1 !== internalToc.length,
+              'primary--text': activeIndex === i,
+              'text--disabled': activeIndex !== i
+            }"
+            :style="{
+              borderColor: activeIndex === i ? 'currentColor' : undefined
+            }"
+            class="documentation-toc__link"
+          >
+            <a
+              :href="`#${item.id}`"
+              class="d-block"
+              @click.stop.prevent="goTo(`#${item.id}`)"
+              v-html="item.text"
+            />
+          </li>
+        </template>
+      </ul>
+
+      <div class="pl-5">
+        <v-fade-transition appear>
+          <supporters-supporter-group
+            :group="supporters['Diamond']"
+            compact
+            title="Diamond Sponsors"
+            justify="start"
+          />
+        </v-fade-transition>
+      </div>
+    </template>
   </v-navigation-drawer>
 </template>
 <script>
@@ -66,6 +68,8 @@
     data: () => ({
       activeIndex: 0,
       currentOffset: 0,
+      internalToc: [],
+      tocTimeout: 0,
     }),
 
     computed: {
@@ -94,6 +98,16 @@
             }
           })
           .filter(h => h.visible)
+      },
+    },
+
+    watch: {
+      toc (val) {
+        if (!val.length) return
+
+        this.$nextTick(() => {
+          this.internalToc = this.toc.slice()
+        })
       },
     },
 

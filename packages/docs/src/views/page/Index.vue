@@ -6,7 +6,7 @@
   >
     <component
       :is="getComponent(child.type)"
-      v-for="(child, i) in structure"
+      v-for="(child, i) in children"
       :key="`${id}-${i}`"
       :value="child"
     />
@@ -29,6 +29,7 @@
   async function load ({ route, store }) {
     const namespace = kebabCase(route.params.namespace)
     const page = upperFirst(camelCase(route.params.page))
+    const setStructure = structure => store.commit('documentation/SET_STRUCTURE', structure)
 
     store.commit('documentation/SET_STRUCTURE', null)
 
@@ -42,10 +43,12 @@
         `@/data/pages/${namespace}/${page}.json`
       )).default
     } catch (err) {
-      structure = false
+      setStructure(false)
+
+      throw new Error(`Unable to find layout for route <${this.page}>.`)
     }
 
-    store.commit('documentation/SET_STRUCTURE', structure)
+    setStructure(structure)
   }
 
   export default {
@@ -65,9 +68,10 @@
     },
 
     computed: {
+      children: get('documentation/structure'),
       namespace: sync('route/params@namespace'),
       page: sync('route/params@page'),
-      structure: get('documentation/structure'),
+      structure: sync('documentation/structure'),
       id () {
         if (!this.structure) return ''
 
