@@ -1,7 +1,7 @@
 <template>
   <v-footer
     id="footer"
-    class="justify-center align-center py-6"
+    class="d-block py-6"
     color="grey darken-4"
     dark
   >
