@@ -15,6 +15,7 @@ const capitalize = str => {
 }
 
 const hyphenateRE = /\B([A-Z])/g
+
 function hyphenate (str) {
   return str.replace(hyphenateRE, '-$1').toLowerCase()
 }
@@ -268,14 +269,9 @@ writeJsonFile(attributes, 'dist/attributes.json')
 writePlainFile(fakeComponents(false), 'dist/fakeComponents.js')
 writePlainFile(fakeComponents(true), 'dist/fakeComponents.ts')
 
-components['$vuetify'] = map['$vuetify']
-components['internationalization'] = map['internationalization']
-
-writeApiFile({ ...components, ...directives }, 'dist/api.js')
-
 // Create web-types.json to provide autocomplete in JetBrains IDEs
 const webTypes = {
-  $schema: "https://raw.githubusercontent.com/JetBrains/web-types/master/schema/web-types.json",
+  $schema: 'https://raw.githubusercontent.com/JetBrains/web-types/master/schema/web-types.json',
   framework: 'vue',
   name: 'vuetify',
   version: pkg.version,
@@ -283,18 +279,99 @@ const webTypes = {
     html: {
       'types-syntax': 'typescript',
       tags: [],
+      attributes: [],
     },
   },
 }
 
-const webTypesTags = { ...components, ...directives }
-Object.keys(webTypesTags).forEach(function (key) {
+components['$vuetify'] = map['$vuetify']
+components['internationalization'] = map['internationalization']
+
+writeApiFile({ ...components, ...directives }, 'dist/api.js')
+
+delete components['$vuetify']
+delete components['internationalization']
+
+Object.keys(components).forEach(function (key) {
   const name = capitalize(camelize(key))
-  const attributes = webTypesTags[key].props || []
-  const events = webTypesTags[key].events || []
-  const slots = webTypesTags[key].slots || []
+  const attributes = mapArray(components[key].props, transformAttribute)
+  const events = mapArray(components[key].events, transformEvent)
+  const slots = mapArray(components[key].slots, transformSlot)
   const tag = { name, attributes, events, slots }
   webTypes.contributions.html.tags.push(tag)
+
+  function mapArray (arr, mapper) {
+    return arr !== undefined ? arr.map(mapper) : undefined
+  }
+
+  function transformAttribute (attr) {
+    attr = copyObject(attr)
+    delete attr['source']
+    if (attr['type']) {
+      attr['value'] = {
+        kind: 'expression',
+        type: attr['type'],
+      }
+      if (attr['type'] !== 'boolean') {
+        delete attr['type']
+      }
+    }
+    if (attr['default'] !== undefined) {
+      attr['default'] = JSON.stringify(attr['default'])
+    }
+    delete attr['example']
+    return attr
+  }
+
+  function transformEvent (event) {
+    event = copyObject(event)
+    if (event['value'] !== undefined) {
+      const type = event['value']
+      event.arguments = [{
+        name: 'argument',
+        type: typeof type === 'string' ? type : JSON.stringify(type),
+      }]
+    }
+    delete event['value']
+    delete event['source']
+    return event
+  }
+
+  function transformSlot (slot) {
+    slot = copyObject(slot)
+    if (slot['props'] !== undefined) {
+      const props = []
+      Object.keys(slot['props']).forEach(function (name) {
+        const type = slot['props'][name]
+        props.push({
+          name,
+          type: typeof type === 'string' ? type : JSON.stringify(type),
+        })
+      })
+      slot['vue-properties'] = props
+    }
+    delete slot['props']
+    delete slot['source']
+    return slot
+  }
+
+  function copyObject (obj) {
+    const result = {}
+    if (typeof obj === 'string') {
+      result['name'] = obj
+    } else {
+      Object.keys(obj).forEach(function (name) {
+        result[name] = obj[name]
+      })
+    }
+    return result
+  }
+})
+
+Object.keys(directives).forEach(function (key) {
+  const name = capitalize(camelize(key))
+  const directive = { name }
+  webTypes.contributions.html.attributes.push(directive)
 })
 
 writeJsonFile(webTypes, 'dist/web-types.json')
