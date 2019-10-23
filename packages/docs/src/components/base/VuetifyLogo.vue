@@ -21,23 +21,18 @@
     />
 
     <v-img
-      :src="`https://cdn.vuetifyjs.com/images/logos/vuetify-name-${isDark ? 'dark' : 'light'}.png`"
       alt="Vuetify Name"
       class="shrink mt-1 hidden-sm-and-down"
       contain
       min-width="100"
+      src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
       width="100"
     />
   </router-link>
 </template>
 
 <script>
-  // Mixins
-  import Themeable from 'vuetify/lib/mixins/themeable'
-
   export default {
     name: 'BaseVuetifyLogo',
-
-    mixins: [Themeable],
   }
 </script>

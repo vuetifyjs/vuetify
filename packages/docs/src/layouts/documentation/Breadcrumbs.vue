@@ -59,7 +59,7 @@
       addMicroDataServer () {
         const breadcrumbs = JSON.stringify(this.genBreadcrumbList(), 2, null)
 
-        this.$ssrContext.head += `<script type="application\\/ld+json">${breadcrumbs}<\\/script>`
+        this.$ssrContext.scripts += `\n<script type="application\\/ld+json">${breadcrumbs}<\\/script>\n`
       },
       genBreadcrumbList () {
         return {

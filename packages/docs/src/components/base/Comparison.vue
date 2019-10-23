@@ -99,8 +99,8 @@
         tree: 'Treeshaking',
         native: 'Native mobile support',
         rtl: 'RTL support',
-        support: 'Consulting and Business support',
-        enterprise: 'Enterprise support',
+        support: 'Consulting support',
+        enterprise: 'Business and Enterprise support',
       },
       frameworks: [
         {

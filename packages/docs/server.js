@@ -143,6 +143,7 @@ function render (req, res) {
       return acc + `<link rel="alternate" hreflang="${lang}" href="https://${req.hostname}/${lang}${req.params[1]}" />`
     }, ''),
     crowdin: '',
+    scripts: '',
   }
 
   if (context.lang === 'eo-UY') {
