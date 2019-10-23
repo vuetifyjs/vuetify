@@ -19,6 +19,7 @@ export function layout (path, name, children) {
       /* webpackChunkName: "layout-[request]" */
       `@/layouts/${folder}/Index`
     ),
+    props: true,
     children,
   }
 }

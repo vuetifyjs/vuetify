@@ -1,17 +1,20 @@
 <template>
-  <component
-    :is="component"
-    v-if="component !== false"
-    :source="`https://github.com/vuetifyjs/vuetify/blob/${branch}/packages/docs/src/examples/layouts/${page}.vue`"
-  />
-  <not-found v-else />
+  <div id="app">
+    <component
+      :is="component"
+      v-if="component !== false"
+      :source="`https://github.com/vuetifyjs/vuetify/blob/${branch}/packages/docs/src/examples/layouts/${page}.vue`"
+    />
+
+    <not-found v-else />
+  </div>
 </template>
 
 <script>
   import { getBranch } from '@/util/helpers'
 
   export default {
-    name: 'LayoutsPage',
+    name: 'LayoutsLayout',
 
     components: {
       NotFound: () => import('@/pages/general/404'),
@@ -30,7 +33,7 @@
     }),
 
     created () {
-      import(`@/examples/layouts/${this.page}.vue`)
+      import(`./demos/${this.page}.vue`)
         .then(res => (this.component = res.default))
         .catch(() => {
           this.component = false

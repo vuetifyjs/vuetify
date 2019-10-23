@@ -6,18 +6,21 @@
       right
     >
       <v-list dense>
-        <v-list-item @click="">
+        <v-list-item link>
           <v-list-item-action>
             <v-icon>mdi-home</v-icon>
           </v-list-item-action>
+
           <v-list-item-content>
             <v-list-item-title>Home</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item @click="">
+
+        <v-list-item link>
           <v-list-item-action>
             <v-icon>mdi-contact-mail</v-icon>
           </v-list-item-action>
+
           <v-list-item-content>
             <v-list-item-title>Contact</v-list-item-title>
           </v-list-item-content>
@@ -30,9 +33,11 @@
       color="cyan"
       dark
     >
-      <v-spacer></v-spacer>
+      <v-spacer />
+
       <v-toolbar-title>Application</v-toolbar-title>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
     </v-app-bar>
 
     <v-content>
@@ -41,8 +46,8 @@
         fluid
       >
         <v-row
-          justify="center"
           align="center"
+          justify="center"
         >
           <v-col class="text-center">
             <v-tooltip left>
@@ -57,6 +62,7 @@
                   <v-icon large>mdi-code-tags</v-icon>
                 </v-btn>
               </template>
+
               <span>Source</span>
             </v-tooltip>
 
@@ -72,6 +78,7 @@
                   <v-icon large>mdi-codepen</v-icon>
                 </v-btn>
               </template>
+
               <span>Codepen</span>
             </v-tooltip>
           </v-col>
@@ -83,7 +90,8 @@
       color="cyan"
       app
     >
-      <v-spacer></v-spacer>
+      <v-spacer />
+
       <span class="white--text">&copy; 2019</span>
     </v-footer>
   </v-app>
@@ -91,6 +99,7 @@
 
 <script>
   export default {
+    name: 'LayoutsDemosBaselineFlipped',
 
     props: {
       source: String,
