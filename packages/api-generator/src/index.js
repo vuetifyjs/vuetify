@@ -375,9 +375,28 @@ Object.keys(components).forEach(function (key) {
 })
 
 Object.keys(directives).forEach(function (key) {
-  const name = capitalize(camelize(key))
-  const directive = { name }
-  webTypes.contributions.html.attributes.push(directive)
+  const name = key
+  const directive = directives[key]
+  const modifiers = []
+  let valueType
+  let defaultValue
+  for (const option of directive.options || []) {
+    if (option.name.indexOf('modifiers.') === 0) {
+      modifiers.push({
+        name: option.name.substr('modifiers.'.length),
+      })
+    } else if (option.name === 'value') {
+      valueType = option.type
+      defaultValue = option.default
+    }
+  }
+  webTypes.contributions.html.attributes.push({
+    name,
+    source: { module: './src/directives/index.ts', symbol: capitalize(name.substr(2)) },
+    default: defaultValue,
+    value: valueType ? { kind: 'expression', type: valueType } : undefined,
+    'vue-modifiers': modifiers.length > 0 ? modifiers : undefined,
+  })
 })
 
 writeJsonFile(webTypes, 'dist/web-types.json')
