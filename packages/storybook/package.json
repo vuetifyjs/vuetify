@@ -16,8 +16,8 @@
   "devDependencies": {
     "@applitools/eyes-storybook": "^2.7.31",
     "@applitools/eyes-testcafe": "^1.1.20",
-    "@babel/preset-react": "^7.0.0",
-    "@mdi/font": "^3.9.96",
+    "@babel/preset-react": "^7.6.3",
+    "@mdi/font": "^4.5.95",
     "@storybook/addon-a11y": "^5.2",
     "@storybook/addon-actions": "^5.2",
     "@storybook/addon-knobs": "^5.2",

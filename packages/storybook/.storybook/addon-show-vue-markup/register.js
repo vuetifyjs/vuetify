@@ -2,25 +2,25 @@ import React, { createElement } from 'react'
 import Highlight, { defaultProps } from 'prism-react-renderer'
 import './styles.css'
 
-import addons, { types } from '@storybook/addons';
+import addons, { types } from '@storybook/addons'
 
-const ADDON_ID = 'show-vue-markup';
-const PANEL_ID = `${ADDON_ID}/panel`;
-export const EVENT_ID = `${ADDON_ID}/markup`;
+const ADDON_ID = 'show-vue-markup'
+const PANEL_ID = `${ADDON_ID}/panel`
+export const EVENT_ID = `${ADDON_ID}/markup`
 
 class MarkupPanel extends React.Component {
-  state = { markup: '' };
+  state = { markup: '' }
 
   componentDidMount() {
-    const { channel } = this.props;
+    const { channel } = this.props
 
-    channel.on(EVENT_ID, this.onStoryChange);
+    channel.on(EVENT_ID, this.onStoryChange)
   }
 
   componentWillUnmount() {
-    const { channel } = this.props;
+    const { channel } = this.props
 
-    channel.off(EVENT_ID, this.onStoryChange);
+    channel.off(EVENT_ID, this.onStoryChange)
   }
 
   onStoryChange = ({ markup }) => {
@@ -28,8 +28,8 @@ class MarkupPanel extends React.Component {
   }
 
   render() {
-    const { markup } = this.state;
-    const { active } = this.props;
+    const { markup } = this.state
+    const { active } = this.props
 
     return active ? createElement(Highlight, {
       ...defaultProps,
@@ -45,7 +45,7 @@ class MarkupPanel extends React.Component {
           ...getTokenProps({ token, key})
         })))))
       }
-    }) : null;
+    }) : null
   }
 }
 
@@ -56,5 +56,5 @@ addons.register(ADDON_ID, () => {
     type: types.PANEL,
     title: 'Markup',
     render: ({ active, key }) => createElement(MarkupPanel, { active, key, channel })
-  });
-});
+  })
+})
