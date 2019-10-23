@@ -40,7 +40,7 @@ module.exports = {
     lib: {
       presets: [
         ['@babel/preset-env', {
-          targets: 'last 1 chrome version, ie 11',
+          targets: 'last 1 chrome version',
           modules: false,
         }],
       ],
