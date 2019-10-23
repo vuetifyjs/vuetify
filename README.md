@@ -69,7 +69,7 @@
     <tr>
       <td>
         <a href="https://www.qomplx.com/?ref=vuetify-github">
-          <img height="70px" src="https://cdn.vuetifyjs.com/images/backers/QOMPLX.webp">
+          <img height="50px" src="https://cdn.vuetifyjs.com/images/backers/QOMPLX.png">
         </a>
       </td>
     </tr>
@@ -226,6 +226,19 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [p
       <td>
         <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-essentials">
           <img src="https://img.shields.io/npm/v/vue-cli-plugin-vuetify-essentials.svg" alt="Version">
+        </a>
+      </td>
+      <td>
+       A Vue CLI 3 plugin for installing the `vue-cli-preset-vuetify` plugin
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify-storybook">vue-cli-plugin-vuetify-storybook</a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-storybook">
+          <img src="https://img.shields.io/npm/v/vue-cli-plugin-vuetify-storybook.svg" alt="Version">
         </a>
       </td>
       <td>
