@@ -1,13 +1,8 @@
 <script>
-  // Components
-  import {
-    VBtn,
-  } from 'vuetify/lib'
-
   export default {
     name: 'BaseBtn',
 
-    extends: VBtn,
+    functional: true,
 
     props: {
       color: {
@@ -18,6 +13,10 @@
         type: [Number, String],
         default: 6,
       },
+    },
+
+    render (h, { data, children }) {
+      return h('v-btn', data, children)
     },
   }
 </script>

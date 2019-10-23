@@ -1,16 +1,18 @@
 <script>
-  import { VCard } from 'vuetify/lib'
-
   export default {
     name: 'BaseCard',
 
-    extends: VCard,
+    functional: true,
 
     props: {
       elevation: {
         type: [Number, String],
         default: 12,
       },
+    },
+
+    render (h, { data, children }) {
+      return h('v-card', data, children)
     },
   }
 </script>
