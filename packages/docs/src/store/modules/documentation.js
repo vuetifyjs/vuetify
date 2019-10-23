@@ -43,6 +43,16 @@ function getHeadings (children, toc = []) {
   return toc
 }
 
+function getNamespace (namespace) {
+  switch (namespace) {
+    case 'getting-started': return 'getting-started/quick-start'
+    case 'styles': return 'styles/colors'
+    case 'components': return 'components/api-explorer'
+    case 'directives': return 'components/api-explorer'
+    default: return ''
+  }
+}
+
 function addFooterAd (children) {
   if (!children.length) return
 
@@ -66,14 +76,21 @@ const getters = {
   breadcrumbs (state, getters, rootState) {
     if (!rootState.route) return []
 
+    const namespace = rootState.route.params.namespace
+    const lang = rootState.route.params.lang
+    const path = rootState.route.path
+    const text = getNamespace(namespace)
+
     return [
       {
-        text: upperFirst(rootState.route.params.namespace.split('-').join(' ')),
-        disabled: true,
+        text: upperFirst(namespace.split('-').join(' ')),
+        to: text ? `/${lang}/${text}` : undefined,
+        disabled: !text,
       },
       {
         text: upperFirst(rootState.route.params.page.split('-').join(' ')),
-        href: '#',
+        to: path,
+        disabled: true,
       },
     ]
   },
