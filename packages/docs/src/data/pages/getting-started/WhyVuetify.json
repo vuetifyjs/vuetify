@@ -52,19 +52,6 @@
         {
           "type": "text",
           "lang": "comparisonText"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "heading",
-          "lang": "featuresHeader"
-        },
-        {
-          "type": "text",
-          "lang": "featuresText"
         },
         {
           "type": "base-comparison",
