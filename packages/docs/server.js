@@ -72,8 +72,6 @@ const serve = (path, cache) => express.static(resolve(path), {
 app.use(express.json())
 app.use(cookieParser())
 app.use(compression({ threshold: 0 }))
-app.use(favicon('./src/public/favicon.ico'))
-app.use('/', serve('./src/public', true))
 app.use('/dist', serve('./dist', true))
 app.use('/themes', serve('./src/themes'))
 
