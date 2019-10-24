@@ -23,6 +23,7 @@
             <v-img
               :alt="`Link to ${activeTemplate.title}`"
               :src="activeTemplate.src"
+              style="border-radius: 4px 0 0 4px"
             />
           </v-list-item-avatar>
 
@@ -57,9 +58,10 @@
     }),
 
     computed: {
+      themes: sync('documentation/templates'),
       templates () {
         return {
-          ...sync.call(this, 'documentation/templates'),
+          ...this.themes,
           ...this.products,
         }
       },
