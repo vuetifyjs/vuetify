@@ -59,7 +59,7 @@ export default Selectable.extend({
     validationState (): string | undefined {
       if (this.hasError && this.shouldValidate) return 'error'
       if (this.hasSuccess) return 'success'
-      if (this.hasColor) return this.computedColor
+      if (this.hasColor !== null) return this.computedColor
       return undefined
     },
     switchData (): VNodeData {
