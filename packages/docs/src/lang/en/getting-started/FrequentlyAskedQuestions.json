@@ -7,6 +7,11 @@
   "resetSearch": "Reset search",
   "gotchas": [
     {
+      "q": "My application won't compile due to sass / scss errors",
+      "a": "Ensure that you are using the proper options object in accordance with your sass-loader version.",
+      "s": "js_webpack_sass"
+    },
+    {
       "q": "### Are there examples on how the v2 grid compares to v1.5?",
       "a": "Yes, you can [view grid examples here](https://gist.github.com/johnleider/207f63c9d30fb77042a0bb0258c5ab32)."
     },

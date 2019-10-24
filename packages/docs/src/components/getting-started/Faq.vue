@@ -1,32 +1,30 @@
 <template>
-  <v-container
-    fluid
-    pa-0
-  >
-    <v-layout wrap>
-      <v-flex
-        mb-4
-        xs12
+  <v-container fluid>
+    <v-row>
+      <v-col
+        class="mb-4"
+        cols="12"
       >
         <v-text-field
           v-model="search"
-          prepend-inner-icon="mdi-comment-search"
-          label="Search"
-          filled
-          single-line
           clearable
+          filled
+          label="Search"
+          prepend-inner-icon="mdi-comment-search"
+          single-line
         />
-      </v-flex>
-      <v-flex
-        xs12
-        mb-12
+      </v-col>
+
+      <v-col
+        class="mb-12"
+        cols="12"
       >
         <v-data-iterator
           :items="gotchas"
           :search.sync="search"
           class="v-data-iterator--faq"
-          hide-default-footer
           disable-pagination
+          hide-default-footer
         >
           <template v-slot:item="{ item: gotcha, index }">
             <section
@@ -37,6 +35,7 @@
                 :id="gotcha.id"
                 :code="gotcha.q"
               />
+
               <v-card
                 class="pa-4"
                 outlined
@@ -48,17 +47,43 @@
                   :code="gotcha.a2"
                 />
 
-                <doc-markup
-                  v-if="gotcha.s"
-                  :value="gotcha.s"
-                  class="mb-0 mt-4"
-                />
+                <template v-if="gotcha.s">
+                  <v-btn
+                    class="mt-4"
+                    depressed
+                    small
+                    @click="gotcha.m = !gotcha.m"
+                  >
+                    Open code snippet
+
+                    <v-icon right>mdi-code-tags</v-icon>
+                  </v-btn>
+
+                  <v-expand-transition v-if="gotcha.m">
+                    <div>
+                      <template v-if="Array.isArray(gotcha.s)">
+                        <doc-markup
+                          v-for="(g, i) in gotcha.s"
+                          :key="i"
+                          :value="g"
+                          class="mb-0 mt-4"
+                        />
+                      </template>
+
+                      <doc-markup
+                        v-else
+                        :value="gotcha.s"
+                        class="mb-0 mt-4"
+                      />
+                    </div>
+                  </v-expand-transition>
+                </template>
               </v-card>
             </section>
           </template>
         </v-data-iterator>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -67,9 +92,10 @@
   import kebabCase from 'lodash/kebabCase'
 
   export default {
-    name: 'FrequentlyAskedQuestions',
+    name: 'Faq',
 
     data: () => ({
+      internalFiltered: [],
       search: null,
     }),
 
@@ -78,23 +104,38 @@
         return this.$t('GettingStarted.FrequentlyAskedQuestions.gotchas').map(faq => {
           return Object.assign({}, faq, {
             id: kebabCase(faq.q),
+            m: false,
           })
         })
       },
-      filtered () {
-        if (!this.search) return this.gotchas
+      filtered: {
+        get () {
+          return this.internalFiltered
+        },
+        set (val) {
+          this.internalFiltered = this.filterItems()
+        },
+      },
+    },
 
-        const search = this.search.toLowerCase()
+    beforeMount () {
+      this.internalFiltered = this.filterItems()
+    },
 
-        return this.gotchas.filter(gotcha => {
-          const q = gotcha.q.toLowerCase()
-          const a = gotcha.a.toLowerCase()
+    methods: {
+      filterItems () {
+        const search = (this.search || '').toLowerCase()
 
-          return (
-            q.indexOf(search) > -1 ||
-            a.indexOf(search) > -1
-          )
-        })
+        return this.gotchas
+          .filter(gotcha => {
+            const q = gotcha.q.toLowerCase()
+            const a = gotcha.a.toLowerCase()
+
+            return (
+              q.indexOf(search) > -1 ||
+              a.indexOf(search) > -1
+            )
+          })
       },
     },
   }

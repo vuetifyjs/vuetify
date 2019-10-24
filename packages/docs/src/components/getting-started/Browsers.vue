@@ -61,9 +61,9 @@
 
     methods: {
       getBrowserSupport (browser) {
-        if (browser.supported === true) return 'GettingStarted.QuickStart.browserSupport.supported'
-        else if (browser.supported === false) return 'GettingStarted.QuickStart.browserSupport.notSupported'
-        else return `GettingStarted.QuickStart.browserSupport.${browser.supported}`
+        if (browser.supported === true) return 'GettingStarted.BrowserSupport.browserSupport.supported'
+        else if (browser.supported === false) return 'GettingStarted.BrowserSupport.browserSupport.notSupported'
+        else return `GettingStarted.BrowserSupport.browserSupport.${browser.supported}`
       },
     },
   }
@@ -75,6 +75,7 @@
 
     &:nth-child(1)
       clip: rect(0px 21px 40px 0px)
+
     &:nth-child(2)
       clip: rect(0px 40px 40px 22px)
 </style>

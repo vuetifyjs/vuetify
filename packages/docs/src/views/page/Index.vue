@@ -48,7 +48,7 @@
     } catch (err) {
       setStructure(false)
 
-      throw new Error(`Unable to find layout for route <${this.page}>.`)
+      throw new Error(`Unable to find layout for route <${route.params.page}>.`)
     }
 
     setStructure(structure)
