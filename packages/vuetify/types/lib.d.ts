@@ -1,5 +1,3 @@
-import {DirectiveOptions} from 'vue';
-
 declare module 'vuetify/lib' {
   import { Component, DirectiveOptions } from 'vue'
   import { Vuetify } from 'vuetify'
