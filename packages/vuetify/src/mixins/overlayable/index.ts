@@ -46,6 +46,8 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
 
   watch: {
     hideOverlay (value) {
+      if (!this.isActive) return
+
       if (value) this.removeOverlay()
       else this.genOverlay()
     },

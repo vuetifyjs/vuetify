@@ -318,10 +318,12 @@ export default VDataIterator.extend({
       const children: VNodeChildren = [
         this.$createElement('template', { slot: 'row.content' }, this.genDefaultRows(items, props)),
       ]
+      const toggleFn = () => this.$set(this.openCache, group, !this.openCache[group])
+      const removeFn = () => props.updateOptions({ groupBy: [], groupDesc: [] })
 
       if (this.$scopedSlots['group.header']) {
         children.unshift(this.$createElement('template', { slot: 'column.header' }, [
-          this.$scopedSlots['group.header']!({ group, groupBy: props.options.groupBy, items, headers: this.computedHeaders }),
+          this.$scopedSlots['group.header']!({ group, groupBy: props.options.groupBy, items, headers: this.computedHeaders, toggle: toggleFn, remove: removeFn }),
         ]))
       } else {
         const toggle = this.$createElement(VBtn, {
@@ -331,7 +333,7 @@ export default VDataIterator.extend({
             small: true,
           },
           on: {
-            click: () => this.$set(this.openCache, group, !this.openCache[group]),
+            click: toggleFn,
           },
         }, [this.$createElement(VIcon, [isOpen ? '$minus' : '$plus'])])
 
@@ -342,7 +344,7 @@ export default VDataIterator.extend({
             small: true,
           },
           on: {
-            click: () => props.updateOptions({ groupBy: [], groupDesc: [] }),
+            click: removeFn,
           },
         }, [this.$createElement(VIcon, ['$close'])])
 
