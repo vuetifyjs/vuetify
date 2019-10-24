@@ -57,6 +57,10 @@
   .documentation-ad-entry
     opacity: 1
 
+    #carbonads_1,
+    #carbonads_2
+      display: none
+
     &--is-active
       opacity: 0
 
