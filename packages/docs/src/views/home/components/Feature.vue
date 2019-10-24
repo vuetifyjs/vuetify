@@ -28,7 +28,7 @@
       >
         <v-card
           :href="feature.href"
-          :to="feature.to "
+          :to="feature.to"
           rel="noopener noreferrer"
           target="_blank"
           class="overflow-hidden text-center mx-auto"
@@ -56,6 +56,20 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <div class="pa-4 text-center">
+      <v-btn
+        color="primary"
+        large
+        outlined
+        rounded
+        to="getting-started/why-vuetify"
+      >
+        <span class="caption font-weight-bold">
+          {{ $t("Vuetify.Home.whyVuetifyText2") }}
+        </span>
+      </v-btn>
+    </div>
   </base-section>
 </template>
 
@@ -66,10 +80,6 @@
     provide: {
       id: 'home-feature',
     },
-
-    data: () => ({
-      // TODO: Move this to somewhere in data
-    }),
 
     computed: {
       features () {
@@ -93,6 +103,7 @@
       },
       computedFeatures () {
         return this.features.map(feature => ({
+          ...feature,
           text: this.$t(`Vuetify.Home.features.${feature.key}.text`),
           title: this.$t(`Vuetify.Home.features.${feature.key}.title`),
           src: feature.src,
