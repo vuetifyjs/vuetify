@@ -15,7 +15,12 @@
       },
     },
 
-    render (h, { data, children }) {
+    render (h, { children, data, props }) {
+      data.props = {
+        ...(data.props || {}),
+        ...props,
+      }
+
       return h('v-btn', data, children)
     },
   }
