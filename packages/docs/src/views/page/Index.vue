@@ -1,6 +1,8 @@
 <template>
+  <page-skeleton-loader v-if="isLoading" />
+
   <section
-    v-if="structure !== false"
+    v-else-if="structure !== false"
     :id="`${namespace}-${page}`"
     class="page"
   >
@@ -36,6 +38,7 @@
     await new Promise(resolve => setTimeout(resolve, 0))
 
     let structure
+    this.isLoading = true
 
     try {
       structure = (await import(
@@ -49,6 +52,7 @@
     }
 
     setStructure(structure)
+    this.isLoading = false
   }
 
   export default {
@@ -59,6 +63,7 @@
         /* webpackChunkName: "notfound" */
         '@/pages/general/404'
       ),
+      PageSkeletonLoader: () => import('./SkeletonLoader'),
     },
 
     provide () {
@@ -66,6 +71,10 @@
         id: this.id,
       }
     },
+
+    data: () => ({
+      isLoading: false,
+    }),
 
     computed: {
       children: get('documentation/structure'),
