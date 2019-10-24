@@ -51,27 +51,18 @@ describe('VLazy.ts', () => {
 
     expect(wrapper.vm.isActive).toBeFalsy()
 
-    wrapper.vm.onObserve([
-      { isIntersecting: false },
-      { isIntersecting: false },
-      { isIntersecting: false },
-    ] as IntersectionObserverEntry[])
+    const entries = [] as IntersectionObserverEntry[]
+    const observer = {} as IntersectionObserver
+
+    wrapper.vm.onObserve(entries, observer, false)
 
     expect(wrapper.vm.isActive).toBeFalsy()
 
-    wrapper.vm.onObserve([
-      { isIntersecting: false },
-      { isIntersecting: false },
-      { isIntersecting: true },
-    ] as IntersectionObserverEntry[])
+    wrapper.vm.onObserve(entries, observer, true)
 
     expect(wrapper.vm.isActive).toBeTruthy()
 
-    wrapper.vm.onObserve([
-      { isIntersecting: false },
-      { isIntersecting: false },
-      { isIntersecting: false },
-    ] as IntersectionObserverEntry[])
+    wrapper.vm.onObserve(entries, observer, false)
 
     expect(wrapper.vm.isActive).toBeTruthy()
   })

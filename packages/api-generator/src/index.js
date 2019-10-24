@@ -3,8 +3,19 @@ const Vuetify = require('vuetify')
 const fs = require('fs')
 const map = require('./helpers/map')
 const deepmerge = require('./helpers/merge')
+const pkg = require('../package.json')
+
+const camelizeRE = /-(\w)/g
+const camelize = str => {
+  return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : '')
+}
+
+const capitalize = str => {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
 
 const hyphenateRE = /\B([A-Z])/g
+
 function hyphenate (str) {
   return str.replace(hyphenateRE, '-$1').toLowerCase()
 }
@@ -258,7 +269,134 @@ writeJsonFile(attributes, 'dist/attributes.json')
 writePlainFile(fakeComponents(false), 'dist/fakeComponents.js')
 writePlainFile(fakeComponents(true), 'dist/fakeComponents.ts')
 
+// Create web-types.json to provide autocomplete in JetBrains IDEs
+const webTypes = {
+  $schema: 'https://raw.githubusercontent.com/JetBrains/web-types/master/schema/web-types.json',
+  framework: 'vue',
+  name: 'vuetify',
+  version: pkg.version,
+  contributions: {
+    html: {
+      'types-syntax': 'typescript',
+      tags: [],
+      attributes: [],
+    },
+  },
+}
+
 components['$vuetify'] = map['$vuetify']
 components['internationalization'] = map['internationalization']
 
 writeApiFile({ ...components, ...directives }, 'dist/api.js')
+
+delete components['$vuetify']
+delete components['internationalization']
+
+Object.keys(components).forEach(function (key) {
+  const name = capitalize(camelize(key))
+  const attributes = mapArray(components[key].props, transformAttribute)
+  const events = mapArray(components[key].events, transformEvent)
+  const slots = mapArray(components[key].slots, transformSlot)
+  const tag = {
+    name,
+    source: { module: './src/components/index.ts', symbol: name },
+    attributes,
+    events,
+    slots,
+  }
+  webTypes.contributions.html.tags.push(tag)
+
+  function mapArray (arr, mapper) {
+    return arr !== undefined ? arr.map(mapper) : undefined
+  }
+
+  function transformAttribute (attr) {
+    attr = copyObject(attr)
+    delete attr['source']
+    if (attr['type']) {
+      attr['value'] = {
+        kind: 'expression',
+        type: attr['type'],
+      }
+      if (attr['type'] !== 'boolean') {
+        delete attr['type']
+      }
+    }
+    if (attr['default'] !== undefined) {
+      attr['default'] = JSON.stringify(attr['default'])
+    }
+    delete attr['example']
+    return attr
+  }
+
+  function transformEvent (event) {
+    event = copyObject(event)
+    if (event['value'] !== undefined) {
+      const type = event['value']
+      event.arguments = [{
+        name: 'argument',
+        type: typeof type === 'string' ? type : JSON.stringify(type),
+      }]
+    }
+    delete event['value']
+    delete event['source']
+    return event
+  }
+
+  function transformSlot (slot) {
+    slot = copyObject(slot)
+    if (slot['props'] !== undefined) {
+      const props = []
+      Object.keys(slot['props']).forEach(function (name) {
+        const type = slot['props'][name]
+        props.push({
+          name,
+          type: typeof type === 'string' ? type : JSON.stringify(type),
+        })
+      })
+      slot['vue-properties'] = props
+    }
+    delete slot['props']
+    delete slot['source']
+    return slot
+  }
+
+  function copyObject (obj) {
+    const result = {}
+    if (typeof obj === 'string') {
+      result['name'] = obj
+    } else {
+      Object.keys(obj).forEach(function (name) {
+        result[name] = obj[name]
+      })
+    }
+    return result
+  }
+})
+
+Object.keys(directives).forEach(function (key) {
+  const name = key
+  const directive = directives[key]
+  const modifiers = []
+  let valueType
+  let defaultValue
+  for (const option of directive.options || []) {
+    if (option.name.indexOf('modifiers.') === 0) {
+      modifiers.push({
+        name: option.name.substr('modifiers.'.length),
+      })
+    } else if (option.name === 'value') {
+      valueType = option.type
+      defaultValue = option.default
+    }
+  }
+  webTypes.contributions.html.attributes.push({
+    name,
+    source: { module: './src/directives/index.ts', symbol: capitalize(name.substr(2)) },
+    default: defaultValue,
+    value: valueType ? { kind: 'expression', type: valueType } : undefined,
+    'vue-modifiers': modifiers.length > 0 ? modifiers : undefined,
+  })
+})
+
+writeJsonFile(webTypes, 'dist/web-types.json')
