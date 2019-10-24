@@ -64,7 +64,7 @@
       const innerHTML = marked(code)
 
       return h(this.tag, {
-        staticClass: 'markdown',
+        staticClass: 'v-markdown',
         class: { 'mb-6': wantsList },
         domProps: { innerHTML },
       })
@@ -73,11 +73,11 @@
 </script>
 
 <style lang="sass">
-  .markdown:last-child p,
-  .markdown:last-child
+  .v-markdown:last-child p,
+  .v-markdown:last-child
     margin-bottom: 0 !important
 
-  .markdown--link
+  .v-markdown--link
     text-decoration: none
     font-weight: 500
 
@@ -89,15 +89,15 @@
       margin-left: 4px
       vertical-align: baseline
 
-  .markdown > h4
+  .v-markdown > h4
     margin: 8px 0
 
-  .markdown code
+  .v-markdown code
     box-shadow: none !important
     color: #c0341d !important
     background-color: #fbe5e1 !important
 
-  .markdown kbd > code
+  .v-markdown kbd > code
     background: transparent !important
     color: inherit !important
 </style>

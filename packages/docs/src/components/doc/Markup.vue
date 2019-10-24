@@ -60,7 +60,7 @@
 </template>
 
 <script>
-  // import { getBranch } from '@/util/helpers'  // Prism
+  // Prism
   import 'prismjs'
   import 'prismjs/components/prism-bash.js'
   import 'prismjs/components/prism-css.js'
@@ -70,6 +70,9 @@
   import 'prismjs/components/prism-scss.js'
   import 'prismjs/components/prism-stylus.js'
   import 'prismjs/components/prism-typescript.js'
+
+  // Utilities
+  import { getBranch } from '@/util/helpers'
 
   export default {
     name: 'Markup',
@@ -121,7 +124,7 @@
 
     mounted () {
       this.$nextTick(this.init)
-      // this.branch = getBranch()
+      this.branch = getBranch()
     },
 
     methods: {

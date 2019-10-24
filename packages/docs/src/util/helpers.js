@@ -41,21 +41,21 @@ export function getComponent (type) {
 
 export function parseLink (match, text, link) {
   let attrs = ''
-  let linkClass = 'markdown--link'
+  let linkClass = 'v-markdown--link'
   let icon = ''
 
   // External link
   if (link.indexOf('http') > -1) {
     attrs = `target="_blank" rel="noopener"`
     icon = 'open-in-new'
-    linkClass += ' markdown--external'
+    linkClass += ' v-markdown--external'
   // Same page internal link
   } else if (link.charAt(0) === '#') {
-    linkClass += ' markdown--same-internal'
+    linkClass += ' v-markdown--same-internal'
     icon = 'pound'
   // Different page internal link
   } else {
-    linkClass += ' markdown--internal'
+    linkClass += ' v-markdown--internal'
     icon = 'page-next'
   }
 

@@ -1,13 +1,23 @@
 {
-  "title": "header",
-  "titleText": "headerText",
   "children": [
     {
       "type": "section",
       "children": [
         {
-          "type": "getting-started-releases-and-migrations"
-        }
+          "type": "heading",
+          "lang": "releaseHeader"
+        },
+        { "type": "getting-started-releases" }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "migrationHeader"
+        },
+        { "type": "getting-started-migrations" }
       ]
     },
     {
