@@ -7,7 +7,7 @@ import PickerButton from '../../mixins/picker-button'
 import { pad } from '../VDatePicker/util'
 import mixins from '../../util/mixins'
 
-import { SelectingTimes } from './VTimePicker'
+import { SelectingTimes } from './SelectingTimes'
 import { PropValidator } from 'vue/types/options'
 import { VNode } from 'vue'
 
