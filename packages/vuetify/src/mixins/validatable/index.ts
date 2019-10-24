@@ -68,12 +68,6 @@ export default mixins(
     computedColor (): string | undefined {
       if (this.disabled) return undefined
       if (this.color) return this.color
-      // It's assumed that if the input is on a
-      // dark background, the user will want to
-      // have a white color. If the entire app
-      // is setup to be dark, then they will
-      // like want to use their primary color
-      if (this.isDark && !this.appIsDark) return 'white'
       else return 'primary'
     },
     hasError (): boolean {
