@@ -19,6 +19,11 @@
     "description": "Select from a multitude of Vuetify Material Design layouts built to help kickstart your application.",
     "keywords": "pre-defined layouts, layouts, application layout, material design layouts"
   },
+  "getting-started/browser-support": {
+    "title": "Browser support",
+    "description": "Vuetify is a progressive framework that supports all evergreen browsers and IE11 / Safari with polyfill.",
+    "keywords": "vuetify browser support"
+  },
   "getting-started/unit-testing": {
     "title": "Unit testing",
     "description": "Learn how to create unit tests with vue-test-utils and Vuetify components in your Vue application.",
