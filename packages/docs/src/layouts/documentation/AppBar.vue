@@ -8,7 +8,7 @@
     dark
   >
     <v-app-bar-nav-icon
-      class="hidden-md-and-up"
+      class="hidden-lg-and-up"
       @click="drawer = !drawer"
     />
 

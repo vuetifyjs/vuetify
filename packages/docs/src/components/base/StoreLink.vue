@@ -1,7 +1,7 @@
 <template>
   <v-btn
     :aria-label="$t('Vuetify.AppToolbar.store')"
-    class="hidden-sm-and-down"
+    class="hidden-xs-only"
     href="https://store.vuetifyjs.com"
     rel="noopener"
     style="min-width: 48px"
@@ -9,7 +9,7 @@
     text
     @click="$ga.event('toolbar', 'click', 'store')"
   >
-    <base-nav-text class="hidden-sm-and-down">Vuetify.AppToolbar.store</base-nav-text>
+    <base-nav-text>Vuetify.AppToolbar.store</base-nav-text>
 
     <v-icon right>
       mdi-open-in-new
