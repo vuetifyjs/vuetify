@@ -29,6 +29,9 @@ export default {
   carousel: {
     prev: 'Poprzedni obraz',
     next: 'Następny obraz',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: '{0} więcej',

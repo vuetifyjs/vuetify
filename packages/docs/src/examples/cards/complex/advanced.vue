@@ -33,7 +33,7 @@
       >
         Bookmark
       </v-btn>
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>mdi-heart</v-icon>
       </v-btn>

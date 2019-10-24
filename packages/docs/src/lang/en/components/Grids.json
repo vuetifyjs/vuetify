@@ -119,7 +119,7 @@
       "orderXl": "Changes the order of the component on extra large and greater breakpoints."
     },
     "v-row": {
-      "align": "Applies the [align-items](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) css property. Available options are **start**, **center**, **end**, **space-between**, **space-around** and **stretch**.",
+      "align": "Applies the [align-items](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) css property. Available options are **start**, **center**, **end**, **baseline** and **stretch**.",
       "alignSm": "Changes the **align-items** property on small and greater breakpoints.",
       "alignMd": "Changes the **align-items** property on medium and greater breakpoints.",
       "alignLg": "Changes the **align-items** property on large and greater breakpoints.",

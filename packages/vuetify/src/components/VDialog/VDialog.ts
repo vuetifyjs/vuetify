@@ -173,14 +173,8 @@ export default baseMixins.extend({
       // click is on the overlay, animate
       this.$emit('click:outside')
 
-      if (this.persistent && this.overlay) {
-        if (
-          !this.noClickAnimation &&
-          (
-            this.overlay.$el === target ||
-            this.overlay.$el.contains(target)
-          )
-        ) this.animateClick()
+      if (this.persistent) {
+        !this.noClickAnimation && this.animateClick()
 
         return false
       }

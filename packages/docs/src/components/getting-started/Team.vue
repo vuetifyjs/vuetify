@@ -74,6 +74,13 @@
           github: 'sh7dm',
           avatar: 'accessoriesType=Blank&avatarStyle=Transparent&clotheColor=Heather&clotheType=Hoodie&eyeType=Default&eyebrowType=Default&facialHairType=Blank&graphicType=Bear&hairColor=BrownDark&mouthType=Smile&skinColor=Pale&topType=ShortHairShortFlat',
         },
+        {
+          title: 'core',
+          name: 'Sean Kimball',
+          github: 'chewy94',
+          linkedin: 'sean-kimball-b50922126',
+          avatar: 'avatarStyle=Transparent&clotheColor=Heather&clotheType=ShirtVNeck&eyeType=Happy&eyebrowType=FlatNatural&facialHairColor=Black&facialHairType=BeardLight&hairColor=Black&mouthType=Smile&skinColor=Pale&topType=ShortHairShortFlat',
+        },
       ],
     }),
   }

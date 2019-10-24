@@ -21,7 +21,7 @@
                 flat
               >
                 <v-toolbar-title>Login form</v-toolbar-title>
-                <div class="flex-grow-1"></div>
+                <v-spacer></v-spacer>
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
                     <v-btn
@@ -70,7 +70,7 @@
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <div class="flex-grow-1"></div>
+                <v-spacer></v-spacer>
                 <v-btn color="primary">Login</v-btn>
               </v-card-actions>
             </v-card>
@@ -86,8 +86,5 @@
     props: {
       source: String,
     },
-    data: () => ({
-      drawer: null,
-    }),
   }
 </script>

@@ -13,7 +13,7 @@
   import {
     mapGetters,
   } from 'vuex'
-
+  import marked from 'marked'
   import kebabCase from 'lodash/kebabCase'
 
   export default {
@@ -64,7 +64,11 @@
           ? lang
           : `${this.namespace}.${this.page}.${lang}`
 
-        return kebabCase(this.$t(str))
+        const innerHTML = marked(this.$t(str))
+        const index = innerHTML.indexOf('</')
+        const text = innerHTML.slice(4, index)
+
+        return kebabCase(text)
       },
     },
   }

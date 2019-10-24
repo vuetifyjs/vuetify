@@ -21,7 +21,7 @@
 
       <v-divider vertical></v-divider>
 
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
 
       <v-btn-toggle
         v-model="toggle_multiple"

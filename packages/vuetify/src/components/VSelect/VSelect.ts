@@ -363,7 +363,7 @@ export default baseMixins.extend<options>().extend({
       }, this.getText(item))
     },
     genCommaSelection (item: object, index: number, last: boolean) {
-      const color = index === this.selectedIndex && this.color
+      const color = index === this.selectedIndex && this.computedColor
       const isDisabled = (
         this.disabled ||
         this.getDisabled(item)
