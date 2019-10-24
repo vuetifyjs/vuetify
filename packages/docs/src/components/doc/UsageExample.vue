@@ -37,7 +37,7 @@
           <v-sheet
             min-height="300"
             tile
-            :dark="dark"
+            :dark="dark || $vuetify.theme.dark"
           >
             <div
               class="fill-height pa-6"
@@ -72,7 +72,10 @@
             Options
           </v-responsive>
 
-          <v-tooltip bottom>
+          <v-tooltip
+            v-if="!$vuetify.theme.dark"
+            bottom
+          >
             <template v-slot:activator="{ on }">
               <v-btn
                 aria-label="Invert playground colors"

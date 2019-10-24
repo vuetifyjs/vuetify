@@ -22,7 +22,10 @@
 
       <v-spacer />
 
-      <v-tooltip bottom>
+      <v-tooltip
+        v-if="!$vuetify.theme.dark"
+        bottom
+      >
         <template v-slot:activator="{ on }">
           <v-btn
             aria-label="Invert example colors"
@@ -166,8 +169,9 @@
 <script>
   // Utilities
   import {
-    mapGetters,
-  } from 'vuex'
+    get,
+  } from 'vuex-pathify'
+
   import { getBranch } from '@/util/helpers'
   import kebabCase from 'lodash/kebabCase'
 
@@ -192,10 +196,8 @@
     }),
 
     computed: {
-      ...mapGetters('documentation', [
-        'namespace',
-        'page',
-      ]),
+      namespace: get('documentation/namespace'),
+      page: get('documentation/page'),
       internalValue () {
         if (this.value === Object(this.value)) return this.value
 
