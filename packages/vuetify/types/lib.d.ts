@@ -1,3 +1,5 @@
+import {DirectiveOptions} from 'vue';
+
 declare module 'vuetify/lib' {
   import { Component, DirectiveOptions } from 'vue'
   import { Vuetify } from 'vuetify'
@@ -5,15 +7,13 @@ declare module 'vuetify/lib' {
 
   const Vuetify: Vuetify
   const colors: Colors
-  const directives: {
-    ClickOutside: DirectiveOptions
-    Intersect: DirectiveOptions
-    Mutate: DirectiveOptions
-    Resize: DirectiveOptions
-    Ripple: DirectiveOptions
-    Scroll: DirectiveOptions
-    Touch: DirectiveOptions
-  }
+  const ClickOutside: DirectiveOptions
+  const Intersect: DirectiveOptions
+  const Mutate: DirectiveOptions
+  const Resize: DirectiveOptions
+  const Ripple: DirectiveOptions
+  const Scroll: DirectiveOptions
+  const Touch: DirectiveOptions
   const VApp: Component
   const VAppBar: Component
   const VAppBarNavIcon: Component
@@ -172,7 +172,13 @@ declare module 'vuetify/lib' {
   export default Vuetify
   export {
     colors,
-    directives,
+    ClickOutside,
+    Intersect,
+    Mutate,
+    Ripple,
+    Resize,
+    Scroll,
+    Touch,
     VApp,
     VAppBar,
     VAppBarNavIcon,
