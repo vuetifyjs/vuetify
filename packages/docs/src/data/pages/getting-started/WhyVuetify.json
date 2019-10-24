@@ -8,6 +8,10 @@
           "lang": "core"
         },
         {
+          "type": "text",
+          "lang": "coreText"
+        },
+        {
           "type": "getting-started-why-vuetify"
         }
       ]
@@ -57,6 +61,10 @@
         {
           "type": "heading",
           "lang": "featuresHeader"
+        },
+        {
+          "type": "text",
+          "lang": "featuresText"
         },
         {
           "type": "base-comparison",

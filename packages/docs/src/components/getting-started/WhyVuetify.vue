@@ -25,43 +25,39 @@
             class="ma-0"
             justify="space-between"
           >
-            <v-col
-              pa-0
-              cols="12"
-              mb-4
-            >
-              <v-row
-                class="ma-0"
-                no-gutters
-              >
-                <h2 class="text-uppercase mb-4 text-center">
-                  <strong
-                    class="headline font-weight-bold"
-                    v-text="philosophy.title"
-                  />
+            <v-col cols="12">
+              <h2 class="text-uppercase mb-4 text-center">
+                <strong
+                  class="headline font-weight-bold"
+                  v-text="philosophy.title"
+                />
 
-                  <div
-                    class="font-weight-thin display-1"
-                    v-text="philosophy.subtitle"
-                  />
-                </h2>
+                <div
+                  class="font-weight-thin display-1"
+                  v-text="philosophy.subtitle"
+                />
+              </h2>
 
-                <div class="text-center">
-                  <base-markdown :code="philosophy.caption" />
-                </div>
-              </v-row>
+              <div class="pa-4">
+                <base-markdown :code="philosophy.caption" />
+              </div>
             </v-col>
 
             <v-col
-              hidden-xs-only
+              class="hidden-xs-only text-center"
               cols="12"
             >
-              <v-img
-                :src="philosophy.src"
-                :aspect-ratio="16/9"
-                class="elevation-6 mx-auto"
-                width="275"
-              />
+              <v-card
+                class="d-inline-block"
+                elevation="12"
+              >
+                <v-img
+                  :src="philosophy.src"
+                  :aspect-ratio="16/9"
+                  class="mx-auto"
+                  width="275"
+                />
+              </v-card>
             </v-col>
 
             <v-col
@@ -90,6 +86,8 @@
 
 <script>
   export default {
+    name: 'GettingStartedWhyVuetify',
+
     provide: {
       namespace: undefined,
     },
