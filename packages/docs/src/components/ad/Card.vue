@@ -1,43 +1,46 @@
 <template>
-  <v-card
-    v-if="activeTemplate"
-    class="mb-12"
-    outlined
-  >
-    <v-list
-      class="py-0"
-      color="transparent"
-      three-line
+  <no-ssr>
+    <v-card
+      v-if="activeTemplate"
+      class="mb-12"
+      outlined
     >
-      <v-list-item
-        :href="`${activeTemplate.url}?ref=vuetifyjs.com${activeTemplate.query || ''}`"
-        target="_blank"
-        rel="noopener noreferrer"
-        @click="$ga.event($route.path, 'click', 'theme-ad')"
+      <v-list
+        class="py-0"
+        color="transparent"
+        three-line
       >
-        <v-list-item-avatar
-          color="grey"
-          size="64"
-          tile
+        <v-list-item
+          :href="`${activeTemplate.url}?ref=vuetifyjs.com${activeTemplate.query || ''}`"
+          target="_blank"
+          rel="noopener noreferrer"
+          @click="$ga.event($route.path, 'click', 'theme-ad')"
         >
-          <v-img
-            :alt="`Link to ${activeTemplate.title}`"
-            :src="activeTemplate.src"
-          />
-        </v-list-item-avatar>
+          <v-list-item-avatar
+            size="56"
+            tile
+          >
+            <v-img
+              :alt="`Link to ${activeTemplate.title}`"
+              :src="activeTemplate.src"
+            />
+          </v-list-item-avatar>
 
-        <v-list-item-content class="align-self-center">
-          <v-list-item-title v-text="activeTemplate.title" />
+          <v-list-item-content class="align-self-center">
+            <v-list-item-title v-text="activeTemplate.title" />
 
-          <v-list-item-subtitle v-text="activeTemplate.description" />
-        </v-list-item-content>
+            <v-list-item-subtitle v-text="activeTemplate.description" />
+          </v-list-item-content>
 
-        <v-list-item-action>
-          <v-icon>mdi-open-in-new</v-icon>
-        </v-list-item-action>
-      </v-list-item>
-    </v-list>
-  </v-card>
+          <v-list-item-action>
+            <v-icon class="mb-3">mdi-open-in-new</v-icon>
+
+            <span class="caption text--secondary">ads by Vuetify</span>
+          </v-list-item-action>
+        </v-list-item>
+      </v-list>
+    </v-card>
+  </no-ssr>
 </template>
 
 <script>
@@ -49,8 +52,17 @@
   export default {
     name: 'AdCard',
 
+    data: () => ({
+      products: require('@/data/products'),
+    }),
+
     computed: {
-      templates: sync('documentation/templates'),
+      templates () {
+        return {
+          ...sync.call(this, 'documentation/templates'),
+          ...this.products,
+        }
+      },
       activeTemplate () {
         const templates = Object.keys(this.templates)
 
