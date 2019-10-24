@@ -1,5 +1,5 @@
 // Helpers
-import { wrapInArray, sortItems, deepEqual, groupByProperty, searchItems } from '../../util/helpers'
+import { wrapInArray, sortItems, deepEqual, groupItems, searchItems } from '../../util/helpers'
 import Vue, { VNode, PropType } from 'vue'
 
 export interface DataOptions {
@@ -76,6 +76,10 @@ export default Vue.extend({
     groupDesc: {
       type: [Boolean, Array] as PropType<boolean | boolean[]>,
       default: () => [],
+    },
+    customGroup: {
+      type: Function as any as PropType<typeof groupItems>,
+      default: groupItems,
     },
     locale: {
       type: String,
@@ -172,7 +176,7 @@ export default Vue.extend({
       return items
     },
     groupedItems (): Record<string, any[]> | null {
-      return this.isGrouped ? groupByProperty(this.computedItems, this.internalOptions.groupBy[0]) : null
+      return this.isGrouped ? this.groupItems(this.computedItems) : null
     },
     scopedProps (): DataProps {
       const props = {
@@ -353,6 +357,9 @@ export default Vue.extend({
       const sortBy = this.internalOptions.groupBy.concat(this.internalOptions.sortBy)
       const sortDesc = this.internalOptions.groupDesc.concat(this.internalOptions.sortDesc)
       return this.customSort(items, sortBy, sortDesc, this.locale)
+    },
+    groupItems (items: any[]) {
+      return this.customGroup(items, this.internalOptions.groupBy, this.internalOptions.groupDesc)
     },
     paginateItems (items: any[]) {
       // Make sure we don't try to display non-existant page if items suddenly change
