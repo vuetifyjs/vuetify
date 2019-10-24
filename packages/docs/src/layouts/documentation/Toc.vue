@@ -131,10 +131,10 @@
           return section.offsetTop - 100 < this.currentOffset
         })
 
-        const lastIndex = list.length
+        const lastIndex = list.length - 1
 
         this.activeIndex = index > -1
-          ? lastIndex - 1 - index
+          ? lastIndex - index
           : lastIndex
       },
       onScroll () {
