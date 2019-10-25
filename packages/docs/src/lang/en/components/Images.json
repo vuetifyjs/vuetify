@@ -1,6 +1,7 @@
 {
   "header": "# Images",
   "headerText": "The `v-img` component is packed with features to support rich media. Combined with the [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader), you can add dynamic progressive images to provide a better user experience.",
+  "alert1": "The `v-img` component uses the [v-intersect](/directives/intersect) directive which requires a [Polyfill](/directives/intersect#polyfill) for IE11 and Safari. If a browser that does not support this functionality is detected, the image will still load as normal.",
   "examples": {
     "usage": {
       "desc": "`v-img` component is used to display a responsive image with lazy-load and placeholder."
