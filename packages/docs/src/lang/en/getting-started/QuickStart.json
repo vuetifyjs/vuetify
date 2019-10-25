@@ -1,6 +1,6 @@
 {
   "header": "# Quick start",
-  "headerText": "Use one of the Vuetify Vue CLI packages _(based on the official examples)_ to get your project started in no time. Vuetify supports **SSR** (server-side rendering), **SPA** (single page application), **PWA** (progressive web application) and standard **HTML** pages.",
+  "headerText": "Get started with Vuetify, the world’s most popular framework for building feature rich, blazing fast applications, with the power of Vue.js.",
   "vueCliHeader": "## Vue CLI 3 Install",
   "vueCliText1": "Vue CLI 3 is the next generation cli tool made to help you get started more easily than before. When you start your app with Vue CLI 3 you will also be able to get the official webpack updates and config changes, as well as Vuetify's updates without an arduous upgrade process.",
   "vueCliText2": "For information on how to use Vue CLI 3, visit the [official documentation](https://cli.vuejs.org/guide/)",

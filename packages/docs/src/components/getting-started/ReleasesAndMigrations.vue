@@ -1,5 +1,8 @@
 <template>
-  <v-layout wrap mb-12>
+  <v-layout
+    wrap
+    mb-12
+  >
     <v-flex
       xs12
       mb-12
@@ -28,22 +31,27 @@
               <v-icon left>
                 mdi-tag
               </v-icon>
+
               <span v-text="props.item.name" />
             </v-chip>
           </template>
+
           <template v-slot:item="props">
             <v-list-item-action>
               <v-icon>mdi-tag</v-icon>
             </v-list-item-action>
+
             <v-list-item-content>
               <v-list-item-title
                 :id="props.attrs['aria-labelledby']"
                 v-text="props.item.name"
               />
+
               <v-list-item-subtitle v-text="`Published: ${new Date(props.item.published_at).toDateString()}`" />
             </v-list-item-content>
           </template>
         </v-autocomplete>
+
         <v-expand-transition>
           <v-card
             v-if="releaseNotes"
@@ -65,8 +73,15 @@
     >
       <section id="migration-guide">
         <doc-heading id="migration-guide">migrationHeader</doc-heading>
-        <v-card outlined class="pa-4">
-          <doc-markdown class="migration-markdown" :code="migration || ' '" />
+
+        <v-card
+          outlined
+          class="pa-4"
+        >
+          <doc-markdown
+            class="migration-markdown"
+            :code="migration || ' '"
+          />
         </v-card>
       </section>
     </v-flex>
@@ -78,6 +93,7 @@
   import { getBranch } from '@/util/helpers'
   // Utilities
   import { mapState } from 'vuex'
+  import { sortBy } from 'lodash'
 
   export default {
     data: () => ({
@@ -90,8 +106,14 @@
     computed: {
       ...mapState('app', ['currentVersion']),
       releases () {
-        const v1 = this.githubReleases.filter(release => release.name && release.name.substring(0, 3) === 'v1.')
-        const v2 = this.githubReleases.filter(release => release.name && release.name.substring(0, 3) === 'v2.')
+        const v1 = sortBy(
+          this.githubReleases.filter(release => release.name && release.name.substring(0, 3) === 'v1.'),
+          ['published_at']
+        ).reverse()
+        const v2 = sortBy(
+          this.githubReleases.filter(release => release.name && release.name.substring(0, 3) === 'v2.'),
+          ['published_at']
+        ).reverse()
         if (v1.length > 0) {
           v1.unshift({ header: 'v1.x' })
         }

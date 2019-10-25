@@ -33,7 +33,10 @@
               :id="gotcha.id"
               class="mb-12"
             >
-              <core-goto :id="gotcha.id" :code="gotcha.q" />
+              <core-goto
+                :id="gotcha.id"
+                :code="gotcha.q"
+              />
               <v-card
                 class="pa-4"
                 outlined

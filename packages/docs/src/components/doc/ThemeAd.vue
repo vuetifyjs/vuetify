@@ -1,5 +1,8 @@
 <template>
-  <v-row v-if="activeTemplate" justify="center">
+  <v-row
+    v-if="activeTemplate"
+    justify="center"
+  >
     <v-col cols="12">
       <v-hover>
         <template v-slot="{ hover }">
@@ -21,7 +24,10 @@
                 :opacity="hover ? .97 : .9"
                 absolute
               >
-                <v-responsive class="pa-6" max-width="900">
+                <v-responsive
+                  class="pa-6"
+                  max-width="900"
+                >
                   <div class="display-1 mb-2">Premium Theme</div>
 
                   <doc-markdown :code="activeTemplate.description" />

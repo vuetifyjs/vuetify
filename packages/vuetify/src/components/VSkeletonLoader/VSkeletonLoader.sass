@@ -108,6 +108,7 @@
     width: 48px
 
   &__bone
+    border-radius: inherit
     overflow: hidden
     position: relative
 
@@ -126,6 +127,10 @@
     border-radius: $skeleton-loader-button-border-radius
     height: 36px
     width: 64px
+
+  &__card
+    .v-skeleton-loader__image
+      border-radius: 0
 
   &__card-heading
     .v-skeleton-loader__heading
