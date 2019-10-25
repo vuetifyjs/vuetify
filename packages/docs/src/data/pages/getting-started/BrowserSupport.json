@@ -3,17 +3,7 @@
     {
       "type": "section",
       "children": [
-        {
-          "type": "heading",
-          "lang": "browserHeader"
-        },
-        {
-          "type": "text",
-          "lang": "browserText"
-        },
-        {
-          "type": "getting-started-browsers"
-        }
+        { "type": "getting-started-browsers" }
       ]
     },
     {

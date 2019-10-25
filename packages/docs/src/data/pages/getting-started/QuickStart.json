@@ -65,6 +65,35 @@
       "children": [
         {
           "type": "heading",
+          "lang": "nuxtHeading"
+        },
+        {
+          "type": "text",
+          "lang": "nuxtText1"
+        },
+        {
+          "type": "markup",
+          "value": "bash_yarn_install_vuetify_nuxt_module"
+        },
+        {
+          "type": "text",
+          "lang": "nuxtText2"
+        },
+        {
+          "type": "markup",
+          "value": "js_nuxt_install_options"
+        },
+        {
+          "type": "text",
+          "lang": "nuxtText3"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
           "lang": "webpackHeader"
         },
         {
