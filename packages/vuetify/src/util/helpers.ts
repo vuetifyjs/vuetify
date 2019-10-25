@@ -387,6 +387,9 @@ export function sortItems (
 ) {
   if (sortBy === null || !sortBy.length) return items
 
+  const numericCollator = new Intl.Collator(locale, { numeric: true, usage: 'sort' })
+  const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
+
   return items.sort((a, b) => {
     for (let i = 0; i < sortBy.length; i++) {
       const sortKey = sortBy[i]
@@ -414,11 +417,8 @@ export function sortItems (
       [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
 
       if (sortA !== sortB) {
-        const sortResult = (!isNaN(sortA) && !isNaN(sortB))
-          ? Number(sortA) - Number(sortB)
-          : sortA.localeCompare(sortB, locale)
-
-        if (sortResult) return sortResult
+        if (!isNaN(sortA) && !isNaN(sortB)) return numericCollator.compare(sortA, sortB)
+        return stringCollator.compare(sortA, sortB)
       }
     }
 
