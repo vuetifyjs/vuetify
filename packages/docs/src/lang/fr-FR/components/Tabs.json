@@ -1,1 +1,7 @@
-{}
+{
+  "examples": {
+    "overflow-to-menu": {
+      "header": "### Avec le menu"
+    }
+  }
+}

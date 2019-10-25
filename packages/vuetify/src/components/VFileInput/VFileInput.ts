@@ -11,7 +11,7 @@ import { VChip } from '../VChip'
 import { PropValidator } from 'vue/types/options'
 
 // Utilities
-import { humanReadableFileSize, wrapInArray } from '../../util/helpers'
+import { deepEqual, humanReadableFileSize, wrapInArray } from '../../util/helpers'
 import { consoleError } from '../../util/console'
 
 export default VTextField.extend({
@@ -140,6 +140,17 @@ export default VTextField.extend({
         if (v === true) consoleError('readonly is not supported on <v-file-input>', this)
       },
       immediate: true,
+    },
+    value (v) {
+      const value = this.isMultiple ? v : v ? [v] : []
+      if (!deepEqual(value, this.$refs.input.files)) {
+        // When the input value is changed programatically, clear the
+        // internal input's value so that the `onInput` handler
+        // can be triggered again if the user re-selects the exact
+        // same file(s). Ideally, `input.files` should be
+        // manipulated directly but that property is readonly.
+        this.$refs.input.value = ''
+      }
     },
   },
 

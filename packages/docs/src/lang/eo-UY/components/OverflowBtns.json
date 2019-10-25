@@ -40,6 +40,10 @@
     "segmented": {
       "header": "crwdns38086:0crwdne38086:0",
       "desc": "crwdns38088:0crwdne38088:0"
+    },
+    "dense": {
+      "header": "crwdns42988:0crwdne42988:0",
+      "desc": "crwdns42990:0crwdne42990:0"
     }
   },
   "props": {

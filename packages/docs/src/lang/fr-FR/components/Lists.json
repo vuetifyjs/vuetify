@@ -1,5 +1,8 @@
 {
   "examples": {
+    "dense": {
+      "header": "### Dense"
+    },
     "flat": {
       "header": "### Plat"
     }

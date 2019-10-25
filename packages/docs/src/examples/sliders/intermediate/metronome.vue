@@ -10,7 +10,7 @@
       <v-toolbar-title>
         <span class="subheading">METRONOME</span>
       </v-toolbar-title>
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>mdi-share-variant</v-icon>
       </v-btn>

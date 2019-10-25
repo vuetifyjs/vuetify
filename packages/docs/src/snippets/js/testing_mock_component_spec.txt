@@ -36,7 +36,7 @@ describe('CustomCard.vue', () => {
 
     // We could also verify this differently
     // by checking the text content
-    const title = wrapper.find('.v-card-title > span')
+    const title = wrapper.find('.v-card__title > span')
 
     expect(title.text()).toBe('Foobar')
   })

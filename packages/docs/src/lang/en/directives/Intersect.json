@@ -1,6 +1,6 @@
 {
   "header": "# Intersection observer",
-  "headerText": "The `v-intersect` directive utilizes the [Interesction Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). It provides an easy to use interface for detecting when elements are visible within the user's viewport. This is also used for the [v-lazy](/components/lazy) component.",
+  "headerText": "The `v-intersect` directive utilizes the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). It provides an easy-to-use interface for detecting when elements are visible within the user's viewport. This is also used for the [v-lazy](/components/lazy) component.",
   "examples": {
     "usage": {
       "desc": "Scroll the window and watch the colored dot. Notice as the [v-card](/components/cards) comes into view that it changes from error to success"
@@ -9,8 +9,8 @@
   "options": {
     "modifiers.once": "Will only invoke the provided user callback on mount and once intersected. If using the **quiet** modifier will only invoke once.",
     "modifiers.quiet": "Will not automatically invoke the provided callback on bind.",
-    "value": "The function to invoke when the targetted element is intersected."
+    "value": "The function to invoke when the targeted element is intersected."
   },
   "polyfillHeading": "## Polyfill",
-  "polyfillText1": "While the [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) api is not available in IE11 by default, it can be implemented using a [polyfill](https://github.com/w3c/IntersectionObserver)."
+  "polyfillText1": "While the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) is not available in IE11 by default, it can be implemented using a [polyfill](https://github.com/w3c/IntersectionObserver)."
 }

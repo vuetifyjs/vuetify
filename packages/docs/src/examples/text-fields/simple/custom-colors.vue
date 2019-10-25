@@ -84,7 +84,7 @@
       </v-container>
       <v-card-actions>
         <v-btn text @click="resetForm">Cancel</v-btn>
-        <div class="flex-grow-1"></div>
+        <v-spacer></v-spacer>
         <v-btn
           :disabled="!formIsValid"
           text
@@ -100,7 +100,7 @@
           {{ content }}
         </v-card-text>
         <v-card-actions>
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
           <v-btn
             text
             color="purple"
@@ -116,7 +116,7 @@
           {{ content }}
         </v-card-text>
         <v-card-actions>
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
           <v-btn
             text
             color="purple"

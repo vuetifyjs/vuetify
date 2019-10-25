@@ -1,1 +1,8 @@
-{}
+{
+  "browserHeader": "## Desteklenen Tarayıcılar",
+  "newHeader": "## Yeni Uygulamalar",
+  "browserSupport": {
+    "supported": "Destekleniyor",
+    "notSupported": "Desteklenmiyor"
+  }
+}

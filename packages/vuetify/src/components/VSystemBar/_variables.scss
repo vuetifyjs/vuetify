@@ -1,3 +1,5 @@
+@import '../../styles/styles.sass';
+
 $system-bar-font-size: map-deep-get($headings, 'body-2', 'size') !default;
 $system-bar-font-weight: map-deep-get($headings, 'body-2', 'weight') !default;
 $system-bar-icon-font-size: map-deep-get($headings, 'subtitle-1', 'size') !default;

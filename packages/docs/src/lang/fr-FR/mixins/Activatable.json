@@ -1,1 +1,6 @@
-{}
+{
+  "props": {
+    "activator": "Désigne un activateur personnalisé lorsque le champ `activator` n'est pas utilisé. La chaîne de caractères peut être n'importe quel querySelector valide et Object peut être n'importe quel nœud valide.",
+    "disabled": "Désactive la capacité d'ouvrir le composant."
+  }
+}

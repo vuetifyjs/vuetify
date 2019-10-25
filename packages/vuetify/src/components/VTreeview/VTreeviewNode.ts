@@ -257,7 +257,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
           click: () => {
             if (this.disabled) return
 
-            if (this.openOnClick && this.children) {
+            if (this.openOnClick && this.hasChildren) {
               this.open()
             } else if (this.activatable) {
               this.isActive = !this.isActive

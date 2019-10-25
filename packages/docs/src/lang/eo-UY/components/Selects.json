@@ -34,6 +34,10 @@
       "header": "crwdns39666:0crwdne39666:0",
       "desc": "crwdns39668:0crwdne39668:0"
     },
+    "dense": {
+      "header": "crwdns43090:0crwdne43090:0",
+      "desc": "crwdns43092:0crwdne43092:0"
+    },
     "readonly": {
       "header": "crwdns39670:0crwdne39670:0",
       "desc": "crwdns39672:0crwdne39672:0"
@@ -53,7 +57,6 @@
     "dark": "crwdns39678:0crwdne39678:0",
     "debounceSearch": "crwdns33194:0crwdne33194:0",
     "deletableChips": "crwdns33196:0crwdne33196:0",
-    "dense": "crwdns33198:0crwdne33198:0",
     "disabled": "crwdns33200:0crwdne33200:0",
     "eager": "crwdns39680:0crwdne39680:0",
     "editable": "crwdns33202:0[spec]crwdne33202:0",
@@ -100,6 +103,7 @@
     "click:prepend-inner": "crwdns33274:0crwdne33274:0",
     "focus": "crwdns39692:0crwdne39692:0",
     "update:error": "crwdns33276:0crwdne33276:0",
+    "update:list-index": "crwdns43094:0crwdne43094:0",
     "update:search-input": "crwdns39694:0crwdne39694:0"
   }
 }

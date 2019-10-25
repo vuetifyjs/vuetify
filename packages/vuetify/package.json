@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue.js 2 Semantic Component Framework",
-  "version": "2.1.0",
+  "version": "2.1.7",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -111,5 +111,6 @@
   "vetur": {
     "tags": "dist/json/tags.json",
     "attributes": "dist/json/attributes.json"
-  }
+  },
+  "web-types": "dist/json/web-types.json"
 }

@@ -1,1 +1,5 @@
-{}
+{
+  "props": {
+    "color": "指定された色をコントロールに適用します。利用できるのは色の名前（たとえば、 `success`または` purple`）またはcss表記の色（ `＃033`または` rgba（255、0、0、0.5） `）です。 [colors page](/ styles / colors＃material-colors) で組み込みクラスのリストを見ることができます。"
+  }
+}

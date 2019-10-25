@@ -1,1 +1,132 @@
-{}
+{
+  "header": "# Sistema de grade",
+  "headerText": "Vuetify vem com um sistema de grade de 12 pontos construído usando <kbd>flex-box</kbd>. A grade é usada para criar layouts específicos dentro do conteúdo de um aplicativo.  Ele contém 5 tipos de breakpoints de mídia que são usados para direcionar tamanhos ou orientações específicas da tela, **xs**, **sm**, **md**, **lg** e **xl**. Estas resoluções estão definidas abaixo na tabela Viewport Breakpoints e podem ser modificadas personalizando o [serviço de Breakpoint](/customization/breakpoints).",
+  "usageText2": "No exemplo acima, nós criamos três colunas de largura igual em dispositivos pequenos, médios, grandes e extras grandes. O pai `v-container` é usado para centralizar os `v-col`s internos.",
+  "usageAlert1": "Ao usar o sistema de grade com IE11, você precisará explicitamente definir um `height`, pois `min-height` não será suficiente e causará resultados indesejados.",
+  "examples": {
+    "usage": {
+      "desc": "A grade Vuetify está fortemente inspirada pela [grade Bootstrap](https://getbootstrap.com/docs/4.0/layout/grid/). É integrado usando uma série de contêineres, linhas e colunas para o layout e alinhamento do conteúdo. **Se você é novo para flexbox**, [Leia o guia de flexbox de Truques CSS](https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-background) para o fundo, terminologia, diretrizes e trechos de código."
+    },
+    "playground": {
+      "header": "### Layout playground",
+      "desc": "Teste as opções de layout em um simples playground."
+    },
+    "auto": {
+      "header": "### Colunas de tamanho automático",
+      "desc": "As colunas vão automaticamente assumir uma mesma quantidade de espaço dentro do contêiner pai. Isso pode ser modificado usando a propriedade **cols**. Você também pode usar as propriedades **sm**, **md**, **lg** e **xl** para melhor definir como a coluna será dimensionada em diferentes tamanhos de visualização."
+    },
+    "equal": {
+      "header": "### Colunas de larguras iguais",
+      "desc": "Você pode quebrar colunas de largura iguais em várias linhas. Embora existam soluções alternativas para versões mais antigas do navegador, houve um [bug de flexbox do Safari](https://github.com/philipwalton/flexbugs#11-min-and-max-size-declarations-are-ignored-when-wrapping-flex-items). Isso não deve ser necessário se estiver atualizado."
+    },
+    "one-column-width": {
+      "header": "### Uma coluna de largura",
+      "desc": "Ao usar o auto-layout, você pode definir a largura de apenas uma coluna enquanto mantém seus irmãos redimensionando automaticamente em torno dela."
+    },
+    "variable-content": {
+      "header": "### Largura de conteúdo variável",
+      "desc": "A atribuição da largura do ponto de interrupção para as colunas pode ser configurada para redimensionar com base na largura natural de seu conteúdo."
+    },
+    "grow-shrink": {
+      "header": "### Crescer e encolher",
+      "desc": "Por padrão, os componentes flexíveis preencherão automaticamente o espaço disponível em uma linha ou coluna. Eles também encolherão em relação ao restante dos itens flexíveis no contêiner flexível quando um tamanho específico não for designado. Você pode definir a largura da coluna `v-col` usando a propriedade **cols** e fornecendo um valor de **1 a 12**."
+    },
+    "row-column-breakpoint": {
+      "header": "### Pontos de interrupção de linha e coluna"
+    },
+    "vertical-alignment": {
+      "header": "### Alinhamento vertical",
+      "desc": "Altere o alinhamento vertical de itens flexíveis e seus pais usando as propriedades **align** e **align-self**."
+    },
+    "horizontal-alignment": {
+      "header": "### Alinhamento horizontal",
+      "desc": "Altere o alinhamento horizontal de itens flexíveis e seus pais usando as propriedades **justify** e **justify-self**."
+    },
+    "no-gutters": {
+      "header": "### Sem espaçamentos",
+      "desc": "Você pode remover as margens negativas de `v-row` e o padding de seus filhos diretos `v-col` usando a propriedade **no-gutters**."
+    },
+    "wrapping": {
+      "header": "### Quebra de coluna"
+    },
+    "order": {
+      "header": "### Classes de ordenação",
+      "desc": "Você pode controlar a ordem dos itens da grade. Assim como nos deslocamentos (offsets), você pode definir diferentes ordens para tamanhos diferentes. Crie layouts de tela especializados que se adaptam a qualquer aplicativo."
+    },
+    "order-first-last": {
+      "header": "### Ordenação primeira / última",
+      "desc": "Você também pode designar explicitamente **first** ou **last** que irá atribuir, respectivamente, os valores **-1** ou **13** para a propriedade CSS `order`."
+    },
+    "offset": {
+      "header": "### Deslocamento (offset)",
+      "desc": "Deslocamentos (offsets) são úteis para compensar elementos que ainda não estão visíveis, ou para controlar a posição do conteúdo. Assim como os pontos de interrupção, você pode definir um deslocamento para qualquer tamanho disponível. Isso permite que você ajuste o layout de sua aplicação exatamente para suas necessidades."
+    },
+    "offset-breakpoint": {
+      "header": "### Ponto de interrupção de deslocamento",
+      "desc": "O deslocamento também pode ser aplicado por ponto de interrupção."
+    },
+    "margin": {
+      "header": "### Utilitários de margem",
+      "desc": "Usando os [utilitários de ajuda de margem automática](/styles/flex#auto-margins) você pode forçar colunas irmãs a se distanciarem umas das outras."
+    },
+    "nested-grid": {
+      "header": "### Grade aninhada",
+      "desc": "As grades podem ser aninhadas, semelhante a outros frameworks, para obter layouts muito personalizados."
+    },
+    "unique-layouts": {
+      "header": "### Layouts únicos",
+      "desc": "O poder e a flexibilidade do sistema de grade Vuetify permitem criar interfaces de usuário incríveis."
+    },
+    "spacer": {
+      "header": "### Espaçadores",
+      "desc": "O componente `v-spacer` é útil quando você quer preencher o espaço disponível ou fazer espaço entre dois componentes."
+    },
+    "tags": {
+      "header": "### Tags Html",
+      "desc": "Às vezes você quer especificar um item de layout como uma tag específica, como um elemento `section` ou `li`."
+    }
+  },
+  "props": {
+    "tag": "Components.Sheets.props.tag",
+    "v-container": {
+      "fluid": "Remove os pontos de interrupção da largura máxima da janela de exibição"
+    },
+    "v-col": {
+      "alignSelf": "Aplica a propriedade css [align-items](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items). As opções disponíveis são **start**, **center**, **end**, **auto**, **baseline** e **stretch**.",
+      "cols": "Define o número padrão de colunas que o componente estende. As opções disponíveis são **1 -> 12** e **auto**.",
+      "sm": "Altera o número de colunas no ponto de interrupção pequeno e maiores.",
+      "md": "Altera o número de colunas no ponto de interrupção médio e maiores.",
+      "lg": "Altera o número de colunas no ponto de interrupção grande e maiores.",
+      "xl": "Altera o número de colunas no ponto de interrupção extra grande e maiores.",
+      "offset": "Define o deslocamento padrão para a coluna.",
+      "offsetSm": "Altera o deslocamento do componente no ponto de interrupção pequeno e maiores.",
+      "offsetMd": "Altera o deslocamento do componente no ponto de interrupção médio e maiores.",
+      "offsetLg": "Altera o deslocamento do componente no ponto de interrupção grande e maiores.",
+      "offsetXl": "Altera o deslocamento do componente no ponto de interrupção extra grande e maiores.",
+      "order": "Define o [order](https://developer.mozilla.org/en-US/docs/Web/CSS/order) padrão para a coluna.",
+      "orderSm": "Altera a ordem do componente no ponto de interrupção pequeno e maiores.",
+      "orderMd": "Altera a ordem do componente no ponto de interrupção médio e maiores.",
+      "orderLg": "Altera a ordem do componente no ponto de interrupção grande e maiores.",
+      "orderXl": "Altera a ordem do componente no ponto de interrupção extra grande e maiores."
+    },
+    "v-row": {
+      "align": "Aplica a propriedade css [align-items](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items). As opções disponíveis são **start**, **center**, **end**, **space-between**, **space-around** e **stretch**.",
+      "alignSm": "Altera a propriedade **align-items** no ponto de interrupção pequeno e maiores.",
+      "alignMd": "Altera a propriedade **align-items** no ponto de interrupção médio e maiores.",
+      "alignLg": "Altera a propriedade **align-items** no ponto de interrupção grande e maiores.",
+      "alignXl": "Altera a propriedade **align-items** no ponto de interrupção extra grande e maiores.",
+      "alignContent": "Aplica a propriedade css [align-content](https://developer.mozilla.org/en-US/docs/Web/CSS/align-content). As opções disponíveis são **start**, **center**, **end**, **space-between**, **space-around** e **stretch**.",
+      "alignContentSm": "Altera a propriedade **align-content** no ponto de interrupção pequeno e maiores.",
+      "alignContentMd": "Altera a propriedade **align-content** no ponto de interrupção médio e maiores.",
+      "alignContentLg": "Altera a propriedade **align-content** no ponto de interrupção grande e maiores.",
+      "alignContentXl": "Altera a propriedade **align-content** no ponto de interrupção extra grande e maiores.",
+      "dense": "Reduz o espaçamento entre `v-col`s.",
+      "justify": "Aplica a propriedade css [justify-content](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content). As opções disponíveis são **start**, **center**, **end**, **space-between** e **space-around**.",
+      "justifySm": "Altera a propriedade **justify-content** no ponto de interrupção pequeno e maiores.",
+      "justifyMd": "Altera a propriedade **justify-content** no ponto de interrupção médio e maiores.",
+      "justifyLg": "Altera a propriedade **justify-items** no ponto de interrupção grande e maiores.",
+      "justifyXl": "Altera a propriedade **justify-items** no ponto de interrupção extra grande e maiores.",
+      "noGutters": "Reduz o espaçamento entre `v-col`s."
+    }
+  }
+}

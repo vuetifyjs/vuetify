@@ -77,6 +77,8 @@ const DataGroupHeaderScopedProps = {
   groupedBy: DataOptions.groupBy,
   items: 'any[]',
   headers: 'TableHeader[]',
+  toggle: '() => void',
+  remove: '() => void',
 }
 
 const DataTableSlots = [

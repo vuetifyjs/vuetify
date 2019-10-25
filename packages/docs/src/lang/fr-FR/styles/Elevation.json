@@ -1,1 +1,13 @@
-{}
+{
+  "header": "# Élévation",
+  "headerText": "Les aides d'élévation vous permettent de contrôler la profondeur relative ou la distance entre deux surfaces le long de **l'axe z**. Il y a un total de 25 niveaux d'élévation. Vous pouvez définir l'élévation d'un élément en utilisant la classe `elevation-{n}`, où `n` est un entier compris entre 0 et 24 correspondant à l'élévation souhaitée.",
+  "examples": {
+    "usage": {
+      "desc": "Les classes d'aide `elevation` vous permettent d'assigner un **z-depth** personnalisé à n'importe quel élément."
+    },
+    "dynamic": {
+      "header": "### Elevation dynamique",
+      "desc": "De nombreux composants utilisent le mixin **elevatable** et possèdent une prop **elevation** . Pour les composants qui ne sont pas pris en charge, vous pouvez modifier dynamiquement la classe"
+    }
+  }
+}

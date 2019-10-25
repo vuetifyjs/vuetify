@@ -2,10 +2,8 @@
   "header": "crwdns40822:0crwdne40822:0",
   "headerText": "crwdns34376:0crwdne34376:0",
   "alert": "crwdns40824:0crwdne40824:0",
+  "usage": "crwdns40826:0crwdne40826:0",
   "examples": {
-    "usage": {
-      "desc": "crwdns40826:0crwdne40826:0"
-    },
     "flat": {
       "header": "crwdns34380:0crwdne34380:0",
       "desc": "crwdns34382:0crwdne34382:0"
@@ -70,7 +68,8 @@
       "rounded": "crwdns40848:0crwdne40848:0",
       "text": "crwdns40850:0crwdne40850:0",
       "type": "crwdns40852:0crwdne40852:0",
-      "value": "crwdns40854:0crwdne40854:0"
+      "value": "crwdns40854:0crwdne40854:0",
+      "retainFocusOnClick": "crwdns43144:0crwdne43144:0"
     },
     "v-btn-toggle": {
       "rounded": "crwdns40856:0crwdne40856:0"

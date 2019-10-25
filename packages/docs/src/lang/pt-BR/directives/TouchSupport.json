@@ -1,1 +1,10 @@
-{}
+{
+  "examples": {
+    "usage": {
+      "uninverted": true
+    }
+  },
+  "options": {
+    "{ move, start, end }": "Atribuir uma chamada quando o evento de toque começa, termina e enquanto está em andamento"
+  }
+}

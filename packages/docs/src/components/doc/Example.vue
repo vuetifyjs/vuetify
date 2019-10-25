@@ -18,7 +18,9 @@
         <v-icon left>mdi-star</v-icon>
         <span>New in <strong>{{ newIn }}</strong></span>
       </v-chip>
+
       <v-spacer />
+
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <v-btn
@@ -30,8 +32,10 @@
             <v-icon>mdi-invert-colors</v-icon>
           </v-btn>
         </template>
+
         Invert example colors
       </v-tooltip>
+
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <v-btn
@@ -43,8 +47,10 @@
             <v-icon>mdi-codepen</v-icon>
           </v-btn>
         </template>
+
         Edit in Codepen
       </v-tooltip>
+
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <v-btn
@@ -57,8 +63,10 @@
             <v-icon>mdi-github-circle</v-icon>
           </v-btn>
         </template>
+
         View on Github
       </v-tooltip>
+
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <v-btn
@@ -70,6 +78,7 @@
             <v-icon>mdi-code-tags</v-icon>
           </v-btn>
         </template>
+
         View source
       </v-tooltip>
     </v-toolbar>

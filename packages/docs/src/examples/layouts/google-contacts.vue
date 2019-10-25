@@ -97,7 +97,7 @@
         label="Search"
         class="hidden-sm-and-down"
       ></v-text-field>
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>mdi-apps</v-icon>
       </v-btn>
@@ -236,7 +236,7 @@
             text
             color="primary"
           >More</v-btn>
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
           <v-btn
             text
             color="primary"
