@@ -56,7 +56,7 @@
     <a href="https://paypal.me/vuetify">Make a one-time payment with Paypal</a>
   </li>
   <li>
-    <a href="https://vuetifyjs.com/introduction/consulting-and-support?ref=github">Book time with John</a>
+    <a href="https://vuetifyjs.com/professional-support/consulting?ref=github">Book time with John</a>
   </li>
 </ul>
 

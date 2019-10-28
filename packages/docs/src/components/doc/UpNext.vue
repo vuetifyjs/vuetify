@@ -56,7 +56,7 @@
           case 'professional-support': return 'amber darken-2'
           case 'directives': return 'blue-grey'
           case 'styles': return 'deep-purple accent-4'
-          case 'themes': return 'warning'
+          case 'themes': return 'pink'
           default: return 'grey'
         }
       },
