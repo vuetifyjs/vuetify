@@ -52,7 +52,7 @@
             v-for="(framework, j) in frameworks"
             :key="j"
             class="text-center"
-            width="13%"
+            width="10%"
           >
             <v-icon
               v-if="framework[key] && typeof framework[key] === 'boolean'"
@@ -80,7 +80,7 @@
       <tfoot>
         <tr>
           <td colspan="7">
-            <caption class="caption d-block font-italic font-weight-light grey--text">*Based on average of all Major/Minor/Patch releases over the last 12 months.</caption>
+            <div class="caption d-block font-italic font-weight-light grey--text">*Based on average of all Major/Minor/Patch releases over the last 12 months.</div>
           </td>
         </tr>
       </tfoot>
@@ -116,7 +116,7 @@
           name: 'Vuetify',
           src: 'https://cdn.vuetifyjs.com/images/logos/vuetify-logo-light.png',
           components: 82,
-          tree: 'Automatic w/ vuetify-loader',
+          tree: 'Automatic',
           release: 'Weekly',
           ssr: true,
           a11y: true,
@@ -168,7 +168,7 @@
           src: 'https://cdn.vuetifyjs.com/images/competitors/quasar.png',
           release: 'Bi-Weekly',
           components: 68,
-          tree: 'Manual',
+          tree: 'Config',
           ssr: true,
           rtl: true,
         },

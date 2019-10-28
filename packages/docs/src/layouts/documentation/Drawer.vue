@@ -44,7 +44,7 @@
       </div>
     </v-container>
 
-    <v-divider class="mb-1 mt-2" />
+    <v-divider class="my-1" />
 
     <v-list
       class="pt-0 pb-7"

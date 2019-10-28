@@ -17,8 +17,8 @@
       <v-timeline-item
         v-else-if="index == null || index >= i"
         :key="i"
-        :icon="item.complete ? 'mdi-check' : item.icon"
         :color="item.complete ? 'success darken-1' : item.color"
+        :icon="item.complete ? 'mdi-check' : item.icon"
         :small="item.complete || item.small"
         fill-dot
       >
@@ -116,7 +116,7 @@
     }),
 
     mounted () {
-      this.items = this.$t('GettingStarted.Roadmap.roadmapItems').map(item => {
+      this.items = this.$t('Introduction.Roadmap.roadmapItems').map(item => {
         const type = types[item.type]
         return {
           ...type,
