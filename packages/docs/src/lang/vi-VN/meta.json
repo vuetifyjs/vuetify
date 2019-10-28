@@ -9,20 +9,20 @@
   "getting-started/why-vuetify": {
     "title": "Tại sao dùng Vuetify?"
   },
-  "getting-started/frequently-asked-questions": {
+  "introduction/frequently-asked-questions": {
     "title": "Câu hỏi thường gặp"
   },
-  "getting-started/meet-the-team": {
+  "introduction/meet-the-team": {
     "title": "Các thành viên",
     "keywords": "đội ngũ phát triển, đội ngũ chính"
   },
-  "getting-started/sponsors-and-backers": {
+  "introduction/sponsors-and-backers": {
     "title": "Nhà tài trợ và ủng hộ"
   },
   "getting-started/contributing": {
     "title": "Đóng góp"
   },
-  "getting-started/consulting-and-support": {
+  "introduction/consulting-and-support": {
     "title": "Tư vấn và hỗ trọ"
   },
   "customization/breakpoints": {

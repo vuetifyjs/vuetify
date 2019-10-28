@@ -49,9 +49,11 @@
     methods: {
       genColor (section) {
         switch (section) {
+          case 'introduction': return 'primary'
           case 'getting-started': return 'teal'
           case 'customization': return 'red lighten-2'
-          case 'components': return 'primary'
+          case 'components': return 'indigo darken-1'
+          case 'professional-support': return 'amber darken-2'
           case 'directives': return 'blue-grey'
           case 'styles': return 'deep-purple accent-4'
           case 'themes': return 'warning'
@@ -60,9 +62,11 @@
       },
       genIcon (section) {
         switch (section) {
+          case 'introduction': return 'mdi-book-open-page-variant'
           case 'getting-started': return 'mdi-speedometer'
           case 'customization': return 'mdi-cogs'
           case 'components': return 'mdi-view-dashboard'
+          case 'professional-support': return 'mdi-atom-variant'
           case 'directives': return 'mdi-function'
           case 'styles': return 'mdi-palette'
           case 'themes': return 'mdi-vuetify'

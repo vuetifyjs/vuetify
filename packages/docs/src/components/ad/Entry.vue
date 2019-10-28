@@ -1,5 +1,6 @@
 <template>
   <v-card
+    v-if="!hasError"
     :class="$vuetify.theme.dark ? 'entry--dark' : undefined"
     class="px-4 pt-4 my-8 documentation-ad-entry"
     flat
@@ -10,6 +11,13 @@
   >
     <div :id="id"><!-- Ad --></div>
   </v-card>
+
+  <v-responsive
+    v-else
+    max-width="425"
+  >
+    <ad-card />
+  </v-responsive>
 </template>
 
 <script>
@@ -28,6 +36,7 @@
     },
 
     data: () => ({
+      hasError: false,
       script: null,
     }),
 
@@ -41,14 +50,11 @@
       script.type = 'text/javascript'
       script.id = this.scriptId
       script.src = '//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuetifyjscom'
+      script.onerror = () => (this.hasError = true)
 
       this.$el && this.$el.appendChild(script)
 
       this.script = script
-    },
-
-    beforeDestroy () {
-      this.script && this.$el && this.$el.removeChild(this.script)
     },
   }
 </script>
@@ -91,4 +97,8 @@
       .carbon-poweredby,
       .carbon-text
         color: #FFFFFF
+
+    .v-list-item__subtitle
+      text-overflow: initial
+      white-space: initial
 </style>

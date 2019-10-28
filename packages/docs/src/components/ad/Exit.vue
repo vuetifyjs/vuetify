@@ -1,16 +1,13 @@
 <template>
-  <v-responsive
-    v-show="isVisible !== false"
-    min-height="61"
-  >
+  <v-responsive min-height="61">
     <div
-      v-show="isVisible"
       :class="$vuetify.theme.dark ? 'exit--dark' : undefined"
       class="documentation-ad-exit"
     >
       <v-divider class="mt-4 mb-7" />
 
       <v-card
+        v-if="!hasError"
         class="pa-4"
         flat
         min-height="60"
@@ -22,6 +19,11 @@
           ref="exit"
         ><!-- Ad --></div>
       </v-card>
+
+      <ad-card
+        v-else
+        dense
+      />
     </div>
   </v-responsive>
 </template>
@@ -31,7 +33,7 @@
     name: 'AdExit',
 
     data: () => ({
-      isVisible: null,
+      hasError: false,
       loadTimeout: 0,
       script: null,
     }),
@@ -45,6 +47,7 @@
       script.type = 'text/javascript'
       script.src = '//m.servedby-buysellads.com/monetization.js'
       script.onload = this.onLoad
+      script.onerror = () => (this.hasError = true)
 
       this.$el && this.$el.appendChild(script)
 
@@ -66,9 +69,10 @@
         // Sometimes ad doesn't load
         await new Promise(resolve => setTimeout(resolve, 500))
 
-        if (!this.$refs.exit) return
-
-        this.isVisible = this.$refs.exit.children.length > 0
+        if (
+          !this.$refs.exit ||
+          !this.$refs.exit.children.length
+        ) this.hasError = true
       },
     },
   }

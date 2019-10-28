@@ -1,5 +1,8 @@
 <template>
-  <v-row justify="space-between">
+  <v-row
+    id="consulting"
+    justify="space-between"
+  >
     <v-col
       cols="12"
       md="8"
@@ -84,4 +87,7 @@
 #consulting
   .v-list-item
     height: 32px !important
+
+.booking-container.booking-wrapper
+  width: 100% !important
 </style>

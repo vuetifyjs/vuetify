@@ -8,7 +8,6 @@
       <v-list
         class="py-0"
         color="transparent"
-        three-line
       >
         <v-list-item
           :href="`${activeTemplate.url}?ref=vuetifyjs.com${activeTemplate.query || ''}`"
@@ -52,6 +51,13 @@
 
   export default {
     name: 'AdCard',
+
+    props: {
+      dense: {
+        type: Boolean,
+        default: false,
+      },
+    },
 
     data: () => ({
       products: require('@/data/products'),

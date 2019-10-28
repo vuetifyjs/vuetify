@@ -17,7 +17,7 @@
           "type": "up-next",
           "value": [
             "getting-started/contributing",
-            "getting-started/consulting-and-support",
+            "introduction/consulting-and-support",
             "customization/a-la-carte"
           ]
         }

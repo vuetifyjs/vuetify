@@ -1,90 +1,88 @@
 <template>
-  <v-container fluid>
-    <v-row>
-      <v-col
-        class="mb-4"
-        cols="12"
-      >
-        <v-text-field
-          v-model="search"
-          clearable
-          filled
-          label="Search"
-          prepend-inner-icon="mdi-comment-search"
-          single-line
-        />
-      </v-col>
+  <v-row>
+    <v-col cols="12">
+      <v-text-field
+        v-model="search"
+        clearable
+        filled
+        label="Search"
+        prepend-inner-icon="mdi-comment-search"
+        single-line
+      />
+    </v-col>
 
-      <v-col
-        class="mb-12"
-        cols="12"
+    <v-col
+      class="mb-12"
+      cols="12"
+    >
+      <v-data-iterator
+        :items="gotchas"
+        :search.sync="search"
+        class="v-data-iterator--faq"
+        disable-pagination
+        hide-default-footer
       >
-        <v-data-iterator
-          :items="gotchas"
-          :search.sync="search"
-          class="v-data-iterator--faq"
-          disable-pagination
-          hide-default-footer
-        >
-          <template v-slot:item="{ item: gotcha, index }">
-            <section
+        <template v-slot:item="{ item: gotcha, index }">
+          <section
+            :id="gotcha.id"
+            class="mb-12"
+          >
+            <base-goto
               :id="gotcha.id"
-              class="mb-12"
+              :code="gotcha.q"
+            />
+
+            <v-card
+              class="pa-4"
+              outlined
             >
-              <base-goto
-                :id="gotcha.id"
-                :code="gotcha.q"
+              <base-markdown :code="gotcha.a" />
+
+              <base-markdown
+                v-if="gotcha.a2"
+                :code="gotcha.a2"
               />
 
-              <v-card
-                class="pa-4"
-                outlined
-              >
-                <base-markdown :code="gotcha.a" />
+              <template v-if="gotcha.s">
+                <v-btn
+                  class="mt-4"
+                  depressed
+                  small
+                  @click="gotcha.m = !gotcha.m"
+                >
+                  Open code snippet
 
-                <base-markdown
-                  v-if="gotcha.a2"
-                  :code="gotcha.a2"
-                />
+                  <v-icon right>mdi-code-tags</v-icon>
+                </v-btn>
 
-                <template v-if="gotcha.s">
-                  <v-btn
-                    class="mt-4"
-                    depressed
-                    small
-                    @click="gotcha.m = !gotcha.m"
-                  >
-                    Open code snippet
-
-                    <v-icon right>mdi-code-tags</v-icon>
-                  </v-btn>
-
-                  <v-expand-transition v-if="gotcha.m">
-                    <div class="swing-transition">
+                <div class="mt-3 mb-n4">
+                  <v-expand-transition>
+                    <div
+                      v-show="gotcha.m"
+                      class="swing-transition"
+                    >
                       <template v-if="Array.isArray(gotcha.s)">
                         <doc-markup
                           v-for="(g, i) in gotcha.s"
                           :key="i"
                           :value="g"
-                          class="mb-0 mt-4"
                         />
                       </template>
 
                       <doc-markup
                         v-else
                         :value="gotcha.s"
-                        class="mb-0 mt-4"
                       />
                     </div>
                   </v-expand-transition>
-                </template>
-              </v-card>
-            </section>
-          </template>
-        </v-data-iterator>
-      </v-col>
-    </v-row>
-  </v-container>
+                </div>
+              </template>
+            </v-card>
+          </section>
+        </template>
+      </v-data-iterator>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -92,7 +90,7 @@
   import kebabCase from 'lodash/kebabCase'
 
   export default {
-    name: 'Faq',
+    name: 'GettingStartedFaq',
 
     data: () => ({
       internalFiltered: [],

@@ -28,6 +28,7 @@
           <v-card
             :color="key"
             outlined
+            tile
           >
             <v-card-text>
               <span
@@ -38,7 +39,7 @@
           </v-card>
 
           <v-card
-            v-for="(subColor, key2, i) in color"
+            v-for="(subColor, key2) in color"
             :key="key2"
             :color="`${key} ${convertToClass(key2)}`"
             flat

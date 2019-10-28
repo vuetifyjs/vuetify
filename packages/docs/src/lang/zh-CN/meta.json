@@ -10,22 +10,22 @@
   "getting-started/why-vuetify": {
     "title": "为什么选择 Vuetify？"
   },
-  "getting-started/frequently-asked-questions": {
+  "introduction/frequently-asked-questions": {
     "title": "常见问题！",
     "keywords": "常见问题"
   },
-  "getting-started/meet-the-team": {
+  "introduction/meet-the-team": {
     "title": "认识开发团队",
     "keywords": "Vuetify开发团队，Vuetify核心成员"
   },
-  "getting-started/sponsors-and-backers": {
+  "introduction/sponsors-and-backers": {
     "title": "赞助商和支持者"
   },
   "getting-started/contributing": {
     "title": "贡献",
     "keywords": "贡献、贡献、功能请求"
   },
-  "getting-started/consulting-and-support": {
+  "introduction/consulting-and-support": {
     "title": "咨询和支持"
   },
   "customization/breakpoints": {

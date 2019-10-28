@@ -68,8 +68,8 @@
         {
           "type": "up-next",
           "value": [
-            "getting-started/consulting-and-support",
-            "getting-started/roadmap",
+            "introduction/consulting-and-support",
+            "introduction/roadmap",
             "themes/premium"
           ]
         }

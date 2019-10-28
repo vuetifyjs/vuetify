@@ -7,7 +7,7 @@
   "resetSearch": "Reset search",
   "gotchas": [
     {
-      "q": "My application won't compile due to sass / scss errors",
+      "q": "### My application won't compile due to sass / scss errors",
       "a": "Ensure that you are using the proper options object in accordance with your sass-loader version.",
       "s": "js_webpack_sass"
     },
@@ -107,7 +107,7 @@
     },
     {
       "q": "### How long will version 1.5 be supported?",
-      "a": "Until July 2020. More information can be found on the [Long-term Support page](/getting-started/long-term-support)."
+      "a": "Until July 2020. More information can be found on the [Long-term Support page](/introduction/long-term-support)."
     },
     {
       "q": "### How do I get to the v1.5 documentation?",

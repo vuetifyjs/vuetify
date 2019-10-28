@@ -179,8 +179,8 @@
           "type": "up-next",
           "value": [
             "getting-started/why-vuetify",
-            "getting-started/frequently-asked-questions",
-            "getting-started/sponsors-and-backers"
+            "introduction/frequently-asked-questions",
+            "introduction/sponsors-and-backers"
           ]
         }
       ]

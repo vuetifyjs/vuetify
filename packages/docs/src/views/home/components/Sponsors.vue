@@ -24,7 +24,7 @@
 
       <supporters-sponsor-btn
         append
-        to="getting-started/sponsors-and-backers"
+        to="introduction/sponsors-and-backers"
         large
       />
     </v-sheet>

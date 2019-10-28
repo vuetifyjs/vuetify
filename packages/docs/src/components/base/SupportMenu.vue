@@ -50,7 +50,7 @@
     data: vm => ({
       supports: [
         {
-          to: 'getting-started/consulting-and-support',
+          to: 'professional-support/consulting',
           icon: 'mdi-vuetify',
           text: vm.$t('Vuetify.AppDrawer.consulting'),
         },

@@ -16,9 +16,9 @@
         {
           "type": "up-next",
           "value": [
-            "getting-started/roadmap",
+            "introduction/roadmap",
             "getting-started/contributing",
-            "getting-started/meet-the-team"
+            "introduction/meet-the-team"
           ]
         }
       ]

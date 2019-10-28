@@ -63,7 +63,7 @@
       "complete": true,
       "title": "v1.5 Release",
       "caption": "February 2019",
-      "text": "Added new component, `v-calendar`. Improved functionality of `v-sparkline` with new **bar** and **fill** properties. Improved `v-treeview` and prepared for LTS. Navigate to the [Long-term Support Page](/getting-started/long-term-support) for more information on LTS. Check here for the official [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0).",
+      "text": "Added new component, `v-calendar`. Improved functionality of `v-sparkline` with new **bar** and **fill** properties. Improved `v-treeview` and prepared for LTS. Navigate to the [Long-term Support Page](/introduction/long-term-support) for more information on LTS. Check here for the official [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0).",
       "value": false
     },
     {
@@ -71,7 +71,7 @@
       "complete": true,
       "title": "v2.0 Release **(Arcadia)**",
       "caption": "July 2019",
-      "text": "A complete rebuild of the framework core. Improving the layout and theme systems, platform integration, accessibility, RTL and performance. Update all components to the [Material Design 2](https://material.io/design/) specification. Add additional functionality to multiple existing components and setup v1.5 for [Long-term Support](/getting-started/long-term-support).",
+      "text": "A complete rebuild of the framework core. Improving the layout and theme systems, platform integration, accessibility, RTL and performance. Update all components to the [Material Design 2](https://material.io/design/) specification. Add additional functionality to multiple existing components and setup v1.5 for [Long-term Support](/introduction/long-term-support).",
       "features": {
         "#### Highlights": [
           "Complete update to Material Design 2",

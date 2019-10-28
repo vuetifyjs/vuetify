@@ -119,7 +119,7 @@
             subtitle: 'support',
             caption: 'supportCaption',
             src: 'https://cdn.vuetifyjs.com/images/why-vuetify/support.png',
-            to: `/${this.$route.params.lang}/getting-started/consulting-and-support`,
+            to: `/${this.$route.params.lang}/professional-support/consulting`,
           },
         ],
       }
