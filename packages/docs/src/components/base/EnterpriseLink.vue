@@ -18,7 +18,7 @@
         const lang = this.$route.params.lang || this.$i18n.fallbackLocale
 
         return {
-          path: `/${lang}/getting-started/enterprise`,
+          path: `/${lang}/professional-support/enterprise`,
         }
       },
     },
