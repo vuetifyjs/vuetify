@@ -15,10 +15,10 @@
       <v-toolbar-items>
         <v-btn
           :aria-label="$t('Vuetify.AppToolbar.documentation')"
-          :to="`/${$route.params.lang}/getting-started/quick-start`"
           exact
           min-width="48"
           text
+          to="getting-started/quick-start"
         >
           <base-nav-text class="hidden-sm-and-down">Vuetify.AppToolbar.documentation</base-nav-text>
 

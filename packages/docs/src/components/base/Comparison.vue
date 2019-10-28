@@ -52,6 +52,7 @@
             v-for="(framework, j) in frameworks"
             :key="j"
             class="text-center"
+            width="13%"
           >
             <v-icon
               v-if="framework[key] && typeof framework[key] === 'boolean'"
@@ -75,6 +76,14 @@
           </td>
         </tr>
       </tbody>
+
+      <tfoot>
+        <tr>
+          <td colspan="7">
+            <caption class="caption d-block font-italic font-weight-light grey--text">*Based on average of all Major/Minor/Patch releases over the last 12 months.</caption>
+          </td>
+        </tr>
+      </tfoot>
     </v-simple-table>
   </v-card>
 </template>
@@ -95,8 +104,8 @@
         components: 'Total components',
         a11y: 'Full Accessibility and Section 508 support',
         ssr: 'Server Side Rendering support',
-        mobile: 'Mobile support',
-        release: 'Release schedule',
+        lts: 'Long-term Support',
+        release: 'Release cadence*',
         tree: 'Treeshaking',
         rtl: 'RTL support',
         themes: 'Premium Themes',
@@ -108,20 +117,20 @@
           src: 'https://cdn.vuetifyjs.com/images/logos/vuetify-logo-light.png',
           components: 82,
           tree: 'Automatic w/ vuetify-loader',
-          mobile: true,
-          release: 'Weekly',
+          release: 'Twice Weekly',
           ssr: true,
           a11y: true,
+          lts: true,
           rtl: true,
           enterprise: true,
           themes: true,
         },
         {
           name: 'Vue Bootstrap',
+          release: 'Bi-Weekly',
           src: 'https://cdn.vuetifyjs.com/images/competitors/bootstrap-vue.png',
           components: 45,
           tree: 'Manual',
-          mobile: true,
           ssr: true,
           a11y: true,
           rtl: true,
@@ -130,15 +139,16 @@
         {
           name: 'Buefy',
           src: 'https://cdn.vuetifyjs.com/images/competitors/buefy.png',
+          release: 'Bi-Monthly',
           components: 41,
           tree: 'Manual',
-          mobile: true,
           a11y: true,
           ssr: true,
         },
         {
           name: 'Element UI',
           src: 'https://cdn.vuetifyjs.com/images/competitors/element-ui.png',
+          release: 'Bi-Weekly',
           components: 86,
           tree: 'Manual',
           ssr: true,
@@ -147,18 +157,18 @@
         {
           name: 'Vue Material',
           src: 'https://cdn.vuetifyjs.com/images/competitors/vue-material.png',
+          release: 'Yearly',
           components: 56,
           tree: 'Manual',
-          mobile: true,
           ssr: true,
           themes: true,
         },
         {
           name: 'Quasar Framework',
           src: 'https://cdn.vuetifyjs.com/images/competitors/quasar.png',
+          release: 'Bi-Weekly',
           components: 68,
           tree: 'Manual',
-          mobile: true,
           ssr: true,
           rtl: true,
         },

@@ -25,9 +25,9 @@
 
               <base-btn
                 :block="$vuetify.breakpoint.smAndDown"
-                :to="`/${$route.params.lang}/getting-started/quick-start`"
                 class="primary--text my-6"
                 color="white"
+                to="introduction/why-vuetify"
                 x-large
               >
                 <v-icon

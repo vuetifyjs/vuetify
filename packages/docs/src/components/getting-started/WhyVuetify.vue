@@ -27,19 +27,13 @@
           >
             <v-col cols="12">
               <h2 class="text-uppercase mb-4 text-center">
-                <strong
-                  class="headline font-weight-bold"
-                  v-text="philosophy.title"
-                />
+                <base-markdown class="headline font-weight-bold">{{ philosophy.title }}</base-markdown>
 
-                <div
-                  class="font-weight-thin display-1"
-                  v-text="philosophy.subtitle"
-                />
+                <base-markdown class="font-weight-thin display-1">{{ philosophy.subtitle }}</base-markdown>
               </h2>
 
               <div class="pa-4">
-                <base-markdown :code="philosophy.caption" />
+                <base-markdown>{{ philosophy.caption }}</base-markdown>
               </div>
             </v-col>
 
@@ -97,33 +91,33 @@
         philosophies: [
           {
             color: 'indigo',
-            title: this.$t('GettingStarted.WhyVuetify.vibrant'),
-            subtitle: this.$t('GettingStarted.WhyVuetify.community'),
-            caption: this.$t('GettingStarted.WhyVuetify.communityCaption'),
+            title: 'vibrant',
+            subtitle: 'community',
+            caption: 'communityCaption',
             src: 'https://cdn.vuetifyjs.com/images/why-vuetify/community.png',
             more: 'https://community.vuetifyjs.com',
           },
           {
             color: 'purple',
-            title: this.$t('GettingStarted.WhyVuetify.material'),
-            subtitle: this.$t('GettingStarted.WhyVuetify.toolkit'),
-            caption: this.$t('GettingStarted.WhyVuetify.toolkitCaption'),
+            title: 'material',
+            subtitle: 'toolkit',
+            caption: 'toolkitCaption',
             src: 'https://cdn.vuetifyjs.com/images/why-vuetify/toolkit.png',
             more: 'https://material.io/design/',
           },
           {
             color: 'warning',
-            title: this.$t('GettingStarted.WhyVuetify.continuous'),
-            subtitle: this.$t('GettingStarted.WhyVuetify.updates'),
-            caption: this.$t('GettingStarted.WhyVuetify.updatesCaption'),
+            title: 'continuous',
+            subtitle: 'updates',
+            caption: 'updatesCaption',
             src: 'https://cdn.vuetifyjs.com/images/why-vuetify/updates.png',
             more: 'https://github.com/vuetifyjs/vuetify/releases',
           },
           {
             color: 'teal darken-2',
-            title: this.$t('GettingStarted.WhyVuetify.professional'),
-            subtitle: this.$t('GettingStarted.WhyVuetify.support'),
-            caption: this.$t('GettingStarted.WhyVuetify.supportCaption'),
+            title: 'professional',
+            subtitle: 'support',
+            caption: 'supportCaption',
             src: 'https://cdn.vuetifyjs.com/images/why-vuetify/support.png',
             to: `/${this.$route.params.lang}/getting-started/consulting-and-support`,
           },

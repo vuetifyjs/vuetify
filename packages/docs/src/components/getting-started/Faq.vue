@@ -60,7 +60,7 @@
                   </v-btn>
 
                   <v-expand-transition v-if="gotcha.m">
-                    <div>
+                    <div class="swing-transition">
                       <template v-if="Array.isArray(gotcha.s)">
                         <doc-markup
                           v-for="(g, i) in gotcha.s"
@@ -101,7 +101,7 @@
 
     computed: {
       gotchas () {
-        return this.$t('GettingStarted.FrequentlyAskedQuestions.gotchas').map(faq => {
+        return this.$t('Introduction.FrequentlyAskedQuestions.gotchas').map(faq => {
           return Object.assign({}, faq, {
             id: kebabCase(faq.q),
             m: false,

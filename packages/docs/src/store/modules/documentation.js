@@ -45,6 +45,7 @@ function getHeadings (children, toc = []) {
 
 function getNamespace (namespace) {
   switch (namespace) {
+    case 'introduction': return 'introduction/why-vuetify'
     case 'getting-started': return 'getting-started/quick-start'
     case 'styles': return 'styles/colors'
     case 'components': return 'components/api-explorer'
