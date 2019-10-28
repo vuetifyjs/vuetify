@@ -2,7 +2,7 @@
   "heading": "# Quick start",
   "headingText": "Get started with Vuetify, the world’s most popular Vue.js framework for building feature rich, blazing fast applications.",
   "vueCliHeader": "## Vue CLI 3 install",
-  "vueCliText1": "Vue CLI 3 is the next generation cli tool made to help you get started more easily than before. When you start your app with Vue CLI 3 you will also be able to get the official webpack updates and config changes, as well as Vuetify's updates without an arduous upgrade process.",
+  "vueCliText1": "Vue CLI 3 is the next generation cli tool made to abstract away the complexities of building an application. When you start your app with Vue CLI 3 you will also be able to get the official webpack updates and config changes, as well as Vuetify's updates without an arduous upgrade process.",
   "vueCliText2": "If you have not already created a new Vue.js project using **Vue CLI 3**, you can do so by typing:",
   "vueCliText3": "Now that you have an instantiated project, you can add the [Vuetify Vue CLI 3 package](https://github.com/vuetifyjs/vue-cli-plugin-vuetify) using the cli.",
   "vueCliAlert1": "For information on how to use Vue CLI 3, visit the [official documentation](https://cli.vuejs.org/guide/)",

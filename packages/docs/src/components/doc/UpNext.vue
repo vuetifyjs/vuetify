@@ -50,7 +50,7 @@
       genColor (section) {
         switch (section) {
           case 'getting-started': return 'teal'
-          case 'customization': return 'tertiary'
+          case 'customization': return 'red lighten-2'
           case 'components': return 'primary'
           case 'directives': return 'blue-grey'
           case 'styles': return 'deep-purple accent-4'

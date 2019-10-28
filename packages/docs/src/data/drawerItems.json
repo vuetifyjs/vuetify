@@ -184,12 +184,6 @@
     ]
   },
   {
-    "group": "ecosystem",
-    "text": "ecosystem",
-    "icon": "mdi-earth",
-    "children": []
-  },
-  {
     "group": "professional-support",
     "text": "support",
     "icon": "mdi-atom-variant",
