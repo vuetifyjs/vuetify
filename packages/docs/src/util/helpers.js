@@ -45,7 +45,10 @@ export function parseLink (match, text, link) {
   let icon = ''
 
   // External link
-  if (link.indexOf('http') > -1) {
+  if (
+    link.indexOf('http') > -1 ||
+    link.indexOf('mailto') > -1
+  ) {
     attrs = `target="_blank" rel="noopener"`
     icon = 'open-in-new'
     linkClass += ' v-markdown--external'

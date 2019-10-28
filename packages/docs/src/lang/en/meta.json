@@ -619,6 +619,11 @@
     "description": "Get professional help, support and guidance for your Vuetify application from the creator, John Leider.",
     "keywords": "vuetify consulting, vuetify support, vuetify help"
   },
+  "professional-support/business": {
+    "title": "Consulting and support",
+    "description": "Get professional help, support and guidance for your Vuetify application while supporting the framework.",
+    "keywords": "vuetify business, vuetify business support, vuetify help"
+  },
   "professional-support/enterprise": {
     "title": "Vuetify for enterprise",
     "description": "Get the tools you need to continuously catalog and understand the open source software that your application depends on with the Tidelift subscription.",

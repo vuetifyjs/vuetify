@@ -50,6 +50,7 @@ function getNamespace (namespace) {
     case 'styles': return 'styles/colors'
     case 'components': return 'components/api-explorer'
     case 'directives': return 'components/api-explorer'
+    case 'professional-support': return 'professional-support/consulting'
     default: return ''
   }
 }
