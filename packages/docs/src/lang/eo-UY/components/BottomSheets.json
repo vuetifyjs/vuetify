@@ -1,28 +1,28 @@
 {
-  "header": "crwdns39310:0crwdne39310:0",
-  "headerText": "crwdns39312:0crwdne39312:0",
+  "heading": "crwdns39310:0crwdne39310:0",
+  "headingText": "crwdns39312:0crwdne39312:0",
   "examples": {
     "usage": {
       "desc": "crwdns32980:0crwdne32980:0"
     },
     "inset": {
-      "header": "crwdns39314:0crwdne39314:0",
+      "heading": "crwdns39314:0crwdne39314:0",
       "desc": "crwdns39316:0crwdne39316:0"
     },
     "persistent": {
-      "header": "crwdns39318:0crwdne39318:0",
+      "heading": "crwdns39318:0crwdne39318:0",
       "desc": "crwdns39320:0crwdne39320:0"
     },
     "model": {
-      "header": "crwdns39322:0crwdne39322:0",
+      "heading": "crwdns39322:0crwdne39322:0",
       "desc": "crwdns39324:0crwdne39324:0"
     },
     "open-in-list": {
-      "header": "crwdns39326:0crwdne39326:0",
+      "heading": "crwdns39326:0crwdne39326:0",
       "desc": "crwdns39328:0crwdne39328:0"
     },
     "player": {
-      "header": "crwdns39330:0crwdne39330:0",
+      "heading": "crwdns39330:0crwdne39330:0",
       "desc": "crwdns39332:0crwdne39332:0"
     }
   },

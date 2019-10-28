@@ -1,5 +1,5 @@
 <template>
-  <core-goto class="core-goto--heading"><slot /></core-goto>
+  <base-goto class="core-goto--heading"><slot /></base-goto>
 </template>
 
 <script>

@@ -1,43 +1,43 @@
 {
-  "headerText": "`v-slider` 컴포넌트는 숫자 입력을 위한 더 나은 시각화를 제공합니다. 사용의 숫자형 데이터를 수집하기 위해 사용도비니다.",
+  "headingText": "`v-slider` 컴포넌트는 숫자 입력을 위한 더 나은 시각화를 제공합니다. 사용의 숫자형 데이터를 수집하기 위해 사용도비니다.",
   "examples": {
     "usage": {
       "desc": "슬라이더는 사용자가 단일 값을 선택할 수 있는 바를 따라 값의 범위를 반영합니다. 그것은 볼륨, 밝기 또는 이미지 필터의 적용과 같은 설정을 조정하는 데 이상적입니다."
     },
     "thumb": {
-      "header": "Thumb"
+      "heading": "Thumb"
     },
     "ticks": {
-      "header": "눈금 (Ticks)",
+      "heading": "눈금 (Ticks)",
       "desc": "눈금 마크(Tick marks)는 사용자가 슬라이더를 이동할 수 있는 미리 결정된 값을 나타냅니다."
     },
     "discrete": {
-      "header": "불연속 (Discrete)",
+      "heading": "불연속 (Discrete)",
       "desc": "불연속(Discrete) 슬라이더는 정확한 현재 값을 보여주기 위한 작은 레이블(Thumb label)을 제공합니다. `step` prop를 이용하여 step 을 이외의 값을 선택하는 것을 방지할 수 있습니다."
     },
     "icons": {
-      "header": "아이콘 (Icons)",
+      "heading": "아이콘 (Icons)",
       "desc": "`append-icon`과 `prepend-icon` prop을 이용하여 슬라이더에 아이콘을 추가할 수 있습니다."
     },
     "editable-numeric-value": {
-      "header": "수정가능한 숫자값 (With an editable numeric value)",
+      "heading": "수정가능한 숫자값 (With an editable numeric value)",
       "desc": "슬라이더는 더 낳은 표현을 위해 다른 컴포넌트와 결합될 수 있습니다."
     },
     "custom-colors": {
       "desc": "`color`, `track-color`와 `thumb-color` prop들을 이용해 슬라이더의 색상을 정의할 수 있습니다."
     },
     "validation": {
-      "header": "검증 (Validation)",
+      "heading": "검증 (Validation)",
       "desc": "Vuetify는 `rules` prop 을 통해 간단한 검증(validation)을 제공합니다. `rules` prop은 콜백 배열을 받습니다. 규칙들(rules)을 검증할 때, 현재 v-model 값이 콜백으로 전달됩니다. 이 콜백은 `true` 나 에러 메시지로 `String`을 반환해야 합니다."
     },
     "range": {
-      "header": "Range"
+      "heading": "Range"
     },
     "min-max": {
-      "header": "Min & Max values"
+      "heading": "Min & Max values"
     },
     "disabled": {
-      "header": "비활성화 (Disabled)"
+      "heading": "비활성화 (Disabled)"
     }
   },
   "props": {

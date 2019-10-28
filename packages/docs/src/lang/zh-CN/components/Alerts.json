@@ -1,14 +1,14 @@
 {
-  "header": "# 提示框",
+  "heading": "# 提示框",
   "examples": {
     "icon": {
-      "header": "图标"
+      "heading": "图标"
     },
     "outlined": {
-      "header": "### 轮廓"
+      "heading": "### 轮廓"
     },
     "transition": {
-      "header": "### 过渡"
+      "heading": "### 过渡"
     }
   }
 }

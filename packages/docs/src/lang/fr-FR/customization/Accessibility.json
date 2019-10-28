@@ -1,6 +1,6 @@
 {
-  "header": "Accessibilité",
-  "headerText": "L'accessibilité Web **(a11y abrégé)**, est la pratique inclusive de s'assurer qu'il n'y a pas d'obstacles qui empêchent l'interaction ou l'accès avec les sites Web du monde entier par les personnes handicapées. Les composants Vuetify sont construits de manière à fournir une interaction avec le clavier pour chaque interaction à la souris et utilise les éléments sémantiques HTML5 lorsqu'ils sont applicables.",
+  "heading": "Accessibilité",
+  "headingText": "L'accessibilité Web **(a11y abrégé)**, est la pratique inclusive de s'assurer qu'il n'y a pas d'obstacles qui empêchent l'interaction ou l'accès avec les sites Web du monde entier par les personnes handicapées. Les composants Vuetify sont construits de manière à fournir une interaction avec le clavier pour chaque interaction à la souris et utilise les éléments sémantiques HTML5 lorsqu'ils sont applicables.",
   "accessibilityHeader": "## Accessibilité Material Design",
   "activatorHeader": "## Emplacements d'activation",
   "activatorText1": "Vuetify utilise des slots activateurs pour de nombreux composants comme `v-menu`, `v-dialog` et plus. Dans certains cas, ces éléments activateurs devraient avoir des attributs spécifiques a11y qui les associent à leur contenu correspondant. Pour y parvenir, nous passons les options nécessaires via les slots scope.",

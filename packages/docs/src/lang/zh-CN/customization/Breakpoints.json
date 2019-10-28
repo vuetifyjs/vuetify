@@ -1,6 +1,6 @@
 {
-  "header": "# 断点",
-  "headerText": "使用Vuetify您可以根据窗口的尺寸设定应用的布局。例如，我们可以使用特定的[grid](/components/grids)属性或者与指定的断点相关的助手类(例如[display](styles/display))设定布局。Vuetify提供了5个预先定义的断点，你也可以根据自己的需要修改他们。",
+  "heading": "# 断点",
+  "headingText": "使用Vuetify您可以根据窗口的尺寸设定应用的布局。例如，我们可以使用特定的[grid](/components/grids)属性或者与指定的断点相关的助手类(例如[display](styles/display))设定布局。Vuetify提供了5个预先定义的断点，你也可以根据自己的需要修改他们。",
   "toc": {
     "2": {
       "text": "API"

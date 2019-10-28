@@ -26,19 +26,19 @@
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/getting-started/frequently-asked-questions</loc>
+       <loc>https://vuetifyjs.com/en/introduction/frequently-asked-questions</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/getting-started/meet-the-team</loc>
+       <loc>https://vuetifyjs.com/en/introduction/meet-the-team</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/getting-started/sponsors-and-backers</loc>
+       <loc>https://vuetifyjs.com/en/introduction/sponsors-and-backers</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
@@ -62,7 +62,7 @@
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/getting-started/consulting-and-support</loc>
+       <loc>https://vuetifyjs.com/en/introduction/consulting-and-support</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>

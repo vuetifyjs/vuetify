@@ -1,6 +1,4 @@
 {
-  "title": "header",
-  "titleText": "headerText",
   "children": [
     {
       "type": "section",
@@ -10,9 +8,7 @@
           "lang": "alert",
           "value": "info"
         },
-        {
-          "type": "doc-pre-made-layouts"
-        }
+        { "type": "doc-pre-made-layouts" }
       ]
     },
     {

@@ -1,56 +1,56 @@
 {
-  "header": "# Buttons",
-  "headerText": "The `v-btn` component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color.",
+  "heading": "# Buttons",
+  "headingText": "The `v-btn` component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color.",
   "alert": "`v-btn` is the only component that behaves differently when using the **dark** prop. Normally components use the **dark** prop to denote that they have a dark colored background and need their text to be white. While this will work for `v-btn`, it is advised to only use the prop when the button **IS ON** a colored background due to the disabled state blending in with white backgrounds. If you need white text, simply add the **white--text** class.",
   "usageText": "Buttons in their simplest form contain uppercase text, a slight elevation, hover effect, and a ripple effect on click.",
   "examples": {
     "flat": {
-      "header": "### Flat",
+      "heading": "### Flat",
       "desc": "Flat buttons have no box shadow and no background. Only on hover is the container for the button shown."
     },
     "raised": {
-      "header": "### Raised",
+      "heading": "### Raised",
       "desc": "Raised buttons have a box shadow that increases when clicked. This is the default style."
     },
     "depressed": {
-      "header": "### Depressed",
+      "heading": "### Depressed",
       "desc": "Depressed buttons still maintain their background color, but have no box shadow."
     },
     "dropdown": {
-      "header": "### Button Dropdown Variants",
+      "heading": "### Button Dropdown Variants",
       "desc": "Button dropdowns are regular selects with additional styling.",
       "uninverted": true
     },
     "icon": {
-      "header": "### Icon",
+      "heading": "### Icon",
       "desc": "Icons can be used for the primary content of a button."
     },
     "floating": {
-      "header": "### Floating",
+      "heading": "### Floating",
       "desc": "Floating buttons are rounded and usually contain an icon."
     },
     "loaders": {
-      "header": "### Loaders",
+      "heading": "### Loaders",
       "desc": "Using the loading prop, you can notify a user that there is processing taking place. The default behavior is to use a `v-progress-circular` component but this can be customized."
     },
     "sizing": {
-      "header": "### Sizing",
+      "heading": "### Sizing",
       "desc": "Buttons can be given different sizing options to fit a multitude of scenarios."
     },
     "outlined": {
-      "header": "### Outlined",
+      "heading": "### Outlined",
       "desc": "Outlined buttons inherit their borders from the current color applied."
     },
     "rounded": {
-      "header": "### Rounded",
+      "heading": "### Rounded",
       "desc": "Rounded buttons behave the same as regular buttons but have rounded edges."
     },
     "tile": {
-      "header": "### Tile",
+      "heading": "### Tile",
       "desc": "Tile buttons behave the same as regular buttons but have no border radius."
     },
     "block": {
-      "header": "### Block",
+      "heading": "### Block",
       "desc": "Block buttons extend the full available width."
     }
   },

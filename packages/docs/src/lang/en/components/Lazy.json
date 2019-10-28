@@ -1,6 +1,6 @@
 {
-  "header": "# Lazy loading",
-  "headerText": "The `v-lazy` component is used to dynamically load components based upon an elements visiblity.",
+  "heading": "# Lazy loading",
+  "headingText": "The `v-lazy` component is used to dynamically load components based upon an elements visiblity.",
   "lazyAlert": "The `v-lazy` component uses the [v-intersect](/directives/intersect) directive which requires a [Polyfill](/directives/intersect#polyfill) in order to work on IE11 / Safari. It's possible on some iOS versions will also require the use of this polyfill.",
   "examples": {
     "usage": {

@@ -1,6 +1,6 @@
 {
-  "header": "# Bắt đầu nhanh",
-  "headerText": "Sử dụng một trong các gói của Vuetify Vue CLI _(dựa trên các ví dụ chính thức)_ để bắt đầu dự án của bạn một cách đơn giản nhất. Vuetify hỗ trợ **SSR** (server-side rendering), **SPA** (single page application), **PWA** (progressive web application) and chuẩn **HTML**.",
+  "heading": "# Bắt đầu nhanh",
+  "headingText": "Sử dụng một trong các gói của Vuetify Vue CLI _(dựa trên các ví dụ chính thức)_ để bắt đầu dự án của bạn một cách đơn giản nhất. Vuetify hỗ trợ **SSR** (server-side rendering), **SPA** (single page application), **PWA** (progressive web application) and chuẩn **HTML**.",
   "vueCliText4": "Sau khi cli đã được cài đặt, bạn có thể tạo dự án mới của mình. Chọn _default install_ sẽ tự động tích hợp các gói cơ bản như (e.g. _vuex_ or _vue-router_). Chương trình sẽ tạo một dự án Vue mới dựa trên thiết lập bạn đã chọn.",
   "vueCliText5": "Bạn đã có một dự án mới, bạn có thể thêm [Vuetify package](https://github.com/vuetifyjs/vue-cli-plugin-vuetify) bằng cli.",
   "vueCliText7": "Sau khi cài đặt xong, chỉ cần chạy <kbd>yarn serve</kbd> or <kbd>npm run serve</kbd> để khởi động ứng dụng của bạn.",

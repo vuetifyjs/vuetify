@@ -1,6 +1,6 @@
 {
-  "header": "# Couleurs",
-  "headerText": "Vous avez directement accès à toutes les couleurs dans les [spécifications Material Design](https://material.io/guidelines/style/color.html) via **stylus** et **JavaScript**. Ces valeurs peuvent être utilisées dans vos feuilles de style, vos fichiers de composants et sur des composants réels via le système de **classes de couleur**.",
+  "heading": "# Couleurs",
+  "headingText": "Vous avez directement accès à toutes les couleurs dans les [spécifications Material Design](https://material.io/guidelines/style/color.html) via **stylus** et **JavaScript**. Ces valeurs peuvent être utilisées dans vos feuilles de style, vos fichiers de composants et sur des composants réels via le système de **classes de couleur**.",
   "classesHeader": "## Classes",
   "classesText": "Chaque couleur de la spécification est convertie en une variante **background** et **text** pour styliser au sein de votre application via une classe, par exemple : `<div class=\"red\">` ou `<span class =\"red-text\">`. Ces classes de couleurs sont définies [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_colors.scss).",
   "classesText2": "Les couleurs du texte supportent également les variantes **darken** et **lighten** en utilisant `text--{lighten|darken}-{n}`",

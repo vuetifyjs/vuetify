@@ -1,6 +1,6 @@
 {
-  "header": "# Carousels",
-  "headerText": "The `v-carousel` component is used to display large numbers of visual content on a rotating timer.",
+  "heading": "# Carousels",
+  "headingText": "The `v-carousel` component is used to display large numbers of visual content on a rotating timer.",
   "subComponentsHeader": "### Sub-components",
   "subComponentsList": [
     "`v-carousel-item`: The image container used by `v-carousel`. Extends `v-window-item`, is routable, and uses `v-img` in its default slot."
@@ -10,27 +10,27 @@
       "desc": "The `v-carousel` component expands upon `v-window` by providing additional features targeted at displaying images."
     },
     "cycle": {
-      "header": "### Cycle",
+      "heading": "### Cycle",
       "desc": "With the **cycle** prop you can have your slides automatically transition to the next available every 6s (default)."
     },
     "custom-transition": {
-      "header": "### Custom transition",
+      "heading": "### Custom transition",
       "desc": "The `v-carousel-item` component can have its **transition/reverse-transition** changed."
     },
     "custom-icons": {
-      "header": "### Custom delimiters",
+      "heading": "### Custom delimiters",
       "desc": "Use any available icon as your carousel's slide delimiter."
     },
     "hide-delimiters": {
-      "header": "### Hide delimiters",
+      "heading": "### Hide delimiters",
       "desc": "You can hide the bottom controls with `hide-delimiters` prop."
     },
     "hide-controls": {
-      "header": "### Hide controls",
+      "heading": "### Hide controls",
       "desc": "You can hide the carousel navigation controls with `:show-arrows=\"false\"`."
     },
     "model": {
-      "header": "### `v-model` control",
+      "heading": "### `v-model` control",
       "desc": "You can control carousel with model."
     }
   },

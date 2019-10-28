@@ -1,21 +1,28 @@
 [
   {
+    "group": "introduction",
+    "text": "introduction",
+    "icon": "mdi-book-open-page-variant",
+    "children": [
+      { "text": "whyVuetify", "to": "why-vuetify" },
+      { "text": "faq", "to": "frequently-asked-questions" },
+      { "text": "meetTheTeam", "to": "meet-the-team" },
+      { "text": "sponsorsAndBackers", "to": "sponsors-and-backers" },
+      { "text": "roadmap", "to": "roadmap" },
+      { "text": "lts", "to": "long-term-support" }
+    ]
+  },
+  {
     "group": "getting-started",
     "text": "gettingStarted",
     "icon": "mdi-speedometer",
     "children": [
       { "text": "quickStart", "to": "quick-start" },
       { "text": "preMadeLayouts", "to": "pre-made-layouts" },
+      { "text": "browserSupport", "to": "browser-support" },
       { "text": "testing", "to": "unit-testing" },
-      { "text": "whyVuetify", "to": "why-vuetify" },
-      { "text": "faq", "to": "frequently-asked-questions" },
-      { "text": "meetTheTeam", "to": "meet-the-team" },
-      { "text": "sponsorsAndBackers", "to": "sponsors-and-backers" },
-      { "new": true, "text": "releasesAndMigrations", "to": "releases-and-migrations" },
-      { "text": "lts", "to": "long-term-support" },
-      { "text": "contributing", "to": "contributing" },
-      { "text": "roadmap", "to": "roadmap" },
-      { "help": true, "text": "consulting", "to": "consulting-and-support" }
+      { "text": "releasesAndMigrations", "to": "releases-and-migrations" },
+      { "text": "contributing", "to": "contributing" }
     ]
   },
   {
@@ -47,8 +54,7 @@
       { "text": "spacing", "to": "spacing" },
       { "text": "text", "to": "text" },
       { "text": "typography", "to": "typography" },
-      { "text": "transitions", "to": "transitions" },
-      { "text": "scroll", "to": "scroll" }
+      { "text": "transitions", "to": "transitions" }
     ]
   },
   {
@@ -178,9 +184,18 @@
     ]
   },
   {
+    "group": "professional-support",
+    "text": "support",
+    "icon": "mdi-atom-variant",
+    "children": [
+      { "text": "consulting", "to": "consulting" },
+      { "text": "business", "to": "business" },
+      { "text": "enterprise", "to": "enterprise" }
+    ]
+  },
+  {
     "text": "premiumThemes",
     "icon": "mdi-vuetify",
-    "to": "themes/premium",
-    "updated": true
+    "to": "themes/premium"
   }
 ]

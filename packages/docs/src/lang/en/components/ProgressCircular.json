@@ -1,24 +1,24 @@
 {
-  "header": "# Progress circular",
-  "headerText": "The `v-progress-circular` component is used to convey data circularly to users. It also can be put into an indeterminate state to portray loading.",
+  "heading": "# Progress circular",
+  "headingText": "The `v-progress-circular` component is used to convey data circularly to users. It also can be put into an indeterminate state to portray loading.",
   "examples": {
     "usage": {
       "desc": "By default, progress circular uses the applications secondary color."
     },
     "circular-colored": {
-      "header": "### Colored",
+      "heading": "### Colored",
       "desc": "Alternate colors can be applied to `v-progress-circular` using the `color` prop."
     },
     "circular-indeterminate": {
-      "header": "### Indeterminate",
+      "heading": "### Indeterminate",
       "desc": "Using the `indeterminate` prop, a `v-progress-circular` continues to animate indefinitely."
     },
     "circular-size-and-width": {
-      "header": "### Size & Width",
+      "heading": "### Size & Width",
       "desc": "The `size` and `width` props allow you to easily alter the size and width of the `v-progress-circular` component."
     },
     "circular-rotate": {
-      "header": "### Rotate",
+      "heading": "### Rotate",
       "desc": "The `rotate` prop gives you the ability to customize the `v-progress-circular`'s origin."
     }
   },

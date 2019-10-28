@@ -1,5 +1,5 @@
 {
-  "header": "# 遮罩层",
+  "heading": "# 遮罩层",
   "props": {
     "opacity": "设置遮罩层的透明度"
   }

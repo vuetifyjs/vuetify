@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row>
+    <v-row justify="center">
       <v-col
         v-for="n in 25"
         :key="n"

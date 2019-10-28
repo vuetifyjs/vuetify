@@ -1,17 +1,17 @@
 {
   "examples": {
     "overlap": {
-      "header": "### Перекрытие"
+      "heading": "### Перекрытие"
     },
     "visibility": {
-      "header": "### Видимость"
+      "heading": "### Видимость"
     },
     "inline": {
-      "header": "### В одну линию",
+      "heading": "### В одну линию",
       "desc": "Badge также могут быть помещены в линию с текстом."
     },
     "icon": {
-      "header": "### Иконка",
+      "heading": "### Иконка",
       "desc": "Иконки поддерживаются только Material Design."
     }
   }

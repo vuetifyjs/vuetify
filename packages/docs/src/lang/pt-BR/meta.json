@@ -27,22 +27,22 @@
     "description": "Vuetify tem uma comunidade extremamente ativa, fornece componentes Material Design fáceis de usar e é constantemente atualizado.",
     "keywords": "por que vuetify, por que escolher o vuetify, melhor framework vue, melhor framework ui"
   },
-  "getting-started/frequently-asked-questions": {
+  "introduction/frequently-asked-questions": {
     "title": "Perguntas frequentes",
     "description": "Preso em um problema? Confira as perguntas mais frequentes da comunidade Vuetify.",
     "keywords": "perguntas frequentes, faq"
   },
-  "getting-started/meet-the-team": {
+  "introduction/meet-the-team": {
     "title": "Conheça a equipe",
     "description": "Conheça a equipe responsável pela construção do Vuetify. Estes são os principais indivíduos que conduzem a visão do framework.",
     "keywords": "vuetify time desenvolvimento, vuetify time principal"
   },
-  "getting-started/sponsors-and-backers": {
+  "introduction/sponsors-and-backers": {
     "title": "Patrocinadores e apoiadores",
     "description": "Ajude o Vuetify apoiando o projeto. Isso ajuda com a manutenção de recursos existentes e o desenvolvimento de novos.",
     "keywords": "patrocinador, apoiador, doações, patrono, ajudando o vuetify, suporte vuetify"
   },
-  "getting-started/long-term-support": {
+  "introduction/long-term-support": {
     "title": "Suporte a longo prazo",
     "description": "Vuetify fornece suporte a longo prazo para a última versão major durante 12 meses para bugs críticos e vulnerabilidades de segurança.",
     "keywords": "lts, suporte a longo prazo"
@@ -52,12 +52,12 @@
     "description": "Contribuir para open souce ajuda os desenvolvedores a acessarem ferramentas incríveis gratuitamente. Saiba como você pode ajudar no desenvolvimento do framework Vuetify.",
     "keywords": "contribuir, contribuindo, solicitar recurso"
   },
-  "getting-started/roadmap": {
+  "introduction/roadmap": {
     "title": "O Cronograma Vuetify",
     "description": "Os próximos recursos planejados e novas funcionalidades chegando ao Vuetify. Novos componentes, novas diretivas e muito, muito mais!.",
     "keywords": "cronograma vuetify, planos futuros, novos recursos vuetify"
   },
-  "getting-started/consulting-and-support": {
+  "introduction/consulting-and-support": {
     "title": "Consultoria e suporte",
     "description": "Obtenha ajuda profissional, apoio e orientação ao seu aplicativo Vuetify pelo criador, John Leider.",
     "keywords": "consultoria vuetify, suporte vuetify, ajuda vuetify"

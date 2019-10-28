@@ -1,32 +1,32 @@
 {
-  "header": "# Icons",
-  "headerText": "The `v-icon` component provides a large set of glyphs to provide context to various aspects of your application. For a list of all available icons, visit the official [Material Design Icons](https://materialdesignicons.com/) page. To use any of these icons simply use the `mdi-` prefix followed by the icon name.",
+  "heading": "# Icons",
+  "headingText": "The `v-icon` component provides a large set of glyphs to provide context to various aspects of your application. For a list of all available icons, visit the official [Material Design Icons](https://materialdesignicons.com/) page. To use any of these icons simply use the `mdi-` prefix followed by the icon name.",
   "examples": {
     "usage": {
       "desc": "Icons come in two themes (light and dark), and five different sizes (x-small, small, medium (default), large, and x-large)."
     },
     "font-awesome": {
-      "header": "### Font Awesome",
+      "heading": "### Font Awesome",
       "desc": "[Font Awesome](http://fontawesome.io/icons/) is also supported. Simply use the `fa-` prefixed icon name. Please note that you still need to include the Font Awesome icons in your project. For more information on how to install it, please navigate to the [installation page](/customization/icons#install-font-awesome-5-icons)"
     },
     "md": {
-      "header": "### Material Design",
+      "heading": "### Material Design",
       "desc": "[Material Design](https://material.io/tools/icons/?style=baseline) is also supported. For more information on how to install it please [navigate here](/customization/icons#install-material-icons)"
     },
     "color": {
-      "header": "### Color",
+      "heading": "### Color",
       "desc": "Using color helpers you can change the color of an icon from the standard dark and light themes."
     },
     "buttons": {
-      "header": "### Buttons",
+      "heading": "### Buttons",
       "desc": "Icons can be used inside of buttons to add emphasis to the action."
     },
     "clickable": {
-      "header": "### Clickable",
+      "heading": "### Clickable",
       "desc": "Binding any click event to `v-icon` will automatically change the cursor to a pointer."
     },
     "mdi-svg": {
-      "header": "### MDI SVG",
+      "heading": "### MDI SVG",
       "desc": "You can manually import only the icons you use when using the [@mdi/js](https://www.npmjs.com/package/@mdi/js) package. If you want to use SVG icons with `VIcon` component, read about using them [here](/customization/icons#install-material-design-icons-js-svg)."
     }
   },

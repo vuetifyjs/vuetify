@@ -1,35 +1,35 @@
 {
-  "headerText": "`v-tabs`组件用于隐藏可选项目后面的内容。这也可以用作页面的伪导航（pseudo-navigation），其中标签是链接，选项卡子项是内容。",
+  "headingText": "`v-tabs`组件用于隐藏可选项目后面的内容。这也可以用作页面的伪导航（pseudo-navigation），其中标签是链接，选项卡子项是内容。",
   "examples": {
     "fixed-tabs": {
-      "header": "固定选项卡",
+      "heading": "固定选项卡",
       "desc": "**fixed-tabs**属性设置一个较高的最小宽度，并将一个新的最大宽度应用于`v-tabs-items`。在桌面屏幕上，选项卡标签项目将在`v-tabs`组件中居中，切换到移动设备时则均匀填充。"
     },
     "content": {
-      "header": "内容",
+      "heading": "内容",
       "desc": "选项卡不是您在`v-tabs`组件中唯一可以放置的东西。在这个例子中，我们还添加了一个工具栏。"
     },
     "icons-and-text": {
-      "header": "图标和文本",
+      "heading": "图标和文本",
       "desc": "通过使用**icons-and-text**属性，您可以为每个选项卡标签项添加图标。"
     },
     "desktop": {
-      "header": "桌面选项卡"
+      "heading": "桌面选项卡"
     },
     "align-with-title": {
-      "header": "与工具栏标题对齐选项卡",
+      "heading": "与工具栏标题对齐选项卡",
       "desc": "使`v-tabs`和`v-toolbar-title`组件已知（`v-app-bar-nav-icon`或`v-btn`必须在`v-toolbar`中使用）。如果标签文本被包装，可能无法正常工作。"
     },
     "grow": {
-      "header": "长大",
+      "heading": "长大",
       "desc": "**grow**属性将使选项卡标签占用所有可用空间。"
     },
     "pagination": {
-      "header": "分页",
+      "heading": "分页",
       "desc": "如果选项卡标签溢出它们的容器，分页控件将会出现"
     },
     "icons": {
-      "header": "自定义图标",
+      "heading": "自定义图标",
       "desc": "**prev-icon**和**next-icon**可以用来设置分页器的自定义图标"
     }
   },

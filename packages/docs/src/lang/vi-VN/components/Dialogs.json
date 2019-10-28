@@ -1,34 +1,34 @@
 {
-  "header": "Hộp thoại",
+  "heading": "Hộp thoại",
   "examples": {
     "without-activator": {
-      "header": "### Kích hoạt rời",
+      "heading": "### Kích hoạt rời",
       "desc": "Trong một vài trường hợp bạn không sử dụng activator slot, hãy đảm bảo đã thêm hậu tố `.stop` vào sự kiện khi mở dialgo."
     },
     "modal": {
-      "header": "### Modal",
+      "heading": "### Modal",
       "desc": "Giống như Dialog đơn giản, Ngoại trừ việc dialog sẽ không đóng khi kích ra ngoài."
     },
     "fullscreen": {
-      "header": "### Toàn màn hình",
+      "heading": "### Toàn màn hình",
       "desc": "Do không gian hạn chế, Dialog toàn màn hình sẽ thích hợp trên thiết bị di động hơn Dialog trên màn hình lớn."
     },
     "form": {
       "desc": "Dialog với form nhập liệu đơn giản."
     },
     "scrollable": {
-      "header": "### Scrollable",
+      "heading": "### Scrollable",
       "desc": "Dialog hiển thị thanh cuộn khi nội dung vượt kích thước quy định."
     },
     "overflowed": {
       "desc": "Dialog sẽ hiển thị thanh cuộn khi phần nội dung vượt quá kích thước giới hạn của dialog."
     },
     "advanced": {
-      "header": "### Dialogs lồng nhau",
+      "heading": "### Dialogs lồng nhau",
       "desc": "Bạn có thể mở một dialog bên trong một dialog."
     },
     "loader": {
-      "header": "### Loader",
+      "heading": "### Loader",
       "desc": "Dễ dàng tạo một tùy biến Loading cho ứng dụng."
     }
   }

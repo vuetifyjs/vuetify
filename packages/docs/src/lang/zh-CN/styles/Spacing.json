@@ -1,6 +1,6 @@
 {
-  "header": "# 间距",
-  "headerText": "更新您的布局而无需创建新的类，间距辅助器对于修改元素的填充（padding）和边距（margin）都非常有用。",
+  "heading": "# 间距",
+  "headingText": "更新您的布局而无需创建新的类，间距辅助器对于修改元素的填充（padding）和边距（margin）都非常有用。",
   "playgroundHeader": "## 实战场",
   "propertyText": "占位符 _property_ 用来设置间距的类型：",
   "properties": [

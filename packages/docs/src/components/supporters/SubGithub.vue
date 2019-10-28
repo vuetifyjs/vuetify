@@ -6,7 +6,7 @@
     wrap
   >
     <v-flex xs12>
-      <doc-heading goto="one-time-donation">github</doc-heading>
+      <base-heading goto="one-time-donation">github</base-heading>
     </v-flex>
 
     <v-flex
@@ -19,7 +19,7 @@
       xs12
       mb-4
     >
-      <doc-markdown>githubBlurb</doc-markdown>
+      <base-markdown>githubBlurb</base-markdown>
     </v-flex>
 
     <v-flex

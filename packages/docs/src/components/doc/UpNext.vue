@@ -1,37 +1,34 @@
 <template>
-  <div>
-    <doc-heading>Generic.Pages.upNext</doc-heading>
-    <v-container
-      fluid
-      grid-list-xl
-      pa-0
-    >
-      <v-layout wrap>
-        <v-flex
-          v-for="(link, i) in links"
-          :key="i"
-          xs12
-          md4
-        >
-          <v-card outlined>
-            <core-item
-              :to="link.link"
-              :avatar="link.icon"
-              :avatar-color="link.color"
-              :text="link.target"
-              :subtext="link.section"
-              no-markdown
-              @click.native="$ga.event('up-next', 'click', link.target, $route.path)"
-            >
-              <v-list-item-action>
-                <v-icon>mdi-arrow-right</v-icon>
-              </v-list-item-action>
-            </core-item>
-          </v-card>
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </div>
+  <section id="up-next">
+    <base-heading id="up-next">Generic.Pages.upNext</base-heading>
+
+    <base-markdown>Generic.Pages.upNextText</base-markdown>
+
+    <v-row>
+      <v-col
+        v-for="(link, i) in links"
+        :key="i"
+        cols="12"
+        md="4"
+      >
+        <v-card outlined>
+          <base-item
+            :to="link.link"
+            :avatar="link.icon"
+            :avatar-color="link.color"
+            :text="link.target"
+            :subtext="link.section"
+            no-markdown
+            @click.native="$ga.event('up-next', 'click', link.target, $route.path)"
+          >
+            <v-list-item-action>
+              <v-icon>mdi-arrow-right</v-icon>
+            </v-list-item-action>
+          </base-item>
+        </v-card>
+      </v-col>
+    </v-row>
+  </section>
 </template>
 
 <script>
@@ -52,9 +49,11 @@
     methods: {
       genColor (section) {
         switch (section) {
+          case 'introduction': return 'primary'
           case 'getting-started': return 'teal'
-          case 'customization': return 'tertiary'
-          case 'components': return 'primary'
+          case 'customization': return 'red lighten-2'
+          case 'components': return 'indigo darken-1'
+          case 'professional-support': return 'amber darken-2'
           case 'directives': return 'blue-grey'
           case 'styles': return 'deep-purple accent-4'
           case 'themes': return 'warning'
@@ -63,9 +62,11 @@
       },
       genIcon (section) {
         switch (section) {
+          case 'introduction': return 'mdi-book-open-page-variant'
           case 'getting-started': return 'mdi-speedometer'
           case 'customization': return 'mdi-cogs'
           case 'components': return 'mdi-view-dashboard'
+          case 'professional-support': return 'mdi-atom-variant'
           case 'directives': return 'mdi-function'
           case 'styles': return 'mdi-palette'
           case 'themes': return 'mdi-vuetify'

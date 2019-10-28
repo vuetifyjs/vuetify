@@ -1,11 +1,11 @@
 {
-  "header": "# SASS variables",
-  "headerText": "Starting with version **2.0**, Vuetify is built using **SASS/SCSS**. Using the data option in your `vue.config.js`, we can also pass in custom variables. A list of available variables is located in each components' folder. In order to build the SASS file, you will need to configure your application to support [SASS](https://sass-lang.com/dart-sass) and [Fibers](https://github.com/laverdet/node-fibers). This can be selected when creating a new Vue application and is automatically handled by [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugin-vuetify).",
-  "setupHeading": "## vue-cli-3 Setup",
-  "setupText1": "Once you have installed Vuetify into your vue-cli-3, create a folder called `sass`, `scss` or `styles` in your src directory with a file named `variables.scss` or `variables.sass`.",
+  "heading": "# SASS variables",
+  "headingText": "Starting with version **2.0**, Vuetify is built using **SASS/SCSS**. Using the data option in your `vue.config.js`, we can also pass in custom variables. A list of available variables is located in each components' folder. In order to build the SASS file, you will need to configure your application to support [SASS](https://sass-lang.com/dart-sass) and [Fibers](https://github.com/laverdet/node-fibers). This can be selected when creating a new Vue application and is automatically handled by [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugin-vuetify).",
+  "setupHeading": "## Vue CLI 3 install",
+  "setupText1": "If you have not installed Vuetify, check out the [quick-start guide](/getting-started/quick-start#vue-cli-3-install). Simply create a folder called `sass`, `scss` or `styles` in your src directory with a file named `variables.scss` or `variables.sass`. The vuetify-loader will automatically bootstrap all of your style files with the located file.",
   "setupText2": "When you run yarn serve, the vuetify-cli-plugin will automatically hoist the global Vuetify variables to all of your sass/scss files. When making changes to individual component variables, you will still need to manually include its variables file.",
   "sassAlert1": "Note: SCSS/SASS variables are only supported using [A-la-carte installation](/customization/a-la-carte). This is automatically setup when using the **vue-cli-plugin-vuetify** plugin.",
   "setupText3": "The next time you run **yarn run serve**, Vue CLI 3 will inject the variables file into your style files. Under the hood, Vuetify global styles will be hoisted to the top of the compiled styles and used to override the default behavior.",
-  "webpackHeading": "## Webpack Setup",
+  "webpackHeading": "## Webpack install",
   "webpackText1": "This step is only necessary if you are modifying SASS Variables in a webpack project. If you are using vue-cli-3 with the **vue-cli-plugin-vuetify** plugin, this is handled automatically for you by creating a `variables.sass` or `variables.scss` file in the `src/sass` directory of your project. A detailed guide of how to setup the loader can be found on the [Quick start](/getting-started/quick-start#webpack-installation) page."
 }

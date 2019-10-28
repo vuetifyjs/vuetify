@@ -1,27 +1,27 @@
 {
-  "headerText": "El componente `v-slider` es una mejor visualización para el input de números. Se utiliza para recolectar datos numéricos del usuario.",
+  "headingText": "El componente `v-slider` es una mejor visualización para el input de números. Se utiliza para recolectar datos numéricos del usuario.",
   "examples": {
     "discrete": {
-      "header": "Discretos",
+      "heading": "Discretos",
       "desc": "Los sliders discretos ofrecen un marcador que muestra la cantidad exacta actual. Al utilizar la prop `step` puedes quitar el uso de valores que estén fuera de los pasos (steps)."
     },
     "icons": {
-      "header": "Íconos",
+      "heading": "Íconos",
       "desc": "Puedes agregar íconos al slider con las props `append-icon` y `prepend-icon`."
     },
     "editable-numeric-value": {
-      "header": "Con un valor numérico editable",
+      "heading": "Con un valor numérico editable",
       "desc": "Los sliders pueden ser combinados con otros componentes para una mejor presentación."
     },
     "custom-colors": {
       "desc": "Puedes configurar los colores del slider usando las props `color`, `track-color` y `thumb-color`."
     },
     "validation": {
-      "header": "Validación",
+      "heading": "Validación",
       "desc": "Vuetify incluye una validación simple a través de la prop `rules`. La prop acepta un arreglo de _callbacks_. Durante la validación de las reglas, el valor del  v-model actual será pasado al callback. Este callback debe retornar ya sea `true` o un `String` con el mensaje de error."
     },
     "disabled": {
-      "header": "Deshabilitado"
+      "heading": "Deshabilitado"
     }
   },
   "props": {

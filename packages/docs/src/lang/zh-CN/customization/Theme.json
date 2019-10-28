@@ -1,5 +1,5 @@
 {
-  "header": "# 主题",
+  "heading": "# 主题",
   "lightAndDarkHeader": "## 明亮和暗黑",
   "customizingHeader": "## 自定义化",
   "customizingText1": "默认情况下，Vuetify具有适用于所有组件的标准主题。",

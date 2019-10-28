@@ -1,50 +1,50 @@
 {
-  "header": "crwdns38326:0crwdne38326:0",
-  "headerText": "crwdns38328:0crwdne38328:0",
+  "heading": "crwdns38326:0crwdne38326:0",
+  "headingText": "crwdns38328:0crwdne38328:0",
   "usage": "crwdns38330:0crwdne38330:0",
   "examples": {
     "border": {
-      "header": "crwdns38332:0crwdne38332:0",
+      "heading": "crwdns38332:0crwdne38332:0",
       "desc": "crwdns38334:0crwdne38334:0"
     },
     "colored-border": {
-      "header": "crwdns38336:0crwdne38336:0",
+      "heading": "crwdns38336:0crwdne38336:0",
       "desc": "crwdns38338:0crwdne38338:0"
     },
     "dense": {
-      "header": "crwdns38340:0crwdne38340:0",
+      "heading": "crwdns38340:0crwdne38340:0",
       "desc": "crwdns38342:0crwdne38342:0"
     },
     "dismissible": {
-      "header": "crwdns38344:0crwdne38344:0",
+      "heading": "crwdns38344:0crwdne38344:0",
       "desc": "crwdns38346:0crwdne38346:0"
     },
     "icon": {
-      "header": "crwdns38348:0crwdne38348:0",
+      "heading": "crwdns38348:0crwdne38348:0",
       "desc": "crwdns38350:0crwdne38350:0"
     },
     "outlined": {
-      "header": "crwdns38352:0crwdne38352:0",
+      "heading": "crwdns38352:0crwdne38352:0",
       "desc": "crwdns38354:0crwdne38354:0"
     },
     "prominent": {
-      "header": "crwdns38356:0crwdne38356:0",
+      "heading": "crwdns38356:0crwdne38356:0",
       "desc": "crwdns38358:0crwdne38358:0"
     },
     "text": {
-      "header": "crwdns38360:0crwdne38360:0",
+      "heading": "crwdns38360:0crwdne38360:0",
       "desc": "crwdns38362:0crwdne38362:0"
     },
     "transition": {
-      "header": "crwdns38364:0crwdne38364:0",
+      "heading": "crwdns38364:0crwdne38364:0",
       "desc": "crwdns38366:0crwdne38366:0"
     },
     "type": {
-      "header": "crwdns38368:0crwdne38368:0",
+      "heading": "crwdns38368:0crwdne38368:0",
       "desc": "crwdns38370:0crwdne38370:0"
     },
     "twitter": {
-      "header": "crwdns38372:0crwdne38372:0",
+      "heading": "crwdns38372:0crwdne38372:0",
       "desc": "crwdns38374:0crwdne38374:0"
     }
   },

@@ -1,35 +1,35 @@
 {
-  "headerText": "툴바가 일반적으로 가장 중요한 사이트 탐색 방법인 것 처럼 `v-toolbar` 컴포넌트 역시 모든 그래픽 환경에서 충추적인 컴포넌트 입니다. The toolbar component works great in conjunction with a navigation drawer for hiding links and presenting an activator to open the sidebar on mobile.",
+  "headingText": "툴바가 일반적으로 가장 중요한 사이트 탐색 방법인 것 처럼 `v-toolbar` 컴포넌트 역시 모든 그래픽 환경에서 충추적인 컴포넌트 입니다. The toolbar component works great in conjunction with a navigation drawer for hiding links and presenting an activator to open the sidebar on mobile.",
   "examples": {
     "light-and-dark": {
       "desc": "툴바는 라이트/다크 두개의 변형이 있습니다. 라이트 툴바는 다크 버튼과 다크 텍스트를 가지고 다크 툴바는 흰색 버튼과 흰색 텍스트를 가집니다."
     },
     "flexible-and-card": {
-      "header": "유연한 툴바와 카드 툴바 (Flexible toolbar and card toolbar)",
+      "heading": "유연한 툴바와 카드 툴바 (Flexible toolbar and card toolbar)",
       "desc": "소수의 커스텀 스타일로 놀라운 인터페이스를 만들 수 있습니다."
     },
     "floating-with-search": {
-      "header": "플로팅과 검색 (Floating with search)"
+      "heading": "플로팅과 검색 (Floating with search)"
     },
     "variations": {
-      "header": "변형 (Variations)",
+      "heading": "변형 (Variations)",
       "desc": "앱바는 테마와 헬퍼 클라스들을 적용하여 다양한 변형을 만들 수 있습니다. 라이트, 다크 테마부터 색상, 투명한 변형도 가능합니다."
     },
     "prominent": {
-      "header": "두드러지는 툴바 (Prominent toolbars)"
+      "heading": "두드러지는 툴바 (Prominent toolbars)"
     },
     "dense": {
-      "header": "밀집된 툴바 (Dense toolbars)",
+      "heading": "밀집된 툴바 (Dense toolbars)",
       "desc": "밀집된 툴바는 48px 높이를 사용합니다. 이는 가로 모바일 모드의 기본 작동방식이기도 합니다."
     },
     "dense-prominent": {
-      "header": "밀집되고 두드러진 툴바"
+      "heading": "밀집되고 두드러진 툴바"
     },
     "scrolling": {
-      "header": "스크롤링 테크닉 (Scrolling techniques)"
+      "heading": "스크롤링 테크닉 (Scrolling techniques)"
     },
     "system-bars-status-window": {
-      "header": "시스템 바 - 상태/윈도우 (System bars - status/window)",
+      "heading": "시스템 바 - 상태/윈도우 (System bars - status/window)",
       "desc": "시스템바는 모바일과 데스크탑에서 알람 아이콘을 보여주는데 유용합니다. For live examples of, head to the pre-defined layouts."
     }
   }

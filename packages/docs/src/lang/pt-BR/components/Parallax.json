@@ -1,16 +1,16 @@
 {
-  "header": "# Parallax",
-  "headerText": "O componente `v-parallax` cria um efeito 3d que faz com que uma imagem pareça rolar mais lento do que a janela.",
+  "heading": "# Parallax",
+  "headingText": "O componente `v-parallax` cria um efeito 3d que faz com que uma imagem pareça rolar mais lento do que a janela.",
   "examples": {
     "usage": {
       "desc": "Um parallax causa uma mudança em uma imagem de fundo quando o usuário rola a página."
     },
     "content": {
-      "header": "### Com conteúdo",
+      "heading": "### Com conteúdo",
       "desc": "Você também pode colocar qualquer conteúdo dentro do parallax. Isso permite que você use o parallax como uma imagem de herói."
     },
     "custom-height": {
-      "header": "### Altura personalizada",
+      "heading": "### Altura personalizada",
       "desc": "Você pode especificar uma altura personalizada em um parallax. Tenha em mente que isso pode quebrar o parallax se sua imagem não é dimensionada corretamente"
     }
   },

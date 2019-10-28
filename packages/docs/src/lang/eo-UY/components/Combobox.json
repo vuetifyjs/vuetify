@@ -1,24 +1,24 @@
 {
-  "header": "crwdns34102:0crwdne34102:0",
-  "headerText": "crwdns40578:0[v-autocomplete]crwdne40578:0",
+  "heading": "crwdns34102:0crwdne34102:0",
+  "headingText": "crwdns40578:0[v-autocomplete]crwdne40578:0",
   "examples": {
     "usage": {
       "desc": "crwdns34108:0crwdne34108:0"
     },
     "no-data": {
-      "header": "crwdns40580:0crwdne40580:0",
+      "heading": "crwdns40580:0crwdne40580:0",
       "desc": "crwdns40582:0crwdne40582:0"
     },
     "advanced": {
-      "header": "crwdns34114:0crwdne34114:0",
+      "heading": "crwdns34114:0crwdne34114:0",
       "desc": "crwdns34116:0crwdne34116:0"
     },
     "combobox-multiple": {
-      "header": "crwdns40584:0crwdne40584:0",
+      "heading": "crwdns40584:0crwdne40584:0",
       "desc": "crwdns40586:0crwdne40586:0"
     },
     "dense": {
-      "header": "crwdns43134:0crwdne43134:0",
+      "heading": "crwdns43134:0crwdne43134:0",
       "desc": "crwdns43136:0crwdne43136:0"
     }
   },

@@ -1,52 +1,52 @@
 {
-  "header": "crwdns39048:0crwdne39048:0",
-  "headerText": "crwdns39050:0crwdne39050:0",
+  "heading": "crwdns39048:0crwdne39048:0",
+  "headingText": "crwdns39050:0crwdne39050:0",
   "examples": {
     "usage": {
       "desc": "crwdns39052:0crwdne39052:0"
     },
     "file-loader": {
-      "header": "crwdns39054:0crwdne39054:0",
+      "heading": "crwdns39054:0crwdne39054:0",
       "desc": "crwdns39056:0crwdne39056:0"
     },
     "linear-buffer": {
-      "header": "crwdns39058:0crwdne39058:0",
+      "heading": "crwdns39058:0crwdne39058:0",
       "desc": "crwdns39060:0crwdne39060:0"
     },
     "linear-custom-colors": {
-      "header": "crwdns39062:0crwdne39062:0",
+      "heading": "crwdns39062:0crwdne39062:0",
       "desc": "crwdns39064:0crwdne39064:0"
     },
     "linear-determinate": {
-      "header": "crwdns39066:0crwdne39066:0",
+      "heading": "crwdns39066:0crwdne39066:0",
       "desc": "crwdns39068:0crwdne39068:0"
     },
     "linear-indeterminate": {
-      "header": "crwdns39070:0crwdne39070:0",
+      "heading": "crwdns39070:0crwdne39070:0",
       "desc": "crwdns39072:0crwdne39072:0"
     },
     "linear-query-indeterminate-and-determinate": {
-      "header": "crwdns39074:0crwdne39074:0",
+      "heading": "crwdns39074:0crwdne39074:0",
       "desc": "crwdns39076:0crwdne39076:0"
     },
     "loader": {
-      "header": "crwdns39078:0crwdne39078:0",
+      "heading": "crwdns39078:0crwdne39078:0",
       "desc": "crwdns39080:0crwdne39080:0"
     },
     "rounded": {
-      "header": "crwdns39082:0crwdne39082:0",
+      "heading": "crwdns39082:0crwdne39082:0",
       "desc": "crwdns39084:0crwdne39084:0"
     },
     "stream": {
-      "header": "crwdns39086:0crwdne39086:0",
+      "heading": "crwdns39086:0crwdne39086:0",
       "desc": "crwdns39088:0crwdne39088:0"
     },
     "striped": {
-      "header": "crwdns39090:0crwdne39090:0",
+      "heading": "crwdns39090:0crwdne39090:0",
       "desc": "crwdns39092:0crwdne39092:0"
     },
     "slot": {
-      "header": "crwdns39094:0crwdne39094:0",
+      "heading": "crwdns39094:0crwdne39094:0",
       "desc": "crwdns39096:0[v-slider]crwdne39096:0"
     }
   },

@@ -1,24 +1,24 @@
 {
-  "header": "crwdns39744:0crwdne39744:0",
-  "headerText": "crwdns39746:0crwdne39746:0",
+  "heading": "crwdns39744:0crwdne39744:0",
+  "headingText": "crwdns39746:0crwdne39746:0",
   "examples": {
     "usage": {
       "desc": "crwdns39748:0crwdne39748:0"
     },
     "model": {
-      "header": "crwdns39750:0crwdne39750:0",
+      "heading": "crwdns39750:0crwdne39750:0",
       "desc": "crwdns39752:0crwdne39752:0"
     },
     "swatches": {
-      "header": "crwdns39754:0crwdne39754:0",
+      "heading": "crwdns39754:0crwdne39754:0",
       "desc": "crwdns43098:0crwdne43098:0"
     },
     "inputs": {
-      "header": "crwdns39758:0crwdne39758:0",
+      "heading": "crwdns39758:0crwdne39758:0",
       "desc": "crwdns39760:0crwdne39760:0"
     },
     "canvas": {
-      "header": "crwdns39762:0crwdne39762:0",
+      "heading": "crwdns39762:0crwdne39762:0",
       "desc": "crwdns39764:0crwdne39764:0"
     }
   },

@@ -1,6 +1,6 @@
 {
-  "header": "# Espacement",
-  "headerText": "Met à jour votre mise en page sans créer de nouvelles classes. Les assistants d'espacement sont utiles pour modifier le padding et la marge d'un élément.",
+  "heading": "# Espacement",
+  "headingText": "Met à jour votre mise en page sans créer de nouvelles classes. Les assistants d'espacement sont utiles pour modifier le padding et la marge d'un élément.",
   "playgroundHeader": "## Terrain de jeux",
   "playgroundText1": "Utilisez le terrain de jeu pour voir ce que les différentes classes d'aide peuvent faire. Pour une explication de leur fonctionnement, voir la section **Comment ça fonctionne** ci-dessous.",
   "howText": "Les classes d'aide appliquent **marge** ou **padding** à un élément allant de _0 à 12_. Chaque taille a été conçue pour s'aligner sur des espaces de conception de matériaux communs. Ces classes peuvent être appliquées au format suivant `{property}{direction}-{size}`.",
@@ -54,11 +54,11 @@
   "horizontalText": "Pour les éléments de bloc avec une largeur désignée, vous pouvez appliquer `.mx-auto` au centre horizontal du contenu.",
   "examples": {
     "horizontal": {
-      "header": "## Horizontal",
+      "heading": "## Horizontal",
       "desc": "En utilisant les classes d'aide à la marge, vous pouvez facilement centrer le contenu horizontalement."
     },
     "negative-margin": {
-      "header": "### Marge négative",
+      "heading": "### Marge négative",
       "desc": "La marge peut également être appliquée négativement à la même fréquence **1 à 12** ."
     }
   }

@@ -1,5 +1,5 @@
 {
-  "header": "# A-la-carte (treeshaking)",
+  "heading": "# A-la-carte (treeshaking)",
   "loaderHeader1": "## vuetify-loader",
   "loaderText1a": "Garder une trace de tous les composants que vous utilisez peut être une vraie corvée. Le [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) atténue cette douleur en important automatiquement tous les composants Vuetify que vous utilisez, là où vous les utilisez. Cela rendra également le fractionnement de code plus efficace, car webpack ne chargera que les composants nécessaires à l'affichage de ce bloc.",
   "loaderHeader2": "### Importation",

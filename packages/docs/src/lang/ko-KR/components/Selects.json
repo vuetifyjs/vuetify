@@ -1,24 +1,24 @@
 {
-  "headerText": "셀렉트 필드 컴포넌트는 옵션 목록에서 사용자가 제공하는 정보를 수집하는데 사용됩니다.",
+  "headingText": "셀렉트 필드 컴포넌트는 옵션 목록에서 사용자가 제공하는 정보를 수집하는데 사용됩니다.",
   "examples": {
     "light": {
-      "header": "라이트 테마 (Light theme)",
+      "heading": "라이트 테마 (Light theme)",
       "desc": "표준 단일 셀렉트는 다양한 설정 옵션을 가지고 있습니다."
     },
     "icons": {
-      "header": "아이콘 (Icons)",
+      "heading": "아이콘 (Icons)",
       "desc": "앞이나 뒤에 커스텀 아이콘 붙이세요"
     },
     "multiple": {
-      "header": "복수선택 (Multiple)",
+      "heading": "복수선택 (Multiple)",
       "desc": "multi-select 에서 선택된 항목들을 보여줄때 `v-chip`을 사용할 수 있습니다."
     },
     "custom-text-and-value": {
-      "header": "항목 텍스트와 값의 커스터마이즈 (Customized item text and value)",
+      "heading": "항목 텍스트와 값의 커스터마이즈 (Customized item text and value)",
       "desc": "텍스트와 값 필드에 해당하는 항목 배열 내의 특정 속성을 지정할 수 있습니다. 기본값은 **text** 와 **value** 입니다. 이 예제에서는 선택된 아이템의 전체 오브젝트를 반환하는 `return-opject` prop을 사용합니다.."
     },
     "disabled": {
-      "header": "비활성화 (Disabled)"
+      "heading": "비활성화 (Disabled)"
     }
   },
   "props": {

@@ -1,28 +1,28 @@
 {
-  "header": "# Footers",
-  "headerText": "The `v-footer` component is used for displaying general information that a user might want to access from any page within your site.",
+  "heading": "# Footers",
+  "headingText": "The `v-footer` component is used for displaying general information that a user might want to access from any page within your site.",
   "examples": {
     "usage": {
       "desc": "The `v-footer` component in its simplest form is a container."
     },
     "absolute": {
-      "header": "### Absolute Footer",
+      "heading": "### Absolute Footer",
       "desc": "The `absolute` prop positions footers absolutely at the bottom of their parent container."
     },
     "padless": {
-      "header": "### Padless Footer",
+      "heading": "### Padless Footer",
       "desc": "The `padless` prop removes all default padding from the footer component."
     },
     "company-footer": {
-      "header": "### Company Footer",
+      "heading": "### Company Footer",
       "desc": "The footer component as a basic company footer with links."
     },
     "indigo-footer": {
-      "header": "### Indigo Footer",
+      "heading": "### Indigo Footer",
       "desc": "The footer component with Indigo background color and social media icons and button."
     },
     "teal-footer": {
-      "header": "### Teal Footer",
+      "heading": "### Teal Footer",
       "desc": "The footer component with a Teal color header and columns and rows of links."
     }
   },

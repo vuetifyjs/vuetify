@@ -1,6 +1,6 @@
 {
-  "header": "crwdns43046:0crwdne43046:0",
-  "headerText": "crwdns43048:0crwdne43048:0",
+  "heading": "crwdns43046:0crwdne43046:0",
+  "headingText": "crwdns43048:0crwdne43048:0",
   "accessibility": {
     "desc": "crwdns43050:0[WAI-ARIA]crwdne43050:0"
   },
@@ -9,11 +9,11 @@
       "desc": "crwdns43052:0crwdne43052:0"
     },
     "boilerplate": {
-      "header": "crwdns43054:0crwdne43054:0",
+      "heading": "crwdns43054:0crwdne43054:0",
       "desc": "crwdns43056:0crwdne43056:0"
     },
     "implementation": {
-      "header": "crwdns43058:0crwdne43058:0",
+      "heading": "crwdns43058:0crwdne43058:0",
       "desc": "crwdns43060:0crwdne43060:0"
     }
   },

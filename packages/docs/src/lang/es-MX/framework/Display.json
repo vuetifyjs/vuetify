@@ -1,5 +1,5 @@
 {
-  "headerText": "Los auxiliares de display te ayudan a controlar cómo muestras tu contenido. Esto incluye mostrarlos condicionalmente basados en el área visible actual (viewport) o el tipo de elemento actual que se debe presentar.",
+  "headingText": "Los auxiliares de display te ayudan a controlar cómo muestras tu contenido. Esto incluye mostrarlos condicionalmente basados en el área visible actual (viewport) o el tipo de elemento actual que se debe presentar.",
   "visibilityHeader": "## Visibilidad",
   "visibilityText": "Mostrar condicionalmente un elemento basado en el **viewport** actual. Estas clases pueden ser aplicadas usando el siguiente formato: `hidden-{breakpoint}-{condición}`",
   "breakpointText": "El _breakpoint_ indica el tamaño del viewport:",

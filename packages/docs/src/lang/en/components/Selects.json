@@ -1,49 +1,49 @@
 {
-  "header": "# Selects",
-  "headerText": "Select fields components are used for collecting user provided information from a list of options.",
+  "heading": "# Selects",
+  "headingText": "Select fields components are used for collecting user provided information from a list of options.",
   "objectAlert": "When using objects for the **items** prop, you must associate **item-text** and **item-value** with existing properties on your objects. These values are defaulted to **text** and **value** and can be changed.",
   "examples": {
     "usage": {
       "desc": ""
     },
     "light": {
-      "header": "### Light theme",
+      "heading": "### Light theme",
       "desc": "A standard single select has a multitude of configuration options."
     },
     "icons": {
-      "header": "### Icons",
+      "heading": "### Icons",
       "desc": "Use a custom prepended or appended icon."
     },
     "multiple": {
-      "header": "### Multiple",
+      "heading": "### Multiple",
       "desc": "A multi-select can utilize `v-chip` as the display for selected items."
     },
     "custom-text-and-value": {
-      "header": "### Customized item text and value",
+      "heading": "### Customized item text and value",
       "desc": "You can specify the specific properties within your items array correspond to the text and value fields. By default, this is **text** and **value**. In this example we also use the `return-object` prop which will return the entire object of the selected item on selection."
     },
     "slots": {
-      "header": "### Prepend/Append item slots",
+      "heading": "### Prepend/Append item slots",
       "desc": "The `v-select` components can be optionally expanded with prepended and appended items. This is perfect for customized **select-all** functionality."
     },
     "selection-appearance": {
-      "header": "### Change selection appearance",
+      "heading": "### Change selection appearance",
       "desc": "The `selection` slot can be used to customize the way selected values are shown in the input. This is great when you want something like `foo (+20 others)` or don't want the selection to occupy multiple lines."
     },
     "disabled": {
-      "header": "### Disabled",
+      "heading": "### Disabled",
       "desc": "You cannot use disabled `v-select`."
     },
     "dense": {
-      "header": "### Dense",
+      "heading": "### Dense",
       "desc": "You can use `dense` prop to reduce the field height and lower max height of list items."
     },
     "readonly": {
-      "header": "### Read-only",
+      "heading": "### Read-only",
       "desc": "You cannot use read-only `v-select`, but it looks default."
     },
     "menu-props": {
-      "header": "### Custom menu props",
+      "heading": "### Custom menu props",
       "desc": "Custom props can be passed directly to `v-menu` using `menuProps` prop. In this example menu is force directed to top and shifted to top."
     }
   },

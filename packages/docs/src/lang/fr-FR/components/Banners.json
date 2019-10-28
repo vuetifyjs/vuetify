@@ -1,27 +1,27 @@
 {
-  "header": "# Bannières",
-  "headerText": "Le composant `v-banner` est utilisé comme message intermédiaire interruptif pour l'utilisateur avec des actions 1-2. Il est disponible en 2 variantes, **monoline** et **multi-ligne** (implicitement). Ces icônes peuvent être utilisées avec votre message et vos actions.",
+  "heading": "# Bannières",
+  "headingText": "Le composant `v-banner` est utilisé comme message intermédiaire interruptif pour l'utilisateur avec des actions 1-2. Il est disponible en 2 variantes, **monoline** et **multi-ligne** (implicitement). Ces icônes peuvent être utilisées avec votre message et vos actions.",
   "examples": {
     "usage": {
       "desc": "Les bannières peuvent avoir 1-2 lignes de texte, d'actions et d'icône."
     },
     "single-line": {
-      "header": "### Ligne unique (bureau)"
+      "heading": "### Ligne unique (bureau)"
     },
     "two-line": {
-      "header": "### Deux lignes (mobile)",
+      "heading": "### Deux lignes (mobile)",
       "desc": "**Deux lignes** VBanner peut stocker plus de données, l'utiliser pour les gros messages."
     },
     "icon-slot": {
-      "header": "### Champ d'icône",
+      "heading": "### Champ d'icône",
       "desc": "Le champ d'icône vous permet de contrôler explicitement le contenu et les fonctionnalités qui y sont contenues."
     },
     "icon-event": {
-      "header": "### Événement de clic d'icône",
+      "heading": "### Événement de clic d'icône",
       "desc": "VBanner émet l'événement `click:icon` sur le clic d'icône, même avec un emplacement d'icône personnalisé."
     },
     "actions-slots": {
-      "header": "### Emplacement des actions",
+      "heading": "### Emplacement des actions",
       "desc": "le champ `actions` possède la fonction `dismiss` dans son champ d'application, vous pouvez l'utiliser pour facilement rejeter la bannière."
     }
   },

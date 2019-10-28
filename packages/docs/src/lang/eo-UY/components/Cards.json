@@ -1,6 +1,6 @@
 {
-  "header": "crwdns39224:0crwdne39224:0",
-  "headerText": "crwdns32876:0crwdne32876:0",
+  "heading": "crwdns39224:0crwdne39224:0",
+  "headingText": "crwdns32876:0crwdne32876:0",
   "componentsHeader": "crwdns39226:0crwdne39226:0",
   "componentsList": [
     "crwdns39228:0[v-btn]crwdnd39228:0[v-menu]crwdne39228:0",
@@ -12,47 +12,47 @@
       "desc": "crwdns32878:0crwdne32878:0"
     },
     "info-card": {
-      "header": "crwdns39234:0crwdne39234:0",
+      "heading": "crwdns39234:0crwdne39234:0",
       "desc": "crwdns39236:0crwdne39236:0"
     },
     "media-with-text": {
-      "header": "crwdns39238:0crwdne39238:0",
+      "heading": "crwdns39238:0crwdne39238:0",
       "desc": "crwdns39240:0crwdne39240:0"
     },
     "outlined": {
-      "header": "crwdns39242:0crwdne39242:0",
+      "heading": "crwdns39242:0crwdne39242:0",
       "desc": "crwdns39244:0crwdne39244:0"
     },
     "horizontal": {
-      "header": "crwdns32884:0crwdne32884:0",
+      "heading": "crwdns32884:0crwdne32884:0",
       "desc": "crwdns32886:0crwdne32886:0"
     },
     "grids": {
-      "header": "crwdns32888:0crwdne32888:0",
+      "heading": "crwdns32888:0crwdne32888:0",
       "desc": "crwdns43042:0crwdne43042:0"
     },
     "custom-actions": {
-      "header": "crwdns39246:0crwdne39246:0",
+      "heading": "crwdns39246:0crwdne39246:0",
       "desc": "crwdns39248:0crwdne39248:0"
     },
     "twitter-card": {
-      "header": "crwdns39250:0crwdne39250:0",
+      "heading": "crwdns39250:0crwdne39250:0",
       "desc": "crwdns39252:0crwdne39252:0"
     },
     "loading": {
-      "header": "crwdns39254:0crwdne39254:0",
+      "heading": "crwdns39254:0crwdne39254:0",
       "desc": "crwdns39256:0[v-progress-linear]crwdne39256:0"
     },
     "weather": {
-      "header": "crwdns39258:0crwdne39258:0",
+      "heading": "crwdns39258:0crwdne39258:0",
       "desc": "crwdns39260:0[v-list-items]crwdnd39260:0[v-slider]crwdne39260:0"
     },
     "advanced": {
-      "header": "crwdns39262:0crwdne39262:0",
+      "heading": "crwdns39262:0crwdne39262:0",
       "desc": "crwdns39264:0crwdne39264:0"
     },
     "intermediate": {
-      "header": "crwdns39266:0crwdne39266:0",
+      "heading": "crwdns39266:0crwdne39266:0",
       "desc": "crwdns39268:0crwdne39268:0"
     }
   },

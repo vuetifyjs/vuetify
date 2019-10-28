@@ -1,6 +1,6 @@
 {
-  "header": "# Défilement",
-  "headerText": "Vous pouvez déclencher par programmation le défilement dans votre application à l’aide de la méthode `goTo` trouvée dans l’objet `$vuetify`. Cette méthode prend en charge différents types de sélecteurs de cibles et d’options, notamment le défilement régulier à l’aide des fonctions d’accélération intégrées.",
+  "heading": "# Défilement",
+  "headingText": "Vous pouvez déclencher par programmation le défilement dans votre application à l’aide de la méthode `goTo` trouvée dans l’objet `$vuetify`. Cette méthode prend en charge différents types de sélecteurs de cibles et d’options, notamment le défilement régulier à l’aide des fonctions d’accélération intégrées.",
   "firstHeader": "## Premier",
   "secondHeader": "## Second",
   "thirdHeader": "## Troisième",

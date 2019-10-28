@@ -1,12 +1,12 @@
 {
-  "header": "crwdns42824:0crwdne42824:0",
-  "headerText": "crwdns42826:0crwdne42826:0",
+  "heading": "crwdns42824:0crwdne42824:0",
+  "headingText": "crwdns42826:0crwdne42826:0",
   "examples": {
     "usage": {
       "desc": "crwdns42828:0crwdne42828:0"
     },
     "once": {
-      "header": "crwdns42830:0crwdne42830:0",
+      "heading": "crwdns42830:0crwdne42830:0",
       "desc": "crwdns42832:0crwdne42832:0"
     }
   },

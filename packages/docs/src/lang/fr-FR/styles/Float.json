@@ -1,6 +1,6 @@
 {
-  "header": "Flottant",
-  "headerText": "Applique un flotteur personnalisé sur n'importe quel point d'arrêt avec des utilitaires flottants réactifs.",
+  "heading": "Flottant",
+  "headingText": "Applique un flotteur personnalisé sur n'importe quel point d'arrêt avec des utilitaires flottants réactifs.",
   "overviewHeader": "## Vue d'ensemble",
   "overviewText1": "Les classes d'utilitaires flottants appliquent float en fonction de la taille actuelle du port de vue en utilisant la [propriété flottante CSS](https://developer.mozilla.org/fr-US/docs/Web/CSS/float).",
   "classesHeader": "## Classes",

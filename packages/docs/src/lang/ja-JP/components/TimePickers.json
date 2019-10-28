@@ -1,7 +1,7 @@
 {
   "examples": {
     "scrollable": {
-      "header": "スクロール可能なダイアログ"
+      "heading": "スクロール可能なダイアログ"
     }
   }
 }

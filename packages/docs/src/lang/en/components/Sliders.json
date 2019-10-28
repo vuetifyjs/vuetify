@@ -1,68 +1,68 @@
 {
-  "header": "# Sliders",
-  "headerText": "The `v-slider` component is a better visualization of the number input. It is used for gathering numerical user data.",
+  "heading": "# Sliders",
+  "headingText": "The `v-slider` component is a better visualization of the number input. It is used for gathering numerical user data.",
   "examples": {
     "usage": {
       "desc": "Sliders reflect a range of values along a bar, from which users may select a single value. They are ideal for adjusting settings such as volume, brightness, or applying image filters."
     },
     "thumb": {
-      "header": "### Thumb",
+      "heading": "### Thumb",
       "desc": "You can display a `thumb-label` while sliding or always. It It can have a custom color by setting `thumb-color` and a custom size with `thumb-size`. With `always-dirty` its color will never change, even when on `min` value."
     },
     "custom-thumb": {
-      "header": "### Custom Range slider",
+      "heading": "### Custom Range slider",
       "desc": " Using the `tick-labels` prop along with slots, you can create a very customized solution."
     },
     "ticks": {
-      "header": "### Ticks",
+      "heading": "### Ticks",
       "desc": "Tick marks represent predetermined values to which the user can move the slider."
     },
     "discrete": {
-      "header": "### Discrete",
+      "heading": "### Discrete",
       "desc": "Discrete sliders offer a thumb label that displays the exact current amount. Using the `step` prop you can disallow selecting values outside of steps."
     },
     "icons": {
-      "header": "### Icons",
+      "heading": "### Icons",
       "desc": "You can add icons to the slider with the `append-icon` and `prepend-icon` props. With `@click:append` and `@click:prepend` you can trigger a callback function when click the icon."
     },
     "editable-numeric-value": {
-      "header": "### With an editable numeric value",
+      "heading": "### With an editable numeric value",
       "desc": "Sliders can be combined with other components for a better display."
     },
     "custom-colors": {
-      "header": "### Custom colors",
+      "heading": "### Custom colors",
       "desc": "You can set the colors of the slider using the props `color`, `track-color` and `thumb-color`."
     },
     "validation": {
-      "header": "### Validation",
+      "heading": "### Validation",
       "desc": "Vuetify includes simple validation through the `rules` prop. The prop accepts an array of callbacks. While validating rules, the current v-model value will be passed to the callback. This callback should return either `true` or a `String`, the error message."
     },
     "range": {
-      "header": "### Range",
+      "heading": "### Range",
       "desc": "Range sliders."
     },
     "min-max": {
-      "header": "### Min & Max values",
+      "heading": "### Min & Max values",
       "desc": "You can set `min` and `max` values of sliders."
     },
     "metronome": {
-      "header": "### Slots",
+      "heading": "### Slots",
       "desc": "Use slots such as `prepend` and `append` to easily customize the `v-slider` to fit any situation."
     },
     "vertical": {
-      "header": "### Vertical sliders",
+      "heading": "### Vertical sliders",
       "desc": "You can use `vertical` to switch sliders to a vertical orientation. If you need to change the height of the slider, use css."
     },
     "disabled": {
-      "header": "### Disabled",
+      "heading": "### Disabled",
       "desc": "You cannot interact with `disabled` sliders."
     },
     "readonly": {
-      "header": "### Readonly",
+      "heading": "### Readonly",
       "desc": "You cannot interact with `readonly` sliders, but they look as ordinary ones."
     },
     "inverse-label": {
-      "header": "### Inverse label",
+      "heading": "### Inverse label",
       "desc": "`v-slider` with `inverse-label` property displays label at the end of it."
     }
   },

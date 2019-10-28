@@ -1,31 +1,31 @@
 {
-  "headerText": "`v-menu`组件展示一个菜单在用于激活它的元素的位置上。",
+  "headingText": "`v-menu`组件展示一个菜单在用于激活它的元素的位置上。",
   "examples": {
     "absolute": {
-      "header": "绝对定位",
+      "heading": "绝对定位",
       "desc": "菜单也可以使用`absolute`属性绝对定位在激活元素的顶部。尝试点击图片上的任何地方。"
     },
     "disabled": {
-      "header": "禁用"
+      "heading": "禁用"
     },
     "absolute-without-activator": {
-      "header": "没有激活时的绝对定位",
+      "heading": "没有激活时的绝对定位",
       "desc": "菜单也可以通过`absolute`属性跟`position-x`和`position-y`属性一起使用。尝试右键点击图像上的仍和位置。"
     },
     "hover": {
-      "header": "悬停",
+      "heading": "悬停",
       "desc": "菜单可以使用悬停进行访问，而不是用`open-on-hover`属性进行点击。"
     },
     "menus": {
-      "header": "菜单",
+      "heading": "菜单",
       "desc": "菜单可以放在几乎任何组件中"
     },
     "custom-transition": {
-      "header": "自定义过渡",
+      "heading": "自定义过渡",
       "desc": "Vuetify带有3个标准过渡，**scale**、**slide-x**和**slide-y**。您也可以创建自己的并将其作为过渡参数传递。有关如何构建内置过渡的示例，请访问[此处](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts#L31)。"
     },
     "popover": {
-      "header": "弹出菜单",
+      "heading": "弹出菜单",
       "desc": "可以将菜单配置为在打开时为静态，使其可以用作弹出窗口。当菜单内容有多个交互项时，这可能很有用。"
     }
   },

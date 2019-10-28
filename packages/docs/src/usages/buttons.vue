@@ -5,12 +5,12 @@
       justify="center"
     >
       <v-btn
+        :class="$vuetify.theme.dark && 'white--text'"
         v-bind="{
           ...attrs,
           color: attrs.color || 'deep-purple accent-4',
           [attrs.size]: true
         }"
-        class="white--text"
       >
         <v-icon v-if="attrs.fab || attrs.icon">mdi-account</v-icon>
 

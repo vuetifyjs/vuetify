@@ -1,9 +1,9 @@
 {
-  "header": "Directiva de desplazamiento (scrolling)",
-  "headerText": "La directiva `v-scroll` te permite proveer callbacks cuando la ventana o un elemento específico son desplazados.",
+  "heading": "Directiva de desplazamiento (scrolling)",
+  "headingText": "La directiva `v-scroll` te permite proveer callbacks cuando la ventana o un elemento específico son desplazados.",
   "examples": {
     "options": {
-      "header": "Desplazamiento con opciones",
+      "heading": "Desplazamiento con opciones",
       "desc": "Para una implementación más fina, puedes asignar al objetivo (target) un listener del evento `scroll`"
     }
   }

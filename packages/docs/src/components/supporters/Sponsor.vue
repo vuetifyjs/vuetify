@@ -2,18 +2,18 @@
   <v-card
     :aria-label="`Supporter ${value.name}`"
     :href="value.href"
-    flat
-    tile
+    class="mx-2 pa-2"
     color="transparent"
-    class="mx-2"
-    target="_blank"
+    flat
     rel="noopener"
+    target="_blank"
+    tile
   >
     <v-img
       :alt="value.name"
       :class="value.dark ? 'black' : ''"
+      :src="src"
       :width="width"
-      :src="`https://cdn.vuetifyjs.com/images/${value.logo}`"
       class="flex-shrink-1"
       contain
       @click="$ga.event('patrons', 'click', value.name)"
@@ -43,6 +43,13 @@
     },
 
     computed: {
+      src () {
+        const cdn = 'https://cdn.vuetifyjs.com/images/'
+
+        return `${cdn}${!this.$vuetify.theme.dark
+          ? this.value.logo
+          : this.value.darkLogo || this.value.logo}`
+      },
       width () {
         if (this.xLarge) return 175
         if (this.large) return 155

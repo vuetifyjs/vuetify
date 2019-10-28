@@ -1,56 +1,56 @@
 {
-  "header": "# Time pickers",
-  "headerText": "The `v-time-picker` is stand-alone component that can be utilized in many existing Vuetify components. It offers the user a visual representation for selecting the time.",
+  "heading": "# Time pickers",
+  "headingText": "The `v-time-picker` is stand-alone component that can be utilized in many existing Vuetify components. It offers the user a visual representation for selecting the time.",
   "examples": {
     "usage": {
       "desc": "Time pickers have the light theme enabled by default."
     },
     "colorable": {
-      "header": "### Colors",
+      "heading": "### Colors",
       "desc": "Time picker colors can be set using the `color` and `header-color` props. If `header-color` prop is not provided  header will use the `color` prop value."
     },
     "dialog-and-menu": {
-      "header": "### In dialog and menu",
+      "heading": "### In dialog and menu",
       "desc": "Due to the flexibility of pickers, you can really dial in the experience exactly how you want it."
     },
     "24h-format": {
-      "header": "### 24h format",
+      "heading": "### 24h format",
       "desc": "A time picker can be switched to 24hr format. Note that the `format` prop defines only the way the picker is displayed, picker's value (model) is always in 24hr format."
     },
     "allowed-times": {
-      "header": "### Allowed times",
+      "heading": "### Allowed times",
       "desc": "You can specify allowed times using arrays, objects, and functions. You can also specify time step/precision/interval - e.g. 10 minutes."
     },
     "width": {
-      "header": "### Setting picker width",
+      "heading": "### Setting picker width",
       "desc": "You can specify allowed the picker's width or make it full width."
     },
     "ampm-in-title": {
-      "header": "### AM/PM switch in title",
+      "heading": "### AM/PM switch in title",
       "desc": "You can move AM/PM switch to picker's title."
     },
     "no-title": {
-      "header": "### No title",
+      "heading": "### No title",
       "desc": "You can remove picker's title."
     },
     "disabled": {
-      "header": "### Disabled",
+      "heading": "### Disabled",
       "desc": "You can't interact with disabled picker."
     },
     "readonly": {
-      "header": "### Read-only",
+      "heading": "### Read-only",
       "desc": "Read-only picker behaves same as disabled one, but looks like default one."
     },
     "use-seconds": {
-      "header": "### With seconds",
+      "heading": "### With seconds",
       "desc": "Time picker can have seconds input."
     },
     "scrollable": {
-      "header": "### Scrollable",
+      "heading": "### Scrollable",
       "desc": "You can edit time picker's value using mouse wheel."
     },
     "range": {
-      "header": "### Range",
+      "heading": "### Range",
       "desc": "This is an example of joining pickers together using `min` and `max` prop."
     }
   },

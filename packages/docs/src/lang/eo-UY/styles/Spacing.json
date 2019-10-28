@@ -1,6 +1,6 @@
 {
-  "header": "crwdns37670:0crwdne37670:0",
-  "headerText": "crwdns37672:0crwdne37672:0",
+  "heading": "crwdns37670:0crwdne37670:0",
+  "headingText": "crwdns37672:0crwdne37672:0",
   "playgroundHeader": "crwdns37674:0crwdne37674:0",
   "playgroundText1": "crwdns37676:0crwdne37676:0",
   "howText": "crwdns41612:0{property}crwdnd41612:0{direction}crwdnd41612:0{size}crwdne41612:0",
@@ -57,15 +57,15 @@
   "breakpointHowText": "crwdns42876:0{property}crwdnd42876:0{direction}crwdnd42876:0{breakpoint}crwdnd42876:0{size}crwdne42876:0",
   "examples": {
     "horizontal": {
-      "header": "crwdns41680:0crwdne41680:0",
+      "heading": "crwdns41680:0crwdne41680:0",
       "desc": "crwdns41682:0crwdne41682:0"
     },
     "negative-margin": {
-      "header": "crwdns41684:0crwdne41684:0",
+      "heading": "crwdns41684:0crwdne41684:0",
       "desc": "crwdns41686:0crwdne41686:0"
     },
     "breakpoint-md": {
-      "header": "crwdns42878:0crwdne42878:0",
+      "heading": "crwdns42878:0crwdne42878:0",
       "desc": "crwdns42880:0crwdne42880:0"
     }
   }

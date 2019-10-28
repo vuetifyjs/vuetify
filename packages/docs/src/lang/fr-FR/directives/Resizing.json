@@ -1,6 +1,6 @@
 {
-  "header": "# Directive de redimensionnement",
-  "headerText": "La directive `v-resize` peut être utilisée pour appeler des fonctions spécifiques lorsque la fenêtre est redimensionnée.",
+  "heading": "# Directive de redimensionnement",
+  "headingText": "La directive `v-resize` peut être utilisée pour appeler des fonctions spécifiques lorsque la fenêtre est redimensionnée.",
   "examples": {
     "usage": {
       "desc": "Redimensionnez votre fenêtre et observez les changements de valeurs.",

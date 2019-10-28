@@ -1,6 +1,6 @@
 {
-  "header": "빠른 시작",
-  "headerText": "Vuetify 프로젝트를 바로 시작하려면 _(공식 예제를 바탕으로한)_ Vuetify Vue CLI 패키지를 사용하세요. Vuetify는 **SSR** (서버사이드 렌더링), **SPA** (싱글페이지 어플리케이션), **PWA** (프로그레시브 웹 어플리케이션)와 단독 **HTML** 페이지를 지원합니다.",
+  "heading": "빠른 시작",
+  "headingText": "Vuetify 프로젝트를 바로 시작하려면 _(공식 예제를 바탕으로한)_ Vuetify Vue CLI 패키지를 사용하세요. Vuetify는 **SSR** (서버사이드 렌더링), **SPA** (싱글페이지 어플리케이션), **PWA** (프로그레시브 웹 어플리케이션)와 단독 **HTML** 페이지를 지원합니다.",
   "vueCliText1": "Vue CLI 3 은 이전 보다 더욱 쉽게 시작할 수 있도록 도와주기 위해 만들어진 다음 세대의 cli 툴 입니다. Vue CLI 3를 가지고 당신의 앱을 시작하면 힘든 업데이트 절차 없이 Vuetify 의 업데이트는 물론이고 공식적인 웹팩 업데이트와 config 변경사항들을 얻을 수 있습니다.",
   "vueCliText2": "Vue CLI 3을 사용하기 위한 더 많은 정보는. [official documentation](https://cli.vuejs.org/guide/) 에 방문해 보세요.",
   "vueCliText3": "**팁**: 만약 이미 **Vue CLI** 가 설치되어 있다면, 터미널에서 <kbd>vue --version</kbd> 명령을 입력해 최신 버전이 설치되어 있는지 확인할 수 있습니다.",

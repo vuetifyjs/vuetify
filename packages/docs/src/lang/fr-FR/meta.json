@@ -16,22 +16,22 @@
   "getting-started/why-vuetify": {
     "title": "Pourquoi Vuetify ?"
   },
-  "getting-started/frequently-asked-questions": {
+  "introduction/frequently-asked-questions": {
     "title": "Foire aux questions",
     "keywords": "foire aux questions, faq"
   },
-  "getting-started/meet-the-team": {
+  "introduction/meet-the-team": {
     "title": "Rencontrez l'équipe",
     "keywords": "équipe de développement vuetify, vuetify core team"
   },
-  "getting-started/sponsors-and-backers": {
+  "introduction/sponsors-and-backers": {
     "title": "Sponsors et donateurs"
   },
   "getting-started/contributing": {
     "title": "Contribuer",
     "keywords": "contribuer, demande de fonctionnalité"
   },
-  "getting-started/consulting-and-support": {
+  "introduction/consulting-and-support": {
     "title": "Conseils et support"
   },
   "customization/breakpoints": {
