@@ -117,7 +117,7 @@
           src: 'https://cdn.vuetifyjs.com/images/logos/vuetify-logo-light.png',
           components: 82,
           tree: 'Automatic w/ vuetify-loader',
-          release: 'Twice Weekly',
+          release: 'Weekly',
           ssr: true,
           a11y: true,
           lts: true,
