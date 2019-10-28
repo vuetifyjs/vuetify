@@ -17,10 +17,30 @@
         </v-responsive>
 
         <supporters-sponsor-btn
-          class="mt-4"
+          class="my-4"
           href="https://github.com/users/johnleider/sponsorship"
           small
         />
+
+        <a
+          aria-label="VueJobs"
+          class="d-block"
+          href="https://vuejobs.com/?utm_source=vuejobs&utm_medium=banner&utm_campaign=linking&ref=vuetifyjs.com"
+          rel="noopener"
+          target="_blank"
+          title="VueJobs"
+          @click="$ga.event('drawer', 'click', 'vuejobs')"
+        >
+          <v-img
+            src="https://cdn.vuetifyjs.com/images/affiliates/vuejobs-logo.svg"
+            alt="VueJobs"
+            title="VueJobs"
+            class="mx-auto"
+            contain
+            height="18"
+            width="60"
+          />
+        </a>
       </div>
     </v-container>
 
