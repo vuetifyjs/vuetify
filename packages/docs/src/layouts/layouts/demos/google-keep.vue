@@ -5,7 +5,7 @@
       clipped-left
       color="amber"
     >
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="drawer = !drawer" />
       <span class="title ml-3 mr-5">Google&nbsp;<span class="font-weight-light">Keep</span></span>
       <v-text-field
         solo-inverted
@@ -13,8 +13,9 @@
         hide-details
         label="Search"
         prepend-inner-icon="search"
-      ></v-text-field>
-      <v-spacer></v-spacer>
+      />
+
+      <v-spacer />
     </v-app-bar>
 
     <v-navigation-drawer
@@ -53,11 +54,11 @@
             :key="i"
             dark
             class="my-4"
-          ></v-divider>
+          />
           <v-list-item
             v-else
             :key="i"
-            @click=""
+            link
           >
             <v-list-item-action>
               <v-icon>{{ item.icon }}</v-icon>

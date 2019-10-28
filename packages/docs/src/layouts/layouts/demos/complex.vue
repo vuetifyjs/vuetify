@@ -24,10 +24,10 @@
       color="blue-grey"
       dark
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title>Toolbar</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-app-bar-nav-icon @click.stop="drawerRight = !drawerRight"></v-app-bar-nav-icon>
+      <v-spacer />
+      <v-app-bar-nav-icon @click.stop="drawerRight = !drawerRight" />
     </v-app-bar>
 
     <v-navigation-drawer
@@ -50,7 +50,7 @@
       v-model="left"
       fixed
       temporary
-    ></v-navigation-drawer>
+    />
 
     <v-content>
       <v-container
@@ -100,7 +100,7 @@
       fixed
       right
       temporary
-    ></v-navigation-drawer>
+    />
 
     <v-footer
       app
@@ -108,7 +108,7 @@
       class="white--text"
     >
       <span>Vuetify</span>
-      <v-spacer></v-spacer>
+      <v-spacer />
       <span>&copy; 2019</span>
     </v-footer>
   </v-app>

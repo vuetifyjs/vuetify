@@ -46,7 +46,7 @@
             <v-list-item
               v-for="(child, i) in item.children"
               :key="i"
-              @click=""
+              link
             >
               <v-list-item-action v-if="child.icon">
                 <v-icon>{{ child.icon }}</v-icon>
@@ -61,7 +61,7 @@
           <v-list-item
             v-else
             :key="item.text"
-            @click=""
+            link
           >
             <v-list-item-action>
               <v-icon>{{ item.icon }}</v-icon>
@@ -86,7 +86,7 @@
         style="width: 300px"
         class="ml-0 pl-4"
       >
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
         <span class="hidden-sm-and-down">Google Contacts</span>
       </v-toolbar-title>
       <v-text-field
@@ -96,8 +96,8 @@
         prepend-inner-icon="search"
         label="Search"
         class="hidden-sm-and-down"
-      ></v-text-field>
-      <v-spacer></v-spacer>
+      />
+      <v-spacer />
       <v-btn icon>
         <v-icon>mdi-apps</v-icon>
       </v-btn>
@@ -115,8 +115,7 @@
           <v-img
             src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
             alt="Vuetify"
-          >
-          </v-img></v-avatar>
+          /></v-avatar>
       </v-btn>
     </v-app-bar>
     <v-content>
@@ -196,38 +195,38 @@
                 </v-avatar>
                 <v-text-field
                   placeholder="Name"
-                ></v-text-field>
+                />
               </v-row>
             </v-col>
             <v-col cols="6">
               <v-text-field
                 prepend-icon="business"
                 placeholder="Company"
-              ></v-text-field>
+              />
             </v-col>
             <v-col cols="6">
               <v-text-field
                 placeholder="Job title"
-              ></v-text-field>
+              />
             </v-col>
             <v-col cols="12">
               <v-text-field
                 prepend-icon="mail"
                 placeholder="Email"
-              ></v-text-field>
+              />
             </v-col>
             <v-col cols="12">
               <v-text-field
                 type="tel"
                 prepend-icon="phone"
                 placeholder="(000) 000 - 0000"
-              ></v-text-field>
+              />
             </v-col>
             <v-col cols="12">
               <v-text-field
                 prepend-icon="notes"
                 placeholder="Notes"
-              ></v-text-field>
+              />
             </v-col>
           </v-row>
         </v-container>
@@ -236,7 +235,7 @@
             text
             color="primary"
           >More</v-btn>
-          <v-spacer></v-spacer>
+          <v-spacer />
           <v-btn
             text
             color="primary"

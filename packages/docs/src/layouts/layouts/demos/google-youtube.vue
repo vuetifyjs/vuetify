@@ -9,7 +9,7 @@
         <v-list-item
           v-for="item in items"
           :key="item.text"
-          @click=""
+          link
         >
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
@@ -25,7 +25,7 @@
           <v-list-item
             v-for="item in items2"
             :key="item.text"
-            @click=""
+            link
           >
             <v-list-item-avatar>
               <img
@@ -33,19 +33,19 @@
                 alt=""
               >
             </v-list-item-avatar>
-            <v-list-item-title v-text="item.text"></v-list-item-title>
+            <v-list-item-title v-text="item.text" />
           </v-list-item>
         </v-list>
         <v-list-item
           class="mt-4"
-          @click=""
+          link
         >
           <v-list-item-action>
             <v-icon color="grey darken-1">mdi-plus-circle-outline</v-icon>
           </v-list-item-action>
           <v-list-item-title class="grey--text text--darken-1">Browse Channels</v-list-item-title>
         </v-list-item>
-        <v-list-item @click="">
+        <v-list-item link>
           <v-list-item-action>
             <v-icon color="grey darken-1">mdi-settings</v-icon>
           </v-list-item-action>
@@ -60,12 +60,12 @@
       color="red"
       dense
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-icon class="mx-4">fab fa-youtube</v-icon>
       <v-toolbar-title class="mr-12 align-center">
         <span class="title">Youtube</span>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
+      <v-spacer />
       <v-row
         align="center"
         style="max-width: 650px"
@@ -77,7 +77,7 @@
           append-icon="search"
           color="white"
           hide-details
-        ></v-text-field>
+        />
       </v-row>
     </v-app-bar>
 

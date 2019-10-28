@@ -80,7 +80,9 @@
       <tfoot>
         <tr>
           <td colspan="7">
-            <div class="caption d-block font-italic font-weight-light grey--text">*Based on average of all Major/Minor/Patch releases over the last 12 months.</div>
+            <div class="caption d-block font-italic font-weight-light grey--text">
+              *Based on average of all Major/Minor/Patch releases over the last 12 months.
+            </div>
           </td>
         </tr>
       </tfoot>

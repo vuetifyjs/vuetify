@@ -21,7 +21,7 @@
                 flat
               >
                 <v-toolbar-title>Login form</v-toolbar-title>
-                <v-spacer></v-spacer>
+                <v-spacer />
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
                     <v-btn
@@ -58,7 +58,7 @@
                     name="login"
                     prepend-icon="person"
                     type="text"
-                  ></v-text-field>
+                  />
 
                   <v-text-field
                     id="password"
@@ -66,11 +66,11 @@
                     name="password"
                     prepend-icon="lock"
                     type="password"
-                  ></v-text-field>
+                  />
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <v-spacer></v-spacer>
+                <v-spacer />
                 <v-btn color="primary">Login</v-btn>
               </v-card-actions>
             </v-card>
