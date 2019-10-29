@@ -17,8 +17,9 @@
     "lint": "lerna run lint --parallel --stream",
     "lint:fix": "lerna run lint:fix --parallel",
     "version": "node scripts/confirm-npm-tag.js",
-    "postinstall": "node scripts/post-install.js",
-    "postversion": "node scripts/post-release-merge.js"
+    "prepare": "node scripts/post-install.js",
+    "postversion": "node scripts/post-release-merge.js",
+    "clean": "lerna clean"
   },
   "engines": {
     "node": ">= 10",
