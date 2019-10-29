@@ -184,10 +184,9 @@ export class Theme extends Service {
   private initVueMeta (root: any) {
     this.vueMeta = root.$meta()
     if (this.isVueMeta23) {
-      // vue-meta needs to apply after mounted()
-      root.$nextTick(() => {
-        this.applyVueMeta23()
-      })
+      this.applyVueMeta23()
+      root._vueMeta = true
+      this.vueMeta.refresh()
       return
     }
 
