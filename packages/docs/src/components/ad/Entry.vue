@@ -43,7 +43,7 @@
     mounted () {
       // Do nothing on ssr
       if (this.$ssrContext) return
-      if (document.getElementById(this.scriptId)) return
+      if (typeof document === 'undefined' || document.getElementById(this.scriptId)) return
 
       const script = document.createElement('script')
 

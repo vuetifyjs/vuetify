@@ -8,11 +8,12 @@ export function createI18n (ssrContext, router) {
   const fallbackLocale = 'en'
   const loadedLanguages = []
   const globalLanguages = {}
+  const hasDocument = typeof document !== 'undefined'
 
   let locale = fallbackLocale
   if (ssrContext && ssrContext.lang) {
     locale = ssrContext.lang
-  } else if (typeof document !== 'undefined') {
+  } else if (hasDocument) {
     locale = document.documentElement.lang
   }
 
@@ -26,7 +27,7 @@ export function createI18n (ssrContext, router) {
   function setI18nLanguage (lang) {
     i18n.locale = lang
 
-    if (!ssrContext) {
+    if (!ssrContext && hasDocument) {
       document.querySelector('html').setAttribute('lang', lang)
     }
 
