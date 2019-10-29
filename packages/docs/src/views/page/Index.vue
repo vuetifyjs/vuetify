@@ -33,25 +33,23 @@
     const page = upperFirst(camelCase(route.params.page))
     const setStructure = structure => store.commit('documentation/SET_STRUCTURE', structure)
 
-    store.commit('documentation/SET_STRUCTURE', null)
+    setStructure(null)
 
     await new Promise(resolve => setTimeout(resolve, 0))
 
-    let structure
     this.isLoading = true
 
     try {
-      structure = (await import(
+      const res = await import(
         /* webpackChunkName: "documentation-pages" */
         `@/data/pages/${namespace}/${page}.json`
-      )).default
+      )
+
+      setStructure(res.default)
     } catch (err) {
       setStructure(false)
-
-      throw new Error(`Unable to find layout for route <${route.params.page}>.`)
     }
 
-    setStructure(structure)
     this.isLoading = false
   }
 
