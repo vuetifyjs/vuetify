@@ -25,7 +25,6 @@
       lang: get('route/params@lang'),
       namespace: get('route/params@namespace'),
       page: get('route/params@page'),
-      test: get('route/params'),
       contributionGuide () {
         return this.parseLink('', 'contribute', `/${this.lang}/getting-started/contributing`)
       },
@@ -37,7 +36,6 @@
       },
       contributionPageLink () {
         const file = `${this.namespace}/${upperFirst(camelCase(this.page))}.json`
-        console.log(this.test)
         return `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/data/pages/${file}`
       },
     },
