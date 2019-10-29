@@ -9,7 +9,8 @@
     {
       "name": "Vueconf.US",
       "href": "http://vueconf.us/",
-      "logo": "backers/vueconf_us.png"
+      "logo": "backers/vueconf_us.png",
+      "darkLogo": "backers/vueconf_us-dark.png"
     }
   ],
   "Diamond": [
