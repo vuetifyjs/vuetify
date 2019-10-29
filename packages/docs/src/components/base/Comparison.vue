@@ -77,11 +77,19 @@
         </tr>
       </tbody>
 
-      <tfoot>
+      <tfoot class="text-center">
         <tr>
-          <td colspan="7">
-            <div class="caption d-block font-italic font-weight-light grey--text">
-              *Based on average of all Major/Minor/Patch releases over the last 12 months.
+          <td
+            colspan="7"
+            class="caption font-italic font-weight-light grey--text"
+            style="height: auto;"
+          >
+            <div>
+              *Based on Top-level components only.
+            </div>
+
+            <div>
+              **Based on average of all Major/Minor/Patch releases over the last 12 months.
             </div>
           </td>
         </tr>
@@ -103,11 +111,11 @@
 
     data: () => ({
       features: {
-        components: 'Total components',
+        components: 'Total components*',
         a11y: 'Full Accessibility and Section 508 support',
         ssr: 'Server Side Rendering support',
         lts: 'Long-term Support',
-        release: 'Release cadence*',
+        release: 'Release cadence**',
         tree: 'Treeshaking',
         rtl: 'RTL support',
         themes: 'Premium Themes',
