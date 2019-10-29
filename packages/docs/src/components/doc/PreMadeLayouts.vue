@@ -36,7 +36,7 @@
                 />
                 <v-btn
                   :aria-label="`Link to layout for ${layout.name}`"
-                  :href="layout.href"
+                  :href="`/${$route.params.lang}/examples/layouts/${kebabCase(layout.name)}`"
                   :title="`Link to layout for ${layout.name}`"
                   class="mx-2"
                   color="indigo"
@@ -70,6 +70,8 @@
 </template>
 
 <script>
+  // Utilities
+  import kebabCase from 'lodash/kebabCase'
   import { getBranch } from '@/util/helpers'
 
   export default {
@@ -91,6 +93,7 @@
       this.branch = getBranch()
     },
     methods: {
+      kebabCase,
       genSrc (name) {
         return `https://cdn.vuetifyjs.com/images/layouts/${name.toLowerCase().replace(' ', '-')}.png`
       },

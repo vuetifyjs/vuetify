@@ -2,15 +2,15 @@
   <div id="app">
     <component
       :is="component"
-      v-if="component !== false"
+      v-if="component"
       :source="`https://github.com/vuetifyjs/vuetify/blob/${branch}/packages/docs/src/examples/layouts/${page}.vue`"
     />
-
-    <not-found v-else />
   </div>
 </template>
 
 <script>
+  // Utilities
+  import kebabCase from 'lodash/kebabCase'
   import { getBranch } from '@/util/helpers'
 
   export default {
@@ -33,11 +33,14 @@
     }),
 
     created () {
-      import(`./demos/${this.page}.vue`)
+      const page = kebabCase(this.page)
+
+      import(`./demos/${page}.vue`)
         .then(res => (this.component = res.default))
         .catch(() => {
-          this.component = false
-          throw new Error(`Unable to find layout for <${this.page}>`)
+          console.warn(`Unable to find layout for <${page}>`)
+
+          this.$router.push({ name: 'Home' })
         })
     },
 
