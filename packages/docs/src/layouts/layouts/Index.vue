@@ -40,7 +40,7 @@
         .catch(() => {
           console.warn(`Unable to find layout for <${page}>`)
 
-          this.$router.push({ name: 'Home' })
+          // this.$router.push({ name: 'Home' })
         })
     },
 
