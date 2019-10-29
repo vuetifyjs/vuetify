@@ -7,10 +7,8 @@
 
 <script>
   // Utilities
-  import {
-    get,
-  } from 'vuex-pathify'
-
+  import { get } from 'vuex-pathify'
+  import { upperFirst, camelCase } from 'lodash'
   import { parseLink } from '@/util/helpers'
 
   export default {
@@ -27,6 +25,7 @@
       lang: get('route/params@lang'),
       namespace: get('route/params@namespace'),
       page: get('route/params@page'),
+      test: get('route/params'),
       contributionGuide () {
         return this.parseLink('', 'contribute', `/${this.lang}/getting-started/contributing`)
       },
@@ -37,8 +36,8 @@
         return this.parseLink('', 'Edit this page on GitHub!', this.contributionPageLink)
       },
       contributionPageLink () {
-        const file = `${this.namespace}/${this.page}.json`
-
+        const file = `${this.namespace}/${upperFirst(camelCase(this.page))}.json`
+        console.log(this.test)
         return `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/data/pages/${file}`
       },
     },
