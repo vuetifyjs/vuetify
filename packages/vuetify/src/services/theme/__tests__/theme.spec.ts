@@ -270,6 +270,7 @@ describe('Theme.ts', () => {
 
     const $meta = () => ({
       addApp: () => ({ set }),
+      refresh: jest.fn(),
     })
 
     ;(instance as any).$meta = $meta as any
