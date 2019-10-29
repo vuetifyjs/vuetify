@@ -165,6 +165,9 @@
     background: #2d2d2d
     color: #fff
 
+    &.theme--dark
+      background: #424242
+
     pre, code
       margin: 0
       background: transparent
