@@ -1,7 +1,7 @@
 {
   "examples": {
     "filter-results": {
-      "header": "Filtrer les résultats"
+      "heading": "Filtrer les résultats"
     }
   }
 }

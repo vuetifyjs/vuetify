@@ -1,18 +1,18 @@
 {
-  "header": "# Barre de navigation inférieure",
-  "headerText": "`v-bottom-navigation` est une alternative à `sidebar` (la barre latérale), principalement utilisé sur mobile en deux variantes, icônes et texte, et shift.",
+  "heading": "# Barre de navigation inférieure",
+  "headingText": "`v-bottom-navigation` est une alternative à `sidebar` (la barre latérale), principalement utilisé sur mobile en deux variantes, icônes et texte, et shift.",
   "examples": {
     "usage": {
       "desc": "Bien que `v-bottom-nav` est censé être utilisé avec `vue-router`, vous pouvez aussi changer l'état des boutons en utilisant le prop `active.sync`. Vous pouvez changer la valeur d'un bouton en utilisant son attribut `value`."
     },
     "color": {
-      "header": "### Couleurs"
+      "heading": "### Couleurs"
     },
     "toggle": {
-      "header": "### Basculement"
+      "heading": "### Basculement"
     },
     "scroll-threshold": {
-      "header": "### Seuil de défilement"
+      "heading": "### Seuil de défilement"
     }
   },
   "props": {

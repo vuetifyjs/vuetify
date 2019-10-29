@@ -1,19 +1,19 @@
 {
-  "headerText": "`v-card` 컴포넌트는 패널부터 스태틱 이미지까지 어떤 것에든 쓸 수 있는 다재다능한 컴포넌트입니다. **card** 컴포넌트엔 쉬운 마크업(markup)을 도와주는 여러 헬퍼 컴포넌트가 있습니다. 나열된 옵션 이 없는 컴포넌트들은 더 빠른 렌더링을 위해 **Vue의** 펑셔널 컴포넌트(functional component) 옵션을 사용하고 쉽게 만들기 위한 마크업 슈거로 작동합니다.",
+  "headingText": "`v-card` 컴포넌트는 패널부터 스태틱 이미지까지 어떤 것에든 쓸 수 있는 다재다능한 컴포넌트입니다. **card** 컴포넌트엔 쉬운 마크업(markup)을 도와주는 여러 헬퍼 컴포넌트가 있습니다. 나열된 옵션 이 없는 컴포넌트들은 더 빠른 렌더링을 위해 **Vue의** 펑셔널 컴포넌트(functional component) 옵션을 사용하고 쉽게 만들기 위한 마크업 슈거로 작동합니다.",
   "examples": {
     "media-with-text": {
-      "header": "미디어와 텍스트 (Media with text)",
+      "heading": "미디어와 텍스트 (Media with text)",
       "desc": "레이아웃 시스템을 이용해 커스텀 텍스트를 백그라운드 위의 어느 곳에든 넣을 수 있습니다."
     },
     "horizontal": {
-      "header": "수평 카드(Horizontal cards)",
+      "heading": "수평 카드(Horizontal cards)",
       "desc": "`v-flex`를 이용해 커스텀 수평 카드를 만들 수 있습니다. `v-card-media`가 컨테이너를 덮지 않고 딱 맞게 들어갈 수 있도록 `contain` 속성(property)를 사용해서 크기를 줄이세요(shrink)."
     },
     "grids": {
-      "header": "그리드 (Grids)"
+      "heading": "그리드 (Grids)"
     },
     "custom-actions": {
-      "header": "커스텀 액션 (Custom Actions)",
+      "heading": "커스텀 액션 (Custom Actions)",
       "desc": "간단한 조건과 함께 열릴때 까지 보이지 않는 추가 텍스트를 쉽게 넣을 수 있습니다."
     }
   }

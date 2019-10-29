@@ -4,10 +4,10 @@
       "uninverted": true
     },
     "outlined": {
-      "header": "### Contorno"
+      "heading": "### Contorno"
     },
     "closable": {
-      "header": "Fechável",
+      "heading": "Fechável",
       "uninverted": true
     },
     "in-selects": {

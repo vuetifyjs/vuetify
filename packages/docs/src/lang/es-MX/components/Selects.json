@@ -1,24 +1,24 @@
 {
-  "headerText": "Los componentes _select fields_ son utilizados para recolectar información provista por el usuario de una lista de opciones.",
+  "headingText": "Los componentes _select fields_ son utilizados para recolectar información provista por el usuario de una lista de opciones.",
   "examples": {
     "light": {
-      "header": "Tema _Light_",
+      "heading": "Tema _Light_",
       "desc": "Un único _select_ estándar tiene una multitud de opciones de configuración."
     },
     "icons": {
-      "header": "Íconos",
+      "heading": "Íconos",
       "desc": "Utiliza un ícono personalizado al principio o al final."
     },
     "multiple": {
-      "header": "Múltiple",
+      "heading": "Múltiple",
       "desc": "Un multi-select puede utilizar `v-chip` para mostrar los elementos seleccionados."
     },
     "custom-text-and-value": {
-      "header": "Texto y valor del elemento personalizado",
+      "heading": "Texto y valor del elemento personalizado",
       "desc": "Puedes especificar las propiedades dentro de tu arreglo de elementos que correspondan a los campos texto y valor (_text_ y _value_). En este ejemplo también usamos la prop `return-object` que retornará el objeto entero del elemento seleccionado."
     },
     "disabled": {
-      "header": "Deshabilitado"
+      "heading": "Deshabilitado"
     }
   },
   "props": {

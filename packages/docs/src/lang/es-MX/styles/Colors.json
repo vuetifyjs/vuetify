@@ -1,6 +1,6 @@
 {
-  "header": "# Colores",
-  "headerText": "Desde el inicio tienes acceso a todos los colores en el [Material Design spec](https://material.io/guidelines/style/color.html) a través de **stylus** y **javascript**. Estos valores pueden ser utilizados dentro de tus hojas de estilo, tus archivos de componentes y los componentes prefabricados usando el sistema de **clases de colores**.",
+  "heading": "# Colores",
+  "headingText": "Desde el inicio tienes acceso a todos los colores en el [Material Design spec](https://material.io/guidelines/style/color.html) a través de **stylus** y **javascript**. Estos valores pueden ser utilizados dentro de tus hojas de estilo, tus archivos de componentes y los componentes prefabricados usando el sistema de **clases de colores**.",
   "classesHeader": "## Clases",
   "classesText2": "El color del texto también tiene soporte para variantes de **darken** y **lighten** si usas `text--{lighten|darken}-{n}`",
   "javascriptPackText": "Vuetify tiene un color pack de javascript que puedes importar y utilizar dentro de tu aplicación. Esto puede también ser usado para ayudarte a definir el tema de tu aplicación.",

@@ -1,15 +1,15 @@
 {
-  "header": "# Fil d'ariane",
+  "heading": "# Fil d'ariane",
   "examples": {
     "usage": {
       "desc": "Par défaut, le fil d'ariane utilise un séparateur de texte. Cela peut être n’importe quelle chaîne de caractère."
     },
     "icon-dividers": {
-      "header": "### Diviseurs d'icônes",
+      "heading": "### Diviseurs d'icônes",
       "desc": "Pour la variante d’icône, le fil d'ariane peut utiliser n’importe quelle icône du thème Material Design."
     },
     "item-slot": {
-      "header": "### Emplacement de l'objet"
+      "heading": "### Emplacement de l'objet"
     }
   }
 }

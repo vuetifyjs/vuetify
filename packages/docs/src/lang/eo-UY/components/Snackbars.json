@@ -1,24 +1,24 @@
 {
-  "header": "crwdns39126:0crwdne39126:0",
-  "headerText": "crwdns42380:0crwdne42380:0",
+  "heading": "crwdns39126:0crwdne39126:0",
+  "headingText": "crwdns42380:0crwdne42380:0",
   "examples": {
     "usage": {
       "desc": "crwdns42382:0crwdne42382:0"
     },
     "multi-line": {
-      "header": "crwdns39130:0crwdne39130:0",
+      "heading": "crwdns39130:0crwdne39130:0",
       "desc": "crwdns39132:0crwdne39132:0"
     },
     "timeout": {
-      "header": "crwdns39134:0crwdne39134:0",
+      "heading": "crwdns39134:0crwdne39134:0",
       "desc": "crwdns39136:0crwdne39136:0"
     },
     "vertical": {
-      "header": "crwdns39138:0crwdne39138:0",
+      "heading": "crwdns39138:0crwdne39138:0",
       "desc": "crwdns39140:0crwdne39140:0"
     },
     "contextual": {
-      "header": "crwdns39142:0crwdne39142:0",
+      "heading": "crwdns39142:0crwdne39142:0",
       "desc": "crwdns32816:0crwdne32816:0"
     }
   },

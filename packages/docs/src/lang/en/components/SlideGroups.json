@@ -1,32 +1,32 @@
 {
-  "header": "# Slide groups",
-  "headerText": "The `v-slide-group` component is used to display pseudo paginated information. It uses [v-item-group](/components/item-groups) at its core and provides a baseline for components such as [v-tabs](/components/tabs) and [v-chip-group](/components/chip-groups).",
+  "heading": "# Slide groups",
+  "headingText": "The `v-slide-group` component is used to display pseudo paginated information. It uses [v-item-group](/components/item-groups) at its core and provides a baseline for components such as [v-tabs](/components/tabs) and [v-chip-group](/components/chip-groups).",
   "examples": {
     "usage": {
       "desc": "Similar to the [v-window](/components/windows) component, `v-slide-group` lets items to take up as much space as needed, allowing the user to move horizontally through the provided information."
     },
     "carousel": {
-      "header": "### Pseudo Carousel",
+      "heading": "### Pseudo Carousel",
       "desc": "Customize the slide group to creatively display information on sheets. Using the selection, we can display auxillary information easily for the user."
     },
     "center-active": {
-      "header": "### Centered active item",
+      "heading": "### Centered active item",
       "desc": "Active item is always centered"
     },
     "custom-icons": {
-      "header": "### Custom icons",
+      "heading": "### Custom icons",
       "desc": "You can add your custom pagination icons instead of arrows"
     },
     "active-class": {
-      "header": "### Active class",
+      "heading": "### Active class",
       "desc": "Active class can be customized"
     },
     "multiple": {
-      "header": "### Multiple",
+      "heading": "### Multiple",
       "desc": "You can select multiple items"
     },
     "mandatory": {
-      "header": "### Mandatory",
+      "heading": "### Mandatory",
       "desc": "At least 1 item must be selected"
     }
   },

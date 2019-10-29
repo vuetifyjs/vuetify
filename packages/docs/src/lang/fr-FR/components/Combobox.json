@@ -1,8 +1,8 @@
 {
-  "header": "# Menu déroulant",
+  "heading": "# Menu déroulant",
   "examples": {
     "dense": {
-      "header": "### Dense"
+      "heading": "### Dense"
     }
   },
   "props": {

@@ -1,9 +1,9 @@
 {
-  "header": "滚动指令",
-  "headerText": "`v-scroll`指令允许您在窗口或者特定定义的元素滚动时提供回调。",
+  "heading": "滚动指令",
+  "headingText": "`v-scroll`指令允许您在窗口或者特定定义的元素滚动时提供回调。",
   "examples": {
     "options": {
-      "header": "滚动选项",
+      "heading": "滚动选项",
       "desc": "为了更好地调整方法，您可以给指定目标绑定滚动事件监听器。"
     }
   }

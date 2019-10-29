@@ -1,10 +1,10 @@
 {
   "examples": {
     "alignment": {
-      "header": "配置"
+      "heading": "配置"
     },
     "visibility": {
-      "header": "表示",
+      "heading": "表示",
       "desc": "`v-model`を使用してTooltipの表示をプログラム的制御できます。"
     }
   },

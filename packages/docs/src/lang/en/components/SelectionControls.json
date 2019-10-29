@@ -1,68 +1,68 @@
 {
-  "header": "# Selection controls",
-  "headerText": "Selection control components allow a user to select options. These components **must** be used with the `v-model` prop as they do not maintain their own state.",
+  "heading": "# Selection controls",
+  "headingText": "Selection control components allow a user to select options. These components **must** be used with the `v-model` prop as they do not maintain their own state.",
   "examples": {
     "usage": {
       "desc": ""
     },
     "checkboxes-boolean": {
-      "header": "### Checkboxes - Boolean",
+      "heading": "### Checkboxes - Boolean",
       "desc": ""
     },
     "checkboxes-array": {
-      "header": "### Checkboxes - Array",
+      "heading": "### Checkboxes - Array",
       "desc": ""
     },
     "checkboxes-states": {
-      "header": "### Checkboxes - States",
+      "heading": "### Checkboxes - States",
       "desc": ""
     },
     "checkboxes-colors": {
-      "header": "### Checkboxes - Colors",
+      "heading": "### Checkboxes - Colors",
       "desc": "Checkboxes can be colored by using any of the builtin colors and contextual names using the `color` prop."
     },
     "checkboxes-inline-textfield": {
-      "header": "### Checkboxes - Inline with a textfield",
+      "heading": "### Checkboxes - Inline with a textfield",
       "desc": ""
     },
     "radios-default": {
-      "header": "### Radios - Default",
+      "heading": "### Radios - Default",
       "desc": "Radio-groups are by default mandatory. This can be changed with the `mandatory` prop."
     },
     "radios-direction": {
-      "header": "### Radios - Direction",
+      "heading": "### Radios - Direction",
       "desc": "Radio-groups can be presented either as a row or a column, using their respective props. The default is as a column."
     },
     "radios-colors": {
-      "header": "### Radios - Colors",
+      "heading": "### Radios - Colors",
       "desc": "Radios can be colored by using any of the builtin colors and contextual names using the `color` prop."
     },
     "switches-boolean": {
-      "header": "### Switches - Boolean",
+      "heading": "### Switches - Boolean",
       "desc": ""
     },
     "switches-array": {
-      "header": "### Switches - Array",
+      "heading": "### Switches - Array",
       "desc": ""
     },
     "switches-states": {
-      "header": "### Switches - States",
+      "heading": "### Switches - States",
       "desc": ""
     },
     "switches-colors": {
-      "header": "### Switches - Colors",
+      "heading": "### Switches - Colors",
       "desc": "Switches can be colored by using any of the builtin colors and contextual names using the `color` prop."
     },
     "switches-flat": {
-      "header": "### Switches - Flat",
+      "heading": "### Switches - Flat",
       "desc": "You can make switch render without elevation of thumb using `flat` property."
     },
     "switches-inset": {
-      "header": "### Switches - inset",
+      "heading": "### Switches - inset",
       "desc": "You can make switch render in inset mode."
     },
     "label-slot": {
-      "header": "### Label slot",
+      "heading": "### Label slot",
       "desc": "Selection controls' labels can be defined in `label` slot - that will allow to use HTML content"
     }
   },

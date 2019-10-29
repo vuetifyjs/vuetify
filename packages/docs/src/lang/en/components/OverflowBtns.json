@@ -1,48 +1,48 @@
 {
-  "header": "# Overflow buttons",
-  "headerText": "`v-overflow-btn` is used to give the user the ability to select items from the list. It has 3 variations: `editable`, `overflow` and `segmented`",
+  "heading": "# Overflow buttons",
+  "headingText": "`v-overflow-btn` is used to give the user the ability to select items from the list. It has 3 variations: `editable`, `overflow` and `segmented`",
   "examples": {
     "usage": {
       "desc": "`v-overflow-btn` is used for creating selection lists"
     },
     "counter": {
-      "header": "### Counter",
+      "heading": "### Counter",
       "desc": "You can add a counter to `v-overflow-btn` to control the max char count"
     },
     "disabled": {
-      "header": "### Disabled",
+      "heading": "### Disabled",
       "desc": "`v-overflow-btn` can be disabled in order to prevent a user from interacting with it"
     },
     "editable": {
-      "header": "### Editable",
+      "heading": "### Editable",
       "desc": "`editable` `v-overflow-btn` can be directly edited, just as `v-text-field`"
     },
     "filled": {
-      "header": "### Filled",
+      "heading": "### Filled",
       "desc": "Text fields can be used with an alternative box design. Append and prepend icon props are **not** supported in this mode."
     },
     "hint": {
-      "header": "### Hint",
+      "heading": "### Hint",
       "desc": "You can add a hint for the user using the `hint` property"
     },
     "loading": {
-      "header": "### Loading",
+      "heading": "### Loading",
       "desc": "`v-overflow-btn` can have `loading` state with a linear progress bar under them"
     },
     "menu-props": {
-      "header": "### Menu props",
+      "heading": "### Menu props",
       "desc": "You can set underlying `v-menu` props using `menu-props` property"
     },
     "readonly": {
-      "header": "### Read-only",
+      "heading": "### Read-only",
       "desc": "`v-overflow-btn` can be put into `readonly` mode, it'll become inactive but won't change the color"
     },
     "segmented": {
-      "header": "### Segmented",
+      "heading": "### Segmented",
       "desc": "`segmented` `v-overflow-btn` has and additional divider between the content and the icon"
     },
     "dense": {
-      "header": "### Dense",
+      "heading": "### Dense",
       "desc": "You can use `dense` prop to reduce overflow button height and lower max height of list items."
     }
   },

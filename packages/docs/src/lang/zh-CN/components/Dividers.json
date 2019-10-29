@@ -1,11 +1,11 @@
 {
   "examples": {
     "inset": {
-      "header": "插页分隔线",
+      "heading": "插页分隔线",
       "desc": "插页隔线向右移动72px，这将使他们将列表项分隔。"
     },
     "divider-list-portrait": {
-      "header": "Divivders in Portrait View"
+      "heading": "Divivders in Portrait View"
     }
   },
   "props": {

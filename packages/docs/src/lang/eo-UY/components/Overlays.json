@@ -1,28 +1,28 @@
 {
-  "header": "crwdns40256:0crwdne40256:0",
-  "headerText": "crwdns40258:0crwdne40258:0",
+  "heading": "crwdns40256:0crwdne40256:0",
+  "headingText": "crwdns40258:0crwdne40258:0",
   "examples": {
     "usage": {
       "desc": "crwdns40260:0crwdne40260:0"
     },
     "absolute": {
-      "header": "crwdns40262:0crwdne40262:0",
+      "heading": "crwdns40262:0crwdne40262:0",
       "desc": "crwdns40264:0crwdne40264:0"
     },
     "opacity": {
-      "header": "crwdns40266:0crwdne40266:0",
+      "heading": "crwdns40266:0crwdne40266:0",
       "desc": "crwdns40268:0crwdne40268:0"
     },
     "z-index": {
-      "header": "crwdns40270:0crwdne40270:0",
+      "heading": "crwdns40270:0crwdne40270:0",
       "desc": "crwdns40272:0crwdne40272:0"
     },
     "loader": {
-      "header": "crwdns40274:0crwdne40274:0",
+      "heading": "crwdns40274:0crwdne40274:0",
       "desc": "crwdns40276:0crwdne40276:0"
     },
     "advanced": {
-      "header": "crwdns40278:0crwdne40278:0",
+      "heading": "crwdns40278:0crwdne40278:0",
       "desc": "crwdns40280:0[v-hover]crwdne40280:0"
     }
   },

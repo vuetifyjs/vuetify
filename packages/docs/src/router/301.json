@@ -71,5 +71,13 @@
   "/customizing/breakpoints": "/customization/breakpoints",
   "/customizing/theme": "/customization/theme",
   "/customizing/icons": "/customization/icons",
-  "/customizing/i18n": "/customization/internationalization"
+  "/customizing/i18n": "/customization/internationalization",
+  "/getting-started/why-vuetify": "/introduction/why-vuetify",
+  "/getting-started/frequently-asked-questions": "/introduction/frequently-asked-questions",
+  "/getting-started/meet-the-team": "/introduction/meet-the-team",
+  "/getting-started/sponsors-and-backers": "/introduction/sponsors-and-backers",
+  "/getting-started/roadmap": "/introduction/roadmap",
+  "/getting-started/long-term-support": "/introduction/long-term-support",
+  "/getting-started/consulting-and-support": "/professional-support/consulting",
+  "/getting-started/support/enterprise": "/professional-support/enterprise"
 }

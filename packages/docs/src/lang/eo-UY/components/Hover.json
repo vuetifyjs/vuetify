@@ -1,24 +1,24 @@
 {
-  "header": "crwdns34856:0crwdne34856:0",
-  "headerText": "crwdns34858:0crwdne34858:0",
+  "heading": "crwdns34856:0crwdne34856:0",
+  "headingText": "crwdns34858:0crwdne34858:0",
   "examples": {
     "usage": {
       "desc": "crwdns41044:0{ wrapper }crwdne41044:0"
     },
     "disabled": {
-      "header": "crwdns41046:0crwdne41046:0",
+      "heading": "crwdns41046:0crwdne41046:0",
       "desc": "crwdns41048:0crwdne41048:0"
     },
     "open-and-close-delay": {
-      "header": "crwdns41050:0crwdne41050:0",
+      "heading": "crwdns41050:0crwdne41050:0",
       "desc": "crwdns41052:0crwdne41052:0"
     },
     "hover-list": {
-      "header": "crwdns41054:0crwdne41054:0",
+      "heading": "crwdns41054:0crwdne41054:0",
       "desc": "crwdns41056:0crwdne41056:0"
     },
     "transition": {
-      "header": "crwdns41058:0crwdne41058:0",
+      "heading": "crwdns41058:0crwdne41058:0",
       "desc": "crwdns41060:0crwdne41060:0"
     }
   },

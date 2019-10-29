@@ -1,6 +1,6 @@
 {
-  "header": "# Bidirectionalité (RTL)",
-  "headerText": "Vuetify supporte les langues RTL **(de droite à gauche)** et peut être activé en utilisant l'option **rtl** lors du bootstrapping de votre application. Vous pouvez trouver des informations supplémentaires sur comment [implémenter la bidrectionalité](https://material.io/design/usability/bidirectionality.html) sur le site de la spécification.",
+  "heading": "# Bidirectionalité (RTL)",
+  "headingText": "Vuetify supporte les langues RTL **(de droite à gauche)** et peut être activé en utilisant l'option **rtl** lors du bootstrapping de votre application. Vous pouvez trouver des informations supplémentaires sur comment [implémenter la bidrectionalité](https://material.io/design/usability/bidirectionality.html) sur le site de la spécification.",
   "bidText1": "Formulaire RTL",
   "bidText2": "Vous pouvez également modifier cette option dynamiquement à n'importe quel moment en modifiant la valeur **rtl** sur l'objet vuetify."
 }

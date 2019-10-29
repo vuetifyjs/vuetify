@@ -1,43 +1,43 @@
 {
-  "header": "# 按钮",
-  "headerText": "`v-btn`组件用一个material design主题和多个选项来替换标准的html按钮。任何色彩辅助类都可以用来改变背景或文字的颜色。",
+  "heading": "# 按钮",
+  "headingText": "`v-btn`组件用一个material design主题和多个选项来替换标准的html按钮。任何色彩辅助类都可以用来改变背景或文字的颜色。",
   "examples": {
     "flat": {
-      "header": "扁平",
+      "heading": "扁平",
       "desc": "扁平按钮没有巷子箱子阴影，也没有背景。只有鼠标悬浮时才显示按钮的容器。"
     },
     "raised": {
-      "header": "凸起",
+      "heading": "凸起",
       "desc": "凸起的按钮有一个会在在点击时加重的框阴影，这是默认的样式。"
     },
     "depressed": {
-      "header": "凹陷",
+      "heading": "凹陷",
       "desc": "凹陷的按钮依然保持其背景色，但没有框阴影。"
     },
     "dropdown": {
-      "header": "按钮下拉菜单",
+      "heading": "按钮下拉菜单",
       "desc": "按钮下拉菜单是带有额外的样式的常规选择框。"
     },
     "icon": {
-      "header": "图标",
+      "heading": "图标",
       "desc": "图标可作为按钮的主要内容。"
     },
     "floating": {
-      "header": "浮动"
+      "heading": "浮动"
     },
     "loaders": {
-      "header": "加载器",
+      "heading": "加载器",
       "desc": "使用加载（loading）属性，你可以通知用户有正在进行的处理。默认行为是使用一个`v-progress-circular`组件，但可以对齐进行自定义。 "
     },
     "sizing": {
-      "header": "大小",
+      "heading": "大小",
       "desc": "按钮可以被设置不同的尺寸选项以适应多种方案。"
     },
     "outlined": {
-      "header": "### 轮廓"
+      "heading": "### 轮廓"
     },
     "block": {
-      "header": "块状",
+      "heading": "块状",
       "desc": "块状按钮可以扩展全部可用宽度"
     }
   },

@@ -1,17 +1,17 @@
 {
-  "header": "# Tooltips",
-  "headerText": "The `v-tooltip` component is useful for conveying information when a user hovers over an element. You can also programmatically control the display of tooltips through a `v-model`. When activated, tooltips display a text label identifying an element, such as a description of its function.",
+  "heading": "# Tooltips",
+  "headingText": "The `v-tooltip` component is useful for conveying information when a user hovers over an element. You can also programmatically control the display of tooltips through a `v-model`. When activated, tooltips display a text label identifying an element, such as a description of its function.",
   "headerAlert1" : "In order for `v-tooltip` to be positioned correctly a position prop ( `top` | `bottom` | `left` | `right` ) is required",
   "examples": {
     "usage": {
       "desc": "Tooltips can wrap any element."
     },
     "alignment": {
-      "header": "### Alignment",
+      "heading": "### Alignment",
       "desc": "A tooltip can be aligned to any of the four sides of the activator element"
     },
     "visibility": {
-      "header": "### Visibility",
+      "heading": "### Visibility",
       "desc": "Tooltip visibility can be programmatically changed using `v-model`."
     }
   },

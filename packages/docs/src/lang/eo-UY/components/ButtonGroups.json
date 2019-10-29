@@ -1,28 +1,28 @@
 {
-  "header": "crwdns41012:0crwdne41012:0",
-  "headerText": "crwdns34816:0crwdne34816:0",
+  "heading": "crwdns41012:0crwdne41012:0",
+  "headingText": "crwdns34816:0crwdne34816:0",
   "examples": {
     "usage": {
       "desc": "crwdns34818:0crwdne34818:0"
     },
     "app-bar": {
-      "header": "crwdns41014:0crwdne41014:0",
+      "heading": "crwdns41014:0crwdne41014:0",
       "desc": "crwdns41016:0crwdne41016:0"
     },
     "qwerty": {
-      "header": "crwdns41018:0crwdne41018:0",
+      "heading": "crwdns41018:0crwdne41018:0",
       "desc": "crwdns41020:0crwdne41020:0"
     },
     "rounded": {
-      "header": "crwdns41022:0crwdne41022:0",
+      "heading": "crwdns41022:0crwdne41022:0",
       "desc": "crwdns42598:0crwdne42598:0"
     },
     "mandatory": {
-      "header": "crwdns41026:0crwdne41026:0",
+      "heading": "crwdns41026:0crwdne41026:0",
       "desc": "crwdns41028:0crwdne41028:0"
     },
     "multiple": {
-      "header": "crwdns41030:0crwdne41030:0",
+      "heading": "crwdns41030:0crwdne41030:0",
       "desc": "crwdns41032:0crwdne41032:0"
     }
   },

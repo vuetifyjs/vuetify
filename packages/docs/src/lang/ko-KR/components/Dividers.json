@@ -1,11 +1,11 @@
 {
   "examples": {
     "inset": {
-      "header": "삽입형 디바이더 (Inset dividers)",
+      "heading": "삽입형 디바이더 (Inset dividers)",
       "desc": "삽입형 디바이더(Inset dividers)는 오른똑으로 72px 치우쳐 있어서 리스트 아이템들과 잘 맞게됩니다."
     },
     "divider-list-portrait": {
-      "header": "새로보기에서의 디바이더",
+      "heading": "새로보기에서의 디바이더",
       "desc": "어떤 상황에도 적합한 커스텀 카드를 만듭니다."
     }
   },

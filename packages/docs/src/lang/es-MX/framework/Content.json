@@ -1,6 +1,6 @@
 {
-  "header": "# Contenido",
-  "headerText": "Vuetify tiene personalización de estilos para múltiples elementos estándar.",
+  "heading": "# Contenido",
+  "headingText": "Vuetify tiene personalización de estilos para múltiples elementos estándar.",
   "blockquoteHeader": "## Citas",
   "paragraphsHeader": "## Párrafos",
   "codeHeader": "## Código",

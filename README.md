@@ -56,7 +56,7 @@
     <a href="https://paypal.me/vuetify">Make a one-time payment with Paypal</a>
   </li>
   <li>
-    <a href="https://vuetifyjs.com/getting-started/consulting-and-support?ref=github">Book time with John</a>
+    <a href="https://vuetifyjs.com/professional-support/consulting?ref=github">Book time with John</a>
   </li>
 </ul>
 
@@ -156,7 +156,7 @@
 
 Vuetify is a Material Design Component Framework for the Vue framework. We believe that you shouldn't need design skills to build beautiful Vue applications. Vuetify takes the pain out of development by providing everything you need:
 
-- Over 100 beautiful hand crafted Material Components
+- Over 80 beautiful hand crafted Material Components
 - Powerful and unique directives for customizing user experiences
 - WCAG accessibility (a11y) and Section 508 compliant
 - Full RTL support

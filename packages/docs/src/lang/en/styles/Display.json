@@ -1,6 +1,6 @@
 {
-  "header": "# Display",
-  "headerText": "The display helpers allow you to control the display of content. This includes being conditionally visible based upon the current viewport, or the actual element display type.",
+  "heading": "# Display",
+  "headingText": "The display helpers allow you to control the display of content. This includes being conditionally visible based upon the current viewport, or the actual element display type.",
   "displayHeader": "## Display",
   "displayText": "Specify the elements `display` property. These classes can be applied to all breakpoints, from `xs` to `xl` and have no specified breakpoint.",
   "displayFormats": [

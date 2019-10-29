@@ -1,6 +1,6 @@
 {
-  "header": "Inicio rápido",
-  "headerText": "Usa uno de los paquetes de Vue CLI de Vuetify _(basados en los ejemplos oficiales)_ para iniciar con tu proyecto en un instante. Vuetify tiene soporte para **SSR** (server-side rendering), **SPA** (single page application), **PWA** (progressive web application) y páginas estándar de **HTML** ",
+  "heading": "Inicio rápido",
+  "headingText": "Usa uno de los paquetes de Vue CLI de Vuetify _(basados en los ejemplos oficiales)_ para iniciar con tu proyecto en un instante. Vuetify tiene soporte para **SSR** (server-side rendering), **SPA** (single page application), **PWA** (progressive web application) y páginas estándar de **HTML** ",
   "vueCliText4": "Una vez que la cli ha sido instalado, puedes generar un nuevo scaffold de proyecto. Selecciona la _instalaión default_ a menos que tengas paquetes específicos que necesites incluír (p.ej. _vuex_ or _vue-router_). Esto creará un nuevo proyecto de Vue que está listo con tus opciones seleccionadas.",
   "vueCliText5": "Ahora que ya tienes un proyecto instanciado, puedes agregar el **[paquete de Vuetify](https://github.com/vuetifyjs/vue-cli-plugin-vuetify)** usando la cli.",
   "vueCliText7": "Después de la instalación, puedes correr el script `dev` que se encuentra en el archivo `package.json`. Esto iniciará un servidor de desarrollo local en **https://localhost:8080**.",

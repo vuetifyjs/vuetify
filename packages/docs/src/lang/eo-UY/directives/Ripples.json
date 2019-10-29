@@ -1,23 +1,23 @@
 {
-  "header": "crwdns30224:0crwdne30224:0",
-  "headerText": "crwdns30226:0crwdne30226:0",
+  "heading": "crwdns30224:0crwdne30224:0",
+  "headingText": "crwdns30226:0crwdne30226:0",
   "examples": {
     "usage": {
       "desc": "crwdns30228:0crwdne30228:0",
       "uninverted": true
     },
     "custom-color": {
-      "header": "crwdns36938:0crwdne36938:0",
+      "heading": "crwdns36938:0crwdne36938:0",
       "desc": "crwdns36940:0crwdne36940:0",
       "uninverted": true
     },
     "center": {
-      "header": "crwdns30238:0crwdne30238:0",
+      "heading": "crwdns30238:0crwdne30238:0",
       "desc": "crwdns30240:0crwdne30240:0",
       "uninverted": true
     },
     "ripple-in-components": {
-      "header": "crwdns36944:0crwdne36944:0",
+      "heading": "crwdns36944:0crwdne36944:0",
       "desc": "crwdns36946:0crwdne36946:0",
       "uninverted": true
     }

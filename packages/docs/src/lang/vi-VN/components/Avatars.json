@@ -1,19 +1,19 @@
 {
-  "headerText": "Component `v-avatar` thường được sử đụng để hiển thị ảnh cá nhân của người dùng. Component này cho phép bạn thay đổi linh động kích cỡ, và viền bo tròn vào hình ảnh, icon và văn bản. Một biến thể **tile** sẽ cho phép bạn hiển thị một avatar vuông không bo tròn.",
+  "headingText": "Component `v-avatar` thường được sử đụng để hiển thị ảnh cá nhân của người dùng. Component này cho phép bạn thay đổi linh động kích cỡ, và viền bo tròn vào hình ảnh, icon và văn bản. Một biến thể **tile** sẽ cho phép bạn hiển thị một avatar vuông không bo tròn.",
   "examples": {
     "size": {
-      "header": "### Size",
+      "heading": "### Size",
       "desc": "Thuộc tính `size` cho phép bạn xác định chiều dài và rộng của `v-avatar`. Thuộc tính này chia đều tỉ lệ 1: 1. Thuộc tính này sẽ bị ghi đè bởi thuộc tính `height` và`width`."
     },
     "tile": {
       "desc": "Thuộc tính `tile` sẽ bỏ bo tròn khỏi v-avatar và bạn sẽ có một hình đại diện hình vuông."
     },
     "default": {
-      "header": "### Slot mặc định",
+      "heading": "### Slot mặc định",
       "desc": "Slot `v-avatar` mặc định chấp nhận một `v-icon` component, một ảnh, hoặc một văn bản. Kết hợp và pha trộn với các thuộc tính để tạo nên một giao diện độc đáo."
     },
     "profile": {
-      "header": "### Thẻ cá nhân"
+      "heading": "### Thẻ cá nhân"
     },
     "advanced": {
       "desc": "Kết hợp một avatar với các component khác cho phép bạn xây dựng một giao diện tuyệt vời."

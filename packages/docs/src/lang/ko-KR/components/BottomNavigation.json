@@ -1,15 +1,15 @@
 {
-  "header": "바닥 내비게이션 (Bottom nav)",
-  "headerText": "`v-bottom-navigation` 사이드바(sidebar)의 대용품입니다. 주로 모바일 장치에 사용하면 두가지 변형 \"아이콘과 텍스트\", shift가 있습니다.",
+  "heading": "바닥 내비게이션 (Bottom nav)",
+  "headingText": "`v-bottom-navigation` 사이드바(sidebar)의 대용품입니다. 주로 모바일 장치에 사용하면 두가지 변형 \"아이콘과 텍스트\", shift가 있습니다.",
   "examples": {
     "color": {
-      "header": "색상 Color"
+      "heading": "색상 Color"
     },
     "grow": {
-      "header": "Grow"
+      "heading": "Grow"
     },
     "toggle": {
-      "header": "토글 (Toggle)"
+      "heading": "토글 (Toggle)"
     }
   }
 }

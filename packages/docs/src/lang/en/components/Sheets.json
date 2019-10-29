@@ -1,20 +1,20 @@
 {
-  "header": "# Sheets",
-  "headerText": "The `v-sheet` is designed to power other **paper** components within Vuetify. It is meant to be used as a low level component.",
+  "heading": "# Sheets",
+  "headingText": "The `v-sheet` is designed to power other **paper** components within Vuetify. It is meant to be used as a low level component.",
   "examples": {
     "usage": {
       "desc": "The `v-sheet` component is a malleable piece of paper that can be morphed to facilitate other components."
     },
     "elevation": {
-      "header": "### Using elevation",
+      "heading": "### Using elevation",
       "desc": "Sheets can accept a custom elevation between **0 and 24** (0 is default)."
     },
     "tile": {
-      "header": "### Tile",
+      "heading": "### Tile",
       "desc": "Sheets can accept a `tile` property which makes them rectangular (no `border-radius`)."
     },
     "colors-sizes": {
-      "header": "### Colors & sizes",
+      "heading": "### Colors & sizes",
       "desc": "Sheets and components based on then can have different sizes and colors."
     }
   },

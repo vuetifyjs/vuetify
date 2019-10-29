@@ -1,6 +1,6 @@
 {
-  "header": "crwdns43028:0crwdne43028:0",
-  "headerText": "crwdns43030:0crwdne43030:0",
+  "heading": "crwdns43028:0crwdne43028:0",
+  "headingText": "crwdns43030:0crwdne43030:0",
   "lazyAlert": "crwdns43032:0[v-intersect]crwdnd43032:0[Polyfill]crwdne43032:0",
   "examples": {
     "usage": {

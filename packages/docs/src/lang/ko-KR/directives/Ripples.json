@@ -1,9 +1,9 @@
 {
-  "header": "리플 디렉티브 (Ripple directive)",
-  "headerText": "`v-ripple` 디렉티브는 사용자의 액션을 보여주는데 사용됩니다. 이 디렉티브는 어떤 블록 레벨 요소에든 적용될 수 있습니다. 다양한 컴포넌트들이 리플 디렉트브와 함께 사용될 수 있습니다. 예르 들어 `v-btn`, `v-tabs-item` 등과 더 많은 다양한 내장 컴포넌트들이 있습니다.",
+  "heading": "리플 디렉티브 (Ripple directive)",
+  "headingText": "`v-ripple` 디렉티브는 사용자의 액션을 보여주는데 사용됩니다. 이 디렉티브는 어떤 블록 레벨 요소에든 적용될 수 있습니다. 다양한 컴포넌트들이 리플 디렉트브와 함께 사용될 수 있습니다. 예르 들어 `v-btn`, `v-tabs-item` 등과 더 많은 다양한 내장 컴포넌트들이 있습니다.",
   "examples": {
     "custom-color": {
-      "header": "커스텀 색상 (Custom color)",
+      "heading": "커스텀 색상 (Custom color)",
       "desc": "헬퍼 클래스를 사용하여 리플의 색을 바꿀 수 있습니다."
     }
   },

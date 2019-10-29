@@ -1,65 +1,65 @@
 {
-  "header": "crwdns40188:0crwdne40188:0",
-  "headerText": "crwdns33802:0crwdne33802:0",
+  "heading": "crwdns40188:0crwdne40188:0",
+  "headingText": "crwdns33802:0crwdne33802:0",
   "alert": "crwdns40190:0crwdne40190:0",
   "examples": {
     "usage": {
       "desc": "crwdns40192:0[v-item-group]crwdne40192:0"
     },
     "fixed-tabs": {
-      "header": "crwdns40194:0crwdne40194:0",
+      "heading": "crwdns40194:0crwdne40194:0",
       "desc": "crwdns40196:0crwdne40196:0"
     },
     "right": {
-      "header": "crwdns33810:0crwdne33810:0",
+      "heading": "crwdns33810:0crwdne33810:0",
       "desc": "crwdns40198:0crwdne40198:0"
     },
     "content": {
-      "header": "crwdns33814:0crwdne33814:0",
+      "heading": "crwdns33814:0crwdne33814:0",
       "desc": "crwdns40200:0crwdne40200:0"
     },
     "dynamic-height": {
-      "header": "crwdns40202:0crwdne40202:0",
+      "heading": "crwdns40202:0crwdne40202:0",
       "desc": "crwdns40204:0crwdne40204:0"
     },
     "icons-and-text": {
-      "header": "crwdns40206:0crwdne40206:0",
+      "heading": "crwdns40206:0crwdne40206:0",
       "desc": "crwdns40208:0crwdne40208:0"
     },
     "desktop": {
-      "header": "crwdns33826:0crwdne33826:0",
+      "heading": "crwdns33826:0crwdne33826:0",
       "desc": "crwdns40210:0crwdne40210:0"
     },
     "align-with-title": {
-      "header": "crwdns40212:0crwdne40212:0",
+      "heading": "crwdns40212:0crwdne40212:0",
       "desc": "crwdns40214:0crwdne40214:0"
     },
     "grow": {
-      "header": "crwdns33834:0crwdne33834:0",
+      "heading": "crwdns33834:0crwdne33834:0",
       "desc": "crwdns40216:0crwdne40216:0"
     },
     "center-active": {
-      "header": "crwdns40218:0crwdne40218:0",
+      "heading": "crwdns40218:0crwdne40218:0",
       "desc": "crwdns40220:0crwdne40220:0"
     },
     "overflow-to-menu": {
-      "header": "crwdns40222:0crwdne40222:0",
+      "heading": "crwdns40222:0crwdne40222:0",
       "desc": "crwdns40224:0crwdne40224:0"
     },
     "pagination": {
-      "header": "crwdns33842:0crwdne33842:0",
+      "heading": "crwdns33842:0crwdne33842:0",
       "desc": "crwdns40226:0crwdne40226:0"
     },
     "icons": {
-      "header": "crwdns33846:0crwdne33846:0",
+      "heading": "crwdns33846:0crwdne33846:0",
       "desc": "crwdns33848:0crwdne33848:0"
     },
     "dynamic": {
-      "header": "crwdns40228:0crwdne40228:0",
+      "heading": "crwdns40228:0crwdne40228:0",
       "desc": "crwdns40230:0crwdne40230:0"
     },
     "vertical": {
-      "header": "crwdns40232:0crwdne40232:0",
+      "heading": "crwdns40232:0crwdne40232:0",
       "desc": "crwdns40234:0crwdne40234:0"
     }
   },

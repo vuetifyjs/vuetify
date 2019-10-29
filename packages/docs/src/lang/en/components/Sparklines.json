@@ -1,28 +1,28 @@
 {
-  "header": "# Sparklines",
-  "headerText": "The sparkline component can be used to create simple graphs, like GitHub's contribution chart.\n\nAny [SVG attribute](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute) may be used in addition to the ones listed below.",
+  "heading": "# Sparklines",
+  "headingText": "The sparkline component can be used to create simple graphs, like GitHub's contribution chart.\n\nAny [SVG attribute](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute) may be used in addition to the ones listed below.",
   "examples": {
     "usage": {
       "desc": "A sparkline is a tiny chart that provides a visual representation of data."
     },
     "playground": {
-      "header": "",
+      "heading": "",
       "desc": "The sparkline component comes in 2 variations, **trend**(default) and **bar**. Each support a multitude of options for customizing the look and feel of the sparkline."
     },
     "heart-rate": {
-      "header": "### Take a break",
+      "heading": "### Take a break",
       "desc": "For concise information, a complete chart might be overkill. Using a trend line with gradient provides enough detail for the user without showing too much information."
     },
     "dashboard-card": {
-      "header": "### Dashboard card",
+      "heading": "### Dashboard card",
       "desc": "The `v-sparkline` component pairs nicely with `v-card` and `v-sheet` to create customized information cards, perfect for admin dashboards. Here we use custom labels to provide additional context for the sparkline."
     },
     "sales-card": {
-      "header": "### Custom labels",
+      "heading": "### Custom labels",
       "desc": "By providing a **label** slot, we are able to modify the displayed content adding a dollar sign ($). This slot is **_exclusively_** for text content. For more information on the svg `<text>` element, [navigate here](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text)."
     },
     "fill": {
-      "header": "### Fill",
+      "heading": "### Fill",
       "desc": "You can create a `v-sparkline` with fill using the `fill` property."
     }
   },

@@ -1,16 +1,16 @@
 {
-  "headerText": "`v-navigation-drawer`组件是用户将用来浏览应用程序的内容，导航抽屉被预先配置为可以使用或不使用**vue-router**。",
+  "headingText": "`v-navigation-drawer`组件是用户将用来浏览应用程序的内容，导航抽屉被预先配置为可以使用或不使用**vue-router**。",
   "examples": {
     "permanent-floating": {
-      "header": "永久浮动抽屉",
+      "heading": "永久浮动抽屉",
       "desc": "导航抽屉可以放置在卡片内并浮在内容背景上。"
     },
     "mini": {
-      "header": "迷你",
+      "heading": "迷你",
       "desc": "导航抽屉也有一个小型变体，可以使用`mini-variant.sync`来控制。"
     },
     "temporary": {
-      "header": "临时的",
+      "heading": "临时的",
       "desc": "临时抽屉位于其应用之上，并使用稀松布（叠加）来使背景变暗。这个抽屉的行为是模仿在移动设备时的持续抽屉。点击抽屉外部会导致关闭。"
     }
   },

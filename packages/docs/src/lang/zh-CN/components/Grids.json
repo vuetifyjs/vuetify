@@ -1,29 +1,29 @@
 {
-  "header": "栅格系统",
+  "heading": "栅格系统",
   "examples": {
     "row-column-breakpoint": {
-      "header": "行和列断点"
+      "heading": "行和列断点"
     },
     "order": {
       "desc": "您可以控制栅格子项目的排序。与偏移一样，您可以为不同的尺寸设置不同的排序，设计适合任何应用程序的专门的屏幕布局。"
     },
     "offset": {
-      "header": "偏移",
+      "heading": "偏移",
       "desc": "偏移对于补偿可能还不可见的元素或控制内容的位置很有用。就像断点一样，您可以为仍和可用的大小设置偏移量，这使您可以根据需要精确调整应用程序布局。"
     },
     "nested-grid": {
-      "header": "嵌套栅格",
+      "heading": "嵌套栅格",
       "desc": "栅格可以被嵌套，类似于其它框架，以实现非常自定义的布局。"
     },
     "unique-layouts": {
-      "header": "独特的布局",
+      "heading": "独特的布局",
       "desc": "Vuetify栅格系统的强大和灵活性使您可以创建出色的用户界面。"
     },
     "spacer": {
       "desc": "当您想要填充可用空间或在两个组件之间留出空间时，`v-spacer`组件会很有用。"
     },
     "tags": {
-      "header": "Html标签",
+      "heading": "Html标签",
       "desc": "有的时候您会想要将一个布局项指定为特定的标签，比如一个`section`或者`li`元素。"
     }
   }

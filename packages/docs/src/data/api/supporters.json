@@ -3,7 +3,14 @@
     {
       "name": "QOMPLX",
       "href": "https://www.qomplx.com/",
-      "logo": "backers/QOMPLX.png"
+      "logo": "backers/QOMPLX.png",
+      "darkLogo": "backers/QOMPLX-dark.png"
+    },
+    {
+      "name": "Vueconf.US",
+      "href": "http://vueconf.us/",
+      "logo": "backers/vueconf_us.png",
+      "darkLogo": "backers/vueconf_us-dark.png"
     }
   ],
   "Diamond": [

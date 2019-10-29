@@ -1,6 +1,6 @@
 {
-  "header": "# Thèmes Premium & gratuits",
-  "headerText": "Vuetify offre des thèmes pré-faits **gratuits** et **premium** conçus pour vous lancer en un éclair. Des thèmes gratuits sont disponibles pour installer à travers Vue CLI 3 ou vous pouvez simplement télécharger la source.",
+  "heading": "# Thèmes Premium & gratuits",
+  "headingText": "Vuetify offre des thèmes pré-faits **gratuits** et **premium** conçus pour vous lancer en un éclair. Des thèmes gratuits sont disponibles pour installer à travers Vue CLI 3 ou vous pouvez simplement télécharger la source.",
   "buy": "Informations et démos",
   "free": "Gratuit",
   "live": "Aperçu en direct",

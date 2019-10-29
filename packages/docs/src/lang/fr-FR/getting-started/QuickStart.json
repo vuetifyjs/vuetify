@@ -1,6 +1,6 @@
 {
-  "header": "# Démarrage rapide",
-  "headerText": "Utilisez l'un des paquets Vuetify Vue CLI _(basé sur les exemples officiels)_ pour démarrer rapidement votre projet. Vuetify supporte **SSR** (rendu côté serveur), **SPA** (application web monopage) , **PWA** (application web progressive) ainsi que les pages **HTML** standard.",
+  "heading": "# Démarrage rapide",
+  "headingText": "Utilisez l'un des paquets Vuetify Vue CLI _(basé sur les exemples officiels)_ pour démarrer rapidement votre projet. Vuetify supporte **SSR** (rendu côté serveur), **SPA** (application web monopage) , **PWA** (application web progressive) ainsi que les pages **HTML** standard.",
   "vueCliHeader": "## Installation de Vue CLI-3",
   "vueCliText1": "Vue CLI 3 est l'outil cli de prochaine génération qui vous aidera à démarrer plus facilement que auparavant. Lorsque vous démarrez votre application avec Vue CLI 3, vous pourrez également obtenir les mises à jour officielles du webpack et les modifications de configuration, ainsi que les mises à jour de Vuetify sans un processus de mise à jour ardu.",
   "vueCliText2": "Pour plus d’informations sur la façon d’utiliser Vue-CLI-3, visitez la [documentation officielle](https://cli.vuejs.org/guide/)",

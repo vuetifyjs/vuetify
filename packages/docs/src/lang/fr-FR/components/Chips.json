@@ -4,10 +4,10 @@
       "uninverted": true
     },
     "outlined": {
-      "header": "### Contour"
+      "heading": "### Contour"
     },
     "closable": {
-      "header": "### Refermable",
+      "heading": "### Refermable",
       "uninverted": true
     },
     "in-selects": {

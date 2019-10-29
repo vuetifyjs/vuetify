@@ -1,5 +1,5 @@
 {
-  "headerText": "Component `v-card` là một component linh hoạt có thể sử dụng cho mọi trường hợp từ bảng nội dung đến hình ảnh. Component **card** có khá nhiều thành phần hỗ trợ cho việc thiết kế dễ dàng nhất có thể. Các component không có các danh sách tùy chỉnh sử dụng các chức năng tùy chỉnh của **Vue** component giúp cho việc hiển thị nhanh và xây dựng dễ dàng hơn.",
+  "headingText": "Component `v-card` là một component linh hoạt có thể sử dụng cho mọi trường hợp từ bảng nội dung đến hình ảnh. Component **card** có khá nhiều thành phần hỗ trợ cho việc thiết kế dễ dàng nhất có thể. Các component không có các danh sách tùy chỉnh sử dụng các chức năng tùy chỉnh của **Vue** component giúp cho việc hiển thị nhanh và xây dựng dễ dàng hơn.",
   "componentsHeader": "### Các component chức năng",
   "componentsList": [
     "`v-card-actions`: Tạo ra một không gian dành cho các **actions** của card, như [v-btn](/components/buttons) hoặc [v-menu](/components/menus). Đồng thời áp dụng _special margin_ để nút nút có khoảng cách dòng khác với các khu vực khác của card.",
@@ -11,11 +11,11 @@
       "desc": "Card có 3 component cơ bản, `v-card-title`, `v-card-text` and `v-card-actions`."
     },
     "horizontal": {
-      "header": "### Card dạng ngang",
+      "heading": "### Card dạng ngang",
       "desc": "Sử dụng `v-flex`, bạn có thể tạo card dạng ngang. Sử dụng thuộc tính `contain` để shrink `v-img` component vừa với hình ảnh, thay vì dùng covering."
     },
     "grids": {
-      "header": "### Dạng lưới"
+      "heading": "### Dạng lưới"
     }
   },
   "cardMediaWarning": "`v-card-media` không dùng được nữa, hãy sử dụng `v-img`.",

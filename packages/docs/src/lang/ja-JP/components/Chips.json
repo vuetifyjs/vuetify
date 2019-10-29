@@ -1,26 +1,26 @@
 {
-  "headerText": "`v-chip` コンポーネントは小さな情報の断片を伝えるために使用されます。`close` プロパティを使用すると、Chip はインタラクティブとなり、ユーザーの入力を受け付けられるようになります。",
+  "headingText": "`v-chip` コンポーネントは小さな情報の断片を伝えるために使用されます。`close` プロパティを使用すると、Chip はインタラクティブとなり、ユーザーの入力を受け付けられるようになります。",
   "examples": {
     "colored": {
-      "header": "色付き",
+      "heading": "色付き",
       "desc": "マテリアルデザインパレットのあらゆる色を使用して Chip に色を付けることができます。"
     },
     "icon": {
-      "header": "アイコン",
+      "heading": "アイコン",
       "desc": "Chip にはテキストのほか、Material Icons フォントに含まれるアイコンを使用することができます。"
     },
     "outlined": {
       "desc": "アウトライン Chip は指定されているテキストの色を元にボーダーカラーが適用されます。"
     },
     "label": {
-      "header": "ラベル",
+      "heading": "ラベル",
       "desc": "ラベル Chip は `v-card` の border-radius を使用します。"
     },
     "closable": {
-      "header": "### 閉じるボタン付きラベル"
+      "heading": "### 閉じるボタン付きラベル"
     },
     "in-selects": {
-      "header": "### Select との組み合わせ",
+      "heading": "### Select との組み合わせ",
       "desc": "Select では、選択された項目を表示するために Chip を使用することができます。"
     }
   },

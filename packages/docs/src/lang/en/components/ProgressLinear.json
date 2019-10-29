@@ -1,52 +1,52 @@
 {
-  "header": "# Progress linear",
-  "headerText": "The `v-progress-linear` component is used to convey data visually to users. They can also represent an indeterminate amount, such as loading or processing.",
+  "heading": "# Progress linear",
+  "headingText": "The `v-progress-linear` component is used to convey data visually to users. They can also represent an indeterminate amount, such as loading or processing.",
   "examples": {
     "usage": {
       "desc": "In its simplest form, `v-progress-linear` displays a horizontal progress bar. Use the `value` prop to control the progress."
     },
     "file-loader": {
-      "header": "### File loader",
+      "heading": "### File loader",
       "desc": "The `v-progress-linear` component is good for translating to the user that they are waiting for a response."
     },
     "linear-buffer": {
-      "header": "### Buffer",
+      "heading": "### Buffer",
       "desc": "A buffer state represents two values simultaneously. The primary value is controlled by `v-model`, whereas the buffer is controlled by the `buffer-value` prop."
     },
     "linear-custom-colors": {
-      "header": "### Custom colors",
+      "heading": "### Custom colors",
       "desc": "You can also set the color using the props `color` and `background-color`."
     },
     "linear-determinate": {
-      "header": "### Determinate",
+      "heading": "### Determinate",
       "desc": "The progress linear component can have a determinate state modified by `v-model`."
     },
     "linear-indeterminate": {
-      "header": "### Indeterminate",
+      "heading": "### Indeterminate",
       "desc": "Using the `indeterminate` prop, `v-progress-linear` continuously animates."
     },
     "linear-query-indeterminate-and-determinate": {
-      "header": "### Query Indeterminate and Determinate",
+      "heading": "### Query Indeterminate and Determinate",
       "desc": "The `query` state is controlled by the truthiness of indeterminate, while the `query` prop set to true."
     },
     "loader": {
-      "header": "### Toolbar loader",
+      "heading": "### Toolbar loader",
       "desc": "Using the `absolute` prop we are able to position the `v-progress-linear` component at the bottom of the `v-toolbar`. We also use the `active` prop which allows us to control the visibility of the progress."
     },
     "rounded": {
-      "header": "### Rounded",
+      "heading": "### Rounded",
       "desc": "The `rounded` prop is an alternative style that adds a border radius to the `v-progress-linear` component."
     },
     "stream": {
-      "header": "### Stream",
+      "heading": "### Stream",
       "desc": "The `stream` property works with `buffer-value` to convey to the user that there is some action taking place. You can use any combination of `buffer-value` and `value` to achieve your design."
     },
     "striped": {
-      "header": "### Striped",
+      "heading": "### Striped",
       "desc": "This applies a striped background over the value portion of the `v-progress-linear`."
     },
     "slot": {
-      "header": "### Slots",
+      "heading": "### Slots",
       "desc": "The `v-progress-linear` component will be responsive to user input when using `v-model`. You can use the default slot or bind a local model to display inside of the progress. If you are looking for advanced features on a linear type component, check out [v-slider](/components/sliders)."
     }
   },

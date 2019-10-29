@@ -1,6 +1,6 @@
 {
-  "header": "# App Bars",
-  "headerText": "`v-app-bar` コンポーネントは、サイトナビゲーションの主なソースであるため、グラフィカルユーザーインターフェイス（GUI）にとって極めて重要です。アプリバーコンポーネントは、[v-navigation-drawer](/components/navigation-drawers) と連携して、アプリケーションでサイトナビゲーションを提供します。",
+  "heading": "# App Bars",
+  "headingText": "`v-app-bar` コンポーネントは、サイトナビゲーションの主なソースであるため、グラフィカルユーザーインターフェイス（GUI）にとって極めて重要です。アプリバーコンポーネントは、[v-navigation-drawer](/components/navigation-drawers) と連携して、アプリケーションでサイトナビゲーションを提供します。",
   "examples": {
     "usage": {
       "desc": "`v-app-bar` コンポーネントは、アプリケーション全体のアクションと情報に対して使用します。"

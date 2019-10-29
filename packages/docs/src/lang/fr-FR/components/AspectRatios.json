@@ -1,6 +1,6 @@
 {
-  "header": "# Ratio d'affichage",
-  "headerText": "Le composant `v-responsive` peut être utilisé pour corriger n'importe quelle section à un ratio d'aspect spécifique",
+  "heading": "# Ratio d'affichage",
+  "headingText": "Le composant `v-responsive` peut être utilisé pour corriger n'importe quelle section à un ratio d'aspect spécifique",
   "examples": {
     "ratios": {
       "desc": "Spécifier un rapport d'affichage personnalisé"

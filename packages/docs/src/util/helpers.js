@@ -21,11 +21,11 @@ export function getComponent (type) {
     case 'checklist': return 'doc-checklist'
     case 'example': return 'doc-example'
     case 'examples': return 'doc-examples'
-    case 'heading': return 'doc-heading'
+    case 'heading': return 'base-heading'
     case 'img': return 'doc-img'
     case 'text': return 'doc-text'
     case 'markup': return 'doc-markup'
-    case 'markdown': return 'doc-markdown'
+    case 'markdown': return 'base-markdown'
     case 'parameters': return 'doc-parameters'
     case 'playground': return 'doc-playground'
     case 'section': return 'doc-section'
@@ -41,21 +41,24 @@ export function getComponent (type) {
 
 export function parseLink (match, text, link) {
   let attrs = ''
-  let linkClass = 'markdown--link'
+  let linkClass = 'v-markdown--link'
   let icon = ''
 
   // External link
-  if (link.indexOf('http') > -1) {
+  if (
+    link.indexOf('http') > -1 ||
+    link.indexOf('mailto') > -1
+  ) {
     attrs = `target="_blank" rel="noopener"`
     icon = 'open-in-new'
-    linkClass += ' markdown--external'
+    linkClass += ' v-markdown--external'
   // Same page internal link
   } else if (link.charAt(0) === '#') {
-    linkClass += ' markdown--same-internal'
+    linkClass += ' v-markdown--same-internal'
     icon = 'pound'
   // Different page internal link
   } else {
-    linkClass += ' markdown--internal'
+    linkClass += ' v-markdown--internal'
     icon = 'page-next'
   }
 

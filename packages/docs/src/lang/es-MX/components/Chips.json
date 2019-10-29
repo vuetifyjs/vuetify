@@ -1,26 +1,26 @@
 {
-  "headerText": "El componente `v-chip` se utiliza para transmitir pequeñas porciones de información. Al utilizar la prop `close`, el chip se vuelve interactivo, permitiendo que el usuario interactúe con él..",
+  "headingText": "El componente `v-chip` se utiliza para transmitir pequeñas porciones de información. Al utilizar la prop `close`, el chip se vuelve interactivo, permitiendo que el usuario interactúe con él..",
   "examples": {
     "colored": {
-      "header": "Coloreado",
+      "heading": "Coloreado",
       "desc": "Cualquier color de la paleta de Material Design puede ser utilizado para cambiar el color de un chip."
     },
     "icon": {
-      "header": "Ícono",
+      "heading": "Ícono",
       "desc": "Los chips pueden usar texto o cualquier ícono disponible en la librería de Material Icons.."
     },
     "outlined": {
       "desc": "El color de contorno de los chips se hereda del color de texto actual."
     },
     "label": {
-      "header": "Etiqueta",
+      "heading": "Etiqueta",
       "desc": "Las etiquetas de los chips utilizan el border-radius de `v-card`."
     },
     "closable": {
-      "header": "Cerrable"
+      "heading": "Cerrable"
     },
     "in-selects": {
-      "header": "Uso en selects",
+      "heading": "Uso en selects",
       "desc": "Los _selects_ pueden usar chips para mostrar selecciones de datos."
     }
   },

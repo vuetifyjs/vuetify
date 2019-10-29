@@ -1,5 +1,5 @@
 {
-  "headerText": "Vuetify はいくつかの基本的な要素に対してカスタムスタイルを適用します。",
+  "headingText": "Vuetify はいくつかの基本的な要素に対してカスタムスタイルを適用します。",
   "blockquoteHeader": "## 引用 (blockquote タグ)",
   "paragraphsHeader": "## 段落 (p タグ)",
   "codeHeader": "## コード (code タグ)",
