@@ -1,15 +1,32 @@
 {
-  "heading": "# Fil d'ariane",
+  "headerAlert1": "Par défaut `v-breadcrumbs` désactivera toutes les miettes jusqu'à la page courante dans un chemin imbriqué. Vous pouvez empêcher ce comportement en utilisant `exact: true` sur chaque fil d'accès applicable dans le tableau `items`.",
   "examples": {
     "usage": {
       "desc": "Par défaut, le fil d'ariane utilise un séparateur de texte. Cela peut être n’importe quelle chaîne de caractère."
     },
     "icon-dividers": {
-      "heading": "### Diviseurs d'icônes",
       "desc": "Pour la variante d’icône, le fil d'ariane peut utiliser n’importe quelle icône du thème Material Design."
     },
     "item-slot": {
-      "heading": "### Emplacement de l'objet"
+      "desc": "Vous pouvez utiliser l'emplacement `item` pour personnaliser chaque fil d'Ariane."
+    },
+    "large": {
+      "desc": "Les grandes chaînes d'engrenages ont une taille de police plus grande."
+    },
+    "divider": {
+      "desc": "Le séparateur de mbes d'arrêt peut être défini en utilisant la propriété `divider`."
     }
+  },
+  "props": {
+    "divider": "Spécifie le caractère de division entre les éléments.",
+    "icons": "Spécifie que les séparateurs entre les éléments sont [v-icon](/components/icons).",
+    "items": "Un tableau d'objets pour chaque fil d'fil d'fil d'attente.",
+    "justifyCenter": "Alignez le centre des breadcrumbs(chapelure).",
+    "justifyEnd": "Alignez les breadcrumbs à la fin.",
+    "large": "Augmentez la taille de la police du texte de l'élément de fil d'entier à 16px (14px par défaut)."
+  },
+  "slots": {
+    "divider": "L'emplacement utilisé pour les séparateurs.",
+    "item": "L'emplacement utilisé pour remplacer le comportement par défaut `v-breadcrumbs-item` lors de l'utilisation du prop **items** ."
   }
 }

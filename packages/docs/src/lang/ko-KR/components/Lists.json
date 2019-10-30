@@ -1,38 +1,22 @@
 {
-  "headingText": "`v-list` 컴포넌트는 정보를 표시하는데 사용됩니다. 이는 아바타, 컨텐츠, 액션, 서브헤더 그리고 많은 것을 포함합니다. 리스트는 자식들을 가질 수 있고 사이드바에서 사용될 수도 있습니다.",
   "examples": {
     "avatar-title-and-action": {
-      "heading": "아바타와 타이틀/액션 (Avatar with title and action)",
       "desc": "리스트는 더 명시적인 접근을 위해 슬롯을 가지고 있습니다. 만약 이 접근방식을 택한다면, 정확한 간격(spacing)을 위해 추가적인 props을 반드시 제공해야 한다는 점을 기억하세요. 예를 들어 아바타를 가진 타일(tile)의 경우 반드시 `avatar` 프로퍼티를 제공해야합니다."
     },
     "icon-two-lines-and-action": {
-      "heading": "두 줄 아이콘과 액션 (Icon with 2 lines and action)",
       "desc": "리스트는 서브헤더, 구분자 그리고 하나의 또는 여러 라인을 포함할 수 있습니다. The subtitle will overflow with ellipsis if it extends past one line."
     },
-    "avatar-three-lines": {
-      "heading": "세 줄 아바타 (Avatar with 3 lines)"
-    },
     "avatar-subheader-title-and-action": {
-      "heading": "아바타와 타이틀/액션 (Avatar with title and action)",
       "desc": "리스트 슬롯을 사용할 경우, 반드시 헤더를 포함할지를 혹은 아이템들이 아바타를 포함할 것인지를 정의해야합니다. 이는 적당한 간격 조정을 위해 필요합니다."
     },
     "subheadings-and-dividers": {
-      "heading": "서브헤더와 구분자 (Subheadings and dividers)",
       "desc": "리스트는 복수의 서브헤더와 구분자를 포함할 수 있습니다."
     },
     "card-list": {
-      "heading": "카드이미지와 툴바/리스트 (Card image with toolbar and list)",
       "desc": "리스트를 카드와 결합할 수 있습니다."
     },
     "title-subtitle-actions-and-action-text": {
-      "heading": "타이틀과 서브타이틀/액션/액션-텍스트 (Title with sub-title, actions and action-text)",
       "desc": "리스트는 액션안에 스택(stack)을 포함할 수 있습니다. A list can contain a stack within an action. Ripple and router props can be passed through the main v-list, to the v-list-item or as a property in the items array."
-    },
-    "action-title-and-subtitle": {
-      "heading": "액션과 타이틀/서브타이틀 (Action with title and sub-title)"
-    },
-    "expansion-lists": {
-      "heading": "확장 리스트 (Expansion Lists)"
     },
     "flat": {
       "heading": "플랫 (Flat)"

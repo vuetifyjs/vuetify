@@ -1,5 +1,4 @@
 {
-  "heading": "# 테마 (Theme)",
   "lightAndDarkHeader": "## 밝게, 어둡게 (Light and Dark)",
   "customizingHeader": "## 커스터마이징",
   "customizingText1": "기본적으로 표준 테마(standard theme)가 모든 컴포넌트에 적용됩니다.",

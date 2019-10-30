@@ -1,5 +1,6 @@
 {
   "props": {
+    "loading": "Affiche la barre de progression linéaire. Il peut s'agir d'une chaîne spécifiant la couleur appliquée à la barre de progression (toute couleur Material ou du thème – **primary**, **secondary**, **success**, **info**, ** warning **, **error**) ou un booléen qui utilise la **couleur** du composant (définie par la propriété color – s'il est pris en charge par le composant) ou la couleur primaire",
     "loaderHeight": "Spécifie la hauteur de l'espace de chargement"
   }
 }

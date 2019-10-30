@@ -8,6 +8,9 @@
     "title": "おっと、404のようです。",
     "description": "おっと、あなたが探しているものはここにはないようです。"
   },
+  "introduction/why-vuetify": {
+    "title": "Vuetifyを選ぶ理由"
+  },
   "getting-started/quick-start": {
     "title": "クイックスタート",
     "keywords": "quick start, vuetify templates, get started"
@@ -19,10 +22,6 @@
   "getting-started/unit-testing": {
     "title": "ユニットテスト",
     "description": "あなたのVueアプリケーション内でVuetifyコンポーネントとvue-test-utilsを使ってユニットテストを書く方法を学ぶ。"
-  },
-  "getting-started/why-vuetify": {
-    "title": "Vuetifyを選ぶ理由",
-    "description": "Vuetifyはとてもアクティブなコミュニティがあり、マテリアルデザインコンポーネントの簡単な使い方を提供しています。また、それは継続的にアップデートされます。"
   },
   "customization/theme": {
     "description": "Setup your custom application theme by changing a few variables."

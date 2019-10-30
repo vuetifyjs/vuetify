@@ -1,6 +1,4 @@
 {
-  "heading": "# Texte",
-  "headingText": "Contrôle l'alignement du texte, l'emballage, le débordement, les transformations et plus encore.",
   "alignmentHeader": "## Alignement du texte",
   "alignmentText1": "Les classes d'aide à l'alignement vous permettent de ré-aligner facilement le texte.",
   "alignmentText2": "Il existe également des classes d'alignement disponibles qui supportent les affichages réactifs.",

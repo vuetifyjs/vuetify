@@ -1,21 +1,6 @@
 {
-  "heading": "Inicio rápido",
-  "headingText": "Usa uno de los paquetes de Vue CLI de Vuetify _(basados en los ejemplos oficiales)_ para iniciar con tu proyecto en un instante. Vuetify tiene soporte para **SSR** (server-side rendering), **SPA** (single page application), **PWA** (progressive web application) y páginas estándar de **HTML** ",
-  "vueCliText4": "Una vez que la cli ha sido instalado, puedes generar un nuevo scaffold de proyecto. Selecciona la _instalaión default_ a menos que tengas paquetes específicos que necesites incluír (p.ej. _vuex_ or _vue-router_). Esto creará un nuevo proyecto de Vue que está listo con tus opciones seleccionadas.",
-  "vueCliText5": "Ahora que ya tienes un proyecto instanciado, puedes agregar el **[paquete de Vuetify](https://github.com/vuetifyjs/vue-cli-plugin-vuetify)** usando la cli.",
-  "vueCliText7": "Después de la instalación, puedes correr el script `dev` que se encuentra en el archivo `package.json`. Esto iniciará un servidor de desarrollo local en **https://localhost:8080**.",
-  "browserHeader": "Navegadores Soportados",
-  "browserText": "Vuetify es un framework progresivo que intenta llevar al desarrollo web al siguiente nivel. Para poder cumplir con esta tarea de la mejor forma, algunos sacrificios se han tenido que hacer en materia de soporte para versiones más antiguas de Internet Explorer. Esta no es una lista exhaustiva de navegadores compatibles, pero de los que más comunmente se les da soporte.",
-  "newHeader": "Aplicaciones nuevas",
-  "existingHeader": "Aplicaciones existentes",
-  "existingText1": "Para incluir Vuetify en un proyecto existente, debes instalar su _paquete de npm_. Puedes usar ya sea `npm`o `yarn` para llevarlo a cabo. Ambos son administradores de paquetes que te permitirán controlar qué recursos están disponibles para tu aplicación.",
-  "alert2": "*Advertencia*: Aunque Vuetify intenta no causar cualquier colisión de css tanto como sea posible, no hay ninguna garantía de que tus estilos personalizados no alterarán tu experiencia cuando integres este framework en tu proyecto existente.",
-  "ie11Header": "Soporte para IE11 y Safari 9",
-  "ie11Text2": "Se recomienda que uses `babel-preset-env` con el polyfill correspondiente para asegurar que sólo se agregan los polyfills necesarios a tu aplicación. Para mayor información acerca de `babel-present-env`, [visita la documentación](https://babeljs.io/docs/en/next/babel-preset-env.html)",
-  "ie11Text4": "Debido al soporte limitado de Internet Explorer para las etiquetas `<template>`, debes enviar elementos del DOM completamente compilados al navegador. Esto puede lograrse ya sea compilando tu código de Vue de antemano o creando componentes \"helper\" para reemplazar los elementos del DOM. Por ejemplo, si se envía lo siguiente directamente a IE, fallará: ",
-  "browserSupport": {
-    "supported": "Soportado",
-    "notSupported": "No soportado",
-    "polyfill": "Soportado con polyfill"
-  }
+  "uiImg1": "Instalar plugin de Vuetify",
+  "uiImg2": "Configura tu instalación de Vuetify",
+  "cdnHeader": "## Uso de una CDN",
+  "cdnText": "Para probar Vuetify.js sin instalar una plantilla desde Vue CLI, copia el siguiente código en tu `index.html`. Esto obtendrá la última versión de Vue y de Vuetify, permitiéndote empezar a jugar con los componentes. También puedes usar el [Vuetify starter](https://template.vuetifyjs.com) en codepen. Aunque no se recomienda hacerlo, si necesitas utilizar los paquetes de CDN en un entorno de _producción_ te sugerimos que definas las versiones para tus assets. Para más información sobre cómo hacer esto, ve al sitio web [jsdelivr](https://www.jsdelivr.com/)."
 }

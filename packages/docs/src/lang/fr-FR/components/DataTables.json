@@ -1,7 +1,22 @@
 {
   "examples": {
+    "slots": {
+      "heading": "### Champs",
+      "desc": "La table `v-data-table` fournit un grand nombre de emplacements pour personnaliser la table. Cet exemple présente quelques-uns de ces emplacements et ce que vous pouvez faire avec chacun. Il est important de noter un emplacement (par exemple : `item`/`body`/`header`) va complètement reprendre le rendu interne du composant qui vous demandera de réinstaller les fonctionnalités telles que la sélection et l'extension. Certains emplacements vont se substituer les uns aux autres comme : `body` > `item` > `item.<name>` et `header`/`header.<name>`."
+    },
     "dense": {
       "heading": "### Dense"
+    },
+    "server": {
+      "desc": "Si vous chargez des données déjà paginées et triées depuis un backend, vous pouvez utiliser la prop`server-items-length`. Définir cette prop désactivera le tri et la pagination intégrés, et vous devrez plutôt utiliser les événements disponibles (`update:page`, `update:sortBy`, `update:options`, etc) pour savoir quand demander de nouvelles pages depuis votre backend. Utilisez la prop `loading` pour afficher une barre de progression lors de la récupération des données."
+    },
+    "custom-filter": {
+      "desc": "Vous pouvez remplacer le filtrage par défaut utilisé avec la prop `search` en fournissant une fonction à la prop`custom-filter`. Si vous avez besoin de personnaliser le filtrage sur une colonne spécifique, vous pouvez fournir une fonction à la propriété `filter` sur les éléments d'en-tête. La signature est `(value: any, search: string | null, item: any) => boolean`. Cette fonction sera toujours exécutée même si la prop `search` n'a pas été fournie. Ainsi vous devez vous assurer avant de quitter de laisser une valeur de `true` si le filtre ne doit pas être appliqué."
+    }
+  },
+  "props": {
+    "v-edit-dialog": {
+      "transition": "Mixins.Transitionable.props.transition"
     }
   }
 }

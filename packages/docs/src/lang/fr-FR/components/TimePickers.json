@@ -1,7 +1,70 @@
 {
   "examples": {
+    "usage": {
+      "desc": "Les sélecteurs de temps ont le thème de lumière activé par défaut."
+    },
+    "colorable": {
+      "heading": "### Couleurs",
+      "desc": "Les couleurs du sélecteur d'heure peuvent être définies en utilisant les propriétés `color` et `header-color`. Si le prop`header-color` n`est pas fourni, l`en-tête utilisera la valeur de prop`color`."
+    },
+    "dialog-and-menu": {
+      "desc": "Grâce à la flexibilité des sélecteurs, vous pouvez vraiment composer dans l'expérience exactement comment vous le souhaitez."
+    },
+    "24h-format": {
+      "desc": "Un sélecteur de temps peut être changé au format 24hr. Notez que la prop`format` définit uniquement la façon dont le sélecteur est affiché, la valeur du sélecteur (modèle) est toujours en format 24hr."
+    },
+    "allowed-times": {
+      "desc": "Vous pouvez spécifier les temps autorisés en utilisant des tableaux, des objets et des fonctions. Vous pouvez également spécifier l'étape/précision/intervalle de temps - par exemple 10 minutes."
+    },
+    "width": {
+      "desc": "Vous pouvez spécifier la largeur du sélecteur ou la rendre pleine largeur."
+    },
+    "ampm-in-title": {
+      "desc": "Vous pouvez déplacer le changement AM/PM pour le titre du sélecteur."
+    },
+    "no-title": {
+      "desc": "Vous pouvez supprimer le titre du sélecteur."
+    },
+    "disabled": {
+      "heading": "### Désactivé",
+      "desc": "Vous ne pouvez pas interagir avec le sélecteur désactivé."
+    },
+    "readonly": {
+      "heading": "### Lecture seule",
+      "desc": "Le sélecteur en lecture seule se comporte comme désactivé, mais il semble que celui-ci soit par défaut."
+    },
+    "use-seconds": {
+      "desc": "Le sélecteur de temps peut avoir une entrée de secondes."
+    },
     "scrollable": {
-      "heading": "### Défilable"
+      "heading": "### Défilable",
+      "desc": "Vous pouvez modifier la valeur du sélecteur de temps en utilisant la roue de la souris."
+    },
+    "range": {
+      "desc": "Ceci est un exemple de rejoindre les ramasseurs ensemble en utilisant `min` et `max`."
     }
+  },
+  "props": {
+    "v-time-picker": {
+      "format": "Définit le format d'une heure affichée dans le sélecteur. Les options disponibles sont `ampm` et `24hr`.",
+      "allowedHours": "Limite le choix des heures",
+      "allowedMinutes": "Limite le choix des minutes",
+      "allowedSeconds": "Limite le choix des secondes",
+      "disabled": "désactive le sélecteur",
+      "scrollable": "Permet de changer l'heure/minute avec le scroll de la souris",
+      "min": "Temps minimum autorisé",
+      "max": "Temps maximum autorisé",
+      "readonly": "Mettre le sélecteur en état de lecture seule",
+      "useSeconds": "Active l'utilisation des secondes dans le sélecteur",
+      "value": "Modèle de chronométrage (format ISO 8601, 24 hh:mm)",
+      "width": "Largeur du sélecteur",
+      "ampmInTitle": "Placez le bouton AM/PM dans le titre, pas près de l'horloge."
+    }
+  },
+  "events": {
+    "click:hour": "Émis lorsque l'utilisateur sélectionne l'heure",
+    "click:minute": "Émis lorsque l'utilisateur sélectionne la minute",
+    "click:second": "Émis lorsque l'utilisateur sélectionne la seconde",
+    "change": "Émis lorsque la sélection de temps est effectuée (lorsque l'utilisateur change la minute pour le sélecteur HH:MM et le second pour le sélecteur HH:MM:SS"
   }
 }

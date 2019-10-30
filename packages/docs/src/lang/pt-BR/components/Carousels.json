@@ -1,16 +1,10 @@
 {
-  "headingText": "O componente `v-carousel` é usado para exibir diversos conteúdos visuais de forma rotativa com temporizador.",
   "examples": {
     "custom-transition": {
-      "heading": "Transição personalizada",
       "desc": "Você também pode aplicar sua própria transição personalizada."
     },
     "custom-icons": {
-      "heading": "Ícones personalizados",
       "desc": "Você também pode alterar o ícone do delimitador do carrossel e os ícones anterior/próximo."
-    },
-    "hide-controls": {
-      "heading": "Ocultar controles"
     }
   },
   "props": {

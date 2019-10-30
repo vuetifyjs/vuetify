@@ -1,5 +1,4 @@
 {
-  "headingText": "`v-treeview` コンポーネントは大量のネストされたデータを表示するのに便利です。",
   "examples": {
     "usage": {
       "desc": "基本的な使い方の例"

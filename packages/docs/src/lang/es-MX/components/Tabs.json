@@ -1,23 +1,15 @@
 {
-  "headingText": "El componente `v-tabs` se usa para esconder contenido detrás de un item seleccionable. También puede usarse como pseudo-navegación para una página, donde los tabs son links y los _tab-items_ son el contenido.",
   "examples": {
     "fixed-tabs": {
-      "heading": "Tabs fijos",
       "desc": "La prop **fixed-tabs** configura un mínimo de ancho más grande y aplica un nuevo máximo de ancho a los `v-tabs-items`. En pantallas de escritorio, los tab items serán centrados dentro del componente `v-tabs` y cambiarán para llenar el espacio disponible en móviles."
     },
     "content": {
-      "heading": "Contenido",
       "desc": "Los tabs no son la única cosa que puedes poner dentro del componente `v-tabs`. En este ejemplo hemos agregado también un toolbar."
     },
     "icons-and-text": {
-      "heading": "Íconos y texto",
       "desc": "Al utilizar la prop **icons-and-text** puedes agregar íconos a cada elemento _tab_."
     },
-    "desktop": {
-      "heading": "Tabs de escritorio"
-    },
     "align-with-title": {
-      "heading": "Alinear tabs con el título del toolbar",
       "desc": "Hace que los `v-tabs` se alineen con el componente `v-toolbar-title` (`v-app-bar-nav-icon` o `v-btn` deben utilizarse en un `v-toolbar`). Tal vez no funcione si el texto del tab se salta a la siguiente línea (_wrapped_)."
     },
     "grow": {
@@ -29,7 +21,6 @@
       "desc": "Puedes usar un menú para que contenga tabs adicionales, cambiándolos al vuelo"
     },
     "pagination": {
-      "heading": "Paginación",
       "desc": "Si los items de tabs sobrepasan a su contenedor (_overflow_), los controles de paginación aparecerán."
     },
     "icons": {

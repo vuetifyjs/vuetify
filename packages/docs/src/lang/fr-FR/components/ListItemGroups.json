@@ -1,1 +1,32 @@
-{}
+{
+  "examples": {
+    "usage": {
+      "desc": "Par défaut, le `v-list-item-group` fonctionne de la même manière que `v-item-group`. Si une **valeur** n'est pas fournie, le groupe fournira un défaut basé sur son index."
+    },
+    "selection-controls": {
+      "desc": "En utilisant l'emplacement par défaut, vous pouvez accéder à un état interne des éléments et le activer. Puisque la propriété **active** est une _boolean_, nous utilisons le prop **true-value** sur la case à cocher pour lier son état à l'élément `v-list`."
+    },
+    "flat": {
+      "desc": "Vous pouvez facilement désactiver la mise en surbrillance par défaut des éléments sélectionnés `v-list`s. Cela crée un profil inférieur pour les choix d'un utilisateur."
+    },
+    "multiple": {
+      "desc": "Vous pouvez sélectionner plusieurs éléments à la fois."
+    },
+    "mandatory": {
+      "heading": "### Obligatoire",
+      "desc": "Au moins un élément doit être sélectionné."
+    },
+    "active-class": {
+      "desc": "Vous pouvez définir une classe qui sera ajoutée lorsqu'un élément est sélectionné."
+    }
+  },
+  "api": {
+    "v-list-item": "Components.Lists",
+    "v-list-item-action": "Components.Lists",
+    "v-list-item-avatar": "Components.Lists",
+    "v-list-item-content": "Components.Lists",
+    "v-list-item-title": "Components.Lists",
+    "v-list-item-subtitle": "Components.Lists",
+    "v-list-item-action-text": "Components.Lists"
+  }
+}

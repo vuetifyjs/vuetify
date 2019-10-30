@@ -1,6 +1,4 @@
 {
-  "heading": "# 间距",
-  "headingText": "更新您的布局而无需创建新的类，间距辅助器对于修改元素的填充（padding）和边距（margin）都非常有用。",
   "playgroundHeader": "## 实战场",
   "propertyText": "占位符 _property_ 用来设置间距的类型：",
   "properties": [
@@ -13,5 +11,10 @@
     "7": "`y` - 同时对应`*-top`和`*-bottom`属性"
   },
   "horizontalHeader": "水平居中",
-  "horizontalText": "对于具有指定宽度的块元素，可以使用`.mx-auto`来使它的内容水平居中"
+  "horizontalText": "对于具有指定宽度的块元素，可以使用`.mx-auto`来使它的内容水平居中",
+  "examples": {
+    "horizontal": {
+      "heading": "### 水平布局"
+    }
+  }
 }

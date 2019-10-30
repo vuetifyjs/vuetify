@@ -1,8 +1,5 @@
 {
   "examples": {
-    "alignment": {
-      "heading": "对齐"
-    },
     "visibility": {
       "heading": "可见性",
       "desc": "Tooltip的可见性可以使用`v-model`以编程的方式改变。"

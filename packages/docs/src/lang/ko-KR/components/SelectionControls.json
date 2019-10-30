@@ -1,43 +1,18 @@
 {
-  "heading": "선택 컨트롤 (Selection controls)",
-  "headingText": "선택 컨트롤 컴포넌트는 사용자가 옵션을 선택할 수 있도록 합니다.Selection control components allow a user to select options. 이 컴포넌트들은 자신의 상태를 관리하지 않기 때문에 **반드시** `v-model` prop을 사용해야 합니다.",
   "examples": {
-    "checkboxes-boolean": {
-      "heading": "체크박스 - 불린 (Boolean)"
-    },
-    "checkboxes-array": {
-      "heading": "체크박스 - 배열"
-    },
-    "checkboxes-states": {
-      "heading": "체크박스 - 상태"
-    },
     "checkboxes-colors": {
-      "heading": "체크박스 - 색깔",
       "desc": "`color` prop를 이용하면 체크박스를 어떠한 내장 색(builtin colors) 이나 contextual 이름에 대응 하는 색으로 만들 수 있습니다."
     },
     "radios-default": {
-      "heading": "라디오 - 기본",
       "desc": "기본적으로는 라디오그룹이 반드시 필요합니다. 하지만 `mandatory` prop 을 사용해 바꿀 수 있습니다."
     },
     "radios-direction": {
-      "heading": "라디오 - 방향",
       "desc": "라디오그룹은 행이나 열로 나타낼 수 있습니다. 기본값은 열(column)입니다."
     },
     "radios-colors": {
-      "heading": "라디오 - 색깔",
       "desc": "`color` prop를 이용하면 라디오를 어떠한 내장 색(builtin colors) 이나 contextual 이름에 대응 하는 색으로 만들 수 있습니다."
     },
-    "switches-boolean": {
-      "heading": "스위치 - 불린"
-    },
-    "switches-array": {
-      "heading": "스위치 - 배열"
-    },
-    "switches-states": {
-      "heading": "스위치 - 상태"
-    },
     "switches-colors": {
-      "heading": "스위치 - 색깔",
       "desc": "`color` prop를 이용하면 스위치를 어떠한 내장 색(builtin colors) 이나 contextual 이름에 대응 하는 색으로 만들 수 있습니다."
     }
   },

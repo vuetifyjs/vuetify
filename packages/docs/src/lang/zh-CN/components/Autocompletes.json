@@ -1,11 +1,7 @@
 {
-  "headingText": "`v-autoompalty` 组件提供简单灵活的输入提示功能。当搜索大量数据甚至从API中动态请求信息时是十分有用的。",
   "examples": {
     "usage": {
       "desc": "自动完成组件扩展了`v-select`并为其增加了过滤项目的能力。"
-    },
-    "api": {
-      "heading": "### 搜索 API"
     },
     "customFilter": {
       "desc": "prop`filter`可以用来过滤每个项目，并带有自定义逻辑。在这个例子中，我们按名称过滤项目"
