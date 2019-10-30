@@ -177,6 +177,12 @@
       "name": "Zeit Now",
       "href": "https://zeit.co/now",
       "logo": "sponsors/zeit-now.svg"
+    },
+    {
+      "name": "Oh Dear!",
+      "href": "https://ohdear.app/",
+      "logo": "sponsors/ohdear-inverted.svg",
+      "darkLogo": "sponsors/ohdear.svg"
     }
   ]
 }

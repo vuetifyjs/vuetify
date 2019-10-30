@@ -30,7 +30,7 @@
           :href="feature.href"
           :to="feature.to"
           rel="noopener noreferrer"
-          target="_blank"
+          :target="feature.href ? '_blank' : undefined"
           class="overflow-hidden text-center mx-auto"
           elevation="12"
           max-width="380px"
@@ -92,7 +92,7 @@
           {
             key: 'components',
             src: 'feature2.png',
-            to: `${this.$route.params.lang}/components/api-explorer`,
+            to: `components/api-explorer`,
           },
           {
             key: 'scaffolding',
