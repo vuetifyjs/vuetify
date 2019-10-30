@@ -1,25 +1,18 @@
 {
-  "heading": "Movimiento",
-  "headingText": "Las animaciones suaves ayudan a que una UI se sienta genial. Al utilizar el sistema de transiciones y los componentes funcionales reusables de Vue puedes controlar fácilmente el movimiento de tu aplicación. Puedes modificar la mayoría de las transiciones de tus componentes a través de la propiedad <code>transition</code>. ",
   "examples": {
     "slide-x-transitions": {
-      "heading": "Transiciones Slide X",
       "desc": "Las transiciones Slide X se mueven en el eje horizontal."
     },
     "slide-y-transitions": {
-      "heading": "Transiciones Slide Y",
       "desc": "Estas animaciones utilizan <code>$primary-transition</code>."
     },
     "scale-transition": {
-      "heading": "Transición Scale",
       "desc": "Muchos de los componentes de Vuetify contienen una propiedad <code>transition</code> que te permite especificar una transición personalizada."
     },
     "fade-transition": {
-      "heading": "Transición Fade",
       "desc": "Otro ejemplo de la transición fade puedes encontrarlo en el componente Carousel."
     },
     "custom-origin": {
-      "heading": "Origen personalizado",
       "desc": "Puedes cambiar el punto de origen de la transición con una simple propiedad."
     }
   },

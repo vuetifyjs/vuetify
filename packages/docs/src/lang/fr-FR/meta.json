@@ -1,61 +1,104 @@
 {
   "": {
-    "title": "Framework de composants Material Design"
+    "title": "Framework de composants Material Design",
+    "keywords": "vue, composants de conception de matériaux, composants vue, composants de conception de matériaux, vuetify, vuetify.js, framework de composants"
   },
   "404": {
     "title": "Oups, 404",
     "description": "Oups, on dirait que ce que vous cherchez n'est pas là !"
   },
-  "getting-started/quick-start": {
-    "title": "Démarrage rapide",
-    "keywords": "démarrage rapide, templates vuetify, installer vuetify"
-  },
-  "getting-started/pre-made-layouts": {
-    "title": "Mises en page de l'application"
-  },
-  "getting-started/why-vuetify": {
+  "introduction/why-vuetify": {
     "title": "Pourquoi Vuetify ?"
   },
   "introduction/frequently-asked-questions": {
-    "title": "Foire aux questions",
-    "keywords": "foire aux questions, faq"
+    "title": "Foire aux questions"
+  },
+  "introduction/long-term-support": {
+    "title": "Support à long terme"
   },
   "introduction/meet-the-team": {
-    "title": "Rencontrez l'équipe",
-    "keywords": "équipe de développement vuetify, vuetify core team"
+    "title": "Rencontrez l'équipe"
   },
   "introduction/sponsors-and-backers": {
     "title": "Sponsors et donateurs"
+  },
+  "getting-started/quick-start": {
+    "title": "Démarrage rapide",
+    "description": "Commencez avec Vue et Vuetify en un rien de temps. Supporte Vue-CLI-3, Webpack, Nuxt et plus encore.",
+    "keywords": "démarrage rapide, templates vuetify, installer vuetify"
+  },
+  "getting-started/pre-made-layouts": {
+    "title": "Mises en page de l'application",
+    "keywords": "mises en page prédéfinies, mises en page, mise en page d'application, mises en page Material Design"
+  },
+  "getting-started/unit-testing": {
+    "title": "Tests unitaires",
+    "description": "Apprenez comment créer des tests unitaires avec des utilitaires de test de vue et des composants Vuetify dans votre application Vue.",
+    "keywords": "test unitaire vuetify, test vuetify, vuetify spec tests"
+  },
+  "getting-started/releases-and-migrations": {
+    "title": "Sorties et migrations",
+    "description": "Restez à jour avec les dernières notes de publication. Les guides de migration vous aideront également à migrer les applications par les versions majeures.",
+    "keywords": "migration, versions, mise à jour de vuetify"
   },
   "getting-started/contributing": {
     "title": "Contribuer",
     "keywords": "contribuer, demande de fonctionnalité"
   },
-  "professional-support/consulting": {
-    "title": "Conseils et support"
+  "customization/accessibility": {
+    "title": "Accessibilité",
+    "description": "Voir les exemples et les avantages d'avoir un support d'accessibilité (a11y) dans les composants Vuetify.",
+    "keywords": "a11y, accessibilité, utilisabilité"
+  },
+  "customization/a-la-carte": {
+    "title": "A-la-carte (treeshaking)"
   },
   "customization/breakpoints": {
-    "title": "Breakpoints"
+    "title": "Breakpoints",
+    "description": "Accédez au système de grille Vuetify à l'intérieur des composants en utilisant le service Breakpoint."
   },
   "customization/icons": {
     "title": "Icônes"
   },
+  "customization/internationalization": {
+    "title": "Internationalisation (i18n)",
+    "keywords": "i18n, langue, internationalisation"
+  },
+  "customization/rtl": {
+    "title": "RTL (bidirectionalité)",
+    "description": "Vuetify est configurable et compatible avec les langues RTL.",
+    "keywords": "rtl, droite à gauche, bidirectionalité"
+  },
   "customization/sass-variables": {
-    "title": "Variables SASS"
+    "title": "Variables SASS",
+    "description": "Personnalisez les styles internes de Vuetify en modifiant les variables SASS.",
+    "keywords": "sas variables, variables scss, modificant les styles Vuetify"
   },
   "customization/theme": {
     "title": "Thème",
     "description": "Configurez le thème et les couleurs supplémentaires de votre application en un éclair.",
     "keywords": "thèmes"
   },
+  "styles/text": {
+    "title": "Aide CSS",
+    "keywords": "Classes d'aide au texte, classes de texte, aides à l'alignement"
+  },
   "styles/colors": {
-    "title": "Palette de couleurs Material"
+    "title": "Palette de couleurs Material",
+    "description": "Découvrez les couleurs de Material Design. Consommez le pack de couleurs javascript directement dans votre application.",
+    "keywords": "couleurs, couleurs de design de matériaux, pack de couleurs vuetify, classes de couleur de matériau"
   },
   "styles/content": {
+    "title": "Styles de contenu",
+    "description": "Vuetify fournit un style personnalisé pour différents éléments HTML.",
     "keywords": "contenu, html, balisage"
   },
-  "styles/scroll": {
-    "keywords": "défilement, défilement fluide, transitions"
+  "styles/display": {
+    "description": "Les classes d'aide d'affichage vous permettent de contrôler quand les éléments doivent s'afficher en fonction du mode de vue.",
+    "keywords": "afficher les classes d'aide, afficher les classes, afficher l'affichage"
+  },
+  "styles/float": {
+    "title": "Aide CSS Float"
   },
   "styles/transitions": {
     "title": "Transitions"
@@ -64,11 +107,16 @@
     "title": "Typographie de l'application",
     "keywords": "typographie, entêtes, titres"
   },
-  "framework/sandbox": {
-    "title": "Sandbox"
-  },
   "components/api-explorer": {
     "title": "Explorateur API"
+  },
+  "components/categories/layout": {
+    "title": "Catégorie de mise en page",
+    "description": "Vuetifier les composants utiles lors de la construction des mises en page",
+    "keywords": "catégorie de mise en page, composants de mise en page vuetify"
+  },
+  "components/alerts": {
+    "title": "Composant Alerte"
   },
   "components/application": {
     "title": "Paramètres de l'application"
@@ -76,7 +124,41 @@
   "components/aspect-ratios": {
     "title": "Ratio d'affichage"
   },
+  "components/autocompletes": {
+    "title": "Composant auto-complétion"
+  },
+  "components/badges": {
+    "title": "Composant Badge"
+  },
+  "components/banners": {
+    "title": "Composant Bannière"
+  },
+  "components/calendars": {
+    "title": "Composant Calendrier"
+  },
   "components/file-inputs": {
     "title": "Composant de lecture de fichier"
+  },
+  "examples/layouts/centered": {
+    "title": "Exemple de mise en page centrée"
+  },
+  "examples/layouts/complex": {
+    "title": "Exemple de mise en page complexe"
+  },
+  "examples/layouts/dark": {
+    "title": "Exemple de mise en page sombre"
+  },
+  "examples/layouts/sandbox": {
+    "keywords": "modèle, pré-fabriqué, format vuetify, bac a sable"
+  },
+  "professional-support/consulting": {
+    "title": "Conseils et support"
+  },
+  "professional-support/business": {
+    "title": "Conseils et support"
+  },
+  "themes/premium": {
+    "description": "Vuetify propose de nombreux thèmes de démarrage et premium pré-construits. Lancez votre prochaine application dès aujourd'hui, aucune compétence en conception n'est requise.",
+    "keywords": "thèmes vuetify, thèmes material pré-construit, thèmes premium"
   }
 }

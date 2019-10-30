@@ -1,13 +1,9 @@
 {
   "examples": {
-    "overlap": {
-      "heading": "중첩 (Overlap)"
-    },
     "visibility": {
       "heading": "표시여부 (Visibility)"
     },
     "inline": {
-      "heading": "인라인 (Inline)",
       "desc": "배지는 텍스트와 같은 줄 위에(inline) 놓일 수 있습니다."
     },
     "icon": {

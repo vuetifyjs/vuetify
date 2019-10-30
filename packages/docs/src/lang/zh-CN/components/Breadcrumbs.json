@@ -1,8 +1,6 @@
 {
-  "heading": "面包屑",
   "examples": {
     "icon-dividers": {
-      "heading": "图标分隔符",
       "desc": "对于图标变体，面包屑可以使 aterial Design Icons中的任何图标。"
     }
   }

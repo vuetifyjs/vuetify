@@ -1,7 +1,106 @@
 {
   "examples": {
+    "usage": {
+      "desc": "Un exemple simple"
+    },
+    "dense": {
+      "desc": "Le mode 'dense' offre une mise en page plus compacte avec une diminution des hauteurs des objets."
+    },
     "color": {
-      "heading": "### Couleurs"
+      "heading": "### Couleurs",
+      "desc": "Vous pouvez contrôler la couleur du texte et de l'arrière-plan du nœud d'exclusion active."
+    },
+    "selected-color": {
+      "desc": "Vous pouvez contrôler la couleur de la checkbox du nœud sélectionné."
+    },
+    "shaped": {
+      "heading": "### Shaped",
+      "desc": "Arborescences façonnées ont des bords arrondis d'un côté des nœuds."
+    },
+    "rounded": {
+      "heading": "### Arrondi",
+      "desc": "Vous pouvez faire arrondir les nœuds de l’arborescence."
+    },
+    "item-disabled": {
+      "desc": "Définir la prop `item-disabled` permet de contrôler la propriété du noeud qui désactive le noeud quand défini sur `true`."
+    },
+    "file-explorer": {
+      "heading": "### Champs",
+      "desc": "En utilisant des créneaux, nous sommes en mesure de créer un explorateur de fichiers intuitif. Outre l'emplacement `prepend`, il y en a aussi un pour le `label`, et un emplacement `append`."
+    },
+    "directory": {
+      "desc": "Vous pouvez charger dynamiquement les données des enfants en fournissant une fonction de rappel _Promise_ à l'appareil `load-children`. Cette fonction sera exécutée la première fois qu'un utilisateur tente d'étendre un élément qui a une propriété enfant qui est un tableau vide."
+    },
+    "hotspots": {
+      "desc": "Personnalisez les icônes **sur**, **off** et **indeterminate** pour votre arbre sélectionnable. Combinez avec d'autres fonctionnalités avancées comme les éléments chargés par l'API."
+    },
+    "human-resources": {
+      "desc": "Filtrez facilement votre scie en utilisant le prop **search** de votre prop. Vous pouvez facilement appliquer votre fonction de filtrage personnalisé si vous avez besoin d'un filtrage sensible ou flou en définissant le prop **filter** . Cela fonctionne similaire au composant [v-autocomplete](/components/autocompletes)."
+    },
+    "selectable": {
+      "desc": "Vous pouvez facilement sélectionner des nœuds et des enfants de treeview."
+    },
+    "activatable": {
+      "desc": "Les nœuds d'aperçu peuvent être activés en cliquant dessus."
+    },
+    "hoverable": {
+      "desc": "Les nœuds de l'arbre peuvent avoir un effet de survol."
+    },
+    "open-all": {
+      "desc": "Les noeuds d'aperçu peuvent être pré-ouverts sur la charge de page."
+    },
+    "selection-type": {
+      "desc": "Treeview supporte maintenant deux types de sélection différents. Le type par défaut est **'leaf'**, qui ne contiendra que des noeuds de feuilles dans le tableau v-model, mais rendra les noeuds parents comme partiellement ou entièrement sélectionnés. Le mode alternatif est **'independent'**, qui permet à un noeud parent de sélectionner, mais chaque noeud est indépendant de son parent et de ses enfants."
     }
+  },
+  "props": {
+    "v-treeview": {
+      "activatable": "Permet à l'utilisateur de marquer un noeud comme actif en cliquant dessus",
+      "active": "Prop Synchronisable qui permet de contrôler les nœuds actifs. Le tableau est composé de la `item-key` de chaque élément actif.",
+      "activeClass": "La classe appliquée au noeud quand active",
+      "color": "Définit la couleur du nœud actif",
+      "dense": "Diminue la hauteur des objets",
+      "expandIcon": "Icône utilisée pour indiquer qu'un noeud peut être étendu",
+      "hoverable": "Applique une classe de survol lors de la moussement des nœuds",
+      "filter": "Fonction de filtrage d'élément personnalisé. Par défaut, elle utilisera la recherche insensible à la casse dans l'étiquette de l'article.",
+      "indeterminateIcon": "Icône utilisée lorsque le noeud est dans un état indéterminé. Seulement visible lorsque `selectable` est `true`.",
+      "itemChildren": "Propriété sur `items` fourni qui contient ses enfants",
+      "itemDisabled": "Propriété sur `items` fourni qui contient l'état désactivé de l'élément",
+      "itemKey": "Propriété sur `items` fourni utilisée pour garder la trace de l'état du noeud. La valeur de cette propriété doit être unique parmi tous les éléments.",
+      "items": "Un tableau d'éléments utilisés pour construire l'arborescence",
+      "itemText": "Propriété sur `items` fourni qui contient son libellé",
+      "loadChildren": "Une fonction utilisée lors du chargement dynamique des enfants. Si ce prop est défini, la fonction fournie sera exécutée si l'extension d'un élément qui a une propriété `item-children` qui est un tableau vide. Supporte de retourner une promesse.",
+      "loadingIcon": "Icône utilisée lorsque le noeud est dans un état de chargement",
+      "multipleActive": "Quand `true`, permet à l'utilisateur d'avoir plusieurs nœuds actifs en même temps",
+      "offIcon": "Icône utilisée lorsque le noeud n'est pas sélectionné. Seulement visible lorsque `selectable` est `true`.",
+      "onIcon": "Icône utilisée lorsque le noeud feuille est sélectionné ou lorsqu'un noeud de branche est complètement sélectionné. Seulement visible lorsque `selectable` est `true`.",
+      "open": "Prop synchronisable qui permet de contrôler les nœuds ouverts. Le tableau est composé de la `item-key` de chaque élément ouvert.",
+      "openAll": "Quand `true` ouvrira tous les noeuds de branche quand le composant est monté",
+      "openOnClick": "Quand `true` va ouvrir des nœuds en cliquant n'importe où, au lieu d'ouvrir uniquement en cliquant sur l'icône d'extension. Lorsque vous utilisez ce prop avec `activatable` vous ne pourrez pas marquer les noeuds avec des enfants aussi actifs.",
+      "returnObject": "Quand `true` fera `v-model`, `active.sync` et `open.sync` retourne l'objet complet au lieu de la seule clé",
+      "rounded": "Fournit un style actif alternatif pour le noeud `v-treeview`. Seulement visible lorsque `activatable` est `true` et ne doit pas être utilisé en conjonction avec le prop `shaped`.",
+      "search": "Le modèle de recherche pour les résultats de filtrage",
+      "selectable": "Renforcera une case à côté de chaque noeud permettant de les sélectionner",
+      "selectedColor": "La couleur de la case à cocher de sélection",
+      "selectionType": "Contrôle la sélection des nœuds de treeview. Il y a deux modes disponibles : 'leaf' et 'independent'",
+      "shaped": "Fournit un style actif alternatif pour le noeud `v-treeview`. Seulement visible lorsque `activatable` est `true` et ne doit pas être utilisé en conjonction avec le prop `rounded`.",
+      "transition": "Applique une transition lorsque les nœuds sont ouverts et fermés",
+      "value": "Permet à un contrôle des noeuds sélectionnés. Le tableau est composé de la `item-key` de chaque élément sélectionné. Il est utilisé avec l'événement `@input` pour permettre la liaison `v-model`."
+    }
+  },
+  "slots": {
+    "v-treeview": {
+      "append": "Ajoute le contenu après étiquette",
+      "label": "Contenu du label",
+      "prepend": "Prépend le contenu avant l'étiquette"
+    }
+  },
+  "functions": {
+    "updateAll": "Ouvre ou ferme tous les nœuds"
+  },
+  "events": {
+    "input": "Émet le tableau des éléments sélectionnés lorsque cette valeur change",
+    "update:active": "Émet le tableau des éléments actifs lorsque cette valeur change",
+    "update:open": "Émet le tableau des éléments ouverts lorsque cette valeur change"
   }
 }

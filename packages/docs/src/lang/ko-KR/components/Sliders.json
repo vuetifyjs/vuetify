@@ -1,18 +1,12 @@
 {
-  "headingText": "`v-slider` 컴포넌트는 숫자 입력을 위한 더 나은 시각화를 제공합니다. 사용의 숫자형 데이터를 수집하기 위해 사용도비니다.",
   "examples": {
     "usage": {
       "desc": "슬라이더는 사용자가 단일 값을 선택할 수 있는 바를 따라 값의 범위를 반영합니다. 그것은 볼륨, 밝기 또는 이미지 필터의 적용과 같은 설정을 조정하는 데 이상적입니다."
     },
-    "thumb": {
-      "heading": "Thumb"
-    },
     "ticks": {
-      "heading": "눈금 (Ticks)",
       "desc": "눈금 마크(Tick marks)는 사용자가 슬라이더를 이동할 수 있는 미리 결정된 값을 나타냅니다."
     },
     "discrete": {
-      "heading": "불연속 (Discrete)",
       "desc": "불연속(Discrete) 슬라이더는 정확한 현재 값을 보여주기 위한 작은 레이블(Thumb label)을 제공합니다. `step` prop를 이용하여 step 을 이외의 값을 선택하는 것을 방지할 수 있습니다."
     },
     "icons": {
@@ -20,7 +14,6 @@
       "desc": "`append-icon`과 `prepend-icon` prop을 이용하여 슬라이더에 아이콘을 추가할 수 있습니다."
     },
     "editable-numeric-value": {
-      "heading": "수정가능한 숫자값 (With an editable numeric value)",
       "desc": "슬라이더는 더 낳은 표현을 위해 다른 컴포넌트와 결합될 수 있습니다."
     },
     "custom-colors": {
@@ -32,9 +25,6 @@
     },
     "range": {
       "heading": "Range"
-    },
-    "min-max": {
-      "heading": "Min & Max values"
     },
     "disabled": {
       "heading": "비활성화 (Disabled)"

@@ -1,54 +1,78 @@
 {
-  "headingText": "Le composant `v-btn` remplace le bouton html standard avec un thème visuel et une multitude d'options. Toutes les classes d'aides de couleur peuvent être utilisées pour modifier la couleur de fond ou du texte.",
+  "alert": "`v-btn` est le seul composant qui se comporte différemment lorsque vous utilisez le prop **dark** normalement, les composants utilisent le prop **dark** pour indiquer qu'ils ont un fond de couleur foncé et ont besoin de leur texte pour être blanc. Bien que cela fonctionne pour `v-btn`, il est conseillé d'utiliser le prop uniquement lorsque le bouton **IS ON** un fond coloré en raison de l'état désactivé se mélangeant avec des fonds blancs. Si vous avez besoin de texte blanc, ajoutez simplement la classe **white--text** .",
   "examples": {
     "flat": {
       "heading": "### Plat",
       "desc": "Les boutons plats n'ont pas d'ombre portée et aucun fond d'écran. Seulement au survol d'un conteneur pour le bouton affiché."
     },
     "raised": {
-      "heading": "### Soulevées",
       "desc": "Les boutons soulevés ont une ombre portée qui augmente lorsque vous cliquez dessus. C'est le style par défaut."
     },
     "depressed": {
-      "heading": "### Diminué",
       "desc": "Les boutons diminués maintiennent toujours leur couleur d'arrière-plan, mais n'ont pas d'ombre portée."
     },
     "dropdown": {
-      "heading": "### Variante de bouton déroulant",
       "desc": "Les boutons de menus déroulants sont régulièrement sélectionné avec un style supplémentaire.",
       "uninverted": true
     },
     "icon": {
+      "heading": "### Icônes",
       "desc": "Les icônes peuvent être utilisées pour le contenu primaire d'un bouton."
     },
     "floating": {
-      "heading": "### Flottant"
+      "desc": "Les boutons flottants sont arrondis et contiennent généralement une icône."
     },
     "loaders": {
-      "heading": "### Chargements",
       "desc": "En utilisant la proprité de chargement, vous pouvez notifier à un utilisateur qu'il y a un traitement en cours. Le comportement par défaut est d'utiliser un composant `v-progress-circular`, mais cela peut être personnalisé."
     },
     "sizing": {
-      "heading": "### Taille",
       "desc": "Les boutons peuvent être dotés de différentes options de tailles pour s'adapter à une multitude de scénarios."
     },
     "outlined": {
-      "heading": "### Contour"
+      "heading": "### Contour",
+      "desc": "Les boutons hors-ligne héritent de leurs frontières de la couleur actuelle appliquée."
+    },
+    "rounded": {
+      "heading": "### Arrondi",
+      "desc": "Les boutons arrondis se comportent comme des boutons réguliers mais ont des bords arrondis."
+    },
+    "tile": {
+      "heading": "### Tuile",
+      "desc": "Les boutons de boutons se comportent comme des boutons réguliers mais n'ont pas de rayon de bordure."
     },
     "block": {
-      "heading": "### Bloc",
       "desc": "Les blocs de boutons s'étendent sur la largeur totale disponible."
     }
   },
   "props": {
     "v-btn": {
+      "block": "Explique le bouton à 100% de l'espace disponible.",
+      "depressed": "Supprime l'ombre de la boîte de boutons.",
+      "fab": "Indique le bouton comme un bouton action flottant - _round_.",
+      "icon": "Indique le bouton comme icône - _round et flat_",
+      "inputValue": "Contrôle l'état actif du bouton.",
+      "left": "Aligne le composant vers la gauche. Cela doit être utilisé avec les **éléments absolus** ou **fixes**.",
       "loading": "Ajoute un chargement d'animation de l’icône",
-      "outlined": "Rends le fond transparent et applique une bordure mince."
+      "outlined": "Rends le fond transparent et applique une bordure mince.",
+      "right": "Aligne le composant vers la droite. Cela doit être utilisé avec les props **absolute** ou **fixed** .",
+      "rounded": "Applique un large rayon de bordure sur le bouton.",
+      "text": "Rend l'arrière-plan transparent.",
+      "type": "Définir l'attribut **type** du bouton",
+      "value": "Mixins.Groupable.props.value",
+      "retainFocusOnClick": "Ne pas flouter en cliquant."
+    },
+    "v-btn-toggle": {
+      "rounded": "Applique un large rayon de bordure sur les boutons."
     }
   },
   "events": {
     "v-btn-toggle": {
       "change": "Components.Inputs.events.change"
+    }
+  },
+  "slots": {
+    "v-btn": {
+      "loader": "Chargeur personnalisé"
     }
   }
 }

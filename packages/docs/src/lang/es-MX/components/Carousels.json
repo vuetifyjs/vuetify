@@ -1,12 +1,7 @@
 {
-  "headingText": "El componente `v-carousel` se utiliza para mostrar grandes cantidades de contenido visual en un timer rotativo.",
   "examples": {
     "custom-transition": {
-      "heading": "Transición personalizada",
       "desc": "También puedes aplicar tu propia transición personalizada."
-    },
-    "hide-controls": {
-      "heading": "Esconder los controles"
     }
   },
   "props": {

@@ -1,32 +1,61 @@
 {
-  "headingText": "Le composant `v-dialog` informe les utilisateurs d'une tâche spécifique et peut contenir des informations critiques, exiger des décisions ou impliquer plusieurs tâches. Utilisez des dialogs avec parcimonie parce qu'ils sont interruptifs.",
   "examples": {
     "usage": {
       "desc": "Une boîte de dialogue contient deux emplacements, l'un pour son activateur et l'autre pour son contenu (par défaut). Bonne pour les politiques de confidentialité."
     },
     "without-activator": {
+      "desc": "Si pour une raison quelconque vous ne pouvez pas utiliser l'emplacement d'activation, assurez-vous d'ajouter le modificateur `.stop` à l'événement qui déclenche la boîte de dialogue.",
       "uninverted": true
     },
     "modal": {
+      "desc": "Comme un dialogue simple, sauf qu'il n'est pas rejeté lors du toucher à l'extérieur.",
       "uninverted": true
     },
     "fullscreen": {
-      "heading": "### Plein écran",
       "desc": "En raison d'un espace limité, les dialogues à écran plein peuvent être plus appropriés pour les appareils mobiles que les dialogues utilisés sur les appareils avec des écrans plus larges.",
       "uninverted": true
     },
     "form": {
+      "desc": "Un simple exemple de formulaire dans une boîte de dialogue.",
       "uninverted": true
     },
     "scrollable": {
       "heading": "### Défilable",
+      "desc": "Exemple de dialogue avec le contenu scrollable.",
       "uninverted": true
     },
     "overflowed": {
+      "desc": "Les modaux qui ne s'adaptent pas dans l'espace de fenêtre disponible feront défiler le conteneur.",
       "uninverted": true
     },
     "advanced": {
+      "desc": "Les dialogue peuvent être imbriqués : vous pouvez ouvrir une boîte de dialogue d'une autre.",
       "uninverted": true
+    },
+    "loader": {
+      "heading": "### Chargeur",
+      "desc": "Le composant `v-dialog` permet de créer une expérience de chargement personnalisée pour votre application."
     }
+  },
+  "props": {
+    "dark": "Mixins.Themeable.props.dark",
+    "fullWidth": "Force la boîte de dialogue à augmenter 100% de la largeur disponible.",
+    "fullscreen": "Modification de la mise en page pour l'affichage plein écran.",
+    "internalActivator": "Détache le contenu du menu à l'intérieur du composant par opposition au document.",
+    "eager": "Mixins.Bootable.props.eager",
+    "light": "Mixins.Themeable.props.light",
+    "maxWidth": "Mixins.Measurable.props.maxWidth",
+    "noClickAnimation": "Désactive l'effet de rebond lorsque vous cliquez à l'extérieur du contenu d'un dialogue `v`, lorsque vous utilisez le prop **persistant**.",
+    "openOnHover": "Indique si le composant doit activer quand son activateur est survolé.",
+    "origin": "Mixins.Transitionable.props.origin",
+    "persistent": "En cliquant à l'extérieur de l'élément, vous ne le désactiverez pas.",
+    "retainFocus": "Le focus d'onglets retournera au premier enfant de la boîte de dialogue par défaut. Désactivez ceci lorsque vous utilisez des outils externes qui nécessitent une focus comme TinyMCE ou le presse-papiers de vue.",
+    "scrollable": "Quand on s'y oppose, attend un composant `v-card` et un `v-card-text` avec une hauteur désignée. Pour plus d'informations, consultez [l'exemple de défilement](/components/dialogs#scrollable).",
+    "transition": "Mixins.Transitionable.props.transition",
+    "width": "Mixins.Measurable.props.width"
+  },
+  "events": {
+    "click:outside": "Événement qui s'allume en cliquant en dehors d'une boîte de dialogue active.",
+    "keydown": "Événement qui s'allume lorsque la touche est enfoncée. Si la boîte de dialogue est active et n'utilise pas le prop **persistant** la touche **esc** la désactivera."
   }
 }

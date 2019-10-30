@@ -1,1 +1,21 @@
-{}
+{
+  "examples": {
+    "color": {
+      "desc": "Vous pouvez éventuellement changer la couleur de la barre `v-system` en utilisant la prop`color`."
+    },
+    "window": {
+      "desc": "Une barre de fenêtre avec les contrôles de fenêtre et les informations d'état."
+    },
+    "themes": {
+      "desc": "Les variantes de thème foncé ou léger peuvent être appliquées à `v-system-bar`."
+    },
+    "lights-out": {
+      "desc": "Vous pouvez réduire l'opacité de `v-system-bar`, en utilisant la propriété `lights-out`."
+    }
+  },
+  "props": {
+    "height": "Mixins.Measurable.props.height",
+    "lightsOut": "Réduit l'opacité de la barre système.",
+    "window": "Augmente la hauteur de la barre système à 32px (24px par défaut)."
+  }
+}

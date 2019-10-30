@@ -1,1 +1,9 @@
-{}
+{
+  "props": {
+    "large": "Rend le composant grand.",
+    "medium": "Rend le composant medium.",
+    "small": "Rend le composant petit.",
+    "xSmall": "Rend le composant plus petit.",
+    "xLarge": "Rend le composant plus grand."
+  }
+}

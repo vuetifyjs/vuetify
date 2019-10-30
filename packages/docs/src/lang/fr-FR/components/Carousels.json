@@ -1,18 +1,62 @@
 {
-  "headingText": "Le composant `v-carousel` est utilisé pour afficher un grand nombre de contenu visuel sur un minuteur rotatif.",
+  "subComponentsHeader": "### Sous-composants",
+  "subComponentsList": [
+    "`v-carousel-item`: Le conteneur d'image utilisé par `v-carousel`. Extends `v-window-item`, est routable, et utilise `v-img` dans son emplacement par défaut."
+  ],
   "examples": {
+    "usage": {
+      "desc": "Le composant `v-carousel` s'agrandit sur `v-window` en fournissant des fonctionnalités supplémentaires destinées à afficher des images."
+    },
+    "cycle": {
+      "desc": "Avec le prop **cycle** vous pouvez faire passer vos diapositives automatiquement à la prochaine disponible tous les 6 secondes (par défaut)."
+    },
     "custom-transition": {
-      "heading": "### Transition personnalisée"
+      "desc": "Le composant `v-carousel-item` peut avoir un changement de **transition/transition inverse** ."
+    },
+    "custom-icons": {
+      "desc": "Utilisez n'importe quelle icône disponible comme délimiteur de diapositives de votre carrousel."
     },
     "hide-delimiters": {
-      "heading": "### Cacher les délimiteurs",
       "desc": "Vous pouvez cacher les délimiteurs avec la propriété <pre>hide-delimiters</pre>."
     },
     "hide-controls": {
-      "heading": "### Cacher les contrôles"
+      "desc": "Vous pouvez masquer les contrôles de navigation du carrousel avec `:show-arrows=\"false\"`."
+    },
+    "model": {
+      "heading": "#### `v-model` contrôle",
+      "desc": "Vous pouvez contrôler le carrousel avec le modèle."
     }
   },
   "props": {
-    "delimiterIcon": "Définit l'icône pour le délimiteur du carrousel"
+    "activeClass": "Mixins.BaseItemGroup.props.activeClass",
+    "continuous": "Détermine si le carrousel est continu",
+    "cycle": "Détermine si le carrousel doit se déplacer à travers les images.",
+    "disabled": "Mixins.Groupable.props.désactivé",
+    "delimiterIcon": "Définit l'icône pour le délimiteur du carrousel",
+    "height": "Mixins.Measurable.props.height",
+    "hideControls": "Cache les contrôles de navigation (gauche et droite).",
+    "hideDelimiters": "Cache les délimiteurs de fond du carrousel.",
+    "hideDelimiterBackground": "Cache le fond du délimiteur de fond.",
+    "interval": "La durée entre les cycles d'image. Nécessite le prop **cycle** .",
+    "link": "Mixins.Routable.props.link",
+    "mandatory": "Mixins.BaseItemGroup.props.mandatory",
+    "multiple": "Mixins.BaseItemGroup.props.multiple",
+    "nextIcon": "L'icône affichée pour forcer la pagination à l'élément suivant.",
+    "prevIcon": "L'icône affichée pour forcer la pagination à l'élément précédent.",
+    "progress": "Affiche une barre de progression du carrousel. Nécessite la prop **cycle** et **intervalle**.",
+    "progressColor": "Applique la couleur spécifiée à la barre de progression.",
+    "reverse": "Components.Windows.props.reverse",
+    "reverseTransition": "Components.Windows.props.reverseTransition",
+    "showArrows": "Affiche les flèches pour la navigation suivante/précédente.",
+    "showArrowsOnHover": "Affiche les flèches de navigation seulement lorsque le carrousel est survécu.",
+    "src": "Components.Images.props.src",
+    "touch": "Components.Windows.props.touch",
+    "touchless": "Components.Windows.props.touchless",
+    "transition": "Mixins.Transitionable.props.transition",
+    "vertical": "Components.Windows.props.vertical",
+    "verticalDelimiters": "Displays carousel delimiters vertically.",
+    "v-carousel-item": {
+      "value": "Mixins.Groupable.props.value"
+    }
   }
 }

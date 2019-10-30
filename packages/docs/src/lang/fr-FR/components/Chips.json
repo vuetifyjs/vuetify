@@ -1,17 +1,57 @@
 {
   "examples": {
     "usage": {
+      "desc": "Les puces sont présentes dans les variantes suivantes : Default, closeable, filter, outlined, pill. Le champ par défaut de `v-chip` accepte également les avatars et les icônes aux côtés du texte.",
       "uninverted": true
     },
+    "colored": {
+      "heading": "### Coloré",
+      "desc": "Toute couleur de la palette Material Design peut être utilisée pour changer une couleur de puce."
+    },
+    "icon": {
+      "heading": "### Icônes",
+      "desc": "Les puces peuvent utiliser du texte ou toute icône disponible dans la bibliothèque de polices d'icônes Material."
+    },
     "outlined": {
-      "heading": "### Contour"
+      "heading": "### Contour",
+      "desc": "Les puces hors ligne héritent de leur couleur de bordure de la couleur actuelle du texte."
+    },
+    "label": {
+      "desc": "Les puces d'étiquette utilisent le rayon de bordure `v-card`."
     },
     "closable": {
-      "heading": "### Refermable",
+      "desc": "Les puces fermables peuvent être contrôlés avec un v-model. Vous pouvez également écouter l'événement `click:close` si vous voulez savoir quand une puce a été fermée.",
       "uninverted": true
     },
     "in-selects": {
       "uninverted": true
+    },
+    "expandable": {
+      "desc": "Les puces peuvent être combinées avec `v-menu` pour activer un ensemble d'actions spécifiques pour une puce."
+    },
+    "sizes": {
+      "desc": "Le composant `v-chip` peut avoir différentes tailles de `x-small` à `x-large`."
+    },
+    "draggable": {
+      "desc": "Le composant `draggable` `v-chip` peut être traîné par la souris."
+    },
+    "filter": {
+      "heading": "### Filtre",
+      "desc": "Le composant `v-chip` a l'option `filter` qui vous montre une icône supplémentaire si la puce est active. Elle peut être personnalisée en utilisant `filter-icon`."
     }
+  },
+  "props": {
+    "active": "Détermine si la puce est visible ou non.",
+    "close": "Ajouter le bouton de suppression",
+    "closeIcon": "Changer l'icône par défaut utilisée pour **close** les puces",
+    "disabled": "Désactive la puce, ce qui la rend non sélectionnable",
+    "draggable": "Rendre le déplaçable de la puce",
+    "link": "Définit explicitement la puce comme un lien",
+    "outlined": "Supprime l'arrière-plan et applique la couleur de la bordure et du texte"
+  },
+  "events": {
+    "click": "Émis lorsque le composant est cliqué, bascule la puce si elle est contenue dans un groupe de puces - déclenchera le composant à ripper lorsque le bouton est cliqué à moins que le modificateur `.native` n'est utilisé",
+    "click:close": "Émis lorsque l'icône de fermeture est cliqué",
+    "update:active": "Émis lorsque l'icône de fermeture est cliqué, définit active sur `false`"
   }
 }

@@ -1,11 +1,5 @@
 {
   "examples": {
-    "right": {
-      "heading": "### 右寄せタブ"
-    },
-    "pagination": {
-      "heading": "### ページネーション"
-    },
     "icons": {
       "heading": "### カスタムアイコン"
     }

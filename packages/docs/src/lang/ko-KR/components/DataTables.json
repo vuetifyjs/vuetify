@@ -1,44 +1,24 @@
 {
-  "headingText": "`v-data-table` 컴포넌트는 데이터를 테이블 형태로 보여줍니다. 정렬(sorting), 검색(searching), 페이지네이션(pagination), 선택(selection) 등이 가능합니다.",
   "examples": {
-    "select": {
-      "heading": "선택 가능한 행 (Selectable rows)"
-    },
-    "expand": {
-      "heading": "슬롯: expand"
-    },
     "headers": {
-      "heading": "슬롯: items 과 headers",
       "desc": "`items` 과 `headers` 슬롯엔 <kbd>td/th</kbd> 태그 모음이나 전체 row 를 제어하고 싶을 경우 <kbd>tr</kbd> 태그를 넣습니다."
     },
     "progress": {
-      "heading": "슬롯: progress",
       "desc": "`progress` 슬롯은 데이터 테이블의 `로딩` 상태 표시를 커스터마이즈 할 수 있습니다.\n기본 값은 `indeterminate` `v-progress-linear` 입니다."
     },
     "search": {
-      "heading": "검색과 \"검색결과 없음\" (no-results) 슬롯",
       "desc": "`search` prop으로 데이터를 필터링 할 수 있습니다."
     },
     "paginate": {
-      "heading": "외부 페이지네이션 (External pagination)",
       "desc": "페이지네이션(Pagination)은 `pagination` prop을 통해 외부에서 제어될 수 있습니다.\n `.sync` 수식어(modifier)를 반드시 사용해야 합니다."
     },
     "sort": {
-      "heading": "외부 정렬 (External sorting)",
       "desc": "정렬 또한 `pagenation` prop을 통해 외부에서 제어될 수 있습니다. `.sync` 수식어(modifier)를 반드시 사용해야 한다는 것을 기억하세요. \n `pagenation` prop으로 또한 기본 정렬 열(default sorted column) 을 정할 수도 있습니다."
     },
-    "server": {
-      "heading": "서버사이드 페이지네이트와 검색 (Paginate and sort server-side)"
-    },
-    "headerless": {
-      "heading": "헤더가 없는 테이블 (Headerless tables)"
-    },
     "edit-dialog": {
-      "heading": "인라인 편집 (Inline Editing)",
       "desc": "`v-edit-dialog` 컴포넌트로 데이터 테이블 내에서의 인라인 편집이 가능합니다. **persistent* prop 을 추가하여 외부를 클릭했을 때 다이얼로그가 닫히는 것을 막을 수 있습니다."
     },
     "crud": {
-      "heading": "CRUD 액션",
       "desc": "데이터 테이블에서 `v-dialog` 컴포넌트를 이용해 각 행을 편집하는 방식의 CRUD 액션입니다.\n(data-table with CRUD actions using a v-dialog component for editing each row)"
     }
   },

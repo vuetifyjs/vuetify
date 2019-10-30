@@ -1,0 +1,18 @@
+{
+  "heading": "# 不同之处是什么？",
+  "community": "社区",
+  "comparisonHeader": "## 对比其它框架",
+  "continuous": "持续",
+  "designHeader": "## 设计规范",
+  "material": "Material",
+  "questionButton": "向社区提问",
+  "questionHeader": "仍有疑问?",
+  "professional": "专业",
+  "support": "支持",
+  "supportCaption": "需要定制的支持计划? Vuetify 的作者 John Leider 提供咨询和支持服务，提供各种使用案例以帮助您在构建应用程序。",
+  "toolkit": "工具包",
+  "toolkitCaption": "Vuetify 是一个语义化框架。易于学习，易于记忆&mdash;这意味着无论您是在开发自己的应用程序还是刚刚上手，Vuetify的 _即写即说_ 组件和属性都使开发变得轻松。",
+  "updates": "更新",
+  "updatesCaption": "Vuetify 有一个一致的更新周期，允许您更快速地获得 bug 修复和框架增强。开发团队致力于为您提供最好的体验。",
+  "vibrant": "充满活力"
+}

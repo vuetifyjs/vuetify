@@ -1,61 +1,65 @@
 {
+  "": {
+    "title": "基于 Vue 编写的 Material Design 框架"
+  },
   "404": {
     "title": "哎呀，404",
     "description": "哎呀，好像你要找的东西不存在了！"
+  },
+  "introduction/why-vuetify": {
+    "title": "为什么选择 Vuetify？"
+  },
+  "introduction/frequently-asked-questions": {
+    "title": "常见问题！"
+  },
+  "introduction/long-term-support": {
+    "title": "长期支持"
+  },
+  "introduction/meet-the-team": {
+    "title": "认识开发团队"
+  },
+  "introduction/sponsors-and-backers": {
+    "title": "赞助商和支持者"
   },
   "getting-started/quick-start": {
     "title": "快速开始",
     "keywords": "快速启动，vuetify模板，安装vuetify"
   },
-  "getting-started/why-vuetify": {
-    "title": "为什么选择 Vuetify？"
-  },
-  "introduction/frequently-asked-questions": {
-    "title": "常见问题！",
-    "keywords": "常见问题"
-  },
-  "introduction/meet-the-team": {
-    "title": "认识开发团队",
-    "keywords": "Vuetify开发团队，Vuetify核心成员"
-  },
-  "introduction/sponsors-and-backers": {
-    "title": "赞助商和支持者"
+  "getting-started/pre-made-layouts": {
+    "title": "应用布局"
   },
   "getting-started/contributing": {
     "title": "贡献",
     "keywords": "贡献、贡献、功能请求"
   },
-  "professional-support/consulting": {
-    "title": "咨询和支持"
-  },
   "customization/breakpoints": {
     "title": "断点"
   },
   "customization/icons": {
-    "title": "图标"
+    "title": "Icons（图标）"
   },
   "customization/theme": {
     "title": "主题"
   },
-  "styles/scroll": {
-    "keywords": "滚动，滚动，平滑滚动，过渡"
-  },
   "styles/transitions": {
-    "title": "过渡"
-  },
-  "framework/sandbox": {
-    "title": "沙箱"
+    "title": "Transitions（过渡动画）"
   },
   "components/api-explorer": {
-    "title": "API 概览"
+    "title": "API explorer（API 概览）"
   },
   "components/application": {
     "title": "应用程序服务"
   },
   "components/aspect-ratios": {
-    "title": "长宽比"
+    "title": "Aspect ratios（长宽比）"
   },
   "components/grids": {
     "title": "栅格系统"
+  },
+  "professional-support/consulting": {
+    "title": "咨询和支持"
+  },
+  "professional-support/business": {
+    "title": "咨询和支持"
   }
 }

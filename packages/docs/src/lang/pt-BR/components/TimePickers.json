@@ -1,5 +1,4 @@
 {
-  "headingText": "O `v-time-picker` é um componente autônomo que pode ser utilizado em vários componentes existentes do Vuetify. Ele oferece ao usuário uma representação visual para a seleção do tempo.",
   "examples": {
     "colorable": {
       "desc": "As cores de um Time picker podem ser modificadas usando as propriedades `color` e `header-color`. Se não foi fornecido valor para a propriedade `header-color`, logo o cabeçalho (header) utilizará o valor da propriedade `color`."

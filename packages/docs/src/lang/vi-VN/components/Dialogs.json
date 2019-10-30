@@ -1,16 +1,12 @@
 {
-  "heading": "Hộp thoại",
   "examples": {
     "without-activator": {
-      "heading": "### Kích hoạt rời",
       "desc": "Trong một vài trường hợp bạn không sử dụng activator slot, hãy đảm bảo đã thêm hậu tố `.stop` vào sự kiện khi mở dialgo."
     },
     "modal": {
-      "heading": "### Modal",
       "desc": "Giống như Dialog đơn giản, Ngoại trừ việc dialog sẽ không đóng khi kích ra ngoài."
     },
     "fullscreen": {
-      "heading": "### Toàn màn hình",
       "desc": "Do không gian hạn chế, Dialog toàn màn hình sẽ thích hợp trên thiết bị di động hơn Dialog trên màn hình lớn."
     },
     "form": {
@@ -24,7 +20,6 @@
       "desc": "Dialog sẽ hiển thị thanh cuộn khi phần nội dung vượt quá kích thước giới hạn của dialog."
     },
     "advanced": {
-      "heading": "### Dialogs lồng nhau",
       "desc": "Bạn có thể mở một dialog bên trong một dialog."
     },
     "loader": {

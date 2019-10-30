@@ -1,10 +1,106 @@
 {
+  "alert1": "Si vous recherchez des éléments de liste d'état, veuillez consulter [v-list-item-group](/components/list-item-groups).",
   "examples": {
+    "usage": {
+      "desc": "Les listes sont en trois variantes principales. **monoline** (par défaut), **deux lignes** et **trois lignes**. La déclaration de ligne spécifie la hauteur minimale de l'élément et peut également être contrôlée à partir de `v-list` avec le même prop."
+    },
+    "avatar-title-and-action": {
+      "desc": "Les listes contiennent également des créneaux pour une approche plus explicite. Si vous choisissez cette approche, rappelez-vous que vous devez fournir des props supplémentaires pour un espacement correct. Dans cet exemple, nous avons une tuile avec un avatar, donc nous devons fournir une propriété `avatar`."
+    },
+    "icon-two-lines-and-action": {
+      "desc": "Les listes peuvent contenir des sous-titres, des diviseurs et peuvent contenir 1 ou plusieurs lignes. Le sous-titre débordera avec des ellipsis s'il s'étend sur une ligne."
+    },
+    "avatar-three-lines": {
+      "desc": "Pour trois listes de lignes, le sous-titre claquera verticalement sur 2 lignes puis ellipsis. Cette fonctionnalité utilise [line-clamp](https://developer.mozilla.org/fr-US/docs/Web/CSS/-webkit-line-clamp) et n'est pas supportée dans tous les navigateurs."
+    },
+    "avatar-subheader-title-and-action": {
+      "desc": "Ici nous allions **v-list-item-avatar** et **v-list-item-icon** dans une liste unique."
+    },
+    "subheadings-and-dividers": {
+      "desc": "Les listes peuvent contenir plusieurs sous-titres et diviseurs."
+    },
+    "nested": {
+      "desc": "En utilisant le composant `v-list-group`, vous pouvez créer jusqu'à **2** niveaux de profondeur en utilisant le prop **sous-groupe**."
+    },
+    "card-list": {
+      "desc": "Une liste peut être combinée avec une carte."
+    },
+    "title-subtitle-actions-and-action-text": {
+      "desc": "Une liste peut contenir une pile dans une action. Ceci est utile lorsque vous devez afficher le méta texte à côté de votre élément d'action."
+    },
+    "action-title-and-subtitle": {
+      "desc": "Une liste **trois lignes** avec actions. Utilisant **[v-list-item-group](/components/list-item-groups)**, connectez facilement les actions à vos tuiles."
+    },
+    "expansion-lists": {
+      "desc": "Une liste peut contenir un groupe d'éléments qui s'afficheront sur le clic. Les listes d'extension sont également utilisées dans le composant **[v-navigation-drawer](/components/navigation-drawers)** ."
+    },
+    "nav": {
+      "desc": "Les listes peuvent recevoir un style alternatif **nav** qui réduit la largeur `v-list-item` et ajoute un rayon de bordure."
+    },
+    "shaped": {
+      "desc": "Les listes stylisées ont des bordures arrondies d'un côté de l'élément `v-list`."
+    },
+    "disabled": {
+      "desc": "Vous ne pouvez pas interagir avec `v-list`."
+    },
     "dense": {
-      "heading": "### Dense"
+      "heading": "### Dense",
+      "desc": "`v-list` peut être abaissé avec la propriété `dense`."
     },
     "flat": {
-      "heading": "### Plat"
+      "heading": "### Plat",
+      "desc": "Les éléments ne changent pas lorsque sélectionnés dans `v-list` avec la propriété `flat`."
+    },
+    "rounded": {
+      "heading": "### Arrondi",
+      "desc": "Vous pouvez faire arrondir les éléments `v-list`."
+    }
+  },
+  "props": {
+    "avatar": "Utilisé pour définir la hauteur minimale des tuiles sur un élément de liste en ligne",
+    "dense": "Hauteur max des tuiles de liste inférieure",
+    "disabled": "Désactive tous les composants `v-list-item`",
+    "expand": "Ne disparaîtra qu'après fermeture explicite",
+    "flat": "Supprimer le fond en surbrillance sur les éléments 'v-list's actifs",
+    "group": "Assigner un espace de nom de route. Accepte une chaîne ou une régression pour déterminer l'état actif",
+    "inactive": "Si défini, la tuile de liste ne sera pas rendue comme un lien même si elle a/href prop ou @click handler",
+    "link": "Applique les styles de survol `v-list-item`. Utile lorsque vous utilisez l'élément comme un _activator_.",
+    "nav": "Un style alternatif qui réduit la largeur `v-list-item` et arrondit les coins. Utilisé en général avec **[v-navigation-drawer](/components/navigation-drawers)**",
+    "noAction": "Supprime le padding de gauche assigné pour les icônes d'action des éléments du groupe",
+    "rounded": "Arrondi les bords `v-list-item`",
+    "shaped": "Fournit un style actif alternatif pour `v-list-item`.",
+    "subGroup": "Indiquez le composant comme groupe de liste imbriqué",
+    "subheader": "Supprime le padding supérieur. Utilisé lorsque le clignotement précédent est un en-tête",
+    "threeLine": "Augmente la hauteur des éléments de liste pour trois lignes. Ce prop utilise [line-clamp](https://developer.mozilla.org/fr-US/docs/Web/CSS/-webkit-line-clamp) et n'est pas pris en charge dans tous les navigateurs.",
+    "twoLine": "Augmente la hauteur des éléments de liste pour deux lignes. Ce prop utilise [line-clamp](https://developer.mozilla.org/fr-US/docs/Web/CSS/-webkit-line-clamp) et n'est pas pris en charge dans tous les navigateurs.",
+    "v-list-item": {
+      "color": "Applique la couleur spécifiée au contrôle lorsque dans un état **actif** ou **input-value** est **vrai** - il peut être le nom de la couleur matérielle (par exemple `success` ou `purple`) ou css color (`#033` ou `rgba(255, 0, 0, 0.5)`)",
+      "disabled": "Désactive le composant",
+      "inputValue": "Contrôle l'état **actif** de l'élément. Ceci est généralement utilisé pour mettre en évidence le composant",
+      "selectable": "Autoriser la sélection de texte dans `v-list-item`. Ce prop utilise [user-select](https://developer.mozilla.org/fr-US/docs/Web/CSS/user-select)",
+      "value": "La valeur utilisée lorsqu'un enfant d'un [v-list-item-group](/components/list-item-groups)."
+    },
+    "v-list-item-avatar": {
+      "color": "Mixins.Colorable.props.color",
+      "horizontal": "Utilise un style horizontal alternatif."
+    },
+    "v-list-group": {
+      "activeClass": "Mixins.Routable.props.activeClass",
+      "appendIcon": "Components.Inputs.props.appendIcon",
+      "prependIcon": "Components.Inputs.props.prependIcon",
+      "ripple": "Mixins.Rippleable.props.ripple",
+      "value": "Expire / Réduire le groupe de liste"
+    }
+  },
+  "slots": {
+    "v-list-group": {
+      "appendIcon": "Components.Inputs.props.appendIcon",
+      "prependIcon": "Components.Inputs.props.prependIcon"
+    }
+  },
+  "events": {
+    "v-list-group": {
+      "click": "Émis lorsque le composant est cliqué - déclenchera le composant à ripper lorsque le bouton clique à moins que le modificateur `.native` soit utilisé"
     }
   }
 }
