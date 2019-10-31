@@ -7,7 +7,9 @@ exports[`VMessages.ts should accept a scoped slot 1`] = `
         class="v-messages__wrapper"
   >
     <div class="v-messages__message">
-      Foo
+      <div>
+        Foo
+      </div>
     </div>
   </span>
 </div>
@@ -20,9 +22,20 @@ exports[`VMessages.ts should allow HTML 1`] = `
         class="v-messages__wrapper"
   >
     <div class="v-messages__message">
-      <a href="#">
-        a link
-      </a>
+      &lt;a href="#"&gt;a link&lt;/a&gt;
+    </div>
+  </span>
+</div>
+`;
+
+exports[`VMessages.ts should not allow HTML 1`] = `
+<div class="v-messages theme--light">
+  <span name="message-transition"
+        tag="div"
+        class="v-messages__wrapper"
+  >
+    <div class="v-messages__message">
+      &lt;a href="#"&gt;a link&lt;/a&gt;
     </div>
   </span>
 </div>
