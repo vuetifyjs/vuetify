@@ -68,6 +68,7 @@ export function parseLink (match, text, link) {
 export async function waitForReadystate () {
   if (
     typeof document !== 'undefined' &&
+    typeof window !== 'undefined' &&
     document.readyState !== 'complete'
   ) {
     await new Promise(resolve => {

@@ -1,44 +1,24 @@
 {
-  "headingText": "`v-data-table` コンポーネントは表形式のデータを表示するために使われます。ソート、検索、ページネーション、インライン編集、ヘッダーツールチップ、行の選択 などの機能を含んでいます。",
   "examples": {
-    "select": {
-      "heading": "選択可能な行"
-    },
-    "expand": {
-      "heading": "スロット: expand"
-    },
     "headers": {
-      "heading": "スロット: items と headers",
       "desc": "`items` と `headers` スロットは <kbd>td/th</kbd> タグを受け付けることができます。行の全体を制御したい場合は、 <kbd>tr</kbd> を受け付けることができます。"
     },
     "progress": {
-      "heading": "スロット: progress",
       "desc": "`progress` スロットは、Data Table のローディング状態の表示をカスタマイズする際に使用します。デフォルトでは `indeterminate` が設定された `v-progress-linear` が使用されます。"
     },
     "search": {
-      "heading": "no-results スロットを使用した検索",
       "desc": "Data table ではデータをフィルタリングするために `search` prop が用意されています"
     },
     "paginate": {
-      "heading": "外部ページネーション",
       "desc": "`pagination` prop を使用することで外部からページネーションを制御できます。 使用するには `.sync` modifier を適用する必要があります。"
     },
     "sort": {
-      "heading": "外部ソート",
       "desc": "`pagination` prop を使用することで外部からソートも制御できます。 使用するには `.sync` modifier を適用する必要があります。 prop でデフォルトでソートに使用するカラムを設定することもできます。"
     },
-    "server": {
-      "heading": "サーバーサイドでのページネーションとソート"
-    },
-    "headerless": {
-      "heading": "ヘッダー無しテーブル"
-    },
     "edit-dialog": {
-      "heading": "インライン編集",
       "desc": "`v-edit-dialog` コンポーネントは Data table 内部でインライン編集する際に使用します。"
     },
     "crud": {
-      "heading": "CRUD アクション",
       "desc": "各行を編集するために `v-dialog` コンポーネントを使用した、CRUD アクション付き Data table のサンプルです。"
     }
   },

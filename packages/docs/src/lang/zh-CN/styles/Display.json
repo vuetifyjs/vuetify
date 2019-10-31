@@ -1,6 +1,7 @@
 {
-  "heading": "# 显示",
-  "headingText": "显示辅助器允许您控制内容的显示，会根据当前的视野或实际的元素显示类型来作为可见性的条件。",
   "displayHeader": "## 显示",
+  "displayText": "指定元素的`display`属性。这些类可以应用到所有从`xs`到`xl`的断点，并且没有特定的断点。",
+  "displayText2": "_value_属性可以为下列之一：",
+  "displayText3": "为显示帮助类设置一个特定的断点时，它会应用到对应宽度及其更宽的屏幕比如，`d-lg-flex`会应用到`lg`和`xl`大小的屏幕上。",
   "visibilityHeader": "## 可见性"
 }

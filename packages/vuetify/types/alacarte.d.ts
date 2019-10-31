@@ -30,13 +30,17 @@ declare module 'vuetify/es5/directives' {
   import { DirectiveOptions } from 'vue'
 
   const ClickOutside: DirectiveOptions
-  const Ripple: DirectiveOptions
+  const Intersect: DirectiveOptions
+  const Mutate: DirectiveOptions
   const Resize: DirectiveOptions
+  const Ripple: DirectiveOptions
   const Scroll: DirectiveOptions
   const Touch: DirectiveOptions
 
   export {
     ClickOutside,
+    Intersect,
+    Mutate,
     Ripple,
     Resize,
     Scroll,

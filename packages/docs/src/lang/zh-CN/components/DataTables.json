@@ -1,44 +1,24 @@
 {
-  "headingText": "`v-data-table` 用于显示表格数据，功能包括排序、搜索、分页、行内编辑、头部提示以及行选择。",
   "examples": {
-    "select": {
-      "heading": "行选择框"
-    },
-    "expand": {
-      "heading": "expand 插槽"
-    },
     "headers": {
-      "heading": "items 和 headers 插槽",
       "desc": "`items` 和 `headers` 可以接受 <kbd>td/th</kbd> 标签, 或者你想控制一整行，可以使用 <kbd>tr</kbd> 标签。第二种情况下，`item-key`并不会自动在行上加上`key`，你需要手动添加。"
     },
     "progress": {
-      "heading": "progress 插槽",
       "desc": "这里也有一个 `progress` 插槽让你可以自定义显示表格的加载状态，默认情况下这是一个`indeterminate` `v-progress-linear`（即不确定进度的线性进度条）。"
     },
     "search": {
-      "heading": "搜索以及无结果时的 no-result 插槽",
       "desc": "数据表格还提供了一个 `search` 属性，允许你进行数据筛选。"
     },
     "paginate": {
-      "heading": "外部分页",
       "desc": "分页可以通过 `pagination` 属性在外部控制，切记使用时必须应用 `.sync` 修饰符。"
     },
     "sort": {
-      "heading": "外部排序",
       "desc": "排序也同样可以通过 `pagination` 属性在外部控制，也必须使用 `.sync` 修饰符。你也可以使用该属性设置默认的排序序列。"
     },
-    "server": {
-      "heading": "服务端分页和排序"
-    },
-    "headerless": {
-      "heading": "无头表格"
-    },
     "edit-dialog": {
-      "heading": "行内编辑",
       "desc": "使用 `v-edit-dialog` 组件来进行数据表格的行内编辑。 You can block closing the dialog when clicked outside by adding the **persistent** prop."
     },
     "crud": {
-      "heading": "CRUD 操作",
       "desc": "数据表格使用 `v-dialog` 组件来进行每行的CRUD操作。"
     }
   },

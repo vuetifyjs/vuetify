@@ -1,16 +1,44 @@
 {
-  "heading": "# Breakpoints",
-  "toc": {
-    "0": {
-      "text": "Introduction"
+  "components": [
+    "v-container",
+    "v-layout",
+    "v-flex",
+    "v-spacer"
+  ],
+  "toc": [
+    {
+      "text": "Introduction",
+      "href": "introduction"
     },
-    "2": {
-      "text": "API"
+    {
+      "text": "Utilisation",
+      "href": "utilisation"
+    },
+    {
+      "text": "API",
+      "href": "api"
+    },
+    {
+      "text": "Supplémentaire",
+      "href": "supplémentaire"
+    },
+    {
+      "text": "Exemples",
+      "href": "exemples"
+    },
+    {
+      "text": "Objet point d'arrêt",
+      "href": "breakpoint-object"
+    },
+    {
+      "text": "Personnaliser les points d'arrêt",
+      "href": "customize-breakpoint-thresholds"
     }
-  },
+  ],
   "breakpointHeader": "## Objet du service Breakpoint",
   "breakpointText1": "Vuetify convertit les breakpoints disponibles en un objet accessible depuis votre application. Cela vous permettra d'assigner / d'appliquer des propriétés et des attributs spécifiques en fonction de la taille de la fenêtre d'affichage. L'objet est disponible par `$vuetify.breakpoint`.",
   "breakpointHeader1a": "## Utilisation",
+  "breakpointText1a": "Vous pouvez spécifier des seuils de point de rupture personnalisés et la largeur de la barre de défilement. Gardez à l'esprit que vous devrez toujours mettre à jour les points d'arrêt de la grille css pour correspondre.",
   "breakpointText2": "Essayons un exemple réel. Vous avez un composant `v-dialog` que vous souhaitez convertir en dialogue **plein écran** sur les appareils mobiles. Normalement, vous devez lier des observateurs pour la taille de la fenêtre et / ou vérifier chaque fois que la page est chargée.",
   "breakpointText3": "Cela fait beaucoup de boilerplate à écrire. Même si vous choisissez d'utiliser la directive intégrée [v-resize](/directives/resizing), vous devrez toujours définir une méthode de redimensionnement. Avec l'objet **breakpoint**, vous pouvez complètement ignorer cette logique et reprendre la construction de votre application.",
   "customizeThresholdsText1": "Vous pouvez définir vos propres seuils de breakpoints en pixels, mais il s'agit actuellement d'un processus en deux étapes : 1. Pour mettre à jour les styles, vous devez remplacer les variables SASS `$grid-breakpoints` (veuillez consulter [SASS variables](/customization/sass-variables)). 2. Pour utiliser les mêmes valeurs du côté JavaScript, vous devez les transmettre lors du bootstrap de l'application, de la manière suivante :"

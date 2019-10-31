@@ -1,11 +1,9 @@
 {
-  "headingText": "Os componentes Text fields são usados para colecionar informação provida pelo usuário.",
   "examples": {
     "usage": {
       "desc": "Um text-field simples com placeholder e/ou label."
     },
     "single-line": {
-      "heading": "Tema claro em linha única",
       "desc": "Text-fields em linha única não possuem seu label flutuando quando estiver focado ou com dados."
     },
     "dense": {
@@ -14,11 +12,7 @@
     "icon": {
       "desc": "Ícones podem ser especificados como prepended ou appended."
     },
-    "character-counter": {
-      "heading": "Contador de caractere"
-    },
     "password": {
-      "heading": "Campo de senha",
       "desc": "Um campo de senha pode ser usado com um ícone anexado e uma função de retorno (callback) para de controlar sua visibilidade."
     },
     "validation": {
@@ -26,34 +20,27 @@
       "desc": "Vuetify inclui uma validação simples através da propriedade `rules`. Esta propriedade aceita um array de funções de retorno (callbacks). Enquanto estiver validando as regras, o valor do v-model atual será passado para a função de retorno. Esta função de retorno deve retornar `true` ou `String`, com a mensagem de erro."
     },
     "full-width-with-character-counter": {
-      "heading": "Text field com largura total e contador de caractere",
       "desc": "Text fields com largura total possibilitam a você criar campos de entrada sem limites. Neste exemplo, nós usamos o `v-divider` para separar os campos."
     },
     "hint": {
-      "heading": "Texto de sugestão",
       "desc": "A propriedade **hint** nos text-fields adiciona a string fornecida abaixo do text-field. Usando **persistent-hint** mantém a sugestão visível quando o text-field não estiver focado."
     },
     "prefixes-and-suffixes": {
-      "heading": "Prefixos e sufixos",
       "desc": "As propriedades **prefix** e **suffix** permitem a você adicionar na mesma linha um texto não modificável próximo ao text-field, no começo ou final"
     },
     "custom-validation": {
-      "heading": "Validações customizadas",
       "desc": "Enquanto o `v-form` ou plugins de terceiros como [vuelidate](https://github.com/monterail/vuelidate) ou [vee-validation](https://github.com/logaretm/vee-validate) podem ajudar a simplificar seu processo de validação, você pode simplesmente escolher controlar você mesmo."
     },
     "box": {
-      "heading": "Estilo em caixa",
       "desc": "Text-fields podem ser usados com um design em caixa alternativo. As props de ícones append e prepend **não** são suportadas neste modo."
     },
     "solo": {
-      "heading": "Estilo solo",
       "desc": "Text-fields podem ser usados com um design solo alternativo."
     },
     "custom-colors": {
       "desc": "Você pode opcionalmente modificar um text-field em qualquer cor que a oalheta de cores do Material design contenha. Abaixo é um exemplo de uma implementação de um formulário customizado com validação."
     },
     "progress-bar": {
-      "heading": "Barra de progresso",
       "desc": "Você pode exibir uma barra de progresso ao invés da linha inferior. Você pode usar o progresso indeterminado padrão que possuirá a mesma cor que o text field ou designar uma cor customizada usando o slot `progress`"
     }
   },

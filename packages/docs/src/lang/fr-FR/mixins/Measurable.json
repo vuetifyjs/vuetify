@@ -1,1 +1,10 @@
-{}
+{
+  "props": {
+    "height": "Définit la hauteur du composant.",
+    "maxHeight": "Définit la hauteur maximale du composant.",
+    "minHeight": "Définit la hauteur minimale du composant.",
+    "maxWidth": "Définit la largeur maximale du composant.",
+    "minWidth": "Définit la largeur minimale du composant.",
+    "width": "Définit la largeur du composant."
+  }
+}

@@ -1,5 +1,4 @@
 {
-  "headingText": "`v-chip`组件用于传递小块信息。使用`close`属性，厚切薯条变得互动，允许用户交互。",
   "examples": {
     "colored": {
       "heading": "色彩",
@@ -14,14 +13,9 @@
       "desc": "轮廓厚切薯条从当前的文字颜色继承它们的边框颜色。"
     },
     "label": {
-      "heading": "标签",
       "desc": "标签厚切薯条使用`v-card`的边框半径"
     },
-    "closable": {
-      "heading": "可关闭"
-    },
     "in-selects": {
-      "heading": "选中",
       "desc": "选择框可以用厚切薯条来显示选定的数据。"
     }
   },

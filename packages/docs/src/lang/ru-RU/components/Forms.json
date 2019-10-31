@@ -1,9 +1,5 @@
 {
-  "headingText": "Когда дело доходит до валидации, Vuetify имеет множество интеграций и искусно работает. Хотите использовать сторонний плагин проверки? Из коробки вы можете использовать [Vee-validate](https://github.com/baianat/Vee-validate) and [vuelidate](https://github.com/monterail/vuelidate).",
   "examples": {
-    "validation-with-submit-and-clear": {
-      "heading": "### Проверка с помощью отправки и очистка"
-    },
     "vee-validate": {
       "desc": "Vee-validate - это ещё один плагин проверки, который позволяет вам проверять свои формы. Одно из предостережений заключается в том, что вы должны добавить **type=\"checkbox\"** для правильной проверки `v-checkbox` при использовании **value** prop."
     }

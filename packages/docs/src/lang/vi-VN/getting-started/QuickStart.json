@@ -1,23 +1,4 @@
 {
-  "heading": "# Bắt đầu nhanh",
-  "headingText": "Sử dụng một trong các gói của Vuetify Vue CLI _(dựa trên các ví dụ chính thức)_ để bắt đầu dự án của bạn một cách đơn giản nhất. Vuetify hỗ trợ **SSR** (server-side rendering), **SPA** (single page application), **PWA** (progressive web application) and chuẩn **HTML**.",
-  "vueCliText4": "Sau khi cli đã được cài đặt, bạn có thể tạo dự án mới của mình. Chọn _default install_ sẽ tự động tích hợp các gói cơ bản như (e.g. _vuex_ or _vue-router_). Chương trình sẽ tạo một dự án Vue mới dựa trên thiết lập bạn đã chọn.",
-  "vueCliText5": "Bạn đã có một dự án mới, bạn có thể thêm [Vuetify package](https://github.com/vuetifyjs/vue-cli-plugin-vuetify) bằng cli.",
-  "vueCliText7": "Sau khi cài đặt xong, chỉ cần chạy <kbd>yarn serve</kbd> or <kbd>npm run serve</kbd> để khởi động ứng dụng của bạn.",
-  "uiHeader": "## Vue UI Install",
-  "uiText2": "Việc này sẽ khởi động Giao diện Vue và mở một [cửa sổ mới](http://localhost:8000) trong trình duyệt của bạn. Phía bên trái của màn hình, click **Plugins**. Sau khi chuyển trang, hãy gõ _Vuetify_ trong ô tìm.",
   "uiImg1": "Cài đặt Plugin Vuetify",
-  "uiImg2": "Cấu hình cài đặt Vuetify",
-  "uiText3": "Sau khi cài đặt, bạn sẽ thấy các tùy chọn mặc định cho ứng dụng Vuetify của bạn.",
-  "browserHeader": "## Trình duyệt được hỗ trợ",
-  "browserText": "Vuetify là một nền tảng phát triển nhằm thúc đẩy thế giới Web lên một tầm cao mới. Để hoàn thành tốt nhất sứ mệnh này, một số tính năng phải hi sinh để hỗ trợ cho các phiên bản Internet Explorer cũ. Đây không phải là danh sách đầy đủ các trình duyệt tương thích, mà là các trình duyệt chính được nhắm đến.",
-  "newHeader": "## Cài đặt mới",
-  "existingHeader": "## Cài đặt trên ứng dụng có sẵn",
-  "existingText1": "Để tích hợp Vuetify vào dự án có sẵn, bạn phải cài đặt nó bằng gói _npm package_. Bạn có thể sử dụng `npm` `yarn` để thực hiện việc này. Cả hai đều là thư viện quản lý gói, chúng cho phép bạn cài đặt các các gói được sủ dụng trong dự án của bạn.",
-  "ie11Header": "## Hỗ trợ IE11 & Safari 9",
-  "browserSupport": {
-    "supported": "Được hỗ trợ",
-    "notSupported": "Không hỗ trợ",
-    "polyfill": "Được hỗ trợ với polyfill"
-  }
+  "uiImg2": "Cấu hình cài đặt Vuetify"
 }

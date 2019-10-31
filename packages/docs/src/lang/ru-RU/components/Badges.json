@@ -1,13 +1,9 @@
 {
   "examples": {
-    "overlap": {
-      "heading": "### Перекрытие"
-    },
     "visibility": {
       "heading": "### Видимость"
     },
     "inline": {
-      "heading": "### В одну линию",
       "desc": "Badge также могут быть помещены в линию с текстом."
     },
     "icon": {

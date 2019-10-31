@@ -1,14 +1,10 @@
 {
   "examples": {
-    "font-awesome": {
-      "heading": "폰트어썸 (Font Awesome)"
-    },
     "color": {
       "heading": "색상 Color",
       "desc": "색상 헬퍼들을 이용하여 아이콘의 색을 기본적인 다크나 라이트 테마 이상으로 바꿀 수 있습니다."
     },
     "buttons": {
-      "heading": "버튼 (Buttons)",
       "desc": "아이콘은 액션을 강조하기 위해 버튼 안에서도 사용될 수 있습니다."
     }
   },

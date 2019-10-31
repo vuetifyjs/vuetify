@@ -1,6 +1,4 @@
 {
-  "heading": "# Entrées de fichier",
-  "headingText": "Le composant `v-file-input` est une entrée spécialisée qui fournit une interface propre pour sélectionner des fichiers, affichant des informations détaillées de sélection et de progression du téléchargement. Il est censé être un remplacement direct d'une entrée standard de fichier.",
   "examples": {
     "usage": {
       "desc": "Au cœur de ce composant, le composant `v-file-input` est un conteneur de base qui étend [v-text-field](/components/text-fields)."
@@ -10,43 +8,48 @@
       "desc": "Le fichier `v-input` peut contenir plusieurs fichiers en même temps lorsque vous utilisez le prop **multiple**."
     },
     "accept": {
-      "heading": "### Accepter des formats",
       "desc": "Le composant`v-file-input` ne peut accepter que des formats/types de fichiers spécifiques si vous le souhaitez. Pour plus d'informations, veuillez vérifier la documentation sur l'attribut [accept](https://developer.mozilla.org/fr-US/docs/Web/HTML/Element/input/file#accept)."
     },
     "chips": {
-      "heading": "### Avec des puces",
       "desc": "Un fichier sélectionné peut être affiché comme [chip](/components/chips). Lorsque vous utilisez les **chips** et **multiple** props, chaque puce sera affichée (par opposition au nombre de fichiers)."
     },
     "size": {
-      "heading": "### Afficher la taille"
+      "desc": "La taille affichée du fichier(s) sélectionné peut être configurée avec la propriété **show-size** . Les tailles d'affichage peuvent être soit _1024_ (la valeur par défaut utilisée lors de la fourniture de **true**) ou _1000_."
     },
     "counter": {
-      "heading": "### Compteur"
+      "heading": "### Compteur",
+      "desc": "Lorsque vous utilisez la propriété **show-size** avec **counter**, le nombre total de fichiers et de taille sera affiché sous l'entrée."
     },
     "selection": {
-      "heading": "### Sélection de champ",
       "desc": "En utilisant l'emplacement `selection`, vous pouvez personnaliser l'apparence de vos sélections d'entrée. Ceci est généralement fait avec [chips](/components/chips), mais n'importe quel composant ou balisage peut être utilisé."
     },
     "custom-icon": {
-      "heading": "### Icônes personnalisées",
       "desc": "L'icône \"v-file-input\" est prédéfinie par défaut, qui peut être réglée sur le composant ou ajustée globalement. Plus d'informations sur le changement de composants globaux peuvent être trouvées sur la [page des icônes de personnalisation](/customization/icônes)."
     },
     "validation": {
-      "heading": "### Validation",
       "desc": "Comme pour les autres entrées, vous pouvez utiliser le prop **rules** pour créer vos propres paramètres de validation personnalisés."
     },
     "advanced": {
-      "heading": "### Sélection de champ complexe",
       "desc": "La flexibilité de la sélection vous permet d'héberger des cas d'utilisation complexes. Dans cet exemple, nous montrons les deux premières sélections comme des champs, tout en ajoutant un indicateur de nombre pour le fichiers restant."
     },
     "dense": {
-      "heading": "### Dense"
+      "heading": "### Dense",
+      "desc": "Vous pouvez réduire la hauteur de l'entrée du fichier avec la prop `dense`."
     }
   },
   "props": {
+    "accept": "Un ou plusieurs [spécificateurs de type de fichier unique](https://developer.mozilla.org/fr-US/docs/Web/HTML/Element/input/file#Unique_file_type_specifiers) décrivant les types de fichiers à autoriser.",
     "chips": "Composants.Selects.props.chips",
+    "counterSizeString": "Le texte affiché lors de l'utilisation des props **counter** et **show-size** peut également être personnalisé dans le monde entier sur la [page d'internationalisation](/customization/internationalisation).",
     "counterString": "Le texte affiché lors de l'utilisation de la prop **counter** peut également être personnalisé globalement sur la [page d'internationalisation](/customization/internationalisation).",
-    "multiple": "Ajoute l'attribut **multiple** à l'entrée, permettant de choisir plusieurs fichiers."
+    "multiple": "Ajoute l'attribut **multiple** à l'entrée, permettant de choisir plusieurs fichiers.",
+    "showSize": "Définit la taille affichée des fichiers sélectionnés. Lorsque l'utilisation de **true** sera par défaut de _1000_ afficher (**kB, MB, GB**) tandis que _1024_ s'affichera (**KiB, MiB, GiB**).",
+    "smallChips": "Components.Selects.props.smallChips",
+    "truncateLength": "La longueur d'un nom de fichier avant qu'il soit tronqué avec des ellipsis",
+    "value": "Un seul ou un tableau de [objets de fichier](https://developer.mozilla.org/fr-US/docs/Web/API/File)."
+  },
+  "slots": {
+    "selection": "Champ pour définir une apparence personnalisée pour les éléments sélectionnés. Fournit l'actuel **index**, **text** (tronqué) et [file](https://developer.mozilla.org/fr-US/docs/Web/API/File)."
   },
   "events": {
     "change": "Components.Inputs.events.change"

@@ -1,6 +1,4 @@
 {
-  "heading": "# 색상 (Colors)",
-  "headingText": "**stylus** 와 **javascript** 를 통해 [Material Design spec](https://material.io/guidelines/style/color.html) 에 있는 모든 색상을 바로 사용할 수 있습니다. 이 값들은 스타일 시트, 컴포넌트 파일 그리고 실제 컴포넌트 안에서 **color class*시스템을 통해 사용될 수 있습니다.",
   "classesHeader": "## 클래스",
   "classesText2": "텍스트 색상 역시 **어둡게(darken)** 와 **밝게(lighten)** 만드는 변형(variants)을 `text--{lighten|darken}-{n}` 형식으로 지원합니다. ",
   "javascriptPackHeader": "## 자바스크립트 색상 팩(Javascript color pack)",

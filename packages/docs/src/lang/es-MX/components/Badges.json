@@ -1,13 +1,9 @@
 {
   "examples": {
-    "overlap": {
-      "heading": "Traslape"
-    },
     "visibility": {
       "heading": "Visibilidad"
     },
     "inline": {
-      "heading": "### En línea",
       "desc": "Las insignias pueden ser colocadas en línea con el texto."
     },
     "icon": {

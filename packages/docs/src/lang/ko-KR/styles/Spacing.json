@@ -1,6 +1,4 @@
 {
-  "heading": "# 간격",
-  "headingText": "새로운 클래스들을 만들지 않고 레이아웃을 업데이트합니다. 간격 도우미들은 요소의 margin이나 padding을 조절하는 데 유용합니다.",
   "propertyText": "_속성_ 은 다음과 같은 간격의 유형에 적용됩니다",
   "properties": [
     "`m` - `margin`에 적용",

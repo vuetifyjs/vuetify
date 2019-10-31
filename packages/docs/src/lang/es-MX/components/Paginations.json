@@ -1,11 +1,6 @@
 {
-  "headingText": "El componente `v-pagination` es utilizado para separar grandes conjuntos de datos de maner que sea más fácil para el usuario consumir la información. Dependiendo de la longitud que sea proveída, el componente de paginación escalará automáticamente. Para mantener la página actual, simplemente agrega un atributo `v-model`.",
   "examples": {
-    "long": {
-      "heading": "Largo"
-    },
     "limit": {
-      "heading": "Límite",
       "desc": "También puedes configurar manualmente el número máximo de botones de páginas visibles con la prop `total-visible`."
     },
     "icons": {
