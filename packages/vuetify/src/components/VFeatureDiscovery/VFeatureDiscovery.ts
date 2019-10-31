@@ -12,6 +12,7 @@ import Themeable from '../../mixins/themeable'
 // Directives
 import ClickOutside from '../../directives/click-outside'
 import Resize from '../../directives/resize'
+import Mutate from '../../directives/mutate'
 
 // Helpers
 import { convertToUnit, keyCodes } from '../../util/helpers'
@@ -71,6 +72,7 @@ export default baseMixins.extend<options>().extend({
   directives: {
     ClickOutside,
     Resize,
+    Mutate,
   },
 
   props: {
@@ -159,7 +161,6 @@ export default baseMixins.extend<options>().extend({
     minHighlightPadding: 20,
     stackClass: 'v-feature-discovery__content--active',
     stackMinZIndex: 6,
-    observer: null as MutationObserver | null,
   }),
 
   computed: {
@@ -323,20 +324,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   mounted () {
-    this.observer = new MutationObserver(this.updateDimensions)
-
-    this.observer.observe(this.$refs.content, {
-      attributes: true,
-      childList: true,
-      subtree: true,
-      characterData: true,
-    })
-
     this.isActive && this.activate()
-  },
-
-  beforeDestroy () {
-    this.observer && this.observer.disconnect()
   },
 
   methods: {
@@ -560,6 +548,10 @@ export default baseMixins.extend<options>().extend({
           staticClass: 'v-feature-discovery__wrap',
           style: this.wrapStyle,
           ref: 'content',
+          directives: [{
+            name: 'mutate',
+            value: this.updateDimensions,
+          }],
         },
         this.$slots.default
       )
