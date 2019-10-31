@@ -1,4 +1,4 @@
 {
-  "header": "Soporte para touch",
-  "headerText": "La directiva <code>v-touch</code> te permite capturar gestos de swipe y aplicar callbacks direccionales."
+  "heading": "Soporte para touch",
+  "headingText": "La directiva <code>v-touch</code> te permite capturar gestos de swipe y aplicar callbacks direccionales."
 }

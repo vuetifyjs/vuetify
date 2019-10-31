@@ -2,7 +2,6 @@
 import { VExpandTransition } from '../transitions'
 import { VIcon } from '../VIcon'
 import VTreeview from './VTreeview'
-import VTreeviewNode from './VTreeviewNode'
 
 // Mixins
 import { inject as RegistrableInject } from '../../mixins/registrable'
@@ -39,11 +38,11 @@ export const VTreeviewNodeProps = {
   },
   expandIcon: {
     type: String,
-    default: '$vuetify.icons.subgroup',
+    default: '$subgroup',
   },
   indeterminateIcon: {
     type: String,
-    default: '$vuetify.icons.checkboxIndeterminate',
+    default: '$checkboxIndeterminate',
   },
   itemChildren: {
     type: String,
@@ -64,15 +63,15 @@ export const VTreeviewNodeProps = {
   loadChildren: Function as PropValidator<(item: any) => Promise<void>>,
   loadingIcon: {
     type: String,
-    default: '$vuetify.icons.loading',
+    default: '$loading',
   },
   offIcon: {
     type: String,
-    default: '$vuetify.icons.checkboxOff',
+    default: '$checkboxOff',
   },
   onIcon: {
     type: String,
-    default: '$vuetify.icons.checkboxOn',
+    default: '$checkboxOn',
   },
   openOnClick: Boolean,
   rounded: Boolean,
@@ -86,7 +85,7 @@ export const VTreeviewNodeProps = {
 }
 
 /* @vue/component */
-export default baseMixins.extend<options>().extend({
+const VTreeviewNode = baseMixins.extend<options>().extend({
   name: 'v-treeview-node',
 
   inject: {
@@ -258,7 +257,7 @@ export default baseMixins.extend<options>().extend({
           click: () => {
             if (this.disabled) return
 
-            if (this.openOnClick && this.children) {
+            if (this.openOnClick && this.hasChildren) {
               this.open()
             } else if (this.activatable) {
               this.isActive = !this.isActive
@@ -334,3 +333,5 @@ export default baseMixins.extend<options>().extend({
     }, children)
   },
 })
+
+export default VTreeviewNode

@@ -1,24 +1,24 @@
 {
-  "header": "crwdns33324:0crwdne33324:0",
-  "headerText": "crwdns39840:0crwdne39840:0",
+  "heading": "crwdns33324:0crwdne33324:0",
+  "headingText": "crwdns39840:0crwdne39840:0",
   "examples": {
     "usage": {
       "desc": "crwdns33328:0crwdne33328:0"
     },
     "onboarding": {
-      "header": "crwdns33330:0crwdne33330:0",
+      "heading": "crwdns33330:0crwdne33330:0",
       "desc": "crwdns33332:0crwdne33332:0"
     },
     "vertical": {
-      "header": "crwdns39842:0crwdne39842:0",
+      "heading": "crwdns39842:0crwdne39842:0",
       "desc": "crwdns39844:0crwdne39844:0"
     },
     "reverse": {
-      "header": "crwdns39846:0crwdne39846:0",
+      "heading": "crwdns39846:0crwdne39846:0",
       "desc": "crwdns39848:0crwdne39848:0"
     },
     "account": {
-      "header": "crwdns33334:0crwdne33334:0",
+      "heading": "crwdns33334:0crwdne33334:0",
       "desc": "crwdns39850:0crwdne39850:0"
     }
   },

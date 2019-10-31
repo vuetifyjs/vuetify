@@ -14,7 +14,7 @@
             <v-icon>mdi-chevron-left</v-icon>
           </v-btn>
 
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
 
           <v-btn dark icon class="mr-4">
             <v-icon>mdi-pencil</v-icon>
@@ -25,7 +25,7 @@
           </v-btn>
         </v-card-title>
 
-        <div class="flex-grow-1"></div>
+        <v-spacer></v-spacer>
 
         <v-card-title class="white--text pl-12 pt-12">
           <div class="display-1 pl-12 pt-12">Ali Conners</div>

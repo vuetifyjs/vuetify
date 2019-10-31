@@ -1,5 +1,5 @@
 {
-  "header": "# Mises en page pré-faites",
-  "headerText": "Le système de mise en page est le cœur de chaque application. Voici quelques exemples des nombreuses possibilités que vous avez pour personnaliser l'apparence et la convivialité de votre application.",
+  "heading": "# Mises en page pré-faites",
+  "headingText": "Le système de mise en page est le cœur de chaque application. Voici quelques exemples des nombreuses possibilités que vous avez pour personnaliser l'apparence et la convivialité de votre application.",
   "alert": "Si vous recherchez des informations supplémentaires sur la structure de ces modèles, allez à la [page d'application](/components/application)."
 }

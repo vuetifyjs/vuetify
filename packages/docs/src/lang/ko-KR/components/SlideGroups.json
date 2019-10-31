@@ -1,10 +1,10 @@
 {
   "examples": {
     "custom-icons": {
-      "header": "커스텀 아이콘 (Custom icons)"
+      "heading": "커스텀 아이콘 (Custom icons)"
     },
     "multiple": {
-      "header": "복수선택 (Multiple)"
+      "heading": "복수선택 (Multiple)"
     }
   }
 }

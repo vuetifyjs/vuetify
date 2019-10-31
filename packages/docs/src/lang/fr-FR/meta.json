@@ -1,4 +1,7 @@
 {
+  "": {
+    "title": "Framework de composants Material Design"
+  },
   "404": {
     "title": "Oups, 404",
     "description": "Oups, on dirait que ce que vous cherchez n'est pas là !"
@@ -13,23 +16,23 @@
   "getting-started/why-vuetify": {
     "title": "Pourquoi Vuetify ?"
   },
-  "getting-started/frequently-asked-questions": {
+  "introduction/frequently-asked-questions": {
     "title": "Foire aux questions",
     "keywords": "foire aux questions, faq"
   },
-  "getting-started/meet-the-team": {
+  "introduction/meet-the-team": {
     "title": "Rencontrez l'équipe",
     "keywords": "équipe de développement vuetify, vuetify core team"
   },
-  "getting-started/sponsors-and-backers": {
+  "introduction/sponsors-and-backers": {
     "title": "Sponsors et donateurs"
   },
   "getting-started/contributing": {
     "title": "Contribuer",
     "keywords": "contribuer, demande de fonctionnalité"
   },
-  "getting-started/consulting-and-support": {
-    "title": "Consulting et support"
+  "professional-support/consulting": {
+    "title": "Conseils et support"
   },
   "customization/breakpoints": {
     "title": "Breakpoints"
@@ -61,10 +64,19 @@
     "title": "Typographie de l'application",
     "keywords": "typographie, entêtes, titres"
   },
+  "framework/sandbox": {
+    "title": "Sandbox"
+  },
   "components/api-explorer": {
     "title": "Explorateur API"
   },
   "components/application": {
     "title": "Paramètres de l'application"
+  },
+  "components/aspect-ratios": {
+    "title": "Ratio d'affichage"
+  },
+  "components/file-inputs": {
+    "title": "Composant de lecture de fichier"
   }
 }

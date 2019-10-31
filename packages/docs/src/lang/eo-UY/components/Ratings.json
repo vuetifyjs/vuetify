@@ -1,36 +1,36 @@
 {
-  "header": "crwdns32996:0crwdne32996:0",
-  "headerText": "crwdns32998:0crwdne32998:0",
+  "heading": "crwdns32996:0crwdne32996:0",
+  "headingText": "crwdns32998:0crwdne32998:0",
   "examples": {
     "usage": {
       "desc": "crwdns33000:0crwdne33000:0"
     },
     "sizes": {
-      "header": "crwdns33002:0crwdne33002:0",
+      "heading": "crwdns33002:0crwdne33002:0",
       "desc": "crwdns33004:0crwdne33004:0"
     },
     "length": {
-      "header": "crwdns33006:0crwdne33006:0",
+      "heading": "crwdns33006:0crwdne33006:0",
       "desc": "crwdns33008:0crwdne33008:0"
     },
     "increments": {
-      "header": "crwdns33010:0crwdne33010:0",
+      "heading": "crwdns33010:0crwdne33010:0",
       "desc": "crwdns33012:0crwdne33012:0"
     },
     "slots": {
-      "header": "crwdns39346:0crwdne39346:0",
+      "heading": "crwdns39346:0crwdne39346:0",
       "desc": "crwdns39348:0crwdne39348:0"
     },
     "card": {
-      "header": "crwdns33018:0crwdne33018:0",
+      "heading": "crwdns33018:0crwdne33018:0",
       "desc": "crwdns33020:0crwdne33020:0"
     },
     "advanced": {
-      "header": "crwdns33022:0crwdne33022:0",
+      "heading": "crwdns33022:0crwdne33022:0",
       "desc": "crwdns33024:0crwdne33024:0"
     },
     "colors": {
-      "header": "crwdns39350:0crwdne39350:0",
+      "heading": "crwdns39350:0crwdne39350:0",
       "desc": "crwdns39352:0crwdne39352:0"
     }
   },

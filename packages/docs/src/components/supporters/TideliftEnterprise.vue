@@ -4,9 +4,11 @@
       :max-width="$vuetify.breakpoint.lgAndUp ? '60%' : '100%'"
       class="float-left mb-12"
     >
-      <doc-heading>subHeader</doc-heading>
-      <doc-markdown>subText1</doc-markdown>
-      <doc-markdown>subText2</doc-markdown>
+      <base-heading>subHeader</base-heading>
+
+      <base-markdown>subText1</base-markdown>
+
+      <base-markdown>subText2</base-markdown>
 
       <supporters-tidelift-more-demo />
     </v-responsive>
@@ -18,9 +20,11 @@
     />
 
     <div style="clear: both;">
-      <doc-heading>depHeader</doc-heading>
-      <doc-markdown>depText1</doc-markdown>
-      <doc-markdown>depText2</doc-markdown>
+      <base-heading>depHeader</base-heading>
+
+      <base-markdown>depText1</base-markdown>
+
+      <base-markdown>depText2</base-markdown>
 
       <supporters-tidelift-more-demo />
     </div>

@@ -1,39 +1,39 @@
 {
-  "headerText": "El componente `v-btn` reemplaza el botón html estándar con un diseño de material design y una multitud de opciones. Cualquier clase auxiliar de color puede ser utilizada para alterar el color del texto o del fondo.",
+  "headingText": "El componente `v-btn` reemplaza el botón html estándar con un diseño de material design y una multitud de opciones. Cualquier clase auxiliar de color puede ser utilizada para alterar el color del texto o del fondo.",
   "examples": {
     "flat": {
-      "header": "Flat",
+      "heading": "Flat",
       "desc": "Los botones _flat_ no tienen sombra ni color de fondo. Sólo cuando se pasa el mouse por encima de ellos es que se muestra el contenedor del botón."
     },
     "raised": {
-      "header": "Raised",
+      "heading": "Raised",
       "desc": "Los botones _raised_ tienen una sombra que incrementa cuando se hace click en ellos. Este es el estilo por default."
     },
     "depressed": {
-      "header": "Depressed",
+      "heading": "Depressed",
       "desc": "Los botones _depressed_ mantienen su color de fondo, pero no tienen sombra."
     },
     "dropdown": {
-      "header": "Variantes de Button Dropdown",
+      "heading": "Variantes de Button Dropdown",
       "desc": "Los _button dropdowns_ son selects regulares con estilos adicionales."
     },
     "icon": {
-      "header": "Ícono",
+      "heading": "Ícono",
       "desc": "Los íconos pueden ser usados como el contenido principal de un botón."
     },
     "floating": {
-      "header": "Floating"
+      "heading": "Floating"
     },
     "loaders": {
-      "header": "Loaders",
+      "heading": "Loaders",
       "desc": "Al utilizar la prop `loading` puedes notificar al usuario que hay una actividad en proceso. El comportamiento default es que se aplica un componente `v-progress-circular` pero esto puede ser personalizado."
     },
     "sizing": {
-      "header": "Tamaños",
+      "heading": "Tamaños",
       "desc": "Los botones pueden obtener diferentes tamaños para poder ser usados en una multitud de escenarios."
     },
     "block": {
-      "header": "Block",
+      "heading": "Block",
       "desc": "Los _block butons_ se extienden hasta abarcar el ancho total disponible."
     }
   },

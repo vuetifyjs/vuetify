@@ -570,6 +570,20 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should round down min date in ISO 8601 format', async () => {
+    const cb = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        value: '2019-01-20',
+        min: '2019-01-06T15:55:56.441Z',
+      },
+    })
+
+    wrapper.vm.$on('input', cb)
+    wrapper.findAll('.v-date-picker-table--date tbody tr+tr td:first-child button').at(0).trigger('click')
+    expect(cb.mock.calls[0][0]).toEqual('2019-01-06')
+  })
+
   it('should emit @input and not emit @change when month is clicked (not reative picker)', async () => {
     const wrapper = mountFunction({
       propsData: {

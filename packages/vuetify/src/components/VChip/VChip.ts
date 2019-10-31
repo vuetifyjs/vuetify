@@ -50,14 +50,14 @@ export default mixins(
     close: Boolean,
     closeIcon: {
       type: String,
-      default: '$vuetify.icons.delete',
+      default: '$delete',
     },
     disabled: Boolean,
     draggable: Boolean,
     filter: Boolean,
     filterIcon: {
       type: String,
-      default: '$vuetify.icons.complete',
+      default: '$complete',
     },
     label: Boolean,
     link: Boolean,

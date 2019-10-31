@@ -3,8 +3,11 @@
     "usage": {
       "uninverted": true
     },
+    "outlined": {
+      "heading": "### Contour"
+    },
     "closable": {
-      "header": "### Refermable",
+      "heading": "### Refermable",
       "uninverted": true
     },
     "in-selects": {

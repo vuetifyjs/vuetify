@@ -1,6 +1,6 @@
 {
-  "header": "# Internationalisation (i18n)",
-  "headerText": "Vuetify prend en charge l'internationalisation linguistique (i18n) de ses composants. Lors du bootstrapping de votre application, vous pouvez spécifier les langues disponibles et la langue actuellement active avec l'option**current**. Le service **lang** permet aussi l'intégration facile avec [vue-i18n](#vue-i18n).",
+  "heading": "# Internationalisation (i18n)",
+  "headingText": "Vuetify prend en charge l'internationalisation linguistique (i18n) de ses composants. Lors du bootstrapping de votre application, vous pouvez spécifier les langues disponibles et la langue actuellement active avec l'option**current**. Le service **lang** permet aussi l'intégration facile avec [vue-i18n](#vue-i18n).",
   "gettingStarted": "## Commencer",
   "gettingStartedText": "Pour définir les langues disponibles ou la langue actuelle, indiquez l'option `lang` lors de l'installation de Vuetify. La propriété `locales` fournie sera fusionnée avec les langues déjà existantes. Vous pouvez modifier les langues pendant l'exécution à l'aide de l'objet `$vuetify` sur l'instance Vue.",
   "availableLocalesText": "Actuellement, Vuetify fournit des traductions dans les langues suivantes :",

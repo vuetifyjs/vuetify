@@ -1,72 +1,72 @@
 {
   "examples": {
     "date-allowed-dates": {
-      "header": "Date pickers - Allowed dates"
+      "heading": "Date pickers - Allowed dates"
     },
     "date-birthday": {
-      "header": "Date pickers - birthday picker"
+      "heading": "Date pickers - birthday picker"
     },
     "date-colorable": {
-      "header": "Date pickers - Colors"
+      "heading": "Date pickers - Colors"
     },
     "date-current": {
-      "header": "Date pickers - current date indicator"
+      "heading": "Date pickers - current date indicator"
     },
     "date-dialog-and-menu": {
-      "header": "Date pickers - In dialog and menu"
+      "heading": "Date pickers - In dialog and menu"
     },
     "date-events": {
       "desc": "You can specify events using arrays, objects, and functions. To change the default color of the event use **event-color** prop.",
-      "header": "Date pickers - Events"
+      "heading": "Date pickers - Events"
     },
     "date-formatting": {
-      "header": "Date pickers - formatting date"
+      "heading": "Date pickers - formatting date"
     },
     "date-icons": {
-      "header": "Date pickers - icons"
+      "heading": "Date pickers - icons"
     },
     "date-internationalization": {
-      "header": "Date pickers - Internationalization"
+      "heading": "Date pickers - Internationalization"
     },
     "date-picker-date": {
-      "header": "Date pickers - react to disaplyed month/year change"
+      "heading": "Date pickers - react to disaplyed month/year change"
     },
     "date-readonly": {
-      "header": "Date pickers - read only"
+      "heading": "Date pickers - read only"
     },
     "date-width": {
-      "header": "Date pickers - Setting picker width"
+      "heading": "Date pickers - Setting picker width"
     },
     "month-allowed-months": {
       "desc": "You can specify allowed months using arrays, objects, and functions.",
-      "header": "Month pickers - Allowed months"
+      "heading": "Month pickers - Allowed months"
     },
     "month-colorable": {
-      "header": "Month pickers - Colors"
+      "heading": "Month pickers - Colors"
     },
     "month-current": {
-      "header": "Month pickers - current month indicator"
+      "heading": "Month pickers - current month indicator"
     },
     "month-dialog-and-menu": {
-      "header": "Month pickers - In dialog and menu"
+      "heading": "Month pickers - In dialog and menu"
     },
     "month-events": {
       "desc": "You can specify events using arrays, objects, and functions. To change the default color of the event use **event-color** prop."
     },
     "month-icons": {
-      "header": "Month pickers - icons"
+      "heading": "Month pickers - icons"
     },
     "month-internationalization": {
-      "header": "Month pickers - Internationalization"
+      "heading": "Month pickers - Internationalization"
     },
     "month-light": {
-      "header": "Month pickers"
+      "heading": "Month pickers"
     },
     "month-readonly": {
-      "header": "Month pickers - read only"
+      "heading": "Month pickers - read only"
     },
     "month-width": {
-      "header": "Month pickers - Setting picker width"
+      "heading": "Month pickers - Setting picker width"
     }
   }
 }

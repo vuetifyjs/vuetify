@@ -1,24 +1,24 @@
 {
-  "header": "crwdns40062:0crwdne40062:0",
-  "headerText": "crwdns33608:0[Vee-validate]crwdnd33608:0[vuelidate]crwdne33608:0",
+  "heading": "crwdns40062:0crwdne40062:0",
+  "headingText": "crwdns33608:0[Vee-validate]crwdnd33608:0[vuelidate]crwdne33608:0",
   "examples": {
     "usage": {
       "desc": "crwdns33610:0crwdne33610:0"
     },
     "rules": {
-      "header": "crwdns33612:0crwdne33612:0",
+      "heading": "crwdns33612:0crwdne33612:0",
       "desc": "crwdns33614:0crwdne33614:0"
     },
     "validation-with-submit-and-clear": {
-      "header": "crwdns40064:0crwdne40064:0",
+      "heading": "crwdns40064:0crwdne40064:0",
       "desc": "crwdns40066:0$refscrwdnd40066:0$refscrwdnd40066:0$refscrwdne40066:0"
     },
     "vuelidate": {
-      "header": "crwdns33620:0crwdne33620:0",
+      "heading": "crwdns33620:0crwdne33620:0",
       "desc": "crwdns33622:0[Documentation]crwdne33622:0"
     },
     "vee-validate": {
-      "header": "crwdns40068:0crwdne40068:0",
+      "heading": "crwdns40068:0crwdne40068:0",
       "desc": "crwdns40070:0[Documentation]crwdne40070:0"
     }
   },

@@ -1,12 +1,19 @@
 {
-  "1500": [
+  "Premiere": [
     {
       "name": "QOMPLX",
       "href": "https://www.qomplx.com/",
-      "logo": "backers/QOMPLX.png"
+      "logo": "backers/QOMPLX.png",
+      "darkLogo": "backers/QOMPLX-dark.png"
+    },
+    {
+      "name": "Vueconf.US",
+      "href": "http://vueconf.us/",
+      "logo": "backers/vueconf_us.png",
+      "darkLogo": "backers/vueconf_us-dark.png"
     }
   ],
-  "500": [
+  "Diamond": [
     {
       "type": "Patron",
       "name": "LMAX Exchange",
@@ -29,7 +36,7 @@
       "href": "https://vuemastery.com/"
     }
   ],
-  "250": [
+  "Platinum": [
     {
       "name": "rateGenius",
       "href": "https://application.rategenius.com/",
@@ -56,7 +63,7 @@
       "logo": "backers/quanted-square.svg"
     }
   ],
-  "50": [
+  "Gold": [
     {
       "name": "Deister Software",
       "href": "http://www.deister.es/",

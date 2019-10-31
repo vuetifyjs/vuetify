@@ -1,6 +1,6 @@
 {
-  "header": "Resize 디렉티브(directive)",
-  "headerText": "`v-resize` 디렉티브는 윈도우의 크기를 변경할 때 특정 함수를 호출하기 위해 사용됩니다.",
+  "heading": "Resize 디렉티브(directive)",
+  "headingText": "`v-resize` 디렉티브는 윈도우의 크기를 변경할 때 특정 함수를 호출하기 위해 사용됩니다.",
   "options": {
     "value": "`v-resize=\"callback\"` 윈도우가 리사이즈될 때 호출되는 함수"
   }

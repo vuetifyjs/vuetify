@@ -1,14 +1,14 @@
 {
   "examples": {
     "inset": {
-      "header": "Inset dividers",
+      "heading": "Inset dividers",
       "desc": "Los _inset dividers_ se mueven 72px hacia la derecha arriba. Esto causará que se alineen con los items de la lista.."
     },
     "vertical": {
-      "header": "_Dividers_ en modo vertical"
+      "heading": "_Dividers_ en modo vertical"
     },
     "divider-list-portrait": {
-      "header": "_Dividers_ en modo _Portrait_",
+      "heading": "_Dividers_ en modo _Portrait_",
       "desc": "Crea _cards_ personalizadas para que se ajusten a cualquier caso de uso"
     }
   },

@@ -322,17 +322,15 @@ export const keyCodes = Object.freeze({
   pagedown: 34,
 })
 
-const ICONS_PREFIX = '$vuetify.'
-
-// This remaps internal names like '$vuetify.icons.cancel'
+// This remaps internal names like '$cancel' or '$vuetify.icons.cancel'
 // to the current name or component for that icon.
 export function remapInternalIcon (vm: Vue, iconName: string): VuetifyIcon {
-  if (!iconName.startsWith(ICONS_PREFIX)) {
+  if (!iconName.startsWith('$')) {
     return iconName
   }
 
   // Get the target icon name
-  const iconPath = `$vuetify.icons.values.${iconName.split('.').pop()}`
+  const iconPath = `$vuetify.icons.values.${iconName.split('$').pop()!.split('.').pop()}`
 
   // Now look up icon indirection name,
   // e.g. '$vuetify.icons.values.cancel'
@@ -369,8 +367,13 @@ export function upperFirst (str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
-export function groupByProperty (xs: any[], key: string): Record<string, any[]> {
-  return xs.reduce((rv, x) => {
+export function groupItems (
+  items: any[],
+  groupBy: string[],
+  groupDesc: boolean[]
+): Record<string, any[]> {
+  const key = groupBy[0]
+  return items.reduce((rv, x) => {
     (rv[x[key]] = rv[x[key]] || []).push(x)
     return rv
   }, {})
@@ -388,6 +391,9 @@ export function sortItems (
   customSorters?: Record<string, compareFn>
 ) {
   if (sortBy === null || !sortBy.length) return items
+
+  const numericCollator = new Intl.Collator(locale, { numeric: true, usage: 'sort' })
+  const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
 
   return items.sort((a, b) => {
     for (let i = 0; i < sortBy.length; i++) {
@@ -416,11 +422,8 @@ export function sortItems (
       [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
 
       if (sortA !== sortB) {
-        const sortResult = (!isNaN(sortA) && !isNaN(sortB))
-          ? Number(sortA) - Number(sortB)
-          : sortA.localeCompare(sortB, locale)
-
-        if (sortResult) return sortResult
+        if (!isNaN(sortA) && !isNaN(sortB)) return numericCollator.compare(sortA, sortB)
+        return stringCollator.compare(sortA, sortB)
       }
     }
 

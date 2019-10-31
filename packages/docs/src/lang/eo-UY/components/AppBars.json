@@ -1,48 +1,48 @@
 {
-  "header": "crwdns38446:0crwdne38446:0",
-  "headerText": "crwdns38448:0[v-navigation-drawer]crwdne38448:0",
+  "heading": "crwdns38446:0crwdne38446:0",
+  "headingText": "crwdns38448:0[v-navigation-drawer]crwdne38448:0",
   "examples": {
     "usage": {
       "desc": "crwdns38450:0crwdne38450:0"
     },
     "dense": {
-      "header": "crwdns38452:0crwdne38452:0",
+      "heading": "crwdns38452:0crwdne38452:0",
       "desc": "crwdns38454:0crwdne38454:0"
     },
     "prominent": {
-      "header": "crwdns38456:0crwdne38456:0",
+      "heading": "crwdns38456:0crwdne38456:0",
       "desc": "crwdns38458:0crwdne38458:0"
     },
     "img": {
-      "header": "crwdns38460:0crwdne38460:0",
+      "heading": "crwdns38460:0crwdne38460:0",
       "desc": "crwdns38462:0crwdne38462:0"
     },
     "img-fade": {
-      "header": "crwdns38464:0crwdne38464:0",
+      "heading": "crwdns38464:0crwdne38464:0",
       "desc": "crwdns38466:0crwdne38466:0"
     },
     "hide": {
-      "header": "crwdns38468:0crwdne38468:0",
+      "heading": "crwdns38468:0crwdne38468:0",
       "desc": "crwdns38470:0crwdne38470:0"
     },
     "scroll-threshold": {
-      "header": "crwdns38472:0crwdne38472:0",
+      "heading": "crwdns38472:0crwdne38472:0",
       "desc": "crwdns38474:0crwdne38474:0"
     },
     "collapse": {
-      "header": "crwdns38476:0crwdne38476:0",
+      "heading": "crwdns38476:0crwdne38476:0",
       "desc": "crwdns38478:0crwdne38478:0"
     },
     "elevate-on-scroll": {
-      "header": "crwdns38480:0crwdne38480:0",
+      "heading": "crwdns38480:0crwdne38480:0",
       "desc": "crwdns38482:0crwdne38482:0"
     },
     "inverted-scroll": {
-      "header": "crwdns38484:0crwdne38484:0",
+      "heading": "crwdns38484:0crwdne38484:0",
       "desc": "crwdns38486:0crwdne38486:0"
     },
     "menu": {
-      "header": "crwdns38488:0crwdne38488:0",
+      "heading": "crwdns38488:0crwdne38488:0",
       "desc": "crwdns38490:0crwdne38490:0"
     }
   },

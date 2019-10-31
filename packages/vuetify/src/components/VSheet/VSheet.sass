@@ -1,5 +1,5 @@
 // Imports
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 // Theme
 +theme(v-sheet) using ($material)
@@ -8,5 +8,7 @@
   color: map-deep-get($material, 'text', 'primary')
 
 .v-sheet
+  border-radius: $sheet-border-radius
+
   &--tile
     border-radius: 0

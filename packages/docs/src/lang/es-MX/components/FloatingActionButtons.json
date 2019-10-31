@@ -1,20 +1,20 @@
 {
-  "header": "Botones: Floating Action Button",
+  "heading": "Botones: Floating Action Button",
   "examples": {
     "small": {
-      "header": "Variante _small_",
+      "heading": "Variante _small_",
       "desc": "Para una mejor apariencia, usamos un botón pequeño para que combine con nuestra lista de _avatars_."
     },
     "display-animation": {
-      "header": "Animados",
+      "heading": "Animados",
       "desc": "Al ser mostrados por primera vez, los FAB deben animarse en la pantalla. Aquí usamos `v-fab-transition` con v-show. Puedes también usar cualquier transición personalizada ya sea de Vuetify o una hecha por tí."
     },
     "lateral-screens": {
-      "header": "Pantallas laterales",
+      "heading": "Pantallas laterales",
       "desc": "Cuando cambias la acción default de tu botóm, se recomienda que muestres una tansición que represente un cambio. Hacemos esto mediante un _binding_ de la prop `key` a un dato que puede mandar una señal apropiada de un cambio al sistema de transición de Vue. Aunque puedes usar una transición personalizada para esto, asegúrate de que la prop `mode` sea **out-in**."
     },
     "speed-dial": {
-      "header": "FAB con _speed-dial_",
+      "heading": "FAB con _speed-dial_",
       "desc": "El componente _speed-dial_ tiene una api muy robusta para personalizar la experiencia con FAB exactamente de la forma que tú quieras."
     }
   },

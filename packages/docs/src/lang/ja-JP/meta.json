@@ -1,6 +1,28 @@
 {
+  "": {
+    "title": "マテリアルデザインコンポーネントフレームワーク",
+    "description": "VuetifyはVue.jsのマテリアルデザインコンポーネントフレームワークです。美しいコンテンツを持つリッチアプリケーションを作成するのに必要不可欠なツールを提供することを目的としています。",
+    "keywords": "vue, material design components, vue components, material design components, vuetify, vuetify.js, component framework"
+  },
+  "404": {
+    "title": "おっと、404のようです。",
+    "description": "おっと、あなたが探しているものはここにはないようです。"
+  },
   "getting-started/quick-start": {
+    "title": "クイックスタート",
     "keywords": "quick start, vuetify templates, get started"
+  },
+  "getting-started/pre-made-layouts": {
+    "title": "アプリケーションレイアウト",
+    "keywords": "事前定義されたレイアウト、レイアウト、アプリケーションレイアウト、マテリアルデザインレイアウト"
+  },
+  "getting-started/unit-testing": {
+    "title": "ユニットテスト",
+    "description": "あなたのVueアプリケーション内でVuetifyコンポーネントとvue-test-utilsを使ってユニットテストを書く方法を学ぶ。"
+  },
+  "getting-started/why-vuetify": {
+    "title": "Vuetifyを選ぶ理由",
+    "description": "Vuetifyはとてもアクティブなコミュニティがあり、マテリアルデザインコンポーネントの簡単な使い方を提供しています。また、それは継続的にアップデートされます。"
   },
   "customization/theme": {
     "description": "Setup your custom application theme by changing a few variables."

@@ -1,20 +1,20 @@
 {
-  "header": "# Data iterators",
-  "headerText": "The `v-data-iterator` component is used for displaying data, and shares a majority of its functionality with the `v-data-table` component. Features include sorting, searching, pagination, and selection.",
+  "heading": "# Data iterators",
+  "headingText": "The `v-data-iterator` component is used for displaying data, and shares a majority of its functionality with the `v-data-table` component. Features include sorting, searching, pagination, and selection.",
   "examples": {
     "usage": {
       "desc": "The `v-data-iterator` allows you to customize exactly how to display your data. In this example we are using a grid with cards."
     },
     "slots": {
-      "header": "### Slots",
+      "heading": "### Slots",
       "desc": "The `v-data-iterator` has both a header and footer slot for adding extra content."
     },
     "expand": {
-      "header": "### Expand",
+      "heading": "### Expand",
       "desc": "The `v-data-iterator` has internal state for both selection and expansion, just like `v-data-table`. In this example we use the methods `isExpanded` and `expand` available on the default slot."
     },
     "filter": {
-      "header": "### Filter",
+      "heading": "### Filter",
       "desc": "Order, filters and pagination can be controlled externally by using the individual props"
     }
   },
@@ -53,7 +53,7 @@
       "default": "The default slot. Use this to render your items",
       "footer.page-text": "This slot is forwarded to the default footer. See the `v-data-footer` API for more information",
       "footer": "Defines a footer below the items",
-      "header": "Defines a header above the items",
+      "heading": "Defines a header above the items",
       "item": "Slot for each item",
       "loading": "Defines content for when `loading` is true and no items are provided",
       "no-data": "Defines content for when no items are provided",

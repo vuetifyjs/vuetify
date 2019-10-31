@@ -1,10 +1,10 @@
 {
   "examples": {
     "alignment": {
-      "header": "정렬 (Alignment)"
+      "heading": "정렬 (Alignment)"
     },
     "visibility": {
-      "header": "표시여부 (Visibility)",
+      "heading": "표시여부 (Visibility)",
       "desc": "툴팁의 표시여부는 `v-model`을 이용해 프로그램적으로 바꿀 수 있습니다."
     }
   },

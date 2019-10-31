@@ -1,24 +1,24 @@
 {
-  "header": "crwdns32788:0crwdne32788:0",
-  "headerText": "crwdns32790:0crwdne32790:0",
+  "heading": "crwdns32788:0crwdne32788:0",
+  "headingText": "crwdns32790:0crwdne32790:0",
   "examples": {
     "usage": {
       "desc": "crwdns39042:0crwdne39042:0"
     },
     "inset": {
-      "header": "crwdns39044:0crwdne39044:0",
+      "heading": "crwdns39044:0crwdne39044:0",
       "desc": "crwdns39046:0crwdne39046:0"
     },
     "grid": {
-      "header": "crwdns32794:0crwdne32794:0",
+      "heading": "crwdns32794:0crwdne32794:0",
       "desc": "crwdns32796:0crwdne32796:0"
     },
     "menu": {
-      "header": "crwdns32798:0crwdne32798:0",
+      "heading": "crwdns32798:0crwdne32798:0",
       "desc": "crwdns32800:0crwdne32800:0"
     },
     "social": {
-      "header": "crwdns32802:0crwdne32802:0",
+      "heading": "crwdns32802:0crwdne32802:0",
       "desc": "crwdns32804:0crwdne32804:0"
     }
   },

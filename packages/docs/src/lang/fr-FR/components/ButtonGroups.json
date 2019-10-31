@@ -1,8 +1,8 @@
 {
-  "headerText": "Le composant `v-btn-toggle` est un simple conteneur pour construire spécifiquement un `v-item-group` pour travailler avec `v-btn`.",
+  "headingText": "Le composant `v-btn-toggle` est un simple conteneur pour construire spécifiquement un `v-item-group` pour travailler avec `v-btn`.",
   "examples": {
     "app-bar": {
-      "header": "### Dans la barre d’outils",
+      "heading": "### Dans la barre d’outils",
       "desc": "Intégration facilement des boutons personnalisées avec `v-toolbar`"
     }
   },

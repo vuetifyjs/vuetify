@@ -1,4 +1,4 @@
 {
-  "header": "触摸支持",
-  "headerText": "`v-touch`</code>`指令允许您捕获轻扫手势手势并应用定向回调。"
+  "heading": "触摸支持",
+  "headingText": "`v-touch`</code>`指令允许您捕获轻扫手势手势并应用定向回调。"
 }

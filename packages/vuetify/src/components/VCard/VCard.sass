@@ -1,4 +1,3 @@
-@import '../../styles/styles.sass'
 @import './_variables.scss'
 
 // Theme
@@ -6,7 +5,8 @@
   background-color: map-get($material, 'cards')
   color: map-deep-get($material, 'text', 'primary')
 
-  > .v-card__text
+  > .v-card__text,
+  .v-card__subtitle
     color: map-deep-get($material, 'text', 'secondary')
 
   &.v-card--outlined
@@ -25,7 +25,7 @@
   +elevationTransition()
   +elevation(2)
 
-  &:not(.v-sheet--tile)
+  &:not(.v-sheet--tile):not(.v-card--shaped)
     border-radius: $card-border-radius
 
   > *:first-child:not(.v-btn):not(.v-chip),
@@ -44,25 +44,41 @@
   right: 0
   overflow: hidden
 
-.v-card__title
-  align-items: center
-  display: flex
-  flex-wrap: wrap
-  font-size: map-deep-get($headings, 'h5', 'size')
-  font-weight: map-deep-get($headings, 'h5', 'weight')
-  letter-spacing: map-deep-get($headings, 'h5', 'letter-spacing')
-  line-height: map-deep-get($headings, 'h5', 'line-height')
-  padding: 16px 16px 8px
-  word-break: break-all
+.v-card__subtitle
+  padding: 16px
 
   + .v-card__text
     padding-top: 0
 
+.v-card__subtitle,
 .v-card__text
-  font-size: map-deep-get($headings, 'subtitle-2', 'size')
-  line-height: map-deep-get($headings, 'subtitle-2', 'line-height')
-  letter-spacing: map-deep-get($headings, 'subtitle-2', 'letter-spacing')
+  font-size: $card-text-font-size
+  font-weight: $card-text-font-weight
+  line-height: $card-text-letter-spacing
+  letter-spacing: $card-text-line-height
+
+.v-card__text,
+.v-card__title
   padding: 16px
+
+.v-card__title
+  align-items: center
+  display: flex
+  flex-wrap: wrap
+  font-size: $card-title-font-size
+  font-weight: $card-title-font-weight
+  letter-spacing: $card-title-letter-spacing
+  line-height: $card-title-line-height
+  word-break: break-all
+
+  + .v-card__subtitle,
+  + .v-card__text
+    padding-top: 0
+
+  + .v-card__subtitle
+    margin-top: -16px
+
+.v-card__text
   width: 100%
 
 .v-card__actions
@@ -144,6 +160,7 @@
 
 .v-card--raised
   +elevation(8)
+
 
 .v-card--shaped
   border-radius: $card-shaped-border-radius $card-border-radius

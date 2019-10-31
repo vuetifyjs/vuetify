@@ -1,10 +1,10 @@
 {
   "examples": {
     "custom-icons": {
-      "header": "Íconos personalizados"
+      "heading": "Íconos personalizados"
     },
     "multiple": {
-      "header": "Múltiple"
+      "heading": "Múltiple"
     }
   }
 }

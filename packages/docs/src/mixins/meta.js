@@ -63,7 +63,7 @@ export default {
       this.meta = meta[path] || this.getFallbackMeta(path) || {}
     },
     getFallbackMeta (path) {
-      const fallbackmeta = this.$i18n.getLocaleMessage(this.$i18n.fallbackLocale).Meta
+      const fallbackmeta = this.$i18n.getLocaleMessage(this.$i18n.fallbackLocale).Meta || {}
       if (process.env.NODE_ENV === 'development') {
         console.warn('Falling back to english meta for ' + (path || '/'))
       }

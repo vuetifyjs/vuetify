@@ -11,7 +11,7 @@
       <v-card-title class="teal">
         <strong class="subheading">Get connected with us on social networks!</strong>
 
-        <div class="flex-grow-1"></div>
+        <v-spacer></v-spacer>
 
         <v-btn
           v-for="icon in icons"
@@ -24,9 +24,9 @@
         </v-btn>
       </v-card-title>
 
-      <v-card-actions class="grey darken-3 justify-center">
+      <v-card-text class="py-2 white--text text-center">
         {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
-      </v-card-actions>
+      </v-card-text>
     </v-card>
   </v-footer>
 </template>

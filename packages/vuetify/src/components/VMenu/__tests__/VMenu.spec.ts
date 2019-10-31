@@ -122,6 +122,7 @@ describe('VMenu.ts', () => {
       methods: { activate },
     })
     expect(activate).toHaveBeenCalled()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should update position dynamically', async () => {
@@ -145,6 +146,7 @@ describe('VMenu.ts', () => {
       positionY: 220,
     })
     expect(content.attributes('style')).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should select next and previous tiles and skip non links/disabled', () => {

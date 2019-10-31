@@ -1,22 +1,12 @@
 <template>
-  <v-card v-intersect.quiet="onIntersect">
-    <v-card-title>Card title</v-card-title>
-
-    <v-card-text>
-      Nulla neque dolor, sagittis eget, iaculis quis, molestie non, velit.
-    </v-card-text>
-  </v-card>
+  <v-card v-intersect.quiet="onIntersect">...</v-card>
 </template>
 
 <script>
   export default {
     methods: {
-      onIntersect (entries, observer) {
-        // Will only be called once the element is intersected
-
-        // More information on what these params do on
-        // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
-      }
+      // Will only be called once the element is intersected
+      onIntersect (entries, observer, isIntersecting) {}
     }
   }
 </script>

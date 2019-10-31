@@ -1,6 +1,6 @@
 {
-  "header": "# 显示",
-  "headerText": "显示辅助器允许您控制内容的显示，会根据当前的视野或实际的元素显示类型来作为可见性的条件。",
+  "heading": "# 显示",
+  "headingText": "显示辅助器允许您控制内容的显示，会根据当前的视野或实际的元素显示类型来作为可见性的条件。",
   "visibilityHeader": "## 可见性",
   "visibilityText": "有条件地显示基于当前**视野**的元素。这些类使用格式`hidden-{breakpoint}-{condition}`",
   "breakpointText": "_断点（breakpoint）_ 设置视野大小:",

@@ -1,6 +1,6 @@
 <template>
   <v-footer>
-    <div class="flex-grow-1"></div>
+    <v-spacer></v-spacer>
     <div>&copy; {{ new Date().getFullYear() }}</div>
   </v-footer>
 </template>

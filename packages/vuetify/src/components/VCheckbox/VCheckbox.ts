@@ -17,15 +17,15 @@ export default Selectable.extend({
     indeterminate: Boolean,
     indeterminateIcon: {
       type: String,
-      default: '$vuetify.icons.checkboxIndeterminate',
+      default: '$checkboxIndeterminate',
     },
     offIcon: {
       type: String,
-      default: '$vuetify.icons.checkboxOff',
+      default: '$checkboxOff',
     },
     onIcon: {
       type: String,
-      default: '$vuetify.icons.checkboxOn',
+      default: '$checkboxOn',
     },
   },
 
@@ -60,7 +60,7 @@ export default Selectable.extend({
       if (this.disabled && !this.inputIndeterminate) return undefined
       if (this.hasError && this.shouldValidate) return 'error'
       if (this.hasSuccess) return 'success'
-      if (this.hasColor) return this.computedColor
+      if (this.hasColor !== null) return this.computedColor
       return undefined
     },
   },

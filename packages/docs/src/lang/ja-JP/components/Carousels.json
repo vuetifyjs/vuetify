@@ -1,12 +1,12 @@
 {
-  "headerText": "`v-carousel` コンポーネントは、タイマーで入れ替わる数枚の大きなビジュアルコンテンツを表示するために使います。",
+  "headingText": "`v-carousel` コンポーネントは、タイマーで入れ替わる数枚の大きなビジュアルコンテンツを表示するために使います。",
   "examples": {
     "custom-transition": {
-      "header": "カスタムトランジション",
+      "heading": "カスタムトランジション",
       "desc": "独自のカスタムトランジションを適用することもできます。"
     },
     "hide-controls": {
-      "header": "コントロールを隠す"
+      "heading": "コントロールを隠す"
     }
   },
   "props": {

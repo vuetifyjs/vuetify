@@ -29,22 +29,27 @@
     "description": "crwdns36274:0crwdne36274:0",
     "keywords": "crwdns36276:0crwdne36276:0"
   },
-  "getting-started/frequently-asked-questions": {
+  "introduction/frequently-asked-questions": {
     "title": "crwdns29594:0crwdne29594:0",
     "description": "crwdns36278:0crwdne36278:0",
     "keywords": "crwdns29598:0crwdne29598:0"
   },
-  "getting-started/meet-the-team": {
+  "introduction/meet-the-team": {
     "title": "crwdns29600:0crwdne29600:0",
     "description": "crwdns36280:0crwdne36280:0",
     "keywords": "crwdns29604:0crwdne29604:0"
   },
-  "getting-started/sponsors-and-backers": {
+  "introduction/sponsors-and-backers": {
     "title": "crwdns29606:0crwdne29606:0",
     "description": "crwdns36282:0crwdne36282:0",
     "keywords": "crwdns36284:0crwdne36284:0"
   },
-  "getting-started/long-term-support": {
+  "getting-started/releases-and-migrations": {
+    "title": "crwdns42778:0crwdne42778:0",
+    "description": "crwdns42780:0crwdne42780:0",
+    "keywords": "crwdns42782:0crwdne42782:0"
+  },
+  "introduction/long-term-support": {
     "title": "crwdns36286:0crwdne36286:0",
     "description": "crwdns36288:0crwdne36288:0",
     "keywords": "crwdns36290:0crwdne36290:0"
@@ -54,12 +59,12 @@
     "description": "crwdns36292:0crwdne36292:0",
     "keywords": "crwdns29616:0crwdne29616:0"
   },
-  "getting-started/roadmap": {
+  "introduction/roadmap": {
     "title": "crwdns36294:0crwdne36294:0",
     "description": "crwdns36296:0crwdne36296:0",
     "keywords": "crwdns36298:0crwdne36298:0"
   },
-  "getting-started/consulting-and-support": {
+  "professional-support/consulting": {
     "title": "crwdns36300:0crwdne36300:0",
     "description": "crwdns36302:0crwdne36302:0",
     "keywords": "crwdns36304:0crwdne36304:0"
@@ -379,6 +384,11 @@
     "description": "crwdns36670:0crwdne36670:0",
     "keywords": "crwdns36672:0crwdne36672:0"
   },
+  "components/lazy": {
+    "title": "crwdns42784:0crwdne42784:0",
+    "description": "crwdns42786:0crwdne42786:0",
+    "keywords": "crwdns42788:0crwdne42788:0"
+  },
   "components/lists": {
     "title": "crwdns36674:0crwdne36674:0",
     "description": "crwdns36676:0crwdne36676:0",
@@ -448,6 +458,11 @@
     "title": "crwdns36752:0crwdne36752:0",
     "description": "crwdns36754:0crwdne36754:0",
     "keywords": "crwdns36756:0crwdne36756:0"
+  },
+  "components/skeleton-loaders": {
+    "title": "crwdns42790:0crwdne42790:0",
+    "description": "crwdns42792:0crwdne42792:0",
+    "keywords": "crwdns42794:0crwdne42794:0"
   },
   "components/simple-tables": {
     "title": "crwdns36758:0crwdne36758:0",
@@ -538,6 +553,16 @@
     "title": "crwdns36860:0crwdne36860:0",
     "description": "crwdns36862:0crwdne36862:0",
     "keywords": "crwdns36864:0crwdne36864:0"
+  },
+  "directives/intersect": {
+    "title": "crwdns42796:0crwdne42796:0",
+    "description": "crwdns42798:0crwdne42798:0",
+    "keywords": "crwdns42800:0crwdne42800:0"
+  },
+  "directives/mutate": {
+    "title": "crwdns42802:0crwdne42802:0",
+    "description": "crwdns42804:0crwdne42804:0",
+    "keywords": "crwdns42806:0crwdne42806:0"
   },
   "directives/resizing": {
     "title": "crwdns36866:0crwdne36866:0",

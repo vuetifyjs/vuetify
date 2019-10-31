@@ -13,7 +13,7 @@
     <supporters-sub-paypal />
 
     <v-flex xs12>
-      <doc-heading>sponsors</doc-heading>
+      <base-heading>sponsors</base-heading>
     </v-flex>
 
     <v-flex

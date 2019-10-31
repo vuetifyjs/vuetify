@@ -1,20 +1,20 @@
 {
-  "header": "crwdns38198:0crwdne38198:0",
-  "headerText": "crwdns31980:0crwdne31980:0",
+  "heading": "crwdns38198:0crwdne38198:0",
+  "headingText": "crwdns31980:0crwdne31980:0",
   "examples": {
     "usage": {
       "desc": "crwdns38200:0crwdne38200:0"
     },
     "elevation": {
-      "header": "crwdns31984:0crwdne31984:0",
+      "heading": "crwdns31984:0crwdne31984:0",
       "desc": "crwdns31986:0crwdne31986:0"
     },
     "tile": {
-      "header": "crwdns38202:0crwdne38202:0",
+      "heading": "crwdns38202:0crwdne38202:0",
       "desc": "crwdns38204:0crwdne38204:0"
     },
     "colors-sizes": {
-      "header": "crwdns38206:0crwdne38206:0",
+      "heading": "crwdns38206:0crwdne38206:0",
       "desc": "crwdns38208:0crwdne38208:0"
     }
   },

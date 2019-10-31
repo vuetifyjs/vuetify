@@ -1,15 +1,15 @@
 {
-  "headerText": "Le composant `v-carousel` est utilisé pour afficher un grand nombre de contenu visuel sur un minuteur rotatif.",
+  "headingText": "Le composant `v-carousel` est utilisé pour afficher un grand nombre de contenu visuel sur un minuteur rotatif.",
   "examples": {
     "custom-transition": {
-      "header": "### Transition personnalisée"
+      "heading": "### Transition personnalisée"
     },
     "hide-delimiters": {
-      "header": "### Cacher les délimiteurs",
+      "heading": "### Cacher les délimiteurs",
       "desc": "Vous pouvez cacher les délimiteurs avec la propriété <pre>hide-delimiters</pre>."
     },
     "hide-controls": {
-      "header": "### Cacher les contrôles"
+      "heading": "### Cacher les contrôles"
     }
   },
   "props": {

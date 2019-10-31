@@ -228,6 +228,9 @@ export default baseMixins.extend<options>().extend({
           light: this.light,
           value: (this.hasMessages || this.hasHint) ? messages : [],
         },
+        attrs: {
+          role: this.hasMessages ? 'alert' : null,
+        },
       })
     },
     genSlot (

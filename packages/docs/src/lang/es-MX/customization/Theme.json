@@ -1,5 +1,5 @@
 {
-  "header": "# Tema",
+  "heading": "# Tema",
   "lightAndDarkHeader": "## Light y Dark",
   "customizingHeader": "## Personalizar",
   "customizingText1": "Por default, Vuetify tiene un tema estándar aplicado a todos sus componentes.",

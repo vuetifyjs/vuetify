@@ -1,8 +1,8 @@
 {
-  "header": "Breadcrumbs",
+  "heading": "Breadcrumbs",
   "examples": {
     "icon-dividers": {
-      "header": "アイコン区切り",
+      "heading": "アイコン区切り",
       "desc": "icon 変数を使用することで、 Material Design Icon に存在するアイコンを Breadcrumbs に使用することができます。"
     }
   }

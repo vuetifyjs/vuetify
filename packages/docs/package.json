@@ -3,7 +3,7 @@
   "description": "A Vue.js project",
   "private": true,
   "author": "John Leider <john.j.leider@gmail.com>",
-  "version": "2.1.0-beta.1",
+  "version": "2.1.7",
   "scripts": {
     "dev": "cross-env node --max_old_space_size=4096 server",
     "start": "cross-env NODE_ENV=production node server",
@@ -12,7 +12,7 @@
     "lint:fix": "yarn lint --fix"
   },
   "dependencies": {
-    "@vuetify/api-generator": "^2.1.0-beta.1",
+    "@vuetify/api-generator": "^2.1.7",
     "babel-polyfill": "^6.26.0",
     "chokidar": "^3.0.2",
     "compression": "^1.7.4",
@@ -39,15 +39,15 @@
     "vue-router": "^3.0.7",
     "vue-server-renderer": "^2.6.10",
     "vuelidate": "^0.7.4",
-    "vuetify": "^2.1.0-beta.1",
+    "vuetify": "^2.1.7",
     "vuex": "^3.1.1",
+    "vuex-pathify": "^1.4.0",
     "vuex-router-sync": "^5.0.0",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
-    "@mdi/font": "^3.8.95",
     "@mdi/js": "^3.8.95",
     "autoprefixer": "^9.6.1",
     "babel-loader": "^8.0.6",

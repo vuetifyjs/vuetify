@@ -52,7 +52,7 @@ export default baseMixins.extend<options>().extend({
     clearable: Boolean,
     clearIcon: {
       type: String,
-      default: '$vuetify.icons.clear',
+      default: '$clear',
     },
     counter: [Boolean, Number, String],
     filled: Boolean,
@@ -136,7 +136,7 @@ export default baseMixins.extend<options>().extend({
       return this.isDirty || dirtyTypes.includes(this.type)
     },
     isSingle (): boolean {
-      return this.isSolo || this.singleLine || this.fullWidth || (this.dense && !this.outlined)
+      return this.isSolo || this.singleLine || this.fullWidth
     },
     isSolo (): boolean {
       return this.solo || this.soloInverted
@@ -451,7 +451,7 @@ export default baseMixins.extend<options>().extend({
     setLabelWidth () {
       if (!this.outlined || !this.$refs.label) return
 
-      this.labelWidth = this.$refs.label.offsetWidth * 0.75 + 6
+      this.labelWidth = this.$refs.label.scrollWidth * 0.75 + 6
     },
     setPrefixWidth () {
       if (!this.$refs.prefix) return

@@ -1,13 +1,15 @@
 import { VNodeDirective } from 'vue/types/vnode'
 
 interface ObserveVNodeDirective extends VNodeDirective {
-  options?: undefined | IntersectionObserverInit
+  options?: IntersectionObserverInit
 }
 
 function inserted (el: HTMLElement, binding: ObserveVNodeDirective) {
   const modifiers = binding.modifiers || /* istanbul ignore next */ {}
-  const callback = binding.value!
-  const callbackWrapper = (
+  const value = binding.value
+  const isObject = typeof value === 'object'
+  const callback = isObject ? value.handler : value
+  const observer = new IntersectionObserver((
     entries: IntersectionObserverEntry[] = [],
     observer: IntersectionObserver
   ) => {
@@ -32,8 +34,7 @@ function inserted (el: HTMLElement, binding: ObserveVNodeDirective) {
     if (el._observe.init && modifiers.once) unbind(el)
     // Otherwise, mark the observer as initted
     else (el._observe.init = true)
-  }
-  const observer = new IntersectionObserver(callbackWrapper, binding.options || {})
+  }, value.options || {})
 
   el._observe = { init: false, observer }
 
