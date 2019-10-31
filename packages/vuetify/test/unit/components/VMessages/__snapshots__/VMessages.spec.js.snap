@@ -1,13 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VMessages.js should accept a scoped slot 1`] = `
+
+<div class="v-messages theme--light">
+  <div class="v-messages__wrapper">
+    <div class="v-messages__message">
+      Foo
+    </div>
+  </div>
+</div>
+
+`;
+
 exports[`VMessages.js should allow HTML 1`] = `
 
 <div class="v-messages theme--light">
   <div class="v-messages__wrapper">
     <div class="v-messages__message">
-      <a href="#">
-        a link
-      </a>
+      &lt;a href="#"&gt;a link&lt;/a&gt;
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VMessages.js should not allow HTML 1`] = `
+
+<div class="v-messages theme--light">
+  <div class="v-messages__wrapper">
+    <div class="v-messages__message">
+      &lt;a href="#"&gt;a link&lt;/a&gt;
     </div>
   </div>
 </div>

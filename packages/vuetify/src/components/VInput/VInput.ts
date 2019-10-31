@@ -245,6 +245,11 @@ export default mixins<options &
           dark: this.dark,
           light: this.light,
           value: (this.hasMessages || this.hasHint) ? messages : []
+        },
+        scopedSlots: {
+          default: this.$scopedSlots.default
+            ? props => this.$scopedSlots.default!(props)
+            : undefined
         }
       })
     },
