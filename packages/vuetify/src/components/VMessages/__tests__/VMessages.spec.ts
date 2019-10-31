@@ -51,4 +51,17 @@ describe('VMessages.ts', () => {
     })
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should accept a scoped slot', () => {
+    const wrapper = mountFunction({
+      propsData: { value: ['Foo'] },
+      scopedSlots: {
+        default (props) {
+          return this.$createElement('div', props.message)
+        },
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
