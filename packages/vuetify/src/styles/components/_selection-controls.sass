@@ -82,6 +82,16 @@
     .v-ripple__container
       transform: scale(1.2)
 
+  &.v-input--dense
+    .v-input--selection-controls__ripple
+      width: 28px
+      height: 28px
+      left: -11px
+
+    &:not(.v-input--switch)
+      .v-input--selection-controls__ripple
+        top: calc(50% - 21px)
+
   &.v-input
     flex: 0 1 auto
 
