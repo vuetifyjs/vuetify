@@ -63,7 +63,7 @@
         large
         outlined
         rounded
-        to="getting-started/why-vuetify"
+        to="introduction/why-vuetify"
       >
         <span class="caption font-weight-bold">
           {{ $t("Vuetify.Home.whyVuetifyText2") }}

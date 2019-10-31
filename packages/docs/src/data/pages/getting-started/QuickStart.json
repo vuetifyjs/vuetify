@@ -178,7 +178,7 @@
         {
           "type": "up-next",
           "value": [
-            "getting-started/why-vuetify",
+            "introduction/why-vuetify",
             "introduction/frequently-asked-questions",
             "introduction/sponsors-and-backers"
           ]
