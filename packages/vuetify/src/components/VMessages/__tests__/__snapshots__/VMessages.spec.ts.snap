@@ -1,5 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VMessages.ts should accept a scoped slot 1`] = `
+<div class="v-messages theme--light">
+  <span name="message-transition"
+        tag="div"
+        class="v-messages__wrapper"
+  >
+    <div class="v-messages__message">
+      Foo
+    </div>
+  </span>
+</div>
+`;
+
 exports[`VMessages.ts should allow HTML 1`] = `
 <div class="v-messages theme--light">
   <span name="message-transition"
