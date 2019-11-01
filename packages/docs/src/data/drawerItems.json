@@ -54,7 +54,8 @@
       { "text": "spacing", "to": "spacing" },
       { "text": "text", "to": "text" },
       { "text": "typography", "to": "typography" },
-      { "text": "transitions", "to": "transitions" }
+      { "text": "transitions", "to": "transitions" },
+      { "text": "scroll", "to": "scroll" }
     ]
   },
   {

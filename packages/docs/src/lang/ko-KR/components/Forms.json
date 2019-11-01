@@ -1,14 +1,6 @@
 {
-  "headingText": "Vuetify 는 폼 유효성 검사(validation)과 관련하여 다양한 통합기능을 가지고 있고 기능면에서 숙성되어 있습니다. 서드파티(3rd party) 플러긴을 사용하고 싶습니까? Out of the box you can use [Vee-validate](https://github.com/baianat/Vee-validate) and [vuelidate](https://github.com/monterail/vuelidate).",
   "examples": {
-    "validation-with-submit-and-clear": {
-      "heading": "서브밋/클리어 유효성 검사 (Validation with submit & clear)"
-    },
-    "vuelidate": {
-      "heading": "Vuelidate"
-    },
     "vee-validate": {
-      "heading": "Vee-validate",
       "desc": "Vee-validate 폼을 체크하는 것을 도와주는 또 다른 유효성 검사 플러그인입니다. 한가지 주의사항(caveat)은 **value** prop을 사용할때 `v-checkbox`를 제대로 검사하기 위해 반드시 **type=\"checkbox\"** 를 추가해야 한다는 점입니다"
     }
   },

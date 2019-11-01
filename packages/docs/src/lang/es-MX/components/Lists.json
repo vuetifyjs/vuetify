@@ -1,38 +1,22 @@
 {
-  "headingText": "El componente `v-list` se utiliza para mostrar información. Puede contener un avatar, contenido, acciones, subheaders y mucho más. Las listas pueden contener componentes hijos y se usan en el sidebar.",
   "examples": {
     "avatar-title-and-action": {
-      "heading": "Avatar con título y acción",
       "desc": "Las listas también contienen _slots_ para una implementación más directa. Si escoges esta manera, recuerda que debes proveer props adicionales para el espaciado correcto. En este ejemplo, tenemos un _tile_ con un avatar, así que debemos proveer una propiedad `avatar`."
     },
     "icon-two-lines-and-action": {
-      "heading": "Ícono con 2 líneas y acción",
       "desc": "Las listas pueden contener _subheaders_, divisores y pueden contener 1 o más líneas. El subtítulo será cortado con una _ellipsis (...)_ si su longitud se extiende más allá de una línea. "
     },
-    "avatar-three-lines": {
-      "heading": "Avatar con 3 líneas"
-    },
     "avatar-subheader-title-and-action": {
-      "heading": "Avatar con título y acción",
       "desc": "Cuando un _slot_ de lista es utilizado, debes manualmente definir si es que contiene encabezados, o si los elementos contienen un avatar. Esto es requerido para mantener el espaciado apropiado."
     },
     "subheadings-and-dividers": {
-      "heading": "Subheadings y divisores",
       "desc": "Las listas pueden contener smúltiples _subheaders_ y _dividers_."
     },
     "card-list": {
-      "heading": "Imagen en _card_ con _toolbar_ y una lista",
       "desc": "Una lista puede ser combinada con una _Card_."
     },
     "title-subtitle-actions-and-action-text": {
-      "heading": "Título y subtítulo, acciones y un _action-text_",
       "desc": "Una lista puede contener una pila dentro de una acción. _Ripple_ y las props del _router_ pueden pasarse al componente principal v-list, al v-list-item o como una propiedad en el arreglo de elementos que compondrán la lista."
-    },
-    "action-title-and-subtitle": {
-      "heading": "Acción con título y subtítulo"
-    },
-    "expansion-lists": {
-      "heading": "Listas de expansión"
     },
     "flat": {
       "heading": "Flat"

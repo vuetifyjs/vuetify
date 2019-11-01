@@ -1,1 +1,21 @@
-{}
+{
+  "examples": {
+    "limit": {
+      "desc": "Vous pouvez définir manuellement le nombre maximal de pages affichées avec « total-visible »."
+    },
+    "icons": {
+      "heading": "### Icônes"
+    },
+    "disabled": {
+      "heading": "### Désactivé"
+    }
+  },
+  "props": {
+    "circle": "Définit la forme des boutons en rond plutôt que rectangle",
+    "disabled": "Désactive le composant",
+    "nextIcon": "Icône pour passer à la page suivante",
+    "prevIcon": "Icône pour passer à la page précédente",
+    "totalVisible": "Définit le nombre maximum de numéros de pages affiché",
+    "value": "Page courante"
+  }
+}

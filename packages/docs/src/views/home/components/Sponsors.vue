@@ -16,7 +16,7 @@
       >Vuetify.Home.proundlySponsoredByText</base-text>
 
       <supporters-sponsors
-        :tier="[0, 1, 2, 3]"
+        :tier="[0, 1, 2, 3, 5]"
         class="mb-12"
         dense
         hide-titles

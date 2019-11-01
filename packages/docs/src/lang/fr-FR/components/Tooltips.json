@@ -1,1 +1,28 @@
-{}
+{
+  "headerAlert1": "Pour que `v-tooltip` soit positionné correctement un prop de position ( `top` | `bottom` | `left` | `right` ) est requis",
+  "examples": {
+    "usage": {
+      "desc": "Les info-bulles peuvent envelopper n'importe quel élément."
+    },
+    "alignment": {
+      "desc": "Une aide peut être alignée sur l'un des quatre côtés de l'élément activateur"
+    },
+    "visibility": {
+      "heading": "### Visibilité",
+      "desc": "La visibilité du panneau d'outils peut être modifiée programmatiquement en utilisant `v-model`."
+    }
+  },
+  "props": {
+    "closeDelay": "Délai (en ms) après lequel le menu se ferme (quand le prop ouvert-on-hover est activé)",
+    "dark": "Mixins.Themeable.props.dark",
+    "debounce": "Durée avant que l'infobulle d'outils soit affiché et caché lorsque vous survolez",
+    "disabled": "Désactive l'aide",
+    "internalActivator": "Indique si vous souhaitez utiliser un activateur interne",
+    "light": "Mixins.Themeable.props.light",
+    "openDelay": "Délai (en ms) après lequel l'infobulle d'outils s'ouvre (quand le prop `open-on-hover` est défini à **true**)",
+    "openOnClick": "Indique si l'aide doit s'ouvrir sur le clic activateur",
+    "openOnHover": "Indique si l'aide doit s'ouvrir sur le survol d'activateur",
+    "tag": "Spécifie une étiquette personnalisée pour le gestionnaire d'activation",
+    "transition": "Mixins.Transitionable.props.transition"
+  }
+}

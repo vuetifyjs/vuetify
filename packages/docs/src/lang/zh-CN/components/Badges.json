@@ -1,13 +1,9 @@
 {
   "examples": {
-    "overlap": {
-      "heading": "重叠"
-    },
     "visibility": {
       "heading": "可见性"
     },
     "inline": {
-      "heading": "内联",
       "desc": "徽章也可以内联地放在文本内。"
     },
     "icon": {

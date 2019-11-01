@@ -1,8 +1,5 @@
 {
   "examples": {
-    "alignment": {
-      "heading": "Alinhamento"
-    },
     "visibility": {
       "heading": "Visibilidade",
       "desc": "A visibilidade de uma tooltip pode ser mudada programaticamente usando o `v-model`."

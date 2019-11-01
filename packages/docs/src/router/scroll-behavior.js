@@ -15,6 +15,10 @@ export default async function (to, from, savedPosition) {
 
   return new Promise(resolve => {
     setTimeout(() => {
+      if (typeof window === 'undefined') {
+        return resolve()
+      }
+
       window.requestAnimationFrame(() => {
         try {
           goTo(scrollTo, options)

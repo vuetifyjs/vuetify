@@ -1,8 +1,6 @@
 {
-  "headingText": "El componente `v-slider` es una mejor visualización para el input de números. Se utiliza para recolectar datos numéricos del usuario.",
   "examples": {
     "discrete": {
-      "heading": "Discretos",
       "desc": "Los sliders discretos ofrecen un marcador que muestra la cantidad exacta actual. Al utilizar la prop `step` puedes quitar el uso de valores que estén fuera de los pasos (steps)."
     },
     "icons": {
@@ -10,7 +8,6 @@
       "desc": "Puedes agregar íconos al slider con las props `append-icon` y `prepend-icon`."
     },
     "editable-numeric-value": {
-      "heading": "Con un valor numérico editable",
       "desc": "Los sliders pueden ser combinados con otros componentes para una mejor presentación."
     },
     "custom-colors": {

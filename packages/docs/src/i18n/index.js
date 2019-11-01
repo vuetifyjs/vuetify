@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import languages from '@/data/i18n/languages.json'
+import en from '@/lang/en'
 
 Vue.use(VueI18n)
 
@@ -8,25 +9,28 @@ export function createI18n (ssrContext, router) {
   const fallbackLocale = 'en'
   const loadedLanguages = []
   const globalLanguages = {}
+  const hasDocument = typeof document !== 'undefined'
 
   let locale = fallbackLocale
   if (ssrContext && ssrContext.lang) {
     locale = ssrContext.lang
-  } else if (typeof document !== 'undefined') {
+  } else if (hasDocument) {
     locale = document.documentElement.lang
   }
 
-  // TODO: Hmm, if locale is set to something other than en-US by
-  // ssr or document then what happens when it's not loaded?
   const i18n = new VueI18n({
     locale,
     fallbackLocale,
+    messages: {
+      en,
+    },
+    silentFallbackWarn: true,
   })
 
   function setI18nLanguage (lang) {
     i18n.locale = lang
 
-    if (!ssrContext) {
+    if (!ssrContext && hasDocument) {
       document.querySelector('html').setAttribute('lang', lang)
     }
 

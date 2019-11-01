@@ -40,7 +40,7 @@
 
     async mounted () {
       // Do nothing on ssr
-      if (this.$ssrContext) return
+      if (this.$ssrContext || typeof document === 'undefined') return
 
       const script = document.createElement('script')
 
@@ -60,11 +60,12 @@
 
     methods: {
       async onLoad () {
-        window._bsa.init('custom', 'CKYD6KQN', 'placement:vuetifyjscom', {
-          ignore: process.env.NODE_ENV === 'development' ? 'yes' : undefined,
-          target: '#bsa-native',
-          template: '<a class="native-box" href="##statlink##"><div class="native-sponsor">Sponsor</div><div class="native-text"><strong>##company##</strong> — ##description##</div></a>',
-        })
+        typeof window !== 'undefined' &&
+          window._bsa.init('custom', 'CKYD6KQN', 'placement:vuetifyjscom', {
+            ignore: process.env.NODE_ENV === 'development' ? 'yes' : undefined,
+            target: '#bsa-native',
+            template: '<a class="native-box" href="##statlink##"><div class="native-sponsor">Sponsor</div><div class="native-text"><strong>##company##</strong> — ##description##</div></a>',
+          })
 
         // Sometimes ad doesn't load
         await new Promise(resolve => setTimeout(resolve, 500))

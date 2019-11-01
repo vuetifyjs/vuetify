@@ -1,11 +1,22 @@
 {
   "examples": {
     "single-line": {
-      "heading": "### Ligne unique",
       "desc": "Les champs de texte en ligne unique ne flottent pas leur étiquette sur la cible ou avec les données."
+    },
+    "shaped": {
+      "heading": "### Shaped"
     },
     "dense": {
       "heading": "### Dense"
+    },
+    "icon": {
+      "heading": "### Icônes"
+    },
+    "clearable": {
+      "heading": "### Effaçable"
+    },
+    "custom-colors": {
+      "heading": "### Couleurs personnalisées"
     }
   },
   "props": {
@@ -14,6 +25,7 @@
     "filled": "Applique le style d'entrée remplie a la place",
     "clearIcon": "Appliqué lors de l'utilisation de **clearable** et l'entrée est sale",
     "counter": "Crée le compteur pour la longueur de l'entrée; si aucun numéro n'est spécifié, il est par défaut à 25. Ne s'applique à aucune validation.",
+    "dark": "Components.Inputs.props.dark",
     "flat": "Mixins.Soloable.props.flat",
     "fullWidth": "Indique le type d'entrée comme prenant la largeur complète",
     "outlined": "Applique le style décrit à l'entrée",

@@ -1,14 +1,10 @@
 {
   "examples": {
-    "font-awesome": {
-      "heading": "Font Awesome"
-    },
     "color": {
       "heading": "色",
       "desc": "カラーヘルパーを使用すると、アイコンの色を標準のdark、lightテーマから変更できます。"
     },
     "buttons": {
-      "heading": "ボタン",
       "desc": "アイコンをボタン内部で使用し、ボタンを強調させるための動きを付けることができます。"
     }
   },

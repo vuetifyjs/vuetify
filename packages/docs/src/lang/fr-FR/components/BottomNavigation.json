@@ -1,22 +1,48 @@
 {
-  "heading": "# Barre de navigation inférieure",
-  "headingText": "`v-bottom-navigation` est une alternative à `sidebar` (la barre latérale), principalement utilisé sur mobile en deux variantes, icônes et texte, et shift.",
   "examples": {
     "usage": {
       "desc": "Bien que `v-bottom-nav` est censé être utilisé avec `vue-router`, vous pouvez aussi changer l'état des boutons en utilisant le prop `active.sync`. Vous pouvez changer la valeur d'un bouton en utilisant son attribut `value`."
     },
     "color": {
-      "heading": "### Couleurs"
+      "heading": "### Couleurs",
+      "desc": "La prop`color` applique une couleur au fond de la navigation en bas. Il est recommandé d'utiliser les props `light` et `dark` pour contraster correctement la couleur du texte."
+    },
+    "grow": {
+      "desc": "Si la propriété `v-bottom-navigation` a `grow`, les boutons dans ce fichier se développent pour remplir l'espace disponible."
+    },
+    "horizontal": {
+      "heading": "## Horizontal",
+      "desc": "Le prop`horizontal` place le texte nav à côté de l'icône comme appose à la dessous."
+    },
+    "shift": {
+      "desc": "Le prop `shift` masquera le texte du bouton jusqu'à ce qu'il soit actif. Pour cela, le texte `v-btn` doit être emballé dans un tag `<span>`."
     },
     "toggle": {
-      "heading": "### Basculement"
+      "desc": "L'état d'affichage de `v-bottom-navigation` peut être activé en utilisant le prop`input-value`. Vous pouvez également contrôler le bouton actuellement actif en utilisant `v-model`."
+    },
+    "hide-on-scroll": {
+      "desc": "Masquer le défilement cache `v-bottom-navigation` lorsque l'élément cible est défilé."
     },
     "scroll-threshold": {
-      "heading": "### Seuil de défilement"
+      "heading": "### Seuil de défilement",
+      "desc": "La propriété 'scroll-seuil' vous permet de personnaliser le seuil que vous pouvez faire défiler avant que `v-bottom-navigation` disparaisse."
     }
   },
   "props": {
     "absolute": "Mixins.Positionable.props.absolute",
-    "fixed": "Mixins.Positionable.props.fixed"
+    "activeClass": "La classe appliquée à un [v-btn](/components/button) quand activé.",
+    "backgroundColor": "Modifie la couleur de fond du composant.",
+    "fixed": "Mixins.Positionable.props.fixed",
+    "grow": "Forcer [v-btn](/components/boutons)s à prendre tout l'espace disponible.",
+    "hideOnScroll": "Passera la navigation hors écran lors du défilement vers le haut.",
+    "horizontal": "Utilise un style horizontal alternatif pour [v-btn](/components/boutons).",
+    "inputValue": "Contrôle si le composant est visible ou caché. Supporte le modificateur **.sync** .",
+    "mandatory": "Mixins.BaseItemGroup.props.obligatoire",
+    "shift": "Masque le texte de [v-btn](/components/boutons)s lorsqu'ils ne sont pas actifs.",
+    "value": "Maintent la valeur de l'actif actuel [v-btn](/components/boutons). Si le bouton n'a pas de valeur fournie, son index sera utilisé à la place.."
+  },
+  "events": {
+    "change": "La valeur du bouton actuellement sélectionné. Si aucune valeur n'est assignée, sera l'index actuel du bouton.",
+    "update:input-value": "L'événement utilisé pour `input-value.sync`."
   }
 }

@@ -1,1 +1,44 @@
-{}
+{
+  "examples": {
+    "usage": {
+      "desc": "Le composant`v-img` est utilisé pour afficher une image réactive avec un support lazy-load et placeholder."
+    },
+    "contain-cover": {
+      "desc": "Si le ratio d'aspect fourni ne correspond pas à celui de l'image réelle, le comportement par défaut est de remplir autant d'espace que possible, en tronquant les côtés de l'image. L'activation de la propriété `contain` évitera cela, mais se traduira par un espace vide sur les côtés."
+    },
+    "max-height": {
+      "desc": "`v-img` passera automatiquement à la taille de son `src`, préservant le bon ratio d'aspect. Vous pouvez limiter ce comportement avec les propriétés `height` et `max-height`."
+    },
+    "ratio": {
+      "desc": "Vous pouvez définir un ratio d'aspect fixe si vous voulez changer le ratio d'aspect de l'image."
+    },
+    "gradients": {
+      "desc": "La propriété `gradient` peut être utilisée pour appliquer une simple superposition de gradient à l'image. Les dégradés plus complexes doivent être écrits comme une classe sur le content slot à la place."
+    },
+    "grid": {
+      "desc": "Vous pouvez utiliser `v-img` pour faire, par exemple, une galerie d'images."
+    },
+    "placeholder": {
+      "desc": "`v-img` a un emplacement spécial `placeholder` pour afficher le un texte par défaut pendant le chargement de l'image. Note: l'exemple ci-dessous a un src mauvais qui ne vous chargera pas pour voir le texte par défaut."
+    }
+  },
+  "props": {
+    "alt": "Texte alternatif pour les lecteurs d'écran. Laisser vide pour les images décoratives",
+    "aspectRatio": "Calculé comme `width/height`, donc pour une image 1920x1080px, cela sera `1.7778`. Sera automatiquement calculé si omis",
+    "contain": "Empêche l'image d'être rognée si elle ne rentre pas",
+    "gradient": "Affiche un dégradé sur l'image. Ne supporte que [linear-gradient](https://developer.mozilla.org/fr-US/docs/Web/CSS/linear-gradient), tout autre chose devra être faite par classes (voir exemples)",
+    "lazySrc": "Quelque chose à afficher en attendant que l'image principale soit chargée, typiquement une petite vignette encodée en base64. A un léger filtre flou appliqué.\n\nUtilisez [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) pour générer automatiquement",
+    "position": "Remplace la valeur par défaut pour changer les parties à rogner. Utilise la même syntaxe que [`background-position`](https://developer.mozilla.org/fr-US/docs/Web/CSS/background-position)",
+    "sizes": "Pour une utilisation avec « srcset », voir [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-sizes)",
+    "src": "L’URL de l’image. Cette propriété est obligatoire",
+    "srcset": "Un ensemble d'images alternatives à utiliser en fonction de la taille de l'appareil. [Lire plus...](https://developer.mozilla.org/fr-US/docs/Web/HTML/Element/img#attr-srcset)",
+    "transition": "La transition à utiliser lors du passage de `lazy-src` à `src`"
+  },
+  "events": {
+    "error": "Émis lorsqu'il y a une erreur",
+    "load": "Émis lorsque l'image est chargée"
+  },
+  "slots": {
+    "placeholder": "Slot pour le placeholder d'image"
+  }
+}

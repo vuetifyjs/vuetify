@@ -1,14 +1,10 @@
 {
   "examples": {
-    "font-awesome": {
-      "heading": "Font Awesome"
-    },
     "color": {
       "heading": "Color",
       "desc": "Al usar auxiliares de color puedes cambiar el color de un ícono de los temas estándar dark y light."
     },
     "buttons": {
-      "heading": "Buttons",
       "desc": "Los íconos pueden ser usados dentro de los botones para enfatizar una acción.."
     }
   },

@@ -1,72 +1,13 @@
 {
   "examples": {
-    "date-allowed-dates": {
-      "heading": "Date pickers - Allowed dates"
-    },
-    "date-birthday": {
-      "heading": "Date pickers - birthday picker"
-    },
-    "date-colorable": {
-      "heading": "Date pickers - Colors"
-    },
-    "date-current": {
-      "heading": "Date pickers - current date indicator"
-    },
-    "date-dialog-and-menu": {
-      "heading": "Date pickers - In dialog and menu"
-    },
     "date-events": {
-      "desc": "You can specify events using arrays, objects, and functions. To change the default color of the event use **event-color** prop.",
-      "heading": "Date pickers - Events"
-    },
-    "date-formatting": {
-      "heading": "Date pickers - formatting date"
-    },
-    "date-icons": {
-      "heading": "Date pickers - icons"
-    },
-    "date-internationalization": {
-      "heading": "Date pickers - Internationalization"
-    },
-    "date-picker-date": {
-      "heading": "Date pickers - react to disaplyed month/year change"
-    },
-    "date-readonly": {
-      "heading": "Date pickers - read only"
-    },
-    "date-width": {
-      "heading": "Date pickers - Setting picker width"
+      "desc": "You can specify events using arrays, objects, and functions. To change the default color of the event use **event-color** prop."
     },
     "month-allowed-months": {
-      "desc": "You can specify allowed months using arrays, objects, and functions.",
-      "heading": "Month pickers - Allowed months"
-    },
-    "month-colorable": {
-      "heading": "Month pickers - Colors"
-    },
-    "month-current": {
-      "heading": "Month pickers - current month indicator"
-    },
-    "month-dialog-and-menu": {
-      "heading": "Month pickers - In dialog and menu"
+      "desc": "You can specify allowed months using arrays, objects, and functions."
     },
     "month-events": {
       "desc": "You can specify events using arrays, objects, and functions. To change the default color of the event use **event-color** prop."
-    },
-    "month-icons": {
-      "heading": "Month pickers - icons"
-    },
-    "month-internationalization": {
-      "heading": "Month pickers - Internationalization"
-    },
-    "month-light": {
-      "heading": "Month pickers"
-    },
-    "month-readonly": {
-      "heading": "Month pickers - read only"
-    },
-    "month-width": {
-      "heading": "Month pickers - Setting picker width"
     }
   }
 }

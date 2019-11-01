@@ -1,6 +1,4 @@
 {
-  "heading": "调整指令",
-  "headingText": "当调整窗口大小时，`v-resize`指令可用于调用指定的函数。",
   "examples": {
     "usage": {
       "desc": "调整您的浏览器窗口大小并观察值的变化.."

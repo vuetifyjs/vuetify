@@ -1,10 +1,39 @@
 {
-  "headingText": "Le composant `v-btn-toggle` est un simple conteneur pour construire spécifiquement un `v-item-group` pour travailler avec `v-btn`.",
   "examples": {
+    "usage": {
+      "desc": "Basculer les boutons vous permet de créer un groupe de boutons stylés qui peuvent être sélectionnés ou bascules sous un seul `v-model`"
+    },
     "app-bar": {
-      "heading": "### Dans la barre d’outils",
       "desc": "Intégration facilement des boutons personnalisées avec `v-toolbar`"
+    },
+    "qwerty": {
+      "desc": "Groupez des actions similaires et concevez votre propre composant WYSIWYG."
+    },
+    "rounded": {
+      "desc": "Vous pouvez faire arrondir `VBtnToggle` en utilisant la prop`arrondie`."
+    },
+    "mandatory": {
+      "heading": "### Obligatoire",
+      "desc": "`obligatoire` `VBtnToggle` a toujours une valeur."
+    },
+    "multiple": {
+      "heading": "### Multiple",
+      "desc": "`multiple` `VBtnToggle` permet à l'utilisateur de sélectionner plusieurs variantes et de retourner la valeur en tant que tableau."
     }
+  },
+  "api": {
+    "v-btn": "Boutons Components.Buttons"
+  },
+  "props": {
+    "activeClass": "Mixins.BaseItemGroup.props.activeClass",
+    "backgroundColor": "Modifie la couleur de fond du composant.",
+    "borderless": "Supprime la frontière du groupe.",
+    "dense": "Réduit la taille et le pliage des boutons.",
+    "group": "Généralement utilisé dans [v-toolbar](/components/toolbars) et [v-app-bar](/components/app-bars). Supprime la couleur d'arrière-plan, la bordure et augmente l'espace entre les boutons",
+    "mandatory": "Mixins.BaseItemGroup.props.obligatoire",
+    "multiple": "Mixins.BaseItemGroup.props.multiple",
+    "rounded": "Boutons de bord rond",
+    "shaped": "Applique un grand rayon de bordure en haut à gauche et en bas à droite de la carte."
   },
   "events": {
     "change": "Components.Inputs.events.change"

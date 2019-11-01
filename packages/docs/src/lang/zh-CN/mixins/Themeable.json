@@ -1,5 +1,6 @@
 {
   "props": {
+    "dark": "将暗色主题变体应用到组件。您可以在[暗色主题](https://material.io/design/color/dark-theme.html)的材料设计语言文档中找到更多有关信息。",
     "light": "为组件设置浅色主题。"
   }
 }

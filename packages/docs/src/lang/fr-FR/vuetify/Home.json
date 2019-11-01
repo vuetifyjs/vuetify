@@ -1,6 +1,5 @@
 {
   "becomeSponsor": "Supporter Vuetify",
-  "callout": "Framework de composants<br>Material Design",
   "features": {
     "community": {
       "text": "Lorsque vous rencontrez un problème sur la route, vous avez besoin d'aide immédiatement. Vuetify offre du support via notre immense communauté sur Discord.",
@@ -18,9 +17,8 @@
   "getHelp": "Obtenir de l'aide",
   "getStarted": "Commencer",
   "github": "Github",
-  "madeWithVuetify": "Projets réalisés avec / pour Vuetify",
   "materialDesign": "Material Design",
   "mit": "Licence MIT",
-  "proudlySponsoredBy": "Sponsors Patreon",
-  "whyVuetify": "Pourquoi Vuetify ?"
+  "seeMoreThemes": "Voir plus de thèmes",
+  "whyVuetifyText2": "Pourquoi Vuetify ?"
 }

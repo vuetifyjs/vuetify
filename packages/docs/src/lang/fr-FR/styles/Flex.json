@@ -1,6 +1,4 @@
 {
-  "heading": "# Flex",
-  "headingText": "Contrôlez la mise en place de conteneurs flex avec alignement, justification et plus avec les utilitaires flexbox réactifs.",
   "flexHeader": "## Activer flexbox",
   "flexText1": "En utilisant les utilitaires `display`, vous pouvez transformer n'importe quel élément en un conteneur flexbox transformant **direct children elements** en objets flex. En utilisant des utilitaires de propriétés flex supplémentaires, vous pouvez personnaliser leur interaction encore plus loin.",
   "flexText2": "Vous pouvez également personnaliser les utilitaires flex pour s'appliquer en fonction de différents points d'arrêt.",
@@ -17,6 +15,7 @@
     "`.d-xl-inline-flex`"
   ],
   "directionHeader": "## Direction flexible",
+  "directionText1": "Par défaut, `d-flex` applique `flex-direction: row` et peut généralement être omis. Cependant, il peut y avoir des situations où vous devez explicitement le définir.",
   "directionText2": "Les classes utilitaires`flex-column` et `flex-column-reverse` peuvent être utilisées pour changer l'orientation du conteneur flexbox. Gardez à l'esprit que **IE11** et **Safari** peuvent avoir des problèmes avec la direction de la colonne.",
   "directionText3": "Il y a aussi des variations réactives pour `flex-direction`.",
   "directionList": [
@@ -72,6 +71,7 @@
     "`.justify-xl-space-around`"
   ],
   "alignHeader": "## Flex align",
+  "alignText1": "Le paramètre flex `align-items` peut être modifié en utilisant les classes flex align. Cela par défaut modifiera les éléments flexbox sur le **y-axis** mais est inversé lors de l'utilisation de `flex-direction: colonne`, modifiant le **x-axis**. Choisissez parmi `start`, `end`, `center`, `baseline`, ou `stretch` (navigateur par défaut).",
   "alignAlert1": "Lorsque vous utilisez flex align avec IE11, vous devrez définir une `height` de façon explicite car `min-height` ne suffira pas et ne causera pas de résultats indésirables.",
   "alignText2": "Il y a aussi des variations réactives pour `align-items`.",
   "alignList": [
@@ -140,7 +140,29 @@
   "marginText1": "En utilisant les classes d'aide de marge dans un conteneur flexbox, vous pouvez contrôler le positionnement des éléments flex sur les **x-axis** ou **y-axis** en utilisant respectivement `flex-row` ou `flex-column`.",
   "marginAlert": "**IE11** ne supporte pas correctement les marges automatiques sur les éléments flex qui ont un parent avec une valeur non par défaut `justify-content`. [Voir cette réponse StackOverflow](https://stackoverflow.com/a/37535548) pour plus de détails.",
   "marginSubheader": "### Utilisation de align-items",
+  "marginText2": "Mélanger les classes d'aide `flex-direction: column` et `align-items`, vous pouvez utiliser les classes d'aide `.mt-auto` et `.mb-auto` pour ajuster le positionnement des éléments flex.",
   "wrapHeader": "## Flex wrap",
+  "wrapText1": "Par défaut `.d-flex` ne fournit aucun emballage (se comporte de la même manière que `flex-wrap: nowrap`). Cela peut être modifié en appliquant des classes d'aide flex-wrap au format `flex-{condition}` où la condition peut être `nowrap`, `wrap`, ou `wrap-reverse`.",
+  "wrapList1": [
+    "`.flex-nowrap`",
+    "`.flex-wrap`",
+    "`.flex-wrap-reverse`"
+  ],
+  "wrapText2": "Ces classes d'aide peuvent également être appliquées au format `flex-{breakpoint}-{condition}` pour créer des variations plus réactives basées sur des points d'arrêt. Les combinaisons suivantes sont disponibles :",
+  "wrapList2": [
+    "`.flex-sm-nowrap`",
+    "`.flex-sm-wrap`",
+    "`.flex-sm-wrap-reverse`",
+    "`.flex-md-nowrap`",
+    "`.flex-md-wrap`",
+    "`.flex-md-wrap-reverse`",
+    "`.flex-lg-nowrap`",
+    "`.flex-lg-wrap`",
+    "`.flex-lg-wrap-reverse`",
+    "`.flex-xl-nowrap`",
+    "`.flex-xl-wrap`",
+    "`.flex-xl-wrap-reverse`"
+  ],
   "orderHeader": "## Flex order",
   "orderText1": "Vous pouvez modifier l'ordre visuel des objets flex avec les utilitaires `order`.",
   "orderText2": "Il y a aussi des variations réactives pour `order`.",
@@ -255,5 +277,33 @@
     "`align-xl-content-space-between`",
     "`align-xl-content-space-around`",
     "`align-xl-content-stretch`"
+  ],
+  "growShrinkHeader": "## Flex grandit et rétrécit",
+  "growShrinkText1": "Vuetify a des classes d'aide pour appliquer la croissance et le rétrécissement manuellement. Ceux-ci peuvent être appliqués en ajoutant la classe d'aide au format `flex-{condition}-{value}`, où la condition peut être soit `grow` ou `shrink` et la valeur peut être soit `0` ou `1`. La condition `grow` permettra à un élément de se développer pour remplir l'espace disponible, tandis que `Shrnk` permettra à un élément de se rétracter à seulement l'espace nécessaire pour son contenu. Cependant, cela ne se produira que si l'élément doit se rétrécir pour s'adapter à son conteneur, comme une résine de conteneur ou être effectué par un `flex-grow-1`. La valeur `0` empêchera l'apparition de la condition alors que `1` permettra la condition. Les classes suivantes sont disponibles :",
+  "growShrinkList1": [
+    "`flex-grow-0`",
+    "`flex-grow-1`",
+    "`flex-shrink-0`",
+    "`flex-shrink-1`"
+  ],
+  "growShrinkAlert1": "Lorsque vous utilisez `flex-grow-1` en conjonction avec `flex-shrink-0`",
+  "growShrinkText2": "Ces classes d'aide peuvent également être appliquées au format `flex-{breakpoint}-{condition}-{state}` pour créer des variations plus réactives basées sur des points d'arrêt. Les combinaisons suivantes sont disponibles :",
+  "growShrinkList2": [
+    "`flex-sm-grow-0`",
+    "`flex-md-grow-0`",
+    "`flex-lg-grow-0`",
+    "`flex-xl-grow-0`",
+    "`flex-sm-grow-1`",
+    "`flex-md-grow-1`",
+    "`flex-lg-grow-1`",
+    "`flex-xl-grow-1`",
+    "`flex-sm-shrink-0`",
+    "`flex-md-shrink-0`",
+    "`flex-lg-shrink-0`",
+    "`flex-xl-shrink-0`",
+    "`flex-sm-shrink-1`",
+    "`flex-md-shrink-1`",
+    "`flex-lg-shrink-1`",
+    "`flex-xl-shrink-1`"
   ]
 }

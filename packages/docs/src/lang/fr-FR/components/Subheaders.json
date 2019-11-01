@@ -1,1 +1,13 @@
-{}
+{
+  "examples": {
+    "usage": {
+      "desc": "Les sous-titres de leur forme la plus simple affichent un sous-titre avec le thème par défaut."
+    },
+    "menu": {
+      "desc": "L'utilisation d'un sous-titre peut aider à séparer différents types d'actions."
+    }
+  },
+  "props": {
+    "inset": "Ajoute l'indentation (72px)"
+  }
+}

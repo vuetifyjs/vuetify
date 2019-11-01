@@ -4,6 +4,9 @@
       "heading": "多选"
     }
   },
+  "props": {
+    "backgroundColor": "更改组件的背景颜色。"
+  },
   "events": {
     "change": "Components.Inputs.events.change"
   }

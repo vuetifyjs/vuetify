@@ -1,36 +1,19 @@
 {
-  "headingText": "O componente `v-toolbar` é fundamental para qualquer interface, pelo fato de geralmente ser a principal fonte de navegação do site. O componente barra de ferramentas (toolbar) trabalha bem em conjunto com o navigation drawer para esconder links e também apresenta um ativador para abrir o sidebar (menu lateral) em dispositivos móveis.",
   "examples": {
     "light-and-dark": {
       "desc": "Barras de ferramentas (toolbars) possuem 2 variantes, clara e escura. Barras de ferramentas claras possuem botões de cor escura e texto escuro, ao passo que barras de ferramentas escuras possuem botões de cor branca e texto branco."
     },
     "flexible-and-card": {
-      "heading": "Barra de ferramentas flexível (flexible toolbar) e barra de ferramentas cartão (toolbar card)",
       "desc": "Com poucos estilos customizados, você pode facilmente criar suas incríveis interfaces de usuários."
     },
-    "floating-with-search": {
-      "heading": "Flutuante com pesquisa"
-    },
     "variations": {
-      "heading": "Variações",
       "desc": "Uma barra de aplicativos (app-bar) possui múltiplas variações que podem ser aplicadas com temas e classes de auxílio. Estes variam entre temas claros e escuros, coloridos e transparentes.",
       "uninverted": true
     },
-    "prominent": {
-      "heading": "Barras de ferramentas proeminentes (prominent toolbars)"
-    },
     "dense": {
-      "heading": "Barras de ferramentas densas (dense toolbars)",
       "desc": "Barras de ferramentas densas têm sua altura reduzida para 48px. Isto também é o comportamento padrão para dispositivos móveis na horizontal (modo paisagem)."
     },
-    "dense-prominent": {
-      "heading": "Barras de ferramentas densas e proeminentes"
-    },
-    "scrolling": {
-      "heading": "Técnicas de rolagem"
-    },
     "system-bars-status-window": {
-      "heading": "Barras do sistema - status/janela",
       "desc": "Barras do sistema (system bars) são úteis para ícones de notificação em dispositivos móveis e desktop. Para exemplos ao vivo, vá até os layouts pré-definidos."
     }
   }
