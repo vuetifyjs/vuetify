@@ -198,9 +198,6 @@ export default baseMixins.extend<options>().extend({
     isOnEdge (): boolean {
       return this.isOnEdgeX || this.isOnEdgeY
     },
-    computedWrapPadding (): number {
-      return 40
-    },
     computedWrapWidth (): number {
       return parseFloat(this.contentWidth) + 2 * this.defaultPadding
     },
@@ -211,9 +208,12 @@ export default baseMixins.extend<options>().extend({
       const isLeft = this.dimensions.activator.x < this.pageWidth / 2
       return isLeft ? this.highlightPadding : -this.highlightPadding
     },
+    computedZIndex (): number {
+      return parseInt(this.zIndex || this.activeZIndex)
+    },
     styles (): object {
       return {
-        zIndex: this.zIndex || this.activeZIndex,
+        zIndex: this.computedZIndex,
       }
     },
     backdropSize (): number {
@@ -359,7 +359,7 @@ export default baseMixins.extend<options>().extend({
     updateActivatorZIndex () {
       const activator = this.getActivator()
       if (activator) {
-        const zIndex = String(parseInt(this.zIndex || this.activeZIndex) + 1)
+        const zIndex = String(this.computedZIndex + 1)
         if (this.isActive) {
           activator.style.zIndex = zIndex
         } else {
@@ -384,6 +384,7 @@ export default baseMixins.extend<options>().extend({
       this.activatorFixed = false
     },
     checkForPageYOffset () {
+      /* istanbul ignore else */
       if (this.hasWindow) {
         this.pageYOffset = this.activatorFixed ? 0 : this.getOffsetTop()
       }
@@ -516,7 +517,7 @@ export default baseMixins.extend<options>().extend({
       if (this.closeOnClick) {
         directives.push({
           name: 'click-outside',
-          value: () => { this.isActive = false },
+          value: () => this.isActive = false,
           args: {
             closeConditional: () => this.closeable,
             include: () => [this.$el],
@@ -531,7 +532,7 @@ export default baseMixins.extend<options>().extend({
         staticClass: 'v-feature-discovery__backdrop',
         class: this.elevationClasses,
         style: this.backdropStyle,
-      }), [])
+      }))
     },
     genHighlight (): VNode {
       return this.$createElement('div', this.setTextColor(this.color, this.setBackgroundColor(this.highlightColor, {
@@ -625,11 +626,11 @@ export default baseMixins.extend<options>().extend({
       on: this.disableKeys ? undefined : {
         keydown: this.onKeyDown,
       },
-    }
+    } as VNodeData
 
     return h('div', data, [
       this.genActivator(),
-      this.$createElement(ThemeProvider, {
+      h(ThemeProvider, {
         props: {
           root: true,
           light: this.light,
