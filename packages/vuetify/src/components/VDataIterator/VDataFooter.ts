@@ -54,6 +54,7 @@ export default Vue.extend({
     showCurrentPage: Boolean,
     disablePagination: Boolean,
     disableItemsPerPage: Boolean,
+    hideItemsPerPage: Boolean,
     pageText: {
       type: String,
       default: '$vuetify.dataFooter.pageText',
@@ -100,6 +101,8 @@ export default Vue.extend({
       }
     },
     genItemsPerPageSelect () {
+      if (this.hideItemsPerPage) return null
+
       let value = this.options.itemsPerPage
       const computedIPPO = this.computedItemsPerPageOptions
 

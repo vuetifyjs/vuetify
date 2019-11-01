@@ -34,6 +34,7 @@
     },
     "v-data-footer": {
       "disableItemsPerPage": "crwdns41102:0crwdne41102:0",
+      "hideItemsPerPage": "translate('Hide items-per-page dropdown')",
       "disablePagination": "crwdns41104:0crwdne41104:0",
       "firstIcon": "crwdns41106:0crwdne41106:0",
       "itemsPerPageAllText": "crwdns41108:0crwdne41108:0",

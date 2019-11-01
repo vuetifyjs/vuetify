@@ -34,6 +34,7 @@
     },
     "v-data-footer": {
       "disableItemsPerPage": "Disables items-per-page dropdown",
+      "hideItemsPerPage": "Hide items-per-page dropdown",
       "disablePagination": "Disables pagination buttons",
       "firstIcon": "First icon",
       "itemsPerPageAllText": "Text for 'All' option in items-per-page dropdown",
