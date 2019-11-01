@@ -518,7 +518,7 @@ export default baseMixins.extend<options>().extend({
           name: 'click-outside',
           value: () => { this.isActive = false },
           args: {
-            closeConditional: this.closeable,
+            closeConditional: () => this.closeable,
             include: () => [this.$el],
           },
         } as any)
