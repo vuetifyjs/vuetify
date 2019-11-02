@@ -410,23 +410,43 @@ export default baseMixins.extend<options>().extend({
       this.dimensions.content = this.measure(this.$refs.content)
     },
     measureDesktopBackdrop (): CircleObject {
+      // Both inner and outer circle should touch (be tangent) to each other
+      //
+      // Backdrop size is calculated using 5 points
+      //   and has 2 possible solutions:
+      // - Any option: the upper point on the inner circle
+      //   that touches (is tangent) to the outer circle, where:
+      //   - X starts with the center of the inner circle
+      //   - Y starts with the inner circle radius + padding
+      //   - both X and Y are rotated/rolled/angled using the cycloid curve,
+      //     depending on the inner circle positioning (left, center, right)
+      // - Option A: the upper two points of the inner
+      //     content rectangle wrapper
+      // - Option B: the bottom two points of the inner
+      //     content rectangle wrapper
+      // The larger size solution is used so that all the content
+      //   will be contained within the backdrop
+      //
+      // X is 0 on the leftmost point, but it could be any other
       const content = this.dimensions.content
       const x = content.width / 2 - this.defaultPadding
-      // Calculate the circles tangent point A(ax, ay) using cycloid curve
-      // Get highlight radius with padding
+      // Calculate the circles tangent point for option A, where A(ax, ay) using cycloid curve
+      // Point A(ax, ay):
+      // Get inner circle (highlight) radius with padding
       const radius = this.highlightOuterSize / 2
       // Get rolled distance/perimeter
       const diameter = -this.computedWrapOffsetLeft
       // Calculate rolled angle
       const t = diameter / (2 * radius)
       // Calculate the tangent point
-      // using the circle bottom center point as origin
+      // using the inner circle's bottom center point as origin
       let ax = radius * Math.sin(t)
       let ay = radius * (1 + Math.cos(t))
 
       // Move the origin to the rectangle top left absolute position
       ax += x + diameter
 
+      // Point B(ax, ay):
       // Calculate backdrop central point B(x, by) and radius (br)
       const by = (Math.pow(ax, 2) - (2 * ax * x) + Math.pow(ay, 2)) / (2 * ay)
       const br = Math.hypot(x, by)
@@ -437,6 +457,7 @@ export default baseMixins.extend<options>().extend({
       const cy = (Math.pow(ax, 2) - (2 * ax * x) + Math.pow(ay, 2)) / (2 * ay)
       const cr = Math.hypot(x, cy)
 
+      // Returns the larger backdrop solution
       if (br > cr) {
         return {
           x,
