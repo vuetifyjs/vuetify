@@ -13,10 +13,11 @@ import {
 
 // Libraries
 import Vue from 'vue'
+const { $createElement: h } = new Vue()
 
 describe('FeatureDiscovery.ts', () => {
   type Instance = InstanceType<typeof VFeatureDiscovery>
-  let mountFunction: (options?: object) => Wrapper<Instance>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 
   beforeEach(() => {
     mountFunction = (options = {} as MountOptions<Instance>) => {
@@ -38,7 +39,6 @@ describe('FeatureDiscovery.ts', () => {
   })
 
   it('should render with activator and activate', () => {
-    const { $createElement: h } = new Vue()
     const wrapper = mountFunction({
       scopedSlots: {
         activator: ({ on }) => h('button', {
@@ -65,6 +65,119 @@ describe('FeatureDiscovery.ts', () => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render active component', async () => {
+    const wrapper = mountFunction()
+    wrapper.setData({
+      isActive: true,
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should deactivate', async () => {
+    jest.useFakeTimers()
+
+    const wrapper = mountFunction({
+      scopedSlots: {
+        activator: ({ on }) => h('button', {
+          attrs: {
+            id: 'foo',
+          },
+          on,
+        }),
+      },
+    })
+    wrapper.setData({
+      isActive: true,
+    })
+    await wrapper.vm.$nextTick()
+
+    wrapper.setData({
+      isActive: false,
+    })
+    await wrapper.vm.$nextTick()
+
+    const activator = wrapper.vm.getActivator()
+    expect(activator.style.zIndex).not.toBe('')
+    jest.runAllTimers()
+    expect(activator.style.zIndex).toBe('')
+
+    jest.useRealTimers()
+  })
+
+  it('should check if activator is fixed', () => {
+    const activator = document.createElement('div')
+
+    const wrapper = mountFunction({
+      methods: {
+        getActivator: () => activator,
+      },
+    })
+
+    wrapper.vm.checkActivatorFixed()
+    expect(wrapper.vm.activatorFixed).toBeFalsy()
+
+    activator.style.position = 'fixed'
+    wrapper.vm.checkActivatorFixed()
+    expect(wrapper.vm.activatorFixed).toBeTruthy()
+  })
+
+  it('should render with custom z-index', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        zIndex: 25,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should measure content', () => {
+    const wrapper = mountFunction({
+      slots: {
+        default: `<div>content</div>`,
+      },
+    })
+
+    wrapper.vm.$refs.content.getBoundingClientRect = () => ({
+      top: 1,
+      left: 2,
+      bottom: 3,
+      right: 4,
+      width: 5,
+      height: 6,
+    })
+    wrapper.vm.measureContent()
+    expect(wrapper.vm.dimensions.content).toMatchSnapshot()
+  })
+
+  it('should calculate backdrop size', () => {
+    const wrapper = mountFunction({
+      slots: {
+        default: `<div>content</div>`,
+      },
+    })
+
+    wrapper.vm.$refs.content.getBoundingClientRect = () => ({
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+      width: 120,
+      height: 100,
+    })
+    wrapper.vm.measureContent()
+
+    expect(wrapper.vm.measureDesktopBackdrop()).toMatchObject({
+      r: 252.82528798916863,
+      size: 585.6505759783372,
+      x: 20,
+      y: 252.03298642599555,
+    })
   })
 
   it('should render component w/o ripple', () => {
@@ -101,6 +214,16 @@ describe('FeatureDiscovery.ts', () => {
       isActive: true,
     })
     content.element.setAttribute('disabled', 'disabled')
+    content.trigger('click')
+    content.element.removeAttribute('disabled')
+    expect(wrapper.vm.isActive).toBeTruthy()
+
+    wrapper.setData({
+      isActive: true,
+    })
+    wrapper.setProps({
+      closeOnContentClick: false,
+    })
     content.trigger('click')
     expect(wrapper.vm.isActive).toBeTruthy()
   })
@@ -159,5 +282,74 @@ describe('FeatureDiscovery.ts', () => {
 
     wrapper.vm.hasWindow = false
     expect(wrapper.vm.getOffsetTop()).toBe(0)
+  })
+
+  describe('sneakPeek', () => {
+    const cbs: FrameRequestCallback[] = []
+    jest.spyOn(window, 'requestAnimationFrame').mockImplementation(cb => cbs.push(cb))
+    const frame = () => cbs.forEach(cb => cb(performance.now()))
+
+    it('should work', () => {
+      const wrapper = mountFunction({
+        slots: {
+          default: `<div>content</div>`,
+        },
+      })
+      const el = wrapper.vm.$refs.content
+      el.style.display = 'none'
+      const fn = jest.fn(() => expect(el.style.display).toBe('inline-block'))
+
+      wrapper.vm.sneakPeek(fn)
+
+      expect(requestAnimationFrame).toHaveBeenCalled()
+      expect(fn).toHaveBeenCalledTimes(0)
+
+      frame()
+      expect(fn).toHaveBeenCalledTimes(1)
+
+      expect(el.style.display).toBe('none')
+    })
+
+    it('should call callback directly if display != none', () => {
+      const wrapper = mountFunction({
+        slots: {
+          default: `<div>content</div>`,
+        },
+      })
+      const el = wrapper.vm.$refs.content
+      el.style.display = 'block'
+      const fn = jest.fn(() => expect(el.style.display).toBe('block'))
+
+      wrapper.vm.sneakPeek(fn)
+
+      expect(requestAnimationFrame).toHaveBeenCalled()
+      expect(fn).toHaveBeenCalledTimes(0)
+
+      frame()
+      expect(fn).toHaveBeenCalledTimes(1)
+
+      expect(el.style.display).toBe('block')
+    })
+
+    it('should call callback directly if no content', () => {
+      const wrapper = mountFunction({
+        methods: {
+          genWrap: () => h('div'),
+        },
+      })
+
+      const el = wrapper.vm.$refs.content
+      expect(el).toBeUndefined()
+
+      const fn = jest.fn()
+
+      wrapper.vm.sneakPeek(fn)
+
+      expect(requestAnimationFrame).toHaveBeenCalled()
+      expect(fn).toHaveBeenCalledTimes(0)
+
+      frame()
+      expect(fn).toHaveBeenCalledTimes(1)
+    })
   })
 })
