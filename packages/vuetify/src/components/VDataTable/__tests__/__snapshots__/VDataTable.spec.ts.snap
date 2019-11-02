@@ -231,6 +231,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -425,6 +426,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -714,6 +716,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -1108,6 +1111,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -1311,6 +1315,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -1567,6 +1572,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -1963,6 +1969,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -2062,6 +2069,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -2161,6 +2169,7 @@ exports[`VDataTable.ts should render 1`] = `
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -2257,6 +2266,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -2385,6 +2395,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -2591,6 +2602,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -2782,6 +2794,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -3071,6 +3084,7 @@ exports[`VDataTable.ts should render with data 1`] = `
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -3255,6 +3269,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -3682,6 +3697,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -4055,6 +4071,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -4259,6 +4276,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -4573,6 +4591,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -4908,6 +4927,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -5243,6 +5263,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -5605,6 +5626,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
