@@ -494,4 +494,14 @@ describe('VAutocomplete.ts', () => {
 
     expect(wrapper.vm.genSelections()).toEqual([])
   })
+
+  it('should change autocomplete attribute', () => {
+    const wrapper = mountFunction({
+      attrs: {
+        autocomplete: 'on',
+      },
+    })
+
+    expect(wrapper.vm.$attrs.autocomplete).toBe('on')
+  })
 })
