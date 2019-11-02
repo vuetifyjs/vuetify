@@ -156,8 +156,8 @@ export default baseMixins.extend<options>().extend({
     pageWidth: 0,
     pageHeight: 0,
     pageYOffset: 0,
-    resizeTimeout: 0,
-    activatorZIndexTimeout: 0,
+    resizeTimeout: -1,
+    activatorZIndexTimeout: -1,
     minHighlightPadding: 20,
     stackClass: 'v-feature-discovery__content--active',
     stackMinZIndex: 6,
@@ -360,6 +360,7 @@ export default baseMixins.extend<options>().extend({
       const activator = this.getActivator()
       if (activator) {
         const zIndex = String(this.computedZIndex + 1)
+        clearTimeout(this.activatorZIndexTimeout)
         if (this.isActive) {
           activator.style.zIndex = zIndex
         } else {
@@ -367,7 +368,6 @@ export default baseMixins.extend<options>().extend({
           // the activator should be visible
           // until the end of the opacity transition
           // hacky but will revisit in the future
-          clearTimeout(this.activatorZIndexTimeout)
           this.activatorZIndexTimeout = window.setTimeout(() => { activator.style.zIndex = '' }, 400)
         }
       }
