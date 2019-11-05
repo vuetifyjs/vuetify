@@ -180,7 +180,6 @@
           tree: 'Automatic',
           release: 'Bi-Weekly',
           ssr: true,
-          lts: true,
           rtl: true,
         },
       ],
