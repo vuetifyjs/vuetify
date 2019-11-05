@@ -1,12 +1,11 @@
 {
-  "heading": "# Affichage",
-  "headingText": "Les aides à l’affichage vous permettent de contrôler l’affichage du contenu. Cela inclut la visibilité conditionnelle en fonction de la fenêtre d'affichage actuelle ou du type d'affichage de l'élément actuel.",
   "displayHeader": "## Affichage",
   "displayText": "Spécifiez les propriétés des éléments `display`. Ces classes peuvent être appliquées à tous les points d'arrêt, de `xs` à `xl` et n'ont pas de point d'arrêt spécifié.",
   "displayFormats": [
     "`.d-{value}` pour `xs`",
     "`.d-{breakpoint}-{value}` pour `sm`, `md`, `lg` et `xl`"
   ],
+  "displayText2": "La propriété _value_ est l'une de :",
   "displays": [
     "``none``",
     "`inline`",
@@ -21,6 +20,14 @@
   "displayText3": "Lors de la configuration d'un point de rupture spécifique pour une classe d'aide à l'affichage, il s'appliquera à toutes les largeurs d'écran de la désignation et de la liste. Par exemple, `d-lg-flex` s'appliquera aux écrans de taille `lg` et `xl`.",
   "visibilityHeader": "## Visibilité",
   "visibilityText": "Affiche un élément basé sur le **viewport**. Les classes d'utilitaires Breakpoint s'appliquent toujours de bas en haut. Cela signifie que si vous avez `.d-none`, il s'appliquera à tous les points d'arrêt. Cependant, `.d-md-none` s'appliquera à `md` et à haut.",
+  "lateralDisplayText": "De plus, vous pouvez également afficher un élément basé sur le **viewport** actuel en utilisant les classes d'aide latérale d'affichage. Ces classes peuvent être appliquées en utilisant le format suivant `hidden-{breakpoint}-{condition}`",
+  "conditionText": "La condition __ applique la base de classe sur :",
+  "conditions": [
+    "`only` - masque l'élément uniquement sur `xs` par les points d'arrêt `xl`",
+    "`and-down` - masque l'élément sur le point d'arrêt spécifié et en-dessous de `sm` à travers les points d'arrêt `lg`",
+    "`and-up` - masque l'élément sur le point d'arrêt spécifié et au-dessus `sm` à travers les points d'arrêt `lg`"
+  ],
+  "mediaText": "De plus, les **types de média** peuvent être ciblés en utilisant la condition `only`. `hidden-screen-only` et` hidden-print-only` sont actuellement pris en charge.",
   "printHeader": "## Afficher en impression",
   "printText1": "Vous pouvez également modifier la propriété d'affichage lors de l'impression.",
   "printOptions": [

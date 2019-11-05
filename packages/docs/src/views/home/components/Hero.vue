@@ -44,8 +44,11 @@
                 :block="$vuetify.breakpoint.smAndDown"
                 class="my-6 ma-md-6"
                 color="white"
+                href="https://github.com/vuetifyjs/vuetify"
                 min-width="187"
                 outlined
+                rel="nofollower noopener"
+                target="_blank"
                 x-large
               >
                 <v-icon

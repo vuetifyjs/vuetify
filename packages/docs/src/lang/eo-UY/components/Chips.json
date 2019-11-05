@@ -1,67 +1,67 @@
 {
-  "heading": "crwdns39148:0crwdne39148:0",
-  "headingText": "crwdns39150:0[v-chip-group]crwdne39150:0",
+  "heading": "crwdns45410:0crwdne45410:0",
+  "headingText": "crwdns45412:0[v-chip-group]crwdne45412:0",
   "examples": {
     "usage": {
       "desc": "crwdns39152:0crwdne39152:0",
       "uninverted": true
     },
     "colored": {
-      "heading": "crwdns32834:0crwdne32834:0",
+      "heading": "crwdns45414:0crwdne45414:0",
       "desc": "crwdns32836:0crwdne32836:0"
     },
     "icon": {
-      "heading": "crwdns32838:0crwdne32838:0",
+      "heading": "crwdns45416:0crwdne45416:0",
       "desc": "crwdns32840:0crwdne32840:0"
     },
     "outlined": {
-      "heading": "crwdns39154:0crwdne39154:0",
+      "heading": "crwdns45418:0crwdne45418:0",
       "desc": "crwdns39156:0crwdne39156:0"
     },
     "label": {
-      "heading": "crwdns32846:0crwdne32846:0",
+      "heading": "crwdns45420:0crwdne45420:0",
       "desc": "crwdns32848:0crwdne32848:0"
     },
     "closable": {
-      "heading": "crwdns32850:0crwdne32850:0",
+      "heading": "crwdns45422:0crwdne45422:0",
       "desc": "crwdns39158:0crwdne39158:0",
       "uninverted": true
     },
     "in-selects": {
-      "heading": "crwdns39160:0crwdne39160:0",
+      "heading": "crwdns45424:0crwdne45424:0",
       "desc": "crwdns39162:0crwdne39162:0",
       "uninverted": true
     },
     "photos": {
-      "heading": "crwdns39166:0crwdne39166:0",
+      "heading": "crwdns45426:0crwdne45426:0",
       "desc": "crwdns39168:0[v-autocomplete]crwdne39168:0"
     },
     "action-chips": {
-      "heading": "crwdns39170:0crwdne39170:0",
+      "heading": "crwdns45428:0crwdne45428:0",
       "desc": "crwdns39172:0crwdne39172:0"
     },
     "filtering": {
-      "heading": "crwdns39174:0crwdne39174:0",
+      "heading": "crwdns45430:0crwdne45430:0",
       "desc": "crwdns39176:0crwdne39176:0"
     },
     "expandable": {
-      "heading": "crwdns39178:0crwdne39178:0",
+      "heading": "crwdns45432:0crwdne45432:0",
       "desc": "crwdns39180:0crwdne39180:0"
     },
     "sizes": {
-      "heading": "crwdns39182:0crwdne39182:0",
+      "heading": "crwdns45434:0crwdne45434:0",
       "desc": "crwdns39184:0crwdne39184:0"
     },
     "draggable": {
-      "heading": "crwdns39186:0crwdne39186:0",
+      "heading": "crwdns45436:0crwdne45436:0",
       "desc": "crwdns39188:0crwdne39188:0"
     },
     "filter": {
-      "heading": "crwdns39190:0crwdne39190:0",
+      "heading": "crwdns45438:0crwdne45438:0",
       "desc": "crwdns39192:0crwdne39192:0"
     },
     "no-ripple": {
-      "heading": "crwdns39194:0crwdne39194:0",
+      "heading": "crwdns45440:0crwdne45440:0",
       "desc": "crwdns39196:0crwdne39196:0"
     }
   },

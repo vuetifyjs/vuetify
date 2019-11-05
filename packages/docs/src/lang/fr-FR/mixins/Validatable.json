@@ -5,6 +5,13 @@
     "errorCount": "Le nombre total d'erreurs devant s'afficher en même temps",
     "errorMessages": "Insère l'entrée dans un état d'erreur et passe par des messages d'erreur personnalisés. Il sera combiné avec toutes les validations qui se produisent à partir du prop **rules** Ce champ ne déclenchera pas la validation",
     "messages": "Affiche une liste de messages ou un message si vous utilisez une chaîne de caractères",
-    "rules": "Accepte un tableau de fonctions qui prennent une valeur d'entrée comme argument et retourne soit `true` / `false` ou une `string` avec un message d'erreur"
+    "readonly": "Met le champ en état de lecture seule",
+    "rules": "Accepte un tableau de fonctions qui prennent une valeur d'entrée comme argument et retourne soit `true` / `false` ou une `string` avec un message d'erreur",
+    "success": "Met le champ dans un état de succès manuel",
+    "successMessages": "Met le champ en état de succès et transmet les messages de succès personnalisés.",
+    "validateOnBlur": "Retarde la validation jusqu'à l'événement de perte de focus (blur)"
+  },
+  "events": {
+    "update:error": "L'événement `error.sync`"
   }
 }

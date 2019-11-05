@@ -82,7 +82,10 @@
         }
 
         this.$router.replace({ params: { lang } })
-        document.cookie = `currentLanguage=${lang};path=/;max-age=${60 * 60 * 24 * 7}` // expires in 7 days
+
+        if (typeof document !== 'undefined') {
+          document.cookie = `currentLanguage=${lang};path=/;max-age=${60 * 60 * 24 * 7}` // expires in 7 days
+        }
       },
     },
   }

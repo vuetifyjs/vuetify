@@ -45,6 +45,8 @@
           : this.addMicroDataDesktop()
       },
       addMicroDataDesktop () {
+        if (typeof document === 'undefined') return
+
         this.script && document.body.removeChild(this.script)
 
         const script = document.createElement('script')
@@ -74,7 +76,7 @@
       ) {
         const origin = this.$ssrContext
           ? `https://${this.$ssrContext.hostname}`
-          : window.location.origin
+          : typeof window !== 'undefined' ? window.location.origin : 'https://vuetifyjs.com'
 
         return {
           '@type': 'ListItem',

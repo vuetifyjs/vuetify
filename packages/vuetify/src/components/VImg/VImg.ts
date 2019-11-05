@@ -264,6 +264,7 @@ export default VResponsive.extend({
     node.data!.directives = this.hasIntersect ? [{
       name: 'intersect',
       options: this.options,
+      modifiers: { once: true },
       value: this.init,
     } as any] : []
 

@@ -1,10 +1,24 @@
 {
   "examples": {
+    "icons": {
+      "heading": "### Icônes"
+    },
+    "multiple": {
+      "heading": "### Multiple"
+    },
+    "disabled": {
+      "heading": "### Désactivé"
+    },
     "dense": {
       "heading": "### Dense"
+    },
+    "readonly": {
+      "heading": "### Lecture seule"
     }
   },
   "props": {
+    "dark": "Components.Inputs.props.dark",
+    "noDataText": "Texte affiché lorsqu'il n'y a pas de données",
     "value": "Components.Inputs.props.value"
   },
   "slots": {

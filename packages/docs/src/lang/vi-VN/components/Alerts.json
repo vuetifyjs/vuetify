@@ -1,16 +1,7 @@
 {
   "examples": {
-    "border": {
-      "heading": "### Border"
-    },
-    "colored-border": {
-      "heading": "### Màu sắc đường viền"
-    },
-    "transition": {
-      "heading": "### Hiệu ứng"
-    },
-    "type": {
-      "heading": "### Loại"
+    "icon": {
+      "heading": "### Icon"
     }
   },
   "props": {

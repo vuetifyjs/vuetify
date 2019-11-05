@@ -1,1 +1,20 @@
-{}
+{
+  "examples": {
+    "disabled": {
+      "heading": "### Désactivé",
+      "desc": "Le prop`disabled` désactive la fonctionnalité de survol."
+    },
+    "open-and-close-delay": {
+      "desc": "Retarder les événements `v-hover` en utilisant les props `open-delay` et `close-delay` en combinaison ou séparément."
+    },
+    "hover-list": {
+      "desc": "`v-hover` peut être utilisé en combinaison avec `v-for` pour faire un seul élément se détacher lorsque l'utilisateur interagit avec la liste."
+    },
+    "transition": {
+      "desc": "Crée des composants hautement personnalisés qui répondent à l'interaction des utilisateurs."
+    }
+  },
+  "props": {
+    "disabled": "Désactive la fonctionnalité de survol"
+  }
+}

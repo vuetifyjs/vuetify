@@ -1,32 +1,33 @@
 {
-  "heading": "crwdns39282:0crwdne39282:0",
-  "headingText": "crwdns32936:0[vuetify-loader]crwdne32936:0",
+  "heading": "crwdns45470:0crwdne45470:0",
+  "headingText": "crwdns45472:0[vuetify-loader]crwdne45472:0",
+  "alert1": "crwdns45474:0[v-intersect]crwdnd45474:0[Polyfill]crwdne45474:0",
   "examples": {
     "usage": {
       "desc": "crwdns39284:0crwdne39284:0"
     },
     "contain-cover": {
-      "heading": "crwdns39286:0crwdne39286:0",
+      "heading": "crwdns45476:0crwdne45476:0",
       "desc": "crwdns39288:0crwdne39288:0"
     },
     "max-height": {
-      "heading": "crwdns39290:0crwdne39290:0",
+      "heading": "crwdns45478:0crwdne45478:0",
       "desc": "crwdns39292:0crwdne39292:0"
     },
     "ratio": {
-      "heading": "crwdns32948:0crwdne32948:0",
+      "heading": "crwdns45480:0crwdne45480:0",
       "desc": "crwdns39294:0crwdne39294:0"
     },
     "gradients": {
-      "heading": "crwdns32952:0crwdne32952:0",
+      "heading": "crwdns45482:0crwdne45482:0",
       "desc": "crwdns32954:0crwdne32954:0"
     },
     "grid": {
-      "heading": "crwdns39296:0crwdne39296:0",
+      "heading": "crwdns45484:0crwdne45484:0",
       "desc": "crwdns39298:0crwdne39298:0"
     },
     "placeholder": {
-      "heading": "crwdns39300:0crwdne39300:0",
+      "heading": "crwdns45486:0crwdne45486:0",
       "desc": "crwdns39302:0crwdne39302:0"
     }
   },
@@ -34,6 +35,7 @@
     "alt": "crwdns32956:0crwdne32956:0",
     "aspectRatio": "crwdns32958:0crwdne32958:0",
     "contain": "crwdns32960:0crwdne32960:0",
+    "eager": "crwdns45488:0crwdne45488:0",
     "gradient": "crwdns32962:0[linear-gradient]crwdne32962:0",
     "lazySrc": "crwdns32964:0[vuetify-loader]crwdne32964:0",
     "position": "crwdns32966:0crwdne32966:0",

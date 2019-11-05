@@ -1,4 +1,18 @@
 {
-  "consulting": "컨설팅과 지원",
-  "diamondSponsors": "다이아몬드 스폰서"
+  "components": "UI 컴포넌트",
+  "customization": "커스터마이징",
+  "diamondSponsors": "다이아몬드 스폰서",
+  "directives": "지시자",
+  "ecosystem": "생태계",
+  "enterprise": "기업",
+  "faq": "자주 묻는 질문",
+  "gettingStarted": "시작해보기",
+  "meetTheTeam": "개발자 팀을 만나보세요",
+  "preMadeLayouts": "미리 만들어진 레이아웃",
+  "premiumThemes": "프리미엄 테마들",
+  "quickStart": "빠른 시작",
+  "sponsorsAndBackers": "스폰서와 후원자들",
+  "styles": "스타일 & 애니메이션",
+  "testing": "단위 테스트",
+  "whyVuetify": "왜 Vuetify 인가요?"
 }

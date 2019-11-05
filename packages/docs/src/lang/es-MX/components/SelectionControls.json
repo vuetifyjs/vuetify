@@ -1,43 +1,18 @@
 {
-  "heading": "Selection controls",
-  "headingText": "Los componentes _selection control_ permiten que un usuario seleccione opciones. Estos componentes **deben** ser utilizados con la prop `v-model` porque no mantienen su propio estado.",
   "examples": {
-    "checkboxes-boolean": {
-      "heading": "Checkboxes - Boolean"
-    },
-    "checkboxes-array": {
-      "heading": "Checkboxes - Array"
-    },
-    "checkboxes-states": {
-      "heading": "Checkboxes - States"
-    },
     "checkboxes-colors": {
-      "heading": "Checkboxes - Colors",
       "desc": "Puedes cambiar el color de los checkboxes si usas cualquiera de los colores prefabricados y los nombres contextuales en la prop `color`."
     },
     "radios-default": {
-      "heading": "Radios - Default",
       "desc": "Los Radio-groups son obligatorios por default. Puedes cambiar esto con la prop `mandatory`."
     },
     "radios-direction": {
-      "heading": "Radios - Dirección",
       "desc": "Los radio-groups pueden ser representados ya sea en una fila o una columna, utilizando sus props respectivas. El default es columna"
     },
     "radios-colors": {
-      "heading": "Radios - Colors",
       "desc": "Puedes cambiar el color de los radios si usas cualquiera de los colores prefabricados y los nombres contextuales en la prop `color`."
     },
-    "switches-boolean": {
-      "heading": "Switches - Boolean"
-    },
-    "switches-array": {
-      "heading": "Switches - Array"
-    },
-    "switches-states": {
-      "heading": "Switches - States"
-    },
     "switches-colors": {
-      "heading": "Switches - Colors",
       "desc": "Puedes cambiar el color de los switches si usas cualquiera de los colores prefabricados y los nombres contextuales en la prop `color`."
     }
   },

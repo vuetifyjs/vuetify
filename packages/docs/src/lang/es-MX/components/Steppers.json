@@ -1,52 +1,39 @@
 {
-  "headingText": "El componente `v-stepper` muestra el progreso en pasos numerados.",
   "examples": {
     "editable": {
-      "heading": "Pasos editables",
       "desc": "Un paso editable puede ser seleccionado por un usuario en cualquier punto y lo llevará hasta ese paso."
     },
     "non-editable": {
-      "heading": "Pasos no editables",
       "desc": "Los pasos no editables obligan al usuario a llevar un proceso lineal."
     },
     "optional": {
-      "heading": "Pasos opcionales",
       "desc": "Un paso opcional puede ser llamado con un sub-texto."
     },
     "horizontal": {
-      "heading": "Pasos horizontales",
       "desc": "Los steppers horizontales mueven al usuario en el eje X a través de los pasos definidos.."
     },
     "vertical": {
-      "heading": "Steppers verticales",
       "desc": "Los steppers verticales mueven al usuario en el eje Y, y trabajan exactamente de la misma forma que su contraparte horizontal."
     },
     "linear": {
-      "heading": "Steppers lineales",
       "desc": "Los steppers lineales siempre moverán al usuario a través del camino que tú decidas."
     },
     "non-linear": {
-      "heading": "Steppers no lineales",
       "desc": "Los steppers no lineales permitirán al usuario que se mueva en tu proceso de cualquier manera que ellos elijan."
     },
     "alternate-labels": {
-      "heading": "Etiquetas alternativas",
       "desc": "Los steppers también tienen un estilo de etiqueta alternativa que coloca el título debajo del paso mismo."
     },
     "error": {
-      "heading": "Estado de error multi línea",
       "desc": "Un estado de error puede ser mostrado para notificar al usuario de alguna acción que debe llevarse a cabo."
     },
     "alternate-error": {
-      "heading": "Estado de error multi línea con etiqueta alternativa",
       "desc": "El estado de error también puede ser aplicado al estilo de la etiqueta alternativa."
     },
     "vertical-error": {
-      "heading": "Estado de error multi línea vertical",
       "desc": "El mismo estado también aplica para los steppers verticales."
     },
     "dynamic": {
-      "heading": "Pasos dinámicos",
       "desc": "Los steppers pueden tener sus pasos dinámicamente agregados o quitados. Si un paso actualmente activo es removido, asegúrate de tomar esto en cuenta haciendo el cambio en el modelo."
     }
   },

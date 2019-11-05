@@ -1,6 +1,4 @@
 {
-  "heading": "# Espacement",
-  "headingText": "Met à jour votre mise en page sans créer de nouvelles classes. Les assistants d'espacement sont utiles pour modifier le padding et la marge d'un élément.",
   "playgroundHeader": "## Terrain de jeux",
   "playgroundText1": "Utilisez le terrain de jeu pour voir ce que les différentes classes d'aide peuvent faire. Pour une explication de leur fonctionnement, voir la section **Comment ça fonctionne** ci-dessous.",
   "howText": "Les classes d'aide appliquent **marge** ou **padding** à un élément allant de _0 à 12_. Chaque taille a été conçue pour s'aligner sur des espaces de conception de matériaux communs. Ces classes peuvent être appliquées au format suivant `{property}{direction}-{size}`.",
@@ -52,14 +50,19 @@
   ],
   "horizontalHeader": "Centrage horizontal",
   "horizontalText": "Pour les éléments de bloc avec une largeur désignée, vous pouvez appliquer `.mx-auto` au centre horizontal du contenu.",
+  "breakpointHeader": "## Avec points d'arrêt",
+  "breakpointText": "Vuetify est livré avec un système de grille de 12 points construit en utilisant Flexbox. L'espace est utilisé pour créer des mises en page spécifiques dans le contenu d'une application. Il se compose de 5 points de rupture de média utilisés pour cibler des tailles ou des orientations spécifiques d'écran : **xs**, **sm**, **md**, **lg** et **xl**. Les résolutions par défaut sont définies ci-dessous dans la table *Viewport Breakpoints* et peuvent être modifiées en personnalisant la configuration [breakpoint service config](/customization/breakpoints).",
+  "breakpointHowText": "Les classes d'aide appliquent **marge** ou **padding** à un point d'arrêt donné. Ces classes peuvent être appliquées en utilisant le format suivant : `{property}{direction}-{breakpoint}-{size}`.",
   "examples": {
     "horizontal": {
       "heading": "## Horizontal",
       "desc": "En utilisant les classes d'aide à la marge, vous pouvez facilement centrer le contenu horizontalement."
     },
     "negative-margin": {
-      "heading": "### Marge négative",
       "desc": "La marge peut également être appliquée négativement à la même fréquence **1 à 12** ."
+    },
+    "breakpoint-md": {
+      "desc": "Espacement avec les points d'arrêt `md` et `lg`"
     }
   }
 }

@@ -1,1 +1,40 @@
-{}
+{
+  "examples": {
+    "usage": {
+      "desc": "Conçu pour faciliter le cycle de contenu, la fonction « v-window » fournit une interface simple pour créer des implémentations vraiment personnalisées."
+    },
+    "onboarding": {
+      "desc": "`v-window` permet de créer facilement des composants personnalisés comme un stepper différent."
+    },
+    "vertical": {
+      "heading": "## Vertical",
+      "desc": "`v-window` peut être vertical. Les fenêtres verticales ont une transition de l'axe Y au lieu de la transition de l'axe X."
+    },
+    "reverse": {
+      "desc": "Inverser `v-window` affiche toujours une transition inverse."
+    },
+    "account": {
+      "desc": "Créez des formulaires riches avec des animations lisses. `v-window` suit automatiquement l'index de sélection actuel pour changer automatiquement la direction de transition. Cela peut être contrôlé manuellement avec la prop `reverse`."
+    }
+  },
+  "props": {
+    "activeClass": "Mixins.BaseItemGroup.props.activeClass",
+    "continuous": "Si `true`, la fenêtre \"enveloppe\" du dernier élément au le premier, et du premier élément au dernier",
+    "nextIcon": "Icône utilisée pour le bouton \"suivant\" si `show-arrows` est `true`",
+    "prevIcon": "Icône utilisée pour le bouton \"prev\" si `show-arrows` est `true`",
+    "reverse": "Définissez manuellement la fenêtre pour utiliser **reverseTransition**",
+    "reverseTransition": "La transition utilisée lorsque le composant inverse les éléments. Peut être l'un des [construits en transitions](/styles/transitions) ou l'un de vos propres.",
+    "showArrows": "Afficher les boutons \"suivant\" et \"prev\"",
+    "showArrowsOnHover": "Afficher les boutons \"next\" et \"prev\" sur le survol. `show-arrows` DOIT AUSSI être défini.",
+    "touch": "Fournir une fonction **left** et **right** en cas de glisser à gauche ou à droite.",
+    "touchless": "Désactiver le support tactile.",
+    "transition": "La transition utilisée lorsque le composant progresse à travers les éléments. Peut être l'un des [built in transitions](/styles/transitions) ou l'un de vos propres component.",
+    "vertical": "Utilise une transition verticale lors du changement de fenêtres.",
+    "v-window-item": {
+      "disabled": "Empêche l'élément de devenir actif lorsque vous utilisez les boutons \"next\" et \"prev\" ou la méthode \"toggle\"",
+      "reverse-transition": "Définit la transition inverse",
+      "transition": "Mixins.Transitionable.props.transition",
+      "value": "Mixins.Groupable.props.value"
+    }
+  }
+}

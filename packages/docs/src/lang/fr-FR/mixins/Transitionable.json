@@ -1,1 +1,7 @@
-{}
+{
+  "props": {
+    "mode": "Définit le mode de transition (ne s'applique pas au groupe de transition). Vous pouvez trouver plus d'informations sur la documentation Vue [pour les modes de transition](https://vuejs.org/v2/api/#transition).",
+    "origin": "Définit l'origine de la transition sur l'élément. Vous pouvez trouver plus d'informations sur la documentation MDN [pour l'origine de la transition](https://developer.mozilla.org/fr-US/docs/Web/CSS/transform-origin).",
+    "transition": "Définit la transition du composant. Peut être l'une des [construites en transitions](/styles/transitions) ou l'autre de vos propres."
+  }
+}

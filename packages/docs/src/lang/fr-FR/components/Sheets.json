@@ -1,1 +1,21 @@
-{}
+{
+  "examples": {
+    "usage": {
+      "desc": "Le composant `v-sheet` est un papier malléable qui peut être morphé pour faciliter d'autres composants."
+    },
+    "elevation": {
+      "desc": "Les feuilles peuvent accepter une altitude personnalisée entre **0 et 24** (0 est par défaut)."
+    },
+    "tile": {
+      "heading": "### Tuile",
+      "desc": "Les feuilles peuvent accepter une propriété `tile` qui les rend rectangulaires (pas de `border-radius`)."
+    },
+    "colors-sizes": {
+      "desc": "Les feuilles et les composants basés sur ce procédé peuvent avoir différentes tailles et couleurs."
+    }
+  },
+  "props": {
+    "tag": "Spécifiez un tag personnalisé utilisé sur l'élément racine.",
+    "tile": "Supprime le rayon de la frontière du composant."
+  }
+}

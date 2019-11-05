@@ -93,15 +93,20 @@
 <script>
   const types = {
     release: {
-      icon: 'mdi-package-variant-closed',
+      icon: 'mdi-firework',
       color: 'indigo lighten-1',
     },
     packages: {
-      icon: 'mdi-server-network',
+      icon: 'mdi-package-variant',
       color: 'red lighten-2',
       small: true,
     },
     site: {
+      icon: 'mdi-monitor-dashboard',
+      color: 'blue-grey',
+      small: true,
+    },
+    snips: {
       icon: 'mdi-content-cut',
       color: 'blue-grey',
       small: true,

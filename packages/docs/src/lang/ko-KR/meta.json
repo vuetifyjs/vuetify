@@ -2,13 +2,29 @@
   "": {
     "title": "Vue Material Design 컴포넌트 프레임워크"
   },
+  "introduction/why-vuetify": {
+    "title": "왜 Vuetify 인가요?"
+  },
+  "introduction/frequently-asked-questions": {
+    "title": "자주 묻는 질문"
+  },
+  "introduction/meet-the-team": {
+    "title": "개발자 팀을 만나보세요"
+  },
+  "introduction/sponsors-and-backers": {
+    "title": "스폰서와 후원자들"
+  },
   "getting-started/quick-start": {
+    "title": "빠른 시작",
     "keywords": "quick start, vuetify templates, get started"
+  },
+  "customization/theme": {
+    "description": "Setup your custom application theme by changing a few variables."
   },
   "professional-support/consulting": {
     "title": "컨설팅과 지원"
   },
-  "customization/theme": {
-    "description": "Setup your custom application theme by changing a few variables."
+  "professional-support/business": {
+    "title": "컨설팅과 지원"
   }
 }

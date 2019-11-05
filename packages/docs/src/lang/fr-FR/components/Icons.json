@@ -1,22 +1,39 @@
 {
   "heading": "# Icônes",
   "examples": {
+    "usage": {
+      "desc": "Les icônes sont présentées dans deux thèmes (lumière et foncé), et cinq tailles différentes (x-small, small, medium (par défaut), grandes et x-large)."
+    },
+    "font-awesome": {
+      "desc": "[Font Awesome](http://fontawesome.io/icons/) est également supporté. Il suffit d'utiliser le nom de l'icône préfixe `fa-`. Veuillez noter que vous devez toujours inclure les icônes Font Awesome dans votre projet. Pour plus d'informations sur la façon de l'installer, veuillez naviguer sur la [page d'installation](/customization/icônes#install-font-awesome-5-icônes)"
+    },
+    "md": {
+      "desc": "[Design de matériaux](https://material.io/tools/icons/?style=baseline) est également pris en charge. Pour plus d'informations sur la façon de l'installer, veuillez [naviguer ici](/customization/icons#install-material-icons)"
+    },
     "color": {
       "heading": "### Couleurs",
       "desc": "En utilisant les utilitaires de couleur, vous pouvez changer la couleur d'une icône à partir des thèmes sombres et clairs standards."
     },
     "buttons": {
-      "heading": "### Boutons",
       "desc": "Les icônes peuvent être utilisées à l'intérieur des boutons pour accentuer l'action."
     },
     "clickable": {
-      "heading": "### Cliquable",
       "desc": "Lier n’importe quel événement click à « v-icon » changera automatiquement le curseur en pointeur."
+    },
+    "mdi-svg": {
+      "desc": "Vous pouvez importer manuellement uniquement les icônes que vous utilisez lors de l'utilisation du paquet [@mdi/js](https://www.npmjs.com/package/@mdi/js). Si vous voulez utiliser des icônes SVG avec le composant `VIcon`, lisez sur leur utilisation [here](/customization/icons#install-material-design-icons-js-svg)."
     }
   },
   "props": {
     "dense": "Rend l'icône petite **(20px)",
+    "disabled": "Mixins.Validatable.props.disabled",
+    "large": "Mixins.Sizeable.props.large",
     "left": "Positionne l'icône à gauche, lorsqu'elle est utilisée à l'intérieur d'un bouton",
-    "right": "Positionne l'icône à droite, lorsqu'elle est utilisée à l'intérieur d'un bouton"
+    "medium": "Mixins.Sizeable.props.medium",
+    "right": "Positionne l'icône à droite, lorsqu'elle est utilisée à l'intérieur d'un bouton",
+    "size": "Spécifie une taille de police personnalisée pour l'icône.",
+    "small": "Mixins.Sizeable.props.small",
+    "tag": "Spécifie un tag personnalisé à utiliser",
+    "xLarge": "Mixins.Sizeable.props.xLarge"
   }
 }

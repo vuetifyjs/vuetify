@@ -1,6 +1,5 @@
 {
   "becomeSponsor": "Vuetifyを支援する",
-  "callout": "マテリアルデザイン<br>コンポーネントフレームワーク",
   "features": {
     "community": {
       "text": "つまづいてしまったらすぐに助けが必要です。VuetifyはDiscord上で大きなコミュニティによるサポートを用意しています。",
@@ -11,11 +10,12 @@
       "title": "セマンティックコンポーネント"
     },
     "scaffolding": {
+      "text": "Vuetifyは、Vueの機能をVue CLI 3のプラグインとしてサポートします。コマンドひとつで素晴らしいアイデアを形にしましょう。",
       "title": "プロジェクトテンプレート"
     }
   },
   "getHelp": "ヘルプ",
   "getStarted": "はじめよう",
   "mit": "MIT ライセンス",
-  "whyVuetify": "Vuetifyを選ぶ理由"
+  "whyVuetifyText2": "Vuetifyを選ぶ理由"
 }
