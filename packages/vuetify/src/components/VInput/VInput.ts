@@ -247,8 +247,8 @@ export default mixins<options &
           value: (this.hasMessages || this.hasHint) ? messages : []
         },
         scopedSlots: {
-          default: this.$scopedSlots.default
-            ? props => this.$scopedSlots.default!(props)
+          default: this.$scopedSlots.message
+            ? props => this.$scopedSlots.message!(props)
             : undefined
         }
       })
