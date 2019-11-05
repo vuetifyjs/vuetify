@@ -183,15 +183,23 @@ export default mixins(
     },
     defaultTitleMultipleDateFormatter (): DatePickerMultipleFormatter {
       return dates => {
-        if (!dates.length) {
+        let selectedItems = dates.length
+
+        if (!selectedItems) {
           return '-'
         }
-
-        if (dates.length === 1) {
+        if (selectedItems === 1) {
           return this.defaultTitleDateFormatter(dates[0])
         }
 
-        return this.$vuetify.lang.t(this.selectedItemsText, dates.length)
+        if (this.range) {
+          const startDate = new Date(dates[0])
+          const endDate = new Date(dates[1])
+          const difference = endDate.getTime() - startDate.getTime()
+          selectedItems = Math.abs(difference) / (1000 * 3600 * 24) + 1
+        }
+
+        return this.$vuetify.lang.t(this.selectedItemsText, selectedItems)
       }
     },
     defaultTitleDateFormatter (): DatePickerFormatter {
