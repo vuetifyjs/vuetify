@@ -11,7 +11,7 @@
     <div class="px-6">
       <strong>Join us</strong>
 
-      &nbsp;at the upcoming VueConf Toronto to learn more about Vuetify v2.0 and more! Use&nbsp;
+      at the upcoming VueConf Toronto to learn about the future of Vuetify! Use&nbsp;
 
       <a
         href="https://vuetoronto.com/tickets"
