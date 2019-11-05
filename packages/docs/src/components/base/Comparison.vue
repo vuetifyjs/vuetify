@@ -178,7 +178,7 @@
           src: 'https://cdn.vuetifyjs.com/images/competitors/quasar.png',
           components: 81,
           tree: 'Automatic',
-          release: 'Weekly',
+          release: 'Bi-Weekly',
           ssr: true,
           lts: true,
           rtl: true,
