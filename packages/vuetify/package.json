@@ -1,6 +1,6 @@
 {
   "name": "vuetify",
-  "description": "Vue.js 2 Semantic Component Framework",
+  "description": "Vue Material Component Framework",
   "version": "2.1.9",
   "author": {
     "name": "John Leider",
@@ -14,10 +14,20 @@
     "directory": "packages/vuetify"
   },
   "keywords": [
-    "vuetify"
+    "vuetify",
+    "ui framework",
+    "component framework",
+    "ui library",
+    "component library",
+    "material components",
+    "vue framework"
   ],
   "bugs": {
-    "url": "https://github.com/vuetifyjs/vuetify/issues"
+    "url": "https://issues.vuetifyjs.com"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/johnleider"
   },
   "main": "dist/vuetify.js",
   "module": "dist/vuetify.js",
