@@ -87,9 +87,9 @@ export default Vue.extend({
     disableFiltering: Boolean,
     search: String,
     customFilter: {
-      type: Function as any as PropType<typeof searchItems>,
-      default: () => searchItems,
-    },
+      type: Function,
+      default: searchItems,
+    } as PropValidator<typeof searchItems>,
     serverItemsLength: {
       type: Number,
       default: -1,
