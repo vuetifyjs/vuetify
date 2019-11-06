@@ -96,7 +96,7 @@ export default Vue.extend({
     },
   },
 
-  data (): { internalOptions: DataOptions } {
+  data () {
     let internalOptions: DataOptions = {
       page: this.page,
       itemsPerPage: this.itemsPerPage,

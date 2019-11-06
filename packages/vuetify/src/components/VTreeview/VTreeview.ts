@@ -119,7 +119,7 @@ export default mixins(
 
   watch: {
     items: {
-      handler (): void {
+      handler () {
         const oldKeys = Object.keys(this.nodes).map(k => getObjectValueByPath(this.nodes[k].item, this.itemKey))
         const newKeys = this.getKeys(this.items)
         const diff = arrayDiff(newKeys, oldKeys)
@@ -144,13 +144,13 @@ export default mixins(
       },
       deep: true,
     },
-    active (value: (string | number | any)[]): void {
+    active (value: (string | number | any)[]) {
       this.handleNodeCacheWatcher(value, this.activeCache, this.updateActive, this.emitActive)
     },
-    value (value: (string | number | any)[]): void {
+    value (value: (string | number | any)[]) {
       this.handleNodeCacheWatcher(value, this.selectedCache, this.updateSelected, this.emitSelected)
     },
-    open (value: (string | number | any)[]): void {
+    open (value: (string | number | any)[]) {
       this.handleNodeCacheWatcher(value, this.openCache, this.updateOpen, this.emitOpen)
     },
   },
