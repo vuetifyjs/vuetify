@@ -1,6 +1,7 @@
 // Helpers
 import { wrapInArray, sortItems, deepEqual, groupByProperty, searchItems } from '../../util/helpers'
 import Vue, { VNode, PropType } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
 export interface DataOptions {
   page: number
@@ -56,9 +57,9 @@ export default Vue.extend({
       default: () => [],
     },
     customSort: {
-      type: Function as any as PropType<typeof sortItems>,
+      type: Function,
       default: sortItems,
-    },
+    } as PropValidator<typeof sortItems>,
     mustSort: Boolean,
     multiSort: Boolean,
     page: {
@@ -87,7 +88,7 @@ export default Vue.extend({
     search: String,
     customFilter: {
       type: Function as any as PropType<typeof searchItems>,
-      default: searchItems,
+      default: () => searchItems,
     },
     serverItemsLength: {
       type: Number,
@@ -95,7 +96,7 @@ export default Vue.extend({
     },
   },
 
-  data () {
+  data (): { internalOptions: DataOptions } {
     let internalOptions: DataOptions = {
       page: this.page,
       itemsPerPage: this.itemsPerPage,

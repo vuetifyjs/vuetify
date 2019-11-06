@@ -14,7 +14,7 @@ import { getObjectValueByPath } from '../../util/helpers'
 import { PropValidator } from 'vue/types/options'
 
 // Types
-import { VNode } from 'vue'
+import { VNode, VNodeChildren } from 'vue'
 
 type VTreeViewInstance = InstanceType<typeof VTreeview>
 
@@ -145,12 +145,14 @@ export default baseMixins.extend<options>().extend({
     },
   },
 
-  created () {
-    this.treeview.register(this)
+  created (): void {
+    // TODO: ts 3.7 broke recursive types
+    (this.treeview as any).register(this)
   },
 
-  beforeDestroy () {
-    this.treeview.unregister(this)
+  beforeDestroy (): void {
+    // TODO: ts 3.7 broke recursive types
+    (this.treeview as any).unregister(this)
   },
 
   methods: {
@@ -167,12 +169,12 @@ export default baseMixins.extend<options>().extend({
         this.hasLoaded = true
       })
     },
-    open () {
+    open (): void {
       this.isOpen = !this.isOpen
       this.treeview.updateOpen(this.key, this.isOpen)
       this.treeview.emitOpen()
     },
-    genLabel () {
+    genLabel (): VNode {
       const children = []
 
       if (this.$scopedSlots.label) children.push(this.$scopedSlots.label(this.scopedProps))
@@ -183,7 +185,7 @@ export default baseMixins.extend<options>().extend({
         staticClass: 'v-treeview-node__label',
       }, children)
     },
-    genContent () {
+    genContent (): VNode {
       const children = [
         this.$scopedSlots.prepend && this.$scopedSlots.prepend(this.scopedProps),
         this.genLabel(),
@@ -194,7 +196,7 @@ export default baseMixins.extend<options>().extend({
         staticClass: 'v-treeview-node__content',
       }, children)
     },
-    genToggle () {
+    genToggle (): VNode {
       return this.$createElement(VIcon, {
         staticClass: 'v-treeview-node__toggle',
         class: {
@@ -215,7 +217,7 @@ export default baseMixins.extend<options>().extend({
         },
       }, [this.isLoading ? this.loadingIcon : this.expandIcon])
     },
-    genCheckbox () {
+    genCheckbox (): VNode {
       return this.$createElement(VIcon, {
         staticClass: 'v-treeview-node__checkbox',
         props: {
@@ -297,7 +299,7 @@ export default baseMixins.extend<options>().extend({
         scopedSlots: this.$scopedSlots,
       })
     },
-    genChildrenWrapper (): any {
+    genChildrenWrapper (): VNode | null {
       if (!this.isOpen || !this.children) return null
 
       const children = [this.children.map(this.genChild)]
@@ -312,7 +314,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   render (h): VNode {
-    const children = [this.genNode()]
+    const children: VNodeChildren = [this.genNode()]
 
     if (this.transition) children.push(this.genTransition())
     else children.push(this.genChildrenWrapper())

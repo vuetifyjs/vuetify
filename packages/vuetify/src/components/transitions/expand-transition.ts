@@ -4,8 +4,8 @@ interface HTMLExpandElement extends HTMLElement {
   _parent?: (Node & ParentNode & HTMLElement) | null
   _initialStyle: {
     transition: string
-    visibility: string | null
-    overflow: string | null
+    visibility: string
+    overflow: string
     height?: string | null
     width?: string | null
   }

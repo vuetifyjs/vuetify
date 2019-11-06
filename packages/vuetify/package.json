@@ -96,7 +96,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "ts-loader": "^6.0.4",
-    "tslint": "^5.18.0",
+    "tslint": "^5.20.1",
     "url-loader": "^2.1.0",
     "vue-meta": "^2.0.5",
     "vue-router": "^3.0.7",
