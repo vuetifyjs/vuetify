@@ -13,6 +13,8 @@ module.exports = {
       __VUETIFY_VERSION__: vuetifyPackage.version,
       __REQUIRED_VUE__: vuetifyPackage.peerDependencies.vue,
     }],
+    '@babel/plugin-proposal-nullish-coalescing-operator',
+    '@babel/plugin-proposal-optional-chaining',
   ],
   env: {
     test: {
