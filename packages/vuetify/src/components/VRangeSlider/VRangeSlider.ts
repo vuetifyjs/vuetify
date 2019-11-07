@@ -66,7 +66,7 @@ export default VSlider.extend({
     },
     inputWidth (): number[] {
       return this.internalValue.map((v: number) => (
-        this.roundValue(v) - this.minValue) / (this.maxValue - this.minValue) * 100
+        this.roundValue(v) - this.minValue) / (this.maxValue - this.minValue) * 100,
       )
     },
     trackFillStyles (): Partial<CSSStyleDeclaration> {
@@ -137,7 +137,7 @@ export default VSlider.extend({
           this.$createElement('div', this.setBackgroundColor(this.computedColor, {
             staticClass: 'v-slider__track-fill',
             style: this.trackFillStyles,
-          }))
+          })),
         )
       }
 

@@ -44,7 +44,7 @@ type NodeState = {
 
 export default mixins(
   RegistrableProvide('treeview'),
-  Themeable
+  Themeable,
   /* @vue/component */
 ).extend({
   name: 'v-treeview',
@@ -109,7 +109,7 @@ export default mixins(
           this.itemKey,
           this.itemText,
           this.itemChildren,
-          excluded
+          excluded,
         )
       }
 

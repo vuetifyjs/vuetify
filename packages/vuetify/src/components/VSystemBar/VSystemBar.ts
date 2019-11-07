@@ -19,7 +19,7 @@ export default mixins(
     'window',
   ]),
   Colorable,
-  Themeable
+  Themeable,
 /* @vue/component */
 ).extend({
   name: 'v-system-bar',

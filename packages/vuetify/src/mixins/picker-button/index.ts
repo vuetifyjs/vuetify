@@ -10,7 +10,7 @@ import { VNodeChildren } from 'vue'
 
 /* @vue/component */
 export default mixins(
-  Colorable
+  Colorable,
 ).extend({
   methods: {
     genPickerButton (
@@ -18,7 +18,7 @@ export default mixins(
       value: any,
       content: VNodeChildren,
       readonly = false,
-      staticClass = ''
+      staticClass = '',
     ) {
       const active = (this as any)[prop] === value
       const click = (event: Event) => {

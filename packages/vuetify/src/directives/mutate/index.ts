@@ -32,7 +32,7 @@ function inserted (el: HTMLElement, binding: MutateVNodeDirective) {
 
   const observer = new MutationObserver((
     mutationsList: MutationRecord[],
-    observer: MutationObserver
+    observer: MutationObserver,
   ) => {
     /* istanbul ignore if */
     if (!el._mutate) return // Just in case, should never fire

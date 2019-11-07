@@ -35,7 +35,7 @@ const VIcon = mixins(
   BindsAttrs,
   Colorable,
   Sizeable,
-  Themeable
+  Themeable,
   /* @vue/component */
 ).extend({
   name: 'v-icon',
@@ -84,7 +84,7 @@ const VIcon = mixins(
     // Component data for both font and svg icon.
     getDefaultData (): VNodeData {
       const hasClickListener = Boolean(
-        this.listeners$.click || this.listeners$['!click']
+        this.listeners$.click || this.listeners$['!click'],
       )
       const data: VNodeData = {
         staticClass: 'v-icon notranslate',
@@ -174,7 +174,7 @@ const VIcon = mixins(
     },
     renderSvgIconComponent (
       icon: VuetifyIconComponent,
-      h: CreateElement
+      h: CreateElement,
     ): VNode {
       const data = this.getDefaultData()
       data.class['v-icon--is-component'] = true

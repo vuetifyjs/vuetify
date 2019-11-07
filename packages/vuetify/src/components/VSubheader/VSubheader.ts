@@ -9,7 +9,7 @@ import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 
 export default mixins(
-  Themeable
+  Themeable,
   /* @vue/component */
 ).extend({
   name: 'v-subheader',

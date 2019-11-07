@@ -11,7 +11,7 @@ function inserted (el: HTMLElement, binding: ObserveVNodeDirective) {
   const callback = isObject ? value.handler : value
   const observer = new IntersectionObserver((
     entries: IntersectionObserverEntry[] = [],
-    observer: IntersectionObserver
+    observer: IntersectionObserver,
   ) => {
     /* istanbul ignore if */
     if (!el._observe) return // Just in case, should never fire

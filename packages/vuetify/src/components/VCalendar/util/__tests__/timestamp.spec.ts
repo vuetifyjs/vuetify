@@ -453,7 +453,7 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
         end,
         today,
         skips,
-        Number.MAX_SAFE_INTEGER
+        Number.MAX_SAFE_INTEGER,
       )
 
       expect(days).toEqual([
@@ -480,7 +480,7 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
         end,
         today,
         skips,
-        Number.MAX_SAFE_INTEGER
+        Number.MAX_SAFE_INTEGER,
       )
 
       expect(days).toMatchSnapshot()

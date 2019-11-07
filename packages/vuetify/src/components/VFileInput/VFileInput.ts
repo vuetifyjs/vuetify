@@ -91,7 +91,7 @@ export default VTextField.extend({
       return this.$vuetify.lang.t(
         this.counterSizeString,
         fileCount,
-        humanReadableFileSize(bytes, this.base === 1024)
+        humanReadableFileSize(bytes, this.base === 1024),
       )
     },
     internalArrayValue (): File[] {
@@ -218,7 +218,7 @@ export default VTextField.extend({
               text: this.text[index],
               file,
               index,
-            })
+            }),
           )
         })
       } else {

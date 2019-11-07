@@ -11,7 +11,7 @@ import mixins from '../../util/mixins'
 
 export default mixins(
   Colorable,
-  Measurable
+  Measurable,
   /* @vue/component */
 ).extend({
   name: 'v-avatar',

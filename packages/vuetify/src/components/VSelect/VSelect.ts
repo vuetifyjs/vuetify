@@ -39,7 +39,7 @@ type ItemProperty = PropValidator<string | (string | number)[] | ((item: object,
 const baseMixins = mixins(
   VTextField,
   Comparable,
-  Filterable
+  Filterable,
 )
 
 interface options extends InstanceType<typeof baseMixins> {
@@ -499,7 +499,7 @@ export default baseMixins.extend<options>().extend({
         children[length] = genSelection(
           this.selectedItems[length],
           length,
-          length === children.length - 1
+          length === children.length - 1,
         )
       }
 
@@ -788,7 +788,7 @@ export default baseMixins.extend<options>().extend({
       for (const value of values) {
         const index = this.allItems.findIndex(v => this.valueComparator(
           this.getValue(v),
-          this.getValue(value)
+          this.getValue(value),
         ))
 
         if (index > -1) {

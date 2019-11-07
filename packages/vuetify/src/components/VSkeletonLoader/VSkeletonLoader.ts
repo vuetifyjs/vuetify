@@ -56,7 +56,7 @@ export default mixins(
     isLoading (): boolean {
       return Boolean(
         !getSlot(this) ||
-        this.loading
+        this.loading,
       )
     },
     rootTypes (): Record<string, string> {

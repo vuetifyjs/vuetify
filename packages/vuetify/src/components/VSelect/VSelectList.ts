@@ -149,7 +149,7 @@ export default mixins(Colorable, Themeable).extend({
     genTile (
       item: object,
       disabled = null as null | boolean,
-      value = false
+      value = false,
     ): VNode | VNode[] | undefined {
       if (!value) value = this.hasItem(item)
 
@@ -213,7 +213,7 @@ export default mixins(Colorable, Themeable).extend({
         [this.$createElement(VListItemTitle, {
           attrs: { id: this.genLabelledBy(item) },
           domProps: { innerHTML },
-        })]
+        })],
       )
     },
     hasItem (item: object) {

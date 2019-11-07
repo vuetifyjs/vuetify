@@ -272,10 +272,10 @@ export default CalendarBase.extend({
               value: this.eventRipple != null ? this.eventRipple : true,
             }],
             ...data,
-          })
+          }),
         ), slot
           ? slot(scope)
-          : (showName ? [this.genName(event, timedEvent)] : undefined)
+          : (showName ? [this.genName(event, timedEvent)] : undefined),
       )
     },
     genName (event: VEventParsed, timedEvent: boolean): VNode {
@@ -311,21 +311,21 @@ export default CalendarBase.extend({
       const identifier = getDayIdentifier(day)
 
       return this.parsedEvents.filter(
-        event => isEventOn(event, identifier)
+        event => isEventOn(event, identifier),
       )
     },
     getEventsForDayAll (day: VTimestamp): VEventParsed[] {
       const identifier = getDayIdentifier(day)
 
       return this.parsedEvents.filter(
-        event => event.allDay && isEventOn(event, identifier)
+        event => event.allDay && isEventOn(event, identifier),
       )
     },
     getEventsForDayTimed (day: VTimestamp): VEventParsed[] {
       const identifier = getDayIdentifier(day)
 
       return this.parsedEvents.filter(
-        event => !event.allDay && isEventOn(event, identifier)
+        event => !event.allDay && isEventOn(event, identifier),
       )
     },
     isSameColumn (a: VEventVisual, b: VEventVisual): boolean {

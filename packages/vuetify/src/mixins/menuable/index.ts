@@ -11,7 +11,7 @@ import { convertToUnit } from '../../util/helpers'
 const baseMixins = mixins(
   Stackable,
   Positionable,
-  Activatable
+  Activatable,
 )
 
 interface options extends ExtractVue<typeof baseMixins> {

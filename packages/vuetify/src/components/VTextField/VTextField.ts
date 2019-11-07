@@ -24,7 +24,7 @@ import { VNode } from 'vue/types'
 
 const baseMixins = mixins(
   VInput,
-  Loadable
+  Loadable,
 )
 interface options extends InstanceType<typeof baseMixins> {
   $refs: {
@@ -282,7 +282,7 @@ export default baseMixins.extend<options>().extend({
       return this.genSlot('append', 'inner', [
         this.genIcon(
           icon,
-          this.clearableCallback
+          this.clearableCallback,
         ),
       ])
     },

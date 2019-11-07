@@ -20,7 +20,7 @@ export default mixins(
   Colorable,
   Elevatable,
   Measurable,
-  Themeable
+  Themeable,
 ).extend({
   name: 'v-sheet',
 
@@ -56,7 +56,7 @@ export default mixins(
     return h(
       this.tag,
       this.setBackgroundColor(this.color, data),
-      this.$slots.default
+      this.$slots.default,
     )
   },
 })

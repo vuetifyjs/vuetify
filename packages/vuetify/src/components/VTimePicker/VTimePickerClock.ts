@@ -29,7 +29,7 @@ export default mixins<options &
 /* eslint-enable indent */
 >(
   Colorable,
-  Themeable
+  Themeable,
 /* @vue/component */
 ).extend({
   name: 'v-time-picker-clock',

@@ -28,7 +28,7 @@ export default mixins(
   ToggleableFactory('inputValue'),
   Proxyable,
   Scrollable,
-  Themeable
+  Themeable,
   /* @vue/component */
 ).extend({
   name: 'v-bottom-navigation',
@@ -118,7 +118,7 @@ export default mixins(
         activeClass: this.activeClass,
         mandatory: Boolean(
           this.mandatory ||
-          this.value !== undefined
+          this.value !== undefined,
         ),
         value: this.internalValue,
       },

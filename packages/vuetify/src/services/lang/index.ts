@@ -20,7 +20,7 @@ const fallback = Symbol('Lang fallback')
 function getTranslation (
   locale: VuetifyLocale,
   key: string,
-  usingFallback = false
+  usingFallback = false,
 ): string {
   const shortKey = key.replace(LANG_PREFIX, '')
   let translation = getObjectValueByPath(locale, shortKey, fallback) as string | typeof fallback

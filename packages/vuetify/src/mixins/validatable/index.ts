@@ -18,7 +18,7 @@ export type VuetifyRuleValidations = (VuetifyRuleValidator | string)[]
 export default mixins(
   Colorable,
   RegistrableInject('form'),
-  Themeable
+  Themeable,
 ).extend({
   name: 'validatable',
 

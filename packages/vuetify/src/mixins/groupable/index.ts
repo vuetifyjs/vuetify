@@ -18,7 +18,7 @@ export type Groupable<T extends string, C extends VueConstructor | null = null> 
 export function factory<T extends string, C extends VueConstructor | null = null> (
   namespace: T,
   child?: string,
-  parent?: string
+  parent?: string,
 ): Groupable<T, C> {
   // TODO: ts 3.4 broke directly returning this
   const R = RegistrableInject<T, C>(namespace, child, parent).extend({

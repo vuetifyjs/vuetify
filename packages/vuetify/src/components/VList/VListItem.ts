@@ -26,7 +26,7 @@ const baseMixins = mixins(
   Routable,
   Themeable,
   GroupableFactory('listItemGroup'),
-  ToggleableFactory('inputValue')
+  ToggleableFactory('inputValue'),
 )
 
 interface options extends ExtractVue<typeof baseMixins> {
@@ -107,7 +107,7 @@ export default baseMixins.extend<options>().extend({
     isClickable (): boolean {
       return Boolean(
         Routable.options.computed.isClickable.call(this) ||
-        this.listItemGroup
+        this.listItemGroup,
       )
     },
   },

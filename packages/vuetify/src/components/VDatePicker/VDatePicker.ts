@@ -41,7 +41,7 @@ function sanitizeDateString (dateString: string, type: 'date' | 'month' | 'year'
 
 export default mixins(
   Localable,
-  Picker
+  Picker,
 /* @vue/component */
 ).extend({
   name: 'v-date-picker',

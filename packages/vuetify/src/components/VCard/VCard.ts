@@ -18,7 +18,7 @@ import { VNode } from 'vue'
 export default mixins(
   Loadable,
   Routable,
-  VSheet
+  VSheet,
 ).extend({
   name: 'v-card',
 

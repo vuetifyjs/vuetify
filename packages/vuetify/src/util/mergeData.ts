@@ -66,7 +66,7 @@ export default function mergeData (): VNodeData {
               // Insert current iteration data in beginning of merged array.
               listeners[event] = Array<Function>().concat( // eslint-disable-line
                 listeners[event],
-                arguments[i][prop][event]
+                arguments[i][prop][event],
               )
             } else {
               // Straight assign.

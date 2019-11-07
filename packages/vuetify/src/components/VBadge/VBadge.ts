@@ -15,7 +15,7 @@ export default mixins(
   Colorable,
   Toggleable,
   PositionableFactory(['left', 'bottom']),
-  Transitionable
+  Transitionable,
 /* @vue/component */
 ).extend({
   name: 'v-badge',

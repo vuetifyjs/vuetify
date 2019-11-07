@@ -57,7 +57,7 @@ export default Grid('container').extend({
           'container--fluid': props.fluid,
         }).concat(classes || []),
       }),
-      children
+      children,
     )
   },
 })

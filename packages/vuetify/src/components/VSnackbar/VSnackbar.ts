@@ -14,7 +14,7 @@ import { removed } from '../../util/console'
 export default mixins(
   Colorable,
   Toggleable,
-  PositionableFactory(['absolute', 'top', 'bottom', 'left', 'right'])
+  PositionableFactory(['absolute', 'top', 'bottom', 'left', 'right']),
 /* @vue/component */
 ).extend({
   name: 'v-snackbar',

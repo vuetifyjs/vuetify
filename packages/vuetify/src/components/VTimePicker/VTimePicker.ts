@@ -32,7 +32,7 @@ type AllowFunction = (val: number) => boolean
 
 export default mixins(
   Picker,
-  PickerButton
+  PickerButton,
 /* @vue/component */
 ).extend({
   name: 'v-time-picker',

@@ -41,7 +41,7 @@ export default mixins(header).extend({
       } else {
         children.push(this.$scopedSlots[header.value]
           ? this.$scopedSlots[header.value]!({ header })
-          : this.$createElement('span', [header.text])
+          : this.$createElement('span', [header.text]),
         )
 
         if (!this.disableSort && (header.sortable || !header.hasOwnProperty('sortable'))) {

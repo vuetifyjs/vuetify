@@ -64,7 +64,7 @@ export default Vue.extend({
         this.isLink ||
         this.$listeners.click ||
         this.$listeners['!click'] ||
-        this.$attrs.tabindex
+        this.$attrs.tabindex,
       )
     },
     isLink (): boolean {

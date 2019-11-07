@@ -21,7 +21,7 @@ import { PropValidator } from 'vue/types/options'
 export default mixins(
   Colorable,
   Localable,
-  Themeable
+  Themeable,
 /* @vue/component */
 ).extend({
   name: 'v-date-picker-header',

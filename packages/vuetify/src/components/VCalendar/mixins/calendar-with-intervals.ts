@@ -47,7 +47,7 @@ export default CalendarBase.extend({
         this.parsedEnd,
         this.times.today,
         this.weekdaySkips,
-        this.maxDays
+        this.maxDays,
       )
     },
     intervals (): VTimestamp[][] {
@@ -70,7 +70,7 @@ export default CalendarBase.extend({
 
       return createNativeLocaleFormatter(
         this.currentLocale,
-        (tms, short) => short ? (tms.minute === 0 ? shortHourOptions : shortOptions) : longOptions
+        (tms, short) => short ? (tms.minute === 0 ? shortHourOptions : shortOptions) : longOptions,
       )
     },
   },

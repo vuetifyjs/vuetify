@@ -11,7 +11,7 @@ import { VNode, ScopedSlotChildren } from 'vue/types/vnode'
 
 export default mixins(
   Delayable,
-  Toggleable
+  Toggleable,
   /* @vue/component */
 ).extend({
   name: 'v-hover',

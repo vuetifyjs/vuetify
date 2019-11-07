@@ -44,7 +44,7 @@ export default SSRBootable.extend({
       h(
         'div',
         { staticClass: 'v-content__wrap' },
-        this.$slots.default
+        this.$slots.default,
       ),
     ])
   },

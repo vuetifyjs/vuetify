@@ -22,7 +22,7 @@ export function genPath (points: Point[], radius: number, fill = false, height =
 
         const threshold = Math.min(
           getDistance(prev, point),
-          getDistance(next, point)
+          getDistance(next, point),
         )
         const isTooCloseForRadius = threshold / 2 < radius
         const radiusForPoint = isTooCloseForRadius ? threshold / 2 : radius

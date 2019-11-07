@@ -17,7 +17,7 @@ import mixins from '../../util/mixins'
 import { VNode, FunctionalComponentOptions, VNodeData } from 'vue'
 
 const baseMixins = mixins(
-  RegistrableInject('stepper', 'v-stepper-content', 'v-stepper')
+  RegistrableInject('stepper', 'v-stepper-content', 'v-stepper'),
 )
 
 interface options extends InstanceType<typeof baseMixins> {
@@ -93,7 +93,7 @@ export default baseMixins.extend<options>().extend({
     this.$refs.wrapper.addEventListener(
       'transitionend',
       this.onTransition,
-      false
+      false,
     )
     this.stepper && this.stepper.register(this)
   },
@@ -102,7 +102,7 @@ export default baseMixins.extend<options>().extend({
     this.$refs.wrapper.removeEventListener(
       'transitionend',
       this.onTransition,
-      false
+      false,
     )
     this.stepper && this.stepper.unregister(this)
   },

@@ -11,7 +11,7 @@ import mixins from '../../util/mixins'
 /* @vue/component */
 export default mixins(
   ButtonGroup,
-  Colorable
+  Colorable,
 ).extend({
   name: 'v-btn-toggle',
 

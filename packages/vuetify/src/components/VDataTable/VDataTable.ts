@@ -37,7 +37,7 @@ function searchTableItems (
   search: string | null,
   headersWithCustomFilters: TableHeader[],
   headersWithoutCustomFilters: TableHeader[],
-  customFilter: FilterFn
+  customFilter: FilterFn,
 ) {
   let filtered = items
   search = typeof search === 'string' ? search.trim() : null

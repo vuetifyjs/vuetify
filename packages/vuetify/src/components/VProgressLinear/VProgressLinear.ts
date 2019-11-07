@@ -24,7 +24,7 @@ const baseMixins = mixins(
   Colorable,
   PositionableFactory(['absolute', 'fixed', 'top', 'bottom']),
   Proxyable,
-  Themeable
+  Themeable,
 )
 
 /* @vue/component */

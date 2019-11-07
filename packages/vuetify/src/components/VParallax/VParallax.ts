@@ -9,7 +9,7 @@ import { VNode, VNodeData } from 'vue/types/vnode'
 import mixins from '../../util/mixins'
 
 const baseMixins = mixins(
-  Translatable
+  Translatable,
 )
 interface options extends InstanceType<typeof baseMixins> {
   $refs: {

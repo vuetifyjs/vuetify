@@ -7,7 +7,7 @@ import mixins from '../../util/mixins'
 
 export default mixins(
   BaseItem,
-  GroupableFactory('slideGroup')
+  GroupableFactory('slideGroup'),
   /* @vue/component */
 ).extend({
   name: 'v-slide-item',

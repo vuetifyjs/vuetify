@@ -20,7 +20,7 @@ import { PropValidator } from 'vue/types/options'
 /* @vue/component */
 export default mixins(
   VSheet,
-  Toggleable
+  Toggleable,
 ).extend({
   name: 'v-banner',
 

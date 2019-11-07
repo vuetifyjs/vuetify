@@ -34,7 +34,7 @@ export class Application extends Service implements IApplication {
   register (
     uid: number,
     location: TargetProp,
-    size: number
+    size: number,
   ) {
     this.application[location][uid] = size
 

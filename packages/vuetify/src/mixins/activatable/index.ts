@@ -13,7 +13,7 @@ import { VNode } from 'vue'
 
 const baseMixins = mixins(
   Delayable,
-  Toggleable
+  Toggleable,
 )
 
 /* @vue/component */

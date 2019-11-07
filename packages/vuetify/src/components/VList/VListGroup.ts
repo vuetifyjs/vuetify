@@ -32,7 +32,7 @@ const baseMixins = mixins(
   Bootable,
   Colorable,
   RegistrableInject('list'),
-  Toggleable
+  Toggleable,
 )
 
 type VListInstance = InstanceType<typeof VList>

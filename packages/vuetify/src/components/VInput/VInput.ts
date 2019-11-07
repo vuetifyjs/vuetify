@@ -23,7 +23,7 @@ import mixins from '../../util/mixins'
 
 const baseMixins = mixins(
   BindsAttrs,
-  Validatable
+  Validatable,
 )
 
 interface options extends InstanceType<typeof baseMixins> {
@@ -148,7 +148,7 @@ export default baseMixins.extend<options>().extend({
     },
     genIcon (
       type: string,
-      cb?: (e: Event) => void
+      cb?: (e: Event) => void,
     ) {
       const icon = (this as any)[`${type}Icon`]
       const eventName = `click:${kebabCase(type)}`
@@ -186,7 +186,7 @@ export default baseMixins.extend<options>().extend({
         this.$createElement(
           VIcon,
           data,
-          icon
+          icon,
         ),
       ])
     },
@@ -240,7 +240,7 @@ export default baseMixins.extend<options>().extend({
     genSlot (
       type: string,
       location: string,
-      slot: (VNode | VNode[])[]
+      slot: (VNode | VNode[])[],
     ) {
       if (!slot.length) return null
 

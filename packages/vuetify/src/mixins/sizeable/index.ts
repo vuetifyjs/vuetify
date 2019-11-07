@@ -16,7 +16,7 @@ export default Vue.extend({
         !this.xSmall &&
         !this.small &&
         !this.large &&
-        !this.xLarge
+        !this.xLarge,
       )
     },
     sizeableClasses (): object {

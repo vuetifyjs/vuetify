@@ -27,7 +27,7 @@ const baseMixins = mixins(
   Colorable,
   Rippleable,
   GroupableFactory('radioGroup'),
-  Themeable
+  Themeable,
 )
 
 interface options extends InstanceType<typeof baseMixins> {

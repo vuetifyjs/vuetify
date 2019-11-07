@@ -132,7 +132,7 @@ export default Vue.extend({
                 const el = e.target as HTMLInputElement
                 this.$emit('update:color', this.currentMode.from(parseHex(el.value)))
               },
-            }
+            },
           )
         }
         default: {
@@ -156,10 +156,10 @@ export default Vue.extend({
 
                   this.$emit('update:color', this.currentMode.from(
                     Object.assign({}, value, { [target]: newVal }),
-                    this.color.alpha
+                    this.color.alpha,
                   ))
                 },
-              }
+              },
             )
           })
         }

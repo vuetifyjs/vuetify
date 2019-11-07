@@ -12,7 +12,7 @@ import { PropValidator } from 'vue/types/options'
 import { VNode, VNodeChildren } from 'vue'
 
 export default mixins(
-  DatePickerTable
+  DatePickerTable,
 /* @vue/component */
 ).extend({
   name: 'v-date-picker-date-table',

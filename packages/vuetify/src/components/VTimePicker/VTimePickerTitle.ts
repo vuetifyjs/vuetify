@@ -12,7 +12,7 @@ import { PropValidator } from 'vue/types/options'
 import { VNode } from 'vue'
 
 export default mixins(
-  PickerButton
+  PickerButton,
 /* @vue/component */
 ).extend({
   name: 'v-time-picker-title',

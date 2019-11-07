@@ -9,7 +9,7 @@ import mixins from '../../util/mixins'
 
 /* @vue/component */
 export default mixins(
-  Themeable
+  Themeable,
 ).extend({
   name: 'v-app',
 

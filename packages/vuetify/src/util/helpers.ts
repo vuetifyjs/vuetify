@@ -5,7 +5,7 @@ import { VuetifyIcon } from 'vuetify/types/services/icons'
 export function createSimpleFunctional (
   c: string,
   el = 'div',
-  name?: string
+  name?: string,
 ) {
   return Vue.extend({
     name: name || c.replace(/__/g, '-'),
@@ -22,7 +22,7 @@ export function createSimpleFunctional (
 
 function mergeTransitions (
   transitions: undefined | Function | Function[],
-  array: Function[]
+  array: Function[],
 ) {
   if (Array.isArray(transitions)) return transitions.concat(array)
   if (transitions) array.push(transitions)
@@ -32,7 +32,7 @@ function mergeTransitions (
 export function createSimpleTransition (
   name: string,
   origin = 'top center 0',
-  mode?: string
+  mode?: string,
 ): FunctionalComponentOptions {
   return {
     name,
@@ -103,7 +103,7 @@ export function createSimpleTransition (
 export function createJavaScriptTransition (
   name: string,
   functions: Record<string, any>,
-  mode = 'in-out'
+  mode = 'in-out',
 ): FunctionalComponentOptions {
   return {
     name,
@@ -145,7 +145,7 @@ export function addOnceEventListener (
   el: EventTarget,
   eventName: string,
   cb: (event: Event) => void,
-  options: boolean | AddEventListenerOptions = false
+  options: boolean | AddEventListenerOptions = false,
 ): void {
   var once = (event: Event) => {
     cb(event)
@@ -174,7 +174,7 @@ export function addPassiveEventListener (
   el: EventTarget,
   event: string,
   cb: EventHandlerNonNull | (() => void),
-  options: {}
+  options: {},
 ): void {
   el.addEventListener(event, cb, passiveSupported ? options : false)
 }
@@ -231,7 +231,7 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
 export function getPropertyFromItem (
   item: object,
   property: string | (string | number)[] | ((item: object, fallback?: any) => any),
-  fallback?: any
+  fallback?: any,
 ): any {
   if (property == null) return item === undefined ? fallback : item
 
@@ -383,7 +383,7 @@ export function sortItems (
   sortBy: string[],
   sortDesc: boolean[],
   locale: string,
-  customSorters?: Record<string, compareFn>
+  customSorters?: Record<string, compareFn>,
 ) {
   if (sortBy === null || !sortBy.length) return items
   const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })

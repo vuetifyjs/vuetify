@@ -11,7 +11,7 @@ import Routable from '../../mixins/routable'
 // Types
 const baseMixins = mixins(
   VWindowItem,
-  Routable
+  Routable,
 )
 
 /* @vue/component */

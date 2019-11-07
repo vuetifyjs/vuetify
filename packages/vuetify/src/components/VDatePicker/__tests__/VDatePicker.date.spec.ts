@@ -196,7 +196,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     expect(cb.mock.calls[0][0]).toHaveLength(3)
     expect(cb.mock.calls[0][0][2]).toBe('2013-05-05')
     expect(cb.mock.calls[0][0]).toEqual(
-      expect.arrayContaining(['2013-05-07', '2013-05-08', '2013-05-05'])
+      expect.arrayContaining(['2013-05-07', '2013-05-08', '2013-05-05']),
     )
   })
 
@@ -660,7 +660,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     wrapper.vm.$on('input', cb)
     wrapper.findAll('.v-date-picker-table--date tbody tr+tr td:first-child button').at(0).trigger('click')
     expect(cb.mock.calls[0][0]).toEqual(
-      expect.arrayContaining(['2019-01-06'])
+      expect.arrayContaining(['2019-01-06']),
     )
 
     wrapper.findAll('.v-date-picker-table--date tbody tr+tr td button').at(2).trigger('click')

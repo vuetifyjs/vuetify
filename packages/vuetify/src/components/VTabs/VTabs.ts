@@ -25,7 +25,7 @@ import { VNode } from 'vue/types'
 const baseMixins = mixins(
   Colorable,
   Proxyable,
-  Themeable
+  Themeable,
 )
 
 interface options extends ExtractVue<typeof baseMixins> {

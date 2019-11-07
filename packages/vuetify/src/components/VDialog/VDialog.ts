@@ -28,7 +28,7 @@ const baseMixins = mixins(
   Overlayable,
   Returnable,
   Stackable,
-  Toggleable
+  Toggleable,
 )
 
 /* @vue/component */
@@ -99,7 +99,7 @@ export default baseMixins.extend({
     hasActivator (): boolean {
       return Boolean(
         !!this.$slots.activator ||
-        !!this.$scopedSlots.activator
+        !!this.$scopedSlots.activator,
       )
     },
   },

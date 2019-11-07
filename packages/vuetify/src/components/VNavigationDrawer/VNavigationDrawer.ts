@@ -40,7 +40,7 @@ const baseMixins = mixins(
   Dependent,
   Overlayable,
   SSRBootable,
-  Themeable
+  Themeable,
 )
 
 /* @vue/component */

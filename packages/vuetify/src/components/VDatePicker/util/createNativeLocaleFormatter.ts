@@ -21,7 +21,7 @@ function createNativeLocaleFormatter (
 function createNativeLocaleFormatter (
   locale: string | undefined,
   options: Intl.DateTimeFormatOptions,
-  substrOptions: SubstrOptions = { start: 0, length: 0 }
+  substrOptions: SubstrOptions = { start: 0, length: 0 },
 ): DatePickerFormatter | undefined {
   const makeIsoString = (dateString: string) => {
     const [year, month, date] = dateString.trim().split(' ')[0].split('-')

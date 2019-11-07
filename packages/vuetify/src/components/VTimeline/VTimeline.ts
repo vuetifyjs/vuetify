@@ -9,7 +9,7 @@ import mixins from '../../util/mixins'
 import Themeable from '../../mixins/themeable'
 
 export default mixins(
-  Themeable
+  Themeable,
 /* @vue/component */
 ).extend({
   name: 'v-timeline',

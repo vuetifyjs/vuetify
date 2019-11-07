@@ -202,7 +202,7 @@ export default mixins<options &
       return Boolean(
         this.showLabels ||
         this.labels.length > 0 ||
-        this.$scopedSlots.label
+        this.$scopedSlots.label,
       )
     },
     parsedLabels (): SparklineText[] {
@@ -291,7 +291,7 @@ export default mixins<options &
             offset: index / len,
             'stop-color': color || this.color || 'currentColor',
           },
-        })
+        }),
       )
 
       return this.$createElement('defs', [

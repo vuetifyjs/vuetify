@@ -30,7 +30,7 @@ const baseMixins = mixins(
   Menuable,
   Returnable,
   Toggleable,
-  Themeable
+  Themeable,
 )
 
 /* @vue/component */
@@ -125,7 +125,7 @@ export default baseMixins.extend({
         this.dimensions.activator.width +
         Number(this.nudgeWidth) +
         (this.auto ? 16 : 0),
-        Math.max(this.pageWidth - 24, 0)
+        Math.max(this.pageWidth - 24, 0),
       )
 
       const calculatedMaxWidth = isNaN(parseInt(this.calculatedMaxWidth))
@@ -134,7 +134,7 @@ export default baseMixins.extend({
 
       return convertToUnit(Math.min(
         calculatedMaxWidth,
-        minWidth
+        minWidth,
       )) || '0'
     },
     calculatedTop (): string {
@@ -345,7 +345,7 @@ export default baseMixins.extend({
       return this.$createElement(
         'div',
         options,
-        this.showLazyContent(this.getContentSlot())
+        this.showLazyContent(this.getContentSlot()),
       )
     },
     getTiles () {

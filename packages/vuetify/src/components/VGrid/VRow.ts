@@ -132,7 +132,7 @@ export default Vue.extend({
         staticClass: 'row',
         class: classList,
       }),
-      children
+      children,
     )
   },
 })

@@ -29,7 +29,7 @@ const baseMixins = mixins(
   Positionable,
   Sizeable,
   GroupableFactory('btnToggle'),
-  ToggleableFactory('inputValue')
+  ToggleableFactory('inputValue'),
   /* @vue/component */
 )
 interface options extends ExtractVue<typeof baseMixins> {
@@ -109,7 +109,7 @@ export default baseMixins.extend<options>().extend({
         !this.depressed &&
         // Contained class only adds elevation
         // is not needed if user provides value
-        !this.elevation
+        !this.elevation,
       )
     },
     computedRipple (): RippleOptions | boolean {
@@ -121,13 +121,13 @@ export default baseMixins.extend<options>().extend({
       return Boolean(
         this.icon ||
         this.text ||
-        this.outlined
+        this.outlined,
       )
     },
     isRound (): boolean {
       return Boolean(
         this.icon ||
-        this.fab
+        this.fab,
       )
     },
     styles (): object {

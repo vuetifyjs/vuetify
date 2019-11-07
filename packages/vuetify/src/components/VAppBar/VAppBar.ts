@@ -33,7 +33,7 @@ const baseMixins = mixins(
     'isExtended',
     'isProminent',
     'value',
-  ])
+  ]),
 )
 
 /* @vue/component */
@@ -136,7 +136,7 @@ export default baseMixins.extend({
 
       const opacity = Math.max(
         (this.computedScrollThreshold - this.currentScroll) / this.computedScrollThreshold,
-        0
+        0,
       )
 
       return Number(parseFloat(opacity).toFixed(2))

@@ -16,7 +16,7 @@ import { PropValidator } from 'vue/types/options'
 const baseMixins = mixins(
   Comparable,
   BaseItemGroup,
-  VInput
+  VInput,
 )
 
 /* @vue/component */

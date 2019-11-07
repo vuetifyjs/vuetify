@@ -21,7 +21,7 @@ export type GroupableInstance = InstanceType<typeof Groupable> & {
 
 export const BaseItemGroup = mixins(
   Proxyable,
-  Themeable
+  Themeable,
 ).extend({
   name: 'base-item-group',
 
@@ -117,7 +117,7 @@ export const BaseItemGroup = mixins(
     },
     onClick (item: GroupableInstance) {
       this.updateInternalValue(
-        this.getValue(item, this.items.indexOf(item))
+        this.getValue(item, this.items.indexOf(item)),
       )
     },
     register (item: GroupableInstance) {
@@ -203,7 +203,7 @@ export const BaseItemGroup = mixins(
       const index = this.items.indexOf(item)
 
       this.updateInternalValue(
-        this.getValue(item, index)
+        this.getValue(item, index),
       )
     },
     updateMultiple (value: any) {

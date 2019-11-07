@@ -65,7 +65,7 @@ export default mixins(Colorable, Themeable).extend({
       const maxLength = Math.min(
         Math.max(0, totalVisible) || this.length,
         Math.max(0, this.maxButtons) || this.length,
-        this.length
+        this.length,
       )
 
       if (this.length <= maxLength) {

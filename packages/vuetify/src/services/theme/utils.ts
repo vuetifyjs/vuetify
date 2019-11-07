@@ -8,7 +8,7 @@ import {
 
 export function parse (
   theme: Record<string, VuetifyThemeItem>,
-  isItem = false
+  isItem = false,
 ): VuetifyParsedTheme {
   const { anchor, ...variant } = theme
   const colors = Object.keys(variant)

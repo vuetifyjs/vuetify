@@ -20,7 +20,7 @@ import { VNode } from 'vue'
 const baseMixins = mixins(
   RegistrableProvide('stepper'),
   Proxyable,
-  Themeable
+  Themeable,
 )
 
 type VStepperStepInstance = InstanceType<typeof VStepperStep>

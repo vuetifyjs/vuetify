@@ -13,7 +13,7 @@ import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 
 export default mixins(
-  PickerButton
+  PickerButton,
 /* @vue/component */
 ).extend({
   name: 'v-date-picker-title',

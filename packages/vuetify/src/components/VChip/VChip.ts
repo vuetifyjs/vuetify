@@ -30,7 +30,7 @@ export default mixins(
   Routable,
   Themeable,
   GroupableFactory('chipGroup'),
-  ToggleableFactory('inputValue')
+  ToggleableFactory('inputValue'),
 ).extend({
   name: 'v-chip',
 
@@ -100,7 +100,7 @@ export default mixins(
     isClickable (): boolean {
       return Boolean(
         Routable.options.computed.isClickable.call(this) ||
-        this.chipGroup
+        this.chipGroup,
       )
     },
   },
@@ -133,7 +133,7 @@ export default mixins(
           this.$createElement(VIcon, {
             staticClass: 'v-chip__filter',
             props: { left: true },
-          }, this.filterIcon)
+          }, this.filterIcon),
         )
       }
 

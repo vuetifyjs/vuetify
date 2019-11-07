@@ -9,7 +9,7 @@ describe('resize.ts', () => {
 
     Intersect.inserted(el, {
       value: callback,
-      modifiers: { quiet: true } } as any
+      modifiers: { quiet: true } } as any,
     )
 
     expect((el as any)._observe).toBeTruthy()

@@ -12,7 +12,7 @@ import mixins from '../../util/mixins'
 export default mixins(
   VInput,
   Rippleable,
-  Comparable
+  Comparable,
 ).extend({
   name: 'selectable',
 

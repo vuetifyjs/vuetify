@@ -146,7 +146,7 @@ export default VResponsive.extend({
     init (
       entries?: IntersectionObserverEntry[],
       observer?: IntersectionObserver,
-      isIntersecting?: boolean
+      isIntersecting?: boolean,
     ) {
       // If the current browser supports the intersection
       // observer api, the image is not observable, and
@@ -174,7 +174,7 @@ export default VResponsive.extend({
       consoleError(
         `Image load failed\n\n` +
         `src: ${this.normalisedSrc.src}`,
-        this
+        this,
       )
       this.$emit('error', this.src)
     },
@@ -194,7 +194,7 @@ export default VResponsive.extend({
               `Failed to decode image, trying to render anyway\n\n` +
               `src: ${this.normalisedSrc.src}` +
               (err.message ? `\nOriginal error: ${err.message}` : ''),
-              this
+              this,
             )
           }).then(this.onLoad)
         } else {

@@ -311,7 +311,7 @@ export function prevDay (timestamp: VTimestamp): VTimestamp {
 export function relativeDays (
   timestamp: VTimestamp,
   mover: VTimestampOperation = nextDay,
-  days = 1
+  days = 1,
 ): VTimestamp {
   while (--days >= 0) mover(timestamp)
   return timestamp
@@ -351,7 +351,7 @@ export function createDayList (
   now: VTimestamp,
   weekdaySkips: number[],
   max = 42,
-  min = 0
+  min = 0,
 ): VTimestamp[] {
   const stop = getDayIdentifier(end)
   const days: VTimestamp[] = []

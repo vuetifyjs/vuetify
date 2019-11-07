@@ -20,7 +20,7 @@ export default mixins(
     'height',
     'inset',
   ]),
-  SSRBootable
+  SSRBootable,
 ).extend({
   name: 'v-footer',
 
@@ -75,7 +75,7 @@ export default mixins(
       return Boolean(
         this.absolute ||
         this.fixed ||
-        this.app
+        this.app,
       )
     },
     styles (): object {
