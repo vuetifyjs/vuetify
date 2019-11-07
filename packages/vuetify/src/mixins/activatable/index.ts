@@ -135,7 +135,7 @@ export default baseMixins.extend({
           // HTMLElement | Element
           activator = this.activator
         }
-      } else if (this.activatorNode.length === 1 || !e) {
+      } else if (this.activatorNode.length === 1 || (this.activatorNode.length && !e)) {
         // Use the contents of the activator slot
         // There's either only one element in it or we
         // don't have a click event to use as a last resort
