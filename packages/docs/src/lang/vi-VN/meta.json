@@ -3,27 +3,26 @@
     "title": "Không tìm thấy",
     "description": "Xin lỗi, xem ra thứ bạn đang tìm không có ở đây!"
   },
-  "getting-started/quick-start": {
-    "title": "Bắt đầu nhanh"
-  },
-  "getting-started/why-vuetify": {
+  "introduction/why-vuetify": {
     "title": "Tại sao dùng Vuetify?"
   },
   "introduction/frequently-asked-questions": {
     "title": "Câu hỏi thường gặp"
   },
+  "introduction/long-term-support": {
+    "title": "Hỗ trợ dài hạn"
+  },
   "introduction/meet-the-team": {
-    "title": "Các thành viên",
-    "keywords": "đội ngũ phát triển, đội ngũ chính"
+    "title": "Các thành viên"
   },
   "introduction/sponsors-and-backers": {
     "title": "Nhà tài trợ và ủng hộ"
   },
+  "getting-started/quick-start": {
+    "title": "Bắt đầu nhanh"
+  },
   "getting-started/contributing": {
     "title": "Đóng góp"
-  },
-  "professional-support/consulting": {
-    "title": "Tư vấn và hỗ trọ"
   },
   "customization/breakpoints": {
     "title": "Điểm ngắt"
@@ -37,9 +36,6 @@
   "styles/transitions": {
     "title": "Hiệu ứng"
   },
-  "framework/sandbox": {
-    "title": "Thử Nghiệm"
-  },
   "components/api-explorer": {
     "title": "API"
   },
@@ -48,5 +44,11 @@
   },
   "directives/touch-support": {
     "title": "Hỗ trợ cảm ứng"
+  },
+  "professional-support/consulting": {
+    "title": "Tư vấn và hỗ trọ"
+  },
+  "professional-support/business": {
+    "title": "Tư vấn và hỗ trọ"
   }
 }

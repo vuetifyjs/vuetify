@@ -1,14 +1,6 @@
 {
-  "headingText": "`v-slider`组件是数字输入的更好的可视化，它用于收集数字用户数据。",
   "examples": {
-    "thumb": {
-      "heading": "Thumb"
-    },
-    "ticks": {
-      "heading": "Ticks"
-    },
     "discrete": {
-      "heading": "离散的",
       "desc": "离散滑块提供了一个拇指标签（倒水滴状），显示当前的确切数量。使用`step`属性可以禁止在步骤之外选择值。"
     },
     "icons": {
@@ -16,7 +8,6 @@
       "desc": "您可以使用`append-icon`和`prepend-icon`属性将图标添加到滑块。"
     },
     "editable-numeric-value": {
-      "heading": "带有可编辑的数值",
       "desc": "滑块可以与其他组件相结合，以获得更好的显示效果。"
     },
     "custom-colors": {
@@ -28,9 +19,6 @@
     },
     "range": {
       "heading": "Range"
-    },
-    "min-max": {
-      "heading": "Min & Max values"
     },
     "disabled": {
       "heading": "禁用"

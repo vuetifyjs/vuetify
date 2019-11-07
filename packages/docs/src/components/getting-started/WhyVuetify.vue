@@ -14,7 +14,7 @@
       >
         <v-card
           :color="philosophy.color"
-          class="mx-auto"
+          class="mx-auto why-vuetify__philosophies"
           dark
           outlined
           min-height="350"
@@ -127,8 +127,11 @@
   }
 </script>
 
-<style>
-.why-vuetify p {
-  margin-bottom: 0;
-}
+<style lang="sass">
+#why-vuetify p
+  margin-bottom: 0
+
+  .why-vuetify__philosophies a
+    color: white
+
 </style>

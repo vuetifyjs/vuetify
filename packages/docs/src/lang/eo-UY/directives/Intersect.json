@@ -1,6 +1,6 @@
 {
-  "heading": "crwdns42808:0crwdne42808:0",
-  "headingText": "crwdns42810:0[v-lazy]crwdne42810:0",
+  "heading": "crwdns44204:0crwdne44204:0",
+  "headingText": "crwdns44206:0[v-lazy]crwdne44206:0",
   "examples": {
     "usage": {
       "desc": "crwdns42812:0[v-card]crwdne42812:0"
@@ -9,8 +9,8 @@
   "options": {
     "modifiers.once": "crwdns42814:0crwdne42814:0",
     "modifiers.quiet": "crwdns42816:0crwdne42816:0",
-    "value": "crwdns42818:0crwdne42818:0"
+    "value": "crwdns44208:0crwdne44208:0"
   },
   "polyfillHeading": "crwdns42820:0crwdne42820:0",
-  "polyfillText1": "crwdns42822:0[polyfill]crwdne42822:0"
+  "polyfillText1": "crwdns44210:0[polyfill]crwdne44210:0"
 }

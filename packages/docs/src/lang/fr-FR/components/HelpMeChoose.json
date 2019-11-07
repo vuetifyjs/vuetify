@@ -1,3 +1,21 @@
 {
-  "application": "Application"
+  "advanced": "Avancé",
+  "application": "Application",
+  "beginner": "Débutant",
+  "desktop": "Bureau",
+  "experience": "Expérience",
+  "intermediate": "Intermédiaire",
+  "mobile": "Mobiles",
+  "no": "Non",
+  "question1": "Quelle expérience avez-vous avec Vue ?",
+  "question2": "Quelle plateforme développez-vous pour?",
+  "question3": "Votre projet nécessite-t-il des test en échafaudages ?",
+  "question4": "Votre application nécessite-t-elle une optimisation SEO ?",
+  "reset": "Réinitialiser",
+  "seo": "Référencement",
+  "suggestion": "Suggestion",
+  "tests": "Tests",
+  "question5": "S'il y a une recommandation pour vos sélections, elle sera mise en évidence ci-dessous",
+  "yes": "Oui",
+  "web": "Web"
 }

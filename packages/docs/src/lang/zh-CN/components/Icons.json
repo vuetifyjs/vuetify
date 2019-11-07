@@ -1,14 +1,10 @@
 {
   "examples": {
-    "font-awesome": {
-      "heading": "Font Awesome"
-    },
     "color": {
       "heading": "色彩",
       "desc": "使用色彩辅助器，您可以改变标准的暗黑和明亮的主题的图标的颜色。"
     },
     "buttons": {
-      "heading": "按钮",
       "desc": "图标可以在按钮内部使用，以增加动作的重点。"
     }
   },

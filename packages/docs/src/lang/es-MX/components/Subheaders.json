@@ -1,13 +1,9 @@
 {
-  "heading": "Subheaders",
-  "headingText": "El componente `v-subheader` se usa para separar secciones de listas.",
   "examples": {
     "grid": {
-      "heading": "Subheaders de grids",
       "desc": "Un subheader puede agregar contexto a lo que el usuario está viendo."
     },
     "menu": {
-      "heading": "Subheaders de menús",
       "desc": "Utilizar un subheader puede ayudar a separar los diferentes tipos de acciones."
     }
   }

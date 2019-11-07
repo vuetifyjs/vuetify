@@ -1,9 +1,31 @@
 {
-  "heading": "# Pop-up basse",
-  "headingText": "La feuille en bas est une version modifiée `v-dialog` qui glisse du bas de l'écran, similaire à `v-bottom-navigation`. Alors qu'un composant de navigation en bas est pour les boutons et spécifiques au niveau d'action de l'application, une feuille en bas peut contenir n'importe quoi.",
   "examples": {
     "usage": {
       "desc": "Ici, nous affichons une liste d’exemple d’actions pouvant être présentes dans une application."
+    },
+    "inset": {
+      "heading": "### Inset",
+      "desc": "Les feuilles inférieures peuvent être inséparables, réduisant leur largeur maximale sur le bureau à 70%. Cela peut être réduit manuellement en utilisant le prop `width`."
+    },
+    "persistent": {
+      "desc": "Les feuilles de fond persistantes ne peuvent pas être fermées en cliquant en dehors de celles-ci."
+    },
+    "model": {
+      "heading": "#### `v-model` contrôle",
+      "desc": "Les feuilles en bas peuvent être contrôlées en utilisant `v-model`. Vous pouvez l'utiliser pour les fermer ou si vous ne pouvez pas utiliser l'emplacement `activator`."
+    },
+    "open-in-list": {
+      "desc": "En combinant une liste fonctionnelle en bas, vous pouvez créer un composant simple 'open in'."
+    },
+    "player": {
+      "desc": " En utilisant une feuille de fond inséparable, vous pouvez faire des composants pratiques tels que ce simple lecteur de musique."
     }
+  },
+  "props": {
+    "eager": "Mixins.Bootable.props.eager",
+    "inset": "Réduit la largeur maximale de la feuille à 70%.",
+    "internalActivator": "Components.Dialogs.props.internalActivator",
+    "openOnHover": "Components.Dialogs.props.openOnHover",
+    "maxWidth": "Components.Dialogs.props.maxWidth"
   }
 }

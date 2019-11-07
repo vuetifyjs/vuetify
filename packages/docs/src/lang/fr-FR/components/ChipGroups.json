@@ -1,7 +1,17 @@
 {
   "examples": {
-    "filter-results": {
-      "heading": "Filtrer les résultats"
+    "usage": {
+      "heading": "Utilisation"
+    },
+    "mandatory": {
+      "heading": "### Obligatoire"
+    },
+    "multiple": {
+      "heading": "### Multiple"
     }
+  },
+  "props": {
+    "nextIcon": "Icône pour passer à la page suivante",
+    "prevIcon": "Icône pour passer à la page précédente"
   }
 }

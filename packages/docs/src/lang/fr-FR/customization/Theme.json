@@ -1,6 +1,4 @@
 {
-  "heading": "# Thèmes",
-  "headingText": "Modifiez facilement les couleurs de votre application programmatiquement. Reconstruisez la feuille de style par défaut et personnalisez divers aspects du framework pour vos besoins particuliers.",
   "lightAndDarkHeader": "## Clair et sombre",
   "lightAndDarkText1": "Vuetify supporte les variantes **light** et **dark** de la spec Material Design. Cette désignation commence au composant racine de l'application, `v-app` et est supportée par la majorité des composants. Par défaut, votre application utilisera le thème **light** mais cela peut être facilement changé en ajoutant l'option **dark** dans le service de thème.",
   "lightAndDarkText2": "Lorsque vous désignez un composant comme light ou dark, tous ses enfants hériteront et appliqueront le même si vous ne le spécifiez pas autrement. Vous pouvez activer ou désactiver manuellement **dark** en changeant `this.$vuetify.theme.dark` en **true** ou **false**.",
@@ -14,6 +12,7 @@
   "optionHeader": "## Options",
   "optionText1": "Vuetify génère des styles de thème à l'exécution pour les SPA et du côté du serveur pour les applications SSR. Les styles générés seront placés dans une balise `<style>` avec l'identifiant **id** de **vuetify-theme-stylesheet**.",
   "optionHeader2": "### Minification",
+  "optionText3": "Pour les applications SSR, vous pouvez passer une fonction de rappel à **$vuetify.theme.options.minifyTheme** pour réduire la taille de la page initiale. Lorsque vous utilisez cette option, il est recommandé d'utiliser **themeCache**.",
   "optionHeader3": "### Caching",
   "optionText4": "Un objet de caching personnalisé peut être fourni (fonctionne en tandem avec **minifyTheme**) pour augmenter l'efficacité du SSR. L'objet doit contenir une méthode **get** et une méthode **set**. Ci-dessous un exemple utilisant un [LRU cache](https://www.npmjs.com/package/lru-cache).",
   "optionHeader4": "### Propriétés personnalisées",
@@ -25,5 +24,7 @@
   "variantsSubheader": "### Variantes de thème personnalisées",
   "variantsText1": "Alors que Vuetify génère automatiquement des variantes _lighten_ et _darken_ pour les couleurs du thème, vous pourriez vouloir les contrôler vous-même. Passez simplement un objet de thème qui contient les variantes que vous souhaitez modifier. Tout ce qui n'est pas fourni sera toujours généré pour vous.",
   "variantsText2": "Vous pouvez maintenant importer votre objet personnalisé et l'appliquer à Vuetify",
-  "variantsText3": "Ci-dessous une liste complète des clés réinscriptibles de l'objet thème :"
+  "variantsText3": "Ci-dessous une liste complète des clés réinscriptibles de l'objet thème :",
+  "disableSubheader": "### Désactiver le thème",
+  "disableText1": "Vous pouvez désactiver la fonctionnalité du thème en utilisant la propriété **disable** avec une valeur de **true**. Cela empêchera la création de la feuille de style Vuetify."
 }

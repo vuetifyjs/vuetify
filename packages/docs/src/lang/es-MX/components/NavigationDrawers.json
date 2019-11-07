@@ -1,16 +1,12 @@
 {
-  "headingText": "El componente `v-navigation-drawer` es lo que quieres que tus usuarios utilicen para navegar la aplicación. El _navigation-drawer_ está preconfigurado para funcionar con o sin **vue-router** desde el inicio.",
   "examples": {
     "permanent-floating": {
-      "heading": "Permanent floating drawer",
       "desc": "Puedes colocar un _navigation drawer_ dentro de un _card_ y flotarlo sobre el contenido.."
     },
     "mini": {
-      "heading": "Mini",
       "desc": "El _navigation drawer_ también tiene una variación _mini_ que puede ser controlada utilizando la prop `mini-variant.sync`."
     },
     "temporary": {
-      "heading": "Temporary",
       "desc": "Un _drawer_ temporal se coloca encima de la aplicación y utiliza un _overlay_ para oscurecer el fondo. El comportamiento de este _drawer_ se puede reproducir en el _persisten drawer_ cuando tu app corre en un móvil. Hacer click afuera del drawer causará que se cierre."
     }
   },

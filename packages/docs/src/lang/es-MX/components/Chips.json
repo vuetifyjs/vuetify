@@ -1,5 +1,4 @@
 {
-  "headingText": "El componente `v-chip` se utiliza para transmitir pequeñas porciones de información. Al utilizar la prop `close`, el chip se vuelve interactivo, permitiendo que el usuario interactúe con él..",
   "examples": {
     "colored": {
       "heading": "Coloreado",
@@ -13,14 +12,9 @@
       "desc": "El color de contorno de los chips se hereda del color de texto actual."
     },
     "label": {
-      "heading": "Etiqueta",
       "desc": "Las etiquetas de los chips utilizan el border-radius de `v-card`."
     },
-    "closable": {
-      "heading": "Cerrable"
-    },
     "in-selects": {
-      "heading": "Uso en selects",
       "desc": "Los _selects_ pueden usar chips para mostrar selecciones de datos."
     }
   },

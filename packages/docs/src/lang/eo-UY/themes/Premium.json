@@ -1,45 +1,11 @@
 {
-  "heading": "crwdns41540:0crwdne41540:0",
-  "headingText": "crwdns42772:0crwdne42772:0",
+  "heading": "crwdns46432:0crwdne46432:0",
+  "headingText": "crwdns46434:0crwdne46434:0",
   "buy": "crwdns35552:0crwdne35552:0",
   "buyNow": "crwdns43320:0crwdne43320:0",
   "free": "crwdns35554:0crwdne35554:0",
   "live": "crwdns35556:0crwdne35556:0",
   "premium": "crwdns35558:0crwdne35558:0",
   "downloadNow": "crwdns35560:0crwdne35560:0",
-  "viewDemo": "crwdns35562:0crwdne35562:0",
-  "templates": {
-    "alpha": {
-      "title": "crwdns35564:0crwdne35564:0",
-      "description": "crwdns42774:0crwdne42774:0"
-    },
-    "dashboard": {
-      "title": "crwdns43322:0crwdne43322:0",
-      "description": "crwdns35570:0crwdne35570:0"
-    },
-    "dashboard-pro": {
-      "title": "crwdns43324:0crwdne43324:0",
-      "description": "crwdns43326:0crwdne43326:0"
-    },
-    "shopify-e-commerce": {
-      "title": "crwdns43328:0crwdne43328:0",
-      "description": "crwdns43330:0crwdne43330:0"
-    },
-    "freelancer": {
-      "title": "crwdns35572:0crwdne35572:0",
-      "description": "crwdns35574:0crwdne35574:0"
-    },
-    "material-kit": {
-      "title": "crwdns35576:0crwdne35576:0",
-      "description": "crwdns42776:0crwdne42776:0"
-    },
-    "parallax": {
-      "title": "crwdns35580:0crwdne35580:0",
-      "description": "crwdns35582:0crwdne35582:0"
-    },
-    "blog": {
-      "title": "crwdns35584:0crwdne35584:0",
-      "description": "crwdns35586:0crwdne35586:0"
-    }
-  }
+  "viewDemo": "crwdns35562:0crwdne35562:0"
 }
