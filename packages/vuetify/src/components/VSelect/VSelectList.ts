@@ -147,7 +147,7 @@ export default mixins(Colorable, Themeable).extend({
           end: text.slice(range[1]),
         }
       }
-      // If no range specified, use same filtering 
+      // If no range specified, use same filtering
       // as VAutocomplete's default filter function
       const index = text.toLocaleLowerCase().indexOf(searchInput.toLocaleLowerCase())
 
