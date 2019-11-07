@@ -62,6 +62,7 @@ export default mixins(Colorable, Themeable).extend({
     } as PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>,
     noDataText: String,
     noFilter: Boolean,
+    filter: Function,
     searchInput: {
       default: null,
     } as PropValidator<any>,
@@ -111,12 +112,12 @@ export default mixins(Colorable, Themeable).extend({
     genDivider (props: { [key: string]: any }) {
       return this.$createElement(VDivider, { props })
     },
-    genFilteredText (text: string) {
+    genFilteredText (item: object, text: string) {
       text = text || ''
 
       if (!this.searchInput || this.noFilter) return escapeHTML(text)
 
-      const { start, middle, end } = this.getMaskedCharacters(text)
+      const { start, middle, end } = this.getMaskedCharacters(item, text)
 
       return `${escapeHTML(start)}${this.genHighlight(middle)}${escapeHTML(end)}`
     },
@@ -131,13 +132,24 @@ export default mixins(Colorable, Themeable).extend({
 
       return `${text}-list-item-${this._uid}`
     },
-    getMaskedCharacters (text: string): {
+    getMaskedCharacters (item: object, text: string): {
       start: string
       middle: string
       end: string
     } {
-      const searchInput = (this.searchInput || '').toString().toLocaleLowerCase()
-      const index = text.toLocaleLowerCase().indexOf(searchInput)
+      const searchInput = String(this.searchInput || '')
+      const range: boolean | [number, number] = this.filter(item, searchInput, text)
+
+      if (Array.isArray(range)) {
+        return {
+          start: text.slice(0, range[0]),
+          middle: text.slice(range[0], range[1]),
+          end: text.slice(range[1]),
+        }
+      }
+      // If no range specified, use same filtering 
+      // as VAutocomplete's default filter function
+      const index = text.toLocaleLowerCase().indexOf(searchInput.toLocaleLowerCase())
 
       if (index < 0) return { start: '', middle: text, end: '' }
 
@@ -207,7 +219,7 @@ export default mixins(Colorable, Themeable).extend({
         : scopedSlot
     },
     genTileContent (item: any): VNode {
-      const innerHTML = this.genFilteredText(this.getText(item))
+      const innerHTML = this.genFilteredText(item, this.getText(item))
 
       return this.$createElement(VListItemContent,
         [this.$createElement(VListItemTitle, {

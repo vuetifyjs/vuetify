@@ -34,7 +34,9 @@ export default VSelect.extend({
     filter: {
       type: Function,
       default: (item: any, queryText: string, itemText: string) => {
-        return itemText.toLocaleLowerCase().indexOf(queryText.toLocaleLowerCase()) > -1
+        const index = itemText.toLocaleLowerCase().indexOf(queryText.toLocaleLowerCase())
+
+        return index === -1 ? false : [index, index + queryText.length]
       },
     },
     hideNoData: Boolean,
@@ -144,6 +146,7 @@ export default VSelect.extend({
           !this.isSearching ||
           !this.filteredItems.length
         ),
+        filter: this.filter,
         searchInput: this.internalSearch,
       }
 
