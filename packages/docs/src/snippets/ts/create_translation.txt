@@ -15,6 +15,7 @@ export default {
     sortBy: 'Sort by',
   },
   dataFooter: {
+    pageText: '{0}-{1} of {2}',
     itemsPerPageText: 'Items per page:',
     itemsPerPageAll: 'All',
     nextPage: 'Next page',
