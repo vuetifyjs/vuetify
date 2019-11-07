@@ -3,7 +3,7 @@
     <component
       :is="component"
       v-if="component"
-      :source="`https://github.com/vuetifyjs/vuetify/blob/${branch}/packages/docs/src/examples/layouts/${page}.vue`"
+      :source="`https://github.com/vuetifyjs/vuetify/blob/${branch}/packages/docs/src/layouts/layouts/demos/${page}.vue`"
     />
   </div>
 </template>
