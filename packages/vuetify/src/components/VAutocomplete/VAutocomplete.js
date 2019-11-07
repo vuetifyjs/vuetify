@@ -329,6 +329,10 @@ export default VSelect.extend({
       VSelect.options.methods.onTabDown.call(this, e)
       this.updateSelf()
     },
+    selectItem (item) {
+      VSelect.options.methods.selectItem.call(this, item)
+      this.setSearch()
+    },
     setSelectedItems () {
       VSelect.options.methods.setSelectedItems.call(this)
 
