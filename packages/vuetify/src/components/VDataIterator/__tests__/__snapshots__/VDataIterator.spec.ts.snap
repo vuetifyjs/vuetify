@@ -44,6 +44,9 @@ exports[`VDataIterator.ts should render and match snapshot 1`] = `
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -135,6 +138,9 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -217,6 +223,9 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -299,6 +308,9 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -381,6 +393,9 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "

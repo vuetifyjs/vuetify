@@ -242,6 +242,9 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="5"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -436,6 +439,9 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="5"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -725,6 +731,9 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="5"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -1119,6 +1128,9 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -1322,6 +1334,9 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -1578,6 +1593,9 @@ exports[`VDataTable.ts should not search column with filterable set to false and
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -1974,6 +1992,9 @@ exports[`VDataTable.ts should not search column with filterable set to false and
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -2073,6 +2094,9 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -2172,6 +2196,9 @@ exports[`VDataTable.ts should render 1`] = `
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -2268,6 +2295,9 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -2396,6 +2426,9 @@ exports[`VDataTable.ts should render loading state 1`] = `
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -2602,6 +2635,9 @@ exports[`VDataTable.ts should render loading state 2`] = `
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -2793,6 +2829,9 @@ exports[`VDataTable.ts should render with body slot 1`] = `
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="5"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -3082,6 +3121,9 @@ exports[`VDataTable.ts should render with data 1`] = `
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="5"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -3266,6 +3308,9 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="5"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -3693,6 +3738,9 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="5"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -4066,6 +4114,9 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="5"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -4270,6 +4321,9 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="5"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -4584,6 +4638,9 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="5"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -4919,6 +4976,9 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="5"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -5254,6 +5314,9 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="5"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -5616,6 +5679,9 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="5"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "

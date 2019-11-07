@@ -427,8 +427,7 @@ export default baseMixins.extend<options>().extend({
           value: this.lazyValue,
         },
         attrs: {
-          ...this.attrs$,
-          type: 'hidden',
+          type: 'hidden'
         },
       })
     },
