@@ -8,7 +8,7 @@
       permanent
       width="100%"
     >
-      <v-row class="fill-height">
+      <v-row class="fill-height" no-gutters>
         <v-navigation-drawer
           dark
           mini-variant

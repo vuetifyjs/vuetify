@@ -8,7 +8,7 @@
     "dev": "cross-env node --max_old_space_size=4096 server",
     "start": "cross-env NODE_ENV=production node server",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config build/webpack.prod.config.js --no-progress --hide-modules",
-    "lint": "eslint --ext .js,.vue,.json src -f codeframe",
+    "lint": "eslint --ext .js,.vue,.json src -f codeframe --max-warnings 0",
     "lint:fix": "yarn lint --fix"
   },
   "dependencies": {
