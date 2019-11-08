@@ -24,13 +24,13 @@
         <header>Radios</header>
       </v-col>
       <v-radio-group>
-      <v-radio
-        v-for="n in 3"
-        :key="n"
-        :label="`Radio ${n}`"
-        :value="n"
-      ></v-radio>
-    </v-radio-group>
+        <v-radio
+          v-for="n in 3"
+          :key="n"
+          :label="`Radio ${n}`"
+          :value="n"
+        ></v-radio>
+      </v-radio-group>
     </v-row>
     <v-switch
       :disabled="disabled"
@@ -57,7 +57,7 @@
       <v-radio label="I'm a radio button"></v-radio>
       <v-radio label="I'm a radio button"></v-radio>
     </v-radio-group>
-     <v-switch v-model="indeterminate" class="mx-2" label="Indeterminate"></v-switch>
+    <v-switch v-model="indeterminate" class="mx-2" label="Indeterminate"></v-switch>
     <v-checkbox
       :disabled="disabled"
       :readonly="readonly"

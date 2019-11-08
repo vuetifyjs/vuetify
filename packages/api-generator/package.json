@@ -7,7 +7,7 @@
   "scripts": {
     "debug": "babel-node inspect src/index.js",
     "build": "node src/index.js",
-    "lint": "eslint --ext .js src",
+    "lint": "eslint --ext .js src -f codeframe --max-warnings 0",
     "lint:fix": "yarn lint --fix"
   },
   "author": "",
