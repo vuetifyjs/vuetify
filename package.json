@@ -48,7 +48,7 @@
     "lerna": "^3.16.2",
     "semver": "^6.2.0",
     "shelljs": "^0.8.3",
-    "ts-jest": "^24.0.2",
+    "ts-jest": "^24.1.0",
     "tslint": "^5.20.1",
     "typescript": "^3.7.2",
     "typestrict": "^1.0.2",
