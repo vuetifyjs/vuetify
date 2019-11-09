@@ -21,6 +21,11 @@
     .v-expansion-panel-header
       +states($material)
 
+  &.v-expansion-panels--hover
+    .v-expansion-panel-header
+      &:hover
+        +states($material)
+
 // Block
 .v-expansion-panels
   border-radius: $expansion-panel-border-radius
@@ -184,3 +189,14 @@
 
     &--active
       max-width: $expansion-panel-inset-active-max-width
+
+.v-expansion-panels--flat
+  .v-expansion-panel
+    &::after
+      border-top: none
+
+    &::before
+      +elevation(0)
+
+.v-expansion-panels--tile
+  border-radius: 0
