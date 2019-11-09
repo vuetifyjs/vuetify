@@ -82,4 +82,26 @@ describe('colorable.ts', () => {
       },
     })
   })
+
+  it('should compute data with text from a css custom property', async () => {
+    const wrapper = mountFunction()
+
+    expect(wrapper.vm.setTextColor('var(--foo-color)', {})).toEqual({
+      style: {
+        color: 'var(--foo-color)',
+        'caret-color': 'var(--foo-color)',
+      },
+    })
+  })
+
+  it('should compute data with background from a css custom property', async () => {
+    const wrapper = mountFunction()
+
+    expect(wrapper.vm.setBackgroundColor('var(--foo-color)', {})).toEqual({
+      style: {
+        'background-color': 'var(--foo-color)',
+        'border-color': 'var(--foo-color)',
+      },
+    })
+  })
 })
