@@ -40,10 +40,8 @@ export default Vue.extend({
       return h('td', {
         class: classes,
       }, [
-        h('div', { staticClass: 'v-data-table__mobile-row__wrapper' }, [
-          header.value !== 'dataTableSelect' && h('div', { staticClass: 'v-data-table__mobile-row__header' }, [header.text]),
-          h('div', { staticClass: 'v-data-table__mobile-row__cell' }, children),
-        ]),
+        header.value !== 'dataTableSelect' && h('div', { staticClass: 'v-data-table__mobile-row__header' }, [header.text]),
+        h('div', { staticClass: 'v-data-table__mobile-row__cell' }, children),
       ])
     })
 
