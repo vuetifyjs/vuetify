@@ -566,15 +566,21 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
 
     wrapper.setProps({ value: 'foo bar baz' })
 
+    await wrapper.vm.$nextTick()
+
     expect(counter.element.innerHTML).toBe('9 / 25')
 
     wrapper.setProps({ counter: '50' })
+
+    await wrapper.vm.$nextTick()
 
     expect(counter.element.innerHTML).toBe('9 / 50')
 
     wrapper.setProps({
       counterValue: (value?: string): number => (value || '').replace(/ba/g, '').length,
     })
+
+    await wrapper.vm.$nextTick()
 
     expect(counter.element.innerHTML).toBe('7 / 50')
   })
