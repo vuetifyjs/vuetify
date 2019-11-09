@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: '每页数目：',
     ariaLabel: {
-      sortDescending: '：降序排列。点击以移除排序。',
-      sortAscending: '：升序排列。点击以降序排列。',
-      sortNone: '：未排序。点击以升序排列。',
+      sortDescending: '：降序排列。',
+      sortAscending: '：升序排列。',
+      sortNone: '：未排序。',
+      activateNone: '点击以移除排序。',
+      activateDescending: '点击以降序排列。',
+      activateAscending: '点击以升序排列。',
     },
     sortBy: '排序方式',
   },
