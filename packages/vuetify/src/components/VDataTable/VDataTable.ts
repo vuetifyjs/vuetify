@@ -469,7 +469,9 @@ export default VDataIterator.extend({
         },
         scopedSlots,
         on: {
-          click: () => this.$emit('click:row', item),
+          // TODO: first argument should be the data object
+          // but this is a breaking change so it's for v3
+          click: () => this.$emit('click:row', item, data),
         },
       })
     },
@@ -478,6 +480,10 @@ export default VDataIterator.extend({
         ...props,
         isMobile: this.isMobile,
         headers: this.computedHeaders,
+        select: this.select,
+        isSelected: this.isSelected,
+        expand: this.expand,
+        isExpanded: this.isExpanded,
       }
 
       if (this.$scopedSlots.body) {
