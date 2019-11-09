@@ -95,11 +95,6 @@ export default baseMixins.extend<options>().extend({
       type: String,
       default: 'white',
     },
-    size: {
-      default: 700,
-      type: [Number, String],
-      validator: (v: string | number) => !isNaN(parseInt(v)),
-    },
     contentWidth: {
       type: [Number, String],
       default: 280,
