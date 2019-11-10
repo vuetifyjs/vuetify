@@ -48,6 +48,10 @@ export default Themeable.extend({
     },
     hideDefaultFooter: Boolean,
     footerProps: Object,
+    selectableKey: {
+      type: String,
+      default: 'isSelectable',
+    },
   },
 
   data: () => ({
@@ -58,13 +62,16 @@ export default Themeable.extend({
 
   computed: {
     everyItem (): boolean {
-      return !!this.internalCurrentItems.length && this.internalCurrentItems.every((i: any) => this.isSelected(i))
+      return !!this.selectableItems.length && this.selectableItems.every((i: any) => this.isSelected(i))
     },
     someItems (): boolean {
-      return this.internalCurrentItems.some((i: any) => this.isSelected(i))
+      return this.selectableItems.some((i: any) => this.isSelected(i))
     },
     sanitizedFooterProps (): Record<string, any> {
       return camelizeObjectKeys(this.footerProps)
+    },
+    selectableItems (): any[] {
+      return this.internalCurrentItems.filter(item => this.isSelectable(item))
     },
   },
 
@@ -135,19 +142,28 @@ export default Themeable.extend({
     toggleSelectAll (value: boolean): void {
       const selection = Object.assign({}, this.selection)
 
-      this.internalCurrentItems.forEach((item: any) => {
+      for (let i = 0; i < this.selectableItems.length; i++) {
+        const item = this.selectableItems[i]
+
+        if (!this.isSelectable(item)) continue
+
         const key = getObjectValueByPath(item, this.itemKey)
         if (value) selection[key] = item
         else delete selection[key]
-      })
+      }
 
       this.selection = selection
       this.$emit('toggle-select-all', { value })
+    },
+    isSelectable (item: any): boolean {
+      return getObjectValueByPath(item, this.selectableKey) !== false
     },
     isSelected (item: any): boolean {
       return !!this.selection[getObjectValueByPath(item, this.itemKey)] || false
     },
     select (item: any, value = true, emit = true): void {
+      if (!this.isSelectable(item)) return
+
       const selection = this.singleSelect ? {} : Object.assign({}, this.selection)
       const key = getObjectValueByPath(item, this.itemKey)
 
