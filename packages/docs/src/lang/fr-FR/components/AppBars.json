@@ -1,3 +1,56 @@
 {
-  "header": "App Bar (Barre d'application)"
+  "examples": {
+    "usage": {
+      "desc": "Le composant `v-app-bar' est utilisé pour les actions et informations à travers toute l'application."
+    },
+    "dense": {
+      "heading": "### Dense",
+      "desc": "Vous pouvez rendre **app-bar** dense. Une barre d'application dense a une hauteur inférieure à celle d'une barre d'application normale"
+    },
+    "prominent": {
+      "desc": "Un `v-app-bar` avec la prop`prominent` peut réduire sa hauteur losrsaue l'utilisateur fait défiler l'écran vers le bas. Cela permet une transition harmonieuse pour utiliser moins d'espace visuel lorsque l'utilisateur défile à travers le contenu. La hauteur de Shrink a 2 options possibles, **dense** (48px) et **short** (56px)."
+    },
+    "img": {
+      "desc": "`v-app-bar` peut contenir des images de fond. Vous pouvez définir la source via la prop`src`. Si vous avez besoin de personnaliser les propriétés `v-img`, la barre d'application vous fournit un emplacement **img** ."
+    },
+    "img-fade": {
+      "desc": "L'image d'arrière-plan d'une barre `v-app` peut s'effacer sur le défilement. Utilisez pour cela la propriété `fade-img-on-scroll`."
+    },
+    "hide": {
+      "desc": "`v-app-bar` peut être masqué lors du défilement. Utilisez la propriété `hide-on-scroll`."
+    },
+    "scroll-threshold": {
+      "heading": "### Seuil de défilement",
+      "desc": "`v-app-bar` peut avoir un seuil de défilement. Il va commencer à réactiver pour défiler uniquement après avoir défini le nombre de pixels de la propriété `scroll-seuil`."
+    },
+    "collapse": {
+      "desc": "Avec les propulsions **effondrement** et **effondrement sur scroll** vous pouvez facilement contrôler l'état de la barre d'outils avec laquelle l'utilisateur interagit."
+    },
+    "elevate-on-scroll": {
+      "desc": "Lorsque vous utilisez le prop **élévation-on-scroll** , la barre `v-app-bar` se reposera à une altitude de 0dp jusqu'à ce que l'utilisateur commence à défiler vers le bas. Une fois défilé, la barre monte à 4dp."
+    },
+    "inverted-scroll": {
+      "desc": "Lorsque vous utilisez la propriété **scroll inversé** la barre se cache jusqu'à ce que l'utilisateur défile au-delà du seuil désigné. Une fois le seuil dépassé, la barre « v-app » continuera d'afficher jusqu'à ce que les utilisateurs défilent au-delà du seuil. Si aucune valeur **scroll-seuil** n'est fournie une valeur par défaut de _0_ sera utilisée."
+    },
+    "menu": {
+      "heading": "### Avec le menu",
+      "desc": "Vous pouvez facilement étendre la fonctionnalité de la barre d'application en ajoutant `VMenu` là. Cliquez sur la dernière icône pour la voir en action."
+    }
+  },
+  "props": {
+    "clippedLeft": "Indique que le `v-navigation-drawer` de l'application qui est positionné à gauche est en dessous de la barre d'application.",
+    "clippedRight": "Indique que le `v-navigation-drawer` de l'application qui est positionné à droite est en dessous de la barre d'application.",
+    "collapseOnScroll": "Mettre la barre d'application dans un état effondré lors du défilement.",
+    "elevateOnScroll": "Remonte la barre d'application lors du défilement.",
+    "fadeImgOnScroll": "Lorsque vous utilisez l'emplacement **src** prop ou `img`, l'image sera effacée lors du défilement.",
+    "hideOnScroll": "Masque la barre d'application lors du défilement. Affichera toujours l'emplacement `extension`.",
+    "invertedScroll": "Cache la barre d'application lors du défilement vers le bas et l'affiche lors du défilement.",
+    "scrollOffScreen": "Cache la barre d'application lors du défilement. La barre d'application n'affiche **PAS** l'emplacement `extension`.",
+    "shrinkOnScroll": "Relie une barre d'outils **prominent** à une **dense** ou **short** (par défaut) lorsqu'elle défile.",
+    "src": "Source de l'image. Voir `v-img` pour plus de détails"
+  },
+  "slots": {
+    "img": "Components.Toolbars.slots.img",
+    "extension": "Extension Components.Toolbars.slots.slots"
+  }
 }

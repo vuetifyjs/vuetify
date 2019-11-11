@@ -18,15 +18,16 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
         aria-label="Calories: Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
+        style="width: 50px; min-width: 50px;"
     >
       <span>
         Calories
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -34,15 +35,16 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
         aria-label="Fat (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
+        style="width: 50em; min-width: 50em;"
     >
       <span>
         Fat (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -55,10 +57,10 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
         Carbs (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -71,10 +73,10 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
         Protein (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -87,10 +89,10 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
         Iron (%)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
   </tr>
@@ -115,15 +117,16 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
         aria-label="Calories: Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
+        style="width: 50px; min-width: 50px;"
     >
       <span>
         Calories
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -131,15 +134,16 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
         aria-label="Fat (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
+        style="width: 50em; min-width: 50em;"
     >
       <span>
         Fat (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -152,10 +156,10 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
         Carbs (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -168,10 +172,10 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
         Protein (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -184,10 +188,10 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
         Iron (%)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
       <span class="v-data-table-header__sort-badge">
         1
@@ -218,15 +222,16 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
         aria-label="Calories: Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
+        style="width: 50px; min-width: 50px;"
     >
       <span>
         Calories
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
       <span>
         group
@@ -237,15 +242,16 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
         aria-label="Fat (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
+        style="width: 50em; min-width: 50em;"
     >
       <span>
         Fat (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
       <span>
         group
@@ -261,10 +267,10 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
         Carbs (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
       <span>
         group
@@ -280,10 +286,10 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
         Protein (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
       <span>
         group
@@ -299,10 +305,10 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
         Iron (%)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
       <span>
         group
@@ -330,15 +336,16 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
         aria-label="Calories: Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
+        style="width: 50px; min-width: 50px;"
     >
       <span>
         Calories
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -346,15 +353,16 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
         aria-label="Fat (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
+        style="width: 50em; min-width: 50em;"
     >
       <span>
         Fat (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -367,10 +375,10 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
         Carbs (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -383,10 +391,10 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
         Protein (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -399,10 +407,10 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
         Iron (%)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
   </tr>
@@ -427,15 +435,16 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
         aria-label="Calories: Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
+        style="width: 50px; min-width: 50px;"
     >
       <span>
         Calories
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -443,15 +452,16 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
         aria-label="Fat (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
+        style="width: 50em; min-width: 50em;"
     >
       <span>
         Fat (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -464,10 +474,10 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
         Carbs (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -480,10 +490,10 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
         Protein (g)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -496,10 +506,10 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
         Iron (%)
       </span>
       <i aria-hidden="true"
-         class="v-icon notranslate material-icons theme--light"
+         class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
   </tr>
@@ -509,7 +519,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
 exports[`VDataTableHeader.ts mobile should render 1`] = `
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
-    <th colspan="6">
+    <th>
       <div class="v-data-table-header-mobile__wrapper">
         <div class="v-input v-input--hide-details theme--light v-text-field v-select">
           <div class="v-input__control">
@@ -538,14 +548,14 @@ exports[`VDataTableHeader.ts mobile should render 1`] = `
                     <i aria-hidden="true"
                        class="v-icon notranslate material-icons theme--light"
                     >
-                      $vuetify.icons.dropdown
+                      $dropdown
                     </i>
                   </div>
                 </div>
               </div>
               <div class="v-menu">
                 <div class="v-menu__content theme--light "
-                     style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                     style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
                 >
                 </div>
               </div>
@@ -561,7 +571,7 @@ exports[`VDataTableHeader.ts mobile should render 1`] = `
 exports[`VDataTableHeader.ts mobile should render with data-table-select header 1`] = `
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
-    <th colspan="7">
+    <th>
       <div class="v-data-table-header-mobile__wrapper">
         <div class="v-data-table-header-mobile__select">
           <div class="v-data-table__checkbox v-simple-checkbox">
@@ -570,7 +580,7 @@ exports[`VDataTableHeader.ts mobile should render with data-table-select header 
             <i aria-hidden="true"
                class="v-icon notranslate material-icons theme--light"
             >
-              $vuetify.icons.checkboxOff
+              $checkboxOff
             </i>
           </div>
         </div>
@@ -601,14 +611,14 @@ exports[`VDataTableHeader.ts mobile should render with data-table-select header 
                     <i aria-hidden="true"
                        class="v-icon notranslate material-icons theme--light"
                     >
-                      $vuetify.icons.dropdown
+                      $dropdown
                     </i>
                   </div>
                 </div>
               </div>
               <div class="v-menu">
                 <div class="v-menu__content theme--light "
-                     style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                     style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
                 >
                 </div>
               </div>
@@ -624,9 +634,9 @@ exports[`VDataTableHeader.ts mobile should render with data-table-select header 
 exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
-    <th colspan="6">
+    <th>
       <div class="v-data-table-header-mobile__wrapper">
-        <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
+        <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select v-select--is-multi">
           <div class="v-input__control">
             <div role="button"
                  aria-haspopup="listbox"
@@ -647,10 +657,10 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
                       Iron (%)
                       <div class="v-chip__close sortable active desc">
                         <i aria-hidden="true"
-                           class="v-icon notranslate material-icons theme--light"
+                           class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                            style="font-size: 18px;"
                         >
-                          $vuetify.icons.sort
+                          $sort
                         </i>
                       </div>
                     </span>
@@ -666,14 +676,14 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
                     <i aria-hidden="true"
                        class="v-icon notranslate material-icons theme--light"
                     >
-                      $vuetify.icons.dropdown
+                      $dropdown
                     </i>
                   </div>
                 </div>
               </div>
               <div class="v-menu">
                 <div class="v-menu__content theme--light "
-                     style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                     style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
                 >
                 </div>
               </div>
@@ -689,7 +699,7 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
 exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
-    <th colspan="6">
+    <th>
       <div class="v-data-table-header-mobile__wrapper">
         <div class="v-input v-input--hide-details theme--light v-text-field v-select">
           <div class="v-input__control">
@@ -718,14 +728,14 @@ exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
                     <i aria-hidden="true"
                        class="v-icon notranslate material-icons theme--light"
                     >
-                      $vuetify.icons.dropdown
+                      $dropdown
                     </i>
                   </div>
                 </div>
               </div>
               <div class="v-menu">
                 <div class="v-menu__content theme--light "
-                     style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                     style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
                 >
                 </div>
               </div>
@@ -741,7 +751,7 @@ exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
 exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
-    <th colspan="6">
+    <th>
       <div class="v-data-table-header-mobile__wrapper">
         <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
           <div class="v-input__control">
@@ -764,10 +774,10 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
                       Iron (%)
                       <div class="v-chip__close sortable active desc">
                         <i aria-hidden="true"
-                           class="v-icon notranslate material-icons theme--light"
+                           class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                            style="font-size: 18px;"
                         >
-                          $vuetify.icons.sort
+                          $sort
                         </i>
                       </div>
                     </span>
@@ -783,14 +793,14 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
                     <i aria-hidden="true"
                        class="v-icon notranslate material-icons theme--light"
                     >
-                      $vuetify.icons.dropdown
+                      $dropdown
                     </i>
                   </div>
                 </div>
               </div>
               <div class="v-menu">
                 <div class="v-menu__content theme--light "
-                     style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                     style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
                 >
                 </div>
               </div>
@@ -806,7 +816,7 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
 exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
-    <th colspan="6">
+    <th>
       <div class="v-data-table-header-mobile__wrapper">
         <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
           <div class="v-input__control">
@@ -829,10 +839,10 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
                       Iron (%)
                       <div class="v-chip__close sortable active asc">
                         <i aria-hidden="true"
-                           class="v-icon notranslate material-icons theme--light"
+                           class="v-icon notranslate v-data-table-header__icon material-icons theme--light"
                            style="font-size: 18px;"
                         >
-                          $vuetify.icons.sort
+                          $sort
                         </i>
                       </div>
                     </span>
@@ -848,14 +858,14 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
                     <i aria-hidden="true"
                        class="v-icon notranslate material-icons theme--light"
                     >
-                      $vuetify.icons.dropdown
+                      $dropdown
                     </i>
                   </div>
                 </div>
               </div>
               <div class="v-menu">
                 <div class="v-menu__content theme--light "
-                     style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                     style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
                 >
                 </div>
               </div>

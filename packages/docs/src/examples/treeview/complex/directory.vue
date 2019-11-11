@@ -3,11 +3,11 @@
     <v-card-title class="indigo white--text headline">
       User Directory
     </v-card-title>
-    <v-layout
-      justify-space-between
-      pa-4
+    <v-row
+      class="pa-4"
+      justify="space-between"
     >
-      <v-flex xs5>
+      <v-col cols="5">
         <v-treeview
           :active.sync="active"
           :items="items"
@@ -22,13 +22,12 @@
             <v-icon v-if="!item.children">mdi-account</v-icon>
           </template>
         </v-treeview>
-      </v-flex>
+      </v-col>
 
       <v-divider vertical></v-divider>
 
-      <v-flex
-        d-flex
-        text-center
+      <v-col
+        class="d-flex text-center"
       >
         <v-scroll-y-transition mode="out-in">
           <div
@@ -62,24 +61,23 @@
               <div class="blue--text subheading font-weight-bold">{{ selected.username }}</div>
             </v-card-text>
             <v-divider></v-divider>
-            <v-layout
+            <v-row
+              class="text-left"
               tag="v-card-text"
-              text-left
-              wrap
             >
-              <v-flex tag="strong" xs5 text-right mr-4 mb-2>Company:</v-flex>
-              <v-flex>{{ selected.company.name }}</v-flex>
-              <v-flex tag="strong" xs5 text-right mr-4 mb-2>Website:</v-flex>
-              <v-flex>
+              <v-col class="text-right mr-4 mb-2" tag="strong" cols="5">Company:</v-col>
+              <v-col>{{ selected.company.name }}</v-col>
+              <v-col class="text-right mr-4 mb-2" tag="strong" cols="5">Website:</v-col>
+              <v-col>
                 <a :href="`//${selected.website}`" target="_blank">{{ selected.website }}</a>
-              </v-flex>
-              <v-flex tag="strong" xs5 text-right mr-4 mb-2>Phone:</v-flex>
-              <v-flex>{{ selected.phone }}</v-flex>
-            </v-layout>
+              </v-col>
+              <v-col class="text-right mr-4 mb-2" tag="strong" cols="5">Phone:</v-col>
+              <v-col>{{ selected.phone }}</v-col>
+            </v-row>
           </v-card>
         </v-scroll-y-transition>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-card>
 </template>
 

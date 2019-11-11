@@ -1,5 +1,8 @@
 <template>
-  <v-tooltip left bottom>
+  <v-tooltip
+    left
+    bottom
+  >
     <template #activator="{ on }">
       <v-btn
         :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/vuetify/src/${link}`"

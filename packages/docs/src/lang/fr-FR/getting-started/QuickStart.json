@@ -1,1 +1,6 @@
-{}
+{
+  "uiImg1": "Installation du plugin Vuetify",
+  "uiImg2": "Configurez votre installation de Vuetify",
+  "cdnHeader": "## Utilisation d'un CDN",
+  "cdnText": "Pour tester l'utilisation de Vuetify.js sans installer un modèle depuis Vue CLI, copiez le code ci-dessous dans votre `index.html`. Ceci tirera la dernière version de Vue et Vuetify, vous permettant de commencer à jouer avec des composants. Vous pouvez également utiliser le [Vuetify starter](https://template.vuetifyjs.com) sur codepen. Bien que non recommandé, si vous devez utiliser les paquets cdn dans un environnement _production_, il est recommandé d'utiliser des versions fixes de vos assets. Pour plus d'informations sur la façon de faire cela, naviguez sur le site web [jsdelivr](https://www.jsdelivr.com/)."
+}

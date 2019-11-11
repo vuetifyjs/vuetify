@@ -1,9 +1,8 @@
 <template>
   <div>
     <v-container>
-      <v-layout
-        justify-space-around
-        wrap
+      <v-row
+        justify="space-around"
       >
         <v-switch
           v-model="showSwatches"
@@ -26,14 +25,14 @@
           label="Hide Mode Switch"
         ></v-switch>
 
-        <v-flex class="mx-2" xs3>
+        <v-col class="mx-2" cols="3">
           <v-select
             v-model="mode"
             :items="modes"
             label="Mode"
           ></v-select>
-        </v-flex>
-      </v-layout>
+        </v-col>
+      </v-row>
     </v-container>
 
     <v-color-picker

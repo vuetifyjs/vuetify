@@ -322,17 +322,15 @@ export const keyCodes = Object.freeze({
   pagedown: 34,
 })
 
-const ICONS_PREFIX = '$vuetify.'
-
-// This remaps internal names like '$vuetify.icons.cancel'
+// This remaps internal names like '$cancel' or '$vuetify.icons.cancel'
 // to the current name or component for that icon.
 export function remapInternalIcon (vm: Vue, iconName: string): VuetifyIcon {
-  if (!iconName.startsWith(ICONS_PREFIX)) {
+  if (!iconName.startsWith('$')) {
     return iconName
   }
 
   // Get the target icon name
-  const iconPath = `$vuetify.icons.values.${iconName.split('.').pop()}`
+  const iconPath = `$vuetify.icons.values.${iconName.split('$').pop()!.split('.').pop()}`
 
   // Now look up icon indirection name,
   // e.g. '$vuetify.icons.values.cancel'
@@ -369,8 +367,13 @@ export function upperFirst (str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
-export function groupByProperty (xs: any[], key: string): Record<string, any[]> {
-  return xs.reduce((rv, x) => {
+export function groupItems (
+  items: any[],
+  groupBy: string[],
+  groupDesc: boolean[]
+): Record<string, any[]> {
+  const key = groupBy[0]
+  return items.reduce((rv, x) => {
     (rv[x[key]] = rv[x[key]] || []).push(x)
     return rv
   }, {})
@@ -389,6 +392,9 @@ export function sortItems (
 ) {
   if (sortBy === null || !sortBy.length) return items
 
+  const numericCollator = new Intl.Collator(locale, { numeric: true, usage: 'sort' })
+  const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
+
   return items.sort((a, b) => {
     for (let i = 0; i < sortBy.length; i++) {
       const sortKey = sortBy[i]
@@ -400,18 +406,24 @@ export function sortItems (
         [sortA, sortB] = [sortB, sortA]
       }
 
-      if (customSorters && customSorters[sortKey]) return customSorters[sortKey](sortA, sortB)
+      if (customSorters && customSorters[sortKey]) {
+        const customResult = customSorters[sortKey](sortA, sortB)
+
+        if (!customResult) continue
+
+        return customResult
+      }
 
       // Check if both cannot be evaluated
       if (sortA === null && sortB === null) {
-        return 0
+        continue
       }
 
       [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
 
       if (sortA !== sortB) {
-        if (!isNaN(sortA) && !isNaN(sortB)) return Number(sortA) - Number(sortB)
-        return sortA.localeCompare(sortB, locale)
+        if (!isNaN(sortA) && !isNaN(sortB)) return numericCollator.compare(sortA, sortB)
+        return stringCollator.compare(sortA, sortB)
       }
     }
 
@@ -505,4 +517,13 @@ export function humanReadableFileSize (bytes: number, binary = false): string {
     ++unit
   }
   return `${bytes.toFixed(1)} ${prefix[unit]}B`
+}
+
+export function camelizeObjectKeys (obj: Record<string, any> | null | undefined) {
+  if (!obj) return {}
+
+  return Object.keys(obj).reduce((o: any, key: string) => {
+    o[camelize(key)] = obj[key]
+    return o
+  }, {})
 }

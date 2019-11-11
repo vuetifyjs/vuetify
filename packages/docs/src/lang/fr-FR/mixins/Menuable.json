@@ -1,1 +1,17 @@
-{}
+{
+  "props": {
+    "allowOverflow": "Supprime le dépassement de repositionnement pour le contenu",
+    "inputActivator": "Définit une nouvelle cible d'activation pour l'élément détaché. Utilisez-le pour placer des éléments détachables dans les slots `v-input`",
+    "maxWidth": "Définit la largeur maximale du contenu",
+    "minWidth": "Définit la largeur minimale du contenu",
+    "nudgeBottom": "Décale le contenu vers le bas",
+    "nudgeLeft": "Décale le contenu vers la gauche",
+    "nudgeRight": "Décale le contenu vers la droite",
+    "nudgeTop": "Décale le contenu vers le haut",
+    "nudgeWidth": "Modifie la largeur du contenu",
+    "offsetOverflow": "Provoque le basculement du composant sur le côté opposé lors du repositionnement en raison du débordement",
+    "positionX": "Utilisé pour positionner le contenu sans utiliser le slot d'activation",
+    "positionY": "Utilisé pour positionner le contenu sans utiliser le slot d'activation",
+    "zIndex": "Le z-index utilisé pour le composant"
+  }
+}

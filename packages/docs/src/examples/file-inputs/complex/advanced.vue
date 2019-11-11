@@ -8,7 +8,7 @@
     placeholder="Select your files"
     prepend-icon="mdi-paperclip"
     outlined
-    :display-size="1000"
+    :show-size="1000"
   >
     <template v-slot:selection="{ index, text }">
       <v-chip

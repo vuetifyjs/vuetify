@@ -2,6 +2,8 @@
 import VInput from '../VInput/VInput'
 
 // Mixins
+import mixins from '../../util/mixins'
+import BindsAttrs from '../../mixins/binds-attrs'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 // Helpers
@@ -16,14 +18,18 @@ type Watchers = {
 }
 
 /* @vue/component */
-export default RegistrableProvide('form').extend({
+export default mixins(
+  BindsAttrs,
+  RegistrableProvide('form')
+  /* @vue/component */
+).extend({
   name: 'v-form',
 
   inheritAttrs: false,
 
   props: {
-    value: Boolean,
     lazyValidation: Boolean,
+    value: Boolean,
   },
 
   data: () => ({
@@ -76,7 +82,7 @@ export default RegistrableProvide('form').extend({
     },
     /** @public */
     validate (): boolean {
-      return this.inputs.every(input => input.validate(true))
+      return this.inputs.filter(input => !input.validate(true)).length === 0
     },
     /** @public */
     reset (): void {
@@ -122,7 +128,7 @@ export default RegistrableProvide('form').extend({
       staticClass: 'v-form',
       attrs: {
         novalidate: true,
-        ...this.$attrs,
+        ...this.attrs$,
       },
       on: {
         submit: (e: Event) => this.$emit('submit', e),

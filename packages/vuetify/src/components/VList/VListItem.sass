@@ -1,4 +1,3 @@
-@import '../../styles/styles.sass'
 @import './_variables.scss'
 
 // Theme
@@ -39,6 +38,9 @@
   &--disabled
     pointer-events: none
 
+  &--selectable
+    user-select: auto
+
 // Element
 .v-list-item__action
   align-self: center
@@ -74,10 +76,16 @@
     margin-top: 8px
 
     &:first-child
-      margin-left: $list-item-avatar-horizontal-margin-x
+      +ltr()
+        margin-left: $list-item-avatar-horizontal-margin-x
+      +rtl()
+        margin-right: $list-item-avatar-horizontal-margin-x
 
     &:last-child
-      margin-left: $list-item-avatar-horizontal-margin-x
+      +ltr()
+        margin-left: $list-item-avatar-horizontal-margin-x
+      +rtl()
+        margin-right: $list-item-avatar-horizontal-margin-x
 
 .v-list-item__content
   align-items: center
@@ -99,20 +107,30 @@
   align-self: flex-start
   margin: 16px 0
 
+// https://github.com/vuetifyjs/vuetify/issues/7930
+.v-list-item__action,
+.v-list-item__avatar,
+.v-list-item__icon
+  &:last-of-type:not(:only-child)
+    +ltr()
+      margin-left: 16px
+    +rtl()
+      margin-right: 16px
+
 .v-list-item__avatar
   &:first-child
-    margin-right: 24px
-
-  &:last-child:not(:only-child)
-    margin-left: 16px
+    +ltr()
+      margin-right: 24px
+    +rtl()
+      margin-left: 24px
 
 .v-list-item__action,
 .v-list-item__icon
   &:first-child
-    margin-right: 32px
-
-  &:last-of-type:not(:only-child)
-    margin-left: 16px
+    +ltr()
+      margin-right: 32px
+    +rtl()
+      margin-left: 32px
 
 .v-list-item__action,
 .v-list-item__avatar,
@@ -151,6 +169,7 @@
   min-height: 40px
 
   .v-list-item__icon
+    height: 24px
     margin-top: 8px
     margin-bottom: 8px
 
@@ -184,7 +203,10 @@
     top: 0
     transition: $primary-transition
 
-.v-list-item--active
+// https://github.com/vuetifyjs/vuetify/issues/8327
+.v-list .v-list-item--active
+  color: inherit
+
   .v-icon
     color: inherit
 

@@ -28,20 +28,8 @@ export interface VColorPickerColor {
 export function fromHSVA (hsva: HSVA): VColorPickerColor {
   hsva = { ...hsva }
   const hexa = HSVAtoHex(hsva)
-  return {
-    alpha: hsva.a,
-    hex: hexa.substr(0, 7),
-    hexa,
-    hsla: HSVAtoHSLA(hsva),
-    hsva,
-    hue: hsva.h,
-    rgba: HSVAtoRGBA(hsva),
-  }
-}
-
-export function fromHSLA (hsla: HSLA): VColorPickerColor {
-  const hsva = HSLAtoHSVA(hsla)
-  const hexa = HSVAtoHex(hsva)
+  const hsla = HSVAtoHSLA(hsva)
+  const rgba = HSVAtoRGBA(hsva)
   return {
     alpha: hsva.a,
     hex: hexa.substr(0, 7),
@@ -49,18 +37,34 @@ export function fromHSLA (hsla: HSLA): VColorPickerColor {
     hsla,
     hsva,
     hue: hsva.h,
-    rgba: HSVAtoRGBA(hsva),
+    rgba,
+  }
+}
+
+export function fromHSLA (hsla: HSLA): VColorPickerColor {
+  const hsva = HSLAtoHSVA(hsla)
+  const hexa = HSVAtoHex(hsva)
+  const rgba = HSVAtoRGBA(hsva)
+  return {
+    alpha: hsva.a,
+    hex: hexa.substr(0, 7),
+    hexa,
+    hsla,
+    hsva,
+    hue: hsva.h,
+    rgba,
   }
 }
 
 export function fromRGBA (rgba: RGBA): VColorPickerColor {
   const hsva = RGBAtoHSVA(rgba)
   const hexa = RGBAtoHex(rgba)
+  const hsla = HSVAtoHSLA(hsva)
   return {
     alpha: hsva.a,
     hex: hexa.substr(0, 7),
     hexa,
-    hsla: HSVAtoHSLA(hsva),
+    hsla,
     hsva,
     hue: hsva.h,
     rgba,
@@ -69,14 +73,16 @@ export function fromRGBA (rgba: RGBA): VColorPickerColor {
 
 export function fromHexa (hexa: Hexa): VColorPickerColor {
   const hsva = HexToHSVA(hexa)
+  const hsla = HSVAtoHSLA(hsva)
+  const rgba = HSVAtoRGBA(hsva)
   return {
     alpha: hsva.a,
     hex: hexa.substr(0, 7),
     hexa,
-    hsla: HSVAtoHSLA(hsva),
+    hsla,
     hsva,
     hue: hsva.h,
-    rgba: HSVAtoRGBA(hsva),
+    rgba,
   }
 }
 
@@ -132,4 +138,18 @@ export function extractColor (color: VColorPickerColor, input: any) {
   }
 
   return color
+}
+
+export function hasAlpha (color: any) {
+  if (!color) return false
+
+  if (typeof color === 'string') {
+    return color.length > 7
+  }
+
+  if (typeof color === 'object') {
+    return has(color, ['a'])
+  }
+
+  return false
 }

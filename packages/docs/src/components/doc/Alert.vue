@@ -1,11 +1,13 @@
 <template>
   <v-alert
+    :class="$vuetify.theme.dark ? undefined : 'grey lighten-3'"
     :type="value"
     border="left"
     class="app-alert mb-4"
+    colored-border
     value
   >
-    <doc-markdown><slot /></doc-markdown>
+    <base-markdown><slot /></base-markdown>
   </v-alert>
 </template>
 
@@ -24,10 +26,6 @@
 
 <style lang="sass">
 .app-alert
-  a
-    color: #fff
-    text-decoration: underline
-
   p
     margin: 0 !important
 </style>

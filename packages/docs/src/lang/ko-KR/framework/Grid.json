@@ -1,43 +1,43 @@
 {
-  "header": "그리드 시스템 (Grid system)",
-  "headerText": "Vuetify 12 포인트 그리드 시스템을 사용합니다. <kbd>flex-box</kbd>를 사용하는 이 그리드는 어플리케이션 컨텐츠의 레이아웃에 사용됩니다. 여기엔 여러 화면 크기와 방향에 대응하는 5가지 타입의 미디어 브레이크포인트가 있습니다. 그리드 컴포넌트의 prop들은 사실 정의된 속성에 따라 파생되는 (css) 클래스들입니다. 이를 이용해 이들 (css) 헬퍼 클래스들을 prop 형태로 쉽게 사용할 수 있습니다. 물론 이 클래스들은 여전히 어디든지 사용할 수 있습니다.",
+  "heading": "그리드 시스템 (Grid system)",
+  "headingText": "Vuetify 12 포인트 그리드 시스템을 사용합니다. <kbd>flex-box</kbd>를 사용하는 이 그리드는 어플리케이션 컨텐츠의 레이아웃에 사용됩니다. 여기엔 여러 화면 크기와 방향에 대응하는 5가지 타입의 미디어 브레이크포인트가 있습니다. 그리드 컴포넌트의 prop들은 사실 정의된 속성에 따라 파생되는 (css) 클래스들입니다. 이를 이용해 이들 (css) 헬퍼 클래스들을 prop 형태로 쉽게 사용할 수 있습니다. 물론 이 클래스들은 여전히 어디든지 사용할 수 있습니다.",
   "examples": {
     "offset": {
-      "header": "오프셋 (Offset)",
+      "heading": "오프셋 (Offset)",
       "desc": "오프셋은 아직 보이지 않는 요소를 보완하거나 컨텐츠의 위치를 제어하는데 유용합니다. 중단점(Breakpoint) 처럼, 여러 크기에 대응하여 오프셋을 정할 수 있습니다. 이를 통해 필요에 따라 레이아웃을 정확하게 미세 조정할 수 있습니다.",
       "uninverted": true
     },
     "order": {
-      "header": "순서 (Order)",
+      "heading": "순서 (Order)",
       "desc": "그리드 항목의 순서를 제어할 수 있습니다. 오프셋처럼 다양한 화면크기에 대응하는 순서를 지정할 수 있습니다. 어떤 어플리케이션에도 적합한 특수화된 스크린 레이아웃을 디자인 하세요.",
       "uninverted": true
     },
     "directionAndAlign": {
-      "header": "방향과 정렬 (Direction and Align)",
+      "heading": "방향과 정렬 (Direction and Align)",
       "desc": "방향과 정렬을 다양한 방법으로 지정합니다. 가능한 모든 <kbd>flex-box</kbd> api 는 직관적인 헬퍼 prop을 통해 가능합니다.",
       "uninverted": true
     },
     "rowColumnBreakpoint": {
-      "header": "행과 열 중단점 (Row and column breakpoints)",
+      "heading": "행과 열 중단점 (Row and column breakpoints)",
       "desc": "해상도에 따라 동적으로 레이아웃을 변경하세요. **(화면 크기를 바꾸면서 작은 중단 점에서 레이아웃이 \"하나의 `행\"으로 바뀌는 것을 관찰해보세요)**",
       "uninverted": true
     },
     "nestedGrid": {
-      "header": "중첩 그리드 (Nested grid)",
+      "heading": "중첩 그리드 (Nested grid)",
       "desc": "다른 프레임워크들 처럼 다양한 커스텀 레이아웃을 구현하기 위해 그리드는 중첩될 수 있습니다.",
       "uninverted": true
     },
     "uniqueLayouts": {
-      "header": "유니크한 레이아웃 (Unique layouts)",
+      "heading": "유니크한 레이아웃 (Unique layouts)",
       "desc": "Vuetify 그리드 시스템의 강력함과 유연함과 함께 놀라운 사용자 인터페이스를 만들 수 있습니다.",
       "uninverted": true
     },
     "spacer": {
-      "header": "v-spacer",
+      "heading": "v-spacer",
       "desc": "`v-spacer` 컴포넌트는 가능한 공간을 체우거나 두 컴포넌트 사이에 공간을 만들고 싶을때 유용합니다."
     },
     "tags": {
-      "header": "HTML 태그 (Html tags)",
+      "heading": "HTML 태그 (Html tags)",
       "desc": "때로 레이아웃 항목에 `section` 이나 `li` 같은 특정 태그를 사용하고 싶을 경우"
     }
   },

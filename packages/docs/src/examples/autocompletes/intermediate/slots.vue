@@ -16,10 +16,10 @@
       height="200"
       src="https://cdn.vuetifyjs.com/images/cards/dark-beach.jpg"
     >
-      <v-layout wrap>
-        <v-flex
-          text-right
-          xs12
+      <v-row>
+        <v-col
+          class="text-right"
+          cols="12"
         >
           <v-menu
             bottom
@@ -31,7 +31,7 @@
                 icon
                 v-on="on"
               >
-                <v-icon>more_vert</v-icon>
+                <v-icon>mdi-dots-vertical</v-icon>
               </v-btn>
             </template>
             <v-list>
@@ -45,24 +45,25 @@
               </v-list-item>
             </v-list>
           </v-menu>
-        </v-flex>
-        <v-layout
-          align-start
-          column
-          justify-end
-          pa-4
+        </v-col>
+        <v-row
+          class="pa-4"
+          align="center"
+          justify="center"
         >
-          <h3 class="headline">{{ name }}</h3>
-          <span class="grey--text text--lighten-1">{{ title }}</span>
-        </v-layout>
-      </v-layout>
+          <v-col class="text-center">
+            <h3 class="headline">{{ name }}</h3>
+            <span class="grey--text text--lighten-1">{{ title }}</span>
+          </v-col>
+        </v-row>
+      </v-row>
     </v-img>
     <v-form>
-      <v-container grid-list-xl>
-        <v-layout wrap>
-          <v-flex
-            xs12
-            md6
+      <v-container>
+        <v-row>
+          <v-col
+            cols="12"
+            md="6"
           >
             <v-text-field
               v-model="name"
@@ -71,10 +72,10 @@
               color="blue-grey lighten-2"
               label="Name"
             ></v-text-field>
-          </v-flex>
-          <v-flex
-            xs12
-            md6
+          </v-col>
+          <v-col
+            cols="12"
+            md="6"
           >
             <v-text-field
               v-model="title"
@@ -83,8 +84,8 @@
               color="blue-grey lighten-2"
               label="Title"
             ></v-text-field>
-          </v-flex>
-          <v-flex xs12>
+          </v-col>
+          <v-col cols="12">
             <v-autocomplete
               v-model="friends"
               :disabled="isUpdating"
@@ -126,8 +127,8 @@
                 </template>
               </template>
             </v-autocomplete>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-form>
     <v-divider></v-divider>

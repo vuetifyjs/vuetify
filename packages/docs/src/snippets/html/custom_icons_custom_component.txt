@@ -12,8 +12,8 @@
     props: {
       icon: {
         type: String,
-        default: '$vuetify.icons.cancel',
-      },
-    },
+        default: '$cancel'
+      }
+    }
   }
 </script>

@@ -13,7 +13,6 @@ export default {
     end: {
       type: String,
       validate: validateTimestamp,
-      default: '0000-00-00',
     },
     weekdays: {
       type: Array,

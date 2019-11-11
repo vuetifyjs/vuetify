@@ -1,13 +1,13 @@
 <template>
-  <v-layout>
-    <v-flex xs12 sm6 offset-sm3>
+  <v-row>
+    <v-col cols="12" sm="6" offset-sm="3">
       <v-card>
         <v-toolbar color="indigo" dark>
           <v-app-bar-nav-icon></v-app-bar-nav-icon>
           <v-toolbar-title>Manage</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn icon>
-            <v-icon>more_vert</v-icon>
+            <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </v-toolbar>
         <v-list class="indigo darken-2" dark>
@@ -25,8 +25,8 @@
           </template>
         </v-list>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

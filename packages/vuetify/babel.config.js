@@ -5,21 +5,21 @@ const env = process.env.NODE_ENV
 module.exports = {
   presets: [
     ['@babel/preset-env', {
-      modules: false
-    }]
+      modules: false,
+    }],
   ],
   plugins: [
     ['transform-define', {
       __VUETIFY_VERSION__: vuetifyPackage.version,
-      __REQUIRED_VUE__: vuetifyPackage.peerDependencies.vue
-    }]
+      __REQUIRED_VUE__: vuetifyPackage.peerDependencies.vue,
+    }],
   ],
   env: {
     test: {
       presets: [
         ['@babel/preset-env', {
-          targets: { node: true }
-        }]
+          targets: { node: true },
+        }],
       ],
       plugins: [
         ['module-resolver', {
@@ -29,23 +29,23 @@ module.exports = {
             '~directives': 'directives',
             '~mixins': 'mixins',
             '~scss': 'scss',
-            '~util': 'util'
-          }
-        }]
-      ]
+            '~util': 'util',
+          },
+        }],
+      ],
     },
     es5: {
-      presets: ['@babel/preset-env']
+      presets: ['@babel/preset-env'],
     },
     lib: {
       presets: [
         ['@babel/preset-env', {
           targets: 'last 1 chrome version',
-          modules: false
-        }]
-      ]
-    }
-  }
+          modules: false,
+        }],
+      ],
+    },
+  },
 }
 
 if (['lib', 'es5'].includes(env)) {

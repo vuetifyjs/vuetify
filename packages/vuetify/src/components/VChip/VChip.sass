@@ -1,5 +1,4 @@
 // Imports
-@import '../../styles/styles.sass'
 @import './_variables.scss'
 
 // Theme
@@ -28,7 +27,9 @@
   cursor: default
   display: inline-flex
   line-height: 20px
+  max-width: 100%
   outline: none
+  overflow: hidden
   padding: 0 12px
   position: relative
   text-decoration: none
@@ -36,6 +37,7 @@
   transition-property: box-shadow, opacity
   transition-timing-function: $chip-transition-fn
   vertical-align: middle
+  white-space: nowrap
 
   &:before
     background-color: currentColor
@@ -104,6 +106,7 @@
   align-items: center
   display: inline-flex
   height: 100%
+  max-width: 100%
 
 // Modifiers
 .v-chip--active

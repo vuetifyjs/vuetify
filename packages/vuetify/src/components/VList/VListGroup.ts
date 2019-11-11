@@ -8,6 +8,7 @@ import VListItem from './VListItem'
 import VListItemIcon from './VListItemIcon'
 
 // Mixins
+import BindsAttrs from '../../mixins/binds-attrs'
 import Bootable from '../../mixins/bootable'
 import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
@@ -27,6 +28,7 @@ import { VNode } from 'vue'
 import { Route } from 'vue-router'
 
 const baseMixins = mixins(
+  BindsAttrs,
   Bootable,
   Colorable,
   RegistrableInject('list'),
@@ -55,7 +57,7 @@ export default baseMixins.extend<options>().extend({
     },
     appendIcon: {
       type: String,
-      default: '$vuetify.icons.expand',
+      default: '$expand',
     },
     color: {
       type: String,
@@ -149,7 +151,7 @@ export default baseMixins.extend<options>().extend({
           value: this.ripple,
         }],
         on: {
-          ...this.$listeners,
+          ...this.listeners$,
           click: this.click,
         },
       }, [
@@ -173,7 +175,7 @@ export default baseMixins.extend<options>().extend({
       const icon = this.prependIcon
         ? this.prependIcon
         : this.subGroup
-          ? '$vuetify.icons.subgroup'
+          ? '$subgroup'
           : false
 
       if (!icon && !this.$slots.prependIcon) return null

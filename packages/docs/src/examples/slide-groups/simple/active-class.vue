@@ -22,10 +22,10 @@
           width="100"
           @click="toggle"
         >
-          <v-layout
-            align-center
-            fill-height
-            justify-center
+          <v-row
+            class="fill-height"
+            align="center"
+            justify="center"
           >
             <v-scale-transition>
               <v-icon
@@ -35,7 +35,7 @@
                 v-text="'mdi-close-circle-outline'"
               ></v-icon>
             </v-scale-transition>
-          </v-layout>
+          </v-row>
         </v-card>
       </v-slide-item>
     </v-slide-group>

@@ -1,16 +1,16 @@
-export interface VuetifyBreakpointOptions {
-  thresholds?: Partial<VuetifyBreakpointThresholds>
+export interface BreakpointOptions {
+  thresholds?: Partial<BreakpointThresholds>
   scrollBarWidth?: number
 }
 
-export interface VuetifyBreakpointThresholds {
+export interface BreakpointThresholds {
   xs: number
   sm: number
   md: number
   lg: number
 }
 
-export interface VuetifyBreakpoint {
+export interface Breakpoint {
   height: number
   lg: boolean
   lgAndDown: boolean
@@ -30,6 +30,6 @@ export interface VuetifyBreakpoint {
   xlOnly: boolean
   xs: boolean
   xsOnly: boolean
-  thresholds: VuetifyBreakpointThresholds
-  scrollbarWidth: number
+  thresholds: BreakpointThresholds
+  scrollBarWidth: number
 }

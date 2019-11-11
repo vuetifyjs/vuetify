@@ -1,7 +1,11 @@
-@import ../../styles/styles.sass
 @import ./_variables
 
 .v-tooltip
+  display: none
+
+  &--attached
+    display: inline
+
   &__content
     background: $tooltip-background-color
     color: $tooltip-text-color
@@ -15,6 +19,9 @@
     width: auto
     opacity: 1
     pointer-events: none
+
+    &--fixed
+      position: fixed
 
     &[class*="-active"]
       transition-timing-function: map-get($transition, 'linear-out-slow-in')

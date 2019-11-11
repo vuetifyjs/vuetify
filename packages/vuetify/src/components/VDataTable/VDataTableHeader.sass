@@ -1,12 +1,11 @@
 // Imports
-@import '../../styles/styles.sass'
 @import './_variables.scss'
 
 // Theme
 +theme(v-data-table) using ($material)
   .v-data-table-header
     th.sortable
-      .v-icon
+      .v-data-table-header__icon
         color: rgba(map-get($material, 'fg-color'), map-get($material, 'disabledORhints-text-percent'))
 
       &:hover
@@ -15,7 +14,7 @@
       &.active
         color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
 
-        .v-icon
+        .v-data-table-header__icon
           color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
 
     &__sort-badge
@@ -30,20 +29,19 @@
       cursor: pointer
       outline: 0
 
-      .v-icon
-        display: inline-block
-        opacity: 0
-        transition: .3s map-get($transition, 'swing')
-
-    &.active
-      transform: none
-
-      .v-icon
+    &.active, &:hover
+      .v-data-table-header__icon
+        transform: none
         opacity: 1
 
-      &.desc
-        .v-icon
-          transform: rotate(-180deg)
+    &.desc
+      .v-data-table-header__icon
+        transform: rotate(-180deg)
+
+.v-data-table-header__icon
+  display: inline-block
+  opacity: 0
+  transition: .3s map-get($transition, 'swing')
 
 .v-data-table-header__sort-badge
   display: inline-flex
@@ -66,7 +64,6 @@
 
   .v-select
     margin-bottom: 8px
-    margin-left: 16px
 
     .v-chip
       height: 24px

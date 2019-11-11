@@ -14,16 +14,12 @@ import mixins from '../../util/mixins'
 // Types
 import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
+import { SelectingTimes } from './SelectingTimes'
 
 const rangeHours24 = createRange(24)
 const rangeHours12am = createRange(12)
 const rangeHours12pm = rangeHours12am.map(v => v + 12)
 const range60 = createRange(60)
-enum SelectingTimes {
-  Hour = 1,
-  Minute = 2,
-  Second = 3
-}
 const selectingNames = { 1: 'hour', 2: 'minute', 3: 'second' }
 export { SelectingTimes }
 
@@ -333,8 +329,8 @@ export default mixins(
       return this.$createElement('div', this.setTextColor(this.color || 'primary', {
         staticClass: 'v-time-picker-clock__ampm',
       }), [
-        this.genPickerButton('period', 'am', 'AM', this.disabled || this.readonly),
-        this.genPickerButton('period', 'pm', 'PM', this.disabled || this.readonly),
+        this.genPickerButton('period', 'am', this.$vuetify.lang.t('$vuetify.timePicker.am'), this.disabled || this.readonly),
+        this.genPickerButton('period', 'pm', this.$vuetify.lang.t('$vuetify.timePicker.pm'), this.disabled || this.readonly),
       ])
     },
     genPickerBody () {

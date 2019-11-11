@@ -1,32 +1,32 @@
 <template>
   <v-container fluid>
-    <v-layout wrap class="light--text">
-      <v-flex xs4>on</v-flex>
-      <v-flex xs4>off</v-flex>
-      <v-flex xs4>indeterminate</v-flex>
-    </v-layout>
-    <v-layout wrap>
-      <v-flex xs4>
+    <v-row class="light--text">
+      <v-col cols="4">on</v-col>
+      <v-col cols="4">off</v-col>
+      <v-col cols="4">indeterminate</v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="4">
         <v-checkbox input-value="true" value></v-checkbox>
-      </v-flex>
-      <v-flex xs4>
+      </v-col>
+      <v-col cols="4">
         <v-checkbox value></v-checkbox>
-      </v-flex>
-      <v-flex xs4>
+      </v-col>
+      <v-col cols="4">
         <v-checkbox value indeterminate></v-checkbox>
-      </v-flex>
-    </v-layout>
-    <v-layout wrap class="light--text">
-      <v-flex xs4>on disabled</v-flex>
-      <v-flex xs4>off disabled</v-flex>
-    </v-layout>
-    <v-layout wrap>
-      <v-flex xs4>
+      </v-col>
+    </v-row>
+    <v-row class="light--text">
+      <v-col cols="4">on disabled</v-col>
+      <v-col cols="4">off disabled</v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="4">
         <v-checkbox input-value="true" value disabled></v-checkbox>
-      </v-flex>
-      <v-flex xs4>
+      </v-col>
+      <v-col cols="4">
         <v-checkbox value disabled></v-checkbox>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>

@@ -1,7 +1,6 @@
 export default {
   close: 'Lukk',
   dataIterator: {
-    pageText: '{0}-{1} av {2}',
     noResultsText: 'Fant ingen matchende elementer.',
     loadingText: 'Laster elementer...',
   },
@@ -12,6 +11,7 @@ export default {
       sortAscending: ': Sortert stigende. Aktiver for å sortere synkende.',
       sortNone: ': Ikke sortert. Aktiver for å sortere stigende.',
     },
+    sortBy: 'Sorter etter',
   },
   dataFooter: {
     itemsPerPageText: 'Elementer per side:',
@@ -20,6 +20,7 @@ export default {
     prevPage: 'Forrige side',
     firstPage: 'Første side',
     lastPage: 'Siste side',
+    pageText: '{0}-{1} av {2}',
   },
   datePicker: {
     itemsSelected: '{0} valgt',
@@ -28,12 +29,19 @@ export default {
   carousel: {
     prev: 'Forrige bilde',
     next: 'Neste bilde',
+    ariaLabel: {
+      delimiter: 'Karusellbilde {0} av {1}',
+    },
   },
   calendar: {
-    moreEvents: '{0} mer',
+    moreEvents: '{0} flere',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counter: '{0} filer',
+    counterSize: '{0} filer ({1} totalt)',
+  },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
   },
 }

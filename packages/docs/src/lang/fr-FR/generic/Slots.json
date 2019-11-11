@@ -1,5 +1,6 @@
 {
   "activator": "Lorsqu'il est utilisé, activera le composant lorsque vous cliquez dessus (ou passez la souris sur certains composants). Cela arrête manuellement la propagation de l'événement. Sans ce slot, si vous ouvrez le composant via son modèle, vous devrez arrêter manuellement la propagation de l'événement",
+  "default": "L'emplacement par défaut de vue.",
   "label": "Remplace le label par défaut",
   "progress": "Slot pour la progression linéaire personnalisée (affiché lorsque la propriété **loading** n'est pas égale au booléen faux)"
 }

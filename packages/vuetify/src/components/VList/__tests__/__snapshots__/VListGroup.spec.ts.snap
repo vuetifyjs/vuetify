@@ -11,7 +11,7 @@ exports[`VListGroup.ts should render component and match snapshot 1`] = `
       <i aria-hidden="true"
          class="v-icon notranslate material-icons theme--light"
       >
-        $vuetify.icons.expand
+        $expand
       </i>
     </div>
   </div>

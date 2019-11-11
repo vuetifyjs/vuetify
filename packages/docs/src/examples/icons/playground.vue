@@ -1,34 +1,34 @@
 <template>
-  <v-container grid-list-xl>
-    <v-layout
-      wrap
-      justify-space-around
+  <v-container>
+    <v-row
+
+      justify="space-around"
     >
-      <v-flex
-        xs12
-        md6
+      <v-col
+        cols="12"
+        md="6"
       >
         <v-select
           v-model="icon"
           :items="icons"
         ></v-select>
-      </v-flex>
-      <v-flex
-        xs12
-        md6
+      </v-col>
+      <v-col
+        cols="12"
+        md="6"
       >
         <v-select
           v-model="color"
           :items="colors"
         ></v-select>
-      </v-flex>
-      <v-flex
-        xs12
-        text-center
+      </v-col>
+      <v-col
+        class="text-center"
+        cols="12"
       >
         <v-icon :color="color">{{ icon }}</v-icon>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

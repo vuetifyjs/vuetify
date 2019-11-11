@@ -1,1 +1,6 @@
-{}
+{
+  "props": {
+    "attach": "Spécifie l'élément DOM auquel ce composant doit détacher.String peut être n'importe quel querySelector et Object valide peut être un noeud valide. Cela attachera au composant racine `v-app` par défaut.",
+    "contentClass": "Applique une classe personnalisée à l'élément détaché. Cela est utile parce que le contenu est déplacé au début du composant `v-app` (sauf si le prop **attach** est fourni) et n'est pas ciblable par les classes passées directement sur le composant."
+  }
+}

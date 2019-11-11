@@ -1,9 +1,9 @@
 <template>
   <v-form>
-    <v-container grid-list-xl fluid>
-      <v-layout wrap>
+    <v-container fluid>
+      <v-row>
 
-        <v-flex xs12 sm6>
+        <v-col cols="12" sm="6">
           <v-text-field
             v-model="password"
             :append-icon="show1 ? 'visibility' : 'visibility_off'"
@@ -15,9 +15,9 @@
             counter
             @click:append="show1 = !show1"
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6>
+        <v-col cols="12" sm="6">
           <v-text-field
             :append-icon="show2 ? 'visibility' : 'visibility_off'"
             :rules="[rules.required, rules.min]"
@@ -29,9 +29,9 @@
             class="input-group--focused"
             @click:append="show2 = !show2"
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6>
+        <v-col cols="12" sm="6">
           <v-text-field
             :append-icon="show3 ? 'visibility' : 'visibility_off'"
             :rules="[rules.required, rules.min]"
@@ -43,9 +43,9 @@
             class="input-group--focused"
             @click:append="show3 = !show3"
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6>
+        <v-col cols="12" sm="6">
           <v-text-field
             :append-icon="show4 ? 'visibility' : 'visibility_off'"
             :rules="[rules.required, rules.emailMatch]"
@@ -57,9 +57,9 @@
             error
             @click:append="show4 = !show4"
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-      </v-layout>
+      </v-row>
     </v-container>
   </v-form>
 </template>

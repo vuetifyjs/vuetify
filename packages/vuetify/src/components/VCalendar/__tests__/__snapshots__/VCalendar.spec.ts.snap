@@ -1248,7 +1248,7 @@ exports[`VCalendar should render month view 1`] = `
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
         <button type="button"
-                class="v-btn v-btn--depressed v-btn--rounded theme--light v-size--small transparent"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
         >
           <span class="v-btn__content">
             Jan 1
@@ -1597,7 +1597,7 @@ exports[`VCalendar should render month view 1`] = `
     <div class="v-calendar-weekly__day v-past v-outside">
       <div class="v-calendar-weekly__day-label">
         <button type="button"
-                class="v-btn v-btn--depressed v-btn--rounded theme--light v-size--small transparent"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
         >
           <span class="v-btn__content">
             Feb 1

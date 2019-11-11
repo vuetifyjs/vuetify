@@ -4,7 +4,7 @@
       :headers="headers"
       :items="desserts"
       :page.sync="page"
-      :items-per-page="5"
+      :items-per-page="itemsPerPage"
       hide-default-footer
       class="elevation-1"
       @page-count="pageCount = $event"
@@ -17,7 +17,7 @@
         type="number"
         min="-1"
         max="15"
-        @input="itemsPerPage = $event"
+        @input="itemsPerPage = parseInt($event, 10)"
       ></v-text-field>
     </div>
   </div>
