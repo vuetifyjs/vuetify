@@ -70,6 +70,7 @@ export default VTextField.extend({
         return typeof val === 'object' || Array.isArray(val)
       },
     } as PropValidator<File | File[]>,
+    multiple: Boolean,
   },
 
   computed: {
@@ -115,7 +116,7 @@ export default VTextField.extend({
       return this.isDirty
     },
     isMultiple (): boolean {
-      return this.$attrs.hasOwnProperty('multiple') && this.$attrs.multiple
+      return this.multiple
     },
     text (): string[] {
       if (!this.isDirty) return [this.placeholder]
