@@ -84,6 +84,7 @@ declare module 'vuetify/lib' {
   const VItem: Component
   const VItemGroup: Component
   const VLabel: Component
+  const VLazy: Component
   const VListItemActionText: Component
   const VListItemContent: Component
   const VListItemTitle: Component
@@ -249,6 +250,7 @@ declare module 'vuetify/lib' {
     VItem,
     VItemGroup,
     VLabel,
+    VLazy,
     VListItemActionText,
     VListItemContent,
     VListItemTitle,
