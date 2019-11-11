@@ -18,19 +18,20 @@
   display: flex
   flex: 1 0 auto
   justify-content: flex-end
-  margin-left: 90px
   margin-bottom: -8px
 
-  & > * // Margin between actions
-    margin-left: 8px
-
-    +rtl()
-      margin-left: 0
-      margin-right: 8px
+  +ltr()
+    margin-left: 90px
 
   +rtl()
-    margin-left: 0
     margin-right: 90px
+
+  & > * // Margin between actions
+    +ltr()
+      margin-left: 8px
+
+    +rtl()
+      margin-right: 8px
 
 .v-banner__content
   align-items: center
@@ -43,22 +44,24 @@
 
 .v-banner__icon
   display: inline-flex
-  margin-right: 24px
   flex: 0 0 auto
+
+  +ltr()
+    margin-right: 24px
 
   +rtl()
     margin-left: 24px
-    margin-right: 0
 
 .v-banner__wrapper
   align-items: center
   display: flex
   flex: 1 1 auto
-  padding: 16px 8px 16px 24px
+
+  +ltr()
+    padding: 16px 8px 16px 24px
 
   +rtl()
-    padding-right: 24px
-    padding-left: 8px
+    padding: 16px 24px 16px 8px
 
 // Modifiers
 .v-banner--single-line
@@ -76,10 +79,10 @@
 
 .v-banner--has-icon
   .v-banner__wrapper
-    padding-left: 16px
+    +ltr()
+      padding-left: 16px
 
     +rtl()
-      padding-left: 8px
       padding-right: 16px
 
 .v-banner--is-mobile
@@ -91,11 +94,12 @@
 
   .v-banner__wrapper
     flex-wrap: wrap
-    padding-left: 16px
     padding-top: 16px
 
+    +ltr()
+      padding-left: 16px
+
     +rtl()
-      padding-left: 0
       padding-right: 16px
 
   &.v-banner--has-icon
@@ -105,11 +109,12 @@
   &.v-banner--single-line
     .v-banner__actions
       flex: initial
-      margin-left: 36px
       padding-top: 0
 
+      +ltr()
+        margin-left: 36px
+
       +rtl()
-        margin-left: 0
         margin-right: 36px
 
     .v-banner__wrapper
@@ -117,18 +122,18 @@
       padding-top: 10px
 
   .v-banner__icon
-    margin-right: 16px
+    +ltr()
+      margin-right: 16px
 
     +rtl()
-      margin-right: 0
       margin-left: 16px
 
   .v-banner__content
-    padding-right: 8px
+    +ltr()
+      padding-right: 8px
 
     +rtl()
       padding-left: 8px
-      padding-right: 0
 
     .v-banner__wrapper
       flex-wrap: nowrap
