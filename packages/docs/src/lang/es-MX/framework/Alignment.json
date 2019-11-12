@@ -1,4 +1,4 @@
 {
-  "header": "# Alineación del texto",
-  "headerText": "Las distribuciones pueden cambiar cuando cambian las resoluciones. Las clases de alineación te ayudan a posicionar tu texto basados en el tamaño del área visible (viewport)"
+  "heading": "# Alineación del texto",
+  "headingText": "Las distribuciones pueden cambiar cuando cambian las resoluciones. Las clases de alineación te ayudan a posicionar tu texto basados en el tamaño del área visible (viewport)"
 }

@@ -1,7 +1,16 @@
 {
   "examples": {
+    "usage": {
+      "uninverted": true
+    },
+    "outlined": {
+      "heading": "### Contorno"
+    },
     "closable": {
-      "header": "Fechável"
+      "uninverted": true
+    },
+    "in-selects": {
+      "uninverted": true
     }
   }
 }

@@ -6,14 +6,9 @@
     ></v-responsive>
 
     <v-card-text>
-      <v-container
-        fluid
-        grid-list-lg
-      >
-        <v-layout
-          wrap
-        >
-          <v-flex xs12>
+      <v-container fluid>
+        <v-row>
+          <v-col cols="12">
             <v-slider
               v-model="red"
               :max="255"
@@ -29,9 +24,9 @@
                 ></v-text-field>
               </template>
             </v-slider>
-          </v-flex>
+          </v-col>
 
-          <v-flex xs12>
+          <v-col cols="12">
             <v-slider
               v-model="green"
               :max="255"
@@ -47,9 +42,9 @@
                 ></v-text-field>
               </template>
             </v-slider>
-          </v-flex>
+          </v-col>
 
-          <v-flex xs12>
+          <v-col cols="12">
             <v-slider
               v-model="blue"
               :max="255"
@@ -65,8 +60,8 @@
                 ></v-text-field>
               </template>
             </v-slider>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-card-text>
   </v-card>

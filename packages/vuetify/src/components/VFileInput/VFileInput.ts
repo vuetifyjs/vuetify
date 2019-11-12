@@ -11,7 +11,8 @@ import { VChip } from '../VChip'
 import { PropValidator } from 'vue/types/options'
 
 // Utilities
-import { humanReadableFileSize, wrapInArray } from '../../util/helpers'
+import { deepEqual, humanReadableFileSize, wrapInArray } from '../../util/helpers'
+import { consoleError } from '../../util/console'
 
 export default VTextField.extend({
   name: 'v-file-input',
@@ -38,11 +39,11 @@ export default VTextField.extend({
     placeholder: String,
     prependIcon: {
       type: String,
-      default: '$vuetify.icons.file',
+      default: '$file',
     },
     readonly: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     showSize: {
       type: [Boolean, Number],
@@ -71,10 +72,6 @@ export default VTextField.extend({
     } as PropValidator<File | File[]>,
   },
 
-  data: () => ({
-    internalFileInput: null,
-  }),
-
   computed: {
     classes (): object {
       return {
@@ -83,13 +80,17 @@ export default VTextField.extend({
       }
     },
     counterValue (): string {
-      if (!this.showSize) return this.$vuetify.lang.t(this.counterString, this.lazyValue.length)
+      const fileCount = (this.isMultiple && this.lazyValue)
+        ? this.lazyValue.length
+        : (this.lazyValue instanceof File) ? 1 : 0
+
+      if (!this.showSize) return this.$vuetify.lang.t(this.counterString, fileCount)
 
       const bytes = this.internalArrayValue.reduce((size: number, file: File) => size + file.size, 0)
 
       return this.$vuetify.lang.t(
         this.counterSizeString,
-        this.lazyValue.length,
+        fileCount,
         humanReadableFileSize(bytes, this.base === 1024)
       )
     },
@@ -133,10 +134,30 @@ export default VTextField.extend({
     },
   },
 
+  watch: {
+    readonly: {
+      handler (v) {
+        if (v === true) consoleError('readonly is not supported on <v-file-input>', this)
+      },
+      immediate: true,
+    },
+    value (v) {
+      const value = this.isMultiple ? v : v ? [v] : []
+      if (!deepEqual(value, this.$refs.input.files)) {
+        // When the input value is changed programatically, clear the
+        // internal input's value so that the `onInput` handler
+        // can be triggered again if the user re-selects the exact
+        // same file(s). Ideally, `input.files` should be
+        // manipulated directly but that property is readonly.
+        this.$refs.input.value = ''
+      }
+    },
+  },
+
   methods: {
     clearableCallback () {
       this.internalValue = this.isMultiple ? [] : null
-      this.internalFileInput = null
+      this.$refs.input.value = ''
     },
     genChips () {
       if (!this.isDirty) return []
@@ -155,16 +176,26 @@ export default VTextField.extend({
     genInput () {
       const input = VTextField.options.methods.genInput.call(this)
 
-      input.data!.domProps!.value = this.internalFileInput
+      // We should not be setting value
+      // programmatically on the input
+      // when it is using type="file"
+      delete input.data!.domProps!.value
+
+      // This solves an issue in Safari where
+      // nothing happens when adding a file
+      // do to the input event not firing
+      // https://github.com/vuetifyjs/vuetify/issues/7941
+      delete input.data!.on!.input
+      input.data!.on!.change = this.onInput
 
       return [this.genSelections(), input]
     },
     genPrependSlot () {
+      if (!this.prependIcon) return null
+
       const icon = this.genIcon('prepend', () => {
         this.$refs.input.click()
       })
-
-      icon.data!.attrs = { tabindex: 0 }
 
       return this.genSlot('prepend', 'outer', [icon])
     },
@@ -179,7 +210,7 @@ export default VTextField.extend({
       const children = []
 
       if (this.isDirty && this.$scopedSlots.selection) {
-        this.internalValue.forEach((file: File, index: number) => {
+        this.internalArrayValue.forEach((file: File, index: number) => {
           if (!this.$scopedSlots.selection) return
 
           children.push(
@@ -209,10 +240,19 @@ export default VTextField.extend({
       const files = [...(e.target as HTMLInputElement).files || []]
 
       this.internalValue = this.isMultiple ? files : files[0]
+
+      // Set initialValue here otherwise isFocused
+      // watcher in VTextField will emit a change
+      // event whenever the component is blurred
+      this.initialValue = this.internalValue
+    },
+    onKeyDown (e: KeyboardEvent) {
+      this.$emit('keydown', e)
     },
     truncateText (str: string) {
       if (str.length < Number(this.truncateLength)) return str
-      return `${str.slice(0, 10)}…${str.slice(-10)}`
+      const charsKeepOneSide = Math.floor((Number(this.truncateLength) - 1) / 2)
+      return `${str.slice(0, charsKeepOneSide)}…${str.slice(str.length - charsKeepOneSide)}`
     },
   },
 })

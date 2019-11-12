@@ -1,1 +1,3 @@
-$dialog-border-radius: 4px !default;
+@import '../../styles/styles.sass';
+
+$dialog-border-radius: $border-radius-root !default;

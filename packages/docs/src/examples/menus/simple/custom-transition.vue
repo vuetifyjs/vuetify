@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap justify-space-around>
+  <v-row justify="space-around">
     <v-menu
       bottom
       origin="center center"
@@ -77,7 +77,7 @@
         </v-list-item>
       </v-list>
     </v-menu>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

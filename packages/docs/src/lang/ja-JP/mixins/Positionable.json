@@ -1,1 +1,7 @@
-{}
+{
+  "props": {
+    "absolute": "コンポーネントに **position: absolute** を適用します。",
+    "bottom": "コンポーネントを底辺に揃えます。",
+    "fixed": "コンポーネントに **position: fixed** を適用します。"
+  }
+}

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-layout wrap justify-space-around>
+    <v-row justify="space-around">
       <v-switch v-model="extended" class="mx-2" label="Extended"></v-switch>
       <v-switch v-model="extendedSlot" class="mx-2" label="Extension slot"></v-switch>
       <v-switch v-model="prominent" class="mx-2" label="Prominent"></v-switch>
@@ -8,10 +8,10 @@
       <v-switch v-model="collapse" class="mx-2" label="Collapse"></v-switch>
       <v-switch v-model="flat" class="mx-2" label="Flat"></v-switch>
       <v-switch v-model="bg" class="mx-2" label="Background"></v-switch>
-      <v-flex xs12>
+      <v-col cols="12">
         <v-slider v-model="extensionHeight" label="Extension height" min="0" max="320"></v-slider>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
 
     <v-toolbar
       :extended="extended"

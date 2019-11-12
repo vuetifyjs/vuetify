@@ -11,6 +11,16 @@
       "type": "section",
       "children": [
         {
+          "type": "alert",
+          "lang": "alert1",
+          "value": "info"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "usage",
           "value": "usage"
         }
@@ -47,7 +57,7 @@
         {
           "type": "up-next",
           "value": [
-            "components/grid-lists",
+            "components/grids",
             "components/aspect-ratios",
             "components/parallax"
           ]

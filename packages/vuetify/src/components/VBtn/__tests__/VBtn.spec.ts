@@ -270,4 +270,39 @@ describe('VBtn.ts', () => {
     wrapper.setProps({ value: { foo: 'bar' } })
     expect(wrapper.attributes('value')).toBe('{"foo":"bar"}')
   })
+
+  it('should not add color classes if disabled', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        color: 'primary--text text--darken-2',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      disabled: true,
+    })
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should retain focus when clicked', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        retainFocusOnClick: true,
+      },
+    })
+    const event = new MouseEvent('click', { detail: 1 })
+    const blur = jest.fn()
+
+    wrapper.element.blur = blur
+    wrapper.element.dispatchEvent(event)
+
+    expect(blur).not.toHaveBeenCalled()
+
+    wrapper.setProps({ retainFocusOnClick: false })
+    wrapper.element.dispatchEvent(event)
+
+    expect(blur).toHaveBeenCalled()
+  })
 })

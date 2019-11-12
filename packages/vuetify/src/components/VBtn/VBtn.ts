@@ -54,6 +54,7 @@ export default baseMixins.extend<options>().extend({
     icon: Boolean,
     loading: Boolean,
     outlined: Boolean,
+    retainFocusOnClick: Boolean,
     rounded: Boolean,
     tag: {
       type: String,
@@ -82,7 +83,7 @@ export default baseMixins.extend<options>().extend({
         'v-btn--contained': this.contained,
         'v-btn--depressed': (this.depressed) || this.outlined,
         'v-btn--disabled': this.disabled,
-        'v-btn--fab': this.isRound,
+        'v-btn--fab': this.fab,
         'v-btn--fixed': this.fixed,
         'v-btn--flat': this.isFlat,
         'v-btn--icon': this.icon,
@@ -151,6 +152,7 @@ export default baseMixins.extend<options>().extend({
 
   methods: {
     click (e: MouseEvent): void {
+      !this.retainFocusOnClick && !this.fab && e.detail && this.$el.blur()
       this.$emit('click', e)
 
       this.btnToggle && this.toggle()
@@ -189,6 +191,6 @@ export default baseMixins.extend<options>().extend({
       ? this.value
       : JSON.stringify(this.value)
 
-    return h(tag, setColor(this.color, data), children)
+    return h(tag, this.disabled ? data : setColor(this.color, data), children)
   },
 })

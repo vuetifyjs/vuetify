@@ -8,6 +8,7 @@ import VRating from '../VRating'
 import {
   mount,
   Wrapper,
+  MountOptions,
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../util/mixins'
 
@@ -16,8 +17,15 @@ describe('VRating.ts', () => {
   let mountFunction: (options?: object) => Wrapper<Instance>
 
   beforeEach(() => {
-    mountFunction = (options = {}) => {
+    mountFunction = (options: MountOptions<Instance>) => {
       return mount(VRating, {
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
+        mocks: {
+          $vuetify: {
+            rtl: false,
+          },
+        },
         ...options,
       })
     }
@@ -49,6 +57,7 @@ describe('VRating.ts', () => {
     expect(wrapper.vm.internalValue).toBe(0)
 
     wrapper.setProps({ value: 1 })
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.internalValue).toBe(1)
 
@@ -71,6 +80,7 @@ describe('VRating.ts', () => {
     expect(wrapper.vm.internalValue).toBe(0)
 
     wrapper.setProps({ value: 1, clearable: false })
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.internalValue).toBe(1)
 
@@ -169,6 +179,35 @@ describe('VRating.ts', () => {
     }, 1)).toBe(2)
   })
 
+  it('should check for half event in rtl', () => {
+    const wrapper = mountFunction({
+      mocks: {
+        $vuetify: {
+          rtl: true,
+        },
+      },
+    })
+
+    const event = new MouseEvent('hover')
+    expect(wrapper.vm.genHoverIndex(event, 1)).toBe(1.5)
+
+    wrapper.setProps({ halfIncrements: true })
+
+    expect(wrapper.vm.genHoverIndex({
+      pageX: 0,
+      target: {
+        getBoundingClientRect: () => ({ width: 10, left: 0 }),
+      },
+    }, 1)).toBe(2)
+
+    expect(wrapper.vm.genHoverIndex({
+      pageX: 6,
+      target: {
+        getBoundingClientRect: () => ({ width: 10, left: 0 }),
+      },
+    }, 1)).toBe(1.5)
+  })
+
   it('should render a scoped slot', () => {
     const vm = new Vue()
     const itemSlot = () => [vm.$createElement('span', 'foobar')]
@@ -181,7 +220,10 @@ describe('VRating.ts', () => {
       }),
     })
 
-    const wrapper = mount(component)
+    const wrapper = mount(component, {
+      // https://github.com/vuejs/vue-test-utils/issues/1130
+      sync: false,
+    })
 
     expect(wrapper.html()).toMatchSnapshot()
   })

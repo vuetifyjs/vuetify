@@ -8,7 +8,7 @@ import VDataFooter from './VDataFooter'
 import Themeable from '../../mixins/themeable'
 
 // Helpers
-import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot } from '../../util/helpers'
+import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, camelizeObjectKeys } from '../../util/helpers'
 import { DataProps } from '../VData/VData'
 import { PropValidator } from 'vue/types/options'
 import { breaking, removed } from '../../util/console'
@@ -62,6 +62,9 @@ export default Themeable.extend({
     },
     someItems (): boolean {
       return this.internalCurrentItems.some((i: any) => this.isSelected(i))
+    },
+    sanitizedFooterProps (): Record<string, any> {
+      return camelizeObjectKeys(this.footerProps)
     },
   },
 
@@ -139,6 +142,7 @@ export default Themeable.extend({
       })
 
       this.selection = selection
+      this.$emit('toggle-select-all', { value })
     },
     isSelected (item: any): boolean {
       return !!this.selection[getObjectValueByPath(item, this.itemKey)] || false
@@ -180,14 +184,14 @@ export default Themeable.extend({
     genEmptyWrapper (content: VNodeChildren) {
       return this.$createElement('div', content)
     },
-    genEmpty (itemsLength: number) {
-      if (itemsLength <= 0 && this.loading) {
+    genEmpty (originalItemsLength: number, filteredItemsLength: number) {
+      if (originalItemsLength === 0 && this.loading) {
         const loading = this.$slots['loading'] || this.$vuetify.lang.t(this.loadingText)
         return this.genEmptyWrapper(loading)
-      } else if (itemsLength <= 0 && !this.items.length) {
+      } else if (originalItemsLength === 0) {
         const noData = this.$slots['no-data'] || this.$vuetify.lang.t(this.noDataText)
         return this.genEmptyWrapper(noData)
-      } else if (itemsLength <= 0 && this.search) {
+      } else if (filteredItemsLength === 0) {
         const noResults = this.$slots['no-results'] || this.$vuetify.lang.t(this.noResultsText)
         return this.genEmptyWrapper(noResults)
       }
@@ -195,7 +199,7 @@ export default Themeable.extend({
       return null
     },
     genItems (props: DataProps) {
-      const empty = this.genEmpty(props.pagination.itemsLength)
+      const empty = this.genEmpty(props.originalItemsLength, props.pagination.itemsLength)
       if (empty) return [empty]
 
       if (this.$scopedSlots.default) {
@@ -219,7 +223,7 @@ export default Themeable.extend({
 
       const data = {
         props: {
-          ...this.footerProps,
+          ...this.sanitizedFooterProps,
           options: props.options,
           pagination: props.pagination,
         },

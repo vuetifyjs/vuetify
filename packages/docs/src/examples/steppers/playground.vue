@@ -1,13 +1,13 @@
 <template>
   <div>
-    <v-layout wrap justify-space-around>
-      <v-flex xs12>
+    <v-row justify="space-around">
+      <v-col cols="12">
         <v-slider v-model="steps" label="Steps" min="2" max="20"></v-slider>
-      </v-flex>
+      </v-col>
       <v-switch v-model="vertical" label="Vertical"></v-switch>
       <v-switch v-model="altLabels" label="altLabels"></v-switch>
       <v-switch v-model="editable" label="Editable"></v-switch>
-    </v-layout>
+    </v-row>
     <v-stepper
       v-model="e1"
       :vertical="vertical"

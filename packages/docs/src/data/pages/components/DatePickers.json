@@ -61,6 +61,7 @@
             "intermediate/date-formatting",
             "intermediate/date-formatting-moment-datefns",
             "intermediate/date-multiple",
+            "intermediate/date-range",
             "intermediate/date-birthday",
             "intermediate/date-events",
             "intermediate/month-dialog-and-menu"

@@ -6,7 +6,7 @@
     >
       <template v-slot:badge>
         <v-icon dark>
-          close
+          mdi-close
         </v-icon>
       </template>
       <span>Badge w/ Bottom Prop</span>

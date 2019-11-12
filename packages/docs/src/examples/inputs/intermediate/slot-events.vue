@@ -1,11 +1,10 @@
 <template>
   <v-container
     id="input-usage"
-    grid-list-xl
     fluid
   >
-    <v-layout wrap>
-      <v-flex xs12>
+    <v-row>
+      <v-col cols="12">
         <v-input
           :messages="['Messages']"
           append-icon="close"
@@ -15,8 +14,8 @@
         >
           Default Slot
         </v-input>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

@@ -13,6 +13,7 @@ export interface TableHeader {
   value: string
   align?: 'start' | 'center' | 'end'
   sortable?: boolean
+  filterable?: boolean
   divider?: boolean
   class?: string | string[]
   width?: string | number
@@ -52,7 +53,7 @@ export default mixins<options>().extend({
     },
     sortIcon: {
       type: String,
-      default: '$vuetify.icons.sort',
+      default: '$sort',
     },
     everyItem: Boolean,
     someItems: Boolean,
@@ -84,6 +85,7 @@ export default mixins<options>().extend({
     },
     genSortIcon () {
       return this.$createElement(VIcon, {
+        staticClass: 'v-data-table-header__icon',
         props: {
           size: 18,
         },

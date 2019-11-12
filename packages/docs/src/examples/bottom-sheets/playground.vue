@@ -1,10 +1,10 @@
 <template>
   <div class="text-center">
-    <v-layout wrap justify-space-around>
+    <v-row justify="space-around">
       <v-switch v-model="sheet" label="Model"></v-switch>
       <v-switch v-model="inset" label="Inset"></v-switch>
       <v-switch v-model="hideOverlay" label="Hide overlay"></v-switch>
-    </v-layout>
+    </v-row>
     <v-bottom-sheet v-model="sheet" :inset="inset" :hide-overlay="hideOverlay">
       <template v-slot:activator="{ on }">
         <v-btn

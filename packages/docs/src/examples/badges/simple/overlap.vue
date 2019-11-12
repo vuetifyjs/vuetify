@@ -7,7 +7,7 @@
     >
       <template v-slot:badge>
         <v-icon dark>
-          done
+          mdi-check
         </v-icon>
       </template>
       <v-icon
@@ -24,7 +24,7 @@
     >
       <template v-slot:badge>
         <v-icon dark>
-          notifications
+          mdi-bell
         </v-icon>
       </template>
       <v-icon

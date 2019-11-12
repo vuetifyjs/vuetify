@@ -36,11 +36,11 @@ export default BaseItemGroup.extend({
     },
     nextIcon: {
       type: [Boolean, String],
-      default: '$vuetify.icons.next',
+      default: '$next',
     },
     prevIcon: {
       type: [Boolean, String],
-      default: '$vuetify.icons.prev',
+      default: '$prev',
     },
     reverse: {
       type: Boolean,
@@ -59,14 +59,18 @@ export default BaseItemGroup.extend({
   data () {
     return {
       changedByDelimiters: false,
-      internalHeight: undefined as undefined | string,
-      isActive: false,
+      internalHeight: undefined as undefined | string, // This can be fixed by child class.
+      transitionHeight: undefined as undefined | string, // Intermediate height during transition.
+      transitionCount: 0, // Number of windows in transition state.
       isBooted: false,
       isReverse: false,
     }
   },
 
   computed: {
+    isActive (): boolean {
+      return this.transitionCount > 0
+    },
     classes (): object {
       return {
         ...BaseItemGroup.options.computed.classes.call(this),
@@ -126,7 +130,7 @@ export default BaseItemGroup.extend({
           'v-window__container--is-active': this.isActive,
         },
         style: {
-          height: this.internalHeight,
+          height: this.internalHeight || this.transitionHeight,
         },
       }, children)
     },
@@ -139,9 +143,7 @@ export default BaseItemGroup.extend({
         staticClass: `v-window__${direction}`,
       }, [
         this.$createElement(VBtn, {
-          props: {
-            icon: true,
-          },
+          props: { icon: true },
           attrs: {
             'aria-label': this.$vuetify.lang.t(`$vuetify.carousel.${direction}`),
           },
@@ -153,7 +155,7 @@ export default BaseItemGroup.extend({
           },
         }, [
           this.$createElement(VIcon, {
-            props: { size: 40 },
+            props: { large: true },
           }, icon),
         ]),
       ])

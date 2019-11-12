@@ -1,7 +1,7 @@
 <template>
-  <v-container id="dropdown-example" grid-list-xl>
-    <v-layout wrap>
-      <v-flex xs12 sm4>
+  <v-container id="dropdown-example">
+    <v-row>
+      <v-col cols="12" sm="4">
         <p>Overflow</p>
 
         <v-overflow-btn
@@ -10,9 +10,9 @@
           label="Overflow Btn"
           target="#dropdown-example"
         ></v-overflow-btn>
-      </v-flex>
+      </v-col>
 
-      <v-flex xs12 sm4>
+      <v-col cols="12" sm="4">
         <p>Segmented</p>
 
         <v-overflow-btn
@@ -22,9 +22,9 @@
           segmented
           target="#dropdown-example"
         ></v-overflow-btn>
-      </v-flex>
+      </v-col>
 
-      <v-flex xs12 sm4>
+      <v-col cols="12" sm="4">
         <p>Editable</p>
 
         <v-overflow-btn
@@ -34,8 +34,8 @@
           editable
           item-value="text"
         ></v-overflow-btn>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

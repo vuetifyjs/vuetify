@@ -9,7 +9,7 @@ import VColorPickerEdit, { Mode, modes } from './VColorPickerEdit'
 import VColorPickerSwatches from './VColorPickerSwatches'
 
 // Helpers
-import { VColorPickerColor, parseColor, fromRGBA, extractColor } from './util'
+import { VColorPickerColor, parseColor, fromRGBA, extractColor, hasAlpha } from './util'
 import mixins from '../../util/mixins'
 import Themeable from '../../mixins/themeable'
 
@@ -58,6 +58,12 @@ export default mixins(Themeable).extend({
     internalValue: fromRGBA({ r: 255, g: 0, b: 0, a: 1 }),
   }),
 
+  computed: {
+    hideAlpha (): boolean {
+      return this.value && !hasAlpha(this.value)
+    },
+  },
+
   watch: {
     value: {
       handler (color: any) {
@@ -104,6 +110,7 @@ export default mixins(Themeable).extend({
         props: {
           color: this.internalValue,
           disabled: this.disabled,
+          hideAlpha: this.hideAlpha,
           hideModeSwitch: this.hideModeSwitch,
           mode: this.mode,
         },
@@ -118,6 +125,7 @@ export default mixins(Themeable).extend({
         props: {
           color: this.internalValue,
           disabled: this.disabled,
+          hideAlpha: this.hideAlpha,
         },
         on: {
           'update:color': this.updateColor,

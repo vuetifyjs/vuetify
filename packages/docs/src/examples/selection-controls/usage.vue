@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid px-0>
+  <v-container class="px-0" fluid>
     <v-checkbox
       v-model="checkbox"
       :label="`Checkbox 1: ${checkbox.toString()}`"

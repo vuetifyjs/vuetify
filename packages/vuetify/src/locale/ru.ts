@@ -1,7 +1,6 @@
 export default {
   close: 'Закрыть',
   dataIterator: {
-    pageText: '{0}-{1} из {2}',
     noResultsText: 'Не найдено подходящих записей',
     loadingText: 'Запись загружается...',
   },
@@ -12,6 +11,7 @@ export default {
       sortAscending: ': Упорядочено во восходящей. Активируйте для упорядочивания по ниcходящей.',
       sortNone: ': Не упорядочено. Активируйте для упорядочивания по восходящей.',
     },
+    sortBy: 'Сортировать по',
   },
   dataFooter: {
     itemsPerPageText: 'Записей на странице:',
@@ -20,6 +20,7 @@ export default {
     prevPage: 'Предыдущая страница',
     firstPage: 'Первая страница',
     lastPage: 'Последняя страница',
+    pageText: '{0}-{1} из {2}',
   },
   datePicker: {
     itemsSelected: '{0} выбран',
@@ -28,6 +29,9 @@ export default {
   carousel: {
     prev: 'Предыдущий визуальный',
     next: 'Следующий визуальный',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: 'Еще {0}',
@@ -35,5 +39,9 @@ export default {
   fileInput: {
     counter: 'Файлов: {0}',
     counterSize: 'Файлов: {0} (всего {1})',
+  },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
   },
 }

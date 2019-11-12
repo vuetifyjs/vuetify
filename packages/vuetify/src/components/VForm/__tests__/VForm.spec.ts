@@ -207,4 +207,41 @@ describe('VForm.ts', () => {
     expect(spy).toHaveBeenCalled()
     expect(resetErrorBag).toHaveBeenCalled()
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/7999
+  it('should validate all inputs', async () => {
+    const validate = jest.fn(() => false)
+    const wrapper = mountFunction({
+      slots: {
+        default: [
+          {
+            render (h) {
+              return h(VTextField, {
+                props: {
+                  rules: [v => v === 1 || 'Error'],
+                },
+              })
+            },
+          },
+          {
+            render (h) {
+              return h(VTextField, {
+                props: {
+                  rules: [v => v === 1 || 'Error'],
+                },
+              })
+            },
+          },
+        ],
+      },
+    })
+
+    wrapper.vm.inputs.forEach(input => input.validate = validate)
+
+    wrapper.vm.validate()
+
+    await wrapper.vm.$nextTick()
+
+    expect(validate).toHaveBeenCalledTimes(2)
+  })
 })

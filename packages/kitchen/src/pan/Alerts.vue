@@ -193,8 +193,8 @@
           This is an error alert.
         </v-alert>
       </core-section>
-      <!-- Dense outline -->
-      <core-title>Dense outline</core-title>
+      <!-- Dense outlined -->
+      <core-title>Dense outlined</core-title>
       <core-section>
         <v-alert
           type="success"
@@ -298,8 +298,8 @@
           This is an error alert.
         </v-alert>
       </core-section>
-      <!-- Prominent outline -->
-      <core-title>Prominent outline</core-title>
+      <!-- Prominent outlined -->
+      <core-title>Prominent outlined</core-title>
       <core-section>
         <v-alert
           type="success"
@@ -545,8 +545,8 @@
         </div>
       </core-section>
 
-      <!-- Closable with outline -->
-      <core-title>Closable with outline</core-title>
+      <!-- Closable with outlined -->
+      <core-title>Closable with outlined</core-title>
       <core-section>
         <v-alert
           v-model="alertOutline"
@@ -554,7 +554,7 @@
           color="success"
           outlined
         >
-          This is a closable success outline alert.
+          This is a closable success outlined alert.
         </v-alert>
 
         <v-alert
@@ -563,7 +563,7 @@
           color="info"
           outlined
         >
-          This is a closable info outline alert.
+          This is a closable info outlined alert.
         </v-alert>
 
         <v-alert
@@ -572,7 +572,7 @@
           color="warning"
           outlined
         >
-          This is a closable warning outline alert.
+          This is a closable warning outlined alert.
         </v-alert>
 
         <v-alert
@@ -581,7 +581,7 @@
           color="error"
           outlined
         >
-          This is a closable error outline alert.
+          This is a closable error outlined alert.
         </v-alert>
         <div class="text-center">
           <v-btn
@@ -595,8 +595,8 @@
         </div>
       </core-section>
 
-      <!-- Custom icons with outline -->
-      <core-title>Custom icons with outline</core-title>
+      <!-- Custom icons with outlined -->
+      <core-title>Custom icons with outlined</core-title>
       <core-section>
         <v-alert
           :value="true"

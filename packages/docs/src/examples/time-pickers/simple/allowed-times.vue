@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap justify-space-around>
+  <v-row justify="space-around">
     <v-time-picker
       v-model="time"
       :allowed-hours="allowedHours"
@@ -16,7 +16,7 @@
       class="mt-4"
       format="24hr"
     ></v-time-picker>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

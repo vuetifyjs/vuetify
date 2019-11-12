@@ -4,8 +4,14 @@ import './calendar-with-events.sass'
 // Types
 import { VNode, VNodeData } from 'vue'
 
+// Directives
+import ripple from '../../../directives/ripple'
+
 // Mixins
 import CalendarBase from './calendar-base'
+
+// Helpers
+import { escapeHTML } from '../../../util/helpers'
 
 // Util
 import props from '../util/props'
@@ -66,6 +72,10 @@ interface VDayBodySlotScope extends VDaySlotScope {
 export default CalendarBase.extend({
   name: 'calendar-with-events',
 
+  directives: {
+    ripple,
+  },
+
   props: props.events,
 
   computed: {
@@ -89,7 +99,7 @@ export default CalendarBase.extend({
       return typeof this.eventName === 'function'
         ? this.eventName as VNameFunction
         : (event, timedEvent) => {
-          const name = event.input[this.eventName as string] as string
+          const name = escapeHTML(event.input[this.eventName as string] as string)
           if (event.start.hasTime) {
             if (timedEvent) {
               const showStart = event.start.hour < 12 && event.end.hour >= 12
@@ -138,7 +148,8 @@ export default CalendarBase.extend({
         for (let i = 0; i <= last; i++) {
           if (!hide) {
             const eventBounds = events[i].getBoundingClientRect()
-            hide = eventBounds.bottom + eventHeight > parentBounds.bottom && i !== last
+            hide = (eventBounds.bottom + eventHeight > parentBounds.bottom && i !== last) ||
+                   events[i].style.display === 'none'
           }
           if (hide) {
             const id = events[i].getAttribute('data-event') as string
@@ -440,7 +451,7 @@ export default CalendarBase.extend({
             visual.offset = getOffset(visual, visuals)
           })
         }
-        visuals.sort((a, b) => (a.column - b.column) || (a.offset - b.offset))
+        visuals.sort((a, b) => (a.offset - b.offset) || (a.column - b.column))
         return visuals
       }
 

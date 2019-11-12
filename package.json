@@ -37,7 +37,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^5.2.3",
-    "eslint-plugin-vuetify": "^1.0.0-beta.1",
+    "eslint-plugin-vuetify": "^1.0.0-beta.4",
     "husky": "^3.0.1",
     "inquirer": "^6.5.0",
     "jest": "^24.8.0",
@@ -55,7 +55,7 @@
     "vue": "^2.6.10",
     "vue-loader": "^15.7.1",
     "vue-template-compiler": "^2.6.10",
-    "webpack": "^4.36.1",
+    "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6",
     "webpack-merge": "^4.2.1"
   }

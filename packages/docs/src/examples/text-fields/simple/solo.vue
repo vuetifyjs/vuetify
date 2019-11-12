@@ -1,25 +1,25 @@
 <template>
   <v-form>
-    <v-container grid-list-xl>
-      <v-layout wrap>
+    <v-container>
+      <v-row>
 
-        <v-flex xs12 sm6>
+        <v-col cols="12" sm="6">
           <v-text-field
             v-model="first"
             label="First Name"
             solo
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6>
+        <v-col cols="12" sm="6">
           <v-text-field
             v-model="last"
             label="Last Name"
             solo-inverted
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-      </v-layout>
+      </v-row>
     </v-container>
   </v-form>
 </template>

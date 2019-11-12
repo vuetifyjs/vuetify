@@ -1,13 +1,12 @@
 <template>
   <v-container
+    class="fill-height"
     fluid
-    grid-list-lg
-    fill-height
     style="min-height: 434px"
   >
     <v-fade-transition mode="out-in">
-      <v-layout v-if="show" key="0" wrap>
-        <v-flex xs6>
+      <v-row v-if="show" key="0">
+        <v-col cols="6">
           <v-card>
             <v-img
               src="https://picsum.photos/350/165?random"
@@ -16,9 +15,9 @@
             ></v-img>
             <v-card-title class="title">height</v-card-title>
           </v-card>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs6>
+        <v-col cols="6">
           <v-card>
             <v-img
               src="https://picsum.photos/350/165?random"
@@ -28,9 +27,9 @@
             ></v-img>
             <v-card-title class="title">height with contain</v-card-title>
           </v-card>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs6>
+        <v-col cols="6">
           <v-card>
             <v-img
               src="https://picsum.photos/350/165?random"
@@ -39,9 +38,9 @@
             ></v-img>
             <v-card-title class="title">max-height</v-card-title>
           </v-card>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs6>
+        <v-col cols="6">
           <v-card>
             <v-img
               src="https://picsum.photos/350/165?random"
@@ -51,12 +50,12 @@
             ></v-img>
             <v-card-title class="title">max-height with contain</v-card-title>
           </v-card>
-        </v-flex>
-      </v-layout>
+        </v-col>
+      </v-row>
 
-      <v-layout v-else key="1" justify-center>
+      <v-row v-else key="1" justify="center">
         <v-btn text @click="show = true">Load images</v-btn>
-      </v-layout>
+      </v-row>
     </v-fade-transition>
   </v-container>
 </template>

@@ -1,6 +1,6 @@
 <template>
-  <v-layout justify-space-between wrap>
-    <v-flex xs12 sm6 class="my-4">
+  <v-row justify="space-between">
+    <v-col cols="12" sm="6" class="my-4">
       <div class="subheading">Defined by array</div>
       <v-date-picker
         v-model="date1"
@@ -8,16 +8,16 @@
         event-color="green lighten-1"
         type="month"
       ></v-date-picker>
-    </v-flex>
-    <v-flex xs12 sm6 class="my-4">
+    </v-col>
+    <v-col cols="12" sm="6" class="my-4">
       <div class="subheading">Defined by function</div>
       <v-date-picker
         v-model="date2"
         :events="functionEvents"
         type="month"
       ></v-date-picker>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

@@ -1,12 +1,12 @@
 <template>
   <div>
-    <v-layout wrap justify-space-around>
+    <v-row justify="space-around">
       <v-switch v-model="chips" label="Chips"></v-switch>
       <v-switch v-model="multiple" label="Multiple"></v-switch>
       <v-switch v-model="hideSelected" label="Hide selected"></v-switch>
       <v-switch v-model="noData" label="No data slot"></v-switch>
       <v-switch v-model="clearable" label="Clearable"></v-switch>
-    </v-layout>
+    </v-row>
 
     <v-combobox
       v-model="model"

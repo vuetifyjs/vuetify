@@ -8,7 +8,7 @@ VSlider.events.push(
   {
     name: 'focus',
     value: 'boolean',
-  },
+  }
 )
 
 module.exports = {

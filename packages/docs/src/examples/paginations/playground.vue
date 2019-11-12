@@ -1,33 +1,33 @@
 <template>
   <div class="text-center">
-    <v-layout column justify-center align-center>
-      <v-flex xs12>
+    <v-row justify="center" align="center">
+      <v-col cols="12">
         <v-radio-group row wrap>
           <v-switch v-model="circle" label="Toggle circle" class="mx-4"></v-switch>
           <v-switch v-model="disabled" label="Toggle disabled" class="mx-4"></v-switch>
         </v-radio-group>
-      </v-flex>
+      </v-col>
 
-      <v-layout wrap>
-        <v-flex xs12 md3>
+      <v-row>
+        <v-col cols="12" md="3">
           <v-select
             v-model="prevIcon"
             class="mx-4"
             :items="prevIcons"
             label="prev-icon"
           ></v-select>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 md3>
+        <v-col cols="12" md="3">
           <v-select
             v-model="nextIcon"
             class="mx-4"
             :items="nextIcons"
             label="next-icon"
           ></v-select>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 md3>
+        <v-col cols="12" md="3">
           <v-text-field
             v-model="length"
             label="Pagination length"
@@ -38,9 +38,9 @@
             type="number"
             @keydown="false"
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 md3>
+        <v-col cols="12" md="3">
           <v-text-field
             v-model="totalVisible"
             label="Total visible"
@@ -51,9 +51,9 @@
             type="number"
             @keydown="false"
           ></v-text-field>
-        </v-flex>
-      </v-layout>
-    </v-layout>
+        </v-col>
+      </v-row>
+    </v-row>
 
     <v-pagination
       v-model="page"
@@ -76,9 +76,9 @@
         disabled: false,
         length: 10,
         nextIcon: 'navigate_next',
-        nextIcons: ['navigate_next', 'arrow_forward', 'arrow_right', 'chevron_right'],
+        nextIcons: ['mdi-chevron-right', 'mdi-arrow-right', 'mdi-menu-right'],
         prevIcon: 'navigate_before',
-        prevIcons: ['navigate_before', 'arrow_back', 'arrow_left', 'chevron_left'],
+        prevIcons: ['mdi-chevron-left', 'mdi-arrow-left', 'mdi-menu-left'],
         page: 1,
         totalVisible: 10,
       }

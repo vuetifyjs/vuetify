@@ -171,11 +171,10 @@ export default mixins(
     },
     isFocused (val) {
       // Should not check validation
-      // if disabled or readonly
+      // if disabled
       if (
         !val &&
-        !this.disabled &&
-        !this.readonly
+        !this.disabled
       ) {
         this.hasFocused = true
         this.validateOnBlur && this.validate()

@@ -1,1 +1,24 @@
-{}
+{
+  "examples": {
+    "absolute": {
+      "desc": "Les superpositions `absolute` sont positionnées de façon absolue et contenues dans leur élément parent."
+    },
+    "opacity": {
+      "desc": "`opacity` vous permet de personnaliser la transparence des composants `v-overlay`."
+    },
+    "z-index": {
+      "desc": "`z-index` vous permet de changer facilement l'ordre de pile du composant `v-overlay`."
+    },
+    "loader": {
+      "heading": "### Chargeur"
+    },
+    "advanced": {
+      "heading": "### Avancé"
+    }
+  },
+  "props": {
+    "absolute": "Mixins.Positionable.props.absolute",
+    "opacity": "Définit l'opacité de la superposition",
+    "zIndex": "Mixins.Menuable.props.zIndex"
+  }
+}

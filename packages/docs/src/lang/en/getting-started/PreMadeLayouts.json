@@ -1,5 +1,5 @@
 {
-  "header": "# Pre-made layouts",
-  "headerText": "The layout system is the heart of every application. Below are a just a few examples of the numerous possiblities you have when customizing the look and feel of your application.",
+  "heading": "# Pre-made layouts",
+  "headingText": "The layout system is the heart of every application. Below are a just a few examples of the numerous possiblities you have when customizing the look and feel of your application.",
   "alert": "If you are looking for additional information on how these templates are structured, navigate to the [Application page](/components/application)."
 }

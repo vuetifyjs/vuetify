@@ -9,6 +9,14 @@
         {
           "type": "usage",
           "value": "usage"
+        },
+        {
+          "type": "heading",
+          "lang": "subComponentsHeader"
+        },
+        {
+          "type": "text",
+          "lang": "subComponentsList"
         }
       ]
     },

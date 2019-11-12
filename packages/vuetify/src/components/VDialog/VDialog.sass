@@ -1,4 +1,3 @@
-@import '../../styles/styles.sass'
 @import './_variables.scss'
 
 // Block
@@ -15,6 +14,19 @@
   &:not(.v-dialog--fullscreen)
     max-height: 90%
 
+  > *
+    width: 100%
+
+  > .v-card
+    > .v-card__title
+      font-size: map-deep-get($headings, 'h6', 'size')
+      font-weight: map-deep-get($headings, 'h6', 'weight')
+      letter-spacing: map-deep-get($headings, 'h6', 'letter-spacing')
+      padding: 16px 24px 10px
+
+    > .v-card__text
+      padding: 0 24px 20px
+
 // Element
 .v-dialog__content
   align-items: center
@@ -25,20 +37,16 @@
   pointer-events: none
   position: fixed
   top: 0
-  transition: .2s map-get($transition, 'fast-in-fast-out')
+  transition: .2s map-get($transition, 'fast-in-fast-out'), z-index 1ms
   width: 100%
   z-index: 6
   outline: none
 
-.v-dialog__activator
-  cursor: pointer
-
-  *
-    cursor: pointer
-
 .v-dialog__container
-  display: inline-block
-  vertical-align: middle
+  display: none
+
+  &--attached
+    display: inline
 
 // Modifier
 .v-dialog--animated

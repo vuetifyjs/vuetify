@@ -1,7 +1,7 @@
 <template>
-  <v-layout wrap justify-space-around>
-    <v-flex xs12>
-      <v-layout wrap justify-space-around>
+  <v-row justify="space-around">
+    <v-col cols="12">
+      <v-row justify="space-around">
         <v-switch v-model="landscape" class="ma-4" label="Landscape"></v-switch>
         <v-switch v-model="reactive" class="ma-4" label="Reactive"></v-switch>
         <v-switch v-model="fullWidth" class="ma-4" label="Full width"></v-switch>
@@ -11,8 +11,8 @@
         <v-switch v-model="readonly" class="ma-4" label="Readonly"></v-switch>
         <v-switch v-model="disabled" class="ma-4" label="Disabled"></v-switch>
         <v-switch v-model="enableEvents" class="ma-4" label="Events"></v-switch>
-      </v-layout>
-    </v-flex>
+      </v-row>
+    </v-col>
 
     <v-date-picker
       v-model="picker"
@@ -26,7 +26,7 @@
       :disabled="disabled"
       :events="enableEvents ? functionEvents : null"
     ></v-date-picker>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

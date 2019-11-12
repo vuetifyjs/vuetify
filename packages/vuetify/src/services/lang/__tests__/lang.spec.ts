@@ -47,4 +47,12 @@ describe('$vuetify.lang', () => {
 
     expect(translator).toHaveBeenCalledWith('$vuetify.foobar', 'fizzbuzz')
   })
+
+  it('should replace params on a non-prefixed key', () => {
+    lang = new Lang({ t: str => str })
+
+    const translated = lang.t('{2} bar {0} foo {1}', 'hello', 'world', '!')
+
+    expect(translated).toBe('! bar hello foo world')
+  })
 })

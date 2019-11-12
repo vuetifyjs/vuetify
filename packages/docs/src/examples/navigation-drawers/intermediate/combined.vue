@@ -8,7 +8,7 @@
       permanent
       width="100%"
     >
-      <v-layout fill-height>
+      <v-row class="fill-height">
         <v-navigation-drawer
           dark
           mini-variant
@@ -53,7 +53,7 @@
             <v-list-item-title v-text="link"></v-list-item-title>
           </v-list-item>
         </v-list>
-      </v-layout>
+      </v-row>
     </v-navigation-drawer>
   </v-card>
 </template>

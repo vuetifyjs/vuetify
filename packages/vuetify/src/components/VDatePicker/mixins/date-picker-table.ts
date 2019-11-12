@@ -43,13 +43,14 @@ export default mixins(
     } as any as PropValidator<DateEventColors>,
     min: String,
     max: String,
+    range: Boolean,
     readonly: Boolean,
     scrollable: Boolean,
     tableDate: {
       type: String,
       required: true,
     },
-    value: [String, Array],
+    value: [String, Array] as PropValidator<string | string[]>,
   },
 
   data: () => ({
@@ -100,7 +101,7 @@ export default mixins(
     },
     genButton (value: string, isFloating: boolean, mouseEventType: string, formatter: DatePickerFormatter) {
       const isAllowed = isDateAllowed(value, this.min, this.max, this.allowedDates)
-      const isSelected = value === this.value || (Array.isArray(this.value) && this.value.indexOf(value) !== -1)
+      const isSelected = this.isSelected(value)
       const isCurrent = value === this.current
       const setColor = isSelected ? this.setBackgroundColor : this.setTextColor
       const color = (isSelected || isCurrent) && (this.color || 'accent')
@@ -191,6 +192,18 @@ export default mixins(
         } : undefined,
         directives: [touchDirective],
       }, [transition])
+    },
+    isSelected (value: string): boolean {
+      if (Array.isArray(this.value)) {
+        if (this.range && this.value.length === 2) {
+          const [from, to] = [...this.value].sort()
+          return from <= value && value <= to
+        } else {
+          return this.value.indexOf(value) !== -1
+        }
+      }
+
+      return value === this.value
     },
   },
 })

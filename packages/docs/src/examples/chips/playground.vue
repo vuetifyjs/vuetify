@@ -13,7 +13,7 @@
         :input-value="value"
       >
         <v-avatar
-          v-if="avatar !== ''"
+          v-if="avatar != ''"
           :color="avatar === 'letter' ? 'secondary' : ''"
           left
         >

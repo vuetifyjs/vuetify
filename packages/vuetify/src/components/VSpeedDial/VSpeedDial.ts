@@ -46,6 +46,7 @@ export default mixins(Positionable, Toggleable, Transitionable).extend({
         'v-speed-dial--absolute': this.absolute,
         'v-speed-dial--fixed': this.fixed,
         [`v-speed-dial--direction-${this.direction}`]: true,
+        'v-speed-dial--is-active': this.isActive,
       }
     },
   },
@@ -71,7 +72,7 @@ export default mixins(Positionable, Toggleable, Transitionable).extend({
     if (this.isActive) {
       let btnCount = 0
       children = (this.$slots.default || []).map((b, i) => {
-        if (b.tag && typeof b.componentOptions !== 'undefined' && b.componentOptions.Ctor.options.name === 'v-btn') {
+        if (b.tag && typeof b.componentOptions !== 'undefined' && (b.componentOptions.Ctor.options.name === 'v-btn' || b.componentOptions.Ctor.options.name === 'v-tooltip')) {
           btnCount++
           return h('div', {
             style: {
