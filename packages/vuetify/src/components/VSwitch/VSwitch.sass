@@ -49,6 +49,25 @@
   .v-input--selection-controls__ripple
     top: $switch-ripple-top
 
+  &.v-input--dense
+    .v-input--switch__thumb
+      width: $switch-thumb-dense-width
+      height: $switch-thumb-dense-height
+
+    .v-input--switch__track
+      height: $switch-track-dense-height
+      width: $switch-track-dense-width
+
+    &.v-input--switch--inset
+      .v-input--switch__track
+        height: 22px
+        width: 44px
+        top: $switch-track-dense-top
+        left: -3px
+
+    .v-input--selection-controls__ripple
+      top: $switch-ripple-dense-top
+
   &.v-input--is-dirty
     &.v-input--is-disabled
       opacity: $switch-disabled-opacity
@@ -56,6 +75,10 @@
   +ltr()
     .v-input--selection-controls__ripple
       left: $switch-ripple-x
+
+    &.v-input--dense
+      .v-input--selection-controls__ripple
+        left: $switch-ripple-dense-x
 
     &.v-input--is-dirty
       .v-input--selection-controls__ripple,
@@ -65,6 +88,10 @@
   +rtl()
     .v-input--selection-controls__ripple
       right: $switch-ripple-x
+
+    &.v-input--dense
+      .v-input--selection-controls__ripple
+        right: $switch-ripple-dense-x
 
     &.v-input--is-dirty
       .v-input--selection-controls__ripple,

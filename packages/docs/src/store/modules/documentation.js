@@ -1,121 +1,133 @@
-import deprecatedIn from '@/data/deprecated'
-import newIn from '@/data/new'
-
 // Utilities
-import { set } from '@/util/vuex'
 import camelCase from 'lodash/camelCase'
 import upperFirst from 'lodash/upperFirst'
+import { make } from 'vuex-pathify'
+
+function addHeadingAndAd (children) {
+  children.splice(0, 0, {
+    type: 'section',
+    children: [
+      { type: 'heading', lang: 'heading' },
+      { type: 'base-text', lang: 'headingText' },
+      { type: 'ad-entry' },
+    ],
+  })
+}
+
+function getHeadings (children, toc = []) {
+  for (const child of children) {
+    if (child.children) {
+      getHeadings(child.children, toc)
+
+      continue
+    }
+
+    if (
+      ![
+        'accessibility',
+        'api',
+        'examples',
+        'heading',
+        'up-next',
+        'usage-new',
+      ].includes(child.type)
+    ) continue
+
+    if (child.type === 'heading') {
+      toc.push(child.lang)
+    } else {
+      toc.push(`Generic.Pages.${camelCase(child.type)}`)
+    }
+  }
+
+  return toc
+}
+
+function getNamespace (namespace) {
+  switch (namespace) {
+    case 'introduction': return 'introduction/why-vuetify'
+    case 'getting-started': return 'getting-started/quick-start'
+    case 'styles': return 'styles/colors'
+    case 'components': return 'components/api-explorer'
+    case 'directives': return 'components/api-explorer'
+    case 'professional-support': return 'professional-support/consulting'
+    default: return ''
+  }
+}
+
+function addFooterAd (children) {
+  if (!children.length) return
+
+  children[children.length - 1].children.push({ type: 'ad-exit' })
+}
+
+const state = {
+  deprecatedIn: require('@/data/deprecated.json'),
+  links: require('@/data/drawerItems.json'),
+  newIn: require('@/data/new.json'),
+  namespace: null,
+  page: null,
+  structure: null,
+  toc: [],
+  templates: require('@/data/templates.json'),
+}
+
+const mutations = make.mutations(state)
+const actions = {}
+const getters = {
+  breadcrumbs (state, getters, rootState) {
+    if (!rootState.route) return []
+
+    const namespace = rootState.route.params.namespace
+    const lang = rootState.route.params.lang
+    const path = rootState.route.path
+    const text = getNamespace(namespace)
+
+    return [
+      {
+        text: upperFirst(namespace.split('-').join(' ')),
+        to: text ? `/${lang}/${text}` : undefined,
+        disabled: !text,
+      },
+      {
+        text: upperFirst(rootState.route.params.page.split('-').join(' ')),
+        to: path,
+        disabled: true,
+      },
+    ]
+  },
+  headings (state, getters) {
+    return getHeadings(getters.structure)
+  },
+  namespace (state, getters, rootState) {
+    return !rootState.route
+      ? undefined
+      : upperFirst(camelCase(rootState.route.params.namespace))
+  },
+  page (state, getters, rootState) {
+    return !rootState.route
+      ? undefined
+      : upperFirst(camelCase(rootState.route.params.page))
+  },
+  structure (state, getters, rootState) {
+    const children = JSON.parse(JSON.stringify((state.structure || {}).children || []))
+
+    if (!children.length) return children
+
+    addHeadingAndAd(children)
+    addFooterAd(children)
+
+    return children
+  },
+  themes (state) {
+    return Object.values(state.templates)
+  },
+}
 
 export default {
   namespaced: true,
-
-  state: {
-    deprecatedIn,
-    newIn,
-    namespace: null,
-    page: null,
-    structure: null,
-    toc: [],
-    templates: {
-      'dashboard-pro': {
-        title: 'Material Dashboard Pro',
-        description: 'Vuetify Material Dashboard PRO is a beautiful theme built over Vuetify, Vuex and Vuejs. Vuetify Material Dashboard PRO is the official Vuejs version of the Original Material Dashboard PRO.',
-        src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-admin-dashboard-pro.jpg',
-        price: '$79',
-        url: 'https://www.creative-tim.com/product/vuetify-material-dashboard-pro',
-        demoUrl: ['https://demos.creative-tim.com/vuetify-material-dashboard-pro/'],
-        query: '&partner=116160',
-      },
-      'shopify-e-commerce': {
-        title: 'Shopify E-commerce',
-        description: 'A handcrafted Vuetify e-commerce application built on top of Shopify. Meticulous tweaks for optimal performance, user experience and accessibility make this theme stand out as a must have for anyone selling or wanting to sell with Shopify.',
-        src: 'https://cdn.vuetifyjs.com/images/starter/shopify-e-commerce.png',
-        price: '$99',
-        url: 'https://store.vuetifyjs.com/product/shopify-e-commerce-theme',
-        demoUrl: ['https://store-beta.vuetifyjs.com'],
-      },
-      'material-kit': {
-        title: 'Material Kit',
-        description: 'A complete set of Material Inspired themes built with Vuetify on top of Vue CLI 3.',
-        src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-material-kit.png',
-        price: '$55',
-        url: 'https://store.vuetifyjs.com/product/material-kit-theme',
-        demoUrl: ['https://material-kit.vuetifyjs.com'],
-      },
-      'alpha-theme': {
-        title: 'Alpha Theme',
-        description: 'Complete theme experience including enhanced Vue CLI 3, full documentation, 5 custom components and much more!',
-        src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-alpha-theme.png',
-        price: '$25',
-        url: 'https://store.vuetifyjs.com/product/vuetify-alpha-theme',
-        demoUrl: [
-          ['Construction', 'https://alpha-construction.vuetifyjs.com'],
-          ['Creative', 'https://alpha-creative.vuetifyjs.com'],
-          ['SaaS', 'https://alpha-saas.vuetifyjs.com'],
-          ['Ecommerce', 'https://alpha-ecommerce.vuetifyjs.com'],
-        ],
-      },
-      dashboard: {
-        title: 'Material Dashboard Free',
-        description: 'Vuetify Material Dashboard is a beautiful resource built over Vuetify, Vuex and Vuejs. It will help you get started developing dashboards in no time.',
-        src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-admin-dashboard.jpg',
-        free: true,
-        url: 'https://www.creative-tim.com/product/vuetify-material-dashboard',
-        demoUrl: ['https://demos.creative-tim.com/vuetify-material-dashboard/#/dashboard'],
-        query: '&partner=116160',
-      },
-      freelance: {
-        title: 'Freelancer',
-        description: 'A single page Material inspired theme for Freelancers.',
-        src: 'https://cdn.vuetifyjs.com/images/starter/freelancer.png',
-        free: true,
-        url: 'https://github.com/vuetifyjs/theme-freelancer',
-        demoUrl: [],
-      },
-      parallax: {
-        title: 'Parallax',
-        description: 'This beautiful single page parallax is a great home page for any application.',
-        src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-parallax-starter.png',
-        free: true,
-        url: 'https://github.com/vuetifyjs/parallax-starter',
-        demoUrl: ['/themes/parallax-starter'],
-      },
-      blog: {
-        title: 'Blog',
-        description: 'A simple template that features a clean interface for creating a blog or blog-like application.',
-        src: 'https://cdn.vuetifyjs.com/images/starter/blog.png',
-        free: true,
-        url: 'https://github.com/vuetifyjs/theme-blog',
-        demoUrl: ['https://free-blog.vuetifyjs.com'],
-      },
-    },
-  },
-
-  getters: {
-    namespace (state, getters, rootState) {
-      if (!rootState || !rootState.route || !rootState.route.params) return undefined
-      return upperFirst(camelCase(rootState.route.params.namespace))
-    },
-    page (state, getters, rootState) {
-      if (!rootState || !rootState.route || !rootState.route.params) return undefined
-      return upperFirst(camelCase(rootState.route.params.page))
-    },
-  },
-
-  mutations: {
-    pushToc: (state, payload) => {
-      if (state.toc.find(item => item.id === payload.id)) {
-        return
-      }
-
-      state.toc.push(payload)
-    },
-    setStructure: (state, payload) => {
-      set('structure')(state, payload)
-
-      if (payload) {
-        state.toc = []
-      }
-    },
-  },
+  state,
+  mutations,
+  actions,
+  getters,
 }

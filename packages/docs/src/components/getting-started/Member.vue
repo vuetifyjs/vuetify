@@ -30,7 +30,7 @@
                 xs12
                 pb-0
               >
-                <doc-markdown>{{ value.title }}</doc-markdown>
+                <base-markdown>{{ value.title }}</base-markdown>
               </v-flex>
               <v-flex>
                 <a

@@ -1,3 +1,3 @@
 <template functional>
-  <doc-markdown><slot /></doc-markdown>
+  <base-markdown><slot /></base-markdown>
 </template>

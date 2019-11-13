@@ -1,1 +1,26 @@
-{}
+{
+  "examples": {
+    "usage": {
+      "desc": "Les Diviseurs dans leur forme la plus simple affichent une ligne horizontale."
+    },
+    "inset": {
+      "desc": "Les intercalaires sont déplacés 72px à droite. Cela les fera correspondre avec les éléments de liste."
+    },
+    "vertical": {
+      "desc": "Les diviseurs verticaux vous offrent plus d'outils pour des mises en page uniques."
+    },
+    "vertical-inset": {
+      "desc": "Les séparateurs verticaux peuvent également être jumelés avec le prop `inset` pour encore plus d'options."
+    },
+    "subheaders": {
+      "desc": "Les Diviseurs et les sous-têtes peuvent aider à casser le contenu et peuvent éventuellement s'inscrire les uns avec les autres en utilisant le même prop `inset`."
+    },
+    "divider-list-portrait": {
+      "desc": "Créer des cartes personnalisées pour convenir à n'importe quel cas d'utilisation"
+    }
+  },
+  "props": {
+    "inset": "Ajoute l'indentation (72px) pour **dividers normaux** réduit la hauteur max pour **vertical**.",
+    "vertical": "Affiche les diviseurs verticalement"
+  }
+}

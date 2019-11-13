@@ -1,24 +1,24 @@
 {
-  "header": "# Windows",
-  "headerText": "The `v-window` component provides the baseline functionality for transitioning content from 1 pane to another. Other components such as `v-tabs`, `v-carousel` and `v-stepper` utilize this component at their core.",
+  "heading": "# Windows",
+  "headingText": "The `v-window` component provides the baseline functionality for transitioning content from 1 pane to another. Other components such as `v-tabs`, `v-carousel` and `v-stepper` utilize this component at their core.",
   "examples": {
     "usage": {
       "desc": "Designed to easily cycle through content, `v-window` provides a simple interface to create truly custom implementations."
     },
     "onboarding": {
-      "header": "### Onboarding",
+      "heading": "### Onboarding",
       "desc": "`v-window` makes it easy to create custom components such as a different styled stepper."
     },
     "vertical": {
-      "header": "### Vertical",
+      "heading": "### Vertical",
       "desc": "`v-window` can be vertical. Vertical windows have Y axis transition instead of X axis transition."
     },
     "reverse": {
-      "header": "### Reverse",
+      "heading": "### Reverse",
       "desc": "Reverse `v-window` always displays reverse transition."
     },
     "account": {
-      "header": "### Account creation",
+      "heading": "### Account creation",
       "desc": "Create rich forms with smooth animations. `v-window` automatically tracks the current selection index to automatically change the transition direction. This can be manually controlled with the `reverse` prop."
     }
   },

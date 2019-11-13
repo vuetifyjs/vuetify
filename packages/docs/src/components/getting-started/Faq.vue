@@ -1,65 +1,88 @@
 <template>
-  <v-container
-    fluid
-    pa-0
-  >
-    <v-layout wrap>
-      <v-flex
-        mb-4
-        xs12
+  <v-row>
+    <v-col cols="12">
+      <v-text-field
+        v-model="search"
+        clearable
+        filled
+        label="Search"
+        prepend-inner-icon="mdi-comment-search"
+        single-line
+      />
+    </v-col>
+
+    <v-col
+      class="mb-12"
+      cols="12"
+    >
+      <v-data-iterator
+        :items="gotchas"
+        :search.sync="search"
+        class="v-data-iterator--faq"
+        disable-pagination
+        hide-default-footer
       >
-        <v-text-field
-          v-model="search"
-          prepend-inner-icon="mdi-comment-search"
-          label="Search"
-          filled
-          single-line
-          clearable
-        />
-      </v-flex>
-      <v-flex
-        xs12
-        mb-12
-      >
-        <v-data-iterator
-          :items="gotchas"
-          :search.sync="search"
-          class="v-data-iterator--faq"
-          hide-default-footer
-          disable-pagination
-        >
-          <template v-slot:item="{ item: gotcha, index }">
-            <section
+        <template v-slot:item="{ item: gotcha, index }">
+          <section
+            :id="gotcha.id"
+            class="mb-12"
+          >
+            <base-goto
               :id="gotcha.id"
-              class="mb-12"
+              :code="gotcha.q"
+            />
+
+            <v-card
+              class="pa-4"
+              outlined
             >
-              <core-goto
-                :id="gotcha.id"
-                :code="gotcha.q"
+              <base-markdown :code="gotcha.a" />
+
+              <base-markdown
+                v-if="gotcha.a2"
+                :code="gotcha.a2"
               />
-              <v-card
-                class="pa-4"
-                outlined
-              >
-                <doc-markdown :code="gotcha.a" />
 
-                <doc-markdown
-                  v-if="gotcha.a2"
-                  :code="gotcha.a2"
-                />
+              <template v-if="gotcha.s">
+                <v-btn
+                  class="mt-4"
+                  depressed
+                  small
+                  @click="gotcha.m = !gotcha.m"
+                >
+                  Open code snippet
 
-                <doc-markup
-                  v-if="gotcha.s"
-                  :value="gotcha.s"
-                  class="mb-0 mt-4"
-                />
-              </v-card>
-            </section>
-          </template>
-        </v-data-iterator>
-      </v-flex>
-    </v-layout>
-  </v-container>
+                  <v-icon right>mdi-code-tags</v-icon>
+                </v-btn>
+
+                <div class="mt-3 mb-n4">
+                  <v-expand-transition>
+                    <div
+                      v-show="gotcha.m"
+                      class="swing-transition"
+                    >
+                      <template v-if="Array.isArray(gotcha.s)">
+                        <doc-markup
+                          v-for="(g, i) in gotcha.s"
+                          :key="i"
+                          :value="g"
+                        />
+                      </template>
+
+                      <doc-markup
+                        v-else
+                        :value="gotcha.s"
+                      />
+                    </div>
+                  </v-expand-transition>
+                </div>
+              </template>
+            </v-card>
+          </section>
+        </template>
+      </v-data-iterator>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -67,34 +90,50 @@
   import kebabCase from 'lodash/kebabCase'
 
   export default {
-    name: 'FrequentlyAskedQuestions',
+    name: 'GettingStartedFaq',
 
     data: () => ({
+      internalFiltered: [],
       search: null,
     }),
 
     computed: {
       gotchas () {
-        return this.$t('GettingStarted.FrequentlyAskedQuestions.gotchas').map(faq => {
+        return this.$t('Introduction.FrequentlyAskedQuestions.gotchas').map(faq => {
           return Object.assign({}, faq, {
             id: kebabCase(faq.q),
+            m: false,
           })
         })
       },
-      filtered () {
-        if (!this.search) return this.gotchas
+      filtered: {
+        get () {
+          return this.internalFiltered
+        },
+        set (val) {
+          this.internalFiltered = this.filterItems()
+        },
+      },
+    },
 
-        const search = this.search.toLowerCase()
+    beforeMount () {
+      this.internalFiltered = this.filterItems()
+    },
 
-        return this.gotchas.filter(gotcha => {
-          const q = gotcha.q.toLowerCase()
-          const a = gotcha.a.toLowerCase()
+    methods: {
+      filterItems () {
+        const search = (this.search || '').toLowerCase()
 
-          return (
-            q.indexOf(search) > -1 ||
-            a.indexOf(search) > -1
-          )
-        })
+        return this.gotchas
+          .filter(gotcha => {
+            const q = gotcha.q.toLowerCase()
+            const a = gotcha.a.toLowerCase()
+
+            return (
+              q.indexOf(search) > -1 ||
+              a.indexOf(search) > -1
+            )
+          })
       },
     },
   }

@@ -15,7 +15,7 @@
         <v-card
           class="d-flex flex-column"
           height="100%"
-          elevation="4"
+          outlined
         >
           <v-img
             :src="template.src"
@@ -45,9 +45,16 @@
 
           <v-divider />
 
-          <v-card-text style="min-height: 95px;">{{ template.description }}</v-card-text>
+          <v-responsive
+            class="pa-4"
+            min-height="95"
+            v-text="template.description"
+          />
 
-          <v-card-actions class="grey lighten-4">
+          <v-card-actions
+            :class="$vuetify.theme.dark ? 'darken-4' : 'lighten-4'"
+            class="grey"
+          >
             <v-menu
               v-if="template.demoUrl.length"
               :disabled="template.demoUrl.length === 1"

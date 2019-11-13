@@ -60,7 +60,7 @@ export default Selectable.extend({
       if (this.disabled && !this.inputIndeterminate) return undefined
       if (this.hasError && this.shouldValidate) return 'error'
       if (this.hasSuccess) return 'success'
-      if (this.hasColor) return this.computedColor
+      if (this.hasColor !== null) return this.computedColor
       return undefined
     },
   },
@@ -93,6 +93,7 @@ export default Selectable.extend({
         this.genRipple(this.setTextColor(this.validationState)),
         this.$createElement(VIcon, this.setTextColor(this.validationState, {
           props: {
+            dense: this.dense,
             dark: this.dark,
             light: this.light,
           },

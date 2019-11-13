@@ -1,1 +1,5 @@
-{}
+{
+  "props": {
+    "eager": "Force le contenu des composants à effectuer le rendu sur les composants montés. Ceci est utile si vous avez du contenu qui ne sera pas rendu dans le DOM que vous voulez explorer pour le référencement."
+  }
+}

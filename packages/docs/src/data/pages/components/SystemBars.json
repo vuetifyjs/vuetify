@@ -57,7 +57,7 @@
           "type": "up-next",
           "value": [
             "components/buttons",
-            "components/toolbar",
+            "components/toolbars",
             "components/tabs"
           ]
         }

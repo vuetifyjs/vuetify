@@ -1,36 +1,36 @@
 {
-  "header": "# Ratings",
-  "headerText": "The rating component is a specialized but crucial piece in building user widgets. Collecting user feedback via ratings is a simple analytic that can provide a lot of feedback to your product or application.",
+  "heading": "# Ratings",
+  "headingText": "The rating component is a specialized but crucial piece in building user widgets. Collecting user feedback via ratings is a simple analytic that can provide a lot of feedback to your product or application.",
   "examples": {
     "usage": {
       "desc": "The `v-rating` component provides a simple interface for gathering user feedback."
     },
     "sizes": {
-      "header": "### Size variants",
+      "heading": "### Size variants",
       "desc": "Utilize the same sizing classes available in `v-icon` or provide your own with the **size** prop."
     },
     "length": {
-      "header": "### Custom length",
+      "heading": "### Custom length",
       "desc": "Sometimes an application will call for a customized implementation. Easily change length or displayed icons."
     },
     "increments": {
-      "header": "### Incremented",
+      "heading": "### Incremented",
       "desc": "A rating can have 3 defined icons, **full-icon**, **half-icon** (with the **half-increments** prop) and **empty-icon**."
     },
     "slots": {
-      "header": "### Slots",
+      "heading": "### Slots",
       "desc": "Slots are provided to give you even more freedom in how you display the rating."
     },
     "card": {
-      "header": "### Card ratings",
+      "heading": "### Card ratings",
       "desc": "The rating component pairs well with products allowing you to gather and display customer feedback."
     },
     "advanced": {
-      "header": "### Advanced usage",
+      "heading": "### Advanced usage",
       "desc": "The `v-rating` component fits right in with existing components. Build truly complex examples with rich features and beautiful designs."
     },
     "colors": {
-      "header": "### Colors",
+      "heading": "### Colors",
       "desc": "The `v-rating` component can be colored as you want, you can set both selected and not selected colors."
     }
   },

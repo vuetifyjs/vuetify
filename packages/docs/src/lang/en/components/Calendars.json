@@ -1,24 +1,24 @@
 {
-  "header": "# Calendars",
-  "headerText": "The `v-calendar` component is used to display information in a daily, weekly, or monthly view. The daily view has slots for all day or timed elements, and the weekly and monthly view has a slot for each day. Optionally you can pass in an array of events and they will be rendered over the appropriate days and times.",
+  "heading": "# Calendars",
+  "headingText": "The `v-calendar` component is used to display information in a daily, weekly, or monthly view. The daily view has slots for all day or timed elements, and the weekly and monthly view has a slot for each day. Optionally you can pass in an array of events and they will be rendered over the appropriate days and times.",
   "examples": {
     "usage": {
       "desc": "A calendar has a type and a value which determines what type of calendar is shown over what span of time. This shows the bare minimum configuration, an array of events with `name`, `start` and `end` properties. `end` is optional, it defaults to the `start`. If the `start` has a time it's considered a timed event and will be shown accordingly in the day views. An event can span multiple days and will be rendered accordingly."
     },
     "slots": {
-      "header": "### Slots",
+      "heading": "### Slots",
       "desc": "Slots allow you to define the content for each day, time interval for the daily views, and various labels."
     },
     "events": {
-      "header": "### Events",
+      "heading": "### Events",
       "desc": "This is an example of a planner with additional event handlers and external components controlling the display of the calendar."
     },
     "weekly": {
-      "header": "### Weekly",
+      "heading": "### Weekly",
       "desc": "This is an example of an event calendar with all-day and timed events with a type of `week`."
     },
     "daily": {
-      "header": "### Daily",
+      "heading": "### Daily",
       "desc": "This is an example of calendar with content in each interval slot and a type of `day`."
     }
   },

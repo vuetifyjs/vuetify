@@ -1,1 +1,23 @@
-{}
+{
+  "examples": {
+    "height": {
+      "desc": "Utilisez la prop `height` pour définir la hauteur du tableau."
+    },
+    "fixed-header": {
+      "desc": "Utilisez la prop `fixed-header` avec la prop `height` pour fixer l'en-tête en haut de la table."
+    },
+    "dense": {
+      "desc": "Vous pouvez afficher une version dense du tableau en utilisant le module `dense`."
+    },
+    "dark": {
+      "desc": "Utilisez la prop `dark` pour basculer le tableau vers le thème sombre."
+    }
+  },
+  "props": {
+    "v-simple-table": {
+      "dense": "Diminue les rajouts pour rendre un tableau dense",
+      "height": "Mixins.Measurable.props.height",
+      "fixedHeader": "Définit l'en-tête du tableau en mode fixe"
+    }
+  }
+}

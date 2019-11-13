@@ -1,1 +1,10 @@
-{}
+{
+  "props": {
+    "absolute": "Applique **position: absolute** au composant.",
+    "bottom": "Aligne le composant vers le bas.",
+    "fixed": "Applique **position: fixed** au composant.",
+    "left": "Aligne le composant vers la gauche.",
+    "right": "Aligne le composant vers la droite.",
+    "top": "Aligner le contenu vers le haut."
+  }
+}

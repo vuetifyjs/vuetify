@@ -1,13 +1,13 @@
 {
   "examples": {
     "disabled": {
-      "header": "禁用"
+      "heading": "禁用"
     },
     "scrollable": {
-      "header": "可滚动"
+      "heading": "可滚动"
     },
     "range": {
-      "header": "Range"
+      "heading": "Range"
     }
   }
 }

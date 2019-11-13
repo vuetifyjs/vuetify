@@ -1,6 +1,6 @@
 {
-  "header": "# La feuille de route de Vuetify",
-  "headerText": "Vuetify est toujours en développement. Nous travaillons constamment à l'amélioration de la base de code existante, ainsi qu'à l'ajout de nouvelles fonctionnalités qui facilitent la création d'applications. Vous trouverez ci-dessous une liste provisoire des fonctionnalités prévues. Cette liste n’est pas exhaustive et peut être modifiée à tout moment sans préavis.",
+  "heading": "# La feuille de route de Vuetify",
+  "headingText": "Vuetify est toujours en développement. Nous travaillons constamment à l'amélioration de la base de code existante, ainsi qu'à l'ajout de nouvelles fonctionnalités qui facilitent la création d'applications. Vous trouverez ci-dessous une liste provisoire des fonctionnalités prévues. Cette liste n’est pas exhaustive et peut être modifiée à tout moment sans préavis.",
   "roadmapItems": [
     {
       "type": "version",
@@ -56,14 +56,14 @@
       "complete": true,
       "title": "v1.5 Release",
       "caption": "Février 2019",
-      "text": "Ajout d'un nouveau composant, `v-calendar`. Amélioration des fonctionnalités de `v-sparkline` avec les propriétés **bar** et **fill**. Amélioration de `v-treeview` et préparation pour le LTS. Naviguez vers la [Page de support à long terme](/getting-started/long-term-support) pour plus d'informations sur le LTS. Regardez ici les notes officielles [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0)."
+      "text": "Ajout d'un nouveau composant, `v-calendar`. Amélioration des fonctionnalités de `v-sparkline` avec les propriétés **bar** et **fill**. Amélioration de `v-treeview` et préparation pour le LTS. Naviguez vers la [Page de support à long terme](/introduction/long-term-support) pour plus d'informations sur le LTS. Regardez ici les notes officielles [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0)."
     },
     {
       "type": "version",
       "complete": true,
       "title": "v2.0 Release **(Arcadia)**",
       "caption": "Juillet 2019",
-      "text": "Une reconstruction complète du noyau du framework. Amélioration des systèmes de mise en page et de thème, intégration de la plate-forme, accessibilité, RTL et performance. Met à jour tous les composants à la spécification [Material Design 2](https://material.io/design/). Ajoute des fonctionnalités supplémentaires à plusieurs composants existants et configure v1.5 pour le [Support à long terme](/getting-started/long-term-support).",
+      "text": "Une reconstruction complète du noyau du framework. Amélioration des systèmes de mise en page et de thème, intégration de la plate-forme, accessibilité, RTL et performance. Met à jour tous les composants à la spécification [Material Design 2](https://material.io/design/). Ajoute des fonctionnalités supplémentaires à plusieurs composants existants et configure v1.5 pour le [Support à long terme](/introduction/long-term-support).",
       "features": {
         "#### Highlights": [
           "Mise à jour complète vers Material Design 2",

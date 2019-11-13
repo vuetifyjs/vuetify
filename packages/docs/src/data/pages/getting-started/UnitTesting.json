@@ -160,9 +160,9 @@
         {
           "type": "up-next",
           "value": [
-            "getting-started/long-term-support",
+            "introduction/long-term-support",
             "getting-started/contributing",
-            "getting-started/consulting-and-support"
+            "professional-support/consulting"
           ]
         }
       ]

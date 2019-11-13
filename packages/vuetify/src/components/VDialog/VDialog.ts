@@ -173,14 +173,8 @@ export default baseMixins.extend({
       // click is on the overlay, animate
       this.$emit('click:outside')
 
-      if (this.persistent && this.overlay) {
-        if (
-          !this.noClickAnimation &&
-          (
-            this.overlay.$el === target ||
-            this.overlay.$el.contains(target)
-          )
-        ) this.animateClick()
+      if (this.persistent) {
+        !this.noClickAnimation && this.animateClick()
 
         return false
       }
@@ -221,12 +215,10 @@ export default baseMixins.extend({
       }
       this.$emit('keydown', e)
     },
+    // On focus change, wrap focus to stay inside the dialog
+    // https://github.com/vuetifyjs/vuetify/issues/6892
     onFocusin (e: Event) {
-      if (
-        !e ||
-        e.target === document.activeElement ||
-        !this.retainFocus
-      ) return
+      if (!e || !this.retainFocus) return
 
       const target = e.target as HTMLElement
 

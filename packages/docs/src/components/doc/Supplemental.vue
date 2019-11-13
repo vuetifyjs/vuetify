@@ -1,6 +1,6 @@
 <template>
   <div>
-    <doc-heading>Generic.Pages.supplemental</doc-heading>
+    <base-heading>Generic.Pages.supplemental</base-heading>
     <core-tree :children="value" />
   </div>
 </template>

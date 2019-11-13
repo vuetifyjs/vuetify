@@ -1,1 +1,5 @@
-{}
+{
+  "props": {
+    "elevation": "Il désigne une altitude appliquée à la composante entre 0 et 24. Vous pouvez trouver plus d'informations sur la [page d'altitude](/styles/altitude)."
+  }
+}
