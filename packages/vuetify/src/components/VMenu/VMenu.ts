@@ -202,6 +202,7 @@ export default baseMixins.extend({
           if (this.$refs.content) {
             this.calculatedTopAuto = this.calcTopAuto()
             this.auto && (this.$refs.content.scrollTop = this.calcScrollPosition())
+            this.$refs.content.focus()
           }
         })
       })
@@ -307,6 +308,7 @@ export default baseMixins.extend({
         attrs: {
           ...this.getScopeIdAttrs(),
           role: 'role' in this.$attrs ? this.$attrs.role : 'menu',
+          tabIndex: -1,
         },
         staticClass: 'v-menu__content',
         class: {

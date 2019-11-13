@@ -7,6 +7,7 @@ exports[`VEditDialog.ts should render 1`] = `
     </span>
   </div>
   <div role="menu"
+       tabindex="-1"
        class="v-menu__content theme--light v-small-dialog__menu-content"
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top right; z-index: 0; display: none;"
   >
@@ -50,6 +51,7 @@ exports[`VEditDialog.ts should render custom button texts 1`] = `
     </span>
   </div>
   <div role="menu"
+       tabindex="-1"
        class="v-menu__content theme--light v-small-dialog__menu-content"
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top right; z-index: 0; display: none;"
   >

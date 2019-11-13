@@ -244,7 +244,8 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
               </div>
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
+              <div tabindex="-1"
+                   class="v-menu__content theme--light "
                    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
@@ -438,7 +439,8 @@ exports[`VDataTable.ts should not limit page to current item count when using se
               </div>
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
+              <div tabindex="-1"
+                   class="v-menu__content theme--light "
                    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
@@ -727,7 +729,8 @@ exports[`VDataTable.ts should not limit page to current item count when using se
               </div>
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
+              <div tabindex="-1"
+                   class="v-menu__content theme--light "
                    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
@@ -1121,7 +1124,8 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
               </div>
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
+              <div tabindex="-1"
+                   class="v-menu__content theme--light "
                    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
@@ -1324,7 +1328,8 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
               </div>
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
+              <div tabindex="-1"
+                   class="v-menu__content theme--light "
                    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
@@ -1580,7 +1585,8 @@ exports[`VDataTable.ts should not search column with filterable set to false and
               </div>
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
+              <div tabindex="-1"
+                   class="v-menu__content theme--light "
                    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
@@ -1976,7 +1982,8 @@ exports[`VDataTable.ts should not search column with filterable set to false and
               </div>
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
+              <div tabindex="-1"
+                   class="v-menu__content theme--light "
                    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
@@ -2075,7 +2082,8 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
               </div>
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
+              <div tabindex="-1"
+                   class="v-menu__content theme--light "
                    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
@@ -2174,7 +2182,8 @@ exports[`VDataTable.ts should render 1`] = `
               </div>
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
+              <div tabindex="-1"
+                   class="v-menu__content theme--light "
                    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
@@ -2270,7 +2279,8 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
               </div>
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
+              <div tabindex="-1"
+                   class="v-menu__content theme--light "
                    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
@@ -2398,7 +2408,8 @@ exports[`VDataTable.ts should render loading state 1`] = `
               </div>
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
+              <div tabindex="-1"
+                   class="v-menu__content theme--light "
                    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
@@ -2604,7 +2615,8 @@ exports[`VDataTable.ts should render loading state 2`] = `
               </div>
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
+              <div tabindex="-1"
+                   class="v-menu__content theme--light "
                    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
@@ -2795,7 +2807,8 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               </div>
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
+              <div tabindex="-1"
+                   class="v-menu__content theme--light "
                    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
@@ -3084,7 +3097,8 @@ exports[`VDataTable.ts should render with data 1`] = `
               </div>
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
+              <div tabindex="-1"
+                   class="v-menu__content theme--light "
                    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
@@ -3268,7 +3282,8 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               </div>
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
+              <div tabindex="-1"
+                   class="v-menu__content theme--light "
                    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
@@ -3695,7 +3710,8 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               </div>
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
+              <div tabindex="-1"
+                   class="v-menu__content theme--light "
                    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
@@ -4068,7 +4084,8 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               </div>
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
+              <div tabindex="-1"
+                   class="v-menu__content theme--light "
                    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
@@ -4272,7 +4289,8 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               </div>
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
+              <div tabindex="-1"
+                   class="v-menu__content theme--light "
                    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
@@ -4586,7 +4604,8 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               </div>
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
+              <div tabindex="-1"
+                   class="v-menu__content theme--light "
                    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
@@ -4921,7 +4940,8 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               </div>
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
+              <div tabindex="-1"
+                   class="v-menu__content theme--light "
                    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
@@ -5256,7 +5276,8 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               </div>
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
+              <div tabindex="-1"
+                   class="v-menu__content theme--light "
                    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
@@ -5618,7 +5639,8 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               </div>
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
+              <div tabindex="-1"
+                   class="v-menu__content theme--light "
                    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
