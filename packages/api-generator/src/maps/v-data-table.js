@@ -36,6 +36,17 @@ const DataTableHeaderScopedProps = {
   },
 }
 
+const DataTableFooterScopedProps = {
+  props: {
+    options: DataOptions,
+    pagination: DataDefaultScopedSlotProps.pagination,
+    itemsPerPageText: 'string',
+  },
+  on: '{}',
+  headers: 'TableHeader[]',
+  widths: '[]',
+}
+
 const DataTableHeaderColumnScopedProps = {
   header: 'TableHeader',
 }
@@ -85,7 +96,7 @@ const DataTableSlots = [
   { name: 'body.append', props: DataTableBodyScopedProps },
   { name: 'body.prepend', props: DataTableBodyScopedProps },
   { name: 'body', props: DataTableBodyScopedProps },
-  { name: 'footer', props: DataDefaultScopedSlotProps },
+  { name: 'footer', props: DataTableFooterScopedProps },
   { name: 'footer.page-text', props: DataFooterPageTextScopedProps },
   { name: 'header', props: DataTableHeaderScopedProps },
   { name: 'header.data-table-select', props: DataTableHeaderSelectScopedProps },

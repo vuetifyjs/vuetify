@@ -215,12 +215,10 @@ export default baseMixins.extend({
       }
       this.$emit('keydown', e)
     },
+    // On focus change, wrap focus to stay inside the dialog
+    // https://github.com/vuetifyjs/vuetify/issues/6892
     onFocusin (e: Event) {
-      if (
-        !e ||
-        e.target === document.activeElement ||
-        !this.retainFocus
-      ) return
+      if (!e || !this.retainFocus) return
 
       const target = e.target as HTMLElement
 
