@@ -1,6 +1,7 @@
-import Vue from 'vue'
+import Vue, { VNodeData } from 'vue'
 import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue/types'
 import { VuetifyIcon } from 'vuetify/types/services/icons'
+import mergeData from './mergeData'
 
 export function createSimpleFunctional (
   c: string,
@@ -18,15 +19,6 @@ export function createSimpleFunctional (
       return h(el, data, children)
     },
   })
-}
-
-function mergeTransitions (
-  transitions: undefined | Function | Function[],
-  array: Function[]
-) {
-  if (Array.isArray(transitions)) return transitions.concat(array)
-  if (transitions) array.push(transitions)
-  return array
 }
 
 export function createSimpleTransition (
@@ -64,38 +56,27 @@ export function createSimpleTransition (
 
     render (h, context): VNode {
       const tag = `transition${context.props.group ? '-group' : ''}`
-      context.data = context.data || {}
-      context.data.props = {
-        name,
-        mode: context.props.mode,
+      const data: VNodeData = {
+        props: {
+          name,
+          mode: context.props.mode,
+        },
+        on: {
+          beforeEnter (el: HTMLElement) {
+            el.style.transformOrigin = context.props.origin
+            el.style.webkitTransformOrigin = context.props.origin
+          },
+        },
       }
-      context.data.on = context.data.on || {}
-      if (!Object.isExtensible(context.data.on)) {
-        context.data.on = { ...context.data.on }
+
+      if (context.props.leaveAbsolute) {
+        data.on!.leave = [...data.on!.leave, (el: HTMLElement) => (el.style.position = 'absolute')]
       }
-
-      const ourBeforeEnter: Function[] = []
-      const ourLeave: Function[] = []
-      const absolute = (el: HTMLElement) => (el.style.position = 'absolute')
-
-      ourBeforeEnter.push((el: HTMLElement) => {
-        el.style.transformOrigin = context.props.origin
-        el.style.webkitTransformOrigin = context.props.origin
-      })
-
-      if (context.props.leaveAbsolute) ourLeave.push(absolute)
       if (context.props.hideOnLeave) {
-        ourLeave.push((el: HTMLElement) => (el.style.display = 'none'))
+        data.on!.leave = [...data.on!.leave, (el: HTMLElement) => (el.style.display = 'none')]
       }
 
-      const { beforeEnter, leave } = context.data.on
-
-      // Type says Function | Function[] but
-      // will only work if provided a function
-      context.data.on.beforeEnter = () => mergeTransitions(beforeEnter, ourBeforeEnter)
-      context.data.on.leave = mergeTransitions(leave, ourLeave)
-
-      return h(tag, context.data, context.children)
+      return h(tag, mergeData(context.data, data), context.children)
     },
   }
 }
@@ -118,15 +99,14 @@ export function createJavaScriptTransition (
     },
 
     render (h, context): VNode {
-      const data = {
-        props: {
-          ...context.props,
-          name,
-        },
-        on: functions,
-      }
-
-      return h('transition', data, context.children)
+      return h(
+        'transition',
+        mergeData(context.data, {
+          props: { name },
+          on: functions,
+        }),
+        context.children
+      )
     },
   }
 }
