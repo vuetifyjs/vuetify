@@ -30,7 +30,7 @@
                 >
                   <div class="display-1 mb-2">Premium Theme</div>
 
-                  <doc-markdown :code="activeTemplate.description" />
+                  <base-markdown :code="activeTemplate.description" />
                 </v-responsive>
               </v-overlay>
             </v-img>

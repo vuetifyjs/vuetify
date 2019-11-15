@@ -1,24 +1,24 @@
 {
-  "header": "# Color pickers",
-  "headerText": "The `v-color-picker` allows you to select a color using a variety of input methods.",
+  "heading": "# Color pickers",
+  "headingText": "The `v-color-picker` allows you to select a color using a variety of input methods.",
   "examples": {
     "usage": {
       "desc": ""
     },
     "model": {
-      "header": "### Model",
+      "heading": "### Model",
       "desc": "The `v-color-picker` uses the `v-model` prop to control the color displayed. It supports hex strings such as **#FF00FF** and **#FF00FF00**, and objects representing **RGBA**, **HSLA** and **HSVA** values."
     },
     "swatches": {
-      "header": "### Swatches",
+      "heading": "### Swatches",
       "desc": "Using the `show-swatches` prop you can display an array of color swatches that users can pick from. It is also possible to customize what colors are shown using the `swatches` prop. This prop accepts a two-dimensional array, where the first dimension defines a column, and second dimension defines the swatches from top to bottom by providing rgba hex strings. You can also set the max height of the swatches section with the `swatches-max-height` prop."
     },
     "inputs": {
-      "header": "### Inputs",
+      "heading": "### Inputs",
       "desc": "The number inputs can be hidden with the `hide-inputs` prop. You can also hide the mode switch icon with the `hide-mode-switch` prop. The mode can also be controlled externally through the `mode` prop."
     },
     "canvas": {
-      "header": "### Canvas",
+      "heading": "### Canvas",
       "desc": "The canvas can be hidden with the `hide-canvas` prop, and you can set its height with the prop `canvas-height`. The size of the selection dot can be controlled with the `dot-size` prop."
     }
   },

@@ -1,96 +1,96 @@
 {
-  "header": "# Data tables",
-  "headerText": "The `v-data-table` component is used for displaying tabular data. Features include sorting, searching, pagination, inline-editing, header tooltips, and row selection.",
+  "heading": "# Data tables",
+  "headingText": "The `v-data-table` component is used for displaying tabular data. Features include sorting, searching, pagination, inline-editing, header tooltips, and row selection.",
   "examples": {
     "usage": {
       "desc": "The standard data-table will by default render your data as simple rows."
     },
     "slots": {
-      "header": "### Slots",
+      "heading": "### Slots",
       "desc": "The `v-data-table` provides a large number of slots for customizing the table. This example showcases some of these slots and what you can do with each. It is important to note some slot (eg: `item`/`body`/`header`) will completely takes over the internal rendering of the component which will require you to re-implement functionalities such as selection and expansion. Some slots will override each other such as: `body` > `item` > `item.<name>` and `header`/`header.<name>`."
     },
     "select": {
-      "header": "### Selectable rows",
+      "heading": "### Selectable rows",
       "desc": "The `show-select` prop will render a checkbox in the default header to toggle all rows, and a checkbox for each default row. You can customize these with the slots `header.data-table-select` and `item.data-table-select` respectively. You can also switch between allowing multiple selected rows at the same time or just one with the `single-select` prop."
     },
     "expand": {
-      "header": "### Expandable rows",
+      "heading": "### Expandable rows",
       "desc": "The `show-expand` prop will render an expand icon on each default row. You can customize this with the `item.data-table-expand` slot. The position of this slot can be customized by adding a column with `value: 'data-table-expand'` to the headers array. You can also switch between allowing multiple expanded rows at the same time or just one with the `single-expand` prop. The expanded rows are available on the synced prop `expanded.sync`"
     },
     "group": {
-      "header": "### Grouped rows",
+      "heading": "### Grouped rows",
       "desc": "Using the `group-by` and `group-desc` props you can group rows on an item property. The `show-group-by` prop will show a group button in the default header."
     },
     "dense": {
-      "header": "### Dense",
+      "heading": "### Dense",
       "desc": "Using the `dense` prop you are able to give your data tables an alternate style."
     },
     "loading": {
-      "header": "### Loading state",
+      "heading": "### Loading state",
       "desc": "You can use the `loading` prop to indicate that data in the table is currently loading. If there is no data in the table, a loading message will also be displayed. This message can be customized using the `loading-text` prop or the `loading` slot."
     },
     "headers": {
-      "header": "### Slot: items and headers",
+      "heading": "### Slot: items and headers",
       "desc": "The `items` and `headers` slots can accept either a collection of <kbd>td/th</kbd> tags, or if you want control of the entire row, a <kbd>tr</kbd> tag. In the latter case, you have to manually specify a `key` on the row regardless of the `item-key` value."
     },
     "footer-props": {
-      "header": "### Footer props",
+      "heading": "### Footer props",
       "desc": "The `v-data-table` renders a default footer using the `v-data-footer` component. You can pass props to this component using `footer-props`."
     },
     "multi-sort": {
-      "header": "### Sort on multiple columns",
+      "heading": "### Sort on multiple columns",
       "desc": "Using the `multi-sort` prop will enable you to sort on multiple columns at the same time. When enabled, you can pass arrays to both `sort-by` and `sort-desc` to programmatically control the sorting, instead of single values."
     },
     "customize-header": {
-      "header": "### Customizing default header",
+      "heading": "### Customizing default header",
       "desc": "You can use the dynamic slots `header.<name>` to customize only certain columns. `<name>` is the name of the `value` property in the corresponding header item sent to `headers`."
     },
     "customize-rows": {
-      "header": "### Customizing default rows",
+      "heading": "### Customizing default rows",
       "desc": "You can use the dynamic slots `item.<name>` to customize only certain columns. `<name>` is the name of the `value` property in the corresponding header item sent to `headers`. So to customize the calories column we're using the `item.calories` slot."
     },
     "progress": {
-      "header": "### Slot: progress",
+      "heading": "### Slot: progress",
       "desc": "There is also a `progress` slot for when you want to customize the display for the data table's `loading` state.  By default this is an `indeterminate` `v-progress-linear`"
     },
     "search": {
-      "header": "### Search",
+      "heading": "### Search",
       "desc": "The data table exposes a `search` prop that allows you to filter your data."
     },
     "paginate": {
-      "header": "### External pagination",
+      "heading": "### External pagination",
       "desc": "Pagination can be controlled externally by using the individual props, or by using the `options` prop. Remember that you must apply the `.sync` modifier."
     },
     "sort": {
-      "header": "### External sorting",
+      "heading": "### External sorting",
       "desc": "Sorting can also be controlled externally by using the individual props, or by using the the `options` prop. Remember that you must apply the `.sync` modifier."
     },
     "server": {
-      "header": "### Paginate and sort server-side",
+      "heading": "### Paginate and sort server-side",
       "desc": "If you're loading data already paginated and sorted from a backend, you can use the `server-items-length` prop. Defining this prop will disable the built-in sorting and pagination, and you will instead need to use the available events (`update:page`, `update:sortBy`, `update:options`, etc) to know when to request new pages from your backend. Use the `loading` prop to display a progress bar while fetching data."
     },
     "headerless": {
-      "header": "### Remove default header and footer",
+      "heading": "### Remove default header and footer",
       "desc": "You can apply the `hide-default-header` and `hide-default-footer` props to remove the default header and footer respectively."
     },
     "edit-dialog": {
-      "header": "### Inline Editing",
+      "heading": "### Inline Editing",
       "desc": "The `v-edit-dialog` component is used for inline-editing within data tables. You can block closing the dialog when clicked outside by adding the **persistent** prop."
     },
     "crud": {
-      "header": "### CRUD Actions",
+      "heading": "### CRUD Actions",
       "desc": "`v-data-table` with CRUD actions using a `v-dialog` component for editing each row"
     },
     "virtualized": {
-      "header": "### Virtualized rows",
+      "heading": "### Virtualized rows",
       "desc": "Using the `virtual-rows` prop will virtualize the rendering of the rows, which can increase the performance of the data-table when you have a large number of rows. Be aware that you can not use the `body`, `body.prepend` or `body.append` slots with this prop."
     },
     "custom-filter": {
-      "header": "### Custom filtering",
+      "heading": "### Custom filtering",
       "desc": "You can override the default filtering used with `search` prop by supplying a function to the `custom-filter` prop. If you need to customize the filtering of a specific column, you can supply a function to the `filter` property on header items. The signature is `(value: any, search: string | null, item: any) => boolean`. This function will always be run even if `search` prop has not been provided. Thus you need to make sure to exit early with a value of `true` if filter should not be applied."
     },
     "filterable-columns": {
-      "header": "### Filterable columns",
+      "heading": "### Filterable columns",
       "desc": "You can easily disable specific columns from being included when searching through table rows by setting the property `filterable` to false on the header item(s). In the example below the dessert name column is no longer searchable."
     }
   },
@@ -131,7 +131,7 @@
       "group": "Slot to replace the default rendering of grouped rows",
       "group.header": "Slot to customize the default rendering of group headers",
       "group.summary": "Slot to customize the default rendering of group summaries",
-      "header": "Slot to add a custom header",
+      "heading": "Slot to add a custom header",
       "header.<name>": "Slot to customize a specific header column",
       "header.data-table-select": "Slot to replace the default `v-simple-checkbox` in header",
       "item": "Slot to replace the default rendering of a row",

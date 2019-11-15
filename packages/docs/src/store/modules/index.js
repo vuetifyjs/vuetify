@@ -1,9 +1,3 @@
-import app from './app'
-import snackbar from './snackbar'
-import documentation from './documentation'
-
-export default {
-  app,
-  snackbar,
-  documentation,
-}
+export { default as app } from './app'
+export { default as documentation } from './documentation'
+export { default as snackbar } from './snackbar'

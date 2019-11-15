@@ -10,7 +10,7 @@ export function createVuetify (ssrContext) {
     theme: {
       themes: {
         light: {
-          primary: '#1867c0',
+          primary: '#1867C0',
           secondary: '#5CBBF6',
           tertiary: '#E57373',
           accent: '#005CAF',

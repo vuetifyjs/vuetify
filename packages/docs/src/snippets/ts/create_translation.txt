@@ -12,8 +12,10 @@ export default {
       sortAscending: ': Sorted ascending. Activate to sort descending.',
       sortNone: ': Not sorted. Activate to sort ascending.',
     },
+    sortBy: 'Sort by',
   },
   dataFooter: {
+    pageText: '{0}-{1} of {2}',
     itemsPerPageText: 'Items per page:',
     itemsPerPageAll: 'All',
     nextPage: 'Next page',

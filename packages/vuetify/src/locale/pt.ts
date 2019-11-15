@@ -30,7 +30,7 @@ export default {
     prev: 'Visão anterior',
     next: 'Próxima visão',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Slide {0} de {1} do carrossel',
     },
   },
   calendar: {

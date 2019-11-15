@@ -1,1 +1,40 @@
-{}
+{
+  "examples": {
+    "model": {
+      "desc": "Le composant `v-color-picker` utilise la prop `v-model` pour contrôler la couleur affichée. Il supporte les chaînes hexadécimales telles que **#FF00FF** et **#FF00FF00**, et les objets représentant les valeurs **RGBA**, **HSLA** et **HSVA** ."
+    },
+    "swatches": {
+      "desc": "En utilisant la prop`show-swatches` vous pouvez afficher un tableau de nuances de couleurs dont les utilisateurs peuvent choisir. Il est également possible de personnaliser les couleurs affichées en utilisant la prop`swatches`. Cette prop accepte un tableau à deux dimensions, où la première dimension définit une colonne, et la deuxième dimension définit les nuances de haut en bas en fournissant des chaînes d'hex rgba. Vous pouvez également définir la hauteur maximale de la section nuances avec la prop `swatches-max-height`."
+    },
+    "inputs": {
+      "desc": "Les entrées de nombre peuvent être masquées avec la prop `hide-inputs`. Vous pouvez aussi masquer l'icône de switch avec la prop `hide-mode-switch`. Le mode peut également être contrôlé à l'extérieur par la prop `mode`."
+    },
+    "canvas": {
+      "desc": "Le canevas peut être caché avec la prop `hide-canvas` et vous pouvez définir sa hauteur avec la prop `canvas-height`. La taille du point de sélection peut être contrôlé avec la prop `dot-size`."
+    }
+  },
+  "props": {
+    "v-color-picker": {
+      "canvasHeight": "Hauteur du canevas",
+      "disabled": "Désactive le sélecteur",
+      "dotSize": "Modifie la taille du point de sélection sur le canvas",
+      "flat": "Supprime l'élévation",
+      "hideCanvas": "Masquer le canevas",
+      "hideInputs": "Cacher les entrées",
+      "hideModeSwitch": "Masquer le mode switch",
+      "mode": "Définit le mode d'entrée. Les modes disponibles sont 'rgba', 'hsla', et 'hexa'. Peut être synchronisé avec le modificateur `.sync`.",
+      "showSwatches": "Affiche les nuances de couleur",
+      "swatches": "Définit les nuances de couleur disponibles à sélectionner - Cette prop accepte uniquement les chaînes de caractères rgba",
+      "swatchesMaxHeight": "Définit la hauteur maximale de la section de nuances de couleurs",
+      "value": "Couleur actuelle. Cela peut être une chaîne représentant une couleur hexadécimale, ou un objet représentant une valeur RGBA, HSLA ou HSVA",
+      "width": "Définit la largeur du sélecteur de couleur"
+    }
+  },
+  "events": {
+    "v-color-picker": {
+      "input": "Couleur sélectionnée. Selon ce que vous avez rentrée dans la prop `value` qu'il s'agisse soit d'une chaîne de caractères soit d'un objet",
+      "update:color": "Couleur sélectionnée. Ceci est la représentation interne de la couleur, contenant toutes les valeurs.",
+      "update:mode": "Mode sélectionné"
+    }
+  }
+}

@@ -1,18 +1,22 @@
 <template>
   <figure class="mb-6 text-center">
-    <v-sheet color="transparent">
+    <v-card
+      color="transparent"
+      flat
+    >
       <v-img
         :src="computedValue"
         class="d-inline-block"
-        style="max-width: 100%;"
+        eager
+        max-width="100%"
       />
-    </v-sheet>
+    </v-card>
 
     <figcaption
       v-if="$slots.default"
       class="caption text-center"
     >
-      <doc-markdown><slot /></doc-markdown>
+      <base-markdown><slot /></base-markdown>
     </figcaption>
   </figure>
 </template>
@@ -30,11 +34,9 @@
       computedValue () {
         if (!this.value) return
 
-        if (this.value.indexOf('http') > -1) {
-          return this.value
-        }
-
-        return `https://cdn.vuetifyjs.com/images/${this.value}`
+        return this.value.indexOf('http') > -1
+          ? this.value
+          : `https://cdn.vuetifyjs.com/images/${this.value}`
       },
     },
   }

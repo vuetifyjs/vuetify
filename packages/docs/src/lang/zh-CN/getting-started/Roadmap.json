@@ -1,6 +1,6 @@
 {
-  "header": "# Vuetify 路线图",
-  "headerText": "Vuetify始终在开发中。我们一直致力于改进现有的代码库，并且增加新的特性和功能，使得构建应用程序更加轻松。以下是计划功能的暂定清单，这不是一个详尽的清单，可能随时会更改，恕不另行通知。",
+  "heading": "# Vuetify 路线图",
+  "headingText": "Vuetify始终在开发中。我们一直致力于改进现有的代码库，并且增加新的特性和功能，使得构建应用程序更加轻松。以下是计划功能的暂定清单，这不是一个详尽的清单，可能随时会更改，恕不另行通知。",
   "roadmapItems": [
     {
       "type": "发布",
@@ -56,14 +56,14 @@
       "complete": true,
       "title": "v1.5 发布",
       "caption": "2019年2月",
-      "text": "添加了新组件 `v-calendar`。 使用新 **bar** 和 **fill** 属性，改进了 `v-sparkline` 的功能。 改进了 `v-treeview` 并为 LTS 做好了准备。 查阅 [Long-term Support Page](/getting-started/long-term-support) 以获取有关 LTS 的更多信息。 点击此处查看官方 [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0)。"
+      "text": "添加了新组件 `v-calendar`。 使用新 **bar** 和 **fill** 属性，改进了 `v-sparkline` 的功能。 改进了 `v-treeview` 并为 LTS 做好了准备。 查阅 [Long-term Support Page](/introduction/long-term-support) 以获取有关 LTS 的更多信息。 点击此处查看官方 [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0)。"
     },
     {
       "type": "发布",
       "complete": true,
       "title": "v2.0 发布 **(Arcadia)**",
       "caption": "2019年7月",
-      "text": "一个完整的重建框架核心。改进布局和主题系统、平台集成、可访问性、RTL和性能。更新所有组件到 [Material Design 2](https://material.io/design/) 规范。向多个现有组件添加附加功能，并为 v1.5 提供 [Long-term Support](/getting-started/long-term-support)。",
+      "text": "一个完整的重建框架核心。改进布局和主题系统、平台集成、可访问性、RTL和性能。更新所有组件到 [Material Design 2](https://material.io/design/) 规范。向多个现有组件添加附加功能，并为 v1.5 提供 [Long-term Support](/introduction/long-term-support)。",
       "features": {
         "#### Highlights": [
           "完成 Material Design 2 的更新",

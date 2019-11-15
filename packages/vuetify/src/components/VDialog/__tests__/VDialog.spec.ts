@@ -312,4 +312,36 @@ describe('VDialog.ts', () => {
     expect(content.element.tabIndex).toBe(0)
     expect(content.html()).toMatchSnapshot()
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8697
+  it('should not close if persistent and hide-overly when click outside', async () => {
+    const input = jest.fn()
+    const clickOutside = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        persistent: true,
+        hideOverlay: true,
+      },
+      scopedSlots: {
+        activator ({ on }) {
+          return this.$createElement('div', {
+            staticClass: 'activator',
+            on,
+          })
+        },
+      },
+    })
+
+    wrapper.vm.$on('input', input)
+    wrapper.vm.$on('click:outside', clickOutside)
+
+    expect(wrapper.vm.isActive).toBe(false)
+    wrapper.find('div.activator').trigger('click')
+    expect(wrapper.vm.isActive).toBe(true)
+    await wrapper.vm.$nextTick()
+    expect(input).toHaveBeenCalledWith(true)
+    wrapper.vm.closeConditional(new Event('click'))
+    expect(clickOutside).toHaveBeenCalled()
+    expect(wrapper.vm.isActive).toBe(true)
+  })
 })

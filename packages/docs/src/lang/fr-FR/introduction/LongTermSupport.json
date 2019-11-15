@@ -1,0 +1,24 @@
+{
+  "heading": "# Support à long terme",
+  "headingText": "En tant que framework de composants, nous comprenons que de nombreux projets qui utilisent Vuetify ont des cycles de développement qui empêchent la mise à niveau vers la dernière version. Pour fournir aux développeurs et entreprises la tranquilité d'esprit, nous offrons un **Support à long terme** pour la dernière _mineur_ de la dernière version _majeure_ . Cela signifie que pour chaque version _majeure_, vous pouvez être sereins en sachant que pour **12 mois** après une nouvelle version majeure, votre version existante sera mise à jour pour les bugs critiques et les vulnérabilités de sécurité.",
+  "2header": "## Vuetify 2.0",
+  "2features": [
+    "**7 nouveaux composants**",
+    "**Mise à jour complète vers la Spécification MD2**",
+    "**Prise en charge complète de Typescript**",
+    "**Amélioration de l'accessibilité et du support RTL**",
+    "**De nombreuses corrections de bugs, changements QOL et améliorations des performances**"
+  ],
+  "2upgrade": "Vous mettez à jour depuis la v1.5 ? Découvrez le [guide de mise à jour](https://github.com/vuetifyjs/vuetify/releases/tag/v2.0.0#user-content-upgrade-guide).",
+  "15header": "## Vuetify 1.5 LTS",
+  "15text": "La dernière version LTS de Vuetify, basée sur la spécification Material Design 1. LTS veux dire support à long terme, ce qui signifie que pendant 12 mois, jusqu'en juillet 2020, la mises à jour gratuites des bugs de sécurité et des bugs critiques est garantie.",
+  "15text2": "Vous vous mettez à jour vers la v1.5 ? Consultez les guides de mise à jour disponibles :",
+  "15versions": [
+    "[Vuetify v1.5](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0)",
+    "[Vuetify v1.4](https://github.com/vuetifyjs/vuetify/releases/tag/v1.4.0)",
+    "[Vuetify v1.3](https://github.com/vuetifyjs/vuetify/releases/tag/v1.3.0)",
+    "[Vuetify v1.2](https://github.com/vuetifyjs/vuetify/releases/tag/v1.2.0)",
+    "[Vuetify v1.1](https://github.com/vuetifyjs/vuetify/releases/tag/v1.1.0)"
+  ],
+  "15text3": "Si vous avez des questions supplémentaires, veuillez vous joindre à notre [communauté Discord](https://community.vuetifyjs.com)."
+}

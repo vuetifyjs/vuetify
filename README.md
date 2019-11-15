@@ -56,7 +56,7 @@
     <a href="https://paypal.me/vuetify">Make a one-time payment with Paypal</a>
   </li>
   <li>
-    <a href="https://vuetifyjs.com/getting-started/consulting-and-support?ref=github">Book time with John</a>
+    <a href="https://vuetifyjs.com/professional-support/consulting?ref=github">Book time with John</a>
   </li>
 </ul>
 
@@ -69,7 +69,7 @@
     <tr>
       <td>
         <a href="https://www.qomplx.com/?ref=vuetify-github">
-          <img height="70px" src="https://cdn.vuetifyjs.com/images/backers/QOMPLX.webp">
+          <img height="50px" src="https://cdn.vuetifyjs.com/images/backers/QOMPLX.png">
         </a>
       </td>
     </tr>
@@ -156,7 +156,7 @@
 
 Vuetify is a Material Design Component Framework for the Vue framework. We believe that you shouldn't need design skills to build beautiful Vue applications. Vuetify takes the pain out of development by providing everything you need:
 
-- Over 100 beautiful hand crafted Material Components
+- Over 80 beautiful hand crafted Material Components
 - Powerful and unique directives for customizing user experiences
 - WCAG accessibility (a11y) and Section 508 compliant
 - Full RTL support
@@ -170,6 +170,135 @@ Vuetify is expansive, powerful and provides tools required for large, robust app
 ###### Browser Support
 
 Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [polyfills](https://vuetifyjs.com/getting-started/quick-start#ie-11-amp-safari-9-support)). Components are designed for a minimum width of _320px_.
+
+### Vuetify Ecosystem
+
+<table>
+  <thead>
+    <tr>
+      <th>Project</th>
+      <th>Version</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/vue-cli-preset-vuetify">vue-cli-preset-vuetify</a>
+      </td>
+      <td>
+        n/a
+      </td>
+      <td>
+       A Vue CLI 3 preset for Vuetify
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify">vue-cli-plugin-vuetify</a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify">
+          <img src="https://img.shields.io/npm/v/vue-cli-plugin-vuetify.svg" alt="Version">
+        </a>
+      </td>
+      <td>
+       A Vue CLI 3 plugin for installing and configuring Vuetify
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify-cli">vue-cli-plugin-vuetify-cli</a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-cli">
+          <img src="https://img.shields.io/npm/v/vue-cli-plugin-vuetify-cli.svg" alt="Version">
+        </a>
+      </td>
+      <td>
+       A Vue CLI 3 plugin for Scaffolding Vuetify projects
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify-essentials">vue-cli-plugin-vuetify-essentials</a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-essentials">
+          <img src="https://img.shields.io/npm/v/vue-cli-plugin-vuetify-essentials.svg" alt="Version">
+        </a>
+      </td>
+      <td>
+       A Vue CLI 3 plugin for installing the `vue-cli-preset-vuetify` plugin
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify-storybook">vue-cli-plugin-vuetify-storybook</a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-storybook">
+          <img src="https://img.shields.io/npm/v/vue-cli-plugin-vuetify-storybook.svg" alt="Version">
+        </a>
+      </td>
+      <td>
+       A Vue CLI 3 plugin for installing the `vue-cli-preset-vuetify` plugin
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/vuetify-loader">vuetify-loader</a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/vuetify-loader">
+          <img src="https://img.shields.io/npm/v/vuetify-loader.svg" alt="Version">
+        </a>
+      </td>
+      <td>
+       A webpack plugin for treeshaking and progressive image support
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/eslint-config-vuetify">eslint-config-vuetify</a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/eslint-config-vuetify">
+          <img src="https://img.shields.io/npm/v/eslint-config-vuetify.svg" alt="Version">
+        </a>
+      </td>
+      <td>
+       An opinionated eslint-config for Vuetify
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/eslint-plugin-vuetify">eslint-plugin-vuetify</a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/eslint-plugin-vuetify">
+          <img src="https://img.shields.io/npm/v/eslint-plugin-vuetify.svg" alt="Version">
+        </a>
+      </td>
+      <td>
+       An opinionated eslint-plugin for Vuetify
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/vuex/tree/master/packages/cognito-module/">vuex-cognito-module</a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/@vuetify/vuex-cognito-module">
+          <img src="https://img.shields.io/npm/v/@vuetify/vuex-cognito-module.svg" alt="Version">
+        </a>
+      </td>
+      <td>
+       A <a href="https://vuex.vuejs.org/">Vuex</a> module for <a href="https://aws.amazon.com/cognito/">AWS Cognito</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ### Documentation
 

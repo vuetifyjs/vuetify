@@ -5,17 +5,19 @@
       class="px-2"
     >
       <strong>MISSING ITEMS:</strong>
+
       {{ missingItems.join(', ') }}
     </div>
+
     <v-data-iterator
-      :search="search"
       :items="computedItems"
-      sort-by="name"
       :items-per-page="-1"
+      :search="search"
       class="component-parameters"
       hide-default-footer
+      sort-by="name"
     >
-      <template #default="{ items }">
+      <template v-slot="{ items }">
         <div>
           <template v-for="(item, i) in items">
             <doc-api-item
@@ -23,6 +25,7 @@
               :headers="headers"
               :item="item"
             />
+
             <v-divider
               v-if="i + 1!== items.length"
               :key="`divider-${i}`"
@@ -45,6 +48,8 @@
   import pluralize from 'pluralize'
 
   export default {
+    name: 'DocParameters',
+
     inject: {
       overrideNamespace: {
         default: null,

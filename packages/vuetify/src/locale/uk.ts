@@ -1,17 +1,17 @@
 export default {
-  close: 'Close',
+  close: 'Закрити',
   dataIterator: {
     noResultsText: 'В результаті пошуку нічого не знайдено',
-    loadingText: 'Loading item...',
+    loadingText: 'Завантаження...',
   },
   dataTable: {
     itemsPerPageText: 'Рядків на сторінці:',
     ariaLabel: {
-      sortDescending: ': Sorted descending. Activate to remove sorting.',
-      sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.',
+      sortDescending: ': Відсортовано за спаданням. Активувати, щоб видалити сортування.',
+      sortAscending: ': Відсортовано за зростанням. Активувати, щоб відсортувати за спаданням.',
+      sortNone: ': Не відсортовано. Активувати, щоб відсортувати за зростанням.',
     },
-    sortBy: 'Sort by',
+    sortBy: 'Відсортувати за',
   },
   dataFooter: {
     itemsPerPageText: 'Елементів на сторінці:',
@@ -27,18 +27,18 @@ export default {
   },
   noDataText: 'Немає даних для відображення',
   carousel: {
-    prev: 'Попередній візуальний',
-    next: 'Наступний візуальнийa',
+    prev: 'Попередній слайд',
+    next: 'Наступий слайд',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Слайд {0} з {1}',
     },
   },
   calendar: {
     moreEvents: 'Ще {0}',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counter: '{0} файлів',
+    counterSize: '{0} файлів ({1} загалом)',
   },
   timePicker: {
     am: 'AM',

@@ -6,7 +6,7 @@
     wrap
   >
     <v-flex xs12>
-      <doc-heading goto="one-time-donation">oneTime</doc-heading>
+      <base-heading goto="one-time-donation">oneTime</base-heading>
     </v-flex>
 
     <v-flex
@@ -19,7 +19,7 @@
       xs12
       mb-4
     >
-      <doc-markdown>oneTimeBlurb</doc-markdown>
+      <base-markdown>oneTimeBlurb</base-markdown>
     </v-flex>
 
     <v-flex

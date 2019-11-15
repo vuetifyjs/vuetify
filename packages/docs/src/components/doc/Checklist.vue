@@ -6,7 +6,7 @@
     >
       <v-list-item-content>
         <v-list-item-title>
-          <doc-markdown :code="item" />
+          <base-markdown :code="item" />
         </v-list-item-title>
       </v-list-item-content>
       <v-list-item-icon>

@@ -1,0 +1,130 @@
+{
+  "heading": "crwdns44620:0crwdne44620:0",
+  "headingText": "crwdns44622:0[issue]crwdnd44622:0[community]crwdne44622:0",
+  "question": "crwdns44624:0crwdne44624:0",
+  "answer": "crwdns44626:0crwdne44626:0",
+  "noResultsFound": "crwdns44628:0crwdne44628:0",
+  "resetSearch": "crwdns44630:0crwdne44630:0",
+  "gotchas": [
+    {
+      "q": "crwdns44632:0crwdne44632:0",
+      "a": "crwdns44634:0crwdne44634:0",
+      "s": "crwdns44636:0crwdne44636:0"
+    },
+    {
+      "q": "crwdns44638:0crwdne44638:0",
+      "a": "crwdns44640:0crwdne44640:0"
+    },
+    {
+      "q": "crwdns44642:0crwdne44642:0",
+      "a": "crwdns44644:0crwdne44644:0"
+    },
+    {
+      "q": "crwdns44646:0$materialcrwdne44646:0",
+      "a": "crwdns44648:0crwdne44648:0"
+    },
+    {
+      "q": "crwdns44650:0crwdne44650:0",
+      "a": "crwdns44652:0[template]crwdnd44652:0[community]crwdne44652:0"
+    },
+    {
+      "q": "crwdns44654:0$attrscrwdnd44654:0$listenerscrwdne44654:0",
+      "a": "crwdns44656:0crwdne44656:0"
+    },
+    {
+      "q": "crwdns44658:0crwdne44658:0",
+      "a": "crwdns44660:0crwdne44660:0"
+    },
+    {
+      "q": "crwdns44662:0crwdne44662:0",
+      "a": "crwdns44664:0crwdne44664:0"
+    },
+    {
+      "q": "crwdns44666:0crwdne44666:0",
+      "a": "crwdns44668:0[Application]crwdne44668:0"
+    },
+    {
+      "q": "crwdns44670:0crwdne44670:0",
+      "a": "crwdns44672:0crwdne44672:0"
+    },
+    {
+      "q": "crwdns44674:0crwdne44674:0",
+      "a": "crwdns44676:0{ overflow-y: auto }crwdne44676:0"
+    },
+    {
+      "q": "crwdns44678:0crwdne44678:0",
+      "a": "crwdns44680:0crwdne44680:0"
+    },
+    {
+      "q": "crwdns44682:0crwdne44682:0",
+      "a": "crwdns44684:0[documentation]crwdne44684:0"
+    },
+    {
+      "q": "crwdns44686:0crwdne44686:0",
+      "a": "crwdns44688:0crwdne44688:0",
+      "s": "crwdns44690:0crwdne44690:0"
+    },
+    {
+      "q": "crwdns44692:0crwdne44692:0",
+      "a": "crwdns44694:0crwdne44694:0"
+    },
+    {
+      "q": "crwdns44696:0crwdne44696:0",
+      "a": "crwdns44698:0crwdne44698:0",
+      "s": "crwdns44700:0crwdne44700:0"
+    },
+    {
+      "q": "crwdns44702:0crwdne44702:0",
+      "a": "crwdns44704:0[vue.config.js]crwdnd44704:0[vue-loader]crwdne44704:0",
+      "s": "crwdns44706:0crwdne44706:0"
+    },
+    {
+      "q": "crwdns44708:0crwdne44708:0",
+      "a": "crwdns44710:0crwdne44710:0",
+      "a2": [
+        "crwdns44712:0[v2.0.0]crwdne44712:0",
+        "crwdns44714:0[v1.5.0]crwdne44714:0",
+        "crwdns44716:0[v1.4.0]crwdne44716:0",
+        "crwdns44718:0[v1.3.0]crwdne44718:0",
+        "crwdns44720:0[v1.2.0]crwdne44720:0",
+        "crwdns44722:0[v1.1.0]crwdne44722:0",
+        "crwdns44724:0[v1.0.0]crwdne44724:0",
+        "crwdns44726:0[v0.17.0]crwdne44726:0",
+        "crwdns44728:0[v0.16.0]crwdne44728:0",
+        "crwdns44730:0[v0.15.0]crwdne44730:0",
+        "crwdns44732:0[v0.14.0]crwdne44732:0",
+        "crwdns44734:0[v0.13.0]crwdne44734:0",
+        "crwdns44736:0[v0.12.0]crwdne44736:0"
+      ]
+    },
+    {
+      "q": "crwdns44738:0crwdne44738:0",
+      "a": "crwdns44740:0crwdne44740:0"
+    },
+    {
+      "q": "crwdns44742:0crwdne44742:0",
+      "a": "crwdns44744:0[limitations]crwdne44744:0"
+    },
+    {
+      "q": "crwdns44746:0crwdne44746:0",
+      "a": "crwdns44748:0crwdne44748:0"
+    },
+    {
+      "q": "crwdns44750:0crwdne44750:0",
+      "a": "crwdns44752:0crwdne44752:0"
+    },
+    {
+      "q": "crwdns44754:0crwdne44754:0",
+      "a": "crwdns44756:0[vue-cli-plugin-vuetify]crwdnd44756:0[vuetify-loader]crwdne44756:0"
+    },
+    {
+      "q": "crwdns44758:0crwdne44758:0",
+      "a": "crwdns44760:0crwdne44760:0"
+    },
+    {
+      "q": "crwdns44762:0crwdne44762:0",
+      "a": "crwdns44764:0crwdne44764:0",
+      "s": "crwdns44766:0crwdne44766:0"
+    }
+  ]
+}

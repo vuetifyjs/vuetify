@@ -1,7 +1,10 @@
 {
   "examples": {
+    "mandatory": {
+      "heading": "### Obligatorio"
+    },
     "multiple": {
-      "header": "Múltiple"
+      "heading": "Múltiple"
     }
   },
   "props": {
