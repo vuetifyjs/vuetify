@@ -22,9 +22,10 @@
       +states($material)
 
   &.v-expansion-panels--hover
-    .v-expansion-panel-header
-      &:hover
-        +states($material)
+    > .v-expansion-panel
+      > .v-expansion-panel-header
+        &:hover
+          +states($material)
 
 // Block
 .v-expansion-panels
@@ -191,7 +192,7 @@
       max-width: $expansion-panel-inset-active-max-width
 
 .v-expansion-panels--flat
-  .v-expansion-panel
+  > .v-expansion-panel
     &::after
       border-top: none
 
