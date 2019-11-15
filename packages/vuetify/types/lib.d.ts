@@ -33,6 +33,7 @@ declare module 'vuetify/lib' {
   const VCalendarMonthly: Component
   const VCard: Component
   const VCardTitle: Component
+  const VCardSubtitle: Component
   const VCardActions: Component
   const VCardText: Component
   const VCarousel: Component
@@ -200,6 +201,7 @@ declare module 'vuetify/lib' {
     VCalendarMonthly,
     VCard,
     VCardTitle,
+    VCardSubtitle,
     VCardActions,
     VCardText,
     VCarousel,
