@@ -1,6 +1,6 @@
 {
-  "header": "# Aspect Ratios",
-  "headerText": "The `v-responsive` component can be used to fix any section to a specific aspect ratio",
+  "heading": "# Aspect Ratios",
+  "headingText": "The `v-responsive` component can be used to fix any section to a specific aspect ratio",
   "examples": {
     "ratios": {
       "desc": "Specify a custom aspect-ratio"

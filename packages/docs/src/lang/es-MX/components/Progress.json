@@ -1,6 +1,6 @@
 {
-    "header": "Progress",
-    "headerText": "Los componentes `v-progress-circular` y `v-progress-linear` se usan para transmitir datos visualmente a los usuarios. Pueden también representar una cantidad indeterminada, como un procesamiento o una carga (loading). Estos componentes contienen un slot que está centrado dentro del componente que lo contiene.",
+    "heading": "Progress",
+    "headingText": "Los componentes `v-progress-circular` y `v-progress-linear` se usan para transmitir datos visualmente a los usuarios. Pueden también representar una cantidad indeterminada, como un procesamiento o una carga (loading). Estos componentes contienen un slot que está centrado dentro del componente que lo contiene.",
     "components": [
         "v-progress-circular",
         "v-progress-linear"
@@ -8,47 +8,47 @@
     "examples": [
         {
             "circularDefault": {
-                "header": "Default",
+                "heading": "Default",
                 "desc": "Por default, el progreso circular utiliza el _secondary color_ de la aplicación.."
             },
             "circularColored": {
-                "header": "Coloreado",
+                "heading": "Coloreado",
                 "desc": "Puedes aplicar colores alternativos."
             },
             "circularIndeterminate": {
-                "header": "Indeterminado",
+                "heading": "Indeterminado",
                 "desc": "Un _progress circular_ está animado continuamente."
             },
             "circularSizeAndWidth": {
-                "header": "Tamaño y ancho",
+                "heading": "Tamaño y ancho",
                 "desc": "El componente _progress circular_ puede variar en tamaño y ancho."
             },
             "circularRotate": {
-                "header": "Rotado",
+                "heading": "Rotado",
                 "desc": "El origen del _progress_ puede ser rotado.."
             },
             "linearDeterminate": {
-                "header": "Determinado",
+                "heading": "Determinado",
                 "desc": "El _progress linear_ puede tener un estado determinado modificado por `v-model`."
             },
             "linearIndeterminate": {
-                "header": "Indeterminado",
+                "heading": "Indeterminado",
                 "desc": "Al igual que con el componente circular, el _progress linear_ tiene un estado indeterminado."
             },
             "linearBuffer": {
-                "header": "Buffer",
+                "heading": "Buffer",
                 "desc": "Un estado _buffer_ representa dos valores simultáneamente. El valor principal es controlado por el modelo, mientras que el buffer es controlado por una prop `buffer-value`."
             },
             "linearQueryIndeterminateAndDeterminate": {
-                "header": "Query Indeterminado y Determinado",
+                "heading": "Query Indeterminado y Determinado",
                 "desc": "El estado _query_ es controlado por un valor _truthy_ de `indeterminate` con la prop `query` en verdadero."
             },
             "linearCustomHeightAndContextualColors": {
-                "header": "Altura personalizada y colores contextuales",
+                "heading": "Altura personalizada y colores contextuales",
                 "desc": "Una altura personalizada o un color contextual pueden ser aplicados a una barra de progreso. EL color principal de la barra es el color principal de tu aplicación."
             },
             "linearCustomColors": {
-                "header": "Colores personalizados",
+                "heading": "Colores personalizados",
                 "desc": "También puedes configurar el color usando las props `color` y `background-color`."
             }
         }

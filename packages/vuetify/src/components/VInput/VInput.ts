@@ -13,6 +13,7 @@ import Validatable from '../../mixins/validatable'
 // Utilities
 import {
   convertToUnit,
+  getSlot,
   kebabCase,
 } from '../../util/helpers'
 
@@ -230,6 +231,9 @@ export default baseMixins.extend<options>().extend({
         },
         attrs: {
           role: this.hasMessages ? 'alert' : null,
+        },
+        scopedSlots: {
+          default: props => getSlot(this, 'message', props),
         },
       })
     },

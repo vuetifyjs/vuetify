@@ -1,17 +1,17 @@
 export default {
-  close: 'Close',
+  close: '閉じる',
   dataIterator: {
     noResultsText: '検索結果が見つかりません。',
-    loadingText: 'Loading item...',
+    loadingText: '項目をロード中です...',
   },
   dataTable: {
     itemsPerPageText: '1ページあたりの行数：',
     ariaLabel: {
-      sortDescending: ': Sorted descending. Activate to remove sorting.',
-      sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.',
+      sortDescending: ': 降順の並び替え。ソートを削除するには有効にしてください。',
+      sortAscending: ': 昇順の並び替え。降順の並び替えのためには有効にしてください。.',
+      sortNone: ': ソートされていません。昇順のソートのためには有効にしてください。',
     },
-    sortBy: 'Sort by',
+    sortBy: 'ソート方式',
   },
   dataFooter: {
     itemsPerPageText: '1ページあたりの件数：',
@@ -29,13 +29,16 @@ export default {
   carousel: {
     prev: '前のビジュアル',
     next: '次のビジュアル',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: 'さらに{0}',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counter: '{0} ファイル',
+    counterSize: '{0} ファイル (合計 {1})',
   },
   timePicker: {
     am: 'AM',

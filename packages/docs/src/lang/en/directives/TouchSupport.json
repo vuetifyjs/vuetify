@@ -1,6 +1,6 @@
 {
-  "header": "# Touch Support",
-  "headerText": "The <code>v-touch</code> directive allows you to capture swipe gestures and apply directional callbacks.",
+  "heading": "# Touch Support",
+  "headingText": "The <code>v-touch</code> directive allows you to capture swipe gestures and apply directional callbacks.",
   "examples": {
     "usage": {
       "desc": "On a mobile device, try swiping in various directions.",

@@ -36,7 +36,7 @@
                 />
                 <v-btn
                   :aria-label="`Link to layout for ${layout.name}`"
-                  :href="layout.href"
+                  :href="`/${$route.params.lang}/examples/layouts/${kebabCase(layout.name)}`"
                   :title="`Link to layout for ${layout.name}`"
                   class="mx-2"
                   color="indigo"
@@ -70,27 +70,30 @@
 </template>
 
 <script>
+  // Utilities
+  import kebabCase from 'lodash/kebabCase'
   import { getBranch } from '@/util/helpers'
 
   export default {
     data: () => ({
       branch: null,
       layouts: [
-        { name: 'Baseline', href: '/examples/layouts/baseline' },
-        { name: 'Baseline Flipped', href: '/examples/layouts/baseline-flipped' },
-        { name: 'Centered', href: '/examples/layouts/centered' },
-        { name: 'Complex', href: '/examples/layouts/complex' },
-        { name: 'Dark', href: '/examples/layouts/dark' },
-        { name: 'Google Contacts', href: '/examples/layouts/google-contacts' },
-        { name: 'Google Keep', href: '/examples/layouts/google-keep' },
-        { name: 'Google Youtube', href: '/examples/layouts/google-youtube' },
-        { name: 'Sandbox', href: '/examples/layouts/sandbox' },
+        { name: 'Baseline', href: '/layouts/layouts/demos/baseline' },
+        { name: 'Baseline Flipped', href: '/layouts/layouts/demos/baseline-flipped' },
+        { name: 'Centered', href: '/layouts/layouts/demos/centered' },
+        { name: 'Complex', href: '/layouts/layouts/demos/complex' },
+        { name: 'Dark', href: '/layouts/layouts/demos/dark' },
+        { name: 'Google Contacts', href: '/layouts/layouts/demos/google-contacts' },
+        { name: 'Google Keep', href: '/layouts/layouts/demos/google-keep' },
+        { name: 'Google Youtube', href: '/layouts/layouts/demos/google-youtube' },
+        { name: 'Sandbox', href: '/layouts/layouts/demos/sandbox' },
       ],
     }),
     mounted () {
       this.branch = getBranch()
     },
     methods: {
+      kebabCase,
       genSrc (name) {
         return `https://cdn.vuetifyjs.com/images/layouts/${name.toLowerCase().replace(' ', '-')}.png`
       },

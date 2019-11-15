@@ -1,6 +1,5 @@
 {
   "becomeSponsor": "Apoie o Vuetify",
-  "callout": "Framework de Componentes<br>Material Design",
   "features": {
     "community": {
       "text": "Quando você se depara com um obstáculo, você precisa de assistência imediata. Vuetify oferece um suporte em nossa enorme comunidade no Discord.",
@@ -11,15 +10,14 @@
       "title": "Componentes do Material Semânticos"
     },
     "scaffolding": {
+      "text": "Vuetify suporta o futuro das ferramentas do Vue através do seu plugin Vue CLI 3. Com um comando você está pronto para começar a construir sua próxima grande ideia.",
       "title": "Estruturas Prontas de Projetos"
     }
   },
   "getHelp": "Obter ajuda",
   "getStarted": "Começar",
   "github": "Github",
-  "madeWithVuetify": "Projetos feitos com/para o Vuetify",
   "materialDesign": "Material Design",
   "mit": "Licença MIT",
-  "proudlySponsoredBy": "Patrocinadores no Patreon",
-  "whyVuetify": "Por que Vuetify?"
+  "whyVuetifyText2": "Por que Vuetify?"
 }

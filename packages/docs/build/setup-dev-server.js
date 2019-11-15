@@ -24,7 +24,7 @@ module.exports = function setupDevServer (app, templatePath, cb) {
       cb(bundle, {
         template,
         clientManifest,
-        shouldPrefetch: () => false
+        shouldPrefetch: () => false,
       })
     }
   }
@@ -40,7 +40,7 @@ module.exports = function setupDevServer (app, templatePath, cb) {
   // modify client config to work with hot middleware
   const entries = [
     clientConfig.entry.app,
-    'webpack-hot-middleware/client?reload=true?name=client'
+    'webpack-hot-middleware/client?reload=true?name=client',
   ]
   clientConfig.entry.app = entries
   clientConfig.output.filename = '[name].js'
@@ -53,9 +53,10 @@ module.exports = function setupDevServer (app, templatePath, cb) {
   const clientCompiler = compiler.compilers.find(compiler => compiler.name === 'client')
   const serverCompiler = compiler.compilers.find(compiler => compiler.name === 'server')
   const devMiddleware = require('webpack-dev-middleware')(compiler, {
+    stats: 'errors-warnings',
     publicPath: clientConfig.output.publicPath,
     // noInfo: true,
-    serverSideRender: true
+    serverSideRender: true,
   })
   app.use(devMiddleware)
   clientCompiler.hooks.done.tap('dev server', () => {

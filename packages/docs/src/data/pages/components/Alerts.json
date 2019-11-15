@@ -7,27 +7,10 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "usage"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "api",
-          "value": ["v-alert"]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "playground-new",
+          "type": "usage-new",
           "value": {
             "booleans": [
+              "colored-border",
               "dismissible"
             ],
             "sliders": [
@@ -49,6 +32,32 @@
               "tile"
             ],
             "selects": [
+              {
+                "prop": "border",
+                "label": "Border",
+                "attrs": {
+                  "items": [
+                    "top",
+                    "right",
+                    "left",
+                    "bottom"
+                  ]
+                }
+              },
+              {
+                "prop": "color",
+                "label": "Color",
+                "attrs": {
+                  "items": [
+                    "red",
+                    "orange",
+                    "yellow",
+                    "green",
+                    "blue",
+                    "purple"
+                  ]
+                }
+              },
               {
                 "prop": "icon",
                 "label": "Icon",
@@ -73,6 +82,15 @@
               }
             ]
           }
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": ["v-alert"]
         }
       ]
     },

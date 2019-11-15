@@ -1,7 +1,6 @@
 {
   "examples": {
     "icon-dividers": {
-      "header": "### Разделители иконок",
       "desc": "Для варианта иконок breadcrumbs могут использовать любую икону из иконок Material Design."
     }
   }

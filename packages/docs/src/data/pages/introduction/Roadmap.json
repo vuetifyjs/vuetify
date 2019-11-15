@@ -1,0 +1,23 @@
+{
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        { "type": "introduction-roadmap" }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "introduction/long-term-support",
+            "introduction/meet-the-team",
+            "introduction/frequently-asked-questions"
+          ]
+        }
+      ]
+    }
+  ]
+}

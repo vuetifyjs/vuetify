@@ -71,4 +71,26 @@ describe('Overlayable.ts', () => {
 
     expect(wrapper.vm.overlay.zIndex).toBe(8)
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8142
+  it('should not update overlay state if not active', () => {
+    const cb = jest.fn()
+    const wrapper = mountFunction({
+      methods: {
+        removeOverlay: cb,
+        genOVerlay: cb,
+      },
+    })
+
+    wrapper.setProps({ hideOverlay: true })
+    wrapper.setProps({ hideOverlay: false })
+
+    expect(cb).not.toHaveBeenCalled()
+
+    wrapper.setData({ isActive: true })
+    wrapper.setProps({ hideOverlay: true })
+    wrapper.setProps({ hideOverlay: false })
+
+    expect(cb).toHaveBeenCalledTimes(1)
+  })
 })

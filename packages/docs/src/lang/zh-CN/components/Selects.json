@@ -1,24 +1,21 @@
 {
-  "headerText": "选择器组件用于从选项列表中收集用户提供的信息。",
   "examples": {
     "light": {
-      "header": "亮色主题",
       "desc": "标准的单选有多种配置选项"
     },
     "icons": {
-      "header": "图标",
+      "heading": "图标",
       "desc": "使用自定义前置或者后置图标。"
     },
     "multiple": {
-      "header": "多选",
+      "heading": "多选",
       "desc": "多选择器可以使用 `v-chip` 组件来显示已选项。"
     },
     "custom-text-and-value": {
-      "header": "自定义选项的文本和值",
       "desc": "你可以指定选项数组中的文本与值字段对应的特定属性，在默认情况下是 **text** 和 **value**。在这个例子中，我们也可以用 `return-object` 属性来返回被选中的对象。"
     },
     "disabled": {
-      "header": "禁用"
+      "heading": "禁用"
     }
   },
   "props": {
@@ -28,7 +25,6 @@
     "combobox": "在单选中 **tags** 的一个变种",
     "debounceSearch": "去除搜索框正在 emitted 的值",
     "deletableChips": "添加一个去除图标的到选定的小纸片（chips）",
-    "dense": "减小列表的最大高度",
     "disabled": "禁用输入",
     "editable": " 创建一个可编辑按钮 - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "filter": "用于过滤条目的功能",

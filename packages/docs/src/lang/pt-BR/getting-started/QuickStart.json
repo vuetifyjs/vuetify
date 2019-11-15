@@ -1,17 +1,6 @@
 {
-  "header": "Inicio rápido",
-  "headerText": "Use um dos pacotes Vuetify Vue CLI _(com base nos exemplos oficiais)_ para começar seu projeto. Vuetify suporta **SSR** (server-side rendering), **SPA** (single page application), **PWA** (progressive web application) e páginas **HTML** padrão.",
-  "browserHeader": "Navegadores suportados",
-  "browserText": "Vuetify é um framework progressivo que tenta levar o desenvolvimento web para o próximo nível. Para melhor realizar esta tarefa, alguns sacrifícios tiveram que ser feitos em termos de suporte para versões antigas do Internet Explorer. Esta não é uma lista completa dos navegadores compatíveis, mas sim dos principais.",
-  "newHeader": "Novas aplicações",
-  "existingHeader": "Aplicações existentes",
-  "existingText1": "Para incluir o Vuetify em um projeto existente, você deve inseri-lo em seu node_modules. Você pode usar `npm` ou `yarn` para realizar esta tarefa. Estes são ambos gerenciadores de pacotes nos quais permitem que você controle quais recursos estarão disponíveis na sua aplicação.",
-  "alert2": "*Aviso*: Embora o Vuetify tenta ao máximo não causar qualquer colisão no CSS, não há garantia de que seus estilos personalizados não alterem sua experiência ao integrar este framework em seu projeto existente.",
-  "ie11Header": "Suporte ao IE11 e Safari 9",
-  "ie11Text2": "Devido ao suporte limitado do Internet Explorer para tags `<template>`, você deve enviar elementos do dom totalmente compilados para o navegador. Isso pode ser feito tanto construindo antecipamente seu código Vue quanto criando componentes auxiliares para substituir os elementos do DOM. Por exemplo, se for enviado diretamente para o IE, isso falhará:",
-  "browserSupport": {
-    "supported": "Suportado",
-    "notSupported": "Não suportado",
-    "polyfill": "Suportado com polyfill"
-  }
+  "uiImg1": "Instalar o Plugin Vuetify",
+  "uiImg2": "Configurar sua instalação Vuetify",
+  "cdnHeader": "## Uso de CDN",
+  "cdnText": "Para testar o Vuetify.js sem instalar um template do Vue CLI, copie o código abaixo em seu `index.html`. Isto irá carregar a versão mais recente do Vue e Vuetify, permitindo que você comece a brincar com componentes. Você também pode usar o [Vuetify starter](https://template.vuetifyjs.com) no codepen. Embora não recomendado, se você precisa usar os pacotes cdn em um ambiente _production_ é recomendado que você esconda as versões de seus ativos. Para mais informações sobre como fazer isso, navegue para o site [jsdelivr](https://www.jsdelivr.com/)."
 }

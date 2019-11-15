@@ -1,45 +1,49 @@
 {
-  "header": "crwdns39654:0crwdne39654:0",
-  "headerText": "crwdns33150:0crwdne33150:0",
+  "heading": "crwdns45606:0crwdne45606:0",
+  "headingText": "crwdns45608:0crwdne45608:0",
   "objectAlert": "crwdns39656:0crwdne39656:0",
   "examples": {
     "usage": {
       "desc": "crwdns33154:0crwdne33154:0"
     },
     "light": {
-      "header": "crwdns33156:0crwdne33156:0",
+      "heading": "crwdns45610:0crwdne45610:0",
       "desc": "crwdns33158:0crwdne33158:0"
     },
     "icons": {
-      "header": "crwdns33160:0crwdne33160:0",
+      "heading": "crwdns45612:0crwdne45612:0",
       "desc": "crwdns33162:0crwdne33162:0"
     },
     "multiple": {
-      "header": "crwdns33164:0crwdne33164:0",
+      "heading": "crwdns45614:0crwdne45614:0",
       "desc": "crwdns33166:0crwdne33166:0"
     },
     "custom-text-and-value": {
-      "header": "crwdns39658:0crwdne39658:0",
+      "heading": "crwdns45616:0crwdne45616:0",
       "desc": "crwdns39660:0crwdne39660:0"
     },
     "slots": {
-      "header": "crwdns33172:0crwdne33172:0",
+      "heading": "crwdns45618:0crwdne45618:0",
       "desc": "crwdns33174:0crwdne33174:0"
     },
     "selection-appearance": {
-      "header": "crwdns39662:0crwdne39662:0",
+      "heading": "crwdns45620:0crwdne45620:0",
       "desc": "crwdns39664:0crwdne39664:0"
     },
     "disabled": {
-      "header": "crwdns39666:0crwdne39666:0",
+      "heading": "crwdns45622:0crwdne45622:0",
       "desc": "crwdns39668:0crwdne39668:0"
     },
+    "dense": {
+      "heading": "crwdns45624:0crwdne45624:0",
+      "desc": "crwdns43092:0crwdne43092:0"
+    },
     "readonly": {
-      "header": "crwdns39670:0crwdne39670:0",
+      "heading": "crwdns45626:0crwdne45626:0",
       "desc": "crwdns39672:0crwdne39672:0"
     },
     "menu-props": {
-      "header": "crwdns39674:0crwdne39674:0",
+      "heading": "crwdns45628:0crwdne45628:0",
       "desc": "crwdns39676:0crwdne39676:0"
     }
   },
@@ -53,7 +57,6 @@
     "dark": "crwdns39678:0crwdne39678:0",
     "debounceSearch": "crwdns33194:0crwdne33194:0",
     "deletableChips": "crwdns33196:0crwdne33196:0",
-    "dense": "crwdns33198:0crwdne33198:0",
     "disabled": "crwdns33200:0crwdne33200:0",
     "eager": "crwdns39680:0crwdne39680:0",
     "editable": "crwdns33202:0[spec]crwdne33202:0",
@@ -100,6 +103,7 @@
     "click:prepend-inner": "crwdns33274:0crwdne33274:0",
     "focus": "crwdns39692:0crwdne39692:0",
     "update:error": "crwdns33276:0crwdne33276:0",
+    "update:list-index": "crwdns43094:0crwdne43094:0",
     "update:search-input": "crwdns39694:0crwdne39694:0"
   }
 }

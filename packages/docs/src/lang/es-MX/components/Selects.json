@@ -1,24 +1,21 @@
 {
-  "headerText": "Los componentes _select fields_ son utilizados para recolectar información provista por el usuario de una lista de opciones.",
   "examples": {
     "light": {
-      "header": "Tema _Light_",
       "desc": "Un único _select_ estándar tiene una multitud de opciones de configuración."
     },
     "icons": {
-      "header": "Íconos",
+      "heading": "Íconos",
       "desc": "Utiliza un ícono personalizado al principio o al final."
     },
     "multiple": {
-      "header": "Múltiple",
+      "heading": "Múltiple",
       "desc": "Un multi-select puede utilizar `v-chip` para mostrar los elementos seleccionados."
     },
     "custom-text-and-value": {
-      "header": "Texto y valor del elemento personalizado",
       "desc": "Puedes especificar las propiedades dentro de tu arreglo de elementos que correspondan a los campos texto y valor (_text_ y _value_). En este ejemplo también usamos la prop `return-object` que retornará el objeto entero del elemento seleccionado."
     },
     "disabled": {
-      "header": "Deshabilitado"
+      "heading": "Deshabilitado"
     }
   },
   "props": {
@@ -28,7 +25,6 @@
     "combobox": "La variante de selección simple de **tags**",
     "debounceSearch": "Retrasa el tiempo entre valores emitidos desde la búsqueda",
     "deletableChips": "Agrega un ícono de _quitar_ a los chips seleccionados",
-    "dense": "Reduce la altura máxima de los elementos de la lista",
     "disabled": "Deshabilita el input",
     "editable": " Crea un botón editable- [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "filter": "La función que se utiliza para filtrar los elementos.",

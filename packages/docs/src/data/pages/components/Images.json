@@ -11,6 +11,16 @@
       "type": "section",
       "children": [
         {
+          "type": "alert",
+          "lang": "alert1",
+          "value": "info"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "usage",
           "value": "usage"
         }

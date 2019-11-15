@@ -101,7 +101,7 @@ describe('VImg.ts', () => {
 
     jest.runOnlyPendingTimers()
 
-    expect(error).toHaveBeenCalledTimes(1)
+    expect(error).toHaveBeenCalledTimes(2)
     expect(error).toHaveBeenCalledWith(LOAD_FAILURE_SRC)
     expect('Image load failed').toHaveBeenWarned()
   })

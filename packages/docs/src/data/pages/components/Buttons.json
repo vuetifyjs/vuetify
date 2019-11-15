@@ -11,28 +11,7 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "usage"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "api",
-          "value": [
-            "v-btn",
-            "v-btn-toggle"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "playground-new",
+          "type": "usage-new",
           "value": {
             "booleans": [
               "disabled",
@@ -86,6 +65,18 @@
               "tile"
             ]
           }
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-btn",
+            "v-btn-toggle"
+          ]
         }
       ]
     },

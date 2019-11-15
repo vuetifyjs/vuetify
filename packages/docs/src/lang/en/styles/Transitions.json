@@ -1,44 +1,44 @@
 {
-  "header": "# Motion",
-  "headerText": "Smooth animations help make a UI feel great. Using Vue's transition system and re-usable functional components, you can easily control the motion of your application. Most components can have their transition altered through the <code>transition</code> prop.",
+  "heading": "# Motion",
+  "headingText": "Smooth animations help make a UI feel great. Using Vue's transition system and re-usable functional components, you can easily control the motion of your application. Most components can have their transition altered through the <code>transition</code> prop.",
   "examples": {
     "usage": {
       "desc": "Vuetify comes with over 10 custom css animations that can be applied to numerous components or your own custom use-case"
     },
     "slide-x-transitions": {
-      "header": "### Slide X transitions",
+      "heading": "### Slide X transitions",
       "desc": "Slide x transitions move along the horizontal axis."
     },
     "slide-y-transitions": {
-      "header": "### Slide Y transitions",
+      "heading": "### Slide Y transitions",
       "desc": "Animations use the application's <code>$primary-transition</code>."
     },
     "scroll-x-transitions": {
-      "header": "### Scroll X transitions",
+      "heading": "### Scroll X transitions",
       "desc": "Scroll X transitions continue along the horizontal axis."
     },
     "scroll-y-transitions": {
-      "header": "### Scroll Y transitions",
+      "heading": "### Scroll Y transitions",
       "desc": "Scroll Y transitions continue along the vertical axis."
     },
     "scale-transition": {
-      "header": "### Scale transition",
+      "heading": "### Scale transition",
       "desc": "Many of Vuetify's components contain a <code>transition</code> prop which allows you to specify your own."
     },
     "fade-transition": {
-      "header": "### Fade transition",
+      "heading": "### Fade transition",
       "desc": "Another example of the fade transition can be found on the Carousel component."
     },
     "expand-transition": {
-      "header": "### Expand transition",
+      "heading": "### Expand transition",
       "desc": "The expand transition is used in Expansion Panels and List Groups. There is also a horizonal version available with `v-expand-x-transition`."
     },
     "custom-origin": {
-      "header": "### Custom Origin",
+      "heading": "### Custom Origin",
       "desc": "Programmatically control the transition origin with a simple prop."
     },
     "todo": {
-      "header": "### Todo list",
+      "heading": "### Todo list",
       "desc": "Using multiple custom transitions, it is easy to bring a simple todo list to life!"
     }
   },

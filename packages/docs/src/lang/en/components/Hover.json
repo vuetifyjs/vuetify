@@ -1,24 +1,24 @@
 {
-  "header": "# Hover",
-  "headerText": "The `v-hover` component provides a clean interface for handling hover states for any component.",
+  "heading": "# Hover",
+  "headingText": "The `v-hover` component provides a clean interface for handling hover states for any component.",
   "examples": {
     "usage": {
       "desc": "The `v-hover` component is a wrapper that should contain only one child element, and can trigger an event when hovered over. In order for `v-hover` to work properly, either the `value` prop should be set to `true` or the wrapped element should contain `slot-scope=\"{ wrapper }\"`."
     },
     "disabled": {
-      "header": "### Disabled",
+      "heading": "### Disabled",
       "desc": "The `disabled` prop disables the hover functionality."
     },
     "open-and-close-delay": {
-      "header": "### Open/Close Delay",
+      "heading": "### Open/Close Delay",
       "desc": "Delay `v-hover` events by using `open-delay` and `close-delay` props in combination or separately."
     },
     "hover-list": {
-      "header": "### Hover list",
+      "heading": "### Hover list",
       "desc": "`v-hover` can be used in combination with `v-for` to make a single item stand out when the user interacts with the list."
     },
     "transition": {
-      "header": "### Transitions",
+      "heading": "### Transitions",
       "desc": "Create highly customized components that respond to user interaction."
     }
   },

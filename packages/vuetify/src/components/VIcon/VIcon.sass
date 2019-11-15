@@ -1,5 +1,4 @@
 // Imports
-@import '../../styles/styles.sass'
 @import './_variables.scss'
 
 // Theme
@@ -24,6 +23,9 @@
   vertical-align: middle
   user-select: none
 
+  &--dense
+    font-size: $icon-size-dense
+
 .v-icon
   &--right
     margin-left: map-get($grid-gutters, 'md')
@@ -47,7 +49,5 @@
     fill: currentColor
 
   &--dense
-    font-size: $icon-size-dense
-
     &--is-component
       height: $icon-size-dense

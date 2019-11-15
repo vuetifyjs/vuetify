@@ -1,20 +1,9 @@
 {
   "buy": "Informations et démos",
+  "buyNow": "Achetez maintenant",
   "free": "Gratuit",
   "live": "Aperçu en direct",
   "premium": "Premium",
   "downloadNow": "Télécharger maintenant",
-  "viewDemo": "Voir la démo",
-  "templates": {
-    "alpha": {
-      "title": "Thème Alpha"
-    },
-    "dashboard": {
-      "title": "Tableau de bord Material",
-      "description": "Vuetify Material Dashboard est une belle ressource construite avec Vuetify, Vuex et Vuejs. Cela vous aidera à commencer à développer des tableaux de bord en un rien de temps."
-    },
-    "blog": {
-      "title": "Blog"
-    }
-  }
+  "viewDemo": "Voir la démo"
 }

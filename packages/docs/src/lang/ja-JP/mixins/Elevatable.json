@@ -1,1 +1,5 @@
-{}
+{
+  "props": {
+    "elevation": "コンポーネントに適用される高さを0〜24の範囲で指定します。[elevation page](/ styles / elevation) で詳細を確認できます。"
+  }
+}

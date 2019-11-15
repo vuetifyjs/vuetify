@@ -29,6 +29,9 @@ export default {
   carousel: {
     prev: 'Ankstesnioji skaidrė',
     next: 'Kita skaidrė',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: 'Daugiau {0}',

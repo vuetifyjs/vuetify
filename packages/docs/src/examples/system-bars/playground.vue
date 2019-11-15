@@ -10,7 +10,7 @@
         >
           <v-icon>mdi-gmail</v-icon>
           <span>10 unread emails</span>
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
           <v-icon>mdi-wifi-strength-4</v-icon>
           <v-icon>mdi-signal-cellular-outline</v-icon>
           <v-icon>mdi-battery</v-icon>

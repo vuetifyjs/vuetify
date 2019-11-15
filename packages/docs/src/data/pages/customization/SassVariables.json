@@ -12,19 +12,11 @@
         },
         {
           "type": "heading",
-          "lang": "sassHeader2"
+          "lang": "setupHeading"
         },
         {
           "type": "text",
-          "lang": "sassText2"
-        },
-        {
-          "type": "markup",
-          "value": "bash_yarn_install_sass"
-        },
-        {
-          "type": "text",
-          "lang": "sassText3"
+          "lang": "setupText1"
         },
         {
           "type": "markup",
@@ -32,24 +24,7 @@
         },
         {
           "type": "text",
-          "lang": "sassText3a"
-        },
-        {
-          "type": "markup",
-          "value": "js_vue_config_sass_variables"
-        },
-        {
-          "type": "text",
-          "lang": "sassText4"
-        },
-        {
-          "type": "alert",
-          "lang": "sassAlert2",
-          "value": "warning"
-        },
-        {
-          "type": "text",
-          "lang": "sassText5"
+          "lang": "setupText2"
         }
       ]
     },
@@ -58,23 +33,15 @@
       "children": [
         {
           "type": "heading",
-          "lang": "sfcHeader"
-        },
-        {
-          "type": "text",
-          "lang": "sfcText1"
-        },
-        {
-          "type": "text",
-          "lang": "sfcText2"
-        },
-        {
-          "type": "text",
-          "lang": "sfcText3"
+          "lang": "webpackHeading"
         },
         {
           "type": "markup",
-          "value": "js_vue_config_sass_loader_config"
+          "value": "bash_yarn_install_sass"
+        },
+        {
+          "type": "text",
+          "lang": "webpackText1"
         }
       ]
     },

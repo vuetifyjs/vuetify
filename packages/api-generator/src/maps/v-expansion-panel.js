@@ -17,6 +17,12 @@ module.exports = {
         name: 'actions',
         props: undefined,
       },
+      {
+        name: 'default',
+        props: {
+          open: 'boolean',
+        },
+      },
     ],
     events: [
       {

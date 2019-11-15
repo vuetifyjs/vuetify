@@ -1,6 +1,6 @@
 {
-  "header": "crwdns24060:0crwdne24060:0",
-  "headerText": "crwdns24062:0crwdne24062:0",
+  "heading": "crwdns24060:0crwdne24060:0",
+  "headingText": "crwdns24062:0crwdne24062:0",
   "components": [
     "crwdns24064:0crwdne24064:0"
   ],
@@ -9,7 +9,7 @@
       "desc": "crwdns24066:0crwdne24066:0"
     },
     "subheader": {
-      "header": "crwdns24068:0crwdne24068:0",
+      "heading": "crwdns24068:0crwdne24068:0",
       "desc": "crwdns24070:0crwdne24070:0"
     }
   },

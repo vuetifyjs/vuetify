@@ -1,6 +1,6 @@
 {
-    "header": "Grid system",
-    "headerText": "Vuetify tiene un sistema de _grid_ de 12 puntos. Construido usando <kbd>flex-box</kbd>, el grid se utiliza para la distribución del contenido de la aplicación. Contiene 5 tipos de _media breakpoints_ que se usan para tamaños de pantalla u orientaciones específicas. Las props para los componentes _grid_ son en realidad clases que se derivan de sus propiedades definidas. Esto te permite especificar fácilmente las clases auxiliares como props, manteniendo la posibilidad de usar clases en cualquier parte.",
+    "heading": "Grid system",
+    "headingText": "Vuetify tiene un sistema de _grid_ de 12 puntos. Construido usando <kbd>flex-box</kbd>, el grid se utiliza para la distribución del contenido de la aplicación. Contiene 5 tipos de _media breakpoints_ que se usan para tamaños de pantalla u orientaciones específicas. Las props para los componentes _grid_ son en realidad clases que se derivan de sus propiedades definidas. Esto te permite especificar fácilmente las clases auxiliares como props, manteniendo la posibilidad de usar clases en cualquier parte.",
     "components": [
         "v-container",
         "v-layout",
@@ -10,46 +10,46 @@
     "examples": [
         {
             "grid": {
-                "header": "Uso",
+                "heading": "Uso",
                 "desc": "El `v-container` puede ser usado para una página enfocada en el centro, o se le puede agregar la prop `fluid` para que se exitienda a todo el ancho. `v-layout` se usa para separar secciones y contiene `v-flex`. La estructura de tu distribución (layout) se describe a continuación: **v-container** &raquo; **v-layout** &raquo; **v-flex**. Cada parte de la cadena del grid es un elemento flex-box. El último `v-flex` automáticamente hace que sus hijos sean <kbd>flex: 1 1 auto</kbd>.",
                 "uninverted": true
             },
             "offset": {
-                "header": "Desplazamiento",
+                "heading": "Desplazamiento",
                 "desc": "Los desplazamientos son útiles para compensar el espacio de elementos que no son visibles aún, o para controlar la posición del contenido. Al igual que con los _breakpoints_, puedes configurar un desplazamiento para cualquiera de los tamaños disponibles. Esto te permite modificar de manera precisa la distribución de tu aplicación para que cumpla con tus necesidades.",
                 "uninverted": true
             },
             "order": {
-                "header": "Orden",
+                "heading": "Orden",
                 "desc": "Puedes controlar el orden de los elementos del grid. Como con los desplazamientos, puedes configurar diferente orden para diferentes tamaños. Diseña distribuciones de pantalla especializadas para cada pantalla en cualquier aplicación.",
                 "uninverted": true
             },
             "directionAndAlign": {
-                "header": "Dirección y Alineación",
+                "heading": "Dirección y Alineación",
                 "desc": "Indica la dirección y la alineación de diferentes maneras. Todas las opciones de la api de <kbd>flex-box</kbd> está disponible a través de props auxiliares intuitivas.",
                 "uninverted": true
             },
             "rowColumnBreakpoint": {
-                "header": "Breakpoints para fila y columna",
+                "heading": "Breakpoints para fila y columna",
                 "desc": "Cambia dinámicamente tu distribución dependiendo de la resolución. **(cambia el tamaño de la ventana y mira cómo cambia la distribución a `row` para breakpoints más pequeños)**",
                 "uninverted": true
             },
             "nestedGrid": {
-                "header": "Grid anidado",
+                "heading": "Grid anidado",
                 "desc": "Los grids pueden anidarse, tal como en otros frameworks, para poder lograr distribuciones muy personalizadas.",
                 "uninverted": true
             },
             "uniqueLayouts": {
-                "header": "Distribuciones únicas",
+                "heading": "Distribuciones únicas",
                 "desc": "El poder y la flexibilidad del sistema de grid de Vuetify te permite crear interfaces de usuario asombrosas.",
                 "uninverted": true
             },
             "spacer": {
-                "header": "v-spacer",
+                "heading": "v-spacer",
                 "desc": "El componente `v-spacer` es útil cuando quieres llenar el espacio disponible o crear espacio entre dos componentes."
             },
             "tags": {
-                "header": "Etiquetas HTML",
+                "heading": "Etiquetas HTML",
                 "desc": "A veces querrás definir un elemento de distribución tan específico como una etiqueta, tal como `section` o `li`."
             }
         }

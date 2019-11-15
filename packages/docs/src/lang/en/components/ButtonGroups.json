@@ -1,28 +1,28 @@
 {
-  "header": "# Button groups",
-  "headerText": "The `v-btn-toggle` component is a simple wrapper for `v-item-group` built specifically to work with `v-btn`.",
+  "heading": "# Button groups",
+  "headingText": "The `v-btn-toggle` component is a simple wrapper for `v-item-group` built specifically to work with `v-btn`.",
   "examples": {
     "usage": {
       "desc": "Toggle buttons allow you to create a styled group of buttons that can selected or toggled under a single `v-model`"
     },
     "app-bar": {
-      "header": "### In toolbar",
+      "heading": "### In toolbar",
       "desc": "Easily integrate customized button solutions with a `v-toolbar`"
     },
     "qwerty": {
-      "header": "### Selected action",
+      "heading": "### Selected action",
       "desc": "Group similar actions and design your own WYSIWYG component."
     },
     "rounded": {
-      "header": "### Rounded buttons",
+      "heading": "### Rounded buttons",
       "desc": "You can make `VBtnToggle` rounded using the `rounded` prop."
     },
     "mandatory": {
-      "header": "### Mandatory",
+      "heading": "### Mandatory",
       "desc": "`mandatory` `VBtnToggle` always has value."
     },
     "multiple": {
-      "header": "### Multiple",
+      "heading": "### Multiple",
       "desc": "`multiple` `VBtnToggle` allows user to select multiple variants and returns value as an array."
     }
   },

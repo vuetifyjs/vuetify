@@ -1,73 +1,73 @@
 {
-  "header": "# Lists",
-  "headerText": "The `v-list` component is used to display information. It can contain an avatar, content, actions, subheaders and much more. Lists present content in a way that makes it easy to identify a specific item in a collection. They provide a consistent styling for organizing groups of text and images.",
+  "heading": "# Lists",
+  "headingText": "The `v-list` component is used to display information. It can contain an avatar, content, actions, subheaders and much more. Lists present content in a way that makes it easy to identify a specific item in a collection. They provide a consistent styling for organizing groups of text and images.",
   "alert1": "If you are looking for stateful list items, please check out [v-list-item-group](/components/list-item-groups).",
   "examples": {
     "usage": {
       "desc": "Lists come in three main variations. **single-line** (default), **two-line** and **three-line**. The line declaration specifies the minimum height of the item and can also be controlled from `v-list` with the same prop."
     },
     "avatar-title-and-action": {
-      "header": "### Avatar with title and action",
+      "heading": "### Avatar with title and action",
       "desc": "Lists also contain slots for a more explicit approach. If you choose this approach, remember you must provide additional props for correct spacing. In this example, we have a tile with an avatar, so we must provide an `avatar` property."
     },
     "icon-two-lines-and-action": {
-      "header": "### Icon with 2 lines and action",
+      "heading": "### Icon with 2 lines and action",
       "desc": "Lists can contain subheaders, dividers, and can contain 1 or more lines. The subtitle will overflow with ellipsis if it extends past one line."
     },
     "avatar-three-lines": {
-      "header": "### Avatar with 3 lines",
+      "heading": "### Avatar with 3 lines",
       "desc": "For three line lists, the subtitle will clamp vertically at 2 lines and then ellipsis. This feature uses [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) and is not supported in all browsers."
     },
     "avatar-subheader-title-and-action": {
-      "header": "### Avatar with title and action",
+      "heading": "### Avatar with title and action",
       "desc": "Here we combine **v-list-item-avatar** and **v-list-item-icon** in a single-line list."
     },
     "subheadings-and-dividers": {
-      "header": "### Subheadings and dividers",
+      "heading": "### Subheadings and dividers",
       "desc": "Lists can contain multiple subheaders and dividers."
     },
     "nested": {
-      "header": "### Nested lists",
+      "heading": "### Nested lists",
       "desc": "Using the `v-list-group` component you can create up to **2** levels in depth using the **sub-group** prop."
     },
     "card-list": {
-      "header": "### Card image with toolbar and list",
+      "heading": "### Card image with toolbar and list",
       "desc": "A list can be combined with a card."
     },
     "title-subtitle-actions-and-action-text": {
-      "header": "### Title with sub-title, actions and action-text",
+      "heading": "### Title with sub-title, actions and action-text",
       "desc": "A list can contain a stack within an action. This is useful when you need to display meta text next to your action item."
     },
     "action-title-and-subtitle": {
-      "header": "### Action with title and sub-title",
+      "heading": "### Action with title and sub-title",
       "desc": "A **three-line** list with actions. Utilizing **[v-list-item-group](/components/list-item-groups)**, easily connect actions to your tiles."
     },
     "expansion-lists": {
-      "header": "### Expansion Lists",
+      "heading": "### Expansion Lists",
       "desc": "A list can contain a group of items which will display on click. Expansion lists are also used within the **[v-navigation-drawer](/components/navigation-drawers)** component."
     },
     "nav": {
-      "header": "### Navigation lists",
+      "heading": "### Navigation lists",
       "desc": "Lists can receive an alternative **nav** styling that reduces the width `v-list-item` takes up as well as adding a border radius."
     },
     "shaped": {
-      "header": "### Shaped lists",
+      "heading": "### Shaped lists",
       "desc": "Shaped lists have rounded borders on one side of the `v-list-item`."
     },
     "disabled": {
-      "header": "### Disabled lists",
+      "heading": "### Disabled lists",
       "desc": "You cannot interact with disabled `v-list`."
     },
     "dense": {
-      "header": "### Dense",
+      "heading": "### Dense",
       "desc": "`v-list` can be lowered with `dense` property."
     },
     "flat": {
-      "header": "### Flat",
+      "heading": "### Flat",
       "desc": "Items don't change when selected in `v-list` with `flat` property."
     },
     "rounded": {
-      "header": "### Rounded",
+      "heading": "### Rounded",
       "desc": "You can make `v-list` items rounded."
     }
   },
