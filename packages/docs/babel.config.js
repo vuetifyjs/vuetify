@@ -5,5 +5,17 @@ module.exports = {
       modules: false,
       corejs: { version: 2, proposals: true }
     }]
-  ]
+  ],
+  env: {
+    server: {
+      presets: [
+        ['@babel/preset-env', {
+          targets: {
+            node: true
+          },
+          modules: false
+        }]
+      ]
+    }
+  }
 }

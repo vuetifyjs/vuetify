@@ -30,6 +30,14 @@ module.exports = merge(base, {
   module: {
     rules: [
       {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        options: {
+          envName: 'server'
+        },
+        exclude: /node_modules/
+      },
+      {
         // TODO: maybe don't use MiniCssExtractPlugin? It really doesn't like SSR
         // https://github.com/webpack-contrib/mini-css-extract-plugin/issues/90
         test: /\.(css|styl(us)?|s(a|c)ss)$/,
