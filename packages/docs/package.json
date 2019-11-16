@@ -4,14 +4,10 @@
   "private": true,
   "author": "John Leider <john.j.leider@gmail.com>",
   "version": "2.1.6",
-  "engines": {
-    "node": "10.x"
-  },
   "scripts": {
     "dev": "cross-env node --max_old_space_size=4096 server",
     "start": "cross-env NODE_ENV=production node server",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config build/webpack.prod.config.js --no-progress --hide-modules",
-    "now-build": "cd ../../ && yarn build",
     "lint": "eslint --ext .js,.vue,.json src -f codeframe",
     "lint:fix": "yarn lint --fix"
   },
