@@ -153,6 +153,12 @@ export default mixins(
     open (value: (string | number | any)[]) {
       this.handleNodeCacheWatcher(value, this.openCache, this.updateOpen, this.emitOpen)
     },
+    openAll: {
+      immediate: true,
+      handler (value: boolean) {
+        value && this.$nextTick(() => this.updateAll(true))
+      },
+    },
   },
 
   created () {
@@ -167,9 +173,7 @@ export default mixins(
       consoleWarn('The prepend and append slots require a slot-scope attribute', this)
     }
 
-    if (this.openAll) {
-      this.updateAll(true)
-    } else {
+    if (!this.openAll) {
       this.open.forEach(key => this.updateOpen(key, true))
       this.emitOpen()
     }

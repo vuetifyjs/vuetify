@@ -253,6 +253,29 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should open all children when open-all prop changes to true', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: threeLevels,
+      },
+    })
+
+    await wrapper.vm.$nextTick()
+
+    wrapper.setProps({ openAll: true })
+
+    await wrapper.vm.$nextTick()
+
+    const openHtml = wrapper.html()
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ openAll: false })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toEqual(openHtml)
+  })
+
   it('should open/close all children when using updateAll', async () => {
     const wrapper = mountFunction({
       propsData: {
