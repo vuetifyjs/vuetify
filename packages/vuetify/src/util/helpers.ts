@@ -69,11 +69,13 @@ export function createSimpleTransition (
         },
       }
 
+      const onLeave = data.on!.leave || []
+
       if (context.props.leaveAbsolute) {
-        data.on!.leave = [...data.on!.leave, (el: HTMLElement) => (el.style.position = 'absolute')]
+        data.on!.leave = [...onLeave, (el: HTMLElement) => (el.style.position = 'absolute')]
       }
       if (context.props.hideOnLeave) {
-        data.on!.leave = [...data.on!.leave, (el: HTMLElement) => (el.style.display = 'none')]
+        data.on!.leave = [...onLeave, (el: HTMLElement) => (el.style.display = 'none')]
       }
 
       return h(tag, mergeData(context.data, data), context.children)
