@@ -135,11 +135,10 @@ export default baseMixins.extend({
           // HTMLElement | Element
           activator = this.activator
         }
-      } else if (e) {
-        // Activated by a click event
-        activator = (e.currentTarget || e.target) as HTMLElement
-      } else if (this.activatorNode.length) {
-        // Last resort, use the contents of the activator slot
+      } else if (this.activatorNode.length === 1 || (this.activatorNode.length && !e)) {
+        // Use the contents of the activator slot
+        // There's either only one element in it or we
+        // don't have a click event to use as a last resort
         const vm = this.activatorNode[0].componentInstance
         if (
           vm &&
@@ -151,6 +150,9 @@ export default baseMixins.extend({
         } else {
           activator = this.activatorNode[0].elm as HTMLElement
         }
+      } else if (e) {
+        // Activated by a click event
+        activator = (e.currentTarget || e.target) as HTMLElement
       }
 
       this.activatorElement = activator

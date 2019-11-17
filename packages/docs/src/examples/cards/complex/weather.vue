@@ -1,7 +1,6 @@
 <template>
   <v-card
     class="mx-auto"
-    color="#F9F9F9"
     max-width="400"
   >
     <v-list-item two-line>

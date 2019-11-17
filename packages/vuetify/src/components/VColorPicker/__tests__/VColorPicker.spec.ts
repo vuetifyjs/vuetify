@@ -137,4 +137,15 @@ describe('VColorPicker.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/9472
+  it('should work correctly when initial value is null', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: null,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
