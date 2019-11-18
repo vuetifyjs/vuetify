@@ -1,1 +1,17 @@
-{}
+{
+  "props": {
+    "activeClass": "Configurez la classe CSS active appliquée lorsque le lien est actif. Vous pouvez trouver plus d'informations sur le prop [**active-class** ](https://router.vuejs.org/api/#active-class) sur la documentation du routeur de vue.",
+    "append": "Paramètre **append** prop ajoute toujours le chemin relatif au chemin actuel. Vous pouvez trouver plus d'informations sur [**append** prop](https://router.vuejs.org/api/#append) sur la documentation du routeur de vue.",
+    "disabled": "Supprime la capacité de cliquer ou de cibler un composant.",
+    "exact": "Correspond exactement au lien. Sans cela, '/' correspondra à chaque itinéraire. Vous pouvez trouver plus d'informations sur le [**exact** prop](https://router.vuejs.org/api/#exact) sur la documentation du routeur de vue.",
+    "exactActiveClass": "Configurez la classe CSS active appliquée lorsque le lien est actif avec la correspondance exacte. Vous pouvez trouver plus d'informations sur le prop [**exact-active-class** en cours](https://router.vuejs.org/api/#exact-active-class) sur la documentation du routeur de vue.",
+    "href": "Définit le composant comme ancré et applique l'attribut **href** .",
+    "link": "Indique que le composant est un lien. Ceci est automatique lorsque vous utilisez la prop **href** ou **to**.",
+    "nuxt": "Spécifie le lien est de type `nuxt-link`.Pour l'utilisation du [nuxt framework](https://nuxtjs.org/api/components-nuxt-link/).",
+    "replace": "Le paramètre **replace** prop appellera `router.replace()` au lieu de `router.push()` lorsqu'on clique dessus, de sorte que la navigation ne laisse pas d'historique. Vous trouverez plus d'informations sur le[**replace** prop](https://router.vuejs.org/api/#replace) sur la documentation vue-router.",
+    "ripple": "Mixins.Rippleable.props.ripple",
+    "to": "Indique l'itinéraire cible du lien. Vous trouverez plus d'informations sur le[**to** prop](https://router.vuejs.org/api/#to) sur la documentation vue-router.",
+    "tag": "Components.Sheets.props.tag",
+    "target": "Désigne l'attribut cible. Ceci ne doit être appliqué qu'en cas d'utilisation de l'accessoire **href****."
+  }
+}

@@ -1,1 +1,10 @@
-{}
+{
+  "examples": {
+    "usage": {
+      "desc": "La grille Vuetify est fortement inspirée par la [grille Bootstrap](https://getbootstrap.com/docs/4.0/layout/grille/). Elle est intégré en utilisant une série de conteneurs, de lignes et de colonnes pour la mise en page et l'alignement du contenu. **Si vous êtes novice avec flexbox**, [Lire le guide flexbox CSS Tricks](https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-background) pour les extraits de fond, de terminologie, de lignes directrices et de code."
+    }
+  },
+  "props": {
+    "tag": "Components.Sheets.props.tag"
+  }
+}

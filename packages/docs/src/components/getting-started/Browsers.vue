@@ -10,7 +10,7 @@
           :key="browser.title"
           cols="12"
           sm="6"
-          md="4"
+          xl="4"
         >
           <v-list-item>
             <v-list-item-avatar

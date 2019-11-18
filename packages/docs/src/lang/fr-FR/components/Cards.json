@@ -1,36 +1,60 @@
 {
-  "headingText": "Le composant `v-card` est un composant polyvalent qui peut être utilisé pour tout allant d'un simple panneau à une image statique. Le composant **card** a de nombreux composants d'aide pour rendre le balisage aussi facile que possible. Les composants qui n'ont aucune option listée utilisent le composant fonctionnel **Vue's** pour un rendu plus rapide et servent de balisage pour rendre la construction plus facile.",
   "componentsHeader": "### Composants fonctionnels",
   "componentsList": [
     "`v-card-actions`: le conteneur utilisé pour placer ** actions ** pour une carte, telles que [v-btn] (/ components / buttons) ou [v-menu] (/ components / menus). Applique également _special margin_ aux boutons afin qu’ils s’alignent correctement avec les autres zones de contenu de la carte.",
-    "v-card-text`: principalement utilisé pour ** le contenu du texte ** dans une carte. Applique un remplissage pour le texte, réduit sa taille de police à 0,875 trame et change sa couleur en gris.\n "
+    "v-card-text`: principalement utilisé pour ** le contenu du texte ** dans une carte. Applique un remplissage pour le texte, réduit sa taille de police à 0,875 trame et change sa couleur en gris.\n ",
+    "`v-card-title`: Fournit une **police-size** par défaut et **padding** pour les titres de la carte. La taille de la police peut être écrasée avec des classes de typographie, (/styles/typographie)."
   ],
   "examples": {
-    "usage": {
-      "desc": "Une carte a 3 composantes de base, `v-card-title`, `v-card-text` et `v-card-actions`."
+    "info-card": {
+      "desc": "Les cartes sont des points d'entrée pour des informations plus détaillées. Pour garder les choses concises, assurez-vous de limiter le nombre d'actions que l'utilisateur peut prendre."
     },
     "media-with-text": {
-      "heading": "### Média avec texte",
       "desc": "En utilisant le système de mise en page, nous pouvons ajouter du texte personnalisé n'importe où en arrière-plan."
     },
     "outlined": {
-      "heading": "### Cartes décrites",
       "desc": "Une carte ** décrite ** a une élévation de 0 et contient une bordure souple."
     },
     "horizontal": {
-      "heading": "### Cartes horizontales",
       "desc": "En utilisant `v-flex`, vous pouvez créer des cartes horizontales personnalisées. Utilisez la propriété `contain` pour réduire le `v-img` pour s'intégrer dans le conteneur, au lieu de recouvrir."
     },
     "grids": {
-      "heading": "### Grilles"
+      "desc": "En utilisant des grids, vous pouvez créer de belles mises en page."
     },
     "custom-actions": {
-      "heading": "### Actions personnalisées",
       "desc": "Avec une simple condition, vous pouvez facilement ajouter un texte complémentaire qui est caché jusqu'à l’ouverture."
     },
     "twitter-card": {
-      "heading": "### Carte twitter",
       "desc": "Le composant `v-card` contient plusieurs composants enfants qui vous aident à construire des exemples complexes sans avoir à vous soucier de l'espacement. Cet exemple est composé des composants `v-card-title`, `v-card-text` et `v-card-actions`."
+    },
+    "loading": {
+      "desc": "Les cartes peuvent être réglées à un état de chargement lors du traitement d'une action utilisateur. Ceci désactive d'autres actions et fournit des commentaires visuels avec un indeterminate [v-progress-linear](/components/progress-linear)."
+    },
+    "weather": {
+      "desc": "En utilisant [v-list-items](/components/lists) et [v-slider](/components/sliders), nous sommes en mesure de créer une carte météo unique. Les composants de la liste assurent que nous avons un espacement et une fonctionnalité cohérents tandis que le composant du curseur nous permet de fournir une interface utile de sélection à l'utilisateur."
+    },
+    "advanced": {
+      "heading": "### Avancé",
+      "desc": "L'utilisation de `v-list-item` et `v-img` nous permet de créer des mises en page de cartes uniques dans un paramètre avancé"
+    },
+    "intermediate": {
+      "desc": "Le composant `v-card` est utile pour l'emballage du contenu."
     }
+  },
+  "cardMediaWarning": "`v-card-media` est obsolète, utilisez `v-img` à la place.",
+  "props": {
+    "alt": "Components.Images.props.alt",
+    "aspectRatio": "Components.Images.props.aspectRatio",
+    "contain": "Applique **taille de fond: contient** à l'image de fond (en utilisant le prop **img** ).",
+    "flat": "Supprime l'élévation de la carte.",
+    "gradient": "Components.Images.props.gradient",
+    "hover": "Applique une altitude de 4dp lorsque vous êtes survolé (2dp par défaut). Vous pouvez trouver plus d'informations sur la [page d'altitude](/styles/altitude).",
+    "img": "Spécifie un fond d'image pour la carte. Pour les implémentations plus avancées, il est recommandé d'utiliser le composant [v-img](/components/images). Vous pouvez trouver un exemple [v-img ici](#media-with-text).",
+    "outlined": "Supprime l'ombre de l'élévation de la carte et ajoute une bordure mince.",
+    "raised": "Spécifie une altitude plus élevée (8dp). Vous pouvez trouver plus d'informations sur la [page d'altitude](/styles/altitude).",
+    "shaped": "Applique un grand rayon de bordure en haut à gauche et en bas à droite de la carte."
+  },
+  "events": {
+    "click": "Émis lorsque le composant est cliqué - déclenchera le composant à ripper lorsque le bouton clique à moins que le modificateur `.native` soit utilisé"
   }
 }

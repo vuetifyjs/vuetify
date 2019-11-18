@@ -1,6 +1,4 @@
 {
-  "heading": "# 文件上传",
-  "headingText": "组件 `v-file-input` 是一个特殊的表单，它为选择文件，展示选中文件，展示上传进度提供了美观的界面，旨在取代标准的文件上传表单。",
   "examples": {
     "usage": {
       "desc": "组件 `v-file-input` 的核心是一个普通的基于 [v-text-field](/components/text-fields) 的容器"
@@ -9,11 +7,9 @@
       "heading": "多选"
     },
     "accept": {
-      "heading": "### 格式限制",
       "desc": "组件 `v-file-input` 可以仅接受特殊的你想要的媒体或文件格式。想要获取更多信息，请查看 [accept attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept) 的文档"
     },
     "chips": {
-      "heading": "### 带有标签",
       "desc": "选中的文件可以以 [chip](/components/chips) 的形式展示 。当带有 **chips** 和 **multiple** 参数时，每一个标签将显示（相对于文件计数）。"
     },
     "custom-icon": {

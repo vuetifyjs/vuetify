@@ -1,43 +1,53 @@
 {
-  "headingText": "Le composant `v-autocomplete` offre des fonctionnalités simples et flexibles. Ceci est utile pour la recherche de grands ensembles de données ou même pour les requêtes dynamiques d'information à partir d'une API.",
   "examples": {
     "usage": {
       "desc": "Le composant d'auto-complétion hérite de `v-select` et ajoute la capacité de filtrer les éléments."
     },
     "api": {
-      "heading": "### Recherche d'une API",
       "desc": "Branchez facilement les données dynamiques et créez une expérience unique. La liste de propriétés expansive de v-autocomplete`permet de régler facilement tous les aspects de l'entrée."
     },
+    "slots": {
+      "heading": "### Champs",
+      "desc": "Avec la puissance des emplacements, vous pouvez personnaliser la sortie visuelle de la sélection. Dans cet exemple, nous ajoutons une image de profil pour les jetons et les éléments de liste."
+    },
     "customFilter": {
-      "heading": "### Filtres personnalisés en auto-complétion",
       "desc": "La propriété `filter` peut être utilisée pour que chaque élément puissent être filtrer en suivant sa propre logique. Dans cet exemple nous filtrons des éléments par leur nom"
     },
     "asynchronous": {
-      "heading": "### Éléments asynchrones",
       "desc": "Parfois vous avez besoin de récupérer des données externes via une requête de recherche. Utilisez la propriété `search-input` avec le modificateur **.sync** quand vous utilisez la propriété `autocomplete`. On peut également utiliser la nouvelle propriété `cache-items`. Ceci gardera une unique liste de tous les éléments qui ont été passés à la propriété `items` et est **REQUIRED** lors de l'utilisation d’éléments asynchrones et de la propriété **multiple**."
     },
     "advanced": {
-      "heading": "### Emplacements avancés"
+      "desc": "Le composant `v-autocomplete` est extrêmement flexible et peut s'adapter à n'importe quel cas d'utilisation. Créez des affichages personnalisés pour **no-data**, **item** et **selection** pour fournir une expérience utilisateur unique. L'utilisation de _slots_ vous permet de personnaliser facilement la recherche souhaitée pour votre application."
+    },
+    "stateSelector": {
+      "desc": "En utilisant une combinaison de pentes et de transitions `v-autocomplete`, vous pouvez créer un champ autocomplete élégant, comme ce sélecteur d'état."
     },
     "dense": {
-      "heading": "### Dense"
+      "heading": "### Dense",
+      "desc": "Vous pouvez utiliser le prop`dense` pour réduire la hauteur de l'autocomplete et la hauteur maximale inférieure des éléments de liste."
     }
   },
   "props": {
     "allowOverflow": "Permet au menu de déborder hors de l'écran",
     "autoSelectFirst": "Lors de la recherche, la première option sera toujours mise en évidence",
+    "dark": "Components.Inputs.props.dark",
+    "filled": "Components.TextFields.props.filled",
+    "filter": "L'algorithme de filtrage utilisé lors de la recherche. [example](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/components/VAutocomplete/VAutocomplete.ts#L36)",
     "hideNoData": "Masque le menu lorsqu'il n'y a pas d'options à afficher. Utile pour empêcher le menu de s'ouvrir avant que les résultats ne soient récupérés de manière asynchrone. Il a également l'effet d'ouvrir le menu lorsque le tableau `items` change, s'il n'est pas déjà ouvert.",
     "noFilter": "Ne pas appliquer le filtrage lors de la recherche. Utile lorsque les données sont filtrées côté serveur",
+    "searchInput": "Valeur de recherche. Peut être utilisé avec le modificateur `.sync`.",
     "value": "Components.Inputs.props.value"
   },
   "slots": {
     "append": "Components.Inputs.slots.append",
     "append-item": "Components.Selects.slots.append-item",
     "append-outer": "Components.TextFields.slots.append-outer",
+    "item": "Composants.Selects.slots.item",
     "no-data": "Mixins.Filterable.slots.noData",
     "prepend": "Components.Inputs.slots.prepend",
     "prepend-inner": "Components.TextFields.slots.prepend-inner",
-    "prepend-item": "Components.Selects.slots.prepend-item"
+    "prepend-item": "Components.Selects.slots.prepend-item",
+    "selection": "Sélection de Components.Selects.slots.selection"
   },
   "events": {
     "change": "Components.Inputs.events.change",
@@ -47,6 +57,7 @@
     "click:prepend": "Components.Inputs.events['click:prepend']",
     "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
     "update:error": "Mixins.Validatable.events['update:error']",
+    "update:list-index": "Components.Selects.events['update:list-index']",
     "update:search-input": "L'événement `search-input.sync`"
   }
 }

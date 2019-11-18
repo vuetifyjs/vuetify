@@ -5,13 +5,13 @@ declare module 'vuetify/lib' {
 
   const Vuetify: Vuetify
   const colors: Colors
-  const directives: {
-    ClickOutside: DirectiveOptions
-    Ripple: DirectiveOptions
-    Resize: DirectiveOptions
-    Scroll: DirectiveOptions
-    Touch: DirectiveOptions
-  }
+  const ClickOutside: DirectiveOptions
+  const Intersect: DirectiveOptions
+  const Mutate: DirectiveOptions
+  const Resize: DirectiveOptions
+  const Ripple: DirectiveOptions
+  const Scroll: DirectiveOptions
+  const Touch: DirectiveOptions
   const VApp: Component
   const VAppBar: Component
   const VAppBarNavIcon: Component
@@ -33,6 +33,7 @@ declare module 'vuetify/lib' {
   const VCalendarMonthly: Component
   const VCard: Component
   const VCardTitle: Component
+  const VCardSubtitle: Component
   const VCardActions: Component
   const VCardText: Component
   const VCarousel: Component
@@ -84,6 +85,7 @@ declare module 'vuetify/lib' {
   const VItem: Component
   const VItemGroup: Component
   const VLabel: Component
+  const VLazy: Component
   const VListItemActionText: Component
   const VListItemContent: Component
   const VListItemTitle: Component
@@ -112,6 +114,7 @@ declare module 'vuetify/lib' {
   const VRating: Component
   const VResponsive: Component
   const VSelect: Component
+  const VSkeletonLoader: Component
   const VSlider: Component
   const VSlideGroup: Component
   const VSlideItem: Component
@@ -170,7 +173,13 @@ declare module 'vuetify/lib' {
   export default Vuetify
   export {
     colors,
-    directives,
+    ClickOutside,
+    Intersect,
+    Mutate,
+    Ripple,
+    Resize,
+    Scroll,
+    Touch,
     VApp,
     VAppBar,
     VAppBarNavIcon,
@@ -192,6 +201,7 @@ declare module 'vuetify/lib' {
     VCalendarMonthly,
     VCard,
     VCardTitle,
+    VCardSubtitle,
     VCardActions,
     VCardText,
     VCarousel,
@@ -243,6 +253,7 @@ declare module 'vuetify/lib' {
     VItem,
     VItemGroup,
     VLabel,
+    VLazy,
     VListItemActionText,
     VListItemContent,
     VListItemTitle,
@@ -271,6 +282,7 @@ declare module 'vuetify/lib' {
     VRating,
     VResponsive,
     VSelect,
+    VSkeletonLoader,
     VSlider,
     VSlideGroup,
     VSlideItem,
@@ -325,5 +337,27 @@ declare module 'vuetify/lib' {
     VSlideYReverseTransition,
     VExpandTransition,
     VExpandXTransition,
+  }
+}
+
+declare module 'vuetify/lib/directives' {
+  import { DirectiveOptions } from 'vue'
+
+  const ClickOutside: DirectiveOptions
+  const Intersect: DirectiveOptions
+  const Mutate: DirectiveOptions
+  const Resize: DirectiveOptions
+  const Ripple: DirectiveOptions
+  const Scroll: DirectiveOptions
+  const Touch: DirectiveOptions
+
+  export {
+    ClickOutside,
+    Intersect,
+    Mutate,
+    Ripple,
+    Resize,
+    Scroll,
+    Touch
   }
 }

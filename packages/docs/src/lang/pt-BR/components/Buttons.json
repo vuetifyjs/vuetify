@@ -1,42 +1,32 @@
 {
-  "headingText": "O componente `v-btn` substitui o tema do botão html padrão pelo material design com grande variedade de opções. Qualquer classe de ajuda de cor pode ser usada para alterar a cor do fundo ou texto.",
   "examples": {
     "flat": {
       "heading": "Plano",
       "desc": "Botões planos não tem sombra ou fundo. O contorno do botão é exibido somente ao passar o mouse."
     },
     "raised": {
-      "heading": "Em relevo",
       "desc": "Os botões em relevo têm sombra que aumenta quando clicado. Este é o estilo padrão."
     },
     "depressed": {
-      "heading": "Rebaixado",
       "desc": "Botões rebaixados ainda mantêm a sua cor de fundo, mas não tem sombra."
     },
     "dropdown": {
-      "heading": "Variantes de Botão com Menu Suspenso",
       "desc": "Os botões com menu suspenso são seleções normais com estilo adicional.",
       "uninverted": true
     },
     "icon": {
       "desc": "Ícones podem ser usados para o contúdo principal de um botão."
     },
-    "floating": {
-      "heading": "Flutuante"
-    },
     "loaders": {
-      "heading": "Carregamento",
       "desc": "Usando a propriedade de carregamento (loading), você pode notificar um usuário de que está ocorrendo um processamento. O comportamento padrão é usar um componente `v-progress-circular`, mas isso pode ser personalizado."
     },
     "sizing": {
-      "heading": "Dimensionamento",
       "desc": "Botões podem receber diferentes opções de tamanhos para se adequarem a uma infinidade de cenários."
     },
     "outlined": {
       "heading": "### Contorno"
     },
     "block": {
-      "heading": "Bloco",
       "desc": "Botões de bloco preenchem toda a largura disponível."
     }
   },

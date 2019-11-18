@@ -1,16 +1,10 @@
 {
-  "headingText": "`v-carousel` 컴포넌트는 많은 수의 비쥬얼 컨텐츠(visual conents) 를 회전 타이머(rotating timer)를 이용해 보여줍니다.",
   "examples": {
     "custom-transition": {
-      "heading": "커스텀 트랜지션 (Custom transition)",
       "desc": "사용자 커스텀 트랜지션을 적용할 수 있습니다."
     },
     "custom-icons": {
-      "heading": "커스텀 아이콘",
       "desc": "캐러셀의 구분자와 이전/다음 아이콘을 바꿀 수 있습니다."
-    },
-    "hide-controls": {
-      "heading": "컨트롤 숨기기 (Hide controls)"
     }
   },
   "props": {

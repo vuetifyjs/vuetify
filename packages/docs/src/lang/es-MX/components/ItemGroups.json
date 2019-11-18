@@ -2,6 +2,9 @@
   "examples": {
     "multiple": {
       "heading": "Múltiple"
+    },
+    "mandatory": {
+      "heading": "### Obligatorio"
     }
   }
 }

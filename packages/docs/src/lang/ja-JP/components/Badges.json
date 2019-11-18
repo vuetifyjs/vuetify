@@ -1,13 +1,9 @@
 {
   "examples": {
-    "overlap": {
-      "heading": "### 重ね合わせ"
-    },
     "visibility": {
       "heading": "表示"
     },
     "inline": {
-      "heading": "### インライン",
       "desc": "Badge はテキスト内部に配置することができます。"
     },
     "icon": {

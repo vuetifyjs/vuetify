@@ -1,1 +1,5 @@
-{}
+{
+  "props": {
+    "color": "给控制器指定颜色。颜色可以为材料颜色（如`success`或`purple`）或CSS颜色（`#033`或`rgba(255, 0, 0, 0.5)`）。您可以在[颜色页面](/styles/colors#material-colors)找到内置类的列表。"
+  }
+}

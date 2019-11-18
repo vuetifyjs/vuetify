@@ -1,4 +1,7 @@
 {
+  "props": {
+    "dark": "Components.Inputs.props.dark"
+  },
   "events": {
     "change": "Components.Inputs.events.change",
     "update:error": "Mixins.Validatable.events['update:error']"

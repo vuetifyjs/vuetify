@@ -1,5 +1,11 @@
 {
+  "examples": {
+    "usage": {
+      "desc": "O componente `v-skeleton-loader` fornece a um usuário um indicador visual que o conteúdo está chegando / carregando. Isto é recebido mais rapidamente do que os carregadores tradicionais de tela cheia."
+    }
+  },
   "props": {
+    "boilerplate": "Remove a animação de carregamento do esqueleto",
     "tile": "Components.Sheets.props.tile"
   }
 }

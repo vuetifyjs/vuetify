@@ -7,6 +7,21 @@
     "title": "Ops, 404",
     "description": "Ops, parece que o que você está procurando não está aqui!"
   },
+  "introduction/why-vuetify": {
+    "title": "Por que Vuetify?"
+  },
+  "introduction/frequently-asked-questions": {
+    "title": "Perguntas frequentes"
+  },
+  "introduction/long-term-support": {
+    "title": "Suporte a longo prazo"
+  },
+  "introduction/meet-the-team": {
+    "title": "Conheça a equipe"
+  },
+  "introduction/sponsors-and-backers": {
+    "title": "Patrocinadores e apoiadores"
+  },
   "getting-started/quick-start": {
     "title": "Inicio rápido",
     "description": "Comece rapidamente com Vue e Vuetify. Suporte para Vue CLI 3, Webpack, Nuxt e muito mais.",
@@ -22,50 +37,13 @@
     "description": "Aprenda a criar testes unitários com vue-test-utils e componentes Vuetify em seu aplicativo Vue.",
     "keywords": "teste de unidade vuetify, testando vuetify, testes de especificações vuetify"
   },
-  "getting-started/why-vuetify": {
-    "title": "Por que Vuetify?",
-    "description": "Vuetify tem uma comunidade extremamente ativa, fornece componentes Material Design fáceis de usar e é constantemente atualizado.",
-    "keywords": "por que vuetify, por que escolher o vuetify, melhor framework vue, melhor framework ui"
-  },
-  "introduction/frequently-asked-questions": {
-    "title": "Perguntas frequentes",
-    "description": "Preso em um problema? Confira as perguntas mais frequentes da comunidade Vuetify.",
-    "keywords": "perguntas frequentes, faq"
-  },
-  "introduction/meet-the-team": {
-    "title": "Conheça a equipe",
-    "description": "Conheça a equipe responsável pela construção do Vuetify. Estes são os principais indivíduos que conduzem a visão do framework.",
-    "keywords": "vuetify time desenvolvimento, vuetify time principal"
-  },
-  "introduction/sponsors-and-backers": {
-    "title": "Patrocinadores e apoiadores",
-    "description": "Ajude o Vuetify apoiando o projeto. Isso ajuda com a manutenção de recursos existentes e o desenvolvimento de novos.",
-    "keywords": "patrocinador, apoiador, doações, patrono, ajudando o vuetify, suporte vuetify"
-  },
-  "introduction/long-term-support": {
-    "title": "Suporte a longo prazo",
-    "description": "Vuetify fornece suporte a longo prazo para a última versão major durante 12 meses para bugs críticos e vulnerabilidades de segurança.",
-    "keywords": "lts, suporte a longo prazo"
+  "getting-started/releases-and-migrations": {
+    "title": "Lançamentos e mudanças"
   },
   "getting-started/contributing": {
     "title": "Contribuindo",
     "description": "Contribuir para open souce ajuda os desenvolvedores a acessarem ferramentas incríveis gratuitamente. Saiba como você pode ajudar no desenvolvimento do framework Vuetify.",
     "keywords": "contribuir, contribuindo, solicitar recurso"
-  },
-  "introduction/roadmap": {
-    "title": "O Cronograma Vuetify",
-    "description": "Os próximos recursos planejados e novas funcionalidades chegando ao Vuetify. Novos componentes, novas diretivas e muito, muito mais!.",
-    "keywords": "cronograma vuetify, planos futuros, novos recursos vuetify"
-  },
-  "professional-support/consulting": {
-    "title": "Consultoria e suporte",
-    "description": "Obtenha ajuda profissional, apoio e orientação ao seu aplicativo Vuetify pelo criador, John Leider.",
-    "keywords": "consultoria vuetify, suporte vuetify, ajuda vuetify"
-  },
-  "getting-started/enterprise": {
-    "title": "Vuetify para empresas",
-    "description": "Obtenha as ferramentas que você precisa continuamente catalogar e entenda o software de código aberto que seu aplicativo precisa com a assinatura Tidelift.",
-    "keywords": "vuetify empresa, tidelift empresa, tidelift vuetify"
   },
   "customization/accessibility": {
     "title": "Acessibilidade",
@@ -123,9 +101,6 @@
   "styles/display": {
     "title": "Ajuda de exibição CSS"
   },
-  "styles/scroll": {
-    "title": "Rolagem suave"
-  },
   "styles/spacing": {
     "title": "Ajuda de Espaçamento CSS"
   },
@@ -135,9 +110,6 @@
   "styles/typography": {
     "title": "Tipografia da aplicação",
     "keywords": "tipografia, cabeçalhos, títulos"
-  },
-  "framework/sandbox": {
-    "title": "Sandbox"
   },
   "components/api-explorer": {
     "title": "Explorador de API",
@@ -288,10 +260,19 @@
   "examples/layouts/baseline": {
     "title": "Exemplo básico de layout"
   },
+  "examples/layouts/centered": {
+    "title": "Exemplo de layout centralizado"
+  },
   "examples/layouts/dark": {
     "title": "Exemplo de layout escuro"
   },
   "examples/layouts/sandbox": {
     "title": "Layout sandbox"
+  },
+  "professional-support/consulting": {
+    "title": "Consultoria e suporte"
+  },
+  "professional-support/business": {
+    "title": "Consultoria e suporte"
   }
 }

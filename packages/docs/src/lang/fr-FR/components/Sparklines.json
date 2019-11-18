@@ -1,1 +1,13 @@
-{}
+{
+  "examples": {
+    "playground": {
+      "desc": "Le composant étincelle est composé de 2 variantes, **tendance**(par défaut) et **bar**. Chaque support une multitude d'options pour personnaliser l'apparence et le sentiment de l'étincelle."
+    },
+    "fill": {
+      "desc": "Vous pouvez créer une `v-sparkline` avec le remplissage en utilisant la propriété `fill`."
+    }
+  },
+  "props": {
+    "smooth": "Nombre de px à utiliser comme rayon d'angle. `true` par défaut à 8, `false` est 0"
+  }
+}

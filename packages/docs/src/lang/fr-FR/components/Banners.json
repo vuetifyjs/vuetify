@@ -1,27 +1,21 @@
 {
-  "heading": "# Bannières",
-  "headingText": "Le composant `v-banner` est utilisé comme message intermédiaire interruptif pour l'utilisateur avec des actions 1-2. Il est disponible en 2 variantes, **monoline** et **multi-ligne** (implicitement). Ces icônes peuvent être utilisées avec votre message et vos actions.",
   "examples": {
     "usage": {
       "desc": "Les bannières peuvent avoir 1-2 lignes de texte, d'actions et d'icône."
     },
     "single-line": {
-      "heading": "### Ligne unique (bureau)"
+      "desc": "**Single-line** VBanner est utilisé pour une petite quantité d'informations et est recommandé pour les implémentations de bureau uniquement. Vous pouvez activer optionnellement le prop **sticky** pour s'assurer que le contenu est épinglé à l'écran (note: ne fonctionne pas dans IE11). Vous pouvez trouver plus d'informations sur [sticky positioning here](https://developer.mozilla.org/fr-US/docs/Web/CSS/position)."
     },
     "two-line": {
-      "heading": "### Deux lignes (mobile)",
       "desc": "**Deux lignes** VBanner peut stocker plus de données, l'utiliser pour les gros messages."
     },
     "icon-slot": {
-      "heading": "### Champ d'icône",
       "desc": "Le champ d'icône vous permet de contrôler explicitement le contenu et les fonctionnalités qui y sont contenues."
     },
     "icon-event": {
-      "heading": "### Événement de clic d'icône",
       "desc": "VBanner émet l'événement `click:icon` sur le clic d'icône, même avec un emplacement d'icône personnalisé."
     },
     "actions-slots": {
-      "heading": "### Emplacement des actions",
       "desc": "le champ `actions` possède la fonction `dismiss` dans son champ d'application, vous pouvez l'utiliser pour facilement rejeter la bannière."
     }
   },

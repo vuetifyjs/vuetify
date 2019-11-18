@@ -1,6 +1,4 @@
 {
-  "heading": "Bottom Nav",
-  "headingText": "El componente `v-bottom-navigation` es una alternativa al sidebar. Se usa principalmente en móviles y viene en dos variantes: íconos y texto y _recorrer_",
   "examples": {
     "usage": {
       "desc": "Aunque está pensado para ser utilizado con el `vue-router`, también puedes controlar manualmente el estado activo de los botones al usar la prop `active.sync`. Puedes cambiar el valor de los botones si utilizas su atributo `value`."
@@ -10,9 +8,6 @@
     },
     "grow": {
       "heading": "Grow"
-    },
-    "toggle": {
-      "heading": "Alternar"
     }
   }
 }

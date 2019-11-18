@@ -5,6 +5,9 @@
     },
     "multiple": {
       "heading": "Múltiple"
+    },
+    "mandatory": {
+      "heading": "### Obligatorio"
     }
   }
 }

@@ -3,5 +3,12 @@
     "overflow-to-menu": {
       "heading": "### Avec le menu"
     }
+  },
+  "props": {
+    "activeClass": "Mixins.BaseItemGroup.props.activeClass",
+    "dark": "Mixins.Themeable.props.dark",
+    "light": "Mixins.Themeable.props.light",
+    "reverseTransition": "Components.Windows.props.reverseTransition",
+    "transition": "Mixins.Transitionable.props.transition"
   }
 }

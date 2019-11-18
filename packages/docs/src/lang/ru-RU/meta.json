@@ -3,9 +3,6 @@
     "title": "Быстрый старт",
     "keywords": "quick start, vuetify templates, get started"
   },
-  "professional-support/consulting": {
-    "title": "Консультации и поддержка"
-  },
   "customization/icons": {
     "title": "Иконки"
   },
@@ -15,5 +12,11 @@
   },
   "components/api-explorer": {
     "title": "Обзор API"
+  },
+  "professional-support/consulting": {
+    "title": "Консультации и поддержка"
+  },
+  "professional-support/business": {
+    "title": "Консультации и поддержка"
   }
 }

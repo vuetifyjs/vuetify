@@ -1,15 +1,66 @@
 {
+  "examples": {
+    "usage": {
+      "desc": "`v-input` a 4 zones principales. L'emplacement précédant, l'emplacement ajouté, l'emplacement par défaut et les messages. Elles constituent la logique de base partagée entre tous les composants de forme."
+    },
+    "loading": {
+      "heading": "### Chargement",
+      "desc": "`v-input` a un état `loading` qui peut être utilisé, par exemple pour le chargement des données. Note: `v-text-field` est utilisé juste par exemple."
+    },
+    "success": {
+      "desc": "Comme tout composant Vuetify validable, `v-input` peut être défini pour être réglé en mode succès en utilisant `success` prop, vous pouvez y ajouter un message en utilisant `success-messages` prop."
+    },
+    "error": {
+      "desc": "Comme n'importe quel composant Vuetify validable, `v-input` peut être défini à l'état d'erreur en utilisant le prop`error` prop, les messages peuvent être ajoutés en utilisant le prop`error-messages`. Vous pouvez déterminer le nombre de messages d'erreur à afficher en utilisant la propriété `error-count`."
+    },
+    "multi-error": {
+      "desc": "Vous pouvez ajouter plusieurs erreurs à `v-input` en utilisant la propriété `error-count`."
+    },
+    "rules": {
+      "desc": "Vous pouvez ajouter des règles de validation personnalisées à `v-input`, les ajouter comme des fonctions qui retournent `true`/message d'erreur. Note: `v-text-field` est utilisé juste par exemple."
+    },
+    "slot-events": {
+      "desc": "`v-input` peut avoir des événements `click:append` et `click:prepend` pour ses emplacements. Note: `v-text-field` est utilisé juste par exemple."
+    },
+    "slots": {
+      "heading": "### Champs",
+      "desc": "`v-input` a des emplacements `append` et `prepend`. Vous pouvez y placer des icônes personnalisées."
+    },
+    "hint": {
+      "heading": "## Astuce",
+      "desc": "`v-input` peut avoir `hint` qui peut dire à l'utilisateur comment utiliser l'entrée. `persistent-hint` prop rend l'indice visible toujours si aucun message n'est affiché."
+    }
+  },
   "props": {
     "appendIcon": "Ajoute une icône au composant, utilise la même syntaxe que `v-icon`",
     "backgroundColor": "Modifie la couleur de fond de l'entrée",
+    "dark": "Applique la variante du thème foncé au composant. Cela va par défaut la couleur des composants à _white_ à moins que vous ayez configuré votre [thème d'application](/customization/thème) à **dark** ou si vous utilisez le prop **couleur** sur le composant. Vous pouvez trouver plus d'informations sur la documentation de Design de matériaux pour [thèmes foncés](https://material.io/design/color/dark-theme.html).",
     "hideDetails": "Masque l'indice, erreurs de validation",
+    "dense": "Réduit la hauteur de l'entrée",
     "height": "Définit la hauteur de l'entrée",
     "hint": "Texte d'indice",
     "label": "Définit l'étiquette d'entrée",
+    "loading": "Mixins.Loadable.props.loading",
     "persistentHint": "Force l'indice à toujours être visible",
-    "prependIcon": "Ajoute une icône au composant, utilise la même syntaxe que `v-icon`"
+    "placeholder": "Définit le texte du marqueur d'entrée",
+    "prependIcon": "Ajoute une icône au composant, utilise la même syntaxe que `v-icon`",
+    "required": "Indique l'entrée comme nécessaire; Ajoute un astérisque à la fin de l'étiquette; ne réalise aucune validation.",
+    "tabindex": "Index des onglets",
+    "toggleKeys": "Tableau de codes clés qui basculera l'entrée (si elle supporte le basculement)",
+    "value": "Valeur d'entrée"
   },
   "slots": {
-    "label": "Remplace le label par défaut"
+    "append": "Ajoute un élément après le contenu de l'entrée",
+    "label": "Remplace le label par défaut",
+    "prepend": "Ajoute un élément avant le contenu de l'entrée"
+  },
+  "events": {
+    "blur": "Émis lorsque l'entrée est floue",
+    "change": "Émis lorsque l'entrée est modifiée par l'interaction utilisateur",
+    "click": "Émis lorsque l'entrée est cliqué",
+    "click:append": "Émis lorsque l'icône ajoutée est cliquée",
+    "click:prepend": "Émis lorsque l'icône précédente est cliqué",
+    "mousedown": "Émis lorsque le clic est pressé",
+    "mouseup": "Émis lorsque le clic est libéré"
   }
 }

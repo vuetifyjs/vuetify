@@ -1,6 +1,5 @@
 {
   "becomeSponsor": "捐助 Vuetify",
-  "callout": "让Vue和Material Design的强大力量在开发上助您一臂之力",
   "features": {
     "community": {
       "text": "当遇到问题时，可以立即向我们请求协助。Vuetify借助Discord服务成立了巨大的社区，为你提供即时聊天支持。",
@@ -17,9 +16,8 @@
   "getHelp": "帮帮我",
   "getStarted": "快速入门",
   "github": "Github",
-  "madeWithVuetify": "使用/用于 Vuetify 的项目",
   "materialDesign": "Material Design",
   "mit": "MIT 许可证",
-  "proudlySponsoredBy": "赞助商",
-  "whyVuetify": "为什么选择 Vuetify？"
+  "seeMoreThemes": "获取更多主题",
+  "whyVuetifyText2": "为什么选择 Vuetify？"
 }

@@ -1,14 +1,6 @@
 {
-  "headingText": "En cuanto a validación, Vuetify tiene una multitud de integraciones y funcionalidad prefabricada. ¿Quieres usar un plugin de terceros para tu validación? Desde el inicio puedes usar [Vee-validate](https://github.com/baianat/Vee-validate) y [vuelidate](https://github.com/monterail/vuelidate).",
   "examples": {
-    "validation-with-submit-and-clear": {
-      "heading": "Validación con _submit_ y _clear_"
-    },
-    "vuelidate": {
-      "heading": "Vuelidate"
-    },
     "vee-validate": {
-      "heading": "Vee-validate",
       "desc": "Vee-validate es otro plugin de validación que te permite checar tus formularios. Algo a considerar es que debes agregar **type=\"checkbox\"** para validar apropiadamente un `v-checkbox` cuando utilizas la prop **value**"
     }
   },
