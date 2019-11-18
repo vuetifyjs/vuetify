@@ -15,7 +15,6 @@
         transform: rotate(if($direction == right, 180deg, 0))
         #{$direction}: -($timeline-wedge-size)
         #{if($direction == left, right, left)}: initial
-
       +rtl()
         transform: rotate(if($direction == right, 0, 180deg))
         #{$direction}: initial
