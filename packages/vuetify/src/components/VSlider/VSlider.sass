@@ -85,12 +85,14 @@
   &:first-child .v-slider__tick-label
     +ltr()
       transform: none
+
     +rtl()
       transform: translateX(100%)
 
   &:last-child .v-slider__tick-label
     +ltr()
       transform: translateX(-100%)
+
     +rtl()
       transform: none
 
@@ -146,12 +148,14 @@
     &:first-child .v-slider__tick-label
       +ltr()
         transform: translateX(0%)
+
       +rtl()
         transform: translateX(100%)
 
     &:last-child .v-slider__tick-label
       +ltr()
         transform: translateX(-100%)
+
       +rtl()
         transform: translateX(0%)
 
@@ -160,6 +164,7 @@
 
       +ltr()
         transform: translateX(-50%)
+
       +rtl()
         transform: translateX(50%)
 
@@ -205,6 +210,7 @@
       +ltr()
         transform: translateY(-50%)
         left: 12px
+
       +rtl()
         transform: translateY(-50%)
         right: 12px
@@ -254,6 +260,7 @@
     +ltr()
       margin-left: 0
       margin-right: 12px
+
     +rtl()
       margin-right: 0
       margin-left: 12px
@@ -263,6 +270,7 @@
     +ltr()
       margin-right: 0
       margin-left: 12px
+
     +rtl()
       margin-left: 0
       margin-right: 12px
@@ -272,6 +280,7 @@
 
   +ltr()
     flex-direction: column-reverse
+
   +rtl()
     flex-direction: column
 

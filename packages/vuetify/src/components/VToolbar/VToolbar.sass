@@ -27,18 +27,21 @@
     &:first-child
       +ltr()
         margin-left: -#{$toolbar-btn-icon-size / 4}
+
       +rtl()
         margin-right: -#{$toolbar-btn-icon-size / 4}
 
       + .v-toolbar__title
         +ltr()
           padding-left: $toolbar-title-padding
+
         +rtl()
           padding-right: $toolbar-title-padding
 
     &:last-child
       +ltr()
         margin-right: -#{$toolbar-btn-icon-size / 4}
+
       +rtl()
         margin-left: -#{$toolbar-btn-icon-size / 4}
 
@@ -111,6 +114,7 @@
 
   +ltr()
     border-bottom-right-radius: 24px
+
   +rtl()
     border-bottom-left-radius: 24px
 

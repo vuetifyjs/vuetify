@@ -23,12 +23,14 @@
   > .v-treeview-node
     +ltr()
       margin-left: 0
+
     +rtl()
       margin-right: 0
 
     &--leaf
       +ltr()
         margin-left: $treeview-direct-leaf-node-margin-start
+
       +rtl()
         margin-right: $treeview-direct-leaf-node-margin-start
 
@@ -36,6 +38,7 @@
         +ltr()
           padding-left: $treeview-direct-leaf-node-padding-start
           padding-right: $treeview-node-padding-end
+
         +rtl()
           padding-right: $treeview-direct-leaf-node-padding-start
           padding-left: $treeview-node-padding-end
@@ -43,6 +46,7 @@
   &-node
     +ltr()
       margin-left: $treeview-node-x-margin
+
     +rtl()
       margin-right: $treeview-node-x-margin
 
@@ -67,6 +71,7 @@
     &--leaf
       +ltr()
         margin-left: $treeview-leaf-node-x-margin
+
       +rtl()
         margin-right: $treeview-leaf-node-x-margin
 
@@ -74,6 +79,7 @@
         +ltr()
           padding-left: $treeview-leaf-node-padding-start
           padding-right: $treeview-node-padding-end
+
         +rtl()
           padding-right: $treeview-leaf-node-padding-start
           padding-left: $treeview-node-padding-end
@@ -86,6 +92,7 @@
 
       +ltr()
         padding-right: $treeview-node-padding-end
+
       +rtl()
         padding-left: $treeview-node-padding-end
 
@@ -136,12 +143,14 @@
 
       +ltr()
         transform: rotate(-90deg)
+
       +rtl()
         transform: rotate(90deg)
 
       &--open
         +ltr()
           transform: none
+
         +rtl()
           transform: none
 

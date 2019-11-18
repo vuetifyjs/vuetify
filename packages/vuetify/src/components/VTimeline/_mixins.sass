@@ -15,6 +15,7 @@
         transform: rotate(if($direction == right, 180deg, 0))
         #{$direction}: -($timeline-wedge-size)
         #{if($direction == left, right, left)}: initial
+
       +rtl()
         transform: rotate(if($direction == right, 0, 180deg))
         #{$direction}: initial
@@ -26,6 +27,7 @@
   .v-timeline-item__opposite
     +ltr()
       text-align: if($direction == left, right, left)
+
     +rtl()
       text-align: if($direction == left, left, right)
 
@@ -34,6 +36,7 @@
     +ltr()
       #{$first}: calc(#{$center} - #{$timeline-line-width / 2})
       #{$second}: initial
+
     +rtl()
       #{$first}: initial
       #{$second}: calc(#{$center} - #{$timeline-line-width / 2})
