@@ -494,4 +494,27 @@ describe('VAutocomplete.ts', () => {
 
     expect(wrapper.vm.genSelections()).toEqual([])
   })
+
+  it('should not delete item if readonly', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo', 'bar', 'fizz'],
+        multiple: true,
+        value: ['foo', 'bar', 'fizz'],
+      },
+    })
+    wrapper.vm.changeSelectedIndex(keyCodes.right)
+    wrapper.vm.changeSelectedIndex(keyCodes.right)
+    wrapper.vm.changeSelectedIndex(keyCodes.backspace)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.selectedItems).toHaveLength(2)
+
+    wrapper.setProps({
+      readonly: true,
+    })
+
+    wrapper.vm.changeSelectedIndex(keyCodes.backspace)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.selectedItems).toHaveLength(2)
+  })
 })
