@@ -1,7 +1,9 @@
 {
-  "title": "header",
-  "titleText": "headerText",
   "file": "components/VBadge",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/develop/android/components/badging/"
+  },
   "children": [
     {
       "type": "section",
@@ -10,13 +12,18 @@
           "type": "usage-new",
           "value": {
             "booleans": [
+              "dot",
+              "overlap",
+              "icon",
               "left",
-              "bottom",
-              "overlap"
+              "bottom"
             ],
             "tabs": [
               "default",
-              "hidden"
+              "hidden",
+              "text",
+              "inline",
+              "bordered"
             ]
           }
         }
@@ -37,14 +44,7 @@
         {
           "type": "examples",
           "value": [
-            "simple/bottom",
-            "simple/left",
-            "simple/overlap",
-            "simple/icon",
-            "simple/inline",
-            "simple/visibility",
-            "intermediate/hover",
-            "complex/dynamic"
+            "simple/visibility"
           ]
         }
       ]

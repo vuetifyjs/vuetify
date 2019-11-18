@@ -1,99 +1,79 @@
 // Imports
 @import './_variables.scss'
 
++theme(v-badge) using ($material)
+  .v-badge__badge::after
+    border: 2px solid map-get($material, 'cards')
+
 .v-badge
   display: inline-block
-  // line-height: 1
+  line-height: $badge-line-height
   position: relative
 
   &__badge
-    align-items: center
     border-radius: $badge-border-radius
-    bottom: auto
     color: $badge-color
-    display: inline-flex
-    flex-direction: row
-    flex-wrap: wrap
+    display: inline-block
     font-size: $badge-font-size
     height: $badge-height
-    justify-content: center
-    line-height: normal
+    letter-spacing: $badge-letter-spacing
+    line-height: inherit
     min-width: $badge-min-width
-    padding: 0 4px
+    padding: $badge-padding
     position: absolute
-    top: 0
+    right: $badge-right
+    text-align: center
+    top: $badge-top
     transition: $primary-transition
+    white-space: nowrap
 
     .v-icon
+      color: inherit
       font-size: $badge-font-size
 
-    +ltr()
-      left: auto
-      right: 0
-      transform: translate(75%, -75%)
+  &__wrapper
+    flex: 0 1
+    height: 100%
+    left: 0
+    pointer-events: none
+    position: absolute
+    top: 0
+    width: 100%
 
-    +rtl()
-      left: 0
-      right: auto
-      transform: translate(-75%, -75%)
-
-  &--left .v-badge__badge
-    +ltr()
-      left: 0
-      right: auto
-      transform: translate(-75%, -75%)
-
-    +rtl()
-      left: auto
-      right: 0
-      transform: translate(75%, -75%)
-
-  &--bottom
-    .v-badge__badge
+  &--bordered
+    .v-badge__badge::after
+      border-radius: inherit
       bottom: 0
-      top: auto
+      content: ''
+      left: 0
+      position: absolute
+      right: 0
+      top: 0
+      transform: scale(1.1)
 
-      +ltr()
-        transform: translate(75%, 75%)
-
-      +rtl()
-        transform: translate(-75%, 75%)
-
-    &.v-badge--left
-      .v-badge__badge
-        +ltr()
-          transform: translate(-75%, 75%)
-
-        +rtl()
-          transform: translate(75%, 75%)
-
-  &--overlap
+  &--dot
     .v-badge__badge
-      +ltr()
-        transform: translate(50%, -50%)
+      height: $badge-dot-height
+      min-width: 0
+      padding: 0
+      width: $badge-dot-width
 
-      +rtl()
-        transform: translate(50%, 50%)
+  &--icon
+    .v-badge__badge
+      padding: $badge-icon-padding
 
-    &.v-badge--left .v-badge__badge
-      +ltr()
-        transform: translate(-50%, -50%)
+  &--inline
+    align-items: center
+    display: inline-flex
+    justify-content: center
 
-      +rtl()
-        transform: translate(-50%, 50%)
+    .v-badge__badge,
+    .v-badge__wrapper
+      position: relative
 
-    &.v-badge--bottom
-      .v-badge__badge
-        +ltr()
-          transform: translate(50%, 50%)
+    .v-badge__wrapper
+      margin: $badge-wrapper-margin
 
-        +rtl()
-          transform: translate(-50%, -50%)
-
-      &.v-badge--left
-        .v-badge__badge
-          +ltr()
-            transform: translate(-50%, 50%)
-
-          +rtl()
-            transform: translate(50%, 50%)
+  &--tile
+    .v-badge__badge
+      border-radius: 0

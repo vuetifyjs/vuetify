@@ -2,9 +2,16 @@
 
 $badge-border-radius: 10px !default;
 $badge-color: map-get($shades, 'white') !default;
+$badge-dot-height: 8px !default;
+$badge-dot-width: 8px !default;
 $badge-font-family: $body-font-family !default;
 $badge-font-size: 12px !default;
 $badge-height: 20px !default;
+$badge-icon-padding: 3px 0 !default;
+$badge-line-height: 1;
 $badge-min-width: 20px !default;
-$badge-top: -($badge-height / 2) !default;
-$badge-right: -($badge-min-width) !default;
+$badge-padding: 4px 6px !default;
+$badge-letter-spacing: 1px !default;
+$badge-right: auto !default;
+$badge-top: auto !default;
+$badge-wrapper-margin: 0 4px !default;

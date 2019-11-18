@@ -4,10 +4,20 @@
       align="center"
       justify="center"
     >
-      <v-badge v-bind="attrs">
-        <template v-slot:badge>2</template>
+      <v-badge
+        :content="!attrs.icon ? '9' : undefined"
+        :icon="attrs.icon ? 'mdi-bell' : undefined"
+        :value="!attrs.hidden"
+        v-bind="computedAttrs"
+      >
+        <v-icon
+          v-if="!attrs.text"
+          x-large
+        >
+          mdi-vuetify
+        </v-icon>
 
-        <v-icon>mdi-cart</v-icon>
+        <span v-else>Example of inline text</span>
       </v-badge>
     </v-row>
   </v-container>
@@ -19,6 +29,18 @@
       attrs: {
         type: Object,
         default: () => ({}),
+      },
+    },
+
+    computed: {
+      computedAttrs () {
+        const {
+          default: x,
+          hidden: y,
+          ...attrs
+        } = this.attrs
+
+        return attrs
       },
     },
   }

@@ -6,10 +6,9 @@
       overlap
     >
       <template v-slot:badge>
-        <v-icon dark>
-          mdi-check
-        </v-icon>
+        <v-icon>mdi-check</v-icon>
       </template>
+
       <v-icon
         color="grey lighten-1"
         large
@@ -23,10 +22,9 @@
       color="orange"
     >
       <template v-slot:badge>
-        <v-icon dark>
-          mdi-bell
-        </v-icon>
+        <v-icon>mdi-bell</v-icon>
       </template>
+
       <v-icon
         large
         color="grey darken-1"
