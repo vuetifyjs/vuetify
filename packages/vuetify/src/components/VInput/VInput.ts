@@ -8,7 +8,7 @@ import VMessages from '../VMessages'
 
 // Mixins
 import BindsAttrs from '../../mixins/binds-attrs'
-import Validatable from '../../mixins/validatable'
+import Validatable, { VuetifyRuleValidator } from '../../mixins/validatable'
 
 // Utilities
 import {
@@ -66,7 +66,7 @@ export default baseMixins.extend<options>().extend({
     classes (): object {
       return {
         'v-input--has-state': this.hasState,
-        'v-input--hide-details': this.genMessages() === null,
+        'v-input--hide-details': !this.showDetails,
         'v-input--is-label-active': this.isLabelActive,
         'v-input--is-dirty': this.isDirty,
         'v-input--is-disabled': this.disabled,
@@ -109,6 +109,22 @@ export default baseMixins.extend<options>().extend({
     },
     isLabelActive (): boolean {
       return this.isDirty
+    },
+    messagesToDisplay (): string[] {
+      if (this.hasHint) return [this.hint]
+
+      if (!this.hasMessages) return []
+
+      return this.validations.map((validation: string | VuetifyRuleValidator) => {
+        if (typeof validation === 'string') return validation
+
+        const validationResult = validation(this.internalValue)
+
+        return typeof validationResult === 'string' ? validationResult : ''
+      }).filter(message => message !== '')
+    },
+    showDetails (): boolean {
+      return this.hideDetails === false || (this.hideDetails === 'auto' && this.messagesToDisplay.length > 0)
     },
   },
 
@@ -216,20 +232,14 @@ export default baseMixins.extend<options>().extend({
       }, this.$slots.label || this.label)
     },
     genMessages () {
-      if (this.hideDetails === true) return null
-
-      const messages = (this.hasMessages || this.hasHint)
-        ? (this.hasHint ? [this.hint] : this.validations)
-        : []
-
-      if (!messages.length && this.hideDetails === 'auto') return null
+      if (!this.showDetails) return null
 
       return this.$createElement(VMessages, {
         props: {
           color: this.hasHint ? '' : this.validationState,
           dark: this.dark,
           light: this.light,
-          value: messages,
+          value: this.messagesToDisplay,
         },
         attrs: {
           role: this.hasMessages ? 'alert' : null,
