@@ -38,7 +38,7 @@
       </template>
 
       <!-- Description -->
-      <doc-markdown
+      <base-markdown
         v-else-if="header.value === 'description' && item.description"
         :code="item.description"
       />

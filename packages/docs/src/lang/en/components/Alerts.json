@@ -1,50 +1,50 @@
 {
-  "header": "# Alerts",
-  "headerText": "The `v-alert` component is used to convey important information to the user through the use contextual types icons and color. These default types come in in 4 variations: **success**, **info**, **warning**, and **error**. Default icons are assigned which help represent different actions each type portrays. Many parts of an alert such as `border`, `icon`, and `color` can also be customized to fit almost any situation.",
+  "heading": "# Alerts",
+  "headingText": "The `v-alert` component is used to convey important information to the user through the use contextual types icons and color. These default types come in in 4 variations: **success**, **info**, **warning**, and **error**. Default icons are assigned which help represent different actions each type portrays. Many parts of an alert such as `border`, `icon`, and `color` can also be customized to fit almost any situation.",
   "usageText": "Alerts in their simplest form are a flat [sheets of paper](/components/sheets) that display a message.",
   "examples": {
     "border": {
-      "header": "### Border",
+      "heading": "### Border",
       "desc": "The **border** prop adds a simple border to one of the 4 sides of the alert. This can be combined props like with **color**, **dark**, and **type** to provide unique accents to the alert."
     },
     "colored-border": {
-      "header": "### Colored Border",
+      "heading": "### Colored Border",
       "desc": "The **color-border** prop removes the alert background in order to accent the **border** prop. If a **type** is set, it will use the types default color. If no **color** or **type** is set, the color will default to the inverted color of the applied theme (black for light and white/gray for dark)."
     },
     "dense": {
-      "header": "### Dense",
+      "heading": "### Dense",
       "desc": "The **dense** prop decreases the height of the alert to create a simple and compact style. When combined with the **border** prop the border thickness will be decreased to stay consistent with the style."
     },
     "dismissible": {
-      "header": "### Dismissible",
+      "heading": "### Dismissible",
       "desc": "The **dismissible** prop adds a close button to the end of the alert component. Clicking this button will set its value to false and effectively hide the alert. You can restore the alert by binding **v-model** and setting it to true. The close icon automatically has an `aria-label` applied that can be changed by modifying the **close-label** prop or changing **close** value in your locale. For more information on how to global modify your locale settings, navigate to the [Internationalization page](/customization/internationalization)."
     },
     "icon": {
-      "header": "### Icon",
+      "heading": "### Icon",
       "desc": "The **icon** prop allows you to add an icon to the beginning of the alert component. If a **type** is provided, this will override the default type icon. Additionally setting the **icon** prop to _false_ will remove the icon altogether."
     },
     "outlined": {
-      "header": "### Outlined",
+      "heading": "### Outlined",
       "desc": "The **outlined** prop inverts the style of an alert, inheriting the currently applied **color**, applying it to the text and border, and making its background transparent."
     },
     "prominent": {
-      "header": "### Prominent",
+      "heading": "### Prominent",
       "desc": "The **prominent** prop provides a more pronounced alert by increasing the height and applying a halo to the icon. When applying both **prominent** and **dense** together, the alert will take on the appearance of a normal alert but with the **prominent** icon effects."
     },
     "text": {
-      "header": "### Text",
+      "heading": "### Text",
       "desc": "The **text** prop is a simple alert variant that applies a reduced opacity background of the provided **color**. Similar to other styled props, **text** can be combined with other props like **dense**, **prominent**, and **outlined** to create a unique and customized component."
     },
     "transition": {
-      "header": "### Transition",
+      "heading": "### Transition",
       "desc": "The **transition** prop allows you to apply a transition to the alert which is viewable when the component hides and shows. For more information, you can checkout any of [Vuetify's prebuilt transitions](/styles/transitions#motion) or review how to [create your own](/styles/transitions#create-your-own)."
     },
     "type": {
-      "header": "### Type",
+      "heading": "### Type",
       "desc": "The **type** prop provides 4 default `v-alert` styles: **success**, **info**, **warning**, and **error**. Each of these styles provide a default icon and color. The default colors can be configured globally by customizing [Vuetify's theme](/customization/theme)."
     },
     "twitter": {
-      "header": "### Twitter alert",
+      "heading": "### Twitter alert",
       "desc": "By combining **color**, **dismissible**, **border**, **elevation**, **icon**, and **color-border** props you can create stylish custom alerts such as this twitter notification."
     }
   },

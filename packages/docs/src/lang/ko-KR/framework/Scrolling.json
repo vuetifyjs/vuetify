@@ -1,4 +1,4 @@
 {
-  "header": "스크롤",
+  "heading": "스크롤",
   "components": ["$vuetify"]
 }

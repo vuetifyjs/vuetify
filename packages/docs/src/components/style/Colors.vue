@@ -1,6 +1,7 @@
 <template>
   <section id="material-colors">
-    <doc-heading>colorHeader</doc-heading>
+    <base-heading>colorHeader</base-heading>
+
     <doc-text>colorText</doc-text>
 
     <v-text-field
@@ -13,17 +14,16 @@
     />
 
     <v-container
+      class="pa-0"
       fluid
-      pa-0
-      grid-list-xl
     >
-      <v-layout wrap>
-        <v-flex
+      <v-row>
+        <v-col
           v-for="(color, key) in computedColors"
           :key="key"
-          xs12
-          md6
-          lg4
+          cols="12"
+          md="6"
+          lg="4"
         >
           <v-card
             :color="key"
@@ -37,36 +37,39 @@
               />
             </v-card-text>
           </v-card>
+
           <v-card
             v-for="(subColor, key2) in color"
             :key="key2"
             :color="`${key} ${convertToClass(key2)}`"
-            tile
             flat
+            tile
           >
             <v-card-text :class="getColorClass(key2)">
-              <v-layout>
-                <v-flex
-                  xs8
-                  caption
+              <v-row>
+                <v-col
+                  cols="8"
+                  class="caption"
                 >
                   <span v-if="key !== 'shades'">{{ key }}&nbsp;</span>
+
                   <span v-if="key2 !== 'base'">{{ key2.replace(/(.*)(\d)/, '$1-$2') }}</span>
-                </v-flex>
-                <v-flex
-                  xs4
-                  text-right
+                </v-col>
+
+                <v-col
+                  cols="4"
+                  class="text-right"
                 >
                   <span
                     v-if="subColor !== 'transparent'"
                     v-text="subColor.toUpperCase()"
                   />
-                </v-flex>
-              </v-layout>
+                </v-col>
+              </v-row>
             </v-card-text>
           </v-card>
-        </v-flex>
-      </v-layout>
+        </v-col>
+      </v-row>
     </v-container>
   </section>
 </template>
@@ -77,6 +80,8 @@
   import colors from 'vuetify/es5/util/colors'
 
   export default {
+    name: 'StyleColors',
+
     data: () => ({
       colors,
       search: '',

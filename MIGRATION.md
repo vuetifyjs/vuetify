@@ -202,7 +202,7 @@ const opts = {
 }
 ```
 
-* Now defaults to use [mdi](https://materialdesignicons.com/) icons. For information on how to install please navigate [here](https://vuetifyjs.com/customization/icons#install-material-design-icons).
+* Now defaults to use [mdi](https://materialdesignicons.com/) icons. For information on how to install please navigate [here](https://vuetifyjs.com/customization/icons#install-material-design-icons)
 * Is now located under the **icons** property of the Vuetify options
 
 If you want to use a custom iconfont, you must set it up in the initial Vuetify options now.
@@ -330,11 +330,11 @@ All event names has been changed from camelCase to kebab-case:
 - `update:returnValue` → `update:return-value`
 
 ### Activators
-* Components with activators, `v-tooltip`, `v-menu`, `v-dialog`, `v-list-group` and `v-bottom-sheet` must now be bound using the new [v-slot](https://vuejs.org/v2/guide/components-slots.html#Named-Slots) syntax.
+* Components with activators, `v-tooltip`, `v-menu`, `v-dialog`, `v-list-group` and `v-bottom-sheet` must now be bound using the new [v-slot](https://vuejs.org/v2/guide/components-slots.html#Named-Slots) syntax
   * Requires Vue@2.6
-* We understand this is considerably more verbose than the v1.5 counterpart. We are still exploring ways to support the new **v-slot** in a more concise manner.
-  * You can find more information on the official Vue documentation for [Destructuring Slot Props](https://vuejs.org/v2/guide/components-slots.html#Destructuring-Slot-Props).
-  * You can find more information on the official Vue documentation for [v-slot](https://vuejs.org/v2/guide/components-slots.html#Named-Slots).
+* We understand this is considerably more verbose than the v1.5 counterpart. We are still exploring ways to support the new **v-slot** in a more concise manner
+  * You can find more information on the official Vue documentation for [Destructuring Slot Props](https://vuejs.org/v2/guide/components-slots.html#Destructuring-Slot-Props)
+  * You can find more information on the official Vue documentation for [v-slot](https://vuejs.org/v2/guide/components-slots.html#Named-Slots)
 * The upside to this change is it is easier to support nested activators and provide proper a11y support
 
 #### Regular activator
@@ -542,10 +542,10 @@ _Developer notes: Was never explicitly listed in API_
 Data table (and iterator) have been rewritten from the ground up to be both easier to use and to allow for more flexibilty in more advanced use cases. This has resulted in a number of breaking changes. Some of these are shared between both components while some are unique to each.
 
 #### Shared
-* **disable-initial-sort** has been removed. Neither component initially sorts data anymore. Use **sort-by** (or **options**) prop to sort.
-* **filter** prop has been removed. Instead use **custom-filter**. This was done in an effort to make custom filtering less confusing.
+* **disable-initial-sort** has been removed. Neither component initially sorts data anymore. Use **sort-by** (or **options**) prop to sort
+* **filter** prop has been removed. Instead use **custom-filter**. This was done in an effort to make custom filtering less confusing
   * The signature for **custom-filter** has changed from `(items: object[], search: string, filter: Filter): object[]` to `(value: any, search: string, item: any) => boolean`
-* **pagination** prop has been removed. Instead use the separate props such as **page**, **sort-by**, etc. If you want to provide a single object you can use the new **options** prop instead. **NOTE**: The **options** prop has a different object structure than **pagination**. Check API docs for details.
+* **pagination** prop has been removed. Instead use the separate props such as **page**, **sort-by**, etc. If you want to provide a single object you can use the new **options** prop instead. **NOTE**: The **options** prop has a different object structure than **pagination**. Check API docs for details
 * **total-items** prop has been renamed to **server-items-length**
 * **hide-actions** prop has been renamed to **hide-default-footer**. Also it no longer changes the visible items per page
 * Props related to the default footer have been move to the **footer-props** prop. These are:
@@ -553,7 +553,7 @@ Data table (and iterator) have been rewritten from the ground up to be both easi
   * **next-icon**
   * **rows-per-page-items** → **items-per-page-options**
   * **rows-per-page-text** → **items-per-page-text**
-* The **expand** prop has been removed.
+* The **expand** prop has been removed
 
 #### `v-data-iterator`
 * The **content-tag**, **content-props**, **content-class** props have been removed. Instead simply use the default scoped slot to implement your intended markup.
@@ -561,10 +561,10 @@ Data table (and iterator) have been rewritten from the ground up to be both easi
 #### `v-data-table`
 * **items** slot has been renamed to **item**
 * **headers** slot renamed to **header**
-* **item** slot (and **header**) now require you to define a `<tr>` element. Previously this was optional.
-* **expand** slot renamed to **expanded-item**. It no longer includes an expansion transition, and the slot is inside the `<tr>` element so that you can define your own `<td>` columns. To get back to a similar look as in 1.5, you will need a `<td>` with *colspan* equal to the number of columns in your header.
+* **item** slot (and **header**) now require you to define a `<tr>` element. Previously this was optional
+* **expand** slot renamed to **expanded-item**. It no longer includes an expansion transition, and the slot is inside the `<tr>` element so that you can define your own `<td>` columns. To get back to a similar look as in 1.5, you will need a `<td>` with *colspan* equal to the number of columns in your header
 * **hide-header** has been renamed to **hide-default-header**
-* **select-all** has been renamed to **show-select**. This will also render a checkbox on each item row as long as you are not defining a slot that overrides the internal row rendering (such as **item** or **body**).
+* **select-all** has been renamed to **show-select**. This will also render a checkbox on each item row as long as you are not defining a slot that overrides the internal row rendering (such as **item** or **body**)
 * Props related to the default header have been moved to the **header-props** prop. These are:
   * **sort-icon**
 
@@ -777,7 +777,7 @@ _Developer notes: The tabs-items component does not have to be provided and is o
 ```
 
 #### `v-toolbar`
-* All existing scrolling techniques and `app` functionality has been deprecated and moved to `v-app-bar`.
+* All existing scrolling techniques and `app` functionality has been deprecated and moved to `v-app-bar`
 
 <h2 id="i-need-help">🆘 I need help!</h2>
 

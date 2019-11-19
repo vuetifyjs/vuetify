@@ -1,66 +1,66 @@
 {
-  "header": "# Toolbars",
-  "headerText": "The `v-toolbar` component is pivotal to any gui, as it generally is the primary source of site navigation. The toolbar component works great in conjunction with [v-navigation-drawer](/components/navigation-drawers) and [v-card](/components/cards).",
+  "heading": "# Toolbars",
+  "headingText": "The `v-toolbar` component is pivotal to any gui, as it generally is the primary source of site navigation. The toolbar component works great in conjunction with [v-navigation-drawer](/components/navigation-drawers) and [v-card](/components/cards).",
   "buttonMargin": "When `<v-btn>`s with the **icon** prop are used inside of `v-toolbar` and `v-app-bar` they will automatically have their size increased and negative margin applied to ensure proper spacing according to the Material Design Specification. If you choose to wrap your buttons in any container, such as a `<div>`, you will need to apply negative margin to that container in order to properly align them.",
   "examples": {
     "usage": {
       "desc": "A toolbar is a flexible container that can be used in a number of ways. By default, the toolbar is 64px high on desktop and 56px high on mobile. There are a number of helper components available to use with the toolbar. The `v-toolbar-title` is used for displaying a title and `v-toolbar-items` allow [v-btn](/components/buttons) to extend full height."
     },
     "light-and-dark": {
-      "header": "### Light and Dark",
+      "heading": "### Light and Dark",
       "desc": "Toolbars come in **2** variants, light and dark. Light toolbars have dark tinted buttons and dark text whereas dark toolbars have white tinted buttons and white text."
     },
     "flexible-and-card": {
-      "header": "### Flexible toolbar and card toolbar",
+      "heading": "### Flexible toolbar and card toolbar",
       "desc": "In this example we offset our card onto the extended content area of a toolbar using the **extended** prop."
     },
     "floating-with-search": {
-      "header": "### Floating with search",
+      "heading": "### Floating with search",
       "desc": "A floating toolbar is turned into an inline element that only takes up as much space as needed. This is particularly useful when placing toolbars over content."
     },
     "variations": {
-      "header": "### Variations",
+      "heading": "### Variations",
       "desc": "A `v-toolbar` has multiple variations that can be applied with themes and helper classes. These range from light and dark themes, colored and transparent.",
       "uninverted": true
     },
     "prominent": {
-      "header": "### Prominent toolbars",
+      "heading": "### Prominent toolbars",
       "desc": "Prominent toolbars increase the `v-toolbar`'s height to _128px_ and positions the `v-toolbar-title` towards the bottom of the container. This is expanded upon in [v-app](/components/app-bars#prominent-w-scroll-shrink) with the ability to shrink a **prominent** toolbar to a **dense** or **short** one."
     },
     "dense": {
-      "header": "### Dense toolbars",
+      "heading": "### Dense toolbars",
       "desc": "Dense toolbars reduce their height to _48px_. When using in conjunction with the **prominent** prop, will reduce height to _96px_."
     },
     "dense-prominent": {
-      "header": "### Dense prominent toolbars",
+      "heading": "### Dense prominent toolbars",
       "desc": "You can combine both the prominent and dense properties."
     },
     "scrolling": {
-      "header": "### Scrolling techniques",
+      "heading": "### Scrolling techniques",
       "desc": "A toolbar can transition off screen when scrolling. Here we demonstrate how you can specify the scroll target (default is window). Note: for this example there is special markup that will not be required in your application."
     },
     "system-bars-status-window": {
-      "header": "### System bars - status/window",
+      "heading": "### System bars - status/window",
       "desc": "System bars are useful for notification icons on mobile and desktop. For live examples of these, head to the pre-defined layouts."
     },
     "contextual-action-bar": {
-      "header": "### Contextual action bars",
+      "heading": "### Contextual action bars",
       "desc": "It is possible to update the appearance of a toolbar in response to changes in app state. In this example, the color and content of the toolbar changes in response to user selections in the `v-select`."
     },
     "background": {
-      "header": "### Prominent w/ Background",
+      "heading": "### Prominent w/ Background",
       "desc": "Toolbars can display a background as opposed to a solid color. This can be modified by using the **img** slot and providing your own [v-img](/components/images) component. Backgrounds can be faded using a [v-app-bar](/components/app-bars#prominent-w-scroll-shrink-and-image)."
     },
     "extended": {
-      "header": "### Extended",
+      "heading": "### Extended",
       "desc": "Toolbars can be extended without using the `extension` slot."
     },
     "extension-height": {
-      "header": "### Extension height",
+      "heading": "### Extension height",
       "desc": "The extension's height can be customized."
     },
     "collapse": {
-      "header": "### Collapse",
+      "heading": "### Collapse",
       "desc": "Toolbars can be collapsed to save screen space."
     }
   },

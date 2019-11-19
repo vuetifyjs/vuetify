@@ -4,8 +4,9 @@ import Vuetify, {
   VBtn,
   VCard,
   VCardText,
-  directives,
 } from 'vuetify/lib'
+
+import * as directives from 'vuetify/lib/directives'
 
 Vuetify.install(Vue)
 

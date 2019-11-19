@@ -1,44 +1,44 @@
 {
-  "header": "# Timelines",
-  "headerText": "The `v-timeline` is useful for stylistically displaying chronological information.",
+  "heading": "# Timelines",
+  "headingText": "The `v-timeline` is useful for stylistically displaying chronological information.",
   "examples": {
     "usage": {
       "desc": "`v-timeline`'s in their simplest form display a vertical timeline that should contain at least one `v-timeline-item`."
     },
     "small": {
-      "header": "### Small dots",
+      "heading": "### Small dots",
       "desc": "The `small` prop allows alternate styles to provide a unique design."
     },
     "icons": {
-      "header": "### Icon dots",
+      "heading": "### Icon dots",
       "desc": "Conditionally use icons within the `v-timeline-item`'s dot to provide additional context."
     },
     "avatars": {
-      "header": "### Avatar dots",
+      "heading": "### Avatar dots",
       "desc": "Insert avatars into dots with use of the `icon` slot and `v-avatar`."
     },
     "card": {
-      "header": "### Timeline card",
+      "heading": "### Timeline card",
       "desc": "If you place a `v-card` inside of a `v-timeline-item`, a caret will appear on the side of the card."
     },
     "color": {
-      "header": "### Colored dots",
+      "heading": "### Colored dots",
       "desc": "Colored dots create visual breakpoints that make your timelines easier to read."
     },
     "slot": {
-      "header": "### Opposite slot",
+      "heading": "### Opposite slot",
       "desc": "The **opposite** slot provides an additional layer of customization within your timelines."
     },
     "alert": {
-      "header": "### Dense alert",
+      "heading": "### Dense alert",
       "desc": "`dense` timelines position all content to the right. In this example, `v-alert` replaces the card to provide a different design."
     },
     "reverse": {
-      "header": "### Reverse direction",
+      "heading": "### Reverse direction",
       "desc": "You can reverse the direction of the timeline items by using the `reverse` prop. This works both in default and `dense` mode."
     },
     "advanced": {
-      "header": "### Advanced",
+      "heading": "### Advanced",
       "desc": "Modular components allow you to create highly customized solutions that just work."
     }
   },

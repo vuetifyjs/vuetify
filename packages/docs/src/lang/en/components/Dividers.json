@@ -1,28 +1,28 @@
 {
-  "header": "# Dividers",
-  "headerText": "The `v-divider` component is used to separate sections of lists or layouts.",
+  "heading": "# Dividers",
+  "headingText": "The `v-divider` component is used to separate sections of lists or layouts.",
   "examples": {
     "usage": {
       "desc": "Dividers in their simplest form display a horizontal line."
     },
     "inset": {
-      "header": "### Inset dividers",
+      "heading": "### Inset dividers",
       "desc": "Inset dividers are moved 72px to the right. This will cause them to line up with list items."
     },
     "vertical": {
-      "header": "### Vertical dividers",
+      "heading": "### Vertical dividers",
       "desc": "Vertical dividers give you more tools for unique layouts."
     },
     "vertical-inset": {
-      "header": "### Vertical inset dividers",
+      "heading": "### Vertical inset dividers",
       "desc": "Vertical dividers can also be paired with the `inset` prop for even more options."
     },
     "subheaders": {
-      "header": "### Dividers and subheaders",
+      "heading": "### Dividers and subheaders",
       "desc": "Dividers and subheaders can help break up content and can optionally line up with one another by using the same `inset` prop."
     },
     "divider-list-portrait": {
-      "header": "### Dividers in Portrait View",
+      "heading": "### Dividers in Portrait View",
       "desc": "Create custom cards to fit any use-case"
     }
   },

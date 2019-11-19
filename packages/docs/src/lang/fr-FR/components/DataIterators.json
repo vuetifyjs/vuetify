@@ -1,1 +1,15 @@
-{}
+{
+  "examples": {
+    "slots": {
+      "heading": "### Champs"
+    },
+    "filter": {
+      "heading": "### Filtre"
+    }
+  },
+  "slots": {
+    "v-data-iterator": {
+      "default": "L'emplacement par défaut. Utilisez ceci pour rendre vos éléments"
+    }
+  }
+}

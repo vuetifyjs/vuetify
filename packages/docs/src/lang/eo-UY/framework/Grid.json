@@ -1,6 +1,6 @@
 {
-  "header": "crwdns24228:0crwdne24228:0",
-  "headerText": "crwdns24230:0crwdne24230:0",
+  "heading": "crwdns24228:0crwdne24228:0",
+  "headingText": "crwdns24230:0crwdne24230:0",
   "components": [
     "crwdns24232:0crwdne24232:0"
   ],
@@ -10,51 +10,51 @@
       "uninverted": true
     },
     "playground": {
-      "header": "crwdns24238:0crwdne24238:0",
+      "heading": "crwdns24238:0crwdne24238:0",
       "desc": "crwdns24240:0crwdne24240:0",
       "uninverted": true
     },
     "offset": {
-      "header": "crwdns24244:0crwdne24244:0",
+      "heading": "crwdns24244:0crwdne24244:0",
       "desc": "crwdns24246:0crwdne24246:0",
       "uninverted": true
     },
     "order": {
-      "header": "crwdns24250:0crwdne24250:0",
+      "heading": "crwdns24250:0crwdne24250:0",
       "desc": "crwdns24252:0crwdne24252:0",
       "uninverted": true
     },
     "directionAndAlign": {
-      "header": "crwdns24256:0crwdne24256:0",
+      "heading": "crwdns24256:0crwdne24256:0",
       "desc": "crwdns24258:0crwdne24258:0",
       "uninverted": true
     },
     "rowColumnBreakpoint": {
-      "header": "crwdns24262:0crwdne24262:0",
+      "heading": "crwdns24262:0crwdne24262:0",
       "desc": "crwdns24264:0crwdne24264:0",
       "uninverted": true
     },
     "growShrink": {
-      "header": "crwdns24268:0crwdne24268:0",
+      "heading": "crwdns24268:0crwdne24268:0",
       "desc": "crwdns24270:0crwdne24270:0",
       "uninverted": true
     },
     "nestedGrid": {
-      "header": "crwdns24274:0crwdne24274:0",
+      "heading": "crwdns24274:0crwdne24274:0",
       "desc": "crwdns24276:0crwdne24276:0",
       "uninverted": true
     },
     "uniqueLayouts": {
-      "header": "crwdns24280:0crwdne24280:0",
+      "heading": "crwdns24280:0crwdne24280:0",
       "desc": "crwdns24282:0crwdne24282:0",
       "uninverted": true
     },
     "spacer": {
-      "header": "crwdns24286:0crwdne24286:0",
+      "heading": "crwdns24286:0crwdne24286:0",
       "desc": "crwdns24288:0crwdne24288:0"
     },
     "tags": {
-      "header": "crwdns24290:0crwdne24290:0",
+      "heading": "crwdns24290:0crwdne24290:0",
       "desc": "crwdns24292:0crwdne24292:0"
     }
   },

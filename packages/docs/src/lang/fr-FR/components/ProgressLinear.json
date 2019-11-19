@@ -1,1 +1,44 @@
-{}
+{
+  "examples": {
+    "file-loader": {
+      "desc": "Le composant `v-progress-linear` est bon pour traduire à l'utilisateur qu'il attend une réponse."
+    },
+    "linear-custom-colors": {
+      "heading": "### Couleurs personnalisées",
+      "desc": "Vous pouvez également définir la couleur en utilisant les props `color` et `background-color`."
+    },
+    "linear-indeterminate": {
+      "heading": "### Indéterminé",
+      "desc": "Utiliser le prop`indeterminate`, `v-progress-linear` anime en permanence."
+    },
+    "loader": {
+      "desc": "En utilisant la prop`absolu` nous sommes en mesure de positionner le composant `v-progress-linear` au bas de la `v-toolbar`. Nous utilisons également la prop`actif` qui nous permet de contrôler la visibilité du progrès."
+    },
+    "rounded": {
+      "heading": "### Arrondi",
+      "desc": "Le prop`rounded` est un style alternatif qui ajoute un rayon de bordure au composant `v-progress-linear`."
+    },
+    "stream": {
+      "desc": "La propriété `stream` fonctionne avec `buffer-value` pour transmettre à l'utilisateur qu'il y a une action en cours. Vous pouvez utiliser toute combinaison de `buffer-value` et `value` pour réaliser votre conception."
+    },
+    "slot": {
+      "heading": "### Champs"
+    }
+  },
+  "props": {
+    "active": "Components.ProgressCircular.props.active",
+    "backgroundColor": "Components.ProgressCircular.props.backgroundColor",
+    "backgroundOpacity": "Components.ProgressCircular.props.backgroundOpacity",
+    "bufferValue": "Components.ProgressCircular.props.bufferValue",
+    "fill": "Components.ProgressCircular.props.fill",
+    "height": "Mixins.Measurable.props.height",
+    "indeterminate": "Components.ProgressCircular.props.indeterminate",
+    "rounded": "Ajoute un rayon de frontière au composant de progression",
+    "size": "Components.ProgressCircular.props.size",
+    "stream": "Un style alternatif pour le chargement qui fonctionne en tandem avec **buffer-value**",
+    "value": "Components.ProgressCircular.props.value"
+  },
+  "slots": {
+    "default": "Fournit la valeur actuelle du composant"
+  }
+}

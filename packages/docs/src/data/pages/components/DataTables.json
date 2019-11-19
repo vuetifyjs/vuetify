@@ -70,15 +70,6 @@
           ]
         }
       ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "doc-theme-ad",
-          "value": "dashboard-pro"
-        }
-      ]
     }
   ]
 }

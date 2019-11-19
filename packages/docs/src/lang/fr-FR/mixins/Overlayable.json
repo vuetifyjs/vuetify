@@ -1,1 +1,7 @@
-{}
+{
+  "props": {
+    "hideOverlay": "Masque l’affichage de la superposition.",
+    "overlayColor": "Définit la couleur de superposition.",
+    "overlayOpacity": "Définit l'opacité de la superposition."
+  }
+}

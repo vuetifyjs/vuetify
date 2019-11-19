@@ -4,13 +4,15 @@
     max-width="1200"
     outlined
   >
-
     <v-row no-gutters>
       <v-col
         cols="12"
         md="9"
       >
-        <div class="d-flex grey lighten-3">
+        <div
+          :class="$vuetify.theme.dark ? 'grey darken-4' : 'grey lighten-3'"
+          class="d-flex"
+        >
           <v-tabs
             v-model="tab"
             background-color="transparent"
@@ -35,7 +37,7 @@
           <v-sheet
             min-height="300"
             tile
-            :dark="dark"
+            :dark="dark || $vuetify.theme.dark"
           >
             <div
               class="fill-height pa-6"
@@ -59,7 +61,10 @@
         cols="12"
         md="3"
       >
-        <div class="d-flex grey lighten-3">
+        <div
+          :class="$vuetify.theme.dark ? 'grey darken-4' : 'grey lighten-3'"
+          class="d-flex"
+        >
           <v-responsive
             class="title font-weight-regular align-center px-3"
             height="48"
@@ -67,7 +72,10 @@
             Options
           </v-responsive>
 
-          <v-tooltip bottom>
+          <v-tooltip
+            v-if="!$vuetify.theme.dark"
+            bottom
+          >
             <template v-slot:activator="{ on }">
               <v-btn
                 aria-label="Invert playground colors"
@@ -259,4 +267,7 @@
       border-bottom: thin solid rgba(0, 0, 0, 0.12) !important
       border-bottom-left-radius: 0 !important
       border-bottom-right-radius: 0 !important
+
+      &.theme--dark
+        border-bottom: thin solid rgba(255, 255, 255, 0.12) !important
 </style>

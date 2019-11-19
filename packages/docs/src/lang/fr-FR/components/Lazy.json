@@ -1,1 +1,12 @@
-{}
+{
+  "examples": {
+    "usage": {
+      "desc": "Le composant `v-lazy` par défaut ne rendra pas son contenu jusqu'à ce qu'il ait été intersecté. Faites défiler le bas et regardez le rendu de l'élément au fur et à mesure que vous l'avez passé."
+    }
+  },
+  "props": {
+    "minHeight": "Mixins.Measurable.props.minHeight",
+    "options": "Options qui sont passées au constructeur [Intersection observateur](https://developer.mozilla.org/fr-US/docs/Web/API/Intersection_Observer_API).",
+    "transition": "Mixins.Transitionable.props.transition"
+  }
+}

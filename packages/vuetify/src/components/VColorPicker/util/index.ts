@@ -127,6 +127,8 @@ export function parseColor (color: any, oldColor: VColorPickerColor | null) {
 }
 
 export function extractColor (color: VColorPickerColor, input: any) {
+  if (input == null) return color
+
   if (typeof input === 'string') {
     return input.length === 7 ? color.hex : color.hexa
   }

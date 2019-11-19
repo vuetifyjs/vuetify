@@ -1,53 +1,61 @@
 <template>
   <div>
-    <doc-heading>Generic.Pages.api</doc-heading>
+    <base-heading>Generic.Pages.api</base-heading>
+
+    <base-markdown>Generic.Pages.apiText</base-markdown>
+
     <v-card outlined>
       <v-toolbar
-        class="px-2 py-3"
         color="primary"
         dark
         flat
         height="auto"
       >
-        <v-layout wrap>
-          <v-flex
-            xs12
-            md4
-          >
-            <v-select
-              v-model="current"
-              :items="value"
-              :class="$vuetify.breakpoint.mdAndUp ? '' : 'mb-6'"
-              label="Available Component(s)"
-              outlined
-              :menu-props="{offsetY: true, contentClass: 'primary'}"
-              prepend-inner-icon="mdi-view-dashboard"
-              hide-details
-            />
-          </v-flex>
-          <v-flex
-            xs12
-            md4
-            offset-md4
-          >
-            <v-text-field
-              v-model="search"
-              type="search"
-              clearable
-              append-icon="mdi-magnify"
-              label="Search..."
-              outlined
-              hide-details
-              single-line
-            />
-          </v-flex>
-        </v-layout>
+        <v-container class="px-0">
+          <v-row no-gutters>
+            <v-col
+              cols="12"
+              md="4"
+            >
+              <v-select
+                v-model="current"
+                :class="$vuetify.breakpoint.mdAndUp ? '' : 'mb-6'"
+                :items="value"
+                :menu-props="{ offsetY: true, contentClass: 'primary' }"
+                color="white"
+                hide-details
+                label="Available Component(s)"
+                outlined
+                prepend-inner-icon="mdi-view-dashboard"
+              />
+            </v-col>
+
+            <v-col
+              cols="12"
+              md="4"
+              offset-md="4"
+            >
+              <v-text-field
+                v-model="search"
+                append-icon="mdi-magnify"
+                clearable
+                color="white"
+                hide-details
+                label="Search..."
+                outlined
+                single-line
+                type="search"
+              />
+            </v-col>
+          </v-row>
+        </v-container>
       </v-toolbar>
+
       <v-tabs
         v-model="tab"
-        background-color="transparent"
-        :vertical="$vuetify.breakpoint.smAndUp"
         :slider-color="computedTabs.length ? 'primary' : 'transparent'"
+        :vertical="$vuetify.breakpoint.smAndUp"
+        background-color="transparent"
       >
         <v-tab
           v-for="(tab, i) in computedTabs"
@@ -60,8 +68,8 @@
         <v-tabs-items
           :key="current"
           v-model="tab"
-          touchless
           class="white overflow-hidden"
+          touchless
         >
           <v-tab-item
             v-for="(tab, i) in computedTabs"
@@ -70,7 +78,10 @@
             eager
             style="max-height: 800px;"
           >
-            <v-card flat>
+            <v-card
+              flat
+              tile
+            >
               <doc-parameters
                 :headers="headers[tab]"
                 :items="component[tab]"
@@ -115,6 +126,8 @@
   ]
 
   export default {
+    name: 'DocApi',
+
     props: {
       lang: {
         type: String,

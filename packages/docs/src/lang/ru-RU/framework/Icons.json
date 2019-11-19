@@ -1,6 +1,6 @@
 {
-  "header": "# Иконки",
-  "headerText": "Vuetify поддерживает следующие библиотеки иконок: Material Icons, Material Design Icons, Font Awesome 4 и Font Awesome 5. По умолчанию, будет использоваться [Material Icons](https://material.io/tools/icons/?style=baseline).",
+  "heading": "# Иконки",
+  "headingText": "Vuetify поддерживает следующие библиотеки иконок: Material Icons, Material Design Icons, Font Awesome 4 и Font Awesome 5. По умолчанию, будет использоваться [Material Icons](https://material.io/tools/icons/?style=baseline).",
   "usageText1": "Чтобы изменить шрифт иконок, добавьте опцию `iconfont` при подключении Vuetify.",
   "usageText2": "Использование этой опции заменит стандартные иконки компонентов, у которых есть значения **icon** по умолчанию, на иконки другой библиотеки. Нажмите [здесь](https://github.com/vuetifyjs/vuetify/blob/dev/src/components/Vuetify/mixins/icons.js), чтобы узнать, какие иконки используются из каждого шрифта.",
   "installText1": "Нужно подключать выбранную библиотеку иконок (даже при использовании стандартных иконок). Это можно сделать с помощью CDN или импортировав библиотеку иконок в ваше приложение",

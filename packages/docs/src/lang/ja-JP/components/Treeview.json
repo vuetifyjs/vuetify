@@ -1,11 +1,10 @@
 {
-  "headerText": "`v-treeview` コンポーネントは大量のネストされたデータを表示するのに便利です。",
   "examples": {
     "usage": {
       "desc": "基本的な使い方の例"
     },
     "color": {
-      "header": "色"
+      "heading": "色"
     }
   },
   "props": {

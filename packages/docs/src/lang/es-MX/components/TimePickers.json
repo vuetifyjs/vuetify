@@ -1,10 +1,10 @@
 {
   "examples": {
     "disabled": {
-      "header": "Deshabilitado"
+      "heading": "Deshabilitado"
     },
     "scrollable": {
-      "header": "_Scrollable_"
+      "heading": "_Scrollable_"
     }
   }
 }

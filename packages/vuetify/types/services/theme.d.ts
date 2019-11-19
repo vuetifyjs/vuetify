@@ -13,6 +13,7 @@ export interface Theme {
     dark: Partial<VuetifyThemeVariant>
     light: Partial<VuetifyThemeVariant>
   }
+  readonly currentTheme: Partial<VuetifyThemeVariant>
 }
 
 export interface VuetifyThemes {

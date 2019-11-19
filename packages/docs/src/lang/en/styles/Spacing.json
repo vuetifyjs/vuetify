@@ -1,6 +1,6 @@
 {
-  "header": "# Spacing",
-  "headerText": "Update your layout without creating new classes. Spacing helpers are useful for modifying the padding and margin of an element.",
+  "heading": "# Spacing",
+  "headingText": "Update your layout without creating new classes. Spacing helpers are useful for modifying the padding and margin of an element.",
   "playgroundHeader": "## Playground",
   "playgroundText1": "Use the playground to get a feel for what the different helper classes can do. For an explanation of how they work, see the **How it works** section below.",
   "howText": "The helper classes apply **margin** or **padding** to an element ranging from _0 to 12_. Each size increment was designed to align with common Material Design spacings. These classes can be applied using the following format `{property}{direction}-{size}`.",
@@ -57,15 +57,15 @@
   "breakpointHowText": "The helper classes apply **margin** or **padding** at a given breakpoint. These classes can be applied using the following format: `{property}{direction}-{breakpoint}-{size}`.",
   "examples": {
     "horizontal": {
-      "header": "### Horizontal",
+      "heading": "### Horizontal",
       "desc": "Using the margin helper classes you can easily center content horizontally."
     },
     "negative-margin": {
-      "header": "### Negative margin",
+      "heading": "### Negative margin",
       "desc": "Margin can also be applied negatively at the same **1 to 12** intervals."
     },
     "breakpoint-md": {
-      "header": "### With breakpoint",
+      "heading": "### With breakpoint",
       "desc": "Spacing with `md` and `lg` breakpoints"
     }
   }

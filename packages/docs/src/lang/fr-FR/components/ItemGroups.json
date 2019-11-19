@@ -1,1 +1,24 @@
-{}
+{
+  "examples": {
+    "usage": {
+      "desc": "L'utilisation principale du `v-item-group` est de créer des groupes de tout ce qui devrait être contrôlé par un **modèle**."
+    },
+    "post": {
+      "desc": "Branchez facilement un groupe de puces sur mesure."
+    },
+    "toggle-pictures": {
+      "desc": "Les icônes peuvent être utilisées comme boutons de basculement lorsqu'elles permettent la sélection ou la désélection d'un seul choix, comme le marquage d'un élément comme un favori."
+    },
+    "multiple": {
+      "heading": "### Multiple",
+      "desc": "Les groupes d'éléments peuvent avoir plusieurs éléments sélectionnés."
+    },
+    "mandatory": {
+      "heading": "### Obligatoire",
+      "desc": "les groupes d'éléments **mandatory** doivent avoir au moins 1 élément sélectionné."
+    },
+    "active-class": {
+      "desc": "La propriété ** activeClass** vous permet de définir une classe CSS personnalisée sur les éléments actifs."
+    }
+  }
+}
