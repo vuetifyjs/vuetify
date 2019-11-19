@@ -12,12 +12,7 @@
     <div :id="id"><!-- Ad --></div>
   </v-card>
 
-  <v-responsive
-    v-else
-    max-width="425"
-  >
-    <ad-card />
-  </v-responsive>
+  <ad-card v-else />
 </template>
 
 <script>
