@@ -44,7 +44,10 @@
         {
           "type": "examples",
           "value": [
-            "simple/visibility"
+            "simple/tabs",
+            "intermediate/hover",
+            "complex/dynamic",
+            "complex/customization"
           ]
         }
       ]

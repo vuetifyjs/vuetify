@@ -3,7 +3,7 @@
 
 +theme(v-badge) using ($material)
   .v-badge__badge::after
-    border: 2px solid map-get($material, 'cards')
+    border-color: map-get($material, 'cards')
 
 .v-badge
   display: inline-block
@@ -31,6 +31,10 @@
       color: inherit
       font-size: $badge-font-size
 
+    .v-img
+      height: $badge-font-size
+      width: $badge-font-size
+
   &__wrapper
     flex: 0 1
     height: 100%
@@ -40,23 +44,38 @@
     top: 0
     width: 100%
 
+  &--avatar
+    .v-badge__badge
+      padding: 0
+
+      .v-avatar
+        height: $badge-height !important
+        min-width: 0 !important
+        max-width: $badge-min-width !important
+
   &--bordered
     .v-badge__badge::after
       border-radius: inherit
+      border-width: 2px
+      border-style: solid
       bottom: 0
       content: ''
       left: 0
       position: absolute
       right: 0
       top: 0
-      transform: scale(1.1)
+      transform: scale(1.15)
 
   &--dot
     .v-badge__badge
+      border-radius: $badge-dot-border-radius
       height: $badge-dot-height
       min-width: 0
       padding: 0
       width: $badge-dot-width
+
+      &::after
+        border-width: 1.5px
 
   &--icon
     .v-badge__badge

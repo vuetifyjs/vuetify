@@ -1,5 +1,8 @@
 <template>
-  <v-container class="fill-height">
+  <v-container
+    :class="attrs.bordered ? 'grey lighten-2' : undefined"
+    class="fill-height"
+  >
     <v-row
       align="center"
       justify="center"

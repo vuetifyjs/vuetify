@@ -29,6 +29,7 @@ export default mixins(
   name: 'v-badge',
 
   props: {
+    avatar: Boolean,
     bordered: Boolean,
     color: {
       type: String,
@@ -45,7 +46,6 @@ export default mixins(
     offsetX: [Number, String],
     offsetY: [Number, String],
     overlap: Boolean,
-    text: Boolean,
     tile: Boolean,
     transition: {
       type: String,
@@ -57,6 +57,7 @@ export default mixins(
   computed: {
     classes (): object {
       return {
+        'v-badge--avatar': this.avatar,
         'v-badge--bordered': this.bordered,
         'v-badge--bottom': this.bottom,
         'v-badge--dot': this.dot,
@@ -95,9 +96,8 @@ export default mixins(
       return this.calcPosition(this.offsetY)
     },
     offset (): number {
-      if (this.text) return this.dot ? 0 : 2
-      if (this.overlap) return this.dot ? 10 : 12
-      return this.dot ? 6 : 4
+      if (this.overlap) return this.dot ? 8 : 12
+      return this.dot ? 2 : 4
     },
     styles (): object {
       if (this.inline) return {}
