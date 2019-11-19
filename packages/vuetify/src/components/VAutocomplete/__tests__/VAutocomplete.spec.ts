@@ -498,9 +498,9 @@ describe('VAutocomplete.ts', () => {
   it('should not delete item if readonly', async () => {
     const wrapper = mountFunction({
       propsData: {
-        items: ['foo', 'bar', 'fizz'],
+        items: ['a', 'b', 'c'],
         multiple: true,
-        value: ['foo', 'bar', 'fizz'],
+        value: ['a', 'b', 'c'],
       },
     })
     wrapper.vm.changeSelectedIndex(keyCodes.right)
