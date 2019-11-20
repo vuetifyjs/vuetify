@@ -3,64 +3,50 @@
 exports[`MobileRow should render non-string values 1`] = `
 <tr>
   <td class="v-data-table__mobile-row">
-    <div class="v-data-table__mobile-row__wrapper">
-      <div class="v-data-table__mobile-row__header">
-      </div>
-      <div class="v-data-table__mobile-row__cell">
-        string
-      </div>
+    <div class="v-data-table__mobile-row__header">
+    </div>
+    <div class="v-data-table__mobile-row__cell">
+      string
     </div>
   </td>
   <td class="v-data-table__mobile-row">
-    <div class="v-data-table__mobile-row__wrapper">
-      <div class="v-data-table__mobile-row__header">
-      </div>
-      <div class="v-data-table__mobile-row__cell">
-        12.34
-      </div>
+    <div class="v-data-table__mobile-row__header">
+    </div>
+    <div class="v-data-table__mobile-row__cell">
+      12.34
     </div>
   </td>
   <td class="v-data-table__mobile-row">
-    <div class="v-data-table__mobile-row__wrapper">
-      <div class="v-data-table__mobile-row__header">
-      </div>
-      <div class="v-data-table__mobile-row__cell">
-        1,2
-      </div>
+    <div class="v-data-table__mobile-row__header">
+    </div>
+    <div class="v-data-table__mobile-row__cell">
+      1,2
     </div>
   </td>
   <td class="v-data-table__mobile-row">
-    <div class="v-data-table__mobile-row__wrapper">
-      <div class="v-data-table__mobile-row__header">
-      </div>
-      <div class="v-data-table__mobile-row__cell">
-        false
-      </div>
+    <div class="v-data-table__mobile-row__header">
+    </div>
+    <div class="v-data-table__mobile-row__cell">
+      false
     </div>
   </td>
   <td class="v-data-table__mobile-row">
-    <div class="v-data-table__mobile-row__wrapper">
-      <div class="v-data-table__mobile-row__header">
-      </div>
-      <div class="v-data-table__mobile-row__cell">
-        [object Object]
-      </div>
+    <div class="v-data-table__mobile-row__header">
+    </div>
+    <div class="v-data-table__mobile-row__cell">
+      [object Object]
     </div>
   </td>
   <td class="v-data-table__mobile-row">
-    <div class="v-data-table__mobile-row__wrapper">
-      <div class="v-data-table__mobile-row__header">
-      </div>
-      <div class="v-data-table__mobile-row__cell">
-      </div>
+    <div class="v-data-table__mobile-row__header">
+    </div>
+    <div class="v-data-table__mobile-row__cell">
     </div>
   </td>
   <td class="v-data-table__mobile-row">
-    <div class="v-data-table__mobile-row__wrapper">
-      <div class="v-data-table__mobile-row__header">
-      </div>
-      <div class="v-data-table__mobile-row__cell">
-      </div>
+    <div class="v-data-table__mobile-row__header">
+    </div>
+    <div class="v-data-table__mobile-row__cell">
     </div>
   </td>
 </tr>
