@@ -33,7 +33,7 @@ export default Vue.extend({
       } else if (regularSlot) {
         children.push(regularSlot)
       } else {
-        children.push(value)
+        children.push(value == null ? value : String(value))
       }
 
       const textAlign = `text-${header.align || 'start'}`

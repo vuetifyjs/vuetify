@@ -1,5 +1,71 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`MobileRow should render non-string values 1`] = `
+<tr>
+  <td class="v-data-table__mobile-row">
+    <div class="v-data-table__mobile-row__wrapper">
+      <div class="v-data-table__mobile-row__header">
+      </div>
+      <div class="v-data-table__mobile-row__cell">
+        string
+      </div>
+    </div>
+  </td>
+  <td class="v-data-table__mobile-row">
+    <div class="v-data-table__mobile-row__wrapper">
+      <div class="v-data-table__mobile-row__header">
+      </div>
+      <div class="v-data-table__mobile-row__cell">
+        12.34
+      </div>
+    </div>
+  </td>
+  <td class="v-data-table__mobile-row">
+    <div class="v-data-table__mobile-row__wrapper">
+      <div class="v-data-table__mobile-row__header">
+      </div>
+      <div class="v-data-table__mobile-row__cell">
+        1,2
+      </div>
+    </div>
+  </td>
+  <td class="v-data-table__mobile-row">
+    <div class="v-data-table__mobile-row__wrapper">
+      <div class="v-data-table__mobile-row__header">
+      </div>
+      <div class="v-data-table__mobile-row__cell">
+        false
+      </div>
+    </div>
+  </td>
+  <td class="v-data-table__mobile-row">
+    <div class="v-data-table__mobile-row__wrapper">
+      <div class="v-data-table__mobile-row__header">
+      </div>
+      <div class="v-data-table__mobile-row__cell">
+        [object Object]
+      </div>
+    </div>
+  </td>
+  <td class="v-data-table__mobile-row">
+    <div class="v-data-table__mobile-row__wrapper">
+      <div class="v-data-table__mobile-row__header">
+      </div>
+      <div class="v-data-table__mobile-row__cell">
+      </div>
+    </div>
+  </td>
+  <td class="v-data-table__mobile-row">
+    <div class="v-data-table__mobile-row__wrapper">
+      <div class="v-data-table__mobile-row__header">
+      </div>
+      <div class="v-data-table__mobile-row__cell">
+      </div>
+    </div>
+  </td>
+</tr>
+`;
+
 exports[`MobileRow should render with regular slots 1`] = `
 <tr>
   <td class="v-data-table__mobile-row">
