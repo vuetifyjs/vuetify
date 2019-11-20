@@ -116,6 +116,8 @@
 
       &--loading
         animation: progress-circular-rotate 1s linear infinite
+        // https://github.com/vuetifyjs/vuetify/issues/9475
+        transform: none
 
     &__children
       transition: all $treeview-transition

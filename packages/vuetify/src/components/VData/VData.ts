@@ -222,11 +222,8 @@ export default Vue.extend({
     itemsPerPage (itemsPerPage: number) {
       this.updateOptions({ itemsPerPage })
     },
-    'internalOptions.itemsPerPage': {
-      handler (itemsPerPage: number) {
-        this.$emit('update:items-per-page', itemsPerPage)
-      },
-      immediate: true,
+    'internalOptions.itemsPerPage' (itemsPerPage: number) {
+      this.$emit('update:items-per-page', itemsPerPage)
     },
     sortBy (sortBy: string | string[]) {
       this.updateOptions({ sortBy: wrapInArray(sortBy) })

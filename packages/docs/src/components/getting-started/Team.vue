@@ -59,6 +59,7 @@
           title: 'core',
           name: 'Andrew Henry',
           github: 'MajesticPotatoe',
+          linkedin: 'andrew-henry-01049830',
           avatar: 'avatarStyle=Transparent&topType=ShortHairShortRound&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=Hoodie&clotheColor=Heather&eyeType=Dizzy&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light',
         },
         {
