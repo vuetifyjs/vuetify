@@ -24,7 +24,7 @@ $material-light: map-deep-merge(
     'text': (
       'theme': map-get($shades, 'white'),
       'primary': rgba(map-get($shades, 'black'), 0.87),
-      'secondary': rgba(map-get($shades, 'black'), 0.54),
+      'secondary': rgba(map-get($shades, 'black'), 0.6),
       'disabled': rgba(map-get($shades, 'black'), 0.38),
       'link': map-get($blue, 'darken-2'),
       'link-hover': map-get($grey, 'darken-3')
@@ -107,7 +107,7 @@ $material-light: map-deep-merge(
     'fg-color': map-get($shades, 'black'),
     'text-color': map-get($shades, 'black'),
     'primary-text-percent': 0.87,
-    'secondary-text-percent': 0.54,
+    'secondary-text-percent': 0.6,
     'disabledORhints-text-percent': 0.38,
     'divider-percent': 0.12,
     'active-icon-percent': 0.54,
