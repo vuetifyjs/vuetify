@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
-  "description": "Vue.js 2 Semantic Component Framework",
-  "version": "2.1.9",
+  "description": "Vue Material Component Framework",
+  "version": "2.1.10",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -14,10 +14,20 @@
     "directory": "packages/vuetify"
   },
   "keywords": [
-    "vuetify"
+    "vuetify",
+    "ui framework",
+    "component framework",
+    "ui library",
+    "component library",
+    "material components",
+    "vue framework"
   ],
   "bugs": {
-    "url": "https://github.com/vuetifyjs/vuetify/issues"
+    "url": "https://issues.vuetifyjs.com"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/johnleider"
   },
   "main": "dist/vuetify.js",
   "module": "dist/vuetify.js",
@@ -50,7 +60,7 @@
     "test:win32": "cross-env NODE_ENV=test jest -i",
     "test:coverage": "yarn test --coverage",
     "test:types": "tsc -p ./types/test/tsconfig.json",
-    "lint": "concurrently -n \"tsc,tslint,eslint,types\" --kill-others-on-fail \"tsc --noEmit --pretty\" \"tslint -p . src/**/*.ts -t verbose\" \"eslint --ext .js,.ts src\" \"yarn test:types\"",
+    "lint": "concurrently -n \"tsc,tslint,eslint,types\" --kill-others-on-fail \"tsc --noEmit --pretty\" \"tslint -p . src/**/*.ts -t verbose\" \"eslint --ext .js,.ts src -f codeframe --max-warnings 0\" \"yarn test:types\"",
     "lint:fix": "concurrently -n \"tsc,tslint,eslint,types\" \"tsc --noEmit --pretty\" \"tslint --fix -p . src/**/*.ts -t verbose\" \"eslint --fix --ext .js,.ts src\" \"yarn test:types\""
   },
   "devDependencies": {

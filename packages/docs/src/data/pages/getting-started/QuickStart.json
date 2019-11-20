@@ -167,6 +167,11 @@
           "lang": "cdnText"
         },
         {
+          "type": "alert",
+          "lang": "cdnAlert",
+          "value": "info"
+        },
+        {
           "type": "markup",
           "value": "html_cdn_quickstart"
         }
