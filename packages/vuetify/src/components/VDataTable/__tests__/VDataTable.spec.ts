@@ -556,4 +556,30 @@ describe('VDataTable.ts', () => {
 
     expect(itemsPerPage).not.toHaveBeenCalled()
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/9010
+  it('should change page if item count decreases below page start', async () => {
+    const page = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems.slice(0, 4),
+        itemsPerPage: 2,
+        footerProps: {
+          itemsPerPageOptions: [2],
+        },
+        page: 2,
+      },
+      listeners: {
+        'update:page': page,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ items: testItems.slice(0, 2) })
+    await wrapper.vm.$nextTick()
+
+    expect(page).toHaveBeenCalledWith(1)
+  })
 })
