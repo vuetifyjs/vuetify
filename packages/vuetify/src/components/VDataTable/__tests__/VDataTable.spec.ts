@@ -509,45 +509,77 @@ describe('VDataTable.ts', () => {
 
   // https://github.com/vuetifyjs/vuetify/issues/8184
   it('should default to first option in itemsPerPageOptions if it does not include itemsPerPage', async () => {
-    const itemsPerPage = jest.fn()
-    const options = jest.fn()
     const wrapper = mountFunction({
       propsData: {
         headers: testHeaders,
         items: testItems,
         footerProps: {
-          itemsPerPageOptions: [5, 6],
+          itemsPerPageOptions: [6, 7],
         },
-      },
-      listeners: {
-        'update:items-per-page': itemsPerPage,
-        'update:options': options,
       },
     })
 
-    expect(itemsPerPage).toHaveBeenCalledWith(5)
-    expect(options).toHaveBeenCalledWith(expect.objectContaining({
-      itemsPerPage: 5,
-    }))
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/8817
   it('should handle object when checking if it should default to first option in itemsPerPageOptions', async () => {
-    const itemsPerPage = jest.fn()
     const wrapper = mountFunction({
       propsData: {
         headers: testHeaders,
         items: testItems,
         itemsPerPage: -1,
         footerProps: {
-          itemsPerPageOptions: [5, 6, { text: 'All', value: -1 }],
+          itemsPerPageOptions: [6, { text: 'All', value: -1 }],
         },
-      },
-      listeners: {
-        'update:items-per-page': itemsPerPage,
       },
     })
 
-    expect(itemsPerPage).toHaveBeenCalledWith(-1)
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/9599
+  it('should not immediately emit items-per-page', async () => {
+    const itemsPerPage = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+        footerProps: {
+          itemsPerPageOptions: [6, 7],
+        },
+      },
+      listeners: {
+        'update:itemsPerPage': itemsPerPage,
+      },
+    })
+
+    expect(itemsPerPage).not.toHaveBeenCalled()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/9010
+  it('should change page if item count decreases below page start', async () => {
+    const page = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems.slice(0, 4),
+        itemsPerPage: 2,
+        footerProps: {
+          itemsPerPageOptions: [2],
+        },
+        page: 2,
+      },
+      listeners: {
+        'update:page': page,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ items: testItems.slice(0, 2) })
+    await wrapper.vm.$nextTick()
+
+    expect(page).toHaveBeenCalledWith(1)
   })
 })
