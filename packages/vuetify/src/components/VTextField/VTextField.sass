@@ -66,10 +66,15 @@
     min-width: 0px
     width: 100%
 
+  fieldset,
+  .v-input__control,
+  .v-input__slot
+    border-radius: inherit
+
   &.v-input--dense
     padding-top: 0
 
-    &:not(.v-text-field--outlined):not(.v-text-field--solo)
+    &:not(.v-text-field--outlined):not(.v-text-field--single-line)
       input
         padding: 4px 0 8px
 
@@ -222,26 +227,11 @@
           min-height: 40px
 
   &--filled,
+  &--outlined
+    border-radius: $text-field-border-radius
+
+  &--filled,
   &--full-width
-    input
-      margin-top: 22px
-
-    &.v-input--dense
-      input
-        margin-top: 20px
-
-      &.v-text-field--outlined
-        input
-          margin-top: 0
-
-    &.v-text-field--single-line
-      input
-        margin-top: 12px
-
-      &.v-input--dense
-        input
-          margin-top: 6px
-
     .v-label
       top: 18px
 
@@ -259,9 +249,28 @@
         .v-label
           top: 11px
 
-  &--filled > .v-input__control > .v-input__slot
-    border-top-left-radius: 4px
-    border-top-right-radius: 4px
+  &--filled
+    border-radius: 4px 4px 0 0
+
+    &:not(.v-text-field--single-line)
+      input
+        margin-top: 22px
+
+    &.v-input--dense:not(.v-text-field--single-line)
+      input
+        margin-top: 20px
+
+      &.v-text-field--outlined
+        input
+          margin-top: 0
+
+  &--full-width
+    border-radius: 0
+
+  &--outlined,
+  &--single-line
+    .v-text-field__slot
+      align-items: center
 
   &.v-text-field--enclosed
     margin: 0
@@ -276,6 +285,10 @@
       .v-progress-linear__background
         display: none
 
+    &:not(.v-text-field--rounded) > .v-input__control > .v-input__slot,
+    .v-text-field__details
+      padding: 0 12px
+
     +prepend-append-margin-top(16px)
 
     &.v-input--dense:not(.v-text-field--solo)
@@ -286,10 +299,6 @@
 
       &.v-text-field--outlined
         +prepend-append-margin-top(7px)
-
-    .v-text-field__details,
-    & > .v-input__control > .v-input__slot
-      padding: 0 12px
 
     .v-text-field__details
       margin-bottom: 8px
@@ -305,9 +314,7 @@
     .v-text-field__slot
       flex-direction: row-reverse
 
-  &--solo,
   &--outlined,
-  &--full-width,
   &--rounded
     & > .v-input__control > .v-input__slot
       &:before,
@@ -374,37 +381,14 @@
         border-color: currentColor
         border-width: 2px
 
-  &--solo,
-  &--outlined
-    border-radius: $text-field-border-radius
-
-    fieldset,
-    .v-input__control,
-    .v-input__slot
-      border-radius: inherit
-
-    .v-text-field__slot
-      align-items: center
-
   &--rounded
     border-radius: 28px
 
-    &.v-text-field--outlined
-      fieldset
-        border-radius: 28px
-
     > .v-input__control > .v-input__slot
-      border-radius: 28px
-      padding: 0 24px !important
+      padding: 0 24px
 
   &--shaped
-    &.v-text-field--outlined
-      fieldset
-        border-radius: 16px 16px 0 0
-
-    > .v-input__control > .v-input__slot
-      border-top-left-radius: 16px
-      border-top-right-radius: 16px
+    border-radius: 16px 16px 0 0
 
   &.v-text-field--solo
     .v-label
