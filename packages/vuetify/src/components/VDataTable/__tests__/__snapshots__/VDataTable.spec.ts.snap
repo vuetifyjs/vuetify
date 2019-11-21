@@ -3,7 +3,7 @@
 exports[`VDataTable.ts should change page if item count decreases below page start 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table>
+    <table class>
       <colgroup>
         <col class>
         <col class>
@@ -190,7 +190,7 @@ exports[`VDataTable.ts should change page if item count decreases below page sta
 exports[`VDataTable.ts should default to first option in itemsPerPageOptions if it does not include itemsPerPage 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table>
+    <table class>
       <colgroup>
         <col class>
         <col class>
@@ -499,7 +499,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
 exports[`VDataTable.ts should handle object when checking if it should default to first option in itemsPerPageOptions 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table>
+    <table class>
       <colgroup>
         <col class>
         <col class>
