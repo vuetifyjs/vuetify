@@ -33,6 +33,7 @@ declare module 'vuetify/lib' {
   const VCalendarMonthly: Component
   const VCard: Component
   const VCardTitle: Component
+  const VCardSubtitle: Component
   const VCardActions: Component
   const VCardText: Component
   const VCarousel: Component
@@ -84,6 +85,7 @@ declare module 'vuetify/lib' {
   const VItem: Component
   const VItemGroup: Component
   const VLabel: Component
+  const VLazy: Component
   const VListItemActionText: Component
   const VListItemContent: Component
   const VListItemTitle: Component
@@ -112,6 +114,7 @@ declare module 'vuetify/lib' {
   const VRating: Component
   const VResponsive: Component
   const VSelect: Component
+  const VSkeletonLoader: Component
   const VSlider: Component
   const VSlideGroup: Component
   const VSlideItem: Component
@@ -198,6 +201,7 @@ declare module 'vuetify/lib' {
     VCalendarMonthly,
     VCard,
     VCardTitle,
+    VCardSubtitle,
     VCardActions,
     VCardText,
     VCarousel,
@@ -249,6 +253,7 @@ declare module 'vuetify/lib' {
     VItem,
     VItemGroup,
     VLabel,
+    VLazy,
     VListItemActionText,
     VListItemContent,
     VListItemTitle,
@@ -277,6 +282,7 @@ declare module 'vuetify/lib' {
     VRating,
     VResponsive,
     VSelect,
+    VSkeletonLoader,
     VSlider,
     VSlideGroup,
     VSlideItem,

@@ -82,11 +82,11 @@
       color="blue darken-3"
       dark
     >
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title
         style="width: 300px"
         class="ml-0 pl-4"
       >
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
         <span class="hidden-sm-and-down">Google Contacts</span>
       </v-toolbar-title>
       <v-text-field
@@ -178,15 +178,18 @@
           Create contact
         </v-card-title>
         <v-container>
-          <v-row>
+          <v-row class="mx-2">
             <v-col
               class="align-center justify-space-between"
               cols="12"
             >
-              <v-row align="center">
+              <v-row
+                align="center"
+                class="mr-0"
+              >
                 <v-avatar
                   size="40px"
-                  class="mr-4"
+                  class="mx-3"
                 >
                   <img
                     src="//ssl.gstatic.com/s2/oz/images/sge/grey_silhouette.png"
