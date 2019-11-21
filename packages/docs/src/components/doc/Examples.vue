@@ -19,7 +19,7 @@
       />
 
       <ad-card
-        v-if="examples.length > 3 && i === 2"
+        v-if="adIndex === i"
         :key="`ad-${i}`"
       />
     </section>
@@ -45,6 +45,11 @@
     computed: {
       namespace: get('documentation/namespace'),
       page: get('documentation/page'),
+      adIndex () {
+        if (this.examples.length < 4) return -1
+
+        return Math.ceil(this.examples.length / 2) - 1
+      },
       examples () {
         return this.value.map(example => {
           const path = example === Object(example) ? example.file : example

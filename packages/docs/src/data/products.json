@@ -1,26 +1,101 @@
 {
   "vuetify-light-sticker": {
     "description": "Stick them to your car, laptop or favorite mug. They are made from a durable vinyl with a laminate that is weather-proof against rain, sun, wind and snow, and even dishwasher safe.",
-    "src": "https://cdn.shopify.com/s/files/1/2695/0984/products/3_pack_A_e21bc165-e27d-4f6e-9fd5-94c8515009d0.png?v=1543435457",
-    "title": "Vuetify Light Stickers",
+    "src": "https://cdn.vuetifyjs.com/images/vuetify-ads/light-stickers.png",
+    "title": "Light Vuetify Stickers",
     "url": "https://store.vuetifyjs.com/product/vuetify-light-sticker"
   },
   "vuetify-dark-sticker": {
     "description": "Stick them to your car, laptop or favorite mug. They are made from a durable vinyl with a laminate that is weather-proof against rain, sun, wind and snow, and even dishwasher safe.",
-    "src": "https://cdn.shopify.com/s/files/1/2695/0984/products/dark-logo-3-pack.png?v=1551293732",
-    "title": "Vuetify Dark Stickers",
+    "src": "https://cdn.vuetifyjs.com/images/vuetify-ads/dark-stickers.png",
+    "title": "Dark Vuetify Stickers",
     "url": "https://store.vuetifyjs.com/product/black-vuetify-vinyl-stickers"
   },
   "black-vuetify-cap": {
-    "description": "An updated classic that won't break the bank! This hat perfectly combines style and function. Acrylic/wool blend . Six-panel construction.",
+    "description": "An updated classic that won't break the bank! This hat perfectly combines style and function.",
     "title": "Black Vuetify Cap",
-    "src": "https://cdn.shopify.com/s/files/1/2695/0984/products/BlacK-ALT.png?v=1546888286",
+    "src": "https://cdn.vuetifyjs.com/images/vuetify-ads/black-hat.png",
     "url": "https://store.vuetifyjs.com/product/black-vuetify-logo-cap"
   },
+  "full-zip-vuetify-jacket": {
+    "description": "The Vuetify Full-Zip Fleece is a great lightweight jacket to keep on hand during the chilly season.",
+    "title": "Full-Zip Vuetify Jacket",
+    "src": "https://cdn.vuetifyjs.com/images/vuetify-ads/zip-up.png",
+    "url": "https://store.vuetifyjs.com/product/full-zip-vuetify-jacket"
+  },
+  "premium-charcoal-vuetify-beanie": {
+    "description": "Stay warm with the new Premium Knit Vuetify Beanie available in black, navy and charcoal.",
+    "title": "Charcoal Vuetify Beanie",
+    "src": "https://cdn.vuetifyjs.com/images/vuetify-ads/charcoal-beanie.png",
+    "url": "https://store.vuetifyjs.com/product/premium-charcoal-vuetify-beanie"
+  },
   "v-developer-tee": {
-    "description": "The < v-developer /> design is now on a Premium Fitted Short Sleeve Crew tee!",
+    "description": "The <v-developer /> design is now on a Premium Fitted Short Sleeve Crew tee!",
     "title": "V-Developer Tee",
-    "src": "https://cdn.shopify.com/s/files/1/2695/0984/products/v-dev_800px.png?v=1548376025",
+    "src": "https://cdn.vuetifyjs.com/images/vuetify-ads/v-developer.png",
     "url": "https://store.vuetifyjs.com/product/v-developer-vuetify-tee"
+  },
+  "vuetify-epic-backpack": {
+    "description": "The Vuetify Epic Backpack is a premium backpack that has a spot for everything you travel with.",
+    "title": "Vuetify Epic Backpack",
+    "src": "https://cdn.vuetifyjs.com/images/vuetify-ads/epic-backpack.png",
+    "url": "https://store.vuetifyjs.com/product/vuetify-epic-backpack"
+  },
+  "vue-school": {
+    "description": "Learn Vue.js and modern and cutting-edge front-end technologies with our premium tutorials and video courses.",
+    "title": "Vue School",
+    "src": "https://cdn.vuetifyjs.com/images/vuetify-ads/vue-school.png",
+    "url": "https://vueschool.io/",
+    "query": "&friend=vuetify"
+  },
+  "dashboard-pro": {
+    "title": "Material Dashboard Pro",
+    "description": "Vuetify Material Dashboard PRO is a beautiful theme built over Vuetify, Vuex and Vuejs. Vuetify Material Dashboard PRO is the official Vuejs version of the Original Material Dashboard PRO.",
+    "src": "https://cdn.vuetifyjs.com/images/vuetify-ads/dashboard-pro.png",
+    "url": "https://www.creative-tim.com/product/vuetify-material-dashboard-pro",
+    "query": "&partner=116160"
+  },
+  "shopify-e-commerce": {
+    "title": "Shopify E-commerce",
+    "description": "A handcrafted Vuetify e-commerce application built on top of Shopify. Meticulous tweaks for optimal performance, user experience and accessibility make this theme stand out as a must have for anyone selling or wanting to sell with Shopify.",
+    "src": "https://cdn.vuetifyjs.com/images/vuetify-ads/shopify.png",
+    "url": "https://store.vuetifyjs.com/product/shopify-e-commerce-theme"
+  },
+  "material-kit": {
+    "title": "Material Kit",
+    "description": "A complete set of Material Inspired themes built with Vuetify on top of Vue CLI 3.",
+    "src": "https://cdn.vuetifyjs.com/images/vuetify-ads/material-kit.png",
+    "url": "https://store.vuetifyjs.com/product/material-kit-theme"
+  },
+  "alpha-theme": {
+    "title": "Alpha Theme",
+    "description": "Complete theme experience including enhanced Vue CLI 3, full documentation, 5 custom components and much more!",
+    "src": "https://cdn.vuetifyjs.com/images/vuetify-ads/alpha.png",
+    "url": "https://store.vuetifyjs.com/product/vuetify-alpha-theme"
+  },
+  "dashboard": {
+    "title": "Material Dashboard Free",
+    "description": "Vuetify Material Dashboard Free is a beautiful resource built over Vuetify, Vuex and Vuejs. It will help you get started developing dashboards in no time.",
+    "src": "https://cdn.vuetifyjs.com/images/vuetify-ads/dashboard-pro.png",
+    "url": "https://www.creative-tim.com/product/vuetify-material-dashboard",
+    "query": "&partner=116160"
+  },
+  "freelance": {
+    "title": "Freelancer",
+    "description": "A single page Material inspired theme for Freelancers.",
+    "src": "https://cdn.vuetifyjs.com/images/vuetify-ads/freelance.png",
+    "url": "https://github.com/vuetifyjs/theme-freelancer"
+  },
+  "parallax": {
+    "title": "Parallax",
+    "description": "This beautiful single page parallax is a great home page for any application.",
+    "src": "https://cdn.vuetifyjs.com/images/vuetify-ads/parallax.png",
+    "url": "https://github.com/vuetifyjs/parallax-starter"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "A simple template that features a clean interface for creating a blog or blog-like application.",
+    "src": "https://cdn.vuetifyjs.com/images/starter/blog.png",
+    "url": "https://github.com/vuetifyjs/theme-blog"
   }
 }

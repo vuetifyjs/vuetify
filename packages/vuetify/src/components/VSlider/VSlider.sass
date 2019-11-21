@@ -262,11 +262,11 @@
   .v-slider__tick
     opacity: 1
 
-.v-slider--readonly
-  pointer-events: none
-
 // Input
 .v-input__slider
+  &.v-input--is-readonly .v-input__slot
+    pointer-events: none
+
   .v-input__slot .v-label
     margin-left: 0
     margin-right: 12px

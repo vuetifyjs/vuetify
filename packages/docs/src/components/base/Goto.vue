@@ -51,7 +51,7 @@
       ]),
       ...mapState('route', ['params']),
       href () {
-        const id = this.id || this.$attrs.id
+        const id = (this.$attrs && this.$attrs.id) ? this.$attrs.id : this.id
         return `#${kebabCase(id)}`
       },
     },
