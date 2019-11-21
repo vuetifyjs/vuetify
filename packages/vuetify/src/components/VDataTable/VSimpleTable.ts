@@ -12,6 +12,7 @@ export default mixins(Themeable).extend({
     dense: Boolean,
     fixedHeader: Boolean,
     height: [Number, String],
+    isMobile: Boolean,
   },
 
   computed: {
@@ -33,7 +34,7 @@ export default mixins(Themeable).extend({
           height: convertToUnit(this.height),
         },
       }, [
-        this.$createElement('table', this.$slots.default),
+        this.$createElement('table', { class: { 'v-data-table__mobile': this.isMobile } }, this.$slots.default),
       ])
     },
   },

@@ -3,7 +3,7 @@
 exports[`VSimpleTable.ts should render 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table>
+    <table class>
       <tr>
         <th>
           Foo
@@ -30,7 +30,7 @@ exports[`VSimpleTable.ts should render with custom height 1`] = `
   <div class="v-data-table__wrapper"
        style="height: 1000px;"
   >
-    <table>
+    <table class>
       <tr>
         <th>
           Foo
@@ -81,7 +81,7 @@ exports[`VSimpleTable.ts should render with top & bottom slots 1`] = `
     Header
   </div>
   <div class="v-data-table__wrapper">
-    <table>
+    <table class>
     </table>
   </div>
   <div class="bottom">
