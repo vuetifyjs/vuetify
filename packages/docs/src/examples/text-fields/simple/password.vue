@@ -6,7 +6,7 @@
         <v-col cols="12" sm="6">
           <v-text-field
             v-model="password"
-            :append-icon="show1 ? 'visibility' : 'visibility_off'"
+            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
             :rules="[rules.required, rules.min]"
             :type="show1 ? 'text' : 'password'"
             name="input-10-1"
@@ -19,7 +19,7 @@
 
         <v-col cols="12" sm="6">
           <v-text-field
-            :append-icon="show2 ? 'visibility' : 'visibility_off'"
+            :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
             :rules="[rules.required, rules.min]"
             :type="show2 ? 'text' : 'password'"
             name="input-10-2"
@@ -33,7 +33,7 @@
 
         <v-col cols="12" sm="6">
           <v-text-field
-            :append-icon="show3 ? 'visibility' : 'visibility_off'"
+            :append-icon="show3 ? 'mdi-eye' : 'mdi-eye-off'"
             :rules="[rules.required, rules.min]"
             :type="show3 ? 'text' : 'password'"
             name="input-10-2"
@@ -47,7 +47,7 @@
 
         <v-col cols="12" sm="6">
           <v-text-field
-            :append-icon="show4 ? 'visibility' : 'visibility_off'"
+            :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'"
             :rules="[rules.required, rules.emailMatch]"
             :type="show4 ? 'text' : 'password'"
             name="input-10-2"

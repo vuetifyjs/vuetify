@@ -34,17 +34,24 @@ export default Vue.extend({
       } else if (regularSlot) {
         children.push(regularSlot)
       } else {
-        children.push(value)
+        children.push(value == null ? value : String(value))
       }
 
-      return h('td', {
-        class: classes,
-      }, [
-        h('div', { staticClass: 'v-data-table__mobile-row__wrapper' }, [
-          header.value !== 'dataTableSelect' && h('div', { staticClass: 'v-data-table__mobile-row__header' }, [header.text]),
-          h('div', { staticClass: 'v-data-table__mobile-row__cell' }, children),
-        ]),
-      ])
+      const mobileRowChildren = [
+        h('div', {
+          staticClass: 'v-data-table__mobile-row__cell',
+        }, children),
+      ]
+
+      if (header.value !== 'dataTableSelect') {
+        mobileRowChildren.unshift(
+          h('div', {
+            staticClass: 'v-data-table__mobile-row__header',
+          }, [header.text])
+        )
+      }
+
+      return h('td', { class: classes }, mobileRowChildren)
     })
 
     return h('tr', data, columns)

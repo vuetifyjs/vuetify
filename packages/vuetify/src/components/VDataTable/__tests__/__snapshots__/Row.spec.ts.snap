@@ -1,5 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Table Row should render non-string values 1`] = `
+<tr>
+  <td class="text-start">
+    string
+  </td>
+  <td class="text-start">
+    12.34
+  </td>
+  <td class="text-start">
+    1,2
+  </td>
+  <td class="text-start">
+    false
+  </td>
+  <td class="text-start">
+    [object Object]
+  </td>
+  <td class="text-start">
+  </td>
+  <td class="text-start">
+  </td>
+</tr>
+`;
+
 exports[`Table Row should render without slots 1`] = `
 <tr>
   <td class="text-start">

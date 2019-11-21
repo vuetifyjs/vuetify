@@ -10,10 +10,8 @@
         color="transparent"
       >
         <v-list-item
-          :href="`${activeTemplate.url}?ref=vuetifyjs.com${activeTemplate.query || ''}`"
-          target="_blank"
-          rel="noopener noreferrer"
-          @click="$ga.event($route.path, 'click', 'theme-ad')"
+          v-bind="adAttrs"
+          @click="$ga.event('theme-ad', 'click', activeTemplate.title, $route.path)"
         >
           <v-list-item-avatar
             size="56"
@@ -60,23 +58,39 @@
     },
 
     data: () => ({
+      discovery: require('@/data/discovery'),
       products: require('@/data/products'),
     }),
 
     computed: {
-      themes: sync('documentation/templates'),
-      templates () {
-        return {
-          ...this.themes,
-          ...this.products,
-        }
-      },
+      lang: sync('route/params@lang'),
       activeTemplate () {
         const templates = Object.keys(this.templates)
 
         return this.templates[
           templates[Math.floor(Math.random() * templates.length)]
         ]
+      },
+      adAttrs () {
+        const url = this.activeTemplate.url
+
+        if (url.charAt(0) === '/') {
+          return { to: `/${this.lang}${url}` }
+        }
+
+        const query = this.activeTemplate.query
+
+        return {
+          target: '_blank',
+          rel: 'sponsored',
+          href: `${url}?ref=vuetifyjs.com${query || ''}`,
+        }
+      },
+      templates () {
+        return {
+          ...this.products,
+          ...this.discovery,
+        }
       },
     },
   }
