@@ -11,7 +11,7 @@
       >
         <v-list-item
           v-bind="adAttrs"
-          @click="$ga.event('theme-ad', 'click', activeTemplate.title, $route.path)"
+          @click="$ga.event('vuetify-ad', 'click', activeTemplate.title)"
         >
           <v-list-item-avatar
             size="56"
