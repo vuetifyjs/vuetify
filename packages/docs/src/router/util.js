@@ -31,6 +31,7 @@ export function root (children) {
       'Root',
       children
     ),
+    redirectLang(),
   ]
 }
 
@@ -45,11 +46,11 @@ export function redirectLang (path = '') {
   const languageRegex = /^\/([a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3})(?:\/.*)?$/
   const fallbackLocale = languages.find(lang => lang.fallback === true).locale
 
-  return redirect(() => {
+  return redirect(to => {
     let lang = `/${getLanguageCookie() || fallbackLocale}`
     if (!languageRegex.test(lang)) lang = `/${fallbackLocale}`
 
-    return `${lang}${path}`
+    return `${lang}${path || to.path}`
   })
 }
 

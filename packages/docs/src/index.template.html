@@ -2,7 +2,7 @@
 <html lang="{{ lang || 'en' }}">
   <head>
     <meta charset="utf-8">
-    <title>{{ title }}</title>
+    <title>Vuetify.js</title>
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimal-ui">
     <meta name="description" content="{{ description }}">
@@ -16,11 +16,8 @@
     <meta name="keywords" content="{{ keywords }}">
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="manifest" href="/manifest.json">
-    {{{ hreflangs }}}
-    {{{ crowdin }}}
   </head>
   <body>
-    <!--vue-ssr-outlet-->
-    {{{ scripts }}}
+    <div id="app"></div>
   </body>
 </html>

@@ -34,16 +34,6 @@ export default {
     },
   },
 
-  created () {
-    if (process.env.VUE_ENV === 'client') return
-
-    this.setMeta()
-
-    this.$ssrContext.title = `${this.title} — Vuetify.js`
-    this.$ssrContext.description = this.description
-    this.$ssrContext.keywords = this.keywords
-  },
-
   mounted () {
     this.bootstrapMeta()
   },

@@ -21,7 +21,7 @@ import App from './App.vue'
 Vue.config.performance = process.env.NODE_ENV === 'development'
 
 // Expose a factory function that creates a fresh set of store, router,
-// app instances on each call (which is called for each SSR request)
+// app instances on each call
 export async function createApp ({
   start = () => {},
 } = {}, ssrContext) {
