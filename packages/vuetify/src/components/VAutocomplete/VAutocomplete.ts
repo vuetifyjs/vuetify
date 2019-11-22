@@ -241,7 +241,7 @@ export default VSelect.extend({
       }
     },
     deleteCurrentItem () {
-      if (this.readonly) return;
+      if (this.readonly) return
 
       const index = this.selectedItems.length - 1
 
