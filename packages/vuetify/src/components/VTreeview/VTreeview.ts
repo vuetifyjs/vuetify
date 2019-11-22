@@ -22,9 +22,9 @@ import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
 import {
   filterTreeItems,
-  FilterTreeItemFunction,
   filterTreeItem,
 } from './util/filterTreeItems'
+import { FilterTreeItemFunction } from './types'
 
 type VTreeviewNodeInstance = InstanceType<typeof VTreeviewNode>
 
