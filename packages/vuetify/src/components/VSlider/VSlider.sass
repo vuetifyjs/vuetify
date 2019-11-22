@@ -83,17 +83,17 @@
     background-color: rgba(255, 255, 255, 0.5) // TODO: move to theme mixin?
 
   &:first-child .v-slider__tick-label
-    transform: none
+    +ltr()
+      transform: none
 
-  +rtl()
-    &:first-child .v-slider__tick-label
+    +rtl()
       transform: translateX(100%)
 
   &:last-child .v-slider__tick-label
-    transform: translateX(-100%)
+    +ltr()
+      transform: translateX(-100%)
 
-  +rtl()
-    &:last-child .v-slider__tick-label
+    +rtl()
       transform: none
 
 .v-slider__tick-label
@@ -146,25 +146,26 @@
 
   .v-slider__tick
     &:first-child .v-slider__tick-label
-      transform: translateX(0%)
+      +ltr()
+        transform: translateX(0%)
 
-    +rtl()
-      &:first-child .v-slider__tick-label
-        transform: translate(100%)
+      +rtl()
+        transform: translateX(100%)
 
     &:last-child .v-slider__tick-label
-      transform: translateX(-100%)
+      +ltr()
+        transform: translateX(-100%)
 
-    +rtl()
-      &:last-child .v-slider__tick-label
+      +rtl()
         transform: translateX(0%)
 
     .v-slider__tick-label
       top: 8px
-      transform: translateX(-50%)
 
-    +rtl()
-      .v-slider__tick-label
+      +ltr()
+        transform: translateX(-50%)
+
+      +rtl()
         transform: translateX(50%)
 
   .v-slider__thumb-label
@@ -203,27 +204,15 @@
     transform: translateX(-50%)
 
   .v-slider__tick
-    &:first-child .v-slider__tick-label
-      transform: translateY(-50%)
-
-    +rtl()
-      &:first-child .v-slider__tick-label
-        right: 12px
-
+    .v-slider__tick-label,
+    &:first-child .v-slider__tick-label,
     &:last-child .v-slider__tick-label
-      transform: translateY(-50%)
-
-    +rtl()
-      &:last-child .v-slider__tick-label
+      +ltr()
         transform: translateY(-50%)
+        left: 12px
 
-    .v-slider__tick-label
-      left: 12px
-      transform: translateY(-50%)
-
-    +rtl()
-      .v-slider__tick-label
-        left: auto
+      +rtl()
+        transform: translateY(-50%)
         right: 12px
 
   .v-slider__thumb-label
@@ -268,27 +257,29 @@
     pointer-events: none
 
   .v-input__slot .v-label
-    margin-left: 0
-    margin-right: 12px
+    +ltr()
+      margin-left: 0
+      margin-right: 12px
 
-  +rtl()
-    .v-input__slot .v-label
+    +rtl()
       margin-right: 0
       margin-left: 12px
 
 .v-input__slider--inverse-label
   .v-input__slot .v-label
-    margin-right: 0
-    margin-left: 12px
+    +ltr()
+      margin-right: 0
+      margin-left: 12px
 
-  +rtl()
-    .v-input__slot .v-label
+    +rtl()
       margin-left: 0
       margin-right: 12px
 
 .v-input__slider--vertical
   align-items: center
-  flex-direction: column-reverse
+
+  +ltr()
+    flex-direction: column-reverse
 
   +rtl()
     flex-direction: column
