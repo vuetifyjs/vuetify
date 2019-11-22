@@ -7,7 +7,7 @@ import mixins from '../../util/mixins'
 
 // Types
 import { VNode } from 'vue'
-import { DatePickerFormatter } from './util/createNativeLocaleFormatter'
+import { DatePickerFormatter } from './types'
 
 export default mixins(
   DatePickerTable

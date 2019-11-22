@@ -11,22 +11,17 @@ import Picker from '../../mixins/picker'
 
 // Utils
 import { pad, createNativeLocaleFormatter } from './util'
-import isDateAllowed, { AllowedDateFunction } from './util/isDateAllowed'
+import isDateAllowed from './util/isDateAllowed'
 import { consoleWarn } from '../../util/console'
 import { daysInMonth } from '../VCalendar/util/timestamp'
 import mixins from '../../util/mixins'
 
 // Types
 import { PropValidator } from 'vue/types/options'
-import { DatePickerFormatter } from './util/createNativeLocaleFormatter'
 import { VNode } from 'vue'
+import { DatePickerFormatter, DatePickerMultipleFormatter, AllowedDateFunction, DateEventColors, DateEvents, DatePickerType } from './types'
 
-export type DateEventColorValue = string | string[]
-export type DateEvents = string[] | ((date: string) => boolean | DateEventColorValue) | Record<string, DateEventColorValue>
-export type DateEventColors = DateEventColorValue | Record<string, DateEventColorValue> | ((date: string) => DateEventColorValue)
 type DatePickerValue = string | string[] | undefined
-type DatePickerType = 'date' | 'month'
-type DatePickerMultipleFormatter = (date: string[]) => string
 interface Formatters {
   year: DatePickerFormatter
   titleDate: DatePickerFormatter | DatePickerMultipleFormatter

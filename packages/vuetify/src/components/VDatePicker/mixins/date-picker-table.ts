@@ -9,14 +9,13 @@ import Localable from '../../../mixins/localable'
 import Themeable from '../../../mixins/themeable'
 
 // Utils
-import isDateAllowed, { AllowedDateFunction } from '../util/isDateAllowed'
+import isDateAllowed from '../util/isDateAllowed'
 import mixins from '../../../util/mixins'
 
 // Types
 import { VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import { DatePickerFormatter } from '../util/createNativeLocaleFormatter'
-import { DateEvents, DateEventColors, DateEventColorValue } from '../VDatePicker'
+import { AllowedDateFunction, DatePickerFormatter, DateEvents, DateEventColors, DateEventColorValue } from '../types'
 
 type CalculateTableDateFunction = (v: number) => string
 

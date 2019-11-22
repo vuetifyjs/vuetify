@@ -7,9 +7,9 @@ import { createRange } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
 // Types
-import { DatePickerFormatter } from './util/createNativeLocaleFormatter'
 import { PropValidator } from 'vue/types/options'
 import { VNode, VNodeChildren } from 'vue'
+import { DatePickerFormatter } from './types'
 
 export default mixins(
   DatePickerTable

@@ -10,8 +10,8 @@ import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
 import Vue, { VNode } from 'vue'
-import { DatePickerFormatter } from './util/createNativeLocaleFormatter'
 import { PropValidator } from 'vue/types/options'
+import { DatePickerFormatter } from './types'
 
 interface options extends Vue {
   $el: HTMLElement

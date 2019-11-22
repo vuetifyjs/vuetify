@@ -1,11 +1,10 @@
 import pad from './pad'
+import { DatePickerFormatter } from '../types'
 
 interface SubstrOptions {
   start?: number
   length: number
 }
-
-export type DatePickerFormatter = (date: string) => string
 
 function createNativeLocaleFormatter (
   local: string | undefined,
