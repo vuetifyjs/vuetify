@@ -449,6 +449,9 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="6"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
@@ -838,6 +841,9 @@ exports[`VDataTable.ts should handle object when checking if it should default t
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="-1"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
