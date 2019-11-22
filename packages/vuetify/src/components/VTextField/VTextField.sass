@@ -226,7 +226,6 @@
         > .v-input__control > .v-input__slot
           min-height: 40px
 
-  &--filled,
   &--outlined
     border-radius: $text-field-border-radius
 
@@ -250,16 +249,13 @@
           top: 11px
 
   &--filled
-    border-radius: 4px 4px 0 0
+    border-radius: $text-field-border-radius $text-field-border-radius 0 0
 
     &:not(.v-text-field--single-line)
       input
         margin-top: 22px
 
     &.v-input--dense:not(.v-text-field--single-line)
-      input
-        margin-top: 20px
-
       &.v-text-field--outlined
         input
           margin-top: 0
@@ -315,11 +311,16 @@
       flex-direction: row-reverse
 
   &--outlined,
+  &--solo,
   &--rounded
     & > .v-input__control > .v-input__slot
       &:before,
       &:after
         display: none
+
+  &--outlined,
+  &--solo
+    border-radius: $text-field-border-radius
 
   &--outlined
     margin-bottom: 16px
