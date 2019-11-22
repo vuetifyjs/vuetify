@@ -110,12 +110,13 @@
 .v-expansion-panel-header__icon
   display: inline-flex
   margin-bottom: -4px
-  margin-left: auto
   margin-top: -4px
   user-select: none
 
+  +ltr()
+    margin-left: auto
+
   +rtl()
-    margin-left: initial
     margin-right: auto
 
 .v-expansion-panel-header
@@ -129,15 +130,17 @@
   outline: none
   padding: $expansion-panel-header-padding
   position: relative
-  text-align: left
   transition: .3s min-height map-get($transition, 'swing')
   width: 100%
 
-  &:not(.v-expansion-panel-header--mousedown):focus::before
-    opacity: 0.12
+  +ltr()
+    text-align: left
 
   +rtl()
     text-align: right
+
+  &:not(.v-expansion-panel-header--mousedown):focus::before
+    opacity: 0.12
 
   &:before
     background-color: currentColor

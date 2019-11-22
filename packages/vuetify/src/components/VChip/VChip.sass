@@ -62,13 +62,14 @@
 
   .v-avatar,
   .v-icon
-    &--left
-      margin-left: $chip-icon-margin-before
-      margin-right: $chip-icon-margin-after
+    +ltr()
+      &--left
+        margin-left: $chip-icon-margin-before
+        margin-right: $chip-icon-margin-after
 
-    &--right
-      margin-left: $chip-icon-margin-after
-      margin-right: $chip-icon-margin-before
+      &--right
+        margin-left: $chip-icon-margin-after
+        margin-right: $chip-icon-margin-before
 
     +rtl()
       &--left
@@ -91,11 +92,11 @@
   user-select: none
 
   &.v-icon--right
-    margin-right: $chip-icon-right-margin-after
+    +ltr()
+      margin-right: $chip-icon-right-margin-after
 
     +rtl()
       margin-left: $chip-icon-right-margin-after
-      margin-right: $chip-icon-right-margin-before
 
   &:hover,
   &:focus,
@@ -154,20 +155,19 @@
     width: $chip-pill-avatar-size !important
 
   .v-avatar
-    &--left
-      margin-left: $chip-pill-avatar-margin-before
+    +ltr()
+      &--left
+        margin-left: $chip-pill-avatar-margin-before
 
-    &--right
-      margin-right: $chip-pill-avatar-margin-before
+      &--right
+        margin-right: $chip-pill-avatar-margin-before
 
     +rtl()
       &--left
-        margin-left: chip-pill-avatar-margin-after
         margin-right: $chip-pill-avatar-margin-before
 
       &--right
         margin-left: $chip-pill-avatar-margin-before
-        margin-right: chip-pill-avatar-margin-after
 
 .v-chip--label
   border-radius: $chip-label-border-radius !important

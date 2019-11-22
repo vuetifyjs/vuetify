@@ -30,14 +30,15 @@
     flex: 0 0 auto
     height: 24px
     position: relative
-    margin-right: 8px
     transition: .3s cubic-bezier(.25,.8,.25,1)
     transition-property: color, transform
     width: 24px
     user-select: none
 
+    +ltr()
+      margin-right: 8px
+
     +rtl()
-      margin-right: 0
       margin-left: 8px
 
     input[role="checkbox"],
