@@ -13,12 +13,11 @@ import CalendarBase from './mixins/calendar-base'
 // Util
 import props from './util/props'
 import {
-  VTimestamp,
-  VTimestampFormatter,
   createDayList,
   getDayIdentifier,
   createNativeLocaleFormatter,
 } from './util/timestamp'
+import { VTimestamp, VTimestampFormatter } from './types'
 
 /* @vue/component */
 export default CalendarBase.extend({

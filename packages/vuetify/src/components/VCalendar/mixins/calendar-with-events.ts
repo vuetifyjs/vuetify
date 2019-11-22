@@ -16,16 +16,15 @@ import { escapeHTML } from '../../../util/helpers'
 // Util
 import props from '../util/props'
 import {
-  VTimestamp,
   getDayIdentifier,
   parseTime,
 } from '../util/timestamp'
 import {
   VEventParsed,
-  VEventInput,
   parseEvent,
   isEventOn,
 } from '../util/events'
+import { VTimestamp, VEventInput } from '../types'
 
 // Types
 type VColorFunction = (event: VEventInput) => string

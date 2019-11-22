@@ -13,8 +13,6 @@ import Resize from '../../../directives/resize'
 // Util
 import props from '../util/props'
 import {
-  VTimestamp,
-  VTimestampFormatter,
   parseTimestamp,
   getWeekdaySkips,
   createDayList,
@@ -22,6 +20,7 @@ import {
   getStartOfWeek,
   getEndOfWeek,
 } from '../util/timestamp'
+import { VTimestamp, VTimestampFormatter } from '../types'
 
 export default mixins(
   Colorable,

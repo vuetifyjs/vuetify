@@ -1,7 +1,7 @@
 
 import { validateTimestamp, parseDate } from './timestamp'
-import { VEventInput } from './events'
 import { PropValidator } from 'vue/types/options'
+import { VEventInput, VTimestampFormatter } from '../types'
 
 export default {
   base: {
@@ -27,13 +27,13 @@ export default {
       default: true,
     },
     weekdayFormat: {
-      type: Function, // VTimestampFormatter,
+      type: Function,
       default: null,
-    },
+    } as PropValidator<VTimestampFormatter>,
     dayFormat: {
-      type: Function, // VTimestampFormatter,
+      type: Function,
       default: null,
-    },
+    } as PropValidator<VTimestampFormatter>,
   },
   intervals: {
     maxDays: {

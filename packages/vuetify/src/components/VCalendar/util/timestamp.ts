@@ -1,3 +1,4 @@
+import { VTimestamp, VTimestampOperation, VTimestampFormatter, VTimestampFormatOptions } from '../types'
 
 export const PARSE_REGEX: RegExp = /^(\d{4})-(\d{1,2})(-(\d{1,2}))?([^\d]+(\d{1,2}))?(:(\d{1,2}))?(:(\d{1,2}))?$/
 export const PARSE_TIME: RegExp = /(\d\d?)(:(\d\d?)|)(:(\d\d?)|)/
@@ -13,35 +14,6 @@ export const DAYS_IN_WEEK = 7
 export const MINUTES_IN_HOUR = 60
 export const HOURS_IN_DAY = 24
 export const FIRST_HOUR = 0
-
-export interface VTimestamp {
-  date: string
-  time: string
-  year: number
-  month: number
-  day: number
-  weekday: number
-  hour: number
-  minute: number
-  hasDay: boolean
-  hasTime: boolean
-  past: boolean
-  present: boolean
-  future: boolean
-}
-
-export interface VTimeObject {
-  hour: number
-  minute: number
-}
-
-export type VTime = number | string | VTimeObject
-
-export type VTimestampFormatter = (timestamp: VTimestamp, short: boolean) => string
-
-export type VTimestampFormatOptions = (timestamp: VTimestamp, short: boolean) => object
-
-export type VTimestampOperation = (timestamp: VTimestamp) => VTimestamp
 
 export function getStartOfWeek (timestamp: VTimestamp, weekdays: number[], today?: VTimestamp): VTimestamp {
   const start = copyTimestamp(timestamp)

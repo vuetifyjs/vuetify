@@ -5,9 +5,6 @@ import CalendarBase from './calendar-base'
 // Util
 import props from '../util/props'
 import {
-  VTimestamp,
-  VTime,
-  VTimestampFormatter,
   parseTime,
   copyTimestamp,
   updateMinutes,
@@ -15,6 +12,7 @@ import {
   createIntervalList,
   createNativeLocaleFormatter,
 } from '../util/timestamp'
+import { VTimestamp, VTimestampFormatter, VTime } from '../types'
 
 /* @vue/component */
 export default CalendarBase.extend({

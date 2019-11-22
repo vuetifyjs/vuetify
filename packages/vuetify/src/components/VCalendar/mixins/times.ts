@@ -1,11 +1,11 @@
 import Vue from 'vue'
 
 import {
-  VTimestamp,
   validateTimestamp,
   parseTimestamp,
   parseDate,
 } from '../util/timestamp'
+import { VTimestamp } from '../types'
 
 export default Vue.extend({
   name: 'times',

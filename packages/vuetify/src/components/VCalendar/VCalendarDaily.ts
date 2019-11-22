@@ -15,7 +15,7 @@ import CalendarWithIntervals from './mixins/calendar-with-intervals'
 
 // Util
 import { convertToUnit } from '../../util/helpers'
-import { VTimestamp } from './util/timestamp'
+import { VTimestamp } from './types'
 
 /* @vue/component */
 export default CalendarWithIntervals.extend({

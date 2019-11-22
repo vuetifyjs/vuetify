@@ -1,13 +1,9 @@
 import {
-  VTimestamp,
   parseTimestamp,
   getDayIdentifier,
   getTimestampIdentifier,
 } from './timestamp'
-
-export interface VEventInput {
-  [prop: string]: any
-}
+import { VTimestamp, VEventInput } from '../types'
 
 export interface VEventParsed {
   input: VEventInput

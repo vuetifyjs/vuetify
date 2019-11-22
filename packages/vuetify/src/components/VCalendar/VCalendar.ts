@@ -13,8 +13,6 @@ import {
   DAYS_IN_MONTH_MAX,
   DAY_MIN,
   DAYS_IN_WEEK,
-  VTimestamp,
-  VTime,
   parseTimestamp,
   validateTimestamp,
   relativeDays,
@@ -32,6 +30,7 @@ import {
 import VCalendarMonthly from './VCalendarMonthly'
 import VCalendarDaily from './VCalendarDaily'
 import VCalendarWeekly from './VCalendarWeekly'
+import { VTimestamp, VTime } from './types'
 
 // Types
 interface VCalendarRenderProps {
