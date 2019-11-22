@@ -116,11 +116,6 @@
           href: 'https://twitter.com/vuetifyjs',
           icon: 'mdi-twitter-box',
         },
-        {
-          text: vm.$t('Vuetify.AppToolbar.facebook'),
-          href: 'https://www.facebook.com/vuetifyjs',
-          icon: 'mdi-facebook-box',
-        },
       ],
     }),
   }
