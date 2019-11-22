@@ -64,17 +64,15 @@
 
   &.v-text-field--enclosed
     .v-text-field__slot
-      margin-right: -12px
+      +ltr()
+        margin-right: -12px
 
-      textarea
-        padding-right: 12px
-
-  +rtl()
-    &.v-text-field--enclosed
-      .v-text-field__slot
-        margin-right: 0
+      +rtl()
         margin-left: -12px
 
-        textarea
-          padding-right: 0
+      textarea
+        +ltr()
+          padding-right: 12px
+
+        +rtl()
           padding-left: 12px

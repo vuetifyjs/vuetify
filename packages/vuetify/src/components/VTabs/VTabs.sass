@@ -120,24 +120,19 @@
 
 .v-tabs--fixed-tabs > .v-tabs-bar,
 .v-tabs--centered > .v-tabs-bar
-  +ltr()
-    .v-tabs-bar__content > *:last-child
+  .v-tabs-bar__content > *:last-child
+    +ltr()
       margin-right: auto
 
-    .v-tabs-bar__content > *:first-child:not(.v-tabs-slider-wrapper)
+    +rtl()
       margin-left: auto
 
-    .v-tabs-slider-wrapper + *
+  .v-tabs-bar__content > *:first-child:not(.v-tabs-slider-wrapper),
+  .v-tabs-slider-wrapper + *
+    +ltr()
       margin-left: auto
 
-  +rtl()
-    .v-tabs-bar__content > *:last-child
-      margin-left: auto
-
-    .v-tabs-bar__content > *:first-child:not(.v-tabs-slider-wrapper)
-      margin-right: auto
-
-    .v-tabs-slider-wrapper + *
+    +rtl()
       margin-right: auto
 
 .v-tabs--fixed-tabs > .v-tabs-bar

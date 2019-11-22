@@ -158,30 +158,15 @@ export default baseMixins.extend({
     },
     closeConditional (e: Event) {
       const target = e.target as HTMLElement
-      // If the dialog content contains
-      // the click event, or if the
-      // dialog is not active, or if the overlay
-      // is the same element as the target
-      if (this._isDestroyed ||
+      // Ignore the click if the dialog is closed or destroyed,
+      // if it was on an element inside the content, or
+      // if it was dragged onto the overlay (#6969)
+      return !(
+        this._isDestroyed ||
         !this.isActive ||
         this.$refs.content.contains(target) ||
         (this.overlay && target && !this.overlay.$el.contains(target))
-      ) return false
-
-      // If we made it here, the click is outside
-      // and is active. If persistent, and the
-      // click is on the overlay, animate
-      this.$emit('click:outside')
-
-      if (this.persistent) {
-        !this.noClickAnimation && this.animateClick()
-
-        return false
-      }
-
-      // close dialog if !persistent, clicked outside and we're the topmost dialog.
-      // Since this should only be called in a capture event (bottom up), we shouldn't need to stop propagation
-      return this.activeZIndex >= this.getMaxZIndex()
+      )
     },
     hideScroll () {
       if (this.fullscreen) {
@@ -202,6 +187,15 @@ export default baseMixins.extend({
     },
     unbind () {
       window.removeEventListener('focusin', this.onFocusin)
+    },
+    onClickOutside (e: Event) {
+      this.$emit('click:outside', e)
+
+      if (this.persistent) {
+        this.noClickAnimation || this.animateClick()
+      } else if (this.activeZIndex >= this.getMaxZIndex()) {
+        this.isActive = false
+      }
     },
     onKeydown (e: KeyboardEvent) {
       if (e.keyCode === keyCodes.esc && !this.getOpenDependents().length) {
@@ -249,7 +243,7 @@ export default baseMixins.extend({
       directives: [
         {
           name: 'click-outside',
-          value: () => { this.isActive = false },
+          value: this.onClickOutside,
           args: {
             closeConditional: this.closeConditional,
             include: this.getOpenDependentElements,

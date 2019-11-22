@@ -82,14 +82,14 @@ jobs:
     - stage: publish-docs-live
       name: 'Publish docs - live'
       before_script: yarn global add now
-      script: node scripts/deploy-and-alias.js vuetifyjs.com
+      script: travis_wait node scripts/deploy-and-alias.js vuetifyjs.com
 
     - stage: publish-docs-dev
       name: 'Publish docs - dev'
       before_script: yarn global add now
-      script: node scripts/deploy-and-alias.js dev.vuetifyjs.com
+      script: travis_wait node scripts/deploy-and-alias.js dev.vuetifyjs.com
 
     - stage: publish-docs-next
       name: 'Publish docs - next'
       before_script: yarn global add now
-      script: node scripts/deploy-and-alias.js next.vuetifyjs.com
+      script: travis_wait node scripts/deploy-and-alias.js next.vuetifyjs.com
