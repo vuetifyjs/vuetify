@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import { VNode, VNodeDirective } from 'vue/types'
 import { VuetifyIcon } from 'vuetify/types/services/icons'
+import { compareFn } from '@components/VData/types'
 
 export function createSimpleFunctional (
   c: string,
@@ -270,8 +271,6 @@ export function groupItems (
 
 export function wrapInArray<T> (v: T | T[] | null | undefined): T[] { return v != null ? Array.isArray(v) ? v : [v] : [] }
 
-export type compareFn<T = any> = (a: T, b: T) => number
-
 export function sortItems (
   items: any[],
   sortBy: string[],
@@ -317,8 +316,6 @@ export function sortItems (
     return 0
   })
 }
-
-export type FilterFn = (value: any, search: string | null, item: any) => boolean
 
 export function defaultFilter (value: any, search: string | null, item: any) {
   return value != null &&

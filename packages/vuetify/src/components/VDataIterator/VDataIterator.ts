@@ -9,9 +9,11 @@ import Themeable from '../../mixins/themeable'
 
 // Helpers
 import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, camelizeObjectKeys } from '../../util/helpers'
-import { DataProps } from '../VData/VData'
-import { PropValidator } from 'vue/types/options'
 import { breaking, removed } from '../../util/console'
+
+// Types
+import { PropValidator } from 'vue/types/options'
+import { DataProps } from '@components/VData/types'
 
 /* @vue/component */
 export default Themeable.extend({

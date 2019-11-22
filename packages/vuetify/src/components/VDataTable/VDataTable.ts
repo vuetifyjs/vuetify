@@ -3,8 +3,6 @@ import './VDataTable.sass'
 // Types
 import { VNode, VNodeChildrenArrayContents, VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import { DataProps, DataPagination, DataOptions } from '../VData/VData'
-import { TableHeader } from './mixins/header'
 
 // Components
 import { VData } from '../VData'
@@ -22,8 +20,10 @@ import MobileRow from './MobileRow'
 import ripple from '../../directives/ripple'
 
 // Helpers
-import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots, getSlot, defaultFilter, FilterFn, camelizeObjectKeys } from '../../util/helpers'
+import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, defaultFilter, camelizeObjectKeys } from '../../util/helpers'
 import { breaking } from '../../util/console'
+import { TableHeader, FilterFn } from './types'
+import { DataProps, DataOptions, DataPagination, compareFn } from '@components/VData/types'
 
 function filterFn (item: any, search: string | null, filter: FilterFn) {
   return (header: TableHeader) => {

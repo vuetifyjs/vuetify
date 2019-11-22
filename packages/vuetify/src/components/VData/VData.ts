@@ -2,36 +2,9 @@
 import { wrapInArray, sortItems, deepEqual, groupItems, searchItems } from '../../util/helpers'
 import Vue, { VNode, PropType } from 'vue'
 
-export interface DataOptions {
-  page: number
-  itemsPerPage: number
-  sortBy: string[]
-  sortDesc: boolean[]
-  groupBy: string[]
-  groupDesc: boolean[]
-  multiSort: boolean
-  mustSort: boolean
-}
-
-export interface DataPagination {
-  page: number
-  itemsPerPage: number
-  pageStart: number
-  pageStop: number
-  pageCount: number
-  itemsLength: number
-}
-
-export interface DataProps {
-  originalItemsLength: number
-  items: any[]
-  pagination: DataPagination
-  options: DataOptions
-  updateOptions: (obj: any) => void
-  sort: (value: string) => void
-  group: (value: string) => void
-  groupedItems: Record<string, any[]> | null
-}
+// Types
+import { DataOptions, DataPagination, DataProps, SortItemsFn } from './types'
+import { PropValidator } from 'vue/types/options'
 
 export default Vue.extend({
   name: 'v-data',
@@ -56,9 +29,9 @@ export default Vue.extend({
       default: () => [],
     },
     customSort: {
-      type: Function as any as PropType<typeof sortItems>,
+      type: Function,
       default: sortItems,
-    },
+    } as PropValidator<SortItemsFn>,
     mustSort: Boolean,
     multiSort: Boolean,
     page: {

@@ -41,12 +41,6 @@ export interface Bar {
   value: number
 }
 
-export interface BarText {
-  points: Point[]
-  boundary: Boundary
-  offsetX: number
-}
-
 interface options extends Vue {
   $refs: {
     path: SVGPathElement

@@ -1,7 +1,7 @@
 import Vue, { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import { TableHeader } from './mixins/header'
 import { getObjectValueByPath } from '../../util/helpers'
+import { TableHeader } from './types'
 
 export default Vue.extend({
   name: 'row',
