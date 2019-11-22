@@ -199,13 +199,13 @@
       .v-icon
         height: #{$size}px
         font-size: #{$size}px
-        width: #{$size}px
+        min-width: #{$size}px
 
 .v-btn--icon
   @each $name, $size in $btn-sizes
     &.v-size--#{$name}
       height: #{$size}px
-      width: #{$size}px
+      min-width: #{$size}px
 
 .v-btn--fab
   &.v-btn--contained
@@ -224,7 +224,7 @@
   @each $name, $size in $fab-sizes
     &.v-size--#{$name}
       height: #{$size}px
-      width: #{$size}px
+      min-width: #{$size}px
 
       &.v-btn--absolute
         &.v-btn--bottom
