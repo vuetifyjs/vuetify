@@ -10,7 +10,7 @@
     @click="$ga.event('system-bar', 'click', 'vueschool')"
   >
     <v-responsive
-      class="mx-auto shrink"
+      class="mx-auto shrink pr-12"
       max-width="1280"
     >
       <a
@@ -33,9 +33,9 @@
 
         <div class="d-md-flex align-center">
           <div
-            class="text-uppercase font-weight-medium white--text mb-md-0 mb-1 pr-4"
+            class="text-uppercase font-weight-medium white--text mb-sm-1 mb-md-0 mb-0"
             :class="{
-              [$vuetify.breakpoint.smAndDown ? 'subtitle-2' : 'headline']: true
+              [$vuetify.breakpoint.mdAndDown ? 'subtitle-2' : 'headline']: true
             }"
           >
             Black Friday 40% Off at Vue School
@@ -46,7 +46,7 @@
             class="mx-6 hidden-sm-and-down"
           />
 
-          <div class="d-flex align-center">
+          <div class="d-none align-center d-sm-flex">
             <v-img
               :max-width="$vuetify.breakpoint.smAndDown ? 125 : 180"
               src="https://cdn.vuetifyjs.com/images/vuetify-ads/vueschool-group.png"
@@ -55,7 +55,7 @@
             />
 
             <div
-              class="mx-6 d-md-inline-block hidden-xs-only"
+              class="mx-6 d-md-inline-block"
               style="opacity: .7;"
               :class="{
                 [
@@ -72,14 +72,16 @@
       </a>
     </v-responsive>
 
-    <v-icon
-      class="core-system-bar__close mr-6"
-      size="26"
+    <v-btn
+      class="core-system-bar__close mr-4"
+      icon
       small
       @click.stop="hasClosedBanner = true"
     >
-      mdi-close
-    </v-icon>
+      <v-icon class="mr-0">
+        mdi-close
+      </v-icon>
+    </v-btn>
   </v-system-bar>
 </template>
 
