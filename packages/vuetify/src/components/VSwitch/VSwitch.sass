@@ -114,22 +114,19 @@
       opacity: .32
       top: calc(50% - 14px)
 
-    +ltr()
-      .v-input--selection-controls__ripple,
-      .v-input--switch__thumb
+    .v-input--selection-controls__ripple,
+    .v-input--switch__thumb
+      +ltr()
         transform: translate(0, 0) !important
 
-      &.v-input--is-dirty
-        .v-input--selection-controls__ripple,
-        .v-input--switch__thumb
-          transform: translate(20px, 0) !important
-
-    +rtl()
-      .v-input--selection-controls__ripple,
-      .v-input--switch__thumb
+      +rtl()
         transform: translate(-6px, 0) !important
 
-      &.v-input--is-dirty
-        .v-input--selection-controls__ripple,
-        .v-input--switch__thumb
+    &.v-input--is-dirty
+      .v-input--selection-controls__ripple,
+      .v-input--switch__thumb
+        +ltr()
+          transform: translate(20px, 0) !important
+
+        +rtl()
           transform: translate(-26px, 0) !important

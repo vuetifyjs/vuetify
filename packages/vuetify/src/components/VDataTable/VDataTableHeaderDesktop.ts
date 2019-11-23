@@ -34,6 +34,7 @@ export default mixins(header).extend({
       const classes = [
         `text-${header.align || 'start'}`,
         ...wrapInArray(header.class),
+        header.divider && 'v-data-table__divider',
       ]
 
       if (header.value === 'data-table-select' && !this.singleSelect) {

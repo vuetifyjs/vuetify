@@ -33,11 +33,16 @@ export default Vue.extend({
       } else if (regularSlot) {
         children.push(regularSlot)
       } else {
-        children.push(value)
+        children.push(value == null ? value : String(value))
       }
 
+      const textAlign = `text-${header.align || 'start'}`
+
       return h('td', {
-        class: `text-${header.align || 'start'}`,
+        class: {
+          [textAlign]: true,
+          'v-data-table__divider': header.divider,
+        },
       }, children)
     })
 

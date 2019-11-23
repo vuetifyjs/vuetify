@@ -18,19 +18,20 @@
   display: flex
   flex: 1 0 auto
   justify-content: flex-end
-  margin-left: $banner-actions-start-margin
   margin-bottom: -$banner-y-padding / 2
 
-  & > * // Margin between actions
-    margin-left: $banner-actions-margin
-
-    +rtl()
-      margin-left: 0
-      margin-right: $banner-actions-margin
+  +ltr()
+    margin-left: $banner-actions-start-margin
 
   +rtl()
-    margin-left: 0
     margin-right: $banner-actions-start-margin
+
+  & > * // Margin between actions
+    +ltr()
+      margin-left: $banner-actions-margin
+
+    +rtl()
+      margin-right: $banner-actions-margin
 
 .v-banner__content
   align-items: center
@@ -43,22 +44,24 @@
 
 .v-banner__icon
   display: inline-flex
-  margin-right: $banner-start-padding
   flex: 0 0 auto
+
+  +ltr()
+  margin-right: $banner-start-padding}
 
   +rtl()
     margin-left: $banner-start-padding
-    margin-right: 0
 
 .v-banner__wrapper
   align-items: center
   display: flex
   flex: 1 1 auto
-  padding: $banner-y-padding $banner-end-padding $banner-y-padding $banner-start-padding
+
+  +ltr()
+    padding: $banner-y-padding $banner-end-padding $banner-y-padding $banner-start-padding
 
   +rtl()
-    padding-right: $banner-start-padding
-    padding-left: $banner-end-padding
+    padding: $banner-y-padding $banner-start-padding $banner-y-padding $banner-end-padding
 
 // Modifiers
 .v-banner--single-line
@@ -77,10 +80,10 @@
 
 .v-banner--has-icon
   .v-banner__wrapper
-    padding-left: $banner-icon-padding
+    +ltr()
+      padding-left: $banner-icon-padding
 
     +rtl()
-      padding-left: $banner-content-padding
       padding-right: $banner-icon-padding
 
 .v-banner--is-mobile
@@ -92,11 +95,12 @@
 
   .v-banner__wrapper
     flex-wrap: wrap
-    padding-left: $banner-mobile-start-padding
     padding-top: $banner-mobile-top-padding
 
+    +ltr()
+      padding-left: $banner-mobile-start-padding
+
     +rtl()
-      padding-left: 0
       padding-right: $banner-mobile-start-padding
 
   &.v-banner--has-icon
@@ -106,11 +110,12 @@
   &.v-banner--single-line
     .v-banner__actions
       flex: initial
-      margin-left: $banner-mobile-singleline-padding
       padding-top: 0
 
+      +ltr()
+        margin-left: $banner-mobile-singleline-padding
+
       +rtl()
-        margin-left: 0
         margin-right: $banner-mobile-singleline-padding
 
     .v-banner__wrapper
@@ -118,18 +123,18 @@
       padding-top: $banner-mobile-padding
 
   .v-banner__icon
-    margin-right: $banner-icon-padding
+    +ltr()
+      margin-right: $banner-icon-padding
 
     +rtl()
-      margin-right: 0
       margin-left: $banner-icon-padding
 
   .v-banner__content
-    padding-right: $banner-content-padding
+    +ltr()
+      padding-right: $banner-content-padding
 
     +rtl()
       padding-left: $banner-content-padding
-      padding-right: 0
 
     .v-banner__wrapper
       flex-wrap: nowrap

@@ -168,7 +168,11 @@
       padding: 24px 24px 16px
 
     .v-stepper__step__step
-      margin-right: 12px
+      +ltr()
+        margin-right: 12px
+
+      +rtl()
+        margin-left: 12px
 
   &--alt-labels
     .v-stepper__header
@@ -190,11 +194,6 @@
     .v-stepper__step__step
       margin-right: 0
       margin-bottom: 11px
-
-  +rtl()
-    .v-stepper__step__step
-      margin-right: 0
-      margin-left: 12px
 
 @media #{map-get($display-breakpoints, 'sm-and-down')}
   .v-stepper:not(.v-stepper--vertical)

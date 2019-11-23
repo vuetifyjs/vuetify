@@ -167,11 +167,6 @@
           title: 'Twitter',
         },
         {
-          icon: 'mdi-facebook',
-          href: 'https://www.facebook.com/vuetifyjs',
-          title: 'Facebook',
-        },
-        {
           icon: 'mdi-discord',
           href: 'https://community.vuetifyjs.com',
           title: 'Discord Community',
