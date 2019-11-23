@@ -10,13 +10,11 @@ $border-radius-root: 4px !default;
 $spacer: 4px !default;
 
 $spacers: ();
-//;
 @for $i from 0 through 12 {
   $spacers: map-merge($spacers, ($i: $spacer * $i))
 };
 
 $negative-spacers: ();
-//;
 @for $i from 1 through 12 {
   $negative-spacers: map-merge($negative-spacers, ("n" + $i: -$spacer * $i))
 };

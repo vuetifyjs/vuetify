@@ -141,8 +141,8 @@ function processVariableFile (dir, folder) {
       const varArr = varString.split(':')
       if (varArr.length >= 2 && varArr[0].charAt(0) === '$') {
         const varName = varArr.shift().trim()
-        let varDefault = (vars[ind + 1] === '//')
-          ? vars[ind + 2]
+        let varDefault = (vars[ind + 1].charAt(0) === '@')
+          ? vars[ind + 1]
           : varArr.join(':')
         varDefault = `${varDefault.trim()};`
         const lastIndex = varValues.findIndex(item => item.name === varName)
