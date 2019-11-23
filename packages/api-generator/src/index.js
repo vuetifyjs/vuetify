@@ -135,18 +135,25 @@ function processVariableFile (dir, folder) {
   const variableFile = `${dir}${folder}/_variables.scss`
   if (fs.existsSync(variableFile)) {
     const varFile = fs.readFileSync(variableFile, 'utf8')
-    const vars = varFile
-      .replace(/^@import\s'\.\.\/\.\.\/styles\/styles\.sass';\s/g, '')
-      .replace(/\s\s+/g, ' ')
-      .split(';\n')
+    const vars = varFile.split(/;[\n]*/g)
     const varValues = []
-    vars.forEach(varString => {
-      const varArr = varString.split(': ')
-      if (varArr.length === 2) {
-        varValues.push({
-          name: varArr[0].trim(),
-          default: varArr[1].trim(),
-        })
+    vars.forEach((varString, ind) => {
+      const varArr = varString.split(':')
+      if (varArr.length >= 2 && varArr[0].charAt(0) === '$') {
+        const varName = varArr.shift().trim()
+        let varDefault = (vars[ind + 1] === '//')
+          ? vars[ind + 2]
+          : varArr.join(':')
+        varDefault = `${varDefault.trim()};`
+        const lastIndex = varValues.findIndex(item => item.name === varName)
+        if (lastIndex > -1) {
+          varValues[lastIndex].default = varDefault
+        } else {
+          varValues.push({
+            name: varName,
+            default: varDefault,
+          })
+        }
       }
     })
     return varValues
