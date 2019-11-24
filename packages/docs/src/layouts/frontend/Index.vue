@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <core-system-bar />
 
     <frontend-app-bar />
@@ -7,7 +7,7 @@
     <frontend-view />
 
     <frontend-footer />
-  </v-app>
+  </div>
 </template>
 
 <script>

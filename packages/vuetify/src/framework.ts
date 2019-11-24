@@ -1,15 +1,19 @@
+// Install
 import { install } from './install'
 
+// Services
+import * as services from './services'
+
+// Utilities
+import mergeData from './util/mergeData'
+
 // Types
+import Vue, { CreateElement } from 'vue'
+import { VuetifyPreset } from 'vuetify/types/presets'
 import {
   VuetifyService,
   VuetifyServiceContract,
 } from 'vuetify/types/services'
-import { VuetifyPreset } from 'vuetify/types/presets'
-import Vue from 'vue'
-
-// Services
-import * as services from './services'
 
 // Styles
 import './styles/main.sass'
@@ -21,7 +25,7 @@ export default class Vuetify {
 
   static version = __VUETIFY_VERSION__
 
-  framework: Record<string, VuetifyServiceContract> = {}
+  framework: Record<string, VuetifyServiceContract> = { rtl: false as any }
 
   installed: string[] = []
 
@@ -38,21 +42,58 @@ export default class Vuetify {
     this.use(services.Theme)
   }
 
-  // Called on the new vuetify instance
-  // bootstrap in install beforeCreate
-  // Exposes ssrContext if available
-  init (root: Vue, ssrContext?: object) {
+  bootstrap (root: Vue, ssrContext?: object) {
     this.installed.forEach(property => {
       const service = this.framework[property]
+
       service.framework = this.framework
 
       service.init(root, ssrContext)
     })
+  }
 
-    // rtl is not installed and
-    // will never be called by
-    // the init process
-    this.framework.rtl = Boolean(this.preset.rtl) as any
+  // Invoked in beforeCreate of
+  // the root Vue element
+  init (root: Vue, ssrContext?: object) {
+    // Iterate all installed services
+    // to bootstrap framework object
+    this.bootstrap(root, ssrContext)
+
+    // Hook into root render method
+    this.render(root)
+
+    // Create observed $vuetify object
+    this.observe(root)
+  }
+
+  observe (instance: Vue) {
+    const options = instance.$options as any
+
+    instance.$vuetify = Vue.observable(options.vuetify.framework)
+  }
+
+  render (instance: Vue) {
+    const rootOptions = instance.$root.$options as any
+    const rootRender = rootOptions.render
+
+    rootOptions.render = (h: CreateElement, hack: Record<string, any>) => {
+      const root = rootRender.call(instance, h, hack)
+
+      if (!root) return root
+
+      root.data = mergeData(root.data, {
+        staticClass: 'v-application',
+        attrs: { 'data-app': true },
+        class: {
+          'theme--dark': instance.$vuetify.theme.dark,
+          'theme--light': !instance.$vuetify.theme.dark,
+          'v-application--is-rtl': instance.$vuetify.rtl,
+          'v-application--is-ltr': !instance.$vuetify.rtl,
+        },
+      })
+
+      return root
+    }
   }
 
   // Instantiate a VuetifyService

@@ -29,9 +29,7 @@ const Themeable = Vue.extend<Themeable>().extend({
 
   inject: {
     theme: {
-      default: {
-        isDark: false,
-      },
+      default: null,
     },
   },
 
@@ -65,10 +63,10 @@ const Themeable = Vue.extend<Themeable>().extend({
       } else if (this.light === true) {
         // explicitly light
         return false
-      } else {
-        // inherit from parent, or default false if there is none
-        return this.theme.isDark
       }
+
+      // inherit from parent, or default false if there is none
+      return this.theme ? this.theme.isDark : this.$vuetify.theme.dark
     },
     themeClasses (): object {
       return {

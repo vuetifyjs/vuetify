@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <core-system-bar />
 
     <documentation-app-bar />
@@ -11,7 +11,7 @@
     <documentation-toc />
 
     <documentation-fab />
-  </v-app>
+  </div>
 </template>
 
 <script>
