@@ -4,11 +4,8 @@ import { install } from './install'
 // Services
 import * as services from './services'
 
-// Utilities
-import mergeData from './util/mergeData'
-
 // Types
-import Vue, { CreateElement } from 'vue'
+import Vue from 'vue'
 import { VuetifyPreset } from 'vuetify/types/presets'
 import {
   VuetifyService,
@@ -40,6 +37,7 @@ export default class Vuetify {
     this.use(services.Icons)
     this.use(services.Lang)
     this.use(services.Theme)
+    this.use(services.Legacy)
   }
 
   bootstrap (root: Vue, ssrContext?: object) {
@@ -59,9 +57,6 @@ export default class Vuetify {
     // to bootstrap framework object
     this.bootstrap(root, ssrContext)
 
-    // Hook into root render method
-    this.render(root)
-
     // Create observed $vuetify object
     this.observe(root)
   }
@@ -70,32 +65,6 @@ export default class Vuetify {
     const options = instance.$options as any
 
     instance.$vuetify = Vue.observable(options.vuetify.framework)
-  }
-
-  render (instance: Vue) {
-    const rootOptions = instance.$root.$options as any
-    const rootRender = rootOptions.render
-
-    rootOptions.render = (h: CreateElement, hack: Record<string, any>) => {
-      const rootNode = rootRender.call(instance, h, hack)
-
-      if (!rootNode) return rootNode
-
-      rootNode.data = mergeData(rootNode.data, {
-        staticClass: 'v-application--wrap',
-      })
-
-      return h('div', {
-        staticClass: 'v-application',
-        attrs: { 'data-app': true },
-        class: {
-          'theme--dark': instance.$vuetify.theme.dark,
-          'theme--light': !instance.$vuetify.theme.dark,
-          'v-application--is-ltr': !instance.$vuetify.rtl,
-          'v-application--is-rtl': instance.$vuetify.rtl,
-        },
-      }, [rootNode])
-    }
   }
 
   // Instantiate a VuetifyService

@@ -25,12 +25,6 @@ export default mixins(
     },
   },
 
-  computed: {
-    isDark (): boolean {
-      return this.$vuetify.theme.dark
-    },
-  },
-
   beforeCreate () {
     if (!this.$vuetify || (this.$vuetify === this.$root as any)) {
       throw new Error('Vuetify is not properly initialized, see https://vuetifyjs.com/getting-started/quick-start#bootstrapping-the-vuetify-object')

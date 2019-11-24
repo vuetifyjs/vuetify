@@ -1,9 +1,9 @@
 <template>
-  <div id="app">
+  <v-app>
     <v-content>
       <playground></playground>
     </v-content>
-  </div>
+  </v-app>
 </template>
 
 <script>
