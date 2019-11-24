@@ -8,7 +8,7 @@ import VBtn from '../VBtn'
 // Types
 import Vue, { VNode, VNodeChildrenArrayContents } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import { DataPagination, DataOptions } from '@components/VData/types'
+import { DataPagination, DataOptions } from '../VData/types'
 
 export default Vue.extend({
   name: 'v-data-footer',

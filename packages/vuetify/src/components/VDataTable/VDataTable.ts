@@ -23,7 +23,7 @@ import ripple from '../../directives/ripple'
 import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, defaultFilter, camelizeObjectKeys } from '../../util/helpers'
 import { breaking } from '../../util/console'
 import { TableHeader, FilterFn } from './types'
-import { DataProps, DataOptions, DataPagination, compareFn } from '@components/VData/types'
+import { DataProps, DataOptions, DataPagination, compareFn } from '../VData/types'
 
 function filterFn (item: any, search: string | null, filter: FilterFn) {
   return (header: TableHeader) => {

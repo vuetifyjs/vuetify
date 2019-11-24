@@ -13,7 +13,7 @@ import { breaking, removed } from '../../util/console'
 
 // Types
 import { PropValidator } from 'vue/types/options'
-import { DataProps } from '@components/VData/types'
+import { DataProps } from '../VData/types'
 
 /* @vue/component */
 export default Themeable.extend({

@@ -1,4 +1,4 @@
-import { compareFn } from '@components/VData/types'
+import { compareFn } from '../VData/types'
 
 export type FilterFn = (value: any, search: string | null, item: any) => boolean
 
