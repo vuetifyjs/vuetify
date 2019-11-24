@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <!-- <core-system-bar /> -->
+    <core-system-bar />
 
     <documentation-app-bar />
 
