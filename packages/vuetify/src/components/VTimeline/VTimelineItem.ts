@@ -62,7 +62,7 @@ export default baseMixins.extend<options>().extend({
       return this.$createElement(VIcon, {
         props: {
           color: this.iconColor,
-          dark: !this.theme.isDark,
+          dark: !this.isDark,
           small: this.small,
         },
       }, this.icon)

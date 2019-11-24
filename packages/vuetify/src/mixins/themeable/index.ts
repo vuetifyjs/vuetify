@@ -1,3 +1,7 @@
+// Utilities
+import { getObjectValueByPath } from '../../util/helpers'
+
+// Types
 import Vue from 'vue'
 import { PropValidator, RenderContext } from 'vue/types/options'
 
@@ -54,7 +58,7 @@ const Themeable = Vue.extend<Themeable>().extend({
 
   computed: {
     appIsDark (): boolean {
-      return this.$vuetify.theme.dark || false
+      return getObjectValueByPath(this.$vuetify, 'theme.dark', false)
     },
     isDark (): boolean {
       if (this.dark === true) {
@@ -65,8 +69,10 @@ const Themeable = Vue.extend<Themeable>().extend({
         return false
       }
 
-      // inherit from parent, or default false if there is none
-      return this.theme ? this.theme.isDark : this.$vuetify.theme.dark
+      // inherit from parent, or grab $vuetify.theme value
+      return this.theme
+        ? this.theme.isDark
+        : this.appIsDark
     },
     themeClasses (): object {
       return {
