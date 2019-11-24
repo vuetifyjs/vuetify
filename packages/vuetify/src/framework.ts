@@ -77,22 +77,24 @@ export default class Vuetify {
     const rootRender = rootOptions.render
 
     rootOptions.render = (h: CreateElement, hack: Record<string, any>) => {
-      const root = rootRender.call(instance, h, hack)
+      const rootNode = rootRender.call(instance, h, hack)
 
-      if (!root) return root
+      if (!rootNode) return rootNode
 
-      root.data = mergeData(root.data, {
+      rootNode.data = mergeData(rootNode.data, {
+        staticClass: 'v-application--wrap',
+      })
+
+      return h('div', {
         staticClass: 'v-application',
         attrs: { 'data-app': true },
         class: {
           'theme--dark': instance.$vuetify.theme.dark,
           'theme--light': !instance.$vuetify.theme.dark,
-          'v-application--is-rtl': instance.$vuetify.rtl,
           'v-application--is-ltr': !instance.$vuetify.rtl,
+          'v-application--is-rtl': instance.$vuetify.rtl,
         },
-      })
-
-      return root
+      }, [rootNode])
     }
   }
 

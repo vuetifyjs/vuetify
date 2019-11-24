@@ -1,6 +1,5 @@
-import VApp from '../../../components/VApp'
 import Detachable from '../'
-import { mount } from '@vue/test-utils'
+import { mount, MountOptions, Wrapper } from '@vue/test-utils'
 
 const Mock = Detachable.extend({
   name: 'mock',
@@ -18,26 +17,39 @@ const Mock = Detachable.extend({
 })
 
 describe('detachable.ts', () => {
-  it('should detach to app', async () => {
-    const localMock = Mock
-    const wrapper = mount(VApp, {
-      attachToDocument: true,
-      slots: {
-        default: [{
-          render: h => h(localMock),
-        }],
-      },
-      mocks: {
-        $vuetify: {
-          rtl: false,
-          theme: {
-            dark: false,
+  type Instance = InstanceType<typeof Mock>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount({
+        render (h) {
+          return h('div', this.$slots.default)
+        },
+      }, {
+        attachToDocument: true,
+        slots: {
+          default: [{
+            render: h => h(Mock),
+          }],
+        },
+        mocks: {
+          $vuetify: {
+            rtl: false,
+            theme: {
+              dark: false,
+            },
           },
         },
-      },
-    })
+        ...options,
+      })
+    }
+  })
 
-    const detach = wrapper.find(localMock)
+  it('should detach to app', async () => {
+    const wrapper = mountFunction()
+
+    const detach = wrapper.find(Mock)
 
     expect(detach.vm.hasDetached).toBe(false)
 
@@ -46,22 +58,7 @@ describe('detachable.ts', () => {
 
   it('should not detach when lazy', async () => {
     const localMock = Mock
-    const wrapper = mount(VApp, {
-      attachToDocument: true,
-      slots: {
-        default: [{
-          render: h => h(localMock),
-        }],
-      },
-      mocks: {
-        $vuetify: {
-          rtl: false,
-          theme: {
-            dark: false,
-          },
-        },
-      },
-    })
+    const wrapper = mountFunction()
 
     const detach = wrapper.find(localMock)
 
