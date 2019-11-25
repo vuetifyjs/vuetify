@@ -1,33 +1,33 @@
 // Styles
 import './calendar-with-events.sass'
 
-// Types
-import { VNode, VNodeData } from 'vue'
-
 // Directives
 import ripple from '../../../directives/ripple'
 
 // Mixins
 import CalendarBase from './calendar-base'
 
-// Helpers
-import { escapeHTML } from '../../../util/helpers'
-
-// Util
+// Utilities
 import props from '../util/props'
 import {
-  VTimestamp,
+  escapeHTML,
+  getVuetify,
+} from '../../../util/helpers'
+import {
   getDayIdentifier,
   parseTime,
+  VTimestamp,
 } from '../util/timestamp'
 import {
-  VEventParsed,
-  VEventInput,
-  parseEvent,
   isEventOn,
+  parseEvent,
+  VEventInput,
+  VEventParsed,
 } from '../util/events'
 
 // Types
+import { VNode, VNodeData } from 'vue'
+
 type VColorFunction = (event: VEventInput) => string
 
 type VNameFunction = (event: VEventParsed, timedEvent: boolean) => string
@@ -128,6 +128,7 @@ export default CalendarBase.extend({
           : `${hour}:${minute}${suffix}`)
         : `${hour}${suffix}`
     },
+    // eslint-disable-next-line max-statements
     updateEventVisibility () {
       if (this.noEvents || !this.eventMore) {
         return
@@ -159,8 +160,10 @@ export default CalendarBase.extend({
         }
 
         if (hide) {
+          const lang = getVuetify(this, 'lang', { t: (text = '') => text })
+
           more.style.display = ''
-          more.innerHTML = this.$vuetify.lang.t(this.eventMoreText, hidden)
+          more.innerHTML = lang.t(this.eventMoreText, hidden)
         } else {
           more.style.display = 'none'
         }

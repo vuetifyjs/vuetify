@@ -12,8 +12,10 @@ import VProgressLinear from '../VProgressLinear'
 // Mixins
 // TODO: Move this into core components v2.0
 import ButtonGroup from '../../mixins/button-group'
+import Localable from '../../mixins/localable'
 
 // Utilities
+import mixins from '../../util/mixins'
 import { convertToUnit } from '../../util/helpers'
 import { breaking } from '../../util/console'
 
@@ -21,7 +23,12 @@ import { breaking } from '../../util/console'
 import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
-export default VWindow.extend({
+const baseMixins = mixins(
+  VWindow,
+  Localable,
+)
+
+export default baseMixins.extend({
   name: 'v-carousel',
 
   props: {
@@ -33,6 +40,10 @@ export default VWindow.extend({
     delimiterIcon: {
       type: String,
       default: '$delimiter',
+    },
+    delimiterText: {
+      type: String,
+      default: '$vuetify.carousel.ariaLabel.delimiter',
     },
     height: {
       type: [Number, String],
@@ -136,7 +147,7 @@ export default VWindow.extend({
         const child = this.$createElement(VBtn, {
           staticClass: 'v-carousel__controls__item',
           attrs: {
-            'aria-label': this.$vuetify.lang.t('$vuetify.carousel.ariaLabel.delimiter', i + 1, length),
+            'aria-label': this.langInstance.t(this.delimiterText, i + 1, length),
           },
           props: {
             icon: true,

@@ -1,11 +1,13 @@
+// Utilities
+import { getVuetify } from '../../util/helpers'
+
+// Types
 import Vue from 'vue'
 import { PropValidator, RenderContext } from 'vue/types/options'
 
 /* eslint-disable-next-line no-use-before-define */
 interface Themeable extends Vue {
-  theme: {
-    isDark: boolean
-  }
+  theme: { isDark: boolean }
 }
 
 export function functionalThemeClasses (context: RenderContext): object {
@@ -13,7 +15,11 @@ export function functionalThemeClasses (context: RenderContext): object {
     ...context.props,
     ...context.injections,
   }
-  const isDark = Themeable.options.computed.isDark.call(vm)
+
+  const isPropDark = Themeable.options.computed.isPropDark.call(vm)
+  const isParentDark = Themeable.options.computed.isParentDark.call(vm)
+  const isDark = isPropDark || isParentDark
+
   return Themeable.options.computed.themeClasses.call({ isDark })
 }
 
@@ -22,16 +28,12 @@ const Themeable = Vue.extend<Themeable>().extend({
   name: 'themeable',
 
   provide (): object {
-    return {
-      theme: this.themeableProvide,
-    }
+    return { theme: this.themeableProvide }
   },
 
   inject: {
     theme: {
-      default: {
-        isDark: false,
-      },
+      default: { isDark: false },
     },
   },
 
@@ -46,29 +48,36 @@ const Themeable = Vue.extend<Themeable>().extend({
     } as PropValidator<boolean | null>,
   },
 
-  data () {
-    return {
-      themeableProvide: {
-        isDark: false,
-      },
-    }
-  },
+  data: () => ({
+    themeableProvide: { isDark: false },
+  }),
 
   computed: {
+    // @deprecated - remove v3
     appIsDark (): boolean {
-      return this.$vuetify.theme.dark || false
+      return this.isAppDark
+    },
+    appThemeClasses (): Dictionary<boolean> {
+      return {
+        'theme--dark': this.isAppDark,
+        'theme--light': !this.isAppDark,
+      }
+    },
+    /** Used by menus and dialogs, inherits from v-app instead of the parent */
+    isAppDark (): boolean {
+      return getVuetify(this, 'theme.dark', false)
     },
     isDark (): boolean {
-      if (this.dark === true) {
-        // explicitly dark
-        return true
-      } else if (this.light === true) {
-        // explicitly light
-        return false
-      } else {
-        // inherit from parent, or default false if there is none
-        return this.theme.isDark
-      }
+      return this.isPropDark || this.isParentDark
+    },
+    isDetachedDark (): boolean {
+      return this.isPropDark || this.isAppDark
+    },
+    isPropDark (): boolean {
+      return Boolean(this.dark && !this.light)
+    },
+    isParentDark (): boolean {
+      return this.theme.isDark
     },
     themeClasses (): object {
       return {
@@ -76,35 +85,23 @@ const Themeable = Vue.extend<Themeable>().extend({
         'theme--light': !this.isDark,
       }
     },
-    /** Used by menus and dialogs, inherits from v-app instead of the parent */
+    // @deprecated - remove v3
     rootIsDark (): boolean {
-      if (this.dark === true) {
-        // explicitly dark
-        return true
-      } else if (this.light === true) {
-        // explicitly light
-        return false
-      } else {
-        // inherit from v-app
-        return this.appIsDark
-      }
+      return this.isAppDark
     },
     rootThemeClasses (): Dictionary<boolean> {
-      return {
-        'theme--dark': this.rootIsDark,
-        'theme--light': !this.rootIsDark,
-      }
+      return this.appThemeClasses
     },
   },
 
   watch: {
     isDark: {
-      handler (newVal, oldVal) {
-        if (newVal !== oldVal) {
-          this.themeableProvide.isDark = this.isDark
-        }
-      },
       immediate: true,
+      handler (newVal, oldVal) {
+        if (newVal === oldVal) return
+
+        this.themeableProvide.isDark = this.isDark
+      },
     },
   },
 })

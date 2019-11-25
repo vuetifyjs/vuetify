@@ -2,18 +2,16 @@
 import VWindow from '../VWindow/VWindow'
 
 // Types & Components
-import { BaseItemGroup, GroupableInstance } from './../VItemGroup/VItemGroup'
+import {
+  BaseItemGroup,
+  GroupableInstance,
+} from './../VItemGroup/VItemGroup'
 
 /* @vue/component */
 export default VWindow.extend({
   name: 'v-tabs-items',
 
-  props: {
-    mandatory: {
-      type: Boolean,
-      default: false,
-    },
-  },
+  props: { mandatory: Boolean },
 
   computed: {
     classes (): object {
@@ -23,7 +21,7 @@ export default VWindow.extend({
       }
     },
     isDark (): boolean {
-      return this.rootIsDark
+      return this.isAppDark
     },
   },
 

@@ -12,6 +12,9 @@ import { VExpandTransition } from '../transitions'
 // Mixins
 import Toggleable from '../../mixins/toggleable'
 
+// Utilities
+import { getVuetify } from '../../util/helpers'
+
 // Types
 import { VNode } from 'vue/types'
 import mixins from '../../util/mixins'
@@ -62,14 +65,14 @@ export default mixins(
       return Boolean(this.icon || this.$slots.icon)
     },
     isMobile (): boolean {
-      return this.$vuetify.breakpoint.width < Number(this.mobileBreakPoint)
+      return getVuetify(this, 'breakpoint.width', 0) < Number(this.mobileBreakPoint)
     },
     styles (): object {
       const styles = VSheet.options.computed.styles.call(this)
 
       if (!this.sticky) return styles
 
-      const { bar, top } = this.$vuetify.application
+      const { bar, top } = getVuetify(this, 'bar', { bar: 0, top: 0 })
 
       return {
         ...styles,

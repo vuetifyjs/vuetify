@@ -1,16 +1,35 @@
+// Styles
 import './VDataFooter.sass'
 
 // Components
-import VSelect from '../VSelect/VSelect'
-import VIcon from '../VIcon'
-import VBtn from '../VBtn'
+import { VSelect } from '../VSelect'
+import { VIcon } from '../VIcon'
+import { VBtn } from '../VBtn'
+
+// Mixins
+import Bidirectional from '../../mixins/bidirectional'
+import Localable from '../../mixins/localable'
+
+// Utilities
+import mixins from '../../util/mixins'
 
 // Types
-import Vue, { VNode, VNodeChildrenArrayContents } from 'vue'
-import { DataOptions, DataPagination } from '../VData/VData'
 import { PropValidator } from 'vue/types/options'
+import {
+  VNode,
+  VNodeChildrenArrayContents,
+} from 'vue'
+import {
+  DataOptions,
+  DataPagination,
+} from '../VData/VData'
 
-export default Vue.extend({
+const baseMixins = mixins(
+  Bidirectional,
+  Localable,
+)
+
+export default baseMixins.extend({
   name: 'v-data-footer',
 
   props: {
@@ -61,16 +80,16 @@ export default Vue.extend({
   },
 
   computed: {
-    disableNextPageIcon (): boolean {
-      return this.options.itemsPerPage < 0 ||
-        this.options.page * this.options.itemsPerPage >= this.pagination.itemsLength ||
-        this.pagination.pageStop < 0
-    },
     computedItemsPerPageOptions (): any[] {
       return this.itemsPerPageOptions.map(option => {
         if (typeof option === 'object') return option
         else return this.genItemsPerPageOption(option)
       })
+    },
+    disableNextPageIcon (): boolean {
+      return this.options.itemsPerPage < 0 ||
+        this.options.page * this.options.itemsPerPage >= this.pagination.itemsLength ||
+        this.pagination.pageStop < 0
     },
   },
 
@@ -95,7 +114,9 @@ export default Vue.extend({
     },
     genItemsPerPageOption (option: number) {
       return {
-        text: option === -1 ? this.$vuetify.lang.t(this.itemsPerPageAllText) : String(option),
+        text: option === -1
+          ? this.langInstance.t(this.itemsPerPageAllText)
+          : String(option),
         value: option,
       }
     },
@@ -110,7 +131,7 @@ export default Vue.extend({
       return this.$createElement('div', {
         staticClass: 'v-data-footer__select',
       }, [
-        this.$vuetify.lang.t(this.itemsPerPageText),
+        this.langInstance.t(this.itemsPerPageText),
         this.$createElement(VSelect, {
           attrs: {
             'aria-label': this.itemsPerPageText,
@@ -141,7 +162,7 @@ export default Vue.extend({
 
         children = this.$scopedSlots['page-text']
           ? [this.$scopedSlots['page-text']!({ pageStart, pageStop, itemsLength })]
-          : [this.$vuetify.lang.t(this.pageText, pageStart, pageStop, itemsLength)]
+          : [this.langInstance.t(this.pageText, pageStart, pageStop, itemsLength)]
       }
 
       return this.$createElement('div', {
@@ -172,30 +193,30 @@ export default Vue.extend({
       before.push(this.genIcon(
         this.onPreviousPage,
         this.options.page === 1,
-        this.$vuetify.lang.t('$vuetify.dataFooter.prevPage'),
-        this.$vuetify.rtl ? this.nextIcon : this.prevIcon
+        this.langInstance.t('$vuetify.dataFooter.prevPage'),
+        this.hasRtl ? this.nextIcon : this.prevIcon
       ))
 
       after.push(this.genIcon(
         this.onNextPage,
         this.disableNextPageIcon,
-        this.$vuetify.lang.t('$vuetify.dataFooter.nextPage'),
-        this.$vuetify.rtl ? this.prevIcon : this.nextIcon
+        this.langInstance.t('$vuetify.dataFooter.nextPage'),
+        this.hasRtl ? this.prevIcon : this.nextIcon
       ))
 
       if (this.showFirstLastPage) {
         before.unshift(this.genIcon(
           this.onFirstPage,
           this.options.page === 1,
-          this.$vuetify.lang.t('$vuetify.dataFooter.firstPage'),
-          this.$vuetify.rtl ? this.lastIcon : this.firstIcon
+          this.langInstance.t('$vuetify.dataFooter.firstPage'),
+          this.hasRtl ? this.lastIcon : this.firstIcon
         ))
 
         after.push(this.genIcon(
           this.onLastPage,
           this.options.page >= this.pagination.pageCount || this.options.itemsPerPage === -1,
-          this.$vuetify.lang.t('$vuetify.dataFooter.lastPage'),
-          this.$vuetify.rtl ? this.firstIcon : this.lastIcon
+          this.langInstance.t('$vuetify.dataFooter.lastPage'),
+          this.hasRtl ? this.firstIcon : this.lastIcon
         ))
       }
 

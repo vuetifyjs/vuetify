@@ -1,20 +1,28 @@
+// Styles
 import './VTimePickerTitle.sass'
 
+// Components
+import { SelectingTimes } from './VTimePicker'
+
 // Mixins
+import Localable from '../../mixins/localable'
 import PickerButton from '../../mixins/picker-button'
 
-// Utils
-import { pad } from '../VDatePicker/util'
+// Utilities
 import mixins from '../../util/mixins'
+import { pad } from '../VDatePicker/util'
 
-import { SelectingTimes } from './VTimePicker'
-import { PropValidator } from 'vue/types/options'
+// Types
 import { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
-export default mixins(
-  PickerButton
+const baseMixins = mixins(
+  Localable,
+  PickerButton,
+)
+
 /* @vue/component */
-).extend({
+export default baseMixins.extend({
   name: 'v-time-picker-title',
 
   props: {
@@ -60,8 +68,8 @@ export default mixins(
       return this.$createElement('div', {
         staticClass: 'v-time-picker-title__ampm',
       }, [
-        this.genPickerButton('period', 'am', this.$vuetify.lang.t('$vuetify.timePicker.am'), this.disabled || this.readonly),
-        this.genPickerButton('period', 'pm', this.$vuetify.lang.t('$vuetify.timePicker.pm'), this.disabled || this.readonly),
+        this.genPickerButton('period', 'am', this.langInstance.t('$vuetify.timePicker.am'), this.disabled || this.readonly),
+        this.genPickerButton('period', 'pm', this.langInstance.t('$vuetify.timePicker.pm'), this.disabled || this.readonly),
       ])
     },
   },

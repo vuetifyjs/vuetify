@@ -1,18 +1,22 @@
 // Styles
 import './VFileInput.sass'
 
-// Extensions
-import VTextField from '../VTextField'
-
 // Components
 import { VChip } from '../VChip'
-
-// Types
-import { PropValidator } from 'vue/types/options'
+import { VTextField } from '../VTextField'
 
 // Utilities
-import { deepEqual, humanReadableFileSize, wrapInArray } from '../../util/helpers'
 import { consoleError } from '../../util/console'
+import {
+  deepEqual,
+  getVuetify,
+  humanReadableFileSize,
+  wrapInArray,
+} from '../../util/helpers'
+
+// Types
+import { Lang } from 'vuetify/types/services/lang'
+import { PropValidator } from 'vue/types/options'
 
 export default VTextField.extend({
   name: 'v-file-input',
@@ -84,11 +88,11 @@ export default VTextField.extend({
         ? this.lazyValue.length
         : (this.lazyValue instanceof File) ? 1 : 0
 
-      if (!this.showSize) return this.$vuetify.lang.t(this.counterString, fileCount)
+      if (!this.showSize) return this.langInstance.t(this.counterString, fileCount)
 
       const bytes = this.internalArrayValue.reduce((size: number, file: File) => size + file.size, 0)
 
-      return this.$vuetify.lang.t(
+      return this.langInstance.t(
         this.counterSizeString,
         fileCount,
         humanReadableFileSize(bytes, this.base === 1024)
@@ -204,7 +208,7 @@ export default VTextField.extend({
 
       if (length < 2) return this.text
       if (this.showSize && !this.counter) return [this.counterValue]
-      return [this.$vuetify.lang.t(this.counterString, length)]
+      return [this.langInstance.t(this.counterString, length)]
     },
     genSelections () {
       const children = []

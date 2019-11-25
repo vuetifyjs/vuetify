@@ -405,7 +405,7 @@ describe('validatable.ts', () => {
 
   it('should return white when no color and isDark', () => {
     const wrapper = mountFunction({
-      computed: { rootIsDark: () => false },
+      computed: { isAppDark: () => false },
       propsData: { dark: true },
     })
 
@@ -418,7 +418,7 @@ describe('validatable.ts', () => {
     expect(wrapper.vm.computedColor).toBe('primary')
 
     const wrapper2 = mountFunction({
-      computed: { rootIsDark: () => true },
+      computed: { isAppDark: () => true },
     })
 
     expect(wrapper2.vm.computedColor).toBe('primary')

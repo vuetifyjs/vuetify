@@ -2,12 +2,14 @@
 import './VInput.sass'
 
 // Components
-import VIcon from '../VIcon'
-import VLabel from '../VLabel'
-import VMessages from '../VMessages'
+import { VIcon } from '../VIcon'
+import { VLabel } from '../VLabel'
+import { VMessages } from '../VMessages'
 
 // Mixins
+import Bidirectional from '../../mixins/bidirectional'
 import BindsAttrs from '../../mixins/binds-attrs'
+import Localable from '../../mixins/localable'
 import Validatable from '../../mixins/validatable'
 
 // Utilities
@@ -18,11 +20,17 @@ import {
 } from '../../util/helpers'
 
 // Types
-import { VNode, VNodeData, PropType } from 'vue'
 import mixins from '../../util/mixins'
+import {
+  VNode,
+  VNodeData,
+  PropType,
+} from 'vue'
 
 const baseMixins = mixins(
+  Bidirectional,
   BindsAttrs,
+  Localable,
   Validatable
 )
 

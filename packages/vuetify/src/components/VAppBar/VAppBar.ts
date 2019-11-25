@@ -124,12 +124,12 @@ export default baseMixins.extend({
     computedLeft (): number {
       if (!this.app || this.clippedLeft) return 0
 
-      return this.$vuetify.application.left
+      return this.applicationInstance.left
     },
     computedMarginTop (): number {
       if (!this.app) return 0
 
-      return this.$vuetify.application.bar
+      return this.applicationInstance.bar
     },
     computedOpacity (): number | undefined {
       if (!this.fadeImgOnScroll) return undefined
@@ -149,7 +149,7 @@ export default baseMixins.extend({
     computedRight (): number {
       if (!this.app || this.clippedRight) return 0
 
-      return this.$vuetify.application.right
+      return this.applicationInstance.right
     },
     computedScrollThreshold (): number {
       if (this.scrollThreshold) return Number(this.scrollThreshold)

@@ -1,9 +1,19 @@
-import { VNode, VNodeChildrenArrayContents } from 'vue'
-import mixins from '../../util/mixins'
-import VSelect from '../VSelect/VSelect'
-import VChip from '../VChip'
+// Components
+import { VChip } from '../VChip'
+import { VSelect } from '../VSelect'
+
+// Mixins
 import header from './mixins/header'
-import { wrapInArray } from '../../util/helpers'
+
+// Utilities
+import mixins from '../../util/mixins'
+import {
+  getVuetify,
+  wrapInArray,
+} from '../../util/helpers'
+
+// Types
+import { VNode, VNodeChildrenArrayContents } from 'vue'
 
 export default mixins(header).extend({
   name: 'v-data-table-header-mobile',
@@ -45,10 +55,11 @@ export default mixins(header).extend({
     },
     genSortSelect () {
       const sortHeaders = this.headers.filter(h => h.sortable !== false && h.value !== 'data-table-select')
+      const lang = getVuetify(this, 'lang', { t: (text = '') => text })
 
       return this.$createElement(VSelect, {
         props: {
-          label: this.$vuetify.lang.t(this.sortByText),
+          label: lang.t(this.sortByText),
           items: sortHeaders,
           hideDetails: true,
           multiple: this.options.multiSort,

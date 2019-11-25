@@ -6,6 +6,7 @@ import SSRBootable from '../../mixins/ssr-bootable'
 
 // Types
 import { VNode } from 'vue'
+import { getVuetify } from '../../util/helpers'
 
 /* @vue/component */
 export default SSRBootable.extend({
@@ -20,9 +21,13 @@ export default SSRBootable.extend({
 
   computed: {
     styles (): object {
+      const fallback = {
+        bar: 0, top: 0, right: 0, footer: 0, insetFooter: 0, bottom: 0, left: 0,
+      }
+
       const {
         bar, top, right, footer, insetFooter, bottom, left,
-      } = this.$vuetify.application
+      } = getVuetify(this, 'application', fallback)
 
       return {
         paddingTop: `${top + bar}px`,

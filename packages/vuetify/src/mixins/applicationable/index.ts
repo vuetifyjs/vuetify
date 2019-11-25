@@ -3,6 +3,7 @@ import { TargetProp } from 'vuetify/types/services/application'
 
 // Util
 import mixins from '../../util/mixins'
+import { getVuetify } from '../../util/helpers'
 
 export default function applicationable (value: TargetProp, events: string[] = []) {
   /* @vue/component */
@@ -14,6 +15,12 @@ export default function applicationable (value: TargetProp, events: string[] = [
     },
 
     computed: {
+      applicationInstance () {
+        return getVuetify(this, 'application', {
+          register () {},
+          unregister () {},
+        })
+      },
       applicationProperty (): TargetProp {
         return value
       },
@@ -28,7 +35,7 @@ export default function applicationable (value: TargetProp, events: string[] = [
           : this.callUpdate()
       },
       applicationProperty (newVal, oldVal) {
-        this.$vuetify.application.unregister(this._uid, oldVal)
+        this.applicationInstance.unregister(this._uid, oldVal)
       },
     },
 
@@ -59,7 +66,7 @@ export default function applicationable (value: TargetProp, events: string[] = [
       callUpdate () {
         if (!this.app) return
 
-        this.$vuetify.application.register(
+        this.applicationInstance.register(
           this._uid,
           this.applicationProperty,
           this.updateApplication()
@@ -68,7 +75,7 @@ export default function applicationable (value: TargetProp, events: string[] = [
       removeApplication (force = false) {
         if (!force && !this.app) return
 
-        this.$vuetify.application.unregister(
+        this.applicationInstance.unregister(
           this._uid,
           this.applicationProperty
         )

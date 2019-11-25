@@ -18,12 +18,19 @@ import Resize from '../../directives/resize'
 import Touch, { TouchWrapper } from '../../directives/touch'
 
 // Utilities
-import { convertToUnit, getSlot } from '../../util/helpers'
+import {
+  convertToUnit,
+  getSlot,
+  getVuetify,
+} from '../../util/helpers'
 import mixins from '../../util/mixins'
 
 // Types
-import { VNode, VNodeDirective } from 'vue'
 import { PropValidator } from 'vue/types/options'
+import {
+  VNode,
+  VNodeDirective,
+} from 'vue'
 
 const baseMixins = mixins(
   Applicationable('left', [
@@ -143,22 +150,22 @@ export default baseMixins.extend({
       if (!this.hasApp) return null
 
       const computedMaxHeight = (
-        this.$vuetify.application.bottom +
-        this.$vuetify.application.footer +
-        this.$vuetify.application.bar
+        this.applicationInstance.bottom +
+        this.applicationInstance.footer +
+        this.applicationInstance.bar
       )
 
       if (!this.clipped) return computedMaxHeight
 
-      return computedMaxHeight + this.$vuetify.application.top
+      return computedMaxHeight + this.applicationInstance.top
     },
     computedTop (): number {
       if (!this.hasApp) return 0
 
-      let computedTop = this.$vuetify.application.bar
+      let computedTop = this.applicationInstance.bar
 
       computedTop += this.clipped
-        ? this.$vuetify.application.top
+        ? this.applicationInstance.top
         : 0
 
       return computedTop
@@ -193,7 +200,7 @@ export default baseMixins.extend({
       return (
         !this.stateless &&
         !this.permanent &&
-        this.$vuetify.breakpoint.width < parseInt(this.mobileBreakPoint, 10)
+        getVuetify(this, 'breakpoint.width', 0) < parseInt(this.mobileBreakPoint, 10)
       )
     },
     reactsToClick (): boolean {

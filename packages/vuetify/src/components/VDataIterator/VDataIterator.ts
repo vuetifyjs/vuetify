@@ -5,16 +5,34 @@ import { VData } from '../VData'
 import VDataFooter from './VDataFooter'
 
 // Mixins
+import Bidirectional from '../../mixins/bidirectional'
+import Localable from '../../mixins/localable'
 import Themeable from '../../mixins/themeable'
 
-// Helpers
-import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, camelizeObjectKeys } from '../../util/helpers'
+// Utilities
+import mixins from '../../util/mixins'
 import { DataProps } from '../VData/VData'
 import { PropValidator } from 'vue/types/options'
-import { breaking, removed } from '../../util/console'
+import {
+  breaking,
+  removed,
+} from '../../util/console'
+import {
+  camelizeObjectKeys,
+  deepEqual,
+  getObjectValueByPath,
+  getPrefixedScopedSlots,
+  getSlot,
+} from '../../util/helpers'
+
+const baseMixins = mixins(
+  Bidirectional,
+  Localable,
+  Themeable,
+)
 
 /* @vue/component */
-export default Themeable.extend({
+export default baseMixins.extend({
   name: 'v-data-iterator',
 
   props: {
@@ -185,14 +203,16 @@ export default Themeable.extend({
       return this.$createElement('div', content)
     },
     genEmpty (originalItemsLength: number, filteredItemsLength: number) {
+      const lang = this.langInstance
+
       if (originalItemsLength === 0 && this.loading) {
-        const loading = this.$slots['loading'] || this.$vuetify.lang.t(this.loadingText)
+        const loading = this.$slots['loading'] || lang.t(this.loadingText)
         return this.genEmptyWrapper(loading)
       } else if (originalItemsLength === 0) {
-        const noData = this.$slots['no-data'] || this.$vuetify.lang.t(this.noDataText)
+        const noData = this.$slots['no-data'] || lang.t(this.noDataText)
         return this.genEmptyWrapper(noData)
       } else if (filteredItemsLength === 0) {
-        const noResults = this.$slots['no-results'] || this.$vuetify.lang.t(this.noResultsText)
+        const noResults = this.$slots['no-results'] || lang.t(this.noResultsText)
         return this.genEmptyWrapper(noResults)
       }
 

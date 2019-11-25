@@ -1,3 +1,4 @@
+// Styles
 import './VProgressLinear.sass'
 
 // Components
@@ -7,20 +8,25 @@ import {
 } from '../transitions'
 
 // Mixins
+import Bidirectional from '../../mixins/bidirectional'
 import Colorable from '../../mixins/colorable'
-import { factory as PositionableFactory } from '../../mixins/positionable'
 import Proxyable from '../../mixins/proxyable'
 import Themeable from '../../mixins/themeable'
+import { factory as PositionableFactory } from '../../mixins/positionable'
 
 // Utilities
-import { convertToUnit, getSlot } from '../../util/helpers'
 import mixins from '../../util/mixins'
+import {
+  convertToUnit,
+  getSlot,
+} from '../../util/helpers'
 
 // Types
 import { FunctionalComponentOptions } from 'vue/types'
 import { VNode } from 'vue'
 
 const baseMixins = mixins(
+  Bidirectional,
   Colorable,
   PositionableFactory(['absolute', 'fixed', 'top', 'bottom']),
   Proxyable,
@@ -128,7 +134,7 @@ export default baseMixins.extend({
 
       return {
         opacity: backgroundOpacity,
-        [this.$vuetify.rtl ? 'right' : 'left']: convertToUnit(this.normalizedValue, '%'),
+        [this.hasRtl ? 'right' : 'left']: convertToUnit(this.normalizedValue, '%'),
         width: convertToUnit(this.normalizedBuffer - this.normalizedValue, '%'),
       }
     },

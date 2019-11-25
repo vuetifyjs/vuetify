@@ -1,8 +1,16 @@
-// Helpers
-import { VNode } from 'vue'
-import mixins from '../../util/mixins'
+// Mixins
 import header, { TableHeader } from './mixins/header'
-import { wrapInArray, convertToUnit } from '../../util/helpers'
+
+// Utilities
+import mixins from '../../util/mixins'
+import {
+  convertToUnit,
+  getVuetify,
+  wrapInArray,
+} from '../../util/helpers'
+
+// Types
+import { VNode } from 'vue'
 
 export default mixins(header).extend({
   name: 'v-data-table-header-desktop',
@@ -51,6 +59,7 @@ export default mixins(header).extend({
           const sortIndex = this.options.sortBy.findIndex(k => k === header.value)
           const beingSorted = sortIndex >= 0
           const isDesc = this.options.sortDesc[sortIndex]
+          const lang = getVuetify(this, 'lang', { t: (text = '') => text })
 
           classes.push('sortable')
 
@@ -60,10 +69,10 @@ export default mixins(header).extend({
 
             attrs['aria-sort'] = isDesc ? 'descending' : 'ascending'
             attrs['aria-label'] += isDesc
-              ? this.$vuetify.lang.t('$vuetify.dataTable.ariaLabel.sortDescending')
-              : this.$vuetify.lang.t('$vuetify.dataTable.ariaLabel.sortAscending')
+              ? lang.t('$vuetify.dataTable.ariaLabel.sortDescending')
+              : lang.t('$vuetify.dataTable.ariaLabel.sortAscending')
           } else {
-            attrs['aria-label'] += this.$vuetify.lang.t('$vuetify.dataTable.ariaLabel.sortNone')
+            attrs['aria-label'] += lang.t('$vuetify.dataTable.ariaLabel.sortNone')
           }
 
           if (header.align === 'end') children.unshift(this.genSortIcon())
