@@ -13,7 +13,11 @@ import { factory as PositionableFactory } from '../../mixins/positionable'
 
 // Utilities
 import mixins from '../../util/mixins'
-import { getSlot, convertToUnit } from '../../util/helpers'
+import {
+  convertToUnit,
+  getSlot,
+  getObjectValueByPath,
+} from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
@@ -73,14 +77,14 @@ export default mixins(
       return this.bottom ? 'auto' : this.computedYOffset
     },
     computedLeft (): string {
-      if (this.$vuetify.rtl) {
+      if (this.isRtl) {
         return !this.left ? 'auto' : this.computedXOffset
       }
 
       return this.left ? 'auto' : this.computedXOffset
     },
     computedRight (): string {
-      if (this.$vuetify.rtl) {
+      if (this.isRtl) {
         return this.left ? 'auto' : this.computedXOffset
       }
 
@@ -94,6 +98,9 @@ export default mixins(
     },
     computedYOffset (): string {
       return this.calcPosition(this.offsetY)
+    },
+    isRtl (): boolean {
+      return getObjectValueByPath(this.$vuetify, 'rtl', false)
     },
     offset (): number {
       if (this.overlap) return this.dot ? 8 : 12
@@ -116,7 +123,9 @@ export default mixins(
       return `calc(100% - ${convertToUnit(offset || this.offset)})`
     },
     genBadge () {
-      const label = this.$attrs['aria-label'] || this.$vuetify.lang.t(this.label)
+      const fallback = { t: (text = '') => text }
+      const lang = getObjectValueByPath(this.$vuetify, 'lang', fallback)
+      const label = this.$attrs['aria-label'] || lang.t(this.label)
       const data = this.setBackgroundColor(this.color, {
         staticClass: 'v-badge__badge',
         style: this.styles,
@@ -133,6 +142,8 @@ export default mixins(
         }],
       })
       const badge = this.$createElement('span', data, [this.genBadgeContent()])
+
+      if (!this.transition) return badge
 
       return this.$createElement('transition', {
         props: {
