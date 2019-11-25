@@ -1,5 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VListGroup.ts should render a custom affix icons 1`] = `
+<div class="v-list-group">
+  <div tabindex="0"
+       aria-expanded="false"
+       role="button"
+       class="v-list-group__header v-list-item v-list-item--link theme--light"
+  >
+    <div class="v-list-item__icon v-list-group__header__prepend-icon">
+      <span>
+        bar
+      </span>
+    </div>
+    <div class="v-list-item__icon v-list-group__header__append-icon">
+      <span>
+        foo
+      </span>
+    </div>
+  </div>
+  <div class="v-list-group__items"
+       style="display: none;"
+  >
+  </div>
+</div>
+`;
+
 exports[`VListGroup.ts should render component and match snapshot 1`] = `
 <div class="v-list-group">
   <div tabindex="0"

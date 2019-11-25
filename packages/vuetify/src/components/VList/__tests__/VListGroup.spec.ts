@@ -91,17 +91,16 @@ describe('VListGroup.ts', () => {
   it('should render a custom affix icons', async () => {
     const wrapper = mountFunction({
       slots: {
-        appendIcon: {
+        'append-icon': {
           render: h => h('span', 'foo'),
         },
-        prependIcon: {
+        'prepend-icon': {
           render: h => h('span', 'bar'),
         },
       },
     })
 
-    expect(wrapper.html()).toContain('<span>foo</span>')
-    expect(wrapper.html()).toContain('<span>bar</span>')
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should respond to keydown.enter on header', () => {
