@@ -128,6 +128,7 @@ export default mixins(
       const fallback = { t: (text = '') => text }
       const lang = getObjectValueByPath(this.$vuetify, 'lang', fallback)
       const label = this.$attrs['aria-label'] || lang.t(this.label)
+
       const data = this.setBackgroundColor(this.color, {
         staticClass: 'v-badge__badge',
         style: this.styles,
@@ -143,6 +144,7 @@ export default mixins(
           value: this.isActive,
         }],
       })
+
       const badge = this.$createElement('span', data, [this.genBadgeContent()])
 
       if (!this.transition) return badge
