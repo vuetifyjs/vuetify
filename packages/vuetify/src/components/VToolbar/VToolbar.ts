@@ -121,7 +121,7 @@ export default VSheet.extend({
   },
 
   methods: {
-    genBackground () {
+    genBackground (): VNode {
       const props = {
         height: convertToUnit(this.computedHeight),
         src: this.src,
@@ -135,15 +135,18 @@ export default VSheet.extend({
         staticClass: 'v-toolbar__image',
       }, [image])
     },
-    genContent () {
+    genContent (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-toolbar__content',
         style: {
           height: convertToUnit(this.computedContentHeight),
         },
-      }, getSlot(this))
+      }, this.genContentChildren())
     },
-    genExtension () {
+    genContentChildren (): VNode[] {
+      return getSlot(this) || []
+    },
+    genExtension (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-toolbar__extension',
         style: {

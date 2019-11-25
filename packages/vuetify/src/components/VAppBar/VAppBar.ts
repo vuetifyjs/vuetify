@@ -14,7 +14,10 @@ import SSRBootable from '../../mixins/ssr-bootable'
 import Toggleable from '../../mixins/toggleable'
 
 // Utilities
-import { convertToUnit } from '../../util/helpers'
+import {
+  convertToUnit,
+  getSlot,
+} from '../../util/helpers'
 import mixins from '../../util/mixins'
 
 // Types
@@ -24,30 +27,23 @@ const baseMixins = mixins(
   VToolbar,
   Scrollable,
   SSRBootable,
-  Toggleable,
-  Applicationable('top', [
-    'clippedLeft',
-    'clippedRight',
-    'computedHeight',
-    'invertedScroll',
-    'isExtended',
-    'isProminent',
-    'value',
-  ])
+  Toggleable
 )
 
 /* @vue/component */
-export default baseMixins.extend({
+const BaseAppBar = baseMixins.extend({
   name: 'v-app-bar',
 
   directives: { Scroll },
 
   props: {
+    app: Boolean,
     clippedLeft: Boolean,
     clippedRight: Boolean,
     collapseOnScroll: Boolean,
     elevateOnScroll: Boolean,
     fadeImgOnScroll: Boolean,
+    fixed: Boolean,
     hideOnScroll: Boolean,
     invertedScroll: Boolean,
     scrollOffScreen: Boolean,
@@ -236,6 +232,7 @@ export default baseMixins.extend({
   },
 
   methods: {
+    callUpdate () { /* noop */ },
     genBackground () {
       const render = VToolbar.options.methods.genBackground.call(this)
 
@@ -244,6 +241,12 @@ export default baseMixins.extend({
       })
 
       return render
+    },
+    genContentChildren (): VNode[] {
+      return getSlot(this, 'default', {
+        collapsed: this.isCollapsed,
+        scrollingUp: this.isScrollingUp,
+      }) || VToolbar.options.methods.genContentChildren.call(this)
     },
     updateApplication (): number {
       return this.invertedScroll
@@ -283,3 +286,18 @@ export default baseMixins.extend({
     return render
   },
 })
+
+export default mixins(
+  BaseAppBar,
+  Applicationable('top', [
+    'clippedLeft',
+    'clippedRight',
+    'computedHeight',
+    'invertedScroll',
+    'isExtended',
+    'isProminent',
+    'value',
+  ])
+)
+
+export { BaseAppBar }
