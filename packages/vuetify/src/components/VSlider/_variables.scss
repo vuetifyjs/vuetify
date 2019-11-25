@@ -6,3 +6,5 @@ $slider-thumb-size: 12px !default;
 $slider-thumb-border-radius: 50% !default;
 $slider-thumb-focused-size-increase: 24px !default;
 $slider-tick-border-radius: 0 !default;
+$slider-transition: .3s map-get($transition, 'swing') !default;
+$slider-thumb-label-transition: .3s map-get($transition, 'fast-in-fast-out') !default;

@@ -31,12 +31,12 @@
 .v-slider__track
   &-background, &-fill
     position: absolute
-    transition: .3s map-get($transition, 'swing')
+    transition: $slider-transition
 
 .v-slider__thumb-container
   outline: none
   position: absolute
-  transition: .3s map-get($transition, 'swing')
+  transition: $slider-transition
   top: 50%
 
   &:hover
@@ -50,7 +50,7 @@
   left: -#{$slider-thumb-size / 2}
   top: 50%
   border-radius: $slider-thumb-border-radius
-  transition: .3s map-get($transition, 'swing')
+  transition: $slider-transition
   transform: translateY(-50%)
   user-select: none
 
@@ -76,7 +76,7 @@
   position: absolute
   opacity: 0
   background-color: rgba(0, 0, 0, 0.5) // TODO: move to theme mixin?
-  transition: .3s map-get($transition, 'swing')
+  transition: $slider-transition
   border-radius: $slider-tick-border-radius
 
   &--filled
@@ -105,7 +105,7 @@
   position: absolute
   left: 0
   top: 0
-  transition: .3s map-get($transition, 'fast-in-fast-out')
+  transition: $slider-thumb-label-transition
 
 .v-slider__thumb-label
   display: flex
@@ -120,7 +120,7 @@
   left: 0
   bottom: 100%
   user-select: none
-  transition: .3s map-get($transition, 'fast-in-fast-out')
+  transition: $slider-thumb-label-transition
 
 // Modifiers
 .v-slider--horizontal
