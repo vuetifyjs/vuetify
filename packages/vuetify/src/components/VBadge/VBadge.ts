@@ -102,6 +102,8 @@ export default mixins(
     isRtl (): boolean {
       return getObjectValueByPath(this.$vuetify, 'rtl', false)
     },
+    // Default fallback if offsetX
+    // or offsetY are undefined.
     offset (): number {
       if (this.overlap) return this.dot ? 8 : 12
       return this.dot ? 2 : 4
@@ -157,6 +159,7 @@ export default mixins(
       const slot = getSlot(this, 'badge')
 
       if (slot) return slot
+      // Dot prop shows no content
       if (this.dot) return undefined
       if (this.content) return String(this.content)
       if (this.icon) return this.genIcon()
