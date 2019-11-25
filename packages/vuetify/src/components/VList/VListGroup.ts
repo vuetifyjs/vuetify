@@ -125,12 +125,12 @@ export default baseMixins.extend<options>().extend({
     genAppendIcon (): VNode | null {
       const icon = !this.subGroup ? this.appendIcon : false
 
-      if (!icon && !this.$slots.appendIcon) return null
+      if (!icon && !this.$slots['append-icon']) return null
 
       return this.$createElement(VListItemIcon, {
         staticClass: 'v-list-group__header__append-icon',
       }, [
-        this.$slots.appendIcon || this.genIcon(icon),
+        this.$slots['append-icon'] || this.genIcon(icon),
       ])
     },
     genHeader (): VNode {
@@ -178,12 +178,11 @@ export default baseMixins.extend<options>().extend({
           ? '$subgroup'
           : false
 
-      if (!icon && !this.$slots.prependIcon) return null
-
+      if (!icon && !this.$slots['prepend-icon']) return null
       return this.$createElement(VListItemIcon, {
         staticClass: 'v-list-group__header__prepend-icon',
       }, [
-        this.$slots.prependIcon || this.genIcon(icon),
+        this.$slots['prepend-icon'] || this.genIcon(icon),
       ])
     },
     onRouteChange (to: Route) {
