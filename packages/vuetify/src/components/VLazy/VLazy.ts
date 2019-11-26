@@ -28,6 +28,10 @@ export default mixins(Toggleable).extend({
         threshold: undefined,
       }),
     },
+    tag: {
+      type: String,
+      default: 'div',
+    },
     transition: {
       type: String,
       default: 'fade-transition',
@@ -69,7 +73,7 @@ export default mixins(Toggleable).extend({
   },
 
   render (h): VNode {
-    return h('div', {
+    return h(this.tag, {
       staticClass: 'v-lazy',
       attrs: this.$attrs,
       directives: [{
