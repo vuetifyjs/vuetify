@@ -1,6 +1,6 @@
 <template>
   <div>
-    <base-heading>Generic.Pages.api</base-heading>
+    <base-heading>{{ computedHeading }}</base-heading>
 
     <base-markdown>Generic.Pages.apiText</base-markdown>
 
@@ -100,6 +100,10 @@
 
 <script>
   // Utilities
+  import {
+    get,
+  } from 'vuex-pathify'
+
   import api from '@vuetify/api-generator'
 
   const propProps = [
@@ -201,6 +205,7 @@
     }),
 
     computed: {
+      ...get('documentation', ['namespace', 'page']),
       component () {
         const component = {}
 
@@ -215,6 +220,11 @@
       },
       computedTabs () {
         return this.tabs.filter(tab => (this.component[tab] || []).length > 0)
+      },
+      computedHeading () {
+        const title = `${this.namespace}.${this.page}.apiHeading`
+
+        return this.$te(title) ? 'apiHeading' : 'Generic.Pages.api'
       },
     },
 

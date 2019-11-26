@@ -1,4 +1,5 @@
 {
+  "apiHeading": "### API",
   "heading": "# Theme",
   "headingText": "Easily change the colors of your application programmatically. Rebuild the default stylesheet and customize various aspects of the framework for your particular needs.",
   "lightAndDarkHeader": "## Light and Dark",
@@ -28,5 +29,10 @@
   "variantsText2": "You can now import your custom theme object and apply it to Vuetify",
   "variantsText3": "Below is a full list of the overwritable keys on the theme object:",
   "disableSubheader": "### Disable theme",
-  "disableText1": "You can disable theme functionality by using the **disable** property with a value of **true**. This will prevent the creation of the Vuetify stylesheet."
+  "disableText1": "You can disable theme functionality by using the **disable** property with a value of **true**. This will prevent the creation of the Vuetify stylesheet.",
+  "provideHeading1": "## Theme Provider",
+  "provideText1": "The Vuetify theme system is propagated through the [provide](https://vuejs.org/v2/api/#provide-inject) functionality in Vue. There may be situations in which you need to manually change the provided theme (dark or light).",
+  "props": {
+    "root": "Use the current value of `$vuetify.theme.dark` as opposed to the provided one."
+  }
 }

@@ -1,22 +1,16 @@
-import { VNode } from 'vue'
-import Themeable from '../mixins/themeable'
-import mixins from './mixins'
+// Components
+import { VThemeProvider } from '../components/VThemeProvider'
+
+// Utilities
+import { deprecate } from './console'
 
 /* @vue/component */
-export default mixins(Themeable).extend({
-  name: 'theme-provider',
-
-  props: {
-    root: Boolean,
-  },
-
-  computed: {
-    isDark (): boolean {
-      return this.root ? this.rootIsDark : Themeable.options.computed.isDark.call(this)
-    },
-  },
-
-  render (): VNode {
-    return this.$slots.default! && this.$slots.default!.find(node => !node.isComment && node.text !== ' ')!
+export default VThemeProvider.extend({
+  created () {
+    deprecate(
+      '<theme-provider></theme-provider>',
+      '<v-theme-provider></v-theme-provider>',
+      this,
+    )
   },
 })
