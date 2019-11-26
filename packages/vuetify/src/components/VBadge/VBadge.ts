@@ -182,9 +182,9 @@ export default mixins(
     const badge = [this.genBadgeWrapper()]
     const children = [getSlot(this)]
     const {
-      'aria-atomic': x,
-      'aria-label': y,
-      'aria-live': z,
+      'aria-atomic': _x,
+      'aria-label': _y,
+      'aria-live': _z,
       role,
       title,
       ...attrs
