@@ -5,6 +5,7 @@ import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 
 // Mixins
+import Bidirectional from '../../mixins/bidirectional'
 import Colorable from '../../mixins/colorable'
 import Localable from '../../mixins/localable'
 import Themeable from '../../mixins/themeable'
@@ -19,6 +20,7 @@ import { DatePickerFormatter } from './util/createNativeLocaleFormatter'
 import { PropValidator } from 'vue/types/options'
 
 export default mixins(
+  Bidirectional,
   Colorable,
   Localable,
   Themeable
@@ -90,7 +92,7 @@ export default mixins(
           },
         },
       }, [
-        this.$createElement(VIcon, ((change < 0) === !this.$vuetify.rtl) ? this.prevIcon : this.nextIcon),
+        this.$createElement(VIcon, ((change < 0) === !this.hasRtl) ? this.prevIcon : this.nextIcon),
       ])
     },
     calculateChange (sign: number) {
@@ -117,7 +119,7 @@ export default mixins(
 
       const transition = this.$createElement('transition', {
         props: {
-          name: (this.isReversing === !this.$vuetify.rtl) ? 'tab-reverse-transition' : 'tab-transition',
+          name: (this.isReversing === !this.hasRtl) ? 'tab-reverse-transition' : 'tab-transition',
         },
       }, [header])
 

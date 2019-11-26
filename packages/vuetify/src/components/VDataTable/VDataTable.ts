@@ -21,9 +21,13 @@ import VSimpleTable from './VSimpleTable'
 import MobileRow from './MobileRow'
 import ripple from '../../directives/ripple'
 
+// Mixins
+import Bidirectional from '../../mixins/bidirectional'
+
 // Helpers
 import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots, getSlot, defaultFilter, FilterFn, camelizeObjectKeys } from '../../util/helpers'
 import { breaking } from '../../util/console'
+import mixins from '../../util/mixins'
 
 function filterFn (item: any, search: string | null, filter: FilterFn) {
   return (header: TableHeader) => {
@@ -52,8 +56,13 @@ function searchTableItems (
   return filtered
 }
 
+const baseMixins = mixins(
+  VDataIterator,
+  Bidirectional
+)
+
 /* @vue/component */
-export default VDataIterator.extend({
+export default baseMixins.extend({
   name: 'v-data-table',
 
   // https://github.com/vuejs/vue/issues/6872
@@ -456,7 +465,7 @@ export default VDataIterator.extend({
         props: {
           headers: this.computedHeaders,
           item,
-          rtl: this.$vuetify.rtl,
+          rtl: this.hasRtl,
         },
         scopedSlots,
         on: {

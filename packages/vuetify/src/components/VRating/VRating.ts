@@ -5,6 +5,7 @@ import './VRating.sass'
 import VIcon from '../VIcon'
 
 // Mixins
+import Bidirectional from '../../mixins/bidirectional'
 import Colorable from '../../mixins/colorable'
 import Delayable from '../../mixins/delayable'
 import Sizeable from '../../mixins/sizeable'
@@ -30,6 +31,7 @@ type ItemSlotProps = {
 
 /* @vue/component */
 export default mixins(
+  Bidirectional,
   Colorable,
   Delayable,
   Rippleable,
@@ -159,7 +161,7 @@ export default mixins(
     },
     genHoverIndex (e: MouseEvent, i: number) {
       let isHalf = this.isHalfEvent(e)
-      if (this.$vuetify.rtl) isHalf = !isHalf
+      if (this.hasRtl) isHalf = !isHalf
       return i + (isHalf ? 0.5 : 1)
     },
     getIconName (props: ItemSlotProps): string {

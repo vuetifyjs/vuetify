@@ -7,6 +7,7 @@ import VLabel from '../VLabel'
 import VMessages from '../VMessages'
 
 // Mixins
+import Bidirectional from '../../mixins/bidirectional'
 import BindsAttrs from '../../mixins/binds-attrs'
 import Validatable from '../../mixins/validatable'
 
@@ -22,6 +23,7 @@ import { VNode, VNodeData, PropType } from 'vue'
 import mixins from '../../util/mixins'
 
 const baseMixins = mixins(
+  Bidirectional,
   BindsAttrs,
   Validatable
 )

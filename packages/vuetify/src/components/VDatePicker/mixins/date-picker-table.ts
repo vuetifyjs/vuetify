@@ -4,6 +4,7 @@ import '../VDatePickerTable.sass'
 import Touch, { TouchWrapper } from '../../../directives/touch'
 
 // Mixins
+import Bidirectional from '../../../mixins/bidirectional'
 import Colorable from '../../../mixins/colorable'
 import Localable from '../../../mixins/localable'
 import Themeable from '../../../mixins/themeable'
@@ -21,6 +22,7 @@ import { DateEvents, DateEventColors, DateEventColorValue } from '../VDatePicker
 type CalculateTableDateFunction = (v: number) => string
 
 export default mixins(
+  Bidirectional,
   Colorable,
   Localable,
   Themeable
@@ -59,7 +61,7 @@ export default mixins(
 
   computed: {
     computedTransition (): string {
-      return (this.isReversing === !this.$vuetify.rtl) ? 'tab-reverse-transition' : 'tab-transition'
+      return (this.isReversing === !this.hasRtl) ? 'tab-reverse-transition' : 'tab-transition'
     },
     displayedMonth (): number {
       return Number(this.tableDate.split('-')[1]) - 1

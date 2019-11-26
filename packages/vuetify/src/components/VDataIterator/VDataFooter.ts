@@ -5,12 +5,15 @@ import VSelect from '../VSelect/VSelect'
 import VIcon from '../VIcon'
 import VBtn from '../VBtn'
 
+// Mixins
+import Bidirectional from '../../mixins/bidirectional'
+
 // Types
-import Vue, { VNode, VNodeChildrenArrayContents } from 'vue'
+import { VNode, VNodeChildrenArrayContents } from 'vue'
 import { DataOptions, DataPagination } from '../VData/VData'
 import { PropValidator } from 'vue/types/options'
 
-export default Vue.extend({
+export default Bidirectional.extend({
   name: 'v-data-footer',
 
   props: {
@@ -173,14 +176,14 @@ export default Vue.extend({
         this.onPreviousPage,
         this.options.page === 1,
         this.$vuetify.lang.t('$vuetify.dataFooter.prevPage'),
-        this.$vuetify.rtl ? this.nextIcon : this.prevIcon
+        this.hasRtl ? this.nextIcon : this.prevIcon
       ))
 
       after.push(this.genIcon(
         this.onNextPage,
         this.disableNextPageIcon,
         this.$vuetify.lang.t('$vuetify.dataFooter.nextPage'),
-        this.$vuetify.rtl ? this.prevIcon : this.nextIcon
+        this.hasRtl ? this.prevIcon : this.nextIcon
       ))
 
       if (this.showFirstLastPage) {
@@ -188,14 +191,14 @@ export default Vue.extend({
           this.onFirstPage,
           this.options.page === 1,
           this.$vuetify.lang.t('$vuetify.dataFooter.firstPage'),
-          this.$vuetify.rtl ? this.lastIcon : this.firstIcon
+          this.hasRtl ? this.lastIcon : this.firstIcon
         ))
 
         after.push(this.genIcon(
           this.onLastPage,
           this.options.page >= this.pagination.pageCount || this.options.itemsPerPage === -1,
           this.$vuetify.lang.t('$vuetify.dataFooter.lastPage'),
-          this.$vuetify.rtl ? this.firstIcon : this.lastIcon
+          this.hasRtl ? this.firstIcon : this.lastIcon
         ))
       }
 

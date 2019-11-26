@@ -149,8 +149,8 @@ export default mixins<options &
       const endDir = this.vertical ? 'top' : 'right'
       const valueDir = this.vertical ? 'height' : 'width'
 
-      const start = this.$vuetify.rtl ? 'auto' : '0'
-      const end = this.$vuetify.rtl ? '0' : 'auto'
+      const start = this.hasRtl ? 'auto' : '0'
+      const end = this.hasRtl ? '0' : 'auto'
       const value = this.disabled ? `calc(${this.inputWidth}% - 10px)` : `${this.inputWidth}%`
 
       return {
@@ -161,7 +161,7 @@ export default mixins<options &
       }
     },
     trackStyles (): Partial<CSSStyleDeclaration> {
-      const startDir = this.vertical ? this.$vuetify.rtl ? 'bottom' : 'top' : this.$vuetify.rtl ? 'left' : 'right'
+      const startDir = this.vertical ? this.hasRtl ? 'bottom' : 'top' : this.hasRtl ? 'left' : 'right'
       const endDir = this.vertical ? 'height' : 'width'
 
       const start = '0px'
@@ -322,7 +322,7 @@ export default mixins<options &
       if (this.vertical) range.reverse()
 
       const ticks = range.map(i => {
-        const index = this.$vuetify.rtl ? this.maxValue - i : i
+        const index = this.hasRtl ? this.maxValue - i : i
         const children = []
 
         if (this.tickLabels[index]) {
@@ -332,7 +332,7 @@ export default mixins<options &
         }
 
         const width = i * (100 / this.numTicks)
-        const filled = this.$vuetify.rtl ? (100 - this.inputWidth) < width : width < this.inputWidth
+        const filled = this.hasRtl ? (100 - this.inputWidth) < width : width < this.inputWidth
 
         return this.$createElement('span', {
           key: i,
@@ -441,7 +441,7 @@ export default mixins<options &
     },
     getThumbContainerStyles (width: number): object {
       const direction = this.vertical ? 'top' : 'left'
-      let value = this.$vuetify.rtl ? 100 - width : width
+      let value = this.hasRtl ? 100 - width : width
       value = this.vertical ? 100 - value : value
 
       return {
@@ -534,7 +534,7 @@ export default mixins<options &
       let clickPos = Math.min(Math.max((clickOffset - trackStart) / trackLength, 0), 1) || 0
 
       if (this.vertical) clickPos = 1 - clickPos
-      if (this.$vuetify.rtl) clickPos = 1 - clickPos
+      if (this.hasRtl) clickPos = 1 - clickPos
 
       const isInsideTrack = clickOffset >= trackStart && clickOffset <= trackStart + trackLength
       const value = parseFloat(this.min) + clickPos * (this.maxValue - this.minValue)
@@ -554,7 +554,7 @@ export default mixins<options &
       if ([left, right, down, up].includes(e.keyCode)) {
         this.keyPressed += 1
 
-        const increase = this.$vuetify.rtl ? [left, up] : [right, up]
+        const increase = this.hasRtl ? [left, up] : [right, up]
         const direction = increase.includes(e.keyCode) ? 1 : -1
         const multiplier = e.shiftKey ? 3 : (e.ctrlKey ? 2 : 1)
 

@@ -2,6 +2,7 @@
 import './VApp.sass'
 
 // Mixins
+import Bidirectional from '../../mixins/bidirectional'
 import Themeable from '../../mixins/themeable'
 
 // Utilities
@@ -9,6 +10,7 @@ import mixins from '../../util/mixins'
 
 /* @vue/component */
 export default mixins(
+  Bidirectional,
   Themeable
 ).extend({
   name: 'v-app',
@@ -46,8 +48,8 @@ export default mixins(
     return h('div', {
       staticClass: 'v-application',
       class: {
-        'v-application--is-rtl': this.$vuetify.rtl,
-        'v-application--is-ltr': !this.$vuetify.rtl,
+        'v-application--is-rtl': this.hasRtl,
+        'v-application--is-ltr': !this.hasRtl,
         ...this.themeClasses,
       },
       attrs: { 'data-app': true },

@@ -7,6 +7,7 @@ import VTabsItems from './VTabsItems'
 import VTabsSlider from './VTabsSlider'
 
 // Mixins
+import Bidirectional from '../../mixins/bidirectional'
 import Colorable from '../../mixins/colorable'
 import Proxyable from '../../mixins/proxyable'
 import Themeable from '../../mixins/themeable'
@@ -23,6 +24,7 @@ import mixins from '../../util/mixins'
 import { VNode } from 'vue/types'
 
 const baseMixins = mixins(
+  Bidirectional,
   Colorable,
   Proxyable,
   Themeable
@@ -109,7 +111,7 @@ export default baseMixins.extend<options>().extend({
       }
     },
     isReversed (): boolean {
-      return this.$vuetify.rtl && this.vertical
+      return this.hasRtl && this.vertical
     },
     sliderStyles (): object {
       return {

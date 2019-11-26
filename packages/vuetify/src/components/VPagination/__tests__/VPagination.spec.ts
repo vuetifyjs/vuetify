@@ -23,7 +23,10 @@ describe('VPagination.ts', () => {
     jest.useFakeTimers()
 
     mountFunction = (options?: MountOptions<Instance>) => {
-      return mount(VPagination, options)
+      return mount(VPagination, {
+        mocks: { $vuetify: {} },
+        ...options,
+      })
     }
   })
 
@@ -59,12 +62,21 @@ describe('VPagination.ts', () => {
         length: 5,
         value: 2,
       },
+      mocks: {
+        $vuetify: {
+          rtl: true,
+          icons: {
+            iconfont: 'mdi',
+            values: {
+              next: 'mdi-chevron-right',
+              prev: 'mdi-chevron-left',
+            },
+          },
+        },
+      },
     })
-    wrapper.vm.$vuetify.rtl = true
-    await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    wrapper.vm.$vuetify.rtl = undefined
   })
 
   it('emits an event when pagination item is clicked', async () => {

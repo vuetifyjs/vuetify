@@ -5,6 +5,7 @@ import {
 } from '../transitions'
 
 // Mixins
+import Bidirectional from '../../mixins/bidirectional'
 import { inject as RegistrableInject } from '../../mixins/registrable'
 
 // Helpers
@@ -17,6 +18,7 @@ import mixins from '../../util/mixins'
 import { VNode, FunctionalComponentOptions, VNodeData } from 'vue'
 
 const baseMixins = mixins(
+  Bidirectional,
   RegistrableInject('stepper', 'v-stepper-content', 'v-stepper')
 )
 
@@ -58,7 +60,7 @@ export default baseMixins.extend<options>().extend({
   computed: {
     computedTransition (): FunctionalComponentOptions {
       // Fix for #8978
-      const reverse = this.$vuetify.rtl ? !this.isReverse : this.isReverse
+      const reverse = this.hasRtl ? !this.isReverse : this.isReverse
 
       return reverse
         ? VTabReverseTransition
