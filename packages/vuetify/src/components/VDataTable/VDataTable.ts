@@ -465,7 +465,7 @@ export default baseMixins.extend({
         props: {
           headers: this.computedHeaders,
           item,
-          rtl: this.hasRtl,
+          rtl: this.isRtl,
         },
         scopedSlots,
         on: {

@@ -7,7 +7,7 @@ const Bidirectional = Vue.extend({
   props: { rtl: Boolean },
 
   computed: {
-    hasRtl (): boolean {
+    isRtl (): boolean {
       return this.rtl || this.$vuetify.rtl
     },
   },

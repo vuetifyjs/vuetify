@@ -92,7 +92,7 @@ export default mixins(
           },
         },
       }, [
-        this.$createElement(VIcon, ((change < 0) === !this.hasRtl) ? this.prevIcon : this.nextIcon),
+        this.$createElement(VIcon, ((change < 0) === !this.isRtl) ? this.prevIcon : this.nextIcon),
       ])
     },
     calculateChange (sign: number) {
@@ -119,7 +119,7 @@ export default mixins(
 
       const transition = this.$createElement('transition', {
         props: {
-          name: (this.isReversing === !this.hasRtl) ? 'tab-reverse-transition' : 'tab-transition',
+          name: (this.isReversing === !this.isRtl) ? 'tab-reverse-transition' : 'tab-transition',
         },
       }, [header])
 

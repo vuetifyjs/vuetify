@@ -111,7 +111,7 @@ export default baseMixins.extend<options>().extend({
       }
     },
     isReversed (): boolean {
-      return this.hasRtl && this.vertical
+      return this.isRtl && this.vertical
     },
     sliderStyles (): object {
       return {

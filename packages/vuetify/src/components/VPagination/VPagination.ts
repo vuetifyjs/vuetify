@@ -188,9 +188,9 @@ export default mixins(
 
   render (h): VNode {
     const children = [
-      this.genIcon(h, this.hasRtl ? this.nextIcon : this.prevIcon, this.value <= 1, this.previous),
+      this.genIcon(h, this.isRtl ? this.nextIcon : this.prevIcon, this.value <= 1, this.previous),
       this.genItems(h),
-      this.genIcon(h, this.hasRtl ? this.prevIcon : this.nextIcon, this.value >= this.length, this.next),
+      this.genIcon(h, this.isRtl ? this.prevIcon : this.nextIcon, this.value >= this.length, this.next),
     ]
 
     return h('ul', {

@@ -48,8 +48,8 @@ export default mixins(
     return h('div', {
       staticClass: 'v-application',
       class: {
-        'v-application--is-rtl': this.hasRtl,
-        'v-application--is-ltr': !this.hasRtl,
+        'v-application--is-rtl': this.isRtl,
+        'v-application--is-ltr': !this.isRtl,
         ...this.themeClasses,
       },
       attrs: { 'data-app': true },

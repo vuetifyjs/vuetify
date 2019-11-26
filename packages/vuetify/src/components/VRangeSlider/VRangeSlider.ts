@@ -73,7 +73,7 @@ export default VSlider.extend({
       const styles = VSlider.options.computed.trackFillStyles.call(this)
       const fillPercent = Math.abs(this.inputWidth[0] - this.inputWidth[1])
       const dir = this.vertical ? 'height' : 'width'
-      const start = this.vertical ? this.hasRtl ? 'top' : 'bottom' : this.hasRtl ? 'right' : 'left'
+      const start = this.vertical ? this.isRtl ? 'top' : 'bottom' : this.isRtl ? 'right' : 'left'
 
       styles[dir] = `${fillPercent}%`
       styles[start] = `${this.inputWidth[0]}%`
@@ -84,7 +84,7 @@ export default VSlider.extend({
 
   methods: {
     getTrackStyle (startLength: number, endLength: number, startPadding = 0, endPadding = 0) {
-      const startDir = this.vertical ? this.hasRtl ? 'top' : 'bottom' : this.hasRtl ? 'right' : 'left'
+      const startDir = this.vertical ? this.isRtl ? 'top' : 'bottom' : this.isRtl ? 'right' : 'left'
       const endDir = this.vertical ? 'height' : 'width'
 
       const start = `calc(${startLength}% + ${startPadding}px)`
@@ -122,7 +122,7 @@ export default VSlider.extend({
           [this.inputWidth[1], Math.abs(100 - this.inputWidth[1]), disabledPadding, 0],
         ]
 
-        if (this.hasRtl) sections.reverse()
+        if (this.isRtl) sections.reverse()
 
         children.push(...sections.map(section => this.$createElement('div', this.setBackgroundColor(this.computedTrackColor, {
           staticClass: 'v-slider__track-background',

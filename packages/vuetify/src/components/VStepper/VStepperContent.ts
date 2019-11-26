@@ -60,7 +60,7 @@ export default baseMixins.extend<options>().extend({
   computed: {
     computedTransition (): FunctionalComponentOptions {
       // Fix for #8978
-      const reverse = this.hasRtl ? !this.isReverse : this.isReverse
+      const reverse = this.isRtl ? !this.isReverse : this.isReverse
 
       return reverse
         ? VTabReverseTransition

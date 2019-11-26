@@ -184,9 +184,9 @@ export const BaseSlideGroup = mixins<options &
     genIcon (location: 'prev' | 'next'): VNode | null {
       let icon = location
 
-      if (this.hasRtl && location === 'prev') {
+      if (this.isRtl && location === 'prev') {
         icon = 'next'
-      } else if (this.hasRtl && location === 'next') {
+      } else if (this.isRtl && location === 'next') {
         icon = 'prev'
       }
 
@@ -273,7 +273,7 @@ export const BaseSlideGroup = mixins<options &
       content.style.setProperty('transition', null)
       content.style.setProperty('willChange', null)
 
-      if (this.hasRtl) {
+      if (this.isRtl) {
         /* istanbul ignore else */
         if (this.scrollOffset > 0 || !this.isOverflowing) {
           this.scrollOffset = 0
@@ -307,13 +307,13 @@ export const BaseSlideGroup = mixins<options &
         this.scrollOffset = this.calculateCenteredOffset(
           this.selectedItem.$el as HTMLElement,
           this.widths,
-          this.hasRtl
+          this.isRtl
         )
       } else if (this.isOverflowing) {
         this.scrollOffset = this.calculateUpdatedOffset(
           this.selectedItem.$el as HTMLElement,
           this.widths,
-          this.hasRtl,
+          this.isRtl,
           this.scrollOffset
         )
       }
@@ -356,7 +356,7 @@ export const BaseSlideGroup = mixins<options &
         // Force reflow
         content: this.$refs.content ? this.$refs.content.clientWidth : 0,
         wrapper: this.$refs.wrapper ? this.$refs.wrapper.clientWidth : 0,
-      }, this.hasRtl, this.scrollOffset)
+      }, this.isRtl, this.scrollOffset)
     },
     setWidths /* istanbul ignore next */  () {
       window.requestAnimationFrame(() => {

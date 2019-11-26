@@ -176,14 +176,14 @@ export default Bidirectional.extend({
         this.onPreviousPage,
         this.options.page === 1,
         this.$vuetify.lang.t('$vuetify.dataFooter.prevPage'),
-        this.hasRtl ? this.nextIcon : this.prevIcon
+        this.isRtl ? this.nextIcon : this.prevIcon
       ))
 
       after.push(this.genIcon(
         this.onNextPage,
         this.disableNextPageIcon,
         this.$vuetify.lang.t('$vuetify.dataFooter.nextPage'),
-        this.hasRtl ? this.prevIcon : this.nextIcon
+        this.isRtl ? this.prevIcon : this.nextIcon
       ))
 
       if (this.showFirstLastPage) {
@@ -191,14 +191,14 @@ export default Bidirectional.extend({
           this.onFirstPage,
           this.options.page === 1,
           this.$vuetify.lang.t('$vuetify.dataFooter.firstPage'),
-          this.hasRtl ? this.lastIcon : this.firstIcon
+          this.isRtl ? this.lastIcon : this.firstIcon
         ))
 
         after.push(this.genIcon(
           this.onLastPage,
           this.options.page >= this.pagination.pageCount || this.options.itemsPerPage === -1,
           this.$vuetify.lang.t('$vuetify.dataFooter.lastPage'),
-          this.hasRtl ? this.firstIcon : this.lastIcon
+          this.isRtl ? this.firstIcon : this.lastIcon
         ))
       }
 

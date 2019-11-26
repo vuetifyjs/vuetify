@@ -174,7 +174,7 @@ export default baseMixins.extend({
     genControlIcons () {
       const icons = []
 
-      const prevIcon = this.hasRtl
+      const prevIcon = this.isRtl
         ? this.nextIcon
         : this.prevIcon
 
@@ -188,7 +188,7 @@ export default baseMixins.extend({
         icon && icons.push(icon)
       }
 
-      const nextIcon = this.hasRtl
+      const nextIcon = this.isRtl
         ? this.prevIcon
         : this.nextIcon
 
@@ -221,7 +221,7 @@ export default baseMixins.extend({
       return prevIndex
     },
     next () {
-      this.isReverse = this.hasRtl
+      this.isReverse = this.isRtl
 
       /* istanbul ignore if */
       if (!this.hasActiveItems || !this.hasNext) return
@@ -232,7 +232,7 @@ export default baseMixins.extend({
       this.internalValue = this.getValue(item, nextIndex)
     },
     prev () {
-      this.isReverse = !this.hasRtl
+      this.isReverse = !this.isRtl
 
       /* istanbul ignore if */
       if (!this.hasActiveItems || !this.hasPrev) return
@@ -262,10 +262,10 @@ export default baseMixins.extend({
     if (!this.touchless) {
       const value = this.touch || {
         left: () => {
-          this.hasRtl ? this.prev() : this.next()
+          this.isRtl ? this.prev() : this.next()
         },
         right: () => {
-          this.hasRtl ? this.next() : this.prev()
+          this.isRtl ? this.next() : this.prev()
         },
         end: (e: TouchEvent) => {
           e.stopPropagation()

@@ -61,7 +61,7 @@ export default mixins(
 
   computed: {
     computedTransition (): string {
-      return (this.isReversing === !this.hasRtl) ? 'tab-reverse-transition' : 'tab-transition'
+      return (this.isReversing === !this.isRtl) ? 'tab-reverse-transition' : 'tab-transition'
     },
     displayedMonth (): number {
       return Number(this.tableDate.split('-')[1]) - 1

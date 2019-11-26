@@ -146,7 +146,7 @@ export default baseMixins.extend<options>().extend({
 
       if (this.labelValue && this.prependWidth) offset -= this.prependWidth
 
-      return (this.hasRtl === this.reverse) ? {
+      return (this.isRtl === this.reverse) ? {
         left: offset,
         right: 'auto',
       } : {
