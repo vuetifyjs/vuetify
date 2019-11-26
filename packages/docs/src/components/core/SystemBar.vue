@@ -3,37 +3,85 @@
     v-if="!hasClosedBanner"
     id="core-system-bar"
     app
-    color="black"
+    color="#1D285F"
     dark
-    window
-    class="justify-center"
+    height="76"
+    class="align-center"
+    @click="$ga.event('system-bar', 'click', 'vueschool')"
   >
-    <div class="px-6">
-      <strong>Join us</strong>
-
-      at the upcoming VueConf Toronto to learn about the future of Vuetify! Use&nbsp;
-
-      <a
-        href="https://vuetoronto.com/tickets"
-        target="_blank"
-      >
-        VUETIFYTO for 15% off!
-
-        <v-icon
-          color="primary"
-          small
-        >
-          mdi-arrow-right
-        </v-icon>
-      </a>
-    </div>
-
-    <v-icon
-      class="core-system-bar__close"
-      @click="close"
+    <v-responsive
+      class="mx-auto shrink pr-12"
+      max-width="1280"
     >
-      mdi-close-circle
-    </v-icon>
+      <a
+        class="d-flex py-3"
+        href="https://vueschool.io/sales/blackfriday?friend=vuetify&utm_source=Vuetifyjs.com&utm_medium=Link&utm_content=Ad&utm_campaign=Black%20Friday"
+        rel="sponsored"
+        target="_blank"
+        style="color: inherit;"
+      >
+        <v-img
+          width="36"
+          contain
+          src="https://cdn.vuetifyjs.com/images/vuetify-ads/vueschool-2.svg"
+        />
+
+        <v-divider
+          vertical
+          class="mx-3 mx-md-6"
+        />
+
+        <div class="d-md-flex align-center">
+          <div
+            class="text-uppercase font-weight-medium white--text mb-sm-1 mb-md-0 mb-0"
+            :class="{
+              [$vuetify.breakpoint.mdAndDown ? 'subtitle-2' : 'headline']: true
+            }"
+          >
+            Black Friday 40% Off at Vue School
+          </div>
+
+          <v-divider
+            vertical
+            class="mx-6 hidden-sm-and-down"
+          />
+
+          <div class="d-none align-center d-sm-flex">
+            <v-img
+              :max-width="$vuetify.breakpoint.smAndDown ? 125 : 180"
+              src="https://cdn.vuetifyjs.com/images/vuetify-ads/vueschool-group.png"
+              class="d-inline-block"
+              contain
+            />
+
+            <div
+              class="mx-6 d-md-inline-block"
+              style="opacity: .7;"
+              :class="{
+                [
+                  $vuetify.breakpoint.smAndDown
+                    ? 'font-weight-light caption white--text'
+                    : 'subtitle-1'
+                ]: true,
+              }"
+            >
+              Level Up with Video Courses
+            </div>
+          </div>
+        </div>
+      </a>
+    </v-responsive>
+
+    <v-btn
+      class="core-system-bar__close mr-4"
+      icon
+      small
+      @click.stop="hasClosedBanner = true"
+    >
+      <v-icon class="mr-0">
+        mdi-close
+      </v-icon>
+    </v-btn>
   </v-system-bar>
 </template>
 
@@ -42,19 +90,8 @@
     name: 'CoreSystemBar',
 
     data: () => ({
-      hasClosedBanner: true,
+      hasClosedBanner: false,
     }),
-
-    mounted () {
-      this.hasClosedBanner = localStorage.getItem('vuetify__vueconf_to__banner') === 'true'
-    },
-
-    methods: {
-      close () {
-        this.hasClosedBanner = true
-        localStorage.setItem('vuetify__vueconf_to__banner', true)
-      },
-    },
   }
 </script>
 
