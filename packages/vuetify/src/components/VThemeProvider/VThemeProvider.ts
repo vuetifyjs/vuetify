@@ -8,9 +8,7 @@ import { VNode } from 'vue'
 export default Themeable.extend({
   name: 'theme-provider',
 
-  props: {
-    root: Boolean,
-  },
+  props: { root: Boolean },
 
   computed: {
     isDark (): boolean {
