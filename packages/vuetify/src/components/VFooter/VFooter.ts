@@ -54,21 +54,21 @@ export default mixins(
       if (!this.isPositioned) return undefined
 
       return this.app
-        ? this.$vuetify.application.bottom
+        ? this.applicationInstance.bottom
         : 0
     },
     computedLeft (): number | undefined {
       if (!this.isPositioned) return undefined
 
       return this.app && this.inset
-        ? this.$vuetify.application.left
+        ? this.applicationInstance.left
         : 0
     },
     computedRight (): number | undefined {
       if (!this.isPositioned) return undefined
 
       return this.app && this.inset
-        ? this.$vuetify.application.right
+        ? this.applicationInstance.right
         : 0
     },
     isPositioned (): boolean {

@@ -472,6 +472,10 @@ export function getSlot (vm: Vue, name = 'default', data?: object, optional = fa
   return undefined
 }
 
+export function getVuetify (vm: Vue, path: string, fallback: any) {
+  return getObjectValueByPath(vm.$vuetify, path, fallback)
+}
+
 export function clamp (value: number, min = 0, max = 1) {
   return Math.max(min, Math.min(max, value))
 }

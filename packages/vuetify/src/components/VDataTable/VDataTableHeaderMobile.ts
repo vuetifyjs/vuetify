@@ -1,9 +1,19 @@
-import { VNode, VNodeChildrenArrayContents } from 'vue'
+// Components
+import { VChip } from '../VChip'
+import { VSelect } from '../VSelect'
+
+// Mixins
+import header from './mixins/header'
+
+// Utilities
 import mixins from '../../util/mixins'
-import VSelect from '../VSelect/VSelect'
-import VChip from '../VChip'
-import header, { TableHeader } from './mixins/header'
-import { wrapInArray } from '../../util/helpers'
+import {
+  getVuetify,
+  wrapInArray,
+} from '../../util/helpers'
+
+// Types
+import { VNode, VNodeChildrenArrayContents } from 'vue'
 
 export default mixins(header).extend({
   name: 'v-data-table-header-mobile',
@@ -43,11 +53,14 @@ export default mixins(header).extend({
         },
       }, children)
     },
-    genSortSelect (items: any[]) {
+    genSortSelect () {
+      const sortHeaders = this.headers.filter(h => h.sortable !== false && h.value !== 'data-table-select')
+      const lang = getVuetify(this, 'lang', { t: (text = '') => text })
+
       return this.$createElement(VSelect, {
         props: {
-          label: this.$vuetify.lang.t(this.sortByText),
-          items,
+          label: lang.t(this.sortByText),
+          items: sortHeaders,
           hideDetails: true,
           multiple: this.options.multiSort,
           value: this.options.multiSort ? this.options.sortBy : this.options.sortBy[0],
@@ -78,10 +91,7 @@ export default mixins(header).extend({
       }, [this.genSelectAll()]))
     }
 
-    const sortHeaders: TableHeader[] = this.headers.filter(h => h.sortable !== false && h.value !== 'data-table-select')
-    if (!this.disableSort && sortHeaders.length) {
-      children.push(this.genSortSelect(sortHeaders))
-    }
+    children.push(this.genSortSelect())
 
     const th = h('th', [h('div', { staticClass: 'v-data-table-header-mobile__wrapper' }, children)])
 

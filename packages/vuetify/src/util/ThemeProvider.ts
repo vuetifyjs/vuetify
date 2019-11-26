@@ -6,13 +6,13 @@ import mixins from './mixins'
 export default mixins(Themeable).extend({
   name: 'theme-provider',
 
-  props: {
-    root: Boolean,
-  },
+  props: { root: Boolean },
 
   computed: {
     isDark (): boolean {
-      return this.root ? this.rootIsDark : Themeable.options.computed.isDark.call(this)
+      return this.root
+        ? this.isAppDark
+        : Themeable.options.computed.isDark.call(this)
     },
   },
 

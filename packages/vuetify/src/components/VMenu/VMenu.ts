@@ -310,7 +310,7 @@ export default baseMixins.extend({
         },
         staticClass: 'v-menu__content',
         class: {
-          ...this.rootThemeClasses,
+          ...this.appThemeClasses,
           'v-menu__content--auto': this.auto,
           'v-menu__content--fixed': this.activatorFixed,
           menuable__content__active: this.isActive,

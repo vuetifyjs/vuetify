@@ -6,15 +6,24 @@ import VIcon from '../VIcon'
 import Resize from '../../directives/resize'
 
 // Mixins
-import mixins from '../../util/mixins'
+import Bidirectional from '../../mixins/bidirectional'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
+
+// Utilities
+import mixins from '../../util/mixins'
 
 // Types
 import { VNode, CreateElement } from 'vue'
 
+const baseMixins = mixins(
+  Bidirectional,
+  Colorable,
+  Themeable
+)
+
 /* @vue/component */
-export default mixins(Colorable, Themeable).extend({
+export default baseMixins.extend({
   name: 'v-pagination',
 
   directives: { Resize },
@@ -183,9 +192,9 @@ export default mixins(Colorable, Themeable).extend({
 
   render (h): VNode {
     const children = [
-      this.genIcon(h, this.$vuetify.rtl ? this.nextIcon : this.prevIcon, this.value <= 1, this.previous),
+      this.genIcon(h, this.hasRtl ? this.nextIcon : this.prevIcon, this.value <= 1, this.previous),
       this.genItems(h),
-      this.genIcon(h, this.$vuetify.rtl ? this.prevIcon : this.nextIcon, this.value >= this.length, this.next),
+      this.genIcon(h, this.hasRtl ? this.prevIcon : this.nextIcon, this.value >= this.length, this.next),
     ]
 
     return h('ul', {

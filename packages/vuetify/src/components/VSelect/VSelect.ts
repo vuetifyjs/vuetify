@@ -1,17 +1,16 @@
 // Styles
-import '../VTextField/VTextField.sass'
+// import '../VTextField/VTextField.sass'
 import './VSelect.sass'
 
 // Components
-import VChip from '../VChip'
-import VMenu from '../VMenu'
 import VSelectList from './VSelectList'
-
-// Extensions
-import VTextField from '../VTextField/VTextField'
+import { VChip } from '../VChip'
+import { VMenu } from '../VMenu'
+import { VTextField } from '../VTextField'
 
 // Mixins
 import Comparable from '../../mixins/comparable'
+import Localable from '../../mixins/localable'
 import Filterable from '../../mixins/filterable'
 
 // Directives
@@ -39,6 +38,7 @@ type ItemProperty = PropValidator<string | (string | number)[] | ((item: object,
 const baseMixins = mixins(
   VTextField,
   Comparable,
+  Localable,
   Filterable
 )
 
@@ -193,7 +193,7 @@ export default baseMixins.extend<options>().extend({
           itemDisabled: this.itemDisabled,
           itemText: this.itemText,
           itemValue: this.itemValue,
-          noDataText: this.$vuetify.lang.t(this.noDataText),
+          noDataText: this.langInstance.t(this.noDataText),
           selectedItems: this.selectedItems,
         },
         on: {

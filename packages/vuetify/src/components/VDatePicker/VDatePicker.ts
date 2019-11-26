@@ -1,20 +1,24 @@
 // Components
-import VDatePickerTitle from './VDatePickerTitle'
-import VDatePickerHeader from './VDatePickerHeader'
 import VDatePickerDateTable from './VDatePickerDateTable'
+import VDatePickerHeader from './VDatePickerHeader'
 import VDatePickerMonthTable from './VDatePickerMonthTable'
+import VDatePickerTitle from './VDatePickerTitle'
 import VDatePickerYears from './VDatePickerYears'
 
 // Mixins
 import Localable from '../../mixins/localable'
 import Picker from '../../mixins/picker'
 
-// Utils
-import { pad, createNativeLocaleFormatter } from './util'
+// Utilities
+import mixins from '../../util/mixins'
 import isDateAllowed, { AllowedDateFunction } from './util/isDateAllowed'
 import { consoleWarn } from '../../util/console'
 import { daysInMonth } from '../VCalendar/util/timestamp'
-import mixins from '../../util/mixins'
+import { getVuetify } from '../../util/helpers'
+import {
+  createNativeLocaleFormatter,
+  pad,
+} from './util'
 
 // Types
 import { PropValidator } from 'vue/types/options'
@@ -24,6 +28,7 @@ import { VNode } from 'vue'
 export type DateEventColorValue = string | string[]
 export type DateEvents = string[] | ((date: string) => boolean | DateEventColorValue) | Record<string, DateEventColorValue>
 export type DateEventColors = DateEventColorValue | Record<string, DateEventColorValue> | ((date: string) => DateEventColorValue)
+
 type DatePickerValue = string | string[] | undefined
 type DatePickerType = 'date' | 'month'
 type DatePickerMultipleFormatter = (date: string[]) => string
@@ -32,6 +37,7 @@ interface Formatters {
   titleDate: DatePickerFormatter | DatePickerMultipleFormatter
 }
 
+// Functions
 // Adds leading zero to month/day if necessary, returns 'YYYY' if type = 'year',
 // 'YYYY-MM' if 'month' and 'YYYY-MM-DD' if 'date'
 function sanitizeDateString (dateString: string, type: 'date' | 'month' | 'year'): string {
@@ -191,7 +197,9 @@ export default mixins(
           return this.defaultTitleDateFormatter(dates[0])
         }
 
-        return this.$vuetify.lang.t(this.selectedItemsText, dates.length)
+        const lang = getVuetify(this, 'lang', { t: (text = '') => text })
+
+        return lang.t(this.selectedItemsText, dates.length)
       }
     },
     defaultTitleDateFormatter (): DatePickerFormatter {

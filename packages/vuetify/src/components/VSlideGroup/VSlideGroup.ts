@@ -5,15 +5,18 @@ import './VSlideGroup.sass'
 import VIcon from '../VIcon'
 import { VFadeTransition } from '../transitions'
 
-// Extensions
+// Components
 import { BaseItemGroup } from '../VItemGroup/VItemGroup'
+
+// Mixins
+import Bidirectional from '../../mixins/bidirectional'
 
 // Directives
 import Resize from '../../directives/resize'
 import Touch from '../../directives/touch'
 
 // Utilities
-import mixins, { ExtractVue } from '../../util/mixins'
+import mixins from '../../util/mixins'
 
 // Types
 import Vue, { VNode } from 'vue'
@@ -36,14 +39,18 @@ interface options extends Vue {
   }
 }
 
-export const BaseSlideGroup = mixins<options &
+const baseMixins = mixins<options &
 /* eslint-disable indent */
-  ExtractVue<typeof BaseItemGroup>
+  InstanceType<typeof BaseItemGroup> &
+  InstanceType<typeof Bidirectional>
 /* eslint-enable indent */
 >(
-  BaseItemGroup
-  /* @vue/component */
-).extend({
+  BaseItemGroup,
+  Bidirectional,
+)
+
+/* @vue/component */
+export const BaseSlideGroup = baseMixins.extend({
   name: 'base-slide-group',
 
   directives: {
@@ -179,9 +186,9 @@ export const BaseSlideGroup = mixins<options &
     genIcon (location: 'prev' | 'next'): VNode | null {
       let icon = location
 
-      if (this.$vuetify.rtl && location === 'prev') {
+      if (this.hasRtl && location === 'prev') {
         icon = 'next'
-      } else if (this.$vuetify.rtl && location === 'next') {
+      } else if (this.hasRtl && location === 'next') {
         icon = 'prev'
       }
 
@@ -268,7 +275,7 @@ export const BaseSlideGroup = mixins<options &
       content.style.setProperty('transition', null)
       content.style.setProperty('willChange', null)
 
-      if (this.$vuetify.rtl) {
+      if (this.hasRtl) {
         /* istanbul ignore else */
         if (this.scrollOffset > 0 || !this.isOverflowing) {
           this.scrollOffset = 0
@@ -302,13 +309,13 @@ export const BaseSlideGroup = mixins<options &
         this.scrollOffset = this.calculateCenteredOffset(
           this.selectedItem.$el as HTMLElement,
           this.widths,
-          this.$vuetify.rtl
+          this.hasRtl
         )
       } else if (this.isOverflowing) {
         this.scrollOffset = this.calculateUpdatedOffset(
           this.selectedItem.$el as HTMLElement,
           this.widths,
-          this.$vuetify.rtl,
+          this.hasRtl,
           this.scrollOffset
         )
       }
@@ -351,7 +358,7 @@ export const BaseSlideGroup = mixins<options &
         // Force reflow
         content: this.$refs.content ? this.$refs.content.clientWidth : 0,
         wrapper: this.$refs.wrapper ? this.$refs.wrapper.clientWidth : 0,
-      }, this.$vuetify.rtl, this.scrollOffset)
+      }, this.hasRtl, this.scrollOffset)
     },
     setWidths /* istanbul ignore next */  () {
       window.requestAnimationFrame(() => {

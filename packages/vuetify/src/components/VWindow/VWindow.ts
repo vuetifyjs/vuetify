@@ -6,14 +6,27 @@ import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 
+// Mixins
+import Bidirectional from '../../mixins/bidirectional'
+import Localable from '../../mixins/localable'
+
 // Directives
 import Touch from '../../directives/touch'
+
+// Utilities
+import mixins from '../../util/mixins'
 
 // Types
 import { VNode, VNodeDirective } from 'vue/types/vnode'
 
+const baseMixins = mixins(
+  BaseItemGroup,
+  Bidirectional,
+  Localable,
+)
+
 /* @vue/component */
-export default BaseItemGroup.extend({
+export default baseMixins.extend({
   name: 'v-window',
 
   provide (): object {
@@ -145,7 +158,7 @@ export default BaseItemGroup.extend({
         this.$createElement(VBtn, {
           props: { icon: true },
           attrs: {
-            'aria-label': this.$vuetify.lang.t(`$vuetify.carousel.${direction}`),
+            'aria-label': this.langInstance.t(`$vuetify.carousel.${direction}`),
           },
           on: {
             click: () => {
@@ -163,7 +176,7 @@ export default BaseItemGroup.extend({
     genControlIcons () {
       const icons = []
 
-      const prevIcon = this.$vuetify.rtl
+      const prevIcon = this.hasRtl
         ? this.nextIcon
         : this.prevIcon
 
@@ -177,7 +190,7 @@ export default BaseItemGroup.extend({
         icon && icons.push(icon)
       }
 
-      const nextIcon = this.$vuetify.rtl
+      const nextIcon = this.hasRtl
         ? this.prevIcon
         : this.nextIcon
 
@@ -210,7 +223,7 @@ export default BaseItemGroup.extend({
       return prevIndex
     },
     next () {
-      this.isReverse = this.$vuetify.rtl
+      this.isReverse = this.hasRtl
 
       /* istanbul ignore if */
       if (!this.hasActiveItems || !this.hasNext) return
@@ -221,7 +234,7 @@ export default BaseItemGroup.extend({
       this.internalValue = this.getValue(item, nextIndex)
     },
     prev () {
-      this.isReverse = !this.$vuetify.rtl
+      this.isReverse = !this.hasRtl
 
       /* istanbul ignore if */
       if (!this.hasActiveItems || !this.hasPrev) return
@@ -251,10 +264,10 @@ export default BaseItemGroup.extend({
     if (!this.touchless) {
       const value = this.touch || {
         left: () => {
-          this.$vuetify.rtl ? this.prev() : this.next()
+          this.hasRtl ? this.prev() : this.next()
         },
         right: () => {
-          this.$vuetify.rtl ? this.next() : this.prev()
+          this.hasRtl ? this.next() : this.prev()
         },
         end: (e: TouchEvent) => {
           e.stopPropagation()

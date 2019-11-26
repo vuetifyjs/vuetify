@@ -1,4 +1,39 @@
+// Styles
 import './VDataTable.sass'
+
+// Components
+// import VVirtualTable from './VVirtualTable'
+import MobileRow from './MobileRow'
+import Row from './Row'
+import RowGroup from './RowGroup'
+import VBtn from '../VBtn'
+import VDataTableHeader from './VDataTableHeader'
+import VIcon from '../VIcon'
+import VProgressLinear from '../VProgressLinear'
+import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'
+import VSimpleTable from './VSimpleTable'
+import { VData } from '../VData'
+import {
+  VDataFooter,
+  VDataIterator,
+} from '../VDataIterator'
+
+// Directives
+import ripple from '../../directives/ripple'
+
+// Utilities
+import { breaking } from '../../util/console'
+import {
+  camelizeObjectKeys,
+  compareFn,
+  deepEqual,
+  defaultFilter,
+  FilterFn,
+  getObjectValueByPath,
+  getPrefixedScopedSlots,
+  getSlot,
+  getVuetify,
+} from '../../util/helpers'
 
 // Types
 import { VNode, VNodeChildrenArrayContents, VNodeChildren } from 'vue'
@@ -6,25 +41,7 @@ import { PropValidator } from 'vue/types/options'
 import { DataProps, DataPagination, DataOptions } from '../VData/VData'
 import { TableHeader } from './mixins/header'
 
-// Components
-import { VData } from '../VData'
-import { VDataFooter, VDataIterator } from '../VDataIterator'
-import VBtn from '../VBtn'
-import VDataTableHeader from './VDataTableHeader'
-// import VVirtualTable from './VVirtualTable'
-import VIcon from '../VIcon'
-import VProgressLinear from '../VProgressLinear'
-import Row from './Row'
-import RowGroup from './RowGroup'
-import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'
-import VSimpleTable from './VSimpleTable'
-import MobileRow from './MobileRow'
-import ripple from '../../directives/ripple'
-
-// Helpers
-import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots, getSlot, defaultFilter, FilterFn, camelizeObjectKeys } from '../../util/helpers'
-import { breaking } from '../../util/console'
-
+// Functions
 function filterFn (item: any, search: string | null, filter: FilterFn) {
   return (header: TableHeader) => {
     const value = getObjectValueByPath(item, header.value)
@@ -126,11 +143,13 @@ export default VDataIterator.extend({
       }
     },
     isMobile (): boolean {
+      const width = getVuetify(this, 'breakpoint.width', 0)
+
       // Guard against SSR render
       // https://github.com/vuetifyjs/vuetify/issues/7410
-      if (this.$vuetify.breakpoint.width === 0) return false
+      if (width === 0) return false
 
-      return this.$vuetify.breakpoint.width < this.mobileBreakpoint
+      return width < this.mobileBreakpoint
     },
     columnSorters (): Record<string, compareFn> {
       return this.computedHeaders.reduce<Record<string, compareFn>>((acc, header) => {
@@ -456,7 +475,7 @@ export default VDataIterator.extend({
         props: {
           headers: this.computedHeaders,
           item,
-          rtl: this.$vuetify.rtl,
+          rtl: this.hasRtl,
         },
         scopedSlots,
         on: {

@@ -9,6 +9,7 @@ import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 
 // Mixins
+import Localable from '../../mixins/localable'
 import Toggleable from '../../mixins/toggleable'
 import Themeable from '../../mixins/themeable'
 import Transitionable from '../../mixins/transitionable'
@@ -24,6 +25,7 @@ import { VNode } from 'vue/types'
 /* @vue/component */
 export default mixins(
   VSheet,
+  Localable,
   Toggleable,
   Transitionable
 ).extend({
@@ -106,7 +108,7 @@ export default mixins(
           small: true,
         },
         attrs: {
-          'aria-label': this.$vuetify.lang.t(this.closeLabel),
+          'aria-label': this.langInstance.t(this.closeLabel),
         },
         on: {
           click: () => (this.isActive = false),

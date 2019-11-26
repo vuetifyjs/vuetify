@@ -5,12 +5,12 @@ import './VLabel.sass'
 import Colorable from '../../mixins/colorable'
 import Themeable, { functionalThemeClasses } from '../../mixins/themeable'
 
+// Utilities
+import mixins from '../../util/mixins'
+import { convertToUnit } from '../../util/helpers'
+
 // Types
 import { VNode } from 'vue'
-import mixins from '../../util/mixins'
-
-// Helpers
-import { convertToUnit } from '../../util/helpers'
 
 /* @vue/component */
 export default mixins(Themeable).extend({
@@ -39,7 +39,11 @@ export default mixins(Themeable).extend({
   },
 
   render (h, ctx): VNode {
-    const { children, listeners, props } = ctx
+    const {
+      children,
+      listeners,
+      props,
+    } = ctx
     const data = {
       staticClass: 'v-label',
       class: {
