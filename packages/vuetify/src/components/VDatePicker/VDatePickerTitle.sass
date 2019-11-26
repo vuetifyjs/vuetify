@@ -7,8 +7,11 @@
   flex-wrap: wrap
   line-height: 1
 
-  +rtl()
-    .v-picker__title__btn
+  .v-picker__title__btn
+    +ltr()
+      text-align: left
+
+    +rtl()
       text-align: right
 
   &__year

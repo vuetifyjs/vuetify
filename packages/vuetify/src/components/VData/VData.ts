@@ -226,11 +226,8 @@ export default Vue.extend({
     itemsPerPage (itemsPerPage: number) {
       this.updateOptions({ itemsPerPage })
     },
-    'internalOptions.itemsPerPage': {
-      handler (itemsPerPage: number) {
-        this.$emit('update:items-per-page', itemsPerPage)
-      },
-      immediate: true,
+    'internalOptions.itemsPerPage' (itemsPerPage: number) {
+      this.$emit('update:items-per-page', itemsPerPage)
     },
     sortBy (sortBy: string | string[]) {
       this.updateOptions({ sortBy: wrapInArray(sortBy) })
@@ -364,7 +361,9 @@ export default Vue.extend({
     paginateItems (items: any[]) {
       // Make sure we don't try to display non-existant page if items suddenly change
       // TODO: Could possibly move this to pageStart/pageStop?
-      if (items.length < this.pageStart) this.internalOptions.page = 1
+      if (this.serverItemsLength === -1 && items.length <= this.pageStart) {
+        this.internalOptions.page = Math.max(1, this.internalOptions.page - 1)
+      }
 
       return items.slice(this.pageStart, this.pageStop)
     },

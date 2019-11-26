@@ -21,12 +21,17 @@
     min-width: $badge-min-width
     padding: $badge-padding
     position: absolute
-    right: $badge-right
     text-align: center
     text-indent: 0
     top: $badge-top
     transition: $primary-transition
     white-space: nowrap
+
+    +ltr()
+      right: $badge-right
+
+    +rtl()
+      left: $badge-right
 
     .v-icon
       color: inherit
