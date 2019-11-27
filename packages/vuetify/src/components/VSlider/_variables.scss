@@ -8,3 +8,5 @@ $slider-thumb-focused-size-increase: 24px !default;
 $slider-tick-border-radius: 0 !default;
 $slider-transition: .3s map-get($transition, 'swing') !default;
 $slider-thumb-label-transition: .3s map-get($transition, 'fast-in-fast-out') !default;
+$chip-group-opacity: .32 !default;
+$chip-group-no-color-opacity: .22 !default;
