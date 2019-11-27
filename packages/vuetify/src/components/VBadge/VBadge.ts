@@ -156,11 +156,12 @@ export default mixins(
       }, [badge])
     },
     genBadgeContent () {
+      // Dot prop shows no content
+      if (this.dot) return undefined
+
       const slot = getSlot(this, 'badge')
 
       if (slot) return slot
-      // Dot prop shows no content
-      if (this.dot) return undefined
       if (this.content) return String(this.content)
       if (this.icon) return this.$createElement(VIcon, this.icon)
 
