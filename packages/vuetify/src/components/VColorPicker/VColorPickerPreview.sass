@@ -2,14 +2,14 @@
 
 .v-color-picker
   .v-input__slider
-    border-radius: 5px
+    border-radius: $color-picker-slider-border-radius
 
     .v-slider
       margin: 0
 
 .v-color-picker__alpha:not(.v-input--is-disabled)
   .v-slider
-    border-radius: 5px
+    border-radius: $color-picker-slider-border-radius
     background: $color-picker-checkerboard
 
 .v-color-picker__sliders
@@ -19,9 +19,9 @@
 
 .v-color-picker__dot
   position: relative
-  height: 30px
-  margin-right: 24px
-  width: 30px
+  height: $color-picker-preview-dot-size
+  margin-right: $color-picker-preview-dot-margin-right
+  width: $color-picker-preview-dot-size
   background: $color-picker-checkerboard
   border-radius: 50%
   overflow: hidden
@@ -43,7 +43,7 @@
   display: flex
 
   .v-slider
-    min-height: 10px
+    min-height: $color-picker-slider-height
 
     &:not(.v-slider--disabled)
       .v-slider__thumb
@@ -54,4 +54,4 @@
 
   &:not(.v-color-picker__preview--hide-alpha)
     .v-color-picker__hue
-      margin-bottom: 24px
+      margin-bottom: $color-picker-hue-margin-bottom
