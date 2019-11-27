@@ -1,19 +1,14 @@
 // Styles
 import './VImg.sass'
 
+// Directives
+import intersect from '../../directives/intersect'
+
 // Components
 import VResponsive from '../VResponsive'
 
 // Mixins
 import Themeable from '../../mixins/themeable'
-
-// Directives
-import intersect from '../../directives/intersect'
-
-// Utilities
-import mixins from '../../util/mixins'
-import mergeData from '../../util/mergeData'
-import { consoleError, consoleWarn } from '../../util/console'
 
 // Types
 import { PropValidator } from 'vue/types/options'
@@ -22,12 +17,17 @@ import {
   VNodeDirective,
 } from 'vue'
 
+// Utils
+import mergeData from '../../util/mergeData'
+import mixins from '../../util/mixins'
+import { consoleError, consoleWarn } from '../../util/console'
+
 // not intended for public use, this is passed in by vuetify-loader
 export interface srcObject {
-  aspect: number
-  lazySrc: string
   src: string
   srcset?: string
+  lazySrc: string
+  aspect: number
 }
 
 const baseMixins = mixins(
