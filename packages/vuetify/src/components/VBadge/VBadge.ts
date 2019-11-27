@@ -16,7 +16,6 @@ import mixins from '../../util/mixins'
 import {
   convertToUnit,
   getSlot,
-  getObjectValueByPath,
 } from '../../util/helpers'
 
 // Types
@@ -100,7 +99,7 @@ export default mixins(
       return this.calcPosition(this.offsetY)
     },
     isRtl (): boolean {
-      return getObjectValueByPath(this.$vuetify, 'rtl', false)
+      return this.$vuetify.rtl
     },
     // Default fallback if offsetX
     // or offsetY are undefined.
@@ -125,8 +124,7 @@ export default mixins(
       return `calc(100% - ${convertToUnit(offset || this.offset)})`
     },
     genBadge () {
-      const fallback = { t: (text = '') => text }
-      const lang = getObjectValueByPath(this.$vuetify, 'lang', fallback)
+      const lang = this.$vuetify.lang
       const label = this.$attrs['aria-label'] || lang.t(this.label)
 
       const data = this.setBackgroundColor(this.color, {
@@ -164,7 +162,7 @@ export default mixins(
       // Dot prop shows no content
       if (this.dot) return undefined
       if (this.content) return String(this.content)
-      if (this.icon) return this.genIcon()
+      if (this.icon) return this.$createElement(VIcon, this.icon)
 
       return undefined
     },
@@ -172,9 +170,6 @@ export default mixins(
       return this.$createElement('span', {
         staticClass: 'v-badge__wrapper',
       }, [this.genBadge()])
-    },
-    genIcon () {
-      return this.$createElement(VIcon, this.icon)
     },
   },
 
