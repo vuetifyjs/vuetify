@@ -1,6 +1,8 @@
 @import '../../styles/styles.sass';
 
-$switch-ripple-x: -14px !default
+$switch-width: 38px !default;
+
+$switch-ripple-x: -14px !default;
 $switch-ripple-top: calc(50% - 24px) !default;
 $switch-track-border-radius: 8px !default;
 $switch-track-width: 36px !default;
@@ -18,6 +20,12 @@ $switch-dirty-offset-x: 20px !default;
 $switch-track-dense-top: calc(50% - 12px) !default;
 $switch-track-dense-width: 32px !default;
 $switch-track-dense-height: 12px !default;
+$switch-track-inset-width: 48px !default;
+$switch-track-inset-height: 12px !default;
+$switch-track-inset-border-radius: 14px !default;
+$switch-track-inset-opacity: .32 !default;
+$switch-track-dense-inset-width: 44px !default;
+$switch-track-dense-inset-height: 22px !default;
 $switch-thumb-dense-width: 18px !default;
 $switch-thumb-dense-height: 18px !default;
 $switch-ripple-dense-top: calc(50% - 22px) !default;
