@@ -77,7 +77,7 @@ export default mixins(
     },
     computedLeft (): string {
       if (this.isRtl) {
-        return !this.left ? 'auto' : this.computedXOffset
+        return this.left ? this.computedXOffset : 'auto'
       }
 
       return this.left ? 'auto' : this.computedXOffset
