@@ -4,18 +4,18 @@ import './VImg.sass'
 // Directives
 import intersect from '../../directives/intersect'
 
-// Components
-import VResponsive from '../VResponsive'
-
-// Mixins
-import Themeable from '../../mixins/themeable'
-
 // Types
 import { PropValidator } from 'vue/types/options'
 import {
   VNode,
   VNodeDirective,
 } from 'vue'
+
+// Components
+import VResponsive from '../VResponsive'
+
+// Mixins
+import Themeable from '../../mixins/themeable'
 
 // Utils
 import mergeData from '../../util/mergeData'
