@@ -90,7 +90,7 @@ export default mixins(
       return !this.left ? 'auto' : this.computedXOffset
     },
     computedTop (): string {
-      return !this.bottom ? 'auto' : this.computedYOffset
+      return this.bottom ? this.computedYOffset : 'auto'
     },
     computedXOffset (): string {
       return this.calcPosition(this.offsetX)
