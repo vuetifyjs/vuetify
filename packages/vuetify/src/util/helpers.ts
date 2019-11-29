@@ -2,6 +2,7 @@ import Vue, { VNodeData } from 'vue'
 import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue/types'
 import { VuetifyIcon } from 'vuetify/types/services/icons'
 import mergeData from './mergeData'
+import { camelize } from './string'
 
 export function createSimpleFunctional (
   c: string,
@@ -329,13 +330,7 @@ export function keys<O> (o: O) {
   return Object.keys(o) as (keyof O)[]
 }
 
-/**
- * Camelize a hyphen-delimited string.
- */
-const camelizeRE = /-(\w)/g
-export const camelize = (str: string): string => {
-  return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : '')
-}
+export camelize
 
 /**
  * Returns the set difference of B and A, i.e. the set of elements in B but not in A
