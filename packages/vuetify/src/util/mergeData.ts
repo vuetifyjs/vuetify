@@ -5,7 +5,7 @@
  */
 /* eslint-disable max-statements */
 import { VNodeData } from 'vue'
-import { camelize } from './helpers'
+import { camelize } from './string'
 
 const pattern = {
   styleList: /;(?![^(]*\))/g,
