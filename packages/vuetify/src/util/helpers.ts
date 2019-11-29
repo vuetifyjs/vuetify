@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import { VNodeDirective } from 'vue/types'
 import { VuetifyIcon } from 'vuetify/types/services/icons'
+export { createSimpleFunctional, createSimpleTransition, createJavaScriptTransition } from './create'
 
 export type BindingConfig = Pick<VNodeDirective, 'arg' | 'modifiers' | 'value'>
 export function directiveConfig (binding: BindingConfig, defaults = {}): VNodeDirective {
