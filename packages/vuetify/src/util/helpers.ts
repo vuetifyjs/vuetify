@@ -2,7 +2,7 @@ import Vue, { VNodeData } from 'vue'
 import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue/types'
 import { VuetifyIcon } from 'vuetify/types/services/icons'
 import mergeData from './mergeData'
-export { camelize } from './string'
+import { camelize } from './string'
 
 export function createSimpleFunctional (
   c: string,
@@ -329,6 +329,8 @@ export function remapInternalIcon (vm: Vue, iconName: string): VuetifyIcon {
 export function keys<O> (o: O) {
   return Object.keys(o) as (keyof O)[]
 }
+
+export { camelcase }
 
 /**
  * Returns the set difference of B and A, i.e. the set of elements in B but not in A
