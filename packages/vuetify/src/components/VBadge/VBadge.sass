@@ -1,27 +1,31 @@
 // Imports
 @import './_variables.scss'
 
++theme(v-badge) using ($material)
+  .v-badge__badge::after
+    border-color: map-get($material, 'cards')
+
 .v-badge
   display: inline-block
-  line-height: 1
+  line-height: $badge-line-height
   position: relative
 
   &__badge
-    align-items: center
     border-radius: $badge-border-radius
     color: $badge-color
-    display: inline-flex
-    flex-direction: row
-    flex-wrap: wrap
+    display: inline-block
     font-size: $badge-font-size
     height: $badge-height
-    justify-content: center
-    line-height: normal
-    min-width: $badge-width
-    padding: 0 4px
+    letter-spacing: $badge-letter-spacing
+    line-height: 1
+    min-width: $badge-min-width
+    padding: $badge-padding
     position: absolute
+    text-align: center
+    text-indent: 0
     top: $badge-top
     transition: $primary-transition
+    white-space: nowrap
 
     +ltr()
       right: $badge-right
@@ -30,44 +34,71 @@
       left: $badge-right
 
     .v-icon
+      color: inherit
       font-size: $badge-font-size
 
-  &--overlap
+    .v-img
+      height: $badge-font-size
+      width: $badge-font-size
+
+  &__wrapper
+    flex: 0 1
+    height: 100%
+    left: 0
+    pointer-events: none
+    position: absolute
+    top: 0
+    width: 100%
+
+  &--avatar
     .v-badge__badge
-      top: -8px
+      padding: 0
 
-      +ltr()
-        right: -8px
+      .v-avatar
+        height: $badge-height !important
+        min-width: 0 !important
+        max-width: $badge-min-width !important
 
-      +rtl()
-        left: -8px
+  &--bordered
+    .v-badge__badge::after
+      border-radius: inherit
+      border-width: $badge-bordered-width
+      border-style: solid
+      bottom: 0
+      content: ''
+      left: 0
+      position: absolute
+      right: 0
+      top: 0
+      transform: scale(1.15)
 
-    &.v-badge--left
-      .v-badge__badge
-        +ltr()
-          left: -8px
-          right: initial
-
-        +rtl()
-          right: -8px
-          left: initial
-
-    &.v-badge--bottom
-      .v-badge__badge
-        bottom: -8px
-        top: initial
-
-  &--left
+  &--dot
     .v-badge__badge
-      +ltr()
-        left: $badge-right
-        right: initial
+      border-radius: $badge-dot-border-radius
+      height: $badge-dot-height
+      min-width: 0
+      padding: 0
+      width: $badge-dot-width
 
-      +rtl()
-        right: $badge-right
-        left: initial
+      &::after
+        border-width: $badge-dot-border-width
 
-  &--bottom
+  &--icon
     .v-badge__badge
-      bottom: $badge-top
-      top: initial
+      padding: $badge-icon-padding
+
+  &--inline
+    align-items: center
+    display: inline-flex
+    justify-content: center
+
+    .v-badge__badge,
+    .v-badge__wrapper
+      position: relative
+
+    .v-badge__wrapper
+      margin: $badge-wrapper-margin
+
+  &--tile
+    .v-badge__badge
+      border-radius: 0

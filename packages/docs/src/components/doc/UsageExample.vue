@@ -99,6 +99,20 @@
           class="overflow-y-auto py-3"
         >
           <v-col
+            v-for="(input, i) in value.inputs || []"
+            :key="`col-0-${i}`"
+            cols="12"
+            class="pb-0"
+          >
+            <v-text-field
+              v-model="inputs[input.prop]"
+              v-bind="input.attrs"
+              :label="input.label"
+              hide-details
+            />
+          </v-col>
+
+          <v-col
             v-for="(v1, boolean, i) in booleans || {}"
             :key="`col-1-${i}`"
             cols="12"
@@ -195,6 +209,7 @@
         type: Object,
         default: () => ({
           booleans: [],
+          inputs: [],
           sliders: [],
           selects: [],
           tabs: [],
@@ -207,6 +222,7 @@
         booleans: setupData(this.value.booleans),
         component: null,
         dark: false,
+        inputs: setupData(this.value.inputs),
         selects: setupData(this.value.selects),
         sliders: setupData(this.value.sliders),
         tab: 0,
@@ -226,6 +242,7 @@
         }
 
         this.parseAttrs(this.booleans, attrs)
+        this.parseAttrs(this.inputs, attrs)
         this.parseAttrs(this.sliders, attrs)
         this.parseAttrs(this.selects, attrs)
 
