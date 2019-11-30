@@ -31,7 +31,7 @@ export default VAutocomplete.extend({
   }),
 
   computed: {
-    counterValue (): number {
+    computedCounterValue (): number {
       return this.multiple
         ? this.selectedItems.length
         : (this.internalSearch || '').toString().length

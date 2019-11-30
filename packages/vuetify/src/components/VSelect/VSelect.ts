@@ -147,7 +147,7 @@ export default baseMixins.extend<options>().extend({
     computedOwns (): string {
       return `list-${this._uid}`
     },
-    counterValue (): number {
+    computedCounterValue (): number {
       return this.multiple
         ? this.selectedItems.length
         : (this.getText(this.selectedItems[0]) || '').toString().length
