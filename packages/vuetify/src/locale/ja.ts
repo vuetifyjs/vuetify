@@ -1,4 +1,5 @@
 export default {
+  badge: 'バッジ',
   close: '閉じる',
   dataIterator: {
     noResultsText: '検索結果が見つかりません。',

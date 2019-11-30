@@ -1,4 +1,5 @@
 export default {
+  badge: 'Знак',
   close: 'Закрити',
   dataIterator: {
     noResultsText: 'В результаті пошуку нічого не знайдено',
