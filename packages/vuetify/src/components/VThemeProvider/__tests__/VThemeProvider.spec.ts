@@ -20,12 +20,6 @@ describe('VThemeProvider.ts', () => {
     }
   })
 
-  it('should work match snapshot', () => {
-    const wrapper = mountFunction()
-
-    expect(wrapper).toMatchSnapshot()
-  })
-
   it('should change based upon root $vuetify', () => {
     const wrapper = mountFunction({
       provide: {

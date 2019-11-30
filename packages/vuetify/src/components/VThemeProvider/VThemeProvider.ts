@@ -6,7 +6,7 @@ import { VNode } from 'vue'
 
 /* @vue/component */
 export default Themeable.extend({
-  name: 'theme-provider',
+  name: 'v-theme-provider',
 
   props: { root: Boolean },
 
