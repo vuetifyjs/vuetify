@@ -19,6 +19,7 @@ export default Themeable.extend({
   },
 
   render (): VNode {
+    /* istanbul ignore next */
     return (
       this.$slots.default! &&
       this.$slots.default!.find(node => !node.isComment && node.text !== ' ')!

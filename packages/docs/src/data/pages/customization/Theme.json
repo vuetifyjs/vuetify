@@ -241,7 +241,7 @@
               "type": "section",
               "children": [
                 {
-                  "type": "api",
+                  "type": "doc-api-items",
                   "value": ["v-theme-provider"]
                 }
               ]

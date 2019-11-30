@@ -1,5 +1,4 @@
 {
-  "apiHeading": "### API",
   "heading": "# Theme",
   "headingText": "Easily change the colors of your application programmatically. Rebuild the default stylesheet and customize various aspects of the framework for your particular needs.",
   "lightAndDarkHeader": "## Light and Dark",
