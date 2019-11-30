@@ -82,18 +82,18 @@
       color="blue darken-3"
       dark
     >
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title
         style="width: 300px"
         class="ml-0 pl-4"
       >
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
         <span class="hidden-sm-and-down">Google Contacts</span>
       </v-toolbar-title>
       <v-text-field
         flat
         solo-inverted
         hide-details
-        prepend-inner-icon="search"
+        prepend-inner-icon="mdi-magnify"
         label="Search"
         class="hidden-sm-and-down"
       />
@@ -178,15 +178,18 @@
           Create contact
         </v-card-title>
         <v-container>
-          <v-row>
+          <v-row class="mx-2">
             <v-col
               class="align-center justify-space-between"
               cols="12"
             >
-              <v-row align="center">
+              <v-row
+                align="center"
+                class="mr-0"
+              >
                 <v-avatar
                   size="40px"
-                  class="mr-4"
+                  class="mx-3"
                 >
                   <img
                     src="//ssl.gstatic.com/s2/oz/images/sge/grey_silhouette.png"
@@ -260,21 +263,21 @@
       dialog: false,
       drawer: null,
       items: [
-        { icon: 'contacts', text: 'Contacts' },
-        { icon: 'history', text: 'Frequently contacted' },
-        { icon: 'content_copy', text: 'Duplicates' },
+        { icon: 'mdi-contacts', text: 'Contacts' },
+        { icon: 'mdi-history', text: 'Frequently contacted' },
+        { icon: 'mdi-content-copy', text: 'Duplicates' },
         {
-          icon: 'keyboard_arrow_up',
-          'icon-alt': 'keyboard_arrow_down',
+          icon: 'mdi-chevron-up',
+          'icon-alt': 'mdi-chevron-down',
           text: 'Labels',
           model: true,
           children: [
-            { icon: 'add', text: 'Create label' },
+            { icon: 'mdi-plus', text: 'Create label' },
           ],
         },
         {
-          icon: 'keyboard_arrow_up',
-          'icon-alt': 'keyboard_arrow_down',
+          icon: 'mdi-chevron-up',
+          'icon-alt': 'mdi-chevron-down',
           text: 'More',
           model: false,
           children: [
@@ -285,11 +288,11 @@
             { text: 'Other contacts' },
           ],
         },
-        { icon: 'settings', text: 'Settings' },
-        { icon: 'chat_bubble', text: 'Send feedback' },
-        { icon: 'help', text: 'Help' },
-        { icon: 'phonelink', text: 'App downloads' },
-        { icon: 'keyboard', text: 'Go to the old version' },
+        { icon: 'mdi-settings', text: 'Settings' },
+        { icon: 'mdi-message', text: 'Send feedback' },
+        { icon: 'mdi-help-circle', text: 'Help' },
+        { icon: 'mdi-cellphone-link', text: 'App downloads' },
+        { icon: 'mdi-keyboard', text: 'Go to the old version' },
       ],
     }),
   }

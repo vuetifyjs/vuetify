@@ -50,7 +50,7 @@
   position: relative
   text-decoration: none
   text-indent: $btn-letter-spacing
-  text-transform: uppercase
+  text-transform: $btn-text-transform
   transition-duration: $btn-transition-duration
   transition-property: box-shadow, transform, opacity
   transition-timing-function: $btn-transition-fn
@@ -88,15 +88,6 @@
         min-width: #{round($size * 1.777777777777778)}px // default ratio
         padding: 0 #{$size / 2.25}px
 
-  +rtl()
-    .v-icon--left
-      margin-left: 8px
-      margin-right: -4px
-
-    .v-icon--right
-      margin-left: -4px
-      margin-right: 8px
-
   > .v-btn__content .v-icon
     color: inherit
 
@@ -121,12 +112,22 @@
     width: $btn-icon-font-size
 
   .v-icon--left
-    margin-left: -4px
-    margin-right: 8px
+    +ltr()
+      margin-left: -4px
+      margin-right: 8px
+
+    +rtl()
+      margin-left: 8px
+      margin-right: -4px
 
   .v-icon--right
-    margin-left: 8px
-    margin-right: -4px
+    +ltr()
+      margin-left: 8px
+      margin-right: -4px
+
+    +rtl()
+      margin-left: -4px
+      margin-right: 8px
 
 .v-btn__loader
   align-items: center
@@ -198,13 +199,13 @@
       .v-icon
         height: #{$size}px
         font-size: #{$size}px
-        width: #{$size}px
+        min-width: #{$size}px
 
 .v-btn--icon
   @each $name, $size in $btn-sizes
     &.v-size--#{$name}
       height: #{$size}px
-      width: #{$size}px
+      min-width: #{$size}px
 
 .v-btn--fab
   &.v-btn--contained
@@ -223,7 +224,7 @@
   @each $name, $size in $fab-sizes
     &.v-size--#{$name}
       height: #{$size}px
-      width: #{$size}px
+      min-width: #{$size}px
 
       &.v-btn--absolute
         &.v-btn--bottom

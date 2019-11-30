@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue/types'
+import { VNode, VNodeDirective } from 'vue/types'
 import { VuetifyIcon } from 'vuetify/types/services/icons'
 
 export function createSimpleFunctional (
@@ -18,117 +18,6 @@ export function createSimpleFunctional (
       return h(el, data, children)
     },
   })
-}
-
-function mergeTransitions (
-  transitions: undefined | Function | Function[],
-  array: Function[]
-) {
-  if (Array.isArray(transitions)) return transitions.concat(array)
-  if (transitions) array.push(transitions)
-  return array
-}
-
-export function createSimpleTransition (
-  name: string,
-  origin = 'top center 0',
-  mode?: string
-): FunctionalComponentOptions {
-  return {
-    name,
-
-    functional: true,
-
-    props: {
-      group: {
-        type: Boolean,
-        default: false,
-      },
-      hideOnLeave: {
-        type: Boolean,
-        default: false,
-      },
-      leaveAbsolute: {
-        type: Boolean,
-        default: false,
-      },
-      mode: {
-        type: String,
-        default: mode,
-      },
-      origin: {
-        type: String,
-        default: origin,
-      },
-    },
-
-    render (h, context): VNode {
-      const tag = `transition${context.props.group ? '-group' : ''}`
-      context.data = context.data || {}
-      context.data.props = {
-        name,
-        mode: context.props.mode,
-      }
-      context.data.on = context.data.on || {}
-      if (!Object.isExtensible(context.data.on)) {
-        context.data.on = { ...context.data.on }
-      }
-
-      const ourBeforeEnter: Function[] = []
-      const ourLeave: Function[] = []
-      const absolute = (el: HTMLElement) => (el.style.position = 'absolute')
-
-      ourBeforeEnter.push((el: HTMLElement) => {
-        el.style.transformOrigin = context.props.origin
-        el.style.webkitTransformOrigin = context.props.origin
-      })
-
-      if (context.props.leaveAbsolute) ourLeave.push(absolute)
-      if (context.props.hideOnLeave) {
-        ourLeave.push((el: HTMLElement) => (el.style.display = 'none'))
-      }
-
-      const { beforeEnter, leave } = context.data.on
-
-      // Type says Function | Function[] but
-      // will only work if provided a function
-      context.data.on.beforeEnter = () => mergeTransitions(beforeEnter, ourBeforeEnter)
-      context.data.on.leave = mergeTransitions(leave, ourLeave)
-
-      return h(tag, context.data, context.children)
-    },
-  }
-}
-
-export function createJavaScriptTransition (
-  name: string,
-  functions: Record<string, any>,
-  mode = 'in-out'
-): FunctionalComponentOptions {
-  return {
-    name,
-
-    functional: true,
-
-    props: {
-      mode: {
-        type: String,
-        default: mode,
-      },
-    },
-
-    render (h, context): VNode {
-      const data = {
-        props: {
-          ...context.props,
-          name,
-        },
-        on: functions,
-      }
-
-      return h('transition', data, context.children)
-    },
-  }
 }
 
 export type BindingConfig = Pick<VNodeDirective, 'arg' | 'modifiers' | 'value'>
@@ -386,8 +275,6 @@ export function sortItems (
   customSorters?: Record<string, compareFn>
 ) {
   if (sortBy === null || !sortBy.length) return items
-
-  const numericCollator = new Intl.Collator(locale, { numeric: true, usage: 'sort' })
   const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
 
   return items.sort((a, b) => {
@@ -417,7 +304,7 @@ export function sortItems (
       [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
 
       if (sortA !== sortB) {
-        if (!isNaN(sortA) && !isNaN(sortB)) return numericCollator.compare(sortA, sortB)
+        if (!isNaN(sortA) && !isNaN(sortB)) return Number(sortA) - Number(sortB)
         return stringCollator.compare(sortA, sortB)
       }
     }

@@ -1,9 +1,9 @@
 module.exports = {
-  'v-carousel': {
+  'v-snackbar': {
     events: [
       {
         name: 'input',
-        value: 'number',
+        value: 'boolean',
       },
     ],
   },

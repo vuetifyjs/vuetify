@@ -176,9 +176,9 @@
         {
           name: 'Quasar Framework',
           src: 'https://cdn.vuetifyjs.com/images/competitors/quasar.png',
+          components: 81,
+          tree: 'Automatic',
           release: 'Bi-Weekly',
-          components: 68,
-          tree: 'Config',
           ssr: true,
           rtl: true,
         },
