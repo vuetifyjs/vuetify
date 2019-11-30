@@ -16,8 +16,7 @@
       "type": "section",
       "children": [
         {
-          "type": "variable-api",
-          "value": "variableApiDesc"
+          "type": "variable-api"
         }
       ]
     },

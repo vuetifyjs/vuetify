@@ -1,7 +1,9 @@
 <template>
   <div>
     <doc-heading>Generic.Pages.variableApi</doc-heading>
+
     <doc-text>{{ value }}</doc-text>
+
     <v-card outlined>
       <v-toolbar
         class="px-2 py-3"
@@ -10,67 +12,70 @@
         flat
         height="auto"
       >
-        <v-layout wrap>
-          <v-flex
-            xs12
-            md4
+        <v-row>
+          <v-col
+            cols="12"
+            md="4"
           >
             <v-autocomplete
               v-model="selectedComponent"
-              :items="components"
               :class="$vuetify.breakpoint.mdAndUp ? '' : 'mb-6'"
-              label="Available Component(s)"
-              outlined
+              :items="components"
               :menu-props="{offsetY: true, contentClass: 'primary'}"
-              prepend-inner-icon="mdi-view-dashboard"
+              label="Available Component(s)"
               hide-details
+              outlined
+              prepend-inner-icon="mdi-view-dashboard"
             />
-          </v-flex>
-          <v-flex
-            xs12
-            md4
-            offset-md4
+          </v-col>
+
+          <v-col
+            cols="12"
+            md="4"
+            offset-md="4"
           >
             <v-text-field
               v-model="search"
-              type="search"
-              clearable
               append-icon="mdi-magnify"
+              clearable
+              hide-details
               label="Search..."
               outlined
-              hide-details
               single-line
+              type="search"
             />
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-toolbar>
+
       <v-data-iterator
-        :search="search"
         :items="variables"
-        sort-by="name"
         :items-per-page="-1"
+        :search="search"
         class="component-parameters"
         hide-default-footer
+        sort-by="name"
       >
-        <template #default="{ items }">
+        <template v-slot="{ items }">
           <div>
             <template v-for="(item, i) in items">
-              <v-layout
+              <v-row
                 :key="`vapi-${i}`"
                 class="api-item pa-2"
-                wrap
               >
-                <v-flex xs12>
+                <v-col cols="12">
                   <div
                     class="text-capitalize overline grey--text text--darken-3"
                     v-text="'name'"
                   />
+
                   <span
                     style="font-weight: medium; color: #d63200;"
                     v-text="item.name"
                   />
-                </v-flex>
-                <v-flex xs12>
+                </v-col>
+
+                <v-col cols="12">
                   <div
                     class="text-capitalize overline grey--text text--darken-3"
                     v-text="'default'"
@@ -80,8 +85,9 @@
                     lang="sass"
                     value="example"
                   >{{ item.default }}</doc-markup>
-                </v-flex>
-              </v-layout>
+                </v-col>
+              </v-row>
+
               <v-divider
                 v-if="i + 1!== items.length"
                 :key="`divider-${i}`"
@@ -99,14 +105,11 @@
   import variableApi from '@vuetify/api-generator/dist/variables'
 
   export default {
-    props: {
-      value: {
-        type: String,
-        default: undefined,
-      },
-    },
+    name: 'DocVariableApi',
 
-    data: vm => ({
+    props: { value: String },
+
+    data: () => ({
       components: [],
       search: '',
       selectedComponent: '',
@@ -115,9 +118,7 @@
 
     watch: {
       selectedComponent (component) {
-        this.variables = (variableApi && variableApi[component])
-          ? variableApi[component]
-          : []
+        this.variables = (variableApi && variableApi[component]) || []
       },
     },
 
