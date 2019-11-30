@@ -1,4 +1,5 @@
 export default {
+  badge: 'rozet',
   close: 'Kapat',
   dataIterator: {
     noResultsText: 'Eşleşen veri bulunamadı',
