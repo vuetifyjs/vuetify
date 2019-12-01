@@ -15,7 +15,7 @@ import Themeable from '../../mixins/themeable'
 
 // Types
 import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { PropType } from 'vue/types/options'
 
 export default mixins(Themeable).extend({
   name: 'v-color-picker',
@@ -40,7 +40,7 @@ export default mixins(Themeable).extend({
       validator: (v: string) => Object.keys(modes).includes(v),
     },
     showSwatches: Boolean,
-    swatches: Array as PropValidator<string[][]>,
+    swatches: Array as PropType<string[][]>,
     swatchesMaxHeight: {
       type: [Number, String],
       default: 150,

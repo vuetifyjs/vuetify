@@ -10,7 +10,7 @@ import Colorable from '../../mixins/colorable'
 // Utils
 import mixins, { ExtractVue } from '../../util/mixins'
 import { getObjectValueByPath } from '../../util/helpers'
-import { PropValidator } from 'vue/types/options'
+import { PropType } from 'vue/types/options'
 
 // Types
 import { VNode } from 'vue'
@@ -60,7 +60,7 @@ export const VTreeviewNodeProps = {
     type: String,
     default: 'name',
   },
-  loadChildren: Function as PropValidator<(item: any) => Promise<void>>,
+  loadChildren: Function as PropType<(item: any) => Promise<void>>,
   loadingIcon: {
     type: String,
     default: '$loading',

@@ -17,9 +17,16 @@ import { daysInMonth } from '../VCalendar/util/timestamp'
 import mixins from '../../util/mixins'
 
 // Types
-import { PropValidator } from 'vue/types/options'
+import { PropType, PropValidator } from 'vue/types/options'
 import { VNode } from 'vue'
-import { DatePickerFormatter, DatePickerMultipleFormatter, AllowedDateFunction, DateEventColors, DateEvents, DatePickerType } from './types'
+import {
+  DatePickerFormatter,
+  DatePickerMultipleFormatter,
+  AllowedDateFunction,
+  DateEventColors,
+  DateEvents,
+  DatePickerType,
+} from './types'
 
 type DatePickerValue = string | string[] | undefined
 interface Formatters {
@@ -42,28 +49,28 @@ export default mixins(
   name: 'v-date-picker',
 
   props: {
-    allowedDates: Function as PropValidator<AllowedDateFunction | undefined>,
+    allowedDates: Function as PropType<AllowedDateFunction | undefined>,
     // Function formatting the day in date picker table
-    dayFormat: Function as PropValidator<AllowedDateFunction | undefined>,
+    dayFormat: Function as PropType<AllowedDateFunction | undefined>,
     disabled: Boolean,
     events: {
       type: [Array, Function, Object],
       default: () => null,
-    } as any as PropValidator<DateEvents>,
+    } as PropValidator<DateEvents>,
     eventColor: {
       type: [Array, Function, Object, String],
       default: () => 'warning',
-    } as any as PropValidator<DateEventColors>,
+    } as PropValidator<DateEventColors>,
     firstDayOfWeek: {
       type: [String, Number],
       default: 0,
     },
     // Function formatting the tableDate in the day/month table header
-    headerDateFormat: Function as PropValidator<DatePickerFormatter | undefined>,
+    headerDateFormat: Function as PropType<DatePickerFormatter | undefined>,
     max: String,
     min: String,
     // Function formatting month in the months table
-    monthFormat: Function as PropValidator<DatePickerFormatter | undefined>,
+    monthFormat: Function as PropType<DatePickerFormatter | undefined>,
     multiple: Boolean,
     nextIcon: {
       type: String,
@@ -88,16 +95,16 @@ export default mixins(
     },
     showWeek: Boolean,
     // Function formatting currently selected date in the picker title
-    titleDateFormat: Function as PropValidator<DatePickerFormatter | DatePickerMultipleFormatter | undefined>,
+    titleDateFormat: Function as PropType<DatePickerFormatter | DatePickerMultipleFormatter | undefined>,
     type: {
       type: String,
       default: 'date',
       validator: (type: any) => ['date', 'month'].includes(type), // TODO: year
-    } as any as PropValidator<DatePickerType>,
-    value: [Array, String] as PropValidator<DatePickerValue>,
-    weekdayFormat: Function as PropValidator<DatePickerFormatter | undefined>,
+    } as PropValidator<DatePickerType>,
+    value: [Array, String] as PropType<DatePickerValue>,
+    weekdayFormat: Function as PropType<DatePickerFormatter | undefined>,
     // Function formatting the year in table header and pickup title
-    yearFormat: Function as PropValidator<DatePickerFormatter | undefined>,
+    yearFormat: Function as PropType<DatePickerFormatter | undefined>,
     yearIcon: String,
   },
 

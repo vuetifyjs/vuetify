@@ -13,7 +13,7 @@ import mixins from '../../util/mixins'
 
 // Types
 import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { PropValidator, PropType } from 'vue/types/options'
 import { SelectingTimes } from './SelectingTimes'
 
 const rangeHours24 = createRange(24)
@@ -56,7 +56,7 @@ export default mixins(
     readonly: Boolean,
     scrollable: Boolean,
     useSeconds: Boolean,
-    value: null as any as PropValidator<any>,
+    value: null as any as PropType<any>,
     ampmInTitle: Boolean,
   },
 

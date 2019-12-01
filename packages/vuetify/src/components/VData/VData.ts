@@ -1,6 +1,6 @@
 // Helpers
 import { wrapInArray, sortItems, deepEqual, groupItems, searchItems } from '../../util/helpers'
-import Vue, { VNode, PropType } from 'vue'
+import Vue, { VNode } from 'vue'
 
 // Types
 import { DataOptions, DataPagination, DataProps, SortItemsFn } from './types'
@@ -13,21 +13,21 @@ export default Vue.extend({
 
   props: {
     items: {
-      type: Array as PropType<any[]>,
+      type: Array,
       default: () => [],
-    },
+    } as PropValidator<any[]>,
     options: {
       type: Object,
       default: () => ({}),
-    },
+    } as PropValidator<Partial<DataOptions>>,
     sortBy: {
-      type: [String, Array] as PropType<string | string[]>,
+      type: [String, Array],
       default: () => [],
-    },
+    } as PropValidator<string | string[]>,
     sortDesc: {
-      type: [Boolean, Array] as PropType<boolean | boolean[]>,
+      type: [Boolean, Array],
       default: () => [],
-    },
+    } as PropValidator<boolean | boolean[]>,
     customSort: {
       type: Function,
       default: sortItems,
@@ -43,17 +43,17 @@ export default Vue.extend({
       default: 10,
     },
     groupBy: {
-      type: [String, Array] as PropType<string | string[]>,
+      type: [String, Array],
       default: () => [],
-    },
+    } as PropValidator<string | string[]>,
     groupDesc: {
-      type: [Boolean, Array] as PropType<boolean | boolean[]>,
+      type: [Boolean, Array],
       default: () => [],
-    },
+    } as PropValidator<boolean | boolean[]>,
     customGroup: {
-      type: Function as any as PropType<typeof groupItems>,
+      type: Function,
       default: groupItems,
-    },
+    } as PropValidator<typeof groupItems>,
     locale: {
       type: String,
       default: 'en-US',
@@ -63,9 +63,9 @@ export default Vue.extend({
     disableFiltering: Boolean,
     search: String,
     customFilter: {
-      type: Function as any as PropType<typeof searchItems>,
+      type: Function,
       default: searchItems,
-    },
+    } as PropValidator<typeof searchItems>,
     serverItemsLength: {
       type: Number,
       default: -1,

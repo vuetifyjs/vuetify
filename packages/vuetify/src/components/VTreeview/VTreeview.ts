@@ -3,7 +3,7 @@ import './VTreeview.sass'
 
 // Types
 import { VNode, VNodeChildrenArrayContents } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { PropValidator, PropType } from 'vue/types/options'
 
 // Components
 import VTreeviewNode, { VTreeviewNodeProps } from './VTreeviewNode'
@@ -59,7 +59,7 @@ export default mixins(
       default: () => ([]),
     } as PropValidator<NodeArray>,
     dense: Boolean,
-    filter: Function as PropValidator<FilterTreeItemFunction>,
+    filter: Function as PropType<FilterTreeItemFunction>,
     hoverable: Boolean,
     items: {
       type: Array,

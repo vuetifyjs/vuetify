@@ -11,6 +11,7 @@ import mixins from '../../util/mixins'
 
 // Types
 import { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
 import { getSlot } from '../../util/helpers'
 
 /* @vue/component */
@@ -30,7 +31,7 @@ export default mixins(
     types: {
       type: Object,
       default: () => ({}),
-    },
+    } as PropValidator<Record<string, string>>,
   },
 
   computed: {

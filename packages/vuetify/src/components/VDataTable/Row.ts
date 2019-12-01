@@ -1,6 +1,6 @@
 // Types
 import Vue, { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { PropType } from 'vue/types/options'
 import { TableHeader } from './types'
 
 // Utils
@@ -12,7 +12,7 @@ export default Vue.extend({
   functional: true,
 
   props: {
-    headers: Array as PropValidator<TableHeader[]>,
+    headers: Array as PropType<TableHeader[]>,
     item: Object,
     rtl: Boolean,
   },

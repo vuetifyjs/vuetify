@@ -10,7 +10,7 @@ import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
 import Vue, { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { PropType } from 'vue/types/options'
 import { DatePickerFormatter } from './types'
 
 interface options extends Vue {
@@ -32,7 +32,7 @@ export default mixins<options &
   name: 'v-date-picker-years',
 
   props: {
-    format: Function as PropValidator<DatePickerFormatter | undefined>,
+    format: Function as PropType<DatePickerFormatter | undefined>,
     min: [Number, String],
     max: [Number, String],
     readonly: Boolean,

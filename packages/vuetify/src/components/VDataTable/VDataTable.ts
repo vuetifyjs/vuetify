@@ -64,6 +64,7 @@ export default VDataIterator.extend({
   props: {
     headers: {
       type: Array,
+      default: () => ([]),
     } as PropValidator<TableHeader[]>,
     showSelect: Boolean,
     showExpand: Boolean,

@@ -1,7 +1,7 @@
 import '../VDatePickerTable.sass'
 
 // Directives
-import Touch, { TouchWrapper } from '../../../directives/touch'
+import Touch from '../../../directives/touch'
 
 // Mixins
 import Colorable from '../../../mixins/colorable'
@@ -14,8 +14,9 @@ import mixins from '../../../util/mixins'
 
 // Types
 import { VNodeChildren } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { PropValidator, PropType } from 'vue/types/options'
 import { AllowedDateFunction, DatePickerFormatter, DateEvents, DateEventColors, DateEventColorValue } from '../types'
+import { TouchWrapper } from '../../../directives/touch/types'
 
 type CalculateTableDateFunction = (v: number) => string
 
@@ -28,10 +29,10 @@ export default mixins(
   directives: { Touch },
 
   props: {
-    allowedDates: Function as PropValidator<AllowedDateFunction | undefined>,
+    allowedDates: Function as PropType<AllowedDateFunction | undefined>,
     current: String,
     disabled: Boolean,
-    format: Function as PropValidator<DatePickerFormatter | undefined>,
+    format: Function as PropType<DatePickerFormatter | undefined>,
     events: {
       type: [Array, Function, Object],
       default: () => null,
@@ -49,7 +50,7 @@ export default mixins(
       type: String,
       required: true,
     },
-    value: [String, Array] as PropValidator<string | string[]>,
+    value: [String, Array] as PropType<string | string[]>,
   },
 
   data: () => ({

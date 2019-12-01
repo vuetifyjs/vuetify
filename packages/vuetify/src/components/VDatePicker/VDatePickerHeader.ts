@@ -15,7 +15,7 @@ import mixins from '../../util/mixins'
 
 // Types
 import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { PropType } from 'vue/types/options'
 import { DatePickerFormatter } from './types'
 
 export default mixins(
@@ -28,7 +28,7 @@ export default mixins(
 
   props: {
     disabled: Boolean,
-    format: Function as PropValidator<DatePickerFormatter | undefined>,
+    format: Function as PropType<DatePickerFormatter | undefined>,
     min: String,
     max: String,
     nextIcon: {

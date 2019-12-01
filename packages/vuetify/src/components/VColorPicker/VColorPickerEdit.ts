@@ -10,7 +10,7 @@ import { parseHex } from '../../util/colorUtils'
 
 // Types
 import Vue, { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { PropType } from 'vue/types/options'
 import { VColorPickerColor, fromRGBA, fromHexa, fromHSLA } from './util'
 
 type Input = [string, number, string]
@@ -48,7 +48,7 @@ export default Vue.extend({
   name: 'v-color-picker-edit',
 
   props: {
-    color: Object as PropValidator<VColorPickerColor>,
+    color: Object as PropType<VColorPickerColor>,
     disabled: Boolean,
     hideAlpha: Boolean,
     hideModeSwitch: Boolean,

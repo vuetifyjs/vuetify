@@ -1,7 +1,7 @@
 
 import { validateTimestamp, parseDate } from './timestamp'
 import { PropValidator } from 'vue/types/options'
-import { VEventInput, VTimestampFormatter } from '../types'
+import { VEventInput, VTimestampFormatter, VTimestamp } from '../types'
 
 export default {
   base: {
@@ -65,17 +65,17 @@ export default {
       validate: validateNumber,
     },
     intervalFormat: {
-      type: Function, // VTimestampFormatter,
+      type: Function,
       default: null,
-    },
+    } as PropValidator<VTimestampFormatter>,
     intervalStyle: {
-      type: Function, // (interval: VTimestamp): object
+      type: Function,
       default: null,
-    },
+    } as PropValidator<(interval: VTimestamp) => object>,
     showIntervalLabel: {
-      type: Function, // (interval: VTimestamp): boolean
+      type: Function,
       default: null,
-    },
+    } as PropValidator<(interval: VTimestamp) => boolean>,
   },
   weeks: {
     minWeeks: {
@@ -91,9 +91,9 @@ export default {
       default: true,
     },
     monthFormat: {
-      type: Function, // VTimestampFormatter,
+      type: Function,
       default: null,
-    },
+    } as PropValidator<VTimestampFormatter>,
   },
   calendar: {
     type: {

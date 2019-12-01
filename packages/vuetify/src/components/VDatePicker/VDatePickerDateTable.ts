@@ -7,7 +7,7 @@ import { createRange } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
 // Types
-import { PropValidator } from 'vue/types/options'
+import { PropType } from 'vue/types/options'
 import { VNode, VNodeChildren } from 'vue'
 import { DatePickerFormatter } from './types'
 
@@ -23,7 +23,7 @@ export default mixins(
       default: 0,
     },
     showWeek: Boolean,
-    weekdayFormat: Function as PropValidator<DatePickerFormatter | undefined>,
+    weekdayFormat: Function as PropType<DatePickerFormatter | undefined>,
   },
 
   computed: {
