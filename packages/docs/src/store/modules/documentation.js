@@ -64,16 +64,18 @@ function addFooterAd (children) {
 const state = {
   deprecatedIn: require('@/data/deprecated.json'),
   links: require('@/data/drawerItems.json'),
-  newIn: require('@/data/new.json'),
   namespace: null,
+  newIn: require('@/data/new.json'),
   page: null,
   structure: null,
-  toc: [],
   templates: require('@/data/templates.json'),
+  toc: [],
 }
 
 const mutations = make.mutations(state)
+
 const actions = {}
+
 const getters = {
   breadcrumbs (state, getters, rootState) {
     if (!rootState.route) return []
