@@ -24,13 +24,14 @@ import {
   updateRelative,
   getStartOfMonth,
   getEndOfMonth,
+  VTime,
 } from './util/timestamp'
 
 // Calendars
 import VCalendarMonthly from './VCalendarMonthly'
 import VCalendarDaily from './VCalendarDaily'
 import VCalendarWeekly from './VCalendarWeekly'
-import { VTimestamp, VTime } from 'types'
+import { VTimestamp } from 'types'
 
 // Types
 interface VCalendarRenderProps {

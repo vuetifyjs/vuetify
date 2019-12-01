@@ -11,8 +11,9 @@ import {
   createDayList,
   createIntervalList,
   createNativeLocaleFormatter,
+  VTime,
 } from '../util/timestamp'
-import { VTimestamp, VTimestampFormatter, VTime } from 'types'
+import { VTimestamp, VTimestampFormatter } from 'types'
 
 /* @vue/component */
 export default CalendarBase.extend({

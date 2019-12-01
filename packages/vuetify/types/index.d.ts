@@ -169,18 +169,7 @@ export interface VTimestamp {
   future: boolean
 }
 
-export interface VTimeObject {
-  hour: number
-  minute: number
-}
-
-export type VTime = number | string | VTimeObject
-
 export type VTimestampFormatter = (timestamp: VTimestamp, short: boolean) => string
-
-export type VTimestampFormatOptions = (timestamp: VTimestamp, short: boolean) => object
-
-export type VTimestampOperation = (timestamp: VTimestamp) => VTimestamp
 
 export interface VEventInput {
   [prop: string]: any
