@@ -3,6 +3,8 @@ import './VDataTable.sass'
 // Types
 import { VNode, VNodeChildrenArrayContents, VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
+import { TableHeader, FilterFn } from './types'
+import { DataProps, DataOptions, DataPagination, compareFn } from '../VData/types'
 
 // Components
 import { VData } from '../VData'
@@ -17,13 +19,13 @@ import RowGroup from './RowGroup'
 import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'
 import VSimpleTable from './VSimpleTable'
 import MobileRow from './MobileRow'
+
+// Directives
 import ripple from '../../directives/ripple'
 
 // Helpers
 import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, defaultFilter, camelizeObjectKeys } from '../../util/helpers'
 import { breaking } from '../../util/console'
-import { TableHeader, FilterFn } from './types'
-import { DataProps, DataOptions, DataPagination, compareFn } from '../VData/types'
 
 function filterFn (item: any, search: string | null, filter: FilterFn) {
   return (header: TableHeader) => {
