@@ -200,4 +200,9 @@
       +elevation(0)
 
 .v-expansion-panels--tile
-  border-radius: 0
+  > .v-expansion-panel
+    &::before
+      border-radius: 0
+
+    > .v-expansion-panel-header
+      border-radius: 0 !important
