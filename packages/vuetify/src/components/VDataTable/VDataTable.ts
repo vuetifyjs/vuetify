@@ -2,7 +2,8 @@ import './VDataTable.sass'
 
 // Types
 import { VNode, VNodeChildrenArrayContents, VNodeChildren, PropType } from 'vue'
-import { TableHeader, FilterFn, DataProps, DataOptions, DataPagination, compareFn } from 'types'
+import { TableHeader, FilterFn, DataProps, DataOptions, DataPagination, compareFn, ItemsPerPageOption } from 'types'
+import { PropValidator } from 'vue/types/options'
 
 // Components
 import { VData } from '../VData'
@@ -63,9 +64,9 @@ export default VDataIterator.extend({
 
   props: {
     headers: {
-      type: Array as PropType<TableHeader[]>,
-      default: () => ([] as TableHeader[]),
-    },
+      type: Array,
+      default: () => [],
+    } as PropValidator<TableHeader[]>,
     showSelect: Boolean,
     showExpand: Boolean,
     showGroupBy: Boolean,
@@ -150,12 +151,11 @@ export default VDataIterator.extend({
     },
     computedItemsPerPage (): number {
       const itemsPerPage = this.options && this.options.itemsPerPage ? this.options.itemsPerPage : this.itemsPerPage
-      const { itemsPerPageOptions } = this.sanitizedFooterProps
+      const itemsPerPageOptions: ItemsPerPageOption[] | undefined = this.sanitizedFooterProps.itemsPerPageOptions
+
       if (
         itemsPerPageOptions &&
-        !itemsPerPageOptions.find((item: number | { value: number }) => {
-          return typeof item === 'number' ? item === itemsPerPage : item.value === itemsPerPage
-        })
+        !itemsPerPageOptions.find(item => typeof item === 'number' ? item === itemsPerPage : item.value === itemsPerPage)
       ) {
         const firstOption = itemsPerPageOptions[0]
         return typeof firstOption === 'object' ? firstOption.value : firstOption

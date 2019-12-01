@@ -200,3 +200,8 @@ export interface TableHeader {
   filter?: (value: any, search: string | null, item: any) => boolean
   sort?: compareFn
 }
+
+export type ItemsPerPageOption = (number | {
+  text: string;
+  value: number;
+});

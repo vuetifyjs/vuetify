@@ -7,7 +7,8 @@ import VBtn from '../VBtn'
 
 // Types
 import Vue, { VNode, VNodeChildrenArrayContents, PropType } from 'vue'
-import { DataPagination, DataOptions } from 'types'
+import { DataPagination, DataOptions, ItemsPerPageOption } from 'types'
+import { PropValidator } from 'vue/types/options'
 
 export default Vue.extend({
   name: 'v-data-footer',
@@ -22,9 +23,9 @@ export default Vue.extend({
       required: true,
     },
     itemsPerPageOptions: {
-      type: Array as PropType<any[]>,
+      type: Array,
       default: () => ([5, 10, 15, -1]),
-    },
+    } as PropValidator<ItemsPerPageOption[]>,
     prevIcon: {
       type: String,
       default: '$prev',
