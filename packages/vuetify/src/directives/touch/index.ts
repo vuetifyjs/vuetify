@@ -1,6 +1,6 @@
 import { VNodeDirective, VNode } from 'vue/types/vnode'
 import { keys } from '../../util/helpers'
-import { TouchHandlers, TouchValues, TouchWrapper } from 'types'
+import { TouchHandlers, TouchValue, TouchWrapper } from 'types'
 
 export interface TouchStoredHandlers {
   touchstart: (e: TouchEvent) => void
@@ -9,7 +9,7 @@ export interface TouchStoredHandlers {
 }
 
 interface TouchVNodeDirective extends VNodeDirective {
-  value?: TouchValues
+  value?: TouchValue
 }
 
 const handleGesture = (wrapper: TouchWrapper) => {

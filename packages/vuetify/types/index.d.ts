@@ -142,7 +142,7 @@ export interface TouchWrapper extends TouchHandlers {
   offsetY: number
 }
 
-export type TouchValues = TouchHandlers & {
+export type TouchValue = TouchHandlers & {
   parent?: boolean
   options?: AddEventListenerOptions
 }
