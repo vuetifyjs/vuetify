@@ -97,6 +97,7 @@
         transform: rotate(-180deg)
 
 .v-expansion-panels:not(.v-expansion-panels--accordion)
+.v-expansion-panels:not(.v-expansion-panels--tile)
   > .v-expansion-panel
     &--active
       border-radius: $expansion-panel-border-radius
@@ -200,9 +201,8 @@
       +elevation(0)
 
 .v-expansion-panels--tile
+  border-radius: 0
+
   > .v-expansion-panel
     &::before
       border-radius: 0
-
-    > .v-expansion-panel-header
-      border-radius: 0 !important
