@@ -1,6 +1,6 @@
 import Vue, { VNode, PropType } from 'vue'
 import { getObjectValueByPath } from '../../util/helpers'
-import { TableHeader } from './types'
+import { TableHeader } from 'types'
 
 export default Vue.extend({
   name: 'row',

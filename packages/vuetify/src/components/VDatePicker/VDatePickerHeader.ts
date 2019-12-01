@@ -15,7 +15,7 @@ import mixins from '../../util/mixins'
 
 // Types
 import { VNode, PropType } from 'vue'
-import { DatePickerFormatter } from './types'
+import { DatePickerFormatter } from 'types'
 
 export default mixins(
   Colorable,

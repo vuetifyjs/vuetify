@@ -1,5 +1,5 @@
 import { getObjectValueByPath } from '../../../util/helpers'
-import { FilterTreeItemFunction } from '../types'
+import { FilterTreeItemFunction } from 'types'
 
 export function filterTreeItem (item: object, search: string, textKey: string): boolean {
   const text = getObjectValueByPath(item, textKey)

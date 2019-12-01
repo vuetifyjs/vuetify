@@ -23,7 +23,7 @@ import mixins from '../../util/mixins'
 
 // Types
 import { VNode, VNodeDirective, PropType } from 'vue'
-import { TouchWrapper } from '../../directives/touch/types'
+import { TouchWrapper } from 'types'
 
 const baseMixins = mixins(
   Applicationable('left', [

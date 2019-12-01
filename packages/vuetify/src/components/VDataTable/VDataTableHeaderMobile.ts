@@ -4,7 +4,7 @@ import VSelect from '../VSelect/VSelect'
 import VChip from '../VChip'
 import header from './mixins/header'
 import { wrapInArray } from '../../util/helpers'
-import { TableHeader } from './types'
+import { TableHeader } from 'types'
 
 export default mixins(header).extend({
   name: 'v-data-table-header-mobile',

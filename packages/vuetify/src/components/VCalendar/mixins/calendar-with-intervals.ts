@@ -12,7 +12,7 @@ import {
   createIntervalList,
   createNativeLocaleFormatter,
 } from '../util/timestamp'
-import { VTimestamp, VTimestampFormatter, VTime } from '../types'
+import { VTimestamp, VTimestampFormatter, VTime } from 'types'
 
 /* @vue/component */
 export default CalendarBase.extend({

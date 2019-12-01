@@ -3,7 +3,7 @@ import { VNode } from 'vue'
 import mixins from '../../util/mixins'
 import header from './mixins/header'
 import { wrapInArray, convertToUnit } from '../../util/helpers'
-import { TableHeader } from './types'
+import { TableHeader } from 'types'
 
 export default mixins(header).extend({
   name: 'v-data-table-header-desktop',

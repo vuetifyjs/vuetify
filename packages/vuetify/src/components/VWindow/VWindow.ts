@@ -4,7 +4,7 @@ import './VWindow.sass'
 // Types
 import { VNode, VNodeDirective } from 'vue/types/vnode'
 import { PropType } from 'vue'
-import { TouchHandlers } from '../../directives/touch/types'
+import { TouchHandlers } from 'types'
 
 // Directives
 import Touch from '../../directives/touch'

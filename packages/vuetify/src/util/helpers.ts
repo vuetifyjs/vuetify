@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import { VNode, VNodeDirective } from 'vue/types'
 import { VuetifyIcon } from 'vuetify/types/services/icons'
-import { compareFn } from '../components/VData/types'
-import { ItemKey } from '@components/VSelect/types'
+import { compareFn, ItemKey } from 'types'
 
 export function createSimpleFunctional (
   c: string,

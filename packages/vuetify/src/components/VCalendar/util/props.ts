@@ -1,7 +1,7 @@
 
 import { validateTimestamp, parseDate } from './timestamp'
 import { PropType } from 'vue'
-import { VEventInput, VTimestampFormatter, VTimestamp } from '../types'
+import { VEventInput, VTimestampFormatter, VTimestamp } from 'types'
 
 export default {
   base: {

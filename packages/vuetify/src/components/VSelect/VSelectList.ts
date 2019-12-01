@@ -29,7 +29,7 @@ import {
 // Types
 import mixins from '../../util/mixins'
 import { VNode, PropType } from 'vue'
-import { ItemKey } from './types'
+import { ItemKey } from 'types'
 
 /* @vue/component */
 export default mixins(Colorable, Themeable).extend({

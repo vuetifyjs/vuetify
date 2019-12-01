@@ -2,8 +2,7 @@ import './VDataTable.sass'
 
 // Types
 import { VNode, VNodeChildrenArrayContents, VNodeChildren, PropType } from 'vue'
-import { TableHeader, FilterFn } from './types'
-import { DataProps, DataOptions, DataPagination, compareFn } from '../VData/types'
+import { TableHeader, FilterFn, DataProps, DataOptions, DataPagination, compareFn } from 'types'
 
 // Components
 import { VData } from '../VData'

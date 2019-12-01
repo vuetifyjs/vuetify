@@ -14,8 +14,7 @@ import mixins from '../../../util/mixins'
 
 // Types
 import { VNodeChildren, PropType } from 'vue'
-import { AllowedDateFunction, DatePickerFormatter, DateEvents, DateEventColors, DateEventColorValue } from '../types'
-import { TouchWrapper } from '../../../directives/touch/types'
+import { AllowedDateFunction, DatePickerFormatter, DateEvents, DateEventColors, DateEventColorValue, TouchWrapper } from 'types'
 
 type CalculateTableDateFunction = (v: number) => string
 

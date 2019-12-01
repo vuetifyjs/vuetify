@@ -11,7 +11,7 @@ import { breaking, removed } from '../../util/console'
 
 // Types
 import { VNode, VNodeChildren, PropType } from 'vue'
-import { DataProps } from '../VData/types'
+import { DataProps } from 'types'
 
 /* @vue/component */
 export default Themeable.extend({

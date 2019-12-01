@@ -5,8 +5,7 @@ import ripple from '../../../directives/ripple'
 
 import Vue, { PropType } from 'vue'
 import mixins from '../../../util/mixins'
-import { DataOptions } from '../../VData/types'
-import { TableHeader } from '../types'
+import { DataOptions, TableHeader } from 'types'
 
 type VDataTableInstance = InstanceType<typeof VDataTable>
 

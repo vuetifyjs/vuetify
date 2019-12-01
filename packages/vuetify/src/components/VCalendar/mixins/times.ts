@@ -5,7 +5,7 @@ import {
   parseTimestamp,
   parseDate,
 } from '../util/timestamp'
-import { VTimestamp } from '../types'
+import { VTimestamp } from 'types'
 
 export default Vue.extend({
   name: 'times',

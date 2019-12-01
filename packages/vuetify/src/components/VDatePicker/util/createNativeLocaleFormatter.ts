@@ -1,5 +1,5 @@
 import pad from './pad'
-import { DatePickerFormatter } from '../types'
+import { DatePickerFormatter } from 'types'
 
 interface SubstrOptions {
   start?: number

@@ -1,4 +1,4 @@
-import { AllowedDateFunction } from '../types'
+import { AllowedDateFunction } from 'types'
 
 export default function isDateAllowed (date: string, min: string, max: string, allowedFn: AllowedDateFunction | undefined) {
   return (!allowedFn || allowedFn(date)) &&

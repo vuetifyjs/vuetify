@@ -24,7 +24,7 @@ import { consoleError } from '../../util/console'
 // Types
 import mixins from '../../util/mixins'
 import { VNode, VNodeDirective, PropType } from 'vue'
-import { ItemKey } from './types'
+import { ItemKey } from 'types'
 
 export const defaultMenuProps = {
   closeOnClick: false,

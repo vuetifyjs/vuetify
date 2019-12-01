@@ -3,7 +3,7 @@ import { wrapInArray, sortItems, deepEqual, groupItems, searchItems } from '../.
 import Vue, { VNode } from 'vue'
 
 // Types
-import { DataOptions, DataPagination, DataProps, SortItemsFn } from './types'
+import { DataOptions, DataPagination, DataProps, SortItemsFn } from 'types'
 import { PropValidator, PropType } from 'vue/types/options'
 
 export default Vue.extend({

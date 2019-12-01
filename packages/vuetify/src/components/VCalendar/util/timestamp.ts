@@ -1,4 +1,4 @@
-import { VTimestamp, VTimestampOperation, VTimestampFormatter, VTimestampFormatOptions } from '../types'
+import { VTimestamp, VTimestampOperation, VTimestampFormatter, VTimestampFormatOptions } from 'types'
 
 export const PARSE_REGEX: RegExp = /^(\d{4})-(\d{1,2})(-(\d{1,2}))?([^\d]+(\d{1,2}))?(:(\d{1,2}))?(:(\d{1,2}))?$/
 export const PARSE_TIME: RegExp = /(\d\d?)(:(\d\d?)|)(:(\d\d?)|)/

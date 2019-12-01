@@ -26,7 +26,7 @@ import {
   DateEventColors,
   DateEvents,
   DatePickerType,
-} from './types'
+} from 'types'
 
 type DatePickerValue = string | string[] | undefined
 interface Formatters {

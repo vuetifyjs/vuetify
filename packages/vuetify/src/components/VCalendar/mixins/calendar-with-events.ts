@@ -24,7 +24,7 @@ import {
   parseEvent,
   isEventOn,
 } from '../util/events'
-import { VTimestamp, VEventInput } from '../types'
+import { VTimestamp, VEventInput } from 'types'
 
 // Types
 type VColorFunction = (event: VEventInput) => string

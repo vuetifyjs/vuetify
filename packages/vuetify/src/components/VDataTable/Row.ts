@@ -1,6 +1,6 @@
 // Types
 import Vue, { VNode, PropType } from 'vue'
-import { TableHeader } from './types'
+import { TableHeader } from 'types'
 
 // Utils
 import { getObjectValueByPath } from '../../util/helpers'

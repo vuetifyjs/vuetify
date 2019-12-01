@@ -17,7 +17,7 @@ import {
   getDayIdentifier,
   createNativeLocaleFormatter,
 } from './util/timestamp'
-import { VTimestamp, VTimestampFormatter } from './types'
+import { VTimestamp, VTimestampFormatter } from 'types'
 
 /* @vue/component */
 export default CalendarBase.extend({

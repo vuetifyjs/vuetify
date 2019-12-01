@@ -23,7 +23,7 @@ import {
   filterTreeItems,
   filterTreeItem,
 } from './util/filterTreeItems'
-import { FilterTreeItemFunction } from './types'
+import { FilterTreeItemFunction } from 'types'
 
 type VTreeviewNodeInstance = InstanceType<typeof VTreeviewNode>
 
