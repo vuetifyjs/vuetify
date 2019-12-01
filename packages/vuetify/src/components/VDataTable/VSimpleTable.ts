@@ -12,7 +12,6 @@ export default mixins(Themeable).extend({
     dense: Boolean,
     fixedHeader: Boolean,
     height: [Number, String],
-    tableClasses: Object,
   },
 
   computed: {
@@ -34,7 +33,7 @@ export default mixins(Themeable).extend({
           height: convertToUnit(this.height),
         },
       }, [
-        this.$createElement('table', { class: { ...this.tableClasses } }, this.$slots.default),
+        this.$createElement('table', this.$slots.default),
       ])
     },
   },

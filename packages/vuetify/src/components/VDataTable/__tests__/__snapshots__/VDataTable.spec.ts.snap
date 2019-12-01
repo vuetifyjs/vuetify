@@ -3,7 +3,7 @@
 exports[`VDataTable.ts should change page if item count decreases below page start 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
         <col class>
         <col class>
@@ -190,7 +190,7 @@ exports[`VDataTable.ts should change page if item count decreases below page sta
 exports[`VDataTable.ts should default to first option in itemsPerPageOptions if it does not include itemsPerPage 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
         <col class>
         <col class>
@@ -499,7 +499,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
 exports[`VDataTable.ts should handle object when checking if it should default to first option in itemsPerPageOptions 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
         <col class>
         <col class>
@@ -889,7 +889,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
 exports[`VDataTable.ts should limit page to current page count if not using server-items-length 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
         <col class>
         <col class>
@@ -1178,7 +1178,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
 exports[`VDataTable.ts should not limit page to current item count when using server-items-length 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
         <col class>
         <col class>
@@ -1372,7 +1372,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
 exports[`VDataTable.ts should not limit page to current item count when using server-items-length 2`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
         <col class>
         <col class>
@@ -1660,7 +1660,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
 exports[`VDataTable.ts should not search column with filterable set to false 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
         <col class>
         <col class>
@@ -2056,7 +2056,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
 exports[`VDataTable.ts should not search column with filterable set to false 2`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
         <col class>
         <col class>
@@ -2259,7 +2259,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
 exports[`VDataTable.ts should not search column with filterable set to false and has filter function 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
         <col class>
         <col class>
@@ -2515,7 +2515,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
 exports[`VDataTable.ts should not search column with filterable set to false and has filter function 2`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
         <col class>
         <col class>
@@ -2911,7 +2911,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
 exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
       </colgroup>
       <thead class="v-data-table-header">
@@ -3010,7 +3010,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
 exports[`VDataTable.ts should render 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
       </colgroup>
       <thead class="v-data-table-header">
@@ -3109,7 +3109,7 @@ exports[`VDataTable.ts should render 1`] = `
 exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
       </colgroup>
       <thead class="v-data-table-header">
@@ -3207,7 +3207,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
 exports[`VDataTable.ts should render loading state 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
       </colgroup>
       <thead class="v-data-table-header">
@@ -3333,7 +3333,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
 exports[`VDataTable.ts should render loading state 2`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
         <col class>
         <col class>
@@ -3539,7 +3539,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
 exports[`VDataTable.ts should render with body slot 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
         <col class>
         <col class>
@@ -3729,7 +3729,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
 exports[`VDataTable.ts should render with data 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
         <col class>
         <col class>
@@ -4018,7 +4018,7 @@ exports[`VDataTable.ts should render with data 1`] = `
 exports[`VDataTable.ts should render with group scoped slot 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
         <col class>
         <col class>
@@ -4202,7 +4202,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
 exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
         <col class>
         <col class>
@@ -4629,7 +4629,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
 exports[`VDataTable.ts should render with grouped rows 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
         <col class>
         <col class>
@@ -5002,7 +5002,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
 exports[`VDataTable.ts should render with item scoped slot 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
         <col class>
         <col class>
@@ -5206,7 +5206,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
 exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
         <col class>
         <col class>
@@ -5520,7 +5520,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
 exports[`VDataTable.ts should render with showExpand 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
         <col class>
         <col class>
@@ -5855,7 +5855,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
 exports[`VDataTable.ts should render with showExpand 2`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
         <col class>
         <col class>
@@ -6190,7 +6190,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
 exports[`VDataTable.ts should render with showSelect 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
-    <table class>
+    <table>
       <colgroup>
         <col class>
         <col class>
