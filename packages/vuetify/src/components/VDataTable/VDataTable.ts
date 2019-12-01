@@ -515,7 +515,7 @@ export default VDataIterator.extend({
         fixedHeader: this.fixedHeader,
         dense: this.dense,
         tableClasses: {
-          'v-data-table__mobile': this.isMobile,
+          'v-data-table--is-mobile': this.isMobile,
         },
       }
 
