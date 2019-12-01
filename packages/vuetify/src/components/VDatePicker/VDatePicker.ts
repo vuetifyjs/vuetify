@@ -54,13 +54,13 @@ export default mixins(
     dayFormat: Function as PropType<AllowedDateFunction | undefined>,
     disabled: Boolean,
     events: {
-      type: [Array, Function, Object],
+      type: [Array, Function, Object] as PropType<DateEvents>,
       default: () => null,
-    } as PropValidator<DateEvents>,
+    },
     eventColor: {
-      type: [Array, Function, Object, String],
+      type: [Array, Function, Object, String] as PropType<DateEventColors>,
       default: () => 'warning',
-    } as PropValidator<DateEventColors>,
+    },
     firstDayOfWeek: {
       type: [String, Number],
       default: 0,

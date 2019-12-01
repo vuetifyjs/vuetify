@@ -18,8 +18,7 @@ import {
 } from '../../util/helpers'
 
 // Types
-import { VNode, VNodeData } from 'vue'
-import { PropType } from 'vue/types/options'
+import { VNode, VNodeData, PropType } from 'vue'
 import mixins from '../../util/mixins'
 
 const baseMixins = mixins(

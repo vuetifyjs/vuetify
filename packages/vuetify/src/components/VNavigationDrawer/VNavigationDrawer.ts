@@ -22,8 +22,7 @@ import { convertToUnit, getSlot } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
 // Types
-import { VNode, VNodeDirective } from 'vue'
-import { PropValidator, PropType } from 'vue/types/options'
+import { VNode, VNodeDirective, PropType } from 'vue'
 import { TouchWrapper } from '../../directives/touch/types'
 
 const baseMixins = mixins(
@@ -85,9 +84,9 @@ export default baseMixins.extend({
     permanent: Boolean,
     right: Boolean,
     src: {
-      type: [String, Object],
+      type: [String, Object] as PropType<string | srcObject>,
       default: '',
-    } as PropValidator<string | srcObject>,
+    },
     stateless: Boolean,
     tag: {
       type: String,

@@ -1,8 +1,7 @@
 import './VDataTable.sass'
 
 // Types
-import { VNode, VNodeChildrenArrayContents, VNodeChildren } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { VNode, VNodeChildrenArrayContents, VNodeChildren, PropType } from 'vue'
 import { TableHeader, FilterFn } from './types'
 import { DataProps, DataOptions, DataPagination, compareFn } from '../VData/types'
 
@@ -65,9 +64,9 @@ export default VDataIterator.extend({
 
   props: {
     headers: {
-      type: Array,
-      default: () => ([]),
-    } as PropValidator<TableHeader[]>,
+      type: Array as PropType<TableHeader[]>,
+      default: () => ([] as TableHeader[]),
+    },
     showSelect: Boolean,
     showExpand: Boolean,
     showGroupBy: Boolean,
@@ -90,9 +89,9 @@ export default VDataIterator.extend({
       default: '$expand',
     },
     customFilter: {
-      type: Function,
+      type: Function as PropType<typeof defaultFilter>,
       default: defaultFilter,
-    } as PropValidator<typeof defaultFilter>,
+    },
   },
 
   data () {

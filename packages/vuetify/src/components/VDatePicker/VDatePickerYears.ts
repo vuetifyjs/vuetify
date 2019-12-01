@@ -9,8 +9,7 @@ import { createNativeLocaleFormatter } from './util'
 import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
-import Vue, { VNode } from 'vue'
-import { PropType } from 'vue/types/options'
+import Vue, { VNode, PropType } from 'vue'
 import { DatePickerFormatter } from './types'
 
 interface options extends Vue {

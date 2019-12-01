@@ -1,7 +1,4 @@
-import Vue, { VNodeData } from 'vue'
-
-// Types
-import { PropValidator } from 'vue/types/options'
+import Vue, { VNodeData, PropType } from 'vue'
 
 // Directives
 import Ripple, { RippleOptions } from '../../directives/ripple'
@@ -21,9 +18,9 @@ export default Vue.extend({
     append: Boolean,
     disabled: Boolean,
     exact: {
-      type: Boolean,
+      type: Boolean as PropType<boolean | undefined>,
       default: undefined,
-    } as PropValidator<boolean | undefined>,
+    },
     exactActiveClass: String,
     link: Boolean,
     href: [String, Object],

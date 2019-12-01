@@ -8,8 +8,7 @@ import VSlider from '../VSlider/VSlider'
 import { RGBtoCSS, RGBAtoCSS } from '../../util/colorUtils'
 
 // Types
-import Vue, { VNode, VNodeData } from 'vue'
-import { PropType } from 'vue/types/options'
+import Vue, { VNode, VNodeData, PropType } from 'vue'
 import { VColorPickerColor, fromHSVA } from './util'
 
 export default Vue.extend({

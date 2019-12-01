@@ -2,6 +2,7 @@ import Vue from 'vue'
 import { VNode, VNodeDirective } from 'vue/types'
 import { VuetifyIcon } from 'vuetify/types/services/icons'
 import { compareFn } from '../components/VData/types'
+import { ItemKey } from '@components/VSelect/types'
 
 export function createSimpleFunctional (
   c: string,
@@ -120,7 +121,7 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
 
 export function getPropertyFromItem (
   item: object,
-  property: string | (string | number)[] | ((item: object, fallback?: any) => any),
+  property: ItemKey,
   fallback?: any
 ): any {
   if (property == null) return item === undefined ? fallback : item

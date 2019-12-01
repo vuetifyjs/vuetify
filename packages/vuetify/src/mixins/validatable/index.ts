@@ -9,7 +9,7 @@ import { consoleError } from '../../util/console'
 import mixins from '../../util/mixins'
 
 // Types
-import { PropValidator } from 'vue/types/options'
+import { PropType } from 'vue'
 import { VuetifyMessage, VuetifyRuleValidations } from './types'
 
 /* @vue/component */
@@ -28,23 +28,23 @@ export default mixins(
       default: 1,
     },
     errorMessages: {
-      type: [String, Array],
+      type: [String, Array] as PropType<VuetifyMessage>,
       default: () => [],
-    } as PropValidator<VuetifyMessage>,
+    },
     messages: {
-      type: [String, Array],
+      type: [String, Array] as PropType<VuetifyMessage>,
       default: () => [],
-    } as PropValidator<VuetifyMessage>,
+    },
     readonly: Boolean,
     rules: {
-      type: Array,
+      type: Array as PropType<VuetifyRuleValidations>,
       default: () => [],
-    } as PropValidator<VuetifyRuleValidations>,
+    },
     success: Boolean,
     successMessages: {
-      type: [String, Array],
+      type: [String, Array] as PropType<VuetifyMessage>,
       default: () => [],
-    } as PropValidator<VuetifyMessage>,
+    },
     validateOnBlur: Boolean,
     value: { required: false },
   },

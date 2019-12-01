@@ -9,8 +9,7 @@ import VIcon from '../VIcon'
 import { parseHex } from '../../util/colorUtils'
 
 // Types
-import Vue, { VNode } from 'vue'
-import { PropType } from 'vue/types/options'
+import Vue, { VNode, PropType } from 'vue'
 import { VColorPickerColor, fromRGBA, fromHexa, fromHSLA } from './util'
 
 type Input = [string, number, string]

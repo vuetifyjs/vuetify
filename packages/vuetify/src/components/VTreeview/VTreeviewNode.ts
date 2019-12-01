@@ -10,10 +10,9 @@ import Colorable from '../../mixins/colorable'
 // Utils
 import mixins, { ExtractVue } from '../../util/mixins'
 import { getObjectValueByPath } from '../../util/helpers'
-import { PropType } from 'vue/types/options'
 
 // Types
-import { VNode } from 'vue'
+import { VNode, PropType } from 'vue'
 
 type VTreeViewInstance = InstanceType<typeof VTreeview>
 

@@ -13,8 +13,7 @@ import isDateAllowed from '../util/isDateAllowed'
 import mixins from '../../../util/mixins'
 
 // Types
-import { VNodeChildren } from 'vue'
-import { PropValidator, PropType } from 'vue/types/options'
+import { VNodeChildren, PropType } from 'vue'
 import { AllowedDateFunction, DatePickerFormatter, DateEvents, DateEventColors, DateEventColorValue } from '../types'
 import { TouchWrapper } from '../../../directives/touch/types'
 
@@ -34,13 +33,13 @@ export default mixins(
     disabled: Boolean,
     format: Function as PropType<DatePickerFormatter | undefined>,
     events: {
-      type: [Array, Function, Object],
+      type: [Array, Function, Object] as PropType<DateEvents>,
       default: () => null,
-    } as any as PropValidator<DateEvents>,
+    },
     eventColor: {
-      type: [Array, Function, Object, String],
+      type: [Array, Function, Object, String] as PropType<DateEventColors>,
       default: () => 'warning',
-    } as any as PropValidator<DateEventColors>,
+    },
     min: String,
     max: String,
     range: Boolean,

@@ -14,8 +14,7 @@ import mixins from '../../util/mixins'
 import Themeable from '../../mixins/themeable'
 
 // Types
-import { VNode } from 'vue'
-import { PropType } from 'vue/types/options'
+import { VNode, PropType } from 'vue'
 
 export default mixins(Themeable).extend({
   name: 'v-color-picker',

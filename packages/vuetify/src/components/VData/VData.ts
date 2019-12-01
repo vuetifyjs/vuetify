@@ -4,7 +4,7 @@ import Vue, { VNode } from 'vue'
 
 // Types
 import { DataOptions, DataPagination, DataProps, SortItemsFn } from './types'
-import { PropValidator } from 'vue/types/options'
+import { PropValidator, PropType } from 'vue/types/options'
 
 export default Vue.extend({
   name: 'v-data',
@@ -13,25 +13,25 @@ export default Vue.extend({
 
   props: {
     items: {
-      type: Array,
+      type: Array as PropType<any[]>,
       default: () => [],
-    } as PropValidator<any[]>,
+    },
     options: {
       type: Object,
       default: () => ({}),
     } as PropValidator<Partial<DataOptions>>,
     sortBy: {
-      type: [String, Array],
+      type: [String, Array] as PropType<string | string[]>,
       default: () => [],
-    } as PropValidator<string | string[]>,
+    },
     sortDesc: {
-      type: [Boolean, Array],
+      type: [Boolean, Array] as PropType<boolean | boolean[]>,
       default: () => [],
-    } as PropValidator<boolean | boolean[]>,
+    },
     customSort: {
-      type: Function,
+      type: Function as PropType<SortItemsFn>,
       default: sortItems,
-    } as PropValidator<SortItemsFn>,
+    },
     mustSort: Boolean,
     multiSort: Boolean,
     page: {
@@ -43,17 +43,17 @@ export default Vue.extend({
       default: 10,
     },
     groupBy: {
-      type: [String, Array],
+      type: [String, Array] as PropType<string | string[]>,
       default: () => [],
-    } as PropValidator<string | string[]>,
+    },
     groupDesc: {
-      type: [Boolean, Array],
+      type: [Boolean, Array] as PropType<boolean | boolean[]>,
       default: () => [],
-    } as PropValidator<boolean | boolean[]>,
+    },
     customGroup: {
-      type: Function,
+      type: Function as PropType<typeof groupItems>,
       default: groupItems,
-    } as PropValidator<typeof groupItems>,
+    },
     locale: {
       type: String,
       default: 'en-US',
@@ -63,9 +63,9 @@ export default Vue.extend({
     disableFiltering: Boolean,
     search: String,
     customFilter: {
-      type: Function,
+      type: Function as PropType<typeof searchItems>,
       default: searchItems,
-    } as PropValidator<typeof searchItems>,
+    },
     serverItemsLength: {
       type: Number,
       default: -1,

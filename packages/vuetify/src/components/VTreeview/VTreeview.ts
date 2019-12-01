@@ -2,8 +2,7 @@
 import './VTreeview.sass'
 
 // Types
-import { VNode, VNodeChildrenArrayContents } from 'vue'
-import { PropValidator, PropType } from 'vue/types/options'
+import { VNode, VNodeChildrenArrayContents, PropType } from 'vue'
 
 // Components
 import VTreeviewNode, { VTreeviewNodeProps } from './VTreeviewNode'
@@ -55,21 +54,21 @@ export default mixins(
 
   props: {
     active: {
-      type: Array,
+      type: Array as PropType<NodeArray>,
       default: () => ([]),
-    } as PropValidator<NodeArray>,
+    },
     dense: Boolean,
     filter: Function as PropType<FilterTreeItemFunction>,
     hoverable: Boolean,
     items: {
-      type: Array,
+      type: Array as PropType<any[]>,
       default: () => ([]),
-    } as PropValidator<any[]>,
+    },
     multipleActive: Boolean,
     open: {
-      type: Array,
+      type: Array as PropType<NodeArray>,
       default: () => ([]),
-    } as PropValidator<NodeArray>,
+    },
     openAll: Boolean,
     returnObject: {
       type: Boolean,
@@ -77,14 +76,14 @@ export default mixins(
     },
     search: String,
     selectionType: {
-      type: String,
+      type: String as PropType<'leaf' | 'independent'>,
       default: 'leaf',
       validator: (v: string) => ['leaf', 'independent'].includes(v),
-    } as PropValidator<'leaf' | 'independent'>,
+    },
     value: {
-      type: Array,
+      type: Array as PropType<NodeArray>,
       default: () => ([]),
-    } as PropValidator<NodeArray>,
+    },
     ...VTreeviewNodeProps,
   },
 

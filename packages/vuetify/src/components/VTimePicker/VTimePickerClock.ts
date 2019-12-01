@@ -6,8 +6,7 @@ import Themeable from '../../mixins/themeable'
 
 // Types
 import mixins, { ExtractVue } from '../../util/mixins'
-import Vue, { VNode } from 'vue'
-import { PropType } from 'vue/types/options'
+import Vue, { VNode, PropType } from 'vue'
 
 interface Point {
   x: number

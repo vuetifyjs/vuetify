@@ -19,7 +19,7 @@ import { removed } from '../../util/console'
 // Types
 import mixins from '../../util/mixins'
 import { VNode } from 'vue'
-import { PropValidator, PropType } from 'vue/types/options'
+import { PropType, PropValidator } from 'vue/types/options'
 
 const baseMixins = mixins(
   Colorable,

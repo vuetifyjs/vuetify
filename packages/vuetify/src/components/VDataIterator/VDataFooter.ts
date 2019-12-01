@@ -6,8 +6,7 @@ import VIcon from '../VIcon'
 import VBtn from '../VBtn'
 
 // Types
-import Vue, { VNode, VNodeChildrenArrayContents } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import Vue, { VNode, VNodeChildrenArrayContents, PropType } from 'vue'
 import { DataPagination, DataOptions } from '../VData/types'
 
 export default Vue.extend({
@@ -15,17 +14,17 @@ export default Vue.extend({
 
   props: {
     options: {
-      type: Object,
+      type: Object as PropType<DataOptions>,
       required: true,
-    } as PropValidator<DataOptions>,
+    },
     pagination: {
-      type: Object,
+      type: Object as PropType<DataPagination>,
       required: true,
-    } as PropValidator<DataPagination>,
+    },
     itemsPerPageOptions: {
-      type: Array,
+      type: Array as PropType<any[]>,
       default: () => ([5, 10, 15, -1]),
-    } as PropValidator<any[]>,
+    },
     prevIcon: {
       type: String,
       default: '$prev',

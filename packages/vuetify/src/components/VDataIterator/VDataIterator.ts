@@ -1,5 +1,3 @@
-import { VNode, VNodeChildren } from 'vue'
-
 // Components
 import { VData } from '../VData'
 import VDataFooter from './VDataFooter'
@@ -12,7 +10,7 @@ import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, camel
 import { breaking, removed } from '../../util/console'
 
 // Types
-import { PropValidator } from 'vue/types/options'
+import { VNode, VNodeChildren, PropType } from 'vue'
 import { DataProps } from '../VData/types'
 
 /* @vue/component */
@@ -26,14 +24,14 @@ export default Themeable.extend({
       default: 'id',
     },
     value: {
-      type: Array,
+      type: Array as PropType<any[]>,
       default: () => [],
-    } as PropValidator<any[]>,
+    },
     singleSelect: Boolean,
     expanded: {
-      type: Array,
+      type: Array as PropType<any[]>,
       default: () => [],
-    } as PropValidator<any[]>,
+    },
     singleExpand: Boolean,
     loading: [Boolean, String],
     noResultsText: {

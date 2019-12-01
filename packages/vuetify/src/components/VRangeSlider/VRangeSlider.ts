@@ -21,7 +21,7 @@ export default VSlider.extend({
     value: {
       type: Array,
       default: () => ([0, 0]),
-    } as PropValidator<number[]>,
+    } as unknown as PropValidator<[number, number]>,
   },
 
   data () {

@@ -9,7 +9,7 @@ import VTextField from '../VTextField/VTextField'
 import { keyCodes } from '../../util/helpers'
 
 // Types
-import { PropValidator } from 'vue/types/options'
+import { PropType } from 'vue'
 
 const defaultMenuProps = {
   ...VSelectMenuProps,
@@ -44,9 +44,9 @@ export default VSelect.extend({
     },
     noFilter: Boolean,
     searchInput: {
-      type: String,
+      type: String as PropType<string | undefined>,
       default: undefined,
-    } as PropValidator<string | undefined>,
+    },
   },
 
   data () {

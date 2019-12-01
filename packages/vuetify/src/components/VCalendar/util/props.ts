@@ -1,6 +1,6 @@
 
 import { validateTimestamp, parseDate } from './timestamp'
-import { PropValidator } from 'vue/types/options'
+import { PropType } from 'vue'
 import { VEventInput, VTimestampFormatter, VTimestamp } from '../types'
 
 export default {
@@ -15,9 +15,9 @@ export default {
       validate: validateTimestamp,
     },
     weekdays: {
-      type: Array,
+      type: Array as PropType<number[]>,
       default: () => [0, 1, 2, 3, 4, 5, 6],
-    } as PropValidator<number[]>,
+    },
     hideHeader: {
       type: Boolean,
       default: false,
@@ -27,13 +27,13 @@ export default {
       default: true,
     },
     weekdayFormat: {
-      type: Function,
+      type: Function as PropType<VTimestampFormatter>,
       default: null,
-    } as PropValidator<VTimestampFormatter>,
+    },
     dayFormat: {
-      type: Function,
+      type: Function as PropType<VTimestampFormatter>,
       default: null,
-    } as PropValidator<VTimestampFormatter>,
+    },
   },
   intervals: {
     maxDays: {
@@ -65,17 +65,17 @@ export default {
       validate: validateNumber,
     },
     intervalFormat: {
-      type: Function,
+      type: Function as PropType<VTimestampFormatter>,
       default: null,
-    } as PropValidator<VTimestampFormatter>,
+    },
     intervalStyle: {
-      type: Function,
+      type: Function as PropType<(interval: VTimestamp) => object>,
       default: null,
-    } as PropValidator<(interval: VTimestamp) => object>,
+    },
     showIntervalLabel: {
-      type: Function,
+      type: Function as PropType<(interval: VTimestamp) => boolean>,
       default: null,
-    } as PropValidator<(interval: VTimestamp) => boolean>,
+    },
   },
   weeks: {
     minWeeks: {
@@ -91,9 +91,9 @@ export default {
       default: true,
     },
     monthFormat: {
-      type: Function,
+      type: Function as PropType<VTimestampFormatter>,
       default: null,
-    } as PropValidator<VTimestampFormatter>,
+    },
   },
   calendar: {
     type: {
@@ -107,9 +107,9 @@ export default {
   },
   events: {
     events: {
-      type: Array,
+      type: Array as PropType<VEventInput[]>,
       default: () => [],
-    } as PropValidator<VEventInput[]>,
+    },
     eventStart: {
       type: String,
       default: 'start',
