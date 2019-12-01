@@ -438,6 +438,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -827,6 +828,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
