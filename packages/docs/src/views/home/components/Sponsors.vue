@@ -35,9 +35,7 @@
   export default {
     name: 'HomeSponsors',
 
-    provide: {
-      id: 'home-sponsors',
-    },
+    provide: { id: 'home-sponsors' },
   }
 </script>
 

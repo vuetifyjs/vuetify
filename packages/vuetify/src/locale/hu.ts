@@ -1,4 +1,5 @@
 export default {
+  badge: 'Jelvény',
   close: 'Close',
   dataIterator: {
     noResultsText: 'Nincs egyező találat',

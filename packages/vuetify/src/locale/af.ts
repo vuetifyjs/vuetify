@@ -1,4 +1,5 @@
 export default {
+  badge: 'badge',
   close: 'Close',
   dataIterator: {
     noResultsText: 'Geen ooreenstemmende resultate is gevind nie',

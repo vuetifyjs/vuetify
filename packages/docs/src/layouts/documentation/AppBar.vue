@@ -30,9 +30,7 @@
 
 <script>
   // Utilities
-  import {
-    sync,
-  } from 'vuex-pathify'
+  import { sync } from 'vuex-pathify'
 
   export default {
     name: 'DocumentationAppBar',
@@ -41,8 +39,6 @@
       DocumentationSearch: () => import('./Search'),
     },
 
-    computed: {
-      drawer: sync('app/drawer'),
-    },
+    computed: { drawer: sync('app/drawer') },
   }
 </script>
