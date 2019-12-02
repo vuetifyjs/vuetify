@@ -160,7 +160,7 @@ Vuetify is a Material Design Component Framework for the Vue framework. We belie
 - Powerful and unique directives for customizing user experiences
 - WCAG accessibility (a11y) and Section 508 compliant
 - Full RTL support
-- Support for IE11 / Safari 9 with [polyfill](https://vuetifyjs.com/getting-started/quick-start#ie-11-amp-safari-9-support)
+- Support for IE11 / Safari 9 with [polyfill](https://vuetifyjs.com/getting-started/browser-support)
 - Easily customizable with SASS variables and [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugin-vuetify)
 - Built with the [Material Design 2 Specification](https://material.io/guidelines/)
 - Designed for mobile to desktop
