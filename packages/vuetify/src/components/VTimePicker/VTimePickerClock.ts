@@ -6,7 +6,7 @@ import Themeable from '../../mixins/themeable'
 
 // Types
 import mixins, { ExtractVue } from '../../util/mixins'
-import Vue, { VNode } from 'vue'
+import Vue, { VNode, PropType } from 'vue'
 
 interface Point {
   x: number
@@ -35,7 +35,7 @@ export default mixins<options &
   name: 'v-time-picker-clock',
 
   props: {
-    allowedValues: Function,
+    allowedValues: Function as PropType<(value: number) => boolean>,
     ampm: Boolean,
     disabled: Boolean,
     double: Boolean,

@@ -20,7 +20,7 @@ import { breaking, consoleWarn } from '../../util/console'
 
 // Types
 import mixins from '../../util/mixins'
-import { VNode } from 'vue/types'
+import { VNode, PropType } from 'vue/types'
 
 const baseMixins = mixins(
   VInput,
@@ -55,7 +55,7 @@ export default baseMixins.extend<options>().extend({
       default: '$clear',
     },
     counter: [Boolean, Number, String],
-    counterValue: Function,
+    counterValue: Function as PropType<(value: any) => number>,
     filled: Boolean,
     flat: Boolean,
     fullWidth: Boolean,

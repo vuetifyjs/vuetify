@@ -1,37 +1,17 @@
 // Helpers
 import { wrapInArray, sortItems, deepEqual, groupItems, searchItems } from '../../util/helpers'
-import Vue, { VNode, PropType } from 'vue'
+import Vue, { VNode } from 'vue'
 
-export interface DataOptions {
-  page: number
-  itemsPerPage: number
-  sortBy: string[]
-  sortDesc: boolean[]
-  groupBy: string[]
-  groupDesc: boolean[]
-  multiSort: boolean
-  mustSort: boolean
-}
-
-export interface DataPagination {
-  page: number
-  itemsPerPage: number
-  pageStart: number
-  pageStop: number
-  pageCount: number
-  itemsLength: number
-}
-
-export interface DataProps {
-  originalItemsLength: number
-  items: any[]
-  pagination: DataPagination
-  options: DataOptions
-  updateOptions: (obj: any) => void
-  sort: (value: string) => void
-  group: (value: string) => void
-  groupedItems: Record<string, any[]> | null
-}
+// Types
+import {
+  DataOptions,
+  DataPagination,
+  DataScopeProps,
+  DataSortFunction,
+  DataGroupFunction,
+  DataSearchFunction,
+} from 'types'
+import { PropValidator, PropType } from 'vue/types/options'
 
 export default Vue.extend({
   name: 'v-data',
@@ -46,7 +26,7 @@ export default Vue.extend({
     options: {
       type: Object,
       default: () => ({}),
-    },
+    } as PropValidator<Partial<DataOptions>>,
     sortBy: {
       type: [String, Array] as PropType<string | string[]>,
       default: () => [],
@@ -56,7 +36,7 @@ export default Vue.extend({
       default: () => [],
     },
     customSort: {
-      type: Function as any as PropType<typeof sortItems>,
+      type: Function as PropType<DataSortFunction>,
       default: sortItems,
     },
     mustSort: Boolean,
@@ -78,7 +58,7 @@ export default Vue.extend({
       default: () => [],
     },
     customGroup: {
-      type: Function as any as PropType<typeof groupItems>,
+      type: Function as PropType<DataGroupFunction>,
       default: groupItems,
     },
     locale: {
@@ -90,7 +70,7 @@ export default Vue.extend({
     disableFiltering: Boolean,
     search: String,
     customFilter: {
-      type: Function as any as PropType<typeof searchItems>,
+      type: Function as PropType<DataSearchFunction>,
       default: searchItems,
     },
     serverItemsLength: {
@@ -178,7 +158,7 @@ export default Vue.extend({
     groupedItems (): Record<string, any[]> | null {
       return this.isGrouped ? this.groupItems(this.computedItems) : null
     },
-    scopedProps (): DataProps {
+    scopedProps (): DataScopeProps {
       const props = {
         sort: this.sort,
         sortArray: this.sortArray,

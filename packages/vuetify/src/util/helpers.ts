@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import { VNode, VNodeDirective } from 'vue/types'
 import { VuetifyIcon } from 'vuetify/types/services/icons'
+import { DataTableCompareFunction, SelectItemKey } from 'types'
 
 export function createSimpleFunctional (
   c: string,
@@ -119,7 +120,7 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
 
 export function getPropertyFromItem (
   item: object,
-  property: string | (string | number)[] | ((item: object, fallback?: any) => any),
+  property: SelectItemKey,
   fallback?: any
 ): any {
   if (property == null) return item === undefined ? fallback : item
@@ -256,29 +257,27 @@ export function upperFirst (str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
-export function groupItems (
-  items: any[],
+export function groupItems<T extends any = any> (
+  items: T[],
   groupBy: string[],
   groupDesc: boolean[]
-): Record<string, any[]> {
+): Record<string, T[]> {
   const key = groupBy[0]
   return items.reduce((rv, x) => {
     (rv[x[key]] = rv[x[key]] || []).push(x)
     return rv
-  }, {})
+  }, {} as Record<string, T[]>)
 }
 
 export function wrapInArray<T> (v: T | T[] | null | undefined): T[] { return v != null ? Array.isArray(v) ? v : [v] : [] }
 
-export type compareFn<T = any> = (a: T, b: T) => number
-
-export function sortItems (
-  items: any[],
+export function sortItems<T extends any = any> (
+  items: T[],
   sortBy: string[],
   sortDesc: boolean[],
   locale: string,
-  customSorters?: Record<string, compareFn>
-) {
+  customSorters?: Record<string, DataTableCompareFunction<T>>
+): T[] {
   if (sortBy === null || !sortBy.length) return items
   const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
 
@@ -318,8 +317,6 @@ export function sortItems (
   })
 }
 
-export type FilterFn = (value: any, search: string | null, item: any) => boolean
-
 export function defaultFilter (value: any, search: string | null, item: any) {
   return value != null &&
     search != null &&
@@ -327,7 +324,7 @@ export function defaultFilter (value: any, search: string | null, item: any) {
     value.toString().toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) !== -1
 }
 
-export function searchItems (items: any[], search: string) {
+export function searchItems<T extends any = any> (items: T[], search: string): T[] {
   if (!search) return items
   search = search.toString().toLowerCase()
   if (search.trim() === '') return items

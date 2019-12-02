@@ -16,29 +16,28 @@ import { escapeHTML } from '../../../util/helpers'
 // Util
 import props from '../util/props'
 import {
-  VTimestamp,
   getDayIdentifier,
   parseTime,
 } from '../util/timestamp'
 import {
   VEventParsed,
-  VEventInput,
   parseEvent,
   isEventOn,
 } from '../util/events'
+import { CalendarTimestamp, CalendarEvent } from 'types'
 
 // Types
-type VColorFunction = (event: VEventInput) => string
+type VColorFunction = (event: CalendarEvent) => string
 
 type VNameFunction = (event: VEventParsed, timedEvent: boolean) => string
 
-type VTimeToY = (time: VTimestamp | number | string) => number
+type VTimeToY = (time: CalendarTimestamp | number | string) => number
 
-type VEventResetCheck = (date: VTimestamp) => void
+type VEventResetCheck = (date: CalendarTimestamp) => void
 
 type VEventVisualGetOffset = (visual: VEventVisual, visuals: VEventVisual[]) => number
 
-type VEventGetter = (day: VTimestamp) => VEventParsed[]
+type VEventGetter = (day: CalendarTimestamp) => VEventParsed[]
 
 type VEventVisualGetter = (events: VEventParsed[], timed: boolean) => VEventVisual[]
 
@@ -59,7 +58,7 @@ interface VEventVisual {
   column: number
 }
 
-interface VDaySlotScope extends VTimestamp {
+interface VDaySlotScope extends CalendarTimestamp {
   outside: boolean
   index: number
 }
@@ -117,7 +116,7 @@ export default CalendarBase.extend({
   },
 
   methods: {
-    formatTime (withTime: VTimestamp, ampm: boolean): string {
+    formatTime (withTime: CalendarTimestamp, ampm: boolean): string {
       const suffix = ampm ? (withTime.hour < 12 ? 'a' : 'p') : ''
       const hour = withTime.hour % 12 || 12
       const minute = withTime.minute
@@ -286,7 +285,7 @@ export default CalendarBase.extend({
         },
       })
     },
-    genMore (day: VTimestamp): VNode {
+    genMore (day: CalendarTimestamp): VNode {
       return this.$createElement('div', {
         staticClass: 'v-event-more pl-1',
         attrs: {
@@ -307,21 +306,21 @@ export default CalendarBase.extend({
         refInFor: true,
       })
     },
-    getEventsForDay (day: VTimestamp): VEventParsed[] {
+    getEventsForDay (day: CalendarTimestamp): VEventParsed[] {
       const identifier = getDayIdentifier(day)
 
       return this.parsedEvents.filter(
         event => isEventOn(event, identifier)
       )
     },
-    getEventsForDayAll (day: VTimestamp): VEventParsed[] {
+    getEventsForDayAll (day: CalendarTimestamp): VEventParsed[] {
       const identifier = getDayIdentifier(day)
 
       return this.parsedEvents.filter(
         event => event.allDay && isEventOn(event, identifier)
       )
     },
-    getEventsForDayTimed (day: VTimestamp): VEventParsed[] {
+    getEventsForDayTimed (day: CalendarTimestamp): VEventParsed[] {
       const identifier = getDayIdentifier(day)
 
       return this.parsedEvents.filter(

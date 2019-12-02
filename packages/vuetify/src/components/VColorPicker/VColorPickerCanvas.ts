@@ -6,17 +6,16 @@ import { clamp, convertToUnit } from '../../util/helpers'
 import { fromHSVA, VColorPickerColor, fromRGBA } from './util'
 
 // Types
-import Vue, { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import Vue, { VNode, PropType } from 'vue'
 
 export default Vue.extend({
   name: 'v-color-picker-canvas',
 
   props: {
     color: {
-      type: Object,
+      type: Object as PropType<VColorPickerColor>,
       default: () => fromRGBA({ r: 255, g: 0, b: 0, a: 1 }),
-    } as PropValidator<VColorPickerColor>,
+    },
     disabled: Boolean,
     dotSize: {
       type: [Number, String],
