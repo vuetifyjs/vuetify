@@ -1,5 +1,8 @@
 <template>
-  <v-card outlined>
+  <v-card
+    class="mb-6"
+    outlined
+  >
     <v-toolbar
       color="primary"
       dark

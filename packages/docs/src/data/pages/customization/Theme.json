@@ -243,14 +243,22 @@
                 {
                   "type": "doc-api-items",
                   "value": ["v-theme-provider"]
+                },
+                {
+                  "type": "heading",
+                  "lang": "provideHeading2"
+                },
+                {
+                  "type": "text",
+                  "lang": "provideText2"
+                },
+                {
+                  "type": "example",
+                  "value": "provider"
                 }
               ]
             }
           ]
-        },
-        {
-          "type": "example",
-          "value": "provider"
         }
       ]
     },
