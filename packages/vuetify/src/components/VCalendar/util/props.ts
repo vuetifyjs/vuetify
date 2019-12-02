@@ -1,7 +1,7 @@
 
 import { validateTimestamp, parseDate } from './timestamp'
-import { VEventInput } from './events'
-import { PropValidator } from 'vue/types/options'
+import { PropType } from 'vue'
+import { CalendarEvent, CalendarFormatter, CalendarTimestamp } from 'types'
 
 export default {
   base: {
@@ -15,9 +15,9 @@ export default {
       validate: validateTimestamp,
     },
     weekdays: {
-      type: Array,
+      type: Array as PropType<number[]>,
       default: () => [0, 1, 2, 3, 4, 5, 6],
-    } as PropValidator<number[]>,
+    },
     hideHeader: {
       type: Boolean,
       default: false,
@@ -27,11 +27,11 @@ export default {
       default: true,
     },
     weekdayFormat: {
-      type: Function, // VTimestampFormatter,
+      type: Function as PropType<CalendarFormatter>,
       default: null,
     },
     dayFormat: {
-      type: Function, // VTimestampFormatter,
+      type: Function as PropType<CalendarFormatter>,
       default: null,
     },
   },
@@ -65,15 +65,15 @@ export default {
       validate: validateNumber,
     },
     intervalFormat: {
-      type: Function, // VTimestampFormatter,
+      type: Function as PropType<CalendarFormatter>,
       default: null,
     },
     intervalStyle: {
-      type: Function, // (interval: VTimestamp): object
+      type: Function as PropType<(interval: CalendarTimestamp) => object>,
       default: null,
     },
     showIntervalLabel: {
-      type: Function, // (interval: VTimestamp): boolean
+      type: Function as PropType<(interval: CalendarTimestamp) => boolean>,
       default: null,
     },
   },
@@ -91,7 +91,7 @@ export default {
       default: true,
     },
     monthFormat: {
-      type: Function, // VTimestampFormatter,
+      type: Function as PropType<CalendarFormatter>,
       default: null,
     },
   },
@@ -107,9 +107,9 @@ export default {
   },
   events: {
     events: {
-      type: Array,
+      type: Array as PropType<CalendarEvent[]>,
       default: () => [],
-    } as PropValidator<VEventInput[]>,
+    },
     eventStart: {
       type: String,
       default: 'start',

@@ -1,3 +1,4 @@
+// Imports
 import { createApp } from './main'
 
 // ENV Variables
@@ -28,6 +29,7 @@ export default context => {
     // wait until router has resolved possible async hooks
     router.onReady(() => {
       const matchedComponents = router.getMatchedComponents()
+
       // Call fetchData hooks on components matched by the route.
       // A preFetch hook dispatches a store action and returns a Promise,
       // which is resolved when the action is complete and store state has been
@@ -36,8 +38,8 @@ export default context => {
         matchedComponents.map(async c => {
           try {
             await c.asyncData({
-              store,
               route: router.currentRoute,
+              store,
             })
           } catch (e) {
             return Promise.resolve(e)

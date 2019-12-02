@@ -20,7 +20,7 @@ import { breaking, consoleWarn } from '../../util/console'
 
 // Types
 import mixins from '../../util/mixins'
-import { VNode } from 'vue/types'
+import { VNode, PropType } from 'vue/types'
 
 const baseMixins = mixins(
   VInput,
@@ -55,6 +55,7 @@ export default baseMixins.extend<options>().extend({
       default: '$clear',
     },
     counter: [Boolean, Number, String],
+    counterValue: Function as PropType<(value: any) => number>,
     filled: Boolean,
     flat: Boolean,
     fullWidth: Boolean,
@@ -107,7 +108,10 @@ export default baseMixins.extend<options>().extend({
         'v-text-field--shaped': this.shaped,
       }
     },
-    counterValue (): number {
+    computedCounterValue (): number {
+      if (typeof this.counterValue === 'function') {
+        return this.counterValue(this.internalValue)
+      }
       return (this.internalValue || '').toString().length
     },
     internalValue: {
@@ -296,7 +300,7 @@ export default baseMixins.extend<options>().extend({
           dark: this.dark,
           light: this.light,
           max,
-          value: this.counterValue,
+          value: this.computedCounterValue,
         },
       })
     },

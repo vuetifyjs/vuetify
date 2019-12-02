@@ -8,8 +8,7 @@ import { getSlot, getSlotType } from '../../util/helpers'
 import { consoleError } from '../../util/console'
 
 // Types
-import { PropValidator } from 'vue/types/options'
-import { VNode } from 'vue'
+import { VNode, PropType } from 'vue'
 
 const baseMixins = mixins(
   Delayable,
@@ -22,11 +21,11 @@ export default baseMixins.extend({
 
   props: {
     activator: {
-      default: null,
+      default: null as unknown as PropType<string | HTMLElement | VNode | Element | null>,
       validator: (val: string | object) => {
         return ['string', 'object'].includes(typeof val)
       },
-    } as PropValidator<string | HTMLElement | VNode | Element | null>,
+    },
     disabled: Boolean,
     internalActivator: Boolean,
     openOnHover: Boolean,

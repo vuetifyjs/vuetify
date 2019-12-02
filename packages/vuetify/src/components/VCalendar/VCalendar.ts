@@ -13,8 +13,6 @@ import {
   DAYS_IN_MONTH_MAX,
   DAY_MIN,
   DAYS_IN_WEEK,
-  VTimestamp,
-  VTime,
   parseTimestamp,
   validateTimestamp,
   relativeDays,
@@ -26,17 +24,19 @@ import {
   updateRelative,
   getStartOfMonth,
   getEndOfMonth,
+  VTime,
 } from './util/timestamp'
 
 // Calendars
 import VCalendarMonthly from './VCalendarMonthly'
 import VCalendarDaily from './VCalendarDaily'
 import VCalendarWeekly from './VCalendarWeekly'
+import { CalendarTimestamp } from 'types'
 
 // Types
 interface VCalendarRenderProps {
-  start: VTimestamp
-  end: VTimestamp
+  start: CalendarTimestamp
+  end: CalendarTimestamp
   component: string | Component
   maxDays: number
 }
@@ -52,15 +52,15 @@ export default CalendarWithEvents.extend({
   },
 
   data: () => ({
-    lastStart: null as VTimestamp | null,
-    lastEnd: null as VTimestamp | null,
+    lastStart: null as CalendarTimestamp | null,
+    lastEnd: null as CalendarTimestamp | null,
   }),
 
   computed: {
-    parsedValue (): VTimestamp {
+    parsedValue (): CalendarTimestamp {
       return (validateTimestamp(this.value)
         ? parseTimestamp(this.value)
-        : (this.parsedStart || this.times.today)) as VTimestamp
+        : (this.parsedStart || this.times.today)) as CalendarTimestamp
     },
     renderProps (): VCalendarRenderProps {
       const around = this.parsedValue
@@ -216,7 +216,7 @@ export default CalendarWithEvents.extend({
       }],
       on: {
         ...this.$listeners,
-        'click:date': (day: VTimestamp) => {
+        'click:date': (day: CalendarTimestamp) => {
           if (this.$listeners['input']) {
             this.$emit('input', day.date)
           }

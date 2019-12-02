@@ -5,6 +5,7 @@
     class="px-0 py-5"
   />
 </template>
+
 <script>
   // Utilities
   import {
@@ -15,9 +16,7 @@
   export default {
     name: 'DocumentationBreadcrumbs',
 
-    data: () => ({
-      script: null,
-    }),
+    data: () => ({ script: null }),
 
     computed: {
       breadcrumbs: get('documentation/breadcrumbs'),
@@ -47,15 +46,13 @@
       addMicroDataDesktop () {
         if (typeof document === 'undefined') return
 
-        this.script && document.body.removeChild(this.script)
-
         const script = document.createElement('script')
 
         script.type = 'application/ld+json'
         script.innerHTML = JSON.stringify(this.genBreadcrumbList(), 2, null)
-
         document.body.appendChild(script)
 
+        this.script && document.body.removeChild(this.script)
         this.script = script
       },
       addMicroDataServer () {
@@ -70,19 +67,16 @@
           itemListElement: this.breadcrumbs.map(this.genListItem),
         }
       },
-      genListItem (
-        breadcrumb,
-        index,
-      ) {
+      genListItem (breadcrumb, index) {
         const origin = this.$ssrContext
           ? `https://${this.$ssrContext.hostname}`
           : typeof window !== 'undefined' ? window.location.origin : 'https://vuetifyjs.com'
 
         return {
           '@type': 'ListItem',
-          position: index + 1,
-          name: breadcrumb.text,
           item: `${origin}${breadcrumb.to}`,
+          name: breadcrumb.text,
+          position: index + 1,
         }
       },
     },

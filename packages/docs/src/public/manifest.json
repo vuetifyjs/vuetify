@@ -1,11 +1,11 @@
 {
   "name": "Vuetify",
   "short_name": "Vuetify",
-  "theme_color": "#094a7f",
+  "theme_color": "#094A7F",
   "background_color": "#5CBBF6",
   "display": "standalone",
   "start_url": "/getting-started/quick-start",
-  "description": "A material design component framework for Vue.js 2.x",
+  "description": "A Material Design Component Framework for Vue",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
