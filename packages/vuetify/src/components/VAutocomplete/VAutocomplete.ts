@@ -257,7 +257,7 @@ export default VSelect.extend({
         keyCodes.backspace,
         keyCodes.delete,
       ].includes(keyCode) &&
-        !this.getDisabled(currentItem)
+        !this.getDisabled(currentItem) && !this.readonly
       ) {
         const newIndex = this.selectedIndex === index
           ? this.selectedIndex - 1

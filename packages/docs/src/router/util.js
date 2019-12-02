@@ -47,6 +47,7 @@ export function redirectLang (path = '') {
 
   return redirect(() => {
     let lang = `/${getLanguageCookie() || fallbackLocale}`
+
     if (!languageRegex.test(lang)) lang = `/${fallbackLocale}`
 
     return `${lang}${path}`
@@ -57,8 +58,8 @@ export function route (path, name, file) {
   const folder = (file || `${kebabCase(name)}`).toLowerCase()
 
   return {
-    path,
-    name,
     component: () => import(`@/views/${folder}/Index.vue`),
+    name,
+    path,
   }
 }

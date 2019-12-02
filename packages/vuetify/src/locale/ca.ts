@@ -1,25 +1,25 @@
 export default {
-  close: 'Close',
+  close: 'Tancar',
   dataIterator: {
     noResultsText: 'Sense dades per mostrar',
-    loadingText: 'Loading item...',
+    loadingText: 'Carregant...',
   },
   dataTable: {
     itemsPerPageText: 'Files per pàgina:',
     ariaLabel: {
-      sortDescending: ': Sorted descending. Activate to remove sorting.',
-      sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.',
+      sortDescending: ': Ordre descendent. Premi per treure la ordenació.',
+      sortAscending: ': Ordre ascendent. Premi per ordenar descendent.',
+      sortNone: ': Sense ordenar. Premi per ordenar ascendent.',
     },
-    sortBy: 'Sort by',
+    sortBy: 'Ordenat per',
   },
   dataFooter: {
     itemsPerPageText: 'Elements per pàgina:',
     itemsPerPageAll: 'Tot',
-    nextPage: 'Pàgina Següent',
-    prevPage: 'Pàgina Anterior',
-    firstPage: 'Pàgina Primera',
-    lastPage: 'Pàgina Darrera',
+    nextPage: 'Pàgina següent',
+    prevPage: 'Pàgina anterior',
+    firstPage: 'Primera pàgina',
+    lastPage: 'Última pàgina',
     pageText: '{0}-{1} de {2}',
   },
   datePicker: {
@@ -28,17 +28,17 @@ export default {
   noDataText: 'Sense dades',
   carousel: {
     prev: 'Visualització prèvia',
-    next: 'Següent visual',
+    next: 'Visualització següent',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Diapositiva {0} of {1}',
     },
   },
   calendar: {
     moreEvents: '{0} més',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counter: '{0} fitxers',
+    counterSize: '{0} fitxers ({1} en total)',
   },
   timePicker: {
     am: 'AM',
