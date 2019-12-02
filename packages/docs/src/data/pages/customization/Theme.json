@@ -247,6 +247,10 @@
               ]
             }
           ]
+        },
+        {
+          "type": "example",
+          "value": "provider"
         }
       ]
     },
