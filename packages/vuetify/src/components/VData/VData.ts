@@ -3,7 +3,14 @@ import { wrapInArray, sortItems, deepEqual, groupItems, searchItems } from '../.
 import Vue, { VNode } from 'vue'
 
 // Types
-import { DataOptions, DataPagination, DataScopeProps, DataSortFunction } from 'types'
+import {
+  DataOptions,
+  DataPagination,
+  DataScopeProps,
+  DataSortFunction,
+  DataGroupFunction,
+  DataSearchFunction,
+} from 'types'
 import { PropValidator, PropType } from 'vue/types/options'
 
 export default Vue.extend({
@@ -51,7 +58,7 @@ export default Vue.extend({
       default: () => [],
     },
     customGroup: {
-      type: Function as PropType<typeof groupItems>,
+      type: Function as PropType<DataGroupFunction>,
       default: groupItems,
     },
     locale: {
@@ -63,7 +70,7 @@ export default Vue.extend({
     disableFiltering: Boolean,
     search: String,
     customFilter: {
-      type: Function as PropType<typeof searchItems>,
+      type: Function as PropType<DataSearchFunction>,
       default: searchItems,
     },
     serverItemsLength: {

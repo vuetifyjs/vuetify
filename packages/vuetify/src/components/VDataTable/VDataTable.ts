@@ -2,7 +2,15 @@ import './VDataTable.sass'
 
 // Types
 import { VNode, VNodeChildrenArrayContents, VNodeChildren, PropType } from 'vue'
-import { DataTableHeader, DataTableFilterFunction, DataScopeProps, DataOptions, DataPagination, DataTableCompareFunction, DataItemsPerPageOption } from 'types'
+import {
+  DataTableHeader,
+  DataTableFilterFunction,
+  DataScopeProps,
+  DataOptions,
+  DataPagination,
+  DataTableCompareFunction,
+  DataItemsPerPageOption,
+} from 'types'
 import { PropValidator } from 'vue/types/options'
 
 // Components

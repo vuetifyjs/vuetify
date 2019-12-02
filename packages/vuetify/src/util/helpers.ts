@@ -257,27 +257,27 @@ export function upperFirst (str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
-export function groupItems (
-  items: any[],
+export function groupItems<T extends any = any> (
+  items: T[],
   groupBy: string[],
   groupDesc: boolean[]
-): Record<string, any[]> {
+): Record<string, T[]> {
   const key = groupBy[0]
   return items.reduce((rv, x) => {
     (rv[x[key]] = rv[x[key]] || []).push(x)
     return rv
-  }, {})
+  }, {} as Record<string, T[]>)
 }
 
 export function wrapInArray<T> (v: T | T[] | null | undefined): T[] { return v != null ? Array.isArray(v) ? v : [v] : [] }
 
-export function sortItems (
-  items: any[],
+export function sortItems<T extends any = any> (
+  items: T[],
   sortBy: string[],
   sortDesc: boolean[],
   locale: string,
-  customSorters?: Record<string, DataTableCompareFunction>
-) {
+  customSorters?: Record<string, DataTableCompareFunction<T>>
+): T[] {
   if (sortBy === null || !sortBy.length) return items
   const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
 
@@ -324,7 +324,7 @@ export function defaultFilter (value: any, search: string | null, item: any) {
     value.toString().toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) !== -1
 }
 
-export function searchItems (items: any[], search: string) {
+export function searchItems<T extends any = any> (items: T[], search: string): T[] {
   if (!search) return items
   search = search.toString().toLowerCase()
   if (search.trim() === '') return items

@@ -99,13 +99,23 @@ export interface DataScopeProps {
 
 export type DataTableCompareFunction<T = any> = (a: T, b: T) => number
 
-export type DataSortFunction<T extends any[] = any[]> = (
-  items: T,
+export type DataSortFunction<T extends any = any> = (
+  items: T[],
   sortBy: string[],
   sortDesc: boolean[],
   locale: string,
-  customSorters?: Record<string, DataTableCompareFunction>
-) => T;
+  customSorters?: Record<string, DataTableCompareFunction<T>>
+) => T[];
+
+export type DataGroupFunction<T extends any = any> = (
+  items: T[],
+  sortBy: string[],
+  sortDesc: boolean[],
+  locale?: string,
+  customSorters?: Record<string, DataTableCompareFunction<T>>
+) => Record<string, T[]>
+
+export type DataSearchFunction<T extends any = any> = (items: T[], search: string) => T[]
 
 export type DatePickerFormatter = (date: string) => string
 
@@ -177,7 +187,7 @@ export interface CalendarEvent {
 
 export type DataTableFilterFunction = (value: any, search: string | null, item: any) => boolean
 
-export interface DataTableHeader {
+export interface DataTableHeader<T extends any = any> {
   text: string
   value: string
   align?: 'start' | 'center' | 'end'
@@ -187,7 +197,7 @@ export interface DataTableHeader {
   class?: string | string[]
   width?: string | number
   filter?: (value: any, search: string | null, item: any) => boolean
-  sort?: DataTableCompareFunction
+  sort?: DataTableCompareFunction<T>
 }
 
 export type DataItemsPerPageOption = (number | {
