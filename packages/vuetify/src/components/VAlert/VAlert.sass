@@ -21,24 +21,24 @@
 
   > .v-icon,
   > .v-alert__content
-    margin-right: $alert-margin
+    +ltr()
+      margin-right: $alert-margin
 
-  > .v-icon + .v-alert__content
-    margin-right: 0
-
-  > .v-alert__content + .v-icon
-    margin-right: 0
-
-  +rtl()
-    > .v-icon,
-    > .v-alert__content
-      margin-right: 0
+    +rtl()
       margin-left: $alert-margin
 
-    > .v-icon + .v-alert__content
+  > .v-icon + .v-alert__content
+    +ltr()
+      margin-right: 0
+
+    +rtl()
       margin-left: 0
 
-    > .v-alert__content + .v-icon
+  > .v-alert__content + .v-icon
+    +ltr()
+      margin-right: 0
+
+    +rtl()
       margin-left: 0
 
 // Elements
@@ -67,36 +67,31 @@
     bottom: 0
 
   &--left
-    border-top-left-radius: inherit
-    border-bottom-left-radius: inherit
-    left: 0
+    +ltr()
+      border-top-left-radius: inherit
+      border-bottom-left-radius: inherit
+      left: 0
+
+    +rtl()
+      border-top-right-radius: inherit
+      border-bottom-right-radius: inherit
+      right: 0
 
   &--right
-    border-top-right-radius: inherit
-    border-bottom-right-radius: inherit
-    right: 0
+    +ltr()
+      border-top-right-radius: inherit
+      border-bottom-right-radius: inherit
+      right: 0
+
+    +rtl()
+      border-top-left-radius: inherit
+      border-bottom-left-radius: inherit
+      left: 0
 
   &--top
     border-top-left-radius: inherit
     border-top-right-radius: inherit
     top: 0
-
-  +rtl()
-    &--left
-      border-top-left-radius: 0
-      border-bottom-left-radius: 0
-      border-top-right-radius: inherit
-      border-bottom-right-radius: inherit
-      left: auto
-      right: 0
-
-    &--right
-      border-top-left-radius: inherit
-      border-bottom-left-radius: inherit
-      border-top-right-radius: 0
-      border-bottom-right-radius: 0
-      left: 0
-      right: auto
 
 .v-alert__content
   flex: 1 1 auto
@@ -112,12 +107,13 @@
   align-self: flex-start
   border-radius: 50%
   height: $alert-icon-size
-  margin-right: 16px
   min-width: $alert-icon-size
   position: relative
 
+  +ltr()
+    margin-right: 16px
+
   +rtl()
-    margin-right: 0
     margin-left: 16px
 
   &.v-icon

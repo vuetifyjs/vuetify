@@ -1,18 +1,13 @@
 <template>
   <base-section
     id="home-made-with-vuetify"
-    v-intersect.once="{
-      options: {
-        rootMargin: '1000px 1000px 1000px 1000px'
-      },
-      handler: init
-    }"
+    v-intersect.once="init"
   >
     <home-cards
-      heading="Vuetify.Home.madeWithVuetify"
-      subheading="Vuetify.Home.madeWithVuetifyText"
       :cards="featured"
       :value="!featured.length"
+      heading="Vuetify.Home.madeWithVuetify"
+      subheading="Vuetify.Home.madeWithVuetifyText"
     />
 
     <div class="text-center">
@@ -27,8 +22,8 @@
         <v-img
           alt="Powered by madewithvuejs.com"
           contain
-          src="https://cdn.vuetifyjs.com/images/home/powered-by-madewithvue-1.svg"
           height="65px"
+          src="https://cdn.vuetifyjs.com/images/home/powered-by-madewithvue-1.svg"
         />
       </a>
     </div>
@@ -39,26 +34,17 @@
   export default {
     name: 'HomeMadeWithVuetify',
 
-    provide: {
-      id: 'home-made-with-vuetify',
-    },
+    provide: { id: 'home-made-with-vuetify' },
 
     components: {
       HomeCards: () => import('./Cards'),
     },
 
-    data: () => ({
-      featured: [],
-    }),
+    data: () => ({ featured: [] }),
 
     computed: {
       computedFeatured () {
         return this.featured.slice(0, 6)
-      },
-    },
-
-    watch: {
-      featured (val) {
       },
     },
 
@@ -100,27 +86,27 @@
 
         const featured = data.data.map(feature => {
           return {
-            title: feature.title,
             description: feature.teaser,
-            src: feature.image,
-            url: feature.url,
             query: '',
+            src: feature.image,
+            title: feature.title,
+            url: feature.url,
           }
         })
 
         this.featured = this.shuffle(featured).slice(0, 4)
 
         const storage = {
-          updatedAt: Date.now(),
           featured: this.featured,
+          updatedAt: Date.now(),
         }
 
         localStorage.setItem('vuetify__featured__projects', JSON.stringify(storage))
       },
       shuffle (array) {
         let currentIndex = array.length
-        let temporaryValue
         let randomIndex
+        let temporaryValue
 
         // While there remain elements to shuffle...
         while (currentIndex !== 0) {

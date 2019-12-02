@@ -26,26 +26,27 @@
     name: 'DocumentationSearch',
 
     data: () => ({
-      label: `Search ("/" to focus)`,
-      search: '',
       docSearch: {},
       isSearching: false,
+      label: 'Search ("/" to focus)',
+      search: '',
     }),
 
     watch: {
       isSearching (val) {
-        this.$refs.toolbar.isScrolling = !val
         if (val) {
-          this.$nextTick(() => this.$refs.search.focus())
-        } else {
-          this.search = null
+          this.$refs.search.focus()
+
+          return
         }
+
+        this.resetSearch()
       },
       search (val) {
-        if (!val) {
-          this.docSearch.autocomplete.autocomplete.close()
-          this.docSearch.autocomplete.autocomplete.setVal('')
-        }
+        if (val) return
+
+        this.docSearch.autocomplete.autocomplete.close()
+        this.docSearch.autocomplete.autocomplete.setVal('')
       },
     },
 
@@ -54,10 +55,11 @@
         e = e || window.event
 
         if (
-          e.keyCode === 191 &&
+          e.keyCode === 191 && // Forward Slash '/'
           e.target !== this.$refs.search.$refs.input
         ) {
           e.preventDefault()
+
           this.$refs.search.focus()
         }
       }
@@ -74,6 +76,7 @@
 
     beforeDestroy () {
       document.onkeydown = null
+
       this.docSearch.autocomplete.autocomplete.close()
       this.docSearch.autocomplete.autocomplete.setVal('')
     },
@@ -81,6 +84,7 @@
     methods: {
       init ({ default: docsearch }) {
         const vm = this
+
         this.docSearch = docsearch({
           apiKey: '259d4615e283a1bbaa3313b4eff7881c',
           autocompleteOptions: {
@@ -88,24 +92,27 @@
             hint: false,
             debug: process.env.NODE_ENV === 'development',
           },
-          indexName: 'vuetifyjs',
-          inputSelector: '#search',
           handleSelected (input, event, suggestion) {
             const url = suggestion.url
             const loc = url.split('.com')
 
-            vm.search = ''
-            vm.isSearching = false
             vm.$router.push(loc.pop())
+            vm.isSearching = false
+            vm.search = ''
             vm.onEsc()
           },
+          indexName: 'vuetifyjs',
+          inputSelector: '#search',
         })
       },
       onBlur () {
-        this.$nextTick(() => (this.search = ''))
+        this.resetSearch()
       },
       onEsc () {
         this.$refs.search.blur()
+      },
+      resetSearch () {
+        this.$nextTick(() => (this.search = undefined))
       },
     },
   }

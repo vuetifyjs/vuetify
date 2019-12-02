@@ -11,6 +11,7 @@
   // Utilities
   import { waitForReadystate } from '@/util/helpers'
 
+  // Data
   import languages from '@/data/i18n/languages.json'
 
   const fallbackLocale = languages.find(lang => lang.fallback === true).locale

@@ -25,22 +25,24 @@
 
   > .v-btn.v-btn--icon
     &:first-child
-      margin-left: -#{$toolbar-btn-icon-size / 4}
+      +ltr()
+        margin-left: -#{$toolbar-btn-icon-size / 4}
 
-      + .v-toolbar__title
-        padding-left: $toolbar-title-padding
-
-    &:last-child
-      margin-right: -#{$toolbar-btn-icon-size / 4}
-
-    +rtl()
-      &:first-child
+      +rtl()
         margin-right: -#{$toolbar-btn-icon-size / 4}
 
-        + .v-toolbar__title
+      + .v-toolbar__title
+        +ltr()
+          padding-left: $toolbar-title-padding
+
+        +rtl()
           padding-right: $toolbar-title-padding
 
-      &:last-child
+    &:last-child
+      +ltr()
+        margin-right: -#{$toolbar-btn-icon-size / 4}
+
+      +rtl()
         margin-left: -#{$toolbar-btn-icon-size / 4}
 
   > .v-tabs
@@ -107,12 +109,13 @@
     white-space: nowrap
 
 .v-toolbar.v-toolbar--collapsed
-  border-bottom-right-radius: 24px
   max-width: 112px
   overflow: hidden
 
+  +ltr()
+    border-bottom-right-radius: 24px
+
   +rtl()
-    border-bottom-right-radius: 0
     border-bottom-left-radius: 24px
 
   .v-toolbar__title,

@@ -21,17 +21,34 @@
 
 .v-treeview
   > .v-treeview-node
-    margin-left: 0
+    +ltr()
+      margin-left: 0
+
+    +rtl()
+      margin-right: 0
 
     &--leaf
-      margin-left: $treeview-direct-leaf-node-margin-start
+      +ltr()
+        margin-left: $treeview-direct-leaf-node-margin-start
+
+      +rtl()
+        margin-right: $treeview-direct-leaf-node-margin-start
 
       & > .v-treeview-node__root
-        padding-left: $treeview-direct-leaf-node-padding-start
-        padding-right: $treeview-node-padding-end
+        +ltr()
+          padding-left: $treeview-direct-leaf-node-padding-start
+          padding-right: $treeview-node-padding-end
+
+        +rtl()
+          padding-right: $treeview-direct-leaf-node-padding-start
+          padding-left: $treeview-node-padding-end
 
   &-node
-    margin-left: $treeview-node-x-margin
+    +ltr()
+      margin-left: $treeview-node-x-margin
+
+    +rtl()
+      margin-right: $treeview-node-x-margin
 
     &--disabled
       pointer-events: none
@@ -52,18 +69,32 @@
         user-select: none
 
     &--leaf
-      margin-left: $treeview-leaf-node-x-margin
+      +ltr()
+        margin-left: $treeview-leaf-node-x-margin
+
+      +rtl()
+        margin-right: $treeview-leaf-node-x-margin
 
       & > .v-treeview-node__root
-        padding-left: $treeview-leaf-node-padding-start
-        padding-right: $treeview-node-padding-end
+        +ltr()
+          padding-left: $treeview-leaf-node-padding-start
+          padding-right: $treeview-node-padding-end
+
+        +rtl()
+          padding-right: $treeview-leaf-node-padding-start
+          padding-left: $treeview-node-padding-end
 
     &__root
       display: flex
       align-items: center
       min-height: $treeview-node-height
-      padding-right: $treeview-node-padding-end
       position: relative
+
+      +ltr()
+        padding-right: $treeview-node-padding-end
+
+      +rtl()
+        padding-left: $treeview-node-padding-end
 
       &::before
         background-color: currentColor
@@ -109,10 +140,19 @@
 
     &__toggle
       user-select: none
-      transform: rotate(-90deg)
+
+      +ltr()
+        transform: rotate(-90deg)
+
+      +rtl()
+        transform: rotate(90deg)
 
       &--open
-        transform: none
+        +ltr()
+          transform: none
+
+        +rtl()
+          transform: none
 
       &--loading
         animation: progress-circular-rotate 1s linear infinite
@@ -121,40 +161,6 @@
 
     &__children
       transition: all $treeview-transition
-
-  +rtl()
-    > .v-treeview-node
-      margin-right: 0
-
-      &--leaf
-        margin-right: $treeview-direct-leaf-node-margin-start
-        margin-left: 0
-
-        & > .v-treeview-node__root
-          padding-right: $treeview-direct-leaf-node-padding-start
-          padding-left: $treeview-node-padding-end
-
-    &-node
-      margin-right: $treeview-node-x-margin
-      margin-left: 0
-
-      &--leaf
-        margin-right: $treeview-leaf-node-x-margin
-        margin-left: 0
-
-        & > .v-treeview-node__root
-          padding-right: $treeview-leaf-node-padding-start
-          padding-left: $treeview-node-padding-end
-
-      &__root
-        padding-right: 0
-        padding-left: $treeview-node-padding-end
-
-      &__toggle
-        transform: rotate(90deg)
-
-        &--open
-          transform: none
 
   &--dense
     .v-treeview-node__root

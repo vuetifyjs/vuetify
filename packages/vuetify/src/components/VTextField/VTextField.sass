@@ -90,27 +90,30 @@
     user-select: none
 
   .v-input__prepend-inner
-    margin-right: auto
-    padding-right: 4px
+    +ltr()
+      margin-right: auto
+      padding-right: 4px
 
     +rtl()
-      padding-right: 0
+      margin-left: auto
       padding-left: 4px
 
   .v-input__append-inner
-    margin-left: auto
-    padding-left: 4px
+    +ltr()
+      margin-left: auto
+      padding-left: 4px
 
     +rtl()
-      padding-left: 0
+      margin-right: auto
       padding-right: 4px
 
   .v-counter
-    margin-left: 8px
     white-space: nowrap
 
+    +ltr()
+      margin-left: 8px
+
     +rtl()
-      margin-left: 0
       margin-right: 8px
 
   .v-label
@@ -118,9 +121,14 @@
     overflow: hidden
     text-overflow: ellipsis
     top: 6px // equal to the margin top of icons
-    transform-origin: top left
     white-space: nowrap
     pointer-events: none
+
+    +ltr()
+      transform-origin: top left
+
+    +rtl()
+      transform-origin: top right
 
     &--active
       max-width: 133%
@@ -164,34 +172,40 @@
     white-space: nowrap
 
   &__prefix
-    text-align: right
-    padding-right: 4px
+    +ltr()
+      text-align: right
+      padding-right: 4px
 
     +rtl()
-      padding-right: 0
+      text-align: left
       padding-left: 4px
 
   &__suffix
-    padding-left: 4px
     white-space: nowrap
 
+    +ltr()
+      padding-left: 4px
+
     +rtl()
-      padding-left: 0
       padding-right: 4px
 
   &--reverse
     .v-text-field__prefix
-      text-align: left
-      padding-right: 0
-      padding-left: 4px
+
+      +ltr()
+        text-align: left
+        padding-right: 0
+        padding-left: 4px
 
       +rtl()
+        text-align: right
         padding-right: 4px
         padding-left: 0
 
     .v-text-field__suffix
-      padding-left: 0
-      padding-right: 4px
+      +ltr()
+        padding-left: 0
+        padding-right: 4px
 
       +rtl()
         padding-left: 4px
@@ -301,10 +315,18 @@
 
   &--reverse
     input
-      text-align: right
+      +ltr()
+        text-align: right
+
+      +rtl()
+        text-align: left
 
     .v-label
-      transform-origin: top right
+      +ltr()
+        transform-origin: top right
+
+      +rtl()
+        transform-origin: top left
 
     & > .v-input__control > .v-input__slot,
     .v-text-field__slot
@@ -336,7 +358,6 @@
       border-width: 1px
       bottom: 0
       left: 0
-      padding-left: 8px
       pointer-events: none
       position: absolute
       right: 0
@@ -345,25 +366,29 @@
       transition-property: border, border-width
       transition-timing-function: map-get($transition, 'fast-in-fast-out')
 
+      +ltr()
+        padding-left: 8px
+
       +rtl()
-        padding-left: 0
         padding-right: 8px
 
     legend
       line-height: 11px
       padding: 0
-      text-align: left
       transition: width $primary-transition
+
+      +ltr()
+        text-align: left
 
       +rtl()
         text-align: right
 
     &.v-text-field--rounded
       legend
-        margin-left: 12px
+        +ltr()
+          margin-left: 12px
 
         +rtl()
-          margin-left: 0
           margin-right: 12px
 
     & > .v-input__control > .v-input__slot
@@ -421,45 +446,14 @@
   &.v-input--has-state > .v-input__control > .v-input__slot:before
     border-color: currentColor
 
-  +rtl()
-    .v-label
-      transform-origin: top right
+  // TODO: where are the corresponding rules for LTR?
+  //
+  // +rtl()
+  //   &--enclosed
+  //     .v-input__append-outer
+  //       margin-left: 0
+  //       margin-right: 16px
 
-    .v-counter
-      margin-left: 0
-      margin-right: 8px
-
-    &--enclosed
-      .v-input__append-outer
-        margin-left: 0
-        margin-right: 16px
-
-      .v-input__prepend-outer
-        margin-left: 16px
-        margin-right: 0
-
-    &--reverse
-      input
-        text-align: left
-
-      .v-label
-        transform-origin: top left
-
-    &__prefix
-      text-align: left
-      padding-right: 0
-      padding-left: 4px
-
-    &__suffix
-      padding-left: 0
-      padding-right: 4px
-
-    &--reverse
-      .v-text-field__prefix
-        text-align: right
-        padding-left: 0
-        padding-right: 4px
-
-      .v-text-field__suffix
-        padding-left: 0
-        padding-right: 4px
+  //     .v-input__prepend-outer
+  //       margin-left: 16px
+  //       margin-right: 0

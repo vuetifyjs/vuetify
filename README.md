@@ -148,6 +148,10 @@
   <a href="https://opencollective.com/vuetify">
     <img src="https://opencollective.com/static/images/become_sponsor.svg" alt="Donate to OpenCollective">
   </a>
+  <br>
+  <a href="https://opencollective.com/vuetify/sponsor/1/website" target="_blank">
+    <img src="https://opencollective.com/vuetify/sponsor/1/avatar.svg">
+  </a>
 </div>
 
 <br>
@@ -160,7 +164,7 @@ Vuetify is a Material Design Component Framework for the Vue framework. We belie
 - Powerful and unique directives for customizing user experiences
 - WCAG accessibility (a11y) and Section 508 compliant
 - Full RTL support
-- Support for IE11 / Safari 9 with [polyfill](https://vuetifyjs.com/getting-started/quick-start#ie-11-amp-safari-9-support)
+- Support for IE11 / Safari 9 with [polyfill](https://vuetifyjs.com/getting-started/browser-support)
 - Easily customizable with SASS variables and [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugin-vuetify)
 - Built with the [Material Design 2 Specification](https://material.io/guidelines/)
 - Designed for mobile to desktop
@@ -338,7 +342,12 @@ Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com
 
 Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/vuetify#sponsor)]
 
-<a href="https://opencollective.com/vuetify/sponsor/0/website" target="_blank"><img src="https://opencollective.com/vuetify/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/vuetify/sponsor/0/website" target="_blank">
+  <img src="https://opencollective.com/vuetify/sponsor/0/avatar.svg">
+</a>
+<a href="https://opencollective.com/vuetify/sponsor/1/website" target="_blank">
+  <img src="https://opencollective.com/vuetify/sponsor/1/avatar.svg">
+</a>
 
 ### 📑 License
 [MIT](http://opensource.org/licenses/MIT)

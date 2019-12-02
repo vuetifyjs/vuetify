@@ -11,10 +11,7 @@ import { PropValidator } from 'vue/types/options'
 import mixins from '../../util/mixins'
 
 // Utilities
-import {
-  escapeHTML,
-  getSlot,
-} from '../../util/helpers'
+import { getSlot } from '../../util/helpers'
 
 /* @vue/component */
 export default mixins(Colorable, Themeable).extend({
@@ -38,15 +35,10 @@ export default mixins(Colorable, Themeable).extend({
       }, this.value.map(this.genMessage))
     },
     genMessage (message: string, key: number) {
-      const slot = getSlot(this, 'default', { message, key })
-      const escapedHTML = escapeHTML(message)
-      const innerHTML = !slot ? escapedHTML : undefined
-
       return this.$createElement('div', {
         staticClass: 'v-messages__message',
         key,
-        domProps: { innerHTML },
-      }, slot)
+      }, getSlot(this, 'default', { message, key }) || [message])
     },
   },
 
