@@ -1,4 +1,4 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 +theme(v-textarea) using ($material)
   &.v-text-field--solo-inverted.v-text-field--solo
@@ -9,31 +9,31 @@
 .v-textarea
   textarea
     flex: 1 1 auto
-    line-height: 18px
+    line-height: $textarea-line-height
     max-width: 100%
-    min-height: 32px
+    min-height: $textarea-min-height
     outline: none
-    padding: 7px 0 8px
+    padding: $textarea-padding
     width: 100%
 
   .v-text-field__prefix
-    padding-top: 4px
+    padding-top: $textarea-prefix-padding-top
     align-self: start
 
   &.v-text-field--box,
   &.v-text-field--enclosed
     .v-text-field__prefix,
     textarea
-      margin-top: 24px
+      margin-top: $textarea-box-enclosed-prefix-margin-top
 
     &.v-text-field--single-line,
     &.v-text-field--outlined
       .v-text-field__prefix,
       textarea
-        margin-top: 12px
+        margin-top: $textarea-box-enclosed-single-outlined-margin-top
 
       .v-label
-        top: 18px
+        top: $textarea-box-enclosed-single-outlined-label-top
 
   &.v-text-field--solo
     align-items: flex-start
@@ -45,14 +45,14 @@
     .v-input__append-inner,
     .v-input__append-outer
       align-self: flex-start
-      margin-top: 16px
+      margin-top: $textarea-solo-append-prepend-margin-top
 
     .v-input__append-inner
       +ltr()
-        padding-left: 12px
+        padding-left: $textarea-solo-append-padding
 
       +rtl()
-        padding-right: 12px
+        padding-right: $textarea-solo-append-padding
 
   &--auto-grow
     textarea
@@ -65,14 +65,14 @@
   &.v-text-field--enclosed
     .v-text-field__slot
       +ltr()
-        margin-right: -12px
+        margin-right: $textarea-enclosed-text-slot-margin
 
       +rtl()
-        margin-left: -12px
+        margin-left: $textarea-enclosed-text-slot-margin
 
       textarea
         +ltr()
-          padding-right: 12px
+          padding-right: $textarea-enclosed-text-slot-padding
 
         +rtl()
-          padding-left: 12px
+          padding-left: $textarea-enclosed-text-slot-padding
