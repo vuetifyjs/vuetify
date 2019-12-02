@@ -107,6 +107,7 @@ export default baseMixins.extend<options>().extend({
         'v-tabs--icons-and-text': this.iconsAndText,
         'v-tabs--right': this.right,
         'v-tabs--vertical': this.vertical,
+        ...this.rtlClasses,
         ...this.themeClasses,
       }
     },
