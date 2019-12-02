@@ -1,4 +1,4 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 // Theme
 +theme(v-navigation-drawer) using ($material)
@@ -37,11 +37,11 @@
 
 // Element
 .v-navigation-drawer__border
-    position: absolute
-    right: 0
-    top: 0
-    height: 100%
-    width: 1px
+  position: absolute
+  right: 0
+  top: 0
+  height: 100%
+  width: $navigation-drawer-border-width
 
 .v-navigation-drawer__content
   height: 100%
@@ -120,4 +120,4 @@
 .v-navigation-drawer--is-mobile,
 .v-navigation-drawer--temporary
   &:not(.v-navigation-drawer--close)
-    +elevation(16)
+    +elevation($navigation-drawer-mobile-temporary-elevation)
