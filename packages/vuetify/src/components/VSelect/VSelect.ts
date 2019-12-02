@@ -23,8 +23,8 @@ import { consoleError } from '../../util/console'
 
 // Types
 import mixins from '../../util/mixins'
-import { PropValidator } from 'vue/types/options'
-import { VNode, VNodeDirective } from 'vue'
+import { VNode, VNodeDirective, PropType } from 'vue'
+import { SelectItemKey } from 'types'
 
 export const defaultMenuProps = {
   closeOnClick: false,
@@ -35,7 +35,6 @@ export const defaultMenuProps = {
 }
 
 // Types
-type ItemProperty = PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>
 const baseMixins = mixins(
   VTextField,
   Comparable,
@@ -67,8 +66,9 @@ export default baseMixins.extend<options>().extend({
       default: '$dropdown',
     },
     attach: {
+      type: null as unknown as PropType<string | boolean | Element | VNode>,
       default: false,
-    } as PropValidator<string | boolean | Element | VNode>,
+    },
     cacheItems: Boolean,
     chips: Boolean,
     clearable: Boolean,
@@ -85,17 +85,17 @@ export default baseMixins.extend<options>().extend({
       default: 'primary',
     },
     itemDisabled: {
-      type: [String, Array, Function],
+      type: [String, Array, Function] as PropType<SelectItemKey>,
       default: 'disabled',
-    } as ItemProperty,
+    },
     itemText: {
-      type: [String, Array, Function],
+      type: [String, Array, Function] as PropType<SelectItemKey>,
       default: 'text',
-    } as ItemProperty,
+    },
     itemValue: {
-      type: [String, Array, Function],
+      type: [String, Array, Function] as PropType<SelectItemKey>,
       default: 'value',
-    } as ItemProperty,
+    },
     menuProps: {
       type: [String, Array, Object],
       default: () => defaultMenuProps,

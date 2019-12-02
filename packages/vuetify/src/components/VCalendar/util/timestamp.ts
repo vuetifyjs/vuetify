@@ -1,3 +1,4 @@
+import { CalendarTimestamp, CalendarFormatter } from 'types'
 
 export const PARSE_REGEX: RegExp = /^(\d{4})-(\d{1,2})(-(\d{1,2}))?([^\d]+(\d{1,2}))?(:(\d{1,2}))?(:(\d{1,2}))?$/
 export const PARSE_TIME: RegExp = /(\d\d?)(:(\d\d?)|)(:(\d\d?)|)/
@@ -14,36 +15,14 @@ export const MINUTES_IN_HOUR = 60
 export const HOURS_IN_DAY = 24
 export const FIRST_HOUR = 0
 
-export interface VTimestamp {
-  date: string
-  time: string
-  year: number
-  month: number
-  day: number
-  weekday: number
-  hour: number
-  minute: number
-  hasDay: boolean
-  hasTime: boolean
-  past: boolean
-  present: boolean
-  future: boolean
-}
-
-export interface VTimeObject {
+type CalendarTimestampFormatOptions = (timestamp: CalendarTimestamp, short: boolean) => object
+type CalendarTimestampOperation = (timestamp: CalendarTimestamp) => CalendarTimestamp
+export type VTime = number | string | {
   hour: number
   minute: number
 }
 
-export type VTime = number | string | VTimeObject
-
-export type VTimestampFormatter = (timestamp: VTimestamp, short: boolean) => string
-
-export type VTimestampFormatOptions = (timestamp: VTimestamp, short: boolean) => object
-
-export type VTimestampOperation = (timestamp: VTimestamp) => VTimestamp
-
-export function getStartOfWeek (timestamp: VTimestamp, weekdays: number[], today?: VTimestamp): VTimestamp {
+export function getStartOfWeek (timestamp: CalendarTimestamp, weekdays: number[], today?: CalendarTimestamp): CalendarTimestamp {
   const start = copyTimestamp(timestamp)
   findWeekday(start, weekdays[0], prevDay)
   updateFormatted(start)
@@ -53,7 +32,7 @@ export function getStartOfWeek (timestamp: VTimestamp, weekdays: number[], today
   return start
 }
 
-export function getEndOfWeek (timestamp: VTimestamp, weekdays: number[], today?: VTimestamp): VTimestamp {
+export function getEndOfWeek (timestamp: CalendarTimestamp, weekdays: number[], today?: CalendarTimestamp): CalendarTimestamp {
   const end = copyTimestamp(timestamp)
   findWeekday(end, weekdays[weekdays.length - 1])
   updateFormatted(end)
@@ -63,7 +42,7 @@ export function getEndOfWeek (timestamp: VTimestamp, weekdays: number[], today?:
   return end
 }
 
-export function getStartOfMonth (timestamp: VTimestamp): VTimestamp {
+export function getStartOfMonth (timestamp: CalendarTimestamp): CalendarTimestamp {
   const start = copyTimestamp(timestamp)
   start.day = DAY_MIN
   updateWeekday(start)
@@ -71,7 +50,7 @@ export function getStartOfMonth (timestamp: VTimestamp): VTimestamp {
   return start
 }
 
-export function getEndOfMonth (timestamp: VTimestamp): VTimestamp {
+export function getEndOfMonth (timestamp: CalendarTimestamp): CalendarTimestamp {
   const end = copyTimestamp(timestamp)
   end.day = daysInMonth(end.year, end.month)
   updateWeekday(end)
@@ -106,13 +85,13 @@ export function validateTimestamp (input: any): boolean {
   return !!PARSE_REGEX.exec(input)
 }
 
-export function parseTimestamp (input: string, now?: VTimestamp): VTimestamp | null {
+export function parseTimestamp (input: string, now?: CalendarTimestamp): CalendarTimestamp | null {
   // YYYY-MM-DD hh:mm:ss
   const parts = PARSE_REGEX.exec(input)
 
   if (!parts) return null
 
-  const timestamp: VTimestamp = {
+  const timestamp: CalendarTimestamp = {
     date: input,
     time: '',
     year: parseInt(parts[1]),
@@ -138,7 +117,7 @@ export function parseTimestamp (input: string, now?: VTimestamp): VTimestamp | n
   return timestamp
 }
 
-export function parseDate (date: Date): VTimestamp {
+export function parseDate (date: Date): CalendarTimestamp {
   return updateFormatted({
     date: '',
     time: '',
@@ -156,19 +135,19 @@ export function parseDate (date: Date): VTimestamp {
   })
 }
 
-export function getDayIdentifier (timestamp: VTimestamp): number {
+export function getDayIdentifier (timestamp: CalendarTimestamp): number {
   return timestamp.year * 10000 + timestamp.month * 100 + timestamp.day
 }
 
-export function getTimeIdentifier (timestamp: VTimestamp): number {
+export function getTimeIdentifier (timestamp: CalendarTimestamp): number {
   return timestamp.hour * 100 + timestamp.minute
 }
 
-export function getTimestampIdentifier (timestamp: VTimestamp): number {
+export function getTimestampIdentifier (timestamp: CalendarTimestamp): number {
   return getDayIdentifier(timestamp) * 10000 + getTimeIdentifier(timestamp)
 }
 
-export function updateRelative (timestamp: VTimestamp, now: VTimestamp, time = false): VTimestamp {
+export function updateRelative (timestamp: CalendarTimestamp, now: CalendarTimestamp, time = false): CalendarTimestamp {
   let a = getDayIdentifier(now)
   let b = getDayIdentifier(timestamp)
   let present = a === b
@@ -186,7 +165,7 @@ export function updateRelative (timestamp: VTimestamp, now: VTimestamp, time = f
   return timestamp
 }
 
-export function updateMinutes (timestamp: VTimestamp, minutes: number, now?: VTimestamp): VTimestamp {
+export function updateMinutes (timestamp: CalendarTimestamp, minutes: number, now?: CalendarTimestamp): CalendarTimestamp {
   timestamp.hasTime = true
   timestamp.hour = Math.floor(minutes / MINUTES_IN_HOUR)
   timestamp.minute = minutes % MINUTES_IN_HOUR
@@ -198,20 +177,20 @@ export function updateMinutes (timestamp: VTimestamp, minutes: number, now?: VTi
   return timestamp
 }
 
-export function updateWeekday (timestamp: VTimestamp): VTimestamp {
+export function updateWeekday (timestamp: CalendarTimestamp): CalendarTimestamp {
   timestamp.weekday = getWeekday(timestamp)
 
   return timestamp
 }
 
-export function updateFormatted (timestamp: VTimestamp): VTimestamp {
+export function updateFormatted (timestamp: CalendarTimestamp): CalendarTimestamp {
   timestamp.time = getTime(timestamp)
   timestamp.date = getDate(timestamp)
 
   return timestamp
 }
 
-export function getWeekday (timestamp: VTimestamp): number {
+export function getWeekday (timestamp: CalendarTimestamp): number {
   if (timestamp.hasDay) {
     const _ = Math.floor
     const k = timestamp.day
@@ -233,7 +212,7 @@ export function daysInMonth (year: number, month: number) {
   return isLeapYear(year) ? DAYS_IN_MONTH_LEAP[month] : DAYS_IN_MONTH[month]
 }
 
-export function copyTimestamp (timestamp: VTimestamp): VTimestamp {
+export function copyTimestamp (timestamp: CalendarTimestamp): CalendarTimestamp {
   const { date, time, year, month, day, weekday, hour, minute, hasDay, hasTime, past, present, future } = timestamp
 
   return { date, time, year, month, day, weekday, hour, minute, hasDay, hasTime, past, present, future }
@@ -248,7 +227,7 @@ export function padNumber (x: number, length: number): string {
   return padded
 }
 
-export function getDate (timestamp: VTimestamp): string {
+export function getDate (timestamp: CalendarTimestamp): string {
   let str = `${padNumber(timestamp.year, 4)}-${padNumber(timestamp.month, 2)}`
 
   if (timestamp.hasDay) str += `-${padNumber(timestamp.day, 2)}`
@@ -256,7 +235,7 @@ export function getDate (timestamp: VTimestamp): string {
   return str
 }
 
-export function getTime (timestamp: VTimestamp): string {
+export function getTime (timestamp: CalendarTimestamp): string {
   if (!timestamp.hasTime) {
     return ''
   }
@@ -264,7 +243,7 @@ export function getTime (timestamp: VTimestamp): string {
   return `${padNumber(timestamp.hour, 2)}:${padNumber(timestamp.minute, 2)}`
 }
 
-export function nextMinutes (timestamp: VTimestamp, minutes: number): VTimestamp {
+export function nextMinutes (timestamp: CalendarTimestamp, minutes: number): CalendarTimestamp {
   timestamp.minute += minutes
   while (timestamp.minute > MINUTES_IN_HOUR) {
     timestamp.minute -= MINUTES_IN_HOUR
@@ -278,7 +257,7 @@ export function nextMinutes (timestamp: VTimestamp, minutes: number): VTimestamp
   return timestamp
 }
 
-export function nextDay (timestamp: VTimestamp): VTimestamp {
+export function nextDay (timestamp: CalendarTimestamp): CalendarTimestamp {
   timestamp.day++
   timestamp.weekday = (timestamp.weekday + 1) % DAYS_IN_WEEK
   if (timestamp.day > DAYS_IN_MONTH_MIN && timestamp.day > daysInMonth(timestamp.year, timestamp.month)) {
@@ -293,7 +272,7 @@ export function nextDay (timestamp: VTimestamp): VTimestamp {
   return timestamp
 }
 
-export function prevDay (timestamp: VTimestamp): VTimestamp {
+export function prevDay (timestamp: CalendarTimestamp): CalendarTimestamp {
   timestamp.day--
   timestamp.weekday = (timestamp.weekday + 6) % DAYS_IN_WEEK
   if (timestamp.day < DAY_MIN) {
@@ -309,16 +288,16 @@ export function prevDay (timestamp: VTimestamp): VTimestamp {
 }
 
 export function relativeDays (
-  timestamp: VTimestamp,
-  mover: VTimestampOperation = nextDay,
+  timestamp: CalendarTimestamp,
+  mover: CalendarTimestampOperation = nextDay,
   days = 1
-): VTimestamp {
+): CalendarTimestamp {
   while (--days >= 0) mover(timestamp)
   return timestamp
 }
 
-export function findWeekday (timestamp: VTimestamp, weekday: number,
-  mover: VTimestampOperation = nextDay, maxDays = 6): VTimestamp {
+export function findWeekday (timestamp: CalendarTimestamp, weekday: number,
+  mover: CalendarTimestampOperation = nextDay, maxDays = 6): CalendarTimestamp {
   while (timestamp.weekday !== weekday && --maxDays >= 0) mover(timestamp)
 
   return timestamp
@@ -346,15 +325,15 @@ export function getWeekdaySkips (weekdays: number[]): number[] {
 }
 
 export function createDayList (
-  start: VTimestamp,
-  end: VTimestamp,
-  now: VTimestamp,
+  start: CalendarTimestamp,
+  end: CalendarTimestamp,
+  now: CalendarTimestamp,
   weekdaySkips: number[],
   max = 42,
   min = 0
-): VTimestamp[] {
+): CalendarTimestamp[] {
   const stop = getDayIdentifier(end)
-  const days: VTimestamp[] = []
+  const days: CalendarTimestamp[] = []
   let current = copyTimestamp(start)
   let currentIdentifier = 0
   let stopped = currentIdentifier === stop
@@ -382,9 +361,9 @@ export function createDayList (
   return days
 }
 
-export function createIntervalList (timestamp: VTimestamp, first: number,
-  minutes: number, count: number, now?: VTimestamp): VTimestamp[] {
-  const intervals: VTimestamp[] = []
+export function createIntervalList (timestamp: CalendarTimestamp, first: number,
+  minutes: number, count: number, now?: CalendarTimestamp): CalendarTimestamp[] {
+  const intervals: CalendarTimestamp[] = []
 
   for (let i = 0; i < count; i++) {
     const mins = (first + i) * minutes
@@ -395,8 +374,8 @@ export function createIntervalList (timestamp: VTimestamp, first: number,
   return intervals
 }
 
-export function createNativeLocaleFormatter (locale: string, getOptions: VTimestampFormatOptions): VTimestampFormatter {
-  const emptyFormatter: VTimestampFormatter = (_t, _s) => ''
+export function createNativeLocaleFormatter (locale: string, getOptions: CalendarTimestampFormatOptions): CalendarFormatter {
+  const emptyFormatter: CalendarFormatter = (_t, _s) => ''
 
   if (typeof Intl === 'undefined' || typeof Intl.DateTimeFormat === 'undefined') {
     return emptyFormatter

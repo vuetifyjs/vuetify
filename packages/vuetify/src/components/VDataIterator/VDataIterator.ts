@@ -1,5 +1,3 @@
-import { VNode, VNodeChildren } from 'vue'
-
 // Components
 import { VData } from '../VData'
 import VDataFooter from './VDataFooter'
@@ -9,9 +7,11 @@ import Themeable from '../../mixins/themeable'
 
 // Helpers
 import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, camelizeObjectKeys } from '../../util/helpers'
-import { DataProps } from '../VData/VData'
-import { PropValidator } from 'vue/types/options'
 import { breaking, removed } from '../../util/console'
+
+// Types
+import { VNode, VNodeChildren, PropType } from 'vue'
+import { DataScopeProps } from 'types'
 
 /* @vue/component */
 export default Themeable.extend({
@@ -24,14 +24,14 @@ export default Themeable.extend({
       default: 'id',
     },
     value: {
-      type: Array,
+      type: Array as PropType<any[]>,
       default: () => [],
-    } as PropValidator<any[]>,
+    },
     singleSelect: Boolean,
     expanded: {
-      type: Array,
+      type: Array as PropType<any[]>,
       default: () => [],
-    } as PropValidator<any[]>,
+    },
     singleExpand: Boolean,
     loading: [Boolean, String],
     noResultsText: {
@@ -198,7 +198,7 @@ export default Themeable.extend({
 
       return null
     },
-    genItems (props: DataProps) {
+    genItems (props: DataScopeProps) {
       const empty = this.genEmpty(props.originalItemsLength, props.pagination.itemsLength)
       if (empty) return [empty]
 
@@ -218,7 +218,7 @@ export default Themeable.extend({
 
       return []
     },
-    genFooter (props: DataProps) {
+    genFooter (props: DataScopeProps) {
       if (this.hideDefaultFooter) return null
 
       const data = {

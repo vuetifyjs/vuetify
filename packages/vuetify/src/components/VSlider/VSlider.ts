@@ -16,8 +16,7 @@ import { addOnceEventListener, deepEqual, keyCodes, createRange, convertToUnit, 
 import { consoleWarn } from '../../util/console'
 
 // Types
-import Vue, { VNode, VNodeChildrenArrayContents } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import Vue, { VNode, VNodeChildrenArrayContents, PropType } from 'vue'
 import { ScopedSlotChildren } from 'vue/types/vnode'
 
 interface options extends Vue {
@@ -63,23 +62,23 @@ export default mixins<options &
     },
     thumbColor: String,
     thumbLabel: {
-      type: [Boolean, String],
-      default: null,
+      type: [Boolean, String] as PropType<boolean | 'always' | undefined>,
+      default: undefined,
       validator: v => typeof v === 'boolean' || v === 'always',
-    } as PropValidator<boolean | 'always' | null>,
+    },
     thumbSize: {
       type: [Number, String],
       default: 32,
     },
     tickLabels: {
-      type: Array,
+      type: Array as PropType<string[]>,
       default: () => ([]),
-    } as PropValidator<string[]>,
+    },
     ticks: {
-      type: [Boolean, String],
+      type: [Boolean, String] as PropType<boolean | 'always'>,
       default: false,
       validator: v => typeof v === 'boolean' || v === 'always',
-    } as PropValidator<boolean | 'always'>,
+    },
     tickSize: {
       type: [Number, String],
       default: 2,

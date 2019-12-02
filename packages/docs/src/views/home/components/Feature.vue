@@ -8,9 +8,7 @@
     <base-text
       class="mx-auto"
       max-width="650"
-    >
-      Vuetify.Home.whyVuetifyText
-    </base-text>
+    >Vuetify.Home.whyVuetifyText</base-text>
 
     <v-container class="pa-0 mb-6">
       <base-comparison />
@@ -23,17 +21,17 @@
       <v-col
         v-for="(feature, i) in computedFeatures"
         :key="i"
-        cols="auto"
         class="d-flex"
+        cols="auto"
       >
         <v-card
           :href="feature.href"
-          :to="feature.to"
-          rel="noopener noreferrer"
           :target="feature.href ? '_blank' : undefined"
+          :to="feature.to"
           class="overflow-hidden text-center mx-auto"
           elevation="12"
           max-width="380px"
+          rel="noopener noreferrer"
         >
           <v-img
             :alt="feature.title"
@@ -65,9 +63,10 @@
         rounded
         to="introduction/why-vuetify"
       >
-        <span class="caption font-weight-bold">
-          {{ $t("Vuetify.Home.whyVuetifyText2") }}
-        </span>
+        <span
+          class="caption font-weight-bold"
+          v-text="$t('Vuetify.Home.whyVuetifyText2')"
+        />
       </v-btn>
     </div>
   </base-section>
@@ -77,17 +76,15 @@
   export default {
     name: 'HomeFeature',
 
-    provide: {
-      id: 'home-feature',
-    },
+    provide: { id: 'home-feature' },
 
     computed: {
       features () {
         return [
           {
+            href: 'https://community.vuetiyfjs.com',
             key: 'community',
             src: 'feature3.png',
-            href: 'https://community.vuetiyfjs.com',
           },
           {
             key: 'components',
@@ -95,9 +92,9 @@
             to: `components/api-explorer`,
           },
           {
+            href: 'https://github.com/vuetifyjs/vue-cli-plugin-vuetify-cli',
             key: 'scaffolding',
             src: 'feature1.png',
-            href: 'https://github.com/vuetifyjs/vue-cli-plugin-vuetify-cli',
           },
         ]
       },

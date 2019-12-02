@@ -5,7 +5,7 @@ import './VImg.sass'
 import intersect from '../../directives/intersect'
 
 // Types
-import { PropValidator } from 'vue/types/options'
+import { PropValidator, PropType } from 'vue/types/options'
 import {
   VNode,
   VNodeDirective,
@@ -56,16 +56,16 @@ export default baseMixins.extend({
         rootMargin: undefined,
         threshold: undefined,
       }),
-    },
+    } as PropValidator<IntersectionObserverInit>,
     position: {
       type: String,
       default: 'center center',
     },
     sizes: String,
     src: {
-      type: [String, Object],
+      type: [String, Object] as PropType<string | srcObject>,
       default: '',
-    } as PropValidator<string | srcObject>,
+    },
     srcset: String,
     transition: {
       type: [Boolean, String],

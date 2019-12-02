@@ -1,4 +1,8 @@
+// Styles
 import './VDialog.sass'
+
+// Components
+import { VThemeProvider } from '../VThemeProvider'
 
 // Mixins
 import Activatable from '../../mixins/activatable'
@@ -13,10 +17,12 @@ import Toggleable from '../../mixins/toggleable'
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import { convertToUnit, keyCodes } from '../../util/helpers'
-import ThemeProvider from '../../util/ThemeProvider'
 import mixins from '../../util/mixins'
 import { removed } from '../../util/console'
+import {
+  convertToUnit,
+  keyCodes,
+} from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
@@ -35,9 +41,7 @@ const baseMixins = mixins(
 export default baseMixins.extend({
   name: 'v-dialog',
 
-  directives: {
-    ClickOutside,
-  },
+  directives: { ClickOutside },
 
   props: {
     dark: Boolean,
@@ -289,7 +293,7 @@ export default baseMixins.extend({
       style: { zIndex: this.activeZIndex },
       ref: 'content',
     }, [
-      this.$createElement(ThemeProvider, {
+      this.$createElement(VThemeProvider, {
         props: {
           root: true,
           light: this.light,

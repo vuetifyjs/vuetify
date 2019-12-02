@@ -13,9 +13,8 @@ import { VExpandTransition } from '../transitions'
 import Toggleable from '../../mixins/toggleable'
 
 // Types
-import { VNode } from 'vue/types'
+import { VNode, PropType } from 'vue'
 import mixins from '../../util/mixins'
-import { PropValidator } from 'vue/types/options'
 
 /* @vue/component */
 export default mixins(
@@ -30,9 +29,9 @@ export default mixins(
     icon: String,
     iconColor: String,
     mobileBreakPoint: {
-      type: [Number, String],
+      type: [Number, String] as PropType<string | number>,
       default: 960,
-    } as PropValidator<string | number>,
+    },
     singleLine: Boolean,
     sticky: Boolean,
     tile: {
