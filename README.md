@@ -148,6 +148,10 @@
   <a href="https://opencollective.com/vuetify">
     <img src="https://opencollective.com/static/images/become_sponsor.svg" alt="Donate to OpenCollective">
   </a>
+  <br>
+  <a href="https://opencollective.com/vuetify/sponsor/1/website" target="_blank">
+    <img src="https://opencollective.com/vuetify/sponsor/1/avatar.svg">
+  </a>
 </div>
 
 <br>
@@ -338,7 +342,12 @@ Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com
 
 Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/vuetify#sponsor)]
 
-<a href="https://opencollective.com/vuetify/sponsor/0/website" target="_blank"><img src="https://opencollective.com/vuetify/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/vuetify/sponsor/0/website" target="_blank">
+  <img src="https://opencollective.com/vuetify/sponsor/0/avatar.svg">
+</a>
+<a href="https://opencollective.com/vuetify/sponsor/1/website" target="_blank">
+  <img src="https://opencollective.com/vuetify/sponsor/1/avatar.svg">
+</a>
 
 ### 📑 License
 [MIT](http://opensource.org/licenses/MIT)
