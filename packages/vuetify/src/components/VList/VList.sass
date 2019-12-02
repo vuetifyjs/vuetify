@@ -28,7 +28,7 @@
 .v-list
   border-radius: $list-border-radius
   display: block
-  padding: 8px 0
+  padding: $list-padding
   position: static
   +elevationTransition()
 
@@ -44,24 +44,24 @@
   .v-subheader
     font-size: $list-dense-subheader-font-size
     height: $list-dense-subheader-height
-    padding: 0 8px
+    padding: $list-dense-subheader-padding
 
 .v-list--nav,
 .v-list--rounded
   .v-list-item:not(:last-child):not(:only-child)
-    margin-bottom: 8px
+    margin-bottom: $list-nav-rounded-item-margin-bottom
 
   &.v-list--dense .v-list-item,
   .v-list-item--dense
     &:not(:last-child):not(:only-child)
-      margin-bottom: 4px
+      margin-bottom: $list-nav-rounded-dense-item-margin-bottom
 
 .v-list--nav
-  padding-left: 8px
-  padding-right: 8px
+  padding-left: $list-nav-padding-left
+  padding-right: $list-nav-padding-right
 
   .v-list-item
-    padding: 0 8px
+    padding: $list-nav-item-padding
 
   .v-list-item,
   .v-list-item:before
@@ -77,10 +77,10 @@
     +list-shaped($list-item-three-line-min-height)
 
   +ltr()
-    padding-right: 8px
+    padding-right: $list-shaped-padding
 
   +rtl()
-    padding-left: 8px
+    padding-left: $list-shaped-padding
 
 .v-list--rounded
   padding: 8px
@@ -93,4 +93,4 @@
     +list-rounded($list-item-three-line-min-height)
 
 .v-list--subheader
-  padding-top: 0
+  padding-top: $list-subheader-padding-top
