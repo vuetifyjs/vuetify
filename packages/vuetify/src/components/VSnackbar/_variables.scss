@@ -1,6 +1,23 @@
 @import '../../styles/styles.sass';
 
-$snackbar-color: map-get($shades, 'white') !default;
 $snackbar-background-color: #323232 !default;
 $snackbar-border-radius: $border-radius-root !default;
+$snackbar-bottom: 8px !default;
+$snackbar-btn-margin-left: 24px !default;
+$snackbar-btn-margin-right: -8px !default;
+$snackbar-color: map-get($shades, 'white') !default;
+$snackbar-content-first-btn-margin: 42px !default;
+$snackbar-content-min-height: 48px !default;
+$snackbar-content-padding: 8px 16px !default;
 $snackbar-corner-offset: 16px !default;
+$snackbar-font-size: map-deep-get($headings, 'subtitle-2', 'size') !default;
+$snackbar-left: 8px !default;
+$snackbar-multi-line-content-min-height: 68px !default;
+$snackbar-right: 8px !default;
+$snackbar-top: 8px !default;
+$snackbar-transition-wrapper-transform: .8 !default;
+$snackbar-vertical-content-btn-margin-top: 18px !default;
+$snackbar-vertical-content-padding: 16px 16px 8px !default;
+$snackbar-wrapper-elevation: 6 !default;
+$snackbar-wrapper-max-width: 672px !default;
+$snackbar-wrapper-min-width: 344px !default;

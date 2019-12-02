@@ -4,24 +4,29 @@
   align-items: center
   color: $snackbar-color
   display: flex
-  font-size: 14px
-  left: 8px
+  font-size: $snackbar-font-size
+  left: $snackbar-left
   pointer-events: none
   position: fixed
-  right: 8px
-  text-align: left
+  right: $snackbar-right
   transition-duration: .15s
   transition-timing-function: map-get($transition, 'linear-out-slow-in')
   z-index: 1000
+
+  +ltr()
+    text-align: left
+
+  +rtl()
+    text-align: right
 
   &--absolute
     position: absolute
 
   &--top
-    top: 8px
+    top: $snackbar-top
 
   &--bottom
-    bottom: 8px
+    bottom: $snackbar-bottom
 
   &__wrapper
     align-items: center
@@ -33,15 +38,15 @@
     transition: inherit
     transition-property: opacity, transform
     min-width: 100%
-    +elevation(6)
+    +elevation($snackbar-wrapper-elevation)
 
   &__content
     align-items: center
     display: flex
-    min-height: 48px
+    min-height: $snackbar-content-min-height
     justify-content: space-between
     overflow: hidden
-    padding: 8px 16px
+    padding: $snackbar-content-padding
     width: 100%
 
     .v-btn.v-btn
@@ -53,10 +58,10 @@
       width: auto
 
       +ltr()
-        margin: 0 -8px 0 24px
+        margin: 0 $snackbar-btn-margin-right 0 $snackbar-btn-margin-left
 
       +rtl()
-        margin: 0 24px 0 -8px
+        margin: 0 $snackbar-btn-margin-left 0 $snackbar-btn-margin-right
 
       &__content
         margin: -2px
@@ -66,21 +71,26 @@
 
   &--multi-line &__content
     height: auto
-    min-height: 68px
+    min-height: $snackbar-multi-line-content-min-height
 
   &--vertical &__content
     // https://stackoverflow.com/questions/35111090/text-in-a-flex-container-doesnt-wrap-in-ie11
     align-items: stretch
     flex-direction: column
     height: auto
-    padding: 16px 16px 8px
+    padding: $snackbar-vertical-content-padding
 
     .v-btn
       &.v-btn // Higher specificity
         align-self: flex-end
         justify-self: flex-end
-        margin-left: 0
-        margin-top: 18px
+        margin-top: $snackbar-vertical-content-btn-margin-top
+
+        +ltr()
+          margin-left: 0
+
+        +rtl()
+          margin-right: 0
 
       &__content
         flex: 0 0 auto
@@ -89,8 +99,8 @@
 @media #{map-get($display-breakpoints, 'sm-and-up')}
   .v-snack
     &__wrapper
-      min-width: 344px
-      max-width: 672px
+      min-width: $snackbar-wrapper-min-width
+      max-width: $snackbar-wrapper-max-width
 
       .v-snack--left &
         margin-left: 0
@@ -100,15 +110,15 @@
 
     &__content .v-btn:first-of-type
       +ltr()
-        margin-left: 42px
+        margin-left: $snackbar-content-first-btn-margin
 
       +rtl()
-        margin-right: 42px
+        margin-right: $snackbar-content-first-btn-margin
 
 .v-snack-transition
   &-enter
     .v-snack__wrapper
-      transform: scale(.8)
+      transform: scale($snackbar-transition-wrapper-transform)
 
   &-enter,
   &-leave-to
