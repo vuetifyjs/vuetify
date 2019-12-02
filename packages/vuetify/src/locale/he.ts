@@ -1,4 +1,5 @@
 export default {
+  badge: 'תג',
   close: 'סגור',
   dataIterator: {
     noResultsText: 'לא נמצאו תוצאות מתאימות',

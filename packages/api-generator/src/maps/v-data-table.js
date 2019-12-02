@@ -36,6 +36,17 @@ const DataTableHeaderScopedProps = {
   },
 }
 
+const DataTableFooterScopedProps = {
+  props: {
+    options: DataOptions,
+    pagination: DataDefaultScopedSlotProps.pagination,
+    itemsPerPageText: 'string',
+  },
+  on: '{}',
+  headers: 'TableHeader[]',
+  widths: '[]',
+}
+
 const DataTableHeaderColumnScopedProps = {
   header: 'TableHeader',
 }
@@ -72,29 +83,43 @@ const DataTableBodyScopedProps = {
   isMobile: 'boolean',
 }
 
+const DataGroupScopedProps = {
+  group: 'string',
+  options: DataOptions,
+  items: 'any[]',
+  headers: 'TableHeader[]',
+}
+
 const DataGroupHeaderScopedProps = {
-  group: DataDefaultScopedSlotProps.group,
-  groupedBy: DataOptions.groupBy,
+  group: 'string',
+  groupBy: DataOptions.groupBy,
   items: 'any[]',
   headers: 'TableHeader[]',
   toggle: '() => void',
   remove: '() => void',
 }
 
+const DataGroupSummaryScopedProps = {
+  group: 'string',
+  groupBy: DataOptions.groupBy,
+  items: 'any[]',
+  headers: 'TableHeader[]',
+}
+
 const DataTableSlots = [
   { name: 'body.append', props: DataTableBodyScopedProps },
   { name: 'body.prepend', props: DataTableBodyScopedProps },
   { name: 'body', props: DataTableBodyScopedProps },
-  { name: 'footer', props: DataDefaultScopedSlotProps },
+  { name: 'footer', props: DataTableFooterScopedProps },
   { name: 'footer.page-text', props: DataFooterPageTextScopedProps },
   { name: 'header', props: DataTableHeaderScopedProps },
   { name: 'header.data-table-select', props: DataTableHeaderSelectScopedProps },
   { name: 'header.<name>', props: DataTableHeaderColumnScopedProps },
   { name: 'top', props: DataDefaultScopedSlotProps },
   { name: 'progress', props: DataDefaultScopedSlotProps },
-  { name: 'group', props: DataDefaultScopedSlotProps },
+  { name: 'group', props: DataGroupScopedProps },
   { name: 'group.header', props: DataGroupHeaderScopedProps },
-  { name: 'group.summary', props: DataDefaultScopedSlotProps },
+  { name: 'group.summary', props: DataGroupSummaryScopedProps },
   { name: 'item', props: { ...DataTableItemScopedProps, index: 'number' } },
   { name: 'item.data-table-select', props: DataTableItemScopedProps },
   { name: 'item.data-table-expand', props: DataTableItemScopedProps },

@@ -24,16 +24,12 @@
 
 <script>
   // Utilities
-  import {
-    sync,
-  } from 'vuex-pathify'
+  import { sync } from 'vuex-pathify'
 
   export default {
     name: 'DocumentationFab',
 
-    data: () => ({
-      fab: false,
-    }),
+    data: () => ({ fab: false }),
 
     computed: {
       ...sync('snackbar/*'),
@@ -43,9 +39,11 @@
       onScroll () {
         if (typeof window === 'undefined') return
 
-        const top = window.pageYOffset ||
+        const top = (
+          window.pageYOffset ||
           document.documentElement.offsetTop ||
           0
+        )
 
         this.fab = top > 300
       },

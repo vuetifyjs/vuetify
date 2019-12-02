@@ -1,11 +1,11 @@
 import Vue from 'vue'
 
 import {
-  VTimestamp,
   validateTimestamp,
   parseTimestamp,
   parseDate,
 } from '../util/timestamp'
+import { CalendarTimestamp } from 'types'
 
 export default Vue.extend({
   name: 'times',
@@ -19,13 +19,13 @@ export default Vue.extend({
 
   data: () => ({
     times: {
-      now: parseTimestamp('0000-00-00 00:00') as VTimestamp,
-      today: parseTimestamp('0000-00-00') as VTimestamp,
+      now: parseTimestamp('0000-00-00 00:00') as CalendarTimestamp,
+      today: parseTimestamp('0000-00-00') as CalendarTimestamp,
     },
   }),
 
   computed: {
-    parsedNow (): VTimestamp | null {
+    parsedNow (): CalendarTimestamp | null {
       return this.now ? parseTimestamp(this.now) : null
     },
   },
@@ -46,15 +46,15 @@ export default Vue.extend({
       this.times.now.future = this.times.today.future = false
     },
     updateTimes (): void {
-      const now: VTimestamp = this.parsedNow || this.getNow()
+      const now: CalendarTimestamp = this.parsedNow || this.getNow()
       this.updateDay(now, this.times.now)
       this.updateTime(now, this.times.now)
       this.updateDay(now, this.times.today)
     },
-    getNow (): VTimestamp {
+    getNow (): CalendarTimestamp {
       return parseDate(new Date())
     },
-    updateDay (now: VTimestamp, target: VTimestamp): void {
+    updateDay (now: CalendarTimestamp, target: CalendarTimestamp): void {
       if (now.date !== target.date) {
         target.year = now.year
         target.month = now.month
@@ -63,7 +63,7 @@ export default Vue.extend({
         target.date = now.date
       }
     },
-    updateTime (now: VTimestamp, target: VTimestamp): void {
+    updateTime (now: CalendarTimestamp, target: CalendarTimestamp): void {
       if (now.time !== target.time) {
         target.hour = now.hour
         target.minute = now.minute

@@ -8,8 +8,7 @@ import { pad } from '../VDatePicker/util'
 import mixins from '../../util/mixins'
 
 import { SelectingTimes } from './SelectingTimes'
-import { PropValidator } from 'vue/types/options'
-import { VNode } from 'vue'
+import { VNode, PropType } from 'vue'
 
 export default mixins(
   PickerButton
@@ -24,9 +23,9 @@ export default mixins(
     minute: Number,
     second: Number,
     period: {
-      type: String,
+      type: String as PropType<'am' | 'pm'>,
       validator: period => period === 'am' || period === 'pm',
-    } as PropValidator<'am' | 'pm'>,
+    },
     readonly: Boolean,
     useSeconds: Boolean,
     selecting: Number,

@@ -1,16 +1,18 @@
 // Styles
 import './VWindow.sass'
 
-// Components
-import VBtn from '../VBtn'
-import VIcon from '../VIcon'
-import { BaseItemGroup } from '../VItemGroup/VItemGroup'
+// Types
+import { VNode, VNodeDirective } from 'vue/types/vnode'
+import { PropType } from 'vue'
+import { TouchHandlers } from 'types'
 
 // Directives
 import Touch from '../../directives/touch'
 
-// Types
-import { VNode, VNodeDirective } from 'vue/types/vnode'
+// Components
+import VBtn from '../VBtn'
+import VIcon from '../VIcon'
+import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 
 /* @vue/component */
 export default BaseItemGroup.extend({
@@ -48,7 +50,7 @@ export default BaseItemGroup.extend({
     },
     showArrows: Boolean,
     showArrowsOnHover: Boolean,
-    touch: Object,
+    touch: Object as PropType<TouchHandlers>,
     touchless: Boolean,
     value: {
       required: false,

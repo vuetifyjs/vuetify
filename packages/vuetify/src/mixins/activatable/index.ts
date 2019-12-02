@@ -8,8 +8,7 @@ import { getSlot, getSlotType } from '../../util/helpers'
 import { consoleError } from '../../util/console'
 
 // Types
-import { PropValidator } from 'vue/types/options'
-import { VNode } from 'vue'
+import { VNode, PropType } from 'vue'
 
 const baseMixins = mixins(
   Delayable,
@@ -22,11 +21,11 @@ export default baseMixins.extend({
 
   props: {
     activator: {
-      default: null,
+      default: null as unknown as PropType<string | HTMLElement | VNode | Element | null>,
       validator: (val: string | object) => {
         return ['string', 'object'].includes(typeof val)
       },
-    } as PropValidator<string | HTMLElement | VNode | Element | null>,
+    },
     disabled: Boolean,
     internalActivator: Boolean,
     openOnHover: Boolean,
@@ -135,11 +134,10 @@ export default baseMixins.extend({
           // HTMLElement | Element
           activator = this.activator
         }
-      } else if (e) {
-        // Activated by a click event
-        activator = (e.currentTarget || e.target) as HTMLElement
-      } else if (this.activatorNode.length) {
-        // Last resort, use the contents of the activator slot
+      } else if (this.activatorNode.length === 1 || (this.activatorNode.length && !e)) {
+        // Use the contents of the activator slot
+        // There's either only one element in it or we
+        // don't have a click event to use as a last resort
         const vm = this.activatorNode[0].componentInstance
         if (
           vm &&
@@ -151,6 +149,9 @@ export default baseMixins.extend({
         } else {
           activator = this.activatorNode[0].elm as HTMLElement
         }
+      } else if (e) {
+        // Activated by a click event
+        activator = (e.currentTarget || e.target) as HTMLElement
       }
 
       this.activatorElement = activator

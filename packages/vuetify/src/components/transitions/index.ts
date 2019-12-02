@@ -1,7 +1,7 @@
 import {
   createSimpleTransition,
-  createJavaScriptTransition,
-} from '../../util/helpers'
+  createJavascriptTransition,
+} from './createTransition'
 
 import ExpandTransitionGenerator from './expand-transition'
 
@@ -27,9 +27,9 @@ export const VSlideXReverseTransition = createSimpleTransition('slide-x-reverse-
 export const VSlideYTransition = createSimpleTransition('slide-y-transition')
 export const VSlideYReverseTransition = createSimpleTransition('slide-y-reverse-transition')
 
-// JavaScript transitions
-export const VExpandTransition = createJavaScriptTransition('expand-transition', ExpandTransitionGenerator())
-export const VExpandXTransition = createJavaScriptTransition('expand-x-transition', ExpandTransitionGenerator('', true))
+// Javascript transitions
+export const VExpandTransition = createJavascriptTransition('expand-transition', ExpandTransitionGenerator())
+export const VExpandXTransition = createJavascriptTransition('expand-x-transition', ExpandTransitionGenerator('', true))
 
 export default {
   $_vuetify_subcomponents: {

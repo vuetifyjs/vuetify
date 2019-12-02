@@ -6,9 +6,8 @@
   background-color: map-get($material, 'cards')
   color: map-deep-get($material, 'text', 'primary')
 
-  colgroup
-    .divider
-      border-right: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+  .v-data-table__divider
+    border-right: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
 
   &.v-data-table--fixed-header
     thead th

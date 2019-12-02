@@ -48,16 +48,18 @@
       color: $snackbar-color
       flex: 0 0 auto
       height: auto
-      margin: 0 -8px 0 24px
       min-width: auto
       padding: 8px
       width: auto
 
-      &__content
-        margin: -2px
+      +ltr()
+        margin: 0 -8px 0 24px
 
       +rtl()
         margin: 0 24px 0 -8px
+
+      &__content
+        margin: -2px
 
       &::before
         display: none
@@ -97,10 +99,10 @@
         margin-right: 0
 
     &__content .v-btn:first-of-type
-      margin-left: 42px
+      +ltr()
+        margin-left: 42px
 
       +rtl()
-        margin-left: 0
         margin-right: 42px
 
 .v-snack-transition

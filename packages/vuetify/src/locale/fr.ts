@@ -1,4 +1,5 @@
 export default {
+  badge: 'Badge',
   close: 'Fermer',
   dataIterator: {
     noResultsText: 'Aucun enregistrement correspondant trouvé',

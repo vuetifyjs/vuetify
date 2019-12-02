@@ -1,25 +1,11 @@
 import { VDataTable } from '../'
-import { DataOptions } from '../../VData/VData'
 import VIcon from '../../VIcon'
 import VSimpleCheckbox from '../../VCheckbox/VSimpleCheckbox'
 import ripple from '../../../directives/ripple'
 
 import Vue, { PropType } from 'vue'
 import mixins from '../../../util/mixins'
-import { compareFn } from '../../../util/helpers'
-
-export interface TableHeader {
-  text: string
-  value: string
-  align?: 'start' | 'center' | 'end'
-  sortable?: boolean
-  filterable?: boolean
-  divider?: boolean
-  class?: string | string[]
-  width?: string | number
-  filter?: (value: any, search: string | null, item: any) => boolean
-  sort?: compareFn
-}
+import { DataOptions, DataTableHeader } from 'types'
 
 type VDataTableInstance = InstanceType<typeof VDataTable>
 
@@ -35,7 +21,7 @@ export default mixins<options>().extend({
 
   props: {
     headers: {
-      type: Array as PropType<TableHeader[]>,
+      type: Array as PropType<DataTableHeader[]>,
       required: true,
     },
     options: {

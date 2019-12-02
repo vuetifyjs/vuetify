@@ -15,15 +15,15 @@ import Themeable from '../../mixins/themeable'
 // Directives
 import ClickOutside from '../../directives/click-outside'
 import Resize from '../../directives/resize'
-import Touch, { TouchWrapper } from '../../directives/touch'
+import Touch from '../../directives/touch'
 
 // Utilities
 import { convertToUnit, getSlot } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
 // Types
-import { VNode, VNodeDirective } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { VNode, VNodeDirective, PropType } from 'vue'
+import { TouchWrapper } from 'types'
 
 const baseMixins = mixins(
   Applicationable('left', [
@@ -84,9 +84,9 @@ export default baseMixins.extend({
     permanent: Boolean,
     right: Boolean,
     src: {
-      type: [String, Object],
+      type: [String, Object] as PropType<string | srcObject>,
       default: '',
-    } as PropValidator<string | srcObject>,
+    },
     stateless: Boolean,
     tag: {
       type: String,
@@ -100,7 +100,7 @@ export default baseMixins.extend({
       type: [Number, String],
       default: 256,
     },
-    value: { required: false } as PropValidator<any>,
+    value: null as unknown as PropType<any>,
   },
 
   data: () => ({
