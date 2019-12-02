@@ -6,7 +6,7 @@ import VCalendarWeekly from './VCalendarWeekly'
 
 // Util
 import { parseTimestamp, getStartOfMonth, getEndOfMonth } from './util/timestamp'
-import { VTimestamp } from 'types'
+import { CalendarTimestamp } from 'types'
 
 /* @vue/component */
 export default VCalendarWeekly.extend({
@@ -16,11 +16,11 @@ export default VCalendarWeekly.extend({
     staticClass (): string {
       return 'v-calendar-monthly v-calendar-weekly'
     },
-    parsedStart (): VTimestamp {
-      return getStartOfMonth(parseTimestamp(this.start) as VTimestamp)
+    parsedStart (): CalendarTimestamp {
+      return getStartOfMonth(parseTimestamp(this.start) as CalendarTimestamp)
     },
-    parsedEnd (): VTimestamp {
-      return getEndOfMonth(parseTimestamp(this.end) as VTimestamp)
+    parsedEnd (): CalendarTimestamp {
+      return getEndOfMonth(parseTimestamp(this.end) as CalendarTimestamp)
     },
   },
 

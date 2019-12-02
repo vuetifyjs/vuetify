@@ -1,6 +1,6 @@
 // Types
 import Vue, { VNode, PropType } from 'vue'
-import { TableHeader } from 'types'
+import { DataTableHeader } from 'types'
 
 // Utils
 import { getObjectValueByPath } from '../../util/helpers'
@@ -11,7 +11,7 @@ export default Vue.extend({
   functional: true,
 
   props: {
-    headers: Array as PropType<TableHeader[]>,
+    headers: Array as PropType<DataTableHeader[]>,
     item: Object,
     rtl: Boolean,
   },
@@ -19,7 +19,7 @@ export default Vue.extend({
   render (h, { props, slots, data }): VNode {
     const computedSlots = slots()
 
-    const columns: VNode[] = props.headers.map((header: TableHeader) => {
+    const columns: VNode[] = props.headers.map((header: DataTableHeader) => {
       const children = []
       const value = getObjectValueByPath(props.item, header.value)
 

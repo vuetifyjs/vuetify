@@ -29,7 +29,7 @@ import {
 // Types
 import mixins from '../../util/mixins'
 import { VNode, PropType } from 'vue'
-import { ItemKey } from 'types'
+import { SelectItemKey } from 'types'
 
 /* @vue/component */
 export default mixins(Colorable, Themeable).extend({
@@ -49,15 +49,15 @@ export default mixins(Colorable, Themeable).extend({
       default: () => [],
     },
     itemDisabled: {
-      type: [String, Array, Function] as PropType<ItemKey>,
+      type: [String, Array, Function] as PropType<SelectItemKey>,
       default: 'disabled',
     },
     itemText: {
-      type: [String, Array, Function] as PropType<ItemKey>,
+      type: [String, Array, Function] as PropType<SelectItemKey>,
       default: 'text',
     },
     itemValue: {
-      type: [String, Array, Function] as PropType<ItemKey>,
+      type: [String, Array, Function] as PropType<SelectItemKey>,
       default: 'value',
     },
     noDataText: String,

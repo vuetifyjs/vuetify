@@ -23,7 +23,7 @@ import {
   filterTreeItems,
   filterTreeItem,
 } from './util/filterTreeItems'
-import { FilterTreeItemFunction } from 'types'
+import { TreeviewItemFunction } from 'types'
 
 type VTreeviewNodeInstance = InstanceType<typeof VTreeviewNode>
 
@@ -58,7 +58,7 @@ export default mixins(
       default: () => ([]),
     },
     dense: Boolean,
-    filter: Function as PropType<FilterTreeItemFunction>,
+    filter: Function as PropType<TreeviewItemFunction>,
     hoverable: Boolean,
     items: {
       type: Array as PropType<any[]>,

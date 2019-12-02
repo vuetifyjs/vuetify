@@ -62,9 +62,9 @@ declare module 'vue/types/options' {
 }
 
 // Public types
-export type FilterTreeItemFunction = (item: object, search: string, textKey: string) => boolean
+export type TreeviewItemFunction = (item: object, search: string, textKey: string) => boolean
 
-export type ItemKey = string | (string | number)[] | ((item: object, fallback?: any) => any)
+export type SelectItemKey = string | (string | number)[] | ((item: object, fallback?: any) => any)
 
 export interface DataOptions {
   page: number
@@ -86,7 +86,7 @@ export interface DataPagination {
   itemsLength: number
 }
 
-export interface DataProps {
+export interface DataScopeProps {
   originalItemsLength: number
   items: any[]
   pagination: DataPagination
@@ -97,25 +97,25 @@ export interface DataProps {
   groupedItems: Record<string, any[]> | null
 }
 
-export type compareFn<T = any> = (a: T, b: T) => number
+export type DataTableCompareFunction<T = any> = (a: T, b: T) => number
 
-export type SortItemsFn<T extends any[] = any[]> = (
+export type DataSortFunction<T extends any[] = any[]> = (
   items: T,
   sortBy: string[],
   sortDesc: boolean[],
   locale: string,
-  customSorters?: Record<string, compareFn>
+  customSorters?: Record<string, DataTableCompareFunction>
 ) => T;
 
 export type DatePickerFormatter = (date: string) => string
 
-export type AllowedDateFunction = (date: string) => boolean
+export type DatePickerAllowedDatesFunction = (date: string) => boolean
 
-export type DateEventColorValue = string | string[]
+export type DatePickerEventColorValue = string | string[]
 
-export type DateEvents = string[] | ((date: string) => boolean | DateEventColorValue) | Record<string, DateEventColorValue>
+export type DatePickerEvents = string[] | ((date: string) => boolean | DatePickerEventColorValue) | Record<string, DatePickerEventColorValue>
 
-export type DateEventColors = DateEventColorValue | Record<string, DateEventColorValue> | ((date: string) => DateEventColorValue)
+export type DatePickerEventColors = DatePickerEventColorValue | Record<string, DatePickerEventColorValue> | ((date: string) => DatePickerEventColorValue)
 
 export type DatePickerType = 'date' | 'month'
 
@@ -147,13 +147,13 @@ export type TouchValue = TouchHandlers & {
   options?: AddEventListenerOptions
 }
 
-export type VuetifyRuleValidator = (value: any) => string | boolean
+export type InputValidationRule = (value: any) => string | boolean
 
-export type VuetifyMessage = string | string[]
+export type InputMessage = string | string[]
 
-export type VuetifyRuleValidations = (VuetifyRuleValidator | string)[]
+export type InputValidationRules = (InputValidationRule | string)[]
 
-export interface VTimestamp {
+export interface CalendarTimestamp {
   date: string
   time: string
   year: number
@@ -169,15 +169,15 @@ export interface VTimestamp {
   future: boolean
 }
 
-export type VTimestampFormatter = (timestamp: VTimestamp, short: boolean) => string
+export type CalendarFormatter = (timestamp: CalendarTimestamp, short: boolean) => string
 
-export interface VEventInput {
+export interface CalendarEvent {
   [prop: string]: any
 }
 
-export type FilterFn = (value: any, search: string | null, item: any) => boolean
+export type DataTableFilterFunction = (value: any, search: string | null, item: any) => boolean
 
-export interface TableHeader {
+export interface DataTableHeader {
   text: string
   value: string
   align?: 'start' | 'center' | 'end'
@@ -187,10 +187,10 @@ export interface TableHeader {
   class?: string | string[]
   width?: string | number
   filter?: (value: any, search: string | null, item: any) => boolean
-  sort?: compareFn
+  sort?: DataTableCompareFunction
 }
 
-export type ItemsPerPageOption = (number | {
+export type DataItemsPerPageOption = (number | {
   text: string;
   value: number;
 });

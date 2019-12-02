@@ -22,9 +22,9 @@ import { VNode } from 'vue'
 import {
   DatePickerFormatter,
   DatePickerMultipleFormatter,
-  AllowedDateFunction,
-  DateEventColors,
-  DateEvents,
+  DatePickerAllowedDatesFunction,
+  DatePickerEventColors,
+  DatePickerEvents,
   DatePickerType,
 } from 'types'
 
@@ -49,16 +49,16 @@ export default mixins(
   name: 'v-date-picker',
 
   props: {
-    allowedDates: Function as PropType<AllowedDateFunction | undefined>,
+    allowedDates: Function as PropType<DatePickerAllowedDatesFunction | undefined>,
     // Function formatting the day in date picker table
-    dayFormat: Function as PropType<AllowedDateFunction | undefined>,
+    dayFormat: Function as PropType<DatePickerAllowedDatesFunction | undefined>,
     disabled: Boolean,
     events: {
-      type: [Array, Function, Object] as PropType<DateEvents>,
+      type: [Array, Function, Object] as PropType<DatePickerEvents>,
       default: () => null,
     },
     eventColor: {
-      type: [Array, Function, Object, String] as PropType<DateEventColors>,
+      type: [Array, Function, Object, String] as PropType<DatePickerEventColors>,
       default: () => 'warning',
     },
     firstDayOfWeek: {

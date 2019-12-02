@@ -13,7 +13,7 @@ import {
   createNativeLocaleFormatter,
   VTime,
 } from '../util/timestamp'
-import { VTimestamp, VTimestampFormatter } from 'types'
+import { CalendarTimestamp, CalendarFormatter } from 'types'
 
 /* @vue/component */
 export default CalendarBase.extend({
@@ -40,7 +40,7 @@ export default CalendarBase.extend({
     bodyHeight (): number {
       return this.parsedIntervalCount * this.parsedIntervalHeight
     },
-    days (): VTimestamp[] {
+    days (): CalendarTimestamp[] {
       return createDayList(
         this.parsedStart,
         this.parsedEnd,
@@ -49,18 +49,18 @@ export default CalendarBase.extend({
         this.maxDays
       )
     },
-    intervals (): VTimestamp[][] {
-      const days: VTimestamp[] = this.days
+    intervals (): CalendarTimestamp[][] {
+      const days: CalendarTimestamp[] = this.days
       const first: number = this.parsedFirstInterval
       const minutes: number = this.parsedIntervalMinutes
       const count: number = this.parsedIntervalCount
-      const now: VTimestamp = this.times.now
+      const now: CalendarTimestamp = this.times.now
 
       return days.map(d => createIntervalList(d, first, minutes, count, now))
     },
-    intervalFormatter (): VTimestampFormatter {
+    intervalFormatter (): CalendarFormatter {
       if (this.intervalFormat) {
-        return this.intervalFormat as VTimestampFormatter
+        return this.intervalFormat as CalendarFormatter
       }
 
       const longOptions = { timeZone: 'UTC', hour12: true, hour: '2-digit', minute: '2-digit' }
@@ -75,16 +75,16 @@ export default CalendarBase.extend({
   },
 
   methods: {
-    showIntervalLabelDefault (interval: VTimestamp): boolean {
-      const first: VTimestamp = this.intervals[0][0]
+    showIntervalLabelDefault (interval: CalendarTimestamp): boolean {
+      const first: CalendarTimestamp = this.intervals[0][0]
       const isFirst: boolean = first.hour === interval.hour && first.minute === interval.minute
       return !isFirst && interval.minute === 0
     },
-    intervalStyleDefault (_interval: VTimestamp): object | undefined {
+    intervalStyleDefault (_interval: CalendarTimestamp): object | undefined {
       return undefined
     },
-    getTimestampAtEvent (e: MouseEvent | TouchEvent, day: VTimestamp): VTimestamp {
-      const timestamp: VTimestamp = copyTimestamp(day)
+    getTimestampAtEvent (e: MouseEvent | TouchEvent, day: CalendarTimestamp): CalendarTimestamp {
+      const timestamp: CalendarTimestamp = copyTimestamp(day)
       const bounds = (e.currentTarget as HTMLElement).getBoundingClientRect()
       const baseMinutes: number = this.firstMinute
       const touchEvent: TouchEvent = e as TouchEvent
@@ -97,7 +97,7 @@ export default CalendarBase.extend({
 
       return updateMinutes(timestamp, minutes, this.times.now)
     },
-    getSlotScope (timestamp: VTimestamp): any {
+    getSlotScope (timestamp: CalendarTimestamp): any {
       const scope = copyTimestamp(timestamp) as any
       scope.timeToY = this.timeToY
       scope.minutesToPixels = this.minutesToPixels

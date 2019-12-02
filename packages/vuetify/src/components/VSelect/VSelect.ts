@@ -24,7 +24,7 @@ import { consoleError } from '../../util/console'
 // Types
 import mixins from '../../util/mixins'
 import { VNode, VNodeDirective, PropType } from 'vue'
-import { ItemKey } from 'types'
+import { SelectItemKey } from 'types'
 
 export const defaultMenuProps = {
   closeOnClick: false,
@@ -85,15 +85,15 @@ export default baseMixins.extend<options>().extend({
       default: 'primary',
     },
     itemDisabled: {
-      type: [String, Array, Function] as PropType<ItemKey>,
+      type: [String, Array, Function] as PropType<SelectItemKey>,
       default: 'disabled',
     },
     itemText: {
-      type: [String, Array, Function] as PropType<ItemKey>,
+      type: [String, Array, Function] as PropType<SelectItemKey>,
       default: 'text',
     },
     itemValue: {
-      type: [String, Array, Function] as PropType<ItemKey>,
+      type: [String, Array, Function] as PropType<SelectItemKey>,
       default: 'value',
     },
     menuProps: {

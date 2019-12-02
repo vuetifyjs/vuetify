@@ -1,6 +1,6 @@
 import Vue, { VNode, PropType } from 'vue'
 import { getObjectValueByPath } from '../../util/helpers'
-import { TableHeader } from 'types'
+import { DataTableHeader } from 'types'
 
 export default Vue.extend({
   name: 'row',
@@ -8,7 +8,7 @@ export default Vue.extend({
   functional: true,
 
   props: {
-    headers: Array as PropType<TableHeader[]>,
+    headers: Array as PropType<DataTableHeader[]>,
     item: Object,
     rtl: Boolean,
   },
@@ -16,7 +16,7 @@ export default Vue.extend({
   render (h, { props, slots, data }): VNode {
     const computedSlots = slots()
 
-    const columns: VNode[] = props.headers.map((header: TableHeader) => {
+    const columns: VNode[] = props.headers.map((header: DataTableHeader) => {
       const classes = {
         'v-data-table__mobile-row': true,
       }

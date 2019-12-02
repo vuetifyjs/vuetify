@@ -5,7 +5,7 @@ import ripple from '../../../directives/ripple'
 
 import Vue, { PropType } from 'vue'
 import mixins from '../../../util/mixins'
-import { DataOptions, TableHeader } from 'types'
+import { DataOptions, DataTableHeader } from 'types'
 
 type VDataTableInstance = InstanceType<typeof VDataTable>
 
@@ -21,7 +21,7 @@ export default mixins<options>().extend({
 
   props: {
     headers: {
-      type: Array as PropType<TableHeader[]>,
+      type: Array as PropType<DataTableHeader[]>,
       required: true,
     },
     options: {

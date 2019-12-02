@@ -4,7 +4,7 @@ import VSelect from '../VSelect/VSelect'
 import VChip from '../VChip'
 import header from './mixins/header'
 import { wrapInArray } from '../../util/helpers'
-import { TableHeader } from 'types'
+import { DataTableHeader } from 'types'
 
 export default mixins(header).extend({
   name: 'v-data-table-header-mobile',
@@ -79,7 +79,7 @@ export default mixins(header).extend({
       }, [this.genSelectAll()]))
     }
 
-    const sortHeaders: TableHeader[] = this.headers.filter(h => h.sortable !== false && h.value !== 'data-table-select')
+    const sortHeaders: DataTableHeader[] = this.headers.filter(h => h.sortable !== false && h.value !== 'data-table-select')
     if (!this.disableSort && sortHeaders.length) {
       children.push(this.genSortSelect(sortHeaders))
     }

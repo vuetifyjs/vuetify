@@ -3,7 +3,7 @@ import { wrapInArray, sortItems, deepEqual, groupItems, searchItems } from '../.
 import Vue, { VNode } from 'vue'
 
 // Types
-import { DataOptions, DataPagination, DataProps, SortItemsFn } from 'types'
+import { DataOptions, DataPagination, DataScopeProps, DataSortFunction } from 'types'
 import { PropValidator, PropType } from 'vue/types/options'
 
 export default Vue.extend({
@@ -29,7 +29,7 @@ export default Vue.extend({
       default: () => [],
     },
     customSort: {
-      type: Function as PropType<SortItemsFn>,
+      type: Function as PropType<DataSortFunction>,
       default: sortItems,
     },
     mustSort: Boolean,
@@ -151,7 +151,7 @@ export default Vue.extend({
     groupedItems (): Record<string, any[]> | null {
       return this.isGrouped ? this.groupItems(this.computedItems) : null
     },
-    scopedProps (): DataProps {
+    scopedProps (): DataScopeProps {
       const props = {
         sort: this.sort,
         sortArray: this.sortArray,

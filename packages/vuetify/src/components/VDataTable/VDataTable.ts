@@ -2,7 +2,7 @@ import './VDataTable.sass'
 
 // Types
 import { VNode, VNodeChildrenArrayContents, VNodeChildren, PropType } from 'vue'
-import { TableHeader, FilterFn, DataProps, DataOptions, DataPagination, compareFn, ItemsPerPageOption } from 'types'
+import { DataTableHeader, DataTableFilterFunction, DataScopeProps, DataOptions, DataPagination, DataTableCompareFunction, DataItemsPerPageOption } from 'types'
 import { PropValidator } from 'vue/types/options'
 
 // Components
@@ -26,8 +26,8 @@ import ripple from '../../directives/ripple'
 import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, defaultFilter, camelizeObjectKeys } from '../../util/helpers'
 import { breaking } from '../../util/console'
 
-function filterFn (item: any, search: string | null, filter: FilterFn) {
-  return (header: TableHeader) => {
+function filterFn (item: any, search: string | null, filter: DataTableFilterFunction) {
+  return (header: DataTableHeader) => {
     const value = getObjectValueByPath(item, header.value)
     return header.filter ? header.filter(value, search, item) : filter(value, search, item)
   }
@@ -36,9 +36,9 @@ function filterFn (item: any, search: string | null, filter: FilterFn) {
 function searchTableItems (
   items: any[],
   search: string | null,
-  headersWithCustomFilters: TableHeader[],
-  headersWithoutCustomFilters: TableHeader[],
-  customFilter: FilterFn
+  headersWithCustomFilters: DataTableHeader[],
+  headersWithoutCustomFilters: DataTableHeader[],
+  customFilter: DataTableFilterFunction
 ) {
   let filtered = items
   search = typeof search === 'string' ? search.trim() : null
@@ -66,7 +66,7 @@ export default VDataIterator.extend({
     headers: {
       type: Array,
       default: () => [],
-    } as PropValidator<TableHeader[]>,
+    } as PropValidator<DataTableHeader[]>,
     showSelect: Boolean,
     showExpand: Boolean,
     showGroupBy: Boolean,
@@ -103,7 +103,7 @@ export default VDataIterator.extend({
   },
 
   computed: {
-    computedHeaders (): TableHeader[] {
+    computedHeaders (): DataTableHeader[] {
       if (!this.headers) return []
       const headers = this.headers.filter(h => h.value === undefined || !this.internalGroupBy.find(v => v === h.value))
       const defaultHeader = { text: '', sortable: false, width: '1px' }
@@ -134,16 +134,16 @@ export default VDataIterator.extend({
 
       return this.$vuetify.breakpoint.width < this.mobileBreakpoint
     },
-    columnSorters (): Record<string, compareFn> {
-      return this.computedHeaders.reduce<Record<string, compareFn>>((acc, header) => {
+    columnSorters (): Record<string, DataTableCompareFunction> {
+      return this.computedHeaders.reduce<Record<string, DataTableCompareFunction>>((acc, header) => {
         if (header.sort) acc[header.value] = header.sort
         return acc
       }, {})
     },
-    headersWithCustomFilters (): TableHeader[] {
+    headersWithCustomFilters (): DataTableHeader[] {
       return this.computedHeaders.filter(header => header.filter && (!header.hasOwnProperty('filterable') || header.filterable === true))
     },
-    headersWithoutCustomFilters (): TableHeader[] {
+    headersWithoutCustomFilters (): DataTableHeader[] {
       return this.computedHeaders.filter(header => !header.filter && (!header.hasOwnProperty('filterable') || header.filterable === true))
     },
     sanitizedHeaderProps (): Record<string, any> {
@@ -151,7 +151,7 @@ export default VDataIterator.extend({
     },
     computedItemsPerPage (): number {
       const itemsPerPage = this.options && this.options.itemsPerPage ? this.options.itemsPerPage : this.itemsPerPage
-      const itemsPerPageOptions: ItemsPerPageOption[] | undefined = this.sanitizedFooterProps.itemsPerPageOptions
+      const itemsPerPageOptions: DataItemsPerPageOption[] | undefined = this.sanitizedFooterProps.itemsPerPageOptions
 
       if (
         itemsPerPageOptions &&
@@ -211,12 +211,12 @@ export default VDataIterator.extend({
 
       return Object.assign(props, { headers: this.computedHeaders })
     },
-    genCaption (props: DataProps) {
+    genCaption (props: DataScopeProps) {
       if (this.caption) return [this.$createElement('caption', [this.caption])]
 
       return getSlot(this, 'caption', props, true)
     },
-    genColgroup (props: DataProps) {
+    genColgroup (props: DataScopeProps) {
       return this.$createElement('colgroup', this.computedHeaders.map(header => {
         return this.$createElement('col', {
           class: {
@@ -245,7 +245,7 @@ export default VDataIterator.extend({
 
       return this.$createElement('thead', [tr])
     },
-    genHeaders (props: DataProps) {
+    genHeaders (props: DataScopeProps) {
       const data = {
         props: {
           ...this.sanitizedHeaderProps,
@@ -288,7 +288,7 @@ export default VDataIterator.extend({
         }, content),
       ])
     },
-    genItems (items: any[], props: DataProps) {
+    genItems (items: any[], props: DataScopeProps) {
       const empty = this.genEmpty(props.originalItemsLength, props.pagination.itemsLength)
       if (empty) return [empty]
 
@@ -296,7 +296,7 @@ export default VDataIterator.extend({
         ? this.genGroupedRows(props.groupedItems, props)
         : this.genRows(items, props)
     },
-    genGroupedRows (groupedItems: Record<string, any[]>, props: DataProps) {
+    genGroupedRows (groupedItems: Record<string, any[]>, props: DataScopeProps) {
       const groups = Object.keys(groupedItems || {})
 
       return groups.map(group => {
@@ -314,7 +314,7 @@ export default VDataIterator.extend({
         }
       })
     },
-    genDefaultGroupedRow (group: string, items: any[], props: DataProps) {
+    genDefaultGroupedRow (group: string, items: any[], props: DataScopeProps) {
       const isOpen = !!this.openCache[group]
       const children: VNodeChildren = [
         this.$createElement('template', { slot: 'row.content' }, this.genDefaultRows(items, props)),
@@ -370,10 +370,10 @@ export default VDataIterator.extend({
         },
       }, children)
     },
-    genRows (items: any[], props: DataProps) {
+    genRows (items: any[], props: DataScopeProps) {
       return this.$scopedSlots.item ? this.genScopedRows(items, props) : this.genDefaultRows(items, props)
     },
-    genScopedRows (items: any[], props: DataProps) {
+    genScopedRows (items: any[], props: DataScopeProps) {
       const rows = []
 
       for (let i = 0; i < items.length; i++) {
@@ -390,7 +390,7 @@ export default VDataIterator.extend({
 
       return rows
     },
-    genDefaultRows (items: any[], props: DataProps) {
+    genDefaultRows (items: any[], props: DataScopeProps) {
       return this.$scopedSlots['expanded-item']
         ? items.map(item => this.genDefaultExpandedRow(item))
         : items.map(item => this.genDefaultSimpleRow(item))
@@ -465,7 +465,7 @@ export default VDataIterator.extend({
         },
       })
     },
-    genBody (props: DataProps): VNode | string | VNodeChildren {
+    genBody (props: DataScopeProps): VNode | string | VNodeChildren {
       const data = {
         ...props,
         isMobile: this.isMobile,
@@ -482,7 +482,7 @@ export default VDataIterator.extend({
         getSlot(this, 'body.append', data, true),
       ])
     },
-    genFooters (props: DataProps) {
+    genFooters (props: DataScopeProps) {
       const data = {
         props: {
           options: props.options,
@@ -510,7 +510,7 @@ export default VDataIterator.extend({
 
       return children
     },
-    genDefaultScopedSlot (props: DataProps): VNode {
+    genDefaultScopedSlot (props: DataScopeProps): VNode {
       const simpleProps = {
         height: this.height,
         fixedHeader: this.fixedHeader,

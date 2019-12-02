@@ -1,7 +1,7 @@
 
 import { validateTimestamp, parseDate } from './timestamp'
 import { PropType } from 'vue'
-import { VEventInput, VTimestampFormatter, VTimestamp } from 'types'
+import { CalendarEvent, CalendarFormatter, CalendarTimestamp } from 'types'
 
 export default {
   base: {
@@ -27,11 +27,11 @@ export default {
       default: true,
     },
     weekdayFormat: {
-      type: Function as PropType<VTimestampFormatter>,
+      type: Function as PropType<CalendarFormatter>,
       default: null,
     },
     dayFormat: {
-      type: Function as PropType<VTimestampFormatter>,
+      type: Function as PropType<CalendarFormatter>,
       default: null,
     },
   },
@@ -65,15 +65,15 @@ export default {
       validate: validateNumber,
     },
     intervalFormat: {
-      type: Function as PropType<VTimestampFormatter>,
+      type: Function as PropType<CalendarFormatter>,
       default: null,
     },
     intervalStyle: {
-      type: Function as PropType<(interval: VTimestamp) => object>,
+      type: Function as PropType<(interval: CalendarTimestamp) => object>,
       default: null,
     },
     showIntervalLabel: {
-      type: Function as PropType<(interval: VTimestamp) => boolean>,
+      type: Function as PropType<(interval: CalendarTimestamp) => boolean>,
       default: null,
     },
   },
@@ -91,7 +91,7 @@ export default {
       default: true,
     },
     monthFormat: {
-      type: Function as PropType<VTimestampFormatter>,
+      type: Function as PropType<CalendarFormatter>,
       default: null,
     },
   },
@@ -107,7 +107,7 @@ export default {
   },
   events: {
     events: {
-      type: Array as PropType<VEventInput[]>,
+      type: Array as PropType<CalendarEvent[]>,
       default: () => [],
     },
     eventStart: {

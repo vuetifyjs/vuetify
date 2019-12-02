@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { VNode, VNodeDirective } from 'vue/types'
 import { VuetifyIcon } from 'vuetify/types/services/icons'
-import { compareFn, ItemKey } from 'types'
+import { DataTableCompareFunction, SelectItemKey } from 'types'
 
 export function createSimpleFunctional (
   c: string,
@@ -120,7 +120,7 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
 
 export function getPropertyFromItem (
   item: object,
-  property: ItemKey,
+  property: SelectItemKey,
   fallback?: any
 ): any {
   if (property == null) return item === undefined ? fallback : item
@@ -276,7 +276,7 @@ export function sortItems (
   sortBy: string[],
   sortDesc: boolean[],
   locale: string,
-  customSorters?: Record<string, compareFn>
+  customSorters?: Record<string, DataTableCompareFunction>
 ) {
   if (sortBy === null || !sortBy.length) return items
   const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })

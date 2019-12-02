@@ -11,7 +11,7 @@ import { breaking, removed } from '../../util/console'
 
 // Types
 import { VNode, VNodeChildren, PropType } from 'vue'
-import { DataProps } from 'types'
+import { DataScopeProps } from 'types'
 
 /* @vue/component */
 export default Themeable.extend({
@@ -198,7 +198,7 @@ export default Themeable.extend({
 
       return null
     },
-    genItems (props: DataProps) {
+    genItems (props: DataScopeProps) {
       const empty = this.genEmpty(props.originalItemsLength, props.pagination.itemsLength)
       if (empty) return [empty]
 
@@ -218,7 +218,7 @@ export default Themeable.extend({
 
       return []
     },
-    genFooter (props: DataProps) {
+    genFooter (props: DataScopeProps) {
       if (this.hideDefaultFooter) return null
 
       const data = {

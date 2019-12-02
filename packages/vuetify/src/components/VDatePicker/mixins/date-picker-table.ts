@@ -14,7 +14,7 @@ import mixins from '../../../util/mixins'
 
 // Types
 import { VNodeChildren, PropType } from 'vue'
-import { AllowedDateFunction, DatePickerFormatter, DateEvents, DateEventColors, DateEventColorValue, TouchWrapper } from 'types'
+import { DatePickerAllowedDatesFunction, DatePickerFormatter, DatePickerEvents, DatePickerEventColors, DatePickerEventColorValue, TouchWrapper } from 'types'
 
 type CalculateTableDateFunction = (v: number) => string
 
@@ -27,16 +27,16 @@ export default mixins(
   directives: { Touch },
 
   props: {
-    allowedDates: Function as PropType<AllowedDateFunction | undefined>,
+    allowedDates: Function as PropType<DatePickerAllowedDatesFunction | undefined>,
     current: String,
     disabled: Boolean,
     format: Function as PropType<DatePickerFormatter | undefined>,
     events: {
-      type: [Array, Function, Object] as PropType<DateEvents>,
+      type: [Array, Function, Object] as PropType<DatePickerEvents>,
       default: () => null,
     },
     eventColor: {
-      type: [Array, Function, Object, String] as PropType<DateEventColors>,
+      type: [Array, Function, Object, String] as PropType<DatePickerEventColors>,
       default: () => 'warning',
     },
     min: String,
@@ -123,7 +123,7 @@ export default mixins(
     },
     getEventColors (date: string) {
       const arrayize = (v: string | string[]) => Array.isArray(v) ? v : [v]
-      let eventData: boolean | DateEventColorValue
+      let eventData: boolean | DatePickerEventColorValue
       let eventColors: string[] = []
 
       if (Array.isArray(this.events)) {
