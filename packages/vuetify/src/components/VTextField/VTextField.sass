@@ -60,8 +60,8 @@
 
   input
     flex: 1 1 auto
-    line-height: 20px
-    padding: 8px 0 8px
+    line-height: $text-field-line-height
+    padding: $text-field-padding
     max-width: 100%
     min-width: 0px
     width: 100%
@@ -76,7 +76,7 @@
 
     &:not(.v-text-field--outlined):not(.v-text-field--single-line)
       input
-        padding: 4px 0 8px
+        padding: $text-field-dense-padding
 
     &[type=text]::-ms-clear
       display: none
@@ -85,42 +85,42 @@
   .v-input__append-inner
     align-self: flex-start
     display: inline-flex
-    margin-top: 4px
+    margin-top: $text-field-append-prepend-margin
     line-height: 1
     user-select: none
 
   .v-input__prepend-inner
     +ltr()
       margin-right: auto
-      padding-right: 4px
+      padding-right: $text-field-append-prepend-margin
 
     +rtl()
       margin-left: auto
-      padding-left: 4px
+      padding-left: $text-field-append-prepend-margin
 
   .v-input__append-inner
     +ltr()
       margin-left: auto
-      padding-left: 4px
+      padding-left: $text-field-append-prepend-margin
 
     +rtl()
       margin-right: auto
-      padding-right: 4px
+      padding-right: $text-field-append-prepend-margin
 
   .v-counter
     white-space: nowrap
 
     +ltr()
-      margin-left: 8px
+      margin-left: $text-field-counter-margin
 
     +rtl()
-      margin-right: 8px
+      margin-right: $text-field-counter-margin
 
   .v-label
     max-width: 90%
     overflow: hidden
     text-overflow: ellipsis
-    top: 6px // equal to the margin top of icons
+    top: $text-field-label-top // equal to the margin top of icons
     white-space: nowrap
     pointer-events: none
 
@@ -132,11 +132,11 @@
 
     &--active
       max-width: 133%
-      transform: translateY(-18px) scale(.75)
+      transform: $text-field-label-active-transform
 
   & > .v-input__control > .v-input__slot
     cursor: text
-    transition: background $primary-transition
+    transition: $primary-transition
 
     &:before,
     &:after
@@ -161,7 +161,7 @@
     display: flex
     flex: 1 0 auto
     max-width: 100%
-    min-height: 14px
+    min-height: $text-field-details-min-height
     overflow: hidden
 
   &__prefix,
@@ -174,20 +174,20 @@
   &__prefix
     +ltr()
       text-align: right
-      padding-right: 4px
+      padding-right: $text-field-append-prepend-margin
 
     +rtl()
       text-align: left
-      padding-left: 4px
+      padding-left: $text-field-append-prepend-margin
 
   &__suffix
     white-space: nowrap
 
     +ltr()
-      padding-left: 4px
+      padding-left: $text-field-append-prepend-margin
 
     +rtl()
-      padding-right: 4px
+      padding-right: $text-field-append-prepend-margin
 
   &--reverse
     .v-text-field__prefix
@@ -195,20 +195,20 @@
       +ltr()
         text-align: left
         padding-right: 0
-        padding-left: 4px
+        padding-left: $text-field-append-prepend-margin
 
       +rtl()
         text-align: right
-        padding-right: 4px
+        padding-right: $text-field-append-prepend-margin
         padding-left: 0
 
     .v-text-field__suffix
       +ltr()
         padding-left: 0
-        padding-right: 4px
+        padding-right: $text-field-append-prepend-margin
 
       +rtl()
-        padding-left: 4px
+        padding-left: $text-field-append-prepend-margin
         padding-right: 0
 
   & > .v-input__control > .v-input__slot > .v-text-field__slot
@@ -228,17 +228,17 @@
 
     & > .v-input__control > .v-input__slot
       align-items: stretch
-      min-height: 56px
+      min-height: $text-field-filled-full-width-outlined-slot-min-height
 
     &.v-input--dense
       > .v-input__control > .v-input__slot
-        min-height: 44px
+        min-height: $text-field-filled-full-width-outlined-dense-slot-min-height
 
       &.v-text-field--single-line,
       &.v-text-field--outlined,
       &.v-text-field--outlined.v-text-field--filled
         > .v-input__control > .v-input__slot
-          min-height: 40px
+          min-height: $text-field-filled-full-width-outlined-single-line-slot-min-height
 
   &--outlined
     border-radius: $text-field-border-radius
@@ -246,28 +246,28 @@
   &--filled,
   &--full-width
     .v-label
-      top: 18px
+      top: $text-field-filled-full-width-label-top
 
       &--active
-        transform: translateY(-6px) scale(.75)
+        transform: $text-field-filled-full-width-label-active-transform
 
     &.v-input--dense
       .v-label
-        top: 17px
+        top: $text-field-dense-label-top
 
         &--active
-          transform: translateY(-10px) scale(.75)
+          transform: $text-field-dense-label-active-transform
 
       &.v-text-field--single-line
         .v-label
-          top: 11px
+          top: $text-field-single-line-label-top
 
   &--filled
     border-radius: $text-field-border-radius $text-field-border-radius 0 0
 
     &:not(.v-text-field--single-line)
       input
-        margin-top: 22px
+        margin-top: $text-field-filled-margin-top
 
     &.v-input--dense:not(.v-text-field--single-line)
       &.v-text-field--outlined
@@ -297,21 +297,21 @@
 
     &:not(.v-text-field--rounded) > .v-input__control > .v-input__slot,
     .v-text-field__details
-      padding: 0 12px
+      padding: $text-field-enclosed-details-padding
 
-    +prepend-append-margin-top(16px)
+    +prepend-append-margin-top($text-field-enclosed-prepend-append-margin-top)
 
     &.v-input--dense:not(.v-text-field--solo)
-      +prepend-append-margin-top(14px)
+      +prepend-append-margin-top($text-field-dense-prepend-append-margin-top)
 
       &.v-text-field--single-line
-        +prepend-append-margin-top(9px)
+        +prepend-append-margin-top($text-field-single-line-prepend-append-margin-top)
 
       &.v-text-field--outlined
-        +prepend-append-margin-top(7px)
+        +prepend-append-margin-top($text-field-outlined-prepend-append-margin-top)
 
     .v-text-field__details
-      margin-bottom: 8px
+      margin-bottom: $text-field-details-margin-bottom
 
   &--reverse
     input
@@ -345,35 +345,35 @@
     border-radius: $text-field-border-radius
 
   &--outlined
-    margin-bottom: 16px
+    margin-bottom: $text-field-outlined-margin-bottom
     transition: border $primary-transition
 
-    +label-position(18px, -24px)
+    +label-position($text-field-outlined-label-position-x, $text-field-outlined-label-position-y)
 
     &.v-input--dense
-      +label-position(10px, -16px)
+      +label-position($text-field-outlined-dense-label-position-x, $text-field-outlined-dense-label-position-y)
 
     fieldset
       border-style: solid
-      border-width: 1px
+      border-width: $text-field-outlined-fieldset-border-width
       bottom: 0
       left: 0
       pointer-events: none
       position: absolute
       right: 0
-      top: -5px
+      top: $text-field-outlined-fieldset-top
       transition-duration: 0.3s
       transition-property: border, border-width
       transition-timing-function: map-get($transition, 'fast-in-fast-out')
 
       +ltr()
-        padding-left: 8px
+        padding-left: $text-field-outlined-fieldset-padding
 
       +rtl()
-        padding-right: 8px
+        padding-right: $text-field-outlined-fieldset-padding
 
     legend
-      line-height: 11px
+      line-height: $text-field-outlined-legend-line-height
       padding: 0
       transition: width $primary-transition
 
@@ -386,46 +386,45 @@
     &.v-text-field--rounded
       legend
         +ltr()
-          margin-left: 12px
+          margin-left: $text-field-rounded-legend-margin
 
         +rtl()
-          margin-right: 12px
+          margin-right: $text-field-rounded-legend-margin
 
     & > .v-input__control > .v-input__slot
       background: transparent
 
     .v-text-field__prefix
-      max-height: 32px
+      max-height: $text-field-prefix-max-height
 
     .v-input__prepend-outer,
     .v-input__append-outer
-      margin-top: 18px // 2px for border
+      margin-top: $text-field-outlined-append-prepend-outer-margin-top // 2px for border
 
     &.v-input--is-focused,
     &.v-input--has-state
       fieldset
-        border-color: currentColor
-        border-width: 2px
+        border: $text-field-outlined-fieldset-border
 
   &--rounded
-    border-radius: 28px
+    border-radius: $text-field-rounded-border-radius
 
     > .v-input__control > .v-input__slot
-      padding: 0 24px
+      padding: $text-field-outlined-rounded-slot-padding
 
   &--shaped
-    border-radius: 16px 16px 0 0
+    border-radius: $text-field-shaped-border-radius
 
   &.v-text-field--solo
     .v-label
-      top: calc(50% - 10px)
+      top: $text-field-solo-label-top
 
     .v-input__control
-      min-height: 48px
+      min-height: $text-field-solo-control-min-height
       padding: 0
 
     &.v-input--dense > .v-input__control
-      min-height: 38px
+      min-height: $text-field-solo-dense-control-min-height
 
     &:not(.v-text-field--solo-flat) > .v-input__control > .v-input__slot
       +elevation(2)
@@ -435,10 +434,10 @@
       align-self: center
       margin-top: 0
 
-    +outer-margin-top(12px)
+    +outer-margin-top($text-field-solo-outer-margin-top)
 
     &.v-input--dense
-      +outer-margin-top(7px)
+      +outer-margin-top($text-field-solo-dense-outer-margin-top)
 
   &.v-input--is-focused > .v-input__control > .v-input__slot:after
     transform: scaleX(1)

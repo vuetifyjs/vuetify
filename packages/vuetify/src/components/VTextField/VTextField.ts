@@ -176,16 +176,7 @@ export default baseMixins.extend<options>().extend({
     prefix () {
       this.$nextTick(this.setPrefixWidth)
     },
-    isFocused (val) {
-      // Sets validationState from validatable
-      this.hasColor = val
-
-      if (val) {
-        this.initialValue = this.lazyValue
-      } else if (this.initialValue !== this.lazyValue) {
-        this.$emit('change', this.lazyValue)
-      }
-    },
+    isFocused: 'updateValue',
     value (val) {
       this.lazyValue = val
     },
@@ -466,6 +457,16 @@ export default baseMixins.extend<options>().extend({
       if (!this.outlined || !this.$refs['prepend-inner']) return
 
       this.prependWidth = this.$refs['prepend-inner'].offsetWidth
+    },
+    updateValue (val: boolean) {
+      // Sets validationState from validatable
+      this.hasColor = val
+
+      if (val) {
+        this.initialValue = this.lazyValue
+      } else if (this.initialValue !== this.lazyValue) {
+        this.$emit('change', this.lazyValue)
+      }
     },
   },
 })

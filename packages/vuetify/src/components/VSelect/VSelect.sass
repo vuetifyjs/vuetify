@@ -1,4 +1,4 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 // Theme
 +theme(v-select) using ($material)
@@ -31,10 +31,10 @@
 
   .v-chip
     flex: 0 1 auto
-    margin: 4px
+    margin: $select-chip-margin
 
     &--selected:after
-      opacity: .22
+      opacity: $select-selected-chip-opacity
 
   .fade-transition-leave-active
     position: absolute
@@ -47,22 +47,22 @@
   &:not(.v-input--is-dirty)
     &:not(.v-input--is-focused)
       .v-text-field__prefix
-          line-height: 20px
+          line-height: $select-prefix-line-height
           position: absolute
-          top: 7px
+          top: $select-prefix-top
           transition: $primary-transition
 
   &.v-text-field--enclosed:not(.v-text-field--single-line):not(.v-text-field--outlined)
     .v-select__selections
-      padding-top: 20px
+      padding-top: $select-selections-padding-top
 
   &.v-text-field--outlined:not(.v-text-field--single-line)
     .v-select__selections
-      padding: 8px 0
+      padding: $select-outlined-selections-padding-top
 
     &.v-input--dense
       .v-select__selections
-        padding: 4px 0
+        padding: $select-outlined-dense-selections-padding-top
 
   &.v-text-field
     input
@@ -72,47 +72,48 @@
       pointer-events: none
       position: relative
 
-  &.v-select--is-menu-active
-    .v-input__icon--append .v-icon
-      transform: rotate(180deg)
+  @if $select-active-icon-flip
+    &.v-select--is-menu-active
+      .v-input__icon--append .v-icon
+        transform: rotate(180deg)
 
   &.v-select--chips
     input
       margin: 0
 
     .v-select__selections
-      min-height: 42px
+      min-height: $select-chips-selections-padding-top
 
     &.v-input--dense
       .v-select__selections
-        min-height: 40px
+        min-height: $select-chips-dense-selections-padding-top
 
     // Explicit override since active chips
     // in select are not focused
     .v-chip--select.v-chip--active::before
-      opacity: 0.2
+      opacity: $select-active-chip-opacity
 
     &.v-select--chips--small
       .v-select__selections
-        min-height: 32px
+        min-height: $select-small-chips-selections-min-height
 
     &:not(.v-text-field--single-line)
       &.v-text-field--box,
       &.v-text-field--enclosed
         .v-select__selections
-          min-height: 68px
+          min-height: $select-chips-box-enclosed-selections-min-height
 
         &.v-input--dense
           .v-select__selections
-            min-height: 40px
+            min-height: $select-chips-dense-selections-min-height
 
         &.v-select--chips--small
           .v-select__selections
-            min-height: 56px
+            min-height: $select-small-chips-selections-min-height
 
           &.v-input--dense
             .v-select__selections
-              min-height: 38px
+              min-height: $select-small-chips-dense-selections-min-height
 
 
   &.v-text-field--reverse
@@ -125,7 +126,7 @@
     display: flex
     flex: 1 1
     flex-wrap: wrap
-    line-height: 18px
+    line-height: $select-selections-line-height
     max-width: 100%
     min-width: 0
 
@@ -133,7 +134,7 @@
     max-width: 90%
 
     &--comma
-      margin: 7px 4px 7px 0
+      margin: $select-selections-margin
       overflow: hidden
       text-overflow: ellipsis
       white-space: nowrap

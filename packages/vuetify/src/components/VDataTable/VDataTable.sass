@@ -13,23 +13,25 @@
       background: map-deep-get($material, 'table', 'group')
 
   .v-data-footer
-    border-top: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+    border-top: thin solid map-get($material, 'dividers')
 
   .v-data-table__empty-wrapper
     color: map-deep-get($material, 'text', 'disabled')
 
 .v-data-table
+  border-radius: $data-table-border-radius
+
   tbody
     tr
       &.v-data-table__expanded
         border-bottom: 0
 
       &.v-data-table__expanded__content
-        box-shadow: inset 0px 4px 8px -5px rgba(50, 50, 50, 0.75), inset 0px -4px 8px -5px rgba(50, 50, 50, 0.75)
+        box-shadow: $data-table-expanded-content-box-shadow
 
   .v-data-table__mobile-row
     height: initial
-    min-height: 48px
+    min-height: $data-table-mobile-row-min-height
 
 .v-data-table__empty-wrapper
   text-align: center
@@ -40,16 +42,20 @@
   justify-content: space-between
 
   &__header
-    font-weight: 600
+    font-weight: $data-table-mobile-row-header-font-weight
 
   &__cell
-    text-align: right
+    +ltr()
+      text-align: right
+
+    +rtl()
+      text-align: left
 
 .v-row-group
   &__header, &__summary
 
     td
-      height: 35px
+      height: $data-table-row-group-children-td-height
 
 .v-data-table__expand-icon
   user-select: none

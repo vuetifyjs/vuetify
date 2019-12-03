@@ -1,4 +1,4 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 // Theme
 +theme(v-label) using ($material)
@@ -8,7 +8,7 @@
     color: map-deep-get($material, 'text', 'disabled')
 
 .v-label
-  font-size: 16px
-  line-height: 1
-  min-height: 8px
+  font-size: $label-font-size
+  line-height: $label-line-height
+  min-height: $label-min-height
   transition: .3s map-get($transition, 'swing')
