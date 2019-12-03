@@ -173,6 +173,7 @@ describe('VDataIterator.ts', () => {
       { id: 'bar' },
     ]
     const toggleSelectAll = jest.fn()
+    let all = false
 
     const wrapper = mountFunction({
       propsData: {
@@ -189,7 +190,7 @@ describe('VDataIterator.ts', () => {
               id: 'header',
             },
             on: {
-              click: () => props.toggleSelectAll(true),
+              click: () => props.toggleSelectAll(all = !all),
             },
           })
         },
@@ -203,6 +204,13 @@ describe('VDataIterator.ts', () => {
 
     expect(input).toHaveBeenCalledWith(items)
     expect(toggleSelectAll).toHaveBeenCalledWith({ value: true })
+
+    header.element.click()
+
+    await wrapper.vm.$nextTick()
+
+    expect(input).toHaveBeenCalledWith([])
+    expect(toggleSelectAll).toHaveBeenCalledWith({ value: false })
   })
 
   it('should update expansion from the outside', async () => {
