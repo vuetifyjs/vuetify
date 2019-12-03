@@ -62,7 +62,7 @@
     height: #{$slider-thumb-size + $slider-thumb-focused-size-increase}
     border-radius: $slider-thumb-border-radius
     background: currentColor
-    opacity: 0.3
+    opacity: $slider-thumb-before-opacity
     position: absolute
     left: -#{$slider-thumb-focused-size-increase / 2}
     top: -#{$slider-thumb-focused-size-increase / 2}
@@ -111,10 +111,10 @@
   display: flex
   align-items: center
   justify-content: center
-  font-size: 12px
+  font-size: $slider-thumb-label-font-size
   color: #fff // TODO: move to theme mixin?
-  width: 32px
-  height: 32px
+  width: $slider-thumb-label-width
+  height: $slider-thumb-label-height
   border-radius: 50% 50% 0
   position: absolute
   left: 0
@@ -124,9 +124,9 @@
 
 // Modifiers
 .v-slider--horizontal
-  min-height: 32px
-  margin-left: 8px
-  margin-right: 8px
+  min-height: $slider-horizontal-min-height
+  margin-left: $slider-horizontal-left
+  margin-right: $slider-horizontal-right
 
   .v-slider__track
     &-container
@@ -178,9 +178,9 @@
       transform: rotate(-45deg)
 
 .v-slider--vertical
-  min-height: 150px
-  margin-top: 12px
-  margin-bottom: 12px
+  min-height: $slider-vertical-min-height
+  margin-top: $slider-vertical-margin-top
+  margin-bottom: $slider-vertical-margin-bottom
 
   .v-slider__track
     &-container
@@ -259,21 +259,21 @@
   .v-input__slot .v-label
     +ltr()
       margin-left: 0
-      margin-right: 12px
+      margin-right: $slider-label-margin-end
 
     +rtl()
       margin-right: 0
-      margin-left: 12px
+      margin-left: $slider-label-margin-end
 
 .v-input__slider--inverse-label
   .v-input__slot .v-label
     +ltr()
       margin-right: 0
-      margin-left: 12px
+      margin-left: $slider-label-margin-start
 
     +rtl()
       margin-left: 0
-      margin-right: 12px
+      margin-right: $slider-label-margin-start
 
 .v-input__slider--vertical
   align-items: center
@@ -293,4 +293,4 @@
 
 .v-input--has-state
   .v-slider__track-background
-    opacity: 0.4
+    opacity: $slider-state-track-background-opacity
