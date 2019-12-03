@@ -3,6 +3,8 @@
 // Theme
 +theme(v-calendar-weekly) using ($material)
   background-color: map-deep-get($material, 'calendar', 'background-color')
+  border-top: map-deep-get($material, 'calendar', 'line-color') 1px solid
+  border-left: map-deep-get($material, 'calendar', 'line-color') 1px solid
 
   .v-calendar-weekly__head-weekday
     border-right: map-deep-get($material, 'calendar', 'line-color') 1px solid
@@ -48,7 +50,7 @@
 .v-calendar-weekly__week
   display: flex
   flex: 1
-  height: 0
+  height: unset
   // https://github.com/vuetifyjs/vuetify/issues/8319
   min-height: 0
 
