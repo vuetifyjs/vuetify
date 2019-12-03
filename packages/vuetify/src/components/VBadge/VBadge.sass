@@ -34,22 +34,27 @@
 
   &--overlap
     .v-badge__badge
-      top: -8px
+      top: 0
+      transform-origin: 100% 0
 
       +ltr()
-        right: -8px
+        right: 0
+        transform: translate(50%, -50%)
 
       +rtl()
-        left: -8px
+        left: 0
+        transform: translate(-50%, -50%)
 
     &.v-badge--left
       .v-badge__badge
         +ltr()
-          left: -8px
+          left: 0
+          transform: translate(-50%, -50%)
           right: initial
 
         +rtl()
-          right: -8px
+          right: 0
+          transform: translate(50%, -50%)
           left: initial
 
     &.v-badge--bottom
