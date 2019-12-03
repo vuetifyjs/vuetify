@@ -222,56 +222,51 @@ export default VSelect.extend({
     changeSelectedIndex (keyCode: number) {
       // Do not allow changing of selectedIndex
       // when search is dirty
-      if (this.searchIsDirty || !this.multiple) return
+      if (this.searchIsDirty) return
 
-      if (![
-        keyCodes.backspace,
-        keyCodes.left,
-        keyCodes.right,
-        keyCodes.delete,
-      ].includes(keyCode)) return
-
-      const index = this.selectedItems.length - 1
-
-      if (keyCode === keyCodes.left) {
+      if (this.multiple && keyCode === keyCodes.left) {
         if (this.selectedIndex === -1) {
-          this.selectedIndex = index
+          this.selectedIndex = this.selectedItems.length - 1
         } else {
           this.selectedIndex--
         }
-      } else if (keyCode === keyCodes.right) {
-        if (this.selectedIndex >= index) {
+      } else if (this.multiple && keyCode === keyCodes.right) {
+        if (this.selectedIndex >= this.selectedItems.length - 1) {
           this.selectedIndex = -1
         } else {
           this.selectedIndex++
         }
-      } else if (this.selectedIndex === -1) {
+      } else if (keyCode === keyCodes.backspace || keyCode === keyCodes.delete) {
+        this.deleteCurrentItem()
+      }
+    },
+    deleteCurrentItem () {
+      if (this.readonly) return
+
+      const index = this.selectedItems.length - 1
+
+      if (this.selectedIndex === -1) {
         this.selectedIndex = index
         return
       }
 
       const currentItem = this.selectedItems[this.selectedIndex]
 
-      if ([
-        keyCodes.backspace,
-        keyCodes.delete,
-      ].includes(keyCode) &&
-        !this.getDisabled(currentItem) && !this.readonly
-      ) {
-        const newIndex = this.selectedIndex === index
-          ? this.selectedIndex - 1
-          : this.selectedItems[this.selectedIndex + 1]
-            ? this.selectedIndex
-            : -1
+      if (this.getDisabled(currentItem)) return
 
-        if (newIndex === -1) {
-          this.setValue(this.multiple ? [] : undefined)
-        } else {
-          this.selectItem(currentItem)
-        }
+      const newIndex = this.selectedIndex === index
+        ? this.selectedIndex - 1
+        : this.selectedItems[this.selectedIndex + 1]
+          ? this.selectedIndex
+          : -1
 
-        this.selectedIndex = newIndex
+      if (newIndex === -1) {
+        this.setValue(this.multiple ? [] : undefined)
+      } else {
+        this.selectItem(currentItem)
       }
+
+      this.selectedIndex = newIndex
     },
     clearableCallback () {
       this.internalSearch = undefined

@@ -39,8 +39,13 @@ export default mixins(
   props: props.base,
 
   computed: {
+    parsedWeekdays (): number[] {
+      return Array.isArray(this.weekdays)
+        ? this.weekdays
+        : (this.weekdays || '').split(',').map(x => parseInt(x, 10))
+    },
     weekdaySkips (): number[] {
-      return getWeekdaySkips(this.weekdays)
+      return getWeekdaySkips(this.parsedWeekdays)
     },
     weekdaySkipsReverse (): number [] {
       const reversed = this.weekdaySkips.slice()

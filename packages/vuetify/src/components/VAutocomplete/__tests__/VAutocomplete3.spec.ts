@@ -123,4 +123,23 @@ describe('VAutocomplete.ts', () => {
 
     expect(setData).not.toHaveBeenCalled()
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/9654
+  it('should delete chip in single mode', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        chips: true,
+        items: ['foo', 'bar', 'fizz', 'buzz'],
+        value: 'foo',
+      },
+    })
+
+    const input = wrapper.find('input')
+
+    input.trigger('focus')
+    input.trigger('keydown.backspace')
+    input.trigger('keydown.backspace')
+
+    expect(wrapper.vm.internalValue).toBeUndefined()
+  })
 })

@@ -114,6 +114,7 @@ export default CalendarWithEvents.extend({
 
   mounted () {
     this.updateEventVisibility()
+    this.checkChange()
   },
 
   updated () {
