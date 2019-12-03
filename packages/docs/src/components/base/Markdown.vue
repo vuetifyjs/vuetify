@@ -116,7 +116,7 @@
       if (wantsList) code = code.map(c => `- ${c}\n`).join('')
 
       // Convert markdown links
-      code = code.replace(/\[([^\]]*)\]\(([^)]*)\)/g, parseLink)
+      code = (code || '').replace(/\[([^\]]*)\]\(([^)]*)\)/g, parseLink)
 
       const innerHTML = marked(code)
 
