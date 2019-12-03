@@ -154,6 +154,11 @@ export default Themeable.extend({
       if (value) selection[key] = item
       else delete selection[key]
 
+      if (this.singleSelect && emit) {
+        const keys = Object.keys(this.selection)
+        const old = keys.length && getObjectValueByPath(this.selection[keys[0]], this.itemKey)
+        old && old !== key && this.$emit('item-selected', { item: this.selection[old], value: false })
+      }
       this.selection = selection
       emit && this.$emit('item-selected', { item, value })
     },
