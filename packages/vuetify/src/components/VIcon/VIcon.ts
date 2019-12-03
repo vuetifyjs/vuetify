@@ -141,11 +141,11 @@ const VIcon = mixins(
       const fontSize = this.getSize()
       const wrapperData = {
         ...this.getDefaultData(),
-        style: !fontSize ? undefined : {
+        style: fontSize ? {
           fontSize,
           height: fontSize,
           width: fontSize,
-        },
+        } : undefined,
       }
       wrapperData.class['v-icon--svg'] = true
       this.applyColors(wrapperData)
