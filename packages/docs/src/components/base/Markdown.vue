@@ -115,8 +115,13 @@
 
       if (wantsList) code = code.map(c => `- ${c}\n`).join('')
 
+      if (typeof code !== 'string') {
+        code = ''
+        console.log(code, typeof code)
+      }
+
       // Convert markdown links
-      code = (code || '').replace(/\[([^\]]*)\]\(([^)]*)\)/g, parseLink)
+      code = code.replace(/\[([^\]]*)\]\(([^)]*)\)/g, parseLink)
 
       const innerHTML = marked(code)
 
