@@ -7,29 +7,29 @@
   color: map-deep-get($material, 'text', 'primary')
 
   .v-data-table__divider
-    border-right: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+    border-right: thin solid map-get($material, 'dividers')
 
   &.v-data-table--fixed-header
     thead th
       background: map-get($material, 'cards')
-      box-shadow: inset 0 -1px 0 rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+      box-shadow: inset 0 -1px 0 map-get($material, 'dividers')
 
   thead
     tr
       &:last-child th
-        border-bottom: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+        border-bottom: thin solid map-get($material, 'dividers')
 
       th
-        color: rgba(map-get($material, 'text-color'), map-get($material, 'secondary-text-percent'))
+        color: map-deep-get($material, 'text', 'primary')
 
   tbody
     tr
       &:not(:last-child) td
         &:not(.v-data-table__mobile-row)
-          border-bottom: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+          border-bottom: thin solid map-get($material, 'dividers')
 
         &:last-child
-          border-bottom: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+          border-bottom: thin solid map-get($material, 'dividers')
 
       &.active
         background: map-deep-get($material, 'table', 'active')
@@ -48,7 +48,7 @@
 
   th
     user-select: none
-    font-size: 12px
+    font-size: $data-table-regular-header-font-size
     height: $data-table-regular-header-height
 
     +ltr()
@@ -58,7 +58,7 @@
       text-align: right
 
   td
-    font-size: 14px
+    font-size: $data-table-regular-row-font-size
     height: $data-table-regular-row-height
 
 // Elements
