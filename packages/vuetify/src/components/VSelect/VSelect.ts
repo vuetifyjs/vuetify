@@ -611,7 +611,6 @@ export default baseMixins.extend<options>().extend({
         this.$nextTick(() => {
           this.$emit('update:list-index', menu.listIndex)
         })
-        this.$emit('update:list-index', menu.listIndex)
       }
 
       // If menu is not active, up and down can do
