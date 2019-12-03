@@ -24,8 +24,8 @@
     components: {
       HomeFeature: () => import('./components/Feature'),
       HomeHero: () => import('./components/Hero'),
-      HomePremiumThemes: () => import('./components/PremiumThemes'),
       HomeMadeWithVuetify: () => import('./components/MadeWithVuetify'),
+      HomePremiumThemes: () => import('./components/PremiumThemes'),
       HomeSponsors: () => import('./components/Sponsors'),
       HomeTidelift: () => import('./components/Tidelift'),
     },

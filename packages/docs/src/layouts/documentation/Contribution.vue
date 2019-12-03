@@ -8,8 +8,11 @@
 <script>
   // Utilities
   import { get } from 'vuex-pathify'
-  import { upperFirst, camelCase } from 'lodash'
   import { parseLink } from '@/util/helpers'
+  import {
+    camelCase,
+    upperFirst,
+  } from 'lodash'
 
   export default {
     name: 'DocumentationContribution',
@@ -22,9 +25,7 @@
     },
 
     computed: {
-      lang: get('route/params@lang'),
-      namespace: get('route/params@namespace'),
-      page: get('route/params@page'),
+      ...get('route/params@*'),
       contributionGuide () {
         return this.parseLink('', 'contribute', `/${this.lang}/getting-started/contributing`)
       },
@@ -51,9 +52,7 @@
         // If we're switching in or out of translating
         // then we need to force a reload to make sure
         // that crowdin script is loaded (or unloaded)
-        setTimeout(() => {
-          this.$router.go()
-        }, 1000)
+        setTimeout(() => this.$router.go(), 1000)
 
         this.$router.replace({ params: { lang } })
 

@@ -37,7 +37,7 @@ export default CalendarBase.extend({
       return parseInt(this.minWeeks)
     },
     days (): VTimestamp[] {
-      const minDays = this.parsedMinWeeks * this.weekdays.length
+      const minDays = this.parsedMinWeeks * this.parsedWeekdays.length
       const start = this.getStartOfWeek(this.parsedStart)
       const end = this.getEndOfWeek(this.parsedEnd)
 
@@ -60,8 +60,8 @@ export default CalendarBase.extend({
         end,
         today,
         this.weekdaySkips,
-        this.weekdays.length,
-        this.weekdays.length
+        this.parsedWeekdays.length,
+        this.parsedWeekdays.length
       )
     },
     monthFormatter (): VTimestampFormatter {
@@ -106,7 +106,7 @@ export default CalendarBase.extend({
     },
     genWeeks (): VNode[] {
       const days = this.days
-      const weekDays = this.weekdays.length
+      const weekDays = this.parsedWeekdays.length
       const weeks: VNode[] = []
       for (let i = 0; i < days.length; i += weekDays) {
         weeks.push(this.genWeek(days.slice(i, i + weekDays)))

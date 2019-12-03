@@ -45,22 +45,23 @@
           <supporters-supporter-group
             :group="supporters['Diamond']"
             compact
-            title="Diamond Sponsors"
             justify="start"
+            title="Diamond Sponsors"
           />
         </v-fade-transition>
       </div>
     </template>
   </v-navigation-drawer>
 </template>
+
 <script>
   // Utilities
+  import kebabCase from 'lodash/kebabCase'
   import { goTo } from '@/util/helpers'
   import {
     get,
     sync,
   } from 'vuex-pathify'
-  import kebabCase from 'lodash/kebabCase'
 
   export default {
     name: 'DocumentationToc',
@@ -73,9 +74,11 @@
     }),
 
     computed: {
-      headings: get('documentation/headings'),
-      namespace: get('documentation/namespace'),
-      page: get('documentation/page'),
+      ...get('documentation', [
+        'headings',
+        'namespace',
+        'page',
+      ]),
       structure: sync('documentation/structure'),
       supporters: sync('app/supporters'),
       toc () {
@@ -107,9 +110,7 @@
         handler (val) {
           if (!val.length) return
 
-          this.$nextTick(() => {
-            this.internalToc = this.toc.slice()
-          })
+          this.$nextTick(() => (this.internalToc = this.toc.slice()))
         },
       },
     },
@@ -119,6 +120,7 @@
       findActiveIndex () {
         if (this.currentOffset < 100) {
           this.activeIndex = 0
+
           return
         }
 
@@ -138,8 +140,11 @@
           : lastIndex
       },
       onScroll () {
-        this.currentOffset = window.pageYOffset ||
-          document.documentElement.offsetTop
+        this.currentOffset = (
+          window.pageYOffset ||
+          document.documentElement.offsetTop ||
+          0
+        )
 
         clearTimeout(this.timeout)
 

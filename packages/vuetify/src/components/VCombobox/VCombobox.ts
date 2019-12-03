@@ -69,6 +69,7 @@ export default VAutocomplete.extend({
     genInput () {
       const input = VAutocomplete.options.methods.genInput.call(this)
 
+      delete input.data!.attrs!.name
       input.data!.on!.paste = this.onPaste
 
       return input

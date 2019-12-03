@@ -1,9 +1,7 @@
 // Must be called in Vue context
 export function goTo (id) {
   this.$vuetify.goTo(id).then(() => {
-    if (!id) {
-      return (document.location.hash = '')
-    }
+    if (!id) return (document.location.hash = '')
 
     if (history.replaceState) {
       history.replaceState(null, null, id)
@@ -42,8 +40,8 @@ export function getComponent (type) {
 
 export function parseLink (match, text, link) {
   let attrs = ''
-  let linkClass = 'v-markdown--link'
   let icon = ''
+  let linkClass = 'v-markdown--link'
 
   // External link
   if (
@@ -55,12 +53,12 @@ export function parseLink (match, text, link) {
     linkClass += ' v-markdown--external'
   // Same page internal link
   } else if (link.charAt(0) === '#') {
-    linkClass += ' v-markdown--same-internal'
     icon = 'pound'
+    linkClass += ' v-markdown--same-internal'
   // Different page internal link
   } else {
-    linkClass += ' v-markdown--internal'
     icon = 'page-next'
+    linkClass += ' v-markdown--internal'
   }
 
   return `<a href="${link}" ${attrs} class="${linkClass}">${text}<i class="v-icon mdi mdi-${icon}"></i></a>`
@@ -77,6 +75,7 @@ export async function waitForReadystate () {
         window.requestAnimationFrame(resolve)
         window.removeEventListener('load', cb)
       }
+
       window.addEventListener('load', cb)
     })
   }
@@ -90,6 +89,9 @@ export function genChip (item) {
 }
 
 export function getBranch () {
-  const branch = window ? window.location.hostname.split('.')[0] : 'master'
+  const branch = window
+    ? window.location.hostname.split('.')[0]
+    : 'master'
+
   return ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
 }
