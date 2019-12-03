@@ -88,6 +88,7 @@ export default mixins(
   },
 
   data: () => ({
+    level: -1,
     activeCache: new Set() as NodeCache,
     nodes: {} as Record<string | number, NodeState>,
     openCache: new Set() as NodeCache,
