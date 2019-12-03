@@ -478,12 +478,12 @@ export default VDataIterator.extend({
     genBody (props: DataScopeProps): VNode | string | VNodeChildren {
       const data = {
         ...props,
-        isMobile: this.isMobile,
-        headers: this.computedHeaders,
-        select: this.select,
-        isSelected: this.isSelected,
         expand: this.expand,
+        headers: this.computedHeaders,
         isExpanded: this.isExpanded,
+        isMobile: this.isMobile,
+        isSelected: this.isSelected,
+        select: this.select,
       }
 
       if (this.$scopedSlots.body) {
