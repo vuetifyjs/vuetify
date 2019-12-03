@@ -610,7 +610,7 @@ export default baseMixins.extend<options>().extend({
         menu.changeListIndex(e)
         this.$nextTick(() => {
           this.$emit('update:list-index', menu.listIndex)
-	})
+        })
         this.$emit('update:list-index', menu.listIndex)
       }
 
