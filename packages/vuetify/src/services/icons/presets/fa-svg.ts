@@ -1,4 +1,4 @@
-import { VuetifyIcon, VuetifyIcons } from 'vuetify/types/services/icons'
+import { VuetifyIcons } from 'vuetify/types/services/icons'
 import { Component } from 'vue'
 import icons from './fa'
 
@@ -6,7 +6,7 @@ export function convertToComponentDeclarations (
   component: Component | string,
   iconSet: VuetifyIcons,
 ) {
-  const result: {[name: string]: VuetifyIcon} = {}
+  const result: Partial<VuetifyIcons> = {}
 
   for (const key in iconSet) {
     result[key] = {
