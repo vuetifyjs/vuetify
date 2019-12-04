@@ -281,6 +281,18 @@
           ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "getting-started/unit-testing",
+            "introduction/frequently-asked-questions"
+          ]
+        }
+      ]
     }
   ]
 }

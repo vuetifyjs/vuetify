@@ -11,17 +11,17 @@
 
       <v-tab href="#tab-1">
         Recents
-        <v-icon>phone</v-icon>
+        <v-icon>mdi-phone</v-icon>
       </v-tab>
 
       <v-tab href="#tab-2">
         Favorites
-        <v-icon>favorite</v-icon>
+        <v-icon>mdi-heart</v-icon>
       </v-tab>
 
       <v-tab href="#tab-3">
         Nearby
-        <v-icon>account_box</v-icon>
+        <v-icon>mdi-account-box</v-icon>
       </v-tab>
     </v-tabs>
 

@@ -42,6 +42,7 @@ module.exports = [
   'v-list-item-avatar',
   'v-list-item-content',
   'v-list-item-group',
+  'v-list-item-icon',
   'v-list-item-subtitle',
   'v-list-item-title',
   'v-list',

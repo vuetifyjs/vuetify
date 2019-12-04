@@ -1,5 +1,5 @@
 <template>
-  <v-layout column align-center>
+  <v-row align="center">
     <v-date-picker
       v-model="date"
       width="290"
@@ -11,7 +11,7 @@
       :landscape="$vuetify.breakpoint.smAndUp"
       class="mt-4"
     ></v-date-picker>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

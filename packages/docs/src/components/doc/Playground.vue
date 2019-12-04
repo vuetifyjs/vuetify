@@ -1,6 +1,6 @@
 <template>
   <div>
-    <doc-heading>Generic.Pages.playground</doc-heading>
+    <base-heading>Generic.Pages.playground</base-heading>
     <doc-example
       :id="`usage-${-1}`"
       :value="internalValue"

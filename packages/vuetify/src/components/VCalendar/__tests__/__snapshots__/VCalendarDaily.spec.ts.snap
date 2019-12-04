@@ -5,7 +5,9 @@ exports[`VCalendarDaily should render component and have v-calendar-daily class 
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
   >
-    <div class="v-calendar-daily__intervals-head">
+    <div class="v-calendar-daily__intervals-head"
+         style="width: 45px;"
+    >
     </div>
     <div class="v-calendar-daily_head-day v-past">
       <div class="v-calendar-daily_head-weekday">
@@ -112,7 +114,9 @@ exports[`VCalendarDaily should render component and have v-calendar-daily class 
            style="height: 960px;"
       >
         <div class="v-calendar-daily__day-container">
-          <div class="v-calendar-daily__intervals-body">
+          <div class="v-calendar-daily__intervals-body"
+               style="width: 45px;"
+          >
             <div class="v-calendar-daily__interval"
                  style="height: 40px;"
             >
@@ -979,7 +983,9 @@ exports[`VCalendarDaily should render correctly with firstInterval prop 1`] = `
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
   >
-    <div class="v-calendar-daily__intervals-head">
+    <div class="v-calendar-daily__intervals-head"
+         style="width: 45px;"
+    >
     </div>
     <div class="v-calendar-daily_head-day v-past">
       <div class="v-calendar-daily_head-weekday">
@@ -1086,7 +1092,9 @@ exports[`VCalendarDaily should render correctly with firstInterval prop 1`] = `
            style="height: 960px;"
       >
         <div class="v-calendar-daily__day-container">
-          <div class="v-calendar-daily__intervals-body">
+          <div class="v-calendar-daily__intervals-body"
+               style="width: 45px;"
+          >
             <div class="v-calendar-daily__interval"
                  style="height: 40px;"
             >
@@ -1952,7 +1960,9 @@ exports[`VCalendarDaily should render correctly with intervalCount prop 1`] = `
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
   >
-    <div class="v-calendar-daily__intervals-head">
+    <div class="v-calendar-daily__intervals-head"
+         style="width: 45px;"
+    >
     </div>
     <div class="v-calendar-daily_head-day v-past">
       <div class="v-calendar-daily_head-weekday">
@@ -2059,7 +2069,9 @@ exports[`VCalendarDaily should render correctly with intervalCount prop 1`] = `
            style="height: 480px;"
       >
         <div class="v-calendar-daily__day-container">
-          <div class="v-calendar-daily__intervals-body">
+          <div class="v-calendar-daily__intervals-body"
+               style="width: 45px;"
+          >
             <div class="v-calendar-daily__interval"
                  style="height: 40px;"
             >
@@ -2506,7 +2518,9 @@ exports[`VCalendarDaily should render correctly with intervalHeight prop 1`] = `
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
   >
-    <div class="v-calendar-daily__intervals-head">
+    <div class="v-calendar-daily__intervals-head"
+         style="width: 45px;"
+    >
     </div>
     <div class="v-calendar-daily_head-day v-past">
       <div class="v-calendar-daily_head-weekday">
@@ -2613,7 +2627,9 @@ exports[`VCalendarDaily should render correctly with intervalHeight prop 1`] = `
            style="height: 1680px;"
       >
         <div class="v-calendar-daily__day-container">
-          <div class="v-calendar-daily__intervals-body">
+          <div class="v-calendar-daily__intervals-body"
+               style="width: 45px;"
+          >
             <div class="v-calendar-daily__interval"
                  style="height: 70px;"
             >
@@ -3480,7 +3496,9 @@ exports[`VCalendarDaily should render correctly with intervalMinutes prop 1`] = 
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
   >
-    <div class="v-calendar-daily__intervals-head">
+    <div class="v-calendar-daily__intervals-head"
+         style="width: 45px;"
+    >
     </div>
     <div class="v-calendar-daily_head-day v-past">
       <div class="v-calendar-daily_head-weekday">
@@ -3587,7 +3605,9 @@ exports[`VCalendarDaily should render correctly with intervalMinutes prop 1`] = 
            style="height: 960px;"
       >
         <div class="v-calendar-daily__day-container">
-          <div class="v-calendar-daily__intervals-body">
+          <div class="v-calendar-daily__intervals-body"
+               style="width: 45px;"
+          >
             <div class="v-calendar-daily__interval"
                  style="height: 40px;"
             >
@@ -3598,12 +3618,14 @@ exports[`VCalendarDaily should render correctly with intervalMinutes prop 1`] = 
                  style="height: 40px;"
             >
               <div class="v-calendar-daily__interval-text">
+                12:40 AM
               </div>
             </div>
             <div class="v-calendar-daily__interval"
                  style="height: 40px;"
             >
               <div class="v-calendar-daily__interval-text">
+                1:20 AM
               </div>
             </div>
             <div class="v-calendar-daily__interval"
@@ -3617,12 +3639,14 @@ exports[`VCalendarDaily should render correctly with intervalMinutes prop 1`] = 
                  style="height: 40px;"
             >
               <div class="v-calendar-daily__interval-text">
+                2:40 AM
               </div>
             </div>
             <div class="v-calendar-daily__interval"
                  style="height: 40px;"
             >
               <div class="v-calendar-daily__interval-text">
+                3:20 AM
               </div>
             </div>
             <div class="v-calendar-daily__interval"
@@ -3636,12 +3660,14 @@ exports[`VCalendarDaily should render correctly with intervalMinutes prop 1`] = 
                  style="height: 40px;"
             >
               <div class="v-calendar-daily__interval-text">
+                4:40 AM
               </div>
             </div>
             <div class="v-calendar-daily__interval"
                  style="height: 40px;"
             >
               <div class="v-calendar-daily__interval-text">
+                5:20 AM
               </div>
             </div>
             <div class="v-calendar-daily__interval"
@@ -3655,12 +3681,14 @@ exports[`VCalendarDaily should render correctly with intervalMinutes prop 1`] = 
                  style="height: 40px;"
             >
               <div class="v-calendar-daily__interval-text">
+                6:40 AM
               </div>
             </div>
             <div class="v-calendar-daily__interval"
                  style="height: 40px;"
             >
               <div class="v-calendar-daily__interval-text">
+                7:20 AM
               </div>
             </div>
             <div class="v-calendar-daily__interval"
@@ -3674,12 +3702,14 @@ exports[`VCalendarDaily should render correctly with intervalMinutes prop 1`] = 
                  style="height: 40px;"
             >
               <div class="v-calendar-daily__interval-text">
+                8:40 AM
               </div>
             </div>
             <div class="v-calendar-daily__interval"
                  style="height: 40px;"
             >
               <div class="v-calendar-daily__interval-text">
+                9:20 AM
               </div>
             </div>
             <div class="v-calendar-daily__interval"
@@ -3693,12 +3723,14 @@ exports[`VCalendarDaily should render correctly with intervalMinutes prop 1`] = 
                  style="height: 40px;"
             >
               <div class="v-calendar-daily__interval-text">
+                10:40 AM
               </div>
             </div>
             <div class="v-calendar-daily__interval"
                  style="height: 40px;"
             >
               <div class="v-calendar-daily__interval-text">
+                11:20 AM
               </div>
             </div>
             <div class="v-calendar-daily__interval"
@@ -3712,12 +3744,14 @@ exports[`VCalendarDaily should render correctly with intervalMinutes prop 1`] = 
                  style="height: 40px;"
             >
               <div class="v-calendar-daily__interval-text">
+                12:40 PM
               </div>
             </div>
             <div class="v-calendar-daily__interval"
                  style="height: 40px;"
             >
               <div class="v-calendar-daily__interval-text">
+                1:20 PM
               </div>
             </div>
             <div class="v-calendar-daily__interval"
@@ -3731,12 +3765,14 @@ exports[`VCalendarDaily should render correctly with intervalMinutes prop 1`] = 
                  style="height: 40px;"
             >
               <div class="v-calendar-daily__interval-text">
+                2:40 PM
               </div>
             </div>
             <div class="v-calendar-daily__interval"
                  style="height: 40px;"
             >
               <div class="v-calendar-daily__interval-text">
+                3:20 PM
               </div>
             </div>
           </div>
@@ -4438,7 +4474,9 @@ exports[`VCalendarDaily should render correctly with maxDays prop 1`] = `
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
   >
-    <div class="v-calendar-daily__intervals-head">
+    <div class="v-calendar-daily__intervals-head"
+         style="width: 45px;"
+    >
     </div>
     <div class="v-calendar-daily_head-day v-past">
       <div class="v-calendar-daily_head-weekday">
@@ -4517,7 +4555,9 @@ exports[`VCalendarDaily should render correctly with maxDays prop 1`] = `
            style="height: 960px;"
       >
         <div class="v-calendar-daily__day-container">
-          <div class="v-calendar-daily__intervals-body">
+          <div class="v-calendar-daily__intervals-body"
+               style="width: 45px;"
+          >
             <div class="v-calendar-daily__interval"
                  style="height: 40px;"
             >
@@ -5189,7 +5229,9 @@ exports[`VCalendarDaily should render correctly without shortIntervals prop 1`] 
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
   >
-    <div class="v-calendar-daily__intervals-head">
+    <div class="v-calendar-daily__intervals-head"
+         style="width: 45px;"
+    >
     </div>
     <div class="v-calendar-daily_head-day v-past">
       <div class="v-calendar-daily_head-weekday">
@@ -5296,7 +5338,9 @@ exports[`VCalendarDaily should render correctly without shortIntervals prop 1`] 
            style="height: 960px;"
       >
         <div class="v-calendar-daily__day-container">
-          <div class="v-calendar-daily__intervals-body">
+          <div class="v-calendar-daily__intervals-body"
+               style="width: 45px;"
+          >
             <div class="v-calendar-daily__interval"
                  style="height: 40px;"
             >
@@ -6164,7 +6208,9 @@ exports[`VCalendarDaily should use custom interval formatter and render correctl
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
   >
-    <div class="v-calendar-daily__intervals-head">
+    <div class="v-calendar-daily__intervals-head"
+         style="width: 45px;"
+    >
     </div>
     <div class="v-calendar-daily_head-day v-past">
       <div class="v-calendar-daily_head-weekday">
@@ -6271,7 +6317,9 @@ exports[`VCalendarDaily should use custom interval formatter and render correctl
            style="height: 960px;"
       >
         <div class="v-calendar-daily__day-container">
-          <div class="v-calendar-daily__intervals-body">
+          <div class="v-calendar-daily__intervals-body"
+               style="width: 45px;"
+          >
             <div class="v-calendar-daily__interval"
                  style="height: 40px;"
             >
@@ -7138,7 +7186,9 @@ exports[`VCalendarDaily should use custom interval style function and render cor
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
   >
-    <div class="v-calendar-daily__intervals-head">
+    <div class="v-calendar-daily__intervals-head"
+         style="width: 45px;"
+    >
     </div>
     <div class="v-calendar-daily_head-day v-past">
       <div class="v-calendar-daily_head-weekday">
@@ -7245,7 +7295,9 @@ exports[`VCalendarDaily should use custom interval style function and render cor
            style="height: 960px;"
       >
         <div class="v-calendar-daily__day-container">
-          <div class="v-calendar-daily__intervals-body">
+          <div class="v-calendar-daily__intervals-body"
+               style="width: 45px;"
+          >
             <div class="v-calendar-daily__interval"
                  style="height: 40px;"
             >
@@ -8112,7 +8164,9 @@ exports[`VCalendarDaily should use custom showIntervalLabel function and render 
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
   >
-    <div class="v-calendar-daily__intervals-head">
+    <div class="v-calendar-daily__intervals-head"
+         style="width: 45px;"
+    >
     </div>
     <div class="v-calendar-daily_head-day v-past">
       <div class="v-calendar-daily_head-weekday">
@@ -8219,7 +8273,9 @@ exports[`VCalendarDaily should use custom showIntervalLabel function and render 
            style="height: 960px;"
       >
         <div class="v-calendar-daily__day-container">
-          <div class="v-calendar-daily__intervals-body">
+          <div class="v-calendar-daily__intervals-body"
+               style="width: 45px;"
+          >
             <div class="v-calendar-daily__interval"
                  style="height: 40px;"
             >

@@ -1,6 +1,6 @@
 <template>
-  <v-layout align-center wrap>
-    <v-flex xs12 sm4 text-center>
+  <v-row align="center">
+    <v-col class="text-center" cols="12" sm="4">
       <div class="my-2">
         <v-btn small>Normal</v-btn>
       </div>
@@ -13,8 +13,8 @@
       <div class="my-2">
         <v-btn small disabled>Disabled</v-btn>
       </div>
-    </v-flex>
-    <v-flex xs12 sm4 text-center>
+    </v-col>
+    <v-col class="text-center" cols="12" sm="4">
       <div class="my-2">
         <v-btn>Normal</v-btn>
       </div>
@@ -27,8 +27,8 @@
       <div class="my-2">
         <v-btn disabled>Disabled</v-btn>
       </div>
-    </v-flex>
-    <v-flex xs12 sm4 text-center>
+    </v-col>
+    <v-col class="text-center" cols="12" sm="4">
       <div class="my-2">
         <v-btn large>Normal</v-btn>
       </div>
@@ -41,6 +41,6 @@
       <div class="my-2">
         <v-btn large disabled>Disabled</v-btn>
       </div>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>

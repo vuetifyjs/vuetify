@@ -23,19 +23,18 @@ import { consoleError } from '../../util/console'
 
 // Types
 import mixins from '../../util/mixins'
-import { PropValidator } from 'vue/types/options'
-import { VNode, VNodeDirective } from 'vue'
+import { VNode, VNodeDirective, PropType } from 'vue'
+import { SelectItemKey } from 'types'
 
 export const defaultMenuProps = {
   closeOnClick: false,
   closeOnContentClick: false,
   disableKeys: true,
   openOnClick: false,
-  maxHeight: 300,
+  maxHeight: 304,
 }
 
 // Types
-type ItemProperty = PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>
 const baseMixins = mixins(
   VTextField,
   Comparable,
@@ -64,16 +63,17 @@ export default baseMixins.extend<options>().extend({
   props: {
     appendIcon: {
       type: String,
-      default: '$vuetify.icons.dropdown',
+      default: '$dropdown',
     },
     attach: {
+      type: null as unknown as PropType<string | boolean | Element | VNode>,
       default: false,
-    } as PropValidator<string | boolean | Element | VNode>,
+    },
     cacheItems: Boolean,
     chips: Boolean,
     clearable: Boolean,
     deletableChips: Boolean,
-    dense: Boolean,
+    disableLookup: Boolean,
     eager: Boolean,
     hideSelected: Boolean,
     items: {
@@ -85,17 +85,17 @@ export default baseMixins.extend<options>().extend({
       default: 'primary',
     },
     itemDisabled: {
-      type: [String, Array, Function],
+      type: [String, Array, Function] as PropType<SelectItemKey>,
       default: 'disabled',
-    } as ItemProperty,
+    },
     itemText: {
-      type: [String, Array, Function],
+      type: [String, Array, Function] as PropType<SelectItemKey>,
       default: 'text',
-    } as ItemProperty,
+    },
     itemValue: {
-      type: [String, Array, Function],
+      type: [String, Array, Function] as PropType<SelectItemKey>,
       default: 'value',
-    } as ItemProperty,
+    },
     menuProps: {
       type: [String, Array, Object],
       default: () => defaultMenuProps,
@@ -138,6 +138,7 @@ export default baseMixins.extend<options>().extend({
         'v-select--chips': this.hasChips,
         'v-select--chips--small': this.smallChips,
         'v-select--is-menu-active': this.isMenuActive,
+        'v-select--is-multi': this.multiple,
       }
     },
     /* Used by other components to overwrite */
@@ -147,7 +148,7 @@ export default baseMixins.extend<options>().extend({
     computedOwns (): string {
       return `list-${this._uid}`
     },
-    counterValue (): number {
+    computedCounterValue (): number {
       return this.multiple
         ? this.selectedItems.length
         : (this.getText(this.selectedItems[0]) || '').toString().length
@@ -190,11 +191,11 @@ export default baseMixins.extend<options>().extend({
           dense: this.dense,
           hideSelected: this.hideSelected,
           items: this.virtualizedItems,
+          itemDisabled: this.itemDisabled,
+          itemText: this.itemText,
+          itemValue: this.itemValue,
           noDataText: this.$vuetify.lang.t(this.noDataText),
           selectedItems: this.selectedItems,
-          itemDisabled: this.itemDisabled,
-          itemValue: this.itemValue,
-          itemText: this.itemText,
         },
         on: {
           select: this.selectItem,
@@ -305,6 +306,8 @@ export default baseMixins.extend<options>().extend({
     },
     closeConditional (e: Event) {
       return (
+        !this._isDestroyed &&
+
         // Click originates from outside the menu content
         this.content &&
         !this.content.contains(e.target) &&
@@ -355,14 +358,13 @@ export default baseMixins.extend<options>().extend({
 
             this.selectedIndex = index
           },
-          focus,
           'click:close': () => this.onChipInput(item),
         },
         key: JSON.stringify(this.getValue(item)),
       }, this.getText(item))
     },
     genCommaSelection (item: object, index: number, last: boolean) {
-      const color = index === this.selectedIndex && this.color
+      const color = index === this.selectedIndex && this.computedColor
       const isDisabled = (
         this.disabled ||
         this.getDisabled(item)
@@ -402,6 +404,7 @@ export default baseMixins.extend<options>().extend({
           this.suffix ? this.genAffix('suffix') : null,
           this.genClearIcon(),
           this.genIconSlot(),
+          this.genHiddenInput(),
         ]),
         this.genMenu(),
         this.genProgress(),
@@ -410,6 +413,7 @@ export default baseMixins.extend<options>().extend({
     genInput (): VNode {
       const input = VTextField.options.methods.genInput.call(this)
 
+      delete input.data!.attrs!.name
       input.data!.domProps!.value = null
       input.data!.attrs!.readonly = true
       input.data!.attrs!.type = 'text'
@@ -417,6 +421,12 @@ export default baseMixins.extend<options>().extend({
       input.data!.on!.keypress = this.onKeyPress
 
       return input
+    },
+    genHiddenInput (): VNode {
+      return this.$createElement('input', {
+        domProps: { value: this.lazyValue },
+        attrs: { type: 'hidden' },
+      })
     },
     genInputSlot (): VNode {
       const render = VTextField.options.methods.genInputSlot.call(this)
@@ -567,7 +577,11 @@ export default baseMixins.extend<options>().extend({
       }
     },
     onKeyPress (e: KeyboardEvent) {
-      if (this.multiple) return
+      if (
+        this.multiple ||
+        this.readonly ||
+        this.disableLookup
+      ) return
 
       const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
       const now = performance.now()
@@ -603,7 +617,10 @@ export default baseMixins.extend<options>().extend({
       // If menu is active, allow default
       // listIndex change from menu
       if (this.isMenuActive && keyCode !== keyCodes.tab) {
-        menu.changeListIndex(e)
+        this.$nextTick(() => {
+          menu.changeListIndex(e)
+          this.$emit('update:list-index', menu.listIndex)
+        })
       }
 
       // If menu is not active, up and down can do

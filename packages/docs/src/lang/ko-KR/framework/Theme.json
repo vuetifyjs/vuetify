@@ -1,6 +1,6 @@
 {
-  "header": "# 테마 (Theme)",
-  "headerText": "프로그래밍 방식으로 어플리케이션의 색상을 쉽게 변경할 수 있습니다. 기본 스타일 시트를 다시 빌드하고 필요에 따라 프레임웤의 다양한 설정을 커스터마이즈 하세요. **테마 생성기** 를 원하시면 [여기](https://theme-generator.vuetifyjs.com)를 방문하세요.",
+  "heading": "# 테마 (Theme)",
+  "headingText": "프로그래밍 방식으로 어플리케이션의 색상을 쉽게 변경할 수 있습니다. 기본 스타일 시트를 다시 빌드하고 필요에 따라 프레임웤의 다양한 설정을 커스터마이즈 하세요. **테마 생성기** 를 원하시면 [여기](https://theme-generator.vuetifyjs.com)를 방문하세요.",
   "lightAndDarkHeader": "## 밝게, 어둡게 (Light and Dark)",
   "customizingHeader": "## 커스터마이징",
   "customizingText1": "기본적으로 표준 테마(standard theme)가 모든 컴포넌트에 적용됩니다.",

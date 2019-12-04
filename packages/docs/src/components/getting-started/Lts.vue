@@ -10,11 +10,11 @@
         <doc-subheading>2header</doc-subheading>
       </v-card-title>
       <v-card-text>
-        <doc-markdown>2text</doc-markdown>
+        <base-markdown>2text</base-markdown>
 
-        <doc-markdown>2features</doc-markdown>
+        <base-markdown>2features</base-markdown>
 
-        <doc-markdown>2upgrade</doc-markdown>
+        <base-markdown>2upgrade</base-markdown>
       </v-card-text>
     </v-card>
 
@@ -27,13 +27,13 @@
         <doc-subheading>15header</doc-subheading>
       </v-card-title>
       <v-card-text>
-        <doc-markdown>15text</doc-markdown>
+        <base-markdown>15text</base-markdown>
 
-        <doc-markdown>15text2</doc-markdown>
+        <base-markdown>15text2</base-markdown>
 
-        <doc-markdown>15versions</doc-markdown>
+        <base-markdown>15versions</base-markdown>
 
-        <doc-markdown>15text3</doc-markdown>
+        <base-markdown>15text3</base-markdown>
       </v-card-text>
     </v-card>
   </v-container>

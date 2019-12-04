@@ -16,6 +16,8 @@ describe('VEditDialog.ts', () => {
 
     mountFunction = (options?: MountOptions<Instance>) => {
       return mount(VEditDialog, {
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
         mocks: {
           $vuetify: {
             theme: {
@@ -45,7 +47,7 @@ describe('VEditDialog.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should open and close', () => {
+  it('should open and close', async () => {
     jest.useFakeTimers()
 
     const open = jest.fn()
@@ -59,16 +61,18 @@ describe('VEditDialog.ts', () => {
     })
 
     wrapper.vm.isActive = true
+    await wrapper.vm.$nextTick()
     expect(open).toHaveBeenCalledTimes(1)
     expect(setTimeout).toHaveBeenLastCalledWith(wrapper.vm.focus, 50)
 
     wrapper.vm.isActive = false
+    await wrapper.vm.$nextTick()
     expect(close).toHaveBeenCalledTimes(1)
 
     jest.useRealTimers()
   })
 
-  it('should react to menu', () => {
+  it('should react to menu', async () => {
     const open = jest.fn()
     const close = jest.fn()
 
@@ -82,9 +86,11 @@ describe('VEditDialog.ts', () => {
     const menu = wrapper.find(VMenu)
 
     menu.vm.$emit('input', true)
+    await wrapper.vm.$nextTick()
     expect(open).toHaveBeenCalledTimes(1)
 
     menu.vm.$emit('input', false)
+    await wrapper.vm.$nextTick()
     expect(close).toHaveBeenCalledTimes(1)
   })
 

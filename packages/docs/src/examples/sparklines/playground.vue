@@ -18,22 +18,22 @@
 
     <v-divider></v-divider>
 
-    <v-layout wrap>
-      <v-flex xs12>
-        <v-layout fill-height align-center wrap>
+    <v-row>
+      <v-col cols="12">
+        <v-row class="fill-height" align="center">
           <v-subheader class="pl-0">Type</v-subheader>
           <v-btn-toggle v-model="type" mandatory>
             <v-btn small text value="bar">bar</v-btn>
             <v-btn small text value="trend">trend</v-btn>
           </v-btn-toggle>
-        </v-layout>
-      </v-flex>
+        </v-row>
+      </v-col>
 
-      <v-flex xs12 md6>
-        <v-layout fill-height align-center wrap>
+      <v-col cols="12" md="6">
+        <v-row class="fill-height" align="center">
           <v-subheader class="pl-0">Gradient</v-subheader>
           <v-item-group v-model="gradient" mandatory>
-            <v-layout>
+            <v-row>
               <v-item
                 v-for="(gradient, i) in gradients"
                 :key="i"
@@ -54,13 +54,13 @@
                   @click.native="toggle"
                 ></v-card>
               </v-item>
-            </v-layout>
+            </v-row>
           </v-item-group>
-        </v-layout>
-      </v-flex>
+        </v-row>
+      </v-col>
 
-      <v-flex xs12 md6>
-        <v-layout fill-height align-center wrap>
+      <v-col cols="12" md="6">
+        <v-row class="fill-height" align="center">
           <v-subheader class="pl-0">Gradient direction</v-subheader>
           <v-btn-toggle v-model="gradientDirection" mandatory>
             <v-btn small text value="top">top</v-btn>
@@ -68,10 +68,10 @@
             <v-btn small text value="left">left</v-btn>
             <v-btn small text value="bottom">bottom</v-btn>
           </v-btn-toggle>
-        </v-layout>
-      </v-flex>
+        </v-row>
+      </v-col>
 
-      <v-flex xs12>
+      <v-col cols="12">
         <v-slider
           v-model="lineWidth"
           label="Line width"
@@ -81,9 +81,9 @@
           thumb-label
           :disabled="autoLineWidth"
         ></v-slider>
-      </v-flex>
+      </v-col>
 
-      <v-flex xs12>
+      <v-col cols="12">
         <v-slider
           v-model="radius"
           label="Radius"
@@ -91,9 +91,9 @@
           max="16"
           thumb-label
         ></v-slider>
-      </v-flex>
+      </v-col>
 
-      <v-flex xs12>
+      <v-col cols="12">
         <v-slider
           v-model="padding"
           label="Padding"
@@ -101,28 +101,28 @@
           max="16"
           thumb-label
         ></v-slider>
-      </v-flex>
+      </v-col>
 
-      <v-flex xs6>
-        <v-layout fill-height align-center>
+      <v-col cols="6">
+        <v-row class="fill-height" align="center">
           <v-subheader class="pl-0">Linecap</v-subheader>
           <v-btn-toggle v-model="lineCap" mandatory :disabled="type !== 'trend'">
             <v-btn small text value="butt">butt</v-btn>
             <v-btn small text value="round">round</v-btn>
             <v-btn small text value="square">square</v-btn>
           </v-btn-toggle>
-        </v-layout>
-      </v-flex>
+        </v-row>
+      </v-col>
 
-      <v-flex xs6>
-        <v-layout wrap justify-space-around>
+      <v-col cols="6">
+        <v-row justify="space-around">
           <v-switch v-model="showLabels" label="Show labels"></v-switch>
           <v-switch v-model="fill" label="Fill" :disabled="type !== 'trend'"></v-switch>
           <v-switch v-model="autoLineWidth" label="Auto-line-width" :disabled="type !== 'bar'"></v-switch>
-        </v-layout>
-      </v-flex>
+        </v-row>
+      </v-col>
 
-      <v-flex v-if="showLabels" xs12>
+      <v-col v-if="showLabels" cols="12">
         <v-slider
           v-model="labelSize"
           label="Label size"
@@ -130,8 +130,8 @@
           max="20"
           thumb-label
         ></v-slider>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

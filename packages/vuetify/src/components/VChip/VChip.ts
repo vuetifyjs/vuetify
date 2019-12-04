@@ -21,7 +21,7 @@ import Sizeable from '../../mixins/sizeable'
 import { breaking } from '../../util/console'
 
 // Types
-import { PropValidator } from 'vue/types/options'
+import { PropValidator, PropType } from 'vue/types/options'
 
 /* @vue/component */
 export default mixins(
@@ -50,14 +50,14 @@ export default mixins(
     close: Boolean,
     closeIcon: {
       type: String,
-      default: '$vuetify.icons.delete',
+      default: '$delete',
     },
     disabled: Boolean,
     draggable: Boolean,
     filter: Boolean,
     filterIcon: {
       type: String,
-      default: '$vuetify.icons.complete',
+      default: '$complete',
     },
     label: Boolean,
     link: Boolean,
@@ -68,7 +68,7 @@ export default mixins(
       default: 'span',
     },
     textColor: String,
-    value: null as any as PropValidator<any>,
+    value: null as any as PropType<any>,
   },
 
   data: () => ({

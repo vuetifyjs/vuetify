@@ -9,9 +9,9 @@ import Vuetify from 'vuetify'
 // Bootstrap
 import '@/components'
 import '@/plugins'
-import { createStore } from '@/store/index'
-import { createRouter } from '@/router/index'
 import { createI18n } from '@/i18n/index'
+import { createRouter } from '@/router/index'
+import { createStore } from '@/store/index'
 import { createVuetify } from '@/vuetify/index'
 import { sync } from 'vuex-router-sync'
 

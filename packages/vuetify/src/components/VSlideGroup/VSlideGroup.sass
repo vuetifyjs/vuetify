@@ -1,10 +1,14 @@
 // Imports
-@import '../../styles/styles.sass'
 @import './_variables.scss'
 
 // Block
 .v-slide-group
   display: flex
+
+  &:not(.v-slide-group--has-affixes)
+    .v-slide-group__prev,
+    .v-slide-group__next
+      display: none
 
   // Needed increased specificity
   // to overwrite v-tabs pointer

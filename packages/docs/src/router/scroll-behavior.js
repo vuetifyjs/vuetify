@@ -4,8 +4,8 @@ import { waitForReadystate } from '../util/helpers'
 export default async function (to, from, savedPosition) {
   await waitForReadystate()
 
-  let scrollTo = 0
   const options = {}
+  let scrollTo = 0
 
   if (to.hash) {
     scrollTo = to.hash
@@ -15,6 +15,10 @@ export default async function (to, from, savedPosition) {
 
   return new Promise(resolve => {
     setTimeout(() => {
+      if (typeof window === 'undefined') {
+        return resolve()
+      }
+
       window.requestAnimationFrame(() => {
         try {
           goTo(scrollTo, options)

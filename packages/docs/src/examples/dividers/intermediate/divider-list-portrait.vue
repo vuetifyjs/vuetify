@@ -1,6 +1,6 @@
 <template>
-  <v-layout justify-center>
-    <v-flex xs12 sm8>
+  <v-row justify="center">
+    <v-col cols="12" sm="8">
       <v-card>
         <v-card-title class="cyan darken-1">
           <span class="headline white--text">Sarah Mcbeal</span>
@@ -8,22 +8,22 @@
           <v-spacer></v-spacer>
 
           <v-btn dark icon>
-            <v-icon>chevron_left</v-icon>
+            <v-icon>mdi-chevron-left</v-icon>
           </v-btn>
 
           <v-btn dark icon>
-            <v-icon>edit</v-icon>
+            <v-icon>mdi-pencil</v-icon>
           </v-btn>
 
           <v-btn dark icon>
-            <v-icon>more_vert</v-icon>
+            <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </v-card-title>
 
         <v-list>
           <v-list-item @click="">
             <v-list-item-action>
-              <v-icon>phone</v-icon>
+              <v-icon>mdi-phone</v-icon>
             </v-list-item-action>
 
             <v-list-item-content>
@@ -31,7 +31,7 @@
             </v-list-item-content>
             <v-list-item-action>
 
-              <v-icon>chat</v-icon>
+              <v-icon>mdi-message-text</v-icon>
             </v-list-item-action>
           </v-list-item>
 
@@ -39,7 +39,7 @@
 
           <v-list-item @click="">
             <v-list-item-action>
-              <v-icon>phone</v-icon>
+              <v-icon>mdi-phone</v-icon>
             </v-list-item-action>
 
             <v-list-item-content>
@@ -47,7 +47,7 @@
             </v-list-item-content>
 
             <v-list-item-action>
-              <v-icon>chat</v-icon>
+              <v-icon>mdi-message-text</v-icon>
             </v-list-item-action>
           </v-list-item>
 
@@ -55,7 +55,7 @@
 
           <v-list-item @click="">
             <v-list-item-action>
-              <v-icon>mail</v-icon>
+              <v-icon>mdi-email</v-icon>
             </v-list-item-action>
 
             <v-list-item-content>
@@ -67,7 +67,7 @@
 
           <v-list-item @click="">
             <v-list-item-action>
-              <v-icon>location_on</v-icon>
+              <v-icon>mdi-map-marker</v-icon>
             </v-list-item-action>
 
             <v-list-item-content>
@@ -81,6 +81,6 @@
           height="200px"
         ></v-img>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>

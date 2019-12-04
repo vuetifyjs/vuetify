@@ -8,9 +8,9 @@ export function functionalContext (context: ComponentOptions<Vue> = {}, children
     context: {
       data: {},
       props: {},
-      ...context
+      ...context,
     },
-    children
+    children,
   }
 }
 
@@ -29,7 +29,7 @@ export function touch (element: Wrapper<any>) {
   return {
     start: createTrigger('touchstart'),
     move: createTrigger('touchmove'),
-    end: createTrigger('touchend')
+    end: createTrigger('touchend'),
   }
 }
 
@@ -45,6 +45,25 @@ export const scrollWindow = (y: number) => {
   window.dispatchEvent(new Event('scroll'))
 
   return new Promise(resolve => setTimeout(resolve, 200))
+}
+
+// Add a global mockup for IntersectionObserver
+(global as any).IntersectionObserver = class IntersectionObserver {
+  callback: (entries: any, observer: any) => {}
+
+  constructor (callback, options) {
+    this.callback = callback
+  }
+
+  observe () {
+    this.callback([], this)
+    return null
+  }
+
+  unobserve () {
+    this.callback = undefined
+    return null
+  }
 }
 
 toHaveBeenWarnedInit()

@@ -1,6 +1,9 @@
 // Styles
 import './VMenu.sass'
 
+// Components
+import { VThemeProvider } from '../VThemeProvider'
+
 // Mixins
 import Delayable from '../../mixins/delayable'
 import Dependent from '../../mixins/dependent'
@@ -16,8 +19,11 @@ import Resize from '../../directives/resize'
 
 // Utilities
 import mixins from '../../util/mixins'
-import { convertToUnit, keyCodes } from '../../util/helpers'
-import ThemeProvider from '../../util/ThemeProvider'
+import { removed } from '../../util/console'
+import {
+  convertToUnit,
+  keyCodes,
+} from '../../util/helpers'
 
 // Types
 import { VNode, VNodeDirective, VNodeData } from 'vue'
@@ -61,7 +67,6 @@ export default baseMixins.extend({
     },
     disabled: Boolean,
     disableKeys: Boolean,
-    fullWidth: Boolean,
     maxHeight: {
       type: [Number, String],
       default: 'auto',
@@ -179,6 +184,13 @@ export default baseMixins.extend({
     },
   },
 
+  created () {
+    /* istanbul ignore next */
+    if (this.$attrs.hasOwnProperty('full-width')) {
+      removed('full-width', this)
+    }
+  },
+
   mounted () {
     this.isActive && this.callActivate()
   },
@@ -253,6 +265,7 @@ export default baseMixins.extend({
       const target = e.target as HTMLElement
 
       return this.isActive &&
+        !this._isDestroyed &&
         this.closeOnClick &&
         !this.$refs.content.contains(target)
     },
@@ -431,7 +444,10 @@ export default baseMixins.extend({
     const data = {
       staticClass: 'v-menu',
       class: {
-        'v-menu--inline': !this.fullWidth && (this.$slots.activator || this.$scopedSlots.activator),
+        'v-menu--attached':
+          this.attach === '' ||
+          this.attach === true ||
+          this.attach === 'attach',
       },
       directives: [{
         arg: '500',
@@ -441,8 +457,8 @@ export default baseMixins.extend({
     }
 
     return h('div', data, [
-      this.genActivator(),
-      this.$createElement(ThemeProvider, {
+      !this.activator && this.genActivator(),
+      this.$createElement(VThemeProvider, {
         props: {
           root: true,
           light: this.light,

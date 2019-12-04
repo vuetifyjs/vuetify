@@ -1,5 +1,4 @@
 // Imports
-@import '../../styles/styles.sass'
 @import './_variables.scss'
 
 // Theme
@@ -32,12 +31,12 @@
 .v-slider__track
   &-background, &-fill
     position: absolute
-    transition: .3s map-get($transition, 'swing')
+    transition: $slider-transition
 
 .v-slider__thumb-container
   outline: none
   position: absolute
-  transition: .3s map-get($transition, 'swing')
+  transition: $slider-transition
   top: 50%
 
   &:hover
@@ -51,7 +50,7 @@
   left: -#{$slider-thumb-size / 2}
   top: 50%
   border-radius: $slider-thumb-border-radius
-  transition: .3s map-get($transition, 'swing')
+  transition: $slider-transition
   transform: translateY(-50%)
   user-select: none
 
@@ -63,7 +62,7 @@
     height: #{$slider-thumb-size + $slider-thumb-focused-size-increase}
     border-radius: $slider-thumb-border-radius
     background: currentColor
-    opacity: 0.3
+    opacity: $slider-thumb-before-opacity
     position: absolute
     left: -#{$slider-thumb-focused-size-increase / 2}
     top: -#{$slider-thumb-focused-size-increase / 2}
@@ -77,24 +76,24 @@
   position: absolute
   opacity: 0
   background-color: rgba(0, 0, 0, 0.5) // TODO: move to theme mixin?
-  transition: .3s map-get($transition, 'swing')
+  transition: $slider-transition
   border-radius: $slider-tick-border-radius
 
   &--filled
     background-color: rgba(255, 255, 255, 0.5) // TODO: move to theme mixin?
 
   &:first-child .v-slider__tick-label
-    transform: none
+    +ltr()
+      transform: none
 
-  +rtl()
-    &:first-child .v-slider__tick-label
+    +rtl()
       transform: translateX(100%)
 
   &:last-child .v-slider__tick-label
-    transform: translateX(-100%)
+    +ltr()
+      transform: translateX(-100%)
 
-  +rtl()
-    &:last-child .v-slider__tick-label
+    +rtl()
       transform: none
 
 .v-slider__tick-label
@@ -106,28 +105,28 @@
   position: absolute
   left: 0
   top: 0
-  transition: .3s map-get($transition, 'fast-in-fast-out')
+  transition: $slider-thumb-label-transition
 
 .v-slider__thumb-label
   display: flex
   align-items: center
   justify-content: center
-  font-size: 12px
+  font-size: $slider-thumb-label-font-size
   color: #fff // TODO: move to theme mixin?
-  width: 32px
-  height: 32px
+  width: $slider-thumb-label-width
+  height: $slider-thumb-label-height
   border-radius: 50% 50% 0
   position: absolute
   left: 0
   bottom: 100%
   user-select: none
-  transition: .3s map-get($transition, 'fast-in-fast-out')
+  transition: $slider-thumb-label-transition
 
 // Modifiers
 .v-slider--horizontal
-  min-height: 32px
-  margin-left: 8px
-  margin-right: 8px
+  min-height: $slider-horizontal-min-height
+  margin-left: $slider-horizontal-left
+  margin-right: $slider-horizontal-right
 
   .v-slider__track
     &-container
@@ -147,25 +146,26 @@
 
   .v-slider__tick
     &:first-child .v-slider__tick-label
-      transform: translateX(0%)
+      +ltr()
+        transform: translateX(0%)
 
-    +rtl()
-      &:first-child .v-slider__tick-label
-        transform: translate(100%)
+      +rtl()
+        transform: translateX(100%)
 
     &:last-child .v-slider__tick-label
-      transform: translateX(-100%)
+      +ltr()
+        transform: translateX(-100%)
 
-    +rtl()
-      &:last-child .v-slider__tick-label
+      +rtl()
         transform: translateX(0%)
 
     .v-slider__tick-label
       top: 8px
-      transform: translateX(-50%)
 
-    +rtl()
-      .v-slider__tick-label
+      +ltr()
+        transform: translateX(-50%)
+
+      +rtl()
         transform: translateX(50%)
 
   .v-slider__thumb-label
@@ -178,9 +178,9 @@
       transform: rotate(-45deg)
 
 .v-slider--vertical
-  min-height: 150px
-  margin-top: 12px
-  margin-bottom: 12px
+  min-height: $slider-vertical-min-height
+  margin-top: $slider-vertical-margin-top
+  margin-bottom: $slider-vertical-margin-bottom
 
   .v-slider__track
     &-container
@@ -204,27 +204,15 @@
     transform: translateX(-50%)
 
   .v-slider__tick
-    &:first-child .v-slider__tick-label
-      transform: translateY(-50%)
-
-    +rtl()
-      &:first-child .v-slider__tick-label
-        right: 12px
-
+    .v-slider__tick-label,
+    &:first-child .v-slider__tick-label,
     &:last-child .v-slider__tick-label
-      transform: translateY(-50%)
-
-    +rtl()
-      &:last-child .v-slider__tick-label
+      +ltr()
         transform: translateY(-50%)
+        left: 12px
 
-    .v-slider__tick-label
-      left: 12px
-      transform: translateY(-50%)
-
-    +rtl()
-      .v-slider__tick-label
-        left: auto
+      +rtl()
+        transform: translateY(-50%)
         right: 12px
 
   .v-slider__thumb-label
@@ -263,33 +251,35 @@
   .v-slider__tick
     opacity: 1
 
-.v-slider--readonly
-  pointer-events: none
-
 // Input
 .v-input__slider
-  .v-input__slot .v-label
-    margin-left: 0
-    margin-right: 12px
+  &.v-input--is-readonly .v-input__slot
+    pointer-events: none
 
-  +rtl()
-    .v-input__slot .v-label
+  .v-input__slot .v-label
+    +ltr()
+      margin-left: 0
+      margin-right: $slider-label-margin-end
+
+    +rtl()
       margin-right: 0
-      margin-left: 12px
+      margin-left: $slider-label-margin-end
 
 .v-input__slider--inverse-label
   .v-input__slot .v-label
-    margin-right: 0
-    margin-left: 12px
+    +ltr()
+      margin-right: 0
+      margin-left: $slider-label-margin-start
 
-  +rtl()
-    .v-input__slot .v-label
+    +rtl()
       margin-left: 0
-      margin-right: 12px
+      margin-right: $slider-label-margin-start
 
 .v-input__slider--vertical
   align-items: center
-  flex-direction: column-reverse
+
+  +ltr()
+    flex-direction: column-reverse
 
   +rtl()
     flex-direction: column
@@ -303,4 +293,4 @@
 
 .v-input--has-state
   .v-slider__track-background
-    opacity: 0.4
+    opacity: $slider-state-track-background-opacity

@@ -1,12 +1,12 @@
 <template>
-  <v-layout justify-center>
+  <v-row justify="center">
     <v-date-picker
       v-model="picker"
       year-icon="mdi-calendar-blank"
       prev-icon="mdi-skip-previous"
       next-icon="mdi-skip-next"
     ></v-date-picker>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

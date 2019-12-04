@@ -57,17 +57,17 @@
       getDataFromApi () {
         this.loading = true
         return new Promise((resolve, reject) => {
-          const { sortBy, descending, page, itemsPerPage } = this.options
+          const { sortBy, sortDesc, page, itemsPerPage } = this.options
 
           let items = this.getDesserts()
           const total = items.length
 
-          if (this.options.sortBy) {
+          if (sortBy.length === 1 && sortDesc.length === 1) {
             items = items.sort((a, b) => {
-              const sortA = a[sortBy]
-              const sortB = b[sortBy]
+              const sortA = a[sortBy[0]]
+              const sortB = b[sortBy[0]]
 
-              if (descending) {
+              if (sortDesc[0]) {
                 if (sortA < sortB) return 1
                 if (sortA > sortB) return -1
                 return 0

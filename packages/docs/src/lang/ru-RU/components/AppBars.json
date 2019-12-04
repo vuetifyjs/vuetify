@@ -1,7 +1,7 @@
 {
   "examples": {
     "menu": {
-      "header": "### С меню"
+      "heading": "### С меню"
     }
   }
 }

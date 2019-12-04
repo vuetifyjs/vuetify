@@ -1,4 +1,4 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 // Theme
 +theme(v-overlay) using ($material)
@@ -16,7 +16,7 @@
   right: 0
   bottom: 0
   pointer-events: none
-  transition: $primary-transition
+  transition: $overlay-transition
 
 // Element
 .v-overlay__content
@@ -30,7 +30,7 @@
   position: absolute
   right: 0
   top: 0
-  transition: .3s cubic-bezier(.25,.8,.50,1)
+  transition: inherit
   width: 100%
   will-change: opacity
 

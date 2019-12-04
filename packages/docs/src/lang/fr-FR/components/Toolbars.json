@@ -1,10 +1,19 @@
 {
   "examples": {
+    "usage": {
+      "desc": "Une barre d'outils est un conteneur flexible qui peut être utilisé de plusieurs façons. Par défaut, la barre d'outils est de 64 px haut sur le bureau et 56px haut sur le mobile. Il y a un certain nombre de composants d'aide disponibles avec la barre d'outils. La barre d'outils `v-title` est utilisée pour afficher un titre et `v-toolbar-items` permet de dépasser la hauteur totale de [v-btn](/components/boutons)."
+    },
     "variations": {
       "uninverted": true
+    },
+    "extension-height": {
+      "desc": "La hauteur de l'extension peut être personnalisée."
     }
   },
   "props": {
-    "bottom": "Mixins.Positionable.props.bottom"
+    "absolute": "Mixins.Positionable.props.absolute",
+    "bottom": "Mixins.Positionable.props.bottom",
+    "extended": "Utilisez cette prop pour augmenter la hauteur de la barre d'outils _without_ en utilisant l'emplacement `extension` pour ajouter du contenu. Peut être utilisé en conjonction avec la prop **extension-height** et n'importe quelles autres props qui affectent la hauteur de la barre d'outils, par exemple**prominent**, **dense**, etc.**WITH THE EXCEPTION** de **height**.",
+    "flat": "Supprime l'ombre de la barre d'outils."
   }
 }

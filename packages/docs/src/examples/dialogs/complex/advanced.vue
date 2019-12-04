@@ -1,8 +1,7 @@
 <template>
   <div>
-    <v-layout
-      justify-center
-      wrap
+    <v-row
+      justify="center"
     >
       <v-btn
         color="primary"
@@ -66,7 +65,7 @@
               dark
               @click="dialog = false"
             >
-              <v-icon>close</v-icon>
+              <v-icon>mdi-close</v-icon>
             </v-btn>
             <v-toolbar-title>Settings</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -90,7 +89,7 @@
                   icon
                   v-on="on"
                 >
-                  <v-icon>more_vert</v-icon>
+                  <v-icon>mdi-dots-vertical</v-icon>
                 </v-btn>
               </template>
               <v-list>
@@ -230,7 +229,7 @@
                   icon
                   v-on="on"
                 >
-                  <v-icon>more_vert</v-icon>
+                  <v-icon>mdi-dots-vertical</v-icon>
                 </v-btn>
               </template>
               <v-list>
@@ -255,7 +254,7 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-    </v-layout>
+    </v-row>
   </div>
 </template>
 

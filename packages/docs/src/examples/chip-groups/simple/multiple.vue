@@ -1,6 +1,6 @@
 <template>
-  <v-layout justify-space-around>
-    <v-flex xs12 sm6 md4>
+  <v-row justify="space-around">
+    <v-col cols="12" sm="6" md="4">
       <v-sheet elevation="10" class="py-4 px-1">
         <v-chip-group
           multiple
@@ -11,8 +11,8 @@
           </v-chip>
         </v-chip-group>
       </v-sheet>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

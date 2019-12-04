@@ -1,10 +1,10 @@
 {
   "examples": {
     "custom-icons": {
-      "header": "自定义图标"
+      "heading": "自定义图标"
     },
     "multiple": {
-      "header": "多选"
+      "heading": "多选"
     }
   }
 }

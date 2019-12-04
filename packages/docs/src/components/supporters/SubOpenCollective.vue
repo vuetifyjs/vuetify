@@ -6,7 +6,7 @@
     wrap
   >
     <v-flex xs12>
-      <doc-heading>openCollective</doc-heading>
+      <base-heading>openCollective</base-heading>
     </v-flex>
 
     <v-flex
@@ -15,8 +15,11 @@
       tag="v-divider"
     />
 
-    <v-flex xs12 mb-4>
-      <doc-markdown>openCollectiveBlurb</doc-markdown>
+    <v-flex
+      xs12
+      mb-4
+    >
+      <base-markdown>openCollectiveBlurb</base-markdown>
     </v-flex>
 
     <v-flex

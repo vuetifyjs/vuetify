@@ -1,12 +1,11 @@
 <template>
-  <v-layout
-    justify-center
-    wrap
+  <v-row
+    justify="center"
   >
-    <v-menu transition="scroll-y-transition">
+    <v-menu transition="scroll-x-transition">
       <template v-slot:activator="{ on }">
         <v-btn color="primary" class="ma-2" v-on="on">
-          Scroll Y Transition
+          Scroll X Transition
         </v-btn>
       </template>
       <v-list>
@@ -18,10 +17,10 @@
 
     <div class="mx-4 hidden-sm-and-down"></div>
 
-    <v-menu transition="scroll-y-reverse-transition">
+    <v-menu transition="scroll-x-reverse-transition">
       <template v-slot:activator="{ on }">
         <v-btn color="secondary" class="ma-2" v-on="on">
-          Scroll Y Reverse Transition
+          Scroll X Reverse Transition
         </v-btn>
       </template>
       <v-list>
@@ -30,5 +29,5 @@
         </v-list-item>
       </v-list>
     </v-menu>
-  </v-layout>
+  </v-row>
 </template>

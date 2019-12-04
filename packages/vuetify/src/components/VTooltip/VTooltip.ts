@@ -26,10 +26,6 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
       type: [Number, String],
       default: 0,
     },
-    debounce: {
-      type: [Number, String],
-      default: 0,
-    },
     disabled: Boolean,
     fixed: {
       type: Boolean,
@@ -114,6 +110,10 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
         'v-tooltip--right': this.right,
         'v-tooltip--bottom': this.bottom,
         'v-tooltip--left': this.left,
+        'v-tooltip--attached':
+          this.attach === '' ||
+          this.attach === true ||
+          this.attach === 'attach',
       }
     },
     computedTransition (): string {

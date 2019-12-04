@@ -1,12 +1,27 @@
-<template functional>
-  <core-goto class="core-goto--heading">
-    <doc-markdown v-bind="$attrs"><slot /></doc-markdown>
-  </core-goto>
+<template>
+  <base-goto class="core-goto--heading"><slot /></base-goto>
 </template>
 
 <script>
   export default {
+    name: 'DocHeading',
+
     inheritAttrs: false,
+
+    provide () {
+      if (!this.id) return
+
+      return {
+        id: this.id,
+      }
+    },
+
+    props: {
+      id: {
+        type: String,
+        default: undefined,
+      },
+    },
   }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
-  <v-layout align-center wrap>
-    <v-flex xs12 sm4 text-center>
+  <v-row align="center">
+    <v-col class="text-center" cols="12" sm="4">
       <div class="my-2">
         <v-btn depressed small>Normal</v-btn>
       </div>
@@ -13,9 +13,9 @@
       <div class="my-2">
         <v-btn depressed small disabled>Disabled</v-btn>
       </div>
-    </v-flex>
+    </v-col>
 
-    <v-flex xs12 sm4 text-center>
+    <v-col class="text-center" cols="12" sm="4">
       <div class="my-2">
         <v-btn depressed>Normal</v-btn>
       </div>
@@ -28,9 +28,9 @@
       <div class="my-2">
         <v-btn depressed disabled>Disabled</v-btn>
       </div>
-    </v-flex>
+    </v-col>
 
-    <v-flex xs12 sm4 text-center>
+    <v-col class="text-center" cols="12" sm="4">
       <div class="my-2">
         <v-btn depressed large>Normal</v-btn>
       </div>
@@ -43,6 +43,6 @@
       <div class="my-2">
         <v-btn depressed large disabled>Disabled</v-btn>
       </div>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>

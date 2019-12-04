@@ -2,7 +2,12 @@
 import VOverlay from '../../components/VOverlay'
 
 // Utilities
-import { keyCodes, addOnceEventListener, addPassiveEventListener } from '../../util/helpers'
+import {
+  keyCodes,
+  addOnceEventListener,
+  addPassiveEventListener,
+  getZIndex,
+} from '../../util/helpers'
 
 // Types
 import Vue from 'vue'
@@ -29,6 +34,8 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
 
   props: {
     hideOverlay: Boolean,
+    overlayColor: String,
+    overlayOpacity: [Number, String],
   },
 
   data () {
@@ -39,6 +46,8 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
 
   watch: {
     hideOverlay (value) {
+      if (!this.isActive) return
+
       if (value) this.removeOverlay()
       else this.genOverlay()
     },
@@ -54,6 +63,8 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
         propsData: {
           absolute: this.absolute,
           value: false,
+          color: this.overlayColor,
+          opacity: this.overlayOpacity,
         },
       })
 
@@ -79,6 +90,8 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
 
         if (this.activeZIndex !== undefined) {
           this.overlay.zIndex = String(this.activeZIndex - 1)
+        } else if (this.$el) {
+          this.overlay.zIndex = getZIndex(this.$el)
         }
 
         this.overlay.value = true

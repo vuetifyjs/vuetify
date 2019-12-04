@@ -1,6 +1,6 @@
 <template>
   <div>
-    <doc-heading>Generic.Pages.accessibility</doc-heading>
+    <base-heading>Generic.Pages.accessibility</base-heading>
     <doc-text>{{ `${namespace}.${page}.accessibility.desc` }}</doc-text>
   </div>
 </template>

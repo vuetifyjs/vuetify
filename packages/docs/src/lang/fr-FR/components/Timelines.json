@@ -1,1 +1,54 @@
-{}
+{
+  "examples": {
+    "usage": {
+      "desc": "`v-timeline`'s dans leur forme la plus simple affiche une chronologie verticale qui devrait contenir au moins un `v-timeline-item`."
+    },
+    "small": {
+      "desc": "La prop`small` permet de créer un style alternatif pour offrir un design unique."
+    },
+    "icons": {
+      "desc": "Utilisez des icônes dans le point de l'élément « v-timeline-item » pour fournir un contexte supplémentaire."
+    },
+    "avatars": {
+      "desc": "Insérez des avatars dans des points avec l'utilisation de l'emplacement `icon` et `v-avatar`."
+    },
+    "card": {
+      "desc": "Si vous placez une `v-card` à l'intérieur d'un `v-timeline-item`, une caret apparaîtra sur le côté de la carte."
+    },
+    "color": {
+      "desc": "Les points colorés créent des points de rupture visuels qui facilitent la lecture de vos échéanciers."
+    },
+    "slot": {
+      "desc": "L'emplacement **opposite** fournit une couche supplémentaire de personnalisation dans vos chronologies."
+    },
+    "reverse": {
+      "desc": "Vous pouvez inverser la direction des éléments de la chronologie en utilisant le prop `reverse`. Cela fonctionne en mode par défaut et `dense`."
+    },
+    "advanced": {
+      "heading": "### Avancé",
+      "desc": "Les composants modulaires vous permettent de créer des solutions hautement personnalisées qui fonctionnent juste."
+    }
+  },
+  "props": {
+    "v-timeline": {
+      "dense": "Masquer le contenu de l'emplacement opposé et positionner tous les éléments à un côté de la chronologie",
+      "reverse": "Inverser la direction des éléments timeline"
+    },
+    "v-timeline-item": {
+      "fillDot": "Supprimer le remplissage du conteneur de point",
+      "hideDot": "Masquer l'affichage du point de chronologie",
+      "icon": "Spécifier l'icône pour le conteneur de points",
+      "iconColor": "Mixins.Colorable.props.color",
+      "large": "Points de grande taille",
+      "left": "Définissez l'élément à une orientation gauche",
+      "right": "Définissez l'élément à une orientation droite",
+      "small": "Points de petite taille"
+    }
+  },
+  "slots": {
+    "v-timeline-item": {
+      "icon": "Utilisé pour personnaliser l'icône dans le point de l'article chronologique",
+      "opposite": "Utilisé pour personnaliser le côté opposé des éléments timeline"
+    }
+  }
+}

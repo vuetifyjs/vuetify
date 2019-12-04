@@ -1,7 +1,7 @@
 import '../VDatePickerTable.sass'
 
 // Directives
-import Touch, { TouchWrapper } from '../../../directives/touch'
+import Touch from '../../../directives/touch'
 
 // Mixins
 import Colorable from '../../../mixins/colorable'
@@ -9,14 +9,12 @@ import Localable from '../../../mixins/localable'
 import Themeable from '../../../mixins/themeable'
 
 // Utils
-import isDateAllowed, { AllowedDateFunction } from '../util/isDateAllowed'
+import isDateAllowed from '../util/isDateAllowed'
 import mixins from '../../../util/mixins'
 
 // Types
-import { VNodeChildren } from 'vue'
-import { PropValidator } from 'vue/types/options'
-import { DatePickerFormatter } from '../util/createNativeLocaleFormatter'
-import { DateEvents, DateEventColors, DateEventColorValue } from '../VDatePicker'
+import { VNodeChildren, PropType } from 'vue'
+import { DatePickerAllowedDatesFunction, DatePickerFormatter, DatePickerEvents, DatePickerEventColors, DatePickerEventColorValue, TouchWrapper } from 'types'
 
 type CalculateTableDateFunction = (v: number) => string
 
@@ -29,27 +27,28 @@ export default mixins(
   directives: { Touch },
 
   props: {
-    allowedDates: Function as PropValidator<AllowedDateFunction | undefined>,
+    allowedDates: Function as PropType<DatePickerAllowedDatesFunction | undefined>,
     current: String,
     disabled: Boolean,
-    format: Function as PropValidator<DatePickerFormatter | undefined>,
+    format: Function as PropType<DatePickerFormatter | undefined>,
     events: {
-      type: [Array, Function, Object],
+      type: [Array, Function, Object] as PropType<DatePickerEvents>,
       default: () => null,
-    } as any as PropValidator<DateEvents>,
+    },
     eventColor: {
-      type: [Array, Function, Object, String],
+      type: [Array, Function, Object, String] as PropType<DatePickerEventColors>,
       default: () => 'warning',
-    } as any as PropValidator<DateEventColors>,
+    },
     min: String,
     max: String,
+    range: Boolean,
     readonly: Boolean,
     scrollable: Boolean,
     tableDate: {
       type: String,
       required: true,
     },
-    value: [String, Array],
+    value: [String, Array] as PropType<string | string[]>,
   },
 
   data: () => ({
@@ -100,7 +99,7 @@ export default mixins(
     },
     genButton (value: string, isFloating: boolean, mouseEventType: string, formatter: DatePickerFormatter) {
       const isAllowed = isDateAllowed(value, this.min, this.max, this.allowedDates)
-      const isSelected = value === this.value || (Array.isArray(this.value) && this.value.indexOf(value) !== -1)
+      const isSelected = this.isSelected(value)
       const isCurrent = value === this.current
       const setColor = isSelected ? this.setBackgroundColor : this.setTextColor
       const color = (isSelected || isCurrent) && (this.color || 'accent')
@@ -124,7 +123,7 @@ export default mixins(
     },
     getEventColors (date: string) {
       const arrayize = (v: string | string[]) => Array.isArray(v) ? v : [v]
-      let eventData: boolean | DateEventColorValue
+      let eventData: boolean | DatePickerEventColorValue
       let eventColors: string[] = []
 
       if (Array.isArray(this.events)) {
@@ -191,6 +190,18 @@ export default mixins(
         } : undefined,
         directives: [touchDirective],
       }, [transition])
+    },
+    isSelected (value: string): boolean {
+      if (Array.isArray(this.value)) {
+        if (this.range && this.value.length === 2) {
+          const [from, to] = [...this.value].sort()
+          return from <= value && value <= to
+        } else {
+          return this.value.indexOf(value) !== -1
+        }
+      }
+
+      return value === this.value
     },
   },
 })

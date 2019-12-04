@@ -1,17 +1,17 @@
 <template>
   <div class="text-center">
     <v-container>
-      <v-layout justify-center>
-        <v-flex xs8>
-          <v-container max-width="300">
+      <v-row justify="center">
+        <v-col cols="8">
+          <v-container class="max-width">
             <v-pagination
               v-model="page"
               class="my-4"
               :length="15"
             ></v-pagination>
           </v-container>
-        </v-flex>
-      </v-layout>
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>

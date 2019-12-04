@@ -1,7 +1,10 @@
 {
   "examples": {
     "validation": {
-      "header": "Validação"
+      "heading": "Validação"
+    },
+    "dense": {
+      "heading": "### Denso"
     }
   }
 }

@@ -9,6 +9,8 @@
   "showExample": "예제 보기",
   "slots": "슬롯",
   "type": "타입",
+  "usage": "## 사용법",
+  "usageNew": "## 사용법",
   "parameters": "파라미터",
   "return": "반환값",
   "example": "예제",
