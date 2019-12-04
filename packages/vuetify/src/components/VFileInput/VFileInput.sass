@@ -1,3 +1,4 @@
+@import './_variables'
 @import '../../styles/styles.sass'
 
 +theme(v-file-input) using ($material)
@@ -26,16 +27,16 @@
     flex-wrap: wrap
 
   .v-chip
-    margin: 4px
+    margin: $file-input-chip-margin
 
 .v-file-input.v-text-field--filled:not(.v-text-field--single-line)
   .v-file-input__text
-    padding-top: 22px
+    padding-top: $file-input-filled-padding-top
 
 .v-file-input.v-text-field--outlined
   .v-text-field__slot
-    padding: 6px 0
+    padding: $file-input-outlined-padding
 
   &.v-input--dense
     .v-text-field__slot
-      padding: 3px 0
+      padding: $file-input-outlined-dense-padding

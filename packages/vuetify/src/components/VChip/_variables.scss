@@ -17,7 +17,13 @@ $chip-pill-filter-margin: 0 16px 0 0 !default;
 $chip-transition-duration: 0.28s !default;
 $chip-transition-fn: map-get($transition, 'fast-out-slow-in') !default;
 $icon-outlined-border-width: thin !default;
-
+$chip-line-height: 20px !default;
+$chip-padding: 0 12px !default;
+$chip-white-space: nowrap !default;
+$chip-disabled-opacity: 0.4 !default;
+$chip-filter-max-width: 24px !default;
+$chip-outlined-active-opacity: 0.08 !default;
+$chip-selected-opacity: 0.28 !default;
 $icon-sizes: () !default;
 $icon-sizes: map-deep-merge(
   (

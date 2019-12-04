@@ -1,30 +1,30 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 .v-date-picker-years
-  font-size: 16px
-  font-weight: 400
-  height: 286px
+  font-size: $date-picker-years-font-size
+  font-weight: $date-picker-years-font-weight
+  height: $date-picker-years-portrait-height
   list-style-type: none
   overflow: auto
-  text-align: center
+  text-align: $date-picker-years-item-align
 
   &.v-date-picker-years
     padding: 0
 
   li
     cursor: pointer
-    padding: 8px 0
+    padding: $date-picker-years-item-padding
     transition: none
 
     &.active
-      font-size: 26px
-      font-weight: 500
-      padding: 10px 0
+      font-size: $date-picker-years-active-font-size
+      font-weight: $date-picker-years-active-font-weight
+      padding: $date-picker-years-active-padding
 
     &:hover
-      background: rgba(0, 0, 0, 0.12)
+      background: $date-picker-years-item-hover-background
 
 .v-picker--landscape
   .v-date-picker-years
     padding: 0
-    height: 286px
+    height: $date-picker-years-landscape-height

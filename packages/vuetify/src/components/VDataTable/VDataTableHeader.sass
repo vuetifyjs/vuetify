@@ -6,19 +6,18 @@
   .v-data-table-header
     th.sortable
       .v-data-table-header__icon
-        color: rgba(map-get($material, 'fg-color'), map-get($material, 'disabledORhints-text-percent'))
+        color: map-deep-get($material, 'text', 'disabled')
 
-      &:hover
-        color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
+      &:hover,
+      &.active
+        color: map-deep-get($material, 'text', 'primary')
 
       &.active
-        color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
-
         .v-data-table-header__icon
-          color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
+          color: map-deep-get($material, 'text', 'primary')
 
     &__sort-badge
-      background-color: rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+      background-color: map-get($material, 'dividers')
       color: map-deep-get($material, 'text', 'primary')
 
 // Block
@@ -49,10 +48,10 @@
   align-items: center
   border: 0px
   border-radius: 50%
-  min-width: 18px
-  min-height: 18px
-  height: 18px
-  width: 18px
+  min-width: $data-table-header-sort-badge-min-height
+  min-height: $data-table-header-sort-badge-min-width
+  height: $data-table-header-sort-badge-height
+  width: $data-table-header-sort-badge-width
 
 // Mobile
 .v-data-table-header-mobile
@@ -63,17 +62,17 @@
   display: flex
 
   .v-select
-    margin-bottom: 8px
+    margin-bottom: $data-table-header-mobile-select-margin-bottom
 
     .v-chip
-      height: 24px
+      height: $data-table-header-mobile-select-chip-height
 
     .v-chip__close.desc
       .v-icon
         transform: rotate(-180deg)
 
 .v-data-table-header-mobile__select
-  min-width: 56px
+  min-width: $data-table-header-mobile-select-max-width
   display: flex
   align-items: center
   justify-content: center

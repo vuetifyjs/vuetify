@@ -49,6 +49,11 @@ export default {
       default: 40,
       validate: validateNumber,
     },
+    intervalWidth: {
+      type: [Number, String],
+      default: 45,
+      validate: validateNumber,
+    },
     intervalMinutes: {
       type: [Number, String],
       default: 60,

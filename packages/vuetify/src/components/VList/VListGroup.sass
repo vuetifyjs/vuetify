@@ -6,7 +6,7 @@
   .v-list-item__icon.v-list-group__header__append-icon
     align-self: center
     margin: 0
-    min-width: 48px
+    min-width: $list-group-header-icon-min-width
     justify-content: flex-end
 
 .v-list-group--sub-group
@@ -41,26 +41,26 @@
   .v-list-item__icon
     &:first-child
       +ltr()
-        margin-right: 16px
+        margin-right: $list-group-sub-group-child-margin
 
       +rtl()
-        margin-left: 16px
+        margin-left: $list-group-sub-group-child-margin
 
   .v-list-group__header
     +ltr()
-      padding-left: 32px
+      padding-left: $list-group-sub-group-header-margin
 
     +rtl()
-      padding-right: 32px
+      padding-right: $list-group-sub-group-header-margin
 
 
   .v-list-group__items
     .v-list-item
       +ltr()
-        padding-left: 40px
+        padding-left: $list-group-items-item-padding
 
       +rtl()
-        padding-right: 40px
+        padding-right: $list-group-items-item-padding
 
   &.v-list-group--active
     .v-list-item__icon.v-list-group__header__prepend-icon .v-icon
@@ -69,39 +69,39 @@
 .v-list-group--no-action
   > .v-list-group__items > div > .v-list-item
     +ltr()
-      padding-left: 72px
+      padding-left: $list-group-no-action-item-padding
 
     +rtl()
-      padding-right: 72px
+      padding-right: $list-group-no-action-item-padding
 
   &.v-list-group--sub-group
     > .v-list-group__items > div > .v-list-item
       +ltr()
-        padding-left: 88px
+        padding-left: $list-group-no-action-sub-group-item-padding
 
       +rtl()
-        padding-right: 88px
+        padding-right: $list-group-no-action-sub-group-item-padding
 
 .v-list--dense
   .v-list-group--sub-group .v-list-group__header
     +ltr()
-      padding-left: 24px
+      padding-left: $list-group-dense-sub-group-header-padding
 
     +rtl()
-      padding-right: 24px
+      padding-right: $list-group-dense-sub-group-header-padding
 
   &.v-list--nav .v-list-group--no-action
     > .v-list-group__items > div > .v-list-item
       +ltr()
-        padding-left: 64px
+        padding-left: $list-group-nav-no-action-item-padding
 
       +rtl()
-        padding-right: 64px
+        padding-right: $list-group-nav-no-action-item-padding
 
     &.v-list-group--sub-group
       > .v-list-group__items > div > .v-list-item
         +ltr()
-          padding-left: 80px
+          padding-left: $list-group-sub-group-item-padding
 
         +rtl()
-          padding-right: 80px
+          padding-right: $list-group-sub-group-item-padding

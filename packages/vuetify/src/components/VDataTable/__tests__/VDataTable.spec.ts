@@ -582,4 +582,30 @@ describe('VDataTable.ts', () => {
 
     expect(page).toHaveBeenCalledWith(1)
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8477
+  it('should emit two item-selected events when using single-select prop and selecting new item', async () => {
+    const itemSelected = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        itemKey: 'name',
+        items: testItems.slice(0, 2),
+        value: [testItems[0]],
+        showSelect: true,
+        singleSelect: true,
+      },
+      listeners: {
+        'item-selected': itemSelected,
+      },
+    })
+
+    const checkbox = wrapper.findAll('.v-data-table__checkbox').at(1)
+    checkbox.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(itemSelected).toHaveBeenCalledTimes(2)
+    expect(itemSelected).toHaveBeenCalledWith({ item: testItems[0], value: false })
+    expect(itemSelected).toHaveBeenCalledWith({ item: testItems[1], value: true })
+  })
 })

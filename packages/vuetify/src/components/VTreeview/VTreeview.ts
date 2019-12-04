@@ -88,6 +88,7 @@ export default mixins(
   },
 
   data: () => ({
+    level: -1,
     activeCache: new Set() as NodeCache,
     nodes: {} as Record<string | number, NodeState>,
     openCache: new Set() as NodeCache,
@@ -156,8 +157,8 @@ export default mixins(
 
   created () {
     this.buildTree(this.items)
-    this.value.forEach(key => this.updateSelected(key, true))
-    this.active.forEach(key => this.updateActive(key, true))
+    this.value.forEach(key => this.updateSelected(this.returnObject ? getObjectValueByPath(key, this.itemKey) : key, true))
+    this.active.forEach(key => this.updateActive(this.returnObject ? getObjectValueByPath(key, this.itemKey) : key, true))
   },
 
   mounted () {
@@ -169,7 +170,7 @@ export default mixins(
     if (this.openAll) {
       this.updateAll(true)
     } else {
-      this.open.forEach(key => this.updateOpen(key, true))
+      this.open.forEach(key => this.updateOpen(this.returnObject ? getObjectValueByPath(key, this.itemKey) : key, true))
       this.emitOpen()
     }
   },

@@ -83,7 +83,8 @@ export default BaseItemGroup.extend({
       if (!this.isBooted) return ''
 
       const axis = this.vertical ? 'y' : 'x'
-      const direction = this.internalReverse ? '-reverse' : ''
+      const reverse = this.$vuetify.rtl && axis === 'x' ? !this.internalReverse : this.internalReverse
+      const direction = reverse ? '-reverse' : ''
 
       return `v-window-${axis}${direction}-transition`
     },

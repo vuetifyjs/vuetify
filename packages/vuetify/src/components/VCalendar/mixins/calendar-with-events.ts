@@ -117,15 +117,13 @@ export default CalendarBase.extend({
 
   methods: {
     formatTime (withTime: CalendarTimestamp, ampm: boolean): string {
-      const suffix = ampm ? (withTime.hour < 12 ? 'a' : 'p') : ''
-      const hour = withTime.hour % 12 || 12
-      const minute = withTime.minute
+      const formatter = this.getFormatter({
+        timeZone: 'UTC',
+        hour: 'numeric',
+        minute: withTime.minute > 0 ? 'numeric' : undefined,
+      })
 
-      return minute > 0
-        ? (minute < 10
-          ? `${hour}:0${minute}${suffix}`
-          : `${hour}:${minute}${suffix}`)
-        : `${hour}${suffix}`
+      return formatter(withTime, true)
     },
     updateEventVisibility () {
       if (this.noEvents || !this.eventMore) {
@@ -363,7 +361,7 @@ export default CalendarBase.extend({
 
       const parsedEvents = this.parsedEvents
       const indexToOffset: number[] = parsedEvents.map(event => -1)
-      const resetOnWeekday = this.weekdays[0]
+      const resetOnWeekday = this.parsedWeekdays[0]
 
       const checkReset: VEventResetCheck = day => {
         if (day.weekday === resetOnWeekday) {
@@ -462,22 +460,52 @@ export default CalendarBase.extend({
           : getVisuals(events, timed).map((visual, index) => mapper(visual, index, day))
       }
 
+      const slots = this.$scopedSlots
+      const slotDay = slots.day
+      const slotDayHeader = slots['day-header']
+      const slotDayBody = slots['day-body']
+
       return {
-        ...this.$scopedSlots,
+        ...slots,
         day: (day: VDaySlotScope) => {
-          const children = getSlotChildren(day, this.getEventsForDay, this.genDayEvent, false)
+          let children = getSlotChildren(day, this.getEventsForDay, this.genDayEvent, false)
           if (children && children.length > 0 && this.eventMore) {
             children.push(this.genMore(day))
+          }
+          if (slotDay) {
+            const slot = slotDay(day)
+            if (slot) {
+              children = children ? children.concat(slot) : slot
+            }
           }
           return children
         },
         'day-header': (day: VDaySlotScope) => {
-          return getSlotChildren(day, this.getEventsForDayAll, this.genDayEvent, false)
+          let children = getSlotChildren(day, this.getEventsForDayAll, this.genDayEvent, false)
+
+          if (slotDayHeader) {
+            const slot = slotDayHeader(day)
+            if (slot) {
+              children = children ? children.concat(slot) : slot
+            }
+          }
+          return children
         },
         'day-body': (day: VDayBodySlotScope) => {
-          return [this.$createElement('div', {
-            staticClass: 'v-event-timed-container',
-          }, getSlotChildren(day, this.getEventsForDayTimed, this.genTimedEvent, true))]
+          const events = getSlotChildren(day, this.getEventsForDayTimed, this.genTimedEvent, true)
+          let children: VNode[] = [
+            this.$createElement('div', {
+              staticClass: 'v-event-timed-container',
+            }, events),
+          ]
+
+          if (slotDayBody) {
+            const slot = slotDayBody(day)
+            if (slot) {
+              children = children.concat(slot)
+            }
+          }
+          return children
         },
       }
     },

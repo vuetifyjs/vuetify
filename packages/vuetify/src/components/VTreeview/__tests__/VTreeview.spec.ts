@@ -7,16 +7,6 @@ import {
 import VTreeview from '../VTreeview'
 import { ExtractVue } from '../../../util/mixins'
 
-Vue.prototype.$vuetify = {
-  icons: {
-    values: {
-      subgroup: 'arrow_drop_down',
-      checkboxOn: 'check_box',
-      checkboxOff: 'check_box_outline_blank',
-    },
-  },
-}
-
 const singleRootTwoChildren = [
   { id: 0, name: 'Root', children: [{ id: 1, name: 'Child' }, { id: 2, name: 'Child 2' }] },
 ]
@@ -654,6 +644,29 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
           name: 'three',
         },
       ],
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8709
+  it('should handle initial active/open/selected values when using return-object prop', async () => {
+    const one = { id: '1', name: 'One' }
+    const three = { id: '3', name: 'Three' }
+    const two = { id: '2', name: 'Two', children: [three] }
+
+    const wrapper = mountFunction({
+      propsData: {
+        returnObject: true,
+        selectable: true,
+        activatable: true,
+        items: [one, two],
+        value: [one],
+        open: [two],
+        active: [three],
+      },
     })
 
     await wrapper.vm.$nextTick()

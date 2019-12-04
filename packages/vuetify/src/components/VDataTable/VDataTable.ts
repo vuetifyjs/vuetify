@@ -469,15 +469,21 @@ export default VDataIterator.extend({
         },
         scopedSlots,
         on: {
-          click: () => this.$emit('click:row', item),
+          // TODO: first argument should be the data object
+          // but this is a breaking change so it's for v3
+          click: () => this.$emit('click:row', item, data),
         },
       })
     },
     genBody (props: DataScopeProps): VNode | string | VNodeChildren {
       const data = {
         ...props,
-        isMobile: this.isMobile,
+        expand: this.expand,
         headers: this.computedHeaders,
+        isExpanded: this.isExpanded,
+        isMobile: this.isMobile,
+        isSelected: this.isSelected,
+        select: this.select,
       }
 
       if (this.$scopedSlots.body) {
