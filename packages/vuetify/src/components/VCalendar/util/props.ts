@@ -1,7 +1,7 @@
 
-import { validateTimestamp, parseDate, DAYS_IN_WEEK } from './timestamp'
-import { VEventInput } from './events'
-import { PropValidator } from 'vue/types/options'
+import { validateTimestamp, parseDate } from './timestamp'
+import { PropType } from 'vue'
+import { CalendarEvent, CalendarFormatter, CalendarTimestamp } from 'types'
 
 export default {
   base: {
@@ -15,27 +15,9 @@ export default {
       validate: validateTimestamp,
     },
     weekdays: {
-      type: [Array, String],
+      type: Array as PropType<number[]>,
       default: () => [0, 1, 2, 3, 4, 5, 6],
-      validate (input: any[] | string) {
-        if (typeof input === 'string') {
-          input = input.split(',')
-        }
-        if (Array.isArray(input)) {
-          if (input.length > DAYS_IN_WEEK || input.length === 0) {
-            return false
-          }
-          for (let i = 0; i < input.length; i++) {
-            const x = input[i]
-            if (!validateNumber(x) || x < 0 || x >= DAYS_IN_WEEK) {
-              return false
-            }
-          }
-          return true
-        }
-        return false
-      },
-    } as PropValidator<number[] | string>,
+    },
     hideHeader: {
       type: Boolean,
       default: false,
@@ -45,11 +27,11 @@ export default {
       default: true,
     },
     weekdayFormat: {
-      type: Function, // VTimestampFormatter,
+      type: Function as PropType<CalendarFormatter>,
       default: null,
     },
     dayFormat: {
-      type: Function, // VTimestampFormatter,
+      type: Function as PropType<CalendarFormatter>,
       default: null,
     },
   },
@@ -88,15 +70,15 @@ export default {
       validate: validateNumber,
     },
     intervalFormat: {
-      type: Function, // VTimestampFormatter,
+      type: Function as PropType<CalendarFormatter>,
       default: null,
     },
     intervalStyle: {
-      type: Function, // (interval: VTimestamp): object
+      type: Function as PropType<(interval: CalendarTimestamp) => object>,
       default: null,
     },
     showIntervalLabel: {
-      type: Function, // (interval: VTimestamp): boolean
+      type: Function as PropType<(interval: CalendarTimestamp) => boolean>,
       default: null,
     },
   },
@@ -114,7 +96,7 @@ export default {
       default: true,
     },
     monthFormat: {
-      type: Function, // VTimestampFormatter,
+      type: Function as PropType<CalendarFormatter>,
       default: null,
     },
   },
@@ -130,9 +112,9 @@ export default {
   },
   events: {
     events: {
-      type: Array,
+      type: Array as PropType<CalendarEvent[]>,
       default: () => [],
-    } as PropValidator<VEventInput[]>,
+    },
     eventStart: {
       type: String,
       default: 'start',

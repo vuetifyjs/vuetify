@@ -16,10 +16,6 @@
 +theme(v-tabs-items) using ($material)
   background-color: map-get($material, 'cards')
 
-.v-tabs-bar.theme--dark
-  .v-tab:not(.v-tab--active):not(.v-tab--disabled)
-    opacity: .7
-
 .v-tabs-bar
   &.primary,
   &.secondary,
@@ -62,11 +58,11 @@
   align-items: center
   display: flex
   flex: 0 1 auto
-  font-size: 0.875rem
-  font-weight: 500
+  font-size: $tab-font-size
+  font-weight: $tab-font-weight
   justify-content: center
   letter-spacing: $tabs-item-letter-spacing
-  line-height: normal
+  line-height: $tab-line-height
   min-width: $tabs-item-min-width
   max-width: $tabs-item-max-width
   outline: none
@@ -153,7 +149,7 @@
     flex-direction: column-reverse
 
     > *:first-child
-      margin-bottom: 6px
+      margin-bottom: $tabs-icons-and-text-first-tab-margin-bottom
 
 .v-tabs--overflow > .v-tabs-bar
   .v-tab
@@ -209,4 +205,4 @@
 
 .v-tab--disabled
   pointer-events: none
-  opacity: .5
+  opacity: $tab-disabled-opacity

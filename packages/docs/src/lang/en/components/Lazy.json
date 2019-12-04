@@ -10,6 +10,7 @@
   "props": {
     "minHeight": "Mixins.Measurable.props.minHeight",
     "options": "Options that are passed to the [Intersection observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) constructor.",
+    "tag": "Components.Sheets.props.tag",
     "transition": "Mixins.Transitionable.props.transition"
   }
 }

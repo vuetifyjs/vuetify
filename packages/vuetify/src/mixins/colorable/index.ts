@@ -3,7 +3,7 @@ import { VNodeData } from 'vue/types/vnode'
 import { consoleError } from '../../util/console'
 
 function isCssColor (color?: string | false): boolean {
-  return !!color && !!color.match(/^(#|(rgb|hsl)a?\()/)
+  return !!color && !!color.match(/^(#|var\(--|(rgb|hsl)a?\()/)
 }
 
 export default Vue.extend({

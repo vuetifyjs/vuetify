@@ -1,4 +1,5 @@
 export default {
+  badge: 'Badge',
   close: 'Close',
   dataIterator: {
     noResultsText: 'No matching records found',

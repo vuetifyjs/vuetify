@@ -1,4 +1,5 @@
 export default {
+  badge: 'insigne',
   close: 'Sluiten',
   dataIterator: {
     noResultsText: 'Geen overeenkomende resultaten gevonden',

@@ -1,4 +1,4 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 +theme(v-date-picker-table) using ($material)
   th,
@@ -7,8 +7,8 @@
 
 .v-date-picker-table
   position: relative
-  padding: 0 12px
-  height: 242px
+  padding: $date-picker-table-padding
+  height: $date-picker-table-height
 
   table
     transition: $primary-transition
@@ -21,43 +21,43 @@
     position: relative
 
   th
-    font-size: 12px
+    font-size: $date-picker-table-font-size
 
   &--date .v-btn
-    height: 32px
-    width: 32px
+    height: $date-picker-table-date-button-height
+    width: $date-picker-table-date-button-width
 
   .v-btn
     z-index: auto
     margin: 0
-    font-size: 12px
+    font-size: $date-picker-table-font-size
 
     &.v-btn--active
-      color: map-get($shades, 'white')
+      color: date-picker-table-active-date-color
 
 .v-date-picker-table--month
   td
     width: 33.333333%
-    height: 56px
+    height: $date-picker-table-month-height
     vertical-align: middle
     text-align: center
 
     .v-btn
       margin: 0 auto
-      max-width: 160px
-      min-width: 40px
+      max-width: $date-picker-table-month-max-width
+      min-width: $date-picker-table-month-min-width
       width: 100%
 
 .v-date-picker-table--date
   th
-    padding: 8px 0
-    font-weight: 600
+    padding: $date-picker-table-date-padding
+    font-weight: $date-picker-table-date-font-weight
 
   td
-    width: 45px
+    width: $date-picker-table-date-width
 
 .v-date-picker-table__events
-  height: 8px
+  height: $date-picker-event-size
   left: 0
   position: absolute
   text-align: center
@@ -65,17 +65,17 @@
   width: 100%
 
   > div
-    border-radius: 50%
+    border-radius: $date-picker-event-border-radius
     display: inline-block
-    height: 8px
-    margin: 0 1px
-    width: 8px
+    height: $date-picker-event-size
+    margin: $date-picker-event-margin
+    width: $date-picker-event-size
 
 .v-date-picker-table--date .v-date-picker-table__events
-  bottom: 6px
+  bottom: $date-picker-event-month-bottom
 
 .v-date-picker-table--month .v-date-picker-table__events
-  bottom: 8px
+  bottom: $date-picker-event-date-bottom
 
 .v-date-picker-table--disabled
   pointer-events: none

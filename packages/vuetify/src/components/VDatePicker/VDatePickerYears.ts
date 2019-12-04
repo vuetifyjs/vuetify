@@ -9,9 +9,8 @@ import { createNativeLocaleFormatter } from './util'
 import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
-import Vue, { VNode } from 'vue'
-import { DatePickerFormatter } from './util/createNativeLocaleFormatter'
-import { PropValidator } from 'vue/types/options'
+import Vue, { VNode, PropType } from 'vue'
+import { DatePickerFormatter } from 'types'
 
 interface options extends Vue {
   $el: HTMLElement
@@ -32,7 +31,7 @@ export default mixins<options &
   name: 'v-date-picker-years',
 
   props: {
-    format: Function as PropValidator<DatePickerFormatter | undefined>,
+    format: Function as PropType<DatePickerFormatter | undefined>,
     min: [Number, String],
     max: [Number, String],
     readonly: Boolean,

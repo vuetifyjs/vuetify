@@ -1,3 +1,5 @@
 @import '../../styles/styles.sass';
 
 $divider-inset-margin: 72px !default;
+$divider-inset-margin-top: 8px !default;
+$divider-inset-max-height: calc(100% - 16px) !default;

@@ -1,10 +1,20 @@
 @import '../../styles/styles.sass';
 
-$badge-border-radius: 11px !default;
+$badge-border-radius: 10px !default;
+$badge-bordered-width: 2px !default;
 $badge-color: map-get($shades, 'white') !default;
+$badge-dot-border-radius: 4.5px;
+$badge-dot-border-width: 1.5px !default;
+$badge-dot-height: 9px !default;
+$badge-dot-width: 9px !default;
 $badge-font-family: $body-font-family !default;
-$badge-font-size: 14px !default;
-$badge-height: 22px !default;
-$badge-width: 22px !default;
-$badge-top: -($badge-height / 2) !default;
-$badge-right: -($badge-width) !default;
+$badge-font-size: 12px !default;
+$badge-height: 20px !default;
+$badge-icon-padding: 3px 0 !default;
+$badge-letter-spacing: 0 !default;
+$badge-line-height: 1;
+$badge-min-width: 20px !default;
+$badge-padding: 4px 6px !default;
+$badge-right: auto !default;
+$badge-top: auto !default;
+$badge-wrapper-margin: 0 4px !default;

@@ -1,14 +1,15 @@
 // Helpers
 import { VNode } from 'vue'
 import mixins from '../../util/mixins'
-import header, { TableHeader } from './mixins/header'
+import header from './mixins/header'
 import { wrapInArray, convertToUnit } from '../../util/helpers'
+import { DataTableHeader } from 'types'
 
 export default mixins(header).extend({
   name: 'v-data-table-header-desktop',
 
   methods: {
-    genGroupByToggle (header: TableHeader) {
+    genGroupByToggle (header: DataTableHeader) {
       return this.$createElement('span', {
         on: {
           click: () => this.$emit('group', header.value),
@@ -16,7 +17,7 @@ export default mixins(header).extend({
       }, ['group'])
     },
     // eslint-disable-next-line max-statements
-    genHeader (header: TableHeader) {
+    genHeader (header: DataTableHeader) {
       const listeners: any = {}
       const children = []
       const attrs = {
