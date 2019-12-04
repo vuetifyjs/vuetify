@@ -140,14 +140,18 @@
             class="pb-0"
           >
             <v-slider
-              v-model="sliders[slider.prop]"
-              v-bind="slider.attrs"
+              v-model="sliders[Object(slider) === slider ? slider.prop : slider]"
+              v-bind="{
+                ...(Object(slider) === slider ? (slider.attrs || {}) : {}),
+                min: slider === 'elevation' ? 0 : undefined,
+                max: slider === 'elevation' ? 24 : undefined,
+              }"
               hide-details
             >
               <template v-slot:label>
                 <span
                   class="text-capitalize"
-                  v-text="slider.label"
+                  v-text="slider === 'elevation' ? 'Elevation' : undefined"
                 />
               </template>
             </v-slider>
