@@ -1,4 +1,4 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 // Theme
 +theme(v-overlay) using ($material)
@@ -16,7 +16,7 @@
   right: 0
   bottom: 0
   pointer-events: none
-  transition: $primary-transition, z-index 1ms
+  transition: $overlay-transition
 
 // Element
 .v-overlay__content

@@ -1,4 +1,4 @@
-@import './_variables.sass'
+@import './_variables.scss'
 
 // Theme
 +theme(v-input--switch) using ($material)
@@ -44,7 +44,7 @@
     transition: $primary-transition
 
   .v-input--selection-controls__input
-    width: 38px
+    width: $switch-width
 
   .v-input--selection-controls__ripple
     top: $switch-ripple-top
@@ -60,8 +60,8 @@
 
     &.v-input--switch--inset
       .v-input--switch__track
-        height: 22px
-        width: 44px
+        height: $switch-track-dense-inset-height
+        width: $switch-track-dense-inset-width
         top: $switch-track-dense-top
         left: -3px
 
@@ -105,14 +105,14 @@
   &--inset
     .v-input--switch__track,
     .v-input--selection-controls__input
-      width: 48px
+      width: $switch-track-inset-width
 
     .v-input--switch__track
-      border-radius: 14px
-      height: 28px
+      border-radius: $switch-track-inset-border-radius
+      height: $switch-track-inset-height
       left: -4px
-      opacity: .32
-      top: calc(50% - 14px)
+      opacity: $switch-track-inset-opacity
+      top: calc(50% - #{$switch-track-inset-height / 2})
 
     .v-input--selection-controls__ripple,
     .v-input--switch__thumb
@@ -126,7 +126,7 @@
       .v-input--selection-controls__ripple,
       .v-input--switch__thumb
         +ltr()
-          transform: translate(20px, 0) !important
+          transform: translate($switch-dirty-offset-x, 0) !important
 
         +rtl()
-          transform: translate(-26px, 0) !important
+          transform: translate(-$switch-dirty-offset-x - 6px, 0) !important

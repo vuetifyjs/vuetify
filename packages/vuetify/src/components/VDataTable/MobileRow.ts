@@ -53,6 +53,6 @@ export default Vue.extend({
       return h('td', { class: classes }, mobileRowChildren)
     })
 
-    return h('tr', data, columns)
+    return h('tr', { ...data, staticClass: 'v-data-table__mobile-table-row' }, columns)
   },
 })

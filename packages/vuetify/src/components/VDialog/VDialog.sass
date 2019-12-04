@@ -3,32 +3,32 @@
 // Block
 .v-dialog
   border-radius: $dialog-border-radius
-  margin: 24px
+  margin: $dialog-margin
   overflow-y: auto
   pointer-events: auto
   transition: .3s map-get($transition, 'fast-in-fast-out')
   width: 100%
   z-index: inherit
-  +elevation(24)
+  +elevation($dialog-elevation)
 
   &:not(.v-dialog--fullscreen)
-    max-height: 90%
+    max-height: $dialog-max-height
 
   > *
     width: 100%
 
   > .v-card
     > .v-card__title
-      font-size: map-deep-get($headings, 'h6', 'size')
-      font-weight: map-deep-get($headings, 'h6', 'weight')
-      letter-spacing: map-deep-get($headings, 'h6', 'letter-spacing')
-      padding: 16px 24px 10px
+      font-size: $dialog-card-title-font-size
+      font-weight: $dialog-card-title-font-weight
+      letter-spacing: $dialog-card-title-letter-spacing
+      padding: $dialog-card-title-padding
 
     > .v-card__text
-      padding: 0 24px 20px
+      padding: $dialog-card-text-padding
 
     > .v-card__subtitle
-      padding: 0 24px 20px
+      padding: $dialog-card-subtitle-padding
 
 // Element
 .v-dialog__content

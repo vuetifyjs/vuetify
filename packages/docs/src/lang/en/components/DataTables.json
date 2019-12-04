@@ -74,8 +74,8 @@
       "desc": "You can apply the `hide-default-header` and `hide-default-footer` props to remove the default header and footer respectively."
     },
     "edit-dialog": {
-      "heading": "### Inline Editing",
-      "desc": "The `v-edit-dialog` component is used for inline-editing within data tables. You can block closing the dialog when clicked outside by adding the **persistent** prop."
+      "heading": "### Content Editing",
+      "desc": "The `v-edit-dialog` component can be used for editing data directly within a `v-data-table`. You can block the closing of the `v-edit-dialog` when clicked outside by adding the **persistent** prop."
     },
     "crud": {
       "heading": "### CRUD Actions",

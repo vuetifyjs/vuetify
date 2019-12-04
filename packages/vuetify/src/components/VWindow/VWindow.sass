@@ -1,4 +1,4 @@
-@import './_variables.sass'
+@import './_variables.scss'
 
 .v-window
   &__container
@@ -14,8 +14,8 @@
     background: rgba(0, 0, 0, .3)
     border-radius: 50%
     position: absolute
-    margin: 0 16px
-    top: calc(50% - 20px)
+    margin: $window-controls-margin
+    top: $window-controls-top
     z-index: 1
 
     .v-btn:hover

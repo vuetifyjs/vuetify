@@ -404,6 +404,7 @@ export default baseMixins.extend<options>().extend({
           this.suffix ? this.genAffix('suffix') : null,
           this.genClearIcon(),
           this.genIconSlot(),
+          this.genHiddenInput(),
         ]),
         this.genMenu(),
         this.genProgress(),
@@ -412,6 +413,7 @@ export default baseMixins.extend<options>().extend({
     genInput (): VNode {
       const input = VTextField.options.methods.genInput.call(this)
 
+      delete input.data!.attrs!.name
       input.data!.domProps!.value = null
       input.data!.attrs!.readonly = true
       input.data!.attrs!.type = 'text'
@@ -419,6 +421,12 @@ export default baseMixins.extend<options>().extend({
       input.data!.on!.keypress = this.onKeyPress
 
       return input
+    },
+    genHiddenInput (): VNode {
+      return this.$createElement('input', {
+        domProps: { value: this.lazyValue },
+        attrs: { type: 'hidden' },
+      })
     },
     genInputSlot (): VNode {
       const render = VTextField.options.methods.genInputSlot.call(this)
