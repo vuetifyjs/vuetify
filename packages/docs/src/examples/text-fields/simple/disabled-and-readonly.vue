@@ -1,79 +1,79 @@
 <template>
   <v-form>
-    <v-container grid-list-xl>
-      <v-layout wrap>
+    <v-container>
+      <v-row>
 
-        <v-flex xs12 sm6>
+        <v-col cols="12" sm="6">
           <v-text-field
             value="John Doe"
             label="Regular"
             disabled
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6>
+        <v-col cols="12" sm="6">
           <v-text-field
             value="John Doe"
             label="Regular"
             readonly
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6>
+        <v-col cols="12" sm="6">
           <v-text-field
             value="John Doe"
             label="Solo"
             solo
             disabled
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6>
+        <v-col cols="12" sm="6">
           <v-text-field
             value="John Doe"
             label="Solo"
             solo
             readonly
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6>
+        <v-col cols="12" sm="6">
           <v-text-field
             value="John Doe"
             label="Filled"
             filled
             disabled
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6>
+        <v-col cols="12" sm="6">
           <v-text-field
             value="John Doe"
             label="Filled"
             filled
             readonly
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6>
+        <v-col cols="12" sm="6">
           <v-text-field
             value="John Doe"
-            label="Outline"
+            label="Outlined"
             outlined
             disabled
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 sm6>
+        <v-col cols="12" sm="6">
           <v-text-field
             value="John Doe"
-            label="Outline"
+            label="Outlined"
             outlined
             readonly
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-      </v-layout>
+      </v-row>
     </v-container>
   </v-form>
 </template>

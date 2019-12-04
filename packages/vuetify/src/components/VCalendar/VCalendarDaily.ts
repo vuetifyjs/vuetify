@@ -15,7 +15,7 @@ import CalendarWithIntervals from './mixins/calendar-with-intervals'
 
 // Util
 import { convertToUnit } from '../../util/helpers'
-import { VTimestamp } from './util/timestamp'
+import { CalendarTimestamp } from 'types'
 
 /* @vue/component */
 export default CalendarWithIntervals.extend({
@@ -65,14 +65,19 @@ export default CalendarWithIntervals.extend({
       ])
     },
     genHeadIntervals (): VNode {
+      const width: string | undefined = convertToUnit(this.intervalWidth)
+
       return this.$createElement('div', {
         staticClass: 'v-calendar-daily__intervals-head',
+        style: {
+          width,
+        },
       })
     },
     genHeadDays (): VNode[] {
       return this.days.map(this.genHeadDay)
     },
-    genHeadDay (day: VTimestamp, index: number): VNode {
+    genHeadDay (day: CalendarTimestamp, index: number): VNode {
       const slot = this.$scopedSlots['day-header']
 
       return this.$createElement('div', {
@@ -88,21 +93,21 @@ export default CalendarWithIntervals.extend({
         slot ? slot({ ...day, index }) : '',
       ])
     },
-    genHeadWeekday (day: VTimestamp): VNode {
+    genHeadWeekday (day: CalendarTimestamp): VNode {
       const color = day.present ? this.color : undefined
 
       return this.$createElement('div', this.setTextColor(color, {
         staticClass: 'v-calendar-daily_head-weekday',
       }), this.weekdayFormatter(day, this.shortWeekdays))
     },
-    genHeadDayLabel (day: VTimestamp): VNode {
+    genHeadDayLabel (day: CalendarTimestamp): VNode {
       return this.$createElement('div', {
         staticClass: 'v-calendar-daily_head-day-label',
       }, [
         this.genHeadDayButton(day),
       ])
     },
-    genHeadDayButton (day: VTimestamp): VNode {
+    genHeadDayButton (day: CalendarTimestamp): VNode {
       const color = day.present ? this.color : 'transparent'
 
       return this.$createElement(VBtn, {
@@ -156,7 +161,7 @@ export default CalendarWithIntervals.extend({
     genDays (): VNode[] {
       return this.days.map(this.genDay)
     },
-    genDay (day: VTimestamp, index: number): VNode {
+    genDay (day: CalendarTimestamp, index: number): VNode {
       const slot = this.$scopedSlots['day-body']
       const scope = this.getSlotScope(day)
 
@@ -175,7 +180,7 @@ export default CalendarWithIntervals.extend({
     genDayIntervals (index: number): VNode[] {
       return this.intervals[index].map(this.genDayInterval)
     },
-    genDayInterval (interval: VTimestamp): VNode {
+    genDayInterval (interval: CalendarTimestamp): VNode {
       const height: string | undefined = convertToUnit(this.intervalHeight)
       const styler = this.intervalStyle || this.intervalStyleDefault
       const slot = this.$scopedSlots.interval
@@ -195,8 +200,12 @@ export default CalendarWithIntervals.extend({
       return this.$createElement('div', data, children)
     },
     genBodyIntervals (): VNode {
+      const width: string | undefined = convertToUnit(this.intervalWidth)
       const data = {
         staticClass: 'v-calendar-daily__intervals-body',
+        style: {
+          width,
+        },
         on: this.getDefaultMouseEventHandlers(':interval', e => {
           return this.getTimestampAtEvent(e, this.parsedStart)
         }),
@@ -209,7 +218,7 @@ export default CalendarWithIntervals.extend({
 
       return this.intervals[0].map(this.genIntervalLabel)
     },
-    genIntervalLabel (interval: VTimestamp): VNode {
+    genIntervalLabel (interval: CalendarTimestamp): VNode {
       const height: string | undefined = convertToUnit(this.intervalHeight)
       const short: boolean = this.shortIntervals
       const shower = this.showIntervalLabel || this.showIntervalLabelDefault

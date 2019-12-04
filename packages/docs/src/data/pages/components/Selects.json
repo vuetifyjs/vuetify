@@ -46,6 +46,7 @@
             "simple/light",
             "simple/icons",
             "simple/multiple",
+            "simple/dense",
             "simple/custom-text-and-value",
             "intermediate/menu-props",
             "intermediate/slots",

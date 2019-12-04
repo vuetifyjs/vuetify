@@ -17,6 +17,8 @@ describe('VSelectList.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VSelectList, {
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
         ...options,
       })
     }

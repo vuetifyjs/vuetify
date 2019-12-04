@@ -18,8 +18,7 @@ import { convertToUnit } from '../../util/helpers'
 import { breaking } from '../../util/console'
 
 // Types
-import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { VNode, PropType } from 'vue'
 
 export default VWindow.extend({
   name: 'v-carousel',
@@ -32,7 +31,7 @@ export default VWindow.extend({
     cycle: Boolean,
     delimiterIcon: {
       type: String,
-      default: '$vuetify.icons.delimiter',
+      default: '$delimiter',
     },
     height: {
       type: [Number, String],
@@ -56,9 +55,9 @@ export default VWindow.extend({
       default: true,
     },
     verticalDelimiters: {
-      type: String,
+      type: String as PropType<'' | 'left' | 'right'>,
       default: undefined,
-    } as PropValidator<'' | 'left' | 'right'>,
+    },
   },
 
   data () {
@@ -135,6 +134,9 @@ export default VWindow.extend({
       for (let i = 0; i < length; i++) {
         const child = this.$createElement(VBtn, {
           staticClass: 'v-carousel__controls__item',
+          attrs: {
+            'aria-label': this.$vuetify.lang.t('$vuetify.carousel.ariaLabel.delimiter', i + 1, length),
+          },
           props: {
             icon: true,
             small: true,
@@ -152,6 +154,7 @@ export default VWindow.extend({
       return this.$createElement(ButtonGroup, {
         props: {
           value: this.internalValue,
+          mandatory: this.mandatory,
         },
         on: {
           change: (val: any) => {

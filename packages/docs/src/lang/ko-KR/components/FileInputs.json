@@ -1,13 +1,13 @@
 {
   "examples": {
     "multiple": {
-      "header": "복수선택 (Multiple)"
+      "heading": "복수선택 (Multiple)"
     },
     "custom-icon": {
-      "header": "커스텀 아이콘 (Custom icons)"
+      "heading": "커스텀 아이콘 (Custom icons)"
     },
     "validation": {
-      "header": "검증 (Validation)"
+      "heading": "검증 (Validation)"
     }
   }
 }

@@ -1,1 +1,6 @@
-{}
+{
+  "uiImg1": "Vuetify プラグインのインストール",
+  "uiImg2": "Vuetify インストールの設定",
+  "cdnHeader": "## CDN の使用",
+  "cdnText": "Vue CLIのテンプレートを使わずにVuetify.jsを試すには、下記のコードを`index.html`に貼り付けてください。最新のVueとVuetifyを使って、コンポーネントを試すことができます。codepenの[Vuetify starter](https://template.vuetifyjs.com)を使うこともできます。おすすめはされていませんが、もし本番環境でCDNパッケージを利用する場合は、アセットのバージョンを指定するようにしましょう。詳しいやり方は[jsdelivr](https://www.jsdelivr.com/)を参照してください。"
+}

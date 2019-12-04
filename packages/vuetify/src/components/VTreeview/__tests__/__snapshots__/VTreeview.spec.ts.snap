@@ -6,6 +6,8 @@ exports[`VTreeView.ts should filter items 1`] = `
        class="v-treeview-node v-treeview-node--leaf"
   >
     <div class="v-treeview-node__root">
+      <div class="v-treeview-node__level">
+      </div>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
           one
@@ -17,6 +19,8 @@ exports[`VTreeView.ts should filter items 1`] = `
        class="v-treeview-node v-treeview-node--leaf"
   >
     <div class="v-treeview-node__root">
+      <div class="v-treeview-node__level">
+      </div>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
           two
@@ -33,6 +37,8 @@ exports[`VTreeView.ts should filter items 2`] = `
        class="v-treeview-node v-treeview-node--leaf v-treeview-node--excluded"
   >
     <div class="v-treeview-node__root">
+      <div class="v-treeview-node__level">
+      </div>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
           one
@@ -44,6 +50,8 @@ exports[`VTreeView.ts should filter items 2`] = `
        class="v-treeview-node v-treeview-node--leaf"
   >
     <div class="v-treeview-node__root">
+      <div class="v-treeview-node__level">
+      </div>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
           two
@@ -60,6 +68,8 @@ exports[`VTreeView.ts should filter items using custom item filter 1`] = `
        class="v-treeview-node v-treeview-node--leaf v-treeview-node--excluded"
   >
     <div class="v-treeview-node__root">
+      <div class="v-treeview-node__level">
+      </div>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
           one
@@ -71,6 +81,8 @@ exports[`VTreeView.ts should filter items using custom item filter 1`] = `
        class="v-treeview-node v-treeview-node--leaf v-treeview-node--excluded"
   >
     <div class="v-treeview-node__root">
+      <div class="v-treeview-node__level">
+      </div>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
           two
@@ -87,6 +99,8 @@ exports[`VTreeView.ts should filter items using custom item filter 2`] = `
        class="v-treeview-node v-treeview-node--leaf"
   >
     <div class="v-treeview-node__root">
+      <div class="v-treeview-node__level">
+      </div>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
           one
@@ -98,9 +112,77 @@ exports[`VTreeView.ts should filter items using custom item filter 2`] = `
        class="v-treeview-node v-treeview-node--leaf v-treeview-node--excluded"
   >
     <div class="v-treeview-node__root">
+      <div class="v-treeview-node__level">
+      </div>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
           two
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts should handle initial active/open/selected values when using return-object prop 1`] = `
+<div class="v-treeview theme--light">
+  <div aria-expanded="false"
+       class="v-treeview-node v-treeview-node--leaf v-treeview-node--selected"
+  >
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__level">
+      </div>
+      <i role="button"
+         class="v-icon notranslate v-treeview-node__checkbox v-icon--link material-icons theme--light accent--text"
+      >
+        $checkboxOn
+      </i>
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          One
+        </div>
+      </div>
+    </div>
+  </div>
+  <div aria-expanded="true"
+       class="v-treeview-node"
+  >
+    <div class="v-treeview-node__root">
+      <i role="button"
+         class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </i>
+      <i role="button"
+         class="v-icon notranslate v-treeview-node__checkbox v-icon--link material-icons theme--light"
+      >
+        $checkboxOff
+      </i>
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          Two
+        </div>
+      </div>
+    </div>
+    <div class="v-treeview-node__children">
+      <div aria-expanded="false"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div class="v-treeview-node__root v-treeview-node--active primary--text">
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <i role="button"
+             class="v-icon notranslate v-treeview-node__checkbox v-icon--link material-icons theme--light"
+          >
+            $checkboxOff
+          </i>
+          <div class="v-treeview-node__content">
+            <div class="v-treeview-node__label">
+              Three
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -114,6 +196,8 @@ exports[`VTreeView.ts should handle replacing items with new array of equal leng
        class="v-treeview-node v-treeview-node--leaf"
   >
     <div class="v-treeview-node__root">
+      <div class="v-treeview-node__level">
+      </div>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
           one
@@ -125,6 +209,8 @@ exports[`VTreeView.ts should handle replacing items with new array of equal leng
        class="v-treeview-node v-treeview-node--leaf"
   >
     <div class="v-treeview-node__root">
+      <div class="v-treeview-node__level">
+      </div>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
           two
@@ -141,6 +227,8 @@ exports[`VTreeView.ts should handle replacing items with new array of equal leng
        class="v-treeview-node v-treeview-node--leaf"
   >
     <div class="v-treeview-node__root">
+      <div class="v-treeview-node__level">
+      </div>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
           one
@@ -152,6 +240,8 @@ exports[`VTreeView.ts should handle replacing items with new array of equal leng
        class="v-treeview-node v-treeview-node--leaf"
   >
     <div class="v-treeview-node__root">
+      <div class="v-treeview-node__level">
+      </div>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
           three
@@ -171,7 +261,7 @@ exports[`VTreeView.ts should load children when expanding 1`] = `
       <i role="button"
          class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
       >
-        arrow_drop_down
+        $subgroup
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -192,7 +282,7 @@ exports[`VTreeView.ts should load children when expanding 2`] = `
       <i role="button"
          class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
       >
-        arrow_drop_down
+        $subgroup
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -205,6 +295,10 @@ exports[`VTreeView.ts should load children when expanding 2`] = `
            class="v-treeview-node v-treeview-node--leaf"
       >
         <div class="v-treeview-node__root">
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
           <div class="v-treeview-node__content">
             <div class="v-treeview-node__label">
               Child
@@ -226,12 +320,12 @@ exports[`VTreeView.ts should load children when selecting, but not render 1`] = 
       <i role="button"
          class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
       >
-        arrow_drop_down
+        $subgroup
       </i>
       <i role="button"
          class="v-icon notranslate v-treeview-node__checkbox v-icon--link material-icons theme--light"
       >
-        check_box_outline_blank
+        $checkboxOff
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -252,12 +346,12 @@ exports[`VTreeView.ts should load children when selecting, but not render 2`] = 
       <i role="button"
          class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
       >
-        arrow_drop_down
+        $subgroup
       </i>
       <i role="button"
          class="v-icon notranslate v-treeview-node__checkbox v-icon--link material-icons theme--light accent--text"
       >
-        check_box
+        $checkboxOn
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -275,6 +369,8 @@ exports[`VTreeView.ts should not show expand icon when children is empty 1`] = `
        class="v-treeview-node v-treeview-node--leaf"
   >
     <div class="v-treeview-node__root">
+      <div class="v-treeview-node__level">
+      </div>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
         </div>
@@ -293,7 +389,7 @@ exports[`VTreeView.ts should open all children when using open-all prop 1`] = `
       <i role="button"
          class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
       >
-        arrow_drop_down
+        $subgroup
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -306,10 +402,12 @@ exports[`VTreeView.ts should open all children when using open-all prop 1`] = `
            class="v-treeview-node"
       >
         <div class="v-treeview-node__root">
+          <div class="v-treeview-node__level">
+          </div>
           <i role="button"
              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
           >
-            arrow_drop_down
+            $subgroup
           </i>
           <div class="v-treeview-node__content">
             <div class="v-treeview-node__label">
@@ -322,6 +420,12 @@ exports[`VTreeView.ts should open all children when using open-all prop 1`] = `
                class="v-treeview-node v-treeview-node--leaf"
           >
             <div class="v-treeview-node__root">
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
               <div class="v-treeview-node__content">
                 <div class="v-treeview-node__label">
                   Grandchild
@@ -335,6 +439,10 @@ exports[`VTreeView.ts should open all children when using open-all prop 1`] = `
            class="v-treeview-node v-treeview-node--leaf"
       >
         <div class="v-treeview-node__root">
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
           <div class="v-treeview-node__content">
             <div class="v-treeview-node__label">
               Child
@@ -356,7 +464,7 @@ exports[`VTreeView.ts should react to open changes 1`] = `
       <i role="button"
          class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
       >
-        arrow_drop_down
+        $subgroup
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -369,10 +477,12 @@ exports[`VTreeView.ts should react to open changes 1`] = `
            class="v-treeview-node"
       >
         <div class="v-treeview-node__root">
+          <div class="v-treeview-node__level">
+          </div>
           <i role="button"
              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
           >
-            arrow_drop_down
+            $subgroup
           </i>
           <div class="v-treeview-node__content">
             <div class="v-treeview-node__label">
@@ -385,6 +495,12 @@ exports[`VTreeView.ts should react to open changes 1`] = `
                class="v-treeview-node v-treeview-node--leaf"
           >
             <div class="v-treeview-node__root">
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
               <div class="v-treeview-node__content">
                 <div class="v-treeview-node__label">
                   Grandchild
@@ -398,6 +514,10 @@ exports[`VTreeView.ts should react to open changes 1`] = `
            class="v-treeview-node v-treeview-node--leaf"
       >
         <div class="v-treeview-node__root">
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
           <div class="v-treeview-node__content">
             <div class="v-treeview-node__label">
               Child
@@ -419,7 +539,7 @@ exports[`VTreeView.ts should react to open changes 2`] = `
       <i role="button"
          class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
       >
-        arrow_drop_down
+        $subgroup
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -432,10 +552,12 @@ exports[`VTreeView.ts should react to open changes 2`] = `
            class="v-treeview-node"
       >
         <div class="v-treeview-node__root">
+          <div class="v-treeview-node__level">
+          </div>
           <i role="button"
              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
           >
-            arrow_drop_down
+            $subgroup
           </i>
           <div class="v-treeview-node__content">
             <div class="v-treeview-node__label">
@@ -448,6 +570,10 @@ exports[`VTreeView.ts should react to open changes 2`] = `
            class="v-treeview-node v-treeview-node--leaf"
       >
         <div class="v-treeview-node__root">
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
           <div class="v-treeview-node__content">
             <div class="v-treeview-node__label">
               Child
@@ -469,7 +595,7 @@ exports[`VTreeView.ts should react to open changes 3`] = `
       <i role="button"
          class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
       >
-        arrow_drop_down
+        $subgroup
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -482,10 +608,12 @@ exports[`VTreeView.ts should react to open changes 3`] = `
            class="v-treeview-node"
       >
         <div class="v-treeview-node__root">
+          <div class="v-treeview-node__level">
+          </div>
           <i role="button"
              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
           >
-            arrow_drop_down
+            $subgroup
           </i>
           <div class="v-treeview-node__content">
             <div class="v-treeview-node__label">
@@ -498,6 +626,12 @@ exports[`VTreeView.ts should react to open changes 3`] = `
                class="v-treeview-node v-treeview-node--leaf"
           >
             <div class="v-treeview-node__root">
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
               <div class="v-treeview-node__content">
                 <div class="v-treeview-node__label">
                   Grandchild
@@ -511,6 +645,10 @@ exports[`VTreeView.ts should react to open changes 3`] = `
            class="v-treeview-node v-treeview-node--leaf"
       >
         <div class="v-treeview-node__root">
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
           <div class="v-treeview-node__content">
             <div class="v-treeview-node__label">
               Child
@@ -532,7 +670,7 @@ exports[`VTreeView.ts should react to open changes 4`] = `
       <i role="button"
          class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
       >
-        arrow_drop_down
+        $subgroup
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -553,7 +691,7 @@ exports[`VTreeView.ts should recalculate tree when loading async children using 
       <i role="button"
          class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
       >
-        arrow_drop_down
+        $subgroup
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -566,6 +704,10 @@ exports[`VTreeView.ts should recalculate tree when loading async children using 
            class="v-treeview-node v-treeview-node--leaf"
       >
         <div class="v-treeview-node__root">
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
           <div class="v-treeview-node__content">
             <div class="v-treeview-node__label">
               Two
@@ -584,6 +726,8 @@ exports[`VTreeView.ts should remove old nodes 1`] = `
        class="v-treeview-node v-treeview-node--leaf"
   >
     <div class="v-treeview-node__root">
+      <div class="v-treeview-node__level">
+      </div>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
           one
@@ -595,6 +739,8 @@ exports[`VTreeView.ts should remove old nodes 1`] = `
        class="v-treeview-node v-treeview-node--leaf"
   >
     <div class="v-treeview-node__root">
+      <div class="v-treeview-node__level">
+      </div>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
           two
@@ -611,6 +757,8 @@ exports[`VTreeView.ts should remove old nodes 2`] = `
        class="v-treeview-node v-treeview-node--leaf"
   >
     <div class="v-treeview-node__root">
+      <div class="v-treeview-node__level">
+      </div>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
           one
@@ -627,6 +775,8 @@ exports[`VTreeView.ts should remove old nodes 3`] = `
        class="v-treeview-node v-treeview-node--leaf"
   >
     <div class="v-treeview-node__root">
+      <div class="v-treeview-node__level">
+      </div>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
           one
@@ -638,6 +788,8 @@ exports[`VTreeView.ts should remove old nodes 3`] = `
        class="v-treeview-node v-treeview-node--leaf"
   >
     <div class="v-treeview-node__root">
+      <div class="v-treeview-node__level">
+      </div>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
           three
@@ -657,7 +809,7 @@ exports[`VTreeView.ts should render items 1`] = `
       <i role="button"
          class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
       >
-        arrow_drop_down
+        $subgroup
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -678,7 +830,7 @@ exports[`VTreeView.ts should render items in dense mode 1`] = `
       <i role="button"
          class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
       >
-        arrow_drop_down
+        $subgroup
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -730,7 +882,7 @@ exports[`VTreeView.ts should select only leaf nodes 1`] = `
       <i role="button"
          class="v-icon notranslate v-treeview-node__checkbox v-icon--link material-icons theme--light"
       >
-        $vuetify.icons.checkboxIndeterminate
+        $checkboxIndeterminate
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -816,7 +968,7 @@ exports[`VTreeView.ts should show expand icon when children is empty and load-ch
       <i role="button"
          class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
       >
-        arrow_drop_down
+        $subgroup
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -836,12 +988,12 @@ exports[`VTreeView.ts should update selection when selected prop changes 1`] = `
       <i role="button"
          class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
       >
-        arrow_drop_down
+        $subgroup
       </i>
       <i role="button"
          class="v-icon notranslate v-treeview-node__checkbox v-icon--link material-icons theme--light"
       >
-        check_box_outline_blank
+        $checkboxOff
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -862,12 +1014,12 @@ exports[`VTreeView.ts should update selection when selected prop changes 2`] = `
       <i role="button"
          class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
       >
-        arrow_drop_down
+        $subgroup
       </i>
       <i role="button"
          class="v-icon notranslate v-treeview-node__checkbox v-icon--link material-icons theme--light accent--text"
       >
-        check_box
+        $checkboxOn
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -880,10 +1032,14 @@ exports[`VTreeView.ts should update selection when selected prop changes 2`] = `
            class="v-treeview-node v-treeview-node--leaf v-treeview-node--selected"
       >
         <div class="v-treeview-node__root">
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
           <i role="button"
              class="v-icon notranslate v-treeview-node__checkbox v-icon--link material-icons theme--light accent--text"
           >
-            check_box
+            $checkboxOn
           </i>
           <div class="v-treeview-node__content">
             <div class="v-treeview-node__label">
@@ -906,12 +1062,12 @@ exports[`VTreeView.ts should update selection when selected prop changes 3`] = `
       <i role="button"
          class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
       >
-        arrow_drop_down
+        $subgroup
       </i>
       <i role="button"
          class="v-icon notranslate v-treeview-node__checkbox v-icon--link material-icons theme--light"
       >
-        check_box_outline_blank
+        $checkboxOff
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -924,10 +1080,14 @@ exports[`VTreeView.ts should update selection when selected prop changes 3`] = `
            class="v-treeview-node v-treeview-node--leaf"
       >
         <div class="v-treeview-node__root">
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
           <i role="button"
              class="v-icon notranslate v-treeview-node__checkbox v-icon--link material-icons theme--light"
           >
-            check_box_outline_blank
+            $checkboxOff
           </i>
           <div class="v-treeview-node__content">
             <div class="v-treeview-node__label">

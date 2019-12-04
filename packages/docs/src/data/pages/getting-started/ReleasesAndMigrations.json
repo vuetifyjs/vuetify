@@ -1,0 +1,37 @@
+{
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "releaseHeader"
+        },
+        { "type": "getting-started-releases" }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "migrationHeader"
+        },
+        { "type": "getting-started-migrations" }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "introduction/long-term-support",
+            "getting-started/contributing",
+            "introduction/roadmap"
+          ]
+        }
+      ]
+    }
+  ]
+}

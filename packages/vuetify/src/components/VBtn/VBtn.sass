@@ -1,5 +1,4 @@
 // Imports
-@import '../../styles/styles.sass'
 @import './_variables.scss'
 
 // Theme
@@ -43,7 +42,6 @@
   border-radius: $btn-border-radius
   display: inline-flex
   flex: 0 0 auto
-  font-size: $btn-font-size
   font-weight: $btn-font-weight
   letter-spacing: $btn-letter-spacing
   justify-content: center
@@ -52,13 +50,17 @@
   position: relative
   text-decoration: none
   text-indent: $btn-letter-spacing
-  text-transform: uppercase
+  text-transform: $btn-text-transform
   transition-duration: $btn-transition-duration
   transition-property: box-shadow, transform, opacity
   transition-timing-function: $btn-transition-fn
   user-select: none
   vertical-align: middle
   white-space: nowrap
+
+  @each $name, $size in $btn-font-sizes
+    &.v-size--#{$name}
+      font-size: $size
 
   &:before
     border-radius: inherit
@@ -86,15 +88,6 @@
         min-width: #{round($size * 1.777777777777778)}px // default ratio
         padding: 0 #{$size / 2.25}px
 
-  +rtl()
-    .v-icon--left
-      margin-left: 8px
-      margin-right: -4px
-
-    .v-icon--right
-      margin-left: -4px
-      margin-right: 8px
-
   > .v-btn__content .v-icon
     color: inherit
 
@@ -119,12 +112,22 @@
     width: $btn-icon-font-size
 
   .v-icon--left
-    margin-left: -4px
-    margin-right: 8px
+    +ltr()
+      margin-left: -4px
+      margin-right: 8px
+
+    +rtl()
+      margin-left: 8px
+      margin-right: -4px
 
   .v-icon--right
-    margin-left: 8px
-    margin-right: -4px
+    +ltr()
+      margin-left: 8px
+      margin-right: -4px
+
+    +rtl()
+      margin-left: -4px
+      margin-right: 8px
 
 .v-btn__loader
   align-items: center
@@ -185,11 +188,26 @@
   box-shadow: none
   pointer-events: none
 
+.v-btn--icon,
 .v-btn--fab
   min-height: 0
   min-width: 0
   padding: 0
 
+  @each $name, $size in $fab-icon-sizes
+    &.v-size--#{$name}
+      .v-icon
+        height: #{$size}px
+        font-size: #{$size}px
+        min-width: #{$size}px
+
+.v-btn--icon
+  @each $name, $size in $btn-sizes
+    &.v-size--#{$name}
+      height: #{$size}px
+      min-width: #{$size}px
+
+.v-btn--fab
   &.v-btn--contained
     +elevation(6)
 
@@ -203,17 +221,10 @@
   &.v-btn--absolute
     z-index: 4
 
-  @each $name, $size in $fab-icon-sizes
-    &.v-size--#{$name}
-      .v-icon
-        height: #{$size}px
-        font-size: #{$size}px
-        width: #{$size}px
-
   @each $name, $size in $fab-sizes
     &.v-size--#{$name}
       height: #{$size}px
-      width: #{$size}px
+      min-width: #{$size}px
 
       &.v-btn--absolute
         &.v-btn--bottom

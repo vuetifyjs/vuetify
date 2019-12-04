@@ -1,1 +1,9 @@
-{}
+{
+  "props": {
+    "nudgeBottom": "Deslocar o conteúdo para o final",
+    "nudgeLeft": "Deslocar o conteúdo para a esquerda",
+    "nudgeRight": "Deslocar o conteúdo para a direita",
+    "nudgeTop": "Deslocar o conteúdo para o topo",
+    "nudgeWidth": "Deslocar o tamanho do conteúdo"
+  }
+}

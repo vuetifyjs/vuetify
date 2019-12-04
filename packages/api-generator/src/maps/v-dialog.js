@@ -12,7 +12,7 @@ module.exports = {
     events: [
       {
         name: 'click:outside',
-        value: 'void',
+        value: 'MouseEvent',
       },
       {
         name: 'keydown',

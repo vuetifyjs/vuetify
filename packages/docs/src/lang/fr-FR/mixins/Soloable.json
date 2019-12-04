@@ -1,1 +1,7 @@
-{}
+{
+  "props": {
+    "solo": "Modifie le style du champ d'entrée",
+    "soloInverted": "Réduit l'opacité de l'élément jusqu'à son focus",
+    "flat": "Supprime l'élévation (ombre) ajoutée à l'élément lors de l'utilisation des propriétés **solo** ou **solo-inverted**"
+  }
+}

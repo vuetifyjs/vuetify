@@ -1,12 +1,9 @@
 <template>
-  <v-container
-    fluid
-    grid-list-xl
-  >
-    <v-layout wrap>
-      <v-flex
-        sm6
-        xs12
+  <v-container fluid>
+    <v-row>
+      <v-col
+        sm="6"
+        cols="12"
       >
         <v-text-field
           v-model="label"
@@ -20,9 +17,9 @@
           v-model="placeholder"
           label="Placeholder"
         ></v-text-field>
-      </v-flex>
+      </v-col>
 
-      <v-flex xs12 sm6>
+      <v-col cols="12" sm="6">
         <v-text-field
           v-model="rowHeight"
           :disabled="!autoGrow"
@@ -44,11 +41,11 @@
           style="width: 125px"
           type="number"
         ></v-text-field>
-      </v-flex>
+      </v-col>
 
-      <v-flex xs12></v-flex>
+      <v-col cols="12"></v-col>
 
-      <v-flex xs12 md6>
+      <v-col cols="12" md="6">
         <v-switch
           v-model="autoGrow"
           class="ma-1"
@@ -106,11 +103,11 @@
           class="ma-1"
           label="Solo"
         ></v-switch>
-      </v-flex>
+      </v-col>
 
-      <v-flex
-        xs12
-        md6
+      <v-col
+        cols="12"
+        md="6"
       >
         <v-sheet
           elevation="12"
@@ -141,8 +138,8 @@
             Value: {{ model }}
           </div>
         </v-sheet>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

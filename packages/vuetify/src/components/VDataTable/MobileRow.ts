@@ -1,7 +1,6 @@
-import Vue, { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
-import { TableHeader } from './mixins/header'
+import Vue, { VNode, PropType } from 'vue'
 import { getObjectValueByPath } from '../../util/helpers'
+import { DataTableHeader } from 'types'
 
 export default Vue.extend({
   name: 'row',
@@ -9,7 +8,7 @@ export default Vue.extend({
   functional: true,
 
   props: {
-    headers: Array as PropValidator<TableHeader[]>,
+    headers: Array as PropType<DataTableHeader[]>,
     item: Object,
     rtl: Boolean,
   },
@@ -17,7 +16,7 @@ export default Vue.extend({
   render (h, { props, slots, data }): VNode {
     const computedSlots = slots()
 
-    const columns: VNode[] = props.headers.map((header: TableHeader) => {
+    const columns: VNode[] = props.headers.map((header: DataTableHeader) => {
       const classes = {
         'v-data-table__mobile-row': true,
       }
@@ -34,19 +33,26 @@ export default Vue.extend({
       } else if (regularSlot) {
         children.push(regularSlot)
       } else {
-        children.push(value)
+        children.push(value == null ? value : String(value))
       }
 
-      return h('td', {
-        class: classes,
-      }, [
-        h('div', { staticClass: 'v-data-table__mobile-row__wrapper' }, [
-          header.value !== 'dataTableSelect' && h('div', { staticClass: 'v-data-table__mobile-row__header' }, [header.text]),
-          h('div', { staticClass: 'v-data-table__mobile-row__cell' }, children),
-        ]),
-      ])
+      const mobileRowChildren = [
+        h('div', {
+          staticClass: 'v-data-table__mobile-row__cell',
+        }, children),
+      ]
+
+      if (header.value !== 'dataTableSelect') {
+        mobileRowChildren.unshift(
+          h('div', {
+            staticClass: 'v-data-table__mobile-row__header',
+          }, [header.text])
+        )
+      }
+
+      return h('td', { class: classes }, mobileRowChildren)
     })
 
-    return h('tr', data, columns)
+    return h('tr', { ...data, staticClass: 'v-data-table__mobile-table-row' }, columns)
   },
 })

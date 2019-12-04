@@ -34,8 +34,8 @@
         <v-progress-linear color="purple" :height="10" indeterminate></v-progress-linear>
       </template>
 
-      <template v-if="isEnabled('item.data-table-select')" v-slot:item.data-table-select="{ on, props }">
-        <v-simple-checkbox color="green" v-bind="props" v-on="on"></v-simple-checkbox>
+      <template v-if="isEnabled('item.data-table-select')" v-slot:item.data-table-select="{ isSelected, select }">
+        <v-simple-checkbox color="green" :value="isSelected" @input="select($event)"></v-simple-checkbox>
       </template>
 
       <template v-if="isEnabled('item.<name>')" v-slot:item.name="{ item }">

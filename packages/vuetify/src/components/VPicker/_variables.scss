@@ -1,4 +1,6 @@
-$picker-border-radius: 2px !default;
+@import '../../styles/styles.sass';
+
+$picker-border-radius: $border-radius-root !default;
 $picker-title-padding: 16px !default;
 $picker-inactive-btn-opacity: .6 !default;
 $picker-active-btn-opacity: 1 !default;

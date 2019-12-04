@@ -1,9 +1,9 @@
 <template>
   <v-form>
-    <v-container grid-list-xl>
-      <v-layout wrap>
+    <v-container>
+      <v-row>
 
-        <v-flex xs12>
+        <v-col cols="12">
           <v-text-field
             v-model="message"
             :append-icon="marker ? 'mdi-map-marker' : 'mdi-map-marker-off'"
@@ -19,9 +19,9 @@
             @click:prepend="changeIcon"
             @click:clear="clearMessage"
           ></v-text-field>
-        </v-flex>
+        </v-col>
 
-      </v-layout>
+      </v-row>
     </v-container>
   </v-form>
 </template>

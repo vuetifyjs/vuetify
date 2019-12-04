@@ -127,4 +127,25 @@ describe('VColorPicker.ts', () => {
 
     expect(fn).toHaveBeenLastCalledWith({ r: 255, g: 0, b: 255, a: 1 })
   })
+
+  it('should not show alpha controls if given hex value without alpha', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: '#00FF00',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/9472
+  it('should work correctly when initial value is null', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: null,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

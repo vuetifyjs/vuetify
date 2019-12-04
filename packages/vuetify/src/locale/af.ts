@@ -1,7 +1,7 @@
 export default {
+  badge: 'badge',
   close: 'Close',
   dataIterator: {
-    pageText: '{0}-{1} van {2}',
     noResultsText: 'Geen ooreenstemmende resultate is gevind nie',
     loadingText: 'Loading item...',
   },
@@ -12,6 +12,7 @@ export default {
       sortAscending: ': Sorted ascending. Activate to sort descending.',
       sortNone: ': Not sorted. Activate to sort ascending.',
     },
+    sortBy: 'Sort by',
   },
   dataFooter: {
     itemsPerPageText: 'Aantal per bladsy:',
@@ -20,6 +21,7 @@ export default {
     prevPage: 'Vorige bladsy',
     firstPage: 'Eerste bladsy',
     lastPage: 'Laaste bladsy',
+    pageText: '{0}-{1} van {2}',
   },
   datePicker: {
     itemsSelected: '{0} gekies',
@@ -28,6 +30,9 @@ export default {
   carousel: {
     prev: 'Vorige visuele',
     next: 'Volgende visuele',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: '{0} meer',
@@ -35,5 +40,9 @@ export default {
   fileInput: {
     counter: '{0} files',
     counterSize: '{0} files ({1} in total)',
+  },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
   },
 }

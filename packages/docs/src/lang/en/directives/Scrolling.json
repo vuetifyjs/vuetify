@@ -1,13 +1,13 @@
 {
-  "header": "# Scrolling directive",
-  "headerText": "The `v-scroll` directive allows you to provide callbacks when the window or a specifically defined element are scrolled.",
+  "heading": "# Scrolling directive",
+  "headingText": "The `v-scroll` directive allows you to provide callbacks when the window or a specifically defined element are scrolled.",
   "examples": {
     "usage": {
       "desc": "The default behavior is to bind to the window. If no additional configuration options are needed, you can simply pass your callback function.",
       "uninverted": true
     },
     "options": {
-      "header": "### Scroll with options",
+      "heading": "### Scroll with options",
       "desc": "For a more fine tuned approach, you can designate the target to bind the scroll event listener.",
       "uninverted": true
     }

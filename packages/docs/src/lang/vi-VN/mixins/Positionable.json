@@ -1,1 +1,8 @@
-{}
+{
+  "props": {
+    "absolute": "Áp dụng thuộc tính **position: absolute**.",
+    "bottom": "Đưa nút về dưới cùng.",
+    "fixed": "Áp dụng thuộc tính **position: fixed**.",
+    "top": "Đưa nút về trên cùng."
+  }
+}

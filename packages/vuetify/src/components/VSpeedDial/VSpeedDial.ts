@@ -12,7 +12,7 @@ import ClickOutside from '../../directives/click-outside'
 // Types
 import mixins from '../../util/mixins'
 import { VNode, VNodeData } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { Prop } from 'vue/types/options'
 
 /* @vue/component */
 export default mixins(Positionable, Toggleable, Transitionable).extend({
@@ -22,12 +22,12 @@ export default mixins(Positionable, Toggleable, Transitionable).extend({
 
   props: {
     direction: {
-      type: String,
+      type: String as Prop<'top' | 'right' | 'bottom' | 'left'>,
       default: 'top',
       validator: (val: string) => {
         return ['top', 'right', 'bottom', 'left'].includes(val)
       },
-    } as PropValidator<'top' | 'right' | 'bottom' | 'left'>,
+    },
     openOnHover: Boolean,
     transition: {
       type: String,
@@ -46,6 +46,7 @@ export default mixins(Positionable, Toggleable, Transitionable).extend({
         'v-speed-dial--absolute': this.absolute,
         'v-speed-dial--fixed': this.fixed,
         [`v-speed-dial--direction-${this.direction}`]: true,
+        'v-speed-dial--is-active': this.isActive,
       }
     },
   },
@@ -71,7 +72,7 @@ export default mixins(Positionable, Toggleable, Transitionable).extend({
     if (this.isActive) {
       let btnCount = 0
       children = (this.$slots.default || []).map((b, i) => {
-        if (b.tag && typeof b.componentOptions !== 'undefined' && b.componentOptions.Ctor.options.name === 'v-btn') {
+        if (b.tag && typeof b.componentOptions !== 'undefined' && (b.componentOptions.Ctor.options.name === 'v-btn' || b.componentOptions.Ctor.options.name === 'v-tooltip')) {
           btnCount++
           return h('div', {
             style: {

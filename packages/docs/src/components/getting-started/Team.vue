@@ -31,9 +31,9 @@
         },
         {
           title: 'operations',
-          name: 'Ranee Leider',
-          email: 'ranee@vuetifyjs.com',
-          avatar: 'avatarStyle=Transparent&topType=LongHairStraight&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Surprised&eyebrowType=DefaultNatural&mouthType=Smile&skinColor=Light',
+          name: 'Heather Hill',
+          email: 'heather@vuetifyjs.com',
+          avatar: 'avatarStyle=Transparent&topType=LongHairStraight2&accessoriesType=Blank&hairColor=Brown&facialHairType=Blank&clotheType=ShirtVNeck&clotheColor=Pink&eyeType=Hearts&eyebrowType=Default&mouthType=Tongue&skinColor=Light',
         },
         {
           title: 'keeper',
@@ -59,6 +59,7 @@
           title: 'core',
           name: 'Andrew Henry',
           github: 'MajesticPotatoe',
+          linkedin: 'andrew-henry-01049830',
           avatar: 'avatarStyle=Transparent&topType=ShortHairShortRound&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=Hoodie&clotheColor=Heather&eyeType=Dizzy&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light',
         },
         {
@@ -73,6 +74,13 @@
           name: 'Dmitry Sharshakov',
           github: 'sh7dm',
           avatar: 'accessoriesType=Blank&avatarStyle=Transparent&clotheColor=Heather&clotheType=Hoodie&eyeType=Default&eyebrowType=Default&facialHairType=Blank&graphicType=Bear&hairColor=BrownDark&mouthType=Smile&skinColor=Pale&topType=ShortHairShortFlat',
+        },
+        {
+          title: 'core',
+          name: 'Sean Kimball',
+          github: 'chewy94',
+          linkedin: 'sean-kimball-b50922126',
+          avatar: 'avatarStyle=Transparent&clotheColor=Heather&clotheType=ShirtVNeck&eyeType=Happy&eyebrowType=FlatNatural&facialHairColor=Black&facialHairType=BeardLight&hairColor=Black&mouthType=Smile&skinColor=Pale&topType=ShortHairShortFlat',
         },
       ],
     }),

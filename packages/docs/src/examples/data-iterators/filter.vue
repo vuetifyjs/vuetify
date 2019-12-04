@@ -1,8 +1,5 @@
 <template>
-  <v-container
-    fluid
-    grid-list-md
-  >
+  <v-container fluid>
     <v-data-iterator
       :items="items"
       :items-per-page.sync="itemsPerPage"
@@ -49,7 +46,7 @@
                 color="blue"
                 :value="false"
               >
-                <v-icon>arrow_upward</v-icon>
+                <v-icon>mdi-arrow-up</v-icon>
               </v-btn>
               <v-btn
                 large
@@ -57,7 +54,7 @@
                 color="blue"
                 :value="true"
               >
-                <v-icon>arrow_downward</v-icon>
+                <v-icon>mdi-arrow-down</v-icon>
               </v-btn>
             </v-btn-toggle>
           </template>
@@ -65,16 +62,14 @@
       </template>
 
       <template v-slot:default="props">
-        <v-layout
-          wrap
-        >
-          <v-flex
+        <v-row>
+          <v-col
             v-for="item in props.items"
             :key="item.name"
-            xs12
-            sm6
-            md4
-            lg3
+            cols="12"
+            sm="6"
+            md="4"
+            lg="3"
           >
             <v-card>
               <v-card-title class="subheading font-weight-bold">{{ item.name }}</v-card-title>
@@ -85,19 +80,18 @@
                 <v-list-item
                   v-for="(key, index) in filteredKeys"
                   :key="index"
-                  :color="sortBy === key ? `blue lighten-4` : `white`"
                 >
-                  <v-list-item-content>{{ key }}:</v-list-item-content>
-                  <v-list-item-content class="align-end">{{ item[key.toLowerCase()] }}</v-list-item-content>
+                  <v-list-item-content :class="{ 'blue--text': sortBy === key }">{{ key }}:</v-list-item-content>
+                  <v-list-item-content class="align-end" :class="{ 'blue--text': sortBy === key }">{{ item[key.toLowerCase()] }}</v-list-item-content>
                 </v-list-item>
               </v-list>
             </v-card>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </template>
 
       <template v-slot:footer>
-        <v-layout mt-2 wrap align-center justify-center>
+        <v-row class="mt-2" align="center" justify="center">
           <span class="grey--text">Items per page</span>
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
@@ -109,7 +103,7 @@
                 v-on="on"
               >
                 {{ itemsPerPage }}
-                <v-icon>keyboard_arrow_down</v-icon>
+                <v-icon>mdi-chevron-down</v-icon>
               </v-btn>
             </template>
             <v-list>
@@ -138,7 +132,7 @@
             class="mr-1"
             @click="formerPage"
           >
-            <v-icon>keyboard_arrow_left</v-icon>
+            <v-icon>mdi-chevron-left</v-icon>
           </v-btn>
           <v-btn
             fab
@@ -147,9 +141,9 @@
             class="ml-1"
             @click="nextPage"
           >
-            <v-icon>keyboard_arrow_right</v-icon>
+            <v-icon>mdi-chevron-right</v-icon>
           </v-btn>
-        </v-layout>
+        </v-row>
       </template>
     </v-data-iterator>
   </v-container>

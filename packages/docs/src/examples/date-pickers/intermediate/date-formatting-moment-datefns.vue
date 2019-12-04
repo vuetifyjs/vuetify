@@ -1,11 +1,10 @@
 <template>
-  <v-container grid-list-md>
-    <v-layout wrap>
-      <v-flex xs12 lg6>
+  <v-container>
+    <v-row>
+      <v-col cols="12" lg="6">
         <v-menu
           v-model="menu1"
           :close-on-content-click="false"
-          full-width
           max-width="290"
         >
           <template v-slot:activator="{ on }">
@@ -15,6 +14,7 @@
               label="Formatted with Moment.js"
               readonly
               v-on="on"
+              @click:clear="date = null"
             ></v-text-field>
           </template>
           <v-date-picker
@@ -22,13 +22,12 @@
             @change="menu1 = false"
           ></v-date-picker>
         </v-menu>
-      </v-flex>
+      </v-col>
 
-      <v-flex xs12 lg6>
+      <v-col cols="12" lg="6">
         <v-menu
           v-model="menu2"
           :close-on-content-click="false"
-          full-width
           max-width="290"
         >
           <template v-slot:activator="{ on }">
@@ -38,6 +37,7 @@
               label="Formatted with datefns"
               readonly
               v-on="on"
+              @click:clear="date = null"
             ></v-text-field>
           </template>
           <v-date-picker
@@ -45,8 +45,8 @@
             @change="menu2 = false"
           ></v-date-picker>
         </v-menu>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

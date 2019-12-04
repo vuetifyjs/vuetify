@@ -8,8 +8,7 @@ import { getSlot, getSlotType } from '../../util/helpers'
 import { consoleError } from '../../util/console'
 
 // Types
-import { PropValidator } from 'vue/types/options'
-import { VNode } from 'vue'
+import { VNode, PropType } from 'vue'
 
 const baseMixins = mixins(
   Delayable,
@@ -22,26 +21,27 @@ export default baseMixins.extend({
 
   props: {
     activator: {
-      default: null,
+      default: null as unknown as PropType<string | HTMLElement | VNode | Element | null>,
       validator: (val: string | object) => {
         return ['string', 'object'].includes(typeof val)
       },
-    } as PropValidator<string | HTMLElement>,
+    },
     disabled: Boolean,
     internalActivator: Boolean,
     openOnHover: Boolean,
   },
 
   data: () => ({
-    activatorElement: null as null | HTMLElement,
+    // Do not use this directly, call getActivator() instead
+    activatorElement: null as HTMLElement | null,
     activatorNode: [] as VNode[],
+    events: ['click', 'mouseenter', 'mouseleave'],
+    listeners: {} as Record<string, (e: MouseEvent & KeyboardEvent) => void>,
   }),
 
   watch: {
-    activator () {
-      this.activatorElement = null
-      this.getActivator()
-    },
+    activator: 'resetActivator',
+    openOnHover: 'resetActivator',
   },
 
   mounted () {
@@ -50,18 +50,27 @@ export default baseMixins.extend({
     if (slotType && ['v-slot', 'normal'].includes(slotType)) {
       consoleError(`The activator slot must be bound, try '<template v-slot:activator="{ on }"><v-btn v-on="on">'`, this)
     }
+
+    this.addActivatorEvents()
+  },
+
+  beforeDestroy () {
+    this.removeActivatorEvents()
   },
 
   methods: {
-    getValueProxy (): object {
-      const self = this
-      return {
-        get value () {
-          return self.isActive
-        },
-        set value (isActive: boolean) {
-          self.isActive = isActive
-        },
+    addActivatorEvents () {
+      if (
+        !this.activator ||
+        this.disabled ||
+        !this.getActivator()
+      ) return
+
+      this.listeners = this.genActivatorListeners()
+      const keys = Object.keys(this.listeners)
+
+      for (const key of keys) {
+        this.getActivator()!.addEventListener(key, this.listeners[key] as any)
       }
     },
     genActivator () {
@@ -73,9 +82,6 @@ export default baseMixins.extend({
       this.activatorNode = node
 
       return node
-    },
-    getContentSlot () {
-      return getSlot(this, 'default', this.getValueProxy(), true)
     },
     genActivatorAttributes () {
       return {
@@ -101,7 +107,6 @@ export default baseMixins.extend({
       } else {
         listeners.click = (e: MouseEvent) => {
           const activator = this.getActivator(e)
-
           if (activator) activator.focus()
 
           this.isActive = !this.isActive
@@ -119,18 +124,72 @@ export default baseMixins.extend({
       if (this.activator) {
         const target = this.internalActivator ? this.$el : document
 
-        activator = typeof this.activator === 'string'
-          ? target.querySelector(this.activator)
-          : this.activator
+        if (typeof this.activator === 'string') {
+          // Selector
+          activator = target.querySelector(this.activator)
+        } else if ((this.activator as any).$el) {
+          // Component (ref)
+          activator = (this.activator as any).$el
+        } else {
+          // HTMLElement | Element
+          activator = this.activator
+        }
+      } else if (this.activatorNode.length === 1 || (this.activatorNode.length && !e)) {
+        // Use the contents of the activator slot
+        // There's either only one element in it or we
+        // don't have a click event to use as a last resort
+        const vm = this.activatorNode[0].componentInstance
+        if (
+          vm &&
+          vm.$options.mixins && //                         Activatable is indirectly used via Menuable
+          vm.$options.mixins.some((m: any) => m.options && ['activatable', 'menuable'].includes(m.options.name))
+        ) {
+          // Activator is actually another activatible component, use its activator (#8846)
+          activator = (vm as any).getActivator()
+        } else {
+          activator = this.activatorNode[0].elm as HTMLElement
+        }
       } else if (e) {
-        activator = e.currentTarget || e.target
-      } else if (this.activatorNode.length) {
-        activator = this.activatorNode[0].elm
+        // Activated by a click event
+        activator = (e.currentTarget || e.target) as HTMLElement
       }
 
-      this.activatorElement = activator as HTMLElement
+      this.activatorElement = activator
 
       return this.activatorElement
+    },
+    getContentSlot () {
+      return getSlot(this, 'default', this.getValueProxy(), true)
+    },
+    getValueProxy (): object {
+      const self = this
+      return {
+        get value () {
+          return self.isActive
+        },
+        set value (isActive: boolean) {
+          self.isActive = isActive
+        },
+      }
+    },
+    removeActivatorEvents () {
+      if (
+        !this.activator ||
+        !this.activatorElement
+      ) return
+
+      const keys = Object.keys(this.listeners)
+
+      for (const key of keys) {
+        (this.activatorElement as any).removeEventListener(key, this.listeners[key])
+      }
+
+      this.listeners = {}
+    },
+    resetActivator () {
+      this.activatorElement = null
+      this.getActivator()
+      this.addActivatorEvents()
     },
   },
 })

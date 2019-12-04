@@ -13,7 +13,8 @@ describe('VCalendar', () => {
   beforeEach(() => {
     mountFunction = (options?: MountOptions<Instance>) => {
       return mount(VCalendar, {
-        ...options,
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
         mocks: {
           $vuetify: {
             lang: {
@@ -21,6 +22,7 @@ describe('VCalendar', () => {
             },
           },
         },
+        ...options,
       })
     }
   })

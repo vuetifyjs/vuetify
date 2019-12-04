@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap align-center justify-space-around>
+  <v-row align="center" justify="space-around">
     <v-switch v-model="disabled" class="ma-2" label="Disabled"></v-switch>
     <v-switch v-model="readonly" class="ma-2" label="Readonly"></v-switch>
     <v-switch v-model="chips" class="ma-2" label="Chips"></v-switch>
@@ -11,7 +11,7 @@
     <v-switch v-model="prependSlot" class="ma-2" label="Prepend slot"></v-switch>
     <v-switch v-model="prependItemSlot" class="ma-2" label="Prepend item slot"></v-switch>
     <v-switch v-model="selectSlot" class="ma-2" label="Selection slot"></v-switch>
-    <v-flex xs12>
+    <v-col cols="12">
       <v-select
         v-model="model"
         :items="items"
@@ -37,8 +37,8 @@
           >(+{{ model.length - 1 }} others)</span>
         </template>
       </v-select>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

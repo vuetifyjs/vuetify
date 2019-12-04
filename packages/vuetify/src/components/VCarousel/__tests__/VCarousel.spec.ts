@@ -85,6 +85,10 @@ describe('VCarousel.ts', () => {
 
     expect(items).toHaveLength(3)
 
+    items.wrappers.forEach(item => {
+      expect(item.attributes()['aria-label']).toBeDefined()
+    })
+
     items.at(1).trigger('click')
 
     expect(wrapper.vm.internalIndex).toBe(1)

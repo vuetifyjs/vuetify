@@ -1,40 +1,40 @@
 <template>
   <v-container fluid>
-    <v-layout wrap class="dark--text">
-      <v-flex xs6>on</v-flex>
-      <v-flex xs6>off</v-flex>
-    </v-layout>
-    <v-layout wrap>
-      <v-flex xs6>
+    <v-row class="dark--text">
+      <v-col cols="6">on</v-col>
+      <v-col cols="6">off</v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="6">
         <v-switch value input-value="true"></v-switch>
-      </v-flex>
-      <v-flex xs6>
+      </v-col>
+      <v-col cols="6">
         <v-switch></v-switch>
-      </v-flex>
-    </v-layout>
-    <v-layout wrap class="dark--text">
-      <v-flex xs6>on disabled</v-flex>
-      <v-flex xs6>off disabled</v-flex>
-    </v-layout>
-    <v-layout wrap>
-      <v-flex xs6>
+      </v-col>
+    </v-row>
+    <v-row class="dark--text">
+      <v-col cols="6">on disabled</v-col>
+      <v-col cols="6">off disabled</v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="6">
         <v-switch value input-value="true" disabled></v-switch>
-      </v-flex>
-      <v-flex xs6>
+      </v-col>
+      <v-col cols="6">
         <v-switch disabled></v-switch>
-      </v-flex>
-    </v-layout>
-    <v-layout wrap class="dark--text">
-      <v-flex xs6>on loading</v-flex>
-      <v-flex xs6>off loading</v-flex>
-    </v-layout>
-    <v-layout wrap>
-      <v-flex xs6>
+      </v-col>
+    </v-row>
+    <v-row class="dark--text">
+      <v-col cols="6">on loading</v-col>
+      <v-col cols="6">off loading</v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="6">
         <v-switch loading="warning" value input-value="true"></v-switch>
-      </v-flex>
-      <v-flex xs6>
+      </v-col>
+      <v-col cols="6">
         <v-switch loading="warning"></v-switch>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>

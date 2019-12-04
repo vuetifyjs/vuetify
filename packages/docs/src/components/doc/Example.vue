@@ -6,7 +6,7 @@
     outlined
   >
     <v-toolbar
-      color="grey lighten-3"
+      :color="$vuetify.theme.dark ? 'grey darken-4' : 'grey lighten-3'"
       dense
       flat
     >
@@ -16,10 +16,16 @@
         small
       >
         <v-icon left>mdi-star</v-icon>
+
         <span>New in <strong>{{ newIn }}</strong></span>
       </v-chip>
+
       <v-spacer />
-      <v-tooltip bottom>
+
+      <v-tooltip
+        v-if="!$vuetify.theme.dark"
+        bottom
+      >
         <template v-slot:activator="{ on }">
           <v-btn
             aria-label="Invert example colors"
@@ -30,8 +36,10 @@
             <v-icon>mdi-invert-colors</v-icon>
           </v-btn>
         </template>
+
         Invert example colors
       </v-tooltip>
+
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <v-btn
@@ -43,8 +51,10 @@
             <v-icon>mdi-codepen</v-icon>
           </v-btn>
         </template>
+
         Edit in Codepen
       </v-tooltip>
+
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <v-btn
@@ -57,8 +67,10 @@
             <v-icon>mdi-github-circle</v-icon>
           </v-btn>
         </template>
+
         View on Github
       </v-tooltip>
+
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <v-btn
@@ -70,6 +82,7 @@
             <v-icon>mdi-code-tags</v-icon>
           </v-btn>
         </template>
+
         View source
       </v-tooltip>
     </v-toolbar>
@@ -119,8 +132,8 @@
             >
               <div :class="($vuetify.breakpoint.smAndUp) ? 'v-example__container' : ''">
                 <doc-markup
-                  :value="file"
                   :filename="false"
+                  :value="file"
                   class="mb-0"
                 >{{ parsed[section] }}</doc-markup>
               </div>
@@ -156,8 +169,9 @@
 <script>
   // Utilities
   import {
-    mapGetters,
-  } from 'vuex'
+    get,
+  } from 'vuex-pathify'
+
   import { getBranch } from '@/util/helpers'
   import kebabCase from 'lodash/kebabCase'
 
@@ -182,10 +196,8 @@
     }),
 
     computed: {
-      ...mapGetters('documentation', [
-        'namespace',
-        'page',
-      ]),
+      namespace: get('documentation/namespace'),
+      page: get('documentation/page'),
       internalValue () {
         if (this.value === Object(this.value)) return this.value
 

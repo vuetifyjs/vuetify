@@ -1,1 +1,22 @@
-{}
+{
+  "examples": {
+    "absolute": {
+      "desc": "Les positions de l'option `absolute` sont toujours en bas de leur conteneur parent."
+    },
+    "padless": {
+      "desc": "La prop`padless` supprime tous les espacements par défaut du composant de pied de page."
+    },
+    "indigo-footer": {
+      "desc": "Le composant de bas de page avec la couleur de fond d'Indigo et les icônes et le bouton des médias sociaux."
+    },
+    "teal-footer": {
+      "desc": "Le composant de pied de page avec un en-tête couleur turquoise et des colonnes et des lignes de liens."
+    }
+  },
+  "props": {
+    "absolute": "Mixins.Positionable.props.absolute",
+    "fixed": "Mixins.Positionable.props.fixed",
+    "inset": "Positionne la barre d'outils à partir d'une application `v-navigation-drawer`",
+    "padless": "Supprimer tous les espacements du pied de page"
+  }
+}

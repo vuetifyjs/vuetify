@@ -1,1 +1,5 @@
-{}
+{
+  "props": {
+    "disabled": "Vô hiệu hóa trường nhập"
+  }
+}

@@ -1,6 +1,6 @@
 {
-  "header": "# Tema",
-  "headerText": "Cambia fácilmente los colores de tu aplicación mediante código. Reconstruye las hojas de estilo que vienen por default y personaliza varios aspectos del framework para tus necesidades particulares. Si estás buscando el **Generador de Temas**, por favor ve [aquí](https://theme-generator.vuetifyjs.com).",
+  "heading": "# Tema",
+  "headingText": "Cambia fácilmente los colores de tu aplicación mediante código. Reconstruye las hojas de estilo que vienen por default y personaliza varios aspectos del framework para tus necesidades particulares. Si estás buscando el **Generador de Temas**, por favor ve [aquí](https://theme-generator.vuetifyjs.com).",
   "lightAndDarkHeader": "## Light y Dark",
   "customizingHeader": "## Personalizar",
   "customizingText1": "Por default, Vuetify tiene un tema estándar aplicado a todos sus componentes.",

@@ -1,9 +1,9 @@
 <template>
-  <v-layout wrap justify-space-around>
-    <v-flex md12 lg4 lg-offset8>
+  <v-row justify="space-around">
+    <v-col class="lg-offset8" md="12" lg="4">
       <v-time-picker v-model="e7" format="24hr"></v-time-picker>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

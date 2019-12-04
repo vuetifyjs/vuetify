@@ -119,6 +119,23 @@
               "value": "ts_theme_item"
             }
           ]
+        },
+        {
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "disableSubheader"
+            },
+            {
+              "type": "text",
+              "lang": "disableText1"
+            },
+            {
+              "type": "markup",
+              "value": "js_vuetify_use_disable_theme"
+            }
+          ]
         }
       ]
     },
@@ -134,21 +151,16 @@
           "lang": "optionText1"
         },
         {
-          "type": "section",
-          "children": [
-            {
-              "type": "heading",
-              "lang": "optionHeader2"
-            },
-            {
-              "type": "text",
-              "lang": "optionText3"
-            },
-            {
-              "type": "markup",
-              "value": "js_minify_theme"
-            }
-          ]
+          "type": "heading",
+          "lang": "optionHeader2"
+        },
+        {
+          "type": "text",
+          "lang": "optionText3"
+        },
+        {
+          "type": "markup",
+          "value": "js_minify_theme"
         },
         {
           "type": "section",
@@ -206,6 +218,45 @@
             {
               "type": "markup",
               "value": "js_vuetify_csp"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "provideHeading1"
+        },
+        {
+          "type": "text",
+          "lang": "provideText1"
+        },
+        {
+          "type": "section",
+          "children": [
+            {
+              "type": "section",
+              "children": [
+                {
+                  "type": "doc-api-items",
+                  "value": ["v-theme-provider"]
+                },
+                {
+                  "type": "heading",
+                  "lang": "provideHeading2"
+                },
+                {
+                  "type": "text",
+                  "lang": "provideText2"
+                },
+                {
+                  "type": "example",
+                  "value": "provider"
+                }
+              ]
             }
           ]
         }

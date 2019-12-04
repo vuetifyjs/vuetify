@@ -317,11 +317,11 @@ describe('calendar-with-intervals.ts', () => {
       },
     })
     expect(typeof wrapper.vm.showIntervalLabelDefault).toBe('function')
-    expect(wrapper.vm.showIntervalLabelDefault({})).toBeFalsy()
+    expect(wrapper.vm.showIntervalLabelDefault({})).toBeTruthy()
 
-    expect(wrapper.vm.showIntervalLabelDefault({ hour: 0, minute: 5 } as VTimestamp)).toBeFalsy()
-    expect(wrapper.vm.showIntervalLabelDefault({ hour: 12, minute: 30 } as VTimestamp)).toBeFalsy()
+    expect(wrapper.vm.showIntervalLabelDefault({ hour: 0, minute: 5 } as VTimestamp)).toBeTruthy()
+    expect(wrapper.vm.showIntervalLabelDefault({ hour: 12, minute: 30 } as VTimestamp)).toBeTruthy()
     expect(wrapper.vm.showIntervalLabelDefault({ hour: 13, minute: 0 } as VTimestamp)).toBeTruthy()
-    expect(wrapper.vm.showIntervalLabelDefault({ hour: 13, minute: 30 } as VTimestamp)).toBeFalsy()
+    expect(wrapper.vm.showIntervalLabelDefault({ hour: 13, minute: 30 } as VTimestamp)).toBeTruthy()
   })
 })

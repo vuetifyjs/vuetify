@@ -17,18 +17,17 @@
           <h2 class="display-1 white--text font-weight-light">Title 1</h2>
         </v-card-title>
         <v-container>
-          <v-layout>
-            <v-flex xs12 md10>
+          <v-row>
+            <v-col cols="12" md="10">
               Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit.
-            </v-flex>
-            <v-flex
-              md2
-              hidden-sm-and-down
-              text-right
+            </v-col>
+            <v-col
+              class="hidden-sm-and-down text-right"
+              md="2"
             >
               <v-icon size="64">mdi-calendar-text</v-icon>
-            </v-flex>
-          </v-layout>
+            </v-col>
+          </v-row>
         </v-container>
       </v-card>
     </v-timeline-item>
@@ -48,14 +47,14 @@
           >mdi-home-outline</v-icon>
         </v-card-title>
         <v-container>
-          <v-layout wrap>
-            <v-flex xs12 md8>
+          <v-row>
+            <v-col cols="12" md="8">
               Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit.
-            </v-flex>
-            <v-flex xs12 md4>
+            </v-col>
+            <v-col cols="12" md="4">
               Lorem ipsum dolor sit amet, no nam oblique veritus.
-            </v-flex>
-          </v-layout>
+            </v-col>
+          </v-row>
         </v-container>
       </v-card>
     </v-timeline-item>
@@ -77,16 +76,16 @@
           <h2 class="display-1 white--text font-weight-light">Title 3</h2>
         </v-card-title>
         <v-container>
-          <v-layout wrap>
-            <v-flex
+          <v-row>
+            <v-col
               v-for="n in 3"
               :key="n"
-              xs12
-              md4
+              cols="12"
+              md="4"
             >
               Lorem ipsum dolor sit amet, no nam oblique veritus no nam oblique.
-            </v-flex>
-          </v-layout>
+            </v-col>
+          </v-row>
         </v-container>
       </v-card>
     </v-timeline-item>
@@ -108,14 +107,14 @@
           </v-icon>
         </v-card-title>
         <v-container>
-          <v-layout wrap>
-            <v-flex md2 hidden-sm-and-down>
+          <v-row>
+            <v-col class="hidden-sm-and-down" md="2">
               <v-icon size="64">mdi-server-network</v-icon>
-            </v-flex>
-            <v-flex xs12 md10>
+            </v-col>
+            <v-col cols="12" md="10">
               Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus.
-            </v-flex>
-          </v-layout>
+            </v-col>
+          </v-row>
         </v-container>
       </v-card>
     </v-timeline-item>
@@ -137,11 +136,11 @@
           <h2 class="display-1 white--text font-weight-light">Title 5</h2>
         </v-card-title>
         <v-container>
-          <v-layout>
-            <v-flex>
+          <v-row>
+            <v-col>
               Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus, vix an salutandi sententiae.
-            </v-flex>
-          </v-layout>
+            </v-col>
+          </v-row>
         </v-container>
       </v-card>
     </v-timeline-item>

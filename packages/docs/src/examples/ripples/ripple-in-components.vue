@@ -1,8 +1,7 @@
 <template>
-  <v-layout
-    justify-space-around
-    py-12
-    wrap
+  <v-row
+    class="py-12"
+    justify="space-around"
   >
     <v-btn
       color="primary"
@@ -27,5 +26,5 @@
     >
       With red ripple
     </v-btn>
-  </v-layout>
+  </v-row>
 </template>

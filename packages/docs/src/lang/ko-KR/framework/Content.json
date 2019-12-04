@@ -1,6 +1,6 @@
 {
-  "header": "# 컨텐츠 (Content)",
-  "headerText": "Vuetify엔 여러 표준 요소들을 위한 커스텀 스타일이 있습니다.",
+  "heading": "# 컨텐츠 (Content)",
+  "headingText": "Vuetify엔 여러 표준 요소들을 위한 커스텀 스타일이 있습니다.",
   "blockquoteHeader": "## 인용 블럭(Block quote)",
   "paragraphsHeader": "## 단락/패러그래프 (Paragraphs)",
   "codeHeader": "## 코드 (Code)",

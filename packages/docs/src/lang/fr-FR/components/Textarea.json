@@ -1,10 +1,50 @@
 {
+  "examples": {
+    "icon": {
+      "heading": "### Icônes",
+      "desc": "Les props `append-icon` et `prepend-icon` aident à ajouter un contexte à `v-textarea`."
+    },
+    "background-color": {
+      "desc": "Les props `background-color` et `color` vous donnent plus de contrôle sur le style `v-textarea`'s."
+    },
+    "browser-autocomplete": {
+      "desc": "La prop`autocomplete` vous donne l'option pour activer le navigateur pour prédire l'entrée de l'utilisateur."
+    },
+    "clearable": {
+      "heading": "### Effaçable",
+      "desc": "Vous pouvez effacer le texte d'un `v-textarea` en utilisant le prop`clearable` et personnaliser l'icône utilisée avec le prop`clearable-icon`."
+    },
+    "counter": {
+      "heading": "### Compteur",
+      "desc": "Le prop`counter` informe l'utilisateur d'une limite de caractères pour le `v-textarea`."
+    },
+    "no-resize": {
+      "desc": "`v-textarea`'s a la possibilité de rester la même taille, quelle que soit la taille de leur contenu, en utilisant le prop`no-resize`."
+    },
+    "rows": {
+      "desc": "Le prop`rows` vous permet de définir combien de lignes le champ textuel a, lorsqu'il est combiné avec le prop`row-height` vous pouvez personnaliser plus loin vos lignes en définissant leur hauteur."
+    },
+    "signup-box": {
+      "desc": "Utilisant des styles alternatifs d'entrée, vous pouvez créer des interfaces incroyables qui sont faciles à construire et faciles à utiliser."
+    }
+  },
   "props": {
-    "value": "Components.Inputs.props.value"
+    "autoGrow": "Augmenter automatiquement la zone de texte en fonction de la quantité de texte",
+    "dark": "Components.Inputs.props.dark",
+    "noResize": "Remove resize handle",
+    "rowHeight": "Valeur de hauteur pour chaque ligne. Nécessite l'utilisation de la prop **auto-grow** .",
+    "rows": "Nombre de lignes par défaut",
+    "value": "Components.Inputs.props.value",
+    "append": "Components.Inputs.props.append",
+    "append-outer": "Components.Inputs.props['append-outer']",
+    "prepend": "Components.Inputs.props.prepend",
+    "prepend-inner": "Components.Inputs.props['prepend-inner']"
   },
   "slots": {
     "append": "Components.Inputs.slots.append",
-    "prepend": "Components.Inputs.slots.prepend"
+    "append-outer": "Ajoute un élément dans le contenu de l'entrée",
+    "prepend": "Components.Inputs.slots.prepend",
+    "prepend-inner": "Empêche un élément dans le contenu de l'entrée"
   },
   "events": {
     "change": "Components.Inputs.events.change",
@@ -13,6 +53,7 @@
     "click:clear": "Components.TextFields.events['click:clear']",
     "click:prepend": "Components.Inputs.events['click:prepend']",
     "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
+    "keydown": "Émis lorsque **n'importe quelle** touche est pressée, la zone de texte doit être concentrée",
     "update:error": "Mixins.Validatable.events['update:error']"
   }
 }
