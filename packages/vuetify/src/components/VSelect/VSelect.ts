@@ -47,6 +47,7 @@ interface options extends InstanceType<typeof baseMixins> {
     label: HTMLElement
     input: HTMLInputElement
     'prepend-inner': HTMLElement
+    'append-inner': HTMLElement
     prefix: HTMLElement
     suffix: HTMLElement
   }
@@ -559,10 +560,12 @@ export default baseMixins.extend<options>().extend({
       }
       this.selectedIndex = -1
     },
-    onClick () {
+    onClick (e: MouseEvent) {
       if (this.isDisabled) return
 
-      this.isMenuActive = true
+      if (!this.isAppendInner(e.target)) {
+        this.isMenuActive = true
+      }
 
       if (!this.isFocused) {
         this.isFocused = true
@@ -664,16 +667,10 @@ export default baseMixins.extend<options>().extend({
     },
     onMouseUp (e: MouseEvent) {
       if (this.hasMouseDown && e.which !== 3) {
-        const appendInner = this.$refs['append-inner']
-
         // If append inner is present
         // and the target is itself
         // or inside, toggle menu
-        if (this.isMenuActive &&
-          appendInner &&
-          (appendInner === e.target ||
-          (appendInner as { [key: string]: any }).contains(e.target))
-        ) {
+        if (this.isAppendInner(e.target)) {
           this.$nextTick(() => (this.isMenuActive = !this.isMenuActive))
         // If user is clicking in the container
         // and field is enclosed, activate it
@@ -812,6 +809,13 @@ export default baseMixins.extend<options>().extend({
       const oldValue = this.internalValue
       this.internalValue = value
       value !== oldValue && this.$emit('change', value)
+    },
+    isAppendInner (target: any) {
+      // return true if append inner is present
+      // and the target is itself or inside
+      const appendInner = this.$refs['append-inner']
+
+      return appendInner && (appendInner === target || appendInner.contains(target))
     },
   },
 })

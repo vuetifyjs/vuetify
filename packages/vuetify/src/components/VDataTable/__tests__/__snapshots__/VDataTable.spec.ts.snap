@@ -3131,7 +3131,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-492"
+               aria-owns="list-549"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -3140,7 +3140,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
                   10
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-492"
+                       id="input-549"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -3155,6 +3155,9 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
