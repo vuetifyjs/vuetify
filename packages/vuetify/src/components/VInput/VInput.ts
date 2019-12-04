@@ -8,7 +8,7 @@ import VMessages from '../VMessages'
 
 // Mixins
 import BindsAttrs from '../../mixins/binds-attrs'
-import Validatable, { VuetifyRuleValidator } from '../../mixins/validatable'
+import Validatable from '../../mixins/validatable'
 
 // Utilities
 import {
@@ -20,6 +20,7 @@ import {
 // Types
 import { VNode, VNodeData, PropType } from 'vue'
 import mixins from '../../util/mixins'
+import { InputValidationRule } from 'types'
 
 const baseMixins = mixins(
   BindsAttrs,
@@ -115,7 +116,7 @@ export default baseMixins.extend<options>().extend({
 
       if (!this.hasMessages) return []
 
-      return this.validations.map((validation: string | VuetifyRuleValidator) => {
+      return this.validations.map((validation: string | InputValidationRule) => {
         if (typeof validation === 'string') return validation
 
         const validationResult = validation(this.internalValue)
