@@ -389,7 +389,7 @@ exports[`VTreeView.ts should open all children when open-all prop changes to tru
       <i role="button"
          class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
       >
-        arrow_drop_down
+        $subgroup
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -402,10 +402,12 @@ exports[`VTreeView.ts should open all children when open-all prop changes to tru
            class="v-treeview-node"
       >
         <div class="v-treeview-node__root">
+          <div class="v-treeview-node__level">
+          </div>
           <i role="button"
              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
           >
-            arrow_drop_down
+            $subgroup
           </i>
           <div class="v-treeview-node__content">
             <div class="v-treeview-node__label">
@@ -418,6 +420,12 @@ exports[`VTreeView.ts should open all children when open-all prop changes to tru
                class="v-treeview-node v-treeview-node--leaf"
           >
             <div class="v-treeview-node__root">
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
               <div class="v-treeview-node__content">
                 <div class="v-treeview-node__label">
                   Grandchild
@@ -431,6 +439,10 @@ exports[`VTreeView.ts should open all children when open-all prop changes to tru
            class="v-treeview-node v-treeview-node--leaf"
       >
         <div class="v-treeview-node__root">
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
           <div class="v-treeview-node__content">
             <div class="v-treeview-node__label">
               Child
