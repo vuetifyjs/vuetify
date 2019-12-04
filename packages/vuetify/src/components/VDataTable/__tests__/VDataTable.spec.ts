@@ -112,6 +112,7 @@ const testItems = [
   },
 ]
 
+/* eslint-disable max-statements */
 describe('VDataTable.ts', () => {
   type Instance = InstanceType<typeof VDataTable>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
@@ -344,5 +345,267 @@ describe('VDataTable.ts', () => {
     await wrapper.vm.$nextTick()
 
     expect(fn).toHaveBeenCalled()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8254
+  it('should pass kebab-case footer props correctly', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: [],
+        items: [],
+        footerProps: {
+          'items-per-page-text': 'Foo:',
+        },
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8266
+  it('should use options prop for initial values', () => {
+    const fn = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+        options: {
+          page: 2,
+          itemsPerPage: 5,
+        },
+      },
+      listeners: {
+        'update:options': fn,
+      },
+    })
+
+    expect(fn).toHaveBeenCalledWith(expect.objectContaining({
+      page: 2,
+    }))
+  })
+
+  it('should render footer.page-text slot content', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: [],
+        items: [{}],
+      },
+      scopedSlots: {
+        'footer.page-text' ({ pageStart, pageStop }) {
+          return this.$createElement('div', [`foo ${pageStart} bar ${pageStop}`])
+        },
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8359
+  it('should not limit page to current item count when using server-items-length', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: [],
+        page: 2,
+        itemsPerPage: 5,
+        serverItemsLength: 0,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      items: testItems.slice(5),
+      serverItemsLength: 20,
+    })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should not search column with filterable set to false', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: testItems,
+        headers: [
+          {
+            text: 'Dessert (100g serving)',
+            align: 'left',
+            filterable: false,
+            value: 'name',
+          },
+          { text: 'Calories', value: 'calories' },
+          { text: 'Fat (g)', value: 'fat' },
+          { text: 'Carbs (g)', value: 'carbs' },
+          { text: 'Protein (g)', value: 'protein' },
+          { text: 'Iron (%)', value: 'iron' },
+        ],
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      search: 'cup',
+    })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should not search column with filterable set to false and has filter function', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: testItems,
+        headers: [
+          {
+            text: 'Dessert (100g serving)',
+            align: 'left',
+            value: 'name',
+          },
+          { text: 'Calories', value: 'calories', filter: v => v > 400 },
+          { text: 'Fat (g)', value: 'fat' },
+          { text: 'Carbs (g)', value: 'carbs' },
+          { text: 'Protein (g)', value: 'protein' },
+          { text: 'Iron (%)', value: 'iron' },
+        ],
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      headers: [
+        {
+          text: 'Dessert (100g serving)',
+          align: 'left',
+          value: 'name',
+        },
+        { text: 'Calories', value: 'calories', filter: v => v > 400, filterable: false },
+        { text: 'Fat (g)', value: 'fat' },
+        { text: 'Carbs (g)', value: 'carbs' },
+        { text: 'Protein (g)', value: 'protein' },
+        { text: 'Iron (%)', value: 'iron' },
+      ],
+    })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8359
+  it('should limit page to current page count if not using server-items-length', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+        page: 3,
+        itemsPerPage: 5,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8184
+  it('should default to first option in itemsPerPageOptions if it does not include itemsPerPage', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+        footerProps: {
+          itemsPerPageOptions: [6, 7],
+        },
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8817
+  it('should handle object when checking if it should default to first option in itemsPerPageOptions', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+        itemsPerPage: -1,
+        footerProps: {
+          itemsPerPageOptions: [6, { text: 'All', value: -1 }],
+        },
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/9599
+  it('should not immediately emit items-per-page', async () => {
+    const itemsPerPage = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+        footerProps: {
+          itemsPerPageOptions: [6, 7],
+        },
+      },
+      listeners: {
+        'update:itemsPerPage': itemsPerPage,
+      },
+    })
+
+    expect(itemsPerPage).not.toHaveBeenCalled()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/9010
+  it('should change page if item count decreases below page start', async () => {
+    const page = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems.slice(0, 4),
+        itemsPerPage: 2,
+        footerProps: {
+          itemsPerPageOptions: [2],
+        },
+        page: 2,
+      },
+      listeners: {
+        'update:page': page,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ items: testItems.slice(0, 2) })
+    await wrapper.vm.$nextTick()
+
+    expect(page).toHaveBeenCalledWith(1)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8477
+  it('should emit two item-selected events when using single-select prop and selecting new item', async () => {
+    const itemSelected = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        itemKey: 'name',
+        items: testItems.slice(0, 2),
+        value: [testItems[0]],
+        showSelect: true,
+        singleSelect: true,
+      },
+      listeners: {
+        'item-selected': itemSelected,
+      },
+    })
+
+    const checkbox = wrapper.findAll('.v-data-table__checkbox').at(1)
+    checkbox.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(itemSelected).toHaveBeenCalledTimes(2)
+    expect(itemSelected).toHaveBeenCalledWith({ item: testItems[0], value: false })
+    expect(itemSelected).toHaveBeenCalledWith({ item: testItems[1], value: true })
   })
 })

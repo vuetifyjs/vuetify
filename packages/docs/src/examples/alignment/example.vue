@@ -6,6 +6,8 @@
       <p class="text-sm-left">Left align on small viewport sizes</p>
       <p class="text-center">Center align on all viewport sizes</p>
       <p class="text-right">Right align on all viewport sizes</p>
+      <p class="text-start">Start align on all viewport sizes</p>
+      <p class="text-end">End align on all viewport sizes</p>
     </v-card-text>
   </v-card>
 </template>

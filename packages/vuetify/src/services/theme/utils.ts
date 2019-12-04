@@ -128,13 +128,13 @@ export function genVariations (name: string, value: ColorInt): Record<string, st
   return values
 }
 
-function lighten (value: ColorInt, amount: number): ColorInt {
+export function lighten (value: ColorInt, amount: number): ColorInt {
   const lab = LAB.fromXYZ(sRGB.toXYZ(value))
   lab[0] = lab[0] + amount * 10
   return sRGB.fromXYZ(LAB.toXYZ(lab))
 }
 
-function darken (value: ColorInt, amount: number): ColorInt {
+export function darken (value: ColorInt, amount: number): ColorInt {
   const lab = LAB.fromXYZ(sRGB.toXYZ(value))
   lab[0] = lab[0] - amount * 10
   return sRGB.fromXYZ(LAB.toXYZ(lab))

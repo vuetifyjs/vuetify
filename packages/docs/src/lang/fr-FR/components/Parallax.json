@@ -1,1 +1,18 @@
-{}
+{
+  "examples": {
+    "usage": {
+      "desc": "Une parallaxe provoque un déplacement d'une image de fond lorsque l'utilisateur fait défiler la page."
+    },
+    "content": {
+      "desc": "Vous pouvez également placer tout contenu dans la parallaxe. Cela vous permet d'utiliser la parallaxe comme image \"hero\"."
+    },
+    "custom-height": {
+      "desc": "Vous pouvez spécifier une hauteur personnalisée sur une parallaxe. Gardez à l'esprit que cela peut casser la parallaxe si la taille de votre image est incorrecte"
+    }
+  },
+  "props": {
+    "alt": "Attache une propriété alternative à l'image du parallaxe",
+    "height": "Mixins.Measurable.props.height",
+    "src": "L'image sur laquelle appliquer la parallaxe"
+  }
+}

@@ -1,7 +1,8 @@
 {
   "props": {
-    "activeClass": "crwdns23542:0crwdne23542:0",
-    "mandatory": "crwdns23544:0crwdne23544:0",
-    "multiple": "crwdns23546:0crwdne23546:0"
+    "activeClass": "crwdns37356:0crwdne37356:0",
+    "mandatory": "crwdns37358:0crwdne37358:0",
+    "max": "crwdns37360:0crwdne37360:0",
+    "multiple": "crwdns37362:0crwdne37362:0"
   }
 }

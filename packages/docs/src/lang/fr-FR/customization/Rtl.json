@@ -1,0 +1,4 @@
+{
+  "bidText1": "Formulaire RTL",
+  "bidText2": "Vous pouvez également modifier cette option dynamiquement à n'importe quel moment en modifiant la valeur **rtl** sur l'objet vuetify."
+}

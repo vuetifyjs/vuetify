@@ -12,14 +12,21 @@
         style="opacity: 0.22"
       ></v-divider>
 
-      <v-layout align-center>
-        <div>Proin magna. Vivamus in erat ut urna cursus vestibulum. Etiam imperdiet imperdiet orci.</div>
+      <v-row
+        align="center"
+        no-gutters
+      >
+        <v-col class="grow">Proin magna. Vivamus in erat ut urna cursus vestibulum. Etiam imperdiet imperdiet orci.</v-col>
         <v-spacer></v-spacer>
-        <v-btn
-          color="info"
-          outlined
-        >Okay</v-btn>
-      </v-layout>
+        <v-col class="shrink">
+          <v-btn
+            color="info"
+            outlined
+          >
+            Okay
+          </v-btn>
+        </v-col>
+      </v-row>
     </v-alert>
     <v-alert
       text

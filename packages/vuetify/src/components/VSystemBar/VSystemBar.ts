@@ -67,6 +67,7 @@ export default mixins(
       staticClass: 'v-system-bar',
       class: this.classes,
       style: this.styles,
+      on: this.$listeners,
     }
 
     return h('div', this.setBackgroundColor(this.color, data), getSlot(this))

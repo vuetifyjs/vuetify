@@ -1,12 +1,19 @@
 {
-  "1500": [
+  "Premiere": [
     {
-      "name": "Fractal Industries",
-      "href": "https://www.fractalindustries.com/",
-      "logo": "backers/fractal-industries.png"
+      "name": "QOMPLX",
+      "href": "https://www.qomplx.com/",
+      "logo": "backers/QOMPLX.png",
+      "darkLogo": "backers/QOMPLX-dark.png"
+    },
+    {
+      "name": "Vueconf.US",
+      "href": "http://vueconf.us/",
+      "logo": "backers/vueconf_us.png",
+      "darkLogo": "backers/vueconf_us-dark.png"
     }
   ],
-  "500": [
+  "Diamond": [
     {
       "type": "Patron",
       "name": "LMAX Exchange",
@@ -16,15 +23,20 @@
     {
       "name": "Intygrate",
       "logo": "backers/intygrate.png",
-      "href": "http://intygrate.com/"
+      "href": "https://intygrate.com/"
     },
     {
       "name": "ResaleAI",
       "logo": "backers/resaleai_logo_blue.svg",
-      "href": "http://resaleai.com/"
+      "href": "https://resaleai.com/"
+    },
+    {
+      "name": "VueMastery",
+      "logo": "backers/vuemastery.svg",
+      "href": "https://vuemastery.com/"
     }
   ],
-  "250": [
+  "Platinum": [
     {
       "name": "rateGenius",
       "href": "https://application.rategenius.com/",
@@ -32,7 +44,7 @@
     },
     {
       "name": "Clearblue Technologies",
-      "href": "http://www.clearbluetechnologies.com/",
+      "href": "https://www.clearbluetechnologies.com/",
       "logo": "backers/clear-blue.png"
     },
     {
@@ -44,9 +56,19 @@
       "name": "DigitalMaas",
       "href": "https://www.brightree.com/",
       "logo": "backers/brightree.svg"
+    },
+    {
+      "name": "Quanted Square",
+      "href": "https://analytics.quantedsquare.com/",
+      "logo": "backers/quanted-square.svg"
+    },
+    {
+      "name": "Getform",
+      "href": "https://getform.io/",
+      "logo": "backers/getform.png"
     }
   ],
-  "50": [
+  "Gold": [
     {
       "name": "Deister Software",
       "href": "http://www.deister.es/",
@@ -59,7 +81,7 @@
     },
     {
       "name": "Zweidenker",
-      "href": "http://zweidenker.de/",
+      "href": "https://zweidenker.de/",
       "logo": "backers/zweidenker-logo-grey.svg"
     },
     {
@@ -84,7 +106,7 @@
     },
     {
       "name": "Elfo",
-      "href": "http://www.elfo.net/",
+      "href": "https://www.elfo.net/",
       "logo": "backers/elfo.svg"
     },
     {
@@ -114,8 +136,18 @@
     },
     {
       "name": "Toolio",
-      "href": "http://www.toolio.com/",
+      "href": "https://www.toolio.com/",
       "logo": "backers/toolio.png"
+    },
+    {
+      "name": "Skale Technologies",
+      "href": "http://www.skaletech.com/",
+      "logo": "backers/skale.png"
+    },
+    {
+      "name": "EduBirdie",
+      "href": "https://edubirdie.com/",
+      "logo": "backers/bird.png"
     }
   ],
   "affiliate": [
@@ -150,6 +182,12 @@
       "name": "Zeit Now",
       "href": "https://zeit.co/now",
       "logo": "sponsors/zeit-now.svg"
+    },
+    {
+      "name": "Oh Dear!",
+      "href": "https://ohdear.app/",
+      "logo": "sponsors/ohdear-inverted.svg",
+      "darkLogo": "sponsors/ohdear.svg"
     }
   ]
 }

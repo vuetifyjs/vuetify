@@ -1,94 +1,126 @@
 {
-  "header": "crwdns29282:0crwdne29282:0",
-  "headerText": "crwdns29284:0[issue]crwdnd29284:0[discord]crwdne29284:0",
-  "question": "crwdns29286:0crwdne29286:0",
-  "answer": "crwdns29288:0crwdne29288:0",
-  "noResultsFound": "crwdns29290:0crwdne29290:0",
-  "resetSearch": "crwdns29292:0crwdne29292:0",
+  "heading": "crwdns35314:0crwdne35314:0",
+  "headingText": "crwdns41468:0[issue]crwdnd41468:0[community]crwdne41468:0",
+  "question": "crwdns35318:0crwdne35318:0",
+  "answer": "crwdns35320:0crwdne35320:0",
+  "noResultsFound": "crwdns35322:0crwdne35322:0",
+  "resetSearch": "crwdns35324:0crwdne35324:0",
   "gotchas": [
     {
-      "q": "crwdns29294:0crwdne29294:0",
-      "a": "crwdns29296:0crwdne29296:0"
+      "q": "crwdns43188:0crwdne43188:0",
+      "a": "crwdns43190:0crwdne43190:0"
     },
     {
-      "q": "crwdns29298:0crwdne29298:0",
-      "a": "crwdns29300:0[template]crwdnd29300:0[community]crwdne29300:0"
+      "q": "crwdns43192:0crwdne43192:0",
+      "a": "crwdns43194:0crwdne43194:0"
     },
     {
-      "q": "crwdns29302:0crwdne29302:0",
-      "a": "crwdns29304:0crwdne29304:0"
+      "q": "crwdns43196:0$materialcrwdne43196:0",
+      "a": "crwdns43198:0crwdne43198:0"
     },
     {
-      "q": "crwdns29306:0crwdne29306:0",
-      "a": "crwdns29308:0crwdne29308:0"
+      "q": "crwdns43200:0crwdne43200:0",
+      "a": "crwdns43202:0[template]crwdnd43202:0[community]crwdne43202:0"
     },
     {
-      "q": "crwdns29310:0crwdne29310:0",
-      "a": "crwdns29312:0crwdne29312:0"
+      "q": "crwdns43204:0$attrscrwdnd43204:0$listenerscrwdne43204:0",
+      "a": "crwdns43206:0crwdne43206:0"
     },
     {
-      "q": "crwdns29314:0crwdne29314:0",
-      "a": "crwdns29316:0crwdne29316:0"
+      "q": "crwdns43208:0crwdne43208:0",
+      "a": "crwdns43210:0crwdne43210:0"
     },
     {
-      "q": "crwdns29318:0crwdne29318:0",
-      "a": "crwdns29320:0{ overflow-y: auto }crwdne29320:0"
+      "q": "crwdns43212:0crwdne43212:0",
+      "a": "crwdns43214:0crwdne43214:0"
     },
     {
-      "q": "crwdns29322:0crwdne29322:0",
-      "a": "crwdns29324:0crwdne29324:0"
+      "q": "crwdns43216:0crwdne43216:0",
+      "a": "crwdns43218:0[Application]crwdne43218:0"
     },
     {
-      "q": "crwdns29326:0crwdne29326:0",
-      "a": "crwdns29328:0[documentation]crwdne29328:0"
+      "q": "crwdns43220:0crwdne43220:0",
+      "a": "crwdns43222:0crwdne43222:0"
     },
     {
-      "q": "crwdns29330:0crwdne29330:0",
-      "a": "crwdns29332:0crwdne29332:0",
-      "s": "crwdns29334:0crwdne29334:0"
+      "q": "crwdns43224:0crwdne43224:0",
+      "a": "crwdns43226:0{ overflow-y: auto }crwdne43226:0"
     },
     {
-      "q": "crwdns29336:0crwdne29336:0",
-      "a": "crwdns29338:0crwdne29338:0",
+      "q": "crwdns43228:0crwdne43228:0",
+      "a": "crwdns43230:0crwdne43230:0"
+    },
+    {
+      "q": "crwdns43232:0crwdne43232:0",
+      "a": "crwdns43234:0[documentation]crwdne43234:0"
+    },
+    {
+      "q": "crwdns43236:0crwdne43236:0",
+      "a": "crwdns43238:0crwdne43238:0",
+      "s": "crwdns43240:0crwdne43240:0"
+    },
+    {
+      "q": "crwdns43242:0crwdne43242:0",
+      "a": "crwdns43244:0crwdne43244:0"
+    },
+    {
+      "q": "crwdns43246:0crwdne43246:0",
+      "a": "crwdns43248:0crwdne43248:0",
+      "s": "crwdns43250:0crwdne43250:0"
+    },
+    {
+      "q": "crwdns43252:0crwdne43252:0",
+      "a": "crwdns43254:0[vue.config.js]crwdnd43254:0[vue-loader]crwdne43254:0",
+      "s": "crwdns43256:0crwdne43256:0"
+    },
+    {
+      "q": "crwdns43258:0crwdne43258:0",
+      "a": "crwdns43260:0crwdne43260:0",
       "a2": [
-        "crwdns29340:0crwdne29340:0",
-        "crwdns29342:0crwdne29342:0"
+        "crwdns43262:0[v2.0.0]crwdne43262:0",
+        "crwdns43264:0[v1.5.0]crwdne43264:0",
+        "crwdns43266:0[v1.4.0]crwdne43266:0",
+        "crwdns43268:0[v1.3.0]crwdne43268:0",
+        "crwdns43270:0[v1.2.0]crwdne43270:0",
+        "crwdns43272:0[v1.1.0]crwdne43272:0",
+        "crwdns43274:0[v1.0.0]crwdne43274:0",
+        "crwdns43276:0[v0.17.0]crwdne43276:0",
+        "crwdns43278:0[v0.16.0]crwdne43278:0",
+        "crwdns43280:0[v0.15.0]crwdne43280:0",
+        "crwdns43282:0[v0.14.0]crwdne43282:0",
+        "crwdns43284:0[v0.13.0]crwdne43284:0",
+        "crwdns43286:0[v0.12.0]crwdne43286:0"
       ]
     },
     {
-      "q": "crwdns29344:0crwdne29344:0",
-      "a": "crwdns29346:0crwdne29346:0",
-      "s": "crwdns29348:0crwdne29348:0"
+      "q": "crwdns43288:0crwdne43288:0",
+      "a": "crwdns43290:0crwdne43290:0"
     },
     {
-      "q": "crwdns29350:0crwdne29350:0",
-      "a": "crwdns29352:0[vue.config.js]crwdnd29352:0[vue-loader]crwdne29352:0",
-      "s": "crwdns29354:0crwdne29354:0"
+      "q": "crwdns43292:0crwdne43292:0",
+      "a": "crwdns43294:0[limitations]crwdne43294:0"
     },
     {
-      "q": "crwdns29356:0crwdne29356:0",
-      "a": "crwdns29358:0crwdne29358:0",
-      "a2": [
-        "crwdns29360:0[v1.4.0]crwdne29360:0",
-        "crwdns29362:0[v1.3.0]crwdne29362:0",
-        "crwdns29364:0[v1.2.0]crwdne29364:0",
-        "crwdns29366:0[v1.1.0]crwdne29366:0",
-        "crwdns29368:0[v1.0.0]crwdne29368:0",
-        "crwdns29370:0[v0.17.0]crwdne29370:0",
-        "crwdns29372:0[v0.16.0]crwdne29372:0",
-        "crwdns29374:0[v0.15.0]crwdne29374:0",
-        "crwdns29376:0[v0.14.0]crwdne29376:0",
-        "crwdns29378:0[v0.13.0]crwdne29378:0",
-        "crwdns29380:0[v0.12.0]crwdne29380:0"
-      ]
+      "q": "crwdns43296:0crwdne43296:0",
+      "a": "crwdns43298:0crwdne43298:0"
     },
     {
-      "q": "crwdns29382:0crwdne29382:0",
-      "a": "crwdns29384:0crwdne29384:0"
+      "q": "crwdns43300:0crwdne43300:0",
+      "a": "crwdns43302:0crwdne43302:0"
     },
     {
-      "q": "crwdns29386:0crwdne29386:0",
-      "a": "crwdns29388:0[limitations]crwdne29388:0"
+      "q": "crwdns43304:0crwdne43304:0",
+      "a": "crwdns43306:0[vue-cli-plugin-vuetify]crwdnd43306:0[vuetify-loader]crwdne43306:0"
+    },
+    {
+      "q": "crwdns43308:0crwdne43308:0",
+      "a": "crwdns43310:0crwdne43310:0",
+      "s": "crwdns43312:0crwdne43312:0"
+    },
+    {
+      "q": "crwdns43314:0crwdne43314:0",
+      "a": "crwdns43316:0crwdne43316:0",
+      "s": "crwdns43318:0crwdne43318:0"
     }
   ]
 }

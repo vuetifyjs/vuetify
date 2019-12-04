@@ -1,0 +1,10 @@
+{
+  "examples": {
+    "usage": {
+      "desc": "Les classes d'aide `elevation` vous permettent d'assigner un **z-depth** personnalisé à n'importe quel élément."
+    },
+    "dynamic": {
+      "desc": "De nombreux composants utilisent le mixin **elevatable** et possèdent une prop **elevation** . Pour les composants qui ne sont pas pris en charge, vous pouvez modifier dynamiquement la classe"
+    }
+  }
+}

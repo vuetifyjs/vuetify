@@ -9,9 +9,9 @@ export default mixins(Themeable).extend({
   name: 'v-simple-table',
 
   props: {
+    dense: Boolean,
     fixedHeader: Boolean,
     height: [Number, String],
-    dense: Boolean,
   },
 
   computed: {

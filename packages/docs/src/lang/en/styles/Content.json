@@ -1,6 +1,6 @@
 {
-  "header": "# Content",
-  "headerText": "Vuetify has custom styling for multiple standard elements.",
+  "heading": "# Content",
+  "headingText": "Vuetify has custom styling for multiple standard elements.",
   "blockquoteHeader": "## Block quote",
   "paragraphsHeader": "## Paragraphs",
   "codeHeader": "## Code",

@@ -1,58 +1,68 @@
 {
-  "header": "crwdns26228:0crwdne26228:0",
-  "headerText": "crwdns26230:0crwdne26230:0",
+  "heading": "crwdns45322:0crwdne45322:0",
+  "headingText": "crwdns45324:0crwdne45324:0",
   "examples": {
     "usage": {
-      "desc": "crwdns26232:0crwdne26232:0"
+      "desc": "crwdns38992:0crwdne38992:0"
     },
     "small": {
-      "header": "crwdns26234:0crwdne26234:0",
-      "desc": "crwdns26236:0crwdne26236:0"
+      "heading": "crwdns45326:0crwdne45326:0",
+      "desc": "crwdns38994:0crwdne38994:0"
     },
     "icons": {
-      "header": "crwdns26238:0crwdne26238:0",
-      "desc": "crwdns26240:0crwdne26240:0"
+      "heading": "crwdns45328:0crwdne45328:0",
+      "desc": "crwdns32728:0crwdne32728:0"
     },
     "avatars": {
-      "header": "crwdns26242:0crwdne26242:0",
-      "desc": "crwdns26244:0crwdne26244:0"
+      "heading": "crwdns45330:0crwdne45330:0",
+      "desc": "crwdns38996:0crwdne38996:0"
+    },
+    "card": {
+      "heading": "crwdns45332:0crwdne45332:0",
+      "desc": "crwdns39000:0crwdne39000:0"
     },
     "color": {
-      "header": "crwdns26246:0crwdne26246:0",
-      "desc": "crwdns26248:0crwdne26248:0"
+      "heading": "crwdns45334:0crwdne45334:0",
+      "desc": "crwdns39002:0crwdne39002:0"
     },
     "slot": {
-      "header": "crwdns26250:0crwdne26250:0",
-      "desc": "crwdns26252:0crwdne26252:0"
+      "heading": "crwdns45336:0crwdne45336:0",
+      "desc": "crwdns32740:0crwdne32740:0"
     },
     "alert": {
-      "header": "crwdns26254:0crwdne26254:0",
-      "desc": "crwdns26256:0crwdne26256:0"
+      "heading": "crwdns45338:0crwdne45338:0",
+      "desc": "crwdns39004:0crwdne39004:0"
     },
     "reverse": {
-      "header": "crwdns26258:0crwdne26258:0",
-      "desc": "crwdns26260:0crwdne26260:0"
+      "heading": "crwdns45340:0crwdne45340:0",
+      "desc": "crwdns39008:0crwdne39008:0"
     },
     "advanced": {
-      "header": "crwdns26262:0crwdne26262:0",
-      "desc": "crwdns26264:0crwdne26264:0"
+      "heading": "crwdns45342:0crwdne45342:0",
+      "desc": "crwdns32748:0crwdne32748:0"
     }
   },
   "props": {
     "v-timeline": {
-      "alignTop": "crwdns26266:0crwdne26266:0",
-      "dense": "crwdns26268:0crwdne26268:0",
-      "reverse": "crwdns26270:0crwdne26270:0"
+      "alignTop": "crwdns39010:0crwdne39010:0",
+      "dense": "crwdns39012:0crwdne39012:0",
+      "reverse": "crwdns39014:0crwdne39014:0"
     },
     "v-timeline-item": {
-      "fillDot": "crwdns26272:0crwdne26272:0",
-      "hideDot": "crwdns26274:0crwdne26274:0",
-      "icon": "crwdns26276:0crwdne26276:0",
-      "iconColor": "crwdns26278:0crwdne26278:0",
-      "large": "crwdns26280:0crwdne26280:0",
-      "left": "crwdns26282:0crwdne26282:0",
-      "right": "crwdns26284:0crwdne26284:0",
-      "small": "crwdns26286:0crwdne26286:0"
+      "fillDot": "crwdns39016:0crwdne39016:0",
+      "hideDot": "crwdns39018:0crwdne39018:0",
+      "icon": "crwdns39020:0crwdne39020:0",
+      "iconColor": "crwdns39022:0crwdne39022:0",
+      "large": "crwdns39024:0crwdne39024:0",
+      "left": "crwdns39026:0crwdne39026:0",
+      "right": "crwdns39028:0crwdne39028:0",
+      "small": "crwdns39030:0crwdne39030:0"
+    }
+  },
+  "slots": {
+    "v-timeline-item": {
+      "icon": "crwdns39032:0crwdne39032:0",
+      "opposite": "crwdns39034:0crwdne39034:0"
     }
   }
 }

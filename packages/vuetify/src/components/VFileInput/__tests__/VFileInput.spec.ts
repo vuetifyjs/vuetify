@@ -21,6 +21,8 @@ describe('VFileInput.ts', () => {
   beforeEach(() => {
     mountFunction = (options?: MountOptions<Instance>) => {
       return mount(VFileInput, {
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
         mocks: {
           $vuetify: {
             lang: new Lang(),
@@ -180,5 +182,91 @@ describe('VFileInput.ts', () => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8049
+  it('should render without icon', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        prependIcon: '',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8167
+  it('should not emit change event when blurred', async () => {
+    const change = jest.fn()
+    const wrapper = mountFunction({
+      listeners: {
+        change,
+      },
+    })
+
+    const input = wrapper.find('input')
+
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
+
+    // TODO: Is there a better way to fake the file change event?
+    wrapper.vm.onInput({ target: {} })
+
+    input.trigger('blur')
+    await wrapper.vm.$nextTick()
+
+    expect(change).toHaveBeenCalledTimes(1)
+  })
+
+  it('should not emit change event when pressing enter', async () => {
+    const change = jest.fn()
+    const wrapper = mountFunction({
+      listeners: {
+        change,
+      },
+    })
+
+    const input = wrapper.find('input')
+
+    input.trigger('keydown.enter')
+    await wrapper.vm.$nextTick()
+
+    expect(change).not.toHaveBeenCalled()
+  })
+
+  it('should truncate correctly', async () => {
+    const fifteenCharFile = { name: 'testFile15Chars', size: 1 }
+    const wrapper = mountFunction({
+      propsData: {
+        truncateLength: 1,
+        value: fifteenCharFile,
+      },
+    })
+
+    expect(wrapper.find('.v-file-input__text').text()).toBe('…')
+
+    wrapper.setProps({
+      truncateLength: 2,
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.find('.v-file-input__text').text()).toBe('…')
+
+    wrapper.setProps({
+      truncateLength: 3,
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.find('.v-file-input__text').text()).toBe('t…s')
+
+    wrapper.setProps({
+      truncateLength: 10,
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.find('.v-file-input__text').text()).toBe('test…hars')
   })
 })

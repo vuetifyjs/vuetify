@@ -1,1 +1,5 @@
-{}
+{
+  "props": {
+    "scrollTarget": "将组件指定为滚动时间的目标。默认为`window`。"
+  }
+}

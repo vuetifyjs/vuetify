@@ -38,7 +38,7 @@
       </template>
 
       <!-- Description -->
-      <doc-markdown
+      <base-markdown
         v-else-if="header.value === 'description' && item.description"
         :code="item.description"
       />
@@ -50,6 +50,20 @@
         lang="ts"
         value="example"
       >{{ item.signature }}</doc-markup>
+
+      <!-- Options -->
+      <doc-markup
+        v-else-if="header.value === 'example' && item.options"
+        :filename="false"
+        lang="json"
+        value="example"
+      >{{ item.options }}</doc-markup>
+
+      <!-- Snippet -->
+      <doc-markup
+        v-else-if="header.value === 'example' && item.snippet"
+        :value="item.snippet"
+      />
 
       <!-- Example -->
       <doc-markup

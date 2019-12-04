@@ -1,5 +1,5 @@
 <template>
-  <v-layout justify-space-between wrap>
+  <v-row justify="space-between">
     <div>
       <div class="subheading">Defined by array</div>
       <v-date-picker
@@ -16,7 +16,7 @@
         :events="functionEvents"
       ></v-date-picker>
     </div>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

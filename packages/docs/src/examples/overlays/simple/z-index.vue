@@ -1,5 +1,5 @@
 <template>
-  <v-layout justify-center wrap>
+  <v-row justify="center">
     <v-btn
       class="white--text"
       color="teal"
@@ -20,7 +20,7 @@
         Hide Overlay
       </v-btn>
     </v-overlay>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

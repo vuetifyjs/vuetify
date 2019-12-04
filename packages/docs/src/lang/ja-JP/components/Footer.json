@@ -1,17 +1,12 @@
 {
-  "header": "Footer",
-  "headerText": "`v-footer`コンポーネントは、あなたのサイト内のどのページからでもアクセスしたい一般的な情報を表示するために使われます。",
   "examples": {
-    "companyFooter": {
-      "header": "会社のフッター",
+    "company-footer": {
       "desc": "リンクを持つ基本的な会社のフッターとしてのフッターコンポーネントです。"
     },
-    "indigoFooter": {
-      "header": "インディゴ色のフッター",
+    "indigo-footer": {
       "desc": "インディゴ色の背景色で、ソーシャルメディアのアイコンとボタンのあるフッターコンポーネントです。"
     },
-    "tealFooter": {
-      "header": "青緑色のフッター",
+    "teal-footer": {
       "desc": "青緑色見出しと、列と行のリンクを含むフッターコンポーネントです。"
     }
   },

@@ -1,9 +1,7 @@
 // Must be called in Vue context
 export function goTo (id) {
   this.$vuetify.goTo(id).then(() => {
-    if (!id) {
-      return (document.location.hash = '')
-    }
+    if (!id) return (document.location.hash = '')
 
     if (history.replaceState) {
       history.replaceState(null, null, id)
@@ -21,11 +19,11 @@ export function getComponent (type) {
     case 'checklist': return 'doc-checklist'
     case 'example': return 'doc-example'
     case 'examples': return 'doc-examples'
-    case 'heading': return 'doc-heading'
+    case 'heading': return 'base-heading'
     case 'img': return 'doc-img'
     case 'text': return 'doc-text'
     case 'markup': return 'doc-markup'
-    case 'markdown': return 'doc-markdown'
+    case 'markdown': return 'base-markdown'
     case 'parameters': return 'doc-parameters'
     case 'playground': return 'doc-playground'
     case 'section': return 'doc-section'
@@ -33,6 +31,7 @@ export function getComponent (type) {
     case 'tree': return 'doc-tree'
     case 'up-next': return 'doc-up-next'
     case 'usage': return 'doc-usage'
+    case 'usage-new': return 'doc-usage-new'
     case 'locales': return 'doc-locales'
     default: return type
   }
@@ -40,22 +39,25 @@ export function getComponent (type) {
 
 export function parseLink (match, text, link) {
   let attrs = ''
-  let linkClass = 'markdown--link'
   let icon = ''
+  let linkClass = 'v-markdown--link'
 
   // External link
-  if (link.indexOf('http') > -1) {
+  if (
+    link.indexOf('http') > -1 ||
+    link.indexOf('mailto') > -1
+  ) {
     attrs = `target="_blank" rel="noopener"`
     icon = 'open-in-new'
-    linkClass += ' markdown--external'
+    linkClass += ' v-markdown--external'
   // Same page internal link
   } else if (link.charAt(0) === '#') {
-    linkClass += ' markdown--same-internal'
     icon = 'pound'
+    linkClass += ' v-markdown--same-internal'
   // Different page internal link
   } else {
-    linkClass += ' markdown--internal'
     icon = 'page-next'
+    linkClass += ' v-markdown--internal'
   }
 
   return `<a href="${link}" ${attrs} class="${linkClass}">${text}<i class="v-icon mdi mdi-${icon}"></i></a>`
@@ -64,6 +66,7 @@ export function parseLink (match, text, link) {
 export async function waitForReadystate () {
   if (
     typeof document !== 'undefined' &&
+    typeof window !== 'undefined' &&
     document.readyState !== 'complete'
   ) {
     await new Promise(resolve => {
@@ -71,6 +74,7 @@ export async function waitForReadystate () {
         window.requestAnimationFrame(resolve)
         window.removeEventListener('load', cb)
       }
+
       window.addEventListener('load', cb)
     })
   }
@@ -84,6 +88,9 @@ export function genChip (item) {
 }
 
 export function getBranch () {
-  const branch = window ? window.location.hostname.split('.')[0] : 'master'
+  const branch = window
+    ? window.location.hostname.split('.')[0]
+    : 'master'
+
   return ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
 }

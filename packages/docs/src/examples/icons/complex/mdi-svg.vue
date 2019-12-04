@@ -1,7 +1,7 @@
 <template>
-  <v-layout
-    align-center
-    justify-center
+  <v-row
+    align="center"
+    justify="center"
   >
     <v-icon>{{ icons.mdiAccount }}</v-icon>
     <div class="mx-2"></div>
@@ -16,7 +16,7 @@
       <v-icon left>{{ icons.mdiDelete }}</v-icon>
       Delete
     </v-btn>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

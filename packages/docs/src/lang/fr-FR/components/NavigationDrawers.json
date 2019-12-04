@@ -1,10 +1,7 @@
 {
-  "examples": {
-    "dark": {
-      "uninverted": true
-    }
-  },
   "props": {
-    "hideOverlay": "Masquer l’affichage de la superposition"
+    "absolute": "Mixins.Positionable.props.absolute",
+    "fixed": "Mixins.Positionable.props.fixed",
+    "tag": "Components.Sheets.props.tag"
   }
 }

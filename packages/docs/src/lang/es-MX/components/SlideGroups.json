@@ -1,1 +1,13 @@
-{}
+{
+  "examples": {
+    "custom-icons": {
+      "heading": "Íconos personalizados"
+    },
+    "multiple": {
+      "heading": "Múltiple"
+    },
+    "mandatory": {
+      "heading": "### Obligatorio"
+    }
+  }
+}

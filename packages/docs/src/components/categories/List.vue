@@ -12,6 +12,7 @@
         sm6
         md4
         d-flex
+        child-flex
       >
         <categories-item :value="item" />
       </v-flex>

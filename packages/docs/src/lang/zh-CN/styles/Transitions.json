@@ -1,0 +1,28 @@
+{
+  "examples": {
+    "usage": {
+      "desc": "Vuetify附带了10多个自定义css动画，可应用于众多组件或您自己的自定义的组件"
+    },
+    "slide-x-transitions": {
+      "desc": "滑动x过渡可沿水平方向移动。"
+    },
+    "slide-y-transitions": {
+      "desc": "过渡地使用应用程序<code>$primary-transition</code>."
+    },
+    "scale-transition": {
+      "desc": "许多Vuetify组件都包含一个`transition`属性允许你指定你自己的效果"
+    },
+    "fade-transition": {
+      "desc": "另一个淡入淡出过渡的示例可以在圆盘传送带组件上找到。"
+    },
+    "custom-origin": {
+      "desc": "通过使用一个简单的属性来可编程地控制过渡原点。"
+    }
+  },
+  "createYourOwnHeader": "创建您自己的",
+  "createYourOwnText1": "您可以用Vuetify的过渡辅助器函数来创建您自己的自定义的过渡效果，这个函数会返回一个可以导入到Vue的对象。使用Vue的 [函数式组件](https://vuejs.org/v2/guide/render-function.html#Functional-Components) 配置将确保您的过渡效果尽可能高效。只需要导入函数：",
+  "createYourOwnText2": "其中`createSimpleTransition`函数接受1个参数，即名称。这将是您可以与您的样式挂钩的名称。这是一个展示`v-fade-transition`的示例：",
+  "props": {
+    "group": "创建`transition-group`组件 [vue docs](https://vuejs.org/v2/api/#transition-group)"
+  }
+}

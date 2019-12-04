@@ -103,6 +103,6 @@
 
 <codepen-resources lang="json">
   {
-    "js": ["https://cdn.jsdelivr.net/npm/vee-validate@latest/dist/vee-validate.js"]
+    "js": ["https://cdn.jsdelivr.net/npm/vee-validate@2.x/dist/vee-validate.js"]
   }
 </codepen-resources>

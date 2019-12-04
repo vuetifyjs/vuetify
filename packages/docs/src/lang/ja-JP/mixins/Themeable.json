@@ -1,6 +1,6 @@
 {
   "props": {
-    "dark": "ダークテーマを適用します。",
-    "light": "ライトテーマを適用します。"
+    "dark": "コンポーネントにダークテーマを適応します。詳しく知りたい場合は、Material Design documentationの[dark themes](https://material.io/design/color/dark-theme.html)を参照してください。",
+    "light": "コンポーネントにlightテーマを適用します。"
   }
 }

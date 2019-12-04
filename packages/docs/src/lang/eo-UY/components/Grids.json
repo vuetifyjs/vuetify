@@ -1,0 +1,141 @@
+{
+  "heading": "crwdns45972:0crwdne45972:0",
+  "headingText": "crwdns45974:0crwdne45974:0",
+  "headerAlert1": "crwdns43120:0crwdne43120:0",
+  "usageText2": "crwdns42434:0crwdne42434:0",
+  "usageList": [
+    "crwdns43122:0crwdne43122:0",
+    "crwdns43124:0crwdne43124:0",
+    "crwdns43126:0crwdne43126:0"
+  ],
+  "usageText3": "crwdns43128:0crwdne43128:0",
+  "usageAlert1": "crwdns42444:0crwdne42444:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns42446:0crwdne42446:0"
+    },
+    "playground": {
+      "heading": "crwdns45976:0crwdne45976:0",
+      "desc": "crwdns40422:0crwdne40422:0"
+    },
+    "auto": {
+      "heading": "crwdns45978:0crwdne45978:0",
+      "desc": "crwdns42450:0crwdne42450:0"
+    },
+    "equal": {
+      "heading": "crwdns45980:0crwdne45980:0",
+      "desc": "crwdns42454:0crwdne42454:0"
+    },
+    "one-column-width": {
+      "heading": "crwdns45982:0crwdne45982:0",
+      "desc": "crwdns42458:0crwdne42458:0"
+    },
+    "variable-content": {
+      "heading": "crwdns45984:0crwdne45984:0",
+      "desc": "crwdns42462:0crwdne42462:0"
+    },
+    "grow-shrink": {
+      "heading": "crwdns45986:0crwdne45986:0",
+      "desc": "crwdns42464:0crwdne42464:0"
+    },
+    "row-column-breakpoint": {
+      "heading": "crwdns45988:0crwdne45988:0",
+      "desc": "crwdns43130:0crwdne43130:0"
+    },
+    "vertical-alignment": {
+      "heading": "crwdns45990:0crwdne45990:0",
+      "desc": "crwdns42468:0crwdne42468:0"
+    },
+    "horizontal-alignment": {
+      "heading": "crwdns45992:0crwdne45992:0",
+      "desc": "crwdns42472:0crwdne42472:0"
+    },
+    "no-gutters": {
+      "heading": "crwdns45994:0crwdne45994:0",
+      "desc": "crwdns42476:0crwdne42476:0"
+    },
+    "wrapping": {
+      "heading": "crwdns45996:0crwdne45996:0",
+      "desc": "crwdns43132:0crwdne43132:0"
+    },
+    "order": {
+      "heading": "crwdns45998:0crwdne45998:0",
+      "desc": "crwdns40434:0crwdne40434:0"
+    },
+    "order-first-last": {
+      "heading": "crwdns46000:0crwdne46000:0",
+      "desc": "crwdns42486:0crwdne42486:0"
+    },
+    "offset": {
+      "heading": "crwdns46002:0crwdne46002:0",
+      "desc": "crwdns40428:0crwdne40428:0"
+    },
+    "offset-breakpoint": {
+      "heading": "crwdns46004:0crwdne46004:0",
+      "desc": "crwdns42490:0crwdne42490:0"
+    },
+    "margin": {
+      "heading": "crwdns46006:0crwdne46006:0",
+      "desc": "crwdns42494:0crwdne42494:0"
+    },
+    "nested-grid": {
+      "heading": "crwdns46008:0crwdne46008:0",
+      "desc": "crwdns40458:0crwdne40458:0"
+    },
+    "unique-layouts": {
+      "heading": "crwdns46010:0crwdne46010:0",
+      "desc": "crwdns40464:0crwdne40464:0"
+    },
+    "spacer": {
+      "heading": "crwdns46012:0crwdne46012:0",
+      "desc": "crwdns40470:0crwdne40470:0"
+    },
+    "tags": {
+      "heading": "crwdns46014:0crwdne46014:0",
+      "desc": "crwdns40474:0crwdne40474:0"
+    }
+  },
+  "props": {
+    "tag": "crwdns42498:0crwdne42498:0",
+    "v-container": {
+      "fluid": "crwdns42500:0crwdne42500:0"
+    },
+    "v-col": {
+      "alignSelf": "crwdns42502:0[align-items]crwdne42502:0",
+      "cols": "crwdns42504:0crwdne42504:0",
+      "sm": "crwdns42506:0crwdne42506:0",
+      "md": "crwdns42508:0crwdne42508:0",
+      "lg": "crwdns42510:0crwdne42510:0",
+      "xl": "crwdns42512:0crwdne42512:0",
+      "offset": "crwdns42514:0crwdne42514:0",
+      "offsetSm": "crwdns42516:0crwdne42516:0",
+      "offsetMd": "crwdns42518:0crwdne42518:0",
+      "offsetLg": "crwdns42520:0crwdne42520:0",
+      "offsetXl": "crwdns42522:0crwdne42522:0",
+      "order": "crwdns42524:0[order]crwdne42524:0",
+      "orderSm": "crwdns42526:0crwdne42526:0",
+      "orderMd": "crwdns42528:0crwdne42528:0",
+      "orderLg": "crwdns42530:0crwdne42530:0",
+      "orderXl": "crwdns42532:0crwdne42532:0"
+    },
+    "v-row": {
+      "align": "crwdns46016:0[align-items]crwdne46016:0",
+      "alignSm": "crwdns42536:0crwdne42536:0",
+      "alignMd": "crwdns42538:0crwdne42538:0",
+      "alignLg": "crwdns42540:0crwdne42540:0",
+      "alignXl": "crwdns42542:0crwdne42542:0",
+      "alignContent": "crwdns42544:0[align-content]crwdne42544:0",
+      "alignContentSm": "crwdns42546:0crwdne42546:0",
+      "alignContentMd": "crwdns42548:0crwdne42548:0",
+      "alignContentLg": "crwdns42550:0crwdne42550:0",
+      "alignContentXl": "crwdns42552:0crwdne42552:0",
+      "dense": "crwdns42554:0crwdne42554:0",
+      "justify": "crwdns42556:0[justify-content]crwdne42556:0",
+      "justifySm": "crwdns42558:0crwdne42558:0",
+      "justifyMd": "crwdns42560:0crwdne42560:0",
+      "justifyLg": "crwdns42562:0crwdne42562:0",
+      "justifyXl": "crwdns42564:0crwdne42564:0",
+      "noGutters": "crwdns42566:0crwdne42566:0"
+    }
+  }
+}

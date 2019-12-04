@@ -6,7 +6,7 @@ exports[`VChip.ts should be removable 1`] = `
     <i role="button"
        class="v-icon notranslate v-chip__close v-icon--link v-icon--right material-icons theme--light"
     >
-      $vuetify.icons.delete
+      $delete
     </i>
   </span>
 </span>

@@ -1,4 +1,4 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 // Transition
 .bottom-sheet-transition
@@ -18,7 +18,7 @@
   overflow: visible
 
   &.v-bottom-sheet--inset
-    max-width: 70%
+    max-width: $bottom-sheet-inset-width
     min-width: 0
 
     @media #{map-get($display-breakpoints, 'xs-only')}

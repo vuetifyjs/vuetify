@@ -1,11 +1,10 @@
 {
-  "header": "提示框",
   "examples": {
     "icon": {
-      "header": "图标"
+      "heading": "图标"
+    },
+    "outlined": {
+      "heading": "### 轮廓"
     }
-  },
-  "props": {
-    "type": "指定**成功（success）**，**信息（info）**，**警告（warning*）*或者**错误（error）**提示框，使用上下文颜色和预定义的图标。"
   }
 }

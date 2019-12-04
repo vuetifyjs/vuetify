@@ -1,37 +1,37 @@
 <template>
-  <v-container fluid grid-list-xl>
-    <v-layout wrap align-center>
-      <v-flex xs12 sm6 d-flex>
+  <v-container fluid>
+    <v-row align="center">
+      <v-col class="d-flex" cols="12" sm="6">
         <v-select
           :items="items"
           label="Standard"
         ></v-select>
-      </v-flex>
+      </v-col>
 
-      <v-flex xs12 sm6 d-flex>
+      <v-col class="d-flex" cols="12" sm="6">
         <v-select
           :items="items"
           filled
           label="Filled style"
         ></v-select>
-      </v-flex>
+      </v-col>
 
-      <v-flex xs12 sm6 d-flex>
+      <v-col class="d-flex" cols="12" sm="6">
         <v-select
           :items="items"
-          label="Outline style"
+          label="Outlined style"
           outlined
         ></v-select>
-      </v-flex>
+      </v-col>
 
-      <v-flex xs12 sm6 d-flex>
+      <v-col class="d-flex" cols="12" sm="6">
         <v-select
           :items="items"
           label="Solo field"
           solo
         ></v-select>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

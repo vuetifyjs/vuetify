@@ -1,0 +1,8 @@
+{
+  "classesHeader": "## 클래스",
+  "classesText2": "텍스트 색상 역시 **어둡게(darken)** 와 **밝게(lighten)** 만드는 변형(variants)을 `text--{lighten|darken}-{n}` 형식으로 지원합니다. ",
+  "javascriptPackHeader": "## 자바스크립트 색상 팩(Javascript color pack)",
+  "javascriptPackText": "Vuetify는 추가로 어플리케이션 내에서 임포트(import) 해서 사용할 수 있는 자바스크립트 색상 팩을 지원합니다. 이는 어플리케이션 테마를 정의하는데 사용될 수도 있습니다.",
+  "colorHeader": "## 메테리얼 색상표 (Material colors)",
+  "colorText": "아래 리스트는 주색상으로 묶은 메테리얼 디자인 색상 팔레트 입니다."
+}

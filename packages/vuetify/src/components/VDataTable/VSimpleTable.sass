@@ -1,5 +1,4 @@
 // Imports
-@import '../../styles/styles.sass'
 @import './_variables.scss'
 
 // Theme
@@ -7,49 +6,59 @@
   background-color: map-get($material, 'cards')
   color: map-deep-get($material, 'text', 'primary')
 
-  colgroup
-    .divider
-      border-right: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+  .v-data-table__divider
+    border-right: thin solid map-get($material, 'dividers')
 
   &.v-data-table--fixed-header
     thead th
       background: map-get($material, 'cards')
-      border-bottom: 0px !important
-      box-shadow: inset 0 -1px 0 rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+      box-shadow: inset 0 -1px 0 map-get($material, 'dividers')
 
   thead
     tr
       &:last-child th
-        border-bottom: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+        border-bottom: thin solid map-get($material, 'dividers')
 
       th
-        color: rgba(map-get($material, 'text-color'), map-get($material, 'secondary-text-percent'))
+        color: map-deep-get($material, 'text', 'primary')
 
   tbody
     tr
-      &:not(:last-child)
-        border-bottom: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+      &:not(:last-child) td
+        &:not(.v-data-table__mobile-row)
+          border-bottom: thin solid map-get($material, 'dividers')
+
+        &:last-child
+          border-bottom: thin solid map-get($material, 'dividers')
 
       &.active
         background: map-deep-get($material, 'table', 'active')
+
+      &:hover:not(.v-data-table__expanded__content)
+        background: map-deep-get($material, 'table', 'hover')
 
 // Block
 .v-data-table
   table
     width: 100%
-    border-collapse: collapse
+    border-spacing: 0
 
   td, th
     padding: 0 16px
 
   th
-    text-align: left
     user-select: none
-    font-size: 12px
+    font-size: $data-table-regular-header-font-size
     height: $data-table-regular-header-height
 
+    +ltr()
+      text-align: left
+
+    +rtl()
+      text-align: right
+
   td
-    font-size: 14px
+    font-size: $data-table-regular-row-font-size
     height: $data-table-regular-row-height
 
 // Elements
@@ -82,6 +91,7 @@
 
   thead
     th
+      border-bottom: 0px !important
       position: sticky
       top: 0
       z-index: 2
@@ -91,18 +101,15 @@
         top: $data-table-regular-header-height
 
   // Account for scroll bar
-  .v-table__header, .v-data-footer
-    margin-right: $data-table-scroll-bar-width
+  .v-data-footer
+    +ltr()
+      margin-right: $data-table-scroll-bar-width
+
+    +rtl()
+      margin-left: $data-table-scroll-bar-width
 
 .v-data-table--fixed.v-data-table--dense
   thead
     tr:nth-child(2)
       th
         top: $data-table-dense-header-height
-
-.v-data-table--mobile
-  tr, td, th
-    display: block
-
-  td, th
-    padding: 14px

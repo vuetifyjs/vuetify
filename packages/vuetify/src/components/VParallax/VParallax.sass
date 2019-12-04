@@ -1,4 +1,4 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 .v-parallax
   position: relative
@@ -23,7 +23,7 @@
     display: none
     transform: translate(-50%, 0)
     will-change: transform
-    transition: .3s opacity map-get($transition, 'swing')
+    transition: $parallax-transition
     z-index: 1
 
   &__content
@@ -34,4 +34,4 @@
     display: flex
     flex-direction: column
     justify-content: center
-    padding: 0 1rem
+    padding: $parallax-padding

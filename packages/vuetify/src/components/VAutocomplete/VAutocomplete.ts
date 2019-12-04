@@ -156,9 +156,10 @@ export default VSelect.extend({
     internalValue: 'setSearch',
     isFocused (val) {
       if (val) {
-        this.$refs.input &&
-          this.$refs.input.select()
+        document.addEventListener('copy', this.onCopy)
+        this.$refs.input && this.$refs.input.select()
       } else {
+        document.removeEventListener('copy', this.onCopy)
         this.updateSelf()
       }
     },
@@ -223,54 +224,49 @@ export default VSelect.extend({
       // when search is dirty
       if (this.searchIsDirty) return
 
-      if (![
-        keyCodes.backspace,
-        keyCodes.left,
-        keyCodes.right,
-        keyCodes.delete,
-      ].includes(keyCode)) return
-
-      const index = this.selectedItems.length - 1
-
-      if (keyCode === keyCodes.left) {
+      if (this.multiple && keyCode === keyCodes.left) {
         if (this.selectedIndex === -1) {
-          this.selectedIndex = index
+          this.selectedIndex = this.selectedItems.length - 1
         } else {
           this.selectedIndex--
         }
-      } else if (keyCode === keyCodes.right) {
-        if (this.selectedIndex >= index) {
+      } else if (this.multiple && keyCode === keyCodes.right) {
+        if (this.selectedIndex >= this.selectedItems.length - 1) {
           this.selectedIndex = -1
         } else {
           this.selectedIndex++
         }
-      } else if (this.selectedIndex === -1) {
+      } else if (keyCode === keyCodes.backspace || keyCode === keyCodes.delete) {
+        this.deleteCurrentItem()
+      }
+    },
+    deleteCurrentItem () {
+      if (this.readonly) return
+
+      const index = this.selectedItems.length - 1
+
+      if (this.selectedIndex === -1) {
         this.selectedIndex = index
         return
       }
 
       const currentItem = this.selectedItems[this.selectedIndex]
 
-      if ([
-        keyCodes.backspace,
-        keyCodes.delete,
-      ].includes(keyCode) &&
-        !this.getDisabled(currentItem)
-      ) {
-        const newIndex = this.selectedIndex === index
-          ? this.selectedIndex - 1
-          : this.selectedItems[this.selectedIndex + 1]
-            ? this.selectedIndex
-            : -1
+      if (this.getDisabled(currentItem)) return
 
-        if (newIndex === -1) {
-          this.setValue(this.multiple ? [] : undefined)
-        } else {
-          this.selectItem(currentItem)
-        }
+      const newIndex = this.selectedIndex === index
+        ? this.selectedIndex - 1
+        : this.selectedItems[this.selectedIndex + 1]
+          ? this.selectedIndex
+          : -1
 
-        this.selectedIndex = newIndex
+      if (newIndex === -1) {
+        this.setValue(this.multiple ? [] : undefined)
+      } else {
+        this.selectItem(currentItem)
       }
+
+      this.selectedIndex = newIndex
     },
     clearableCallback () {
       this.internalSearch = undefined
@@ -282,6 +278,8 @@ export default VSelect.extend({
 
       input.data = input.data || {}
       input.data.attrs = input.data.attrs || {}
+      input.data.attrs.autocomplete = input.data.attrs.autocomplete || 'disabled'
+
       input.data.domProps = input.data.domProps || {}
       input.data.domProps.value = this.internalSearch
 
@@ -345,6 +343,10 @@ export default VSelect.extend({
       // instead activate the menu
       this.activateMenu()
     },
+    selectItem (item: object) {
+      VSelect.options.methods.selectItem.call(this, item)
+      this.setSearch()
+    },
     setSelectedItems () {
       VSelect.options.methods.setSelectedItems.call(this)
 
@@ -385,6 +387,15 @@ export default VSelect.extend({
     },
     hasItem (item: any) {
       return this.selectedValues.indexOf(this.getValue(item)) > -1
+    },
+    onCopy (event: ClipboardEvent) {
+      if (this.selectedIndex === -1) return
+
+      const currentItem = this.selectedItems[this.selectedIndex]
+      const currentItemText = this.getText(currentItem)
+      event.clipboardData!.setData('text/plain', currentItemText)
+      event.clipboardData!.setData('text/vnd.vuetify.autocomplete.item+plain', currentItemText)
+      event.preventDefault()
     },
   },
 })

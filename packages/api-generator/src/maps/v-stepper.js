@@ -7,4 +7,12 @@ module.exports = {
       },
     ],
   },
+  'v-stepper-step': {
+    events: [
+      {
+        name: 'click',
+        value: 'MouseEvent',
+      },
+    ],
+  },
 }

@@ -1,5 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VBtn.ts should not add color classes if disabled 1`] = `
+<button type="button"
+        class="v-btn v-btn--contained theme--light v-size--default primary--text text--darken-2"
+>
+  <span class="v-btn__content">
+  </span>
+</button>
+`;
+
+exports[`VBtn.ts should not add color classes if disabled 2`] = `
+<button type="button"
+        class="v-btn v-btn--contained v-btn--disabled theme--light v-size--default"
+        disabled="disabled"
+>
+  <span class="v-btn__content">
+  </span>
+</button>
+`;
+
 exports[`VBtn.ts should render an <a> tag when using href prop 1`] = `
 <a href="http://www.google.com"
    class="v-btn v-btn--contained theme--light v-size--default"

@@ -1,5 +1,4 @@
 // Imports
-@import '../../styles/styles.sass'
 @import './_variables.scss'
 
 // Theme
@@ -22,6 +21,10 @@
   text-indent: 0
   transition: $primary-transition
   vertical-align: middle
+  user-select: none
+
+  &--dense
+    font-size: $icon-size-dense
 
 .v-icon
   &--right
@@ -34,7 +37,7 @@
 
   &--disabled
     pointer-events: none
-    opacity: .6
+    opacity: $icon-disabled-opacity
 
   &--is-component
     height: $icon-size
@@ -46,7 +49,5 @@
     fill: currentColor
 
   &--dense
-    font-size: $icon-size-dense
-
     &--is-component
       height: $icon-size-dense

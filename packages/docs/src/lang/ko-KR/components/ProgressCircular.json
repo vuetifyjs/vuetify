@@ -1,7 +1,7 @@
 {
   "examples": {
-    "circularColored": {
-      "header": "색상 (Colored)"
+    "circular-colored": {
+      "heading": "색상 (Colored)"
     }
   }
 }

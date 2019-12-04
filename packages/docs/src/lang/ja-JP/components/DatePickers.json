@@ -1,73 +1,13 @@
 {
   "examples": {
-    "dateAllowedDates": {
-      "header": "Date pickers - Allowed dates"
-    },
-    "dateBirthday": {
-      "header": "Date pickers - birthday picker"
-    },
-    "dateColorable": {
-      "header": "Date pickers - Colors"
-    },
-    "dateCurrent": {
-      "header": "Date pickers - current date indicator"
-    },
-    "dateDialogAndMenu": {
-      "header": "Date pickers - In dialog and menu"
-    },
-    "dateEvents": {
-      "desc": "You can specify events using arrays, objects, and functions. To change the default color of the event use **event-color** prop.",
-      "header": "Date pickers - Events"
-    },
-    "dateFormatting": {
-      "header": "Date pickers - formatting date"
-    },
-    "dateIcons": {
-      "header": "Date pickers - icons"
-    },
-    "dateInternationalization": {
-      "header": "Date pickers - Internationalization"
-    },
-    "datePickerDate": {
-      "header": "Date pickers - react to disaplyed month/year change"
-    },
-    "dateReadonly": {
-      "header": "Date pickers - read only"
-    },
-    "dateWidth": {
-      "header": "Date pickers - Setting picker width"
-    },
-    "monthAllowedMonths": {
-      "desc": "You can specify allowed months using arrays, objects, and functions.",
-      "header": "Month pickers - Allowed months"
-    },
-    "monthColorable": {
-      "header": "Month pickers - Colors"
-    },
-    "monthCurrent": {
-      "header": "Month pickers - current month indicator"
-    },
-    "monthDialogAndMenu": {
-      "header": "Month pickers - In dialog and menu"
-    },
-    "monthEvents": {
+    "date-events": {
       "desc": "You can specify events using arrays, objects, and functions. To change the default color of the event use **event-color** prop."
     },
-    "monthIcons": {
-      "header": "Month pickers - icons"
+    "month-allowed-months": {
+      "desc": "You can specify allowed months using arrays, objects, and functions."
     },
-    "monthInternationalization": {
-      "header": "Month pickers - Internationalization"
-    },
-    "monthLight": {
-      "header": "Month pickers"
-    },
-    "monthReadonly": {
-      "header": "Month pickers - read only"
-    },
-    "monthWidth": {
-      "header": "Month pickers - Setting picker width"
+    "month-events": {
+      "desc": "You can specify events using arrays, objects, and functions. To change the default color of the event use **event-color** prop."
     }
-  },
-  "header": "Date/month picker"
+  }
 }

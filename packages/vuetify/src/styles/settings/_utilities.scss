@@ -1,5 +1,7 @@
+@import '../tools/_functions.sass';
+
 $utilities: () !default;
-$utilities: map-merge(
+$utilities: map-deep-merge(
   (
     // Display utilities
     "overflow": (
@@ -308,7 +310,7 @@ $utilities: map-merge(
       responsive: true,
       property: text-align,
       class: text,
-      values: left right center justify
+      values: left right center justify start end
     ),
     "white-space": (
       property: white-space,

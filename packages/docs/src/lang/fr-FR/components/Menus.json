@@ -7,24 +7,25 @@
       "uninverted": true
     },
     "disabled": {
+      "heading": "### Désactivé",
       "uninverted": true
     },
-    "offsetX": {
+    "offset-x": {
       "uninverted": true
     },
-    "offsetY": {
+    "offset-y": {
       "uninverted": true
     },
-    "closeOnClick": {
+    "close-on-click": {
       "uninverted": true
     },
-    "closeOnContentClick": {
+    "close-on-content-click": {
       "uninverted": true
     },
-    "absoluteWithoutActivator": {
+    "absolute-without-activator": {
       "uninverted": true
     },
-    "menuActivatorTooltip": {
+    "menu-activator-tooltip": {
       "uninverted": true
     },
     "hover": {
@@ -33,11 +34,17 @@
     "menus": {
       "uninverted": true
     },
-    "customTransition": {
+    "custom-transition": {
       "uninverted": true
     },
     "popover": {
       "uninverted": true
     }
+  },
+  "props": {
+    "dark": "Mixins.Themeable.props.dark",
+    "light": "Mixins.Themeable.props.light",
+    "internalActivator": "Components.Dialogs.props.internalActivator",
+    "transition": "Mixins.Transitionable.props.transition"
   }
 }

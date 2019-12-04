@@ -1,38 +1,30 @@
 {
-  "header": "Chip",
-  "headerText": "`v-chip` コンポーネントは小さな情報の断片を伝えるために使用されます。`close` プロパティを使用すると、Chip はインタラクティブとなり、ユーザーの入力を受け付けられるようになります。",
   "examples": {
     "colored": {
-      "header": "色付き",
+      "heading": "色付き",
       "desc": "マテリアルデザインパレットのあらゆる色を使用して Chip に色を付けることができます。"
     },
     "icon": {
-      "header": "アイコン",
+      "heading": "アイコン",
       "desc": "Chip にはテキストのほか、Material Icons フォントに含まれるアイコンを使用することができます。"
     },
     "outlined": {
       "desc": "アウトライン Chip は指定されているテキストの色を元にボーダーカラーが適用されます。"
     },
     "label": {
-      "header": "ラベル",
       "desc": "ラベル Chip は `v-card` の border-radius を使用します。"
     },
-    "closable": {
-      "header": "閉じるボタン付きラベル",
-      "uninverted": true
+    "in-selects": {
+      "desc": "Select では、選択された項目を表示するために Chip を使用することができます。"
     },
-    "inSelects": {
-      "header": "Select との組み合わせ",
-      "desc": "Select では、選択された項目を表示するために Chip を使用することができます。",
-      "uninverted": true
+    "filter": {
+      "heading": "### フィルター"
     }
   },
   "props": {
     "close": "閉じるボタンを追加します。",
     "disabled": "Chip を無効化し、選択できないようにします。",
     "label": "丸みを削除します。",
-    "outline": "背景を削除しテキストカラーとボーダーカラーを適用します。",
-    "outlined": "背景を削除しテキストカラーとボーダーカラーを適用します。",
-    "selected": "Chip が選択された状態の色を適用します。 主に `v-select` でハイライト表示するために使用します。"
+    "outlined": "背景を削除しテキストカラーとボーダーカラーを適用します。"
   }
 }

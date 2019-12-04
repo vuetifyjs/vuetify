@@ -44,10 +44,13 @@ exports[`VDataIterator.ts should render and match snapshot 1`] = `
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -61,7 +64,7 @@ exports[`VDataIterator.ts should render and match snapshot 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -75,7 +78,7 @@ exports[`VDataIterator.ts should render and match snapshot 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -135,10 +138,13 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -152,7 +158,7 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -166,7 +172,7 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -217,10 +223,13 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -234,7 +243,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -248,7 +257,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -299,10 +308,13 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -316,7 +328,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -330,7 +342,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -381,10 +393,13 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
               <div class="v-menu__content theme--light "
-                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
               >
               </div>
             </div>
@@ -398,7 +413,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -412,7 +427,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">

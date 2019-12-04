@@ -1,0 +1,13 @@
+{
+  "examples": {
+    "multiple": {
+      "heading": "복수선택 (Multiple)"
+    },
+    "custom-icon": {
+      "heading": "커스텀 아이콘 (Custom icons)"
+    },
+    "validation": {
+      "heading": "검증 (Validation)"
+    }
+  }
+}

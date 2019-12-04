@@ -1,15 +1,22 @@
 {
-  "": {
-    "description": "Vuetify.js is a reusable semantic component framework for Vue.js. It aims to provide clean, semantic and reusable components."
-  },
   "getting-started/quick-start": {
-    "description": "Get started with Vue and Vuetify in no time.",
+    "title": "Быстрый старт",
     "keywords": "quick start, vuetify templates, get started"
   },
-  "getting-started/contributing": {
-    "description": "Help develop Vuetify with new features and functionality."
+  "customization/icons": {
+    "title": "Иконки"
   },
   "customization/theme": {
+    "title": "Темы",
     "description": "Setup your custom application theme by changing a few variables."
+  },
+  "components/api-explorer": {
+    "title": "Обзор API"
+  },
+  "professional-support/consulting": {
+    "title": "Консультации и поддержка"
+  },
+  "professional-support/business": {
+    "title": "Консультации и поддержка"
   }
 }

@@ -1,1 +1,7 @@
-{}
+{
+  "examples": {
+    "scroll-threshold": {
+      "heading": "### 滚动阈值"
+    }
+  }
+}

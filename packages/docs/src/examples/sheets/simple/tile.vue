@@ -1,11 +1,11 @@
 <template>
-  <v-container grid-list-xl>
-    <v-layout wrap justify-space-around>
-      <v-flex
+  <v-container>
+    <v-row justify="space-around">
+      <v-col
         v-for="tile in [false, true]"
         :key="tile"
-        xs12
-        md4
+        cols="12"
+        md="4"
       >
         <v-sheet
           class="pa-12"
@@ -20,7 +20,7 @@
           ></v-sheet>
           <div></div>
         </v-sheet>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>

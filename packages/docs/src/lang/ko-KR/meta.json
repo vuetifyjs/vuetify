@@ -1,23 +1,30 @@
 {
   "": {
-    "description": "Vuetify.js is a reusable semantic component framework for Vue.js. It aims to provide clean, semantic and reusable components."
+    "title": "Vue Material Design 컴포넌트 프레임워크"
+  },
+  "introduction/why-vuetify": {
+    "title": "왜 Vuetify 인가요?"
+  },
+  "introduction/frequently-asked-questions": {
+    "title": "자주 묻는 질문"
+  },
+  "introduction/meet-the-team": {
+    "title": "개발자 팀을 만나보세요"
+  },
+  "introduction/sponsors-and-backers": {
+    "title": "스폰서와 후원자들"
   },
   "getting-started/quick-start": {
-    "description": "Get started with Vue and Vuetify in no time.",
+    "title": "빠른 시작",
     "keywords": "quick start, vuetify templates, get started"
-  },
-  "getting-started/contributing": {
-    "description": "Help develop Vuetify with new features and functionality."
   },
   "customization/theme": {
     "description": "Setup your custom application theme by changing a few variables."
   },
-  "components/grid-lists": {
-    "description": "Grid list component for Vuetify Framework"
+  "professional-support/consulting": {
+    "title": "컨설팅과 지원"
   },
-  "components/inputs": {
-    "title": "Inputs",
-    "description": "Input component for the Vuetify framework.",
-    "keywords": "input"
+  "professional-support/business": {
+    "title": "컨설팅과 지원"
   }
 }

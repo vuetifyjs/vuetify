@@ -1,5 +1,5 @@
 <template>
-  <v-layout justify-space-around align-center>
+  <v-row justify="space-around" align="center">
     <v-chip
       class="ma-2"
       :input-value="active"
@@ -27,7 +27,7 @@
     </v-chip>
 
     <v-switch v-model="active" label="Active"></v-switch>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

@@ -28,7 +28,12 @@
         {
           "type": "markup",
           "value": "html_breakpoint_example3"
-        },
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
         {
           "type": "heading",
           "lang": "breakpointHeader1a"

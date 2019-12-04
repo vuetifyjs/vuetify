@@ -1,12 +1,12 @@
 <template>
-  <v-container grid-list-xl>
-    <v-layout
-      wrap
-      justify-space-between
+  <v-container>
+    <v-row
+
+      justify="space-between"
     >
-      <v-flex
-        xs12
-        md4
+      <v-col
+        cols="12"
+        md="4"
       >
         <v-form ref="form">
           <v-text-field
@@ -16,11 +16,11 @@
             label="First name"
           ></v-text-field>
         </v-form>
-      </v-flex>
+      </v-col>
 
-      <v-flex
-        xs12
-        md6
+      <v-col
+        cols="12"
+        md="6"
       >
         <v-slider
           v-model="max"
@@ -37,8 +37,8 @@
           v-model="match"
           label="Value must match"
         ></v-text-field>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

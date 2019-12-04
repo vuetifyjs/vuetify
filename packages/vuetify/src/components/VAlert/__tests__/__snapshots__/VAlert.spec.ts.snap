@@ -9,14 +9,14 @@ exports[`VAlert.ts should be dismissible 1`] = `
     <div class="v-alert__content">
     </div>
     <button type="button"
-            class="v-alert__dismissible v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
+            class="v-alert__dismissible v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
             aria-label="$vuetify.close"
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
            class="v-icon notranslate material-icons theme--light"
         >
-          $vuetify.icons.cancel
+          $cancel
         </i>
       </span>
     </button>
@@ -55,14 +55,14 @@ exports[`VAlert.ts should have a close icon 1`] = `
     <div class="v-alert__content">
     </div>
     <button type="button"
-            class="v-alert__dismissible v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
+            class="v-alert__dismissible v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
             aria-label="$vuetify.close"
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
            class="v-icon notranslate material-icons theme--light"
         >
-          $vuetify.icons.cancel
+          $cancel
         </i>
       </span>
     </button>

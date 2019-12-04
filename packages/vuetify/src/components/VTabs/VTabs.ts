@@ -48,8 +48,8 @@ export default baseMixins.extend<options>().extend({
     },
     alignWithTitle: Boolean,
     backgroundColor: String,
-    centered: Boolean,
     centerActive: Boolean,
+    centered: Boolean,
     fixedTabs: Boolean,
     grow: Boolean,
     height: {
@@ -64,16 +64,20 @@ export default baseMixins.extend<options>().extend({
     },
     nextIcon: {
       type: String,
-      default: '$vuetify.icons.next',
+      default: '$next',
     },
     optional: Boolean,
     prevIcon: {
       type: String,
-      default: '$vuetify.icons.prev',
+      default: '$prev',
     },
     right: Boolean,
     showArrows: Boolean,
     sliderColor: String,
+    sliderSize: {
+      type: [Number, String],
+      default: 2,
+    },
     vertical: Boolean,
   },
 
@@ -167,11 +171,11 @@ export default baseMixins.extend<options>().extend({
         const el = activeTab.$el as HTMLElement
 
         this.slider = {
-          height: this.vertical ? el.offsetHeight : 2,
+          height: !this.vertical ? Number(this.sliderSize) : el.scrollHeight,
           left: this.vertical ? 0 : el.offsetLeft,
           right: this.vertical ? 0 : el.offsetLeft + el.offsetWidth,
           top: el.offsetTop,
-          width: this.vertical ? 2 : el.scrollWidth,
+          width: this.vertical ? Number(this.sliderSize) : el.scrollWidth,
         }
       })
 

@@ -1,44 +1,44 @@
 {
-  "close": "crwdns25290:0crwdne25290:0",
-  "init": "crwdns25292:0crwdne25292:0",
+  "close": "crwdns31992:0crwdne31992:0",
+  "init": "crwdns31994:0crwdne31994:0",
   "quickstart": {
-    "title": "crwdns25294:0crwdne25294:0",
-    "desc": "crwdns25296:0crwdne25296:0"
+    "title": "crwdns31996:0crwdne31996:0",
+    "desc": "crwdns31998:0crwdne31998:0"
   },
   "simple": {
-    "title": "crwdns25298:0crwdne25298:0",
-    "desc": "crwdns25300:0crwdne25300:0"
+    "title": "crwdns32000:0crwdne32000:0",
+    "desc": "crwdns32002:0crwdne32002:0"
   },
   "webpack": {
-    "title": "crwdns25302:0crwdne25302:0",
-    "desc": "crwdns25304:0crwdne25304:0"
+    "title": "crwdns32004:0crwdne32004:0",
+    "desc": "crwdns32006:0crwdne32006:0"
   },
   "webpackSimple": {
-    "title": "crwdns25306:0crwdne25306:0",
-    "desc": "crwdns25308:0crwdne25308:0"
+    "title": "crwdns32008:0crwdne32008:0",
+    "desc": "crwdns32010:0crwdne32010:0"
   },
   "webpackSSR": {
-    "title": "crwdns25310:0crwdne25310:0",
-    "desc": "crwdns25312:0[Hackernews]crwdne25312:0"
+    "title": "crwdns32012:0crwdne32012:0",
+    "desc": "crwdns32014:0[Hackernews]crwdne32014:0"
   },
   "nuxt": {
-    "title": "crwdns25314:0crwdne25314:0",
-    "desc": "crwdns25316:0crwdne25316:0"
+    "title": "crwdns32016:0crwdne32016:0",
+    "desc": "crwdns32018:0crwdne32018:0"
   },
   "pwa": {
-    "title": "crwdns25318:0crwdne25318:0",
-    "desc": "crwdns25320:0crwdne25320:0"
+    "title": "crwdns32020:0crwdne32020:0",
+    "desc": "crwdns32022:0crwdne32022:0"
   },
   "electron": {
-    "title": "crwdns25322:0crwdne25322:0",
-    "desc": "crwdns25324:0crwdne25324:0"
+    "title": "crwdns32024:0crwdne32024:0",
+    "desc": "crwdns32026:0crwdne32026:0"
   },
   "aLaCarte": {
-    "title": "crwdns25326:0crwdne25326:0",
-    "desc": "crwdns25328:0crwdne25328:0"
+    "title": "crwdns32028:0crwdne32028:0",
+    "desc": "crwdns32030:0crwdne32030:0"
   },
   "cordova": {
-    "title": "crwdns25330:0crwdne25330:0",
-    "desc": "crwdns25332:0crwdne25332:0"
+    "title": "crwdns32032:0crwdne32032:0",
+    "desc": "crwdns32034:0crwdne32034:0"
   }
 }

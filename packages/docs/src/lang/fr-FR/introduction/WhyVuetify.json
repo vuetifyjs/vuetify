@@ -1,0 +1,18 @@
+{
+  "heading": "# Quelle est la différence ?",
+  "community": "Communauté",
+  "comparisonHeader": "## Comparaison avec les autres frameworks",
+  "continuous": "Continues",
+  "designHeader": "## Spécification du design",
+  "material": "Material",
+  "questionButton": "Demander à la communauté",
+  "questionHeader": "Vous avez d'autres questions ?",
+  "professional": "Professionel",
+  "support": "Support",
+  "supportCaption": "Vous avez besoin d'un forfait pour un support personnalisé ? L'auteur de Vuetify, John Leider, fournit des services de consultation et de soutien pour aider avec tout cas d'utilisation que vous avez créé pendant la construction de votre application.",
+  "toolkit": "Outils",
+  "toolkitCaption": "Vuetify est construit à partir de zéro pour être sémantique. Facile à apprendre, facile à retenir &mdash; que vous développiez votre propre application ou que vous intégriez un nouveau développeur, cela signifie que les composants et propriétés Vuetify _écrits comme l'on parle_ facilitent grandement le développement.",
+  "updates": "Mises à jour",
+  "updatesCaption": "Vuetify a un cycle de mise à jour régulier, vous permettant de mettre la main sur des corrections de bugs et des améliorations plus souvent. L’équipe de développement s’engage à vous fournir la meilleure expérience possible.",
+  "vibrant": "Vibrante"
+}

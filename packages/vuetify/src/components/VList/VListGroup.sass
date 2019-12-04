@@ -1,13 +1,13 @@
-@import '../../styles/styles.sass'
 @import './_variables.scss'
 @import './_mixins.sass'
 
 // Element
-.v-list-group
+.v-list-group .v-list-group__header
   .v-list-item__icon.v-list-group__header__append-icon
-    min-width: 48px
+    align-self: center
+    margin: 0
+    min-width: $list-group-header-icon-min-width
     justify-content: flex-end
-    margin-left: 0
 
 .v-list-group--sub-group
   align-items: center
@@ -15,17 +15,8 @@
   flex-wrap: wrap
 
 .v-list-group__header
-  align-items: center
-  cursor: pointer
-  display: flex
-  flex: 1 1 auto
-  outline: none
-  padding: 0 16px
-  position: relative
-  user-select: none
-
   &.v-list-item--active:not(:hover):not(:focus):before
-    display: none
+    opacity: 0
 
 .v-list-group__items
   flex: 1 1 auto
@@ -49,14 +40,27 @@
   .v-list-item__avatar,
   .v-list-item__icon
     &:first-child
-      margin-right: 16px
+      +ltr()
+        margin-right: $list-group-sub-group-child-margin
+
+      +rtl()
+        margin-left: $list-group-sub-group-child-margin
 
   .v-list-group__header
-    padding-left: 32px
+    +ltr()
+      padding-left: $list-group-sub-group-header-margin
+
+    +rtl()
+      padding-right: $list-group-sub-group-header-margin
+
 
   .v-list-group__items
     .v-list-item
-      padding-left: 40px
+      +ltr()
+        padding-left: $list-group-items-item-padding
+
+      +rtl()
+        padding-right: $list-group-items-item-padding
 
   &.v-list-group--active
     .v-list-item__icon.v-list-group__header__prepend-icon .v-icon
@@ -64,20 +68,40 @@
 
 .v-list-group--no-action
   > .v-list-group__items > div > .v-list-item
-    padding-left: 72px
+    +ltr()
+      padding-left: $list-group-no-action-item-padding
+
+    +rtl()
+      padding-right: $list-group-no-action-item-padding
 
   &.v-list-group--sub-group
     > .v-list-group__items > div > .v-list-item
-      padding-left: 88px
+      +ltr()
+        padding-left: $list-group-no-action-sub-group-item-padding
+
+      +rtl()
+        padding-right: $list-group-no-action-sub-group-item-padding
 
 .v-list--dense
   .v-list-group--sub-group .v-list-group__header
-    padding-left: 24px
+    +ltr()
+      padding-left: $list-group-dense-sub-group-header-padding
 
-  .v-list-group--no-action
+    +rtl()
+      padding-right: $list-group-dense-sub-group-header-padding
+
+  &.v-list--nav .v-list-group--no-action
     > .v-list-group__items > div > .v-list-item
-      padding-left: 64px
+      +ltr()
+        padding-left: $list-group-nav-no-action-item-padding
+
+      +rtl()
+        padding-right: $list-group-nav-no-action-item-padding
 
     &.v-list-group--sub-group
       > .v-list-group__items > div > .v-list-item
-        padding-left: 80px
+        +ltr()
+          padding-left: $list-group-sub-group-item-padding
+
+        +rtl()
+          padding-right: $list-group-sub-group-item-padding

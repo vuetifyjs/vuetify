@@ -1,0 +1,66 @@
+{
+  "heading": "crwdns45534:0crwdne45534:0",
+  "headingText": "crwdns45536:0crwdne45536:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns39376:0[v-text-field]crwdne39376:0"
+    },
+    "multiple": {
+      "heading": "crwdns45538:0crwdne45538:0",
+      "desc": "crwdns39380:0crwdne39380:0"
+    },
+    "accept": {
+      "heading": "crwdns45540:0crwdne45540:0",
+      "desc": "crwdns39384:0crwdne39384:0"
+    },
+    "chips": {
+      "heading": "crwdns45542:0crwdne45542:0",
+      "desc": "crwdns39388:0[chip]crwdne39388:0"
+    },
+    "size": {
+      "heading": "crwdns45544:0crwdne45544:0",
+      "desc": "crwdns43070:0crwdne43070:0"
+    },
+    "counter": {
+      "heading": "crwdns45546:0crwdne45546:0",
+      "desc": "crwdns43072:0crwdne43072:0"
+    },
+    "selection": {
+      "heading": "crwdns45548:0crwdne45548:0",
+      "desc": "crwdns39400:0[chips]crwdne39400:0"
+    },
+    "custom-icon": {
+      "heading": "crwdns45550:0crwdne45550:0",
+      "desc": "crwdns42390:0crwdne42390:0"
+    },
+    "validation": {
+      "heading": "crwdns45552:0crwdne45552:0",
+      "desc": "crwdns39408:0crwdne39408:0"
+    },
+    "advanced": {
+      "heading": "crwdns45554:0crwdne45554:0",
+      "desc": "crwdns39412:0crwdne39412:0"
+    },
+    "dense": {
+      "heading": "crwdns45556:0crwdne45556:0",
+      "desc": "crwdns43076:0crwdne43076:0"
+    }
+  },
+  "props": {
+    "accept": "crwdns39414:0crwdne39414:0",
+    "chips": "crwdns39416:0crwdne39416:0",
+    "counterSizeString": "crwdns43078:0crwdne43078:0",
+    "counterString": "crwdns39420:0crwdne39420:0",
+    "multiple": "crwdns39422:0crwdne39422:0",
+    "showSize": "crwdns39424:0crwdne39424:0",
+    "smallChips": "crwdns39426:0crwdne39426:0",
+    "truncateLength": "crwdns39428:0crwdne39428:0",
+    "value": "crwdns39430:0crwdne39430:0"
+  },
+  "slots": {
+    "selection": "crwdns39432:0[file]crwdne39432:0"
+  },
+  "events": {
+    "change": "crwdns39434:0crwdne39434:0"
+  }
+}

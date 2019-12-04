@@ -10,6 +10,43 @@
       "children": [
         {
           "type": "heading",
+          "lang": "displayHeader"
+        },
+        {
+          "type": "text",
+          "lang": "displayText"
+        },
+        {
+          "type": "markdown",
+          "lang": "displayFormats"
+        },
+        {
+          "type": "text",
+          "lang": "displayText2"
+        },
+        {
+          "type": "markdown",
+          "lang": "displays"
+        },
+        {
+          "type": "text",
+          "lang": "displayText3"
+        },
+        {
+          "type": "example",
+          "value": "display-inline"
+        },
+        {
+          "type": "example",
+          "value": "display-block"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
           "lang": "visibilityHeader"
         },
         {
@@ -17,12 +54,15 @@
           "lang": "visibilityText"
         },
         {
-          "type": "text",
-          "lang": "breakpointText"
+          "type": "style-visibility-table"
         },
         {
-          "type": "markdown",
-          "lang": "breakpoints"
+          "type": "example",
+          "value": "visibility"
+        },
+        {
+          "type": "text",
+          "lang": "lateralDisplayText"
         },
         {
           "type": "text",
@@ -43,49 +83,23 @@
       "children": [
         {
           "type": "heading",
-          "lang": "overflowHeader"
+          "lang": "printHeader"
         },
         {
           "type": "text",
-          "lang": "overflowText"
-        },
-        {
-          "type": "markdown",
-          "lang": "overflows"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "heading",
-          "lang": "displayHeader"
+          "lang": "printText1"
         },
         {
           "type": "text",
-          "lang": "displayText"
-        },
-        {
-          "type": "markdown",
-          "lang": "displays"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "heading",
-          "lang": "Generic.Pages.examples"
+          "lang": "printOptions"
         },
         {
           "type": "text",
-          "lang": "exampleText"
+          "lang": "printText2"
         },
         {
           "type": "example",
-          "value": "hidden-elements"
+          "value": "print"
         }
       ]
     },

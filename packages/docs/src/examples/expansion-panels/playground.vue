@@ -1,6 +1,6 @@
 <template>
-  <v-layout column align-center>
-    <v-layout wrap justify-space-around>
+  <v-row align="center">
+    <v-row justify="space-around">
       <v-switch v-model="accordion" class="ma-2" label="Accordion"></v-switch>
       <v-switch v-model="popout" class="ma-2" label="Popout"></v-switch>
       <v-switch v-model="inset" class="ma-2" label="Inset"></v-switch>
@@ -8,7 +8,7 @@
       <v-switch v-model="disabled" class="ma-2" label="Disabled"></v-switch>
       <v-switch v-model="readonly" class="ma-2" label="Readonly"></v-switch>
       <v-switch v-model="focusable" class="ma-2" label="Focusable"></v-switch>
-    </v-layout>
+    </v-row>
 
     <v-expansion-panels
       :accordion="accordion"
@@ -29,7 +29,7 @@
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>

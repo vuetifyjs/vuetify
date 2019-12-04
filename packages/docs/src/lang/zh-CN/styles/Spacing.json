@@ -1,0 +1,20 @@
+{
+  "playgroundHeader": "## 实战场",
+  "propertyText": "占位符 _property_ 用来设置间距的类型：",
+  "properties": [
+    "`m` - 对应 `margin`",
+    "`p` - 对应 `padding`"
+  ],
+  "directionText": "占位符 _direction_ 指定属性所应用到的方向：",
+  "directions": {
+    "6": "`x` - 同时对应`*-left`和`*-right`属性",
+    "7": "`y` - 同时对应`*-top`和`*-bottom`属性"
+  },
+  "horizontalHeader": "水平居中",
+  "horizontalText": "对于具有指定宽度的块元素，可以使用`.mx-auto`来使它的内容水平居中",
+  "examples": {
+    "horizontal": {
+      "heading": "### 水平布局"
+    }
+  }
+}

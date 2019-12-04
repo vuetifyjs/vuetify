@@ -1,0 +1,8 @@
+{
+  "classesHeader": "## 类",
+  "classesText2": "文本色彩还可以使用`text--{lighten|darken}-{n}`来支持**变暗（darken）**和**变亮（lighten）**变体",
+  "javascriptPackHeader": "## Javascript色彩包",
+  "javascriptPackText": "Vuetify也有一个可选的色彩包，您可以在您的应用程序中导入和使用。这也可以用来帮助定义您的应用程序的主题。",
+  "colorHeader": "## Material 色彩表",
+  "colorText": "以下是按原色分组的Material Design调色板列表。"
+}

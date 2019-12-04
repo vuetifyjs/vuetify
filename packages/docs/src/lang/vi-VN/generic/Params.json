@@ -1,1 +1,4 @@
-{}
+{
+  "callback": "Hàm được gọi sau khi hoàn thành",
+  "debounce": "Thời gian đợi đến khi hàm được thực thi"
+}

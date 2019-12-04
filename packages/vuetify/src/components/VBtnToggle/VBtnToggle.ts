@@ -16,7 +16,13 @@ export default mixins(
   name: 'v-btn-toggle',
 
   props: {
+    backgroundColor: String,
+    borderless: Boolean,
+    dense: Boolean,
+    group: Boolean,
     rounded: Boolean,
+    shaped: Boolean,
+    tile: Boolean,
   },
 
   computed: {
@@ -24,7 +30,12 @@ export default mixins(
       return {
         ...ButtonGroup.options.computed.classes.call(this),
         'v-btn-toggle': true,
+        'v-btn-toggle--borderless': this.borderless,
+        'v-btn-toggle--dense': this.dense,
+        'v-btn-toggle--group': this.group,
         'v-btn-toggle--rounded': this.rounded,
+        'v-btn-toggle--shaped': this.shaped,
+        'v-btn-toggle--tile': this.tile,
         ...this.themeClasses,
       }
     },
@@ -32,9 +43,13 @@ export default mixins(
 
   methods: {
     genData () {
-      return this.setTextColor(this.color, {
+      const data = this.setTextColor(this.color, {
         ...ButtonGroup.options.methods.genData.call(this),
       })
+
+      if (this.group) return data
+
+      return this.setBackgroundColor(this.backgroundColor, data)
     },
   },
 })

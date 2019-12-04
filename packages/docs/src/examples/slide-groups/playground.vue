@@ -1,13 +1,13 @@
 <template>
   <div>
-    <v-layout wrap justify-space-around>
+    <v-row justify="space-around">
       <v-switch v-model="multiple" label="Multiple"></v-switch>
       <v-switch v-model="mandatory" label="Mandatory"></v-switch>
       <v-switch v-model="showArrows" label="Show arrows"></v-switch>
       <v-switch v-model="prevIcon" label="Custom prev icon"></v-switch>
       <v-switch v-model="nextIcon" label="Custom next icon"></v-switch>
       <v-switch v-model="centerActive" label="Center active item"></v-switch>
-    </v-layout>
+    </v-row>
 
     <v-sheet
       class="mx-auto"
@@ -36,10 +36,10 @@
             width="100"
             @click="toggle"
           >
-            <v-layout
-              align-center
-              fill-height
-              justify-center
+            <v-row
+              class="fill-height"
+              align="center"
+              justify="center"
             >
               <v-scale-transition>
                 <v-icon
@@ -49,7 +49,7 @@
                   v-text="'mdi-close-circle-outline'"
                 ></v-icon>
               </v-scale-transition>
-            </v-layout>
+            </v-row>
           </v-card>
         </v-slide-item>
       </v-slide-group>

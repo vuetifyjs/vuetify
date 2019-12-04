@@ -11,6 +11,18 @@ module.exports = {
         name: 'change',
         value: 'string',
       },
+      {
+        name: 'blur',
+        value: 'boolean',
+      },
+      {
+        name: 'focus',
+        value: 'boolean',
+      },
+      {
+        name: 'keydown',
+        value: 'KeyboardEvent',
+      },
       ...inputEvents,
       ...textEvents,
     ].concat(validatableEvents),

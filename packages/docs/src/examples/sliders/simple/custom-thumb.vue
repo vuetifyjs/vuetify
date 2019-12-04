@@ -1,6 +1,6 @@
 <template>
-  <v-layout>
-    <v-flex pa-12>
+  <v-row>
+    <v-col class="pa-12">
       <v-range-slider
         :tick-labels="seasons"
         :value="[0, 1]"
@@ -15,8 +15,8 @@
           </v-icon>
         </template>
       </v-range-slider>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

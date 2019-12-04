@@ -151,4 +151,39 @@ describe('VTabs.ts', () => {
     expect(wrapper.vm.slider.left).toBe(0)
     expect(wrapper.vm.slider.width).toBe(0)
   })
+
+  it('should adjust slider size', async () => {
+    const el = {
+      $el: {
+        scrollHeight: 99,
+        scrollWidth: 99,
+      },
+    }
+    const wrapper = mountFunction({
+      propsData: {
+        value: 0,
+      },
+    })
+    wrapper.vm.$refs.items.items.push(el)
+    wrapper.vm.callSlider()
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.slider.height).toBe(2)
+
+    wrapper.setProps({ sliderSize: 4 })
+    wrapper.vm.callSlider()
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.slider.height).toBe(4)
+
+    wrapper.setProps({ vertical: true })
+    wrapper.vm.callSlider()
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.slider.height).toBe(99)
+    expect(wrapper.vm.slider.width).toBe(4)
+  })
 })
