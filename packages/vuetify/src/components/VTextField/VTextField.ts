@@ -9,6 +9,7 @@ import VCounter from '../VCounter'
 import VLabel from '../VLabel'
 
 // Mixins
+import Intersectable from '../../mixins/intersectable'
 import Loadable from '../../mixins/loadable'
 
 // Directives
@@ -24,7 +25,14 @@ import { VNode } from 'vue/types'
 
 const baseMixins = mixins(
   VInput,
-  Loadable
+  Intersectable({
+    onVisible: [
+      'setLabelWidth',
+      'setPrefixWidth',
+      'setPrependWidth',
+    ],
+  }),
+  Loadable,
 )
 interface options extends InstanceType<typeof baseMixins> {
   $refs: {
