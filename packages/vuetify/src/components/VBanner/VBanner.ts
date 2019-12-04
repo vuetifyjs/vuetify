@@ -161,6 +161,7 @@ export default mixins(
     return h(VExpandTransition, [
       h('div', {
         staticClass: 'v-banner',
+        attrs: this.attrs$,
         class: this.classes,
         style: this.styles,
         directives: [{
