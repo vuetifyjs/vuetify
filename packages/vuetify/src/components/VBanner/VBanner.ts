@@ -13,11 +13,14 @@ import { VExpandTransition } from '../transitions'
 import Toggleable from '../../mixins/toggleable'
 
 // Utilities
-import { convertToUnit } from '../../util/helpers'
+import mixins from '../../util/mixins'
+import {
+  convertToUnit,
+  getSlot,
+} from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue/types'
-import mixins from '../../util/mixins'
 import { PropValidator } from 'vue/types/options'
 
 /* @vue/component */
@@ -58,9 +61,6 @@ export default mixins(
         'v-banner--single-line': this.singleLine,
         'v-banner--sticky': this.isSticky,
       }
-    },
-    hasActions (): boolean {
-      return Boolean(this.$slots.actions || this.$scopedSlots.actions)
     },
     hasIcon (): boolean {
       return Boolean(this.icon || this.$slots.icon)
@@ -129,11 +129,11 @@ export default mixins(
       }, this.$slots.default)
     },
     genActions () {
-      if (!this.hasActions) return undefined
-
-      const children = this.$scopedSlots.actions ? this.$scopedSlots.actions({
+      const children = getSlot(this, 'actions', {
         dismiss: () => this.isActive = false,
-      }) : this.$slots.actions
+      })
+
+      if (!children) return undefined
 
       return this.$createElement('div', {
         staticClass: 'v-banner__actions',
