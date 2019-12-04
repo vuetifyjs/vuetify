@@ -433,6 +433,7 @@ export default VDataIterator.extend({
           staticClass: 'v-data-table__checkbox',
           props: {
             value: data.isSelected,
+            disabled: !this.isSelectable(item),
           },
           on: {
             input: (val: boolean) => data.select(val),
