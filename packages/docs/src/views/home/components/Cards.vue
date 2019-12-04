@@ -23,18 +23,18 @@
                 <v-skeleton-loader
                   :loading="internalValue"
                   min-width="550"
-                  width="100%"
                   type="image"
+                  width="100%"
                 >
                   <base-card
                     v-if="Object(card) === card"
                     :href="`${card.url}?ref=vuetifyjs.com${card.query || ''}`"
                     :title="`Link to ${card.title}`"
                     class="v-card--mwvjs mx-auto"
-                    width="450"
                     max-width="100%"
                     rel="noopener"
                     target="_blank"
+                    width="450"
                     @click="$ga.event('home', 'click', 'card', card.title)"
                   >
                     <v-img
@@ -80,8 +80,8 @@
           <v-col
             v-if="i % 2 === 1"
             :key="`break-${i}`"
-            cols="12"
             class="pa-0"
+            cols="12"
           />
         </template>
       </v-row>

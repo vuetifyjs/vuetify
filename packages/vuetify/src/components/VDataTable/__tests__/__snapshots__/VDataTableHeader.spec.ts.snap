@@ -553,6 +553,7 @@ exports[`VDataTableHeader.ts mobile should render 1`] = `
                     </i>
                   </div>
                 </div>
+                <input type="hidden">
               </div>
               <div class="v-menu">
                 <div class="v-menu__content theme--light "
@@ -617,6 +618,7 @@ exports[`VDataTableHeader.ts mobile should render with data-table-select header 
                     </i>
                   </div>
                 </div>
+                <input type="hidden">
               </div>
               <div class="v-menu">
                 <div class="v-menu__content theme--light "
@@ -683,6 +685,9 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
                     </i>
                   </div>
                 </div>
+                <input type="hidden"
+                       value="iron"
+                >
               </div>
               <div class="v-menu">
                 <div class="v-menu__content theme--light "
@@ -736,6 +741,7 @@ exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
                     </i>
                   </div>
                 </div>
+                <input type="hidden">
               </div>
               <div class="v-menu">
                 <div class="v-menu__content theme--light "
@@ -802,6 +808,9 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
                     </i>
                   </div>
                 </div>
+                <input type="hidden"
+                       value="iron"
+                >
               </div>
               <div class="v-menu">
                 <div class="v-menu__content theme--light "
@@ -868,6 +877,9 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
                     </i>
                   </div>
                 </div>
+                <input type="hidden"
+                       value="iron"
+                >
               </div>
               <div class="v-menu">
                 <div class="v-menu__content theme--light "

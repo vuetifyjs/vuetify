@@ -39,6 +39,9 @@ exports[`VSelect.ts should be clearable with prop, dirty and multi select 1`] = 
             </i>
           </div>
         </div>
+        <input type="hidden"
+               value="1"
+        >
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
@@ -99,6 +102,9 @@ exports[`VSelect.ts should be clearable with prop, dirty and single select 1`] =
             </i>
           </div>
         </div>
+        <input type="hidden"
+               value="1"
+        >
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
@@ -150,6 +156,9 @@ exports[`VSelect.ts should use scoped slot for selection generation 1`] = `
             </i>
           </div>
         </div>
+        <input type="hidden"
+               value="foo"
+        >
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
