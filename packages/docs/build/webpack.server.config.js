@@ -1,8 +1,6 @@
-const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const base = require('./webpack.base.config')
-const nodeExternals = require('webpack-node-externals')
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
 
 const isProd = process.env.NODE_ENV === 'production'
@@ -20,13 +18,7 @@ module.exports = merge(base, {
       'vue$': 'vue/dist/vue.runtime.common.js'
     }
   },
-  // https://webpack.js.org/configuration/externals/#externals
-  // https://github.com/liady/webpack-node-externals
-  externals: nodeExternals({
-    // do not externalize CSS files in case we need to import it from a dep
-    whitelist: isProd ? undefined : /^vuetify/,
-    modulesDir: path.resolve(__dirname, '../../../node_modules')
-  }),
+  externals: ['dotenv', 'lodash', '@mdi/js'],
   module: {
     rules: [
       {

@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const base = require('./webpack.base.config')
+const CopyPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 
@@ -76,7 +77,10 @@ const config = merge(base, {
     new webpack.DefinePlugin({
       'process.env.VUE_ENV': '"client"'
     }),
-    new VueSSRClientPlugin()
+    new VueSSRClientPlugin(),
+    new CopyPlugin([
+      { from: 'src/public', force: true },
+    ]),
   ],
   optimization: {
     minimize: isProd,
@@ -109,7 +113,8 @@ if (isProd) {
   config.plugins.push(
     new MiniCssExtractPlugin({
       filename: 'common.[chunkhash].css'
-    })
+    }),
+
   )
 }
 

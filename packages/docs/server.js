@@ -3,7 +3,6 @@ const path = require('path')
 const LRU = require('lru-cache')
 const express = require('express')
 const cookieParser = require('cookie-parser')
-const favicon = require('serve-favicon')
 const compression = require('compression')
 const microcache = require('route-cache')
 const resolve = file => path.resolve(__dirname, file)
@@ -126,7 +125,7 @@ function render (req, res) {
       res.status(404).send('404 | Page Not Found')
     } else {
       ouchInstance.handleException(err, req, res, output => {
-        console.log('Error handled!')
+        console.log('Error handled!', err)
       })
     }
   }

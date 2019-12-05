@@ -5,7 +5,7 @@
   "author": "John Leider <john.j.leider@gmail.com>",
   "version": "2.1.6",
   "engines": {
-    "node": "10.x"
+    "node": ">10.x"
   },
   "scripts": {
     "dev": "cross-env node --max_old_space_size=4096 server",
