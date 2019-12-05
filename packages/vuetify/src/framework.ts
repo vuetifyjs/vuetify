@@ -2,12 +2,12 @@ import { install } from './install'
 import { Preset } from '../src/presets/default'
 
 // Types
+import Vue from 'vue'
+import { UserVuetifyPreset } from 'vuetify/types/presets'
 import {
   VuetifyService,
   VuetifyServiceContract,
 } from 'vuetify/types/services'
-import { VuetifyPreset } from 'vuetify/types/presets'
-import Vue from 'vue'
 
 // Services
 import * as services from './services'
@@ -30,10 +30,10 @@ export default class Vuetify {
 
   preset = Preset
 
-  userPreset: Partial<VuetifyPreset> = {}
+  userPreset: Partial<UserVuetifyPreset> = {}
 
-  constructor (preset: Partial<VuetifyPreset> = {}) {
-    this.userPreset = preset
+  constructor (userPreset: Partial<UserVuetifyPreset> = {}) {
+    this.userPreset = userPreset
 
     this.use(services.Presets)
     this.use(services.Application)
@@ -67,7 +67,8 @@ export default class Vuetify {
 
     if (this.installed.includes(property)) return
 
-    this.framework[property] = new Service(this.preset, this)
+    // TODO maybe a specific type for arg 2?
+    this.framework[property] = new Service(this.preset, this as any)
     this.installed.push(property)
   }
 }

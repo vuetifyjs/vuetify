@@ -34,7 +34,7 @@ export class Theme extends Service {
 
   private vueMeta = null as any | null
 
-  constructor (preset: VuetifyPreset = {}) {
+  constructor (preset: VuetifyPreset) {
     super()
 
     const itheme: ITheme = preset[Theme.property]

@@ -12,7 +12,7 @@ import { Theme } from './services/theme'
 
 // Service Options
 import { GoToOptions } from './services/goto'
-import { VuetifyPreset } from './presets'
+import { UserVuetifyPreset, VuetifyPreset } from './presets'
 
 declare const Vuetify: Vuetify
 export default Vuetify
@@ -23,7 +23,7 @@ export interface Vuetify {
   preset: VuetifyPreset
   userPreset: Partial<VuetifyPreset>
   version: string
-  new (preset?: Partial<VuetifyPreset>): Vuetify
+  new (preset?: Partial<UserVuetifyPreset>): Vuetify
 }
 
 export type ComponentOrPack = Component & {
@@ -204,6 +204,6 @@ export interface DataTableHeader<T extends any = any> {
 }
 
 export type DataItemsPerPageOption = (number | {
-  text: string;
-  value: number;
+  text: string
+  value: number
 });
