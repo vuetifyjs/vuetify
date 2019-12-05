@@ -45,7 +45,7 @@ export const Preset: VuetifyPreset = {
     },
     themes: {
       light: {
-        primary: colors.blueGrey.darken2,
+        primary: colors.blue.darken2,
         secondary: colors.grey.darken3,
         accent: colors.blue.accent1,
         error: colors.red.accent2,
