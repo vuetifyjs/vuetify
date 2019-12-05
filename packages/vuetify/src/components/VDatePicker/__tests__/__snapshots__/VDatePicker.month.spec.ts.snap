@@ -45,7 +45,7 @@ exports[`VDatePicker.ts should match snapshot with allowed dates as array 1`] = 
     </td>
     <td>
       <button type="button"
-              class="v-btn v-size--default v-btn--active theme--light accent"
+              class="v-btn v-size--default v-btn--active v-btn--active-single theme--light accent"
       >
         <div class="v-btn__content">
           May

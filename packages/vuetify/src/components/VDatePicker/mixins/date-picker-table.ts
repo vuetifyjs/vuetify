@@ -18,6 +18,8 @@ import { DatePickerAllowedDatesFunction, DatePickerFormatter, DatePickerEvents, 
 
 type CalculateTableDateFunction = (v: number) => string
 
+type SelectionType = 'start' | 'end' | 'middle' | 'single' | null
+
 export default mixins(
   Colorable,
   Localable,
@@ -74,10 +76,13 @@ export default mixins(
   },
 
   methods: {
-    genButtonClasses (isAllowed: boolean, isFloating: boolean, isSelected: boolean, isCurrent: boolean) {
+    genButtonClasses (isAllowed: boolean, isFloating: boolean, selectionType: SelectionType, isCurrent: boolean) {
+      const isSelected = selectionType !== null
+
       return {
         'v-size--default': !isFloating,
         'v-btn--active': isSelected,
+        [`v-btn--active-${selectionType}`]: isSelected,
         'v-btn--flat': !isAllowed || this.disabled,
         'v-btn--text': isSelected === isCurrent,
         'v-btn--rounded': isFloating,
@@ -99,14 +104,15 @@ export default mixins(
     },
     genButton (value: string, isFloating: boolean, mouseEventType: string, formatter: DatePickerFormatter) {
       const isAllowed = isDateAllowed(value, this.min, this.max, this.allowedDates)
-      const isSelected = this.isSelected(value)
+      const selectionType = this.getSelectionType(value)
+      const isSelected = selectionType !== null
       const isCurrent = value === this.current
       const setColor = isSelected ? this.setBackgroundColor : this.setTextColor
       const color = (isSelected || isCurrent) && (this.color || 'accent')
 
       return this.$createElement('button', setColor(color, {
         staticClass: 'v-btn',
-        class: this.genButtonClasses(isAllowed, isFloating, isSelected, isCurrent),
+        class: this.genButtonClasses(isAllowed, isFloating, selectionType, isCurrent),
         attrs: {
           type: 'button',
         },
@@ -191,17 +197,21 @@ export default mixins(
         directives: [touchDirective],
       }, [transition])
     },
-    isSelected (value: string): boolean {
+    getSelectionType (value: string): SelectionType {
       if (Array.isArray(this.value)) {
         if (this.range && this.value.length === 2) {
           const [from, to] = [...this.value].sort()
-          return from <= value && value <= to
+
+          if (value === from && value === to) return 'single'
+          if (value === from) return 'start'
+          if (value === to) return 'end'
+          return (value > from && value < to) ? 'middle' : null
         } else {
-          return this.value.indexOf(value) !== -1
+          return this.value.indexOf(value) !== -1 ? 'single' : null
         }
       }
 
-      return value === this.value
+      return value === this.value ? 'single' : null
     },
   },
 })

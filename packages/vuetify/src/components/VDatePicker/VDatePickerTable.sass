@@ -11,6 +11,7 @@
   height: $date-picker-table-height
 
   table
+    border-spacing: 0
     transition: $primary-transition
     top: 0
     table-layout: fixed
@@ -19,6 +20,7 @@
   td, th
     text-align: center
     position: relative
+    padding: 1px 0
 
   th
     font-size: $date-picker-table-font-size
@@ -34,6 +36,18 @@
 
     &.v-btn--active
       color: $date-picker-table-active-date-color
+
+      &:not(.v-btn--active-single)
+        width: 100%
+
+    &.v-btn--active-start
+        border-radius: 50% 0 0 50%
+
+    &.v-btn--active-end
+        border-radius: 0 50% 50% 0
+
+    &.v-btn--active-middle
+        border-radius: 0
 
 .v-date-picker-table--month
   td

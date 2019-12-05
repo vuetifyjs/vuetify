@@ -82,7 +82,7 @@ exports[`VDatePicker.ts should match snapshot with colored picker & header 1`] =
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--active v-btn--rounded theme--light primary"
+                        class="v-btn v-btn--active v-btn--active-single v-btn--rounded theme--light primary"
                 >
                   <div class="v-btn__content">
                     1
@@ -449,7 +449,7 @@ exports[`VDatePicker.ts should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--active v-btn--rounded theme--light orange darken-1"
+                        class="v-btn v-btn--active v-btn--active-single v-btn--rounded theme--light orange darken-1"
                 >
                   <div class="v-btn__content">
                     1
@@ -874,7 +874,7 @@ exports[`VDatePicker.ts should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--active v-btn--rounded theme--dark accent"
+                        class="v-btn v-btn--active v-btn--active-single v-btn--rounded theme--dark accent"
                 >
                   <div class="v-btn__content">
                     7
@@ -1252,7 +1252,7 @@ exports[`VDatePicker.ts should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--active v-btn--rounded theme--light accent"
+                        class="v-btn v-btn--active v-btn--active-single v-btn--rounded theme--light accent"
                 >
                   <div class="v-btn__content">
                     7
@@ -3185,7 +3185,7 @@ exports[`VDatePicker.ts should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--active v-btn--flat v-btn--rounded v-btn--disabled theme--light accent"
+                        class="v-btn v-btn--active v-btn--active-single v-btn--flat v-btn--rounded v-btn--disabled theme--light accent"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3588,7 +3588,7 @@ exports[`VDatePicker.ts should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--active v-btn--rounded theme--light accent"
+                        class="v-btn v-btn--active v-btn--active-single v-btn--rounded theme--light accent"
                 >
                   <div class="v-btn__content">
                     7
