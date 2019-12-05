@@ -12,9 +12,6 @@ import {
 // Services
 import * as services from './services'
 
-// Styles
-import './styles/main.sass'
-
 export default class Vuetify {
   static install = install
 

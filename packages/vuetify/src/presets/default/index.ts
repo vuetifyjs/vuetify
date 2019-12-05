@@ -1,3 +1,6 @@
+// Styles
+import '../../styles/main.sass'
+
 // Utilities
 import colors from '../../util/colors'
 
