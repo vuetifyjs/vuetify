@@ -9,6 +9,7 @@ import { getObjectValueByPath } from '../../util/helpers'
 import { consoleError, consoleWarn } from '../../util/console'
 
 // Types
+import { VuetifyPreset } from 'vuetify/types/presets'
 import {
   VuetifyLocale,
   Lang as ILang,
@@ -41,17 +42,25 @@ function getTranslation (
 export class Lang extends Service implements ILang {
   static property = 'lang'
 
-  public locales: Record<string, VuetifyLocale>
+  public current: ILang['current']
 
-  public current: string
+  public locales: ILang['locales']
 
-  private translator: ((key: string, ...params: any[]) => string) | undefined
+  private translator: ILang['t']
 
-  constructor (options: Partial<ILang> = {}) {
+  constructor (preset: VuetifyPreset) {
     super()
-    this.current = options.current || 'en'
-    this.locales = Object.assign({ en }, options.locales)
-    this.translator = options.t
+
+    const ilang: ILang = preset[Lang.property]
+    const {
+      current,
+      locales,
+      t,
+    } = ilang
+
+    this.current = current
+    this.locales = Object.assign({ en }, locales)
+    this.translator = t
   }
 
   public t (key: string, ...params: any[]) {

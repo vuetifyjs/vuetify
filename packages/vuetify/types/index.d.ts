@@ -17,9 +17,12 @@ import { VuetifyPreset } from './presets'
 declare const Vuetify: Vuetify
 export default Vuetify
 export interface Vuetify {
-  install: PluginFunction<VuetifyUseOptions>
-  version: string
+  defaultPreset: VuetifyPreset
   framework: Framework
+  install: PluginFunction<VuetifyUseOptions>
+  preset: VuetifyPreset
+  userPreset: Partial<VuetifyPreset>
+  version: string
   new (preset?: Partial<VuetifyPreset>): Vuetify
 }
 

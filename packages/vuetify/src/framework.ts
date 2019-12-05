@@ -1,4 +1,5 @@
 import { install } from './install'
+import { Preset } from '../src/presets/default'
 
 // Types
 import {
@@ -25,11 +26,16 @@ export default class Vuetify {
 
   installed: string[] = []
 
-  preset: Partial<VuetifyPreset> = {}
+  defaultPreset = Preset
+
+  preset = Preset
+
+  userPreset: Partial<VuetifyPreset> = {}
 
   constructor (preset: Partial<VuetifyPreset> = {}) {
-    this.preset = preset
+    this.userPreset = preset
 
+    this.use(services.Presets)
     this.use(services.Application)
     this.use(services.Breakpoint)
     this.use(services.Goto)
@@ -61,7 +67,7 @@ export default class Vuetify {
 
     if (this.installed.includes(property)) return
 
-    this.framework[property] = new Service(this.preset[property])
+    this.framework[property] = new Service(this.preset, this)
     this.installed.push(property)
   }
 }

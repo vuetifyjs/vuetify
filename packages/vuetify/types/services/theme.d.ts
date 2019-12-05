@@ -10,8 +10,8 @@ export interface Theme {
     themeCache?: VuetifyThemeCache
   }
   themes: {
-    dark: Partial<VuetifyThemeVariant>
-    light: Partial<VuetifyThemeVariant>
+    dark: VuetifyThemeVariant
+    light: VuetifyThemeVariant
   }
   readonly currentTheme: Partial<VuetifyThemeVariant>
 }

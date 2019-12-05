@@ -2,6 +2,7 @@
 import { Service } from '../service'
 
 // Types
+import { VuetifyPreset } from 'vuetify/types/presets'
 import { BreakpointOptions, Breakpoint as IBreakpoint } from 'vuetify/types/services/breakpoint'
 
 export class Breakpoint extends Service implements IBreakpoint {
@@ -46,24 +47,24 @@ export class Breakpoint extends Service implements IBreakpoint {
 
   public width = 0
 
-  public thresholds = {
-    xs: 600,
-    sm: 960,
-    md: 1280,
-    lg: 1920,
-  }
+  public thresholds: IBreakpoint['thresholds']
 
-  public scrollBarWidth = 16
+  public scrollBarWidth: IBreakpoint['scrollBarWidth']
 
   private resizeTimeout = 0
 
-  constructor (options: Partial<BreakpointOptions> = {}) {
+  constructor (preset: VuetifyPreset) {
     super()
-    this.thresholds = {
-      ...this.thresholds,
-      ...options.thresholds,
-    }
-    this.scrollBarWidth = options.scrollBarWidth != null ? options.scrollBarWidth : this.scrollBarWidth
+
+    const ibreakpoint: BreakpointOptions = preset[Breakpoint.property]
+    const {
+      scrollBarWidth,
+      thresholds,
+    } = ibreakpoint
+
+    this.thresholds = thresholds
+    this.scrollBarWidth = scrollBarWidth
+
     this.init()
   }
 

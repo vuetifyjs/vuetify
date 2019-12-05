@@ -2,6 +2,7 @@
 import { Service } from '../service'
 
 // Types
+import { VuetifyPreset } from 'vuetify/types/presets'
 import { Icons as IIcons } from 'vuetify/types/services/icons'
 
 // Presets
@@ -10,17 +11,23 @@ import presets from './presets'
 export class Icons extends Service implements IIcons {
   static property = 'icons'
 
-  public iconfont: IIcons['iconfont'] = 'mdi'
+  public iconfont: IIcons['iconfont']
 
-  public values: IIcons['values'] = presets[this.iconfont]
+  public values: IIcons['values']
 
-  constructor (options: Partial<IIcons> = {}) {
+  constructor (preset: VuetifyPreset) {
     super()
-    if (options.iconfont) this.iconfont = options.iconfont
 
-    this.values = {
-      ...presets[this.iconfont],
-      ...(options.values || {}),
-    }
+    const iicon: IIcons = preset[Icons.property]
+    const {
+      iconfont,
+      values,
+    } = iicon
+
+    this.iconfont = iconfont
+    this.values = Object.assign({},
+      presets[iconfont],
+      values,
+    )
   }
 }

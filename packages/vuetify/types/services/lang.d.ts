@@ -1,7 +1,7 @@
 export interface Lang {
   locales: Record<string, VuetifyLocale>
   current: string
-  t (key: string, ...params: Array<string | number>): string
+  t?: (key: string, ...params: Array<string | number>) => string
 }
 
 // TODO: complete list of keys?
