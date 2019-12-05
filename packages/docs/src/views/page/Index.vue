@@ -19,14 +19,16 @@
 
 <script>
   // Utilities
+  import { getComponent } from '@/util/helpers'
   import {
     get,
     sync,
   } from 'vuex-pathify'
-  import kebabCase from 'lodash/kebabCase'
-  import camelCase from 'lodash/camelCase'
-  import upperFirst from 'lodash/upperFirst'
-  import { getComponent } from '@/util/helpers'
+  import {
+    camelCase,
+    kebabCase,
+    upperFirst,
+  } from 'lodash'
 
   async function load ({ route, store }) {
     const namespace = kebabCase(route.params.namespace)
@@ -65,19 +67,14 @@
     },
 
     provide () {
-      return {
-        id: this.id,
-      }
+      return { id: this.id }
     },
 
-    data: () => ({
-      isLoading: false,
-    }),
+    data: () => ({ isLoading: false }),
 
     computed: {
+      ...sync('route@params', ['namespace', 'page']),
       children: get('documentation/structure'),
-      namespace: sync('route/params@namespace'),
-      page: sync('route/params@page'),
       structure: sync('documentation/structure'),
       id () {
         if (!this.structure) return ''
@@ -91,9 +88,7 @@
       },
     },
 
-    watch: {
-      '$route.path': 'onRouteChange',
-    },
+    watch: { '$route.path': 'onRouteChange' },
 
     asyncData: load,
 

@@ -1,12 +1,17 @@
+// Vue
 import Vue from 'vue'
 import Router from 'vue-router'
 import VueAnalytics from 'vue-analytics'
-import scrollBehavior from './scroll-behavior'
+
+// Settings
 import redirects from './301.json'
+import scrollBehavior from './scroll-behavior'
+
+// Utilities
 import {
   layout,
-  root,
   redirectLang,
+  root,
   route,
 } from './util'
 
@@ -32,13 +37,11 @@ export function createRouter () {
   const router = new Router({
     base: __dirname,
     mode: 'history',
-    scrollBehavior,
     routes,
+    scrollBehavior,
   })
 
   Vue.use(VueAnalytics, {
-    id: 'UA-75262397-3',
-    router,
     autoTracking: {
       page: process.env.NODE_ENV !== 'development',
     },
@@ -47,6 +50,8 @@ export function createRouter () {
       trace: false,
       sendHitTask: true,
     } : false,
+    id: 'UA-75262397-3',
+    router,
   })
 
   return router

@@ -9,7 +9,17 @@
     text
     @click="$ga.event('toolbar', 'click', 'store')"
   >
-    <base-nav-text>Vuetify.AppToolbar.store</base-nav-text>
+    <v-badge
+      v-model="badge"
+      color="red"
+      left
+    >
+      <template v-slot:badge>
+        <v-icon>mdi-tag-text</v-icon>
+      </template>
+
+      <base-nav-text>Vuetify.AppToolbar.store</base-nav-text>
+    </v-badge>
 
     <v-icon right>
       mdi-open-in-new
@@ -20,5 +30,18 @@
 <script>
   export default {
     name: 'BaseStoreLink',
+
+    data () {
+      const start = (new Date('November 28, 2019 18:00:00')).getTime()
+      const stop = (new Date('December 2, 2019 23:59:59')).getTime()
+      const now = Date.now()
+
+      return {
+        badge: (
+          now >= start &&
+          now <= stop
+        ),
+      }
+    },
   }
 </script>

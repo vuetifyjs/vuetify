@@ -5,6 +5,8 @@ exports[`VTreeViewNode.ts should be able to have active children with empty arra
      class="v-treeview-node v-treeview-node--leaf v-treeview-node--click"
 >
   <div class="v-treeview-node__root">
+    <div class="v-treeview-node__level">
+    </div>
     <div class="v-treeview-node__content">
       <div class="v-treeview-node__label">
         Child
@@ -19,6 +21,8 @@ exports[`VTreeViewNode.ts should generate a transition element 1`] = `
      class="v-treeview-node v-treeview-node--leaf"
 >
   <div class="v-treeview-node__root">
+    <div class="v-treeview-node__level">
+    </div>
     <div class="v-treeview-node__content">
       <div class="v-treeview-node__label">
       </div>
@@ -32,6 +36,8 @@ exports[`VTreeViewNode.ts should not be able to have active children with empty 
      class="v-treeview-node v-treeview-node--leaf v-treeview-node--click v-treeview-node--disabled"
 >
   <div class="v-treeview-node__root">
+    <div class="v-treeview-node__level">
+    </div>
     <div class="v-treeview-node__content">
       <div class="v-treeview-node__label">
         Child
@@ -71,14 +77,18 @@ exports[`VTreeViewNode.ts should render disabled item 1`] = `
       arrow_drop_down
     </i>
     <div class="v-treeview-node__content">
-      <div>
-        foobar
+      <div class="v-treeview-node__prepend">
+        <div>
+          foobar
+        </div>
       </div>
       <div class="v-treeview-node__label">
         Root
       </div>
-      <div>
-        foobar
+      <div class="v-treeview-node__append">
+        <div>
+          foobar
+        </div>
       </div>
     </div>
   </div>
@@ -111,14 +121,20 @@ exports[`VTreeViewNode.ts should use scoped slots 1`] = `
      class="v-treeview-node v-treeview-node--leaf"
 >
   <div class="v-treeview-node__root">
+    <div class="v-treeview-node__level">
+    </div>
     <div class="v-treeview-node__content">
-      <div>
-        foobar
+      <div class="v-treeview-node__prepend">
+        <div>
+          foobar
+        </div>
       </div>
       <div class="v-treeview-node__label">
       </div>
-      <div>
-        foobar
+      <div class="v-treeview-node__append">
+        <div>
+          foobar
+        </div>
       </div>
     </div>
   </div>

@@ -16,10 +16,6 @@
 +theme(v-tabs-items) using ($material)
   background-color: map-get($material, 'cards')
 
-.v-tabs-bar.theme--dark
-  .v-tab:not(.v-tab--active):not(.v-tab--disabled)
-    opacity: .7
-
 .v-tabs-bar
   &.primary,
   &.secondary,
@@ -62,10 +58,11 @@
   align-items: center
   display: flex
   flex: 0 1 auto
-  font-size: 0.875rem
-  font-weight: 500
+  font-size: $tab-font-size
+  font-weight: $tab-font-weight
   justify-content: center
-  line-height: normal
+  letter-spacing: $tabs-item-letter-spacing
+  line-height: $tab-line-height
   min-width: $tabs-item-min-width
   max-width: $tabs-item-max-width
   outline: none
@@ -120,24 +117,19 @@
 
 .v-tabs--fixed-tabs > .v-tabs-bar,
 .v-tabs--centered > .v-tabs-bar
-  +ltr()
-    .v-tabs-bar__content > *:last-child
+  .v-tabs-bar__content > *:last-child
+    +ltr()
       margin-right: auto
 
-    .v-tabs-bar__content > *:first-child:not(.v-tabs-slider-wrapper)
+    +rtl()
       margin-left: auto
 
-    .v-tabs-slider-wrapper + *
+  .v-tabs-bar__content > *:first-child:not(.v-tabs-slider-wrapper),
+  .v-tabs-slider-wrapper + *
+    +ltr()
       margin-left: auto
 
-  +rtl()
-    .v-tabs-bar__content > *:last-child
-      margin-left: auto
-
-    .v-tabs-bar__content > *:first-child:not(.v-tabs-slider-wrapper)
-      margin-right: auto
-
-    .v-tabs-slider-wrapper + *
+    +rtl()
       margin-right: auto
 
 .v-tabs--fixed-tabs > .v-tabs-bar
@@ -157,7 +149,7 @@
     flex-direction: column-reverse
 
     > *:first-child
-      margin-bottom: 6px
+      margin-bottom: $tabs-icons-and-text-first-tab-margin-bottom
 
 .v-tabs--overflow > .v-tabs-bar
   .v-tab
@@ -213,4 +205,4 @@
 
 .v-tab--disabled
   pointer-events: none
-  opacity: .5
+  opacity: $tab-disabled-opacity

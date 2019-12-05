@@ -2,8 +2,7 @@
 import './VBreadcrumbs.sass'
 
 // Types
-import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { VNode, PropType } from 'vue'
 
 // Components
 import VBreadcrumbsItem from './VBreadcrumbsItem'
@@ -27,9 +26,9 @@ export default mixins(
       default: '/',
     },
     items: {
-      type: Array,
+      type: Array as PropType<any[]>,
       default: () => ([]),
-    } as PropValidator<any[]>,
+    },
     large: Boolean,
   },
 

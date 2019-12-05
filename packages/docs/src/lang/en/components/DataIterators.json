@@ -28,6 +28,7 @@
       "loadingText": "Text shown when `loading` is true and no items are provided",
       "noDataText": "Text shown when no items are provided to the component",
       "noResultsText": "Text shown when `search` prop is used and there are no results",
+      "selectableKey": "The property on each item that is used to determine if it is selectable or not",
       "singleExpand": "Changes expansion mode to single expand",
       "singleSelect": "Changes selection mode to single select",
       "value": "Used for controlling selected rows"

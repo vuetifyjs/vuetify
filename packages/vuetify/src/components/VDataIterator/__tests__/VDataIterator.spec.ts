@@ -202,7 +202,7 @@ describe('VDataIterator.ts', () => {
     await wrapper.vm.$nextTick()
 
     expect(input).toHaveBeenCalledWith(items)
-    expect(toggleSelectAll).toHaveBeenCalledWith({ value: true })
+    expect(toggleSelectAll).toHaveBeenCalledWith({ items, value: true })
   })
 
   it('should update expansion from the outside', async () => {

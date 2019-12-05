@@ -2,10 +2,9 @@
 import { convertToUnit } from '../../util/helpers'
 
 // Types
-import Vue from 'vue'
-import { PropValidator } from 'vue/types/options'
+import Vue, { PropType } from 'vue'
 
-export type NumberOrNumberString = PropValidator<string | number | undefined>
+export type NumberOrNumberString = PropType<string | number | undefined>
 
 export default Vue.extend({
   name: 'measurable',

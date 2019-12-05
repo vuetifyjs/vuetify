@@ -105,9 +105,9 @@
 
           <a
             class="grey--text text--lighten-1"
-            target="_blank"
-            rel="noopener"
             href="https://www.iubenda.com/privacy-policy/76325752"
+            rel="noopener"
+            target="_blank"
           >
             Privacy Policy
           </a>
@@ -116,9 +116,9 @@
 
           <a
             class="grey--text text--lighten-1"
-            target="_blank"
-            rel="noopener"
             href="https://www.iubenda.com/privacy-policy/76325752/cookie-policy"
+            rel="noopener"
+            target="_blank"
           >
             Cookie Policy
           </a>
@@ -127,9 +127,9 @@
 
           <a
             class="grey--text text--lighten-1"
-            target="_blank"
-            rel="noopener"
             href="mailto:john@vuetifyjs.com"
+            rel="noopener"
+            target="_blank"
           >
             Contact Us
           </a>
@@ -165,11 +165,6 @@
           icon: 'mdi-twitter',
           href: 'https://twitter.com/vuetifyjs',
           title: 'Twitter',
-        },
-        {
-          icon: 'mdi-facebook',
-          href: 'https://www.facebook.com/vuetifyjs',
-          title: 'Facebook',
         },
         {
           icon: 'mdi-discord',

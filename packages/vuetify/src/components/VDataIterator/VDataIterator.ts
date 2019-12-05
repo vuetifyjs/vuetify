@@ -1,5 +1,3 @@
-import { VNode, VNodeChildren } from 'vue'
-
 // Components
 import { VData } from '../VData'
 import VDataFooter from './VDataFooter'
@@ -9,9 +7,11 @@ import Themeable from '../../mixins/themeable'
 
 // Helpers
 import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, camelizeObjectKeys } from '../../util/helpers'
-import { DataProps } from '../VData/VData'
-import { PropValidator } from 'vue/types/options'
 import { breaking, removed } from '../../util/console'
+
+// Types
+import { VNode, VNodeChildren, PropType } from 'vue'
+import { DataScopeProps } from 'types'
 
 /* @vue/component */
 export default Themeable.extend({
@@ -24,14 +24,14 @@ export default Themeable.extend({
       default: 'id',
     },
     value: {
-      type: Array,
+      type: Array as PropType<any[]>,
       default: () => [],
-    } as PropValidator<any[]>,
+    },
     singleSelect: Boolean,
     expanded: {
-      type: Array,
+      type: Array as PropType<any[]>,
       default: () => [],
-    } as PropValidator<any[]>,
+    },
     singleExpand: Boolean,
     loading: [Boolean, String],
     noResultsText: {
@@ -48,6 +48,10 @@ export default Themeable.extend({
     },
     hideDefaultFooter: Boolean,
     footerProps: Object,
+    selectableKey: {
+      type: String,
+      default: 'isSelectable',
+    },
   },
 
   data: () => ({
@@ -58,13 +62,16 @@ export default Themeable.extend({
 
   computed: {
     everyItem (): boolean {
-      return !!this.internalCurrentItems.length && this.internalCurrentItems.every((i: any) => this.isSelected(i))
+      return !!this.selectableItems.length && this.selectableItems.every((i: any) => this.isSelected(i))
     },
     someItems (): boolean {
-      return this.internalCurrentItems.some((i: any) => this.isSelected(i))
+      return this.selectableItems.some((i: any) => this.isSelected(i))
     },
     sanitizedFooterProps (): Record<string, any> {
       return camelizeObjectKeys(this.footerProps)
+    },
+    selectableItems (): any[] {
+      return this.internalCurrentItems.filter(item => this.isSelectable(item))
     },
   },
 
@@ -135,25 +142,39 @@ export default Themeable.extend({
     toggleSelectAll (value: boolean): void {
       const selection = Object.assign({}, this.selection)
 
-      this.internalCurrentItems.forEach((item: any) => {
+      for (let i = 0; i < this.selectableItems.length; i++) {
+        const item = this.selectableItems[i]
+
+        if (!this.isSelectable(item)) continue
+
         const key = getObjectValueByPath(item, this.itemKey)
         if (value) selection[key] = item
         else delete selection[key]
-      })
+      }
 
       this.selection = selection
-      this.$emit('toggle-select-all', { value })
+      this.$emit('toggle-select-all', { items: this.internalCurrentItems, value })
+    },
+    isSelectable (item: any): boolean {
+      return getObjectValueByPath(item, this.selectableKey) !== false
     },
     isSelected (item: any): boolean {
       return !!this.selection[getObjectValueByPath(item, this.itemKey)] || false
     },
     select (item: any, value = true, emit = true): void {
+      if (!this.isSelectable(item)) return
+
       const selection = this.singleSelect ? {} : Object.assign({}, this.selection)
       const key = getObjectValueByPath(item, this.itemKey)
 
       if (value) selection[key] = item
       else delete selection[key]
 
+      if (this.singleSelect && emit) {
+        const keys = Object.keys(this.selection)
+        const old = keys.length && getObjectValueByPath(this.selection[keys[0]], this.itemKey)
+        old && old !== key && this.$emit('item-selected', { item: this.selection[old], value: false })
+      }
       this.selection = selection
       emit && this.$emit('item-selected', { item, value })
     },
@@ -198,7 +219,7 @@ export default Themeable.extend({
 
       return null
     },
-    genItems (props: DataProps) {
+    genItems (props: DataScopeProps) {
       const empty = this.genEmpty(props.originalItemsLength, props.pagination.itemsLength)
       if (empty) return [empty]
 
@@ -218,7 +239,7 @@ export default Themeable.extend({
 
       return []
     },
-    genFooter (props: DataProps) {
+    genFooter (props: DataScopeProps) {
       if (this.hideDefaultFooter) return null
 
       const data = {

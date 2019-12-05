@@ -37,6 +37,7 @@ exports[`VSelect.ts should only show items if they are in items 1`] = `
             </i>
           </div>
         </div>
+        <input type="hidden">
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
@@ -84,6 +85,7 @@ exports[`VSelect.ts should only show items if they are in items 2`] = `
             </i>
           </div>
         </div>
+        <input type="hidden">
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
@@ -134,6 +136,7 @@ exports[`VSelect.ts should only show items if they are in items 3`] = `
             </i>
           </div>
         </div>
+        <input type="hidden">
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
@@ -187,6 +190,7 @@ exports[`VSelect.ts should only show items if they are in items 4`] = `
             </i>
           </div>
         </div>
+        <input type="hidden">
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
@@ -234,6 +238,7 @@ exports[`VSelect.ts should render v-select correctly when not using scope slot 1
             </i>
           </div>
         </div>
+        <input type="hidden">
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
@@ -281,6 +286,7 @@ exports[`VSelect.ts should render v-select correctly when not using v-list-item 
             </i>
           </div>
         </div>
+        <input type="hidden">
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
@@ -328,6 +334,7 @@ exports[`VSelect.ts should render v-select correctly when using v-list-item in i
             </i>
           </div>
         </div>
+        <input type="hidden">
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "

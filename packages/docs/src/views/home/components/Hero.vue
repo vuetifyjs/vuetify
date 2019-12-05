@@ -1,8 +1,8 @@
 <template>
   <base-section
     id="home-hero"
-    class="white--text py-4 py-md-12"
     :class="$vuetify.theme.dark && 'theme--dark'"
+    class="white--text py-4 py-md-12"
   >
     <v-responsive min-height="30vh">
       <v-container class="pa-0">

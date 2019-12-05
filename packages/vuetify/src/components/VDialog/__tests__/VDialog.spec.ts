@@ -275,7 +275,8 @@ describe('VDialog.ts', () => {
     expect(wrapper.vm.isActive).toBe(true)
     await wrapper.vm.$nextTick()
     expect(input).toHaveBeenCalledWith(true)
-    wrapper.vm.closeConditional(new Event('click'))
+
+    wrapper.vm.onClickOutside(new Event('click'))
     expect(clickOutside).toHaveBeenCalled()
   })
 
@@ -340,7 +341,8 @@ describe('VDialog.ts', () => {
     expect(wrapper.vm.isActive).toBe(true)
     await wrapper.vm.$nextTick()
     expect(input).toHaveBeenCalledWith(true)
-    wrapper.vm.closeConditional(new Event('click'))
+
+    wrapper.vm.onClickOutside(new Event('click'))
     expect(clickOutside).toHaveBeenCalled()
     expect(wrapper.vm.isActive).toBe(true)
   })

@@ -28,8 +28,8 @@ import {
 
 // Types
 import mixins from '../../util/mixins'
-import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { VNode, PropType } from 'vue'
+import { SelectItemKey } from 'types'
 
 /* @vue/component */
 export default mixins(Colorable, Themeable).extend({
@@ -45,30 +45,28 @@ export default mixins(Colorable, Themeable).extend({
     dense: Boolean,
     hideSelected: Boolean,
     items: {
-      type: Array,
+      type: Array as PropType<any[]>,
       default: () => [],
-    } as PropValidator<any[]>,
+    },
     itemDisabled: {
-      type: [String, Array, Function],
+      type: [String, Array, Function] as PropType<SelectItemKey>,
       default: 'disabled',
-    } as PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>,
+    },
     itemText: {
-      type: [String, Array, Function],
+      type: [String, Array, Function] as PropType<SelectItemKey>,
       default: 'text',
-    } as PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>,
+    },
     itemValue: {
-      type: [String, Array, Function],
+      type: [String, Array, Function] as PropType<SelectItemKey>,
       default: 'value',
-    } as PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>,
+    },
     noDataText: String,
     noFilter: Boolean,
-    searchInput: {
-      default: null,
-    } as PropValidator<any>,
+    searchInput: null as unknown as PropType<any>,
     selectedItems: {
-      type: Array,
+      type: Array as PropType<any[]>,
       default: () => [],
-    } as PropValidator<any[]>,
+    },
   },
 
   computed: {

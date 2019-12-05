@@ -5,7 +5,9 @@ exports[`VCalendar should go to correct day when using next/prev public function
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
   >
-    <div class="v-calendar-daily__intervals-head">
+    <div class="v-calendar-daily__intervals-head"
+         style="width: 45px;"
+    >
     </div>
     <div class="v-calendar-daily_head-day v-past">
       <div class="v-calendar-daily_head-weekday">
@@ -28,7 +30,9 @@ exports[`VCalendar should go to correct day when using next/prev public function
            style="height: 960px;"
       >
         <div class="v-calendar-daily__day-container">
-          <div class="v-calendar-daily__intervals-body">
+          <div class="v-calendar-daily__intervals-body"
+               style="width: 45px;"
+          >
             <div class="v-calendar-daily__interval"
                  style="height: 40px;"
             >
@@ -307,7 +311,9 @@ exports[`VCalendar should go to correct day when using next/prev public function
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
   >
-    <div class="v-calendar-daily__intervals-head">
+    <div class="v-calendar-daily__intervals-head"
+         style="width: 45px;"
+    >
     </div>
     <div class="v-calendar-daily_head-day v-past">
       <div class="v-calendar-daily_head-weekday">
@@ -330,7 +336,9 @@ exports[`VCalendar should go to correct day when using next/prev public function
            style="height: 960px;"
       >
         <div class="v-calendar-daily__day-container">
-          <div class="v-calendar-daily__intervals-body">
+          <div class="v-calendar-daily__intervals-body"
+               style="width: 45px;"
+          >
             <div class="v-calendar-daily__interval"
                  style="height: 40px;"
             >
@@ -609,7 +617,9 @@ exports[`VCalendar should go to correct day when using next/prev public function
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
   >
-    <div class="v-calendar-daily__intervals-head">
+    <div class="v-calendar-daily__intervals-head"
+         style="width: 45px;"
+    >
     </div>
     <div class="v-calendar-daily_head-day v-past">
       <div class="v-calendar-daily_head-weekday">
@@ -632,7 +642,9 @@ exports[`VCalendar should go to correct day when using next/prev public function
            style="height: 960px;"
       >
         <div class="v-calendar-daily__day-container">
-          <div class="v-calendar-daily__intervals-body">
+          <div class="v-calendar-daily__intervals-body"
+               style="width: 45px;"
+          >
             <div class="v-calendar-daily__interval"
                  style="height: 40px;"
             >
@@ -911,7 +923,9 @@ exports[`VCalendar should render day view 1`] = `
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
   >
-    <div class="v-calendar-daily__intervals-head">
+    <div class="v-calendar-daily__intervals-head"
+         style="width: 45px;"
+    >
     </div>
     <div class="v-calendar-daily_head-day v-past">
       <div class="v-calendar-daily_head-weekday">
@@ -934,7 +948,9 @@ exports[`VCalendar should render day view 1`] = `
            style="height: 960px;"
       >
         <div class="v-calendar-daily__day-container">
-          <div class="v-calendar-daily__intervals-body">
+          <div class="v-calendar-daily__intervals-body"
+               style="width: 45px;"
+          >
             <div class="v-calendar-daily__interval"
                  style="height: 40px;"
             >
@@ -1636,7 +1652,9 @@ exports[`VCalendar should render week view 1`] = `
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
   >
-    <div class="v-calendar-daily__intervals-head">
+    <div class="v-calendar-daily__intervals-head"
+         style="width: 45px;"
+    >
     </div>
     <div class="v-calendar-daily_head-day v-past">
       <div class="v-calendar-daily_head-weekday">
@@ -1743,7 +1761,9 @@ exports[`VCalendar should render week view 1`] = `
            style="height: 960px;"
       >
         <div class="v-calendar-daily__day-container">
-          <div class="v-calendar-daily__intervals-body">
+          <div class="v-calendar-daily__intervals-body"
+               style="width: 45px;"
+          >
             <div class="v-calendar-daily__interval"
                  style="height: 40px;"
             >
