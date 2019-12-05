@@ -8,7 +8,7 @@
     "notSupported": "Not supported",
     "polyfill": "Supported with polyfill"
   },
-  "ie11Header": "## IE11 & Safari 9 support",
+  "ie11Header": "## IE11 &amp; Safari 9 support",
   "ie11Text": "Vuetify utilizes features of ES2015/2017 that require the need to use polyfills for **Internet Explorer 11** and **Safari 9/10**. If you are using Vue CLI 3, this is done automatically for you. Otherwise, in your project directory, you can install `babel-polyfill`:",
   "ie11Text1": "Vuetify utilizes features of ES2015/2017 that require the need to use polyfills for **Internet Explorer 11** and **Safari 9/10**. If you are using Vue CLI 3, this is done automatically for you. Otherwise, in your project directory, you can install `babel-polyfill`:",
   "ie11Text2": "It is important to include the plugin as early as possible within your main **index.js** file. If using a Vuetify SSR package, this will apply to the **client-entry.js** file",

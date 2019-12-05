@@ -1,5 +1,5 @@
 
-import { validateTimestamp, parseDate } from './timestamp'
+import { validateTimestamp, parseDate, DAYS_IN_WEEK } from './timestamp'
 import { VEventInput } from './events'
 import { PropValidator } from 'vue/types/options'
 
@@ -15,9 +15,27 @@ export default {
       validate: validateTimestamp,
     },
     weekdays: {
-      type: Array,
+      type: [Array, String],
       default: () => [0, 1, 2, 3, 4, 5, 6],
-    } as PropValidator<number[]>,
+      validate (input: any[] | string) {
+        if (typeof input === 'string') {
+          input = input.split(',')
+        }
+        if (Array.isArray(input)) {
+          if (input.length > DAYS_IN_WEEK || input.length === 0) {
+            return false
+          }
+          for (let i = 0; i < input.length; i++) {
+            const x = input[i]
+            if (!validateNumber(x) || x < 0 || x >= DAYS_IN_WEEK) {
+              return false
+            }
+          }
+          return true
+        }
+        return false
+      },
+    } as PropValidator<number[] | string>,
     hideHeader: {
       type: Boolean,
       default: false,
@@ -47,6 +65,11 @@ export default {
     intervalHeight: {
       type: [Number, String],
       default: 40,
+      validate: validateNumber,
+    },
+    intervalWidth: {
+      type: [Number, String],
+      default: 45,
       validate: validateNumber,
     },
     intervalMinutes: {

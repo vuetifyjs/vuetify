@@ -430,4 +430,21 @@ describe('VSelect.ts', () => {
       { text: 'Foo', value: ['bar'] },
     ])
   })
+
+  it('should update inner input element', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo', 'bar', 'fizz', 'buzz'],
+        value: ['fizz'],
+      },
+    })
+
+    const inputs = wrapper.findAll('input')
+    const input = inputs.at(1)
+    const element = input.element
+    expect(element.value).toEqual('fizz')
+
+    input.setValue('bar')
+    expect(element.value).toEqual('bar')
+  })
 })

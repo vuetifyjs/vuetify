@@ -17,6 +17,7 @@ import {
   VTimestampFormatter,
   parseTimestamp,
   getWeekdaySkips,
+  getTimestampIdentifier,
   createDayList,
   createNativeLocaleFormatter,
   getStartOfWeek,
@@ -40,8 +41,13 @@ export default mixins(
   props: props.base,
 
   computed: {
+    parsedWeekdays (): number[] {
+      return Array.isArray(this.weekdays)
+        ? this.weekdays
+        : this.weekdays.split(',').map(x => parseInt(x, 10))
+    },
     weekdaySkips (): number[] {
-      return getWeekdaySkips(this.weekdays)
+      return getWeekdaySkips(this.parsedWeekdays)
     },
     weekdaySkipsReverse (): number [] {
       const reversed = this.weekdaySkips.slice()
@@ -52,7 +58,10 @@ export default mixins(
       return parseTimestamp(this.start) as VTimestamp
     },
     parsedEnd (): VTimestamp {
-      return (this.end ? parseTimestamp(this.end) : this.parsedStart) as VTimestamp
+      const start = this.parsedStart
+      const end: VTimestamp = this.end ? parseTimestamp(this.end) || start : start
+
+      return getTimestampIdentifier(end) < getTimestampIdentifier(start) ? start : end
     },
     days (): VTimestamp[] {
       return createDayList(
@@ -99,10 +108,10 @@ export default mixins(
       }
     },
     getStartOfWeek (timestamp: VTimestamp): VTimestamp {
-      return getStartOfWeek(timestamp, this.weekdays, this.times.today)
+      return getStartOfWeek(timestamp, this.parsedWeekdays, this.times.today)
     },
     getEndOfWeek (timestamp: VTimestamp): VTimestamp {
-      return getEndOfWeek(timestamp, this.weekdays, this.times.today)
+      return getEndOfWeek(timestamp, this.parsedWeekdays, this.times.today)
     },
     getFormatter (options: object): VTimestampFormatter {
       return createNativeLocaleFormatter(
