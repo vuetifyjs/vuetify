@@ -661,7 +661,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     wrapper.vm.$on('change', change)
 
     wrapper.findAll('.v-date-picker-table--date tbody tr+tr td button').at(2).trigger('click')
-    // Selected to be [from, to], both 'input' and 'change' should be called
+    // Lead to [from, to], both 'input' and 'change' should be called
     expect(input.mock.calls[0][0]).toEqual(expect.arrayContaining(['2019-01-06', '2019-01-08']))
     expect(change.mock.calls[0][0]).toEqual(expect.arrayContaining(['2019-01-06', '2019-01-08']))
 
@@ -669,7 +669,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
       value: ['2019-01-01', '2019-01-31'],
     })
     wrapper.findAll('.v-date-picker-table--date tbody tr+tr td:first-child button').at(0).trigger('click')
-    // Selected to be [from,], only 'input' should be called
+    // Lead to [from,], only 'input' should be called
     expect(input.mock.calls[1][0]).toEqual(expect.arrayContaining(['2019-01-06']))
     expect(change.mock.calls).toHaveLength(1)
   })
