@@ -3,6 +3,8 @@
 // Theme
 +theme(v-calendar-daily) using ($material)
   background-color: map-deep-get($material, 'calendar', 'background-color')
+  border-left: map-deep-get($material, 'calendar', 'line-color') 1px solid
+  border-top: map-deep-get($material, 'calendar', 'line-color') 1px solid
 
   .v-calendar-daily__intervals-head
     border-right: map-deep-get($material, 'calendar', 'line-color') 1px solid
@@ -45,11 +47,11 @@
 
 .v-calendar-daily__intervals-head
   flex: none
-  width: $calendar-daily-interval-gutter-width
 
 .v-calendar-daily_head-day
   flex: 1 1 auto
   width: 0
+  position: relative
 
 .v-calendar-daily_head-weekday
   user-select: none
@@ -93,10 +95,10 @@
 .v-calendar-daily__intervals-body
   flex: none
   user-select: none
-  width: $calendar-daily-interval-gutter-width
 
 .v-calendar-daily__interval
-  text-align: center
+  text-align: $calendar-daily-interval-gutter-align
+  padding-right: $calendar-daily-interval-gutter-left
   border-bottom: none
 
 .v-calendar-daily__interval-text
