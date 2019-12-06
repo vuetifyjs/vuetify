@@ -3,7 +3,7 @@
 exports[`VDataFooter.ts should disable last page button if no items 1`] = `
 <div class="v-data-footer">
   <div class="v-data-footer__select">
-    Items per page:
+    $vuetify.dataFooter.itemsPerPageText
     <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
       <div class="v-input__control">
         <div role="button"
@@ -53,7 +53,7 @@ exports[`VDataFooter.ts should disable last page button if no items 1`] = `
     <button type="button"
             disabled="disabled"
             class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-            aria-label="First page"
+            aria-label="$vuetify.dataFooter.firstPage"
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
@@ -65,7 +65,7 @@ exports[`VDataFooter.ts should disable last page button if no items 1`] = `
     <button type="button"
             disabled="disabled"
             class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-            aria-label="Previous page"
+            aria-label="$vuetify.dataFooter.prevPage"
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
@@ -79,7 +79,7 @@ exports[`VDataFooter.ts should disable last page button if no items 1`] = `
     <button type="button"
             disabled="disabled"
             class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-            aria-label="Next page"
+            aria-label="$vuetify.dataFooter.nextPage"
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
@@ -91,7 +91,7 @@ exports[`VDataFooter.ts should disable last page button if no items 1`] = `
     <button type="button"
             disabled="disabled"
             class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-            aria-label="Last page"
+            aria-label="$vuetify.dataFooter.lastPage"
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
@@ -107,7 +107,7 @@ exports[`VDataFooter.ts should disable last page button if no items 1`] = `
 exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 1`] = `
 <div class="v-data-footer">
   <div class="v-data-footer__select">
-    Items per page:
+    $vuetify.dataFooter.itemsPerPageText
     <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
       <div class="v-input__control">
         <div role="button"
@@ -151,12 +151,12 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
     </div>
   </div>
   <div class="v-data-footer__pagination">
-    2-10 of 100
+    $vuetify.dataFooter.pageText
   </div>
   <div class="v-data-footer__icons-before">
     <button type="button"
             class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-            aria-label="First page"
+            aria-label="$vuetify.dataFooter.firstPage"
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
@@ -167,7 +167,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
     </button>
     <button type="button"
             class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-            aria-label="Previous page"
+            aria-label="$vuetify.dataFooter.prevPage"
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
@@ -180,7 +180,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
   <div class="v-data-footer__icons-after">
     <button type="button"
             class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-            aria-label="Next page"
+            aria-label="$vuetify.dataFooter.nextPage"
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
@@ -191,7 +191,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
     </button>
     <button type="button"
             class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-            aria-label="Last page"
+            aria-label="$vuetify.dataFooter.lastPage"
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
@@ -207,7 +207,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
 exports[`VDataFooter.ts should render in RTL mode 1`] = `
 <div class="v-data-footer">
   <div class="v-data-footer__select">
-    Items per page:
+    $vuetify.dataFooter.itemsPerPageText
     <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
       <div class="v-input__control">
         <div role="button"
@@ -251,12 +251,12 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
     </div>
   </div>
   <div class="v-data-footer__pagination">
-    2-10 of 100
+    $vuetify.dataFooter.pageText
   </div>
   <div class="v-data-footer__icons-before">
     <button type="button"
             class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-            aria-label="First page"
+            aria-label="$vuetify.dataFooter.firstPage"
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
@@ -267,7 +267,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
     </button>
     <button type="button"
             class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-            aria-label="Previous page"
+            aria-label="$vuetify.dataFooter.prevPage"
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
@@ -280,7 +280,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
   <div class="v-data-footer__icons-after">
     <button type="button"
             class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-            aria-label="Next page"
+            aria-label="$vuetify.dataFooter.nextPage"
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
@@ -291,7 +291,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
     </button>
     <button type="button"
             class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-            aria-label="Last page"
+            aria-label="$vuetify.dataFooter.lastPage"
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
@@ -307,7 +307,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
 exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
 <div class="v-data-footer">
   <div class="v-data-footer__select">
-    Items per page:
+    $vuetify.dataFooter.itemsPerPageText
     <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
       <div class="v-input__control">
         <div role="button"
@@ -351,12 +351,12 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
     </div>
   </div>
   <div class="v-data-footer__pagination">
-    2-10 of 100
+    $vuetify.dataFooter.pageText
   </div>
   <div class="v-data-footer__icons-before">
     <button type="button"
             class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-            aria-label="Previous page"
+            aria-label="$vuetify.dataFooter.prevPage"
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
@@ -370,7 +370,7 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
     <button type="button"
             disabled="disabled"
             class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-            aria-label="Next page"
+            aria-label="$vuetify.dataFooter.nextPage"
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
@@ -386,7 +386,7 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
 exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
 <div class="v-data-footer">
   <div class="v-data-footer__select">
-    Items per page:
+    $vuetify.dataFooter.itemsPerPageText
     <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
       <div class="v-input__control">
         <div role="button"
@@ -430,12 +430,12 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
     </div>
   </div>
   <div class="v-data-footer__pagination">
-    2-10 of 100
+    $vuetify.dataFooter.pageText
   </div>
   <div class="v-data-footer__icons-before">
     <button type="button"
             class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-            aria-label="Previous page"
+            aria-label="$vuetify.dataFooter.prevPage"
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
@@ -451,7 +451,7 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
   <div class="v-data-footer__icons-after">
     <button type="button"
             class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-            aria-label="Next page"
+            aria-label="$vuetify.dataFooter.nextPage"
     >
       <span class="v-btn__content">
         <i aria-hidden="true"

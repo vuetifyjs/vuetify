@@ -56,11 +56,12 @@ export class Breakpoint extends Service implements IBreakpoint {
   constructor (preset: VuetifyPreset) {
     super()
 
-    const ibreakpoint: BreakpointOptions = preset[Breakpoint.property]
+    preset = preset || {} as VuetifyPreset
+
     const {
       scrollBarWidth,
       thresholds,
-    } = ibreakpoint
+    } = preset[Breakpoint.property] || {} as BreakpointOptions
 
     this.thresholds = thresholds
     this.scrollBarWidth = scrollBarWidth

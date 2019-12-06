@@ -1,9 +1,6 @@
 // Styles
 import '../../styles/main.sass'
 
-// Utilities
-import colors from '../../util/colors'
-
 // Types
 import { VuetifyPreset } from 'vuetify/types/presets'
 
@@ -45,22 +42,22 @@ export const Preset: VuetifyPreset = {
     },
     themes: {
       light: {
-        primary: colors.blue.darken2,
-        secondary: colors.grey.darken3,
-        accent: colors.blue.accent1,
-        error: colors.red.accent2,
-        info: colors.blue.base,
-        success: colors.green.base,
-        warning: colors.amber.base,
+        primary: '#1976D2',
+        secondary: '#424242',
+        accent: '#82B1FF',
+        error: '#FF5252',
+        info: '#2196F3',
+        success: '#4CAF50',
+        warning: '#FB8C00',
       },
       dark: {
-        primary: colors.blue.base,
-        secondary: colors.grey.darken3,
-        accent: colors.pink.accent2,
-        error: colors.red.accent2,
-        info: colors.blue.base,
-        success: colors.green.base,
-        warning: colors.amber.base,
+        primary: '#2196F3',
+        secondary: '#424242',
+        accent: '#FF4081',
+        error: '#FF5252',
+        info: '#2196F3',
+        success: '#4CAF50',
+        warning: '#FB8C00',
       },
     },
   },

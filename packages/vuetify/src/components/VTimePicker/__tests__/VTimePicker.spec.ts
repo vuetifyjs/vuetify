@@ -8,7 +8,7 @@ import {
 } from '@vue/test-utils'
 
 Vue.prototype.$vuetify = {
-  lang: new Lang(),
+  lang: { t: text => text },
 }
 
 describe('VTimePicker.ts', () => {

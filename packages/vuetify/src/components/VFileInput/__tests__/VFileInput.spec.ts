@@ -25,7 +25,7 @@ describe('VFileInput.ts', () => {
         sync: false,
         mocks: {
           $vuetify: {
-            lang: new Lang(),
+            lang: { t: text => text },
           },
         },
         ...options,

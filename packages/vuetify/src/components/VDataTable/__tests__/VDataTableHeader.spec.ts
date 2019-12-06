@@ -26,7 +26,7 @@ const testHeaders = [
 
 Vue.prototype.$vuetify = {
   rtl: false,
-  lang: new Lang(),
+  lang: { t: text => text },
   theme: {
     dark: false,
   },

@@ -31,7 +31,7 @@ describe('VDataFooter.ts', () => {
         sync: false,
         mocks: {
           $vuetify: {
-            lang: new Lang(),
+            lang: { t: text => text },
             theme: {
               dark: false,
             },
@@ -84,7 +84,7 @@ describe('VDataFooter.ts', () => {
       mocks: {
         $vuetify: {
           rtl: true,
-          lang: new Lang(),
+          lang: { t: text => text },
           theme: {
             dark: false,
           },

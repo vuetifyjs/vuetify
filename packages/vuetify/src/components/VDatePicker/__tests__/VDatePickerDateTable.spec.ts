@@ -16,7 +16,7 @@ describe('VDatePickerDateTable.ts', () => {
         mocks: {
           $vuetify: {
             rtl: false,
-            lang: new Lang(),
+            lang: { t: text => text },
           },
         },
       })

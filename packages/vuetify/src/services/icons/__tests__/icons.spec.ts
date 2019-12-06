@@ -1,18 +1,22 @@
 // Service
 import { Icons } from '../index'
 
+// Preset
+import { Preset } from '../../../presets/default'
+
 describe('Icons.ts', () => {
   let icon
 
   it('should generate default icons', () => {
-    icon = new Icons()
+    icon = new Icons(Preset)
 
     expect(icon.values).toMatchSnapshot()
   })
 
   it('should use a custom iconfont preset', () => {
     icon = new Icons({
-      iconfont: 'fa4',
+      ...Preset,
+      icons: { iconfont: 'fa4' },
     })
 
     expect(icon.values).toMatchSnapshot()
@@ -20,8 +24,9 @@ describe('Icons.ts', () => {
 
   it('should accept custom icons', () => {
     icon = new Icons({
-      values: {
-        complete: 'fizzbuzz',
+      ...Preset,
+      icons: {
+        values: { complete: 'fizzbuzz' },
       },
     })
 

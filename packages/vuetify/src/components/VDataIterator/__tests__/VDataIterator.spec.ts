@@ -29,7 +29,7 @@ describe('VDataIterator.ts', () => {
       return mount(VDataIterator, {
         mocks: {
           $vuetify: {
-            lang: new Lang(),
+            lang: { t: text => text },
             theme: {
               dark: false,
             },

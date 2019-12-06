@@ -51,12 +51,13 @@ export class Lang extends Service implements ILang {
   constructor (preset: VuetifyPreset) {
     super()
 
-    const ilang: ILang = preset[Lang.property]
+    preset = preset || {} as VuetifyPreset
+
     const {
       current,
       locales,
       t,
-    } = ilang
+    } = preset[Lang.property] || {} as ILang
 
     this.current = current
     this.locales = Object.assign({ en }, locales)
