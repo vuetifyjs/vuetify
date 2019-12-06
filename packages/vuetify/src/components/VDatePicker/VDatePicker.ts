@@ -415,7 +415,7 @@ export default mixins(
           locale: this.locale,
           min: this.minMonth,
           max: this.maxMonth,
-          range: true,
+          range: this.range,
           readonly: this.readonly && this.type === 'month',
           scrollable: this.scrollable,
           value: this.selectedMonths,
