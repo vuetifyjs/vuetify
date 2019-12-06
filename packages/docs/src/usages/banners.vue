@@ -32,8 +32,8 @@
   import Usage from './usage'
 
   export default {
-
     name: 'BannersUsage',
+
     mixins: [Usage],
 
     computed: {

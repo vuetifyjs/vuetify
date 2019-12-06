@@ -30,6 +30,7 @@
 
   export default {
     mixins: [Usage],
+
     data: () => ({
       alert: true,
     }),
