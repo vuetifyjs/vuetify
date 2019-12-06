@@ -14,13 +14,6 @@ export const Preset: VuetifyPreset = {
       lg: 1920,
     },
   },
-  goto: {
-    container: undefined,
-    duration: undefined,
-    offset: undefined,
-    easing: undefined,
-    appOffset: undefined,
-  },
   icons: {
     iconfont: 'mdi',
     values: {},
