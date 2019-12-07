@@ -10,7 +10,7 @@
         aspect-ratio="1"
         class="grey lighten-2"
         v-bind="attrs"
-      ></v-img>
+      />
     </v-row>
   </v-container>
 </template>
