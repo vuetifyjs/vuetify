@@ -142,9 +142,9 @@
             <v-slider
               v-model="sliders[Object(slider) === slider ? slider.prop : slider]"
               v-bind="{
-                ...(Object(slider) === slider ? (slider.attrs || {}) : {}),
                 min: slider === 'elevation' ? 0 : undefined,
                 max: slider === 'elevation' ? 24 : undefined,
+                ...(Object(slider) === slider ? (slider.attrs || {}) : {}),
               }"
               hide-details
             >
