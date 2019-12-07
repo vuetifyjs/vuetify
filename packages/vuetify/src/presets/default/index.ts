@@ -26,7 +26,8 @@ export const Preset: VuetifyPreset = {
   rtl: false,
   theme: {
     dark: false,
-    disable: undefined,
+    default: 'light',
+    disable: false,
     options: {
       cspNonce: undefined,
       customProperties: undefined,

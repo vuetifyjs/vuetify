@@ -3,7 +3,10 @@ import { Preset } from '../src/presets/default'
 
 // Types
 import Vue from 'vue'
-import { UserVuetifyPreset } from 'vuetify/types/presets'
+import {
+  UserVuetifyPreset,
+  VuetifyPreset,
+} from 'vuetify/types/presets'
 import {
   VuetifyService,
   VuetifyServiceContract,
@@ -19,17 +22,17 @@ export default class Vuetify {
 
   static version = __VUETIFY_VERSION__
 
-  framework: Record<string, VuetifyServiceContract> = {}
+  public framework: Dictionary<VuetifyServiceContract> = {}
 
-  installed: string[] = []
+  public installed: string[] = []
 
-  defaultPreset = Preset
+  public defaultPreset = Preset
 
-  preset = Preset
+  public preset = {} as VuetifyPreset
 
-  userPreset: Partial<UserVuetifyPreset> = {}
+  public userPreset: UserVuetifyPreset = {}
 
-  constructor (userPreset: Partial<UserVuetifyPreset> = {}) {
+  constructor (userPreset: UserVuetifyPreset = {}) {
     this.userPreset = userPreset
 
     this.use(services.Presets)
@@ -47,6 +50,7 @@ export default class Vuetify {
   init (root: Vue, ssrContext?: object) {
     this.installed.forEach(property => {
       const service = this.framework[property]
+
       service.framework = this.framework
 
       service.init(root, ssrContext)

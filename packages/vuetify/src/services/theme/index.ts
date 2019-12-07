@@ -16,7 +16,7 @@ import {
 } from 'vuetify/types/services/theme'
 
 export class Theme extends Service {
-  static property = 'theme'
+  static property: 'theme' = 'theme'
 
   public disabled = false
 
@@ -37,13 +37,12 @@ export class Theme extends Service {
   constructor (preset: VuetifyPreset) {
     super()
 
-    const itheme: ITheme = preset[Theme.property]
     const {
       dark,
       disable,
       options,
       themes,
-    } = itheme
+    } = preset[Theme.property]
 
     this.dark = Boolean(dark)
     this.defaults = this.themes = themes

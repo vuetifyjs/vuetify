@@ -4,10 +4,10 @@ export interface Theme {
   default: string | false
   options: {
     /** @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#Unsafe_inline_script */
-    cspNonce: string | null
+    cspNonce?: string
     customProperties?: boolean
-    minifyTheme: ThemeMinifyTheme
-    themeCache: VuetifyThemeCache
+    minifyTheme?: ThemeMinifyTheme
+    themeCache?: VuetifyThemeCache
   }
   themes: {
     dark: VuetifyThemeVariant
@@ -22,7 +22,7 @@ export interface ThemeOptions {
   default?: string | false
   options?: {
     /** @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#Unsafe_inline_script */
-    cspNonce?: string | null
+    cspNonce?: string
     customProperties?: boolean
     minifyTheme?: ThemeMinifyTheme
     themeCache?: VuetifyThemeCache

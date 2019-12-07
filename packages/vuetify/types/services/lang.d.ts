@@ -1,7 +1,7 @@
 export interface Lang {
   locales: LangLocales
   current: string
-  t: LangTranslator
+  t: LangTranslator | undefined
 }
 
 export interface LangOptions {

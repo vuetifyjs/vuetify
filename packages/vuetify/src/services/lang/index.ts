@@ -5,7 +5,7 @@ import { Service } from '../service'
 import en from '../../locale/en'
 
 // Utilities
-import { getObjectValueByPath } from '../../util/helpers'
+import { getObjectValueByPath, mergeDeep } from '../../util/helpers'
 import { consoleError, consoleWarn } from '../../util/console'
 
 // Types
@@ -40,7 +40,7 @@ function getTranslation (
 }
 
 export class Lang extends Service implements ILang {
-  static property = 'lang'
+  static property: 'lang' = 'lang'
 
   public current: ILang['current']
 
@@ -51,16 +51,14 @@ export class Lang extends Service implements ILang {
   constructor (preset: VuetifyPreset) {
     super()
 
-    preset = preset || {} as VuetifyPreset
-
     const {
       current,
       locales,
       t,
-    } = preset[Lang.property] || {} as ILang
+    } = preset[Lang.property]
 
     this.current = current
-    this.locales = Object.assign({ en }, locales)
+    this.locales = mergeDeep({ en }, locales)
     this.translator = t
   }
 

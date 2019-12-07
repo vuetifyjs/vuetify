@@ -1,6 +1,6 @@
 export interface BreakpointOptions {
-  thresholds: BreakpointThresholds
-  scrollBarWidth: number
+  scrollBarWidth?: number
+  thresholds?: Partial<BreakpointThresholds>
 }
 
 export interface BreakpointThresholds {

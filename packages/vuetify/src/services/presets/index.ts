@@ -1,21 +1,36 @@
+// Utilities
+import { mergeDeep } from '../../util/helpers'
+
 // Types
 import Framework from 'vuetify/types'
 import { Service } from '../service'
-import { VuetifyPreset } from 'vuetify/types/presets'
+import {
+  UserVuetifyPreset,
+  VuetifyPreset,
+} from 'vuetify/types/presets'
 
 export class Presets extends Service {
-  static property: 'presets'
+  static property: 'presets' = 'presets'
+
+  preset: VuetifyPreset
 
   constructor (
-    preset: Partial<VuetifyPreset>,
+    preset: Partial<UserVuetifyPreset>,
     parent: InstanceType<typeof Framework>,
   ) {
     super()
 
-    parent.preset = Object.assign({},
-      preset,
-      parent.defaultPreset,
-      parent.userPreset,
-    )
+    const {
+      defaultPreset,
+      userPreset,
+    } = parent
+
+    const defaults = mergeDeep({}, defaultPreset)
+    const upreset = mergeDeep(defaults, preset)
+
+    this.preset = parent.preset = mergeDeep(
+      upreset,
+      userPreset
+    ) as VuetifyPreset
   }
 }

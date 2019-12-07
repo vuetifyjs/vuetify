@@ -411,3 +411,22 @@ export function camelizeObjectKeys (obj: Record<string, any> | null | undefined)
     return o
   }, {})
 }
+
+export function mergeDeep (
+  source: Dictionary<any> = {},
+  target: Dictionary<any> = {}
+) {
+  for (const key in target) {
+    const property = target[key]
+
+    if (isObject(property)) {
+      source[key] = mergeDeep(source[key], property)
+
+      continue
+    }
+
+    source[key] = property
+  }
+
+  return source
+}
