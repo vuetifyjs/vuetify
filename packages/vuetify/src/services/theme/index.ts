@@ -7,7 +7,7 @@ import * as ThemeUtils from './utils'
 
 // Types
 import Vue from 'vue'
-import { VuetifyPreset } from 'vuetify/types/presets'
+import { VuetifyPreset } from 'vuetify/types/services/presets'
 import {
   VuetifyParsedTheme,
   VuetifyThemes,

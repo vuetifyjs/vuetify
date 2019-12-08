@@ -6,7 +6,7 @@ import { getObjectValueByPath } from '../../util/helpers'
 import { consoleError, consoleWarn } from '../../util/console'
 
 // Types
-import { VuetifyPreset } from 'vuetify/types/presets'
+import { VuetifyPreset } from 'vuetify/types/services/presets'
 import {
   VuetifyLocale,
   Lang as ILang,

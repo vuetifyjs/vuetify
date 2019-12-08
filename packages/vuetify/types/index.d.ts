@@ -9,19 +9,22 @@ import { Breakpoint } from './services/breakpoint'
 import { Icons } from './services/icons'
 import { Lang } from './services/lang'
 import { Theme } from './services/theme'
+import {
+  Presets,
+  UserVuetifyPreset,
+  VuetifyPreset,
+} from './services/presets'
 
 // Service Options
 import { GoToOptions } from './services/goto'
-import { UserVuetifyPreset, VuetifyPreset } from './presets'
 
 declare const Vuetify: Vuetify
 export default Vuetify
 export interface Vuetify {
-  defaultPreset: VuetifyPreset
   framework: Framework
   install: PluginFunction<VuetifyUseOptions>
   preset: VuetifyPreset
-  userPreset: Partial<VuetifyPreset>
+  userPreset: UserVuetifyPreset
   version: string
   new (preset?: Partial<UserVuetifyPreset>): Vuetify
 }
@@ -43,6 +46,7 @@ export interface Framework {
   theme: Theme
   icons: Icons
   lang: Lang
+  presets: Presets
   rtl: boolean
 }
 

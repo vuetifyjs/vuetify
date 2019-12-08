@@ -5,7 +5,7 @@ import Vue from 'vue'
 import {
   UserVuetifyPreset,
   VuetifyPreset,
-} from 'vuetify/types/presets'
+} from 'vuetify/types/services/presets'
 import {
   VuetifyService,
   VuetifyServiceContract,

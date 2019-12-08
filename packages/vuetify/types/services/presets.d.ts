@@ -51,3 +51,7 @@ export interface UserVuetifyPreset {
 
   [name: string]: any
 }
+
+export interface Presets {
+  preset: UserVuetifyPreset
+}

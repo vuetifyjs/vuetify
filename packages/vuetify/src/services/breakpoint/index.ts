@@ -2,7 +2,7 @@
 import { Service } from '../service'
 
 // Types
-import { VuetifyPreset } from 'vuetify/types/presets'
+import { VuetifyPreset } from 'vuetify/types/services/presets'
 import { Breakpoint as IBreakpoint } from 'vuetify/types/services/breakpoint'
 
 export class Breakpoint extends Service implements IBreakpoint {

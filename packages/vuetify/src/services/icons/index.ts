@@ -5,7 +5,7 @@ import { Service } from '../service'
 import { mergeDeep } from '../../util/helpers'
 
 // Types
-import { VuetifyPreset } from 'vuetify/types/presets'
+import { VuetifyPreset } from 'vuetify/types/services/presets'
 import {
   Icons as IIcons,
   VuetifyIcons,
