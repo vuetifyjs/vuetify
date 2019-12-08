@@ -14,21 +14,21 @@ describe('Icons.ts', () => {
   })
 
   it('should use a custom iconfont preset', () => {
-    icon = new Icons({
-      ...Preset,
-      icons: { iconfont: 'fa4' },
-    })
+    const preset = { ...Preset }
+
+    preset.icons.iconfont = 'fa4'
+    icon = new Icons(preset)
 
     expect(icon.values).toMatchSnapshot()
   })
 
   it('should accept custom icons', () => {
-    icon = new Icons({
-      ...Preset,
-      icons: {
-        values: { complete: 'fizzbuzz' },
-      },
-    })
+    const preset = { ...Preset }
+
+    preset.icons.iconfont = 'fa4'
+    preset.icons.values.complete = 'fizzbuzz'
+
+    icon = new Icons(preset)
 
     expect(icon.values.complete).toBe('fizzbuzz')
   })

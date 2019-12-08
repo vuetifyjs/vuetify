@@ -61,8 +61,8 @@ export class Breakpoint extends Service implements IBreakpoint {
       thresholds,
     } = preset[Breakpoint.property]
 
-    this.thresholds = thresholds
     this.scrollBarWidth = scrollBarWidth
+    this.thresholds = thresholds
 
     this.init()
   }

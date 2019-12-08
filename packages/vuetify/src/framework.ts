@@ -1,5 +1,4 @@
 import { install } from './install'
-import { Preset } from '../src/presets/default'
 
 // Types
 import Vue from 'vue'
@@ -25,8 +24,6 @@ export default class Vuetify {
   public framework: Dictionary<VuetifyServiceContract> = {}
 
   public installed: string[] = []
-
-  public defaultPreset = Preset
 
   public preset = {} as VuetifyPreset
 

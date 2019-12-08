@@ -1,6 +1,13 @@
 // Styles
 import '../../styles/main.sass'
 
+// Locale
+import { en } from '../../locale'
+
+// Icons
+// TODO: Enable for v3
+// import mdi from '../../services/icons/presets/mdi'
+
 // Types
 import { VuetifyPreset } from 'vuetify/types/presets'
 
@@ -15,13 +22,15 @@ export const Preset: VuetifyPreset = {
     },
   },
   icons: {
+    // TODO: Deprecate in v2.2, remove v3
     iconfont: 'mdi',
     values: {},
   },
   lang: {
     current: 'en',
-    locales: {},
-    t: undefined,
+    locales: { en },
+    // Default translator exists in lang service
+    t: undefined as any,
   },
   rtl: false,
   theme: {

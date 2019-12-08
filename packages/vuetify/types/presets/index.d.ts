@@ -23,11 +23,12 @@ export interface VuetifyPreset {
   }
   icons: {
     iconfont: Icons['iconfont']
+    // TODO: Remove partial for v3
     values: Partial<Icons['values']>
   }
   lang: {
     current: Lang['current']
-    locales: Partial<Lang['locales']>
+    locales: Lang['locales']
     t: Lang['t']
   }
   theme: {
@@ -45,6 +46,7 @@ export interface UserVuetifyPreset {
   breakpoint?: BreakpointOptions
   icons?: IconsOptions
   lang?: LangOptions
+  preset?: UserVuetifyPreset
   theme?: ThemeOptions
 
   [name: string]: any

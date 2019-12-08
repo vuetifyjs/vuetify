@@ -1,3 +1,6 @@
+// Preset
+import { Preset } from '../../presets/default'
+
 // Utilities
 import { mergeDeep } from '../../util/helpers'
 
@@ -12,25 +15,29 @@ import {
 export class Presets extends Service {
   static property: 'presets' = 'presets'
 
-  preset: VuetifyPreset
-
   constructor (
     preset: Partial<UserVuetifyPreset>,
     parent: InstanceType<typeof Framework>,
   ) {
     super()
-
-    const {
-      defaultPreset,
-      userPreset,
-    } = parent
-
-    const defaults = mergeDeep({}, defaultPreset)
+    // Copy defaultPreset
+    const defaults = mergeDeep({}, Preset)
+    // Merge with user provided preset
     const upreset = mergeDeep(defaults, preset)
 
-    this.preset = parent.preset = mergeDeep(
+    let mergedPreset = mergeDeep(
       upreset,
-      userPreset
+      parent.userPreset
     ) as VuetifyPreset
+
+    // Global preset
+    if (mergedPreset.preset) {
+      mergedPreset = mergeDeep(
+        mergedPreset,
+        mergedPreset.preset
+      ) as VuetifyPreset
+    }
+
+    parent.preset = mergedPreset
   }
 }
