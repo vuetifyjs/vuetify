@@ -45,4 +45,13 @@ export default {
     am: '오전',
     pm: '오후',
   },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Pagination Navigation',
+      next: '다음 페이지',
+      previous: '이전 페이지',
+      page: '고토 페이지 {0}',
+      currentPage: '현재 페이지, 페이지 {0}',
+    },
+  },
 }

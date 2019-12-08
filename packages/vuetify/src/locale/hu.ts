@@ -45,4 +45,13 @@ export default {
     am: 'AM',
     pm: 'PM',
   },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Lapszámozásának navigáció',
+      next: 'Következő oldal',
+      previous: 'Előző oldal',
+      page: 'Menj az oldalra {0}',
+      currentPage: 'Aktuális oldal, oldal {0}',
+    },
+  },
 }

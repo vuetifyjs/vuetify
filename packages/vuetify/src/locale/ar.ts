@@ -45,4 +45,13 @@ export default {
     am: 'صباحاً',
     pm: 'مساءً',
   },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'ترقيم الصفحات الملاحة',
+      next: 'الصفحة التالية',
+      previous: 'الصفحة السابقة',
+      page: '{0} انتقل إلى صفحة',
+      currentPage: '{0} الصفحة الحالية ، الصفحة',
+    },
+  },
 }
