@@ -168,7 +168,7 @@ export default baseMixins.extend<options>().extend({
       }, this.$slots.loader || [this.$createElement(VProgressCircular, {
         props: {
           indeterminate: true,
-          size: 23,
+          size: this.xSmall ? 15 : 23,
           width: 2,
         },
       })])
