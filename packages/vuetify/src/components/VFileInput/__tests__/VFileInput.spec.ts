@@ -4,6 +4,9 @@ import VFileInput from '../VFileInput'
 // Services
 import { Lang } from '../../../services/lang'
 
+// Preset
+import { Preset } from '../../../presets/default'
+
 // Libraries
 import {
   Wrapper,
@@ -25,7 +28,7 @@ describe('VFileInput.ts', () => {
         sync: false,
         mocks: {
           $vuetify: {
-            lang: { t: text => text },
+            lang: new Lang(Preset),
           },
         },
         ...options,

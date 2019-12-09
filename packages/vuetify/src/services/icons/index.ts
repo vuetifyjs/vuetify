@@ -6,10 +6,7 @@ import { mergeDeep } from '../../util/helpers'
 
 // Types
 import { VuetifyPreset } from 'vuetify/types/services/presets'
-import {
-  Icons as IIcons,
-  VuetifyIcons,
-} from 'vuetify/types/services/icons'
+import { Icons as IIcons } from 'vuetify/types/services/icons'
 
 // Presets
 import presets from './presets'
@@ -31,7 +28,7 @@ export class Icons extends Service implements IIcons {
 
     this.iconfont = iconfont
     this.values = mergeDeep(
-      presets[iconfont] as VuetifyIcons,
+      presets[iconfont],
       values
     ) as IIcons['values']
   }

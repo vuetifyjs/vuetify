@@ -15,7 +15,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+        aria-label="Calories: Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
         style="width: 50px; min-width: 50px;"
@@ -32,7 +32,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+        aria-label="Fat (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
         style="width: 50em; min-width: 50em;"
@@ -49,7 +49,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+        aria-label="Carbs (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
     >
@@ -65,7 +65,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+        aria-label="Protein (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
     >
@@ -81,7 +81,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+        aria-label="Iron (%): Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
     >
@@ -114,7 +114,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+        aria-label="Calories: Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
         style="width: 50px; min-width: 50px;"
@@ -131,7 +131,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+        aria-label="Fat (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
         style="width: 50em; min-width: 50em;"
@@ -148,7 +148,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+        aria-label="Carbs (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
     >
@@ -164,7 +164,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+        aria-label="Protein (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
     >
@@ -180,7 +180,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortDescending"
+        aria-label="Iron (%): Sorted descending. Activate to remove sorting."
         aria-sort="descending"
         class="text-start sortable active desc"
     >
@@ -219,7 +219,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+        aria-label="Calories: Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
         style="width: 50px; min-width: 50px;"
@@ -239,7 +239,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+        aria-label="Fat (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
         style="width: 50em; min-width: 50em;"
@@ -259,7 +259,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+        aria-label="Carbs (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
     >
@@ -278,7 +278,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+        aria-label="Protein (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
     >
@@ -297,7 +297,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+        aria-label="Iron (%): Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
     >
@@ -333,7 +333,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+        aria-label="Calories: Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
         style="width: 50px; min-width: 50px;"
@@ -350,7 +350,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+        aria-label="Fat (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
         style="width: 50em; min-width: 50em;"
@@ -367,7 +367,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+        aria-label="Carbs (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
     >
@@ -383,7 +383,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+        aria-label="Protein (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
     >
@@ -399,7 +399,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortDescending"
+        aria-label="Iron (%): Sorted descending. Activate to remove sorting."
         aria-sort="descending"
         class="text-start sortable active desc"
     >
@@ -432,7 +432,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+        aria-label="Calories: Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
         style="width: 50px; min-width: 50px;"
@@ -449,7 +449,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+        aria-label="Fat (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
         style="width: 50em; min-width: 50em;"
@@ -466,7 +466,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortDescending"
+        aria-label="Carbs (g): Sorted descending. Activate to remove sorting."
         aria-sort="descending"
         class="text-start sortable active desc"
     >
@@ -482,7 +482,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+        aria-label="Protein (g): Not sorted. Activate to sort ascending."
         aria-sort="none"
         class="text-start sortable"
     >
@@ -498,7 +498,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
     </th>
     <th role="columnheader"
         scope="col"
-        aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortAscending"
+        aria-label="Iron (%): Sorted ascending. Activate to sort descending."
         aria-sort="ascending"
         class="text-start sortable active asc"
     >
@@ -534,7 +534,7 @@ exports[`VDataTableHeader.ts mobile should render 1`] = `
                        class="v-label theme--light"
                        style="left: 0px; position: absolute;"
                 >
-                  $vuetify.dataTable.sortBy
+                  Sort by
                 </label>
                 <div class="v-select__selections">
                   <input id="input-37"
@@ -598,7 +598,7 @@ exports[`VDataTableHeader.ts mobile should render with data-table-select header 
                        class="v-label theme--light"
                        style="left: 0px; position: absolute;"
                 >
-                  $vuetify.dataTable.sortBy
+                  Sort by
                 </label>
                 <div class="v-select__selections">
                   <input id="input-79"
@@ -651,7 +651,7 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
                        class="v-label v-label--active theme--light"
                        style="left: 0px; position: absolute;"
                 >
-                  $vuetify.dataTable.sortBy
+                  Sort by
                 </label>
                 <div class="v-select__selections">
                   <span class="sortable v-chip v-chip--no-color theme--light v-size--default">
@@ -719,7 +719,7 @@ exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
                        class="v-label theme--light"
                        style="left: 0px; position: absolute;"
                 >
-                  $vuetify.dataTable.sortBy
+                  Sort by
                 </label>
                 <div class="v-select__selections">
                   <input id="input-44"
@@ -772,7 +772,7 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
                        class="v-label v-label--active theme--light"
                        style="left: 0px; position: absolute;"
                 >
-                  $vuetify.dataTable.sortBy
+                  Sort by
                 </label>
                 <div class="v-select__selections">
                   <span class="sortable v-chip v-chip--no-color theme--light v-size--default">
@@ -840,7 +840,7 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
                        class="v-label v-label--active theme--light"
                        style="left: 0px; position: absolute;"
                 >
-                  $vuetify.dataTable.sortBy
+                  Sort by
                 </label>
                 <div class="v-select__selections">
                   <span class="sortable v-chip v-chip--no-color theme--light v-size--default">

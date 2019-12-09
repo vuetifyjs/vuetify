@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VTimePickerTitle from '../VTimePickerTitle'
 import { SelectingTimes } from '../VTimePicker'
 import { Lang } from '../../../services/lang'
+import { Preset } from '../../../presets/default'
 import {
   mount,
   Wrapper,
@@ -9,7 +10,7 @@ import {
 } from '@vue/test-utils'
 
 Vue.prototype.$vuetify = {
-  lang: { t: text => text },
+  lang: new Lang(Preset),
 }
 
 describe('VTimePickerTitle.ts', () => {

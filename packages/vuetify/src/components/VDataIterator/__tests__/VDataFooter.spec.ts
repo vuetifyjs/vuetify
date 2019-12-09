@@ -6,6 +6,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 import Vue from 'vue'
+import { Preset } from '../../../presets/default'
 
 Vue.prototype.$vuetify = {
   icons: {
@@ -31,7 +32,7 @@ describe('VDataFooter.ts', () => {
         sync: false,
         mocks: {
           $vuetify: {
-            lang: { t: text => text },
+            lang: new Lang(Preset),
             theme: {
               dark: false,
             },
@@ -84,7 +85,7 @@ describe('VDataFooter.ts', () => {
       mocks: {
         $vuetify: {
           rtl: true,
-          lang: { t: text => text },
+          lang: new Lang(Preset),
           theme: {
             dark: false,
           },

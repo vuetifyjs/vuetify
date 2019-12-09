@@ -6,6 +6,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 import Vue from 'vue'
+import { Preset } from '../../../presets/default'
 
 Vue.prototype.$vuetify = {
   icons: {
@@ -29,7 +30,7 @@ describe('VDataIterator.ts', () => {
       return mount(VDataIterator, {
         mocks: {
           $vuetify: {
-            lang: { t: text => text },
+            lang: new Lang(Preset),
             theme: {
               dark: false,
             },

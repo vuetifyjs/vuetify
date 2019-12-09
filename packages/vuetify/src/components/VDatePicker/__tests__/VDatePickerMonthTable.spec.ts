@@ -1,5 +1,7 @@
 import VDatePickerMonthTable from '../VDatePickerMonthTable'
 import { Lang } from '../../../services/lang'
+
+import { Preset } from '../../../presets/default'
 import {
   mount,
   MountOptions,
@@ -15,7 +17,7 @@ describe('VDatePickerMonthTable.ts', () => {
         ...options,
         mocks: {
           $vuetify: {
-            lang: { t: text => text },
+            lang: new Lang(Preset),
           },
         },
       })

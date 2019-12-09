@@ -26,7 +26,7 @@ exports[`VDataTable.ts should change page if item count decreases below page sta
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -42,7 +42,7 @@ exports[`VDataTable.ts should change page if item count decreases below page sta
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -58,7 +58,7 @@ exports[`VDataTable.ts should change page if item count decreases below page sta
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -74,7 +74,7 @@ exports[`VDataTable.ts should change page if item count decreases below page sta
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -90,7 +90,7 @@ exports[`VDataTable.ts should change page if item count decreases below page sta
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -152,12 +152,12 @@ exports[`VDataTable.ts should change page if item count decreases below page sta
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__pagination">
-      $vuetify.dataFooter.pageText
+      3-4 of 4
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
               class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -172,7 +172,7 @@ exports[`VDataTable.ts should change page if item count decreases below page sta
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -213,7 +213,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -229,7 +229,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -245,7 +245,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -261,7 +261,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -277,7 +277,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -419,7 +419,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -464,13 +464,13 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
       </div>
     </div>
     <div class="v-data-footer__pagination">
-      $vuetify.dataFooter.pageText
+      1-6 of 10
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -484,7 +484,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
     <div class="v-data-footer__icons-after">
       <button type="button"
               class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -525,7 +525,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -541,7 +541,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -557,7 +557,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -573,7 +573,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -589,7 +589,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -811,7 +811,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -856,13 +856,13 @@ exports[`VDataTable.ts should handle object when checking if it should default t
       </div>
     </div>
     <div class="v-data-footer__pagination">
-      $vuetify.dataFooter.pageText
+      1-10 of 10
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -877,7 +877,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -918,7 +918,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -934,7 +934,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -950,7 +950,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -966,7 +966,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -982,7 +982,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -1104,7 +1104,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -1149,12 +1149,12 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
       </div>
     </div>
     <div class="v-data-footer__pagination">
-      $vuetify.dataFooter.pageText
+      6-10 of 10
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
               class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -1169,7 +1169,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -1210,7 +1210,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -1226,7 +1226,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -1242,7 +1242,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -1258,7 +1258,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -1274,7 +1274,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -1293,7 +1293,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
       <tbody>
         <tr class="v-data-table__empty-wrapper">
           <td colspan="6">
-            $vuetify.noDataText
+            No data available
           </td>
         </tr>
       </tbody>
@@ -1301,7 +1301,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -1351,7 +1351,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
     <div class="v-data-footer__icons-before">
       <button type="button"
               class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -1366,7 +1366,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -1407,7 +1407,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -1423,7 +1423,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -1439,7 +1439,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -1455,7 +1455,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -1471,7 +1471,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -1593,7 +1593,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -1638,12 +1638,12 @@ exports[`VDataTable.ts should not limit page to current item count when using se
       </div>
     </div>
     <div class="v-data-footer__pagination">
-      $vuetify.dataFooter.pageText
+      6-10 of 20
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
               class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -1657,7 +1657,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
     <div class="v-data-footer__icons-after">
       <button type="button"
               class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -1688,7 +1688,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
         <tr>
           <th role="columnheader"
               scope="col"
-              aria-label="Dessert (100g serving)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Dessert (100g serving): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-left sortable"
           >
@@ -1704,7 +1704,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -1720,7 +1720,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -1736,7 +1736,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -1752,7 +1752,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -1768,7 +1768,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -1990,7 +1990,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -2035,13 +2035,13 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
       </div>
     </div>
     <div class="v-data-footer__pagination">
-      $vuetify.dataFooter.pageText
+      1-10 of 10
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -2056,7 +2056,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -2087,7 +2087,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
         <tr>
           <th role="columnheader"
               scope="col"
-              aria-label="Dessert (100g serving)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Dessert (100g serving): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-left sortable"
           >
@@ -2103,7 +2103,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -2119,7 +2119,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -2135,7 +2135,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -2151,7 +2151,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -2167,7 +2167,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -2188,7 +2188,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
           <td class
               colspan="6"
           >
-            $vuetify.dataIterator.noResultsText
+            No matching records found
           </td>
         </tr>
       </tbody>
@@ -2196,7 +2196,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -2247,7 +2247,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -2262,7 +2262,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -2293,7 +2293,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
         <tr>
           <th role="columnheader"
               scope="col"
-              aria-label="Dessert (100g serving)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Dessert (100g serving): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-left sortable"
           >
@@ -2309,7 +2309,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -2325,7 +2325,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -2341,7 +2341,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -2357,7 +2357,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -2373,7 +2373,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -2455,7 +2455,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -2500,13 +2500,13 @@ exports[`VDataTable.ts should not search column with filterable set to false and
       </div>
     </div>
     <div class="v-data-footer__pagination">
-      $vuetify.dataFooter.pageText
+      1-3 of 3
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -2521,7 +2521,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -2552,7 +2552,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
         <tr>
           <th role="columnheader"
               scope="col"
-              aria-label="Dessert (100g serving)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Dessert (100g serving): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-left sortable"
           >
@@ -2568,7 +2568,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -2584,7 +2584,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -2600,7 +2600,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -2616,7 +2616,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -2632,7 +2632,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -2854,7 +2854,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -2899,13 +2899,13 @@ exports[`VDataTable.ts should not search column with filterable set to false and
       </div>
     </div>
     <div class="v-data-footer__pagination">
-      $vuetify.dataFooter.pageText
+      1-10 of 10
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -2920,7 +2920,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -2979,7 +2979,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -2995,7 +2995,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -3011,7 +3011,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -3027,7 +3027,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -3043,7 +3043,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -3125,7 +3125,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -3170,13 +3170,13 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
       </div>
     </div>
     <div class="v-data-footer__pagination">
-      $vuetify.dataFooter.pageText
+      1-2 of 2
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -3191,7 +3191,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -3219,7 +3219,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
       <tbody>
         <tr class="v-data-table__empty-wrapper">
           <td colspan="0">
-            $vuetify.noDataText
+            No data available
           </td>
         </tr>
       </tbody>
@@ -3278,7 +3278,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -3293,7 +3293,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -3321,7 +3321,7 @@ exports[`VDataTable.ts should render 1`] = `
       <tbody>
         <tr class="v-data-table__empty-wrapper">
           <td colspan="0">
-            $vuetify.noDataText
+            No data available
           </td>
         </tr>
       </tbody>
@@ -3329,7 +3329,7 @@ exports[`VDataTable.ts should render 1`] = `
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -3380,7 +3380,7 @@ exports[`VDataTable.ts should render 1`] = `
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -3395,7 +3395,7 @@ exports[`VDataTable.ts should render 1`] = `
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -3428,7 +3428,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -3481,7 +3481,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -3496,7 +3496,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -3551,7 +3551,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
       <tbody>
         <tr class="v-data-table__empty-wrapper">
           <td colspan="0">
-            $vuetify.dataIterator.loadingText
+            Loading items...
           </td>
         </tr>
       </tbody>
@@ -3559,7 +3559,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -3610,7 +3610,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -3625,7 +3625,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -3666,7 +3666,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -3682,7 +3682,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -3698,7 +3698,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -3714,7 +3714,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -3730,7 +3730,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -3760,7 +3760,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
       <tbody>
         <tr class="v-data-table__empty-wrapper">
           <td colspan="6">
-            $vuetify.dataIterator.loadingText
+            Loading items...
           </td>
         </tr>
       </tbody>
@@ -3768,7 +3768,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -3819,7 +3819,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -3834,7 +3834,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -3875,7 +3875,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -3891,7 +3891,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -3907,7 +3907,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -3923,7 +3923,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -3939,7 +3939,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -3962,7 +3962,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -4007,13 +4007,13 @@ exports[`VDataTable.ts should render with body slot 1`] = `
       </div>
     </div>
     <div class="v-data-footer__pagination">
-      $vuetify.dataFooter.pageText
+      1-5 of 10
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -4027,7 +4027,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -4068,7 +4068,7 @@ exports[`VDataTable.ts should render with data 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -4084,7 +4084,7 @@ exports[`VDataTable.ts should render with data 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -4100,7 +4100,7 @@ exports[`VDataTable.ts should render with data 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -4116,7 +4116,7 @@ exports[`VDataTable.ts should render with data 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -4132,7 +4132,7 @@ exports[`VDataTable.ts should render with data 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -4254,7 +4254,7 @@ exports[`VDataTable.ts should render with data 1`] = `
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -4299,13 +4299,13 @@ exports[`VDataTable.ts should render with data 1`] = `
       </div>
     </div>
     <div class="v-data-footer__pagination">
-      $vuetify.dataFooter.pageText
+      1-5 of 10
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -4319,7 +4319,7 @@ exports[`VDataTable.ts should render with data 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -4359,7 +4359,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -4375,7 +4375,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -4391,7 +4391,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -4407,7 +4407,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -4441,7 +4441,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -4486,13 +4486,13 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
       </div>
     </div>
     <div class="v-data-footer__pagination">
-      $vuetify.dataFooter.pageText
+      1-5 of 10
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -4506,7 +4506,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -4546,7 +4546,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -4562,7 +4562,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -4578,7 +4578,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -4594,7 +4594,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -4871,7 +4871,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -4916,13 +4916,13 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
       </div>
     </div>
     <div class="v-data-footer__pagination">
-      $vuetify.dataFooter.pageText
+      1-5 of 10
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -4936,7 +4936,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -4976,7 +4976,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -4992,7 +4992,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -5008,7 +5008,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -5024,7 +5024,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -5247,7 +5247,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -5292,13 +5292,13 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
       </div>
     </div>
     <div class="v-data-footer__pagination">
-      $vuetify.dataFooter.pageText
+      1-5 of 10
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -5312,7 +5312,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -5353,7 +5353,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -5369,7 +5369,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -5385,7 +5385,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -5401,7 +5401,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -5417,7 +5417,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -5454,7 +5454,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -5499,13 +5499,13 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
       </div>
     </div>
     <div class="v-data-footer__pagination">
-      $vuetify.dataFooter.pageText
+      1-5 of 10
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -5519,7 +5519,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -5560,7 +5560,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -5576,7 +5576,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -5592,7 +5592,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -5608,7 +5608,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -5624,7 +5624,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -5771,7 +5771,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -5816,13 +5816,13 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
       </div>
     </div>
     <div class="v-data-footer__pagination">
-      $vuetify.dataFooter.pageText
+      1-5 of 10
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -5836,7 +5836,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -5888,7 +5888,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -5904,7 +5904,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -5920,7 +5920,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -5936,7 +5936,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -5952,7 +5952,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -6109,7 +6109,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -6154,13 +6154,13 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
       </div>
     </div>
     <div class="v-data-footer__pagination">
-      $vuetify.dataFooter.pageText
+      1-5 of 10
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -6174,7 +6174,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -6226,7 +6226,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -6242,7 +6242,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -6258,7 +6258,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -6274,7 +6274,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -6290,7 +6290,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -6447,7 +6447,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -6492,13 +6492,13 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
       </div>
     </div>
     <div class="v-data-footer__pagination">
-      $vuetify.dataFooter.pageText
+      1-5 of 10
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -6512,7 +6512,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -6571,7 +6571,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Calories$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -6587,7 +6587,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Fat (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -6603,7 +6603,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Carbs (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -6619,7 +6619,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Protein (g)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -6635,7 +6635,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
           </th>
           <th role="columnheader"
               scope="col"
-              aria-label="Iron (%)$vuetify.dataTable.ariaLabel.sortNone"
+              aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
               class="text-start sortable"
           >
@@ -6812,7 +6812,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
   </div>
   <div class="v-data-footer">
     <div class="v-data-footer__select">
-      $vuetify.dataTable.itemsPerPageText
+      Rows per page:
       <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
           <div role="button"
@@ -6857,13 +6857,13 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
       </div>
     </div>
     <div class="v-data-footer__pagination">
-      $vuetify.dataFooter.pageText
+      1-5 of 10
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
               class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.prevPage"
+              aria-label="Previous page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -6877,7 +6877,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="$vuetify.dataFooter.nextPage"
+              aria-label="Next page"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"

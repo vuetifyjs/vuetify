@@ -7,11 +7,12 @@ import {
 import { Breakpoint } from '../../../services/breakpoint'
 import ripple from '../../../directives/ripple/index'
 import Vue from 'vue'
+import { Lang } from '../../../services/lang'
 import { Preset } from '../../../presets/default'
 
 Vue.prototype.$vuetify = {
   rtl: false,
-  lang: { t: text => text },
+  lang: new Lang(Preset),
 }
 Vue.directive('ripple', ripple)
 
@@ -124,9 +125,7 @@ describe('VDataTable.ts', () => {
         mocks: {
           $vuetify: {
             breakpoint: new Breakpoint(Preset),
-            lang: {
-              t: text => text,
-            },
+            lang: new Lang(Preset),
             theme: {
               dark: false,
             },
