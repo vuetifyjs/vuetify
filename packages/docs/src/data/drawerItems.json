@@ -36,6 +36,7 @@
       { "text": "icons", "to": "icons" },
       { "text": "i18n", "to": "internationalization" },
       { "text": "rtl", "to": "rtl" },
+      { "new": true, "text": "presets", "to": "presets" },
       { "text": "sass-variables", "to": "sass-variables" },
       { "text": "theme", "to": "theme" }
     ]

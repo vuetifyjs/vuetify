@@ -42,11 +42,16 @@ export interface VuetifyPreset {
   [name: string]: any
 }
 
-export interface UserVuetifyPreset {
+export interface UserVuetifyPreset extends GlobalVuetifyPreset {
+  preset?: GlobalVuetifyPreset
+
+  [name: string]: any
+}
+
+export interface GlobalVuetifyPreset {
   breakpoint?: BreakpointOptions
   icons?: IconsOptions
   lang?: LangOptions
-  preset?: UserVuetifyPreset
   theme?: ThemeOptions
 
   [name: string]: any

@@ -2,6 +2,7 @@
 import { Preset } from '../../presets/default'
 
 // Utilities
+import { consoleWarn } from '../../util/console'
 import { mergeDeep } from '../../util/helpers'
 
 // Types
@@ -30,6 +31,10 @@ export class Presets extends Service {
       preset: globalPreset = {},
       ...preset
     } = userPreset
+
+    if (globalPreset.preset != null) {
+      consoleWarn('Global presets do not support the **preset** option, it can be safely omitted')
+    }
 
     parent.preset = mergeDeep(
       mergeDeep(defaultPreset, globalPreset),
