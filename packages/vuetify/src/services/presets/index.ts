@@ -21,13 +21,19 @@ export class Presets extends Service {
   ) {
     super()
 
-    // The user provided preset
-    const { userPreset } = parent
     // The default preset
     const defaultPreset = mergeDeep({}, Preset)
+    // The user provided preset
+    const { userPreset } = parent
     // The user provided global preset
-    const globalPreset = mergeDeep(defaultPreset, userPreset.preset || {})
+    const {
+      preset: globalPreset = {},
+      ...preset
+    } = userPreset
 
-    parent.preset = mergeDeep(globalPreset, userPreset) as VuetifyPreset
+    parent.preset = mergeDeep(
+      mergeDeep(defaultPreset, globalPreset),
+      preset
+    ) as VuetifyPreset
   }
 }
