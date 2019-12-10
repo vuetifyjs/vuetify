@@ -22,7 +22,7 @@ export const Preset: VuetifyPreset = {
     },
   },
   icons: {
-    // TODO: Deprecate in v2.2, remove v3
+    // TODO: remove v3
     iconfont: 'mdi',
     values: {},
   },
