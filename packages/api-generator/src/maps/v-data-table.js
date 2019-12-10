@@ -1,7 +1,7 @@
 const deepmerge = require('../helpers/merge')
-const {DataDefaultScopedSlotProps, DataOptions} = require('./v-data')
-const {DataIteratorEvents, DataIteratorProps, DataIteratorSlots, DataIteratorItemScopedProps} = require('./v-data-iterator')
-const {DataFooterPageTextScopedProps} = require('./v-data-footer')
+const { DataDefaultScopedSlotProps, DataOptions } = require('./v-data')
+const { DataIteratorEvents, DataIteratorProps, DataIteratorSlots, DataIteratorItemScopedProps } = require('./v-data-iterator')
+const { DataFooterPageTextScopedProps } = require('./v-data-footer')
 
 const TableHeader = {
   text: 'string',
@@ -18,7 +18,7 @@ const TableHeader = {
 }
 
 const DataTableEvents = [
-  {name: 'click:row', source: 'v-data-table', value: 'any, { select: (value: boolean) => void, isSelected: boolean, expand: (value: boolean) => void, isExpanded: boolean }'},
+  { name: 'click:row', source: 'v-data-table', value: 'any, { select: (value: boolean) => void, isSelected: boolean, expand: (value: boolean) => void, isExpanded: boolean }' },
 ].concat(DataIteratorEvents)
 
 const DataTableHeaderScopedProps = {
@@ -112,24 +112,24 @@ const DataGroupSummaryScopedProps = {
 }
 
 const DataTableSlots = [
-  {name: 'body.append', props: DataTableBodyScopedProps},
-  {name: 'body.prepend', props: DataTableBodyScopedProps},
-  {name: 'body', props: DataTableBodyScopedProps},
-  {name: 'footer', props: DataTableFooterScopedProps},
-  {name: 'footer.page-text', props: DataFooterPageTextScopedProps},
-  {name: 'header', props: DataTableHeaderScopedProps},
-  {name: 'header.data-table-select', props: DataTableHeaderSelectScopedProps},
-  {name: 'header.<name>', props: DataTableHeaderColumnScopedProps},
-  {name: 'top', props: DataDefaultScopedSlotProps},
-  {name: 'progress', props: DataDefaultScopedSlotProps},
-  {name: 'group', props: DataGroupScopedProps},
-  {name: 'group.header', props: DataGroupHeaderScopedProps},
-  {name: 'group.summary', props: DataGroupSummaryScopedProps},
-  {name: 'item', props: {...DataTableItemScopedProps, index: 'number'}},
-  {name: 'item.data-table-select', props: DataTableItemScopedProps},
-  {name: 'item.data-table-expand', props: DataTableItemScopedProps},
-  {name: 'item.<name>', props: DataTableItemColumnScopedProps},
-  {name: 'expanded-item', props: DataTableExpandedItemScopedProps},
+  { name: 'body.append', props: DataTableBodyScopedProps },
+  { name: 'body.prepend', props: DataTableBodyScopedProps },
+  { name: 'body', props: DataTableBodyScopedProps },
+  { name: 'footer', props: DataTableFooterScopedProps },
+  { name: 'footer.page-text', props: DataFooterPageTextScopedProps },
+  { name: 'header', props: DataTableHeaderScopedProps },
+  { name: 'header.data-table-select', props: DataTableHeaderSelectScopedProps },
+  { name: 'header.<name>', props: DataTableHeaderColumnScopedProps },
+  { name: 'top', props: DataDefaultScopedSlotProps },
+  { name: 'progress', props: DataDefaultScopedSlotProps },
+  { name: 'group', props: DataGroupScopedProps },
+  { name: 'group.header', props: DataGroupHeaderScopedProps },
+  { name: 'group.summary', props: DataGroupSummaryScopedProps },
+  { name: 'item', props: { ...DataTableItemScopedProps, index: 'number' } },
+  { name: 'item.data-table-select', props: DataTableItemScopedProps },
+  { name: 'item.data-table-expand', props: DataTableItemScopedProps },
+  { name: 'item.<name>', props: DataTableItemColumnScopedProps },
+  { name: 'expanded-item', props: DataTableExpandedItemScopedProps },
 ]
 
 module.exports = {

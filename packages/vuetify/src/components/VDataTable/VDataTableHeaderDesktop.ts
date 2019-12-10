@@ -1,15 +1,15 @@
 // Helpers
-import {VNode} from 'vue'
+import { VNode } from 'vue'
 import mixins from '../../util/mixins'
 import header from './mixins/header'
-import {wrapInArray, convertToUnit} from '../../util/helpers'
-import {DataTableHeader} from 'types'
+import { wrapInArray, convertToUnit } from '../../util/helpers'
+import { DataTableHeader } from 'types'
 
 export default mixins(header).extend({
   name: 'v-data-table-header-desktop',
 
   methods: {
-    genGroupByToggle(header: DataTableHeader) {
+    genGroupByToggle (header: DataTableHeader) {
       return this.$createElement('span', {
         on: {
           click: () => this.$emit('group', header.value),
@@ -17,7 +17,7 @@ export default mixins(header).extend({
       }, ['group'])
     },
     // eslint-disable-next-line max-statements
-    genHeader(header: DataTableHeader) {
+    genHeader (header: DataTableHeader) {
       const listeners: any = {}
       const children = []
       const attrs = {
@@ -42,7 +42,7 @@ export default mixins(header).extend({
         children.push(this.genSelectAll())
       } else {
         children.push(this.$scopedSlots[header.value]
-          ? this.$scopedSlots[header.value]!({header})
+          ? this.$scopedSlots[header.value]!({ header })
           : this.$createElement('span', [header.text])
         )
 
@@ -71,7 +71,7 @@ export default mixins(header).extend({
           else children.push(this.genSortIcon())
 
           if (this.options.multiSort && beingSorted) {
-            children.push(this.$createElement('span', {class: 'v-data-table-header__sort-badge'}, [String(sortIndex + 1)]))
+            children.push(this.$createElement('span', { class: 'v-data-table-header__sort-badge' }, [String(sortIndex + 1)]))
           }
         }
 
@@ -90,11 +90,11 @@ export default mixins(header).extend({
     },
   },
 
-  render(): VNode {
+  render (): VNode {
     return this.$createElement('thead', {
       staticClass: 'v-data-table-header',
     }, [
-        this.$createElement('tr', this.headers.map(header => this.genHeader(header))),
-      ])
+      this.$createElement('tr', this.headers.map(header => this.genHeader(header))),
+    ])
   },
 })
