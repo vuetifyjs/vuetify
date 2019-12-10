@@ -7,11 +7,11 @@
       :src="attrs.image ? 'https://picsum.photos/1920/1080?random' : ''"
       v-bind="attrs"
     >
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon />
 
       <v-toolbar-title>Title</v-toolbar-title>
 
-      <v-spacer></v-spacer>
+      <v-spacer />
 
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
@@ -22,9 +22,7 @@
       class="overflow-y-auto"
       max-height="600"
     >
-      <v-container style="height: 1500px;">
-
-      </v-container>
+      <v-container style="height: 1500px;" />
     </v-sheet>
   </v-card>
 </template>
