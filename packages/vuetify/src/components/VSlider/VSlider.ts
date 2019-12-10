@@ -114,7 +114,7 @@ export default mixins<options &
         return this.lazyValue
       },
       set (val: number) {
-        const externalValue = val
+        if (val === null) return
         val = isNaN(val) ? this.minValue : val
         // Round value to ensure the
         // entire slider range can
@@ -125,7 +125,7 @@ export default mixins<options &
 
         this.lazyValue = value
 
-        this.$emit('input', externalValue)
+        this.$emit('input', value)
       },
     },
     trackTransition (): string {
