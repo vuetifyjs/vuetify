@@ -1,18 +1,18 @@
-import Vue, { Component, PluginFunction, VueConstructor, DirectiveOptions } from 'vue'
+import Vue, {Component, PluginFunction, VueConstructor, DirectiveOptions} from 'vue'
 import './lib'
 import './alacarte'
 import './colors'
 
 // Services
-import { Application } from './services/application'
-import { Breakpoint } from './services/breakpoint'
-import { Icons } from './services/icons'
-import { Lang } from './services/lang'
-import { Theme } from './services/theme'
+import {Application} from './services/application'
+import {Breakpoint} from './services/breakpoint'
+import {Icons} from './services/icons'
+import {Lang} from './services/lang'
+import {Theme} from './services/theme'
 
 // Service Options
-import { GoToOptions } from './services/goto'
-import { VuetifyPreset } from './presets'
+import {GoToOptions} from './services/goto'
+import {VuetifyPreset} from './presets'
 
 declare const Vuetify: Vuetify
 export default Vuetify
@@ -20,7 +20,7 @@ export interface Vuetify {
   install: PluginFunction<VuetifyUseOptions>
   version: string
   framework: Framework
-  new (preset?: Partial<VuetifyPreset>): Vuetify
+  new(preset?: Partial<VuetifyPreset>): Vuetify
 }
 
 export type ComponentOrPack = Component & {
@@ -52,11 +52,11 @@ declare module 'vue/types/vue' {
 declare module 'vue/types/options' {
   export interface ComponentOptions<
     V extends Vue,
-    Data=DefaultData<V>,
-    Methods=DefaultMethods<V>,
-    Computed=DefaultComputed,
-    PropsDef=PropsDefinition<DefaultProps>,
-    Props=DefaultProps> {
+    Data = DefaultData<V>,
+    Methods = DefaultMethods<V>,
+    Computed = DefaultComputed,
+    PropsDef = PropsDefinition<DefaultProps>,
+    Props = DefaultProps> {
     vuetify?: Vuetify
   }
 }
@@ -191,6 +191,7 @@ export interface DataTableHeader<T extends any = any> {
   text: string
   value: string
   align?: 'start' | 'center' | 'end'
+  groupable?: boolean
   sortable?: boolean
   filterable?: boolean
   divider?: boolean
