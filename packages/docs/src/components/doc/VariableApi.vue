@@ -2,7 +2,7 @@
   <div>
     <doc-heading>Generic.Pages.variableApi</doc-heading>
 
-    <doc-text>{{ value }}</doc-text>
+    <doc-text>Customization.SassVariables.variableApiDesc</doc-text>
 
     <v-card outlined>
       <v-toolbar
