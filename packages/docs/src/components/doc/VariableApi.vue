@@ -59,34 +59,11 @@
         <template v-slot="{ items }">
           <div>
             <template v-for="(item, i) in items">
-              <v-row
-                :key="`vapi-${i}`"
-                class="api-item pa-2"
-              >
-                <v-col cols="12">
-                  <div
-                    class="text-capitalize overline grey--text text--darken-3"
-                    v-text="'name'"
-                  />
-
-                  <span
-                    style="font-weight: medium; color: #d63200;"
-                    v-text="item.name"
-                  />
-                </v-col>
-
-                <v-col cols="12">
-                  <div
-                    class="text-capitalize overline grey--text text--darken-3"
-                    v-text="'default'"
-                  />
-                  <doc-markup
-                    :filename="false"
-                    lang="sass"
-                    value="example"
-                  >{{ item.default }}</doc-markup>
-                </v-col>
-              </v-row>
+              <doc-api-item
+                :key="item.name"
+                :headers="headers"
+                :item="item"
+              />
 
               <v-divider
                 v-if="i + 1!== items.length"
@@ -114,6 +91,17 @@
       search: '',
       selectedComponent: '',
       variables: [],
+      headers: [
+        {
+          value: 'name',
+          class: 'xs12',
+        },
+        {
+          value: 'default',
+          type: 'sass',
+          class: 'xs12 mt-2',
+        },
+      ],
     }),
 
     watch: {
