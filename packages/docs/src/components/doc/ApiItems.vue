@@ -181,6 +181,11 @@
             class: 'xs12',
           },
           {
+            value: 'description',
+            type: 'markdown',
+            class: 'xs12 mt-2',
+          },
+          {
             value: 'signature',
             class: 'xs12 mt-2',
           },
