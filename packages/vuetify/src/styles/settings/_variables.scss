@@ -12,11 +12,12 @@ $spacer: 4px !default;
 $spacers: ();
 @for $i from 0 through 12 {
   $spacers: map-merge($spacers, ($i: $spacer * $i))
-}
+};
+
 $negative-spacers: ();
 @for $i from 1 through 12 {
   $negative-spacers: map-merge($negative-spacers, ("n" + $i: -$spacer * $i))
-}
+};
 
 $grid-breakpoints: () !default;
 $grid-breakpoints: map-deep-merge(
@@ -29,6 +30,7 @@ $grid-breakpoints: map-deep-merge(
   ),
   $grid-breakpoints
 );
+
 $grid-gutter: $spacer * 6 !default;
 $form-grid-gutter: $spacer * 2 !default;
 $grid-columns: 12 !default;
@@ -192,12 +194,12 @@ $transition: map-deep-merge(
 $primary-transition: 0.3s map-get($transition, 'swing') !default;
 $secondary-transition: 0.2s map-get($transition, 'ease-in-out') !default;
 
-/** Ripples */
+// Ripples //;
 $ripple-animation-transition-in: transform 0.25s map-get($transition, 'fast-out-slow-in'), opacity 0.1s map-get($transition, 'fast-out-slow-in') !default;
 $ripple-animation-transition-out: opacity 0.3s map-get($transition, 'fast-out-slow-in') !default;
 $ripple-animation-visible-opacity: 0.15 !default;
 
-/** Elements */
+// Elements //;
 $bootable-transition: 0.2s map-get($transition, 'fast-out-slow-in') !default;
 $blockquote-font-size: 18px !default;
 $blockquote-font-weight: 300 !default;

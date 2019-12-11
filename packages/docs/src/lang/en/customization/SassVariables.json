@@ -1,6 +1,7 @@
 {
   "heading": "# SASS variables",
   "headingText": "Starting with version **2.0**, Vuetify is built using **SASS/SCSS**. Using the data option in your `vue.config.js`, we can also pass in custom variables. A list of available variables is located in each components' folder. In order to build the SASS file, you will need to configure your application to support [SASS](https://sass-lang.com/dart-sass) and [Fibers](https://github.com/laverdet/node-fibers). This can be selected when creating a new Vue application and is automatically handled by [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugin-vuetify).",
+  "variableApiDesc": "There are many SASS variables that can be customized across the entire Vuetify framework. Select a component below to view all available customizable SASS variables.",
   "setupHeading": "## Vue CLI 3 install",
   "setupText1": "If you have not installed Vuetify, check out the [quick-start guide](/getting-started/quick-start#vue-cli-3-install). Simply create a folder called `sass`, `scss` or `styles` in your src directory with a file named `variables.scss` or `variables.sass`. The vuetify-loader will automatically bootstrap all of your style files with the located file.",
   "setupText2": "When you run yarn serve, the vuetify-cli-plugin will automatically hoist the global Vuetify variables to all of your sass/scss files. When making changes to individual component variables, you will still need to manually include its variables file.",
