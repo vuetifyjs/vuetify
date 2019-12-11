@@ -87,7 +87,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
         this.overlay.zIndex = getZIndex(this.$el)
       }
 
-      this.overlay.value = true               
+      this.overlay.value = true
     },
     genOverlay () {
       this.hideScroll()
@@ -101,7 +101,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
           this.declareOverlay()
         })
       } else {
-        this.declareOverlay()                             
+        this.declareOverlay()
       }
 
       return true
@@ -114,7 +114,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
             !this.overlay ||
             !this.overlay.$el ||
             !this.overlay.$el.parentNode ||
-            this.overlay.value && !document.hidden
+            (this.overlay.value && !document.hidden)
           ) return
 
           this.overlay.$el.parentNode.removeChild(this.overlay.$el)
