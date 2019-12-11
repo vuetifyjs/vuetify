@@ -84,6 +84,8 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
       if (this.hideOverlay) return
 
       if (!this.overlay) this.createOverlay()
+                                    
+      this.overlay.value = true
 
       requestAnimationFrame(() => {
         if (!this.overlay) return
@@ -93,8 +95,6 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
         } else if (this.$el) {
           this.overlay.zIndex = getZIndex(this.$el)
         }
-
-        this.overlay.value = true
       })
 
       return true
