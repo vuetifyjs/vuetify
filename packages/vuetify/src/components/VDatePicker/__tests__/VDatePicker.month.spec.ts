@@ -6,7 +6,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 import Vue from 'vue'
-import { Preset } from '../../../presets/default'
+import { preset } from '../../../presets/default'
 import en from '../../../locale/en'
 
 Vue.prototype.$vuetify = {
@@ -29,7 +29,7 @@ describe('VDatePicker.ts', () => {
           $vuetify: {
             rtl: false,
             lang: new Lang({
-              ...Preset,
+              ...preset,
               lang: {
                 current: 'en',
                 locales: {

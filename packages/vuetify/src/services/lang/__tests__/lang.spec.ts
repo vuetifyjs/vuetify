@@ -2,13 +2,13 @@
 import { Lang } from '../index'
 
 // Preset
-import { Preset } from '../../../presets/default'
+import { preset } from '../../../presets/default'
 
 describe('$vuetify.lang', () => {
   let lang: Lang
 
   beforeEach(() => {
-    lang = new Lang(Preset)
+    lang = new Lang(preset)
   })
 
   it('should fall back to en', () => {
@@ -32,7 +32,7 @@ describe('$vuetify.lang', () => {
 
   it('should use a different default', () => {
     lang = new Lang({
-      ...Preset,
+      ...preset,
       lang: {
         current: 'foreign',
         locales: {
@@ -48,7 +48,7 @@ describe('$vuetify.lang', () => {
     const translator = jest.fn(str => str)
 
     lang = new Lang({
-      ...Preset,
+      ...preset,
       lang: { t: translator },
     })
 
@@ -59,7 +59,7 @@ describe('$vuetify.lang', () => {
 
   it('should replace params on a non-prefixed key', () => {
     lang = new Lang({
-      ...Preset,
+      ...preset,
       lang: { t: str => str },
     })
 

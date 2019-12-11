@@ -7,10 +7,10 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-import { Preset } from '../../../presets/default'
+import { preset } from '../../../presets/default'
 
 Vue.prototype.$vuetify = {
-  lang: new Lang(Preset),
+  lang: new Lang(preset),
 }
 
 describe('VTimePicker.ts', () => {

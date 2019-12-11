@@ -2,16 +2,16 @@
 
 import Vue from 'vue'
 import Vuetify from 'vuetify/lib'
-import { Preset } from 'vuetify/lib/presets/basil'
+import { preset } from 'vuetify/lib/presets/basil'
 
 Vue.use(Vuetify)
 
 export default new Vuetify({
-  preset: Preset,
+  preset,
   rtl: true,
   theme: { dark: true },
 })
 
 // You can also pass the Preset directly to the constructor
 
-export default new Vuetify(Preset)
+export default new Vuetify(preset)

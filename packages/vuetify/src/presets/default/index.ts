@@ -11,7 +11,7 @@ import { en } from '../../locale'
 // Types
 import { VuetifyPreset } from 'vuetify/types/services/presets'
 
-export const Preset: VuetifyPreset = {
+export const preset: VuetifyPreset = {
   breakpoint: {
     scrollBarWidth: 16,
     thresholds: {

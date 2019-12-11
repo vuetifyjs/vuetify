@@ -1,6 +1,6 @@
 import { resizeWindow } from '../../../../test'
 import { Breakpoint } from '../'
-import { Preset } from '../../../presets/default'
+import { preset } from '../../../presets/default'
 
 describe('Breakpoint.ts', () => {
   let breakpoint: Breakpoint
@@ -231,7 +231,7 @@ describe('Breakpoint.ts', () => {
   ]
 
   beforeEach(() => {
-    breakpoint = new Breakpoint(Preset)
+    breakpoint = new Breakpoint(preset)
   })
 
   scenarios.slice(0, 1).forEach(scenario => {
@@ -272,7 +272,7 @@ describe('Breakpoint.ts', () => {
 
   it('should allow to override defaults via factory args', async () => {
     breakpoint = new Breakpoint({
-      ...Preset,
+      ...preset,
       breakpoint: {
         thresholds: { xs: 400 },
       } as any,

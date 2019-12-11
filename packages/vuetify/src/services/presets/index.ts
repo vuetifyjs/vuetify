@@ -1,5 +1,5 @@
 // Preset
-import { Preset } from '../../presets/default'
+import { preset as Preset } from '../../presets/default'
 
 // Utilities
 import { consoleWarn } from '../../util/console'

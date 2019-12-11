@@ -1,6 +1,6 @@
 import VDatePickerDateTable from '../VDatePickerDateTable'
 import { Lang } from '../../../services/lang'
-import { Preset } from '../../../presets/default'
+import { preset } from '../../../presets/default'
 import {
   mount,
   MountOptions,
@@ -17,7 +17,7 @@ describe('VDatePickerDateTable.ts', () => {
         mocks: {
           $vuetify: {
             rtl: false,
-            lang: new Lang(Preset),
+            lang: new Lang(preset),
           },
         },
       })

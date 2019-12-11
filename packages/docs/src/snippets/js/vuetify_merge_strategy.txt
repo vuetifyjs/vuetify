@@ -2,7 +2,7 @@
 
 import Vue from 'vue'
 import Vuetify from 'vuetify/lib'
-import { Preset } from 'vuetify/lib/presets/shrine'
+import { preset } from 'vuetify/lib/presets/shrine'
 
 Vue.use(Vuetify)
 
@@ -17,7 +17,7 @@ const options = {
 
 export default new Vuetify({
   // The provided global preset is first merged with defaults
-  preset: Preset,
+  preset,
   // User options are then merged, overwriting defaults and the global preset
   ...options,
 })

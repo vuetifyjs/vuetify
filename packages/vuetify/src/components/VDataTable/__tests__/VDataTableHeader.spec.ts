@@ -2,7 +2,7 @@ import VDataTableHeader from '../VDataTableHeader'
 import { Lang } from '../../../services/lang'
 import ripple from '../../../directives/ripple'
 import VSelect from '../../VSelect/VSelect'
-import { Preset } from '../../../presets/default'
+import { preset } from '../../../presets/default'
 
 import {
   mount,
@@ -27,7 +27,7 @@ const testHeaders = [
 
 Vue.prototype.$vuetify = {
   rtl: false,
-  lang: new Lang(Preset),
+  lang: new Lang(preset),
   theme: {
     dark: false,
   },

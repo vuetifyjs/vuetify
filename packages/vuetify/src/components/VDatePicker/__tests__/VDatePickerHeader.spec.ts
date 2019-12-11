@@ -1,6 +1,6 @@
 import VDatePickerHeader from '../VDatePickerHeader'
 import { Lang } from '../../../services/lang'
-import { Preset } from '../../../presets/default'
+import { preset } from '../../../presets/default'
 import {
   mount,
   MountOptions,
@@ -27,7 +27,7 @@ describe('VDatePickerHeader.ts', () => {
         mocks: {
           $vuetify: {
             rtl: false,
-            lang: new Lang(Preset),
+            lang: new Lang(preset),
           },
         },
       })
