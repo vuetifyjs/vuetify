@@ -97,6 +97,7 @@ const DataGroupScopedProps = {
 const DataGroupHeaderScopedProps = {
   group: 'string',
   groupBy: DataOptions.groupBy,
+  isOpen: 'boolean',
   items: 'any[]',
   headers: 'TableHeader[]',
   toggle: '() => void',
@@ -106,6 +107,7 @@ const DataGroupHeaderScopedProps = {
 const DataGroupSummaryScopedProps = {
   group: 'string',
   groupBy: DataOptions.groupBy,
+  isOpen: 'boolean',
   items: 'any[]',
   headers: 'TableHeader[]',
 }
