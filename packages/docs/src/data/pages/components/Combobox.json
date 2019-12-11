@@ -7,8 +7,16 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "usage"
+          "type": "usage-new",
+          "value": {
+            "booleans": [
+              "hide-selected",
+              "multiple",
+              "persistent-hint",
+              "small-chips",
+              "clearable"
+            ]
+          }
         },
         {
           "type": "alert",
@@ -23,15 +31,6 @@
         {
           "type": "api",
           "value": [ "v-combobox" ]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "playground",
-          "value": "playground"
         }
       ]
     },
