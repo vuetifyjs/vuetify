@@ -78,24 +78,31 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
 
       this.overlay = overlay
     },
+    declareOverlay () {
+      if (!this.overlay) return
+
+      if (this.activeZIndex !== undefined) {
+        this.overlay.zIndex = String(this.activeZIndex - 1)
+      } else if (this.$el) {
+        this.overlay.zIndex = getZIndex(this.$el)
+      }
+
+      this.overlay.value = true               
+    },
     genOverlay () {
       this.hideScroll()
 
       if (this.hideOverlay) return
 
       if (!this.overlay) this.createOverlay()
-                                    
-      this.overlay.value = true
 
-      requestAnimationFrame(() => {
-        if (!this.overlay) return
-
-        if (this.activeZIndex !== undefined) {
-          this.overlay.zIndex = String(this.activeZIndex - 1)
-        } else if (this.$el) {
-          this.overlay.zIndex = getZIndex(this.$el)
-        }
-      })
+      if (!document.hidden) {
+        requestAnimationFrame(() => {
+          this.declareOverlay()
+        })
+      } else {
+        this.declareOverlay()                             
+      }
 
       return true
     },
@@ -107,7 +114,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
             !this.overlay ||
             !this.overlay.$el ||
             !this.overlay.$el.parentNode ||
-            this.overlay.value
+            this.overlay.value && !document.hidden
           ) return
 
           this.overlay.$el.parentNode.removeChild(this.overlay.$el)
