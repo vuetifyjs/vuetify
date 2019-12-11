@@ -23,7 +23,7 @@ module.exports = {
   devtool,
   output: {
     path: resolve('../dist'),
-    publicPath: '/dist/',
+    publicPath: process.env.AWS_REGION ? '/' : '/dist/',
     filename: isProd ? '[name].[chunkhash].js' : '[name].js',
     chunkFilename: isProd ? '[name].[chunkhash].js' : '[name].js'
   },

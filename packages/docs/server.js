@@ -71,12 +71,13 @@ const serve = (path, cache) => express.static(resolve(path), {
 app.use(express.json())
 app.use(cookieParser())
 app.use(compression({ threshold: 0 }))
-app.use('/dist', serve('./dist', true))
-app.use('/themes', serve('./src/themes'))
+process.env.AWS_REGION
+  ? app.use('/', serve('./', true))
+  : app.use('/dist', serve('./dist', true))
 
 app.get('/sitemap.xml', (req, res) => {
   res.setHeader('Content-Type', 'text/xml')
-  res.sendFile(resolve('./src/public/sitemap.xml'))
+  res.sendFile(resolve(process.env.AWS_REGION ? './sitemap.xml' : './src/public/sitemap.xml'))
 })
 
 const languagePattern = '/([a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3})'

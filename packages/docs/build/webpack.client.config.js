@@ -80,6 +80,7 @@ const config = merge(base, {
     new VueSSRClientPlugin(),
     new CopyPlugin([
       { from: 'src/public', force: true },
+      { from: 'src/themes', to: 'themes', force: true },
     ]),
   ],
   optimization: {

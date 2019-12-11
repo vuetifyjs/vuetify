@@ -3,7 +3,7 @@
   "name": "vuetifyjs.com",
   "alias": "vuetifyjs.com",
   "builds": [
-	{ "src": "packages/docs/package.json", "use": "@now/static-build" },
+    { "src": "packages/docs/package.json", "use": "@now/static-build" },
     { "src": "packages/docs/server.js", "use": "@now/node" }
   ],
   "routes": [
