@@ -332,7 +332,7 @@ export default VDataIterator.extend({
 
       if (this.$scopedSlots['group.header']) {
         children.unshift(this.$createElement('template', { slot: 'column.header' }, [
-          this.$scopedSlots['group.header']!({ group, groupBy: props.options.groupBy, items, headers: this.computedHeaders, toggle: toggleFn, remove: removeFn }),
+          this.$scopedSlots['group.header']!({ group, groupBy: props.options.groupBy, isOpen, items, headers: this.computedHeaders, toggle: toggleFn, remove: removeFn }),
         ]))
       } else {
         const toggle = this.$createElement(VBtn, {
@@ -367,7 +367,7 @@ export default VDataIterator.extend({
 
       if (this.$scopedSlots['group.summary']) {
         children.push(this.$createElement('template', { slot: 'column.summary' }, [
-          this.$scopedSlots['group.summary']!({ group, groupBy: props.options.groupBy, items, headers: this.computedHeaders }),
+          this.$scopedSlots['group.summary']!({ group, groupBy: props.options.groupBy, isOpen, items, headers: this.computedHeaders }),
         ]))
       }
 
