@@ -29,13 +29,22 @@
         v-text="item.type"
       />
 
-      <template v-if="header.value === 'default'">
+      <!-- Default -->
+      <template v-if="header.value === 'default' && item.default && header.type !== 'sass'">
         <span
           v-if="typeof item.default === 'string'"
           class="mono"
           v-text="item.default"
         />
       </template>
+
+      <!-- Sass Default -->
+      <doc-markup
+        v-if="header.value === 'default' && header.type === 'sass' && item.default"
+        :filename="false"
+        lang="sass"
+        value="example"
+      >{{ item.default }}</doc-markup>
 
       <!-- Description -->
       <base-markdown

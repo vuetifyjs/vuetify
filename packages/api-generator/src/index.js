@@ -131,6 +131,52 @@ function parseMixins (component) {
   return mixins.sort((a, b) => a > b)
 }
 
+function processVariableFile (dir, folder) {
+  const variableFile = `${dir}${folder}/_variables.scss`
+  if (fs.existsSync(variableFile)) {
+    const varFile = fs.readFileSync(variableFile, 'utf8')
+    const vars = varFile.split(/;[\n]*/g)
+    const varValues = []
+    vars.forEach((varString, ind) => {
+      const varArr = varString.split(':')
+      if (varArr.length >= 2 && varArr[0].charAt(0) === '$') {
+        const varName = varArr.shift().trim()
+        let varDefault = (vars[ind + 1].charAt(0) === '@')
+          ? vars[ind + 1]
+          : varArr.join(':')
+        varDefault = `${varDefault.trim()};`
+        const lastIndex = varValues.findIndex(item => item.name === varName)
+        if (lastIndex > -1) {
+          varValues[lastIndex].default = varDefault
+        } else {
+          varValues.push({
+            name: varName,
+            default: varDefault,
+          })
+        }
+      }
+    })
+    return varValues
+  }
+}
+
+function parseVariables () {
+  const variables = {}
+  const rootDir = './../vuetify/src/components/'
+  const comps = fs.readFileSync(`${rootDir}index.ts`, 'utf8')
+  const folders = comps
+    .trim()
+    .replace(/export\s\*\sfrom\s'.\//g, '')
+    .split(`'\n`)
+  folders.forEach(folder => {
+    variables[hyphenate(folder)] = processVariableFile(rootDir, folder)
+  })
+  const globalDir = './../vuetify/src/styles/'
+
+  variables.globals = processVariableFile(globalDir, 'settings')
+  return variables
+}
+
 const components = {}
 const directives = {}
 
@@ -260,12 +306,15 @@ const fakeComponents = ts => {
   }).join('\n')
 }
 
+const variables = parseVariables()
+
 if (!fs.existsSync('dist')) {
   fs.mkdirSync('dist', 0o755)
 }
 
 writeJsonFile(tags, 'dist/tags.json')
 writeJsonFile(attributes, 'dist/attributes.json')
+writeJsonFile(variables, 'dist/variables.json')
 writePlainFile(fakeComponents(false), 'dist/fakeComponents.js')
 writePlainFile(fakeComponents(true), 'dist/fakeComponents.ts')
 
