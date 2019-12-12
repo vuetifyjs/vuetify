@@ -2,11 +2,11 @@
 import { Component } from 'vue'
 
 export interface Icons extends IconsOptions {
-  iconfont: IconsIconfonts
+  iconfont: Iconfont
   values: VuetifyIcons
 }
 
-export type IconsIconfonts = 'mdi' | 'mdiSvg' | 'md' | 'fa' | 'fa4'
+export type Iconfont = 'mdi' | 'mdiSvg' | 'md' | 'fa' | 'fa4'
 
 export interface IconsOptions {
   /**
@@ -17,7 +17,7 @@ export interface IconsOptions {
    * fa: <a href="https://fontawesome.com/get-started/web-fonts-with-css">FontAwesome 5</a>
    * fa4: <a href="">FontAwesome 4</a> TODO: link
    */
-  iconfont?: IconsIconfonts
+  iconfont?: Iconfont
   values?: Partial<VuetifyIcons>
 }
 
