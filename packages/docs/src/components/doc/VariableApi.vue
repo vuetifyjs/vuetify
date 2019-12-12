@@ -52,7 +52,7 @@
         :items="variables"
         :items-per-page="-1"
         :search="search"
-        class="component-parameters"
+        class="sass-var-iterator"
         hide-default-footer
         sort-by="name"
       >
@@ -116,3 +116,9 @@
     },
   }
 </script>
+
+<style lang="sass" scoped>
+  .sass-var-iterator
+    max-height: 800px
+    overflow-y: scroll
+</style>
