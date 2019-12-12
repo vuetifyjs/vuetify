@@ -30,7 +30,7 @@ export default {
     prev: 'Önceki görsel',
     next: 'Sonraki görsel',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Galeri sayfa {0} / {1}',
     },
   },
   calendar: {
