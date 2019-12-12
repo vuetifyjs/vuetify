@@ -102,6 +102,7 @@
   } from 'vuex-pathify'
 
   import api from '@vuetify/api-generator'
+  import variableApi from '@vuetify/api-generator/dist/variables'
 
   const propProps = [
     {
@@ -180,6 +181,11 @@
             class: 'xs12',
           },
           {
+            value: 'description',
+            type: 'markdown',
+            class: 'xs12 mt-2',
+          },
+          {
             value: 'signature',
             class: 'xs12 mt-2',
           },
@@ -195,10 +201,21 @@
           },
         ],
         options: [...propProps],
+        sass: [
+          {
+            value: 'name',
+            class: 'xs12',
+          },
+          {
+            value: 'default',
+            type: 'sass',
+            class: 'xs12 mt-2',
+          },
+        ],
       },
       search: null,
       tab: null,
-      tabs: ['api', 'props', 'slots', 'params', 'events', 'functions', 'functional', 'options'],
+      tabs: ['api', 'props', 'slots', 'params', 'events', 'functions', 'functional', 'options', 'sass'],
     }),
 
     computed: {
@@ -213,6 +230,7 @@
         return {
           ...component,
           ...(api[this.current] || {}),
+          sass: variableApi[this.current] || [],
         }
       },
       computedTabs () {
