@@ -14,7 +14,7 @@
 
       <v-toolbar-title>Title</v-toolbar-title>
 
-      <v-spacer></v-spacer>
+      <v-spacer />
 
       <v-toolbar-items>
         <v-btn text>Link 1</v-btn>

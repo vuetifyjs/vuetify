@@ -6,7 +6,7 @@
     >
       <v-color-picker
         v-bind="attrs"
-      ></v-color-picker>
+      />
     </v-row>
   </v-container>
 </template>
