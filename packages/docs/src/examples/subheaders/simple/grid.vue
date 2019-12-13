@@ -4,15 +4,15 @@
       <v-card>
         <v-toolbar color="white" flat>
           <v-btn icon light>
-            <v-icon color="grey darken-2">arrow_back</v-icon>
+            <v-icon color="grey darken-2">mdi-arrow-left</v-icon>
           </v-btn>
 
           <v-toolbar-title class="grey--text text--darken-4">Albums</v-toolbar-title>
 
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
 
           <v-btn icon light>
-            <v-icon color="grey darken-2">search</v-icon>
+            <v-icon color="grey darken-2">mdi-magnify</v-icon>
           </v-btn>
         </v-toolbar>
 

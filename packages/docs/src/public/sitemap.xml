@@ -20,26 +20,32 @@
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/getting-started/why-vuetify</loc>
+       <loc>https://vuetifyjs.com/en/introduction/why-vuetify</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/getting-started/frequently-asked-questions</loc>
+       <loc>https://vuetifyjs.com/en/introduction/frequently-asked-questions</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/getting-started/meet-the-team</loc>
+       <loc>https://vuetifyjs.com/en/introduction/meet-the-team</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/getting-started/sponsors-and-backers</loc>
+       <loc>https://vuetifyjs.com/en/introduction/sponsors-and-backers</loc>
        <lastmod>2019-01-07</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://vuetifyjs.com/en/getting-started/releases-and-migrations</loc>
+       <lastmod>2019-09-20</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
   </url>
@@ -56,7 +62,7 @@
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/getting-started/consulting-and-support</loc>
+       <loc>https://vuetifyjs.com/en/professional-support/consulting</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
@@ -518,6 +524,12 @@
        <priority>0.8000</priority>
   </url>
   <url>
+       <loc>https://vuetifyjs.com/en/components/skeleton-loaders</loc>
+       <lastmod>2019-09-19</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
        <loc>https://vuetifyjs.com/en/components/snackbars</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
@@ -597,6 +609,18 @@
   </url>
   <url>
        <loc>https://vuetifyjs.com/en/directives/touch-support</loc>
+       <lastmod>2019-01-07</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://vuetifyjs.com/en/directives/mutate</loc>
+       <lastmod>2019-01-07</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://vuetifyjs.com/en/directives/intersect</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>

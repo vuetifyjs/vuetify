@@ -16,16 +16,16 @@
           mandatory
         >
           <v-btn>
-            <v-icon>format_align_left</v-icon>
+            <v-icon>mdi-format-align-left</v-icon>
           </v-btn>
           <v-btn>
-            <v-icon>format_align_center</v-icon>
+            <v-icon>mdi-format-align-center</v-icon>
           </v-btn>
           <v-btn>
-            <v-icon>format_align_right</v-icon>
+            <v-icon>mdi-format-align-right</v-icon>
           </v-btn>
           <v-btn>
-            <v-icon>format_align_justify</v-icon>
+            <v-icon>mdi-format-align-justify</v-icon>
           </v-btn>
         </v-btn-toggle>
       </v-row>

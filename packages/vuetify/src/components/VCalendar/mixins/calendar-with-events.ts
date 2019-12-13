@@ -10,32 +10,34 @@ import ripple from '../../../directives/ripple'
 // Mixins
 import CalendarBase from './calendar-base'
 
+// Helpers
+import { escapeHTML } from '../../../util/helpers'
+
 // Util
 import props from '../util/props'
 import {
-  VTimestamp,
   getDayIdentifier,
   parseTime,
 } from '../util/timestamp'
 import {
   VEventParsed,
-  VEventInput,
   parseEvent,
   isEventOn,
 } from '../util/events'
+import { CalendarTimestamp, CalendarEvent } from 'types'
 
 // Types
-type VColorFunction = (event: VEventInput) => string
+type VColorFunction = (event: CalendarEvent) => string
 
 type VNameFunction = (event: VEventParsed, timedEvent: boolean) => string
 
-type VTimeToY = (time: VTimestamp | number | string) => number
+type VTimeToY = (time: CalendarTimestamp | number | string) => number
 
-type VEventResetCheck = (date: VTimestamp) => void
+type VEventResetCheck = (date: CalendarTimestamp) => void
 
 type VEventVisualGetOffset = (visual: VEventVisual, visuals: VEventVisual[]) => number
 
-type VEventGetter = (day: VTimestamp) => VEventParsed[]
+type VEventGetter = (day: CalendarTimestamp) => VEventParsed[]
 
 type VEventVisualGetter = (events: VEventParsed[], timed: boolean) => VEventVisual[]
 
@@ -56,7 +58,7 @@ interface VEventVisual {
   column: number
 }
 
-interface VDaySlotScope extends VTimestamp {
+interface VDaySlotScope extends CalendarTimestamp {
   outside: boolean
   index: number
 }
@@ -96,7 +98,7 @@ export default CalendarBase.extend({
       return typeof this.eventName === 'function'
         ? this.eventName as VNameFunction
         : (event, timedEvent) => {
-          const name = event.input[this.eventName as string] as string
+          const name = escapeHTML(event.input[this.eventName as string] as string)
           if (event.start.hasTime) {
             if (timedEvent) {
               const showStart = event.start.hour < 12 && event.end.hour >= 12
@@ -114,16 +116,14 @@ export default CalendarBase.extend({
   },
 
   methods: {
-    formatTime (withTime: VTimestamp, ampm: boolean): string {
-      const suffix = ampm ? (withTime.hour < 12 ? 'a' : 'p') : ''
-      const hour = withTime.hour % 12 || 12
-      const minute = withTime.minute
+    formatTime (withTime: CalendarTimestamp, ampm: boolean): string {
+      const formatter = this.getFormatter({
+        timeZone: 'UTC',
+        hour: 'numeric',
+        minute: withTime.minute > 0 ? 'numeric' : undefined,
+      })
 
-      return minute > 0
-        ? (minute < 10
-          ? `${hour}:0${minute}${suffix}`
-          : `${hour}:${minute}${suffix}`)
-        : `${hour}${suffix}`
+      return formatter(withTime, true)
     },
     updateEventVisibility () {
       if (this.noEvents || !this.eventMore) {
@@ -145,7 +145,8 @@ export default CalendarBase.extend({
         for (let i = 0; i <= last; i++) {
           if (!hide) {
             const eventBounds = events[i].getBoundingClientRect()
-            hide = eventBounds.bottom + eventHeight > parentBounds.bottom && i !== last
+            hide = (eventBounds.bottom + eventHeight > parentBounds.bottom && i !== last) ||
+                   events[i].style.display === 'none'
           }
           if (hide) {
             const id = events[i].getAttribute('data-event') as string
@@ -282,7 +283,7 @@ export default CalendarBase.extend({
         },
       })
     },
-    genMore (day: VTimestamp): VNode {
+    genMore (day: CalendarTimestamp): VNode {
       return this.$createElement('div', {
         staticClass: 'v-event-more pl-1',
         attrs: {
@@ -303,21 +304,21 @@ export default CalendarBase.extend({
         refInFor: true,
       })
     },
-    getEventsForDay (day: VTimestamp): VEventParsed[] {
+    getEventsForDay (day: CalendarTimestamp): VEventParsed[] {
       const identifier = getDayIdentifier(day)
 
       return this.parsedEvents.filter(
         event => isEventOn(event, identifier)
       )
     },
-    getEventsForDayAll (day: VTimestamp): VEventParsed[] {
+    getEventsForDayAll (day: CalendarTimestamp): VEventParsed[] {
       const identifier = getDayIdentifier(day)
 
       return this.parsedEvents.filter(
         event => event.allDay && isEventOn(event, identifier)
       )
     },
-    getEventsForDayTimed (day: VTimestamp): VEventParsed[] {
+    getEventsForDayTimed (day: CalendarTimestamp): VEventParsed[] {
       const identifier = getDayIdentifier(day)
 
       return this.parsedEvents.filter(
@@ -360,7 +361,7 @@ export default CalendarBase.extend({
 
       const parsedEvents = this.parsedEvents
       const indexToOffset: number[] = parsedEvents.map(event => -1)
-      const resetOnWeekday = this.weekdays[0]
+      const resetOnWeekday = this.parsedWeekdays[0]
 
       const checkReset: VEventResetCheck = day => {
         if (day.weekday === resetOnWeekday) {
@@ -459,22 +460,52 @@ export default CalendarBase.extend({
           : getVisuals(events, timed).map((visual, index) => mapper(visual, index, day))
       }
 
+      const slots = this.$scopedSlots
+      const slotDay = slots.day
+      const slotDayHeader = slots['day-header']
+      const slotDayBody = slots['day-body']
+
       return {
-        ...this.$scopedSlots,
+        ...slots,
         day: (day: VDaySlotScope) => {
-          const children = getSlotChildren(day, this.getEventsForDay, this.genDayEvent, false)
+          let children = getSlotChildren(day, this.getEventsForDay, this.genDayEvent, false)
           if (children && children.length > 0 && this.eventMore) {
             children.push(this.genMore(day))
+          }
+          if (slotDay) {
+            const slot = slotDay(day)
+            if (slot) {
+              children = children ? children.concat(slot) : slot
+            }
           }
           return children
         },
         'day-header': (day: VDaySlotScope) => {
-          return getSlotChildren(day, this.getEventsForDayAll, this.genDayEvent, false)
+          let children = getSlotChildren(day, this.getEventsForDayAll, this.genDayEvent, false)
+
+          if (slotDayHeader) {
+            const slot = slotDayHeader(day)
+            if (slot) {
+              children = children ? children.concat(slot) : slot
+            }
+          }
+          return children
         },
         'day-body': (day: VDayBodySlotScope) => {
-          return [this.$createElement('div', {
-            staticClass: 'v-event-timed-container',
-          }, getSlotChildren(day, this.getEventsForDayTimed, this.genTimedEvent, true))]
+          const events = getSlotChildren(day, this.getEventsForDayTimed, this.genTimedEvent, true)
+          let children: VNode[] = [
+            this.$createElement('div', {
+              staticClass: 'v-event-timed-container',
+            }, events),
+          ]
+
+          if (slotDayBody) {
+            const slot = slotDayBody(day)
+            if (slot) {
+              children = children.concat(slot)
+            }
+          }
+          return children
         },
       }
     },

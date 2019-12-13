@@ -34,7 +34,7 @@
                 icon
                 @click="fav = !fav"
               >
-                <v-icon>favorite</v-icon>
+                <v-icon>mdi-heart</v-icon>
               </v-btn>
             </v-list-item-action>
           </v-list-item>
@@ -59,7 +59,7 @@
         </v-list>
 
         <v-card-actions>
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
 
           <v-btn text @click="menu = false">Cancel</v-btn>
           <v-btn color="primary" text @click="menu = false">Save</v-btn>

@@ -1,1 +1,11 @@
-{}
+{
+  "props": {
+    "actions": "Utilisez ceci lorsque vous utilisez des actions dans le sélecteur",
+    "autosave": "Sauvegarde automatiquement la valeur sélectionnée. Ceci met à jour la valeur interne précédente. Ainsi, si vous cliquez sur Annuler, les modifications apportées par l'utilisateur ne seront pas annulées",
+    "headerColor": "Définit la couleur de l'en-tête. Si non spécifié, utilisera la couleur définie par la propriété <code>color</code> ou la couleur du sélecteur par défaut",
+    "landscape": "Oriente le sélecteur horizontalement",
+    "noTitle": "Masque le titre du sélecteur",
+    "scrollable": "Permet l'utilisation de la molette dans le sélecteur",
+    "value": "Valeur du sélecteur"
+  }
+}

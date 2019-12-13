@@ -1,12 +1,19 @@
 {
-  "1500": [
+  "Premiere": [
     {
       "name": "QOMPLX",
       "href": "https://www.qomplx.com/",
-      "logo": "backers/QOMPLX.png"
+      "logo": "backers/QOMPLX.png",
+      "darkLogo": "backers/QOMPLX-dark.png"
+    },
+    {
+      "name": "Vueconf.US",
+      "href": "http://vueconf.us/",
+      "logo": "backers/vueconf_us.png",
+      "darkLogo": "backers/vueconf_us-dark.png"
     }
   ],
-  "500": [
+  "Diamond": [
     {
       "type": "Patron",
       "name": "LMAX Exchange",
@@ -29,7 +36,7 @@
       "href": "https://vuemastery.com/"
     }
   ],
-  "250": [
+  "Platinum": [
     {
       "name": "rateGenius",
       "href": "https://application.rategenius.com/",
@@ -49,9 +56,19 @@
       "name": "DigitalMaas",
       "href": "https://www.brightree.com/",
       "logo": "backers/brightree.svg"
+    },
+    {
+      "name": "Quanted Square",
+      "href": "https://analytics.quantedsquare.com/",
+      "logo": "backers/quanted-square.svg"
+    },
+    {
+      "name": "Getform",
+      "href": "https://getform.io/",
+      "logo": "backers/getform.png"
     }
   ],
-  "50": [
+  "Gold": [
     {
       "name": "Deister Software",
       "href": "http://www.deister.es/",
@@ -165,6 +182,12 @@
       "name": "Zeit Now",
       "href": "https://zeit.co/now",
       "logo": "sponsors/zeit-now.svg"
+    },
+    {
+      "name": "Oh Dear!",
+      "href": "https://ohdear.app/",
+      "logo": "sponsors/ohdear-inverted.svg",
+      "darkLogo": "sponsors/ohdear.svg"
     }
   ]
 }

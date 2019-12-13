@@ -13,7 +13,7 @@
             <v-icon small>mdi-chevron-right</v-icon>
           </v-btn>
           <v-toolbar-title>{{ title }}</v-toolbar-title>
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
           <v-menu bottom right>
             <template v-slot:activator="{ on }">
               <v-btn
@@ -76,7 +76,7 @@
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
-              <div class="flex-grow-1"></div>
+              <v-spacer></v-spacer>
               <v-btn icon>
                 <v-icon>mdi-heart</v-icon>
               </v-btn>
@@ -106,8 +106,8 @@
 <script>
   export default {
     data: () => ({
-      today: '2019-01-08',
-      focus: '2019-01-08',
+      today: '2019-01-01',
+      focus: '2019-01-01',
       type: 'month',
       typeToLabel: {
         month: 'Month',
@@ -281,6 +281,9 @@
           timeZone: 'UTC', month: 'long',
         })
       },
+    },
+    mounted () {
+      this.$refs.calendar.checkChange()
     },
     methods: {
       viewDay ({ date }) {

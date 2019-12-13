@@ -5,29 +5,29 @@
         <div>
           <v-toolbar>
             <v-btn icon class="hidden-xs-only">
-              <v-icon>arrow_back</v-icon>
+              <v-icon>mdi-arrow-left</v-icon>
             </v-btn>
 
             <v-toolbar-title>Title</v-toolbar-title>
 
-            <div class="flex-grow-1"></div>
+            <v-spacer></v-spacer>
 
             <v-btn icon class="hidden-xs-only">
-              <v-icon>search</v-icon>
+              <v-icon>mdi-magnify</v-icon>
             </v-btn>
           </v-toolbar>
         </div>
 
         <div style="flex-basis: 20%">
           <v-toolbar dark>
-            <div class="flex-grow-1"></div>
+            <v-spacer></v-spacer>
 
             <v-btn icon>
-              <v-icon>reply</v-icon>
+              <v-icon>mdi-reply</v-icon>
             </v-btn>
 
             <v-btn icon>
-              <v-icon>more_vert</v-icon>
+              <v-icon>mdi-dots-vertical</v-icon>
             </v-btn>
           </v-toolbar>
         </div>

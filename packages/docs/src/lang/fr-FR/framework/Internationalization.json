@@ -1,6 +1,6 @@
 {
-  "header": "# Internationalisation",
-  "headerText": "Vuetify prend en charge l'internationalisation linguistique de ses composants. Lors de l'installation de Vuetify, vous pouvez spécifier les langues disponibles et la langue actuellement active avec l'option `lang`. Voir la section Commencer. ",
+  "heading": "# Internationalisation",
+  "headingText": "Vuetify prend en charge l'internationalisation linguistique de ses composants. Lors de l'installation de Vuetify, vous pouvez spécifier les langues disponibles et la langue actuellement active avec l'option `lang`. Voir la section Commencer. ",
   "gettingStarted": "## Commencer",
   "gettingStartedText": "Pour définir les langues disponibles ou la langue actuelle, indiquez l'option `lang` lors de l'installation de Vuetify. La propriété `locales` fournie sera fusionnée avec les langues déjà existantes. Vous pouvez modifier les langues pendant l'exécution à l'aide de l'objet `$vuetify` sur l'instance Vue.",
   "availableLocalesText": "Actuellement, Vuetify fournit des traductions dans les langues suivantes :",

@@ -1,7 +1,7 @@
 export default {
+  badge: 'Odznak',
   close: 'Zavřít',
   dataIterator: {
-    pageText: '{0}-{1} z {2}',
     noResultsText: 'Nenalezeny žádné záznamy',
     loadingText: 'Načítám položky...',
   },
@@ -21,6 +21,7 @@ export default {
     prevPage: 'Předchozí strana',
     firstPage: 'První strana',
     lastPage: 'Poslední strana',
+    pageText: '{0}-{1} z {2}',
   },
   datePicker: {
     itemsSelected: '{0} vybráno',
@@ -29,6 +30,9 @@ export default {
   carousel: {
     prev: 'Předchozí obrázek',
     next: 'Další obrázek',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: '{0} dalších',
@@ -36,5 +40,9 @@ export default {
   fileInput: {
     counter: '{0} souborů',
     counterSize: '{0} souborů ({1} celkem)',
+  },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
   },
 }

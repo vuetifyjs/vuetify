@@ -1,7 +1,7 @@
 {
   "examples": {
     "disabled": {
-      "header": "禁用"
+      "heading": "禁用"
     },
     "filled": {
       "desc": "文本框可以使用替代的样式设计，但是这种模式下不支持附加或者前置图标属性。"

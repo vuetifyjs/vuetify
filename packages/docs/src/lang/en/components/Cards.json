@@ -1,6 +1,7 @@
 {
-  "header": "# Cards",
-  "headerText": "The `v-card` component is a versatile component that can be used for anything from a panel to a static image. The **card** component has numerous helper components to make markup as easy as possible. Components that have no listed options use **Vue's** functional component option for faster rendering and serve as markup sugar to make building easier.",
+  "heading": "# Cards",
+  "headingText": "The `v-card` component is a versatile component that can be used for anything from a panel to a static image. The **card** component has numerous helper components to make markup as easy as possible. Components that have no listed options use **Vue's** functional component option for faster rendering and serve as markup sugar to make building easier.",
+  "usageText": "A card has 4 basic components, `v-card-title`, `v-card-subtitle`, `v-card-text` and `v-card-actions`.",
   "componentsHeader": "### Functional components",
   "componentsList": [
     "`v-card-actions`: The container used for placing **actions** for a card, such as [v-btn](/components/buttons) or [v-menu](/components/menus). Also applies _special margin_ to buttons so that they properly line up with other card content areas.",
@@ -8,51 +9,48 @@
     "`v-card-title`: Provides a default **font-size** and **padding** for card titles. Font-size can be overwritten with typography classes, (/styles/typography)."
   ],
   "examples": {
-    "usage": {
-      "desc": "A card has 3 basic components, `v-card-title`, `v-card-text` and `v-card-actions`."
-    },
     "info-card": {
-      "header": "### Information card",
+      "heading": "### Information card",
       "desc": "Cards are entry points to more detailed information. To keep things concise, ensure to limit the number of actions the user can take."
     },
     "media-with-text": {
-      "header": "### Media with text",
+      "heading": "### Media with text",
       "desc": "Using the layout system, we can add custom text anywhere within the background."
     },
     "outlined": {
-      "header": "### Outlined cards",
+      "heading": "### Outlined cards",
       "desc": "An **outlined** card has 0 elevation and contains a soft border."
     },
     "horizontal": {
-      "header": "### Horizontal cards",
+      "heading": "### Horizontal cards",
       "desc": "Using `v-flex`, you can create customized horizontal cards. Use the `contain` property to shrink the `v-img` to fit inside the container, instead of covering."
     },
     "grids": {
-      "header": "### Grids",
-      "desc": "Using grid lists, you can create beautiful layouts."
+      "heading": "### Grids",
+      "desc": "Using grids, you can create beautiful layouts."
     },
     "custom-actions": {
-      "header": "### Custom actions",
+      "heading": "### Custom actions",
       "desc": "With a simple conditional, you can easily add supplementary text that is hidden until opened."
     },
     "twitter-card": {
-      "header": "### Twitter card",
+      "heading": "### Twitter card",
       "desc": "The `v-card` component has multiple children components that help you build complex examples without having to worry about spacing. This example is comprised of the `v-card-title`, `v-card-text` and `v-card-actions` components."
     },
     "loading": {
-      "header": "### Loading card",
+      "heading": "### Loading card",
       "desc": "Cards can be set to a loading state when processing a user action. This disables further actions and provides visual feedback with an indeterminate [v-progress-linear](/components/progress-linear)."
     },
     "weather": {
-      "header": "### Weather card",
+      "heading": "### Weather card",
       "desc": "Using [v-list-items](/components/lists) and a [v-slider](/components/sliders), we are able to create a unique weather card. The list components ensure that we have consistent spacing and functionality while the slider component allows us to provide a useful interface of selection to the user."
     },
     "advanced": {
-      "header": "### Advanced",
+      "heading": "### Advanced",
       "desc": "Using `v-list-item` and `v-img` allows us to create unique card layouts in an advanced setting"
     },
     "intermediate": {
-      "header": "### Intermediate",
+      "heading": "### Intermediate",
       "desc": "The `v-card` component is useful for wrapping content."
     }
   },
@@ -66,7 +64,8 @@
     "hover": "Will apply an elevation of 4dp when hovered (default 2dp). You can find more information on the [elevation page](/styles/elevation).",
     "img": "Specifies an image background for the card. For more advanced implementations, it is recommended that you use the [v-img](/components/images) component. You can find a [v-img example here](#media-with-text).",
     "outlined": "Removes card elevation shadow and adds a thin border.",
-    "raised": "Specifies a higher default elevation (8dp). You can find more information on the [elevation page](/styles/elevation)."
+    "raised": "Specifies a higher default elevation (8dp). You can find more information on the [elevation page](/styles/elevation).",
+    "shaped": "Applies a large border radius on the top left and bottom right of the card."
   },
   "events": {
     "click": "Emitted when component is clicked - Will trigger component to ripple when clicked unless the `.native` modifier is used"

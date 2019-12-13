@@ -76,9 +76,9 @@
         disabled: false,
         length: 10,
         nextIcon: 'navigate_next',
-        nextIcons: ['navigate_next', 'arrow_forward', 'arrow_right', 'chevron_right'],
+        nextIcons: ['mdi-chevron-right', 'mdi-arrow-right', 'mdi-menu-right'],
         prevIcon: 'navigate_before',
-        prevIcons: ['navigate_before', 'arrow_back', 'arrow_left', 'chevron_left'],
+        prevIcons: ['mdi-chevron-left', 'mdi-arrow-left', 'mdi-menu-left'],
         page: 1,
         totalVisible: 10,
       }

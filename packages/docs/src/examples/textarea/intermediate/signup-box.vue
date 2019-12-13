@@ -7,7 +7,7 @@
       color="deep-purple darken-4"
       dark
     >
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
       <v-icon small>mdi-square</v-icon>
       <v-icon
         class="ml-1"
@@ -28,7 +28,7 @@
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
       <v-card-title class="title font-weight-regular">Sign up</v-card-title>
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
@@ -94,7 +94,7 @@
       >
         Clear
       </v-btn>
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
       <v-btn
         :disabled="!form"
         :loading="isLoading"
@@ -122,7 +122,7 @@
           >
             No
           </v-btn>
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
           <v-btn
             class="white--text"
             color="deep-purple accent-4"

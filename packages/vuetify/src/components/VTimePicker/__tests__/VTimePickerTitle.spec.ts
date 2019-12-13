@@ -1,10 +1,16 @@
+import Vue from 'vue'
 import VTimePickerTitle from '../VTimePickerTitle'
 import { SelectingTimes } from '../VTimePicker'
+import { Lang } from '../../../services/lang'
 import {
   mount,
   Wrapper,
   MountOptions,
 } from '@vue/test-utils'
+
+Vue.prototype.$vuetify = {
+  lang: new Lang(),
+}
 
 describe('VTimePickerTitle.ts', () => {
   type Instance = InstanceType<typeof VTimePickerTitle>

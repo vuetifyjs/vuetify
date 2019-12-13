@@ -17,18 +17,18 @@
       <v-toolbar flat>
         <v-toolbar-title class="grey--text">Title</v-toolbar-title>
 
-        <div class="flex-grow-1"></div>
+        <v-spacer></v-spacer>
 
         <v-btn icon>
-          <v-icon>search</v-icon>
+          <v-icon>mdi-magnify</v-icon>
         </v-btn>
 
         <v-btn icon>
-          <v-icon>apps</v-icon>
+          <v-icon>mdi-apps</v-icon>
         </v-btn>
 
         <v-btn icon>
-          <v-icon>more_vert</v-icon>
+          <v-icon>mdi-dots-vertical</v-icon>
         </v-btn>
       </v-toolbar>
 

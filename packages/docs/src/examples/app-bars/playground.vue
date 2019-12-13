@@ -117,10 +117,10 @@
 
         <v-toolbar-title>Title</v-toolbar-title>
 
-        <div class="flex-grow-1"></div>
+        <v-spacer></v-spacer>
 
         <v-btn icon>
-          <v-icon>search</v-icon>
+          <v-icon>mdi-magnify</v-icon>
         </v-btn>
       </v-app-bar>
       <v-sheet

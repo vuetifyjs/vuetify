@@ -15,7 +15,10 @@
           pl-1
           xs10
         >
-          <v-layout align-center wrap>
+          <v-layout
+            align-center
+            wrap
+          >
             <v-flex
               display-1
               mr-6
@@ -24,12 +27,28 @@
               xs12
               sm6
             >
-              <v-icon x-large class="mr-3">mdi-github-circle</v-icon>
+              <v-icon
+                x-large
+                class="mr-3"
+              >mdi-github-circle</v-icon>
               GITHUB
             </v-flex>
-            <v-flex hidden-xs-only support-bar mr-6 />
-            <v-flex hidden-sm-and-up support-bar-horizontal mr-6 />
-            <v-flex xs12 sm6 display-1 support-caption>
+            <v-flex
+              hidden-xs-only
+              support-bar
+              mr-6
+            />
+            <v-flex
+              hidden-sm-and-up
+              support-bar-horizontal
+              mr-6
+            />
+            <v-flex
+              xs12
+              sm6
+              display-1
+              support-caption
+            >
               Sponsor the project
             </v-flex>
           </v-layout>

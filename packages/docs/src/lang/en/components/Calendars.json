@@ -1,24 +1,24 @@
 {
-  "header": "# Calendars",
-  "headerText": "The `v-calendar` component is used to display information in a daily, weekly, or monthly view. The daily view has slots for all day or timed elements, and the weekly and monthly view has a slot for each day. Optionally you can pass in an array of events and they will be rendered over the appropriate days and times.",
+  "heading": "# Calendars",
+  "headingText": "The `v-calendar` component is used to display information in a daily, weekly, or monthly view. The daily view has slots for all day or timed elements, and the weekly and monthly view has a slot for each day. Optionally you can pass in an array of events and they will be rendered over the appropriate days and times.",
   "examples": {
     "usage": {
       "desc": "A calendar has a type and a value which determines what type of calendar is shown over what span of time. This shows the bare minimum configuration, an array of events with `name`, `start` and `end` properties. `end` is optional, it defaults to the `start`. If the `start` has a time it's considered a timed event and will be shown accordingly in the day views. An event can span multiple days and will be rendered accordingly."
     },
     "slots": {
-      "header": "### Slots",
+      "heading": "### Slots",
       "desc": "Slots allow you to define the content for each day, time interval for the daily views, and various labels."
     },
     "events": {
-      "header": "### Events",
+      "heading": "### Events",
       "desc": "This is an example of a planner with additional event handlers and external components controlling the display of the calendar."
     },
     "weekly": {
-      "header": "### Weekly",
+      "heading": "### Weekly",
       "desc": "This is an example of an event calendar with all-day and timed events with a type of `week`."
     },
     "daily": {
-      "header": "### Daily",
+      "heading": "### Daily",
       "desc": "This is an example of calendar with content in each interval slot and a type of `day`."
     }
   },
@@ -62,6 +62,7 @@
     "weekdays": "Specifies which days of the week to display. To display Monday through Friday only, a value of `[1, 2, 3, 4, 5]` can be used. To display a week starting on Monday a value of `[1, 2, 3, 4, 5, 6, 0]` can be used."
   },
   "functions": {
+    "checkChange": "Checks for change in start and end dates. Updates and emits a change event if they have changed.",
     "formatTime": "A utility function to take a timestamp object (at least has hour and minute properties) and generates a time as a string.",
     "getFormatter": "A utility function given options to pass to Intl.DateTimeFormat and returns a function which can be given a Date to format as a string.",
     "minutesToPixels": "Converts minutes to a pixel value on the y-axis for the `day` view. If the view is not `day` then -1 is returned.",

@@ -21,46 +21,54 @@
 
       <v-divider vertical></v-divider>
 
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
 
       <v-btn-toggle
         v-model="toggle_multiple"
+        color="primary"
+        dense
+        group
         multiple
       >
         <v-btn :value="1" text>
-          <v-icon>format_bold</v-icon>
+          <v-icon>mdi-format-bold</v-icon>
         </v-btn>
 
         <v-btn :value="2" text>
-          <v-icon>format_italic</v-icon>
+          <v-icon>mdi-format-italic</v-icon>
         </v-btn>
 
         <v-btn :value="3" text>
-          <v-icon>format_underlined</v-icon>
+          <v-icon>mdi-format-underline</v-icon>
         </v-btn>
 
         <v-btn :value="4" text>
-          <v-icon>format_color_fill</v-icon>
+          <v-icon>mdi-format-color-fill</v-icon>
         </v-btn>
       </v-btn-toggle>
 
       <div class="mx-4"></div>
 
-      <v-btn-toggle v-model="toggle_exclusive">
+      <v-btn-toggle
+        v-model="toggle_exclusive"
+        color="primary"
+        dense
+        group
+      >
         <v-btn :value="1" text>
-          <v-icon>format_align_left</v-icon>
+          <v-icon>mdi-format-align-left</v-icon>
         </v-btn>
 
         <v-btn :value="2" text>
-          <v-icon>format_align_center</v-icon>
+          <v-icon>mdi-format-align-center</v-icon>
         </v-btn>
 
         <v-btn :value="3" text>
-          <v-icon>format_align_right</v-icon>
+          <v-icon>mdi-format-align-right</v-icon>
         </v-btn>
 
         <v-btn :value="4" text>
-          <v-icon>format_align_justify</v-icon>
+          <v-icon>mdi-format-align-justify</v-icon>
         </v-btn>
       </v-btn-toggle>
     </template>

@@ -6,7 +6,7 @@
     wrap
   >
     <v-flex xs12>
-      <doc-heading>tidelift</doc-heading>
+      <base-heading>tidelift</base-heading>
     </v-flex>
 
     <v-flex
@@ -15,8 +15,11 @@
       tag="v-divider"
     />
 
-    <v-flex xs12 mb-4>
-      <doc-markdown>tideliftBlurb</doc-markdown>
+    <v-flex
+      xs12
+      mb-4
+    >
+      <base-markdown>tideliftBlurb</base-markdown>
     </v-flex>
 
     <v-flex

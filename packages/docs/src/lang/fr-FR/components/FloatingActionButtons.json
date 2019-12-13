@@ -1,1 +1,28 @@
-{}
+{
+  "examples": {
+    "usage": {
+      "desc": "Les boutons d'action flottant peuvent être attachés au matériel pour indiquer une action promue dans votre application. La taille par défaut sera utilisée dans la plupart des cas, tandis que la variante `small` peut être utilisée pour maintenir la continuité avec des éléments de taille similaires."
+    },
+    "small": {
+      "desc": "Pour un meilleur attrait visuel, nous utilisons un petit bouton pour correspondre à nos avatars de liste."
+    },
+    "display-animation": {
+      "desc": "Lors de son premier affichage, un bouton d'action flottant devrait s'animer sur l'écran. Ici nous utilisons`v-fab-transition` avec v-show. Vous pouvez également utiliser toute transition personnalisée fournie par Vuetify ou votre propre."
+    },
+    "lateral-screens": {
+      "desc": "Lors du changement d'action par défaut de votre bouton, il est recommandé d'afficher une transition pour signaler un changement. Nous le faisons en liant la prop `key` à un morceau de données qui peut correctement signaler un changement d'action au système de transition Vue. Bien que vous puissiez utiliser une transition personnalisée pour cela, assurez-vous que vous définissez la prop `mode` à **out-in**."
+    },
+    "speed-dial": {
+      "desc": "Le composant speed-dial a une api très robuste pour personnaliser votre expérience FAB exactement comme vous le souhaitez."
+    }
+  },
+  "api": {
+    "v-btn": "Components.Buttons"
+  },
+  "props": {
+    "v-speed-dial": {
+      "direction": "Direction dans laquelle le contenu du cadran rapide s'affichera. Les valeurs possibles sont `top`, `bottom`, `left`, `right`.",
+      "openOnHover": "Ouvre speed-dial au survol"
+    }
+  }
+}

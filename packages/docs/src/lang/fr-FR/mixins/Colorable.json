@@ -1,1 +1,5 @@
-{}
+{
+  "props": {
+    "color": "Applique la couleur spécifiée à la commande - cela peut être le nom de la couleur matérielle (par exemple `success` ou `purple`) ou la couleur css (`#033` ou `rgba(255, 0, 0, 0.5)`). Vous pouvez trouver la liste des classes construites dans la page [couleurs](/styles/couleurs#material-colors)."
+  }
+}

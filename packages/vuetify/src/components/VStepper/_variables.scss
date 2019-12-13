@@ -1,0 +1,28 @@
+@import '../../styles/styles.sass';
+
+$stepper-alt-labels-flex-basis : 175px !default;
+$stepper-alt-labels-header-divider: 35px -67px 0 !default;
+$stepper-alt-labels-step-step-margin-bottom: 11px !default;
+$stepper-border-radius: $border-radius-root !default;
+$stepper-content-btn-margin: 24px 8px 8px 0 !default;
+$stepper-content-padding: 24px 24px 16px 24px !default;
+$stepper-elevation: 2 !default;
+$stepper-header-divider-margin: 0 -16px !default;
+$stepper-header-elevation: 2 !default;
+$stepper-header-height: 72px !default;
+$stepper-label-line-height: 1 !default;
+$stepper-label-small-font-size: map-deep-get($headings, 'caption', 'size') !default;
+$stepper-label-small-font-weight: 300 !default;
+$stepper-step-error-icon-font-size: map-deep-get($headings, 'h5', 'size')  !default;
+$stepper-step-padding: 24px !default;
+$stepper-step-step-font-size: map-deep-get($headings, 'caption', 'size') !default;
+$stepper-step-step-height: 24px !default;
+$stepper-step-step-icon-font-size: map-deep-get($headings, 'h6', 'size') !default;
+$stepper-step-step-margin: 8px !default;
+$stepper-step-step-min-width: 24px !default;
+$stepper-step-step-width: 24px !default;
+$stepper-vertical-content-margin: -8px -36px -16px 36px !default;
+$stepper-vertical-content-padding: 16px 60px 16px 23px !default;
+$stepper-vertical-padding-bottom: 36px !default;
+$stepper-vertical-step-padding: 24px 24px 16px !default;
+$stepper-vertical-step-step-margin: 12px !default;

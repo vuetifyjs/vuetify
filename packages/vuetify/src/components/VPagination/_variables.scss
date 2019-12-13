@@ -1,0 +1,16 @@
+@import '../../styles/styles.sass';
+
+$pagination-border-radius: $border-radius-root !default;
+$pagination-disabled-opacity: 0.6 !default;
+$pagination-item-font-size: map-deep-get($headings, 'subtitle-1', 'size') !default;
+$pagination-item-height: 34px !default;
+$pagination-item-margin: .3rem !default;
+$pagination-item-min-width: 34px !default;
+$pagination-item-padding: 0 5px !default;
+$pagination-more-height: 32px !default;
+$pagination-more-margin: .3rem !default;
+$pagination-more-width: 32px !default;
+$pagination-navigation-disabled-opacity: 0.6 !default;
+$pagination-navigation-height: 32px !default;
+$pagination-navigation-margin: .3rem 10px !default;
+$pagination-navigation-width: 32px !default;

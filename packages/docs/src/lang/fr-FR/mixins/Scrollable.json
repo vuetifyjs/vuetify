@@ -1,1 +1,6 @@
-{}
+{
+  "props": {
+    "scrollTarget": "Indique l'élément à la cible pour défiler les événements. Utilise `window` par défaut.",
+    "scrollThreshold": "La distance de défilement vers le bas avant **cacher-sur-scroll** active."
+  }
+}

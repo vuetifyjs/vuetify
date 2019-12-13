@@ -25,7 +25,7 @@
             label="Search"
           ></v-text-field>
           <template v-if="$vuetify.breakpoint.mdAndUp">
-            <div class="flex-grow-1"></div>
+            <v-spacer></v-spacer>
             <v-select
               v-model="sortBy"
               flat
@@ -35,7 +35,7 @@
               prepend-inner-icon="search"
               label="Sort by"
             ></v-select>
-            <div class="flex-grow-1"></div>
+            <v-spacer></v-spacer>
             <v-btn-toggle
               v-model="sortDesc"
               mandatory
@@ -46,7 +46,7 @@
                 color="blue"
                 :value="false"
               >
-                <v-icon>arrow_upward</v-icon>
+                <v-icon>mdi-arrow-up</v-icon>
               </v-btn>
               <v-btn
                 large
@@ -54,7 +54,7 @@
                 color="blue"
                 :value="true"
               >
-                <v-icon>arrow_downward</v-icon>
+                <v-icon>mdi-arrow-down</v-icon>
               </v-btn>
             </v-btn-toggle>
           </template>
@@ -80,10 +80,9 @@
                 <v-list-item
                   v-for="(key, index) in filteredKeys"
                   :key="index"
-                  :color="sortBy === key ? `blue lighten-4` : `white`"
                 >
-                  <v-list-item-content>{{ key }}:</v-list-item-content>
-                  <v-list-item-content class="align-end">{{ item[key.toLowerCase()] }}</v-list-item-content>
+                  <v-list-item-content :class="{ 'blue--text': sortBy === key }">{{ key }}:</v-list-item-content>
+                  <v-list-item-content class="align-end" :class="{ 'blue--text': sortBy === key }">{{ item[key.toLowerCase()] }}</v-list-item-content>
                 </v-list-item>
               </v-list>
             </v-card>
@@ -104,7 +103,7 @@
                 v-on="on"
               >
                 {{ itemsPerPage }}
-                <v-icon>keyboard_arrow_down</v-icon>
+                <v-icon>mdi-chevron-down</v-icon>
               </v-btn>
             </template>
             <v-list>
@@ -118,7 +117,7 @@
             </v-list>
           </v-menu>
 
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
 
           <span
             class="mr-4
@@ -133,7 +132,7 @@
             class="mr-1"
             @click="formerPage"
           >
-            <v-icon>keyboard_arrow_left</v-icon>
+            <v-icon>mdi-chevron-left</v-icon>
           </v-btn>
           <v-btn
             fab
@@ -142,7 +141,7 @@
             class="ml-1"
             @click="nextPage"
           >
-            <v-icon>keyboard_arrow_right</v-icon>
+            <v-icon>mdi-chevron-right</v-icon>
           </v-btn>
         </v-row>
       </template>

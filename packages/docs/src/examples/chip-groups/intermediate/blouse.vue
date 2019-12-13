@@ -5,7 +5,7 @@
   >
     <v-card-title>
       <h2 class="display-1">Shirt Blouse</h2>
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
       <span class="title">$44.50</span>
     </v-card-title>
 

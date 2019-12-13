@@ -1,6 +1,5 @@
 {
   "becomeSponsor": "Hỗ trợ Vuetify",
-  "callout": "Material Design<br>Component Framework",
   "features": {
     "community": {
       "text": "Khi bạn gặp khó khăn, bạn cần hỗ trợ ngay lập tức. Vuetify cung cấp sự hỗ trợ cộng đồng trên Discord."
@@ -16,9 +15,7 @@
   "getHelp": "Nhận hỗ trợ",
   "getStarted": "Bắt đầu",
   "github": "Github",
-  "madeWithVuetify": "Các dự án sử dụng Vuetify",
   "materialDesign": "Material Design",
   "mit": "MIT License",
-  "proudlySponsoredBy": "Patreon Sponsors",
-  "whyVuetify": "Dùng Vuetify?"
+  "whyVuetifyText2": "Tại sao dùng Vuetify?"
 }

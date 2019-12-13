@@ -60,10 +60,10 @@
   export default {
     data: () => ({
       icons: [
-        'home',
-        'mail',
-        'event',
-        'delete',
+        'mdi-home',
+        'mdi-email',
+        'mdi-calendar',
+        'mdi-delete',
       ],
       items: [
         'default',

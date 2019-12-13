@@ -38,7 +38,7 @@
               >
                 <template v-slot:activator="{ on }">
                   <v-btn v-on="on">
-                    <v-icon left>menu</v-icon>
+                    <v-icon left>mdi-menu</v-icon>
                     Menu
                   </v-btn>
                 </template>

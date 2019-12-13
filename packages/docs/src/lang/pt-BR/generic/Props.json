@@ -1,11 +1,16 @@
 {
   "auto": "Centraliza a lista no elemento selecionado",
   "centered": "Centraliza as abas",
-  "clearable": "Adicionar a funcionalidade de limpar o input, ícone padrão é usa o **clear** do Material Icons",
+  "clearable": "Adicionar a funcionalidade de limpar o input, ícone padrão é o **clear** do Material Icons",
   "falseValue": "Define o valor para falso",
   "fullWidth": "Força largura 100%",
+  "fixedTabs": "`v-tabs-item` min-width 160px (72px mobile), max-width 264px",
   "id": "Define o id no DOM do componente",
+  "mobileBreakPoint": "Define o breakpoint mobile designado para o componente. Isto aplica estilos alternativos para dispositivos móveis.",
+  "persistent": "Clicar fora não fechará a caixa de diálogo",
   "singleLine": "Label não se move em eventos focus/dirty",
+  "size": "Define a altura e a largura do componente.",
   "textColor": "Aplica uma cor específica ao texto",
+  "tile": "Components.Sheets.props.tile",
   "trueValue": "Define o valor para verdadeiro"
 }

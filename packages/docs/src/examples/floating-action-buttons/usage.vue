@@ -16,7 +16,7 @@
               right
               color="pink"
             >
-              <v-icon>add</v-icon>
+              <v-icon>mdi-plus</v-icon>
             </v-btn>
           </v-card-text>
         </v-card>
@@ -35,7 +35,7 @@
                 left
                 fab
               >
-                <v-icon>add</v-icon>
+                <v-icon>mdi-plus</v-icon>
               </v-btn>
             </template>
           </v-toolbar>

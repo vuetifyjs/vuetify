@@ -1,13 +1,16 @@
 <template>
   <v-list class="checklist">
-    <v-list-item v-for="(item, index) in items" :key="index">
+    <v-list-item
+      v-for="(item, index) in items"
+      :key="index"
+    >
       <v-list-item-content>
         <v-list-item-title>
-          <doc-markdown :code="item" />
+          <base-markdown :code="item" />
         </v-list-item-title>
       </v-list-item-content>
       <v-list-item-icon>
-        <v-icon color="success">check</v-icon>
+        <v-icon color="success">mdi-check</v-icon>
       </v-list-item-icon>
     </v-list-item>
   </v-list>

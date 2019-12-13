@@ -1,7 +1,7 @@
 export default {
+  badge: 'Bricka',
   close: 'Stäng',
   dataIterator: {
-    pageText: '{0}-{1} av {2}',
     noResultsText: 'Inga poster funna',
     loadingText: 'Laddar data...',
   },
@@ -12,7 +12,7 @@ export default {
       sortAscending: ': Sorterat stigande. Aktivera för sortering fallande.',
       sortNone: ': Osorterat. Aktivera för sortering stigande.',
     },
-    sortBy: 'Sort by',
+    sortBy: 'Sortera efter',
   },
   dataFooter: {
     itemsPerPageText: 'Objekt per sida:',
@@ -21,6 +21,7 @@ export default {
     prevPage: 'Föregående sida',
     firstPage: 'Första sidan',
     lastPage: 'Sista sidan',
+    pageText: '{0}-{1} av {2}',
   },
   datePicker: {
     itemsSelected: '{0} markerade',
@@ -29,6 +30,9 @@ export default {
   carousel: {
     prev: 'Föregående vy',
     next: 'Nästa vy',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: '{0} fler',
@@ -36,5 +40,9 @@ export default {
   fileInput: {
     counter: '{0} filer',
     counterSize: '{0} filer (av {1} totalt)',
+  },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
   },
 }

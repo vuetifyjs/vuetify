@@ -21,7 +21,7 @@ export default VSlider.extend({
     value: {
       type: Array,
       default: () => ([0, 0]),
-    } as PropValidator<number[]>,
+    } as unknown as PropValidator<[number, number]>,
   },
 
   data () {
@@ -204,7 +204,7 @@ export default VSlider.extend({
     onMouseMove (e: MouseEvent) {
       const { value, isInsideTrack } = this.parseMouseMove(e)
 
-      if (isInsideTrack) {
+      if (isInsideTrack && this.activeThumb === null) {
         this.activeThumb = this.getIndexOfClosestValue(this.internalValue, value)
       }
 

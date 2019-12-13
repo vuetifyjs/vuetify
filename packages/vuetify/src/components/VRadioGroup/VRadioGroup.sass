@@ -1,3 +1,4 @@
+@import './_variables'
 @import '../../styles/styles.sass'
 
 .v-input--radio-group
@@ -6,10 +7,10 @@
     width: 100%
 
   &--column .v-input--radio-group__input > .v-label
-    padding-bottom: 8px
+    padding-bottom: $radio-group-padding
 
   &--row .v-input--radio-group__input > .v-label
-    padding-right: 8px
+    padding-right: $radio-group-padding
 
   &--row
     .v-input--radio-group__input
@@ -18,7 +19,7 @@
 
   &--column
     .v-radio:not(:last-child):not(:only-child)
-      margin-bottom: 8px
+      margin-bottom: $radio-group-padding
 
     .v-input--radio-group__input
       flex-direction: column

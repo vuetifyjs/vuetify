@@ -24,17 +24,17 @@
               <v-list-item-subtitle>Fitz & The Trantrums</v-list-item-subtitle>
             </v-list-item-content>
 
-            <div class="flex-grow-1"></div>
+            <v-spacer></v-spacer>
 
             <v-list-item-icon>
               <v-btn icon>
-                <v-icon>fast_rewind</v-icon>
+                <v-icon>mdi-rewind</v-icon>
               </v-btn>
             </v-list-item-icon>
 
             <v-list-item-icon :class="{ 'mx-5': $vuetify.breakpoint.mdAndUp }">
               <v-btn icon>
-                <v-icon>pause</v-icon>
+                <v-icon>mdi-pause</v-icon>
               </v-btn>
             </v-list-item-icon>
 
@@ -43,7 +43,7 @@
               :class="{ 'mr-3': $vuetify.breakpoint.mdAndUp }"
             >
               <v-btn icon>
-                <v-icon>fast_forward</v-icon>
+                <v-icon>mdi-fast-forward</v-icon>
               </v-btn>
             </v-list-item-icon>
           </v-list-item>

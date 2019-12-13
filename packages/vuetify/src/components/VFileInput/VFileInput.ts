@@ -11,7 +11,8 @@ import { VChip } from '../VChip'
 import { PropValidator } from 'vue/types/options'
 
 // Utilities
-import { humanReadableFileSize, wrapInArray } from '../../util/helpers'
+import { deepEqual, humanReadableFileSize, wrapInArray } from '../../util/helpers'
+import { consoleError } from '../../util/console'
 
 export default VTextField.extend({
   name: 'v-file-input',
@@ -38,11 +39,11 @@ export default VTextField.extend({
     placeholder: String,
     prependIcon: {
       type: String,
-      default: '$vuetify.icons.file',
+      default: '$file',
     },
     readonly: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     showSize: {
       type: [Boolean, Number],
@@ -71,10 +72,6 @@ export default VTextField.extend({
     } as PropValidator<File | File[]>,
   },
 
-  data: () => ({
-    internalFileInput: null,
-  }),
-
   computed: {
     classes (): object {
       return {
@@ -82,7 +79,7 @@ export default VTextField.extend({
         'v-file-input': true,
       }
     },
-    counterValue (): string {
+    computedCounterValue (): string {
       const fileCount = (this.isMultiple && this.lazyValue)
         ? this.lazyValue.length
         : (this.lazyValue instanceof File) ? 1 : 0
@@ -137,10 +134,30 @@ export default VTextField.extend({
     },
   },
 
+  watch: {
+    readonly: {
+      handler (v) {
+        if (v === true) consoleError('readonly is not supported on <v-file-input>', this)
+      },
+      immediate: true,
+    },
+    value (v) {
+      const value = this.isMultiple ? v : v ? [v] : []
+      if (!deepEqual(value, this.$refs.input.files)) {
+        // When the input value is changed programatically, clear the
+        // internal input's value so that the `onInput` handler
+        // can be triggered again if the user re-selects the exact
+        // same file(s). Ideally, `input.files` should be
+        // manipulated directly but that property is readonly.
+        this.$refs.input.value = ''
+      }
+    },
+  },
+
   methods: {
     clearableCallback () {
       this.internalValue = this.isMultiple ? [] : null
-      this.internalFileInput = null
+      this.$refs.input.value = ''
     },
     genChips () {
       if (!this.isDirty) return []
@@ -159,7 +176,10 @@ export default VTextField.extend({
     genInput () {
       const input = VTextField.options.methods.genInput.call(this)
 
-      input.data!.domProps!.value = this.internalFileInput
+      // We should not be setting value
+      // programmatically on the input
+      // when it is using type="file"
+      delete input.data!.domProps!.value
 
       // This solves an issue in Safari where
       // nothing happens when adding a file
@@ -183,7 +203,7 @@ export default VTextField.extend({
       const length = this.text.length
 
       if (length < 2) return this.text
-      if (this.showSize && !this.counter) return [this.counterValue]
+      if (this.showSize && !this.counter) return [this.computedCounterValue]
       return [this.$vuetify.lang.t(this.counterString, length)]
     },
     genSelections () {
@@ -231,7 +251,8 @@ export default VTextField.extend({
     },
     truncateText (str: string) {
       if (str.length < Number(this.truncateLength)) return str
-      return `${str.slice(0, 10)}…${str.slice(-10)}`
+      const charsKeepOneSide = Math.floor((Number(this.truncateLength) - 1) / 2)
+      return `${str.slice(0, charsKeepOneSide)}…${str.slice(str.length - charsKeepOneSide)}`
     },
   },
 })

@@ -19,6 +19,8 @@ describe('VRating.ts', () => {
   beforeEach(() => {
     mountFunction = (options: MountOptions<Instance>) => {
       return mount(VRating, {
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
         mocks: {
           $vuetify: {
             rtl: false,
@@ -55,6 +57,7 @@ describe('VRating.ts', () => {
     expect(wrapper.vm.internalValue).toBe(0)
 
     wrapper.setProps({ value: 1 })
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.internalValue).toBe(1)
 
@@ -77,6 +80,7 @@ describe('VRating.ts', () => {
     expect(wrapper.vm.internalValue).toBe(0)
 
     wrapper.setProps({ value: 1, clearable: false })
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.internalValue).toBe(1)
 
@@ -216,7 +220,10 @@ describe('VRating.ts', () => {
       }),
     })
 
-    const wrapper = mount(component)
+    const wrapper = mount(component, {
+      // https://github.com/vuejs/vue-test-utils/issues/1130
+      sync: false,
+    })
 
     expect(wrapper.html()).toMatchSnapshot()
   })

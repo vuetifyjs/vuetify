@@ -10,8 +10,8 @@ import { consoleError, consoleWarn } from '../../util/console'
 
 // Types
 import {
-  VuetifyLangOptions,
   VuetifyLocale,
+  Lang as ILang,
 } from 'vuetify/types/services/lang'
 
 const LANG_PREFIX = '$vuetify.'
@@ -38,7 +38,7 @@ function getTranslation (
   return translation
 }
 
-export class Lang extends Service {
+export class Lang extends Service implements ILang {
   static property = 'lang'
 
   public locales: Record<string, VuetifyLocale>
@@ -47,7 +47,7 @@ export class Lang extends Service {
 
   private translator: ((key: string, ...params: any[]) => string) | undefined
 
-  constructor (options: Partial<VuetifyLangOptions> = {}) {
+  constructor (options: Partial<ILang> = {}) {
     super()
     this.current = options.current || 'en'
     this.locales = Object.assign({ en }, options.locales)
@@ -55,13 +55,17 @@ export class Lang extends Service {
   }
 
   public t (key: string, ...params: any[]) {
-    if (!key.startsWith(LANG_PREFIX)) return key
+    if (!key.startsWith(LANG_PREFIX)) return this.replace(key, params)
 
     if (this.translator) return this.translator(key, ...params)
 
     const translation = getTranslation(this.locales[this.current], key)
 
-    return translation.replace(/\{(\d+)\}/g, (match: string, index: string) => {
+    return this.replace(translation, params)
+  }
+
+  private replace (str: string, params: any[]) {
+    return str.replace(/\{(\d+)\}/g, (match: string, index: string) => {
       /* istanbul ignore next */
       return String(params[+index])
     })

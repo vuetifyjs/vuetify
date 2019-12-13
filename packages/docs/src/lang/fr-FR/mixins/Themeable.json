@@ -1,1 +1,6 @@
-{}
+{
+  "props": {
+    "dark": "Applique la variante du thème foncé au composant. Vous pouvez trouver plus d'informations sur la documentation Material Design pour [thèmes sombres](https://material.io/design/color/dark-theme.html).",
+    "light": "Applique la variante claire du thème au composant."
+  }
+}

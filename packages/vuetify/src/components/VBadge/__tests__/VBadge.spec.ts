@@ -17,7 +17,14 @@ describe('VBadge.ts', () => {
 
   beforeEach(() => {
     mountFunction = (options = {}) => {
-      return mount(VBadge, options)
+      return mount(VBadge, {
+        mocks: {
+          $vuetify: {
+            lang: { t: (text = '') => text },
+          },
+        },
+        ...options,
+      })
     }
   })
 

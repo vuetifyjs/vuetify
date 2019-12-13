@@ -2,7 +2,6 @@
 import { VExpandTransition } from '../transitions'
 import { VIcon } from '../VIcon'
 import VTreeview from './VTreeview'
-import VTreeviewNode from './VTreeviewNode'
 
 // Mixins
 import { inject as RegistrableInject } from '../../mixins/registrable'
@@ -10,11 +9,10 @@ import Colorable from '../../mixins/colorable'
 
 // Utils
 import mixins, { ExtractVue } from '../../util/mixins'
-import { getObjectValueByPath } from '../../util/helpers'
-import { PropValidator } from 'vue/types/options'
+import { getObjectValueByPath, createRange } from '../../util/helpers'
 
 // Types
-import { VNode } from 'vue'
+import { VNode, PropType } from 'vue'
 
 type VTreeViewInstance = InstanceType<typeof VTreeview>
 
@@ -39,11 +37,11 @@ export const VTreeviewNodeProps = {
   },
   expandIcon: {
     type: String,
-    default: '$vuetify.icons.subgroup',
+    default: '$subgroup',
   },
   indeterminateIcon: {
     type: String,
-    default: '$vuetify.icons.checkboxIndeterminate',
+    default: '$checkboxIndeterminate',
   },
   itemChildren: {
     type: String,
@@ -61,18 +59,18 @@ export const VTreeviewNodeProps = {
     type: String,
     default: 'name',
   },
-  loadChildren: Function as PropValidator<(item: any) => Promise<void>>,
+  loadChildren: Function as PropType<(item: any) => Promise<void>>,
   loadingIcon: {
     type: String,
-    default: '$vuetify.icons.loading',
+    default: '$loading',
   },
   offIcon: {
     type: String,
-    default: '$vuetify.icons.checkboxOff',
+    default: '$checkboxOff',
   },
   onIcon: {
     type: String,
-    default: '$vuetify.icons.checkboxOn',
+    default: '$checkboxOn',
   },
   openOnClick: Boolean,
   rounded: Boolean,
@@ -86,7 +84,7 @@ export const VTreeviewNodeProps = {
 }
 
 /* @vue/component */
-export default baseMixins.extend<options>().extend({
+const VTreeviewNode = baseMixins.extend<options>().extend({
   name: 'v-treeview-node',
 
   inject: {
@@ -96,6 +94,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   props: {
+    level: Number,
     item: {
       type: Object,
       default: () => null,
@@ -183,11 +182,25 @@ export default baseMixins.extend<options>().extend({
         staticClass: 'v-treeview-node__label',
       }, children)
     },
+    genPrependSlot () {
+      if (!this.$scopedSlots.prepend) return null
+
+      return this.$createElement('div', {
+        staticClass: 'v-treeview-node__prepend',
+      }, this.$scopedSlots.prepend(this.scopedProps))
+    },
+    genAppendSlot () {
+      if (!this.$scopedSlots.append) return null
+
+      return this.$createElement('div', {
+        staticClass: 'v-treeview-node__append',
+      }, this.$scopedSlots.append(this.scopedProps))
+    },
     genContent () {
       const children = [
-        this.$scopedSlots.prepend && this.$scopedSlots.prepend(this.scopedProps),
+        this.genPrependSlot(),
         this.genLabel(),
-        this.$scopedSlots.append && this.$scopedSlots.append(this.scopedProps),
+        this.genAppendSlot(),
       ]
 
       return this.$createElement('div', {
@@ -243,11 +256,23 @@ export default baseMixins.extend<options>().extend({
         },
       }, [this.computedIcon])
     },
+    genLevel (level: number) {
+      return createRange(level).map(() => this.$createElement('div', {
+        staticClass: 'v-treeview-node__level',
+      }))
+    },
     genNode (): VNode {
       const children = [this.genContent()]
 
       if (this.selectable) children.unshift(this.genCheckbox())
-      if (this.hasChildren) children.unshift(this.genToggle())
+
+      if (this.hasChildren) {
+        children.unshift(this.genToggle())
+      } else {
+        children.unshift(...this.genLevel(1))
+      }
+
+      children.unshift(...this.genLevel(this.level))
 
       return this.$createElement('div', this.setTextColor(this.isActive && this.color, {
         staticClass: 'v-treeview-node__root',
@@ -258,7 +283,7 @@ export default baseMixins.extend<options>().extend({
           click: () => {
             if (this.disabled) return
 
-            if (this.openOnClick && this.children) {
+            if (this.openOnClick && this.hasChildren) {
               this.open()
             } else if (this.activatable) {
               this.isActive = !this.isActive
@@ -293,6 +318,7 @@ export default baseMixins.extend<options>().extend({
           openOnClick: this.openOnClick,
           rounded: this.rounded,
           shaped: this.shaped,
+          level: this.level + 1,
         },
         scopedSlots: this.$scopedSlots,
       })
@@ -334,3 +360,5 @@ export default baseMixins.extend<options>().extend({
     }, children)
   },
 })
+
+export default VTreeviewNode

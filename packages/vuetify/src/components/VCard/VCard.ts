@@ -33,6 +33,7 @@ export default mixins(
     },
     outlined: Boolean,
     raised: Boolean,
+    shaped: Boolean,
   },
 
   computed: {
@@ -44,9 +45,10 @@ export default mixins(
         'v-card--hover': this.hover,
         'v-card--link': this.isClickable,
         'v-card--loading': this.loading,
-        'v-card--disabled': this.loading || this.disabled,
+        'v-card--disabled': this.disabled,
         'v-card--outlined': this.outlined,
         'v-card--raised': this.raised,
+        'v-card--shaped': this.shaped,
         ...VSheet.options.computed.classes.call(this),
       }
     },

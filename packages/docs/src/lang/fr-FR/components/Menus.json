@@ -7,6 +7,7 @@
       "uninverted": true
     },
     "disabled": {
+      "heading": "### Désactivé",
       "uninverted": true
     },
     "offset-x": {
@@ -39,5 +40,11 @@
     "popover": {
       "uninverted": true
     }
+  },
+  "props": {
+    "dark": "Mixins.Themeable.props.dark",
+    "light": "Mixins.Themeable.props.light",
+    "internalActivator": "Components.Dialogs.props.internalActivator",
+    "transition": "Mixins.Transitionable.props.transition"
   }
 }

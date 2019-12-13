@@ -1,6 +1,4 @@
 {
-  "header": "# Faites partie de quelque chose de plus grand !",
-  "headerText": "Vuetify est rendu possible par une communauté extraordinaire qui soumet des tickets, crée des demandes de fusion et fournit des commentaires précieux. Notre travail consiste à vous permettre de créer des applications étonnantes. Souvent, vous rencontrez quelque chose qui peut être amélioré. Peut-être trouvez-vous un bug ou avez-vous une idée de fonctionnalités supplémentaires ? C'est génial ! Il suffit de cloner le projet Vuetify pour commencer à travailler dans un environnement de développement.",
   "issueHeader": "## Signaler des problèmes",
   "issue1": "La liste des tickets de ce projet est exclusivement destinée aux rapports de bugs et aux demandes de fonctionnalités. Les tickets non conformes seront fermés immédiatement.",
   "issue2": "Pour des questions générales, veuillez rejoindre la [community](https://chat.vuetifyjs.com).",
@@ -46,6 +44,7 @@
   "changesText3": "Commitez avec commitizen en utilisant la commande `git cz`. De là, vous suivrez une série de choix. Assurez-vous de sélectionner le type approprié (voir **Lignes directrices de modifications avec Commitizen** ci-dessus)",
   "changesText4": "Enfin, `git push` et ouvrez une demande de fusion.",
   "changesSubHeader1": "### Demandes de fusion pour Vuetify",
+  "changesText7": "Requêtes de Pull liées à Vuetify :   \n* Pour **bug fixes** et **documentation updates** soumettre les demandes de pull au `master`.   \n* Pour **new features** et **enhancements** soumettre les demandes de pull au `dev`   \n* Pour **bugs** et **critical fixes** liés à **v1.5/LTS** soumettre les demandes de pull au `stable`   \n* Pour toute **features** contenant **breaking changes** soumettre les demandes de pull au `next` ",
   "changesSubHeader2": "### Demandes du fusion pour la documentation",
   "changesText8": "Pour toute demande de fusion liée à la documentation de Vuetify, soumettez votre demande d'extraction à la branche `master`."
 }

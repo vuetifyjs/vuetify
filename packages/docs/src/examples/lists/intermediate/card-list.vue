@@ -11,21 +11,21 @@
       <v-row class="fill-height">
         <v-card-title>
           <v-btn dark icon>
-            <v-icon>chevron_left</v-icon>
+            <v-icon>mdi-chevron-left</v-icon>
           </v-btn>
 
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
 
           <v-btn dark icon class="mr-4">
-            <v-icon>edit</v-icon>
+            <v-icon>mdi-pencil</v-icon>
           </v-btn>
 
           <v-btn dark icon>
-            <v-icon>more_vert</v-icon>
+            <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </v-card-title>
 
-        <div class="flex-grow-1"></div>
+        <v-spacer></v-spacer>
 
         <v-card-title class="white--text pl-12 pt-12">
           <div class="display-1 pl-12 pt-12">Ali Conners</div>
@@ -36,7 +36,7 @@
     <v-list two-line>
       <v-list-item @click="">
         <v-list-item-icon>
-          <v-icon color="indigo">phone</v-icon>
+          <v-icon color="indigo">mdi-phone</v-icon>
         </v-list-item-icon>
 
         <v-list-item-content>
@@ -45,7 +45,7 @@
         </v-list-item-content>
 
         <v-list-item-icon>
-          <v-icon>chat</v-icon>
+          <v-icon>mdi-message-text</v-icon>
         </v-list-item-icon>
       </v-list-item>
 
@@ -58,7 +58,7 @@
         </v-list-item-content>
 
         <v-list-item-icon>
-          <v-icon>chat</v-icon>
+          <v-icon>mdi-message-text</v-icon>
         </v-list-item-icon>
       </v-list-item>
 
@@ -66,7 +66,7 @@
 
       <v-list-item @click="">
         <v-list-item-icon>
-          <v-icon color="indigo">mail</v-icon>
+          <v-icon color="indigo">mdi-email</v-icon>
         </v-list-item-icon>
 
         <v-list-item-content>
@@ -88,7 +88,7 @@
 
       <v-list-item @click="">
         <v-list-item-icon>
-          <v-icon color="indigo">location_on</v-icon>
+          <v-icon color="indigo">mdi-map-marker</v-icon>
         </v-list-item-icon>
 
         <v-list-item-content>

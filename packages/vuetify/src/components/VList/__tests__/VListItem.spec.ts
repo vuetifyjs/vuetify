@@ -217,9 +217,5 @@ describe('VListItem.ts', () => {
       provide: { isInList: true },
     })
     expect(wrapper5.element.getAttribute('role')).toBe('listitem')
-
-    // In list link
-    wrapper5.setProps({ link: true })
-    expect(wrapper5.element.getAttribute('role')).toBeNull()
   })
 })

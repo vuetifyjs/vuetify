@@ -9,9 +9,9 @@ import * as ThemeUtils from './utils'
 import Vue from 'vue'
 import {
   VuetifyParsedTheme,
-  VuetifyThemeOptions,
   VuetifyThemes,
   VuetifyThemeVariant,
+  Theme as ITheme,
 } from 'vuetify/types/services/theme'
 
 export class Theme extends Service {
@@ -19,7 +19,7 @@ export class Theme extends Service {
 
   public disabled = false
 
-  public options: VuetifyThemeOptions['options']
+  public options!: ITheme['options']
 
   public styleEl?: HTMLStyleElement
 
@@ -50,7 +50,9 @@ export class Theme extends Service {
 
   private vueInstance = null as Vue | null
 
-  constructor (options: Partial<VuetifyThemeOptions> = {}) {
+  private vueMeta = null as any | null
+
+  constructor (options: Partial<ITheme> = {}) {
     super()
     if (options.disable) {
       this.disabled = true
@@ -58,13 +60,10 @@ export class Theme extends Service {
       return
     }
 
-    this.options = {
-      ...this.options,
-      ...options.options,
-    }
+    this.options = options.options!
 
     this.dark = Boolean(options.dark)
-    const themes = options.themes || {}
+    const themes = options.themes || {} as never
 
     this.themes = {
       dark: this.fillVariant(themes.dark, true),
@@ -75,6 +74,12 @@ export class Theme extends Service {
   // When setting css, check for element
   // and apply new values
   set css (val: string) {
+    if (this.vueMeta) {
+      if (this.isVueMeta23) {
+        this.applyVueMeta23()
+      }
+      return
+    }
     this.checkOrCreateStyleElement() && (this.styleEl!.innerHTML = val)
   }
 
@@ -159,6 +164,7 @@ export class Theme extends Service {
   // Generate the style element
   // if applicable
   private genStyleElement (): void {
+    /* istanbul ignore if */
     if (typeof document === 'undefined') return
 
     /* istanbul ignore next */
@@ -175,22 +181,50 @@ export class Theme extends Service {
     document.head.appendChild(this.styleEl)
   }
 
-  private initVueMeta (root: Vue) {
-    const options = this.options || {}
-    root.$children.push(new Vue({
-      head: () => {
-        return {
-          style: [
-            {
-              cssText: this.generatedStyles,
-              type: 'text/css',
-              id: 'vuetify-theme-stylesheet',
-              nonce: options.cspNonce,
-            },
-          ],
-        }
-      },
-    } as any))
+  private initVueMeta (root: any) {
+    this.vueMeta = root.$meta()
+    if (this.isVueMeta23) {
+      // vue-meta needs to apply after mounted()
+      root.$nextTick(() => {
+        this.applyVueMeta23()
+      })
+      return
+    }
+
+    const metaKeyName = typeof this.vueMeta.getOptions === 'function' ? this.vueMeta.getOptions().keyName : 'metaInfo'
+    const metaInfo = root.$options[metaKeyName] || {}
+
+    root.$options[metaKeyName] = () => {
+      metaInfo.style = metaInfo.style || []
+
+      const vuetifyStylesheet = metaInfo.style.find((s: any) => s.id === 'vuetify-theme-stylesheet')
+
+      if (!vuetifyStylesheet) {
+        metaInfo.style.push({
+          cssText: this.generatedStyles,
+          type: 'text/css',
+          id: 'vuetify-theme-stylesheet',
+          nonce: (this.options || {}).cspNonce,
+        })
+      } else {
+        vuetifyStylesheet.cssText = this.generatedStyles
+      }
+
+      return metaInfo
+    }
+  }
+
+  private applyVueMeta23 () {
+    const { set } = this.vueMeta.addApp('vuetify')
+
+    set({
+      style: [{
+        cssText: this.generatedStyles,
+        type: 'text/css',
+        id: 'vuetify-theme-stylesheet',
+        nonce: (this.options || {}).cspNonce,
+      }],
+    })
   }
 
   private initSSR (ssrContext?: any) {
@@ -260,5 +294,11 @@ export class Theme extends Service {
     /* istanbul ignore next */
     const theme = this.currentTheme || {}
     return ThemeUtils.parse(theme)
+  }
+
+  // Is using v2.3 of vue-meta
+  // https://github.com/nuxt/vue-meta/releases/tag/v2.3.0
+  private get isVueMeta23 (): boolean {
+    return typeof this.vueMeta.addApp === 'function'
   }
 }

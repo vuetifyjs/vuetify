@@ -9,6 +9,36 @@
     "description": "Whoops, looks like whatever you are looking for is not there!",
     "keywords": ""
   },
+  "introduction/why-vuetify": {
+    "title": "Why Vuetify?",
+    "description": "Vuetify has an extremely active community, provides easy to use Material Design components and is consistently updated.",
+    "keywords": "why vuetify, why choose vuetify, best vue framework, best ui framework"
+  },
+  "introduction/frequently-asked-questions": {
+    "title": "Frequently asked questions",
+    "description": "Stuck on a problem? Check out the most frequently asked questions by the Vuetify community.",
+    "keywords": "frequently asked questions, faq"
+  },
+  "introduction/long-term-support": {
+    "title": "Long-term support",
+    "description": "Vuetify provides long-term support to the last major release for 12 months for critical bugs and security vulnerabilities.",
+    "keywords": "lts, long-term support"
+  },
+  "introduction/meet-the-team": {
+    "title": "Meet the team",
+    "description": "Meet the team responsible for building Vuetify. These are the core individuals who drive the vision of the framework.",
+    "keywords": "vuetify dev team, vuetify core team"
+  },
+  "introduction/roadmap": {
+    "title": "The Vuetify Roadmap",
+    "description": "The upcoming planned features and new functionality coming to Vuetify. New components, new directives, and much much more!.",
+    "keywords": "vuetify roadmap, future plans, new vuetify features"
+  },
+  "introduction/sponsors-and-backers": {
+    "title": "Sponsors and backers",
+    "description": "Help support Vuetify by backing the project. This helps with the maintenance of existing features and the development of new ones.",
+    "keywords": "sponsor, backer, donations, patron, supporting vuetify, vuetify support"
+  },
   "getting-started/quick-start": {
     "title": "Quick start",
     "description": "Get started with Vue and Vuetify in no time. Support for Vue CLI 3, Webpack, Nuxt and more.",
@@ -19,55 +49,25 @@
     "description": "Select from a multitude of Vuetify Material Design layouts built to help kickstart your application.",
     "keywords": "pre-defined layouts, layouts, application layout, material design layouts"
   },
+  "getting-started/browser-support": {
+    "title": "Browser support",
+    "description": "Vuetify is a progressive framework that supports all evergreen browsers and IE11 / Safari with polyfill.",
+    "keywords": "vuetify browser support"
+  },
   "getting-started/unit-testing": {
     "title": "Unit testing",
     "description": "Learn how to create unit tests with vue-test-utils and Vuetify components in your Vue application.",
     "keywords": "unit testing vuetify, testing vuetify, vuetify spec tests"
   },
-  "getting-started/why-vuetify": {
-    "title": "Why Vuetify?",
-    "description": "Vuetify has an extremely active community, provides easy to use Material Design components and is consistently updated.",
-    "keywords": "why vuetify, why choose vuetify, best vue framework, best ui framework"
-  },
-  "getting-started/frequently-asked-questions": {
-    "title": "Frequently asked questions",
-    "description": "Stuck on a problem? Check out the most frequently asked questions by the Vuetify community.",
-    "keywords": "frequently asked questions, faq"
-  },
-  "getting-started/meet-the-team": {
-    "title": "Meet the team",
-    "description": "Meet the team responsible for building Vuetify. These are the core individuals who drive the vision of the framework.",
-    "keywords": "vuetify dev team, vuetify core team"
-  },
-  "getting-started/sponsors-and-backers": {
-    "title": "Sponsors and backers",
-    "description": "Help support Vuetify by backing the project. This helps with the maintenance of existing features and the development of new ones.",
-    "keywords": "sponsor, backer, donations, patron, supporting vuetify, vuetify support"
-  },
-  "getting-started/long-term-support": {
-    "title": "Long-term support",
-    "description": "Vuetify provides long-term support to the last major release for 12 months for critical bugs and security vulnerabilities.",
-    "keywords": "lts, long-term support"
+  "getting-started/releases-and-migrations": {
+    "title": "Releases and migrations",
+    "description": "Stay up to date with the latest release notes. The migration guides will also help you migrate applications though major releases.",
+    "keywords": "migration, releases, upgrading vuetify"
   },
   "getting-started/contributing": {
     "title": "Contributing",
     "description": "Contributing to open source helps developers access amazing tools for free. Learn how you can help develop in the Vuetify framework.",
     "keywords": "contribute, contributing, feature request"
-  },
-  "getting-started/roadmap": {
-    "title": "The Vuetify Roadmap",
-    "description": "The upcoming planned features and new functionality coming to Vuetify. New components, new directives, and much much more!.",
-    "keywords": "vuetify roadmap, future plans, new vuetify features"
-  },
-  "getting-started/consulting-and-support": {
-    "title": "Consulting and support",
-    "description": "Get professional help, support and guidance for your Vuetify application from the creator, John Leider.",
-    "keywords": "vuetify consulting, vuetify support, vuetify help"
-  },
-  "getting-started/enterprise": {
-    "title": "Vuetify for enterprise",
-    "description": "Get the tools you need to continuously catalog and understand the open source software that your application depends on with the Tidelift subscription.",
-    "keywords": "vuetify enterprise, tidelift enterprise, tidelift vuetify"
   },
   "customization/accessibility": {
     "title": "Accessibility",
@@ -144,11 +144,6 @@
     "description": "Flex helper classes allow you to modify flexbox parents and children.",
     "keywords": "flex helper classes, flex classes, vuetify flex"
   },
-  "styles/scroll": {
-    "title": "Smooth scrolling",
-    "description": "Using the goTo helper you can smoothly scroll to any location or component on the page.",
-    "keywords": "scrolling, scroll, smooth scroll, transitions"
-  },
   "styles/spacing": {
     "title": "CSS Spacing helpers",
     "description": "Spacing helper classes allow you to apply margin or padding to any element in increments from 1 to 5.",
@@ -163,11 +158,6 @@
     "title": "Application typography",
     "description": "View the various typography styles. From headings to captions, with various weights, sizes and italics.",
     "keywords": "typography, headings, titles"
-  },
-  "framework/sandbox": {
-    "title": "Sandbox",
-    "description": "Play around with the available configuring options using Vuetify layout components.",
-    "keywords": "sandbox, vuetify, layout sandbox, vuetify layout"
   },
   "components/api-explorer": {
     "title": "API explorer",
@@ -344,11 +334,6 @@
     "description": "Vuetify supports the 12 point Material Design grid for laying out and controlling breakpoints for your application.",
     "keywords": "grids, vuetify grid component, layout component, flex component"
   },
-  "components/grid-lists": {
-    "title": "Grid list component",
-    "description": "Grid lists allow you to specify the gutter used when separating grid items.",
-    "keywords": "grid lists, vuetify grid list component, vue grid list component"
-  },
   "components/file-inputs": {
     "title": "File input component",
     "description": "The file input component is a specialized input that provides a clean interface for selecting files, showing detailed selection information and upload progress.",
@@ -383,6 +368,11 @@
     "title": "Item group component",
     "description": "The item group components provides the ability to create a group of selectable items out of any component.",
     "keywords": "item groups, vuetify item group component, vue item group component"
+  },
+  "components/lazy": {
+    "title": "Lazy component",
+    "description": "The lazy component allows you to dynamically render content based upon the user's viewport.",
+    "keywords": "lazy loading"
   },
   "components/lists": {
     "title": "List component",
@@ -453,6 +443,11 @@
     "title": "Sheet component",
     "description": "The sheet component is the default paper element in Vuetify and serves as the baseline for many Material Design implementations.",
     "keywords": "sheets, vuetify sheet component, vue sheet component"
+  },
+  "components/skeleton-loaders": {
+    "title": "Skeleton loaders component",
+    "description": "The v-skeleton-loader component is a versatile tool that can fill many roles within a project. At its heart, the component provides an indication to the user that something is coming but not yet available.",
+    "keywords": "skeleton-loader, material loader, bar loader"
   },
   "components/simple-tables": {
     "title": "Simple table component",
@@ -544,6 +539,16 @@
     "description": "The window component is a wrapper container that allows transitioning between content. It serves as the baseline for tabs and carousels.",
     "keywords": "windows, vuetify window component, vue window component"
   },
+  "directives/intersect": {
+    "title": "Intersection observer directive",
+    "description": "The intersection observer directive utilizes the Intersection observer API. It allows you to determine when elements are visible on the screen.",
+    "keywords": "intersect, vuetify intersect directive, intersection observer directive"
+  },
+  "directives/mutate": {
+    "title": "Mutation observer directive",
+    "description": "The mutation observer directive utilizes the Mutation observer API. It allows you to determine when elements are updated.",
+    "keywords": "mutate, vuetify mutate directive, mutation observer directive"
+  },
   "directives/resizing": {
     "title": "Resizing directive",
     "description": "The resize directive provides the ability to conditionally invoke functions when the screen is resized.",
@@ -608,6 +613,21 @@
     "title": "Layout sandbox",
     "description": "A layout sandbox where you can try different variations of layout setups.",
     "keywords": "template, pre-made, vuetify layout, sandbox"
+  },
+  "professional-support/consulting": {
+    "title": "Consulting and support",
+    "description": "Get professional help, support and guidance for your Vuetify application from the creator, John Leider.",
+    "keywords": "vuetify consulting, vuetify support, vuetify help"
+  },
+  "professional-support/business": {
+    "title": "Consulting and support",
+    "description": "Get professional help, support and guidance for your Vuetify application while supporting the framework.",
+    "keywords": "vuetify business, vuetify business support, vuetify help"
+  },
+  "professional-support/enterprise": {
+    "title": "Vuetify for enterprise",
+    "description": "Get the tools you need to continuously catalog and understand the open source software that your application depends on with the Tidelift subscription.",
+    "keywords": "vuetify enterprise, tidelift enterprise, tidelift vuetify"
   },
   "themes/premium": {
     "title": "Premium & free themes",

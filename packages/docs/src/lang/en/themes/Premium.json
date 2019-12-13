@@ -1,41 +1,11 @@
 {
-  "header": "# Premium & free themes",
-  "headerText": "Vuetify offers both **free** and **premium** pre-made themes designed to get you started in a flash. Free themes are available to install through Vue CLI 3 or you can simply download the source.",
+  "heading": "# Premium & free themes",
+  "headingText": "Vuetify offers both **free** and **premium** pre-made themes designed to get you started in a flash. Free themes are available to install through Vue CLI 3 or you can simply download the source.",
   "buy": "Information and Demos",
   "buyNow": "Buy Now",
   "free": "Free",
   "live": "Live Preview",
   "premium": "Premium",
   "downloadNow": "Download Now",
-  "viewDemo": "View Demo",
-  "templates": {
-    "alpha": {
-      "title": "Alpha Theme",
-      "description": "Complete theme experience including enhanced Vue CLI 3, full documentation, 5 custom components and much more!"
-    },
-    "dashboard": {
-      "title": "Material Dashboard Free",
-      "description": "Vuetify Material Dashboard is a beautiful resource built over Vuetify, Vuex and Vuejs. It will help you get started developing dashboards in no time."
-    },
-    "dashboard-pro": {
-      "title": "Material Dashboard Pro",
-      "description": "Vuetify Material Dashboard PRO is a beautiful theme built over Vuetify, Vuex and Vuejs. Vuetify Material Dashboard PRO is the official Vuejs version of the Original Material Dashboard PRO."
-    },
-    "freelancer": {
-      "title": "Freelancer",
-      "description": "A single page Material inspired theme for Freelancers."
-    },
-    "material-kit": {
-      "title": "Material Kit",
-      "description": "A complete set of Material Inspired themes built with Vuetify on top of Vue CLI 3."
-    },
-    "parallax": {
-      "title": "Parallax",
-      "description": "This beautiful single page parallax is a great home page for any application."
-    },
-    "blog": {
-      "title": "Blog",
-      "description": "A simple template that features a clean interface for creating a blog or blog-like application."
-    }
-  }
+  "viewDemo": "View Demo"
 }

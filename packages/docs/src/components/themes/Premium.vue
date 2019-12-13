@@ -15,7 +15,7 @@
         <v-card
           class="d-flex flex-column"
           height="100%"
-          elevation="4"
+          outlined
         >
           <v-img
             :src="template.src"
@@ -36,14 +36,25 @@
             </h2>
             <v-spacer />
 
-            <div v-if="template.price" class="headline font-weight-bold primary--text" v-text="template.price" />
+            <div
+              v-if="template.price"
+              class="headline font-weight-bold primary--text"
+              v-text="template.price"
+            />
           </v-card-title>
 
           <v-divider />
 
-          <v-card-text style="min-height: 95px;">{{ template.description }}</v-card-text>
+          <v-responsive
+            class="pa-4"
+            min-height="95"
+            v-text="template.description"
+          />
 
-          <v-card-actions class="grey lighten-4">
+          <v-card-actions
+            :class="$vuetify.theme.dark ? 'darken-4' : 'lighten-4'"
+            class="grey"
+          >
             <v-menu
               v-if="template.demoUrl.length"
               :disabled="template.demoUrl.length === 1"
@@ -56,7 +67,7 @@
                 <v-tooltip bottom>
                   <template #activator="{ on: tooltip }">
                     <v-btn
-                      :href="template.demoUrl.length === 1 ? `${template.demoUrl[0]}?ref=vuetifyjs.com` : undefined"
+                      :href="template.demoUrl.length === 1 ? `${template.demoUrl[0]}?ref=vuetifyjs.com${template.query || ''}` : undefined"
                       icon
                       target="_blank"
                       rel="noopener"
@@ -73,7 +84,7 @@
                 <v-list-item
                   v-for="([title, demo], i) in template.demoUrl"
                   :key="i"
-                  :href="`${demo}?ref=vuetifyjs.com`"
+                  :href="`${demo}?ref=vuetifyjs.com${template.query || ''}`"
                   target="_blank"
                   rel="noopener"
                 >
@@ -91,7 +102,7 @@
 
             <v-btn
               :color="template.price ? 'success' : 'indigo'"
-              :href="`${template.url}?ref=vuetifyjs.com`"
+              :href="`${template.url}?ref=vuetifyjs.com${template.query || ''}`"
               :outlined="!template.price"
               dark
               min-width="100"
@@ -109,72 +120,12 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
+
   export default {
-    data: vm => ({
-      templates: [
-        {
-          title: vm.$t('Themes.Premium.templates.dashboard-pro.title'),
-          description: vm.$t('Themes.Premium.templates.dashboard-pro.description'),
-          src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-admin-dashboard-pro.jpg',
-          price: '$79',
-          url: 'https://www.creative-tim.com/product/vuetify-material-dashboard-pro',
-          demoUrl: ['https://demos.creative-tim.com/vuetify-material-dashboard-pro/'],
-        },
-        {
-          title: vm.$t('Themes.Premium.templates.material-kit.title'),
-          description: vm.$t('Themes.Premium.templates.material-kit.description'),
-          src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-material-kit.png',
-          price: '$55',
-          url: 'https://store.vuetifyjs.com/product/material-kit-theme',
-          demoUrl: ['https://material-kit.vuetifyjs.com'],
-        },
-        {
-          title: vm.$t('Themes.Premium.templates.alpha.title'),
-          description: vm.$t('Themes.Premium.templates.alpha.description'),
-          src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-alpha-theme.png',
-          price: '$25',
-          url: 'https://store.vuetifyjs.com/product/vuetify-alpha-theme',
-          demoUrl: [
-            ['Construction', 'https://alpha-construction.vuetifyjs.com'],
-            ['Creative', 'https://alpha-creative.vuetifyjs.com'],
-            ['SaaS', 'https://alpha-saas.vuetifyjs.com'],
-            ['Ecommerce', 'https://alpha-ecommerce.vuetifyjs.com'],
-          ],
-        },
-        {
-          title: vm.$t('Themes.Premium.templates.dashboard.title'),
-          description: vm.$t('Themes.Premium.templates.dashboard.description'),
-          src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-admin-dashboard.jpg',
-          free: true,
-          url: 'https://www.creative-tim.com/product/vuetify-material-dashboard',
-          demoUrl: ['https://demos.creative-tim.com/vuetify-material-dashboard/#/dashboard'],
-        },
-        {
-          title: vm.$t('Themes.Premium.templates.freelancer.title'),
-          description: vm.$t('Themes.Premium.templates.freelancer.description'),
-          src: 'https://cdn.vuetifyjs.com/images/starter/freelancer.png',
-          free: true,
-          url: 'https://github.com/vuetifyjs/theme-freelancer',
-          demoUrl: [],
-        },
-        {
-          title: vm.$t('Themes.Premium.templates.parallax.title'),
-          description: vm.$t('Themes.Premium.templates.parallax.description'),
-          src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-parallax-starter.png',
-          free: true,
-          url: 'https://github.com/vuetifyjs/parallax-starter',
-          demoUrl: ['/themes/parallax-starter'],
-        },
-        {
-          title: vm.$t('Themes.Premium.templates.blog.title'),
-          description: vm.$t('Themes.Premium.templates.blog.description'),
-          src: 'https://cdn.vuetifyjs.com/images/starter/blog.png',
-          free: true,
-          url: 'https://github.com/vuetifyjs/theme-blog',
-          demoUrl: ['https://free-blog.vuetifyjs.com'],
-        },
-      ],
-    }),
+    computed: {
+      ...mapState('documentation', ['templates']),
+    },
   }
 </script>
 

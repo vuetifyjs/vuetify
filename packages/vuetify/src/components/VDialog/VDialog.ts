@@ -1,4 +1,8 @@
+// Styles
 import './VDialog.sass'
+
+// Components
+import { VThemeProvider } from '../VThemeProvider'
 
 // Mixins
 import Activatable from '../../mixins/activatable'
@@ -13,9 +17,12 @@ import Toggleable from '../../mixins/toggleable'
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import { convertToUnit, keyCodes } from '../../util/helpers'
-import ThemeProvider from '../../util/ThemeProvider'
 import mixins from '../../util/mixins'
+import { removed } from '../../util/console'
+import {
+  convertToUnit,
+  keyCodes,
+} from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
@@ -34,15 +41,12 @@ const baseMixins = mixins(
 export default baseMixins.extend({
   name: 'v-dialog',
 
-  directives: {
-    ClickOutside,
-  },
+  directives: { ClickOutside },
 
   props: {
     dark: Boolean,
     disabled: Boolean,
     fullscreen: Boolean,
-    fullWidth: Boolean,
     light: Boolean,
     maxWidth: {
       type: [String, Number],
@@ -127,6 +131,13 @@ export default baseMixins.extend({
     },
   },
 
+  created () {
+    /* istanbul ignore next */
+    if (this.$attrs.hasOwnProperty('full-width')) {
+      removed('full-width', this)
+    }
+  },
+
   beforeMount () {
     this.$nextTick(() => {
       this.isBooted = this.isActive
@@ -151,31 +162,15 @@ export default baseMixins.extend({
     },
     closeConditional (e: Event) {
       const target = e.target as HTMLElement
-      // If the dialog content contains
-      // the click event, or if the
-      // dialog is not active
-      if (this._isDestroyed || !this.isActive || this.$refs.content.contains(target)) return false
-
-      // If we made it here, the click is outside
-      // and is active. If persistent, and the
-      // click is on the overlay, animate
-      this.$emit('click:outside')
-
-      if (this.persistent && this.overlay) {
-        if (
-          !this.noClickAnimation &&
-          (
-            this.overlay.$el === target ||
-            this.overlay.$el.contains(target)
-          )
-        ) this.animateClick()
-
-        return false
-      }
-
-      // close dialog if !persistent, clicked outside and we're the topmost dialog.
-      // Since this should only be called in a capture event (bottom up), we shouldn't need to stop propagation
-      return this.activeZIndex >= this.getMaxZIndex()
+      // Ignore the click if the dialog is closed or destroyed,
+      // if it was on an element inside the content, or
+      // if it was dragged onto the overlay (#6969)
+      return !(
+        this._isDestroyed ||
+        !this.isActive ||
+        this.$refs.content.contains(target) ||
+        (this.overlay && target && !this.overlay.$el.contains(target))
+      )
     },
     hideScroll () {
       if (this.fullscreen) {
@@ -186,14 +181,25 @@ export default baseMixins.extend({
     },
     show () {
       !this.fullscreen && !this.hideOverlay && this.genOverlay()
-      this.$refs.content.focus()
-      this.bind()
+      this.$nextTick(() => {
+        this.$refs.content.focus()
+        this.bind()
+      })
     },
     bind () {
       window.addEventListener('focusin', this.onFocusin)
     },
     unbind () {
       window.removeEventListener('focusin', this.onFocusin)
+    },
+    onClickOutside (e: Event) {
+      this.$emit('click:outside', e)
+
+      if (this.persistent) {
+        this.noClickAnimation || this.animateClick()
+      } else if (this.activeZIndex >= this.getMaxZIndex()) {
+        this.isActive = false
+      }
     },
     onKeydown (e: KeyboardEvent) {
       if (e.keyCode === keyCodes.esc && !this.getOpenDependents().length) {
@@ -207,6 +213,8 @@ export default baseMixins.extend({
       }
       this.$emit('keydown', e)
     },
+    // On focus change, wrap focus to stay inside the dialog
+    // https://github.com/vuetifyjs/vuetify/issues/6892
     onFocusin (e: Event) {
       if (!e || !this.retainFocus) return
 
@@ -239,7 +247,7 @@ export default baseMixins.extend({
       directives: [
         {
           name: 'click-outside',
-          value: () => { this.isActive = false },
+          value: this.onClickOutside,
           args: {
             closeConditional: this.closeConditional,
             include: this.getOpenDependentElements,
@@ -276,7 +284,7 @@ export default baseMixins.extend({
       class: this.contentClasses,
       attrs: {
         role: 'document',
-        tabindex: 0,
+        tabindex: this.isActive ? 0 : undefined,
         ...this.getScopeIdAttrs(),
       },
       on: {
@@ -285,7 +293,7 @@ export default baseMixins.extend({
       style: { zIndex: this.activeZIndex },
       ref: 'content',
     }, [
-      this.$createElement(ThemeProvider, {
+      this.$createElement(VThemeProvider, {
         props: {
           root: true,
           light: this.light,
@@ -296,10 +304,13 @@ export default baseMixins.extend({
 
     return h('div', {
       staticClass: 'v-dialog__container',
-      attrs: { role: 'dialog' },
-      style: {
-        display: (!this.hasActivator || this.fullWidth) ? 'block' : 'inline-block',
+      class: {
+        'v-dialog__container--attached':
+          this.attach === '' ||
+          this.attach === true ||
+          this.attach === 'attach',
       },
+      attrs: { role: 'dialog' },
     }, children)
   },
 })

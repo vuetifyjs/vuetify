@@ -61,7 +61,7 @@
         :href="`#tab-${i}`"
       >
         Tab {{ i }}
-        <v-icon v-if="icons">phone</v-icon>
+        <v-icon v-if="icons">mdi-phone</v-icon>
       </v-tab>
 
       <v-tab-item

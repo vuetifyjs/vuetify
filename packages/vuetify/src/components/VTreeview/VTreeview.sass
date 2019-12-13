@@ -1,4 +1,3 @@
-@import '../../styles/styles.sass'
 @import './_variables.scss'
 @import './_mixins.sass'
 
@@ -20,148 +19,127 @@
     .v-treeview-node__checkbox
       color: map-deep-get($material, 'text', 'disabled') !important
 
-.v-treeview
-  > .v-treeview-node
-    margin-left: 0
+.v-treeview-node
+  &--disabled
+    pointer-events: none
 
-    &--leaf
-      margin-left: $treeview-direct-leaf-node-margin-start
+  &.v-treeview-node--shaped
+    +treeview-shaped($treeview-node-height, $treeview-node-shaped-margin)
 
-      & > .v-treeview-node__root
-        padding-left: $treeview-direct-leaf-node-padding-start
-        padding-right: $treeview-node-padding-end
+  &.v-treeview-node--rounded
+    +treeview-rounded($treeview-node-height, $treeview-node-shaped-margin)
 
-  &-node
-    margin-left: $treeview-node-x-margin
+  &--excluded
+    display: none
 
-    &--disabled
-      pointer-events: none
-
-    &.v-treeview-node--shaped
-      +treeview-shaped($treeview-node-height, $treeview-node-shaped-margin)
-
-    &.v-treeview-node--rounded
-      +treeview-rounded($treeview-node-height, $treeview-node-shaped-margin)
-
-    &--excluded
-      display: none
-
-    &--click
-      > .v-treeview-node__root,
-      > .v-treeview-node__root > .v-treeview-node__content > *
-        cursor: pointer
-        user-select: none
-
-    &--leaf
-      margin-left: $treeview-leaf-node-x-margin
-
-      & > .v-treeview-node__root
-        padding-left: $treeview-leaf-node-padding-start
-        padding-right: $treeview-node-padding-end
-
-    &__root
-      display: flex
-      align-items: center
-      min-height: $treeview-node-height
-      padding-right: $treeview-node-padding-end
-      position: relative
-
-      &::before
-        background-color: currentColor
-        bottom: 0
-        content: ''
-        left: 0
-        opacity: 0
-        pointer-events: none
-        position: absolute
-        right: 0
-        top: 0
-        transition: $primary-transition
-
-      &.v-treeview-node--active .v-treeview-node__content .v-icon
-        color: inherit
-
-    &__content
-      align-items: center
-      display: flex
-      flex-basis: 0%
-      flex-grow: 1
-      flex-shrink: 0
-      min-width: 0
-
-      // TODO: this is temporary fix for d-flex * shenanigans
-      .v-btn
-        flex-grow: 0 !important
-        flex-shrink: 1 !important
-
-    &__label
-      flex: 1
-      font-size: $treeview-label-font-size
-      margin-left: $treeview-label-margin-start
-      overflow: hidden
-      text-overflow: ellipsis
-      white-space: nowrap
-
-      .v-icon
-        padding-right: $treeview-label-icon-padding-end
-
-    &__checkbox
+  &--click
+    > .v-treeview-node__root,
+    > .v-treeview-node__root > .v-treeview-node__content > *
+      cursor: pointer
       user-select: none
 
-    &__toggle
-      user-select: none
-      transform: rotate(-90deg)
+  &.v-treeview-node--active .v-treeview-node__content .v-icon
+    color: inherit
 
-      &--open
-        transform: none
+.v-treeview-node__root
+  display: flex
+  align-items: center
+  min-height: $treeview-node-height
+  padding-left: $treeview-node-padding
+  padding-right: $treeview-node-padding
+  position: relative
 
-      &--loading
-        animation: progress-circular-rotate 1s linear infinite
+  &::before
+    background-color: currentColor
+    bottom: 0
+    content: ''
+    left: 0
+    opacity: 0
+    pointer-events: none
+    position: absolute
+    right: 0
+    top: 0
+    transition: $primary-transition
 
-    &__children
-      transition: all $treeview-transition
+.v-treeview-node__children
+  transition: all $treeview-transition
+
+.v-treeview--dense
+  .v-treeview-node__root
+    min-height: $treeview-node-height-dense
+
+  &.v-treeview-node--shaped
+    +treeview-shaped($treeview-node-height-dense, $treeview-node-shaped-margin)
+
+  &.v-treeview-node--rounded
+    +treeview-rounded($treeview-node-height-dense, $treeview-node-shaped-margin)
+
+.v-treeview-node__checkbox
+  width: $treeview-node-level-width
+  user-select: none
+
+  +ltr()
+    margin-left: $treeview-node-margin
+  +rtl()
+    margin-right: $treeview-node-margin
+
+.v-treeview-node__toggle
+  width: $treeview-node-level-width
+  user-select: none
+
+  &--loading
+    animation: progress-circular-rotate 1s linear infinite
+
+  +ltr()
+    transform: rotate(-90deg)
+    &--open
+      transform: none
 
   +rtl()
-    > .v-treeview-node
-      margin-right: 0
+    transform: rotate(90deg)
+    &--open
+      transform: none
 
-      &--leaf
-        margin-right: $treeview-direct-leaf-node-margin-start
-        margin-left: 0
+.v-treeview-node__prepend
+  min-width: $treeview-node-level-width
 
-        & > .v-treeview-node__root
-          padding-right: $treeview-direct-leaf-node-padding-start
-          padding-left: $treeview-node-padding-end
+  +ltr()
+    margin-right: $treeview-node-margin
+  +rtl()
+    margin-left: $treeview-node-margin
 
-    &-node
-      margin-right: $treeview-node-x-margin
-      margin-left: 0
+.v-treeview-node__append
+  min-width: $treeview-node-level-width
 
-      &--leaf
-        margin-right: $treeview-leaf-node-x-margin
-        margin-left: 0
+  +ltr()
+    margin-left: $treeview-node-margin
+  +rtl()
+    margin-right: $treeview-node-margin
 
-        & > .v-treeview-node__root
-          padding-right: $treeview-leaf-node-padding-start
-          padding-left: $treeview-node-padding-end
+.v-treeview-node__level
+  width: $treeview-node-level-width
 
-      &__root
-        padding-right: 0
-        padding-left: $treeview-node-padding-end
+.v-treeview-node__label
+  flex: 1
+  font-size: $treeview-label-font-size
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
 
-      &__toggle
-        transform: rotate(90deg)
+.v-treeview-node__content
+  align-items: center
+  display: flex
+  flex-basis: 0%
+  flex-grow: 1
+  flex-shrink: 0
+  min-width: 0
 
-        &--open
-          transform: none
+  // TODO: this is temporary fix for d-flex * shenanigans
+  .v-btn
+    flex-grow: 0 !important
+    flex-shrink: 1 !important
 
-  &--dense
-    .v-treeview-node__root
-      min-height: $treeview-node-height-dense
-
-    &.v-treeview-node--shaped
-      +treeview-shaped($treeview-node-height-dense, $treeview-node-shaped-margin)
-
-    &.v-treeview-node--rounded
-      +treeview-rounded($treeview-node-height-dense, $treeview-node-shaped-margin)
-
+  +ltr()
+    margin-left: $treeview-node-margin
+  +rtl()
+    margin-right: $treeview-node-margin

@@ -7,9 +7,8 @@ import { createRange } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
 // Types
-import { DatePickerFormatter } from './util/createNativeLocaleFormatter'
-import { PropValidator } from 'vue/types/options'
-import { VNode, VNodeChildren } from 'vue'
+import { VNode, VNodeChildren, PropType } from 'vue'
+import { DatePickerFormatter } from 'types'
 
 export default mixins(
   DatePickerTable
@@ -23,7 +22,7 @@ export default mixins(
       default: 0,
     },
     showWeek: Boolean,
-    weekdayFormat: Function as PropValidator<DatePickerFormatter | undefined>,
+    weekdayFormat: Function as PropType<DatePickerFormatter | undefined>,
   },
 
   computed: {
