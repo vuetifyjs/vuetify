@@ -11,8 +11,21 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "usage"
+          "type": "usage-new",
+          "value": {
+            "selects": [
+              {
+                "prop": "filter",
+                "label": "Filter",
+                "attrs": {
+                  "items": [
+                    "Exact Match",
+                    "Search Length > 2 & Loose Match"
+                  ]
+                }
+              }
+            ]
+          }
         },
         {
           "type": "alert",
@@ -27,15 +40,6 @@
         {
           "type": "api",
           "value": [ "v-autocomplete" ]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "playground",
-          "value": "playground"
         }
       ]
     },

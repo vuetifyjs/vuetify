@@ -1,10 +1,8 @@
 {
   "heading": "# Autocompletes",
   "headingText": "The `v-autocomplete` component offers simple and flexible type-ahead functionality. This is useful when searching large sets of data or even dynamically requesting information from an API.",
+  "usageText": "The autocomplete component extends `v-select` and adds the ability to filter items.",
   "examples": {
-    "usage": {
-      "desc": "The autocomplete component extends `v-select` and adds the ability to filter items."
-    },
     "api": {
       "heading": "### Searching an API",
       "desc": "Easily hook up dynamic data and create a unique experience. The `v-autocomplete`'s expansive prop list makes it easy to fine tune every aspect of the input."
