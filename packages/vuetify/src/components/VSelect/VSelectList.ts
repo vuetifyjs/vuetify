@@ -146,11 +146,12 @@ export default mixins(Colorable, Themeable).extend({
       const end = text.slice(index + searchInput.length)
       return { start, middle, end }
     },
-    genTile (
-      item: object,
-      disabled = null as null | boolean,
-      value = false
-    ): VNode | VNode[] | undefined {
+    genTile ({
+      item,
+      index,
+      disabled = null,
+      value = false,
+    }: { item: any, disabled?: null | boolean, value?: boolean, index: number }): VNode | VNode[] | undefined {
       if (!value) value = this.hasItem(item)
 
       if (item === Object(item)) {
@@ -164,7 +165,7 @@ export default mixins(Colorable, Themeable).extend({
           // Default behavior in list does not
           // contain aria-selected by default
           'aria-selected': String(value),
-          'aria-labelledby': this.genLabelledBy(item),
+          'aria-labelledby': `${this.genLabelledBy(item)}-${index}`,
           role: 'option',
         },
         on: {
@@ -187,7 +188,7 @@ export default mixins(Colorable, Themeable).extend({
           this.action && !this.hideSelected && this.items.length > 0
             ? this.genAction(item, value)
             : null,
-          this.genTileContent(item),
+          this.genTileContent(item, index),
         ])
       }
 
@@ -206,12 +207,12 @@ export default mixins(Colorable, Themeable).extend({
         ? this.$createElement(VListItem, tile, scopedSlot)
         : scopedSlot
     },
-    genTileContent (item: any): VNode {
+    genTileContent (item: any, index = 0 as string | number): VNode {
       const innerHTML = this.genFilteredText(this.getText(item))
 
       return this.$createElement(VListItemContent,
         [this.$createElement(VListItemTitle, {
-          attrs: { id: this.genLabelledBy(item) },
+          attrs: { id: `${this.genLabelledBy(item)}-${index}` },
           domProps: { innerHTML },
         })]
       )
@@ -237,15 +238,18 @@ export default mixins(Colorable, Themeable).extend({
 
   render (): VNode {
     const children = []
-    for (const item of this.items) {
+    const itemsLength = this.items.length
+    for (let index = 0; index < itemsLength; index++) {
+      const item = this.items[index]
+
       if (this.hideSelected &&
         this.hasItem(item)
       ) continue
 
-      if (item == null) children.push(this.genTile(item))
+      if (item == null) children.push(this.genTile({ item, index }))
       else if (item.header) children.push(this.genHeader(item))
       else if (item.divider) children.push(this.genDivider(item))
-      else children.push(this.genTile(item))
+      else children.push(this.genTile({ item, index }))
     }
 
     children.length || children.push(this.$slots['no-data'] || this.staticNoDataTile)
