@@ -305,13 +305,13 @@ export function relativeDays (
 }
 
 export function diffMinutes (min: CalendarTimestamp, max: CalendarTimestamp) {
-  const a = (max.year - min.year) * 525600
-  const b = (max.month - min.month) * 43800
-  const c = (max.day - min.day) * 1440
-  const d = (max.hour - min.hour) * 60
-  const e = (max.minute - min.minute)
+  const Y = (max.year - min.year) * 525600
+  const M = (max.month - min.month) * 43800
+  const D = (max.day - min.day) * 1440
+  const h = (max.hour - min.hour) * 60
+  const m = (max.minute - min.minute)
 
-  return a + b + c + d + e
+  return Y + M + D + h + m
 }
 
 export function findWeekday (timestamp: CalendarTimestamp, weekday: number,

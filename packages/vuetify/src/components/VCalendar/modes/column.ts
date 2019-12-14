@@ -1,6 +1,8 @@
 import { CalendarEventOverlapMode } from 'types'
 import { getOverlapGroupHandler } from './common'
 
+const FULL_WIDTH = 100
+
 export const column: CalendarEventOverlapMode = (events, firstWeekday, overlapThreshold) => {
   const handler = getOverlapGroupHandler(firstWeekday)
 
@@ -9,8 +11,8 @@ export const column: CalendarEventOverlapMode = (events, firstWeekday, overlapTh
 
     if (timed) {
       visuals.forEach(visual => {
-        visual.left = visual.column * 100 / visual.columnCount
-        visual.width = 100 / visual.columnCount
+        visual.left = visual.column * FULL_WIDTH / visual.columnCount
+        visual.width = FULL_WIDTH / visual.columnCount
       })
     }
 

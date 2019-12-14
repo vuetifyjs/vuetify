@@ -43,6 +43,12 @@ type VEventGetter = (day: CalendarTimestamp) => CalendarEventParsed[]
 
 type VEventVisualToNode<D> = (visual: CalendarEventVisual, day: D) => VNode
 
+type VEventsToNodes = <D extends CalendarDaySlotScope>(
+  day: D,
+  getter: VEventGetter,
+  mapper: VEventVisualToNode<D>,
+  timed: boolean) => VNode[] | undefined
+
 type VDailyEventsMap = {
   [date: string]: {
     parent: HTMLElement
@@ -365,11 +371,7 @@ export default CalendarBase.extend({
         this.parsedEventOverlapThreshold
       )
 
-      const getSlotChildren = <D extends CalendarDaySlotScope>(
-        day: D,
-        getter: VEventGetter,
-        mapper: VEventVisualToNode<D>,
-        timed: boolean) => {
+      const getSlotChildren: VEventsToNodes = (day, getter, mapper, timed) => {
         const events = getter(day)
 
         if (events.length === 0) {
