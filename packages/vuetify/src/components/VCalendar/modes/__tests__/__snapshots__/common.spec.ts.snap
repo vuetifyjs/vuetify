@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`events.ts should parse events 1`] = `
+exports[`common.ts should get visuals 1 1`] = `
 Object {
   "allDay": true,
   "end": Object {
@@ -45,7 +45,7 @@ Object {
 }
 `;
 
-exports[`events.ts should parse events 2`] = `
+exports[`common.ts should get visuals 1 2`] = `
 Object {
   "allDay": true,
   "end": Object {
@@ -90,7 +90,7 @@ Object {
 }
 `;
 
-exports[`events.ts should parse events 3`] = `
+exports[`common.ts should get visuals 1 3`] = `
 Object {
   "allDay": true,
   "end": Object {
@@ -135,7 +135,7 @@ Object {
 }
 `;
 
-exports[`events.ts should parse events 4`] = `
+exports[`common.ts should get visuals 1 4`] = `
 Object {
   "allDay": true,
   "end": Object {
@@ -177,50 +177,5 @@ Object {
   },
   "startIdentifier": 20190213,
   "startTimestampIdentifier": 201902130000,
-}
-`;
-
-exports[`events.ts should parse timed events 1`] = `
-Object {
-  "allDay": false,
-  "end": Object {
-    "date": "2019-02-14",
-    "day": 14,
-    "future": false,
-    "hasDay": true,
-    "hasTime": false,
-    "hour": 0,
-    "minute": 0,
-    "month": 2,
-    "past": false,
-    "present": false,
-    "time": "",
-    "weekday": 4,
-    "year": 2019,
-  },
-  "endIdentifier": 20190214,
-  "endTimestampIdentifier": 201902140000,
-  "index": 0,
-  "input": Object {
-    "end": "2019-02-14",
-    "start": "2019-02-13 8:30",
-  },
-  "start": Object {
-    "date": "2019-02-13",
-    "day": 13,
-    "future": false,
-    "hasDay": true,
-    "hasTime": true,
-    "hour": 8,
-    "minute": 30,
-    "month": 2,
-    "past": false,
-    "present": false,
-    "time": "08:30",
-    "weekday": 3,
-    "year": 2019,
-  },
-  "startIdentifier": 20190213,
-  "startTimestampIdentifier": 201902130830,
 }
 `;

@@ -65,6 +65,7 @@ export default CalendarWithIntervals.extend({
       ])
     },
     genHeadIntervals (): VNode {
+      const slot = this.$scopedSlots['interval-header']
       const width: string | undefined = convertToUnit(this.intervalWidth)
 
       return this.$createElement('div', {
@@ -72,7 +73,7 @@ export default CalendarWithIntervals.extend({
         style: {
           width,
         },
-      })
+      }, slot ? slot({}) : undefined)
     },
     genHeadDays (): VNode[] {
       return this.days.map(this.genHeadDay)
@@ -90,7 +91,7 @@ export default CalendarWithIntervals.extend({
       }, [
         this.genHeadWeekday(day),
         this.genHeadDayLabel(day),
-        slot ? slot({ ...day, index }) : '',
+        slot ? slot({ week: this.days, ...day, index }) : '',
       ])
     },
     genHeadWeekday (day: CalendarTimestamp): VNode {

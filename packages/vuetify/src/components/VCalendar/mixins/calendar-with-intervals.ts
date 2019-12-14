@@ -101,6 +101,7 @@ export default CalendarBase.extend({
       const scope = copyTimestamp(timestamp) as any
       scope.timeToY = this.timeToY
       scope.minutesToPixels = this.minutesToPixels
+      scope.week = this.days
       return scope
     },
     scrollToTime (time: VTime): boolean {

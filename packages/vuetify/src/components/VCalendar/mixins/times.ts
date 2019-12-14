@@ -19,14 +19,14 @@ export default Vue.extend({
 
   data: () => ({
     times: {
-      now: parseTimestamp('0000-00-00 00:00') as CalendarTimestamp,
-      today: parseTimestamp('0000-00-00') as CalendarTimestamp,
+      now: parseTimestamp('0000-00-00 00:00', true),
+      today: parseTimestamp('0000-00-00', true),
     },
   }),
 
   computed: {
     parsedNow (): CalendarTimestamp | null {
-      return this.now ? parseTimestamp(this.now) : null
+      return this.now ? parseTimestamp(this.now, true) : null
     },
   },
 

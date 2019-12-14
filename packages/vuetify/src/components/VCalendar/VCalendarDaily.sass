@@ -9,6 +9,10 @@
   .v-calendar-daily__intervals-head
     border-right: map-deep-get($material, 'calendar', 'line-color') 1px solid
 
+    &::after
+      background: map-deep-get($material, 'calendar', 'line-color')
+      background: linear-gradient(90deg, transparent, map-deep-get($material, 'calendar', 'line-color'))
+  
   .v-calendar-daily_head-day
     border-right: map-deep-get($material, 'calendar', 'line-color') 1px solid
     border-bottom: map-deep-get($material, 'calendar', 'line-color') 1px solid
@@ -23,7 +27,7 @@
     border-right: map-deep-get($material, 'calendar', 'line-color') 1px solid
 
     .v-calendar-daily__interval-text
-      color: map-deep-get($material, 'calendar', 'interval-color') 1px solid
+      color: map-deep-get($material, 'calendar', 'interval-color')
 
   .v-calendar-daily__day
     border-right: map-deep-get($material, 'calendar', 'line-color') 1px solid
@@ -34,6 +38,9 @@
 
     &:first-child
       border-top: none !important
+
+  .v-calendar-daily__interval::after
+    border-top: map-deep-get($material, 'calendar', 'line-color') 1px solid
 
 .v-calendar-daily
   display: flex
@@ -47,6 +54,15 @@
 
 .v-calendar-daily__intervals-head
   flex: none
+  position: relative
+
+  &::after
+    position: absolute
+    bottom: 0px
+    height: 1px
+    left: 0
+    right: 0
+    content: ''
 
 .v-calendar-daily_head-day
   flex: 1 1 auto
@@ -98,14 +114,25 @@
 
 .v-calendar-daily__interval
   text-align: $calendar-daily-interval-gutter-align
-  padding-right: $calendar-daily-interval-gutter-left
+  padding-right: $calendar-daily-interval-gutter-line-width
   border-bottom: none
+  position: relative
+
+  &::after
+    width: $calendar-daily-interval-gutter-line-width
+    position: absolute
+    height: 1px
+    display: block
+    content: ''
+    right: 0
+    bottom: -1px
 
 .v-calendar-daily__interval-text
   display: block
   position: relative
   top: $calendar-daily-interval-gutter-top
   font-size: $calendar-daily-interval-gutter-font-size
+  padding-right: $calendar-daily-interval-gutter-width
 
 .v-calendar-daily__day
   flex: 1

@@ -36,7 +36,7 @@ export default CalendarBase.extend({
       return parseInt(this.minWeeks)
     },
     days (): CalendarTimestamp[] {
-      const minDays = this.parsedMinWeeks * this.weekdays.length
+      const minDays = this.parsedMinWeeks * this.parsedWeekdays.length
       const start = this.getStartOfWeek(this.parsedStart)
       const end = this.getEndOfWeek(this.parsedEnd)
 
@@ -117,12 +117,12 @@ export default CalendarBase.extend({
       return this.$createElement('div', {
         key: week[0].date,
         staticClass: 'v-calendar-weekly__week',
-      }, week.map(this.genDay))
+      }, week.map((day, index) => this.genDay(day, index, week)))
     },
-    genDay (day: CalendarTimestamp, index: number): VNode {
+    genDay (day: CalendarTimestamp, index: number, week: CalendarTimestamp[]): VNode {
       const outside = this.isOutside(day)
       const slot = this.$scopedSlots.day
-      const scope = { outside, index, ...day }
+      const scope = { outside, index, week, ...day }
 
       return this.$createElement('div', {
         key: day.date,
@@ -132,8 +132,6 @@ export default CalendarBase.extend({
       }, [
         this.genDayLabel(day),
         slot ? slot(scope) : '',
-        // renders the orginial month text
-        // (day.day === 1 && this.showMonthOnFirst) ? this.genDayMonth(day) : '',
       ])
     },
     genDayLabel (day: CalendarTimestamp): VNode {

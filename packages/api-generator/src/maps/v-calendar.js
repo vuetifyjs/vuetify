@@ -1,11 +1,15 @@
-const { VTimestamp, VTimestampWithTime } = require('../helpers/variables')
+const { VTimestamp, VTimestampWithTime, VCalendarDay, VCalendarEventSlot } = require('../helpers/variables')
 
 module.exports = {
   'v-calendar': {
     slots: [
       {
+        name: 'event',
+        props: VCalendarEventSlot,
+      },
+      {
         name: 'day',
-        props: VTimestamp,
+        props: VCalendarDay,
       },
       {
         name: 'day-body',
@@ -13,7 +17,7 @@ module.exports = {
       },
       {
         name: 'day-header',
-        props: VTimestamp,
+        props: VTimestampWithTime,
       },
       {
         name: 'day-label',
@@ -61,6 +65,10 @@ module.exports = {
         name: 'scrollToTime',
         signature: '(time: number | string | { hour: number, minute: number }): boolean',
       },
+      {
+        name: 'getVisibleEvents',
+        signature: '(): CalendarEventParsed[]',
+      },
     ],
     events: [
       {
@@ -82,6 +90,10 @@ module.exports = {
       {
         name: 'contextmenu:date',
         value: VTimestampWithTime,
+      },
+      {
+        name: 'click:more',
+        value: VTimestamp,
       },
       {
         name: 'click:day',

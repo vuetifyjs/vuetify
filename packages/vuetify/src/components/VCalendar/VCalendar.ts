@@ -59,8 +59,8 @@ export default CalendarWithEvents.extend({
   computed: {
     parsedValue (): CalendarTimestamp {
       return (validateTimestamp(this.value)
-        ? parseTimestamp(this.value)
-        : (this.parsedStart || this.times.today)) as CalendarTimestamp
+        ? parseTimestamp(this.value, true)
+        : (this.parsedStart || this.times.today))
     },
     renderProps (): VCalendarRenderProps {
       const around = this.parsedValue
@@ -123,8 +123,11 @@ export default CalendarWithEvents.extend({
 
   methods: {
     checkChange (): void {
+      const { lastStart, lastEnd } = this
       const { start, end } = this.renderProps
-      if (start !== this.lastStart || end !== this.lastEnd) {
+      if (!lastStart || !lastEnd ||
+        start.date !== lastStart.date ||
+        end.date !== lastEnd.date) {
         this.lastStart = start
         this.lastEnd = end
         this.$emit('change', { start, end })
