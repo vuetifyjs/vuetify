@@ -5,10 +5,8 @@
   "subComponentsList": [
     "`v-carousel-item`: The image container used by `v-carousel`. Extends `v-window-item`, is routable, and uses `v-img` in its default slot."
   ],
+  "usageText": "The `v-carousel` component expands upon `v-window` by providing additional features targeted at displaying images.",
   "examples": {
-    "usage": {
-      "desc": "The `v-carousel` component expands upon `v-window` by providing additional features targeted at displaying images."
-    },
     "cycle": {
       "heading": "### Cycle",
       "desc": "With the **cycle** prop you can have your slides automatically transition to the next available every 6s (default)."
