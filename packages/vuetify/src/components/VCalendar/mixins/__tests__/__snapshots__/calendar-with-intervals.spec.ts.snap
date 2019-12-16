@@ -4559,23 +4559,6 @@ Object {
   "present": false,
   "time": "",
   "timeToY": [Function],
-  "week": Array [
-    Object {
-      "date": "2019-12-15",
-      "day": 15,
-      "future": false,
-      "hasDay": true,
-      "hasTime": false,
-      "hour": 0,
-      "minute": 0,
-      "month": 12,
-      "past": false,
-      "present": true,
-      "time": "",
-      "weekday": 0,
-      "year": 2019,
-    },
-  ],
   "weekday": 5,
   "year": 2019,
 }

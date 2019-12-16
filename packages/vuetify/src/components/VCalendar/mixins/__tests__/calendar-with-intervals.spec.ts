@@ -178,7 +178,11 @@ describe('calendar-with-intervals.ts', () => {
 
     expect(wrapper.vm.getSlotScope(parseTimestamp('2019-02-08'))).toBeDefined()
     expect(wrapper.vm.getSlotScope(parseTimestamp('2019-02-08')).date).toBe('2019-02-08')
-    expect(wrapper.vm.getSlotScope(parseTimestamp('2019-02-08'))).toMatchSnapshot()
+
+    const scope = wrapper.vm.getSlotScope(parseTimestamp('2019-02-08'))
+    delete scope.week
+
+    expect(scope).toMatchSnapshot()
     expect(typeof wrapper.vm.getSlotScope(parseTimestamp('2019-02-08')).timeToY).toBe('function')
     expect(typeof wrapper.vm.getSlotScope(parseTimestamp('2019-02-08')).minutesToPixels).toBe('function')
   })
