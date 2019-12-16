@@ -59,7 +59,7 @@ function addFooterAd (children = []) {
   if (!children.length) return
 
   const index = children.length - 1
-  const childChildren = children[index] || []
+  const childChildren = children[index].children || []
 
   childChildren.push({ type: 'ad-exit' })
   children[index].children = childChildren
