@@ -361,9 +361,9 @@ export function getPrefixedScopedSlots (prefix: string, scopedSlots: any) {
   }, {})
 }
 
-export function getSlot (vm: Vue, name = 'default', data?: object, optional = false) {
+export function getSlot (vm: Vue, name = 'default', data?: object | (() => object), optional = false) {
   if (vm.$scopedSlots[name]) {
-    return vm.$scopedSlots[name]!(data)
+    return vm.$scopedSlots[name]!(data instanceof Function ? data() : data)
   } else if (vm.$slots[name] && (!data || optional)) {
     return vm.$slots[name]
   }

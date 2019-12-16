@@ -4561,8 +4561,8 @@ Object {
   "timeToY": [Function],
   "week": Array [
     Object {
-      "date": "2019-12-14",
-      "day": 14,
+      "date": "2019-12-15",
+      "day": 15,
       "future": false,
       "hasDay": true,
       "hasTime": false,
@@ -4572,7 +4572,7 @@ Object {
       "past": false,
       "present": true,
       "time": "",
-      "weekday": 6,
+      "weekday": 0,
       "year": 2019,
     },
   ],
