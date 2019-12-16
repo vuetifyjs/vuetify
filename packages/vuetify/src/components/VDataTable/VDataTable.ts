@@ -100,6 +100,9 @@ export default VDataIterator.extend({
       type: Function as PropType<typeof defaultFilter>,
       default: defaultFilter,
     },
+    canExpand: {
+      type: Function as PropType<(item: any) => boolean>,
+    },
   },
 
   data () {
@@ -443,18 +446,25 @@ export default VDataIterator.extend({
 
       if (this.showExpand) {
         const slot = scopedSlots['data-table-expand']
-        scopedSlots['data-table-expand'] = slot ? () => slot(data) : () => this.$createElement(VIcon, {
-          staticClass: 'v-data-table__expand-icon',
-          class: {
-            'v-data-table__expand-icon--active': data.isExpanded,
-          },
-          on: {
-            click: (e: MouseEvent) => {
-              e.stopPropagation()
-              data.expand(!data.isExpanded)
-            },
-          },
-        }, [this.expandIcon])
+        scopedSlots['data-table-expand'] = slot
+          ? () => slot(data)
+          : () => {
+            if (this.canExpand && !this.canExpand(item)) {
+              return null
+            }
+            return this.$createElement(VIcon, {
+              staticClass: 'v-data-table__expand-icon',
+              class: {
+                'v-data-table__expand-icon--active': data.isExpanded,
+              },
+              on: {
+                click: (e: MouseEvent) => {
+                  e.stopPropagation()
+                  data.expand(!data.isExpanded)
+                },
+              },
+            }, [this.expandIcon])
+          }
       }
 
       return this.$createElement(this.isMobile ? MobileRow : Row, {
