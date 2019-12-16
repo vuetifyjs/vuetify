@@ -14,7 +14,7 @@ import VBtn from '../VBtn'
 import CalendarWithIntervals from './mixins/calendar-with-intervals'
 
 // Util
-import { convertToUnit } from '../../util/helpers'
+import { convertToUnit, getSlot } from '../../util/helpers'
 import { CalendarTimestamp } from 'types'
 
 /* @vue/component */
@@ -65,7 +65,6 @@ export default CalendarWithIntervals.extend({
       ])
     },
     genHeadIntervals (): VNode {
-      const slot = this.$scopedSlots['interval-header']
       const width: string | undefined = convertToUnit(this.intervalWidth)
 
       return this.$createElement('div', {
@@ -73,7 +72,7 @@ export default CalendarWithIntervals.extend({
         style: {
           width,
         },
-      }, slot ? slot({}) : undefined)
+      }, getSlot(this, 'interval-header'))
     },
     genHeadDays (): VNode[] {
       return this.days.map(this.genHeadDay)
@@ -164,7 +163,6 @@ export default CalendarWithIntervals.extend({
     },
     genDay (day: CalendarTimestamp, index: number): VNode {
       const slot = this.$scopedSlots['day-body']
-      const scope = this.getSlotScope(day)
 
       return this.$createElement('div', {
         key: day.date,
@@ -175,7 +173,7 @@ export default CalendarWithIntervals.extend({
         }),
       }, [
         ...this.genDayIntervals(index),
-        slot ? slot(scope) : '',
+        slot ? slot(this.getSlotScope(day)) : '',
       ])
     },
     genDayIntervals (index: number): VNode[] {
