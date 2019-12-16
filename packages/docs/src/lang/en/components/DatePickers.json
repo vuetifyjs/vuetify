@@ -42,7 +42,7 @@
     },
     "date-multiple": {
       "desc": "Date picker can now select multiple dates with the `multiple` prop. If using `multiple` then date picker expects its model to be an array.",
-      "heading": "### Date pickers - Mutiple"
+      "heading": "### Date pickers - Multiple"
     },
     "date-range": {
       "desc": "Date picker can select date range with the `range` prop. When using `range` prop date picker expects its model to be an array of length 2 or empty.",
