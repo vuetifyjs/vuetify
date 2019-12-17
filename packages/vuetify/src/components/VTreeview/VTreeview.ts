@@ -155,8 +155,10 @@ export default mixins(
     },
     openAll: {
       immediate: true,
-      handler (value: boolean) {
-        this.$nextTick(() => this.updateAll(value))
+      handler (value: boolean, previous: any) {
+        if (value || previous !== undefined) {
+          this.$nextTick(() => this.updateAll(value))
+        }
       },
     },
   },
