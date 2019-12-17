@@ -85,8 +85,7 @@ export function validateTimestamp (input: any): boolean {
   return !!PARSE_REGEX.exec(input)
 }
 
-export function parseTimestamp (input: string): CalendarTimestamp | null
-export function parseTimestamp (input: string, required: false, now?: CalendarTimestamp): CalendarTimestamp | null
+export function parseTimestamp (input: string, required?: false, now?: CalendarTimestamp): CalendarTimestamp | null
 export function parseTimestamp (input: string, required: true, now?: CalendarTimestamp): CalendarTimestamp
 export function parseTimestamp (input: string, required = false, now?: CalendarTimestamp): CalendarTimestamp | null {
   // YYYY-MM-DD hh:mm:ss
