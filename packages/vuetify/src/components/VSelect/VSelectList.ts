@@ -207,7 +207,7 @@ export default mixins(Colorable, Themeable).extend({
         ? this.$createElement(VListItem, tile, scopedSlot)
         : scopedSlot
     },
-    genTileContent (item: any, index = 0 as string | number): VNode {
+    genTileContent (item: any, index = 0): VNode {
       const innerHTML = this.genFilteredText(this.getText(item))
 
       return this.$createElement(VListItemContent,
