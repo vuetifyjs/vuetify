@@ -381,13 +381,18 @@ export default baseMixins.extend<options>().extend({
       })
     },
     genMessages () {
-      if (this.hideDetails) return null
+      if (this.hideDetails === true) return null
+
+      const messagesNode = VInput.options.methods.genMessages.call(this)
+      const counterNode = this.genCounter()
+
+      if (this.hideDetails === 'auto' && !messagesNode && !counterNode) return null
 
       return this.$createElement('div', {
         staticClass: 'v-text-field__details',
       }, [
-        VInput.options.methods.genMessages.call(this),
-        this.genCounter(),
+        messagesNode,
+        counterNode,
       ])
     },
     genTextFieldSlot () {
