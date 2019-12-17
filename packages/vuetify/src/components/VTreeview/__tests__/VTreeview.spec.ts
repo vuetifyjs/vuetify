@@ -256,14 +256,13 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
 
     await wrapper.vm.$nextTick()
 
-    const openHtml = wrapper.html()
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({ openAll: false })
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.html()).toEqual(openHtml)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should open/close all children when using updateAll', async () => {
