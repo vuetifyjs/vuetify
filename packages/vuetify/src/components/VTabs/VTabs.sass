@@ -3,7 +3,7 @@
 
 +theme(v-tabs) using ($material)
   > .v-tabs-bar
-    background-color: map-get($material, 'cards')
+    background-color: map-get($material, $tabs-bar-background-color)
 
     .v-tab:not(.v-tab--active),
     .v-tab:not(.v-tab--active) > .v-icon,

@@ -4,6 +4,7 @@ $tab-disabled-opacity: .5 !default;
 $tab-font-size: map-deep-get($headings, 'subtitle-2', 'size') !default;
 $tab-font-weight: map-deep-get($headings, 'subtitle-2', 'weight') !default;
 $tab-line-height: normal !default;
+$tabs-bar-background-color: 'cards' !default;
 $tabs-bar-height: 48px !default;
 $tabs-icons-and-text-bar-height: 72px !default;
 $tabs-icons-and-text-first-tab-margin-bottom: 6px !default;
