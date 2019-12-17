@@ -19,6 +19,7 @@ import {
   createNativeLocaleFormatter,
   getStartOfWeek,
   getEndOfWeek,
+  getTimestampIdentifier,
 } from '../util/timestamp'
 import { CalendarTimestamp, CalendarFormatter } from 'types'
 
@@ -53,10 +54,13 @@ export default mixins(
       return reversed
     },
     parsedStart (): CalendarTimestamp {
-      return parseTimestamp(this.start) as CalendarTimestamp
+      return parseTimestamp(this.start, true)
     },
     parsedEnd (): CalendarTimestamp {
-      return (this.end ? parseTimestamp(this.end) : this.parsedStart) as CalendarTimestamp
+      const start = this.parsedStart
+      const end: CalendarTimestamp = this.end ? parseTimestamp(this.end) || start : start
+
+      return getTimestampIdentifier(end) < getTimestampIdentifier(start) ? start : end
     },
     days (): CalendarTimestamp[] {
       return createDayList(
@@ -103,10 +107,10 @@ export default mixins(
       }
     },
     getStartOfWeek (timestamp: CalendarTimestamp): CalendarTimestamp {
-      return getStartOfWeek(timestamp, this.weekdays, this.times.today)
+      return getStartOfWeek(timestamp, this.parsedWeekdays, this.times.today)
     },
     getEndOfWeek (timestamp: CalendarTimestamp): CalendarTimestamp {
-      return getEndOfWeek(timestamp, this.weekdays, this.times.today)
+      return getEndOfWeek(timestamp, this.parsedWeekdays, this.times.today)
     },
     getFormatter (options: object): CalendarFormatter {
       return createNativeLocaleFormatter(

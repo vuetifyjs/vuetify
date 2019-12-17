@@ -32,6 +32,7 @@
     "eventMore": "Whether the more 'button' is displayed on a calendar with too many events in a given day. It will say something like '5 more' and when clicked generates a `click:more` event.",
     "eventMoreText": "The text to display in the more 'button' given the number of hidden events.",
     "eventName": "Set property of *event*'s displayed name, or a function which accepts an event object passed to the calendar as the first argument and a flag signalling whether the name is for a timed event (true) or an event over a day.",
+    "eventOverlapMode": "One of `stack`, `column`, or a custom render function",
     "eventOverlapThreshold": "A value in minutes that's used to determine whether two timed events should be placed in column beside each other or should be treated as slightly overlapping events.",
     "eventRipple": "Applies the `v-ripple` directive.",
     "events": "An array of event objects with a property for a start timestamp and optionally a name and end timestamp. If an end timestamp is not given, the value of start will be used. If no name is given, you must provide an implementation for the `event` slot.",
@@ -42,6 +43,7 @@
     "intervalCount": "The number of intervals to display in the `day` view.",
     "intervalFormat": "Formats time of day string that appears in the interval gutter of the `day` and `week` view to specified locale",
     "intervalHeight": "The height of an interval in pixels in the `day` view.",
+    "intervalWidth": "The width of the interval gutter on the left side in the `day` view.",
     "intervalMinutes": "The number of minutes the intervals are in the `day` view. A common interval is 60 minutes so the intervals are an hour.",
     "intervalStyle": "Returns CSS styling to apply to the interval.",
     "locale": "The locale of the calendar.",
@@ -72,7 +74,8 @@
     "scrollToTime": "Scrolls the scrollable area in the `day` view to the given time. If the time is not in a valid format or if the calendar is not in the `day` view then false is returned.",
     "timeToY": "Converts a time to a pixel value on the y-axis for the `day` view. If the time is not in a valid format or if the calendar is not in the `day` view then false is returned.",
     "updateEventVisibility": "If the calendar has events and `event-more` is truthy the days with too many events contain a 'button' to represent how many events had to be hidden.",
-    "updateTimes": "Updates now & today in the calendar, possibly updating the styles in the calendar."
+    "updateTimes": "Updates now & today in the calendar, possibly updating the styles in the calendar.",
+    "getVisibleEvents": "Returns the list of events seen on the current calendar where each element returned has the following properties:<br>- `input`: the event passed in the `events` prop.<br>- `start`: a CalendarTimestamp of the start timestamp parsed.<br>- `startIdentifier`: a number which represents the day the event starts on.<br>- `startTimestampIdentifier`: a number which represents the day and time the event starts on.<br>- `end`: a CalendarTimestamp of the end timestamp parsed.<br>- `endIdentifier`: a number which represents the day the event ends on.<br>- `endTimestampIdentifier`: a number which represents the day & time the event ends on.<br>- `allDay`: if this is an all-day event (has no time specified in the `start`/`end` on the event).<br>- `index`: the index of the event in the given array."
   },
   "slots": {
     "day-body": "The content that is placed in a `day` view in the scrollable interval container. The day & time object is passed through this slots scope.",
@@ -80,8 +83,9 @@
     "day-label": "The content that is placed in the day of the month space in the `week` or `month` view. The day & time object is passed through this slots scope.",
     "day-month": "The content that is placed in the month space in the `week` or `month` view. The day & time object is passed through this slots scope.",
     "day": "The content that is placed in a `week` or `month` view. The day & time object is passed through this slots scope.",
-    "event": "The content placed in an event. The following variables are available: event, day, outside, start, end, timed.",
-    "interval": "The content that is placed in the interval space in the `day` view. The day & time object is passed through this slots scope."
+    "event": "The content placed in an event. This ignores the `event-name` prop.",
+    "interval": "The content that is placed in the interval space in the `day` view. The day & time object is passed through this slots scope.",
+    "interval-header": "The content that is placed in the interval space in the top left of the `day` view."
   },
   "events": {
     "change": "The range of days displayed on the calendar changed. This is triggered on initialization. The event passed is an object with start and end date objects.",

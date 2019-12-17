@@ -2,7 +2,7 @@
 import './VCalendarDaily.sass'
 
 // Types
-import { VNode, VNodeChildren } from 'vue'
+import { VNode } from 'vue'
 
 // Directives
 import Resize from '../../directives/resize'
@@ -14,7 +14,7 @@ import VBtn from '../VBtn'
 import CalendarWithIntervals from './mixins/calendar-with-intervals'
 
 // Util
-import { convertToUnit } from '../../util/helpers'
+import { convertToUnit, getSlot } from '../../util/helpers'
 import { CalendarTimestamp } from 'types'
 
 /* @vue/component */
@@ -72,13 +72,15 @@ export default CalendarWithIntervals.extend({
         style: {
           width,
         },
-      })
+      }, getSlot(this, 'interval-header'))
     },
     genHeadDays (): VNode[] {
       return this.days.map(this.genHeadDay)
     },
     genHeadDay (day: CalendarTimestamp, index: number): VNode {
-      const slot = this.$scopedSlots['day-header']
+      const header = getSlot(this, 'day-header', () => ({
+        week: this.days, ...day, index,
+      }))
 
       return this.$createElement('div', {
         key: day.date,
@@ -90,7 +92,7 @@ export default CalendarWithIntervals.extend({
       }, [
         this.genHeadWeekday(day),
         this.genHeadDayLabel(day),
-        slot ? slot({ ...day, index }) : '',
+        ...(header || []),
       ])
     },
     genHeadWeekday (day: CalendarTimestamp): VNode {
@@ -162,9 +164,6 @@ export default CalendarWithIntervals.extend({
       return this.days.map(this.genDay)
     },
     genDay (day: CalendarTimestamp, index: number): VNode {
-      const slot = this.$scopedSlots['day-body']
-      const scope = this.getSlotScope(day)
-
       return this.$createElement('div', {
         key: day.date,
         staticClass: 'v-calendar-daily__day',
@@ -174,7 +173,7 @@ export default CalendarWithIntervals.extend({
         }),
       }, [
         ...this.genDayIntervals(index),
-        slot ? slot(scope) : '',
+        ...(getSlot(this, 'day-body', () => this.getSlotScope(day)) || []),
       ])
     },
     genDayIntervals (index: number): VNode[] {
@@ -183,8 +182,6 @@ export default CalendarWithIntervals.extend({
     genDayInterval (interval: CalendarTimestamp): VNode {
       const height: string | undefined = convertToUnit(this.intervalHeight)
       const styler = this.intervalStyle || this.intervalStyleDefault
-      const slot = this.$scopedSlots.interval
-      const scope = this.getSlotScope(interval)
 
       const data = {
         key: interval.time,
@@ -195,7 +192,7 @@ export default CalendarWithIntervals.extend({
         },
       }
 
-      const children = slot ? slot(scope) as VNodeChildren : undefined
+      const children = getSlot(this, 'interval', () => this.getSlotScope(interval))
 
       return this.$createElement('div', data, children)
     },

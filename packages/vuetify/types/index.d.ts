@@ -192,6 +192,44 @@ export interface CalendarEvent {
   [prop: string]: any
 }
 
+export interface CalendarEventParsed {
+  input: CalendarEvent
+  start: CalendarTimestamp
+  startIdentifier: number
+  startTimestampIdentifier: number
+  end: CalendarTimestamp
+  endIdentifier: number
+  endTimestampIdentifier: number
+  allDay: boolean
+  index: number
+}
+
+export interface CalendarEventVisual {
+  event: CalendarEventParsed
+  columnCount: number
+  column: number
+  left: number
+  width: number
+}
+
+export interface CalendarDaySlotScope extends CalendarTimestamp {
+  outside: boolean
+  index: number
+  week: CalendarTimestamp[]
+}
+
+export type CalendarTimeToY = (time: CalendarTimestamp | number | string) => number
+
+export interface CalendarDayBodySlotScope extends CalendarDaySlotScope {
+  timeToY: CalendarTimeToY
+}
+
+export type CalendarEventOverlapMode = (events: CalendarEventParsed[], firstWeekday: number, overlapThreshold: number) => (day: CalendarDaySlotScope, dayEvents: CalendarEventParsed[], timed: boolean) => CalendarEventVisual[]
+
+export type CalendarEventColorFunction = (event: CalendarEvent) => string
+
+export type CalendarEventNameFunction = (event: CalendarEventParsed, timedEvent: boolean) => string
+
 export type DataTableFilterFunction = (value: any, search: string | null, item: any) => boolean
 
 export interface DataTableHeader<T extends any = any> {

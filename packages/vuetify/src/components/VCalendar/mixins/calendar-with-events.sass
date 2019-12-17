@@ -3,7 +3,13 @@
 
 +theme(v-calendar-events) using ($material)
   .v-event-timed
-    border: 1px solid !important
+    border: $calendar-event-border-width solid !important
+
+  .v-event-more
+    background-color: map-deep-get($material, 'calendar', 'background-color')
+
+    &.v-outside
+      background-color: map-deep-get($material, 'calendar', 'outside-background-color')
 
 .v-calendar
   .v-event
@@ -13,16 +19,9 @@
     white-space: nowrap
     font-size: $calendar-event-font-size
     cursor: pointer
-    margin-right: -1px
-
-    &.v-event-start
-      border-top-left-radius: $calendar-event-border-radius
-      border-bottom-left-radius: $calendar-event-border-radius
-
-    &.v-event-end
-      width: 95%
-      border-top-right-radius: $calendar-event-border-radius
-      border-bottom-right-radius: $calendar-event-border-radius
+    margin-right: -$calendar-line-width
+    z-index: 1
+    border-radius: $calendar-event-border-radius
 
   .v-event-more
     overflow: hidden
@@ -30,9 +29,9 @@
     white-space: nowrap
     font-size: $calendar-event-font-size
     cursor: pointer
-    border-radius: $calendar-event-border-radius
     font-weight: bold
-    margin-right: $calendar-event-right-empty
+    z-index: 1
+    position: relative
 
   .v-event-timed-container
     position: absolute
@@ -54,5 +53,8 @@
     pointer-events: all
 
   &.v-calendar-events
+    .v-calendar-weekly__head-weekday
+      margin-right: -$calendar-line-width
     .v-calendar-weekly__day
       overflow: visible
+      margin-right: -$calendar-line-width

@@ -85,11 +85,19 @@ export function validateTimestamp (input: any): boolean {
   return !!PARSE_REGEX.exec(input)
 }
 
-export function parseTimestamp (input: string, now?: CalendarTimestamp): CalendarTimestamp | null {
+export function parseTimestamp (input: string): CalendarTimestamp | null
+export function parseTimestamp (input: string, required: false, now?: CalendarTimestamp): CalendarTimestamp | null
+export function parseTimestamp (input: string, required: true, now?: CalendarTimestamp): CalendarTimestamp
+export function parseTimestamp (input: string, required = false, now?: CalendarTimestamp): CalendarTimestamp | null {
   // YYYY-MM-DD hh:mm:ss
   const parts = PARSE_REGEX.exec(input)
 
-  if (!parts) return null
+  if (!parts) {
+    if (required) {
+      throw new Error(`${input} is not a valid timestamp. It must be in the format of YYYY-MM-DD or YYYY-MM-DD hh:mm. Zero-padding is optional and seconds are ignored.`)
+    }
+    return null
+  }
 
   const timestamp: CalendarTimestamp = {
     date: input,
@@ -135,11 +143,11 @@ export function parseDate (date: Date): CalendarTimestamp {
   })
 }
 
-export function getDayIdentifier (timestamp: CalendarTimestamp): number {
+export function getDayIdentifier (timestamp: { year: number, month: number, day: number }): number {
   return timestamp.year * 10000 + timestamp.month * 100 + timestamp.day
 }
 
-export function getTimeIdentifier (timestamp: CalendarTimestamp): number {
+export function getTimeIdentifier (timestamp: { hour: number, minute: number }): number {
   return timestamp.hour * 100 + timestamp.minute
 }
 
@@ -294,6 +302,16 @@ export function relativeDays (
 ): CalendarTimestamp {
   while (--days >= 0) mover(timestamp)
   return timestamp
+}
+
+export function diffMinutes (min: CalendarTimestamp, max: CalendarTimestamp) {
+  const Y = (max.year - min.year) * 525600
+  const M = (max.month - min.month) * 43800
+  const D = (max.day - min.day) * 1440
+  const h = (max.hour - min.hour) * 60
+  const m = (max.minute - min.minute)
+
+  return Y + M + D + h + m
 }
 
 export function findWeekday (timestamp: CalendarTimestamp, weekday: number,
