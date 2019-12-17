@@ -3,15 +3,19 @@
 // Theme
 +theme(v-calendar-daily) using ($material)
   background-color: map-deep-get($material, 'calendar', 'background-color')
-  border-left: map-deep-get($material, 'calendar', 'line-color') 1px solid
-  border-top: map-deep-get($material, 'calendar', 'line-color') 1px solid
+  border-left: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
+  border-top: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
 
   .v-calendar-daily__intervals-head
-    border-right: map-deep-get($material, 'calendar', 'line-color') 1px solid
+    border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
 
+    &::after
+      background: map-deep-get($material, 'calendar', 'line-color')
+      background: linear-gradient(90deg, transparent, map-deep-get($material, 'calendar', 'line-color'))
+  
   .v-calendar-daily_head-day
-    border-right: map-deep-get($material, 'calendar', 'line-color') 1px solid
-    border-bottom: map-deep-get($material, 'calendar', 'line-color') 1px solid
+    border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
+    border-bottom: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
     color: map-deep-get($material, 'calendar', 'text-color')
 
     &.v-past
@@ -20,20 +24,23 @@
         color: map-deep-get($material, 'calendar', 'past-color')
 
   .v-calendar-daily__intervals-body
-    border-right: map-deep-get($material, 'calendar', 'line-color') 1px solid
+    border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
 
     .v-calendar-daily__interval-text
-      color: map-deep-get($material, 'calendar', 'interval-color') 1px solid
+      color: map-deep-get($material, 'calendar', 'interval-color')
 
   .v-calendar-daily__day
-    border-right: map-deep-get($material, 'calendar', 'line-color') 1px solid
-    border-bottom: map-deep-get($material, 'calendar', 'line-color') 1px solid
+    border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
+    border-bottom: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
 
   .v-calendar-daily__day-interval
-    border-top: map-deep-get($material, 'calendar', 'line-color') 1px solid
+    border-top: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
 
     &:first-child
       border-top: none !important
+
+  .v-calendar-daily__interval::after
+    border-top: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
 
 .v-calendar-daily
   display: flex
@@ -47,6 +54,15 @@
 
 .v-calendar-daily__intervals-head
   flex: none
+  position: relative
+
+  &::after
+    position: absolute
+    bottom: 0px
+    height: $calendar-line-width
+    left: 0
+    right: 0
+    content: ''
 
 .v-calendar-daily_head-day
   flex: 1 1 auto
@@ -98,14 +114,25 @@
 
 .v-calendar-daily__interval
   text-align: $calendar-daily-interval-gutter-align
-  padding-right: $calendar-daily-interval-gutter-left
+  padding-right: $calendar-daily-interval-gutter-line-width
   border-bottom: none
+  position: relative
+
+  &::after
+    width: $calendar-daily-interval-gutter-line-width
+    position: absolute
+    height: $calendar-line-width
+    display: block
+    content: ''
+    right: 0
+    bottom: -$calendar-line-width
 
 .v-calendar-daily__interval-text
   display: block
   position: relative
   top: $calendar-daily-interval-gutter-top
   font-size: $calendar-daily-interval-gutter-font-size
+  padding-right: $calendar-daily-interval-gutter-width
 
 .v-calendar-daily__day
   flex: 1

@@ -361,9 +361,9 @@ export function getPrefixedScopedSlots (prefix: string, scopedSlots: any) {
   }, {})
 }
 
-export function getSlot (vm: Vue, name = 'default', data?: object, optional = false) {
+export function getSlot (vm: Vue, name = 'default', data?: object | (() => object), optional = false) {
   if (vm.$scopedSlots[name]) {
-    return vm.$scopedSlots[name]!(data)
+    return vm.$scopedSlots[name]!(data instanceof Function ? data() : data)
   } else if (vm.$slots[name] && (!data || optional)) {
     return vm.$slots[name]
   }
@@ -410,4 +410,23 @@ export function camelizeObjectKeys (obj: Record<string, any> | null | undefined)
     o[camelize(key)] = obj[key]
     return o
   }, {})
+}
+
+export function mergeDeep (
+  source: Dictionary<any> = {},
+  target: Dictionary<any> = {}
+) {
+  for (const key in target) {
+    const property = target[key]
+
+    if (isObject(property)) {
+      source[key] = mergeDeep(source[key], property)
+
+      continue
+    }
+
+    source[key] = property
+  }
+
+  return source
 }

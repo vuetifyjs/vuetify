@@ -9,20 +9,8 @@
         {
           "type": "usage-new",
           "value": {
-            "booleans": [
-              "colored-border",
-              "dismissible"
-            ],
-            "sliders": [
-              {
-                "prop": "elevation",
-                "label": "Elevation",
-                "attrs": {
-                  "min": 0,
-                  "max": 24
-                }
-              }
-            ],
+            "booleans": ["dismissible"],
+            "sliders": ["elevation"],
             "tabs": [
               "normal",
               "dense",

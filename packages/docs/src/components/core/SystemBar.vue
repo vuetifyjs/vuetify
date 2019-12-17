@@ -1,6 +1,6 @@
 <template>
   <v-system-bar
-    v-if="!hasClosedBanner"
+    v-if="false"
     id="core-system-bar"
     app
     color="#1D285F"

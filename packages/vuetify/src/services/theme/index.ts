@@ -7,6 +7,7 @@ import * as ThemeUtils from './utils'
 
 // Types
 import Vue from 'vue'
+import { VuetifyPreset } from 'vuetify/types/services/presets'
 import {
   VuetifyParsedTheme,
   VuetifyThemes,
@@ -15,36 +16,17 @@ import {
 } from 'vuetify/types/services/theme'
 
 export class Theme extends Service {
-  static property = 'theme'
+  static property: 'theme' = 'theme'
 
   public disabled = false
 
-  public options!: ITheme['options']
+  public options: ITheme['options']
 
   public styleEl?: HTMLStyleElement
 
-  public themes: VuetifyThemes = {
-    light: {
-      primary: '#1976D2',   // blue.darken2
-      secondary: '#424242', // grey.darken3
-      accent: '#82B1FF',    // blue.accent1
-      error: '#FF5252',     // red.accent2
-      info: '#2196F3',      // blue.base
-      success: '#4CAF50',   // green.base
-      warning: '#FB8C00',    // amber.base
-    },
-    dark: {
-      primary: '#2196F3',   // blue.base
-      secondary: '#424242', // grey.darken3
-      accent: '#FF4081',    // pink.accent-2
-      error: '#FF5252',     // red.accent2
-      info: '#2196F3',      // blue.base
-      success: '#4CAF50',   // green.base
-      warning: '#FB8C00',    // amber.base
-    },
-  }
+  public themes: VuetifyThemes
 
-  public defaults: VuetifyThemes = this.themes
+  public defaults: VuetifyThemes
 
   private isDark = null as boolean | null
 
@@ -52,18 +34,25 @@ export class Theme extends Service {
 
   private vueMeta = null as any | null
 
-  constructor (options: Partial<ITheme> = {}) {
+  constructor (preset: VuetifyPreset) {
     super()
-    if (options.disable) {
+
+    const {
+      dark,
+      disable,
+      options,
+      themes,
+    } = preset[Theme.property]
+
+    this.dark = Boolean(dark)
+    this.defaults = this.themes = themes
+    this.options = options
+
+    if (disable) {
       this.disabled = true
 
       return
     }
-
-    this.options = options.options!
-
-    this.dark = Boolean(options.dark)
-    const themes = options.themes || {} as never
 
     this.themes = {
       dark: this.fillVariant(themes.dark, true),

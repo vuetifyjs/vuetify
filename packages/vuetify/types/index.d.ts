@@ -9,18 +9,24 @@ import { Breakpoint } from './services/breakpoint'
 import { Icons } from './services/icons'
 import { Lang } from './services/lang'
 import { Theme } from './services/theme'
+import {
+  Presets,
+  UserVuetifyPreset,
+  VuetifyPreset,
+} from './services/presets'
 
 // Service Options
 import { GoToOptions } from './services/goto'
-import { VuetifyPreset } from './presets'
 
 declare const Vuetify: Vuetify
 export default Vuetify
 export interface Vuetify {
-  install: PluginFunction<VuetifyUseOptions>
-  version: string
   framework: Framework
-  new (preset?: Partial<VuetifyPreset>): Vuetify
+  install: PluginFunction<VuetifyUseOptions>
+  preset: VuetifyPreset
+  userPreset: UserVuetifyPreset
+  version: string
+  new (preset?: Partial<UserVuetifyPreset>): Vuetify
 }
 
 export type ComponentOrPack = Component & {
@@ -40,6 +46,7 @@ export interface Framework {
   theme: Theme
   icons: Icons
   lang: Lang
+  presets: Presets
   rtl: boolean
 }
 
@@ -185,6 +192,44 @@ export interface CalendarEvent {
   [prop: string]: any
 }
 
+export interface CalendarEventParsed {
+  input: CalendarEvent
+  start: CalendarTimestamp
+  startIdentifier: number
+  startTimestampIdentifier: number
+  end: CalendarTimestamp
+  endIdentifier: number
+  endTimestampIdentifier: number
+  allDay: boolean
+  index: number
+}
+
+export interface CalendarEventVisual {
+  event: CalendarEventParsed
+  columnCount: number
+  column: number
+  left: number
+  width: number
+}
+
+export interface CalendarDaySlotScope extends CalendarTimestamp {
+  outside: boolean
+  index: number
+  week: CalendarTimestamp[]
+}
+
+export type CalendarTimeToY = (time: CalendarTimestamp | number | string) => number
+
+export interface CalendarDayBodySlotScope extends CalendarDaySlotScope {
+  timeToY: CalendarTimeToY
+}
+
+export type CalendarEventOverlapMode = (events: CalendarEventParsed[], firstWeekday: number, overlapThreshold: number) => (day: CalendarDaySlotScope, dayEvents: CalendarEventParsed[], timed: boolean) => CalendarEventVisual[]
+
+export type CalendarEventColorFunction = (event: CalendarEvent) => string
+
+export type CalendarEventNameFunction = (event: CalendarEventParsed, timedEvent: boolean) => string
+
 export type DataTableFilterFunction = (value: any, search: string | null, item: any) => boolean
 
 export interface DataTableHeader<T extends any = any> {
@@ -201,6 +246,6 @@ export interface DataTableHeader<T extends any = any> {
 }
 
 export type DataItemsPerPageOption = (number | {
-  text: string;
-  value: number;
+  text: string
+  value: number
 });

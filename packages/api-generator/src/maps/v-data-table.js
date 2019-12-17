@@ -99,6 +99,7 @@ const DataGroupHeaderScopedProps = {
   groupBy: DataOptions.groupBy,
   items: 'any[]',
   headers: 'TableHeader[]',
+  isOpen: 'boolean',
   toggle: '() => void',
   remove: '() => void',
 }

@@ -19,7 +19,7 @@ Object {
     "year": 2019,
   },
   "endIdentifier": 20190214,
-  "endTimestampIdentifier": 201902140000,
+  "endTimestampIdentifier": 201902142359,
   "index": 0,
   "input": Object {
     "end": "2019-02-14",
@@ -64,7 +64,7 @@ Object {
     "year": 2019,
   },
   "endIdentifier": 20190214,
-  "endTimestampIdentifier": 201902140000,
+  "endTimestampIdentifier": 201902142359,
   "index": 0,
   "input": Object {
     "a": "2019-02-13",
@@ -109,7 +109,7 @@ Object {
     "year": 2019,
   },
   "endIdentifier": 20190214,
-  "endTimestampIdentifier": 201902140000,
+  "endTimestampIdentifier": 201902142359,
   "index": 1,
   "input": Object {
     "end": "2019-02-14",
@@ -154,7 +154,7 @@ Object {
     "year": 2019,
   },
   "endIdentifier": 20190214,
-  "endTimestampIdentifier": 201902140000,
+  "endTimestampIdentifier": 201902142359,
   "index": 1,
   "input": Object {
     "a": "2019-02-13",

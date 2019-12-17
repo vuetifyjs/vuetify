@@ -16,32 +16,38 @@ import { escapeHTML } from '../../../util/helpers'
 // Util
 import props from '../util/props'
 import {
-  getDayIdentifier,
-  parseTime,
+  CalendarEventOverlapModes,
+} from '../modes'
+import {
+  getDayIdentifier, diffMinutes,
 } from '../util/timestamp'
 import {
-  VEventParsed,
   parseEvent,
+  isEventStart,
   isEventOn,
+  isEventOverlapping,
 } from '../util/events'
-import { CalendarTimestamp, CalendarEvent } from 'types'
+import {
+  CalendarTimestamp,
+  CalendarEventParsed,
+  CalendarEventVisual,
+  CalendarEventColorFunction,
+  CalendarEventNameFunction,
+  CalendarDaySlotScope,
+  CalendarDayBodySlotScope,
+  CalendarEventOverlapMode,
+} from 'types'
 
 // Types
-type VColorFunction = (event: CalendarEvent) => string
+type VEventGetter = (day: CalendarTimestamp) => CalendarEventParsed[]
 
-type VNameFunction = (event: VEventParsed, timedEvent: boolean) => string
+type VEventVisualToNode<D> = (visual: CalendarEventVisual, day: D) => VNode
 
-type VTimeToY = (time: CalendarTimestamp | number | string) => number
-
-type VEventResetCheck = (date: CalendarTimestamp) => void
-
-type VEventVisualGetOffset = (visual: VEventVisual, visuals: VEventVisual[]) => number
-
-type VEventGetter = (day: CalendarTimestamp) => VEventParsed[]
-
-type VEventVisualGetter = (events: VEventParsed[], timed: boolean) => VEventVisual[]
-
-type VEventVisualToNode<D> = (visual: VEventVisual, index: number, day: D) => VNode
+type VEventsToNodes = <D extends CalendarDaySlotScope>(
+  day: D,
+  getter: VEventGetter,
+  mapper: VEventVisualToNode<D>,
+  timed: boolean) => VNode[] | undefined
 
 type VDailyEventsMap = {
   [date: string]: {
@@ -51,21 +57,9 @@ type VDailyEventsMap = {
   }
 }
 
-interface VEventVisual {
-  offset: number
-  event: VEventParsed
-  columnCount: number
-  column: number
-}
-
-interface VDaySlotScope extends CalendarTimestamp {
-  outside: boolean
-  index: number
-}
-
-interface VDayBodySlotScope extends VDaySlotScope {
-  timeToY: VTimeToY
-}
+const WIDTH_FULL = 100
+const WIDTH_START = 95
+const MINUTES_IN_DAY = 1440
 
 /* @vue/component */
 export default CalendarBase.extend({
@@ -81,22 +75,25 @@ export default CalendarBase.extend({
     noEvents (): boolean {
       return this.events.length === 0
     },
-    parsedEvents (): VEventParsed[] {
+    parsedEvents (): CalendarEventParsed[] {
       return this.events.map((input, index) => parseEvent(input, index, this.eventStart, this.eventEnd))
     },
-    eventColorFunction (): VColorFunction {
+    parsedEventOverlapThreshold (): number {
+      return parseInt(this.eventOverlapThreshold)
+    },
+    eventColorFunction (): CalendarEventColorFunction {
       return typeof this.eventColor === 'function'
-        ? this.eventColor as VColorFunction
+        ? this.eventColor as CalendarEventColorFunction
         : () => (this.eventColor as string)
     },
-    eventTextColorFunction (): VColorFunction {
+    eventTextColorFunction (): CalendarEventColorFunction {
       return typeof this.eventTextColor === 'function'
-        ? this.eventTextColor as VColorFunction
+        ? this.eventTextColor as CalendarEventColorFunction
         : () => (this.eventTextColor as string)
     },
-    eventNameFunction (): VNameFunction {
+    eventNameFunction (): CalendarEventNameFunction {
       return typeof this.eventName === 'function'
-        ? this.eventName as VNameFunction
+        ? this.eventName as CalendarEventNameFunction
         : (event, timedEvent) => {
           const name = escapeHTML(event.input[this.eventName as string] as string)
           if (event.start.hasTime) {
@@ -104,7 +101,9 @@ export default CalendarBase.extend({
               const showStart = event.start.hour < 12 && event.end.hour >= 12
               const start = this.formatTime(event.start, showStart)
               const end = this.formatTime(event.end, true)
-              return `<strong>${name}</strong><br>${start} - ${end}`
+              const singline = diffMinutes(event.start, event.end) <= this.parsedEventOverlapThreshold
+              const separator = singline ? ', ' : '<br>'
+              return `<strong>${name}</strong>${separator}${start} - ${end}`
             } else {
               const time = this.formatTime(event.start, true)
               return `<strong>${time}</strong> ${name}`
@@ -112,6 +111,11 @@ export default CalendarBase.extend({
           }
           return name
         }
+    },
+    eventModeFunction (): CalendarEventOverlapMode {
+      return typeof this.eventOverlapMode === 'function'
+        ? this.eventOverlapMode as CalendarEventOverlapMode
+        : CalendarEventOverlapModes[this.eventOverlapMode]
     },
   },
 
@@ -138,19 +142,21 @@ export default CalendarBase.extend({
         if (!more) {
           break
         }
+
         const parentBounds = parent.getBoundingClientRect()
         const last = events.length - 1
         let hide = false
         let hidden = 0
+
         for (let i = 0; i <= last; i++) {
           if (!hide) {
             const eventBounds = events[i].getBoundingClientRect()
-            hide = (eventBounds.bottom + eventHeight > parentBounds.bottom && i !== last) ||
-                   events[i].style.display === 'none'
+            hide = i === last
+              ? (eventBounds.bottom > parentBounds.bottom)
+              : (eventBounds.bottom + eventHeight > parentBounds.bottom)
           }
           if (hide) {
-            const id = events[i].getAttribute('data-event') as string
-            this.hideEvents(id)
+            events[i].style.display = 'none'
             hidden++
           }
         }
@@ -162,15 +168,6 @@ export default CalendarBase.extend({
           more.style.display = 'none'
         }
       }
-    },
-    hideEvents (id: string) {
-      const elements = this.$refs.events as HTMLElement[]
-
-      elements.forEach(el => {
-        if (el.getAttribute('data-event') === id) {
-          el.style.display = 'none'
-        }
-      })
     },
     getEventsMap (): VDailyEventsMap {
       const eventsMap: VDailyEventsMap = {}
@@ -201,16 +198,29 @@ export default CalendarBase.extend({
 
       return eventsMap
     },
-    genDayEvent ({ offset, event }: VEventVisual, index: number, day: VDaySlotScope): VNode {
+    genDayEvent ({ event }: CalendarEventVisual, day: CalendarDaySlotScope): VNode {
       const eventHeight = this.eventHeight
       const eventMarginBottom = this.eventMarginBottom
-      const relativeOffset = (offset - index) * (eventHeight + eventMarginBottom) // 1 = margin bottom
       const dayIdentifier = getDayIdentifier(day)
+      const week = day.week
       const start = dayIdentifier === event.startIdentifier
-      const end = dayIdentifier === event.endIdentifier
+      let end = dayIdentifier === event.endIdentifier
+      let width = WIDTH_START
+      for (let i = day.index + 1; i < week.length; i++) {
+        const weekdayIdentifier = getDayIdentifier(week[i])
+        if (event.endIdentifier >= weekdayIdentifier) {
+          width += WIDTH_FULL
+          if (weekdayIdentifier === event.endIdentifier) {
+            end = true
+          }
+        } else {
+          end = true
+          break
+        }
+      }
       const scope = { event: event.input, day, outside: day.outside, start, end, timed: false }
 
-      return this.genEvent(event, scope, start || day.index === 0, false, {
+      return this.genEvent(event, scope, false, {
         staticClass: 'v-event',
         class: {
           'v-event-start': start,
@@ -218,44 +228,37 @@ export default CalendarBase.extend({
         },
         style: {
           height: `${eventHeight}px`,
-          top: `${relativeOffset}px`,
+          width: `${width}%`,
           'margin-bottom': `${eventMarginBottom}px`,
         },
         attrs: {
           'data-date': day.date,
-          'data-event': event.index,
         },
         key: event.index,
         ref: 'events',
         refInFor: true,
       })
     },
-    genTimedEvent ({ offset, event, columnCount, column }: VEventVisual, index: number, day: VDayBodySlotScope): VNode {
+    genTimedEvent ({ event, left, width }: CalendarEventVisual, day: CalendarDayBodySlotScope): VNode {
       const dayIdentifier = getDayIdentifier(day)
       const start = event.startIdentifier >= dayIdentifier
       const end = event.endIdentifier > dayIdentifier
       const top = start ? day.timeToY(event.start) : 0
-      const bottom = end ? day.timeToY(1440) : day.timeToY(event.end)
+      const bottom = end ? day.timeToY(MINUTES_IN_DAY) : day.timeToY(event.end)
       const height = Math.max(this.eventHeight, bottom - top)
-      const left = columnCount === -1
-        ? offset * 5
-        : column * 100 / columnCount
-      const right = columnCount === -1
-        ? 0
-        : Math.max(0, (columnCount - column - 2) * 100 / columnCount + 10)
       const scope = { event: event.input, day, outside: day.outside, start, end, timed: true }
 
-      return this.genEvent(event, scope, true, true, {
+      return this.genEvent(event, scope, true, {
         staticClass: 'v-event-timed',
         style: {
           top: `${top}px`,
           height: `${height}px`,
           left: `${left}%`,
-          right: `${right}%`,
+          width: `${width}%`,
         },
       })
     },
-    genEvent (event: VEventParsed, scope: object, showName: boolean, timedEvent: boolean, data: VNodeData): VNode {
+    genEvent (event: CalendarEventParsed, scope: object, timedEvent: boolean, data: VNodeData): VNode {
       const slot = this.$scopedSlots.event
       const text = this.eventTextColorFunction(event.input)
       const background = this.eventColorFunction(event.input)
@@ -272,10 +275,10 @@ export default CalendarBase.extend({
           })
         ), slot
           ? slot(scope)
-          : (showName ? [this.genName(event, timedEvent)] : undefined)
+          : [this.genName(event, timedEvent)]
       )
     },
-    genName (event: VEventParsed, timedEvent: boolean): VNode {
+    genName (event: CalendarEventParsed, timedEvent: boolean): VNode {
       return this.$createElement('div', {
         staticClass: 'pl-1',
         domProps: {
@@ -283,9 +286,29 @@ export default CalendarBase.extend({
         },
       })
     },
-    genMore (day: CalendarTimestamp): VNode {
+    genPlaceholder (day: CalendarTimestamp): VNode {
+      const height = this.eventHeight + this.eventMarginBottom
+
+      return this.$createElement('div', {
+        style: {
+          height: `${height}px`,
+        },
+        attrs: {
+          'data-date': day.date,
+        },
+        ref: 'events',
+        refInFor: true,
+      })
+    },
+    genMore (day: CalendarDaySlotScope): VNode {
+      const eventHeight = this.eventHeight
+      const eventMarginBottom = this.eventMarginBottom
+
       return this.$createElement('div', {
         staticClass: 'v-event-more pl-1',
+        class: {
+          'v-outside': day.outside,
+        },
         attrs: {
           'data-date': day.date,
           'data-more': 1,
@@ -299,165 +322,78 @@ export default CalendarBase.extend({
         },
         style: {
           display: 'none',
+          height: `${eventHeight}px`,
+          'margin-bottom': `${eventMarginBottom}px`,
         },
         ref: 'events',
         refInFor: true,
       })
     },
-    getEventsForDay (day: CalendarTimestamp): VEventParsed[] {
-      const identifier = getDayIdentifier(day)
+    getVisibleEvents (): CalendarEventParsed[] {
+      const start = getDayIdentifier(this.days[0])
+      const end = getDayIdentifier(this.days[this.days.length - 1])
 
       return this.parsedEvents.filter(
-        event => isEventOn(event, identifier)
+        event => isEventOverlapping(event, start, end)
       )
     },
-    getEventsForDayAll (day: CalendarTimestamp): VEventParsed[] {
+    getEventsForDay (day: CalendarTimestamp): CalendarEventParsed[] {
       const identifier = getDayIdentifier(day)
+      const firstWeekday = this.parsedWeekdays[0]
 
       return this.parsedEvents.filter(
-        event => event.allDay && isEventOn(event, identifier)
+        event => isEventStart(event, day, identifier, firstWeekday)
       )
     },
-    getEventsForDayTimed (day: CalendarTimestamp): VEventParsed[] {
+    getEventsForDayAll (day: CalendarTimestamp): CalendarEventParsed[] {
+      const identifier = getDayIdentifier(day)
+      const firstWeekday = this.parsedWeekdays[0]
+
+      return this.parsedEvents.filter(
+        event => event.allDay && isEventStart(event, day, identifier, firstWeekday)
+      )
+    },
+    getEventsForDayTimed (day: CalendarTimestamp): CalendarEventParsed[] {
       const identifier = getDayIdentifier(day)
 
       return this.parsedEvents.filter(
         event => !event.allDay && isEventOn(event, identifier)
       )
     },
-    isSameColumn (a: VEventVisual, b: VEventVisual): boolean {
-      const astart = parseTime(a.event.start) as number
-      const bstart = parseTime(b.event.start) as number
-      const diff = astart - bstart
-      const abs = diff < 0 ? -diff : diff
-
-      return abs < this.eventOverlapThreshold
-    },
-    isOverlapping (a: VEventVisual, b: VEventVisual): boolean {
-      const astart = parseTime(a.event.start) as number
-      const bstart = parseTime(b.event.start) as number
-
-      if (a.offset < b.offset && bstart < astart) {
-        const aend = astart + this.eventOverlapThreshold
-        const bend = parseTime(b.event.end) as number
-        return !(astart >= bend || aend <= bstart)
-      }
-
-      return false
-    },
     getScopedSlots () {
       if (this.noEvents) {
         return this.$scopedSlots
       }
 
-      /**
-       * Over the span of a week (for example) we want to maintain an event in the same row (for weekly and monthly views).
-       * We keep track of those rows by indexToOffset. If the value in that array is -1, then we can place an event at that spot.
-       * For a daily view with timed events we arrange them based on columns and offsets. If two or more events start at around the
-       * same time (eventOverlapThreshold) they go into columns. If one event starts inside another it is indented the appropriate amount.
-       * If one event overlaps another after those adjustments are made those events are placed in columns together instead of any defined
-       * indents.
-       */
+      const mode = this.eventModeFunction(
+        this.parsedEvents,
+        this.parsedWeekdays[0],
+        this.parsedEventOverlapThreshold
+      )
 
-      const parsedEvents = this.parsedEvents
-      const indexToOffset: number[] = parsedEvents.map(event => -1)
-      const resetOnWeekday = this.parsedWeekdays[0]
-
-      const checkReset: VEventResetCheck = day => {
-        if (day.weekday === resetOnWeekday) {
-          for (let i = 0; i < indexToOffset.length; i++) {
-            indexToOffset[i] = -1
-          }
-        }
-      }
-
-      const getOffset: VEventVisualGetOffset = (visual, visuals) => {
-        let offset = indexToOffset[visual.event.index]
-        if (offset === -1) {
-          let min = Number.MAX_SAFE_INTEGER
-          let max = -1
-          visuals.forEach(other => {
-            const otherOffset = indexToOffset[other.event.index]
-            if (otherOffset !== -1) {
-              min = Math.min(min, otherOffset)
-              max = Math.max(max, otherOffset)
-            }
-          })
-          offset = min > 0 && max !== -1 ? min - 1 : max + 1
-          indexToOffset[visual.event.index] = offset
-        }
-        return offset
-      }
-
-      const getVisuals: VEventVisualGetter = (events, timed) => {
-        const visuals: VEventVisual[] = events.map(event => ({ event, offset: 0, columnCount: -1, column: -1 }))
-        // sort events by start date/time
-        visuals.sort((a, b) => a.event.startTimestampIdentifier - b.event.startTimestampIdentifier)
-        if (timed) {
-          // timed events can be organized into columns
-          visuals.forEach(visual => {
-            if (visual.columnCount !== -1) {
-              return
-            }
-            const columns: VEventVisual[] = []
-            visuals.forEach(other => {
-              if (other.columnCount === -1 && this.isSameColumn(visual, other)) {
-                columns.push(other)
-              }
-            })
-            if (columns.length > 1) {
-              columns.forEach((visual, visualIndex) => {
-                visual.column = visualIndex
-                visual.columnCount = columns.length
-              })
-            }
-          })
-          // for any not organized into columns, if they overlap another event
-          // not in a column they are offset
-          visuals.forEach(visual => {
-            if (visual.columnCount === -1) {
-              visuals.forEach(other => {
-                const otherOffset = indexToOffset[other.event.index]
-                if (otherOffset !== -1 && other.event.endTimestampIdentifier <= visual.event.startTimestampIdentifier) {
-                  indexToOffset[other.event.index] = -1
-                }
-              })
-              visual.offset = getOffset(visual, visuals)
-            }
-          })
-          // for any not organized into columns, if a previous event overlaps this event
-          // join them into the columns
-          visuals.forEach(visual => {
-            if (visual.columnCount === -1) {
-              const columns: VEventVisual[] = [visual]
-              visuals.forEach(other => {
-                if (other !== visual && other.columnCount === -1 && this.isOverlapping(visual, other)) {
-                  columns.push(other)
-                }
-              })
-              if (columns.length > 1) {
-                columns.forEach((visual, visualIndex) => {
-                  visual.column = visualIndex
-                  visual.columnCount = columns.length
-                })
-              }
-            }
-          })
-        } else {
-          visuals.forEach(visual => {
-            visual.offset = getOffset(visual, visuals)
-          })
-        }
-        visuals.sort((a, b) => (a.offset - b.offset) || (a.column - b.column))
-        return visuals
-      }
-
-      const getSlotChildren = <D extends VDaySlotScope>(day: D, getter: VEventGetter, mapper: VEventVisualToNode<D>, timed: boolean) => {
-        checkReset(day)
+      const getSlotChildren: VEventsToNodes = (day, getter, mapper, timed) => {
         const events = getter(day)
-        return events.length === 0
-          ? undefined
-          : getVisuals(events, timed).map((visual, index) => mapper(visual, index, day))
+
+        if (events.length === 0) {
+          return
+        }
+
+        const visuals = mode(day, events, timed)
+
+        if (timed) {
+          return visuals.map(visual => mapper(visual, day))
+        }
+
+        const children: VNode[] = []
+
+        visuals.forEach((visual, index) => {
+          while (children.length < visual.column) {
+            children.push(this.genPlaceholder(day))
+          }
+          children.push(mapper(visual, day))
+        })
+
+        return children
       }
 
       const slots = this.$scopedSlots
@@ -467,7 +403,7 @@ export default CalendarBase.extend({
 
       return {
         ...slots,
-        day: (day: VDaySlotScope) => {
+        day: (day: CalendarDaySlotScope) => {
           let children = getSlotChildren(day, this.getEventsForDay, this.genDayEvent, false)
           if (children && children.length > 0 && this.eventMore) {
             children.push(this.genMore(day))
@@ -480,7 +416,7 @@ export default CalendarBase.extend({
           }
           return children
         },
-        'day-header': (day: VDaySlotScope) => {
+        'day-header': (day: CalendarDaySlotScope) => {
           let children = getSlotChildren(day, this.getEventsForDayAll, this.genDayEvent, false)
 
           if (slotDayHeader) {
@@ -491,7 +427,7 @@ export default CalendarBase.extend({
           }
           return children
         },
-        'day-body': (day: VDayBodySlotScope) => {
+        'day-body': (day: CalendarDayBodySlotScope) => {
           const events = getSlotChildren(day, this.getEventsForDayTimed, this.genTimedEvent, true)
           let children: VNode[] = [
             this.$createElement('div', {

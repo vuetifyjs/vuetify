@@ -4,16 +4,33 @@ export interface Theme {
   default: string | false
   options: {
     /** @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#Unsafe_inline_script */
-    cspNonce?: string | null
+    cspNonce?: string
     customProperties?: boolean
-    minifyTheme?: ((css: string) => string) | null
+    minifyTheme?: ThemeMinifyTheme
     themeCache?: VuetifyThemeCache
   }
   themes: {
-    dark: Partial<VuetifyThemeVariant>
-    light: Partial<VuetifyThemeVariant>
+    dark: VuetifyThemeVariant
+    light: VuetifyThemeVariant
   }
   readonly currentTheme: Partial<VuetifyThemeVariant>
+}
+
+export interface ThemeOptions {
+  dark?: boolean
+  disable?: boolean
+  default?: string | false
+  options?: {
+    /** @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#Unsafe_inline_script */
+    cspNonce?: string
+    customProperties?: boolean
+    minifyTheme?: ThemeMinifyTheme
+    themeCache?: VuetifyThemeCache
+  }
+  themes?: {
+    dark?: Partial<VuetifyThemeVariant>
+    light?: Partial<VuetifyThemeVariant>
+  }
 }
 
 export interface VuetifyThemes {
@@ -59,3 +76,5 @@ export interface VuetifyParsedThemeItem {
 }
 
 export type VuetifyThemeItem = Partial<VuetifyParsedThemeItem> | string | number | undefined
+
+export type ThemeMinifyTheme = ((css: string) => string) | null

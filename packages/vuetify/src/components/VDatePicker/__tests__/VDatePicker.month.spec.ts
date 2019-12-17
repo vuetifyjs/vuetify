@@ -6,6 +6,8 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 import Vue from 'vue'
+import { preset } from '../../../presets/default'
+import en from '../../../locale/en'
 
 Vue.prototype.$vuetify = {
   icons: {
@@ -27,10 +29,15 @@ describe('VDatePicker.ts', () => {
           $vuetify: {
             rtl: false,
             lang: new Lang({
-              locales: {
-                en: {
-                  datePicker: {
-                    itemsSelected: 'i has {0} items',
+              ...preset,
+              lang: {
+                current: 'en',
+                locales: {
+                  en: {
+                    ...en,
+                    datePicker: {
+                      itemsSelected: 'i has {0} items',
+                    },
                   },
                 },
               },
