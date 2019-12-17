@@ -265,9 +265,13 @@ export default mixins(
   methods: {
     emitInput (newInput: string) {
       if (this.range && this.value) {
-        this.value.length === 2
-          ? this.$emit('input', [newInput])
-          : this.$emit('input', [...this.value, newInput])
+        if (this.value.length === 2) {
+          this.$emit('input', [newInput])
+        } else {
+          const output = [...this.value, newInput]
+          this.$emit('input', output)
+          this.$emit('change', output)
+        }
         return
       }
 
