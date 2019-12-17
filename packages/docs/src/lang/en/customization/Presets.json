@@ -1,0 +1,33 @@
+{
+  "heading": "# Presets",
+  "headingText": "Global presets are a way of easily preconfiguring a Vuetify application with settings and styles. Originally introduced in MD2, the [Material Studies](https://material.io/design/material-studies/about-our-material-studies.html) provide examples for modifying the default styling of Material Design.",
+  "defaultHeading": "## Default preset",
+  "defaultText1": "The default Vuetify preset provides values for every option available for all services including language, styles and more.",
+  "materialHeading1": "## Material Studies",
+  "materialText1": "Material studies showcase the flexibility of Material Theming and components to create expressive and unique apps. There are 7 pre-configured presets based on the provided examples.",
+  "materialText2": "Below is a list of built in presets:",
+  "materialText3": [
+    "[Basil](https://material.io/design/material-studies/basil.html)",
+    "[Crane](https://material.io/design/material-studies/crane.html)",
+    "[Fortnightly](https://material.io/design/material-studies/fortnightly.html)",
+    "[Owl](https://material.io/design/material-studies/owl.html)",
+    "[Rally](https://material.io/design/material-studies/rally.html)",
+    "[Reply](https://material.io/design/material-studies/reply.html)",
+    "[Shrine](https://material.io/design/material-studies/shrine.html)"
+  ],
+  "materialHeading2": "### Installation",
+  "materialText4": "You can provide a custom global preset one of two ways. By passing its value as options when instantiating a new Vuetify instance, or by using the **preset** property.",
+  "materialHeading3": "### Merging strategy",
+  "materialText5": "Vuetify options are merged from the top down. The [default](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/presets/default/index.ts) preset is first merged with a provided **preset** property in the Vuetify constructor options. Finally, user provide options override the default and global options.",
+  "customHeading1": "## Custom presets",
+  "customText1": "A Vuetify Preset is an npm package that can provide framework wide options and custom styling using Vue CLI. These features include:",
+  "customText2": [
+    "configures framework options with a pre-defined values — can use any combination of the available [Vuetify options](#default-preset)",
+    "bootstraps custom SASS variables for configuring existing Vuetify components — presets use the [Vue CLI Plugin API](https://cli.vuejs.org/dev-guide/plugin-api.html#plugin-api) to hoist SASS variables during compilation",
+    "provides global overrides for styling that is not coverable through variables"
+  ],
+  "customText3": "A preset's folder structure looks like the following:",
+  "customAlert": "Custom presets can not themselves contain a **preset** property.",
+  "customHeading2": "### Development Guide",
+  "customText4": "Coming soon..."
+}

@@ -1,0 +1,7 @@
+.
+├── generator.js        # generator (optional)
+├── index.js            # service plugin
+└── preset
+    ├── index.js        # preset object
+    ├── overrides.sass  # global overrides
+    └── variables.scss  # SASS variables

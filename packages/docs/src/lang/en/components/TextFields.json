@@ -61,6 +61,10 @@
       "heading": "### Hint text",
       "desc": "The `hint` property on text fields adds the provided string beneath the text field. Using `persistent-hint` keeps the hint visible when the text field is not focused. Hint prop is **not** supported in solo mode."
     },
+    "hide-details": {
+      "header": "### Auto hiding details",
+      "desc": "When `hide-details` is set to `auto` messages will be rendered only if there's a message (hint, error message, counter value etc) to display."
+    },
     "prefixes-and-suffixes": {
       "heading": "### Prefixes & suffixes",
       "desc": "The `prefix` and `suffix` properties allows you to prepend and append inline non-modifiable text next to the text field."

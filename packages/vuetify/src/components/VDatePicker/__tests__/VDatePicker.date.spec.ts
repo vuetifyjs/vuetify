@@ -7,6 +7,7 @@ import {
 import { Lang } from '../../../services/lang'
 import VDatePicker from '../VDatePicker'
 import Vue from 'vue'
+import { preset } from '../../../presets/default'
 
 Vue.prototype.$vuetify = {
   icons: {
@@ -27,10 +28,14 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
         mocks: {
           $vuetify: {
             lang: new Lang({
-              locales: {
-                en: {
-                  datePicker: {
-                    itemsSelected: 'i has {0} items',
+              ...preset,
+              lang: {
+                current: 'en',
+                locales: {
+                  en: {
+                    datePicker: {
+                      itemsSelected: 'i has {0} items',
+                    },
                   },
                 },
               },
