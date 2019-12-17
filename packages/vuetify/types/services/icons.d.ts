@@ -16,6 +16,7 @@ export interface IconsOptions {
    * mdi: <a href="https://materialdesignicons.com">MDI</a>
    * fa: <a href="https://fontawesome.com/get-started/web-fonts-with-css">FontAwesome 5</a>
    * fa4: <a href="">FontAwesome 4</a> TODO: link
+   * faSvg: <a href="https://fontawesome.com/how-to-use/on-the-web/using-with/vuejs">FontAwesome SVG</a>
    */
   iconfont?: Iconfont
   values?: Partial<VuetifyIcons>
