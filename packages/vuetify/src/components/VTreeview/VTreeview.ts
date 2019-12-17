@@ -156,7 +156,7 @@ export default mixins(
     openAll: {
       immediate: true,
       handler (value: boolean) {
-        value && this.$nextTick(() => this.updateAll(true))
+        this.$nextTick(() => this.updateAll(value))
       },
     },
   },
