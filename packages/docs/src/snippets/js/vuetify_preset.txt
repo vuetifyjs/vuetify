@@ -1,5 +1,3 @@
-// src/presets/index.js
-
 import 'variables.scss'
 
 import colors from 'vuetify/lib/util/colors'

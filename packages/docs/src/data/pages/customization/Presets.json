@@ -94,21 +94,34 @@
           "lang": "customText1"
         },
         {
+          "type": "text",
+          "lang": "customText2"
+        },
+        {
+          "type": "text",
+          "lang": "customText3"
+        },
+        {
+          "type": "markup",
+          "value": "bash_preset_folder_structure"
+        },
+        {
           "type": "alert",
           "lang": "customAlert",
           "value": "warning"
         },
         {
-          "type": "markup",
-          "value": "js_vuetify_preset"
-        },
-        {
-          "type": "heading",
-          "lang": "customHeading2"
-        },
-        {
-          "type": "text",
-          "lang": "customText2"
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "customHeading2"
+            },
+            {
+              "type": "text",
+              "lang": "customText4"
+            }
+          ]
         }
       ]
     },

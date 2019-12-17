@@ -2,7 +2,7 @@
 
 import Vue from 'vue'
 import Vuetify from 'vuetify/lib'
-import { preset } from 'vuetify/lib/presets/shrine'
+import { preset } from 'vue-cli-plugin-vuetify-preset-shrine/preset'
 
 Vue.use(Vuetify)
 
