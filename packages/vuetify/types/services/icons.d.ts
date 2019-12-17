@@ -1,7 +1,14 @@
 // Types
 import { Component } from 'vue'
 
-export interface Icons {
+export interface Icons extends IconsOptions {
+  iconfont: Iconfont
+  values: VuetifyIcons
+}
+
+export type Iconfont = 'mdi' | 'mdiSvg' | 'md' | 'fa' | 'fa4'
+
+export interface IconsOptions {
   /**
    * Select a base icon font to use. Note that none of these are included, you must install them yourself
    *
@@ -10,7 +17,7 @@ export interface Icons {
    * fa: <a href="https://fontawesome.com/get-started/web-fonts-with-css">FontAwesome 5</a>
    * fa4: <a href="">FontAwesome 4</a> TODO: link
    */
-  iconfont: 'mdi' | 'mdiSvg' | 'md' | 'fa' | 'fa4' // TODO: camelCase
+  iconfont?: Iconfont
   values?: Partial<VuetifyIcons>
 }
 

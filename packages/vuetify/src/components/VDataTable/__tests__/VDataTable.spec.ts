@@ -5,13 +5,14 @@ import {
   MountOptions,
 } from '@vue/test-utils'
 import { Breakpoint } from '../../../services/breakpoint'
-import { Lang } from '../../../services/lang'
 import ripple from '../../../directives/ripple/index'
 import Vue from 'vue'
+import { Lang } from '../../../services/lang'
+import { preset } from '../../../presets/default'
 
 Vue.prototype.$vuetify = {
   rtl: false,
-  lang: new Lang(),
+  lang: new Lang(preset),
 }
 Vue.directive('ripple', ripple)
 
@@ -123,8 +124,8 @@ describe('VDataTable.ts', () => {
       return mount(VDataTable, {
         mocks: {
           $vuetify: {
-            breakpoint: new Breakpoint(),
-            lang: new Lang(),
+            breakpoint: new Breakpoint(preset),
+            lang: new Lang(preset),
             theme: {
               dark: false,
             },

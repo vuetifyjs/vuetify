@@ -78,7 +78,7 @@ goTo.framework = {} as Record<string, VuetifyServiceContract>
 goTo.init = () => {}
 
 export class Goto extends Service {
-  public static property = 'goTo'
+  public static property: 'goTo' = 'goTo'
 
   constructor () {
     super()

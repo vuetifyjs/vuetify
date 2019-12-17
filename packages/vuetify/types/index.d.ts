@@ -9,18 +9,24 @@ import { Breakpoint } from './services/breakpoint'
 import { Icons } from './services/icons'
 import { Lang } from './services/lang'
 import { Theme } from './services/theme'
+import {
+  Presets,
+  UserVuetifyPreset,
+  VuetifyPreset,
+} from './services/presets'
 
 // Service Options
 import { GoToOptions } from './services/goto'
-import { VuetifyPreset } from './presets'
 
 declare const Vuetify: Vuetify
 export default Vuetify
 export interface Vuetify {
-  install: PluginFunction<VuetifyUseOptions>
-  version: string
   framework: Framework
-  new (preset?: Partial<VuetifyPreset>): Vuetify
+  install: PluginFunction<VuetifyUseOptions>
+  preset: VuetifyPreset
+  userPreset: UserVuetifyPreset
+  version: string
+  new (preset?: Partial<UserVuetifyPreset>): Vuetify
 }
 
 export type ComponentOrPack = Component & {
@@ -40,6 +46,7 @@ export interface Framework {
   theme: Theme
   icons: Icons
   lang: Lang
+  presets: Presets
   rtl: boolean
 }
 
@@ -201,6 +208,6 @@ export interface DataTableHeader<T extends any = any> {
 }
 
 export type DataItemsPerPageOption = (number | {
-  text: string;
-  value: number;
+  text: string
+  value: number
 });
