@@ -55,10 +55,14 @@ function getNamespace (namespace) {
   }
 }
 
-function addFooterAd (children) {
+function addFooterAd (children = []) {
   if (!children.length) return
 
-  children[children.length - 1].children.push({ type: 'ad-exit' })
+  const index = children.length - 1
+  const childChildren = children[index].children || []
+
+  childChildren.push({ type: 'ad-exit' })
+  children[index].children = childChildren
 }
 
 const state = {

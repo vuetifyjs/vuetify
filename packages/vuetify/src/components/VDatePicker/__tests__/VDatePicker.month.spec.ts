@@ -293,4 +293,25 @@ describe('VDatePicker.ts', () => {
     wrapper.findAll('.v-date-picker-table--month tbody tr+tr td:first-child button').at(0).trigger('dblclick')
     expect(dblclick).toHaveBeenCalledWith('2013-04')
   })
+
+  it('should handle date range select', async () => {
+    const cb = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        range: true,
+        type: 'month',
+        value: [],
+      },
+    })
+
+    wrapper.vm.$on('input', cb)
+    wrapper.find('.v-date-picker-table--month tbody tr:first-child td:nth-child(3) button').trigger('click')
+    expect(cb.mock.calls[0][0]).toEqual(
+      expect.arrayContaining(['2019-03'])
+    )
+
+    wrapper.find('.v-date-picker-table--month tbody tr:first-child+tr+tr td:nth-child(2) button').trigger('click')
+    expect(cb.mock.calls[0][0][0]).toBe('2019-03')
+    expect(cb.mock.calls[1][0][0]).toBe('2019-08')
+  })
 })

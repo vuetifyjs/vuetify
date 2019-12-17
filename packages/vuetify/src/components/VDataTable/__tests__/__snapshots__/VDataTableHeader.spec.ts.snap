@@ -541,6 +541,7 @@ exports[`VDataTableHeader.ts mobile should render 1`] = `
                          readonly="readonly"
                          type="text"
                          aria-readonly="true"
+                         autocomplete="off"
                   >
                 </div>
                 <div class="v-input__append-inner">
@@ -605,6 +606,7 @@ exports[`VDataTableHeader.ts mobile should render with data-table-select header 
                          readonly="readonly"
                          type="text"
                          aria-readonly="true"
+                         autocomplete="off"
                   >
                 </div>
                 <div class="v-input__append-inner">
@@ -671,6 +673,7 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
                          readonly="readonly"
                          type="text"
                          aria-readonly="true"
+                         autocomplete="off"
                   >
                 </div>
                 <div class="v-input__append-inner">
@@ -726,6 +729,7 @@ exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
                          readonly="readonly"
                          type="text"
                          aria-readonly="true"
+                         autocomplete="off"
                   >
                 </div>
                 <div class="v-input__append-inner">
@@ -792,6 +796,7 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
                          readonly="readonly"
                          type="text"
                          aria-readonly="true"
+                         autocomplete="off"
                   >
                 </div>
                 <div class="v-input__append-inner">
@@ -860,6 +865,7 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
                          readonly="readonly"
                          type="text"
                          aria-readonly="true"
+                         autocomplete="off"
                   >
                 </div>
                 <div class="v-input__append-inner">

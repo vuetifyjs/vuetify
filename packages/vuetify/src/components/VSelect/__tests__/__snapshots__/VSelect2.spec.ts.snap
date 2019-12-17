@@ -18,6 +18,7 @@ exports[`VSelect.ts should be clearable with prop, dirty and multi select 1`] = 
                  readonly="readonly"
                  type="text"
                  aria-readonly="true"
+                 autocomplete="off"
           >
         </div>
         <div class="v-input__append-inner">
@@ -80,6 +81,7 @@ exports[`VSelect.ts should be clearable with prop, dirty and single select 1`] =
                  readonly="readonly"
                  type="text"
                  aria-readonly="true"
+                 autocomplete="off"
           >
         </div>
         <div class="v-input__append-inner">
@@ -142,6 +144,7 @@ exports[`VSelect.ts should use scoped slot for selection generation 1`] = `
                  readonly="readonly"
                  type="text"
                  aria-readonly="true"
+                 autocomplete="off"
           >
         </div>
         <div class="v-input__append-inner">

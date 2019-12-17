@@ -129,10 +129,12 @@ function render (req, res) {
       res.redirect(err.url)
     } else if (err.code === 404) {
       res.status(404).send('404 | Page Not Found')
-    } else {
+    } else if (process.env.NODE_ENV !== 'production') {
       ouchInstance.handleException(err, req, res, output => {
         console.log('Error handled!', err)
       })
+    } else {
+      res.status(500)
     }
   }
 
