@@ -97,9 +97,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
       if (!this.overlay) this.createOverlay()
 
       if (!document.hidden) {
-        requestAnimationFrame(() => {
-          this.declareOverlay()
-        })
+        requestAnimationFrame(this.declareOverlay())
       } else {
         this.declareOverlay()
       }
