@@ -297,7 +297,6 @@ describe('VSelect.ts', () => {
     const input = wrapper.find('input')
     const slot = wrapper.find('.v-input__slot')
     slot.trigger('click')
-    await wrapper.vm.$nextTick()
 
     input.trigger('keydown.down')
     await wrapper.vm.$nextTick()
