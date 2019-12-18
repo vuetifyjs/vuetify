@@ -38,6 +38,11 @@
         {
           "type": "markup",
           "value": "js_testing_vue_setup"
+        },
+        {
+          "type": "alert",
+          "lang": "setupInfo1",
+          "value": "info"
         }
       ]
     },

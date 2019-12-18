@@ -12,6 +12,7 @@
   ],
   "setupHeading": "## Bootstrapping Vuetify",
   "setupText1": "In order to properly utilize Typescript, Vuetify components extend the Vue object. This has the potential to [cause issues](https://github.com/vuetifyjs/vuetify/issues/4068) as noted in the above alert. Instead of using a [localVue instance](https://vue-test-utils.vuejs.org/api/options.html#localvue) we must instead install Vuetify globally in the unit tests setup file. This can vary between test runners. Make sure to reference the appropriate documentation on setup files.",
+  "setupInfo1": "If you are not using a `setup.js` file, you should add `Vue.use(Vuetify)` in the utilities section of your test.",
   "specHeader": "## Spec tests",
   "specText1": "Creating unit tests in Vuetify are similar to **vuex** and **vue-router** in that you will use the Vuetify object in a **localVue** instance and pass an instance to the mount functions options.",
   "specText2": "Let's create an example test use-case that we might find in our application.",
