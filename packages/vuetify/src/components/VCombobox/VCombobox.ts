@@ -103,9 +103,7 @@ export default VAutocomplete.extend({
       // If has menu index, let v-select-list handle
       if (this.getMenuIndex() > -1) return
 
-      this.$nextTick(() => {
-        this.updateSelf()
-      })
+      this.$nextTick(this.updateSelf)
     },
     onFilteredItemsChanged (val: never[], oldVal: never[]) {
       if (!this.autoSelectFirst) return
