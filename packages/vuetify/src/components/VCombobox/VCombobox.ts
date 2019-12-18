@@ -100,10 +100,10 @@ export default VAutocomplete.extend({
     // to overwrite removal in v-autocomplete
     onEnterDown (e: Event) {
       e.preventDefault()
+      // If has menu index, let v-select-list handle
+      if (this.getMenuIndex() > -1) return
 
       this.$nextTick(() => {
-        // If has menu index, let v-select-list handle
-        if (this.getMenuIndex() > -1) return
         this.updateSelf()
       })
     },
