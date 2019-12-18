@@ -495,6 +495,16 @@ describe('VAutocomplete.ts', () => {
     expect(wrapper.vm.genSelections()).toEqual([])
   })
 
+  it('should change autocomplete attribute', () => {
+    const wrapper = mountFunction({
+      attrs: {
+        autocomplete: 'on',
+      },
+    })
+
+    expect(wrapper.vm.$attrs.autocomplete).toBe('on')
+  })
+
   it('should not delete item if readonly', async () => {
     const wrapper = mountFunction({
       propsData: {

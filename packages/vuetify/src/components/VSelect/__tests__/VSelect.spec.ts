@@ -441,4 +441,14 @@ describe('VSelect.ts', () => {
     expect(wrapper.vm.$slots['no-data']).toBeTruthy()
     expect(list.html()).toMatchSnapshot()
   })
+
+  it('should change autocomplete attribute', () => {
+    const wrapper = mountFunction({
+      attrs: {
+        autocomplete: 'on',
+      },
+    })
+
+    expect(wrapper.vm.$attrs.autocomplete).toBe('on')
+  })
 })

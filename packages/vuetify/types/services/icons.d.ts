@@ -9,6 +9,7 @@ export interface Icons {
    * mdi: <a href="https://materialdesignicons.com">MDI</a>
    * fa: <a href="https://fontawesome.com/get-started/web-fonts-with-css">FontAwesome 5</a>
    * fa4: <a href="">FontAwesome 4</a> TODO: link
+   * faSvg: <a href="https://fontawesome.com/how-to-use/on-the-web/using-with/vuejs">FontAwesome SVG</a>
    */
   iconfont: 'mdi' | 'mdiSvg' | 'md' | 'fa' | 'fa4' // TODO: camelCase
   values?: Partial<VuetifyIcons>

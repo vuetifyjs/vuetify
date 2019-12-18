@@ -418,6 +418,7 @@ export default baseMixins.extend<options>().extend({
       input.data!.attrs!.readonly = true
       input.data!.attrs!.type = 'text'
       input.data!.attrs!['aria-readonly'] = true
+      input.data!.attrs!.autocomplete = input.data!.attrs!.autocomplete || 'off'
       input.data!.on!.keypress = this.onKeyPress
 
       return input
