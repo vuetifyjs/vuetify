@@ -45,6 +45,9 @@ describe('CustomCard.vue', () => {
     const wrapper = mount(CustomCard, {
       localVue,
       vuetify,
+      propsData: {
+        title: 'Foobar',
+      },
     })
 
     const event = jest.fn()
