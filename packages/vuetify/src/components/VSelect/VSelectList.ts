@@ -31,6 +31,8 @@ import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
+type ListTile = { item: any, disabled?: null | boolean, value?: boolean, index: number };
+
 /* @vue/component */
 export default mixins(Colorable, Themeable).extend({
   name: 'v-select-list',
@@ -149,7 +151,7 @@ export default mixins(Colorable, Themeable).extend({
       index,
       disabled = null,
       value = false,
-    }: { item: any, disabled?: null | boolean, value?: boolean, index: number }): VNode | VNode[] | undefined {
+    }: ListTile): VNode | VNode[] | undefined {
       if (!value) value = this.hasItem(item)
 
       if (item === Object(item)) {
