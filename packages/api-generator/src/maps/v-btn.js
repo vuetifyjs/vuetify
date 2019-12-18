@@ -6,5 +6,11 @@ module.exports = {
         props: undefined,
       },
     ],
+    events: [
+      {
+        name: 'click',
+        value: 'Event',
+      },
+    ],
   },
 }
