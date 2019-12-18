@@ -45,7 +45,6 @@
   font-weight: $btn-font-weight
   letter-spacing: $btn-letter-spacing
   justify-content: center
-  max-width: 100%
   outline: 0
   position: relative
   text-decoration: none
@@ -199,13 +198,13 @@
       .v-icon
         height: #{$size}px
         font-size: #{$size}px
-        min-width: #{$size}px
+        width: #{$size}px
 
 .v-btn--icon
   @each $name, $size in $btn-sizes
     &.v-size--#{$name}
       height: #{$size}px
-      min-width: #{$size}px
+      width: #{$size}px
 
 .v-btn--fab
   &.v-btn--contained
@@ -224,7 +223,7 @@
   @each $name, $size in $fab-sizes
     &.v-size--#{$name}
       height: #{$size}px
-      min-width: #{$size}px
+      width: #{$size}px
 
       &.v-btn--absolute
         &.v-btn--bottom
