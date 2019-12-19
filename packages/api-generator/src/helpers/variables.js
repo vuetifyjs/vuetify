@@ -195,7 +195,7 @@ const VSelect = {
     },
     {
       name: 'menuProps',
-      default: '{"closeOnClick":false, "closeOnContentClick":false, "openOnClick":false, "maxHeight":300}',
+      default: '{ "closeOnClick": false, "closeOnContentClick": false, "disableKeys": true, "openOnClick": false, "maxHeight": 304 }',
     },
   ],
   slots: selectSlots.concat([
