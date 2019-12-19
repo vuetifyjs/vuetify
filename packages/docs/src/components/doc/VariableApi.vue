@@ -20,6 +20,7 @@
             <v-autocomplete
               v-model="selectedComponent"
               :class="$vuetify.breakpoint.mdAndUp ? '' : 'mb-6'"
+              :clearable="selectedComponent !== 'globals'"
               :items="components"
               :menu-props="{offsetY: true, contentClass: 'primary'}"
               label="Available Component(s)"
@@ -106,7 +107,11 @@
 
     watch: {
       selectedComponent (component) {
-        this.variables = (variableApi && variableApi[component]) || []
+        if (!component) {
+          this.selectedComponent = 'globals'
+        } else {
+          this.variables = (variableApi && variableApi[component]) || []
+        }
       },
     },
 
