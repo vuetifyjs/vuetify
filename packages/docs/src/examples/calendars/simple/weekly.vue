@@ -47,7 +47,7 @@
   export default {
     data: () => ({
       today: '2019-01-08',
-      events: [
+      eventsMap: [
         {
           name: 'Weekly Meeting',
           start: '2019-01-07 09:00',
