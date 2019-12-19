@@ -11,7 +11,7 @@ export interface Icons {
    * fa4: <a href="">FontAwesome 4</a> TODO: link
    * faSvg: <a href="https://fontawesome.com/how-to-use/on-the-web/using-with/vuejs">FontAwesome SVG</a>
    */
-  iconfont: 'mdi' | 'mdiSvg' | 'md' | 'fa' | 'fa4' // TODO: camelCase
+  iconfont: 'mdi' | 'mdiSvg' | 'md' | 'fa' | 'fa4' | 'faSvg' // TODO: camelCase
   values?: Partial<VuetifyIcons>
 }
 
