@@ -214,7 +214,6 @@ export default mixins(
         // This fixed bug with dynamic children resetting selected parent state
         if (!this.nodes.hasOwnProperty(key) && parent !== null && this.nodes.hasOwnProperty(parent)) {
           node.isSelected = this.nodes[parent].isSelected
-          node.isIndeterminate = this.nodes[parent].isIndeterminate
         } else {
           node.isSelected = oldNode.isSelected
           node.isIndeterminate = oldNode.isIndeterminate
