@@ -21,7 +21,7 @@ export default mixins(Measurable).extend({
     computedAspectRatio (): number {
       return Number(this.aspectRatio)
     },
-    containerAspectStyle (): object | undefined {
+    sizerAspectStyle (): object | undefined {
       return this.computedAspectRatio
         ? { paddingTop: (1 / this.computedAspectRatio) * 100 + '%' }
         : undefined
@@ -36,16 +36,21 @@ export default mixins(Measurable).extend({
   methods: {
     genContent (): VNode {
       return this.$createElement('div', {
-        staticClass: 'v-responsive__content',
-        style: this.contentAspectStyle,
-      }, this.$slots.default)
+        staticClass: 'v-responsive__sizer',
+        style: this.sizerAspectStyle,
+      }, [
+        this.$createElement('div', {
+          staticClass: 'v-responsive__content',
+          style: this.contentAspectStyle,
+        }, this.$slots.default),
+      ])
     },
   },
 
   render (h): VNode {
     return h('div', {
       staticClass: 'v-responsive',
-      style: { ...this.measurableStyles, ...this.containerAspectStyle },
+      style: this.measurableStyles,
       on: this.$listeners,
     }, [
       this.genContent(),

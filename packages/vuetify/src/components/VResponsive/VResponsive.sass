@@ -6,9 +6,15 @@
   flex: 1 0 auto
   max-width: 100%
   display: flex
-  transition: padding-top 0.2s map-get($transition, 'swing')
 
+  &__sizer
+    display: flex
+    transition: padding-top 0.2s map-get($transition, 'swing')
+
+  &__content
+    transition: margin-top 0.2s map-get($transition, 'swing')
+
+  &__sizer,
   &__content
     flex: 1 0 0px
     max-width: 100%
-    transition: margin-top 0.2s map-get($transition, 'swing')
