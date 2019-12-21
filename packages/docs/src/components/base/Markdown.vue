@@ -116,8 +116,8 @@
       if (wantsList) code = code.map(c => `- ${c}\n`).join('')
 
       if (typeof code !== 'string') {
-        code = ''
         console.log(code, typeof code)
+        code = ''
       }
 
       // Convert markdown links

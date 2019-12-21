@@ -99,6 +99,11 @@
     "description": "Vuetify is configurable and compatible with RTL languages.",
     "keywords": "rtl, right-to-left, bidirectionality"
   },
+  "customization/presets": {
+    "title": "Presets",
+    "description": "Easily setup customized Vuetify options and styles.",
+    "keywords": "vuetify presets"
+  },
   "customization/sass-variables": {
     "title": "SASS variables",
     "description": "Customize Vuetify's internal styles by modifying SASS variables.",

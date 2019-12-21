@@ -332,7 +332,7 @@ export default VDataIterator.extend({
 
       if (this.$scopedSlots['group.header']) {
         children.unshift(this.$createElement('template', { slot: 'column.header' }, [
-          this.$scopedSlots['group.header']!({ group, groupBy: props.options.groupBy, items, headers: this.computedHeaders, toggle: toggleFn, remove: removeFn }),
+          this.$scopedSlots['group.header']!({ group, groupBy: props.options.groupBy, items, headers: this.computedHeaders, isOpen, toggle: toggleFn, remove: removeFn }),
         ]))
       } else {
         const toggle = this.$createElement(VBtn, {

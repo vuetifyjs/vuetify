@@ -716,6 +716,22 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     expect(focus).toHaveBeenCalledTimes(1)
   })
 
+  it('should hide messages if no messages and hide-details is auto', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        hideDetails: 'auto',
+      },
+    })
+
+    expect(wrapper.vm.genMessages()).toBeNull()
+
+    wrapper.setProps({ counter: 7 })
+    expect(wrapper.vm.genMessages()).not.toBeNull()
+
+    wrapper.setProps({ counter: null, errorMessages: 'required' })
+    expect(wrapper.vm.genMessages()).not.toBeNull()
+  })
+
   // https://github.com/vuetifyjs/vuetify/issues/8268
   // TODO: this fails without sync, nextTick doesn't help
   // https://github.com/vuejs/vue-test-utils/issues/1130

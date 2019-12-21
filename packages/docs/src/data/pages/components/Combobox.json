@@ -22,6 +22,11 @@
           "type": "alert",
           "lang": "Components.Selects.objectAlert",
           "value": "error"
+        },
+        {
+          "type": "alert",
+          "lang": "Components.Selects.autocompleteAlert",
+          "value": "info"
         }
       ]
     },

@@ -57,6 +57,6 @@ describe('events.ts', () => {
       end: '2019-02-15',
     }, 0, 'start', 'end')
 
-    expect(fn).toThrow('The start property is required on all events to be a valid timestamp in the format YYYY-MM-DD or YYYY-MM-DD hh:mm')
+    expect(fn).toThrow('undefined is not a valid timestamp. It must be in the format of YYYY-MM-DD or YYYY-MM-DD hh:mm. Zero-padding is optional and seconds are ignored.')
   })
 })

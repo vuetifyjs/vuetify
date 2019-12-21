@@ -20,6 +20,7 @@ import {
 // Types
 import { VNode, VNodeData, PropType } from 'vue'
 import mixins from '../../util/mixins'
+import { InputValidationRule } from 'types'
 
 const baseMixins = mixins(
   BindsAttrs,
@@ -45,7 +46,7 @@ export default baseMixins.extend<options>().extend({
     },
     dense: Boolean,
     height: [Number, String],
-    hideDetails: Boolean,
+    hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
     hint: String,
     id: String,
     label: String,
@@ -66,7 +67,7 @@ export default baseMixins.extend<options>().extend({
     classes (): object {
       return {
         'v-input--has-state': this.hasState,
-        'v-input--hide-details': this.hideDetails,
+        'v-input--hide-details': !this.showDetails,
         'v-input--is-label-active': this.isLabelActive,
         'v-input--is-dirty': this.isDirty,
         'v-input--is-disabled': this.disabled,
@@ -109,6 +110,22 @@ export default baseMixins.extend<options>().extend({
     },
     isLabelActive (): boolean {
       return this.isDirty
+    },
+    messagesToDisplay (): string[] {
+      if (this.hasHint) return [this.hint]
+
+      if (!this.hasMessages) return []
+
+      return this.validations.map((validation: string | InputValidationRule) => {
+        if (typeof validation === 'string') return validation
+
+        const validationResult = validation(this.internalValue)
+
+        return typeof validationResult === 'string' ? validationResult : ''
+      }).filter(message => message !== '')
+    },
+    showDetails (): boolean {
+      return this.hideDetails === false || (this.hideDetails === 'auto' && this.messagesToDisplay.length > 0)
     },
   },
 
@@ -216,18 +233,14 @@ export default baseMixins.extend<options>().extend({
       }, this.$slots.label || this.label)
     },
     genMessages () {
-      if (this.hideDetails) return null
-
-      const messages = this.hasHint
-        ? [this.hint]
-        : this.validations
+      if (!this.showDetails) return null
 
       return this.$createElement(VMessages, {
         props: {
           color: this.hasHint ? '' : this.validationState,
           dark: this.dark,
           light: this.light,
-          value: (this.hasMessages || this.hasHint) ? messages : [],
+          value: this.messagesToDisplay,
         },
         attrs: {
           role: this.hasMessages ? 'alert' : null,

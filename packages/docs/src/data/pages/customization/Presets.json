@@ -1,0 +1,141 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "defaultHeading"
+        },
+        {
+          "type": "text",
+          "lang": "defaultText1"
+        },
+        {
+          "type": "markup",
+          "value": "ts_default_preset"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "materialHeading1"
+        },
+        {
+          "type": "text",
+          "lang": "materialText1"
+        },
+        {
+          "type": "text",
+          "lang": "materialText2"
+        },
+        {
+          "type": "text",
+          "lang": "materialText3"
+        },
+        {
+          "type": "text",
+          "lang": "materialText4"
+        },
+        {
+          "type": "markup",
+          "value": "js_vuetify_use_preset"
+        },
+        {
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "materialHeading2"
+            },
+            {
+              "type": "text",
+              "lang": "materialText4"
+            },
+            {
+              "type": "markup",
+              "value": "js_vuetify_use_preset"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "materialHeading3"
+            },
+            {
+              "type": "text",
+              "lang": "materialText5"
+            },
+            {
+              "type": "markup",
+              "value": "js_vuetify_merge_strategy"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "customHeading1"
+        },
+        {
+          "type": "text",
+          "lang": "customText1"
+        },
+        {
+          "type": "text",
+          "lang": "customText2"
+        },
+        {
+          "type": "text",
+          "lang": "customText3"
+        },
+        {
+          "type": "markup",
+          "value": "bash_preset_folder_structure"
+        },
+        {
+          "type": "alert",
+          "lang": "customAlert",
+          "value": "warning"
+        },
+        {
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "customHeading2"
+            },
+            {
+              "type": "text",
+              "lang": "customText4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "customization/accessibility",
+            "customization/internationalization"
+          ]
+        }
+      ]
+    }
+  ]
+}
