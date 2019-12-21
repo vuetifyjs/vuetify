@@ -21,18 +21,15 @@ export default mixins(Measurable).extend({
     computedAspectRatio (): number {
       return Number(this.aspectRatio)
     },
-    aspectStyle (): object | undefined {
+    containerAspectStyle (): object | undefined {
       return this.computedAspectRatio
-        ? { paddingBottom: (1 / this.computedAspectRatio) * 100 + '%' }
+        ? { paddingTop: (1 / this.computedAspectRatio) * 100 + '%' }
         : undefined
     },
-    __cachedSizer (): VNode | [] {
-      if (!this.aspectStyle) return []
-
-      return this.$createElement('div', {
-        style: this.aspectStyle,
-        staticClass: 'v-responsive__sizer',
-      })
+    contentAspectStyle (): object | undefined {
+      return this.computedAspectRatio
+        ? { marginTop: -1 * (1 / this.computedAspectRatio) * 100 + '%' }
+        : undefined
     },
   },
 
@@ -40,6 +37,7 @@ export default mixins(Measurable).extend({
     genContent (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-responsive__content',
+        style: this.contentAspectStyle,
       }, this.$slots.default)
     },
   },
@@ -47,10 +45,9 @@ export default mixins(Measurable).extend({
   render (h): VNode {
     return h('div', {
       staticClass: 'v-responsive',
-      style: this.measurableStyles,
+      style: { ...this.measurableStyles, ...this.containerAspectStyle },
       on: this.$listeners,
     }, [
-      this.__cachedSizer,
       this.genContent(),
     ])
   },

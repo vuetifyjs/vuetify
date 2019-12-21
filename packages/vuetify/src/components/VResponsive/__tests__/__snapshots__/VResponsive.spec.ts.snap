@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VResponsive.ts should force aspect ratio 1`] = `
-<div class="v-responsive">
-  <div class="v-responsive__sizer"
-       style="padding-bottom: 56.25%;"
+<div class="v-responsive"
+     style="padding-top: 56.25%;"
+>
+  <div class="v-responsive__content"
+       style="margin-top: -56.25%;"
   >
-  </div>
-  <div class="v-responsive__content">
   </div>
 </div>
 `;
