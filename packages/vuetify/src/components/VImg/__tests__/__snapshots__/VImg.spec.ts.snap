@@ -13,7 +13,9 @@ exports[`VImg.ts should display placeholders 1`] = `
       loading...
     </div>
   </div>
-  <div class="v-responsive__content">
+  <div class="v-responsive__sizer">
+    <div class="v-responsive__content">
+    </div>
   </div>
 </div>
 `;
@@ -31,7 +33,9 @@ exports[`VImg.ts should display placeholders 2`] = `
       loading...
     </div>
   </div>
-  <div class="v-responsive__content">
+  <div class="v-responsive__sizer">
+    <div class="v-responsive__content">
+    </div>
   </div>
 </div>
 `;
@@ -47,7 +51,9 @@ exports[`VImg.ts should have aria attributes 1`] = `
        mode="in-out"
   >
   </div>
-  <div class="v-responsive__content">
+  <div class="v-responsive__sizer">
+    <div class="v-responsive__content">
+    </div>
   </div>
 </div>
 `;
@@ -60,7 +66,9 @@ exports[`VImg.ts should load 1`] = `
        mode="in-out"
   >
   </div>
-  <div class="v-responsive__content">
+  <div class="v-responsive__sizer">
+    <div class="v-responsive__content">
+    </div>
   </div>
 </div>
 `;
@@ -73,24 +81,28 @@ exports[`VImg.ts should load 2`] = `
        mode="in-out"
   >
   </div>
-  <div class="v-responsive__content">
+  <div class="v-responsive__sizer">
+    <div class="v-responsive__content">
+    </div>
   </div>
 </div>
 `;
 
 exports[`VImg.ts should override vuetify-loader values 1`] = `
 <div class="v-responsive v-image">
-  <div class="v-responsive__sizer"
-       style="padding-bottom: 50%;"
-  >
-  </div>
   <div class="v-image__image v-image__image--preload v-image__image--cover"
        style="background-image: url(lazySrc_manual); background-position: center center;"
        name="fade-transition"
        mode="in-out"
   >
   </div>
-  <div class="v-responsive__content">
+  <div class="v-responsive__sizer"
+       style="padding-top: 50%;"
+  >
+    <div class="v-responsive__content"
+         style="margin-top: -50%;"
+    >
+    </div>
   </div>
 </div>
 `;
@@ -103,26 +115,28 @@ exports[`VImg.ts should update src 1`] = `
        mode="in-out"
   >
   </div>
-  <div class="v-responsive__content">
+  <div class="v-responsive__sizer">
+    <div class="v-responsive__content">
+    </div>
   </div>
 </div>
 `;
 
 exports[`VImg.ts should update src 2`] = `
 <div class="v-responsive v-image">
-  <div class="v-responsive__sizer"
-       style="padding-bottom: 56.25%;"
-  >
-  </div>
   <div class="v-image__image v-image__image--cover"
        style="background-image: url(LOAD_SUCCESS_SRC1); background-position: center center;"
        name="fade-transition"
        mode="in-out"
   >
   </div>
-  <div class="v-responsive__content"
-       style="width: 1600px;"
+  <div class="v-responsive__sizer"
+       style="padding-top: 56.25%;"
   >
+    <div class="v-responsive__content"
+         style="width: 1600px; margin-top: -56.25%;"
+    >
+    </div>
   </div>
 </div>
 `;
@@ -135,43 +149,47 @@ exports[`VImg.ts should update src while still loading 1`] = `
        mode="in-out"
   >
   </div>
-  <div class="v-responsive__content">
+  <div class="v-responsive__sizer">
+    <div class="v-responsive__content">
+    </div>
   </div>
 </div>
 `;
 
 exports[`VImg.ts should update src while still loading 2`] = `
 <div class="v-responsive v-image">
-  <div class="v-responsive__sizer"
-       style="padding-bottom: 56.25%;"
-  >
-  </div>
   <div class="v-image__image v-image__image--cover"
        style="background-image: url(LOAD_SUCCESS_SRC1); background-position: center center;"
        name="fade-transition"
        mode="in-out"
   >
   </div>
-  <div class="v-responsive__content"
-       style="width: 1600px;"
+  <div class="v-responsive__sizer"
+       style="padding-top: 56.25%;"
   >
+    <div class="v-responsive__content"
+         style="width: 1600px; margin-top: -56.25%;"
+    >
+    </div>
   </div>
 </div>
 `;
 
 exports[`VImg.ts should use vuetify-loader data 1`] = `
 <div class="v-responsive v-image">
-  <div class="v-responsive__sizer"
-       style="padding-bottom: 100%;"
-  >
-  </div>
   <div class="v-image__image v-image__image--preload v-image__image--cover"
        style="background-image: url(lazySrc_auto); background-position: center center;"
        name="fade-transition"
        mode="in-out"
   >
   </div>
-  <div class="v-responsive__content">
+  <div class="v-responsive__sizer"
+       style="padding-top: 100%;"
+  >
+    <div class="v-responsive__content"
+         style="margin-top: -100%;"
+    >
+    </div>
   </div>
 </div>
 `;
