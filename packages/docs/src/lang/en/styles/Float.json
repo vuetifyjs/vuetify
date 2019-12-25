@@ -1,6 +1,6 @@
 {
-  "header": "# Float",
-  "headerText": "Applies a custom float across any breakpoint with responsive float utilities.",
+  "heading": "# Float",
+  "headingText": "Applies a custom float across any breakpoint with responsive float utilities.",
   "overviewHeader": "## Overview",
   "overviewText1": "Float utility classes apply floating based upon the current viewport size using the [CSS float property](https://developer.mozilla.org/en-US/docs/Web/CSS/float).",
   "classesHeader": "## Classes",

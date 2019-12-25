@@ -18,6 +18,7 @@ exports[`VSelect.ts should add color to selected index 1`] = `
                  readonly="readonly"
                  type="text"
                  aria-readonly="true"
+                 autocomplete="off"
           >
         </div>
         <div class="v-input__append-inner">
@@ -29,6 +30,9 @@ exports[`VSelect.ts should add color to selected index 1`] = `
             </i>
           </div>
         </div>
+        <input type="hidden"
+               value="foo"
+        >
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "

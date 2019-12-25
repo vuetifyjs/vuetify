@@ -111,25 +111,21 @@ describe('calendar-with-events.ts', () => {
     expect(wrapper.vm.eventNameFunction).toBeDefined()
     expect(typeof wrapper.vm.eventNameFunction).toBe('function')
     expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12' }, input: { Conference: 'Conference' } })).toBe('Conference')
-    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12', hour: 8, minute: 30, hasTime: true }, input: { Conference: 'Conference' } })).toBe('<strong>8:30a</strong> Conference')
+    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12', hour: 8, minute: 30, hasTime: true }, input: { Conference: 'Conference' } })).toBe('<strong>8:30 AM</strong> Conference')
   })
 
   it('should format time', async () => {
-    const testData1 = { hour: 8, minute: 30 }
-    const testData2 = { hour: 17, minute: 45 }
-    const testData3 = { hour: 9, minute: 5 }
-    const testData4 = { hour: 15, minute: 0 }
+    const testData1 = { date: '2019-01-01', hour: 8, minute: 30 }
+    const testData2 = { date: '2019-01-01', hour: 17, minute: 45 }
+    const testData3 = { date: '2019-01-01', hour: 9, minute: 5 }
+    const testData4 = { date: '2019-01-01', hour: 15, minute: 0 }
 
     const wrapper = mount(Mock)
 
-    expect(wrapper.vm.formatTime(testData1, false)).toBe('8:30')
-    expect(wrapper.vm.formatTime(testData1, true)).toBe('8:30a')
-    expect(wrapper.vm.formatTime(testData2, false)).toBe('5:45')
-    expect(wrapper.vm.formatTime(testData2, true)).toBe('5:45p')
-    expect(wrapper.vm.formatTime(testData3, false)).toBe('9:05')
-    expect(wrapper.vm.formatTime(testData3, true)).toBe('9:05a')
-    expect(wrapper.vm.formatTime(testData4, false)).toBe('3')
-    expect(wrapper.vm.formatTime(testData4, true)).toBe('3p')
+    expect(wrapper.vm.formatTime(testData1, true)).toBe('8:30 AM')
+    expect(wrapper.vm.formatTime(testData2, true)).toBe('5:45 PM')
+    expect(wrapper.vm.formatTime(testData3, true)).toBe('9:05 AM')
+    expect(wrapper.vm.formatTime(testData4, true)).toBe('3 PM')
   })
 
   it('should hide events', async () => {

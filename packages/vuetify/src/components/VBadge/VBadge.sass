@@ -20,9 +20,14 @@
     min-width: $badge-width
     padding: 0 4px
     position: absolute
-    right: $badge-right
     top: $badge-top
     transition: $primary-transition
+
+    +ltr()
+      right: $badge-right
+
+    +rtl()
+      left: $badge-right
 
     .v-icon
       font-size: $badge-font-size
@@ -30,12 +35,22 @@
   &--overlap
     .v-badge__badge
       top: -8px
-      right: -8px
+
+      +ltr()
+        right: -8px
+
+      +rtl()
+        left: -8px
 
     &.v-badge--left
       .v-badge__badge
-        left: -8px
-        right: initial
+        +ltr()
+          left: -8px
+          right: initial
+
+        +rtl()
+          right: -8px
+          left: initial
 
     &.v-badge--bottom
       .v-badge__badge
@@ -44,30 +59,15 @@
 
   &--left
     .v-badge__badge
-      left: $badge-right
-      right: initial
+      +ltr()
+        left: $badge-right
+        right: initial
+
+      +rtl()
+        right: $badge-right
+        left: initial
 
   &--bottom
     .v-badge__badge
       bottom: $badge-top
       top: initial
-
-  +rtl()
-    &__badge
-      right: initial
-      left: $badge-right
-
-    &--overlap
-      .v-badge__badge
-        right: initial
-        left: -8px
-
-      &.v-badge--left
-        .v-badge__badge
-          right: -8px
-          left: initial
-
-    &--left
-      .v-badge__badge
-        right: $badge-right
-        left: initial

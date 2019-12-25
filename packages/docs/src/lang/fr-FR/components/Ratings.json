@@ -1,1 +1,19 @@
-{}
+{
+  "examples": {
+    "length": {
+      "desc": "Parfois, une application demandera une implémentation personnalisée. Changez facilement la longueur ou les icônes affichées."
+    },
+    "slots": {
+      "heading": "### Champs"
+    },
+    "advanced": {
+      "heading": "### Usage avancé"
+    },
+    "colors": {
+      "heading": "### Couleurs"
+    }
+  },
+  "props": {
+    "length": "La quantité d'évaluation à afficher"
+  }
+}

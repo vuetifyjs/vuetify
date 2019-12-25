@@ -1,44 +1,44 @@
 {
-  "header": "# Textareas",
-  "headerText": "Textarea components are used for collecting large amounts of textual data.",
+  "heading": "# Textareas",
+  "headingText": "Textarea components are used for collecting large amounts of textual data.",
   "examples": {
     "usage": {
       "desc": "`v-textarea` in its simplest form is a multi-line text-field, useful for larger amounts of text."
     },
     "icon": {
-      "header": "### Icons",
+      "heading": "### Icons",
       "desc": "The `append-icon` and `prepend-icon` props help add context to `v-textarea`."
     },
     "auto-grow": {
-      "header": "### Auto grow",
+      "heading": "### Auto grow",
       "desc": "When using the `auto-grow` prop, textarea's will automatically increase in size when the contained text exceeds its size."
     },
     "background-color": {
-      "header": "### Background color",
+      "heading": "### Background color",
       "desc": "The `background-color` and `color` props give you more control over styling `v-textarea`'s."
     },
     "browser-autocomplete": {
-      "header": "### Browser autocomplete",
+      "heading": "### Browser autocomplete",
       "desc": "The `autocomplete` prop gives you the option to enable the browser to predict user input."
     },
     "clearable": {
-      "header": "### Clearable",
+      "heading": "### Clearable",
       "desc": "You can clear the text from a `v-textarea` by using the `clearable` prop, and customize the icon used with the `clearable-icon` prop."
     },
     "counter": {
-      "header": "### Counter",
+      "heading": "### Counter",
       "desc": "The `counter` prop informs the user of a character limit for the `v-textarea`."
     },
     "no-resize": {
-      "header": "### No resize",
+      "heading": "### No resize",
       "desc": "`v-textarea`'s have the option to remain the same size regardless of their content's size, using the `no-resize` prop."
     },
     "rows": {
-      "header": "### Rows",
+      "heading": "### Rows",
       "desc": "The `rows` prop allows you to define how many rows the textarea has, when combined with the `row-height` prop you can further customize your rows by defining their height."
     },
     "signup-box": {
-      "header": "### Beautiful Forms",
+      "heading": "### Beautiful Forms",
       "desc": "Utilizing alternative input styles, you can create amazing interfaces that are easy to build and easy to use."
     }
   },

@@ -51,7 +51,7 @@ $headings: (
   'overline': (
     'letter-spacing': 0
   )
-)
+);
 
 // Any component modifications must be imported at the bottom
 

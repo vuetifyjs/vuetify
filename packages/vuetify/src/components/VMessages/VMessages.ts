@@ -10,6 +10,9 @@ import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import mixins from '../../util/mixins'
 
+// Utilities
+import { getSlot } from '../../util/helpers'
+
 /* @vue/component */
 export default mixins(Colorable, Themeable).extend({
   name: 'v-messages',
@@ -35,10 +38,7 @@ export default mixins(Colorable, Themeable).extend({
       return this.$createElement('div', {
         staticClass: 'v-messages__message',
         key,
-        domProps: {
-          innerHTML: message,
-        },
-      })
+      }, getSlot(this, 'default', { message, key }) || [message])
     },
   },
 

@@ -1,1 +1,28 @@
-{}
+{
+  "examples": {
+    "usage": {
+      "desc": "Le composant interne `v-form` permet d'ajouter facilement la validation aux entrées de formulaire. Tous les composants d'entrée ont une prop`rules` qui prend un tableau de fonctions. Ces fonctions vous permettent de spécifier les conditions dans lesquelles le champ est _valide_ ou _invalide_. Chaque fois que la valeur d'une entrée est modifiée, chaque fonction dans le tableau recevra la nouvelle valeur. Si une fonction retourne false ou une chaîne, la validation a échoué."
+    },
+    "rules": {
+      "desc": "Les règles vous permettent d'appliquer une validation personnalisée sur tous les composants de formulaire. Ces derniers sont validés séquentiellement et afficheront un **maximum** d'une erreur à la fois, assurez-vous donc de commander vos règles en conséquence."
+    },
+    "validation-with-submit-and-clear": {
+      "desc": "Le composant `v-form` a **trois** fonctions qui peuvent être accessibles en définissant un _ref_ sur le composant. Un ref nous permet d'accéder aux méthodes internes d'un composant, par exemple, `<v-form ref=\"form\">`. \n**ceci.$refs.form.validate()** validera toutes les entrées et retournera s'ils sont tous valides ou non. **ceci.$refs.form.reset()** effacera toutes les entrées et réinitialisera leurs erreurs de validation. **ceci.$refs.form.resetValidation()** ne réinitialisera la validation de l'entrée et ne modifiera pas leur état."
+    },
+    "vee-validate": {
+      "desc": "**vee-validate** est un Framework de Validation Basé sur des Templates pour Vue.js [Documentation](https://baianat.github.io/vee-validate/)"
+    }
+  },
+  "props": {
+    "lazyValidation": "Si activé, **value** sera toujours _true_ à moins qu'il y ait des erreurs de validation visibles. Vous pouvez toujours appeler `validate()` pour déclencher manuellement la validation",
+    "value": "Une valeur booléenne représentant la validité du formulaire."
+  },
+  "events": {
+    "submit": "Émis lorsque le formulaire est soumis"
+  },
+  "functions": {
+    "reset": "Réinitialise l'état de toutes les entrées enregistrées (à l'intérieur du formulaire) à **{}** pour les tableaux et **null** pour toutes les autres valeurs. Réinitialise le sac d'erreurs lors de l'utilisation de la prop **lazy-validation** .",
+    "resetValidation": "Réinitialise la validation de toutes les entrées enregistrées sans modifier leur état",
+    "validate": "Valide toutes les entrées enregistrées. Retourne **true** si succès et **false** si non"
+  }
+}

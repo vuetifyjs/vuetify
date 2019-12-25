@@ -1,7 +1,76 @@
 {
   "examples": {
+    "usage": {
+      "desc": "Les panneaux d'extension dans leur forme la plus simple affichent une liste d'objets extensibles."
+    },
+    "external": {
+      "desc": "Les panneaux d'extension peuvent être contrôlés à l'extérieur en modifiant le `v-model`. Sa valeur correspond à un index zéro du contenu du panneau d'extension actuellement ouvert. Si le prop `multiple` est utilisé alors il s'agit d'un tableau contenant les indices des éléments ouverts."
+    },
+    "disabled": {
+      "heading": "### Désactivé",
+      "desc": "Le panneau d'extension et son contenu peuvent être désactivés en utilisant le prop `désactivé`."
+    },
+    "readonly": {
+      "heading": "### Lecture seule",
+      "desc": "`readonly` prop fait la même chose que `désactivé`, mais il ne touche pas les styles."
+    },
+    "popout": {
+      "desc": "Le panneau d'extension a également un design **popout** avec lequel le panneau d'extension est agrandi lorsqu'il est activé."
+    },
+    "inset": {
+      "heading": "### Inset",
+      "desc": "**inset** le panneau d'extension devient plus petit lorsque activé."
+    },
+    "accordion": {
+      "desc": "**accordéon** le panneau d'extension n'a pas de marges autour du panneau actif."
+    },
+    "custom-icons": {
+      "desc": "L'icône d'extension d'action peut être personnalisée avec la prop `expand-icon` ou l'emplacement `actions`."
+    },
+    "focusable": {
+      "desc": "Les en-têtes du panneau d'expansion peuvent être rendus concentrables avec la prop `focusable`."
+    },
     "advanced": {
+      "heading": "### Avancé",
+      "desc": "Le volet du panneau d'extension fournit un espace de lecture riche pour construire des implémentations vraiment avancées. Ici nous profitons des créneaux dans le composant `v-expansion-panel-header` pour réagir à l'état d'ouverture ou de fermeture en décolorant le contenu entrant et sortant.",
       "uninverted": true
+    }
+  },
+  "props": {
+    "v-expansion-panels": {
+      "accordion": "Supprime la marge autour des panneaux ouverts",
+      "disabled": "Désactive l'ensemble du panneau d'extension",
+      "expand": "Laisse le panneau d'extension ouvert tout en sélectionnant un autre",
+      "focusable": "Rend les en-têtes du panneau d'expansion plus concentrés",
+      "inset": "Rend le panneau d'extension ouvert avec un style incrusté",
+      "popout": "Rend le panneau d'extension ouvert avec un style popout",
+      "readonly": "Rend le panneau d'extension complet en lecture seule.",
+      "value": "Contrôle l'état de contenu ouvert/fermé dans le panneau d'extension. Correspond à un index zéro du contenu actuellement ouvert. Si la prop `multiple` précédemment `expand` dans 1.5.x) est utilisé alors il s'agit d'un tableau de nombres où chaque entrée correspond à l'index du contenu ouvert. L'ordre d'index n'est pas pertinent."
+    },
+    "v-expansion-panel": {
+      "disabled": "Désactive le contenu du panneau d'extension",
+      "readonly": "Rend le contenu du panneau d'extension en lecture seule.",
+      "value": "Contrôle l'état de contenu ouvert/fermé"
+    },
+    "v-expansion-panel-header": {
+      "disableIconRotate": "Supprime l'animation de rotation des icônes lors de l'agrandissement d'un panneau",
+      "expandIcon": "Définir l'icône d'action d'extension",
+      "hideActions": "Masquer l'icône d'extension dans l'en-tête de contenu",
+      "ripple": "Mixins.Rippleable.props.ripple"
+    }
+  },
+  "events": {
+    "v-expansion-panel": {
+      "change": "Active la valeur du panneau sélectionné",
+      "click": "Événement de clic de souris"
+    },
+    "v-expansion-panel-header": {
+      "click": "Événement de clic de souris"
+    }
+  },
+  "slots": {
+    "v-expansion-panel-header": {
+      "actions": "Actions d'expansion de l'en-tête"
     }
   }
 }

@@ -48,6 +48,7 @@ interface options extends InstanceType<typeof baseMixins> {
     label: HTMLElement
     input: HTMLInputElement
     'prepend-inner': HTMLElement
+    'append-inner': HTMLElement
     prefix: HTMLElement
     suffix: HTMLElement
   }
@@ -403,6 +404,7 @@ export default baseMixins.extend<options>().extend({
           this.suffix ? this.genAffix('suffix') : null,
           this.genClearIcon(),
           this.genIconSlot(),
+          this.genHiddenInput(),
         ]),
         this.genMenu(),
         this.genProgress(),
@@ -411,13 +413,21 @@ export default baseMixins.extend<options>().extend({
     genInput (): VNode {
       const input = VTextField.options.methods.genInput.call(this)
 
+      delete input.data!.attrs!.name
       input.data!.domProps!.value = null
       input.data!.attrs!.readonly = true
       input.data!.attrs!.type = 'text'
       input.data!.attrs!['aria-readonly'] = true
+      input.data!.attrs!.autocomplete = input.data!.attrs!.autocomplete || 'off'
       input.data!.on!.keypress = this.onKeyPress
 
       return input
+    },
+    genHiddenInput (): VNode {
+      return this.$createElement('input', {
+        domProps: { value: this.lazyValue },
+        attrs: { type: 'hidden' },
+      })
     },
     genInputSlot (): VNode {
       const render = VTextField.options.methods.genInputSlot.call(this)
@@ -550,10 +560,12 @@ export default baseMixins.extend<options>().extend({
       }
       this.selectedIndex = -1
     },
-    onClick () {
+    onClick (e: MouseEvent) {
       if (this.isDisabled) return
 
-      this.isMenuActive = true
+      if (!this.isAppendInner(e.target)) {
+        this.isMenuActive = true
+      }
 
       if (!this.isFocused) {
         this.isFocused = true
@@ -654,16 +666,10 @@ export default baseMixins.extend<options>().extend({
     },
     onMouseUp (e: MouseEvent) {
       if (this.hasMouseDown && e.which !== 3) {
-        const appendInner = this.$refs['append-inner']
-
         // If append inner is present
         // and the target is itself
         // or inside, toggle menu
-        if (this.isMenuActive &&
-          appendInner &&
-          (appendInner === e.target ||
-          (appendInner as { [key: string]: any }).contains(e.target))
-        ) {
+        if (this.isAppendInner(e.target)) {
           this.$nextTick(() => (this.isMenuActive = !this.isMenuActive))
         // If user is clicking in the container
         // and field is enclosed, activate it
@@ -802,6 +808,13 @@ export default baseMixins.extend<options>().extend({
       const oldValue = this.internalValue
       this.internalValue = value
       value !== oldValue && this.$emit('change', value)
+    },
+    isAppendInner (target: any) {
+      // return true if append inner is present
+      // and the target is itself or inside
+      const appendInner = this.$refs['append-inner']
+
+      return appendInner && (appendInner === target || appendInner.contains(target))
     },
   },
 })

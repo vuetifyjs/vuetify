@@ -1,6 +1,4 @@
 {
-  "header": "# 内容",
-  "headerText": "Vuetify拥有多个标准元素的自定义样式",
   "blockquoteHeader": "## 引用块",
   "paragraphsHeader": "## 段落",
   "codeHeader": "## 代码`<code>`",

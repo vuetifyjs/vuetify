@@ -93,6 +93,7 @@ export default Selectable.extend({
         this.genRipple(this.setTextColor(this.validationState)),
         this.$createElement(VIcon, this.setTextColor(this.validationState, {
           props: {
+            dense: this.dense,
             dark: this.dark,
             light: this.light,
           },

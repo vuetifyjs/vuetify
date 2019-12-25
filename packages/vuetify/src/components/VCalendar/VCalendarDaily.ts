@@ -65,8 +65,13 @@ export default CalendarWithIntervals.extend({
       ])
     },
     genHeadIntervals (): VNode {
+      const width: string | undefined = convertToUnit(this.intervalWidth)
+
       return this.$createElement('div', {
         staticClass: 'v-calendar-daily__intervals-head',
+        style: {
+          width,
+        },
       })
     },
     genHeadDays (): VNode[] {
@@ -195,8 +200,12 @@ export default CalendarWithIntervals.extend({
       return this.$createElement('div', data, children)
     },
     genBodyIntervals (): VNode {
+      const width: string | undefined = convertToUnit(this.intervalWidth)
       const data = {
         staticClass: 'v-calendar-daily__intervals-body',
+        style: {
+          width,
+        },
         on: this.getDefaultMouseEventHandlers(':interval', e => {
           return this.getTimestampAtEvent(e, this.parsedStart)
         }),

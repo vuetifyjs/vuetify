@@ -28,6 +28,9 @@ exports[`VOverflowBtn.js should use default autocomplete selections 1`] = `
             </i>
           </div>
         </div>
+        <input type="hidden"
+               value="foo"
+        >
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light v-autocomplete__content"
@@ -77,6 +80,9 @@ exports[`VOverflowBtn.js should use default autocomplete selections 2`] = `
             </i>
           </div>
         </div>
+        <input type="hidden"
+               value="foo"
+        >
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light v-autocomplete__content"

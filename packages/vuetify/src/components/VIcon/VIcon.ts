@@ -138,38 +138,38 @@ const VIcon = mixins(
       return h(this.tag, data, newChildren)
     },
     renderSvgIcon (icon: string, h: CreateElement): VNode {
-      const data = this.getDefaultData()
-      data.class['v-icon--svg'] = true
-
-      data.attrs = {
-        xmlns: 'http://www.w3.org/2000/svg',
-        viewBox: '0 0 24 24',
-        height: '24',
-        width: '24',
-        role: 'img',
-        'aria-hidden': !this.attrs$['aria-label'],
-        'aria-label': this.attrs$['aria-label'],
-      }
-
       const fontSize = this.getSize()
-      if (fontSize) {
-        data.style = {
+      const wrapperData = {
+        ...this.getDefaultData(),
+        style: fontSize ? {
           fontSize,
           height: fontSize,
           width: fontSize,
-        }
-        data.attrs.height = fontSize
-        data.attrs.width = fontSize
+        } : undefined,
+      }
+      wrapperData.class['v-icon--svg'] = true
+      this.applyColors(wrapperData)
+
+      const svgData: VNodeData = {
+        attrs: {
+          xmlns: 'http://www.w3.org/2000/svg',
+          viewBox: '0 0 24 24',
+          height: fontSize || '32',
+          width: fontSize || '32',
+          role: 'img',
+          'aria-hidden': !this.attrs$['aria-label'],
+          'aria-label': this.attrs$['aria-label'],
+        },
       }
 
-      this.applyColors(data)
-
-      return h('svg', data, [
-        h('path', {
-          attrs: {
-            d: icon,
-          },
-        }),
+      return h('span', wrapperData, [
+        h('svg', svgData, [
+          h('path', {
+            attrs: {
+              d: icon,
+            },
+          }),
+        ]),
       ])
     },
     renderSvgIconComponent (

@@ -1,6 +1,34 @@
 {
   "close": "Fermer",
+  "quickstart": {
+    "title": "Démarrage rapide d'une minute",
+    "desc": "Utile pour une prévisualisation rapide des capacités du framework Vuetify. Parce que Vuetify peut être lié à l'exécution. Même dans les environnements sans processus de construction, vous pouvez créer de beaux modèles liés au modèle."
+  },
+  "simple": {
+    "title": "HTML simple",
+    "desc": "Ce modèle est destiné aux utilisateurs qui veulent essayer Vue.js et Vuetify.js de la manière la plus simpliste. Il contient un index de base.html sans fonctionnalité supplémentaire. Ceci est utile pour les développeurs qui veulent facilement prévisualiser les fonctionnalités du framework."
+  },
+  "webpackSimple": {
+    "desc": "Ce modèle est destiné aux utilisateurs déjà familiers avec Vue/Webpack. Il contient une configuration très simple et est ciblé par les développeurs qui créent des prototypes ou des applications de base."
+  },
+  "nuxt": {
+    "title": "NUXT",
+    "desc": "Utilisant la puissance de NUXT, superchargez votre expérience de développement avec une version bootstraped prête à aller avec Vuetify hors de la boîte."
+  },
+  "pwa": {
+    "title": "PWA",
+    "desc": "Un modèle PWA (Application Web Progressive) pré-configuré est à votre disposition. Démarré avec les employés de service, le manifeste d'application et un score de 90+/100 Lighthouse."
+  },
+  "electron": {
+    "title": "Electron",
+    "desc": "Le modèle officiel d'Electron de Vuetify pour la création d'applications de bureau."
+  },
   "aLaCarte": {
-    "title": "A la carte"
+    "title": "A la carte",
+    "desc": "Dans ce modèle, vous pouvez voir un exemple de la façon de sélectionner uniquement les composants que vous souhaitez utiliser. Ceci est utile pour réduire la taille du paquet avec les composants inutilisés."
+  },
+  "cordova": {
+    "title": "Cordova",
+    "desc": "Ce modèle utilise Apache Cordova pour vous aider à convertir facilement votre application web en une application Android ou iOS native."
   }
 }

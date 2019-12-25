@@ -1,6 +1,6 @@
 <template>
   <div>
-    <doc-heading>Generic.Pages.usage</doc-heading>
+    <base-heading>Generic.Pages.usage</base-heading>
     <doc-text>{{ `${namespace}.${page}.examples.${internalValue.file}.desc` }}</doc-text>
     <doc-example
       :id="`usage-${-1}`"

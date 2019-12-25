@@ -3,8 +3,33 @@
  * @license MIT
  * @see https://github.com/alexsasharegan/vue-functional-data-merge
  */
-
+/* eslint-disable max-statements */
 import { VNodeData } from 'vue'
+import { camelize } from './helpers'
+
+const pattern = {
+  styleList: /;(?![^(]*\))/g,
+  styleProp: /:(.*)/,
+} as const
+
+function parseStyle (style: string) {
+  const styleMap: Dictionary<any> = {}
+
+  for (const s of style.split(pattern.styleList)) {
+    let [key, val] = s.split(pattern.styleProp)
+    key = key.trim()
+    if (!key) {
+      continue
+    }
+    // May be undefined if the `key: value` pair is incomplete.
+    if (typeof val === 'string') {
+      val = val.trim()
+    }
+    styleMap[camelize(key)] = val
+  }
+
+  return styleMap
+}
 
 /**
  * Intelligently merges data for createElement.
@@ -13,7 +38,7 @@ import { VNodeData } from 'vue'
  */
 export default function mergeData (...vNodeData: VNodeData[]): VNodeData
 export default function mergeData (): VNodeData {
-  const mergeTarget: VNodeData & { [key: string]: any } = {}
+  const mergeTarget: VNodeData & Dictionary<any> = {}
   let i: number = arguments.length
   let prop: string
   let event: string
@@ -31,6 +56,23 @@ export default function mergeData (): VNodeData {
           if (!Array.isArray(mergeTarget[prop])) {
             mergeTarget[prop] = []
           }
+
+          if (prop === 'style') {
+            let style: any[]
+            if (Array.isArray(arguments[i].style)) {
+              style = arguments[i].style
+            } else {
+              style = [arguments[i].style]
+            }
+            for (let j = 0; j < style.length; j++) {
+              const s = style[j]
+              if (typeof s === 'string') {
+                style[j] = parseStyle(s)
+              }
+            }
+            arguments[i].style = style
+          }
+
           // Repackaging in an array allows Vue runtime
           // to merge class/style bindings regardless of type.
           mergeTarget[prop] = mergeTarget[prop].concat(arguments[i][prop])
