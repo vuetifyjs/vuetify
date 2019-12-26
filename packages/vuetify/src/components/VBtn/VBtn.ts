@@ -117,13 +117,6 @@ export default baseMixins.extend<options>().extend({
       if (this.disabled) return false
       else return this.ripple != null ? this.ripple : defaultRipple
     },
-    computedSize (): Number {
-      if (this.xSmall) return 12
-      else if (this.small) return 16.8
-      else if (this.large) return 26.4
-      else if (this.xLarge) return 31.2
-      else return 21.6
-    },
     isFlat (): boolean {
       return Boolean(
         this.icon ||
@@ -175,8 +168,8 @@ export default baseMixins.extend<options>().extend({
       }, this.$slots.loader || [this.$createElement(VProgressCircular, {
         props: {
           indeterminate: true,
+          size: 23,
           width: 2,
-          size: this.computedSize,
         },
       })])
     },
