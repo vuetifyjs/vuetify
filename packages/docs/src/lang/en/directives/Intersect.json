@@ -7,7 +7,7 @@
     },
     "once": {
       "heading": "### With options",
-      "desc": "The `v-intersect` directive accepts options. Available options in the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). Below is example that is options with `threshold: [0, 0.5, 1.0]`"
+      "desc": "The `v-intersect` directive accepts options. Available options can be found in the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). Below is an example using the `threshold` option.`"
     }
   },
   "options": {
