@@ -25,7 +25,9 @@ export default Vue.extend({
     link: Boolean,
     href: [String, Object],
     to: [String, Object],
+    noPrefetch: Boolean,
     nuxt: Boolean,
+    prefetch: Boolean,
     replace: Boolean,
     ripple: {
       type: [Boolean, Object],
@@ -125,6 +127,12 @@ export default Vue.extend({
           append: this.append,
           replace: this.replace,
         })
+        if (this.nuxt) {
+          Object.assign(data.props, {
+            prefetch: this.prefetch,
+            noPrefetch: this.noPrefetch,
+          })
+        }
       } else {
         tag = (this.href && 'a') || this.tag || 'div'
 
