@@ -38,17 +38,17 @@
 </template>
 
 <script>
-export default {
-  data: () => ({
-    isIntersecting: false
-  }),
+  export default {
+    data: () => ({
+      isIntersecting: false,
+    }),
 
-  methods: {
-    onIntersect(entries, observer) {
-      // More information about these options
-      // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
-      this.isIntersecting = entries[0].intersectionRatio >= 0.5;
-    }
+    methods: {
+      onIntersect (entries, observer) {
+        // More information about these options
+        // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+        this.isIntersecting = entries[0].intersectionRatio >= 0.5
+      },
+    },
   }
-};
 </script>
