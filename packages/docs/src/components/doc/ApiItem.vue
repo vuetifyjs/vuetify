@@ -11,7 +11,7 @@
       <!-- Header -->
       <div
         v-if="!['example', 'props'].includes(header.value) || item.example || item.props"
-        class="text-capitalize overline grey--text text--darken-3"
+        class="text-capitalize overline text--secondary text--darken-3"
         v-text="header.value"
       />
 
