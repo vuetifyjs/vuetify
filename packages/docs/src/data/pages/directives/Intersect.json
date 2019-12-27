@@ -26,7 +26,7 @@
       "children": [
         {
           "type": "examples",
-          "value": ["simple/once"]
+          "value": ["simple/options"]
         }
       ]
     },
