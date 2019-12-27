@@ -25,6 +25,15 @@
       "type": "section",
       "children": [
         {
+          "type": "examples",
+          "value": ["simple/options"]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "heading",
           "lang": "polyfillHeading"
         },
