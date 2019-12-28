@@ -163,6 +163,8 @@ function parseVariables () {
   const variables = {}
   const varPaths = [
     { path: './../vuetify/src/styles/settings/_variables.scss', tag: 'globals' },
+    { path: './../vuetify/src/styles/settings/_light.scss', tag: 'light' },
+    { path: './../vuetify/src/styles/settings/_dark.scss', tag: 'dark' },
   ]
   // component dir
   const rootDir = './../vuetify/src/components'
