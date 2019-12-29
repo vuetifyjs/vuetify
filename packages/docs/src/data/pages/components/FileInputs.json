@@ -12,7 +12,8 @@
             "booleans": [
               "chips",
               "counter",
-              "disabled"
+"disabled",
+"show-size"
             ]
           }
         }
