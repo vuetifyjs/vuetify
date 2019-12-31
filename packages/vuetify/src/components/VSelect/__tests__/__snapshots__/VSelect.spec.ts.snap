@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VSelect.ts should escape items in menu 1`] = `
-<div id="&amp;lt;strong&amp;gt;foo&amp;lt;/strong&amp;gt;-list-item-95"
+<div id="list-item-95-0"
      class="v-list-item__title"
 >
   &lt;strong&gt;foo&lt;/strong&gt;
@@ -371,12 +371,12 @@ exports[`VSelect.ts should use slotted no-data 1`] = `
 >
   <div tabindex="0"
        aria-selected="false"
-       aria-labelledby="foo-list-item-162"
+       aria-labelledby="list-item-162-0"
        role="option"
        class="v-list-item v-list-item--link theme--light"
   >
     <div class="v-list-item__content">
-      <div id="foo-list-item-162"
+      <div id="list-item-162-0"
            class="v-list-item__title"
       >
         foo
