@@ -42,6 +42,11 @@
     "country": "ru"
   },
   {
+    "name": "Türk",
+    "locale": "tr-TR",
+    "country": "tr"
+  },
+  {
     "name": "简体中文",
     "locale": "zh-CN",
     "alternate": "zh-Hans",
