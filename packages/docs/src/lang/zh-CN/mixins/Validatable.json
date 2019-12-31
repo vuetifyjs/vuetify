@@ -1,6 +1,17 @@
 {
   "props": {
+    "disabled": "禁用输入",
     "error": "将输入框设置为手动错误状态。",
+    "errorCount": "一次性显示的错误总数",
+    "errorMessages": "将输入框置于错误状态，并传入自定义的错误信息。将与来自 **rules** 属性的任何验证相结合。这个字段不会触发验证。",
+    "messages": "显示消息列表或消息（如果使用字符串）",
+    "readonly": "将输入设置为只读状态",
+    "rules": "接受一个函数数组（array of functions），该数组接受一个输入值作为参数，并返回 `true` / `false` 或 a `string` 和一个错误消息",
+    "success": "将输入设置为手动成功状态",
+    "successMessages": "将输入设置为成功状态，并传递自定义成功消息。",
     "validateOnBlur": "延迟验证直到失去焦点的事件被触发"
+  },
+  "events": {
+    "update:error": "`error.sync` 事件"
   }
 }

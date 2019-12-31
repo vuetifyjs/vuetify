@@ -33,13 +33,13 @@
     "keywords": "贡献、贡献、功能请求"
   },
   "customization/breakpoints": {
-    "title": "断点"
+    "title": "Breakpoints（断点）"
   },
   "customization/icons": {
     "title": "Icons（图标）"
   },
   "customization/theme": {
-    "title": "主题"
+    "title": "Theme（主题）"
   },
   "styles/transitions": {
     "title": "Transitions（过渡动画）"

@@ -1,7 +1,39 @@
 {
+  "heading": "# 进度环",
+  "headingText": "`v-progress-circular` 组件用于将数据环传递给用户。 也可以将其置于不确定状态来描述加载。",
   "examples": {
+    "usage": {
+      "desc": "默认情况下，进度圆环使用应用程序辅助色彩。"
+    },
     "circular-colored": {
-      "heading": "色彩"
+      "heading": "### 色彩",
+      "desc": "可以使用 `color` 属性将其他颜色应用于 `v-progress-circular`。"
+    },
+    "circular-indeterminate": {
+      "heading": "### 不定圆环",
+      "desc": "使用 `indeterminate` 属性，一个 `v-progress-circular` 继续无限地进行动画处理。"
+    },
+    "circular-size-and-width": {
+      "heading": "### 大小和宽度",
+      "desc": "`size` 和 `width` 属性使您可以轻松更改 `v-progress-circular` 组件的大小和宽度。"
+    },
+    "circular-rotate": {
+      "heading": "### 旋转",
+      "desc": "`rotate` 属性使您能够自定义 `v-progress-circular` 的原点。"
     }
+  },
+  "props": {
+    "active": "将高度降低到 0，隐藏组件",
+    "backgroundColor": "背景色，如果为 null，则设置为组件的颜色",
+    "backgroundOpacity": "背景不透明度，如果为 null，默认为 0.3，如果没有指定背景颜色，则为 1",
+    "bufferValue": "缓冲区的百分比值",
+    "button": "已弃用 - 待删除",
+    "fill": "设置圆环的填充颜色",
+    "indeterminate": "恒定动画，加载进度未知时使用。",
+    "query": "像 **indeterminate** 属性但反转的动画效果",
+    "rotate": "以度为单位旋转圆的起点",
+    "size": "设置圆的直径（以像素为单位）",
+    "value": "当前进度的百分比值",
+    "width": "以像素为单位设置圆的笔触"
   }
 }

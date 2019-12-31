@@ -1,1 +1,15 @@
-{}
+{
+  "heading": "# 懒加载",
+  "headingText": "`v-lazy` 组件用于根据元素的可见性动态加载组件。",
+  "lazyAlert": "`v-lazy` 组件使用 [v-intersect](/directives/intersect) 指令，该指令需要 [Polyfill](/directives/intersect#polyfill) 才能在 IE11 / Safari 上运行。 在某些iOS 版本上可能还需要使用此 polyfill。",
+  "examples": {
+    "usage": {
+      "desc": "默认情况下，`v-lazy` 组件在被相交之前不会渲染其内容。 向下滚动并查看元素经过时的渲染。"
+    }
+  },
+  "props": {
+    "minHeight": "Mixins.Measurable.props.minHeight",
+    "options": "传递给 [Intersection observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) 构造函数的选项。",
+    "transition": "Mixins.Transitionable.props.transition"
+  }
+}

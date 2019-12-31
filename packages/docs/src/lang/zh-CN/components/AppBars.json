@@ -1,7 +1,65 @@
 {
+  "heading": "# 应用栏",
+  "headingText": "`v-app-bar` 组件对于任何图形用户界面 (GUI) 都是至关重要的，因为它通常是网站导航的主要来源。app-bar 和 [v-navigation-drawer](/components/navigation-drawers) 结合在一起为应用程序提供站点导航。",
   "examples": {
+    "usage": {
+      "desc": "`v-app-bar` 组件用于应用程序范围内的操作和信息。"
+    },
+    "dense": {
+      "heading": "### 密集",
+      "desc": "你可以使 **app-bar** 密集。 密集的应用栏的高度低于常规应用栏"
+    },
+    "prominent": {
+      "heading": "### Prominent w/ scroll shrink",
+      "desc": "当用户向下滚动时，带有 `prominent` 属性的 `v-app-bar` 可以选择缩小其高度。这提供了一个平滑的过渡，当用户滚动内容时占用更少的视觉空间。缩小高度有两个选项，**dense** (48px) 和 **short** (56px)。"
+    },
+    "img": {
+      "heading": "### Prominent w/ scroll shrink and image",
+      "desc": "`v-app-bar` 可以包含背景图像。你可以通过 `src` 设置源文件。如果你需要自定义 `v-img` 属性，应用程序栏会提供一个 **img** 插槽。"
+    },
+    "img-fade": {
+      "heading": "### Prominent w/ scroll shrink and image, fading on scroll",
+      "desc": "`v-app-bar` 的背景图像可以在滚动时淡入淡出。为此使用 `fade-img-on-scroll` 属性。"
+    },
+    "hide": {
+      "heading": "### 滚动时隐藏",
+      "desc": "`v-app-bar` 可以在滚动中隐藏。为此使用 `hide-on-scroll` 属性。"
+    },
     "scroll-threshold": {
-      "heading": "### 滚动阈值"
+      "heading": "### 滚动阈值",
+      "desc": "`v-app-bar` 可以有滚动阀值。只有在通过 `scroll-threshold` 属性定义的像素数量之后，它才会开始对滚动进行反应。"
+    },
+    "collapse": {
+      "heading": "### 可折叠栏",
+      "desc": "使用 **collapse** 和 **collapse-on-scroll** 属性可以可以轻松控制用户与之交互的工具栏的状态。"
+    },
+    "elevate-on-scroll": {
+      "heading": "### 滚动时升高栏",
+      "desc": "当使用 **elevate-on-scroll** 属性时，`v-app-bar` 将停留在 0dp 的高度，直到用户开始向下滚动。 滚动后，该条会升至 4dp。"
+    },
+    "inverted-scroll": {
+      "heading": "### 反转滚动",
+      "desc": "使用 **inverted-scroll** 属性时，该条将一直隐藏，直到用户滚动超过指定的阈值为止。 一旦超过阈值，`v-app-bar` 将继续显示，直到用户向上滚动超过阈值为止。 如果未提供 **scroll-threshold** 值，则将使用默认值 _0_。"
+    },
+    "menu": {
+      "heading": "### 带菜单",
+      "desc": "你可以通过添加 `VMenu` 来轻松扩展 app bar 的功能。点击最后一个图标，看看它的动作。"
     }
+  },
+  "props": {
+    "clippedLeft": "指定位于左侧的应用程序的 `v-navigation-drawer` 在应用程序栏下方。",
+    "clippedRight": "指定位于右侧的应用程序的 `v-navigation-drawer` 在应用程序栏下方。",
+    "collapseOnScroll": "滚动时将应用栏置于折叠状态。",
+    "elevateOnScroll": "滚动时升高应用栏。",
+    "fadeImgOnScroll": "当使用 **src** 属性或 `img` 插槽时，滚动时会淡化图像。",
+    "hideOnScroll": "滚动时隐藏应用程序栏。 仍会显示 `extension` 插槽。",
+    "invertedScroll": "向下滚动时隐藏应用程序栏，向上滚动时显示它。",
+    "scrollOffScreen": "滚动时隐藏应用程序栏。将 **不** 显示 `extension` 插槽。",
+    "shrinkOnScroll": "滚动时，将 **prominent** 工具栏缩小为 **dense** 或 **short** （默认）。",
+    "src": "图像源。详情请参阅 `v-img`"
+  },
+  "slots": {
+    "img": "Components.Toolbars.slots.img",
+    "extension": "Components.Toolbars.slots.extension"
   }
 }

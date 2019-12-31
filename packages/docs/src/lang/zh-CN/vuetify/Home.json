@@ -1,23 +1,35 @@
 {
-  "becomeSponsor": "捐助 Vuetify",
+  "becomeSponsor": "支持 Vuetify",
+  "callout": "# Material Design 组件框架",
+  "text": "Vuetify 是一个 Vue UI 库，包含手工制作的精美材料组件。不需要设计技能 - 创建令人惊叹的应用程序所需的一切都触手可及。",
   "features": {
     "community": {
-      "text": "当遇到问题时，可以立即向我们请求协助。Vuetify借助Discord服务成立了巨大的社区，为你提供即时聊天支持。",
+      "text": "当遇到问题时，你可以立即向我们请求协助。Vuetify 借助 Discord 服务成立了不断壮大的社区，为你提供即时聊天支持。",
       "title": "语义化助手组件"
     },
     "components": {
-      "text": "已为你需要在项目中使用的很多专用组件做好准备。一共拥有80多个组件，是一个适用于任何应用的解决方案。",
-      "title": "语义化的Material组件"
+      "text": "已为你需要在项目中使用的很多专用组件做好准备。一共拥有 80 多个组件，是一个适用于任何应用的解决方案。",
+      "title": "语义化的 Material 组件"
     },
     "scaffolding": {
+      "text": "当遇到问题时，你可以立即向我们请求协助。Vuetify 借助 Discord 服务成立了不断壮大的社区，为你提供即时聊天支持。",
       "title": "充满活力的社区"
     }
   },
   "getHelp": "帮帮我",
   "getStarted": "快速入门",
   "github": "Github",
+  "madeWithVuetify": "## 使用 Vuetify 制作的项目",
+  "madeWithVuetifyText": "使用 Vuetify 制作的项目集合。看看其他人在生态系统中创造了什么。",
   "materialDesign": "Material Design",
   "mit": "MIT 许可证",
+  "openCollective": "Open Collective",
+  "premiumThemes": "## 付费主题",
+  "premiumThemesText": "使用我们的官方商店的高级主题来让你的项目进入更高水平 - 所有项目都使用 Vuetify 制作",
+  "proudlySponsoredBy": "## 项目赞助者",
+  "proundlySponsoredByText": "这些慷慨的赞助者使 Vuetify 的持续发展和维护成为可能",
   "seeMoreThemes": "获取更多主题",
+  "whyVuetify": "## 为什么使用 Vuetify？",
+  "whyVuetifyText": "用 Vue 构建应用程序从未如此简单。使用成功所需的所有工具来加速您的开发过程。",
   "whyVuetifyText2": "为什么选择 Vuetify？"
 }

@@ -1,1 +1,6 @@
-{}
+{
+  "props": {
+    "activator": "当未使用 `activator` 插槽时，指定自定义激活器。String 可以是任何有效的 querySelector，对象可以是任何有效的 Node。",
+    "disabled": "禁用打开组件的能力。"
+  }
+}

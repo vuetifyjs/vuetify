@@ -1,6 +1,22 @@
 {
+  "heading": "# Démarrage rapide",
+  "vueCliHeader": "## Installation de Vue CLI 3",
+  "vueCliText1": "Le CLI Vue 3 est la prochaine génération d'outil cli fait pour écarter la complexité de construire une application. Quand vous démarrez votre application avec le CLI Vue 3 vous avez aussi la possibilité d'obtenir les mises à jours webpack et changements de configurations officiels, comme avec les mise à jours de Vuetify sans un ardue processus d'amélioration.",
+  "vueCliText2": "Si vous n'avez toujours pas créé un nouveau project Vue.js en utilisant le **CLI Vue 3**, vous pouvez le faire en tapant:",
+  "vueCliText3": "Maintenant que votre projet est créé, vous pouvez ajouter le [paquet Vuetify Vue CLI 3](https://github.com/vuetifyjs/vue-cli-plugin-vuetify) en utilisant le cli.",
+  "vueCliAlert1": "Pour plus d'information sur l'utilisation du CLI Vue 3, visitez la [documentation officiel](https://cli.vuejs.org/guide/)",
+  "uiHeader": "## Installation de Vue UI",
+  "uiText1": "Vuetify peut aussi être installé en utilisant **Vue UI**, une nouvelle application pour le CLI Vue 3. Assurez vous d'avoir la dernière version du CLI Vue 3 d'installer puis à partir de votre console tapez:",
   "uiImg1": "Installation du plugin Vuetify",
   "uiImg2": "Configurez votre installation de Vuetify",
+  "uiText2": "Ce dernier démarrera l'interface utilisateur Vue et ouvrira une [nouvelle fenêtre](http://localhost:8000/) dans votre navigateur. Sur le côté gauche de votre écran, cliquez sur **Plugins**. Une fois dessus, effectuez une simple recherche pour Vuetify dans le champ de saisie.",
+  "nuxtHeading": "## Installation Nuxt",
+  "nuxtText1": "Vuetify peut-être ajouté en installant le [module Nuxt Vuetify](https://github.com/nuxt-community/vuetify-module).",
+  "nuxtText2": "Une fois installé, mettez à jour votre fichier `nuxt.config.js` pour ajouter le module Vuetify dans le build.",
+  "nuxtText3": "Plus d'informations sur l'installation de Nuxt peuvent être trouvées sur la [document officielle](https://nuxtjs.org/).",
+  "webpackHeader": "## Installation de Webpack",
+  "webpackText1": "Pour installer Vuetify dans un projet Webpack, vous devez ajouter quelques dépendances:",
+  "webpackHeader2": "### Installation de polices",
   "cdnHeader": "## Utilisation d'un CDN",
   "cdnText": "Pour tester l'utilisation de Vuetify.js sans installer un modèle depuis Vue CLI, copiez le code ci-dessous dans votre `index.html`. Ceci tirera la dernière version de Vue et Vuetify, vous permettant de commencer à jouer avec des composants. Vous pouvez également utiliser le [Vuetify starter](https://template.vuetifyjs.com) sur codepen. Bien que non recommandé, si vous devez utiliser les paquets cdn dans un environnement _production_, il est recommandé d'utiliser des versions fixes de vos assets. Pour plus d'informations sur la façon de faire cela, naviguez sur le site web [jsdelivr](https://www.jsdelivr.com/)."
 }

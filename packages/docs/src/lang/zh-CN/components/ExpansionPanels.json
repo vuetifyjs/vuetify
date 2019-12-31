@@ -1,21 +1,83 @@
 {
+  "heading": "# 扩展面板",
+  "headingText": "`v-expansion-panel` 组件对于减少大量信息的垂直空间非常有用。该组件的默认功能是一次仅显示一个展开面板主题。但是使用 `expandable` 属性后，扩展面板会保持打开状态，直到被显式关闭。",
   "examples": {
+    "usage": {
+      "desc": "最简单的扩展面板显示可扩展项目的列表。"
+    },
+    "external": {
+      "heading": "### 外部控制",
+      "desc": "扩展面板可以通过修改 `v-model` 从外部进行控制。 它的值对应于当前打开的扩展面板内容的从零开始的索引。 如果使用 `multiple` 属性，那么它是一个包含未清项目索引的数组。"
+    },
     "disabled": {
-      "heading": "禁用"
+      "heading": "### 禁用",
+      "desc": "扩展面板及其内容都可以使用 `disabled` 属性禁用。"
+    },
+    "readonly": {
+      "heading": "### 只读",
+      "desc": "`readonly` 属性做了与 `disabled` 相同的事情，但不涉及样式。"
+    },
+    "popout": {
+      "heading": "### 弹出",
+      "desc": "扩展面板还具有 **popout** 设计。 有了它，激活后扩展面板就会扩大。"
+    },
+    "inset": {
+      "heading": "### 嵌入",
+      "desc": "**inset** 激活时的扩展面板将会变得更小。"
+    },
+    "accordion": {
+      "heading": "### 手风琴",
+      "desc": "**accordion** 激活时，当前扩展面板将不会产生边距。"
     },
     "custom-icons": {
-      "desc": "Expand action icon can be customized with `expand-icon` prop."
+      "heading": "### 自定义图标",
+      "desc": "展开动作的图标可以通过 `expand-icon` 属性或 `actions` 插槽进行自定义。"
     },
     "focusable": {
-      "desc": "扩展面板头部可以通过`focusable`属性进行调焦。"
+      "heading": "### 聚焦",
+      "desc": "扩展面板头部可以通过 `focusable` 属性进行聚焦。"
+    },
+    "advanced": {
+      "heading": "### 高级版",
+      "desc": "扩展面板组件为构建真正高级的实现提供了丰富的平台。在这里，我们利用 `v-expansion-panel-header` 组件中的插槽，通过淡入淡出内容来响应打开或关闭的状态。",
+      "uninverted": true
     }
   },
   "props": {
     "v-expansion-panels": {
+      "accordion": "移除打开面板周围的边距",
+      "disabled": "禁用整个扩展面板",
       "expand": "选择另一个时，将扩展面板打开",
       "focusable": "使扩展面板标题可以调焦",
       "inset": "使扩展面板以嵌入的样式打开",
-      "popout": "使扩展面板以弹出的样式打开"
+      "popout": "使扩展面板以弹出的样式打开",
+      "readonly": "使整个扩展面板为只读。",
+      "value": "控制扩展面板中内容的 打开/关闭 状态。对应于当前打开的内容的从零开始的索引。如果使用了 `multiple` 属性（以前在  1.5.x 中使用 `expand`），则它是一个数字数组，其中每个条目对应于打开内容的索引。 索引顺序不相关。"
+    },
+    "v-expansion-panel": {
+      "disabled": "禁用扩展面板内容",
+      "readonly": "使扩展面板内容为只读。",
+      "value": "控制内容的 打开/关闭 状态"
+    },
+    "v-expansion-panel-header": {
+      "disableIconRotate": "展开面板时删除图标旋转动画",
+      "expandIcon": "设置图标展开动作",
+      "hideActions": "隐藏内容标题中的展开图标",
+      "ripple": "Mixins.Rippleable.props.ripple"
+    }
+  },
+  "events": {
+    "v-expansion-panel": {
+      "change": "切换所选面板的值",
+      "click": "鼠标点击事件"
+    },
+    "v-expansion-panel-header": {
+      "click": "鼠标点击事件"
+    }
+  },
+  "slots": {
+    "v-expansion-panel-header": {
+      "actions": "扩展标题动作"
     }
   }
 }
