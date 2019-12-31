@@ -71,8 +71,10 @@ export default VResponsive.extend({
   },
 
   computed: {
-    computedAspectRatio (): number {
-      return Number(this.normalisedSrc.aspect || this.calculatedAspectRatio)
+    computedAspectRatio (): number | undefined {
+      const aspectRatio = Number(this.normalisedSrc.aspect || this.calculatedAspectRatio)
+
+      return !isNaN(aspectRatio) ? (1 / aspectRatio) : undefined
     },
     hasIntersect () {
       return (
