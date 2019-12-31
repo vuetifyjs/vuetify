@@ -16,6 +16,11 @@
     "country": "fr"
   },
   {
+    "name": "Italiano",
+    "locale": "it-IT",
+    "country": "it"
+  },
+  {
     "name": "Português",
     "locale": "pt-BR",
     "country": "br"
