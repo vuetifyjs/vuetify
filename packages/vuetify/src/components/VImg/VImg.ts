@@ -188,6 +188,11 @@ export default VResponsive.extend({
       )
       this.$emit('error', this.src)
     },
+    genContent (): VNode | undefined {
+      return this.computedAspectRatio != null
+        ? VResponsive.options.methods.genContent.call(this)
+        : undefined
+    },
     getSrc () {
       /* istanbul ignore else */
       if (this.image) this.currentSrc = this.image.currentSrc || this.image.src
