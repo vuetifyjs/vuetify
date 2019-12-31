@@ -11,6 +11,11 @@
     "country": "mx"
   },
   {
+    "name": "Français",
+    "locale": "fr-FR",
+    "country": "fr"
+  },
+  {
     "name": "Português",
     "locale": "pt-BR",
     "country": "br"
