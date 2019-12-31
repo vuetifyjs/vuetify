@@ -7,11 +7,11 @@
       "children": [
         {
           "type": "heading",
-          "lang": "defaultHeading"
+          "lang": "defaultHeading1"
         },
         {
           "type": "text",
-          "lang": "defaultText1"
+          "lang": "defaultText1a"
         },
         {
           "type": "markup",
@@ -28,38 +28,39 @@
         },
         {
           "type": "text",
-          "lang": "materialText1"
+          "lang": "materialText1a"
+        },
+        {
+          "type": "alert",
+          "lang": "limitationAlert1",
+          "value": "info"
         },
         {
           "type": "text",
-          "lang": "materialText2"
+          "lang": "materialText1b"
         },
         {
           "type": "text",
-          "lang": "materialText3"
-        },
-        {
-          "type": "text",
-          "lang": "materialText4"
-        },
-        {
-          "type": "markup",
-          "value": "js_vuetify_use_preset"
+          "lang": "materialText1c"
         },
         {
           "type": "section",
           "children": [
             {
               "type": "heading",
-              "lang": "materialHeading2"
+              "lang": "installHeading2"
             },
             {
               "type": "text",
-              "lang": "materialText4"
+              "lang": "installText2a"
             },
             {
               "type": "markup",
               "value": "js_vuetify_use_preset"
+            },
+            {
+              "type": "text",
+              "lang": "installText2b"
             }
           ]
         },
@@ -68,11 +69,11 @@
           "children": [
             {
               "type": "heading",
-              "lang": "materialHeading3"
+              "lang": "mergeHeading3"
             },
             {
               "type": "text",
-              "lang": "materialText5"
+              "lang": "mergeText3a"
             },
             {
               "type": "markup",
@@ -87,19 +88,66 @@
       "children": [
         {
           "type": "heading",
-          "lang": "customHeading1"
+          "lang": "limitationHeading1"
         },
         {
           "type": "text",
-          "lang": "customText1"
+          "lang": "limitationText1a"
         },
         {
           "type": "text",
-          "lang": "customText2"
+          "lang": "limitationText1b"
+        },
+        {
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "limitationHeading2"
+            },
+            {
+              "type": "text",
+              "lang": "limitationText2a"
+            },
+            {
+              "type": "markup",
+              "value": "html_preset_index_html_fonts"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "limitationHeading3"
+            },
+            {
+              "type": "text",
+              "lang": "limitationText3a"
+            },
+            {
+              "type": "markup",
+              "value": "js_preset_compilation"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "devHeading1"
         },
         {
           "type": "text",
-          "lang": "customText3"
+          "lang": "devText1a"
+        },
+        {
+          "type": "text",
+          "lang": "devText1b"
         },
         {
           "type": "markup",
@@ -107,7 +155,7 @@
         },
         {
           "type": "alert",
-          "lang": "customAlert",
+          "lang": "devAlert1",
           "value": "warning"
         },
         {
@@ -115,11 +163,83 @@
           "children": [
             {
               "type": "heading",
-              "lang": "customHeading2"
+              "lang": "devHeading2"
             },
             {
               "type": "text",
-              "lang": "customText4"
+              "lang": "devText2a"
+            },
+            {
+              "type": "markup",
+              "value": "js_preset_generator"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "devHeading3"
+            },
+            {
+              "type": "text",
+              "lang": "devText3a"
+            },
+            {
+              "type": "markup",
+              "value": "js_preset_index"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "devHeading4"
+            },
+            {
+              "type": "text",
+              "lang": "devText4a"
+            },
+            {
+              "type": "markup",
+              "value": "js_preset_preset_index"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "devHeading5"
+            },
+            {
+              "type": "text",
+              "lang": "devText5a"
+            },
+            {
+              "type": "markup",
+              "value": "sass_preset_overrides_overrides"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "devHeading6"
+            },
+            {
+              "type": "text",
+              "lang": "devText6a"
+            },
+            {
+              "type": "markup",
+              "value": "sass_preset_overrides_variables"
             }
           ]
         }
@@ -131,8 +251,8 @@
         {
           "type": "up-next",
           "value": [
-            "customization/accessibility",
-            "customization/internationalization"
+            "customization/theme",
+            "customization/sass-variables"
           ]
         }
       ]

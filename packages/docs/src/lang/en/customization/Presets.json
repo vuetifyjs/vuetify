@@ -1,12 +1,12 @@
 {
   "heading": "# Presets",
-  "headingText": "Global presets are a way of easily preconfiguring a Vuetify application with settings and styles. Originally introduced in MD2, the [Material Studies](https://material.io/design/material-studies/about-our-material-studies.html) provide examples for modifying the default styling of Material Design.",
-  "defaultHeading": "## Default preset",
-  "defaultText1": "The default Vuetify preset provides values for every option available for all services including language, styles and more.",
+  "headingText": "For version 2 of the Material Design specification, Google created [Material studies](https://material.io/design/material-studies/about-our-material-studies.html) in order to explore real-world design limitations through fictional apps, each with their own unique properties and use cases. Vuetify presets integrate these studies through pre-configured framework options, SASS variables and custom styles that instantly change the look and feel of your application.",
+  "defaultHeading1": "## Default preset",
+  "defaultText1a": "The default Vuetify preset provides all framework services with baseline values. Each object key corresponds to a service on the `$vuetify` object and can be overwritten via a **preset** or custom **user options** in the Vuetify constructor.",
   "materialHeading1": "## Material Studies",
-  "materialText1": "Material studies showcase the flexibility of Material Theming and components to create expressive and unique apps. There are 7 pre-configured presets based on the provided examples.",
-  "materialText2": "Below is a list of built in presets:",
-  "materialText3": [
+  "materialText1a": "[Material Design](https://material.io/) is an opinionated visual language that can be overwhelming to work with when implementing highly customized designs. The new studies showcase the _flexibility_ of Material Theming and walk you through just how easy it is to create **unique** applications without the default Material appearance.",
+  "materialText1b": "There are currently a total of **7 Material Studies** to choose from, each that have a corresponding preset plugin:",
+  "materialText1c": [
     "[Basil](https://material.io/design/material-studies/basil.html)",
     "[Crane](https://material.io/design/material-studies/crane.html)",
     "[Fortnightly](https://material.io/design/material-studies/fortnightly.html)",
@@ -15,19 +15,40 @@
     "[Reply](https://material.io/design/material-studies/reply.html)",
     "[Shrine](https://material.io/design/material-studies/shrine.html)"
   ],
-  "materialHeading2": "### Installation",
-  "materialText4": "You can provide a custom global preset one of two ways. By passing its value as options when instantiating a new Vuetify instance, or by using the **preset** property.",
-  "materialHeading3": "### Merging strategy",
-  "materialText5": "Vuetify options are merged from the top down. The [default](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/presets/default/index.ts) preset is first merged with a provided **preset** property in the Vuetify constructor options. Finally, user provide options override the default and global options.",
-  "customHeading1": "## Custom presets",
-  "customText1": "A Vuetify Preset is an npm package that can provide framework wide options and custom styling using Vue CLI. These features include:",
-  "customText2": [
-    "configures framework options with a pre-defined values — can use any combination of the available [Vuetify options](#default-preset)",
-    "bootstraps custom SASS variables for configuring existing Vuetify components — presets use the [Vue CLI Plugin API](https://cli.vuejs.org/dev-guide/plugin-api.html#plugin-api) to hoist SASS variables during compilation",
-    "provides global overrides for styling that is not coverable through variables"
+  "installHeading2": "### Installation",
+  "installText2a": "In your console type <kbd>vue add vuetify-preset-{name}</kbd>, where `{name}` corresponds to one of the available [Material Studies](#material-studies). Once the plugin is installed, your **vuetify.js** file will be updated to include the selected preset.",
+  "installText2b": "To start development, in the command line type <kbd>yarn serve</kbd> or <kbd>npm run serve</kbd>. The Vuetify service plugin will bootstrap into Vue CLI and automatically apply all of the variable and style changes from the preset. For more information on how the generator and service plugins' work, checkout the [Plugin Development Guide](#plugin-development-guide).",
+  "mergeHeading3": "### Merging strategy",
+  "mergeText3a": "Vuetify options are merged from the top down—_Defaults, Preset and User_. The [default](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/presets/default/index.ts) preset is first merged with a provided **preset** property in the Vuetify constructor options. If applicable, user supplied options will then be merged with the global defaults and preset.",
+  "limitationHeading1": "## Limitations",
+  "limitationText1a": "Due to the [studies](https://material.io/design/material-studies/about-our-material-studies.html) being more visual than technical, presets are our _best-guess_ implementation. In many cases, styles and functionality must be inferred due to lack of information within the study's guidelines. There are also situations in which part of a study _**can not**_ or _**will not**_ be supported:",
+  "limitationText1b": [
+    "It requires changes to the framework",
+    "It's not currently possible with CSS",
+    "We haven't figured out how to support it yet"
   ],
-  "customText3": "A preset's folder structure looks like the following:",
-  "customAlert": "Custom presets can not themselves contain a **preset** property.",
-  "customHeading2": "### Development Guide",
-  "customText4": "Coming soon..."
+  "limitationAlert1": "Vuetify presets are an in progress feature that will be enhanced over time as Vuetify gains new functionality",
+  "limitationHeading2": "### Google fonts",
+  "limitationText2a": "When you install a preset, it will update your main **public/index.html** file with only the fonts and weights it needs. For example, a study may only require `400,500,600` font weights. This would cause some helper classes in Vuetify to not work; e.g. `font-weight-thin` requires _300_ font weight. Weights can always be later modified by updating the font link in your `public.html`.",
+  "limitationHeading3": "### Compilation time",
+  "limitationText3a": "In order to update SASS variables in Vuetify, styles are recompiled during development and when your application is built for production. This _will_ increase your initial compilation time and _will_ be triggered any time you edit a **variables** file. If your application isn't affected by any of the [Vuetify loader limitations](/customization/a-la-carte#limitations), you can opt to import Vuetify from `vuetify/lib/framework`. This can decrease compilation time by up to _50%_.",
+  "devAlert1": "A custom preset **can not** itself contain a _preset_ property.",
+  "devHeading1": "## Plugin development guide",
+  "devText1a": "A Vuetify preset is a npm package that provides framework wide options and custom styling using Vue CLI. It consists of a SASS variables file, a CSS overrides file and the Vue CLI [Generator](https://cli.vuejs.org/dev-guide/generator-api.html) and [Plugin Service](https://cli.vuejs.org/dev-guide/plugin-api.html). Some of the features offered by presets are:",
+  "devText1b": [
+    "configures framework options with **pre-defined** values — can use any combination of the available [Vuetify options](#default-preset)",
+    "injects **custom SASS variables** for configuring existing Vuetify functionality; e.g. components. Presets use the [Vue CLI Plugin API](https://cli.vuejs.org/dev-guide/plugin-api.html#plugin-api) to hoist SASS variables during compilation",
+    "provides **global overrides** for styling that is not coverable through variables",
+    "a _streamlined approach_ to modifying a Vuetify application's style and options"
+  ],
+  "devHeading2": "#### generator.js",
+  "devText2a": "This file is a Vue CLI [Generator](https://cli.vuejs.org/dev-guide/generator-api.html) that updates the **vuetify.js** file in your application to include the defined preset.",
+  "devHeading3": "#### index.js",
+  "devText3a": "This file is a Vue CLI [Plugin Service](https://cli.vuejs.org/dev-guide/plugin-api.html) that hooks into your application when running `yarn serve` or `npm run serve`. The `injectSassVariables` method injects the target file's variables into all SASS/SCSS files.",
+  "devHeading4": "#### preset/index.js",
+  "devText4a": "This contains the framework configuration options that are passed to the Vuetify constructor. These options combine with any user supplied values and the [framework defaults](#default-preset).",
+  "devHeading5": "#### preset/overrides.sass",
+  "devText5a": "This is a catch all for style modifications that do not have corresponding variables to target. This is useful when you need to add new CSS properties to existing components.",
+  "devHeading6": "#### preset/variables.scss",
+  "devText6a": "This is a Vuetify SASS variables file which will overwrite existing framework values. You can find more information about available variables on the [Vuetify SASS Variables](https://dev.vuetifyjs.com/en/customization/sass-variables#variable-api) documentation page or within the API section of a component."
 }
