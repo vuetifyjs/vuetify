@@ -42,6 +42,11 @@
     "country": "ru"
   },
   {
+    "name": "Svenska",
+    "locale": "tr-TR",
+    "country": "sv-SE"
+  },
+  {
     "name": "Türk",
     "locale": "tr-TR",
     "country": "tr"
