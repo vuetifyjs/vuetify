@@ -11,6 +11,11 @@
     "country": "ar"
   },
   {
+    "name": "Nederlands",
+    "locale": "nl-NL",
+    "country": "nl"
+  },
+  {
     "name": "Español",
     "locale": "es-MX",
     "country": "mx"
