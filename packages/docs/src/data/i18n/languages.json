@@ -6,6 +6,11 @@
     "fallback": true
   },
   {
+    "name": "عربى",
+    "locale": "ar-SA",
+    "country": "ar"
+  },
+  {
     "name": "Español",
     "locale": "es-MX",
     "country": "mx"
