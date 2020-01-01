@@ -1,1 +1,48 @@
-{}
+{
+  "heading": "# 迷你图表",
+  "headingText": "迷你图表组件可以用来创建简单的图形，比如 GitHub 的贡献图。\n\n除了下面列出的以外，还可以使用任何 [SVG attribute](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute)",
+  "examples": {
+    "usage": {
+      "desc": "迷你图表是一个提供数据可视化表示的小图表。"
+    },
+    "playground": {
+      "desc": "迷你图标组件有 2 种变化形式：**trend**（默认）和 **bar**。 每个都支持多种选项，可自定义迷你图表的外观。"
+    },
+    "heart-rate": {
+      "heading": "### 休息一下",
+      "desc": "对于简明扼要的信息，完整的图表可能有点过头。 使用具有梯度的趋势线可以为用户提供足够的细节，而不会显示太多信息。"
+    },
+    "dashboard-card": {
+      "heading": "### 仪表盘卡片",
+      "desc": "`v-sparkline` 组件可以与 `v-card` 和 `v-sheet` 很好地组合，创建定制的信息卡，完美的管理仪表板。这里，我们使用自定义标签为迷你图表提供额外的上下文。"
+    },
+    "sales-card": {
+      "heading": "### 自定义标签",
+      "desc": "通过提供 **label** 插槽，我们可以修改显示的内容并添加美元符号（$）。 此插槽是 **_exclusively_** 用于文本内容。 有关 svg `<text>` 元素的更多信息，请 [navigate here](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text)。"
+    },
+    "fill": {
+      "heading": "### 填充",
+      "desc": "您可以使用 `fill` 属性创建一个 `v-sparkline` 。"
+    }
+  },
+  "props": {
+    "autoDraw": "首次渲染时跟踪线的长度",
+    "autoDrawDuration": "运行跟踪动画的时间（以毫秒为单位）",
+    "autoDrawEasing": "用于跟踪动画的缓动功能",
+    "autoLineWidth": "自动扩展栏，有效利用空间",
+    "data": "数据点数组",
+    "fill": "使用 **fill** 属性可以让您更好地自定义您的迷你图表的外观。",
+    "gradient": "用作线性渐变的颜色数组",
+    "gradientDirection": "渐变应运行的方向",
+    "height": "SVG 趋势线或条的高度",
+    "labels": "与数据对应的索引对应的字符串标签数组",
+    "labelSize": "标签字体大小",
+    "lineWidth": "线的粗细，以 px 为单位",
+    "padding": "较低的 `smooth` 值或较高的 `line-width` 值可能会导致裁切，请增加填充以补偿",
+    "showLabels": "在每个数据点下方显示标签",
+    "smooth": "用作角半径的 px 数。 `true` 为默认值 8，`false` 为 0",
+    "type": "在趋势线和条线之间选择",
+    "value": "数字数组。",
+    "width": "SVG 趋势线或条的宽度"
+  }
+}

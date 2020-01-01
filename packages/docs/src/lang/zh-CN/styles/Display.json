@@ -1,7 +1,48 @@
 {
+  "heading": "# 显示",
+  "headingText": "显示助手允许你控制内容的显示。这包括根据当前的视图或实际的元素显示类型有条件地显示。",
   "displayHeader": "## 显示",
-  "displayText": "指定元素的`display`属性。这些类可以应用到所有从`xs`到`xl`的断点，并且没有特定的断点。",
-  "displayText2": "_value_属性可以为下列之一：",
-  "displayText3": "为显示帮助类设置一个特定的断点时，它会应用到对应宽度及其更宽的屏幕比如，`d-lg-flex`会应用到`lg`和`xl`大小的屏幕上。",
-  "visibilityHeader": "## 可见性"
+  "displayText": "指定元素的 `display` 属性。这些类可以应用到所有从 `xs` 到 `xl` 的断点，并且没有特定的断点。",
+  "displayFormats": [
+    "`.d-{value}` for `xs`",
+    "`.d-{breakpoint}-{value}` for `sm`, `md`, `lg` and `xl`"
+  ],
+  "displayText2": "_value_ 属性可以为下列之一：",
+  "displays": [
+    "`none`",
+    "`inline`",
+    "`inline-block`",
+    "`block`",
+    "`table`",
+    "`table-cell`",
+    "`table-row`",
+    "`flex`",
+    "`inline-flex`"
+  ],
+  "displayText3": "为显示帮助类设置一个特定的断点时，它会应用到对应宽度及其更宽的屏幕比如，`d-lg-flex` 会应用到 `lg` 和 `xl` 大小的屏幕上。",
+  "visibilityHeader": "## 可见性",
+  "visibilityText": "根据当前 **viewport** 有条件地显示一个元素。断点功能类总是自下而上应用。这意味着如果你使用 `.d-none`，它将适用于所有断点。然而 `.d-md-none` 只适用于 `md` 及以上。",
+  "lateralDisplayText": "此外，你还可以使用横向显示助手类来显示基于当前 **viewport** 的元素。可以使用以下格式 `hidden-{breakpoint}-{condition}` 应用这些类",
+  "conditionText": "_condition_ 适用于基于以下前置条件的类：",
+  "conditions": [
+    "`only` - 仅通过 `xl` 断点将元素隐藏在 `xs` 上",
+    "`and-down` - 在指定的断点处隐藏元素，并通过 `lg` 断点向下隐藏 `sm` 上的元素",
+    "`and-up` - 在指定的断点处隐藏元素，并通过 `lg` 断点向上隐藏 `sm` 上的元素"
+  ],
+  "mediaText": "此外，**media types** 可以使用 `only` 条件作为目标。目前支持 `hidden-screen-only` 和 `hidden-print-only`。",
+  "printHeader": "## 打印显示",
+  "printText1": "你还可以在打印时更改显示属性。",
+  "printOptions": [
+    "`.d-print-none`",
+    "`.d-print-inline`",
+    "`.d-print-inline-block`",
+    "`.d-print-block`",
+    "`.d-print-table`",
+    "`.d-print-table-row`",
+    "`.d-print-table-cell`",
+    "`.d-print-flex`",
+    "`.d-print-inline-flex`"
+  ],
+  "printText2": "打印功能类也可以与无打印显示功能组合。",
+  "exampleText": "调整屏幕大小以查看隐藏的元素。"
 }

@@ -1,7 +1,11 @@
 {
+  "heading": "# チップ",
   "examples": {
+    "usage": {
+      "uninverted": true
+    },
     "colored": {
-      "heading": "色付き",
+      "heading": "### 色付き",
       "desc": "マテリアルデザインパレットのあらゆる色を使用して Chip に色を付けることができます。"
     },
     "icon": {
@@ -9,13 +13,28 @@
       "desc": "Chip にはテキストのほか、Material Icons フォントに含まれるアイコンを使用することができます。"
     },
     "outlined": {
+      "heading": "### アウトライン",
       "desc": "アウトライン Chip は指定されているテキストの色を元にボーダーカラーが適用されます。"
     },
     "label": {
+      "heading": "### ラベル",
       "desc": "ラベル Chip は `v-card` の border-radius を使用します。"
     },
+    "closable": {
+      "heading": "### 閉じるボタン付きラベル",
+      "desc": "閉じるボタン付きラベルは v-model によって制御可能です。 Chip が閉じられたタイミングを検知したい場合は `click:close` イベントを使用することもできます。",
+      "uninverted": true
+    },
     "in-selects": {
-      "desc": "Select では、選択された項目を表示するために Chip を使用することができます。"
+      "heading": "### Select との組み合わせ",
+      "desc": "Select では、選択された項目を表示するために Chip を使用することができます。",
+      "uninverted": true
+    },
+    "photos": {
+      "heading": "### カスタムリスト"
+    },
+    "action-chips": {
+      "heading": "### 動きのあるチップ"
     },
     "filter": {
       "heading": "### フィルター"

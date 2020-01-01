@@ -1,5 +1,7 @@
 {
   "becomeSponsor": "Vuetifyを支援する",
+  "callout": "# マテリアルデザイン・コンポーネントフレームワーク",
+  "text": "Vuetifyは、美しく手作りされたマテリアルコンポーネントを備えたVue UIライブラリです。設計スキルは必要ありません。素晴らしいアプリケーションを作成するために必要なものはすべて手元にあります。",
   "features": {
     "community": {
       "text": "つまづいてしまったらすぐに助けが必要です。VuetifyはDiscord上で大きなコミュニティによるサポートを用意しています。",
@@ -16,6 +18,13 @@
   },
   "getHelp": "ヘルプ",
   "getStarted": "はじめよう",
+  "github": "Github",
+  "materialDesign": "マテリアルデザイン",
   "mit": "MIT ライセンス",
+  "premiumThemes": "## プレミアムテーマ",
+  "premiumThemesText": "公式ショップのプレミアムテーマでプロジェクトを次のレベルに引き上げましょう。いずれもVuetifyで構築されています。",
+  "proudlySponsoredBy": "プロジェクトスポンサー",
+  "seeMoreThemes": "テーマをもっと見る",
+  "whyVuetify": "Vuetifyを選ぶ理由",
   "whyVuetifyText2": "Vuetifyを選ぶ理由"
 }

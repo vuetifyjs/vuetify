@@ -1,46 +1,54 @@
 {
+  "heading": "# 底部导航",
+  "headingText": "`v-bottom-navigation` 组件是一个侧边栏的替代方案。它主要用于移动端，并有两个变量，图标+文本和转变。",
   "examples": {
     "usage": {
-      "desc": "尽管底部导航栏原应与`vue-router`配合使用，但您也可以使用`active.sync`属性来以编程方式控制按钮的激活状态。您可以使用按钮的`value`标签来更改它的值。"
+      "desc": "尽管底部导航栏原应与 `vue-router` 配合使用，但你也可以使用` active.sync` 属性来以编程方式控制按钮的激活状态。你可以使用按钮的 `value` 标签来更改它的值。"
     },
     "color": {
-      "heading": "色彩",
-      "desc": "`color`属性会给底部导航栏的背景应用颜色。建议使用`light`和`dark`属性来提高与文本的对比度。"
+      "heading": "### 颜色",
+      "desc": "`color` 属性会给底部导航栏的背景应用颜色。建议使用 `light` 和 `dark` 属性来提高与文本的对比度。"
     },
     "grow": {
-      "heading": "长大",
-      "desc": "如果`v-bottom-navigation`有`grow`属性，其内的按钮会扩大并填满可用空间。"
+      "heading": "### 扩大",
+      "desc": "如果 `v-bottom-navigation` 有 `grow` 属性，其内的按钮会扩大并填满可用空间。"
     },
     "horizontal": {
       "heading": "### 水平布局",
-      "desc": "`horizontal`属性将导航文本置于与图标水平的附近位置。"
+      "desc": "`horizontal` 属性将导航文本置于与图标水平的附近位置。"
     },
     "shift": {
-      "desc": "`shift`属性将在按钮没被激活时隐藏它的文本。需用`<span>`包围`v-btn`的文本。"
+      "heading": "### 变换",
+      "desc": "`shift` 属性将在按钮没被激活时隐藏它的文本。需用 `<span>` 包围 `v-btn` 的文本。"
     },
     "toggle": {
-      "desc": "`v-bottom-navigation`的显示状态可使用`input-value`属性来控制。您也可以使用`v-model`来控制当前已经激活的按钮。"
+      "heading": "### 开关",
+      "desc": "`v-bottom-navigation` 的显示状态可使用 `input-value` 属性来控制。你也可以使用 `v-model` 来控制当前已经激活的按钮。"
     },
     "hide-on-scroll": {
-      "desc": "当目标元素滚动时，“滚动时隐藏”会隐藏`v-bottom-navigation`。"
+      "heading": "### 滚动时隐藏",
+      "desc": "当目标元素滚动时，“滚动时隐藏”会隐藏 `v-bottom-navigation`。"
     },
     "scroll-threshold": {
       "heading": "### 滚动阈值",
-      "desc": "`scroll-threshold`属性可以自定义触发`v-bottom-navigation`消失的滚动阈值。"
+      "desc": "`scroll-threshold` 属性可以自定义触发 `v-bottom-navigation` 消失的滚动阈值。"
     }
   },
   "props": {
-    "activeClass": "该类在激活时会被应用到一个[v-btn](/components/buttons)。",
+    "absolute": "Mixins.Positionable.props.absolute",
+    "activeClass": "该类在激活时会被应用到一个 [v-btn](/components/buttons)。",
     "backgroundColor": "更改组件的背景颜色。",
-    "grow": "强制[v-btn](/components/buttons)占用所有可用空间。",
+    "fixed": "Mixins.Positionable.props.fixed",
+    "grow": "强制 [v-btn](/components/buttons) 占用所有可用空间。",
     "hideOnScroll": "向上滚动时过渡到屏幕外。",
-    "horizontal": "使用[v-btn](/components/buttons)的替代横向样式。",
-    "inputValue": "控制组件是否可见。支持**.sync**修饰符。",
-    "shift": "当[v-btn](/components/buttons)未激活时隐藏它们的文本。",
-    "value": "保存当前激活了的[v-btn](/components/buttons)的值。若按钮没有值，则使用其索引号。"
+    "horizontal": "使用 [v-btn](/components/buttons) 的替代横向样式。",
+    "inputValue": "控制组件是否可见。支持 **.sync** 修饰符。",
+    "mandatory": "Mixins.BaseItemGroup.props.mandatory",
+    "shift": "当 [v-btn](/components/buttons) 未激活时隐藏它们的文本。",
+    "value": "保存当前激活了的 [v-btn](/components/buttons) 的值。若按钮没有值，则使用其索引号。"
   },
   "events": {
     "change": "当前被选定按钮的值。若未分配值，则为按钮的当前索引号。",
-    "update:input-value": "用于`input-value.sync`的事件。"
+    "update:input-value": "用于 `input-value.sync` 的事件。"
   }
 }

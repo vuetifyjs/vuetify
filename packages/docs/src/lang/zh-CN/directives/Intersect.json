@@ -1,1 +1,16 @@
-{}
+{
+  "heading": "# Intersection observer",
+  "headingText": "`v-intersect` 指令使用了 [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)。 它提供了一个易于使用的接口，用于检测元素在用户视图中可见的时间。这也用于 [v-lazy](/components/lazy) 组件。",
+  "examples": {
+    "usage": {
+      "desc": "滚动窗口并观看彩色的点。注意 [v-card](/components/cards) 会从 error 变为 success"
+    }
+  },
+  "options": {
+    "modifiers.once": "将仅在挂载上调用所提供的用户回调，且只调用一次。如果使用 **quiet** 修饰符将只调用一次。",
+    "modifiers.quiet": "不会在绑定时自动调用提供的回调。",
+    "value": "当目标元素相交时要调用的函数。"
+  },
+  "polyfillHeading": "## Polyfill",
+  "polyfillText1": "虽然 [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) 默认在 IE11 中不可用，但它可以使用 [polyfill](https://github.com/w3c/IntersectionObserver) 来实现。"
+}

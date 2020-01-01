@@ -8,6 +8,9 @@
   "introduction/frequently-asked-questions": {
     "title": "자주 묻는 질문"
   },
+  "introduction/long-term-support": {
+    "title": "장기 지원"
+  },
   "introduction/meet-the-team": {
     "title": "개발자 팀을 만나보세요"
   },
@@ -18,8 +21,27 @@
     "title": "빠른 시작",
     "keywords": "quick start, vuetify templates, get started"
   },
+  "getting-started/contributing": {
+    "title": "기여하기"
+  },
+  "customization/breakpoints": {
+    "title": "Breakpoints"
+  },
+  "customization/icons": {
+    "title": "아이콘 (Icons)"
+  },
   "customization/theme": {
+    "title": "테마 (Theme)",
     "description": "Setup your custom application theme by changing a few variables."
+  },
+  "styles/transitions": {
+    "title": "트랜지션"
+  },
+  "components/api-explorer": {
+    "title": "API 탐색기"
+  },
+  "components/aspect-ratios": {
+    "title": "화면 비율 (Aspect ratios)"
   },
   "professional-support/consulting": {
     "title": "컨설팅과 지원"

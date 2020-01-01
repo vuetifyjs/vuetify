@@ -1,4 +1,10 @@
 {
   "becomeSponsor": "Vuetify'ı Destekleyin",
+  "callout": "KAYNAK",
+  "text": "Vuetify güzel el yapımı Malzeme Bileşenleri ile bir Vue UI Kütüphanesi. Tasarım becerisine gerek yok - inanılmaz uygulamalar oluşturmak için ihtiyacınız olan her şey parmaklarınızın ucunda.",
+  "getStarted": "ŞİMDİ BAŞLA",
+  "madeWithVuetify": "Vuetify ile Yapılan Projeler",
+  "proudlySponsoredBy": "Proje Sonsorları",
+  "seeMoreThemes": "Daha fazla tema incele",
   "whyVuetifyText2": "Neden Vuetify?"
 }

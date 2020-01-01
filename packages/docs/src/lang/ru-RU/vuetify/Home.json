@@ -14,5 +14,6 @@
     }
   },
   "getHelp": "Получить помощь",
-  "getStarted": "Начать"
+  "getStarted": "Начать",
+  "whyVuetifyText2": "Почему Vuetify?"
 }

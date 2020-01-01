@@ -1,1 +1,6 @@
-{}
+{
+  "heading": "# 双向性 (RTL)",
+  "headingText": "Vuetify 支持 RTL **(右至左)** 语言，可以通过启动应用程序时使用 **rtl** 选项激活。 你可以在规范网站上找到更多 [implementing bidrectionality](https://material.io/design/usability/bidirectionality.html)。",
+  "bidText1": "RTL 表单",
+  "bidText2": "你还可以在任何时候通过修改 vuetify 对象上的 **rtl** 值来动态地更改它。"
+}

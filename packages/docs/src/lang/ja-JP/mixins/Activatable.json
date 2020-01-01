@@ -1,1 +1,6 @@
-{}
+{
+  "props": {
+    "activator": "`activator` slot が使われていない場合、カスタムの activator を指定します。String には任意の有効な querySelector が、Object には任意の有効な Node が指定できます。",
+    "disabled": "コンポーネントを open できる状態を無効化します。"
+  }
+}
