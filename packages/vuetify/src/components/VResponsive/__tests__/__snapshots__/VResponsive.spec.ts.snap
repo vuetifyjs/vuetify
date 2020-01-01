@@ -3,23 +3,19 @@
 exports[`VResponsive.ts should force aspect ratio 1`] = `
 <div class="v-responsive">
   <div class="v-responsive__sizer"
-       style="padding-top: 56.25%;"
+       style="padding-bottom: 56.25%;"
   >
-    <div class="v-responsive__content"
-         style="margin-top: -56.25%;"
-    >
-    </div>
+  </div>
+  <div class="v-responsive__content">
   </div>
 </div>
 `;
 
 exports[`VResponsive.ts should render content 1`] = `
 <div class="v-responsive">
-  <div class="v-responsive__sizer">
-    <div class="v-responsive__content">
-      <div>
-        content
-      </div>
+  <div class="v-responsive__content">
+    <div>
+      content
     </div>
   </div>
 </div>
@@ -29,9 +25,7 @@ exports[`VResponsive.ts should set height 1`] = `
 <div class="v-responsive"
      style="height: 100px; max-height: 200px;"
 >
-  <div class="v-responsive__sizer">
-    <div class="v-responsive__content">
-    </div>
+  <div class="v-responsive__content">
   </div>
 </div>
 `;

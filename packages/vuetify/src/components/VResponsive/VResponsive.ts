@@ -19,6 +19,14 @@ export default mixins(Measurable).extend({
   },
 
   computed: {
+    __cachedSizer (): VNode | [] {
+      if (!this.sizerAspectStyle) return []
+
+      return this.$createElement('div', {
+        style: this.sizerAspectStyle,
+        staticClass: 'v-responsive__sizer',
+      })
+    },
     computedAspectRatio (): number | undefined {
       const aspectRatio = Number(this.aspectRatio)
 
@@ -29,18 +37,11 @@ export default mixins(Measurable).extend({
 
       return this.computedAspectRatio * 100
     },
-    contentAspectStyle (): object | undefined {
-      if (this.computedAspectRatioPercent == null) return undefined
-
-      return {
-        marginTop: convertToUnit(-1 * this.computedAspectRatioPercent, '%'),
-      }
-    },
     sizerAspectStyle (): object | undefined {
       if (this.computedAspectRatioPercent == null) return undefined
 
       return {
-        paddingTop: convertToUnit(this.computedAspectRatioPercent, '%'),
+        paddingBottom: convertToUnit(this.computedAspectRatioPercent, '%'),
       }
     },
   },
@@ -48,14 +49,8 @@ export default mixins(Measurable).extend({
   methods: {
     genContent (): VNode {
       return this.$createElement('div', {
-        staticClass: 'v-responsive__sizer',
-        style: this.sizerAspectStyle,
-      }, [
-        this.$createElement('div', {
-          staticClass: 'v-responsive__content',
-          style: this.contentAspectStyle,
-        }, this.$slots.default),
-      ])
+        staticClass: 'v-responsive__content',
+      }, this.$slots.default)
     },
   },
 
@@ -65,6 +60,7 @@ export default mixins(Measurable).extend({
       style: this.measurableStyles,
       on: this.$listeners,
     }, [
+      this.__cachedSizer,
       this.genContent(),
     ])
   },
