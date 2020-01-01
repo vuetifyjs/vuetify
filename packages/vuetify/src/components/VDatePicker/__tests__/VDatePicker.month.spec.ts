@@ -303,15 +303,18 @@ describe('VDatePicker.ts', () => {
         value: [],
       },
     })
+    const year = new Date().getFullYear()
+    const toDate = `${year}-08`
+    const fromDate = `${year}-03`
 
     wrapper.vm.$on('input', cb)
     wrapper.find('.v-date-picker-table--month tbody tr:first-child td:nth-child(3) button').trigger('click')
     expect(cb.mock.calls[0][0]).toEqual(
-      expect.arrayContaining(['2019-03'])
+      expect.arrayContaining([fromDate])
     )
 
     wrapper.find('.v-date-picker-table--month tbody tr:first-child+tr+tr td:nth-child(2) button').trigger('click')
-    expect(cb.mock.calls[0][0][0]).toBe('2019-03')
-    expect(cb.mock.calls[1][0][0]).toBe('2019-08')
+    expect(cb.mock.calls[0][0][0]).toBe(fromDate)
+    expect(cb.mock.calls[1][0][0]).toBe(toDate)
   })
 })

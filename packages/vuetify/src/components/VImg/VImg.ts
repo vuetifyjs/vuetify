@@ -142,14 +142,6 @@ export default baseMixins.extend({
         },
       }, [image])
     },
-    contentAspectStyle (): object | undefined {
-      const styles = VResponsive.options.computed.contentAspectStyle.call(this)
-
-      return {
-        ...styles,
-        ...(this.naturalWidth && { width: `${this.naturalWidth}px` }),
-      }
-    },
   },
 
   watch: {
@@ -297,6 +289,7 @@ export default baseMixins.extend({
     })
 
     return h(node.tag, data, [
+      this.__cachedSizer,
       this.__cachedImage,
       this.__genPlaceholder(),
       this.genContent(),
