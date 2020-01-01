@@ -1,1 +1,13 @@
-{}
+{
+  "heading": "# メニュー",
+  "headingText": "`v-menu`コンポーネントは、アクティブにするために使用される要素の位置にメニューを表示します。",
+  "examples": {
+    "usage": {
+      "desc": "メニューをアクティブにする要素を `activator`スロットに忘れずに配置してください。"
+    }
+  },
+  "props": {
+    "dark": "Mixins.Themeable.props.dark",
+    "light": "Mixins.Themeable.props.light"
+  }
+}

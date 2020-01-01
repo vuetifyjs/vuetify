@@ -1,6 +1,7 @@
 {
   "props": {
-    "allowOverflow": "移除内容的移除重新定位",
+    "allowOverflow": "移除内容的溢出重新定位",
+    "inputActivator": "为分离的元素设置新的激活器目标。使用时，把可拆卸的项目在 `v-input` 插槽",
     "maxWidth": "设置内容的最大宽度",
     "minWidth": "设置内容的最小宽度",
     "nudgeBottom": "向底部微调内容",
@@ -11,6 +12,6 @@
     "offsetOverflow": "当由于溢出而重新定位时，导致组件翻转到另一侧",
     "positionX": "用于在不使用激活器插槽时定位内容",
     "positionY": "用于在不使用激活器插槽时定位内容",
-    "zIndex": "用于组件的z-index"
+    "zIndex": "用于组件的 z-index"
   }
 }

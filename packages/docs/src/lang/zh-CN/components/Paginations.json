@@ -1,13 +1,42 @@
 {
+  "heading": "# 分页",
+  "headingText": "`v-pagination` 组件用于分离长数据集，以便用户更容易地使用信息。根据提供的长度，分页组件将自动伸缩。要维护当前页面，只需提供一个 `v-model` 属性。",
   "examples": {
+    "usage": {
+      "desc": "默认情况下，分页显示基于设置的 `length` 属性的页面数，并带有 `prev` 和 `next` 按钮，以帮助您导航。"
+    },
+    "long": {
+      "heading": "### 长的",
+      "desc": "使用 `length` 属性，您可以设置 `v-pagination` 的长度，如果页面按钮的数量超过父容器，它将截断列表。"
+    },
     "limit": {
+      "heading": "### 限制",
       "desc": "您可以用`total-visible`属性手动设置可见页面按钮的最大数量。"
     },
+    "circle": {
+      "heading": "### 圆形",
+      "desc": "`circle` 属性为您提供了分页按钮的另一种样式。"
+    },
     "icons": {
-      "heading": "图标"
+      "heading": "### 图标",
+      "desc": "上一页和下一页的图标可以使用 `prev-icon` 和 `next-icon` 属性定制。"
     },
     "disabled": {
-      "heading": "禁用"
+      "heading": "### 禁用",
+      "desc": "分页项可以使用 `disabled` 属性手动停用。"
     }
+  },
+  "events": {
+    "previous": "转到上一个项目时发出",
+    "next": "转到下一个项目时发出"
+  },
+  "props": {
+    "circle": "将分页元素的形状改变圆形",
+    "disabled": "禁用组件",
+    "length": "分页组件的长度",
+    "nextIcon": "指定用于下一个图标的图标",
+    "prevIcon": "指定用于上一个图标的图标",
+    "totalVisible": "指定最大可见分页数",
+    "value": "当前选定页面"
   }
 }

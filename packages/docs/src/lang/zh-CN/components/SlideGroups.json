@@ -1,10 +1,46 @@
 {
+  "heading": "# 幻灯片组",
+  "headingText": "`v-slide-group` 组件用于显示伪装分页信息。 它在其核心中使用 [v-item-group](/components/item-groups) 并为诸如 [v-tabs](/components/tabs) 和 [v-chip-group](/components/chip-groups) 等组件提供一个基础。",
   "examples": {
+    "usage": {
+      "desc": "与 [v-window](/components/windows) 组件类似，`v-slide-group` 可以让项目占用尽可能多的空间。 允许用户通过提供的信息水平移动。"
+    },
+    "carousel": {
+      "heading": "### 伪轮播",
+      "desc": "自定义幻灯片组以在图纸上创造性地显示信息。 使用选择，我们可以为用户轻松显示辅助信息。"
+    },
+    "center-active": {
+      "heading": "### 居中活动项目",
+      "desc": "活动项目总是居中"
+    },
     "custom-icons": {
-      "heading": "自定义图标"
+      "heading": "自定义图标",
+      "desc": "您可以添加自定义分页图标，而不是箭头"
+    },
+    "active-class": {
+      "heading": "### 活动类",
+      "desc": "可以自定义活动类"
     },
     "multiple": {
-      "heading": "多选"
+      "heading": "### 多选",
+      "desc": "您可以选择多个项目"
+    },
+    "mandatory": {
+      "heading": "### 必填项",
+      "desc": "必须选择至少 1 个项目"
     }
+  },
+  "props": {
+    "centerActive": "强制将选中的组件居中",
+    "nextIcon": "当箭头显示时附加的插槽",
+    "prevIcon": "当箭头显示时，预定的插槽",
+    "showArrows": "总是显示分页箭头"
+  },
+  "events": {
+    "click:location": "在幻灯片组内选择幻灯片项时发出"
+  },
+  "slots": {
+    "next": "下一个插槽",
+    "prev": "前一个插槽"
   }
 }

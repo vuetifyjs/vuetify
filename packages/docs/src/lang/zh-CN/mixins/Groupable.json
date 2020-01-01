@@ -1,1 +1,7 @@
-{}
+{
+  "props": {
+    "activeClass": "Mixins.Routable.props.activeClass",
+    "disabled": "Mixins.Routable.props.disabled",
+    "value": "在组中选择组件时使用的值。如果没有提供，则使用 index。"
+  }
+}

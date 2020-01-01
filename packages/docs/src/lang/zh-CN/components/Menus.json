@@ -1,34 +1,87 @@
 {
+  "heading": "# 菜单",
+  "headingText": "`v-menu` 组件在激活它的元素的位置上展示一个菜单。",
   "examples": {
+    "usage": {
+      "desc": "请记住将激活菜单的元素放置在 `activator` 插槽中。",
+      "uninverted": true
+    },
     "absolute": {
-      "desc": "菜单也可以使用`absolute`属性绝对定位在激活元素的顶部。尝试点击图片上的任何地方。"
+      "heading": "### 绝对定位",
+      "desc": "菜单也可以使用`absolute`属性绝对定位在激活元素的顶部。尝试点击图片上的任何地方。",
+      "uninverted": true
     },
     "disabled": {
-      "heading": "禁用"
+      "heading": "### 禁用",
+      "desc": "您可以禁用菜单。 禁用的菜单无法打开。",
+      "uninverted": true
+    },
+    "offset-x": {
+      "heading": "### X 偏移",
+      "desc": "菜单可以通过 X 轴偏移，以使激活器可见。",
+      "uninverted": true
+    },
+    "offset-y": {
+      "heading": "### Y 偏移",
+      "desc": "菜单可以通过 Y 轴偏移，以使激活器可见。",
+      "uninverted": true
+    },
+    "close-on-click": {
+      "heading": "### 点击关闭",
+      "desc": "失去焦点时可以关闭菜单。",
+      "uninverted": true
+    },
+    "close-on-content-click": {
+      "heading": "### 点击内容后关闭",
+      "desc": "您可以配置单击 `v-menu` 的内容时是否应关闭它。",
+      "uninverted": true
     },
     "absolute-without-activator": {
-      "desc": "菜单也可以通过`absolute`属性跟`position-x`和`position-y`属性一起使用。尝试右键点击图像上的仍和位置。"
+      "heading": "### 没有激活时的绝对定位",
+      "desc": "菜单也可以通过 `absolute` 属性跟 `position-x` 和 `position-y` 属性一起使用。尝试右键单击图像上的任意位置。",
+      "uninverted": true
+    },
+    "menu-activator-tooltip": {
+      "heading": "### 菜单带有激活器和提示",
+      "desc": "在新的 `v-slot` 语法中，嵌套的激活器（比如与同一个激活器按钮相连的 `v-menu` 和 `v-tooltip`）需要特殊的设置才能正常工作。**注意：同样的语法也适用于其他嵌套的激活器，比如 `v-dialog` w/ `v-tooltip`。**",
+      "uninverted": true
     },
     "hover": {
-      "desc": "菜单可以使用悬停进行访问，而不是用`open-on-hover`属性进行点击。"
+      "heading": "### 悬停",
+      "desc": "菜单可以使用悬停进行访问，而不是点击 `open-on-hover` 属性。",
+      "uninverted": true
     },
     "menus": {
-      "desc": "菜单可以放在几乎任何组件中"
+      "heading": "### 菜单",
+      "desc": "菜单可以放在几乎任何组件中",
+      "uninverted": true
     },
     "custom-transition": {
-      "desc": "Vuetify带有3个标准过渡，**scale**、**slide-x**和**slide-y**。您也可以创建自己的并将其作为过渡参数传递。有关如何构建内置过渡的示例，请访问[此处](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts#L31)。"
+      "heading": "### 自定义过渡",
+      "desc": "Vuetify 带有3个标准过渡，**scale**、**slide-x** 和 **slide-y**。您也可以创建自己的并将其作为过渡参数传递。有关如何构建内置过渡的示例，请访问 [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts)。",
+      "uninverted": true
     },
     "popover": {
-      "desc": "可以将菜单配置为在打开时为静态，使其可以用作弹出窗口。当菜单内容有多个交互项时，这可能很有用。"
+      "heading": "### 弹出菜单",
+      "desc": "菜单可以配置为在打开时为静态菜单，使其充当弹出菜单。 当菜单内容中有多个交互式项目时，这很有用。",
+      "uninverted": true
     }
   },
   "props": {
     "closeOnClick": "指定菜应该在外部激活器被点击时关闭。",
     "closeOnContentClick": "指定点击内容时菜单是否应该关闭。",
+    "dark": "Mixins.Themeable.props.dark",
+    "light": "Mixins.Themeable.props.light",
     "disabled": "禁用菜单",
+    "disableKeys": "移除所有键盘交互功能",
+    "internalActivator": "Components.Dialogs.props.internalActivator",
     "offsetX": "在x轴上偏移菜单，与左/右方向一起工作",
     "offsetY": "在y轴上偏移菜单，与上/下方向一起工作",
+    "maxHeight": "设置菜单内容的最大高度",
     "openOnClick": "指定是否在激活器点击时打开菜单",
-    "openOnHover": "指定是否在激活器悬停时打开菜单"
+    "openOnHover": "指定是否在激活器悬停时打开菜单",
+    "origin": "Mixins.Transitionable.props.origin",
+    "returnValue": "关闭菜单时更新的值 - 必须为原始值。 支持点表示法",
+    "transition": "Mixins.Transitionable.props.transition"
   }
 }

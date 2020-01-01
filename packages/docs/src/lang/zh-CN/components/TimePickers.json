@@ -1,13 +1,80 @@
 {
+  "heading": "# 时间选择器",
+  "headingText": "`v-time-picker` 是独立的组件，可用于许多现有的 Vuetify 组件。它为用户提供了选择时间的可视化表示。",
   "examples": {
+    "usage": {
+      "desc": "时间选择器默认情况下启用了浅色主题。"
+    },
+    "colorable": {
+      "heading": "### 色彩",
+      "desc": "时间选择器颜色可以使用 `color` 和 `header-color` 属性设置。如果没有提供 `header-color` 属性将使用 `color` 属性值。"
+    },
+    "dialog-and-menu": {
+      "heading": "### 在对话框和菜单",
+      "desc": "由于选择器的灵活性，您可以真正按照自己的意愿进行输入。"
+    },
+    "24h-format": {
+      "heading": "### 24小时格式",
+      "desc": "时间选择器可以切换到 24 小时格式。注意 `format` 属性只定义了选择器显示的方式，选择器的值（模型）总是 24 小时格式。"
+    },
+    "allowed-times": {
+      "heading": "### 允许的时间",
+      "desc": "您可以使用数组，对象和函数指定允许的时间。 您还可以指定时间 步长/精度/间隔 - 例如 10 分钟。"
+    },
+    "width": {
+      "heading": "### 设置选择器的宽度",
+      "desc": "您可以指定选择器的宽度或使其完全宽度。"
+    },
+    "ampm-in-title": {
+      "heading": "### 标题中的 AM/PM 开关",
+      "desc": "您可以移动 AM/PM 切换到选择器的标题。"
+    },
+    "no-title": {
+      "heading": "### 无标题",
+      "desc": "您可以删除选择器的标题。"
+    },
     "disabled": {
-      "heading": "禁用"
+      "heading": "### 禁用",
+      "desc": "您无法与禁用的选择器互动。"
+    },
+    "readonly": {
+      "heading": "### 只读",
+      "desc": "只读选择器的行为与禁用的一样，但看起来像默认的。"
+    },
+    "use-seconds": {
+      "heading": "### 秒数",
+      "desc": "时间选择器可以输入秒数。"
     },
     "scrollable": {
-      "heading": "可滚动"
+      "heading": "### 可滚动",
+      "desc": "您可以使用鼠标滚轮编辑时间选择器的值。"
     },
     "range": {
-      "heading": "Range"
+      "heading": "### 范围",
+      "desc": "这是使用 `min` 和 `max` 属性将选择器连接在一起的示例。"
     }
+  },
+  "props": {
+    "v-time-picker": {
+      "format": "定义在选择器中显示的时间格式。可用的选项是 `ampm` 和 `24hr`。",
+      "allowedHours": "限制可以选择的小时",
+      "allowedMinutes": "限制可以选择的分钟",
+      "allowedSeconds": "限制可以选择的秒数",
+      "disabled": "禁用选择器",
+      "scrollable": "允许通过鼠标滚动更改 小时/分钟",
+      "min": "允许的最小时间",
+      "max": "允许的最大时间",
+      "readonly": "将选择器置于只读状态",
+      "useSeconds": "切换选择器中秒的使用",
+      "value": "时间选择器型号（ISO 8601 格式，24hr hh:mm）",
+      "width": "选择器宽度",
+      "ampmInTitle": "将 AM/PM 开关放置在标题中，不在时钟附近。"
+    }
+  },
+  "events": {
+    "click:hour": "当用户选择小时时发出",
+    "click:minute": "当用户选择分钟时发出",
+    "click:second": "当用户选择秒时发出",
+    "change": "当时间选择完成时发出通知（当用户更改 HH:MM 选择器的分钟数时, HH:MM:SS 选择器的秒数"
   }
 }

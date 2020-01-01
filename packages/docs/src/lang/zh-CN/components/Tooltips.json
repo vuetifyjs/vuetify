@@ -1,11 +1,31 @@
 {
+  "heading": "# 提示",
+  "headingText": "当用户将鼠标悬停在元素上时，`v-tooltip` 组件可用于传递信息。 您还可以通过 `v-model` 以编程方式控制工具提示的显示。 激活后，工具提示将显示标识元素的文本标签，例如其功能说明。",
+  "headerAlert1": "为了正确定位 `v-tooltip`，需要一个位置支撑 ( `top` | `bottom` | `left` | `right` )",
   "examples": {
+    "usage": {
+      "desc": "提示组件可以包装任何元素。"
+    },
+    "alignment": {
+      "heading": "### 对齐",
+      "desc": "提示可以对齐到激活器元素的四个侧面"
+    },
     "visibility": {
-      "heading": "可见性",
-      "desc": "Tooltip的可见性可以使用`v-model`以编程的方式改变。"
+      "heading": "### 可见性",
+      "desc": "提示可见性可以使用 `v-model` 以编程方式进行更改。"
     }
   },
   "props": {
-    "closeDelay": "当（open-on-hover）属性设置为true时，会在菜单关闭之后延时（以毫秒为单位）"
+    "closeDelay": "当（open-on-hover）属性设置为true时，会在菜单关闭之后延时（以毫秒为单位）",
+    "dark": "Mixins.Themeable.props.dark",
+    "debounce": "悬停时显示和隐藏工具提示之前的持续时间",
+    "disabled": "禁用提示",
+    "internalActivator": "指定是否使用内部激活器",
+    "light": "Mixins.Themeable.props.light",
+    "openDelay": "打开工具提示后的延迟时间（以毫秒为单位）（`open-on-hover` 属性设置为 **true** 时）",
+    "openOnClick": "指定是否应在激活器单击时打开工具提示",
+    "openOnHover": "指定是否在激活器悬停时打开工具提示",
+    "tag": "指定激活程序包装的自定义标签",
+    "transition": "Mixins.Transitionable.props.transition"
   }
 }

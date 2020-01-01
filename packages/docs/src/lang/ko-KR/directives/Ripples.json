@@ -1,5 +1,8 @@
 {
   "examples": {
+    "usage": {
+      "desc": "기본적인 Ripple 효과는 그저 HTML 엘리먼트에 `v-ripple` 디렉티브를 추가하는것으로 작동할 수 있습니다."
+    },
     "custom-color": {
       "desc": "헬퍼 클래스를 사용하여 리플의 색을 바꿀 수 있습니다."
     }

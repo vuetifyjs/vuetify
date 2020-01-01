@@ -19,5 +19,9 @@
     "overflowed": {
       "desc": "利用可能なウィンドウスペースに収まらないモーダルは、コンテナでスクロールされます。"
     }
+  },
+  "props": {
+    "dark": "Mixins.Themeable.props.dark",
+    "light": "Mixins.Themeable.props.light"
   }
 }
