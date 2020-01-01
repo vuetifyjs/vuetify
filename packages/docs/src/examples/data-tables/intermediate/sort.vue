@@ -4,7 +4,7 @@
       :headers="headers"
       :items="desserts"
       :sort-by.sync="sortBy"
-      :sort-desc.sync="descending"
+      :sort-desc.sync="sortDesc"
       class="elevation-1"
     ></v-data-table>
     <div class="text-center pt-2">
@@ -19,7 +19,7 @@
     data () {
       return {
         sortBy: 'fat',
-        descending: false,
+        sortDesc: false,
         headers: [
           {
             text: 'Dessert (100g serving)',

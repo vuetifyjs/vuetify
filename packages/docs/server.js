@@ -129,10 +129,12 @@ function render (req, res) {
       res.redirect(err.url)
     } else if (err.code === 404) {
       res.status(404).send('404 | Page Not Found')
-    } else {
+    } else if (process.env.NODE_ENV !== 'production') {
       ouchInstance.handleException(err, req, res, output => {
         console.log('Error handled!', err)
       })
+    } else {
+      res.status(500)
     }
   }
 
@@ -140,7 +142,7 @@ function render (req, res) {
     crowdin: '',
     hostname: req.hostname,
     hreflangs: availableLanguages.reduce((acc, lang) => {
-      return acc + `<link rel="alternate" hreflang="${lang}" href="https://${req.hostname}/${lang}${req.params[1]}" />`
+      return acc + `<link rel="alternate" hreflang="${lang}" href="https://${req.hostname}/${lang}${encodeURI(req.params[1])}" />`
     }, ''),
     lang: req.params[0],
     res,

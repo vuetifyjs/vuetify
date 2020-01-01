@@ -71,8 +71,10 @@ export default VResponsive.extend({
   },
 
   computed: {
-    computedAspectRatio (): number {
-      return Number(this.normalisedSrc.aspect || this.calculatedAspectRatio)
+    computedAspectRatio (): number | undefined {
+      const aspectRatio = Number(this.normalisedSrc.aspect || this.calculatedAspectRatio)
+
+      return !isNaN(aspectRatio) ? (1 / aspectRatio) : undefined
     },
     hasIntersect () {
       return (
@@ -127,6 +129,14 @@ export default VResponsive.extend({
         },
       }, [image])
     },
+    contentAspectStyle (): object | undefined {
+      const styles = VResponsive.options.computed.contentAspectStyle.call(this)
+
+      return {
+        ...styles,
+        ...(this.naturalWidth && { width: `${this.naturalWidth}px` }),
+      }
+    },
   },
 
   watch: {
@@ -178,6 +188,11 @@ export default VResponsive.extend({
       )
       this.$emit('error', this.src)
     },
+    genContent (): VNode | undefined {
+      return this.computedAspectRatio != null
+        ? VResponsive.options.methods.genContent.call(this)
+        : undefined
+    },
     getSrc () {
       /* istanbul ignore else */
       if (this.image) this.currentSrc = this.image.currentSrc || this.image.src
@@ -224,16 +239,6 @@ export default VResponsive.extend({
 
       poll()
     },
-    genContent () {
-      const content: VNode = VResponsive.options.methods.genContent.call(this)
-      if (this.naturalWidth) {
-        this._b(content.data!, 'div', {
-          style: { width: `${this.naturalWidth}px` },
-        })
-      }
-
-      return content
-    },
     __genPlaceholder (): VNode | void {
       if (this.$slots.placeholder) {
         const placeholder = this.isLoading
@@ -274,7 +279,6 @@ export default VResponsive.extend({
     }
 
     node.children = [
-      this.__cachedSizer,
       this.__cachedImage,
       this.__genPlaceholder(),
       this.genContent(),

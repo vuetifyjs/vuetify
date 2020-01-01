@@ -90,11 +90,6 @@ export default Vue.extend({
       default: null,
       validator: (str: any) => ['auto', 'start', 'end', 'center', 'baseline', 'stretch'].includes(str),
     },
-    justifySelf: {
-      type: String,
-      default: null,
-      validator: (str: any) => ['auto', 'start', 'end', 'center', 'baseline', 'stretch'].includes(str),
-    },
     tag: {
       type: String,
       default: 'div',
@@ -129,7 +124,6 @@ export default Vue.extend({
         [`offset-${props.offset}`]: props.offset,
         [`order-${props.order}`]: props.order,
         [`align-self-${props.alignSelf}`]: props.alignSelf,
-        [`justify-self-${props.justifySelf}`]: props.justifySelf,
       })
 
       cache.set(cacheKey, classList)

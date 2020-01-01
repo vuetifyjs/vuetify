@@ -649,22 +649,28 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
   })
 
   it('should handle date range select', async () => {
-    const cb = jest.fn()
     const wrapper = mountFunction({
       propsData: {
         range: true,
-        value: ['2019-01-01', '2019-01-02'],
+        value: ['2019-01-06'],
       },
     })
 
-    wrapper.vm.$on('input', cb)
-    wrapper.findAll('.v-date-picker-table--date tbody tr+tr td:first-child button').at(0).trigger('click')
-    expect(cb.mock.calls[0][0]).toEqual(
-      expect.arrayContaining(['2019-01-06'])
-    )
+    const [input, change] = [jest.fn(), jest.fn()]
+    wrapper.vm.$on('input', input)
+    wrapper.vm.$on('change', change)
 
     wrapper.findAll('.v-date-picker-table--date tbody tr+tr td button').at(2).trigger('click')
-    expect(cb.mock.calls[0][0][0]).toBe('2019-01-06')
-    expect(cb.mock.calls[1][0][0]).toBe('2019-01-08')
+    // Lead to [from, to], both 'input' and 'change' should be called
+    expect(input.mock.calls[0][0]).toEqual(expect.arrayContaining(['2019-01-06', '2019-01-08']))
+    expect(change.mock.calls[0][0]).toEqual(expect.arrayContaining(['2019-01-06', '2019-01-08']))
+
+    wrapper.setProps({
+      value: ['2019-01-01', '2019-01-31'],
+    })
+    wrapper.findAll('.v-date-picker-table--date tbody tr+tr td:first-child button').at(0).trigger('click')
+    // Lead to [from,], only 'input' should be called
+    expect(input.mock.calls[1][0]).toEqual(expect.arrayContaining(['2019-01-06']))
+    expect(change.mock.calls).toHaveLength(1)
   })
 })

@@ -27,6 +27,13 @@
     />
 
     <supporters-supporter-group
+      v-if="tier.includes(6)"
+      :group="supporters['Collective']"
+      :title="!hideTitles ? 'Open Collective' : undefined"
+      :class="classes"
+    />
+
+    <supporters-supporter-group
       v-if="tier.includes(3)"
       :group="supporters['Gold']"
       :title="!hideTitles ? 'Gold' : undefined"
@@ -73,7 +80,7 @@
       },
       tier: {
         type: Array,
-        default: () => ([0, 1, 2, 3, 4, 5]),
+        default: () => ([0, 1, 2, 3, 4, 5, 6]),
       },
     },
 
