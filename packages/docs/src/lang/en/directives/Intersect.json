@@ -4,6 +4,10 @@
   "examples": {
     "usage": {
       "desc": "Scroll the window and watch the colored dot. Notice as the [v-card](/components/cards) comes into view that it changes from error to success"
+    },
+    "options": {
+      "heading": "### With options",
+      "desc": "The `v-intersect` directive accepts options. Available options can be found in the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). Below is an example using the `threshold` option."
     }
   },
   "options": {

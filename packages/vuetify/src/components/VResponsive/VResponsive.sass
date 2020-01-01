@@ -7,10 +7,14 @@
   max-width: 100%
   display: flex
 
+  &__sizer
+    display: flex
+    transition: padding-top 0.2s map-get($transition, 'swing')
+
+  &__content
+    transition: margin-top 0.2s map-get($transition, 'swing')
+
+  &__sizer,
   &__content
     flex: 1 0 0px
     max-width: 100%
-
-  &__sizer
-    transition: $responsive-transition
-    flex: 0 0 0px

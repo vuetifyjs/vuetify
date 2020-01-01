@@ -152,6 +152,12 @@
   <a href="https://opencollective.com/vuetify/sponsor/1/website" target="_blank">
     <img src="https://opencollective.com/vuetify/sponsor/1/avatar.svg">
   </a>
+  <a href="https://opencollective.com/vuetify/sponsor/2/website" target="_blank">
+    <img src="https://opencollective.com/vuetify/sponsor/2/avatar.svg">
+  </a>
+  <a href="https://opencollective.com/vuetify/sponsor/3/website" target="_blank">
+    <img src="https://opencollective.com/vuetify/sponsor/3/avatar.svg">
+  </a>
 </div>
 
 <br>

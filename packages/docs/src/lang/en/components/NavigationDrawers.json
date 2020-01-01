@@ -23,7 +23,7 @@
     },
     "combined": {
       "heading": "### Combined drawers",
-      "desc": "In this example we define a custom width to accommodate our nested drawer. Using `v-layout` we ensure that the drawer and list stack horizontally next to each other."
+      "desc": "In this example we define a custom width to accommodate our nested drawer. Using `v-row` we ensure that the drawer and list stack horizontally next to each other."
     },
     "right": {
       "heading": "### Right positioned",
