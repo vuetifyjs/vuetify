@@ -129,14 +129,6 @@ export default VResponsive.extend({
         },
       }, [image])
     },
-    contentAspectStyle (): object | undefined {
-      const styles = VResponsive.options.computed.contentAspectStyle.call(this)
-
-      return {
-        ...styles,
-        ...(this.naturalWidth && { width: `${this.naturalWidth}px` }),
-      }
-    },
   },
 
   watch: {
@@ -279,6 +271,7 @@ export default VResponsive.extend({
     }
 
     node.children = [
+      this.__cachedSizer,
       this.__cachedImage,
       this.__genPlaceholder(),
       this.genContent(),
