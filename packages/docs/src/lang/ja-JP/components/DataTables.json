@@ -1,5 +1,9 @@
 {
+  "headingText": "`v-data-table` コンポーネントは表形式のデータを表示するために使われます。ソート、検索、ページネーション、インライン編集、ヘッダーツールチップ、行の選択 などの機能があります。",
   "examples": {
+    "slots": {
+      "desc": "`v-data-table` は、テーブルをカスタマイズするための slot を数多く用意しています。 この例では、いくつかの slot について紹介します。注意点として、コンポーネントの内部レンダリングを完全に引き継いで selection や expansion などの機能を再実装しなければならない slot (例：`item` / `body` / `header`) や、 `body` > `item` > `item.<name>` and `header`/`header.<name>` のように上書きしてしまう slot があります。"
+    },
     "headers": {
       "desc": "`items` と `headers` スロットは <kbd>td/th</kbd> タグを受け付けることができます。行の全体を制御したい場合は、 <kbd>tr</kbd> を受け付けることができます。"
     },

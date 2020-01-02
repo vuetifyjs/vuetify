@@ -137,7 +137,7 @@ describe('VSelect.ts', () => {
       },
     })
 
-    expect(wrapper.vm.counterValue).toBe(3)
+    expect(wrapper.vm.computedCounterValue).toBe(3)
 
     wrapper.setProps({
       items: [{
@@ -146,7 +146,7 @@ describe('VSelect.ts', () => {
       }],
     })
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.counterValue).toBe(9)
+    expect(wrapper.vm.computedCounterValue).toBe(9)
 
     wrapper.setProps({
       items: ['foo', 'bar', 'baz'],
@@ -154,7 +154,7 @@ describe('VSelect.ts', () => {
       value: ['foo', 'bar'],
     })
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.counterValue).toBe(2)
+    expect(wrapper.vm.computedCounterValue).toBe(2)
   })
 
   it('should emit a single change event', async () => {

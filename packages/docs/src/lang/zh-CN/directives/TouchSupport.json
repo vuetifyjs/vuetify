@@ -1,1 +1,14 @@
-{}
+{
+  "heading": "# 触控支持",
+  "headingText": "<code>v-touch</code> 指令允许你捕获滑动手势并应用定向回调。",
+  "examples": {
+    "usage": {
+      "desc": "在一个移动设备上，尝试向各个方向滑动。",
+      "uninverted": true
+    }
+  },
+  "options": {
+    "{ move, start, end }": "在触摸事件开始、结束和正在进行时分配回调",
+    "{ up, down, left, right }": "根据滑动方向分配回调。此时不建议对 x轴 和 y轴 回调进行适配"
+  }
+}

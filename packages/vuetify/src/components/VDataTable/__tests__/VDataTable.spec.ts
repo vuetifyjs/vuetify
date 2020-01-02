@@ -5,13 +5,14 @@ import {
   MountOptions,
 } from '@vue/test-utils'
 import { Breakpoint } from '../../../services/breakpoint'
-import { Lang } from '../../../services/lang'
 import ripple from '../../../directives/ripple/index'
 import Vue from 'vue'
+import { Lang } from '../../../services/lang'
+import { preset } from '../../../presets/default'
 
 Vue.prototype.$vuetify = {
   rtl: false,
-  lang: new Lang(),
+  lang: new Lang(preset),
 }
 Vue.directive('ripple', ripple)
 
@@ -123,8 +124,8 @@ describe('VDataTable.ts', () => {
       return mount(VDataTable, {
         mocks: {
           $vuetify: {
-            breakpoint: new Breakpoint(),
-            lang: new Lang(),
+            breakpoint: new Breakpoint(preset),
+            lang: new Lang(preset),
             theme: {
               dark: false,
             },
@@ -607,5 +608,68 @@ describe('VDataTable.ts', () => {
     expect(itemSelected).toHaveBeenCalledTimes(2)
     expect(itemSelected).toHaveBeenCalledWith({ item: testItems[0], value: false })
     expect(itemSelected).toHaveBeenCalledWith({ item: testItems[1], value: true })
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8915
+  it('should not select item that is not selectable', async () => {
+    const items = [
+      { ...testItems[0], isSelectable: false },
+      { ...testItems[1] },
+    ]
+    const input = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items,
+        showSelect: true,
+      },
+      listeners: {
+        input,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    const selectAll = wrapper.findAll('.v-simple-checkbox').at(0)
+    selectAll.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(input).toHaveBeenNthCalledWith(1, [testItems[1]])
+
+    const single = wrapper.findAll('.v-simple-checkbox').at(1)
+    single.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(input.mock.calls).toHaveLength(1)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8915
+  it('should toggle all selectable items', async () => {
+    const items = [
+      { ...testItems[0], isSelectable: false },
+      { ...testItems[1] },
+    ]
+    const input = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items,
+        showSelect: true,
+      },
+      listeners: {
+        input,
+      },
+    })
+
+    const selectAll = wrapper.findAll('.v-simple-checkbox').at(0)
+    selectAll.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(input).toHaveBeenNthCalledWith(1, [testItems[1]])
+
+    selectAll.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(input).toHaveBeenNthCalledWith(2, [])
   })
 })

@@ -109,14 +109,14 @@
     white-space: nowrap
 
 .v-toolbar.v-toolbar--collapsed
-  max-width: 112px
+  max-width: $toolbar-collapsed-max-width
   overflow: hidden
 
   +ltr()
-    border-bottom-right-radius: 24px
+    border-bottom-right-radius: $toolbar-collapsed-border-radius
 
   +rtl()
-    border-bottom-left-radius: 24px
+    border-bottom-left-radius: $toolbar-collapsed-border-radius
 
   .v-toolbar__title,
   .v-toolbar__extension
@@ -140,10 +140,10 @@
 
   .v-toolbar__title
     font-size: 1.5rem
-    padding-top: 6px
+    padding-top: $toolbar-promient-padding
 
   &:not(.v-toolbar--bottom)
     .v-toolbar__title
       align-self: flex-end
-      padding-bottom: 6px
+      padding-bottom: $toolbar-promient-padding
       padding-top: 0

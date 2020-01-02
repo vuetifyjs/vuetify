@@ -1,43 +1,88 @@
 {
+  "heading": "# 按钮",
+  "headingText": "`v-btn` 组件用一 material design 主题和大量选项替代了标准的 html 按钮。任何颜色助手类都可以用来改变背景色或文本颜色。",
+  "alert": "当使用 **dark** 属性时，`v-btn` 是唯一表现不同的组件。 通常，组件使用 **dark** 属性来表示它们具有深色背景，并且其文本必须为白色。 虽然这对`v-btn` 起作用，但由于禁用状态与白色背景混合，建议仅在按钮 **IS ON**为彩色背景时使用属性。 如果您需要白色文本，只需添加 **white--text** 类。",
+  "usageText": "最简单的按钮包含大写文本、轻微的仰角、悬停效果和单击时的波纹效果。",
   "examples": {
     "flat": {
-      "heading": "扁平",
+      "heading": "### 扁平",
       "desc": "扁平按钮没有巷子箱子阴影，也没有背景。只有鼠标悬浮时才显示按钮的容器。"
     },
     "raised": {
+      "heading": "### 凸起",
       "desc": "凸起的按钮有一个会在在点击时加重的框阴影，这是默认的样式。"
     },
     "depressed": {
+      "heading": "### 凹陷",
       "desc": "凹陷的按钮依然保持其背景色，但没有框阴影。"
     },
     "dropdown": {
-      "desc": "按钮下拉菜单是带有额外的样式的常规选择框。"
+      "heading": "### 按钮下拉变量",
+      "desc": "按钮下拉菜单是带有额外的样式的常规选择框。",
+      "uninverted": true
     },
     "icon": {
-      "heading": "图标",
+      "heading": "### 图标",
       "desc": "图标可作为按钮的主要内容。"
     },
+    "floating": {
+      "heading": "### 浮动",
+      "desc": "浮动按钮是圆形的，通常包含一个图标。"
+    },
     "loaders": {
+      "heading": "### 加载器",
       "desc": "使用加载（loading）属性，你可以通知用户有正在进行的处理。默认行为是使用一个`v-progress-circular`组件，但可以对齐进行自定义。 "
     },
     "sizing": {
+      "heading": "### 大小",
       "desc": "按钮可以被设置不同的尺寸选项以适应多种方案。"
     },
     "outlined": {
-      "heading": "### 轮廓"
+      "heading": "### 轮廓",
+      "desc": "轮廓按钮从应用的当前颜色继承其边框。"
+    },
+    "rounded": {
+      "heading": "### 圆角",
+      "desc": "圆形按钮的行为与常规按钮相同，但具有圆形边缘。"
+    },
+    "tile": {
+      "heading": "### 平铺",
+      "desc": "平铺按钮的行为与常规按钮相同，但没有边框半径。"
     },
     "block": {
+      "heading": "### 块状",
       "desc": "块状按钮可以扩展全部可用宽度"
     }
   },
   "props": {
     "v-btn": {
-      "loading": "添加一个加载中的图标动画"
+      "block": "将按钮扩展到可用空间的 100％。",
+      "depressed": "移除按钮的阴影效果。",
+      "fab": "将按钮指定为 floating-action-button - _round_。",
+      "icon": "将按钮指定为图标 - _round 和 flat_",
+      "inputValue": "控制按钮的活动状态。",
+      "left": "将组件向左对齐。 这应该与 **absolute** 或 **fixed** 属性一起使用。",
+      "loading": "添加一个加载中的图标动画",
+      "outlined": "使背景透明并使用薄边框。",
+      "right": "将组件向右对齐。这应该与 **absolute** 或 **fixed** 属性一起使用。",
+      "rounded": "在按钮上应用较大的边框半径。",
+      "text": "使背景透明。",
+      "type": "设置按钮的 **type** 属性",
+      "value": "Mixins.Groupable.props.value",
+      "retainFocusOnClick": "点击时不模糊。"
+    },
+    "v-btn-toggle": {
+      "rounded": "在按钮上应用较大的边框半径。"
     }
   },
   "events": {
     "v-btn-toggle": {
       "change": "Components.Inputs.events.change"
+    }
+  },
+  "slots": {
+    "v-btn": {
+      "loader": "自定义加载器"
     }
   }
 }

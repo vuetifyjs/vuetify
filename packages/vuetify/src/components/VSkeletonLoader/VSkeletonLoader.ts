@@ -10,7 +10,7 @@ import Themeable from '../../mixins/themeable'
 import mixins from '../../util/mixins'
 
 // Types
-import { VNode } from 'vue'
+import { VNode, PropType } from 'vue'
 import { getSlot } from '../../util/helpers'
 
 /* @vue/component */
@@ -28,7 +28,7 @@ export default mixins(
     transition: String,
     type: String,
     types: {
-      type: Object,
+      type: Object as PropType<Record<string, string>>,
       default: () => ({}),
     },
   },

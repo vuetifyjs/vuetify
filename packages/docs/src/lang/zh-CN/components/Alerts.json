@@ -1,10 +1,74 @@
 {
+  "heading": "# 提示框",
+  "headingText": "`v-alert` 组件用于通过使用上下文类型图标和颜色向用户传达重要信息。这些默认类型有 4 种变量：**success**，**info**，**warning** 和 **error**。 默认图标可代表每种类型所传达的不同意思。 也可以自定义提示框的许多部分，例如 `border`, `icon`, 和 `color` 以适应几乎所有情况。",
+  "usageText": "最简单形式的提示框显示消息时是一个扁平的 [sheets of paper](/components/sheets)。",
   "examples": {
+    "border": {
+      "heading": "### 边框",
+      "desc": "**border** 属性支持将一个简单的边框添加到提示框的 4 个边。这可以和 **color**, **dark**, **type** 这些属性一起使用来为提示框提供强调作用。"
+    },
+    "colored-border": {
+      "heading": "### 彩色边框",
+      "desc": "**color-border** 属性会移除提示框背景，以便强调 **border** 属性。如果 **type** 已经被设置，那么它讲使用默认的类型颜色。如果没有设置 **color** 或 **type**，那么颜色将为应用主题的反转（白-黑 和 黑-白/灰）。"
+    },
+    "dense": {
+      "heading": "### 密集",
+      "desc": "**dense** 属性会降低提示框的高度来制造出一个简单且紧凑的风格。如果和 **border** 属性一起使用，那么边界高度也会一起降低来保持风格统一。"
+    },
+    "dismissible": {
+      "heading": "### 可关闭",
+      "desc": "**dismissible** 属性将会在提示框的尾部添加一个关闭按钮。点击此按钮将会将它的值设置为 false 且隐藏提示框。你也能够通过绑定 **v-model** 的值为 true 来恢复提示框。关闭图标会自动应用 `aria-label`，可以通过修改 **close-label** 属性或者改变本地设置 **close** 的值来进行更改它。浏览 [Internationalization page](/customization/internationalization) 来了解如何全局修改你本地设置。"
+    },
     "icon": {
-      "heading": "图标"
+      "heading": "### 图标",
+      "desc": "**icon** 属性允许你在提示框的开头添加图标。如果提供了 **type**，那么将会覆盖默认类型的图标。 此外设置 **icon** 属性为 _false_ 将会完全移除图标。"
     },
     "outlined": {
-      "heading": "### 轮廓"
+      "heading": "### 轮廓",
+      "desc": "**outlined** 属性将会反转提示框的风格，它会继承当前应用的 **color** 并应用与文本和边框且将其背景透明化。"
+    },
+    "prominent": {
+      "heading": "### 突出",
+      "desc": "**prominent** 属性通过增加高度并向图标施加光晕来提供更明显的提示。当同时应用 **prominent** 和 **dense** 时，提示框将会呈现出普通的风格但是会 **prominent** 图标特效。"
+    },
+    "text": {
+      "heading": "### 文本",
+      "desc": "**text** 属性是一个简单的提示框变量，它对所提供的颜色使用不透明的背景。 类似于其他样式的属性，**text** 可与 **dense**, **prominent** 和 **outlined** 等其他属性结合使用，以创建独特的定制组件。"
+    },
+    "transition": {
+      "heading": "### 过渡",
+      "desc": "**transition** 属性可让你向提示框应用一个过渡，该动画在隐藏和显示组件时可见。你可以在 [Vuetify's prebuilt transitions](/styles/transitions#motion) 浏览更多信息或者查看如何 [create your own](/styles/transitions#create-your-own)。"
+    },
+    "type": {
+      "heading": "### 类型",
+      "desc": "**type** 属性提供 4 种默认的 `v-alert` 样式：**success**, **info**, **warning**, 和 **error**。每个样式都提供默认图标和颜色。默认颜色可通过 [Vuetify's theme](/customization/theme) 进行全局配置。"
+    },
+    "twitter": {
+      "heading": "### Twitter 提醒",
+      "desc": "通过讲 **color**, **dismissible**, **border**, **elevation**, **icon**, 和 \n **color-border** 这些属性一起组合，你可以创建像 twitter 这样的自定义提醒。"
     }
+  },
+  "accessibility": {
+    "desc": "默认情况下，`v-alert` 被分配到 [**alert**](https://www.w3.org/TR/wai-aria/#alert) 的 [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) 作用，这表示提示框是一个活动区域，包含重要且通常对时间敏感的信息。当使用 **dismissible** 属性时，关闭图标将会接受相应的 `aria-label`。可以通过修改 **close-label** 属性来修改它或者全局自定义 [Internationalization](/customization/internationalization) 默认值来修改 _close_ 属性。"
+  },
+  "props": {
+    "border": "为提示框添加边界。接受值有 **top** | **right** | **bottom** | **left**。",
+    "closeLabel": "在 **dismissible** 提示框上的 *aria-label* 使用文本。也可以全局自定义 [Internationalization](/customization/internationalization)。",
+    "coloredBorder": "将自定义的 **color** 应用于提示框的边框",
+    "dense": "隐藏提示框图标并降低组件的高度。",
+    "dismissible": "添加一个可以关闭警报的图标。",
+    "icon": "指定特定的图标。",
+    "outlined": "使背景透明并使用薄边框。",
+    "prominent": "显示较大的垂直居中图标，以引起更多注意。",
+    "text": "将定义的 **color** 应用于文本和同样的低透明度背景。",
+    "type": "指定一个 **success**, **info**, **warning** 或 **error** 提示。使用上下文颜色并具有预定义的图标。"
+  },
+  "slots": {
+    "append": "提示框末尾的图标插槽。",
+    "close": "**dismissible** 属性中的图标插槽",
+    "prepend": "提示框开始的图标插槽。"
+  },
+  "functions": {
+    "toggle": "切换提示框的活动状态。可在关闭插槽中使用，并在 **dismissible** 中用作单击操作。"
   }
 }

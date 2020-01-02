@@ -95,5 +95,12 @@ export default VAutocomplete.extend({
         },
       }, [itemObj.text])
     },
+    updateValue (val: boolean) {
+      if (val) {
+        this.initialValue = this.lazyValue
+      } else if (this.initialValue !== this.lazyValue) {
+        this.$emit('change', this.lazyValue)
+      }
+    },
   },
 })

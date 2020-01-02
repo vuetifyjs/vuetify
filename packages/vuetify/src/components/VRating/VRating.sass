@@ -1,12 +1,12 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 .v-rating
   max-width: 100%
   white-space: nowrap
 
   .v-icon
-    padding: 0.5rem
-    border-radius: 50%
+    padding: $rating-padding
+    border-radius: $rating-border-radius
     user-select: none
 
     +ltr()
@@ -21,4 +21,4 @@
 
   &--dense
     .v-icon
-      padding: 0.1rem
+      padding: $rating-dense-padding

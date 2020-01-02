@@ -1,1 +1,9 @@
-{}
+{
+  "heading": "# 오버레이 (Overlays)",
+  "headingText": "`v-overlay` 특정 엘리먼트 또는 부분을 강조 할 수 있게 도와주는 컴포넌트 입니다. Overlay는 앱의 상태변화를 유저에게 알려줄 수 있으며 `Loader`, `Dialog` 등 다양한 컴포넌트를 구현하는데 사용될 수 있습니다.",
+  "examples": {
+    "usage": {
+      "desc": "`v-overlay` 컴포넌트는 앱상에 어두운 레이어를 추가합니다."
+    }
+  }
+}

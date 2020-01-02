@@ -1,15 +1,42 @@
 {
+  "heading": "# 组合框",
+  "headingText": "`v-combobox` 组件是一个 [v-autocomplete](/components/autocompletes) ，允许用户输入在提供的 **tems** 中不存在的值。创建的项目将作为字符串返回。",
+  "examples": {
+    "usage": {
+      "desc": "使用组合框，您可以允许用户创建可能不在提供的项列表中显示的新值。"
+    },
+    "no-data": {
+      "heading": "### 没有带纸片的数据",
+      "desc": "在本例中，我们使用一个自定义的 **no-data** 插槽在 搜索/创建 项时为用户提供上下文。"
+    },
+    "advanced": {
+      "heading": "### 高级自定义选项",
+      "desc": "`v-combobox` 改进了 `v-select` 和 `v-autocomplete` 的功能。这为您提供了一个可扩展的接口来创建真正的自定义实现。这个示例利用了一些更高级的特性，比如自定义**filter** 算法、内联列表编辑和动态输入项。"
+    },
+    "combobox-multiple": {
+      "heading": "### 多个组合框",
+      "desc": "以前称为 **tags** - 允许用户输入多个值"
+    },
+    "dense": {
+      "heading": "### 密集",
+      "desc": "您可以使用 `dense` 属性来降低组合框的高度并降低列表项的最大高度。"
+    }
+  },
   "props": {
+    "dark": "Components.Inputs.props.dark",
+    "delimiters": "接受将在键入时触发新标记的字符串数组。不替换正常的 Tab 和 Enter keys。",
     "value": "Components.Inputs.props.value"
   },
   "slots": {
     "append": "Components.Inputs.slots.append",
     "append-outer": "Components.TextFields.slots.append-outer",
+    "item": "Components.Selects.slots.item",
     "prepend": "Components.Inputs.slots.prepend",
     "prepend-inner": "Components.TextFields.slots.prepend-inner",
     "append-item": "Components.Selects.slots.append-item",
     "no-data": "Mixins.Filterable.slots.noData",
-    "prepend-item": "Components.Selects.slots.prepend-item"
+    "prepend-item": "Components.Selects.slots.prepend-item",
+    "selection": "Components.Selects.slots.selection"
   },
   "events": {
     "change": "Components.Inputs.events.change",
@@ -18,6 +45,8 @@
     "click:clear": "Components.TextFields.events['click:clear']",
     "click:prepend": "Components.Inputs.events['click:prepend']",
     "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
-    "update:error": "Mixins.Validatable.events['update:error']"
+    "update:error": "Mixins.Validatable.events['update:error']",
+    "update:list-index": "Components.Selects.events['update:list-index']",
+    "update:search-input": "`search-input.sync` 事件"
   }
 }

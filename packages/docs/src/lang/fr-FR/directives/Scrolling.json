@@ -1,10 +1,13 @@
 {
+  "heading": "# Directive de défilement",
+  "headingText": "La directive `v-scroll` vous permet de fournir des fonctions de rappel lorsque la fenêtre ou un élément spécifiquement défini défile.",
   "examples": {
     "usage": {
       "desc": "Le comportement par défaut est de se lier à la fenêtre. Si aucune option de configuration supplémentaire n'est requise, vous pouvez simplement transmettre votre fonction de rappel.",
       "uninverted": true
     },
     "options": {
+      "heading": "### Défilement avec options",
       "desc": "Pour une approche plus précise, vous pouvez désigner la cible pour lier l'écouteur d'événements de défilement.",
       "uninverted": true
     }

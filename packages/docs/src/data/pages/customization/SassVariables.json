@@ -9,7 +9,20 @@
           "type": "alert",
           "lang": "sassAlert1",
           "value": "warning"
-        },
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "variable-api"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
         {
           "type": "heading",
           "lang": "setupHeading"

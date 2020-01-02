@@ -1,9 +1,12 @@
 {
+  "heading": "# Observateur de Mutation",
+  "headingText": "La directive `v-mutate` utilise l'API [Mutation Observer](https://developer.mozilla.org/fr-US/docs/Web/API/MutationObserver). Elle fournit une interface facile à utiliser pour détecter lorsque des éléments sont mis à jour.",
   "examples": {
     "usage": {
       "desc": "Par défaut, la directive `v-mutate` permettra toutes les options disponibles dans l'API [Mutation Observer](https://developer.mozilla.org/fr-US/docs/Web/API/MutationObserver). Cela peut être modifié d'une manière ou d'une autre. Vous pouvez passer en objet avec des clés pour **handler** et **options** ou utiliser la propriété _modificateur_ de la directive, `v-mutate.attr.sub=\"onMutate\"`"
     },
     "once": {
+      "heading": "### Modificateurs",
       "desc": "La directive « v-mutate » accepte les modificateurs pour toutes les options disponibles dans l'API [Mutation Observer](https://developer.mozilla.org/fr-US/docs/Web/API/MutationObserver). Pour la durée, les abréviations sont utilisées—**attr** (attributs), **child** (Liste d'enfants), **sub** (sous-réci) et **char** (characterData)."
     }
   },

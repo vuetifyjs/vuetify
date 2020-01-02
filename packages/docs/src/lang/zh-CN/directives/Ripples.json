@@ -1,7 +1,29 @@
 {
+  "heading": "# 波纹指令",
+  "headingText": "`v-ripple` 指令被用于显示用户的操作。它可以应用于任何块级元素。许多组件都带有内置的波纹指令，比如 `v-btn`、`v-tabs-item` 等等。",
   "examples": {
+    "usage": {
+      "desc": "只要在组件或 HTML 元素上使用 `v-ripple` 指令，就可以启用基本的波纹功能",
+      "uninverted": true
+    },
     "custom-color": {
-      "desc": "您可以使用辅助器类改变波纹的颜色。"
+      "heading": "### 自定义色彩",
+      "desc": "您可以使用辅助器类改变波纹的颜色。",
+      "uninverted": true
+    },
+    "center": {
+      "heading": "### 居中波纹",
+      "desc": "当使用 `center` 选项时，始终会从目标的中心处产生波纹。",
+      "uninverted": true
+    },
+    "ripple-in-components": {
+      "heading": "### 组件中的波纹",
+      "desc": "有些组件提供了 `ripple` 属性，允许您控制波纹效果。 您可以使用 `class` 或 `center` 选项关闭它或提供自定义行为。",
+      "uninverted": true
     }
+  },
+  "options": {
+    "class": "`v-ripple=\"{ \"class\": 'my-class' }\"` 用来改变波纹的颜色",
+    "center": "`v-ripple=\"{ \"class\": 'my-class' }\"` 强制从中心点扩散"
   }
 }

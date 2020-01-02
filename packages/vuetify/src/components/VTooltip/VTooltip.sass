@@ -1,4 +1,4 @@
-@import ./_variables
+@import './_variables.scss'
 
 .v-tooltip
   display: none
@@ -13,7 +13,7 @@
     font-size: $tooltip-font-size
     line-height: round($tooltip-font-size * 1.6)
     display: inline-block
-    padding: 5px 16px
+    padding: $tooltip-padding
     position: absolute
     text-transform: initial
     width: auto
@@ -24,10 +24,10 @@
       position: fixed
 
     &[class*="-active"]
-      transition-timing-function: map-get($transition, 'linear-out-slow-in')
+      transition-timing-function: $tooltip-transition-timing-function
 
     &[class*="enter-active"]
-      transition-duration: 150ms
+      transition-duration: $tooltip-transition-enter-duration
 
     &[class*="leave-active"]
-      transition-duration: 75ms
+      transition-duration: $tooltip-transition-leave-duration

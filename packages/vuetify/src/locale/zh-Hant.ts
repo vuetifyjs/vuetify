@@ -1,4 +1,5 @@
 export default {
+  badge: '徽章',
   close: '關閉',
   dataIterator: {
     noResultsText: '沒有符合條件的結果',

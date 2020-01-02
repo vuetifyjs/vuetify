@@ -1,4 +1,5 @@
 export default {
+  badge: 'Значка',
   close: 'Close',
   dataIterator: {
     noResultsText: 'Ни један запис није пронађен',

@@ -19,9 +19,8 @@ import {
   getSlot,
 } from '../../util/helpers'
 
-// Types
-import { VNode } from 'vue/types'
-import { PropValidator } from 'vue/types/options'
+// Typeslint
+import { VNode, PropType } from 'vue'
 
 /* @vue/component */
 export default mixins(
@@ -37,9 +36,9 @@ export default mixins(
     icon: String,
     iconColor: String,
     mobileBreakPoint: {
-      type: [Number, String],
+      type: [Number, String] as PropType<string | number>,
       default: 960,
-    } as PropValidator<string | number>,
+    },
     singleLine: Boolean,
     sticky: Boolean,
     tile: {

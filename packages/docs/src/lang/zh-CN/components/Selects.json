@@ -1,6 +1,10 @@
 {
+  "heading": "# 选择器",
+  "headingText": "选择器组件用于从选项列表中收集用户提供的信息。",
+  "objectAlert": "在为 **items** 属性使用对象时，您必须将 **item-text** 和 **item-value** 与对象上的现有属性关联。这些值默认为 **text** 和 **value**，可以更改。",
   "examples": {
     "light": {
+      "heading": "### 浅色主题",
       "desc": "标准的单选有多种配置选项"
     },
     "icons": {
@@ -12,25 +16,55 @@
       "desc": "多选择器可以使用 `v-chip` 组件来显示已选项。"
     },
     "custom-text-and-value": {
+      "heading": "### 自定义选项的文本和值",
       "desc": "你可以指定选项数组中的文本与值字段对应的特定属性，在默认情况下是 **text** 和 **value**。在这个例子中，我们也可以用 `return-object` 属性来返回被选中的对象。"
     },
+    "slots": {
+      "heading": "### 预留/附加 项目插槽",
+      "desc": "`v-select` 组件可以有选择地扩展，带有前缀和附加项。这是完美的定制 **select-all** 功能。"
+    },
+    "selection-appearance": {
+      "heading": "### 更改选择器外观",
+      "desc": "`selection` 插槽可用于自定义所选值在输入中的显示方式。 当您想要 `foo (+20 others)` 之类的东西或者不希望选择占据多行时，这是很棒的。"
+    },
     "disabled": {
-      "heading": "禁用"
+      "heading": "### 禁用",
+      "desc": "您不能使用禁用的 `v-select`。"
+    },
+    "dense": {
+      "heading": "### 密集",
+      "desc": "您可以使用 `dense` 属性来降低字段高度和列表项的最大高度。"
+    },
+    "readonly": {
+      "heading": "### 只读",
+      "desc": "您不能使用只读的 `v-select`，但它看起来是默认的。"
+    },
+    "menu-props": {
+      "heading": "### 自定义菜单属性",
+      "desc": "自定义属性可以使用 `menuProps` 属性直接传递给 `v-menu`。 在此示例中，菜单被强制指向顶部并转移到顶部。"
     }
   },
   "props": {
+    "attach": "Mixins.Detachable.props.attach",
     "autocomplete": "根据用户输入进行筛选",
     "cacheItems": "保留已经通过 **items** 属性的项在本地的唯一副本",
     "chips": "改变一个已选择项为小纸片（chips）的显示方式",
     "combobox": "在单选中 **tags** 的一个变种",
+    "contentClass": "Mixins.Detachable.props.contentClass",
+    "dark": "Components.Inputs.props.dark",
     "debounceSearch": "去除搜索框正在 emitted 的值",
     "deletableChips": "添加一个去除图标的到选定的小纸片（chips）",
     "disabled": "禁用输入",
+    "eager": "Mixins.Bootable.props.eager",
     "editable": " 创建一个可编辑按钮 - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "filter": "用于过滤条目的功能",
     "hideSelected": "不要在选择菜单中显示已选择的项",
+    "itemColor": "设置选中项目的颜色",
     "itemDisabled": " 禁用 **items** 的属性值",
+    "items": "可以是对象数组或字符串数组。当使用对象时，将寻找文本和值字段。 这可以使用 **item-text** 和 **item-value** 属性来更改。 具有 **header** 或 **divider** 属性的对象被视为特殊情况并生成列表头或分隔符；这些是不可选择的。",
     "itemText": "设置**items**'属性的文本值",
+    "itemValue": "设置 **items** 值的属性 - **must be primitive**。 支持点表示法",
+    "menuProps": "将属性传递到 `v-menu` 组件。接受布尔属性 `menu-props=\"auto, overflowY\"` ，或一个对象 `:menu-props=\"{ auto: true, overflowY: true }\"`",
     "minWidth": "Mixins.Menuable.props.minWidth",
     "multiple": "多选，接受数组作为值",
     "multiLine": "当选择器组件被聚焦或使用时，使标签浮动",
@@ -40,23 +74,33 @@
     "returnObject": "将选择器的行为更改为直接返回对象，而不是 item-value 指定的值",
     "searchInput": "使用自动补全（autocomplete）属性，使用 .sync 修饰符从自动补全搜索框中捕获用户的输入",
     "segmented": "创建一个分段按钮 - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
+    "smallChips": "使用 **small** 属性将选择的显示更改为纸片",
     "tags": "标记功能允许用户创建一个 **items** 属性中不存在的新值",
+    "valueComparator": "用于值的比较算法。[More info](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts)",
     "value": "Components.Inputs.props.value"
   },
   "slots": {
     "append": "Components.Inputs.slots.append",
+    "append-item": "在菜单内容后添加项目",
     "append-outer": "Components.TextFields.slots.append-outer",
+    "item": "定义自定义项外观",
     "no-data": "Mixins.Filterable.slots.noData",
     "prepend": "Components.Inputs.slots.prepend",
-    "prepend-inner": "Components.TextFields.slots.prepend-inner"
+    "prepend-inner": "Components.TextFields.slots.prepend-inner",
+    "prepend-item": "在菜单内容之前添加项目",
+    "selection": "定义自定义选择器外观"
   },
   "events": {
+    "blur": "当组件不再聚焦时发出",
     "change": "Components.Inputs.events.change",
     "click:append": "Components.Inputs.events['click:append']",
     "click:append-outer": "Components.TextFields.events['click:append-outer']",
     "click:clear": "Components.TextFields.events['click:clear']",
     "click:prepend": "Components.Inputs.events['click:prepend']",
     "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
-    "update:error": "Mixins.Validatable.events['update:error']"
+    "focus": "组件聚焦时发出",
+    "update:error": "Mixins.Validatable.events['update:error']",
+    "update:list-index": "使用键盘箭头选择菜单项时发出",
+    "update:search-input": "`search-input.sync` 事件"
   }
 }

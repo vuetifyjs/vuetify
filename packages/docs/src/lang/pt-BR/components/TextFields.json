@@ -1,16 +1,32 @@
 {
+  "heading": "# Campos de texto",
+  "headingText": "Os componentes de campo de texto são usados para coletar informação provida pelo usuário.",
   "examples": {
     "usage": {
       "desc": "Um text-field simples com placeholder e/ou label."
     },
     "single-line": {
+      "heading": "### Linha Única",
       "desc": "Text-fields em linha única não possuem seu label flutuando quando estiver focado ou com dados."
     },
+    "disabled-and-readonly": {
+      "heading": "### Desativado e somente leitura",
+      "desc": "Os campos de texto podem ser `disabled` ou `readonly`."
+    },
     "dense": {
-      "heading": "### Denso"
+      "heading": "### Denso",
+      "desc": "Você pode reduzir a altura do campo de texto com a propriedade `dense`."
     },
     "icon": {
+      "heading": "### Ícones",
       "desc": "Ícones podem ser especificados como prepended ou appended."
+    },
+    "clearable": {
+      "heading": "### Limpável",
+      "desc": "Quando `clearable`, você pode personalizar o ícone de limpeza com `clear-icon`."
+    },
+    "icon-events": {
+      "heading": "### Eventos de ícone"
     },
     "password": {
       "desc": "Um campo de senha pode ser usado com um ícone anexado e uma função de retorno (callback) para de controlar sua visibilidade."

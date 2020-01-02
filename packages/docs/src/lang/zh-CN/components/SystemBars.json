@@ -1,1 +1,30 @@
-{}
+{
+  "heading": "# 系统栏",
+  "headingText": "`v-system-bar` 组件可用于向用户显示状态。它看起来像 Android 系统栏，可以包含图标、分隔符和一些文本。",
+  "examples": {
+    "usage": {
+      "desc": "`v-system-bar` 最简单的形式是显示一个默认主题的容器。"
+    },
+    "color": {
+      "heading": "### 彩色栏",
+      "desc": "您可以通过使用 `color` 属性更改 `v-system-bar` 的颜色。"
+    },
+    "window": {
+      "heading": "### 窗口栏",
+      "desc": "带有窗口控件和状态信息的窗口栏。"
+    },
+    "themes": {
+      "heading": "### 主题",
+      "desc": "可以将深色或浅色主题变量应用于 `v-system-bar`。"
+    },
+    "lights-out": {
+      "heading": "### 熄灯",
+      "desc": "您可以使用 `lights-out` 属性来降低 `v-system-bar` 的不透明度。"
+    }
+  },
+  "props": {
+    "height": "Mixins.Measurable.props.height",
+    "lightsOut": "降低系统栏不透明度。",
+    "window": "将系统栏高度增加到 32px（24px 默认值）。"
+  }
+}

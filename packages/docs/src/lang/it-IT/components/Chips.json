@@ -1,1 +1,19 @@
-{}
+{
+  "examples": {
+    "usage": {
+      "uninverted": true
+    },
+    "icon": {
+      "heading": "### Icona"
+    },
+    "outlined": {
+      "heading": "### Delineato"
+    },
+    "closable": {
+      "uninverted": true
+    },
+    "in-selects": {
+      "uninverted": true
+    }
+  }
+}

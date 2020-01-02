@@ -1,4 +1,4 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 /* Theme */
 +theme(v-input) using ($material)
@@ -21,17 +21,17 @@
   align-items: flex-start
   display: flex
   flex: 1 1 auto
-  font-size: 16px
-  letter-spacing: normal
+  font-size: $input-font-size
+  letter-spacing: $input-letter-spacing
   max-width: 100%
-  text-align: left
+  text-align: $input-text-align
 
   .v-progress-linear
     top: calc(100% - 1px)
     left: 0
 
   input
-    max-height: 32px
+    max-height: $input-max-height
 
   input,
   textarea
@@ -44,8 +44,8 @@
       outline: none
 
   .v-label
-    height: 20px
-    line-height: 20px
+    height: $input-label-height
+    line-height: $input-label-letter-spacing
 
   &__append-outer,
   &__prepend-outer
@@ -59,17 +59,17 @@
 
   &__append-outer
     +ltr()
-      margin-left: 9px
+      margin-left: $input-prepend-append-outer-margin
 
     +rtl()
-      margin-right: 9px
+      margin-right: $input-prepend-append-outer-margin
 
   &__prepend-outer
     +ltr()
-      margin-right: 9px
+      margin-right: $input-prepend-append-outer-margin
 
     +rtl()
-      margin-left: 9px
+      margin-left: $input-prepend-append-outer-margin
 
   &__control
     display: flex
@@ -83,11 +83,11 @@
   &__icon
     align-items: center
     display: inline-flex
-    height: 24px
+    height: $input-icon-height
     flex: 1 0 auto
     justify-content: center
-    min-width: 24px
-    width: 24px
+    min-width: $input-icon-min-width
+    width: $input-icon-width
 
     &--clear
       border-radius: 50%
@@ -96,14 +96,14 @@
     align-items: center
     color: inherit
     display: flex
-    margin-bottom: 8px
+    margin-bottom: $input-slot-margin-bottom
     min-height: inherit
     position: relative
     transition: $primary-transition
     width: 100%
 
   &--dense > .v-input__control > .v-input__slot
-    margin-bottom: 4px
+    margin-bottom: $input-dense-slot-margin-bottom
 
   &--is-disabled:not(.v-input--is-readonly)
     pointer-events: none

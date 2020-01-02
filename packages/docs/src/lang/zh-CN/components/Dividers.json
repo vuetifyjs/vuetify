@@ -1,10 +1,36 @@
 {
+  "heading": "# 分割线",
+  "headingText": "`v-divider` 组件用于分隔列表或布局的各个部分。",
   "examples": {
+    "usage": {
+      "desc": "最简单的分隔线显示一条水平线。"
+    },
     "inset": {
-      "desc": "插页隔线向右移动72px，这将使他们将列表项分隔。"
+      "heading": "### 嵌入式分隔线",
+      "desc": "嵌入式分隔线向右移动 72px。 这将使他们与列表项对齐。"
+    },
+    "vertical": {
+      "heading": "### 垂直分割线",
+      "desc": "垂直分隔线为您提供了更多用于独特布局的工具。"
+    },
+    "vertical-inset": {
+      "heading": "### 垂直的嵌入式分割线",
+      "desc": "垂直分割线还可以与 `inset` 属性一起使用，以获得更多选项。"
+    },
+    "subheaders": {
+      "heading": "### 分隔线和副标题",
+      "desc": "分割线和副标题可以帮助分解内容，并可以使用相同的 `inset` 属性来相互对齐。"
+    },
+    "divider-list-portrait": {
+      "heading": "### 人像视图中的分隔符",
+      "desc": "创建自定义卡片以适应任何用例"
     }
   },
+  "accessibility": {
+    "desc": "默认情况下，`v-diver` 组件被分配给 [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) 的角色 [**separator**](https://www.w3.org/TR/wai-aria/#separator)，它表示分隔符“分离并区分菜单项的内容部分或组别。 然而，有时分隔符只是使界面看起来很好的一种方式。在这种情况下， [**presentation**](https://www.w3.org/TR/wai-aria/#presentation) 应使用表示“一个其隐性本地角色语义不会映射到可访问性 API 的元素”。 要覆盖默认的 **separator** 角色在 `v-divider` 中，只需添加一个 `role=\"presentation\"` \n 属性到您的组件。 此外，`v-divider` 组件有一个 `aria-orientation=\"vertical\"`。如果 `vertical=\"true\"`，那么 `aria-orientation=\"undefined\"` 也会自动设置。如果 `role=\"presentation\"`, `aria-orientation=\"undefined\"`，那么就会应用默认值。"
+  },
   "props": {
-    "inset": "添加缩进 (72px)"
+    "inset": "添加缩进 (72px)",
+    "vertical": "垂直显示分隔线"
   }
 }

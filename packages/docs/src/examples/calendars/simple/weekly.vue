@@ -9,35 +9,7 @@
           :events="events"
           color="primary"
           type="week"
-        >
-          <!-- the events at the top (all-day) -->
-          <template v-slot:day-header="{ date }">
-            <template v-for="event in eventsMap[date]">
-              <!-- all day events don't have time -->
-              <div
-                v-if="!event.time"
-                :key="event.title"
-                class="my-event"
-                @click="open(event)"
-                v-html="event.title"
-              ></div>
-            </template>
-          </template>
-          <!-- the events at the bottom (timed) -->
-          <template v-slot:day-body="{ date, timeToY, minutesToPixels }">
-            <template v-for="event in eventsMap[date]">
-              <!-- timed events -->
-              <div
-                v-if="event.time"
-                :key="event.title"
-                :style="{ top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) + 'px' }"
-                class="my-event with-time"
-                @click="open(event)"
-                v-html="event.title"
-              ></div>
-            </template>
-          </template>
-        </v-calendar>
+        ></v-calendar>
       </v-sheet>
     </v-col>
   </v-row>
