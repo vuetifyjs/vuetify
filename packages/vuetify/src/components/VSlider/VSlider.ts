@@ -95,7 +95,6 @@ export default mixins<options &
     keyPressed: 0,
     isFocused: false,
     isActive: false,
-    lazyValue: 0,
     noClick: false, // Prevent click event if dragging took place, hack for #7915
   }),
 
