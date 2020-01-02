@@ -549,6 +549,42 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     expect(counter.element.innerHTML).toBe('0 / 50')
   })
 
+  it('should use counter value function', async () => {
+    const wrapper = mountFunction({
+      attrs: {
+        maxlength: 25,
+      },
+      propsData: {
+        counter: true,
+        counterValue: (value?: string): number => (value || '').replace(/\s/g, '').length,
+      },
+    })
+
+    const counter = wrapper.find('.v-counter')
+
+    expect(counter.element.innerHTML).toBe('0 / 25')
+
+    wrapper.setProps({ value: 'foo bar baz' })
+
+    await wrapper.vm.$nextTick()
+
+    expect(counter.element.innerHTML).toBe('9 / 25')
+
+    wrapper.setProps({ counter: '50' })
+
+    await wrapper.vm.$nextTick()
+
+    expect(counter.element.innerHTML).toBe('9 / 50')
+
+    wrapper.setProps({
+      counterValue: (value?: string): number => (value || '').replace(/ba/g, '').length,
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(counter.element.innerHTML).toBe('7 / 50')
+  })
+
   it('should set bad input on input', () => {
     const wrapper = mountFunction()
 
@@ -678,6 +714,22 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     input.trigger('mouseup')
 
     expect(focus).toHaveBeenCalledTimes(1)
+  })
+
+  it('should hide messages if no messages and hide-details is auto', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        hideDetails: 'auto',
+      },
+    })
+
+    expect(wrapper.vm.genMessages()).toBeNull()
+
+    wrapper.setProps({ counter: 7 })
+    expect(wrapper.vm.genMessages()).not.toBeNull()
+
+    wrapper.setProps({ counter: null, errorMessages: 'required' })
+    expect(wrapper.vm.genMessages()).not.toBeNull()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/8268

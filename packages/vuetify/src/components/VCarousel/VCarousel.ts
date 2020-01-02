@@ -18,8 +18,7 @@ import { convertToUnit } from '../../util/helpers'
 import { breaking } from '../../util/console'
 
 // Types
-import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { VNode, PropType } from 'vue'
 
 export default VWindow.extend({
   name: 'v-carousel',
@@ -56,9 +55,9 @@ export default VWindow.extend({
       default: true,
     },
     verticalDelimiters: {
-      type: String,
+      type: String as PropType<'' | 'left' | 'right'>,
       default: undefined,
-    } as PropValidator<'' | 'left' | 'right'>,
+    },
   },
 
   data () {

@@ -19,7 +19,7 @@ import { removed } from '../../util/console'
 // Types
 import mixins from '../../util/mixins'
 import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { PropType, PropValidator } from 'vue/types/options'
 
 const baseMixins = mixins(
   Colorable,
@@ -83,7 +83,7 @@ export default baseMixins.extend<options>().extend({
     },
     threeLine: Boolean,
     twoLine: Boolean,
-    value: null as any as PropValidator<any>,
+    value: null as any as PropType<any>,
   },
 
   data: () => ({

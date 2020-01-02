@@ -1,4 +1,4 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 +theme(v-small-dialog) using ($material)
   &__menu-content,
@@ -14,9 +14,9 @@
       display: inline-block
 
   &__content
-    padding: 0 16px
+    padding: $edit-dialog-content-padding
 
   &__actions
-    padding: 8px
+    padding: $edit-dialog-actions-padding
     text-align: right
     white-space: pre

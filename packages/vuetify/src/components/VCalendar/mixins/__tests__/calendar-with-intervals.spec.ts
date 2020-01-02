@@ -1,5 +1,6 @@
 import CalendarWithIntervals from '../calendar-with-intervals'
-import { parseTimestamp, VTimestamp } from '../../util/timestamp'
+import { CalendarTimestamp } from 'types'
+import { parseTimestamp } from '../../util/timestamp'
 import {
   mount,
   Wrapper,
@@ -151,12 +152,12 @@ describe('calendar-with-intervals.ts', () => {
   it.skip('should format interval', async () => {
     const wrapper = mountFunction()
 
-    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 8, minute: 30 } as VTimestamp, false)).toBe('8:30 AM')
-    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 20, minute: 30 } as VTimestamp, false)).toBe('8:30 PM')
-    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 0, minute: 30 } as VTimestamp, false)).toBe('12:30 AM')
-    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 8, minute: 30 } as VTimestamp, true)).toBe('8:30 AM')
-    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 20, minute: 30 } as VTimestamp, true)).toBe('8:30 PM')
-    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 0, minute: 30 } as VTimestamp, true)).toBe('12:30 AM')
+    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 8, minute: 30 } as CalendarTimestamp, false)).toBe('8:30 AM')
+    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 20, minute: 30 } as CalendarTimestamp, false)).toBe('8:30 PM')
+    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 0, minute: 30 } as CalendarTimestamp, false)).toBe('12:30 AM')
+    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 8, minute: 30 } as CalendarTimestamp, true)).toBe('8:30 AM')
+    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 20, minute: 30 } as CalendarTimestamp, true)).toBe('8:30 PM')
+    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 0, minute: 30 } as CalendarTimestamp, true)).toBe('12:30 AM')
   })
 
   it('should return intervalFormat if has one', async () => {
@@ -177,7 +178,11 @@ describe('calendar-with-intervals.ts', () => {
 
     expect(wrapper.vm.getSlotScope(parseTimestamp('2019-02-08'))).toBeDefined()
     expect(wrapper.vm.getSlotScope(parseTimestamp('2019-02-08')).date).toBe('2019-02-08')
-    expect(wrapper.vm.getSlotScope(parseTimestamp('2019-02-08'))).toMatchSnapshot()
+
+    const scope = wrapper.vm.getSlotScope(parseTimestamp('2019-02-08'))
+    delete scope.week
+
+    expect(scope).toMatchSnapshot()
     expect(typeof wrapper.vm.getSlotScope(parseTimestamp('2019-02-08')).timeToY).toBe('function')
     expect(typeof wrapper.vm.getSlotScope(parseTimestamp('2019-02-08')).minutesToPixels).toBe('function')
   })
@@ -187,9 +192,9 @@ describe('calendar-with-intervals.ts', () => {
 
     expect(typeof wrapper.vm.timeToY).toBe('function')
     expect(wrapper.vm.timeToY('08:30')).toBeDefined()
-    expect(wrapper.vm.timeToY('08:30')).toBe(340)
-    expect(wrapper.vm.timeToY('09:30')).toBe(380)
-    expect(Math.round(wrapper.vm.timeToY('23:50') || 0)).toBe(953)
+    expect(wrapper.vm.timeToY('08:30')).toBe(408)
+    expect(wrapper.vm.timeToY('09:30')).toBe(456)
+    expect(Math.round(wrapper.vm.timeToY('23:50') || 0)).toBe(1144)
 
     wrapper.setProps({
       firstInterval: 5,
@@ -198,15 +203,15 @@ describe('calendar-with-intervals.ts', () => {
       bodyHeight: 400,
     })
 
-    expect(wrapper.vm.timeToY('08:30')).toBe(200)
-    expect(wrapper.vm.timeToY('09:30')).toBe(200)
-    expect(wrapper.vm.timeToY('23:50')).toBe(200)
+    expect(wrapper.vm.timeToY('08:30')).toBe(240)
+    expect(wrapper.vm.timeToY('09:30')).toBe(240)
+    expect(wrapper.vm.timeToY('23:50')).toBe(240)
 
     expect(wrapper.vm.timeToY('00:05')).toBe(0)
 
-    expect(Math.round(wrapper.vm.timeToY('08:30', false) || 0)).toBe(1840)
-    expect(wrapper.vm.timeToY('09:30', false)).toBe(2080)
-    expect(wrapper.vm.timeToY('23:50', false)).toBe(5520)
+    expect(Math.round(wrapper.vm.timeToY('08:30', false) || 0)).toBe(2208)
+    expect(wrapper.vm.timeToY('09:30', false)).toBe(2496)
+    expect(wrapper.vm.timeToY('23:50', false)).toBe(6624)
 
     expect(wrapper.vm.timeToY('bad')).toBe(false)
   })
@@ -223,18 +228,18 @@ describe('calendar-with-intervals.ts', () => {
     expect(typeof wrapper.vm.minutesToPixels).toBe('function')
     expect(wrapper.vm.minutesToPixels(5)).toBeDefined()
 
-    expect(wrapper.vm.minutesToPixels(5)).toBe(40)
-    expect(wrapper.vm.minutesToPixels(10)).toBe(80)
-    expect(wrapper.vm.minutesToPixels(50)).toBe(400)
+    expect(wrapper.vm.minutesToPixels(5)).toBe(48)
+    expect(wrapper.vm.minutesToPixels(10)).toBe(96)
+    expect(wrapper.vm.minutesToPixels(50)).toBe(480)
 
     wrapper.setProps({
       intervalMinutes: 10,
       bodyHeight: 400,
     })
 
-    expect(wrapper.vm.minutesToPixels(5)).toBe(20)
-    expect(wrapper.vm.minutesToPixels(10)).toBe(40)
-    expect(wrapper.vm.minutesToPixels(50)).toBe(200)
+    expect(wrapper.vm.minutesToPixels(5)).toBe(24)
+    expect(wrapper.vm.minutesToPixels(10)).toBe(48)
+    expect(wrapper.vm.minutesToPixels(50)).toBe(240)
   })
 
   it('should scroll to time', async () => {
@@ -247,11 +252,11 @@ describe('calendar-with-intervals.ts', () => {
     })
 
     wrapper.vm.scrollToTime('8:30')
-    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(340)
+    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(408)
     wrapper.vm.scrollToTime('12:30')
-    expect(Math.round((wrapper.vm.$refs.scrollArea as any).scrollTop)).toBe(500)
+    expect(Math.round((wrapper.vm.$refs.scrollArea as any).scrollTop)).toBe(600)
     wrapper.vm.scrollToTime('20:00')
-    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(800)
+    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(960)
 
     wrapper.setProps({
       intervalMinutes: 5,
@@ -259,11 +264,11 @@ describe('calendar-with-intervals.ts', () => {
     })
 
     wrapper.vm.scrollToTime('8:30')
-    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(960)
+    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(1152)
     wrapper.vm.scrollToTime('12:30')
-    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(960)
+    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(1152)
     wrapper.vm.scrollToTime('20:30')
-    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(960)
+    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(1152)
 
     wrapper.setProps({
       intervalMinutes: 30,
@@ -271,11 +276,11 @@ describe('calendar-with-intervals.ts', () => {
     })
 
     wrapper.vm.scrollToTime('8:30')
-    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(680)
+    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(816)
     wrapper.vm.scrollToTime('12:30')
-    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(960)
+    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(1152)
     wrapper.vm.scrollToTime('20:30')
-    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(960)
+    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(1152)
 
     expect(wrapper.vm.scrollToTime('20:19')).toBe(true)
     expect(wrapper.vm.scrollToTime('bad')).toBe(false)
@@ -286,9 +291,9 @@ describe('calendar-with-intervals.ts', () => {
 
     expect(typeof wrapper.vm.getTimestampAtEvent).toBe('function')
 
-    expect(wrapper.vm.getTimestampAtEvent(createMouseEvent(0, 100) as unknown as MouseEvent, { time: '20:00' } as VTimestamp)).toMatchObject({ hour: 2, minute: 30 })
-    expect(wrapper.vm.getTimestampAtEvent(createMouseEvent(0, 150) as unknown as MouseEvent, { time: '20:00' } as VTimestamp)).toMatchObject({ hour: 3, minute: 45 })
-    expect(wrapper.vm.getTimestampAtEvent(createMouseEvent(0, 200) as unknown as MouseEvent, { time: '20:00' } as VTimestamp)).toMatchObject({ hour: 5, minute: 0 })
+    expect(wrapper.vm.getTimestampAtEvent(createMouseEvent(0, 100) as unknown as MouseEvent, { time: '20:00' } as CalendarTimestamp)).toMatchObject({ hour: 2, minute: 5 })
+    expect(wrapper.vm.getTimestampAtEvent(createMouseEvent(0, 150) as unknown as MouseEvent, { time: '20:00' } as CalendarTimestamp)).toMatchObject({ hour: 3, minute: 7 })
+    expect(wrapper.vm.getTimestampAtEvent(createMouseEvent(0, 200) as unknown as MouseEvent, { time: '20:00' } as CalendarTimestamp)).toMatchObject({ hour: 4, minute: 10 })
   })
 
   it('should get timestamp at touch event', async () => {
@@ -296,16 +301,16 @@ describe('calendar-with-intervals.ts', () => {
 
     expect(typeof wrapper.vm.getTimestampAtEvent).toBe('function')
 
-    expect(wrapper.vm.getTimestampAtEvent(createTouchEvent(0, 100) as unknown as TouchEvent, { time: '20:00' } as VTimestamp)).toMatchObject({ hour: 2, minute: 30 })
-    expect(wrapper.vm.getTimestampAtEvent(createTouchEvent(0, 150) as unknown as TouchEvent, { time: '20:00' } as VTimestamp)).toMatchObject({ hour: 3, minute: 45 })
-    expect(wrapper.vm.getTimestampAtEvent(createTouchEvent(0, 200) as unknown as TouchEvent, { time: '20:00' } as VTimestamp)).toMatchObject({ hour: 5, minute: 0 })
+    expect(wrapper.vm.getTimestampAtEvent(createTouchEvent(0, 100) as unknown as TouchEvent, { time: '20:00' } as CalendarTimestamp)).toMatchObject({ hour: 2, minute: 5 })
+    expect(wrapper.vm.getTimestampAtEvent(createTouchEvent(0, 150) as unknown as TouchEvent, { time: '20:00' } as CalendarTimestamp)).toMatchObject({ hour: 3, minute: 7 })
+    expect(wrapper.vm.getTimestampAtEvent(createTouchEvent(0, 200) as unknown as TouchEvent, { time: '20:00' } as CalendarTimestamp)).toMatchObject({ hour: 4, minute: 10 })
   })
 
   it('should get style', async () => {
     const wrapper = mountFunction()
 
     expect(typeof wrapper.vm.intervalStyleDefault).toBe('function')
-    expect(wrapper.vm.intervalStyleDefault({} as VTimestamp)).toBeUndefined()
+    expect(wrapper.vm.intervalStyleDefault({} as CalendarTimestamp)).toBeUndefined()
   })
 
   it('should show interval label', async () => {
@@ -319,9 +324,9 @@ describe('calendar-with-intervals.ts', () => {
     expect(typeof wrapper.vm.showIntervalLabelDefault).toBe('function')
     expect(wrapper.vm.showIntervalLabelDefault({})).toBeTruthy()
 
-    expect(wrapper.vm.showIntervalLabelDefault({ hour: 0, minute: 5 } as VTimestamp)).toBeTruthy()
-    expect(wrapper.vm.showIntervalLabelDefault({ hour: 12, minute: 30 } as VTimestamp)).toBeTruthy()
-    expect(wrapper.vm.showIntervalLabelDefault({ hour: 13, minute: 0 } as VTimestamp)).toBeTruthy()
-    expect(wrapper.vm.showIntervalLabelDefault({ hour: 13, minute: 30 } as VTimestamp)).toBeTruthy()
+    expect(wrapper.vm.showIntervalLabelDefault({ hour: 0, minute: 5 } as CalendarTimestamp)).toBeTruthy()
+    expect(wrapper.vm.showIntervalLabelDefault({ hour: 12, minute: 30 } as CalendarTimestamp)).toBeTruthy()
+    expect(wrapper.vm.showIntervalLabelDefault({ hour: 13, minute: 0 } as CalendarTimestamp)).toBeTruthy()
+    expect(wrapper.vm.showIntervalLabelDefault({ hour: 13, minute: 30 } as CalendarTimestamp)).toBeTruthy()
   })
 })

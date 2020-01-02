@@ -271,6 +271,34 @@ const VTimestamp = {
   future: 'boolean',
 }
 
+const VCalendarDay = {
+  outside: 'boolean',
+  index: 'number',
+  week: [VTimestamp],
+  date: 'string',
+  time: 'string',
+  year: 'number',
+  month: 'number',
+  day: 'number',
+  hour: 'number',
+  minute: 'number',
+  weekday: 'number',
+  hasDay: 'boolean',
+  hasTime: 'boolean',
+  past: 'boolean',
+  present: 'boolean',
+  future: 'boolean',
+}
+
+const VCalendarEventSlot = {
+  event: 'any',
+  day: VCalendarDay,
+  outside: 'boolean',
+  start: 'boolean',
+  end: 'boolean',
+  timed: 'boolean',
+}
+
 const VTimestampWithTime = {
   date: 'string',
   time: 'string',
@@ -286,6 +314,8 @@ const VTimestampWithTime = {
   present: 'boolean',
   future: 'boolean',
   timeToY: '(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number',
+  minutesToPixels: '(minutes: number): number',
+  week: [VTimestamp],
 }
 
 const VSlider = {
@@ -339,6 +369,8 @@ module.exports = {
   VSlider,
   VTimestamp,
   VTimestampWithTime,
+  VCalendarDay,
+  VCalendarEventSlot,
   inputSlots,
   inputEvents,
   sharedGridProps,

@@ -1,4 +1,5 @@
 export default {
+  badge: 'знак',
   close: 'Закрыть',
   dataIterator: {
     noResultsText: 'Не найдено подходящих записей',

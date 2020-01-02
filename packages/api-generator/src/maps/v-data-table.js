@@ -17,7 +17,7 @@ const TableHeader = {
 }
 
 const DataTableEvents = [
-  { name: 'click:row', source: 'v-data-table', value: 'any' },
+  { name: 'click:row', source: 'v-data-table', value: 'any, { select: (value: boolean) => void, isSelected: boolean, expand: (value: boolean) => void, isExpanded: boolean }' },
 ].concat(DataIteratorEvents)
 
 const DataTableHeaderScopedProps = {
@@ -81,6 +81,10 @@ const DataTableBodyScopedProps = {
   ...DataDefaultScopedSlotProps,
   headers: 'TableHeader[]',
   isMobile: 'boolean',
+  isSelected: '(item: any) => boolean',
+  select: '(item: any, value: boolean) => void',
+  isExpanded: '(item: any) => boolean',
+  expand: '(item: any, value: boolean) => void',
 }
 
 const DataGroupScopedProps = {
@@ -95,6 +99,7 @@ const DataGroupHeaderScopedProps = {
   groupBy: DataOptions.groupBy,
   items: 'any[]',
   headers: 'TableHeader[]',
+  isOpen: 'boolean',
   toggle: '() => void',
   remove: '() => void',
 }

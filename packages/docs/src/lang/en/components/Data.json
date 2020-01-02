@@ -2,6 +2,7 @@
   "props": {
     "customFilter": "Function to filter items",
     "customSort": "Function used to sort items",
+    "customGroup": "Function used to group items",
     "disableFiltering": "Disables filtering completely",
     "disablePagination": "Disables pagination completely",
     "disableSort": "Disables sorting completely",

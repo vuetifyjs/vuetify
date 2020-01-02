@@ -1,4 +1,5 @@
 export default {
+  badge: 'Ženklelis',
   close: 'Uždaryti',
   dataIterator: {
     noResultsText: 'Nerasta atitinkančių įrašų',

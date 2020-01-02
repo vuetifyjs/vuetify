@@ -1,0 +1,24 @@
+// preset/variables.scss
+
+// Shrine specific variables
+$shrine-chip-border-radius: 4px;
+$shrine-chip-border: thin solid black;
+$shrine-chip-font-weight: 900;
+$shrine-chip-padding: 0 8px;
+
+// Preset variables
+$body-font-family: 'Work Sans', sans-serif;
+$border-radius-root: 6px;
+$headings: (
+  'h1': (
+    'font-family': 'Roboto', sans-serif;
+    'letter-spacing': 0
+  )
+);
+$material-light: (
+  'cards': #E0E0E0,
+  'text': (
+    'primary': rgba(0, 0, 0, .76),
+    'secondary': grey
+  )
+);

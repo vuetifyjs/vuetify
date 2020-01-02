@@ -1,33 +1,28 @@
 <template>
-  <v-container fluid class="text-center">
-    <v-row
-      justify="center"
+  <div class="text-center">
+    <v-badge
+      :value="hover"
+      color="deep-purple accent-4"
+      content="9999+"
+      left
+      transition="slide-x-transition"
     >
-      <v-badge
-        v-model="show"
-        color="cyan"
-        left
-      >
-        <template v-slot:badge>
-          <span>6</span>
-        </template>
+      <v-hover v-model="hover">
         <v-icon
-          large
           color="grey lighten-1"
-          @mouseover="show = true"
-          @mouseout="show = false"
-        >shopping_cart</v-icon>
-      </v-badge>
-    </v-row>
-  </v-container>
+          large
+        >
+          mdi-account-circle
+        </v-icon>
+      </v-hover>
+    </v-badge>
+  </div>
 </template>
 
 <script>
   export default {
-    data () {
-      return {
-        show: false,
-      }
-    },
+    data: () => ({
+      hover: false,
+    }),
   }
 </script>
