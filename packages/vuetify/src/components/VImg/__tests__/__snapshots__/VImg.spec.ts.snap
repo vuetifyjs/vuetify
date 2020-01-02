@@ -13,6 +13,8 @@ exports[`VImg.ts should display placeholders 1`] = `
       loading...
     </div>
   </div>
+  <div class="v-responsive__content">
+  </div>
 </div>
 `;
 
@@ -29,6 +31,8 @@ exports[`VImg.ts should display placeholders 2`] = `
       loading...
     </div>
   </div>
+  <div class="v-responsive__content">
+  </div>
 </div>
 `;
 
@@ -43,6 +47,8 @@ exports[`VImg.ts should have aria attributes 1`] = `
        mode="in-out"
   >
   </div>
+  <div class="v-responsive__content">
+  </div>
 </div>
 `;
 
@@ -54,6 +60,8 @@ exports[`VImg.ts should load 1`] = `
        mode="in-out"
   >
   </div>
+  <div class="v-responsive__content">
+  </div>
 </div>
 `;
 
@@ -64,6 +72,8 @@ exports[`VImg.ts should load 2`] = `
        name="fade-transition"
        mode="in-out"
   >
+  </div>
+  <div class="v-responsive__content">
   </div>
 </div>
 `;
@@ -93,6 +103,8 @@ exports[`VImg.ts should update src 1`] = `
        mode="in-out"
   >
   </div>
+  <div class="v-responsive__content">
+  </div>
 </div>
 `;
 
@@ -108,7 +120,9 @@ exports[`VImg.ts should update src 2`] = `
        mode="in-out"
   >
   </div>
-  <div class="v-responsive__content">
+  <div class="v-responsive__content"
+       style="width: 1600px;"
+  >
   </div>
 </div>
 `;
@@ -120,6 +134,8 @@ exports[`VImg.ts should update src while still loading 1`] = `
        name="fade-transition"
        mode="in-out"
   >
+  </div>
+  <div class="v-responsive__content">
   </div>
 </div>
 `;
@@ -136,7 +152,9 @@ exports[`VImg.ts should update src while still loading 2`] = `
        mode="in-out"
   >
   </div>
-  <div class="v-responsive__content">
+  <div class="v-responsive__content"
+       style="width: 1600px;"
+  >
   </div>
 </div>
 `;

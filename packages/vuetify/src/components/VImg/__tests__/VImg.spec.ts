@@ -190,18 +190,4 @@ describe('VImg.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
-
-  // Changes made in https://github.com/vuetifyjs/vuetify/pull/10027
-  // caused the container padding to animate when an image loaded.
-  it('should not render content until computedAspectRatio is defined', () => {
-    const wrapper = mountFunction()
-
-    expect(wrapper.vm.computedAspectRatio).toBeUndefined()
-    expect(wrapper.vm.genContent()).toBeUndefined()
-
-    wrapper.setData({ calculatedAspectRatio: 1 })
-
-    expect(wrapper.vm.computedAspectRatio).toBeDefined()
-    expect(wrapper.vm.genContent()).toBeDefined()
-  })
 })

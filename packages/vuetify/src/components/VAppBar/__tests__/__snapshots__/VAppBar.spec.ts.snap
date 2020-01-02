@@ -14,6 +14,8 @@ exports[`AppBar.ts should render with background 1`] = `
            mode="in-out"
       >
       </div>
+      <div class="v-responsive__content">
+      </div>
     </div>
   </div>
   <div class="v-toolbar__content"
