@@ -6,7 +6,7 @@ export interface Icons extends IconsOptions {
   values: VuetifyIcons
 }
 
-export type Iconfont = 'mdi' | 'mdiSvg' | 'md' | 'fa' | 'fa4'
+export type Iconfont = 'mdi' | 'mdiSvg' | 'md' | 'fa' | 'faSvg' | 'fa4'
 
 export interface IconsOptions {
   /**
