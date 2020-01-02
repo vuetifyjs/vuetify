@@ -6,9 +6,8 @@ import Measurable, { NumberOrNumberString } from '../../mixins/measurable'
 // Types
 import { VNode } from 'vue'
 
-// Utilities
+// Utils
 import mixins from '../../util/mixins'
-import { convertToUnit } from '../../util/helpers'
 
 /* @vue/component */
 export default mixins(Measurable).extend({
@@ -19,30 +18,21 @@ export default mixins(Measurable).extend({
   },
 
   computed: {
+    computedAspectRatio (): number {
+      return Number(this.aspectRatio)
+    },
+    aspectStyle (): object | undefined {
+      return this.computedAspectRatio
+        ? { paddingBottom: (1 / this.computedAspectRatio) * 100 + '%' }
+        : undefined
+    },
     __cachedSizer (): VNode | [] {
-      if (!this.sizerAspectStyle) return []
+      if (!this.aspectStyle) return []
 
       return this.$createElement('div', {
-        style: this.sizerAspectStyle,
+        style: this.aspectStyle,
         staticClass: 'v-responsive__sizer',
       })
-    },
-    computedAspectRatio (): number | undefined {
-      const aspectRatio = Number(this.aspectRatio)
-
-      return !isNaN(aspectRatio) ? (1 / aspectRatio) : undefined
-    },
-    computedAspectRatioPercent (): number | undefined {
-      if (this.computedAspectRatio == null) return undefined
-
-      return this.computedAspectRatio * 100
-    },
-    sizerAspectStyle (): object | undefined {
-      if (this.computedAspectRatioPercent == null) return undefined
-
-      return {
-        paddingBottom: convertToUnit(this.computedAspectRatioPercent, '%'),
-      }
     },
   },
 
