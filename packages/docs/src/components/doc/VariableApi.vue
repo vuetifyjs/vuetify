@@ -1,8 +1,8 @@
 <template>
   <div>
-    <doc-heading>Generic.Pages.variableApi</doc-heading>
+    <base-heading>Generic.Pages.variableApi</base-heading>
 
-    <doc-text>Customization.SassVariables.variableApiDesc</doc-text>
+    <base-markdown>Customization.SassVariables.variableApiDesc</base-markdown>
 
     <v-card outlined>
       <v-toolbar
