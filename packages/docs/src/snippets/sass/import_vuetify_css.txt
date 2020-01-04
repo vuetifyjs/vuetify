@@ -1,6 +1,7 @@
 // src/sass/variables.scss
 
 // Globals
+$body-font-family: 'Work Sans', serif;
 $border-radius-root: 6px;
 $font-size-root: 14px;
 
@@ -12,10 +13,6 @@ $list-item-dense-title-font-size: 0.929rem;
 $list-item-dense-title-font-weight: initial;
 $fab-icon-sizes: (
   'small': 20
-);
-$btn-font-sizes: (
-  'default': 1rem,
-  'large': 1rem
 );
 $btn-sizes: (
   'default': 41,
@@ -30,25 +27,5 @@ $headings: (
   'h2': (
     'size': 2.25rem,
     'line-height': 1.5em
-  ),
-  'h3': (
-    'size': 1.5625rem,
-    'line-height': 1.4em
-  ),
-  'h4': (
-    'size': 1.125rem,
-    'line-height': 1.4em
-  ),
-  'h5': (
-    'size': 1.0625rem
-  ),
-  'h6': (
-    'size': .75rem
-  ),
-  'subtitle-2': (
-    'size': 1rem
-  ),
-  'overline': (
-    'letter-spacing': 0
   )
 );
