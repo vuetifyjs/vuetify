@@ -1,4 +1,5 @@
 export default {
+  badge: 'Odznak',
   close: 'Zavřít',
   dataIterator: {
     noResultsText: 'Nenalezeny žádné záznamy',

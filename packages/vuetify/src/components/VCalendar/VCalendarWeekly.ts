@@ -2,7 +2,7 @@
 import './VCalendarWeekly.sass'
 
 // Types
-import { VNode, VNodeChildren } from 'vue'
+import { VNode } from 'vue'
 
 // Components
 import VBtn from '../VBtn'
@@ -11,14 +11,14 @@ import VBtn from '../VBtn'
 import CalendarBase from './mixins/calendar-base'
 
 // Util
+import { getSlot } from '../../util/helpers'
 import props from './util/props'
 import {
-  VTimestamp,
-  VTimestampFormatter,
   createDayList,
   getDayIdentifier,
   createNativeLocaleFormatter,
 } from './util/timestamp'
+import { CalendarTimestamp, CalendarFormatter } from 'types'
 
 /* @vue/component */
 export default CalendarBase.extend({
@@ -36,7 +36,7 @@ export default CalendarBase.extend({
     parsedMinWeeks (): number {
       return parseInt(this.minWeeks)
     },
-    days (): VTimestamp[] {
+    days (): CalendarTimestamp[] {
       const minDays = this.parsedMinWeeks * this.parsedWeekdays.length
       const start = this.getStartOfWeek(this.parsedStart)
       const end = this.getEndOfWeek(this.parsedEnd)
@@ -50,7 +50,7 @@ export default CalendarBase.extend({
         minDays
       )
     },
-    todayWeek (): VTimestamp[] {
+    todayWeek (): CalendarTimestamp[] {
       const today = this.times.today
       const start = this.getStartOfWeek(today)
       const end = this.getEndOfWeek(today)
@@ -64,9 +64,9 @@ export default CalendarBase.extend({
         this.parsedWeekdays.length
       )
     },
-    monthFormatter (): VTimestampFormatter {
+    monthFormatter (): CalendarFormatter {
       if (this.monthFormat) {
-        return this.monthFormat as VTimestampFormatter
+        return this.monthFormat as CalendarFormatter
       }
 
       const longOptions = { timeZone: 'UTC', month: 'long' }
@@ -80,7 +80,7 @@ export default CalendarBase.extend({
   },
 
   methods: {
-    isOutside (day: VTimestamp): boolean {
+    isOutside (day: CalendarTimestamp): boolean {
       const dayIdentifier = getDayIdentifier(day)
 
       return dayIdentifier < getDayIdentifier(this.parsedStart) ||
@@ -94,7 +94,7 @@ export default CalendarBase.extend({
     genHeadDays (): VNode[] {
       return this.todayWeek.map(this.genHeadDay)
     },
-    genHeadDay (day: VTimestamp, index: number): VNode {
+    genHeadDay (day: CalendarTimestamp, index: number): VNode {
       const outside = this.isOutside(this.days[index])
       const color = day.present ? this.color : undefined
 
@@ -114,16 +114,14 @@ export default CalendarBase.extend({
 
       return weeks
     },
-    genWeek (week: VTimestamp[]): VNode {
+    genWeek (week: CalendarTimestamp[]): VNode {
       return this.$createElement('div', {
         key: week[0].date,
         staticClass: 'v-calendar-weekly__week',
-      }, week.map(this.genDay))
+      }, week.map((day, index) => this.genDay(day, index, week)))
     },
-    genDay (day: VTimestamp, index: number): VNode {
+    genDay (day: CalendarTimestamp, index: number, week: CalendarTimestamp[]): VNode {
       const outside = this.isOutside(day)
-      const slot = this.$scopedSlots.day
-      const scope = { outside, index, ...day }
 
       return this.$createElement('div', {
         key: day.date,
@@ -132,21 +130,15 @@ export default CalendarBase.extend({
         on: this.getDefaultMouseEventHandlers(':day', _e => day),
       }, [
         this.genDayLabel(day),
-        slot ? slot(scope) : '',
-        // renders the orginial month text
-        // (day.day === 1 && this.showMonthOnFirst) ? this.genDayMonth(day) : '',
+        ...(getSlot(this, 'day', () => ({ outside, index, week, ...day })) || []),
       ])
     },
-    genDayLabel (day: VTimestamp): VNode {
-      const slot = this.$scopedSlots['day-label']
-
+    genDayLabel (day: CalendarTimestamp): VNode {
       return this.$createElement('div', {
         staticClass: 'v-calendar-weekly__day-label',
-      }, [
-        slot ? slot(day) as VNodeChildren : this.genDayLabelButton(day),
-      ])
+      }, getSlot(this, 'day-label', day) || [this.genDayLabelButton(day)])
     },
-    genDayLabelButton (day: VTimestamp): VNode {
+    genDayLabelButton (day: CalendarTimestamp): VNode {
       const color = day.present ? this.color : 'transparent'
       const hasMonth = day.day === 1 && this.showMonthOnFirst
 
@@ -166,13 +158,12 @@ export default CalendarBase.extend({
         : this.dayFormatter(day, false)
       )
     },
-    genDayMonth (day: VTimestamp): VNode | string {
+    genDayMonth (day: CalendarTimestamp): VNode | string {
       const color = day.present ? this.color : undefined
-      const slot = this.$scopedSlots['day-month']
 
       return this.$createElement('div', this.setTextColor(color, {
         staticClass: 'v-calendar-weekly__day-month',
-      }), slot ? slot(day) as VNodeChildren : this.monthFormatter(day, this.shortMonths))
+      }), getSlot(this, 'day-month', day) || this.monthFormatter(day, this.shortMonths))
     },
   },
 

@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { PropValidator, RenderContext } from 'vue/types/options'
+import { PropType, RenderContext } from 'vue/types/options'
 
 /* eslint-disable-next-line no-use-before-define */
 interface Themeable extends Vue {
@@ -37,13 +37,13 @@ const Themeable = Vue.extend<Themeable>().extend({
 
   props: {
     dark: {
-      type: Boolean,
+      type: Boolean as PropType<boolean | null>,
       default: null,
-    } as PropValidator<boolean | null>,
+    },
     light: {
-      type: Boolean,
+      type: Boolean as PropType<boolean | null>,
       default: null,
-    } as PropValidator<boolean | null>,
+    },
   },
 
   data () {

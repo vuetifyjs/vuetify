@@ -99,6 +99,20 @@
           class="overflow-y-auto py-3"
         >
           <v-col
+            v-for="(input, i) in value.inputs || []"
+            :key="`col-0-${i}`"
+            cols="12"
+            class="pb-0"
+          >
+            <v-text-field
+              v-model="inputs[input.prop]"
+              v-bind="input.attrs"
+              :label="input.label"
+              hide-details
+            />
+          </v-col>
+
+          <v-col
             v-for="(v1, boolean, i) in booleans || {}"
             :key="`col-1-${i}`"
             cols="12"
@@ -126,15 +140,21 @@
             class="pb-0"
           >
             <v-slider
-              v-model="sliders[slider.prop]"
-              v-bind="slider.attrs"
+              v-model="sliders[Object(slider) === slider ? slider.prop : slider]"
+              v-bind="{
+                ...(Object(slider) === slider ? (slider.attrs || {}) : {}),
+                min: slider === 'elevation' ? 0 : undefined,
+                max: slider === 'elevation' ? 24 : undefined,
+              }"
               hide-details
             >
               <template v-slot:label>
-                <span
-                  class="text-capitalize"
-                  v-text="slider.label"
-                />
+                <span class="text-capitalize">
+                  <template v-if="slider === 'elevation'">Elevation</template>
+                  <template v-else-if="Object(slider) === slider">
+                    {{ slider.label }}
+                  </template>
+                </span>
               </template>
             </v-slider>
           </v-col>
@@ -195,6 +215,7 @@
         type: Object,
         default: () => ({
           booleans: [],
+          inputs: [],
           sliders: [],
           selects: [],
           tabs: [],
@@ -207,6 +228,7 @@
         booleans: setupData(this.value.booleans),
         component: null,
         dark: false,
+        inputs: setupData(this.value.inputs),
         selects: setupData(this.value.selects),
         sliders: setupData(this.value.sliders),
         tab: 0,
@@ -226,6 +248,7 @@
         }
 
         this.parseAttrs(this.booleans, attrs)
+        this.parseAttrs(this.inputs, attrs)
         this.parseAttrs(this.sliders, attrs)
         this.parseAttrs(this.selects, attrs)
 

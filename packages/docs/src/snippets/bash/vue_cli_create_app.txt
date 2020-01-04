@@ -1,1 +1,3 @@
 $ vue create my-app
+// navigate to new project directory
+$ cd my-app

@@ -47,6 +47,7 @@
             "simple/icon",
             "simple/clearable",
             "simple/character-counter",
+            "simple/hide-details",
             "simple/password",
             "simple/box",
             "simple/solo",

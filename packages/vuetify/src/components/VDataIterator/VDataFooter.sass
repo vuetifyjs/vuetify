@@ -1,5 +1,4 @@
-// Imports
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 // Block
 .v-data-footer
@@ -7,7 +6,8 @@
   flex-wrap: wrap
   justify-content: flex-end
   align-items: center
-  font-size: 12px
+  font-size: $data-footer-font-size
+  padding: $data-footer-padding
 
   .v-btn
     color: inherit
@@ -16,28 +16,28 @@
 .v-data-footer__icons-before
   .v-btn:last-child
     +ltr()
-      margin-right: 7px
+      margin-right: $data-footer-icons-before-btn-margin-end
 
     +rtl()
-      margin-left: 7px
+      margin-left: $data-footer-icons-before-btn-margin-end
 
 .v-data-footer__icons-after
   .v-btn:first-child
     +ltr()
-      margin-left: 7px
+      margin-left: $data-footer-icons-after-btn-margin-start
 
     +rtl()
-      margin-right: 7px
+      margin-right: $data-footer-icons-after-btn-margin-start
 
 .v-data-footer__pagination
   display: block
   text-align: center
 
   +ltr()
-    margin: 0 32px 0 24px
+    margin: 0 $data-footer-pagination-margin-end 0 $data-footer-pagination-margin-start
 
   +rtl()
-    margin: 0 24px 0 32px
+    margin: 0 $data-footer-pagination-margin-start 0 $data-footer-pagination-margin-end
 
 .v-data-footer__select
   display: flex
@@ -47,10 +47,10 @@
   white-space: nowrap
 
   +ltr()
-    margin-right: 14px
+    margin-right: $data-footer-select-margin-end
 
   +rtl()
-    margin-left: 14px
+    margin-left: $data-footer-select-margin-end
 
   .v-select
     flex: 0 1 0
@@ -58,13 +58,13 @@
     position: initial
 
     +ltr()
-      margin: 13px 0 13px 34px
+      margin: $data-footer-select-select-margin-y 0 $data-footer-select-select-margin-y $data-footer-select-select-margin-start
 
     +rtl()
-      margin: 13px 34px 13px 0
+      margin: $data-footer-select-select-margin-y $data-footer-select-select-margin-start $data-footer-select-select-margin-y 0
 
   .v-select__selections
     flex-wrap: nowrap
 
     .v-select__selection--comma
-      font-size: 12px
+      font-size: $data-footer-select-selections-comma-font-size

@@ -13,16 +13,15 @@ import Resize from '../../../directives/resize'
 // Util
 import props from '../util/props'
 import {
-  VTimestamp,
-  VTimestampFormatter,
   parseTimestamp,
   getWeekdaySkips,
-  getTimestampIdentifier,
   createDayList,
   createNativeLocaleFormatter,
   getStartOfWeek,
   getEndOfWeek,
+  getTimestampIdentifier,
 } from '../util/timestamp'
+import { CalendarTimestamp, CalendarFormatter } from 'types'
 
 export default mixins(
   Colorable,
@@ -44,7 +43,7 @@ export default mixins(
     parsedWeekdays (): number[] {
       return Array.isArray(this.weekdays)
         ? this.weekdays
-        : this.weekdays.split(',').map(x => parseInt(x, 10))
+        : (this.weekdays || '').split(',').map(x => parseInt(x, 10))
     },
     weekdaySkips (): number[] {
       return getWeekdaySkips(this.parsedWeekdays)
@@ -54,16 +53,16 @@ export default mixins(
       reversed.reverse()
       return reversed
     },
-    parsedStart (): VTimestamp {
-      return parseTimestamp(this.start) as VTimestamp
+    parsedStart (): CalendarTimestamp {
+      return parseTimestamp(this.start, true)
     },
-    parsedEnd (): VTimestamp {
+    parsedEnd (): CalendarTimestamp {
       const start = this.parsedStart
-      const end: VTimestamp = this.end ? parseTimestamp(this.end) || start : start
+      const end: CalendarTimestamp = this.end ? parseTimestamp(this.end) || start : start
 
       return getTimestampIdentifier(end) < getTimestampIdentifier(start) ? start : end
     },
-    days (): VTimestamp[] {
+    days (): CalendarTimestamp[] {
       return createDayList(
         this.parsedStart,
         this.parsedEnd,
@@ -71,9 +70,9 @@ export default mixins(
         this.weekdaySkips
       )
     },
-    dayFormatter (): VTimestampFormatter {
+    dayFormatter (): CalendarFormatter {
       if (this.dayFormat) {
-        return this.dayFormat as VTimestampFormatter
+        return this.dayFormat as CalendarFormatter
       }
 
       const options = { timeZone: 'UTC', day: 'numeric' }
@@ -83,9 +82,9 @@ export default mixins(
         (_tms, _short) => options
       )
     },
-    weekdayFormatter (): VTimestampFormatter {
+    weekdayFormatter (): CalendarFormatter {
       if (this.weekdayFormat) {
-        return this.weekdayFormat as VTimestampFormatter
+        return this.weekdayFormat as CalendarFormatter
       }
 
       const longOptions = { timeZone: 'UTC', weekday: 'long' }
@@ -99,7 +98,7 @@ export default mixins(
   },
 
   methods: {
-    getRelativeClasses (timestamp: VTimestamp, outside = false): object {
+    getRelativeClasses (timestamp: CalendarTimestamp, outside = false): object {
       return {
         'v-present': timestamp.present,
         'v-past': timestamp.past,
@@ -107,13 +106,13 @@ export default mixins(
         'v-outside': outside,
       }
     },
-    getStartOfWeek (timestamp: VTimestamp): VTimestamp {
+    getStartOfWeek (timestamp: CalendarTimestamp): CalendarTimestamp {
       return getStartOfWeek(timestamp, this.parsedWeekdays, this.times.today)
     },
-    getEndOfWeek (timestamp: VTimestamp): VTimestamp {
+    getEndOfWeek (timestamp: CalendarTimestamp): CalendarTimestamp {
       return getEndOfWeek(timestamp, this.parsedWeekdays, this.times.today)
     },
-    getFormatter (options: object): VTimestampFormatter {
+    getFormatter (options: object): CalendarFormatter {
       return createNativeLocaleFormatter(
         this.locale,
         (_tms, _short) => options

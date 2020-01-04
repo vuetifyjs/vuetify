@@ -42,6 +42,7 @@
             "simple/error",
             "simple/multi-error",
             "intermediate/rules",
+            "intermediate/hide-details",
             "intermediate/slots",
             "intermediate/slot-events"
           ]

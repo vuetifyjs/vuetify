@@ -1,4 +1,5 @@
 export default {
+  badge: 'Bricka',
   close: 'Stäng',
   dataIterator: {
     noResultsText: 'Inga poster funna',

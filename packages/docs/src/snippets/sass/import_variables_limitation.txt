@@ -1,0 +1,16 @@
+// src/styles/overrides.sass
+.v-btn
+  text-transform: capitalize
+
+// src/styles/variables.scss
+
+// This will inject the overrides file into
+// every component that imports variables
+@import '@/styles/overrides.sass';
+
+$card-border-radius: 6px;
+$headings: (
+  'h1': (
+    'font-size': 2rem
+  )
+);

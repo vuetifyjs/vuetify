@@ -1,0 +1,3 @@
+@import '../../styles/styles.sass';
+
+$responsive-transition: padding-bottom 0.2s map-get($transition, 'swing') !default;

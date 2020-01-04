@@ -27,7 +27,6 @@
         :shaped="shaped"
         :flat="flat"
         :subheader="subheader"
-        :inactive="inactive"
         :sub-group="subGroup"
         :nav="nav"
         :avatar="avatar"
@@ -38,6 +37,7 @@
           <v-list-item
             v-for="(item, i) in items"
             :key="i"
+            :inactive="inactive"
           >
             <v-list-item-avatar v-if="avatar">
               <v-img :src="item.avatar"></v-img>

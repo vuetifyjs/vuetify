@@ -8,15 +8,14 @@ import VSlider from '../VSlider/VSlider'
 import { RGBtoCSS, RGBAtoCSS } from '../../util/colorUtils'
 
 // Types
-import Vue, { VNode, VNodeData } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import Vue, { VNode, VNodeData, PropType } from 'vue'
 import { VColorPickerColor, fromHSVA } from './util'
 
 export default Vue.extend({
   name: 'v-color-picker-preview',
 
   props: {
-    color: Object as PropValidator<VColorPickerColor>,
+    color: Object as PropType<VColorPickerColor>,
     disabled: Boolean,
     hideAlpha: Boolean,
   },

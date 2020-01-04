@@ -1,4 +1,5 @@
 export default {
+  badge: 'نشان',
   close: 'بستن',
   dataIterator: {
     noResultsText: 'نتیجه‌ای یافت نشد',
