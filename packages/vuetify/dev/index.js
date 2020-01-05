@@ -1,30 +1,10 @@
-import Vue from 'vue'
+import { h, createApp } from 'vue'
 import App from './App'
-import Vuetify from 'vuetify'
-import * as locales from '../src/locale'
-import router from './router'
-import '@mdi/font/css/materialdesignicons.css'
 
-Vue.config.performance = true
+const app = createApp()
 
-Vue.use(Vuetify)
-
-const vuetify = new Vuetify({
-  lang: {
-    locales,
+app.mount({
+  setup () {
+    return () => h(App)
   },
-})
-
-const vm = new Vue({
-  data: () => ({ isLoaded: document.readyState === 'complete' }),
-  vuetify,
-  router,
-  render (h) {
-    return this.isLoaded ? h(App) : undefined
-  },
-}).$mount('#app')
-
-// Prevent layout jump while waiting for styles
-vm.isLoaded || window.addEventListener('load', () => {
-  vm.isLoaded = true
-})
+}, '#app')

@@ -33,7 +33,6 @@
   "module": "dist/vuetify.js",
   "jsdelivr": "dist/vuetify.js",
   "unpkg": "dist/vuetify.js",
-  "types": "types/index.d.ts",
   "sideEffects": [
     "*.sass",
     "*.scss",
@@ -114,7 +113,7 @@
     "webpack-dev-server": "^3.7.2"
   },
   "peerDependencies": {
-    "vue": "^2.6.4"
+    "vue": "^3.0.0-alpha.1"
   },
   "publishConfig": {
     "access": "public"
