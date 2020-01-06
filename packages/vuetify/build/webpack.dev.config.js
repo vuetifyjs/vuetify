@@ -34,12 +34,12 @@ module.exports = merge(baseWebpackConfig, {
       },
       {
         test: /\.ts$/,
-        use: 'babel-loader',
+        use: 'happypack/loader?id=ts',
         exclude: /node_modules/
       },
       {
         test: /\.js$/,
-        use: 'babel-loader',
+        use: 'happypack/loader?id=js',
         exclude: /node_modules/
       },
       {
@@ -87,25 +87,25 @@ module.exports = merge(baseWebpackConfig, {
     //   checkSyntacticErrors: true,
     //   tsconfig: resolve('../tsconfig.json')
     // }),
-    // new HappyPack({
-    //   id: 'ts',
-    //   threadPool: happyThreadPool,
-    //   loaders: [
-    //     'babel-loader',
-    //     {
-    //       loader: 'ts-loader',
-    //       options: {
-    //         appendTsSuffixTo: [/\.vue$/],
-    //         happyPackMode: true
-    //       }
-    //     },
-    //     'eslint-loader?cache=true?emitWarning=true'
-    //   ]
-    // }),
-    // new HappyPack({
-    //   id: 'js',
-    //   threadPool: happyThreadPool,
-    //   loaders: ['babel-loader', 'eslint-loader?cache=true?emitWarning=true']
-    // })
+    new HappyPack({
+      id: 'ts',
+      threadPool: happyThreadPool,
+      loaders: [
+        'babel-loader',
+        {
+          loader: 'ts-loader',
+          options: {
+            appendTsSuffixTo: [/\.vue$/],
+            happyPackMode: true
+          }
+        },
+        // 'eslint-loader?cache=true?emitWarning=true'
+      ]
+    }),
+    new HappyPack({
+      id: 'js',
+      threadPool: happyThreadPool,
+      loaders: ['babel-loader', /*'eslint-loader?cache=true?emitWarning=true'*/]
+    })
   ]
 })
