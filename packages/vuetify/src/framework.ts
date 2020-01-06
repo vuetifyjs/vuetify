@@ -9,7 +9,7 @@ import {
 } from 'vuetify/types/services'
 
 // Services
-// import * as services from './services'
+import * as services from './services'
 
 export default class Vuetify {
   static installed = false
@@ -27,25 +27,25 @@ export default class Vuetify {
   constructor (userPreset: UserVuetifyPreset = {}) {
     this.userPreset = userPreset
 
-    // this.use(services.Presets)
-    // this.use(services.Application)
-    // this.use(services.Breakpoint)
-    // this.use(services.Goto)
-    // this.use(services.Icons)
-    // this.use(services.Lang)
-    // this.use(services.Theme)
+    this.use(services.Presets)
+    this.use(services.Application)
+    this.use(services.Breakpoint)
+    this.use(services.Goto)
+    this.use(services.Icons)
+    this.use(services.Lang)
+    this.use(services.Theme)
   }
 
   // Called on the new vuetify instance
   // bootstrap in install beforeCreate
   // Exposes ssrContext if available
-  init (root: any, ssrContext?: object) {
+  init () {
     this.installed.forEach(property => {
       const service = this.framework[property]
 
       service.framework = this.framework
 
-      service.init(root, ssrContext)
+      service.init()
     })
 
     // rtl is not installed and

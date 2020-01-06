@@ -5,7 +5,7 @@ import { VuetifyPreset } from 'vuetify/types/services/presets'
 
 export interface VuetifyServiceContract {
   framework: Record<string, VuetifyServiceContract>
-  init: (root: Vue, ssrContext?: object) => void
+  init: () => void
 }
 
 export interface VuetifyService {

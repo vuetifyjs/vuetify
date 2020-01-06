@@ -7,6 +7,8 @@ import {
 const VuetifySymbol = Symbol.for('vuetify')
 
 function VuetifyProvide (vuetify: any) {
+  vuetify.init()
+
   provide(VuetifySymbol, vuetify)
 }
 
