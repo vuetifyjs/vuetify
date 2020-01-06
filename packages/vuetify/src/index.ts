@@ -1,19 +1,47 @@
-import * as components from './components'
-import * as directives from './directives'
 import Vuetify from './framework'
+import {
+  inject,
+  provide,
+} from 'vue'
 
-export default Vuetify
+const VuetifySymbol = Symbol.for('vuetify')
 
-const install = Vuetify.install
-
-Vuetify.install = (Vue, args) => {
-  install.call(Vuetify, Vue, {
-    components,
-    directives,
-    ...args,
-  })
+function VuetifyProvide (vuetify: any) {
+  provide(VuetifySymbol, vuetify)
 }
 
-if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(Vuetify)
+function VuetifyInject () {
+  const vuetify = inject(VuetifySymbol)
+
+  if (!vuetify) {
+    throw Error(`Unable to find vuetify instance on Symbol <${String(VuetifySymbol)}>`)
+  }
+
+  return vuetify
 }
+
+export {
+  Vuetify,
+  VuetifyInject,
+  VuetifyProvide,
+}
+
+// import * as components from './components'
+// import * as directives from './directives'
+// import Vuetify from './framework'
+
+// export default Vuetify
+
+// const install = Vuetify.install
+
+// Vuetify.install = (Vue, args) => {
+//   install.call(Vuetify, Vue, {
+//     components,
+//     directives,
+//     ...args,
+//   })
+// }
+
+// if (typeof window !== 'undefined' && window.Vue) {
+//   window.Vue.use(Vuetify)
+// }
