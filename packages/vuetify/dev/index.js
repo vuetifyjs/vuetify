@@ -1,9 +1,18 @@
 import App from './App'
-import { Vuetify, VuetifyProvide } from 'vuetify'
-import { h, createApp } from 'vue'
+import {
+  h,
+  createApp,
+} from 'vue'
+import {
+  Vuetify,
+  VuetifyProvide,
+  VuetifyInstall
+} from 'vuetify'
 
 const app = createApp()
 const vuetify = new Vuetify()
+
+app.use(VuetifyInstall)
 
 app.mount({
   setup () {

@@ -1,19 +1,16 @@
 <template>
-  <div>
-    Testing
-  </div>
+  <v-app>
+    <!-- <v-content> -->
+      <playground></playground>
+    <!-- </v-content> -->
+  </v-app>
 </template>
 
 <script>
-  import { VuetifyInject } from 'vuetify'
-
+  import Playground from './Playground'
   export default {
-    setup () {
-      const vuetify = VuetifyInject()
-
-      console.log(vuetify)
-
-      return {}
-    },
+    components: {
+      Playground
+    }
   }
 </script>

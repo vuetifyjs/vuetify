@@ -1,13 +1,17 @@
 <template>
-  <v-container>
+  <div>
     <!--  -->
-  </v-container>
+  </div>
 </template>
 
 <script>
+import { VuetifyInject } from 'vuetify'
+
 export default {
-  data: () => ({
-    //
-  })
+  setup () {
+    const vuetify = VuetifyInject()
+
+    console.log(vuetify)
+  }
 }
 </script>
