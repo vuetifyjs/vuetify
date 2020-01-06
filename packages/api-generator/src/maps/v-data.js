@@ -21,7 +21,7 @@ const DataPagination = {
 const DataProps = [
   { name: 'items', source: 'v-data' },
   { name: 'itemKey', source: 'v-data' },
-  { name: 'options', source: 'v-data' },
+  { name: 'options', source: 'v-data', type: 'DataOptions', example: DataOptions },
   { name: 'sortBy', source: 'v-data' },
   { name: 'sortDesc', source: 'v-data' },
   { name: 'customSort', source: 'v-data', default: '(items: any[], sortBy: string[], sortDesc: boolean[], locale: string, customSorters?: Record<string, compareFn>) => any[]' },
