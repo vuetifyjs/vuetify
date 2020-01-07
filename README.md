@@ -92,11 +92,6 @@
         </a>
       </td>
       <td>
-        <a href="http://resaleai.com/?ref=vuetify-github">
-          <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/resaleai_logo_blue.svg">
-        </a>
-      </td>
-      <td>
         <a href="http://vuemastery.com/?ref=vuetify-github">
           <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/vuemastery.svg">
         </a>
