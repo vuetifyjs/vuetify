@@ -16,7 +16,7 @@ module.exports = {
   },
   plugins: [
     '@typescript-eslint',
-    'vuetify'
+    // 'vuetify'
   ],
   rules: {
     // allow paren-less arrow functions
