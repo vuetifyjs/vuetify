@@ -27,7 +27,7 @@ export default mixins(
 
   computed: {
     formatter (): DatePickerFormatter {
-      return this.format || createNativeLocaleFormatter(this.currentLocale, { day: 'numeric', timeZone: 'UTC' }, { start: 8, length: 2 })
+      return this.format || createNativeLocaleFormatter('en', { day: 'numeric', timeZone: 'UTC' }, { start: 8, length: 2 })
     },
     weekdayFormatter (): DatePickerFormatter | undefined {
       return this.weekdayFormat || createNativeLocaleFormatter(this.currentLocale, { weekday: 'narrow', timeZone: 'UTC' })
