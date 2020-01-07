@@ -101,8 +101,8 @@
   },
   "customization/presets": {
     "title": "Presets",
-    "description": "Easily setup customized Vuetify options and styles.",
-    "keywords": "vuetify presets"
+    "description": "Presets are Vue CLI plugins that drastically alter the look and feel of your Vuetify application.",
+    "keywords": "vuetify presets, custom material design"
   },
   "customization/sass-variables": {
     "title": "SASS variables",

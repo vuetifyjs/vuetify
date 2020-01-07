@@ -11,7 +11,3 @@ export default new Vuetify({
   rtl: true,
   theme: { dark: true },
 })
-
-// You can also pass the Preset directly to the constructor
-
-export default new Vuetify(preset)

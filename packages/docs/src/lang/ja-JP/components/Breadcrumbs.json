@@ -1,4 +1,5 @@
 {
+  "heading": "# パンくずリスト (Breadcrumbs)",
   "examples": {
     "icon-dividers": {
       "desc": "icon 変数を使用することで、 Material Design Icon に存在するアイコンを Breadcrumbs に使用することができます。"

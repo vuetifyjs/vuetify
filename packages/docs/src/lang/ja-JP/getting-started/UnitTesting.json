@@ -1,3 +1,24 @@
 {
-  "runnerHeader": "## テストランナーのセットアップ"
+  "heading": "# ユニットテスト",
+  "headingText": "ユニットテストはアプリケーション開発の重要な部分(そして時々無視される)部分です。ユニットテストは私たちのプロセスとワークフローを保護し、プロジェクトの最も重要な部分を偶発的なミスや見落としから守ることを保証します。このためVueは [vue-test-utils] (https://vue-test-utils.vuejs.org/) と呼ばれる、テストユーティリティを持っています。Vueコンポーネントと対話するための便利な機能を提供し、多くの一般的なテストランナーと連携します。",
+  "runnerHeader": "## テストランナーのセットアップ",
+  "runnerText2": [
+    "[Jest](https://github.com/vuejs/vue-test-utils-jest-example)",
+    "[Mocha](https://github.com/vuejs/vue-test-utils-mocha-webpack-example)",
+    "[tape](https://github.com/eddyerburgh/vue-test-utils-tape-example)",
+    "[AVA](https://github.com/eddyerburgh/vue-test-utils-ava-example)"
+  ],
+  "setupHeading": "## Vuetify のブートストラップ",
+  "specHeader": "## Spec テスト",
+  "efficiencyHeader": "### テストの効率",
+  "mockHeader": "### Vuetify の Mocking",
+  "mockList": [
+    "[application](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/application)",
+    "[breakpoint](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/breakpoint)",
+    "[goto](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/goto)",
+    "[icons](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/icons)",
+    "[lang](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/lang)",
+    "[theme](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/theme)"
+  ],
+  "e2eHeader": "## E2E テスト"
 }

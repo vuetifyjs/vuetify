@@ -163,14 +163,15 @@ export default baseMixins.extend({
     closeConditional (e: Event) {
       const target = e.target as HTMLElement
       // Ignore the click if the dialog is closed or destroyed,
-      // if it was on an element inside the content, or
-      // if it was dragged onto the overlay (#6969)
+      // if it was on an element inside the content,
+      // if it was dragged onto the overlay (#6969),
+      // or if this isn't the topmost dialog (#9907)
       return !(
         this._isDestroyed ||
         !this.isActive ||
         this.$refs.content.contains(target) ||
         (this.overlay && target && !this.overlay.$el.contains(target))
-      )
+      ) && this.activeZIndex >= this.getMaxZIndex()
     },
     hideScroll () {
       if (this.fullscreen) {
@@ -197,7 +198,7 @@ export default baseMixins.extend({
 
       if (this.persistent) {
         this.noClickAnimation || this.animateClick()
-      } else if (this.activeZIndex >= this.getMaxZIndex()) {
+      } else {
         this.isActive = false
       }
     },

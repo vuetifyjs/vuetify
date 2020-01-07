@@ -1,1 +1,5 @@
-{}
+{
+  "props": {
+    "ripple": "[v-ripple]（/ directives / ripples）ディレクティブを適用します。"
+  }
+}

@@ -1,19 +1,45 @@
 {
+  "heading": "# 图标",
+  "headingText": "`v-icon` 组件提供了大量字形，以提供应用程序各个方面的上下文。 有关所有可用图标的列表，请访问官方 [Material Design Icons](https://materialdesignicons.com/) 页面。 要使用任何这些图标，只需使用 `mdi-` 前缀，后跟图标名称即可。",
   "examples": {
+    "usage": {
+      "desc": "图标有两个主题（浅色和深色）和五个不同的大小（x-small, small, medium （默认）, large, and x-large）。"
+    },
+    "font-awesome": {
+      "heading": "### Font Awesome",
+      "desc": "[Font Awesome](http://fontawesome.io/icons/) 也被支持。只需使用 `fa-` 前缀图标名称。 请注意，您仍然需要在您的项目中包含 Font Awesome 图标。 关于如何安装它的更多信息，请导航到 [installation page](/customization/icons#install-font-awesome-5-icons)"
+    },
+    "md": {
+      "heading": "### 材料设计",
+      "desc": "[Material Design](https://material.io/tools/icons/?style=baseline) 也被支持。有关如何安装的更多信息，请 [navigate here](/customization/icons#install-material-icons)"
+    },
     "color": {
-      "heading": "色彩",
+      "heading": "### 颜色",
       "desc": "使用色彩辅助器，您可以改变标准的暗黑和明亮的主题的图标的颜色。"
     },
     "buttons": {
+      "heading": "### 按钮",
       "desc": "图标可以在按钮内部使用，以增加动作的重点。"
+    },
+    "clickable": {
+      "heading": "### 可点击",
+      "desc": "将任何单击事件绑定到 `v-icon` 将自动将光标更改为指针。"
+    },
+    "mdi-svg": {
+      "heading": "### MDI SVG",
+      "desc": "您只能手动导入使用 [@mdi/js](https://www.npmjs.com/package/@mdi/js) \n 软件包时使用的图标。 如果您想使用 `VIcon` 组件的 SVG 图标，请阅读如何使用 [here](/customization/icons#install-material-design-icons-js-svg)。"
     }
   },
   "props": {
+    "dense": "使图标更小（20px）",
+    "disabled": "Mixins.Validatable.props.disabled",
     "large": "设置图标为大型**（36px）**",
     "left": "在按钮内部使用时，把图标放置在左侧",
     "medium": "设置图标为中型**(28px)**",
     "right": "在按钮内部使用时，把图标放置在右侧",
+    "size": "为图标指定自定义字体大小。",
     "small": "设置图标为小型**(16px)**",
+    "tag": "指定要使用的自定义标签",
     "xLarge": "设置图标为超大型**(40px)**"
   }
 }

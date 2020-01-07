@@ -57,11 +57,13 @@
       "caption": "2019年Q4"
     },
     {
-      "type": "リリース"
+      "type": "リリース",
+      "title": "v2.3 リリース **(Orion)**",
+      "caption": "2020年Q1"
     },
     {
       "type": "サイト",
-      "title": "Vuetifyの切れ目",
+      "title": "Vuetifyのスニペット",
       "caption": "未定",
       "text": "Vuetifyのスニペットを作ったりシェアすることに特化した、Webサイト。"
     }

@@ -1,1 +1,32 @@
-{}
+{
+  "heading": "# 简单的表格",
+  "headingText": "`v-simple-table` 组件是围绕 `<table>` 元素的简单包装器组件。 在组件内部，您可以使用所有常规表格元素，例如 `<thead>`, `<tbody>`, `<tr>` 等。",
+  "examples": {
+    "usage": {
+      "desc": "简单的表格是一个围绕着 `<table>` 元素的包装器组件。"
+    },
+    "height": {
+      "heading": "### 固定高度",
+      "desc": "使用 `height` 属性来设置表的高度。"
+    },
+    "fixed-header": {
+      "heading": "### 固定标题",
+      "desc": "将 `fixed-header` 属性与 `height` 属性一起使用将标题固定在表格的顶部。"
+    },
+    "dense": {
+      "heading": "### 密集表格",
+      "desc": "您可以使用 `dense` 属性显示表格的密集版本。"
+    },
+    "dark": {
+      "heading": "### 暗黑主题",
+      "desc": "使用 `dark` 属性切换到暗色主题。"
+    }
+  },
+  "props": {
+    "v-simple-table": {
+      "dense": "减少填充以呈现一个密集的表",
+      "height": "Mixins.Measurable.props.height",
+      "fixedHeader": "将表头设置为固定模式"
+    }
+  }
+}

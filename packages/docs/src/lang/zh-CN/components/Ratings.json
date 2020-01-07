@@ -1,1 +1,55 @@
-{}
+{
+  "heading": "# 评分",
+  "headingText": "评级组件是构建用户小部件时的专门但至关重要的部分。 通过评级收集用户反馈是一种简单的分析，可以为您的产品或应用程序提供大量反馈。",
+  "examples": {
+    "usage": {
+      "desc": "`v-rating` 组件提供了一个用于收集用户反馈的简单接口。"
+    },
+    "sizes": {
+      "heading": "### 大小变量",
+      "desc": "使用 `v-icon` 中可用的相同大小调整类，或为您自己提供 **size** 属性。"
+    },
+    "length": {
+      "heading": "### 自定义长度",
+      "desc": "有时应用程序会调用自定义实现。轻松改变长度或显示图标。"
+    },
+    "increments": {
+      "heading": "### 增量",
+      "desc": "评分可以包含 3 个已定义的图标：**full-icon**, **half-icon**（带有 **half-increments** 属性）和 **empty-icon**。"
+    },
+    "slots": {
+      "heading": "### 插槽",
+      "desc": "提供了插槽，使您在显示评分时有更大的自由度。"
+    },
+    "card": {
+      "heading": "### 卡片评分",
+      "desc": "评分组件与产品搭配得很好，使您可以收集和显示客户反馈。"
+    },
+    "advanced": {
+      "heading": "### 高级用法",
+      "desc": "`v-rating` 组件恰好适合现有组件。 构建具有丰富功能和精美设计的真正复杂的示例。"
+    },
+    "colors": {
+      "heading": "### 色彩",
+      "desc": "`v-rating` 组件可以根据需要进行着色，可以设置选定和未选定的颜色。"
+    }
+  },
+  "props": {
+    "backgroundColor": "使用空图标的颜色",
+    "dense": "图标大小较小",
+    "emptyIcon": "空时显示的图标",
+    "fullIcon": "满时显示的图标",
+    "halfIcon": "半时显示的图标（需要 **half-increments** 属性）",
+    "halfIncrements": "允许选择半增量",
+    "hover": "将鼠标悬停在图标上时提供视觉反馈",
+    "length": "要显示的评分数量",
+    "readonly": "移除所有悬停效果和指针事件",
+    "value": "评分值"
+  },
+  "slots": {
+    "item": "已渲染项目的插槽"
+  },
+  "events": {
+    "input": "当此值发生变化时的评分数"
+  }
+}

@@ -417,15 +417,21 @@ export function mergeDeep (
   target: Dictionary<any> = {}
 ) {
   for (const key in target) {
-    const property = target[key]
+    const sourceProperty = source[key]
+    const targetProperty = target[key]
 
-    if (isObject(property)) {
-      source[key] = mergeDeep(source[key], property)
+    // Only continue deep merging if
+    // both properties are objects
+    if (
+      isObject(sourceProperty) &&
+      isObject(targetProperty)
+    ) {
+      source[key] = mergeDeep(sourceProperty, targetProperty)
 
       continue
     }
 
-    source[key] = property
+    source[key] = targetProperty
   }
 
   return source

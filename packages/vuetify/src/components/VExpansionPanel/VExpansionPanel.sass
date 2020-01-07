@@ -49,6 +49,24 @@
     border-bottom-left-radius: inherit
     border-bottom-right-radius: inherit
 
+  // round corners on non-accordion/tile panels
+  &:not(&--accordion):not(&--tile)
+    > .v-expansion-panel
+      &--active
+        border-radius: $expansion-panel-border-radius
+
+        + .v-expansion-panel
+          border-top-left-radius: $expansion-panel-border-radius
+          border-top-right-radius: $expansion-panel-border-radius
+
+      &--next-active
+        border-bottom-left-radius: $expansion-panel-border-radius
+        border-bottom-right-radius: $expansion-panel-border-radius
+
+        .v-expansion-panel-header
+          border-bottom-left-radius: inherit
+          border-bottom-right-radius: inherit
+
 // Element
 .v-expansion-panel
   flex: 1 0 100%
@@ -95,24 +113,6 @@
     > .v-expansion-panel-header--active .v-expansion-panel-header__icon
       &:not(.v-expansion-panel-header__icon--disable-rotate) .v-icon
         transform: rotate(-180deg)
-
-.v-expansion-panels:not(.v-expansion-panels--accordion)
-.v-expansion-panels:not(.v-expansion-panels--tile)
-  > .v-expansion-panel
-    &--active
-      border-radius: $expansion-panel-border-radius
-
-      + .v-expansion-panel
-        border-top-left-radius: $expansion-panel-border-radius
-        border-top-right-radius: $expansion-panel-border-radius
-
-    &--next-active
-      border-bottom-left-radius: $expansion-panel-border-radius
-      border-bottom-right-radius: $expansion-panel-border-radius
-
-      .v-expansion-panel-header
-        border-bottom-left-radius: inherit
-        border-bottom-right-radius: inherit
 
 .v-expansion-panel-header__icon
   display: inline-flex

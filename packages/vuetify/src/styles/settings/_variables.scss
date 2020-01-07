@@ -143,37 +143,43 @@ $headings: map-deep-merge(
       'size': 1rem,
       'weight': 400,
       'line-height': 1.75rem,
-      'letter-spacing': .009375em
+      'letter-spacing': .009375em,
+      'font-family': $body-font-family
     ),
     'subtitle-2': (
       'size': .875rem,
       'weight': 500,
       'line-height': 1.375rem,
-      'letter-spacing': .0071428571em
+      'letter-spacing': .0071428571em,
+      'font-family': $body-font-family
     ),
     'body-2': (
       'size': .875rem,
       'weight': 400,
       'letter-spacing': .0178571429em,
-      'line-height': 1.25rem
+      'line-height': 1.25rem,
+      'font-family': $body-font-family
     ),
     'body-1': (
       'size': 1rem,
       'weight': 400,
       'letter-spacing': .03125em,
-      'line-height': 1.5rem
+      'line-height': 1.5rem,
+      'font-family': $body-font-family
     ),
     'caption': (
       'size': .75rem,
       'weight': 400,
       'letter-spacing': .0333333333em,
-      'line-height': 1.25rem
+      'line-height': 1.25rem,
+      'font-family': $body-font-family
     ),
     'overline': (
       'size': .625rem,
       'weight': 400,
       'letter-spacing': .1666666667em,
-      'line-height': 1rem
+      'line-height': 1rem,
+      'font-family': $body-font-family
     )
   ),
   $headings

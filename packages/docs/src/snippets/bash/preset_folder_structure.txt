@@ -1,3 +1,4 @@
+# Vuetify preset plugin structure
 .
 ├── generator.js        # generator (optional)
 ├── index.js            # service plugin

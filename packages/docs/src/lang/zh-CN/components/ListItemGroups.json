@@ -1,1 +1,38 @@
-{}
+{
+  "heading": "# 列表项目组",
+  "headingText": "`v-list-item-group` 提供创建一组可选择的 `v-list-item` 的能力。`v-list-item-group` 组件利用其核心的 [v-item-group](/components/item-groups) 来为交互式列表提供一个简洁的接口。",
+  "examples": {
+    "usage": {
+      "desc": "默认情况下，`v-list-item-group` 操作类似于 `v-item-group` 。如果没有提供 **value** ，则该群组将基于其索引提供默认值。"
+    },
+    "selection-controls": {
+      "heading": "### 选择控件",
+      "desc": "使用默认插槽，可以访问项的内部状态并切换它。由于 **active** 属性是一个 _boolean_，我们使用复选框上的 **true-value** 属性将其状态绑定到 `v-list-item`。"
+    },
+    "flat": {
+      "heading": "### 不加强调的选择",
+      "desc": "您可以轻松地禁用选定的 v-list-items 的默认高亮度。这将为用户的选择创建一个较低的配置文件。"
+    },
+    "multiple": {
+      "heading": "### 选择多个项目",
+      "desc": "您可以一次选择多个项目。"
+    },
+    "mandatory": {
+      "heading": "### 必填项",
+      "desc": "必须至少选定一项。"
+    },
+    "active-class": {
+      "heading": "### 自定义活动类",
+      "desc": "您可以设置一个在选择项目时将添加的类。"
+    }
+  },
+  "api": {
+    "v-list-item": "Components.Lists",
+    "v-list-item-action": "Components.Lists",
+    "v-list-item-avatar": "Components.Lists",
+    "v-list-item-content": "Components.Lists",
+    "v-list-item-title": "Components.Lists",
+    "v-list-item-subtitle": "Components.Lists",
+    "v-list-item-action-text": "Components.Lists"
+  }
+}

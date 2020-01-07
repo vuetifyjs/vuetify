@@ -1,23 +1,69 @@
 {
+  "heading": "# 对话框",
+  "headingText": "`v-dialog` 组件通知用户有关特定任务，且可能包含关键信息、需要决策或涉及多个任务。减少使用对话框的频率，因为它们具有干扰性。",
   "examples": {
+    "usage": {
+      "desc": "对话框包含两个插槽，一个用于其激活器，另一个用于其内容（默认）。对隐私政策有好处。"
+    },
     "without-activator": {
-      "desc": "如果因为某些原因而不能使用 activator slot(激活器插槽)，请确保将`.stop`修饰符添加到触发对话框的事件。"
+      "heading": "### 没有激活器",
+      "desc": "如果因为某些原因而不能使用 activator slot （激活器插槽），请确保将`.stop` 修饰符添加到触发对话框的事件。",
+      "uninverted": true
     },
     "modal": {
-      "desc": "类似于简单对话框，除了说点击对话框外部不会关闭外。"
+      "heading": "### 模态框",
+      "desc": "与 Simple Dialog 类似，不同之处在于在触摸外部时不会将其关闭。",
+      "uninverted": true
     },
     "fullscreen": {
-      "desc": "由于空间的限制，全屏对话框可能更适用于移动设备，相对大屏设备来说。"
+      "heading": "### 全屏对话框",
+      "desc": "由于空间的限制，全屏对话框可能更适用于移动设备，相对大屏设备来说。",
+      "uninverted": true
     },
     "form": {
-      "desc": "这里有一个简单的表单对话框的例子。"
+      "heading": "### 表单对话框",
+      "desc": "这里有一个简单的表单对话框的例子。",
+      "uninverted": true
     },
     "scrollable": {
-      "heading": "可滚动",
-      "desc": "一个可滚动内容的对话框示例"
+      "heading": "### 可滚动",
+      "desc": "一个可滚动内容的对话框示例。",
+      "uninverted": true
     },
     "overflowed": {
-      "desc": "如果内容溢出有效窗口空间，将会滚动容器"
+      "heading": "### 溢出",
+      "desc": "如果内容溢出有效窗口空间，将会滚动容器。",
+      "uninverted": true
+    },
+    "advanced": {
+      "heading": "### 嵌套对话框",
+      "desc": "对话框可以嵌套：可以从一个对话框打开另一个对话框。",
+      "uninverted": true
+    },
+    "loader": {
+      "heading": "### 加载器",
+      "desc": "`v-dialog` 组件可以轻松地为您的应用程序创建自定义加载体验。"
     }
+  },
+  "props": {
+    "dark": "Mixins.Themeable.props.dark",
+    "fullWidth": "强制对话框扩展 100% 的可用宽度。",
+    "fullscreen": "改变全屏显示的布局。",
+    "internalActivator": "与文档相反，分离组件内部的菜单内容。",
+    "eager": "Mixins.Bootable.props.eager",
+    "light": "Mixins.Themeable.props.light",
+    "maxWidth": "Mixins.Measurable.props.maxWidth",
+    "noClickAnimation": "使用 **persistent** 属性，在 `v-dialog` 的内容之外点击时，禁用弹跳效果。",
+    "openOnHover": "指定组件在其激活器悬停时是否应激活。",
+    "origin": "Mixins.Transitionable.props.origin",
+    "persistent": "在元素外部单击不会将其停用。",
+    "retainFocus": "默认情况下，制表符焦点将返回到对话框的第一个子级。在使用需要焦点的外部工具（如 TinyMCE 或 vue-clipboard）时禁用此选项。",
+    "scrollable": "设置为 true 时，需要指定高度的 `v-card` 和 `v-card-text` 组件。有关更多信息，请查看 [scrollabe example](/components/dialogs#scrollable)。",
+    "transition": "Mixins.Transitionable.props.transition",
+    "width": "Mixins.Measurable.props.width"
+  },
+  "events": {
+    "click:outside": "在活动对话框外部单击时激发的事件。",
+    "keydown": "按下 key 时激发的事件。如果对话处于激活状态且未使用 **persistent** 属性，则 **esc** 键会将其停用。"
   }
 }

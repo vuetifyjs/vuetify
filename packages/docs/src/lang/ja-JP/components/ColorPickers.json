@@ -1,1 +1,9 @@
-{}
+{
+  "heading": "# カラーピッカー",
+  "headingText": "`v-color-picker`を使用すると、さまざまな入力方法を使用して色を選択できます。",
+  "examples": {
+    "model": {
+      "desc": "`v-color-picker`は`v-model`propを使用して表示される色を制御します。 **#FF00FF**および**#FF00FF00**などの16進文字列、および**RGBA**、**HSLA**および**HSVA**値を表すオブジェクトをサポートします。"
+    }
+  }
+}
