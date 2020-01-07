@@ -11,13 +11,13 @@
   margin-top: $input-top-spacing
   padding-top: 4px
 
-  .v-input__append-outer,
-  .v-input__prepend-outer
+  > .v-input__append-outer,
+  > .v-input__prepend-outer
     margin-top: 0
     margin-bottom: 0
 
   &:not(.v-input--hide-details)
-    .v-input__slot
+    > .v-input__slot
       margin-bottom: 12px
 
   &__input
@@ -76,7 +76,7 @@
       transform: scale(0.2)
       transition: inherit
 
-    .v-ripple__container
+    > .v-ripple__container
       transform: scale(1.2)
 
   &.v-input--dense
@@ -91,12 +91,6 @@
 
   &.v-input
     flex: 0 1 auto
-
-    .v-label
-      align-items: center
-      display: inline-flex
-      top: 0
-      height: auto
 
   &.v-input--is-focused,
   .v-radio--is-focused

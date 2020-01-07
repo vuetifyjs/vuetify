@@ -148,7 +148,13 @@ export default baseMixins.extend<options>().extend({
       return this.isDirty || dirtyTypes.includes(this.type)
     },
     isSingle (): boolean {
-      return this.isSolo || this.singleLine || this.fullWidth
+      return (
+        this.isSolo ||
+        this.singleLine ||
+        this.fullWidth ||
+        // https://material.io/components/text-fields/#filled-text-field
+        (this.filled && !this.hasLabel)
+      )
     },
     isSolo (): boolean {
       return this.solo || this.soloInverted
@@ -459,7 +465,7 @@ export default baseMixins.extend<options>().extend({
     setLabelWidth () {
       if (!this.outlined || !this.$refs.label) return
 
-      this.labelWidth = this.$refs.label.scrollWidth * 0.75 + 6
+      this.labelWidth = Math.min(this.$refs.label.scrollWidth * 0.75 + 6, (this.$el as HTMLElement).offsetWidth - 24)
     },
     setPrefixWidth () {
       if (!this.$refs.prefix) return
