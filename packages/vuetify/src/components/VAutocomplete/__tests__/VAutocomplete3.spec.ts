@@ -142,4 +142,20 @@ describe('VAutocomplete.ts', () => {
 
     expect(wrapper.vm.internalValue).toBeUndefined()
   })
+
+  it('should not change selectedIndex to 0 when backspace is pressed', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['f', 'b'],
+        value: 'f',
+      },
+    })
+
+    const input = wrapper.find('input')
+
+    input.trigger('focus')
+    input.trigger('keydown.backspace')
+
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+  })
 })
