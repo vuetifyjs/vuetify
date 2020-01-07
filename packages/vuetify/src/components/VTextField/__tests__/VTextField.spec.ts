@@ -791,4 +791,17 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     ])
     expect(inputElement.element.value).toBe('')
   })
+
+  // https://material.io/components/text-fields/#filled-text-field
+  it('should be single if using the filled prop with no label', () => {
+    const wrapper = mountFunction({
+      propsData: { filled: true },
+    })
+
+    expect(wrapper.vm.isSingle).toBe(true)
+
+    wrapper.setProps({ label: 'Foobar ' })
+
+    expect(wrapper.vm.isSingle).toBe(false)
+  })
 })
