@@ -14,6 +14,10 @@ import {
 
 const VuetifySymbol = Symbol.for('vuetify')
 
+// Ordering for plugin install invocation was changed and won't work for us atm
+// Hoping to remove this in the future or rename it
+// v2.x https://github.com/vuejs/vue/blob/6fe07ebf5ab3fea1860c59fe7cdd2ec1b760f9b0/src/core/global-api/use.js#L15
+// v3.x https://github.com/vuejs/vue-next/blob/master/packages/runtime-core/src/apiCreateApp.ts#L106
 function VuetifyInstall (app: any, args: any) {
   install(app, {
     components,
@@ -22,13 +26,15 @@ function VuetifyInstall (app: any, args: any) {
   })
 }
 
-function VuetifyProvide (vuetify: any) {
+function createVuetify (opts: any) {
+  const vuetify = new Vuetify(opts)
+
   vuetify.init()
 
   provide(VuetifySymbol, vuetify.framework)
 }
 
-function VuetifyInject () {
+function useVuetify () {
   const vuetify = inject(VuetifySymbol)
 
   if (!vuetify) {
@@ -39,10 +45,10 @@ function VuetifyInject () {
 }
 
 export {
-  VuetifyInstall,
+  createVuetify,
+  useVuetify,
   Vuetify,
-  VuetifyInject,
-  VuetifyProvide,
+  VuetifyInstall,
 }
 
 export default Vuetify

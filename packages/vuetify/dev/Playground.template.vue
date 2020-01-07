@@ -5,13 +5,13 @@
 </template>
 
 <script>
-import { VuetifyInject } from 'vuetify'
+  import { useVuetify } from 'vuetify'
 
-export default {
-  setup () {
-    const vuetify = VuetifyInject()
+  export default {
+    setup () {
+      const vuetify = useVuetify()
 
-    console.log(vuetify)
+      console.log(vuetify)
+    },
   }
-}
 </script>

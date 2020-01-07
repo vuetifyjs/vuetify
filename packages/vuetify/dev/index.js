@@ -4,19 +4,17 @@ import {
   createApp,
 } from 'vue'
 import {
-  Vuetify,
-  VuetifyProvide,
-  VuetifyInstall
+  createVuetify,
+  VuetifyInstall,
 } from 'vuetify'
 
 const app = createApp()
-const vuetify = new Vuetify()
 
 app.use(VuetifyInstall)
 
 app.mount({
   setup () {
-    VuetifyProvide(vuetify)
+    createVuetify()
 
     return () => h(App)
   },
