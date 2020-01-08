@@ -1,9 +1,9 @@
 // Styles
 import './VApp.sass'
 
-import { computed, h } from 'vue'
+import { defineComponent, computed, h, mergeProps } from 'vue'
 
-export default {
+export default defineComponent({
   name: 'VApp',
 
   setup (props, { attrs, slots }) {
@@ -12,11 +12,10 @@ export default {
     }))
 
     return () => (
-      h('div', {
+      h('div', mergeProps(attrs, {
         class: classes.value,
         'data-app': true,
-        ...attrs,
-      }, slots.default())
+      }), slots.default())
     )
   }
-}
+})

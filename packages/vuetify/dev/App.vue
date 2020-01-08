@@ -1,8 +1,6 @@
 <template>
   <v-app>
-    <!-- <v-content> -->
-      <playground></playground>
-    <!-- </v-content> -->
+    <Playground />
   </v-app>
 </template>
 
