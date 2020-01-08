@@ -10,8 +10,5 @@ export interface VuetifyServiceContract {
 
 export interface VuetifyService {
   property: string
-  new (
-    preset: VuetifyPreset,
-    parent: InstanceType<typeof Framework>
-  ): VuetifyServiceContract
+  new (preset: VuetifyPreset): VuetifyServiceContract
 }

@@ -1,5 +1,11 @@
 import { inject, warn } from 'vue'
 
+// Preset
+import { preset as Preset } from './presets/default'
+
+// Utilities
+import { mergeDeep } from './util/helpers'
+
 // Types
 import {
   UserVuetifyPreset,
@@ -28,39 +34,37 @@ export function useVuetify () {
 export const version = __VUETIFY_VERSION__
 
 export default class Vuetify {
+  public defaultPreset = Preset
+
   public framework: Dictionary<VuetifyServiceContract> = {}
 
-  public installed: string[] = []
+  public installed: Set<string> = new Set()
 
   public preset = {} as VuetifyPreset
 
   public userPreset: UserVuetifyPreset = {}
 
   constructor (userPreset: UserVuetifyPreset = {}) {
-    this.userPreset = userPreset
-
-    this.use(services.Presets)
-    this.use(services.Application)
-    this.use(services.Breakpoint)
-    this.use(services.Goto)
-    this.use(services.Icons)
-    this.use(services.Lang)
-    this.use(services.Theme)
-
-    this.init()
+    this.init(userPreset)
   }
 
   // Called on the new vuetify instance
   // bootstrap in install beforeCreate
   // Exposes ssrContext if available
-  init () {
-    this.installed.forEach(property => {
-      const service = this.framework[property]
+  init (userPreset: UserVuetifyPreset) {
+    this.preset = this.mergePresets(userPreset)
 
-      service.framework = this.framework
+    const s: Dictionary<VuetifyService> = services
 
-      service.init()
-    })
+    for (const key in s) {
+      const service = s[key]
+
+      this.use(service)
+
+      // TODO: remove if https://www.notion.so/vuetify/0006-create-scroll-service-13bf10dcda0b447ea0bd3e9729c87e32
+      // is approved
+      this.framework[service.property].framework = this.framework
+    }
 
     // rtl is not installed and
     // will never be called by
@@ -68,14 +72,33 @@ export default class Vuetify {
     this.framework.rtl = Boolean(this.preset.rtl) as any
   }
 
+  mergePresets (userPreset: UserVuetifyPreset) {
+    const defaultPreset = mergeDeep({}, this.defaultPreset)
+
+    // The user provided global preset
+    const {
+      preset: globalPreset = {},
+      ...preset
+    } = userPreset
+
+    if (globalPreset.preset != null) {
+      warn('Global presets do not support the **preset** option, it can be safely omitted')
+    }
+
+    return mergeDeep(
+      mergeDeep(defaultPreset, globalPreset),
+      preset,
+    ) as VuetifyPreset
+  }
+
   // Instantiate a VuetifyService
   use (Service: VuetifyService) {
     const property = Service.property
 
-    if (this.installed.includes(property)) return
+    if (this.installed.has(property)) return
 
-    // TODO maybe a specific type for arg 2?
-    this.framework[property] = new Service(this.preset, this as any)
-    this.installed.push(property)
+    this.framework[property] = new Service(this.preset)
+
+    this.installed.add(property)
   }
 }
