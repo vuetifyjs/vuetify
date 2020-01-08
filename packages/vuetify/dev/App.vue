@@ -7,8 +7,9 @@
 <script>
   import Playground from './Playground'
   export default {
+    name: 'App',
     components: {
-      Playground
-    }
+      Playground,
+    },
   }
 </script>

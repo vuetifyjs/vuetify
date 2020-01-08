@@ -6,4 +6,4 @@ const app = createApp()
 
 app.use(Vuetify)
 
-app.mount(() => h(App), '#app')
+app.mount(App, '#app')

@@ -1,4 +1,4 @@
-import { inject } from 'vue'
+import { inject, warn } from 'vue'
 
 // Types
 import {
@@ -19,7 +19,7 @@ export function useVuetify () {
   const vuetify = inject(VuetifySymbol)
 
   if (!vuetify) {
-    throw Error(`Unable to find vuetify instance on Symbol <${String(VuetifySymbol)}>`)
+    warn('Vuetify has not been installed on this app')
   }
 
   return vuetify
