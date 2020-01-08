@@ -36,7 +36,5 @@ export function install (app: App, args: VuetifyUseOptions = {}) {
 
   const vuetify = new Vuetify(args)
 
-  vuetify.init()
-
   app.provide(VuetifySymbol, vuetify.framework)
 }

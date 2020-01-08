@@ -46,6 +46,8 @@ export default class Vuetify {
     this.use(services.Icons)
     this.use(services.Lang)
     this.use(services.Theme)
+
+    this.init()
   }
 
   // Called on the new vuetify instance
