@@ -8,6 +8,7 @@ You can join them in supporting Vuetify.js by [sponsoring through Github](https:
 ### Diamond
 - [LMAX Exchange](https://www.lmax.com/)
 - [Intygrate](http://intygrate.com/)
+- [Resale AI](http://resaleai.com/)
 - [Vue Mastery](https://vuemastery.com/)
 
 ### Platinum
