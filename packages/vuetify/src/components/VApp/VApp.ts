@@ -17,5 +17,5 @@ export default defineComponent({
         'data-app': true,
       }), slots.default())
     )
-  }
+  },
 })

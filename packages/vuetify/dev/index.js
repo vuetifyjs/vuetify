@@ -1,21 +1,9 @@
 import App from './App'
-import {
-  h,
-  createApp,
-} from 'vue'
-import {
-  createVuetify,
-  VuetifyInstall,
-} from 'vuetify'
+import { h, createApp } from 'vue'
+import Vuetify from 'vuetify'
 
 const app = createApp()
 
-app.use(VuetifyInstall)
+app.use(Vuetify)
 
-app.mount({
-  setup () {
-    createVuetify()
-
-    return () => h(App)
-  },
-}, '#app')
+app.mount(() => h(App), '#app')

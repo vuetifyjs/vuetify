@@ -1,3 +1,5 @@
+import { inject } from 'vue'
+
 // Types
 import {
   UserVuetifyPreset,
@@ -10,6 +12,18 @@ import {
 
 // Services
 import * as services from './services'
+
+export const VuetifySymbol = Symbol.for('vuetify')
+
+export function useVuetify () {
+  const vuetify = inject(VuetifySymbol)
+
+  if (!vuetify) {
+    throw Error(`Unable to find vuetify instance on Symbol <${String(VuetifySymbol)}>`)
+  }
+
+  return vuetify
+}
 
 export default class Vuetify {
   static installed = false

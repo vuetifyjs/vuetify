@@ -1,7 +1,8 @@
-// import OurVue, { VueConstructor } from 'vue'
+import { App } from 'vue'
 import { VuetifyUseOptions } from 'types'
+import Vuetify, { VuetifySymbol } from './framework'
 
-export function install (app: any, args: VuetifyUseOptions = {}) {
+export function install (app: App, args: VuetifyUseOptions = {}) {
   const components = args.components || {}
   const directives = args.directives || {}
 
@@ -23,4 +24,9 @@ export function install (app: any, args: VuetifyUseOptions = {}) {
     }
     return false
   })(components)
+
+  const vuetify = new Vuetify(args)
+  vuetify.init()
+
+  app.provide(VuetifySymbol, vuetify.framework)
 }
