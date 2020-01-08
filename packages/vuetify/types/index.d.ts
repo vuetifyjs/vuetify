@@ -29,6 +29,8 @@ export interface Vuetify {
   new (preset?: Partial<UserVuetifyPreset>): Vuetify
 }
 
+export { Presets, VuetifyPreset, UserVuetifyPreset } from './services/presets';
+
 export type ComponentOrPack = Component & {
   $_vuetify_subcomponents?: Record<string, ComponentOrPack>
 }
