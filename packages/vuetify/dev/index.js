@@ -1,3 +1,4 @@
+import '@mdi/font/css/materialdesignicons.css'
 import App from './App'
 import { h, createApp } from 'vue'
 import Vuetify from 'vuetify'
