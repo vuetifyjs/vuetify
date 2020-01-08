@@ -25,11 +25,9 @@ export function useVuetify () {
   return vuetify
 }
 
+export const version = __VUETIFY_VERSION__
+
 export default class Vuetify {
-  static installed = false
-
-  static version = __VUETIFY_VERSION__
-
   public framework: Dictionary<VuetifyServiceContract> = {}
 
   public installed: string[] = []
