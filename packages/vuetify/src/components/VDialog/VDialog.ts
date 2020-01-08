@@ -255,14 +255,10 @@ export default baseMixins.extend({
       on: {
         click: (e: Event) => { e.stopPropagation() },
       },
-      style: {},
-    }
-
-    if (!this.fullscreen) {
-      data.style = {
+      style: {
         maxWidth: this.maxWidth === 'none' ? undefined : convertToUnit(this.maxWidth),
         width: this.width === 'auto' ? undefined : convertToUnit(this.width),
-      }
+      },
     }
 
     children.push(this.genActivator())
