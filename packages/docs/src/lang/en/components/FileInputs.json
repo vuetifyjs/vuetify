@@ -59,8 +59,5 @@
   },
   "slots": {
     "selection": "Slot for defining a custom appearance for selected item(s). Provides the current **index**, **text** (truncated) and [file](https://developer.mozilla.org/en-US/docs/Web/API/File)."
-  },
-  "events": {
-    "change": "Components.Inputs.events.change"
   }
 }
