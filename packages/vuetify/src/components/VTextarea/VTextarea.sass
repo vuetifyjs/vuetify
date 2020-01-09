@@ -8,6 +8,7 @@
 
 .v-textarea
   textarea
+    align-self: stretch
     flex: 1 1 auto
     line-height: $textarea-line-height
     max-width: 100%
@@ -29,12 +30,27 @@
 
     &.v-text-field--single-line,
     &.v-text-field--outlined
-      .v-text-field__prefix,
-      textarea
-        margin-top: $textarea-box-enclosed-single-outlined-margin-top
+      &:not(.v-input--dense)
+        .v-text-field__prefix,
+        .v-text-field__suffix,
+        textarea
+          margin-top: $textarea-box-enclosed-single-outlined-margin-top
 
-      .v-label
-        top: $textarea-box-enclosed-single-outlined-label-top
+        .v-label
+          top: $textarea-box-enclosed-single-outlined-label-top
+
+      &.v-input--dense
+        .v-text-field__prefix,
+        .v-text-field__suffix,
+        textarea
+          margin-top: $textarea-dense-box-enclosed-single-outlined-margin-top
+
+        .v-input__prepend-inner,
+        .v-input__prepend-outer,
+        .v-input__append-inner,
+        .v-input__append-outer
+          align-self: flex-start
+          margin-top: $textarea-dense-append-prepend-margin-top
 
   &.v-text-field--solo
     align-items: flex-start
@@ -65,6 +81,8 @@
 
   &.v-text-field--enclosed
     .v-text-field__slot
+      align-self: stretch
+
       +ltr()
         margin-right: $textarea-enclosed-text-slot-margin
 
