@@ -1,6 +1,7 @@
 {
   "heading": "# Inputs",
   "headingText": "The `v-input` component gives you a baseline to create your own custom inputs. It consists of a prepend/append slot, messages, and a default slot. It is _recommended_ that you extend this component, but it can be used as a standalone.",
+  "attributesAlert": "The `v-input` component is used as a wrapper for all of the Vuetify form controls. It does **NOT** inherit attributes as they are expected to be passed down to inner inputs.",
   "examples": {
     "usage": {
       "desc": "`v-input` has 4 main areas. The prepended slot, the appended slot, the default slot, and messages. These make up the core logic shared between all form components."
