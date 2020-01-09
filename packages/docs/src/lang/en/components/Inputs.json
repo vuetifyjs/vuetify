@@ -63,6 +63,7 @@
   "slots": {
     "append": "Adds an item after input content",
     "label": "Replaces the default label",
+    "message": "Customize the messages slot.",
     "prepend": "Adds an item before input content"
   },
   "events": {

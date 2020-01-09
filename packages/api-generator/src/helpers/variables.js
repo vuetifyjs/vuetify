@@ -149,6 +149,13 @@ const inputSlots = [
     name: 'prepend',
     props: undefined,
   },
+  {
+    name: 'message',
+    props: {
+      key: 'number, // the messages index',
+      message: 'string, // the message',
+    },
+  },
 ]
 
 const textFieldSlots = [
