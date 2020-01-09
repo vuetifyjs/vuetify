@@ -1,0 +1,11 @@
+// preset/overrides.sass
+
+@import './variables.scss'
+
+.theme--light
+  .v-chip
+    border-radius: $shrine-chip-border-radius
+    border: $shrine-chip-border
+    font-weight: $shrine-chip-font-weight
+    padding: $shrine-chip-padding
+    +elevation(0)

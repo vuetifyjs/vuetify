@@ -11,8 +11,19 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "usage"
+          "type": "usage-new",
+          "value": {
+            "booleans": [
+              "action",
+              "icon"
+            ],
+            "sliders": ["elevation"],
+            "tabs": [
+              "default",
+              "single-line",
+              "sticky"
+            ]
+          }
         }
       ]
     },
@@ -22,15 +33,6 @@
         {
           "type": "api",
           "value": ["v-banner"]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "playground",
-          "value": "playground"
         }
       ]
     },

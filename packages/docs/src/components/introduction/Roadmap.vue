@@ -32,10 +32,9 @@
         <v-card
           :class="`elevation-${item.value ? 8 : 1}`"
           :hover="!item.value"
-          class="py-2"
           @click.native="item.value = true"
         >
-          <v-card-title class="py-0 pr-2">
+          <v-card-title class="py-2 pl-4 pr-2">
             <base-markdown
               class="body-2"
               :code="item.title"
@@ -56,14 +55,17 @@
                 v-text="item.caption"
               />
 
-              <v-icon small>
-                mdi-calendar
-              </v-icon>
+              <v-icon
+                small
+                v-text="item.value ? '$close' : 'mdi-calendar'"
+              />
             </v-btn>
           </v-card-title>
 
           <v-expand-transition>
             <div v-if="(index != null && index >= i) || item.value">
+              <v-divider />
+
               <v-card-text>
                 <base-markdown :code="item.text" />
 
@@ -95,6 +97,10 @@
     release: {
       icon: 'mdi-firework',
       color: 'indigo lighten-1',
+    },
+    maintenance: {
+      icon: 'mdi-tools',
+      color: 'warning',
     },
     packages: {
       icon: 'mdi-package-variant',

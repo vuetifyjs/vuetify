@@ -20,6 +20,10 @@ describe('VBanner.ts', () => {
         ...options,
         mocks: {
           $vuetify: {
+            application: {
+              top: 0,
+              bar: 0,
+            },
             breakpoint: {
               width: 1000,
             },
@@ -191,5 +195,30 @@ describe('VBanner.ts', () => {
     })
 
     expect(wrapper.classes('v-banner--is-mobile')).toBeTruthy()
+  })
+
+  it('should apply sticky when using the app prop', () => {
+    const wrapper = mountFunction({
+      propsData: { app: true },
+    })
+
+    expect(wrapper.vm.isSticky).toBe(true)
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      app: false,
+      sticky: true,
+    })
+
+    expect(wrapper.vm.isSticky).toBe(true)
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ sticky: false })
+
+    expect(wrapper.vm.isSticky).toBe(false)
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

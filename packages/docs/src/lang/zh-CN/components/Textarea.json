@@ -1,15 +1,64 @@
 {
+  "heading": "# 多行文本框",
+  "headingText": "多行文本框组件用于收集大量文本数据。",
   "examples": {
+    "usage": {
+      "desc": "`v-textarea` 最简单的形式是多行文本字段，可用于大量文本。"
+    },
     "icon": {
-      "heading": "图标"
+      "heading": "图标",
+      "desc": "`append-icon` 和 `prepend-icon` 属性有助于将上下文添加到 `v-textarea`。"
+    },
+    "auto-grow": {
+      "heading": "### 自动增长",
+      "desc": "当使用 `auto-grow` 属性时，当包含的文本超过其大小时，多行文本框的大小将自动增加。"
+    },
+    "background-color": {
+      "heading": "### 背景颜色",
+      "desc": "`background-color` 和 `color` 属性让您更好地控制样式 `v-textarea` 的样式。"
+    },
+    "browser-autocomplete": {
+      "heading": "### 浏览器自动完成",
+      "desc": "`autocomplete` 属性为您提供使浏览器能够预测用户输入的选项。"
+    },
+    "clearable": {
+      "heading": "### 可清除",
+      "desc": "您可以使用 `clearable` 属性清除 `v-textarea` 中的文本，并自定义与 `clearable-icon` 属性一起使用的图标。"
+    },
+    "counter": {
+      "heading": "### 计数器",
+      "desc": "`counter` 属性通知用户 `v-textarea` 的字符数限制。"
+    },
+    "no-resize": {
+      "heading": "### 没有调整大小",
+      "desc": "`v-textarea` 使用 `no-resize` 属性，可以选择保持大小不变​​，而不管其内容的大小如何。"
+    },
+    "rows": {
+      "heading": "### 行",
+      "desc": "`rows` 属性可让您定义文本区域有多少行，当与 `row-height` 属性结合使用时，您可以通过定义行的高度进一步自定义行。"
+    },
+    "signup-box": {
+      "heading": "### 美丽的表单",
+      "desc": "利用替代的输入样式，您可以创建易于构建和使用的惊人界面。"
     }
   },
   "props": {
-    "value": "Components.Inputs.props.value"
+    "autoGrow": "根据文本数量自动增长文本",
+    "dark": "Components.Inputs.props.dark",
+    "noResize": "移除调整大小的句柄",
+    "rowHeight": "每行的高度值。 需要使用 **auto-grow** 属性。",
+    "rows": "默认行数",
+    "value": "Components.Inputs.props.value",
+    "append": "Components.Inputs.props.append",
+    "append-outer": "Components.Inputs.props['append-outer']",
+    "prepend": "Components.Inputs.props.prepend",
+    "prepend-inner": "Components.Inputs.props['prepend-inner']"
   },
   "slots": {
     "append": "Components.Inputs.slots.append",
-    "prepend": "Components.Inputs.slots.prepend"
+    "append-outer": "在输入内容内追加一个项目",
+    "prepend": "Components.Inputs.slots.prepend",
+    "prepend-inner": "在输入内容中预设一个项目"
   },
   "events": {
     "change": "Components.Inputs.events.change",
@@ -18,6 +67,7 @@
     "click:clear": "Components.TextFields.events['click:clear']",
     "click:prepend": "Components.Inputs.events['click:prepend']",
     "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
+    "keydown": "当 **any** 键被按下时发出。文本必须对焦。",
     "update:error": "Mixins.Validatable.events['update:error']"
   }
 }

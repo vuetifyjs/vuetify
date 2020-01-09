@@ -1,4 +1,4 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 .v-speed-dial
   position: relative
@@ -34,7 +34,7 @@
       .v-speed-dial__list
         height: 100%
         top: 0
-        padding: 0 16px
+        padding: 0 $speed-dial-padding
 
     &-top,
     &-bottom
@@ -67,11 +67,11 @@
   align-items: center
   display: flex
   justify-content: center
-  padding: 16px 0
+  padding: $speed-dial-padding 0
   position: absolute
 
   .v-btn
-    margin: 6px
+    margin: $speed-dial-button-margin
 
 /** Modifiers */
 .v-speed-dial:not(.v-speed-dial--is-active) .v-speed-dial__list

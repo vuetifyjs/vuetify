@@ -1,7 +1,7 @@
-import Vue, { VNodeData } from 'vue'
-import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue/types'
+import Vue from 'vue'
+import { VNode, VNodeDirective } from 'vue/types'
 import { VuetifyIcon } from 'vuetify/types/services/icons'
-import mergeData from './mergeData'
+import { DataTableCompareFunction, SelectItemKey } from 'types'
 
 export function createSimpleFunctional (
   c: string,
@@ -19,98 +19,6 @@ export function createSimpleFunctional (
       return h(el, data, children)
     },
   })
-}
-
-export function createSimpleTransition (
-  name: string,
-  origin = 'top center 0',
-  mode?: string
-): FunctionalComponentOptions {
-  return {
-    name,
-
-    functional: true,
-
-    props: {
-      group: {
-        type: Boolean,
-        default: false,
-      },
-      hideOnLeave: {
-        type: Boolean,
-        default: false,
-      },
-      leaveAbsolute: {
-        type: Boolean,
-        default: false,
-      },
-      mode: {
-        type: String,
-        default: mode,
-      },
-      origin: {
-        type: String,
-        default: origin,
-      },
-    },
-
-    render (h, context): VNode {
-      const tag = `transition${context.props.group ? '-group' : ''}`
-      const data: VNodeData = {
-        props: {
-          name,
-          mode: context.props.mode,
-        },
-        on: {
-          beforeEnter (el: HTMLElement) {
-            el.style.transformOrigin = context.props.origin
-            el.style.webkitTransformOrigin = context.props.origin
-          },
-        },
-      }
-
-      const onLeave = data.on!.leave || []
-
-      if (context.props.leaveAbsolute) {
-        data.on!.leave = [...onLeave, (el: HTMLElement) => (el.style.position = 'absolute')]
-      }
-      if (context.props.hideOnLeave) {
-        data.on!.leave = [...onLeave, (el: HTMLElement) => (el.style.display = 'none')]
-      }
-
-      return h(tag, mergeData(context.data, data), context.children)
-    },
-  }
-}
-
-export function createJavaScriptTransition (
-  name: string,
-  functions: Record<string, any>,
-  mode = 'in-out'
-): FunctionalComponentOptions {
-  return {
-    name,
-
-    functional: true,
-
-    props: {
-      mode: {
-        type: String,
-        default: mode,
-      },
-    },
-
-    render (h, context): VNode {
-      return h(
-        'transition',
-        mergeData(context.data, {
-          props: { name },
-          on: functions,
-        }),
-        context.children
-      )
-    },
-  }
 }
 
 export type BindingConfig = Pick<VNodeDirective, 'arg' | 'modifiers' | 'value'>
@@ -212,7 +120,7 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
 
 export function getPropertyFromItem (
   item: object,
-  property: string | (string | number)[] | ((item: object, fallback?: any) => any),
+  property: SelectItemKey,
   fallback?: any
 ): any {
   if (property == null) return item === undefined ? fallback : item
@@ -349,24 +257,27 @@ export function upperFirst (str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
-export function groupByProperty (xs: any[], key: string): Record<string, any[]> {
-  return xs.reduce((rv, x) => {
+export function groupItems<T extends any = any> (
+  items: T[],
+  groupBy: string[],
+  groupDesc: boolean[]
+): Record<string, T[]> {
+  const key = groupBy[0]
+  return items.reduce((rv, x) => {
     (rv[x[key]] = rv[x[key]] || []).push(x)
     return rv
-  }, {})
+  }, {} as Record<string, T[]>)
 }
 
 export function wrapInArray<T> (v: T | T[] | null | undefined): T[] { return v != null ? Array.isArray(v) ? v : [v] : [] }
 
-export type compareFn<T = any> = (a: T, b: T) => number
-
-export function sortItems (
-  items: any[],
+export function sortItems<T extends any = any> (
+  items: T[],
   sortBy: string[],
   sortDesc: boolean[],
   locale: string,
-  customSorters?: Record<string, compareFn>
-) {
+  customSorters?: Record<string, DataTableCompareFunction<T>>
+): T[] {
   if (sortBy === null || !sortBy.length) return items
   const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
 
@@ -406,8 +317,6 @@ export function sortItems (
   })
 }
 
-export type FilterFn = (value: any, search: string | null, item: any) => boolean
-
 export function defaultFilter (value: any, search: string | null, item: any) {
   return value != null &&
     search != null &&
@@ -415,7 +324,7 @@ export function defaultFilter (value: any, search: string | null, item: any) {
     value.toString().toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) !== -1
 }
 
-export function searchItems (items: any[], search: string) {
+export function searchItems<T extends any = any> (items: T[], search: string): T[] {
   if (!search) return items
   search = search.toString().toLowerCase()
   if (search.trim() === '') return items
@@ -452,9 +361,9 @@ export function getPrefixedScopedSlots (prefix: string, scopedSlots: any) {
   }, {})
 }
 
-export function getSlot (vm: Vue, name = 'default', data?: object, optional = false) {
+export function getSlot (vm: Vue, name = 'default', data?: object | (() => object), optional = false) {
   if (vm.$scopedSlots[name]) {
-    return vm.$scopedSlots[name]!(data)
+    return vm.$scopedSlots[name]!(data instanceof Function ? data() : data)
   } else if (vm.$slots[name] && (!data || optional)) {
     return vm.$slots[name]
   }
@@ -501,4 +410,29 @@ export function camelizeObjectKeys (obj: Record<string, any> | null | undefined)
     o[camelize(key)] = obj[key]
     return o
   }, {})
+}
+
+export function mergeDeep (
+  source: Dictionary<any> = {},
+  target: Dictionary<any> = {}
+) {
+  for (const key in target) {
+    const sourceProperty = source[key]
+    const targetProperty = target[key]
+
+    // Only continue deep merging if
+    // both properties are objects
+    if (
+      isObject(sourceProperty) &&
+      isObject(targetProperty)
+    ) {
+      source[key] = mergeDeep(sourceProperty, targetProperty)
+
+      continue
+    }
+
+    source[key] = targetProperty
+  }
+
+  return source
 }

@@ -1,4 +1,8 @@
+// Styles
 import './VDialog.sass'
+
+// Components
+import { VThemeProvider } from '../VThemeProvider'
 
 // Mixins
 import Activatable from '../../mixins/activatable'
@@ -13,10 +17,12 @@ import Toggleable from '../../mixins/toggleable'
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import { convertToUnit, keyCodes } from '../../util/helpers'
-import ThemeProvider from '../../util/ThemeProvider'
 import mixins from '../../util/mixins'
 import { removed } from '../../util/console'
+import {
+  convertToUnit,
+  keyCodes,
+} from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
@@ -35,9 +41,7 @@ const baseMixins = mixins(
 export default baseMixins.extend({
   name: 'v-dialog',
 
-  directives: {
-    ClickOutside,
-  },
+  directives: { ClickOutside },
 
   props: {
     dark: Boolean,
@@ -159,14 +163,15 @@ export default baseMixins.extend({
     closeConditional (e: Event) {
       const target = e.target as HTMLElement
       // Ignore the click if the dialog is closed or destroyed,
-      // if it was on an element inside the content, or
-      // if it was dragged onto the overlay (#6969)
+      // if it was on an element inside the content,
+      // if it was dragged onto the overlay (#6969),
+      // or if this isn't the topmost dialog (#9907)
       return !(
         this._isDestroyed ||
         !this.isActive ||
         this.$refs.content.contains(target) ||
         (this.overlay && target && !this.overlay.$el.contains(target))
-      )
+      ) && this.activeZIndex >= this.getMaxZIndex()
     },
     hideScroll () {
       if (this.fullscreen) {
@@ -193,7 +198,7 @@ export default baseMixins.extend({
 
       if (this.persistent) {
         this.noClickAnimation || this.animateClick()
-      } else if (this.activeZIndex >= this.getMaxZIndex()) {
+      } else {
         this.isActive = false
       }
     },
@@ -289,7 +294,7 @@ export default baseMixins.extend({
       style: { zIndex: this.activeZIndex },
       ref: 'content',
     }, [
-      this.$createElement(ThemeProvider, {
+      this.$createElement(VThemeProvider, {
         props: {
           root: true,
           light: this.light,

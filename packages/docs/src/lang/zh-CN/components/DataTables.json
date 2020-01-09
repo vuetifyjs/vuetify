@@ -1,34 +1,162 @@
 {
+  "heading": "# 数据表格",
+  "headingText": "`v-data-table` 用于显示表格数据，功能包括排序、搜索、分页、行内编辑、头部提示以及行选择。",
   "examples": {
+    "usage": {
+      "desc": "标准数据表格默认将您的数据作为简单行渲染。"
+    },
+    "slots": {
+      "heading": "### 插槽",
+      "desc": "`v-data-table` 提供了大量用于定制表的插槽。 此示例展示了其中一些插槽，以及每个插槽可以做什么。 重要的是要注意一些插槽（例如：`item`/`body`/`header`）将完全代替组件的内部渲染，这将要求您重新实现选择和扩展之类的功能。 某些插槽会相互覆盖，例如：`body` > `item` > `item.<name>` 和 `header`/`header.<name>`。"
+    },
+    "select": {
+      "heading": "### 行选择框",
+      "desc": "`show-select` 属性将在默认标题中呈现一个复选框来切换所有行，并为每个默认行呈现一个复选框。你可以自定义 `header.data-table-select` 和 `item.data-table-select` 这些插槽的标题。您也可以在一次允许多个选定行之间进行切换，也可以使用 `single-select` 属性仅允许一次进行切换。"
+    },
+    "expand": {
+      "heading": "### 可展开行",
+      "desc": "`show-expand` 属性将在每个默认行上呈现一个展开图标。 您可以使用 `item.data-table-expand` 插槽自定义。 可以通过在标题数组中添加一个带有 `value: 'data-table-expand'` 的列来定制该插槽的位置。 您也可以在一次允许多个扩展行之间切换，也可以使用 `single-expand` 属性只允许一个扩展行之间切换。 展开的行在同步属性 `expanded.sync` 上可用"
+    },
+    "group": {
+      "heading": "### 分组行",
+      "desc": "使用 `group-by` 和 `group-desc` 属性可以将项目的属性的行进行分组。`show-group-by` 属性将在默认标题中显示一个组按钮。"
+    },
+    "dense": {
+      "heading": "### 密集",
+      "desc": "使用 `dense` 属性，您可以为数据表提供其他样式。"
+    },
+    "loading": {
+      "heading": "### 加载状态",
+      "desc": "您可以使用 `loading` 属性来表示表中的数据正在加载中。 如果表中没有数据，也会显示加载消息。 此消息可以使用 `loading-text` 属性或 `loading` 插槽自定义。"
+    },
     "headers": {
+      "heading": "### 插槽：项目和标题",
       "desc": "`items` 和 `headers` 可以接受 <kbd>td/th</kbd> 标签, 或者你想控制一整行，可以使用 <kbd>tr</kbd> 标签。第二种情况下，`item-key`并不会自动在行上加上`key`，你需要手动添加。"
     },
+    "footer-props": {
+      "heading": "### 页脚属性",
+      "desc": "`v-data-table` 使用 `v-data-footer` 组件渲染默认页脚。 您可以使用 `footer-props` 将属性传递到此组件。"
+    },
+    "multi-sort": {
+      "heading": "### 按多列排序",
+      "desc": "使用 `multi-sort` 属性将使您可以同时对多个列进行排序。 启用后，您可以将数组传递给 `sort-by` 和 `sort-desc` 来以编程方式控制排序，而不是单个值。"
+    },
+    "customize-header": {
+      "heading": "### 自定义默认头部",
+      "desc": "您可以使用 `header.<name>` 的动态插槽来仅自定义某些列。 `<name>` 是发送到 `headers` 的相应标题项中 `value` 属性的名称。"
+    },
+    "customize-rows": {
+      "heading": "### 自定义默认行",
+      "desc": "您可以使用动态插槽 `item.<name>` 仅自定义某些列。`<name>` 是发送到 `headers` 的相应标题项中 `value` 属性的名称。 因此，要自定义 calories \n 列，我们使用 `item.calories` 插槽。"
+    },
     "progress": {
+      "heading": "### 插槽：进度",
       "desc": "这里也有一个 `progress` 插槽让你可以自定义显示表格的加载状态，默认情况下这是一个`indeterminate` `v-progress-linear`（即不确定进度的线性进度条）。"
     },
     "search": {
+      "heading": "### 搜索",
       "desc": "数据表格还提供了一个 `search` 属性，允许你进行数据筛选。"
     },
     "paginate": {
+      "heading": "### 外部分页",
       "desc": "分页可以通过 `pagination` 属性在外部控制，切记使用时必须应用 `.sync` 修饰符。"
     },
     "sort": {
+      "heading": "### 外部排序",
       "desc": "排序也同样可以通过 `pagination` 属性在外部控制，也必须使用 `.sync` 修饰符。你也可以使用该属性设置默认的排序序列。"
     },
+    "server": {
+      "heading": "### 服务端分页和排序",
+      "desc": "如果要加载已经从后端进行分页和排序的数据，则可以使用 `server-items-length` 属性。 定义此属性将禁用内置的排序和分页功能，而您需要使用可用的事件（`update:page`, `update:sortBy`, `update:options`, 等）来知道何时请求新的后端的页面。 在获取数据时，使用 `loading` 属性显示进度条。"
+    },
+    "headerless": {
+      "heading": "### 无头表格",
+      "desc": "您可以使用 `hide-default-header` 和 `hide-default-footer` 属性分别移除默认页眉和页脚。"
+    },
     "edit-dialog": {
+      "heading": "### 行内编辑",
       "desc": "使用 `v-edit-dialog` 组件来进行数据表格的行内编辑。 You can block closing the dialog when clicked outside by adding the **persistent** prop."
     },
     "crud": {
-      "desc": "数据表格使用 `v-dialog` 组件来进行每行的CRUD操作。"
+      "heading": "### CRUD 操作",
+      "desc": "数据表格使用 `v-dialog` 组件来进行每行的 CRUD 操作。"
+    },
+    "virtualized": {
+      "heading": "### 虚拟化行",
+      "desc": "使用 `virtual-rows` 属性将使行变得虚拟化， 当你有大量行时，它可以提高数据表的性能。 请注意，您不能使用带有此属性的 `body`, `body.prepend` 和 `body.append` 插槽。"
+    },
+    "custom-filter": {
+      "heading": "### 自定义过滤",
+      "desc": "您可以通过为 `custom-filter` 属性提供函数来覆盖 `search` 属性所使用的默认过滤。 如果您需要自定义特定列的过滤，则可以在标头项目的 `filter` \n 属性中提供函数。 标识是 `(value: any, search: string | null, item: any) => boolean`。 即使未提供 `search` 属性，该功能也将始终运行。 因此，如果不应用过滤器，则需要确保以值 `true` 提前退出。"
+    },
+    "filterable-columns": {
+      "heading": "### 过滤列",
+      "desc": "通过在标题项上将 `filterable` 的属性设置为 false，可以轻松地禁止在搜索表行时包括特定列。 在下面的示例中，甜点名称列不再可搜索。"
     }
   },
   "props": {
     "v-edit-dialog": {
       "cancelText": "为取消按钮设置默认文本，当使用了 `large` 属性时（即有提交和取消按钮的对话框）。",
-      "saveText": "为保存按钮设置默认文本，当使用了 `large` 属性时。"
+      "eager": "Mixins.Bootable.props.eager",
+      "large": "将提交和取消按钮附加到对话框",
+      "saveText": "为保存按钮设置默认文本，当使用了 `large` 属性时。",
+      "transition": "Mixins.Transitionable.props.transition"
     },
     "v-data-table": {
-      "headers": "表头数组"
+      "calculateWidths": "启用列宽的计算。`widths` 属性将在部分作用域内可用",
+      "caption": "设置标题（使用 `<caption>`）",
+      "dense": "降低行高度",
+      "expandIcon": "用于展开按钮的图标。",
+      "fixedHeader": "固定页眉至表格顶部。**注意：** 在 IE11 中不可用",
+      "headerProps": "将属性传递到默认标题。 有关更多信息，请参见 'v-data-table-header' API",
+      "headers": "表头数组",
+      "headersLength": "可以与 `hide-headers` 结合使用以指定表中的列数，以允许扩展行和加载栏正常运行",
+      "height": "设置表的显式高度",
+      "hideDefaultHeader": "隐藏默认标题",
+      "mobileBreakpoint": "用于设置何时在常规表和移动视图之间切换",
+      "showSelect": "在标题和行中显示选择复选框（如果使用默认行）",
+      "showExpand": "在默认行中显示展开切换",
+      "showGroupBy": "在标题中通过切换显示分组并启用分组的行",
+      "virtualRows": "虚拟化行的渲染。 请注意，您不能在此属性上使用 `body`, `body.prepend` 或 `body.append` 插槽。"
+    }
+  },
+  "slots": {
+    "v-data-table": {
+      "body": "替换默认表 `<tbody>` 的插槽",
+      "body.append": "将元素追加到默认表 `<tbody>` 的末尾",
+      "body.prepend": "将元素添加到默认表 `<tbody>` 的开头",
+      "expanded-item": "插槽自定义展开的行",
+      "footer": "添加自定义页脚的插槽",
+      "footer.page-text": "自定义页脚页文本的插槽",
+      "group": "替换分组行的默认渲染的插槽",
+      "group.header": "用于自定义组标题的默认渲染的插槽",
+      "group.summary": "用于自定义组摘要的默认渲染的插槽",
+      "heading": "添加自定义标题的插槽",
+      "header.<name>": "自定义特定标题列的插槽",
+      "header.data-table-select": "替换标题中默认的 `v-simple-checkbox` 的插槽",
+      "item": "替换行默认渲染的插槽",
+      "item.data-table-select": "用于替换选择行时使用的默认 `v-simple-checkbox` 的插槽",
+      "item.data-table-expand": "用于扩展行时替换默认的 `v-icon` 的插槽",
+      "item.<name>": "自定义特定列的插槽",
+      "loading": "定义 `loading` 为 true 且未提供任何项目时的内容",
+      "no-data": "定义何时不提供任何项目的内容",
+      "no-results": "定义何时提供 `search` 但未找到结果的内容",
+      "progress": "用于替换默认 `<v-progress-linear>` 组件的插槽",
+      "top": "将内容添加到表上方的插槽"
+    },
+    "v-edit-dialog": {
+      "input": "用于表示 v-edit-dialog 输入组件的插槽"
+    }
+  },
+  "events": {
+    "v-edit-dialog": {
+      "cancel": "在编辑被取消时发出",
+      "close": "按下编辑对话框关闭按钮时发出",
+      "open": "在打开编辑时发出",
+      "save": "按下编辑对话框保存按钮时退出"
+    },
+    "v-data-table": {
+      "click:row": "单击表行时退出。 包含该行的项目。 **注意**：当通过诸如 `item` 或 `body` 之类的插槽定义表格行时，不会发出。"
     }
   }
 }

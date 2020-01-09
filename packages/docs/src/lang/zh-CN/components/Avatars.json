@@ -1,7 +1,31 @@
 {
+  "heading": "# 头像",
+  "headingText": "`v-avatar` 组件通常用于显示用户个人资料的圆形图片。该组件将允许你动态调整大小并添加响应图像，图标和文本的边框半径。**tile** 变量可用来显示方形头像。",
+  "usageText": "头像以最简单的形式在圆形容器中显示内容。",
   "examples": {
+    "size": {
+      "heading": "### 大小",
+      "desc": "`size` 属性允许你定义 `v-avatar` 的高度和宽度。这个属性以 1 的长宽比均匀缩放。`height` 和 `width` 属性将会覆盖这个属性。"
+    },
+    "tile": {
+      "heading": "### 平铺",
+      "desc": "`tile` 属性会移除圆形边框，为你提供简单的正方形 v-avatar。"
+    },
+    "default": {
+      "heading": "### 默认插槽",
+      "desc": "`v-avatar` 的默认插槽将接受 `v-icon` 组件、图像或文本。混合并匹配这些元素来创建一个独一无二的东西。"
+    },
+    "profile": {
+      "heading": "### 个人资料卡",
+      "desc": "使用 **tile** 属性，我们可以创建一个光滑的内衬型卡。"
+    },
     "advanced": {
-      "desc": "将头像与其他组件组合在一起，您就可以构建漂亮的用户界面。"
+      "heading": "### 高级用法",
+      "desc": "将头像与其他组件组合在一起，你就可以构建漂亮的用户界面。"
     }
+  },
+  "props": {
+    "left": "指定头像在组件左侧。它被诸如 [v-chip](/components/chips) 和 [v-btn](/components/butons) 等组件绑在一起。",
+    "right": "指定头像在组件的右侧。它被诸如 [v-chip](/components/chips) 和 [v-btn](/components/butons) 等组件绑在一起。"
   }
 }

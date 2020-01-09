@@ -1,7 +1,6 @@
 // Types
-import Vue, { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
-import { TableHeader } from './mixins/header'
+import Vue, { VNode, PropType } from 'vue'
+import { DataTableHeader } from 'types'
 
 // Utils
 import { getObjectValueByPath } from '../../util/helpers'
@@ -12,7 +11,7 @@ export default Vue.extend({
   functional: true,
 
   props: {
-    headers: Array as PropValidator<TableHeader[]>,
+    headers: Array as PropType<DataTableHeader[]>,
     item: Object,
     rtl: Boolean,
   },
@@ -20,7 +19,7 @@ export default Vue.extend({
   render (h, { props, slots, data }): VNode {
     const computedSlots = slots()
 
-    const columns: VNode[] = props.headers.map((header: TableHeader) => {
+    const columns: VNode[] = props.headers.map((header: DataTableHeader) => {
       const children = []
       const value = getObjectValueByPath(props.item, header.value)
 
@@ -33,11 +32,16 @@ export default Vue.extend({
       } else if (regularSlot) {
         children.push(regularSlot)
       } else {
-        children.push(value)
+        children.push(value == null ? value : String(value))
       }
 
+      const textAlign = `text-${header.align || 'start'}`
+
       return h('td', {
-        class: `text-${header.align || 'start'}`,
+        class: {
+          [textAlign]: true,
+          'v-data-table__divider': header.divider,
+        },
       }, children)
     })
 

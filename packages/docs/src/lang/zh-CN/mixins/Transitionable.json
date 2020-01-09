@@ -1,1 +1,7 @@
-{}
+{
+  "props": {
+    "mode": "设置转换模式（不应用于转换组）。你可以在 Vue 文档浏览更多 [for transition modes](https://vuejs.org/v2/api/#transition)。",
+    "origin": "设置元素上的动画原点。您可以在 MDN 文档上浏览更多 [for transition origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin)",
+    "transition": "设置组件转换。可以是一个 [built in transitions](/styles/transitions) 或者是自己自定义的。"
+  }
+}

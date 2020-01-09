@@ -1,1 +1,36 @@
-{}
+{
+  "heading": "# 底部表单",
+  "headingText": "底部表单是一个修改后的`v-dialog`，可以从屏幕底部滑动，类似于一个`v-bottom-navigation`。底部导航组件用于按钮和特定应用程序级别操作，而底部表单可以包含任何内容。",
+  "examples": {
+    "usage": {
+      "desc": "在这里，我们将显示一个示例操作列表，它可能出现在应用程序中。"
+    },
+    "inset": {
+      "heading": "### 嵌入",
+      "desc": "底部表单可以嵌入，将其在桌面上的最大宽度减小到 70％。可以使用 `width` 属性手动减少。"
+    },
+    "persistent": {
+      "heading": "### 持久的",
+      "desc": "持久的底部表单无法通过在外部单击来关闭。"
+    },
+    "model": {
+      "heading": "### `v-model` 控制",
+      "desc": "底部表单可以使用 `v-model` 来控制。如果你不能使用 `activator` 插槽，那么可以用它来控制开关。"
+    },
+    "open-in-list": {
+      "heading": "### 打开列表",
+      "desc": "通过将功能列表合并到底部表单中，您可以创建一个简单的 'open in' 组件。"
+    },
+    "player": {
+      "heading": "### 音乐播放器",
+      "desc": " 使用嵌入式底部表单，您可以制作实用的组件，例如这个简单的音乐播放器。"
+    }
+  },
+  "props": {
+    "eager": "Mixins.Bootable.props.eager",
+    "inset": "将对话框内容最大宽度减少到 70％",
+    "internalActivator": "Components.Dialogs.props.internalActivator",
+    "openOnHover": "Components.Dialogs.props.openOnHover",
+    "maxWidth": "Components.Dialogs.props.maxWidth"
+  }
+}

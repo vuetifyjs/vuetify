@@ -14,6 +14,7 @@
               label="Formatted with Moment.js"
               readonly
               v-on="on"
+              @click:clear="date = null"
             ></v-text-field>
           </template>
           <v-date-picker
@@ -36,6 +37,7 @@
               label="Formatted with datefns"
               readonly
               v-on="on"
+              @click:clear="date = null"
             ></v-text-field>
           </template>
           <v-date-picker

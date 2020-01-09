@@ -1,12 +1,31 @@
 {
+  "heading": "# ツールチップ",
+  "headingText": "`v-tooltip`コンポーネントは、ユーザーが要素にカーソルを合わせたときに情報を伝えるのに役立ちます。また、 `v-model`を介してツールチップの表示をプログラムで制御することもできます。有効にするとツールチップには、その機能の説明など要素を識別するテキストラベルが表示されます。",
+  "headerAlert1": "`v-tooltip`の表示位置の設定には、position prop(` top` | `bottom` |` left` | `right`) が必要です。",
   "examples": {
+    "usage": {
+      "desc": "Tooltipsはどんな要素もラップすることができます。"
+    },
+    "alignment": {
+      "heading": "### 配置",
+      "desc": "Tooltipは対象になる要素の四方向のどこにでも配置することができます。"
+    },
     "visibility": {
       "heading": "表示",
-      "desc": "`v-model`を使用してTooltipの表示をプログラム的制御できます。"
+      "desc": "`v-model`を使用してTooltipの表示を制御できます。"
     }
   },
   "props": {
     "closeDelay": "open-on-hover prop が true の場合に、メニューが閉じられるまでの遅延時間。(ミリ秒単位)",
-    "debounce": "Tooltipがホバーされた際に表示されてから消えるまでの時間。"
+    "dark": "Mixins.Themeable.props.dark",
+    "debounce": "Tooltipがホバーされた際に表示されてから消えるまでの時間。",
+    "disabled": "ツールチップを無効にする",
+    "internalActivator": "内部アクティベーターを使用するか指定します",
+    "light": "Mixins.Themeable.props.light",
+    "openDelay": "Open-on-hover prop が true の場合に、メニューが開くまでの遅延時間。(ミリ秒単位**)",
+    "openOnClick": "アクティベーターのクリック時にツールチップを開くかどうかを指定します",
+    "openOnHover": "アクティベーターのクリック時にツールチップを開くかどうかを指定します",
+    "tag": "activator のラッパーにカスタムタグを指定します",
+    "transition": "Mixins.Transitionable.props.transition"
   }
 }

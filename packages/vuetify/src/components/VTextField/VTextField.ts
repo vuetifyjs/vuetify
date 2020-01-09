@@ -9,6 +9,7 @@ import VCounter from '../VCounter'
 import VLabel from '../VLabel'
 
 // Mixins
+import Intersectable from '../../mixins/intersectable'
 import Loadable from '../../mixins/loadable'
 
 // Directives
@@ -20,11 +21,18 @@ import { breaking, consoleWarn } from '../../util/console'
 
 // Types
 import mixins from '../../util/mixins'
-import { VNode } from 'vue/types'
+import { VNode, PropType } from 'vue/types'
 
 const baseMixins = mixins(
   VInput,
-  Loadable
+  Intersectable({
+    onVisible: [
+      'setLabelWidth',
+      'setPrefixWidth',
+      'setPrependWidth',
+    ],
+  }),
+  Loadable,
 )
 interface options extends InstanceType<typeof baseMixins> {
   $refs: {
@@ -55,6 +63,7 @@ export default baseMixins.extend<options>().extend({
       default: '$clear',
     },
     counter: [Boolean, Number, String],
+    counterValue: Function as PropType<(value: any) => number>,
     filled: Boolean,
     flat: Boolean,
     fullWidth: Boolean,
@@ -107,7 +116,10 @@ export default baseMixins.extend<options>().extend({
         'v-text-field--shaped': this.shaped,
       }
     },
-    counterValue (): number {
+    computedCounterValue (): number {
+      if (typeof this.counterValue === 'function') {
+        return this.counterValue(this.internalValue)
+      }
       return (this.internalValue || '').toString().length
     },
     internalValue: {
@@ -136,7 +148,13 @@ export default baseMixins.extend<options>().extend({
       return this.isDirty || dirtyTypes.includes(this.type)
     },
     isSingle (): boolean {
-      return this.isSolo || this.singleLine || this.fullWidth
+      return (
+        this.isSolo ||
+        this.singleLine ||
+        this.fullWidth ||
+        // https://material.io/components/text-fields/#filled-text-field
+        (this.filled && !this.hasLabel)
+      )
     },
     isSolo (): boolean {
       return this.solo || this.soloInverted
@@ -172,16 +190,7 @@ export default baseMixins.extend<options>().extend({
     prefix () {
       this.$nextTick(this.setPrefixWidth)
     },
-    isFocused (val) {
-      // Sets validationState from validatable
-      this.hasColor = val
-
-      if (val) {
-        this.initialValue = this.lazyValue
-      } else if (this.initialValue !== this.lazyValue) {
-        this.$emit('change', this.lazyValue)
-      }
-    },
+    isFocused: 'updateValue',
     value (val) {
       this.lazyValue = val
     },
@@ -296,7 +305,7 @@ export default baseMixins.extend<options>().extend({
           dark: this.dark,
           light: this.light,
           max,
-          value: this.counterValue,
+          value: this.computedCounterValue,
         },
       })
     },
@@ -378,13 +387,18 @@ export default baseMixins.extend<options>().extend({
       })
     },
     genMessages () {
-      if (this.hideDetails) return null
+      if (this.hideDetails === true) return null
+
+      const messagesNode = VInput.options.methods.genMessages.call(this)
+      const counterNode = this.genCounter()
+
+      if (this.hideDetails === 'auto' && !messagesNode && !counterNode) return null
 
       return this.$createElement('div', {
         staticClass: 'v-text-field__details',
       }, [
-        VInput.options.methods.genMessages.call(this),
-        this.genCounter(),
+        messagesNode,
+        counterNode,
       ])
     },
     genTextFieldSlot () {
@@ -451,7 +465,7 @@ export default baseMixins.extend<options>().extend({
     setLabelWidth () {
       if (!this.outlined || !this.$refs.label) return
 
-      this.labelWidth = this.$refs.label.scrollWidth * 0.75 + 6
+      this.labelWidth = Math.min(this.$refs.label.scrollWidth * 0.75 + 6, (this.$el as HTMLElement).offsetWidth - 24)
     },
     setPrefixWidth () {
       if (!this.$refs.prefix) return
@@ -462,6 +476,16 @@ export default baseMixins.extend<options>().extend({
       if (!this.outlined || !this.$refs['prepend-inner']) return
 
       this.prependWidth = this.$refs['prepend-inner'].offsetWidth
+    },
+    updateValue (val: boolean) {
+      // Sets validationState from validatable
+      this.hasColor = val
+
+      if (val) {
+        this.initialValue = this.lazyValue
+      } else if (this.initialValue !== this.lazyValue) {
+        this.$emit('change', this.lazyValue)
+      }
     },
   },
 })

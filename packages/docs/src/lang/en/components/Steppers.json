@@ -73,6 +73,9 @@
     }
   },
   "events": {
+    "v-stepper": {
+      "change": "Emitted when step is changed by user interaction"
+    },
     "v-stepper-step": {
       "click": "Emitted when component is clicked"
     }

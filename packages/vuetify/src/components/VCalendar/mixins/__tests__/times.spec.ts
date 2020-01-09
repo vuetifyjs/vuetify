@@ -5,7 +5,7 @@ import {
   MountOptions,
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../../util/mixins'
-import { VTimestamp } from '../../util/timestamp'
+import { CalendarTimestamp } from 'types'
 
 const Mock = Times.extend({
   render: h => h('div'),
@@ -43,7 +43,7 @@ describe('times.ts', () => {
       day: '8',
       weekday: '4',
     }
-    wrapper.vm.updateDay(now as unknown as VTimestamp, target as unknown as VTimestamp)
+    wrapper.vm.updateDay(now as unknown as CalendarTimestamp, target as unknown as CalendarTimestamp)
     expect(target).toEqual(now)
   })
 
@@ -59,7 +59,7 @@ describe('times.ts', () => {
       day: '8',
       weekday: '4',
     }
-    wrapper.vm.updateDay(now as unknown as VTimestamp, target as unknown as VTimestamp)
+    wrapper.vm.updateDay(now as unknown as CalendarTimestamp, target as unknown as CalendarTimestamp)
     expect(target).not.toEqual(now)
   })
 
@@ -73,7 +73,7 @@ describe('times.ts', () => {
       hour: '8',
       minute: '30',
     }
-    wrapper.vm.updateTime(now as unknown as VTimestamp, target as unknown as VTimestamp)
+    wrapper.vm.updateTime(now as unknown as CalendarTimestamp, target as unknown as CalendarTimestamp)
     expect(target).not.toEqual(now)
   })
 })

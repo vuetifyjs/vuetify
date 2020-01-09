@@ -1,7 +1,33 @@
 {
+  "heading": "# カルーセル",
+  "headingText": "`v-carousel` コンポーネントは、タイマーで入れ替わる数枚の大きなビジュアルコンテンツを表示するために使います。",
+  "subComponentsHeader": "### サブコンポーネント",
   "examples": {
+    "usage": {
+      "desc": "`v-carousel`コンポーネントは、` v-window`を拡張し、画像の表示を目的とした追加機能を提供します。"
+    },
+    "cycle": {
+      "desc": "** cycle ** propを使用すると、6秒(デフォルト) ごとに次の利用可能なスライドに自動的に移行させることができます。"
+    },
     "custom-transition": {
+      "heading": "### カスタムトランジション",
       "desc": "独自のカスタムトランジションを適用することもできます。"
+    },
+    "custom-icons": {
+      "heading": "### カスタムデリミタ",
+      "desc": "カルーセルスライドのデリミタ(区切り) として利用可能なアイコンを使用します。"
+    },
+    "hide-delimiters": {
+      "heading": "### デリミタを非表示にする",
+      "desc": "`hide-delimiters`propで下部のコントロールを非表示にできます。"
+    },
+    "hide-controls": {
+      "heading": "### コントロールを非表示にする",
+      "desc": "ナビゲーションコントロールは `:show-arrows=\"false\"` で非表示にできます。"
+    },
+    "model": {
+      "heading": "### `v-model`による制御",
+      "desc": "カルーセルをモデルで制御できます。"
     }
   },
   "props": {

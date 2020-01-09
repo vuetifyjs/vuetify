@@ -78,8 +78,11 @@ $material-dark: map-deep-merge(
       'color': map-get($shades, 'white')
     ),
     'text-fields': (
-      'filled': rgba(map-get($shades, 'black'), 0.1),
-      'filled-hover': rgba(map-get($shades, 'black'), 0.2)
+      'filled': rgba(map-get($shades, 'white'), 0.08),
+      'filled-hover': rgba(map-get($shades, 'white'), 0.16),
+      'outlined': rgba(map-get($shades, 'white'), 0.24),
+      'outlined-disabled': rgba(map-get($shades, 'white'), 0.16),
+      'outlined-hover': map-get($shades, 'white')
     ),
     'input-bottom-line': rgba(map-get($shades, 'white'), 0.7),
     'stepper': (

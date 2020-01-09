@@ -1,1 +1,30 @@
-{}
+{
+  "heading": "# 无障碍",
+  "headingText": "Web 无障碍 **(a11y for short)**，是一种包容性的做法，确保没有任何障碍阻止残疾人与万维网上的网站进行交互或访问。Vuetify 组件为所有基于鼠标的操作提供键盘交互，并在可应用的地方利用 HTML5 语义元素。",
+  "accessibilityHeader": "## Material Design 无障碍",
+  "accessibilityText": "Google 详细介绍了如何创建其组件。它们还提供了一些示例，说明如何在创建应用程序时确保使用最佳实践（超出了Vuetify的默认支持）。你可以在规范网站上找到有关 [implementing accessibility](https://material.io/design/usability/accessibility.html) 的更多信息。",
+  "activatorHeader": "## 激活槽位",
+  "activatorText1": "Vuetify 对许多组件使用激活槽，如 `v-menu`,`v-dialog` 等等。 在某些情况下，这些 activator 元素应该具有特定的 a11y 属性，将它们与它们的相应内容联系起来。 为了做到这一点，我们通过插槽范围传递必要的 a11y 选项。",
+  "activatorText2": "当 activator 元素被呈现时，它现在将包含绑定的 a11y 属性",
+  "focusHeader1": "## 焦点管理和键盘交互",
+  "focusText1": "除了属性之外，诸如 `v-menu` 之类的组件还通过按 <kbd>↑</kbd> 和 <kbd>↓</kbd> 在选项之间导航来支持交互。",
+  "focusHeader2": "### v-menu",
+  "focusText2": "在 `v-menu` 中，`v-list-item` 将自动配置为 **menuitem** 的作用。浏览 [Menu](/components/menus) 以获得有关组件功能的更多信息。",
+  "focusHeader3": "### v-list-item-group",
+  "focusText3": "`v-list-item-group` 组件在按 <kbd>tab</kbd> 键时，`v-list-item` 变得可以互动和导航。 它还将 `v-list-item` 配置为具有 **listitem** 的功能。参阅 [List-item group](/components/list-item-groups) 以获取更多关于组件特性的信息。",
+  "scopedHeader1": "## Item slots",
+  "scopedText1": "在某些情况下，你将插槽用于组件，并且需要正确的 aria 属性才能绑定到元素。当使用 (**v-slot**) 时，这在插槽范围内传递给你，正如上面的 `v-menu` 示例所示。然而，还有其他更复杂的组件，你需要将属性绑定到正确的组件以确保获得适当的支持。",
+  "scopedHeader2": "### v-select",
+  "scopedText2": "`v-select` 组件将自动配置所有需要 a11y 的属性。每个项目将生成对应的 **id**, **aria-labelledby**, **aria-selected** 和 **roles**",
+  "scopedText3": "渲染时，`v-select` 组件的内容将类似于：",
+  "scopedText4": "但是，在某些情况下使用插槽时，你将需要利用传递的属性来获得正确的 aria 设置。这个信息同样也适用于 `v-autocomplete`, `v-combobox` and `v-overflow-btn`，因为它们都是 `v-select` 扩展而来。",
+  "scopedText5": "当在插槽中提供 `v-list-item` 组件时，aria 属性会通过 **attrs** 数据属性，并且可以与 `v-bind` 绑定。",
+  "scopedText6": "为了正确地将标签与正确的 _option_ 关联，你休要绑定 `attrs.id` 到 `v-list-item-title` 上的 `aria-labelled-by`。这将去报文本被正确关联。请记住，如果你没有使用插槽，这些都会自动完成。",
+  "resourcesHeader": "## 额外资源",
+  "resourcesText1": "虽然 Vuetify 尽可能保证你在开发应用程序中轻松地使用 a11y，但有时候仍然需要额外的信息。 下面可以找到有用的资源列表。",
+  "resourcesText2": [
+    "[W3C Web Accessibility Initiative](https://www.w3.org/WAI/)",
+    "[WAI-ARIA Authoring Practices](https://www.w3.org/TR/wai-aria-practices-1.1/)",
+    "[The A11Y Project](https://a11yproject.com/)"
+  ]
+}

@@ -1,1 +1,10 @@
-{}
+{
+  "props": {
+    "absolute": "给组件应用 **position: absolute**",
+    "bottom": "将组件向底部对齐。",
+    "fixed": "给组件应用 **position: fixed**",
+    "left": "将组件向左边对齐。",
+    "right": "将组件向右边对齐。",
+    "top": "将组件向顶部对齐。"
+  }
+}

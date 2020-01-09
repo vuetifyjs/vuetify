@@ -1,10 +1,15 @@
 {
   "examples": {
+    "overflow-to-menu": {
+      "heading": "### メニュー付き"
+    },
     "icons": {
       "heading": "### カスタムアイコン"
     }
   },
   "props": {
+    "dark": "Mixins.Themeable.props.dark",
+    "light": "Mixins.Themeable.props.light",
     "reverseTransition": "戻す際のトランジションを設定します。"
   }
 }

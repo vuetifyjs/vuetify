@@ -1,3 +1,44 @@
 {
-  "close": "关闭"
+  "close": "关闭",
+  "init": "初始化命令已复制",
+  "quickstart": {
+    "title": "一分钟快速开始",
+    "desc": "用于快速预览 Vuetify 框架的功能。 因为 Vuetify 可以在运行时绑定。 即使在没有构建过程的环境中，您也可以创建漂亮的模型绑定模板。"
+  },
+  "simple": {
+    "title": "简单的 HTML",
+    "desc": "这个模板是为那些想要以最简单的方式尝试 Vue.js 和 Vuetify.js 的用户设计的。它包含一个基本的 index.html，没有附加功能。这对于希望轻松预览框架特性的开发人员非常有用。"
+  },
+  "webpack": {
+    "title": "Webpack",
+    "desc": "这个模板是为那些寻找开箱即用的格式化和单元测试的用户设计的。"
+  },
+  "webpackSimple": {
+    "title": "简单的 Webpack 例子",
+    "desc": "该模板适用于已经熟悉 Vue/Webpack 的用户。 它包含一个非常简单的 webpack 设置，并且针对创建原型或基本应用程序的开发人员。"
+  },
+  "webpackSSR": {
+    "title": "Webpack SSR",
+    "desc": "该模板适用于希望利用新的 Vue SSR（服务器端渲染）的高级用户。 基于 Vue.js 2 [Hackernews](https://github.com/vuejs/vue-hackernews-2.0) 存储库中的结构。Vuetify.js SSR 模板为高级 Vue 应用程序提供了下一代功能。"
+  },
+  "nuxt": {
+    "title": "NUXT",
+    "desc": "利用 NUXT 的强大功能，可以立即使用 Vuetify 提供的引导版本来增强您的开发经验。"
+  },
+  "pwa": {
+    "title": "PWA",
+    "desc": "您可以使用预先配置的 PWA（渐进式 Web 应用程序）模板。 通过 service workers，application manifest 和 90 + / 100 Lighthouse 分数进行引导。"
+  },
+  "electron": {
+    "title": "Electron",
+    "desc": "Vuetify 的官方 Electron 模板用于创建桌面应用程序。"
+  },
+  "aLaCarte": {
+    "title": "A La Carte",
+    "desc": "在此模板中，您可以看到如何仅选择要使用的组件的示例。 这对于减少未使用组件的包装尺寸很有用。"
+  },
+  "cordova": {
+    "title": "Cordova",
+    "desc": "该模板使用 Apache Cordova 帮助您轻松地将 Web 应用程序转换为本地 Android 或 iOS 应用程序。"
+  }
 }

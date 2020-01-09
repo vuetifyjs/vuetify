@@ -1,1 +1,7 @@
-[]
+{
+  "props": {
+    "hideOverlay": "隐藏遮罩层的显示.",
+    "overlayColor": "设置遮罩层的颜色。",
+    "overlayOpacity": "设置遮罩层的透明度。"
+  }
+}

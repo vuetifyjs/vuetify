@@ -1,24 +1,9 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 // Theme
 +theme(v-overflow-btn) using ($material)
-  .v-input__control,
   .v-input__slot
-    &::before
-      background-color: map-get($material, 'dividers') !important // override v-text-field bottom border
-
-  &.v-text-field--outline
-    .v-input__control,
-    .v-input__slot
-      &::before
-        background-color: transparent !important // override v-text-field top border
-
-  &--segmented,
-  &--editable:hover,
-  &--editable.v-input--is-focused,
-  &--editable.v-select--is-menu-active
-    .v-input__append-inner
-      border-left: 1px solid map-get($material, 'dividers')
+    border-color: map-get($material, 'dividers') !important // override v-text-field bottom border
 
   &:hover,
   &.v-input--is-focused,
@@ -26,50 +11,83 @@
     .v-input__slot
       background: map-get($material, 'cards')
 
+  &.v-overflow-btn--segmented
+    .v-input__append-inner
+      border-left: thin solid map-get($material, 'dividers')
+
+
+.v-autocomplete__content.v-menu__content
+  box-shadow: $overflow-menu-content-box-shadow
+
+  .v-select-list
+    border-radius: $overflow-menu-content-select-list-border-radius
+
 .v-overflow-btn
-  margin-top: 12px
+  margin-top: $overflow-margin-top
   padding-top: 0
 
   &:not(.v-overflow-btn--editable) > .v-input__control > .v-input__slot
     cursor: pointer
 
+  .v-input__slot
+    border-width: $overflow-input-slot-border-width
+    border-style: solid
+
+    &:before
+      display: none
+
   .v-select__slot
-    height: 48px
+    height: $overflow-slot-height
 
   &.v-input--dense
     .v-select__slot
-      height: 38px
+      height: $overflow-dense-slot-height
 
     input
-      margin-left: 16px
       cursor: pointer
 
+      +ltr()
+        margin-left: $overflow-dense-input-margin-x
+
+      +rtl()
+        margin-right: $overflow-dense-input-margin-x
+
   .v-select__selection--comma:first-child
-    margin-left: 16px
+    +ltr()
+      margin-left: $overflow-selection-comma-margin-x
+
+    +rtl()
+      margin-right: $overflow-selection-comma-margin-x
 
   .v-input__slot
     transition: .3s map-get($transition, 'swing')
 
+    &::before,
     &::after
-      content: none
+      display: none
 
   .v-label
-    margin-left: 16px
-    top: calc(50% - 10px)
+    top: $overflow-label-top
+
+    +ltr()
+      margin-left: $overflow-label-margin-x
+
+    +rtl()
+      margin-right: $overflow-label-margin-x
 
   .v-input__append-inner
-    width: 48px
-    height: 48px
-    align-self: auto
     align-items: center
-    margin-top: 0
-    padding: 0
+    align-self: auto
     flex-shrink: 0
+    height: $overflow-append-inner-height
+    margin-top: 0
+    padding: 0 4px
+    width: $overflow-append-inner-width
 
   .v-input__append-outer,
   .v-input__prepend-outer
-    margin-top: 12px
-    margin-bottom: 12px
+    margin-bottom: $overflow-append-prepend-margin-bottom
+    margin-top: $overflow-append-prepend-margin-top
 
   .v-input__control::before
     // TODO: move to mixin
@@ -84,21 +102,39 @@
   &.v-input--is-focused,
   &.v-select--is-menu-active
     .v-input__slot
-      +elevation(2)
+      border-color: transparent !important
+      box-shadow: $overflow-focused-active-slot-box-shadow
+
+  &.v-input--is-focused
+    .v-input__slot
+      border-radius: $overflow-focused-active-border-radius
+
+  &.v-select--is-menu-active
+    .v-input__slot
+      border-radius: $overflow-active-slot-border-radius
 
   .v-select__selections
     width: 0px
 
   &--segmented
+    .v-input__slot
+      border-width: $overflow-segmented-input-slot-border-width
+
     .v-select__selections
       flex-wrap: nowrap
 
       .v-btn
         border-radius: 0
         margin: 0
-        margin-right: -16px // push past the input's padding
-        height: 48px
+        height: $overflow-segmented-selections-btn-height
         width: 100%
+
+        // push past the input's padding
+        +ltr()
+          margin-right: $overflow-segmented-selections-btn-margin-x
+
+        +rtl()
+          margin-left: $overflow-segmented-selections-btn-margin-x
 
         &__content
           justify-content: start
@@ -110,6 +146,7 @@
     .v-select__slot
       input
         cursor: text
+        padding: $overflow-editable-select-slot-padding
 
     .v-input__append-inner,
     .v-input__append-inner *

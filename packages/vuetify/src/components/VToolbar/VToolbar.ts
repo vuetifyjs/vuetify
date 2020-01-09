@@ -12,8 +12,7 @@ import { convertToUnit, getSlot } from '../../util/helpers'
 import { breaking } from '../../util/console'
 
 // Types
-import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { VNode, PropType } from 'vue'
 
 /* @vue/component */
 export default VSheet.extend({
@@ -34,9 +33,9 @@ export default VSheet.extend({
     prominent: Boolean,
     short: Boolean,
     src: {
-      type: [String, Object],
+      type: [String, Object] as PropType<string | srcObject>,
       default: '',
-    } as PropValidator<string | srcObject>,
+    },
     tag: {
       type: String,
       default: 'header',

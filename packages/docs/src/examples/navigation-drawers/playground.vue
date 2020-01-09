@@ -1,5 +1,5 @@
 <template>
-  <v-row align="stretch">
+  <v-container>
     <v-row justify="space-around">
       <v-col cols="12">
         <v-select
@@ -87,7 +87,7 @@
         </v-list>
       </v-navigation-drawer>
     </v-card>
-  </v-row>
+  </v-container>
 </template>
 
 <script>

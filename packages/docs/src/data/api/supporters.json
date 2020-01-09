@@ -15,7 +15,6 @@
   ],
   "Diamond": [
     {
-      "type": "Patron",
       "name": "LMAX Exchange",
       "href": "https://careers.lmax.com/?utm_source=vuetify&utm_medium=logo-link&utm_campaign=lmax-careers",
       "logo": "backers/lmax-exchange.png"
@@ -53,9 +52,10 @@
       "logo": "backers/digital-maas.svg"
     },
     {
-      "name": "DigitalMaas",
+      "name": "BrightTree",
       "href": "https://www.brightree.com/",
-      "logo": "backers/brightree.svg"
+      "logo": "backers/brightree-logo-light.png",
+      "darkLogo": "backers/brightree-logo-dark.png"
     },
     {
       "name": "Quanted Square",
@@ -63,16 +63,28 @@
       "logo": "backers/quanted-square.svg"
     }
   ],
+  "Collective": [
+    {
+      "name": "Getform",
+      "href": "https://opencollective.com/vuetify/sponsor/1/website",
+      "logo": "https://opencollective.com/vuetify/sponsor/1/avatar.svg"
+    },
+    {
+      "name": "Edusson",
+      "href": "https://opencollective.com/vuetify/sponsor/2/website",
+      "logo": "https://opencollective.com/vuetify/sponsor/2/avatar.svg"
+    },
+    {
+      "name": "PapersOwl",
+      "href": "https://opencollective.com/vuetify/sponsor/3/website",
+      "logo": "https://opencollective.com/vuetify/sponsor/3/avatar.svg"
+    }
+  ],
   "Gold": [
     {
       "name": "Deister Software",
       "href": "http://www.deister.es/",
       "logo": "backers/deister-logo-light.png"
-    },
-    {
-      "name": "Cycloid",
-      "href": "https://www.cycloid.io/",
-      "logo": "backers/cycloid.png"
     },
     {
       "name": "Zweidenker",
@@ -125,11 +137,6 @@
       "logo": "backers/blokt.png"
     },
     {
-      "name": "Loomio",
-      "href": "https://www.loomio.org/",
-      "logo": "backers/loomio.svg"
-    },
-    {
       "name": "Toolio",
       "href": "https://www.toolio.com/",
       "logo": "backers/toolio.png"
@@ -143,6 +150,11 @@
       "name": "EduBirdie",
       "href": "https://edubirdie.com/",
       "logo": "backers/bird.png"
+    },
+    {
+      "name": "ClothingRIC",
+      "href": "https://www.clothingric.com/",
+      "logo": "backers/clothingric.png"
     }
   ],
   "affiliate": [

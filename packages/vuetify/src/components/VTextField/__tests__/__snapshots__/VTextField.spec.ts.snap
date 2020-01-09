@@ -22,13 +22,13 @@ exports[`VTextField.ts should apply theme to label, counter, messages and icons 
         </div>
       </div>
       <div class="v-text-field__slot">
-        <label for="input-127"
+        <label for="input-131"
                class="v-label theme--light"
                style="left: 0px; position: absolute;"
         >
           foo
         </label>
-        <input id="input-127"
+        <input id="input-131"
                type="text"
         >
       </div>

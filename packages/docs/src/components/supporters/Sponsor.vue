@@ -44,11 +44,16 @@
 
     computed: {
       src () {
-        const cdn = 'https://cdn.vuetifyjs.com/images/'
+        const { logo, darkLogo } = this.value
+        const cdn = !this.value.logo.match('http')
+          ? 'https://cdn.vuetifyjs.com/images/'
+          : ''
 
-        return `${cdn}${!this.$vuetify.theme.dark
-          ? this.value.logo
-          : this.value.darkLogo || this.value.logo}`
+        if (this.$vuetify.theme.dark && darkLogo) {
+          return `${cdn}${darkLogo}`
+        }
+
+        return `${cdn}${logo}`
       },
       width () {
         if (this.xLarge) return 175

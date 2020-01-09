@@ -563,19 +563,20 @@ describe('VSlider.ts', () => {
     expect(parseKeyDown).toHaveBeenCalled()
   })
 
-  it('should set value to min value if given a NaN', () => {
+  it('should set value to min value if given a NaN value', () => {
     const input = jest.fn()
     const wrapper = mountFunction({
       propsData: {
         min: -20,
         max: 20,
+        value: NaN,
       },
       listeners: {
         input,
       },
     })
 
-    expect(input).toHaveBeenCalledWith(-20)
+    expect(wrapper.vm.internalValue).toBe(-20)
   })
 
   it('should correctly handle initial value of zero (#7320)', () => {
@@ -617,5 +618,24 @@ describe('VSlider.ts', () => {
 
     expect(input).not.toHaveBeenCalledWith(-20)
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10018
+  it('should not fire event if value is provided and valid', async () => {
+    const input = jest.fn()
+    mountFunction({
+      propsData: { value: 10, min: -20 },
+      listeners: { input },
+    })
+
+    expect(input).not.toHaveBeenCalled()
+
+    // Should set to min value if invalid
+    mountFunction({
+      propsData: { value: NaN, min: -20 },
+      listeners: { input },
+    })
+
+    expect(input).toHaveBeenCalledWith(-20)
   })
 })

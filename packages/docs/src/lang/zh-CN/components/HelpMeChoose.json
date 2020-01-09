@@ -1,1 +1,21 @@
-{}
+{
+  "advanced": "高级版",
+  "application": "应用程序",
+  "beginner": "初学者",
+  "desktop": "桌面端",
+  "experience": "经验",
+  "intermediate": "中级",
+  "mobile": "移动端",
+  "no": "不",
+  "question1": "您对 Vue 的经验如何？",
+  "question2": "您正在什么平台上开发？",
+  "question3": "您的项目需要测试脚手架吗？",
+  "question4": "您的应用程序是否需要 SEO 优化？",
+  "reset": "重置",
+  "seo": "SEO",
+  "suggestion": "建议",
+  "tests": "测试",
+  "question5": "如果您的选择有建议，它将在下面突出显示",
+  "yes": "是",
+  "web": "Web"
+}

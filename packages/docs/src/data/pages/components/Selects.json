@@ -32,6 +32,11 @@
         {
           "type": "playground",
           "value": "playground"
+        },
+        {
+          "type": "alert",
+          "lang": "Components.Selects.autocompleteAlert",
+          "value": "info"
         }
       ]
     },
