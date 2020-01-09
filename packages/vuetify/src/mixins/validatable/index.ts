@@ -236,8 +236,8 @@ export default mixins(
         const rule = this.rules[index]
         const valid = typeof rule === 'function' ? rule(value) : rule
 
-        if (typeof valid === 'string') {
-          errorBucket.push(valid)
+        if (valid === false || typeof valid === 'string') {
+          errorBucket.push(valid || '')
         } else if (typeof valid !== 'boolean') {
           consoleError(`Rules should return a string or boolean, received '${typeof valid}' instead`, this)
         }

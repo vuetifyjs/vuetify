@@ -102,7 +102,8 @@ describe('validatable.ts', () => {
 
     wrapper.vm.validate()
 
-    expect(wrapper.vm.errorBucket).toEqual([])
+    // https://github.com/vuetifyjs/vuetify/issues/9976
+    expect(wrapper.vm.errorBucket).toEqual([''])
 
     // Boolean true sets no messages
     wrapper.setProps({ rules: [true] })
