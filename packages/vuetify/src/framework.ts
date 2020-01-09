@@ -24,6 +24,7 @@ export const VuetifySymbol = Symbol.for('vuetify')
 export function useVuetify () {
   const vuetify = inject(VuetifySymbol)
 
+  /* istanbul ignore if */
   if (!vuetify) {
     warn('Vuetify has not been installed on this app')
   }
@@ -81,6 +82,7 @@ export default class Vuetify {
       ...preset
     } = userPreset
 
+    /* istanbul ignore if */
     if (globalPreset.preset != null) {
       warn('Global presets do not support the **preset** option, it can be safely omitted')
     }
