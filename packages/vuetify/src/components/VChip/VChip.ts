@@ -148,6 +148,7 @@ export default mixins(
         on: {
           click: (e: Event) => {
             e.stopPropagation()
+            e.preventDefault()
 
             this.$emit('click:close')
             this.$emit('update:active', false)
