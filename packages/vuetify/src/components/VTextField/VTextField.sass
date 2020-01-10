@@ -35,17 +35,17 @@
           color: map-deep-get($material, 'inputs', 'solo-inverted-focused-text')
 
   &--outlined
-    &:not(.v-input--is-focused):not(.v-input--has-state)
-      > .v-input__control > .v-input__slot fieldset
-        color: map-deep-get($material, 'text-fields', 'outlined')
+    &:not(.v-input--is-focused)
+      &:not(.v-input--has-state)
+        > .v-input__control > .v-input__slot fieldset
+          color: map-deep-get($material, 'text-fields', 'outlined')
 
-    &:not(.v-input--is-focused):not(.v-input--has-state)
-      > .v-input__control > .v-input__slot:hover fieldset
-        color: map-deep-get($material, 'text-fields', 'outlined-hover')
+        > .v-input__control > .v-input__slot:hover fieldset
+          color: map-deep-get($material, 'text-fields', 'outlined-hover')
 
-    &.v-input--is-disabled
-      > .v-input__control > .v-input__slot fieldset
-        color: map-deep-get($material, 'text-fields', 'outlined-disabled')
+      &.v-input--is-disabled
+        > .v-input__control > .v-input__slot fieldset
+          color: map-deep-get($material, 'text-fields', 'outlined-disabled')
 
 .v-text-field
   padding-top: $text-field-active-label-height
@@ -64,7 +64,19 @@
   .v-input__slot
     border-color: inherit
     border-radius: inherit
+
+  fieldset,
+  .v-input__control
     color: inherit
+
+  &.v-input--has-state
+    .v-input__control > .v-text-field__details > .v-counter
+      color: inherit
+
+  &.v-input--is-disabled
+    .v-input__control > .v-text-field__details > .v-counter,
+    .v-input__control > .v-text-field__details > .v-messages
+      color: inherit
 
   &.v-input--dense
     padding-top: 0
