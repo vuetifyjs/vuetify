@@ -667,7 +667,11 @@ export default baseMixins.extend<options>().extend({
       }
     },
     onMouseUp (e: MouseEvent) {
-      if (this.hasMouseDown && e.which !== 3) {
+      if (
+        this.hasMouseDown &&
+        e.which !== 3 &&
+        !this.isDisabled
+      ) {
         // If append inner is present
         // and the target is itself
         // or inside, toggle menu
@@ -675,7 +679,7 @@ export default baseMixins.extend<options>().extend({
           this.$nextTick(() => (this.isMenuActive = !this.isMenuActive))
         // If user is clicking in the container
         // and field is enclosed, activate it
-        } else if (this.isEnclosed && !this.isDisabled) {
+        } else if (this.isEnclosed) {
           this.isMenuActive = true
         }
       }
