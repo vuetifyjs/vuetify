@@ -1,23 +1,11 @@
 @import './_variables.scss'
 
-// Theme
 +theme(v-select) using ($material)
-  // Needs an explicit color to override
-  // higher level color
-  .v-select__selections
+  .v-select__selection--comma
     color: map-deep-get($material, 'text', 'primary')
 
-  &.v-input--is-disabled
-    .v-select__selections
-      color: map-deep-get($material, 'text', 'disabled')
-
-  .v-chip--disabled,
   .v-select__selection--disabled
     color: map-deep-get($material, 'text', 'disabled')
-
-  &.v-text-field--solo-inverted.v-input--is-focused
-    .v-select__selections
-      color: map-deep-get($material, 'inputs', 'solo-inverted-focused-text')
 
 .v-select
   position: relative // For **attach** prop
