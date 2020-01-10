@@ -175,7 +175,7 @@ export default mixins(
         !this.disabled
       ) {
         this.hasFocused = true
-        this.validateOnBlur && this.validate()
+        this.validateOnBlur && this.$nextTick(this.validate)
       }
     },
     isResetting () {

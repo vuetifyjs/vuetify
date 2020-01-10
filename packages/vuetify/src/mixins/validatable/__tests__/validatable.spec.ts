@@ -444,4 +444,35 @@ describe('validatable.ts', () => {
     expect(wrapper.vm.validationState).toBeUndefined()
     expect(wrapper.vm.hasState).toBe(false)
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10174
+  it('should validate correct value when blurring', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        rules: [v => !!v || 'Mandatory Field'],
+        validateOnBlur: true,
+        value: 'Foo',
+      },
+    })
+
+    wrapper.setData({ isFocused: true })
+
+    wrapper.setProps({ value: '' })
+    await wrapper.vm.$nextTick()
+
+    wrapper.setData({ isFocused: false })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.hasError).toBe(true)
+
+    wrapper.setData({ isFocused: true })
+
+    wrapper.setProps({ value: 'Bar' })
+    await wrapper.vm.$nextTick()
+
+    wrapper.setData({ isFocused: false })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.hasError).toBe(false)
+  })
 })
