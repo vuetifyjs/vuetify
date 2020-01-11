@@ -69,14 +69,10 @@ export interface VuetifyPreset {
     options: Theme['options']
     themes: Theme['themes']
   }
-
-  [name: string]: any
 }
 
 export interface UserVuetifyPreset extends GlobalVuetifyPreset {
   preset?: GlobalVuetifyPreset
-
-  [name: string]: any
 }
 
 export interface GlobalVuetifyPreset {
@@ -87,8 +83,6 @@ export interface GlobalVuetifyPreset {
   lang?: LangOptions
   theme?: ThemeOptions
   transitions?: Dictionary<VueConstructor>
-
-  [name: string]: any
 }
 
 export interface Presets {
