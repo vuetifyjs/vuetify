@@ -12,17 +12,11 @@ describe('framework.ts', () => {
   it('should initialize a Vuetify service', () => {
     const vuetify = new Vuetify()
 
-    expect(vuetify.installed.size).toBe(6)
-    expect(vuetify.installed.has('mock')).toBe(false)
+    expect('mock' in vuetify.framework).toBe(false)
 
     vuetify.use(MockService)
 
-    expect(vuetify.installed.has('mock')).toBe(true)
-    expect(vuetify.installed.size).toBe(7)
-
-    // If already installed, won't add again
-    vuetify.use(MockService)
-    expect(vuetify.installed.size).toBe(7)
+    expect('mock' in vuetify.framework).toBe(true)
   })
 
   it('should merge user options with default preset', () => {

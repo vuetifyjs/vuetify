@@ -37,8 +37,6 @@ export const version = __VUETIFY_VERSION__
 export default class Vuetify {
   public framework: Dictionary<VuetifyServiceContract> = {}
 
-  public installed: Set<string> = new Set()
-
   public preset = {} as VuetifyPreset
 
   constructor (userPreset: UserVuetifyPreset = {}) {
@@ -77,10 +75,8 @@ export default class Vuetify {
   use (Service: VuetifyService) {
     const property = Service.property
 
-    if (this.installed.has(property)) return
+    if (property in this.framework) return
 
     this.framework[property] = new Service(this.preset)
-
-    this.installed.add(property)
   }
 }
