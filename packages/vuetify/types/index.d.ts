@@ -3,40 +3,38 @@ import './lib'
 import './alacarte'
 import './colors'
 
-// Services
+// Types
 import { Application } from './services/application'
-import { Breakpoint } from './services/breakpoint'
-import { Icons } from './services/icons'
-import { Lang } from './services/lang'
-import { Theme } from './services/theme'
-import {
-  Presets,
-  UserVuetifyPreset,
-  VuetifyPreset,
-} from './services/presets'
-
-// Service Options
 import { GoToOptions } from './services/goto'
+import {
+  Breakpoint,
+  BreakpointOptions,
+} from 'vuetify/types/services/breakpoint'
+import {
+  Icons,
+  IconsOptions,
+} from 'vuetify/types/services/icons'
+import {
+  Lang,
+  LangOptions,
+} from 'vuetify/types/services/lang'
+import {
+  Theme,
+  ThemeOptions,
+} from 'vuetify/types/services/theme'
 
 declare const Vuetify: Vuetify
 export default Vuetify
 export interface Vuetify {
   framework: Framework
-  install: PluginFunction<VuetifyUseOptions>
-  preset: VuetifyPreset
-  userPreset: UserVuetifyPreset
+  install: PluginFunction<GlobalVuetifyPreset>
   version: string
   new (preset?: Partial<UserVuetifyPreset>): Vuetify
 }
 
 export type ComponentOrPack = Component & {
+  // eslint-disable-next-line camelcase
   $_vuetify_subcomponents?: Record<string, ComponentOrPack>
-}
-
-export interface VuetifyUseOptions {
-  transitions?: Record<string, VueConstructor>
-  directives?: Record<string, DirectiveOptions>
-  components?: Record<string, ComponentOrPack>
 }
 
 export interface Framework {
@@ -48,6 +46,54 @@ export interface Framework {
   lang: Lang
   presets: Presets
   rtl: boolean
+}
+
+export interface VuetifyPreset {
+  breakpoint: {
+    scrollBarWidth: Breakpoint['scrollBarWidth']
+    thresholds: Breakpoint['thresholds']
+  }
+  icons: {
+    iconfont: Icons['iconfont']
+    // TODO: Remove partial for v3
+    values: Partial<Icons['values']>
+  }
+  lang: {
+    current: Lang['current']
+    locales: Lang['locales']
+    t: Lang['t']
+  }
+  theme: {
+    dark: Theme['dark']
+    default: Theme['default']
+    disable: Theme['disable']
+    options: Theme['options']
+    themes: Theme['themes']
+  }
+
+  [name: string]: any
+}
+
+export interface UserVuetifyPreset extends GlobalVuetifyPreset {
+  preset?: GlobalVuetifyPreset
+
+  [name: string]: any
+}
+
+export interface GlobalVuetifyPreset {
+  breakpoint?: BreakpointOptions
+  components?: Dictionary<ComponentOrPack>
+  directives?: Dictionary<DirectiveOptions>
+  icons?: IconsOptions
+  lang?: LangOptions
+  theme?: ThemeOptions
+  transitions?: Dictionary<VueConstructor>
+
+  [name: string]: any
+}
+
+export interface Presets {
+  preset: UserVuetifyPreset
 }
 
 declare module 'vue/types/vue' {

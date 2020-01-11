@@ -1,10 +1,14 @@
-import { App } from 'vue'
 import Vuetify, { VuetifySymbol } from './framework'
-import { ComponentOrPack, VuetifyUseOptions } from 'types'
+import { App } from 'vue'
+import { GlobalVuetifyPreset } from 'types'
 
-export function install (app: App, args: VuetifyUseOptions = {}) {
-  const components = args.components || {}
-  const directives = args.directives || {}
+export function install (app: App, args: GlobalVuetifyPreset = {}) {
+  const {
+    components = {},
+    directives = {},
+    transitions = {},
+    ...preset
+  } = args
 
   for (const key in directives) {
     const directive = directives[key]
@@ -12,7 +16,7 @@ export function install (app: App, args: VuetifyUseOptions = {}) {
     app.directive(key, directive)
   }
 
-  (function registerComponents (components: Dictionary<ComponentOrPack>) {
+  (function registerComponents (components: GlobalVuetifyPreset['components']) {
     if (!components) return false
 
     for (const key in components) {
@@ -34,7 +38,7 @@ export function install (app: App, args: VuetifyUseOptions = {}) {
     return true
   })(components)
 
-  const vuetify = new Vuetify(args)
+  const vuetify = new Vuetify(preset)
 
   app.provide(VuetifySymbol, vuetify.framework)
 }
