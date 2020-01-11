@@ -60,7 +60,7 @@ export default mixins<options &
   beforeMount () {
     this.$nextTick(() => {
       if (this.activatorNode) {
-        const activator = Array.isArray(this.activatorNode) ? this.activatorNode : [this.activatorNode]
+        const activator = Array.isArray(this.activatorNode) ? [...this.activatorNode].reverse() : [this.activatorNode]
 
         activator.forEach(node => node.elm && this.$el.insertAdjacentElement('afterend', node.elm as HTMLElement))
       }
