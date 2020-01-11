@@ -35,15 +35,11 @@ export function useVuetify () {
 export const version = __VUETIFY_VERSION__
 
 export default class Vuetify {
-  public defaultPreset = Preset
-
   public framework: Dictionary<VuetifyServiceContract> = {}
 
   public installed: Set<string> = new Set()
 
   public preset = {} as VuetifyPreset
-
-  public userPreset: UserVuetifyPreset = {}
 
   constructor (userPreset: UserVuetifyPreset = {}) {
     this.init(userPreset)
@@ -53,7 +49,7 @@ export default class Vuetify {
   // bootstrap in install beforeCreate
   // Exposes ssrContext if available
   init (userPreset: UserVuetifyPreset) {
-    this.preset = this.mergePresets(userPreset)
+    this.preset = this.mergePreset(userPreset)
 
     const s: Dictionary<VuetifyService> = services
 
@@ -73,24 +69,8 @@ export default class Vuetify {
     this.framework.rtl = Boolean(this.preset.rtl) as any
   }
 
-  mergePresets (userPreset: UserVuetifyPreset) {
-    const defaultPreset = mergeDeep({}, this.defaultPreset)
-
-    // The user provided global preset
-    const {
-      preset: globalPreset = {},
-      ...preset
-    } = userPreset
-
-    /* istanbul ignore if */
-    if (globalPreset.preset != null) {
-      warn('Global presets do not support the **preset** option, it can be safely omitted')
-    }
-
-    return mergeDeep(
-      mergeDeep(defaultPreset, globalPreset),
-      preset,
-    ) as VuetifyPreset
+  mergePreset ({ preset, ...userPreset }: UserVuetifyPreset) {
+    return mergeDeep(mergeDeep(Preset, preset), userPreset) as VuetifyPreset
   }
 
   // Instantiate a VuetifyService
