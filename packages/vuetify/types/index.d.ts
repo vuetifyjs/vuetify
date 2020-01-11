@@ -3,7 +3,6 @@ import './lib'
 import './alacarte'
 import './colors'
 
-// Types
 import { Application } from './services/application'
 import { GoToOptions } from './services/goto'
 import {
