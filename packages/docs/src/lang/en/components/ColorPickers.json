@@ -1,10 +1,8 @@
 {
   "heading": "# Color pickers",
   "headingText": "The `v-color-picker` allows you to select a color using a variety of input methods.",
+  "usageText": "",
   "examples": {
-    "usage": {
-      "desc": ""
-    },
     "model": {
       "heading": "### Model",
       "desc": "The `v-color-picker` uses the `v-model` prop to control the color displayed. It supports hex strings such as **#FF00FF** and **#FF00FF00**, and objects representing **RGBA**, **HSLA** and **HSVA** values."

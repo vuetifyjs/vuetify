@@ -4,18 +4,14 @@
       align="center"
       justify="center"
     >
-      <v-btn
-        :class="$vuetify.theme.dark && 'white--text'"
+      <v-icon
         v-bind="{
           ...attrs,
-          color: attrs.color || 'deep-purple accent-4',
-          [attrs.size]: true
+          [attrs.size]: true,
         }"
       >
-        <v-icon v-if="attrs.fab || attrs.icon">mdi-account</v-icon>
-
-        <span v-else>Click Me</span>
-      </v-btn>
+        {{ attrs.icon || 'mdi-plus' }}
+      </v-icon>
     </v-row>
   </v-container>
 </template>
