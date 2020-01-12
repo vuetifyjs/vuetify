@@ -6,7 +6,7 @@ import { Service } from '../service'
 import * as ThemeUtils from './utils'
 
 // Types
-import { VuetifyPreset } from 'vuetify/types/services/presets'
+import { VuetifyPreset } from 'vuetify'
 import {
   reactive,
   watch,
@@ -47,18 +47,10 @@ export class Theme extends Service {
 
     this.dark = Boolean(dark)
     this.defaults = this.themes = themes
+    this.disabled = disable
     this.options = options
 
-    if (disable) {
-      this.disabled = true
-
-      return
-    }
-
-    this.themes = reactive({
-      dark: this.fillVariant(themes.dark, true),
-      light: this.fillVariant(themes.light, false),
-    })
+    this.init()
   }
 
   // When setting css, check for element
@@ -103,6 +95,11 @@ export class Theme extends Service {
   // apply new theme to document
   public init (): void {
     if (this.disabled) return
+
+    this.themes = reactive({
+      dark: this.fillVariant(this.themes.dark, true),
+      light: this.fillVariant(this.themes.light, false),
+    })
 
     /* istanbul ignore else */
     // if ((root as any).$meta) {
