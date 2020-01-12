@@ -140,8 +140,7 @@ export default baseMixins.extend<options>().extend({
       return (
         this.filled ||
         this.isSolo ||
-        this.outlined ||
-        this.fullWidth
+        this.outlined
       )
     },
     isLabelActive (): boolean {

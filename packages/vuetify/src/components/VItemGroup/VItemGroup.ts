@@ -127,7 +127,7 @@ export const BaseItemGroup = mixins(
 
       // If no value provided and mandatory,
       // assign first registered item
-      if (this.mandatory && this.internalLazyValue == null) {
+      if (this.mandatory && !this.selectedValues.length) {
         this.updateMandatory()
       }
 

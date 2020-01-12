@@ -339,4 +339,42 @@ describe('VSelect.ts', () => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isMenuActive).toBe(true)
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/9960
+  it('should not manipulate menu state if is readonly or disabled', async () => {
+    const wrapper = mountFunction({
+      data: () => ({ hasMouseDown: true }),
+      propsData: { readonly: true },
+    })
+
+    const icon = wrapper.find('.v-input__append-inner')
+
+    icon.trigger('mousedown')
+    icon.trigger('mouseup')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isMenuActive).toBe(false)
+
+    wrapper.setProps({
+      disabled: true,
+      readonly: undefined,
+    })
+
+    icon.trigger('mousedown')
+    icon.trigger('mouseup')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isMenuActive).toBe(false)
+
+    wrapper.setProps({ disabled: undefined })
+
+    icon.trigger('mousedown')
+    icon.trigger('mouseup')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isMenuActive).toBe(true)
+  })
 })

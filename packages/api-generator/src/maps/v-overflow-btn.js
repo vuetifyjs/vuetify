@@ -1,5 +1,5 @@
 const { VSelect } = require('../helpers/variables')
 
 module.exports = {
-  'v-select': VSelect,
+  'v-overflow-btn': VSelect,
 }

@@ -246,6 +246,19 @@
   &--outlined
     border-radius: $text-field-border-radius
 
+  &--full-width,
+  &--enclosed
+    +prepend-append-margin-top($text-field-enclosed-prepend-append-margin-top)
+
+    &.v-input--dense:not(.v-text-field--solo)
+      +prepend-append-margin-top($text-field-dense-prepend-append-margin-top)
+
+      &.v-text-field--single-line
+        +prepend-append-margin-top($text-field-single-line-prepend-append-margin-top)
+
+      &.v-text-field--outlined
+        +prepend-append-margin-top($text-field-outlined-prepend-append-margin-top)
+
   &--filled,
   &--full-width
     .v-label
@@ -301,17 +314,6 @@
     &:not(.v-text-field--rounded) > .v-input__control > .v-input__slot,
     .v-text-field__details
       padding: $text-field-enclosed-details-padding
-
-    +prepend-append-margin-top($text-field-enclosed-prepend-append-margin-top)
-
-    &.v-input--dense:not(.v-text-field--solo)
-      +prepend-append-margin-top($text-field-dense-prepend-append-margin-top)
-
-      &.v-text-field--single-line
-        +prepend-append-margin-top($text-field-single-line-prepend-append-margin-top)
-
-      &.v-text-field--outlined
-        +prepend-append-margin-top($text-field-outlined-prepend-append-margin-top)
 
     .v-text-field__details
       margin-bottom: $text-field-details-margin-bottom

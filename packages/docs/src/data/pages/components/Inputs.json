@@ -9,6 +9,11 @@
         {
           "type": "usage",
           "value": "usage"
+        },
+        {
+          "type": "alert",
+          "lang": "attributesAlert",
+          "value": "info"
         }
       ]
     },
