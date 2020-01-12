@@ -1,14 +1,44 @@
 import Vuetify, { VuetifySymbol } from './framework'
-import { App } from 'vue'
+import { App, Component } from 'vue'
 import { GlobalVuetifyPreset } from 'types'
+
+export function flattenComponents (
+  components: GlobalVuetifyPreset['components'],
+  flattenedComponents: Dictionary<Component> = {},
+) {
+  if (!components) return flattenedComponents
+
+  for (const key in components) {
+    const component = components[key]
+
+    // Check for and register subcomponents
+    if (
+      component &&
+      component.$_vuetify_subcomponents
+    ) {
+      flattenComponents(
+        component.$_vuetify_subcomponents,
+        flattenedComponents,
+      )
+
+      continue
+    }
+
+    flattenedComponents[key] = component
+  }
+
+  return flattenedComponents
+}
 
 export function install (app: App, args: GlobalVuetifyPreset = {}) {
   const {
     components = {},
     directives = {},
-    transitions = {},
+    transitions = {}, // TODO: Is this needed? We never registered this before to my knowledge
     ...preset
   } = args
+
+  const flattenedComponents = flattenComponents(components)
 
   for (const key in directives) {
     const directive = directives[key]
@@ -16,27 +46,11 @@ export function install (app: App, args: GlobalVuetifyPreset = {}) {
     app.directive(key, directive)
   }
 
-  (function registerComponents (components: GlobalVuetifyPreset['components']) {
-    if (!components) return false
+  for (const key in flattenedComponents) {
+    const component = flattenedComponents[key]
 
-    for (const key in components) {
-      const component = components[key]
-
-      // Check for and register subcomponents
-      if (
-        component &&
-        component.$_vuetify_subcomponents
-      ) {
-        registerComponents(component.$_vuetify_subcomponents)
-
-        continue
-      }
-
-      app.component(key, component)
-    }
-
-    return true
-  })(components)
+    app.component(key, component)
+  }
 
   const vuetify = new Vuetify(preset)
 
