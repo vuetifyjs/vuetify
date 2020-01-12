@@ -226,11 +226,7 @@ export class Theme extends Service {
     // Only watch for reactivity on client side
     if (typeof document === 'undefined') return
 
-    this.applyTheme()
-
-    watch(() => this.themes, () => {
-      this.applyTheme.call(this)
-    }, { deep: true })
+    watch(() => this.themes, () => this.applyTheme(), { deep: true })
   }
 
   get currentTheme () {
