@@ -169,17 +169,11 @@
               v-model="selects[select.prop]"
               v-bind="select.attrs"
               :hide-details="i + 1 !== (value.selects || []).length"
+              :label="select.label"
               clearable
               dense
               filled
-            >
-              <template v-slot:label>
-                <span
-                  class="text-capitalize"
-                  v-text="select.label"
-                />
-              </template>
-            </v-select>
+            />
           </v-col>
         </v-responsive>
       </v-col>
