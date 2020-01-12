@@ -1,9 +1,9 @@
 import Vuetify, { VuetifySymbol } from './framework'
 import { App, Component } from 'vue'
-import { GlobalVuetifyPreset } from 'types'
+import { VuetifyUseOptions } from 'types'
 
 export function flattenComponents (
-  components: GlobalVuetifyPreset['components'],
+  components: VuetifyUseOptions['components'],
   flattenedComponents: Dictionary<Component> = {},
 ) {
   if (!components) return flattenedComponents
@@ -30,13 +30,13 @@ export function flattenComponents (
   return flattenedComponents
 }
 
-export function install (app: App, args: GlobalVuetifyPreset = {}) {
+export function install (app: App, options: VuetifyUseOptions = {}) {
   const {
     components = {},
     directives = {},
     transitions = {}, // TODO: Is this needed? We never registered this before to my knowledge
     ...preset
-  } = args
+  } = options
 
   const flattenedComponents = flattenComponents(components)
 

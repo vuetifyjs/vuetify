@@ -21,14 +21,15 @@ import {
   Theme,
   ThemeOptions,
 } from 'vuetify/types/services/theme'
+import { VuetifyService } from 'vuetify/types/services'
 
 declare const Vuetify: Vuetify
 export default Vuetify
 export interface Vuetify {
   framework: Framework
-  install: PluginFunction<GlobalVuetifyPreset>
+  install: PluginFunction<VuetifyUserPreset>
   version: string
-  new (preset?: Partial<UserVuetifyPreset>): Vuetify
+  new (preset?: Partial<VuetifyUserPreset>): Vuetify
 }
 
 export type ComponentOrPack = Component & {
@@ -38,55 +39,35 @@ export type ComponentOrPack = Component & {
 
 export interface Framework {
   readonly breakpoint: Breakpoint
-  readonly goTo: <T extends string | number | HTMLElement | Vue>(target: T, options?: GoToOptions) => Promise<T>
+  readonly goTo: <T extends string | number | HTMLElement>(target: T, options?: GoToOptions) => Promise<T>
   application: Application
   theme: Theme
   icons: Icons
   lang: Lang
-  presets: Presets
   rtl: boolean
 }
 
+/** https://stackoverflow.com/questions/47914536/use-partial-in-nested-property-with-typescript */
+type NestedPartial<T> = {
+  [K in keyof T]?: T[K] extends Array<infer R> ? Array<NestedPartial<R>> : NestedPartial<T[K]>
+}
+
 export interface VuetifyPreset {
-  breakpoint: {
-    scrollBarWidth: Breakpoint['scrollBarWidth']
-    thresholds: Breakpoint['thresholds']
-  }
-  icons: {
-    iconfont: Icons['iconfont']
-    // TODO: Remove partial for v3
-    values: Partial<Icons['values']>
-  }
-  lang: {
-    current: Lang['current']
-    locales: Lang['locales']
-    t: Lang['t']
-  }
-  theme: {
-    dark: Theme['dark']
-    default: Theme['default']
-    disable: Theme['disable']
-    options: Theme['options']
-    themes: Theme['themes']
-  }
+  breakpoint: BreakpointOptions
+  icons: IconsOptions
+  lang: LangOptions
+  rtl: boolean
+  theme: ThemeOptions
 }
 
-export interface UserVuetifyPreset extends GlobalVuetifyPreset {
-  preset?: GlobalVuetifyPreset
+export interface VuetifyUserPreset extends NestedPartial<VuetifyPreset> {
+  preset?: NestedPartial<VuetifyPreset>
 }
 
-export interface GlobalVuetifyPreset {
-  breakpoint?: BreakpointOptions
+export interface VuetifyUseOptions extends VuetifyUserPreset {
   components?: Dictionary<ComponentOrPack>
   directives?: Dictionary<DirectiveOptions>
-  icons?: IconsOptions
-  lang?: LangOptions
-  theme?: ThemeOptions
   transitions?: Dictionary<VueConstructor>
-}
-
-export interface Presets {
-  preset: UserVuetifyPreset
 }
 
 declare module 'vue/types/vue' {

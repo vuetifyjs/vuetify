@@ -1,4 +1,8 @@
-import { inject, warn } from 'vue'
+import {
+  InjectionKey,
+  inject,
+  warn,
+} from 'vue'
 
 // Preset
 import { preset as Preset } from './presets/default'
@@ -8,9 +12,10 @@ import { mergeDeep } from './util/helpers'
 
 // Types
 import {
-  UserVuetifyPreset,
+  Framework,
+  VuetifyUserPreset,
   VuetifyPreset,
-} from 'vuetify/types/services/presets'
+} from 'vuetify/types'
 import {
   VuetifyService,
   VuetifyServiceContract,
@@ -19,7 +24,7 @@ import {
 // Services
 import * as services from './services'
 
-export const VuetifySymbol = Symbol.for('vuetify')
+export const VuetifySymbol: InjectionKey<Framework> = Symbol.for('vuetify')
 
 export function useVuetify () {
   const vuetify = inject(VuetifySymbol)
@@ -39,14 +44,14 @@ export default class Vuetify {
 
   public preset = {} as VuetifyPreset
 
-  constructor (userPreset: UserVuetifyPreset = {}) {
+  constructor (userPreset: VuetifyUserPreset = {}) {
     this.init(userPreset)
   }
 
   // Called on the new vuetify instance
   // bootstrap in install beforeCreate
   // Exposes ssrContext if available
-  init (userPreset: UserVuetifyPreset) {
+  init (userPreset: VuetifyUserPreset) {
     this.preset = this.mergePreset(userPreset)
 
     const s: Dictionary<VuetifyService> = services
@@ -67,7 +72,7 @@ export default class Vuetify {
     this.framework.rtl = Boolean(this.preset.rtl) as any
   }
 
-  mergePreset ({ preset, ...userPreset }: UserVuetifyPreset) {
+  mergePreset ({ preset, ...userPreset }: VuetifyUserPreset) {
     return mergeDeep(mergeDeep(Preset, preset), userPreset) as VuetifyPreset
   }
 

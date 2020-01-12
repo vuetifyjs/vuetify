@@ -1,6 +1,6 @@
 // Core
 import { App } from 'vue'
-import { GlobalVuetifyPreset } from 'types'
+import { VuetifyUseOptions } from 'types'
 import { install as VuetifyInstall } from './install'
 
 // Functionality
@@ -9,13 +9,12 @@ import * as directives from './directives'
 
 // Wrapped install function to register all components by default
 // original install for a-la-carte is re-exported in entry-lib.ts
-export default function install (app: App, preset: GlobalVuetifyPreset = {}) {
-  const args = Object.assign({
+export default function install (app: App, options: VuetifyUseOptions = {}) {
+  VuetifyInstall(app, {
     components,
     directives,
-  }, preset)
-
-  VuetifyInstall(app, args)
+    ...options,
+  } as VuetifyUseOptions)
 }
 
 export { useVuetify, version } from './framework'
