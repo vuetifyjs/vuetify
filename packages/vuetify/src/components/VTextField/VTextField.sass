@@ -54,6 +54,9 @@
       fieldset
         border-color: map-deep-get($material, 'text-fields', 'outlined-hover')
 
+    &.v-input--is-disabled fieldset
+      border-color: map-deep-get($material, 'text-fields', 'outlined-disabled')
+
 .v-text-field
   padding-top: $text-field-active-label-height
   margin-top: $input-top-spacing - $text-field-active-label-height

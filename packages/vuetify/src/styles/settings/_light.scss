@@ -80,7 +80,8 @@ $material-light: map-deep-merge(
     'text-fields': (
       'filled': rgba(map-get($shades, 'black'), 0.06),
       'filled-hover': rgba(map-get($shades, 'black'), 0.12),
-      'outlined': rgba(map-get($shades, 'black'), 0.24),
+      'outlined': rgba(map-get($shades, 'black'), 0.38),
+      'outlined-disabled': rgba(map-get($shades, 'black'), 0.26),
       'outlined-hover': rgba(map-get($shades, 'black'), 0.86)
     ),
     'input-bottom-line': rgba(map-get($shades, 'black'), 0.42),

@@ -14,7 +14,7 @@
     "locale": "Sets the locale of component. Used for translating internal text strings.",
     "mustSort": "If `true` then one can not disable sorting, it will always switch between ascending and descending",
     "multiSort": "If `true` then one can sort on multiple properties",
-    "options": "A combined object for options. See example below for definition",
+    "options": "A combined object for options. See example below for definition. Can be used with `.sync` modifier",
     "page": "Changes which page of items is displayed. Can be used with `.sync` modifier",
     "search": "Text input used to filter items",
     "serverItemsLength": "Used only when data is provided by a server. Should be set to the total amount of items available on server so that pagination works correctly",

@@ -245,7 +245,7 @@ export default VSelect.extend({
 
       const index = this.selectedItems.length - 1
 
-      if (this.selectedIndex === -1) {
+      if (this.selectedIndex === -1 && index !== 0) {
         this.selectedIndex = index
         return
       }
