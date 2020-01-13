@@ -131,7 +131,6 @@ export default baseMixins.extend<options>().extend({
       return children
     },
     toggle (step: number | string) {
-      console.log('toggle', step)
       this.isActive = step.toString() === this.step.toString()
       this.isInactive = Number(step) < Number(this.step)
     },
