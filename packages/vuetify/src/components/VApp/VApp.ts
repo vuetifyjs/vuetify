@@ -15,7 +15,9 @@ export default defineComponent({
       h('div', mergeProps(attrs, {
         class: classes.value,
         'data-app': true,
-      }), slots.default())
+      }), h('div', {
+        class: 'v-application__wrap',
+      }, slots.default()))
     )
   },
 })
