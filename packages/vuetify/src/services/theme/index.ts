@@ -6,8 +6,11 @@ import { Service } from '../service'
 import * as ThemeUtils from './utils'
 
 // Types
-import Vue from 'vue'
-import { VuetifyPreset } from 'vuetify/types/services/presets'
+import { VuetifyPreset } from 'vuetify'
+import {
+  reactive,
+  watch,
+} from 'vue'
 import {
   VuetifyParsedTheme,
   VuetifyThemes,
@@ -30,8 +33,6 @@ export class Theme extends Service {
 
   private isDark = null as boolean | null
 
-  private vueInstance = null as Vue | null
-
   private vueMeta = null as any | null
 
   constructor (preset: VuetifyPreset) {
@@ -46,18 +47,10 @@ export class Theme extends Service {
 
     this.dark = Boolean(dark)
     this.defaults = this.themes = themes
+    this.disabled = disable
     this.options = options
 
-    if (disable) {
-      this.disabled = true
-
-      return
-    }
-
-    this.themes = {
-      dark: this.fillVariant(themes.dark, true),
-      light: this.fillVariant(themes.light, false),
-    }
+    this.init()
   }
 
   // When setting css, check for element
@@ -100,15 +93,20 @@ export class Theme extends Service {
   // Initialize theme for SSR and SPA
   // Attach to ssrContext head or
   // apply new theme to document
-  public init (root: Vue, ssrContext?: any): void {
+  public init (): void {
     if (this.disabled) return
 
+    this.themes = reactive({
+      dark: this.fillVariant(this.themes.dark, true),
+      light: this.fillVariant(this.themes.light, false),
+    })
+
     /* istanbul ignore else */
-    if ((root as any).$meta) {
-      this.initVueMeta(root)
-    } else if (ssrContext) {
-      this.initSSR(ssrContext)
-    }
+    // if ((root as any).$meta) {
+    //   this.initVueMeta(root)
+    // } else if (ssrContext) {
+    //   this.initSSR(ssrContext)
+    // }
 
     this.initTheme()
   }
@@ -228,24 +226,7 @@ export class Theme extends Service {
     // Only watch for reactivity on client side
     if (typeof document === 'undefined') return
 
-    // If we get here somehow, ensure
-    // existing instance is removed
-    if (this.vueInstance) this.vueInstance.$destroy()
-
-    // Use Vue instance to track reactivity
-    // TODO: Update to use RFC if merged
-    // https://github.com/vuejs/rfcs/blob/advanced-reactivity-api/active-rfcs/0000-advanced-reactivity-api.md
-    this.vueInstance = new Vue({
-      data: { themes: this.themes },
-
-      watch: {
-        themes: {
-          immediate: true,
-          deep: true,
-          handler: () => this.applyTheme(),
-        },
-      },
-    })
+    watch(() => this.themes, () => this.applyTheme(), { deep: true })
   }
 
   get currentTheme () {

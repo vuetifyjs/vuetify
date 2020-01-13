@@ -3,6 +3,8 @@ declare module 'vuetify/lib' {
   import { Vuetify } from 'vuetify'
   import { Colors } from 'vuetify/lib/util/colors'
 
+  export { useVuetify } from 'vuetify'
+
   const Vuetify: Vuetify
   const colors: Colors
   const ClickOutside: DirectiveOptions

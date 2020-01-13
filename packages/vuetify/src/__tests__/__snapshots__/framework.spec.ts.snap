@@ -1,0 +1,215 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`framework.ts should merge user options with default preset 1`] = `
+Object {
+  "breakpoint": Object {
+    "scrollBarWidth": 16,
+    "thresholds": Object {
+      "lg": 1920,
+      "md": 1280,
+      "sm": 960,
+      "xs": 600,
+    },
+  },
+  "icons": Object {
+    "iconfont": "fa",
+    "values": Object {},
+  },
+  "lang": Object {
+    "current": "es",
+    "locales": Object {
+      "en": Object {
+        "badge": "Badge",
+        "calendar": Object {
+          "moreEvents": "{0} more",
+        },
+        "carousel": Object {
+          "ariaLabel": Object {
+            "delimiter": "Carousel slide {0} of {1}",
+          },
+          "next": "Next visual",
+          "prev": "Previous visual",
+        },
+        "close": "Close",
+        "dataFooter": Object {
+          "firstPage": "First page",
+          "itemsPerPageAll": "All",
+          "itemsPerPageText": "Items per page:",
+          "lastPage": "Last page",
+          "nextPage": "Next page",
+          "pageText": "{0}-{1} of {2}",
+          "prevPage": "Previous page",
+        },
+        "dataIterator": Object {
+          "loadingText": "Loading items...",
+          "noResultsText": "No matching records found",
+        },
+        "dataTable": Object {
+          "ariaLabel": Object {
+            "sortAscending": ": Sorted ascending. Activate to sort descending.",
+            "sortDescending": ": Sorted descending. Activate to remove sorting.",
+            "sortNone": ": Not sorted. Activate to sort ascending.",
+          },
+          "itemsPerPageText": "Rows per page:",
+          "sortBy": "Sort by",
+        },
+        "datePicker": Object {
+          "itemsSelected": "{0} selected",
+        },
+        "fileInput": Object {
+          "counter": "{0} files",
+          "counterSize": "{0} files ({1} in total)",
+        },
+        "noDataText": "No data available",
+        "timePicker": Object {
+          "am": "AM",
+          "pm": "PM",
+        },
+      },
+      "es": Object {
+        "foo": "bar",
+      },
+    },
+    "t": undefined,
+  },
+  "rtl": false,
+  "theme": Object {
+    "dark": false,
+    "default": "light",
+    "disable": false,
+    "options": Object {
+      "cspNonce": undefined,
+      "customProperties": undefined,
+      "minifyTheme": undefined,
+      "themeCache": undefined,
+    },
+    "themes": Object {
+      "dark": Object {
+        "accent": "#FF4081",
+        "error": "#FF5252",
+        "info": "#2196F3",
+        "primary": "blue",
+        "secondary": "#424242",
+        "success": "#4CAF50",
+        "warning": "#FB8C00",
+      },
+      "light": Object {
+        "accent": "#82B1FF",
+        "error": "#FF5252",
+        "info": "#2196F3",
+        "primary": "#1976D2",
+        "secondary": "#424242",
+        "success": "#4CAF50",
+        "warning": "#FB8C00",
+      },
+    },
+  },
+}
+`;
+
+exports[`framework.ts should merge user options with global and default preset 1`] = `
+Object {
+  "breakpoint": Object {
+    "scrollBarWidth": 16,
+    "thresholds": Object {
+      "lg": 1920,
+      "md": 1280,
+      "sm": 960,
+      "xs": 600,
+    },
+  },
+  "icons": Object {
+    "iconfont": "fa",
+    "values": Object {},
+  },
+  "lang": Object {
+    "current": "en",
+    "locales": Object {
+      "en": Object {
+        "badge": "Badge",
+        "calendar": Object {
+          "moreEvents": "{0} more",
+        },
+        "carousel": Object {
+          "ariaLabel": Object {
+            "delimiter": "Carousel slide {0} of {1}",
+          },
+          "next": "Next visual",
+          "prev": "Previous visual",
+        },
+        "close": "Close",
+        "dataFooter": Object {
+          "firstPage": "First page",
+          "itemsPerPageAll": "All",
+          "itemsPerPageText": "Items per page:",
+          "lastPage": "Last page",
+          "nextPage": "Next page",
+          "pageText": "{0}-{1} of {2}",
+          "prevPage": "Previous page",
+        },
+        "dataIterator": Object {
+          "loadingText": "Loading items...",
+          "noResultsText": "No matching records found",
+        },
+        "dataTable": Object {
+          "ariaLabel": Object {
+            "sortAscending": ": Sorted ascending. Activate to sort descending.",
+            "sortDescending": ": Sorted descending. Activate to remove sorting.",
+            "sortNone": ": Not sorted. Activate to sort ascending.",
+          },
+          "itemsPerPageText": "Rows per page:",
+          "sortBy": "Sort by",
+        },
+        "datePicker": Object {
+          "itemsSelected": "{0} selected",
+        },
+        "fileInput": Object {
+          "counter": "{0} files",
+          "counterSize": "{0} files ({1} in total)",
+        },
+        "noDataText": "No data available",
+        "timePicker": Object {
+          "am": "AM",
+          "pm": "PM",
+        },
+      },
+      "es": Object {
+        "foo": "bar",
+      },
+    },
+    "t": undefined,
+  },
+  "rtl": false,
+  "theme": Object {
+    "dark": false,
+    "default": "light",
+    "disable": false,
+    "options": Object {
+      "cspNonce": undefined,
+      "customProperties": undefined,
+      "minifyTheme": undefined,
+      "themeCache": undefined,
+    },
+    "themes": Object {
+      "dark": Object {
+        "accent": "#FF4081",
+        "error": "#FF5252",
+        "info": "#2196F3",
+        "primary": "blue",
+        "secondary": "#424242",
+        "success": "#4CAF50",
+        "warning": "#FB8C00",
+      },
+      "light": Object {
+        "accent": "#82B1FF",
+        "error": "#FF5252",
+        "info": "#2196F3",
+        "primary": "#1976D2",
+        "secondary": "#424242",
+        "success": "#4CAF50",
+        "warning": "#FB8C00",
+      },
+    },
+  },
+}
+`;

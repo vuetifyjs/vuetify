@@ -1,13 +1,18 @@
 <template>
-  <v-container>
+  <div>
     <!--  -->
-  </v-container>
+  </div>
 </template>
 
 <script>
-export default {
-  data: () => ({
-    //
-  })
-}
+  import { useVuetify } from 'vuetify'
+
+  export default {
+    name: 'Playground',
+    setup () {
+      const vuetify = useVuetify()
+
+      console.log(vuetify)
+    },
+  }
 </script>

@@ -1,19 +1,22 @@
+// Core
+import { App } from 'vue'
+import { VuetifyUseOptions } from 'types'
+import { install as VuetifyInstall } from './install'
+
+// Functionality
 import * as components from './components'
 import * as directives from './directives'
-import Vuetify from './framework'
 
-export default Vuetify
-
-const install = Vuetify.install
-
-Vuetify.install = (Vue, args) => {
-  install.call(Vuetify, Vue, {
+// Wrapped install function to register all components by default
+// original install for a-la-carte is re-exported in entry-lib.ts
+export default function install (app: App, options: VuetifyUseOptions = {}) {
+  VuetifyInstall(app, {
     components,
     directives,
-    ...args,
-  })
+    ...options,
+  } as VuetifyUseOptions)
 }
 
-if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(Vuetify)
-}
+install.version = VuetifyInstall.version
+
+export { useVuetify } from './framework'

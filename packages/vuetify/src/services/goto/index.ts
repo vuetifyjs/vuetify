@@ -13,7 +13,7 @@ import { GoToOptions, VuetifyGoToTarget } from 'vuetify/types/services/goto'
 
 import { VuetifyServiceContract } from 'vuetify/types/services'
 
-export default function goTo (
+function goTo (
   _target: VuetifyGoToTarget,
   _settings: Partial<GoToOptions> = {}
 ): Promise<number> {
@@ -75,7 +75,6 @@ export default function goTo (
 }
 
 goTo.framework = {} as Record<string, VuetifyServiceContract>
-goTo.init = () => {}
 
 export class Goto extends Service {
   public static property: 'goTo' = 'goTo'

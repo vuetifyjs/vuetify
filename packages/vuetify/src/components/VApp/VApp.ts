@@ -1,57 +1,23 @@
 // Styles
 import './VApp.sass'
 
-// Mixins
-import Themeable from '../../mixins/themeable'
+import { defineComponent, computed, h, mergeProps } from 'vue'
 
-// Utilities
-import mixins from '../../util/mixins'
+export default defineComponent({
+  name: 'VApp',
 
-/* @vue/component */
-export default mixins(
-  Themeable
-).extend({
-  name: 'v-app',
+  setup (props, { attrs, slots }) {
+    const classes = computed(() => ({
+      'v-application': true,
+    }))
 
-  props: {
-    dark: {
-      type: Boolean,
-      default: undefined,
-    },
-    id: {
-      type: String,
-      default: 'app',
-    },
-    light: {
-      type: Boolean,
-      default: undefined,
-    },
-  },
-
-  computed: {
-    isDark (): boolean {
-      return this.$vuetify.theme.dark
-    },
-  },
-
-  beforeCreate () {
-    if (!this.$vuetify || (this.$vuetify === this.$root as any)) {
-      throw new Error('Vuetify is not properly initialized, see https://vuetifyjs.com/getting-started/quick-start#bootstrapping-the-vuetify-object')
-    }
-  },
-
-  render (h) {
-    const wrapper = h('div', { staticClass: 'v-application--wrap' }, this.$slots.default)
-
-    return h('div', {
-      staticClass: 'v-application',
-      class: {
-        'v-application--is-rtl': this.$vuetify.rtl,
-        'v-application--is-ltr': !this.$vuetify.rtl,
-        ...this.themeClasses,
-      },
-      attrs: { 'data-app': true },
-      domProps: { id: this.id },
-    }, [wrapper])
+    return () => (
+      h('div', mergeProps(attrs, {
+        class: classes.value,
+        'data-app': true,
+      }), h('div', {
+        class: 'v-application__wrap',
+      }, slots.default()))
+    )
   },
 })
