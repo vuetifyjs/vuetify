@@ -61,10 +61,7 @@ export default mixins(
       }
     },
     isLoading (): boolean {
-      return Boolean(
-        !getSlot(this) ||
-        this.loading
-      )
+      return !('default' in this.$scopedSlots) || this.loading
     },
     rootTypes (): Record<string, string> {
       return {
@@ -143,9 +140,8 @@ export default mixins(
     },
     genSkeleton () {
       const children = []
-      const slot = getSlot(this)
 
-      if (!this.isLoading) children.push(slot)
+      if (!this.isLoading) children.push(getSlot(this))
       else children.push(this.genStructure())
 
       /* istanbul ignore else */
