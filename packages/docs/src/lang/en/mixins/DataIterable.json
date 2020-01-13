@@ -29,6 +29,6 @@
   },
   "scopedSlots": {
     "items": "Slot to specify how items are rendered",
-    "pageText": "Slot to customize the page text region of the pagination controls."
+    "pageText": "Slot name is `pageText`. This slot is used to customize the page text region of the pagination controls."
   }
 }
