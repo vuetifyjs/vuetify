@@ -1,5 +1,19 @@
 {
+  "heading": "# グリッドシステム",
+  "headingText": "Vuetifyは、 <kbd>flex-box</kbd>を使用する12ポイントのグリッドシステムを備えています。グリッドシステムを用いる事で、アプリケーションコンテント内で特定のレイアウトを再現できます。グリッドシステムは **xs**, **sm**, **md**, **lg**,**xl**5種類にスクリーンサイズ（解像度詳細は下記表を参照ください）を分類し利用することができます。また解像度をカスタマイズすることも可能です。[Breakpoint service](/customization/breakpoints).",
+  "headerAlert1": "1.xグリッドシステムは、2.xグリッドシステムを支持して廃止されました。 1.xグリッドのドキュメントは[v1.5 docs](https://v15.vuetifyjs.com/framework/grid)にあります。",
+  "usageText2": "上記の例では、小、中、大、特大のデバイスに３つの同幅のカラムを作成しました。親の「v-container」は、内側の複数の「v-col」を中央に配置します。",
+  "usageList": [
+    "「v-container」は、サイトのコンテンツを中央および水平方向にパディングする機能を提供します。また、**fluid**プロパティを使用して、すべてのviewportとデバイスサイズにわたってコンテナを完全に拡張することもできます。ヘルパークラス(`ma-#`/`pa-#`/`fill-height`など)を簡単に適用するために、プロパティが`v-container`のクラスとして渡される以前の1.x機能は維持されます。",
+    "「v-row」は「v-col」のラッパーコンポーネントです。flexプロパティを使用して、内部のカラムのレイアウトとフローを制御します。**24px**の標準的な隙間が使用されます。これは**dense**プロパティで減らすか、**no-gutters**で完全に削除できます。これは、1.xの`v-layout`が2.xで置き換えられたものです。",
+    "「v-col」は「v-row」の直接の子要素でなければならないコンテンツホルダーです。これは、1.xの`v-flex`が2.xで置き換えられたものです。"
+  ],
+  "usageText3": "[特定のHTML要素をフレックスコンテナとして利用できない](https://github.com/philipwalton)などの制限と[フレックスボックスに関するバグ](https://github.com/philipwalton/flexbugs#9-some-html-elements-cant-be-flex-containers)を必ず理解してください。",
+  "usageAlert1": "IE11でグリッドシステムを使用する場合、「min-height」では不十分であり、望ましくない結果が生じるため、明示的な「height」を設定する必要があります。",
   "examples": {
+    "usage": {
+      "desc": "Vuetifyのグリッドシステムは [Bootstrap grid](https://getbootstrap.com/docs/4.0/layout/grid/)から多くの影響を受けています。グリッドシステムは、containers、row、columnを統合し用いて、コンテンツの配置、調整を行います。もしflexboxをご存じでない場合は、背景知識、専門用語、ガイドライン、コード例を次のURLから参照ください。(https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-background)"
+    },
     "playground": {
       "desc": "簡単ですが以下のplaygroundでレイアウトに関するpropsを試すことができます。"
     },

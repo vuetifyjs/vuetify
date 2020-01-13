@@ -159,6 +159,24 @@
     }
   }
 
+  .scale-rotate-transition {
+    @include transition-default();
+
+    &-enter, &-leave, &-leave-to {
+      opacity: 0;
+      transform: scale(0) rotate(-45deg);
+    }
+  }
+
+  .scale-rotate-reverse-transition {
+    @include transition-default();
+
+    &-enter, &-leave, &-leave-to {
+      opacity: 0;
+      transform: scale(0) rotate(45deg);
+    }
+  }
+
   .message-transition {
     @include transition-default();
 

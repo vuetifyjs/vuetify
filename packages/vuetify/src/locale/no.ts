@@ -1,4 +1,5 @@
 export default {
+  badge: 'Skilt',
   close: 'Lukk',
   dataIterator: {
     noResultsText: 'Fant ingen matchende elementer.',

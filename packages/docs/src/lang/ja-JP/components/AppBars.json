@@ -1,19 +1,65 @@
 {
+  "heading": "# App Bars",
+  "headingText": "`v-app-bar` は、一般にサイトナビゲーションとして一番最初に使われるため、どんな GUI にとっても重要なコンポーネントです。app-bar コンポーネントは、[v-navigation-drawer](/components/navigation-drawers) と連携して、あなたのアプリケーションにサイトナビゲーションを提供します。",
   "examples": {
     "usage": {
       "desc": "`v-app-bar` コンポーネントは、アプリケーション全体のアクションと情報に対して使用します。"
     },
+    "dense": {
+      "heading": "### 高さが詰まったスタイル",
+      "desc": "**app-bar** を密集させることができます。密集したアプリバーは、通常のアプリバーよりも高さが低くなります。"
+    },
     "prominent": {
+      "heading": "### Prominent によるスクロール時の圧縮",
       "desc": "「prominent」プロップを持つ「v-app-bar」は、ユーザーが下にスクロールするときに高さを縮小することを選択できます。これにより、ユーザーがコンテンツをスクロールしているときに、表示スペースを少なくするためのスムーズな移行が提供されます。シュリンクの高さには、**圧縮された**（48px）サイズと **短い**（56px）サイズの2つのオプションがあります。"
     },
+    "img": {
+      "heading": "### Prominent によるスクロール時の圧縮と画像",
+      "desc": "`src`プロップにソースを設定することで「v-app-bar」に背景画像を含めることができます。`v-img`プロパティをカスタマイズする必要がある場合は、アプリバーが提供している **img** スロットを使います。"
+    },
+    "img-fade": {
+      "heading": "### Prominent によるスクロール時の圧縮と画像とフェード",
+      "desc": "スクロール時にフェードする `v-app-bar` のバックグラウンド画像です。この機能を利用するには、`fade-img-on-scroll` プロパティを使用してください。"
+    },
+    "hide": {
+      "heading": "### スクロール時に隠す",
+      "desc": "`v-app-bar` はスクロール時に隠すことができます。この機能を利用するには、`hide-on-scroll` プロパティを使用してください。"
+    },
+    "scroll-threshold": {
+      "heading": "### スクロールのしきい値",
+      "desc": "`v-app-bar` にはスクロールのしきい値を設定できます。`scroll-threshold` プロパティに指定したピクセル値の合計を超えるまでスクロールしたときに初めてスクロールに反応するようになります。"
+    },
+    "collapse": {
+      "heading": "### 折りたたみ可能な bar",
+      "desc": "**collapse** と **collapse-on-scroll** props を使用すると、ユーザーがインタラクトするツールバーの状態を簡単にコントロールできます。"
+    },
+    "elevate-on-scroll": {
+      "heading": "### スクロール時にバーを上げる",
+      "desc": "**elevate-on-scroll** prop を使用すると、ユーザーが下にスクロールするまで `v-app-bar` 0dp で持ち上がります。スクロールを始めると、バーは 4dp まで上がります。"
+    },
     "inverted-scroll": {
+      "heading": "### 逆のスクロール",
       "desc": "**inverted-scroll** プロパティを使用すると、ユーザーが指定されたしきい値を超えるまでバーが非表示になります。しきい値を超えると、ユーザーがしきい値を超えてスクロールアップするまで「v-app-bar」が表示され続けます。 **scroll-threshold** 値が指定されていない場合、デフォルト値_0_が使用されます。"
+    },
+    "menu": {
+      "heading": "### メニュー付き",
+      "desc": "app bar は、`VMenu` を加えるだけで簡単に拡張できます。拡張した動作を見るには、アクションの最後のアイコンをクリックしてみてください。"
     }
   },
   "props": {
     "clippedLeft": "v-navigation-drawerをapp-barの下の左側に配置します。",
     "clippedRight": "v-navigation-drawerをapp-barの下の右側に配置します。",
+    "collapseOnScroll": "スクロール時に app-bar を折りたたんだ状態にします。",
+    "elevateOnScroll": "スクロール時に app-bar を持ち上げます。",
+    "fadeImgOnScroll": "**src** prop や `img` slot を使用すると、スクロール時に画像がフェードします。",
     "hideOnScroll": "スクロール時にこのapp-barを隠しますが、`extension`slot は表示したままにします。",
-    "scrollOffScreen": "スクロール時に app-bar を隠します。`extension` slotも表示しません。"
+    "invertedScroll": "下へスクロールすると app-bar を隠し、上へスクロールすると app-bar を表示します。",
+    "scrollOffScreen": "スクロール時に app-bar を隠します。`extension` slotも表示しません。",
+    "shrinkOnScroll": "スクロール時に **prominent** ツールバーを **dense** または **short** (デフォルト) に圧縮します。",
+    "src": "画像のソースです。詳しくは `v-img` を参照してください。"
+  },
+  "slots": {
+    "img": "Components.Toolbars.slots.img",
+    "extension": "Components.Toolbars.slots.extension"
   }
 }

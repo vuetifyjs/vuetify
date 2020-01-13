@@ -1,38 +1,100 @@
 {
+  "heading": "# 滑块",
+  "headingText": "`v-slider`组件是数字输入的更好的可视化，它用于收集数字用户数据。",
   "examples": {
+    "usage": {
+      "desc": "滑块沿着条形图反映一系列值，用户可以从中选择单个值。 它们是调整设置的理想选择，例如音量，亮度或应用图像滤镜。"
+    },
+    "thumb": {
+      "heading": "### 拇指",
+      "desc": "您可以在滑动时或始终显示 `thumb-label`。\n它可以通过设置 `thumb-color` 自定义颜色，并使用 `thumb-size` 自定义大小。\n对于 `always-dirty` ，它的颜色永远不会改变，即使在 `min` 值上也是如此。"
+    },
+    "custom-thumb": {
+      "heading": "### 自定义范围滑块",
+      "desc": "使用 `tick-labels` 属性和插槽，您可以创建一个非常定制的解决方案。"
+    },
+    "ticks": {
+      "heading": "### 刻度线",
+      "desc": "刻度线代表用户可以将滑块移动到的预定值。"
+    },
     "discrete": {
+      "heading": "### 离散的",
       "desc": "离散滑块提供了一个拇指标签（倒水滴状），显示当前的确切数量。使用`step`属性可以禁止在步骤之外选择值。"
     },
     "icons": {
-      "heading": "图标",
-      "desc": "您可以使用`append-icon`和`prepend-icon`属性将图标添加到滑块。"
+      "heading": "### 图标",
+      "desc": "您可以使用 `append-icon` 和 `prepend-icon` 属性将图标添加到滑块。"
     },
     "editable-numeric-value": {
+      "heading": "### 带有可编辑的数值",
       "desc": "滑块可以与其他组件相结合，以获得更好的显示效果。"
     },
     "custom-colors": {
+      "heading": "### 自定义颜色",
       "desc": "您可以使用`color`、`track-color`和`thumb-color`属性来设置滑块的颜色。"
     },
     "validation": {
-      "heading": "验证",
+      "heading": "### 验证",
       "desc": "Vuetify包含简单的验证通过使用 `rules` 属性，这个属性接受一个回调函数组，在验证规则时，当前的 v-model 值将被传递给回调函数，这个回调函数必须返回 `ture` 或 `String` 或者错误信息。"
     },
     "range": {
-      "heading": "Range"
+      "heading": "### 范围",
+      "desc": "范围滑块。"
+    },
+    "min-max": {
+      "heading": "### 最小值和最大值",
+      "desc": "您可以设置滑块的 `min` 和 `max` 值。"
+    },
+    "metronome": {
+      "heading": "### 插槽",
+      "desc": "使用诸如 `prepend` 和 `append` 之类的插槽可轻松自定义 `v-slider` 以适应任何情况。"
+    },
+    "vertical": {
+      "heading": "### 垂直滑块",
+      "desc": "您可以使用 `vertical` 将滑块切换到垂直方向。 如果需要更改滑块的高度，请使用 css。"
     },
     "disabled": {
-      "heading": "禁用"
+      "heading": "### 禁用",
+      "desc": "您无法与 `disabled` 滑块互动。"
+    },
+    "readonly": {
+      "heading": "### 只读",
+      "desc": "您不能与 `readonly` 滑块交互，但它们看起来与普通滑块一样。"
+    },
+    "inverse-label": {
+      "heading": "### 反向标签",
+      "desc": "具有 `inverse-label` 属性的 `v-slider` 在其末尾显示标签。"
     }
   },
   "props": {
+    "alwaysDirty": "与 *thumb-label** 道具一起使用时，将始终显示拇指标签。",
+    "dark": "Components.Inputs.props.dark",
+    "inverseLabel": "使用 **rtl** 反转标签位置。",
+    "max": "设置允许的最大值",
+    "min": "设置允许的最小值",
     "step": "如果大于0，则为滑块上的点设置步骤间隔",
     "thumbColor": "设置拇指和拇指标签颜色",
-    "thumbLabel": "显示拇指标签"
+    "thumbLabel": "显示拇指标签",
+    "thumbSize": "控制缩略图标签的大小。",
+    "ticks": "显示刻度线。如果 `true` ，使用滑块时将显示刻度线。如果设置为 `'always'` \n，它总是显示刻度线。",
+    "tickLabels": "与 Array<string> 一起提供时，将尝试按索引顺序将标签映射到每个步骤",
+    "tickSize": "控制 **ticks** 的大小",
+    "trackColor": "设置刻度线颜色",
+    "trackFillColor": "设置刻度线填充颜色",
+    "value": "控制滑块的当前值",
+    "vertical": "将滑块方向切换为垂直方向"
   },
   "events": {
+    "blur": "当组件不再聚焦时发出",
     "change": "Components.Inputs.events.change",
     "click:append": "Components.Inputs.events['click:append']",
     "click:prepend": "Components.Inputs.events['click:prepend']",
+    "end": "滑块移动结束时发出的滑块值",
+    "focus": "组件聚焦时发出",
+    "start": "滑块移动开始时发出的滑块值",
     "update:error": "Mixins.Validatable.events['update:error']"
+  },
+  "slots": {
+    "thumb-label": "替换缩略图标签内的内容"
   }
 }

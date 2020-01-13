@@ -80,23 +80,9 @@
     "name": "Sets the component's name attribute",
     "offIcon": "The icon used when inactive",
     "onIcon": "The icon used when active",
-    "row": "Displays radio buttons in row",
-    "value": "Sets the value of the selection control component",
-    "v-radio": {
-      "disabled": "Mixins.Validatable.props.disabled",
-      "label": "Components.Inputs.props.label",
-      "readonly": "Mixins.Validatable.props.readonly"
-    }
-  },
-  "slots": {
-    "append": "Components.Selects.slots.append",
-    "prepend": "Components.Selects.slots.prepend"
+    "row": "Displays radio buttons in row"
   },
   "events": {
-    "blur": "Components.Inputs.events.blur",
-    "change": "Components.Inputs.events.change",
-    "focus": "Emitted when the input is focused",
-    "update:indeterminate": "The **indeterminate.sync** event.",
-    "update:error": "Mixins.Validatable.events['update:error']"
+    "update:indeterminate": "The **indeterminate.sync** event."
   }
 }

@@ -1,16 +1,35 @@
 {
+  "heading": "# 页脚",
+  "headingText": "`v-footer` 用于显示用户可能希望从站点内的所有页面访问到的公共信息。",
   "examples": {
+    "usage": {
+      "desc": "最简单形式的 `v-footer` 组件是一个容器。"
+    },
+    "absolute": {
+      "heading": "### 绝对定位的页脚",
+      "desc": "`absolute` 属性将页脚放在其父容器的底部。"
+    },
+    "padless": {
+      "heading": "### 无垫页脚",
+      "desc": "`padless` 属性将从页脚组件中删除所有默认边距"
+    },
     "company-footer": {
-      "desc": "使用 footer 组件制作一个包含一些页面链接的公司页脚。"
+      "heading": "### 公司页脚",
+      "desc": "使用页脚组件制作一个包含一些页面链接的公司页脚。"
     },
     "indigo-footer": {
-      "desc": "使用 footer 组件制作一个靛蓝背景以及包含一些社交媒体图标按钮的页脚。"
+      "heading": "### 靛蓝色页脚",
+      "desc": "使用页脚组件制作一个靛蓝背景以及包含一些社交媒体图标按钮的页脚。"
     },
     "teal-footer": {
-      "desc": "使用 footer 组件制作一个蓝绿色顶部以及几个行列链接的页脚。"
+      "heading": "### 蓝绿色页脚",
+      "desc": "使用页脚组件制作一个蓝绿色顶部以及几个行列链接的页脚。"
     }
   },
   "props": {
-    "inset": "定位工具栏偏离应用程序的`v-navigation-drawer`的位置"
+    "absolute": "Mixins.Positionable.props.absolute",
+    "fixed": "Mixins.Positionable.props.fixed",
+    "inset": "定位工具栏偏离应用程序的`v-navigation-drawer`的位置",
+    "padless": "删除页脚中的所有边距"
   }
 }

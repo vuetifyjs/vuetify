@@ -8,19 +8,34 @@
     "description": "Ops, parece que o que você está procurando não está aqui!"
   },
   "introduction/why-vuetify": {
-    "title": "Por que Vuetify?"
+    "title": "Por que Vuetify?",
+    "description": "Vuetify tem uma comunidade extremamente ativa, fornece componentes Material Design fáceis de usar e é constantemente atualizado.",
+    "keywords": "por que vuetify, por que escolher o vuetify, melhor framework vue, melhor framework ui"
   },
   "introduction/frequently-asked-questions": {
-    "title": "Perguntas frequentes"
+    "title": "Perguntas frequentes",
+    "description": "Preso em um problema? Confira as perguntas mais frequentes da comunidade Vuetify.",
+    "keywords": "perguntas frequentes, faq"
   },
   "introduction/long-term-support": {
-    "title": "Suporte a longo prazo"
+    "title": "Suporte a longo prazo",
+    "description": "Vuetify fornece suporte a longo prazo para a última versão major durante 12 meses para bugs críticos e vulnerabilidades de segurança.",
+    "keywords": "lts, suporte a longo prazo"
   },
   "introduction/meet-the-team": {
-    "title": "Conheça a equipe"
+    "title": "Conheça a equipe",
+    "description": "Conheça a equipe responsável pela construção do Vuetify. Estes são os principais indivíduos que conduzem a visão do framework.",
+    "keywords": "vuetify time desenvolvimento, vuetify time principal"
+  },
+  "introduction/roadmap": {
+    "title": "O Cronograma Vuetify",
+    "description": "Os próximos recursos planejados e novas funcionalidades chegando ao Vuetify. Novos componentes, novas diretivas e muito, muito mais!.",
+    "keywords": "cronograma vuetify, planos futuros, novos recursos vuetify"
   },
   "introduction/sponsors-and-backers": {
-    "title": "Patrocinadores e apoiadores"
+    "title": "Patrocinadores e apoiadores",
+    "description": "Ajude o Vuetify apoiando o projeto. Isso ajuda com a manutenção de recursos existentes e o desenvolvimento de novos.",
+    "keywords": "patrocinador, apoiador, doações, patrono, ajudando o vuetify, suporte vuetify"
   },
   "getting-started/quick-start": {
     "title": "Inicio rápido",
@@ -32,13 +47,18 @@
     "description": "Selecione de uma multiplicidade de layouts do Vuetify Material Design construídos para ajudar a iniciar rapidamente seu aplicativo.",
     "keywords": "layouts pré-definidos, layouts, layout de aplicação, layouts de material design"
   },
+  "getting-started/browser-support": {
+    "title": "Suporte ao navegador",
+    "keywords": "suporte ao navegador vuetify"
+  },
   "getting-started/unit-testing": {
     "title": "Testes de unidade",
     "description": "Aprenda a criar testes unitários com vue-test-utils e componentes Vuetify em seu aplicativo Vue.",
     "keywords": "teste de unidade vuetify, testando vuetify, testes de especificações vuetify"
   },
   "getting-started/releases-and-migrations": {
-    "title": "Lançamentos e mudanças"
+    "title": "Lançamentos e mudanças",
+    "keywords": "migração, lançamentos, atualizando vuetify"
   },
   "getting-started/contributing": {
     "title": "Contribuindo",
@@ -270,9 +290,16 @@
     "title": "Layout sandbox"
   },
   "professional-support/consulting": {
-    "title": "Consultoria e suporte"
+    "title": "Consultoria e suporte",
+    "description": "Obtenha ajuda profissional, apoio e orientação ao seu aplicativo Vuetify pelo criador, John Leider.",
+    "keywords": "consultoria vuetify, suporte vuetify, ajuda vuetify"
   },
   "professional-support/business": {
     "title": "Consultoria e suporte"
+  },
+  "professional-support/enterprise": {
+    "title": "Vuetify para empresas",
+    "description": "Obtenha as ferramentas que você precisa continuamente catalogar e entenda o software de código aberto que seu aplicativo precisa com a assinatura Tidelift.",
+    "keywords": "vuetify empresa, tidelift empresa, tidelift vuetify"
   }
 }

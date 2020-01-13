@@ -1,10 +1,37 @@
 {
+  "heading": "# 表单",
+  "headingText": "当涉及到表单验证时，Vuetify 具有大量的集成和功能。 是否要使用第三方验证插件？ 开箱即用，您可以使用 [Vee-validate](https://github.com/baianat/Vee-validate) 和 [vuelidate](https://github.com/vuelidate/vuelidate)。",
   "examples": {
+    "usage": {
+      "desc": "内部的 `v-form` 组件使添加验证到表单输入变得容易。 所有输入组件都有一个“ `rules` 属性，该属性带有一系列功能。 这些函数允许您指定字段为_valid_ 或 _invalid_ 的条件。 每当输入值更改时，数组中的每个函数都将接收新值。 如果函数返回 false 或字符串，则验证失败。"
+    },
+    "rules": {
+      "heading": "### 创建规则",
+      "desc": "规则允许您在所有表单组件上应用自定义验证。 这些将按顺序进行验证，并且一次将显示 **maximum** 或者 1 个错误，因此请确保您相应地创建规则。"
+    },
+    "validation-with-submit-and-clear": {
+      "heading": "### 验证与 提交 & 清除",
+      "desc": "`v-form` 组件具有 **three** 功能，可以通过在该组件上设置 _ref_ 来访问它们。 ref 允许我们访问组件上的内部方法，例如 `<v-form ref=\"form\">`。**this.$refs.form.validate()** 将验证所有输入并返回所有输入是否有效。 **this.$refs.form.reset()** 将清除所有输入并重置其验证错误。**this.$refs.form.resetValidation()** 将仅重置输入验证，而不会更改其状态。"
+    },
+    "vuelidate": {
+      "heading": "### 验证",
+      "desc": "**vuelidate** 是 Vue.js 的简单、轻量模型验证。[Documentation](https://vuelidate.netlify.com/)"
+    },
     "vee-validate": {
-      "desc": "Vee-validate是另一个验证插件，允许您检查您的表单。一个警告是，当您使用**value**属性时必须添加**type=\"checkbox\"**来正确验证一个`v-checkbox`。"
+      "heading": "### Vee-validate",
+      "desc": "**vee-validate** 是用于Vue.js的基于模板的验证框架。[Documentation](https://baianat.github.io/vee-validate/)"
     }
   },
   "props": {
-    "lazyValidation": "如果启用，**value**将永远是 _true_ ，除非有可见的验证错误。您仍然可以调用`validate()`来手动触发验证。"
+    "lazyValidation": "如果启用，**value**将永远是 _true_ ，除非有可见的验证错误。您仍然可以调用`validate()`来手动触发验证。",
+    "value": "表示表单有效性的布尔值。"
+  },
+  "events": {
+    "submit": "提交表单时发出"
+  },
+  "functions": {
+    "reset": "将所有已注册输入（在表单内）的状态重置为数组的 **{}** 和所有其他值的 **null**。 使用 **lazy-validation** 属性时，重置错误包。",
+    "resetValidation": "重置所有已注册输入的验证，但不修改其状态",
+    "validate": "验证所有注册的输入。 如果成功返回 **true**，否则返回 **false**"
   }
 }

@@ -1,0 +1,9 @@
+// src/plugins/vuetify.js
+
+// CORRECT
+import Vuetify from 'vuetify/lib/framework'
+
+// INCORRECT
+import Vuetify, { VRow } from 'vuetify/lib/framework'
+
+export default new Vuetify()

@@ -1,3 +1,37 @@
 {
-  "heading": "# 자주 묻는 질문 (FAQ)"
+  "heading": "# 자주 묻는 질문 (FAQ)",
+  "gotchas": [
+    {
+      "q": "### sass / scss 에러 때문에 컴파일이 안 됩니다."
+    },
+    {
+      "q": "### v1.5 와 v2 의 그리드를 비교한 예제가 있을까요?",
+      "a": "네. [이 곳](https://gist.github.com/johnleider/207f63c9d30fb77042a0bb0258c5ab32) 에서 예제를 볼 수 있습니다."
+    },
+    {
+      "a": "`package.json` 파일의 `@vue/cli 패키지`가 최소 **^3.5.0** 인지 확인해 주세요."
+    },
+    {
+      "a": "**package.json** 에서 `node-sass` 대신 `sass`를 사용하고 있는지 확인해 주세요."
+    },
+    {
+      "q": "코드가 동작하지 않습니다. - 무엇을 해야 하나요?",
+      "a": "우선, 최신 버전의 Vue.js 와 Vuetify 를 사용하고 있는지 확인해 주세요. codepen 에서 다음의 [template](https://template.vuetifyjs.com/)을 사용하여 재연해 주세요. 당신의 개발환경 이외의 다른 곳에서 재연되지 않는다면, 보통 당신 환경 자체에 문제가 있는 겁니다. 문제가 여전히 해결되지 않는다면, 작성한 codepen 과 해당 문제를 [community](https://chat.vuetifyjs.com) 의 **#need-help** 에 보내주세요."
+    },
+    {
+      "q": "### **$attrs is readonly** 나 **$listeners is readonly** 와 같은 에러가 발생합니다.",
+      "a": "Vuetify 는 Typescript 를 사용하고, Vue 객체를 import 하거나 확장해야만 합니다. 이로 인해, 일부 어플리케이션에서 경고 메시지가 나타날 가능성이 있습니다. 다양한 사용 예에 대한 잠재적인 해결책이 [깃헙 토론](https://github.com/vuetifyjs/vuetify/issues/4068) 에 제시되고 있습니다. 추가 질문이 있으면, [온라인 커뮤니티](https://community.vuetifyjs.com) 에 참여해 주세요."
+    },
+    {
+      "q": "### Error in ./node_modules/vuetify/src/dir/file.js Module parse \"failed\": Unexpected token (&lt;lineno&gt;:&lt;characterno&gt;) 에러가 발생합니다.",
+      "a": "IntelliJ IDEA 혹은 WebStorm을 사용하는 경우, 사용하고 있는 컴포넌트로 인해 `vuetify/src/` 디렉토리를 자동으로 import 하는 경우가 자주 발생합니다. import 구문의 `vuetify/src/`를 `vuetify/es5` 로 변경해 주세요."
+    },
+    {
+      "q": "### router 를 포함한 codepen 템플릿이 있나요?",
+      "a": "네. [Vuetify Codepen Router Template](https://codepen.io/johnjleider/pen/PMZvpr)"
+    },
+    {
+      "q": "### 어플리케이션이 제대로 표시되지 않습니다."
+    }
+  ]
 }

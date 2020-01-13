@@ -4,6 +4,7 @@ import VExpansionPanel from './VExpansionPanel'
 import VIcon from '../VIcon'
 
 // Mixins
+import Colorable from '../../mixins/colorable'
 import { inject as RegistrableInject } from '../../mixins/registrable'
 
 // Directives
@@ -17,6 +18,7 @@ import mixins, { ExtractVue } from '../../util/mixins'
 import Vue, { VNode, VueConstructor } from 'vue'
 
 const baseMixins = mixins(
+  Colorable,
   RegistrableInject<'expansionPanel', VueConstructor<Vue>>('expansionPanel', 'v-expansion-panel-header', 'v-expansion-panel')
 )
 
@@ -97,7 +99,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   render (h): VNode {
-    return h('button', {
+    return h('button', this.setBackgroundColor(this.color, {
       staticClass: 'v-expansion-panel-header',
       class: this.classes,
       attrs: {
@@ -114,7 +116,7 @@ export default baseMixins.extend<options>().extend({
         mousedown: () => (this.hasMousedown = true),
         mouseup: () => (this.hasMousedown = false),
       },
-    }, [
+    }), [
       getSlot(this, 'default', { open: this.isActive }, true),
       this.hideActions || this.genIcon(),
     ])

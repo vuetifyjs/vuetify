@@ -1,4 +1,4 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 .v-date-picker-title
   display: flex
@@ -17,14 +17,14 @@
   &__year
       align-items: center
       display: inline-flex
-      font-size: 14px
-      font-weight: 500
-      margin-bottom: 8px
+      font-size: $date-picker-title-year-font-size
+      font-weight: $date-picker-title-year-font-weight
+      margin-bottom: $date-picker-title-year-bottom-margin
 
   &__date
-      font-size: 34px
+      font-size: $date-picker-title-date-font-size
       text-align: left
-      font-weight: 500
+      font-weight: $date-picker-title-date-font-weight
       position: relative
       overflow: hidden
       padding-bottom: 8px

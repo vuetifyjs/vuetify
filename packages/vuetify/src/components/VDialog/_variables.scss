@@ -1,3 +1,12 @@
 @import '../../styles/styles.sass';
 
 $dialog-border-radius: $border-radius-root !default;
+$dialog-card-subtitle-padding: 0 24px 20px !default;
+$dialog-card-text-padding: 0 24px 20px !default;
+$dialog-card-title-font-size: map-deep-get($headings, 'h6', 'size') !default;
+$dialog-card-title-font-weight: map-deep-get($headings, 'h6', 'weight') !default;
+$dialog-card-title-letter-spacing: map-deep-get($headings, 'h6', 'letter-spacing') !default;
+$dialog-card-title-padding: 16px 24px 10px !default;
+$dialog-elevation: 24 !default;
+$dialog-margin: 24px !default;
+$dialog-max-height: 90% !default;

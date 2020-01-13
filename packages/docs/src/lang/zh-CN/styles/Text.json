@@ -1,1 +1,17 @@
-{}
+{
+  "heading": "# 文本",
+  "headingText": "控制文本对齐、换行、溢出、转换等等。",
+  "alignmentHeader": "## 文本对齐",
+  "alignmentText1": "Alignment 助手类允许你轻松的创建 re-align 文本。",
+  "alignmentText2": "还有可用于支持响应式显示的 alignment 类。",
+  "overflowHeader": "## 文本换行和溢出",
+  "overflowText1": "你能够使用 `.text-no-wrap` 类来防止文本换行。",
+  "overflowText2": "较长的内容可以用文本省略号截断。**需要** `display: inline-block` **或者** `display: block`。",
+  "transformHeader": "## 文本转换",
+  "transformText1": "文本 capitalization 类可以转换文字的大小写。",
+  "transformText2": "使用 `text-transform` 来达到文本的破坏和移除的效果也是有可能的。在第一个例子中，`text-transform: uppercase` 这个自定义类被覆盖，允许保留文本框。在第二个例子中，我们将一个较长的单词分离以适应可用的空间。",
+  "weightsHeader": "## 字体宽度和斜体",
+  "weightsText1": "Material design 默认支持 **100, 300, 400, 500, 700, 900** 字体宽度和斜体文本。",
+  "rtlHeader": "## RTL agnostic alignment",
+  "rtlText1": "当使用 [RTL](/customization/rtl) 时，无论使用的 **rtl** 名称如何，你都希望保持对其。"
+}

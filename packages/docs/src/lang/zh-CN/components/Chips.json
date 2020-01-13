@@ -1,28 +1,88 @@
 {
+  "heading": "# 纸片",
+  "headingText": "`v-chip` 组件用于传递小段信息。`close` 属性会让纸片变得可交互。此组件由 [v-chip-group](/components/chip-groups) 用于高级选项。",
   "examples": {
+    "usage": {
+      "desc": "纸片有以下变量： Default, closeable, filter, outlined, pill。\n默认的 `v-chip` 插槽文本的旁边也接受头像和图标。",
+      "uninverted": true
+    },
     "colored": {
       "heading": "色彩",
-      "desc": " Material Design调色板中的任何色彩均可用于更改厚切薯条的颜色。"
+      "desc": "Material Design 调色板中的任何颜色都可用于更改纸片颜色。"
     },
     "icon": {
-      "heading": "图标",
-      "desc": "厚切薯条可以使用Material图标字体库中的文本或任何图标。"
+      "heading": "### 图标",
+      "desc": "纸片可以使用文本或“ Material Icons 字体库中可用的任何图标。"
     },
     "outlined": {
       "heading": "### 轮廓",
-      "desc": "轮廓厚切薯条从当前的文字颜色继承它们的边框颜色。"
+      "desc": "轮廓纸片从当前文本颜色继承其边框颜色。"
     },
     "label": {
-      "desc": "标签厚切薯条使用`v-card`的边框半径"
+      "heading": "### 标签",
+      "desc": "标签纸片使用 `v-card` border-radius。"
+    },
+    "closable": {
+      "heading": "### 可关闭",
+      "desc": "可关闭的纸片可以通过 v-model 进行控制。如果您想知道纸片何时关闭，也可以监听 `click:close` 事件。",
+      "uninverted": true
     },
     "in-selects": {
-      "desc": "选择框可以用厚切薯条来显示选定的数据。"
+      "heading": "### 选中",
+      "desc": "选择框可以使用纸片显示所选数据。请尝试在下面添加您自己的标签。",
+      "uninverted": true
+    },
+    "photos": {
+      "heading": "### 自定义列表",
+      "desc": "在本例中，我们选择使用自定义列表来替代 [v-autocomplete](/components/autocompletes)。这允许我们始终显示可用的选项，同时仍然提供相同的搜索和选择功能。"
+    },
+    "action-chips": {
+      "heading": "### 操作纸片",
+      "desc": "纸片可以被操作。如果提供了_click_ 事件，芯片将变成交互式的，并且可以调用方法。"
+    },
+    "filtering": {
+      "heading": "### 其他过滤器",
+      "desc": "纸片非常适合为特定任务提供辅助操作。在本例中，我们搜索项目列表并收集信息子集以显示可用的关键字。"
+    },
+    "expandable": {
+      "heading": "### 可展开",
+      "desc": "纸片可以与 `v-menu` 结合使用，以启用纸片的一组特定动作。"
+    },
+    "sizes": {
+      "heading": "### 尺寸",
+      "desc": "`v-chip` 组件可以拥有不同的大小，从 `x-small` 到 `x-large`。"
+    },
+    "draggable": {
+      "heading": "### 可拖动",
+      "desc": "`draggable` `v-chip` 组件可以被鼠标拖放。"
+    },
+    "filter": {
+      "heading": "### 过滤器",
+      "desc": "`v-chip` 组件有 `filter` 选项，如果纸片处于活动状态，那么就会在该纸片内向您显示一个额外的图标。可以使用 `filter-icon` 自定义。"
+    },
+    "no-ripple": {
+      "heading": "### 没有涟漪",
+      "desc": "如果 `ripple` 属性设置为 `false`，则 `v-chip` 将不会渲染涟漪。"
     }
   },
   "props": {
+    "active": "确定纸片是否可见。",
     "close": "添加删除按钮",
-    "disabled": "禁用厚切薯条，使其不可选择",
+    "closeIcon": "更改用于 **close** 纸片的默认图标",
+    "disabled": "禁用纸片，使其不可选择",
+    "draggable": "使纸片可拖动",
+    "filter": "选中时显示选择图标",
+    "filterIcon": "更改用于 **filter** 纸片的默认图标",
+    "inputValue": "控制项的 **active** 状态。这通常用于高亮显示组件。",
     "label": "移除圆形边缘",
-    "outlined": "删除背景并应用边框和文本颜色"
+    "link": "明确地将纸片定义为链接",
+    "outlined": "删除背景并应用边框和文本颜色",
+    "pill": "移除 `v-avatar` 的边距",
+    "value": "[v-chip-group](/components/chip-groups) 的子组时使用的值。"
+  },
+  "events": {
+    "click": "单击组件时发出，切换芯片（如果包含在芯片组中） - 除非使用 `.native` 修饰符，否则单击时将触发组件产生涟漪",
+    "click:close": "单击关闭图标时发出",
+    "update:active": "单击关闭图标时发出，将 active 设置为 `false`"
   }
 }

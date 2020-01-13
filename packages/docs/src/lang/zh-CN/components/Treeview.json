@@ -1,7 +1,119 @@
 {
+  "heading": "# 树形视图",
+  "headingText": "`v-treeview` 组件对于显示大量嵌套数据很有用。",
   "examples": {
+    "usage": {
+      "desc": "一个基本示例"
+    },
+    "dense": {
+      "heading": "### 密度模式",
+      "desc": "密集模式提供了更紧凑的布局，同时降低了项目的高度。"
+    },
     "color": {
-      "heading": "色彩"
+      "heading": "### 颜色",
+      "desc": "您可以控制活动的树形视图节点的文本和背景颜色。"
+    },
+    "selected-color": {
+      "heading": "### 复选框颜色",
+      "desc": "您可以控制所选节点复选框的颜色。"
+    },
+    "shaped": {
+      "heading": "### 形状",
+      "desc": "形状的树形视图在节点的一侧具有圆形边界。"
+    },
+    "rounded": {
+      "heading": "### 圆角",
+      "desc": "您可以使树视图节点变成圆角。"
+    },
+    "item-disabled": {
+      "heading": "### 停用节点",
+      "desc": "设置 `item-disabled` 属性可当设置为 `true` 时，以控制哪个节点的属性会禁用该节点。"
+    },
+    "file-explorer": {
+      "heading": "### 插槽",
+      "desc": "使用插槽，我们可以创建一个直观的文件浏览器。 除了 `prepend` 插槽外，还有一个用于 `label` 和 `append` 插槽。"
+    },
+    "directory": {
+      "heading": "### 同步项目",
+      "desc": "您可以通过向 `load-children` 属性提供 _Promise_ 回调来动态加载子数据。 用户首次尝试扩展具有子属性（为空数组）的项目时，将执行此回调。"
+    },
+    "hotspots": {
+      "heading": "### 自定义可选择图标",
+      "desc": "为您的可选树形视图自定义 **on**, **off** 和 **indeterminate** 图标。 与其他高级功能（如 API 加载项）结合使用。"
+    },
+    "human-resources": {
+      "heading": "### 搜索目录",
+      "desc": "使用 **search** 属性轻松过滤您的树形视图。 如果需要区分大小写或模糊过滤，可以通过设置 **filter** 属性轻松地应用自定义过滤功能。 这类似于 [v-autocomplete](/components/autocompletes) 组件。"
+    },
+    "selectable": {
+      "heading": "### 可选择",
+      "desc": "您可以轻松选择树形视图节点和子节点。"
+    },
+    "activatable": {
+      "heading": "### 可激活",
+      "desc": "树形视图节点可以将其激活。"
+    },
+    "hoverable": {
+      "heading": "### 可悬停的",
+      "desc": "树形视图节点可以具有悬停效果。"
+    },
+    "open-all": {
+      "heading": "### 打开所有",
+      "desc": "树形视图节点可以在页面加载时预先打开。"
+    },
+    "selection-type": {
+      "heading": "### 选择类型",
+      "desc": "树形视图现在支持两种不同的选择类型。 默认类型是 **'leaf'**，它仅在 v-model 数组中包括叶节点，但会将父节点呈现为部分或完全选择状态。 另一种模式是 **'independent'**，它允许选择一个父节点，但是每个节点都独立于其父节点和子节点。"
     }
+  },
+  "props": {
+    "v-treeview": {
+      "activatable": "允许用户通过单击节点将其标记为活动节点",
+      "active": "可同步属性，允许您控制哪些节点处于活动状态。 该数组由每个活动项目的 `item-key` 组成。",
+      "activeClass": "活动时应用于节点的类",
+      "color": "设置活动节点的颜色",
+      "dense": "降低项目的高度",
+      "expandIcon": "用于指示可以扩展节点的图标",
+      "hoverable": "将鼠标悬停在节点上时应用悬停类",
+      "filter": "自定义项目过滤功能。 默认情况下，它将在项目的标签中使用不区分大小写的搜索。",
+      "indeterminateIcon": "节点处于不确定状态时使用的图标。 仅在 `selectable` 为 `true` 时可见。",
+      "itemChildren": "提供的包含其子项的 `items` 上的属性",
+      "itemDisabled": "提供的 `items` 上的属性，其中包含该项目的禁用状态",
+      "itemKey": "提供的 `items` 上的属性用于跟踪节点状态。 此属性的值在所有项目中必须唯一。",
+      "items": "用于构建树视图的项目数组",
+      "itemText": "提供的包含标签文本的 `items` 上的属性",
+      "loadChildren": "动态加载子代时使用的功能。 如果设置了此道具，则在扩展具有 `item-children` 属性（为空数组）的项时，将运行提供的功能。 支持回调。",
+      "loadingIcon": "节点处于加载状态时使用的图标",
+      "multipleActive": "为 `true` 时，允许用户同时具有多个活动节点",
+      "offIcon": "未选择节点时使用的图标。 仅在 `selectable` 为 `true` 时可见。",
+      "onIcon": "选择叶节点或完全选择分支节点时使用的图标。 仅在 `selectable` 为 `true` 时可见。",
+      "open": "可同步属性，允许您控制打开哪些节点。 该数组由每个打开项目的 `item-key` 组成。",
+      "openAll": "当为 `true` 时，将导致在安装组件时打开所有分支节点",
+      "openOnClick": "如果为 `true` ，将导致通过单击节点上的任意位置来打开节点，而不是仅通过单击展开图标来打开节点。 将此属性与 `activatable` 一起使用时，您将无法将带有子节点标记为活动状态。",
+      "returnObject": "当 `true` 时，`v-model`、`active.sync` 和 `open.sync` 将返回完整的对象而不是只是键",
+      "rounded": "为 `v-treeview` 节点提供替代的活动样式。 仅在 `activatable` 为 `true` 时可见，并且不应与 `shaped`属性一起使用。",
+      "search": "筛选结果的搜索模型",
+      "selectable": "将在每个节点旁边渲染一个复选框，以允许选择它们",
+      "selectedColor": "选择框的颜色",
+      "selectionType": "控制树形视图如何选择节点。 有两种模式可用：'leaf' 和 'independent'",
+      "shaped": "为 `v-treeview` 节点提供替代的活动样式。 仅在 `activatable` 为 `true` 时可见，并且不应与 `rounded` 属性结合使用。",
+      "transition": "在打开和关闭节点时应用过渡",
+      "value": "允许您控制选择哪些节点。 该数组由每个选定项目的 `item-key` 组成。 与 `@input` 事件一起使用以允许 `v-model` 绑定。"
+    }
+  },
+  "slots": {
+    "v-treeview": {
+      "append": "在标签后附加内容",
+      "label": "标签内容",
+      "prepend": "在标签之前添加内容"
+    }
+  },
+  "functions": {
+    "updateAll": "打开或关闭所有节点"
+  },
+  "events": {
+    "input": "当此值更改时，发出选定项的数组",
+    "update:active": "当此值更改时，发出活动项的数组",
+    "update:open": "当此值更改时，发出打开项的数组"
   }
 }

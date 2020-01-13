@@ -1,5 +1,5 @@
 {
   "props": {
-    "color": "给控制器指定颜色。颜色可以为材料颜色（如`success`或`purple`）或CSS颜色（`#033`或`rgba(255, 0, 0, 0.5)`）。您可以在[颜色页面](/styles/colors#material-colors)找到内置类的列表。"
+    "color": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 `success` 或者 `purple`）或 css 颜色 (`#033` 或 `rgba(255, 0, 0, 0.5)`)。 你可以在 [colors page](/styles/colors#material-colors) 中找到内置类的列表。"
   }
 }

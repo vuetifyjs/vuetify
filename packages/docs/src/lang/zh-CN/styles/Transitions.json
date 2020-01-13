@@ -1,28 +1,55 @@
 {
+  "heading": "# 过渡效果",
+  "headingText": "流畅的动画有助于给用户界面带来很棒的感觉。使用 Vue 的过渡系统和可复用的功能组件，你可以轻松地控制应用程序的动画效果。大多数组件可以通过 <code>transition</code> 属性来改变他们的过渡效果。",
   "examples": {
     "usage": {
-      "desc": "Vuetify附带了10多个自定义css动画，可应用于众多组件或您自己的自定义的组件"
+      "desc": "Vuetify 附带了 10 多个自定义 css 动画，可应用于众多组件或你自己的自定义的组件。"
     },
     "slide-x-transitions": {
-      "desc": "滑动x过渡可沿水平方向移动。"
+      "heading": "### X 轴滑动过渡",
+      "desc": "X 轴滑动过渡可沿水平方向移动。"
     },
     "slide-y-transitions": {
-      "desc": "过渡地使用应用程序<code>$primary-transition</code>."
+      "heading": "### Y 轴滑动过渡",
+      "desc": "动画使用应用程序的 <code>$primary-transition</code>。"
+    },
+    "scroll-x-transitions": {
+      "heading": "### X 轴滚动过渡",
+      "desc": "X 轴滚动过渡沿着水平轴继续。"
+    },
+    "scroll-y-transitions": {
+      "heading": "### Y 轴滚动过渡",
+      "desc": "Y 轴滚动过渡沿着垂直轴继续。"
     },
     "scale-transition": {
-      "desc": "许多Vuetify组件都包含一个`transition`属性允许你指定你自己的效果"
+      "heading": "### 缩放过渡",
+      "desc": "许多 Vuetify 组件都包含一个 <code>transition</code> 属性允许你指定想要的效果。"
     },
     "fade-transition": {
-      "desc": "另一个淡入淡出过渡的示例可以在圆盘传送带组件上找到。"
+      "heading": "### 淡入淡出过渡",
+      "desc": "另一个淡入淡出过渡的示例可以在轮播组件上找到。"
+    },
+    "expand-transition": {
+      "heading": "### 展开过渡",
+      "desc": "展开过度和 Expansion Panels， List Groups 一起使用。还有一个水平版本的 `v-expand-x-transition`。"
     },
     "custom-origin": {
+      "heading": "### 自定义原点",
       "desc": "通过使用一个简单的属性来可编程地控制过渡原点。"
+    },
+    "todo": {
+      "heading": "### Todo 列表",
+      "desc": "使用多个自定义转场，可以轻松实现简单的待办事项清单！"
     }
   },
-  "createYourOwnHeader": "创建您自己的",
-  "createYourOwnText1": "您可以用Vuetify的过渡辅助器函数来创建您自己的自定义的过渡效果，这个函数会返回一个可以导入到Vue的对象。使用Vue的 [函数式组件](https://vuejs.org/v2/guide/render-function.html#Functional-Components) 配置将确保您的过渡效果尽可能高效。只需要导入函数：",
-  "createYourOwnText2": "其中`createSimpleTransition`函数接受1个参数，即名称。这将是您可以与您的样式挂钩的名称。这是一个展示`v-fade-transition`的示例：",
+  "createYourOwnHeader": "## 创建你自己的",
+  "createYourOwnText1": "你可以使用 Vuetify 的助手函数来创建你自己的自定义的过渡效果，这个函数会返回一个可以导入到 Vue 的对象。使用 Vue [functional component](https://vuejs.org/v2/guide/render-function.html#Functional-Components) 配置将确保您的过渡效果尽可能高性能。只需要导入函数：",
+  "createYourOwnText2": "其中 <code>createSimpleTransition</code> 函数接受 1 个参数，即 name。这将是你可以与你的样式挂钩的名称。这是一个展示 <code>v-fade-transition</code> 的示例：",
   "props": {
-    "group": "创建`transition-group`组件 [vue docs](https://vuejs.org/v2/api/#transition-group)"
+    "group": "创建 `transition-group` 组件 [vue docs](https://vuejs.org/v2/api/#transition-group)。",
+    "hideOnLeave": "隐藏离开元素 （无退出动画）",
+    "leaveAbsolute": "离开元素的绝对位置 (useful for [FLIP](https://aerotwist.com/blog/flip-your-animations/))",
+    "mode": "Mixins.Transitionable.props.mode",
+    "origin": "Mixins.Transitionable.props.origin"
   }
 }

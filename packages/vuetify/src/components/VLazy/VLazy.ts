@@ -10,6 +10,7 @@ import { convertToUnit, getSlot } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
 export default mixins(Toggleable).extend({
   name: 'VLazy',
@@ -27,6 +28,10 @@ export default mixins(Toggleable).extend({
         rootMargin: undefined,
         threshold: undefined,
       }),
+    } as PropValidator<IntersectionObserverInit>,
+    tag: {
+      type: String,
+      default: 'div',
     },
     transition: {
       type: String,
@@ -69,7 +74,7 @@ export default mixins(Toggleable).extend({
   },
 
   render (h): VNode {
-    return h('div', {
+    return h(this.tag, {
       staticClass: 'v-lazy',
       attrs: this.$attrs,
       directives: [{

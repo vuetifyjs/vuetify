@@ -1,10 +1,8 @@
 {
   "heading": "# Icons",
   "headingText": "The `v-icon` component provides a large set of glyphs to provide context to various aspects of your application. For a list of all available icons, visit the official [Material Design Icons](https://materialdesignicons.com/) page. To use any of these icons simply use the `mdi-` prefix followed by the icon name.",
+  "usageText": "Icons come in two themes (light and dark), and five different sizes (x-small, small, medium (default), large, and x-large).",
   "examples": {
-    "usage": {
-      "desc": "Icons come in two themes (light and dark), and five different sizes (x-small, small, medium (default), large, and x-large)."
-    },
     "font-awesome": {
       "heading": "### Font Awesome",
       "desc": "[Font Awesome](http://fontawesome.io/icons/) is also supported. Simply use the `fa-` prefixed icon name. Please note that you still need to include the Font Awesome icons in your project. For more information on how to install it, please navigate to the [installation page](/customization/icons#install-font-awesome-5-icons)"

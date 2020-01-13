@@ -1,4 +1,4 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 +theme(v-date-picker-header) using ($material)
   .v-date-picker-header__value:not(.v-date-picker-header__value--disabled)
@@ -10,7 +10,7 @@
       color: map-deep-get($material, 'text', 'disabled')
 
 .v-date-picker-header
-  padding: 4px 16px
+  padding: $date-picker-header-padding
 
   align-items: center
   display: flex
@@ -32,15 +32,15 @@
   overflow: hidden
 
   div
-    transition: $primary-transition
+    transition: $date-picker-header-value-transition
     width: 100%
 
   button
     cursor: pointer
-    font-weight: bold
+    font-weight: $date-picker-header-button-font-weight
     outline: none
-    padding: 0.5rem
-    transition: $primary-transition
+    padding: $date-picker-header-button-padding
+    transition: $date-picker-header-button-transition
 
 .v-date-picker-header--disabled
   pointer-events: none

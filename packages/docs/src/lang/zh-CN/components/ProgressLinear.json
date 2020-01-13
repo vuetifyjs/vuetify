@@ -1,1 +1,69 @@
-{}
+{
+  "heading": "# 进度线",
+  "headingText": "`v-progress-lineear` 组件用于将数据直观传输给用户。它们也可以表示一个不确定的数量，如加载或处理。",
+  "examples": {
+    "usage": {
+      "desc": "最简单的形式，`v-progress-linear` 显示一个水平进度条。使用 `value` 属性来控制进度。"
+    },
+    "file-loader": {
+      "heading": "### 文件加载器",
+      "desc": "`v-progress-linear` 组件有助于向用户解释他们正在等待响应。"
+    },
+    "linear-buffer": {
+      "heading": "### 缓冲",
+      "desc": "缓冲区状态同时表示两个值。 主值由 `v-model` 控制，而缓冲区由 `buffer-value` 属性控制。"
+    },
+    "linear-custom-colors": {
+      "heading": "### 自定义颜色",
+      "desc": "您还可以使用属性 `color` 和 `background-color` 设置颜色。"
+    },
+    "linear-determinate": {
+      "heading": "### 定值线条",
+      "desc": "进度线条组件可以有一个由 `v-model` 修改的确定性状态。"
+    },
+    "linear-indeterminate": {
+      "heading": "### 不定线条",
+      "desc": "使用 `indeterminate` 属性, `v-progress-linear` 持续不断的动画。"
+    },
+    "linear-query-indeterminate-and-determinate": {
+      "heading": "### 查询不确定和确定",
+      "desc": "`query` 属性设置为 true 时，`query` 状态由不确定性的真实性控制 。"
+    },
+    "loader": {
+      "heading": "### 工具栏加载器",
+      "desc": "使用 `absolute` 属性，我们可以将 `v-progress-linear` 组件定位在 `v-toolbar` 的底部。我们还使用了 `active` 属性来控制进度的可见性。"
+    },
+    "rounded": {
+      "heading": "### 圆角",
+      "desc": "`rounded` 属性是一种替代样式，为 `v-progress-linear` 组件添加了边框半径。"
+    },
+    "stream": {
+      "heading": "### 流",
+      "desc": "`stream` 属性与 `buffer-value` 一起工作，向用户传达正在进行某些操作。您可以使用 `buffer-value` 和 `value` 的任何组合来实现您的设计。"
+    },
+    "striped": {
+      "heading": "### 有条纹的",
+      "desc": "这将在 `v-progress-linear` 的值部分上应用条纹背景。"
+    },
+    "slot": {
+      "heading": "### 插槽",
+      "desc": "使用 `v-model` 时，`v-progress-linear` 组件将响应用户输入。 您可以使用默认插槽或绑定本地模型以显示进度内部。 如果要在线性组件上寻找高级功能，请查看 [v-slider](/components/sliders)。"
+    }
+  },
+  "props": {
+    "active": "Components.ProgressCircular.props.active",
+    "backgroundColor": "Components.ProgressCircular.props.backgroundColor",
+    "backgroundOpacity": "Components.ProgressCircular.props.backgroundOpacity",
+    "bufferValue": "Components.ProgressCircular.props.bufferValue",
+    "height": "Mixins.Measurable.props.height",
+    "indeterminate": "Components.ProgressCircular.props.indeterminate",
+    "query": "像 **indeterminate** 属性但反转的动画效果",
+    "rounded": "向进度组件添加边界半径",
+    "stream": "描绘加载的另一种样式与 **buffer-value** 协同工作",
+    "striped": "将条纹背景添加到进度组件的填充部分",
+    "value": "Components.ProgressCircular.props.value"
+  },
+  "slots": {
+    "default": "提供组件的当前值"
+  }
+}

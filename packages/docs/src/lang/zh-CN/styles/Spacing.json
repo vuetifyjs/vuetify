@@ -1,20 +1,72 @@
 {
+  "heading": "# 间距",
+  "headingText": "更新你的布局而无需创建新的类，间距助手类对于修改元素的 padding 和 margin 都非常有用。",
   "playgroundHeader": "## 实战场",
-  "propertyText": "占位符 _property_ 用来设置间距的类型：",
+  "playgroundText1": "使用 playground 来了解不同的助手类能够做些什么。 关于他们是如何工作的，请参阅下面 **How it works** 部分。",
+  "howText": "将 **margin** 或者 **padding** 应用于一个元素，范围在 _0 到 12_ 之间。每个尺寸增量都设计成与常用 Material Design 间距对齐。这些类可以使用 `{property}{direction}-{size}` 这个格式来应用。",
+  "propertyText": "占位符 **property** 用来设置间距的类型：",
   "properties": [
     "`m` - 对应 `margin`",
     "`p` - 对应 `padding`"
   ],
   "directionText": "占位符 _direction_ 指定属性所应用到的方向：",
-  "directions": {
-    "6": "`x` - 同时对应`*-left`和`*-right`属性",
-    "7": "`y` - 同时对应`*-top`和`*-bottom`属性"
-  },
+  "directions": [
+    "`t` - 应用 `margin-top` 和 `padding-top` 的间距。",
+    "`b` - 应用 `bankin-bow` 和 `padding-bow` 的间距。",
+    "`l` - 适用 `bomin-left` 和 `padding-left` 的间距。",
+    "`r` - 应用 `bomin-right` 和 `padding-right` 的间距。",
+    "`s` - 应用 `margin-left`/`padding-left` _(LTR mode)_ 和 `margin-right`/`padding-right` _(RTL mode)_",
+    "`e` - 应用 `margin-right`/`padding-right` _(LTR model)_ 和 `margin-left`/`padding-left` _(RTL model)_",
+    "`x` - 同时对应`*-left`和`*-right`属性",
+    "`y` - 同时对应`*-top`和`*-bottom`属性",
+    "`a` - 在所有方向应用该属性的间距。"
+  ],
+  "sizeText": "**size** 控制在 4px 间隔中的属性增量：",
+  "sizes": [
+    "`0` - 消除所有 `margin` 或者 `padding` 并设置为 `0`",
+    "`1` - 设置 `margin` 或者 `padding` 到 4px",
+    "`2` - 设置 `margin` 或者 `padding` 到 8px",
+    "`3` - 设置 `margin` 或者 `padding` 到 12px",
+    "`4` - 设置 `margin` 或者 `padding` 到 16px",
+    "`5` - 设置 `margin` 或者 `padding` 到 20px",
+    "`6` - 设置 `margin` 或者 `padding` 到 24px",
+    "`7` - 设置 `margin` 或者 `padding` 到 28px",
+    "`8` - 设置 `margin` 或者 `padding` 到 32px",
+    "`9` - 设置 `margin` 或者 `padding` 到 36px",
+    "`10` - 设置 `margin` 或者 `padding` 到 40px",
+    "`11` - 设置 `margin` 或者 `padding` 到 44px",
+    "`12` - 设置 `margin` 或者 `padding` 到 48px",
+    "`n1` - 将负的 `margin` 设置到 4px",
+    "`n2` - 将负的 `margin` 设置到 8px",
+    "`n3` - 将负的 `margin` 设置到 12px",
+    "`n4` - 将负的 `margin` 设置到 16px",
+    "`n5` - 将负的 `margin` 设置到 20px",
+    "`n6` - 将负的 `margin` 设置到 24px",
+    "`n7` - 将负的 `margin` 设置到 28px",
+    "`n8` - 将负的 `margin` 设置到 32px",
+    "`n9` - 将负的 `margin` 设置到 36px",
+    "`n10` - 将负的 `margin` 设置到 40px",
+    "`n11` - 将负的 `margin` 设置到 44px",
+    "`n12` - 将负的 `margin` 设置到 48px",
+    "`auto` - 设置边距为 `auto`"
+  ],
   "horizontalHeader": "水平居中",
   "horizontalText": "对于具有指定宽度的块元素，可以使用`.mx-auto`来使它的内容水平居中",
+  "breakpointHeader": "## 和断点一起",
+  "breakpointText": "Vuetify 有一个使用 Flexbox 构建的 12 格栅格系统。空格用于创建应用程序内容中的特定布局。 它由 5 个用于针对特定屏幕大小或方向的介质断点组成：**xs**, **sm**, **md**, **lg** 和 **xl**。 默认分辨率定义在 *Viewport Breakpoints* 表中，可以通过 [breakpoint service config](/customization/breakpoints) 进行修改。",
+  "breakpointHowText": "助手类在给定的断点上应用 **margin** 或 **padding**。这些类的格式遵循 `{property}{direction}-{breakpoint}-{size}`。",
   "examples": {
     "horizontal": {
-      "heading": "### 水平布局"
+      "heading": "### 水平布局",
+      "desc": "使用边距助手类，你可以轻松地水平居中内容。"
+    },
+    "negative-margin": {
+      "heading": "### 负边距",
+      "desc": "也可以在相同的 **1 到 12** 间隔内应用负边距。"
+    },
+    "breakpoint-md": {
+      "heading": "### 和断电一起",
+      "desc": "使用 `md` 和 `lg` 断点间距"
     }
   }
 }

@@ -1,37 +1,17 @@
 // Helpers
-import { wrapInArray, sortItems, deepEqual, groupByProperty, searchItems } from '../../util/helpers'
-import Vue, { VNode, PropType } from 'vue'
+import { wrapInArray, sortItems, deepEqual, groupItems, searchItems } from '../../util/helpers'
+import Vue, { VNode } from 'vue'
 
-export interface DataOptions {
-  page: number
-  itemsPerPage: number
-  sortBy: string[]
-  sortDesc: boolean[]
-  groupBy: string[]
-  groupDesc: boolean[]
-  multiSort: boolean
-  mustSort: boolean
-}
-
-export interface DataPagination {
-  page: number
-  itemsPerPage: number
-  pageStart: number
-  pageStop: number
-  pageCount: number
-  itemsLength: number
-}
-
-export interface DataProps {
-  originalItemsLength: number
-  items: any[]
-  pagination: DataPagination
-  options: DataOptions
-  updateOptions: (obj: any) => void
-  sort: (value: string) => void
-  group: (value: string) => void
-  groupedItems: Record<string, any[]> | null
-}
+// Types
+import {
+  DataOptions,
+  DataPagination,
+  DataScopeProps,
+  DataSortFunction,
+  DataGroupFunction,
+  DataSearchFunction,
+} from 'types'
+import { PropValidator, PropType } from 'vue/types/options'
 
 export default Vue.extend({
   name: 'v-data',
@@ -46,7 +26,7 @@ export default Vue.extend({
     options: {
       type: Object,
       default: () => ({}),
-    },
+    } as PropValidator<Partial<DataOptions>>,
     sortBy: {
       type: [String, Array] as PropType<string | string[]>,
       default: () => [],
@@ -56,7 +36,7 @@ export default Vue.extend({
       default: () => [],
     },
     customSort: {
-      type: Function as any as PropType<typeof sortItems>,
+      type: Function as PropType<DataSortFunction>,
       default: sortItems,
     },
     mustSort: Boolean,
@@ -77,6 +57,10 @@ export default Vue.extend({
       type: [Boolean, Array] as PropType<boolean | boolean[]>,
       default: () => [],
     },
+    customGroup: {
+      type: Function as PropType<DataGroupFunction>,
+      default: groupItems,
+    },
     locale: {
       type: String,
       default: 'en-US',
@@ -86,7 +70,7 @@ export default Vue.extend({
     disableFiltering: Boolean,
     search: String,
     customFilter: {
-      type: Function as any as PropType<typeof searchItems>,
+      type: Function as PropType<DataSearchFunction>,
       default: searchItems,
     },
     serverItemsLength: {
@@ -172,9 +156,9 @@ export default Vue.extend({
       return items
     },
     groupedItems (): Record<string, any[]> | null {
-      return this.isGrouped ? groupByProperty(this.computedItems, this.internalOptions.groupBy[0]) : null
+      return this.isGrouped ? this.groupItems(this.computedItems) : null
     },
-    scopedProps (): DataProps {
+    scopedProps (): DataScopeProps {
       const props = {
         sort: this.sort,
         sortArray: this.sortArray,
@@ -350,6 +334,9 @@ export default Vue.extend({
       const sortBy = this.internalOptions.groupBy.concat(this.internalOptions.sortBy)
       const sortDesc = this.internalOptions.groupDesc.concat(this.internalOptions.sortDesc)
       return this.customSort(items, sortBy, sortDesc, this.locale)
+    },
+    groupItems (items: any[]) {
+      return this.customGroup(items, this.internalOptions.groupBy, this.internalOptions.groupDesc)
     },
     paginateItems (items: any[]) {
       // Make sure we don't try to display non-existant page if items suddenly change

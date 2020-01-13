@@ -1,1 +1,5 @@
-{}
+{
+  "heading": "# 미리 만들어진 레이아웃",
+  "headingText": "Layout 시스템이야말로 모든 앱의 심장과 같습니다. 아래에 주어진 몇가지 예제를 통해 당신의 앱에 가장 적합한 Layout을 찾아보세요.",
+  "alert": "이 예제가 어떻게 구성되어있는지 더 자세한 정보를 알고 싶다면 [Application page](/components/application) 를 참고해 주세요."
+}

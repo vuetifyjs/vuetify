@@ -96,6 +96,40 @@ describe('VData.ts', () => {
     }))
   })
 
+  it('should group items with a custom group function', async () => {
+    const render = jest.fn()
+    const items = [
+      { id: 1, text: 'foo', value: 1 },
+      { id: 2, text: 'bar', value: 4 },
+      { id: 3, text: 'baz', value: 3 },
+    ]
+
+    const wrapper = mountFunction({
+      propsData: {
+        items,
+        groupBy: ['value'],
+        customGroup: function evenOddGrouper (items: any[], groupBy: string[]) {
+          const key = groupBy[0]
+          return items.reduce((rv, x) => {
+            const group = x[key] % 2 ? 'odd' : 'even';
+            (rv[group] = rv[group] || []).push(x)
+            return rv
+          }, {})
+        },
+      },
+      scopedSlots: {
+        default: render,
+      },
+    })
+
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
+      groupedItems: {
+        even: [items[1]],
+        odd: [items[0], items[2]],
+      },
+    }))
+  })
+
   it('should sort items', () => {
     const render = jest.fn()
 

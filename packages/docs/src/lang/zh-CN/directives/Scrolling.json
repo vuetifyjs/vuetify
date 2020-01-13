@@ -1,7 +1,19 @@
 {
+  "heading": "# 滚动指令",
+  "headingText": "`v-scroll` 指令允许你在窗口或者特定定义的元素滚动时提供回调。",
   "examples": {
+    "usage": {
+      "desc": "默认行为是绑定到窗口。如果不需要其他配置选项，则可以简单的传递回调函数。",
+      "uninverted": true
+    },
     "options": {
-      "desc": "为了更好地调整方法，您可以给指定目标绑定滚动事件监听器。"
+      "heading": "### 滚动选项",
+      "desc": "为了更好地调整方法，您可以给指定目标绑定滚动事件监听器。",
+      "uninverted": true
     }
+  },
+  "options": {
+    "arg:target": "`v-scroll:#target=\"callback\"\" 这个 target 监控滚动更改。默认值为窗口，但可以切换到任何有效的 id 选择器。",
+    "value": "`v-scroll=\"callback\"` 这个函数在目标滚动时调用"
   }
 }

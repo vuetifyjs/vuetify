@@ -1,1 +1,27 @@
-{}
+{
+  "heading": "# 骨架装载器",
+  "headingText": "`v-skeleton-loader` 组件是一种多功能工具，可以在项目中扮演许多角色。 从本质上讲，该组件向用户指示即将到来但尚不可用。 有 30 多个预定义选项可用，可以组合在一起以创建自定义示例。",
+  "accessibility": {
+    "desc": "默认情况下，`v-skeleton-loader` 组件被分配给了 [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) 角色 [**alert**](https://www.w3.org/TR/wai-aria/#alert)。我们用两个法属性来补充这个角色。[**aria-busy**](https://www.w3.org/TR/wai-aria-1.0/states_and_properties#aria-busy) 的值 **true** 表示小部件缺少所需属元素。[**aria-live**](https://www.w3.org/TR/wai-aria-1.1/#aria-live) 的值**polite** 设置屏幕读者对实时区域的优先级。"
+  },
+  "examples": {
+    "usage": {
+      "desc": "`v-skeleton-loader` 组件为用户提供了视觉指示，指示内容 即将到来/正在加载。 比传统的全屏加载器更好。"
+    },
+    "boilerplate": {
+      "heading": "### 样板组件",
+      "desc": "`v-skeleton-loader` 可以在创建模型时使用样板设计。 混合并匹配各种预定义选项，或创建自己的独特实现。 在此示例中，我们将 `v-skeleton-loader` 扩展到名为 `v-boilerplate` 的新组件中，以用作功能样板组件。"
+    },
+    "implementation": {
+      "heading": "### 实现方法",
+      "desc": "有两种方法可以使用 `v-skeleton-component`。**default slot** 或 **v-if** 条件。内建的插槽是最方便和最容易使用的，但是一旦渲染就会生成一个额外的 div。如果额外的 div 在您的设置中是一个问题，您可以使用一个 Vuetify [transition component](/styles/transitions) 或一个定制的 **v-if** 条件。"
+    }
+  },
+  "props": {
+    "boilerplate": "从骨架中移除加载动画",
+    "tile": "Components.Sheets.props.tile",
+    "loading": "将加载样式应用于悬停时的光标",
+    "type": "字符串分隔要创建的骨架组件列表，例如 `type=\"text@3\"` 和 `type=\"card, list-item\"`。将根据提供的字符串递归生成相应的框架。 还支持多个元素的简写，例如 **article@3** 和 **paragraph@2** ，它们将生成 3 _article_ skeletons and 2 _paragraph_ 骨架。 请参阅下面的可用预定义选项列表。",
+    "types": "将与预定义选项结合使用的自定义类型对象。 有关可用的预定义选项的列表，请参见 **type** 属性。"
+  }
+}

@@ -1,10 +1,8 @@
 {
   "heading": "# Combobox",
   "headingText": "The `v-combobox` component is a [v-autocomplete](/components/autocompletes) that allows the user to enter values that do not exist within the provided **items**. Created items will be returned as strings.",
+  "usageText": "With Combobox, you can allow a user to create new values that may not be present in a provided items list.",
   "examples": {
-    "usage": {
-      "desc": "With Combobox, you can allow a user to create new values that may not be present in a provided items list."
-    },
     "no-data": {
       "heading": "### No data with chips",
       "desc": "In this example we utilize a custom **no-data** slot to provide context to the user when searching / creating items."
@@ -24,29 +22,6 @@
   },
   "props": {
     "dark": "Components.Inputs.props.dark",
-    "delimiters": "Accepts an array of strings that will trigger a new tag when typing. Does not replace the normal Tab and Enter keys.",
-    "value": "Components.Inputs.props.value"
-  },
-  "slots": {
-    "append": "Components.Inputs.slots.append",
-    "append-outer": "Components.TextFields.slots.append-outer",
-    "item": "Components.Selects.slots.item",
-    "prepend": "Components.Inputs.slots.prepend",
-    "prepend-inner": "Components.TextFields.slots.prepend-inner",
-    "append-item": "Components.Selects.slots.append-item",
-    "no-data": "Mixins.Filterable.slots.noData",
-    "prepend-item": "Components.Selects.slots.prepend-item",
-    "selection": "Components.Selects.slots.selection"
-  },
-  "events": {
-    "change": "Components.Inputs.events.change",
-    "click:append": "Components.Inputs.events['click:append']",
-    "click:append-outer": "Components.TextFields.events['click:append-outer']",
-    "click:clear": "Components.TextFields.events['click:clear']",
-    "click:prepend": "Components.Inputs.events['click:prepend']",
-    "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
-    "update:error": "Mixins.Validatable.events['update:error']",
-    "update:list-index": "Components.Selects.events['update:list-index']",
-    "update:search-input": "The `search-input.sync` event"
+    "delimiters": "Accepts an array of strings that will trigger a new tag when typing. Does not replace the normal Tab and Enter keys."
   }
 }

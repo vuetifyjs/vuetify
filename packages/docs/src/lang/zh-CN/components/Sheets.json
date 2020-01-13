@@ -1,1 +1,25 @@
-{}
+{
+  "heading": "# 延展纸",
+  "headingText": "`v-sheet` 旨在为 Vuetify 中的其他 **paper** 组件提供支持。 它旨在用作低级组件。",
+  "examples": {
+    "usage": {
+      "desc": "`v-sheet` 组件是一张可塑的纸，可以变形以方便其他组件。"
+    },
+    "elevation": {
+      "heading": "### 使用海拔",
+      "desc": "延展纸可以接受 **0 到 24** 之间的自定义海拔（默认值为 0）。"
+    },
+    "tile": {
+      "heading": "### 平铺",
+      "desc": "延展纸可以接受将其设为矩形的 `tile` 属性（不包含 `border-radius`）。"
+    },
+    "colors-sizes": {
+      "heading": "### 颜色和大小",
+      "desc": "延展纸和组件的基础上，可以有不同的大小和颜色。"
+    }
+  },
+  "props": {
+    "tag": "指定在根元素上使用的自定义标签。",
+    "tile": "删除组件的 border-radius。"
+  }
+}

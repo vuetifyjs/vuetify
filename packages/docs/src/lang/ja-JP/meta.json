@@ -8,6 +8,24 @@
     "title": "おっと、404のようです。",
     "description": "おっと、あなたが探しているものはここにはないようです。"
   },
+  "introduction/why-vuetify": {
+    "title": "Vuetifyを選ぶ理由",
+    "description": "Vuetifyはとてもアクティブなコミュニティがあり、マテリアルデザインコンポーネントの簡単な使い方を提供しています。また、継続的にアップデートされています。"
+  },
+  "introduction/frequently-asked-questions": {
+    "title": "よくある質問（FAQ）",
+    "keywords": "よくある質問（FAQ）"
+  },
+  "introduction/long-term-support": {
+    "title": "LTSバージョン",
+    "keywords": "長期サポート (LTS)"
+  },
+  "introduction/meet-the-team": {
+    "title": "チーム紹介"
+  },
+  "introduction/sponsors-and-backers": {
+    "title": "スポンサーとバッカー"
+  },
   "getting-started/quick-start": {
     "title": "クイックスタート",
     "keywords": "quick start, vuetify templates, get started"
@@ -20,11 +38,30 @@
     "title": "ユニットテスト",
     "description": "あなたのVueアプリケーション内でVuetifyコンポーネントとvue-test-utilsを使ってユニットテストを書く方法を学ぶ。"
   },
-  "introduction/why-vuetify": {
-    "title": "Vuetifyを選ぶ理由",
-    "description": "Vuetifyはとてもアクティブなコミュニティがあり、マテリアルデザインコンポーネントの簡単な使い方を提供しています。また、それは継続的にアップデートされます。"
+  "getting-started/contributing": {
+    "title": "コントリビュートする",
+    "description": "オープンソースへのコントリビューションは、開発者が素晴らしいツールに無料でアクセスする助けとなります。Vietify フレームワークでの開発に協力する方法について学んでください。",
+    "keywords": "コントリビューションと機能のリクエスト"
+  },
+  "customization/accessibility": {
+    "title": "アクセシビリティ",
+    "description": "Vuetify のコンポーネントでアクセシビリティ (accessibility; a11y) をサポートする例と利点を見ましょう。",
+    "keywords": "a11y、アクセシビリティ、ユーザビリティ"
+  },
+  "customization/a-la-carte": {
+    "title": "アラカルト (treeshaking)",
+    "description": "アラカルトでは、vuetify-loader を用いた自動的な treeshaking の説明をします。アプリケーションが必要とする機能のみを使用することで、パッケージバンドルサイズを劇的に削減することができます。",
+    "keywords": "アラカルト、vuetify single import、vuetify import、コンポーネント import、vuetify のサイズ削減"
+  },
+  "customization/icons": {
+    "title": "アイコン"
+  },
+  "customization/internationalization": {
+    "title": "国際化 (i18n)"
   },
   "customization/theme": {
-    "description": "Setup your custom application theme by changing a few variables."
+    "title": "テーマ",
+    "description": "Setup your custom application theme by changing a few variables.",
+    "keywords": "テーマ"
   }
 }

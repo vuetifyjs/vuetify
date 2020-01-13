@@ -1,4 +1,5 @@
 export default {
+  badge: 'Odznaka',
   close: 'Zamknij',
   dataIterator: {
     noResultsText: 'Nie znaleziono danych odpowiadających wyszukiwaniu',

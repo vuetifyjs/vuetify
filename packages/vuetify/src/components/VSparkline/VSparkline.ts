@@ -12,7 +12,7 @@ import { genPath } from './helpers/path'
 
 // Types
 import Vue, { VNode } from 'vue'
-import { Prop, PropValidator } from 'vue/types/options'
+import { Prop } from 'vue/types/options'
 
 export type SparklineItem = number | { value: number }
 
@@ -39,12 +39,6 @@ export interface Bar {
   y: number
   height: number
   value: number
-}
-
-export interface BarText {
-  points: Point[]
-  boundary: Boundary
-  offsetX: number
 }
 
 interface options extends Vue {
@@ -125,10 +119,10 @@ export default mixins<options &
       default: false,
     },
     type: {
-      type: String,
+      type: String as Prop<'trend' | 'bar'>,
       default: 'trend',
       validator: (val: string) => ['trend', 'bar'].includes(val),
-    } as PropValidator<'trend' | 'bar'>,
+    },
     value: {
       type: Array as Prop<SparklineItem[]>,
       default: () => ([]),

@@ -1,4 +1,6 @@
 {
+  "heading": "# Faites partie de quelque chose de plus grand !",
+  "headingText": "Vuetify est rendu possible par une communauté extraordinaire qui soumet des tickets, crée des demandes de fusion et fournit des commentaires précieux. Notre travail consiste à vous permettre de créer des applications étonnantes. Souvent, vous rencontrez quelque chose qui peut être amélioré. Peut-être trouvez-vous un bug ou avez-vous une idée de fonctionnalités supplémentaires ? C'est génial ! Il suffit de cloner le projet Vuetify pour commencer à travailler dans un environnement de développement.",
   "issueHeader": "## Signaler des problèmes",
   "issue1": "La liste des tickets de ce projet est exclusivement destinée aux rapports de bugs et aux demandes de fonctionnalités. Les tickets non conformes seront fermés immédiatement.",
   "issue2": "Pour des questions générales, veuillez rejoindre la [community](https://chat.vuetifyjs.com).",

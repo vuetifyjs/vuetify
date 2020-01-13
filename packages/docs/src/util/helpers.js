@@ -33,6 +33,7 @@ export function getComponent (type) {
     case 'usage': return 'doc-usage'
     case 'usage-new': return 'doc-usage-new'
     case 'locales': return 'doc-locales'
+    case 'variable-api': return 'doc-variable-api'
     default: return type
   }
 }

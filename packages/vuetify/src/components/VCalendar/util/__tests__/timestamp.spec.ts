@@ -170,12 +170,12 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
   })
 
   it('should parse timestamp and update relative flags', () => {
-    expect(parseTimestamp('2019-01-03', parseTimestamp('2019-02-08'))).toMatchObject({
+    expect(parseTimestamp('2019-01-03', true, parseTimestamp('2019-02-08'))).toMatchObject({
       past: true,
       present: false,
       future: false,
     })
-    expect(parseTimestamp('2019-01-03 07:00', parseTimestamp('2019-01-03 07:00'))).toMatchObject({
+    expect(parseTimestamp('2019-01-03 07:00', true, parseTimestamp('2019-01-03 07:00'))).toMatchObject({
       past: false,
       present: true,
       future: false,

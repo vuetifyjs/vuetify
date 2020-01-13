@@ -1,7 +1,11 @@
 {
   "examples": {
+    "usage": {
+      "uninverted": true
+    },
     "options": {
-      "desc": "더 자세한 설정을 위해서, 타겟을 스크롤 이벤트 리스너와 연결할 수 있습니다."
+      "desc": "더 자세한 설정을 위해서, 타겟을 스크롤 이벤트 리스너와 연결할 수 있습니다.",
+      "uninverted": true
     }
   },
   "options": {

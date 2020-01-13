@@ -20,7 +20,7 @@ import { breaking } from '../../util/console'
 
 // Types
 import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { PropValidator, PropType } from 'vue/types/options'
 import { RippleOptions } from '../../directives/ripple'
 
 const baseMixins = mixins(
@@ -65,7 +65,7 @@ export default baseMixins.extend<options>().extend({
       type: String,
       default: 'button',
     },
-    value: null as any as PropValidator<any>,
+    value: null as any as PropType<any>,
   },
 
   data: () => ({

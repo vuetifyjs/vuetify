@@ -1,11 +1,44 @@
 {
+  "heading": "# 按钮组",
+  "headingText": "`v-btn-toggle` 组件是专门针对 `v-btn` 构建的 `v-item-group` 的简单包装器。",
   "examples": {
+    "usage": {
+      "desc": "切换按钮允许您创建一个样式化的按钮组，可以在单个 `v-model` 下选择或切换"
+    },
+    "app-bar": {
+      "heading": "### 在工具栏中",
+      "desc": "与 `v-toolbar` 轻松集成自定义按钮"
+    },
+    "qwerty": {
+      "heading": "### 选中的操作",
+      "desc": "对类似的操作进行分组，并设计自己的 WYSIWYG 组件。"
+    },
+    "rounded": {
+      "heading": "### 圆角按钮",
+      "desc": "你能够使用 `rounded` 属性让 `VBtnToggle` 变成圆角。"
+    },
+    "mandatory": {
+      "heading": "### 必填项",
+      "desc": "`mandatory` `VBtnToggle` 总是要有值"
+    },
     "multiple": {
-      "heading": "多选"
+      "heading": "### 多选",
+      "desc": "`multiple` `VBtnToggle` 允许用户选择多个变量并返回数组值。"
     }
   },
+  "api": {
+    "v-btn": "Components.Buttons"
+  },
   "props": {
-    "backgroundColor": "更改组件的背景颜色。"
+    "activeClass": "Mixins.BaseItemGroup.props.activeClass",
+    "backgroundColor": "更改组件的背景颜色。",
+    "borderless": "移除按钮组的边框。",
+    "dense": "减少按钮大小和间距。",
+    "group": "通常用于 [v-toolbar](/components/toolbars) 和 [v-app-bar](/components/app-bars)。删除背景颜色、边框并增加按钮的间距",
+    "mandatory": "Mixins.BaseItemGroup.props.mandatory",
+    "multiple": "Mixins.BaseItemGroup.props.multiple",
+    "rounded": "在边缘上的圆角按钮",
+    "shaped": "在卡片的左上角和右下角应用一个较大的边框半径。"
   },
   "events": {
     "change": "Components.Inputs.events.change"

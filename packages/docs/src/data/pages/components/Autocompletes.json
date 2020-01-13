@@ -11,13 +11,31 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "usage"
+          "type": "usage-new",
+          "value": {
+            "selects": [
+              {
+                "prop": "filter",
+                "label": "Filter",
+                "attrs": {
+                  "items": [
+                    "Exact Match",
+                    "Search Length > 2 & Loose Match"
+                  ]
+                }
+              }
+            ]
+          }
         },
         {
           "type": "alert",
           "lang": "Components.Selects.objectAlert",
           "value": "error"
+        },
+        {
+          "type": "alert",
+          "lang": "Components.Selects.autocompleteAlert",
+          "value": "info"
         }
       ]
     },
@@ -27,20 +45,6 @@
         {
           "type": "api",
           "value": [ "v-autocomplete" ]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "playground",
-          "value": "playground"
-        },
-        {
-          "type": "alert",
-          "lang": "Components.Selects.autocompleteAlert",
-          "value": "info"
         }
       ]
     },
