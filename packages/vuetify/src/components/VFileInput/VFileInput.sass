@@ -8,6 +8,13 @@
     &--placeholder
       color: map-deep-get($material, 'text', 'secondary')
 
+  &.v-input--is-disabled
+    .v-file-input__text
+      color: map-deep-get($material, 'text', 'disabled')
+
+      .v-file-input__text--placeholder
+        color: map-deep-get($material, 'text', 'disabled')
+
 // Block
 .v-file-input
   input[type="file"]

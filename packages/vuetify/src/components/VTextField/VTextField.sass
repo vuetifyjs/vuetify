@@ -2,60 +2,50 @@
 @import './_variables.scss'
 
 +theme(v-text-field) using ($material)
-  & > .v-input__control > .v-input__slot:before
-    border-color: map-get($material, 'input-bottom-line')
+  border-color: map-get($material, 'input-bottom-line')
 
-  &:not(.v-input--has-state) > .v-input__control > .v-input__slot:hover:before
+  &:not(.v-input--has-state):hover
     border-color: map-deep-get($material, 'text', 'primary')
 
-  &.v-input--is-disabled > .v-input__control > .v-input__slot:before
+  &.v-input--is-disabled .v-input__slot::before
     border-image: repeating-linear-gradient(to right, #{map-deep-get($material, 'text', 'disabled')} 0px, #{map-deep-get($material, 'text', 'disabled')} 2px, transparent 2px, transparent 4px) 1 repeat
 
-  &.v-input--is-disabled
-    .v-text-field__prefix,
-    .v-text-field__suffix
-      color: map-deep-get($material, 'text', 'disabled')
-
-  &__prefix,
-  &__suffix
-    color: map-deep-get($material, 'text', 'secondary')
-
-  &--solo > .v-input__control > .v-input__slot
-    background: map-get($material, 'cards')
-
-  &--solo-inverted.v-text-field--solo
-    & > .v-input__control > .v-input__slot
-      background: map-deep-get($material, 'inputs', 'solo-inverted')
-
-    &.v-input--is-focused > .v-input__control > .v-input__slot
-      background: map-deep-get($material, 'inputs', 'solo-inverted-focused')
-
-      .v-label,
-      input
-          color: map-deep-get($material, 'inputs', 'solo-inverted-focused-text')
-
   &--filled
-    & > .v-input__control > .v-input__slot
+    > .v-input__control > .v-input__slot
       background: map-deep-get($material, 'text-fields', 'filled')
 
-    .v-text-field__prefix,
-    .v-text-field__suffix
-      max-height: 32px
-      margin-top: 20px
+    &:not(.v-input--is-focused):not(.v-input--has-state)
+      > .v-input__control > .v-input__slot:hover
+        background: map-deep-get($material, 'text-fields', 'filled-hover')
 
-    &:not(.v-input--is-focused) > .v-input__control > .v-input__slot:hover
-      background: map-deep-get($material, 'text-fields', 'filled-hover')
+  &--solo
+    > .v-input__control > .v-input__slot
+      background: map-get($material, 'cards')
+
+  &--solo-inverted
+    > .v-input__control > .v-input__slot
+      background: map-deep-get($material, 'inputs', 'solo-inverted')
+
+    &.v-input--is-focused
+      > .v-input__control > .v-input__slot
+        background: map-deep-get($material, 'inputs', 'solo-inverted-focused')
+
+        .v-label,
+        input
+          color: map-deep-get($material, 'inputs', 'solo-inverted-focused-text')
 
   &--outlined
-    fieldset
-      border-color: map-deep-get($material, 'text-fields', 'outlined')
+    &:not(.v-input--is-focused)
+      &:not(.v-input--has-state)
+        > .v-input__control > .v-input__slot fieldset
+          color: map-deep-get($material, 'text-fields', 'outlined')
 
-    &:not(.v-input--is-focused):not(.v-input--has-state) > .v-input__control > .v-input__slot:hover
-      fieldset
-        border-color: map-deep-get($material, 'text-fields', 'outlined-hover')
+        > .v-input__control > .v-input__slot:hover fieldset
+          color: map-deep-get($material, 'text-fields', 'outlined-hover')
 
-    &.v-input--is-disabled fieldset
-      border-color: map-deep-get($material, 'text-fields', 'outlined-disabled')
+      &.v-input--is-disabled
+        > .v-input__control > .v-input__slot fieldset
+          color: map-deep-get($material, 'text-fields', 'outlined-disabled')
 
 .v-text-field
   padding-top: $text-field-active-label-height
@@ -72,7 +62,21 @@
   fieldset,
   .v-input__control,
   .v-input__slot
+    border-color: inherit
     border-radius: inherit
+
+  fieldset,
+  .v-input__control
+    color: inherit
+
+  &.v-input--has-state
+    .v-input__control > .v-text-field__details > .v-counter
+      color: inherit
+
+  &.v-input--is-disabled
+    .v-input__control > .v-text-field__details > .v-counter,
+    .v-input__control > .v-text-field__details > .v-messages
+      color: inherit
 
   &.v-input--dense
     padding-top: 0
@@ -151,6 +155,7 @@
       width: 100%
 
     &:before
+      border-color: inherit
       border-style: solid
       border-width: thin 0 0 0
 
@@ -290,6 +295,11 @@
         input
           margin-top: 0
 
+    .v-text-field__prefix,
+    .v-text-field__suffix
+      max-height: 32px
+      margin-top: 20px
+
   &--full-width
     border-radius: 0
 
@@ -359,6 +369,7 @@
       +label-position($text-field-outlined-dense-label-position-x, $text-field-outlined-dense-label-position-y)
 
     fieldset
+      border-color: currentColor
       border-style: solid
       border-width: $text-field-outlined-fieldset-border-width
       bottom: 0
@@ -368,7 +379,7 @@
       right: 0
       top: $text-field-outlined-fieldset-top
       transition-duration: 0.3s
-      transition-property: border, border-width
+      transition-property: color, border-width
       transition-timing-function: map-get($transition, 'fast-in-fast-out')
 
       +ltr()

@@ -2,20 +2,21 @@
 
 /* Theme */
 +theme(v-input) using ($material)
-  &:not(.v-input--is-disabled)
-    input,
-    textarea
-      color: map-deep-get($material, 'text', 'primary')
+  color: map-deep-get($material, 'text', 'primary')
 
+  input,
+  textarea,
   input::placeholder,
   textarea::placeholder
-    color: map-deep-get($material, 'text', 'disabled')
+    color: map-deep-get($material, 'text', 'primary')
 
   &--is-disabled
-    .v-label,
-    .v-messages,
+    color: map-deep-get($material, 'text', 'disabled')
+
     input,
-    textarea
+    textarea,
+    input::placeholder,
+    textarea::placeholder
       color: map-deep-get($material, 'text', 'disabled')
 
 .v-input
