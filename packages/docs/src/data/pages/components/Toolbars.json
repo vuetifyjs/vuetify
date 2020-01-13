@@ -11,8 +11,51 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "usage"
+          "type": "usage-new",
+          "value": {
+            "booleans": [
+              "image",
+              "collapse",
+              "dense",
+              "extended",
+              "flat",
+              "prominent",
+              "short"
+            ],
+            "sliders": [
+              "elevation",
+              {
+                "prop": "height",
+                "attrs": {
+                  "min": 0,
+                  "max": 250
+                }
+              },
+              {
+                "prop": "extension-height",
+                "attrs": {
+                  "min": 0,
+                  "max": 350
+                }
+              }
+            ],
+            "selects": [
+              {
+                "prop": "color",
+                "label": "Color",
+                "attrs": {
+                  "items": [
+                    "primary",
+                    "orange",
+                    "yellow",
+                    "green",
+                    "blue",
+                    "purple"
+                  ]
+                }
+              }
+            ]
+          }
         },
         {
           "type": "alert",

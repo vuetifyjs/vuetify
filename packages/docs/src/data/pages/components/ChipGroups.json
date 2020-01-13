@@ -11,8 +11,14 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "usage"
+          "type": "usage-new",
+          "value": {
+            "booleans": [
+              "column",
+              "mandatory",
+              "multiple"
+            ]
+          }
         }
       ]
     },
@@ -25,15 +31,6 @@
             "v-chip-group",
             "v-chip"
           ]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "playground",
-          "value": "playground"
         }
       ]
     },

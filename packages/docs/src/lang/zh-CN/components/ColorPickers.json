@@ -1,1 +1,46 @@
-{}
+{
+  "heading": "# 取色器",
+  "headingText": "`v-color-picker` 允许您使用各种输入方法选择颜色。",
+  "examples": {
+    "model": {
+      "heading": "### 模型",
+      "desc": "`v-color-picker` 使用 `v-model` 属性来控制显示的颜色。它支持十六进制字符串，如 **#FF00FF** 和 **#FF00FF00**，对象代表 **RGBA**， **HSLA** 和 **HSVA** 值。"
+    },
+    "swatches": {
+      "heading": "### 色板",
+      "desc": "使用 `show-swatches` 属性，您可以显示用户可以选择的一系列色样。 也可以使用 `swatches` 属性自定义显示什么颜色。 该属性接受二维数组，其中第一维定义一列，第二维通过提供 rgba hex 字符串从上到下定义色板。 您还可以使用 `swatches-max-height` 属性设置色板部分的最大高度。"
+    },
+    "inputs": {
+      "heading": "### 输入",
+      "desc": "数字输入可以用 `hide-inputs` 属性隐藏。你也可以用 `hide-mode-switch` 属性隐藏模式切换图标。模式也可以通过 `mode` 属性进行外部控制。"
+    },
+    "canvas": {
+      "heading": "### 画布",
+      "desc": "可以使用 `hide-canvas` 属性隐藏画布，并且可以使用 `canvas-height` 属性设置画布的高度。 选择点的大小可以通过 `dot-size` 属性来控制。"
+    }
+  },
+  "props": {
+    "v-color-picker": {
+      "canvasHeight": "画布高度",
+      "disabled": "禁用选择器",
+      "dotSize": "更改画布上选择点的大小",
+      "flat": "移除海拔",
+      "hideCanvas": "隐藏画布",
+      "hideInputs": "隐藏输入",
+      "hideModeSwitch": "隐藏模式开关",
+      "mode": "设置输入模式。可用的模式有 'rgba', 'hsla', 和 'hexa'。可以与 `.sync` 的修饰符同步使用。",
+      "showSwatches": "显示色板",
+      "swatches": "设置可供选择的颜色样本 - 此属性仅接受 rgba hex 字符串",
+      "swatchesMaxHeight": "设置色板部分的最大高度",
+      "value": "当前的颜色。可以是表示十六进制颜色的字符串，也可以是表示 RGBA、HSLA 或 HSVA 值的对象",
+      "width": "设置取色器的宽度"
+    }
+  },
+  "events": {
+    "v-color-picker": {
+      "input": "选定的颜色。 根据您传递给 `value` 属性的内容，它可以是字符串或对象",
+      "update:color": "选定的颜色。 这是颜色的内部表示，包含所有值。",
+      "update:mode": "选择模式"
+    }
+  }
+}

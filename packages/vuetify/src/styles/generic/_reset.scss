@@ -143,7 +143,7 @@
   button,
   [type="button"],
   [type="reset"],
-  [type="submit"]
+  [type="submit"],
   [role="button"] {
     cursor: pointer;
   }
@@ -197,7 +197,6 @@
   }
 
   /* Replace focus style removed in the border reset above */
-  button:-moz-focusring,
   [type="button"]::-moz-focus-inner,
   [type="reset"]::-moz-focus-inner,
   [type="submit"]::-moz-focus-inner {

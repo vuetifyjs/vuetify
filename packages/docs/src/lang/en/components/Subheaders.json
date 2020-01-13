@@ -1,24 +1,24 @@
 {
-  "header": "# Subheaders",
-  "headerText": "The `v-subheader` component is used to separate sections of lists.",
+  "heading": "# Subheaders",
+  "headingText": "The `v-subheader` component is used to separate sections of lists.",
   "examples": {
     "usage": {
       "desc": "Subheaders in their simplest form display a subheading with default theme."
     },
     "inset": {
-      "header": "### Inset subheaders",
+      "heading": "### Inset subheaders",
       "desc": "Inset subheaders are moved 72px to the right. This gives you the option to line them up with list items and inset dividers."
     },
     "grid": {
-      "header": "### Grid subheaders",
+      "heading": "### Grid subheaders",
       "desc": "A subheader can add context to what a user is looking at."
     },
     "menu": {
-      "header": "### Menu subheaders",
+      "heading": "### Menu subheaders",
       "desc": "Using a subheader can help separate different types of actions."
     },
     "social": {
-      "header": "### Subheaders with social media",
+      "heading": "### Subheaders with social media",
       "desc": "Using a subheader with social media interaction."
     }
   },

@@ -11,7 +11,7 @@ import { VChip } from '../VChip'
 import { PropValidator } from 'vue/types/options'
 
 // Utilities
-import { humanReadableFileSize, wrapInArray } from '../../util/helpers'
+import { deepEqual, humanReadableFileSize, wrapInArray } from '../../util/helpers'
 import { consoleError } from '../../util/console'
 
 export default VTextField.extend({
@@ -39,7 +39,7 @@ export default VTextField.extend({
     placeholder: String,
     prependIcon: {
       type: String,
-      default: '$vuetify.icons.file',
+      default: '$file',
     },
     readonly: {
       type: Boolean,
@@ -79,7 +79,7 @@ export default VTextField.extend({
         'v-file-input': true,
       }
     },
-    counterValue (): string {
+    computedCounterValue (): string {
       const fileCount = (this.isMultiple && this.lazyValue)
         ? this.lazyValue.length
         : (this.lazyValue instanceof File) ? 1 : 0
@@ -141,6 +141,17 @@ export default VTextField.extend({
       },
       immediate: true,
     },
+    value (v) {
+      const value = this.isMultiple ? v : v ? [v] : []
+      if (!deepEqual(value, this.$refs.input.files)) {
+        // When the input value is changed programatically, clear the
+        // internal input's value so that the `onInput` handler
+        // can be triggered again if the user re-selects the exact
+        // same file(s). Ideally, `input.files` should be
+        // manipulated directly but that property is readonly.
+        this.$refs.input.value = ''
+      }
+    },
   },
 
   methods: {
@@ -192,7 +203,7 @@ export default VTextField.extend({
       const length = this.text.length
 
       if (length < 2) return this.text
-      if (this.showSize && !this.counter) return [this.counterValue]
+      if (this.showSize && !this.counter) return [this.computedCounterValue]
       return [this.$vuetify.lang.t(this.counterString, length)]
     },
     genSelections () {
@@ -240,7 +251,8 @@ export default VTextField.extend({
     },
     truncateText (str: string) {
       if (str.length < Number(this.truncateLength)) return str
-      return `${str.slice(0, 10)}…${str.slice(-10)}`
+      const charsKeepOneSide = Math.floor((Number(this.truncateLength) - 1) / 2)
+      return `${str.slice(0, charsKeepOneSide)}…${str.slice(str.length - charsKeepOneSide)}`
     },
   },
 })

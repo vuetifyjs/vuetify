@@ -1,16 +1,15 @@
 {
   "examples": {
-    "right": {
-      "header": "### 右寄せタブ"
-    },
-    "pagination": {
-      "header": "### ページネーション"
+    "overflow-to-menu": {
+      "heading": "### メニュー付き"
     },
     "icons": {
-      "header": "### カスタムアイコン"
+      "heading": "### カスタムアイコン"
     }
   },
   "props": {
+    "dark": "Mixins.Themeable.props.dark",
+    "light": "Mixins.Themeable.props.light",
     "reverseTransition": "戻す際のトランジションを設定します。"
   }
 }

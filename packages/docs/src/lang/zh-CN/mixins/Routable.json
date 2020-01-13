@@ -1,1 +1,17 @@
-{}
+{
+  "props": {
+    "activeClass": "配置在链接激活时应用的 CSS 类。你能够在 vue-router 文档浏览更多 [**active-class** prop](https://router.vuejs.org/api/#active-class)。",
+    "append": "设置 **append** 属性总是会附加到当前路径的相对路径上。你能够在 vue-router 文档浏览更多 [**append** prop](https://router.vuejs.org/api/#append)。",
+    "disabled": "移除组件的单击或 target 功能。",
+    "exact": "完全匹配链接。如果没有这个链接，'/' 将匹配每个路由。你能够在 vue-router 文档浏览更多 [**exact** prop](https://router.vuejs.org/api/#exact)。",
+    "exactActiveClass": "配置在精准链接激活时应用的 CSS 类。你能够在 vue-router 文档浏览更多[**exact-active-class** prop](https://router.vuejs.org/api/#exact-active-class)。",
+    "href": "指定组件为锚点并应用 **href** 属性。",
+    "link": "指定组件为链接。当使用 **href** 或 **to ** 属性时，这是自动的设置的。",
+    "nuxt": "指定链接是 `nuxt-link` 。用处参考 [nuxt framework](https://nuxtjs.org/api/components-nuxt-link/).",
+    "replace": "设置 **replace** 属性会在点击时调用 `router.replace()` 而不是 `router.push()`，这样导航就不会留下历史记录。您可以在 vue-router 文档中浏览更多 [**replace** prop](https://router.vuejs.org/api/#replace)。",
+    "ripple": "Mixins.Rippleable.props.ripple",
+    "to": "表示链接的目标路由。你可以在 vue-router 文档浏览更多 [**to** prop](https://router.vuejs.org/api/#to)。",
+    "tag": "Components.Sheets.props.tag",
+    "target": "指定 target 属性。只在使用 **href** 属性时应用。"
+  }
+}

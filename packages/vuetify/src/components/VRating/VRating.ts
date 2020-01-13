@@ -51,15 +51,15 @@ export default mixins(
     dense: Boolean,
     emptyIcon: {
       type: String,
-      default: '$vuetify.icons.ratingEmpty',
+      default: '$ratingEmpty',
     },
     fullIcon: {
       type: String,
-      default: '$vuetify.icons.ratingFull',
+      default: '$ratingFull',
     },
     halfIcon: {
       type: String,
-      default: '$vuetify.icons.ratingHalf',
+      default: '$ratingHalf',
     },
     halfIncrements: Boolean,
     hover: Boolean,
@@ -94,22 +94,24 @@ export default mixins(
     iconProps (): object {
       const {
         dark,
-        medium,
         large,
         light,
+        medium,
         small,
         size,
         xLarge,
+        xSmall,
       } = this.$props
 
       return {
         dark,
-        medium,
         large,
         light,
+        medium,
         size,
         small,
         xLarge,
+        xSmall,
       }
     },
     isHovering (): boolean {
@@ -157,7 +159,14 @@ export default mixins(
     },
     genHoverIndex (e: MouseEvent, i: number) {
       let isHalf = this.isHalfEvent(e)
-      if (this.$vuetify.rtl) isHalf = !isHalf
+
+      if (
+        this.halfIncrements &&
+        this.$vuetify.rtl
+      ) {
+        isHalf = !isHalf
+      }
+
       return i + (isHalf ? 0.5 : 1)
     },
     getIconName (props: ItemSlotProps): string {

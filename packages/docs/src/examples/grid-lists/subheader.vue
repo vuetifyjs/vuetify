@@ -7,7 +7,7 @@
             <v-icon>mdi-arrow-left</v-icon>
           </v-btn>
           <v-toolbar-title>Albums</v-toolbar-title>
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
           <v-btn icon>
             <v-icon>mdi-magnify</v-icon>
           </v-btn>

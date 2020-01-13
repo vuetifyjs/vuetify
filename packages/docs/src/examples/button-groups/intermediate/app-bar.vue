@@ -21,10 +21,13 @@
 
       <v-divider vertical></v-divider>
 
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
 
       <v-btn-toggle
         v-model="toggle_multiple"
+        color="primary"
+        dense
+        group
         multiple
       >
         <v-btn :value="1" text>
@@ -46,7 +49,12 @@
 
       <div class="mx-4"></div>
 
-      <v-btn-toggle v-model="toggle_exclusive">
+      <v-btn-toggle
+        v-model="toggle_exclusive"
+        color="primary"
+        dense
+        group
+      >
         <v-btn :value="1" text>
           <v-icon>mdi-format-align-left</v-icon>
         </v-btn>

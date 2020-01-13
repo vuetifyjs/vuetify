@@ -1,15 +1,10 @@
 {
-  "headerText": "`v-icon` 컴포넌트는 다양한 상황에서 쓸 수 있는 많은 glyphs(그림문자)를 제공합니다.  Vuetify 아이콘들은 구글의 머티리얼 아이콘 폰트 라이브러리를 사용합니다. 사용가능한 모든 아이콘의 리스트를 보려면 공식 [머티리얼 아이콘](https://material.io/icons/) 페이지를 방문하세요.",
   "examples": {
-    "font-awesome": {
-      "header": "폰트어썸 (Font Awesome)"
-    },
     "color": {
-      "header": "색상 Color",
+      "heading": "색상 Color",
       "desc": "색상 헬퍼들을 이용하여 아이콘의 색을 기본적인 다크나 라이트 테마 이상으로 바꿀 수 있습니다."
     },
     "buttons": {
-      "header": "버튼 (Buttons)",
       "desc": "아이콘은 액션을 강조하기 위해 버튼 안에서도 사용될 수 있습니다."
     }
   },

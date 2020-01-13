@@ -7,18 +7,19 @@
     "hooks": {
       "prepare-commit-msg": "node scripts/prepare-commit-message.js",
       "commit-msg": "node scripts/lint-commit-message.js",
-      "pre-commit": "node scripts/warn-npm-install.js && yarn run lint && yarn lerna run test -- -- -o"
+      "pre-commit": "node scripts/warn-npm-install.js && yarn run lint && yarn lerna run test"
     }
   },
   "scripts": {
     "dev": "node scripts/dev.js",
     "build": "node scripts/build.js",
     "start": "lerna run start --scope vuetifyjs.com --stream",
-    "lint": "lerna run lint --parallel",
+    "lint": "lerna run lint --parallel --stream",
     "lint:fix": "lerna run lint:fix --parallel",
     "version": "node scripts/confirm-npm-tag.js",
-    "postinstall": "node scripts/post-install.js",
-    "postversion": "node scripts/post-release-merge.js"
+    "prepare": "node scripts/post-install.js",
+    "postversion": "node scripts/post-release-merge.js",
+    "clean": "lerna clean"
   },
   "engines": {
     "node": ">= 10",

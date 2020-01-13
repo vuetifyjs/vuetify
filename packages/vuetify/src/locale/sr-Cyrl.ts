@@ -1,7 +1,7 @@
 export default {
+  badge: 'Значка',
   close: 'Close',
   dataIterator: {
-    pageText: '{0}-{1} од {2}',
     noResultsText: 'Ни један запис није пронађен',
     loadingText: 'Loading item...',
   },
@@ -21,6 +21,7 @@ export default {
     prevPage: 'Претходна страница',
     firstPage: 'Прва страница',
     lastPage: 'Последња страница',
+    pageText: '{0}-{1} од {2}',
   },
   datePicker: {
     itemsSelected: '{0} одабрано',
@@ -29,6 +30,9 @@ export default {
   carousel: {
     prev: 'Превиоус висуал',
     next: 'Нект висуал',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: '{0} море',
@@ -36,5 +40,9 @@ export default {
   fileInput: {
     counter: '{0} files',
     counterSize: '{0} files ({1} in total)',
+  },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
   },
 }

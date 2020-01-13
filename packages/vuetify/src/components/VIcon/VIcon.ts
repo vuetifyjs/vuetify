@@ -1,10 +1,14 @@
 import './VIcon.sass'
+
 // Mixins
+import BindsAttrs from '../../mixins/binds-attrs'
 import Colorable from '../../mixins/colorable'
 import Sizeable from '../../mixins/sizeable'
 import Themeable from '../../mixins/themeable'
+
 // Util
 import { convertToUnit, keys, remapInternalIcon } from '../../util/helpers'
+
 // Types
 import Vue, { CreateElement, VNode, VNodeChildren, VNodeData } from 'vue'
 import mixins from '../../util/mixins'
@@ -20,7 +24,7 @@ enum SIZE_MAP {
 }
 
 function isFontAwesome5 (iconType: string): boolean {
-  return ['fas', 'far', 'fal', 'fab'].some(val => iconType.includes(val))
+  return ['fas', 'far', 'fal', 'fab', 'fad'].some(val => iconType.includes(val))
 }
 
 function isSvgPath (icon: string): boolean {
@@ -28,6 +32,7 @@ function isSvgPath (icon: string): boolean {
 }
 
 const VIcon = mixins(
+  BindsAttrs,
   Colorable,
   Sizeable,
   Themeable
@@ -79,7 +84,7 @@ const VIcon = mixins(
     // Component data for both font and svg icon.
     getDefaultData (): VNodeData {
       const hasClickListener = Boolean(
-        this.$listeners.click || this.$listeners['!click']
+        this.listeners$.click || this.listeners$['!click']
       )
       const data: VNodeData = {
         staticClass: 'v-icon notranslate',
@@ -93,9 +98,9 @@ const VIcon = mixins(
         attrs: {
           'aria-hidden': !hasClickListener,
           role: hasClickListener ? 'button' : null,
-          ...this.$attrs,
+          ...this.attrs$,
         },
-        on: this.$listeners,
+        on: this.listeners$,
       }
 
       return data
@@ -133,38 +138,38 @@ const VIcon = mixins(
       return h(this.tag, data, newChildren)
     },
     renderSvgIcon (icon: string, h: CreateElement): VNode {
-      const data = this.getDefaultData()
-      data.class['v-icon--svg'] = true
-
-      data.attrs = {
-        xmlns: 'http://www.w3.org/2000/svg',
-        viewBox: '0 0 24 24',
-        height: '24',
-        width: '24',
-        role: 'img',
-        'aria-hidden': !this.$attrs['aria-label'],
-        'aria-label': this.$attrs['aria-label'],
-      }
-
       const fontSize = this.getSize()
-      if (fontSize) {
-        data.style = {
+      const wrapperData = {
+        ...this.getDefaultData(),
+        style: fontSize ? {
           fontSize,
           height: fontSize,
           width: fontSize,
-        }
-        data.attrs.height = fontSize
-        data.attrs.width = fontSize
+        } : undefined,
+      }
+      wrapperData.class['v-icon--svg'] = true
+      this.applyColors(wrapperData)
+
+      const svgData: VNodeData = {
+        attrs: {
+          xmlns: 'http://www.w3.org/2000/svg',
+          viewBox: '0 0 24 24',
+          height: fontSize || '32',
+          width: fontSize || '32',
+          role: 'img',
+          'aria-hidden': !this.attrs$['aria-label'],
+          'aria-label': this.attrs$['aria-label'],
+        },
       }
 
-      this.applyColors(data)
-
-      return h('svg', data, [
-        h('path', {
-          attrs: {
-            d: icon,
-          },
-        }),
+      return h('span', wrapperData, [
+        h('svg', svgData, [
+          h('path', {
+            attrs: {
+              d: icon,
+            },
+          }),
+        ]),
       ])
     },
     renderSvgIconComponent (

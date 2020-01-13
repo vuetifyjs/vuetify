@@ -1,1 +1,42 @@
-{}
+{
+  "heading": "# 横幅",
+  "headingText": "`v-banner` 组件用于通过 1-2 个操作向用户发送中级中断消息。它有两个变量，**single-line** 和 **multi-line**。这些变量在和你的消息和动作一起使用时包含图标。",
+  "examples": {
+    "usage": {
+      "desc": "横幅可以有 1-2 行文本、动作和图标。"
+    },
+    "single-line": {
+      "heading": "### 单行（桌面端）",
+      "desc": "**Single-line** VBanner 用于少量信息，推荐仅在桌面分辨率下实现。你可以启用 **sticky** 属性来保证内容被固定到屏幕上（注意：IE11 不工作）。参阅更多 [sticky positioning here](https://developer.mozilla.org/en-US/docs/Web/CSS/position)。"
+    },
+    "two-line": {
+      "heading": "### 双行（移动端）",
+      "desc": "**Two-line** VBanner 能够存储大量数据，用于大量消息。"
+    },
+    "icon-slot": {
+      "heading": "### 图标插槽",
+      "desc": "图标插槽允许你明确控制其包含的内容和功能。"
+    },
+    "icon-event": {
+      "heading": "### 图标点击事件",
+      "desc": "横幅上的图标在点击时发出 `click:icon` 事件，该事件带有自定义图标插槽。"
+    },
+    "actions-slots": {
+      "heading": "### 动作插槽",
+      "desc": "`actions` 插槽在其范围内具有 `dismiss` 功能，你可以使用它来轻松地隐藏横幅。"
+    }
+  },
+  "props": {
+    "icon": "指定特定的图标。",
+    "iconColor": "指定特定的图标颜色。",
+    "singleLine": "强制横幅变为一行。",
+    "sticky": "组件应用 **position: sticky**（**常绿浏览器**）。你能够在 [MDN documentation for sticky position](https://developer.mozilla.org/en-US/docs/Web/CSS/position) 浏览更多信息。"
+  },
+  "slots": {
+    "actions": "动作内容使用的插槽，例如 [v-btn](/components/buttons)。调用时，插槽内的 **dismiss** 方法将会使横幅关闭。",
+    "icon": "用于图标内容的插槽。"
+  },
+  "functions": {
+    "toggle": "Mixins.Toggleable.props.value"
+  }
+}

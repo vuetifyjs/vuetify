@@ -7,6 +7,7 @@ import {
 import { Lang } from '../../../services/lang'
 import VDatePicker from '../VDatePicker'
 import Vue from 'vue'
+import { preset } from '../../../presets/default'
 
 Vue.prototype.$vuetify = {
   icons: {
@@ -27,10 +28,14 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
         mocks: {
           $vuetify: {
             lang: new Lang({
-              locales: {
-                en: {
-                  datePicker: {
-                    itemsSelected: 'i has {0} items',
+              ...preset,
+              lang: {
+                current: 'en',
+                locales: {
+                  en: {
+                    datePicker: {
+                      itemsSelected: 'i has {0} items',
+                    },
                   },
                 },
               },
@@ -570,6 +575,20 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should round down min date in ISO 8601 format', async () => {
+    const cb = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        value: '2019-01-20',
+        min: '2019-01-06T15:55:56.441Z',
+      },
+    })
+
+    wrapper.vm.$on('input', cb)
+    wrapper.findAll('.v-date-picker-table--date tbody tr+tr td:first-child button').at(0).trigger('click')
+    expect(cb.mock.calls[0][0]).toEqual('2019-01-06')
+  })
+
   it('should emit @input and not emit @change when month is clicked (not reative picker)', async () => {
     const wrapper = mountFunction({
       propsData: {
@@ -632,5 +651,31 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     wrapper.vm.$on(`dblclick:date`, dblclick)
     wrapper.findAll('.v-date-picker-table--date tbody tr+tr td:first-child button').at(0).trigger('dblclick')
     expect(dblclick).toHaveBeenCalledWith('2013-05-05')
+  })
+
+  it('should handle date range select', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        range: true,
+        value: ['2019-01-06'],
+      },
+    })
+
+    const [input, change] = [jest.fn(), jest.fn()]
+    wrapper.vm.$on('input', input)
+    wrapper.vm.$on('change', change)
+
+    wrapper.findAll('.v-date-picker-table--date tbody tr+tr td button').at(2).trigger('click')
+    // Lead to [from, to], both 'input' and 'change' should be called
+    expect(input.mock.calls[0][0]).toEqual(expect.arrayContaining(['2019-01-06', '2019-01-08']))
+    expect(change.mock.calls[0][0]).toEqual(expect.arrayContaining(['2019-01-06', '2019-01-08']))
+
+    wrapper.setProps({
+      value: ['2019-01-01', '2019-01-31'],
+    })
+    wrapper.findAll('.v-date-picker-table--date tbody tr+tr td:first-child button').at(0).trigger('click')
+    // Lead to [from,], only 'input' should be called
+    expect(input.mock.calls[1][0]).toEqual(expect.arrayContaining(['2019-01-06']))
+    expect(change.mock.calls).toHaveLength(1)
   })
 })

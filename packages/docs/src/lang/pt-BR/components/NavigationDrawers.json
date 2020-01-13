@@ -1,5 +1,5 @@
 {
   "props": {
-    "hideOverlay": "Oculta a exibição da sobreposição"
+    "tag": "Components.Sheets.props.tag"
   }
 }

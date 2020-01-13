@@ -1,4 +1,4 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 @mixin firefox()
   @-moz-document url-prefix()
@@ -10,7 +10,7 @@
   display: flex
   flex: 1 0 auto
   max-width: 100%
-  transition: 0.2s map-get($transition, 'fast-out-slow-in')
+  transition: $content-transition
 
   &__wrap
     flex: 1 1 auto

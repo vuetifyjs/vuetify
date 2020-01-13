@@ -1,4 +1,7 @@
 {
+  "dataIterators": "Iteradores de dados",
   "form": "Formulários",
-  "tabs": "Abas"
+  "menus": "Menu",
+  "tabs": "Abas",
+  "treeview": "Árvore"
 }

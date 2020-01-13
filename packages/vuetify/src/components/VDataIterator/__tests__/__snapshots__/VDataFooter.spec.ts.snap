@@ -22,6 +22,7 @@ exports[`VDataFooter.ts should disable last page button if no items 1`] = `
                      readonly="readonly"
                      type="text"
                      aria-readonly="true"
+                     autocomplete="off"
               >
             </div>
             <div class="v-input__append-inner">
@@ -32,6 +33,9 @@ exports[`VDataFooter.ts should disable last page button if no items 1`] = `
                 </i>
               </div>
             </div>
+            <input type="hidden"
+                   value="10"
+            >
           </div>
           <div class="v-menu">
             <div class="v-menu__content theme--light "
@@ -123,6 +127,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
                      readonly="readonly"
                      type="text"
                      aria-readonly="true"
+                     autocomplete="off"
               >
             </div>
             <div class="v-input__append-inner">
@@ -133,6 +138,9 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
                 </i>
               </div>
             </div>
+            <input type="hidden"
+                   value="10"
+            >
           </div>
           <div class="v-menu">
             <div class="v-menu__content theme--light "
@@ -220,6 +228,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
                      readonly="readonly"
                      type="text"
                      aria-readonly="true"
+                     autocomplete="off"
               >
             </div>
             <div class="v-input__append-inner">
@@ -230,6 +239,9 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
                 </i>
               </div>
             </div>
+            <input type="hidden"
+                   value="10"
+            >
           </div>
           <div class="v-menu">
             <div class="v-menu__content theme--light "
@@ -317,6 +329,7 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
                      readonly="readonly"
                      type="text"
                      aria-readonly="true"
+                     autocomplete="off"
               >
             </div>
             <div class="v-input__append-inner">
@@ -327,6 +340,9 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
                 </i>
               </div>
             </div>
+            <input type="hidden"
+                   value="100"
+            >
           </div>
           <div class="v-menu">
             <div class="v-menu__content theme--light "
@@ -393,6 +409,7 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
                      readonly="readonly"
                      type="text"
                      aria-readonly="true"
+                     autocomplete="off"
               >
             </div>
             <div class="v-input__append-inner">
@@ -403,6 +420,9 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
                 </i>
               </div>
             </div>
+            <input type="hidden"
+                   value="10"
+            >
           </div>
           <div class="v-menu">
             <div class="v-menu__content theme--light "

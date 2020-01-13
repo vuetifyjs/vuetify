@@ -1,6 +1,9 @@
 // Service
 import { Theme } from '../index'
 
+// Preset
+import { preset } from '../../../presets/default'
+
 // Types
 import Vue from 'vue'
 import {
@@ -44,7 +47,10 @@ describe('Theme.ts', () => {
   })
 
   it('should disable theme colors', () => {
-    const theme = new Theme({ disable: true })
+    const theme = new Theme({
+      ...preset,
+      theme: { disable: true },
+    })
 
     theme.init(instance)
 
@@ -53,12 +59,15 @@ describe('Theme.ts', () => {
 
   it('should generate theme and apply to document', () => {
     const theme = new Theme({
-      themes: {
-        light: FillVariant({
-          primary: '#000001',
-          secondary: '#000002',
-          accent: '#000003',
-        }),
+      ...preset,
+      theme: {
+        themes: {
+          light: FillVariant({
+            primary: '#000001',
+            secondary: '#000002',
+            accent: '#000003',
+          }),
+        },
       },
     })
 
@@ -75,12 +84,15 @@ describe('Theme.ts', () => {
 
   it('should apply a new theme', () => {
     const theme = new Theme({
-      default: 'light',
-      themes: {
-        light: FillVariant(),
-        dark: FillVariant({
-          primary: '#FFFFFF',
-        }),
+      ...preset,
+      theme: {
+        default: 'light',
+        themes: {
+          light: FillVariant(),
+          dark: FillVariant({
+            primary: '#FFFFFF',
+          }),
+        },
       },
     })
 
@@ -95,7 +107,7 @@ describe('Theme.ts', () => {
   })
 
   it('should clear css', () => {
-    const theme = new Theme()
+    const theme = new Theme(preset)
     const spy = jest.spyOn(theme, 'clearCss')
 
     theme.dark = true
@@ -120,9 +132,12 @@ describe('Theme.ts', () => {
     }
 
     const theme = new Theme({
-      ...mock,
-      options: {
-        themeCache,
+      ...preset,
+      theme: {
+        ...mock,
+        options: {
+          themeCache,
+        },
       },
     })
 
@@ -140,9 +155,12 @@ describe('Theme.ts', () => {
     const minifyTheme = jest.fn((css: string) => css + 'foobar')
 
     const theme = new Theme({
-      ...mock,
-      options: {
-        minifyTheme,
+      ...preset,
+      theme: {
+        ...mock,
+        options: {
+          minifyTheme,
+        },
       },
     })
 
@@ -158,9 +176,12 @@ describe('Theme.ts', () => {
 
   it('should add nonce to stylesheet', () => {
     const theme = new Theme({
-      ...mock,
-      options: {
-        cspNonce: 'foobar',
+      ...preset,
+      theme: {
+        ...mock,
+        options: {
+          cspNonce: 'foobar',
+        },
       },
     })
 
@@ -172,7 +193,8 @@ describe('Theme.ts', () => {
 
   it('should initialize the theme', () => {
     const theme = new Theme({
-      ...mock,
+      ...preset,
+      theme: { ...mock },
     })
     const spy = jest.spyOn(theme, 'applyTheme')
     const ssrContext = { head: '' }
@@ -183,8 +205,31 @@ describe('Theme.ts', () => {
     expect(ssrContext.head).toMatchSnapshot()
   })
 
-  it('should set theme with vue-meta', () => {
-    const theme = new Theme(mock)
+  it('should set theme with vue-meta@1', () => {
+    const theme = new Theme({
+      ...preset,
+      theme: mock,
+    })
+    const anyInstance = instance as any
+
+    anyInstance.$meta = () => ({})
+
+    theme.init(anyInstance)
+
+    expect(typeof anyInstance.$options['metaInfo']).toBe('function')
+
+    const metaInfo = anyInstance.$options['metaInfo']()
+
+    expect(metaInfo).toBeTruthy()
+    expect(metaInfo.style).toHaveLength(1)
+    expect(metaInfo.style[0].cssText).toMatchSnapshot()
+  })
+
+  it('should set theme with vue-meta@2', () => {
+    const theme = new Theme({
+      ...preset,
+      theme: mock,
+    })
     const anyInstance = instance as any
 
     anyInstance.$meta = () => ({
@@ -205,7 +250,10 @@ describe('Theme.ts', () => {
   })
 
   it('should react to theme changes', async () => {
-    const theme = new Theme(mock)
+    const theme = new Theme({
+      ...preset,
+      theme: mock,
+    })
     const spy = jest.spyOn(theme, 'applyTheme')
     theme.init(instance)
 
@@ -224,7 +272,10 @@ describe('Theme.ts', () => {
   })
 
   it('should reset themes', async () => {
-    const theme = new Theme(mock)
+    const theme = new Theme({
+      ...preset,
+      theme: mock,
+    })
     const spy = jest.spyOn(theme, 'applyTheme')
     theme.init(instance)
 
@@ -235,7 +286,10 @@ describe('Theme.ts', () => {
   })
 
   it('should set theme', () => {
-    const theme = new Theme(mock)
+    const theme = new Theme({
+      ...preset,
+      theme: mock,
+    })
     const spy = jest.spyOn(theme, 'applyTheme')
     theme.init(instance)
 
@@ -245,5 +299,23 @@ describe('Theme.ts', () => {
     theme.setTheme('dark', { accent: '#c0ffee' })
     expect(theme.generatedStyles).toMatchSnapshot()
     expect(spy).toHaveBeenCalledTimes(3)
+  })
+
+  it('should use vue-meta@2.3 functionality', () => {
+    const theme = new Theme({
+      ...preset,
+      theme: mock,
+    })
+    const set = jest.fn()
+
+    const $meta = () => ({
+      addApp: () => ({ set }),
+    })
+
+    ;(instance as any).$meta = $meta as any
+
+    theme.init(instance)
+
+    expect(set).toHaveBeenCalled()
   })
 })

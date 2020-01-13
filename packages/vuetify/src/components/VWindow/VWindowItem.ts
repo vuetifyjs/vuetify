@@ -100,7 +100,7 @@ export default baseMixins.extend<options>().extend(
 
         // Remove container height if we are out of transition.
         if (this.windowGroup.transitionCount === 0) {
-          this.windowGroup.internalHeight = undefined
+          this.windowGroup.transitionHeight = undefined
         }
       }
     },
@@ -113,7 +113,7 @@ export default baseMixins.extend<options>().extend(
       this.inTransition = true
       if (this.windowGroup.transitionCount === 0) {
         // Set initial height for height transition.
-        this.windowGroup.internalHeight = convertToUnit(this.windowGroup.$el.clientHeight)
+        this.windowGroup.transitionHeight = convertToUnit(this.windowGroup.$el.clientHeight)
       }
       this.windowGroup.transitionCount++
     },
@@ -132,7 +132,7 @@ export default baseMixins.extend<options>().extend(
         }
 
         // Set transition target height.
-        this.windowGroup.internalHeight = convertToUnit(el.clientHeight)
+        this.windowGroup.transitionHeight = convertToUnit(el.clientHeight)
       })
     },
   },

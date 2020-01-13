@@ -20,7 +20,7 @@ import { breaking } from '../../util/console'
 
 // Types
 import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { PropValidator, PropType } from 'vue/types/options'
 import { RippleOptions } from '../../directives/ripple'
 
 const baseMixins = mixins(
@@ -54,6 +54,7 @@ export default baseMixins.extend<options>().extend({
     icon: Boolean,
     loading: Boolean,
     outlined: Boolean,
+    retainFocusOnClick: Boolean,
     rounded: Boolean,
     tag: {
       type: String,
@@ -64,7 +65,7 @@ export default baseMixins.extend<options>().extend({
       type: String,
       default: 'button',
     },
-    value: null as any as PropValidator<any>,
+    value: null as any as PropType<any>,
   },
 
   data: () => ({
@@ -151,6 +152,7 @@ export default baseMixins.extend<options>().extend({
 
   methods: {
     click (e: MouseEvent): void {
+      !this.retainFocusOnClick && !this.fab && e.detail && this.$el.blur()
       this.$emit('click', e)
 
       this.btnToggle && this.toggle()

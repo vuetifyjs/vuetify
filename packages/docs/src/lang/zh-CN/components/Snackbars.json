@@ -1,10 +1,30 @@
 {
+  "heading": "# 消息条",
+  "headingText": "`v-snackbar` 组件用于向用户显示快速消息。消息条支持定位、移除延迟和回调。",
   "examples": {
+    "usage": {
+      "desc": "`v-snackbar` 以最简单的形式向用户显示一个临时且可关闭的通知。"
+    },
+    "multi-line": {
+      "heading": "### 多行",
+      "desc": "`multi-line` 属性扩展了 `v-snackbar` 的高度，为您提供了更多的内容空间。"
+    },
+    "timeout": {
+      "heading": "### 超时",
+      "desc": "`timeout` 属性允许您自定义隐藏 `v-snackbar` 之前的延迟。"
+    },
+    "vertical": {
+      "heading": "### 垂直",
+      "desc": "`vertical` 属性允许您堆叠您的 `v-snackbar` 的内容。"
+    },
     "contextual": {
+      "heading": "### 上下文",
       "desc": "您可以为 Snackbars 应用一种色彩，以更好地适应您的实现。"
     }
   },
   "props": {
-    "timeout": "等待 Snackbars 自动隐藏的时间。使用 0 来保持永久开启。"
+    "multiLine": "使消息条具有更大的最低高度。",
+    "timeout": "等待 Snackbars 自动隐藏的时间。使用 0 来保持永久开启。",
+    "vertical": "将消息条内容堆叠在操作（按钮）之上。"
   }
 }

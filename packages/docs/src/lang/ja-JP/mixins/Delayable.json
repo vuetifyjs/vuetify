@@ -1,1 +1,6 @@
-{}
+{
+  "props": {
+    "openDelay": "コンポーネントを開く前に待機する時間を milliseconds で指定します。",
+    "closeDelay": "コンポーネントを閉じる前に待機する時間を milliseconds で指定します。"
+  }
+}

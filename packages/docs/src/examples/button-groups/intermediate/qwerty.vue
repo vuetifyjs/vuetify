@@ -21,15 +21,23 @@
         <v-btn color="white">
           <v-icon>mdi-format-italic</v-icon>
         </v-btn>
+
         <v-btn color="white">
           <v-icon>mdi-format-bold</v-icon>
         </v-btn>
+
         <v-btn color="white">
           <v-icon>mdi-format-underline</v-icon>
         </v-btn>
+
         <v-btn color="white">
-          <v-row justify="center">
+          <v-row
+            align="center"
+            class="flex-column"
+            justify="center"
+          >
             <v-icon class="cols 12">mdi-format-color-text</v-icon>
+
             <v-sheet
               tile
               style="margin-top: -4px;"
@@ -40,18 +48,22 @@
           </v-row>
         </v-btn>
       </v-btn-toggle>
+
       <v-btn-toggle v-model="alignment">
         <v-btn color="white">
           <v-icon>mdi-format-align-center</v-icon>
         </v-btn>
+
         <v-btn color="white">
           <v-icon>mdi-format-align-left</v-icon>
         </v-btn>
+
         <v-btn color="white">
           <v-icon>mdi-format-align-right</v-icon>
         </v-btn>
       </v-btn-toggle>
     </v-row>
+
     <v-sheet
       class="pa-4 text-center"
       color="grey lighten-3"
@@ -68,6 +80,7 @@
           v-text="n"
         ></v-col>
       </v-row>
+
       <v-row dense>
         <v-col
           v-for="l in letters"

@@ -1,16 +1,18 @@
 // Styles
 import './VWindow.sass'
 
-// Components
-import VBtn from '../VBtn'
-import VIcon from '../VIcon'
-import { BaseItemGroup } from '../VItemGroup/VItemGroup'
+// Types
+import { VNode, VNodeDirective } from 'vue/types/vnode'
+import { PropType } from 'vue'
+import { TouchHandlers } from 'types'
 
 // Directives
 import Touch from '../../directives/touch'
 
-// Types
-import { VNode, VNodeDirective } from 'vue/types/vnode'
+// Components
+import VBtn from '../VBtn'
+import VIcon from '../VIcon'
+import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 
 /* @vue/component */
 export default BaseItemGroup.extend({
@@ -36,11 +38,11 @@ export default BaseItemGroup.extend({
     },
     nextIcon: {
       type: [Boolean, String],
-      default: '$vuetify.icons.next',
+      default: '$next',
     },
     prevIcon: {
       type: [Boolean, String],
-      default: '$vuetify.icons.prev',
+      default: '$prev',
     },
     reverse: {
       type: Boolean,
@@ -48,7 +50,7 @@ export default BaseItemGroup.extend({
     },
     showArrows: Boolean,
     showArrowsOnHover: Boolean,
-    touch: Object,
+    touch: Object as PropType<TouchHandlers>,
     touchless: Boolean,
     value: {
       required: false,
@@ -59,7 +61,8 @@ export default BaseItemGroup.extend({
   data () {
     return {
       changedByDelimiters: false,
-      internalHeight: undefined as undefined | string,
+      internalHeight: undefined as undefined | string, // This can be fixed by child class.
+      transitionHeight: undefined as undefined | string, // Intermediate height during transition.
       transitionCount: 0, // Number of windows in transition state.
       isBooted: false,
       isReverse: false,
@@ -80,7 +83,8 @@ export default BaseItemGroup.extend({
       if (!this.isBooted) return ''
 
       const axis = this.vertical ? 'y' : 'x'
-      const direction = this.internalReverse ? '-reverse' : ''
+      const reverse = this.$vuetify.rtl && axis === 'x' ? !this.internalReverse : this.internalReverse
+      const direction = reverse ? '-reverse' : ''
 
       return `v-window-${axis}${direction}-transition`
     },
@@ -101,9 +105,7 @@ export default BaseItemGroup.extend({
       })
     },
     internalReverse (): boolean {
-      if (this.reverse !== undefined) return this.reverse
-
-      return this.isReverse
+      return this.reverse ? !this.isReverse : this.isReverse
     },
   },
 
@@ -129,7 +131,7 @@ export default BaseItemGroup.extend({
           'v-window__container--is-active': this.isActive,
         },
         style: {
-          height: this.internalHeight,
+          height: this.internalHeight || this.transitionHeight,
         },
       }, children)
     },

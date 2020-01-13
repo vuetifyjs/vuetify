@@ -7,13 +7,26 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "usage"
+          "type": "usage-new",
+          "value": {
+            "booleans": [
+              "hide-selected",
+              "multiple",
+              "persistent-hint",
+              "small-chips",
+              "clearable"
+            ]
+          }
         },
         {
           "type": "alert",
           "lang": "Components.Selects.objectAlert",
           "value": "error"
+        },
+        {
+          "type": "alert",
+          "lang": "Components.Selects.autocompleteAlert",
+          "value": "info"
         }
       ]
     },
@@ -30,18 +43,10 @@
       "type": "section",
       "children": [
         {
-          "type": "playground",
-          "value": "playground"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
           "type": "examples",
           "value": [
             "simple/combobox-multiple",
+            "simple/dense",
             "intermediate/no-data",
             "intermediate/advanced"
           ]

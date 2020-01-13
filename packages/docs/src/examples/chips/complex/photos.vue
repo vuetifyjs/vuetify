@@ -1,7 +1,6 @@
 <template>
   <v-card
     class="mx-auto"
-    color="white"
     max-width="500"
   >
     <v-toolbar
@@ -10,7 +9,7 @@
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-toolbar-title>Photo Info</v-toolbar-title>
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
       <v-btn
         icon
         @click="$refs.search.focus()"
@@ -79,7 +78,7 @@
     <v-divider></v-divider>
 
     <v-card-actions>
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
       <v-btn
         :disabled="!selected.length"
         :loading="loading"

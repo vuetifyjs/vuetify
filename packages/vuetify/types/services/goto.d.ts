@@ -19,8 +19,8 @@ export type VuetifyGoToEasing =
   'easeOutQuint' |
   'easeInOutQuint'
 
-export interface VuetifyGoToOptions {
-  container?: string | HTMLElement | Vue,
+export interface GoToOptions {
+  container?: string | HTMLElement | Vue
   duration?: number
   offset?: number
   easing?: VuetifyGoToEasing

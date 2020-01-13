@@ -1,6 +1,6 @@
 {
-  "header": "# Support tactile",
-  "headerText": "La directive <code>v-touch</code> vous permet de capturer des gestes de balayage et d'appliquer des fonctions de rappels directionnelles.",
+  "heading": "# Support tactile",
+  "headingText": "La directive <code>v-touch</code> vous permet de capturer des gestes de balayage et d'appliquer des fonctions de rappels directionnelles.",
   "examples": {
     "usage": {
       "desc": "Sur un appareil mobile, essayez de balayer dans différentes directions.",

@@ -6,6 +6,8 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 import Vue from 'vue'
+import { preset } from '../../../presets/default'
+import en from '../../../locale/en'
 
 Vue.prototype.$vuetify = {
   icons: {
@@ -27,10 +29,15 @@ describe('VDatePicker.ts', () => {
           $vuetify: {
             rtl: false,
             lang: new Lang({
-              locales: {
-                en: {
-                  datePicker: {
-                    itemsSelected: 'i has {0} items',
+              ...preset,
+              lang: {
+                current: 'en',
+                locales: {
+                  en: {
+                    ...en,
+                    datePicker: {
+                      itemsSelected: 'i has {0} items',
+                    },
                   },
                 },
               },
@@ -285,5 +292,29 @@ describe('VDatePicker.ts', () => {
     wrapper.vm.$on(`dblclick:month`, dblclick)
     wrapper.findAll('.v-date-picker-table--month tbody tr+tr td:first-child button').at(0).trigger('dblclick')
     expect(dblclick).toHaveBeenCalledWith('2013-04')
+  })
+
+  it('should handle date range select', async () => {
+    const cb = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        range: true,
+        type: 'month',
+        value: [],
+      },
+    })
+    const year = new Date().getFullYear()
+    const toDate = `${year}-08`
+    const fromDate = `${year}-03`
+
+    wrapper.vm.$on('input', cb)
+    wrapper.find('.v-date-picker-table--month tbody tr:first-child td:nth-child(3) button').trigger('click')
+    expect(cb.mock.calls[0][0]).toEqual(
+      expect.arrayContaining([fromDate])
+    )
+
+    wrapper.find('.v-date-picker-table--month tbody tr:first-child+tr+tr td:nth-child(2) button').trigger('click')
+    expect(cb.mock.calls[0][0][0]).toBe(fromDate)
+    expect(cb.mock.calls[1][0][0]).toBe(toDate)
   })
 })

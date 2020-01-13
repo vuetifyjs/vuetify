@@ -1,1 +1,40 @@
-{}
+{
+  "props": {
+    "customFilter": "Fonction pour filtrer les éléments",
+    "customSort": "Fonction utilisée pour trier les éléments",
+    "disableFiltering": "Désactiver complètement le filtrage",
+    "disablePagination": "Désactiver complètement la pagination",
+    "disableSort": "Désactiver le tri complètement",
+    "groupDesc": "Modifications du groupement de direction. Peut être utilisé avec le modificateur `.sync`",
+    "groupBy": "Modifications du groupement de direction. Peut être utilisé avec le modificateur `.sync`",
+    "itemKey": "Le champ de chaque objet qui désigne une clé unique. La valeur de cette propriété doit être unique pour chaque élément.",
+    "items": "Le tableau d'éléments à afficher",
+    "itemsPerPage": "Modifie le nombre d'éléments par page. Peut être utilisé avec le modificateur `.sync`",
+    "locale": "Définit la locale du composant. Utilisée pour traduire les chaînes de texte internes.",
+    "mustSort": "Si `true` alors on ne peut pas désactiver le tri, il basculera toujours entre ascendant et descendant",
+    "multiSort": "Si `true` alors on peut trier sur plusieurs propriétés",
+    "options": "Un objet combiné pour les options. Voir l'exemple ci-dessous pour la définition",
+    "page": "Modifie quelle page d'éléments est affichée. Peut être utilisé avec le modificateur `.sync",
+    "search": "Saisie de texte utilisée pour filtrer les éléments",
+    "serverItemsLength": "Utilisé uniquement lorsque les données sont fournies par un serveur. Doit être réglé au total des éléments disponibles sur le serveur afin que la pagination fonctionne correctement",
+    "sortBy": "Modifications de la propriété de l'élément (ou des propriétés) doivent être utilisées pour l'ordre de tri. Peut être utilisé avec le modificateur `.sync`",
+    "sortDesc": "Modification de direction du tri. Peut être utilisé avec le modificateur `.sync`"
+  },
+  "slots": {
+    "default": "L'emplacement par défaut. Utilisez ceci pour rendre vos éléments"
+  },
+  "events": {
+    "current-items": "Les éléments de la page actuelle",
+    "page-count": "Le nombre total de pages",
+    "pagination": "Informations sur la pagination actuelle",
+    "update:options": "Informations sur les options actuelles",
+    "update:page": "L'événement `.sync` pour la prop`page`",
+    "update:items-per-page": "L'événement `.sync` pour la prop `items-per-page`",
+    "update:sort-by": "L'événement `.sync` pour la prop `sort-by`",
+    "update:sort-desc": "L'événement `.sync` pour la prop `sort-desc`",
+    "update:group-by": "L'événement `.sync` pour la prop `group-by`",
+    "update:group-desc": "L'événement `.sync` pour la prop `group-desc`",
+    "update:multi-sort": "L'événement `.sync` pour la prop `multi-sort`",
+    "update:must-sort": "L'événement `.sync` pour la prop `must-sort`"
+  }
+}

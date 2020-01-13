@@ -1,1 +1,23 @@
-{}
+{
+  "heading": "# التنبيهات",
+  "examples": {
+    "border": {
+      "heading": "### حدود"
+    },
+    "colored-border": {
+      "heading": "### ألوان الحدود"
+    },
+    "icon": {
+      "heading": "### أيقونات"
+    },
+    "outlined": {
+      "heading": "###الخطوط العريضة"
+    },
+    "text": {
+      "heading": "### الخط"
+    }
+  },
+  "props": {
+    "icon": "يعين رمز محدد."
+  }
+}

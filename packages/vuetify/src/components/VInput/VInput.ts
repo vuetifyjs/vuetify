@@ -7,19 +7,23 @@ import VLabel from '../VLabel'
 import VMessages from '../VMessages'
 
 // Mixins
+import BindsAttrs from '../../mixins/binds-attrs'
 import Validatable from '../../mixins/validatable'
 
 // Utilities
 import {
   convertToUnit,
+  getSlot,
   kebabCase,
 } from '../../util/helpers'
 
 // Types
 import { VNode, VNodeData, PropType } from 'vue'
 import mixins from '../../util/mixins'
+import { InputValidationRule } from 'types'
 
 const baseMixins = mixins(
+  BindsAttrs,
   Validatable
 )
 
@@ -40,8 +44,9 @@ export default baseMixins.extend<options>().extend({
       type: String,
       default: '',
     },
+    dense: Boolean,
     height: [Number, String],
-    hideDetails: Boolean,
+    hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
     hint: String,
     id: String,
     label: String,
@@ -62,13 +67,14 @@ export default baseMixins.extend<options>().extend({
     classes (): object {
       return {
         'v-input--has-state': this.hasState,
-        'v-input--hide-details': this.hideDetails,
+        'v-input--hide-details': !this.showDetails,
         'v-input--is-label-active': this.isLabelActive,
         'v-input--is-dirty': this.isDirty,
         'v-input--is-disabled': this.disabled,
         'v-input--is-focused': this.isFocused,
         'v-input--is-loading': this.loading !== false && this.loading !== undefined,
         'v-input--is-readonly': this.readonly,
+        'v-input--dense': this.dense,
         ...this.themeClasses,
       }
     },
@@ -104,6 +110,22 @@ export default baseMixins.extend<options>().extend({
     },
     isLabelActive (): boolean {
       return this.isDirty
+    },
+    messagesToDisplay (): string[] {
+      if (this.hasHint) return [this.hint]
+
+      if (!this.hasMessages) return []
+
+      return this.validations.map((validation: string | InputValidationRule) => {
+        if (typeof validation === 'string') return validation
+
+        const validationResult = validation(this.internalValue)
+
+        return typeof validationResult === 'string' ? validationResult : ''
+      }).filter(message => message !== '')
+    },
+    showDetails (): boolean {
+      return this.hideDetails === false || (this.hideDetails === 'auto' && this.messagesToDisplay.length > 0)
     },
   },
 
@@ -155,7 +177,7 @@ export default baseMixins.extend<options>().extend({
           disabled: this.disabled,
           light: this.light,
         },
-        on: !(this.$listeners[eventName] || cb)
+        on: !(this.listeners$[eventName] || cb)
           ? undefined
           : {
             click: (e: Event) => {
@@ -204,6 +226,7 @@ export default baseMixins.extend<options>().extend({
         props: {
           color: this.validationState,
           dark: this.dark,
+          disabled: this.disabled,
           focused: this.hasState,
           for: this.computedId,
           light: this.light,
@@ -211,18 +234,20 @@ export default baseMixins.extend<options>().extend({
       }, this.$slots.label || this.label)
     },
     genMessages () {
-      if (this.hideDetails) return null
-
-      const messages = this.hasHint
-        ? [this.hint]
-        : this.validations
+      if (!this.showDetails) return null
 
       return this.$createElement(VMessages, {
         props: {
           color: this.hasHint ? '' : this.validationState,
           dark: this.dark,
           light: this.light,
-          value: (this.hasMessages || this.hasHint) ? messages : [],
+          value: this.messagesToDisplay,
+        },
+        attrs: {
+          role: this.hasMessages ? 'alert' : null,
+        },
+        scopedSlots: {
+          default: props => getSlot(this, 'message', props),
         },
       })
     },

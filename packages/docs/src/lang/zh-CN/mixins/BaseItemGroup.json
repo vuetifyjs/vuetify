@@ -1,1 +1,8 @@
-{}
+{
+  "props": {
+    "activeClass": "**active-class** 在子组件（children ）被激活时应用。",
+    "mandatory": "强制始终选择一个值（如果可用）。",
+    "max": "设置可以选择的最大数量。",
+    "multiple": "允许多个选择。**value** 属性必须是 _array_。"
+  }
+}

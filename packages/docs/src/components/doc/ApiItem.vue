@@ -11,7 +11,7 @@
       <!-- Header -->
       <div
         v-if="!['example', 'props'].includes(header.value) || item.example || item.props"
-        class="text-capitalize overline grey--text text--darken-3"
+        class="text-capitalize overline text--secondary text--darken-3"
         v-text="header.value"
       />
 
@@ -29,7 +29,8 @@
         v-text="item.type"
       />
 
-      <template v-if="header.value === 'default'">
+      <!-- Default -->
+      <template v-if="header.value === 'default' && item.default && header.type !== 'sass'">
         <span
           v-if="typeof item.default === 'string'"
           class="mono"
@@ -37,8 +38,16 @@
         />
       </template>
 
+      <!-- Sass Default -->
+      <doc-markup
+        v-if="header.value === 'default' && header.type === 'sass' && item.default"
+        :filename="false"
+        lang="sass"
+        value="example"
+      >{{ item.default }}</doc-markup>
+
       <!-- Description -->
-      <doc-markdown
+      <base-markdown
         v-else-if="header.value === 'description' && item.description"
         :code="item.description"
       />
@@ -50,6 +59,20 @@
         lang="ts"
         value="example"
       >{{ item.signature }}</doc-markup>
+
+      <!-- Options -->
+      <doc-markup
+        v-else-if="header.value === 'example' && item.options"
+        :filename="false"
+        lang="json"
+        value="example"
+      >{{ item.options }}</doc-markup>
+
+      <!-- Snippet -->
+      <doc-markup
+        v-else-if="header.value === 'example' && item.snippet"
+        :value="item.snippet"
+      />
 
       <!-- Example -->
       <doc-markup

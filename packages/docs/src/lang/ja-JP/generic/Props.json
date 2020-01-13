@@ -1,3 +1,5 @@
 {
-  "persistent": "ダイアログの外側をクリックしてもダイアログを消しません。"
+  "fullWidth": "幅を強制的に 100% にする",
+  "persistent": "ダイアログの外側をクリックしてもダイアログを消しません。",
+  "tile": "Components.Sheets.props.tile"
 }

@@ -1,5 +1,8 @@
 <template>
-  <v-card class="mb-12" outlined>
+  <v-card
+    class="mb-12"
+    outlined
+  >
     <v-simple-table>
       <caption class="pa-4">Material Design Viewport Breakpoints</caption>
 
@@ -46,7 +49,7 @@
             <strong>md</strong>
           </td>
           <td>large tablet to laptop</td>
-          <td>960px &gt; &lt; 1264*</td>
+          <td>960px &gt; &lt; 1264px*</td>
         </tr>
 
         <tr>
@@ -58,7 +61,7 @@
             <strong>lg</strong>
           </td>
           <td>desktop</td>
-          <td>1264 &gt; &lt; 1904px*</td>
+          <td>1264px* &gt; &lt; 1904px*</td>
         </tr>
 
         <tr>
@@ -76,7 +79,10 @@
 
       <tfoot>
         <tr>
-          <td colspan="4" class="text-center">
+          <td
+            colspan="4"
+            class="text-center"
+          >
             <small><em class="grey--text">* -16px on Desktop</em></small>
           </td>
         </tr>

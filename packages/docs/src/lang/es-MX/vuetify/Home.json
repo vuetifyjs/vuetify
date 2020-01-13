@@ -1,5 +1,4 @@
 {
-  "callout": "Aumenta la potencia de tu desarrollo con el poder de Vue y de Material Design",
   "features": {
     "community": {
       "text": "Vuetify viene preparado con 8 plantillas prefabricadas para el vue-cli. Desde html sencillo hasta SSR (Server Side Rendering | Renderizado del Lado del Servidor) estás listo para trabajar en minutos.",
@@ -14,7 +13,5 @@
     }
   },
   "getHelp": "Obtén ayuda",
-  "getStarted": "Iniciar",
-  "madeWithVuetify": "Proyectos hechos con/por Vuetify",
-  "proudlySponsoredBy": "Patrocinadores de Patreon"
+  "getStarted": "Iniciar"
 }

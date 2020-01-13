@@ -11,7 +11,7 @@ import Comparable from '../../mixins/comparable'
 
 // Types
 import mixins from '../../util/mixins'
-import { PropValidator } from 'vue/types/options'
+import { PropType } from 'vue'
 
 const baseMixins = mixins(
   Comparable,
@@ -43,9 +43,7 @@ export default baseMixins.extend({
     // If no value set on VRadio
     // will match valueComparator
     // force default to null
-    value: {
-      default: null,
-    } as PropValidator<any>,
+    value: null as unknown as PropType<any>,
   },
 
   computed: {

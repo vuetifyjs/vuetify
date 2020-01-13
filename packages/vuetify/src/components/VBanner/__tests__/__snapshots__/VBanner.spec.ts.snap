@@ -1,5 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VBanner.ts should apply sticky when using the app prop 1`] = `
+<div class="v-banner v-sheet v-sheet--tile theme--light v-banner--sticky"
+     style="top: 0px; position: sticky; z-index: 1;"
+>
+  <div class="v-banner__wrapper">
+    <div class="v-banner__content">
+      <div class="v-banner__text">
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VBanner.ts should apply sticky when using the app prop 2`] = `
+<div class="v-banner v-sheet v-sheet--tile theme--light v-banner--sticky"
+     style="top: 0px; position: sticky; z-index: 1;"
+>
+  <div class="v-banner__wrapper">
+    <div class="v-banner__content">
+      <div class="v-banner__text">
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VBanner.ts should apply sticky when using the app prop 3`] = `
+<div class="v-banner v-sheet v-sheet--tile theme--light"
+     style
+>
+  <div class="v-banner__wrapper">
+    <div class="v-banner__content">
+      <div class="v-banner__text">
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`VBanner.ts should render component with actions 1`] = `
 <div class="v-banner v-sheet v-sheet--tile theme--light">
   <div class="v-banner__wrapper">

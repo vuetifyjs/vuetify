@@ -1,6 +1,6 @@
 {
-  "header": "crwdns41156:0crwdne41156:0",
-  "headerText": "crwdns42600:0[vue-test-utils]crwdne42600:0",
+  "heading": "crwdns46286:0crwdne46286:0",
+  "headingText": "crwdns46288:0[vue-test-utils]crwdne46288:0",
   "alert": "crwdns41160:0$attrscrwdnd41160:0$listenerscrwdne41160:0",
   "runnerHeader": "crwdns41162:0crwdne41162:0",
   "runnerText1": "crwdns42602:0crwdne42602:0",
@@ -10,6 +10,8 @@
     "crwdns41170:0[tape]crwdne41170:0",
     "crwdns41172:0[AVA]crwdne41172:0"
   ],
+  "setupHeading": "crwdns43160:0crwdne43160:0",
+  "setupText1": "crwdns43162:0crwdne43162:0",
   "specHeader": "crwdns41174:0crwdne41174:0",
   "specText1": "crwdns41176:0crwdne41176:0",
   "specText2": "crwdns41178:0crwdne41178:0",
@@ -31,5 +33,6 @@
     "crwdns42622:0[theme]crwdne42622:0"
   ],
   "e2eHeader": "crwdns41190:0crwdne41190:0",
-  "e2eText1": "crwdns41192:0[community]crwdne41192:0"
+  "e2eText1": "crwdns43164:0crwdne43164:0",
+  "e2eText2": "crwdns43166:0[Cypress]crwdne43166:0"
 }

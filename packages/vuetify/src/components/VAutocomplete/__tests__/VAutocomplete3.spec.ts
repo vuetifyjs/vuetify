@@ -69,4 +69,93 @@ describe('VAutocomplete.ts', () => {
 
     expect(element.value).toBe('foo')
   })
+
+  it('should copy selected item if multiple', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['aaa', 'bbb', 'ccc'],
+        value: ['aaa', 'bbb'],
+        chips: true,
+        multiple: true,
+      },
+    })
+
+    const input = wrapper.find('input')
+    const chip = wrapper.findAll('.v-chip').at(1)
+    const setData = jest.fn()
+    const event = {
+      clipboardData: {
+        setData,
+      },
+      preventDefault: jest.fn(),
+    }
+
+    input.trigger('focus')
+    chip.trigger('click')
+    wrapper.vm.onCopy(event)
+
+    expect(setData).toHaveBeenCalledWith('text/plain', 'bbb')
+    expect(setData).toHaveBeenCalledWith('text/vnd.vuetify.autocomplete.item+plain', 'bbb')
+    expect(event.preventDefault).toHaveBeenCalled()
+  })
+
+  it('should not copy anything if there is no selected item', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['aaa', 'bbb', 'ccc'],
+        value: ['aaa', 'bbb'],
+        chips: true,
+        multiple: true,
+      },
+    })
+
+    const input = wrapper.find('input')
+    const setData = jest.fn()
+    const event = {
+      clipboardData: {
+        setData,
+      },
+      preventDefault: jest.fn(),
+    }
+
+    input.trigger('focus')
+    wrapper.vm.onCopy(event)
+
+    expect(setData).not.toHaveBeenCalled()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/9654
+  it('should delete chip in single mode', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        chips: true,
+        items: ['foo', 'bar', 'fizz', 'buzz'],
+        value: 'foo',
+      },
+    })
+
+    const input = wrapper.find('input')
+
+    input.trigger('focus')
+    input.trigger('keydown.backspace')
+    input.trigger('keydown.backspace')
+
+    expect(wrapper.vm.internalValue).toBeUndefined()
+  })
+
+  it('should not change selectedIndex to 0 when backspace is pressed', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['f', 'b'],
+        value: 'f',
+      },
+    })
+
+    const input = wrapper.find('input')
+
+    input.trigger('focus')
+    input.trigger('keydown.backspace')
+
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+  })
 })

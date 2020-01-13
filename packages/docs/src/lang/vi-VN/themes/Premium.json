@@ -4,13 +4,5 @@
   "live": "Xem trực tiếp",
   "premium": "Trả phí",
   "downloadNow": "Tải xuống",
-  "viewDemo": "Xem thử",
-  "templates": {
-    "freelancer": {
-      "title": "Freelancer"
-    },
-    "parallax": {
-      "title": "Parallax"
-    }
-  }
+  "viewDemo": "Xem thử"
 }

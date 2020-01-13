@@ -1,7 +1,7 @@
 export default {
+  badge: 'insigne',
   close: 'Sluiten',
   dataIterator: {
-    pageText: '{0}-{1} van {2}',
     noResultsText: 'Geen overeenkomende resultaten gevonden',
     loadingText: 'Items aan het laden...',
   },
@@ -21,6 +21,7 @@ export default {
     prevPage: 'Vorige pagina',
     firstPage: 'Eerste pagina',
     lastPage: 'Laatste pagina',
+    pageText: '{0}-{1} van {2}',
   },
   datePicker: {
     itemsSelected: '{0} geselecteerd',
@@ -29,6 +30,9 @@ export default {
   carousel: {
     prev: 'Vorig beeld',
     next: 'Volgend beeld',
+    ariaLabel: {
+      delimiter: 'Carousel slide {0} of {1}',
+    },
   },
   calendar: {
     moreEvents: '{0} meer',
@@ -36,5 +40,9 @@ export default {
   fileInput: {
     counter: '{0} bestanden',
     counterSize: '{0} bestanden ({1} in totaal)',
+  },
+  timePicker: {
+    am: 'AM',
+    pm: 'PM',
   },
 }

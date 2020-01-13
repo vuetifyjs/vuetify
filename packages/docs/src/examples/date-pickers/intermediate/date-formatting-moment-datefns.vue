@@ -5,7 +5,6 @@
         <v-menu
           v-model="menu1"
           :close-on-content-click="false"
-          full-width
           max-width="290"
         >
           <template v-slot:activator="{ on }">
@@ -15,6 +14,7 @@
               label="Formatted with Moment.js"
               readonly
               v-on="on"
+              @click:clear="date = null"
             ></v-text-field>
           </template>
           <v-date-picker
@@ -28,7 +28,6 @@
         <v-menu
           v-model="menu2"
           :close-on-content-click="false"
-          full-width
           max-width="290"
         >
           <template v-slot:activator="{ on }">
@@ -38,6 +37,7 @@
               label="Formatted with datefns"
               readonly
               v-on="on"
+              @click:clear="date = null"
             ></v-text-field>
           </template>
           <v-date-picker

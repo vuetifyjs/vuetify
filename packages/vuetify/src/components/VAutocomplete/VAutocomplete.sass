@@ -17,6 +17,10 @@
     .v-select__slot > input
       margin-top: $autocomplete-enclosed-input-margin-top
 
+    &.v-input--dense
+      .v-select__slot > input
+        margin-top: $autocomplete-dense-enclosed-input-margin-top
+
   &:not(.v-input--is-disabled).v-select.v-text-field
     input
       pointer-events: inherit

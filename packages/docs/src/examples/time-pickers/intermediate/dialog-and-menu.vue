@@ -9,7 +9,6 @@
         :return-value.sync="time"
         transition="scale-transition"
         offset-y
-        full-width
         max-width="290px"
         min-width="290px"
       >
@@ -30,14 +29,13 @@
         ></v-time-picker>
       </v-menu>
     </v-col>
-    <div class="flex-grow-1"></div>
+    <v-spacer></v-spacer>
     <v-col cols="11" sm="5">
       <v-dialog
         ref="dialog"
         v-model="modal2"
         :return-value.sync="time"
         persistent
-        full-width
         width="290px"
       >
         <template v-slot:activator="{ on }">
@@ -54,7 +52,7 @@
           v-model="time"
           full-width
         >
-          <div class="flex-grow-1"></div>
+          <v-spacer></v-spacer>
           <v-btn text color="primary" @click="modal2 = false">Cancel</v-btn>
           <v-btn text color="primary" @click="$refs.dialog.save(time)">OK</v-btn>
         </v-time-picker>

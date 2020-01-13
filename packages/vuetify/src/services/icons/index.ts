@@ -1,26 +1,35 @@
 // Extensions
 import { Service } from '../service'
 
+// Utilities
+import { mergeDeep } from '../../util/helpers'
+
 // Types
-import { VuetifyIconOptions } from 'vuetify/types/services/icons'
+import { VuetifyPreset } from 'vuetify/types/services/presets'
+import { Icons as IIcons } from 'vuetify/types/services/icons'
 
 // Presets
 import presets from './presets'
 
-export class Icons extends Service {
-  static property = 'icons'
+export class Icons extends Service implements IIcons {
+  static property: 'icons' = 'icons'
 
-  public iconfont: VuetifyIconOptions['iconfont'] = 'mdi'
+  public iconfont: IIcons['iconfont']
 
-  public values: VuetifyIconOptions['values'] = presets[this.iconfont]
+  public values: IIcons['values']
 
-  constructor (options: Partial<VuetifyIconOptions> = {}) {
+  constructor (preset: VuetifyPreset) {
     super()
-    if (options.iconfont) this.iconfont = options.iconfont
 
-    this.values = {
-      ...presets[this.iconfont],
-      ...(options.values || {}),
-    }
+    const {
+      iconfont,
+      values,
+    } = preset[Icons.property]
+
+    this.iconfont = iconfont
+    this.values = mergeDeep(
+      presets[iconfont],
+      values
+    ) as IIcons['values']
   }
 }

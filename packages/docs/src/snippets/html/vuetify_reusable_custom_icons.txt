@@ -3,10 +3,13 @@
 <template>
   <div>
     <v-icon>$vuetify.icons.product</v-icon>
+    <v-icon>$product</v-icon>
 
     <v-icon v-text="'$vuetify.icons.support'"></v-icon>
+    <v-icon v-text="'$support'"></v-icon>
 
     <v-icon v-html="'$vuetify.icons.steam'"></v-icon>
+    <v-icon v-html="'$steam'"></v-icon>
 
     <v-icon v-text="platform"></v-icon>
   </div>
@@ -23,8 +26,8 @@
 
     computed: {
       platform () {
-        return '$vuetify.icons.' + this.user.platform
-      },
-    },
+        return '$' + this.user.platform
+      }
+    }
   }
 </script>

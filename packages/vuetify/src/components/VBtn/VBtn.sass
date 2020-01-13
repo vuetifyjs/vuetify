@@ -1,5 +1,4 @@
 // Imports
-@import '../../styles/styles.sass'
 @import './_variables.scss'
 
 // Theme
@@ -46,12 +45,11 @@
   font-weight: $btn-font-weight
   letter-spacing: $btn-letter-spacing
   justify-content: center
-  max-width: 100%
   outline: 0
   position: relative
   text-decoration: none
   text-indent: $btn-letter-spacing
-  text-transform: uppercase
+  text-transform: $btn-text-transform
   transition-duration: $btn-transition-duration
   transition-property: box-shadow, transform, opacity
   transition-timing-function: $btn-transition-fn
@@ -89,15 +87,6 @@
         min-width: #{round($size * 1.777777777777778)}px // default ratio
         padding: 0 #{$size / 2.25}px
 
-  +rtl()
-    .v-icon--left
-      margin-left: 8px
-      margin-right: -4px
-
-    .v-icon--right
-      margin-left: -4px
-      margin-right: 8px
-
   > .v-btn__content .v-icon
     color: inherit
 
@@ -122,12 +111,22 @@
     width: $btn-icon-font-size
 
   .v-icon--left
-    margin-left: -4px
-    margin-right: 8px
+    +ltr()
+      margin-left: -4px
+      margin-right: 8px
+
+    +rtl()
+      margin-left: 8px
+      margin-right: -4px
 
   .v-icon--right
-    margin-left: 8px
-    margin-right: -4px
+    +ltr()
+      margin-left: 8px
+      margin-right: -4px
+
+    +rtl()
+      margin-left: -4px
+      margin-right: 8px
 
 .v-btn__loader
   align-items: center

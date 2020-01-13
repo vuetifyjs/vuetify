@@ -11,8 +11,8 @@
     </div>
 
     <v-bottom-navigation
+      v-model="activeBtn"
       :input-value="showNav"
-      :value="activeBtn"
       color="indigo"
     >
       <v-btn>

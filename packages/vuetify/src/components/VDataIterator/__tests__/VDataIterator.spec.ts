@@ -6,6 +6,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 import Vue from 'vue'
+import { preset } from '../../../presets/default'
 
 Vue.prototype.$vuetify = {
   icons: {
@@ -29,7 +30,7 @@ describe('VDataIterator.ts', () => {
       return mount(VDataIterator, {
         mocks: {
           $vuetify: {
-            lang: new Lang(),
+            lang: new Lang(preset),
             theme: {
               dark: false,
             },
@@ -172,6 +173,7 @@ describe('VDataIterator.ts', () => {
       { id: 'foo' },
       { id: 'bar' },
     ]
+    const toggleSelectAll = jest.fn()
 
     const wrapper = mountFunction({
       propsData: {
@@ -179,6 +181,7 @@ describe('VDataIterator.ts', () => {
       },
       listeners: {
         input,
+        'toggle-select-all': toggleSelectAll,
       },
       scopedSlots: {
         header (props) {
@@ -200,6 +203,7 @@ describe('VDataIterator.ts', () => {
     await wrapper.vm.$nextTick()
 
     expect(input).toHaveBeenCalledWith(items)
+    expect(toggleSelectAll).toHaveBeenCalledWith({ items, value: true })
   })
 
   it('should update expansion from the outside', async () => {

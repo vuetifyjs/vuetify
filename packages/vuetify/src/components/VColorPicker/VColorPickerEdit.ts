@@ -9,8 +9,7 @@ import VIcon from '../VIcon'
 import { parseHex } from '../../util/colorUtils'
 
 // Types
-import Vue, { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import Vue, { VNode, PropType } from 'vue'
 import { VColorPickerColor, fromRGBA, fromHexa, fromHSLA } from './util'
 
 type Input = [string, number, string]
@@ -48,7 +47,7 @@ export default Vue.extend({
   name: 'v-color-picker-edit',
 
   props: {
-    color: Object as PropValidator<VColorPickerColor>,
+    color: Object as PropType<VColorPickerColor>,
     disabled: Boolean,
     hideAlpha: Boolean,
     hideModeSwitch: Boolean,
@@ -176,7 +175,7 @@ export default Vue.extend({
           click: this.changeMode,
         },
       }, [
-        this.$createElement(VIcon, '$vuetify.icons.unfold'),
+        this.$createElement(VIcon, '$unfold'),
       ])
     },
   },

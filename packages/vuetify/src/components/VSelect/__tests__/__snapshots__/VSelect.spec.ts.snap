@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VSelect.ts should escape items in menu 1`] = `
-<div id="&amp;lt;strong&amp;gt;foo&amp;lt;/strong&amp;gt;-list-item-102"
+<div id="list-item-88-0"
      class="v-list-item__title"
 >
   &lt;strong&gt;foo&lt;/strong&gt;
@@ -26,6 +26,7 @@ exports[`VSelect.ts should only show items if they are in items 1`] = `
                  readonly="readonly"
                  type="text"
                  aria-readonly="true"
+                 autocomplete="off"
           >
         </div>
         <div class="v-input__append-inner">
@@ -33,10 +34,11 @@ exports[`VSelect.ts should only show items if they are in items 1`] = `
             <i aria-hidden="true"
                class="v-icon notranslate material-icons theme--light"
             >
-              $vuetify.icons.dropdown
+              $dropdown
             </i>
           </div>
         </div>
+        <input type="hidden">
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
@@ -73,6 +75,7 @@ exports[`VSelect.ts should only show items if they are in items 2`] = `
                  readonly="readonly"
                  type="text"
                  aria-readonly="true"
+                 autocomplete="off"
           >
         </div>
         <div class="v-input__append-inner">
@@ -80,10 +83,11 @@ exports[`VSelect.ts should only show items if they are in items 2`] = `
             <i aria-hidden="true"
                class="v-icon notranslate material-icons theme--light"
             >
-              $vuetify.icons.dropdown
+              $dropdown
             </i>
           </div>
         </div>
+        <input type="hidden">
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
@@ -123,6 +127,7 @@ exports[`VSelect.ts should only show items if they are in items 3`] = `
                  readonly="readonly"
                  type="text"
                  aria-readonly="true"
+                 autocomplete="off"
           >
         </div>
         <div class="v-input__append-inner">
@@ -130,10 +135,11 @@ exports[`VSelect.ts should only show items if they are in items 3`] = `
             <i aria-hidden="true"
                class="v-icon notranslate material-icons theme--light"
             >
-              $vuetify.icons.dropdown
+              $dropdown
             </i>
           </div>
         </div>
+        <input type="hidden">
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
@@ -156,7 +162,7 @@ exports[`VSelect.ts should only show items if they are in items 3`] = `
 `;
 
 exports[`VSelect.ts should only show items if they are in items 4`] = `
-<div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
+<div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select v-select--is-multi">
   <div class="v-input__control">
     <div role="button"
          aria-haspopup="listbox"
@@ -176,6 +182,7 @@ exports[`VSelect.ts should only show items if they are in items 4`] = `
                  readonly="readonly"
                  type="text"
                  aria-readonly="true"
+                 autocomplete="off"
           >
         </div>
         <div class="v-input__append-inner">
@@ -183,10 +190,11 @@ exports[`VSelect.ts should only show items if they are in items 4`] = `
             <i aria-hidden="true"
                class="v-icon notranslate material-icons theme--light"
             >
-              $vuetify.icons.dropdown
+              $dropdown
             </i>
           </div>
         </div>
+        <input type="hidden">
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
@@ -223,6 +231,7 @@ exports[`VSelect.ts should render v-select correctly when not using scope slot 1
                  readonly="readonly"
                  type="text"
                  aria-readonly="true"
+                 autocomplete="off"
           >
         </div>
         <div class="v-input__append-inner">
@@ -230,10 +239,11 @@ exports[`VSelect.ts should render v-select correctly when not using scope slot 1
             <i aria-hidden="true"
                class="v-icon notranslate material-icons theme--light"
             >
-              $vuetify.icons.dropdown
+              $dropdown
             </i>
           </div>
         </div>
+        <input type="hidden">
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
@@ -270,6 +280,7 @@ exports[`VSelect.ts should render v-select correctly when not using v-list-item 
                  readonly="readonly"
                  type="text"
                  aria-readonly="true"
+                 autocomplete="off"
           >
         </div>
         <div class="v-input__append-inner">
@@ -277,10 +288,11 @@ exports[`VSelect.ts should render v-select correctly when not using v-list-item 
             <i aria-hidden="true"
                class="v-icon notranslate material-icons theme--light"
             >
-              $vuetify.icons.dropdown
+              $dropdown
             </i>
           </div>
         </div>
+        <input type="hidden">
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
@@ -317,6 +329,7 @@ exports[`VSelect.ts should render v-select correctly when using v-list-item in i
                  readonly="readonly"
                  type="text"
                  aria-readonly="true"
+                 autocomplete="off"
           >
         </div>
         <div class="v-input__append-inner">
@@ -324,10 +337,11 @@ exports[`VSelect.ts should render v-select correctly when using v-list-item in i
             <i aria-hidden="true"
                class="v-icon notranslate material-icons theme--light"
             >
-              $vuetify.icons.dropdown
+              $dropdown
             </i>
           </div>
         </div>
+        <input type="hidden">
       </div>
       <div class="v-menu">
         <div class="v-menu__content theme--light "
@@ -351,18 +365,18 @@ exports[`VSelect.ts should render v-select correctly when using v-list-item in i
 
 exports[`VSelect.ts should use slotted no-data 1`] = `
 <div role="listbox"
-     id="list-157"
+     id="list-143"
      tabindex="-1"
      class="v-list v-sheet v-sheet--tile theme--light"
 >
   <div tabindex="0"
        aria-selected="false"
-       aria-labelledby="foo-list-item-162"
+       aria-labelledby="list-item-148-0"
        role="option"
        class="v-list-item v-list-item--link theme--light"
   >
     <div class="v-list-item__content">
-      <div id="foo-list-item-162"
+      <div id="list-item-148-0"
            class="v-list-item__title"
       >
         foo
