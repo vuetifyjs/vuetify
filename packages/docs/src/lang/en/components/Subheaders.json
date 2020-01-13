@@ -1,10 +1,8 @@
 {
   "heading": "# Subheaders",
   "headingText": "The `v-subheader` component is used to separate sections of lists.",
+  "usageText": "Subheaders in their simplest form display a subheading with default theme.",
   "examples": {
-    "usage": {
-      "desc": "Subheaders in their simplest form display a subheading with default theme."
-    },
     "inset": {
       "heading": "### Inset subheaders",
       "desc": "Inset subheaders are moved 72px to the right. This gives you the option to line them up with list items and inset dividers."

@@ -1,10 +1,8 @@
 {
   "heading": "# Ratings",
   "headingText": "The rating component is a specialized but crucial piece in building user widgets. Collecting user feedback via ratings is a simple analytic that can provide a lot of feedback to your product or application.",
+  "usageText": "The `v-rating` component provides a simple interface for gathering user feedback.",
   "examples": {
-    "usage": {
-      "desc": "The `v-rating` component provides a simple interface for gathering user feedback."
-    },
     "sizes": {
       "heading": "### Size variants",
       "desc": "Utilize the same sizing classes available in `v-icon` or provide your own with the **size** prop."

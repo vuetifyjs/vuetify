@@ -1,10 +1,8 @@
 {
   "heading": "# Windows",
   "headingText": "The `v-window` component provides the baseline functionality for transitioning content from 1 pane to another. Other components such as `v-tabs`, `v-carousel` and `v-stepper` utilize this component at their core.",
+  "usageText": "Designed to easily cycle through content, `v-window` provides a simple interface to create truly custom implementations.",
   "examples": {
-    "usage": {
-      "desc": "Designed to easily cycle through content, `v-window` provides a simple interface to create truly custom implementations."
-    },
     "onboarding": {
       "heading": "### Onboarding",
       "desc": "`v-window` makes it easy to create custom components such as a different styled stepper."
