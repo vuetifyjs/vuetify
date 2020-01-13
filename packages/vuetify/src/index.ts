@@ -17,4 +17,6 @@ export default function install (app: App, options: VuetifyUseOptions = {}) {
   } as VuetifyUseOptions)
 }
 
-export { useVuetify, version } from './framework'
+install.version = VuetifyInstall.version
+
+export { useVuetify } from './framework'

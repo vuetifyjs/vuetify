@@ -34,7 +34,6 @@ export function install (app: App, options: VuetifyUseOptions = {}) {
   const {
     components = {},
     directives = {},
-    transitions = {}, // TODO: Is this needed? We never registered this before to my knowledge
     ...preset
   } = options
 
@@ -56,3 +55,5 @@ export function install (app: App, options: VuetifyUseOptions = {}) {
 
   app.provide(VuetifySymbol, vuetify.framework)
 }
+
+install.version = __VUETIFY_VERSION__

@@ -1,4 +1,4 @@
-import Vue, { Component, PluginFunction, VueConstructor, DirectiveOptions } from 'vue'
+import { Component, App, Directive } from 'vue'
 import './lib'
 import './alacarte'
 import './colors'
@@ -26,11 +26,11 @@ import { VuetifyService } from 'vuetify/types/services'
 declare const Vuetify: Vuetify
 export default Vuetify
 export interface Vuetify {
-  framework: Framework
-  install: PluginFunction<VuetifyUserPreset>
   version: string
-  new (preset?: Partial<VuetifyUserPreset>): Vuetify
+  (app: App, options: VuetifyUseOptions): void
 }
+
+export function useVuetify (): Framework
 
 export type ComponentOrPack = Component & {
   // eslint-disable-next-line camelcase
@@ -66,26 +66,7 @@ export interface VuetifyUserPreset extends NestedPartial<VuetifyPreset> {
 
 export interface VuetifyUseOptions extends VuetifyUserPreset {
   components?: Dictionary<ComponentOrPack>
-  directives?: Dictionary<DirectiveOptions>
-  transitions?: Dictionary<VueConstructor>
-}
-
-declare module 'vue/types/vue' {
-  export interface Vue {
-    $vuetify: Framework
-  }
-}
-
-declare module 'vue/types/options' {
-  export interface ComponentOptions<
-    V extends Vue,
-    Data=DefaultData<V>,
-    Methods=DefaultMethods<V>,
-    Computed=DefaultComputed,
-    PropsDef=PropsDefinition<DefaultProps>,
-    Props=DefaultProps> {
-    vuetify?: Vuetify
-  }
+  directives?: Dictionary<Directive>
 }
 
 // Public types

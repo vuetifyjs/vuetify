@@ -1,6 +1,7 @@
-import Vue from 'vue'
+import { App, defineComponent } from 'vue'
 
 import Vuetify, {
+  useVuetify,
   VBtn,
   VCard,
   VCardText,
@@ -8,11 +9,11 @@ import Vuetify, {
 
 import * as directives from 'vuetify/lib/directives'
 
-Vuetify.install(Vue)
+declare const app: App
 
-Vuetify.install(Vue, {})
-
-Vuetify.install(Vue, {
+app.use(Vuetify)
+app.use(Vuetify, {})
+app.use(Vuetify, {
   components: {
     VBtn,
     VCard,
@@ -21,7 +22,8 @@ Vuetify.install(Vue, {
   directives,
 })
 
-/* eslint-disable-next-line no-new */
-new Vue({
-  vuetify: new Vuetify(),
+defineComponent({
+  setup () {
+    const vuetify = useVuetify()
+  },
 })

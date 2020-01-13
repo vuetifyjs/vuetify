@@ -12,7 +12,6 @@ import { mergeDeep } from './util/helpers'
 
 // Types
 import {
-  Framework,
   VuetifyUserPreset,
   VuetifyPreset,
 } from 'vuetify/types'
@@ -24,7 +23,7 @@ import {
 // Services
 import * as services from './services'
 
-export const VuetifySymbol: InjectionKey<Framework> = Symbol.for('vuetify')
+export const VuetifySymbol: InjectionKey<Dictionary<VuetifyServiceContract>> = Symbol.for('vuetify')
 
 export function useVuetify () {
   const vuetify = inject(VuetifySymbol)
@@ -36,8 +35,6 @@ export function useVuetify () {
 
   return vuetify
 }
-
-export const version = __VUETIFY_VERSION__
 
 export default class Vuetify {
   public framework: Dictionary<VuetifyServiceContract> = {}
