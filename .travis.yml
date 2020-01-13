@@ -19,8 +19,8 @@ install:
 stages:
   # - name: kitchen
   #   if: (branch = master) AND (type = push) AND (repo = vuetifyjs/vuetify)
-  - name: test
-    if: (tag IS blank) OR (type != push) OR (repo != vuetifyjs/vuetify)
+  # - name: test
+  #   if: (tag IS blank) OR (type != push) OR (repo != vuetifyjs/vuetify)
   - name: deploy
     if: (tag IS present) AND (type = push) AND (repo = vuetifyjs/vuetify)
   - name: publish-docs-live
