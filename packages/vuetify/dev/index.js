@@ -5,8 +5,7 @@ import Vuetify from 'vuetify'
 import { createApp } from 'vue'
 
 const app = createApp()
-const options = {}
 
-app.use(Vuetify, options)
+app.use(Vuetify)
 
 app.mount(App, '#app')
