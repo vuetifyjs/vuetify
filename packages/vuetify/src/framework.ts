@@ -54,10 +54,9 @@ export default class Vuetify {
   init (userPreset: VuetifyUserPreset) {
     this.preset = this.mergePreset(userPreset)
 
-    const s: Dictionary<VuetifyService> = services
-
-    for (const key in s) {
-      const service = s[key]
+    let key: keyof typeof services
+    for (key in services) {
+      const service = services[key]
 
       this.use(service)
 
