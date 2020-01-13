@@ -20,7 +20,7 @@
   "optionHeader4": "### Custom Properties",
   "optionText5": "Enabling `customProperties` will also generate a css variable for each theme color, which you can then use in your components' `<style>` blocks.",
   "optionHeader5": "### CSP Nonce",
-  "optionText6": "Pages with the `script-src` CSP rule enabled may require a **nonce** to be specified for embedded style tags. ",
+  "optionText6": "Pages with the `script-src` or `style-src` CSP rules enabled may require a **nonce** to be specified for embedded style tags.",
   "themeGeneratorHeader": "## Theme generator",
   "themeGeneratorText1": "Discover and generate new color themes for your **Vuetify** applications using our [Theme Generator](https://theme-generator.vuetifyjs.com) tool.",
   "variantsSubheader": "### Custom theme variants",
