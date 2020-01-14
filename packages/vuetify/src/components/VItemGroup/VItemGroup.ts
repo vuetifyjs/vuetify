@@ -92,10 +92,8 @@ export const BaseItemGroup = mixins(
   },
 
   watch: {
-    internalValue () {
-      // https://github.com/vuetifyjs/vuetify/issues/5352
-      this.$nextTick(this.updateItemsState)
-    },
+    internalValue: 'updateItemsState',
+    items: 'updateItemsState',
   },
 
   created () {
@@ -105,6 +103,7 @@ export const BaseItemGroup = mixins(
   },
 
   methods: {
+
     genData (): object {
       return {
         class: this.classes,
@@ -170,17 +169,20 @@ export const BaseItemGroup = mixins(
 
       item.isActive = this.toggleMethod(value)
     },
+    // https://github.com/vuetifyjs/vuetify/issues/5352
     updateItemsState () {
-      if (this.mandatory &&
-        !this.selectedItems.length
-      ) {
-        return this.updateMandatory()
-      }
+      this.$nextTick(() => {
+        if (this.mandatory &&
+          !this.selectedItems.length
+        ) {
+          return this.updateMandatory()
+        }
 
-      // TODO: Make this smarter so it
-      // doesn't have to iterate every
-      // child in an update
-      this.items.forEach(this.updateItem)
+        // TODO: Make this smarter so it
+        // doesn't have to iterate every
+        // child in an update
+        this.items.forEach(this.updateItem)
+      })
     },
     updateInternalValue (value: any) {
       this.multiple
