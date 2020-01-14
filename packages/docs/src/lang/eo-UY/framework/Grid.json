@@ -4,11 +4,8 @@
   "components": [
     "crwdns24232:0crwdne24232:0"
   ],
+  "usageText": "crwdns24234:0crwdne24234:0",
   "examples": {
-    "usage": {
-      "desc": "crwdns24234:0crwdne24234:0",
-      "uninverted": true
-    },
     "playground": {
       "heading": "crwdns24238:0crwdne24238:0",
       "desc": "crwdns24240:0crwdne24240:0",

@@ -1,14 +1,12 @@
 {
   "heading": "crwdns44968:0crwdne44968:0",
   "headingText": "crwdns44970:0crwdne44970:0",
+  "usageText": "crwdns38130:0crwdne38130:0",
   "subComponentsHeader": "crwdns42350:0crwdne42350:0",
   "subComponentsList": [
     "crwdns42352:0crwdne42352:0"
   ],
   "examples": {
-    "usage": {
-      "desc": "crwdns38130:0crwdne38130:0"
-    },
     "cycle": {
       "heading": "crwdns44972:0crwdne44972:0",
       "desc": "crwdns38134:0crwdne38134:0"

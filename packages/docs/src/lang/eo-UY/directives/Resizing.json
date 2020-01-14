@@ -1,12 +1,7 @@
 {
   "heading": "crwdns44228:0crwdne44228:0",
   "headingText": "crwdns44230:0crwdne44230:0",
-  "examples": {
-    "usage": {
-      "desc": "crwdns30258:0crwdne30258:0",
-      "uninverted": true
-    }
-  },
+  "usageText": "crwdns30258:0crwdne30258:0",
   "options": {
     "modifiers.quiet": "crwdns30262:0crwdne30262:0",
     "value": "crwdns30264:0crwdne30264:0"

@@ -5,11 +5,7 @@
   "secondHeader": "crwdns23754:0crwdne23754:0",
   "thirdHeader": "crwdns23756:0crwdne23756:0",
   "loremIpsum": "crwdns23758:0crwdne23758:0",
-  "examples": {
-    "usage": {
-      "desc": "crwdns35614:0crwdne35614:0"
-    }
-  },
+  "usageText": "crwdns35614:0crwdne35614:0",
   "components": [
     "crwdns23762:0$vuetifycrwdne23762:0"
   ],

@@ -4,10 +4,8 @@
   "components": [
     "crwdns24064:0crwdne24064:0"
   ],
+  "usageText": "crwdns24066:0crwdne24066:0",
   "examples": {
-    "usage": {
-      "desc": "crwdns24066:0crwdne24066:0"
-    },
     "subheader": {
       "heading": "crwdns24068:0crwdne24068:0",
       "desc": "crwdns24070:0crwdne24070:0"

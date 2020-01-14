@@ -1,10 +1,8 @@
 {
   "heading": "crwdns45116:0crwdne45116:0",
   "headingText": "crwdns45118:0crwdne45118:0",
+  "usageText": "crwdns32174:0crwdne32174:0",
   "examples": {
-    "usage": {
-      "desc": "crwdns32174:0crwdne32174:0"
-    },
     "api": {
       "heading": "crwdns45120:0crwdne45120:0",
       "desc": "crwdns32178:0crwdne32178:0"

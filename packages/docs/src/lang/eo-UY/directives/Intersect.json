@@ -1,11 +1,7 @@
 {
   "heading": "crwdns44204:0crwdne44204:0",
   "headingText": "crwdns44206:0[v-lazy]crwdne44206:0",
-  "examples": {
-    "usage": {
-      "desc": "crwdns42812:0[v-card]crwdne42812:0"
-    }
-  },
+  "usageText": "crwdns42812:0[v-card]crwdne42812:0",
   "options": {
     "modifiers.once": "crwdns42814:0crwdne42814:0",
     "modifiers.quiet": "crwdns42816:0crwdne42816:0",

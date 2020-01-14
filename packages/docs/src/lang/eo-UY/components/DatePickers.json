@@ -1,4 +1,5 @@
 {
+  "usageText": "crwdns32372:0crwdne32372:0",
   "examples": {
     "date-allowed-dates": {
       "desc": "crwdns38554:0crwdne38554:0",
@@ -103,9 +104,6 @@
     "month-width": {
       "desc": "crwdns38650:0crwdne38650:0",
       "heading": "crwdns45192:0crwdne45192:0"
-    },
-    "usage": {
-      "desc": "crwdns32372:0crwdne32372:0"
     }
   },
   "heading": "crwdns45194:0crwdne45194:0",

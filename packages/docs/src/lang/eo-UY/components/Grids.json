@@ -2,6 +2,7 @@
   "heading": "crwdns45972:0crwdne45972:0",
   "headingText": "crwdns45974:0crwdne45974:0",
   "headerAlert1": "crwdns43120:0crwdne43120:0",
+  "usageText": "crwdns42446:0crwdne42446:0",
   "usageText2": "crwdns42434:0crwdne42434:0",
   "usageList": [
     "crwdns43122:0crwdne43122:0",
@@ -11,9 +12,6 @@
   "usageText3": "crwdns43128:0crwdne43128:0",
   "usageAlert1": "crwdns42444:0crwdne42444:0",
   "examples": {
-    "usage": {
-      "desc": "crwdns42446:0crwdne42446:0"
-    },
     "playground": {
       "heading": "crwdns45976:0crwdne45976:0",
       "desc": "crwdns40422:0crwdne40422:0"

@@ -1,10 +1,8 @@
 {
   "heading": "crwdns46210:0crwdne46210:0",
   "headingText": "crwdns46212:0crwdne46212:0",
+  "usageText": "crwdns42592:0crwdne42592:0",
   "examples": {
-    "usage": {
-      "desc": "crwdns42592:0crwdne42592:0"
-    },
     "slots": {
       "heading": "crwdns46214:0crwdne46214:0",
       "desc": "crwdns34584:0crwdne34584:0"
