@@ -1,8 +1,10 @@
 {
   "heading": "# Text fields",
   "headingText": "Text fields components are used for collecting user provided information.",
-  "usageText": "A simple text field with placeholder and/or label.",
   "examples": {
+    "usage": {
+      "desc": "A simple text field with placeholder and/or label."
+    },
     "single-line": {
       "heading": "### Single line",
       "desc": "Single line text fields do not float their label on focus or with data."
@@ -109,7 +111,7 @@
     "multiLine": "Turns into textarea",
     "noResize": "Removes the resize handle, only applies to **multi-line** and **textarea** props",
     "outlined": "Applies the outlined style to the input",
-    "placeholder": "Sets the input's placeholder text",
+    "placeholder": "Sets the input’s placeholder text",
     "prefix": "Displays prefix text",
     "prependInnerIcon": "Prepends an icon inside the component's input, uses the same syntax as `v-icon`",
     "reverse": "Reverses the input orientation",
