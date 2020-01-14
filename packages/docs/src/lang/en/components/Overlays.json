@@ -1,10 +1,8 @@
 {
   "heading": "# Overlays",
   "headingText": "The `v-overlay` component is used to provide emphasis on a particular element or parts of it. It signals to the user of a state change within the application and can be used for creating loaders, dialogs and more.",
+  "usageText": "In its simplest form, the `v-overlay` component will add a dimmed layer over your application.",
   "examples": {
-    "usage": {
-      "desc": "In its simplest form, the `v-overlay` component will add a dimmed layer over your application."
-    },
     "absolute": {
       "heading": "### Absolute",
       "desc": "`absolute` overlays are positioned absolutely and contained inside of their parent element."

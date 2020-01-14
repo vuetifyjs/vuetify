@@ -1,10 +1,8 @@
 {
   "heading": "# Snackbars",
   "headingText": "The `v-snackbar` component is used to display a quick message to a user. Snackbars support positioning, removal delay, and callbacks.",
+  "usageText": "`v-snackbar`'s in their simplest form display a temporary and closable notification to the user.",
   "examples": {
-    "usage": {
-      "desc": "`v-snackbar`'s in their simplest form display a temporary and closable notification to the user."
-    },
     "multi-line": {
       "heading": "### Multi Line",
       "desc": "The `multi-line` property extends the height of the `v-snackbar` to give you a little more room for content."

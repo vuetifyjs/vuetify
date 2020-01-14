@@ -1,10 +1,8 @@
 {
   "heading": "# Treeview",
   "headingText": "The `v-treeview` component is useful for displaying large amounts of nested data.",
+  "usageText": "A basic example",
   "examples": {
-    "usage": {
-      "desc": "A basic example"
-    },
     "dense": {
       "heading": "### Dense mode",
       "desc": "Dense mode provides more compact layout with decreased heights of the items."

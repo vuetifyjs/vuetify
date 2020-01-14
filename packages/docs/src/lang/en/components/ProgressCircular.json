@@ -1,10 +1,8 @@
 {
   "heading": "# Progress circular",
   "headingText": "The `v-progress-circular` component is used to convey data circularly to users. It also can be put into an indeterminate state to portray loading.",
+  "usageText": "By default, progress circular uses the applications secondary color.",
   "examples": {
-    "usage": {
-      "desc": "By default, progress circular uses the applications secondary color."
-    },
     "circular-colored": {
       "heading": "### Colored",
       "desc": "Alternate colors can be applied to `v-progress-circular` using the `color` prop."

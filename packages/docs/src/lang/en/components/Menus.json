@@ -1,11 +1,8 @@
 {
   "heading": "# Menus",
   "headingText": "The `v-menu` component shows a menu at the position of the element used to activate it.",
+  "usageText": "Remember to put the element that activates the menu in the `activator` slot.",
   "examples": {
-    "usage": {
-      "desc": "Remember to put the element that activates the menu in the `activator` slot.",
-      "uninverted": true
-    },
     "absolute": {
       "heading": "### Absolute position",
       "desc": "Menus can also be placed absolutely on top of the activator element using the `absolute` prop. Try clicking anywhere on the image.",
