@@ -1,10 +1,8 @@
 {
   "heading": "crwdns46018:0crwdne46018:0",
   "headingText": "crwdns46020:0[v-item-group]crwdnd46020:0[v-tabs]crwdnd46020:0[v-chip-group]crwdne46020:0",
+  "usageText": "crwdns40546:0[v-window]crwdne40546:0",
   "examples": {
-    "usage": {
-      "desc": "crwdns40546:0[v-window]crwdne40546:0"
-    },
     "carousel": {
       "heading": "crwdns46022:0crwdne46022:0",
       "desc": "crwdns40550:0crwdne40550:0"

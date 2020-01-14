@@ -4,10 +4,8 @@
   "accessibility": {
     "desc": "crwdns43050:0[WAI-ARIA]crwdne43050:0"
   },
+  "usageText": "crwdns43052:0crwdne43052:0",
   "examples": {
-    "usage": {
-      "desc": "crwdns43052:0crwdne43052:0"
-    },
     "boilerplate": {
       "heading": "crwdns45508:0crwdne45508:0",
       "desc": "crwdns45510:0crwdne45510:0"
