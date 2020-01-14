@@ -10,8 +10,10 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "ratios"
+          "type": "usage-new",
+          "value": {
+            "booleans": []
+          }
         }
       ]
     },

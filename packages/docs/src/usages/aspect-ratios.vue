@@ -1,0 +1,11 @@
+<template>
+  <v-img v-bind="attrs" />
+</template>
+
+<script>
+  import Usage from './usage'
+
+  export default {
+    mixins: [Usage],
+  }
+</script>

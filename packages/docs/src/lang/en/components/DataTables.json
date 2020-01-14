@@ -1,10 +1,8 @@
 {
   "heading": "# Data tables",
   "headingText": "The `v-data-table` component is used for displaying tabular data. Features include sorting, searching, pagination, inline-editing, header tooltips, and row selection.",
+  "usageText": "The standard data-table will by default render your data as simple rows.",
   "examples": {
-    "usage": {
-      "desc": "The standard data-table will by default render your data as simple rows."
-    },
     "slots": {
       "heading": "### Slots",
       "desc": "The `v-data-table` provides a large number of slots for customizing the table. This example showcases some of these slots and what you can do with each. It is important to note some slot (eg: `item`/`body`/`header`) will completely takes over the internal rendering of the component which will require you to re-implement functionalities such as selection and expansion. Some slots will override each other such as: `body` > `item` > `item.<name>` and `header`/`header.<name>`."

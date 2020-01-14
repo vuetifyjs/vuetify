@@ -1,10 +1,8 @@
 {
   "heading": "# Bottom navigation",
   "headingText": "The `v-bottom-navigation` is an alternative to the sidebar. It is primarily used on mobile and comes in two variants, icons and text, and shift.",
+  "usageText": "While the bottom nav is meant to be used with the `vue-router`, you can also programmatically control the active state of the buttons by using the `active.sync` prop. You can change a button's value by using its `value` attribute.",
   "examples": {
-    "usage": {
-      "desc": "While the bottom nav is meant to be used with the `vue-router`, you can also programmatically control the active state of the buttons by using the `active.sync` prop. You can change a button's value by using its `value` attribute."
-    },
     "color": {
       "heading": "### Color",
       "desc": "The `color` prop applies a color to the background the bottom navigation. It is recommended to use the `light` and `dark` props to properly contrast text color."

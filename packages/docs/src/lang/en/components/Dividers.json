@@ -1,10 +1,8 @@
 {
   "heading": "# Dividers",
   "headingText": "The `v-divider` component is used to separate sections of lists or layouts.",
+  "usageText": "Dividers in their simplest form display a horizontal line.",
   "examples": {
-    "usage": {
-      "desc": "Dividers in their simplest form display a horizontal line."
-    },
     "inset": {
       "heading": "### Inset dividers",
       "desc": "Inset dividers are moved 72px to the right. This will cause them to line up with list items."

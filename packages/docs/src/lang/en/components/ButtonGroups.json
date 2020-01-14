@@ -1,10 +1,8 @@
 {
   "heading": "# Button groups",
   "headingText": "The `v-btn-toggle` component is a simple wrapper for `v-item-group` built specifically to work with `v-btn`.",
+  "usageText": "Toggle buttons allow you to create a styled group of buttons that can selected or toggled under a single `v-model`",
   "examples": {
-    "usage": {
-      "desc": "Toggle buttons allow you to create a styled group of buttons that can selected or toggled under a single `v-model`"
-    },
     "app-bar": {
       "heading": "### In toolbar",
       "desc": "Easily integrate customized button solutions with a `v-toolbar`"

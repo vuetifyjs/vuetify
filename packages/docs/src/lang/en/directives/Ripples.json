@@ -1,11 +1,8 @@
 {
   "heading": "# Ripple directive",
   "headingText": "The `v-ripple` directive is used to show action from a user. It can be applied to any block level element. Numerous components come with the ripple directive built in, such as the `v-btn`, `v-tabs-item` and many more.",
+  "usageText": "Basic ripple functionality can be enabled just by using `v-ripple` directive on a component or an HTML element",
   "examples": {
-    "usage": {
-      "desc": "Basic ripple functionality can be enabled just by using `v-ripple` directive on a component or an HTML element",
-      "uninverted": true
-    },
     "custom-color": {
       "heading": "### Custom color",
       "desc": "Using a helper class, you can change the color of the ripple.",

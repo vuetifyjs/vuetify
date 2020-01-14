@@ -23,8 +23,10 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "usage"
+          "type": "usage-new",
+          "value": {
+            "booleans": []
+          }
         },
         {
           "type": "text",
