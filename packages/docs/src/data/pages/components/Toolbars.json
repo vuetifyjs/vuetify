@@ -23,20 +23,13 @@
               "short"
             ],
             "sliders": [
-              "elevation",
               {
-                "prop": "height",
+                "prop": "elevation",
                 "attrs": {
-                  "min": 0,
-                  "max": 250
-                }
-              },
-              {
-                "prop": "extension-height",
-                "attrs": {
-                  "min": 0,
-                  "max": 350
-                }
+                  "min": 2,
+                  "max": 24
+                },
+                "value": 2
               }
             ],
             "selects": [
@@ -74,15 +67,6 @@
             "v-toolbar-title",
             "v-toolbar-items"
           ]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "playground",
-          "value": "playground"
         }
       ]
     },

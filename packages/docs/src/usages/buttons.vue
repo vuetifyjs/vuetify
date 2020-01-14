@@ -5,12 +5,13 @@
       justify="center"
     >
       <v-btn
-        :class="$vuetify.theme.dark && 'white--text'"
+        class="white--text"
         v-bind="{
           ...attrs,
           color: attrs.color || 'deep-purple accent-4',
           [attrs.size]: true
         }"
+        :elevation="!hasElevation ? undefined : attrs.elevation"
       >
         <v-icon v-if="attrs.fab || attrs.icon">mdi-account</v-icon>
 
@@ -25,5 +26,16 @@
 
   export default {
     mixins: [Usage],
+
+    computed: {
+      hasElevation () {
+        return !(
+          this.attrs.outlined ||
+          this.attrs.depressed ||
+          this.attrs.icon ||
+          this.attrs.text
+        )
+      },
+    },
   }
 </script>
