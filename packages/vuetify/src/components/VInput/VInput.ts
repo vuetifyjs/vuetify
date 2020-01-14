@@ -226,6 +226,7 @@ export default baseMixins.extend<options>().extend({
         props: {
           color: this.validationState,
           dark: this.dark,
+          disabled: this.disabled,
           focused: this.hasState,
           for: this.computedId,
           light: this.light,

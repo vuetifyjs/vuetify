@@ -1,10 +1,10 @@
 <template>
-  <v-card class="overflow-hidden">
+  <div>
     <v-app-bar
+      :src="attrs.image ? 'https://picsum.photos/1920/1080?random' : ''"
       absolute
       dark
-      scroll-target="#playground-example"
-      :src="attrs.image ? 'https://picsum.photos/1920/1080?random' : ''"
+      scroll-target="#usage-example"
       v-bind="attrs"
     >
       <v-app-bar-nav-icon />
@@ -17,14 +17,9 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
     </v-app-bar>
-    <v-sheet
-      id="playground-example"
-      class="overflow-y-auto"
-      max-height="600"
-    >
-      <v-container style="height: 1500px;" />
-    </v-sheet>
-  </v-card>
+
+    <v-responsive height="1000">&nbsp;</v-responsive>
+  </div>
 </template>
 
 <script>
