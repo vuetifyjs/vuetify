@@ -61,6 +61,12 @@
       "name": "Quanted Square",
       "href": "https://analytics.quantedsquare.com/",
       "logo": "backers/quanted-square.svg"
+    },
+    {
+      "name": "HYPE",
+      "href": "https://www.hypeinnovation.com/home",
+      "darkLogo": "backers/hype-logo-dark.svg",
+      "logo": "backers/hype-logo-light.svg"
     }
   ],
   "Collective": [
