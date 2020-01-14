@@ -1,10 +1,8 @@
 {
   "heading": "# Selection controls",
   "headingText": "Selection control components allow a user to select options. These components **must** be used with the `v-model` prop as they do not maintain their own state.",
+  "usageText": "",
   "examples": {
-    "usage": {
-      "desc": ""
-    },
     "checkboxes-boolean": {
       "heading": "### Checkboxes - Boolean",
       "desc": ""

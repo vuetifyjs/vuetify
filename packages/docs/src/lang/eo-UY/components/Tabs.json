@@ -2,10 +2,8 @@
   "heading": "crwdns45870:0crwdne45870:0",
   "headingText": "crwdns45872:0crwdne45872:0",
   "alert": "crwdns40190:0crwdne40190:0",
+  "usageText": "crwdns40192:0[v-item-group]crwdne40192:0",
   "examples": {
-    "usage": {
-      "desc": "crwdns40192:0[v-item-group]crwdne40192:0"
-    },
     "fixed-tabs": {
       "heading": "crwdns45874:0crwdne45874:0",
       "desc": "crwdns40196:0crwdne40196:0"

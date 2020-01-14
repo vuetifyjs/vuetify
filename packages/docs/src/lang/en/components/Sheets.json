@@ -1,10 +1,8 @@
 {
   "heading": "# Sheets",
   "headingText": "The `v-sheet` is designed to power other **paper** components within Vuetify. It is meant to be used as a low level component.",
+  "usageText": "The `v-sheet` component is a malleable piece of paper that can be morphed to facilitate other components.",
   "examples": {
-    "usage": {
-      "desc": "The `v-sheet` component is a malleable piece of paper that can be morphed to facilitate other components."
-    },
     "elevation": {
       "heading": "### Using elevation",
       "desc": "Sheets can accept a custom elevation between **0 and 24** (0 is default)."

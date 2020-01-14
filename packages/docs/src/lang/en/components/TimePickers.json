@@ -1,10 +1,8 @@
 {
   "heading": "# Time pickers",
   "headingText": "The `v-time-picker` is stand-alone component that can be utilized in many existing Vuetify components. It offers the user a visual representation for selecting the time.",
+  "usageText": "Time pickers have the light theme enabled by default.",
   "examples": {
-    "usage": {
-      "desc": "Time pickers have the light theme enabled by default."
-    },
     "colorable": {
       "heading": "### Colors",
       "desc": "Time picker colors can be set using the `color` and `header-color` props. If `header-color` prop is not provided  header will use the `color` prop value."

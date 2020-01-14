@@ -1,10 +1,8 @@
 {
   "heading": "# Progress linear",
   "headingText": "The `v-progress-linear` component is used to convey data visually to users. They can also represent an indeterminate amount, such as loading or processing.",
+  "usageText": "In its simplest form, `v-progress-linear` displays a horizontal progress bar. Use the `value` prop to control the progress.",
   "examples": {
-    "usage": {
-      "desc": "In its simplest form, `v-progress-linear` displays a horizontal progress bar. Use the `value` prop to control the progress."
-    },
     "file-loader": {
       "heading": "### File loader",
       "desc": "The `v-progress-linear` component is good for translating to the user that they are waiting for a response."

@@ -1,10 +1,8 @@
 {
   "heading": "# Parallax",
   "headingText": "The `v-parallax` component creates a 3d effect that makes an image appear to scroll slower than the window.",
+  "usageText": "A parallax causes a shift in a background image when the user scrolls the page.",
   "examples": {
-    "usage": {
-      "desc": "A parallax causes a shift in a background image when the user scrolls the page."
-    },
     "content": {
       "heading": "### With content",
       "desc": "You can also place any content inside of the parallax. This allows you to use the parallax as a hero image."

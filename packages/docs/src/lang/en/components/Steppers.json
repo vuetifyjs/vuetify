@@ -1,10 +1,8 @@
 {
   "heading": "# Steppers",
   "headingText": "The `v-stepper` component displays progress through numbered steps.",
+  "usageText": "A stepper can be used for a multitude of scenarios, including shopping carts, record creation and more.",
   "examples": {
-    "usage": {
-      "desc": "A stepper can be used for a multitude of scenarios, including shopping carts, record creation and more."
-    },
     "editable": {
       "heading": "### Editable steps",
       "desc": "An editable step can be selected by a user at any point and will navigate them to that step."
