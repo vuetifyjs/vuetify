@@ -1,10 +1,8 @@
 {
   "heading": "# Text fields",
   "headingText": "Text fields components are used for collecting user provided information.",
+  "usageText": "A simple text field with placeholder and/or label.",
   "examples": {
-    "usage": {
-      "desc": "A simple text field with placeholder and/or label."
-    },
     "single-line": {
       "heading": "### Single line",
       "desc": "Single line text fields do not float their label on focus or with data."
