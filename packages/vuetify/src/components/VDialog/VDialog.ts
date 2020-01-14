@@ -271,14 +271,14 @@ export default baseMixins.extend({
 
     children.push(this.genActivator())
 
-    let dialog = h('div', data, this.showLazyContent([
+    let dialog = h('div', data, this.showLazyContent(() => [
       this.$createElement(VThemeProvider, {
         props: {
           root: true,
           light: this.light,
           dark: this.dark,
         },
-      }, [this.getContentSlot()]),
+      }, this.getContentSlot()),
     ]))
     if (this.transition) {
       dialog = h('transition', {

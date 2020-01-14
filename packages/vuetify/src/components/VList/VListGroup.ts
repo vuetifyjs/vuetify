@@ -22,6 +22,7 @@ import { VExpandTransition } from '../transitions'
 
 // Utils
 import mixins, { ExtractVue } from '../../util/mixins'
+import { getSlot } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
@@ -167,8 +168,8 @@ export default baseMixins.extend<options>().extend({
           name: 'show',
           value: this.isActive,
         }],
-      }, this.showLazyContent([
-        this.$createElement('div', this.$slots.default),
+      }, this.showLazyContent(() => [
+        this.$createElement('div', getSlot(this)),
       ]))
     },
     genPrependIcon (): VNode | null {

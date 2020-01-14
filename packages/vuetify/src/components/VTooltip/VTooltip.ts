@@ -185,21 +185,23 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
   },
 
   render (h): VNode {
-    const tooltip = h('div', this.setBackgroundColor(this.color, {
-      staticClass: 'v-tooltip__content',
-      class: {
-        [this.contentClass]: true,
-        menuable__content__active: this.isActive,
-        'v-tooltip__content--fixed': this.activatorFixed,
-      },
-      style: this.styles,
-      attrs: this.getScopeIdAttrs(),
-      directives: [{
-        name: 'show',
-        value: this.isContentActive,
-      }],
-      ref: 'content',
-    }), this.showLazyContent(this.getContentSlot()))
+    const tooltip = this.showLazyContent(() => [
+      h('div', this.setBackgroundColor(this.color, {
+        staticClass: 'v-tooltip__content',
+        class: {
+          [this.contentClass]: true,
+          menuable__content__active: this.isActive,
+          'v-tooltip__content--fixed': this.activatorFixed,
+        },
+        style: this.styles,
+        attrs: this.getScopeIdAttrs(),
+        directives: [{
+          name: 'show',
+          value: this.isContentActive,
+        }],
+        ref: 'content',
+      }), this.getContentSlot()),
+    ])
 
     return h(this.tag, {
       staticClass: 'v-tooltip',
@@ -209,7 +211,7 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
         props: {
           name: this.computedTransition,
         },
-      }, [tooltip]),
+      }, tooltip),
       this.genActivator(),
     ])
   },

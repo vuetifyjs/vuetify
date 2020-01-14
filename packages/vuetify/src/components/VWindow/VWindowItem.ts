@@ -86,7 +86,7 @@ export default baseMixins.extend<options>().extend(
           value: this.isActive,
         }],
         on: this.$listeners,
-      }, this.showLazyContent(this.genDefaultSlot()))
+      }, this.genDefaultSlot())
     },
     onAfterTransition () {
       if (!this.inTransition) {
@@ -156,6 +156,6 @@ export default baseMixins.extend<options>().extend(
         // Enter handler for height transition.
         enter: this.onEnter,
       },
-    }, [this.genWindowItem()])
+    }, this.showLazyContent(() => [this.genWindowItem()]))
   },
 })

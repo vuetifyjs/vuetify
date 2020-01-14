@@ -350,14 +350,14 @@ export default baseMixins.extend({
       return this.$createElement(
         'div',
         options,
-        this.showLazyContent([
+        this.showLazyContent(() => [
           this.$createElement(VThemeProvider, {
             props: {
               root: true,
               light: this.light,
               dark: this.dark,
             },
-          }, [this.getContentSlot()]),
+          }, this.getContentSlot()),
         ])
       )
     },

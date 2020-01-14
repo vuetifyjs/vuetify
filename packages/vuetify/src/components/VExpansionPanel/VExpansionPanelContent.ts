@@ -50,7 +50,7 @@ export default baseMixins.extend<options>().extend({
           name: 'show',
           value: this.isActive,
         }],
-      }), this.showLazyContent([
+      }), this.showLazyContent(() => [
         h('div', { class: 'v-expansion-panel-content__wrap' }, getSlot(this)),
       ])),
     ])
