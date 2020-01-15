@@ -231,6 +231,7 @@ describe('VSelect.ts', () => {
       propsData: {
         items: ['foo', 'bar'],
         readonly: true,
+        menuProps: 'eager',
       },
     })
 
