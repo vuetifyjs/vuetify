@@ -49,6 +49,7 @@ $material-light: map-deep-merge(
       'focus': map-get($grey, 'lighten-3')
     ),
     'selection-controls': (
+      'disabled': rgba(map-get($shades, 'black'), 0.26),
       'thumb': (
         'inactive': map-get($shades, 'white'),
         'disabled': map-get($grey, 'lighten-5')
