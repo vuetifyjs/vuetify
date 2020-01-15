@@ -246,10 +246,6 @@ exports[`VSelect.ts should render v-select correctly when not using scope slot 1
         <input type="hidden">
       </div>
       <div class="v-menu">
-        <div class="v-menu__content theme--light "
-             style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
-        >
-        </div>
       </div>
     </div>
     <div class="v-text-field__details">
@@ -295,10 +291,6 @@ exports[`VSelect.ts should render v-select correctly when not using v-list-item 
         <input type="hidden">
       </div>
       <div class="v-menu">
-        <div class="v-menu__content theme--light "
-             style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
-        >
-        </div>
       </div>
     </div>
     <div class="v-text-field__details">
@@ -344,10 +336,6 @@ exports[`VSelect.ts should render v-select correctly when using v-list-item in i
         <input type="hidden">
       </div>
       <div class="v-menu">
-        <div class="v-menu__content theme--light "
-             style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
-        >
-        </div>
       </div>
     </div>
     <div class="v-text-field__details">

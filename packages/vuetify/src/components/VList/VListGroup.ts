@@ -161,16 +161,16 @@ export default baseMixins.extend<options>().extend({
         this.genAppendIcon(),
       ])
     },
-    genItems (): VNode {
-      return this.$createElement('div', {
-        staticClass: 'v-list-group__items',
-        directives: [{
-          name: 'show',
-          value: this.isActive,
-        }],
-      }, this.showLazyContent(() => [
-        this.$createElement('div', getSlot(this)),
-      ]))
+    genItems (): VNode[] {
+      return this.showLazyContent(() => [
+        this.$createElement('div', {
+          staticClass: 'v-list-group__items',
+          directives: [{
+            name: 'show',
+            value: this.isActive,
+          }],
+        }, getSlot(this)),
+      ])
     },
     genPrependIcon (): VNode | null {
       const icon = this.prependIcon
@@ -217,7 +217,7 @@ export default baseMixins.extend<options>().extend({
       class: this.classes,
     }), [
       this.genHeader(),
-      h(VExpandTransition, [this.genItems()]),
+      h(VExpandTransition, this.genItems()),
     ])
   },
 })

@@ -556,10 +556,6 @@ exports[`VDataTableHeader.ts mobile should render 1`] = `
                 <input type="hidden">
               </div>
               <div class="v-menu">
-                <div class="v-menu__content theme--light "
-                     style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
-                >
-                </div>
               </div>
             </div>
           </div>
@@ -621,10 +617,6 @@ exports[`VDataTableHeader.ts mobile should render with data-table-select header 
                 <input type="hidden">
               </div>
               <div class="v-menu">
-                <div class="v-menu__content theme--light "
-                     style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
-                >
-                </div>
               </div>
             </div>
           </div>
@@ -690,10 +682,6 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
                 >
               </div>
               <div class="v-menu">
-                <div class="v-menu__content theme--light "
-                     style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
-                >
-                </div>
               </div>
             </div>
           </div>
@@ -744,10 +732,6 @@ exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
                 <input type="hidden">
               </div>
               <div class="v-menu">
-                <div class="v-menu__content theme--light "
-                     style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
-                >
-                </div>
               </div>
             </div>
           </div>
@@ -813,10 +797,6 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
                 >
               </div>
               <div class="v-menu">
-                <div class="v-menu__content theme--light "
-                     style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
-                >
-                </div>
               </div>
             </div>
           </div>
@@ -882,10 +862,6 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
                 >
               </div>
               <div class="v-menu">
-                <div class="v-menu__content theme--light "
-                     style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
-                >
-                </div>
               </div>
             </div>
           </div>

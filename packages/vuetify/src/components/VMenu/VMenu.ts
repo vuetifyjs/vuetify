@@ -285,7 +285,7 @@ export default baseMixins.extend({
         props: {
           name: this.transition,
         },
-      }, [this.genContent()])
+      }, this.showLazyContent(() => [this.genContent()]))
     },
     genDirectives (): VNodeDirective[] {
       const directives: VNodeDirective[] = [{
@@ -350,15 +350,13 @@ export default baseMixins.extend({
       return this.$createElement(
         'div',
         options,
-        this.showLazyContent(() => [
-          this.$createElement(VThemeProvider, {
-            props: {
-              root: true,
-              light: this.light,
-              dark: this.dark,
-            },
-          }, this.getContentSlot()),
-        ])
+        [this.$createElement(VThemeProvider, {
+          props: {
+            root: true,
+            light: this.light,
+            dark: this.dark,
+          },
+        }, this.getContentSlot())]
       )
     },
     getTiles () {

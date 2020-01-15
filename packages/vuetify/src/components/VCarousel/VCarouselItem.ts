@@ -46,7 +46,7 @@ export default baseMixins.extend({
         value: this.isActive,
       })
 
-      return this.$createElement(tag, data, this.showLazyContent(() => this.genDefaultSlot()))
+      return this.$createElement(tag, data, this.genDefaultSlot())
     },
   },
 })

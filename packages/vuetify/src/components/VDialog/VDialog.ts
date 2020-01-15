@@ -241,67 +241,54 @@ export default baseMixins.extend({
   },
 
   render (h): VNode {
-    const children = []
-    const data = {
-      class: this.classes,
-      ref: 'dialog',
-      directives: [
-        {
-          name: 'click-outside',
-          value: this.onClickOutside,
-          args: {
-            closeConditional: this.closeConditional,
-            include: this.getOpenDependentElements,
+    let dialog = this.showLazyContent(() => {
+      const data = {
+        class: this.classes,
+        ref: 'dialog',
+        directives: [
+          {
+            name: 'click-outside',
+            value: this.onClickOutside,
+            args: {
+              closeConditional: this.closeConditional,
+              include: this.getOpenDependentElements,
+            },
           },
+          { name: 'show', value: this.isActive },
+        ],
+        on: {
+          click: (e: Event) => { e.stopPropagation() },
         },
-        { name: 'show', value: this.isActive },
-      ],
-      on: {
-        click: (e: Event) => { e.stopPropagation() },
-      },
-      style: {},
-    }
-
-    if (!this.fullscreen) {
-      data.style = {
-        maxWidth: this.maxWidth === 'none' ? undefined : convertToUnit(this.maxWidth),
-        width: this.width === 'auto' ? undefined : convertToUnit(this.width),
+        style: {},
       }
-    }
 
-    children.push(this.genActivator())
+      if (!this.fullscreen) {
+        data.style = {
+          maxWidth: this.maxWidth === 'none' ? undefined : convertToUnit(this.maxWidth),
+          width: this.width === 'auto' ? undefined : convertToUnit(this.width),
+        }
+      }
 
-    let dialog = h('div', data, this.showLazyContent(() => [
-      this.$createElement(VThemeProvider, {
-        props: {
-          root: true,
-          light: this.light,
-          dark: this.dark,
-        },
-      }, this.getContentSlot()),
-    ]))
+      return [
+        h('div', data, [
+          this.$createElement(VThemeProvider, {
+            props: {
+              root: true,
+              light: this.light,
+              dark: this.dark,
+            },
+          }, this.getContentSlot()),
+        ]),
+      ]
+    })
     if (this.transition) {
-      dialog = h('transition', {
+      dialog = [h('transition', {
         props: {
           name: this.transition,
           origin: this.origin,
         },
-      }, [dialog])
+      }, dialog)]
     }
-
-    children.push(h('div', {
-      class: this.contentClasses,
-      attrs: {
-        role: 'document',
-        tabindex: this.isActive ? 0 : undefined,
-        ...this.getScopeIdAttrs(),
-      },
-      on: {
-        keydown: this.onKeydown,
-      },
-      style: { zIndex: this.activeZIndex },
-      ref: 'content',
-    }, [dialog]))
 
     return h('div', {
       staticClass: 'v-dialog__container',
@@ -312,6 +299,21 @@ export default baseMixins.extend({
           this.attach === 'attach',
       },
       attrs: { role: 'dialog' },
-    }, children)
+    }, [
+      this.genActivator(),
+      h('div', {
+        class: this.contentClasses,
+        attrs: {
+          role: 'document',
+          tabindex: this.isActive ? 0 : undefined,
+          ...this.getScopeIdAttrs(),
+        },
+        on: {
+          keydown: this.onKeydown,
+        },
+        style: { zIndex: this.activeZIndex },
+        ref: 'content',
+      }, dialog),
+    ])
   },
 })
