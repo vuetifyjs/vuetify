@@ -1,6 +1,3 @@
-// Styles
-import '../VCard/VCard.sass'
-
 // Components
 import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'
 import VDivider from '../VDivider'
@@ -28,7 +25,7 @@ import {
 
 // Types
 import mixins from '../../util/mixins'
-import { VNode, PropType } from 'vue'
+import { VNode, PropType, VNodeChildren } from 'vue'
 import { SelectItemKey } from 'types'
 
 type ListTile = { item: any, disabled?: null | boolean, value?: boolean, index: number };
@@ -235,7 +232,7 @@ export default mixins(Colorable, Themeable).extend({
   },
 
   render (): VNode {
-    const children = []
+    const children: VNodeChildren = []
     const itemsLength = this.items.length
     for (let index = 0; index < itemsLength; index++) {
       const item = this.items[index]
@@ -256,18 +253,14 @@ export default mixins(Colorable, Themeable).extend({
 
     this.$slots['append-item'] && children.push(this.$slots['append-item'])
 
-    return this.$createElement('div', {
-      staticClass: 'v-select-list v-card',
+    return this.$createElement(VList, {
+      staticClass: 'v-select-list',
       class: this.themeClasses,
-    }, [
-      this.$createElement(VList, {
-        attrs: {
-          id: this.$attrs.id,
-          role: 'listbox',
-          tabindex: -1,
-        },
-        props: { dense: this.dense },
-      }, children),
-    ])
+      attrs: {
+        role: 'listbox',
+        tabindex: -1,
+      },
+      props: { dense: this.dense },
+    }, children)
   },
 })
