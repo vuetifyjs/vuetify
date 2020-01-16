@@ -18,7 +18,9 @@
 // Block
 .v-file-input
   input[type="file"]
+    left: 0
     opacity: 0
+    position: absolute
     max-width: 0
     width: 0
 
@@ -35,6 +37,9 @@
 
   .v-chip
     margin: $file-input-chip-margin
+
+.v-file-input .v-text-field__slot
+  min-height: $file-input-slot-min-height
 
 .v-file-input.v-text-field--filled:not(.v-text-field--single-line)
   .v-file-input__text

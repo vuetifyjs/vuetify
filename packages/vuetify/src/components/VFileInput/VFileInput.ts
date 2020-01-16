@@ -231,10 +231,17 @@ export default VTextField.extend({
           'v-file-input__text--placeholder': this.placeholder && !this.isDirty,
           'v-file-input__text--chips': this.hasChips && !this.$scopedSlots.selection,
         },
-        on: {
-          click: () => this.$refs.input.click(),
-        },
       }, children)
+    },
+    genTextFieldSlot () {
+      const node = VTextField.options.methods.genTextFieldSlot.call(this)
+
+      node.data!.on = {
+        ...(node.data!.on || {}),
+        click: () => this.$refs.input.click(),
+      }
+
+      return node
     },
     onInput (e: Event) {
       const files = [...(e.target as HTMLInputElement).files || []]
