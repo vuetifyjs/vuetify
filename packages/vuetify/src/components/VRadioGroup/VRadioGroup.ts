@@ -83,7 +83,7 @@ export default baseMixins.extend({
       label.data!.attrs!.id = this.computedId
       // WAI considers this an orphaned label
       delete label.data!.attrs!.for
-      label.tag = 'div'
+      label.tag = 'legend'
 
       return label
     },
