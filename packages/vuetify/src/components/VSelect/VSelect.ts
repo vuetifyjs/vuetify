@@ -616,6 +616,8 @@ export default baseMixins.extend<options>().extend({
         keyCodes.space,
       ].includes(keyCode)) this.activateMenu()
 
+      this.$emit('keydown', e)
+
       if (!menu) return
 
       // If menu is active, allow default
