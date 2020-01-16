@@ -20,6 +20,15 @@
     > .v-input__slot
       margin-bottom: 12px
 
+  .v-input__slot,
+  .v-radio
+    > .v-label
+      align-items: center
+      display: inline-flex
+      flex: 1 1 auto
+      // TODO: Resolve in v3, all selection controls need separate sass files
+      height: 24px
+
   &__input
     color: inherit
     display: inline-flex
