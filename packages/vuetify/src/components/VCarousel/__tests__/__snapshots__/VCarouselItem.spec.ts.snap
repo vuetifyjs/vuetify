@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`VCarouselItem.ts should render component and match snapshot 1`] = `undefined`;
-
-exports[`VCarouselItem.ts should throw warning when not used inside v-carousel 1`] = `undefined`;
