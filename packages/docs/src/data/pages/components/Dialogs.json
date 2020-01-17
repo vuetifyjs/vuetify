@@ -18,7 +18,7 @@
               "fullscreen",
               "hide-overlay",
               "no-click-animation",
-              "persistent",
+              "persistent"
             ]
           }
         }
