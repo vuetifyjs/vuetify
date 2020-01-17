@@ -9,7 +9,15 @@
         {
           "type": "usage-new",
           "value": {
-            "booleans": []
+            "booleans": [
+              "event-more",
+              "event-ripple",
+              "hide-header",
+              "short-intervals",
+              "short-months",
+              "short-weekdays",
+              "show-month-on-first"
+            ]
           }
         }
       ]
