@@ -238,10 +238,17 @@ export default baseMixins.extend({
         focusable.length && (focusable[0] as HTMLElement).focus()
       }
     },
-  },
+    genTransition () {
+      if (!this.transition) return this.genContent()
 
-  render (h): VNode {
-    let dialog = this.showLazyContent(() => {
+      return this.$createElement('transition', {
+        props: {
+          name: this.transition,
+          origin: this.origin,
+        },
+      }, this.showLazyContent(() => [this.genContent()]))
+    },
+    genContent () {
       const data = {
         class: this.classes,
         ref: 'dialog',
@@ -269,39 +276,7 @@ export default baseMixins.extend({
         }
       }
 
-      return [
-        h('div', data, [
-          this.$createElement(VThemeProvider, {
-            props: {
-              root: true,
-              light: this.light,
-              dark: this.dark,
-            },
-          }, this.getContentSlot()),
-        ]),
-      ]
-    })
-    if (this.transition) {
-      dialog = [h('transition', {
-        props: {
-          name: this.transition,
-          origin: this.origin,
-        },
-      }, dialog)]
-    }
-
-    return h('div', {
-      staticClass: 'v-dialog__container',
-      class: {
-        'v-dialog__container--attached':
-          this.attach === '' ||
-          this.attach === true ||
-          this.attach === 'attach',
-      },
-      attrs: { role: 'dialog' },
-    }, [
-      this.genActivator(),
-      h('div', {
+      return this.$createElement('div', {
         class: this.contentClasses,
         attrs: {
           role: 'document',
@@ -313,7 +288,33 @@ export default baseMixins.extend({
         },
         style: { zIndex: this.activeZIndex },
         ref: 'content',
-      }, dialog),
+      }, [
+        this.$createElement('div', data, [
+          this.$createElement(VThemeProvider, {
+            props: {
+              root: true,
+              light: this.light,
+              dark: this.dark,
+            },
+          }, this.getContentSlot()),
+        ]),
+      ])
+    },
+  },
+
+  render (h): VNode {
+    return h('div', {
+      staticClass: 'v-dialog__container',
+      class: {
+        'v-dialog__container--attached':
+          this.attach === '' ||
+          this.attach === true ||
+          this.attach === 'attach',
+      },
+      attrs: { role: 'dialog' },
+    }, [
+      this.genActivator(),
+      this.genContent(),
     ])
   },
 })

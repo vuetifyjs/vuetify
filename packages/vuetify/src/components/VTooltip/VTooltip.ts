@@ -182,36 +182,44 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
 
       return listeners
     },
+    genTransition () {
+      if (!this.computedTransition) return this.genContent()
+
+      return this.$createElement('transition', {
+        props: {
+          name: this.computedTransition,
+        },
+      }, this.showLazyContent(() => [this.genContent()]))
+    },
+    genContent () {
+      return this.$createElement(
+        'div',
+        this.setBackgroundColor(this.color, {
+          staticClass: 'v-tooltip__content',
+          class: {
+            [this.contentClass]: true,
+            menuable__content__active: this.isActive,
+            'v-tooltip__content--fixed': this.activatorFixed,
+          },
+          style: this.styles,
+          attrs: this.getScopeIdAttrs(),
+          directives: [{
+            name: 'show',
+            value: this.isContentActive,
+          }],
+          ref: 'content',
+        }),
+        this.getContentSlot()
+      )
+    },
   },
 
   render (h): VNode {
-    const tooltip = this.showLazyContent(() => [
-      h('div', this.setBackgroundColor(this.color, {
-        staticClass: 'v-tooltip__content',
-        class: {
-          [this.contentClass]: true,
-          menuable__content__active: this.isActive,
-          'v-tooltip__content--fixed': this.activatorFixed,
-        },
-        style: this.styles,
-        attrs: this.getScopeIdAttrs(),
-        directives: [{
-          name: 'show',
-          value: this.isContentActive,
-        }],
-        ref: 'content',
-      }), this.getContentSlot()),
-    ])
-
     return h(this.tag, {
       staticClass: 'v-tooltip',
       class: this.classes,
     }, [
-      h('transition', {
-        props: {
-          name: this.computedTransition,
-        },
-      }, tooltip),
+      this.genTransition(),
       this.genActivator(),
     ])
   },
