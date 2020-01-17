@@ -2,19 +2,30 @@
 .v-backdrop
   position: relative
 
-// Element
-.v-backdrop__content, .v-backdrop__front, .v-backdrop__back
-  width: 100%
-  position: absolute
-  transition: all .3s
+  // Element
+  &__content, &__front, &__back
+    width: 100%
+    position: absolute
+    transition: all .3s
 
-.v-backdrop__content, .v-backdrop__back
-  overflow: auto
+  &__content, &__back
+    overflow: auto
 
-.v-backdrop__overlay
-  height: 100%
-  width: 100%
-  position: absolute
-  top: 0
-  transition: opacity .3s
-  background-color: #ffffff
+  &__overlay
+    height: 100%
+    width: 100%
+    position: absolute
+    top: 0
+    transition: opacity .3s
+    background-color: #ffffff
+    opacity: 0
+    pointer-events: none
+
+  // Modifier
+  &--active
+    .v-backdrop__overlay
+      opacity: .5
+      pointer-events: auto
+
+    .v-backdrop__content
+      overflow: hidden

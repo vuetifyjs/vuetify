@@ -106,16 +106,11 @@ export default mixins(
           staticClass: 'v-backdrop__content',
           style: {
             'max-height': `calc(100vh - ${convertToUnit(this.frontShift + this.subheaderHeight)})`,
-            overflow: this.isActive ? 'hidden' : 'auto',
           },
         }, [
           this.$slots.default,
           this.$createElement('div', {
             staticClass: 'v-backdrop__overlay',
-            style: {
-              opacity: this.isActive ? 0.5 : 0,
-              'pointer-events': this.isActive ? 'auto' : 'none',
-            },
           }),
         ]),
       ])
@@ -125,6 +120,9 @@ export default mixins(
   render (): VNode {
     return this.$createElement('div', {
       staticClass: 'v-backdrop',
+      class: {
+        'v-backdrop--active': this.isActive,
+      },
     }, [
       this.genBack(),
       this.genFront(),
