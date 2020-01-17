@@ -13,7 +13,12 @@
         {
           "type": "usage-new",
           "value": {
-            "booleans": []
+            "booleans": [
+              "calculate-widths",
+              "dense",
+              "disable-pagination",
+              "fixed-header"
+            ]
           }
         }
       ]
