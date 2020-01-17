@@ -13,7 +13,16 @@
         {
           "type": "usage-new",
           "value": {
-            "booleans": []
+            "booleans": [
+              "full-width",
+              "landscape",
+              "no-title",
+              "reactive",
+              "readonly",
+              "scrollable",
+              "show-current",
+              "show-week"
+            ]
           }
         }
       ]

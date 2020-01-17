@@ -1,5 +1,5 @@
 <template>
-  <v-date-picker v-bind="attrs" />
+  <v-date-picker v-model="picker" v-bind="attrs" />
 </template>
 
 <script>
@@ -7,5 +7,10 @@
 
   export default {
     mixins: [Usage],
+    data () {
+      return {
+        picker: new Date().toISOString().substr(0, 10),
+      }
+    },
   }
 </script>
