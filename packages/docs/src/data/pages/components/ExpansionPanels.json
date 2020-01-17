@@ -13,7 +13,18 @@
         {
           "type": "usage-new",
           "value": {
-            "booleans": []
+            "booleans": [
+              "accordion",
+              "popout",
+              "inset",
+              "multiple",
+              "disabled",
+              "readonly",
+              "focusable",
+              "flat",
+              "hover",
+              "tile"
+            ]
           }
         }
       ]
