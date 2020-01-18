@@ -1,5 +1,6 @@
 // Imports
 @import './_variables.scss'
+@import '../VAvatar/_variables.scss'
 
 // Theme
 +theme(v-skeleton-loader) using ($material)
@@ -39,7 +40,7 @@
   vertical-align: top
 
   &__actions
-    padding: 16px 16px 8px
+    padding: $skeleton-loader-actions-padding
     text-align: right
 
     .v-skeleton-loader__button
@@ -47,10 +48,10 @@
 
       &:first-child
         +ltr()
-          margin-right: 12px
+          margin-right: $skeleton-loader-actions-button-margin
 
         +rtl()
-          margin-left: 12px
+          margin-left: $skeleton-loader-actions-button-margin
 
 
   .v-skeleton-loader__list-item,
@@ -94,13 +95,13 @@
   &__article
     .v-skeleton-loader__heading
       +ltr()
-        margin: 16px 0 8px 16px
+        margin: $skeleton-loader-article-heading-margin-top-left 0 $skeleton-loader-article-heading-margin-x $skeleton-loader-article-heading-margin-top-left
 
       +rtl()
-        margin: 16px 8px 0 16px
+        margin: $skeleton-loader-article-heading-margin-top-left $skeleton-loader-article-heading-margin-x 0 $skeleton-loader-article-heading-margin-top-left
 
     .v-skeleton-loader__paragraph
-      padding: 16px
+      padding: $skeleton-loader-article-paragraph-padding
 
   &__bone
     border-radius: inherit
@@ -119,14 +120,14 @@
       z-index: 1
 
   &__avatar
-    border-radius: 50%
-    height: 48px
-    width: 48px
+    border-radius: $avatar-border-radius
+    height: $skeleton-loader-avatar-height
+    width: $skeleton-loader-avatar-width
 
   &__button
     border-radius: $skeleton-loader-button-border-radius
-    height: 36px
-    width: 64px
+    height: $skeleton-loader-button-height
+    width: $skeleton-loader-button-width
 
   &__card
     .v-skeleton-loader__image
@@ -134,15 +135,15 @@
 
   &__card-heading
     .v-skeleton-loader__heading
-      margin: 16px
+      margin: $skeleton-loader-card-heading-loader-heading-margin
 
   &__card-text
-    padding: 16px
+    padding: $skeleton-loader-card-text-padding
 
   &__chip
     border-radius: $skeleton-loader-chip-border-radius
-    height: 32px
-    width: 96px
+    height: $skeleton-loader-chip-height
+    width: $skeleton-loader-chip-width
 
   &__date-picker
     border-radius: $skeleton-loader-date-picker-border-radius
@@ -159,33 +160,33 @@
   &__date-picker-days
     display: flex
     flex-wrap: wrap
-    padding: 0 12px
+    padding: $skeleton-loader-date-picker-days-padding
     margin: 0 auto
 
     .v-skeleton-loader__avatar
       border-radius: $skeleton-loader-border-radius
       flex: 1 1 auto
-      margin: 4px
-      height: 40px
-      width: 40px
+      margin: $skeleton-loader-date-picker-days-margin
+      height: $skeleton-loader-date-picker-days-height
+      width: $skeleton-loader-date-picker-days-width
 
   &__date-picker-options
     align-items: center
     display: flex
-    padding: 16px
+    padding: $skeleton-loader-date-picker-options-padding
 
     .v-skeleton-loader__avatar
-      height: 40px
-      width: 40px
+      height: $skeleton-loader-date-picker-options-avatar-height
+      width: $skeleton-loader-date-picker-options-avatar-width
 
       &:nth-child(2)
         margin-left: auto
 
         +ltr()
-          margin-right: 8px
+          margin-right: $skeleton-loader-date-picker-options-avatar-child-margin
 
         +rtl()
-          margin-left: 8px
+          margin-left: $skeleton-loader-date-picker-options-avatar-child-margin
 
     .v-skeleton-loader__text.v-skeleton-loader__bone:first-child
       margin-bottom: 0px
@@ -194,21 +195,21 @@
 
   &__divider
     border-radius: $skeleton-loader-divider-border-radius
-    height: 2px
+    height: $skeleton-loader-divider-height
 
   &__heading
     border-radius: $skeleton-loader-heading-border-radius
-    height: 24px
+    height: $skeleton-loader-heading-height
     width: 45%
 
   &__image
-    height: 200px
+    height: $skeleton-loader-image-height
 
     &:not(:first-child):not(:last-child)
       border-radius: 0
 
   &__list-item
-    height: 48px
+    height: $skeleton-loader-list-item-height
 
   &__list-item-three-line
     flex-wrap: wrap
@@ -221,19 +222,19 @@
   &__list-item-avatar-two-line,
   &__list-item-avatar-three-line
     .v-skeleton-loader__avatar
-      height: 40px
-      width: 40px
+      height: $skeleton-loader-item-avatar-height
+      width: $skeleton-loader-item-avatar-width
 
   &__list-item-avatar
-    height: 56px
+    height: $skeleton-loader-avatar-height
 
   &__list-item-two-line,
   &__list-item-avatar-two-line
-    height: 72px
+    height: $skeleton-loader-item-two-line-height
 
   &__list-item-three-line,
   &__list-item-avatar-three-line
-    height: 88px
+    height: $skeleton-loader-item-three-line-height
 
   &__list-item-avatar-three-line
     .v-skeleton-loader__avatar
@@ -249,14 +250,14 @@
     align-items: center
     display: flex
     flex-wrap: wrap
-    padding: 0 16px
+    padding: $skeleton-loader-item-padding
 
     .v-skeleton-loader__avatar
       +ltr()
-        margin-right: 16px
+        margin-right: $skeleton-loader-item-avatar-margin
 
       +rtl()
-        margin-left: 16px
+        margin-left: $skeleton-loader-item-avatar-margin
 
     .v-skeleton-loader__text:last-child,
     .v-skeleton-loader__text:only-child
@@ -290,7 +291,7 @@
     align-items: center
     display: flex
     justify-content: space-between
-    padding: 16px
+    padding: $skeleton-loader-table-heading-padding
 
     .v-skeleton-loader__heading
       max-width: 15%
@@ -301,26 +302,30 @@
   &__table-thead
     display: flex
     justify-content: space-between
-    padding: 16px
+    padding: $skeleton-loader-table-thead-padding
 
     .v-skeleton-loader__heading
       max-width: 5%
 
   &__table-tbody
-    padding: 16px 16px 0
+    padding: $skeleton-loader-table-tbody-padding
 
   &__table-tfoot
     align-items: center
     display: flex
     justify-content: flex-end
-    padding: 16px
+    padding: $skeleton-loader-table-tfoot-padding
 
     > *
-      margin-left: 8px
+      +ltr()
+        margin-left: $skeleton-loader-table-tfoot-children-margin
+
+      +rtl()
+        margin-right: $skeleton-loader-table-tfoot-children-margin
 
     .v-skeleton-loader__avatar
-      height: 40px
-      width: 40px
+      height: $skeleton-loader-table-tfoot-avatar-height
+      width: $skeleton-loader-table-tfoot-avatar-width
 
     .v-skeleton-loader__text
       margin-bottom: 0
@@ -338,8 +343,8 @@
   &__table-cell
     align-items: center
     display: flex
-    height: 48px
-    width: 88px
+    height: $skeleton-loader-table-cell-height
+    width: $skeleton-loader-table-cell-width
 
     .v-skeleton-loader__text
       margin-bottom: 0
@@ -347,7 +352,7 @@
   &__text
     border-radius: $skeleton-loader-text-border-radius
     flex: 1 0 auto
-    height: 12px
+    height: $skeleton-loader-text-height
     margin-bottom: 6px
 
   &--boilerplate

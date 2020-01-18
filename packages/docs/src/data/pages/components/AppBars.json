@@ -11,8 +11,34 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "usage"
+          "type": "usage-new",
+          "value": {
+            "booleans": [
+              "image",
+              "collapse-on-scroll",
+              "dense",
+              "flat",
+              "hide-on-scroll",
+              "inverted-scroll",
+              "prominent"
+            ],
+            "selects": [
+              {
+                "prop": "color",
+                "label": "Color",
+                "attrs": {
+                  "items": [
+                    "primary",
+                    "orange",
+                    "yellow",
+                    "green",
+                    "blue",
+                    "purple"
+                  ]
+                }
+              }
+            ]
+          }
         },
         {
           "type": "alert",
@@ -30,15 +56,6 @@
             "v-app-bar",
             "v-app-bar-nav-icon"
           ]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "playground",
-          "value": "playground"
         }
       ]
     },

@@ -1,4 +1,5 @@
 export default {
+  badge: '배지',
   close: '닫기',
   dataIterator: {
     noResultsText: '일치하는 항목이 없습니다.',

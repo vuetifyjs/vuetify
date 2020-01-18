@@ -1,4 +1,5 @@
 export default {
+  badge: 'Žetons',
   close: 'Aizvērt',
   dataIterator: {
     noResultsText: 'Nekas netika atrasts',

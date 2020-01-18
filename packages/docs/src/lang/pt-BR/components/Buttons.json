@@ -15,6 +15,7 @@
       "uninverted": true
     },
     "icon": {
+      "heading": "### Ícone",
       "desc": "Ícones podem ser usados para o contúdo principal de um botão."
     },
     "loaders": {

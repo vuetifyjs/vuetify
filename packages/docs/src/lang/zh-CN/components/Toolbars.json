@@ -1,19 +1,85 @@
 {
+  "heading": "# 工具栏",
+  "headingText": "`v-toolbar` 组件对于任何 gui 都是至关重要的，因为它通常是站点导航的主要来源。工具栏组件与 [v-navigation-drawer](/components/navigation-drawers) 和 [v-card](/components/cards) 配合使用效果非常好。",
+  "buttonMargin": "当在 `v-toolbar` 和 `v-app-bar` 内部使用带有 **icon** 属性的 `<v-btn>` 时，它们的大小会自动增加，并且会使用负边距来确保适当的间距以遵守 Material Design Specification。如果您选择将按钮包装在任何容器中，例如`<div>`，则需要对该容器应用负边距以正确对齐它们。",
   "examples": {
+    "usage": {
+      "desc": "工具栏是一个灵活的容器，可以通过多种方式使用。 默认情况下，工具栏在桌面上的高度为 64px，在移动设备上的高度为 56px。 工具栏上有许多辅助组件可供使用。`v-toolbar-title` 用于显示标题， `v-toolbar-items` 允许 [v-btn](/components/buttons) 扩展整个高度。"
+    },
     "light-and-dark": {
+      "heading": "### 明亮和暗黑",
       "desc": "工具栏有两个变种，明亮和暗黑。明亮工具栏有深色的按钮和黑暗的文字，而暗黑工具栏有白色的按钮和白色的文字。"
     },
     "flexible-and-card": {
-      "desc": "通过一些自定义样式，您可以轻松创建令人惊叹的用户界面。"
+      "heading": "### 灵活的工具栏和卡片工具栏",
+      "desc": "在本例中，我们使用 **extended** 属性将卡片偏移到工具栏的扩展内容区域。"
+    },
+    "floating-with-search": {
+      "heading": "### 搜索时浮动",
+      "desc": "浮动工具栏被转换成内联元素，只占用所需的空间。这在将工具栏放置在内容上时特别有用。"
     },
     "variations": {
-      "desc": "一个应用程序栏有多个可以应用主题和辅助类的变种，范围从明亮和暗黑的主题、色彩和透明度。"
+      "heading": "### 变量",
+      "desc": "一个应用程序栏有多个可以应用主题和辅助类的变种，范围从明亮和暗黑的主题、色彩和透明度。",
+      "uninverted": true
+    },
+    "prominent": {
+      "heading": "### 突出的工具栏",
+      "desc": "突出的工具栏将 `v-toolbar`' 的高度增加到 _128px_，并将 `v-toolbar-title` 放置在容器的底部。 这在 [v-app](/components/app-bars#prominent-w-scroll-shrink) 中进行了扩展，能够将 **prominent** 工具栏缩小为 **dense** 或 **short**。"
     },
     "dense": {
+      "heading": "### 密集的工具栏",
       "desc": "密集工具栏降低其高度未48px,这也是移动设备横向定位的默认行为。"
     },
+    "dense-prominent": {
+      "heading": "### 密集突出的工具栏",
+      "desc": "您可以结合使用突出属性和密集属性。"
+    },
+    "scrolling": {
+      "heading": "### 滚动屏幕",
+      "desc": "滚动时，工具栏可以在屏幕外切换。 在这里，我们演示了如何指定滚动目标（默认为 window）。 注意：在此示例中，您的应用程序中不需要特殊标记。"
+    },
     "system-bars-status-window": {
+      "heading": "### 系统栏 - 状态/窗口",
       "desc": "系统栏对于移动设备和桌面上的通知图标很有用，对于现场示例，请前往预定义的布局。"
+    },
+    "contextual-action-bar": {
+      "heading": "### 上下文操作栏",
+      "desc": "可以根据应用程序状态的变化更新工具栏的外观。在本例中，工具栏的颜色和内容根据用户在 `v-select` 中的选择而变化。"
+    },
+    "background": {
+      "heading": "### 突出 w/ Background",
+      "desc": "工具栏可以显示背景，而不是纯色。 可以通过使用 **img** 插槽并提供您自己的 [v-img](/components/images) 组件来进行修改。 可以使用 [v-app-bar](/components/app-bars#prominent-w-scroll-shrink-and-image) 淡化背景。"
+    },
+    "extended": {
+      "heading": "### 扩展",
+      "desc": "无需使用 `extension` 插槽即可扩展工具栏。"
+    },
+    "extension-height": {
+      "heading": "### 扩展高度",
+      "desc": "扩展的高度可以定制。"
+    },
+    "collapse": {
+      "heading": "### 折叠",
+      "desc": "可以折叠工具栏以节省屏幕空间。"
     }
+  },
+  "props": {
+    "absolute": "Mixins.Positionable.props.absolute",
+    "bottom": "Mixins.Positionable.props.bottom",
+    "collapse": "将工具栏置于折叠状态，以减小其最大宽度。",
+    "dense": "将工具栏内容的高度降低到 48px（使用 **prominent** 属性时为 96px）。",
+    "extended": "使用此道具可以增加工具栏的高度，而 _不需要_ 使用 `extension` 插槽来添加内容。可以与 **extension-height** 属性，以及其他会影响工具栏高度的其他属性，例如 **prominent**, **dense** 等配合使用，**height** **除外**。",
+    "extensionHeight": "为 `extension` 插槽指定一个明确的高度。 ",
+    "flat": "删除工具栏的框阴影。",
+    "floating": "将 **display: inline-flex** 应用于组件。",
+    "height": "指定工具栏的特定高度。覆盖其他 props 所施加的高度，例如 **prominent**, **dense**, **extended**。",
+    "prominent": "将工具栏内容的高度增加到 128px。",
+    "short": "将工具栏内容的高度降低到 56px（使用 **prominent** 属性时为 112px）。",
+    "src": "指定 [v-img](/components/images) 作为组件背景。"
+  },
+  "slots": {
+    "extension": "槽位直接位于工具栏的主要内容下。可以使用 **extension-height** 属性显式设置高度。如果该插槽没有内容，可以使用 **extended** 属性代替。",
+    "img": "需要 [v-img](/components/images) 组件。范围内的 **props** 应该与 `v-bind=\"props\"` 一起使用。"
   }
 }

@@ -1,4 +1,4 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 .v-carousel
   overflow: hidden
@@ -7,10 +7,10 @@
 
   &__controls
     align-items: center
-    background: rgba(0, 0, 0, .3)
+    background: $carousel-controls-bg
     bottom: 0
     display: flex
-    height: 50px
+    height: $carousel-controls-size
     justify-content: center
     list-style-type: none
     position: absolute
@@ -21,21 +21,21 @@
       flex: 0 1 auto
 
     &__item
-      margin: 0 8px
+      margin: $carousel-dot-margin
 
       .v-icon
-        opacity: .5
+        opacity: $carousel-dot-inactive-opacity
 
       &--active
         .v-icon
-          opacity: 1
+          opacity: $carousel-dot-active-opacity
           vertical-align: middle
 
       &:hover
         background: none
 
         .v-icon
-          opacity: .8
+          opacity: $carousel-dot-hover-opacity
 
 // Element
 .v-carousel__progress
@@ -58,4 +58,4 @@
 .v-carousel--vertical-delimiters
   .v-carousel__controls
     height: 100% !important
-    width: 50px
+    width: $carousel-controls-size

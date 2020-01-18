@@ -1,7 +1,46 @@
 {
+  "heading": "# 纸片组",
+  "headingText": "`v-chip-group` 通过提供可添加的功能来添加 `v-chip` 组件。它用于使用纸片创建选择组。",
   "examples": {
+    "usage": {
+      "heading": "用例",
+      "desc": "纸片组使用户可以方便地为更复杂的实现选择过滤选项。默认情况下，`v-chip-group` 将向右溢出，但可以更改为 **column** 模式。"
+    },
+    "toothbrush": {
+      "heading": "### 牙刷卡片",
+      "desc": "纸片组允许创建自定义接口，这些接口执行与项组或单选控件相同的操作，但在风格上有所不同。"
+    },
+    "filter-results": {
+      "heading": "### 过滤结果",
+      "desc": "使用 **filter** 属性轻松创建纸片组，以提供更多反馈。 这创建了一种替代的视觉风格，可以与用户交流选择了纸片的情况。"
+    },
+    "blouse": {
+      "heading": "### 衬衫产品卡片",
+      "desc": "`v-chip` 组件可以具有用于其模型的显式值。这将传递给 `v-chip-group` 组件，在不希望使用纸片索引作为其值时非常有用。"
+    },
+    "column": {
+      "heading": "### 列",
+      "desc": "带有 `column` 属性的纸片组可以包装其纸片。"
+    },
+    "mandatory": {
+      "heading": "### 必填项",
+      "desc": "具有 `mandatory` 属性的纸片组必须始终选择一个值。"
+    },
     "multiple": {
-      "heading": "多选"
+      "heading": "### 多选",
+      "desc": "具有 `multiple` 属性的纸片组可以选择许多值。"
     }
+  },
+  "api": {
+    "v-chip": "Components.Chips"
+  },
+  "props": {
+    "appendIcon": "附加插槽中使用的图标（如果显示）",
+    "centerActive": "强制选择的纸片居中",
+    "column": "删除水平分页并根据需要包装项目",
+    "nextIcon": "指定用于下一个图标的图标",
+    "prependIcon": "前置插槽中使用的此图标（如果显示）",
+    "prevIcon": "指定用于上一个图标的图标",
+    "showArrows": "强制显示分页箭头"
   }
 }

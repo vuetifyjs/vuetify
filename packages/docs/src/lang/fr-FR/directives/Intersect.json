@@ -1,4 +1,6 @@
 {
+  "heading": "# Observateur intersection",
+  "headingText": "La directive `v-intersect` utilise l'API [Intersection Observer](https://developer.mozilla.org/fr-US/docs/Web/API/Intersection_Observer_API). Elle fournit une interface facile à utiliser pour détecter les éléments qui sont visibles dans le port de vue de l'utilisateur. Ceci est également utilisé pour le composant [v-lazy](/components/lazy).",
   "examples": {
     "usage": {
       "desc": "Défiler la fenêtre et regarder le point coloré. Avis comme [v-card](/components/cards) vient en vue qu'il change d'erreur à succès"
@@ -6,7 +8,9 @@
   },
   "options": {
     "modifiers.once": "N'invoquera que le rappel de l'utilisateur fourni sur la monture et une fois intersecté. Si vous utilisez le modificateur **calme** ne sera invoqué qu'une seule fois.",
-    "modifiers.quiet": "N'invoquera pas automatiquement le rappel fourni lors de la liaison."
+    "modifiers.quiet": "N'invoquera pas automatiquement le rappel fourni lors de la liaison.",
+    "value": "La fonction à appeler lorsque l'élément ciblé est intersecté."
   },
-  "polyfillHeading": "## Polyremplissage"
+  "polyfillHeading": "## Polyremplissage",
+  "polyfillText1": "Si l'API [Intersection Observer](https://developer.mozilla.org/fr-US/docs/Web/API/Intersection_Observer_API) n'est pas disponible dans IE11 par défaut, il peut être implémenté en utilisant un [polyfill](https://github.com/w3c/IntersectionObserver)."
 }

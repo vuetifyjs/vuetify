@@ -1,1 +1,45 @@
-{}
+{
+  "heading": "# 窗口",
+  "headingText": "`v-window` 组件提供将内容从一个窗口转换到另一个窗口的基础功能。其他组件，如 `v-tabs`, `v-carousel` 和 `v-stepper` 在它们的核心中利用了这个组件。",
+  "examples": {
+    "usage": {
+      "desc": "`v-window` 被设计成可以轻松地循环浏览内容，它提供了一个简单的接口来创建真正的自定义实现。"
+    },
+    "onboarding": {
+      "heading": "### 入职",
+      "desc": "`v-window` 使它很容易创建自定义组件，如不同风格的幻灯片。"
+    },
+    "vertical": {
+      "heading": "### 垂直",
+      "desc": "`v-window` 可以是垂直的。 垂直窗口具有 Y 轴过渡而不是 X 轴过渡。"
+    },
+    "reverse": {
+      "heading": "### 反转",
+      "desc": "反转 `v-window` 总是显示反向转换。"
+    },
+    "account": {
+      "heading": "### 帐户创建",
+      "desc": "使用平滑动画创建表单。`v-window ` 会自动跟踪当前的选择索引以自动改变过渡方向。 这可以通过 `reverse` 属性手动控制。"
+    }
+  },
+  "props": {
+    "activeClass": "Mixins.BaseItemGroup.props.activeClass",
+    "continuous": "如果为 `true`，则窗口将从最后一项到第一项，以及从第一项到最后 \"wrap around\"",
+    "nextIcon": "如果 `show-arrows` 为 `true`，则显示 \"next\" 按钮的图标",
+    "prevIcon": "如果 `show-arrows` 为 `true`，则显示 \"prev\" 按钮的图标",
+    "reverse": "手动设置窗口以使用 **reverseTransition**",
+    "reverseTransition": "组件反转项时使用的转换。可以是一个 [built in transitions](/styles/transitions) 或是你自己创建的过渡。",
+    "showArrows": "显示 \"next\" 和 \"prev\" 按钮",
+    "showArrowsOnHover": "悬停时显示 \"next\" 和 \"prev\" 按钮。必须设置 `show-arrows` 。",
+    "touch": "左右滑动时提供自定义的 **left** 和 **right** 函数。",
+    "touchless": "禁用触摸支持.",
+    "transition": "组件在逐项浏览时使用的过渡。 可以是 [built in transitions](/styles/transitions) 之一，或是你自己创建的过渡。",
+    "vertical": "改变窗口时使用垂直转换.",
+    "v-window-item": {
+      "disabled": "当使用 \"next\" 和 \"prev\" 按钮或 `toggle` 方法时，防止该项目变为活动状态",
+      "reverse-transition": "设置反转过渡",
+      "transition": "Mixins.Transitionable.props.transition",
+      "value": "Mixins.Groupable.props.value"
+    }
+  }
+}

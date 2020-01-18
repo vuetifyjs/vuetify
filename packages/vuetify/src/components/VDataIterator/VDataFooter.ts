@@ -6,8 +6,8 @@ import VIcon from '../VIcon'
 import VBtn from '../VBtn'
 
 // Types
-import Vue, { VNode, VNodeChildrenArrayContents } from 'vue'
-import { DataOptions, DataPagination } from '../VData/VData'
+import Vue, { VNode, VNodeChildrenArrayContents, PropType } from 'vue'
+import { DataPagination, DataOptions, DataItemsPerPageOption } from 'types'
 import { PropValidator } from 'vue/types/options'
 
 export default Vue.extend({
@@ -15,17 +15,17 @@ export default Vue.extend({
 
   props: {
     options: {
-      type: Object,
+      type: Object as PropType<DataOptions>,
       required: true,
-    } as PropValidator<DataOptions>,
+    },
     pagination: {
-      type: Object,
+      type: Object as PropType<DataPagination>,
       required: true,
-    } as PropValidator<DataPagination>,
+    },
     itemsPerPageOptions: {
       type: Array,
       default: () => ([5, 10, 15, -1]),
-    } as PropValidator<any[]>,
+    } as PropValidator<DataItemsPerPageOption[]>,
     prevIcon: {
       type: String,
       default: '$prev',
@@ -66,10 +66,10 @@ export default Vue.extend({
         this.options.page * this.options.itemsPerPage >= this.pagination.itemsLength ||
         this.pagination.pageStop < 0
     },
-    computedItemsPerPageOptions (): any[] {
+    computedDataItemsPerPageOptions (): any[] {
       return this.itemsPerPageOptions.map(option => {
         if (typeof option === 'object') return option
-        else return this.genItemsPerPageOption(option)
+        else return this.genDataItemsPerPageOption(option)
       })
     },
   },
@@ -93,7 +93,7 @@ export default Vue.extend({
     onChangeItemsPerPage (itemsPerPage: number) {
       this.updateOptions({ itemsPerPage, page: 1 })
     },
-    genItemsPerPageOption (option: number) {
+    genDataItemsPerPageOption (option: number) {
       return {
         text: option === -1 ? this.$vuetify.lang.t(this.itemsPerPageAllText) : String(option),
         value: option,
@@ -101,7 +101,7 @@ export default Vue.extend({
     },
     genItemsPerPageSelect () {
       let value = this.options.itemsPerPage
-      const computedIPPO = this.computedItemsPerPageOptions
+      const computedIPPO = this.computedDataItemsPerPageOptions
 
       if (computedIPPO.length <= 1) return null
 

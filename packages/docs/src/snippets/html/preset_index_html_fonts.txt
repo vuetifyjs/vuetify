@@ -1,0 +1,5 @@
+<!-- You can add or remove font weights after the fact; e.g. Rubik:100,300,400,500 -->
+<!-- The available weights for each font can be found on https://
+fonts.google.com/ -->
+
+<link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500&display=swap" rel="stylesheet">

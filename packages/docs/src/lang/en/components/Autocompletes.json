@@ -1,10 +1,8 @@
 {
   "heading": "# Autocompletes",
   "headingText": "The `v-autocomplete` component offers simple and flexible type-ahead functionality. This is useful when searching large sets of data or even dynamically requesting information from an API.",
+  "usageText": "The autocomplete component extends `v-select` and adds the ability to filter items.",
   "examples": {
-    "usage": {
-      "desc": "The autocomplete component extends `v-select` and adds the ability to filter items."
-    },
     "api": {
       "heading": "### Searching an API",
       "desc": "Easily hook up dynamic data and create a unique experience. The `v-autocomplete`'s expansive prop list makes it easy to fine tune every aspect of the input."
@@ -38,33 +36,9 @@
     "allowOverflow": "Allow the menu to overflow off the screen",
     "autoSelectFirst": "When searching, will always highlight the first option",
     "dark": "Components.Inputs.props.dark",
-    "filled": "Components.TextFields.props.filled",
     "filter": "The filtering algorithm used when searching. [example](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/components/VAutocomplete/VAutocomplete.ts#L36)",
     "hideNoData": "Hides the menu when there are no options to show.  Useful for preventing the menu from opening before results are fetched asynchronously.  Also has the effect of opening the menu when the `items` array changes if not already open.",
     "noFilter": "Do not apply filtering when searching. Useful when data is being filtered server side",
-    "searchInput": "Search value. Can be use with `.sync` modifier.",
-    "value": "Components.Inputs.props.value"
-  },
-  "slots": {
-    "append": "Components.Inputs.slots.append",
-    "append-item": "Components.Selects.slots.append-item",
-    "append-outer": "Components.TextFields.slots.append-outer",
-    "item": "Components.Selects.slots.item",
-    "no-data": "Mixins.Filterable.slots.noData",
-    "prepend": "Components.Inputs.slots.prepend",
-    "prepend-inner": "Components.TextFields.slots.prepend-inner",
-    "prepend-item": "Components.Selects.slots.prepend-item",
-    "selection": "Components.Selects.slots.selection"
-  },
-  "events": {
-    "change": "Components.Inputs.events.change",
-    "click:append": "Components.Inputs.events['click:append']",
-    "click:append-outer": "Components.TextFields.events['click:append-outer']",
-    "click:clear": "Components.TextFields.events['click:clear']",
-    "click:prepend": "Components.Inputs.events['click:prepend']",
-    "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
-    "update:error": "Mixins.Validatable.events['update:error']",
-    "update:list-index": "Components.Selects.events['update:list-index']",
-    "update:search-input": "The `search-input.sync` event"
+    "searchInput": "Search value. Can be use with `.sync` modifier."
   }
 }

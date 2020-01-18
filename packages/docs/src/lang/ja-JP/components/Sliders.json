@@ -1,1 +1,100 @@
-{}
+{
+  "heading": "# スライダー",
+  "headingText": "`v-slider` コンポーネントは数値の入力をうまく可視化できます。数値のユーザーデータに利用されます。",
+  "examples": {
+    "usage": {
+      "desc": "スライダーはバーの範囲の値を反映します。ユーザーは1つの値を指定することもできます。音量・明るさ・画像フィルタの設定の調整などに適しています。"
+    },
+    "thumb": {
+      "heading": "### Thumb",
+      "desc": "`thumb-label` を表示するタイミングを、「スライド中のみ」または「常に表示する」かを選択できます。`thumb-color` でカスタムカラーを設定したり、`thumb-size` でカスタムサイズを指定することができます。`always-dirty` を設定すると、`min` の値であっても色が変化しないようになります。"
+    },
+    "custom-thumb": {
+      "heading": "### カスタムの範囲スライダー",
+      "desc": "`tick-labels` prop と slots を使うと、カスタマイズした動作を自分で作れます。"
+    },
+    "ticks": {
+      "heading": "### Ticks",
+      "desc": "Tick マークは、ユーザーがスライダーを移動できる既定値を表します。"
+    },
+    "discrete": {
+      "heading": "### 離散的な設定",
+      "desc": "離散的スライダは、現在の合計値びったりの値を表示する thumb ラベルを提供します。`step` prop を設定することで、ユーザーが指定したステップの値以外を選択できないように設定できます。"
+    },
+    "icons": {
+      "heading": "### アイコン",
+      "desc": "`append-icon` および `prepend-icon` props を使用することで、スライダーにアイコンを設定できます。`@click:append` および `@click:prepend` を使用すれば、アイコンをクリックしたときにコールバック関数をトリガさせることができます。"
+    },
+    "editable-numeric-value": {
+      "heading": "### 編集可能な数値を使用する",
+      "desc": "スライダーはよりきれいに見せるために、他のコンポーネントと組み合わせることもできます。"
+    },
+    "custom-colors": {
+      "heading": "### カスタムカラー",
+      "desc": "スライダーのカラーは、`color`、`track-color`、`thumb-color` props で設定できます。"
+    },
+    "validation": {
+      "heading": "### バリデーション",
+      "desc": "Vuetify では、`rules` prop を使用することで単純なバリデーションが行えます。この prop はコールバック関数の配列を受け取ります。ルールのバリデーションを実行中は、現在の v-model の値はコールバック関数へ渡されます。このコールバック関数は、`true` またはエラーメッセージを表す `String` のいずれかを返さなければいけません。"
+    },
+    "range": {
+      "heading": "### 範囲",
+      "desc": "範囲付きスライダーです。"
+    },
+    "min-max": {
+      "heading": "### 最小値と最大値",
+      "desc": "スライダーには、`min` と `max` の値を設定できます。"
+    },
+    "metronome": {
+      "heading": "### Slots",
+      "desc": "`prepend` や `append` の slots を使用すれば、`v-slider` をどんな場所にも合うように簡単にカスタマイズできます。"
+    },
+    "vertical": {
+      "heading": "### 垂直スライダー",
+      "desc": "`vertical` を指定すると、スライダーの方向を垂直に切り替えることができます。スライダーの高さを調整する必要があるときは CSS を使用してください。"
+    },
+    "disabled": {
+      "heading": "### 無効化",
+      "desc": "スライダーに `disabled` を設定すると、インタラクションができなくなります。"
+    },
+    "readonly": {
+      "heading": "### Readonly",
+      "desc": "スライダーに `readonly` を設定すると、見た目は通常のままですが、入力などのインタラクションができなくなります。"
+    },
+    "inverse-label": {
+      "heading": "### ラベルの逆転",
+      "desc": "`inverse-label` プロパティを `v-slider` に設定すると、スライドの最後にラベルが表示されます。"
+    }
+  },
+  "props": {
+    "alwaysDirty": "**thumb-label** prop を使用すると、thumb ラベルが常に表示されるようになります。",
+    "dark": "Components.Inputs.props.dark",
+    "inverseLabel": "ラベルのポジションを逆にします。**rtl** の (右から左に書く) 言語で利用できます。",
+    "max": "入力の最大値を設定します",
+    "min": "入力の最小値を設定します",
+    "step": "0 より大きな数値を指定すると、tick に対して step のインターバルを設定します",
+    "thumbColor": "thumb と thumb ラベルの色を設定します",
+    "thumbLabel": "thumb ラベルを表示します。`true` の場合、スライダの使用中にのみラベルを表示します。`'always'` の場合、常にラベルを表示します。",
+    "thumbSize": "thumb ラベルのサイズを調整します",
+    "ticks": "track tick を表示します。`true` の場合、スライダの使用中にのみ tick を表示します。`'always'` の場合、常に tick を表示します。",
+    "tickLabels": "Array<string> が与えられた場合、各ステップに対して index の順にラベルをマッピングするように試みます。",
+    "tickSize": "**tick** のサイズをコントロールします",
+    "trackColor": "track の色を設定します",
+    "trackFillColor": "track の塗りつぶしの色を設定します",
+    "value": "スライダーの現在の値をコントロールします",
+    "vertical": "スライダーの方向を縦に変更します"
+  },
+  "events": {
+    "blur": "コンポーネントのフォーカスが失われたときに発生します",
+    "change": "Components.Inputs.events.change",
+    "click:append": "Components.Inputs.events['click:append']",
+    "click:prepend": "Components.Inputs.events['click:prepend']",
+    "end": "スライダーの移動の最後に発生するスライダー値",
+    "focus": "コンポーネントにフォーカスしたときに発生します",
+    "start": "スライダーの移動の最初に発生するスライダー値",
+    "update:error": "Mixins.Validatable.events['update:error']"
+  },
+  "slots": {
+    "thumb-label": "thumb ラベルの内側のコンテンツを置き換える"
+  }
+}

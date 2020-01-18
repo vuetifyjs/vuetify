@@ -1,9 +1,4 @@
-@import './_variables.sass'
-
-// Theme
-+theme(v-chip-group) using ($material)
-  .v-chip:not(.v-chip--active)
-    color: map-deep-get($material, 'text', 'primary') !important
+@import './_variables.scss'
 
 // Block
 .v-chip-group
@@ -15,10 +10,10 @@
 
     &.v-chip--no-color
       &:after
-        opacity: .22
+        opacity: $chip-group-no-color-opacity
 
       &:focus:after
-        opacity: .32
+        opacity: $chip-group-no-color-focus-opacity
 
 // Element
 .v-chip-group .v-slide-group__content

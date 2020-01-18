@@ -3,11 +3,11 @@
 // Theme
 +theme(v-calendar-weekly) using ($material)
   background-color: map-deep-get($material, 'calendar', 'background-color')
-  border-top: map-deep-get($material, 'calendar', 'line-color') 1px solid
-  border-left: map-deep-get($material, 'calendar', 'line-color') 1px solid
+  border-top: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
+  border-left: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
 
   .v-calendar-weekly__head-weekday
-    border-right: map-deep-get($material, 'calendar', 'line-color') 1px solid
+    border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
     color: map-deep-get($material, 'calendar', 'text-color')
 
     &.v-past
@@ -17,8 +17,8 @@
       background-color: map-deep-get($material, 'calendar', 'outside-background-color')
 
   .v-calendar-weekly__day
-    border-right: map-deep-get($material, 'calendar', 'line-color') 1px solid
-    border-bottom: map-deep-get($material, 'calendar', 'line-color') 1px solid
+    border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
+    border-bottom: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
     color: map-deep-get($material, 'calendar', 'text-color')
 
     &.v-outside

@@ -1,5 +1,14 @@
 {
+  "heading": "# タイムピッカー",
+  "headingText": "`v-time-picker`は、多くの既存のVuetifyコンポーネントで利用できるスタンドアロンコンポーネントです。時間を選択するための視覚的表現をユーザーに提供します。",
   "examples": {
+    "usage": {
+      "desc": "タイムピッカーでは、デフォルトでライトテーマが有効になっています。"
+    },
+    "colorable": {
+      "heading": "### 色",
+      "desc": "タイムピッカーの色は、 `color`および`header-color`プロパティを使用して設定できます。 `header-color` propが提供されない場合、ヘッダーは`color` prop値を使用します。"
+    },
     "scrollable": {
       "heading": "スクロール可能なダイアログ"
     }

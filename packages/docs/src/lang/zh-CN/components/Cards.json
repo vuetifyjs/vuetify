@@ -1,13 +1,73 @@
 {
+  "heading": "# 卡片",
+  "headingText": "`v-card` 组件是一种多功能组件，可用于从面板到静态图像的任何东西。\n **card** 组件有许多助手组件，以使标记尽可能简单。没有列出选项的组件使用 **Vue的** 功能组件选项来加快渲染速度，并充当标记糖来简化构建。",
+  "usageText": "卡片有 4 个基本组件：`v-card-title`, `v-card-subtitle`, `v-card-text` 和 `v-card-actions`。",
+  "componentsHeader": "### 函数组件",
+  "componentsList": [
+    "`v-card-actions`: 用于放置卡片 **actions** 的容器，例如 [v-btn](/components/buttons) 或 [v-menu](/components/menus)。 还将 _special margin_ 应用于按钮，以便它们与其他卡片内容区域正确对齐。",
+    "`v-card-text`: 主要用于卡片中的 **text content**。对文本应用填充，将其字体大小降低到 .875rem 并将其颜色更改为灰色。",
+    "`v-card-title`: 提供卡片标题的默认 **font-size** 和 **padding**。 字体大小可以用印刷类 (/styles/typography) 覆盖。"
+  ],
   "examples": {
+    "info-card": {
+      "heading": "### 信息卡片",
+      "desc": "卡片是更详细信息的入口点。为简洁起见，请确保限制用户可以执行的操作数量。"
+    },
     "media-with-text": {
+      "heading": "### 带文本的媒体",
       "desc": "使用布局系统，我们可以在背景中的任何地方添加自定义文本。"
     },
+    "outlined": {
+      "heading": "### 轮廓卡片",
+      "desc": "**outlined** 卡片的海拔为0，并且包含边框。"
+    },
     "horizontal": {
+      "heading": "### 水平的卡片",
       "desc": "使用`v-flex`，您可以创建自定义的水平卡片。使用`contain`属性来缩小`v-card-media`以适应容器内部，而不是覆盖。"
     },
+    "grids": {
+      "heading": "### 栅格",
+      "desc": "使用栅格，您可以创建美丽的布局。"
+    },
     "custom-actions": {
+      "heading": "### 自定义操作",
       "desc": "使用简单的条件，您可以轻松添加隐藏的补充文本，直到被打开。"
+    },
+    "twitter-card": {
+      "heading": "### Twitter 卡片",
+      "desc": "`v-card` 组件有多个子组件帮助您建立复杂的示例，而不必担心间隔。此示例由 `v-card-title`、`v-card-text` 和 `v-card-actions` 组件组成。"
+    },
+    "loading": {
+      "heading": "### 正在加载的卡片",
+      "desc": "在处理用户动作时，可以将卡片设置为加载状态。这将禁用进一步的操作，并提供具有不确定的 [v-progress-linear](/components/progress-linear) 的可视反馈。"
+    },
+    "weather": {
+      "heading": "### 天气卡片",
+      "desc": "通过使用 [v-list-items](/components/lists) 和 [v-slider](/components/sliders)，我们可以创建独特的天气卡片。列表组件确保我们具有一致的间距和功能，而滑块组件允许我们向用户提供有用的选择界面。"
+    },
+    "advanced": {
+      "heading": "### 高级版",
+      "desc": "使用 `v-list-item` 和 `v-img` 允许我们在高级设置中创建唯一的卡片布局"
+    },
+    "intermediate": {
+      "heading": "### 中间值",
+      "desc": "`v-card` 组件对于包装内容非常有用。"
     }
+  },
+  "cardMediaWarning": "`v-card-media` 不推荐使用，而是使用 `v-img`。",
+  "props": {
+    "alt": "Components.Images.props.alt",
+    "aspectRatio": "Components.Images.props.aspectRatio",
+    "contain": "应用 **background-size: contain** 到背景图像（当使用 **img** 属性时）。",
+    "flat": "移除卡片的海拔。",
+    "gradient": "Components.Images.props.gradient",
+    "hover": "悬停时将应用 4dp 的海拔（默认值为 2dp）。您可以在 [elevation page](/styles/elevation) 找到更多信息。",
+    "img": "指定卡片的图像背景。对于更高级的实现，建议您使用 [v-img](/components/images) 组件。您可以在此处找到 [v-img example here](#media-with-text)。",
+    "outlined": "去除卡片的海拔阴影并添加细边框。",
+    "raised": "指定较高的默认海拔（8dp）。您可以在 [elevation page](/styles/elevation) 找到更多信息。",
+    "shaped": "在卡片的左上角和右下角应用较大的边框半径。"
+  },
+  "events": {
+    "click": "单击组件时发出 - 不使用 `.native` 修饰符，否则单击时将触发组件产生涟漪"
   }
 }

@@ -79,7 +79,7 @@ export default VTextField.extend({
         'v-file-input': true,
       }
     },
-    counterValue (): string {
+    computedCounterValue (): string {
       const fileCount = (this.isMultiple && this.lazyValue)
         ? this.lazyValue.length
         : (this.lazyValue instanceof File) ? 1 : 0
@@ -203,7 +203,7 @@ export default VTextField.extend({
       const length = this.text.length
 
       if (length < 2) return this.text
-      if (this.showSize && !this.counter) return [this.counterValue]
+      if (this.showSize && !this.counter) return [this.computedCounterValue]
       return [this.$vuetify.lang.t(this.counterString, length)]
     },
     genSelections () {
@@ -231,10 +231,17 @@ export default VTextField.extend({
           'v-file-input__text--placeholder': this.placeholder && !this.isDirty,
           'v-file-input__text--chips': this.hasChips && !this.$scopedSlots.selection,
         },
-        on: {
-          click: () => this.$refs.input.click(),
-        },
       }, children)
+    },
+    genTextFieldSlot () {
+      const node = VTextField.options.methods.genTextFieldSlot.call(this)
+
+      node.data!.on = {
+        ...(node.data!.on || {}),
+        click: () => this.$refs.input.click(),
+      }
+
+      return node
     },
     onInput (e: Event) {
       const files = [...(e.target as HTMLInputElement).files || []]

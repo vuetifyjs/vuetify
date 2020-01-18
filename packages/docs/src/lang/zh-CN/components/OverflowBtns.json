@@ -1,23 +1,68 @@
 {
+  "heading": "# 溢出按钮",
+  "headingText": "`v-overflow-btn` 用于使用户能够从列表中选择项目。 它具有 3 种变量：`editable`, `overflow` 和 `segmented`",
   "examples": {
+    "usage": {
+      "desc": "`v-overflow-btn` 用于创建选择列表"
+    },
+    "counter": {
+      "heading": "### 计数器",
+      "desc": "您可以添加一个计数器到 `v-overflow-btn` 来控制最大字符计数"
+    },
     "disabled": {
-      "heading": "禁用"
+      "heading": "### 禁用",
+      "desc": "`v-overflow-btn` 可以被禁用，以防止用户与它进行交互。"
+    },
+    "editable": {
+      "heading": "### 可编辑",
+      "desc": "`editable` `v-overflow-btn` 可以直接编辑，就像 `v-text-field` 一样"
     },
     "filled": {
+      "heading": "### 填充的",
       "desc": "文本框可以使用替代的样式设计，但是这种模式下不支持附加或者前置图标属性。"
+    },
+    "hint": {
+      "heading": "### 提示",
+      "desc": "您可以使用 `hint` 属性为用户添加提示"
+    },
+    "loading": {
+      "heading": "### 加载",
+      "desc": "`v-overflow-btn` 可以处于 `loading` 状态，并且在其下方具有线性进度条"
+    },
+    "menu-props": {
+      "heading": "### 菜单属性",
+      "desc": "你可以使用 `menu-props` 属性设置底部的 `v-menu` 属性"
+    },
+    "readonly": {
+      "heading": "### 只读",
+      "desc": "`v-overflow-btn` 可以设置为 `readonly` 模式，它将处于非活动状态，但不会改变颜色"
+    },
+    "segmented": {
+      "heading": "### 分段",
+      "desc": "`segmented` `v-overflow-btn` 在内容和图标之间有一个附加的分隔符"
+    },
+    "dense": {
+      "heading": "### 密集",
+      "desc": "您可以使用 `dense` 属性来降低溢出按钮的高度并降低列表项的最大高度。"
     }
   },
   "props": {
+    "dark": "Components.Inputs.props.dark",
+    "editable": "创建一个可编辑按钮",
+    "overflow": "创建溢出按钮",
+    "segmented": "创建一个分段按钮",
     "value": "Components.Inputs.props.value"
   },
   "slots": {
     "append": "Components.Inputs.slots.append",
     "append-item": "Components.Selects.slots.append-item",
     "append-outer": "Components.TextFields.slots.append-outer",
+    "item": "Components.Selects.slots.item",
     "no-data": "Mixins.Filterable.slots.noData",
     "prepend": "Components.Inputs.slots.prepend",
     "prepend-inner": "Components.TextFields.slots.prepend-inner",
-    "prepend-item": "Components.Selects.slots.prepend-item"
+    "prepend-item": "Components.Selects.slots.prepend-item",
+    "selection": "Components.Selects.slots.selection"
   },
   "events": {
     "change": "Components.Inputs.events.change",
@@ -26,6 +71,7 @@
     "click:clear": "Components.TextFields.events['click:clear']",
     "click:prepend": "Components.Inputs.events['click:prepend']",
     "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
-    "update:error": "Mixins.Validatable.events['update:error']"
+    "update:error": "Mixins.Validatable.events['update:error']",
+    "update:search-input": "`search-input.sync` 事件"
   }
 }

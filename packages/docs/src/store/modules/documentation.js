@@ -30,6 +30,7 @@ function getHeadings (children, toc = []) {
         'heading',
         'up-next',
         'usage-new',
+        'variable-api',
       ].includes(child.type)
     ) continue
 

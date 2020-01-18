@@ -197,7 +197,7 @@ function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boo
 
 function removeListeners (el: HTMLElement) {
   el.removeEventListener('mousedown', rippleShow)
-  el.removeEventListener('touchstart', rippleHide)
+  el.removeEventListener('touchstart', rippleShow)
   el.removeEventListener('touchend', rippleHide)
   el.removeEventListener('touchcancel', rippleHide)
   el.removeEventListener('mouseup', rippleHide)

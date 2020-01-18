@@ -1,8 +1,73 @@
 {
+  "heading": "# 输入",
+  "headingText": "`v-input` 组件为您提供创建自己的自定义输入的基础。 它由一个 前置/追加 插槽，消息和一个默认插槽组成。 _recommended_ 扩展了此组件，但可以将其用作独立组件。",
+  "examples": {
+    "usage": {
+      "desc": "`v-input` 有四个主要区域。前列位置、附加位置、默认位置和消息。 这些构成了所有形式组件之间共享的核心逻辑。"
+    },
+    "loading": {
+      "heading": "### 加载",
+      "desc": "`v-input` 具有可使用的 `loading` 状态，例如 用于数据加载指示。 注意：仅以 `v-text-field` 为例。"
+    },
+    "success": {
+      "heading": "### 成功",
+      "desc": "与任何可验证的 Vuetify 组件一样，`v-input` 可以使用 `success` 属性设置为成功状态，也可以使用 `success-messages` 属性添加消息。"
+    },
+    "error": {
+      "heading": "### 错误",
+      "desc": "作为任何可验证的 Vuetify 组件，可以使用 `error` 属性将 `v-input` 设置为错误状态，可以使用 `error-messages` 属性添加消息。 您可以使用 `error-count` 属性确定要显示的错误消息数。"
+    },
+    "multi-error": {
+      "heading": "### 多个错误",
+      "desc": "您可以使用 `error-count` 属性向 `v-input` 添加多个错误。"
+    },
+    "rules": {
+      "heading": "### 规则",
+      "desc": "您可以将自定义验证规则添加到 `v-input`，将其添加为返回 `true`/error 消息的函数。 注意：仅以 `v-text-field` 为例。"
+    },
+    "slot-events": {
+      "heading": "### 插槽事件",
+      "desc": "`v-input` 可以可以具有插槽的 `click:append` 和 `click:prepend` 两个事件。注意：仅以 `v-text-field` 为例。"
+    },
+    "slots": {
+      "heading": "### 插槽",
+      "desc": "`v-input` 具有 `append` 和 `prepend` 插槽。 您可以在其中放置自定义图标。"
+    },
+    "hint": {
+      "heading": "### 提示",
+      "desc": "`v-input` 可以具有 `hint`，可以告诉用户如何使用输入。 如果没有显示任何消息，`persistent-hint` 属性将使提示始终可见。"
+    }
+  },
   "props": {
-    "toggleKeys": "切换输入键值的数组（如果支持切换的话）"
+    "appendIcon": "在组件上附加一个图标，使用与 `v-icon` 相同的语法",
+    "backgroundColor": "更改输入的背景颜色",
+    "dark": "将深色主题变量应用于组件。 除非您已将 [application theme](/customization/theme) 配置为 **dark** 或在组件上使用 **color** 属性，否则组件的颜色默认为 _white_。 您可以在材料设计文档中找到更多信息 [dark themes](https://material.io/design/color/dark-theme.html)。",
+    "hideDetails": "隐藏提示、验证错误",
+    "dense": "降低输入高度",
+    "height": "设置输入的高度",
+    "hint": "提示文本",
+    "label": "设置输入标签",
+    "loading": "Mixins.Loadable.props.loading",
+    "persistentHint": "强制提示总是可见的",
+    "placeholder": "设置输入的占位符文本",
+    "prependIcon": "在组件前添加一个图标，使用与 `v-icon` 相同的语法",
+    "required": "根据需要指定输入； 在标签的末尾添加一个星号； 不执行任何验证。",
+    "tabindex": "输入的选项卡索引",
+    "toggleKeys": "切换输入键值的数组（如果支持切换的话）",
+    "value": "输入值"
   },
   "slots": {
-    "label": "替换默认标签"
+    "append": "在输入内容后添加一个项目",
+    "label": "替换默认标签",
+    "prepend": "在输入内容之前添加一个项目"
+  },
+  "events": {
+    "blur": "当输入焦点时发出",
+    "change": "当用户交互更改输入时发出",
+    "click": "在单击输入时发出",
+    "click:append": "单击附加图标时发出",
+    "click:prepend": "单击前置图标时发出",
+    "mousedown": "单击时发出",
+    "mouseup": "当单击释放时，发出"
   }
 }

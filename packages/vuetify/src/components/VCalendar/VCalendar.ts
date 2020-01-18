@@ -13,8 +13,6 @@ import {
   DAYS_IN_MONTH_MAX,
   DAY_MIN,
   DAYS_IN_WEEK,
-  VTimestamp,
-  VTime,
   parseTimestamp,
   validateTimestamp,
   relativeDays,
@@ -26,17 +24,19 @@ import {
   updateRelative,
   getStartOfMonth,
   getEndOfMonth,
+  VTime,
 } from './util/timestamp'
 
 // Calendars
 import VCalendarMonthly from './VCalendarMonthly'
 import VCalendarDaily from './VCalendarDaily'
 import VCalendarWeekly from './VCalendarWeekly'
+import { CalendarTimestamp } from 'types'
 
 // Types
 interface VCalendarRenderProps {
-  start: VTimestamp
-  end: VTimestamp
+  start: CalendarTimestamp
+  end: CalendarTimestamp
   component: string | Component
   maxDays: number
 }
@@ -52,15 +52,15 @@ export default CalendarWithEvents.extend({
   },
 
   data: () => ({
-    lastStart: null as VTimestamp | null,
-    lastEnd: null as VTimestamp | null,
+    lastStart: null as CalendarTimestamp | null,
+    lastEnd: null as CalendarTimestamp | null,
   }),
 
   computed: {
-    parsedValue (): VTimestamp {
+    parsedValue (): CalendarTimestamp {
       return (validateTimestamp(this.value)
-        ? parseTimestamp(this.value)
-        : (this.parsedStart || this.times.today)) as VTimestamp
+        ? parseTimestamp(this.value, true)
+        : (this.parsedStart || this.times.today))
     },
     renderProps (): VCalendarRenderProps {
       const around = this.parsedValue
@@ -118,13 +118,16 @@ export default CalendarWithEvents.extend({
   },
 
   updated () {
-    this.updateEventVisibility()
+    window.requestAnimationFrame(this.updateEventVisibility)
   },
 
   methods: {
     checkChange (): void {
+      const { lastStart, lastEnd } = this
       const { start, end } = this.renderProps
-      if (start !== this.lastStart || end !== this.lastEnd) {
+      if (!lastStart || !lastEnd ||
+        start.date !== lastStart.date ||
+        end.date !== lastEnd.date) {
         this.lastStart = start
         this.lastEnd = end
         this.$emit('change', { start, end })
@@ -217,7 +220,7 @@ export default CalendarWithEvents.extend({
       }],
       on: {
         ...this.$listeners,
-        'click:date': (day: VTimestamp) => {
+        'click:date': (day: CalendarTimestamp) => {
           if (this.$listeners['input']) {
             this.$emit('input', day.date)
           }
