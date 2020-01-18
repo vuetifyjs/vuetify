@@ -107,12 +107,13 @@ export default mixins(
           style: {
             'max-height': `calc(100vh - ${convertToUnit(this.frontShift + this.subheaderHeight)})`,
           },
-        }, [
-          this.$slots.default,
-          this.$createElement('div', {
-            staticClass: 'v-backdrop__overlay',
-          }),
-        ]),
+        }, [this.$slots.default]),
+        this.$createElement('div', {
+          staticClass: 'v-backdrop__overlay',
+          style: {
+            height: `calc(100vh - ${convertToUnit(this.frontShift + this.subheaderHeight)})`,
+          },
+        }),
       ])
     },
   },
