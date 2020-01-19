@@ -111,7 +111,7 @@ export default mixins(
         this.$createElement('div', {
           staticClass: 'v-backdrop__overlay',
           style: {
-            height: `calc(100vh - ${convertToUnit(this.frontShift + this.subheaderHeight)})`,
+            height: `calc(100vh - ${convertToUnit(this.frontShift)})`,
           },
         }),
       ])
