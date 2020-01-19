@@ -30,7 +30,7 @@ export default mixins(
   props: {
     elevation: {
       type: [Number, String],
-      default: 4,
+      default: 1,
       validator: v => !isNaN(Number(v)),
     },
     flat: Boolean,
