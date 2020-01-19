@@ -256,9 +256,6 @@ export default baseMixins.extend({
         },
         { name: 'show', value: this.isActive },
       ],
-      on: {
-        click: (e: Event) => { e.stopPropagation() },
-      },
       style: {},
     }
 
