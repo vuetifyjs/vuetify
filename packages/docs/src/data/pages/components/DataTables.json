@@ -23,6 +23,7 @@
           "type": "api",
           "value": [
             "v-data-table",
+            "v-data-table-header",
             "v-data-footer",
             "v-edit-dialog"
           ]
