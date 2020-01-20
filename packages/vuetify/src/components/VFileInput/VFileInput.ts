@@ -95,9 +95,7 @@ export default VTextField.extend({
       )
     },
     internalArrayValue (): File[] {
-      return Array.isArray(this.internalValue)
-        ? this.internalValue
-        : wrapInArray(this.internalValue)
+      return wrapInArray(this.internalValue).filter(file => file instanceof File)
     },
     internalValue: {
       get (): File[] {
