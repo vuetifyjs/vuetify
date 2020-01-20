@@ -20,6 +20,7 @@ import ClickOutside from '../../directives/click-outside'
 // Utilities
 import { getPropertyFromItem, keyCodes } from '../../util/helpers'
 import { consoleError } from '../../util/console'
+import mergeData from '../../util/mergeData'
 
 // Types
 import mixins from '../../util/mixins'
@@ -380,47 +381,53 @@ export default baseMixins.extend<options>().extend({
       }), `${this.getText(item)}${last ? '' : ', '}`)
     },
     genDefaultSlot (): (VNode | VNode[] | null)[] {
-      const selections = this.genSelections()
-      const input = this.genInput()
-
-      // If the return is an empty array
-      // push the input
-      if (Array.isArray(selections)) {
-        selections.push(input)
-      // Otherwise push it into children
-      } else {
-        selections.children = selections.children || []
-        selections.children.push(input)
-      }
-
       return [
         this.genFieldset(),
-        this.$createElement('div', {
-          staticClass: 'v-select__slot',
-          directives: this.directives,
-        }, [
-          this.genLabel(),
-          this.prefix ? this.genAffix('prefix') : null,
-          selections,
-          this.suffix ? this.genAffix('suffix') : null,
-          this.genClearIcon(),
-          this.genIconSlot(),
-          this.genHiddenInput(),
-        ]),
-        this.genMenu(),
+        this.genMenu(data => {
+          const selections = this.genSelections()
+          const input = this.genInput(data)
+
+          // If the return is an empty array
+          // push the input
+          if (Array.isArray(selections)) {
+            selections.push(input)
+          // Otherwise push it into children
+          } else {
+            selections.children = selections.children || []
+            selections.children.push(input)
+          }
+
+          return this.$createElement('div', {
+            staticClass: 'v-select__slot',
+            directives: this.directives,
+          }, [
+            this.genLabel(),
+            this.prefix ? this.genAffix('prefix') : null,
+            selections,
+            this.suffix ? this.genAffix('suffix') : null,
+            this.genClearIcon(),
+            this.genIconSlot(),
+            this.genHiddenInput(),
+          ])
+        }),
         this.genProgress(),
       ]
     },
-    genInput (): VNode {
+    genInput (data: any): VNode {
       const input = VTextField.options.methods.genInput.call(this)
 
       delete input.data!.attrs!.name
-      input.data!.domProps!.value = null
-      input.data!.attrs!.readonly = true
-      input.data!.attrs!.type = 'text'
-      input.data!.attrs!['aria-readonly'] = true
-      input.data!.attrs!.autocomplete = input.data!.attrs!.autocomplete || 'off'
-      input.data!.on!.keypress = this.onKeyPress
+
+      input.data = mergeData(input.data!, {
+        domProps: { value: null },
+        attrs: {
+          readonly: true,
+          type: 'text',
+          'aria-readonly': true,
+          autocomplete: input.data!.attrs!.autocomplete || 'off',
+        },
+        on: { keypress: this.onKeyPress },
+      }, data)
 
       return input
     },
@@ -464,7 +471,7 @@ export default baseMixins.extend<options>().extend({
         ...this.listData,
       }, slots)
     },
-    genMenu (): VNode {
+    genMenu (slot: (data: any) => VNode): VNode {
       const props = this.$_menuProps as any
       props.activator = this.$refs['input-slot']
 
@@ -491,6 +498,9 @@ export default baseMixins.extend<options>().extend({
           },
         },
         ref: 'menu',
+        scopedSlots: {
+          activator: slot,
+        },
       }, [this.genList()])
     },
     genSelections (): VNode {
