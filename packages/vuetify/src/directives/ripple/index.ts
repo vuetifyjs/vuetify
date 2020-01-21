@@ -19,15 +19,25 @@ export interface RippleOptions {
   circle?: boolean
 }
 
-function isTouchEvent (e: MouseEvent | TouchEvent): e is TouchEvent {
+function isTouchEvent (e: MouseEvent | TouchEvent | KeyboardEvent): e is TouchEvent {
   return e.constructor.name === 'TouchEvent'
 }
 
-const calculate = (e: MouseEvent | TouchEvent, el: HTMLElement, value: RippleOptions = {}) => {
-  const offset = el.getBoundingClientRect()
-  const target = isTouchEvent(e) ? e.touches[e.touches.length - 1] : e
-  const localX = target.clientX - offset.left
-  const localY = target.clientY - offset.top
+function isKeyboardEvent (e: MouseEvent | TouchEvent | KeyboardEvent): e is KeyboardEvent {
+  return e.constructor.name === 'KeyboardEvent'
+}
+
+const calculate = (e: MouseEvent | TouchEvent | KeyboardEvent, el: HTMLElement, value: RippleOptions = {}) => {
+  let localX, localY
+  if (!isKeyboardEvent(e)) {
+    const offset = el.getBoundingClientRect()
+    const target = isTouchEvent(e) ? e.touches[e.touches.length - 1] : e
+    localX = target.clientX - offset.left
+    localY = target.clientY - offset.top
+  } else {
+    localX = el.clientWidth / 2
+    localY = el.clientHeight / 2
+  }
 
   let radius = 0
   let scale = 0.3
@@ -50,7 +60,7 @@ const calculate = (e: MouseEvent | TouchEvent, el: HTMLElement, value: RippleOpt
 
 const ripples = {
   /* eslint-disable max-statements */
-  show (e: MouseEvent | TouchEvent, el: HTMLElement, value: RippleOptions = {}) {
+  show (e: MouseEvent | TouchEvent | KeyboardEvent, el: HTMLElement, value: RippleOptions = {}) {
     if (!el._ripple || !el._ripple.enabled) {
       return
     }
@@ -130,7 +140,7 @@ function isRippleEnabled (value: any): value is true {
   return typeof value === 'undefined' || !!value
 }
 
-function rippleShow (e: MouseEvent | TouchEvent) {
+function rippleShow (e: MouseEvent | TouchEvent | KeyboardEvent) {
   const value: RippleOptions = {}
   const element = e.currentTarget as HTMLElement
   if (!element || !element._ripple || element._ripple.touched) return
@@ -163,6 +173,18 @@ function rippleHide (e: Event) {
   ripples.hide(element)
 }
 
+let keyboardRipple = false
+function keyboardRippleShow (e: KeyboardEvent) {
+  if (!keyboardRipple && (e.keyCode === 13 || e.keyCode === 32)) {
+    keyboardRipple = true
+    rippleShow(e)
+  }
+}
+function keyboardRippleHide (e: KeyboardEvent) {
+  keyboardRipple = false
+  rippleHide(e)
+}
+
 function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boolean) {
   const enabled = isRippleEnabled(binding.value)
   if (!enabled) {
@@ -188,6 +210,10 @@ function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boo
     el.addEventListener('mousedown', rippleShow)
     el.addEventListener('mouseup', rippleHide)
     el.addEventListener('mouseleave', rippleHide)
+
+    el.addEventListener('keydown', keyboardRippleShow)
+    el.addEventListener('keyup', keyboardRippleHide)
+
     // Anchor tags can be dragged, causes other hides to fail - #1537
     el.addEventListener('dragstart', rippleHide, { passive: true })
   } else if (!enabled && wasEnabled) {
@@ -202,6 +228,8 @@ function removeListeners (el: HTMLElement) {
   el.removeEventListener('touchcancel', rippleHide)
   el.removeEventListener('mouseup', rippleHide)
   el.removeEventListener('mouseleave', rippleHide)
+  el.removeEventListener('keydown', keyboardRippleShow)
+  el.removeEventListener('keyup', keyboardRippleHide)
   el.removeEventListener('dragstart', rippleHide)
 }
 
