@@ -65,7 +65,7 @@ export default VTextField.extend({
       default: 'file',
     },
     value: {
-      default () {
+      default (this: any) {
         return this.isMultiple ? [] : undefined;
       },
       validator: val => {
