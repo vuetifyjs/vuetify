@@ -66,7 +66,7 @@ export default VTextField.extend({
     },
     value: {
       default (this: any) {
-        return this.isMultiple ? [] : undefined;
+        return this.isMultiple ? [] : undefined
       },
       validator: val => {
         return typeof val === 'object' || Array.isArray(val)
