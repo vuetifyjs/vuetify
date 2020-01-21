@@ -33,6 +33,7 @@ $material-light: map-deep-merge(
     ),
     'icons': (
       'active': rgba(map-get($shades, 'black'), 0.54),
+      'focused': rgba(map-get($shades, 'black'), 0.87),
       'inactive': rgba(map-get($shades, 'black'), 0.38)
     ),
     'inputs': (

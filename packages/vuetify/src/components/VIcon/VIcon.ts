@@ -5,6 +5,7 @@ import BindsAttrs from '../../mixins/binds-attrs'
 import Colorable from '../../mixins/colorable'
 import Sizeable from '../../mixins/sizeable'
 import Themeable from '../../mixins/themeable'
+import Toggleable from '../../mixins/toggleable'
 
 // Util
 import { convertToUnit, keys, remapInternalIcon } from '../../util/helpers'
@@ -35,7 +36,8 @@ const VIcon = mixins(
   BindsAttrs,
   Colorable,
   Sizeable,
-  Themeable
+  Themeable,
+  Toggleable,
   /* @vue/component */
 ).extend({
   name: 'v-icon',
@@ -90,6 +92,7 @@ const VIcon = mixins(
         staticClass: 'v-icon notranslate',
         class: {
           'v-icon--disabled': this.disabled,
+          'v-icon--is-active': this.isActive,
           'v-icon--left': this.left,
           'v-icon--link': hasClickListener,
           'v-icon--right': this.right,

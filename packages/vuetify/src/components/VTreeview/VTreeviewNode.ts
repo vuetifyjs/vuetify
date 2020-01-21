@@ -1,3 +1,4 @@
+import { keyCodes } from './../../util/helpers'
 // Components
 import { VExpandTransition } from '../transitions'
 import { VIcon } from '../VIcon'
@@ -214,8 +215,27 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
           'v-treeview-node__toggle--open': this.isOpen,
           'v-treeview-node__toggle--loading': this.isLoading,
         },
+        props: { value: this.isOpen },
+        attrs: {
+          'aria-expanded': String(this.isOpen),
+          'aria-label': this.text,
+          role: 'button',
+        },
         slot: 'prepend',
         on: {
+          keydown: (e: KeyboardEvent) => {
+            if (
+              this.disabled ||
+              ![
+                keyCodes.enter,
+                keyCodes.space,
+              ].includes(e.keyCode)
+            ) return
+
+            if (this.isLoading) return
+
+            this.checkChildren().then(() => this.open())
+          },
           click: (e: MouseEvent) => {
             if (this.disabled) return
 
@@ -235,6 +255,29 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
           color: this.isSelected ? this.selectedColor : undefined,
         },
         on: {
+          keydown: (e: KeyboardEvent) => {
+            console.log('keydown 1')
+            if (
+              this.disabled ||
+              ![
+                keyCodes.enter,
+                keyCodes.space,
+              ].includes(e.keyCode)
+            ) return
+
+            if (this.isLoading) return
+
+            this.checkChildren().then(() => {
+              // We nextTick here so that items watch in VTreeview has a chance to run first
+              this.$nextTick(() => {
+                this.isSelected = !this.isSelected
+                this.isIndeterminate = false
+
+                this.treeview.updateSelected(this.key, this.isSelected)
+                this.treeview.emitSelected()
+              })
+            })
+          },
           click: (e: MouseEvent) => {
             if (this.disabled) return
 
@@ -353,9 +396,6 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
         'v-treeview-node--shaped': this.shaped,
         'v-treeview-node--selected': this.isSelected,
         'v-treeview-node--excluded': this.treeview.isExcluded(this.key),
-      },
-      attrs: {
-        'aria-expanded': String(this.isOpen),
       },
     }, children)
   },

@@ -5,6 +5,10 @@
 +theme(v-icon) using ($material)
   color: map-deep-get($material, 'icons', 'active')
 
+  &:focus,
+  &--is-active
+    color: map-deep-get($material, 'icons', 'focused')
+
   &--disabled
     color: map-deep-get($material, 'icons', 'inactive') !important
 
@@ -18,6 +22,7 @@
   justify-content: center
   letter-spacing: normal
   line-height: 1
+  outline: none
   text-indent: 0
   transition: $primary-transition, visibility 0s
   vertical-align: middle

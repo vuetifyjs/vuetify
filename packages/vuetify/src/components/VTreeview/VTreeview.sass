@@ -5,6 +5,12 @@
 +theme(v-treeview) using ($material)
   color: map-deep-get($material, 'text', 'primary')
 
+  .v-treeview-node__toggle
+    border-radius: 50%
+
+    &:focus
+      background: map-deep-get($material, 'inputs', 'box')
+
   &--hoverable .v-treeview-node__root,
   .v-treeview-node--click > .v-treeview-node__root
     +states($material)
@@ -75,8 +81,30 @@
     +treeview-rounded($treeview-node-height-dense, $treeview-node-shaped-margin)
 
 .v-treeview-node__checkbox
-  width: $treeview-node-level-width
+  position: relative
   user-select: none
+  width: $treeview-node-level-width
+
+  &.v-icon.v-icon:focus
+    color: initial !important
+
+  &::after
+    background: currentColor
+    border-radius: 50%
+    bottom: 0
+    content: ''
+    left: 0
+    opacity: 0
+    pointer-events: none
+    position: absolute
+    right: 0
+    top: 0
+    transform-origin: center center
+    transform: scale(.2)
+
+  &:focus::after
+    opacity: .4
+    transform: scale(1.6)
 
   +ltr()
     margin-left: $treeview-node-margin
