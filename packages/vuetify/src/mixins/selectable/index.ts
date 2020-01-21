@@ -45,7 +45,7 @@ export default mixins(
       if (!this.isActive) return undefined
       if (this.color) return this.color
       if (this.isDark && !this.appIsDark) return 'white'
-      return 'accent'
+      return 'primary'
     },
     isMultiple (): boolean {
       return this.multiple === true || (this.multiple === null && Array.isArray(this.internalValue))
