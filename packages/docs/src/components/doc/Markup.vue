@@ -166,7 +166,7 @@
     color: #fff
 
     &.theme--dark
-      background: #424242
+      background: #1F1F1F
 
     pre, code
       margin: 0

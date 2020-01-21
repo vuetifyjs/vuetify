@@ -50,10 +50,10 @@ exports[`VRadio.ts should render role and aria-checked attributes on input group
            type="radio"
            value
     >
-    <div class="v-input--selection-controls__ripple accent--text">
+    <div class="v-input--selection-controls__ripple primary--text">
     </div>
     <i aria-hidden="true"
-       class="v-icon notranslate material-icons theme--light accent--text"
+       class="v-icon notranslate material-icons theme--light primary--text"
     >
       $radioOn
     </i>
@@ -90,10 +90,10 @@ exports[`VRadio.ts should use custom icons 2`] = `
            type="radio"
            value
     >
-    <div class="v-input--selection-controls__ripple accent--text">
+    <div class="v-input--selection-controls__ripple primary--text">
     </div>
     <i aria-hidden="true"
-       class="v-icon notranslate material-icons theme--light accent--text"
+       class="v-icon notranslate material-icons theme--light primary--text"
     >
       foo
     </i>

@@ -8,7 +8,8 @@ $material-dark: map-deep-merge(
       'lights-out': rgba(map-get($shades, 'black'), 0.2)
     ),
     'app-bar': map-get($grey, 'darken-4'),
-    'background': #303030,
+    'background': #121212,
+    'surface': #121212,
     'calendar': (
       'background-color': #303030,
       'outside-background-color': #202020,
@@ -17,8 +18,8 @@ $material-dark: map-deep-merge(
       'interval-line-color': map-get($grey, 'darken-2'),
       'text-color': map-get($shades, 'white'),
       'past-color': rgba(map-get($shades, 'white'), .50)
-    ),
-    'cards': map-get($grey, 'darken-3'),
+      ),
+    'cards': #1F1F1F,
     'chips': #555,
     'dividers': rgba(map-get($shades, 'white'), 0.12),
     'text': (

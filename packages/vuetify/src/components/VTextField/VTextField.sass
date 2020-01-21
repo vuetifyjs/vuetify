@@ -387,6 +387,14 @@
 
       +rtl()
         padding-right: $text-field-outlined-fieldset-padding
+    
+
+    &.v-text-field--reverse fieldset
+      +ltr()
+        padding-right: $text-field-outlined-fieldset-padding
+
+      +rtl()
+        padding-left: $text-field-outlined-fieldset-padding
 
     legend
       line-height: $text-field-outlined-legend-line-height
@@ -398,6 +406,13 @@
 
       +rtl()
         text-align: right
+
+    &.v-text-field--reverse legend
+      +ltr()
+        text-align: right
+
+      +rtl()
+        text-align: left
 
     &.v-text-field--rounded
       legend

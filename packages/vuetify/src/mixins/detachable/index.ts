@@ -141,10 +141,7 @@ export default mixins<options &
         return
       }
 
-      target.insertBefore(
-        this.$refs.content,
-        target.firstChild
-      )
+      target.appendChild(this.$refs.content)
 
       this.hasDetached = true
     },
