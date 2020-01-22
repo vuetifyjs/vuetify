@@ -82,7 +82,7 @@
       features () {
         return [
           {
-            href: 'https://community.vuetiyfjs.com',
+            href: 'https://community.vuetifyjs.com',
             key: 'community',
             src: 'feature3.png',
           },
