@@ -40,6 +40,26 @@ export default mixins(Colorable, Themeable).extend({
       type: Number,
       default: 0,
     },
+    pageAriaLabel: {
+      type: String,
+      default: '$vuetify.pagination.ariaLabel.page',
+    },
+    currentPageAriaLabel: {
+      type: String,
+      default: '$vuetify.pagination.ariaLabel.currentPage',
+    },
+    previousAriaLabel: {
+      type: String,
+      default: '$vuetify.pagination.ariaLabel.previous',
+    },
+    nextAriaLabel: {
+      type: String,
+      default: '$vuetify.pagination.ariaLabel.next',
+    },
+    wrapperAriaLabel: {
+      type: String,
+      default: '$vuetify.pagination.ariaLabel.wrapper',
+    },
   },
 
   data () {
@@ -161,7 +181,7 @@ export default mixins(Colorable, Themeable).extend({
     genItem (h: CreateElement, i: string | number): VNode {
       const color: string | false = (i === this.value) && (this.color || 'primary')
       const isCurrentPage = i === this.value
-      const ariaLabel = isCurrentPage ? 'currentPage' : 'page'
+      const ariaLabel = isCurrentPage ? this.currentPageAriaLabel : this.pageAriaLabel
 
       return h('button', this.setBackgroundColor(color, {
         staticClass: 'v-pagination__item',
@@ -171,7 +191,7 @@ export default mixins(Colorable, Themeable).extend({
         attrs: {
           type: 'button',
           'aria-current': isCurrentPage,
-          'aria-label': this.$vuetify.lang.t(`$vuetify.pagination.ariaLabel.${ariaLabel}`, i),
+          'aria-label': this.$vuetify.lang.t(ariaLabel, i),
         },
         on: {
           click: () => this.$emit('input', i),
@@ -199,15 +219,23 @@ export default mixins(Colorable, Themeable).extend({
 
   render (h): VNode {
     const children = [
-      this.genIcon(h, this.$vuetify.rtl ? this.nextIcon : this.prevIcon, this.value <= 1, this.previous, this.$vuetify.lang.t('$vuetify.pagination.ariaLabel.previous')),
+      this.genIcon(h,
+        this.$vuetify.rtl ? this.nextIcon : this.prevIcon,
+        this.value <= 1,
+        this.previous,
+        this.$vuetify.lang.t(this.previousAriaLabel)),
       this.genItems(h),
-      this.genIcon(h, this.$vuetify.rtl ? this.prevIcon : this.nextIcon, this.value >= this.length, this.next, this.$vuetify.lang.t('$vuetify.pagination.ariaLabel.next')),
+      this.genIcon(h,
+        this.$vuetify.rtl ? this.prevIcon : this.nextIcon,
+        this.value >= this.length,
+        this.next,
+        this.$vuetify.lang.t(this.nextAriaLabel)),
     ]
 
     return h('nav', {
       attrs: {
         role: 'navigation',
-        'aria-label': this.$vuetify.lang.t('$vuetify.pagination.ariaLabel.wrapper'),
+        'aria-label': this.$vuetify.lang.t(this.wrapperAriaLabel),
       },
     }, [this.genList(h, children)])
   },
