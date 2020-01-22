@@ -49,6 +49,7 @@ $material-light: map-deep-merge(
     'expansion-panels': (
       'focus': map-get($grey, 'lighten-3')
     ),
+    'navigation-drawer': map-get($shades, 'white'),
     'selection-controls': (
       'disabled': rgba(map-get($shades, 'black'), 0.26),
       'thumb': (
@@ -86,6 +87,7 @@ $material-light: map-deep-merge(
       'outlined-disabled': rgba(map-get($shades, 'black'), 0.26),
       'outlined-hover': rgba(map-get($shades, 'black'), 0.86)
     ),
+    'toolbar': map-get($shades, 'white'),
     'input-bottom-line': rgba(map-get($shades, 'black'), 0.42),
     'stepper': (
       'active': rgba(map-get($shades, 'white'), 1),

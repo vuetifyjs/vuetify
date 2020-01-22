@@ -19,7 +19,7 @@ $material-dark: map-deep-merge(
       'text-color': map-get($shades, 'white'),
       'past-color': rgba(map-get($shades, 'white'), .50)
       ),
-    'cards': #1F1F1F,
+    'cards': #1E1E1E,
     'chips': #555,
     'dividers': rgba(map-get($shades, 'white'), 0.12),
     'text': (
@@ -49,6 +49,7 @@ $material-dark: map-deep-merge(
     'expansion-panels': (
       'focus': #494949
     ),
+    'navigation-drawer': #363636,
     'selection-controls': (
       'disabled': rgba(map-get($shades, 'white'), 0.3),
       'thumb': (
@@ -97,6 +98,7 @@ $material-dark: map-deep-merge(
       'hover': map-get($grey, 'darken-2'),
       'group': map-get($grey, 'darken-2')
     ),
+    'toolbar': #272727,
     'picker': (
       'body': map-get($grey, 'darken-3'),
       'clock': map-get($grey, 'darken-2'),
