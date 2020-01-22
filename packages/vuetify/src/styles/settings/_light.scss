@@ -9,6 +9,7 @@ $material-light: map-deep-merge(
     ),
     'app-bar': map-get($grey, 'lighten-4'),
     'background': map-get($shades, 'white'),
+    'bottom-navigation': map-get($shades, 'white'),
     'surface': map-get($shades, 'white'),
     'calendar': (
       'background-color': map-get($shades, 'white'),
