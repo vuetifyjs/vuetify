@@ -65,7 +65,7 @@ export default VTextField.extend({
       default: 'file',
     },
     value: {
-      default: () => [],
+      default: undefined,
       validator: val => {
         return typeof val === 'object' || Array.isArray(val)
       },
@@ -154,7 +154,7 @@ export default VTextField.extend({
 
   methods: {
     clearableCallback () {
-      this.internalValue = this.isMultiple ? [] : null
+      this.internalValue = this.isMultiple ? [] : undefined
       this.$refs.input.value = ''
     },
     genChips () {
