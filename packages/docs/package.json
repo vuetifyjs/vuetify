@@ -2,7 +2,7 @@
   "name": "vuetifyjs.com",
   "description": "A Vue.js project",
   "private": true,
-  "author": "John Leider <john.j.leider@gmail.com>",
+  "author": "John Leider <john@vuetifyjs.com>",
   "version": "2.2.6",
   "scripts": {
     "dev": "cross-env node --max_old_space_size=4096 server",
