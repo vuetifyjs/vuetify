@@ -28,15 +28,13 @@ function isKeyboardEvent (e: MouseEvent | TouchEvent | KeyboardEvent): e is Keyb
 }
 
 const calculate = (e: MouseEvent | TouchEvent | KeyboardEvent, el: HTMLElement, value: RippleOptions = {}) => {
-  let localX, localY
+  let localX = 0
+  let localY = 0
   if (!isKeyboardEvent(e)) {
     const offset = el.getBoundingClientRect()
     const target = isTouchEvent(e) ? e.touches[e.touches.length - 1] : e
     localX = target.clientX - offset.left
     localY = target.clientY - offset.top
-  } else {
-    localX = el.clientWidth / 2
-    localY = el.clientHeight / 2
   }
 
   let radius = 0
@@ -154,7 +152,7 @@ function rippleShow (e: MouseEvent | TouchEvent | KeyboardEvent) {
     // already been registered as touch
     if (element._ripple.isTouch) return
   }
-  value.center = element._ripple.centered
+  value.center = element._ripple.centered || isKeyboardEvent(e)
   if (element._ripple.class) {
     value.class = element._ripple.class
   }
