@@ -37,8 +37,10 @@ $material-light: map-deep-merge(
     ),
     'inputs': (
       'box': rgba(map-get($shades, 'black'), 0.04),
-      'solo-inverted': rgba(map-get($shades, 'black'), 0.16),
+      'solo-inverted': rgba(map-get($shades, 'black'), 0.06),
       'solo-inverted-focused': map-get($grey, 'darken-3'),
+      'solo-inverted-focused-label': rgba(map-get($shades, 'white'), .7),
+      'solo-inverted-focused-placeholder': rgba(map-get($shades, 'white'), 0.5),
       'solo-inverted-focused-text': map-get($shades, 'white')
     ),
     'buttons': (

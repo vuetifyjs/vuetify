@@ -30,9 +30,14 @@
       > .v-input__control > .v-input__slot
         background: map-deep-get($material, 'inputs', 'solo-inverted-focused')
 
-        .v-label,
         input
           color: map-deep-get($material, 'inputs', 'solo-inverted-focused-text')
+
+        input::placeholder
+          color: map-deep-get($material, 'inputs', 'solo-inverted-focused-placeholder')
+
+        .v-label
+          color: map-deep-get($material, 'inputs', 'solo-inverted-focused-label')
 
   &--outlined
     &:not(.v-input--is-focused)
@@ -387,7 +392,7 @@
 
       +rtl()
         padding-right: $text-field-outlined-fieldset-padding
-    
+
 
     &.v-text-field--reverse fieldset
       +ltr()
@@ -453,6 +458,9 @@
     .v-input__control
       min-height: $text-field-solo-control-min-height
       padding: 0
+
+      input
+        caret-color: auto
 
     &.v-input--dense > .v-input__control
       min-height: $text-field-solo-dense-control-min-height

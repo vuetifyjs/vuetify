@@ -55,7 +55,9 @@ $material-dark: map-deep-merge(
       'box': map-get($shades, 'white'),
       'solo-inverted': rgba(map-get($shades, 'white'), 0.16),
       'solo-inverted-focused': map-get($shades, 'white'),
-      'solo-inverted-focused-text': map-get(map-get($material-light, 'text'), 'primary')
+      'solo-inverted-focused-label': rgba(map-get($shades, 'black'), .6),
+      'solo-inverted-focused-placeholder': rgba(map-get($shades, 'black'), 0.38),
+      'solo-inverted-focused-text': rgba(map-get($shades, 'black'), 0.87)
     ),
     'buttons': (
       'disabled': rgba(map-get($shades, 'white'), 0.3),
