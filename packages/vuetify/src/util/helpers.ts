@@ -3,11 +3,6 @@ import { VuetifyIcon } from 'vuetify/types/services/icons'
 import { DataTableCompareFunction, SelectItemKey } from 'types'
 import { PASSIVE_SUPPORTED } from './globals'
 
-interface EventListenerOptions {
-  capture?: boolean
-  passive?: boolean
-}
-
 export function createSimpleFunctional (
   c: string,
   el = 'div',
