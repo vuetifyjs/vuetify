@@ -12,13 +12,13 @@ function checkForEventListenerPassiveSupport (supported = false): boolean {
 }
 
 const IN_BROWSER = typeof window !== 'undefined'
+const INTERSECTION_OBSERVER_SUPPORTED = IN_BROWSER && 'IntersectionObserver' in window
 const MUTATION_OBSERVER_SUPPORTED = IN_BROWSER && 'MutationObserver' in window
 const PASSIVE_SUPPORTED = IN_BROWSER ? checkForEventListenerPassiveSupport() : false
-const INTERSECTION_OBSERVER_SUPPORTED = IN_BROWSER && 'IntersectionObserver' in window
 
 export {
-  INTERSECTION_OBSERVER_SUPPORTED,
   IN_BROWSER,
+  INTERSECTION_OBSERVER_SUPPORTED,
   MUTATION_OBSERVER_SUPPORTED,
   PASSIVE_SUPPORTED,
 }
