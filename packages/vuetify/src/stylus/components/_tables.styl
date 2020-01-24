@@ -16,8 +16,8 @@ v-table($material)
 
   tbody
     tr
-      &:not(:last-child)
-        border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
+      &:not(:first-child)
+        border-top: 1px solid rgba($material.fg-color, $material.divider-percent)
 
       &[active]
         background: $material.table.active
