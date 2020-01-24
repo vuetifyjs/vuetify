@@ -8,7 +8,7 @@ import { VNode, VNodeChildren, PropType } from 'vue'
 import mixins from '../../util/mixins'
 
 // Utiltiies
-import { convertToUnit, debounce, addPassiveEventListener } from '../../util/helpers'
+import { convertToUnit, debounce } from '../../util/helpers'
 
 // Types
 const baseMixins = mixins(VSimpleTable)
@@ -93,7 +93,7 @@ export default baseMixins.extend<options>().extend({
   mounted () {
     this.scrollDebounce = debounce(this.onScroll, 50)
 
-    addPassiveEventListener(this.$refs.table, 'scroll', this.scrollDebounce)
+    this.$refs.table.addEventListener('scroll', this.scrollDebounce, { passive: true })
   },
 
   beforeDestroy () {

@@ -13,7 +13,6 @@ import VResponsive from '../VResponsive'
 
 // Utils
 import { consoleError, consoleWarn } from '../../util/console'
-import { IN_BROWSER } from '../../util/globals'
 
 // not intended for public use, this is passed in by vuetify-loader
 export interface srcObject {
@@ -77,7 +76,7 @@ export default VResponsive.extend({
     },
     hasIntersect () {
       return (
-        IN_BROWSER &&
+        typeof window !== 'undefined' &&
         'IntersectionObserver' in window
       )
     },
