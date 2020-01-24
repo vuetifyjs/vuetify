@@ -37,10 +37,7 @@ export function addEventListener (
   cb: EventHandlerNonNull | (() => void),
   options: boolean | AddEventListenerOptions = false
 ): void {
-  if (
-    !PASSIVE_SUPPORTED &&
-    typeof options === 'object'
-  ) delete options.passive
+  if (!PASSIVE_SUPPORTED) options = false
 
   el.addEventListener(event, cb, options)
 }
@@ -63,7 +60,7 @@ export function addPassiveEventListener (
   el: EventTarget,
   eventName: string,
   cb: (event: Event) => void,
-  options: boolean | AddEventListenerOptions = false
+  options: boolean | AddEventListenerOptions = {}
 ): void {
   if (typeof options === 'object' && !('passive' in options)) {
     options.passive = true
