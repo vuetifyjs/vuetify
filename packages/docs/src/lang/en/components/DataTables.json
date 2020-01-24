@@ -122,7 +122,7 @@
   },
   "slots": {
     "v-data-table": {
-      "body": "Slot to replaces the default table `<tbody>`",
+      "body": "Slot to replace the default table `<tbody>`",
       "body.append": "Appends elements to the end of the default table `<tbody>`",
       "body.prepend": "Prepends elements to the start of the default table `<tbody>`",
       "expanded-item": "Slot to customize expanded rows",
