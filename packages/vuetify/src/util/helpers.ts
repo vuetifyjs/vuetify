@@ -1,6 +1,12 @@
 import { VNode, VNodeDirective } from 'vue/types'
 import { VuetifyIcon } from 'vuetify/types/services/icons'
 import { DataTableCompareFunction, SelectItemKey } from 'types'
+import { PASSIVE_SUPPORTED } from './globals'
+
+interface EventListenerOptions {
+  capture?: boolean
+  passive?: boolean
+}
 
 export function createSimpleFunctional (
   c: string,
@@ -30,6 +36,20 @@ export function directiveConfig (binding: BindingConfig, defaults = {}): VNodeDi
   }
 }
 
+export function addEventListener (
+  el: EventTarget,
+  event: string,
+  cb: EventHandlerNonNull | (() => void),
+  options: boolean | AddEventListenerOptions = false
+): void {
+  if (
+    !PASSIVE_SUPPORTED &&
+    typeof options === 'object'
+  ) delete options.passive
+
+  el.addEventListener(event, cb, options)
+}
+
 export function addOnceEventListener (
   el: EventTarget,
   eventName: string,
@@ -41,31 +61,20 @@ export function addOnceEventListener (
     el.removeEventListener(eventName, once, options)
   }
 
-  el.addEventListener(eventName, once, options)
+  addEventListener(el, eventName, once, options)
 }
-
-let passiveSupported = false
-try {
-  if (typeof window !== 'undefined') {
-    const testListenerOpts = Object.defineProperty({}, 'passive', {
-      get: () => {
-        passiveSupported = true
-      },
-    })
-
-    window.addEventListener('testListener', testListenerOpts, testListenerOpts)
-    window.removeEventListener('testListener', testListenerOpts, testListenerOpts)
-  }
-} catch (e) { console.warn(e) }
-export { passiveSupported }
 
 export function addPassiveEventListener (
   el: EventTarget,
-  event: string,
-  cb: EventHandlerNonNull | (() => void),
-  options: {}
+  eventName: string,
+  cb: (event: Event) => void,
+  options: boolean | AddEventListenerOptions = false
 ): void {
-  el.addEventListener(event, cb, passiveSupported ? options : false)
+  if (typeof options === 'object' && !('passive' in options)) {
+    options.passive = true
+  }
+
+  addEventListener(el, eventName, cb, options)
 }
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {

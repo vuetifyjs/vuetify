@@ -17,6 +17,7 @@ import {
   VuetifyThemeVariant,
   Theme as ITheme,
 } from 'vuetify/types/services/theme'
+import { IN_BROWSER } from '../../util/globals'
 
 export class Theme extends Service {
   static property: 'theme' = 'theme'
@@ -152,7 +153,7 @@ export class Theme extends Service {
   // if applicable
   private genStyleElement (): void {
     /* istanbul ignore if */
-    if (typeof document === 'undefined') return
+    if (!IN_BROWSER) return
 
     /* istanbul ignore next */
     const options = this.options || {}
@@ -224,7 +225,7 @@ export class Theme extends Service {
 
   private initTheme () {
     // Only watch for reactivity on client side
-    if (typeof document === 'undefined') return
+    if (!IN_BROWSER) return
 
     watch(() => this.themes, () => this.applyTheme(), { deep: true })
   }

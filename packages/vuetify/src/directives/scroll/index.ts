@@ -1,6 +1,9 @@
 import { VNodeDirective } from 'vue/types/vnode'
 import { DirectiveOptions } from 'vue'
 
+// Utilities
+import { PASSIVE_SUPPORTED } from '../../util/globals'
+
 interface ScrollVNodeDirective extends VNodeDirective {
   arg: string
   value: EventListenerOrEventListenerObject
@@ -9,7 +12,7 @@ interface ScrollVNodeDirective extends VNodeDirective {
 
 function inserted (el: HTMLElement, binding: ScrollVNodeDirective) {
   const callback = binding.value
-  const options = binding.options || { passive: true }
+  const options = binding.options || PASSIVE_SUPPORTED ? { passive: true } : false
   const target = binding.arg ? document.querySelector(binding.arg) : window
   if (!target) return
 

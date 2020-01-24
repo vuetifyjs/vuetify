@@ -6,6 +6,7 @@ import Activatable from '../activatable'
 // Utilities
 import mixins, { ExtractVue } from '../../util/mixins'
 import { convertToUnit } from '../../util/helpers'
+import { IN_BROWSER } from '../../util/globals'
 
 // Types
 const baseMixins = mixins(
@@ -164,7 +165,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   beforeMount () {
-    this.hasWindow = typeof window !== 'undefined'
+    this.hasWindow = IN_BROWSER
   },
 
   methods: {
@@ -339,7 +340,7 @@ export default baseMixins.extend<options>().extend({
       }))
     },
     updateDimensions () {
-      this.hasWindow = typeof window !== 'undefined'
+      this.hasWindow = IN_BROWSER
       this.checkActivatorFixed()
       this.checkForPageYOffset()
       this.pageWidth = document.documentElement.clientWidth

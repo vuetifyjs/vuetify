@@ -26,6 +26,7 @@ import {
 
 // Types
 import { VNode } from 'vue'
+import { IN_BROWSER } from '../../util/globals'
 
 const baseMixins = mixins(
   Activatable,
@@ -146,7 +147,7 @@ export default baseMixins.extend({
   },
 
   beforeDestroy () {
-    if (typeof window !== 'undefined') this.unbind()
+    if (IN_BROWSER) this.unbind()
   },
 
   methods: {

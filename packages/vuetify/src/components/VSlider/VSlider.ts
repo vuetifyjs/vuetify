@@ -12,8 +12,9 @@ import Loadable from '../../mixins/loadable'
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import { addOnceEventListener, deepEqual, keyCodes, createRange, convertToUnit, passiveSupported } from '../../util/helpers'
+import { addOnceEventListener, deepEqual, keyCodes, createRange, convertToUnit } from '../../util/helpers'
 import { consoleWarn } from '../../util/console'
+import { PASSIVE_SUPPORTED } from '../../util/globals'
 
 // Types
 import Vue, { VNode, VNodeChildrenArrayContents, PropType } from 'vue'
@@ -452,8 +453,8 @@ export default mixins<options &
       this.keyPressed = 2
       this.isActive = true
 
-      const mouseUpOptions = passiveSupported ? { passive: true, capture: true } : true
-      const mouseMoveOptions = passiveSupported ? { passive: true } : false
+      const mouseUpOptions = PASSIVE_SUPPORTED ? { passive: true, capture: true } : true
+      const mouseMoveOptions = PASSIVE_SUPPORTED ? { passive: true } : false
       if ('touches' in e) {
         this.app.addEventListener('touchmove', this.onMouseMove, mouseMoveOptions)
         addOnceEventListener(this.app, 'touchend', this.onSliderMouseUp, mouseUpOptions)
@@ -467,7 +468,7 @@ export default mixins<options &
     onSliderMouseUp (e: Event) {
       e.stopPropagation()
       this.keyPressed = 0
-      const mouseMoveOptions = passiveSupported ? { passive: true } : false
+      const mouseMoveOptions = PASSIVE_SUPPORTED ? { passive: true } : false
       this.app.removeEventListener('touchmove', this.onMouseMove, mouseMoveOptions)
       this.app.removeEventListener('mousemove', this.onMouseMove, mouseMoveOptions)
 

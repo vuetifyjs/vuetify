@@ -2,6 +2,9 @@ import { VNodeDirective, VNode } from 'vue/types/vnode'
 import { keys } from '../../util/helpers'
 import { TouchHandlers, TouchValue, TouchWrapper } from 'types'
 
+// Utilities
+import { PASSIVE_SUPPORTED } from '../../util/globals'
+
 export interface TouchStoredHandlers {
   touchstart: (e: TouchEvent) => void
   touchend: (e: TouchEvent) => void
@@ -87,7 +90,7 @@ function createHandlers (value: TouchHandlers): TouchStoredHandlers {
 function inserted (el: HTMLElement, binding: TouchVNodeDirective, vnode: VNode) {
   const value = binding.value!
   const target = value.parent ? el.parentElement : el
-  const options = value.options || { passive: true }
+  const options = value.options || PASSIVE_SUPPORTED ? { passive: true } : false
 
   // Needed to pass unit tests
   if (!target) return

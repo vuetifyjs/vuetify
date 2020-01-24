@@ -6,9 +6,10 @@ import { consoleWarn } from '../../util/console'
 
 // Types
 import Vue from 'vue'
+import { IN_BROWSER } from '../../util/globals'
 
 export default function intersectable (options: { onVisible: string[] }) {
-  if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+  if (!IN_BROWSER || !('IntersectionObserver' in window)) {
     // do nothing because intersection observer is not available
     return Vue.extend({ name: 'intersectable' })
   }

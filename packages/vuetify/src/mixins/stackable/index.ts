@@ -1,6 +1,7 @@
 import Vue from 'vue'
 
 import { getZIndex } from '../../util/helpers'
+import { IN_BROWSER } from '../../util/globals'
 
 interface options extends Vue {
   $refs: {
@@ -22,7 +23,7 @@ export default Vue.extend<options>().extend({
   },
   computed: {
     activeZIndex (): number {
-      if (typeof window === 'undefined') return 0
+      if (!IN_BROWSER) return 0
 
       const content = this.stackElement || this.$refs.content
       // Return current zindex if not active

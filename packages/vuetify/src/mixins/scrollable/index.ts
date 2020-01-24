@@ -6,6 +6,7 @@ import { consoleWarn } from '../../util/console'
 
 // Types
 import Vue from 'vue'
+import { IN_BROWSER } from '../../util/globals'
 
 /**
  * Scrollable
@@ -43,7 +44,7 @@ export default Vue.extend({
      * enabled or disabled
      */
     canScroll (): boolean {
-      return typeof window !== 'undefined'
+      return IN_BROWSER
     },
     /**
      * The threshold that must be met before
