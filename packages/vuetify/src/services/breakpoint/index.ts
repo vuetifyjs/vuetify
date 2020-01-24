@@ -4,7 +4,6 @@ import { Service } from '../service'
 // Types
 import { VuetifyPreset } from 'vuetify/types/services/presets'
 import { Breakpoint as IBreakpoint } from 'vuetify/types/services/breakpoint'
-import { IN_BROWSER } from '../../util/globals'
 
 export class Breakpoint extends Service implements IBreakpoint {
   public static property: 'breakpoint' = 'breakpoint'
@@ -70,7 +69,7 @@ export class Breakpoint extends Service implements IBreakpoint {
 
   public init () {
     /* istanbul ignore if */
-    if (!IN_BROWSER) return
+    if (typeof window === 'undefined') return
 
     window.addEventListener(
       'resize',
@@ -146,7 +145,7 @@ export class Breakpoint extends Service implements IBreakpoint {
   // https://stackoverflow.com/questions/1248081
   private getClientWidth () {
     /* istanbul ignore if */
-    if (!IN_BROWSER) return 0 // SSR
+    if (typeof document === 'undefined') return 0 // SSR
     return Math.max(
       document.documentElement!.clientWidth,
       window.innerWidth || 0
@@ -155,7 +154,7 @@ export class Breakpoint extends Service implements IBreakpoint {
 
   private getClientHeight () {
     /* istanbul ignore if */
-    if (!IN_BROWSER) return 0 // SSR
+    if (typeof document === 'undefined') return 0 // SSR
     return Math.max(
       document.documentElement!.clientHeight,
       window.innerHeight || 0

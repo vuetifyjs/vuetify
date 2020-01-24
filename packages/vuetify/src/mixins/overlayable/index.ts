@@ -216,7 +216,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
       if (this.$vuetify.breakpoint.smAndDown) {
         document.documentElement!.classList.add('overflow-y-hidden')
       } else {
-        addPassiveEventListener(window, 'wheel', this.scrollListener as EventHandlerNonNull)
+        addPassiveEventListener(window, 'wheel', this.scrollListener as EventHandlerNonNull, { passive: false })
         window.addEventListener('keydown', this.scrollListener as EventHandlerNonNull)
       }
     },

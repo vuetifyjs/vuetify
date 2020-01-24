@@ -3,7 +3,6 @@ import './VRipple.sass'
 
 import { VNode, VNodeDirective } from 'vue'
 import { consoleWarn } from '../../util/console'
-import { addPassiveEventListener } from '../../util/helpers'
 
 function transform (el: HTMLElement, value: string) {
   el.style['transform'] = value
@@ -182,15 +181,15 @@ function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boo
     el._ripple.circle = value.circle
   }
   if (enabled && !wasEnabled) {
-    addPassiveEventListener(el, 'touchstart', rippleShow as any)
-    addPassiveEventListener(el, 'touchend', rippleHide)
+    el.addEventListener('touchstart', rippleShow, { passive: true })
+    el.addEventListener('touchend', rippleHide, { passive: true })
     el.addEventListener('touchcancel', rippleHide)
 
     el.addEventListener('mousedown', rippleShow)
     el.addEventListener('mouseup', rippleHide)
     el.addEventListener('mouseleave', rippleHide)
     // Anchor tags can be dragged, causes other hides to fail - #1537
-    addPassiveEventListener(el, 'dragstart', rippleHide)
+    el.addEventListener('dragstart', rippleHide, { passive: true })
   } else if (!enabled && wasEnabled) {
     removeListeners(el)
   }
