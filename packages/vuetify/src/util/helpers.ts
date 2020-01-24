@@ -1,7 +1,6 @@
 import { VNode, VNodeDirective } from 'vue/types'
 import { VuetifyIcon } from 'vuetify/types/services/icons'
 import { DataTableCompareFunction, SelectItemKey } from 'types'
-import { PASSIVE_SUPPORTED } from './globals'
 
 export function createSimpleFunctional (
   c: string,
@@ -29,44 +28,6 @@ export function directiveConfig (binding: BindingConfig, defaults = {}): VNodeDi
     value: binding.arg,
     ...(binding.value || {}),
   }
-}
-
-export function addEventListener (
-  el: EventTarget,
-  event: string,
-  cb: EventHandlerNonNull | (() => void),
-  options: boolean | AddEventListenerOptions = false
-): void {
-  if (!PASSIVE_SUPPORTED) options = false
-
-  el.addEventListener(event, cb, options)
-}
-
-export function addOnceEventListener (
-  el: EventTarget,
-  eventName: string,
-  cb: (event: Event) => void,
-  options: boolean | AddEventListenerOptions = false
-): void {
-  var once = (event: Event) => {
-    cb(event)
-    el.removeEventListener(eventName, once, options)
-  }
-
-  addEventListener(el, eventName, once, options)
-}
-
-export function addPassiveEventListener (
-  el: EventTarget,
-  eventName: string,
-  cb: (event: Event) => void,
-  options: boolean | AddEventListenerOptions = {}
-): void {
-  if (typeof options === 'object' && !('passive' in options)) {
-    options.passive = true
-  }
-
-  addEventListener(el, eventName, cb, options)
 }
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
