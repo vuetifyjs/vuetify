@@ -4,7 +4,7 @@ import { defineComponent } from 'vue'
 // Mixins
 import {
   ElevationProps,
-  useElevation,
+  useElevationClasses,
 } from '../'
 
 // Utilities
@@ -16,7 +16,7 @@ describe('elevation.ts', () => {
     props: ElevationProps(),
 
     setup (props) {
-      return { classes: useElevation(props) }
+      return { classes: useElevationClasses(props) }
     },
   })
 
