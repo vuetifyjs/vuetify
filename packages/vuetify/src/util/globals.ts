@@ -6,10 +6,7 @@ function checkForEventListenerPassiveSupport (supported = false): boolean {
 
     window.addEventListener('check', opts, opts)
     window.removeEventListener('check', opts, opts)
-  } catch (e) {
-    console.warn('The current browser does not support the passive option.')
-    console.warn(e)
-  }
+  } catch (e) { /**/ }
 
   return supported
 }
