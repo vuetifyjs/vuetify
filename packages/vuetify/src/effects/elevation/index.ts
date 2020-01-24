@@ -18,5 +18,5 @@ export const ElevationProps = (
 
 // Effect
 export function useElevationClasses (props: ElevationProps) {
-  return computed(() => ({ [`elevation-${props.elevation}`]: Boolean(0 ^ props.elevation!) }))
+  return computed(() => (0 ^ props.elevation!) ? { [`elevation-${props.elevation}`]: true } : {})
 }
