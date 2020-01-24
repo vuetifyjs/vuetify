@@ -23,6 +23,7 @@
     }
   },
   "props": {
+    "disabled": "If enabled this will set all child inputs to disabled",
     "lazyValidation": "If enabled, **value** will always be _true_ unless there are visible validation errors. You can still call `validate()` to manually trigger validation",
     "value": "A boolean value representing the validity of the form."
   },

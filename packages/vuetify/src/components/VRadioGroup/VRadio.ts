@@ -88,7 +88,7 @@ export default baseMixins.extend<options>().extend({
       return (this.radioGroup || {}).hasState
     },
     isDisabled (): boolean {
-      return this.disabled || !!(this.radioGroup || {}).disabled
+      return this.disabled || !!(this.radioGroup || {}).isDisabled
     },
     isReadonly (): boolean {
       return this.readonly || !!(this.radioGroup || {}).readonly

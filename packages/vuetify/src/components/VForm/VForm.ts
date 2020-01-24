@@ -25,9 +25,14 @@ export default mixins(
 ).extend({
   name: 'v-form',
 
+  provide (): object {
+    return { form: this }
+  },
+
   inheritAttrs: false,
 
   props: {
+    disabled: Boolean,
     lazyValidation: Boolean,
     value: Boolean,
   },
