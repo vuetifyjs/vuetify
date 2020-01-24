@@ -21,6 +21,7 @@
             v-if="item.visible"
             :key="i"
             :class="{
+              'documentation-toc__link--subheader': item.subheader,
               'mb-2': i + 1 !== internalToc.length,
               'primary--text': activeIndex === i,
               'text--disabled': activeIndex !== i
@@ -94,10 +95,14 @@
             text.shift()
             text = text.join(' ')
 
+            const isSubheader = translation.indexOf('###') > -1
+            const isHeader = !isSubheader && translation.indexOf('##') > -1
+
             return {
               id: kebabCase(text),
+              subheader: isSubheader,
               text,
-              visible: translation.indexOf('###') === -1,
+              visible: isHeader || isSubheader,
             }
           })
           .filter(h => h.visible)
@@ -179,4 +184,7 @@
 
     .supporter-group
       justify-content: flex-start !important
+
+    .documentation-toc__link--subheader
+      margin-left: 8px
 </style>
