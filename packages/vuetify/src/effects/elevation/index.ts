@@ -17,8 +17,9 @@ export const ElevationProps = (
 })
 
 // Effect
-export function useElevation ({ elevation }: ElevationProps) {
+export function useElevation (props: ElevationProps) {
   const classes: Dictionary<boolean> = {}
+  const elevation = props.elevation
 
   if (
     elevation != null &&
