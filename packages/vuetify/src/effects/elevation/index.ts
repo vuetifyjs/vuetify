@@ -18,17 +18,9 @@ export const ElevationProps = (
 
 // Effect
 export function useElevation (props: ElevationProps) {
-  const classes: Dictionary<boolean> = {}
-  const elevation = props.elevation
-
-  if (
-    elevation != null &&
-    !isNaN(parseInt(elevation))
-  ) {
-    classes[`elevation-${elevation}`] = true
-  }
-
-  const elevationClasses = computed(() => classes)
-
-  return { elevationClasses }
+  return computed(() => ({
+    elevationClasses: {
+      [`elevation-${props.elevation}`]: Boolean(0 ^ props.elevation!),
+    },
+  }))
 }
