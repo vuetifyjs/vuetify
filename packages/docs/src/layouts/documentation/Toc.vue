@@ -95,14 +95,15 @@
             text.shift()
             text = text.join(' ')
 
-            const isSubheader = translation.indexOf('###') > -1
-            const isHeader = !isSubheader && translation.indexOf('##') > -1
+            const isSubheading = translation.substring(0, 3) === '###'
+            const isHeading = !isSubheading && translation.substring(0, 2) === '##'
+            const isIntroduction = !isHeading && translation.charAt(0) === '#'
 
             return {
               id: kebabCase(text),
-              subheader: isSubheader,
+              subheader: isSubheading,
               text,
-              visible: isHeader || isSubheader,
+              visible: isSubheading || isHeading || isIntroduction,
             }
           })
           .filter(h => h.visible)
