@@ -40,11 +40,11 @@
         </template>
       </ul>
 
-      <div class="pl-5">
+      <div class="pl-6">
         <v-fade-transition appear>
           <supporters-supporter-group
             :group="supporters['Diamond']"
-            compact
+            small
             justify="start"
             title="Diamond Sponsors"
           />
@@ -157,7 +157,7 @@
 <style lang="sass">
   #documentation-toc
     .supporter-group__title
-      padding-left: 14px
+      padding-left: 8px
 
   .documentation-toc
     list-style-type: none !important
@@ -178,6 +178,5 @@
       transition: color .1s ease-in
 
     .supporter-group
-        justify-content: flex-start !important
-        margin-left: 20px !important
+      justify-content: flex-start !important
 </style>

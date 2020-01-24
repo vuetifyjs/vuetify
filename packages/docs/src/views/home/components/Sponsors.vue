@@ -5,7 +5,7 @@
   >
     <v-sheet
       :color="$vuetify.theme.dark ? undefined : 'grey lighten-5'"
-      class="pa-12"
+      class="pa-0 pa-md-12"
       tag="v-container"
     >
       <base-heading>Vuetify.Home.proudlySponsoredBy</base-heading>
