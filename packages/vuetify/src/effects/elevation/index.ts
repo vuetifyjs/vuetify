@@ -2,12 +2,12 @@
 import { computed } from 'vue'
 
 // Types
-interface ElevationProps {
+export interface ElevationProps {
   elevation?: number
 }
 
 // Props
-export const ElevationProps = (
+export const elevationProps = (
   defaults: Partial<ElevationProps> = {}
 ) => ({
   elevation: {
