@@ -4,23 +4,6 @@ import { PASSIVE_SUPPORTED } from './globals'
 // Types
 type EventOptions = boolean | AddEventListenerOptions
 
-export function eventOptions (options: EventOptions = false): EventOptions {
-  if (!PASSIVE_SUPPORTED) {
-    options = options != null && typeof options === 'object'
-      ? Boolean(options.capture)
-      : options
-  }
-
-  return options
-}
-
-export function passiveEventOptions (options?: EventOptions): EventOptions {
-  return eventOptions({
-    passive: true,
-    ...(typeof options === 'object' ? options : {}),
-  })
-}
-
 export function addOnceEventListener (
   el: EventTarget,
   eventName: string,
@@ -36,4 +19,21 @@ export function addOnceEventListener (
   }
 
   el.addEventListener(eventName, once, options)
+}
+
+export function eventOptions (options: EventOptions = false): EventOptions {
+  if (!PASSIVE_SUPPORTED) {
+    options = options != null && typeof options === 'object'
+      ? Boolean(options.capture)
+      : options
+  }
+
+  return options
+}
+
+export function passiveEventOptions (options?: EventOptions): EventOptions {
+  return eventOptions({
+    passive: true,
+    ...(typeof options === 'object' ? options : {}),
+  })
 }
