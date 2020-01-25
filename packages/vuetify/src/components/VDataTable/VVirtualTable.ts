@@ -41,7 +41,7 @@ export default baseMixins.extend<options>().extend({
       default: 48,
     },
     expansion: {
-      type: Object as PropType<any[]>,
+      type: Object,
       default: () => ({}),
     },
   },

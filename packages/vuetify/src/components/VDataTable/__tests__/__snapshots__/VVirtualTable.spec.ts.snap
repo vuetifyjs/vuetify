@@ -3,11 +3,11 @@
 exports[`VVirtualTable.ts should re-render when items change 1`] = `
 <div class="v-data-table v-virtual-table theme--light">
   <div class="v-virtual-table__wrapper">
-    <div class="v-virtual-table__table">
-      <table>
+    <div class="v-virtual-table__table"
+         style="height: 192px;"
+    >
+      <table style="margin-top: 0px;">
         <tbody>
-          <tr style="height: 0px;">
-          </tr>
           <div>
             <div>
               a
@@ -19,8 +19,6 @@ exports[`VVirtualTable.ts should re-render when items change 1`] = `
               c
             </div>
           </div>
-          <tr style="height: 0px;">
-          </tr>
         </tbody>
       </table>
     </div>
@@ -31,11 +29,11 @@ exports[`VVirtualTable.ts should re-render when items change 1`] = `
 exports[`VVirtualTable.ts should re-render when items change 2`] = `
 <div class="v-data-table v-virtual-table theme--light">
   <div class="v-virtual-table__wrapper">
-    <div class="v-virtual-table__table">
-      <table>
+    <div class="v-virtual-table__table"
+         style="height: 192px;"
+    >
+      <table style="margin-top: 0px;">
         <tbody>
-          <tr style="height: 0px;">
-          </tr>
           <div>
             <div>
               d
@@ -47,8 +45,6 @@ exports[`VVirtualTable.ts should re-render when items change 2`] = `
               f
             </div>
           </div>
-          <tr style="height: 0px;">
-          </tr>
         </tbody>
       </table>
     </div>
@@ -59,16 +55,14 @@ exports[`VVirtualTable.ts should re-render when items change 2`] = `
 exports[`VVirtualTable.ts should render 1`] = `
 <div class="v-data-table v-virtual-table theme--light">
   <div class="v-virtual-table__wrapper">
-    <div class="v-virtual-table__table">
-      <table>
+    <div class="v-virtual-table__table"
+         style="height: 192px;"
+    >
+      <table style="margin-top: 0px;">
         <tbody>
-          <tr style="height: 0px;">
-          </tr>
           <div class="test">
             {"items":["a","b","c"]}
           </div>
-          <tr style="height: 0px;">
-          </tr>
         </tbody>
       </table>
     </div>
