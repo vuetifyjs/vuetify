@@ -440,11 +440,13 @@ describe('VSelect.ts', () => {
     })
 
     const inputs = wrapper.findAll('input')
-    const input = inputs.at(1)
-    const element = input.element
+    const element = inputs.at(1).element
     expect(element.value).toEqual('fizz')
 
-    input.setValue('bar')
+    wrapper.vm.selectItem(wrapper.vm.items[1])
+
+    await wrapper.vm.$nextTick()
+
     expect(element.value).toEqual('bar')
   })
 })
