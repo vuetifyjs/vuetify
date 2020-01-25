@@ -22,6 +22,11 @@ v-datatable($material)
     color: rgba($material.fg-color, $material.secondary-text-percent)
     border-top: 1px solid rgba($material.fg-color, $material.divider-percent)
 
+  .v-datatable__expand-col
+    &--expanded
+      border-bottom: 1px solid $material.table.border
+
+
 theme(v-datatable, "v-datatable")
 
 .v-datatable
@@ -112,14 +117,16 @@ theme(v-datatable, "v-datatable")
 
 .v-datatable__expand
   &-row
-    border: none !important
+    border-top: none !important
 
   &-col
     padding: 0 !important
     height: 0px !important
+    visibility: hidden
 
     &--expanded
-      border-bottom: 1px solid rgba(0,0,0,0.12)
+      visibility: visible
+
 
   &-content
     transition: height $primary-transition

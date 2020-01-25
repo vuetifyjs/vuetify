@@ -22,8 +22,13 @@ export default {
         children.push(expand)
       }
 
+      const classes = {
+        'v-datatable__expand-col': true,
+        'v-datatable__expand-col--expanded': this.isExpanded(props.item)
+      }
+
       const transition = this.$createElement('transition-group', {
-        class: 'v-datatable__expand-col',
+        class: classes,
         attrs: { colspan: this.headerColumns },
         props: {
           tag: 'td'
