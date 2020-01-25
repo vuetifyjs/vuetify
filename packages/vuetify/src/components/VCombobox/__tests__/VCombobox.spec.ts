@@ -319,4 +319,17 @@ describe('VCombobox.ts', () => {
 
     expect(wrapper.vm.$attrs.autocomplete).toBe('on')
   })
+
+  it('should pass the name attribute to the inner input element', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo'],
+        name: ['bar'],
+      },
+    })
+
+    const inputs = wrapper.findAll('input')
+    const element = inputs.at(1).element
+    expect(element.name).toEqual('bar')
+  })
 })

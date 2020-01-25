@@ -449,4 +449,17 @@ describe('VSelect.ts', () => {
 
     expect(element.value).toEqual('bar')
   })
+
+  it('should pass the name attribute to the inner input element', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo'],
+        name: ['bar'],
+      },
+    })
+
+    const inputs = wrapper.findAll('input')
+    const element = inputs.at(1).element
+    expect(element.name).toEqual('bar')
+  })
 })

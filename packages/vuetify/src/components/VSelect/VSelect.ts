@@ -427,7 +427,7 @@ export default baseMixins.extend<options>().extend({
     genHiddenInput (): VNode {
       return this.$createElement('input', {
         domProps: { value: this.lazyValue },
-        attrs: { type: 'hidden' },
+        attrs: { type: 'hidden', name: this.attrs$.name },
       })
     },
     genInputSlot (): VNode {
