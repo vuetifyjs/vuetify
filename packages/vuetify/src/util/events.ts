@@ -1,5 +1,7 @@
+// Globals
 import { PASSIVE_SUPPORTED } from './globals'
 
+// Types
 type EventOptions = boolean | AddEventListenerOptions
 
 export function eventOptions (options: EventOptions = false): EventOptions {
