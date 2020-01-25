@@ -14,4 +14,4 @@ export function supportsPassiveEvents (supported = false): boolean {
 export const IN_BROWSER = typeof window !== 'undefined'
 export const INTERSECTION_OBSERVER_SUPPORTED = !!(IN_BROWSER && 'IntersectionObserver' in window)
 export const MUTATION_OBSERVER_SUPPORTED = !!(IN_BROWSER && 'MutationObserver' in window)
-export const PASSIVE_SUPPORTED = IN_BROWSER ? supportsPassiveEvents() : false
+export const PASSIVE_SUPPORTED = !!(IN_BROWSER && supportsPassiveEvents())
