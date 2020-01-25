@@ -1,5 +1,9 @@
 // Utility
-import { eventOptions, passiveEventOptions, addOnceEventListener } from '../events'
+import {
+  addOnceEventListener,
+  eventOptions,
+  passiveEventOptions,
+} from '../events'
 
 describe('events.ts', () => {
   const capture = { capture: true }
@@ -11,7 +15,7 @@ describe('events.ts', () => {
     [true, true, true],
     [false, false, false],
     [undefined, false, false],
-    [null, false, false],
+    [null, null, null],
     [capture, capture, true],
     [passive, passive, false],
     [combined, combined, true],
@@ -38,6 +42,9 @@ describe('events.ts', () => {
   it('should add passive to options if not already defined', () => {
     const passiveFalse = { passive: false }
     const passiveOptions = [
+      [false, passive],
+      [true, passive],
+      [null, passive],
       [undefined, passive],
       [capture, { ...capture, ...passive }],
       [passive, passive],
