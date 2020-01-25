@@ -5,27 +5,16 @@ describe('events.ts', () => {
   const capture = { capture: true }
   const passive = { passive: true }
   const combined = { ...capture, ...passive }
-  /* eslint-disable-next-line */
-  const noOptions = [, false]
+  // 2nd arg is for Evergreen Browsers
+  // 3rd arg is for IE11
   const defaultOptions = [
-    noOptions,
-    [true, true],
-    [false, false],
-    [undefined, false],
-    [null, false],
-    [capture, capture],
-    [passive, passive],
-    [combined, combined],
-  ]
-  const ie11Options = [
-    noOptions,
-    [true, true],
-    [false, false],
-    [undefined, false],
-    [null, false],
-    [capture, true],
-    [passive, false],
-    [combined, true],
+    [true, true, true],
+    [false, false, false],
+    [undefined, false, false],
+    [null, false, false],
+    [capture, capture, true],
+    [passive, passive, false],
+    [combined, combined, true],
   ]
 
   beforeEach(jest.resetModules)
@@ -41,7 +30,7 @@ describe('events.ts', () => {
 
     const { eventOptions } = require('../events')
 
-    for (const [value, expected] of ie11Options) {
+    for (const [value,, expected] of defaultOptions) {
       expect(eventOptions(value)).toEqual(expected)
     }
   })
@@ -49,8 +38,7 @@ describe('events.ts', () => {
   it('should add passive to options if not already defined', () => {
     const passiveFalse = { passive: false }
     const passiveOptions = [
-      /* eslint-disable-next-line */
-      [, passive],
+      [undefined, passive],
       [capture, { ...capture, ...passive }],
       [passive, passive],
       [passiveFalse, passiveFalse],
