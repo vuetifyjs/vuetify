@@ -219,7 +219,7 @@ export default Vue.extend({
       this.updateOptions({ sortDesc: wrapInArray(sortDesc) })
     },
     'internalOptions.sortDesc' (sortDesc: boolean[], old: boolean[]) {
-      !deepEqual(sortDesc, old) && this.$emit('update:sort-desc', Array.isArray(this.sortDesc) ? sortDesc : sortDesc[0])
+      !deepEqual(sortDesc, old) && this.$emit('update:sort-desc', Array.isArray(sortDesc) ? sortDesc[0] : sortDesc)
     },
     groupBy (groupBy: string | string[]) {
       this.updateOptions({ groupBy: wrapInArray(groupBy) })
