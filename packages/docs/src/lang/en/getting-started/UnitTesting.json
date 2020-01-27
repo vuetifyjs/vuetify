@@ -5,8 +5,8 @@
   "runnerHeader": "## Test runner setup",
   "runnerText1": "Information on how to setup a test runner with Vue CLI 3 can be found on the [official documentation](https://vue-test-utils.vuejs.org/guides/getting-started.html). At a glance, Vue CLI 3 has getting started repositories for the following test runners:",
   "runnerText2": [
-    "[Jest](https://github.com/vuejs/vue-test-utils-jest-example)",
-    "[Mocha](https://github.com/vuejs/vue-test-utils-mocha-webpack-example)",
+    "[Jest](https://cli.vuejs.org/core-plugins/unit-jest.html)",
+    "[Mocha](https://cli.vuejs.org/core-plugins/unit-mocha.html)",
     "[tape](https://github.com/eddyerburgh/vue-test-utils-tape-example)",
     "[AVA](https://github.com/eddyerburgh/vue-test-utils-ava-example)"
   ],
