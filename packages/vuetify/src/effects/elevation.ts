@@ -14,6 +14,17 @@ export function elevationProps (
     elevation: {
       type: [Number, String],
       default: defaults.elevation,
+      validator (v: any) {
+        const value = parseInt(v)
+
+        return (
+          !isNaN(value) &&
+          value >= 0 &&
+          // Material Design has a maximum elevation of 24
+          // https://material.io/design/environment/elevation.html#default-elevations
+          value <= 24
+        )
+      },
     },
   }
 }
@@ -24,7 +35,9 @@ export function useElevationClasses (props: ElevationProps) {
     const { elevation } = props
     const hasElevation = (elevation != null && elevation !== '') ? true : undefined
 
-    return { [`elevation-${elevation}`]: hasElevation }
+    return {
+      class: { [`elevation-${elevation}`]: hasElevation },
+    }
   })
 
   return { elevationClasses }

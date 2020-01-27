@@ -20,7 +20,7 @@ describe('elevation.ts', () => {
       const props = { elevation }
       const { elevationClasses } = useElevationClasses(props)
 
-      expect(elevationClasses.value).toEqual(equal)
+      expect(elevationClasses.value).toEqual({ class: equal })
     }
   })
 
@@ -28,5 +28,19 @@ describe('elevation.ts', () => {
     expect(elevationProps().elevation.default).toBeUndefined()
     expect(elevationProps({ elevation: 2 }).elevation.default).toBe(2)
     expect(elevationProps({ elevation: '22' }).elevation.default).toBe('22')
+  })
+
+  it('should only allow numeric values between 0 and 24', () => {
+    const { elevation: { validator } } = elevationProps()
+    const validValues = [1, '24']
+    const invalidValues = [-1, '25', false, true]
+
+    for (const value of validValues) {
+      expect(validator(value)).toBe(true)
+    }
+
+    for (const value of invalidValues) {
+      expect(validator(value)).toBe(false)
+    }
   })
 })
