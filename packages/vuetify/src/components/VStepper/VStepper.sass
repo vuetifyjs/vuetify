@@ -52,7 +52,11 @@
 
   &--vertical
     .v-stepper__content:not(:last-child)
-      border-left: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+      +ltr()
+        border-left: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+
+      +rtl()
+        border-right: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
 
 .v-stepper
   border-radius: $stepper-border-radius
@@ -174,9 +178,13 @@
     padding-bottom: $stepper-vertical-padding-bottom
 
     .v-stepper__content
-      margin: $stepper-vertical-content-margin
       padding: $stepper-vertical-content-padding
       width: auto
+      +ltr()
+        margin: $stepper-vertical-content-ltr-margin
+
+      +rtl()
+        margin: $stepper-vertical-content-rtl-margin
 
     .v-stepper__step
       padding: $stepper-vertical-step-padding

@@ -2,7 +2,7 @@
 
 // Theme
 +theme(v-navigation-drawer) using ($material)
-  background-color: map-get($material, 'cards')
+  background-color: map-get($material, 'navigation-drawer')
 
   &:not(.v-navigation-drawer--floating)
     .v-navigation-drawer__border
@@ -98,18 +98,20 @@
   overflow: hidden
 
   .v-list-item
-    justify-content: center
-
     > *:first-child
       margin-left: 0
       margin-right: 0
 
     > *:not(:first-child)
-      display: none
+      @include visually-hidden
 
   .v-list-group--no-action .v-list-group__items,
   .v-list-group--sub-group
     display: none
+
+  &.v-navigation-drawer--custom-mini-variant
+    .v-list-item
+      justify-content: center
 
 .v-navigation-drawer--temporary
   z-index: 7

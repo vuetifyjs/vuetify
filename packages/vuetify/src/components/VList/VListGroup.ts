@@ -172,11 +172,9 @@ export default baseMixins.extend<options>().extend({
       ]))
     },
     genPrependIcon (): VNode | null {
-      const icon = this.prependIcon
-        ? this.prependIcon
-        : this.subGroup
-          ? '$subgroup'
-          : false
+      const icon = this.subGroup && this.prependIcon == null
+        ? '$subgroup'
+        : this.prependIcon
 
       if (!icon && !this.$slots.prependIcon) return null
 

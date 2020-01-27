@@ -53,6 +53,7 @@ exports[`VTreeViewNode.ts should not be able to have active children with empty 
 >
   <div class="v-treeview-node__root">
     <i role="button"
+       tabindex="0"
        class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
     >
       arrow_drop_down
@@ -72,6 +73,7 @@ exports[`VTreeViewNode.ts should render disabled item 1`] = `
 >
   <div class="v-treeview-node__root">
     <i role="button"
+       tabindex="0"
        class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
     >
       arrow_drop_down
@@ -101,6 +103,7 @@ exports[`VTreeViewNode.ts should use label slot 1`] = `
 >
   <div class="v-treeview-node__root">
     <i role="button"
+       tabindex="0"
        class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
     >
       arrow_drop_down
