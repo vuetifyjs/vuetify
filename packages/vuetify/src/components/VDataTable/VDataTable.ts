@@ -80,10 +80,6 @@ export default VDataIterator.extend({
     showGroupBy: Boolean,
     // TODO: Fix
     // virtualRows: Boolean,
-    mobileBreakpoint: {
-      type: Number,
-      default: 600,
-    },
     height: [Number, String],
     hideDefaultHeader: Boolean,
     caption: String,
@@ -134,13 +130,6 @@ export default VDataIterator.extend({
       return this.isMobile ? undefined : {
         colspan: this.headersLength || this.computedHeaders.length,
       }
-    },
-    isMobile (): boolean {
-      // Guard against SSR render
-      // https://github.com/vuetifyjs/vuetify/issues/7410
-      if (this.$vuetify.breakpoint.width === 0) return false
-
-      return this.$vuetify.breakpoint.width < this.mobileBreakpoint
     },
     columnSorters (): Record<string, DataTableCompareFunction> {
       return this.computedHeaders.reduce<Record<string, DataTableCompareFunction>>((acc, header) => {

@@ -7,6 +7,7 @@ import {
 } from '@vue/test-utils'
 import Vue from 'vue'
 import { preset } from '../../../presets/default'
+import {Breakpoint} from "../../../services/breakpoint";
 
 Vue.prototype.$vuetify = {
   icons: {
@@ -30,6 +31,7 @@ describe('VDataIterator.ts', () => {
       return mount(VDataIterator, {
         mocks: {
           $vuetify: {
+            breakpoint: new Breakpoint(preset),
             lang: new Lang(preset),
             theme: {
               dark: false,

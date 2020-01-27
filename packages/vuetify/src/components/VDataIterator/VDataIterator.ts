@@ -78,6 +78,10 @@ export default Themeable.extend({
       return this.internalCurrentItems.filter(item => this.isSelectable(item))
     },
     isMobile (): boolean {
+      // Guard against SSR render
+      // https://github.com/vuetifyjs/vuetify/issues/7410
+      if (this.$vuetify.breakpoint.width === 0) return false
+
       return this.$vuetify.breakpoint.width < this.mobileBreakpoint
     },
   },
