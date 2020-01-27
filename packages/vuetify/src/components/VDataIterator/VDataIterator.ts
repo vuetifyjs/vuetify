@@ -32,6 +32,10 @@ export default Themeable.extend({
       type: Array as PropType<any[]>,
       default: () => [],
     },
+    mobileBreakpoint: {
+      type: Number,
+      default: 600,
+    },
     singleExpand: Boolean,
     loading: [Boolean, String],
     noResultsText: {
@@ -72,6 +76,9 @@ export default Themeable.extend({
     },
     selectableItems (): any[] {
       return this.internalCurrentItems.filter(item => this.isSelectable(item))
+    },
+    isMobile (): boolean {
+      return this.$vuetify.breakpoint.width < this.mobileBreakpoint
     },
   },
 
@@ -192,15 +199,14 @@ export default Themeable.extend({
       this.$emit('item-expanded', { item, value })
     },
     createItemProps (item: any) {
-      const props = {
+      return {
         item,
         select: (v: boolean) => this.select(item, v),
         isSelected: this.isSelected(item),
         expand: (v: boolean) => this.expand(item, v),
         isExpanded: this.isExpanded(item),
+        isMobile: this.isMobile,
       }
-
-      return props
     },
     genEmptyWrapper (content: VNodeChildren) {
       return this.$createElement('div', content)
