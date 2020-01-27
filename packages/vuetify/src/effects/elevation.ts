@@ -24,9 +24,7 @@ export function useElevationClasses (props: ElevationProps) {
     const { elevation } = props
     const hasElevation = (elevation != null && elevation !== '') ? true : undefined
 
-    return {
-      [`elevation-${elevation}`]: hasElevation,
-    }
+    return { [`elevation-${elevation}`]: hasElevation }
   })
 
   return { elevationClasses }
