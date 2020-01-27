@@ -25,5 +25,13 @@
   "webpackText6": "For more information on different support iconfonts and advanced implementations, navigate to the [Icons](/customization/icons) page.",
   "cdnHeader": "## CDN usage",
   "cdnText": "To test using Vuetify.js without installing a template from Vue CLI, copy the code below into your `index.html`. This will pull the latest version of Vue and Vuetify, allowing you to start playing with components. You can also use the [Vuetify starter](https://template.vuetifyjs.com) on codepen. While not recommended, if you need to utilize the cdn packages in a _production_ environment, it is recommended that you scope the versions of your assets. For more information on how to do this, navigate to the [jsdelivr](https://www.jsdelivr.com/) website.",
-  "cdnAlert": "In order for your application to work properly, you must wrap it in a v-app component. See the [Application](/components/application) component page for more details."
+  "cdnAlert": "In order for your application to work properly, you must wrap it in a v-app component. See the [Application](/components/application) component page for more details.",
+  "electronHeader": "## Usage with Electron",
+  "electronText": "To use Vuetify with electron, simply add electron via Vue CLI using [electron-builder](https://github.com/nklayman/Vue CLI-plugin-electron-builder).",
+  "pwaHeader": "## Usage with PWA",
+  "pwaText": "If you are bootstrapping a new application via Vue CLI, you can simply select the PWA option during your Vue CLI project install. Then follwo the CLI usage above. If you want to add PWA to an existing Vue CLI project, you can use the following Vue CLI command:",
+  "cordovaHeader": "## Usage with Cordova",
+  "cordovaText": "To use Vuetify with Corodova, simply add the [Corodova](https://github.com/m0dch3n/vue-cli-plugin-cordova) plugin via Vue CLI:",
+  "capacitorHeader": "## Usage with Capacitor",
+  "capacitorText": "To use Vuetify with Capacitor, simply add the [Capacitor](https://github.com/nklayman/vue-cli-plugin-capacitor) plugin via Vue CLI:"
 }

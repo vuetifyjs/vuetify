@@ -181,6 +181,74 @@
       "type": "section",
       "children": [
         {
+          "type": "heading",
+          "lang": "electronHeader"
+        },
+        {
+          "type": "text",
+          "lang": "electronText"
+        },
+        {
+          "type": "markup",
+          "value": "bash_vue_add_electronbuilder"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "pwaHeader"
+        },
+        {
+          "type": "text",
+          "lang": "pwaText"
+        },
+        {
+          "type": "markup",
+          "value": "bash_vue_add_pwa"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "cordovaHeader"
+        },
+        {
+          "type": "text",
+          "lang": "cordovaText"
+        },
+        {
+          "type": "markup",
+          "value": "bash_vue_add_cordova"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "capacitorHeader"
+        },
+        {
+          "type": "text",
+          "lang": "capacitorText"
+        },
+        {
+          "type": "markup",
+          "value": "bash_vue_add_capacitor"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "up-next",
           "value": [
             "introduction/why-vuetify",
