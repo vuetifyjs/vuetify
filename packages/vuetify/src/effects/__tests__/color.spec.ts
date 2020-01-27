@@ -19,6 +19,9 @@ describe('color.ts', () => {
 
       props.color = ''
       expect(useTextColor(props).textColor.value).toEqual({})
+
+      props.color = null
+      expect(useTextColor(props).textColor.value).toEqual({})
     })
 
     it('should have proper styles', () => {
@@ -34,6 +37,9 @@ describe('color.ts', () => {
       })
 
       props.color = ''
+      expect(useTextColor(props).textColor.value).toEqual({})
+
+      props.color = null
       expect(useTextColor(props).textColor.value).toEqual({})
     })
 
@@ -63,6 +69,9 @@ describe('color.ts', () => {
 
       props.color = ''
       expect(useBackgroundColor(props).backgroundColor.value).toEqual({})
+
+      props.color = null
+      expect(useBackgroundColor(props).backgroundColor.value).toEqual({})
     })
 
     it('should have proper styles', () => {
@@ -75,6 +84,9 @@ describe('color.ts', () => {
       })
 
       props.color = ''
+      expect(useBackgroundColor(props).backgroundColor.value).toEqual({})
+
+      props.color = null
       expect(useBackgroundColor(props).backgroundColor.value).toEqual({})
     })
 

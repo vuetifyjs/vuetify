@@ -11,25 +11,25 @@ export const colorProps = (defaults: Partial<ColorProps> = {}) => ({
   },
 })
 
-const isCssColor = (color?: string | false): boolean => !!color && !!color.match(/^(#|(rgb|hsl)a?\()/)
-const isProps = <T>(props: T | ComputedRef<string>): props is T => !isRef(props)
+const isCssColor = (color: string): boolean => !!color && !!color.match(/^(#|(rgb|hsl)a?\()/)
+const isProps = <T>(props: T | ComputedRef<PropValue>): props is T => !isRef(props)
 
+type PropValue = string | null | undefined
 type Color = { class: Record<string, boolean> } | { style: Record<string, string> } | {}
 
 type TextColor = {
   textColor: ComputedRef<Color>
 }
 
-export function useTextColor (props: ColorProps | ComputedRef<string>): TextColor
+export function useTextColor (props: ColorProps | ComputedRef<PropValue>): TextColor
 export function useTextColor<T extends Record<string, any>> (props: T, prop: keyof T): TextColor
-export function useTextColor<T extends Record<string, any>> (props: T | ComputedRef<string>, prop: keyof T = 'color'): TextColor {
+export function useTextColor<T extends Record<string, any>> (props: T | ComputedRef<PropValue>, prop: keyof T = 'color'): TextColor {
   const textColor = computed(() => {
-    const color: string = isProps(props) ? props[prop] : props.value
-    const isCss = isCssColor(color)
+    const color: PropValue = isProps(props) ? props[prop] : props.value
 
     if (!color) return {}
 
-    if (isCss) {
+    if (isCssColor(color)) {
       return {
         style: {
           color,
@@ -55,27 +55,22 @@ type BackgroundColor = {
   backgroundColor: ComputedRef<Color>
 }
 
-export function useBackgroundColor (props: ColorProps | ComputedRef<string>): BackgroundColor
+export function useBackgroundColor (props: ColorProps | ComputedRef<PropValue>): BackgroundColor
 export function useBackgroundColor<T extends Record<string, any>> (props: T, prop: keyof T): BackgroundColor
-export function useBackgroundColor<T extends Record<string, any>> (props: T | ComputedRef<string>, prop: keyof T = 'color'): BackgroundColor {
+export function useBackgroundColor<T extends Record<string, any>> (props: T | ComputedRef<PropValue>, prop: keyof T = 'color'): BackgroundColor {
   const backgroundColor = computed(() => {
-    const color: string = isProps(props) ? props[prop] : props.value
-    const isCss = isCssColor(color)
+    const color: PropValue = isProps(props) ? props[prop] : props.value
 
     if (!color) return {}
 
-    if (isCss) {
+    if (isCssColor(color)) {
       return {
-        style: {
-          'background-color': color,
-        },
+        style: { 'background-color': color },
       }
     }
 
     return {
-      class: {
-        [color]: true,
-      },
+      class: { [color]: true },
     }
   })
 
