@@ -1,5 +1,6 @@
 <template>
   <v-menu
+    v-model="menu"
     max-height="calc(100% - 16px)"
     offset-y
     right
@@ -10,43 +11,40 @@
       <v-btn
         :aria-label="$t('Vuetify.AppToolbar.translations')"
         class="text--secondary text-capitalize mr-3"
-        icon
+        rounded
+        text
         v-bind="attrs"
         v-on="on"
       >
-        <v-icon v-if="currentLanguage.locale === 'eo-UY'">mdi-web</v-icon>
+        <v-icon left>
+          mdi-{{ currentLanguage.locale === 'eo-UY' ? 'web' : 'translate' }}
+        </v-icon>
 
-        <v-img
-          v-else
-          :src="`https://cdn.vuetifyjs.com/images/flags/${currentLanguage.country}.png`"
-          max-width="22px"
-        />
+        {{ currentLanguage.name }}
+
+        <v-icon right>mdi-menu-{{ menu ? 'up' : 'down' }}</v-icon>
       </v-btn>
     </template>
 
     <v-list
+      class="px-0 py-1"
       dense
       nav
     >
-      <v-list-item
-        v-for="language in languages"
-        :key="language.locale"
-        @click="translateI18n(language)"
-      >
-        <v-list-item-avatar
-          tile
-          size="24px"
+      <template v-for="(language, i) in languages">
+        <v-list-item
+          :key="language.locale"
+          @click="translateI18n(language)"
         >
-          <v-icon v-if="language.locale === 'eo-UY'">mdi-web</v-icon>
+          <v-list-item-title v-text="language.name" />
+        </v-list-item>
 
-          <v-img
-            v-else
-            :src="`https://cdn.vuetifyjs.com/images/flags/${language.country}.png`"
-            width="24px"
-          />
-        </v-list-item-avatar>
-        <v-list-item-title v-text="language.name" />
-      </v-list-item>
+        <v-divider
+          v-if="i === languages.length - 2"
+          :key="`divider-${i}`"
+          class="mb-1"
+        />
+      </template>
     </v-list>
   </v-menu>
 </template>
@@ -60,6 +58,7 @@
 
     data: () => ({
       languages,
+      menu: false,
     }),
 
     computed: {
