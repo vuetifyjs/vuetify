@@ -12,7 +12,7 @@
   "installFA": "### Установка Font Awesome 5",
   "installFAText1": "Самый простой способ начать работать с **FontAwesome** – использовать CDN. В части `head` вашего файла `index.html` поместите следующий код:",
   "installFAText2": "Для локальной установки можно скачать [свободную версию **FontAwesome**](https://fontawesome.com/) используя ваш пакетный менеджер:",
-  "installFAText3": "В главном файле просто импортируйте файл **all.css** из пакета. Если вы используете Webpack в своем проекте, настройте импорт `.css` файлов используя [css-loader](https://github.com/webpack-contrib/css-loader). Если вы уже используете [Vue CLI 3](https://cli.vuejs.org/), импорт `.css` файлов уже настроен по умолчанию.",
+  "installFAText3": "В главном файле просто импортируйте файл **all.css** из пакета. Если вы используете Webpack в своем проекте, настройте импорт `.css` файлов используя [css-loader](https://github.com/webpack-contrib/css-loader). Если вы уже используете [Vue CLI](https://cli.vuejs.org/), импорт `.css` файлов уже настроен по умолчанию.",
   "installFA4": "### Установка Font Awesome 4",
   "installFA4Text1": "Устанвка выполняется так же, как и Font Awesome 5. Импорт FontAwesome через CDN это самый простой способ использовать Font Awesome 4 в своем проекте:",
   "installFA4Text2": "Установка **FontAwesome 4** такая же, как и установка новой версии, но из другого репозитория. Используйте репозиторий `font-awesome` вместо `@fortawesome`.",

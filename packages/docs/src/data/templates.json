@@ -22,7 +22,7 @@
   },
   "material-kit": {
     "title": "Material Kit",
-    "description": "A complete set of Material Inspired themes built with Vuetify on top of Vue CLI 3.",
+    "description": "A complete set of Material Inspired themes built with Vuetify on top of Vue CLI.",
     "src": "https://cdn.vuetifyjs.com/images/starter/vuetify-material-kit.png",
     "price": "$55",
     "url": "https://store.vuetifyjs.com/product/material-kit-theme",
@@ -32,7 +32,7 @@
   },
   "alpha-theme": {
     "title": "Alpha Theme",
-    "description": "Complete theme experience including enhanced Vue CLI 3, full documentation, 5 custom components and much more!",
+    "description": "Complete theme experience including enhanced Vue CLI, full documentation, 5 custom components and much more!",
     "src": "https://cdn.vuetifyjs.com/images/starter/vuetify-alpha-theme.png",
     "price": "$25",
     "url": "https://store.vuetifyjs.com/product/vuetify-alpha-theme",
