@@ -102,6 +102,28 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render flat picker', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: '2013-05-07',
+        flat: true,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render picker with elevation', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: '2013-05-07',
+        elevation: 15,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render disabled picker', () => {
     const wrapper = mountFunction({
       propsData: {

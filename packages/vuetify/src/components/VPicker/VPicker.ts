@@ -3,6 +3,7 @@ import '../VCard/VCard.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Elevatable from '../../mixins/elevatable'
 import Themeable from '../../mixins/themeable'
 
 // Helpers
@@ -13,10 +14,15 @@ import { VNode } from 'vue/types'
 import mixins from '../../util/mixins'
 
 /* @vue/component */
-export default mixins(Colorable, Themeable).extend({
+export default mixins(
+  Colorable,
+  Elevatable,
+  Themeable
+).extend({
   name: 'v-picker',
 
   props: {
+    flat: Boolean,
     fullWidth: Boolean,
     landscape: Boolean,
     noTitle: Boolean,
@@ -84,6 +90,7 @@ export default mixins(Colorable, Themeable).extend({
         'v-picker--landscape': this.landscape,
         'v-picker--full-width': this.fullWidth,
         ...this.themeClasses,
+        ...(this.flat ? { 'elevation-0': true } : this.elevationClasses),
       },
     }, [
       this.$slots.title ? this.genTitle() : null,
