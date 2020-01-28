@@ -25,6 +25,11 @@
       "href": "https://intygrate.com/"
     },
     {
+      "name": "ResaleAI",
+      "logo": "backers/resaleai_logo_blue.svg",
+      "href": "https://resaleai.com/"
+    },
+    {
       "name": "VueMastery",
       "logo": "backers/vuemastery.svg",
       "href": "https://vuemastery.com/"
@@ -49,12 +54,19 @@
     {
       "name": "BrightTree",
       "href": "https://www.brightree.com/",
-      "logo": "backers/brightree.svg"
+      "logo": "backers/brightree-logo-light.png",
+      "darkLogo": "backers/brightree-logo-dark.png"
     },
     {
       "name": "Quanted Square",
       "href": "https://analytics.quantedsquare.com/",
       "logo": "backers/quanted-square.svg"
+    },
+    {
+      "name": "HYPE",
+      "href": "https://www.hypeinnovation.com/home",
+      "darkLogo": "backers/hype-logo-dark.svg",
+      "logo": "backers/hype-logo-light.svg"
     }
   ],
   "Collective": [
@@ -149,6 +161,11 @@
       "name": "ClothingRIC",
       "href": "https://www.clothingric.com/",
       "logo": "backers/clothingric.png"
+    },
+    {
+      "name": "jsDevJobs",
+      "href": "https://jsdevjobs.com/",
+      "logo": "backers/jsdevjobs-logo-light.png"
     }
   ],
   "affiliate": [

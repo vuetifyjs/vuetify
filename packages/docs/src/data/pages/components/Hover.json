@@ -7,8 +7,29 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "usage"
+          "type": "usage-new",
+          "value": {
+            "booleans": [
+              "value",
+              "disabled"
+            ],
+            "sliders": [
+              {
+                "prop": "open-delay",
+                "attrs": {
+                  "min": 0,
+                  "max": 1000
+                }
+              },
+              {
+                "prop": "close-delay",
+                "attrs": {
+                  "min": 0,
+                  "max": 1000
+                }
+              }
+            ]
+          }
         }
       ]
     },
@@ -18,15 +39,6 @@
         {
           "type": "api",
           "value": ["v-hover"]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "playground",
-          "value": "playground"
         }
       ]
     },

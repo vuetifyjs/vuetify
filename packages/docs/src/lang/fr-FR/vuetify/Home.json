@@ -12,7 +12,7 @@
       "title": "Composants sémantiques Material"
     },
     "scaffolding": {
-      "text": "Vuetify supporte le futur de Vue via son plugin sur Vue CLI 3. Avec une seule commande, vous êtes prêt à développer votre prochaine bonne idée.",
+      "text": "Vuetify supporte le futur de Vue via son plugin sur Vue CLI. Avec une seule commande, vous êtes prêt à développer votre prochaine bonne idée.",
       "title": "Des projets prêts à l'emploi"
     }
   },

@@ -9,7 +9,7 @@
     },
     "colored-border": {
       "heading": "### Colored Border",
-      "desc": "The **color-border** prop removes the alert background in order to accent the **border** prop. If a **type** is set, it will use the types default color. If no **color** or **type** is set, the color will default to the inverted color of the applied theme (black for light and white/gray for dark)."
+      "desc": "The **colored-border** prop removes the alert background in order to accent the **border** prop. If a **type** is set, it will use the types default color. If no **color** or **type** is set, the color will default to the inverted color of the applied theme (black for light and white/gray for dark)."
     },
     "dense": {
       "heading": "### Dense",
@@ -45,7 +45,7 @@
     },
     "twitter": {
       "heading": "### Twitter alert",
-      "desc": "By combining **color**, **dismissible**, **border**, **elevation**, **icon**, and **color-border** props you can create stylish custom alerts such as this twitter notification."
+      "desc": "By combining **color**, **dismissible**, **border**, **elevation**, **icon**, and **colored-border** props you can create stylish custom alerts such as this twitter notification."
     }
   },
   "accessibility": {

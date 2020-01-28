@@ -3,10 +3,10 @@
   "headingText": "Unit tests are an important (and sometimes ignored) part of developing applications. They help us secure our processes and work flows, ensuring that the most critical parts of our projects are protected from accidental mistakes or oversights in our development. Because of this, Vue has its own testing utility called [vue-test-utils](https://vue-test-utils.vuejs.org/). It provides useful features for interacting with Vue components and works with many popular test runners.",
   "alert": "Vuetify utilizes Typescript and currently must import and extend the Vue object. This has the potential in some applications to generate a warning **$attrs** or **$listeners** is read-only. There is currenty an on-going [Github discussion](https://github.com/vuetifyjs/vuetify/issues/4068) with potential work-arounds in a variety of use-cases. If you have additional questions please join us in our [online community](https://community.vuetifyjs.com).",
   "runnerHeader": "## Test runner setup",
-  "runnerText1": "Information on how to setup a test runner with Vue CLI 3 can be found on the [official documentation](https://vue-test-utils.vuejs.org/guides/getting-started.html). At a glance, Vue CLI 3 has getting started repositories for the following test runners:",
+  "runnerText1": "Information on how to setup a test runner with Vue CLI can be found on the [official documentation](https://vue-test-utils.vuejs.org/guides/getting-started.html). At a glance, Vue CLI has getting started repositories for the following test runners:",
   "runnerText2": [
-    "[Jest](https://github.com/vuejs/vue-test-utils-jest-example)",
-    "[Mocha](https://github.com/vuejs/vue-test-utils-mocha-webpack-example)",
+    "[Jest](https://cli.vuejs.org/core-plugins/unit-jest.html)",
+    "[Mocha](https://cli.vuejs.org/core-plugins/unit-mocha.html)",
     "[tape](https://github.com/eddyerburgh/vue-test-utils-tape-example)",
     "[AVA](https://github.com/eddyerburgh/vue-test-utils-ava-example)"
   ],

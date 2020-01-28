@@ -1,216 +1,206 @@
-const sharedGridProps = [
-  {
-    name: 'tag',
-    type: 'String',
-    default: 'div',
-    source: null,
-  },
-  {
-    name: 'alignBaseline',
-    type: 'Boolean',
-    default: 'false',
-    source: null,
-  },
-  {
-    name: 'alignCenter',
-    type: 'Boolean',
-    default: 'false',
-    source: null,
-  },
-  {
-    name: 'alignContentCenter',
-    type: 'Boolean',
-    default: 'false',
-    source: null,
-  },
-  {
-    name: 'alignContentEnd',
-    type: 'Boolean',
-    default: 'false',
-    source: null,
-  },
-  {
-    name: 'alignContentSpaceAround',
-    type: 'Boolean',
-    default: 'false',
-    source: null,
-  },
-  {
-    name: 'alignContentSpaceBetween',
-    type: 'Boolean',
-    default: 'false',
-    source: null,
-  },
-  {
-    name: 'alignContentStart',
-    type: 'Boolean',
-    default: 'false',
-    source: null,
-  },
-  {
-    name: 'alignEnd',
-    type: 'Boolean',
-    default: 'false',
-    source: null,
-  },
-  {
-    name: 'alignStart',
-    type: 'Boolean',
-    default: 'false',
-    source: null,
-  },
-  {
-    name: 'd-{type}',
-    type: 'Boolean',
-    default: 'false',
-    source: null,
-  },
-  {
-    name: 'fillHeight',
-    type: 'Boolean',
-    default: 'false',
-    source: null,
-  },
-  {
-    name: 'justifyCenter',
-    type: 'Boolean',
-    default: 'false',
-    source: null,
-  },
-  {
-    name: 'justifyEnd',
-    type: 'Boolean',
-    default: 'false',
-    source: null,
-  },
-  {
-    name: 'justifySpaceAround',
-    type: 'Boolean',
-    default: 'false',
-    source: null,
-  },
-  {
-    name: 'justifySpaceBetween',
-    type: 'Boolean',
-    default: 'false',
-    source: null,
-  },
-  {
-    name: 'justifyStart',
-    type: 'Boolean',
-    default: 'false',
-    source: null,
-  },
-]
+function createItems (strings, defaults) {
+  return strings.map(name => ({ name, ...defaults }))
+}
 
-const validatableEvents = [
-  {
-    name: 'update:error',
+const Validatable = {
+  props: createItems(['disabled', 'readonly'], {
+    default: false,
+    source: 'validatable',
     value: 'boolean',
+  }),
+  events: [
+    {
+      name: 'update:error',
+      source: 'validatable',
+      value: 'boolean',
+    },
+  ],
+}
+
+const VGridProps = [
+  ...createItems([
+    'alignBaseline',
+    'alignCenter',
+    'alignContentCenter',
+    'alignContentEnd',
+    'alignContentSpaceAround',
+    'alignContentSpaceBetween',
+    'alignContentStart',
+    'alignEnd',
+    'alignStart',
+    'd-{type}',
+    'fillHeight',
+    'justifyCenter',
+    'justifyEnd',
+    'justifySpaceAround',
+    'justifySpaceBetween',
+    'justifyStart',
+  ], {
+    default: 'false',
+    source: null,
+    type: 'Boolean',
+  }),
+  {
+    default: 'div',
+    name: 'tag',
+    source: null,
+    type: 'String',
   },
 ]
 
-const inputEvents = [
-  {
-    name: 'click:prepend',
-    value: 'Event',
-  },
-  {
-    name: 'click:append',
-    value: 'Event',
-  },
-]
+const VInput = {
+  events: [
+    ...Validatable.events,
+    ...createItems([
+      'click',
+      'mousedown',
+      'mouseup',
+    ], {
+      source: 'v-input',
+      value: 'MouseEvent',
+    }),
+    ...createItems(['click:append', 'click:prepend'], {
+      source: 'v-input',
+      value: 'Event',
+    }),
+  ],
+  props: [
+    ...Validatable.props,
+    {
+      name: 'label',
+      source: 'v-input',
+      type: 'string',
+      default: undefined,
+    },
+    {
+      name: 'value',
+      source: 'v-input',
+      type: 'any',
+      default: undefined,
+    },
+  ],
+  slots: [
+    ...createItems([
+      'append',
+      'default',
+      'prepend',
+    ], {
+      props: undefined,
+      source: 'v-input',
+    }),
+    {
+      name: 'message',
+      props: {
+        key: 'number, // the messages index',
+        message: 'string, // the message',
+      },
+      source: 'v-input',
+    },
+  ],
+}
 
-const textEvents = [
-  {
-    name: 'click:clear',
-    value: 'Event',
-  },
-  {
-    name: 'click:append-outer',
-    value: 'Event',
-  },
-  {
-    name: 'click:prepend-inner',
-    value: 'Event',
-  },
-]
-
-const inputSlots = [
-  {
-    name: 'append',
-    props: undefined,
-  },
-  {
-    name: 'default',
-    props: undefined,
-  },
-  {
-    name: 'prepend',
-    props: undefined,
-  },
-]
-
-const textFieldSlots = [
-  ...inputSlots,
-  {
-    name: 'append-outer',
-    props: undefined,
-  },
-  {
-    name: 'label',
-    props: undefined,
-  },
-  {
-    name: 'progress',
-    props: undefined,
-  },
-  {
-    name: 'prepend-inner',
-    props: undefined,
-  },
-]
-
-const selectSlots = [
-  ...textFieldSlots,
-  {
-    name: 'append-item',
-    props: undefined,
-  },
-  {
-    name: 'prepend-item',
-    props: undefined,
-  },
-]
+const VTextField = {
+  ...VInput,
+  events: [
+    ...VInput.events,
+    ...createItems([
+      'blur',
+      'click:clear',
+      'click:append-outer',
+      'click:prepend-inner',
+      'focus',
+    ], {
+      source: 'v-text-field',
+      value: 'Event',
+    }),
+    ...createItems([
+      'change',
+      'input',
+    ], {
+      source: 'v-text-field',
+      value: 'any',
+    }),
+    {
+      name: 'keydown',
+      source: 'v-text-field',
+      value: 'KeyboardEvent',
+    },
+  ],
+  slots: [
+    ...VInput.slots,
+    ...createItems([
+      'append-outer',
+      'label',
+      'prepend-inner',
+      'progress',
+    ], {
+      props: undefined,
+      source: 'v-text-field',
+    }),
+  ],
+}
 
 const VSelect = {
+  ...VTextField,
+  events: [
+    ...VTextField.events,
+    {
+      name: 'update:search-input',
+      source: 'v-select',
+      value: 'string',
+    },
+    {
+      name: 'update:list-index',
+      source: 'v-select',
+      value: 'number',
+    },
+  ],
   props: [
+    ...VTextField.props,
+    {
+      name: 'items',
+      example: {
+        text: 'string | number | object',
+        value: 'string | number | object',
+      },
+      source: 'v-select',
+    },
     {
       name: 'filter',
       default: '(item: object, queryText: string, itemText: string): boolean',
+      source: 'v-select',
     },
     {
       name: 'valueComparator',
       default: '(a: any, b: any): boolean',
+      source: 'v-select',
     },
     {
       name: 'menuProps',
       default: '{ "closeOnClick": false, "closeOnContentClick": false, "disableKeys": true, "openOnClick": false, "maxHeight": 304 }',
+      source: 'v-select',
     },
   ],
-  slots: selectSlots.concat([
+  slots: [
+    ...VTextField.slots,
+    ...createItems(['append-item', 'prepend-item'], {
+      props: undefined,
+      source: 'v-select',
+    }),
     {
       name: 'item',
       props: {
         parent: 'VueComponent',
         item: 'object',
-        on: 'object',
-        attrs: 'object',
+        on: 'object // Only needed when providing your own v-list-item',
+        attrs: 'object // Only needed when providing your own v-list-item',
       },
+      source: 'v-select',
     },
     {
       name: 'no-data',
       props: undefined,
+      source: 'v-select',
     },
     {
       name: 'selection',
@@ -222,28 +212,35 @@ const VSelect = {
         selected: 'boolean',
         disabled: 'boolean',
       },
+      source: 'v-select',
     },
-  ]),
+  ],
+}
+
+const VSlider = {
+  ...VInput,
   events: [
-    {
-      name: 'input',
-      value: 'any',
-    },
-    {
-      name: 'change',
-      value: 'any',
-    },
-    {
-      name: 'update:search-input',
-      value: 'string',
-    },
-    {
-      name: 'update:list-index',
+    ...VInput.events,
+    ...createItems(['start', 'end'], {
+      source: 'v-slider',
       value: 'number',
+    }),
+  ],
+  slots: [
+    ...VInput.slots,
+    {
+      name: 'progress',
+      props: undefined,
+      source: 'v-slider',
     },
-    ...inputEvents,
-    ...textEvents,
-  ].concat(validatableEvents),
+    {
+      name: 'thumb-label',
+      props: {
+        value: 'number | string',
+      },
+      source: 'v-slider',
+    },
+  ],
 }
 
 const VTreeviewScopedProps = {
@@ -318,64 +315,16 @@ const VTimestampWithTime = {
   week: [VTimestamp],
 }
 
-const VSlider = {
-  events: [
-    {
-      name: 'input',
-      value: 'number',
-    },
-    {
-      name: 'change',
-      value: 'number',
-    },
-    {
-      name: 'start',
-      value: 'number',
-    },
-    {
-      name: 'end',
-      value: 'number',
-    },
-    ...inputEvents,
-  ].concat(validatableEvents),
-  slots: [
-    {
-      name: 'append',
-      source: 'v-input',
-    },
-    {
-      name: 'label',
-      source: 'v-input',
-    },
-    {
-      name: 'prepend',
-      source: 'v-input',
-    },
-    {
-      name: 'progress',
-      props: undefined,
-    },
-    {
-      name: 'thumb-label',
-      props: {
-        value: 'number | string',
-      },
-    },
-  ],
-}
-
 module.exports = {
-  VSelect,
-  VSlider,
-  VTimestamp,
-  VTimestampWithTime,
+  createItems,
   VCalendarDay,
   VCalendarEventSlot,
-  inputSlots,
-  inputEvents,
-  sharedGridProps,
-  validatableEvents,
-  textEvents,
-  textFieldSlots,
+  VGridProps,
+  VInput,
+  VSelect,
+  VSlider,
+  VTextField,
+  VTimestamp,
+  VTimestampWithTime,
   VTreeviewScopedProps,
 }

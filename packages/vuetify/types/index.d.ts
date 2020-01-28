@@ -31,6 +31,7 @@ export interface Vuetify {
 }
 
 export function useVuetify (): Framework
+export { Presets, VuetifyPreset, UserVuetifyPreset } from './services/presets';
 
 export type ComponentOrPack = Component & {
   // eslint-disable-next-line camelcase

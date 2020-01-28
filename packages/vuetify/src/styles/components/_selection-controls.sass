@@ -5,7 +5,7 @@
   &.v-input--is-disabled:not(.v-input--indeterminate)
     .v-icon
       // needed for helper override
-      color: map-deep-get($material, 'buttons', 'disabled') !important
+      color: map-deep-get($material, 'selection-controls', 'disabled') !important
 
 .v-input--selection-controls
   margin-top: $input-top-spacing
@@ -20,6 +20,15 @@
     > .v-input__slot
       margin-bottom: 12px
 
+  .v-input__slot,
+  .v-radio
+    > .v-label
+      align-items: center
+      display: inline-flex
+      flex: 1 1 auto
+      // TODO: Resolve in v3, all selection controls need separate sass files
+      height: auto
+
   &__input
     color: inherit
     display: inline-flex
@@ -30,6 +39,9 @@
     transition-property: color, transform
     width: 24px
     user-select: none
+
+    .v-icon
+      width: 100%
 
     +ltr()
       margin-right: 8px

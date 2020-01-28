@@ -21,6 +21,10 @@ module.exports = {
         name: 'click:second',
         value: 'string',
       },
+      {
+        name: 'update:period',
+        value: 'string',
+      },
     ],
   },
 }

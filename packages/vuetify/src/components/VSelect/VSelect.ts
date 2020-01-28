@@ -427,7 +427,10 @@ export default baseMixins.extend<options>().extend({
     genHiddenInput (): VNode {
       return this.$createElement('input', {
         domProps: { value: this.lazyValue },
-        attrs: { type: 'hidden' },
+        attrs: {
+          type: 'hidden',
+          name: this.attrs$.name,
+        },
       })
     },
     genInputSlot (): VNode {
@@ -616,6 +619,8 @@ export default baseMixins.extend<options>().extend({
         keyCodes.space,
       ].includes(keyCode)) this.activateMenu()
 
+      this.$emit('keydown', e)
+
       if (!menu) return
 
       // If menu is active, allow default
@@ -667,7 +672,11 @@ export default baseMixins.extend<options>().extend({
       }
     },
     onMouseUp (e: MouseEvent) {
-      if (this.hasMouseDown && e.which !== 3) {
+      if (
+        this.hasMouseDown &&
+        e.which !== 3 &&
+        !this.isDisabled
+      ) {
         // If append inner is present
         // and the target is itself
         // or inside, toggle menu
@@ -675,7 +684,7 @@ export default baseMixins.extend<options>().extend({
           this.$nextTick(() => (this.isMenuActive = !this.isMenuActive))
         // If user is clicking in the container
         // and field is enclosed, activate it
-        } else if (this.isEnclosed && !this.isDisabled) {
+        } else if (this.isEnclosed) {
           this.isMenuActive = true
         }
       }

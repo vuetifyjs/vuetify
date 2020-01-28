@@ -29,11 +29,11 @@
             "sliders": [
               {
                 "prop": "elevation",
-                "label": "Elevation",
                 "attrs": {
-                  "min": 0,
+                  "min": 2,
                   "max": 24
-                }
+                },
+                "value": 2
               }
             ],
             "tabs": [

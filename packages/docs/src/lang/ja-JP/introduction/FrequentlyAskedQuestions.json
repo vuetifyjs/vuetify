@@ -75,7 +75,7 @@
     },
     {
       "q": "### `v-card` , `v-img`等vuetifyコンポーネントにてイメージ参照がうまくいきません。",
-      "a": "Vue loader は相対パスを必要な関数に自動的に変換します。残念ながら、カスタムコンポーネントでは自動的な変換が機能しません。この問題を克服するには `require` を利用します。Vue CLI 3 plugin を用いて Vuetify を使用している場合、プロジェクトの [vue.config.js](https://cli.vuejs.org/config/#vue-config-js) ファイルで [vue-loader](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader) のオプションを編集することで設定できます。",
+      "a": "Vue loader は相対パスを必要な関数に自動的に変換します。残念ながら、カスタムコンポーネントでは自動的な変換が機能しません。この問題を克服するには `require` を利用します。Vue CLI plugin を用いて Vuetify を使用している場合、プロジェクトの [vue.config.js](https://cli.vuejs.org/config/#vue-config-js) ファイルで [vue-loader](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader) のオプションを編集することで設定できます。",
       "s": "html_img_require"
     },
     {

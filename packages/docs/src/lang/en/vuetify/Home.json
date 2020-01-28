@@ -12,7 +12,7 @@
       "title": "Semantic Material Components"
     },
     "scaffolding": {
-      "text": "Vuetify supports the future of Vue tooling through its Vue CLI 3 plugin. With one command you are ready to start building your next great idea.",
+      "text": "Vuetify supports the future of Vue tooling through its Vue CLI plugin. With one command you are ready to start building your next great idea.",
       "title": "Ready-Made Project Scaffolding"
     }
   },

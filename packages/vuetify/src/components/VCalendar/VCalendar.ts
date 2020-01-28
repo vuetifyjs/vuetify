@@ -118,7 +118,7 @@ export default CalendarWithEvents.extend({
   },
 
   updated () {
-    this.updateEventVisibility()
+    window.requestAnimationFrame(this.updateEventVisibility)
   },
 
   methods: {

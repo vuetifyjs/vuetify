@@ -92,6 +92,11 @@
         </a>
       </td>
       <td>
+        <a href="http://resaleai.com/?ref=vuetify-github">
+          <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/resaleai_logo_blue.svg">
+        </a>
+      </td>
+      <td>
         <a href="http://vuemastery.com/?ref=vuetify-github">
           <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/vuemastery.svg">
         </a>
@@ -122,7 +127,7 @@
       </td>
       <td>
         <a href="https://www.brightree.com/?ref=vuetify-github">
-          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/brightree.svg">
+          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/brightree-logo-light.png">
         </a>
       </td>
       </td>
@@ -377,7 +382,7 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [p
         n/a
       </td>
       <td>
-       A Vue CLI 3 preset for Vuetify
+       A Vue CLI preset for Vuetify
       </td>
     </tr>
     <tr>

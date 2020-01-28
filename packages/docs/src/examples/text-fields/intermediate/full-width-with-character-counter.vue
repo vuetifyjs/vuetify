@@ -1,47 +1,35 @@
 <template>
-  <v-card>
-    <v-toolbar
-      flat
-      color="pink"
-      dark
-    >
-      <v-icon>mdi-arrow-left</v-icon>
-      <v-toolbar-title>Compose</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-icon>mdi-send</v-icon>
-    </v-toolbar>
-    <v-form>
-      <v-autocomplete
-        v-model="selected"
-        :items="['Trevor Handsen', 'Alex Nelson']"
-        chips
-        label="To"
-        full-width
-        hide-details
-        hide-no-data
-        hide-selected
-        multiple
-        single-line
-      ></v-autocomplete>
-      <v-divider></v-divider>
-      <v-text-field
-        label="Subject"
-        value="Plans for the weekend"
-        single-line
-        full-width
-        hide-details
-      ></v-text-field>
-      <v-divider></v-divider>
-      <v-textarea
-        v-model="title"
-        label="Message"
-        counter
-        maxlength="120"
-        full-width
-        single-line
-      ></v-textarea>
-    </v-form>
-  </v-card>
+  <v-form>
+    <v-autocomplete
+      v-model="selected"
+      :items="['Trevor Handsen', 'Alex Nelson']"
+      chips
+      label="To"
+      full-width
+      hide-details
+      hide-no-data
+      hide-selected
+      multiple
+      single-line
+    ></v-autocomplete>
+    <v-divider></v-divider>
+    <v-text-field
+      label="Subject"
+      value="Plans for the weekend"
+      single-line
+      full-width
+      hide-details
+    ></v-text-field>
+    <v-divider></v-divider>
+    <v-textarea
+      v-model="title"
+      label="Message"
+      counter
+      maxlength="120"
+      full-width
+      single-line
+    ></v-textarea>
+  </v-form>
 </template>
 
 <script>

@@ -2,13 +2,11 @@
 
 // Theme
 +theme(v-overflow-btn) using ($material)
-  .v-input__slot
-    border-color: map-get($material, 'dividers') !important // override v-text-field bottom border
+  &#{&}
+    border-color: map-get($material, 'dividers')
 
-  &:hover,
-  &.v-input--is-focused,
-  &.v-select--is-menu-active
-    .v-input__slot
+  &:not(.v-input--is-focused):not(.v-input--has-state)
+    > .v-input__control > .v-input__slot:hover
       background: map-get($material, 'cards')
 
   &.v-overflow-btn--segmented

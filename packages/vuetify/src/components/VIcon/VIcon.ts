@@ -98,6 +98,7 @@ const VIcon = mixins(
         attrs: {
           'aria-hidden': !hasClickListener,
           role: hasClickListener ? 'button' : null,
+          tabindex: hasClickListener ? 0 : undefined,
           ...this.attrs$,
         },
         on: this.listeners$,

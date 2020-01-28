@@ -159,7 +159,14 @@ export default mixins(
     },
     genHoverIndex (e: MouseEvent, i: number) {
       let isHalf = this.isHalfEvent(e)
-      if (this.$vuetify.rtl) isHalf = !isHalf
+
+      if (
+        this.halfIncrements &&
+        this.$vuetify.rtl
+      ) {
+        isHalf = !isHalf
+      }
+
       return i + (isHalf ? 0.5 : 1)
     },
     getIconName (props: ItemSlotProps): string {
