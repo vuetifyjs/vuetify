@@ -265,7 +265,7 @@
       color: #ccc
       background: none
       font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace
-      font-size: 1em
+      font-size: 1rem
       text-align: left
       white-space: pre
       word-spacing: normal
@@ -276,13 +276,13 @@
       hyphens: none
 
     pre[class*="language-"]
-      padding: 1em
-      margin: .5em 0
+      padding: 1rem
+      margin: 0
       overflow: auto
 
     :not(pre) > code[class*="language-"]
-      padding: .1em
-      border-radius: .3em
+      padding: .1rem
+      border-radius: .3rem
       white-space: normal
 
     .token.comment,

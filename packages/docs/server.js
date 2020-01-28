@@ -142,7 +142,7 @@ function render (req, res) {
     crowdin: '',
     hostname: req.hostname,
     hreflangs: availableLanguages.reduce((acc, lang) => {
-      return acc + `<link rel="alternate" hreflang="${lang}" href="https://${req.hostname}/${lang}${req.params[1]}" />`
+      return acc + `<link rel="alternate" hreflang="${lang}" href="https://${req.hostname}/${lang}${encodeURI(req.params[1])}" />`
     }, ''),
     lang: req.params[0],
     res,

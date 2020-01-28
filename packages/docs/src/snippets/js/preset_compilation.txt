@@ -3,7 +3,7 @@
 // CORRECT
 import Vuetify from 'vuetify/lib/framework'
 
-// INCORRECT - will still work, but without the performance improvements
+// INCORRECT
 import Vuetify, { VRow } from 'vuetify/lib/framework'
 
 export default new Vuetify()

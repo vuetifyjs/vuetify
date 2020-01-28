@@ -149,10 +149,12 @@
               hide-details
             >
               <template v-slot:label>
-                <span
-                  class="text-capitalize"
-                  v-text="slider === 'elevation' ? 'Elevation' : undefined"
-                />
+                <span class="text-capitalize">
+                  <template v-if="slider === 'elevation'">Elevation</template>
+                  <template v-else-if="Object(slider) === slider">
+                    {{ slider.label }}
+                  </template>
+                </span>
               </template>
             </v-slider>
           </v-col>

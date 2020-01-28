@@ -1,3 +1,28 @@
 {
-  "classesHeader": "## 类"
+  "heading": "# 浮动",
+  "headingText": "使用响应式 float 工具在任何断点上应用自定义 float。",
+  "overviewHeader": "## 概述",
+  "overviewText1": "Float 工具类使用 [CSS float property](https://developer.mozilla.org/en-US/docs/Web/CSS/float) 来根据当前的视图端口大小应用 float。",
+  "classesHeader": "## 类",
+  "classesText1": "轻松切换一个带有类的 float：",
+  "responsiveHeader": "## 响应式",
+  "responsiveText1": "Floats 也可以在每个断点（视图）的基础上适用。",
+  "responsiveText2": "以下是所有可用的支持类列表：",
+  "responsiveClasses": [
+    "`.float-left`",
+    "`.float-right`",
+    "`.float-none`",
+    "`.float-sm-left`",
+    "`.float-sm-right`",
+    "`.float-sm-none`",
+    "`.float-md-left`",
+    "`.float-md-right`",
+    "`.float-md-none`",
+    "`.float-lg-left`",
+    "`.float-lg-right`",
+    "`.float-lg-none`",
+    "`.float-xl-left`",
+    "`.float-xl-right`",
+    "`.float-xl-none`"
+  ]
 }

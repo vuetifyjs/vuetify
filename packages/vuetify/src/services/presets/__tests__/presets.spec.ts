@@ -27,7 +27,11 @@ describe('$vuetify.presets', () => {
       theme: {
         dark: true,
         themes: {
-          light: { primary: 'blue' },
+          light: {
+            primary: 'blue',
+            // https://github.com/vuetifyjs/vuetify/issues/10100
+            secondary: { darken4: 'red' },
+          },
         },
       },
     })

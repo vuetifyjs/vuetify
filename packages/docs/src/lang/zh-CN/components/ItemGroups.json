@@ -1,7 +1,29 @@
 {
+  "heading": "# 项目组",
+  "headingText": "`v-item-group` 提供从任何组件创建一组可选项的能力。这是组件的基础功能，如 `v-tabs` 和 `v-carousel`。",
   "examples": {
+    "usage": {
+      "desc": "`v-item-group` 的核心用法是创建应由 **model** 控制的任何事物的组。"
+    },
+    "post": {
+      "heading": "### 纸片",
+      "desc": "轻松绑定自定义纸片组。"
+    },
+    "toggle-pictures": {
+      "heading": "### 自定义组",
+      "desc": "当图标允许选择或取消选择单个选项（例如将项目标记为收藏）时，它们可以用作切换按钮。"
+    },
     "multiple": {
-      "heading": "多选"
+      "heading": "### 多选",
+      "desc": "项目组可以选择多个项目。"
+    },
+    "mandatory": {
+      "heading": "### 必填项",
+      "desc": "**mandatory** 项目组必须至少选择 1 个项目。"
+    },
+    "active-class": {
+      "heading": "### 带有活动类",
+      "desc": "**activeClass** 属性允许您在活动项目上设置自定义 CSS 类。"
     }
   }
 }

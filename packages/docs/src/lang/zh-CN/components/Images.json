@@ -1,1 +1,54 @@
-{}
+{
+  "heading": "# 图像",
+  "headingText": "`v-img` 组件包含支持丰富媒体的功能。与 [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) 结合使用，您可以添加动态渐进图像以提供更好的用户体验。",
+  "alert1": "`v-img` 组件使用 [v-intersect](/directives/intersect) 指令，该指令要求 IE11和 Safari 使用 [Polyfill](/directives/intersect#polyfill) 。 如果检测到不支持此功能的浏览器，则图像仍会照常加载。",
+  "examples": {
+    "usage": {
+      "desc": "`v-img` 组件用于显示具有延迟加载和占位符的响应图像。"
+    },
+    "contain-cover": {
+      "heading": "### 包含和覆盖",
+      "desc": "如果提供的长宽比与实际图像不匹配，则默认行为是填充尽可能多的空间，裁剪图像的边。启用 `contain` 属性可以防止这种情况，但会导致两边出现空白。"
+    },
+    "max-height": {
+      "heading": "### 高度",
+      "desc": "`v-img` 将自动增长到其 `src` 的大小，保持正确的长宽比。您可以限制这与 `height` 和 `max-height` 属性。"
+    },
+    "ratio": {
+      "heading": "### 固定比例",
+      "desc": "如果你想改变图像的长宽比，你可以设置一个固定的长宽比。"
+    },
+    "gradients": {
+      "heading": "### 渐变",
+      "desc": "`gradient` 属性可用于将简单的渐变叠加层应用于图像。 应该将更复杂的渐变作为类写在内容插槽上。"
+    },
+    "grid": {
+      "heading": "### 栅格",
+      "desc": "您可以使用 `v-img` 来制作图片库。"
+    },
+    "placeholder": {
+      "heading": "### 占位符",
+      "desc": "`v-img` 有一个特殊的 `placeholder` 插槽，占位符显示图像的加载。注意：下面的例子有一个错误的 src，它不会为你加载占位符。"
+    }
+  },
+  "props": {
+    "alt": "屏幕阅读器的备用文本。 留空以装饰图像",
+    "aspectRatio": "计算为`width/height`，因此对于 1920x1080px 的图片，其值为 `1.7778`。 如果省略，将自动计算",
+    "contain": "防止图像不合适时被裁剪",
+    "eager": "Mixins.Bootable.props.eager",
+    "gradient": "将渐变叠加到图像上。 仅支持 [linear-gradient](https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient) 语法，其他任何操作都应使用类完成（请参见示例）",
+    "lazySrc": "在等待主映像加载时显示的内容，通常是一个小型的base64编码的缩略图。有一个轻微的模糊滤镜应用。\n\n使用 [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) 来自动生成",
+    "position": "覆盖默认设置，以更改被裁剪的部分。 使用与以下相同的语法 [`background-position`](https://developer.mozilla.org/en-US/docs/Web/CSS/background-position)",
+    "sizes": "使用 `srcset`，请参见 [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-sizes)",
+    "src": "图像的 URL。这个属性是强制性的",
+    "srcset": "根据设备大小使用的一组备用图像。[Read more...](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-srcset)",
+    "transition": "从 `lazy-src` 切换到 `src` 时要使用的过渡"
+  },
+  "events": {
+    "error": "当出现错误时发出",
+    "load": "在加载图像时发出"
+  },
+  "slots": {
+    "placeholder": "图像占位符的插槽"
+  }
+}

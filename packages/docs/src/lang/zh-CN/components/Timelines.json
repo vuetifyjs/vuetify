@@ -1,1 +1,68 @@
-{}
+{
+  "heading": "# 时间线",
+  "headingText": "`v-timeline` 在样式上显示时间顺序信息时很有用。",
+  "examples": {
+    "usage": {
+      "desc": "`v-timeline` 以其最简单的形式显示一条垂直时间线，其中应至少包含一个 `v-timeline-item`。"
+    },
+    "small": {
+      "heading": "### 小点",
+      "desc": "`small` 属性允许多种样式提供独特的设计。"
+    },
+    "icons": {
+      "heading": "### 图标点",
+      "desc": "有条件地使用 `v-timeline-item` 点内的图标来提供其他上下文。"
+    },
+    "avatars": {
+      "heading": "### 头像点",
+      "desc": "使用 `icon` 插槽和 `v-avatar`，将头像插入点中。"
+    },
+    "card": {
+      "heading": "### 时间线卡片",
+      "desc": "如果将 `v-card` 放置在 `v-timeline-item` 的内部，则插入符会出现在卡的侧面。"
+    },
+    "color": {
+      "heading": "### 彩色点",
+      "desc": "彩色的点可以创建可视的断点，使您的时间线更容易阅读。"
+    },
+    "slot": {
+      "heading": "### 相反的插槽",
+      "desc": "**opposite** 插槽在您的时间线内提供额外的自定义层。"
+    },
+    "alert": {
+      "heading": "### 密度提示框",
+      "desc": "`dense` 时间线将所有内容定位在右侧。 在此示例中，`v-alert` 替换了卡片以提供不同的设计。"
+    },
+    "reverse": {
+      "heading": "### 反向方向",
+      "desc": "您可以使用 `reverse` 属性来反转时间轴项目的方向。这在默认和 `dense` 模式下都能工作。"
+    },
+    "advanced": {
+      "heading": "### 高级版",
+      "desc": "模块化组件允许您创建高度定制的解决方案。"
+    }
+  },
+  "props": {
+    "v-timeline": {
+      "alignTop": "将时间线项目的插入符号和圆点对齐到顶部",
+      "dense": "隐藏相对的插槽内容，并将所有项目放置在时间轴的一侧",
+      "reverse": "反转时间轴项目"
+    },
+    "v-timeline-item": {
+      "fillDot": "从点容器中删除填充",
+      "hideDot": "隐藏时间线内点的显示",
+      "icon": "为点容器指定图标",
+      "iconColor": "Mixins.Colorable.props.color",
+      "large": "大尺寸的点",
+      "left": "显式地将项目设置为左方向",
+      "right": "显式地将项目设置为右方向",
+      "small": "小尺寸的点"
+    }
+  },
+  "slots": {
+    "v-timeline-item": {
+      "icon": "用于自定义时间线项的点内的图标",
+      "opposite": "用于自定义时间轴项目的另一面"
+    }
+  }
+}

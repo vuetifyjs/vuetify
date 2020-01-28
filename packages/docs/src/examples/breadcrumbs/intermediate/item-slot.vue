@@ -1,11 +1,11 @@
 <template>
   <v-breadcrumbs :items="items">
-    <template v-slot:item="props">
+    <template v-slot:item="{ item }">
       <v-breadcrumbs-item
-        :href="props.item.href"
-        :class="[props.item.disabled && 'disabled']"
+        :href="item.href"
+        :disabled="item.disabled"
       >
-        {{ props.item.text.toUpperCase() }}
+        {{ item.text.toUpperCase() }}
       </v-breadcrumbs-item>
     </template>
   </v-breadcrumbs>
@@ -34,10 +34,3 @@
     }),
   }
 </script>
-
-<style scoped>
-  .disabled {
-    color: grey;
-    pointer-events: none;
-  }
-</style>

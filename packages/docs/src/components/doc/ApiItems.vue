@@ -239,7 +239,7 @@
       computedHeading () {
         const title = `${this.namespace}.${this.page}.apiHeading`
 
-        return this.$te(title) ? 'apiHeading' : 'Generic.Pages.api'
+        return this.$te(title, 'en') ? 'apiHeading' : 'Generic.Pages.api'
       },
     },
 

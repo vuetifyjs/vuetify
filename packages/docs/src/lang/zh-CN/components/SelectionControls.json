@@ -1,29 +1,92 @@
 {
+  "heading": "# 选择控件",
+  "headingText": "选择控件组件允许用户选择选项。这些组件 **must** 与 `v-model` 一起使用，因为它们不维护自己的状态。",
   "examples": {
+    "checkboxes-boolean": {
+      "heading": "### 复选框 - 布尔值"
+    },
+    "checkboxes-array": {
+      "heading": "### 复选框 - 数组"
+    },
+    "checkboxes-states": {
+      "heading": "### 复选框 - 状态"
+    },
     "checkboxes-colors": {
+      "heading": "### 复选框 - 色彩",
       "desc": "复选框可以设置颜色通过使用 `color` 属性，颜色可以是任何内置的颜色或者其上下文名称。"
     },
+    "checkboxes-inline-textfield": {
+      "heading": "### 复选框 - 和文本框内联"
+    },
+    "radios-default": {
+      "heading": "### 单选框 - 默认",
+      "desc": "默认情况下，单选框组是强制性的。这可以通过 `mandatory` 属性来改变。"
+    },
     "radios-direction": {
+      "heading": "### 单选框 - 方向",
       "desc": "单选框组可以作为一行或者一列的形式，通过使用 column 或者 row 属性设置，默认是使用列的方式。"
     },
     "radios-colors": {
+      "heading": "### 单选框 - 颜色",
       "desc": "单选框也是可以通过 `color` 属性使用内置的颜色来设置色彩。"
     },
+    "switches-boolean": {
+      "heading": "### 开关 - 布尔值"
+    },
+    "switches-array": {
+      "heading": "### 开关 - 数组"
+    },
+    "switches-states": {
+      "heading": "### 开关 - 状态"
+    },
     "switches-colors": {
+      "heading": "### 开关 - 颜色",
       "desc": "开关也可以通过 `color` 属性使用内置的颜色来设置色彩。"
+    },
+    "switches-flat": {
+      "heading": "### 开关 - 扁平",
+      "desc": "您可以使用 `flat` 属性，在不高亮的情况下进行开关渲染。"
+    },
+    "switches-inset": {
+      "heading": "### 开关 - 嵌入",
+      "desc": "您可以在嵌入模式下使开关渲染。"
+    },
+    "label-slot": {
+      "heading": "### 标签插槽",
+      "desc": "选择控件标签可以在 `label` 插槽中定义 - 这将允许使用 HTML 内容"
     }
   },
   "props": {
     "column": "单选框列显示",
+    "dark": "Components.Inputs.props.dark",
+    "flat": "显示没有海拔的组件。 拇指的默认海拔为 4dp，`flat` 重置它",
     "indeterminate": "为复选框设置不确定状态",
+    "indeterminateIcon": "处于不确定状态时使用的图标",
     "inputValue": "**v-model** 的绑定值",
+    "inset": "扩展 `v-switch` 轨迹以包含缩略图",
+    "loading": "显示循环进度条。 可以是指定将哪种颜色应用于进度栏的字符串（任何 material color 或主题颜色――primary, secondary, success, info, warning, error），也可以是使用组件颜色的布尔值 （由颜色属性设置 - 如果是由组件支持） 或主色",
     "mandatory": "强制选择复选框组的一个子复选框 `v-radio` ",
+    "multiple": "将预期模型更改为数组",
     "name": "设置组件的 name 属性",
+    "offIcon": "不活动时使用的图标",
+    "onIcon": "激活时使用的图标",
     "row": "单选框行显示",
-    "value": "设置选择控件组件的值"
+    "value": "设置选择控件组件的值",
+    "v-radio": {
+      "disabled": "Mixins.Validatable.props.disabled",
+      "label": "Components.Inputs.props.label",
+      "readonly": "Mixins.Validatable.props.readonly"
+    }
+  },
+  "slots": {
+    "append": "Components.Selects.slots.append",
+    "prepend": "Components.Selects.slots.prepend"
   },
   "events": {
+    "blur": "Components.Inputs.events.blur",
     "change": "Components.Inputs.events.change",
+    "focus": "输入聚焦时发出",
+    "update:indeterminate": "**indeterminate.sync** 事件。",
     "update:error": "Mixins.Validatable.events['update:error']"
   }
 }

@@ -1,23 +1,64 @@
 {
+  "heading": "# 文件上传",
+  "headingText": "`v-file-input` 组件是一个特殊的表单，它为选择文件，展示选中文件，展示上传进度提供了美观的界面，旨在取代标准的文件上传表单。",
   "examples": {
     "usage": {
       "desc": "组件 `v-file-input` 的核心是一个普通的基于 [v-text-field](/components/text-fields) 的容器"
     },
     "multiple": {
-      "heading": "多选"
+      "heading": "多选",
+      "desc": "使用 **multiple** 属性时，`v-file-input` 可以同时包含多个文件。"
     },
     "accept": {
+      "heading": "### 格式限制",
       "desc": "组件 `v-file-input` 可以仅接受特殊的你想要的媒体或文件格式。想要获取更多信息，请查看 [accept attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept) 的文档"
     },
     "chips": {
+      "heading": "### 带有纸片",
       "desc": "选中的文件可以以 [chip](/components/chips) 的形式展示 。当带有 **chips** 和 **multiple** 参数时，每一个标签将显示（相对于文件计数）。"
     },
+    "size": {
+      "heading": "### 显示的大小",
+      "desc": "所选文件的显示的大小可以使用 **show-size** 属性进行配置。 显示的大小可以是 _1024_ （提供 **true** 时使用的默认值） 或 _1000_。"
+    },
+    "counter": {
+      "heading": "### 计数器",
+      "desc": "当使用 **show-size** 属性和 **counter** 时，将在输入下显示文件的总数和大小。"
+    },
+    "selection": {
+      "heading": "### 选择插槽",
+      "desc": "使用 `selection` 插槽，您可以自定义输入选择的外观。 通常使用 [chips](/components/chips) 完成此操作，但是可以使用任何组件或标记。"
+    },
     "custom-icon": {
-      "heading": "自定义图标"
+      "heading": "自定义图标",
+      "desc": "`v-file-input` 有一个默认的预设图标，可以在组件上设置或全局调整。 关于不断变化的全局组件的更多信息可在 [customizing icons page](/customization/icons)。"
     },
     "validation": {
-      "heading": "验证"
+      "heading": "验证",
+      "desc": "与其他输入类似，您可以使用 **rules** 属性来创建您自己的自定义验证参数。"
+    },
+    "advanced": {
+      "heading": "### 复杂选择插槽",
+      "desc": "选择插槽的灵活性使您可以适应复杂的用例。 在此示例中，我们将前两个选择显示为筹码，同时为剩余金额添加数字指示符。"
+    },
+    "dense": {
+      "heading": "### 密集",
+      "desc": "您可以使用 `dense` 属性降低文件输入高度。"
     }
+  },
+  "props": {
+    "accept": "一个或多个 [unique file type specifiers](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#Unique_file_type_specifiers) 描述允许的文件类型。",
+    "chips": "Components.Selects.props.chips",
+    "counterSizeString": "使用 **counter** 和 **show-size** 属性时显示的文本。也可以在 [internationalization page](/customization/internationalization) 上进行全局定制。",
+    "counterString": "使用 **counter** 属性时显示的文字。 也可以在 [internationalization page](/customization/internationalization) 上进行全局自定义。",
+    "multiple": "将 **multiple** 属性添加到输入中，允许选择多个文件。",
+    "showSize": "设置所选文件的显示大小。当使用 **true** 默认值为 _1000_ 显示（**kB，MB，GB**） 时，_1024_ 将显示（**KiB，MiB，GiB**）。",
+    "smallChips": "Components.Selects.props.smallChips",
+    "truncateLength": "在用省略号截断之前的文件名的长度",
+    "value": "一个或一组 [File objects](https://developer.mozilla.org/en-US/docs/Web/API/File)。"
+  },
+  "slots": {
+    "selection": "为选定的项目定义自定义外观的插槽。提供当前 **索引**、**文本**（已截断）和 [file](https://developer.mozilla.org/en-US/docs/Web/API/File)。"
   },
   "events": {
     "change": "Components.Inputs.events.change"

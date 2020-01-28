@@ -2,7 +2,7 @@ module.exports = {
   'v-stepper': {
     events: [
       {
-        name: 'input',
+        name: 'change',
         value: 'number',
       },
     ],

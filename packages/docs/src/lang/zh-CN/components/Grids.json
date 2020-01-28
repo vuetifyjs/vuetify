@@ -1,22 +1,141 @@
 {
+  "heading": "# 栅格系统",
+  "headingText": "Vuetify 附带了一个使用 <kbd>flex-box</kbd> 构建的 12 点栅格系统。\n网格用于在应用程序的内容中创建特定布局。其中包含 5 种媒体断点，分别用于定位特定屏幕大小或方向：**xs**, **sm**, **md**, **lg** 和 **xl**。\n这些分辨率在下面的视口断点表中定义，可以通过自定义 [Breakpoint service](/customization/breakpoints) 进行修改。",
+  "headerAlert1": "1.x 版本的栅格系统已经被弃用，2.x 的栅格系统更好。1.x 网格的文档在 [v1.5 docs](https://v15.vuetifyjs.com/framework/grid)",
+  "usageText2": "在上面的示例中，我们在小型，中型，大型和超大型设备上创建了三个等宽列。父级的 `v-container` 来居中子级的 `v-col`。",
+  "usageList": [
+    "`v-container` 提供了居中和水平填充网站内容的功能。您也可以使用 **fluid** 属性在所有视口和设备尺寸上完全扩展容器。 遵循以前的 1.x 功能，在这些功能中，属性作为 `v-container` 中的类传递，从而允许轻松地使用助手类（例如 `ma-#`/`pa-#`/`fill-height`） 进行应用",
+    "`v-row` 是 `v-col` 的包装组件。它利用 flex 属性来控制内部列的布局和流。它使用的标准边距是 **24px**。这可以减少 **dense** 属性或完全移除 **no-gutters** 。这是 2.x 版本的用法，替换了 1.x 中的 `v-layout`。",
+    "`v-col` 是内容所有者，必须是 `v-row` 的直接子集。 这是 2.x 版本的用法，替换了 1.x 中的 `v-flex`。"
+  ],
+  "usageText3": "确保您了解其局限性和 [bugs around flexbox](https://github.com/philipwalton/flexbugs)。例如无法 [utilize certain HTML elements as flex containers](https://github.com/philipwalton/flexbugs#9-some-html-elements-cant-be-flex-containers)。",
+  "usageAlert1": "将网格系统与IE11一起使用时，您需要设置一个明确的 `height`，因为 `min-height` 将不足以导致不正确的结果。",
   "examples": {
+    "usage": {
+      "desc": "Vuetify 栅格受到 [Bootstrap grid](https://getbootstrap.com/docs/4.0/layout/grid/) 的启发。它通过使用一系列容器，行和列来布局和对齐内容进行集成。 **如果您不熟悉Flexbox**，参阅链接内容的背景，术语，代码，指南来了解更多 [Read the CSS Tricks flexbox guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-background)。"
+    },
+    "playground": {
+      "heading": "### 布局实战常",
+      "desc": "在实战场上测试布局属性。"
+    },
+    "auto": {
+      "heading": "### 自动大小的列",
+      "desc": "列将自动在其父容器内占据相等的空间。 可以使用 **cols** 属性修改。 您还可以使用 **sm**, **md**, **lg**, 和 **xl** 属性来进一步定义如何在不同视口尺寸下调整列的尺寸。"
+    },
+    "equal": {
+      "heading": "### 同等宽度的列",
+      "desc": "您可以将等宽的列分成多行。 虽然有一些针对较旧版本浏览器的解决方法，有一个 [Safari flexbox bug](https://github.com/philipwalton/flexbugs#11-min-and-max-size-declarations-are-ignored-when-wrapping-flex-items)。如果你是最新的浏览器，这应该没有必要。"
+    },
+    "one-column-width": {
+      "heading": "### 一列宽度",
+      "desc": "使用自动布局时，您只能定义一列的宽度，并且仍然具有其同级元素来自动调整其大小。"
+    },
+    "variable-content": {
+      "heading": "### 内容宽度可变",
+      "desc": "可以为列分配断点宽度，以根据其内容的自然宽度来调整大小。"
+    },
+    "grow-shrink": {
+      "heading": "### 扩张和收缩",
+      "desc": "默认情况下，flex 组件将自动填充行或列中的可用空间。 当未指定特定大小时，它们还将相对于 flex 容器中的其余 flex 项目收缩。 您可以使用 **cols** 属性并提供 **1 到 12** 的值来定义 `v-col` 的列宽。"
+    },
+    "row-column-breakpoint": {
+      "heading": "### 行和列断点",
+      "desc": "根据分辨率动态调整布局。**（调整屏幕大小，并在 sm, md, 和 lg 断点上观察顶部的 `row` 布局更改）**"
+    },
+    "vertical-alignment": {
+      "heading": "### 垂直对齐",
+      "desc": "使用 **align** 和 **align-self** 属性更改队列及其上级的垂直对齐。"
+    },
+    "horizontal-alignment": {
+      "heading": "### 水平对齐",
+      "desc": "使用 **justify** 和 **justify-self** 属性更改伸缩项及其父项的水平对齐。"
+    },
+    "no-gutters": {
+      "heading": "### 没有边距槽",
+      "desc": "您可以使用 **no-gutters** 属性去掉 `v-row` 的负边距让其直接的 `v-col` 子代的填充。"
+    },
+    "wrapping": {
+      "heading": "### 列包装",
+      "desc": "当给定行中放置超过 12 列时（不使用 `.flex-nowrap` 工具类），每组额外的列将换行。"
+    },
     "order": {
+      "heading": "### 顺序类",
       "desc": "您可以控制栅格子项目的排序。与偏移一样，您可以为不同的尺寸设置不同的排序，设计适合任何应用程序的专门的屏幕布局。"
     },
+    "order-first-last": {
+      "heading": "### 顺序 最后/最前",
+      "desc": "您还可以显式指定 **first** 或 **last**，这将分别为 `order` CSS 属性分配 **-1** 或 **13** 值。"
+    },
     "offset": {
+      "heading": "### 偏移",
       "desc": "偏移对于补偿可能还不可见的元素或控制内容的位置很有用。就像断点一样，您可以为仍和可用的大小设置偏移量，这使您可以根据需要精确调整应用程序布局。"
     },
+    "offset-breakpoint": {
+      "heading": "### 偏移断点",
+      "desc": "每个断点也可偏移。"
+    },
+    "margin": {
+      "heading": "### 边距工具",
+      "desc": "使用 [auto margin helper utilities](/styles/flex#auto-margins) 你可以强行将列从彼此分离。"
+    },
     "nested-grid": {
+      "heading": "### 嵌套栅格",
       "desc": "栅格可以被嵌套，类似于其它框架，以实现非常自定义的布局。"
     },
     "unique-layouts": {
-      "desc": "Vuetify栅格系统的强大和灵活性使您可以创建出色的用户界面。"
+      "heading": "### 独特的布局",
+      "desc": "Vuetify 栅格系统的强大和灵活性使您可以创建出色的用户界面。"
     },
     "spacer": {
-      "desc": "当您想要填充可用空间或在两个组件之间留出空间时，`v-spacer`组件会很有用。"
+      "heading": "### 空格",
+      "desc": "当您想要填充可用空间或在两个组件之间留出空间时，`v-spacer` 组件会很有用。"
     },
     "tags": {
+      "heading": "### Html标签",
       "desc": "有的时候您会想要将一个布局项指定为特定的标签，比如一个`section`或者`li`元素。"
+    }
+  },
+  "props": {
+    "tag": "Components.Sheets.props.tag",
+    "v-container": {
+      "fluid": "删除视图最大宽度大小的断点"
+    },
+    "v-col": {
+      "alignSelf": "应用 [align-items](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) css 属性。可用的选项是**start**, **center**, **end**, **auto**, **baseline** 和 **stretch**。",
+      "cols": "设置组件扩展的默认列数。可用的选项是 **1 -> 12** 和 **auto** 。",
+      "sm": "在较小和较大的断点上更改列数。",
+      "md": "更改中等和较大断点上的列数。",
+      "lg": "在更大和更大的断点上更改列数。",
+      "xl": "在更大和更大的断点上更改列数。",
+      "offset": "设置列的默认偏移量。",
+      "offsetSm": "在较小和较大的断点处更改组件的偏移量。",
+      "offsetMd": "在中等和更高的断点上更改组件的偏移量。",
+      "offsetLg": "在更大和更大的断点上更改组件的偏移量。",
+      "offsetXl": "在更大和更大的断点处更改组件的偏移量。",
+      "order": "设置列的默认 [order](https://developer.mozilla.org/en-US/docs/Web/CSS/order)",
+      "orderSm": "在较小和较大的断点上更改组件的顺序。",
+      "orderMd": "在中等和更高的断点上更改组件的顺序。",
+      "orderLg": "在更大和更大的断点上更改组件的顺序。",
+      "orderXl": "在更大和更大的断点上更改组件的顺序。"
+    },
+    "v-row": {
+      "align": "应用 [align-items](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) css 属性。可用的选项是 **start**, **center**, **end**, **baseline** 和 **stretch**。",
+      "alignSm": "在较小和较大的断点处更改 **align-items** 属性。",
+      "alignMd": "在中等和更高的断点上更改 **align-items** 属性。",
+      "alignLg": "在更大和更大的断点上更改 **align-items** 属性。",
+      "alignXl": "在更大和更大的断点上更改 **align-items** 属性。",
+      "alignContent": "应用 [align-content](https://developer.mozilla.org/en-US/docs/Web/CSS/align-content) 属性。可用的选项是： **start**, **center**, **end**, **space-between**, **space-around** 和 **stretch**。",
+      "alignContentSm": "在较小和较大的断点处更改 **align-content** 属性。",
+      "alignContentMd": "在中等和较大的断点上更改 **align-content** 属性。",
+      "alignContentLg": "在更大和更大的断点上更改 **align-content** 属性。",
+      "alignContentXl": "在更大和更大的断点上更改 **align-content** 属性。",
+      "dense": "减少 `v-col` 之间的距离。",
+      "justify": "应用 [justify-content](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content) css 属性。可用选项是 **start**, **center**, **end**, **space-between** 和 **space-around**。",
+      "justifySm": "在较小和较大的断点上更改 **justify-content** 属性。",
+      "justifyMd": "在中等和更高的断点上更改 **justify-content** 属性。",
+      "justifyLg": "在更大和更大的断点上更改 **justify-content** 属性。",
+      "justifyXl": "在更大和更大的断点上更改 **justify-content** 属性。",
+      "noGutters": "移除 `v-col` 之间的距离。"
     }
   }
 }

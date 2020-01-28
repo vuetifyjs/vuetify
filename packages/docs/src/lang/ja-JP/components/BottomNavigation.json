@@ -1,10 +1,15 @@
 {
+  "heading": "# ボトムナビゲーション",
+  "headingText": "# ボトムシート",
   "examples": {
     "usage": {
       "desc": "ボトムナビゲーションは `vue-router` と一緒に使われることを想定していますが、`active.sync` を使用することで、ボタンのアクティブ状態をプログラム的に制御することができます。ボタンの値を変更するには `value` 属性を使用します。"
     },
     "color": {
       "heading": "色"
+    },
+    "scroll-threshold": {
+      "heading": "### スクロールのしきい値"
     }
   }
 }
