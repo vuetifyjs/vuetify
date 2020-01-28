@@ -72,7 +72,7 @@
     "@mdi/js": "^3.8.95",
     "@types/jest": "^24.0.15",
     "@types/node": "^12.6.8",
-    "@vue/test-utils": "^1.0.0-beta.29",
+    "@vue/test-utils": "^1.0.0-beta.31",
     "autoprefixer": "^9.6.1",
     "babel-loader": "^8.0.6",
     "babel-plugin-detective": "^2.0.0",

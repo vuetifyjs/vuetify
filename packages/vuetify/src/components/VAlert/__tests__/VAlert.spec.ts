@@ -18,8 +18,6 @@ describe('VAlert.ts', () => {
     mountFunction = (options = {}) => {
       return mount(VAlert, {
         ...options,
-        // https://github.com/vuejs/vue-test-utils/issues/1130
-        sync: false,
         mocks: {
           $vuetify: {
             lang: {
@@ -36,9 +34,14 @@ describe('VAlert.ts', () => {
 
     expect(wrapper.element.style.display).toBe('')
     expect(wrapper.html()).toMatchSnapshot()
+  })
 
-    wrapper.setProps({ value: false })
-    await wrapper.vm.$nextTick()
+  it('should sets display to none when value is false', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: false,
+      }
+    })
 
     expect(wrapper.element.style.display).toBe('none')
     expect(wrapper.html()).toMatchSnapshot()
@@ -60,7 +63,7 @@ describe('VAlert.ts', () => {
     })
 
     const icon = wrapper.find('.v-alert__dismissible')
-    const input = jest.fn(show => wrapper.setProps({ show }))
+    const input = jest.fn()
 
     wrapper.vm.$on('input', input)
 
@@ -89,26 +92,22 @@ describe('VAlert.ts', () => {
     expect(wrapper.contains('.v-icon')).toBe(false)
   })
 
-  // TODO: this fails without sync, nextTick doesn't help
-  // https://github.com/vuejs/vue-test-utils/issues/1130
-  it.skip('should display contextual colors by type', async () => {
+  it('should display contextual colors by type', () => {
     const wrapper = mountFunction({
       propsData: { type: 'error' },
     })
 
     expect(wrapper.classes('error')).toBe(true)
+  })
 
-    wrapper.setProps({ type: 'success' })
-    await wrapper.vm.$nextTick()
-    expect(wrapper.classes('success')).toBe(true)
+  ;['success', 'error', 'warning', 'info'].forEach(type => {
+    it('should display contextual colors by type', () => {
+      const wrapper = mountFunction({
+        propsData: { type },
+      })
 
-    wrapper.setProps({ type: 'warning' })
-    await wrapper.vm.$nextTick()
-    expect(wrapper.classes('warning')).toBe(true)
-
-    wrapper.setProps({ type: 'info' })
-    await wrapper.vm.$nextTick()
-    expect(wrapper.classes('info')).toBe(true)
+      expect(wrapper.classes(type)).toBe(true)
+    })
   })
 
   it('should allow overriding color for contextual alert', () => {
@@ -135,22 +134,20 @@ describe('VAlert.ts', () => {
     expect(icon.text()).toBe('block')
   })
 
-  it('should show border', async () => {
-    const directions = ['top', 'right', 'bottom', 'left']
-    const wrapper = mountFunction()
-
-    expect(wrapper.classes('v-alert--border')).toBe(false)
-
-    for (const border of directions) {
-      wrapper.setProps({ border })
-      await wrapper.vm.$nextTick()
+  ;['top', 'right', 'bottom', 'left'].forEach(border => {
+    it('should show border', async () => {
+      const wrapper = mountFunction({
+        propsData: {
+          border,
+        }
+      })
 
       expect(wrapper.classes('v-alert--border')).toBe(true)
       expect(wrapper.classes(`v-alert--border-${border}`)).toBe(true)
-    }
+    })
   })
 
-  it('should move color classes to border and icon elements', async () => {
+  it('renders without a colored border and icons', async () => {
     const wrapper = mountFunction({
       propsData: {
         color: 'pink',
@@ -161,9 +158,18 @@ describe('VAlert.ts', () => {
 
     expect(wrapper.classes('pink')).toBe(true)
     expect(border.classes('pink')).toBe(false)
+  })
 
-    wrapper.setProps({ coloredBorder: true })
-    await wrapper.vm.$nextTick()
+  it('renders a colored border and icons', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        color: 'pink',
+        border: 'left',
+        coloredBorder: true,
+      },
+    })
+    const border = wrapper.find('.v-alert__border')
+
     expect(wrapper.classes('pink')).toBe(false)
     expect(border.classes('pink')).toBe(true)
     expect(border.classes('v-alert__border--has-color')).toBe(true)

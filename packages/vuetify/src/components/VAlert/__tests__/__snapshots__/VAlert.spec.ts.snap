@@ -69,3 +69,15 @@ exports[`VAlert.ts should have a close icon 1`] = `
   </div>
 </div>
 `;
+
+exports[`VAlert.ts should sets display to none when value is false 1`] = `
+<div role="alert"
+     class="v-alert v-sheet theme--light"
+     style="display: none;"
+>
+  <div class="v-alert__wrapper">
+    <div class="v-alert__content">
+    </div>
+  </div>
+</div>
+`;
