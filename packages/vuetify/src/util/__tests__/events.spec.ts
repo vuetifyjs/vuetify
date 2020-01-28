@@ -23,56 +23,62 @@ describe('events.ts', () => {
 
   beforeEach(jest.resetModules)
 
-  it('should create event options', () => {
-    for (const [value, expected] of defaultOptions) {
-      expect(eventOptions(value)).toEqual(expected)
-    }
+  describe('addOnceEventListener', () => {
+    it('should add an event listener that removes after firing once', () => {
+      const callback = jest.fn()
+      const event = new Event('click')
+      const el = document.createElement('button')
+
+      document.body.appendChild(el)
+
+      addOnceEventListener(el, 'click', callback)
+
+      el.dispatchEvent(event)
+
+      expect(callback).toHaveBeenCalled()
+
+      el.dispatchEvent(event)
+
+      expect(callback).toHaveBeenCalledTimes(1)
+
+      document.body.removeChild(el)
+    })
   })
 
-  it('should fallback when passive is not supported', () => {
-    jest.mock('../globals', () => ({ PASSIVE_SUPPORTED: false }))
+  describe('eventOptions', () => {
+    it('should create event options', () => {
+      for (const [value, expected] of defaultOptions) {
+        expect(eventOptions(value)).toEqual(expected)
+      }
+    })
 
-    const { eventOptions } = require('../events')
+    it('should fallback when passive is not supported', () => {
+      jest.mock('../globals', () => ({ PASSIVE_SUPPORTED: false }))
 
-    for (const [value,, expected] of defaultOptions) {
-      expect(eventOptions(value)).toEqual(expected)
-    }
+      const { eventOptions } = require('../events')
+
+      for (const [value,, expected] of defaultOptions) {
+        expect(eventOptions(value)).toEqual(expected)
+      }
+    })
   })
 
-  it('should add passive to options if not already defined', () => {
-    const passiveFalse = { passive: false }
-    const passiveOptions = [
-      [false, passive],
-      [true, passive],
-      [null, passive],
-      [undefined, passive],
-      [capture, { ...capture, ...passive }],
-      [passive, passive],
-      [passiveFalse, passiveFalse],
-    ]
+  describe('passiveEventOptions', () => {
+    it('should add passive to options if not already defined', () => {
+      const passiveFalse = { passive: false }
+      const passiveOptions = [
+        [false, passive],
+        [true, passive],
+        [null, passive],
+        [undefined, passive],
+        [capture, { ...capture, ...passive }],
+        [passive, passive],
+        [passiveFalse, passiveFalse],
+      ]
 
-    for (const [value, expected] of passiveOptions) {
-      expect(passiveEventOptions(value)).toEqual(expected)
-    }
-  })
-
-  it('should add an event listener that removes after firing once', () => {
-    const callback = jest.fn()
-    const event = new Event('click')
-    const el = document.createElement('button')
-
-    document.body.appendChild(el)
-
-    addOnceEventListener(el, 'click', callback)
-
-    el.dispatchEvent(event)
-
-    expect(callback).toHaveBeenCalled()
-
-    el.dispatchEvent(event)
-
-    expect(callback).toHaveBeenCalledTimes(1)
-
-    document.body.removeChild(el)
+      for (const [value, expected] of passiveOptions) {
+        expect(passiveEventOptions(value)).toEqual(expected)
+      }
+    })
   })
 })
