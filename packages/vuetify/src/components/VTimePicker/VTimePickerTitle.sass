@@ -1,4 +1,5 @@
 @import './_variables.scss'
+@import '../VPicker/_variables.scss'
 
 .v-time-picker-title
   color: $time-picker-title-color
@@ -33,6 +34,10 @@
 
   div:only-child
     flex-direction: row
+
+  &--readonly
+    .v-picker__title__btn.v-picker__title__btn--active
+      opacity: $picker-inactive-btn-opacity
 
 .v-picker__title--landscape
   .v-time-picker-title
