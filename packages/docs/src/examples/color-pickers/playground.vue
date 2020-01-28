@@ -20,6 +20,11 @@
           label="Hide Canvas"
         ></v-switch>
         <v-switch
+          v-model="flat"
+          class="mx-2"
+          label="Flat"
+        ></v-switch>
+        <v-switch
           v-model="hideModeSwitch"
           class="mx-2"
           label="Hide Mode Switch"
@@ -42,6 +47,7 @@
       :hide-mode-switch="hideModeSwitch"
       :mode.sync="mode"
       :show-swatches="showSwatches"
+      :flat="flat"
       class="mx-auto"
     ></v-color-picker>
   </div>
@@ -54,6 +60,7 @@
       hideCanvas: false,
       hideInputs: false,
       hideModeSwitch: false,
+      flat: false,
       mode: 'rgba',
       modes: ['rgba', 'hsla', 'hexa'],
       showSwatches: false,

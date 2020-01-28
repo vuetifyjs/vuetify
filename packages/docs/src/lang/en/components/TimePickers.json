@@ -65,7 +65,7 @@
       "allowedMinutes": "Restricts which minutes can be selected",
       "allowedSeconds": "Restricts which seconds can be selected",
       "disabled": "disables picker",
-      "flat": "Sets the elevation to 0",
+      "flat": "Removes  elevation",
       "scrollable": "Allows changing hour/minute with mouse scroll",
       "min": "Minimum allowed time",
       "max": "Maximum allowed time",

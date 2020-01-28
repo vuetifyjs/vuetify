@@ -121,7 +121,7 @@
     "eventColor": "Sets the color for event dot. It can be string (all events will have the same color) or `object` where attribute is the event date and value is boolean/color/array of colors for specified date or `function` taking date as a parameter and returning boolean/color/array of colors for that date",
     "events": "Array of dates or object defining events or colors or function returning boolean/color/array of colors",
     "firstDayOfWeek": "Sets the first day of the week, starting with 0 for Sunday.",
-    "flat": "Sets the elevation to 0",
+    "flat": "Removes  elevation",
     "headerDateFormat": "Allows you to customize the format of the month string that appears in the header of the calendar. Called with date (ISO 8601 string) arguments.",
     "locale": "Sets the locale. Accepts a string with a BCP 47 language tag.",
     "max": "Maximum allowed date/month (ISO 8601 format)",
