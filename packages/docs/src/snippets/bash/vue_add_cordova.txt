@@ -5,9 +5,9 @@ $ npm install -g cordova
 $ vue add cordova
 
 # Usage
-$ npm run cordova-serve-android # Development Android
-$ npm run cordova-build-android # Build Android
-$ npm run cordova-serve-ios # Development IOS
-npm run cordova-build-ios # Build IOS
-npm run cordova-serve-browser # Development Browser
-npm run cordova-build-browser # Build Browser
+$ yarn cordova-serve-android # Development Android
+$ yarn cordova-build-android # Build Android
+$ yarn cordova-serve-ios # Development IOS
+$ yarn cordova-build-ios # Build IOS
+$ yarn cordova-serve-browser # Development Browser
+$ yarn cordova-build-browser # Build Browser
