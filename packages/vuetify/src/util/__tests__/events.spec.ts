@@ -65,13 +65,14 @@ describe('events.ts', () => {
 
   describe('passiveEventOptions', () => {
     it('should add passive to options if not already defined', () => {
+      const captureFalse = { capture: false }
       const passiveFalse = { passive: false }
       const passiveOptions = [
-        [false, passive],
-        [true, passive],
+        [false, { ...captureFalse, ...passive }],
+        [true, combined],
         [null, passive],
         [undefined, passive],
-        [capture, { ...capture, ...passive }],
+        [capture, combined],
         [passive, passive],
         [passiveFalse, passiveFalse],
       ]

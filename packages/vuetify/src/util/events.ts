@@ -34,6 +34,6 @@ export function eventOptions (options: EventOptions = false): EventOptions {
 export function passiveEventOptions (options?: EventOptions): EventOptions {
   return eventOptions({
     passive: true,
-    ...(typeof options === 'object' ? options : {}),
+    ...(typeof options === 'boolean' ? { capture: options } : options),
   })
 }
