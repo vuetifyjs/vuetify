@@ -25,6 +25,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} izbrano/-ih',
+    nextMonthAriaLabel: 'Naslednji mesec',
+    nextYearAriaLabel: 'Naslednje leto',
+    prevMonthAriaLabel: 'Prejšnji mesec',
+    prevYearAriaLabel: 'Prejšnje leto',
   },
   noDataText: 'Ni podatkov',
   carousel: {

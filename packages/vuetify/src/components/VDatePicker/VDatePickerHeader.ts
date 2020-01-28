@@ -30,10 +30,12 @@ export default mixins(
     format: Function as PropType<DatePickerFormatter | undefined>,
     min: String,
     max: String,
+    nextAriaLabel: String,
     nextIcon: {
       type: String,
       default: '$next',
     },
+    prevAriaLabel: String,
     prevIcon: {
       type: String,
       default: '$prev',
@@ -71,11 +73,13 @@ export default mixins(
 
   methods: {
     genBtn (change: number) {
+      const ariaLabel = this.$vuetify.lang.t((change > 0 ? this.nextAriaLabel : this.prevAriaLabel) || '')
       const disabled = this.disabled ||
         (change < 0 && this.min && this.calculateChange(change) < this.min) ||
         (change > 0 && this.max && this.calculateChange(change) > this.max)
 
       return this.$createElement(VBtn, {
+        attrs: ariaLabel ? { 'aria-label': ariaLabel } : undefined,
         props: {
           dark: this.dark,
           disabled,

@@ -25,6 +25,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} valitud',
+    nextMonthAriaLabel: 'Järgmine kuu',
+    nextYearAriaLabel: 'Järgmine aasta',
+    prevMonthAriaLabel: 'Eelmine kuu',
+    prevYearAriaLabel: 'Eelmine aasta',
   },
   noDataText: 'Andmed puuduvad',
   carousel: {
