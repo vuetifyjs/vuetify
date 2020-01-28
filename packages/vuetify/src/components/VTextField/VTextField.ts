@@ -30,6 +30,7 @@ const baseMixins = mixins(
       'setLabelWidth',
       'setPrefixWidth',
       'setPrependWidth',
+      'tryAutofocus',
     ],
   }),
   Loadable,
@@ -213,7 +214,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   mounted () {
-    this.autofocus && this.onFocus()
+    this.autofocus && this.tryAutofocus()
     this.setLabelWidth()
     this.setPrefixWidth()
     this.setPrependWidth()
@@ -428,10 +429,6 @@ export default baseMixins.extend<options>().extend({
     onFocus (e?: Event) {
       if (!this.$refs.input) return
 
-      if (document.activeElement !== this.$refs.input) {
-        return this.$refs.input.focus()
-      }
-
       if (!this.isFocused) {
         this.isFocused = true
         e && this.$emit('focus', e)
@@ -475,6 +472,18 @@ export default baseMixins.extend<options>().extend({
       if (!this.outlined || !this.$refs['prepend-inner']) return
 
       this.prependWidth = this.$refs['prepend-inner'].offsetWidth
+    },
+    tryAutofocus () {
+      if (
+        !this.autofocus ||
+        typeof document === 'undefined' ||
+        !this.$refs.input ||
+        document.activeElement === this.$refs.input
+      ) return false
+
+      this.$refs.input.focus()
+
+      return true
     },
     updateValue (val: boolean) {
       // Sets validationState from validatable
