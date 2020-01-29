@@ -239,14 +239,16 @@ export default baseMixins.extend({
       }
     },
     genTransition () {
-      if (!this.transition) return this.genContent()
+      const content = this.genContent()
+
+      if (!this.transition) return content
 
       return this.$createElement('transition', {
         props: {
           name: this.transition,
           origin: this.origin,
         },
-      }, this.showLazyContent(() => [this.genContent()]))
+      }, this.showLazyContent(() => [content]))
     },
     genContent () {
       const data = {
@@ -280,9 +282,7 @@ export default baseMixins.extend({
           tabindex: this.isActive ? 0 : undefined,
           ...this.getScopeIdAttrs(),
         },
-        on: {
-          keydown: this.onKeydown,
-        },
+        on: { keydown: this.onKeydown },
         style: { zIndex: this.activeZIndex },
         ref: 'content',
       }, [

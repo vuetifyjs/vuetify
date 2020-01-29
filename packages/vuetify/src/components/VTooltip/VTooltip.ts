@@ -183,13 +183,15 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
       return listeners
     },
     genTransition () {
-      if (!this.computedTransition) return this.genContent()
+      const content = this.genContent()
+
+      if (!this.computedTransition) return content
 
       return this.$createElement('transition', {
         props: {
           name: this.computedTransition,
         },
-      }, this.showLazyContent(() => [this.genContent()]))
+      }, this.showLazyContent(() => [content]))
     },
     genContent () {
       return this.$createElement(

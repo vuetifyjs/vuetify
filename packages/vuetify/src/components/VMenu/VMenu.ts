@@ -279,13 +279,15 @@ export default baseMixins.extend({
       return listeners
     },
     genTransition (): VNode {
-      if (!this.transition) return this.genContent()
+      const content = this.genContent()
+
+      if (!this.transition) return content
 
       return this.$createElement('transition', {
         props: {
           name: this.transition,
         },
-      }, this.showLazyContent(() => [this.genContent()]))
+      }, this.showLazyContent(() => [content]))
     },
     genDirectives (): VNodeDirective[] {
       const directives: VNodeDirective[] = [{
