@@ -311,7 +311,7 @@ export default baseMixins.extend({
       attrs: { role: 'dialog' },
     }, [
       this.genActivator(),
-      this.genContent(),
+      this.genTransition(),
     ])
   },
 })
