@@ -5906,6 +5906,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         <tr class>
           <td class="text-start">
             <i role="button"
+               tabindex="0"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $expand
@@ -5933,6 +5934,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         <tr class>
           <td class="text-start">
             <i role="button"
+               tabindex="0"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $expand
@@ -5960,6 +5962,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         <tr class>
           <td class="text-start">
             <i role="button"
+               tabindex="0"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $expand
@@ -5987,6 +5990,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         <tr class>
           <td class="text-start">
             <i role="button"
+               tabindex="0"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $expand
@@ -6014,6 +6018,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         <tr class>
           <td class="text-start">
             <i role="button"
+               tabindex="0"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $expand
@@ -6241,6 +6246,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         <tr class>
           <td class="text-start">
             <i role="button"
+               tabindex="0"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
             >
               $expand
@@ -6268,6 +6274,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         <tr class>
           <td class="text-start">
             <i role="button"
+               tabindex="0"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $expand
@@ -6295,6 +6302,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         <tr class>
           <td class="text-start">
             <i role="button"
+               tabindex="0"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $expand
@@ -6322,6 +6330,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         <tr class>
           <td class="text-start">
             <i role="button"
+               tabindex="0"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $expand
@@ -6349,6 +6358,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         <tr class>
           <td class="text-start">
             <i role="button"
+               tabindex="0"
                class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $expand

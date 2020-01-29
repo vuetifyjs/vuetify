@@ -60,6 +60,15 @@
       "type": "section",
       "children": [
         {
+          "type": "accessibility",
+          "value": "accessibility"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "up-next",
           "value": [
             "components/dialogs",

@@ -175,4 +175,16 @@ describe('activatable.ts', () => {
 
     document.body.removeChild(el)
   })
+
+  it('should stop event propagation when activator is clicked', () => {
+    const wrapper = mountFunction()
+
+    const stopPropagation = jest.fn()
+    const onClick = { stopPropagation }
+    const listeners = wrapper.vm.genActivatorListeners()
+
+    listeners.click(onClick as any)
+
+    expect(stopPropagation).toHaveBeenCalled()
+  })
 })

@@ -8,6 +8,6 @@
     "polyfill": "Polyfill 로 지원"
   },
   "ie11Header": "## IE11 & Safari 9 지원",
-  "ie11Text1": "Vuetify 는 **Internet Explorer 11** 와 **Safari 9/10** 를 지원하기 위한 ES2015/2017 의 기능들이 반드시 필요합니다. 만약 Vue CLI 3을 사용중이라면, 자동적으로 적용 될 것 입니다. 아니라면, 프로젝트에 `babel-polyfill`을 직접 설치 해주셔야 합니다.",
+  "ie11Text1": "Vuetify 는 **Internet Explorer 11** 와 **Safari 9/10** 를 지원하기 위한 ES2015/2017 의 기능들이 반드시 필요합니다. 만약 Vue CLI을 사용중이라면, 자동적으로 적용 될 것 입니다. 아니라면, 프로젝트에 `babel-polyfill`을 직접 설치 해주셔야 합니다.",
   "ie11Text2": "플러그인을 가능한 한 쉽게 귀하의 메인 **index.js** 에 추가하는것은 중요한 일입니다. 만약, Vuetify SSR 페키지를 사용중이라면, **client-entry.js** 에 추가해 주세요."
 }

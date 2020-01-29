@@ -263,9 +263,10 @@ export function groupItems<T extends any = any> (
   groupDesc: boolean[]
 ): Record<string, T[]> {
   const key = groupBy[0]
-  return items.reduce((rv, x) => {
-    (rv[x[key]] = rv[x[key]] || []).push(x)
-    return rv
+  return items.reduce((acc, item) => {
+    const val = getObjectValueByPath(item, key)
+    ;(acc[val] = acc[val] || []).push(item)
+    return acc
   }, {} as Record<string, T[]>)
 }
 

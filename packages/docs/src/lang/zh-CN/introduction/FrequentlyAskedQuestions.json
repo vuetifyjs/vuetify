@@ -75,7 +75,7 @@
     },
     {
       "q": "### Relative 图像在 `v-card` , `v-img` 和其他自定义 vuetify 组件中无法正常工作",
-      "a": "Vue loader 为你相关路径自动转换为 require 函数。不幸的是，当涉及到定制组件时，情况并非如此。你可以使用 `require` 来绕过这个问题。如果你在 Vue CLI 3 插件中使用 Vuetify，你可以通过修改 [vue-loader](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader) 的选项来编辑你项目的 [vue.config.js](https://cli.vuejs.org/config/#vue-config-js) 文件。",
+      "a": "Vue loader 为你相关路径自动转换为 require 函数。不幸的是，当涉及到定制组件时，情况并非如此。你可以使用 `require` 来绕过这个问题。如果你在 Vue CLI 插件中使用 Vuetify，你可以通过修改 [vue-loader](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader) 的选项来编辑你项目的 [vue.config.js](https://cli.vuejs.org/config/#vue-config-js) 文件。",
       "s": "html_img_require"
     },
     {

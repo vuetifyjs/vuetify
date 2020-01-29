@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="mx-auto overflow-hidden example-new"
+    class="mx-auto example-new mb-12"
     max-width="1200"
     outlined
   >
@@ -30,17 +30,22 @@
           <v-divider vertical />
         </div>
 
-        <div
+        <v-responsive
           v-if="component"
-          class="d-flex child-flex"
+          class="child-flex overflow-hidden"
+          height="300"
         >
           <v-sheet
-            min-height="300"
-            tile
+            id="usage-example"
             :dark="dark || $vuetify.theme.dark"
+            class="d-inline-block"
+            width="calc(100% - 1px)"
+            height="300"
+            style="overflow-y: auto;"
+            tile
           >
             <div
-              class="fill-height pa-6"
+              class="fill-height pa-6 d-flex align-center"
               data-app="true"
             >
               <component
@@ -51,10 +56,10 @@
           </v-sheet>
 
           <v-divider
-            class="hidden-sm-and-down shrink"
+            class="hidden-sm-and-down"
             vertical
           />
-        </div>
+        </v-responsive>
       </v-col>
 
       <v-col
@@ -152,7 +157,7 @@
                 <span class="text-capitalize">
                   <template v-if="slider === 'elevation'">Elevation</template>
                   <template v-else-if="Object(slider) === slider">
-                    {{ slider.label }}
+                    {{ slider.label || (slider.prop || '').replace('-', ' ') }}
                   </template>
                 </span>
               </template>

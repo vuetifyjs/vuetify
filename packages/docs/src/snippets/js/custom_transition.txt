@@ -1,4 +1,7 @@
-import { createSimpleTransition } from 'vuetify/es5/util/helpers'
+import { createSimpleTransition } from 'vuetify/lib/components/transitions/createTransition'
+
+// ES5
+// import { createSimpleTransition } from 'vuetify/es5/components/transitions/createTransition'
 
 const myTransition = createSimpleTransition('my-transition')
 

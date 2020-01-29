@@ -192,8 +192,8 @@ const VSelect = {
       props: {
         parent: 'VueComponent',
         item: 'object',
-        on: 'object',
-        attrs: 'object',
+        on: 'object // Only needed when providing your own v-list-item',
+        attrs: 'object // Only needed when providing your own v-list-item',
       },
       source: 'v-select',
     },

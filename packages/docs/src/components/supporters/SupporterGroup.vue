@@ -3,7 +3,7 @@
     :align="$attrs.align || 'center'"
     :justify="$attrs.justify || 'center'"
     class="ma-0 supporter-group"
-    no-gutters
+    dense
     v-bind="$attrs"
   >
     <v-col
@@ -25,6 +25,9 @@
       <v-col
         :key="i"
         class="d-flex shrink"
+        cols="6"
+        md="auto"
+        justify="center"
       >
         <supporters-sponsor
           :large="$attrs.large"

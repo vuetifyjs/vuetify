@@ -1,1 +1,5 @@
+<!-- Use with script-src -->
 Content-Security-Policy: script-src 'self' 'nonce-dQw4w9WgXcQ'
+
+<!-- Use with style-src -->
+Content-Security-Policy: style-src 'self' 'nonce-dQw4w9WgXcQ'

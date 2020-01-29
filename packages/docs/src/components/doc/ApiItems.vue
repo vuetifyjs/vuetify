@@ -53,7 +53,6 @@
       v-model="tab"
       :slider-color="computedTabs.length ? 'primary' : 'transparent'"
       :vertical="$vuetify.breakpoint.smAndUp"
-      background-color="transparent"
     >
       <v-tab
         v-for="(tab, i) in computedTabs"

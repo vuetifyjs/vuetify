@@ -15,6 +15,10 @@ module.exports = {
         value: 'MouseEvent',
       },
       {
+        name: 'input',
+        value: 'Boolean',
+      },
+      {
         name: 'keydown',
         value: 'KeyboardEvent',
       },

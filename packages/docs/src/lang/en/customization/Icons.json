@@ -19,7 +19,7 @@
   "installFA": "### Install Font Awesome 5 Icons",
   "installFAText1": "The easiest way to get started with **FontAwesome** is to use a cdn. Within the head of your main `index.html` place this snippet:",
   "installFAText2": "To install locally you can pull in the [Free](https://fontawesome.com/) version of **FontAwesome** using your preferred package manager:",
-  "installFAText3": "Within your main entry point, simply import the package's **all.css**. If you are using a configured webpack project, you will need to setup support for `.css` files using the webpack [css loader](https://github.com/webpack-contrib/css-loader). If you are already using [Vue CLI 3](https://cli.vuejs.org/), this is done for you automatically.",
+  "installFAText3": "Within your main entry point, simply import the package's **all.css**. If you are using a configured webpack project, you will need to setup support for `.css` files using the webpack [css loader](https://github.com/webpack-contrib/css-loader). If you are already using [Vue CLI](https://cli.vuejs.org/), this is done for you automatically.",
   "installFA4": "### Install Font Awesome 4 Icons",
   "installFA4Text1": "Same as above. Installing FontAwesome through cdn is the easiest way to check it out within your project:",
   "installFA4Text2": "Installing FontAwesome**4** is the same as its newer version, just from a different repository. You will be targeting the `font-awesome` repo as opposed to `@fortawesome` one.",

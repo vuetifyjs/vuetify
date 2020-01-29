@@ -46,13 +46,15 @@ describe('VBottomNavigation.ts', () => {
     }
   })
 
-  it('should be visible with a true value', () => {
+  it('should be visible with a true value', async () => {
     const wrapper = mountFunction({
       propsData: { inputValue: true },
       slots: {
         default: [VBtn, VBtn],
       },
     })
+
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.styles).toMatchSnapshot()
     expect(wrapper.html()).toMatchSnapshot()

@@ -7,7 +7,7 @@
     "disablePagination": "Disables pagination completely",
     "disableSort": "Disables sorting completely",
     "groupDesc": "Changes which direction grouping is done. Can be used with `.sync` modifier",
-    "groupBy": "Changes which item property should be used for grouping items. Can be used with `.sync` modifier",
+    "groupBy": "Changes which item property should be used for grouping items. Currently only supports a single grouping in the format:  `group` or `['group']`. When using an array, only the first element is considered. Can be used with `.sync` modifier",
     "itemKey": "The field on each item object that designates a unique key. The value of this property has to be unique for each item.",
     "items": "The array of items to display",
     "itemsPerPage": "Changes how many items per page should be visible. Can be used with `.sync` modifier",

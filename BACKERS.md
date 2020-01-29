@@ -34,7 +34,7 @@ You can join them in supporting Vuetify.js by [sponsoring through Github](https:
 - Hannes Kochniß
 - [EduBirdie](https://edubirdie.com/)
 - [Toolio](https://www.toolio.com/)
-- JSDevJobs
+- [JSDevJobs](https://jsdevjobs.com/)
 - [Skale Technologies](http://www.skaletech.com/)
 - [NoteRiot](https://note.riot.ai/)
 - [EduBirdie](https://edubirdie.com/)

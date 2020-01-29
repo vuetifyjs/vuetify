@@ -326,8 +326,6 @@ export default baseMixins.extend({
         ref: 'content',
         on: {
           click: (e: Event) => {
-            e.stopPropagation()
-
             const target = e.target as HTMLElement
 
             if (target.getAttribute('disabled')) return

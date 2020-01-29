@@ -15,41 +15,12 @@
           "value": {
             "booleans": [
               "image",
-              "collapse",
               "collapse-on-scroll",
               "dense",
-              "extended",
-              "fade-img-on-scroll",
               "flat",
               "hide-on-scroll",
               "inverted-scroll",
-              "prominent",
-              "short",
-              "shrink-on-scroll"
-            ],
-            "sliders": [
-              "elevation",
-              {
-                "prop": "height",
-                "attrs": {
-                  "min": 0,
-                  "max": 250
-                }
-              },
-              {
-                "prop": "scroll-threshold",
-                "attrs": {
-                  "min": 0,
-                  "max": 500
-                }
-              },
-              {
-                "prop": "extension-height",
-                "attrs": {
-                  "min": 0,
-                  "max": 350
-                }
-              }
+              "prominent"
             ],
             "selects": [
               {
