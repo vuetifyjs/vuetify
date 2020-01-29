@@ -429,6 +429,10 @@ export default baseMixins.extend<options>().extend({
     onFocus (e?: Event) {
       if (!this.$refs.input) return
 
+      if (document.activeElement !== this.$refs.input) {
+        return this.$refs.input.focus()
+      }
+
       if (!this.isFocused) {
         this.isFocused = true
         e && this.$emit('focus', e)

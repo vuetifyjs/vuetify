@@ -638,11 +638,9 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
   it('should have focus and blur methods', async () => {
     const wrapper = mountFunction()
     const onBlur = jest.spyOn(wrapper.vm.$refs.input, 'blur')
-    const onFocus = jest.spyOn(wrapper.vm, 'onFocus')
+    const onFocus = jest.spyOn(wrapper.vm.$refs.input, 'focus')
 
     wrapper.vm.focus()
-
-    await wrapper.vm.$nextTick()
 
     expect(onFocus).toHaveBeenCalledTimes(1)
 
