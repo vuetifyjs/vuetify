@@ -51,6 +51,15 @@
       "type": "section",
       "children": [
         {
+          "type": "functional",
+          "value": "functional"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "api",
           "value": [
             "v-card",
