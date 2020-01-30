@@ -6,7 +6,7 @@ const { DataFooterPageTextScopedProps } = require('./v-data-footer')
 const TableHeader = {
   text: 'string',
   value: 'string',
-  'align?': '\'start\' | \'center\' | \'end\'',
+  'align?': '\'start\' | \'center\' | \'right\'',
   'sortable?': 'boolean',
   'filterable?': 'boolean',
   'divider?': 'boolean',
