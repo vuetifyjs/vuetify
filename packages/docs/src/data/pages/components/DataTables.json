@@ -24,7 +24,8 @@
           "value": [
             "v-data-table",
             "v-data-footer",
-            "v-edit-dialog"
+            "v-edit-dialog",
+            "v-simple-checkbox"
           ]
         }
       ]
