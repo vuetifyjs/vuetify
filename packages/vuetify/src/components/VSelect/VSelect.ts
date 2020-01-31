@@ -381,39 +381,38 @@ export default baseMixins.extend<options>().extend({
       }), `${this.getText(item)}${last ? '' : ', '}`)
     },
     genDefaultSlot (): (VNode | VNode[] | null)[] {
+      const selections = this.genSelections()
+      const input = this.genInput()
+
+      // If the return is an empty array
+      // push the input
+      if (Array.isArray(selections)) {
+        selections.push(input)
+      // Otherwise push it into children
+      } else {
+        selections.children = selections.children || []
+        selections.children.push(input)
+      }
+
       return [
         this.genFieldset(),
-        this.genMenu(data => {
-          const selections = this.genSelections()
-          const input = this.genInput(data)
-
-          // If the return is an empty array
-          // push the input
-          if (Array.isArray(selections)) {
-            selections.push(input)
-          // Otherwise push it into children
-          } else {
-            selections.children = selections.children || []
-            selections.children.push(input)
-          }
-
-          return this.$createElement('div', {
-            staticClass: 'v-select__slot',
-            directives: this.directives,
-          }, [
-            this.genLabel(),
-            this.prefix ? this.genAffix('prefix') : null,
-            selections,
-            this.suffix ? this.genAffix('suffix') : null,
-            this.genClearIcon(),
-            this.genIconSlot(),
-            this.genHiddenInput(),
-          ])
-        }),
+        this.$createElement('div', {
+          staticClass: 'v-select__slot',
+          directives: this.directives,
+        }, [
+          this.genLabel(),
+          this.prefix ? this.genAffix('prefix') : null,
+          selections,
+          this.suffix ? this.genAffix('suffix') : null,
+          this.genClearIcon(),
+          this.genIconSlot(),
+          this.genHiddenInput(),
+        ]),
+        this.genMenu(),
         this.genProgress(),
       ]
     },
-    genInput (data: any): VNode {
+    genInput (): VNode {
       const input = VTextField.options.methods.genInput.call(this)
 
       delete input.data!.attrs!.name
@@ -427,7 +426,7 @@ export default baseMixins.extend<options>().extend({
           autocomplete: input.data!.attrs!.autocomplete || 'off',
         },
         on: { keypress: this.onKeyPress },
-      }, data)
+      })
 
       return input
     },
@@ -474,7 +473,7 @@ export default baseMixins.extend<options>().extend({
         ...this.listData,
       }, slots)
     },
-    genMenu (slot: (data: any) => VNode): VNode {
+    genMenu (): VNode {
       const props = this.$_menuProps as any
       props.activator = this.$refs['input-slot']
 
@@ -501,9 +500,6 @@ export default baseMixins.extend<options>().extend({
           },
         },
         ref: 'menu',
-        scopedSlots: {
-          activator: slot,
-        },
       }, [this.genList()])
     },
     genSelections (): VNode {
