@@ -5,7 +5,7 @@
   "scripts": {
     "start": "start-storybook -p 6006",
     "watch": "yarn start",
-    "foo": "concurrently --no-color -n snapshot,e2e \"yarn test:snapshot\" \"yarn test:e2e\"",
+    "test:storybook": "concurrently --no-color -n snapshot,e2e \"yarn test:snapshot\" \"yarn test:e2e\"",
     "test:snapshot": "cross-env BATCH=\"snapshot\" eyes-storybook",
     "test:e2e": "cross-env BATCH=\"e2e\" testcafe chrome:headless tests --app \"yarn start --ci --quiet\" --app-init-delay 15000"
   },
