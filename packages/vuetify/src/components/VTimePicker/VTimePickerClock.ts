@@ -7,6 +7,7 @@ import Themeable from '../../mixins/themeable'
 // Types
 import mixins, { ExtractVue } from '../../util/mixins'
 import Vue, { VNode, PropType } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
 interface Point {
   x: number
@@ -42,7 +43,7 @@ export default mixins<options &
     format: {
       type: Function,
       default: (val: string | number) => val,
-    },
+    } as PropValidator<(val: string | number) => string | number>,
     max: {
       type: Number,
       required: true,

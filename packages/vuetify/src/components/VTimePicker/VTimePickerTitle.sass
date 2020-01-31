@@ -23,8 +23,13 @@
   display: flex
   flex-direction: column
   font-size: $time-picker-ampm-title-font-size
-  margin: $time-picker-ampm-title-margin
   text-transform: uppercase
+
+  +ltr()
+    margin: $time-picker-ampm-title-margin-ltr
+
+  +rtl()
+    margin: $time-picker-ampm-title-margin-rtl
 
   div:only-child
     flex-direction: row
