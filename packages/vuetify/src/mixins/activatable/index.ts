@@ -109,6 +109,8 @@ export default baseMixins.extend({
           const activator = this.getActivator(e)
           if (activator) activator.focus()
 
+          e.stopPropagation()
+
           this.isActive = !this.isActive
         }
       }

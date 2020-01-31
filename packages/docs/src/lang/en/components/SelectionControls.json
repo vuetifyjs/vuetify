@@ -83,6 +83,7 @@
     "row": "Displays radio buttons in row"
   },
   "events": {
-    "update:indeterminate": "The **indeterminate.sync** event."
+    "update:indeterminate": "The **indeterminate.sync** event.",
+    "change": "Emitted when the input is changed by user interaction"
   }
 }

@@ -14,8 +14,8 @@ import {
   MountOptions,
 } from '@vue/test-utils'
 
-const oneMBFile = { name: 'test', size: 1048576 }
-const twoMBFile = { name: 'test', size: 2097152 }
+const oneMBFile = new File([new ArrayBuffer(1048576)], 'test')
+const twoMBFile = new File([new ArrayBuffer(2097152)], 'test')
 
 describe('VFileInput.ts', () => {
   type Instance = InstanceType<typeof VFileInput>
@@ -140,7 +140,7 @@ describe('VFileInput.ts', () => {
     })
 
     wrapper.vm.clearableCallback()
-    expect(wrapper.vm.internalValue).toBeNull()
+    expect(wrapper.vm.internalValue).toBeUndefined()
 
     const wrapper2 = mountFunction({
       attrs: { multiple: '' },
@@ -238,7 +238,7 @@ describe('VFileInput.ts', () => {
   })
 
   it('should truncate correctly', async () => {
-    const fifteenCharFile = { name: 'testFile15Chars', size: 1 }
+    const fifteenCharFile = new File(['V'.repeat(15)], 'testFile15Chars')
     const wrapper = mountFunction({
       propsData: {
         truncateLength: 1,
@@ -271,5 +271,17 @@ describe('VFileInput.ts', () => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.find('.v-file-input__text').text()).toBe('test…hars')
+  })
+
+  it('should filter internal array values for instanceof File', () => {
+    const wrapper = mountFunction()
+
+    const values = [null, undefined, {}, [null], [undefined], [{}]]
+
+    for (const value of values) {
+      wrapper.setProps({ value })
+
+      expect(wrapper.vm.internalArrayValue).toEqual([])
+    }
   })
 })

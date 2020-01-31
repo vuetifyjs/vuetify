@@ -231,7 +231,11 @@ export default mixins<options &
       immediate: true,
       handler () {
         this.$nextTick(() => {
-          if (!this.autoDraw || this.type === 'bar') return
+          if (
+            !this.autoDraw ||
+            this.type === 'bar' ||
+            !this.$refs.path
+          ) return
 
           const path = this.$refs.path
           const length = path.getTotalLength()

@@ -201,7 +201,7 @@
             </v-col>
             <v-col cols="6">
               <v-text-field
-                prepend-icon="business"
+                prepend-icon="mdi-account-card-details-outline"
                 placeholder="Company"
               />
             </v-col>
@@ -212,20 +212,20 @@
             </v-col>
             <v-col cols="12">
               <v-text-field
-                prepend-icon="mail"
+                prepend-icon="mdi-mail"
                 placeholder="Email"
               />
             </v-col>
             <v-col cols="12">
               <v-text-field
                 type="tel"
-                prepend-icon="phone"
+                prepend-icon="mdi-phone"
                 placeholder="(000) 000 - 0000"
               />
             </v-col>
             <v-col cols="12">
               <v-text-field
-                prepend-icon="notes"
+                prepend-icon="mdi-text"
                 placeholder="Notes"
               />
             </v-col>

@@ -75,7 +75,7 @@
     },
     {
       "q": "### Relative images are not working in `v-card` , `v-img` and other custom vuetify components",
-      "a": "Vue loader converts relative paths into require functions automatically for you. Unfortunately, this is not the case when it comes to custom components. You can circumvent this issue by using `require`. If you're using Vuetify as a Vue CLI 3 plugin, you can edit your project's [vue.config.js](https://cli.vuejs.org/config/#vue-config-js) file by modifying the options for [vue-loader](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader).",
+      "a": "Vue loader converts relative paths into require functions automatically for you. Unfortunately, this is not the case when it comes to custom components. You can circumvent this issue by using `require`. If you're using Vuetify as a Vue CLI plugin, you can edit your project's [vue.config.js](https://cli.vuejs.org/config/#vue-config-js) file by modifying the options for [vue-loader](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader).",
       "s": "html_img_require"
     },
     {

@@ -75,6 +75,7 @@
     "click:hour": "Emitted when user selects the hour",
     "click:minute": "Emitted when user selects the minute",
     "click:second": "Emitted when user selects the second",
-    "change": "Emitted when the time selection is done (when user changes the minute for HH:MM picker and the second for HH:MM:SS picker"
+    "change": "Emitted when the time selection is done (when user changes the minute for HH:MM picker and the second for HH:MM:SS picker",
+    "update:period": "Emitted when user clicks the AM/PM button"
   }
 }

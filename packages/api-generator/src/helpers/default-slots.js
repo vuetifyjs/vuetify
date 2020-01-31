@@ -13,6 +13,7 @@ module.exports = [
   'v-btn-toggle',
   'v-btn',
   'v-card-actions',
+  'v-card-subtitle',
   'v-card-text',
   'v-card-title',
   'v-card',

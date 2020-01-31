@@ -75,7 +75,7 @@ export default baseMixins.extend({
     miniVariant: Boolean,
     miniVariantWidth: {
       type: [Number, String],
-      default: 80,
+      default: 56,
     },
     mobileBreakPoint: {
       type: [Number, String],
@@ -132,6 +132,7 @@ export default baseMixins.extend({
         'v-navigation-drawer--is-mobile': this.isMobile,
         'v-navigation-drawer--is-mouseover': this.isMouseover,
         'v-navigation-drawer--mini-variant': this.isMiniVariant,
+        'v-navigation-drawer--custom-mini-variant': Number(this.miniVariantWidth) !== 56,
         'v-navigation-drawer--open': this.isActive,
         'v-navigation-drawer--open-on-hover': this.expandOnHover,
         'v-navigation-drawer--right': this.right,
