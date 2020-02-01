@@ -33,7 +33,7 @@ exports[`VDataIterator.ts should render and match snapshot 1`] = `
                        id="input-4"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -124,7 +124,7 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
                        id="input-17"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -206,7 +206,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                        id="input-29"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -288,7 +288,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                        id="input-29"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -370,7 +370,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                        id="input-29"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>

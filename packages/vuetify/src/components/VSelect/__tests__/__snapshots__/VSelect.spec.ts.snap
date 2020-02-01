@@ -230,7 +230,7 @@ exports[`VSelect.ts should render v-select correctly when not using scope slot 1
           <input id="input-35"
                  readonly="readonly"
                  type="text"
-                 aria-readonly="true"
+                 aria-readonly="false"
                  autocomplete="off"
           >
         </div>
@@ -275,7 +275,7 @@ exports[`VSelect.ts should render v-select correctly when not using v-list-item 
           <input id="input-28"
                  readonly="readonly"
                  type="text"
-                 aria-readonly="true"
+                 aria-readonly="false"
                  autocomplete="off"
           >
         </div>
@@ -320,7 +320,7 @@ exports[`VSelect.ts should render v-select correctly when using v-list-item in i
           <input id="input-20"
                  readonly="readonly"
                  type="text"
-                 aria-readonly="true"
+                 aria-readonly="false"
                  autocomplete="off"
           >
         </div>

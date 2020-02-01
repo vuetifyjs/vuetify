@@ -420,7 +420,7 @@ export default baseMixins.extend<options>().extend({
         attrs: {
           readonly: true,
           type: 'text',
-          'aria-readonly': true,
+          'aria-readonly': String(this.readonly),
           'aria-activedescendant': this.$refs.menu && this.$refs.menu.activeTile && this.$refs.menu.activeTile.getAttribute('aria-labelledby'),
           autocomplete: input.data!.attrs!.autocomplete || 'off',
         },

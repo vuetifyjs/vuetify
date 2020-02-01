@@ -540,7 +540,7 @@ exports[`VDataTableHeader.ts mobile should render 1`] = `
                   <input id="input-37"
                          readonly="readonly"
                          type="text"
-                         aria-readonly="true"
+                         aria-readonly="false"
                          autocomplete="off"
                   >
                 </div>
@@ -601,7 +601,7 @@ exports[`VDataTableHeader.ts mobile should render with data-table-select header 
                   <input id="input-74"
                          readonly="readonly"
                          type="text"
-                         aria-readonly="true"
+                         aria-readonly="false"
                          autocomplete="off"
                   >
                 </div>
@@ -664,7 +664,7 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
                   <input id="input-49"
                          readonly="readonly"
                          type="text"
-                         aria-readonly="true"
+                         aria-readonly="false"
                          autocomplete="off"
                   >
                 </div>
@@ -716,7 +716,7 @@ exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
                   <input id="input-43"
                          readonly="readonly"
                          type="text"
-                         aria-readonly="true"
+                         aria-readonly="false"
                          autocomplete="off"
                   >
                 </div>
@@ -779,7 +779,7 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
                   <input id="input-57"
                          readonly="readonly"
                          type="text"
-                         aria-readonly="true"
+                         aria-readonly="false"
                          autocomplete="off"
                   >
                 </div>
@@ -844,7 +844,7 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
                   <input id="input-65"
                          readonly="readonly"
                          type="text"
-                         aria-readonly="true"
+                         aria-readonly="false"
                          autocomplete="off"
                   >
                 </div>
