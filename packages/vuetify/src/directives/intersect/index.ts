@@ -1,10 +1,10 @@
-import { VNodeDirective } from 'vue/types/vnode'
+import { DirectiveBinding, ObjectDirective } from 'vue'
 
-interface ObserveVNodeDirective extends VNodeDirective {
+interface ObserveVNodeDirectiveBinding extends DirectiveBinding {
   options?: IntersectionObserverInit
 }
 
-function inserted (el: HTMLElement, binding: ObserveVNodeDirective) {
+function mounted (el: HTMLElement, binding: ObserveVNodeDirectiveBinding) {
   const modifiers = binding.modifiers || /* istanbul ignore next */ {}
   const value = binding.value
   const isObject = typeof value === 'object'
@@ -31,7 +31,7 @@ function inserted (el: HTMLElement, binding: ObserveVNodeDirective) {
 
     // If has already been initted and
     // has the once modifier, unbind
-    if (el._observe.init && modifiers.once) unbind(el)
+    if (el._observe.init && modifiers.once) unmounted(el)
     // Otherwise, mark the observer as initted
     else (el._observe.init = true)
   }, value.options || {})
@@ -41,7 +41,7 @@ function inserted (el: HTMLElement, binding: ObserveVNodeDirective) {
   observer.observe(el)
 }
 
-function unbind (el: HTMLElement) {
+function unmounted (el: HTMLElement) {
   /* istanbul ignore if */
   if (!el._observe) return
 
@@ -49,9 +49,9 @@ function unbind (el: HTMLElement) {
   delete el._observe
 }
 
-export const Intersect = {
-  inserted,
-  unbind,
+export const Intersect: ObjectDirective<HTMLElement> = {
+  mounted,
+  unmounted,
 }
 
 export default Intersect
