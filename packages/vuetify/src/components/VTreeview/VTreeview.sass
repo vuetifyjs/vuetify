@@ -85,9 +85,6 @@
   user-select: none
   width: $treeview-node-level-width
 
-  &.v-icon.v-icon:focus
-    color: initial !important
-
   &::after
     background: currentColor
     border-radius: 50%
@@ -103,7 +100,8 @@
     transform: scale(.2)
 
   &:focus::after
-    opacity: .4
+    color: inherit
+    opacity: 0.2
     transform: scale(1.6)
 
   +ltr()
