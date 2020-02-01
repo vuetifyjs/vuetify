@@ -47,6 +47,11 @@ export const scrollWindow = (y: number) => {
   return new Promise(resolve => setTimeout(resolve, 200))
 }
 
+export const scrollElement = (element: Element, y: number) => {
+  element.scrollTop = y
+  element.dispatchEvent(new Event('scroll'))
+}
+
 // Add a global mockup for IntersectionObserver
 (global as any).IntersectionObserver = class IntersectionObserver {
   callback: (entries: any, observer: any) => {}

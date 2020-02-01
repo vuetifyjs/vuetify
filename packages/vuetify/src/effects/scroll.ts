@@ -6,9 +6,9 @@ import {
   watch,
   onBeforeUnmount,
 } from 'vue'
-import { IN_BROWSER } from '@util/globals'
-import { consoleWarn } from '@util/console'
-import { passiveEventOptions } from '@util/events'
+import { IN_BROWSER } from '../util/globals'
+import { consoleWarn } from '../util/console'
+import { passiveEventOptions } from '../util/events'
 
 // Types
 export interface ScrollProps {
@@ -33,7 +33,7 @@ export function scrollProps (
 }
 
 interface ScrollArguments {
-  thresholMetCallback?: (data: {
+  thresholdMetCallback?: (data: {
     isScrollingUp: boolean
     currentThreshold: number
     savedScroll: Ref<number>
@@ -44,9 +44,9 @@ interface ScrollArguments {
 
 export function useScroll (
   props: ScrollProps,
-  args: ScrollArguments,
+  args: ScrollArguments = {},
 ) {
-  const { thresholMetCallback, scrollThreshold, canScroll } = args
+  const { thresholdMetCallback, scrollThreshold, canScroll } = args
   let previousScroll = 0
   const target = ref<Element | Window | null>(null)
   const currentScroll = ref(0)
@@ -66,10 +66,10 @@ export function useScroll (
   const onScroll = () => {
     const targetEl = target.value
 
-    if (!targetEl || !IN_BROWSER || !(canScroll && canScroll.value)) return
+    if (!targetEl || (canScroll && !canScroll.value)) return
 
     previousScroll = currentScroll.value
-    currentScroll.value = targetEl instanceof Window ? targetEl.pageYOffset : (targetEl as Element).scrollTop
+    currentScroll.value = ('window' in targetEl) ? (targetEl as Window).pageYOffset : (targetEl as Element).scrollTop
 
     isScrollingUp.value = currentScroll.value < previousScroll
     currentThreshold.value = Math.abs(currentScroll.value - computedScrollThreshold.value)
@@ -79,7 +79,7 @@ export function useScroll (
 
   watch(isScrollActive, () => (savedScroll.value = 0))
 
-  watch(() => props.scrollTarget, () => {
+  watch(() => [props.scrollTarget], () => {
     target.value = props.scrollTarget ? document.querySelector(props.scrollTarget) : window
 
     if (!target.value) {
@@ -92,23 +92,31 @@ export function useScroll (
     newTarget && newTarget.addEventListener('scroll', onScroll, passiveEventOptions())
   })
 
-  thresholMetCallback && watch(() => (
+  thresholdMetCallback && watch(() => (
     Math.abs(currentScroll.value - savedScroll.value) > computedScrollThreshold.value
-  ), thresholdMet => thresholdMet && thresholMetCallback({
-    currentThreshold: currentThreshold.value,
-    isScrollingUp: isScrollingUp.value,
-    savedScroll,
-  }))
+  ), thresholdMet => {
+    thresholdMet && thresholdMetCallback({
+      currentThreshold: currentThreshold.value,
+      isScrollingUp: isScrollingUp.value,
+      savedScroll,
+    })
+  })
 
   // Do we need this? If yes - seems that
   // there's no need to expose onScroll
   canScroll && watch(canScroll, onScroll)
 
-  onBeforeUnmount(() => {
+  getCurrentInstance() && onBeforeUnmount(() => {
     target.value && target.value.removeEventListener('scroll', onScroll, passiveEventOptions())
   })
 
   return {
     isScrollActive,
+
+    // required only for testing
+    // probably can be removed
+    // later (2 chars chlng)
+    isScrollingUp,
+    savedScroll,
   }
 }
