@@ -251,7 +251,7 @@ describe('VTimePickerClock.js', () => {
 
     for (let i = 0; i <= 6; i++) {
       touch(wrapper).move(...anglePosition(i * degreesPerUnit))
-      expect(input).toBeCalledWith(i)
+      expect(input).toHaveBeenCalledWith(i)
     }
   })
 
@@ -283,13 +283,13 @@ describe('VTimePickerClock.js', () => {
     // Click on disabled value and less than 15 degrees away from the allowed value
     touch(wrapper).move(...anglePosition(ALLOWED_VALUE * degreesPerUnit + ACCURACY_ANGLE - 1))
     expect(input).toHaveBeenCalledTimes(1)
-    expect(input).toBeCalledWith(ALLOWED_VALUE)
+    expect(input).toHaveBeenCalledWith(ALLOWED_VALUE)
     touch(wrapper).move(...anglePosition((60 - ALLOWED_VALUE) * degreesPerUnit + ACCURACY_ANGLE - 1))
     expect(input).toHaveBeenCalledTimes(2)
-    expect(input).toBeCalledWith(60 - ALLOWED_VALUE)
+    expect(input).toHaveBeenCalledWith(60 - ALLOWED_VALUE)
     touch(wrapper).move(...anglePosition(ALLOWED_VALUE * degreesPerUnit - ACCURACY_ANGLE + 1))
     expect(input).toHaveBeenCalledTimes(3)
-    expect(input).toBeCalledWith(ALLOWED_VALUE)
+    expect(input).toHaveBeenCalledWith(ALLOWED_VALUE)
   })
 
   it('should change with touch move', () => {
