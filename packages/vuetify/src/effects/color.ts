@@ -1,4 +1,4 @@
-import { computed, ComputedRef, isRef } from 'vue'
+import { computed, ComputedRef, isRef, Ref } from 'vue'
 
 export interface ColorProps {
   color?: string
@@ -12,18 +12,19 @@ export const colorProps = (defaults: Partial<ColorProps> = {}) => ({
 })
 
 const isCssColor = (color: string): boolean => !!color && !!color.match(/^(#|(rgb|hsl)a?\()/)
-const isProps = <T>(props: T | ComputedRef<PropValue>): props is T => !isRef(props)
+const isProps = <T>(props: T | RefValue): props is T => !isRef(props)
 
 type PropValue = string | null | undefined
+type RefValue = Readonly<Ref<PropValue>>
 type Color = { class: Record<string, boolean> } | { style: Record<string, string> } | {}
 
 type TextColor = {
   textColor: ComputedRef<Color>
 }
 
-export function useTextColor (props: ColorProps | ComputedRef<PropValue>): TextColor
+export function useTextColor (props: ColorProps | RefValue): TextColor
 export function useTextColor<T extends Record<string, any>> (props: T, prop: keyof T): TextColor
-export function useTextColor<T extends Record<string, any>> (props: T | ComputedRef<PropValue>, prop: keyof T = 'color'): TextColor {
+export function useTextColor<T extends Record<string, any>> (props: T | RefValue, prop: keyof T = 'color'): TextColor {
   const textColor = computed(() => {
     const color: PropValue = isProps(props) ? props[prop] : props.value
 
@@ -55,9 +56,9 @@ type BackgroundColor = {
   backgroundColor: ComputedRef<Color>
 }
 
-export function useBackgroundColor (props: ColorProps | ComputedRef<PropValue>): BackgroundColor
+export function useBackgroundColor (props: ColorProps | RefValue): BackgroundColor
 export function useBackgroundColor<T extends Record<string, any>> (props: T, prop: keyof T): BackgroundColor
-export function useBackgroundColor<T extends Record<string, any>> (props: T | ComputedRef<PropValue>, prop: keyof T = 'color'): BackgroundColor {
+export function useBackgroundColor<T extends Record<string, any>> (props: T | RefValue, prop: keyof T = 'color'): BackgroundColor {
   const backgroundColor = computed(() => {
     const color: PropValue = isProps(props) ? props[prop] : props.value
 
