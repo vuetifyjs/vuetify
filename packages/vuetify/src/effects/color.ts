@@ -16,10 +16,10 @@ const isProps = <T>(props: T | RefValue): props is T => !isRef(props)
 
 type PropValue = string | null | undefined
 type RefValue = Readonly<Ref<PropValue>>
-type Color = { class: Record<string, boolean> } | { style: Record<string, string> } | {}
+type ColorData = { class: Record<string, boolean> } | { style: Record<string, string> } | {}
 
 type TextColor = {
-  textColor: ComputedRef<Color>
+  textColor: ComputedRef<ColorData>
 }
 
 export function useTextColor (props: ColorProps | RefValue): TextColor
@@ -53,7 +53,7 @@ export function useTextColor<T extends Record<string, any>> (props: T | RefValue
 }
 
 type BackgroundColor = {
-  backgroundColor: ComputedRef<Color>
+  backgroundColor: ComputedRef<ColorData>
 }
 
 export function useBackgroundColor (props: ColorProps | RefValue): BackgroundColor
