@@ -32,19 +32,36 @@ export function scrollProps (
   }
 }
 
+interface ScrollArguments {
+  thresholMetCallback?: (data: {
+    isScrollingUp: boolean
+    currentThreshold: number
+    savedScroll: Ref<number>
+  }) => void
+  scrollThreshold?: Readonly<Ref<number>>
+  canScroll?: Readonly<Ref<boolean>>
+}
+
 export function useScroll (
   props: ScrollProps,
-  canScroll?: Readonly<Ref<boolean>>
+  args: ScrollArguments,
 ) {
+  const { thresholMetCallback, scrollThreshold, canScroll } = args
   let previousScroll = 0
   const target = ref<Element | Window | null>(null)
-  const computedScrollThreshold = computed(() => props.scrollThreshold == null ? Number(props.scrollThreshold) : 300)
   const currentScroll = ref(0)
   const savedScroll = ref(0)
   const currentThreshold = ref(0)
-  const isActive = ref(false)
+  const isScrollActive = ref(false)
   const isScrollingUp = ref(false)
-  const thresholdMet = computed(() => Math.abs(currentScroll.value - savedScroll.value) > computedScrollThreshold.value)
+
+  const computedScrollThreshold = computed(() => {
+    if (props.scrollThreshold != null) return Number(props.scrollThreshold)
+
+    if (scrollThreshold != null) return scrollThreshold.value
+
+    return 300
+  })
 
   const onScroll = () => {
     const targetEl = target.value
@@ -60,11 +77,7 @@ export function useScroll (
 
   watch(isScrollingUp, () => (savedScroll.value = savedScroll.value || currentScroll.value))
 
-  watch(isActive, () => (savedScroll.value = 0))
-
-  // Do we need this? If yes - seems that
-  // there's no need to expose onScroll
-  canScroll && watch(canScroll, onScroll)
+  watch(isScrollActive, () => (savedScroll.value = 0))
 
   watch(() => props.scrollTarget, () => {
     target.value = props.scrollTarget ? document.querySelector(props.scrollTarget) : window
@@ -79,16 +92,23 @@ export function useScroll (
     newTarget && newTarget.addEventListener('scroll', onScroll, passiveEventOptions())
   })
 
+  thresholMetCallback && watch(() => (
+    Math.abs(currentScroll.value - savedScroll.value) > computedScrollThreshold.value
+  ), thresholdMet => thresholdMet && thresholMetCallback({
+    currentThreshold: currentThreshold.value,
+    isScrollingUp: isScrollingUp.value,
+    savedScroll,
+  }))
+
+  // Do we need this? If yes - seems that
+  // there's no need to expose onScroll
+  canScroll && watch(canScroll, onScroll)
+
   onBeforeUnmount(() => {
     target.value && target.value.removeEventListener('scroll', onScroll, passiveEventOptions())
   })
 
   return {
-    currentThreshold,
-    isActive,
-    isScrollingUp,
-    onScroll,
-    savedScroll,
-    thresholdMet,
+    isScrollActive,
   }
 }
