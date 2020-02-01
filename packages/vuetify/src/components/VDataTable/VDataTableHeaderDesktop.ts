@@ -25,20 +25,22 @@ export default mixins(header).extend({
         $t('activateAscending'),
       ]
 
-      if (beingSorted) {
-        if (isDesc) {
-          ariaSort = 'descending'
-          ariaLabel = [
-            $t('sortDescending'),
-            $t(this.options.mustSort ? 'activateAscending' : 'activateNone'),
-          ]
-        } else {
-          ariaSort = 'ascending'
-          ariaLabel = [
-            $t('sortAscending'),
-            $t('activateDescending'),
-          ]
-        }
+      if (!beingSorted) {
+        return { ariaSort, ariaLabel: ariaLabel.join(' ') }
+      }
+
+      if (isDesc) {
+        ariaSort = 'descending'
+        ariaLabel = [
+          $t('sortDescending'),
+          $t(this.options.mustSort ? 'activateAscending' : 'activateNone'),
+        ]
+      } else {
+        ariaSort = 'ascending'
+        ariaLabel = [
+          $t('sortAscending'),
+          $t('activateDescending'),
+        ]
       }
 
       return { ariaSort, ariaLabel: ariaLabel.join(' ') }
