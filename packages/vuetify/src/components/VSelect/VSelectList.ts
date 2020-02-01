@@ -123,9 +123,6 @@ export default mixins(Colorable, Themeable).extend({
     genHighlight (text: string): string {
       return `<span class="v-list-item__mask">${escapeHTML(text)}</span>`
     },
-    genLabelledBy (item: object) {
-      return `list-item-${this._uid}`
-    },
     getMaskedCharacters (text: string): {
       start: string
       middle: string
@@ -160,7 +157,7 @@ export default mixins(Colorable, Themeable).extend({
           // Default behavior in list does not
           // contain aria-selected by default
           'aria-selected': String(value),
-          'aria-labelledby': `${this.genLabelledBy(item)}-${index}`,
+          id: `list-item-${this._uid}-${index}`,
           role: 'option',
         },
         on: {
@@ -207,7 +204,6 @@ export default mixins(Colorable, Themeable).extend({
 
       return this.$createElement(VListItemContent,
         [this.$createElement(VListItemTitle, {
-          attrs: { id: `${this.genLabelledBy(item)}-${index}` },
           domProps: { innerHTML },
         })]
       )

@@ -178,14 +178,12 @@ exports[`VSelect.ts should use slotted append-item 1`] = `
 >
   <div tabindex="0"
        aria-selected="false"
-       aria-labelledby="list-item-18-0"
+       id="list-item-18-0"
        role="option"
        class="v-list-item v-list-item--link theme--light"
   >
     <div class="v-list-item__content">
-      <div id="list-item-18-0"
-           class="v-list-item__title"
-      >
+      <div class="v-list-item__title">
         foo
       </div>
     </div>
@@ -207,14 +205,12 @@ exports[`VSelect.ts should use slotted prepend-item 1`] = `
   </div>
   <div tabindex="0"
        aria-selected="false"
-       aria-labelledby="list-item-6-0"
+       id="list-item-6-0"
        role="option"
        class="v-list-item v-list-item--link theme--light"
   >
     <div class="v-list-item__content">
-      <div id="list-item-6-0"
-           class="v-list-item__title"
-      >
+      <div class="v-list-item__title">
         foo
       </div>
     </div>
