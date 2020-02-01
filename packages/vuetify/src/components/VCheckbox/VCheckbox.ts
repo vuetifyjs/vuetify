@@ -90,7 +90,7 @@ export default Selectable.extend({
             ? 'mixed'
             : this.isActive.toString(),
         }),
-        this.genRipple(this.setTextColor(this.validationState)),
+        this.genRipple(this.setTextColor(this.rippleState)),
         this.$createElement(VIcon, this.setTextColor(this.validationState, {
           props: {
             dense: this.dense,
