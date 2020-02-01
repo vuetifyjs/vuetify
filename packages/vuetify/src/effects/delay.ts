@@ -18,11 +18,11 @@ export function delayProps (
   }
 }
 
-export function useDelay (props: DelayProps, activate: (value: boolean) => void) {
+export function useDelay (props: DelayProps, cb?: (value: boolean) => void) {
   const delays: Partial<Record<keyof DelayProps, number>> = {}
 
-  const runDelayFactory = (prop: keyof DelayProps) => (cb?: () => void) => {
-    const delay = parseInt(props[prop], 10)
+  const runDelayFactory = (prop: keyof DelayProps) => (): Promise<boolean> => {
+    const active = prop === 'openDelay'
 
     delays.closeDelay && window.clearTimeout(delays.closeDelay)
     delete delays.closeDelay
@@ -30,7 +30,12 @@ export function useDelay (props: DelayProps, activate: (value: boolean) => void)
     delays.openDelay && window.clearTimeout(delays.openDelay)
     delete delays.openDelay
 
-    delays[prop] = window.setTimeout(cb || (() => activate(prop === 'openDelay')), delay)
+    return new Promise(resolve => {
+      delays[prop] = window.setTimeout(() => {
+        cb && cb(active) // eslint-disable-line standard/no-callback-literal
+        resolve(active)
+      }, parseInt(props[prop], 10))
+    })
   }
 
   return {
