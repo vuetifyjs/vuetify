@@ -9,7 +9,7 @@ describe('dimensions.ts', () => {
     it('should take a single prop to use', () => {
       const { useDimensions } = dimensionsFactory('width')
 
-      const props = reactive({ width: 100 })
+      const props = { width: 100 }
       const { dimensions } = useDimensions(props)
 
       expect(dimensions.value.style.width).toBeDefined()
@@ -18,7 +18,7 @@ describe('dimensions.ts', () => {
     it('should take a multiple props to use', () => {
       const { useDimensions } = dimensionsFactory('width', 'height')
 
-      const props = reactive({ width: 100, height: 200 })
+      const props = { width: 100, height: 200 }
       const { dimensions } = useDimensions(props)
 
       expect(dimensions.value.style.width).toBeDefined()
@@ -28,7 +28,7 @@ describe('dimensions.ts', () => {
     it('should default to all props when given no props', () => {
       const { useDimensions } = dimensionsFactory()
 
-      const props = reactive({ width: 100, height: 200, maxWidth: 300, maxHeight: 400, minWidth: 500, minHeight: 600 })
+      const props = { width: 100, height: 200, maxWidth: 300, maxHeight: 400, minWidth: 500, minHeight: 600 }
       const { dimensions } = useDimensions(props)
 
       expect(dimensions.value.style.width).toBeDefined()
@@ -44,28 +44,63 @@ describe('dimensions.ts', () => {
     it('should have proper styles', () => {
       const { useDimensions } = dimensionsFactory()
 
-      expect(useDimensions(reactive({ width: 100 })).dimensions.value).toEqual({
+      expect(useDimensions({ width: 100 }).dimensions.value).toEqual({
         style: {
           width: '100px',
         },
       })
 
-      expect(useDimensions(reactive({ width: 100, height: '' })).dimensions.value).toEqual({
+      expect(useDimensions({ width: 100, height: '' }).dimensions.value).toEqual({
         style: {
           width: '100px',
         },
       })
 
-      expect(useDimensions(reactive({ width: 100, height: null })).dimensions.value).toEqual({
+      expect(useDimensions({ width: 100, height: null }).dimensions.value).toEqual({
         style: {
           width: '100px',
         },
       })
 
-      expect(useDimensions(reactive({ width: 100, height: '200' })).dimensions.value).toEqual({
+      expect(useDimensions({ width: 100, height: '200' }).dimensions.value).toEqual({
         style: {
           width: '100px',
           height: '200px',
+        },
+      })
+    })
+
+    it('should be reactive', () => {
+      const { useDimensions } = dimensionsFactory()
+
+      const props: { width?: number | string, height?: number | string } = reactive({ width: 100 })
+      const { dimensions } = useDimensions(props)
+
+      expect(dimensions.value).toEqual({
+        style: {
+          width: '100px',
+        },
+      })
+
+      props.width = 200
+
+      expect(dimensions.value).toEqual({
+        style: {
+          width: '200px',
+        },
+      })
+
+      delete props.width
+
+      expect(dimensions.value).toEqual({
+        style: {},
+      })
+
+      props.height = 300
+
+      expect(dimensions.value).toEqual({
+        style: {
+          height: '300px',
         },
       })
     })
@@ -84,6 +119,27 @@ describe('dimensions.ts', () => {
           type: [Number, String],
         },
         minWidth: {
+          type: [Number, String],
+        },
+      })
+
+      expect(dimensionsFactory().dimensionsProps()).toEqual({
+        height: {
+          type: [Number, String],
+        },
+        width: {
+          type: [Number, String],
+        },
+        maxHeight: {
+          type: [Number, String],
+        },
+        maxWidth: {
+          type: [Number, String],
+        },
+        minWidth: {
+          type: [Number, String],
+        },
+        minHeight: {
           type: [Number, String],
         },
       })
