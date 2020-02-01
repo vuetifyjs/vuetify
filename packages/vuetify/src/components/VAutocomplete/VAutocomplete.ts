@@ -7,6 +7,7 @@ import VTextField from '../VTextField/VTextField'
 
 // Utilities
 import { keyCodes } from '../../util/helpers'
+import mergeData from '../../util/mergeData'
 
 // Types
 import { PropType } from 'vue'
@@ -276,12 +277,13 @@ export default VSelect.extend({
     genInput () {
       const input = VTextField.options.methods.genInput.call(this)
 
-      input.data = input.data || {}
-      input.data.attrs = input.data.attrs || {}
-      input.data.attrs.autocomplete = input.data.attrs.autocomplete || 'off'
-
-      input.data.domProps = input.data.domProps || {}
-      input.data.domProps.value = this.internalSearch
+      input.data = mergeData(input.data!, {
+        attrs: {
+          'aria-activedescendant': this.$refs.menu && this.$refs.menu.activeTile && this.$refs.menu.activeTile.id,
+          autocomplete: input.data!.attrs!.autocomplete || 'off',
+        },
+        domProps: { value: this.internalSearch },
+      })
 
       return input
     },
