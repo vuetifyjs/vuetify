@@ -233,7 +233,7 @@ describe('VTimePickerClock.js', () => {
     expect(angle({ x: 2, y: 0 })).toBe(135)
   })
 
-  it.only('should calculate position from angle', () => {
+  it('should calculate position from angle', () => {
     const wrapper = mount(VTimePickerClock, {
       propsData: {
         min: 0,
@@ -255,7 +255,7 @@ describe('VTimePickerClock.js', () => {
     }
   })
 
-  it.only('should not emit input event when clicked disabled value (#5897)', () => {
+  it('should not emit input event when clicked disabled value (#5897)', () => {
     const ALLOWED_VALUE = 15
     const ACCURACY_ANGLE = 15
     const wrapper = mount(VTimePickerClock, {
