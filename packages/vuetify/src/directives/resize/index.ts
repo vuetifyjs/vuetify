@@ -1,11 +1,11 @@
 import { DirectiveBinding, ObjectDirective } from 'vue'
 
-interface ResizeVNodeDirective extends DirectiveBinding {
+interface ResizeDirectiveBinding extends DirectiveBinding {
   value: () => void | undefined
   options?: boolean | AddEventListenerOptions
 }
 
-function mounted (el: HTMLElement, binding: ResizeVNodeDirective) {
+function mounted (el: HTMLElement, binding: ResizeDirectiveBinding) {
   const callback = binding.value!
   const options = binding.options || { passive: true }
 
