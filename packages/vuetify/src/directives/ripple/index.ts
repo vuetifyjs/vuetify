@@ -1,8 +1,7 @@
 // Styles
 import './VRipple.sass'
 
-import { VNode, VNodeDirective } from 'vue'
-import { consoleWarn } from '../../util/console'
+import { ObjectDirective, DirectiveBinding } from 'vue'
 
 function transform (el: HTMLElement, value: string) {
   el.style['transform'] = value
@@ -163,7 +162,7 @@ function rippleHide (e: Event) {
   ripples.hide(element)
 }
 
-function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boolean) {
+function updateRipple (el: HTMLElement, binding: DirectiveBinding, wasEnabled: boolean) {
   const enabled = isRippleEnabled(binding.value)
   if (!enabled) {
     ripples.hide(el)
@@ -205,27 +204,16 @@ function removeListeners (el: HTMLElement) {
   el.removeEventListener('dragstart', rippleHide)
 }
 
-function directive (el: HTMLElement, binding: VNodeDirective, node: VNode) {
+function mounted (el: HTMLElement, binding: DirectiveBinding) {
   updateRipple(el, binding, false)
-
-  if (process.env.NODE_ENV === 'development') {
-    // warn if an inline element is used, waiting for el to be in the DOM first
-    node.context && node.context.$nextTick(() => {
-      const computed = window.getComputedStyle(el)
-      if (computed && computed.display === 'inline') {
-        const context = (node as any).fnOptions ? [(node as any).fnOptions, node.context] : [node.componentInstance]
-        consoleWarn('v-ripple can only be used on block-level elements', ...context)
-      }
-    })
-  }
 }
 
-function unbind (el: HTMLElement) {
+function unmounted (el: HTMLElement) {
   delete el._ripple
   removeListeners(el)
 }
 
-function update (el: HTMLElement, binding: VNodeDirective) {
+function updated (el: HTMLElement, binding: DirectiveBinding) {
   if (binding.value === binding.oldValue) {
     return
   }
@@ -234,10 +222,10 @@ function update (el: HTMLElement, binding: VNodeDirective) {
   updateRipple(el, binding, wasEnabled)
 }
 
-export const Ripple = {
-  bind: directive,
-  unbind,
-  update,
+export const Ripple: ObjectDirective<HTMLElement> = {
+  mounted,
+  unmounted,
+  updated,
 }
 
 export default Ripple

@@ -1,69 +1,34 @@
 // Libraries
-import Vue from 'vue'
+import { h, withDirectives, defineComponent, ref, createApp, nextTick, Ref } from 'vue'
 
 // Directives
 import Ripple from '../'
 
-// Utilities
-import {
-  mount,
-} from '@vue/test-utils'
-
 describe('ripple.ts', () => {
   it('Ripple with no value should render element with ripple enabled', () => {
-    const testComponent = Vue.component('test', {
-      directives: {
-        Ripple,
-      },
-      render (h) {
-        const data = {
-          directives: [{
-            name: 'ripple',
-          }],
-        }
-        return h('div', data)
-      },
-    })
+    const Test = defineComponent(() => () => withDirectives(h('div', { class: 'a' }), [ [ Ripple, true ] ]))
+    const app = createApp()
+    const el = document.createElement('div')
+    app.mount(Test, el)
 
-    const wrapper = mount(testComponent)
-
-    const div = wrapper.find('div')
-    expect(div.element['_ripple'].enabled).toBe(true)
+    expect(el.querySelector('.a')['_ripple'].enabled).toBe(true)
   })
 
-  it('Ripple should update element property reactively', () => {
-    const testComponent = Vue.component('test', {
-      directives: {
-        Ripple,
-      },
-      props: {
-        ripple: Boolean,
-        default: () => false,
-      },
-      render (h) {
-        const data = {
-          directives: [{
-            name: 'ripple',
-            value: this.ripple,
-          }],
-        }
-        return h('div', data)
-      },
-    })
+  it('Ripple should update element property reactively', async () => {
+    const ripple = ref(true)
+    const Test = defineComponent((props: { ripple: Ref<boolean> }) => () => withDirectives(h('div', { class: 'a' }), [ [ Ripple, props.ripple.value ] ]))
+    const app = createApp()
+    const el = document.createElement('div')
+    app.mount(Test, el, { ripple })
 
-    const wrapper = mount(testComponent, {
-      propsData: {
-        ripple: true,
-      },
-    })
+    expect(el.querySelector('.a')['_ripple'].enabled).toBe(true)
 
-    const div = wrapper.find('div')
-    expect(div.element['_ripple'].enabled).toBe(true)
+    ripple.value = false
+    await nextTick()
+    expect(el.querySelector('.a')['_ripple'].enabled).toBe(false)
 
-    wrapper.setProps({ ripple: false })
-    expect(div.element['_ripple'].enabled).toBe(false)
-
-    wrapper.setProps({ ripple: true })
-    expect(div.element['_ripple'].enabled).toBe(true)
+    ripple.value = true
+    await nextTick()
+    expect(el.querySelector('.a')['_ripple'].enabled).toBe(true)
   })
 })
