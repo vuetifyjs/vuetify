@@ -1,10 +1,10 @@
 import { DirectiveBinding, ObjectDirective } from 'vue'
 
-interface ObserveVNodeDirectiveBinding extends DirectiveBinding {
+interface ObserveDirectiveBinding extends DirectiveBinding {
   options?: IntersectionObserverInit
 }
 
-function mounted (el: HTMLElement, binding: ObserveVNodeDirectiveBinding) {
+function mounted (el: HTMLElement, binding: ObserveDirectiveBinding) {
   const modifiers = binding.modifiers || /* istanbul ignore next */ {}
   const value = binding.value
   const isObject = typeof value === 'object'
