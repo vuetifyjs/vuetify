@@ -1,0 +1,177 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`size.ts should have the correct class 1`] = `
+Object {
+  "v-size--default": true,
+  "v-size--large": undefined,
+  "v-size--small": undefined,
+  "v-size--x-large": undefined,
+  "v-size--x-small": undefined,
+}
+`;
+
+exports[`size.ts should have the correct class 2`] = `
+Object {
+  "large": Object {
+    "default": undefined,
+    "type": [Function],
+  },
+  "small": Object {
+    "default": undefined,
+    "type": [Function],
+  },
+  "xLarge": Object {
+    "default": undefined,
+    "type": [Function],
+  },
+  "xSmall": Object {
+    "default": undefined,
+    "type": [Function],
+  },
+}
+`;
+
+exports[`size.ts should have the correct class 3`] = `
+Object {
+  "v-size--default": undefined,
+  "v-size--large": true,
+  "v-size--small": undefined,
+  "v-size--x-large": undefined,
+  "v-size--x-small": undefined,
+}
+`;
+
+exports[`size.ts should have the correct class 4`] = `
+Object {
+  "large": Object {
+    "default": true,
+    "type": [Function],
+  },
+  "small": Object {
+    "default": undefined,
+    "type": [Function],
+  },
+  "xLarge": Object {
+    "default": undefined,
+    "type": [Function],
+  },
+  "xSmall": Object {
+    "default": undefined,
+    "type": [Function],
+  },
+}
+`;
+
+exports[`size.ts should have the correct class 5`] = `
+Object {
+  "v-size--default": undefined,
+  "v-size--large": undefined,
+  "v-size--small": true,
+  "v-size--x-large": undefined,
+  "v-size--x-small": undefined,
+}
+`;
+
+exports[`size.ts should have the correct class 6`] = `
+Object {
+  "large": Object {
+    "default": undefined,
+    "type": [Function],
+  },
+  "small": Object {
+    "default": true,
+    "type": [Function],
+  },
+  "xLarge": Object {
+    "default": undefined,
+    "type": [Function],
+  },
+  "xSmall": Object {
+    "default": undefined,
+    "type": [Function],
+  },
+}
+`;
+
+exports[`size.ts should have the correct class 7`] = `
+Object {
+  "v-size--default": undefined,
+  "v-size--large": undefined,
+  "v-size--small": undefined,
+  "v-size--x-large": true,
+  "v-size--x-small": undefined,
+}
+`;
+
+exports[`size.ts should have the correct class 8`] = `
+Object {
+  "large": Object {
+    "default": undefined,
+    "type": [Function],
+  },
+  "small": Object {
+    "default": undefined,
+    "type": [Function],
+  },
+  "xLarge": Object {
+    "default": true,
+    "type": [Function],
+  },
+  "xSmall": Object {
+    "default": undefined,
+    "type": [Function],
+  },
+}
+`;
+
+exports[`size.ts should have the correct class 9`] = `
+Object {
+  "v-size--default": undefined,
+  "v-size--large": undefined,
+  "v-size--small": undefined,
+  "v-size--x-large": undefined,
+  "v-size--x-small": true,
+}
+`;
+
+exports[`size.ts should have the correct class 10`] = `
+Object {
+  "large": Object {
+    "default": undefined,
+    "type": [Function],
+  },
+  "small": Object {
+    "default": undefined,
+    "type": [Function],
+  },
+  "xLarge": Object {
+    "default": undefined,
+    "type": [Function],
+  },
+  "xSmall": Object {
+    "default": true,
+    "type": [Function],
+  },
+}
+`;
+
+exports[`size.ts should have the correct class 11`] = `
+Object {
+  "large": Object {
+    "default": undefined,
+    "type": [Function],
+  },
+  "small": Object {
+    "default": undefined,
+    "type": [Function],
+  },
+  "xLarge": Object {
+    "default": undefined,
+    "type": [Function],
+  },
+  "xSmall": Object {
+    "default": undefined,
+    "type": [Function],
+  },
+}
+`;
