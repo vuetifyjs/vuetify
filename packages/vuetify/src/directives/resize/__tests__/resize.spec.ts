@@ -1,6 +1,8 @@
 // Directives
 import Resize from '../'
-import { h } from 'vue';
+
+// Libraries
+import { h } from 'vue'
 
 describe('resize.ts', () => {
   it('should bind event on inserted', () => {
