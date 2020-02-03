@@ -1,8 +1,15 @@
-// Directives
-import Touch from '../'
 
 // Libraries
-import { defineComponent, withDirectives, h, createApp, DirectiveBinding, nextTick } from 'vue'
+import {
+  defineComponent,
+  withDirectives,
+  h,
+  createApp,
+  DirectiveBinding
+} from 'vue'
+
+// Directives
+import Touch from '../'
 
 // Utilities
 import { touch } from '../../../../test'
