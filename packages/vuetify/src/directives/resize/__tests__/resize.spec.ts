@@ -1,4 +1,4 @@
-// Libraries
+// Setup
 import { h } from 'vue'
 
 // Directives
