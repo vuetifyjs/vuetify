@@ -2,10 +2,6 @@
 
 exports[`VTooltip should render component and match snapshot 1`] = `
 <span class="v-tooltip">
-  <div class="v-tooltip__content"
-       style="left: 0px; max-width: auto; opacity: 0; top: 12px; z-index: 0; display: none;"
-  >
-  </div>
   <span>
     activator
   </span>
@@ -46,9 +42,5 @@ exports[`VTooltip should render component with value=true and match snapshot 1`]
 
 exports[`VTooltip should render component with zIndex prop and match snapshot 1`] = `
 <span class="v-tooltip">
-  <div class="v-tooltip__content"
-       style="left: 0px; max-width: auto; opacity: 0; top: 12px; z-index: 42; display: none;"
-  >
-  </div>
 </span>
 `;

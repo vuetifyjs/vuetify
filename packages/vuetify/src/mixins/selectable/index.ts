@@ -71,6 +71,11 @@ export default mixins(
     isDirty (): boolean {
       return this.isActive
     },
+    rippleState (): string | undefined {
+      return !this.disabled && !this.validationState
+        ? 'primary'
+        : this.validationState
+    },
   },
 
   watch: {

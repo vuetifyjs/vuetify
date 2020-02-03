@@ -110,7 +110,6 @@ export default baseMixins.extend<options>().extend({
   data () {
     return {
       cachedItems: this.cacheItems ? this.items : [],
-      content: null as any,
       isBooted: false,
       isMenuActive: false,
       lastItem: 20,
@@ -248,8 +247,8 @@ export default baseMixins.extend<options>().extend({
     },
     isBooted () {
       this.$nextTick(() => {
-        if (this.content && this.content.addEventListener) {
-          this.content.addEventListener('scroll', this.onScroll, false)
+        if (this.getContent() && this.getContent().addEventListener) {
+          this.getContent().addEventListener('scroll', this.onScroll, false)
         }
       })
     },
@@ -275,10 +274,6 @@ export default baseMixins.extend<options>().extend({
         this.setSelectedItems()
       },
     },
-  },
-
-  mounted () {
-    this.content = this.$refs.menu && (this.$refs.menu as { [key: string]: any }).$refs.content
   },
 
   methods: {
@@ -310,8 +305,8 @@ export default baseMixins.extend<options>().extend({
         !this._isDestroyed &&
 
         // Click originates from outside the menu content
-        this.content &&
-        !this.content.contains(e.target) &&
+        this.getContent() &&
+        !this.getContent().contains(e.target as Node) &&
 
         // Click originates from outside the element
         this.$el &&
@@ -334,6 +329,9 @@ export default baseMixins.extend<options>().extend({
       const itemValue = this.getValue(item)
 
       return (this.internalValue || []).findIndex((i: object) => this.valueComparator(this.getValue(i), itemValue))
+    },
+    getContent () {
+      return this.$refs.menu && this.$refs.menu.$refs.content
     },
     genChipSelection (item: object, index: number) {
       const isDisabled = (
@@ -693,14 +691,14 @@ export default baseMixins.extend<options>().extend({
     },
     onScroll () {
       if (!this.isMenuActive) {
-        requestAnimationFrame(() => (this.content.scrollTop = 0))
+        requestAnimationFrame(() => (this.getContent().scrollTop = 0))
       } else {
         if (this.lastItem >= this.computedItems.length) return
 
         const showMoreItems = (
-          this.content.scrollHeight -
-          (this.content.scrollTop +
-          this.content.clientHeight)
+          this.getContent().scrollHeight -
+          (this.getContent().scrollTop +
+          this.getContent().clientHeight)
         ) < 200
 
         if (showMoreItems) {

@@ -100,6 +100,9 @@ export default baseMixins.extend<options>().extend({
 
       return this.radioGroup.name || `radio-${this.radioGroup._uid}`
     },
+    rippleState (): string | undefined {
+      return Selectable.options.computed.rippleState.call(this)
+    },
     validationState (): string | undefined {
       return (this.radioGroup || {}).validationState || this.computedColor
     },
@@ -144,7 +147,7 @@ export default baseMixins.extend<options>().extend({
           value: this.value,
           ...this.attrs$,
         }),
-        this.genRipple(this.setTextColor(this.validationState)),
+        this.genRipple(this.setTextColor(this.rippleState)),
         this.$createElement(VIcon, this.setTextColor(this.validationState, {
           props: {
             dense: this.radioGroup && this.radioGroup.dense,

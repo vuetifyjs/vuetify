@@ -279,13 +279,15 @@ export default baseMixins.extend({
       return listeners
     },
     genTransition (): VNode {
-      if (!this.transition) return this.genContent()
+      const content = this.genContent()
+
+      if (!this.transition) return content
 
       return this.$createElement('transition', {
         props: {
           name: this.transition,
         },
-      }, [this.genContent()])
+      }, this.showLazyContent(() => [content]))
     },
     genDirectives (): VNodeDirective[] {
       const directives: VNodeDirective[] = [{
@@ -348,7 +350,13 @@ export default baseMixins.extend({
       return this.$createElement(
         'div',
         options,
-        this.showLazyContent(this.getContentSlot())
+        [this.$createElement(VThemeProvider, {
+          props: {
+            root: true,
+            light: this.light,
+            dark: this.dark,
+          },
+        }, this.getContentSlot())]
       )
     },
     getTiles () {
@@ -456,13 +464,7 @@ export default baseMixins.extend({
 
     return h('div', data, [
       !this.activator && this.genActivator(),
-      this.$createElement(VThemeProvider, {
-        props: {
-          root: true,
-          light: this.light,
-          dark: this.dark,
-        },
-      }, [this.genTransition()]),
+      this.genTransition(),
     ])
   },
 })
