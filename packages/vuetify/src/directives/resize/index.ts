@@ -1,7 +1,7 @@
 import { DirectiveBinding, ObjectDirective } from 'vue'
 
 interface ResizeDirectiveBinding extends DirectiveBinding {
-  value: () => void | undefined
+  value: (() => void) | undefined
   options?: boolean | AddEventListenerOptions
 }
 
