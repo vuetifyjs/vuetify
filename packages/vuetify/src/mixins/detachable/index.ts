@@ -54,7 +54,9 @@ export default mixins<options &
       this.hasDetached = false
       this.initDetach()
     },
-    hasContent: 'initDetach',
+    hasContent () {
+      this.$nextTick(this.initDetach)
+    },
   },
 
   beforeMount () {

@@ -122,11 +122,19 @@
         },
         {
           "type": "markup",
-          "value": "js_use_vuetify_loader"
+          "value": "js_use_vuetify"
         },
         {
           "type": "text",
           "lang": "webpackText4"
+        },
+        {
+          "type": "markup",
+          "value": "js_use_vuetify_loader"
+        },
+        {
+          "type": "text",
+          "lang": "webpackText5"
         },
         {
           "type": "markup",
