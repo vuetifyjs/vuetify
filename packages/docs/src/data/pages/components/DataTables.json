@@ -46,6 +46,7 @@
             "simple/footer-props",
             "simple/filterable-columns",
             "intermediate/slots",
+            "intermediate/simple-checkbox",
             "intermediate/expand",
             "intermediate/custom-filter",
             "intermediate/customize-header",
