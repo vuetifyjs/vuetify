@@ -80,7 +80,14 @@
     "name": "Sets the component's name attribute",
     "offIcon": "The icon used when inactive",
     "onIcon": "The icon used when active",
-    "row": "Displays radio buttons in row"
+    "row": "Displays radio buttons in row",
+    "v-simple-checkbox": {
+      "color": "Mixins.Colorable.props.color",
+      "disabled": "Disables simple checkbox.",
+      "light": "Mixins.Themeable.props.light",
+      "ripple": "Mixins.Rippleable.props.ripple",
+      "value": "A boolean value that represents whether the simple checkbox is checked."
+    }
   },
   "events": {
     "update:indeterminate": "The **indeterminate.sync** event.",
