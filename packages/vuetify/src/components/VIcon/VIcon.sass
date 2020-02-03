@@ -3,7 +3,11 @@
 
 // Theme
 +theme(v-icon) using ($material)
-  color: map-deep-get($material, 'icons', 'active')
+  color: map-deep-get($material, 'text-color')
+  opacity: map-deep-get($material, 'icons', 'active')
+
+  &:focus
+    opacity: map-deep-get($material, 'icons', 'focused')
 
   &--disabled
     color: map-deep-get($material, 'icons', 'inactive') !important
@@ -34,10 +38,10 @@
 
   &.v-icon.v-icon--link
     cursor: pointer
+    outline: none
 
   &--disabled
     pointer-events: none
-    opacity: $icon-disabled-opacity
 
   &--is-component
     height: $icon-size
