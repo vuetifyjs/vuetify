@@ -1,4 +1,8 @@
-import { DirectiveBinding, ObjectDirective } from 'vue'
+// Types
+import {
+  DirectiveBinding, 
+  ObjectDirective,
+} from 'vue'
 
 interface ObserveDirectiveBinding extends DirectiveBinding {
   options?: IntersectionObserverInit
