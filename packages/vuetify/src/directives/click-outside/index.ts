@@ -6,7 +6,7 @@ interface ClickOutsideBindingArgs {
 }
 
 interface ClickOutsideDirectiveBinding extends DirectiveBinding {
-  value: (e: Event) => void | undefined
+  value: ((e: Event) => void) | undefined
   args?: ClickOutsideBindingArgs
 }
 
