@@ -1,8 +1,8 @@
-// Directives
-import Intersect from '../'
-
 // Libraries
 import { h } from 'vue'
+
+// Directives
+import Intersect from '../'
 
 describe('resize.ts', () => {
   it('should bind event on mounted', () => {
