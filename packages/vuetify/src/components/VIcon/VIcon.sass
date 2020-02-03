@@ -6,9 +6,6 @@
   color: map-deep-get($material, 'text-color')
   opacity: map-deep-get($material, 'icons', 'active')
 
-  &:focus
-    opacity: map-deep-get($material, 'icons', 'focused')
-
   &--disabled
     color: map-deep-get($material, 'icons', 'inactive') !important
 
@@ -22,10 +19,28 @@
   justify-content: center
   letter-spacing: normal
   line-height: 1
+  position: relative
   text-indent: 0
   transition: $primary-transition, visibility 0s
   vertical-align: middle
   user-select: none
+
+  &::after
+    background-color: currentColor
+    border-radius: 50%
+    content: ''
+    display: inline-block
+    height: 100%
+    opacity: 0
+    pointer-events: none
+    position: absolute
+    transform: scale(1.3)
+    transition-property: opacity
+    transition: inherit
+    width: 100%
+
+  &:focus::after
+    opacity: 0.12
 
   &--dense
     font-size: $icon-size-dense
