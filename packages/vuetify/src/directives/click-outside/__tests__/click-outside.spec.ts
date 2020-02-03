@@ -24,7 +24,7 @@ function bootstrap (args?: object) {
   }
 }
 
-describe('click-outside.js', () => {
+describe('click-outside.ts', () => {
   it('should register and unregister handler', () => {
     const { registeredHandler, el } = bootstrap()
     expect(window.document.body.addEventListener).toHaveBeenCalledWith('click', registeredHandler, true)

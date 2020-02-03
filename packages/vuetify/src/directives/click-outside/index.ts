@@ -1,25 +1,25 @@
-import { VNodeDirective } from 'vue/types/vnode'
+import { DirectiveBinding } from 'vue'
 
 interface ClickOutsideBindingArgs {
   closeConditional?: (e: Event) => boolean
   include?: () => HTMLElement[]
 }
 
-interface ClickOutsideDirective extends VNodeDirective {
-  value?: (e: Event) => void
+interface ClickOutsideDirectiveBinding extends DirectiveBinding {
+  value: (e: Event) => void | undefined
   args?: ClickOutsideBindingArgs
 }
 
-function closeConditional () {
+function defaultCloseConditional () {
   return false
 }
 
-function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirective): void {
+function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirectiveBinding): void {
   // Args may not always be supplied
   binding.args = binding.args || {}
 
   // If no closeConditional was supplied assign a default
-  const isActive = (binding.args.closeConditional || closeConditional)
+  const isActive = binding.args.closeConditional || defaultCloseConditional
 
   // The include element callbacks below can be expensive
   // so we should avoid calling them when we're not active.
@@ -58,7 +58,7 @@ export const ClickOutside = {
   // sure that the root element is
   // available, iOS does not support
   // clicks on body
-  inserted (el: HTMLElement, binding: ClickOutsideDirective) {
+  inserted (el: HTMLElement, binding: ClickOutsideDirectiveBinding) {
     const onClick = (e: Event) => directive(e as PointerEvent, el, binding)
     // iOS does not recognize click events on document
     // or body, this is the entire purpose of the v-app
@@ -74,7 +74,7 @@ export const ClickOutside = {
 
     const app = document.querySelector('[data-app]') ||
       document.body // This is only for unit tests
-    app && app.removeEventListener('click', el._clickOutside, true)
+    app.removeEventListener('click', el._clickOutside, true)
     delete el._clickOutside
   },
 }
