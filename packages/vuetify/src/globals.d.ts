@@ -54,9 +54,7 @@ declare global {
       options: boolean | AddEventListenerOptions
       target: EventTarget
     }
-    _touchHandlers?: {
-      [_uid: number]: TouchStoredHandlers
-    }
+    _touchHandlers?: TouchStoredHandlers
   }
 
   interface WheelEvent {

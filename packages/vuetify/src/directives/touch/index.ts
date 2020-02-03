@@ -1,5 +1,10 @@
-import { VNodeDirective, VNode } from 'vue/types/vnode'
+// Libraries
+import { DirectiveBinding, ObjectDirective } from 'vue'
+
+// Utilities
 import { keys } from '../../util/helpers'
+
+// Types
 import { TouchHandlers, TouchValue, TouchWrapper } from 'types'
 
 export interface TouchStoredHandlers {
@@ -8,8 +13,8 @@ export interface TouchStoredHandlers {
   touchmove: (e: TouchEvent) => void
 }
 
-interface TouchVNodeDirective extends VNodeDirective {
-  value?: TouchValue
+interface TouchDirectiveBinding extends DirectiveBinding {
+  value: TouchValue | undefined
 }
 
 const handleGesture = (wrapper: TouchWrapper) => {
@@ -84,7 +89,7 @@ function createHandlers (value: TouchHandlers): TouchStoredHandlers {
   }
 }
 
-function inserted (el: HTMLElement, binding: TouchVNodeDirective, vnode: VNode) {
+function mounted (el: HTMLElement, binding: TouchDirectiveBinding) {
   const value = binding.value!
   const target = value.parent ? el.parentElement : el
   const options = value.options || { passive: true }
@@ -93,28 +98,27 @@ function inserted (el: HTMLElement, binding: TouchVNodeDirective, vnode: VNode) 
   if (!target) return
 
   const handlers = createHandlers(binding.value!)
-  target._touchHandlers = Object(target._touchHandlers)
-  target._touchHandlers![vnode.context!._uid] = handlers
+  target._touchHandlers = handlers
 
   keys(handlers).forEach(eventName => {
     target.addEventListener(eventName, handlers[eventName] as EventListener, options)
   })
 }
 
-function unbind (el: HTMLElement, binding: TouchVNodeDirective, vnode: VNode) {
+function unmounted (el: HTMLElement, binding: TouchDirectiveBinding) {
   const target = binding.value!.parent ? el.parentElement : el
   if (!target || !target._touchHandlers) return
 
-  const handlers = target._touchHandlers[vnode.context!._uid]
+  const handlers = target._touchHandlers
   keys(handlers).forEach(eventName => {
     target.removeEventListener(eventName, handlers[eventName])
   })
-  delete target._touchHandlers[vnode.context!._uid]
+  delete target._touchHandlers
 }
 
-export const Touch = {
-  inserted,
-  unbind,
+export const Touch: ObjectDirective<HTMLElement> = {
+  mounted,
+  unmounted,
 }
 
 export default Touch
