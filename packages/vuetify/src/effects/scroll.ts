@@ -80,7 +80,8 @@ export function useScroll (
 
   watch(isScrollActive, () => (savedScroll.value = 0))
 
-  watch(() => [props.scrollTarget], () => {
+  // TODO: requires vue@3.0.0-alpha.5
+  watch(() => props.scrollTarget, () => {
     const newTarget = props.scrollTarget ? document.querySelector(props.scrollTarget) : window
 
     if (!newTarget) {
@@ -93,7 +94,7 @@ export function useScroll (
     target.value && target.value.removeEventListener('scroll', onScroll, passiveEventOptions())
     target.value = newTarget
     target.value.addEventListener('scroll', onScroll, passiveEventOptions())
-})
+  })
 
   thresholdMetCallback && watch(() => (
     Math.abs(currentScroll.value - savedScroll.value) > computedScrollThreshold.value
