@@ -149,15 +149,11 @@
             },
             {
               "type": "text",
-              "lang": "webpackText5"
+              "lang": "webpackText6"
             },
             {
               "type": "markup",
               "value": "html_font_cdn"
-            },
-            {
-              "type": "text",
-              "lang": "webpackText6"
             }
           ]
         }

@@ -6,12 +6,19 @@
     >
       <v-combobox
         v-model="model"
-        label="Add some tags"
         :items="items"
         :search-input.sync="search"
-        v-bind="attrs"
+        label="Add some tags"
+        hint="Comboboxes can receive custom values not present in items"
+        v-bind="{
+          ...attrs,
+          [attrs.type]: true,
+        }"
       >
-        <template v-if="noData" v-slot:no-data>
+        <template
+          v-if="attrs.noData"
+          v-slot:no-data
+        >
           <v-list-item>
             <v-list-item-content>
               <v-list-item-title>
@@ -30,10 +37,43 @@
 
   export default {
     mixins: [Usage],
+
     data: () => ({
       items: ['Gaming', 'Programming', 'Vue', 'Vuetify'],
-      model: ['Vuetify'],
+      model: 'Vuetify',
       search: null,
     }),
+
+    watch: {
+      attrs: {
+        deep: true,
+        handler (val, oldVal) {
+          if (val['small-chips'] !== oldVal['small-chips']) {
+            this.resetSearch()
+          }
+
+          if (val.multiple !== oldVal.multiple) {
+            this.resetModel(val)
+          }
+        },
+      },
+    },
+
+    methods: {
+      resetModel () {
+        this.model = this.attrs.multiple
+          ? this.model ? this.model.split(', ') : []
+          : this.model ? this.model.join(', ') : null
+      },
+      resetSearch () {
+        this.search = (!this.attrs['small-chips'] && !this.attrs.multiple)
+          ? 'Vuetify'
+          : (this.attrs['small-chips'] || this.attrs.multiple) ? null : 'Vuetify'
+      },
+      resetState () {
+        this.resetModel()
+        this.resetSearch()
+      },
+    },
   }
 </script>

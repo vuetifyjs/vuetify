@@ -2,6 +2,11 @@
   "heading": "# App Bars",
   "headingText": "The `v-app-bar` component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation. The app-bar component works great in conjunction with a [v-navigation-drawer](/components/navigation-drawers) for providing site navigation in your application.",
   "usageText": "The `v-app-bar` component is used for application-wide actions and information.",
+  "functional": {
+    "desc": [
+      "`v-app-bar-nav-icon`: A styled icon button component created specifically for use with [v-toolbar](/components/toolbars) and `v-app-bar`. Typically seen on the left side of a toolbar as a hamburger menu, it is often used to control the state of a navigation drawer. The `default` slot can be used to customize the icon and function of this component."
+    ]
+  },
   "examples": {
     "dense": {
       "heading": "### Dense",
@@ -22,6 +27,10 @@
     "hide": {
       "heading": "### Hiding on scroll",
       "desc": "`v-app-bar` can be hidden on scroll. Use the `hide-on-scroll` property for this."
+    },
+    "app-bar-nav": {
+      "heading": "### Toggle Navigation Drawers",
+      "desc": "Using the functional component `v-app-bar-nav-icon` you can toggle the state of other components such as a [v-navigation-drawer](/components/navigation-drawer)."
     },
     "scroll-threshold": {
       "heading": "### Scroll threshold",

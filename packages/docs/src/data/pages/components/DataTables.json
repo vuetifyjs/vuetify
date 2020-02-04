@@ -24,7 +24,8 @@
           "value": [
             "v-data-table",
             "v-data-footer",
-            "v-edit-dialog"
+            "v-edit-dialog",
+            "v-simple-checkbox"
           ]
         }
       ]
@@ -45,6 +46,7 @@
             "simple/footer-props",
             "simple/filterable-columns",
             "intermediate/slots",
+            "intermediate/simple-checkbox",
             "intermediate/expand",
             "intermediate/custom-filter",
             "intermediate/customize-header",
