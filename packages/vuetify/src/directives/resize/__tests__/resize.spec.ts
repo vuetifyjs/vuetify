@@ -17,6 +17,8 @@ describe('resize.ts', () => {
     expect(window.addEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
     Resize.unmounted(el as HTMLElement, {} as any, vnode, vnode)
     expect(window.removeEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
+    ;(window.addEventListener as jest.Mock).mockClear()
+    ;(window.removeEventListener as jest.Mock).mockClear()
   })
 
   it('should not run the callback in quiet mode', () => {
@@ -31,5 +33,7 @@ describe('resize.ts', () => {
     expect(window.addEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
     Resize.unmounted(el as HTMLElement, {} as any, vnode, vnode)
     expect(window.removeEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
+    ;(window.addEventListener as jest.Mock).mockClear()
+    ;(window.removeEventListener as jest.Mock).mockClear()
   })
 })
