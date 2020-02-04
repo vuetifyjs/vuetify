@@ -2,12 +2,13 @@ import { DirectiveBinding, ObjectDirective } from 'vue'
 
 interface ResizeDirectiveBinding extends DirectiveBinding {
   value: (() => void) | undefined
-  options?: boolean | AddEventListenerOptions
 }
 
 function mounted (el: HTMLElement, binding: ResizeDirectiveBinding) {
   const callback = binding.value!
-  const options = binding.options || { passive: true }
+  const options = {
+    passive: !((binding.modifiers && binding.modifiers.active) || false)
+  } as AddEventListenerOptions
 
   window.addEventListener('resize', callback, options)
   el._onResize = {
