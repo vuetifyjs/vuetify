@@ -40,6 +40,7 @@ describe('resize.ts', () => {
 
     Resize.unmounted(el as HTMLElement, {} as any, vnode, vnode)
     expect(window.removeEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
+
     ;(window.addEventListener as jest.Mock).mockClear()
     ;(window.removeEventListener as jest.Mock).mockClear()
   })
