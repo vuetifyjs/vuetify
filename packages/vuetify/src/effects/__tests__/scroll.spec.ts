@@ -7,7 +7,11 @@ import {
 } from '../scroll'
 
 // Utils
-import { scrollWindow, scrollElement } from '../../../test'
+import {
+  scrollElement,
+  scrollWindow,
+  wait,
+} from '../../../test'
 
 describe('scroll.ts', () => {
   describe('scrollProps', () => {
@@ -45,7 +49,7 @@ describe('scroll.ts', () => {
     it('should set isScrollingUp', async () => {
       const { isScrollingUp } = useScroll({})
 
-      await new Promise(resolve => setTimeout(resolve))
+      await wait()
 
       await scrollWindow(1000)
       expect(isScrollingUp.value).toBe(false)
@@ -59,11 +63,11 @@ describe('scroll.ts', () => {
 
       useScroll({ scrollTarget: 'body', scrollThreshold: 300 }, { thresholdMetCallback })
 
-      await new Promise(resolve => setTimeout(resolve))
+      await wait()
       expect(thresholdMetCallback).not.toHaveBeenCalled()
 
       scrollElement(document.body, 1000)
-      await new Promise(resolve => setTimeout(resolve))
+      await wait()
       expect(thresholdMetCallback).toHaveBeenCalled()
     })
 
@@ -75,11 +79,11 @@ describe('scroll.ts', () => {
         canScroll: ref(false),
       })
 
-      await new Promise(resolve => setTimeout(resolve))
+      await wait()
       expect(thresholdMetCallback).not.toHaveBeenCalled()
 
       scrollElement(document.body, 1000)
-      await new Promise(resolve => setTimeout(resolve))
+      await wait()
       expect(thresholdMetCallback).not.toHaveBeenCalled()
     })
 
@@ -91,51 +95,34 @@ describe('scroll.ts', () => {
         canScroll: ref(true),
       })
 
-      await new Promise(resolve => setTimeout(resolve))
+      await wait()
       expect(thresholdMetCallback).not.toHaveBeenCalled()
 
       scrollElement(document.body, 1000)
-      await new Promise(resolve => setTimeout(resolve))
+      await wait()
       expect(thresholdMetCallback).toHaveBeenCalled()
     })
 
-    // it('should accept a custom scrollThreshold', async () => {
-    //   const thresholdMet = jest.fn()
-    //   const wrapper = mountFunction({
-    //     methods: {
-    //       thresholdMet,
-    //     },
-    //     propsData: {
-    //       scrollThreshold: 1000,
-    //     },
-    //   })
+    it('should reset savedScroll when isActive state changes', async () => {
+      const { isScrollActive, isScrollingUp, savedScroll } = useScroll({})
 
-    //   await scrollWindow(900)
-    //   await wrapper.vm.$nextTick()
+      await wait()
 
-    //   expect(thresholdMet).not.toHaveBeenCalled()
+      await scrollWindow(1000)
+      expect(savedScroll.value).toEqual(0)
 
-    //   await scrollWindow(1001)
-    //   await wrapper.vm.$nextTick()
-    //   expect(thresholdMet).toHaveBeenCalled()
-    // })
+      await scrollWindow(900)
+      expect(savedScroll.value).toEqual(900)
 
-    // it('should reset savedScroll when isActive state changes', async () => {
-    //   const wrapper = mountFunction({
-    //     data: () => ({
-    //       savedScroll: 100,
-    //     }),
-    //   })
-
-    //   wrapper.setData({ isActive: true })
-
-    //   expect(wrapper.vm.savedScroll).toBe(0)
-    // })
+      isScrollActive.value = true
+      await wait()
+      expect(savedScroll.value).toEqual(0)
+    })
 
     it('should warn if target isn\'t present', async () => {
       useScroll({ scrollTarget: '#test' })
 
-      await new Promise(resolve => setTimeout(resolve))
+      await wait()
 
       expect('Unable to locate element with identifier #test').toHaveBeenTipped()
     })

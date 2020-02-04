@@ -1,10 +1,10 @@
 import {
-  Ref,
-  getCurrentInstance,
   computed,
+  getCurrentInstance,
+  onBeforeUnmount,
+  Ref,
   ref,
   watch,
-  onBeforeUnmount,
 } from 'vue'
 import { consoleWarn } from '../util/console'
 import { passiveEventOptions } from '../util/events'
@@ -13,6 +13,12 @@ import { passiveEventOptions } from '../util/events'
 export interface ScrollProps {
   scrollTarget?: string
   scrollThreshold?: string | number
+}
+
+export interface ThresholdMetCallbackData {
+  isScrollingUp: boolean
+  currentThreshold: number
+  savedScroll: Ref<number>
 }
 
 // Props
@@ -32,11 +38,7 @@ export function scrollProps (
 }
 
 interface ScrollArguments {
-  thresholdMetCallback?: (data: {
-    isScrollingUp: boolean
-    currentThreshold: number
-    savedScroll: Ref<number>
-  }) => void
+  thresholdMetCallback?: (data: ThresholdMetCallbackData) => void
   scrollThreshold?: Readonly<Ref<number>>
   canScroll?: Readonly<Ref<boolean>>
 }
@@ -78,19 +80,20 @@ export function useScroll (
 
   watch(isScrollActive, () => (savedScroll.value = 0))
 
-  // source returns array because https://github.com/vuejs/vue-next/issues/683
   watch(() => [props.scrollTarget], () => {
-    target.value = props.scrollTarget ? document.querySelector(props.scrollTarget) : window
+    const newTarget = props.scrollTarget ? document.querySelector(props.scrollTarget) : window
 
-    if (!target.value) {
+    if (!newTarget) {
       consoleWarn(`Unable to locate element with identifier ${props.scrollTarget}`, getCurrentInstance())
+      return
     }
-  })
 
-  watch(target, (newTarget, prevTarget) => {
-    prevTarget && prevTarget.removeEventListener('scroll', onScroll, passiveEventOptions())
-    newTarget && newTarget.addEventListener('scroll', onScroll, passiveEventOptions())
-  })
+    if (newTarget === target.value) return
+
+    target.value && target.value.removeEventListener('scroll', onScroll, passiveEventOptions())
+    target.value = newTarget
+    target.value.addEventListener('scroll', onScroll, passiveEventOptions())
+})
 
   thresholdMetCallback && watch(() => (
     Math.abs(currentScroll.value - savedScroll.value) > computedScrollThreshold.value
@@ -106,6 +109,8 @@ export function useScroll (
   // there's no need to expose onScroll
   canScroll && watch(canScroll, onScroll)
 
+  // TODO: get rid of getCurrentInstance, it is
+  // required only for tests to avoid warning
   getCurrentInstance() && onBeforeUnmount(() => {
     target.value && target.value.removeEventListener('scroll', onScroll, passiveEventOptions())
   })
