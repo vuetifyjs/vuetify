@@ -6,7 +6,6 @@ import {
   watch,
   onBeforeUnmount,
 } from 'vue'
-import { IN_BROWSER } from '../util/globals'
 import { consoleWarn } from '../util/console'
 import { passiveEventOptions } from '../util/events'
 
@@ -79,6 +78,7 @@ export function useScroll (
 
   watch(isScrollActive, () => (savedScroll.value = 0))
 
+  // source returns array because https://github.com/vuejs/vue-next/issues/683
   watch(() => [props.scrollTarget], () => {
     target.value = props.scrollTarget ? document.querySelector(props.scrollTarget) : window
 
