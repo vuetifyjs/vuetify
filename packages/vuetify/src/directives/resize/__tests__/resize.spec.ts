@@ -29,6 +29,7 @@ describe('resize.ts', () => {
 
     jest.spyOn(window, 'addEventListener')
     jest.spyOn(window, 'removeEventListener')
+
     const vnode = h('div')
     const el = {}
 
