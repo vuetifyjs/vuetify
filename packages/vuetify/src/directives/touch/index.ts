@@ -4,11 +4,15 @@ import {
   ObjectDirective,
 } from 'vue'
 
+// Types
+import {
+  TouchHandlers,
+  TouchValue,
+  TouchWrapper
+} from 'types'
+
 // Utilities
 import { keys } from '../../util/helpers'
-
-// Types
-import { TouchHandlers, TouchValue, TouchWrapper } from 'types'
 
 export interface TouchStoredHandlers {
   touchstart: (e: TouchEvent) => void
@@ -117,7 +121,7 @@ function unmounted (el: HTMLElement, binding: TouchDirectiveBinding) {
   keys(handlers).forEach(eventName => {
     target.removeEventListener(eventName, handlers[eventName])
   })
-  
+
   delete target._touch
 }
 

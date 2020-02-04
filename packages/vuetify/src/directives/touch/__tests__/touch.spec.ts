@@ -1,3 +1,5 @@
+// Directives
+import Touch from '../'
 
 // Libraries
 import {
@@ -8,14 +10,11 @@ import {
   DirectiveBinding
 } from 'vue'
 
-// Directives
-import Touch from '../'
+// Types
+import { TouchValue } from '../../../../types'
 
 // Utilities
 import { touch } from '../../../../test'
-
-// Types
-import { TouchValue } from '../../../../types'
 
 describe('touch.ts', () => {
   const el = document.createElement('div')
