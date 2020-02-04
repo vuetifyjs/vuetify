@@ -20,7 +20,7 @@ describe('scroll.ts', () => {
 
   it('shoud bind event on inserted (selector)', () => {
     const value = () => {}
-    const targetElement = { addEventListener: jest.fn(), removeEventListener: jest.fn() }
+    const targetElement = { addEventListener: jest.fn(), removeEventListener: jest.fn() } as any as Element
     const el = {}
 
     jest.spyOn(window.document, 'querySelector').mockImplementation(selector => selector === '.selector' ? targetElement : undefined)

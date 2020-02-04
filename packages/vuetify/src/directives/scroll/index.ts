@@ -5,7 +5,7 @@ import {
 import { passiveEventOptions } from '../../util/events'
 
 interface ScrollDirectiveBinding extends DirectiveBinding {
-  arg: string
+  arg?: string
   value: EventListenerOrEventListenerObject
 }
 
@@ -28,9 +28,9 @@ function unmounted (el: HTMLElement) {
   delete el._onScroll
 }
 
-export const Scroll = {
+export const Scroll: ObjectDirective<HTMLElement> = {
   mounted,
   unmounted,
-} as ObjectDirective
+}
 
 export default Scroll
