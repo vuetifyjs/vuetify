@@ -10,6 +10,7 @@ function mounted (el: HTMLElement, binding: ResizeDirectiveBinding) {
     passive: !((binding.modifiers && binding.modifiers.active) || false)
   } as AddEventListenerOptions
 
+
   window.addEventListener('resize', callback, options)
   el._onResize = {
     callback,
