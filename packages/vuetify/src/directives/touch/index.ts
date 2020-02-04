@@ -110,7 +110,7 @@ function unmounted (el: HTMLElement, binding: TouchDirectiveBinding) {
 
   if (!target || !target._touchHandlers) return
 
-  const handlers = target._touchHandlers
+  const handlers = target._touch
   keys(handlers).forEach(eventName => {
     target.removeEventListener(eventName, handlers[eventName])
   })
