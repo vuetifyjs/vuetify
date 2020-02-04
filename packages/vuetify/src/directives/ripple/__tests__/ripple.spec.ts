@@ -1,5 +1,13 @@
 // Libraries
-import { h, withDirectives, defineComponent, ref, createApp, nextTick, Ref } from 'vue'
+import { 
+  createApp, 
+  defineComponent, 
+  h, 
+  nextTick, 
+  Ref,
+  ref, 
+  withDirectives, 
+} from 'vue'
 
 // Directives
 import Ripple from '../'
