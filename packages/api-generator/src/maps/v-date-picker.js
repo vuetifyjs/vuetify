@@ -1,8 +1,5 @@
 module.exports = {
   'v-date-picker': {
-    slots: [{
-      name: 'default',
-    }],
     events: [
       {
         name: 'input',
