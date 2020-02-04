@@ -17,6 +17,7 @@ describe('resize.ts', () => {
     Resize.mounted(el as HTMLElement, { value: callback } as any, vnode, null)
     expect(callback).toHaveBeenCalled()
     expect(window.addEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
+
     Resize.unmounted(el as HTMLElement, {} as any, vnode, vnode)
     expect(window.removeEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
     ;(window.addEventListener as jest.Mock).mockClear()
