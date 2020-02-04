@@ -1,5 +1,8 @@
 // Libraries
-import { DirectiveBinding, ObjectDirective } from 'vue'
+import {
+  DirectiveBinding,
+  ObjectDirective,
+} from 'vue'
 
 // Utilities
 import { keys } from '../../util/helpers'
