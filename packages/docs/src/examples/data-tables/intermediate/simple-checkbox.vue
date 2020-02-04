@@ -5,8 +5,8 @@
       :items="desserts"
       class="elevation-1"
     >
-      <template v-slot:item.glutenFree="{ item }">
-        <v-checkbox v-model="item.glutenFree" disabled></v-checkbox>
+      <template v-slot:item.glutenfree="{ item }">
+        <v-checkbox v-model="item.glutenfree" disabled></v-checkbox>
       </template>
     </v-data-table>
   </div>
@@ -24,7 +24,7 @@
             carbs: 24,
             protein: 4.0,
             iron: '1%',
-            glutenFree: true,
+            glutenfree: true,
           },
           {
             name: 'Ice cream sandwich',
@@ -33,7 +33,7 @@
             carbs: 37,
             protein: 4.3,
             iron: '1%',
-            glutenFree: false,
+            glutenfree: false,
           },
           {
             name: 'Eclair',
@@ -42,7 +42,7 @@
             carbs: 23,
             protein: 6.0,
             iron: '7%',
-            glutenFree: false,
+            glutenfree: false,
           },
           {
             name: 'Jelly bean',
@@ -51,7 +51,7 @@
             carbs: 94,
             protein: 0.0,
             iron: '0%',
-            glutenFree: true,
+            glutenfree: true,
           },
           {
             name: 'Lollipop',
@@ -60,7 +60,7 @@
             carbs: 98,
             protein: 0,
             iron: '2%',
-            glutenFree: true,
+            glutenfree: true,
           },
           {
             name: 'KitKat',
@@ -69,7 +69,7 @@
             carbs: 65,
             protein: 7,
             iron: '6%',
-            glutenFree: false,
+            glutenfree: false,
           },
         ],
         headers: [
@@ -84,7 +84,7 @@
           { text: 'Carbs (g)', value: 'carbs' },
           { text: 'Protein (g)', value: 'protein' },
           { text: 'Iron (%)', value: 'iron' },
-          { text: 'Gluten-Free', value: 'glutenFree' },
+          { text: 'Gluten-Free', value: 'glutenfree' },
         ],
       }
     },
