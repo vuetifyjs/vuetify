@@ -51,7 +51,6 @@ declare global {
     }
     _onScroll?: {
       callback: EventListenerOrEventListenerObject
-      options: boolean | AddEventListenerOptions
       target: EventTarget
     }
     _touchHandlers?: {

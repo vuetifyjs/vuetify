@@ -1,39 +1,36 @@
-import { VNodeDirective } from 'vue/types/vnode'
-import { DirectiveOptions } from 'vue'
+import {
+  DirectiveBinding,
+  ObjectDirective,
+} from 'vue'
+import { passiveEventOptions } from '../../util/events'
 
-interface ScrollVNodeDirective extends VNodeDirective {
+interface ScrollDirectiveBinding extends DirectiveBinding {
   arg: string
   value: EventListenerOrEventListenerObject
-  options?: boolean | AddEventListenerOptions
 }
 
-function inserted (el: HTMLElement, binding: ScrollVNodeDirective) {
+function mounted (el: HTMLElement, binding: ScrollDirectiveBinding) {
   const callback = binding.value
-  const options = binding.options || { passive: true }
   const target = binding.arg ? document.querySelector(binding.arg) : window
+
   if (!target) return
 
-  target.addEventListener('scroll', callback, options)
-
-  el._onScroll = {
-    callback,
-    options,
-    target,
-  }
+  target.addEventListener('scroll', callback, passiveEventOptions())
+  el._onScroll = { callback, target }
 }
 
-function unbind (el: HTMLElement) {
+function unmounted (el: HTMLElement) {
   if (!el._onScroll) return
 
-  const { callback, options, target } = el._onScroll
+  const { callback, target } = el._onScroll
 
-  target.removeEventListener('scroll', callback, options)
+  target.removeEventListener('scroll', callback, passiveEventOptions())
   delete el._onScroll
 }
 
 export const Scroll = {
-  inserted,
-  unbind,
-} as DirectiveOptions
+  mounted,
+  unmounted,
+} as ObjectDirective
 
 export default Scroll
