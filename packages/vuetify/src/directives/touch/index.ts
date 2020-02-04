@@ -107,6 +107,7 @@ function mounted (el: HTMLElement, binding: TouchDirectiveBinding) {
 
 function unmounted (el: HTMLElement, binding: TouchDirectiveBinding) {
   const target = binding.value!.parent ? el.parentElement : el
+
   if (!target || !target._touchHandlers) return
 
   const handlers = target._touchHandlers
