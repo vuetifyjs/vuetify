@@ -82,7 +82,7 @@ export default Themeable.extend({
       // https://github.com/vuetifyjs/vuetify/issues/7410
       if (this.$vuetify.breakpoint.width === 0) return false
 
-      return this.$vuetify.breakpoint.width < parseInt(this.mobileBreakPoint, 10)
+      return this.$vuetify.breakpoint.width < parseInt(this.mobileBreakpoint, 10)
     },
   },
 
