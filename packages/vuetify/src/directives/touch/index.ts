@@ -1,4 +1,4 @@
-// Libraries
+// Setup
 import {
   DirectiveBinding,
   ObjectDirective,
@@ -105,6 +105,7 @@ function mounted (el: HTMLElement, binding: TouchDirectiveBinding) {
   if (!target) return
 
   const handlers = createHandlers(binding.value!)
+
   target._touch = handlers
 
   keys(handlers).forEach(eventName => {
@@ -118,6 +119,7 @@ function unmounted (el: HTMLElement, binding: TouchDirectiveBinding) {
   if (!target || !target._touch) return
 
   const handlers = target._touch
+
   keys(handlers).forEach(eventName => {
     target.removeEventListener(eventName, handlers[eventName])
   })

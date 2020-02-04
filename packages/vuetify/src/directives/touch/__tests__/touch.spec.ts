@@ -23,11 +23,13 @@ describe('touch.ts', () => {
     const app = createApp()
 
     app.mount(Test, el)
+
     return el.querySelector('.test')
   }
 
   it('should call directive handlers', () => {
     const down = jest.fn()
+
     touch(mountFunction({ down })).start(0, 0).end(0, 20)
     expect(down).toHaveBeenCalled()
 

@@ -1,4 +1,6 @@
+// Setup
 import { ComponentOptions } from 'vue'
+// Utilities
 import toHaveBeenWarnedInit from './util/to-have-been-warned'
 
 export function functionalContext (context: ComponentOptions<Vue> = {}, children = []) {
