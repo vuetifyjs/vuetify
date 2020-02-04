@@ -28,9 +28,17 @@ function unmounted (el: HTMLElement) {
   delete el._onScroll
 }
 
+function updated (el: HTMLElement, binding: ScrollDirectiveBinding) {
+  if (binding.value === binding.oldValue) return
+
+  unmounted(el)
+  mounted(el, binding)
+}
+
 export const Scroll: ObjectDirective<HTMLElement> = {
   mounted,
   unmounted,
+  updated,
 }
 
 export default Scroll

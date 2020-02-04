@@ -3,6 +3,7 @@ import {
   defineComponent,
   h,
   withDirectives,
+  reactive,
 } from 'vue'
 
 // Directives
@@ -38,14 +39,38 @@ describe('scroll.ts', () => {
 
   it('shoud bind event on inserted (window)', () => {
     const value = () => {}
-    jest.spyOn(window, 'addEventListener')
-    jest.spyOn(window, 'removeEventListener')
+    const addListener = jest.spyOn(window, 'addEventListener')
+    const removeListener = jest.spyOn(window, 'removeEventListener')
     const el = {}
 
     Scroll.mounted(el as HTMLElement, { value } as any, null, null)
-    expect(window.addEventListener).toHaveBeenCalledWith('scroll', value, { passive: true })
+    expect(addListener).toHaveBeenCalledWith('scroll', value, { passive: true })
     Scroll.unmounted(el as HTMLElement, null, null, null)
-    expect(window.removeEventListener).toHaveBeenCalledWith('scroll', value, { passive: true })
+    expect(removeListener).toHaveBeenCalledWith('scroll', value, { passive: true })
+
+    addListener.mockClear()
+    removeListener.mockClear()
+  })
+
+  it('shoud rebind event on updated', () => {
+    const value1 = () => {}
+    const value2 = () => {}
+    const addListener = jest.spyOn(window, 'addEventListener')
+    const removeListener = jest.spyOn(window, 'removeEventListener')
+    const el = {}
+
+    Scroll.mounted(el as HTMLElement, { value: value1 } as any, null, null)
+    expect(addListener).toHaveBeenCalledTimes(1)
+    expect(addListener).toHaveBeenCalledWith('scroll', value1, { passive: true })
+
+    Scroll.updated(el as HTMLElement, { value: value2, oldValue: value1 } as any, null, null)
+    expect(removeListener).toHaveBeenCalledTimes(1)
+    expect(removeListener).toHaveBeenCalledWith('scroll', value1, { passive: true })
+    expect(addListener).toHaveBeenCalledTimes(2)
+    expect(addListener).toHaveBeenCalledWith('scroll', value2, { passive: true })
+
+    addListener.mockClear()
+    removeListener.mockClear()
   })
 
   it('should not fail when unbinding element without _onScroll', () => {
