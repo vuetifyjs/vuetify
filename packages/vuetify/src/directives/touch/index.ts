@@ -98,7 +98,7 @@ function mounted (el: HTMLElement, binding: TouchDirectiveBinding) {
   if (!target) return
 
   const handlers = createHandlers(binding.value!)
-  target._touchHandlers = handlers
+  target._touch = handlers
 
   keys(handlers).forEach(eventName => {
     target.addEventListener(eventName, handlers[eventName] as EventListener, options)
