@@ -198,26 +198,35 @@ export default mixins<options &
       const coords = { x: clientX - left, y: top - clientY }
       const handAngle = Math.round(this.angle(center, coords) - this.rotate + 360) % 360
       const insideClick = this.double && this.euclidean(center, coords) < (innerWidth + innerWidth * this.innerRadiusScale) / 4
+      const checksCount = Math.ceil(15 / this.degreesPerUnit)
+      let value
+
+      for (let i = 0; i < checksCount; i++) {
+        value = this.angleToValue(handAngle + i * this.degreesPerUnit, insideClick)
+        if (this.isAllowed(value)) return this.setMouseDownValue(value)
+
+        value = this.angleToValue(handAngle - i * this.degreesPerUnit, insideClick)
+        if (this.isAllowed(value)) return this.setMouseDownValue(value)
+      }
+    },
+    angleToValue (angle: number, insideClick: boolean): number {
       const value = (
-        Math.round(handAngle / this.degreesPerUnit) +
+        Math.round(angle / this.degreesPerUnit) +
         (insideClick ? this.roundCount : 0)
       ) % this.count + this.min
 
       // Necessary to fix edge case when selecting left part of the value(s) at 12 o'clock
-      let newValue: number
-      if (handAngle >= (360 - this.degreesPerUnit / 2)) {
-        newValue = insideClick ? this.max - this.roundCount + 1 : this.min
-      } else {
-        newValue = value
+      if (angle < (360 - this.degreesPerUnit / 2)) return value
+
+      return insideClick ? this.max - this.roundCount + 1 : this.min
+    },
+    setMouseDownValue (value: number) {
+      if (this.valueOnMouseDown === null) {
+        this.valueOnMouseDown = value
       }
 
-      if (this.isAllowed(value)) {
-        if (this.valueOnMouseDown === null) {
-          this.valueOnMouseDown = newValue
-        }
-        this.valueOnMouseUp = newValue
-        this.update(newValue)
-      }
+      this.valueOnMouseUp = value
+      this.update(value)
     },
     update (value: number) {
       if (this.inputValue !== value) {
