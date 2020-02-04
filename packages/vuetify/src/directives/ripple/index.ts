@@ -1,7 +1,11 @@
 // Styles
 import './VRipple.sass'
 
-import { ObjectDirective, DirectiveBinding } from 'vue'
+// Setup
+import {
+  DirectiveBinding,
+  ObjectDirective,
+} from 'vue'
 
 function transform (el: HTMLElement, value: string) {
   el.style['transform'] = value
@@ -164,6 +168,7 @@ function rippleHide (e: Event) {
 
 function updateRipple (el: HTMLElement, binding: DirectiveBinding, wasEnabled: boolean) {
   const enabled = isRippleEnabled(binding.value)
+
   if (!enabled) {
     ripples.hide(el)
   }

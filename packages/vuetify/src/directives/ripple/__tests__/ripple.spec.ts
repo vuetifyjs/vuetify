@@ -17,6 +17,7 @@ describe('ripple.ts', () => {
     const Test = defineComponent(() => () => withDirectives(h('div', { class: 'a' }), [ [ Ripple, true ] ]))
     const app = createApp()
     const el = document.createElement('div')
+
     app.mount(Test, el)
 
     expect(el.querySelector('.a')['_ripple'].enabled).toBe(true)
@@ -27,6 +28,7 @@ describe('ripple.ts', () => {
     const Test = defineComponent((props: { ripple: Ref<boolean> }) => () => withDirectives(h('div', { class: 'a' }), [ [ Ripple, props.ripple.value ] ]))
     const app = createApp()
     const el = document.createElement('div')
+
     app.mount(Test, el, { ripple })
 
     expect(el.querySelector('.a')['_ripple'].enabled).toBe(true)
