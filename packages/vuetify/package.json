@@ -125,8 +125,5 @@
     "tags": "dist/json/tags.json",
     "attributes": "dist/json/attributes.json"
   },
-  "web-types": "dist/json/web-types.json",
-  "dependencies": {
-    "typescript": "^3.8.0-dev.20200201"
-  }
+  "web-types": "dist/json/web-types.json"
 }
