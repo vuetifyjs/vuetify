@@ -108,13 +108,14 @@ function mounted (el: HTMLElement, binding: TouchDirectiveBinding) {
 function unmounted (el: HTMLElement, binding: TouchDirectiveBinding) {
   const target = binding.value!.parent ? el.parentElement : el
 
-  if (!target || !target._touchHandlers) return
+  if (!target || !target._touch) return
 
   const handlers = target._touch
   keys(handlers).forEach(eventName => {
     target.removeEventListener(eventName, handlers[eventName])
   })
-  delete target._touchHandlers
+  
+  delete target._touch
 }
 
 export const Touch: ObjectDirective<HTMLElement> = {
