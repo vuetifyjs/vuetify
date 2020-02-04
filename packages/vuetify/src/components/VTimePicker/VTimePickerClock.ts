@@ -197,10 +197,10 @@ export default mixins<options &
       const coords = { x: clientX - left, y: top - clientY }
       const handAngle = Math.round(this.angle(center, coords) - this.rotate + 360) % 360
       const insideClick = this.double && this.euclidean(center, coords) < (innerWidth + innerWidth * this.innerRadiusScale) / 4
+      const checksCount = Math.ceil(15 / this.degreesPerUnit)
+      let value
 
-      for (let i = 0; i < Math.ceil(15 / this.degreesPerUnit); i++) {
-        let value
-
+      for (let i = 0; i < checksCount; i++) {
         value = this.angleToValue(handAngle + i * this.degreesPerUnit, insideClick)
         if (this.isAllowed(value)) return this.setMouseDownValue(value)
 
@@ -215,16 +215,15 @@ export default mixins<options &
       ) % this.count + this.min
 
       // Necessary to fix edge case when selecting left part of the value(s) at 12 o'clock
-      if (angle >= (360 - this.degreesPerUnit / 2)) {
-        return insideClick ? this.max - this.roundCount + 1 : this.min
-      } else {
-        return value
-      }
+      if (angle < (360 - this.degreesPerUnit / 2)) return value
+
+      return insideClick ? this.max - this.roundCount + 1 : this.min
     },
     setMouseDownValue (value: number) {
       if (this.valueOnMouseDown === null) {
         this.valueOnMouseDown = value
       }
+
       this.valueOnMouseUp = value
       this.update(value)
     },
