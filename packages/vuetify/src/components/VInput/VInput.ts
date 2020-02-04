@@ -169,15 +169,19 @@ export default baseMixins.extend<options>().extend({
     ) {
       const icon = (this as any)[`${type}Icon`]
       const eventName = `click:${kebabCase(type)}`
+      const hasListener = !!(this.listeners$[eventName] || cb)
 
       const data: VNodeData = {
+        attrs: {
+          'aria-label': hasListener ? kebabCase(type).split('-')[0] + ' icon' : undefined,
+        },
         props: {
           color: this.validationState,
           dark: this.dark,
           disabled: this.disabled,
           light: this.light,
         },
-        on: !(this.listeners$[eventName] || cb)
+        on: !hasListener
           ? undefined
           : {
             click: (e: Event) => {
@@ -198,7 +202,6 @@ export default baseMixins.extend<options>().extend({
 
       return this.$createElement('div', {
         staticClass: `v-input__icon v-input__icon--${kebabCase(type)}`,
-        key: type + icon,
       }, [
         this.$createElement(
           VIcon,

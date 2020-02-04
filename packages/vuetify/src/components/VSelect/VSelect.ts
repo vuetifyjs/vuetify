@@ -8,6 +8,7 @@ import VMenu from '../VMenu'
 import VSelectList from './VSelectList'
 
 // Extensions
+import VInput from '../VInput'
 import VTextField from '../VTextField/VTextField'
 
 // Mixins
@@ -20,6 +21,7 @@ import ClickOutside from '../../directives/click-outside'
 // Utilities
 import { getPropertyFromItem, keyCodes } from '../../util/helpers'
 import { consoleError } from '../../util/console'
+import mergeData from '../../util/mergeData'
 
 // Types
 import mixins from '../../util/mixins'
@@ -408,6 +410,22 @@ export default baseMixins.extend<options>().extend({
         this.genMenu(),
         this.genProgress(),
       ]
+    },
+    genIcon (
+      type: string,
+      cb?: (e: Event) => void
+    ) {
+      const icon = VInput.options.methods.genIcon.call(this, type, cb)
+
+      icon.children![0].data = mergeData(icon.children![0].data!, {
+        attrs: {
+          tabindex: icon.children![0].componentOptions!.listeners && '-1',
+          'aria-hidden': 'true',
+          'aria-label': undefined,
+        },
+      })
+
+      return icon
     },
     genInput (): VNode {
       const input = VTextField.options.methods.genInput.call(this)
