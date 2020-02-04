@@ -7,6 +7,7 @@ import Resize from '../'
 describe('resize.ts', () => {
   it('should bind event on inserted', () => {
     const callback = jest.fn()
+
     jest.spyOn(window, 'addEventListener')
     jest.spyOn(window, 'removeEventListener')
     const vnode = h('div')
