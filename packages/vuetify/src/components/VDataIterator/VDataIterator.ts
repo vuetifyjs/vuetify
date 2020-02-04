@@ -33,7 +33,7 @@ export default Themeable.extend({
       default: () => [],
     },
     mobileBreakpoint: {
-      type: Number,
+      type: [Number, String],
       default: 600,
     },
     singleExpand: Boolean,
@@ -82,7 +82,7 @@ export default Themeable.extend({
       // https://github.com/vuetifyjs/vuetify/issues/7410
       if (this.$vuetify.breakpoint.width === 0) return false
 
-      return this.$vuetify.breakpoint.width < this.mobileBreakpoint
+      return this.$vuetify.breakpoint.width < parseInt(this.mobileBreakPoint, 10)
     },
   },
 

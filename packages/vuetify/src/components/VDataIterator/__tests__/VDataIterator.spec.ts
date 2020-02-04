@@ -6,8 +6,8 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 import Vue from 'vue'
-import { preset } from '../../../presets/default'
 import { Breakpoint } from '../../../services/breakpoint'
+import { preset } from '../../../presets/default'
 
 Vue.prototype.$vuetify = {
   icons: {
