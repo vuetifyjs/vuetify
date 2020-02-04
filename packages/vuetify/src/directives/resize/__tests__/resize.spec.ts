@@ -26,6 +26,7 @@ describe('resize.ts', () => {
 
   it('should not run the callback in quiet mode', () => {
     const callback = jest.fn()
+
     jest.spyOn(window, 'addEventListener')
     jest.spyOn(window, 'removeEventListener')
     const vnode = h('div')
