@@ -28,6 +28,10 @@
       "heading": "### Hiding on scroll",
       "desc": "`v-app-bar` can be hidden on scroll. Use the `hide-on-scroll` property for this."
     },
+    "app-bar-nav": {
+      "heading": "### Toggle Navigation Drawers",
+      "desc": "Using the functional component `v-app-bar-nav-icon` you can toggle the state of other components such as a [v-navigation-drawer](/components/navigation-drawer)."
+    },
     "scroll-threshold": {
       "heading": "### Scroll threshold",
       "desc": "`v-app-bar` can have scroll threshold. It will start reacting to scroll only after defined via `scroll-threshold` property amount of pixels."

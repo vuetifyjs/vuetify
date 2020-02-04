@@ -81,6 +81,7 @@
             "simple/collapse",
             "simple/elevate-on-scroll",
             "simple/inverted-scroll",
+            "intermediate/app-bar-nav",
             "intermediate/scroll-threshold",
             "complex/img-fade",
             "complex/menu"
