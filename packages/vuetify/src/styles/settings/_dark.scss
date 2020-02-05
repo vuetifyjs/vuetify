@@ -48,8 +48,7 @@ $material-dark: map-deep-merge(
       'link-hover': map-get($grey, 'lighten-3')
     ),
     'icons': (
-      'focused': 1,
-      'active': 0.7,
+      'active': map-get($shades, 'white'),
       'inactive': rgba(map-get($shades, 'white'), 0.5)
     ),
     'inputs': (
