@@ -247,12 +247,11 @@ exports[`VFileInput.ts should render 1`] = `
         >
       </div>
       <div class="v-input__append-inner">
-        <div class="v-input__icon v-input__icon--">
-          <button type="button"
-                  aria-label=" icon"
-                  class="v-icon notranslate v-icon--link material-icons theme--light"
+        <div class="v-input__icon">
+          <i aria-hidden="true"
+             class="v-icon notranslate material-icons theme--light"
           >
-          </button>
+          </i>
         </div>
       </div>
     </div>
@@ -430,12 +429,11 @@ exports[`VFileInput.ts should render without icon 1`] = `
         >
       </div>
       <div class="v-input__append-inner">
-        <div class="v-input__icon v-input__icon--">
-          <button type="button"
-                  aria-label=" icon"
-                  class="v-icon notranslate v-icon--link material-icons theme--light"
+        <div class="v-input__icon">
+          <i aria-hidden="true"
+             class="v-icon notranslate material-icons theme--light"
           >
-          </button>
+          </i>
         </div>
       </div>
     </div>
