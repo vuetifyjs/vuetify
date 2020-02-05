@@ -19,13 +19,13 @@ exports[`VRadioGroup.ts should match dense snapshot 1`] = `
                    name="radio-5"
                    value
             >
-            <div class="v-input--selection-controls__ripple primary--text">
-            </div>
             <i aria-hidden="true"
                class="v-icon notranslate v-icon--dense material-icons theme--light"
             >
               $radioOff
             </i>
+            <div class="v-input--selection-controls__ripple primary--text">
+            </div>
           </div>
         </div>
       </div>

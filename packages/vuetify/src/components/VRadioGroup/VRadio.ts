@@ -147,12 +147,12 @@ export default baseMixins.extend<options>().extend({
           value: this.value,
           ...this.attrs$,
         }),
-        this.genRipple(this.setTextColor(this.rippleState)),
         this.$createElement(VIcon, this.setTextColor(this.validationState, {
           props: {
             dense: this.radioGroup && this.radioGroup.dense,
           },
         }), this.computedIcon),
+        this.genRipple(this.setTextColor(this.rippleState)),
       ])
     },
     onFocus (e: Event) {

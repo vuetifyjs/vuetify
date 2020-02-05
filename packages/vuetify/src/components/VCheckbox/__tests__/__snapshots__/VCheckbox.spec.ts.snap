@@ -21,13 +21,13 @@ exports[`VCheckbox.ts should render themed component 1`] = `
                type="checkbox"
                value
         >
-        <div class="v-input--selection-controls__ripple primary--text">
-        </div>
         <i aria-hidden="true"
            class="v-icon notranslate material-icons theme--light"
         >
           $checkboxOff
         </i>
+        <div class="v-input--selection-controls__ripple primary--text">
+        </div>
       </div>
     </div>
     <div class="v-messages theme--light">
@@ -52,13 +52,13 @@ exports[`VCheckbox.ts should use custom icons 1`] = `
                type="checkbox"
                value="fizz"
         >
-        <div class="v-input--selection-controls__ripple primary--text">
-        </div>
         <i aria-hidden="true"
            class="v-icon notranslate material-icons theme--light"
         >
           fizzbuzz
         </i>
+        <div class="v-input--selection-controls__ripple primary--text">
+        </div>
       </div>
     </div>
     <div class="v-messages theme--light">
@@ -83,13 +83,13 @@ exports[`VCheckbox.ts should use custom icons 2`] = `
                type="checkbox"
                value="fizz"
         >
-        <div class="v-input--selection-controls__ripple primary--text">
-        </div>
         <i aria-hidden="true"
            class="v-icon notranslate material-icons theme--light"
         >
           fizzbuzz
         </i>
+        <div class="v-input--selection-controls__ripple primary--text">
+        </div>
       </div>
     </div>
     <div class="v-messages theme--light">
@@ -114,13 +114,13 @@ exports[`VCheckbox.ts should use custom icons 3`] = `
                type="checkbox"
                value="fizz"
         >
-        <div class="v-input--selection-controls__ripple primary--text">
-        </div>
         <i aria-hidden="true"
            class="v-icon notranslate material-icons theme--light"
         >
           fizzbuzz
         </i>
+        <div class="v-input--selection-controls__ripple primary--text">
+        </div>
       </div>
     </div>
     <div class="v-messages theme--light">
