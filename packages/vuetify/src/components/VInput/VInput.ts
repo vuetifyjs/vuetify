@@ -202,7 +202,7 @@ export default baseMixins.extend<options>().extend({
 
       return this.$createElement('div', {
         staticClass: `v-input__icon`,
-        class: type ? `v-input__icon--${kebabCase(type)}` : '',
+        class: type ? `v-input__icon--${kebabCase(type)}` : undefined,
       }, [
         this.$createElement(
           VIcon,
