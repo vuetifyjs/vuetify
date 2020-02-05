@@ -419,7 +419,9 @@ export default baseMixins.extend<options>().extend({
 
       icon.children![0].data = mergeData(icon.children![0].data!, {
         attrs: {
-          tabindex: icon.children![0].componentOptions!.listeners && '-1',
+          tabindex: type === 'clear'
+            ? undefined
+            : (icon.children![0].componentOptions!.listeners && '-1'),
           'aria-hidden': 'true',
           'aria-label': undefined,
         },
