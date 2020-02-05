@@ -31,9 +31,6 @@
   &.v-btn--outlined.v-btn--text
     border-color: map-get($material, 'dividers')
 
-  &.v-btn--icon
-    color: map-deep-get($material, 'icons', 'active')
-
   +states($material)
 
 // Block
@@ -89,6 +86,7 @@
 
   > .v-btn__content .v-icon
     color: inherit
+    opacity: 1
 
 // Elements
 .v-btn__content

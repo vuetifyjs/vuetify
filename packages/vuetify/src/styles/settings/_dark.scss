@@ -50,7 +50,7 @@ $material-dark: map-deep-merge(
     'icons': (
       'focused': 1,
       'active': 0.7,
-      'inactive': rgba(map-get($shades, 'white'), 0.5)
+      'inactive': 0.5
     ),
     'inputs': (
       'box': map-get($shades, 'white'),
