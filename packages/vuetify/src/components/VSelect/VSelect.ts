@@ -304,6 +304,8 @@ export default baseMixins.extend<options>().extend({
       if (this.openOnClear) this.isMenuActive = true
     },
     closeConditional (e: Event) {
+      if (!this.isMenuActive) return true
+
       return (
         !this._isDestroyed &&
 
