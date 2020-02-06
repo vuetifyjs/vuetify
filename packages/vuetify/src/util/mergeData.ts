@@ -53,6 +53,9 @@ export default function mergeData (): VNodeData {
         case 'class':
         case 'style':
         case 'directives':
+          if (!arguments[i][prop]) {
+            break
+          }
           if (!Array.isArray(mergeTarget[prop])) {
             mergeTarget[prop] = []
           }
@@ -98,6 +101,9 @@ export default function mergeData (): VNodeData {
         // uses the last given value to assign.
         case 'on':
         case 'nativeOn':
+          if (!arguments[i][prop]) {
+            break
+          }
           if (!mergeTarget[prop]) {
             mergeTarget[prop] = {}
           }
@@ -124,6 +130,9 @@ export default function mergeData (): VNodeData {
         case 'staticStyle':
         case 'hook':
         case 'transition':
+          if (!arguments[i][prop]) {
+            break
+          }
           if (!mergeTarget[prop]) {
             mergeTarget[prop] = {}
           }
