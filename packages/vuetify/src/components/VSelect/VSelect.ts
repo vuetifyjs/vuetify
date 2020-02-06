@@ -420,15 +420,16 @@ export default baseMixins.extend<options>().extend({
     ) {
       const icon = VInput.options.methods.genIcon.call(this, type, cb)
 
-      icon.children![0].data = mergeData(icon.children![0].data!, {
-        attrs: {
-          tabindex: type !== 'append'
-            ? undefined
-            : (icon.children![0].componentOptions!.listeners && '-1'),
-          'aria-hidden': 'true',
-          'aria-label': undefined,
-        },
-      })
+      if (type === 'append') {
+        // Don't allow the dropdown icon to be focused
+        icon.children![0].data = mergeData(icon.children![0].data!, {
+          attrs: {
+            tabindex: icon.children![0].componentOptions!.listeners && '-1',
+            'aria-hidden': 'true',
+            'aria-label': undefined,
+          },
+        })
+      }
 
       return icon
     },
