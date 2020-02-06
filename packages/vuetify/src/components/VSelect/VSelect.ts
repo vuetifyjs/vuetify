@@ -781,9 +781,13 @@ export default baseMixins.extend<options>().extend({
 
       // Cycle through available values to achieve
       // select native behavior
-      menu.getTiles()
-      keyCodes.up === keyCode ? menu.prevTile() : menu.nextTile()
-      menu.activeTile && menu.activeTile.click()
+      menu.isBooted = true
+
+      window.requestAnimationFrame(() => {
+        menu.getTiles()
+        keyCodes.up === keyCode ? menu.prevTile() : menu.nextTile()
+        menu.activeTile && menu.activeTile.click()
+      })
     },
     selectItem (item: object) {
       if (!this.multiple) {
