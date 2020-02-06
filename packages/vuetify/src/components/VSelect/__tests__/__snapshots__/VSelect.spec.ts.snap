@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VSelect.ts should escape items in menu 1`] = `
-<div id="list-item-92-0"
-     class="v-list-item__title"
->
+<div class="v-list-item__title">
   &lt;strong&gt;foo&lt;/strong&gt;
 </div>
 `;
@@ -230,7 +228,7 @@ exports[`VSelect.ts should render v-select correctly when not using scope slot 1
           <input id="input-35"
                  readonly="readonly"
                  type="text"
-                 aria-readonly="true"
+                 aria-readonly="false"
                  autocomplete="off"
           >
         </div>
@@ -275,7 +273,7 @@ exports[`VSelect.ts should render v-select correctly when not using v-list-item 
           <input id="input-28"
                  readonly="readonly"
                  type="text"
-                 aria-readonly="true"
+                 aria-readonly="false"
                  autocomplete="off"
           >
         </div>
@@ -320,7 +318,7 @@ exports[`VSelect.ts should render v-select correctly when using v-list-item in i
           <input id="input-20"
                  readonly="readonly"
                  type="text"
-                 aria-readonly="true"
+                 aria-readonly="false"
                  autocomplete="off"
           >
         </div>
@@ -353,20 +351,18 @@ exports[`VSelect.ts should render v-select correctly when using v-list-item in i
 
 exports[`VSelect.ts should use slotted no-data 1`] = `
 <div role="listbox"
-     id="list-147"
      tabindex="-1"
-     class="v-list v-sheet v-sheet--tile theme--light"
+     class="v-list v-select-list v-sheet v-sheet--tile theme--light theme--light"
+     id="list-147"
 >
   <div tabindex="0"
        aria-selected="false"
-       aria-labelledby="list-item-152-0"
+       id="list-item-152-0"
        role="option"
        class="v-list-item v-list-item--link theme--light"
   >
     <div class="v-list-item__content">
-      <div id="list-item-152-0"
-           class="v-list-item__title"
-      >
+      <div class="v-list-item__title">
         foo
       </div>
     </div>

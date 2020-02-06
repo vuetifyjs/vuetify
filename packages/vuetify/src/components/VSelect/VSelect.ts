@@ -19,9 +19,9 @@ import Filterable from '../../mixins/filterable'
 import ClickOutside from '../../directives/click-outside'
 
 // Utilities
-import { getPropertyFromItem, keyCodes } from '../../util/helpers'
-import { consoleError } from '../../util/console'
 import mergeData from '../../util/mergeData'
+import { getPropertyFromItem, getObjectValueByPath, keyCodes } from '../../util/helpers'
+import { consoleError } from '../../util/console'
 
 // Types
 import mixins from '../../util/mixins'
@@ -438,12 +438,18 @@ export default baseMixins.extend<options>().extend({
       const input = VTextField.options.methods.genInput.call(this)
 
       delete input.data!.attrs!.name
-      input.data!.domProps!.value = null
-      input.data!.attrs!.readonly = true
-      input.data!.attrs!.type = 'text'
-      input.data!.attrs!['aria-readonly'] = true
-      input.data!.attrs!.autocomplete = input.data!.attrs!.autocomplete || 'off'
-      input.data!.on!.keypress = this.onKeyPress
+
+      input.data = mergeData(input.data!, {
+        domProps: { value: null },
+        attrs: {
+          readonly: true,
+          type: 'text',
+          'aria-readonly': String(this.readonly),
+          'aria-activedescendant': getObjectValueByPath(this.$refs.menu, 'activeTile.id', undefined),
+          autocomplete: getObjectValueByPath(input.data!, 'attrs.autocomplete', 'off'),
+        },
+        on: { keypress: this.onKeyPress },
+      })
 
       return input
     },
