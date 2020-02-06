@@ -401,7 +401,7 @@ export default VDataIterator.extend({
     genDefaultRows (items: any[], props: DataScopeProps) {
       return this.$scopedSlots['expanded-item']
         ? items.map(item => this.genDefaultExpandedRow(item))
-        : items.map(item => this.genDefaultSimpleRow(item))
+        : items.map((item, index) => this.genDefaultSimpleRow(item, {}, index))
     },
     genDefaultExpandedRow (item: any): VNode {
       const isExpanded = this.isExpanded(item)
@@ -422,7 +422,7 @@ export default VDataIterator.extend({
         this.$createElement('template', { slot: 'row.content' }, [expandedRow]),
       ])
     },
-    genDefaultSimpleRow (item: any, classes: Record<string, boolean> = {}): VNode {
+    genDefaultSimpleRow (item: any, classes: Record<string, boolean> = {}, index: Number = 0): VNode {
       const scopedSlots = getPrefixedScopedSlots('item.', this.$scopedSlots)
 
       const data = this.createItemProps(item)
@@ -465,6 +465,7 @@ export default VDataIterator.extend({
         },
         props: {
           headers: this.computedHeaders,
+          index,
           item,
           rtl: this.$vuetify.rtl,
         },
