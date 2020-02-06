@@ -92,6 +92,10 @@
     "filterable-columns": {
       "heading": "### Filterable columns",
       "desc": "You can easily disable specific columns from being included when searching through table rows by setting the property `filterable` to false on the header item(s). In the example below the dessert name column is no longer searchable."
+    },
+    "simple-checkbox": {
+      "heading": "### Simple Checkbox",
+      "desc": "When wanting to use a checkbox component inside of a slot template in your data tables, use the `v-simple-checkbox` component rather than the `v-checkbox` component. The `v-simple-checkbox` component is used internally and will respect header alignment."
     }
   },
   "props": {
@@ -118,6 +122,18 @@
       "showExpand": "Shows the expand toggle in default rows",
       "showGroupBy": "Shows the group by toggle in the header and enables grouped rows",
       "virtualRows": "Virtualizes the rendering of rows. Be aware that you can not use the `body`, `body.prepend` or `body.append` slots with this prop."
+    },
+    "v-simple-checkbox": {
+      "color": "Mixins.Colorable.props.color",
+      "dark": "Mixins.Themeable.props.dark",
+      "disabled": "Disables simple checkbox.",
+      "indeterminate": "Sets an indeterminate state for the simple checkbox.",
+      "indeterminateIcon": "The icon used when in an indeterminate state.",
+      "light": "Mixins.Themeable.props.light",
+      "offIcon": "The icon used when inactive.",
+      "onIcon": "The icon used when active.",
+      "ripple": "Mixins.Rippleable.props.ripple",
+      "value": "A boolean value that represents whether the simple checkbox is checked."
     }
   },
   "slots": {
@@ -157,6 +173,9 @@
     },
     "v-data-table": {
       "click:row": "Emits when a table row is clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`."
+    },
+    "v-simple-checkbox": {
+      "click": "Event that is emitted when the component is clicked"
     }
   }
 }

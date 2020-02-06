@@ -5905,12 +5905,11 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
       <tbody>
         <tr class>
           <td class="text-start">
-            <i role="button"
-               tabindex="0"
-               class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
+            <button type="button"
+                    class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $expand
-            </i>
+            </button>
           </td>
           <td class="text-left">
             Frozen Yogurt
@@ -5933,12 +5932,11 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         </tr>
         <tr class>
           <td class="text-start">
-            <i role="button"
-               tabindex="0"
-               class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
+            <button type="button"
+                    class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $expand
-            </i>
+            </button>
           </td>
           <td class="text-left">
             Ice cream sandwich
@@ -5961,12 +5959,11 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         </tr>
         <tr class>
           <td class="text-start">
-            <i role="button"
-               tabindex="0"
-               class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
+            <button type="button"
+                    class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $expand
-            </i>
+            </button>
           </td>
           <td class="text-left">
             Eclair
@@ -5989,12 +5986,11 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         </tr>
         <tr class>
           <td class="text-start">
-            <i role="button"
-               tabindex="0"
-               class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
+            <button type="button"
+                    class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $expand
-            </i>
+            </button>
           </td>
           <td class="text-left">
             Cupcake
@@ -6017,12 +6013,11 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         </tr>
         <tr class>
           <td class="text-start">
-            <i role="button"
-               tabindex="0"
-               class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
+            <button type="button"
+                    class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $expand
-            </i>
+            </button>
           </td>
           <td class="text-left">
             Gingerbread
@@ -6245,12 +6240,11 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
       <tbody>
         <tr class>
           <td class="text-start">
-            <i role="button"
-               tabindex="0"
-               class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
+            <button type="button"
+                    class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
             >
               $expand
-            </i>
+            </button>
           </td>
           <td class="text-left">
             Frozen Yogurt
@@ -6273,12 +6267,11 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         </tr>
         <tr class>
           <td class="text-start">
-            <i role="button"
-               tabindex="0"
-               class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
+            <button type="button"
+                    class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $expand
-            </i>
+            </button>
           </td>
           <td class="text-left">
             Ice cream sandwich
@@ -6301,12 +6294,11 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         </tr>
         <tr class>
           <td class="text-start">
-            <i role="button"
-               tabindex="0"
-               class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
+            <button type="button"
+                    class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $expand
-            </i>
+            </button>
           </td>
           <td class="text-left">
             Eclair
@@ -6329,12 +6321,11 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         </tr>
         <tr class>
           <td class="text-start">
-            <i role="button"
-               tabindex="0"
-               class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
+            <button type="button"
+                    class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $expand
-            </i>
+            </button>
           </td>
           <td class="text-left">
             Cupcake
@@ -6357,12 +6348,11 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         </tr>
         <tr class>
           <td class="text-start">
-            <i role="button"
-               tabindex="0"
-               class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
+            <button type="button"
+                    class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $expand
-            </i>
+            </button>
           </td>
           <td class="text-left">
             Gingerbread

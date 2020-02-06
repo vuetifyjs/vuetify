@@ -2,10 +2,6 @@
 @import '../../styles/styles.sass'
 
 .v-input--radio-group
-  legend
-    align-self: center
-    display: inline-block
-
   &__input
     border: none
     display: flex
@@ -18,6 +14,10 @@
     padding-right: $radio-group-padding
 
   &--row
+    legend
+      align-self: center
+      display: inline-block
+
     .v-input--radio-group__input
       flex-direction: row
       flex-wrap: wrap

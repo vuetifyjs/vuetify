@@ -835,4 +835,24 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     wrapper.vm.onObserve([], [], true)
     expect(document.activeElement === element).toBe(false)
   })
+
+  it('should use the correct icon color when using the solo inverted prop', () => {
+    const wrapper = mountFunction({
+      propsData: { soloInverted: true },
+      mocks: {
+        $vuetify: {
+          theme: { dark: false },
+        },
+      },
+      provide: {
+        theme: { isDark: true },
+      },
+    })
+
+    expect(wrapper.vm.computedColor).toBe('white')
+
+    wrapper.vm.focus()
+
+    expect(wrapper.vm.computedColor).toBe('primary')
+  })
 })
