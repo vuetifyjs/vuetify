@@ -576,7 +576,11 @@ export default VTextField.extend({
       this.keyboardLookupPrefix += e.key.toLowerCase()
       this.keyboardLookupLastTime = now
 
-      const index = this.allItems.findIndex(item => this.getText(item).toLowerCase().startsWith(this.keyboardLookupPrefix))
+      const index = this.allItems.findIndex(item => {
+        const text = (this.getText(item) || '').toString()
+
+        return text.toLowerCase().startsWith(this.keyboardLookupPrefix)
+      })
       const item = this.allItems[index]
       if (index !== -1) {
         this.setValue(this.returnObject ? item : this.getValue(item))
