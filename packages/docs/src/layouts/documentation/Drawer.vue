@@ -86,8 +86,6 @@
       <v-divider />
 
       <div class="px-4 py-2 d-flex">
-        <base-locales-menu />
-
         <base-versions-menu />
 
         <v-spacer />

@@ -8,6 +8,7 @@ import VMenu from '../VMenu'
 import VSelectList from './VSelectList'
 
 // Extensions
+import VInput from '../VInput'
 import VTextField from '../VTextField/VTextField'
 
 // Mixins
@@ -20,6 +21,7 @@ import ClickOutside from '../../directives/click-outside'
 // Utilities
 import { getPropertyFromItem, keyCodes } from '../../util/helpers'
 import { consoleError } from '../../util/console'
+import mergeData from '../../util/mergeData'
 
 // Types
 import mixins from '../../util/mixins'
@@ -110,7 +112,6 @@ export default baseMixins.extend<options>().extend({
   data () {
     return {
       cachedItems: this.cacheItems ? this.items : [],
-      content: null as any,
       isBooted: false,
       isMenuActive: false,
       lastItem: 20,
@@ -248,8 +249,8 @@ export default baseMixins.extend<options>().extend({
     },
     isBooted () {
       this.$nextTick(() => {
-        if (this.content && this.content.addEventListener) {
-          this.content.addEventListener('scroll', this.onScroll, false)
+        if (this.getContent() && this.getContent().addEventListener) {
+          this.getContent().addEventListener('scroll', this.onScroll, false)
         }
       })
     },
@@ -277,10 +278,6 @@ export default baseMixins.extend<options>().extend({
     },
   },
 
-  mounted () {
-    this.content = this.$refs.menu && (this.$refs.menu as { [key: string]: any }).$refs.content
-  },
-
   methods: {
     /** @public */
     blur (e?: Event) {
@@ -301,17 +298,20 @@ export default baseMixins.extend<options>().extend({
     },
     clearableCallback () {
       this.setValue(this.multiple ? [] : undefined)
+      this.setMenuIndex(-1)
       this.$nextTick(() => this.$refs.input && this.$refs.input.focus())
 
       if (this.openOnClear) this.isMenuActive = true
     },
     closeConditional (e: Event) {
+      if (!this.isMenuActive) return true
+
       return (
         !this._isDestroyed &&
 
         // Click originates from outside the menu content
-        this.content &&
-        !this.content.contains(e.target) &&
+        this.getContent() &&
+        !this.getContent().contains(e.target as Node) &&
 
         // Click originates from outside the element
         this.$el &&
@@ -334,6 +334,9 @@ export default baseMixins.extend<options>().extend({
       const itemValue = this.getValue(item)
 
       return (this.internalValue || []).findIndex((i: object) => this.valueComparator(this.getValue(i), itemValue))
+    },
+    getContent () {
+      return this.$refs.menu && this.$refs.menu.$refs.content
     },
     genChipSelection (item: object, index: number) {
       const isDisabled = (
@@ -411,6 +414,24 @@ export default baseMixins.extend<options>().extend({
         this.genProgress(),
       ]
     },
+    genIcon (
+      type: string,
+      cb?: (e: Event) => void
+    ) {
+      const icon = VInput.options.methods.genIcon.call(this, type, cb)
+
+      icon.children![0].data = mergeData(icon.children![0].data!, {
+        attrs: {
+          tabindex: type !== 'append'
+            ? undefined
+            : (icon.children![0].componentOptions!.listeners && '-1'),
+          'aria-hidden': 'true',
+          'aria-label': undefined,
+        },
+      })
+
+      return icon
+    },
     genInput (): VNode {
       const input = VTextField.options.methods.genInput.call(this)
 
@@ -427,7 +448,10 @@ export default baseMixins.extend<options>().extend({
     genHiddenInput (): VNode {
       return this.$createElement('input', {
         domProps: { value: this.lazyValue },
-        attrs: { type: 'hidden' },
+        attrs: {
+          type: 'hidden',
+          name: this.attrs$.name,
+        },
       })
     },
     genInputSlot (): VNode {
@@ -690,14 +714,14 @@ export default baseMixins.extend<options>().extend({
     },
     onScroll () {
       if (!this.isMenuActive) {
-        requestAnimationFrame(() => (this.content.scrollTop = 0))
+        requestAnimationFrame(() => (this.getContent().scrollTop = 0))
       } else {
         if (this.lastItem >= this.computedItems.length) return
 
         const showMoreItems = (
-          this.content.scrollHeight -
-          (this.content.scrollTop +
-          this.content.clientHeight)
+          this.getContent().scrollHeight -
+          (this.getContent().scrollTop +
+          this.getContent().clientHeight)
         ) < 200
 
         if (showMoreItems) {

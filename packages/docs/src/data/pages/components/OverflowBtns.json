@@ -18,6 +18,11 @@
           "type": "alert",
           "lang": "Components.Selects.objectAlert",
           "value": "error"
+        },
+        {
+          "type": "alert",
+          "lang": "Components.Selects.autoAlert",
+          "value": "warning"
         }
       ]
     },

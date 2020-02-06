@@ -57,6 +57,11 @@ const VIcon = mixins(
     medium () {
       return false
     },
+    hasClickListener (): boolean {
+      return Boolean(
+        this.listeners$.click || this.listeners$['!click']
+      )
+    },
   },
 
   methods: {
@@ -83,22 +88,19 @@ const VIcon = mixins(
     },
     // Component data for both font and svg icon.
     getDefaultData (): VNodeData {
-      const hasClickListener = Boolean(
-        this.listeners$.click || this.listeners$['!click']
-      )
       const data: VNodeData = {
         staticClass: 'v-icon notranslate',
         class: {
           'v-icon--disabled': this.disabled,
           'v-icon--left': this.left,
-          'v-icon--link': hasClickListener,
+          'v-icon--link': this.hasClickListener,
           'v-icon--right': this.right,
           'v-icon--dense': this.dense,
         },
         attrs: {
-          'aria-hidden': !hasClickListener,
-          role: hasClickListener ? 'button' : null,
-          tabindex: hasClickListener ? 0 : undefined,
+          'aria-hidden': !this.hasClickListener,
+          disabled: this.hasClickListener && this.disabled,
+          type: this.hasClickListener ? 'button' : undefined,
           ...this.attrs$,
         },
         on: this.listeners$,
@@ -136,7 +138,7 @@ const VIcon = mixins(
 
       this.applyColors(data)
 
-      return h(this.tag, data, newChildren)
+      return h(this.hasClickListener ? 'button' : this.tag, data, newChildren)
     },
     renderSvgIcon (icon: string, h: CreateElement): VNode {
       const fontSize = this.getSize()
@@ -158,12 +160,11 @@ const VIcon = mixins(
           height: fontSize || '32',
           width: fontSize || '32',
           role: 'img',
-          'aria-hidden': !this.attrs$['aria-label'],
-          'aria-label': this.attrs$['aria-label'],
+          'aria-hidden': true,
         },
       }
 
-      return h('span', wrapperData, [
+      return h(this.hasClickListener ? 'button' : 'span', wrapperData, [
         h('svg', svgData, [
           h('path', {
             attrs: {

@@ -189,6 +189,7 @@ export default baseMixins.extend({
       this.listeners = {}
     },
     resetActivator () {
+      this.removeActivatorEvents()
       this.activatorElement = null
       this.getActivator()
       this.addActivatorEvents()

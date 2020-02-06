@@ -1,9 +1,9 @@
 {
   "heading": "# Démarrage rapide",
-  "vueCliHeader": "## Installation de Vue CLI 3",
+  "vueCliHeader": "## Installation de Vue CLI",
   "vueCliText1": "Le CLI Vue 3 est la prochaine génération d'outil cli fait pour écarter la complexité de construire une application. Quand vous démarrez votre application avec le CLI Vue 3 vous avez aussi la possibilité d'obtenir les mises à jours webpack et changements de configurations officiels, comme avec les mise à jours de Vuetify sans un ardue processus d'amélioration.",
   "vueCliText2": "Si vous n'avez toujours pas créé un nouveau project Vue.js en utilisant le **CLI Vue 3**, vous pouvez le faire en tapant:",
-  "vueCliText3": "Maintenant que votre projet est créé, vous pouvez ajouter le [paquet Vuetify Vue CLI 3](https://github.com/vuetifyjs/vue-cli-plugin-vuetify) en utilisant le cli.",
+  "vueCliText3": "Maintenant que votre projet est créé, vous pouvez ajouter le [paquet Vuetify Vue CLI](https://github.com/vuetifyjs/vue-cli-plugin-vuetify) en utilisant le cli.",
   "vueCliAlert1": "Pour plus d'information sur l'utilisation du CLI Vue 3, visitez la [documentation officiel](https://cli.vuejs.org/guide/)",
   "uiHeader": "## Installation de Vue UI",
   "uiText1": "Vuetify peut aussi être installé en utilisant **Vue UI**, une nouvelle application pour le CLI Vue 3. Assurez vous d'avoir la dernière version du CLI Vue 3 d'installer puis à partir de votre console tapez:",

@@ -238,68 +238,68 @@ export default baseMixins.extend({
         focusable.length && (focusable[0] as HTMLElement).focus()
       }
     },
-  },
+    genTransition () {
+      const content = this.genContent()
 
-  render (h): VNode {
-    const children = []
-    const data = {
-      class: this.classes,
-      ref: 'dialog',
-      directives: [
-        {
-          name: 'click-outside',
-          value: this.onClickOutside,
-          args: {
-            closeConditional: this.closeConditional,
-            include: this.getOpenDependentElements,
-          },
-        },
-        { name: 'show', value: this.isActive },
-      ],
-      style: {},
-    }
+      if (!this.transition) return content
 
-    if (!this.fullscreen) {
-      data.style = {
-        maxWidth: this.maxWidth === 'none' ? undefined : convertToUnit(this.maxWidth),
-        width: this.width === 'auto' ? undefined : convertToUnit(this.width),
-      }
-    }
-
-    children.push(this.genActivator())
-
-    let dialog = h('div', data, this.showLazyContent(this.getContentSlot()))
-    if (this.transition) {
-      dialog = h('transition', {
+      return this.$createElement('transition', {
         props: {
           name: this.transition,
           origin: this.origin,
         },
-      }, [dialog])
-    }
+      }, this.showLazyContent(() => [content]))
+    },
+    genContent () {
+      const data = {
+        class: this.classes,
+        ref: 'dialog',
+        directives: [
+          {
+            name: 'click-outside',
+            value: this.onClickOutside,
+            args: {
+              closeConditional: this.closeConditional,
+              include: this.getOpenDependentElements,
+            },
+          },
+          { name: 'show', value: this.isActive },
+        ],
+        style: {},
+      }
 
-    children.push(h('div', {
-      class: this.contentClasses,
-      attrs: {
-        role: 'document',
-        tabindex: this.isActive ? 0 : undefined,
-        ...this.getScopeIdAttrs(),
-      },
-      on: {
-        keydown: this.onKeydown,
-      },
-      style: { zIndex: this.activeZIndex },
-      ref: 'content',
-    }, [
-      this.$createElement(VThemeProvider, {
-        props: {
-          root: true,
-          light: this.light,
-          dark: this.dark,
+      if (!this.fullscreen) {
+        data.style = {
+          maxWidth: this.maxWidth === 'none' ? undefined : convertToUnit(this.maxWidth),
+          width: this.width === 'auto' ? undefined : convertToUnit(this.width),
+        }
+      }
+
+      return this.$createElement('div', {
+        class: this.contentClasses,
+        attrs: {
+          role: 'document',
+          tabindex: this.isActive ? 0 : undefined,
+          ...this.getScopeIdAttrs(),
         },
-      }, [dialog]),
-    ]))
+        on: { keydown: this.onKeydown },
+        style: { zIndex: this.activeZIndex },
+        ref: 'content',
+      }, [
+        this.$createElement('div', data, [
+          this.$createElement(VThemeProvider, {
+            props: {
+              root: true,
+              light: this.light,
+              dark: this.dark,
+            },
+          }, this.getContentSlot()),
+        ]),
+      ])
+    },
+  },
 
+  render (h): VNode {
     return h('div', {
       staticClass: 'v-dialog__container',
       class: {
@@ -309,6 +309,9 @@ export default baseMixins.extend({
           this.attach === 'attach',
       },
       attrs: { role: 'dialog' },
-    }, children)
+    }, [
+      this.genActivator(),
+      this.genTransition(),
+    ])
   },
 })

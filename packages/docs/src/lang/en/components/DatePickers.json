@@ -148,5 +148,8 @@
     "click:month": "Emitted when the month button is clicked",
     "dblclick:month": "Emitted when the month button is double clicked. Usable only for `month` pickers.",
     "change": "Reactive date picker emits `input` even when any part of the date (year/month/day) changes, but `change` event is emitted only when the day (for date pickers) or month (for month pickers) changes. If `range` prop is set, date picker emits `change` when both [from, to] are selected."
+  },
+  "slots": {
+    "default": "Displayed below the calendar, can be used for example for adding action button (`OK` and `Cancel`)"
   }
 }

@@ -3,7 +3,11 @@
 $time-picker-title-color: map-get($shades, 'white') !default;
 $time-picker-title-btn-height: 70px !default;
 $time-picker-landscape-title-btn-height: 55px !default;
-$time-picker-ampm-title-margin: 8px 0 6px 8px !default;
+$time-picker-ampm-title-margin-start: 8px !default;
+$time-picker-ampm-title-margin-bottom: 6px !default;
+$time-picker-ampm-title-margin: 0 0 $time-picker-ampm-title-margin-bottom $time-picker-ampm-title-margin-start !default;  // TODO: remove in 3.0
+$time-picker-ampm-title-margin-ltr: $time-picker-ampm-title-margin !default;
+$time-picker-ampm-title-margin-rtl: 0 $time-picker-ampm-title-margin-start $time-picker-ampm-title-margin-bottom 0 !default;
 $time-picker-ampm-title-font-size: 16px !default;
 $time-picker-landscape-ampm-title-margin: 16px 0 0 !default;
 $time-picker-number-font-size: 16px !default;
@@ -19,4 +23,6 @@ $time-picker-clock-end-top: -4px !default;
 $time-picker-clock-inner-hand-height: 14px !default;
 $time-picker-clock-inner-offset: 27px !default;
 $time-picker-ampm-padding: 10px !default;
-$time-picker-clock-end-border: 2px solid inherit !default;
+$time-picker-clock-end-border-width: 2px !default;
+$time-picker-clock-end-border-style: solid !default;
+$time-picker-clock-end-border-color: inherit !default;

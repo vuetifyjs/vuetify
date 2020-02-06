@@ -122,11 +122,19 @@
         },
         {
           "type": "markup",
-          "value": "js_use_vuetify_loader"
+          "value": "js_use_vuetify"
         },
         {
           "type": "text",
           "lang": "webpackText4"
+        },
+        {
+          "type": "markup",
+          "value": "js_use_vuetify_loader"
+        },
+        {
+          "type": "text",
+          "lang": "webpackText5"
         },
         {
           "type": "markup",
@@ -141,15 +149,11 @@
             },
             {
               "type": "text",
-              "lang": "webpackText5"
+              "lang": "webpackText6"
             },
             {
               "type": "markup",
               "value": "html_font_cdn"
-            },
-            {
-              "type": "text",
-              "lang": "webpackText6"
             }
           ]
         }
@@ -174,6 +178,74 @@
         {
           "type": "markup",
           "value": "html_cdn_quickstart"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "electronHeader"
+        },
+        {
+          "type": "text",
+          "lang": "electronText"
+        },
+        {
+          "type": "markup",
+          "value": "bash_vue_add_electronbuilder"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "pwaHeader"
+        },
+        {
+          "type": "text",
+          "lang": "pwaText"
+        },
+        {
+          "type": "markup",
+          "value": "bash_vue_add_pwa"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "cordovaHeader"
+        },
+        {
+          "type": "text",
+          "lang": "cordovaText"
+        },
+        {
+          "type": "markup",
+          "value": "bash_vue_add_cordova"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "capacitorHeader"
+        },
+        {
+          "type": "text",
+          "lang": "capacitorText"
+        },
+        {
+          "type": "markup",
+          "value": "bash_vue_add_capacitor"
         }
       ]
     },

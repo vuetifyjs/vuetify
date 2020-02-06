@@ -42,7 +42,7 @@ export default {
     counterSize: '{0} پرونده ({1} در کل)',
   },
   timePicker: {
-    am: 'AM',
-    pm: 'PM',
+    am: 'قبل از ظهر',
+    pm: 'بعد از ظهر',
   },
 }

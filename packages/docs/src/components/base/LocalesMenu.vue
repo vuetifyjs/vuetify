@@ -1,33 +1,38 @@
 <template>
   <v-menu
-    v-model="menu"
-    max-height="calc(100% - 16px)"
+    bottom
+    left
     offset-y
-    right
-    top
-    transition="slide-y-reverse-transition"
+    max-height="calc(100% - 16px)"
+    transition="slide-y-transition"
   >
     <template v-slot:activator="{ attrs, on }">
       <v-btn
         :aria-label="$t('Vuetify.AppToolbar.translations')"
-        class="text--secondary text-capitalize mr-3"
-        rounded
+        class="text-capitalize"
         text
         v-bind="attrs"
         v-on="on"
       >
-        <v-icon left>
+        <v-icon :left="$vuetify.breakpoint.mdAndUp">
           mdi-{{ currentLanguage.locale === 'eo-UY' ? 'web' : 'translate' }}
         </v-icon>
 
-        {{ currentLanguage.name }}
+        <span
+          class="subtitle-1 text-capitalize font-weight-light hidden-sm-and-down"
+          v-text="currentLanguage.name"
+        />
 
-        <v-icon right>mdi-menu-{{ menu ? 'up' : 'down' }}</v-icon>
+        <v-icon
+          class="hidden-sm-and-down"
+          right
+        >
+          mdi-menu-down
+        </v-icon>
       </v-btn>
     </template>
 
     <v-list
-      class="px-0 py-1"
       dense
       nav
     >
@@ -58,7 +63,6 @@
 
     data: () => ({
       languages,
-      menu: false,
     }),
 
     computed: {

@@ -15,6 +15,8 @@
         v-bind="attrs"
         v-on="on"
       >
+        <v-icon left>mdi-tag-outline</v-icon>
+
         <span v-text="version" />
 
         <v-icon right>mdi-menu-{{ menu ? 'up' : 'down' }}</v-icon>
