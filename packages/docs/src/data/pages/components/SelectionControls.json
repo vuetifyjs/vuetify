@@ -20,7 +20,7 @@
       "children": [
         {
           "type": "api",
-          "value": [ "v-checkbox", "v-radio", "v-radio-group", "v-switch" ]
+          "value": [ "v-checkbox", "v-radio", "v-radio-group", "v-simple-checkbox", "v-switch" ]
         }
       ]
     },

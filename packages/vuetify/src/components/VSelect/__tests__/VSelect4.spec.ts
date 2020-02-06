@@ -89,6 +89,7 @@ describe('VSelect.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         clearable: true,
+        items: ['foo'],
         value: 'foo',
       },
     })
@@ -221,10 +222,10 @@ describe('VSelect.ts', () => {
     expect(items.at(1).element.getAttribute('aria-selected')).toBe('true')
 
     const item = items.at(0)
-    const generatedId = `foo-list-item-${(list.vm as any)._uid}`
+    const generatedId = item.find('.v-list-item__title').element.id
 
+    expect(generatedId).toMatch(/^foo-list-item-\d+$/)
     expect(item.element.getAttribute('aria-labelledby')).toBe(generatedId)
-    expect(item.find('.v-list-item__title').element.id).toBe(generatedId)
   })
 
   // TODO: this fails without sync, nextTick doesn't help

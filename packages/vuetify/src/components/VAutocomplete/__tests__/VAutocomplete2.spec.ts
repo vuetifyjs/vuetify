@@ -200,6 +200,8 @@ describe('VAutocomplete.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         clearable: true,
+        items: ['foo'],
+        value: 'foo',
       },
     })
 

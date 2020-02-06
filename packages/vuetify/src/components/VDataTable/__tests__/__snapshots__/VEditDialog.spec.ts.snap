@@ -6,11 +6,6 @@ exports[`VEditDialog.ts should render 1`] = `
     <span class="v-small-dialog__activator__content">
     </span>
   </div>
-  <div role="menu"
-       class="v-menu__content theme--light v-small-dialog__menu-content"
-       style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top right; z-index: 0; display: none;"
-  >
-  </div>
 </div>
 `;
 
@@ -48,11 +43,6 @@ exports[`VEditDialog.ts should render custom button texts 1`] = `
   <div class="v-small-dialog__activator">
     <span class="v-small-dialog__activator__content">
     </span>
-  </div>
-  <div role="menu"
-       class="v-menu__content theme--light v-small-dialog__menu-content"
-       style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top right; z-index: 0; display: none;"
-  >
   </div>
 </div>
 `;

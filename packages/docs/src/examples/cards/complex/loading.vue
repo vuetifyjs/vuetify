@@ -32,7 +32,7 @@
         $ • Italian, Cafe
       </div>
 
-      <div>Small plates, salads & sandwiches an inteimate setting with 12 indoor seats plus patio seating.</div>
+      <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
     </v-card-text>
 
     <v-divider class="mx-4"></v-divider>
