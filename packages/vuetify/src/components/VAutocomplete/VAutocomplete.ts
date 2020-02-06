@@ -339,7 +339,10 @@ export default VSelect.extend({
       VSelect.options.methods.onTabDown.call(this, e)
       this.updateSelf()
     },
-    onUpDown () {
+    onUpDown (e: Event) {
+      // Prevent screen from scrolling
+      e.preventDefault()
+
       // For autocomplete / combobox, cycling
       // interfers with native up/down behavior
       // instead activate the menu
