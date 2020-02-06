@@ -112,7 +112,7 @@ export default baseMixins.extend<options>().extend({
   data () {
     return {
       cachedItems: this.cacheItems ? this.items : [],
-      isBooted: false,
+      menuIsBooted: false,
       isMenuActive: false,
       lastItem: 20,
       // As long as a value is defined, show it
@@ -247,19 +247,19 @@ export default baseMixins.extend<options>().extend({
       this.initialValue = val
       this.setSelectedItems()
     },
-    isBooted () {
-      this.$nextTick(() => {
+    menuIsBooted () {
+      window.setTimeout(() => {
         if (this.getContent() && this.getContent().addEventListener) {
           this.getContent().addEventListener('scroll', this.onScroll, false)
         }
       })
     },
     isMenuActive (val) {
-      this.$nextTick(() => this.onMenuActiveChange(val))
+      window.setTimeout(() => this.onMenuActiveChange(val))
 
       if (!val) return
 
-      this.isBooted = true
+      this.menuIsBooted = true
     },
     items: {
       immediate: true,
