@@ -280,7 +280,7 @@ export default VSelect.extend({
       input.data = mergeData(input.data!, {
         attrs: {
           'aria-activedescendant': getObjectValueByPath(this.$refs.menu, 'activeTile.id', undefined),
-          autocomplete: input.data!.attrs!.autocomplete || 'off',
+          autocomplete: getObjectValueByPath(input.data!, 'attrs.autocomplete', 'off'),
         },
         domProps: { value: this.internalSearch },
       })
