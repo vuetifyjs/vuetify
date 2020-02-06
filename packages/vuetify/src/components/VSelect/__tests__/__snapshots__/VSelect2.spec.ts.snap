@@ -17,7 +17,7 @@ exports[`VSelect.ts should be clearable with prop, dirty and multi select 1`] = 
           <input id="input-104"
                  readonly="readonly"
                  type="text"
-                 aria-readonly="true"
+                 aria-readonly="false"
                  autocomplete="off"
           >
         </div>
@@ -77,7 +77,7 @@ exports[`VSelect.ts should be clearable with prop, dirty and single select 1`] =
           <input id="input-96"
                  readonly="readonly"
                  type="text"
-                 aria-readonly="true"
+                 aria-readonly="false"
                  autocomplete="off"
           >
         </div>
@@ -137,7 +137,7 @@ exports[`VSelect.ts should use scoped slot for selection generation 1`] = `
           <input id="input-26"
                  readonly="readonly"
                  type="text"
-                 aria-readonly="true"
+                 aria-readonly="false"
                  autocomplete="off"
           >
         </div>
@@ -172,20 +172,18 @@ exports[`VSelect.ts should use scoped slot for selection generation 1`] = `
 
 exports[`VSelect.ts should use slotted append-item 1`] = `
 <div role="listbox"
-     id="list-13"
      tabindex="-1"
-     class="v-list v-sheet v-sheet--tile theme--light"
+     class="v-list v-select-list v-sheet v-sheet--tile theme--light theme--light"
+     id="list-13"
 >
   <div tabindex="0"
        aria-selected="false"
-       aria-labelledby="list-item-18-0"
+       id="list-item-18-0"
        role="option"
        class="v-list-item v-list-item--link theme--light"
   >
     <div class="v-list-item__content">
-      <div id="list-item-18-0"
-           class="v-list-item__title"
-      >
+      <div class="v-list-item__title">
         foo
       </div>
     </div>
@@ -198,23 +196,21 @@ exports[`VSelect.ts should use slotted append-item 1`] = `
 
 exports[`VSelect.ts should use slotted prepend-item 1`] = `
 <div role="listbox"
-     id="list-1"
      tabindex="-1"
-     class="v-list v-sheet v-sheet--tile theme--light"
+     class="v-list v-select-list v-sheet v-sheet--tile theme--light theme--light"
+     id="list-1"
 >
   <div>
     foo
   </div>
   <div tabindex="0"
        aria-selected="false"
-       aria-labelledby="list-item-6-0"
+       id="list-item-6-0"
        role="option"
        class="v-list-item v-list-item--link theme--light"
   >
     <div class="v-list-item__content">
-      <div id="list-item-6-0"
-           class="v-list-item__title"
-      >
+      <div class="v-list-item__title">
         foo
       </div>
     </div>
