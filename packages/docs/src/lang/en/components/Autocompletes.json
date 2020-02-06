@@ -39,6 +39,6 @@
     "filter": "The filtering algorithm used when searching. [example](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/components/VAutocomplete/VAutocomplete.ts#L36)",
     "hideNoData": "Hides the menu when there are no options to show.  Useful for preventing the menu from opening before results are fetched asynchronously.  Also has the effect of opening the menu when the `items` array changes if not already open.",
     "noFilter": "Do not apply filtering when searching. Useful when data is being filtered server side",
-    "searchInput": "Search value. Can be use with `.sync` modifier."
+    "searchInput": "Search value. Can be used with `.sync` modifier."
   }
 }

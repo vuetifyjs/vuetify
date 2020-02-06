@@ -43,12 +43,14 @@
     </v-col>
 
     <v-col cols="12">
-      <v-responsive
-        class="calendly-inline-widget"
-        data-url="https://calendly.com/vuetify"
-        height="625"
-        min-width="320"
-      />
+      <v-lazy>
+        <iframe
+          src="https://app.acuityscheduling.com/schedule.php?owner=19002891"
+          width="100%"
+          height="1000"
+          frameBorder="0"
+        />
+      </v-lazy>
     </v-col>
   </v-row>
 </template>
@@ -75,7 +77,7 @@
       attachScript () {
         const script = document.createElement('script')
         script.type = 'text/javascript'
-        script.src = '//assets.calendly.com/assets/external/widget.js'
+        script.src = '//embed.acuityscheduling.com/js/embed.js'
 
         this.$el.append(script)
       },

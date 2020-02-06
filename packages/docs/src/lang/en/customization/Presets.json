@@ -50,5 +50,5 @@
   "devHeading5": "#### preset/overrides.sass",
   "devText5a": "This is a catch all for style modifications that do not have corresponding variables to target. This is useful when you need to add new CSS properties to existing components.",
   "devHeading6": "#### preset/variables.scss",
-  "devText6a": "This is a Vuetify SASS variables file which will overwrite existing framework values. You can find more information about available variables on the [Vuetify SASS Variables](https://dev.vuetifyjs.com/en/customization/sass-variables#variable-api) documentation page or within the API section of a component."
+  "devText6a": "This is a Vuetify SASS variables file which will overwrite existing framework values. You can find more information about available variables on the [Vuetify SASS Variables](https://vuetifyjs.com/en/customization/sass-variables#variable-api) documentation page or within the API section of a component."
 }
