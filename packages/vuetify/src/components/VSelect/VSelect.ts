@@ -25,7 +25,7 @@ import mergeData from '../../util/mergeData'
 
 // Types
 import mixins from '../../util/mixins'
-import { VNode, VNodeDirective, PropType } from 'vue'
+import { VNode, VNodeDirective, PropType, VNodeData } from 'vue'
 import { SelectItemKey } from 'types'
 
 export const defaultMenuProps = {
@@ -416,9 +416,10 @@ export default baseMixins.extend<options>().extend({
     },
     genIcon (
       type: string,
-      cb?: (e: Event) => void
+      cb?: (e: Event) => void,
+      extraData?: VNodeData
     ) {
-      const icon = VInput.options.methods.genIcon.call(this, type, cb)
+      const icon = VInput.options.methods.genIcon.call(this, type, cb, extraData)
 
       if (type === 'append') {
         // Don't allow the dropdown icon to be focused
