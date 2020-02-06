@@ -25,7 +25,7 @@ import mergeData from '../../util/mergeData'
 
 // Types
 import mixins from '../../util/mixins'
-import { VNode, VNodeDirective, PropType } from 'vue'
+import { VNode, VNodeDirective, PropType, VNodeData } from 'vue'
 import { SelectItemKey } from 'types'
 
 export const defaultMenuProps = {
@@ -416,19 +416,21 @@ export default baseMixins.extend<options>().extend({
     },
     genIcon (
       type: string,
-      cb?: (e: Event) => void
+      cb?: (e: Event) => void,
+      extraData?: VNodeData
     ) {
-      const icon = VInput.options.methods.genIcon.call(this, type, cb)
+      const icon = VInput.options.methods.genIcon.call(this, type, cb, extraData)
 
-      icon.children![0].data = mergeData(icon.children![0].data!, {
-        attrs: {
-          tabindex: type !== 'append'
-            ? undefined
-            : (icon.children![0].componentOptions!.listeners && '-1'),
-          'aria-hidden': 'true',
-          'aria-label': undefined,
-        },
-      })
+      if (type === 'append') {
+        // Don't allow the dropdown icon to be focused
+        icon.children![0].data = mergeData(icon.children![0].data!, {
+          attrs: {
+            tabindex: icon.children![0].componentOptions!.listeners && '-1',
+            'aria-hidden': 'true',
+            'aria-label': undefined,
+          },
+        })
+      }
 
       return icon
     },

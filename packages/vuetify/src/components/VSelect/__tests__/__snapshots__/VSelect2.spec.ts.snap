@@ -23,8 +23,8 @@ exports[`VSelect.ts should be clearable with prop, dirty and multi select 1`] = 
         </div>
         <div class="v-input__append-inner">
           <div class="v-input__icon v-input__icon--clear">
-            <button aria-hidden="true"
-                    type="button"
+            <button type="button"
+                    aria-label="clear icon"
                     class="v-icon notranslate v-icon--link material-icons theme--light"
             >
               $clear
@@ -83,8 +83,8 @@ exports[`VSelect.ts should be clearable with prop, dirty and single select 1`] =
         </div>
         <div class="v-input__append-inner">
           <div class="v-input__icon v-input__icon--clear">
-            <button aria-hidden="true"
-                    type="button"
+            <button type="button"
+                    aria-label="clear icon"
                     class="v-icon notranslate v-icon--link material-icons theme--light"
             >
               $clear
