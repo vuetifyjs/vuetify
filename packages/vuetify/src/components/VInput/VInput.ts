@@ -167,7 +167,7 @@ export default baseMixins.extend<options>().extend({
     genIcon (
       type: string,
       cb?: (e: Event) => void,
-      extraData?: VNodeData
+      extraData: VNodeData = {}
     ) {
       const icon = (this as any)[`${type}Icon`]
       const eventName = `click:${kebabCase(type)}`
@@ -198,7 +198,7 @@ export default baseMixins.extend<options>().extend({
               e.stopPropagation()
             },
           },
-      }, extraData || {})
+      }, extraData)
 
       return this.$createElement('div', {
         staticClass: `v-input__icon`,
