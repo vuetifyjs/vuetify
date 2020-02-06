@@ -374,6 +374,7 @@ export default baseMixins.extend({
     },
     getTiles () {
       if (!this.$refs.content) return
+
       this.tiles = Array.from(this.$refs.content.querySelectorAll('.v-list-item'))
     },
     mouseEnterHandler () {

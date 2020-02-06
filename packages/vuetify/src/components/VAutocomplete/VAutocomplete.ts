@@ -6,8 +6,8 @@ import VSelect, { defaultMenuProps as VSelectMenuProps } from '../VSelect/VSelec
 import VTextField from '../VTextField/VTextField'
 
 // Utilities
-import { keyCodes } from '../../util/helpers'
 import mergeData from '../../util/mergeData'
+import { keyCodes } from '../../util/helpers'
 
 // Types
 import { PropType } from 'vue'
