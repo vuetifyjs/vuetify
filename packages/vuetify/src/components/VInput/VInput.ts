@@ -16,6 +16,7 @@ import {
   getSlot,
   kebabCase,
 } from '../../util/helpers'
+import mergeData from '../../util/mergeData'
 
 // Types
 import { VNode, VNodeData, PropType } from 'vue'
@@ -165,17 +166,16 @@ export default baseMixins.extend<options>().extend({
     },
     genIcon (
       type: string,
-      cb?: (e: Event) => void
+      cb?: (e: Event) => void,
+      extraData: VNodeData = {}
     ) {
       const icon = (this as any)[`${type}Icon`]
       const eventName = `click:${kebabCase(type)}`
       const hasListener = !!(this.listeners$[eventName] || cb)
 
-      const data: VNodeData = {
+      const data = mergeData({
         attrs: {
           'aria-label': hasListener ? kebabCase(type).split('-')[0] + ' icon' : undefined,
-        },
-        props: {
           color: this.validationState,
           dark: this.dark,
           disabled: this.disabled,
@@ -198,7 +198,7 @@ export default baseMixins.extend<options>().extend({
               e.stopPropagation()
             },
           },
-      }
+      }, extraData)
 
       return this.$createElement('div', {
         staticClass: `v-input__icon`,

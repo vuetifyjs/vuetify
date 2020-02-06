@@ -437,7 +437,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
                        id="input-429"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -826,7 +826,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
                        id="input-448"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -1116,7 +1116,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
                        id="input-410"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -1310,7 +1310,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                        id="input-351"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -1599,7 +1599,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                        id="input-351"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -1993,7 +1993,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
                        id="input-371"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -2196,7 +2196,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
                        id="input-371"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -2452,7 +2452,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
                        id="input-391"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -2848,7 +2848,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
                        id="input-391"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -3116,7 +3116,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
                        id="input-525"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -3215,7 +3215,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
                        id="input-298"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -3314,7 +3314,7 @@ exports[`VDataTable.ts should render 1`] = `
                        id="input-6"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -3410,7 +3410,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
                        id="input-332"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -3538,7 +3538,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
                        id="input-246"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -3744,7 +3744,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
                        id="input-265"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -3935,7 +3935,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
                        id="input-45"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -4224,7 +4224,7 @@ exports[`VDataTable.ts should render with data 1`] = `
                        id="input-25"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -4408,7 +4408,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
                        id="input-230"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -4835,7 +4835,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                        id="input-155"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -5208,7 +5208,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                        id="input-210"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -5412,7 +5412,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
                        id="input-176"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -5726,7 +5726,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
                        id="input-115"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -6061,7 +6061,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
                        id="input-69"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -6396,7 +6396,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
                        id="input-69"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>
@@ -6758,7 +6758,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
                        id="input-94"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
                        autocomplete="off"
                 >
               </div>

@@ -5,6 +5,7 @@ import './VMenu.sass'
 import { VThemeProvider } from '../VThemeProvider'
 
 // Mixins
+import Activatable from '../../mixins/activatable'
 import Delayable from '../../mixins/delayable'
 import Dependent from '../../mixins/dependent'
 import Detachable from '../../mixins/detachable'
@@ -269,6 +270,18 @@ export default baseMixins.extend({
         this.closeOnClick &&
         !this.$refs.content.contains(target)
     },
+    genActivatorAttributes () {
+      const attributes = Activatable.options.methods.genActivatorAttributes.call(this)
+
+      if (this.activeTile && this.activeTile.id) {
+        return {
+          ...attributes,
+          'aria-activedescendant': this.activeTile.id,
+        }
+      }
+
+      return attributes
+    },
     genActivatorListeners () {
       const listeners = Menuable.options.methods.genActivatorListeners.call(this)
 
@@ -360,6 +373,8 @@ export default baseMixins.extend({
       )
     },
     getTiles () {
+      if (!this.$refs.content) return
+
       this.tiles = Array.from(this.$refs.content.querySelectorAll('.v-list-item'))
     },
     mouseEnterHandler () {
