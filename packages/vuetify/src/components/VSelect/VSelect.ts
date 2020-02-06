@@ -22,7 +22,6 @@ import ClickOutside from '../../directives/click-outside'
 import mergeData from '../../util/mergeData'
 import { getPropertyFromItem, getObjectValueByPath, keyCodes } from '../../util/helpers'
 import { consoleError } from '../../util/console'
-import mergeData from '../../util/mergeData'
 
 // Types
 import mixins from '../../util/mixins'
