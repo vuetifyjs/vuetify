@@ -19,7 +19,7 @@ import ClickOutside from '../../directives/click-outside'
 
 // Utilities
 import mergeData from '../../util/mergeData'
-import { getPropertyFromItem, keyCodes } from '../../util/helpers'
+import { getPropertyFromItem, getObjectValueByPath, keyCodes } from '../../util/helpers'
 import { consoleError } from '../../util/console'
 
 // Types

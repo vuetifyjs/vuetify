@@ -7,7 +7,7 @@ import VTextField from '../VTextField/VTextField'
 
 // Utilities
 import mergeData from '../../util/mergeData'
-import { keyCodes } from '../../util/helpers'
+import { keyCodes, getObjectValueByPath } from '../../util/helpers'
 
 // Types
 import { PropType } from 'vue'
