@@ -14289,6 +14289,11 @@ typescript@^3.8.0-dev.20200201:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.8.0-dev.20200201.tgz#e03210f5c7915f89cb77bd38793d12a69933a1a6"
   integrity sha512-KhaK6J3dIg6p9t24UVhBLcBIav4MpMExlD6nf18cVwp9LELuqhWu0NDmnLdSN0ovsrbcIJNmobQ1xC7vLN21eg==
 
+typescript@^3.8.0-dev.20200206:
+  version "3.8.0-dev.20200206"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.8.0-dev.20200206.tgz#4d5c377db14a9f166d172934a4add60a9157881d"
+  integrity sha512-wCLl+s+qhZX46hDlYuS9FDAT1J0LgDYRYIPebQWXFuYSyy7eZGUgiISEajSEhEV02+bgwrCiobm/2jgSLTMYxw==
+
 typestrict@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/typestrict/-/typestrict-1.0.2.tgz#7167559a128508162920614ce58af6ac6b5ba29a"
