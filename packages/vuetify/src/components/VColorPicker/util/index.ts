@@ -129,8 +129,11 @@ export function parseColor (color: any, oldColor: VColorPickerColor | null) {
 function stripAlpha (color: any, stripAlpha: boolean) {
   if (stripAlpha) {
     const { a, ...rest } = color
+
     return rest
-  } else return color
+  }
+
+  return color
 }
 
 export function extractColor (color: VColorPickerColor, input: any) {

@@ -61,6 +61,7 @@ export default mixins(Themeable).extend({
   computed: {
     hideAlpha (): boolean {
       if (!this.value) return false
+
       return !hasAlpha(this.value)
     },
   },
