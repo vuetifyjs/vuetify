@@ -17,3 +17,5 @@ export const asDefault = () => story({
   },
   template: `<v-btn :disabled="isDisabled">{{ text }}</v-btn>`
 })
+
+export const asDisabled = () => '<v-btn :disabled="true">disabled</v-btn>'

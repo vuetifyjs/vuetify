@@ -1,6 +1,6 @@
 import setup from "./bootstrap"
 
-setup('VTabs', 'vtabs--default', test => {
+setup('VTabs', 'vtabs--as-default', test => {
   test('render', async (_, eyes) => {
     await eyes.checkWindow('Base')
   })
