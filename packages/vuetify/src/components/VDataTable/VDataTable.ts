@@ -422,7 +422,7 @@ export default VDataIterator.extend({
         this.$createElement('template', { slot: 'row.content' }, [expandedRow]),
       ])
     },
-    genDefaultSimpleRow (item: any, classes: Record<string, boolean> = {}, index: Number = 0): VNode {
+    genDefaultSimpleRow (item: any, classes: Record<string, boolean> = {}, index = 0): VNode {
       const scopedSlots = getPrefixedScopedSlots('item.', this.$scopedSlots)
 
       const data = this.createItemProps(item)
