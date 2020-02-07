@@ -286,15 +286,13 @@ export default baseMixins.extend({
         style: { zIndex: this.activeZIndex },
         ref: 'content',
       }, [
-        this.$createElement('div', data, [
-          this.$createElement(VThemeProvider, {
-            props: {
-              root: true,
-              light: this.light,
-              dark: this.dark,
-            },
-          }, this.getContentSlot()),
-        ]),
+        this.$createElement(VThemeProvider, {
+          props: {
+            root: true,
+            light: this.light,
+            dark: this.dark,
+          },
+        }, [this.$createElement('div', data, this.getContentSlot())]),
       ])
     },
   },
