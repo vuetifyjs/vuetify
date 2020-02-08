@@ -1,9 +1,9 @@
 {
-  "color": "green",
+  "color": "base",
   "close": true,
-  "id": "new-store",
-  "text": "Check it Out",
-  "msg": "💖 New Vuetify Store in Beta 🛒",
-  "href": "https://store-beta.vuetifyjs.com/",
+  "id": "vuetify-italy",
+  "text": "More info",
+  "msg": "🌏 Come see the Author, [John Leider](https://twitter.com/@zeroskillz), speak in **Italy** this February!",
+  "href": "https://www.eventbrite.com/e/klab-2020-1-vuetify-in-depth-tickets-90932552713?ref=vuetifyjs.com",
   "timeout": 0
 }

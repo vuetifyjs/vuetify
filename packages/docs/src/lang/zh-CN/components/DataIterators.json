@@ -1,1 +1,77 @@
-{}
+{
+  "heading": "# 数据迭代器",
+  "headingText": "`v-data-iterator` 组件用于显示数据，并将其大部分功能与 `v-data-table` 组件共享。功能包括排序、搜索、分页和选择。",
+  "examples": {
+    "usage": {
+      "desc": "`v-data-iterator` 允许您精确地自定义如何显示数据。在本例中，我们使用带有卡片的网格。"
+    },
+    "slots": {
+      "heading": "### 插槽",
+      "desc": "`v-data-iterator` 同时具有页眉和页脚插槽，用于添加额外的内容。"
+    },
+    "expand": {
+      "heading": "### 扩展",
+      "desc": "`v-data-iterator` 具有内部状态，可以进行选择和扩展，就像 `v-data-table` 一样。在本例中，我们使用了在默认插槽上可用的 `isExpanded` 和 `expand` \n 方法。"
+    },
+    "filter": {
+      "heading": "### 过滤器",
+      "desc": "顺序，过滤器和分页可以使用单独的道具从外部进行控制"
+    }
+  },
+  "props": {
+    "v-data-iterator": {
+      "expanded": "扩展项目数组。可以与 `.sync` 修饰符一起使用",
+      "footerProps": "更多信息请访问 `v-data-footer` API",
+      "hideDefaultFooter": "默认隐藏页脚",
+      "itemKey": "每个项上用作唯一键的属性",
+      "loading": "如果为 `true` 且未提供任何项目，则将显示加载文本",
+      "loadingText": "当 `loading` 为 true 且未提供任何物品时显示的文本",
+      "noDataText": "未向组件提供任何项目时显示的文本",
+      "noResultsText": "使用 `search` 属性时显示的文本，但没有结果",
+      "singleExpand": "将扩展模式更改为单个扩展",
+      "singleSelect": "将选择模式更改为单选",
+      "value": "用于控制选定的行"
+    },
+    "v-data-footer": {
+      "disableItemsPerPage": "禁用每页下拉菜单项",
+      "disablePagination": "禁用分页按钮",
+      "firstIcon": "第一个图标",
+      "itemsPerPageAllText": "每页下拉菜单中 'All' 选项的文本",
+      "itemsPerPageOptions": "每页项目下拉列表中显示的选项数组",
+      "itemsPerPageText": "每页项目的文本下拉菜单",
+      "lastIcon": "最后一个图标",
+      "nextIcon": "下一图标",
+      "options": "数据选项",
+      "pagination": "数据分页",
+      "prevIcon": "上一个图标",
+      "showCurrentPage": "在 上一个/下一个 图标之间显示当前页码",
+      "showFirstLastPage": "显示 第一个/最后一个 图标"
+    }
+  },
+  "slots": {
+    "v-data-iterator": {
+      "default": "默认插槽。用它渲染您的项目",
+      "footer.page-text": "该插槽将转发到默认页脚。 有关更多信息，请参见 `v-data-footer` API。",
+      "footer": "在项目下方定义页脚",
+      "heading": "在项目上方定义标题",
+      "item": "每个项目的插槽",
+      "loading": "定义 `loading` 为 true 且未提供任何项目时的内容",
+      "no-data": "定义何时不提供任何项目的内容",
+      "no-results": "定义何时提供 `search` 但未找到结果的内容"
+    },
+    "v-data-footer": {
+      "pageText": "定义每页项目文本的内容"
+    }
+  },
+  "events": {
+    "v-data-iterator": {
+      "input": "选中项数组",
+      "item-expanded": "展开或关闭项目时发出的事件",
+      "item-selected": "选中或取消选中某项时发出的事件",
+      "update:expanded": "`expanded` 属性的 `.sync` 事件"
+    },
+    "v-data-footer": {
+      "update:options": "`options` 属性的 `.sync` 事件"
+    }
+  }
+}

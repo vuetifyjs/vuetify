@@ -41,7 +41,7 @@
   },
   "getting-started/quick-start": {
     "title": "Quick start",
-    "description": "Get started with Vue and Vuetify in no time. Support for Vue CLI 3, Webpack, Nuxt and more.",
+    "description": "Get started with Vue and Vuetify in no time. Support for Vue CLI, Webpack, Nuxt and more.",
     "keywords": "quick start, vuetify templates, installing vuetify, install vuetify"
   },
   "getting-started/pre-made-layouts": {
@@ -98,6 +98,11 @@
     "title": "RTL (bidirectionality)",
     "description": "Vuetify is configurable and compatible with RTL languages.",
     "keywords": "rtl, right-to-left, bidirectionality"
+  },
+  "customization/presets": {
+    "title": "Presets",
+    "description": "Presets are Vue CLI plugins that drastically alter the look and feel of your Vuetify application.",
+    "keywords": "vuetify presets, custom material design"
   },
   "customization/sass-variables": {
     "title": "SASS variables",

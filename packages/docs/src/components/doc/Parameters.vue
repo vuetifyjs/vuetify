@@ -183,25 +183,25 @@
         // api['v-btn'] = 'Components.Buttons'
         const apiDesc = `${composite}.api['${this.target}']`
 
-        if (this.$te(specialDesc)) {
+        if (this.$te(specialDesc, 'en')) {
           description = this.$t(specialDesc)
           devPrepend = `**SPECIAL (${item.source})** - `
-        } else if (this.$te(componentDesc)) {
+        } else if (this.$te(componentDesc, 'en')) {
           description = this.$t(componentDesc)
           devPrepend = `**COMPONENT (${item.source})** - `
-        } else if (this.$te(componentNestedDesc)) {
+        } else if (this.$te(componentNestedDesc, 'en')) {
           description = this.$t(componentNestedDesc)
           devPrepend = `**COMPONENT NESTED (${item.source})** - `
-        } else if (this.$te(selfDesc)) {
+        } else if (this.$te(selfDesc, 'en')) {
           description = this.$t(selfDesc)
           devPrepend = `**SELF** - `
-        } else if (this.$te(mixinDesc)) {
+        } else if (this.$te(mixinDesc, 'en')) {
           description = this.$t(mixinDesc)
           devPrepend = `**MIXIN (${item.source})** - `
-        } else if (this.$te(genericDesc)) {
+        } else if (this.$te(genericDesc, 'en')) {
           description = this.$t(genericDesc)
           devPrepend = `**GENERIC (${item.source})** - `
-        } else if (this.$te(apiDesc)) {
+        } else if (this.$te(apiDesc, 'en')) {
           const [namespace, page] = this.$t(apiDesc).split('.')
 
           return this.genDescription(name, item, namespace, page)

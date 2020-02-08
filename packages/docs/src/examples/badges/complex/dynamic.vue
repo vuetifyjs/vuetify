@@ -1,8 +1,6 @@
 <template>
-  <v-container fluid class="text-center">
-    <v-row
-      justify="space-around"
-    >
+  <v-container>
+    <v-row justify="space-around">
       <div>
         <v-btn
           class="mx-1"
@@ -11,6 +9,7 @@
         >
           Send Message
         </v-btn>
+
         <v-btn
           class="mx-1"
           color="error"
@@ -19,13 +18,13 @@
           Clear Notifications
         </v-btn>
       </div>
+
       <v-badge
+        :content="messages"
+        :value="messages"
         color="green"
         overlap
       >
-        <template v-slot:badge>
-          <span v-if="messages > 0">{{ messages }}</span>
-        </template>
         <v-icon large>mdi-email</v-icon>
       </v-badge>
     </v-row>
@@ -36,8 +35,8 @@
   export default {
     data () {
       return {
-        show: false,
         messages: 0,
+        show: false,
       }
     },
   }

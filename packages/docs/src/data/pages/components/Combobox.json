@@ -7,13 +7,44 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "usage"
+          "type": "usage-new",
+          "value": {
+            "booleans": [
+              "hide-selected",
+              "multiple",
+              "persistent-hint",
+              "small-chips",
+              "clearable"
+            ],
+            "selects": [
+              {
+                "prop": "type",
+                "label": "Type",
+                "attrs": {
+                  "items": [
+                    "filled",
+                    "outlined",
+                    "solo"
+                  ]
+                }
+              }
+            ]
+          }
         },
         {
           "type": "alert",
           "lang": "Components.Selects.objectAlert",
           "value": "error"
+        },
+        {
+          "type": "alert",
+          "lang": "Components.Selects.autoAlert",
+          "value": "warning"
+        },
+        {
+          "type": "alert",
+          "lang": "Components.Selects.autocompleteAlert",
+          "value": "info"
         }
       ]
     },
@@ -23,15 +54,6 @@
         {
           "type": "api",
           "value": [ "v-combobox" ]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "playground",
-          "value": "playground"
         }
       ]
     },

@@ -15,15 +15,15 @@ import Themeable from '../../mixins/themeable'
 // Directives
 import ClickOutside from '../../directives/click-outside'
 import Resize from '../../directives/resize'
-import Touch, { TouchWrapper } from '../../directives/touch'
+import Touch from '../../directives/touch'
 
 // Utilities
 import { convertToUnit, getSlot } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
 // Types
-import { VNode, VNodeDirective } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { VNode, VNodeDirective, PropType } from 'vue'
+import { TouchWrapper } from 'types'
 
 const baseMixins = mixins(
   Applicationable('left', [
@@ -75,7 +75,7 @@ export default baseMixins.extend({
     miniVariant: Boolean,
     miniVariantWidth: {
       type: [Number, String],
-      default: 80,
+      default: 56,
     },
     mobileBreakPoint: {
       type: [Number, String],
@@ -84,9 +84,9 @@ export default baseMixins.extend({
     permanent: Boolean,
     right: Boolean,
     src: {
-      type: [String, Object],
+      type: [String, Object] as PropType<string | srcObject>,
       default: '',
-    } as PropValidator<string | srcObject>,
+    },
     stateless: Boolean,
     tag: {
       type: String,
@@ -100,7 +100,7 @@ export default baseMixins.extend({
       type: [Number, String],
       default: 256,
     },
-    value: { required: false } as PropValidator<any>,
+    value: null as unknown as PropType<any>,
   },
 
   data: () => ({
@@ -132,6 +132,7 @@ export default baseMixins.extend({
         'v-navigation-drawer--is-mobile': this.isMobile,
         'v-navigation-drawer--is-mouseover': this.isMouseover,
         'v-navigation-drawer--mini-variant': this.isMiniVariant,
+        'v-navigation-drawer--custom-mini-variant': Number(this.miniVariantWidth) !== 56,
         'v-navigation-drawer--open': this.isActive,
         'v-navigation-drawer--open-on-hover': this.expandOnHover,
         'v-navigation-drawer--right': this.right,

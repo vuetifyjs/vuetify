@@ -1,7 +1,7 @@
 <template>
   <v-responsive
-    class="mr-0 mr-md-6 hidden-xs-only"
-    max-width="250"
+    class="mr-0 mr-md-6 hidden-xs-only transition-swing"
+    :max-width="isFocused ? 300 : 250"
   >
     <v-text-field
       id="search"
@@ -16,6 +16,7 @@
       rounded
       solo-inverted
       @blur="onBlur"
+      @focus="onFocus"
       @keydown.esc="onEsc"
     />
   </v-responsive>
@@ -26,26 +27,29 @@
     name: 'DocumentationSearch',
 
     data: () => ({
-      label: `Search ("/" to focus)`,
-      search: '',
       docSearch: {},
+      isFocused: false,
       isSearching: false,
+      label: 'Search ("/" to focus)',
+      search: '',
+      timeout: null,
     }),
 
     watch: {
       isSearching (val) {
-        this.$refs.toolbar.isScrolling = !val
         if (val) {
-          this.$nextTick(() => this.$refs.search.focus())
-        } else {
-          this.search = null
+          this.$refs.search.focus()
+
+          return
         }
+
+        this.resetSearch()
       },
       search (val) {
-        if (!val) {
-          this.docSearch.autocomplete.autocomplete.close()
-          this.docSearch.autocomplete.autocomplete.setVal('')
-        }
+        if (val) return
+
+        this.docSearch.autocomplete.autocomplete.close()
+        this.docSearch.autocomplete.autocomplete.setVal('')
       },
     },
 
@@ -54,10 +58,11 @@
         e = e || window.event
 
         if (
-          e.keyCode === 191 &&
+          e.keyCode === 191 && // Forward Slash '/'
           e.target !== this.$refs.search.$refs.input
         ) {
           e.preventDefault()
+
           this.$refs.search.focus()
         }
       }
@@ -74,6 +79,7 @@
 
     beforeDestroy () {
       document.onkeydown = null
+
       this.docSearch.autocomplete.autocomplete.close()
       this.docSearch.autocomplete.autocomplete.setVal('')
     },
@@ -81,31 +87,44 @@
     methods: {
       init ({ default: docsearch }) {
         const vm = this
+
         this.docSearch = docsearch({
           apiKey: '259d4615e283a1bbaa3313b4eff7881c',
           autocompleteOptions: {
             appendTo: '#documentation-app-bar',
+            autoselect: true,
+            clearOnSelected: true,
             hint: false,
             debug: process.env.NODE_ENV === 'development',
           },
+          handleSelected (input, event, suggestion) {
+            vm.$router.push(suggestion.url.split('.com').pop())
+            vm.resetSearch(400)
+          },
           indexName: 'vuetifyjs',
           inputSelector: '#search',
-          handleSelected (input, event, suggestion) {
-            const url = suggestion.url
-            const loc = url.split('.com')
-
-            vm.search = ''
-            vm.isSearching = false
-            vm.$router.push(loc.pop())
-            vm.onEsc()
-          },
         })
       },
       onBlur () {
-        this.$nextTick(() => (this.search = ''))
+        this.resetSearch()
       },
       onEsc () {
         this.$refs.search.blur()
+      },
+      onFocus () {
+        clearTimeout(this.timeout)
+
+        this.isFocused = true
+      },
+      resetSearch (timeout = 0) {
+        clearTimeout(this.timeout)
+
+        this.$nextTick(() => {
+          this.search = undefined
+          this.isSearching = false
+
+          this.timeout = setTimeout(() => (this.isFocused = false), timeout)
+        })
       },
     },
   }

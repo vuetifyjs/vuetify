@@ -4,10 +4,10 @@
     class="text-center"
   >
     <home-cards
-      heading="Vuetify.Home.premiumThemes"
-      subheading="Vuetify.Home.premiumThemesText"
       :cards="themes"
       :value="isLoading"
+      heading="Vuetify.Home.premiumThemes"
+      subheading="Vuetify.Home.premiumThemesText"
     />
 
     <v-btn
@@ -33,17 +33,13 @@
   export default {
     name: 'HomePremiumThemes',
 
-    provide: {
-      id: 'home-premium-themes',
-    },
+    provide: { id: 'home-premium-themes' },
 
     components: {
       HomeCards: () => import('./Cards'),
     },
 
-    data: () => ({
-      isLoading: true,
-    }),
+    data: () => ({ isLoading: true }),
 
     computed: {
       templates: get('documentation/themes'),

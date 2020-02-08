@@ -9,13 +9,18 @@ $border-radius-root: 4px !default;
 
 $spacer: 4px !default;
 
-$spacers: ();
-@for $i from 0 through 12 {
-  $spacers: map-merge($spacers, ($i: $spacer * $i))
+$spacers: () !default;
+@if (type-of($spacers) == list) {
+  @for $i from 0 through 12 {
+    $spacers: map-merge($spacers, ($i: $spacer * $i))
+  }
 }
-$negative-spacers: ();
-@for $i from 1 through 12 {
-  $negative-spacers: map-merge($negative-spacers, ("n" + $i: -$spacer * $i))
+
+$negative-spacers: () !default;
+@if (type-of($negative-spacers) == list) {
+  @for $i from 1 through 12 {
+    $negative-spacers: map-merge($negative-spacers, ("n" + $i: -$spacer * $i))
+  }
 }
 
 $grid-breakpoints: () !default;
@@ -29,6 +34,7 @@ $grid-breakpoints: map-deep-merge(
   ),
   $grid-breakpoints
 );
+
 $grid-gutter: $spacer * 6 !default;
 $form-grid-gutter: $spacer * 2 !default;
 $grid-columns: 12 !default;
@@ -141,37 +147,43 @@ $headings: map-deep-merge(
       'size': 1rem,
       'weight': 400,
       'line-height': 1.75rem,
-      'letter-spacing': .009375em
+      'letter-spacing': .009375em,
+      'font-family': $body-font-family
     ),
     'subtitle-2': (
       'size': .875rem,
       'weight': 500,
       'line-height': 1.375rem,
-      'letter-spacing': .0071428571em
+      'letter-spacing': .0071428571em,
+      'font-family': $body-font-family
     ),
     'body-2': (
       'size': .875rem,
       'weight': 400,
       'letter-spacing': .0178571429em,
-      'line-height': 1.25rem
+      'line-height': 1.25rem,
+      'font-family': $body-font-family
     ),
     'body-1': (
       'size': 1rem,
       'weight': 400,
       'letter-spacing': .03125em,
-      'line-height': 1.5rem
+      'line-height': 1.5rem,
+      'font-family': $body-font-family
     ),
     'caption': (
       'size': .75rem,
       'weight': 400,
       'letter-spacing': .0333333333em,
-      'line-height': 1.25rem
+      'line-height': 1.25rem,
+      'font-family': $body-font-family
     ),
     'overline': (
       'size': .625rem,
       'weight': 400,
       'letter-spacing': .1666666667em,
-      'line-height': 1rem
+      'line-height': 1rem,
+      'font-family': $body-font-family
     )
   ),
   $headings
@@ -192,12 +204,12 @@ $transition: map-deep-merge(
 $primary-transition: 0.3s map-get($transition, 'swing') !default;
 $secondary-transition: 0.2s map-get($transition, 'ease-in-out') !default;
 
-/** Ripples */
+// Ripples //;
 $ripple-animation-transition-in: transform 0.25s map-get($transition, 'fast-out-slow-in'), opacity 0.1s map-get($transition, 'fast-out-slow-in') !default;
 $ripple-animation-transition-out: opacity 0.3s map-get($transition, 'fast-out-slow-in') !default;
 $ripple-animation-visible-opacity: 0.15 !default;
 
-/** Elements */
+// Elements //;
 $bootable-transition: 0.2s map-get($transition, 'fast-out-slow-in') !default;
 $blockquote-font-size: 18px !default;
 $blockquote-font-weight: 300 !default;

@@ -189,6 +189,22 @@ describe('VInput.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should hide messages if no messages and hide-details is auto', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        hideDetails: 'auto',
+      },
+    })
+
+    expect(wrapper.vm.genMessages()).toBeNull()
+
+    wrapper.setProps({ error: true })
+    expect(wrapper.vm.genMessages()).toBeNull()
+
+    wrapper.setProps({ errorMessages: 'required' })
+    expect(wrapper.vm.genMessages()).not.toBeNull()
+  })
+
   it('should be disabled', () => {
     const wrapper = mountFunction()
 

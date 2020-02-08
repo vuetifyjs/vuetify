@@ -11,21 +11,21 @@
     />
 
     <v-skeleton-loader
-      type="image"
       class="d-inline-block"
       height="133"
+      type="image"
       width="362"
     />
 
     <v-skeleton-loader
-      type="spacer@2, heading, spacer@2"
       :types="types"
       max-width="50%"
+      type="spacer@2, heading, spacer@2"
     />
 
     <v-skeleton-loader
-      type="sentences, spacer@6"
       :types="types"
+      type="sentences, spacer@6"
     />
 
     <v-skeleton-loader type="table-heading, image" />
@@ -37,9 +37,7 @@
     name: 'PageSkeletonLoader',
 
     data: () => ({
-      types: {
-        spacer: 'spacer',
-      },
+      types: { spacer: 'spacer' },
     }),
   }
 </script>

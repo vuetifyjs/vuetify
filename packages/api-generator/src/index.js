@@ -131,6 +131,59 @@ function parseMixins (component) {
   return mixins.sort((a, b) => a > b)
 }
 
+function processVariableFile (path) {
+  if (fs.existsSync(path)) {
+    const varFile = fs.readFileSync(path, 'utf8')
+    const vars = varFile.split(/;[\n]*/g)
+    const varValues = []
+    for (const [ind, varString] of vars.entries()) {
+      const varArr = varString.split(':')
+      if (varArr.length >= 2 && varArr[0].charAt(0) === '$') {
+        const varName = varArr.shift().trim()
+        let varDefault = (vars[ind + 1].charAt(0) === '@')
+          ? vars[ind + 1]
+          : varArr.join(':')
+        varDefault = `${varDefault.trim()};`
+        const lastIndex = varValues.findIndex(item => item.name === varName)
+        if (lastIndex > -1) {
+          varValues[lastIndex].default = varDefault
+        } else {
+          varValues.push({
+            name: varName,
+            default: varDefault,
+          })
+        }
+      }
+    }
+    return varValues
+  }
+}
+
+function parseVariables () {
+  const variables = {}
+  const varPaths = [
+    { path: './../vuetify/src/styles/settings/_variables.scss', tag: 'globals' },
+    { path: './../vuetify/src/styles/settings/_light.scss', tag: 'light' },
+    { path: './../vuetify/src/styles/settings/_dark.scss', tag: 'dark' },
+  ]
+  // component dir
+  const rootDir = './../vuetify/src/components'
+  const comps = fs.readFileSync(`${rootDir}/index.ts`, 'utf8')
+  const folders = comps
+    .trim()
+    .replace(/export\s\*\sfrom\s'.\//g, '')
+    .split(`'\n`)
+  for (const folder of folders) {
+    varPaths.push({ path: `${rootDir}/${folder}/_variables.scss`, tag: hyphenate(folder) })
+  }
+  // process all variable paths
+  for (const varPath of varPaths) {
+    variables[varPath.tag] = processVariableFile(varPath.path)
+  }
+
+  return variables
+}
+
 const components = {}
 const directives = {}
 
@@ -260,12 +313,15 @@ const fakeComponents = ts => {
   }).join('\n')
 }
 
+const variables = parseVariables()
+
 if (!fs.existsSync('dist')) {
   fs.mkdirSync('dist', 0o755)
 }
 
 writeJsonFile(tags, 'dist/tags.json')
 writeJsonFile(attributes, 'dist/attributes.json')
+writeJsonFile(variables, 'dist/variables.json')
 writePlainFile(fakeComponents(false), 'dist/fakeComponents.js')
 writePlainFile(fakeComponents(true), 'dist/fakeComponents.ts')
 

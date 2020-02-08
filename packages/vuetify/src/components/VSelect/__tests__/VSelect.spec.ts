@@ -268,7 +268,7 @@ describe('VSelect.ts', () => {
 
     const wrapper = mountFunction({
       propsData: {
-        menuProps: { contentClass: 'v-menu-class' },
+        menuProps: { contentClass: 'v-menu-class', eager: true },
         items,
       },
     })
@@ -440,5 +440,15 @@ describe('VSelect.ts', () => {
 
     expect(wrapper.vm.$slots['no-data']).toBeTruthy()
     expect(list.html()).toMatchSnapshot()
+  })
+
+  it('should change autocomplete attribute', () => {
+    const wrapper = mountFunction({
+      attrs: {
+        autocomplete: 'on',
+      },
+    })
+
+    expect(wrapper.vm.$attrs.autocomplete).toBe('on')
   })
 })

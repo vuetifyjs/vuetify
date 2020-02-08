@@ -1,1 +1,152 @@
-{}
+{
+  "examples": {
+    "date-allowed-dates": {
+      "desc": "您可以使用数组、对象和函数指定允许的日期。",
+      "heading": "### 日期选择器 - 允许的日期"
+    },
+    "date-birthday": {
+      "desc": "默认情况下，从年份选择器开始，限制日期范围并在选择日期后关闭选择器菜单，使之成为理想的生日选择器。",
+      "heading": "### 日期选择器 - 生日选择器"
+    },
+    "date-colorable": {
+      "desc": "日期选择器颜色可以使用 `color` 和 `header-color` 属性设置。如果没有提供 `header-color` 属性将使用 `color` 属性值。",
+      "heading": "### 日期选择器 - 颜色"
+    },
+    "date-current": {
+      "desc": "默认情况下，使用轮廓按钮显示当前日期 - **show-current** 属性可让您删除边框或选择其他日期作为当前日期显示。",
+      "heading": "### 日期选择器 - 当前日期指示器"
+    },
+    "date-dialog-and-menu": {
+      "desc": "将选择器集成到 `v-text-field` 中时，建议使用 **readonly** 属性。 这样可以防止移动键盘触发。 为了节省垂直空间，您还可以隐藏选择器标题。\n\n选择器提供了一个插槽，您可以使用它来保存和取消功能。 这将保留一个旧值，如果用户取消，则可以替换该旧值。",
+      "heading": "### 日期选择器 - 在对话框和菜单中"
+    },
+    "date-events": {
+      "desc": "您可以使用数组，对象或函数指定事件。 要更改事件的默认颜色，请使用 **event-color** 属性。 如果您想显示多个事件指示器，则您的事件函数或对象可以返回颜色（material 或 css）数组。",
+      "heading": "### 日期选择器 - 事件"
+    },
+    "date-formatting": {
+      "desc": "如果您需要以自定义格式显示日期（不同于YYYY-MM-DD），您需要使用格式化函数。",
+      "heading": "### 日期选择器 - 格式化日期"
+    },
+    "date-formatting-moment-datefns": {
+      "desc": "也可以使用外部库（例如 Moment.js 或 date-fns）格式化日期",
+      "heading": "### 日期选择器 - 使用外部库格式化日期"
+    },
+    "date-icons": {
+      "desc": "您可以覆盖选择器中使用的默认图标。",
+      "heading": "### 日期选择器 - 图标"
+    },
+    "date-internationalization": {
+      "desc": "日期选择器通过 JavaScript Date 对象支持国际化。 使用 `locale` 属性指定 BCP 47 语言标签，然后使用`first-day-of-week` 属性设置一周的第一天。",
+      "heading": "### 日期选择器 - 国际化"
+    },
+    "date-multiple": {
+      "desc": "日期选择器使用 `multiple` 属性可以选择多个日期。如果使用 `multiple`，那么日期选择器期望它的模型是一个数组。",
+      "heading": "### 日期选择器 - 多选"
+    },
+    "date-range": {
+      "desc": "日期选择器可以使用 `range` 属性选择日期范围。 当使用 `range` 属性时，日期选择器它的模型为长度为 2 的数组或为空。",
+      "heading": "### 日期选择器 - 范围"
+    },
+    "date-picker-date": {
+      "desc": "您可以观看 `pickerDate`，它是显示的 月份/年份（取决于选择器类型和活动视图），以便在更改时执行一些操作。",
+      "heading": "### 日期选择器 - 对显示的 月/年 变化做出反应"
+    },
+    "date-readonly": {
+      "desc": "可以通过添加 **readonly** 属性来禁用选择新日期。",
+      "heading": "### 日期选择器 - 只读"
+    },
+    "date-width": {
+      "desc": "您可以指定选择器的宽度或使其完全宽度。",
+      "heading": "### 日期选择器 - 设置选择器宽度"
+    },
+    "month-allowed-months": {
+      "desc": "您可以使用数组、对象或函数指定允许的月份。",
+      "heading": "### 月份选择器 - 允许月份"
+    },
+    "month-colorable": {
+      "desc": "月份选择器颜色可以使用 `color` 和 `header-color` 属性设置。如果没有提供 `header-color` 属性将使用 `color` 属性值。",
+      "heading": "### 月份选择器 - 颜色"
+    },
+    "month-current": {
+      "desc": "默认情况下，使用轮廓按钮显示当前月份 - * show-current** 属性可让您删除边框或选择要显示为当前月份的其他月份。",
+      "heading": "### 月份选择器 - 当前月份指示器"
+    },
+    "month-dialog-and-menu": {
+      "desc": "将选择器集成到 `v-text-field` 中时，建议使用 **readonly** 属性。 这样可以防止移动键盘触发。 为了节省垂直空间，您还可以隐藏选择器标题。\n\n选择器提供了一个插槽，您可以使用它来保存和取消功能。 这将保留一个旧值，如果用户取消，则可以替换该旧值。",
+      "heading": "### 月份选择器 - 在对话框和菜单"
+    },
+    "month-events": {
+      "desc": "您可以使用数组，对象或函数指定事件。 要更改事件的默认颜色，请使用 **event-color** 属性。 如果您想显示多个事件指示器，则您的事件函数或对象可以返回颜色（material 或 css）数组。",
+      "heading": "### 月份选择器 - 事件"
+    },
+    "month-icons": {
+      "desc": "您可以覆盖选择器中使用的默认图标。",
+      "heading": "### 月份选择器 - 图标"
+    },
+    "month-internationalization": {
+      "desc": "月份选择器支持通过 JavaScript 日期对象进行国际化。 使用 `locale` prop, 指定一个 BCP 47 语言标记, 然后使用 `first day of week` 属性, 设置星期的第一天。",
+      "heading": "### 月份选择器 - 国际化"
+    },
+    "month-light": {
+      "desc": "月份选择器有两种方向变化：纵向 **（默认）** 和横向。",
+      "heading": "### 月份选择器"
+    },
+    "month-multiple": {
+      "desc": "月份选择器现在可以使用 `multiple` 属性选择多个月。如果使用 `multiple` ，则月份选择器的模型是一个数组。",
+      "heading": "### 月份选择器 - 多选"
+    },
+    "month-readonly": {
+      "desc": "可以通过添加 **readonly** 属性来禁用选择新日期。",
+      "heading": "### 月份选择器 - 只读"
+    },
+    "month-width": {
+      "desc": "您可以指定选择器的宽度或使其完全宽度。",
+      "heading": "### 月份选择器 - 设置选择器宽度"
+    },
+    "usage": {
+      "desc": "日期选择器有两种方向变化：纵向 **（默认）** 和横向。 默认情况下，它们在日期（对于日期选择器）或月份（对于月选择器）时发出 `input` 事件，但是使用 **reactive** 属性，即使单击 年/月 后，它们也可以更新模型。"
+    }
+  },
+  "heading": "# 日期/月份 选择器",
+  "headingText": "`v-date-picker` 是独立的组件，可用于许多现有的 Vuetify 组件。它为用户提供了一个选择 日期/月份 的可视化表示。",
+  "props": {
+    "disabled": "禁用与选择器的交互",
+    "allowedDates": "限制可以选择的日期",
+    "dayFormat": "允许您自定义日期表中出现的日期字符串的格式。使用日期（ISO 8601字符串）参数调用。",
+    "eventColor": "设置事件点的颜色。 它可以是字符串（所有事件将具有相同的颜色）或 `object`，其中属性是事件的日期，值是 布尔值/颜色/指定日期 的颜色数组，或者是 `function`，将日期作为参数并返回 布尔值/颜色/该日期 的颜色数组",
+    "events": "日期或对象定义事件或颜色的数组，或者返回 布尔值/颜色/数组 的函数",
+    "firstDayOfWeek": "设置一周的第一天，从周日的 0 开始。",
+    "headerDateFormat": "允许您自定义出现在日历标题中的月份字符串的格式。 用日期（ISO 8601字符串）参数调用。",
+    "locale": "设置语言环境。 接受带有 BCP 47 语言标记的字符串。",
+    "max": "允许的最大 日期/月份（ISO 8601格式）",
+    "min": "允许的最小 日期/月份（ISO 8601格式）",
+    "monthFormat": "用于在月份表中显示月份的格式化功能。 用日期（ISO 8601字符串）参数调用。",
+    "multiple": "允许选择多个日期",
+    "nextIcon": "设置下个 月/年 按钮的图标",
+    "pickerDate": "显示 年/月",
+    "prevIcon": "设置上一个 月/年 按钮的图标",
+    "range": "允许选择日期范围",
+    "reactive": "自动更改 月份/年份 时更新选择器模型",
+    "readonly": "使选择器变为只读状态（不允许选择新日期）",
+    "scrollable": "允许通过鼠标滚动更改显示的月份",
+    "selectedItemsText": "使用 *multiple* 属性时用于翻译所选日期数的文本。 也可以在 [Internationalization](/customization/internationalization) 中进行全局定制。",
+    "showCurrent": "切换当前 日期/月份 大纲的可见性或将提供的 日期/月份 显示为当前日期",
+    "showWeek": "切换日历正文中星期几的可见性",
+    "titleDateFormat": "允许您自定义出现在日期选择器标题中的日期字符串的格式。 用日期（ISO 8601字符串）参数调用。",
+    "type": "确定选择器的类型 - 日期选择器的 `date` ，月选择器的 `month`",
+    "value": "日期选择器模型（ISO 8601格式，YY-mm-dd 或 YY-mm）",
+    "weekdayFormat": "允许您自定义显示在日历正文中的工作日字符串的格式。使用日期（ISO 8601 字符串）参数调用。",
+    "width": "选择器宽度",
+    "yearFormat": "允许您自定义日历标题中出现的年份字符串的格式。需要日期（ISO 8601字符串）参数。",
+    "yearIcon": "设置年份选择按钮中的图标"
+  },
+  "events": {
+    "update:picker-date": "`picker-date` 属性的`.sync` 事件",
+    "click:date": "单击日期按钮时发出",
+    "dblclick:date": "双击日期按钮时发出",
+    "click:month": "单击月份按钮时发出",
+    "dblclick:month": "双击月份按钮时发出。 仅适用于 `month` 选择器。",
+    "change": "反应式日期选择器即使在日期（年/月/日）的任何部分发生更改时也会发出 `input`，但是只有在日（对于日期选择器）或月（对于月份选择器）发生更改时才会发出 `change` 事件。"
+  }
+}

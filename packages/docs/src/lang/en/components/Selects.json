@@ -2,6 +2,8 @@
   "heading": "# Selects",
   "headingText": "Select fields components are used for collecting user provided information from a list of options.",
   "objectAlert": "When using objects for the **items** prop, you must associate **item-text** and **item-value** with existing properties on your objects. These values are defaulted to **text** and **value** and can be changed.",
+  "autoAlert": "The **auto** property of **menu-props** is only supported for the default input style.",
+  "autocompleteAlert": "Browser autocomplete is set to off by default, may vary by browser and may be ignored. [MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion)",
   "examples": {
     "usage": {
       "desc": ""
@@ -58,6 +60,7 @@
     "debounceSearch": "Debounces the search input value being emitted",
     "deletableChips": "Adds a remove icon to selected chips",
     "disabled": "Disables the input",
+    "disableLookup": "Disables keyboard lookup",
     "eager": "Mixins.Bootable.props.eager",
     "editable": " Creates an editable button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "filter": "The function used for filtering items",
@@ -83,26 +86,13 @@
     "value": "Components.Inputs.props.value"
   },
   "slots": {
-    "append": "Components.Inputs.slots.append",
     "append-item": "Adds an item after menu content",
-    "append-outer": "Components.TextFields.slots.append-outer",
     "item": "Define a custom item appearance",
     "no-data": "Mixins.Filterable.slots.noData",
-    "prepend": "Components.Inputs.slots.prepend",
-    "prepend-inner": "Components.TextFields.slots.prepend-inner",
     "prepend-item": "Adds an item before menu content",
     "selection": "Define a custom selection appearance"
   },
   "events": {
-    "blur": "Emitted when component is no longer focused",
-    "change": "Components.Inputs.events.change",
-    "click:append": "Components.Inputs.events['click:append']",
-    "click:append-outer": "Components.TextFields.events['click:append-outer']",
-    "click:clear": "Components.TextFields.events['click:clear']",
-    "click:prepend": "Components.Inputs.events['click:prepend']",
-    "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
-    "focus": "Emitted when component is focused",
-    "update:error": "Mixins.Validatable.events['update:error']",
     "update:list-index": "Emitted when menu item is selected using keyboard arrows",
     "update:search-input": "The `search-input.sync` event"
   }

@@ -4,6 +4,7 @@ import { VExpandTransition } from '../transitions'
 
 // Mixins
 import Bootable from '../../mixins/bootable'
+import Colorable from '../../mixins/colorable'
 import { inject as RegistrableInject } from '../../mixins/registrable'
 
 // Utilities
@@ -15,6 +16,7 @@ import Vue, { VNode, VueConstructor } from 'vue'
 
 const baseMixins = mixins(
   Bootable,
+  Colorable,
   RegistrableInject<'expansionPanel', VueConstructor<Vue>>('expansionPanel', 'v-expansion-panel-content', 'v-expansion-panel')
 )
 
@@ -41,16 +43,16 @@ export default baseMixins.extend<options>().extend({
   },
 
   render (h): VNode {
-    return h(VExpandTransition, [
-      h('div', {
+    return h(VExpandTransition, this.showLazyContent(() => [
+      h('div', this.setBackgroundColor(this.color, {
         staticClass: 'v-expansion-panel-content',
         directives: [{
           name: 'show',
           value: this.isActive,
         }],
-      }, this.showLazyContent([
+      }), [
         h('div', { class: 'v-expansion-panel-content__wrap' }, getSlot(this)),
-      ])),
-    ])
+      ]),
+    ]))
   },
 })

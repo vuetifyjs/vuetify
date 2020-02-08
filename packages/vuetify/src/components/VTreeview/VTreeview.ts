@@ -2,8 +2,7 @@
 import './VTreeview.sass'
 
 // Types
-import { VNode, VNodeChildrenArrayContents } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { VNode, VNodeChildrenArrayContents, PropType } from 'vue'
 
 // Components
 import VTreeviewNode, { VTreeviewNodeProps } from './VTreeviewNode'
@@ -22,9 +21,9 @@ import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
 import {
   filterTreeItems,
-  FilterTreeItemFunction,
   filterTreeItem,
 } from './util/filterTreeItems'
+import { TreeviewItemFunction } from 'types'
 
 type VTreeviewNodeInstance = InstanceType<typeof VTreeviewNode>
 
@@ -55,21 +54,21 @@ export default mixins(
 
   props: {
     active: {
-      type: Array,
+      type: Array as PropType<NodeArray>,
       default: () => ([]),
-    } as PropValidator<NodeArray>,
+    },
     dense: Boolean,
-    filter: Function as PropValidator<FilterTreeItemFunction>,
+    filter: Function as PropType<TreeviewItemFunction>,
     hoverable: Boolean,
     items: {
-      type: Array,
+      type: Array as PropType<any[]>,
       default: () => ([]),
-    } as PropValidator<any[]>,
+    },
     multipleActive: Boolean,
     open: {
-      type: Array,
+      type: Array as PropType<NodeArray>,
       default: () => ([]),
-    } as PropValidator<NodeArray>,
+    },
     openAll: Boolean,
     returnObject: {
       type: Boolean,
@@ -77,18 +76,19 @@ export default mixins(
     },
     search: String,
     selectionType: {
-      type: String,
+      type: String as PropType<'leaf' | 'independent'>,
       default: 'leaf',
       validator: (v: string) => ['leaf', 'independent'].includes(v),
-    } as PropValidator<'leaf' | 'independent'>,
+    },
     value: {
-      type: Array,
+      type: Array as PropType<NodeArray>,
       default: () => ([]),
-    } as PropValidator<NodeArray>,
+    },
     ...VTreeviewNodeProps,
   },
 
   data: () => ({
+    level: -1,
     activeCache: new Set() as NodeCache,
     nodes: {} as Record<string | number, NodeState>,
     openCache: new Set() as NodeCache,
@@ -157,8 +157,8 @@ export default mixins(
 
   created () {
     this.buildTree(this.items)
-    this.value.forEach(key => this.updateSelected(key, true))
-    this.active.forEach(key => this.updateActive(key, true))
+    this.value.forEach(key => this.updateSelected(this.returnObject ? getObjectValueByPath(key, this.itemKey) : key, true))
+    this.active.forEach(key => this.updateActive(this.returnObject ? getObjectValueByPath(key, this.itemKey) : key, true))
   },
 
   mounted () {
@@ -170,7 +170,7 @@ export default mixins(
     if (this.openAll) {
       this.updateAll(true)
     } else {
-      this.open.forEach(key => this.updateOpen(key, true))
+      this.open.forEach(key => this.updateOpen(this.returnObject ? getObjectValueByPath(key, this.itemKey) : key, true))
       this.emitOpen()
     }
   },
@@ -214,7 +214,6 @@ export default mixins(
         // This fixed bug with dynamic children resetting selected parent state
         if (!this.nodes.hasOwnProperty(key) && parent !== null && this.nodes.hasOwnProperty(parent)) {
           node.isSelected = this.nodes[parent].isSelected
-          node.isIndeterminate = this.nodes[parent].isIndeterminate
         } else {
           node.isSelected = oldNode.isSelected
           node.isIndeterminate = oldNode.isIndeterminate

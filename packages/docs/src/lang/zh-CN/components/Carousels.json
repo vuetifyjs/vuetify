@@ -1,14 +1,69 @@
 {
+  "heading": "# 轮播",
+  "headingText": "`v-carousel` 组件用于在旋转计时器上显示大量的可视内容。",
+  "subComponentsHeader": "### 次要组件",
+  "subComponentsList": [
+    "`v-carousel-item`：`v-carousel` 使用的图像容器。继承 `v-window-item`，且是可通过路由导航的，并使用 `v-img` 安装在其默认插槽。"
+  ],
   "examples": {
+    "usage": {
+      "desc": "`v-carousel` 组件在 `v-window` 的基础上进行了扩展，提供了更多针对图像显示的功能。"
+    },
+    "cycle": {
+      "heading": "### 循环",
+      "desc": "有了 **cycle** 属性，你可以让你的轮播每 6s（默认）自动转换到下一个。"
+    },
     "custom-transition": {
-      "desc": "您也可以应用您自己的自定义过渡。"
+      "heading": "### 自定义过渡",
+      "desc": "`v-carousel-item` 组件可以使用 **transition/reverse-transition** 来改变过渡动画。"
     },
     "custom-icons": {
-      "desc": "您也可以更改轮播分隔符的图标。"
+      "heading": "### 自定义分隔符",
+      "desc": "使用任何可用的图标来改变轮播的滑动分隔符。"
+    },
+    "hide-delimiters": {
+      "heading": "### 隐藏分隔符",
+      "desc": "你可以使用 `hide-delimiters` 属性隐藏底部控件。"
+    },
+    "hide-controls": {
+      "heading": "### 隐藏控件",
+      "desc": "可以使用 `:show-arrows=\"false\"` 隐藏轮播的导航控件。"
+    },
+    "model": {
+      "heading": "### `v-model` 控制",
+      "desc": "你可以用 model 控制轮播。"
     }
   },
   "props": {
+    "activeClass": "Mixins.BaseItemGroup.props.activeClass",
+    "continuous": "确定轮播是否连续",
+    "cycle": "确定轮播是否应该循环显示图像。",
+    "disabled": "Mixins.Groupable.props.disabled",
     "delimiterIcon": "设置轮播分隔符的图标",
-    "reverseTransition": "设置反向转换"
+    "height": "Mixins.Measurable.props.height",
+    "hideControls": "隐藏导航控件（左和右）。",
+    "hideDelimiters": "隐藏轮播的底部分隔符。",
+    "hideDelimiterBackground": "隐藏底部分隔符的背景。",
+    "interval": "轮播图像周期之间的持续时间。需要 **cycle** 属性。",
+    "link": "Mixins.Routable.props.link",
+    "mandatory": "Mixins.BaseItemGroup.props.mandatory",
+    "multiple": "Mixins.BaseItemGroup.props.multiple",
+    "nextIcon": "强制对下一项分页而显示的图标。",
+    "prevIcon": "强制对前一项分页而显示的图标。",
+    "progress": "显示轮播进度条。需要 **cycle** 和 **interval** 属性。",
+    "progressColor": "将指定的颜色应用于进度条。",
+    "reverse": "Components.Windows.props.reverse",
+    "reverseTransition": "Components.Windows.props.reverseTransition",
+    "showArrows": "显示 下一个/前一个 导航的箭头。",
+    "showArrowsOnHover": "仅当鼠标悬停到轮播其上时才显示导航箭头。",
+    "src": "Components.Images.props.src",
+    "touch": "Components.Windows.props.touch",
+    "touchless": "Components.Windows.props.touch",
+    "transition": "Mixins.Transitionable.props.transition",
+    "vertical": "Components.Windows.props.vertical",
+    "verticalDelimiters": "垂直显示轮播的分隔符。",
+    "v-carousel-item": {
+      "value": "Mixins.Groupable.props.value"
+    }
   }
 }

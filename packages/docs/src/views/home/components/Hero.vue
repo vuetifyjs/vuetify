@@ -1,10 +1,14 @@
 <template>
   <base-section
     id="home-hero"
-    class="white--text py-4 py-md-12"
     :class="$vuetify.theme.dark && 'theme--dark'"
+    class="white--text py-4 py-md-12"
   >
-    <v-responsive min-height="30vh">
+    <v-responsive
+      :max-width="1280 + 24"
+      class="mx-auto pa-6"
+      min-height="30vh"
+    >
       <v-container class="pa-0">
         <v-row align="center">
           <v-col

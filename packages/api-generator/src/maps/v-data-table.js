@@ -17,7 +17,7 @@ const TableHeader = {
 }
 
 const DataTableEvents = [
-  { name: 'click:row', source: 'v-data-table', value: 'any' },
+  { name: 'click:row', source: 'v-data-table', value: 'any, { select: (value: boolean) => void, isSelected: boolean, expand: (value: boolean) => void, isExpanded: boolean }' },
 ].concat(DataIteratorEvents)
 
 const DataTableHeaderScopedProps = {
@@ -81,15 +81,34 @@ const DataTableBodyScopedProps = {
   ...DataDefaultScopedSlotProps,
   headers: 'TableHeader[]',
   isMobile: 'boolean',
+  isSelected: '(item: any) => boolean',
+  select: '(item: any, value: boolean) => void',
+  isExpanded: '(item: any) => boolean',
+  expand: '(item: any, value: boolean) => void',
+}
+
+const DataGroupScopedProps = {
+  group: 'string',
+  options: DataOptions,
+  items: 'any[]',
+  headers: 'TableHeader[]',
 }
 
 const DataGroupHeaderScopedProps = {
-  group: DataDefaultScopedSlotProps.group,
-  groupedBy: DataOptions.groupBy,
+  group: 'string',
+  groupBy: DataOptions.groupBy,
   items: 'any[]',
   headers: 'TableHeader[]',
+  isOpen: 'boolean',
   toggle: '() => void',
   remove: '() => void',
+}
+
+const DataGroupSummaryScopedProps = {
+  group: 'string',
+  groupBy: DataOptions.groupBy,
+  items: 'any[]',
+  headers: 'TableHeader[]',
 }
 
 const DataTableSlots = [
@@ -103,9 +122,9 @@ const DataTableSlots = [
   { name: 'header.<name>', props: DataTableHeaderColumnScopedProps },
   { name: 'top', props: DataDefaultScopedSlotProps },
   { name: 'progress', props: DataDefaultScopedSlotProps },
-  { name: 'group', props: DataDefaultScopedSlotProps },
+  { name: 'group', props: DataGroupScopedProps },
   { name: 'group.header', props: DataGroupHeaderScopedProps },
-  { name: 'group.summary', props: DataDefaultScopedSlotProps },
+  { name: 'group.summary', props: DataGroupSummaryScopedProps },
   { name: 'item', props: { ...DataTableItemScopedProps, index: 'number' } },
   { name: 'item.data-table-select', props: DataTableItemScopedProps },
   { name: 'item.data-table-expand', props: DataTableItemScopedProps },

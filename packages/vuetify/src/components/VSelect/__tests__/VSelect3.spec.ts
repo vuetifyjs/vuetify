@@ -329,7 +329,9 @@ describe('VSelect.ts', () => {
 
     wrapper.setData({ isMenuActive: false })
     wrapper.setProps({ disabled: true })
+
     await wrapper.vm.$nextTick()
+
     expect(wrapper.vm.isMenuActive).toBe(false)
 
     slot.trigger('click')
@@ -429,5 +431,39 @@ describe('VSelect.ts', () => {
     expect(wrapper.vm.selectedItems).toEqual([
       { text: 'Foo', value: ['bar'] },
     ])
+  })
+
+  it('should update inner input element', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo', 'bar', 'fizz', 'buzz'],
+        value: ['fizz'],
+      },
+    })
+
+    const inputs = wrapper.findAll('input')
+    const element = inputs.at(1).element
+
+    expect(element.value).toEqual('fizz')
+
+    wrapper.vm.selectItem(wrapper.vm.items[1])
+
+    await wrapper.vm.$nextTick()
+
+    expect(element.value).toEqual('bar')
+  })
+
+  it('should pass the name attribute to the inner input element', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo'],
+        name: ['bar'],
+      },
+    })
+
+    const inputs = wrapper.findAll('input')
+    const element = inputs.at(1).element
+
+    expect(element.name).toEqual('bar')
   })
 })

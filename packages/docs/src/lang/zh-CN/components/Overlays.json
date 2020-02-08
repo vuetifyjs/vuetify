@@ -1,5 +1,34 @@
 {
+  "heading": "# 遮罩层",
+  "headingText": "`v-overlay` 组件用于强调特定元素或其中的一部分。 它向用户发出应用程序内状态更改的信号，可用于创建加载程序，对话框等。",
+  "examples": {
+    "usage": {
+      "desc": "以最简单的形式，`v-overlay` 组件将在您的应用程序上添加暗淡的图层。"
+    },
+    "absolute": {
+      "heading": "### 绝对定位",
+      "desc": "`absolute` 遮罩层被放置在绝对位置，并包含在父元素中。"
+    },
+    "opacity": {
+      "heading": "### 透明度",
+      "desc": "`opacity` 允许您自定义 `v-overlay` 组件的透明度。"
+    },
+    "z-index": {
+      "heading": "### Z 索引",
+      "desc": "使用 `z-index` 可以轻松更改 `v-overlay` 组件的堆栈顺序。"
+    },
+    "loader": {
+      "heading": "### 加载器",
+      "desc": "使用 `v-overlay` 作为背景，添加进度组件来轻松创建自定义加载器。"
+    },
+    "advanced": {
+      "heading": "### 高级版",
+      "desc": "使用 [v-hover](/components/hover)，我们可以在信息卡上添加漂亮的稀松布，以及用户可以执行的其他操作。"
+    }
+  },
   "props": {
-    "opacity": "设置遮罩层的透明度"
+    "absolute": "Mixins.Positionable.props.absolute",
+    "opacity": "设置遮罩层的透明度",
+    "zIndex": "Mixins.Menuable.props.zIndex"
   }
 }

@@ -14,6 +14,7 @@
   "showExample": "Show Example",
   "slots": "Slots",
   "supplemental": "## Supplemental",
+  "functional": "### Functional components",
   "type": "Type",
   "introduction": "Introduction",
   "upNext": "## Up Next",
@@ -25,5 +26,6 @@
   "return": "Returns",
   "example": "Example",
   "signature": "Signature",
-  "value": "Value"
+  "value": "Value",
+  "variableApi": "## Variable API"
 }

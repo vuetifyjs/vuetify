@@ -5,7 +5,7 @@ import { Service } from '../service'
 import { TargetPropValues, TargetProp, Application as IApplication } from 'vuetify/types/services/application'
 
 export class Application extends Service implements IApplication {
-  static property = 'application'
+  static property: 'application' = 'application'
 
   bar = 0
 
@@ -36,7 +36,7 @@ export class Application extends Service implements IApplication {
     location: TargetProp,
     size: number
   ) {
-    this.application[location][uid] = size
+    this.application[location] = { [uid]: size }
 
     this.update(location)
   }

@@ -1,10 +1,9 @@
-import 'vuetify/dist/vuetify.css'
+// Imports
 import 'es6-promise/auto'
-
-import { createApp } from './main'
-import WebFontLoader from 'webfontloader'
-
 import 'intersection-observer'
+import 'vuetify/dist/vuetify.css'
+import WebFontLoader from 'webfontloader'
+import { createApp } from './main'
 
 // async load fonts
 WebFontLoader.load({

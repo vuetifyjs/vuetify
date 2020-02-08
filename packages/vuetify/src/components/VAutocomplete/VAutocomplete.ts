@@ -6,7 +6,8 @@ import VSelect, { defaultMenuProps as VSelectMenuProps } from '../VSelect/VSelec
 import VTextField from '../VTextField/VTextField'
 
 // Utilities
-import { keyCodes } from '../../util/helpers'
+import mergeData from '../../util/mergeData'
+import { keyCodes, getObjectValueByPath } from '../../util/helpers'
 
 // Types
 import { PropType } from 'vue'
@@ -222,56 +223,51 @@ export default VSelect.extend({
     changeSelectedIndex (keyCode: number) {
       // Do not allow changing of selectedIndex
       // when search is dirty
-      if (this.searchIsDirty || !this.multiple) return
+      if (this.searchIsDirty) return
 
-      if (![
-        keyCodes.backspace,
-        keyCodes.left,
-        keyCodes.right,
-        keyCodes.delete,
-      ].includes(keyCode)) return
-
-      const index = this.selectedItems.length - 1
-
-      if (keyCode === keyCodes.left) {
+      if (this.multiple && keyCode === keyCodes.left) {
         if (this.selectedIndex === -1) {
-          this.selectedIndex = index
+          this.selectedIndex = this.selectedItems.length - 1
         } else {
           this.selectedIndex--
         }
-      } else if (keyCode === keyCodes.right) {
-        if (this.selectedIndex >= index) {
+      } else if (this.multiple && keyCode === keyCodes.right) {
+        if (this.selectedIndex >= this.selectedItems.length - 1) {
           this.selectedIndex = -1
         } else {
           this.selectedIndex++
         }
-      } else if (this.selectedIndex === -1) {
+      } else if (keyCode === keyCodes.backspace || keyCode === keyCodes.delete) {
+        this.deleteCurrentItem()
+      }
+    },
+    deleteCurrentItem () {
+      if (this.readonly) return
+
+      const index = this.selectedItems.length - 1
+
+      if (this.selectedIndex === -1 && index !== 0) {
         this.selectedIndex = index
         return
       }
 
       const currentItem = this.selectedItems[this.selectedIndex]
 
-      if ([
-        keyCodes.backspace,
-        keyCodes.delete,
-      ].includes(keyCode) &&
-        !this.getDisabled(currentItem)
-      ) {
-        const newIndex = this.selectedIndex === index
-          ? this.selectedIndex - 1
-          : this.selectedItems[this.selectedIndex + 1]
-            ? this.selectedIndex
-            : -1
+      if (this.getDisabled(currentItem)) return
 
-        if (newIndex === -1) {
-          this.setValue(this.multiple ? [] : undefined)
-        } else {
-          this.selectItem(currentItem)
-        }
+      const newIndex = this.selectedIndex === index
+        ? this.selectedIndex - 1
+        : this.selectedItems[this.selectedIndex + 1]
+          ? this.selectedIndex
+          : -1
 
-        this.selectedIndex = newIndex
+      if (newIndex === -1) {
+        this.setValue(this.multiple ? [] : undefined)
+      } else {
+        this.selectItem(currentItem)
       }
+
+      this.selectedIndex = newIndex
     },
     clearableCallback () {
       this.internalSearch = undefined
@@ -281,12 +277,13 @@ export default VSelect.extend({
     genInput () {
       const input = VTextField.options.methods.genInput.call(this)
 
-      input.data = input.data || {}
-      input.data.attrs = input.data.attrs || {}
-      input.data.attrs.autocomplete = input.data.attrs.autocomplete || 'disabled'
-
-      input.data.domProps = input.data.domProps || {}
-      input.data.domProps.value = this.internalSearch
+      input.data = mergeData(input.data!, {
+        attrs: {
+          'aria-activedescendant': getObjectValueByPath(this.$refs.menu, 'activeTile.id', undefined),
+          autocomplete: getObjectValueByPath(input.data!, 'attrs.autocomplete', 'off'),
+        },
+        domProps: { value: this.internalSearch },
+      })
 
       return input
     },
@@ -342,7 +339,10 @@ export default VSelect.extend({
       VSelect.options.methods.onTabDown.call(this, e)
       this.updateSelf()
     },
-    onUpDown () {
+    onUpDown (e: Event) {
+      // Prevent screen from scrolling
+      e.preventDefault()
+
       // For autocomplete / combobox, cycling
       // interfers with native up/down behavior
       // instead activate the menu

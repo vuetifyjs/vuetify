@@ -1,0 +1,20 @@
+@import '../../styles/styles.sass';
+
+$select-chip-margin: 4px !default;
+$select-selected-chip-opacity: .22 !default;
+$select-prefix-line-height: 20px !default;
+$select-prefix-top: 7px !default;
+$select-selections-padding-top: 20px !default;
+$select-outlined-selections-padding-top: 8px 0 !default;
+$select-outlined-dense-selections-padding-top: 4px 0 !default;
+$select-chips-selections-padding-top: 42px !default;
+$select-active-icon-flip: true !default;
+$select-chips-dense-selections-padding-top: 40px !default;
+$select-active-chip-opacity: 0.2 !default;
+$select-small-chips-selections-min-height: 32px !default;
+$select-chips-box-enclosed-selections-min-height: 68px !default;
+$select-chips-dense-selections-min-height: 40px !default;
+$select-small-chips-selections-min-height: 56px !default;
+$select-small-chips-dense-selections-min-height: 38px !default;
+$select-selections-line-height: 18px !default;
+$select-selections-margin: 7px 4px 7px 0 !default;

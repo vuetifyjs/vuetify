@@ -11,8 +11,18 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "usage"
+          "type": "usage-new",
+          "value": {
+            "booleans": [
+              "dense",
+              "disabled",
+              "hide-details",
+              "inverse-label",
+              "readonly",
+              "persistent-hint",
+              "vertical"
+            ]
+          }
         }
       ]
     },

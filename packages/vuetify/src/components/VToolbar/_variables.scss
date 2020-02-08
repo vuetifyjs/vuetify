@@ -11,3 +11,6 @@ $toolbar-transition: 0.2s map-get($transition, 'fast-out-slow-in') transform,
                      280ms map-get($transition, 'fast-out-slow-in') box-shadow,
                      0.25s map-get($transition, 'fast-out-slow-in') max-width,
                      0.25s map-get($transition, 'fast-out-slow-in') width !default;
+$toolbar-collapsed-max-width: 112px !default;
+$toolbar-collapsed-border-radius: 24px !default;
+$toolbar-promient-padding: 6px !default;

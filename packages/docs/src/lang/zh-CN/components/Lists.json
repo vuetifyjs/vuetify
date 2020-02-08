@@ -1,32 +1,121 @@
 {
+  "heading": "# 列表",
+  "headingText": "`v-list` 组件用于显示信息，它可以包含一个头像、内容、操作、列表组标题等等。列表也可以包含子元素并在侧边栏（sidebar）使用。",
+  "alert1": "如果您要查找有状态列表项，请查看 [v-list-item-group](/components/list-item-groups)。",
   "examples": {
+    "usage": {
+      "desc": "列表有三个主要变量。**single-line** （默认）, **two-line** 和 **three-line**。 行声明指定了项目的最小高度，也可以使用相同的属性从 `v-list` 中进行控制。"
+    },
     "avatar-title-and-action": {
+      "heading": "### 头像和列表项标题操作的组合",
       "desc": "列表组件还提供了用于更明确做法的插槽，如果你选择这种方法，切记必须提供附加属性来确保正确的间距。在这个例子中，有一个带有头像的图块，所以我们必须提供 `avatar` 属性。"
     },
     "icon-two-lines-and-action": {
+      "heading": "### 具有两行内容加上图标的操作",
       "desc": "列表组件可以包含列表组标题，分割线，以及1行或者更多行，如果副标题文本溢出则会以省略号的形式截断文本"
     },
+    "avatar-three-lines": {
+      "heading": "### 头像和三行内容的组合",
+      "desc": "对于三行列表，字幕将垂直夹在 2 行，然后省略。\n此功能使用 [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) ，并不是所有浏览器都支持此功能。"
+    },
     "avatar-subheader-title-and-action": {
+      "heading": "### 头像和列表项标题操作的组合",
       "desc": "当使用一个 lists 插槽时，你必须手动定义它是否包含列表组标题（headers）或者列表项是否包含 avatar，这样做是为了确保正确的间距。"
     },
     "subheadings-and-dividers": {
+      "heading": "### 列表组标题和分割线",
       "desc": "Lists 组件可以包含多个列表组标题和分割线。"
     },
+    "nested": {
+      "heading": "### 嵌套列表",
+      "desc": "使用 `v-list-group` 组件，您可以使用 **sub-group** 属性创建多达 **2** 级的深度。"
+    },
     "card-list": {
+      "heading": "### 图像卡片和工具栏以及列表的组合",
       "desc": "一个列表可以和卡片组合。"
     },
     "title-subtitle-actions-and-action-text": {
+      "heading": "### 列表项的标题和子标题, 操作与操作文本说明",
       "desc": "列表组件可以包含一个操作栈。波纹效果和路由属性也可以应用到 v-list 甚至 v-list-item中，或者作为列表项数组的一个属性。"
     },
+    "action-title-and-subtitle": {
+      "heading": "### 操作和标题以及副标题的组合",
+      "desc": "可操作的 **three-line** 列表。 利用 **[v-list-item-group](/components/list-item-groups)**，轻松将动作连接到图块。"
+    },
+    "expansion-lists": {
+      "heading": "### 可展开的列表",
+      "desc": "列表可以包含一组项目，这些项目将在单击时显示。 扩展列表也用于 **[v-navigation-drawer](/components/navigation-drawers)** 组件中。"
+    },
+    "nav": {
+      "heading": "### 导航列表",
+      "desc": "列表可以接受一个替代的 **nav** 样式，它减少了 `v-list-item` 的宽度，并增加了一个边框半径。"
+    },
+    "shaped": {
+      "heading": "### 形状列表",
+      "desc": "形状列表在 `v-list-item` 的一侧具有圆形边界。"
+    },
+    "disabled": {
+      "heading": "### 已禁用列表",
+      "desc": "您不能与禁用的 `v-list` 互动。"
+    },
+    "dense": {
+      "heading": "### 密集",
+      "desc": "`v-list` 可以通过 `dense` 属性变密集。"
+    },
     "flat": {
-      "heading": "扁平"
+      "heading": "### 扁平",
+      "desc": "在 `flat` 属性的 `v-list` 中选择时，项目不会发生变化。"
+    },
+    "rounded": {
+      "heading": "### 圆角",
+      "desc": "你可以让 `v-list` 项变成圆角。"
     }
   },
   "props": {
     "avatar": "用来设置单行列表项的最小高度（即使用该属性后将有一个头像大小的最小高度）",
     "dense": "减小列表块的最大宽度",
+    "disabled": "禁用所有子级的 `v-list-item` 组件",
     "expand": "将只有在明确关闭后才会折叠起来",
+    "flat": "删除活动的 `v-list-item` 上突出显示的背景",
+    "group": "分配路由名称空间。 接受字符串或正则表达式以确定活动状态",
     "inactive": "如果设置了该属性，即使有to/href或者@click，列表块也不会响应链接。",
-    "subheader": "会移除上边距（top padding），当前面只有一个列表组标题的时候使用"
+    "link": "应用 `v-list-item` 悬停样式。 将项目用作 _activator_ 时很有用。",
+    "nav": "另一种样式可以减小 `v-list-item` 的宽度并圆角化。 通常与 **[v-navigation-drawer](/components/navigation-drawers)** 一起使用",
+    "noAction": "从组项目中删除分配给操作图标的左边距",
+    "rounded": "圆角 `v-list-item` 边",
+    "shaped": "为 `v-list-item` 提供一个可选的活动样式。",
+    "subGroup": "将组件指定为嵌套列表组",
+    "subheader": "会移除上边距（top padding），当前面只有一个列表组标题的时候使用",
+    "threeLine": "增加三行的列表项高度。 该属性使用 [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) ，并非所有浏览器都支持。",
+    "twoLine": "增加两行的列表项高度。 该属性使用 [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) ，并非所有浏览器都支持。",
+    "v-list-item": {
+      "color": "当处于 **active** 状态或 **input-value** 为 **true** 时，将指定的颜色应用于控件 - 它可以是材质颜色的名称（例如，`success` 或 `purple`）或 css 颜色（`#033` or `rgba(255, 0, 0, 0.5)`）",
+      "disabled": "禁用组件",
+      "inputValue": "控制项目的 **active** 状态。 通常用于突出显示组件",
+      "selectable": "允许在 `v-list-item` 中选择文本。 该属性使用 [user-select](https://developer.mozilla.org/en-US/docs/Web/CSS/user-select)",
+      "value": "当 [v-list-item-group](/components/list-item-groups) 的子元素时使用的值。"
+    },
+    "v-list-item-avatar": {
+      "color": "Mixins.Colorable.props.color",
+      "horizontal": "使用另一种水平样式。"
+    },
+    "v-list-group": {
+      "activeClass": "Mixins.Routable.props.activeClass",
+      "appendIcon": "Components.Inputs.props.appendIcon",
+      "prependIcon": "Components.Inputs.props.prependIcon",
+      "ripple": "Mixins.Rippleable.props.ripple",
+      "value": "展开/折叠 列表组"
+    }
+  },
+  "slots": {
+    "v-list-group": {
+      "appendIcon": "Components.Inputs.props.appendIcon",
+      "prependIcon": "Components.Inputs.props.prependIcon"
+    }
+  },
+  "events": {
+    "v-list-group": {
+      "click": "单击组件时发出 - 不使用 `.native` 修饰符，否则单击时将触发组件产生涟漪"
+    }
   }
 }

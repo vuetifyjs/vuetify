@@ -12,10 +12,15 @@ import { VExpandTransition } from '../transitions'
 // Mixins
 import Toggleable from '../../mixins/toggleable'
 
-// Types
-import { VNode } from 'vue/types'
+// Utilities
 import mixins from '../../util/mixins'
-import { PropValidator } from 'vue/types/options'
+import {
+  convertToUnit,
+  getSlot,
+} from '../../util/helpers'
+
+// Typeslint
+import { VNode, PropType } from 'vue'
 
 /* @vue/component */
 export default mixins(
@@ -27,12 +32,13 @@ export default mixins(
   inheritAttrs: false,
 
   props: {
+    app: Boolean,
     icon: String,
     iconColor: String,
     mobileBreakPoint: {
-      type: [Number, String],
+      type: [Number, String] as PropType<string | number>,
       default: 960,
-    } as PropValidator<string | number>,
+    },
     singleLine: Boolean,
     sticky: Boolean,
     tile: {
@@ -52,11 +58,8 @@ export default mixins(
         'v-banner--has-icon': this.hasIcon,
         'v-banner--is-mobile': this.isMobile,
         'v-banner--single-line': this.singleLine,
-        'v-banner--sticky': this.sticky,
+        'v-banner--sticky': this.isSticky,
       }
-    },
-    hasActions (): boolean {
-      return Boolean(this.$slots.actions || this.$scopedSlots.actions)
     },
     hasIcon (): boolean {
       return Boolean(this.icon || this.$slots.icon)
@@ -64,19 +67,23 @@ export default mixins(
     isMobile (): boolean {
       return this.$vuetify.breakpoint.width < Number(this.mobileBreakPoint)
     },
+    isSticky (): boolean {
+      return this.sticky || this.app
+    },
     styles (): object {
-      const styles = VSheet.options.computed.styles.call(this)
+      const styles: Record<string, any> = { ...VSheet.options.computed.styles.call(this) }
 
-      if (!this.sticky) return styles
+      if (this.isSticky) {
+        const top = !this.app
+          ? 0
+          : (this.$vuetify.application.bar + this.$vuetify.application.top)
 
-      const { bar, top } = this.$vuetify.application
-
-      return {
-        ...styles,
-        position: 'sticky',
-        top: `${bar + top}px`,
-        zIndex: 1,
+        styles.top = convertToUnit(top)
+        styles.position = 'sticky'
+        styles.zIndex = 1
       }
+
+      return styles
     },
   },
 
@@ -121,11 +128,11 @@ export default mixins(
       }, this.$slots.default)
     },
     genActions () {
-      if (!this.hasActions) return undefined
-
-      const children = this.$scopedSlots.actions ? this.$scopedSlots.actions({
+      const children = getSlot(this, 'actions', {
         dismiss: () => this.isActive = false,
-      }) : this.$slots.actions
+      })
+
+      if (!children) return undefined
 
       return this.$createElement('div', {
         staticClass: 'v-banner__actions',
@@ -151,15 +158,16 @@ export default mixins(
 
   render (h): VNode {
     return h(VExpandTransition, [
-      h('div', {
+      h('div', this.setBackgroundColor(this.color, {
         staticClass: 'v-banner',
+        attrs: this.attrs$,
         class: this.classes,
         style: this.styles,
         directives: [{
           name: 'show',
           value: this.isActive,
         }],
-      }, [this.genWrapper()]),
+      }), [this.genWrapper()]),
     ])
   },
 })

@@ -7,8 +7,46 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "usage"
+          "type": "usage-new",
+          "value": {
+            "booleans": [
+              "disabled",
+              "hide-canvas",
+              "hide-inputs",
+              "hide-mode-switch",
+              "show-swatches",
+              "flat"
+            ],
+            "selects": [
+              {
+                "prop": "mode",
+                "label": "Mode",
+                "attrs": {
+                  "items": [
+                    "rgba",
+                    "hsla",
+                    "hexa"
+                  ]
+                }
+              }
+            ],
+            "sliders": [
+              {
+                "prop": "dot-size",
+                "attrs": {
+                  "min": 0,
+                  "max": 50
+                }
+              },
+              {
+                "prop": "swatches-max-height",
+                "attrs": {
+                  "min": 100,
+                  "max": 250
+                }
+              }
+            ]
+          }
         }
       ]
     },
@@ -18,15 +56,6 @@
         {
           "type": "api",
           "value": [ "v-color-picker" ]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "playground",
-          "value": "playground"
         }
       ]
     },

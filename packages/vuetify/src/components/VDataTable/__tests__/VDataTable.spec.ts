@@ -5,13 +5,14 @@ import {
   MountOptions,
 } from '@vue/test-utils'
 import { Breakpoint } from '../../../services/breakpoint'
-import { Lang } from '../../../services/lang'
 import ripple from '../../../directives/ripple/index'
 import Vue from 'vue'
+import { Lang } from '../../../services/lang'
+import { preset } from '../../../presets/default'
 
 Vue.prototype.$vuetify = {
   rtl: false,
-  lang: new Lang(),
+  lang: new Lang(preset),
 }
 Vue.directive('ripple', ripple)
 
@@ -123,8 +124,8 @@ describe('VDataTable.ts', () => {
       return mount(VDataTable, {
         mocks: {
           $vuetify: {
-            breakpoint: new Breakpoint(),
-            lang: new Lang(),
+            breakpoint: new Breakpoint(preset),
+            lang: new Lang(preset),
             theme: {
               dark: false,
             },
@@ -509,45 +510,166 @@ describe('VDataTable.ts', () => {
 
   // https://github.com/vuetifyjs/vuetify/issues/8184
   it('should default to first option in itemsPerPageOptions if it does not include itemsPerPage', async () => {
-    const itemsPerPage = jest.fn()
-    const options = jest.fn()
     const wrapper = mountFunction({
       propsData: {
         headers: testHeaders,
         items: testItems,
         footerProps: {
-          itemsPerPageOptions: [5, 6],
+          itemsPerPageOptions: [6, 7],
         },
-      },
-      listeners: {
-        'update:items-per-page': itemsPerPage,
-        'update:options': options,
       },
     })
 
-    expect(itemsPerPage).toHaveBeenCalledWith(5)
-    expect(options).toHaveBeenCalledWith(expect.objectContaining({
-      itemsPerPage: 5,
-    }))
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/8817
   it('should handle object when checking if it should default to first option in itemsPerPageOptions', async () => {
-    const itemsPerPage = jest.fn()
     const wrapper = mountFunction({
       propsData: {
         headers: testHeaders,
         items: testItems,
         itemsPerPage: -1,
         footerProps: {
-          itemsPerPageOptions: [5, 6, { text: 'All', value: -1 }],
+          itemsPerPageOptions: [6, { text: 'All', value: -1 }],
         },
-      },
-      listeners: {
-        'update:items-per-page': itemsPerPage,
       },
     })
 
-    expect(itemsPerPage).toHaveBeenCalledWith(-1)
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/9599
+  it('should not immediately emit items-per-page', async () => {
+    const itemsPerPage = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+        footerProps: {
+          itemsPerPageOptions: [6, 7],
+        },
+      },
+      listeners: {
+        'update:itemsPerPage': itemsPerPage,
+      },
+    })
+
+    expect(itemsPerPage).not.toHaveBeenCalled()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/9010
+  it('should change page if item count decreases below page start', async () => {
+    const page = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems.slice(0, 4),
+        itemsPerPage: 2,
+        footerProps: {
+          itemsPerPageOptions: [2],
+        },
+        page: 2,
+      },
+      listeners: {
+        'update:page': page,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ items: testItems.slice(0, 2) })
+    await wrapper.vm.$nextTick()
+
+    expect(page).toHaveBeenCalledWith(1)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8477
+  it('should emit two item-selected events when using single-select prop and selecting new item', async () => {
+    const itemSelected = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        itemKey: 'name',
+        items: testItems.slice(0, 2),
+        value: [testItems[0]],
+        showSelect: true,
+        singleSelect: true,
+      },
+      listeners: {
+        'item-selected': itemSelected,
+      },
+    })
+
+    const checkbox = wrapper.findAll('.v-data-table__checkbox').at(1)
+    checkbox.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(itemSelected).toHaveBeenCalledTimes(2)
+    expect(itemSelected).toHaveBeenCalledWith({ item: testItems[0], value: false })
+    expect(itemSelected).toHaveBeenCalledWith({ item: testItems[1], value: true })
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8915
+  it('should not select item that is not selectable', async () => {
+    const items = [
+      { ...testItems[0], isSelectable: false },
+      { ...testItems[1] },
+    ]
+    const input = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items,
+        showSelect: true,
+      },
+      listeners: {
+        input,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    const selectAll = wrapper.findAll('.v-simple-checkbox').at(0)
+    selectAll.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(input).toHaveBeenNthCalledWith(1, [testItems[1]])
+
+    const single = wrapper.findAll('.v-simple-checkbox').at(1)
+    single.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(input.mock.calls).toHaveLength(1)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8915
+  it('should toggle all selectable items', async () => {
+    const items = [
+      { ...testItems[0], isSelectable: false },
+      { ...testItems[1] },
+    ]
+    const input = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items,
+        showSelect: true,
+      },
+      listeners: {
+        input,
+      },
+    })
+
+    const selectAll = wrapper.findAll('.v-simple-checkbox').at(0)
+    selectAll.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(input).toHaveBeenNthCalledWith(1, [testItems[1]])
+
+    selectAll.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(input).toHaveBeenNthCalledWith(2, [])
   })
 })

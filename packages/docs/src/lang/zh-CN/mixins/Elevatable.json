@@ -1,1 +1,5 @@
-{}
+{
+  "props": {
+    "elevation": "组件的海拔可接受 0 到 24 之间的值。你可以在 [elevation page](/styles/elevation) 浏览更多信息。"
+  }
+}

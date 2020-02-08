@@ -1,1 +1,7 @@
-{}
+{
+  "examples": {
+    "usage": {
+      "uninverted": true
+    }
+  }
+}

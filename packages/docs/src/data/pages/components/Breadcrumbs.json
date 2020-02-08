@@ -17,8 +17,29 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "usage"
+          "type": "usage-new",
+          "value": {
+            "booleans": [
+              "customDivider",
+              "large"
+            ],
+            "selects": [
+              {
+                "prop": "divider",
+                "label": "Divider",
+                "attrs": {
+                  "items": [
+                    "/",
+                    "\\",
+                    ".",
+                    ";",
+                    ">",
+                    "-"
+                  ]
+                }
+              }
+            ]
+          }
         }
       ]
     },
@@ -31,15 +52,6 @@
             "v-breadcrumbs",
             "v-breadcrumbs-item"
           ]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "playground",
-          "value": "playground"
         }
       ]
     },

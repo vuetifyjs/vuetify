@@ -1,1 +1,6 @@
-{}
+{
+  "heading": "# 排版",
+  "headingText": "应用程序的排版与其功能一样重要。Vuetify.js 使用 Material Design 规范中所要求的 Roboto 字体。每个标题大小也有一个相应的辅助器类来设置其它元素的样式。",
+  "fontHeader": "## 字体大小",
+  "fontText": "排版助手类允许你能够根据 Material Design 规范所要求的大小来简便的创建文本样式。"
+}

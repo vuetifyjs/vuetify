@@ -11,7 +11,7 @@
       <!-- Header -->
       <div
         v-if="!['example', 'props'].includes(header.value) || item.example || item.props"
-        class="text-capitalize overline grey--text text--darken-3"
+        class="text-capitalize overline text--secondary text--darken-3"
         v-text="header.value"
       />
 
@@ -29,13 +29,22 @@
         v-text="item.type"
       />
 
-      <template v-if="header.value === 'default'">
+      <!-- Default -->
+      <template v-if="header.value === 'default' && item.default && header.type !== 'sass'">
         <span
           v-if="typeof item.default === 'string'"
           class="mono"
           v-text="item.default"
         />
       </template>
+
+      <!-- Sass Default -->
+      <doc-markup
+        v-if="header.value === 'default' && header.type === 'sass' && item.default"
+        :filename="false"
+        lang="sass"
+        value="example"
+      >{{ item.default }}</doc-markup>
 
       <!-- Description -->
       <base-markdown

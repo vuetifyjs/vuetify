@@ -1,4 +1,4 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 // Transition
 .bottom-sheet-transition
@@ -12,14 +12,12 @@
 .v-bottom-sheet.v-dialog
   align-self: flex-end
   border-radius: 0
-  flex: 1 0 100%
+  flex: 0 1 auto
   margin: 0
-  min-width: 100%
   overflow: visible
 
   &.v-bottom-sheet--inset
-    max-width: 70%
-    min-width: 0
+    max-width: $bottom-sheet-inset-width
 
     @media #{map-get($display-breakpoints, 'xs-only')}
       max-width: none

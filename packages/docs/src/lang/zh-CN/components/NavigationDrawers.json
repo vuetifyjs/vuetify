@@ -1,26 +1,77 @@
 {
+  "heading": "# 导航抽屉",
+  "headingText": "`v-navigation-drawer` 组件是用户将用来浏览应用程序的组件。 导航抽屉已预先配置为可以在有或没有 **vue-router** 的情况下使用。 为了显示的目的，一些示例被包装在 `v-card` 元素中。 在您的应用程序中，通常会将 `v-navigation-drawer` 直接放置在 `v-app` 的下面。",
   "examples": {
+    "usage": {
+      "desc": "导航抽屉主要用于存放指向应用程序页面的链接。 将 `null` 用作其 `v-model` 的起始值会将抽屉初始化为在移动设备上关闭，在桌面上打开。 通常使用 **nav** 属性将抽屉与 [v-list](/components/lists) 组件配对。"
+    },
+    "colored": {
+      "heading": "### 彩色的抽屉",
+      "desc": "导航抽屉可以定制，以适应任何应用程序的设计。这里，我们使用 **append** 插槽应用自定义背景颜色和附加的内容区域。"
+    },
     "permanent-floating": {
-      "desc": "导航抽屉可以放置在卡片内并浮在内容背景上。"
+      "heading": "### 永久浮动抽屉",
+      "desc": "默认情况下，导航抽屉的右边框为 1px，将其与内容分开。 在此示例中，我们要从左侧拆下抽屉，让它自己浮动。 **floating** 属性删除右边框（如果使用 **right**，则删除左边框）。"
     },
     "mini": {
-      "desc": "导航抽屉也有一个小型变体，可以使用`mini-variant.sync`来控制。"
+      "heading": "### 迷你",
+      "desc": "当使用 **mini-variant** 属性时，抽屉会缩小（默认为 80px），并将除第一个元素之外的所有内容隐藏在 `v-list` 内部。 在此示例中，我们使用 **.sync** ，该修饰符允许我们以编程方式绑定抽屉的 展开/收缩。"
     },
     "temporary": {
+      "heading": "### 临时的",
       "desc": "临时抽屉位于其应用之上，并使用稀松布（叠加）来使背景变暗。这个抽屉的行为是模仿在移动设备时的持续抽屉。点击抽屉外部会导致关闭。"
+    },
+    "combined": {
+      "heading": "### 组合抽屉",
+      "desc": "在此示例中，我们定义了一个自定义宽度来容纳我们的嵌套抽屉。 使用 `v-layout` 我们确保抽屉和列表在水平方向上彼此相邻堆叠。"
+    },
+    "right": {
+      "heading": "### 右侧",
+      "desc": "导航抽屉也可以位于应用程序（或元素）的右侧。 这对于创建带有辅助信息（可能没有任何导航链接）的侧页很有用。 使用 **RTL** 时，必须为抽屉明确定义 **right**。"
+    },
+    "background": {
+      "heading": "### 背景",
+      "desc": "将自定义背景应用于抽屉。 如果您需要自定义 `v-img` 的属性，则可以使用 **img** 插槽。"
+    },
+    "bottom-drawer": {
+      "heading": "### 底部抽屉",
+      "desc": "使用 **bottom** 属性，我们可以在移动设备上重新定位我们的抽屉，让它从屏幕的底部出来。这是另一种样式，只在遇到 **mobile-break-point** 时激活。"
+    },
+    "expand-on-hover": {
+      "heading": "### 悬停扩展",
+      "desc": "将组件置于 **mini-variant** 模式，并在悬停后展开。 不更改内容区域。 宽度可以通过 **mini-variant-width** 属性进行控制。"
     }
   },
   "props": {
+    "absolute": "Mixins.Positionable.props.absolute",
+    "bottom": "在移动设备上从屏幕底部展开",
     "clipped": "剪切的抽屉位于应用程序工具栏下方",
     "disableResizeWatcher": "调整大小时将自动打开/关闭抽屉，具体取决于手机还是桌面",
     "disableRouteWatcher": "当路由改变时禁止打开抽屉导航",
+    "expandOnHover": "将抽屉折叠成 **mini-variant**，直到用鼠标悬停",
+    "fixed": "Mixins.Positionable.props.fixed",
     "floating": "浮动抽屉没有可见的容器（没有右边框）",
+    "height": "设置导航抽屉高度",
     "miniVariantWidth": "指定`mini`属性开期时指定的宽度",
     "miniVariant": "凝结导航抽屉宽度，也接受**.sync**修饰符。这样，抽屉在点击时会重新打开",
     "permanent": "不管屏幕尺寸如何，抽屉都可以看到",
     "right": "将抽屉放置在右侧",
+    "src": "Components.Toolbars.props.src",
     "stateless": "删除所有自动状态功能（调整大小、移动、路由）并手动控制抽屉状态。",
+    "tag": "Components.Sheets.props.tag",
     "temporary": "临时抽屉位于其应用之上，并使用稀松布（叠加）来使背景变暗",
-    "touchless": "禁用移动触摸功能"
-  }
+    "touchless": "禁用移动触摸功能",
+    "value": "Mixins.Toggleable.props.value",
+    "width": "Mixins.Measurable.props.width"
+  },
+  "events": {
+    "transitionend": "过渡完成后，发出事件对象。",
+    "update:mini-variant": "`mini-variant.sync` 事件"
+  },
+  "slots": {
+    "append": "抽屉底部的插槽",
+    "img": "用于修改 `v-img` 属性时使用 **src** 属性",
+    "prepend": "抽屉顶部的插槽"
+  },
+  "alert": "如果使用启用了 `app` 属性的 `v-navigation-drawer`，则不需要像示例中那样使用 `absolute` 属性。"
 }

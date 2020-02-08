@@ -1,10 +1,10 @@
 <template>
   <v-navigation-drawer
     v-model="drawer"
+    :right="$vuetify.rtl"
     :width="300"
     app
     clipped
-    :right="$vuetify.rtl"
   >
     <v-container>
       <div class="text-center">
@@ -32,12 +32,12 @@
           @click="$ga.event('drawer', 'click', 'vuejobs')"
         >
           <v-img
-            src="https://cdn.vuetifyjs.com/images/affiliates/vuejobs-logo.svg"
             alt="VueJobs"
-            title="VueJobs"
             class="mx-auto"
             contain
             height="18"
+            src="https://cdn.vuetifyjs.com/images/affiliates/vuejobs-logo.svg"
+            title="VueJobs"
             width="60"
           />
         </a>
@@ -86,8 +86,6 @@
       <v-divider />
 
       <div class="px-4 py-2 d-flex">
-        <base-locales-menu />
-
         <base-versions-menu />
 
         <v-spacer />
@@ -100,11 +98,9 @@
 
 <script>
   // Utilities
-  import {
-    sync,
-  } from 'vuex-pathify'
   import kebabCase from 'lodash/kebabCase'
   import { genChip } from '@/util/helpers'
+  import { sync } from 'vuex-pathify'
 
   export default {
     name: 'DocumentationDrawer',
@@ -130,7 +126,8 @@
 
     watch: {
       $route () {
-        if (this.stateless &&
+        if (
+          this.stateless &&
           this.drawer &&
           this.$vuetify.breakpoint.mdAndDown
         ) this.drawer = false
@@ -140,7 +137,11 @@
     methods: {
       genChip,
       addLanguagePrefix (item) {
-        const { children, subtext, ...props } = item
+        const {
+          children,
+          subtext,
+          ...props
+        } = item
         const newItem = {
           ...props,
           text: `Vuetify.AppDrawer.${item.text}`,

@@ -1,1 +1,9 @@
-{}
+{
+  "heading": "# コンボボックス",
+  "headingText": "`v-combobox`コンポーネントは選択肢**items**に存在しない値を入力できる [v-autocomplete](/components/autocompletes) です。作成されたアイテムは文字列として返されます。",
+  "examples": {
+    "usage": {
+      "desc": "コンボボックスを使用すると、提供されたアイテムリストに存在しない値をユーザーが作成できるようにすることができます。"
+    }
+  }
+}
