@@ -445,7 +445,7 @@ export default baseMixins.extend<options>().extend({
           readonly: true,
           type: 'text',
           'aria-readonly': String(this.readonly),
-          'aria-activedescendant': getObjectValueByPath(this.$refs.menu, 'activeTile.id', undefined),
+          'aria-activedescendant': getObjectValueByPath(this.$refs.menu, 'activeTile.id'),
           autocomplete: getObjectValueByPath(input.data!, 'attrs.autocomplete', 'off'),
         },
         on: { keypress: this.onKeyPress },
