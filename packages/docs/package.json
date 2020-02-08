@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.js --hot --progress",
     "start": "cross-env NODE_ENV=production node server",
-    "build": "rimraf dist && cross-env NODE_ENV=production webpack --config build/webpack.prod.config.js --no-progress --hide-modules",
+    "build": "rimraf dist && cross-env NODE_ENV=production webpack --config build/webpack.config.js --no-progress --hide-modules",
     "lint": "eslint --ext .js,.vue,.json src -f codeframe --max-warnings 0",
     "lint:fix": "yarn lint --fix"
   },
@@ -52,6 +52,7 @@
     "autoprefixer": "^9.6.1",
     "babel-loader": "^8.0.6",
     "concurrently": "^4.1.1",
+    "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.1.0",
     "deepmerge": "^4.0.0",
     "docsearch.js": "^2.6.3",

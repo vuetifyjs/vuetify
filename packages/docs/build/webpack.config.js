@@ -7,6 +7,7 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 const isProd = process.env.NODE_ENV === 'production'
 const resolve = file => path.resolve(__dirname, file)
@@ -19,7 +20,10 @@ const plugins = [
   new VueLoaderPlugin(),
   new HtmlWebpackPlugin({
     template: resolve('../src/index.template.html')
-  })
+  }),
+  new CopyPlugin([
+    { from: 'src/public' },
+  ]),
 ]
 
 const cssLoaders = [
@@ -59,7 +63,7 @@ module.exports = {
   },
   output: {
     path: resolve('../dist'),
-    publicPath: '/dist/',
+    publicPath: '/',
     filename: isProd ? '[name].[chunkhash].js' : '[name].js',
     chunkFilename: isProd ? '[name].[chunkhash].js' : '[name].js'
   },
@@ -181,7 +185,7 @@ module.exports = {
 }
 
 if (isProd) {
-  config.plugins.push(
+  plugins.push(
     new MiniCssExtractPlugin({
       filename: 'common.[chunkhash].css'
     })
