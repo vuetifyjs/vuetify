@@ -1,1 +1,13 @@
-{}
+{
+  "heading": "# テーマ",
+  "headingText": "プログラムでアプリケーションの色を簡単に変更できます。既定のスタイルシートを再構築し、ニーズに合わせてフレームワークのさまざまな個所をカスタマイズします。",
+  "lightAndDarkHeader": "## Light and Dark",
+  "lightAndDarkText1": "Vuetify は、Material Design specの**light**と**dark**バリアントの両方をサポートしています。この指定は、ルート アプリケーション コンポーネント 'v-app' から始まり、大部分のコンポーネントでサポートされています。既定では、アプリケーションは **light** テーマを使用しますが、theme serviceに **dark** オプションを追加すると簡単に上書きできます。",
+  "lightAndDarkText2": "コンポーネントを \"light\" または \"dark\" として指定すると、特に指定がない限り、そのコンポーネントはすべて同じコンポーネントを継承して適用します。'this.$vuetify.theme.dark' を **true** または **false** に変更することで、手動で **dark** のオンとオフを切り替えることができます。",
+  "customizingHeader": "## カスタマイズ",
+  "customizingText1": "デフォルトでは、Vuetify はすべてのコンポーネントに適用される標準テーマを持っています。",
+  "customizingText3": "定義済みのマテリアルカラーを使用することもできます。",
+  "customizingText3a": "デフォルトでは、theme serviceはアプリケーションのprimaryカラーを **anchor** タグに使用します。これをオーバーライドするには、テーマにanchorプロパティを追加します。",
+  "themeGeneratorHeader": "## テーマジェネレータ",
+  "themeGeneratorText1": "[テーマジェネレータ](https://theme-generator.vuetifyjs.com) を使用して**Vuetify**アプリケーションの新しいカラーテーマを見つけて、生成してみてください。"
+}

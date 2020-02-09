@@ -1,1 +1,12 @@
-{}
+{
+  "heading": "# Intersection observer",
+  "headingText": "'v-intersect' ディレクティブは[Intersection Observer API](https://developer.mozilla.org/ja/docs/Web/API/Intersection_Observer_API)を利用します。ユーザーのビューポート内に要素が表示されるタイミングを検出するための使いやすいインターフェイスを提供します。これは [v-lazy](/components/lazy) コンポーネントにも使用されます。",
+  "examples": {
+    "usage": {
+      "desc": "次のウィンドウ内でスクロールし、色付きのドットを見てください。[v-card](/components/cards) が error から success に変わることがわかります。"
+    }
+  },
+  "options": {
+    "modifiers.once": "マウント時に指定されたユーザー コールバックのみを呼び出し、要素がビューポートに入ったときユーザー コールバックを 1 回だけ呼び出します。**quiet** 修飾子を使用する場合、呼び出されるのは 1 回だけです。"
+  }
+}

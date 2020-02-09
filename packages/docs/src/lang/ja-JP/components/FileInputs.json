@@ -1,10 +1,8 @@
 {
   "heading": "# File inputs",
   "headingText": "`v-file-input`コンポーネントは、ファイルを選択するためのクリーンなインターフェースを提供する特殊な入力であり、詳細な選択情報とアップロードの進行状況を表示します。これは、標準のファイル入力を直接置き換えるものです。",
+  "usageText": "`v-file-input`コンポーネントは[v-text-field](/components/text-fields) を拡張するコンテナです。",
   "examples": {
-    "usage": {
-      "desc": "`v-file-input`コンポーネントは[v-text-field](/components/text-fields) を拡張するコンテナです。"
-    },
     "custom-icon": {
       "heading": "### カスタムアイコン"
     }

@@ -1,8 +1,6 @@
 {
+  "usageText": "Au cœur de ce composant, le composant `v-file-input` est un conteneur de base qui étend [v-text-field](/components/text-fields).",
   "examples": {
-    "usage": {
-      "desc": "Au cœur de ce composant, le composant `v-file-input` est un conteneur de base qui étend [v-text-field](/components/text-fields)."
-    },
     "multiple": {
       "heading": "### Multiple",
       "desc": "Le fichier `v-input` peut contenir plusieurs fichiers en même temps lorsque vous utilisez le prop **multiple**."
@@ -50,8 +48,5 @@
   },
   "slots": {
     "selection": "Champ pour définir une apparence personnalisée pour les éléments sélectionnés. Fournit l'actuel **index**, **text** (tronqué) et [file](https://developer.mozilla.org/fr-US/docs/Web/API/File)."
-  },
-  "events": {
-    "change": "Components.Inputs.events.change"
   }
 }

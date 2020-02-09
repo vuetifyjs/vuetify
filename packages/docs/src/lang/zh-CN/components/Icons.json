@@ -1,10 +1,8 @@
 {
   "heading": "# 图标",
   "headingText": "`v-icon` 组件提供了大量字形，以提供应用程序各个方面的上下文。 有关所有可用图标的列表，请访问官方 [Material Design Icons](https://materialdesignicons.com/) 页面。 要使用任何这些图标，只需使用 `mdi-` 前缀，后跟图标名称即可。",
+  "usageText": "图标有两个主题（浅色和深色）和五个不同的大小（x-small, small, medium （默认）, large, and x-large）。",
   "examples": {
-    "usage": {
-      "desc": "图标有两个主题（浅色和深色）和五个不同的大小（x-small, small, medium （默认）, large, and x-large）。"
-    },
     "font-awesome": {
       "heading": "### Font Awesome",
       "desc": "[Font Awesome](http://fontawesome.io/icons/) 也被支持。只需使用 `fa-` 前缀图标名称。 请注意，您仍然需要在您的项目中包含 Font Awesome 图标。 关于如何安装它的更多信息，请导航到 [installation page](/customization/icons#install-font-awesome-5-icons)"
