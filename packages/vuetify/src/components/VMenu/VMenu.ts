@@ -360,17 +360,15 @@ export default baseMixins.extend({
         options.on.mouseleave = this.mouseLeaveHandler
       }
 
-      return this.$createElement(
-        'div',
-        options,
-        [this.$createElement(VThemeProvider, {
-          props: {
-            root: true,
-            light: this.light,
-            dark: this.dark,
-          },
-        }, this.getContentSlot())]
-      )
+      return this.$createElement(VThemeProvider, {
+        props: {
+          root: true,
+          light: this.light,
+          dark: this.dark,
+        },
+      }, [
+        this.$createElement('div', options, this.getContentSlot()),
+      ])
     },
     getTiles () {
       if (!this.$refs.content) return
