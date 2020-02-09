@@ -35,7 +35,7 @@
     "pluralize": "^8.0.0",
     "route-cache": "^0.4.4",
     "serve-favicon": "^2.5.0",
-    "vee-validate": "^2.2.13",
+    "vee-validate": "^3.2.4",
     "vue-analytics": "^5.17.0",
     "vue-i18n": "^8.12.0",
     "vue-no-ssr": "^1.1.1",
