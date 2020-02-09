@@ -133,8 +133,10 @@ export default mixins(Returnable, Themeable).extend({
         },
       },
     }, [
-      this.genContent(),
-      this.large ? this.genActions() : null,
+      h('div', [
+        this.genContent(),
+        this.large ? this.genActions() : null,
+      ]),
     ])
   },
 })
