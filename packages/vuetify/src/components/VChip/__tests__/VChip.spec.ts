@@ -15,7 +15,7 @@ import {
 } from '@vue/test-utils'
 
 describe('VChip.ts', () => {
-  let mountFunction: (options?: object) => Wrapper<Vue>
+  let mountFunction: (options?: object, name?: string) => Wrapper<Vue>
   let router: Router
   let localVue: typeof Vue
 
@@ -23,7 +23,6 @@ describe('VChip.ts', () => {
     router = new Router()
     localVue = createLocalVue()
     localVue.use(Router)
-
     mountFunction = (options = {}) => {
       return mount(VChip, {
         // https://github.com/vuejs/vue-test-utils/issues/1130
@@ -32,6 +31,11 @@ describe('VChip.ts', () => {
         router,
         ...options,
       })
+    }
+    Vue.prototype.$vuetify = {
+      icons: {
+        iconfont: 'mdiSvg',
+      },
     }
   })
 
@@ -51,7 +55,7 @@ describe('VChip.ts', () => {
 
     const input = jest.fn(value => wrapper.setProps({ value }))
     wrapper.vm.$on('click:close', input)
-
+    console.log(wrapper.html())
     expect(wrapper.html()).toMatchSnapshot()
 
     close.trigger('click')
