@@ -32,11 +32,6 @@ describe('VChip.ts', () => {
         ...options,
       })
     }
-    Vue.prototype.$vuetify = {
-      icons: {
-        iconfont: 'mdiSvg',
-      },
-    }
   })
 
   it('should have a v-chip class', () => {
@@ -55,7 +50,6 @@ describe('VChip.ts', () => {
 
     const input = jest.fn(value => wrapper.setProps({ value }))
     wrapper.vm.$on('click:close', input)
-    console.log(wrapper.html())
     expect(wrapper.html()).toMatchSnapshot()
 
     close.trigger('click')
