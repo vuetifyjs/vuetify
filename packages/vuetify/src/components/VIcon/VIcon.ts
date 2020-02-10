@@ -150,10 +150,8 @@ const VIcon = mixins(
           width: fontSize,
         } : undefined,
       }
-      console.log(fontSize)
       wrapperData.class['v-icon--svg'] = true
       this.applyColors(wrapperData)
-      console.log(JSON.stringify(wrapperData, null, 2))
       const svgData: VNodeData = {
         attrs: {
           xmlns: 'http://www.w3.org/2000/svg',
