@@ -36,37 +36,31 @@ exports[`VOverflowBtn.js should use default autocomplete selections 1`] = `
         <div class="v-menu__content theme--light v-autocomplete__content"
              style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
         >
-          <div class="v-select-list v-card theme--light"
+          <div role="listbox"
+               tabindex="-1"
+               class="v-list v-select-list v-sheet v-sheet--tile theme--light theme--light"
                id="list-1"
           >
-            <div role="listbox"
-                 id="list-1"
-                 tabindex="-1"
-                 class="v-list v-sheet v-sheet--tile theme--light"
+            <div tabindex="0"
+                 aria-selected="true"
+                 id="list-item-5-0"
+                 role="option"
+                 class="v-list-item primary--text v-list-item--active v-list-item--link theme--light"
             >
-              <div tabindex="0"
-                   aria-selected="true"
-                   aria-labelledby="list-item-5-0"
-                   role="option"
-                   class="v-list-item primary--text v-list-item--active v-list-item--link theme--light"
-              >
-                <div class="v-list-item__action">
-                  <div class="v-simple-checkbox">
-                    <div class="v-input--selection-controls__ripple primary--text">
-                    </div>
-                    <i aria-hidden="true"
-                       class="v-icon notranslate material-icons theme--light primary--text"
-                    >
-                      $checkboxOn
-                    </i>
+              <div class="v-list-item__action">
+                <div class="v-simple-checkbox">
+                  <div class="v-input--selection-controls__ripple primary--text">
                   </div>
-                </div>
-                <div class="v-list-item__content">
-                  <div id="list-item-5-0"
-                       class="v-list-item__title"
+                  <i aria-hidden="true"
+                     class="v-icon notranslate material-icons theme--light primary--text"
                   >
-                    foo
-                  </div>
+                    $checkboxOn
+                  </i>
+                </div>
+              </div>
+              <div class="v-list-item__content">
+                <div class="v-list-item__title">
+                  foo
                 </div>
               </div>
             </div>
@@ -123,37 +117,31 @@ exports[`VOverflowBtn.js should use default autocomplete selections 2`] = `
         <div class="v-menu__content theme--light v-autocomplete__content"
              style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
         >
-          <div class="v-select-list v-card theme--light"
+          <div role="listbox"
+               tabindex="-1"
+               class="v-list v-select-list v-sheet v-sheet--tile theme--light theme--light"
                id="list-1"
           >
-            <div role="listbox"
-                 id="list-1"
-                 tabindex="-1"
-                 class="v-list v-sheet v-sheet--tile theme--light"
+            <div tabindex="0"
+                 aria-selected="true"
+                 id="list-item-5-0"
+                 role="option"
+                 class="v-list-item primary--text v-list-item--active v-list-item--link theme--light"
             >
-              <div tabindex="0"
-                   aria-selected="true"
-                   aria-labelledby="list-item-5-0"
-                   role="option"
-                   class="v-list-item primary--text v-list-item--active v-list-item--link theme--light"
-              >
-                <div class="v-list-item__action">
-                  <div class="v-simple-checkbox">
-                    <div class="v-input--selection-controls__ripple primary--text">
-                    </div>
-                    <i aria-hidden="true"
-                       class="v-icon notranslate material-icons theme--light primary--text"
-                    >
-                      $checkboxOn
-                    </i>
+              <div class="v-list-item__action">
+                <div class="v-simple-checkbox">
+                  <div class="v-input--selection-controls__ripple primary--text">
                   </div>
-                </div>
-                <div class="v-list-item__content">
-                  <div id="list-item-5-0"
-                       class="v-list-item__title"
+                  <i aria-hidden="true"
+                     class="v-icon notranslate material-icons theme--light primary--text"
                   >
-                    foo
-                  </div>
+                    $checkboxOn
+                  </i>
+                </div>
+              </div>
+              <div class="v-list-item__content">
+                <div class="v-list-item__title">
+                  foo
                 </div>
               </div>
             </div>

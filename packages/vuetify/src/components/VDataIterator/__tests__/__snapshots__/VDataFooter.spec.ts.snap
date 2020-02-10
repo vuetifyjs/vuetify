@@ -21,7 +21,7 @@ exports[`VDataFooter.ts should disable last page button if no items 1`] = `
                      id="input-60"
                      readonly="readonly"
                      type="text"
-                     aria-readonly="true"
+                     aria-readonly="false"
                      autocomplete="off"
               >
             </div>
@@ -122,7 +122,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
                      id="input-26"
                      readonly="readonly"
                      type="text"
-                     aria-readonly="true"
+                     aria-readonly="false"
                      autocomplete="off"
               >
             </div>
@@ -219,7 +219,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
                      id="input-12"
                      readonly="readonly"
                      type="text"
-                     aria-readonly="true"
+                     aria-readonly="false"
                      autocomplete="off"
               >
             </div>
@@ -316,7 +316,7 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
                      id="input-2"
                      readonly="readonly"
                      type="text"
-                     aria-readonly="true"
+                     aria-readonly="false"
                      autocomplete="off"
               >
             </div>
@@ -392,7 +392,7 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
                      id="input-50"
                      readonly="readonly"
                      type="text"
-                     aria-readonly="true"
+                     aria-readonly="false"
                      autocomplete="off"
               >
             </div>

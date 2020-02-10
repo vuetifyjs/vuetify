@@ -12,6 +12,8 @@
   "transformText2": "Text breaking and the removal of `text-transform` is also possible. In the first example, the `text-transform: uppercase` custom class is overwritten and allows the text casing to remain. In the second example, we break up a longer word to fit the available space.`",
   "weightsHeader": "## Font weights and italics",
   "weightsText1": "Material design, by default, supports **100, 300, 400, 500, 700, 900** font weights and italicized text.",
+  "opacityHeader": "## Text opacity",
+  "opacityText1": "Opacity helper classes allow you to easily adjust the emphasis of text. `text--primary` has the same opacity as default text. `text--secondary` is used for hints and helper text. De-emphasise text with `text--disabled`.",
   "rtlHeader": "## RTL Alignment",
   "rtlText1": "When using [RTL](/customization/rtl), you may want to keep the alignment regardless of the **rtl** designation. This can be achieved using text alignment helper classes in the following format: `text-<breakpoint>-<direction>`, where breakpoint can be `sm`, `md`, `lg`, or `xl` and direction can be `left` or `right`. You may also want alignment to respond to rtl which can be done using directions `start` and `end`."
 }
