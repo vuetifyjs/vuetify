@@ -308,12 +308,6 @@ describe('VIcon', () => {
       await wrapper.vm.$nextTick()
 
       expect(wrapper.html()).toMatchSnapshot()
-
-      wrapper.setProps({ 'v-chip--close': true })
-
-      await wrapper.vm.$nextTick()
-
-      expect(wrapper.html()).toMatchSnapshot()
     })
 
     it('should render an svg icon chip close', async () => {
