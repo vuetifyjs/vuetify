@@ -13,6 +13,9 @@ const vuetify = new Vuetify({
   lang: {
     locales,
   },
+  icons: {
+    iconfont: 'mdiSvg',
+  },
 })
 
 const vm = new Vue({
