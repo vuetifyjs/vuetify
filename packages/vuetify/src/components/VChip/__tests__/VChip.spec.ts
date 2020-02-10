@@ -15,7 +15,7 @@ import {
 } from '@vue/test-utils'
 
 describe('VChip.ts', () => {
-  let mountFunction: (options?: object, name?: string) => Wrapper<Vue>
+  let mountFunction: (options?: object) => Wrapper<Vue>
   let router: Router
   let localVue: typeof Vue
 
