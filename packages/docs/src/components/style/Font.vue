@@ -72,6 +72,9 @@
             ['font-italic font-weight-light', 'Light italic'],
             ['font-italic font-weight-medium', 'Medium italic'],
             ['font-italic font-weight-bold', 'Bold italic'],
+            ['text--primary', '87% opacity'],
+            ['text--secondary', '60% opacity'],
+            ['text--disabled', '38% opacity']
           ],
         },
       ],
