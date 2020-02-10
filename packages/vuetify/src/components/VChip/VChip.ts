@@ -145,6 +145,9 @@ export default mixins(
         props: {
           right: true,
         },
+        attrs: {
+          'v-chip--close': true,
+        },
         on: {
           click: (e: Event) => {
             e.stopPropagation()
@@ -170,7 +173,6 @@ export default mixins(
   render (h): VNode {
     const children = [this.genContent()]
     let { tag, data } = this.generateRouteLink()
-
     data.attrs = {
       ...data.attrs,
       draggable: this.draggable ? 'true' : undefined,
@@ -181,7 +183,6 @@ export default mixins(
       value: this.active,
     })
     data = this.setBackgroundColor(this.color, data)
-
     const color = this.textColor || (this.outlined && this.color)
 
     return h(tag, this.setTextColor(color, data), children)
