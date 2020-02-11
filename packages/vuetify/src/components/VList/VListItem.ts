@@ -97,7 +97,7 @@ export default baseMixins.extend<options>().extend({
         ...Routable.options.computed.classes.call(this),
         'v-list-item--dense': this.dense,
         'v-list-item--disabled': this.disabled,
-        'v-list-item--link': this.isClickable && !this.inactive,
+        'v-list-item--link': !(this.to || this.href) && this.isClickable && !this.inactive,
         'v-list-item--selectable': this.selectable,
         'v-list-item--three-line': this.threeLine,
         'v-list-item--two-line': this.twoLine,
@@ -178,6 +178,30 @@ export default baseMixins.extend<options>().extend({
       : this.$slots.default
 
     tag = this.inactive ? 'div' : tag
+
+    if (this.inactive) {
+      delete data.attrs.href
+    }
+
+    if (!this.inactive && (this.to || this.href)) {
+      const anchorData = {
+        class: {
+          'v-list-item--link': true,
+          ...this.themeClasses,
+        },
+        props: data.props,
+        attrs: {
+          ...(data.attrs.href && { href: data.attrs.href }),
+        },
+      }
+      const anchorChild = h(tag, anchorData, children)
+
+      if (this.href) {
+        delete data.attrs.href
+      }
+
+      return h(this.tag, this.setTextColor(this.color, data), [anchorChild])
+    }
 
     return h(tag, this.setTextColor(this.color, data), children)
   },
