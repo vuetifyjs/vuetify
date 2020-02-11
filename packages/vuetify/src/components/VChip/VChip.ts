@@ -144,9 +144,7 @@ export default mixins(
         staticClass: 'v-chip__close',
         props: {
           right: true,
-        },
-        attrs: {
-          'v-chip--close': true,
+          size: 18,
         },
         on: {
           click: (e: Event) => {

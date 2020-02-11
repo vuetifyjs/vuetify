@@ -150,14 +150,15 @@ const VIcon = mixins(
           width: fontSize,
         } : undefined,
       }
+      console.log(fontSize)
       wrapperData.class['v-icon--svg'] = true
       this.applyColors(wrapperData)
       const svgData: VNodeData = {
         attrs: {
           xmlns: 'http://www.w3.org/2000/svg',
           viewBox: '0 0 24 24',
-          height: fontSize || (wrapperData.attrs && wrapperData.attrs['v-chip--close'] ? '18' : '24'),
-          width: fontSize || (wrapperData.attrs && wrapperData.attrs['v-chip--close'] ? '18' : '24'),
+          height: fontSize || '24',
+          width: fontSize || '24',
           role: 'img',
           'aria-hidden': true,
         },
