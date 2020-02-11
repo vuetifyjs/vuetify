@@ -5375,19 +5375,19 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
       </thead>
       <tbody>
         <div>
-          {"item":{"name":"Frozen Yogurt","calories":159,"fat":6,"carbs":24,"protein":4,"iron":"1%"},"isSelected":false,"isExpanded":false,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"index":0}
+          {"item":{"name":"Frozen Yogurt","calories":159,"fat":6,"carbs":24,"protein":4,"iron":"1%"},"isSelected":false,"isExpanded":false,"isMobile":false,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"index":0}
         </div>
         <div>
-          {"item":{"name":"Ice cream sandwich","calories":237,"fat":9,"carbs":37,"protein":4.3,"iron":"1%"},"isSelected":false,"isExpanded":false,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"index":1}
+          {"item":{"name":"Ice cream sandwich","calories":237,"fat":9,"carbs":37,"protein":4.3,"iron":"1%"},"isSelected":false,"isExpanded":false,"isMobile":false,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"index":1}
         </div>
         <div>
-          {"item":{"name":"Eclair","calories":262,"fat":16,"carbs":23,"protein":6,"iron":"7%"},"isSelected":false,"isExpanded":false,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"index":2}
+          {"item":{"name":"Eclair","calories":262,"fat":16,"carbs":23,"protein":6,"iron":"7%"},"isSelected":false,"isExpanded":false,"isMobile":false,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"index":2}
         </div>
         <div>
-          {"item":{"name":"Cupcake","calories":305,"fat":3.7,"carbs":67,"protein":4.3,"iron":"8%"},"isSelected":false,"isExpanded":false,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"index":3}
+          {"item":{"name":"Cupcake","calories":305,"fat":3.7,"carbs":67,"protein":4.3,"iron":"8%"},"isSelected":false,"isExpanded":false,"isMobile":false,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"index":3}
         </div>
         <div>
-          {"item":{"name":"Gingerbread","calories":356,"fat":16,"carbs":49,"protein":3.9,"iron":"16%"},"isSelected":false,"isExpanded":false,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"index":4}
+          {"item":{"name":"Gingerbread","calories":356,"fat":16,"carbs":49,"protein":3.9,"iron":"16%"},"isSelected":false,"isExpanded":false,"isMobile":false,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"index":4}
         </div>
       </tbody>
     </table>
