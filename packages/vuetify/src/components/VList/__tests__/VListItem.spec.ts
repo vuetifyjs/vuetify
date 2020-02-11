@@ -57,7 +57,7 @@ describe('VListItem.ts', () => {
 
     const a = wrapper.find('a')
 
-    expect(wrapper.is('a')).toBe(true)
+    expect(a.exists()).toBe(true)
     expect(a.element.getAttribute('href')).toBe('http://www.google.com')
     expect(wrapper.html()).toMatchSnapshot()
   })
@@ -69,16 +69,17 @@ describe('VListItem.ts', () => {
       },
     })
 
-    expect(wrapper.classes('v-list-item--link')).toBe(true)
+    expect(wrapper.find('a').exists()).toBe(true)
+    expect(wrapper.find('a').classes('v-list-item--link')).toBe(true)
 
     wrapper.setProps({ href: undefined, to: '/foo' })
-    expect(wrapper.classes('v-list-item--link')).toBe(true)
+    expect(wrapper.find('router-link').classes('v-list-item--link')).toBe(true)
 
     wrapper.setProps({ to: undefined, link: true })
     expect(wrapper.classes('v-list-item--link')).toBe(true)
 
     wrapper.setProps({ link: false })
-    expect(wrapper.classes('v-list-item--link')).toBe(false)
+    expect(wrapper.find('a').exists()).toBe(false)
   })
 
   it('should have --link class when click handler present', () => {
