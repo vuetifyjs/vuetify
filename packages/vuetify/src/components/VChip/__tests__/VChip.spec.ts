@@ -51,6 +51,7 @@ describe('VChip.ts', () => {
 
     const input = jest.fn(value => wrapper.setProps({ value }))
     wrapper.vm.$on('click:close', input)
+
     expect(wrapper.html()).toMatchSnapshot()
 
     close.trigger('click')
