@@ -150,9 +150,9 @@ const VIcon = mixins(
           width: fontSize,
         } : undefined,
       }
-      console.log(fontSize)
       wrapperData.class['v-icon--svg'] = true
       this.applyColors(wrapperData)
+
       const svgData: VNodeData = {
         attrs: {
           xmlns: 'http://www.w3.org/2000/svg',
@@ -163,6 +163,7 @@ const VIcon = mixins(
           'aria-hidden': true,
         },
       }
+
       return h(this.hasClickListener ? 'button' : 'span', wrapperData, [
         h('svg', svgData, [
           h('path', {

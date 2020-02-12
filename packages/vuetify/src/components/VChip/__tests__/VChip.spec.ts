@@ -23,6 +23,7 @@ describe('VChip.ts', () => {
     router = new Router()
     localVue = createLocalVue()
     localVue.use(Router)
+
     mountFunction = (options = {}) => {
       return mount(VChip, {
         // https://github.com/vuejs/vue-test-utils/issues/1130
