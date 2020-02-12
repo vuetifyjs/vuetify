@@ -6,6 +6,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 import Vue from 'vue'
+import { Breakpoint } from '../../../services/breakpoint'
 import { preset } from '../../../presets/default'
 
 Vue.prototype.$vuetify = {
@@ -30,6 +31,7 @@ describe('VDataIterator.ts', () => {
       return mount(VDataIterator, {
         mocks: {
           $vuetify: {
+            breakpoint: new Breakpoint(preset),
             lang: new Lang(preset),
             theme: {
               dark: false,
