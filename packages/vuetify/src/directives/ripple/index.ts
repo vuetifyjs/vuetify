@@ -1,8 +1,12 @@
 // Styles
 import './VRipple.sass'
 
-import { VNode, VNodeDirective } from 'vue'
+// Utilities
+import { keyCodes } from '../../util/helpers'
 import { consoleWarn } from '../../util/console'
+
+// Types
+import { VNode, VNodeDirective } from 'vue'
 
 function transform (el: HTMLElement, value: string) {
   el.style['transform'] = value
@@ -27,12 +31,18 @@ function isKeyboardEvent (e: MouseEvent | TouchEvent | KeyboardEvent): e is Keyb
   return e.constructor.name === 'KeyboardEvent'
 }
 
-const calculate = (e: MouseEvent | TouchEvent | KeyboardEvent, el: HTMLElement, value: RippleOptions = {}) => {
+const calculate = (
+  e: MouseEvent | TouchEvent | KeyboardEvent,
+  el: HTMLElement,
+  value: RippleOptions = {}
+) => {
   let localX = 0
   let localY = 0
+
   if (!isKeyboardEvent(e)) {
     const offset = el.getBoundingClientRect()
     const target = isTouchEvent(e) ? e.touches[e.touches.length - 1] : e
+
     localX = target.clientX - offset.left
     localY = target.clientY - offset.top
   }
@@ -58,7 +68,11 @@ const calculate = (e: MouseEvent | TouchEvent | KeyboardEvent, el: HTMLElement, 
 
 const ripples = {
   /* eslint-disable max-statements */
-  show (e: MouseEvent | TouchEvent | KeyboardEvent, el: HTMLElement, value: RippleOptions = {}) {
+  show (
+    e: MouseEvent | TouchEvent | KeyboardEvent,
+    el: HTMLElement,
+    value: RippleOptions = {}
+  ) {
     if (!el._ripple || !el._ripple.enabled) {
       return
     }
@@ -173,7 +187,7 @@ function rippleHide (e: Event) {
 
 let keyboardRipple = false
 function keyboardRippleShow (e: KeyboardEvent) {
-  if (!keyboardRipple && (e.keyCode === 13 || e.keyCode === 32)) {
+  if (!keyboardRipple && (e.keyCode === keyCodes.enter || e.keyCode === keyCodes.space)) {
     keyboardRipple = true
     rippleShow(e)
   }
