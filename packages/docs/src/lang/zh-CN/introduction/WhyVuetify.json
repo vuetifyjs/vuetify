@@ -4,7 +4,6 @@
   "community": "社区",
   "communityCaption": "准备好享受 Vue 生态系统中最活跃的社区之一吧。被一个问题困住了？马上寻求帮助。找到一个bug？想谈谈 Firebase 吗？创造了一些令人惊叹的东西吗？来让我们知道吧！了解其他人在 [awesome-vuetify](https://github.com/vuetifyjs/awesome-vuetify) 存储库上构建了什么。",
   "communityHeader": "## 开发者支持",
-  "communityText": "用 Vuetify 开发意味着你永远不是一个人在战斗。在官方的 [server](https://community.vuetifyjs.com) 中寻求开发团队和其他社区成员的帮助。有机会与来自世界各地想要帮助你成功的人才交流。需要专业指导，或是想要支持这个项目？成为 [Github sponsor](https://github.com/sponsors/johnleider) 并与作者一起获得私人支持或 [预约一个时间](/professional-support/consulting)。",
   "comparisonHeader": "## 对比其它框架",
   "comparisonText": "自2014年发布以来，[Vue.js](https://vuejs.org/) 已经成为世界上最流行的 JavaScript 框架之一。这种流行的原因之一是组件的广泛使用，它使开发人员能够创建在整个应用程序中使用和重用的简洁模块。UI 库是这些组件的集合，它们根据特定的样式指南来实现，并提供构建丰富 web 应用程序所需的工具。以下是 2019 年 Vue 最佳组件库的精简列表:",
   "continuous": "持续",
@@ -19,7 +18,7 @@
   "support": "支持",
   "supportCaption": "需要定制的支持计划? Vuetify 的作者 John Leider 提供咨询和支持服务，提供各种使用案例以帮助您在构建应用程序。",
   "toolkit": "工具包",
-  "toolkitCaption": "Vuetify 是一个语义化框架。易于学习，易于记忆&mdash;这意味着无论您是在开发自己的应用程序还是刚刚上手，Vuetify的 _即写即说_ 组件和属性都使开发变得轻松。",
+  "toolkitCaption": "Vuetify 是一种语义化的语言。易于学习，易于记忆 &mdash; 这意味着无论您是在开发自己的应用程序，还是刚开始接触新的开发人员，Vuetify 的 _即写即说_ 组件和属性都使开发变得轻而易举。",
   "updates": "更新",
   "updatesCaption": "Vuetify 有一个一致的更新周期，允许您更快速地获得 bug 修复和框架增强。开发团队致力于为您提供最好的体验。",
   "vibrant": "充满活力"

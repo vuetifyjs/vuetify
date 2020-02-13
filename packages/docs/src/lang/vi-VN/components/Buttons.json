@@ -45,10 +45,5 @@
       "text": "Chỉ hiển thị chữ. Tắt nền và viền.",
       "type": "Thiết lập kiểu của nút"
     }
-  },
-  "events": {
-    "v-btn-toggle": {
-      "change": "Components.Inputs.events.change"
-    }
   }
 }

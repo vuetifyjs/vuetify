@@ -1,5 +1,6 @@
 {
   "heading": "# パンくずリスト (Breadcrumbs)",
+  "headingText": "v-breadcrumbsコンポーネントは、ページのナビゲーションヘルパーです。**Material Icons** のアイコンまたは文字を区切りとして使用できます。オブジェクトの配列は、コンポーネントのitemsプロパティに渡すことができます。さらに、v-breadcrumbs-itemまたはその他のカスタムマークアップを利用して、パンくずリストをより細かく制御するためのスロットが存在します。",
   "examples": {
     "icon-dividers": {
       "desc": "icon 変数を使用することで、 Material Design Icon に存在するアイコンを Breadcrumbs に使用することができます。"

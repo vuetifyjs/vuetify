@@ -8,6 +8,9 @@
     },
     "grow": {
       "heading": "Grow"
+    },
+    "scroll-threshold": {
+      "heading": "### Umbral de desplazamiento"
     }
   }
 }

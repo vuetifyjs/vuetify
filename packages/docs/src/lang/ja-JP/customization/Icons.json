@@ -1,1 +1,4 @@
-{}
+{
+  "installFAText1": "FontAwesomeを使い始める最も簡単な方法は、cdnを使用することです。メインのindex.htmlのhead内に、次のスニペットを配置します。",
+  "installFAText2": "好みのパッケージマネージャーで **FontAwesome** の [無料版](https://fontawesome.com/) をローカル環境にインストールすることができます。"
+}

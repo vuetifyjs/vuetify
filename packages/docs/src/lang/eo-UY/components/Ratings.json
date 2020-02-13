@@ -36,6 +36,7 @@
   },
   "props": {
     "backgroundColor": "crwdns33026:0crwdne33026:0",
+    "clearable": "crwdns56275:0crwdne56275:0",
     "dense": "crwdns33028:0crwdne33028:0",
     "emptyIcon": "crwdns33030:0crwdne33030:0",
     "fullIcon": "crwdns33032:0crwdne33032:0",

@@ -1,7 +1,63 @@
 {
+  "heading": "# Barras para la App",
+  "headingText": "El componente `v-app-bar` es crucial en cualquier interfaz gráfica de usuario (GUI), ya que generalmente es la fuente principal de navegación del sitio. El componente app-bar funciona muy bien junto con un [v-navigation-drawer](/components/navigation-drawers) para proporcionar la navegación del sitio en tu aplicación.",
+  "usageText": "El componente `v-app-bar` se utiliza para acciones e información en toda la aplicación.",
   "examples": {
+    "dense": {
+      "heading": "### Densa",
+      "desc": "Puedes hacer la **app-bar** más densa. Una barra de aplicación densa tiene menor altura que la normal"
+    },
+    "prominent": {
+      "heading": "### Prominente con la reducción del desplazamiento",
+      "desc": "Una `v-app-bar` con la prop `prominent` puede optar por reducir su altura a medida que el usuario se desplaza. Esto proporciona una transición suave al ocupar menos espacio visual cuando el usuario se desplaza a través del contenido. La reducción de la altura tiene dos opciones posibles, **dense** (densa) (48px) y **short** (corta) (56px)."
+    },
+    "img": {
+      "heading": "### Prominente con la reducción del desplazamiento",
+      "desc": "`v-app-bar` puede contener imágenes de fondo. Puedes establecer el origen de la imagen a través de la prop `src`. Si necesitas personalizar las propiedades `v-img`, la barra de la aplicación te proporciona un slot **img**."
+    },
+    "img-fade": {
+      "heading": "### Prominente con la reducción del desplazamiento e imagen, desvaneciendo al desplazarse",
+      "desc": "La imagen de fondo de una `v-app-bar` puede desvanecerse durante el desplazamiento. Utiliza la prop `fade-img-on-scroll` para esto."
+    },
+    "hide": {
+      "heading": "### Ocultar al desplazarse",
+      "desc": "`v-app-bar` puede ocultarse durante desplazamiento. Utiliza la propiedad `oculta-on-scroll` para esto."
+    },
+    "scroll-threshold": {
+      "heading": "### Umbral de desplazamiento",
+      "desc": "`v-app-bar` puede tener un umbral de desplazamiento. Empezará a reaccionar sólo después de definir la cantidad de píxeles de la propiedad `scroll-ceiling`."
+    },
+    "collapse": {
+      "heading": "### Barras colapsables",
+      "desc": "Con las props **collapse** y **collapse-on-scroll** puedes controlar fácilmente el estado de la barra de herramientas con el que interactúa el usuario."
+    },
+    "elevate-on-scroll": {
+      "heading": "### Elevar la barra durante el desplazamiento",
+      "desc": "Cuando se utiliza la prop **elevate-on-scroll**, la `v-app-bar` quedará a una elevación de 0dp hasta que el usuario comience a desplazarse hacia abajo. Una vez desplazado, la barra sube a 4dp."
+    },
+    "inverted-scroll": {
+      "heading": "### Desplazamiento invertido",
+      "desc": "Al usar la propiedad **inverted-scroll**, la barra se ocultará hasta que el usuario pase por el umbral designado. Una vez pasado el umbral, la `v-app-bar` continuará mostrándose hasta que el usuario vaya más allá del umbral. Si no se proporciona ningún valor **scroll-threshold** se utilizará _0_ por defecto."
+    },
     "menu": {
-      "heading": "Con menu"
+      "heading": "Con menu",
+      "desc": "Puedes extender fácilmente la funcionalidad de la barra de aplicaciones añadiendo `VMenu`. Haz clic en el último icono para verlo en acción."
     }
+  },
+  "props": {
+    "clippedLeft": "Hace que el `v-navigation-drawer` de la aplicación que está posicionado a la izquierda quede debajo de la app-bar.",
+    "clippedRight": "Hace que el `v-navigation-drawer` de la aplicación que está posicionado a la derecha quede debajo de la app-bar.",
+    "collapseOnScroll": "Coloca la barra de aplicaciones en un estado colapsado al hacer el desplazamiento.",
+    "elevateOnScroll": "Eleva la app-bar cuando hay desplazamiento.",
+    "fadeImgOnScroll": "Cuando se usa la prop **src** o el slot `img`, se desvanecerá la imagen cuando se desplaza.",
+    "hideOnScroll": "Oculta la barra de aplicaciones al desplazarse. Seguirá mostrando el slot `extension`.",
+    "invertedScroll": "Oculta la barra de aplicaciones al desplazarse hacia abajo y la muestra al desplazarse hacia arriba.",
+    "scrollOffScreen": "Oculta la barra de aplicaciones al desplazarse. **NO** seguirá mostrando el slot `extension`.",
+    "shrinkOnScroll": "Contrae una barra de herramientas **prominent** a una ** dense** o ** short** (por defecto) cuando se desplaza.",
+    "src": "Origen de la imagen. Ver `v-img` para más detalles"
+  },
+  "slots": {
+    "img": "Components.Toolbars.slots.img",
+    "extension": "Components.Toolbars.slots.extension"
   }
 }
