@@ -28,7 +28,7 @@
         <div class="grey--text ml-4">4.5 (413)</div>
       </v-row>
 
-      <div class="my-4 subtitle-1 black--text">
+      <div class="my-4 subtitle-1">
         $ • Italian, Cafe
       </div>
 
@@ -57,7 +57,7 @@
 
     <v-card-actions>
       <v-btn
-        color="deep-purple accent-4"
+        color="deep-purple lighten-2"
         text
         @click="reserve"
       >
