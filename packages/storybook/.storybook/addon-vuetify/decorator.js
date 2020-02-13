@@ -26,12 +26,17 @@ export default makeDecorator({
     }, parameters))
     const WrappedComponent = storyFn(context)
 
+    const fillHeight = parameters.fillHeight === true
+
     return Vue.extend({
       vuetify,
       components: { WrappedComponent },
+      data: () => ({
+        fillHeight,
+      }),
       template: `
         <v-app>
-          <v-container fluid>
+          <v-container fluid :fill-height="fillHeight">
             <wrapped-component />
           </v-container>
         </v-app>

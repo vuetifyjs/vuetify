@@ -2,8 +2,7 @@ const path = require('path');
 
 module.exports = {
   stories: [
-    // '../**/*.stories.js',
-    '../**/*.stories.vue'
+    '../stories/*.stories.*'
   ],
   addons: [
     '@storybook/addon-knobs',
