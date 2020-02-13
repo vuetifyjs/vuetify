@@ -2,10 +2,8 @@
   "heading": "# 工具栏",
   "headingText": "`v-toolbar` 组件对于任何 gui 都是至关重要的，因为它通常是站点导航的主要来源。工具栏组件与 [v-navigation-drawer](/components/navigation-drawers) 和 [v-card](/components/cards) 配合使用效果非常好。",
   "buttonMargin": "当在 `v-toolbar` 和 `v-app-bar` 内部使用带有 **icon** 属性的 `<v-btn>` 时，它们的大小会自动增加，并且会使用负边距来确保适当的间距以遵守 Material Design Specification。如果您选择将按钮包装在任何容器中，例如`<div>`，则需要对该容器应用负边距以正确对齐它们。",
+  "usageText": "工具栏是一个灵活的容器，可以通过多种方式使用。 默认情况下，工具栏在桌面上的高度为 64px，在移动设备上的高度为 56px。 工具栏上有许多辅助组件可供使用。`v-toolbar-title` 用于显示标题， `v-toolbar-items` 允许 [v-btn](/components/buttons) 扩展整个高度。",
   "examples": {
-    "usage": {
-      "desc": "工具栏是一个灵活的容器，可以通过多种方式使用。 默认情况下，工具栏在桌面上的高度为 64px，在移动设备上的高度为 56px。 工具栏上有许多辅助组件可供使用。`v-toolbar-title` 用于显示标题， `v-toolbar-items` 允许 [v-btn](/components/buttons) 扩展整个高度。"
-    },
     "light-and-dark": {
       "heading": "### 明亮和暗黑",
       "desc": "工具栏有两个变种，明亮和暗黑。明亮工具栏有深色的按钮和黑暗的文字，而暗黑工具栏有白色的按钮和白色的文字。"

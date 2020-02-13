@@ -1,7 +1,20 @@
 {
+  "heading": "# リップル（波紋） ディレクティブ",
+  "headingText": "`v-ripple`ディレクティブはユーザーからのアクションを表示するために使用されます。任意のブロックレベル要素に適用できます。 `v-btn`、` v-tabs-item`など、多くのコンポーネントにリップルディレクティブが組み込まれています。",
   "examples": {
+    "usage": {
+      "desc": "基本的なリップル（波紋効果）は、コンポーネントまたはHTML要素で `v-ripple`ディレクティブを使用するだけで有効にできます",
+      "uninverted": true
+    },
     "custom-color": {
-      "desc": "Helperクラスを利用すれば波紋の色を変更できます。"
+      "desc": "Helperクラスを利用すれば波紋の色を変更できます。",
+      "uninverted": true
+    },
+    "center": {
+      "uninverted": true
+    },
+    "ripple-in-components": {
+      "uninverted": true
     }
   }
 }

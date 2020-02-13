@@ -1,8 +1,6 @@
 {
+  "usageText": "Le composant `v-app-bar' est utilisé pour les actions et informations à travers toute l'application.",
   "examples": {
-    "usage": {
-      "desc": "Le composant `v-app-bar' est utilisé pour les actions et informations à travers toute l'application."
-    },
     "dense": {
       "heading": "### Dense",
       "desc": "Vous pouvez rendre **app-bar** dense. Une barre d'application dense a une hauteur inférieure à celle d'une barre d'application normale"

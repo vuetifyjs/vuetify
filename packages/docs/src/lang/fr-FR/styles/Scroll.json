@@ -8,9 +8,6 @@
       "desc": "La méthode `goTo` prend deux paramètres `target` et `options`. `target` peut être soit un espacement en pixels en haut de la page, un sélecteur css valide, soit une référence d'élément. `options` est un objet qui inclut `duration`, `easing` ,`container`, et `offset`."
     }
   },
-  "components": [
-    "$vuetify"
-  ],
   "routerHeading": "## Utilisation avec routeur",
   "routerText1": "La fonction **goTo** peut être importée et invoquée individuellement n'importe où. Ceci est particulièrement utile lors de l'accrochage jusqu'à [vue-router](https://router.vuejs.org/).",
   "functions": {

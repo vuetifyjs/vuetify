@@ -58,7 +58,7 @@
                 <v-chip
                   v-if="message.new"
                   :color="`${message.color} lighten-4`"
-                  class="ml-0"
+                  class="ml-0 mr-2 black--text"
                   label
                   small
                 >

@@ -1,1 +1,21 @@
-{}
+{
+  "heading": "# プログレスバー",
+  "headingText": "`v-progress-linear`コンポーネントは、ユーザーに視覚的にデータを伝えるために使用されます。また、ロードや処理など、不定の量を表すこともあります。",
+  "examples": {
+    "usage": {
+      "desc": "最も単純な形式では、 `v-progress-linear`は水平のプログレスバー（進捗状況）を表示します。進捗を制御するには、 `value`プロパティを使用します。"
+    },
+    "file-loader": {
+      "heading": "### ファイルローダ",
+      "desc": "`v-progress-linear`コンポーネントは、応答を待っていることをユーザーに伝えるのに適しています。"
+    },
+    "linear-buffer": {
+      "heading": "### バッファ",
+      "desc": "バッファ状態は、2つの値を同時に表します。プライマリ値は`v-model`によって制御されますが、バッファは`buffer-value` propによって制御されます。"
+    },
+    "linear-custom-colors": {
+      "heading": "### 色の変更",
+      "desc": "`color`と`background-color`propを使用して、色と背景色を設定することもできます。"
+    }
+  }
+}

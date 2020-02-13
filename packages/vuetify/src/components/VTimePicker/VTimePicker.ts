@@ -350,7 +350,7 @@ export default mixins(
         },
         on: {
           'update:selecting': (value: 1 | 2 | 3) => (this.selecting = value),
-          'update:period': this.setPeriod,
+          'update:period': (period: string) => this.$emit('update:period', period),
         },
         ref: 'title',
         slot: 'title',

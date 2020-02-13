@@ -19,6 +19,7 @@ export function getComponent (type) {
     case 'checklist': return 'doc-checklist'
     case 'example': return 'doc-example'
     case 'examples': return 'doc-examples'
+    case 'functional': return 'doc-functional'
     case 'heading': return 'base-heading'
     case 'img': return 'doc-img'
     case 'text': return 'doc-text'

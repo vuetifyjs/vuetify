@@ -10,21 +10,31 @@
   },
   "introduction/why-vuetify": {
     "title": "Vuetifyを選ぶ理由",
-    "description": "Vuetifyはとてもアクティブなコミュニティがあり、マテリアルデザインコンポーネントの簡単な使い方を提供しています。また、継続的にアップデートされています。"
+    "description": "Vuetifyはとてもアクティブなコミュニティがあり、マテリアルデザインコンポーネントの簡単な使い方を提供しています。また、継続的にアップデートされています。",
+    "keywords": "vuetifyの理由、vuetifyを選ぶ理由、ベストなvueフレームワーク、ベストなuiフレームワーク\n"
   },
   "introduction/frequently-asked-questions": {
     "title": "よくある質問（FAQ）",
+    "description": "問題が発生しましたか？ Vuetifyコミュニティでよく寄せられる質問をご覧ください。",
     "keywords": "よくある質問（FAQ）"
   },
   "introduction/long-term-support": {
     "title": "LTSバージョン",
+    "description": "Vuetifyは最新メジャーリリースの重大なバグとセキュリティの脆弱性について12か月間の長期サポートを提供します。",
     "keywords": "長期サポート (LTS)"
   },
   "introduction/meet-the-team": {
-    "title": "チーム紹介"
+    "title": "チーム紹介",
+    "description": "Vuetifyの構築を担当するチームに会います。フレームワークのビジョンを推進する中心的な人物です。",
+    "keywords": "vuetify開発チーム、vuetifyコアチーム"
+  },
+  "introduction/roadmap": {
+    "title": "Vuetifyロードマップ",
+    "description": "Vuetifyに予定されている予定の機能と新しい機能。 新しいコンポーネント、新しいディレクティブ、その他多数！",
+    "keywords": "vuetifyのロードマップ、将来の計画、新しいvuetifyの機能"
   },
   "introduction/sponsors-and-backers": {
-    "title": "スポンサーとバッカー"
+    "title": "スポンサーと後援者"
   },
   "getting-started/quick-start": {
     "title": "クイックスタート",

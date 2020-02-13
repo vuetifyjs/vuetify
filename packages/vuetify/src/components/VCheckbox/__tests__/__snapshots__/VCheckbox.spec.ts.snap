@@ -15,19 +15,19 @@ exports[`VCheckbox.ts should render themed component 1`] = `
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-input--selection-controls__input">
+        <i aria-hidden="true"
+           class="v-icon notranslate material-icons theme--light"
+        >
+          $checkboxOff
+        </i>
         <input aria-checked="false"
                id="input-96"
                role="checkbox"
                type="checkbox"
                value
         >
-        <div class="v-input--selection-controls__ripple">
+        <div class="v-input--selection-controls__ripple primary--text">
         </div>
-        <i aria-hidden="true"
-           class="v-icon notranslate material-icons theme--light"
-        >
-          $checkboxOff
-        </i>
       </div>
     </div>
     <div class="v-messages theme--light">
@@ -46,19 +46,19 @@ exports[`VCheckbox.ts should use custom icons 1`] = `
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-input--selection-controls__input">
+        <i aria-hidden="true"
+           class="v-icon notranslate material-icons theme--light"
+        >
+          fizzbuzz
+        </i>
         <input aria-checked="mixed"
                id="input-91"
                role="checkbox"
                type="checkbox"
                value="fizz"
         >
-        <div class="v-input--selection-controls__ripple">
+        <div class="v-input--selection-controls__ripple primary--text">
         </div>
-        <i aria-hidden="true"
-           class="v-icon notranslate material-icons theme--light"
-        >
-          fizzbuzz
-        </i>
       </div>
     </div>
     <div class="v-messages theme--light">
@@ -77,19 +77,19 @@ exports[`VCheckbox.ts should use custom icons 2`] = `
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-input--selection-controls__input">
+        <i aria-hidden="true"
+           class="v-icon notranslate material-icons theme--light"
+        >
+          fizzbuzz
+        </i>
         <input aria-checked="mixed"
                id="input-91"
                role="checkbox"
                type="checkbox"
                value="fizz"
         >
-        <div class="v-input--selection-controls__ripple">
+        <div class="v-input--selection-controls__ripple primary--text">
         </div>
-        <i aria-hidden="true"
-           class="v-icon notranslate material-icons theme--light"
-        >
-          fizzbuzz
-        </i>
       </div>
     </div>
     <div class="v-messages theme--light">
@@ -108,19 +108,19 @@ exports[`VCheckbox.ts should use custom icons 3`] = `
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-input--selection-controls__input">
+        <i aria-hidden="true"
+           class="v-icon notranslate material-icons theme--light"
+        >
+          fizzbuzz
+        </i>
         <input aria-checked="mixed"
                id="input-91"
                role="checkbox"
                type="checkbox"
                value="fizz"
         >
-        <div class="v-input--selection-controls__ripple">
+        <div class="v-input--selection-controls__ripple primary--text">
         </div>
-        <i aria-hidden="true"
-           class="v-icon notranslate material-icons theme--light"
-        >
-          fizzbuzz
-        </i>
       </div>
     </div>
     <div class="v-messages theme--light">

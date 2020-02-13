@@ -49,9 +49,12 @@
       "disabled": "crwdns38764:0crwdne38764:0",
       "expand": "crwdns38766:0crwdne38766:0",
       "focusable": "crwdns38768:0crwdne38768:0",
+      "flat": "crwdns56241:0crwdne56241:0",
+      "hover": "crwdns56243:0crwdne56243:0",
       "inset": "crwdns38770:0crwdne38770:0",
       "popout": "crwdns38772:0crwdne38772:0",
       "readonly": "crwdns38774:0crwdne38774:0",
+      "tile": "crwdns56245:0crwdne56245:0",
       "value": "crwdns42364:0crwdne42364:0"
     },
     "v-expansion-panel": {

@@ -41,7 +41,7 @@
   },
   "getting-started/quick-start": {
     "title": "crwdns36258:0crwdne36258:0",
-    "description": "crwdns41542:0crwdne41542:0",
+    "description": "crwdns56099:0crwdne56099:0",
     "keywords": "crwdns29580:0crwdne29580:0"
   },
   "getting-started/pre-made-layouts": {
@@ -98,6 +98,11 @@
     "title": "crwdns36342:0crwdne36342:0",
     "description": "crwdns36344:0crwdne36344:0",
     "keywords": "crwdns36346:0crwdne36346:0"
+  },
+  "customization/presets": {
+    "title": "crwdns56101:0crwdne56101:0",
+    "description": "crwdns56103:0crwdne56103:0",
+    "keywords": "crwdns56105:0crwdne56105:0"
   },
   "customization/sass-variables": {
     "title": "crwdns36348:0crwdne36348:0",

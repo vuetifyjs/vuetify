@@ -42,7 +42,6 @@
     "appendIcon": "在组件上附加一个图标，使用与 `v-icon` 相同的语法",
     "backgroundColor": "更改输入的背景颜色",
     "dark": "将深色主题变量应用于组件。 除非您已将 [application theme](/customization/theme) 配置为 **dark** 或在组件上使用 **color** 属性，否则组件的颜色默认为 _white_。 您可以在材料设计文档中找到更多信息 [dark themes](https://material.io/design/color/dark-theme.html)。",
-    "hideDetails": "隐藏提示、验证错误",
     "dense": "降低输入高度",
     "height": "设置输入的高度",
     "hint": "提示文本",
@@ -53,8 +52,7 @@
     "prependIcon": "在组件前添加一个图标，使用与 `v-icon` 相同的语法",
     "required": "根据需要指定输入； 在标签的末尾添加一个星号； 不执行任何验证。",
     "tabindex": "输入的选项卡索引",
-    "toggleKeys": "切换输入键值的数组（如果支持切换的话）",
-    "value": "输入值"
+    "toggleKeys": "切换输入键值的数组（如果支持切换的话）"
   },
   "slots": {
     "append": "在输入内容后添加一个项目",
@@ -62,8 +60,6 @@
     "prepend": "在输入内容之前添加一个项目"
   },
   "events": {
-    "blur": "当输入焦点时发出",
-    "change": "当用户交互更改输入时发出",
     "click": "在单击输入时发出",
     "click:append": "单击附加图标时发出",
     "click:prepend": "单击前置图标时发出",

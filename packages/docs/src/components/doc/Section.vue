@@ -53,6 +53,7 @@
           if (child.type === 'accessibility') return 'accessibility'
           if (child.type === 'api') return 'api'
           if (child.type === 'examples') return 'examples'
+          if (child.type === 'functional') return 'functional'
           if (child.type === 'playground') return 'playground'
           if (child.type === 'up-next') return 'up-next'
           if (child.type === 'usage' || child.type === 'usage-new') return 'usage'

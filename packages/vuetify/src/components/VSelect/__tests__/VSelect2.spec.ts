@@ -231,6 +231,7 @@ describe('VSelect.ts', () => {
       propsData: {
         items: ['foo', 'bar'],
         readonly: true,
+        menuProps: 'eager',
       },
     })
 
@@ -412,10 +413,9 @@ describe('VSelect.ts', () => {
     expect(wrapper.vm.isMenuActive).toBe(true)
   })
 
-  // TODO: this fails without sync, nextTick doesn't help
-  // https://github.com/vuejs/vue-test-utils/issues/1130
   /* eslint-disable-next-line max-statements */
-  it.skip('should react to different key down', async () => {
+  it('should react to different key down', async () => {
+    const sleep = () => new Promise(resolve => window.requestAnimationFrame(resolve))
     const wrapper = mountFunction({
       propsData: {
         items: [1, 2, 3, 4],
@@ -430,7 +430,7 @@ describe('VSelect.ts', () => {
     wrapper.vm.$refs.input.focus()
     wrapper.vm.onKeyDown(event)
 
-    await new Promise(resolve => window.requestAnimationFrame(resolve))
+    await sleep()
 
     expect(blur).toHaveBeenCalled()
     expect(wrapper.vm.isMenuActive).toBe(false)
@@ -440,6 +440,8 @@ describe('VSelect.ts', () => {
       event.keyCode = keyCode
       wrapper.vm.onKeyDown(event)
       expect(wrapper.vm.isMenuActive).toBe(true)
+
+      await sleep()
 
       // Escape
       event.keyCode = keyCodes.esc
@@ -452,14 +454,23 @@ describe('VSelect.ts', () => {
     expect(wrapper.vm.internalValue).toBeUndefined()
 
     wrapper.vm.onKeyDown(event)
+
+    await sleep()
+
     expect(wrapper.vm.internalValue).toBe(1)
 
     wrapper.vm.onKeyDown(event)
+
+    await sleep()
+
     expect(wrapper.vm.internalValue).toBe(2)
 
     // Up arrow
     event.keyCode = keyCodes.up
     wrapper.vm.onKeyDown(event)
+
+    await sleep()
+
     expect(wrapper.vm.internalValue).toBe(1)
   })
 })

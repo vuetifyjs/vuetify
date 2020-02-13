@@ -2,10 +2,8 @@
   "heading": "# カルーセル",
   "headingText": "`v-carousel` コンポーネントは、タイマーで入れ替わる数枚の大きなビジュアルコンテンツを表示するために使います。",
   "subComponentsHeader": "### サブコンポーネント",
+  "usageText": "`v-carousel`コンポーネントは、` v-window`を拡張し、画像の表示を目的とした追加機能を提供します。",
   "examples": {
-    "usage": {
-      "desc": "`v-carousel`コンポーネントは、` v-window`を拡張し、画像の表示を目的とした追加機能を提供します。"
-    },
     "cycle": {
       "desc": "** cycle ** propを使用すると、6秒(デフォルト) ごとに次の利用可能なスライドに自動的に移行させることができます。"
     },

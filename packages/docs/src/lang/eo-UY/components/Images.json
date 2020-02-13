@@ -2,10 +2,8 @@
   "heading": "crwdns45470:0crwdne45470:0",
   "headingText": "crwdns45472:0[vuetify-loader]crwdne45472:0",
   "alert1": "crwdns45474:0[v-intersect]crwdnd45474:0[Polyfill]crwdne45474:0",
+  "usageText": "crwdns56255:0crwdne56255:0",
   "examples": {
-    "usage": {
-      "desc": "crwdns39284:0crwdne39284:0"
-    },
     "contain-cover": {
       "heading": "crwdns45476:0crwdne45476:0",
       "desc": "crwdns39288:0crwdne39288:0"

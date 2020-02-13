@@ -120,7 +120,8 @@
     {
       "name": "Elfo",
       "href": "https://www.elfo.net/",
-      "logo": "backers/elfo.svg"
+      "logo": "backers/elfo-logo-light.png",
+      "darkLogo": "backers/elfo-logo-dark.png"
     },
     {
       "name": "CodeFirst",

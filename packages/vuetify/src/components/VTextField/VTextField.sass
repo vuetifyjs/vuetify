@@ -2,9 +2,10 @@
 @import './_variables.scss'
 
 +theme(v-text-field) using ($material)
-  border-color: map-get($material, 'input-bottom-line')
+  > .v-input__control > .v-input__slot:before
+    border-color: map-get($material, 'input-bottom-line')
 
-  &:not(.v-input--has-state):hover
+  &:not(.v-input--has-state):hover > .v-input__control > .v-input__slot:before
     border-color: map-deep-get($material, 'text', 'primary')
 
   &.v-input--is-disabled .v-input__slot::before
@@ -67,7 +68,6 @@
   fieldset,
   .v-input__control,
   .v-input__slot
-    border-color: inherit
     border-radius: inherit
 
   fieldset,

@@ -53,6 +53,7 @@
           "value": [
             "simple/fixed-tabs",
             "simple/center-active",
+            "simple/tab-items",
             "simple/grow",
             "simple/pagination",
             "simple/icons",

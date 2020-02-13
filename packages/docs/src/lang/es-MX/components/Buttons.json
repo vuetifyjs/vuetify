@@ -23,13 +23,17 @@
     "sizing": {
       "desc": "Los botones pueden obtener diferentes tamaños para poder ser usados en una multitud de escenarios."
     },
+    "outlined": {
+      "heading": "### Contorno"
+    },
     "block": {
       "desc": "Los _block butons_ se extienden hasta abarcar el ancho total disponible."
     }
   },
   "props": {
     "v-btn": {
-      "loading": "Agrega una ícono animado de \"cargando\""
+      "loading": "Agrega una ícono animado de \"cargando\"",
+      "outlined": "Hace el fondo transparente y aplica un borde delgado."
     }
   }
 }

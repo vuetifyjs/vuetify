@@ -540,7 +540,7 @@ exports[`VDataTableHeader.ts mobile should render 1`] = `
                   <input id="input-37"
                          readonly="readonly"
                          type="text"
-                         aria-readonly="true"
+                         aria-readonly="false"
                          autocomplete="off"
                   >
                 </div>
@@ -556,10 +556,6 @@ exports[`VDataTableHeader.ts mobile should render 1`] = `
                 <input type="hidden">
               </div>
               <div class="v-menu">
-                <div class="v-menu__content theme--light "
-                     style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
-                >
-                </div>
               </div>
             </div>
           </div>
@@ -591,21 +587,21 @@ exports[`VDataTableHeader.ts mobile should render with data-table-select header 
             <div role="button"
                  aria-haspopup="listbox"
                  aria-expanded="false"
-                 aria-owns="list-79"
+                 aria-owns="list-69"
                  class="v-input__slot"
             >
               <div class="v-select__slot">
-                <label for="input-79"
+                <label for="input-69"
                        class="v-label theme--light"
                        style="left: 0px; position: absolute;"
                 >
                   Sort by
                 </label>
                 <div class="v-select__selections">
-                  <input id="input-79"
+                  <input id="input-69"
                          readonly="readonly"
                          type="text"
-                         aria-readonly="true"
+                         aria-readonly="false"
                          autocomplete="off"
                   >
                 </div>
@@ -621,10 +617,6 @@ exports[`VDataTableHeader.ts mobile should render with data-table-select header 
                 <input type="hidden">
               </div>
               <div class="v-menu">
-                <div class="v-menu__content theme--light "
-                     style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
-                >
-                </div>
               </div>
             </div>
           </div>
@@ -645,11 +637,11 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
             <div role="button"
                  aria-haspopup="listbox"
                  aria-expanded="false"
-                 aria-owns="list-51"
+                 aria-owns="list-47"
                  class="v-input__slot"
             >
               <div class="v-select__slot">
-                <label for="input-51"
+                <label for="input-47"
                        class="v-label v-label--active theme--light"
                        style="left: 0px; position: absolute;"
                 >
@@ -669,10 +661,10 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
                       </div>
                     </span>
                   </span>
-                  <input id="input-51"
+                  <input id="input-47"
                          readonly="readonly"
                          type="text"
-                         aria-readonly="true"
+                         aria-readonly="false"
                          autocomplete="off"
                   >
                 </div>
@@ -690,10 +682,6 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
                 >
               </div>
               <div class="v-menu">
-                <div class="v-menu__content theme--light "
-                     style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
-                >
-                </div>
               </div>
             </div>
           </div>
@@ -714,21 +702,21 @@ exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
             <div role="button"
                  aria-haspopup="listbox"
                  aria-expanded="false"
-                 aria-owns="list-44"
+                 aria-owns="list-42"
                  class="v-input__slot"
             >
               <div class="v-select__slot">
-                <label for="input-44"
+                <label for="input-42"
                        class="v-label theme--light"
                        style="left: 0px; position: absolute;"
                 >
                   Sort by
                 </label>
                 <div class="v-select__selections">
-                  <input id="input-44"
+                  <input id="input-42"
                          readonly="readonly"
                          type="text"
-                         aria-readonly="true"
+                         aria-readonly="false"
                          autocomplete="off"
                   >
                 </div>
@@ -744,10 +732,6 @@ exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
                 <input type="hidden">
               </div>
               <div class="v-menu">
-                <div class="v-menu__content theme--light "
-                     style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
-                >
-                </div>
               </div>
             </div>
           </div>
@@ -768,11 +752,11 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
             <div role="button"
                  aria-haspopup="listbox"
                  aria-expanded="false"
-                 aria-owns="list-60"
+                 aria-owns="list-54"
                  class="v-input__slot"
             >
               <div class="v-select__slot">
-                <label for="input-60"
+                <label for="input-54"
                        class="v-label v-label--active theme--light"
                        style="left: 0px; position: absolute;"
                 >
@@ -792,10 +776,10 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
                       </div>
                     </span>
                   </span>
-                  <input id="input-60"
+                  <input id="input-54"
                          readonly="readonly"
                          type="text"
-                         aria-readonly="true"
+                         aria-readonly="false"
                          autocomplete="off"
                   >
                 </div>
@@ -813,10 +797,6 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
                 >
               </div>
               <div class="v-menu">
-                <div class="v-menu__content theme--light "
-                     style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
-                >
-                </div>
               </div>
             </div>
           </div>
@@ -837,11 +817,11 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
             <div role="button"
                  aria-haspopup="listbox"
                  aria-expanded="false"
-                 aria-owns="list-69"
+                 aria-owns="list-61"
                  class="v-input__slot"
             >
               <div class="v-select__slot">
-                <label for="input-69"
+                <label for="input-61"
                        class="v-label v-label--active theme--light"
                        style="left: 0px; position: absolute;"
                 >
@@ -861,10 +841,10 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
                       </div>
                     </span>
                   </span>
-                  <input id="input-69"
+                  <input id="input-61"
                          readonly="readonly"
                          type="text"
-                         aria-readonly="true"
+                         aria-readonly="false"
                          autocomplete="off"
                   >
                 </div>
@@ -882,10 +862,6 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
                 >
               </div>
               <div class="v-menu">
-                <div class="v-menu__content theme--light "
-                     style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
-                >
-                </div>
               </div>
             </div>
           </div>

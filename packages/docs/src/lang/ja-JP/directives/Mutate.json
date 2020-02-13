@@ -1,1 +1,21 @@
-{}
+{
+  "heading": "# Mutation observer",
+  "headingText": "`v-mutate`ディレクティブは [Mutation Observer API](https://developer.mozilla.org/ja/docs/Web/API/MutationObserver) を利用します。要素が更新されたことを検出するための使いやすいインターフェイスを提供します。",
+  "examples": {
+    "usage": {
+      "desc": "デフォルトでは、 `v-mutate`ディレクティブは [Mutation Observer API](https://developer.mozilla.org/ja/docs/Web/API/MutationObserver) で利用可能なすべてのオプションを有効にします。これは、2つの方法のいずれかで変更できます。 **handler** および **options** のキーを持つオブジェクトを渡すか、ディレクティブの _modifier_ プロパティ、 `v-mutate.attr.sub =\"onMutate\"` を使用できます。"
+    },
+    "once": {
+      "heading": "### Modifiers",
+      "desc": "`v-mutate`ディレクティブは、 [Mutation Observer API](https://developer.mozilla.org/ja/docs/Web/API/MutationObserver) で利用可能なすべてのオプションの修飾子を受け入れます。簡潔にするために、つぎの略語を使用します。**attr** (attributes), **child** (childList), **sub** (subtree) and **char** (characterData)"
+    }
+  },
+  "options": {
+    "modifiers.once": "指定されたユーザーコールバックを1回だけ呼び出すと、ディレクティブはバインドされなくなります。",
+    "modifiers.attr": "[attributes](https://developer.mozilla.org/ja/docs/Web/API/MutationObserverInit/attributes)の値をtrueに設定します。",
+    "modifiers.child": "[childList](https://developer.mozilla.org/ja/docs/Web/API/MutationObserverInit/childList) の値をtrueに設定します。",
+    "modifiers.char": "[characterData](https://developer.mozilla.org/ja/docs/Web/API/MutationObserverInit/characterData)の値をtrueに設定します。",
+    "modifiers.sub": "[subtree](https://developer.mozilla.org/ja/docs/Web/API/MutationObserver/observe#Parameters) の値をtrueに設定します。",
+    "value": "ターゲット要素が更新されたときに呼び出す関数。"
+  }
+}

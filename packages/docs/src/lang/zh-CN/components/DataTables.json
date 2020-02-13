@@ -74,8 +74,8 @@
       "desc": "您可以使用 `hide-default-header` 和 `hide-default-footer` 属性分别移除默认页眉和页脚。"
     },
     "edit-dialog": {
-      "heading": "### 行内编辑",
-      "desc": "使用 `v-edit-dialog` 组件来进行数据表格的行内编辑。 You can block closing the dialog when clicked outside by adding the **persistent** prop."
+      "heading": "### 内容编辑",
+      "desc": "`v-edit-dialog` 组件可用于直接在 `v-data-table` 中编辑数据。 您可以通过添加 **persistent** 属性来阻止在外部点击 `v-edit-dialog` 时关闭。"
     },
     "crud": {
       "heading": "### CRUD 操作",
@@ -110,7 +110,6 @@
       "fixedHeader": "固定页眉至表格顶部。**注意：** 在 IE11 中不可用",
       "headerProps": "将属性传递到默认标题。 有关更多信息，请参见 'v-data-table-header' API",
       "headers": "表头数组",
-      "headersLength": "可以与 `hide-headers` 结合使用以指定表中的列数，以允许扩展行和加载栏正常运行",
       "height": "设置表的显式高度",
       "hideDefaultHeader": "隐藏默认标题",
       "mobileBreakpoint": "用于设置何时在常规表和移动视图之间切换",
@@ -118,11 +117,16 @@
       "showExpand": "在默认行中显示展开切换",
       "showGroupBy": "在标题中通过切换显示分组并启用分组的行",
       "virtualRows": "虚拟化行的渲染。 请注意，您不能在此属性上使用 `body`, `body.prepend` 或 `body.append` 插槽。"
+    },
+    "v-simple-checkbox": {
+      "color": "Mixins.Colorable.props.color",
+      "dark": "Mixins.Themeable.props.dark",
+      "light": "Mixins.Themeable.props.light",
+      "ripple": "Mixins.Rippleable.props.ripple"
     }
   },
   "slots": {
     "v-data-table": {
-      "body": "替换默认表 `<tbody>` 的插槽",
       "body.append": "将元素追加到默认表 `<tbody>` 的末尾",
       "body.prepend": "将元素添加到默认表 `<tbody>` 的开头",
       "expanded-item": "插槽自定义展开的行",
@@ -157,6 +161,9 @@
     },
     "v-data-table": {
       "click:row": "单击表行时退出。 包含该行的项目。 **注意**：当通过诸如 `item` 或 `body` 之类的插槽定义表格行时，不会发出。"
+    },
+    "v-simple-checkbox": {
+      "click": "单击组件时发出的事件"
     }
   }
 }
