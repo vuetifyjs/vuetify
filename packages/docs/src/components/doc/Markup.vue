@@ -159,14 +159,13 @@
     display: flex
     border-radius: 4px
     position: relative
-    overflow-x: auto
-    overflow-y: hidden
+    overflow: hidden
     margin-bottom: 16px
     background: #2d2d2d
     color: #fff
 
     &.theme--dark
-      background: #424242
+      background: #1F1F1F
 
     pre, code
       margin: 0

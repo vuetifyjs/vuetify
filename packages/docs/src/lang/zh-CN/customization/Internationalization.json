@@ -1,9 +1,10 @@
 {
   "heading": "# 国际化 (i18n)",
-  "headingText": "Vuifiefy支持组件的语言国际化 (i18n)。当启动应用程序时，你可以指定可用的区域和当前活动的区域的 **current** 选项。 ** lang** 服务还支持与 [vue-i18n](#vue-i18n) 轻松集成。",
+  "headingText": "Vuetify 支持其组件的语言国际化 (i18n)。 在引导应用程序时，您可以使用 **current** 选项指定可用的语言环境和当前活动的语言环境。**lang** 服务还支持与 [vue-i18n](#vue-i-18-n) 的轻松集成。",
   "gettingStarted": "## 快速入门",
   "gettingStartedText": "要设置可用的语言环境或当前语言环境，请在安装 Vuetify 时提供 `lang` 选项。`locales` 属性将与现有的语言环境合并。 你可以在运行时通过 Vue 实例上的 `$vuetify` 对象更改语言环境。",
   "availableLocalesText": "目前，Vuetify 提供以下语言的翻译：",
+  "alertInfo": "Vuetify 只提供了一个基本的翻译功能 `t`。对于更高级的国际化功能，建议将 Vuetifys 与 [vue-i18n](#vue-i-18-n) 的集成。",
   "createTranslation": "## 创建翻译",
   "createTranslationText": "若要创建自己的翻译, 请使用下面的代码或复制并重命名 `vuetify/src/locale/en.ts` 文件到你的项目并进行更改。",
   "customComponents": "## 自定义组件",

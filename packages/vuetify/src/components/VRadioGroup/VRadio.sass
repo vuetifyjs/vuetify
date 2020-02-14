@@ -8,14 +8,17 @@
 
     .v-icon
       // needed for helper override
-      color: map-deep-get($material, 'buttons', 'disabled') !important
+      color: map-deep-get($material, 'selection-controls', 'disabled') !important
 
 .v-radio
   align-items: center
   display: flex
   height: auto
-  margin-right: $radio-margin-right
   outline: none
 
   &--is-disabled
     pointer-events: none
+
+.v-input--radio-group.v-input--radio-group--row
+  .v-radio
+    margin-right: $radio-margin-right

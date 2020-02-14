@@ -56,7 +56,6 @@
       <v-tabs
         v-model="tab"
         :hide-slider="!model"
-        background-color="transparent"
         color="blue-grey"
         slider-color="blue-grey"
       >

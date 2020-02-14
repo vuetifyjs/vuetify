@@ -1,1 +1,9 @@
-{}
+{
+  "heading": "# Resumen de la API del componente",
+  "headingText": "¡Busca rápidamente y navega por todos los componentes de Material Design y más! Selecciona un componente y mira rápidamente su API y ejemplo de uso",
+  "search": "Buscar",
+  "searchText": "Selecciona un componente para ver su API",
+  "select": "Buscar un componente",
+  "or": "O",
+  "browseCategories": "Navegar categorías"
+}

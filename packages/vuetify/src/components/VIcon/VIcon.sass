@@ -5,7 +5,10 @@
 +theme(v-icon) using ($material)
   color: map-deep-get($material, 'icons', 'active')
 
-  &--disabled
+  &:focus::after
+    opacity: map-deep-get($material, 'states', 'focus')
+
+  &.v-icon.v-icon--disabled
     color: map-deep-get($material, 'icons', 'inactive') !important
 
 // Increased specificity to overwrite
@@ -18,10 +21,24 @@
   justify-content: center
   letter-spacing: normal
   line-height: 1
+  position: relative
   text-indent: 0
   transition: $primary-transition, visibility 0s
   vertical-align: middle
   user-select: none
+
+  &::after
+    background-color: currentColor
+    border-radius: 50%
+    content: ''
+    display: inline-block
+    height: 100%
+    opacity: 0
+    pointer-events: none
+    position: absolute
+    transform: scale(1.3)
+    width: 100%
+    transition: opacity 0.2s map-get($transition, 'ease-in-out')
 
   &--dense
     font-size: $icon-size-dense
@@ -34,10 +51,10 @@
 
   &.v-icon.v-icon--link
     cursor: pointer
+    outline: none
 
   &--disabled
     pointer-events: none
-    opacity: $icon-disabled-opacity
 
   &--is-component
     height: $icon-size

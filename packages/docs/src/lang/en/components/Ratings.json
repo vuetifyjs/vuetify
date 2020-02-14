@@ -36,6 +36,7 @@
   },
   "props": {
     "backgroundColor": "The color used empty icons",
+    "clearable": "Allows for the component to be cleared. Triggers when the icon containing the current value is clicked.",
     "dense": "Icons have a smaller size",
     "emptyIcon": "The icon displayed when empty",
     "fullIcon": "The icon displayed when full",

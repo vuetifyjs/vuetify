@@ -25,7 +25,8 @@
             "v-stepper",
             "v-stepper-step",
             "v-stepper-content",
-            "v-stepper-header"
+            "v-stepper-header",
+            "v-stepper-items"
           ]
         }
       ]

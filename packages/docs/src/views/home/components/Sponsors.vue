@@ -5,7 +5,8 @@
   >
     <v-sheet
       :color="$vuetify.theme.dark ? undefined : 'grey lighten-5'"
-      class="pa-12"
+      :max-width="1280 + ($vuetify.breakpoint.mdAndUp ? 48 : 0)"
+      class="pa-0 pa-md-12 mx-auto"
       tag="v-container"
     >
       <base-heading>Vuetify.Home.proudlySponsoredBy</base-heading>

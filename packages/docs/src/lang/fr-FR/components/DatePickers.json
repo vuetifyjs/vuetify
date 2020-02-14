@@ -40,6 +40,7 @@
       "desc": "2 orientations possibles : portrait (défaut) et paysage. Par défaut dès qu'une date est choisie, l’événement \"input\" est activée, en sélectionnant \"reactive\" cela met à jour le model."
     }
   },
+  "headingText": "Le composant `v-date-picker` est indépendant et peut être utilisé partout. Il permet de choisir une date à partir d'un calendrier.",
   "props": {
     "disabled": "Désactive le sélecteur de date",
     "allowedDates": "Limite le choix des dates",
@@ -47,8 +48,5 @@
     "eventColor": "Définit la couleur pour le point d'événement. Elle peut être une chaîne de caractères (tous les événements auront la même couleur) ou `object` où l'attribut est la date et la valeur de l'événement est booléen/couleur/tableau de couleurs pour la date spécifiée ou `function` prenant la date comme paramètre et retour booléen/color/array des couleurs pour cette date",
     "headerDateFormat": "Permet de personnaliser le format de la chaîne de mois qui apparaît dans l'en-tête du calendrier. Appelé avec la date (chaîne ISO 8601).",
     "width": "Largeur du sélecteur"
-  },
-  "events": {
-    "change": "Le sélecteur de date réactive émet `input` même lorsque toute partie de la date (année/mois/jour) change, mais l'événement `change` n'est émis que lorsque le jour (pour les sélecteurs de date) ou le mois (pour les sélecteurs de mois) change."
   }
 }

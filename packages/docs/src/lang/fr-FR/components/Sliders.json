@@ -18,11 +18,5 @@
   },
   "props": {
     "dark": "Components.Inputs.props.dark"
-  },
-  "events": {
-    "change": "Components.Inputs.events.change",
-    "click:append": "Components.Inputs.events['click:append']",
-    "click:prepend": "Components.Inputs.events['click:prepend']",
-    "update:error": "Mixins.Validatable.events['update:error']"
   }
 }

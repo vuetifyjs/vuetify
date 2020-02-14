@@ -11,13 +11,48 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "usage"
+          "type": "usage-new",
+          "value": {
+            "booleans": [
+              "image",
+              "collapse-on-scroll",
+              "dense",
+              "flat",
+              "hide-on-scroll",
+              "inverted-scroll",
+              "prominent"
+            ],
+            "selects": [
+              {
+                "prop": "color",
+                "label": "Color",
+                "attrs": {
+                  "items": [
+                    "primary",
+                    "orange",
+                    "yellow",
+                    "green",
+                    "blue",
+                    "purple"
+                  ]
+                }
+              }
+            ]
+          }
         },
         {
           "type": "alert",
           "lang": "Components.Toolbars.buttonMargin",
           "value": "warning"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "functional",
+          "value": "functional"
         }
       ]
     },
@@ -37,15 +72,6 @@
       "type": "section",
       "children": [
         {
-          "type": "playground",
-          "value": "playground"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
           "type": "examples",
           "value": [
             "simple/dense",
@@ -55,6 +81,7 @@
             "simple/collapse",
             "simple/elevate-on-scroll",
             "simple/inverted-scroll",
+            "intermediate/app-bar-nav",
             "intermediate/scroll-threshold",
             "complex/img-fade",
             "complex/menu"

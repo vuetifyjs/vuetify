@@ -1,10 +1,22 @@
 {
+  "heading": "# アイコン",
+  "headingText": "'v-icon' コンポーネントは、アプリケーションのさまざまな場面で使えるグリフの大規模なセットを提供します。利用可能なすべてのアイコンのリストについては、公式の[Material Design Icons](https://materialdesignicons.com/)ページをご覧ください。これらのアイコンのいずれかを使用するには、単に 'mdi-' プレフィックスの後にアイコン名を付けて使用します。",
+  "usageText": "アイコンは、2 つのテーマ （light, dark）と 5 つのサイズ （x-small, small, medium （デフォルト）, large, x-large）で表現されます。",
   "examples": {
+    "font-awesome": {
+      "heading": "### Font Awesome",
+      "desc": "[Font Awesome](http://fontawesome.io/icons/) もサポートされています。'fa-' プレフィクス付きでアイコン名を使用するだけです。プロジェクトに Font Awesome icons を含める必要があることに注意してください。インストール方法の詳細については、[インストールページ](/customization/icons#install-font-awesome-5-icons) に移動してください。"
+    },
+    "md": {
+      "heading": "### Material Design",
+      "desc": "[Material Design](https://material.io/tools/icons/?style=baseline) もサポートされています。インストール方法の詳細については、[こちらを参照](/customization/icons#install-material-icons) してください。"
+    },
     "color": {
-      "heading": "色",
+      "heading": "### カラー",
       "desc": "カラーヘルパーを使用すると、アイコンの色を標準のdark、lightテーマから変更できます。"
     },
     "buttons": {
+      "heading": "### ボタン",
       "desc": "アイコンをボタン内部で使用し、ボタンを強調させるための動きを付けることができます。"
     }
   },

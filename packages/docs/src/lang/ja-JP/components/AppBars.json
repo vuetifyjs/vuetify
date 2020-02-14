@@ -1,10 +1,8 @@
 {
   "heading": "# App Bars",
   "headingText": "`v-app-bar` は、一般にサイトナビゲーションとして一番最初に使われるため、どんな GUI にとっても重要なコンポーネントです。app-bar コンポーネントは、[v-navigation-drawer](/components/navigation-drawers) と連携して、あなたのアプリケーションにサイトナビゲーションを提供します。",
+  "usageText": "`v-app-bar` コンポーネントは、アプリケーション全体のアクションと情報に対して使用します。",
   "examples": {
-    "usage": {
-      "desc": "`v-app-bar` コンポーネントは、アプリケーション全体のアクションと情報に対して使用します。"
-    },
     "dense": {
       "heading": "### 高さが詰まったスタイル",
       "desc": "**app-bar** を密集させることができます。密集したアプリバーは、通常のアプリバーよりも高さが低くなります。"

@@ -93,6 +93,23 @@
       { "text": "dividers", "to": "dividers" },
       { "text": "expansionPanels", "to": "expansion-panels" },
       { "text": "footer", "to": "footer" },
+      {
+        "group": "components",
+        "text": "formInputsAndControls",
+        "children": [
+          { "text": "autocompletes", "to": "autocompletes" },
+          { "text": "combobox", "to": "combobox" },
+          { "text": "fileInputs", "to": "file-inputs" },
+          { "text": "forms", "to": "forms" },
+          { "text": "inputs", "to": "inputs" },
+          { "text": "overflowButtons", "to": "overflow-btns" },
+          { "text": "selects", "to": "selects" },
+          { "text": "selectionControls", "to": "selection-controls" },
+          { "text": "sliders", "to": "sliders" },
+          { "text": "textareas", "to": "textarea" },
+          { "text": "textFields", "to": "text-fields" }
+        ]
+      },
       { "text": "grid", "to": "grids" },
       {
         "group": "components",
@@ -109,23 +126,6 @@
       { "text": "hover", "to": "hover" },
       { "text": "icons", "to": "icons" },
       { "text": "images", "to": "images" },
-      {
-        "group": "components",
-        "text": "inputsAndControls",
-        "children": [
-          { "text": "autocompletes", "to": "autocompletes" },
-          { "text": "combobox", "to": "combobox" },
-          { "text": "fileInputs", "to": "file-inputs" },
-          { "text": "forms", "to": "forms" },
-          { "text": "inputs", "to": "inputs" },
-          { "text": "overflowButtons", "to": "overflow-btns" },
-          { "text": "selects", "to": "selects" },
-          { "text": "selectionControls", "to": "selection-controls" },
-          { "text": "sliders", "to": "sliders" },
-          { "text": "textareas", "to": "textarea" },
-          { "text": "textFields", "to": "text-fields" }
-        ]
-      },
       { "new": true, "text": "lazy", "to": "lazy" },
       { "text": "lists", "to": "lists" },
       { "text": "menus", "to": "menus" },

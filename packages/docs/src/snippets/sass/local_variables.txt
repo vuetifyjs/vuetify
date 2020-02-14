@@ -1,5 +1,5 @@
 <style lang="scss">
-  @import '~vuetify/src/styles/styles.sass';
+  @import '@/path/to/variables.scss';
 
   .custom-class {
     border-radius: $border-radius-root;

@@ -1,3 +1,26 @@
 {
-  "headingText": "`v-hover`コンポーネントは、コンポーネントのホバー状態を処理するためのクリーンなインターフェースを提供します。"
+  "heading": "# Hover",
+  "headingText": "`v-hover`コンポーネントは、コンポーネントのホバー状態を処理するためのクリーンなインターフェースを提供します。",
+  "usageText": "`v-hover` コンポーネントは1つの子要素のみを含むラッパーであり、ホバーする（要素にカーソルが乗る）ことでイベントのトリガーになります。 `v-hover`が適切に機能するためには、`value` プロパティを `true`に設定するか、ラップされた要素に `slot-scope=\"{ wrapper }\"` を含める必要があります",
+  "examples": {
+    "disabled": {
+      "heading": "### 無効化",
+      "desc": "`disabled`プロパティはホバー機能を無効にします。"
+    },
+    "open-and-close-delay": {
+      "heading": "### Open/Closeの遅延設定",
+      "desc": "`open-delay`と`close-delay`propsを組み合わせたり別々に使用することで `v-hover`のイベントを遅らせます。"
+    },
+    "hover-list": {
+      "heading": "### Hover list",
+      "desc": "`v-hover`に`v-for`と組み合わせて使用​​すると、ユーザーがリストを操作するときにアイテム１つだけを目立たせることができます。"
+    },
+    "transition": {
+      "heading": "### トランジション",
+      "desc": "ユーザーの操作に応答する高度にカスタマイズされたコンポーネントを作成します。"
+    }
+  },
+  "props": {
+    "disabled": "ホバー機能をオフにします"
+  }
 }

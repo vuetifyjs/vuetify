@@ -41,7 +41,7 @@
   },
   "getting-started/quick-start": {
     "title": "Quick start",
-    "description": "Get started with Vue and Vuetify in no time. Support for Vue CLI 3, Webpack, Nuxt and more.",
+    "description": "Get started with Vue and Vuetify in no time. Support for Vue CLI, Webpack, Nuxt and more.",
     "keywords": "quick start, vuetify templates, installing vuetify, install vuetify"
   },
   "getting-started/pre-made-layouts": {

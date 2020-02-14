@@ -205,4 +205,19 @@ describe('VRangeSlider.ts', () => {
     expect(wrapper.vm.activeThumb).toEqual(0)
     expect(setInternalValue).toHaveBeenCalledWith(1)
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/9818
+  it('should accept falsy values', () => {
+    [
+      [undefined, undefined],
+      [null, null],
+      [false, false],
+    ].forEach(value => {
+      const wrapper = mountFunction({
+        propsData: { value },
+      })
+
+      expect(wrapper.vm.internalValue).toEqual([0, 0])
+    })
+  })
 })

@@ -1,15 +1,12 @@
 {
   "heading": "# チップ",
   "examples": {
-    "usage": {
-      "uninverted": true
-    },
     "colored": {
       "heading": "### 色付き",
       "desc": "マテリアルデザインパレットのあらゆる色を使用して Chip に色を付けることができます。"
     },
     "icon": {
-      "heading": "アイコン",
+      "heading": "### アイコン",
       "desc": "Chip にはテキストのほか、Material Icons フォントに含まれるアイコンを使用することができます。"
     },
     "outlined": {

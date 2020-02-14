@@ -1,4 +1,5 @@
 {
+  "headingText": "Le `v-item-group` permet de créer un groupe d'éléments sélectionnables sur n'importe quel composant. C'est la fonctionnalité de base pour les composants tels que `v-tabs` et `v-carousel`.",
   "examples": {
     "usage": {
       "desc": "L'utilisation principale du `v-item-group` est de créer des groupes de tout ce qui devrait être contrôlé par un **modèle**."

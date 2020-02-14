@@ -11,8 +11,53 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "usage"
+          "type": "usage-new",
+          "value": {
+            "booleans": [
+              "dense"
+            ],
+            "selects": [
+              {
+                "prop": "icon",
+                "label": "Icon",
+                "attrs": {
+                  "items": [
+                    "mdi-plus",
+                    "mdi-minus",
+                    "mdi-access-point",
+                    "mdi-antenna"
+                  ]
+                }
+              },
+              {
+                "prop": "size",
+                "label": "Size",
+                "attrs": {
+                  "items": [
+                    "x-small",
+                    "small",
+                    "medium",
+                    "large",
+                    "x-large"
+                  ]
+                }
+              },
+              {
+                "prop": "color",
+                "label": "Color",
+                "attrs": {
+                  "items": [
+                    "red",
+                    "orange",
+                    "yellow",
+                    "green",
+                    "blue",
+                    "purple"
+                  ]
+                }
+              }
+            ]
+          }
         }
       ]
     },
@@ -22,15 +67,6 @@
         {
           "type": "api",
           "value": ["v-icon"]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "playground",
-          "value": "playground"
         }
       ]
     },

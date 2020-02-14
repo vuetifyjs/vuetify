@@ -21,8 +21,28 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "usage"
+          "type": "usage-new",
+          "value": {
+            "booleans": [
+              "contain"
+            ],
+            "sliders": [
+              {
+                "prop": "max-width",
+                "attrs": {
+                  "min": 0,
+                  "max": 500
+                }
+              },
+              {
+                "prop": "max-height",
+                "attrs": {
+                  "min": 0,
+                  "max": 300
+                }
+              }
+            ]
+          }
         }
       ]
     },

@@ -1,8 +1,6 @@
 {
+  "usageText": "Avec Combobox, vous pouvez permettre à un utilisateur de créer de nouvelles valeurs qui ne sont pas présentes dans une liste d'éléments fournis.",
   "examples": {
-    "usage": {
-      "desc": "Avec Combobox, vous pouvez permettre à un utilisateur de créer de nouvelles valeurs qui ne sont pas présentes dans une liste d'éléments fournis."
-    },
     "no-data": {
       "desc": "Dans cet exemple, nous utilisons un emplacement **no-data** personnalisé pour fournir un contexte à l'utilisateur lors de la recherche / création d'éléments."
     },
@@ -19,29 +17,6 @@
   },
   "props": {
     "dark": "Components.Inputs.props.dark",
-    "delimiters": "Accepte un tableau de chaînes qui déclenchera un nouveau tag lors de la saisie. Ne remplace pas l'onglet normal et les clés Entrées.",
-    "value": "Components.Inputs.props.value"
-  },
-  "slots": {
-    "append": "Components.Inputs.slots.append",
-    "append-outer": "Components.TextFields.slots.append-outer",
-    "item": "Components.Selects.slots.item",
-    "prepend": "Components.Inputs.slots.prepend",
-    "prepend-inner": "Components.TextFields.slots.prepend-inner",
-    "append-item": "Components.Selects.slots.append-item",
-    "no-data": "Mixins.Filterable.slots.noData",
-    "prepend-item": "Components.Selects.slots.prepend-item",
-    "selection": "Components.Selects.slots.selection"
-  },
-  "events": {
-    "change": "Components.Inputs.events.change",
-    "click:append": "Components.Inputs.events['click:append']",
-    "click:append-outer": "Components.TextFields.events['click:append-outer']",
-    "click:clear": "Components.TextFields.events['click:clear']",
-    "click:prepend": "Components.Inputs.events['click:prepend']",
-    "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
-    "update:error": "Mixins.Validatable.events['update:error']",
-    "update:list-index": "Components.Selects.events['update:list-index']",
-    "update:search-input": "L'événement `search-input.sync`"
+    "delimiters": "Accepte un tableau de chaînes qui déclenchera un nouveau tag lors de la saisie. Ne remplace pas l'onglet normal et les clés Entrées."
   }
 }

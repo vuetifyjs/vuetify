@@ -55,10 +55,12 @@
     "backgroundColor": "Components.ProgressCircular.props.backgroundColor",
     "backgroundOpacity": "Components.ProgressCircular.props.backgroundOpacity",
     "bufferValue": "Components.ProgressCircular.props.bufferValue",
+    "fill": "Components.ProgressCircular.props.fill",
     "height": "Mixins.Measurable.props.height",
     "indeterminate": "Components.ProgressCircular.props.indeterminate",
     "query": "像 **indeterminate** 属性但反转的动画效果",
     "rounded": "向进度组件添加边界半径",
+    "size": "Components.ProgressCircular.props.size",
     "stream": "描绘加载的另一种样式与 **buffer-value** 协同工作",
     "striped": "将条纹背景添加到进度组件的填充部分",
     "value": "Components.ProgressCircular.props.value"
