@@ -136,10 +136,10 @@
           themes: true,
         },
         {
-          name: 'Vue Bootstrap',
+          name: 'BootstrapVue',
           release: 'Bi-Weekly',
           src: 'https://cdn.vuetifyjs.com/images/competitors/bootstrap-vue.png',
-          components: 45,
+          components: 80,
           tree: 'Manual',
           ssr: true,
           a11y: true,
