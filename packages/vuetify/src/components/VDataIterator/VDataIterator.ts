@@ -295,6 +295,7 @@ export default Themeable.extend({
           this.internalCurrentItems = v
           this.$emit('current-items', v)
         },
+        'page-count': (v: number) => this.$emit('page-count', v),
       },
       scopedSlots: {
         default: this.genDefaultScopedSlot,
