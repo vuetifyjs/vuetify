@@ -672,4 +672,45 @@ describe('VDataTable.ts', () => {
 
     expect(input).toHaveBeenNthCalledWith(2, [])
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10392
+  it('should search group-by column', async () => {
+    const headers = [
+      {
+        text: 'Name',
+        value: 'name',
+      },
+      {
+        text: 'ID',
+        value: 'id',
+      },
+    ]
+
+    const items = [
+      {
+        name: 'Assistance',
+        id: 1,
+      },
+      {
+        name: 'Candidat',
+        id: 2,
+      },
+    ]
+
+    const wrapper = mountFunction({
+      propsData: {
+        headers,
+        items,
+        itemKey: 'id',
+        groupBy: 'name',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ search: 'candidat' })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
