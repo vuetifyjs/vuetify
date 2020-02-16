@@ -672,4 +672,23 @@ describe('VDataTable.ts', () => {
 
     expect(input).toHaveBeenNthCalledWith(2, [])
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10289
+  it('should render item slot when using group-by function', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        itemKey: 'name',
+        items: testItems.slice(0, 2),
+        groupBy: 'name',
+      },
+      scopedSlots: {
+        item () {
+          return this.$createElement('div', ['scoped'])
+        },
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
