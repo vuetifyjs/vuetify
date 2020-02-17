@@ -4,6 +4,8 @@ import './VRipple.sass'
 import { VNode, VNodeDirective } from 'vue'
 import { consoleWarn } from '../../util/console'
 
+const DELAY_RIPPLE = 80
+
 function transform (el: HTMLElement, value: string) {
   el.style['transform'] = value
   el.style['webkitTransform'] = value
@@ -148,12 +150,43 @@ function rippleShow (e: MouseEvent | TouchEvent) {
   if (element._ripple.class) {
     value.class = element._ripple.class
   }
-  ripples.show(e, element, value)
+
+  if (isTouchEvent(e)) {
+    // already queued that shows or hides the ripple
+    if (element._ripple.showTimerCommit) return
+
+    element._ripple.showTimerCommit = () => {
+      ripples.show(e, element, value)
+    }
+    element._ripple.showTimer = window.setTimeout(() => {
+      if (element && element._ripple && element._ripple.showTimerCommit) {
+        element._ripple.showTimerCommit()
+        element._ripple.showTimerCommit = null
+      }
+    }, DELAY_RIPPLE)
+  } else {
+    ripples.show(e, element, value)
+  }
 }
 
 function rippleHide (e: Event) {
   const element = e.currentTarget as HTMLElement | null
-  if (!element) return
+  if (!element || !element._ripple) return
+
+  window.clearTimeout(element._ripple.showTimer)
+
+  // The touch interaction occurs before the show timer is triggered.
+  // We still want to show ripple effect.
+  if (e.type === 'touchend' && element._ripple.showTimerCommit) {
+    element._ripple.showTimerCommit()
+    element._ripple.showTimerCommit = null
+
+    // re-queue ripple hiding
+    element._ripple.showTimer = setTimeout(() => {
+      rippleHide(e)
+    })
+    return
+  }
 
   window.setTimeout(() => {
     if (element._ripple) {
@@ -161,6 +194,18 @@ function rippleHide (e: Event) {
     }
   })
   ripples.hide(element)
+}
+
+function rippleCancelShow (e: MouseEvent | TouchEvent) {
+  const element = e.currentTarget as HTMLElement | undefined
+
+  if (!element || !element._ripple) return
+
+  if (element._ripple.showTimerCommit) {
+    element._ripple.showTimerCommit = null
+  }
+
+  window.clearTimeout(element._ripple.showTimer)
 }
 
 function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boolean) {
@@ -183,6 +228,7 @@ function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boo
   if (enabled && !wasEnabled) {
     el.addEventListener('touchstart', rippleShow, { passive: true })
     el.addEventListener('touchend', rippleHide, { passive: true })
+    el.addEventListener('touchmove', rippleCancelShow, { passive: true })
     el.addEventListener('touchcancel', rippleHide)
 
     el.addEventListener('mousedown', rippleShow)
@@ -199,6 +245,7 @@ function removeListeners (el: HTMLElement) {
   el.removeEventListener('mousedown', rippleShow)
   el.removeEventListener('touchstart', rippleShow)
   el.removeEventListener('touchend', rippleHide)
+  el.removeEventListener('touchmove', rippleCancelShow)
   el.removeEventListener('touchcancel', rippleHide)
   el.removeEventListener('mouseup', rippleHide)
   el.removeEventListener('mouseleave', rippleHide)

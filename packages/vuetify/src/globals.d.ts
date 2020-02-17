@@ -41,6 +41,8 @@ declare global {
       circle?: boolean
       touched?: boolean
       isTouch?: boolean
+      showTimer?: number
+      showTimerCommit?: (() => void) | null
     }
     _observe?: {
       init: boolean
