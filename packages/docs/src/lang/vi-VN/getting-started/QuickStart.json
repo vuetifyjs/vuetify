@@ -1,4 +1,6 @@
 {
+  "headingText": "Hãy bắt đầu với Vuerify - framework phổ biến nhất thế giới để xây dựng nên các ứng dụng với tính năng phong phú và nhanh chóng.",
   "uiImg1": "Cài đặt Plugin Vuetify",
-  "uiImg2": "Cấu hình cài đặt Vuetify"
+  "uiImg2": "Cấu hình cài đặt Vuetify",
+  "cdnHeader": "## Sử dụng CDN"
 }

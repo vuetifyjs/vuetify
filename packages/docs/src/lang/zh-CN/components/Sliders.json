@@ -1,10 +1,8 @@
 {
   "heading": "# 滑块",
   "headingText": "`v-slider`组件是数字输入的更好的可视化，它用于收集数字用户数据。",
+  "usageText": "滑块沿着条形图反映一系列值，用户可以从中选择单个值。 它们是调整设置的理想选择，例如音量，亮度或应用图像滤镜。",
   "examples": {
-    "usage": {
-      "desc": "滑块沿着条形图反映一系列值，用户可以从中选择单个值。 它们是调整设置的理想选择，例如音量，亮度或应用图像滤镜。"
-    },
     "thumb": {
       "heading": "### 拇指",
       "desc": "您可以在滑动时或始终显示 `thumb-label`。\n它可以通过设置 `thumb-color` 自定义颜色，并使用 `thumb-size` 自定义大小。\n对于 `always-dirty` ，它的颜色永远不会改变，即使在 `min` 值上也是如此。"
@@ -81,18 +79,11 @@
     "tickSize": "控制 **ticks** 的大小",
     "trackColor": "设置刻度线颜色",
     "trackFillColor": "设置刻度线填充颜色",
-    "value": "控制滑块的当前值",
     "vertical": "将滑块方向切换为垂直方向"
   },
   "events": {
-    "blur": "当组件不再聚焦时发出",
-    "change": "Components.Inputs.events.change",
-    "click:append": "Components.Inputs.events['click:append']",
-    "click:prepend": "Components.Inputs.events['click:prepend']",
     "end": "滑块移动结束时发出的滑块值",
-    "focus": "组件聚焦时发出",
-    "start": "滑块移动开始时发出的滑块值",
-    "update:error": "Mixins.Validatable.events['update:error']"
+    "start": "滑块移动开始时发出的滑块值"
   },
   "slots": {
     "thumb-label": "替换缩略图标签内的内容"

@@ -1,8 +1,21 @@
 {
+  "heading": "# データテーブル",
   "headingText": "`v-data-table` コンポーネントは表形式のデータを表示するために使われます。ソート、検索、ページネーション、インライン編集、ヘッダーツールチップ、行の選択 などの機能があります。",
   "examples": {
+    "usage": {
+      "desc": "データ テーブルは、デフォルトではデータを単純な行として表示します。"
+    },
     "slots": {
+      "heading": "### Slots",
       "desc": "`v-data-table` は、テーブルをカスタマイズするための slot を数多く用意しています。 この例では、いくつかの slot について紹介します。注意点として、コンポーネントの内部レンダリングを完全に引き継いで selection や expansion などの機能を再実装しなければならない slot (例：`item` / `body` / `header`) や、 `body` > `item` > `item.<name>` and `header`/`header.<name>` のように上書きしてしまう slot があります。"
+    },
+    "select": {
+      "heading": "### 行の選択",
+      "desc": "'show-select' propは、すべての行を切り替えるヘッダーのチェック ボックスと、各行のチェック ボックスをレンダリングします。これらをそれぞれスロット 'header.data-table-select' と 'item.data-table-select' でカスタマイズできます。また、複数の選択した行を同時に許可するか、`single-select` propで 1 つだけ許可するかを切り替えることもできます。"
+    },
+    "dense": {
+      "heading": "### Dense （高さが詰まったスタイル）",
+      "desc": "`dense` propを使用することで、データテーブルの各行が低くなった代替スタイルを与えることもできます。"
     },
     "headers": {
       "desc": "`items` と `headers` スロットは <kbd>td/th</kbd> タグを受け付けることができます。行の全体を制御したい場合は、 <kbd>tr</kbd> を受け付けることができます。"
@@ -19,10 +32,8 @@
     "sort": {
       "desc": "`pagination` prop を使用することで外部からソートも制御できます。 使用するには `.sync` modifier を適用する必要があります。 prop でデフォルトでソートに使用するカラムを設定することもできます。"
     },
-    "edit-dialog": {
-      "desc": "`v-edit-dialog` コンポーネントは Data table 内部でインライン編集する際に使用します。"
-    },
     "crud": {
+      "heading": "### CRUD アクション",
       "desc": "各行を編集するために `v-dialog` コンポーネントを使用した、CRUD アクション付き Data table のサンプルです。"
     }
   },
@@ -33,6 +44,10 @@
     },
     "v-data-table": {
       "headers": "ヘッダーのカラムとなる配列のオブジェクトを設定します。 全プロパティの定義については下記の例を参照してください。"
+    },
+    "v-simple-checkbox": {
+      "dark": "Mixins.Themeable.props.dark",
+      "light": "Mixins.Themeable.props.light"
     }
   }
 }

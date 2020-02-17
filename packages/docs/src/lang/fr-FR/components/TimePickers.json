@@ -1,4 +1,5 @@
 {
+  "headingText": "Le composant `v-time-picker` est indépendant et peut être utilisé partout. Il permet de choisir une heure à partir d'un sélecteur.",
   "examples": {
     "usage": {
       "desc": "Les sélecteurs de temps ont le thème de lumière activé par défaut."

@@ -1,4 +1,9 @@
 {
+  "examples": {
+    "disabled": {
+      "heading": "### 無効化"
+    }
+  },
   "props": {
     "noDataText": "データが存在しない場合に表示するテキストです。"
   }

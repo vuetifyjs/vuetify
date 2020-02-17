@@ -2,10 +2,8 @@
   "heading": "# 图像",
   "headingText": "`v-img` 组件包含支持丰富媒体的功能。与 [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) 结合使用，您可以添加动态渐进图像以提供更好的用户体验。",
   "alert1": "`v-img` 组件使用 [v-intersect](/directives/intersect) 指令，该指令要求 IE11和 Safari 使用 [Polyfill](/directives/intersect#polyfill) 。 如果检测到不支持此功能的浏览器，则图像仍会照常加载。",
+  "usageText": "`v-img` 组件用于显示具有延迟加载和占位符的响应图像。",
   "examples": {
-    "usage": {
-      "desc": "`v-img` 组件用于显示具有延迟加载和占位符的响应图像。"
-    },
     "contain-cover": {
       "heading": "### 包含和覆盖",
       "desc": "如果提供的长宽比与实际图像不匹配，则默认行为是填充尽可能多的空间，裁剪图像的边。启用 `contain` 属性可以防止这种情况，但会导致两边出现空白。"

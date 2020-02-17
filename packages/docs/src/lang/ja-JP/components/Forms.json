@@ -1,9 +1,4 @@
 {
-  "examples": {
-    "vee-validate": {
-      "desc": "Vee-validateは、フォームのバリデーションが可能なもうひとつのバリデーションプラグインです。なお、 **value** propを使用するときに `v-checkbox`を正しくバリデートするには、**type =\"checkbox\"** を追加する必要があるので注意して下さい。"
-    }
-  },
   "props": {
     "lazyValidation": "有効にすると、表示されるバリデーションエラーが無い限り、 **value** は常に _true_ となります。"
   },

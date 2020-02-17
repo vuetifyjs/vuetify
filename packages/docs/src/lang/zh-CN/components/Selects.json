@@ -80,26 +80,13 @@
     "value": "Components.Inputs.props.value"
   },
   "slots": {
-    "append": "Components.Inputs.slots.append",
     "append-item": "在菜单内容后添加项目",
-    "append-outer": "Components.TextFields.slots.append-outer",
     "item": "定义自定义项外观",
     "no-data": "Mixins.Filterable.slots.noData",
-    "prepend": "Components.Inputs.slots.prepend",
-    "prepend-inner": "Components.TextFields.slots.prepend-inner",
     "prepend-item": "在菜单内容之前添加项目",
     "selection": "定义自定义选择器外观"
   },
   "events": {
-    "blur": "当组件不再聚焦时发出",
-    "change": "Components.Inputs.events.change",
-    "click:append": "Components.Inputs.events['click:append']",
-    "click:append-outer": "Components.TextFields.events['click:append-outer']",
-    "click:clear": "Components.TextFields.events['click:clear']",
-    "click:prepend": "Components.Inputs.events['click:prepend']",
-    "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
-    "focus": "组件聚焦时发出",
-    "update:error": "Mixins.Validatable.events['update:error']",
     "update:list-index": "使用键盘箭头选择菜单项时发出",
     "update:search-input": "`search-input.sync` 事件"
   }

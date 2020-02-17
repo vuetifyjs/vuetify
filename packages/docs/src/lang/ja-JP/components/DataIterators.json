@@ -1,10 +1,8 @@
 {
   "heading": "# データイテレータ",
   "headingText": "`v-data-iterator`コンポーネントはデータの表示に使用され、その機能の大部分を`v-data-table`コンポーネントと共有します。機能にはソート、検索、ページネーション、および選択が含まれます。",
+  "usageText": "`v-data-iterator`を使用すると、データの表示方法を正確にカスタマイズできます。この例では、カードのあるグリッドを使用しています。",
   "examples": {
-    "usage": {
-      "desc": "`v-data-iterator`を使用すると、データの表示方法を正確にカスタマイズできます。この例では、カードのあるグリッドを使用しています。"
-    },
     "slots": {
       "desc": "`v-data-iterator`はその他のコンテンツの追加するためのheaderとfooterのslotを持っています。"
     },
