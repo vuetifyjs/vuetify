@@ -22,7 +22,6 @@
     "inputValue": "El valor referenciado en **v-model**",
     "mandatory": "Obliga la selección de un `v-radio`",
     "name": "Configura el atributo _name_ del componente",
-    "row": "Muestra los radio buttons en una columna",
-    "value": "Configura el valor de la selección en el componente"
+    "row": "Muestra los radio buttons en una columna"
   }
 }

@@ -1,28 +1,6 @@
 {
+  "usageText": "Les badges dans leur forme la plus simple s'affichent à la droite supérieure du contenu qu'il enveloppe et nécessite l'emplacement de badge.",
   "examples": {
-    "usage": {
-      "desc": "Les badges dans leur forme la plus simple s'affichent à la droite supérieure du contenu qu'il enveloppe et nécessite l'emplacement de badge."
-    },
-    "bottom": {
-      "desc": "Le prop`bottom` placera le badge comme un abonnement au contenu enveloppé. Peut être utilisé avec le prop `left` pour obtenir une position inférieure à gauche."
-    },
-    "left": {
-      "desc": "Le prop`left` placera le badge à gauche du contenu enveloppé. Peut être utilisé avec le prop `bottom` pour obtenir une position inférieure à gauche."
-    },
-    "overlap": {
-      "desc": "Le prop`overlap` va faire chevaucher le badge."
-    },
-    "visibility": {
-      "heading": "### Visibilité",
-      "desc": "La visibilité de`v-badge`peutêtre contrôlée en liant `v-model` et en la définissant à vrai ou faux programmatiquement."
-    },
-    "inline": {
-      "desc": "Les badges peuvent également être placés sur du texte."
-    },
-    "icon": {
-      "heading": "### Icônes",
-      "desc": "Le badge peut utiliser tous les jeux d'icônes actuellement pris en charge."
-    },
     "hover": {
       "desc": "Vous pouvez faire beaucoup de choses avec le contrôle de visibilité, par exemple, montrer badge sur le survol."
     },

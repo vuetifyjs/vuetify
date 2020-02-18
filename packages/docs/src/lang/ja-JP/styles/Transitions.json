@@ -1,16 +1,36 @@
 {
+  "heading": "# モーション",
+  "headingText": "スムースなアニメーションはUIの使用感を高めます。Vueのトランジションシステムと関数型コンポーネントにより、アプリケーションで簡単に動きを制御することができます。ほとんどのコンポーネントは`transition`propによって、トランジションを変更することができます。",
   "examples": {
+    "usage": {
+      "desc": "Vuetifyには10を超えるカスタムcssアニメーションが付属しており、多数のコンポーネントまたは独自のカスタムユースケースに適用できます。"
+    },
     "slide-x-transitions": {
+      "heading": "### Slide X transitions",
       "desc": "Slide x transitionは水平方向に移動します。"
     },
     "slide-y-transitions": {
+      "heading": "### Slide Y transitions",
       "desc": "アニメーションはアプリケーションの`$primary-transition`を利用します。"
     },
+    "scroll-x-transitions": {
+      "heading": "### Scroll X transitions",
+      "desc": "Scroll X トランジションは、水平方向に移動します。"
+    },
+    "scroll-y-transitions": {
+      "heading": "### Scroll Y transitions",
+      "desc": "Scroll Y トランジションは、垂直方向に移動します。"
+    },
     "scale-transition": {
-      "desc": "Vuetifyのほとんどのコンポーネントは`transition`プロパティを含んでいます。"
+      "heading": "### Scale transition",
+      "desc": "Vuetifyのコンポーネントの多くは`transition`プロパティを含んでいます。"
     },
     "fade-transition": {
+      "heading": "### Fade transition",
       "desc": "フェードはCarouselでも見ることができます。"
+    },
+    "expand-transition": {
+      "heading": "### Expand transition"
     },
     "custom-origin": {
       "desc": "シンプルなプロパティでトランジションのoriginを制御することができます。"

@@ -2,6 +2,11 @@
   "accessibility": {
     "desc": "Par défaut, le composant `v-skeleton-loader` est assigné à un [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) rôle de [**alert**](https://www.w3.org/TR/wai-aria/#alert). Nous augmentons ce rôle avec deux propriétés aria. Un [**aria-busy**](https://www.w3.org/TR/wai-aria-1.0/states_and_properties#aria-busy) valeur de **true** indique qu'un widget manque d'éléments appartenant à l'utilisateur. Un [**aria-live**](https://www.w3.org/TR/wai-aria-1.1/#aria-live) de **polite** définit la priorité du lecteur d'écran des régions en direct."
   },
+  "examples": {
+    "usage": {
+      "desc": "Le composant `v-skeleton-loader` fournit à un utilisateur un indicateur visuel indiquant que le contenu arrive/charge. Cette solution est mieux accueillie que les chargeurs traditionnels en plein écran."
+    }
+  },
   "props": {
     "tile": "Components.Sheets.props.tile"
   }

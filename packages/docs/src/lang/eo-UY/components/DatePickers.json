@@ -42,7 +42,7 @@
     },
     "date-multiple": {
       "desc": "crwdns38594:0crwdne38594:0",
-      "heading": "crwdns45162:0crwdne45162:0"
+      "heading": "crwdns56235:0crwdne56235:0"
     },
     "date-range": {
       "desc": "crwdns43000:0crwdne43000:0",
@@ -147,6 +147,9 @@
     "dblclick:date": "crwdns38664:0crwdne38664:0",
     "click:month": "crwdns38666:0crwdne38666:0",
     "dblclick:month": "crwdns38668:0crwdne38668:0",
-    "change": "crwdns38670:0crwdne38670:0"
+    "change": "crwdns56237:0crwdne56237:0"
+  },
+  "slots": {
+    "default": "crwdns56239:0crwdne56239:0"
   }
 }

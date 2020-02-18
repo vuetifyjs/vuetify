@@ -67,7 +67,7 @@
   },
   "events": {
     "v-btn-toggle": {
-      "change": "Components.Inputs.events.change"
+      "change": "Émis lorsque l'entrée est modifiée par l'interaction utilisateur"
     }
   },
   "slots": {

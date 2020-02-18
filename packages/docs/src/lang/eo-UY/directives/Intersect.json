@@ -4,6 +4,10 @@
   "examples": {
     "usage": {
       "desc": "crwdns42812:0[v-card]crwdne42812:0"
+    },
+    "options": {
+      "heading": "crwdns56491:0crwdne56491:0",
+      "desc": "crwdns56493:0crwdne56493:0"
     }
   },
   "options": {

@@ -52,7 +52,6 @@
   "horizontalText": "Pour les éléments de bloc avec une largeur désignée, vous pouvez appliquer `.mx-auto` au centre horizontal du contenu.",
   "breakpointHeader": "## Avec points d'arrêt",
   "breakpointText": "Vuetify est livré avec un système de grille de 12 points construit en utilisant Flexbox. L'espace est utilisé pour créer des mises en page spécifiques dans le contenu d'une application. Il se compose de 5 points de rupture de média utilisés pour cibler des tailles ou des orientations spécifiques d'écran : **xs**, **sm**, **md**, **lg** et **xl**. Les résolutions par défaut sont définies ci-dessous dans la table *Viewport Breakpoints* et peuvent être modifiées en personnalisant la configuration [breakpoint service config](/customization/breakpoints).",
-  "breakpointHowText": "Les classes d'aide appliquent **marge** ou **padding** à un point d'arrêt donné. Ces classes peuvent être appliquées en utilisant le format suivant : `{property}{direction}-{breakpoint}-{size}`.",
   "examples": {
     "horizontal": {
       "heading": "## Horizontal",

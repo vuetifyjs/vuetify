@@ -74,8 +74,8 @@
       "desc": "crwdns43010:0crwdne43010:0"
     },
     "edit-dialog": {
-      "heading": "crwdns45292:0crwdne45292:0",
-      "desc": "crwdns38856:0crwdne38856:0"
+      "heading": "crwdns56201:0crwdne56201:0",
+      "desc": "crwdns56203:0crwdne56203:0"
     },
     "crud": {
       "heading": "crwdns45294:0crwdne45294:0",
@@ -92,6 +92,10 @@
     "filterable-columns": {
       "heading": "crwdns45300:0crwdne45300:0",
       "desc": "crwdns43014:0crwdne43014:0"
+    },
+    "simple-checkbox": {
+      "heading": "crwdns56205:0crwdne56205:0",
+      "desc": "crwdns56207:0crwdne56207:0"
     }
   },
   "props": {
@@ -110,7 +114,7 @@
       "fixedHeader": "crwdns38878:0crwdne38878:0",
       "headerProps": "crwdns38880:0crwdne38880:0",
       "headers": "crwdns38882:0crwdne38882:0",
-      "headersLength": "crwdns32662:0crwdne32662:0",
+      "headersLength": "crwdns56209:0crwdne56209:0",
       "height": "crwdns38884:0crwdne38884:0",
       "hideDefaultHeader": "crwdns38886:0crwdne38886:0",
       "mobileBreakpoint": "crwdns38888:0crwdne38888:0",
@@ -118,11 +122,23 @@
       "showExpand": "crwdns38892:0crwdne38892:0",
       "showGroupBy": "crwdns38894:0crwdne38894:0",
       "virtualRows": "crwdns38896:0crwdne38896:0"
+    },
+    "v-simple-checkbox": {
+      "color": "crwdns56211:0crwdne56211:0",
+      "dark": "crwdns56213:0crwdne56213:0",
+      "disabled": "crwdns56215:0crwdne56215:0",
+      "indeterminate": "crwdns56217:0crwdne56217:0",
+      "indeterminateIcon": "crwdns56219:0crwdne56219:0",
+      "light": "crwdns56221:0crwdne56221:0",
+      "offIcon": "crwdns56223:0crwdne56223:0",
+      "onIcon": "crwdns56225:0crwdne56225:0",
+      "ripple": "crwdns56227:0crwdne56227:0",
+      "value": "crwdns56229:0crwdne56229:0"
     }
   },
   "slots": {
     "v-data-table": {
-      "body": "crwdns38898:0crwdne38898:0",
+      "body": "crwdns56231:0crwdne56231:0",
       "body.append": "crwdns38900:0crwdne38900:0",
       "body.prepend": "crwdns42376:0crwdne42376:0",
       "expanded-item": "crwdns38904:0crwdne38904:0",
@@ -157,6 +173,9 @@
     },
     "v-data-table": {
       "click:row": "crwdns38940:0crwdne38940:0"
+    },
+    "v-simple-checkbox": {
+      "click": "crwdns56233:0crwdne56233:0"
     }
   }
 }

@@ -31,13 +31,13 @@
       class="my-1"
       align="center"
     >
-      <strong class="mx-4 info--text text--darken-3">
+      <strong class="mx-4 info--text text--darken-2">
         Remaining: {{ remainingTasks }}
       </strong>
 
       <v-divider vertical></v-divider>
 
-      <strong class="mx-4 black--text">
+      <strong class="mx-4 success--text text--darken-2">
         Completed: {{ completedTasks }}
       </strong>
 
@@ -67,11 +67,11 @@
             <v-list-item-action>
               <v-checkbox
                 v-model="task.done"
-                color="info darken-3"
+                :color="task.done && 'grey' || 'primary'"
               >
                 <template v-slot:label>
                   <div
-                    :class="task.done && 'grey--text' || 'text--primary'"
+                    :class="task.done && 'grey--text' || 'primary--text'"
                     class="ml-4"
                     v-text="task.text"
                   ></div>

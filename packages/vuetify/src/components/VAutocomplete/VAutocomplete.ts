@@ -299,14 +299,14 @@ export default VSelect.extend({
         ? VSelect.options.methods.genSelections.call(this)
         : []
     },
-    onClick () {
+    onClick (e: MouseEvent) {
       if (this.isDisabled) return
 
       this.selectedIndex > -1
         ? (this.selectedIndex = -1)
         : this.onFocus()
 
-      this.activateMenu()
+      if (!this.isAppendInner(e.target)) this.activateMenu()
     },
     onInput (e: Event) {
       if (

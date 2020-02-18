@@ -9,6 +9,9 @@
       "heading": "### 色",
       "desc": "タイムピッカーの色は、 `color`および`header-color`プロパティを使用して設定できます。 `header-color` propが提供されない場合、ヘッダーは`color` prop値を使用します。"
     },
+    "disabled": {
+      "heading": "### 無効化"
+    },
     "scrollable": {
       "heading": "スクロール可能なダイアログ"
     }

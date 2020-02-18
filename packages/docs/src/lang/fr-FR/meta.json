@@ -24,7 +24,6 @@
   },
   "getting-started/quick-start": {
     "title": "Démarrage rapide",
-    "description": "Commencez avec Vue et Vuetify en un rien de temps. Supporte Vue-CLI-3, Webpack, Nuxt et plus encore.",
     "keywords": "démarrage rapide, templates vuetify, installer vuetify"
   },
   "getting-started/pre-made-layouts": {
@@ -54,7 +53,7 @@
     "title": "A-la-carte (treeshaking)"
   },
   "customization/breakpoints": {
-    "title": "Breakpoints",
+    "title": "Points d'arrêt",
     "description": "Accédez au système de grille Vuetify à l'intérieur des composants en utilisant le service Breakpoint."
   },
   "customization/icons": {
