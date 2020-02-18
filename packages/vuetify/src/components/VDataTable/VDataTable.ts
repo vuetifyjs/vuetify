@@ -80,10 +80,6 @@ export default VDataIterator.extend({
     showGroupBy: Boolean,
     // TODO: Fix
     // virtualRows: Boolean,
-    mobileBreakpoint: {
-      type: Number,
-      default: 600,
-    },
     height: [Number, String],
     hideDefaultHeader: Boolean,
     caption: String,
@@ -135,13 +131,6 @@ export default VDataIterator.extend({
         colspan: this.headersLength || this.computedHeaders.length,
       }
     },
-    isMobile (): boolean {
-      // Guard against SSR render
-      // https://github.com/vuetifyjs/vuetify/issues/7410
-      if (this.$vuetify.breakpoint.width === 0) return false
-
-      return this.$vuetify.breakpoint.width < this.mobileBreakpoint
-    },
     columnSorters (): Record<string, DataTableCompareFunction> {
       return this.computedHeaders.reduce<Record<string, DataTableCompareFunction>>((acc, header) => {
         if (header.sort) acc[header.value] = header.sort
@@ -149,10 +138,10 @@ export default VDataIterator.extend({
       }, {})
     },
     headersWithCustomFilters (): DataTableHeader[] {
-      return this.computedHeaders.filter(header => header.filter && (!header.hasOwnProperty('filterable') || header.filterable === true))
+      return this.headers.filter(header => header.filter && (!header.hasOwnProperty('filterable') || header.filterable === true))
     },
     headersWithoutCustomFilters (): DataTableHeader[] {
-      return this.computedHeaders.filter(header => !header.filter && (!header.hasOwnProperty('filterable') || header.filterable === true))
+      return this.headers.filter(header => !header.filter && (!header.hasOwnProperty('filterable') || header.filterable === true))
     },
     sanitizedHeaderProps (): Record<string, any> {
       return camelizeObjectKeys(this.headerProps)
@@ -325,7 +314,7 @@ export default VDataIterator.extend({
     genDefaultGroupedRow (group: string, items: any[], props: DataScopeProps) {
       const isOpen = !!this.openCache[group]
       const children: VNodeChildren = [
-        this.$createElement('template', { slot: 'row.content' }, this.genDefaultRows(items, props)),
+        this.$createElement('template', { slot: 'row.content' }, this.genRows(items, props)),
       ]
       const toggleFn = () => this.$set(this.openCache, group, !this.openCache[group])
       const removeFn = () => props.updateOptions({ groupBy: [], groupDesc: [] })

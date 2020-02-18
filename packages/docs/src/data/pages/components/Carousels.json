@@ -7,8 +7,14 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "usage"
+          "type": "usage-new",
+          "value": {
+            "booleans": [
+              "show-arrows",
+              "hide-delimiters",
+              "cycle"
+            ]
+          }
         },
         {
           "type": "heading",
@@ -29,15 +35,6 @@
             "v-carousel",
             "v-carousel-item"
           ]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "playground",
-          "value": "playground"
         }
       ]
     },

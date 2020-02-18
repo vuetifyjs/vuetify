@@ -85,29 +85,30 @@
       color: inherit
 
 // Elements
-.v-chip__close.v-icon
-  font-size: $chip-close-size
-  max-height: $chip-close-size
-  max-width: $chip-close-size
-  user-select: none
+.v-chip
+  .v-chip__close.v-icon
+    font-size: $chip-close-size
+    max-height: $chip-close-size
+    max-width: $chip-close-size
+    user-select: none
 
-  &.v-icon--right
-    +ltr()
-      margin-right: $chip-icon-right-margin-after
+    &.v-icon--right
+      +ltr()
+        margin-right: $chip-icon-right-margin-after
 
-    +rtl()
-      margin-left: $chip-icon-right-margin-after
+      +rtl()
+        margin-left: $chip-icon-right-margin-after
 
-  &:hover,
-  &:focus,
-  &:active
-    opacity: .72
+    &:hover,
+    &:focus,
+    &:active
+      opacity: .72
 
-.v-chip__content
-  align-items: center
-  display: inline-flex
-  height: 100%
-  max-width: 100%
+  .v-chip__content
+    align-items: center
+    display: inline-flex
+    height: 100%
+    max-width: 100%
 
 // Modifiers
 .v-chip--active
@@ -123,6 +124,7 @@
 
 .v-chip--clickable
   cursor: pointer
+  user-select: none
 
   &:active
     +elevation(2)

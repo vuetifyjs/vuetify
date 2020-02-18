@@ -73,6 +73,9 @@
     }
   },
   "events": {
+    "v-stepper": {
+      "change": "crwdns56299:0crwdne56299:0"
+    },
     "v-stepper-step": {
       "click": "crwdns42578:0crwdne42578:0"
     }

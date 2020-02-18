@@ -1,9 +1,12 @@
 {
   "props": {
-    "dark": "Components.Inputs.props.dark"
+    "dark": "Components.Inputs.props.dark",
+    "v-simple-checkbox": {
+      "light": "Mixins.Themeable.props.light",
+      "ripple": "Mixins.Rippleable.props.ripple"
+    }
   },
   "events": {
-    "change": "Components.Inputs.events.change",
-    "update:error": "Mixins.Validatable.events['update:error']"
+    "change": "Émis lorsque l'entrée est modifiée par l'interaction utilisateur"
   }
 }

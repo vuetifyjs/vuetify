@@ -1,11 +1,8 @@
 {
   "heading": "# Chip groups",
   "headingText": "The `v-chip-group` supercharges the `v-chip` component by providing groupable functionality. It is used for creating groups of selections using chips.",
+  "usageText": "Chip groups make it easy for users to select filtering options for more complex implementations. By default `v-chip-group` will overflow to the right but can be changed to a **column** only mode.",
   "examples": {
-    "usage": {
-      "heading": "Usage",
-      "desc": "Chip groups make it easy for users to select filtering options for more complex implementations. By default `v-chip-group` will overflow to the right but can be changed to a **column** only mode."
-    },
     "toothbrush": {
       "heading": "### Toothbrush card",
       "desc": "Chip groups allow the creation of custom interfaces that perform the same actions as an item group or radio controls, but are stylistically different."

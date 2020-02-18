@@ -62,7 +62,7 @@
       "desc": "The `hint` property on text fields adds the provided string beneath the text field. Using `persistent-hint` keeps the hint visible when the text field is not focused. Hint prop is **not** supported in solo mode."
     },
     "hide-details": {
-      "header": "### Auto hiding details",
+      "heading": "### Auto hiding details",
       "desc": "When `hide-details` is set to `auto` messages will be rendered only if there's a message (hint, error message, counter value etc) to display."
     },
     "prefixes-and-suffixes": {
@@ -124,25 +124,19 @@
     "textarea": "Textarea text field with alternate style",
     "toggleKeys": "Array of key codes that will toggle the input (if it supports toggling)",
     "type": "Sets input type",
-    "value": "Components.Inputs.props.value",
     "shaped": "Round if `outlined` and increase `border-radius` if `filled`. Must be used with either `outlined` or `filled`"
   },
   "slots": {
-    "append": "Components.Inputs.slots.append",
     "append-outer": "Appends an item inside input content",
-    "prepend": "Components.Inputs.slots.prepend",
     "prepend-inner": "Prepends an item inside input content"
   },
   "events": {
-    "blur": "Emitted when component is no longer focused",
-    "change": "Components.Inputs.events.change",
-    "click:append": "Components.Inputs.events['click:append']",
+    "blur": "Emitted when the input is blurred",
+    "change": "Emitted when the input is changed by user interaction",
     "click:append-outer": "Emitted when appended outer icon is clicked",
     "click:clear": "Emitted when clearable icon clicked",
-    "click:prepend": "Components.Inputs.events['click:prepend']",
     "click:prepend-inner": "Emitted when prepended inner icon is clicked",
     "focus": "Emitted when component is focused",
-    "keydown": "Emitted when **any** key is pressed, Text-field must be focused",
-    "update:error": "Mixins.Validatable.events['update:error']"
+    "keydown": "Emitted when **any** key is pressed"
   }
 }

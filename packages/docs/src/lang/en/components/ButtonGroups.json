@@ -41,6 +41,6 @@
     "shaped": "Applies a large border radius on the top left and bottom right of the card."
   },
   "events": {
-    "change": "Components.Inputs.events.change"
+    "change": "Emitted when the input is changed by user interaction"
   }
 }

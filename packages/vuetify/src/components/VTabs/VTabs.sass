@@ -175,7 +175,12 @@
   display: flex
 
   & > .v-tabs-bar
+    flex: 1 0 auto
     height: auto
+
+    .v-slide-group__next,
+    .v-slide-group__prev
+      display: none
 
     .v-tabs-bar__content
       flex-direction: column
@@ -187,7 +192,7 @@
       height: 100%
 
   & > .v-window
-    flex: 1 1 auto
+    flex: 0 1 100%
 
   &.v-tabs--icons-and-text
     & > .v-tabs-bar

@@ -382,7 +382,7 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [p
         n/a
       </td>
       <td>
-       A Vue CLI 3 preset for Vuetify
+       A Vue CLI preset for Vuetify
       </td>
     </tr>
     <tr>

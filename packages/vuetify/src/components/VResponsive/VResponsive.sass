@@ -12,7 +12,11 @@
     max-width: 100%
 
   &__sizer ~ &__content
-    margin-left: -100%
+    +ltr()
+      margin-left: -100%
+
+    +rtl()
+      margin-right: -100%
 
   &__sizer
     transition: padding-bottom 0.2s map-get($transition, 'swing')

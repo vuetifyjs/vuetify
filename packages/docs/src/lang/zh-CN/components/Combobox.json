@@ -1,10 +1,8 @@
 {
   "heading": "# 组合框",
   "headingText": "`v-combobox` 组件是一个 [v-autocomplete](/components/autocompletes) ，允许用户输入在提供的 **tems** 中不存在的值。创建的项目将作为字符串返回。",
+  "usageText": "使用组合框，您可以允许用户创建可能不在提供的项列表中显示的新值。",
   "examples": {
-    "usage": {
-      "desc": "使用组合框，您可以允许用户创建可能不在提供的项列表中显示的新值。"
-    },
     "no-data": {
       "heading": "### 没有带纸片的数据",
       "desc": "在本例中，我们使用一个自定义的 **no-data** 插槽在 搜索/创建 项时为用户提供上下文。"
@@ -24,29 +22,6 @@
   },
   "props": {
     "dark": "Components.Inputs.props.dark",
-    "delimiters": "接受将在键入时触发新标记的字符串数组。不替换正常的 Tab 和 Enter keys。",
-    "value": "Components.Inputs.props.value"
-  },
-  "slots": {
-    "append": "Components.Inputs.slots.append",
-    "append-outer": "Components.TextFields.slots.append-outer",
-    "item": "Components.Selects.slots.item",
-    "prepend": "Components.Inputs.slots.prepend",
-    "prepend-inner": "Components.TextFields.slots.prepend-inner",
-    "append-item": "Components.Selects.slots.append-item",
-    "no-data": "Mixins.Filterable.slots.noData",
-    "prepend-item": "Components.Selects.slots.prepend-item",
-    "selection": "Components.Selects.slots.selection"
-  },
-  "events": {
-    "change": "Components.Inputs.events.change",
-    "click:append": "Components.Inputs.events['click:append']",
-    "click:append-outer": "Components.TextFields.events['click:append-outer']",
-    "click:clear": "Components.TextFields.events['click:clear']",
-    "click:prepend": "Components.Inputs.events['click:prepend']",
-    "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
-    "update:error": "Mixins.Validatable.events['update:error']",
-    "update:list-index": "Components.Selects.events['update:list-index']",
-    "update:search-input": "`search-input.sync` 事件"
+    "delimiters": "接受将在键入时触发新标记的字符串数组。不替换正常的 Tab 和 Enter keys。"
   }
 }

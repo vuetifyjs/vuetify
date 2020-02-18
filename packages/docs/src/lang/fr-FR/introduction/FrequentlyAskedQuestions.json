@@ -75,7 +75,6 @@
     },
     {
       "q": "### Les images relatives ne fonctionnent pas dans `v-card`,` v-img` et autres composants personnalisés Vuetify",
-      "a": "Vue loader convertit les chemins relatifs en fonctions require automatiquement pour vous. Malheureusement, ce n'est pas le cas lorsqu'il s'agit de composants personnalisés. Vous pouvez contourner ce problème en utilisant `require`. Si vous utilisez Vuetify en tant que plugin Vue-CLI 3, vous pouvez éditer le fichier [vue.config.js](https://cli.vuejs.org/config/#vue-config-js) de votre projet en modifiant les options pour [vue-loader] (https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader).",
       "s": "html_img_require"
     },
     {

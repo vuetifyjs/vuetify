@@ -1,12 +1,13 @@
-const { inputSlots } = require('../helpers/variables')
+const { VInput } = require('../helpers/variables')
 
 module.exports = {
   'v-switch': {
-    slots: inputSlots.concat(['label']),
-    events: [
+    ...VInput,
+    slots: [
+      ...VInput.slots,
       {
-        name: 'change',
-        value: 'any',
+        name: 'label',
+        props: undefined,
       },
     ],
   },

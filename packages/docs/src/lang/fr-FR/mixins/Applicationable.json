@@ -1,5 +1,1 @@
-{
-  "props": {
-    "app": "Spécifie le composant dans le cadre de la mise en page de l'application. Utilisé pour ajuster dynamiquement le sizing du contenu. Les composants utilisant ce prop devraient résider **hors** du composant `v-content` pour fonctionner correctement. Vous pouvez plus d'informations sur les mises en page sur la [page d'application](/components/application)."
-  }
-}
+{}

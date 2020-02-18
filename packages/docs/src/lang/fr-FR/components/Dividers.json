@@ -19,6 +19,9 @@
       "desc": "Créer des cartes personnalisées pour convenir à n'importe quel cas d'utilisation"
     }
   },
+  "accessibility": {
+    "desc": "Par défaut, les composants`v-divider` sont assignés au [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) rôle de [**séparateur**](https://www.w3.org/TR/wai-aria/#separator) qui indique que le séparateur \"sépare et distingue les sections de contenu ou de groupes de menuitems.\" Cependant, parfois, un séparateur n'est qu'un moyen de rendre une interface agréable. Dans ces cas, le rôle de [**presentation**](https://www.w3.org/TR/wai-aria/#presentation) devrait être utilisé pour désigner \"un élément dont le sémantique natif implicite ne sera pas mappé à l'API d'accessibilité.\" Pour remplacer le rôle par défaut **séparateur** dans un rôle `v-divider`, il suffit d'ajouter un prop `role=\"presentation\"` à votre composant. En outre, les composants `v-divider` ont un `aria-orientation=\"horizontal\"`. Si `vertical=\"true\"`, alors `aria-orientation=\"vertical\"` sera automatiquement défini. Si `role=\"presentation\"`, `aria-orientation=\"undefined\"`, c'est la valeur par défaut."
+  },
   "props": {
     "inset": "Ajoute l'indentation (72px) pour **dividers normaux** réduit la hauteur max pour **vertical**.",
     "vertical": "Affiche les diviseurs verticalement"

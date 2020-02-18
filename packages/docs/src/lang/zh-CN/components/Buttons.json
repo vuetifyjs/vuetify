@@ -77,7 +77,7 @@
   },
   "events": {
     "v-btn-toggle": {
-      "change": "Components.Inputs.events.change"
+      "change": "当用户交互更改输入时发出"
     }
   },
   "slots": {

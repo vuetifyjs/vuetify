@@ -35,7 +35,6 @@
     "appendIcon": "Ajoute une icône au composant, utilise la même syntaxe que `v-icon`",
     "backgroundColor": "Modifie la couleur de fond de l'entrée",
     "dark": "Applique la variante du thème foncé au composant. Cela va par défaut la couleur des composants à _white_ à moins que vous ayez configuré votre [thème d'application](/customization/thème) à **dark** ou si vous utilisez le prop **couleur** sur le composant. Vous pouvez trouver plus d'informations sur la documentation de Design de matériaux pour [thèmes foncés](https://material.io/design/color/dark-theme.html).",
-    "hideDetails": "Masque l'indice, erreurs de validation",
     "dense": "Réduit la hauteur de l'entrée",
     "height": "Définit la hauteur de l'entrée",
     "hint": "Texte d'indice",
@@ -46,8 +45,7 @@
     "prependIcon": "Ajoute une icône au composant, utilise la même syntaxe que `v-icon`",
     "required": "Indique l'entrée comme nécessaire; Ajoute un astérisque à la fin de l'étiquette; ne réalise aucune validation.",
     "tabindex": "Index des onglets",
-    "toggleKeys": "Tableau de codes clés qui basculera l'entrée (si elle supporte le basculement)",
-    "value": "Valeur d'entrée"
+    "toggleKeys": "Tableau de codes clés qui basculera l'entrée (si elle supporte le basculement)"
   },
   "slots": {
     "append": "Ajoute un élément après le contenu de l'entrée",
@@ -55,8 +53,6 @@
     "prepend": "Ajoute un élément avant le contenu de l'entrée"
   },
   "events": {
-    "blur": "Émis lorsque l'entrée est floue",
-    "change": "Émis lorsque l'entrée est modifiée par l'interaction utilisateur",
     "click": "Émis lorsque l'entrée est cliqué",
     "click:append": "Émis lorsque l'icône ajoutée est cliquée",
     "click:prepend": "Émis lorsque l'icône précédente est cliqué",

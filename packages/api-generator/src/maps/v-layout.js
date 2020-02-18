@@ -1,32 +1,24 @@
-const { sharedGridProps } = require('../helpers/variables')
+const { createItems, VGridProps } = require('../helpers/variables')
 
 module.exports = {
   'v-layout': {
     props: [
+      ...VGridProps,
+      ...createItems([
+        'column',
+        'reverse',
+        'wrap',
+      ], {
+        type: 'boolean',
+        default: 'false',
+        source: null,
+      }),
       {
         name: 'row',
         type: 'boolean',
         default: 'true',
         source: null,
       },
-      {
-        name: 'column',
-        type: 'boolean',
-        default: 'false',
-        source: null,
-      },
-      {
-        name: 'reverse',
-        type: 'boolean',
-        default: 'false',
-        source: null,
-      },
-      {
-        name: 'wrap',
-        type: 'boolean',
-        default: 'false',
-        source: null,
-      },
-    ].concat(sharedGridProps),
+    ],
   },
 }

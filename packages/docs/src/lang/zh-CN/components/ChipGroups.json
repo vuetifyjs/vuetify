@@ -1,11 +1,8 @@
 {
   "heading": "# 纸片组",
   "headingText": "`v-chip-group` 通过提供可添加的功能来添加 `v-chip` 组件。它用于使用纸片创建选择组。",
+  "usageText": "纸片组使用户可以方便地为更复杂的实现选择过滤选项。默认情况下，`v-chip-group` 将向右溢出，但可以更改为 **column** 模式。",
   "examples": {
-    "usage": {
-      "heading": "用例",
-      "desc": "纸片组使用户可以方便地为更复杂的实现选择过滤选项。默认情况下，`v-chip-group` 将向右溢出，但可以更改为 **column** 模式。"
-    },
     "toothbrush": {
       "heading": "### 牙刷卡片",
       "desc": "纸片组允许创建自定义接口，这些接口执行与项组或单选控件相同的操作，但在风格上有所不同。"

@@ -52,11 +52,11 @@ exports[`VTreeViewNode.ts should not be able to have active children with empty 
      class="v-treeview-node v-treeview-node--click"
 >
   <div class="v-treeview-node__root">
-    <i role="button"
-       class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
+    <button type="button"
+            class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
     >
       arrow_drop_down
-    </i>
+    </button>
     <div class="v-treeview-node__content">
       <div class="v-treeview-node__label">
         Child
@@ -71,11 +71,11 @@ exports[`VTreeViewNode.ts should render disabled item 1`] = `
      class="v-treeview-node v-treeview-node--disabled"
 >
   <div class="v-treeview-node__root">
-    <i role="button"
-       class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
+    <button type="button"
+            class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
     >
       arrow_drop_down
-    </i>
+    </button>
     <div class="v-treeview-node__content">
       <div class="v-treeview-node__prepend">
         <div>
@@ -100,11 +100,11 @@ exports[`VTreeViewNode.ts should use label slot 1`] = `
      class="v-treeview-node"
 >
   <div class="v-treeview-node__root">
-    <i role="button"
-       class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
+    <button type="button"
+            class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
     >
       arrow_drop_down
-    </i>
+    </button>
     <div class="v-treeview-node__content">
       <div class="v-treeview-node__label">
         <div>

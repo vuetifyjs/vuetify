@@ -6,7 +6,7 @@
   "lightAndDarkText2": "crwdns36958:0$vuetifycrwdne36958:0",
   "customizingHeader": "crwdns36960:0crwdne36960:0",
   "customizingText1": "crwdns36962:0crwdne36962:0",
-  "customizingText2": "crwdns36964:0crwdne36964:0",
+  "customizingText2": "crwdns56477:0crwdne56477:0",
   "customizingText3": "crwdns36966:0crwdne36966:0",
   "customizingText3a": "crwdns36968:0crwdne36968:0",
   "customizingText4": "crwdns36970:0crwdne36970:0",
@@ -20,7 +20,7 @@
   "optionHeader4": "crwdns36986:0crwdne36986:0",
   "optionText5": "crwdns36988:0crwdne36988:0",
   "optionHeader5": "crwdns36990:0crwdne36990:0",
-  "optionText6": "crwdns36992:0crwdne36992:0",
+  "optionText6": "crwdns56479:0crwdne56479:0",
   "themeGeneratorHeader": "crwdns36994:0crwdne36994:0",
   "themeGeneratorText1": "crwdns36996:0crwdne36996:0",
   "variantsSubheader": "crwdns36998:0crwdne36998:0",
@@ -28,5 +28,12 @@
   "variantsText2": "crwdns37002:0crwdne37002:0",
   "variantsText3": "crwdns37004:0crwdne37004:0",
   "disableSubheader": "crwdns41564:0crwdne41564:0",
-  "disableText1": "crwdns41566:0crwdne41566:0"
+  "disableText1": "crwdns41566:0crwdne41566:0",
+  "provideHeading1": "crwdns56481:0crwdne56481:0",
+  "provideText1": "crwdns56483:0[provide]crwdne56483:0",
+  "provideHeading2": "crwdns56485:0crwdne56485:0",
+  "provideText2": "crwdns56487:0$vuetifycrwdne56487:0",
+  "props": {
+    "root": "crwdns56489:0$vuetifycrwdne56489:0"
+  }
 }

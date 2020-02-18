@@ -1,10 +1,8 @@
 {
   "heading": "# Bottom sheets",
   "headingText": "The bottom sheet is a modified `v-dialog` that slides from the bottom of the screen, similar to a `v-bottom-navigation`. Whereas a bottom navigation component is for buttons and specific application level actions, a bottom sheet can contain anything.",
+  "usageText": "Here we display an example list of actions that could be present in an application.",
   "examples": {
-    "usage": {
-      "desc": "Here we display an example list of actions that could be present in an application."
-    },
     "inset": {
       "heading": "### Inset",
       "desc": "Bottom sheets can be inset, reducing their maximum width on desktop to 70%. This can be further reduced manually using the `width` prop."

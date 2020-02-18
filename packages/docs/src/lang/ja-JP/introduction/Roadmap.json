@@ -1,71 +1,86 @@
 {
   "headingText": "Vuetifyは常に開発をしています。私たちは継続的に既存のコードの改善に努力しているだけでなく、アプリケーションをより簡単にビルドできるために新しい機能を追加しています。以下は予定されている機能の暫定的なリストです。これは完全なリストではなく、予告なく変更されることがあります。",
-  "roadmapItems": [
-    {
+  "roadmapItems": {
+    "0": {
       "type": "リリース",
+      "complete": true,
       "title": "アルファ版立ち上げ",
       "caption": "2016年12月",
       "text": "Vuetifyが公式公開されました。40個のコンポーネントで当初公開され、実に46KBでした。"
     },
-    {
+    "1": {
       "type": "リリース",
+      "complete": true,
       "title": "v1.0 リリース",
       "caption": "2018年2月"
     },
-    {
+    "2": {
       "type": "リリース",
+      "complete": true,
       "title": "v1.1 リリース",
       "caption": "2018年6月"
     },
-    {
+    "3": {
       "type": "リリース",
+      "complete": true,
       "title": "v1.2 リリース",
       "caption": "2018年7月"
     },
-    {
+    "4": {
       "type": "リリース",
+      "complete": true,
       "title": "v1.3 リリース",
       "caption": "2018年10月"
     },
-    {
+    "5": {
       "type": "リリース",
+      "complete": true,
       "title": "AWS Cognito Vuex モジュール",
       "caption": "2018年11月"
     },
-    {
+    "6": {
       "type": "リリース",
+      "complete": true,
       "title": "v1.4 リリース",
       "caption": "2018年12月"
     },
-    {
+    "7": {
       "type": "リリース",
+      "complete": true,
       "title": "v1.5 リリース",
       "caption": "2019年2月"
     },
-    {
+    "8": {
       "type": "リリース",
+      "complete": true,
       "title": "v2.0 リリース **(Arcadia)**"
     },
-    {
+    "9": {
       "type": "リリース",
-      "title": "v2.1 リリース **(Vanguard)**",
-      "caption": "2019年Q3"
+      "complete": true,
+      "title": "v2.1 リリース **(Vanguard)**"
     },
-    {
+    "10": {
       "type": "リリース",
-      "title": "v2.2 リリース **(Tigris)**",
-      "caption": "2019年Q4"
+      "complete": true,
+      "title": "v2.2 リリース **(Tigris)**"
     },
-    {
+    "11": {
+      "value": true
+    },
+    "12": {
       "type": "リリース",
-      "title": "v2.3 リリース **(Orion)**",
-      "caption": "2020年Q1"
+      "value": true
     },
-    {
-      "type": "サイト",
+    "14": {
+      "type": "リリース"
+    },
+    "15": {
+      "type": "サイト"
+    },
+    "16": {
       "title": "Vuetifyのスニペット",
-      "caption": "未定",
-      "text": "Vuetifyのスニペットを作ったりシェアすることに特化した、Webサイト。"
+      "caption": "未定"
     }
-  ]
+  }
 }

@@ -1,8 +1,13 @@
 {
   "heading": "# 国際化 (Internationalization; i18n)",
+  "headingText": "Vuetify は、コンポーネントの国際化 (i18n) をサポートしています。アプリケーションをブートストラップする際に、利用可能なロケールと現在アクティブなロケールを**current**オプションで指定できます。**lang**サービスは [vue-i18n](#vue-i-18-n) との簡単な統合もサポートしています。",
   "gettingStarted": "## はじめる",
+  "gettingStartedText": "使用可能なロケールまたは現行ロケールを設定するには、Vuetify をインストールするときに `lang` オプションを指定します。提供された `locales` プロパティは既存のロケールとマージされます。実行時に、Vue インスタンスの`$vuetify` オブジェクトを使用してロケールを変更できます。",
   "availableLocalesText": "現在Vuetifyは、以下の言語の翻訳を提供しています:",
+  "alertInfo": "Vuetifyは基本的な変換関数 `t`のみを提供します。Vuetifyの[vue-i18n](#vue-i-18-n) との統合を利用するために、より高度な国際化機能に推奨されます。",
   "createTranslation": "## 翻訳を作成する",
+  "createTranslationText": "独自の翻訳を作成するには、以下のコードを使用するか、ファイル `vuetify/src/locale/en.ts` をコピーして名前を変更し、変更を加えます。",
   "customComponents": "## カスタムコンポーネント",
+  "customComponentsText": "国際化エンジンにフックする必要があるカスタム Vuetify コンポーネントを構築する場合は、`$vuetify.lang` API の一部である `t` 関数を使用できます。",
   "vueI18nHeader": "## Vue i18n"
 }

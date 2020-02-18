@@ -22,13 +22,13 @@ exports[`VTextField.ts should apply theme to label, counter, messages and icons 
         </div>
       </div>
       <div class="v-text-field__slot">
-        <label for="input-131"
+        <label for="input-129"
                class="v-label theme--light"
                style="left: 0px; position: absolute;"
         >
           foo
         </label>
-        <input id="input-131"
+        <input id="input-129"
                type="text"
         >
       </div>
@@ -77,7 +77,7 @@ exports[`VTextField.ts should have prefix and suffix 1`] = `
         <div class="v-text-field__prefix">
           $
         </div>
-        <input id="input-88"
+        <input id="input-87"
                type="text"
         >
         <div class="v-text-field__suffix">
@@ -177,7 +177,7 @@ exports[`VTextField.ts should render component with async loading and custom pro
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-text-field__slot">
-        <input id="input-73"
+        <input id="input-72"
                type="text"
         >
       </div>
@@ -219,7 +219,7 @@ exports[`VTextField.ts should render component with async loading and match snap
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-text-field__slot">
-        <input id="input-67"
+        <input id="input-66"
                type="text"
         >
       </div>

@@ -1,11 +1,8 @@
 {
   "heading": "crwdns45410:0crwdne45410:0",
   "headingText": "crwdns45412:0[v-chip-group]crwdne45412:0",
+  "usageText": "crwdns56185:0crwdne56185:0",
   "examples": {
-    "usage": {
-      "desc": "crwdns39152:0crwdne39152:0",
-      "uninverted": true
-    },
     "colored": {
       "heading": "crwdns45414:0crwdne45414:0",
       "desc": "crwdns32836:0crwdne32836:0"

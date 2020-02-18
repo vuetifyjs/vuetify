@@ -1,1 +1,4 @@
-{}
+{
+  "heading": "# カラー",
+  "headingText": "追加設定なしに**Sass**と**javascript**から [Material Design spec](https://material.io/guidelines/style/color.html) のすべての色にアクセスできます。これらの値は、スタイルシート内、コンポーネントファイル内、および **color class** システムを介して実際のコンポーネントで使用できます。"
+}
