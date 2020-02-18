@@ -4,7 +4,6 @@
   "community": "활기찬 커뮤니티",
   "communityCaption": "Vue 생태계 중 가장 활발한 커뮤니티를 만날 수 있습니다. 문제가 생겼나요? 바로 도움을 구해 보세요. 버그를 찾았나요? Firebase에 대하여 이야기 하고 싶나요? 어썸한것을 만들었나요? 우리에게 알려주세요! [awesome-vuetify](https://github.com/vuetifyjs/awesome-vuetify) Repository 에 당신이 발견한 무엇이든 알려주세요.",
   "communityHeader": "## 개발자 지원",
-  "communityText": "Vuetify 와 함깨면 당신은 혼자가 아닙니다. [Discord server](https://community.vuetifyjs.com) 의 개발팀과 다른 커뮤니티 멤버들을 통한 즉각적은 도움을 받을 수 있습니다. 전세계에 당신이 노력한 성과를 자랑하고 싶다면 우리에게 말 해 주세요! 혹여나 Vuetify를 지원하고 싶나요? [Github sponsor](https://github.com/sponsors/johnleider) 를 통해 지원해주시고 Vuetify 주요 제작자의 개인적인 지원을 받아보세요! [schedule time](/professional-support/consulting)",
   "comparisonHeader": "다른 프레임웤들과 비교",
   "comparisonText": "2014년에 처음 세상에 나온 [Vue.js](https://vuejs.org/) 는 급격히 성장하여 세계에서 가장 인기있는 JavaScript 프레임워크가 되었습니다. Vue.js 의 가장 큰 성공 요인 중하나는 간결한 모듈화로 어떠한 앱에서도 재사용 가능한 컴포넌트를 쉽게 만들 수 있다는 것 입니다. UI 라이브러리는 명세화된 스타일 가이드와 어썸한 웹앱을 만들기 위한 툴들을 제공하는 집합체 입니다. 2019년 최고의 Vue.js 컴포넌트 라이브러리를 비교해보았습니다.",
   "continuous": "Continuous",

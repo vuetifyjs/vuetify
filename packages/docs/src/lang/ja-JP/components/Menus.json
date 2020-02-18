@@ -3,7 +3,45 @@
   "headingText": "`v-menu`コンポーネントは、アクティブにするために使用される要素の位置にメニューを表示します。",
   "examples": {
     "usage": {
-      "desc": "メニューをアクティブにする要素を `activator`スロットに忘れずに配置してください。"
+      "desc": "メニューをアクティブにする要素を `activator`スロットに忘れずに配置してください。",
+      "uninverted": true
+    },
+    "absolute": {
+      "uninverted": true
+    },
+    "disabled": {
+      "heading": "### 無効化",
+      "uninverted": true
+    },
+    "offset-x": {
+      "uninverted": true
+    },
+    "offset-y": {
+      "uninverted": true
+    },
+    "close-on-click": {
+      "uninverted": true
+    },
+    "close-on-content-click": {
+      "uninverted": true
+    },
+    "absolute-without-activator": {
+      "uninverted": true
+    },
+    "menu-activator-tooltip": {
+      "uninverted": true
+    },
+    "hover": {
+      "uninverted": true
+    },
+    "menus": {
+      "uninverted": true
+    },
+    "custom-transition": {
+      "uninverted": true
+    },
+    "popover": {
+      "uninverted": true
     }
   },
   "props": {

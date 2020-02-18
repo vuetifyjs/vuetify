@@ -1,14 +1,1 @@
-{
-  "examples": {
-    "visibility": {
-      "heading": "Visibilidad"
-    },
-    "inline": {
-      "desc": "Las insignias pueden ser colocadas en línea con el texto."
-    },
-    "icon": {
-      "heading": "Ícono",
-      "desc": "La insignia puede utilizar cualquiera de los íconos soportados actualmente."
-    }
-  }
-}
+{}

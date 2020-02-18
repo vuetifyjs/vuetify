@@ -10,6 +10,7 @@
   "props": {
     "minHeight": "Mixins.Measurable.props.minHeight",
     "options": "传递给 [Intersection observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) 构造函数的选项。",
+    "tag": "Components.Sheets.props.tag",
     "transition": "Mixins.Transitionable.props.transition"
   }
 }

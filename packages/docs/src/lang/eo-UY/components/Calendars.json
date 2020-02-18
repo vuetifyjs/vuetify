@@ -32,6 +32,7 @@
     "eventMore": "crwdns40922:0crwdne40922:0",
     "eventMoreText": "crwdns40924:0crwdne40924:0",
     "eventName": "crwdns40926:0crwdne40926:0",
+    "eventOverlapMode": "crwdns56163:0crwdne56163:0",
     "eventOverlapThreshold": "crwdns40928:0crwdne40928:0",
     "eventRipple": "crwdns40930:0crwdne40930:0",
     "events": "crwdns40932:0crwdne40932:0",
@@ -42,6 +43,7 @@
     "intervalCount": "crwdns34624:0crwdne34624:0",
     "intervalFormat": "crwdns34644:0crwdne34644:0",
     "intervalHeight": "crwdns34618:0crwdne34618:0",
+    "intervalWidth": "crwdns56165:0crwdne56165:0",
     "intervalMinutes": "crwdns34620:0crwdne34620:0",
     "intervalStyle": "crwdns34646:0crwdne34646:0",
     "locale": "crwdns34612:0crwdne34612:0",
@@ -72,7 +74,8 @@
     "scrollToTime": "crwdns34664:0crwdne34664:0",
     "timeToY": "crwdns34660:0crwdne34660:0",
     "updateEventVisibility": "crwdns40942:0crwdne40942:0",
-    "updateTimes": "crwdns34652:0crwdne34652:0"
+    "updateTimes": "crwdns34652:0crwdne34652:0",
+    "getVisibleEvents": "crwdns56167:0crwdne56167:0"
   },
   "slots": {
     "day-body": "crwdns40944:0crwdne40944:0",
@@ -80,8 +83,9 @@
     "day-label": "crwdns40948:0crwdne40948:0",
     "day-month": "crwdns40950:0crwdne40950:0",
     "day": "crwdns40952:0crwdne40952:0",
-    "event": "crwdns40954:0crwdne40954:0",
-    "interval": "crwdns40956:0crwdne40956:0"
+    "event": "crwdns56169:0crwdne56169:0",
+    "interval": "crwdns40956:0crwdne40956:0",
+    "interval-header": "crwdns56171:0crwdne56171:0"
   },
   "events": {
     "change": "crwdns34682:0crwdne34682:0",

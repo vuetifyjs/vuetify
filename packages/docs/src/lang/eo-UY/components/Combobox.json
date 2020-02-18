@@ -1,10 +1,8 @@
 {
   "heading": "crwdns46034:0crwdne46034:0",
   "headingText": "crwdns46036:0[v-autocomplete]crwdne46036:0",
+  "usageText": "crwdns56189:0crwdne56189:0",
   "examples": {
-    "usage": {
-      "desc": "crwdns34108:0crwdne34108:0"
-    },
     "no-data": {
       "heading": "crwdns46038:0crwdne46038:0",
       "desc": "crwdns40582:0crwdne40582:0"
@@ -24,29 +22,6 @@
   },
   "props": {
     "dark": "crwdns40588:0crwdne40588:0",
-    "delimiters": "crwdns42576:0crwdne42576:0",
-    "value": "crwdns34122:0crwdne34122:0"
-  },
-  "slots": {
-    "append": "crwdns34124:0crwdne34124:0",
-    "append-outer": "crwdns34126:0crwdne34126:0",
-    "item": "crwdns40590:0crwdne40590:0",
-    "prepend": "crwdns34128:0crwdne34128:0",
-    "prepend-inner": "crwdns34130:0crwdne34130:0",
-    "append-item": "crwdns34132:0crwdne34132:0",
-    "no-data": "crwdns34134:0crwdne34134:0",
-    "prepend-item": "crwdns34136:0crwdne34136:0",
-    "selection": "crwdns40592:0crwdne40592:0"
-  },
-  "events": {
-    "change": "crwdns34142:0crwdne34142:0",
-    "click:append": "crwdns34144:0crwdne34144:0",
-    "click:append-outer": "crwdns34146:0crwdne34146:0",
-    "click:clear": "crwdns34148:0crwdne34148:0",
-    "click:prepend": "crwdns34150:0crwdne34150:0",
-    "click:prepend-inner": "crwdns34152:0crwdne34152:0",
-    "update:error": "crwdns34154:0crwdne34154:0",
-    "update:list-index": "crwdns43138:0crwdne43138:0",
-    "update:search-input": "crwdns40594:0crwdne40594:0"
+    "delimiters": "crwdns42576:0crwdne42576:0"
   }
 }

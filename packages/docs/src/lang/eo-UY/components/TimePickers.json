@@ -75,6 +75,10 @@
     "click:hour": "crwdns38268:0crwdne38268:0",
     "click:minute": "crwdns38270:0crwdne38270:0",
     "click:second": "crwdns38272:0crwdne38272:0",
-    "change": "crwdns38274:0crwdne38274:0"
+    "change": "crwdns38274:0crwdne38274:0",
+    "update:period": "crwdns56315:0crwdne56315:0"
+  },
+  "slots": {
+    "default": "crwdns56317:0crwdne56317:0"
   }
 }

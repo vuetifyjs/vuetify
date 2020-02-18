@@ -2,7 +2,6 @@
   "heading": "# Support à long terme",
   "headingText": "En tant que framework de composants, nous comprenons que de nombreux projets qui utilisent Vuetify ont des cycles de développement qui empêchent la mise à niveau vers la dernière version. Pour fournir aux développeurs et entreprises la tranquilité d'esprit, nous offrons un **Support à long terme** pour la dernière _mineur_ de la dernière version _majeure_ . Cela signifie que pour chaque version _majeure_, vous pouvez être sereins en sachant que pour **12 mois** après une nouvelle version majeure, votre version existante sera mise à jour pour les bugs critiques et les vulnérabilités de sécurité.",
   "2header": "## Vuetify 2.0",
-  "2text": "La dernière version de Vuetify, basée sur la spécification Material Design 2. Elle inclut plusieurs avancées vis à vis de la v1.5 et est la version recommandée pour les fonctionnalités les plus récentes. Cette version est activement maintenue et a une [roadmap](/introduction/roadmap) des fonctionnalités à venir.",
   "2features": [
     "**7 nouveaux composants**",
     "**Mise à jour complète vers la Spécification MD2**",
