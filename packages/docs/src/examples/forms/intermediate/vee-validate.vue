@@ -58,7 +58,7 @@
 
   extend('max', {
     ...max,
-    message: 'The name {_field_} may not be greater than {length} characters',
+    message: '{_field_} may not be greater than {length} characters',
   })
 
   extend('email', {
