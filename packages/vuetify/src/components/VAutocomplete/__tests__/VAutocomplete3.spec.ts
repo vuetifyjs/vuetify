@@ -158,4 +158,38 @@ describe('VAutocomplete.ts', () => {
 
     expect(wrapper.vm.selectedIndex).toBe(-1)
   })
+
+  it('should close menu when append icon is clicked', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo', 'bar'],
+      },
+    })
+
+    const append = wrapper.find('.v-input__append-inner')
+    const slot = wrapper.find('.v-input__slot')
+    slot.trigger('click')
+    expect(wrapper.vm.isMenuActive).toBe(true)
+    append.trigger('mousedown')
+    append.trigger('mouseup')
+    append.trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isMenuActive).toBe(false)
+  })
+
+  it('should open menu when append icon is clicked', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo', 'bar'],
+      },
+    })
+
+    const append = wrapper.find('.v-input__append-inner')
+
+    append.trigger('mousedown')
+    append.trigger('mouseup')
+    append.trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isMenuActive).toBe(true)
+  })
 })
