@@ -53,17 +53,17 @@
 
   extend('required', {
     ...required,
-    message: 'Field can not be empty',
+    message: '{_field_} can not be empty',
   })
 
   extend('max', {
     ...max,
-    message: 'The name field may not be greater than {length} characters',
+    message: '{_field_} may not be greater than {length} characters',
   })
 
   extend('email', {
     ...email,
-    message: 'This field must be a valid email',
+    message: '{_field_} must be a valid email',
   })
 
   export default {
