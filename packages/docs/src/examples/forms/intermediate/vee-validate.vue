@@ -63,7 +63,7 @@
 
   extend('email', {
     ...email,
-    message: 'This {_field_} must be a valid email',
+    message: '{_field_} must be a valid email',
   })
 
   export default {
