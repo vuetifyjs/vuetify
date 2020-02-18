@@ -24,12 +24,14 @@
 
   tbody
     tr
-      &:not(:last-child) td
-        &:not(.v-data-table__mobile-row)
-          border-bottom: thin solid map-get($material, 'dividers')
+      &:not(:last-child)
+        td,
+        th
+          &:not(.v-data-table__mobile-row)
+            border-bottom: thin solid map-get($material, 'dividers')
 
-        &:last-child
-          border-bottom: thin solid map-get($material, 'dividers')
+          &:last-child
+            border-bottom: thin solid map-get($material, 'dividers')
 
       &.active
         background: map-deep-get($material, 'table', 'active')
