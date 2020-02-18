@@ -314,7 +314,7 @@ export default VDataIterator.extend({
     genDefaultGroupedRow (group: string, items: any[], props: DataScopeProps) {
       const isOpen = !!this.openCache[group]
       const children: VNodeChildren = [
-        this.$createElement('template', { slot: 'row.content' }, this.genDefaultRows(items, props)),
+        this.$createElement('template', { slot: 'row.content' }, this.genRows(items, props)),
       ]
       const toggleFn = () => this.$set(this.openCache, group, !this.openCache[group])
       const removeFn = () => props.updateOptions({ groupBy: [], groupDesc: [] })
