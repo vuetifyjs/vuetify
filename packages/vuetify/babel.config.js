@@ -54,7 +54,7 @@ if (['lib', 'es5'].includes(env)) {
 
 if (env !== 'lib') {
   module.exports.plugins.push([
-    '@babel/plugin-proposal-object-rest-spread',
+    '@babel/plugin-proposal-nullish-coalescing-operator',
     {
       loose: true,
     },
@@ -65,5 +65,5 @@ if (env !== 'lib') {
       loose: true,
     },
   ])
-  module.exports.plugins.push('@babel/plugin-proposal-nullish-coalescing-operator')
+  module.exports.plugins.push('@babel/plugin-proposal-object-rest-spread')
 }
