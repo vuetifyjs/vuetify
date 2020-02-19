@@ -13,6 +13,11 @@ module.exports = {
         loose: true,
       },
     ],
-    '@babel/plugin-proposal-nullish-coalescing-operator',
+    [
+      '@babel/plugin-proposal-nullish-coalescing-operator',
+      {
+        loose: true,
+      },
+    ],
   ]
 }

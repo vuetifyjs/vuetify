@@ -53,7 +53,12 @@ if (['lib', 'es5'].includes(env)) {
 }
 
 if (env !== 'lib') {
-  module.exports.plugins.push('@babel/plugin-proposal-object-rest-spread')
+  module.exports.plugins.push([
+    '@babel/plugin-proposal-object-rest-spread',
+    {
+      loose: true,
+    },
+  ])
   module.exports.plugins.push([
     '@babel/plugin-proposal-optional-chaining',
     {
