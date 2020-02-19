@@ -80,7 +80,6 @@ export function useScroll (
 
   watch(isScrollActive, () => (savedScroll.value = 0))
 
-  // TODO: requires vue@3.0.0-alpha.5
   watch(() => props.scrollTarget, () => {
     const newTarget = props.scrollTarget ? document.querySelector(props.scrollTarget) : window
 
