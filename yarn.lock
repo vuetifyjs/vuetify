@@ -14284,15 +14284,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@^3.8.0-dev.20200201:
-  version "3.8.0-dev.20200201"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.8.0-dev.20200201.tgz#e03210f5c7915f89cb77bd38793d12a69933a1a6"
-  integrity sha512-KhaK6J3dIg6p9t24UVhBLcBIav4MpMExlD6nf18cVwp9LELuqhWu0NDmnLdSN0ovsrbcIJNmobQ1xC7vLN21eg==
-
-typescript@^3.8.0-dev.20200206:
-  version "3.8.0-dev.20200206"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.8.0-dev.20200206.tgz#4d5c377db14a9f166d172934a4add60a9157881d"
-  integrity sha512-wCLl+s+qhZX46hDlYuS9FDAT1J0LgDYRYIPebQWXFuYSyy7eZGUgiISEajSEhEV02+bgwrCiobm/2jgSLTMYxw==
+typescript@^3.8.1-rc:
+  version "3.8.1-rc"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.8.1-rc.tgz#f94333c14da70927ccd887be2e91be652a9a09f6"
+  integrity sha512-aOIe066DyZn2uYIiND6fXMUUJ70nxwu/lKhA92QuQzXyC86fr0ywo1qvO8l2m0EnDcfjprYPuFRgNgDj7U2GlQ==
 
 typestrict@^1.0.2:
   version "1.0.2"
