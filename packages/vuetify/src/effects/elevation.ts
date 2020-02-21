@@ -1,5 +1,5 @@
 // Setup
-import { computed } from 'vue'
+import { computed, ComponentObjectPropsOptions } from 'vue'
 
 // Types
 export interface ElevationProps {
@@ -10,7 +10,7 @@ export interface ElevationProps {
 // Props
 export function elevationProps (
   defaults: Partial<ElevationProps> = {}
-) {
+): ComponentObjectPropsOptions<ElevationProps> {
   return {
     elevation: {
       type: [Number, String],
