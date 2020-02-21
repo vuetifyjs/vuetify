@@ -1,5 +1,8 @@
 // Setup
-import { computed, ComponentObjectPropsOptions } from 'vue'
+import {
+  computed,
+  ComponentObjectPropsOptions
+} from 'vue'
 
 // Types
 export interface ElevationProps {
