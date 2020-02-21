@@ -83,5 +83,5 @@ export const maskText = (text: string | null | undefined, masked: string | strin
 }
 
 export const unmaskText = (text: string): string => {
-  return text ? String(text).replace(new RegExp(defaultDelimiters, 'g'), '') : text
+  return text ? String(text).replace(new RegExp(defaultDelimiters.source, 'g'), '') : text
 }
