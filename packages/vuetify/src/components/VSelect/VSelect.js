@@ -257,11 +257,9 @@ export default VTextField.extend({
   methods: {
     /** @public */
     blur (e) {
+      VTextField.options.methods.blur.call(this, e)
       this.isMenuActive = false
-      this.isFocused = false
-      this.$refs.input && this.$refs.input.blur()
       this.selectedIndex = -1
-      this.onBlur(e)
     },
     /** @public */
     activateMenu () {
@@ -529,9 +527,6 @@ export default VTextField.extend({
     },
     getValue (item) {
       return getPropertyFromItem(item, this.itemValue, this.getText(item))
-    },
-    onBlur (e) {
-      this.$emit('blur', e)
     },
     onChipInput (item) {
       if (this.multiple) this.selectItem(item)
