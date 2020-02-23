@@ -227,7 +227,8 @@ export default baseMixins.extend({
       this.callUpdate()
     },
     invertedScroll (val: boolean) {
-      this.isActive = !val
+      if (val && this.currentScroll === 0) this.isActive = false
+      if (!val) this.isActive = true
     },
   },
 
