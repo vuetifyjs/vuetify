@@ -107,6 +107,7 @@ export default VSlider.extend({
         input.data = input.data || {}
         input.data.attrs = input.data.attrs || {}
         input.data.attrs.value = this.internalValue[i]
+        input.data.attrs.id = !i ? `min-${this._uid}` : `max-${this._uid}`
 
         return input
       })
