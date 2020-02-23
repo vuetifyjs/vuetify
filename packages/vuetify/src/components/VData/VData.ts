@@ -192,7 +192,6 @@ export default Vue.extend({
       handler (options: DataOptions, old: DataOptions) {
         if (deepEqual(options, old)) return
         this.$emit('update:options', options)
-        this.$emit('pagination', this.pagination)
       },
       deep: true,
       immediate: true,
@@ -254,6 +253,12 @@ export default Vue.extend({
     computedItems: {
       handler (computedItems: any[]) {
         this.$emit('current-items', computedItems)
+      },
+      immediate: true,
+    },
+    pagination: {
+      handler () {
+        this.$emit('pagination', this.pagination)
       },
       immediate: true,
     },
