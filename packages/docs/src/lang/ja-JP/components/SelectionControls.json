@@ -1,1 +1,9 @@
-{}
+{
+  "heading": "# 選択コントロール",
+  "headingText": "選択コントロール・コンポーネントを使用すると、ユーザーはオプションを選択できます。これらのコンポーネントは、**状態を維持しない**ので、'v-model'propを使用する必要があります。",
+  "props": {
+    "v-simple-checkbox": {
+      "light": "Mixins.Themeable.props.light"
+    }
+  }
+}

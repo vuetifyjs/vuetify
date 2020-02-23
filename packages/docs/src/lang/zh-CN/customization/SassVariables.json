@@ -1,11 +1,5 @@
 {
   "heading": "# SASS 变量",
-  "headingText": "**2.0** 版本开始，Vuetify 将使用 **SASS/SCSS**。在你的 `vue.config.js` 文件中使用这个数据选项，我们同样接受自定义变量。可用变量的列表位于每个组件的文件夹中。为了构建这些 SASS 文件，你需要配置你的应用支持 [SASS](https://sass-lang.com/dart-sass) 和 [Fibers](https://github.com/laverdet/node-fibers)。可以在创建新的 Vue 应用程序时选择此选项 [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugin-vuetify)。",
-  "setupHeading": "## Vue CLI 3 安装",
-  "setupText1": "如果你尚未安装 Vuetify，请查看 [quick-start guide](/getting-started/quick-start#vue-cli-3-install)。 只需在你的 src 目录中创建一个名为 `sass`,`scss` 或 `styles` 的文件夹，文件名为 `variables. scss` 或 `variables.sass` 。vuetify-loader 将自动引导你所有的样式文件。",
-  "setupText2": "当你运行 yarn serve 时，vuetify-cli-plugin 自动将全局 Vuetify 变量绑定到你所有的 sass/scss 文件。 当对个别组件变量进行更改时，你仍然需要手动包含其变量文件。",
-  "sassAlert1": "注意：SCSS/SASS 变量只支持 [A-la-carte installation](/customization/a-la-carte)。当使用 **vue-cli-plugin-vuetify** 插件时功能会自动设置。",
-  "setupText3": "下一次运行 **yarn run serve** 时，Vue CLI 3 将把变量文件注入到你的样式文件中。 在设置里，Vuetify 全局风格将被绑定到编译样式的顶端，并用来覆盖默认行为。",
-  "webpackHeading": "## Webpack 安装",
-  "webpackText1": "只有当你正在修改 webpack 项目中的 SASS 变量时，此步骤才是必要的。 如果你使用 **vue-cli-plugin-vuetify** 插件，通过在项目的 `src/sass` 目录中创建 `variables.sass` 或 `variables.scss` 文件，可以自动为你处理此问题。有关如何设置加载程序的详细指南，请参阅 [Quick start](/getting-started/quick-start#webpack-installation)。"
+  "nuxtHeading1": "## Nuxt 安装",
+  "webpackHeading": "## Webpack 安装"
 }

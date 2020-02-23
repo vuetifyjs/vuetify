@@ -9,11 +9,11 @@
     "polyfill": "Supported with polyfill"
   },
   "ie11Header": "## IE11 &amp; Safari 9 support",
-  "ie11Text": "Vuetify utilizes features of ES2015/2017 that require the need to use polyfills for **Internet Explorer 11** and **Safari 9/10**. If you are using Vue CLI 3, this is done automatically for you. Otherwise, in your project directory, you can install `babel-polyfill`:",
-  "ie11Text1": "Vuetify utilizes features of ES2015/2017 that require the need to use polyfills for **Internet Explorer 11** and **Safari 9/10**. If you are using Vue CLI 3, this is done automatically for you. Otherwise, in your project directory, you can install `babel-polyfill`:",
+  "ie11Text": "Vuetify utilizes features of ES2015/2017 that require the need to use polyfills for **Internet Explorer 11** and **Safari 9/10**. If you are using Vue CLI, this is done automatically for you. Otherwise, in your project directory, you can install `babel-polyfill`:",
+  "ie11Text1": "Vuetify utilizes features of ES2015/2017 that require the need to use polyfills for **Internet Explorer 11** and **Safari 9/10**. If you are using Vue CLI, this is done automatically for you. Otherwise, in your project directory, you can install `babel-polyfill`:",
   "ie11Text2": "It is important to include the plugin as early as possible within your main **index.js** file. If using a Vuetify SSR package, this will apply to the **client-entry.js** file",
   "ie11Text3": "It is recommended that you use `babel-preset-env` with the corresponding polyfill to ensure only the necessary polyfills are added to your application. For more information on `babel-preset-env`, [visit the documentation](https://babeljs.io/docs/en/next/babel-preset-env.html)",
   "ie11Text4": "Once installed, add the preset to your `.babelrc` or `babel.config.js`",
-  "ie11Text5": "Unfortunately Vue CLI 3 doesn't automatically bring IE11 compatibility in which you may encounter various errors (such as <i>Symbol is not defined</i>). To assist in resolving these errors you may need to manually add `transpileDependencies` parameter in `vue.config.js`.",
+  "ie11Text5": "Unfortunately Vue CLI doesn't automatically bring IE11 compatibility in which you may encounter various errors (such as <i>Symbol is not defined</i>). To assist in resolving these errors you may need to manually add `transpileDependencies` parameter in `vue.config.js`.",
   "ie11Text6": "Due to Internet Explorer's limited support for `<template>` tags, you must send fully compiled dom elements to the browser. This can be done by either building your Vue code in advance or by creating helper components to replace the dom elements. For instance, if sent directly to IE, this will fail:"
 }

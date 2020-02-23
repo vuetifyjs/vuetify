@@ -71,7 +71,7 @@
   export default {
     data () {
       return {
-        e1: 0,
+        e1: 1,
       }
     },
   }

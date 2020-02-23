@@ -2,9 +2,10 @@
 @import './_variables.scss'
 
 +theme(v-text-field) using ($material)
-  border-color: map-get($material, 'input-bottom-line')
+  > .v-input__control > .v-input__slot:before
+    border-color: map-get($material, 'input-bottom-line')
 
-  &:not(.v-input--has-state):hover
+  &:not(.v-input--has-state):hover > .v-input__control > .v-input__slot:before
     border-color: map-deep-get($material, 'text', 'primary')
 
   &.v-input--is-disabled .v-input__slot::before
@@ -30,9 +31,14 @@
       > .v-input__control > .v-input__slot
         background: map-deep-get($material, 'inputs', 'solo-inverted-focused')
 
-        .v-label,
         input
           color: map-deep-get($material, 'inputs', 'solo-inverted-focused-text')
+
+        input::placeholder
+          color: map-deep-get($material, 'inputs', 'solo-inverted-focused-placeholder')
+
+        .v-label
+          color: map-deep-get($material, 'inputs', 'solo-inverted-focused-label')
 
   &--outlined
     &:not(.v-input--is-focused)
@@ -62,7 +68,6 @@
   fieldset,
   .v-input__control,
   .v-input__slot
-    border-color: inherit
     border-radius: inherit
 
   fieldset,
@@ -369,6 +374,7 @@
       +label-position($text-field-outlined-dense-label-position-x, $text-field-outlined-dense-label-position-y)
 
     fieldset
+      border-collapse: collapse
       border-color: currentColor
       border-style: solid
       border-width: $text-field-outlined-fieldset-border-width
@@ -388,6 +394,14 @@
       +rtl()
         padding-right: $text-field-outlined-fieldset-padding
 
+
+    &.v-text-field--reverse fieldset
+      +ltr()
+        padding-right: $text-field-outlined-fieldset-padding
+
+      +rtl()
+        padding-left: $text-field-outlined-fieldset-padding
+
     legend
       line-height: $text-field-outlined-legend-line-height
       padding: 0
@@ -398,6 +412,13 @@
 
       +rtl()
         text-align: right
+
+    &.v-text-field--reverse legend
+      +ltr()
+        text-align: right
+
+      +rtl()
+        text-align: left
 
     &.v-text-field--rounded
       legend
@@ -438,6 +459,9 @@
     .v-input__control
       min-height: $text-field-solo-control-min-height
       padding: 0
+
+      input
+        caret-color: auto
 
     &.v-input--dense > .v-input__control
       min-height: $text-field-solo-dense-control-min-height

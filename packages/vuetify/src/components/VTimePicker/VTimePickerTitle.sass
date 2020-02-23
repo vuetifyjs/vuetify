@@ -1,4 +1,5 @@
 @import './_variables.scss'
+@import '../VPicker/_variables.scss'
 
 .v-time-picker-title
   color: $time-picker-title-color
@@ -23,11 +24,20 @@
   display: flex
   flex-direction: column
   font-size: $time-picker-ampm-title-font-size
-  margin: $time-picker-ampm-title-margin
   text-transform: uppercase
+
+  +ltr()
+    margin: $time-picker-ampm-title-margin-ltr
+
+  +rtl()
+    margin: $time-picker-ampm-title-margin-rtl
 
   div:only-child
     flex-direction: row
+
+  &--readonly
+    .v-picker__title__btn.v-picker__title__btn--active
+      opacity: $picker-inactive-btn-opacity
 
 .v-picker__title--landscape
   .v-time-picker-title

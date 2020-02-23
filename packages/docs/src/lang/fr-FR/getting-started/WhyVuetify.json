@@ -18,7 +18,7 @@
     "Treeshaking automatique avec [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader)",
     "API de composants étendue",
     "Prise en charge SSR, PWA et application mobile",
-    "Support vue CLI 3",
+    "Support Vue CLI",
     "Prise en charge de l'Accessibilité **(a11y)**",
     "Prise en charge de l'internationalisation **(i18n)**",
     "Prise en charge du RTL **(bidirectionalité)**",

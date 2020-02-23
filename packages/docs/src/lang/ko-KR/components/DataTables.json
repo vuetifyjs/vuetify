@@ -15,9 +15,6 @@
     "sort": {
       "desc": "정렬 또한 `pagenation` prop을 통해 외부에서 제어될 수 있습니다. `.sync` 수식어(modifier)를 반드시 사용해야 한다는 것을 기억하세요. \n `pagenation` prop으로 또한 기본 정렬 열(default sorted column) 을 정할 수도 있습니다."
     },
-    "edit-dialog": {
-      "desc": "`v-edit-dialog` 컴포넌트로 데이터 테이블 내에서의 인라인 편집이 가능합니다. **persistent* prop 을 추가하여 외부를 클릭했을 때 다이얼로그가 닫히는 것을 막을 수 있습니다."
-    },
     "crud": {
       "desc": "데이터 테이블에서 `v-dialog` 컴포넌트를 이용해 각 행을 편집하는 방식의 CRUD 액션입니다.\n(data-table with CRUD actions using a v-dialog component for editing each row)"
     }

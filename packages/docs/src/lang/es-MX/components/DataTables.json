@@ -15,9 +15,6 @@
     "sort": {
       "desc": "El ordenamiento también puede ser controlado externamente al utilizar la prop `pagination`. Recuerda que debes aplicar el modificador `.sync`. Puedes también utilizar esa prop para configurar la columna ordenada por default."
     },
-    "edit-dialog": {
-      "desc": "El componente `v-edit-dialog` se utiliza para la edición _inline_ dentro de los data tables."
-    },
     "crud": {
       "desc": "Un data-table con acciones de Crear, Leer, Actualizar y Borrar (CRUD en inglés) que utiliza un componente `v-dialog` para editar cada fila"
     }
@@ -28,8 +25,7 @@
       "saveText": "Configura el texto default para el botón de guardar cuando se usa la prop **large**"
     },
     "v-data-table": {
-      "headers": "Un arreglo de objetos en el que cada uno describe el encabezado de una columna. Ve el ejemplo de abajo para una definición de todas las propiedades.",
-      "headersLength": "Pueden ser utilizados en combinación con `hide-headers` para especificar el número de columnas en la table que permiten que las filas con expansión y la barra de progreso funcione apropidadamente."
+      "headers": "Un arreglo de objetos en el que cada uno describe el encabezado de una columna. Ve el ejemplo de abajo para una definición de todas las propiedades."
     }
   }
 }

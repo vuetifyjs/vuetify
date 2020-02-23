@@ -2,6 +2,8 @@
   "heading": "crwdns45606:0crwdne45606:0",
   "headingText": "crwdns45608:0crwdne45608:0",
   "objectAlert": "crwdns39656:0crwdne39656:0",
+  "autoAlert": "crwdns56289:0crwdne56289:0",
+  "autocompleteAlert": "crwdns56291:0[MDN]crwdne56291:0",
   "examples": {
     "usage": {
       "desc": "crwdns33154:0crwdne33154:0"
@@ -58,6 +60,7 @@
     "debounceSearch": "crwdns33194:0crwdne33194:0",
     "deletableChips": "crwdns33196:0crwdne33196:0",
     "disabled": "crwdns33200:0crwdne33200:0",
+    "disableLookup": "crwdns56293:0crwdne56293:0",
     "eager": "crwdns39680:0crwdne39680:0",
     "editable": "crwdns33202:0[spec]crwdne33202:0",
     "filter": "crwdns33204:0crwdne33204:0",
@@ -83,26 +86,13 @@
     "value": "crwdns33244:0crwdne33244:0"
   },
   "slots": {
-    "append": "crwdns33246:0crwdne33246:0",
     "append-item": "crwdns33254:0crwdne33254:0",
-    "append-outer": "crwdns33248:0crwdne33248:0",
     "item": "crwdns39686:0crwdne39686:0",
     "no-data": "crwdns33256:0crwdne33256:0",
-    "prepend": "crwdns33250:0crwdne33250:0",
-    "prepend-inner": "crwdns33252:0crwdne33252:0",
     "prepend-item": "crwdns33258:0crwdne33258:0",
     "selection": "crwdns39688:0crwdne39688:0"
   },
   "events": {
-    "blur": "crwdns39690:0crwdne39690:0",
-    "change": "crwdns33264:0crwdne33264:0",
-    "click:append": "crwdns33266:0crwdne33266:0",
-    "click:append-outer": "crwdns33268:0crwdne33268:0",
-    "click:clear": "crwdns33270:0crwdne33270:0",
-    "click:prepend": "crwdns33272:0crwdne33272:0",
-    "click:prepend-inner": "crwdns33274:0crwdne33274:0",
-    "focus": "crwdns39692:0crwdne39692:0",
-    "update:error": "crwdns33276:0crwdne33276:0",
     "update:list-index": "crwdns43094:0crwdne43094:0",
     "update:search-input": "crwdns39694:0crwdne39694:0"
   }

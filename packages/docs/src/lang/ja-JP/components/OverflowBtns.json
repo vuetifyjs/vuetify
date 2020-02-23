@@ -1,1 +1,13 @@
-{}
+{
+  "heading": "# オーバーフロー・ボタン",
+  "headingText": "'v-overflow-btn' は、ユーザーがリストから項目を選択できるようにするために使用されます。`editable`, `overflow`, `segmented`の3つのバリエーションがあります。",
+  "examples": {
+    "usage": {
+      "desc": "`v-overflow-btn`は選択リストの作成に使用されます。"
+    },
+    "disabled": {
+      "heading": "### 無効化",
+      "desc": "`v-overflow-btn`は、ユーザーが操作するのを防ぐために無効にすることができます。"
+    }
+  }
+}

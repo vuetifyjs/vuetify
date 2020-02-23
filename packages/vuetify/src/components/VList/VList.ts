@@ -102,6 +102,6 @@ export default VSheet.extend<options>().extend({
       },
     }
 
-    return h('div', this.setBackgroundColor(this.color, data), [this.$slots.default])
+    return h(this.tag, this.setBackgroundColor(this.color, data), [this.$slots.default])
   },
 })

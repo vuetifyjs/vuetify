@@ -1,17 +1,26 @@
 {
   "heading": "# ユニットテスト",
-  "headingText": "ユニットテストはアプリケーション開発の重要な部分(そして時々無視される)部分です。ユニットテストは私たちのプロセスとワークフローを保護し、プロジェクトの最も重要な部分を偶発的なミスや見落としから守ることを保証します。このためVueは [vue-test-utils] (https://vue-test-utils.vuejs.org/) と呼ばれる、テストユーティリティを持っています。Vueコンポーネントと対話するための便利な機能を提供し、多くの一般的なテストランナーと連携します。",
+  "headingText": "単体テストはアプリケーション開発の重要な部分(そして時々無視される)部分です。単体テストは私たちのプロセスとワークフローを保護し、プロジェクトの最も重要な部分を偶発的なミスや見落としから守ることを保証します。このためVueは [vue-test-utils](https://vue-test-utils.vuejs.org/) と呼ばれる、テストユーティリティを持っています。Vueコンポーネントと対話するための便利な機能を提供し、多くの一般的なテストランナーと連携します。",
+  "alert": "VuetifyはTypescriptを利用しており、現在Vueオブジェクトをimportおよびextendする必要があります。そのため一部のアプリケーションで警告メッセージを生成する可能性があります。現在、進行中の[Githubディスカッション] (https://github.com/vuetifyjs/vuetify/issues/4068) があり、さまざまなユースケースで回避策が考えられます。さらに質問がある場合は、[オンラインコミュニティ] (https://community.vuetifyjs.com) にご参加ください。",
   "runnerHeader": "## テストランナーのセットアップ",
-  "runnerText2": [
-    "[Jest](https://github.com/vuejs/vue-test-utils-jest-example)",
-    "[Mocha](https://github.com/vuejs/vue-test-utils-mocha-webpack-example)",
-    "[tape](https://github.com/eddyerburgh/vue-test-utils-tape-example)",
-    "[AVA](https://github.com/eddyerburgh/vue-test-utils-ava-example)"
-  ],
+  "runnerText2": {
+    "2": "[tape](https://github.com/eddyerburgh/vue-test-utils-tape-example)",
+    "3": "[AVA](https://github.com/eddyerburgh/vue-test-utils-ava-example)"
+  },
   "setupHeading": "## Vuetify のブートストラップ",
+  "setupText1": "Typescriptを適切に利用するために、VuetifyコンポーネントはVueオブジェクトを拡張します。 これには、上記のアラートに記載されている [問題の原因](https://github.com/vuetifyjs/vuetify/issues/4068) の可能性があります。 [localVueインスタンス](https://vue-test-utils.vuejs.org/api/options.html#localvue) を使用する代わりに、単体テストセットアップファイルでVuetifyをグローバルにインストールする必要があります。 これはテストランナーによって異なります。 セットアップファイルに関する適切なドキュメントを必ず参照してください。",
   "specHeader": "## Spec テスト",
-  "efficiencyHeader": "### テストの効率",
+  "specText1": "Vuetifyでのユニットテストの作成は、 **localVue** インスタンスでVuetifyオブジェクトを使用し、インスタンスをマウント関数オプションに渡すという点で **vuex** および **vue-router** に似ています。",
+  "specText2": "アプリケーションで見つかる可能性のあるサンプルテストユースケースを作成しましょう。",
+  "specText3": "上記の例では、**title** propと、クリックされたときにカスタムイベントを発生する `v-btn` を持つカスタムコンポーネントを作成しました。ここで、この動作が正常に機能することを確認するテストを作成し、今後の変更を通じて引き続き機能するようにします。以下の例は、 [Jest](https://jestjs.io/) テストランナーを使用して作成されています。",
+  "specAlert": "立ち往生していて、テストに関する追加の質問がある場合や一般的なサポートが必要な場合は、[オンラインコミュニティ](https://community.vuetifyjs.com) にご参加ください。",
+  "efficiencyHeader": "### 効率的にテストする",
+  "efficiencyText1": "テストを作成するとき、同じことを何度も繰り返すことがよくあります。このような場合、ヘルパー関数を作成して、個々のテストの重複を減らすことは有益です。コードは [DRY原則](https://ja.wikipedia.org/wiki/Don%27t_repeat_yourself) を適用します。",
+  "efficiencyText2": "ユニットテストで記述された最も一般的な複製コードの1つは、マウント関数です。これは、実行ごとに再利用可能な関数に簡単に圧縮できます。",
   "mockHeader": "### Vuetify の Mocking",
+  "mockText1": "Vuetifyのコンポーネントの多くは、グローバルな `$vuetify` オブジェクトを利用して、デフォルトのテキストやブレークポイント情報などの設定を導き出します。これらのコンポーネントをテストするとき、 `vue-test-utils` にモックオブジェクトを提供する必要があります。",
+  "mockText2": "**lang** や **application** など **使用されているサービスのみをスタブする** 必要があることに留意してください。 これらのサービスを手動でインポートすることもできます。",
+  "mockText3": "利用可能なサービスは以下のとおりです。",
   "mockList": [
     "[application](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/application)",
     "[breakpoint](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/breakpoint)",
@@ -20,5 +29,7 @@
     "[lang](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/lang)",
     "[theme](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/theme)"
   ],
-  "e2eHeader": "## E2E テスト"
+  "e2eHeader": "## E2E テスト",
+  "e2eText1": "Vuetifyは、コンポーネントから関連するHTML要素に `data-*` 属性を渡します。これにより、E2Eテストフレームワークはそれらの要素を簡単に見つけることができます。",
+  "e2eText2": "たとえば、[Cypress](https://docs.cypress.io/guides/references/best-practices.html#How-It-Works) は、要素を簡単にターゲティングできるようにするために `data-cy` 属性を追加することを推奨しています。"
 }

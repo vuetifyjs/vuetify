@@ -96,6 +96,32 @@ describe('VData.ts', () => {
     }))
   })
 
+  it('should group items by deep keys', async () => {
+    const render = jest.fn()
+    const items = [
+      { id: 1, text: 'foo', foo: { bar: 'one' } },
+      { id: 2, text: 'bar', foo: { bar: 'two' } },
+      { id: 3, text: 'baz', foo: { bar: 'one' } },
+    ]
+
+    const wrapper = mountFunction({
+      propsData: {
+        items,
+        groupBy: ['foo.bar'],
+      },
+      scopedSlots: {
+        default: render,
+      },
+    })
+
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
+      groupedItems: {
+        one: [items[0], items[2]],
+        two: [items[1]],
+      },
+    }))
+  })
+
   it('should group items with a custom group function', async () => {
     const render = jest.fn()
     const items = [

@@ -1,12 +1,30 @@
 {
   "heading": "# アラート",
   "headingText": "`v-alert` コンポーネントはコンテキストタイプのアイコンと色を使い重要な情報をユーザーに伝える際に使用します。 **success**、**info**、**warning** そして **error** の4つのバリエーションを備えています。 これらにはそれぞれ異なるアクションを表すデフォルトのアイコンが設定されており、必要に応じて変更が可能です。'border', 'iicon', 'color' 等多くのパーツが状況に合わせてカスタマイズできます。",
+  "usageText": "最も単純な形式のアラートは、flatな [sheets of paper](/components/sheets) で表示するメッセージです。",
   "examples": {
+    "border": {
+      "heading": "### ボーダー",
+      "desc": "** border ** propを設定すると、アラートの4つの側面の1つにシンプルなボーダーを追加することができます。 ** color **、** dark **、** type **などのpropsと組み合わせて、アラートに独特なアクセントを与えることができます。"
+    },
+    "colored-border": {
+      "heading": "### 色付きボーダー"
+    },
+    "dense": {
+      "heading": "### 高さが詰まったスタイル",
+      "desc": "** dense ** propは、アラートの高さを減らしシンプルでコンパクトなスタイルのアラートを作成します。 ** border ** propと同時に利用した場合、コンパクトなスタイルと協調させるためボーダーの太さは細くなります。"
+    },
+    "dismissible": {
+      "heading": "### 閉じるボタン付き",
+      "desc": "** dismissible ** propは、アラートコンポーネントの端に閉じるボタンを追加します。 このボタンをクリックすると、valueがfalseに設定され、アラートが非表示になります。 ** v-model ** をバインドしtrueに設定することにより、アラートを再度表示させることができます。 閉じるアイコンには自動的に `aria-label`が適用されます。これは、** close-label ** propで変更するか、ロケールの ** close ** の値を変更することで、値を変更することができます。 ロケール設定をグローバルに変更する方法の詳細については、 [Internationalization page](/customization/internationalization) を参照してください。"
+    },
     "icon": {
-      "heading": "アイコン"
+      "heading": "### アイコン"
     }
   },
   "props": {
-    "border": "ボーダーを表示します。**top** | **right** | **bottom** | **left** のいずれかの値を受け付けます。"
+    "border": "ボーダーを表示します。**top** | **right** | **bottom** | **left** のいずれかの値を受け付けます。",
+    "dense": "アラートアイコンを非表示にして、コンポーネントの高さを減らします。",
+    "dismissible": "アラートを非表示にする、閉じるアイコンを表示します。"
   }
 }

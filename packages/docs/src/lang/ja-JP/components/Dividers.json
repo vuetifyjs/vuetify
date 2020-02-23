@@ -1,7 +1,15 @@
 {
+  "heading": "# Dividers （区切り線）",
+  "headingText": "`v-divider`コンポーネントは、リストまたはレイアウトのセクションの区切り線として使用できます。",
   "examples": {
+    "usage": {
+      "desc": "最も単純なDividerは、水平線を表示します。"
+    },
     "inset": {
       "desc": "水平方向の位置をリストアイテムと揃えるために、72px 右に寄せて表示できます。"
+    },
+    "vertical": {
+      "heading": "### 垂直区切り線"
     },
     "divider-list-portrait": {
       "desc": "横長のコンポーネント内でも区切り線は問題なく表示できます。"

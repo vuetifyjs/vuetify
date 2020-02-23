@@ -2,10 +2,8 @@
   "heading": "# 面包屑",
   "headingText": "`v-breadcrumbs` 组件是页面的导航助手。 它可以接受  **Material Icons** 图标或文本字符作为分隔符。 可以将对象数组传递给组件的  **items** 属性。 另外，还可以使用 `v-breadcrumbs-item` 或其他自定义标记来更好地控制面包屑。",
   "headerAlert1": "默认情况下，`v-breadcrumbs` 将禁用所有到当前页面的嵌套路径。 您可以通过在 `items` 数组中的每个适用面包屑上使用 `exact: true` 来防止这种行为。",
+  "usageText": "默认情况下，面包屑使用文本分隔符。它可以是任何字符串。",
   "examples": {
-    "usage": {
-      "desc": "默认情况下，面包屑使用文本分隔符。它可以是任何字符串。"
-    },
     "icon-dividers": {
       "heading": "### 图标分隔符",
       "desc": "对于图标变体，面包屑可以使 aterial Design Icons中的任何图标。"

@@ -1,14 +1,1 @@
-{
-  "examples": {
-    "visibility": {
-      "heading": "Visibilidade"
-    },
-    "inline": {
-      "desc": "Marcadores também podem ser colocados em linha com o texto."
-    },
-    "icon": {
-      "heading": "### Ícone",
-      "desc": "O marcador pode usar todos os conjuntos de ícones atualmente suportados."
-    }
-  }
-}
+{}

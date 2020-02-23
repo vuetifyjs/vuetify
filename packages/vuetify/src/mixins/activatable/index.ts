@@ -109,6 +109,8 @@ export default baseMixins.extend({
           const activator = this.getActivator(e)
           if (activator) activator.focus()
 
+          e.stopPropagation()
+
           this.isActive = !this.isActive
         }
       }
@@ -187,6 +189,7 @@ export default baseMixins.extend({
       this.listeners = {}
     },
     resetActivator () {
+      this.removeActivatorEvents()
       this.activatorElement = null
       this.getActivator()
       this.addActivatorEvents()

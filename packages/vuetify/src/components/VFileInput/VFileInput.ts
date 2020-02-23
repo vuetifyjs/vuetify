@@ -65,9 +65,9 @@ export default VTextField.extend({
       default: 'file',
     },
     value: {
-      default: () => [],
+      default: undefined,
       validator: val => {
-        return typeof val === 'object' || Array.isArray(val)
+        return wrapInArray(val).every(v => v != null && typeof v === 'object')
       },
     } as PropValidator<File | File[]>,
   },
@@ -86,7 +86,9 @@ export default VTextField.extend({
 
       if (!this.showSize) return this.$vuetify.lang.t(this.counterString, fileCount)
 
-      const bytes = this.internalArrayValue.reduce((size: number, file: File) => size + file.size, 0)
+      const bytes = this.internalArrayValue.reduce((bytes: number, { size = 0 }: File) => {
+        return bytes + size
+      }, 0)
 
       return this.$vuetify.lang.t(
         this.counterSizeString,
@@ -95,9 +97,7 @@ export default VTextField.extend({
       )
     },
     internalArrayValue (): File[] {
-      return Array.isArray(this.internalValue)
-        ? this.internalValue
-        : wrapInArray(this.internalValue)
+      return wrapInArray(this.internalValue)
     },
     internalValue: {
       get (): File[] {
@@ -121,9 +121,16 @@ export default VTextField.extend({
       if (!this.isDirty) return [this.placeholder]
 
       return this.internalArrayValue.map((file: File) => {
-        const name = this.truncateText(file.name)
+        const {
+          name = '',
+          size = 0,
+        } = file
 
-        return !this.showSize ? name : `${name} (${humanReadableFileSize(file.size, this.base === 1024)})`
+        const truncatedText = this.truncateText(name)
+
+        return !this.showSize
+          ? truncatedText
+          : `${truncatedText} (${humanReadableFileSize(size, this.base === 1024)})`
       })
     },
     base (): 1000 | 1024 | undefined {
@@ -156,7 +163,7 @@ export default VTextField.extend({
 
   methods: {
     clearableCallback () {
-      this.internalValue = this.isMultiple ? [] : null
+      this.internalValue = this.isMultiple ? [] : undefined
       this.$refs.input.value = ''
     },
     genChips () {
