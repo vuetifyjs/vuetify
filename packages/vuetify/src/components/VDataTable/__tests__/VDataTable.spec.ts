@@ -732,4 +732,63 @@ describe('VDataTable.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10392
+  it('should emit pagination event when filtering', async () => {
+    const headers = [
+      {
+        text: 'Name',
+        value: 'name',
+      },
+      {
+        text: 'ID',
+        value: 'id',
+      },
+    ]
+
+    const items = [
+      {
+        name: 'Assistance',
+        id: 1,
+      },
+      {
+        name: 'Candidat',
+        id: 2,
+      },
+    ]
+
+    const pagination = jest.fn()
+
+    const wrapper = mountFunction({
+      propsData: {
+        headers,
+        items,
+        itemKey: 'id',
+      },
+      listeners: {
+        pagination,
+      },
+    })
+
+    expect(pagination).toHaveBeenLastCalledWith({
+      itemsLength: 2,
+      itemsPerPage: 10,
+      page: 1,
+      pageCount: 1,
+      pageStart: 0,
+      pageStop: 2,
+    })
+
+    wrapper.setProps({ search: 'candidat' })
+    await wrapper.vm.$nextTick()
+
+    expect(pagination).toHaveBeenLastCalledWith({
+      itemsLength: 1,
+      itemsPerPage: 10,
+      page: 1,
+      pageCount: 1,
+      pageStart: 0,
+      pageStop: 1,
+    })
+  })
 })
