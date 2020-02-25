@@ -373,7 +373,7 @@ export default VSelect.extend({
             this.multiple ||
             this.hasSlot
           )
-            ? null
+            ? this.internalSearch || null
             : this.getText(this.selectedItem)
         }
       })

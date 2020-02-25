@@ -65,6 +65,17 @@ describe('VAutocomplete.ts', () => {
     expect(update).toHaveBeenCalledWith('test')
   })
 
+  it('should set intial search value', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        searchInput: 'foo',
+        items: ['foo', 'bar', 'fizz', 'buzz'],
+      },
+    })
+
+    expect(wrapper.vm.internalSearch).toBe('foo')
+  })
+
   it('should filter autocomplete search results', async () => {
     const wrapper = mountFunction({
       propsData: { items: ['foo', 'bar'] },
