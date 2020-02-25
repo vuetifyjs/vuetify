@@ -4,7 +4,7 @@
   "clearable": "Adicionar a funcionalidade de limpar o input, ícone padrão é o **clear** do Material Icons",
   "falseValue": "Define o valor para falso",
   "fullWidth": "Força largura 100%",
-  "fixedTabs": "`v-tabs-item` min-width 160px (72px mobile), max-width 264px",
+  "fixedTabs": "`v-tabs-item` min-width 160px, max-width 360px",
   "id": "Define o id no DOM do componente",
   "mobileBreakPoint": "Define o breakpoint mobile designado para o componente. Isto aplica estilos alternativos para dispositivos móveis.",
   "persistent": "Clicar fora não fechará a caixa de diálogo",

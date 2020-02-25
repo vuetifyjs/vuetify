@@ -4,7 +4,7 @@
   "clearable": "添加输入框清除功能，默认图标是 Material Icons **clear**",
   "falseValue": "设置假值",
   "fullWidth": "强制 100% 宽度",
-  "fixedTabs": "`v-tabs-item` 最小宽度 160px (72px mobile), 最大宽度 264px",
+  "fixedTabs": "`v-tabs-item` 最小宽度 160px, 最大宽度 360px",
   "id": "设置组件上的 DOM id",
   "mobileBreakPoint": "为组件设置指定的移动断点。这将为移动设备应用其他样式。",
   "persistent": "点击外部不会关闭对话框",
