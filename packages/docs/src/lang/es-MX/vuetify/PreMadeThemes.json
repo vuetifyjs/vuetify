@@ -15,7 +15,7 @@
             "demoUrl": ""
         },
         {
-            "screenshot": "/static/doc-images/starter/vuetify-parallax-starter.png",
+            "screenshot": "/static/doc-images/starter/parallax-2020-large.png",
             "title": "Parallax",
             "description": "Esta bella _single page_ con parallax es una gran página de inicio para cualquier aplicación.",
             "sourceUrl": "vuetifyjs/parallax-starter",
