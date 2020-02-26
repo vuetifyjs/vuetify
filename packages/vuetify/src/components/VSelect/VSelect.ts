@@ -379,6 +379,7 @@ export default baseMixins.extend<options>().extend({
         staticClass: 'v-select__selection v-select__selection--comma',
         class: {
           'v-select__selection--disabled': isDisabled,
+          'v-select__selection--dense': this.dense,
         },
         key: JSON.stringify(this.getValue(item)),
       }), `${this.getText(item)}${last ? '' : ', '}`)
