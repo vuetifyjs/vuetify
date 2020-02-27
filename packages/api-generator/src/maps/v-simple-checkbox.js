@@ -2,7 +2,7 @@ module.exports = {
   'v-simple-checkbox': {
     events: [
       {
-        name: 'click',
+        name: 'input',
         value: 'Event',
       },
     ],
