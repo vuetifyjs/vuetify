@@ -39,20 +39,26 @@ const cssLoaders = [
 
 const sassLoaders = [
   ...cssLoaders,
-  { loader: 'sass-loader', options: {
+  {
+    loader: 'sass-loader',
+    options: {
       implementation: require('sass'),
       fiber: require('fibers'),
       indentedSyntax: true
-    } }
+    }
+  }
 ]
 
 const scssLoaders = [
   ...cssLoaders,
-  { loader: 'sass-loader', options: {
+  {
+    loader: 'sass-loader',
+    options: {
       implementation: require('sass'),
       fiber: require('fibers'),
       indentedSyntax: false
-    } }
+    }
+  }
 ]
 
 module.exports = {
