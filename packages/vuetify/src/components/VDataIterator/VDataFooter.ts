@@ -62,7 +62,7 @@ export default Vue.extend({
 
   computed: {
     disableNextPageIcon (): boolean {
-      return this.options.itemsPerPage < 0 ||
+      return this.options.itemsPerPage <= 0 ||
         this.options.page * this.options.itemsPerPage >= this.pagination.itemsLength ||
         this.pagination.pageStop < 0
     },
@@ -132,7 +132,7 @@ export default Vue.extend({
     genPaginationInfo () {
       let children: VNodeChildrenArrayContents = ['–']
 
-      if (this.pagination.itemsLength) {
+      if (this.pagination.itemsLength && this.pagination.itemsPerPage) {
         const itemsLength = this.pagination.itemsLength
         const pageStart = this.pagination.pageStart + 1
         const pageStop = itemsLength < this.pagination.pageStop || this.pagination.pageStop < 0
