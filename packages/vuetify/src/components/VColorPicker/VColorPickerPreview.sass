@@ -20,11 +20,16 @@
 .v-color-picker__dot
   position: relative
   height: $color-picker-preview-dot-size
-  margin-right: $color-picker-preview-dot-margin-right
   width: $color-picker-preview-dot-size
   background: $color-picker-checkerboard
   border-radius: 50%
   overflow: hidden
+
+  +ltr()
+    margin-right: $color-picker-preview-dot-margin
+
+  +rtl()
+    margin-left: $color-picker-preview-dot-margin
 
   > div
     width: 100%
