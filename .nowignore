@@ -1,0 +1,10 @@
+packages/kitchen/*
+packages/api-generator/node_modules/*
+packages/api-generator/dist/*
+packages/docs/node_modules/*
+packages/docs/dist/*
+packages/vuetify/dist/*
+packages/vuetify/es5/*
+packages/vuetify/lib/*
+packages/vuetify/lib-temp/*
+packages/vuetify/node_modules/*

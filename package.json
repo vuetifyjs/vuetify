@@ -13,6 +13,7 @@
   "scripts": {
     "dev": "node scripts/dev.js",
     "build": "node scripts/build.js",
+    "now-build": "yarn && yarn build",
     "start": "lerna run start --scope vuetifyjs.com --stream",
     "lint": "lerna run lint --parallel --stream",
     "lint:fix": "lerna run lint:fix --parallel",
