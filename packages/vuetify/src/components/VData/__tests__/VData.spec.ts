@@ -436,4 +436,47 @@ describe('VData.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10372
+  it('should handle setting itemsPerPage to zero', async () => {
+    const render = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        items: [
+          { id: 1, text: 'foo' },
+          { id: 2, text: 'bar' },
+        ],
+        itemsPerPage: 0,
+      },
+      scopedSlots: {
+        default: render,
+      },
+    })
+
+    await wrapper.vm.$nextTick()
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
+      pagination: expect.objectContaining({
+        itemsPerPage: 0,
+        page: 1,
+        pageCount: 1,
+        pageStart: 0,
+        pageStop: 0,
+      }),
+    }))
+
+    wrapper.setProps({
+      itemsPerPage: 1,
+    })
+
+    await wrapper.vm.$nextTick()
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
+      pagination: expect.objectContaining({
+        itemsPerPage: 1,
+        page: 1,
+        pageCount: 2,
+        pageStart: 0,
+        pageStop: 1,
+      }),
+    }))
+  })
 })
