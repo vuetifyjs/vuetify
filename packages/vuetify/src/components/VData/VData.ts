@@ -105,9 +105,9 @@ export default Vue.extend({
       return this.serverItemsLength >= 0 ? this.serverItemsLength : this.filteredItems.length
     },
     pageCount (): number {
-      return this.internalOptions.itemsPerPage === -1
+      return this.internalOptions.itemsPerPage <= 0
         ? 1
-        : Math.ceil(this.itemsLength / this.internalOptions.itemsPerPage) // TODO: can't use items.length here
+        : Math.ceil(this.itemsLength / this.internalOptions.itemsPerPage)
     },
     pageStart (): number {
       if (this.internalOptions.itemsPerPage === -1 || !this.items.length) return 0
