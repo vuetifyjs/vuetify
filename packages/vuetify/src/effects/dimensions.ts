@@ -1,11 +1,10 @@
+// Setup
 import { computed, Prop } from 'vue'
 import { convertToUnit } from '../util/helpers'
 
+// Props
 const allDimensionsProps = {
   height: {
-    type: [Number, String],
-  },
-  width: {
     type: [Number, String],
   },
   maxHeight: {
@@ -14,17 +13,22 @@ const allDimensionsProps = {
   maxWidth: {
     type: [Number, String],
   },
+  minHeight: {
+    type: [Number, String],
+  },
   minWidth: {
     type: [Number, String],
   },
-  minHeight: {
+  width: {
     type: [Number, String],
   },
 }
 
+// Types
 type PropValue = string | number | undefined
 type PropNames = keyof typeof allDimensionsProps
 
+// Effect
 export function dimensionsFactory<S extends PropNames> (...possibleProps: S[]) {
   const selectedProps = possibleProps.length ? possibleProps : Object.keys(allDimensionsProps) as S[]
   const dimensionsProps = (defaults?: Partial<Record<S, PropValue>>) => selectedProps.reduce((obj, prop) => {

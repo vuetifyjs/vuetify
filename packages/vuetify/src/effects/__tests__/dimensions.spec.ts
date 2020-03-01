@@ -72,7 +72,6 @@ describe('dimensions.ts', () => {
 
     it('should be reactive', () => {
       const { useDimensions } = dimensionsFactory()
-
       const props: { width?: number | string, height?: number | string } = reactive({ width: 100 })
       const { dimensions } = useDimensions(props)
 
