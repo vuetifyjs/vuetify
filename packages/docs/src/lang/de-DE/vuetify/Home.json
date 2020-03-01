@@ -1,0 +1,25 @@
+{
+  "becomeSponsor": "Unterstütze Vuetify",
+  "callout": "# Material Design Komponenten-Framework",
+  "text": "Vuetify ist eine Vue UI Bibliothek mit handgefertigten Material-Komponenten. Keine Designfähigkeiten erforderlich – alles, was du brauchst, um erstaunliche Anwendungen zu erstellen, steht dir zur Verfügung.",
+  "features": {
+    "community": {
+      "text": "Wer auf Hindernisse stößt braucht sofort Hilfe. Mit der riesigen Vuetify-Community auf Discord erhältst du jederzeit Unterstützung.",
+      "title": "Lebendige Community"
+    },
+    "components": {
+      "text": "Ihnen stehen über 80 spezialisierter Komponenten zur Verfügung, die für jede Situation eine Lösung bieten.",
+      "title": "Semantische Material-Komponenten"
+    },
+    "scaffolding": {
+      "text": "Vuetify ist mit seinem Vue CLI Plugin gerüstet für die Zukunft. Mit nur einem Befehl beginnen Sie Ihre nächste große Idee in die Tat umzusetzen.",
+      "title": "Schnellstart"
+    }
+  },
+  "getStarted": "Erste Schritte",
+  "proudlySponsoredBy": "Sponsoren",
+  "proundlySponsoredByText": "Die kontinuierliche Weiterentwicklung und Wartung von Vuetify wird durch diese großzügigen Sponsoren ermöglicht:",
+  "whyVuetify": "## Warum Vuetify?",
+  "whyVuetifyText": "Das Erstellen von Anwendungen mit Vue war noch nie so einfach. Bringen Sie Ihren Entwicklungsprozess auf den nächsten Level, mit allen Werkzeugen, die Sie dafür benötigen.",
+  "whyVuetifyText2": "Warum Vuetify?"
+}

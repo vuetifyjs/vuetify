@@ -1,1 +1,16 @@
-{}
+{
+  "heading": "# Lazy loading （遅延読み込み）",
+  "headingText": "`v-lazy` コンポーネントは、要素の可視性に基づいてコンポーネントを動的にロードするために使用されます。",
+  "lazyAlert": "`v-lazy`コンポーネントは [v-intersect](/directives/intersect) ディレクティブを使用します。IE11 / Safariで動作するためには [Polyfill](/directives/intersect#polyfill) を必要とします。一部のiOSバージョンでは、このポリフィルの使用が必要になる可能性もあります。",
+  "examples": {
+    "usage": {
+      "desc": "デフォルトでは、 `v-lazy`コンポーネントは交差するまでコンテンツをレンダリングしません。下にスクロールして、要素を通過するときに要素がレンダリングされるのを確認します。"
+    }
+  },
+  "props": {
+    "minHeight": "Mixins.Measurable.props.minHeight",
+    "options": "[Intersection observer](https://developer.mozilla.org/ja/docs/Web/API/Intersection_Observer_API) コンストラクターに渡されるオプション。",
+    "tag": "Components.Sheets.props.tag",
+    "transition": "Mixins.Transitionable.props.transition"
+  }
+}

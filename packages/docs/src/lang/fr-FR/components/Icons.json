@@ -1,5 +1,6 @@
 {
   "heading": "# Icônes",
+  "headingText": "Le composant `v-icon` fournit un grand ensemble de glyphes pour fournir un contexte à divers aspects de votre application. Pour une liste de toutes les icônes disponibles, visitez la page officielle [Icons de design de matériaux](https://materialdesignicons.com/). Pour utiliser n'importe quelle de ces icônes, utilisez simplement le préfixe `mdi-` suivi du nom d'icône.",
   "usageText": "Les icônes sont présentées dans deux thèmes (lumière et foncé), et cinq tailles différentes (x-small, small, medium (par défaut), grandes et x-large).",
   "examples": {
     "font-awesome": {

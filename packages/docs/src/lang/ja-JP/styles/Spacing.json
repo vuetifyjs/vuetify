@@ -1,7 +1,24 @@
 {
   "heading": "# Spacing",
-  "headingText": "新しいクラスを作成せずにレイアウトを更新します。Spacingヘルパーは、要素のパディングとマージンを変更するのに役立ちます。",
+  "headingText": "新しいクラスを作成せずにレイアウトを更新します。Spacingヘルパーは、要素のパディングとマージンを変更する場合に便利です。",
   "playgroundHeader": "## プレイグラウンド",
   "playgroundText1": "プレイグラウンドを使用して、さまざまなヘルパークラスで何ができるかを試してください。それらがどのように機能するかの説明については、以下の**動作のしくみ**セクションを参照してください。",
-  "howText": "ヘルパークラスは* *margin** または **padding** を _0〜12_ の範囲で要素に適用します。各サイズ増分は、一般的なMaterial Design spacingsに合わせて設計されています。これらのクラスは、次の形式 `{property}{direction}-{size}` を使用して適用できます。"
+  "howText": "ヘルパークラスは* *margin** または **padding** を _0〜12_ の範囲で要素に適用します。各サイズ増分は、一般的なMaterial Design spacingsに合わせて設計されています。これらのクラスは、次の形式 `{property}{direction}-{size}` を使用して適用できます。",
+  "propertyText": "**property** は、間隔のタイプを適用します。",
+  "properties": [
+    "`m` - `margin`を適用します。",
+    "`p` - `padding`を適用します。"
+  ],
+  "directionText": "**direction**は、プロパティが適用される側を指定します。",
+  "directions": {
+    "0": "`t` - `margin-top`と`padding-top`の間隔を適用します。",
+    "1": "`b` - `margin-bottom` と `padding-bottom`の間隔を適用します。",
+    "2": "`l` - `margin-left` と `padding-left`の間隔を適用します。",
+    "3": "`r` - `margin-right` と `padding-right`の間隔を適用します。",
+    "6": "`x` - `*-left` と `*-right` の両方の間隔を適用します。",
+    "7": "`y` - `*-top` と `*-bottom` の両方の間隔を適用します。",
+    "8": "`a` - プロパティの間隔をすべての方向に適用します。"
+  },
+  "sizeText": "**size** は、プロパティの増分を 4px 間隔で制御します。",
+  "horizontalText": "指定した幅のブロック要素の場合は、コンテンツを水平方向に中央揃えする `.mx-auto`を適用できます。"
 }

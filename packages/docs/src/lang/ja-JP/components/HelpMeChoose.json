@@ -1,3 +1,9 @@
 {
-  "seo": "SEO"
+  "application": "Application",
+  "desktop": "Desktop",
+  "mobile": "Mobile",
+  "no": "No",
+  "reset": "Reset",
+  "seo": "SEO",
+  "yes": "Yes"
 }

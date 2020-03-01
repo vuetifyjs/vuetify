@@ -1,1 +1,28 @@
-{}
+{
+  "heading": "# Float",
+  "headingText": "レスポンシブ フロート ユーティリティを使用して、任意のブレークポイントにカスタム フロートを適用します。",
+  "overviewHeader": "## 概要",
+  "overviewText1": "Float ユーティリティ クラスは [CSS float property](https://developer.mozilla.org/en-US/docs/Web/CSS/float) を使用して、現在のビューポート サイズに基づいてフローティングを適用します。",
+  "classesHeader": "## クラス",
+  "classesText1": "クラスでフロートを簡単に切り替えます：",
+  "responsiveHeader": "## レスポンシブ",
+  "responsiveText1": "フロートは、ブレークポイント（ビューポート）ごとに適用することもできます。",
+  "responsiveText2": "利用可能なすべてのサポート クラスの一覧を次に示します：",
+  "responsiveClasses": [
+    "`.float-left`",
+    "`.float-right`",
+    "`.float-none`",
+    "`.float-sm-left`",
+    "`.float-sm-right`",
+    "`.float-sm-none`",
+    "`.float-md-left`",
+    "`.float-md-right`",
+    "`.float-md-none`",
+    "`.float-lg-left`",
+    "`.float-lg-right`",
+    "`.float-lg-none`",
+    "`.float-xl-left`",
+    "`.float-xl-right`",
+    "`.float-xl-none`"
+  ]
+}

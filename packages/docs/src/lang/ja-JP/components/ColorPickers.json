@@ -3,7 +3,38 @@
   "headingText": "`v-color-picker`を使用すると、さまざまな入力方法を使用して色を選択できます。",
   "examples": {
     "model": {
+      "heading": "### Model",
       "desc": "`v-color-picker`は`v-model`propを使用して表示される色を制御します。 **#FF00FF**および**#FF00FF00**などの16進文字列、および**RGBA**、**HSLA**および**HSVA**値を表すオブジェクトをサポートします。"
+    },
+    "swatches": {
+      "heading": "### スウォッチ",
+      "desc": "`show-swatches` propを使用すると、ユーザーが選択できる色見本の配列を表示できます。 `swatches` プロパティを使用して、表示する色をカスタマイズすることもできます。このpropは2次元配列を受け入れます。1次元目は列を定義し、2次元目にrgba 16進文字列を提供することで上から下にスウォッチを定義します。 `swatches-max-height` プロパティを使用して、スウォッチセクションの最大高さを設定することもできます。"
+    },
+    "inputs": {
+      "heading": "### 入力",
+      "desc": "ナンバー入力は、 `hide-inputs` propで非表示にできます。 `hide-mode-switch` propでモード切り替えアイコンを非表示にすることもできます。モードは、 `mode` propを介して外部から制御することもできます。"
+    },
+    "canvas": {
+      "heading": "### キャンバス",
+      "desc": "キャンバスは`hide-canvas` propで非表示にでき、その高さは`canvas-height` propで設定できます。選択ドットのサイズは、`dot-size` propで制御できます。"
+    }
+  },
+  "props": {
+    "v-color-picker": {
+      "canvasHeight": "キャンバスの高さ",
+      "disabled": "ピッカーを無効にします",
+      "dotSize": "キャンバス上の選択ドットのサイズを変更します。",
+      "flat": "Elevationを削除します。",
+      "hideCanvas": "キャンバスを非表示にする",
+      "showSwatches": "カラースウォッチを表示します",
+      "swatches": "選択可能なカラースウォッチを設定します - このpropは rgba 16進数文字列のみを受け入れます",
+      "width": "カラー ピッカーの幅を設定します。"
+    }
+  },
+  "events": {
+    "v-color-picker": {
+      "input": "選択した色: `value` propに渡したものに応じて、文字列またはオブジェクトのいずれかになります。",
+      "update:color": "選択した色。これは、すべての値を含む色の内部表現です。"
     }
   }
 }

@@ -1,5 +1,17 @@
 {
   "props": {
-    "disabled": "コンポーネントをクリックまたはターゲットにできなくします。"
+    "activeClass": "リンクがアクティブなときに適用されるアクティブなCSSクラスを構成します。vue-routerのドキュメントで [**active-class** prop](https://router.vuejs.org/ja/api/#active-class) の詳細をご覧ください。",
+    "append": "**append** propを設定すると、常に現在のパスに相対パスが追加されます。vue-router のドキュメントで [**append** prop](https://router.vuejs.org/ja/api/#append) の詳細についてをご覧ください。",
+    "disabled": "コンポーネントをクリックまたはターゲットにできなくします。",
+    "exact": "リンクと完全に一致します。これがなければ、'/' はすべてのルートにマッチします。[**exact** prop](https://router.vuejs.org/ja/api/#exact) の詳細については、vue-router のドキュメントを参照してください。",
+    "exactActiveClass": "完全一致のリンクがアクティブな場合に適用されるアクティブな CSS クラスを設定します。[**exact-active-class** prop](https://router.vuejs.org/ja/api/#exact-active-class) の詳細については、vue-router のドキュメントをご覧ください。",
+    "href": "コンポーネントをアンカーとして指定し、**href** 属性を適用します。",
+    "link": "コンポーネントがリンクであることを指定します。これは **href** または **to** propを使用する場合は自動的に行われます。",
+    "nuxt": "リンクが`nuxt-link`であることを指定します。 [nuxtフレームワーク](https://ja.nuxtjs.org/api/components-nuxt-link/) で使用します。",
+    "replace": "**replace** propを設定すると、クリックされたときに `router.push()` の代わりに `router.replace()` が呼び出されるため、ナビゲーションは history レコードを残しません。[**replace** prop](https://router.vuejs.org/ja/api/#replace) の詳細については、vue-routerのドキュメントをご覧ください。",
+    "ripple": "Mixins.Rippleable.props.ripple",
+    "to": "リンクのターゲットルートを示します。[**to** prop](https://router.vuejs.org/ja/api/#to) の詳細については、vue-routerのドキュメントをご覧ください。",
+    "tag": "Components.Sheets.props.tag",
+    "target": "ターゲット属性を指定します。これは **href** propを使用する場合にのみ適用する必要があります。"
   }
 }

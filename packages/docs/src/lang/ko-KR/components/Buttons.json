@@ -23,6 +23,12 @@
     "outlined": {
       "heading": "### 테두리형 (Outlined)"
     },
+    "rounded": {
+      "desc": "둥근 버튼(Rounded buttons)은 일반적인 버튼과 같습니다. 모서리가 둥글다는 것만 빼면요!"
+    },
+    "tile": {
+      "desc": "타일 버튼(Tile buttons)도 역시 일반적인 버튼과 같습니다. 모서리에 각이 져있을 뿐이에요!"
+    },
     "block": {
       "desc": "블럭 버튼은 너비가 가능한 최대값으로 확장됩니다."
     }
