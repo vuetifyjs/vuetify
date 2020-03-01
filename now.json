@@ -1,7 +1,5 @@
 {
   "version": 2,
-  "name": "vuetifyjs.com",
-  "alias": "vuetifyjs.com",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ],
