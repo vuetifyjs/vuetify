@@ -26,5 +26,6 @@
   "return": "Retourne",
   "example": "Exemple",
   "signature": "Signature",
-  "value": "Valeur"
+  "value": "Valeur",
+  "variableApi": "## Variable API"
 }

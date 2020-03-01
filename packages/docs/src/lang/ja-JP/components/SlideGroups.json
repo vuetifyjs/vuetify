@@ -10,6 +10,18 @@
     },
     "custom-icons": {
       "heading": "### カスタムアイコン"
+    },
+    "active-class": {
+      "heading": "### Active class",
+      "desc": "アクティブクラスをカスタマイズできます"
+    },
+    "multiple": {
+      "heading": "### Multiple",
+      "desc": "複数のアイテムを選択できます。"
     }
+  },
+  "slots": {
+    "next": "次のslot",
+    "prev": "前のslot"
   }
 }

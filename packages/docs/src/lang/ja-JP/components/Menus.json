@@ -11,6 +11,7 @@
     },
     "disabled": {
       "heading": "### 無効化",
+      "desc": "メニューを無効にできます。無効なメニューは開くことができません。",
       "uninverted": true
     },
     "offset-x": {
@@ -45,7 +46,18 @@
     }
   },
   "props": {
+    "closeOnClick": "外側アクティベータークリック時にメニューを閉じるかどうかを指定します。",
+    "closeOnContentClick": "コンテンツがクリックされたときにメニューを閉じるかどうかを指定します。",
     "dark": "Mixins.Themeable.props.dark",
-    "light": "Mixins.Themeable.props.light"
+    "light": "Mixins.Themeable.props.light",
+    "disabled": "メニューを無効にします。",
+    "internalActivator": "Components.Dialogs.props.internalActivator",
+    "offsetX": "X軸のメニューのオフセット。left/right方向と連動します。",
+    "offsetY": "Y軸のメニューのオフセット。top/bottom方向と連動します。",
+    "maxHeight": "メニューコンテンツの最大高さを設定します。",
+    "openOnClick": "アクティベーターのクリック時にメニューを開くかどうかを指定します。",
+    "openOnHover": "アクティベーターのホバー時にメニューを開くかどうかを指定します",
+    "origin": "Mixins.Transitionable.props.origin",
+    "transition": "Mixins.Transitionable.props.transition"
   }
 }

@@ -1,5 +1,9 @@
 {
+  "heading": "# コンポーネントAPIの概要",
+  "headingText": "Material Design specのすべてのコンポーネントをすばやく検索できます。コンポーネントを選んでそのAPIと使用例を確認しましょう。",
   "search": "検索",
+  "searchText": "API を表示するコンポーネントを選択します",
   "select": "コンポーネントを選択",
+  "or": "または",
   "browseCategories": "カテゴリを閲覧"
 }

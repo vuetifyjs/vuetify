@@ -1,1 +1,41 @@
-{}
+{
+  "heading": "# Display",
+  "headingText": "displayヘルパーを使用すると、コンテンツの表示を制御できます。これには、現在のビューポートまたは実際の要素displayタイプに基づいて条件付きで表示されていることが含まれます。",
+  "displayFormats": [
+    "`xs`の場合は、`.d-{value}`",
+    "`sm`, `md`, `lg`, `xl`の場合は、`.d-{breakpoint}-{value}`"
+  ],
+  "displayText2": "_value_ プロパティは次のいずれか：",
+  "displays": [
+    "`none`",
+    "`inline`",
+    "`inline-block`",
+    "`block`",
+    "`table`",
+    "`table-cell`",
+    "`table-row`",
+    "`flex`",
+    "`inline-flex`"
+  ],
+  "displayText3": "ディスプレイヘルパークラスに特定のブレークポイントを設定する場合、指定から上のすべての画面幅に適用されます。たとえば、`d-lg-flex`は `lg` と `xl` のサイズの画面に適用されます。",
+  "lateralDisplayText": "さらに、横形式の表示ヘルパー クラスを使用して、現在の **viewport** に基づいて要素を表示することもできます。これらのクラスは、次の `hidden-{breakpoint}-{condition}` 形式で適用できます。",
+  "conditionText": "_condition_ は、次のクラスベースを適用します:",
+  "conditions": [
+    "`only` - `xs` から`xl` のブレークポイントでのみ要素を非表示にします。"
+  ],
+  "printHeader": "## 印刷時の表示",
+  "printText1": "印刷用に表示プロパティを変更することもできます。",
+  "printOptions": [
+    "`.d-print-none`",
+    "`.d-print-inline`",
+    "`.d-print-inline-block`",
+    "`.d-print-block`",
+    "`.d-print-table`",
+    "`.d-print-table-row`",
+    "`.d-print-table-cell`",
+    "`.d-print-flex`",
+    "`.d-print-inline-flex`"
+  ],
+  "printText2": "印刷ユーティリティー・クラスは、印刷時の表示ユーティリティーを使用しない場合にも組み合わせることができます。",
+  "exampleText": "画面のサイズを変更して、要素が条件付きで非表示になるようにします。"
+}

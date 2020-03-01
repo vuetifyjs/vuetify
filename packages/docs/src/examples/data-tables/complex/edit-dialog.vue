@@ -70,7 +70,7 @@
         headers: [
           {
             text: 'Dessert (100g serving)',
-            align: 'left',
+            align: 'start',
             sortable: false,
             value: 'name',
           },

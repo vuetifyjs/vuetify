@@ -397,6 +397,160 @@ exports[`VColorPicker.ts should hide inputs 1`] = `
 </div>
 `;
 
+exports[`VColorPicker.ts should not hide alpha if given initial value of null 1`] = `
+<div class="v-color-picker v-sheet theme--light theme--light"
+     style="max-width: 300px;"
+>
+  <div class="v-color-picker__canvas"
+       style="width: 300px; height: 150px;"
+  >
+    <canvas width="300"
+            height="150"
+    >
+    </canvas>
+    <div class="v-color-picker__canvas-dot"
+         style="width: 10px; height: 10px; transform: translate(295px, -5px);"
+    >
+    </div>
+  </div>
+  <div class="v-color-picker__controls">
+    <div class="v-color-picker__preview">
+      <div class="v-color-picker__dot">
+        <div style="background: rgb(255, 0, 0);">
+        </div>
+      </div>
+      <div class="v-color-picker__sliders">
+        <div class="v-input v-color-picker__hue v-input--hide-details theme--light v-input__slider v-color-picker__track">
+          <div class="v-input__control">
+            <div class="v-input__slot">
+              <div class="v-slider v-slider--horizontal theme--light">
+                <input value="0"
+                       id="input-89"
+                       readonly="readonly"
+                       tabindex="-1"
+                >
+                <div class="v-slider__track-container">
+                  <div class="v-slider__track-background primary lighten-3"
+                       style="right: 0px;"
+                  >
+                  </div>
+                  <div class="v-slider__track-fill primary"
+                       style="left: 0px; width: 0%;"
+                  >
+                  </div>
+                </div>
+                <div role="slider"
+                     tabindex="0"
+                     aria-valuemin="0"
+                     aria-valuemax="360"
+                     aria-valuenow="0"
+                     aria-readonly="false"
+                     aria-orientation="horizontal"
+                     class="v-slider__thumb-container grey--text text--lighten-2"
+                     style="left: 0%;"
+                >
+                  <div class="v-slider__thumb grey lighten-2">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="v-input v-color-picker__alpha v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-input__slider v-color-picker__track">
+          <div class="v-input__control">
+            <div class="v-input__slot">
+              <div class="v-slider v-slider--horizontal theme--light">
+                <input value="1"
+                       id="input-90"
+                       readonly="readonly"
+                       tabindex="-1"
+                >
+                <div class="v-slider__track-container">
+                  <div class="v-slider__track-background primary lighten-3"
+                       style="right: 0px;"
+                  >
+                  </div>
+                  <div class="v-slider__track-fill primary"
+                       style="left: 0px; width: 100%;"
+                  >
+                  </div>
+                </div>
+                <div role="slider"
+                     tabindex="0"
+                     aria-valuemin="0"
+                     aria-valuemax="1"
+                     aria-valuenow="1"
+                     aria-readonly="false"
+                     aria-orientation="horizontal"
+                     class="v-slider__thumb-container grey--text text--lighten-2"
+                     style="left: 100%;"
+                >
+                  <div class="v-slider__thumb grey lighten-2">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-color-picker__edit">
+      <div class="v-color-picker__input">
+        <input type="number"
+               min="0"
+               max="255"
+               step="1"
+        >
+        <span>
+          R
+        </span>
+      </div>
+      <div class="v-color-picker__input">
+        <input type="number"
+               min="0"
+               max="255"
+               step="1"
+        >
+        <span>
+          G
+        </span>
+      </div>
+      <div class="v-color-picker__input">
+        <input type="number"
+               min="0"
+               max="255"
+               step="1"
+        >
+        <span>
+          B
+        </span>
+      </div>
+      <div class="v-color-picker__input">
+        <input type="number"
+               min="0"
+               max="1"
+               step="0.01"
+        >
+        <span>
+          A
+        </span>
+      </div>
+      <button type="button"
+              class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon notranslate material-icons theme--light"
+          >
+            $unfold
+          </i>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`VColorPicker.ts should not show alpha controls if given hex value without alpha 1`] = `
 <div class="v-color-picker v-sheet theme--light theme--light"
      style="max-width: 300px;"

@@ -1,28 +1,48 @@
 {
+  "heading": "# Движение",
+  "headingText": "Плавная анимация помогает сделать пользовательский интерфейс более привлекательным. Используя систему Vue transition и многоразовые функциональные компоненты, вы можете легко контролировать анимацию движения своего приложения. У большинства компонентов transition может быть изменен с помощью <code>transition</code> prop.",
   "examples": {
+    "usage": {
+      "desc": "Vuetify содержит более 10 анимаций css, которые могут быть применены к большинству компонентов или к вашему собственному пользовательскому кейсу"
+    },
     "slide-x-transitions": {
-      "desc": "При этом эффекте элемент двигается по горизонтали."
+      "heading": "### Slide X transitions",
+      "desc": "При этом эффекте элемент двигается по горизонтальной оси."
     },
     "slide-y-transitions": {
-      "desc": "Движение по вертикали."
+      "heading": "### Slide Y transitions",
+      "desc": "При этом эффекте элемент двигается по вертикальной оси."
+    },
+    "scroll-x-transitions": {
+      "heading": "### Scroll X transitions",
+      "desc": "При этом эффекте элемент прокручивается по горизонтальной оси."
+    },
+    "scroll-y-transitions": {
+      "heading": "### Scroll Y transitions",
+      "desc": "При этом эффекте элемент прокручивается по вертикальной оси."
     },
     "scale-transition": {
-      "desc": "Многие компоненты Vuetify содержат свойство <code>transition</code>, которое позволяет вам задать собственный переход."
+      "heading": "### Scale transition",
+      "desc": "Многие компоненты Vuetify содержит <code>transition</code> prop, который позволяет вам указать собственный переход."
     },
     "fade-transition": {
-      "desc": "Другой пример такого перехода — компонент <code>VCarousel</code>."
+      "heading": "### Fade transition",
+      "desc": "Такой же пример затухания можно найти в компоненте Carousel."
     },
     "expand-transition": {
-      "desc": "Пример такого перехода — компонент <code>VExpansionPanel</code>."
+      "heading": "### Expand transition",
+      "desc": "Expand transition используется в Expansion Panels и List Groups. Существует также горизонтальная версия, доступная с `v-expand-x-transition`."
     },
     "custom-origin": {
-      "desc": "Настраивайте центр перехода с помощью одного свойства."
+      "heading": "### Custom Origin",
+      "desc": "Программно управляйте началом перехода с помощью простого origin prop."
     },
     "todo": {
+      "heading": "### Todo list",
       "desc": "Используя несколько пользовательских переходов, легко создать простой анимированный список задач!"
     }
   },
-  "createYourOwnHeader": "## Создание собственного перехода",
+  "createYourOwnHeader": "## Создание собственного transition",
   "createYourOwnText1": "Вы можете использовать функцию <code>createSimpleTransition</code> для создания своих собственных переходов. Эта функция вернет компонент, который вы можете подключить в Vue. Использование [функциональных компонентов](https://ru.vuejs.org/v2/guide/render-function.html#%D0%A4%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82%D1%8B) сделает ваш переход максимально эффективным. Просто импортируйте функцию:",
   "createYourOwnText2": "Функция <code>createSimpleTransition</code> принимает 1 аргумент, <code>name</code>. Это имя, которое вы должны указать в стилях для вашего перехода. Это пример того, как выглядит <code>v-fade-transition</code>:",
   "props": {

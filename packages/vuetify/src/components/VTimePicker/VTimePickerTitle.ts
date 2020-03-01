@@ -18,6 +18,7 @@ export default mixins(
 
   props: {
     ampm: Boolean,
+    ampmReadonly: Boolean,
     disabled: Boolean,
     hour: Number,
     minute: Number,
@@ -58,9 +59,12 @@ export default mixins(
     genAmPm () {
       return this.$createElement('div', {
         staticClass: 'v-time-picker-title__ampm',
+        class: {
+          'v-time-picker-title__ampm--readonly': this.ampmReadonly,
+        },
       }, [
-        this.genPickerButton('period', 'am', this.$vuetify.lang.t('$vuetify.timePicker.am'), this.disabled || this.readonly),
-        this.genPickerButton('period', 'pm', this.$vuetify.lang.t('$vuetify.timePicker.pm'), this.disabled || this.readonly),
+        (!this.ampmReadonly || this.period === 'am') ? this.genPickerButton('period', 'am', this.$vuetify.lang.t('$vuetify.timePicker.am'), this.disabled || this.readonly) : null,
+        (!this.ampmReadonly || this.period === 'pm') ? this.genPickerButton('period', 'pm', this.$vuetify.lang.t('$vuetify.timePicker.pm'), this.disabled || this.readonly) : null,
       ])
     },
   },

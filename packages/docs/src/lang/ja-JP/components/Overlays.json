@@ -25,5 +25,9 @@
       "heading": "### 高度な使い方",
       "desc": "[v-hover](/components/hover) を使用して、情報カードに素敵なスクリムを追加し、ユーザーが実行できるアクションを追加できます。"
     }
+  },
+  "props": {
+    "absolute": "Mixins.Positionable.props.absolute",
+    "zIndex": "Mixins.Menuable.props.zIndex"
   }
 }

@@ -338,7 +338,8 @@ export default mixins(
     genPickerTitle () {
       return this.$createElement(VTimePickerTitle, {
         props: {
-          ampm: this.ampmInTitle && this.isAmPm,
+          ampm: this.isAmPm,
+          ampmReadonly: this.isAmPm && !this.ampmInTitle,
           disabled: this.disabled,
           hour: this.inputHour,
           minute: this.inputMinute,

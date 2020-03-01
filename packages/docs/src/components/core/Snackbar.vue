@@ -25,7 +25,7 @@
 
         <v-btn
           :ripple="false"
-          class="text--primary ml-auto ml-sm-4"
+          class="black--text ml-auto ml-sm-4"
           color="white"
           depressed
           v-bind="bind"

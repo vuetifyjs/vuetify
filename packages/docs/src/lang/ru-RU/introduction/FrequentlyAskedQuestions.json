@@ -1,7 +1,130 @@
 {
   "heading": "# Часто задаваемые вопросы",
+  "headingText": "Застрял на какой-то конкретной проблеме? Проверьте некоторые из этих распространенных проблем, прежде чем создавать тикет. Если вы не можете найти то, что искали, вы можете отправить [issue](https://issues. uetifyjs.com) на Github или спросите в нашем [community](https://community.vuetifyjs.com).",
   "question": "Вопрос:",
   "answer": "Ответ",
   "noResultsFound": "результатов не найдено",
-  "resetSearch": "Сбросить поиск"
+  "resetSearch": "Сбросить поиск",
+  "gotchas": [
+    {
+      "q": "### Мое приложение не компилируется из-за ошибок sass / scss",
+      "a": "Убедитесь, что вы используете правильный объект options в соответствии с вашей версией sass-loader.",
+      "s": "js_webpack_sass"
+    },
+    {
+      "q": "### Есть ли примеры того, как grid v2 сравнивается с v1.5?",
+      "a": "Да, вы можете просмотреть это [здесь](https://gist.github.com/johnleider/207f63c9d30fb77042a0bb0258c5ab32)."
+    },
+    {
+      "q": "### Error: Cannot find module 'node-sass'",
+      "a": "Убедитесь, что ваши пакеты `@vue/cli packages` находятся в `package.json` и имеют как минимум версию **^3.5.0**."
+    },
+    {
+      "q": "###  Invalid CSS after \"    @content\": expected \"}\", was \"($material-light); \"",
+      "a": "Убедитесь, что вы используете `sass` вместо `node-sass` в **package.json**."
+    },
+    {
+      "q": "### Мой код не работает - что делать?",
+      "a": "Во-первых, убедитесь, что вы используете последнюю версию Vue.js и Vuetify. Попробуйте воспроизвести ее в codepen, используя следующий [template](https://template.vuetifyjs.com/). Если вы не можете воспроизвести проблему за пределами вашего окружения, это обычно означает, что проблема находится локально. Если у вас все еще не получилось решить вашу проблему, пожалуйста, предоставьте свой код на codepen и отправьте вопрос в **#need-help** в [community](https://chat.vuetifyjs.com)."
+    },
+    {
+      "q": "### Я получаю ошибку, похожую на следующее:<br>**$attrs is readonly** и/или **$listeners is readonly** в консоли",
+      "a": "Vuetify использует Typescript и в настоящее время должен импортировать и расширять объект Vue. В некоторых приложениях есть потенциал для создания предупреждающих сообщений. В настоящее время идет [обсуждение на Github](https://github. om/vuetifyjs/vuetify/issues/4068) с потенциальными проблемами в различных use-cases. Если у вас есть дополнительные вопросы, пожалуйста, присоединяйтесь к нам в нашем [онлайн-сообществе](https://community.vuetifyjs.com)."
+    },
+    {
+      "q": "### Я получаю сообщения об ошибке, похожее на следующее:<br>Error in ./node_modules/vuetify/src/dir/file.js Module parse \"failed\": Unexpected token (&lt;lineno&gt;:&lt;characterno&gt;)",
+      "a": "Если вы используете IDE, такие как IntelliJ IDEA или WebStorm, часто добавляется автоматический импорт, указывающий на каталог `vuetify/src/` для используемых вами компонентов. Измените путь к импортируемому выражению из `vuetify/src/` на `vuetify/es5/`."
+    },
+    {
+      "q": "### Есть ли пример шаблона на codepen с использованием router",
+      "a": "Да. [Vuetify Codepen Router Template](https://codepen.io/johnjleider/pen/PMZvpr)."
+    },
+    {
+      "q": "### Моё приложение выглядит неправильно",
+      "a": "Vuetify требует использования компонента `v-app`. Он должен обернуть всё ваше приложение и является центральной точкой для большей части функциональности фреймворка, включая темы. Убедитесь, что вы следуете правильной разметке, документированной на странице [Application](/components/application)."
+    },
+    {
+      "q": "### Menu/Dialog/Navigation drawer открываются неправильно.",
+      "a": "Убедитесь, что компоненты находятся внутри элемента `v-app`. Если вы используете элемент для активации компонента, который не помещен в слот **activator**, убедитесь, что вы остановили распространение события (stop propagation) клика. Эти компоненты используют директиву **v-outside-click** и немедленно закрываются."
+    },
+    {
+      "q": "### Полоса прокрутки отображается, хотя мой контент не переполнен вертикально.",
+      "a": "Vuetify использует [ress reset](https://github.com/filipelinhares/ress), который по умолчанию включает на html прокрутку для нормализации поведения между браузерами. Этот выбор дизайна обсуждался много раз. Есть аргументы “за” и “против” иметь и не иметь вертикальную полосу прокрутки, а на данный момент, голосование в пользу отставить все как есть. Если вы хотите отключить эту функцию, просто добавьте `html { overflow-y: auto }` в ваш файл стиля."
+    },
+    {
+      "q": "### Как центрировать по вертикали",
+      "a": "Применить класс **fill-height** к `v-container`. Этот класс-помощник добавляет только **height: 100%**, но для контейнера, а также ищет дочерний \"v-layout\" и применяет необходимые классы к вертикальному центрирования содержимого."
+    },
+    {
+      "q": "### Моя ссылка _/_ активна, когда я нахожусь на странице _/home_",
+      "a": "Добавьте **exact** к ссылке, указывающей на абсолютную /. Для получения дополнительной информации об этом, вы можете посетить официальную документацию Vue router [documentation](https://router.vuejs.org/en/api/router-link.html)."
+    },
+    {
+      "q": "### Моя страница на мобильном устройстве не отзывчива (not responsive)",
+      "a": "Убедитесь, что у вас есть правильные мета-теги внутри секции `<head>` в вашем index.html.",
+      "s": "html_mobile_viewport"
+    },
+    {
+      "q": "### Как использовать иконки в стиле Font Awesome, Material Design Icons или Material Icons?",
+      "a": "Вы можете найти больше информации в нашем [icon guide](/customization/icons)."
+    },
+    {
+      "q": "### Моё диалоговое окно закрывается сразу после нажатия кнопки",
+      "a": "Например когда слот **activator** не используется для `v-menu` и `v-dialog`, вы должны вручную остановить _распространение(propagation)_ события клика. Для этого просто добавьте модификатор _.stop_ к событию клика.",
+      "s": "html_stop_click_propagation"
+    },
+    {
+      "q": "### Относительные изображения не работают в `v-card` , `v-img` и других пользовательских компонентах vuetify",
+      "a": "Vue loader автоматически преобразует относительные пути в требуемые функции. К сожалению, это не так, когда речь идет о пользовательских компонентах. Вы можете обойти эту проблему, используя `require`. Если вы используете Vuetify в качестве Vue CLI плагина, вы можете редактировать проект [vue.config.js](https://cli.vuejs. rg/config/#vue-config-js) путем изменения параметров [vue-loader](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader).",
+      "s": "html_img_require"
+    },
+    {
+      "q": "### Как обновить до последней версии?",
+      "a": "Все необходимые изменения указаны в **Upgrade Guide** наших релизов.",
+      "a2": [
+        "[v2.0.0](https://github.com/vuetifyjs/vuetify/releases/tag/v2.0.0)",
+        "[v1.5.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0)",
+        "[v1.4.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.4.0)",
+        "[v1.3.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.3.0)",
+        "[v1.2.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.2.0)",
+        "[v1.1.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.1.0)",
+        "[v1.0.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.0.0)",
+        "[v0.17.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.17.0)",
+        "[v0.16.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.16.0)",
+        "[v0.15.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.15.0)",
+        "[v0.14.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.14.0)",
+        "[v0.13.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.13.0)",
+        "[v0.12.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.12.0)"
+      ]
+    },
+    {
+      "q": "### Как сообщить об ошибке или запросить функцию",
+      "a": "Чтобы убедиться, что вся необходимая информация предоставлена, мы создали [генератор вопросов](https://issues.vuetifyjs. om), который помогает вам в процессе. Любая проблема, созданная без использования генератора, будет автоматически закрыта, поэтому, пожалуйста, используйте её."
+    },
+    {
+      "q": "### vuetify-loader не загружает все компоненты",
+      "a": "В vuetify-loader есть ограничения в _dynamic_ компонентах. Пожалуйста, проверьте раздел [limitations](/customization/a-la-carte#limitations) для получения дополнительной информации."
+    },
+    {
+      "q": "### Сколько времени будет поддерживаться версия 1.5?",
+      "a": "До июля 2020 года. Больше информации можно найти на [странице долгосрочной поддержки](/introduction/long-term-support)."
+    },
+    {
+      "q": "### Как получить документацию к версии 1.5?",
+      "a": "[https://v15.vuetifyjs.com](https://v15.vuetifyjs.com)"
+    },
+    {
+      "q": "### [Vue warn]: Unknown custom element: <v-app>",
+      "a": "Убедитесь, что у вас установлена последняя версия [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugin-vuetify) и [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) в вашем **package.json**."
+    },
+    {
+      "q": "### SCRIPT5022: Expected identifier, string or number",
+      "a": "Для поддержки **modern mode** в vue-cli-3, `vuetify/lib` не перенесён. Вы должны сообщить vue-cli для переноса `vuetify`. Это настраивается автоматически при установке плагина Vuetify cli. Если вы используете старую версию, просто добавьте 'vuetify' в ваш `vue.config.js` массив **transpileDependencies**."
+    },
+    {
+      "q": "### При добавлении typescript - Error: Could not find a declaration file for module 'vuetify/lib'",
+      "a": "Добавить следующее в файл tsconfig:",
+      "s": "json_tsconfig_types"
+    }
+  ]
 }

@@ -8,6 +8,27 @@
     "app-bar": {
       "heading": "### ツールバーでの利用",
       "desc": "カスタマイズされたボタンソリューションを`v-toolbar`と簡単に統合できます"
+    },
+    "rounded": {
+      "heading": "### ラウンドボタン",
+      "desc": "`rounded` propを使用して`VBtnToggle`は丸みのある形状になります。"
+    },
+    "multiple": {
+      "heading": "### Multiple"
     }
+  },
+  "api": {
+    "v-btn": "Components.Buttons"
+  },
+  "props": {
+    "activeClass": "Mixins.BaseItemGroup.props.activeClass",
+    "backgroundColor": "コンポーネントの背景色を変更します。",
+    "dense": "ボタンのサイズとパディングを縮小します。",
+    "group": "一般的に [v-toolbar](/components/toolbars) および [v-app-bar](/components/app-bars) で使用されます。背景色、境界線を削除し、ボタン間のスペースを増やします",
+    "mandatory": "Mixins.BaseItemGroup.props.mandatory",
+    "multiple": "Mixins.BaseItemGroup.props.multiple"
+  },
+  "events": {
+    "change": "ユーザーの操作によって値が変更されたときに発生します。"
   }
 }

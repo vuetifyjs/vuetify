@@ -1,1 +1,6 @@
-{}
+{
+  "heading": "# Sorties et migrations",
+  "headingText": "L'équipe Vuetify sort des nouvelles versions tous les semaines. Toutes les notes de publication peuvent être trouvées via Github et peuvent être vues ci-dessous pour plus de simplicité. De plus, entre les versions majeures, il peut y avoir de nombreuses modifications de rupture dans lesquelles vous pouvez suivre le dernier guide de migration ci-dessous pour faciliter votre transition.",
+  "releaseHeader": "## Notes de publication",
+  "migrationHeader": "## Guide de migration"
+}
