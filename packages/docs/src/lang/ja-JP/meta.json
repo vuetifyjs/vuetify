@@ -1,6 +1,6 @@
 {
   "": {
-    "title": "マテリアルデザインコンポーネントフレームワーク",
+    "title": "Vue Material Design Component Framework",
     "description": "VuetifyはVue.jsのマテリアルデザインコンポーネントフレームワークです。美しいコンテンツを持つリッチアプリケーションを作成するのに必要不可欠なツールを提供することを目的としています。",
     "keywords": "vue, material design components, vue components, material design components, vuetify, vuetify.js, component framework"
   },
@@ -34,7 +34,8 @@
     "keywords": "vuetifyのロードマップ、将来の計画、新しいvuetifyの機能"
   },
   "introduction/sponsors-and-backers": {
-    "title": "スポンサーと後援者"
+    "title": "スポンサーと後援者",
+    "description": "プロジェクトを支援することで Vuetify をサポートします。これは、既存機能のメンテナンスと新しい機能の開発に役立ちます。"
   },
   "getting-started/quick-start": {
     "title": "クイックスタート",
@@ -63,6 +64,9 @@
     "description": "アラカルトでは、vuetify-loader を用いた自動的な treeshaking の説明をします。アプリケーションが必要とする機能のみを使用することで、パッケージバンドルサイズを劇的に削減することができます。",
     "keywords": "アラカルト、vuetify single import、vuetify import、コンポーネント import、vuetify のサイズ削減"
   },
+  "customization/breakpoints": {
+    "title": "Breakpoints"
+  },
   "customization/icons": {
     "title": "アイコン"
   },
@@ -73,5 +77,14 @@
     "title": "テーマ",
     "description": "Setup your custom application theme by changing a few variables.",
     "keywords": "テーマ"
+  },
+  "styles/transitions": {
+    "title": "Transitions"
+  },
+  "components/api-explorer": {
+    "title": "API explorer"
+  },
+  "components/aspect-ratios": {
+    "title": "アスペクト比"
   }
 }

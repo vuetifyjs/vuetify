@@ -18,14 +18,26 @@
     "buttons": {
       "heading": "### ボタン",
       "desc": "アイコンをボタン内部で使用し、ボタンを強調させるための動きを付けることができます。"
+    },
+    "clickable": {
+      "heading": "### クリッカブル",
+      "desc": "`v-icon` にクリックイベントをバインドすると、自動的にカーソルがポインターになります。"
+    },
+    "mdi-svg": {
+      "heading": "### MDI SVG",
+      "desc": "[@mdi/js](https://www.npmjs.com/package/@mdi/js) パッケージを使用するアイコンのみを手動でインポートできます。`VIcon`コンポーネントを持つ SVG アイコンを使用する場合は、 [こちら](/customization/icons#install-material-design-icons-js-svg) で使用する方法を参照してください。"
     }
   },
   "props": {
+    "dense": "アイコンを小さくする(20px)",
+    "disabled": "Mixins.Validatable.props.disabled",
     "large": "アイコンのサイズを大 **(36px)** にします。",
     "left": "ボタン内部でアイコンを使用する場合に、アイコンを左に配置します。",
     "medium": "アイコンのサイズを中 **(28px)** にします。",
     "right": "ボタン内部でアイコンを使用する場合に、アイコンを右に配置します。",
+    "size": "アイコンのカスタム フォント サイズを指定します。",
     "small": "アイコンのサイズを小 **(16px)** にします。",
+    "tag": "使用するカスタム タグを指定します。",
     "xLarge": "アイコンのサイズを最大 **(40px)** にします。"
   }
 }

@@ -75,6 +75,7 @@
     },
     {
       "q": "### Les images relatives ne fonctionnent pas dans `v-card`,` v-img` et autres composants personnalisés Vuetify",
+      "a": "Vue loader convertit les chemins relatifs en fonctions require automatiquement pour vous. Malheureusement, ce n'est pas le cas lorsqu'il s'agit de composants personnalisés. Vous pouvez contourner ce problème en utilisant `require`. Si vous utilisez Vuetify en tant que plugin Vue-CLI , vous pouvez éditer le fichier [vue.config.js](https://cli.vuejs.org/config/#vue-config-js) de votre projet en modifiant les options pour [vue-loader] (https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader).",
       "s": "html_img_require"
     },
     {
@@ -117,7 +118,8 @@
       "a": "Assurez-vous que vous avez la dernière version de [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugin-vuetify) et [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) installée dans votre **package.json**."
     },
     {
-      "q": "## SCRIPT5022 : Identifiant, chaîne ou numéro attendu"
+      "q": "## SCRIPT5022 : Identifiant, chaîne ou numéro attendu",
+      "a": "Afin de supporter le **mode moderne** dans vue-cli-3, `vuetify/lib` n'est pas transpiré. Vous devez dire à vue-cli de transpile le paquet `vuetify`. Ceci est configuré automatiquement lors de l'installation du plugin de cli Vuetify. Si vous utilisez une version plus ancienne, ajoutez simplement 'vuetify' à votre tableau `vue.config.js` **transpileDependencies**."
     },
     {
       "q": "### Lors de l'ajout de typescript - Erreur : Impossible de trouver un fichier de déclaration pour le module 'vuetify/lib'",

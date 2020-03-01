@@ -1,7 +1,13 @@
 {
   "heading": "# 快速入门",
   "headingText": "让我们从 Vuetify 开始吧，这是世界上最流行的 Vue.js 框架，用于构建功能丰富、快速的应用程序。",
+  "vueCliHeader": "## Vue CLI 安装",
+  "vueCliText1": "Vue CLI 是下一代 CLI 工具，用于抽离构建应用程序的复杂性。当你用 Vue CLI 启动你的应用程序时，你还可以获得官方的 webpack 更新和配置更改和 Vuetify 的更新，而无需费力地升级程序。",
+  "vueCliText2": "如果你还没有使用 **Vue CLI** 创建一个新的 Vue.js 项目，你可以输入：",
+  "vueCliText3": "现在你已经实例化了一个项目，你可以使用 cli 添加 [Vuetify Vue CLI package](https://github.com/vuetifyjs/vue-cli-plugin-vuetify) 。",
+  "vueCliAlert1": "想知道如何使用 Vue CLI，请查阅 [官方文档](https://cli.vuejs.org/zh/guide/)",
   "uiHeader": "### Vue UI 安装",
+  "uiText1": "Vuetify 也可通过 **Vue UI**——Vue CLI 的全新可视化应用程序——进行安装。确保你已安装了最新版的 Vue CLI，在终端上输入：",
   "uiImg1": "安装 Vuetify 插件",
   "uiImg2": "配置你的 Vuetify",
   "nuxtHeading": "## Nuxt 安装",

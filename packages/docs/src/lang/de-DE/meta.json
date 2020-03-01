@@ -1,0 +1,70 @@
+{
+  "": {
+    "title": "Vue Material Design Komponenten-Framework",
+    "description": "Vuetify ist ein Material-Design-Komponenten-Framework für Vue.js. Sein Ziel ist es, alle notwendigen Werkzeuge zur Erstellung von grafisch ansprechenden Web-Anwendungen bereit zu stellen.",
+    "keywords": "vue, Material Design, vue Komponenten, vuetify, vuetify.js, Komponenten-Framework"
+  },
+  "404": {
+    "title": "Hoppla, 404",
+    "description": "Hoppla, das was Sie hier suchen, ist nicht da!"
+  },
+  "introduction/why-vuetify": {
+    "title": "Warum Vuetify?",
+    "description": "Vuetify verfügt über eine sehr aktive Community, bietet einfach zu bedienende Material-Design-Komponenten und wird stetig weiterentwickelt.",
+    "keywords": "warum vuetify, warum vuetify wählen, bestes vue Framework, bestes ui Framework"
+  },
+  "introduction/frequently-asked-questions": {
+    "title": "Häufig gestellte Fragen"
+  },
+  "introduction/long-term-support": {
+    "title": "Langfristige Unterstützung"
+  },
+  "introduction/meet-the-team": {
+    "title": "Das Team"
+  },
+  "introduction/roadmap": {
+    "title": "Der Vuetify-Fahrplan"
+  },
+  "introduction/sponsors-and-backers": {
+    "title": "Sponsoren & Unterstützer"
+  },
+  "getting-started/quick-start": {
+    "title": "Schnellstart"
+  },
+  "getting-started/browser-support": {
+    "title": "Browserunterstützung"
+  },
+  "getting-started/unit-testing": {
+    "title": "Unit-Tests"
+  },
+  "getting-started/contributing": {
+    "title": "Zum Projekt beitragen"
+  },
+  "customization/accessibility": {
+    "title": "Barrierefreiheit"
+  },
+  "customization/a-la-carte": {
+    "title": "A-la-carte (Treeshaking)"
+  },
+  "customization/breakpoints": {
+    "title": "Breakpoints"
+  },
+  "components/avatars": {
+    "title": "Avatar-Komponente"
+  },
+  "components/badges": {
+    "title": "Badge-Komponente"
+  },
+  "components/breadcrumbs": {
+    "title": "Breadcrumbs-Komponente"
+  },
+  "components/calendars": {
+    "title": "Kalender-Komponente"
+  },
+  "components/cards": {
+    "title": "Cards-Komponente"
+  },
+  "components/buttons": {
+    "title": "Button-Komponente"
+  }
+}

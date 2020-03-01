@@ -1,12 +1,63 @@
 {
+  "heading": "# リスト",
   "headingText": "`v-list` コンポーネントは情報を表示するために使用されます。リストにはアバター、コンテンツ、アクション、サブヘッダーなどを含めることができます。 リストは、テキストと画像のグループを整理するための一貫したスタイリングを提供し、コレクション内の特定のアイテムを簡単に識別できるようにコンテンツを表示します。",
   "alert1": "ステートフルリストアイテムを探している場合は、[v-list-item-group](/components /list-item-groups) を確認してください。",
   "examples": {
     "usage": {
       "desc": "リストには主に **single-line** (デフォルト)、 **two-line** 、 **three-line** の3つのバリエーションがあります。行宣言はアイテムの最小の高さを指定し、 `v-list` の同じプロップから制御することもできます。"
     },
+    "avatar-title-and-action": {
+      "heading": "### タイトルとアクションを持つAvatar",
+      "desc": "リストには、より明示的なアプローチのためのスロットも含まれています。この方法を選択する場合は、正しい間隔を設定するために追加のpropsを用意する必要があります。この例では、アバターを含むタイルがあるため、 `avatar`プロパティを提供する必要があります。"
+    },
+    "avatar-subheader-title-and-action": {
+      "heading": "### タイトルとアクションを持つAvatar",
+      "desc": "ここでは、 **v-list-item-avatar** と **v-list-item-icon** を1行のリストにまとめます。"
+    },
+    "subheadings-and-dividers": {
+      "heading": "### サブヘッダと区切り線",
+      "desc": "リストには、複数のサブヘッダーと区切り線を含めることができます。"
+    },
+    "nested": {
+      "heading": "### ネストしたリスト",
+      "desc": "`v-list-group` コンポーネントを使用すると、**sub-group** propを使用して最大 **2** レベルまで作成できます。"
+    },
+    "expansion-lists": {
+      "heading": "### 展開するリスト",
+      "desc": "リストには、クリックすると表示される項目のグループを含めることができます。展開リストは**[v-navigation-drawer](/components/navigation-drawers)** コンポーネント内でも使用されます。"
+    },
+    "dense": {
+      "heading": "### Dense （高さが詰まったスタイル）"
+    },
     "flat": {
       "heading": "フラットボタン"
+    }
+  },
+  "props": {
+    "v-list-item": {
+      "disabled": "コンポーネントを無効にします。",
+      "selectable": "`v-list-item`内でテキストを選択できるようにします。このpropは[user-select](https://developer.mozilla.org/ja/docs/Web/CSS/user-select) を使用します。",
+      "value": "[v-list-item-group](/components/list-item-groups) の子の場合に使用される値。"
+    },
+    "v-list-item-avatar": {
+      "color": "Mixins.Colorable.props.color"
+    },
+    "v-list-group": {
+      "activeClass": "Mixins.Routable.props.activeClass",
+      "appendIcon": "Components.Inputs.props.appendIcon",
+      "prependIcon": "Components.Inputs.props.prependIcon",
+      "ripple": "Mixins.Rippleable.props.ripple"
+    }
+  },
+  "slots": {
+    "v-list-group": {
+      "appendIcon": "Components.Inputs.props.appendIcon",
+      "prependIcon": "Components.Inputs.props.prependIcon"
+    }
+  },
+  "events": {
+    "v-list-group": {
+      "click": "コンポーネントがクリックされたときに発生 - `.native`修飾子を使用しない限り、クリックするとコンポーネントにリップル効果が適用されます。"
     }
   }
 }

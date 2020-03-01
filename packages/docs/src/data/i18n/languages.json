@@ -11,9 +11,9 @@
     "country": "ar"
   },
   {
-    "name": "Nederlands",
-    "locale": "nl-NL",
-    "country": "nl"
+    "name": "Deutsche",
+    "locale": "de-DE",
+    "country": "de"
   },
   {
     "name": "Español",
@@ -29,6 +29,16 @@
     "name": "Italiano",
     "locale": "it-IT",
     "country": "it"
+  },
+  {
+    "name": "ខ្មែរ",
+    "locale": "km-KH",
+    "country": "kh"
+  },
+  {
+    "name": "Nederlands",
+    "locale": "nl-NL",
+    "country": "nl"
   },
   {
     "name": "Português",

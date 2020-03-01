@@ -7,8 +7,13 @@
       "uninverted": true
     },
     "options": {
+      "heading": "### オプションを使用したスクロール",
       "desc": "指定した要素にイベントリスナーをバインドすることもできます。",
       "uninverted": true
     }
+  },
+  "options": {
+    "arg:target": "`v-scroll:#target=\"callback\"` スクロールの変更を監視するターゲット。デフォルトはウィンドウですが、任意の有効なIDセレクターに変更できます。",
+    "value": "`v-scroll=\"callback\"` ターゲットスクロールで呼び出す関数"
   }
 }
