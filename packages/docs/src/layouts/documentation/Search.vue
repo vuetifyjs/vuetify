@@ -58,7 +58,7 @@
         e = e || window.event
 
         if (
-          e.keyCode === 191 && // Forward Slash '/'
+          e.key === '/' &&
           e.target !== this.$refs.search.$refs.input
         ) {
           e.preventDefault()
