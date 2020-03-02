@@ -6,8 +6,13 @@ notifications:
 
 cache:
   yarn: true
+  npm: true
   directories:
     - node_modules
+    - packages/api-generator/node_modules
+    - packages/docs/node_modules
+    - packages/vuetify/node_modules
+    - $(yarn global bin)
 
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
