@@ -150,8 +150,7 @@ module.exports = {
   },
   plugins,
   devServer: {
-    contentBase: resolve('../src/public'),
-    publicPath: '/dist/',
+    publicPath: '/',
     host: process.env.HOST || 'localhost',
     port: process.env.PORT || '8095',
     disableHostCheck: true,
