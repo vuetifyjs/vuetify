@@ -40,13 +40,13 @@
   &--selectable
     user-select: auto
 
-// Fix for IE11 where min-height does not work with
-// align-items: center in flex containers
-// https://github.com/philipwalton/flexbugs/issues/231
-.v-list-item:after
-  content: ''
-  min-height: inherit
-  font-size: 0
+  // Fix for IE11 where min-height does not work with
+  // align-items: center in flex containers
+  // https://github.com/philipwalton/flexbugs/issues/231
+  &:after
+    content: ''
+    min-height: inherit
+    font-size: 0
 
 
 // Element
