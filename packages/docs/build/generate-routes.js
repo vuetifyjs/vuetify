@@ -43,6 +43,6 @@ module.exports = function generateRoutes () {
 }
 
 function getLangs () {
-  return readdir(LANG_PATH, { withFileTypes: false }).then(files => files.filter(file => file === 'en'))
-  // return readdir(LANG_PATH, { withFileTypes: false }).then(files => files.filter(file => file !== 'eo-UY'))
+  // return readdir(LANG_PATH, { withFileTypes: false }).then(files => files.filter(file => file === 'en'))
+  return readdir(LANG_PATH, { withFileTypes: false }).then(files => files.filter(file => file !== 'eo-UY'))
 }

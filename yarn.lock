@@ -10261,6 +10261,11 @@ node-releases@^1.1.25:
   dependencies:
     semver "^5.3.0"
 
+node-worker-threads-pool@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/node-worker-threads-pool/-/node-worker-threads-pool-1.2.0.tgz#6ee86461e383c35dfd2b389b46523474ec51f80b"
+  integrity sha512-AuEMPaPLysE4OhD/U35TezqYBa95M5ccqLScxiRzIUI47PBfXYxcK12RmONzsX+z+4WaCVc+MuZXpE1veJR0hA==
+
 nopt@1.0.10:
   version "1.0.10"
   resolved "https://registry.yarnpkg.com/nopt/-/nopt-1.0.10.tgz#6ddd21bd2a31417b92727dd585f8a6f37608ebee"
