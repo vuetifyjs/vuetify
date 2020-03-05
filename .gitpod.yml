@@ -1,0 +1,10 @@
+tasks:
+  - init: yarn install && yarn run build
+    command: yarn run start
+ports:
+  - port: 8095
+    onOpen: open-preview
+vscode:
+  extensions:
+    - octref.vetur@0.23.0:TEzauMObB6f3i2JqlvrOpA==
+
