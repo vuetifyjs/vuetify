@@ -3,6 +3,7 @@ const merge = require('webpack-merge')
 const base = require('./webpack.base.config')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -71,8 +72,23 @@ const config = merge(base, {
     new webpack.DefinePlugin({
       'process.env.VUE_ENV': '"client"'
     }),
-    new VueSSRClientPlugin()
+    new CopyPlugin([
+      { from: 'src/public' },
+    ]),
   ],
+  devServer: {
+    publicPath: '/',
+    host: process.env.HOST || 'localhost',
+    port: process.env.PORT || '8095',
+    disableHostCheck: true,
+    historyApiFallback: {
+      rewrites: [
+        { from: /.*/, to: '/dist/index.html' },
+      ],
+    },
+    serveIndex: true,
+    quiet: true
+  },
   optimization: {
     minimize: isProd,
     runtimeChunk: true,
@@ -104,7 +120,8 @@ if (isProd) {
   config.plugins.push(
     new MiniCssExtractPlugin({
       filename: 'common.[chunkhash].css'
-    })
+    }),
+    new VueSSRClientPlugin(),
   )
 }
 
