@@ -434,18 +434,14 @@ Detailed changes for each release are documented in the [release notes](https://
 ### Contributing
 Developers interested in contributing should read the [Code of Conduct](./CODE_OF_CONDUCT.md) and the [Contribution Guide](https://vuetifyjs.com/getting-started/contributing).
 
-#### Online one-click setup for Contributing
-
-Contribute to Vuetify, using a fully featured online development environment; cloned repo, pre-installed dependencies, running web server.
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer/)
-
 > Please do **not** ask general questions in an issue. Issues are only to report bugs, suggest
   enhancements, or request new features. For general questions and discussions, ask in the [community chat](https://community.vuetifyjs.com/).
 
 To help you get you familiar with our contribution process, we have a list of [good first issues](https://github.com/vuetifyjs/vuetify/labels/good%20first%20issue) that contain bugs which have a relatively limited scope. This is a great place to get started. If you have any questions, please join us on the [community chat](https://community.vuetifyjs.com).
 
 We also have a list of [help wanted](https://github.com/vuetifyjs/vuetify/labels/help%20wanted) issues that you might want to check.
+
+To quickly start up in an online dev environment fork this repo and click the following [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer/)
 
 This project exists thanks to all the people who contribute 😍!
 
