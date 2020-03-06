@@ -6,36 +6,71 @@ const generateRoutes = require('./generate-routes')
 const { DynamicPool } = require('node-worker-threads-pool')
 
 const threads = os.cpus().length
-const readFile = util.promisify(fs.readFile)
 const resolve = file => path.resolve(__dirname, file)
-
-const templatePath = resolve('../src/index.template.html')
 
 const pool = new DynamicPool(threads)
 
+function log (msg) {
+  console.info('\n')
+  console.info(msg)
+  console.info('\n')
+}
+
 function chunk (arr, chunkSize) {
-  const chunks = [];
+  const chunks = []
+
   for (let i = 0; i < arr.length; i += chunkSize) {
     chunks.push(arr.slice(i , i + chunkSize))
   }
+
   return chunks
 }
 
-Promise.all([
-  generateRoutes(),
-  readFile(templatePath, 'utf-8'),
-  readFile('./dist/vue-ssr-server-bundle.json', 'utf-8'),
-  readFile('./dist/vue-ssr-client-manifest.json', 'utf-8'),
-]).then(([routes, template, serverBundle, clientManifest]) => {
-  serverBundle = JSON.parse(serverBundle)
-  clientManifest = JSON.parse(clientManifest)
-  console.info('Starting prerender')
+function promise (cb) {
+  return new Promise(resolve => {
+    let value
+
+    try {
+      value = cb()
+    } catch (err) {
+      log(err)
+
+      process.exit(1)
+    }
+
+    resolve(value)
+  })
+}
+
+function readFile (file) {
+  const read = util.promisify(fs.readFile)
+
+  return promise(() => read(resolve(file), 'utf-8'))
+}
+
+async function readTemplate () {
+  return readFile('../src/index.template.html')
+}
+
+async function readBundle () {
+  return JSON.parse(await readFile('../dist/vue-ssr-server-bundle.json'))
+}
+
+async function readManifest () {
+  return JSON.parse(await readFile('../dist/vue-ssr-server-bundle.json'))
+}
+
+async function run () {
+  const routes = await promise(generateRoutes).catch(log)
+  const template = await promise(readTemplate).catch(log)
+  const bundle = await promise(readBundle).catch(log)
+  const manifest = await promise(readManifest).catch(log)
 
   chunk(routes, Math.round(routes.length / threads)).forEach((routes, index) => {
     pool.exec({
-      workerData: { routes, template, serverBundle, clientManifest, index },
+      workerData: { routes, template, bundle, manifest, index },
       task () {
-        const { routes, template, serverBundle, clientManifest, index } = this.workerData
+        const { routes, template, bundle, manifest, index } = this.workerData
 
         const fs = require('fs')
         const path = require('path')
@@ -46,9 +81,9 @@ Promise.all([
 
         const writeFile = util.promisify(fs.writeFile)
 
-        const renderer = createBundleRenderer(serverBundle, {
+        const renderer = createBundleRenderer(bundle, {
           runInNewContext: false,
-          clientManifest,
+          manifest,
           shouldPrefetch: () => false,
           template,
         })
@@ -95,4 +130,6 @@ Promise.all([
       },
     })
   })
-})
+}
+
+run()
