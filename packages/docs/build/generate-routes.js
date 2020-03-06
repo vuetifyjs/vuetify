@@ -8,7 +8,9 @@ const { kebabCase } = require('lodash')
 const resolve = file => path.resolve(__dirname, file)
 
 const DATA_PATH_JSON_FILES = resolve('../src/data/pages/**/*.json')
-const LANG_PATH = resolve('../src/lang')
+const languages = require('../src/data/i18n/languages.json')
+  .map(lang => lang.alternate || lang.locale)
+  .filter(lang => lang !== 'eo-UY')
 
 module.exports = function generateRoutes () {
   return new Promise((resolve, reject) => {
@@ -29,20 +31,13 @@ module.exports = function generateRoutes () {
         paths.push(`/${route}`)
       }
 
-      getLangs().then(langs => {
-        for (const locale of langs) {
-          for (const path of paths) {
-            routes.push({ locale, path, fullPath: `/${locale}${path}` })
-          }
+      for (const locale of languages) {
+        for (const path of paths) {
+          routes.push({ locale, path, fullPath: `/${locale}${path}` })
         }
+      }
 
-        resolve(routes)
-      }).catch(reject)
+      resolve(routes)
     })
   })
-}
-
-function getLangs () {
-  // return readdir(LANG_PATH, { withFileTypes: false }).then(files => files.filter(file => file === 'en'))
-  return readdir(LANG_PATH, { withFileTypes: false }).then(files => files.filter(file => file !== 'eo-UY'))
 }

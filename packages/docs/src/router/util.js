@@ -31,9 +31,6 @@ export function root (children) {
       'Root',
       children
     ),
-    layout('', 'Frontend', [
-      route('', 'Home'),
-    ]),
   ]
 }
 
