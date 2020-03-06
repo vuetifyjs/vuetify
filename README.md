@@ -34,9 +34,6 @@
   <a href="https://cdnjs.com/libraries/vuetify">
     <img src="https://img.shields.io/cdnjs/v/vuetify.svg" alt="CDN">
   </a>
-  <a href="https://gitpod.io/#https://github.com/vuetifyjs/vuetify">
-    <img src="https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod" alt="Gitpod Ready-to-Code">
-  </a>
 </p>
 
 <h2 align="center">Supporting Vuetify</h2>
@@ -440,8 +437,6 @@ Developers interested in contributing should read the [Code of Conduct](./CODE_O
 To help you get you familiar with our contribution process, we have a list of [good first issues](https://github.com/vuetifyjs/vuetify/labels/good%20first%20issue) that contain bugs which have a relatively limited scope. This is a great place to get started. If you have any questions, please join us on the [community chat](https://community.vuetifyjs.com).
 
 We also have a list of [help wanted](https://github.com/vuetifyjs/vuetify/labels/help%20wanted) issues that you might want to check.
-
-To quickly start up in an online dev environment fork this repo and click the following [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer/)
 
 This project exists thanks to all the people who contribute 😍!
 
