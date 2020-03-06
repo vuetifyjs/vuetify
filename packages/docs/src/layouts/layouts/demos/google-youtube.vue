@@ -131,11 +131,11 @@
     data: () => ({
       drawer: null,
       items: [
-        { icon: 'trending_up', text: 'Most Popular' },
-        { icon: 'subscriptions', text: 'Subscriptions' },
-        { icon: 'history', text: 'History' },
-        { icon: 'featured_play_list', text: 'Playlists' },
-        { icon: 'watch_later', text: 'Watch Later' },
+        { icon: 'mdi-trending-up', text: 'Most Popular' },
+        { icon: 'mdi-youtube-subscription', text: 'Subscriptions' },
+        { icon: 'mdi-history', text: 'History' },
+        { icon: 'mdi-playlist-play', text: 'Playlists' },
+        { icon: 'mdi-clock', text: 'Watch Later' },
       ],
       items2: [
         { picture: 28, text: 'Joseph' },
