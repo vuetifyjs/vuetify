@@ -1,11 +1,15 @@
+const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const base = require('./webpack.base.config')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const isProd = process.env.NODE_ENV === 'production'
+
+const resolve = file => path.resolve(__dirname, file)
 
 const cssLoaders = [
   isProd ? MiniCssExtractPlugin.loader : {
@@ -83,7 +87,7 @@ const config = merge(base, {
     disableHostCheck: true,
     historyApiFallback: {
       rewrites: [
-        { from: /.*/, to: '/dist/index.html' },
+        { from: /.*/, to: '/' },
       ],
     },
     serveIndex: true,
@@ -122,6 +126,12 @@ if (isProd) {
       filename: 'common.[chunkhash].css'
     }),
     new VueSSRClientPlugin(),
+  )
+} else {
+  config.plugins.push(
+    new HtmlWebpackPlugin({
+      template: resolve('../src/dev.template.html')
+    }),
   )
 }
 
