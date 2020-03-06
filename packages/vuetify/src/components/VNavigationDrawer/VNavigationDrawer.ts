@@ -225,7 +225,7 @@ export default baseMixins.extend({
     },
     showOverlay (): boolean {
       return (
-        !this.hideOverlay
+        !this.hideOverlay &&
         this.isActive &&
         (this.isMobile || this.temporary)
       )
