@@ -1,5 +1,3 @@
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/vuetifyjs/vuetify) 
-
 <p align="center">
   <a href="https://vuetifyjs.com" target="_blank">
     <img alt="Vuetify Logo" width="100" src="https://cdn.vuetifyjs.com/images/logos/logo.svg">
@@ -35,6 +33,9 @@
   </a>
   <a href="https://cdnjs.com/libraries/vuetify">
     <img src="https://img.shields.io/cdnjs/v/vuetify.svg" alt="CDN">
+  </a>
+  <a href="https://gitpod.io/#https://github.com/vuetifyjs/vuetify">
+    <img src="https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod" alt="Gitpod Ready-to-Code">
   </a>
 </p>
 
@@ -432,6 +433,12 @@ Detailed changes for each release are documented in the [release notes](https://
 
 ### Contributing
 Developers interested in contributing should read the [Code of Conduct](./CODE_OF_CONDUCT.md) and the [Contribution Guide](https://vuetifyjs.com/getting-started/contributing).
+
+#### Online one-click setup for Contributing
+
+Contribute to Vuetify, using a fully featured online development environment; cloned repo, pre-installed dependencies, running web server.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer/)
 
 > Please do **not** ask general questions in an issue. Issues are only to report bugs, suggest
   enhancements, or request new features. For general questions and discussions, ask in the [community chat](https://community.vuetifyjs.com/).
