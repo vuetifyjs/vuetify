@@ -18,3 +18,5 @@ coverage/
 # cypress
 cypress/screenshots
 cypress/videos 
+
+.now
