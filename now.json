@@ -7,7 +7,7 @@
       "destination": "/packages/docs/dist/$1"
     }
   ],
-  "trailingSlash": false,
+  "trailingSlash": true,
   "github": {
     "autoAlias": false,
     "silent": true

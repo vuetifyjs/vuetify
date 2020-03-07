@@ -27,7 +27,7 @@ export function layout (path, name, children) {
 export function root (children) {
   return [
     layout(
-      '/:lang([a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3})',
+      `/:lang`,
       'Root',
       children
     ),
@@ -40,18 +40,17 @@ export function redirect (redirect) {
 }
 
 export function redirectLang (path = '') {
-  // language regex:
-  // /^[a-z]{2,3}(?:-[a-zA-Z]{4})?(?:-[A-Z]{2,3})?$/
-  // /^[a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3}$/
-  const languageRegex = /^\/([a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3})(?:\/.*)?$/
-  const fallbackLocale = languages.find(lang => lang.fallback === true).locale
+  const languageRe = new RegExp(languages.map(l => l.locale).join('|'), 'gi')
 
   return redirect(to => {
-    let lang = `/${getLanguageCookie() || fallbackLocale}`
+    const langCookie = getLanguageCookie() || ''
+    const lang = langCookie.match(languageRe) ? langCookie : 'en'
+    path = path || to.path
 
-    if (!languageRegex.test(lang)) lang = `/${fallbackLocale}`
+    const redirectPath = `/${lang}`
+    const trailingSlash = redirectPath.substr(-1) !== '/' ? '/' : ''
 
-    return `${lang}${path || to.path}`
+    return `${redirectPath}${trailingSlash}`
   })
 }
 
