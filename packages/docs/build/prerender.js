@@ -15,6 +15,9 @@ const ProgressBar = require('progress')
 const { createBundleRenderer } = require('vue-server-renderer')
 const generateRoutes = require('./generate-routes')
 
+const languages = require('../src/data/i18n/languages.json')
+const availableLanguages = languages.map(lang => lang.alternate || lang.locale)
+
 const threads = os.cpus().length
 const resolve = file => path.resolve(__dirname, file)
 
@@ -108,10 +111,10 @@ if (isMainThread) {
     const context = {
       crowdin: '',
       hostname: 'https://vuetifyjs.com', // TODO
-      hreflangs: '', // TODO
-      // hreflangs: availableLanguages.reduce((acc, lang) => {
-      //   return acc + `<link rel="alternate" hreflang="${lang}" href="https://${req.hostname}/${lang}${encodeURI(req.params[1])}" />`
-      // }, ''),
+      hreflangs: availableLanguages.reduce((acc, lang) => {
+        const href = path.normalize(`/${lang}/${route.path}`)
+        return acc + `<link rel="alternate" hreflang="${lang}" href="${href}" />`
+      }, ''),
       lang: route.locale,
       scripts: '',
       title: 'Vuetify', // default title
