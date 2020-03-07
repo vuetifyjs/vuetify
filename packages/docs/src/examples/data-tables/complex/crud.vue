@@ -60,13 +60,13 @@
         class="mr-2"
         @click="editItem(item)"
       >
-        mdi-pencil
+        edit
       </v-icon>
       <v-icon
         small
         @click="deleteItem(item)"
       >
-        mdi-delete
+        delete
       </v-icon>
     </template>
     <template v-slot:no-data>
