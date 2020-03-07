@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.client.config.js --hot --progress",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config build/webpack.prod.config.js --no-progress --hide-modules && yarn prerender",
-    "prerender": "cross-env NODE_ENV=production node --max_old_space_size=3072 build/prerender.js",
+    "prerender": "cross-env NODE_ENV=production node build/prerender.js",
     "lint": "eslint --ext .js,.vue,.json src -f codeframe --max-warnings 0",
     "lint:fix": "yarn lint --fix"
   },
