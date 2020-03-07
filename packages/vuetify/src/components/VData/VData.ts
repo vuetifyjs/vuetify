@@ -257,7 +257,8 @@ export default Vue.extend({
       immediate: true,
     },
     pagination: {
-      handler () {
+      handler (pagination: DataPagination, old: DataPagination) {
+        if (deepEqual(pagination, old)) return
         this.$emit('pagination', this.pagination)
       },
       immediate: true,
