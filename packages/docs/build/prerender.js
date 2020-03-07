@@ -68,13 +68,16 @@ if (isMainThread) {
       workerData: { routes, template, bundle, clientManifest, index },
       stdout: true,
     })
+
+    const interrupt = process.stdout.clearLine ? bar.interrupt : console.log
     worker.on('message', ({ message, error, lastFile, time }) => {
       if (message) {
-        bar.interrupt(message)
+        interrupt(message)
       }
       if (error) {
-        bar.interrupt('\n' + lastFile + '\n' + error)
+        interrupt('\n' + lastFile + '\n' + error)
       }
+
       if (lastFile) {
         bar.tick({ lastFile, time })
       }
