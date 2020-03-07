@@ -10261,11 +10261,6 @@ node-releases@^1.1.25:
   dependencies:
     semver "^5.3.0"
 
-node-worker-threads-pool@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/node-worker-threads-pool/-/node-worker-threads-pool-1.2.0.tgz#6ee86461e383c35dfd2b389b46523474ec51f80b"
-  integrity sha512-AuEMPaPLysE4OhD/U35TezqYBa95M5ccqLScxiRzIUI47PBfXYxcK12RmONzsX+z+4WaCVc+MuZXpE1veJR0hA==
-
 nopt@1.0.10:
   version "1.0.10"
   resolved "https://registry.yarnpkg.com/nopt/-/nopt-1.0.10.tgz#6ddd21bd2a31417b92727dd585f8a6f37608ebee"
@@ -11623,7 +11618,7 @@ process@~0.5.1:
   resolved "https://registry.yarnpkg.com/process/-/process-0.5.2.tgz#1638d8a8e34c2f440a91db95ab9aeb677fc185cf"
   integrity sha1-FjjYqONML0QKkduVq5rrZ3/Bhc8=
 
-progress@^2.0.0:
+progress@^2.0.0, progress@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
   integrity sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
