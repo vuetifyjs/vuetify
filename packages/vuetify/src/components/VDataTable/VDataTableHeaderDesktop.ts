@@ -12,7 +12,10 @@ export default mixins(header).extend({
     genGroupByToggle (header: DataTableHeader) {
       return this.$createElement('span', {
         on: {
-          click: () => this.$emit('group', header.value),
+          click: (e: MouseEvent) => {
+            e.stopPropagation()
+            this.$emit('group', header.value)
+          },
         },
       }, ['group'])
     },
