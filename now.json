@@ -1,9 +1,13 @@
 {
   "version": 2,
-  "name": "vuetify",
+  "cleanUrls": true,
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/(.*)",
+      "destination": "/packages/docs/dist/$1"
+    }
   ],
+  "trailingSlash": false,
   "github": {
     "autoAlias": false,
     "silent": true
