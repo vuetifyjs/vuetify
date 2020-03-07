@@ -41,32 +41,16 @@ describe('dimensions.ts', () => {
   })
 
   describe('useDimensions', () => {
-    it('should have proper styles', () => {
+    it.each([
+      [{ width: 100 }, { width: '100px' }],
+      [{ width: 100, height: '' }, { width: '100px' }],
+      [{ width: 100, height: null }, { width: '100px' }],
+      [{ width: 100, height: '200' }, { width: '100px', height: '200px' }],
+    ])('should have proper styles', (input, expected) => {
       const { useDimensions } = dimensionsFactory()
 
-      expect(useDimensions({ width: 100 }).dimensions.value).toEqual({
-        style: {
-          width: '100px',
-        },
-      })
-
-      expect(useDimensions({ width: 100, height: '' }).dimensions.value).toEqual({
-        style: {
-          width: '100px',
-        },
-      })
-
-      expect(useDimensions({ width: 100, height: null }).dimensions.value).toEqual({
-        style: {
-          width: '100px',
-        },
-      })
-
-      expect(useDimensions({ width: 100, height: '200' }).dimensions.value).toEqual({
-        style: {
-          width: '100px',
-          height: '200px',
-        },
+      expect(useDimensions(input).dimensions.value).toEqual({
+        style: expected,
       })
     })
 
