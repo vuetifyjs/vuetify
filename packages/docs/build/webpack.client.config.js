@@ -78,6 +78,7 @@ const config = merge(base, {
     }),
     new CopyPlugin([
       { from: 'src/public' },
+      { from: 'src/themes', to: 'themes' },
     ]),
   ],
   devServer: {
