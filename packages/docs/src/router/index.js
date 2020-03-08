@@ -5,16 +5,14 @@ import VueAnalytics from 'vue-analytics'
 
 // Settings
 import redirects from './301.json'
-import languages from '@/data/i18n/languages.json'
 import scrollBehavior from './scroll-behavior'
 
 // Utilities
 import {
-  getLanguageCookie,
   layout,
-  redirectLang,
   root,
   route,
+  trailingSlash,
 } from './util'
 
 Vue.use(Router)
@@ -30,8 +28,16 @@ const routes = root([
   layout('examples/layouts/:page', 'Layouts'),
   layout(':namespace/:page/:section?', 'Documentation', [
     route('', 'Page'),
-    redirectLang('404'),
   ]),
+  {
+    component: () => import('@/layouts/frontend/Index.vue'),
+    path: '*',
+    children: [{
+      name: 'NotFound',
+      path: '',
+      component: () => import('@/pages/general/404.vue'),
+    }],
+  },
 ])
 
 export function createRouter () {
@@ -43,19 +49,7 @@ export function createRouter () {
   })
 
   router.beforeEach((to, from, next) => {
-    const locales = languages.map(l => l.locale).join('|')
-    const languageRe = new RegExp(locales, 'gi')
-    const langCookie = getLanguageCookie() || ''
-    const lang = langCookie.match(languageRe) ? langCookie : 'en'
-
-    if (!lang.match(languageRe)) return next(`/en/${to.path}`)
-
-    if (
-      Object.keys(to.params).length === 1 &&
-      to.path.substr(-1) !== '/'
-    ) return next(`/${lang}/${to.path}/`)
-
-    next()
+    return to.path.endsWith('/') ? next() : next(trailingSlash(to.path))
   })
 
   Vue.use(VueAnalytics, {

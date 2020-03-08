@@ -2,14 +2,6 @@
 import kebabCase from 'lodash/kebabCase'
 import languages from '@/data/i18n/languages.json'
 
-export function getLanguageCookie () {
-  return typeof document === 'undefined'
-    ? undefined
-    : new Map(
-      document.cookie.split('; ').map(c => c.split('='))
-    ).get('currentLanguage')
-}
-
 export function layout (path, name, children) {
   const folder = kebabCase(name)
 
@@ -24,34 +16,42 @@ export function layout (path, name, children) {
   }
 }
 
+export function trailingSlash (str) {
+  return str.endsWith('/') ? str : str + '/'
+}
+
+// Matches allowed languages
+export const languagePattern = languages.map(lang => lang.alternate || lang.locale).join('|')
+export const languageRegexp = new RegExp('^(' + languagePattern + ')$')
+// Matches any language identifier
+export const genericLanguageRegexp = /[a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3}/
+
+const preferredLanguage = typeof document === 'undefined'
+  ? 'en'
+  : window.localStorage.getItem('currentLanguage') || navigator.languages.find(l => l.match(languageRegexp)) || 'en'
+
 export function root (children) {
   return [
     layout(
-      `/:lang`,
+      `/:lang(${languagePattern})`,
       'Root',
       children
     ),
-    redirectLang(),
+    {
+      path: `/:lang(${genericLanguageRegexp.source})/*`,
+      redirect: to => trailingSlash(`/${preferredLanguage}/${to.params.pathMatch || ''}`),
+    },
+    {
+      // The previous one doesn't match if there's no slash after the language code (
+      path: `/:lang(${genericLanguageRegexp.source})`,
+      redirect: () => `/${preferredLanguage}/`,
+    },
+    redirect(to => trailingSlash(`/${preferredLanguage}${to.path}`)),
   ]
 }
 
 export function redirect (redirect) {
   return { path: '*', redirect }
-}
-
-export function redirectLang (path = '') {
-  const languageRe = new RegExp(languages.map(l => l.locale).join('|'), 'gi')
-
-  return redirect(to => {
-    const langCookie = getLanguageCookie() || ''
-    const lang = langCookie.match(languageRe) ? langCookie : 'en'
-    path = path || to.path
-
-    const redirectPath = `/${lang}`
-    const trailingSlash = redirectPath.substr(-1) !== '/' ? '/' : ''
-
-    return `${redirectPath}${trailingSlash}`
-  })
 }
 
 export function route (path, name, file) {

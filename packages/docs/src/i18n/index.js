@@ -66,7 +66,7 @@ export function createI18n (ssrContext, router) {
   router.beforeEach((to, from, next) => {
     loadLanguageAsync(to.params.lang)
       .then(() => next())
-      .catch(() => next('/' + fallbackLocale))
+      .catch(() => {})
   })
 
   return i18n
