@@ -42,7 +42,7 @@ export function root (children) {
       redirect: to => trailingSlash(`/${preferredLanguage}/${to.params.pathMatch || ''}`),
     },
     {
-      // The previous one doesn't match if there's no slash after the language code (
+      // The previous one doesn't match if there's no slash after the language code
       path: `/:lang(${genericLanguageRegexp.source})`,
       redirect: () => `/${preferredLanguage}/`,
     },

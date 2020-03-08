@@ -1,6 +1,7 @@
 {
   "version": 2,
   "cleanUrls": true,
+  "trailingSlash": true,
   "rewrites": [
     {
       "source": "/eo-UY/(.*)",
