@@ -1,6 +1,7 @@
 <template>
-  <v-container fluid>
+  <v-container class="fill-height">
     <v-data-iterator
+      :footer-props="{ itemsPerPageOptions }"
       :items="items"
       :items-per-page.sync="itemsPerPage"
       :page="page"
@@ -28,6 +29,7 @@
             <v-spacer />
             <v-select
               v-model="sortBy"
+              class="mx-2"
               flat
               solo-inverted
               hide-details
@@ -67,12 +69,10 @@
             :key="item.name"
             cols="12"
             sm="4"
-            md="4"
-            lg="4"
           >
             <v-card>
               <v-card-title>
-                <h4>{{ item.name }}</h4>
+                <h5>{{ item.name }}</h5>
               </v-card-title>
               <v-divider />
               <v-list dense>
@@ -119,9 +119,8 @@
     mixins: [Usage],
     data () {
       return {
-        itemsPerPageArray: [4, 8, 12],
+        itemsPerPageOptions: [4, 8, 12],
         search: '',
-        filter: {},
         sortDesc: false,
         page: 1,
         itemsPerPage: 4,
@@ -239,25 +238,6 @@
           },
         ],
       }
-    },
-    computed: {
-      numberOfPages () {
-        return Math.ceil(this.items.length / this.itemsPerPage)
-      },
-      filteredKeys () {
-        return this.keys.filter(key => key !== `Name`)
-      },
-    },
-    methods: {
-      nextPage () {
-        if (this.page + 1 <= this.numberOfPages) this.page += 1
-      },
-      formerPage () {
-        if (this.page - 1 >= 1) this.page -= 1
-      },
-      updateItemsPerPage (number) {
-        this.itemsPerPage = number
-      },
     },
   }
 </script>
