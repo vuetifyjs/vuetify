@@ -12,11 +12,9 @@ const languages = require('../src/data/i18n/languages.json')
   .map(lang => lang.alternate || lang.locale)
   .filter(lang => lang !== 'eo-UY')
 
-module.exports = function generateRoutes () {
+function genDocumentation () {
   const files = glob.sync(DATA_PATH_JSON_FILES)
-
   const paths = ['/']
-  const routes = [{ locale: '', path: '', fullPath: '/' }]
 
   for (const file of files) {
     const route = file
@@ -29,11 +27,35 @@ module.exports = function generateRoutes () {
     paths.push(`/${route}`)
   }
 
-  for (const locale of languages) {
-    for (const path of paths) {
-      routes.push({ locale, path, fullPath: `/${locale}${path}` })
-    }
+  return paths
+}
+
+function genDemos () {
+  const files = glob.sync(resolve('../src/layouts/layouts/demos/*.vue'))
+  const paths = []
+
+  for (const file of files) {
+    const route = file
+      .split('/demos/')
+      .pop()
+      .replace(/\.vue$/, '')
+
+    paths.push(`/examples/layouts/${route}`)
   }
 
-  return routes
+  return paths
 }
+
+const paths = [
+  ...genDocumentation(),
+  ...genDemos(),
+]
+const routes = [{ locale: '', path: '', fullPath: '/' }]
+
+for (const locale of languages) {
+  for (const path of paths) {
+    routes.push({ locale, path, fullPath: `/${locale}${path}` })
+  }
+}
+
+module.exports = routes

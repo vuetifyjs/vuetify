@@ -13,7 +13,6 @@ const {
 
 const ProgressBar = require('progress')
 const { createBundleRenderer } = require('vue-server-renderer')
-const generateRoutes = require('./generate-routes')
 
 const languages = require('../src/data/i18n/languages.json')
 const availableLanguages = languages.map(lang => lang.alternate || lang.locale)
@@ -53,7 +52,7 @@ function forEachSequential (arr, cb) {
 }
 
 if (isMainThread) {
-  const routes = generateRoutes()
+  const routes = require('./generate-routes')
   const template = readFile('../src/index.template.html')
   const bundle = JSON.parse(readFile('../dist/vue-ssr-server-bundle.json'))
   const clientManifest = JSON.parse(readFile('../dist/vue-ssr-client-manifest.json'))
@@ -69,7 +68,7 @@ if (isMainThread) {
       stdout: true,
     })
 
-    const interrupt = process.stdout.clearLine ? bar.interrupt : console.log
+    const interrupt = process.stdout.clearLine ? bar.interrupt.bind(bar) : console.log.bind(console)
     worker.on('message', ({ message, error, lastFile, time }) => {
       if (message) {
         interrupt(message)
