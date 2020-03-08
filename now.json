@@ -3,11 +3,18 @@
   "cleanUrls": true,
   "rewrites": [
     {
+      "source": "/eo-UY/(.*)",
+      "destination": "/_crowdin"
+    },
+    {
       "source": "/(.*)",
-      "destination": "/packages/docs/dist/$1"
+      "destination": "$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/_fallback"
     }
   ],
-  "trailingSlash": true,
   "github": {
     "autoAlias": false,
     "silent": true

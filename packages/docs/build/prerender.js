@@ -111,7 +111,6 @@ if (isMainThread) {
     const start = performance.now()
 
     const context = {
-      crowdin: '',
       hostname: 'https://vuetifyjs.com', // TODO
       hreflangs: availableLanguages.reduce((acc, lang) => {
         const href = path.normalize(`/${lang}/${route.path}`)

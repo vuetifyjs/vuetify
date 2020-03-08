@@ -80,6 +80,14 @@ const config = merge(base, {
       { from: 'src/public' },
       { from: 'src/themes', to: 'themes' },
     ]),
+    new HtmlWebpackPlugin({
+      filename: '_crowdin.html',
+      template: resolve('../src/crowdin.template.html')
+    }),
+    new HtmlWebpackPlugin({
+      filename: '_fallback.html',
+      template: resolve('../src/spa.template.html')
+    }),
   ],
   devServer: {
     publicPath: '/',
@@ -88,7 +96,8 @@ const config = merge(base, {
     disableHostCheck: true,
     historyApiFallback: {
       rewrites: [
-        { from: /.*/, to: '/' },
+        { from: /eo-UY\/.*/, to: '/_crowdin.html' },
+        { from: /.*/, to: '/_fallback.html' },
       ],
     },
     serveIndex: true,
@@ -127,12 +136,6 @@ if (isProd) {
       filename: 'common.[chunkhash].css'
     }),
     new VueSSRClientPlugin(),
-  )
-} else {
-  config.plugins.push(
-    new HtmlWebpackPlugin({
-      template: resolve('../src/dev.template.html')
-    }),
   )
 }
 

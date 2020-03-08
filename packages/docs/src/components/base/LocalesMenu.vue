@@ -86,7 +86,9 @@
 
         this.$router.replace({ params: { lang } })
 
-        window.localStorage.setItem('currentLanguage', lang)
+        if (lang !== 'eo-UY') {
+          window.localStorage.setItem('currentLanguage', lang)
+        }
       },
     },
   }
