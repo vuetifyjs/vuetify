@@ -1,5 +1,3 @@
-import { trailingSlash } from '@/router/util'
-
 // Must be called in Vue context
 export function goTo (id) {
   this.$vuetify.goTo(id).then(() => {
