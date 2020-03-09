@@ -67,14 +67,14 @@ jobs:
       deploy:
         - provider: script
           script: bash scripts/deploy.sh
-          skip_cleanup: true
+          cleanup: false
           on:
             repo: vuetifyjs/vuetify
             tags: true
         - provider: releases
           api_key: $GITHUB_API_KEY
           file: "release/vuetify-${TRAVIS_TAG}.zip"
-          skip_cleanup: true
+          cleanup: false
           on:
             repo: vuetifyjs/vuetify
             tags: true
