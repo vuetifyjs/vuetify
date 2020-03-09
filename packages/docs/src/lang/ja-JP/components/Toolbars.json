@@ -6,6 +6,8 @@
     }
   },
   "props": {
+    "absolute": "Mixins.Positionable.props.absolute",
+    "bottom": "Mixins.Positionable.props.bottom",
     "dense": "ツールバーのコンテンツの高さを48px（** prominent ** propを使用する場合は96px）に減らします。",
     "extended": "このプロパティを使用して、コンテンツを追加するための「extension」スロットを使用してツールバーの高さを増加させます。 **extension-height **プロップ、およびツールバーの高さに影響する他のプロップと組み合わせて使用​​できます。例えば **prominent**、**dense**などです。**heightと組み合わせると例外が発生します**。",
     "extensionHeight": "`extension`slotの高さ。 ",

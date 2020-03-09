@@ -73,6 +73,7 @@ export default mixins(
 
       return this.$createElement('div', {
         staticClass: 'v-card__progress',
+        key: 'progress',
       }, [render])
     },
   },

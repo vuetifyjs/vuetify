@@ -22,5 +22,12 @@
       "heading": "### Music Player",
       "desc": " Insetボトムシートを使用すると、シンプルな音楽プレーヤーなどの実用的なコンポーネントを作ることができます。"
     }
+  },
+  "props": {
+    "eager": "Mixins.Bootable.props.eager",
+    "inset": "シートの最大の横幅を 70% に縮小します。",
+    "internalActivator": "Components.Dialogs.props.internalActivator",
+    "openOnHover": "Components.Dialogs.props.openOnHover",
+    "maxWidth": "Components.Dialogs.props.maxWidth"
   }
 }

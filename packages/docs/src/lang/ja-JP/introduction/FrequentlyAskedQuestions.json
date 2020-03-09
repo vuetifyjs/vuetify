@@ -7,17 +7,17 @@
   "resetSearch": "検索をリセットする",
   "gotchas": [
     {
-      "q": "###Sass/Scssが原因でアプリケーションをコンパイルできない",
+      "q": "### Sass/Scssが原因でアプリケーションをコンパイルできない",
       "a": "ご使用のsass-loaderバージョンに従って、適切なオプションオブジェクトを使用していることを確認してください。",
       "s": "js_webpack_sass"
     },
     {
       "q": "### v2でのグリッドとv1.5の比較例はありますか？",
-      "a": "はい。Urlをご確認下さい。(https://gist.github.com/johnleider/207f63c9d30fb77042a0bb0258c5ab32)"
+      "a": "はい。[グリッドの例](https://gist.github.com/johnleider/207f63c9d30fb77042a0bb0258c5ab32) をご確認下さい。"
     },
     {
       "q": "### node-sassモジュールが見当たらない。(Error: Cannot find module 'node-sass')",
-      "a": "'package.json'内の'@vue/cli'のバージョンが**^3.5.0**以上であることをご確認ください。"
+      "a": "`package.json`内の`@vue/cli`のバージョンが**^3.5.0**以上であることをご確認ください。"
     },
     {
       "q": "###  不適切なCSS(Invalid CSS after \"    @content\": expected \"}\", was \"($material-light); \")",
@@ -75,6 +75,7 @@
     },
     {
       "q": "### `v-card` , `v-img`等vuetifyコンポーネントにてイメージ参照がうまくいきません。",
+      "a": "Vue loader は相対パスを必要な関数に自動的に変換します。残念ながら、カスタムコンポーネントでは自動的な変換が機能しません。この問題を克服するには `require` を利用します。Vue CLI  plugin を用いて Vuetify を使用している場合、プロジェクトの [vue.config.js](https://cli.vuejs.org/config/#vue-config-js) ファイルで [vue-loader](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader) のオプションを編集することで設定できます。",
       "s": "html_img_require"
     },
     {

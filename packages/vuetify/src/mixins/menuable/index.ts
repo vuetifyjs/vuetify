@@ -344,7 +344,10 @@ export default baseMixins.extend<options>().extend({
       this.checkForPageYOffset()
       this.pageWidth = document.documentElement.clientWidth
 
-      const dimensions: any = {}
+      const dimensions: any = {
+        activator: { ...this.dimensions.activator },
+        content: { ...this.dimensions.content },
+      }
 
       // Activator should already be shown
       if (!this.hasActivator || this.absolute) {
@@ -366,7 +369,7 @@ export default baseMixins.extend<options>().extend({
 
       // Display and hide to get dimensions
       this.sneakPeek(() => {
-        dimensions.content = this.measure(this.$refs.content)
+        this.$refs.content && (dimensions.content = this.measure(this.$refs.content))
 
         this.dimensions = dimensions
       })

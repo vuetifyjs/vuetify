@@ -16,6 +16,25 @@
     "linear-custom-colors": {
       "heading": "### 色の変更",
       "desc": "`color`と`background-color`propを使用して、色と背景色を設定することもできます。"
+    },
+    "striped": {
+      "heading": "### ストライプ模様の指定",
+      "desc": "`v-progress-linear`の値部分をストライプ模様の縞々背景にします。"
+    },
+    "slot": {
+      "heading": "### スロット"
     }
+  },
+  "props": {
+    "active": "Components.ProgressCircular.props.active",
+    "backgroundColor": "Components.ProgressCircular.props.backgroundColor",
+    "backgroundOpacity": "Components.ProgressCircular.props.backgroundOpacity",
+    "bufferValue": "Components.ProgressCircular.props.bufferValue",
+    "fill": "Components.ProgressCircular.props.fill",
+    "height": "Mixins.Measurable.props.height",
+    "indeterminate": "Components.ProgressCircular.props.indeterminate",
+    "size": "Components.ProgressCircular.props.size",
+    "stream": "**buffer-value** と連携して動作するローディングを描写するための代替スタイル",
+    "value": "Components.ProgressCircular.props.value"
   }
 }

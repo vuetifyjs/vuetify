@@ -4,7 +4,7 @@
   "clearable": "Add input clear functionality, default icon is Material Icons **clear**",
   "falseValue": "Sets value for falsy state",
   "fullWidth": "Forces 100% width",
-  "fixedTabs": "`v-tabs-item` min-width 160px (72px mobile), max-width 264px",
+  "fixedTabs": "`v-tabs-item` min-width 160px, max-width 360px",
   "id": "Sets the DOM id on the component",
   "mobileBreakPoint": "Sets the designated mobile breakpoint for the component. This will apply alternate styles for mobile devices.",
   "persistent": "Clicking outside will not dismiss the dialog",

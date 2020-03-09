@@ -6,10 +6,33 @@
       "desc": "ボトムナビゲーションは `vue-router` と一緒に使われることを想定していますが、`active.sync` を使用することで、ボタンのアクティブ状態をプログラム的に制御することができます。ボタンの値を変更するには `value` 属性を使用します。"
     },
     "color": {
-      "heading": "色"
+      "heading": "色",
+      "desc": "`color` prop は、ボトムナビゲーションを背景に色を適用します。テキストの色を適切に対比するには、`light` と `dark` propを使用することをお勧めします。"
+    },
+    "grow": {
+      "heading": "### Grow",
+      "desc": "`v-bottom-navigation` に `grow` プロパティが設定されている場合、その中のボタンは使用可能な領域を埋めるために拡張されます。"
+    },
+    "horizontal": {
+      "heading": "### Horizontal",
+      "desc": "`horizontal` propは、アイコンの下に配置されるナビゲーションテキストを、アイコンの横に配置します。"
+    },
+    "shift": {
+      "desc": "`shift` prop は、ボタンのテキストをアクティブになるまで非表示にします。この機能は、`v-btn` テキストを `<span>` タグでラップする必要があります。"
+    },
+    "toggle": {
+      "desc": "`v-bottom-navigation`の表示状態は、`input-value` propを使用して切り替えることができます。 `v-model`を使用して現在アクティブなボタンを制御することもできます。"
     },
     "scroll-threshold": {
       "heading": "### スクロールのしきい値"
     }
+  },
+  "props": {
+    "absolute": "Mixins.Positionable.props.absolute",
+    "fixed": "Mixins.Positionable.props.fixed",
+    "mandatory": "Mixins.BaseItemGroup.props.mandatory"
+  },
+  "events": {
+    "update:input-value": "`input-value.sync` 用のイベント"
   }
 }

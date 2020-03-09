@@ -6,7 +6,7 @@ exports[`VDialog.ts should only set tabindex if active 1`] = `
      style="z-index: 0;"
 >
   <div class="v-dialog"
-       style="display: none;"
+       style="transform-origin: center center; display: none;"
   >
   </div>
 </div>
@@ -19,7 +19,7 @@ exports[`VDialog.ts should only set tabindex if active 2`] = `
      tabindex="0"
 >
   <div class="v-dialog v-dialog--active"
-       style
+       style="transform-origin: center center;"
   >
   </div>
 </div>

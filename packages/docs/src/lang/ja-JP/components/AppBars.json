@@ -23,6 +23,9 @@
       "heading": "### スクロール時に隠す",
       "desc": "`v-app-bar` はスクロール時に隠すことができます。この機能を利用するには、`hide-on-scroll` プロパティを使用してください。"
     },
+    "app-bar-nav": {
+      "desc": "機能的なコンポーネント`v-app-bar-nav-icon`を使用すると、[v-navigation-drawer](/components/navigation-drawer) などの他のコンポーネントの状態を切り替えることができます。"
+    },
     "scroll-threshold": {
       "heading": "### スクロールのしきい値",
       "desc": "`v-app-bar` にはスクロールのしきい値を設定できます。`scroll-threshold` プロパティに指定したピクセル値の合計を超えるまでスクロールしたときに初めてスクロールに反応するようになります。"

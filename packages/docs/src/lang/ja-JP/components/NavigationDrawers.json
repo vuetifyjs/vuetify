@@ -1,4 +1,45 @@
 {
   "heading": "# ナビゲーションドロワー",
-  "headingText": "`v-navigation-drawer`コンポーネントは、アプリケーション全体をナビゲーションするためのものです。ナビゲーションドロワーはvue-routerなしで動作するように設定されています。下のいくつかの例では、v-cardでラップしています。基本的には、あなたのアプリケーションでは'v-app'の中にv-navigation-drawerを配置してください。"
+  "headingText": "`v-navigation-drawer`コンポーネントは、アプリケーション全体をナビゲーションするためのものです。ナビゲーションドロワーは**vue-router**なしで動作するように設定されています。下のいくつかの例では、`v-card`でラップしています。基本的には、あなたのアプリケーションでは `v-app`の中に`v-navigation-drawer`を配置してください。",
+  "examples": {
+    "usage": {
+      "desc": "ナビゲーションドロワーは、主にアプリケーション内のページへのリンクを格納するために使用されます。 `v-model`の開始値として `null` を使用すると、モバイルでは閉じられ、デスクトップでは開かれるようにドロワーが初期化されます。 **nav** プロパティを使用して、ドロワーと[v-list](/components/lists) コンポーネントをペアにするのが一般的です。"
+    },
+    "colored": {
+      "heading": "### 色付きドロワー",
+      "desc": "ナビゲーションドロワーは、あらゆるアプリケーションの設計に合わせてカスタマイズできます。ここでは、**append** スロットを使用してカスタム背景色と追加コンテンツ領域を適用します。"
+    },
+    "permanent-floating": {
+      "desc": "デフォルトでは、ナビゲーションドロワーには、コンテンツと分離する1pxの右境界線があります。この例では、ドロワーを左側から取り外して、それだけでfloatにします。 **floating** プロパティは、右側の境界線（**right** を使用している場合は左側）を削除します。"
+    },
+    "right": {
+      "heading": "### 右側への配置",
+      "desc": "ナビゲーションドロワーは、アプリケーション (またはエレメント) の右側に配置することもできます。これは、ナビゲーション リンクを持たない可能性がある補助情報を含むサイド シートを作成する場合にも役立ちます。**RTL** を使用する場合は、ドロワーの **right** を明示的に定義する必要があります。"
+    },
+    "background": {
+      "heading": "### 背景",
+      "desc": "ドロワーにカスタム背景を適用します。`v-img`のプロパティをカスタマイズする必要がある場合は、**img** スロットを使用できます。"
+    }
+  },
+  "props": {
+    "absolute": "Mixins.Positionable.props.absolute",
+    "fixed": "Mixins.Positionable.props.fixed",
+    "height": "ナビゲーション ドロワーの高さを設定します。",
+    "miniVariantWidth": "`mini` prop がオンのときに割り当てられる幅を指定します。",
+    "miniVariant": "ナビゲーションドロワーの幅を縮小し、**.sync**修飾子も受け入れます。これにより、ドロワーはクリックすると再び開きます",
+    "right": "ナビゲーションドロワーを右側に配置します。",
+    "src": "Components.Toolbars.props.src",
+    "tag": "Components.Sheets.props.tag",
+    "touchless": "モバイルのタッチ機能を無効にする",
+    "value": "Mixins.Toggleable.props.value",
+    "width": "Mixins.Measurable.props.width"
+  },
+  "events": {
+    "transitionend": "トランジションが完了したときにイベントオブジェクトを発生させます。",
+    "update:mini-variant": "`mini-variant.sync` イベント"
+  },
+  "slots": {
+    "append": "ドロワーの下部にあるスロット"
+  },
+  "alert": "`app` プロパティを有効にして `v-navigation-drawer` を使用している場合は、例のように `absolute` prop を使用する必要はありません。"
 }
