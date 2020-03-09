@@ -54,10 +54,18 @@ export function parseLink (match, text, link) {
     icon = 'open-in-new'
     linkClass += ' v-markdown--external'
   } else {
+    const hashIndex = link.indexOf('#')
     const lang = window.localStorage.getItem('currentLanguage') || 'en'
-    const suffix = link.indexOf('#') < 0
-      ? 'same-internal'
-      : 'internal'
+    let suffix = 'internal'
+
+    if (hashIndex > -1) {
+      const [target, hash] = link.split('#')
+
+      suffix = 'same-internal'
+      link = `${trailingSlash(target)}#${hash}`
+    } else {
+      link = trailingSlash(link)
+    }
 
     linkClass += ` v-markdown--${suffix}`
 
