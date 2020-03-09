@@ -116,7 +116,7 @@
       if (wantsList) code = code.map(c => `- ${c}\n`).join('')
 
       if (typeof code !== 'string') {
-        console.log(code, typeof code)
+        console.log(`Invalid type ${typeof code}, expected string`, code)
         code = ''
       }
 
