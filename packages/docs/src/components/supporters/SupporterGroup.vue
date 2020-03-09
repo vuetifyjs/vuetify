@@ -1,7 +1,7 @@
 <template>
   <v-row
     :align="$attrs.align || 'center'"
-    :justify="'center'"
+    :justify="$attrs['justify'] || 'center'"
     class="ma-0 supporter-group"
     dense
     v-bind="$attrs"
@@ -25,10 +25,9 @@
 
       <v-col
         :key="i"
-        class="d-flex shrink"
+        class="d-flex shrink justify-center"
         cols="6"
-        md="auto"
-        justify="center"
+        sm="auto"
       >
         <supporters-sponsor
           :large="$attrs.large"
