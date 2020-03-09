@@ -1,5 +1,6 @@
 {
   "props": {
+    "loading": "線形プログレス バーを表示します。 進行状況バー (任意のマテリアルカラーまたはテーマカラー - **primary**, **secondary**, **success**, **info**, **warning**, **error**) に適用する色を指定する文字列、あるいはコンポーネント **color** (color propで設定 - コンポーネントでサポートされている場合) またはprimary色を使用する真偽値を指定できます。",
     "loaderHeight": "loader の高さを指定します。"
   }
 }

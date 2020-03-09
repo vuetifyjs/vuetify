@@ -25,7 +25,7 @@ import {
 } from '../../util/helpers'
 
 // Types
-import { VNode } from 'vue'
+import { VNode, VNodeData } from 'vue'
 
 const baseMixins = mixins(
   Activatable,
@@ -275,7 +275,7 @@ export default baseMixins.extend({
       }, [content])
     },
     genInnerContent () {
-      const data = {
+      const data: VNodeData = {
         class: this.classes,
         ref: 'dialog',
         directives: [
@@ -286,14 +286,17 @@ export default baseMixins.extend({
               closeConditional: this.closeConditional,
               include: this.getOpenDependentElements,
             },
-          },
+          } as any,
           { name: 'show', value: this.isActive },
         ],
-        style: {},
+        style: {
+          transformOrigin: this.origin,
+        },
       }
 
       if (!this.fullscreen) {
         data.style = {
+          ...data.style as object,
           maxWidth: this.maxWidth === 'none' ? undefined : convertToUnit(this.maxWidth),
           width: this.width === 'auto' ? undefined : convertToUnit(this.width),
         }

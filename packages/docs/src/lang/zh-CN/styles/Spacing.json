@@ -12,7 +12,7 @@
   "directionText": "占位符 _direction_ 指定属性所应用到的方向：",
   "directions": [
     "`t` - 应用 `margin-top` 和 `padding-top` 的间距。",
-    "`b` - 应用 `margin-bow` 和 `padding-bow` 的间距。",
+    "`b` - 应用 `margin-bottom` 和 `padding-bottom` 的间距。",
     "`l` - 适用 `margin-left` 和 `padding-left` 的间距。",
     "`r` - 应用 `margin-right` 和 `padding-right` 的间距。",
     "`s` - 应用 `margin-left`/`padding-left` _(LTR mode)_ 和 `margin-right`/`padding-right` _(RTL mode)_",

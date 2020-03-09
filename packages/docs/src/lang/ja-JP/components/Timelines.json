@@ -32,7 +32,8 @@
   },
   "props": {
     "v-timeline-item": {
-      "hideDot": "タイムラインドットの非表示にする"
+      "hideDot": "タイムラインドットの非表示にする",
+      "iconColor": "Mixins.Colorable.props.color"
     }
   }
 }

@@ -17,6 +17,9 @@
     "playground": {
       "desc": "簡単ですが以下のplaygroundでレイアウトに関するpropsを試すことができます。"
     },
+    "no-gutters": {
+      "desc": "**no-gutters** プロパティを使用して、直接の`v-col`の子から`v-row`とパディングから負のマージンを削除することができます。"
+    },
     "order": {
       "desc": "グリッドの順序を制御できます。 Offsetと同様に、サイズごとに異なる順序を設定できます。あらゆるアプリケーションに対応できるレイアウトを設計します。"
     },
@@ -24,6 +27,7 @@
       "desc": "Offsetは、まだ表示されていない可能性のある要素を補正したり、コンテンツの位置を制御したりするのに役立ちます。 ブレークポイントと同様に、利用可能なサイズにオフセットを設定できます。 これにより、アプリケーションのレイアウトを必要に合わせて微調整できます。"
     },
     "nested-grid": {
+      "heading": "### ネストしたグリッド",
       "desc": "非常にカスタマイズされたレイアウトを実現するために、他のフレームワークと同様にグリッドをネストすることができます。"
     },
     "unique-layouts": {
@@ -33,7 +37,23 @@
       "desc": "`v-spacer`コンポーネントは利用可能なスペースを埋めるときや2つのコンポーネントの間にスペースを作りたいときに便利です。"
     },
     "tags": {
+      "heading": "### HTML タグ",
       "desc": "`section`や` li`要素のように、レイアウトアイテムを特定のタグとして指定したいことがあるでしょう。"
+    }
+  },
+  "props": {
+    "tag": "Components.Sheets.props.tag",
+    "v-col": {
+      "alignSelf": "[align-items](https://developer.mozilla.org/ja/docs/Web/CSS/align-items) cssプロパティを適用します。使用可能なオプションは、 **start** 、 **center** 、 **end** 、 **auto** 、 **baseline** および **stretch** です。",
+      "cols": "コンポーネントが拡張する列のデフォルト数を設定します。利用可能なオプションは **1 -> 12** および **auto** です。",
+      "offset": "列の既定のオフセットを設定します。",
+      "order": "列のデフォルト [order](https://developer.mozilla.org/ja/docs/Web/CSS/order) を設定します。"
+    },
+    "v-row": {
+      "align": "[align-items](https://developer.mozilla.org/ja/docs/Web/CSS/align-items) cssプロパティを適用します。使用可能なオプションは、**start**、**center**、**end**、**baseline**および**stretch**です。",
+      "alignContent": "[align-content](https://developer.mozilla.org/ja/docs/Web/CSS/align-content) cssプロパティを適用します。利用可能なオプションは **start** 、 **center** 、 **end** 、 **space-between** 、 **space-around** および **stretch** です。",
+      "justify": "[justify-content](https://developer.mozilla.org/ja/docs/Web/CSS/justify-content) cssプロパティを適用します。使用可能なオプションは、 **start** 、 **center** 、 **end** 、 **space-between** および **space-around** です。",
+      "noGutters": "`v-col`間のガターを削除します。"
     }
   }
 }

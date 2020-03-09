@@ -1,4 +1,6 @@
 {
+  "heading": "# Dialogues",
+  "headingText": "Le composant `v-dialog` informe les utilisateurs d'une tâche spécifique et contient généralement des informations capitales . Elles peuvent parfois avoir recours à des décisions.",
   "examples": {
     "usage": {
       "desc": "Une boîte de dialogue contient deux emplacements, l'un pour son activateur et l'autre pour son contenu (par défaut). Bonne pour les politiques de confidentialité."

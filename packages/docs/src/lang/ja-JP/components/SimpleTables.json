@@ -18,5 +18,10 @@
       "heading": "### ダークテーマ",
       "desc": "テーブルをダーク表示に切り替えるには、`dark` propを使用します。"
     }
+  },
+  "props": {
+    "v-simple-table": {
+      "height": "Mixins.Measurable.props.height"
+    }
   }
 }
