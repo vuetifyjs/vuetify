@@ -29,9 +29,9 @@
 
               <base-btn
                 :block="$vuetify.breakpoint.smAndDown"
+                :to="`/${$route.params.lang}/introduction/why-vuetify/`"
                 class="primary--text my-6"
                 color="white"
-                to="introduction/why-vuetify"
                 x-large
               >
                 <v-icon

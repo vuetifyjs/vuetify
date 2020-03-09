@@ -8,7 +8,6 @@
     outlined
     rounded
     rel="noopener"
-    replace
     v-on="$listeners"
   >
     <span class="caption font-weight-bold">
