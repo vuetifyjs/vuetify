@@ -52,19 +52,14 @@
         clearTimeout(this.timeout)
 
         this.timeout = setTimeout(() => {
-          const sameInternal = this.$el.querySelectorAll('a.v-markdown--same-internal')
-          const internal = this.$el.querySelectorAll('a.v-markdown--internal')
+          const links = this.$el.querySelectorAll('a.v-markdown--link')
 
-          Array.prototype.forEach.call(sameInternal, el => {
-            el.addEventListener('click', this.onSameInternalClick)
-          })
-
-          Array.prototype.forEach.call(internal, el => {
-            el.addEventListener('click', this.onSameInternalClick)
+          Array.prototype.forEach.call(links, el => {
+            el.addEventListener('click', this.onLinkClick)
           })
         }, 300)
       },
-      onSameInternalClick (e) {
+      onLinkClick (e) {
         e.preventDefault()
 
         this.$router.push(e.target.getAttribute('href'))

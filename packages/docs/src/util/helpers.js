@@ -42,39 +42,32 @@ export function getComponent (type) {
 }
 
 export function parseLink (match, text, link) {
-  let attrs = ''
-  let icon = 'page-next'
-  let linkClass = 'v-markdown--link'
-
-  if (
+  const isInternal = !(
     link.indexOf('http') > -1 ||
     link.indexOf('mailto') > -1
-  ) {
-    attrs = `target="_blank" rel="noopener"`
-    icon = 'open-in-new'
-    linkClass += ' v-markdown--external'
-  } else {
-    const hashIndex = link.indexOf('#')
+  )
+  const isSamePage = link.startsWith('#')
+
+  const attrs = isInternal ? '' : `target="_blank" rel="noopener"`
+  const classes = 'v-markdown--link'
+  const icon = isInternal ? 'page-next' : 'open-in-new'
+  const [url = '', hash = ''] = link.split('#')
+
+  if (isInternal && !isSamePage) {
     const lang = window.localStorage.getItem('currentLanguage') || 'en'
-    let suffix = 'internal'
 
-    if (hashIndex > -1) {
-      const [target, hash] = link.split('#')
+    // Reset link
+    link = `/${lang}`
 
-      suffix = 'same-internal'
-      link = `${trailingSlash(target)}#${hash}`
-    } else {
-      link = trailingSlash(link)
-    }
-
-    linkClass += ` v-markdown--${suffix}`
-
-    if (link.startsWith('/')) link = link.slice(1)
-
-    link = `/${lang}/${link}`
+    // Remove leading/trailing slashes
+    if (url) link += `/${url.replace(/^\/|\/$/, '')}/`
+    // Append hash
+    if (hash) link += `#${hash}`
+  } else if (isInternal && hash) {
+    link = `#${hash}`
   }
 
-  return `<a href="${link}" ${attrs} class="${linkClass}">${text}<i class="v-icon mdi mdi-${icon}"></i></a>`
+  return `<a href="${link}" ${attrs} class="${classes}">${text}<i class="v-icon mdi mdi-${icon}"></i></a>`
 }
 
 export async function waitForReadystate () {
