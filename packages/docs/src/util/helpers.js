@@ -1,3 +1,5 @@
+import { trailingSlash } from '@/router/util'
+
 // Must be called in Vue context
 export function goTo (id) {
   this.$vuetify.goTo(id).then(() => {
@@ -41,10 +43,9 @@ export function getComponent (type) {
 
 export function parseLink (match, text, link) {
   let attrs = ''
-  let icon = ''
+  let icon = 'page-next'
   let linkClass = 'v-markdown--link'
 
-  // External link
   if (
     link.indexOf('http') > -1 ||
     link.indexOf('mailto') > -1
@@ -52,14 +53,17 @@ export function parseLink (match, text, link) {
     attrs = `target="_blank" rel="noopener"`
     icon = 'open-in-new'
     linkClass += ' v-markdown--external'
-  // Same page internal link
-  } else if (link.charAt(0) === '#') {
-    icon = 'pound'
-    linkClass += ' v-markdown--same-internal'
-  // Different page internal link
   } else {
-    icon = 'page-next'
-    linkClass += ' v-markdown--internal'
+    const lang = window.localStorage.getItem('currentLanguage') || 'en'
+    const suffix = link.indexOf('#') < 0
+      ? 'same-internal'
+      : 'internal'
+
+    linkClass += ` v-markdown--${suffix}`
+
+    if (link.startsWith('/')) link = link.slice(1)
+
+    link = `/${lang}/${link}`
   }
 
   return `<a href="${link}" ${attrs} class="${linkClass}">${text}<i class="v-icon mdi mdi-${icon}"></i></a>`
