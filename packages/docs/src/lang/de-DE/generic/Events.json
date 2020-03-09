@@ -1,1 +1,4 @@
-{}
+{
+  "click": "Event welches geworfen wird, wenn die Komponente geklickt wurde",
+  "input": "Das aktualisierte gebundene Model"
+}
