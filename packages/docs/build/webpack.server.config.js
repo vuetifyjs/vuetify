@@ -41,7 +41,7 @@ module.exports = merge(base, {
     new webpack.DefinePlugin({
       'process.env.VUE_ENV': '"server"'
     }),
-    new VueSSRServerPlugin()
+    new VueSSRServerPlugin(),
   ],
   optimization: {
     minimize: false,
