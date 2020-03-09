@@ -82,6 +82,14 @@
           linkedin: 'sean-kimball-b50922126',
           avatar: 'avatarStyle=Transparent&clotheColor=Heather&clotheType=ShirtVNeck&eyeType=Happy&eyebrowType=FlatNatural&facialHairColor=Black&facialHairType=BeardLight&hairColor=Black&mouthType=Smile&skinColor=Pale&topType=ShortHairShortFlat',
         },
+        {
+          title: 'core',
+          name: 'Johanna Lee',
+          email: 'johannarlee@gmail.com',
+          github: 'johannaRlee',
+          twitter: 'johannaRlee',
+          avatar: 'avatarStyle=Transparent&topType=LongHairBob&accessoriesType=Blank&hairColor=Brown&facialHairType=Blank&clotheType=CollarSweater&clotheColor=Black&eyeType=Squint&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light',
+        },
       ],
     }),
   }
