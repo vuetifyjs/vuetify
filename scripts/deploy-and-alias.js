@@ -11,7 +11,7 @@ const options = {
   env: process.env,
 }
 
-const child = shell.exec('now --scope=vuetifyjs --token=$NOW_TOKEN', options)
+const child = shell.exec('now --scope=vuetifyjs --token=$NOW_TOKEN --confirm', options)
 if (child.code !== 0) {
   process.exit(child.code)
 }
