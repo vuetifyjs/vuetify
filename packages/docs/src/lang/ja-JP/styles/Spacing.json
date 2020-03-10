@@ -10,15 +10,15 @@
     "`p` - `padding`を適用します。"
   ],
   "directionText": "**direction**は、プロパティが適用される側を指定します。",
-  "directions": {
-    "0": "`t` - `margin-top`と`padding-top`の間隔を適用します。",
-    "1": "`b` - `margin-bottom` と `padding-bottom`の間隔を適用します。",
-    "2": "`l` - `margin-left` と `padding-left`の間隔を適用します。",
-    "3": "`r` - `margin-right` と `padding-right`の間隔を適用します。",
-    "6": "`x` - `*-left` と `*-right` の両方の間隔を適用します。",
-    "7": "`y` - `*-top` と `*-bottom` の両方の間隔を適用します。",
-    "8": "`a` - プロパティの間隔をすべての方向に適用します。"
-  },
+  "directions": [
+    "`t` - `margin-top`と`padding-top`の間隔を適用します。",
+    "`b` - `margin-bottom` と `padding-bottom`の間隔を適用します。",
+    "`l` - `margin-left` と `padding-left`の間隔を適用します。",
+    "`r` - `margin-right` と `padding-right`の間隔を適用します。",
+    "`x` - `*-left` と `*-right` の両方の間隔を適用します。",
+    "`y` - `*-top` と `*-bottom` の両方の間隔を適用します。",
+    "`a` - プロパティの間隔をすべての方向に適用します。"
+  ],
   "sizeText": "**size** は、プロパティの増分を 4px 間隔で制御します。",
   "horizontalText": "指定した幅のブロック要素の場合は、コンテンツを水平方向に中央揃えする `.mx-auto`を適用できます。"
 }
