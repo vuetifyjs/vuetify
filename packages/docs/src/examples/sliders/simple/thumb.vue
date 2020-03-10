@@ -25,6 +25,19 @@
           thumb-label="always"
         ></v-slider>
       </v-col>
+
+      <v-col cols="12">
+        <v-subheader class="pl-0">Custom thumb label</v-subheader>
+        <v-slider
+          v-model="slider"
+          :thumb-size="24"
+          thumb-label="always"
+        >
+          <template v-slot:thumb-label="{ value }">
+            {{ satisfactionEmojis[Math.min(Math.floor(value / 10), 9)] }}
+          </template>
+        </v-slider>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -33,6 +46,7 @@
   export default {
     data () {
       return {
+        satisfactionEmojis: ['😭', '😢', '☹️', '🙁', '😐', '🙂', '😊', '😁', '😄', '😍'],
         slider: 45,
       }
     },
