@@ -309,5 +309,42 @@ describe('VIcon', () => {
 
       expect(wrapper.html()).toMatchSnapshot()
     })
+
+    it('should render an svg icon using svg icon definition', async () => {
+      const wrapper = mountFunction({}, {
+        path: 'M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z',
+        viewBox: '0 0 24 24',
+      } as any)
+
+      expect(wrapper.html()).toMatchSnapshot()
+
+      wrapper.setProps({ large: true })
+
+      await wrapper.vm.$nextTick()
+
+      expect(wrapper.html()).toMatchSnapshot()
+    })
+
+    it('should render an svg icon using a FontAwesome5 icon definition', async () => {
+      const wrapper = mountFunction({}, {
+        icon: [
+          24,
+          24,
+          [],
+          'f0c9',
+          'M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z',
+        ],
+        iconName: 'test',
+        prefix: 'fas',
+      } as any)
+
+      expect(wrapper.html()).toMatchSnapshot()
+
+      wrapper.setProps({ large: true })
+
+      await wrapper.vm.$nextTick()
+
+      expect(wrapper.html()).toMatchSnapshot()
+    })
   })
 })

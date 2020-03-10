@@ -1,0 +1,17 @@
+<!-- Vue Component -->
+
+<template>
+  <div class="my-component">
+    <v-icon>{{ icon }}</v-icon>
+  </div>
+</template>
+
+<script>
+  import { faBars } from '@fortawesome/free-solid-svg-icons'
+
+  export default {
+    data: {
+      icon: faBars
+    }
+  }
+</script>

@@ -1,0 +1,13 @@
+<!-- Vue JSX Component -->
+
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+
+export default {
+  render() {
+    return (
+      <div class="my-component">
+        <v-icon>{ faBars }</v-icon>
+      </div>
+    )
+  }
+}

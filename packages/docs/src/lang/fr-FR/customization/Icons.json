@@ -44,5 +44,7 @@
   "usingMissingMaterialIconsText3": "Vous devez alors enregistrer les icônes Material exactes que vous voulez.",
   "usingMissingMaterialIconsText4": "Enfin, vous pouvez utiliser les icônes Material comme ceci.",
   "customFASvg": "### Icônes personnalisées Font Awesome Pro",
-  "customFASvgText1": "Vous pouvez utiliser les icônes des composants avec Font Awesome Pro pour sélectionner des poids d'icônes individuels :"
+  "customFASvgText1": "Vous pouvez utiliser les icônes des composants avec Font Awesome Pro pour sélectionner des poids d'icônes individuels :",
+  "customFASvgText2": "Vous pouvez également passer une icone SVG de Font Awesome Pro directement dans le slot du composent VIcon. De cette manière, vous bénéficierez du tree-shaking, et vous n'aurez également plus besoin de lister les icones dans une library en amont.",
+  "customFASvgText3": "C'est aussi une élégante façon d'implémenter les icones FA au travers de JSX comme suit :"
 }

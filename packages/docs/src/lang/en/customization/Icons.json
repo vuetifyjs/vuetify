@@ -44,5 +44,7 @@
   "usingMissingMaterialIconsText3": "Then you need to register the exact material icons you want.",
   "usingMissingMaterialIconsText4": "Finally you can use the material icons like this.",
   "customFASvg": "### Custom Font Awesome Pro Icons",
-  "customFASvgText1": "You can utilize component icons with Font Awesome Pro to select individual icon weights:"
+  "customFASvgText1": "You can utilize component icons with Font Awesome Pro to select individual icon weights:",
+  "customFASvgText2": "You can also directly pass Font Awesome Pro icons within the slot of the VIcon component. This way you get the benefit of tree-shaking, and you don't need to list all icons in a library prior to their use.",
+  "customFASvgText3": "It's also a perfect way to implement FA icons through JSX like so:"
 }

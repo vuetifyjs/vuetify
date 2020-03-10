@@ -26,6 +26,10 @@
     "mdi-svg": {
       "heading": "### MDI SVG",
       "desc": "You can manually import only the icons you use when using the [@mdi/js](https://www.npmjs.com/package/@mdi/js) package. If you want to use SVG icons with `VIcon` component, read about using them [here](/customization/icons#install-material-design-icons-js-svg)."
+    },
+    "fa-svg": {
+      "heading": "### Font Awesome Pro SVG",
+      "desc": "You can manualy construct an SVG payload, to use directly with VIcon or other components using VIcon. It's fully compatible with Font Awesome Pro 5 icons, so you can import them manualy from their SVG library to benefit from the tree shaking."
     }
   },
   "props": {

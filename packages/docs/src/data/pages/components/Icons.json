@@ -81,7 +81,8 @@
             "simple/color",
             "intermediate/buttons",
             "intermediate/clickable",
-            "complex/mdi-svg"
+            "complex/mdi-svg",
+            "complex/fa-svg"
           ]
         }
       ]

@@ -27,7 +27,14 @@ export type VuetifyIconComponent = {
   props?: object
 }
 
-export type VuetifyIcon = string | VuetifyIconComponent
+export type VuetifyIconSVG = {
+  path: string
+  viewBox: string
+  name?: string
+  prefix?: string
+}
+
+export type VuetifyIcon = string | VuetifyIconComponent | VuetifyIconSVG
 
 export interface VuetifyIcons {
   complete: VuetifyIcon

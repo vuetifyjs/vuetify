@@ -305,6 +305,22 @@
             {
               "type": "markup",
               "value": "js_vuetify_custom_fa_svg_icons"
+            },
+            {
+              "type": "text",
+              "lang": "customFASvgText2"
+            },
+            {
+              "type": "markup",
+              "value": "vuetify_custom_fa_svg_icons_direct"
+            },
+            {
+              "type": "text",
+              "lang": "customFASvgText3"
+            },
+            {
+              "type": "markup",
+              "value": "vuetify_custom_fa_svg_icons_jsx"
             }
           ]
         }

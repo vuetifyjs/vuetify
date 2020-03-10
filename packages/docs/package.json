@@ -51,6 +51,7 @@
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
+    "@fortawesome/free-solid-svg-icons": "^5.12.1",
     "@mdi/js": "^3.8.95",
     "autoprefixer": "^9.6.1",
     "babel-loader": "^8.0.6",

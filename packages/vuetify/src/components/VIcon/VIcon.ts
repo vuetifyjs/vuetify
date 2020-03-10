@@ -12,7 +12,7 @@ import { convertToUnit, keys, remapInternalIcon } from '../../util/helpers'
 // Types
 import Vue, { CreateElement, VNode, VNodeChildren, VNodeData } from 'vue'
 import mixins from '../../util/mixins'
-import { VuetifyIcon, VuetifyIconComponent } from 'vuetify/types/services/icons'
+import { VuetifyIcon, VuetifyIconComponent, VuetifyIconSVG } from 'vuetify/types/services/icons'
 
 enum SIZE_MAP {
   xSmall = '12px',
@@ -23,8 +23,35 @@ enum SIZE_MAP {
   xLarge = '40px'
 }
 
+interface FontAwesome5IconDefinition {
+  icon: [ number, number, string[], string, string ]
+  iconName: string
+  prefix: string
+}
+
 function isFontAwesome5 (iconType: string): boolean {
   return ['fas', 'far', 'fal', 'fab', 'fad'].some(val => iconType.includes(val))
+}
+
+function isVuetifyIconSVG (obj: any): obj is VuetifyIconSVG {
+  return Boolean(typeof obj === 'object' && 'path' in obj && 'viewBox' in obj)
+}
+
+function isVNode (obj: any): obj is VNode {
+  return typeof obj === 'object' && 'isComment' in obj
+}
+
+function isFontAwesome5IconDefinition (obj: any): obj is FontAwesome5IconDefinition {
+  return Boolean(
+    typeof obj === 'object' &&
+    typeof obj.icon === 'object' &&
+    obj.icon.length === 5,
+    /* this additionnal checks are overkilled for only FA
+      typeof obj.icon[0] === 'number' &&
+      typeof obj.icon[1] === 'number' &&
+      typeof obj.icon[4] === 'string'
+    */
+  )
 }
 
 function isSvgPath (icon: string): boolean {
@@ -35,7 +62,7 @@ const VIcon = mixins(
   BindsAttrs,
   Colorable,
   Sizeable,
-  Themeable
+  Themeable,
   /* @vue/component */
 ).extend({
   name: 'v-icon',
@@ -59,7 +86,7 @@ const VIcon = mixins(
     },
     hasClickListener (): boolean {
       return Boolean(
-        this.listeners$.click || this.listeners$['!click']
+        this.listeners$.click || this.listeners$['!click'],
       )
     },
   },
@@ -67,9 +94,37 @@ const VIcon = mixins(
   methods: {
     getIcon (): VuetifyIcon {
       let iconName = ''
-      if (this.$slots.default) iconName = this.$slots.default[0].text!.trim()
+      if (this.$slots.default) {
+        // Casting to any, because this may not be a VNode anymore
+        const mixedDefinition = this.$slots.default[0] as any
 
-      return remapInternalIcon(this, iconName)
+        if (isVuetifyIconSVG(mixedDefinition)) {
+          return mixedDefinition
+        }
+
+        if (isFontAwesome5IconDefinition(mixedDefinition)) {
+          return {
+            path: mixedDefinition.icon[4],
+            viewBox: `0 0 ${mixedDefinition.icon[0]} ${mixedDefinition.icon[1]}`,
+            name: mixedDefinition.iconName,
+            prefix: mixedDefinition.prefix,
+          }
+        }
+
+        if (isVNode(mixedDefinition) && mixedDefinition.text) {
+          iconName = mixedDefinition.text.trim()
+        }
+      }
+
+      const icon = remapInternalIcon(this, iconName)
+      if (typeof icon === 'string' && isSvgPath(icon)) {
+        return {
+          path: icon,
+          viewBox: `0 0 24 24`,
+        }
+      }
+
+      return icon
     },
     getSize (): string | undefined {
       const sizes = {
@@ -140,7 +195,7 @@ const VIcon = mixins(
 
       return h(this.hasClickListener ? 'button' : this.tag, data, newChildren)
     },
-    renderSvgIcon (icon: string, h: CreateElement): VNode {
+    renderSvgIcon (icon: VuetifyIconSVG, h: CreateElement): VNode {
       const fontSize = this.getSize()
       const wrapperData = {
         ...this.getDefaultData(),
@@ -156,7 +211,7 @@ const VIcon = mixins(
       const svgData: VNodeData = {
         attrs: {
           xmlns: 'http://www.w3.org/2000/svg',
-          viewBox: '0 0 24 24',
+          viewBox: icon.viewBox,
           height: fontSize || '24',
           width: fontSize || '24',
           role: 'img',
@@ -168,7 +223,7 @@ const VIcon = mixins(
         h('svg', svgData, [
           h('path', {
             attrs: {
-              d: icon,
+              d: icon.path,
             },
           }),
         ]),
@@ -176,7 +231,7 @@ const VIcon = mixins(
     },
     renderSvgIconComponent (
       icon: VuetifyIconComponent,
-      h: CreateElement
+      h: CreateElement,
     ): VNode {
       const data = this.getDefaultData()
       data.class['v-icon--is-component'] = true
@@ -202,13 +257,16 @@ const VIcon = mixins(
   render (h: CreateElement): VNode {
     const icon = this.getIcon()
 
+    // Object with a path is now always a VuetifyIconSVG
+    if (isVuetifyIconSVG(icon)) {
+      return this.renderSvgIcon(icon, h)
+    }
+
     if (typeof icon === 'string') {
-      if (isSvgPath(icon)) {
-        return this.renderSvgIcon(icon, h)
-      }
       return this.renderFontIcon(icon, h)
     }
 
+    // Remaining is a VuetifyIconComponent
     return this.renderSvgIconComponent(icon, h)
   },
 })
