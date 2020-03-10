@@ -61,7 +61,7 @@ export default {
     setMeta () {
       const [, lang, namespace, page] = this.$route.path.split('/')
 
-      const key = `${namespace}/${page}`
+      const key = namespace ? `${namespace}/${page}` : ''
       const meta = this.$i18n.getLocaleMessage(lang).Meta || {}
 
       this.meta = meta[key] || this.getFallbackMeta(key) || {}
