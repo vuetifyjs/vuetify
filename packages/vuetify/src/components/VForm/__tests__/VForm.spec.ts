@@ -26,7 +26,7 @@ describe('VForm.ts', () => {
   })
 
   // TODO: event not bubbling or something
-  it.skip('should pass on listeners to form element', async () => {
+  it.skip('should pass on save listener to form element', async () => {
     const submit = jest.fn()
     const component = Vue.component('test', {
       render (h) {
@@ -47,6 +47,50 @@ describe('VForm.ts', () => {
     btn.trigger('click')
 
     expect(submit).toHaveBeenCalled()
+  })
+
+  it('should pass on reset listener to form element', async () => {
+    const reset = jest.fn()
+    const component = Vue.component('test', {
+      render (h) {
+        return h(VForm, {
+          on: {
+            reset,
+          },
+        }, [
+          h('button', {
+            attrs: { type: 'reset' },
+          }, ['Reset']),
+        ])
+      },
+    })
+
+    const wrapper = mount(component, { attachToDocument: true })
+
+    const btn = wrapper.find('button')
+
+    btn.trigger('click')
+
+    expect(reset).toHaveBeenCalled()
+  })
+
+  it('should pass on click listener to form element', async () => {
+    const click = jest.fn()
+    const component = Vue.component('test', {
+      render (h) {
+        return h(VForm, {
+          on: {
+            click,
+          },
+        })
+      },
+    })
+
+    const wrapper = mount(component)
+    const form = wrapper.find('form')
+
+    form.trigger('click')
+    expect(click).toHaveBeenCalled()
   })
 
   it('should watch the error bag', async () => {
