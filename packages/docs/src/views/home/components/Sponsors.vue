@@ -24,8 +24,7 @@
       />
 
       <supporters-sponsor-btn
-        append
-        to="introduction/sponsors-and-backers"
+        :to="`/${$route.params.lang}/introduction/sponsors-and-backers/`"
         large
       />
     </v-sheet>
