@@ -17,7 +17,7 @@
       >Vuetify.Home.proundlySponsoredByText</base-text>
 
       <supporters-sponsors
-        :tier="[0, 1, 2, 3, 5, 6]"
+        :tier="tier"
         class="mb-12"
         dense
         hide-titles
@@ -37,6 +37,14 @@
     name: 'HomeSponsors',
 
     provide: { id: 'home-sponsors' },
+
+    computed: {
+      tier () {
+        return this.$vuetify.breakpoint.smAndUp
+          ? [0, 1, 2, 3, 5, 6]
+          : [0, 1, 2]
+      },
+    },
   }
 </script>
 

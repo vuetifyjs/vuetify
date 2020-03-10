@@ -5,11 +5,11 @@
     "`p` - `padding`에 적용"
   ],
   "directionText": "_방향_ 은 속성이 적용되는 방향입니다.",
-  "directions": {
-    "6": "`x` - `*-left` 과 `*-right`에 둘다 적용",
-    "7": "`y` - `*-top` 과 `*-bottom`에 둘다 적용",
-    "8": "`a` - `margin` 이나 `padding` 을 모든 방향에 적용"
-  },
+  "directions": [
+    "`x` - `*-left` 과 `*-right`에 둘다 적용",
+    "`y` - `*-top` 과 `*-bottom`에 둘다 적용",
+    "`a` - `margin` 이나 `padding` 을 모든 방향에 적용"
+  ],
   "horizontalHeader": "가로 중앙 정렬",
   "horizontalText": "`.mx-auto` 클래스로 너비가 정해진 블럭 요소를 가로 중앙 정렬 할 수 있습니다.."
 }
