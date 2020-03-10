@@ -1,3 +1,6 @@
+// Utilities
+import { preferredLanguage } from '@/router/util'
+
 // Must be called in Vue context
 export function goTo (id) {
   this.$vuetify.goTo(id).then(() => {
@@ -52,10 +55,8 @@ export function parseLink (match, text, link) {
   const [url = '', hash = ''] = link.split('#')
 
   if (isInternal && !isSamePage) {
-    const lang = window.localStorage.getItem('currentLanguage') || 'en'
-
     // Reset link
-    link = `/${lang}`
+    link = `/${preferredLanguage}`
 
     // Remove leading/trailing slashes
     if (url) link += `/${url.replace(/^\/|\/$/, '')}/`
