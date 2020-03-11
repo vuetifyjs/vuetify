@@ -114,7 +114,7 @@ if (isMainThread) {
       hostname: 'https://vuetifyjs.com', // TODO
       hreflangs: availableLanguages.reduce((acc, lang) => {
         const href = path.normalize(`/${lang}/${route.path}`)
-        return acc + `<link rel="alternate" hreflang="${lang}" href="${href}" />`
+        return acc + `<link rel="alternate" hreflang="${lang}" href="${href}">`
       }, ''),
       lang: route.locale,
       scripts: '',

@@ -91,7 +91,7 @@
         {
           "type": "examples",
           "value": [
-            "simple/flat",
+            "simple/text",
             "simple/raised",
             "simple/depressed",
             "simple/dropdown",
