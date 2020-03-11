@@ -1,0 +1,9 @@
+node_modules
+packages/kitchen
+packages/api-generator/dist
+packages/docs/dist
+packages/vuetify/coverage
+packages/vuetify/dist
+packages/vuetify/es5
+packages/vuetify/lib
+packages/vuetify/lib-temp

@@ -33,9 +33,9 @@ export default Vue.extend({
           max: 1,
         },
         style: {
-          backgroundImage: !this.disabled
-            ? `linear-gradient(to right, transparent, ${RGBtoCSS(this.color.rgba)})`
-            : undefined,
+          backgroundImage: this.disabled
+            ? undefined
+            : `linear-gradient(to ${this.$vuetify.rtl ? 'left' : 'right'}, transparent, ${RGBtoCSS(this.color.rgba)})`,
         },
         on: {
           input: (val: number) => this.color.alpha !== val && this.$emit('update:color', fromHSVA({ ...this.color.hsva, a: val })),

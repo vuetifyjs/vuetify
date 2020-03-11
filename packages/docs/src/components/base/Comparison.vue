@@ -85,10 +85,6 @@
             style="height: auto;"
           >
             <div>
-              *Based on Top-level components only.
-            </div>
-
-            <div>
               **Based on average of all Major/Minor/Patch releases over the last 12 months.
             </div>
           </td>
@@ -111,7 +107,6 @@
 
     data: () => ({
       features: {
-        components: 'Total components*',
         a11y: 'Full Accessibility and Section 508 support',
         ssr: 'Server Side Rendering support',
         lts: 'Long-term Support',
@@ -125,7 +120,6 @@
         {
           name: 'Vuetify',
           src: 'https://cdn.vuetifyjs.com/images/logos/vuetify-logo-light.png',
-          components: 82,
           tree: 'Automatic',
           release: 'Weekly',
           ssr: true,
@@ -136,10 +130,9 @@
           themes: true,
         },
         {
-          name: 'Vue Bootstrap',
+          name: 'BootstrapVue',
           release: 'Bi-Weekly',
           src: 'https://cdn.vuetifyjs.com/images/competitors/bootstrap-vue.png',
-          components: 45,
           tree: 'Manual',
           ssr: true,
           a11y: true,
@@ -150,7 +143,6 @@
           name: 'Buefy',
           src: 'https://cdn.vuetifyjs.com/images/competitors/buefy.png',
           release: 'Bi-Monthly',
-          components: 41,
           tree: 'Manual',
           a11y: true,
           ssr: true,
@@ -159,7 +151,6 @@
           name: 'Element UI',
           src: 'https://cdn.vuetifyjs.com/images/competitors/element-ui.png',
           release: 'Bi-Weekly',
-          components: 86,
           tree: 'Manual',
           ssr: true,
           rtl: true,
@@ -168,7 +159,6 @@
           name: 'Vue Material',
           src: 'https://cdn.vuetifyjs.com/images/competitors/vue-material.png',
           release: 'Yearly',
-          components: 56,
           tree: 'Manual',
           ssr: true,
           themes: true,
@@ -176,7 +166,6 @@
         {
           name: 'Quasar Framework',
           src: 'https://cdn.vuetifyjs.com/images/competitors/quasar.png',
-          components: 81,
           tree: 'Automatic',
           release: 'Bi-Weekly',
           ssr: true,

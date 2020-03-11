@@ -86,6 +86,9 @@ const getters = {
     if (!rootState.route) return []
 
     const namespace = rootState.route.params.namespace
+
+    if (!namespace) return []
+
     const lang = rootState.route.params.lang
     const path = rootState.route.path
     const text = getNamespace(namespace)
