@@ -26,7 +26,7 @@ export const languageRegexp = new RegExp('^(' + languagePattern + ')$')
 // Matches any language identifier
 export const genericLanguageRegexp = /[a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3}/
 
-const preferredLanguage = typeof document === 'undefined'
+export const preferredLanguage = typeof document === 'undefined'
   ? 'en'
   : window.localStorage.getItem('currentLanguage') || navigator.languages.find(l => l.match(languageRegexp)) || 'en'
 

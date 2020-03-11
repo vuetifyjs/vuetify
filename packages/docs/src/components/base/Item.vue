@@ -130,7 +130,7 @@
         const lang = this.$route.params.lang || this.$i18n.fallbackLocale
 
         return {
-          path: `/${lang}/${this.to}`,
+          path: `/${lang}/${this.to}/`,
         }
       },
     },
