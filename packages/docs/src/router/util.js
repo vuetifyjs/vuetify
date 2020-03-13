@@ -2,14 +2,6 @@
 import kebabCase from 'lodash/kebabCase'
 import languages from '@/data/i18n/languages.json'
 
-export function getLanguageCookie () {
-  return typeof document === 'undefined'
-    ? undefined
-    : new Map(
-      document.cookie.split('; ').map(c => c.split('='))
-    ).get('currentLanguage')
-}
-
 export function layout (path, name, children) {
   const folder = kebabCase(name)
 
@@ -24,34 +16,42 @@ export function layout (path, name, children) {
   }
 }
 
+export function trailingSlash (str) {
+  return str.endsWith('/') ? str : str + '/'
+}
+
+// Matches allowed languages
+export const languagePattern = languages.map(lang => lang.alternate || lang.locale).join('|')
+export const languageRegexp = new RegExp('^(' + languagePattern + ')$')
+// Matches any language identifier
+export const genericLanguageRegexp = /[a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3}/
+
+export const preferredLanguage = typeof document === 'undefined'
+  ? 'en'
+  : window.localStorage.getItem('currentLanguage') || navigator.languages.find(l => l.match(languageRegexp)) || 'en'
+
 export function root (children) {
   return [
     layout(
-      '/:lang([a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3})',
+      `/:lang(${languagePattern})`,
       'Root',
       children
     ),
+    {
+      path: `/:lang(${genericLanguageRegexp.source})/*`,
+      redirect: to => trailingSlash(`/${preferredLanguage}/${to.params.pathMatch || ''}`),
+    },
+    {
+      // The previous one doesn't match if there's no slash after the language code
+      path: `/:lang(${genericLanguageRegexp.source})`,
+      redirect: () => `/${preferredLanguage}/`,
+    },
+    redirect(to => trailingSlash(`/${preferredLanguage}${to.path}`)),
   ]
 }
 
 export function redirect (redirect) {
   return { path: '*', redirect }
-}
-
-export function redirectLang (path = '') {
-  // language regex:
-  // /^[a-z]{2,3}(?:-[a-zA-Z]{4})?(?:-[A-Z]{2,3})?$/
-  // /^[a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3}$/
-  const languageRegex = /^\/([a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3})(?:\/.*)?$/
-  const fallbackLocale = languages.find(lang => lang.fallback === true).locale
-
-  return redirect(() => {
-    let lang = `/${getLanguageCookie() || fallbackLocale}`
-
-    if (!languageRegex.test(lang)) lang = `/${fallbackLocale}`
-
-    return `${lang}${path}`
-  })
 }
 
 export function route (path, name, file) {

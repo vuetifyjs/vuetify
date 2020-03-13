@@ -16,8 +16,8 @@
         <v-switch v-model="singleExpand" label="Single expand" class="mt-2"></v-switch>
       </v-toolbar>
     </template>
-    <template v-slot:expanded-item="{ headers }">
-      <td :colspan="headers.length">Peek-a-boo!</td>
+    <template v-slot:expanded-item="{ headers, item }">
+      <td :colspan="headers.length">More info about {{ item.name }}</td>
     </template>
   </v-data-table>
 </template>
