@@ -12,7 +12,10 @@
     <div :id="id"><!-- Ad --></div>
   </v-card>
 
-  <ad-card v-else />
+  <ad-card
+    v-else
+    is-fallback
+  />
 </template>
 
 <script>

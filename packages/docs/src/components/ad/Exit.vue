@@ -23,6 +23,7 @@
       <ad-card
         v-else
         dense
+        is-fallback
       />
     </div>
   </v-responsive>
