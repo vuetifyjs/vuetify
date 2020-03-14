@@ -1,4 +1,16 @@
 import './_grid.sass'
-import { createSimpleFunctional } from '../../util/helpers'
 
-export default createSimpleFunctional('spacer', 'div', 'v-spacer')
+import Vue, { VNode } from 'vue'
+
+export default Vue.extend({
+  name: 'v-spacer',
+
+  render (h): VNode {
+    return h('div', {
+      staticClass: 'spacer v-spacer',
+      attrs: {
+        role: 'presentation',
+      },
+    }, this.$slots.default)
+  },
+})
