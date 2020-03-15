@@ -118,7 +118,7 @@
     },
     methods: {
       toggleOrder () {
-        this.descending = !this.descending
+        this.sortDesc = !this.sortDesc
       },
       nextSort () {
         let index = this.headers.findIndex(h => h.value === this.sortBy)
