@@ -1,16 +1,18 @@
+// Styles
 import './_grid.sass'
 
+// Types
 import Vue, { VNode } from 'vue'
 
 export default Vue.extend({
   name: 'v-spacer',
 
-  render (h): VNode {
+  functional: true,
+
+  render (h, { children }): VNode {
     return h('div', {
       staticClass: 'spacer v-spacer',
-      attrs: {
-        role: 'presentation',
-      },
-    }, this.$slots.default)
+      attrs: { role: 'presentation' },
+    }, children)
   },
 })
