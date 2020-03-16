@@ -16,3 +16,6 @@ $ yarn build <package name>
 
 // Package alias
 api-generator: api
+
+// To access your local environment:
+ http://localhost:8095
