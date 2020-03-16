@@ -263,7 +263,7 @@ export default baseMixins.extend<options>().extend({
 
       const onClick = listeners.click
 
-      listeners.click = (e: MouseEvent & KeyboardEvent) => {
+      listeners.click = (e: MouseEvent & KeyboardEvent & FocusEvent) => {
         if (this.openOnClick) {
           onClick && onClick(e)
         }
