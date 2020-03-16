@@ -4,6 +4,7 @@ import './_grid.sass'
 // Types
 import Vue, { VNode } from 'vue'
 
+/* @vue/component */
 export default Vue.extend({
   name: 'v-spacer',
 
