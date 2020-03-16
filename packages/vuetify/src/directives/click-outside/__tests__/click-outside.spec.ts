@@ -7,8 +7,10 @@ function bootstrap (args?: object) {
   const el = document.createElement('div')
 
   const binding = {
-    value: jest.fn(),
-    args,
+    value: {
+      handler: jest.fn(),
+      ...args,
+    },
   }
 
   jest.spyOn(window.document.body, 'addEventListener').mockImplementation((eventName, eventHandler, options) => {
@@ -19,7 +21,7 @@ function bootstrap (args?: object) {
   ClickOutside.inserted(el as HTMLElement, binding as any)
 
   return {
-    callback: binding.value,
+    callback: binding.value.handler,
     el: el as HTMLElement,
     registeredHandler,
   }
