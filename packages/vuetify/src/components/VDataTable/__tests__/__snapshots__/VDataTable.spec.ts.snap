@@ -425,7 +425,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-409"
+               aria-owns="list-414"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -434,7 +434,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
                   6
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-409"
+                       id="input-414"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -814,7 +814,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-427"
+               aria-owns="list-432"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -823,7 +823,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
                   All
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-427"
+                       id="input-432"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -1104,7 +1104,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-391"
+               aria-owns="list-396"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -1113,7 +1113,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-391"
+                       id="input-396"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -1298,7 +1298,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-335"
+               aria-owns="list-340"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -1307,7 +1307,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-335"
+                       id="input-340"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -1587,7 +1587,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-335"
+               aria-owns="list-340"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -1596,7 +1596,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-335"
+                       id="input-340"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -1981,7 +1981,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-354"
+               aria-owns="list-359"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -1990,7 +1990,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
                   10
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-354"
+                       id="input-359"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -2184,7 +2184,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-354"
+               aria-owns="list-359"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -2193,7 +2193,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
                   10
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-354"
+                       id="input-359"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -2440,7 +2440,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-373"
+               aria-owns="list-378"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -2449,7 +2449,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
                   10
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-373"
+                       id="input-378"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -2836,7 +2836,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-373"
+               aria-owns="list-378"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -2845,7 +2845,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
                   10
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-373"
+                       id="input-378"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -3104,7 +3104,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-501"
+               aria-owns="list-506"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -3113,7 +3113,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
                   10
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-501"
+                       id="input-506"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -3203,7 +3203,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-285"
+               aria-owns="list-290"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -3212,7 +3212,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
                   10
                 </div>
                 <input aria-label="Foo:"
-                       id="input-285"
+                       id="input-290"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -3398,7 +3398,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-317"
+               aria-owns="list-322"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -3407,7 +3407,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
                   10
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-317"
+                       id="input-322"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -3643,7 +3643,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-571"
+               aria-owns="list-576"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -3652,7 +3652,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
                   10
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-571"
+                       id="input-576"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -3769,7 +3769,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-236"
+               aria-owns="list-241"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -3778,7 +3778,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
                   10
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-236"
+                       id="input-241"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -3975,7 +3975,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-254"
+               aria-owns="list-259"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -3984,7 +3984,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
                   10
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-254"
+                       id="input-259"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -4639,7 +4639,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-221"
+               aria-owns="list-226"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -4648,7 +4648,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-221"
+                       id="input-226"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -5066,7 +5066,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-149"
+               aria-owns="list-154"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -5075,7 +5075,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-149"
+                       id="input-154"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -5439,7 +5439,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-202"
+               aria-owns="list-207"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -5448,7 +5448,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-202"
+                       id="input-207"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -5643,7 +5643,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-169"
+               aria-owns="list-174"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -5652,7 +5652,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-169"
+                       id="input-174"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -5957,7 +5957,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-110"
+               aria-owns="list-115"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -5966,7 +5966,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-110"
+                       id="input-115"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -6149,9 +6149,16 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         <tr class>
           <td class="text-start">
             <button type="button"
-                    class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
+                    class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    aria-expanded="false"
             >
-              $expand
+              <span class="v-btn__content">
+                <i aria-hidden="true"
+                   class="v-icon notranslate v-data-table__expand-icon material-icons theme--light"
+                >
+                  $expand
+                </i>
+              </span>
             </button>
           </td>
           <td class="text-left">
@@ -6176,9 +6183,16 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         <tr class>
           <td class="text-start">
             <button type="button"
-                    class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
+                    class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    aria-expanded="false"
             >
-              $expand
+              <span class="v-btn__content">
+                <i aria-hidden="true"
+                   class="v-icon notranslate v-data-table__expand-icon material-icons theme--light"
+                >
+                  $expand
+                </i>
+              </span>
             </button>
           </td>
           <td class="text-left">
@@ -6203,9 +6217,16 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         <tr class>
           <td class="text-start">
             <button type="button"
-                    class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
+                    class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    aria-expanded="false"
             >
-              $expand
+              <span class="v-btn__content">
+                <i aria-hidden="true"
+                   class="v-icon notranslate v-data-table__expand-icon material-icons theme--light"
+                >
+                  $expand
+                </i>
+              </span>
             </button>
           </td>
           <td class="text-left">
@@ -6230,9 +6251,16 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         <tr class>
           <td class="text-start">
             <button type="button"
-                    class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
+                    class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    aria-expanded="false"
             >
-              $expand
+              <span class="v-btn__content">
+                <i aria-hidden="true"
+                   class="v-icon notranslate v-data-table__expand-icon material-icons theme--light"
+                >
+                  $expand
+                </i>
+              </span>
             </button>
           </td>
           <td class="text-left">
@@ -6257,9 +6285,16 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         <tr class>
           <td class="text-start">
             <button type="button"
-                    class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
+                    class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    aria-expanded="false"
             >
-              $expand
+              <span class="v-btn__content">
+                <i aria-hidden="true"
+                   class="v-icon notranslate v-data-table__expand-icon material-icons theme--light"
+                >
+                  $expand
+                </i>
+              </span>
             </button>
           </td>
           <td class="text-left">
@@ -6292,7 +6327,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-66"
+               aria-owns="list-71"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -6301,7 +6336,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-66"
+                       id="input-71"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -6484,9 +6519,16 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         <tr class>
           <td class="text-start">
             <button type="button"
-                    class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
+                    class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    aria-expanded="true"
             >
-              $expand
+              <span class="v-btn__content">
+                <i aria-hidden="true"
+                   class="v-icon notranslate v-data-table__expand-icon material-icons theme--light v-data-table__expand-icon--active"
+                >
+                  $expand
+                </i>
+              </span>
             </button>
           </td>
           <td class="text-left">
@@ -6511,9 +6553,16 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         <tr class>
           <td class="text-start">
             <button type="button"
-                    class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
+                    class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    aria-expanded="false"
             >
-              $expand
+              <span class="v-btn__content">
+                <i aria-hidden="true"
+                   class="v-icon notranslate v-data-table__expand-icon material-icons theme--light"
+                >
+                  $expand
+                </i>
+              </span>
             </button>
           </td>
           <td class="text-left">
@@ -6538,9 +6587,16 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         <tr class>
           <td class="text-start">
             <button type="button"
-                    class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
+                    class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    aria-expanded="false"
             >
-              $expand
+              <span class="v-btn__content">
+                <i aria-hidden="true"
+                   class="v-icon notranslate v-data-table__expand-icon material-icons theme--light"
+                >
+                  $expand
+                </i>
+              </span>
             </button>
           </td>
           <td class="text-left">
@@ -6565,9 +6621,16 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         <tr class>
           <td class="text-start">
             <button type="button"
-                    class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
+                    class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    aria-expanded="false"
             >
-              $expand
+              <span class="v-btn__content">
+                <i aria-hidden="true"
+                   class="v-icon notranslate v-data-table__expand-icon material-icons theme--light"
+                >
+                  $expand
+                </i>
+              </span>
             </button>
           </td>
           <td class="text-left">
@@ -6592,9 +6655,16 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         <tr class>
           <td class="text-start">
             <button type="button"
-                    class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
+                    class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    aria-expanded="false"
             >
-              $expand
+              <span class="v-btn__content">
+                <i aria-hidden="true"
+                   class="v-icon notranslate v-data-table__expand-icon material-icons theme--light"
+                >
+                  $expand
+                </i>
+              </span>
             </button>
           </td>
           <td class="text-left">
@@ -6627,7 +6697,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-66"
+               aria-owns="list-71"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -6636,7 +6706,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-66"
+                       id="input-71"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -6989,7 +7059,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-90"
+               aria-owns="list-95"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -6998,7 +7068,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-90"
+                       id="input-95"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -7167,7 +7237,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-544"
+               aria-owns="list-549"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -7176,7 +7246,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
                   10
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-544"
+                       id="input-549"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -7312,7 +7382,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-544"
+               aria-owns="list-549"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -7321,7 +7391,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
                   10
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-544"
+                       id="input-549"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"

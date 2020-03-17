@@ -432,10 +432,14 @@ export default VDataIterator.extend({
 
       if (this.showExpand) {
         const slot = scopedSlots['data-table-expand']
-        scopedSlots['data-table-expand'] = slot ? () => slot(data) : () => this.$createElement(VIcon, {
-          staticClass: 'v-data-table__expand-icon',
-          class: {
-            'v-data-table__expand-icon--active': data.isExpanded,
+        scopedSlots['data-table-expand'] = slot ? () => slot(data) : () => this.$createElement(VBtn, {
+          props: {
+            icon: true,
+            small: true,
+          },
+          attrs: {
+            // TODO: add aria-label
+            'aria-expanded': String(data.isExpanded),
           },
           on: {
             click: (e: MouseEvent) => {
@@ -443,7 +447,12 @@ export default VDataIterator.extend({
               data.expand(!data.isExpanded)
             },
           },
-        }, [this.expandIcon])
+        }, [this.$createElement(VIcon, {
+          staticClass: 'v-data-table__expand-icon',
+          class: {
+            'v-data-table__expand-icon--active': data.isExpanded,
+          },
+        }, [this.expandIcon])])
       }
 
       return this.$createElement(this.isMobile ? MobileRow : Row, {
