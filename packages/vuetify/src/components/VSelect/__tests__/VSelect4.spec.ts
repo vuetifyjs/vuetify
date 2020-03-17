@@ -396,6 +396,6 @@ describe('VSelect.ts', () => {
 
     await wrapper.vm.$nextTick()
 
-    expect(click).toHaveBeenCalled()
+    expect(click).toHaveBeenCalledTimes(1)
   })
 })
