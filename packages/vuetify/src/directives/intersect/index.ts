@@ -9,15 +9,17 @@ type ObserveHandler = (
 interface ObserveVNodeDirective extends Omit<VNodeDirective, 'modifiers'> {
   value?: ObserveHandler | { handler: ObserveHandler, options?: IntersectionObserverInit }
   modifiers?: {
-    quiet?: boolean
     once?: boolean
+    quiet?: boolean
   }
 }
 
 function inserted (el: HTMLElement, binding: ObserveVNodeDirective) {
   const modifiers = binding.modifiers || {}
   const value = binding.value
-  const { handler, options } = typeof value === 'object' ? value : { handler: value, options: {} }
+  const { handler, options } = typeof value === 'object'
+    ? value
+    : { handler: value, options: {} }
   const observer = new IntersectionObserver((
     entries: IntersectionObserverEntry[] = [],
     observer: IntersectionObserver
