@@ -378,4 +378,24 @@ describe('VSelect.ts', () => {
 
     expect(wrapper.vm.isMenuActive).toBe(true)
   })
+
+  it('should emit click event', async () => {
+    const item = { value: 'hello', text: 'Hello' }
+    const wrapper = mountFunction({
+      propsData: {
+        value: 'hello',
+        items: [item],
+      },
+    })
+
+    const click = jest.fn()
+    wrapper.vm.$on('click', click)
+
+    const select = wrapper.find('.v-input__slot')
+    select.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(click).toHaveBeenCalledTimes(1)
+  })
 })
