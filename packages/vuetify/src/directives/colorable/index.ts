@@ -28,23 +28,17 @@ function classToHex (color: string, colors: Record<string, Record<string, string
 }
 
 function setTextColor (el: HTMLElement, color: string) {
-  const setColor = (v: string) => {
-    el.style.color = v
-    el.style.caretColor = v
-  }
+  const cssColor = !isCssColor(color) ? classToHex(color, colors) : color
 
-  if (isCssColor(color)) setColor(color)
-  else if (color) setColor(classToHex(color, colors))
+  el.style.color = cssColor
+  el.style.caretColor = cssColor
 }
 
 function setBackgroundColor (el: HTMLElement, color: string) {
-  const setColor = (v: string) => {
-    el.style.backgroundColor = v
-    el.style.borderColor = v
-  }
+  const cssColor = !isCssColor(color) ? classToHex(color, colors) : color
 
-  if (isCssColor(color)) setColor(color)
-  else if (color) setColor(classToHex(color, colors))
+  el.style.backgroundColor = cssColor
+  el.style.borderColor = cssColor
 }
 
 function setBorderColor (
@@ -53,25 +47,15 @@ function setBorderColor (
   modifiers?: BorderModifiers
 ) {
   const hasModifiers = modifiers ? Object.keys(modifiers).length > 0 : false
+  const cssColor = !isCssColor(color) ? classToHex(color, colors) : color
 
-  const setColor = (v: string) => el.style.borderColor = v
-  const setSidesColor = (v: string) => {
-    if (modifiers) {
-      if (modifiers.top) el.style.borderTopColor = v
-      if (modifiers.right) el.style.borderRightColor = v
-      if (modifiers.bottom) el.style.borderBottomColor = v
-      if (modifiers.left) el.style.borderLeftColor = v
-    }
-  }
-
-  if (isCssColor(color)) {
-    if (hasModifiers) setSidesColor(color)
-    else setColor(color)
-  } else if (color) {
-    const hexColor = classToHex(color, colors)
-
-    if (hasModifiers) setSidesColor(hexColor)
-    else setColor(hexColor)
+  if (hasModifiers && modifiers) {
+    if (modifiers.top) el.style.borderTopColor = cssColor
+    if (modifiers.right) el.style.borderRightColor = cssColor
+    if (modifiers.bottom) el.style.borderBottomColor = cssColor
+    if (modifiers.left) el.style.borderLeftColor = cssColor
+  } else {
+    el.style.borderColor = cssColor
   }
 }
 
