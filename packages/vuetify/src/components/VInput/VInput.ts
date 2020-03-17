@@ -83,6 +83,9 @@ export default baseMixins.extend<options>().extend({
     computedId (): string {
       return this.id || `input-${this._uid}`
     },
+    hasDetails (): boolean {
+      return this.messagesToDisplay.length > 0
+    },
     hasHint (): boolean {
       return !this.hasMessages &&
         !!this.hint &&
@@ -127,7 +130,7 @@ export default baseMixins.extend<options>().extend({
       }).filter(message => message !== '')
     },
     showDetails (): boolean {
-      return this.hideDetails === false || (this.hideDetails === 'auto' && this.messagesToDisplay.length > 0)
+      return this.hideDetails === false || (this.hideDetails === 'auto' && this.hasDetails)
     },
   },
 

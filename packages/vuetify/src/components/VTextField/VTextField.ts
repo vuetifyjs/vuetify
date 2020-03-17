@@ -131,6 +131,12 @@ export default baseMixins.extend<options>().extend({
       }
       return (this.internalValue || '').toString().length
     },
+    hasCounter (): boolean {
+      return this.counter !== false && this.counter != null
+    },
+    hasDetails (): boolean {
+      return VInput.options.computed.hasDetails.call(this) || this.hasCounter
+    },
     internalValue: {
       get (): any {
         return this.lazyValue
@@ -301,7 +307,7 @@ export default baseMixins.extend<options>().extend({
       ])
     },
     genCounter () {
-      if (this.counter === false || this.counter == null) return null
+      if (!this.hasCounter) return null
 
       const max = this.counter === true ? this.attrs$.maxlength : this.counter
 
@@ -392,12 +398,10 @@ export default baseMixins.extend<options>().extend({
       })
     },
     genMessages () {
-      if (this.hideDetails === true) return null
+      if (!this.showDetails) return null
 
       const messagesNode = VInput.options.methods.genMessages.call(this)
       const counterNode = this.genCounter()
-
-      if (this.hideDetails === 'auto' && !messagesNode && !counterNode) return null
 
       return this.$createElement('div', {
         staticClass: 'v-text-field__details',
