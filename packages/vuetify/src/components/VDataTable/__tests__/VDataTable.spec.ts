@@ -790,5 +790,48 @@ describe('VDataTable.ts', () => {
       pageStart: 0,
       pageStop: 1,
     })
+
+    expect(pagination).toHaveBeenCalledTimes(2)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10715
+  // NOTE: This test currently succeeds regardless of fix
+  // It seems like the test environment does not double
+  // fire the events in the same way the browser does
+  it('should not emit too many pagination events', async () => {
+    const headers = [
+      {
+        text: 'Name',
+        value: 'name',
+      },
+      {
+        text: 'ID',
+        value: 'id',
+      },
+    ]
+
+    const items = [
+      {
+        name: 'Assistance',
+        id: 1,
+      },
+      {
+        name: 'Candidat',
+        id: 2,
+      },
+    ]
+
+    const wrapper = mountFunction({
+      propsData: {
+        headers,
+        itemKey: 'id',
+        serverItemsLength: 0,
+      },
+    })
+
+    wrapper.setProps({ items, serverItemsLength: items.length })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.emitted().pagination).toHaveLength(2)
   })
 })
