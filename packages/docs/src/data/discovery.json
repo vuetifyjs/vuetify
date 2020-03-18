@@ -9,7 +9,7 @@
     "description": "Get help with an issue, report a bug or connect with other developers on Discord",
     "title": "Vuetify Community",
     "src": "https://cdn.vuetifyjs.com/images/vuetify-ads/discord.png",
-    "url": "https://community.vuetifyjs.com/"
+    "url": "https://community.vuetifyjs.com"
   },
   "medium": {
     "description": "Find guides, articles and tutorials on the official Vuetify publication",
