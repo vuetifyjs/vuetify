@@ -27,8 +27,16 @@ export default mixins(
 
   provide () {
     return {
+      activationMode: this.activationMode,
+      items: this.items,
       tabsBar: this,
+      vertical: this.vertical,
     }
+  },
+
+  props: {
+    activationMode: String,
+    vertical: Boolean,
   },
 
   computed: {
@@ -93,6 +101,7 @@ export default mixins(
     const render = BaseSlideGroup.options.render.call(this, h)
 
     render.data!.attrs = {
+      'aria-orientation': this.vertical ? 'vertical' : 'horizontal',
       role: 'tablist',
     }
 

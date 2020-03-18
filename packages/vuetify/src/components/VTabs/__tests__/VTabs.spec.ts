@@ -28,6 +28,8 @@ describe('VTabs.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VTabs, {
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
         mocks: {
           $vuetify: {
             application: { left: 0, right: 0 },
@@ -123,7 +125,10 @@ describe('VTabs.ts', () => {
       propsData: { value: 'foo' },
     })
 
+    expect(wrapper.vm.internalValue).toBe('foo')
+
     wrapper.setProps({ value: 'bar' })
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.internalValue).toBe('bar')
   })

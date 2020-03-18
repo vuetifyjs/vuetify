@@ -71,6 +71,7 @@
     "v-tab-item": {
       "value": "Sets the value of the tab. If not provided, the index will be used."
     },
+    "activationMode": "Determines if tabs should be activated automatically on focus. Can be `manual` or `automatic`. See [Deciding When to Make Selection Automatically Follow Focus](https://www.w3.org/TR/wai-aria-practices/#kbd_selection_follows_focus).",
     "activeClass": "Mixins.BaseItemGroup.props.activeClass",
     "alignWithTitle": "Make `v-tabs` lined up with the toolbar title",
     "backgroundColor": "Changes the background color of the component.",

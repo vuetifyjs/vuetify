@@ -42,6 +42,10 @@ export default baseMixins.extend<options>().extend({
   },
 
   props: {
+    activationMode: {
+      type: String,
+      default: 'manual',
+    },
     activeClass: {
       type: String,
       default: '',
@@ -187,6 +191,7 @@ export default baseMixins.extend<options>().extend({
           height: convertToUnit(this.height),
         },
         props: {
+          activationMode: this.activationMode,
           activeClass: this.activeClass,
           centerActive: this.centerActive,
           dark: this.dark,
@@ -197,6 +202,7 @@ export default baseMixins.extend<options>().extend({
           prevIcon: this.prevIcon,
           showArrows: this.showArrows,
           value: this.internalValue,
+          vertical: this.vertical,
         },
         on: {
           'call:slider': this.callSlider,
