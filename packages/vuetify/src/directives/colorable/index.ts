@@ -1,4 +1,5 @@
 import { VNode, VNodeDirective } from 'vue'
+import { isCssColor } from '../../util/colorUtils'
 import colors from '../../util/colors'
 
 interface BorderModifiers {
@@ -6,10 +7,6 @@ interface BorderModifiers {
   right?: Boolean
   bottom?: Boolean
   left?: Boolean
-}
-
-function isCssColor (color?: string | false): boolean {
-  return !!color && !!color.match(/^(#|var\(--|(rgb|hsl)a?\()/)
 }
 
 function classToHex (color: string, colors: Record<string, Record<string, string>>): string {
