@@ -9,6 +9,11 @@
     "description": "Whoops, looks like whatever you are looking for is not there!",
     "keywords": ""
   },
+  "introduction/guide": {
+    "title": "Beginner's Guide",
+    "description": "Page in Development 🔨. Check back soon for more information.",
+    "keywords": "guide, vuetify beginner, starting vuetify, vuetify guide"
+  },
   "introduction/why-vuetify": {
     "title": "Why Vuetify?",
     "description": "Vuetify has an extremely active community, provides easy to use Material Design components and is consistently updated.",
