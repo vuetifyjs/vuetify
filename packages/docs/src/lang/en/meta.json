@@ -39,6 +39,11 @@
     "description": "Help support Vuetify by backing the project. This helps with the maintenance of existing features and the development of new ones.",
     "keywords": "sponsor, backer, donations, patron, supporting vuetify, vuetify support"
   },
+  "introduction/security-disclosure": {
+    "title": "Security Disclosure Procedures",
+    "description": "This document outlines security procedures and general policies for the Vuetify project.",
+    "keywords": "security, security vulnerability, disclosure policy, security disclosure"
+  },
   "getting-started/quick-start": {
     "title": "Quick start",
     "description": "Get started with Vue and Vuetify in no time. Support for Vue CLI, Webpack, Nuxt and more.",
