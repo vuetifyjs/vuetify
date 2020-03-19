@@ -18,7 +18,7 @@
     />
 
     <span class="body-2 text-uppercase font-weight-regular hidden-sm-and-down">
-      Vuetify For Enterprise Available via Tidelift
+      Vuetify For <strong>Enterprise</strong> Available via Tidelift
     </span>
 
     <span class="body-2 text-uppercase font-weight-regular hidden-md-and-up">

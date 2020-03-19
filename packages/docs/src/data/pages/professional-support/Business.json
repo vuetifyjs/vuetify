@@ -58,6 +58,18 @@
       "type": "section",
       "children": [
         {
+          "type": "base-comparison",
+          "value": {
+            "outlined": true,
+            "elevation": 0
+          }
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "text",
           "lang": "customText"
         }

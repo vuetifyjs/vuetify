@@ -156,14 +156,6 @@
           rtl: true,
         },
         {
-          name: 'Vue Material',
-          src: 'https://cdn.vuetifyjs.com/images/competitors/vue-material.png',
-          release: 'Yearly',
-          tree: 'Manual',
-          ssr: true,
-          themes: true,
-        },
-        {
           name: 'Quasar Framework',
           src: 'https://cdn.vuetifyjs.com/images/competitors/quasar.png',
           tree: 'Automatic',

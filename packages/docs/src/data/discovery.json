@@ -33,8 +33,7 @@
     "description": "The Tidelift Subscription is a managed open source subscription for application dependencies.",
     "title": "Enterprise support through Tidelift",
     "src": "https://cdn.vuetifyjs.com/images/vuetify-ads/tidelift.png",
-    "url": "https://tidelift.com/subscription/pkg/npm-vuetify",
-    "query": "&utm_source=vuetify&utm_medium=referral&utm_campaign=homepage"
+    "url": "/professional-support/enterprise"
   },
   "reddit": {
     "description": "Connect with developers across the globe on the Vuetify subreddit.",
