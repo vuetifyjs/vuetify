@@ -1,6 +1,9 @@
-import { VNode, VNodeDirective } from 'vue'
+// Utilities
 import { isCssColor } from '../../util/colorUtils'
 import colors from '../../util/colors'
+
+// Types
+import { VNode, VNodeDirective } from 'vue'
 
 interface BorderModifiers {
   top?: Boolean
@@ -9,30 +12,40 @@ interface BorderModifiers {
   left?: Boolean
 }
 
-function classToHex (color: string, colors: Record<string, Record<string, string>>): string {
+function classToHex (
+  color: string,
+  colors: Record<string, Record<string, string>>,
+  node: VNode,
+): string {
   const [colorName, colorModifier] = color
     .toString().trim().replace('-', '').split(' ', 2) as (string | undefined)[]
 
-  let hexColor = ''
+  const currentTheme = node.context
+    ? node.context.$vuetify.theme.currentTheme : {}
+
+  let hexColor: string = ''
   if (colorName && colorName in colors) {
     if (colorModifier && colorModifier in colors[colorName]) {
       hexColor = colors[colorName][colorModifier]
     } else if ('base' in colors[colorName]) {
       hexColor = colors[colorName].base
     }
+  } else if (colorName && colorName in currentTheme) {
+    hexColor = <string>currentTheme[colorName]
   }
+
   return hexColor
 }
 
-function setTextColor (el: HTMLElement, color: string) {
-  const cssColor = !isCssColor(color) ? classToHex(color, colors) : color
+function setTextColor (el: HTMLElement, color: string, node: VNode) {
+  const cssColor = !isCssColor(color) ? classToHex(color, colors, node) : color
 
   el.style.color = cssColor
   el.style.caretColor = cssColor
 }
 
-function setBackgroundColor (el: HTMLElement, color: string) {
-  const cssColor = !isCssColor(color) ? classToHex(color, colors) : color
+function setBackgroundColor (el: HTMLElement, color: string, node: VNode) {
+  const cssColor = !isCssColor(color) ? classToHex(color, colors, node) : color
 
   el.style.backgroundColor = cssColor
   el.style.borderColor = cssColor
@@ -41,10 +54,11 @@ function setBackgroundColor (el: HTMLElement, color: string) {
 function setBorderColor (
   el: HTMLElement,
   color: string,
-  modifiers?: BorderModifiers
+  node: VNode,
+  modifiers?: BorderModifiers,
 ) {
   const hasModifiers = modifiers ? Object.keys(modifiers).length > 0 : false
-  const cssColor = !isCssColor(color) ? classToHex(color, colors) : color
+  const cssColor = !isCssColor(color) ? classToHex(color, colors, node) : color
 
   if (hasModifiers && modifiers) {
     if (modifiers.top) el.style.borderTopColor = cssColor
@@ -58,34 +72,34 @@ function setBorderColor (
 
 export const Color = {
   bind (el: HTMLElement, binding: VNodeDirective, node: VNode) {
-    setTextColor(el, binding.value)
+    setTextColor(el, binding.value, node)
   },
-  update (el: HTMLElement, binding: VNodeDirective) {
+  update (el: HTMLElement, binding: VNodeDirective, node: VNode) {
     if (binding.value === binding.oldValue) return
 
-    setTextColor(el, binding.value)
+    setTextColor(el, binding.value, node)
   },
 }
 
 export const BgColor = {
   bind (el: HTMLElement, binding: VNodeDirective, node: VNode) {
-    setBackgroundColor(el, binding.value)
+    setBackgroundColor(el, binding.value, node)
   },
-  update (el: HTMLElement, binding: VNodeDirective) {
+  update (el: HTMLElement, binding: VNodeDirective, node: VNode) {
     if (binding.value === binding.oldValue) return
 
-    setBackgroundColor(el, binding.value)
+    setBackgroundColor(el, binding.value, node)
   },
 }
 
 export const BorderColor = {
   bind (el: HTMLElement, binding: VNodeDirective, node: VNode) {
-    setBorderColor(el, binding.value, binding.modifiers)
+    setBorderColor(el, binding.value, node, binding.modifiers)
   },
-  update (el: HTMLElement, binding: VNodeDirective) {
+  update (el: HTMLElement, binding: VNodeDirective, node: VNode) {
     if (binding.value === binding.oldValue) return
 
-    setBorderColor(el, binding.value, binding.modifiers)
+    setBorderColor(el, binding.value, node, binding.modifiers)
   },
 }
 

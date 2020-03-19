@@ -7,7 +7,6 @@ import Colorable from '../'
 // Utilities
 import {
   mount,
-  MountOptions,
   Wrapper,
 } from '@vue/test-utils'
 
@@ -38,7 +37,17 @@ describe('colorable.ts', () => {
             }
             return h('div', data)
           },
-        }))
+        }), {
+          mocks: {
+            $vuetify: {
+              theme: {
+                currentTheme: {
+                  primary: '#1976d2',
+                },
+              },
+            },
+          },
+        })
       }
     })
 
@@ -64,6 +73,10 @@ describe('colorable.ts', () => {
       wrapper.setData({ color: 'red lighten-1' })
       expect(wrapper.element.style.color).toEqual('rgb(239, 83, 80)')
       expect(wrapper.element.style.caretColor).toEqual('#ef5350')
+
+      wrapper.setData({ color: 'primary' })
+      expect(wrapper.element.style.color).toEqual('rgb(25, 118, 210)')
+      expect(wrapper.element.style.caretColor).toEqual('#1976d2')
     })
   })
 
@@ -84,7 +97,17 @@ describe('colorable.ts', () => {
             }
             return h('div', data)
           },
-        }))
+        }), {
+          mocks: {
+            $vuetify: {
+              theme: {
+                currentTheme: {
+                  primary: '#1976d2',
+                },
+              },
+            },
+          },
+        })
       }
     })
 
@@ -110,6 +133,10 @@ describe('colorable.ts', () => {
       wrapper.setData({ color: 'red lighten-1' })
       expect(wrapper.element.style.backgroundColor).toEqual('rgb(239, 83, 80)')
       expect(wrapper.element.style.borderColor).toEqual('#ef5350')
+
+      wrapper.setData({ color: 'primary' })
+      expect(wrapper.element.style.backgroundColor).toEqual('rgb(25, 118, 210)')
+      expect(wrapper.element.style.borderColor).toEqual('#1976d2')
     })
   })
 
@@ -131,7 +158,17 @@ describe('colorable.ts', () => {
             }
             return h('div', data)
           },
-        }))
+        }), {
+          mocks: {
+            $vuetify: {
+              theme: {
+                currentTheme: {
+                  primary: '#1976d2',
+                },
+              },
+            },
+          },
+        })
       }
     })
 
@@ -153,6 +190,9 @@ describe('colorable.ts', () => {
 
       wrapper.setData({ color: 'red lighten-1' })
       expect(wrapper.element.style.borderColor).toEqual('#ef5350')
+
+      wrapper.setData({ color: 'primary' })
+      expect(wrapper.element.style.borderColor).toEqual('#1976d2')
     })
 
     it('should respect border top modifier', async () => {
