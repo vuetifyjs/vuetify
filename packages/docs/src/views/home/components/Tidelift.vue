@@ -4,7 +4,7 @@
     color="#4B5168"
     dark
     flat
-    href="https://tidelift.com/subscription/npm/vuetify?utm_source=vuetify&utm_medium=referral&utm_campaign=homepage"
+    href="https://tidelift.com/subscription/pkg/npm-vuetify?utm_source=npm-vuetify&utm_medium=referral&utm_campaign=enterprise"
     rel="noopener"
     target="_blank"
     tile
