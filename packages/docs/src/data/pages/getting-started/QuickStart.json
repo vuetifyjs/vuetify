@@ -31,32 +31,32 @@
         {
           "type": "markup",
           "value": "bash_vue_add_vuetify"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "uiHeader"
         },
         {
-          "type": "section",
-          "children": [
-            {
-              "type": "heading",
-              "lang": "uiHeader"
-            },
-            {
-              "type": "text",
-              "lang": "uiText1"
-            },
-            {
-              "type": "markup",
-              "value": "bash_vue_ui"
-            },
-            {
-              "type": "text",
-              "lang": "uiText2"
-            },
-            {
-              "type": "img",
-              "lang": "uiImg1",
-              "value": "quick-start/vue_ui.png"
-            }
-          ]
+          "type": "text",
+          "lang": "uiText1"
+        },
+        {
+          "type": "markup",
+          "value": "bash_vue_ui"
+        },
+        {
+          "type": "text",
+          "lang": "uiText2"
+        },
+        {
+          "type": "img",
+          "lang": "uiImg1",
+          "value": "quick-start/vue_ui.png"
         }
       ]
     },
@@ -139,23 +139,23 @@
         {
           "type": "markup",
           "value": "js_vue_options_vuetify"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "webpackHeader2"
         },
         {
-          "type": "section",
-          "children": [
-            {
-              "type": "heading",
-              "lang": "webpackHeader2"
-            },
-            {
-              "type": "text",
-              "lang": "webpackText6"
-            },
-            {
-              "type": "markup",
-              "value": "html_font_cdn"
-            }
-          ]
+          "type": "text",
+          "lang": "webpackText6"
+        },
+        {
+          "type": "markup",
+          "value": "html_font_cdn"
         }
       ]
     },
@@ -255,7 +255,7 @@
         {
           "type": "up-next",
           "value": [
-            "introduction/why-vuetify",
+            "introduction/quick-start",
             "introduction/frequently-asked-questions",
             "introduction/sponsors-and-backers"
           ]
