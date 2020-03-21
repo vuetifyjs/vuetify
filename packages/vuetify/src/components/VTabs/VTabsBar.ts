@@ -36,6 +36,16 @@ export default mixins(
 
   props: {
     activationMode: String,
+    ariaLabel: {
+      type: String,
+      required: false,
+      default: undefined,
+    },
+    ariaLabelledBy: {
+      type: String,
+      required: false,
+      default: undefined,
+    },
     vertical: Boolean,
   },
 
@@ -103,6 +113,12 @@ export default mixins(
     render.data!.attrs = {
       'aria-orientation': this.vertical ? 'vertical' : 'horizontal',
       role: 'tablist',
+    }
+    if (this.ariaLabel) {
+      render.data!.attrs['aria-label'] = this.ariaLabel
+    }
+    if (this.ariaLabelledBy) {
+      render.data!.attrs['aria-labelledby'] = this.ariaLabelledBy
     }
 
     return render

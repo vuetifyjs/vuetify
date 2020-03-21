@@ -193,6 +193,8 @@ export default baseMixins.extend<options>().extend({
         props: {
           activationMode: this.activationMode,
           activeClass: this.activeClass,
+          ariaLabel: this.$attrs['aria-label'],
+          ariaLabelledBy: this.$attrs['aria-labelledby'],
           centerActive: this.centerActive,
           dark: this.dark,
           light: this.light,

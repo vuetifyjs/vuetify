@@ -107,25 +107,25 @@ export default baseMixins.extend<options>().extend(
       this.to || this.toggle()
     },
     getFirstTab () {
-      return this.items.find((item: any) => !item.disabled)
+      return this.items[0]
     },
     getFocusedTab () {
       return this.items.find((item: any) => document.activeElement === item.$el)
     },
     getLastTab () {
-      return [...this.items].reverse().find((item: any) => !item.disabled)
+      return this.items[this.items.length - 1]
     },
     getNextTab () {
       const tab = this.getFocusedTab()
-      const tabIndex = this.items.findIndex((item: any) => item.value === tab.value)
-      const nextTabs = [...this.items.slice(tabIndex + 1), ...this.items.slice(0, tabIndex + 1)]
-      return nextTabs.find((item: any) => !item.disabled)
+      const currentIndex = this.items.findIndex((item: any) => item.value === tab.value)
+      const targetIndex = (currentIndex + 1) % this.items.length
+      return this.items[targetIndex]
     },
     getPrevTab () {
       const tab = this.getFocusedTab()
-      const tabIndex = this.items.findIndex((item: any) => item.value === tab.value)
-      const prevTabs = [...this.items.slice(tabIndex), ...this.items.slice(0, tabIndex)].reverse()
-      return prevTabs.find((item: any) => !item.disabled)
+      const currentIndex = this.items.findIndex((item: any) => item.value === tab.value)
+      const targetIndex = (currentIndex - 1 + this.items.length) % this.items.length
+      return this.items[targetIndex]
     },
     onKeyDown (e: KeyboardEvent): void {
       this.$emit('keydown', e)
@@ -171,7 +171,8 @@ export default baseMixins.extend<options>().extend(
     data.attrs = {
       ...data.attrs,
       'aria-controls': this.value,
-      'aria-selected': String(this.isActive),
+      'aria-disabled': this.disabled,
+      'aria-selected': this.isActive.toString(),
       role: 'tab',
       tabindex: this.isActive ? 0 : -1,
     }

@@ -130,9 +130,9 @@ describe('VTab.ts', () => {
     })
   })
 
-  it('should getFirstTab with no disabled tabs', () => {
-    const firstItem = { first: 'item', disabled: false }
-    const secondItem = { second: 'item', disabled: false }
+  it('should get first tab', () => {
+    const firstItem = { first: 'item' }
+    const secondItem = { second: 'item' }
     const wrapper = mountFunction({
       provide: {
         items: [firstItem, secondItem],
@@ -142,21 +142,9 @@ describe('VTab.ts', () => {
     expect(wrapper.vm.getFirstTab()).toBe(firstItem)
   })
 
-  it('should getFirstTab with disabled tabs', () => {
-    const firstItem = { first: 'item', disabled: true }
-    const secondItem = { second: 'item', disabled: false }
-    const wrapper = mountFunction({
-      provide: {
-        items: [firstItem, secondItem],
-      },
-    })
-
-    expect(wrapper.vm.getFirstTab()).toBe(secondItem)
-  })
-
-  it('should getLastTab with no disabled tabs', () => {
-    const lastItem = { first: 'item', disabled: false }
-    const secondToLastItem = { second: 'item', disabled: false }
+  it('should get last tab', () => {
+    const lastItem = { first: 'item' }
+    const secondToLastItem = { second: 'item' }
     const wrapper = mountFunction({
       provide: {
         items: [secondToLastItem, lastItem],
@@ -166,22 +154,10 @@ describe('VTab.ts', () => {
     expect(wrapper.vm.getLastTab()).toBe(lastItem)
   })
 
-  it('should getLastTab with disabled tabs', () => {
-    const lastItem = { first: 'item', disabled: true }
-    const secondToLastItem = { second: 'item', disabled: false }
-    const wrapper = mountFunction({
-      provide: {
-        items: [secondToLastItem, lastItem],
-      },
-    })
-
-    expect(wrapper.vm.getLastTab()).toBe(secondToLastItem)
-  })
-
-  it('should getNextTab with no disabled tabs', () => {
-    const firstItem = { value: 1, disabled: false }
-    const currentItem = { value: 2, disabled: false }
-    const lastItem = { value: 3, disabled: false }
+  it('should get next tab', () => {
+    const firstItem = { value: 1 }
+    const currentItem = { value: 2 }
+    const lastItem = { value: 3 }
     const getFocusedTab = jest.fn()
     getFocusedTab.mockReturnValue(currentItem)
     const wrapper = mountFunction({
@@ -194,26 +170,10 @@ describe('VTab.ts', () => {
     expect(wrapper.vm.getNextTab()).toBe(lastItem)
   })
 
-  it('should getNextTab with disabled tabs', () => {
-    const firstItem = { value: 1, disabled: false }
-    const currentItem = { value: 2, disabled: false }
-    const lastItem = { value: 3, disabled: true }
-    const getFocusedTab = jest.fn()
-    getFocusedTab.mockReturnValue(currentItem)
-    const wrapper = mountFunction({
-      provide: {
-        items: [firstItem, currentItem, lastItem],
-      },
-      methods: { getFocusedTab },
-    })
-
-    expect(wrapper.vm.getNextTab()).toBe(firstItem)
-  })
-
-  it('should getPrevTab with no disabled tabs', () => {
-    const firstItem = { value: 1, disabled: false }
-    const currentItem = { value: 2, disabled: false }
-    const lastItem = { value: 3, disabled: false }
+  it('should get previous tab', () => {
+    const firstItem = { value: 1 }
+    const currentItem = { value: 2 }
+    const lastItem = { value: 3 }
     const getFocusedTab = jest.fn()
     getFocusedTab.mockReturnValue(currentItem)
     const wrapper = mountFunction({
@@ -224,22 +184,6 @@ describe('VTab.ts', () => {
     })
 
     expect(wrapper.vm.getPrevTab()).toBe(firstItem)
-  })
-
-  it('should getPrevTab with disabled tabs', () => {
-    const firstItem = { value: 1, disabled: true }
-    const currentItem = { value: 2, disabled: false }
-    const lastItem = { value: 3, disabled: false }
-    const getFocusedTab = jest.fn()
-    getFocusedTab.mockReturnValue(currentItem)
-    const wrapper = mountFunction({
-      provide: {
-        items: [firstItem, currentItem, lastItem],
-      },
-      methods: { getFocusedTab },
-    })
-
-    expect(wrapper.vm.getPrevTab()).toBe(lastItem)
   })
 
   it('should emit keydown', async () => {
