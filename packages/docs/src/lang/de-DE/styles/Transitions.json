@@ -1,1 +1,55 @@
-{}
+{
+  "heading": "# Bewegung",
+  "headingText": "Sanfte Animationen sorgen dafür, dass sich die Benutzeroberfläche hervorragend anfühlt. Mit Vue-transition-System und wiederverwendbaren Funktionskomponenten können Sie die Bewegung Ihrer Anwendung ganz einfach steuern. Die meisten Komponenten können ihren Übergang durch das <code>transition</code>Props verändern.",
+  "examples": {
+    "usage": {
+      "desc": "Vuetify enthält über 10 benutzerdefinierte css-Animationen, die auf zahlreiche Komponenten oder Ihren eigenen benutzerdefinierten Anwendungsfall angewendet werden können"
+    },
+    "slide-x-transitions": {
+      "heading": "### Slide X Übergänge",
+      "desc": "Slide x Übergänge bewegen sich entlang der horizontalen Achse."
+    },
+    "slide-y-transitions": {
+      "heading": "### Slide Y Übergänge",
+      "desc": "Animationen verwenden <code>$primary-transition</code> der Anwendung."
+    },
+    "scroll-x-transitions": {
+      "heading": "### Scroll X Übergänge",
+      "desc": "Scroll X Übergänge folgen der horizontalen Achse."
+    },
+    "scroll-y-transitions": {
+      "heading": "### Scroll Y-Übergänge",
+      "desc": "Scroll Y-Übergänge gehen entlang der vertikalen Achse weiter."
+    },
+    "scale-transition": {
+      "heading": "### Skalierungs-Übergänge",
+      "desc": "Viele der Vuetify-Komponenten enthalten ein <code>transition</code>-Props, mit dem Sie Ihre eigenen definieren können."
+    },
+    "fade-transition": {
+      "heading": "### Blend-Übergänge",
+      "desc": "Ein weiteres Beispiel des Blend-Übergangs finden Sie auf der Carousel-Komponente."
+    },
+    "expand-transition": {
+      "heading": "### Erweiterungs-Übergang",
+      "desc": "Der Erweiterungs-Übergang wird in Erweiterungs-Panels und Listen mit Gruppen verwendet. Es gibt auch eine horizontale Version mit `v-expand-x-transition`."
+    },
+    "custom-origin": {
+      "heading": "### Benutzerdefinierter Ursprung",
+      "desc": "Programmmäßig steuern Sie den Ursprung des Übergangs mit einem einfachen Prop."
+    },
+    "todo": {
+      "heading": "### Todo-Liste",
+      "desc": "Mit mehreren benutzerdefinierten Übergängen ist es leicht, eine einfache Todo-Liste zum Leben zu erwecken!"
+    }
+  },
+  "createYourOwnHeader": "## Erstellen Sie Ihre eigene",
+  "createYourOwnText1": "Sie können Vuetifys Übergangs-Hilfe-Funktion verwenden, um eigene benutzerdefinierte Übergänge einfach zu erstellen. Diese Funktion gibt ein Objekt zurück, das Sie in Vue importieren können. Die Verwendung der [funktionalen Komponenten](https://vuejs.org/v2/guide/render-function.html#Functional-Components)-Option sorgt dafür, dass Ihr Übergang so effizient wie möglich ist. Importieren Sie einfach die Funktion:",
+  "createYourOwnText2": "Die <code>createSimpleTransition</code>-Methode nimmt ein Argument - name - entgegen. Dieses wird der Name sein, den Sie in Ihren Style einhängen können. Dies ist ein Beispiel, wie <code>v-fade-transition</code> ausschauen könnte:",
+  "props": {
+    "group": "Erstellt eine `transition-group`-Komponente. [vue docs](https://vuejs.org/v2/api/#transition-group)",
+    "hideOnLeave": "Versteckt das verlassende Element (keine Ausstiegsanimation)",
+    "leaveAbsolute": "Positioniert das verlassende Element absolut (nützlich für [FLIP](https://aerotwist.com/blog/flip-your-animations/))",
+    "mode": "Mixins.Transitionable.props.mode",
+    "origin": "Mixins.Transitionable.props.origin"
+  }
+}

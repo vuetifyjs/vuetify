@@ -1,1 +1,31 @@
-{}
+{
+  "heading": "# Avatare",
+  "headingText": "Die Komponente `v-avatar` wird normalerweise verwendet, um kreisförmige Benutzerprofilbilder anzuzeigen. Mit dieser Komponente können Sie die Größe dynamisch anpassen und einen Rahmenradius für ansprechende Bilder, Symbole und Text hinzufügen. Für die Anzeige eines Avatars ohne Rahmenradius steht eine **Kachel**-Variante zur Verfügung.",
+  "usageText": "Avatare in ihrer einfachsten Form zeigen Inhalte in einem kreisförmigen Container an.",
+  "examples": {
+    "size": {
+      "heading": "### Größe",
+      "desc": "Mit der `size`-Props können Sie die Höhe und Breite von `v-avatar` definieren. Diese Props skaliert beide gleichmäßig mit einem Seitenverhältnis von 1. Die Props `height` und `width` überschreiben diese Props."
+    },
+    "tile": {
+      "heading": "### Kachel",
+      "desc": "Die `tile`-Props entfernt den Randradius vom v-avatar und hinterlässt einen einfachen quadratischen Avatar."
+    },
+    "default": {
+      "heading": "### Standard-Slot",
+      "desc": "Der `v-avatar` Standard-Slot akzeptiert die `v-icon` Komponente, ein Bild oder Text. Mische und stimme diesen mit anderen Props ab, um etwas Einmaliges zu erstellen."
+    },
+    "profile": {
+      "heading": "### Profilkarte",
+      "desc": "Mit der **Kachel**-Props können wir eine schlanke, hart-gezogene Profilkarte erstellen."
+    },
+    "advanced": {
+      "heading": "### Erweiterte Nutzung",
+      "desc": "Durch die Kombination eines Avatars mit anderen Komponenten können Sie einfach wundervolle Benutzeroberflächen erstellen."
+    }
+  },
+  "props": {
+    "left": "Legt fest, dass sich der Avatar auf der linken Seite einer Komponente befindet. Dies wird durch Komponenten wie [v-chip](/components/chips) und [v-btn](/components/buttons) eingehängt.",
+    "right": "Legt fest, dass sich der Avatar auf der rechten Seite einer Komponente befindet. Dies wird durch Komponenten wie [v-chip](/components/chips) und [v-btn](/components/buttons) eingehängt."
+  }
+}

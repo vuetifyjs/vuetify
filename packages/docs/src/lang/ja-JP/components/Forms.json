@@ -7,6 +7,17 @@
     },
     "rules": {
       "desc": "ルールを使用すると、すべてのフォーム コンポーネントにカスタムバリデーションを適用できます。これらは順次検証され、一度に 1 エラーの **maximum** が表示されるので、それに応じてルールを並べてください。"
+    },
+    "validation-with-submit-and-clear": {
+      "desc": "`v-form` コンポーネントには、コンポーネントに _ref_ を設定することでアクセスできる **3つの関数** があります。 refを使用すると、コンポーネントの内部メソッドにアクセスできます。たとえば、 `<v-form ref=\"form\">`です。 **this.$refs.form.validate()** はすべての入力をバリデーションし、それらがすべて有効かどうかを返します。 **this.$refs.form.reset()** はすべての入力をクリアし、バリデーションエラーをリセットします。 **this.$refs.form.resetValidation()**は入力バリデーションのみをリセットし、状態を変更しません。"
+    },
+    "vuelidate": {
+      "heading": "### Vuelidate",
+      "desc": "**vuelidate** は Vue.js のシンプルで軽量なモデル ベースのバリデーションです。[ドキュメント](https://vuelidate.netlify.com/)"
+    },
+    "vee-validate": {
+      "heading": "### Vee-validate",
+      "desc": "**vee-validate** は Vue.js のテンプレートベースのバリデーションフレームワークです。[ドキュメント](https://logaretm.github.io/vee-validate/)"
     }
   },
   "props": {

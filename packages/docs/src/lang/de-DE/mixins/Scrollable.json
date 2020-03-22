@@ -1,1 +1,6 @@
-{}
+{
+  "props": {
+    "scrollTarget": "Bestimmt das Element für Scroll-Ereignisse. Verwendet standardmäßig `window`.",
+    "scrollThreshold": "Die Anzahl der Scrollstrecke bevor **hide-on-scroll** aktiviert wird."
+  }
+}

@@ -1,1 +1,5 @@
-{}
+{
+  "props": {
+    "valueComparator": "Benutzerdefinierte Wertevergleichsfunktion benutzen"
+  }
+}

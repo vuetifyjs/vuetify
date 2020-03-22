@@ -1,1 +1,5 @@
-{}
+{
+  "props": {
+    "noDataText": "Text wird angezeigt, wenn keine Daten vorhanden sind"
+  }
+}

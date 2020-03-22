@@ -1,1 +1,10 @@
-{}
+{
+  "assistant": "### Jr.<br>UI Designer",
+  "cm": "### Community-Manager",
+  "core": "### Core<br>Team",
+  "founder": "### Gründer<br>CEO",
+  "heading": "# Lerne das Team kennen",
+  "headingText": "Vuetify ist _nicht_ eine Ein-Mann-Show. Wir haben ein sehr aktives und engagiertes Team, das **ständig bestrebt** ist, Entwicklern ein besseres Erlebnis zu bringen. Denken Sie daran, dass das unten stehende nicht eine vollständige Liste aller Personen ist, die helfen, Vuetify großartig zu machen. **Vielen Dank** für Ihre Unterstützung und vielen Dank für die Verwendung von Vuetify!",
+  "keeper": "### Bewahrer<br>des Hains",
+  "operations": "### Chief Operations Officer"
+}

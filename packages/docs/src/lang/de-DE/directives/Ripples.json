@@ -1,1 +1,29 @@
-{}
+{
+  "heading": "# Ripple Direktive",
+  "headingText": "Die `v-ripple`-Direktive wird verwendet, um die Aktion eines Benutzers anzuzeigen. Sie kann auf jedes Block Level Element angewendet werden. Zahlreiche Komponenten wie der `v-btn`, `v-tabs-item` und viele mehr kommen mit der Ripple-Direktive bereits eingebaut.",
+  "examples": {
+    "usage": {
+      "desc": "Grundlegende Ripple-Funktionalität kann nur durch Verwendung der `v-ripple`-Direktive auf einer Komponente oder einem HTML-Element aktiviert werden",
+      "uninverted": true
+    },
+    "custom-color": {
+      "heading": "### Benutzerdefinierte Farbe",
+      "desc": "Mit einer Helfer-Klasse können Sie die Farbe des Ripples ändern.",
+      "uninverted": true
+    },
+    "center": {
+      "heading": "### Zentrierter Ripple",
+      "desc": "Wenn eine `center`-Option benutzt wird, wird der Ripple immer aus der Mitte des Ziels stammen.",
+      "uninverted": true
+    },
+    "ripple-in-components": {
+      "heading": "### Ripple in Komponenten",
+      "desc": "Einige Komponenten bieten das \"ripple\"-Props an, das es Ihnen erlaubt, den Rippeleffekt zu steuern. Sie können es deaktivieren oder das Verhalten anpassen, indem Sie `class`- oder `center`-Optionen benutzen.",
+      "uninverted": true
+    }
+  },
+  "options": {
+    "class": "`v-ripple=\"{ \"class\": 'my-class' }\"` wendet eine benutzerdefinierte Klasse auf die Ripple an, die zum Ändern der Farbe verwendet werden",
+    "center": "`v-ripple=\"{ \"center\": true }\"` zwingt Ripple aus der Mitte des Ziels zu starten"
+  }
+}

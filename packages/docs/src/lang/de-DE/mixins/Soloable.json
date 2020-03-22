@@ -1,1 +1,7 @@
-{}
+{
+  "props": {
+    "solo": "Ändert den Stil der Eingabe",
+    "soloInverted": "Reduziert die Deckkraft des Elements wenn nicht fokussiert",
+    "flat": "Entfernt die Höhe (Schatten), welcher zum Element hinzugefügt wurde, wenn die **solo** oder **solo-invertierten**-Props verwendet werden"
+  }
+}

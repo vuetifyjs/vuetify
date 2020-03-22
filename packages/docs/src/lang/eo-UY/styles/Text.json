@@ -12,6 +12,8 @@
   "transformText2": "crwdns42336:0crwdne42336:0",
   "weightsHeader": "crwdns42338:0crwdne42338:0",
   "weightsText1": "crwdns42340:0crwdne42340:0",
+  "opacityHeader": "crwdns56916:0crwdne56916:0",
+  "opacityText1": "crwdns56918:0crwdne56918:0",
   "rtlHeader": "crwdns56733:0crwdne56733:0",
   "rtlText1": "crwdns56735:0[RTL]crwdne56735:0"
 }

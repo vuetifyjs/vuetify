@@ -20,6 +20,7 @@
   },
   "props": {
     "dark": "Components.Inputs.props.dark",
+    "filter": "検索時に使用されるフィルター 処理アルゴリズム。[example](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/components/VAutocomplete/VAutocomplete.ts#L36)",
     "searchInput": "検索値。`.sync` 修飾子と共に使用できます。"
   }
 }

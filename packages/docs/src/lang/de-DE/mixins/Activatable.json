@@ -1,1 +1,6 @@
-{}
+{
+  "props": {
+    "activator": "Legen Sie einen benutzerdefinierten Aktivator fest, wenn der `activator`-Slot nicht verwendet wird. String kann ein beliebiger gültiger querySelector sein und das Objekt kann ein beliebiger gültiger Knoten sein.",
+    "disabled": "Deaktiviert die Möglichkeit die Komponente zu öffnen."
+  }
+}

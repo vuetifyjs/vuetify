@@ -1,1 +1,21 @@
-{}
+{
+  "heading": "# Mutation observer",
+  "headingText": "Die `v-mutate`-Direktive verwendet die [Mutation Observer API](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver). Sie bietet eine einfach zu bedienende Schnittstelle, um zu erkennen, wann Elemente aktualisiert wurden.",
+  "examples": {
+    "usage": {
+      "desc": "Standardmäßig aktiviert die `v-mutate`-Direktive alle verfügbaren Optionen in der [Mutation Observer API](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver). Dies kann auf zwei Arten geändert werden. Sie können entweder das Objekt mit den Schlüsseln **handler** und **options** übergeben oder die Eigenschaft _modifier_ der Direktive `v-mutate.attr.sub=\"onMutate\"` verwenden"
+    },
+    "once": {
+      "heading": "### Modifikatoren",
+      "desc": "Die `v-mutate`-Direktive akzeptiert Modifikatoren für alle verfügbaren Optionen in der [Mutation Observer API](https://developer.mozilla. rg/de-US/docs/Web/API/MutationObserver). Für Bündigkeit werden Abkürzungen wie ** attr** (Attribute), **child** (childList), **sub** (Subbaum) und **char** (characterData) verwendet."
+    }
+  },
+  "options": {
+    "modifiers.once": "Wird nur einmal den angegebenen User-Callback aufrufen, dann wird die Direktive ungebunden sein.",
+    "modifiers.attr": "Legt den Wert von [attributes](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/attributes) auf true fest.",
+    "modifiers.child": "Legt den Wert von [childList](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/childList) auf true fest.",
+    "modifiers.char": "Legt den Wert von [characterData](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/characterData) auf true fest.",
+    "modifiers.sub": "Legt den Wert von [subtree](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/observe#Parameters) auf true fest.",
+    "value": "Die Funktion, die aufgerufen wird, wenn das Zielelement aktualisiert wurde."
+  }
+}

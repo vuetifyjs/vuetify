@@ -15,8 +15,16 @@
   },
   "props": {
     "alt": "スクリーンリーダー用の代替テキストです。装飾用の画像の場合空にしてください。",
+    "aspectRatio": "`width/height`として計算されるため、1920x1080 px画像の場合、`1.7778`になります。省略すると自動的に計算されます",
     "eager": "Mixins.Bootable.props.eager",
     "sizes": "`srcset`で使用するには、[MDN](https://developer.mozilla.org/ja/docs/Web/HTML/Element/img#attr-sizes) を参照してください。",
     "srcset": "デバイスのサイズに基づいて使用する代替画像のセット。 [続きを読む...](https://developer.mozilla.org/ja/docs/Web/HTML/Element/img#attr-srcset)"
+  },
+  "events": {
+    "error": "エラーがあった場合に発生します。",
+    "load": "画像が読み込まれたときに発生します"
+  },
+  "slots": {
+    "placeholder": "画像プレースホルダーのスロット"
   }
 }

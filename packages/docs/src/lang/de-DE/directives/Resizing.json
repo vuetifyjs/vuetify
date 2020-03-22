@@ -1,1 +1,14 @@
-{}
+{
+  "heading": "# Direktive zur Größenänderung",
+  "headingText": "Die Direktive `v-resize` kann benutzt werden, um bestimmte Funktionen aufzurufen, wenn die Größe des Fensters geändert wird.",
+  "examples": {
+    "usage": {
+      "desc": "Ändern Sie die Größe Ihres Fensters und beobachten Sie die Änderungen der Werte.",
+      "uninverted": true
+    }
+  },
+  "options": {
+    "modifiers.quiet": "`v-resize.quiet=\"callback\"` Wird **nicht** automatisch den angegebenen Callback beim Binding aufrufen.",
+    "value": "`v-resize=\"callback\"` Die Funktion, die bei der Änderung der Fenstergröße aufgerufen werden soll"
+  }
+}

@@ -1,5 +1,8 @@
 {
   "examples": {
+    "text": {
+      "heading": "### الخط"
+    },
     "icon": {
       "heading": "### أيقونه"
     },

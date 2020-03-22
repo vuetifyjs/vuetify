@@ -1,1 +1,5 @@
-{}
+{
+  "heading": "# App-Leisten",
+  "headingText": "Die Komponente `v-app-bar` ist für jede grafische Benutzeroberfläche (GUI) von entscheidender Bedeutung, da sie im Allgemeinen die primäre Quelle der Navigation ist. Die App-Bar-Komponente funktioniert hervorragend in Verbindung mit einem [v-navigation-drawer](/components/navigation-drawers) um die Site-Navigation in Ihrer Anwendung zu gewährleisten.",
+  "usageText": "Der `v-app-bar` Component wird für anwendungsweite Aktionen und Informationen verwendet."
+}

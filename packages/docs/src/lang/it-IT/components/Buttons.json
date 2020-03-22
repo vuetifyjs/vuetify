@@ -1,5 +1,8 @@
 {
   "examples": {
+    "text": {
+      "heading": "### Testo"
+    },
     "dropdown": {
       "uninverted": true
     },

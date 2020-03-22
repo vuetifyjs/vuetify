@@ -1,10 +1,11 @@
 {
   "heading": "# 빠른 시작",
   "headingText": "세상에서 가장 유명한 Vue.js 프레임워크인 'Vuetify' 와 함깨 기능이 풍부하고 아주 빠른 앱을 만들어 보세요!",
-  "uiHeader": "### Vue UI 로 설치하기",
+  "vueCliHeader": "## Vue CLII로 설치하기",
+  "uiHeader": "### Vue UI로 설치하기",
   "uiImg1": "Vuetify 플러그인 설치하기",
   "uiImg2": "Vuetify 설치과정 설정하기",
-  "nuxtHeading": "## Nuxt 에 Vuetify 설치하기",
+  "nuxtHeading": "## Nuxt로 설치",
   "nuxtText1": "Vuetify는 [Nuxt Vuetify 모듈](https://github.com/nuxt-community/vuetify-module) 을 이용해 Nuxt 프로젝트에 추가할 수 있습니다.",
   "nuxtText2": "설치 후, `nuxt.config.js` 파일의 'buildModules' 항목에 Vuetify 모듈을 아래와 같이 추가 해 주세요.",
   "nuxtText3": "Nuxt 를 이용한 설치에 관한 더욱 많은 정보를 원한다면 [Nuxt 공식 문서](https://nuxtjs.org/) 를 참고하세요.",

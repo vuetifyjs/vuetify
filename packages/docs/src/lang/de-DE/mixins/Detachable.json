@@ -1,1 +1,6 @@
-{}
+{
+  "props": {
+    "attach": "Gibt an, zu welchem DOM-Element diese Komponente sich trennen soll. String - Kann jeder gültige QuerySelector sein. Objekt - Lann jeder gültige Knoten sein. Dies wird standardmäßig an den Root-`v-app` Component anhängt.",
+    "contentClass": "Wendet eine benutzerdefinierte Klasse auf das abgelöste Element an. Dies ist nützlich, da der Inhalt an den Anfang der `v-app` Komponente verschoben wird (es sei denn, das **attach** Prop wird bereitgestellt) und nicht zielgerichtet von Klassen ist, die direkt auf die Komponente übergeben werden."
+  }
+}

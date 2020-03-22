@@ -1,8 +1,7 @@
 {
   "examples": {
-    "flat": {
-      "heading": "플랫 (Flat)",
-      "desc": "평평한 플랫 버튼은 박스 그림자와 배경이 없습니다. 마우스 포인터를 버튼 컨테이너 위에 올려야만 (Only on hover) 버튼 형태가 보입니다."
+    "text": {
+      "heading": "### 텍스트 (Text)"
     },
     "raised": {
       "desc": "Raised 버튼은 클릭할때 박스의 그림자가 커집니다. 버튼의 기본 스타일입니다."

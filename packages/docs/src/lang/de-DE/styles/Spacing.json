@@ -1,1 +1,72 @@
-{}
+{
+  "heading": "# Abstände",
+  "headingText": "Aktualisieren Sie Ihr Layout ohne neue Klassen zu erstellen. Abstandshelfer sind nützlich, um das 'padding ' und das 'margin ' eines Elements zu ändern.",
+  "playgroundHeader": "## Spielwiese",
+  "playgroundText1": "Benutze die Spielwiese, um ein Gefühl dafür zu bekommen, was die verschiedenen Helferklassen tun können. Für eine Erklärung, wie sie funktionieren, siehe den Abschnitt **Wie es funktioniert** unten.",
+  "howText": "Die Hilfsklassen wenden **margin** oder **padding** auf ein Element von _0 bis 12_ an. Jede Größensteigerung wurde so gestaltet, dass sie mit den üblichen Abständen des Material-Designs übereinstimmt. Diese Klassen können im folgenden Format angewendet werden `{property}{direction}-{size}`.",
+  "propertyText": "Die **Eigenschaft** wendet den Typ des Abstands an:",
+  "properties": [
+    "`m` - wendet `margin` an",
+    "`p` - wendet `padding` an"
+  ],
+  "directionText": "**direction** bezeichnet die Seite, auf die die Eigenschaft zutrifft:",
+  "directions": [
+    "`t` - wendet den Abstand für `margin-top` und `padding-top` an",
+    "`b` - wendet den Abstand für `margin-bottom` und `padding-bottom` an",
+    "`l` - wendet den Abstand für `margin-left ` und `padding-left` an",
+    "`r` - wendet den Abstand für `margin-right` und `padding-right` an",
+    "`s` - wendet den Abstand für `margin-left`/`padding-left` _(im LTR-Modus)_ und `margin-right`/`padding-right` _(im RTL-Modus)_",
+    "`e` - wendet den Abstand für `margin-right`/`padding-right` _(im LTR-Modus)_ und `margin-left`/`padding-left` _(im RTL-Modus)_",
+    "`x` - wendet den Abstand für `*-left` und `*-right` an",
+    "`y` - wendet den Abstand für `*-top` und `*-bottom` an",
+    "`a` - wendet den Abstand für die Eigenschaft in alle Richtungen an"
+  ],
+  "sizeText": "Das **size**-Element steuert den Anstieg der Eigenschaft in 4px Intervallen:",
+  "sizes": [
+    "`0` - eliminiert alle `margin` oder `padding` durch die Einstellung `0`",
+    "`1` - setzt `margin` oder `padding` auf 4px",
+    "`2` - setzt `margin` oder `padding` auf 8px",
+    "`3` - setzt `margin` oder `padding` auf 12px",
+    "`4` - setzt `margin` oder `padding` auf 16px",
+    "`5` - setzt `margin` oder `padding` auf 20px",
+    "`6` - setzt `margin` oder `padding` auf 24px",
+    "`7` - setzt `margin` oder `padding` auf 28px",
+    "`8` - setzt `margin` oder `padding` auf 32px",
+    "`9` - setzt `margin` oder `padding` auf 36px",
+    "`10` - setzt `margin` oder `padding` auf 40px",
+    "`11` - setzt `margin` oder `padding` auf 44px",
+    "`12` - setzt `margin` oder `padding` auf 48px",
+    "`n1` - setzt negativen `margin` auf 4px",
+    "`n2` - setzt negativen `margin` auf 8px",
+    "`n3` - setzt negativen `margin` auf 12px",
+    "`n4` - setzt negativen `margin` auf 16px",
+    "`n5` - setzt negativen `margin` auf 20px",
+    "`n6` - setzt negativen `margin` auf 24px",
+    "`n7` - setzt negativen `margin` auf 28px",
+    "`n8` - setzt negativen `margin` auf 32px",
+    "`n9` - setzt negativen `margin` auf 36px",
+    "`n10` - setzt negativen `margin` auf 40px",
+    "`n11` - setzt negativen `margin` auf 44px",
+    "`n12` - setzt negativen `margin` auf 48px",
+    "`auto` - setzt den Abstand auf `auto`"
+  ],
+  "horizontalHeader": "Horizontales Zentrieren",
+  "horizontalText": "Für Blockelemente mit einer bestimmten Breite können Sie `.mx-auto` anwenden, um den Inhalt horizontal zu zentrieren.",
+  "breakpointHeader": "## Mit Haltepunkten",
+  "breakpointText": "Vuetify verfügt über ein 12-Punkte-Rastersystem, das mit Flexbox erstellt wurde. Spacing wird verwendet, um bestimmte Layouts innerhalb eines Anwendungsinhalts zu erstellen. Es besteht aus 5 Media-Haltepunkten, die für bestimmte Bildschirmgrößen oder -Orientierungen verwendet werden: **xs**, **sm**, **md**, **lg** und **xl**. Die Standardauflösungen sind unten in der Tabelle *Viewport Haltepunkte* definiert und können durch Anpassung der [Haltepunktkonfiguration](/customization/breakpoints) geändert werden.",
+  "breakpointHowText": "Die Helferklassen gelten an einem gegebenen Haltepunkt **margin** oder **padding**. Diese Klassen können im folgenden Format angewendet werden: `{property}{direction}-{breakpoint}-{size}`. Dies gilt nicht für **xs** da es abgeleitet ist; z.B. `ma-xs-2` entspricht `ma-2`.",
+  "examples": {
+    "horizontal": {
+      "heading": "### Horizontal",
+      "desc": "Mit Hilfe der Margin Helfer Klassen können Sie Inhalte einfach horizontal zentrieren."
+    },
+    "negative-margin": {
+      "heading": "### Negativer Abstand",
+      "desc": "Margin kann auch negativ in den gleichen **1 bis 12** Intervallen angewendet werden."
+    },
+    "breakpoint-md": {
+      "heading": "### Mit Haltepunkt",
+      "desc": "Abstand mit `md` und `lg` Haltepunkte"
+    }
+  }
+}

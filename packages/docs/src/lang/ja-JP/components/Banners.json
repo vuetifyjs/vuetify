@@ -24,6 +24,8 @@
     }
   },
   "props": {
+    "icon": "アイコンを指定します。",
+    "iconColor": "アイコンの色を指定します。",
     "sticky": "**position: sticky** をコンポーネントに適用します（**Evergreenブラウザのみ**）。 [スティッキーポジションのMDNドキュメント](https://developer.mozilla.org/ja/docs/Web/CSS/position) で詳細を確認できます。"
   },
   "functions": {

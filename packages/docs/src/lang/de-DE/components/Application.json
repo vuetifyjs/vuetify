@@ -1,1 +1,8 @@
-{}
+{
+  "heading": "# Anwendung",
+  "props": {
+    "v-content": {
+      "tag": "Components.Sheets.props.tag"
+    }
+  }
+}

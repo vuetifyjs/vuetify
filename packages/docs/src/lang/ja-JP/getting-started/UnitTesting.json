@@ -1,9 +1,9 @@
 {
   "heading": "# ユニットテスト",
-  "headingText": "単体テストはアプリケーション開発の重要な部分(そして時々無視される)部分です。単体テストは私たちのプロセスとワークフローを保護し、プロジェクトの最も重要な部分を偶発的なミスや見落としから守ることを保証します。このためVueは [vue-test-utils](https://vue-test-utils.vuejs.org/) と呼ばれる、テストユーティリティを持っています。Vueコンポーネントと対話するための便利な機能を提供し、多くの一般的なテストランナーと連携します。",
+  "headingText": "ユニットテストはアプリケーション開発の重要な部分(そして時々無視される)部分です。ユニットテストは私たちのプロセスとワークフローを保護し、プロジェクトの最も重要な部分を偶発的なミスや見落としから守ることを保証します。このためVueは [vue-test-utils](https://vue-test-utils.vuejs.org/ja/) と呼ばれる、テストユーティリティを持っています。Vueコンポーネントと対話するための便利な機能を提供し、多くの一般的なテストランナーと連携します。",
   "alert": "VuetifyはTypescriptを利用しており、現在Vueオブジェクトをimportおよびextendする必要があります。そのため一部のアプリケーションで警告メッセージを生成する可能性があります。現在、進行中の[Githubディスカッション] (https://github.com/vuetifyjs/vuetify/issues/4068) があり、さまざまなユースケースで回避策が考えられます。さらに質問がある場合は、[オンラインコミュニティ] (https://community.vuetifyjs.com) にご参加ください。",
   "runnerHeader": "## テストランナーのセットアップ",
-  "runnerText1": "Vue CLI でテストランナーをセットアップする方法に関する情報は、 [公式ドキュメント](https://vue-test-utils.vuejs.org/guides/getting-started.html) にあります。 また、Vue CLI は次のテストランナー向けのリポジトリを開始しました。",
+  "runnerText1": "Vue CLI でテストランナーをセットアップする方法に関する情報は、 [公式ドキュメント](https://vue-test-utils.vuejs.org/ja/guides/getting-started.html) にあります。 また、Vue CLI は次のテストランナー向けのリポジトリを開始しました。",
   "runnerText2": [
     "[Jest](https://cli.vuejs.org/core-plugins/unit-jest.html)",
     "[Mocha](https://cli.vuejs.org/core-plugins/unit-mocha.html)",
@@ -11,7 +11,7 @@
     "[AVA](https://github.com/eddyerburgh/vue-test-utils-ava-example)"
   ],
   "setupHeading": "## Vuetify のブートストラップ",
-  "setupText1": "Typescriptを適切に利用するために、VuetifyコンポーネントはVueオブジェクトを拡張します。 これには、上記のアラートに記載されている [問題の原因](https://github.com/vuetifyjs/vuetify/issues/4068) の可能性があります。 [localVueインスタンス](https://vue-test-utils.vuejs.org/api/options.html#localvue) を使用する代わりに、単体テストセットアップファイルでVuetifyをグローバルにインストールする必要があります。 これはテストランナーによって異なります。 セットアップファイルに関する適切なドキュメントを必ず参照してください。",
+  "setupText1": "Typescriptを適切に利用するために、VuetifyコンポーネントはVueオブジェクトを拡張します。 これには、上記のアラートに記載されている [問題の原因](https://github.com/vuetifyjs/vuetify/issues/4068) の可能性があります。 [localVueインスタンス](https://vue-test-utils.vuejs.org/ja/api/options.html#localvue) を使用する代わりに、ユニットテストセットアップファイルでVuetifyをグローバルにインストールする必要があります。 これはテストランナーによって異なります。 セットアップファイルに関する適切なドキュメントを必ず参照してください。",
   "setupInfo1": "`setup.js`ファイルを使用していない場合は、テストのユーティリティセクションに`Vue.use(Vuetify)`を追加してください。",
   "specHeader": "## Spec テスト",
   "specText1": "Vuetifyでのユニットテストの作成は、 **localVue** インスタンスでVuetifyオブジェクトを使用し、インスタンスをマウント関数オプションに渡すという点で **vuex** および **vue-router** に似ています。",

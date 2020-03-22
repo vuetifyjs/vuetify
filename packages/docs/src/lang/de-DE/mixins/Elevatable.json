@@ -1,1 +1,5 @@
-{}
+{
+  "props": {
+    "elevation": "Legt eine Höhe für die Komponente zwischen 0 und 24 fest. Weitere Informationen finden Sie auf der [Höhenseite](/styles/elevation)."
+  }
+}

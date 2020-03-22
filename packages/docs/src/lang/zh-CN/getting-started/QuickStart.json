@@ -10,6 +10,7 @@
   "uiText1": "Vuetify 也可通过 **Vue UI**——Vue CLI 的全新可视化应用程序——进行安装。确保你已安装了最新版的 Vue CLI，在终端上输入：",
   "uiImg1": "安装 Vuetify 插件",
   "uiImg2": "配置你的 Vuetify",
+  "uiText2": "Vue UI 启动后会自动在浏览器打开 [可视化界面](http://localhost:8000/) ，点击屏幕左侧的 **插件** 按钮。进入插件页面后，在搜索框中输入 Vuetify 。",
   "nuxtHeading": "## Nuxt 安装",
   "nuxtText1": "可以通过安装 [Nuxt Vuetify module](https://github.com/nuxt-community/vuetify-module) 来添加 Vuetify 。",
   "nuxtText2": "安装之后，更新你的 `nuxt.config.js` 从而在构建中包含 Vuetify 模块。",
@@ -18,10 +19,19 @@
   "webpackText1": "要将 Vuetify 安装到 Webpack 项目，您需要添加几个依赖：",
   "webpackText2": "一旦安装，请找到你的 `webpack.config.js` 文件，并将下面的片段复制到 **rules** 。如果已经存在 **sass** 规则，你可能需要应用下面的一些或所有的更改。如果你希望在 treeshaking 中使用 **vuetify-loader** ，请确保你的 Webpack 版本 `>=4`，你可以在 [A-la-carte](/customization/a-la-carte#vueconfigjs-installation) 页面中找到更多关于此项的设置。",
   "webpackText3": "为 Vuetify 创建一个包含以下内容的插件文件，`src/plugins/vuetify.js`：",
+  "webpackText4": "如果使用了 `vuetify-loader`，请修改为如下代码：",
   "webpackText5": "导航到主入口点，在那里实例化 Vue 实例并将 Vuetify 对象作为选项传递进来。",
   "webpackHeader2": "### 字体安装",
   "webpackText6": "Vuetify 使用 [Google's Roboto fon](https://material.io/design/typography/the-type-system.html) 和 [Material Design Icons](https://materialdesignicons.com/)。安装这些软件的最简单方式是将他们的 CDN 包含在你的主 `index.html` 中。",
   "webpackText7": "有关不同支持图标字体和高级实现的更多信息，请参阅 [Icons](/custom/Icons)。",
   "cdnHeader": "## 使用 CDN",
-  "cdnText": "要在不安装 Vue CLI 模板的情况下使用 Vuetify.js 进行测试，请将下面的代码复制到您的 `index.html` 中。这将拉取最新版本的 Vue 和 Vuetify，从而允许你开始使用组件。您还可以在 codepen 上使用 [Vuetify starter](https://template.vuetifyjs.com) 。虽然不建议这样做，但是如果需要在 _生产_ 环境中使用 cdn，请对包的版本进行范围限定。有关如何做到这一点的更多信息，请浏览 [jsdelivr](https://www.jsdelivr.com/) 。"
+  "cdnText": "要在不安装 Vue CLI 模板的情况下使用 Vuetify.js 进行测试，请将下面的代码复制到您的 `index.html` 中。这将拉取最新版本的 Vue 和 Vuetify，从而允许你开始使用组件。您还可以在 codepen 上使用 [Vuetify starter](https://template.vuetifyjs.com) 。虽然不建议这样做，但是如果需要在 _生产_ 环境中使用 cdn，请对包的版本进行范围限定。有关如何做到这一点的更多信息，请浏览 [jsdelivr](https://www.jsdelivr.com/) 。",
+  "cdnAlert": "为了使您的应用能正常运行，您必须用 `v-app` 组件包裹您的应用。请参阅 [Application](/components/application) 组件的文档。",
+  "electronHeader": "## 结合 Electron",
+  "electronText": "想要在 **Electron** 中使用 Vuetify，请先安装 Vue CLI 插件 [electron-builder](https://github.com/nklayman/Vue CLI-plugin-electron-builder) 。",
+  "pwaHeader": "## 结合 PWA",
+  "pwaText": "如果您使用 Vue CLI 创建新项目，在 `vue create my-app` 提供的选项中您可以选择 **Progressive Web App (PWA) Support** 。对于已经存在的 Vue CLI 项目，您可以通过如下命令安装该依赖库。",
+  "cordovaHeader": "## 结合 Cordova",
+  "capacitorHeader": "## 结合 Capacitor",
+  "capacitorText": "想要在 **Capacitor** 中使用 Vuetify，请先安装 Vue CLI 插件 [Capacitor](https://github.com/nklayman/vue-cli-plugin-capacitor) 。"
 }

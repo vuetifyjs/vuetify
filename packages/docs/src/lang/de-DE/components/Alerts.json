@@ -1,1 +1,35 @@
-{}
+{
+  "heading": "# Alarme",
+  "headingText": "Die Komponente `v-alert` wird verwendet, um wichtige Informationen an den Benutzer über die Verwendung kontextabhängigen Typen Symbole und Farbe zu übermitteln. Es gibt 4 Variationen: **Erfolg**, **info**, **Warnung** und **Fehler**. Standardsymbole werden zugewiesen, die helfen, verschiedene Aktionen zu repräsentieren. Viele Teile eines Alarms, wie z. B. `border`, `icon` und `color` können auch so angepasst werden, dass sie nahezu jeder Situation entsprechen.",
+  "usageText": "Alarme in ihrer einfachsten Form ist ein flaches [stück Paper](/components/sheets), auf dem eine Nachricht anzeigezeigt wird.",
+  "examples": {
+    "border": {
+      "heading": "### Rand",
+      "desc": "Das **border** (Rand) Attribut fügt auf eine der 4 Seiten der Alarmmeldung einen einfachen Rand hinzu. Dies kann mit Attributen wie **color**, **dark** und **type** kombiniert werden, um dem Alarm anzupassen."
+    },
+    "colored-border": {
+      "heading": "### Gefärbter Rand",
+      "desc": "Das **colored-border** Attribut entfernt den Alarmhintergrund, um das **border** Attribut zu unterstreichen. Wenn ein **type** gesetzt ist, wird die Standardfarbe des entsprechenden typs verwendet. Wenn keine **color** oder **type** gesetzt ist, wird die Farbe standardmäßig auf die invertierte Farbe des angewendeten Themes (schwarz für hell und weiß/grau für dunkel) gesetzt."
+    },
+    "dense": {
+      "heading": "### Kompakt",
+      "desc": "Das **dense** Attribut verringert die Höhe des Alarms, um einen einfachen und kompakten Stil zu schaffen. In Kombination mit dem **border** Attribut wird die Grenzdicke reduziert, um mit dem Stil konsistent zu bleiben."
+    },
+    "dismissible": {
+      "heading": "### Schließbar"
+    },
+    "icon": {
+      "heading": "### Icon"
+    },
+    "type": {
+      "heading": "### Type"
+    },
+    "twitter": {
+      "heading": "### Twitter-Warnung"
+    }
+  },
+  "props": {
+    "border": "Setzt einen Rand auf die Warnung. Akzeptiert **top** | **right** | **bottom** | **left**.",
+    "closeLabel": "Text für *aria-label* auf **dismissible** Alarmen. Kann auch global in [Internationalization](/customization/internationalization) angepasst werden."
+  }
+}

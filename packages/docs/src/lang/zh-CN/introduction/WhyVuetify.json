@@ -4,6 +4,7 @@
   "community": "社区",
   "communityCaption": "准备好享受 Vue 生态系统中最活跃的社区之一吧。被一个问题困住了？马上寻求帮助。找到一个bug？想谈谈 Firebase 吗？创造了一些令人惊叹的东西吗？来让我们知道吧！了解其他人在 [awesome-vuetify](https://github.com/vuetifyjs/awesome-vuetify) 存储库上构建了什么。",
   "communityHeader": "## 开发者支持",
+  "communityText": "使用Vuetify进行开发意味着你永远不会孤立无援。在官方的 [Discord 群组](https://community.vuetifyjs.com) 可以快速获得开发团队与其他社区成员地帮助，并有机会与世界各地的优秀开发者交流，以帮助您取得成功。需要帮助并且乐于赞助本项目吗？成为 [赞助者](https://github.com/sponsors/johnleider) ，您就能访问非公开的技术支持渠道或是 [咨询](/professional-support/consulting) 项目作者。",
   "comparisonHeader": "## 对比其它框架",
   "comparisonText": "自2014年发布以来，[Vue.js](https://vuejs.org/) 已经成为世界上最流行的 JavaScript 框架之一。这种流行的原因之一是组件的广泛使用，它使开发人员能够创建在整个应用程序中使用和重用的简洁模块。UI 库是这些组件的集合，它们根据特定的样式指南来实现，并提供构建丰富 web 应用程序所需的工具。以下是 2019 年 Vue 最佳组件库的精简列表:",
   "continuous": "持续",

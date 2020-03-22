@@ -1,1 +1,30 @@
-{}
+{
+  "heading": "# Snackbars",
+  "headingText": "Die `v-snackbar`-Komponente wird verwendet, um eine kurze Nachricht einem Benutzer anzuzeigen. Snackbars unterstützen Positionierung, Verzögerungen für das Ausblenden und Callbacks.",
+  "examples": {
+    "usage": {
+      "desc": "`v-snackbar`s in ihrer einfachsten Form zeigen eine temporäre und schließbare Benachrichtigung an den Benutzer."
+    },
+    "multi-line": {
+      "heading": "### Mehrere Zeilen",
+      "desc": "Die Eigenschaft `multi-line` erweitert die Höhe der `v-snackbar` für mehr Inhalte."
+    },
+    "timeout": {
+      "heading": "### Timeout",
+      "desc": "Mit der Eigenschaft `timeout` können Sie die Zeit bis zur Ausblendung der `v-snackbar` anpassen."
+    },
+    "vertical": {
+      "heading": "### Vertikal",
+      "desc": "Die `vertical`-Eigenschaft erlaubt es Ihnen, den Inhalt der `v-snackbar` zu stapeln."
+    },
+    "contextual": {
+      "heading": "### Contextual",
+      "desc": "Sie können auch eine Farbe auf die Snackbar anwenden, um sie Ihrer Implementierung besser anzupassen."
+    }
+  },
+  "props": {
+    "multiLine": "Gibt der Snackbar eine größere Mindesthöhe.",
+    "timeout": "Zeit (in Millisekunden), bis die Snackbar automatisch ausgeblendet wird. Verwenden Sie 0, um sie unbegrenzt anzuzeigen.",
+    "vertical": "Stapelt den Inhalt der Snackbar oben auf die Aktionen (Button)."
+  }
+}

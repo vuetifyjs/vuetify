@@ -1,1 +1,19 @@
-{}
+{
+  "heading": "# Scrolling-Direktive",
+  "headingText": "Die `v-scroll`-Direktive erlaubt es Ihnen Callbacks bereitzustellen, die beim Scrollen des Fensters oder eines speziell definierten Elements aufgerufen werden.",
+  "examples": {
+    "usage": {
+      "desc": "Das Standardverhalten ist die Bindung an das Fenster. Wenn keine zusätzlichen Konfigurationsoptionen benötigt werden, können Sie einfach Ihre Callback-Funktion übergeben.",
+      "uninverted": true
+    },
+    "options": {
+      "heading": "### Scrollen mit Optionen",
+      "desc": "Für einen feineren Ansatz können Sie das Ziel benennen, um den Scroll-Ereignis-Listener zu binden.",
+      "uninverted": true
+    }
+  },
+  "options": {
+    "arg:target": "`v-scroll:#target=\"callback\"` Das Ziel hört auf Scroll-Änderungen. Standardmäßig ist es das Fenster, kann aber zu jeder gültigen Id-Auswahl geändert werden.",
+    "value": "`v-scroll=\"callback\"` Die Funktion die beim Scrollen aufgerufen werden soll"
+  }
+}

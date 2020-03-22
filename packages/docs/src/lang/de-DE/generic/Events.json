@@ -1,1 +1,4 @@
-{}
+{
+  "click": "Ereignis, das abgesendet wird, wenn der Component angeklickt wird",
+  "input": "Das aktualisierte gebundene Modell"
+}

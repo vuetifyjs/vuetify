@@ -1,1 +1,17 @@
-{}
+{
+  "props": {
+    "allowOverflow": "Entfernt Überlauf-Neupositionierung für den Inhalt",
+    "inputActivator": "Legt ein neues Aktivierungsziel für das abgelöste Element fest. Verwende, wenn detachable Elemente in `v-input`-Slots platziert werden",
+    "maxWidth": "Legt die maximale Breite für den Inhalt fest",
+    "minWidth": "Legt die minimale Breite für den Inhalt fest",
+    "nudgeBottom": "Schiebe den Inhalt nach unten",
+    "nudgeLeft": "Schiebe den Inhalt nach links",
+    "nudgeRight": "Schiebe den Inhalt nach rechts",
+    "nudgeTop": "Schiebe den Inhalt nach oben",
+    "nudgeWidth": "Stoße die Breite an",
+    "offsetOverflow": "Bewirkt, dass die Komponente durch Überlauf auf die gegenüberliegende Seite gedreht wird",
+    "positionX": "Wird verwendet, um den Inhalt zu positionieren, wenn kein Aktivierungs-Slot verwendet wird",
+    "positionY": "Wird verwendet, um den Inhalt zu positionieren, wenn kein Aktivierungs-Slot verwendet wird",
+    "zIndex": "Der z-Index für die Komponente"
+  }
+}

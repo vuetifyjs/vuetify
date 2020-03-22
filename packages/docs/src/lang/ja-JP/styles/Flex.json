@@ -71,6 +71,8 @@
     "`.justify-xl-space-around`"
   ],
   "alignHeader": "## Flex align （位置）",
+  "alignText1": "`align-items`フレックス設定はflex alignクラスを使用して変更できます。これはデフォルトで **y-axis** のフレックスボックスアイテムを変更しますが、 `flex-direction: column`を使用すると逆に**x-axis**に変更されます。 整列位置は `start`, `end`, `center`, `baseline` または `stretch` (ブラウザのデフォルト) から指定します。",
+  "alignAlert1": "IE11でflex alignを使用する場合、「min-height」では不十分であり、望ましくない結果が生じるため、明示的な「height」を設定する必要があります。",
   "alignList": [
     "`.align-start`",
     "`.align-end`",
@@ -132,11 +134,13 @@
   ],
   "marginText1": "Flexbox コンテナのマージンヘルパー クラスを使用すると、 `flex-row` または `flex-column` をそれぞれ使用する場合に、**x-axis** または **y-axis** 上のフレックス アイテムの位置を制御できます。",
   "marginAlert": "**IE11**は、デフォルト以外の `justify-content` 値を持つ親を持つflexアイテムの自動マージンを適切にサポートしません。 詳細については、この [StackOverflowの回答を参照](https://stackoverflow.com/a/37535548) してください。",
+  "marginText2": "`flex-direction: column`と`align-items`を組み合わせると、 `.mt-auto`と`.mb-auto`ヘルパークラスを利用してflexアイテムの位置を調整できます。",
   "wrapList1": [
     "`.flex-nowrap`",
     "`.flex-wrap`",
     "`.flex-wrap-reverse`"
   ],
+  "wrapText2": "これらのヘルパークラスは、`flex-{breakpoint}-{condition}` の形式で適用して、ブレークポイントに基づいて、よりレスポンシブなバリエーションを作成することもできます。次の組み合わせを使用できます:",
   "wrapList2": [
     "`.flex-sm-nowrap`",
     "`.flex-sm-wrap`",

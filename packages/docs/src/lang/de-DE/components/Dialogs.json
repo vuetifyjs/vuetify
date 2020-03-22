@@ -1,1 +1,25 @@
-{}
+{
+  "examples": {
+    "without-activator": {
+      "uninverted": true
+    },
+    "modal": {
+      "uninverted": true
+    },
+    "fullscreen": {
+      "uninverted": true
+    },
+    "form": {
+      "uninverted": true
+    },
+    "scrollable": {
+      "uninverted": true
+    },
+    "overflowed": {
+      "uninverted": true
+    },
+    "advanced": {
+      "uninverted": true
+    }
+  }
+}

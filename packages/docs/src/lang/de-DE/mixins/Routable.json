@@ -1,1 +1,17 @@
-{}
+{
+  "props": {
+    "activeClass": "Konfiguriere die aktive CSS-Klasse, wenn der Link aktiv ist. Mehr Informationen über das [**active-class**-Props](https://router.vuejs.org/api/#active-class) finden Sie in der vue-router Dokumentation.",
+    "append": "Das Setzen des **append**-Props fügt immer den relativen Pfad an den aktuellen Pfad an. Mehr Informationen über das [**append**-Props](https://router.vuejs.org/api/#append) finden Sie in der vue-router Dokumentation.",
+    "disabled": "Entfernt die Möglichkeit, auf die Komponente zu klicken oder diese zu selektieren.",
+    "exact": "Stimme exakt mit dem Link überein. Andernfalls passt '/' zu jeder Route. Mehr Informationen über das [**exact**-Props](https://router.vuejs.org/api/#exakt) finden Sie in der vue-router Dokumentation.",
+    "exactActiveClass": "Konfigurieren Sie die aktive CSS-Klasse, die angewendet wird, wenn der Link aktiv ist. Mehr Informationen über das [**exact-active-class**-Props](https://router.vuejs.org/api/#exact-active-class) finden Sie in der vue-router Dokumentation.",
+    "href": "Legt die Komponente als 'anchor ' fest und wendet das Attribut **href** an.",
+    "link": "Legt fest, dass die Komponente ein Link ist. Dies wird automatisch festgelegt, wenn das **href**- oder **to**-Props verwendet wird.",
+    "nuxt": "Legt den Link als `nuxt-link` fest. Für die Nutzung mit dem [nuxt Framework](https://nuxtjs.org/api/components-nuxt-link/).",
+    "replace": "Wenn das **replace**-Props gesetzt wird, wird bei einem Klick `router.replace()` anstelle von `router.push()` aufgerufen, so dass die Navigation keinen Verlauf hinterlässt. Sie können weitere Informationen über das [**replace**-Props](https://router.vuejs.org/api/#replace) in der vue-router Dokumentation finden.",
+    "ripple": "Mixins.Rippleable.props.ripple",
+    "to": "Benennt die Zielroute des Links. Mehr Informationen über das [**to**-Props](https://router.vuejs.org/api/#to) finden Sie in der vue-router Dokumentation.",
+    "tag": "Components.Sheets.props.tag",
+    "target": "Definiert das 'target '-Attribut. Dies sollte nur angewendet werden, wenn das **href** Prop verwendet wird."
+  }
+}
