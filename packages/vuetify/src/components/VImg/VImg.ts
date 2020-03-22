@@ -12,7 +12,7 @@ import { PropValidator } from 'vue/types/options'
 import VResponsive from '../VResponsive'
 
 // Utils
-import { consoleError, consoleWarn } from '../../util/console'
+import { consoleWarn } from '../../util/console'
 
 // not intended for public use, this is passed in by vuetify-loader
 export interface srcObject {
@@ -171,11 +171,6 @@ export default VResponsive.extend({
       this.$emit('load', this.src)
     },
     onError () {
-      consoleError(
-        `Image load failed\n\n` +
-        `src: ${this.normalisedSrc.src}`,
-        this
-      )
       this.$emit('error', this.src)
     },
     getSrc () {
