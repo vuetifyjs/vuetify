@@ -8,18 +8,28 @@
       "title": "Lebendige Community"
     },
     "components": {
-      "text": "Ihnen stehen über 80 spezialisierter Komponenten zur Verfügung, die für jede Situation eine Lösung bieten.",
+      "text": "Ihnen stehen über 80 spezialisierte Komponenten zur Verfügung, die für jede Situation eine Lösung bieten.",
       "title": "Semantische Material-Komponenten"
     },
     "scaffolding": {
-      "text": "Vuetify ist mit seinem Vue CLI Plugin gerüstet für die Zukunft. Mit nur einem Befehl beginnen Sie Ihre nächste große Idee in die Tat umzusetzen.",
+      "text": "Vuetify ist mit seinem Vue CLI Plugin für die Zukunft gerüstet. Mit nur einem Befehl beginnen Sie Ihre nächste große Idee in die Tat umzusetzen.",
       "title": "Schnellstart"
     }
   },
+  "getHelp": "Hol dir Hilfe",
   "getStarted": "Erste Schritte",
-  "proudlySponsoredBy": "Sponsoren",
+  "github": "GitHub",
+  "madeWithVuetify": "## Projekte mit Vuetify",
+  "madeWithVuetifyText": "Eine Sammlung von Projekten, die mit Vuetify erstellt wurden. Schau dir an, was andere auf der Welt erstellen.",
+  "materialDesign": "Material Design",
+  "mit": "MIT-Lizenz",
+  "openCollective": "Open Collective",
+  "premiumThemes": "## Premium Themes",
+  "premiumThemesText": "Bringen Sie Ihr Projekt auf die nächste Stufe mit Premium Themes aus unserem offiziellen Shop — alles mit Vuetify.",
+  "proudlySponsoredBy": "## Projekt Sponsoren",
   "proundlySponsoredByText": "Die kontinuierliche Weiterentwicklung und Wartung von Vuetify wird durch diese großzügigen Sponsoren ermöglicht:",
+  "seeMoreThemes": "Weitere Themes",
   "whyVuetify": "## Warum Vuetify?",
-  "whyVuetifyText": "Das Erstellen von Anwendungen mit Vue war noch nie so einfach. Bringen Sie Ihren Entwicklungsprozess auf den nächsten Level, mit allen Werkzeugen, die Sie dafür benötigen.",
+  "whyVuetifyText": "Das Erstellen von Anwendungen mit Vue war noch nie so einfach. Bringen Sie Ihren Entwicklungsprozess auf das nächste Level, mit allen Werkzeugen, die Sie dafür benötigen.",
   "whyVuetifyText2": "Warum Vuetify?"
 }

@@ -1,1 +1,18 @@
-{}
+{
+  "heading": "# Programmatisches Scrollen",
+  "headingText": "Sie können das Scrollen in Ihrer Anwendung programmatisch auslösen, indem Sie die `goTo`-Methode verwenden, die Sie auf dem `$vuetify` Objekt finden. Diese Methode unterstützt verschiedene Arten von Ziel-Selektoren und Optionen einschließlich sanften Scrollens unter Nutzung integrierter easing-Funktionen.",
+  "firstHeader": "## Erster",
+  "secondHeader": "## Zweiter",
+  "thirdHeader": "## Dritter",
+  "loremIpsum": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
+  "examples": {
+    "usage": {
+      "desc": "Die `goTo`-Methode benutzt zwei Parameter `target` und `options`. `target` kann entweder ein Pixelversatz von oben auf der Seite sein, ein gültiger CSS-Selektor oder eine Elementreferenz. `options` ist ein Objekt, das `duration`, `easing` ,`container` und `offset` enthält."
+    }
+  },
+  "routerHeading": "## Nutzung mit Router",
+  "routerText1": "Die **goTo**-Funktion kann überall individuell importiert und aufgerufen werden. Dies ist bei der Nutzung von [vue-router](https://router.vuejs.org/) besonders nützlich.",
+  "functions": {
+    "goTo": "Mit den angegebenen Optionen zum Zielort scrollen"
+  }
+}

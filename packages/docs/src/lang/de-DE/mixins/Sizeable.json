@@ -1,1 +1,9 @@
-{}
+{
+  "props": {
+    "large": "Macht die Komponente groß.",
+    "medium": "Macht die Komponente mittel.",
+    "small": "Macht die Komponente klein.",
+    "xSmall": "Macht die Komponente sehr klein.",
+    "xLarge": "Macht die Komponente sehr groß."
+  }
+}

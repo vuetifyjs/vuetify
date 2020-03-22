@@ -1,1 +1,13 @@
-{}
+{
+  "heading": "# Erhebung",
+  "headingText": "Die Erhebungshelfer erlauben es Ihnen die relative Tiefe oder Distanz zwischen zwei Oberflächen entlang der **z-Achse** zu kontrollieren. Es gibt insgesamt 25 Höhenstufen. Sie können die Höhe eines Elements einstellen, indem Sie die Klasse `elevation-{n}` verwenden, wobei `n` eine Ganzzahl zwischen 0-24 ist, die der gewünschten Höhe entspricht.",
+  "examples": {
+    "usage": {
+      "desc": "Die `elevation`-Hilfsklassen erlauben es Ihnen, jedem Element eine benutzerdefinierte **z-depth** zuzuweisen."
+    },
+    "dynamic": {
+      "heading": "### Dynamische Erhebung",
+      "desc": "Zahlreiche Komponenten verwenden das **elevatable**-Mixin und erhalten eine **elevation**-Props. Für Komponenten, die nicht unterstützt werden, können Sie die Klasse dynamisch ändern"
+    }
+  }
+}

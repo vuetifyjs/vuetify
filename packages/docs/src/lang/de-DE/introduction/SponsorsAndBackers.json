@@ -1,3 +1,17 @@
 {
-  "questionButton": "Kontaktiere uns"
+  "heading": "# Unterstütze Vuetify's Entwicklung",
+  "headingText": "Vuetify ist ein Open-Source-Projekt unter der [MIT-Lizenz](https://opensource.org/licenses/MIT). Es ist und bleibt immer frei benutzbar. Die Zeit und die Hingabe, die nötig ist, um das Core-Framework zu erhalten und alle ergänzenden Pakete sind beträchtlich. Einmalige Spender, GitHub-Sponsoren, Affiliates und Sondersponsoren ermöglichen die kontinuierliche Entwicklung zusätzlicher Funktionen auch nach der Fertigstellung der Materialdesign-Spezifikation. Sie können das Vuetifys Open-Source-Projekt unterstützen, indem Sie durch eines der folgenden Mittel ein Unterstützer werden:",
+  "affiliatesHeader": "### Affiliates",
+  "openCollective": "### Open Collective",
+  "openCollectiveBlurb": "Open Collective-Unterstützer sind monatliche Spender, die das Core Development Team direkt unterstützen.",
+  "sponsors": "### Sponsoren",
+  "github": "### GitHub",
+  "githubBlurb": "Projektsponsoren sind monatliche Spender, die den Autor John Leider direkt unterstützen.",
+  "serviceSponsorsHeader": "## Service-Sponsoren",
+  "tidelift": "### Tidelift",
+  "tideliftBlurb": "Erhalten Sie Enterprise-Support für Vuetify als Teil des Tidelift Abonnements.",
+  "oneTime": "### Einmalige Spende",
+  "oneTimeBlurb": "Vuetify ist dankbar für alle einmaligen Spenden, die durch sie erhalten wurden:",
+  "questionHeader": "## Haben Sie zusätzliche Fragen?",
+  "questionButton": "Kontaktieren Sie uns"
 }

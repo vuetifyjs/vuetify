@@ -4,6 +4,8 @@
   "alert": "Vuetify 使用 Typescript，目前必须导入和继承 Vue 对象。在某些应用程序中，这可能会生成一个 **$attrs** 或 **$listeners** 只读警告。目前有一个正在进行的 [Github 讨论](https://github.com/vuetifyjs/vuetify/issues/4068)，为各种测试用例提供潜在的解决方案。如果你还有额外的问题，请加入我们的 [在线社区](https://community.vuetifyjs.com)。",
   "runnerHeader": "## 测试环境设置",
   "runnerText2": [
+    "[Jest](https://cli.vuejs.org/core-plugins/unit-jest.html)",
+    "[Mocha](https://cli.vuejs.org/core-plugins/unit-mocha.html)",
     "[tape](https://github.com/eddyerburgh/vue-test-utils-tape-example)",
     "[AVA](https://github.com/eddyerburgh/vue-test-utils-ava-example)"
   ],

@@ -1,1 +1,9 @@
-{}
+{
+  "heading": "# API-Übersicht der Komponenten",
+  "headingText": "Schnelles Suchen und Navigieren aller Komponenten der Materialdesign-Spezifikation und mehr! Wählen Sie eine Komponente aus und sehen Sie sich die API und das Nutzungsbeispiel schnell an",
+  "search": "Suche",
+  "searchText": "Wählen Sie eine Komponente aus, um die API anzusehen",
+  "select": "Nach einer Komponente suchen",
+  "or": "oder",
+  "browseCategories": "Kategorien durchsuchen"
+}

@@ -1,1 +1,12 @@
-{}
+{
+  "heading": "# Seitenverhältnisse",
+  "headingText": "Die `v-responsive`-Komponente kann verwendet werden, um einen beliebigen Abschnitt auf ein bestimmtes Seitenverhältnis festzulegen",
+  "examples": {
+    "ratios": {
+      "desc": "Geben Sie ein benutzerdefiniertes Seitenverhältnis an"
+    }
+  },
+  "props": {
+    "aspectRatio": "Legt ein Basis-Seitenverhältnis fest, das als Breite/ öhe berechnet wird. Dadurch wird nur eine **Mindesthöhe** festgelegt. Die Komponente kann immer noch wachsen, wenn sie viel Inhalt enthält."
+  }
+}

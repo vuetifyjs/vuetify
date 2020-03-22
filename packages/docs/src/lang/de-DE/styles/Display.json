@@ -1,1 +1,48 @@
-{}
+{
+  "heading": "# Anzeige",
+  "headingText": "Die Display-Helfer erlauben es Ihnen die Anzeige von Inhalten zu steuern. Dazu gehört die bedingte Sichtbarkeit basierend auf dem aktuellen Viewport oder dem tatsächlichen Element-Anzeigetyp.",
+  "displayHeader": "## Anzeige",
+  "displayText": "Geben Sie die Elemente `display`-Eigenschaft an. Diese Klassen können auf alle Haltepunkte angewendet werden, von `xs` bis `xl` und haben keinen angegebenen Haltepunkt.",
+  "displayFormats": [
+    "`.d-{value}` für `xs`",
+    "`.d-{breakpoint}-{value}` für `sm`, `md`, `lg` und `xl`"
+  ],
+  "displayText2": "Die Eigenschaft _value_ ist eine von:",
+  "displays": [
+    "`none`",
+    "`inline`",
+    "`inline-block`",
+    "`block`",
+    "`table`",
+    "`table-cell`",
+    "`table-row`",
+    "`flex`",
+    "`inline-flex`"
+  ],
+  "displayText3": "Wenn ein spezieller Haltepunkt für eine Display-Helfer-Klasse gesetzt wird, wird er auf alle Bildschirmbreiten der Bezeichnung und höher angewendet. Zum Beispiel wird `d-lg-flex` auf `lg` und `xl` Großbildschirme angewandt.",
+  "visibilityHeader": "## Sichbarkeit",
+  "visibilityText": "Zeigt ein Element auf der Basis des aktuellen **Viewport** an. Haltepunkt-Utility-Klassen gelten immer von unten nach oben. Das bedeutet, wenn Sie `.d-none` setzen, wird es sich auf alle Breakpoints auswirken. Allerdings wird sich `.d-md-none` nur auf `md` und höher auswirken.",
+  "lateralDisplayText": "Zusätzlich können Sie ein Element basierend auf dem aktuellen **Viewport** mit Hilfe von seitlichen Displayhelfer-Klassen anzeigen. Diese Klassen können im Format `hidden-{breakpoint}-{condition} ` angewendet werden",
+  "conditionText": "Die _condition_ wendet die Klassenbasis wie folgt an:",
+  "conditions": [
+    "`only` - Versteckt das Element nur von `xs` bis `xl` Haltepunkten",
+    "`and-down` - Versteckt das Element an dem angegebenen Haltepunkt und abwärts von `sm` bis `lg` Haltepunkte",
+    "`and-up` - Versteckt das Element an dem angegebenen Haltepunkt und aufwärts von `sm` bis `lg` Haltepunkte"
+  ],
+  "mediaText": "Zusätzlich können **Medientypen** mit der `only` Bedingung gezielt angesprochen werden. Sowohl `hidden-screen-only` als auch `hidden-print-only` werden derzeit unterstützt.",
+  "printHeader": "## Druckanzeige",
+  "printText1": "Sie können auch die Anzeigeeigenschaften beim Drucken ändern.",
+  "printOptions": [
+    "`.d-print-none`",
+    "`.d-print-inline`",
+    "`.d-print-inline-block`",
+    "`.d-print-block`",
+    "`.d-print-table`",
+    "`.d-print-table-row`",
+    "`.d-print-table-cell`",
+    "`.d-print-flex`",
+    "`.d-print-inline-flex`"
+  ],
+  "printText2": "Druckwerkzeuge lassen sich auch mit \"none print display\"-Werkzeug kombinieren.",
+  "exampleText": "Ändern Sie die Größe des Bildschirms, um die Elemente bedingt zu verstecken."
+}

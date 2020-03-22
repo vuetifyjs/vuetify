@@ -1,1 +1,6 @@
-{}
+{
+  "props": {
+    "loading": "Zeigt den linearen Fortschrittsbalken an. Kann entweder eine Zeichenfolge sein, die angibt, welche Farbe auf den Fortschrittsbalken angewendet wird (jede Materialfarbe oder Themenfarbe - **primary**, **secondary**, **success**, **info**, **warning**, **error**) oder ein Boolescher Wert, der die Komponenten-**color** (festgelegt durch das color-prop - sofern dies von der Komponente unterstützt wird) oder die Primärfarbe verwendet",
+    "loaderHeight": "Legt die Höhe des Laders fest"
+  }
+}

@@ -1,9 +1,5 @@
 {
   "examples": {
-    "flat": {
-      "heading": "### Flat",
-      "desc": "Nút dạng `flat` không có đổ bóng và màu nền. Chỉ khi di chuột vào nút thì nút mới hiển thị."
-    },
     "raised": {
       "desc": "Nút dạng `Raised ` có hộp đổ bóng tăng cường khi được click. Đây là kiểu mặc định."
     },

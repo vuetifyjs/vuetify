@@ -1,1 +1,12 @@
-{}
+{
+  "heading": "# Vuetify für Unternehmen",
+  "headingText": "Holen Sie sich professionelle Unterstützung vom Entwickler John Leider, während Sie Open Source Software unterstützen. Vuetify bietet drei Ebenen, die Unternehmen Beratung, dedizierten Chat-Support und Priorisierung von GitHub-Problemen bieten sollen.",
+  "premiereHeading": "## Premium Sponsor",
+  "premiereText": "Holen Sie sich professionelle Unterstützung vom Gründer [John Leider] (https://github.com/johnleider), während Sie Open Source Software unterstützen. Vuetify bietet drei Ebenen, die Unternehmen Beratung, dedizierten Chat-Support und Priorisierung von GitHub-Problemen bieten sollen. Dieses Paket bietet ** drei (3) ** Stunden Live-Support pro Monat.",
+  "diamondHeading": "## Diamant Sponsor",
+  "diamondText": "Werden Sie ein Elite-Sponsor von Vuetify und fördern Sie Ihre Marke, während Sie gleichzeitig die Aufrechterhaltung des Frameworks unterstützen. Ihr Logo befindet sich auf der Startseite, der Unterstützerseite, der README-Datei des Repositorys und in der Navigationsleiste der Dokumentation. Dieses Paket bietet ** zwei (2) ** Stunden Live-Support pro Monat.",
+  "platinumHeading": "## Platin Sponsor",
+  "platinumText": "Diese Stufe richtet sich an kleinere Shops mit allen Vorteilen von Premium-Unterstützung, Live-Training und Priorisierung von GitHub-Problemen. Dieses Paket beinhaltet ** eine (1) ** Stunde Live-Support pro Monat.",
+  "customText": "Suchen Sie einen maßgeschneiderten Supportplan? Bitte senden Sie alle Fragen per E-Mail an [john@vuetifyjs.com](mailto:john@vuetifyjs.com?subject=Sponsorship%20Question)",
+  "sponsor": "Aktuell gibt es **{count} {type}** Sponsor(en), trette diesen heute bei!"
+}

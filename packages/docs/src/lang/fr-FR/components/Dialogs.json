@@ -52,7 +52,6 @@
     "origin": "Mixins.Transitionable.props.origin",
     "persistent": "En cliquant à l'extérieur de l'élément, vous ne le désactiverez pas.",
     "retainFocus": "Le focus d'onglets retournera au premier enfant de la boîte de dialogue par défaut. Désactivez ceci lorsque vous utilisez des outils externes qui nécessitent une focus comme TinyMCE ou le presse-papiers de vue.",
-    "scrollable": "Quand on s'y oppose, attend un composant `v-card` et un `v-card-text` avec une hauteur désignée. Pour plus d'informations, consultez [l'exemple de défilement](/components/dialogs#scrollable).",
     "transition": "Mixins.Transitionable.props.transition",
     "width": "Mixins.Measurable.props.width"
   },

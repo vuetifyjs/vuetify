@@ -88,6 +88,7 @@
       "type": "发布",
       "complete": true,
       "title": "v2.1 发布 **(Vanguard)**",
+      "caption": "2019年10月",
       "text": "从 v2.0 版本开始的 bug 维护周期。这包括性能问题、不正确或缺少a11y、RTL、回归和一般修复。这将允许团队解决在前一个版本的 8 个月开发周期中的任务积压。",
       "features": {
         "#### Highlights": [
@@ -108,7 +109,8 @@
     "10": {
       "type": "发布",
       "complete": true,
-      "title": "v2.2 发布 **(Tigris)**"
+      "title": "v2.2 发布 **(Tigris)**",
+      "caption": "2020年1月"
     },
     "11": {
       "value": true

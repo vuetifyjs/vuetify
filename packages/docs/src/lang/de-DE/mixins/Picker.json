@@ -1,1 +1,11 @@
-{}
+{
+  "props": {
+    "actions": "Verwende dies, wenn Aktionen in der Auswahl verwendet werden",
+    "autosave": "Automatisch den ausgewählten Wert speichern. Dies aktualisiert den internen vorherigen Wert, so dass, wenn Abbrechen angeklickt wird, die Änderungen des Benutzers nicht rückgängig gemacht werden",
+    "headerColor": "Definiert die Kopfzeilen-Farbe. Falls nicht angegeben, wird die Farbe verwendet vom <code>color</code> prop oder der Standardfarbe verwendet",
+    "landscape": "Orientiert den Picker horizontal",
+    "noTitle": "Ausblenden des Picker-Titels",
+    "scrollable": "Erlaubt die Verwendung des Mausrades im Picker",
+    "value": "Picker-Wert"
+  }
+}

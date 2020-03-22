@@ -1,1 +1,7 @@
-{}
+{
+  "props": {
+    "mode": "Legt den Übergangsmodus fest (gilt nicht für Übergangs-Gruppen). Weitere Informationen finden Sie in der Vue Dokumentation [für Übergangsmodi](https://vuejs.org/v2/api/#transition).",
+    "origin": "Legt den Übergangspunkt des Elements fest. Mehr Informationen bezüglich [des Herkunfts-Übergangs](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin) finden Sie in der MDN-Dokumentation.",
+    "transition": "Legt den Komponenten-Übergang fest. Kann einer der [eingebauten Übergänge](/styles/transitions) oder ein eigener sein."
+  }
+}

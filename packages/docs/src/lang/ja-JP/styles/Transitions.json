@@ -30,7 +30,8 @@
       "desc": "フェードはCarouselでも見ることができます。"
     },
     "expand-transition": {
-      "heading": "### Expand transition"
+      "heading": "### Expand transition",
+      "desc": "expandトランジションは、エクスパンションパネルとリストグループで使用されます。 `v-expand-x-transition`で利用できる水平バージョンもあります。"
     },
     "custom-origin": {
       "desc": "シンプルなプロパティでトランジションのoriginを制御することができます。"
@@ -39,9 +40,12 @@
       "desc": "複数のトランジションを使用すれば、簡単にToDoリストを作成することができます！"
     }
   },
-  "createYourOwnText1": "Vuetifyのトランジションヘルパー関数を使用すると、簡単に独自のトランジションを作成することができます。この関数はVueにインポート可能なオブジェクトを返却します。Vueの[関数型コンポーネント](https://jp.vuejs.org/v2/guide/render-function.html#%E9%96%A2%E6%95%B0%E5%9E%8B%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%8D%E3%83%B3%E3%83%88)を使用することによって、効率的にトランジションを作ることができます。",
+  "createYourOwnHeader": "## 独自のトランジションを作成する",
+  "createYourOwnText1": "Vuetify のトランジションヘルパー関数を使用すると、カスタムトランジションを簡単に作成できます。この関数は Vue にインポートできるオブジェクトを返します。Vueの [関数型コンポーネント](https://jp.vuejs.org/v2/guide/render-function.html#%E9%96%A2%E6%95%B0%E5%9E%8B%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%Bc%E3%83%8D%E3%83%B3%E3%83%88) オプションを使用することによって、効率的にトランジションを作ることができます。",
   "createYourOwnText2": "`createSimpleTransition`関数は引数としてnameを受け取ります。これはスタイルで利用するための名前となります。これは`v-fade-transition`がどのように見えるかの例です。",
   "props": {
+    "group": "`transition-group` コンポーネントを作成します。 [vue docs](https://jp.vuejs.org/v2/api/index.html#transition-group)",
+    "hideOnLeave": "leave時の要素を非表示にします(終了アニメーションなし)",
     "mode": "Mixins.Transitionable.props.mode",
     "origin": "Mixins.Transitionable.props.origin"
   }

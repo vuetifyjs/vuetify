@@ -1,1 +1,6 @@
-{}
+{
+  "heading": "# Versionen und Migrationen",
+  "headingText": "Das Vuetify-Team bringt wöchentlich neue Versionen. Alle Versionshinweise finden Sie über Github und können unten zur Vereinfachung eingesehen werden. Darüber hinaus kann es zwischen den Hauptversionen viele Breaking Changes geben, bei denen Sie den neuesten Migrationsleitfaden weiter unten befolgen können, um den Übergang zu vereinfachen.",
+  "releaseHeader": "## Versionshinweise",
+  "migrationHeader": "## Migrations-Guide"
+}

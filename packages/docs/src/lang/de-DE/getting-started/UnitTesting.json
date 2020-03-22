@@ -1,1 +1,39 @@
-{}
+{
+  "heading": "# Unit-Tests",
+  "headingText": "Unit-Tests sind ein wichtiger (und manchmal ignorierter) Bestandteil bei der Entwicklung von Anwendungen. Sie helfen uns, unsere Prozesse und Arbeitsabläufe zu sichern und sicherzustellen, dass die kritischsten Teile unserer Projekte vor versehentlichen Fehlern oder Versehen in unserer Entwicklung geschützt sind. Aus diesem Grund verfügt Vue über eine eigene Test Utility namens [vue-test-utils](https://vue-test-utils.vuejs.org/). Es bietet nützliche Funktionen für die Interaktion mit Vue-Komponenten und funktioniert mit vielen gängigen Test runners.",
+  "alert": "Vuetify verwendet Typescript und muss derzeit das Vue-Objekt importieren und erweitern. Dies hat in einigen Anwendungen das Potenzial, eine Warnung zu generieren. **$attrs** oder **$listeners** ist schreibgeschützt. Derzeit läuft eine [Github-Diskussion](https://github.com/vuetifyjs/vuetify/issues/4068) mit potenziellen Problemumgehungen in einer Vielzahl von Anwendungsfällen. Wenn Sie weitere Fragen haben, treten Sie uns bitte in unserer [Online-Community](https://community.vuetifyjs.com) bei.",
+  "runnerHeader": "## Test Runner Setup",
+  "runnerText1": "Informationen zum Einrichten eines Test Runners mit der Vue CLI finden Sie in der [offiziellen Dokumentation](https://vue-test-utils.vuejs.org/guides/getting-started.html). Auf einen Blick hat Vue CLI Repositories für die folgenden Test Runner eingerichtet:",
+  "runnerText2": [
+    "[Jest](https://cli.vuejs.org/core-plugins/unit-jest.html)",
+    "[Mocha](https://cli.vuejs.org/core-plugins/unit-mocha.html)",
+    "[tape](https://github.com/eddyerburgh/vue-test-utils-tape-example)",
+    "[AVA](https://github.com/eddyerburgh/vue-test-utils-ava-example)"
+  ],
+  "setupHeading": "## Bootstrapping Vuetify",
+  "setupText1": "Um Typescript ordnungsgemäß zu verwenden, erweitern Vuetify-Komponenten das Vue-Objekt. Dies kann [Probleme verursachen](https://github.com/vuetifyjs/vuetify/issues/4068), wie in der obigen Warnung angegeben. Anstatt eine [localVue-Instanz](https://vue-test-utils.vuejs.org/api/options.html#localvue) zu verwenden, müssen wir Vuetify global in der Setup-Datei für Komponententests installieren. Dies kann zwischen den Test Runners variieren. Stellen Sie sicher, dass Sie auf die entsprechende Dokumentation zu den Setup-Dateien verweisen.",
+  "setupInfo1": "Wenn Sie keine `setup.js`-Datei verwenden, sollten Sie `Vue.use(Vuetify)` in dem Utilities-Abschnitt Ihrer Tests hinzufügen.",
+  "specHeader": "## Spec Tests",
+  "specText1": "Das Erstellen von Komponententests in Vuetify ähnelt **vuex** und **vue-router**, da Sie das Vuetify-Objekt in einer **localVue**-Instanz verwenden und eine Instanz an die Mount-Funktionsoptionen übergeben.",
+  "specText2": "Lassen Sie uns einen beispielhaften Testanwendungsfall erstellen, den wir möglicherweise in unserer Anwendung finden.",
+  "specText3": "Im obigen Beispiel haben wir eine benutzerdefinierte Komponente mit einer **title**-prop und einem `v-btn` erstellt, der beim Klicken ein benutzerdefiniertes Ereignis ausgibt. Wir möchten jetzt Tests erstellen, die sicherstellen, dass dieses Verhalten korrekt funktioniert und dies auch bei zukünftigen Änderungen tut. Die folgenden Beispiele werden mit dem Test Runner [Jest](https://jestjs.io/) erstellt.",
+  "specAlert": "Wenn Sie nicht weiterkommen und weitere Fragen zum Testen haben oder generell Hilfe benötigen, treten Sie bitte unserer [Online-Community](https://community.vuetifyjs.com) bei.",
+  "efficiencyHeader": "### Effizienz testen",
+  "efficiencyText1": "Wenn Sie Tests schreiben, werden Sie oft feststellen, dass Sie dieselben Dinge immer und immer wieder wiederholen. In diesem Fall ist es vorteilhaft, Hilfsfunktionen zu erstellen, um die Duplizierung für jeden einzelnen Test zu verringern. Einfach [DRYing](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) unseren Code.",
+  "efficiencyText2": "Einer der am häufigsten in Komponententests geschriebenen duplizierten Code-Abschnitte sind die Mount-Funktionen. Diese können leicht zu einer wiederverwendbaren Funktion für jeden Lauf reduziert werden.",
+  "mockHeader": "### Vuetify mocken",
+  "mockText1": "Viele der Vuetify-Komponenten verwenden das globale `$vuetify`-Objekt, um Einstellungen wie Standardtext oder Haltepunktinformationen abzuleiten. Wenn Sie diese Komponenten testen, müssen Sie den `vue-test-utils` ein gemocktes Objekt bereitstellen.",
+  "mockText2": "Denke Sie daran, dass Sie die Dienste **nur ersetzen müssen**, wenn Sie benutzt werden. Beispielsweise **lang** oder **application**. Diese können Sie auch manuell importieren.",
+  "mockText3": "Eine vollständige Liste aller verfügbaren Dienste ist unten aufgeführt:",
+  "mockList": [
+    "[application](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/application)",
+    "[breakpoint](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/breakpoint)",
+    "[goto](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/goto)",
+    "[icons](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/icons)",
+    "[lang](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/lang)",
+    "[theme](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/theme)"
+  ],
+  "e2eHeader": "## E2E Tests",
+  "e2eText1": "Vuetify übergibt `data-*`-Attribute von Komponenten an die relevanten HTML-Elemente, sodass das E2E-Testframework diese leicht finden kann.",
+  "e2eText2": "Beispielsweise empfiehlt [Cypress](https://docs.cypress.io/guides/references/best-practices.html#How-It-Works) ein `data-cy`-Attribute hinzuzufügen, um Elemente einfacher auffindbar zu machen."
+}

@@ -1,1 +1,5 @@
-{}
+{
+  "props": {
+    "value": "Der angegebene model-wert für den Component."
+  }
+}

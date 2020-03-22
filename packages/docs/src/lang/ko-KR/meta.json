@@ -2,8 +2,13 @@
   "": {
     "title": "Vue Material Design 컴포넌트 프레임워크"
   },
+  "404": {
+    "title": "이런, 404",
+    "description": "이런, 찾고 계시는 건 여기에 없습니다!"
+  },
   "introduction/why-vuetify": {
-    "title": "왜 Vuetify 인가요?"
+    "title": "왜 Vuetify인가요?",
+    "description": "Vuetify는 매우 활동적인 커뮤니티를 보유하고 있으며, 사용하기 쉬운 Material Design 컴포넌트를 제공하며 지속적으로 업데이트됩니다."
   },
   "introduction/frequently-asked-questions": {
     "title": "자주 묻는 질문"

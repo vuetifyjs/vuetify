@@ -1,1 +1,6 @@
-{}
+{
+  "activator": "Bei Verwendung wird die Komponente aktiviert, wenn Sie darauf klicken (oder für bestimmte Komponenten den Mauszeiger darüber bewegen). Dadurch wird die event propagation manuell gestoppt. Wenn Sie die Komponente ohne diesen slot über ihr Modell öffnen, müssen Sie die event propagation manuell stoppen",
+  "default": "Der Standard-Vue Slot.",
+  "label": "Ersetzt die Standardbezeichnung",
+  "progress": "Slot für den benutzerdefinierten linearen Fortschritt (angezeigt wenn das **loading**-Props ungleich zu Boolean False ist)"
+}

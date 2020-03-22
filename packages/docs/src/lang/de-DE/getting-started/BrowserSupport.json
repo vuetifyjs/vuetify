@@ -1,1 +1,19 @@
-{}
+{
+  "heading": "# Browser-Unterstützung",
+  "headingText": "Vuetify ist ein progressives Framework, das versucht, die Webentwicklung auf die nächste Ebene zu bringen. Um diese Aufgabe bestmöglich zu erfüllen, mussten einige Opfer in Bezug auf die Unterstützung älterer Versionen des Internet Explorers erbracht werden. Dies ist keine vollständige Liste kompatibler Browser, sondern die wichtigsten.",
+  "browserHeader": "## Unterstützte Browser",
+  "browserText": "Vuetify ist ein progressives Framework, das versucht, die Webentwicklung auf die nächste Ebene zu bringen. Um diese Aufgabe bestmöglich zu erfüllen, mussten einige Opfer in Bezug auf die Unterstützung älterer Versionen des Internet Explorers erbracht werden. Dies ist keine vollständige Liste kompatibler Browser, sondern die wichtigsten.",
+  "browserSupport": {
+    "supported": "Unterstützt",
+    "notSupported": "Nicht unterstützt",
+    "polyfill": "Unterstützt mit Polyfill"
+  },
+  "ie11Header": "## IE11 &amp; Safari 9 Unterstützung",
+  "ie11Text": "Vuetify verwendet ES2015/2017-Funktionen, für die Polyfills für **Internet Explorer 11** und **Safari 9/10** erforderlich sind. Wenn Sie die Vue CLI verwenden, erfolgt dies automatisch für Sie. Andernfalls können Sie in Ihrem Projektverzeichnis `babel-polyfill` installieren:",
+  "ie11Text1": "Vuetify verwendet ES2015/2017-Funktionen, für die Polyfills für **Internet Explorer 11** und **Safari 9/10** erforderlich sind. Wenn Sie die Vue CLI verwenden, erfolgt dies automatisch für Sie. Andernfalls können Sie in Ihrem Projektverzeichnis `babel-polyfill` installieren:",
+  "ie11Text2": "Es ist wichtig, das Plugin so früh wie möglich in Ihre Hauptdatei **index.js** aufzunehmen. Wenn Sie ein Vuetify SSR-Paket verwenden, gilt dies für die Datei **client-entry.js**",
+  "ie11Text3": "Es wird empfohlen, `babel-preset-env` mit der entsprechenden Polyfill zu verwenden, um sicherzustellen, dass Ihrer Anwendung nur die erforderlichen Polyfills hinzugefügt werden. Weitere Informationen zu `babel-preset-env` [finden Sie in der Dokumentation](https://babeljs.io/docs/en/next/babel-preset-env.html)",
+  "ie11Text4": "Fügen Sie nach der Installation die Voreinstellung zu Ihrer `.babelrc` oder ' babel.config.js` hinzu",
+  "ie11Text5": "Leider bringt die Vue CLI nicht automatisch IE11-Kompatibilität mit, weshalb verschiedene Fehler auftreten können (z. B. <i>Symbol is not defined</i>). Um diese Fehler zu beheben, müssen Sie möglicherweise den Parameter `transpileDependencies` manuell in `vue.config.js` hinzufügen.",
+  "ie11Text6": "Aufgrund der eingeschränkten Unterstützung des Internet Explorers für `<template>`-Tags müssen Sie vollständig kompilierte DOM-Elemente an den Browser senden. Dies kann entweder durch vorheriges Erstellen Ihres Vue-Codes oder durch das Erstellen von Hilfskomponenten zum Ersetzen der DOM-Elemente erfolgen. Wenn beispielsweise folgendes direkt an den IE gesendet wird, schlägt es fehl:"
+}

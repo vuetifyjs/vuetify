@@ -1,1 +1,6 @@
-{}
+{
+  "heading": "# Typografie",
+  "headingText": "Die Typografie einer Anwendung ist ebenso wichtig wie ihre Funktionalität: Vuetify.js nutzt die Materialdesign-Spezifikation Roboto Font. Jede Überschriftengröße hat auch eine entsprechende Helfer-Klasse, um andere Elemente gleich zu gestalten.",
+  "fontHeader": "## Schriftgrößen",
+  "fontText": "Typographiehelferklassen erlauben es Ihnen, Text nach Größe des Material-Designs zu gestalten."
+}

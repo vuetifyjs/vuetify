@@ -1,1 +1,7 @@
-{}
+{
+  "props": {
+    "v-simple-checkbox": {
+      "ripple": "Mixins.Rippleable.props.ripple"
+    }
+  }
+}

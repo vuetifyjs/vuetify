@@ -1,1 +1,14 @@
-{}
+{
+  "heading": "# Touch-Unterstützung",
+  "headingText": "Die <code>v-touch</code>-Direktive erlaubt es Ihnen, Wischgesten zu erfassen und Richtungsaufrufe zu übernehmen.",
+  "examples": {
+    "usage": {
+      "desc": "Wischen Sie auf einem mobilen Gerät in verschiedene Richtungen.",
+      "uninverted": true
+    }
+  },
+  "options": {
+    "{ move, start, end }": "Ein Callback zuweisen, wenn das Touch-Event beginnt, endet und während des laufenden Prozesses",
+    "{ up, down, left, right }": "Zuweisen eines Callbacks basierend auf einer Wischrichtung. Das Verwende von Callbacks für die X-Achse und y-Achse wird derzeit nicht empfohlen"
+  }
+}

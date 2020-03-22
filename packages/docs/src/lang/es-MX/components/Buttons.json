@@ -1,8 +1,7 @@
 {
   "examples": {
-    "flat": {
-      "heading": "Flat",
-      "desc": "Los botones _flat_ no tienen sombra ni color de fondo. Sólo cuando se pasa el mouse por encima de ellos es que se muestra el contenedor del botón."
+    "text": {
+      "heading": "### Texto"
     },
     "raised": {
       "desc": "Los botones _raised_ tienen una sombra que incrementa cuando se hace click en ellos. Este es el estilo por default."

@@ -1,1 +1,5 @@
-{}
+{
+  "props": {
+    "app": "Bezeichnet die Komponente als Teil des Anwendungslayouts. Wird zum dynamischen Anpassen der Inhaltsgröße verwendet. Komponenten, die diese Props verwenden, sollten sich **outside** der `v-content`-Komponente befinden, damit sie ordnungsgemäß funktionieren. Weitere Informationen zu Layouts finden Sie auf der [Anwendungsseite] (/components/application). **Hinweis:** Diese Props wendet automatisch **position: fixed** auf das Layoutelement an. Sie können diese Funktionalität mit der Props `absolute` überschreiben"
+  }
+}

@@ -1,1 +1,17 @@
-{}
+{
+  "props": {
+    "disabled": "Input deaktivieren",
+    "error": "Stellt die Eingabe manuel in einen Fehlerzustand",
+    "errorCount": "Die Gesamtzahl der Fehler, die auf einmal angezeigt werden sollen",
+    "errorMessages": "Stellt die Eingabe in einen Fehlerzustand und durchläuft benutzerdefinierte Fehlermeldungen. Wird mit allen Validierungen kombiniert, die vom **rules**-Prop auftreten. Dieses Feld wird keine Validierung auslösen",
+    "messages": "Zeigt eine Liste von Nachrichten oder eine einzelne Nachricht an, wenn eine Zeichenkette (string) verwendet wird",
+    "readonly": "Setzt die Eingabe in einen schreibgeschützten Zustand",
+    "rules": "Akzeptiert ein Array von Funktionen, die einen Eingabewert als Argument annehmen und entweder `true` / `false` oder einen `string` mit einer Fehlermeldung zurückgeben",
+    "success": "Setzt die Eingabe manuel in einen Erfolgszustand",
+    "successMessages": "Stellt die Eingabe in einen Erfolgszustand ein und überträgt benutzerdefinierte Erfolgsmitteilungen.",
+    "validateOnBlur": "Verzögert die Validierung bis zum 'blur'-Ereignis"
+  },
+  "events": {
+    "update:error": "Das `error.sync` Ereignis"
+  }
+}

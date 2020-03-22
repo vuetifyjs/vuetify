@@ -1,1 +1,20 @@
-{}
+{
+  "heading": "# Intersection Observer",
+  "headingText": "Die `v-intersect`-Direktive verwendet die [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). Es stellt eine einfach zu bedienende Schnittstelle zur Verfügung, um zu erkennen, wann Elemente im Viewport des Benutzers sichtbar sind. Diese wird auch für die [v-lazy](/components/lazy)-Komponente verwendet.",
+  "examples": {
+    "usage": {
+      "desc": "Scrollen Sie das Fenster und beobachten Sie den farbigen Punkt. Beachten Sie, wenn [v-card](/components/cards) angezeigt wird, dass es von Fehler zu Erfolg wechselt"
+    },
+    "options": {
+      "heading": "### Mit Optionen",
+      "desc": "Die `v-intersect`-Direktive akzeptiert Optionen. Verfügbare Optionen finden Sie in der [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). Unten ist ein Beispiel mit der `threshold`-Option."
+    }
+  },
+  "options": {
+    "modifiers.once": "Wird den angegebenen User-Callback nur in mount aufrufen und einmal, wenn 'intersected'. Bei Verwendung des **quiet** Modifikators wird er nur einmal aufgerufen.",
+    "modifiers.quiet": "Der angegebene Callback wird nicht automatisch bei Bindung aufgerufen.",
+    "value": "Die Funktion, die aufgerufen werden soll, wenn das Zielelement überschnitten wird."
+  },
+  "polyfillHeading": "## Polyfill",
+  "polyfillText1": "Obwohl die [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) in IE11 standardmäßig nicht verfügbar ist, kann sie mit einem [polyfill](https://github.com/w3c/IntersectionObserver) implementiert werden."
+}

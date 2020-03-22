@@ -1,1 +1,28 @@
-{}
+{
+  "heading": "# Float",
+  "headingText": "Wendet einen benutzerdefinierten Float über jeden Haltepunkt mit responsiven Float-Utilities an.",
+  "overviewHeader": "## Übersicht",
+  "overviewText1": "Float Utility-Klassen gelten basierend auf der aktuellen Viewport-Größe mit der [CSS float property](https://developer.mozilla.org/en-US/docs/Web/CSS/float).",
+  "classesHeader": "## Klassen",
+  "classesText1": "Schalten Sie Float einfach mit einer Klasse ein:",
+  "responsiveHeader": "## Responsiv",
+  "responsiveText1": "Floats können auch pro Haltepunkt (Viewport) eingesetzt werden.",
+  "responsiveText2": "Hier ist eine Liste aller verfügbaren Supportklassen:",
+  "responsiveClasses": [
+    "`.float-left`",
+    "`.float-right`",
+    "`.float-none`",
+    "`.float-sm-left`",
+    "`.float-sm-right`",
+    "`.float-sm-none`",
+    "`.float-md-left`",
+    "`.float-md-right`",
+    "`.float-md-none`",
+    "`.float-lg-left`",
+    "`.float-lg-right`",
+    "`.float-lg-none`",
+    "`.float-xl-left`",
+    "`.float-xl-right`",
+    "`.float-xl-none`"
+  ]
+}

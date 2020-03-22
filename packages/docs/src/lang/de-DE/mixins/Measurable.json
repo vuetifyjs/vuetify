@@ -1,1 +1,10 @@
-{}
+{
+  "props": {
+    "height": "Legt die Höhe für den Component fest.",
+    "maxHeight": "Legt die maximale Höhe für den Component fest.",
+    "minHeight": "Legt die mindest Höhe für den Component fest.",
+    "maxWidth": "Legt die maximale Breite für den Component fest.",
+    "minWidth": "Legt die mindest Breite für den Component fest.",
+    "width": "Legt die Breite für den Component fest."
+  }
+}
