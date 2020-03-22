@@ -5,10 +5,10 @@
     "`p` - aplica un `padding`"
   ],
   "directionText": "La _dirección_ indica de qué lado se aplica el espaciado:",
-  "directions": {
-    "6": "`x` - aplica ambas propiedades `*-left` y `*-right`",
-    "7": "`y` - aplica ambas propiedades `*-top` y `*-bottom`"
-  },
+  "directions": [
+    "`x` - aplica ambas propiedades `*-left` y `*-right`",
+    "`y` - aplica ambas propiedades `*-top` y `*-bottom`"
+  ],
   "horizontalHeader": "Centrar horizontalmente",
   "horizontalText": "Para elementos de bloque (block elements) con un ancho definido, puedes aplicar `.mx-auto` para centrar horizontalmente el contenido."
 }
