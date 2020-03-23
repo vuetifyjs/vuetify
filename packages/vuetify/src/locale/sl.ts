@@ -45,4 +45,13 @@ export default {
     am: 'AM',
     pm: 'PM',
   },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Navigacija po strani po strani',
+      next: 'Naslednja stran',
+      previous: 'Prejšnja stran',
+      page: 'Pojdi na stran {0}',
+      currentPage: 'Trenutna stran, stran {0}',
+    },
+  },
 }

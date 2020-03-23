@@ -45,4 +45,13 @@ export default {
     am: 'AM',
     pm: 'PM',
   },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Πλοήγηση με προορισμούς',
+      next: 'Επόμενη σελίδα',
+      previous: 'Προηγούμενη σελίδα',
+      page: 'Πήγαινε στην σελίδα {0}',
+      currentPage: 'Τρέχουσα σελίδα, σελίδα {0}',
+    },
+  },
 }

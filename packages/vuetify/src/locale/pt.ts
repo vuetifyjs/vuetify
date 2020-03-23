@@ -45,4 +45,13 @@ export default {
     am: 'AM',
     pm: 'PM',
   },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Navegação de paginação',
+      next: 'Próxima página',
+      previous: 'Página anterior',
+      page: 'Ir à página {0}',
+      currentPage: 'Página atual, página {0}',
+    },
+  },
 }

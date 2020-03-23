@@ -45,4 +45,13 @@ export default {
     am: 'AM',
     pm: 'PM',
   },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'ניווט עימוד',
+      next: 'עמוד הבא',
+      previous: 'עמוד הקודם',
+      page: '{0} לך לעמוד',
+      currentPage: '{0} עמוד נוכחי, עמוד',
+    },
+  },
 }

@@ -45,4 +45,13 @@ export default {
     am: 'AM',
     pm: 'PM',
   },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'ページネーションナビゲーション',
+      next: '次のページ',
+      previous: '前のページ',
+      page: 'ページに移動 {0}',
+      currentPage: '現在のページ、ページ {0}',
+    },
+  },
 }

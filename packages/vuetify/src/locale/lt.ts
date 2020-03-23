@@ -45,4 +45,13 @@ export default {
     am: 'AM',
     pm: 'PM',
   },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Puslapio naršymas',
+      next: 'Kitas puslapis',
+      previous: 'Ankstesnis puslapis',
+      page: 'Eiti į puslapį {0}',
+      currentPage: 'Dabartinis puslapis, puslapis {0}',
+    },
+  },
 }
