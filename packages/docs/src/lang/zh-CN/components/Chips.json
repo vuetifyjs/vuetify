@@ -1,11 +1,8 @@
 {
   "heading": "# 纸片",
   "headingText": "`v-chip` 组件用于传递小段信息。`close` 属性会让纸片变得可交互。此组件由 [v-chip-group](/components/chip-groups) 用于高级选项。",
+  "usageText": "纸片有以下变量： Default, closeable, filter, outlined, pill。\n默认的 `v-chip` 插槽文本的旁边也接受头像和图标。",
   "examples": {
-    "usage": {
-      "desc": "纸片有以下变量： Default, closeable, filter, outlined, pill。\n默认的 `v-chip` 插槽文本的旁边也接受头像和图标。",
-      "uninverted": true
-    },
     "colored": {
       "heading": "色彩",
       "desc": "Material Design 调色板中的任何颜色都可用于更改纸片颜色。"

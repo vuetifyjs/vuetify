@@ -47,27 +47,9 @@
     "dark": "crwdns40184:0crwdne40184:0",
     "noResize": "crwdns33748:0crwdne33748:0",
     "rowHeight": "crwdns40186:0crwdne40186:0",
-    "rows": "crwdns33752:0crwdne33752:0",
-    "value": "crwdns33754:0crwdne33754:0",
-    "append": "crwdns33756:0crwdne33756:0",
-    "append-outer": "crwdns33758:0crwdne33758:0",
-    "prepend": "crwdns33760:0crwdne33760:0",
-    "prepend-inner": "crwdns33762:0crwdne33762:0"
-  },
-  "slots": {
-    "append": "crwdns33764:0crwdne33764:0",
-    "append-outer": "crwdns33766:0crwdne33766:0",
-    "prepend": "crwdns33768:0crwdne33768:0",
-    "prepend-inner": "crwdns33770:0crwdne33770:0"
+    "rows": "crwdns33752:0crwdne33752:0"
   },
   "events": {
-    "change": "crwdns33772:0crwdne33772:0",
-    "click:append": "crwdns33774:0crwdne33774:0",
-    "click:append-outer": "crwdns33776:0crwdne33776:0",
-    "click:clear": "crwdns33778:0crwdne33778:0",
-    "click:prepend": "crwdns33780:0crwdne33780:0",
-    "click:prepend-inner": "crwdns33782:0crwdne33782:0",
-    "keydown": "crwdns42418:0crwdne42418:0",
-    "update:error": "crwdns33784:0crwdne33784:0"
+    "keydown": "crwdns42418:0crwdne42418:0"
   }
 }

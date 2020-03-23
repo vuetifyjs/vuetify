@@ -80,7 +80,6 @@
     "day-label": "在 `week` 或 `month` 视图中放置在月份的第几天的内容。day & time 对象通过此插槽作用域传递。",
     "day-month": "在 `week` 或 `month` 视图中放置在月份空间的内容。day & time 对象通过此插槽作用域传递。",
     "day": "放置在 `week` 或 `month` 视图中的内容。day & time 对象通过此插槽作用域传递。",
-    "event": "放置在事件中的内容。 提供以下变量：event, day, outside, start, end, timed。",
     "interval": "在 `day` 视图中放置在间隔空间中的内容。day & time 对象通过此插槽作用域传递。"
   },
   "events": {

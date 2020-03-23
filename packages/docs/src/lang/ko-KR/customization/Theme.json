@@ -2,7 +2,6 @@
   "lightAndDarkHeader": "## 밝게, 어둡게 (Light and Dark)",
   "customizingHeader": "## 커스터마이징",
   "customizingText1": "기본적으로 표준 테마(standard theme)가 모든 컴포넌트에 적용됩니다.",
-  "customizingText2": "이는 쉽게 변경될 수 있습니다. 간단히 **theme** 속성(property)으로 `Vue.use` 함수를 사용하세요. 또한 기본 테마의 속성을 상속하면서 동시에 모든 혹은 일부 테마 속성을 골라서 변경할 수 있습니다.",
   "customizingText3": "또한 미리 정의된 메테리얼 색상표를 사용할 수 있습니다.",
   "customizingText4": "내부적으로, Vuetify는 이 값들을 기반으로 DOM에서 사용될 수 있는 css 클래스들을 생성합니다. 이 클래스들은 예를 들어  `primary` or `secondary--text` 같은 다른 헬퍼 클래스들과 같은 형식으로 쓰입니다.",
   "customizingText5": "또한 이 값들은 **$vuetify** 인스턴스의 **theme** 속성아래 오브젝트로 설정할 수 있습니다. 이는 테마를 _동적으로_ 바꾸는 것을 가능하게 합니다. 내부적으로는 Vuetifys는 테마 클래스들을 재생성하고 어플리케이션이 중단 없이 업데이트 되도록 클래스를 업데이트 합니다.",

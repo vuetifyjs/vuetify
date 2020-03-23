@@ -300,7 +300,7 @@ export default baseMixins.extend({
         props: {
           name: this.transition,
         },
-      }, this.showLazyContent(() => [content]))
+      }, [content])
     },
     genDirectives (): VNodeDirective[] {
       const directives: VNodeDirective[] = [{
@@ -360,17 +360,7 @@ export default baseMixins.extend({
         options.on.mouseleave = this.mouseLeaveHandler
       }
 
-      return this.$createElement(
-        'div',
-        options,
-        [this.$createElement(VThemeProvider, {
-          props: {
-            root: true,
-            light: this.light,
-            dark: this.dark,
-          },
-        }, this.getContentSlot())]
-      )
+      return this.$createElement('div', options, this.getContentSlot())
     },
     getTiles () {
       if (!this.$refs.content) return
@@ -479,7 +469,15 @@ export default baseMixins.extend({
 
     return h('div', data, [
       !this.activator && this.genActivator(),
-      this.genTransition(),
+      this.showLazyContent(() => [
+        this.$createElement(VThemeProvider, {
+          props: {
+            root: true,
+            light: this.light,
+            dark: this.dark,
+          },
+        }, [this.genTransition()]),
+      ]),
     ])
   },
 })

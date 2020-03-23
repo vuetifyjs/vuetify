@@ -4,12 +4,14 @@
     "text": "introduction",
     "icon": "mdi-book-open-page-variant",
     "children": [
+      { "text": "guide", "to": "guide" },
       { "text": "whyVuetify", "to": "why-vuetify" },
       { "text": "faq", "to": "frequently-asked-questions" },
       { "text": "meetTheTeam", "to": "meet-the-team" },
       { "text": "sponsorsAndBackers", "to": "sponsors-and-backers" },
       { "text": "roadmap", "to": "roadmap" },
-      { "text": "lts", "to": "long-term-support" }
+      { "text": "lts", "to": "long-term-support" },
+      { "new": true, "text": "security", "to": "security-disclosure" }
     ]
   },
   {

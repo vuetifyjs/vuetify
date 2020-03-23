@@ -9,6 +9,11 @@
     "description": "Whoops, looks like whatever you are looking for is not there!",
     "keywords": ""
   },
+  "introduction/guide": {
+    "title": "Beginner's Guide",
+    "description": "Page in Development 🔨. Check back soon for more information.",
+    "keywords": "guide, vuetify beginner, starting vuetify, vuetify guide"
+  },
   "introduction/why-vuetify": {
     "title": "Why Vuetify?",
     "description": "Vuetify has an extremely active community, provides easy to use Material Design components and is consistently updated.",
@@ -38,6 +43,11 @@
     "title": "Sponsors and backers",
     "description": "Help support Vuetify by backing the project. This helps with the maintenance of existing features and the development of new ones.",
     "keywords": "sponsor, backer, donations, patron, supporting vuetify, vuetify support"
+  },
+  "introduction/security-disclosure": {
+    "title": "Security Disclosure Procedures",
+    "description": "This document outlines security procedures and general policies for the Vuetify project.",
+    "keywords": "security, security vulnerability, disclosure policy, security disclosure"
   },
   "getting-started/quick-start": {
     "title": "Quick start",

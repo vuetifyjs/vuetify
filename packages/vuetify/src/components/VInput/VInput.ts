@@ -73,7 +73,8 @@ export default baseMixins.extend<options>().extend({
         'v-input--is-dirty': this.isDirty,
         'v-input--is-disabled': this.disabled,
         'v-input--is-focused': this.isFocused,
-        'v-input--is-loading': this.loading !== false && this.loading !== undefined,
+        // <v-switch loading>.loading === '' so we can't just cast to boolean
+        'v-input--is-loading': this.loading !== false && this.loading != null,
         'v-input--is-readonly': this.readonly,
         'v-input--dense': this.dense,
         ...this.themeClasses,
@@ -81,6 +82,9 @@ export default baseMixins.extend<options>().extend({
     },
     computedId (): string {
       return this.id || `input-${this._uid}`
+    },
+    hasDetails (): boolean {
+      return this.messagesToDisplay.length > 0
     },
     hasHint (): boolean {
       return !this.hasMessages &&
@@ -126,7 +130,7 @@ export default baseMixins.extend<options>().extend({
       }).filter(message => message !== '')
     },
     showDetails (): boolean {
-      return this.hideDetails === false || (this.hideDetails === 'auto' && this.messagesToDisplay.length > 0)
+      return this.hideDetails === false || (this.hideDetails === 'auto' && this.hasDetails)
     },
   },
 

@@ -9,8 +9,21 @@
       "heading": "### 色",
       "desc": "タイムピッカーの色は、 `color`および`header-color`プロパティを使用して設定できます。 `header-color` propが提供されない場合、ヘッダーは`color` prop値を使用します。"
     },
+    "disabled": {
+      "heading": "### 無効化"
+    },
+    "readonly": {
+      "heading": "### Read-only"
+    },
     "scrollable": {
       "heading": "スクロール可能なダイアログ"
     }
+  },
+  "events": {
+    "click:hour": "ユーザーが「時」を選択したときに発生します。",
+    "click:minute": "ユーザーが「分」を選択したときに発生します。",
+    "click:second": "ユーザーが「秒」を選択したときに発生します。",
+    "change": "時間の選択が完了したときに発生します (HH:MM ピッカーの場合は「分」を、HH:MM:SS ピッカーの場合は 「秒」を変更したとき)。",
+    "update:period": "ユーザーが AM/PM ボタンをクリックすると発生します。"
   }
 }

@@ -99,6 +99,23 @@
       "children": [
         {
           "type": "heading",
+          "lang": "opacityHeader"
+        },
+        {
+          "type": "text",
+          "lang": "opacityText1"
+        },
+        {
+          "type": "example",
+          "value": "opacity"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
           "lang": "rtlHeader"
         },
         {

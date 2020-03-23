@@ -715,20 +715,22 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     expect(focus).toHaveBeenCalledTimes(1)
   })
 
-  it('should hide messages if no messages and hide-details is auto', () => {
+  it('should hide messages if no messages and hide-details is auto', async () => {
     const wrapper = mountFunction({
       propsData: {
         hideDetails: 'auto',
       },
     })
 
-    expect(wrapper.vm.genMessages()).toBeNull()
+    expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({ counter: 7 })
-    expect(wrapper.vm.genMessages()).not.toBeNull()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({ counter: null, errorMessages: 'required' })
-    expect(wrapper.vm.genMessages()).not.toBeNull()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/8268

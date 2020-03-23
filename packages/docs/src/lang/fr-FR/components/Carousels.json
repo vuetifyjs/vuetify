@@ -3,10 +3,8 @@
   "subComponentsList": [
     "`v-carousel-item`: Le conteneur d'image utilisé par `v-carousel`. Extends `v-window-item`, est routable, et utilise `v-img` dans son emplacement par défaut."
   ],
+  "usageText": "Le composant `v-carousel` s'agrandit sur `v-window` en fournissant des fonctionnalités supplémentaires destinées à afficher des images.",
   "examples": {
-    "usage": {
-      "desc": "Le composant `v-carousel` s'agrandit sur `v-window` en fournissant des fonctionnalités supplémentaires destinées à afficher des images."
-    },
     "cycle": {
       "desc": "Avec le prop **cycle** vous pouvez faire passer vos diapositives automatiquement à la prochaine disponible tous les 6 secondes (par défaut)."
     },

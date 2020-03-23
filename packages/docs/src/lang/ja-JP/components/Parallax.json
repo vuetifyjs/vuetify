@@ -1,8 +1,12 @@
 {
+  "heading": "# パララックス",
   "headingText": "`v-parallax`コンポーネントは、画像がウィンドウよりも遅くスクロールするように見える3D効果を作成します。",
   "examples": {
     "usage": {
       "desc": "ユーザーがページをスクロールすると、視差により背景画像がシフトします。"
     }
+  },
+  "props": {
+    "height": "Mixins.Measurable.props.height"
   }
 }

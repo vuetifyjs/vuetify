@@ -6,7 +6,30 @@
       "desc": "最も単純な形式の `v-textarea` は、複数行のテキストフィールドで、大量のテキストを扱うとき役立ちます。"
     },
     "icon": {
-      "heading": "### アイコン"
+      "heading": "### アイコン",
+      "desc": "`append-icon` と `prepend-icon` propsは、 `v-textarea`にコンテキストを追加するのに役立ちます。"
+    },
+    "auto-grow": {
+      "heading": "### Auto grow",
+      "desc": "`auto-grow` propを使用すると、含まれるテキストサイズに応じて、textarea のサイズは自動的に拡張されます。"
+    },
+    "background-color": {
+      "desc": "`background-color` と `color` propsにより、 `v-textarea`のスタイルをより細かく制御できます。"
+    },
+    "clearable": {
+      "heading": "### Clearable",
+      "desc": "`clearable` propを使用すると、テキストを`v-textarea`からクリアできるようになります。アイコンは`clearable-icon` propでカスタマイズできます。"
+    },
+    "counter": {
+      "heading": "### カウンタ",
+      "desc": "`counter` prop は、ユーザーに`v-textarea`の文字数制限を通知します。"
     }
+  },
+  "props": {
+    "dark": "Components.Inputs.props.dark",
+    "noResize": "サイズ変更ハンドルを削除します"
+  },
+  "events": {
+    "keydown": "**any** キーが押されたときに発生します。テキストエリアはフォーカスを設定する必要があります"
   }
 }

@@ -1,71 +1,195 @@
 {
+  "heading": "# Vuetifyロードマップ",
   "headingText": "Vuetifyは常に開発をしています。私たちは継続的に既存のコードの改善に努力しているだけでなく、アプリケーションをより簡単にビルドできるために新しい機能を追加しています。以下は予定されている機能の暫定的なリストです。これは完全なリストではなく、予告なく変更されることがあります。",
   "roadmapItems": [
     {
       "type": "リリース",
+      "complete": true,
       "title": "アルファ版立ち上げ",
       "caption": "2016年12月",
       "text": "Vuetifyが公式公開されました。40個のコンポーネントで当初公開され、実に46KBでした。"
     },
     {
       "type": "リリース",
+      "complete": true,
       "title": "v1.0 リリース",
-      "caption": "2018年2月"
+      "caption": "2018年2月",
+      "text": "公式v1.0リリースパーティー。 18か月とKaelによる動作確認の後、最初の**MAJOR**リリースに移行しました。これには、多数の新しいコンポーネント、機能が含まれていました。公式の [リリースノート](https://github.com/vuetifyjs/vuetify/releases/tag/v1.0.0) を確認してください。"
     },
     {
       "type": "リリース",
+      "complete": true,
       "title": "v1.1 リリース",
-      "caption": "2018年6月"
+      "caption": "2018年6月",
+      "text": "すべての入力および選択コントロールを含む、すべてのフォーム機能の完全な再構築。 `v-autocomplete`, `v-combobox`などの機能を抽象化し`v-select`などのコンポーネントから新しい実装とし、機能の範囲を広げ、テストを容易にしました。このリリースは、**RTL**言語の最初の公式サポートでもありました。公式の [リリースノート](https://github.com/vuetifyjs/vuetify/releases/tag/v1.1.0) を確認してください。"
     },
     {
       "type": "リリース",
+      "complete": true,
       "title": "v1.2 リリース",
-      "caption": "2018年7月"
+      "caption": "2018年7月",
+      "text": "新しいコンポーネント `v-img`, `v-rating`, `v-hover`を追加しました。テーマ伝播システムを改善し、HEXやRGBAなどのコンポーネントで使用される色の機能を拡張しました。Als は、多数の新しいロケールを追加しました。[release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.2.0) をご覧ください。"
     },
     {
       "type": "リリース",
+      "complete": true,
       "title": "v1.3 リリース",
-      "caption": "2018年10月"
+      "caption": "2018年10月",
+      "text": "`v-treeview` と `v-timeline` と `v-item-group` を新規コンポーネントとして追加しました。 `v-tabs` と `v-carousel` で使われるインターフェースを統一しました。Vuetifyのコンポーネントでツリーシェイキングをサポートする楽なアプリケーションにするために、 **vuetify-loader** を改善しました。[release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.3.0) を参照してください。"
     },
     {
       "type": "リリース",
+      "complete": true,
       "title": "AWS Cognito Vuex モジュール",
-      "caption": "2018年11月"
+      "caption": "2018年11月",
+      "text": "AWS Cognitoとやり取りするためのフル機能のVuexモジュール。認証が必要なWebサイトに役立ちます。 [AWS Cognito](https://aws.amazon.com/jp/cognito/dev-resources/) の詳細については、リンク先をご覧ください。"
     },
     {
       "type": "リリース",
+      "complete": true,
       "title": "v1.4 リリース",
-      "caption": "2018年12月"
+      "caption": "2018年12月",
+      "text": "新しいコンポーネント`v-sparkline` を追加し、`v-toolbar`'の機能を複数のコンポーネントに抽象化して、保守性とテストを容易にしました。チームの貢献者と保守を容易にするために、ドキュメント全体を再構築しました。[release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.4.0) を確認してください。"
     },
     {
       "type": "リリース",
+      "complete": true,
       "title": "v1.5 リリース",
-      "caption": "2019年2月"
+      "caption": "2019年2月",
+      "text": "新しいコンポーネント`v-calendar`が追加されました。新しい**bar**および**fill**プロパティで`v-sparkline`の機能を改善しました。`v-treeview`を改善し、LTSに対応しました。 LTSの詳細については、[Long-term Support Page](/introduction/long-term-support) に移動してください。[release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0) を確認してください。"
     },
     {
       "type": "リリース",
-      "title": "v2.0 リリース **(Arcadia)**"
+      "complete": true,
+      "title": "v2.0 リリース **(Arcadia)**",
+      "caption": "2019年7月",
+      "text": "フレームワーク コアの完全な再構築。レイアウトとテーマシステム、プラットフォームの統合、アクセシビリティ、RTLとパフォーマンスを向上させます。すべてのコンポーネントを [Material Design 2](https://material.io/design/) specificationに更新します。[Long-term Support](/introduction/long-term-support) の複数の既存コンポーネントとセットアップv1.5に追加機能を追加します。",
+      "features": {
+        "#### Highlights": [
+          "Material Design 2のアップデートを完了",
+          "JavascriptからTypescriptに移行",
+          "StylusからSassへ移行",
+          "avoriazからvue-test-utilsへ移行"
+        ],
+        "#### New Components": [
+          "`v-app-bar`",
+          "`v-banner`",
+          "`v-chip-group`",
+          "`v-color-picker`",
+          "`v-file-input`",
+          "`v-list-item-group`",
+          "`v-overlay`",
+          "`v-simple-table`",
+          "`v-slide-group`"
+        ]
+      }
     },
     {
       "type": "リリース",
+      "complete": true,
       "title": "v2.1 リリース **(Vanguard)**",
-      "caption": "2019年Q3"
+      "caption": "2019年10月",
+      "text": "v2.0リリースのバグに対処するためのメンテナンスサイクル。これには、パフォーマンスの問題、a11yの不正確または欠落、RTL、回帰および一般的な修正が含まれます。これにより、チームは前のリリースの8か月の開発サイクルで蓄積されたタスクのバックログに追いつくことができます。",
+      "features": {
+        "#### Highlights": [
+          "2つの新しいコンポーネント",
+          "2つの新しいディレクティブ",
+          "`v-img`の遅延読み込み対応"
+        ],
+        "#### New Components": [
+          "`v-lazy`",
+          "`v-skeleton-loader`"
+        ],
+        "#### New Directives": [
+          "`v-intersect`",
+          "`v-mutate`"
+        ]
+      }
     },
     {
       "type": "リリース",
+      "complete": true,
       "title": "v2.2 リリース **(Tigris)**",
-      "caption": "2019年Q4"
+      "caption": "2020年1月",
+      "text": "Vuetify Presetsの導入。 Material Design Studiesコレクション全体が含まれ、_user customizable_ になります。フレームワークのデフォルトのスタイルを変更するプロセスを合理化します。数千のSASS変数が追加され、それらの変数を見つけるためのルックアップツリーがドキュメントに追加されます。 Google' studiesの詳細については、[こちら](https://material.io/design/material-studies/about-our-material-studies.html) をご覧ください。",
+      "features": {
+        "#### Objectives": [
+          "_数千_ の新しいSASS変数を追加",
+          "事前設定されたフレームワークオプションをブートストラップするための新しい Vuetify サービスを作成します; **Preset**",
+          "公式の [Material Design Studies](https://material.io/design/material-studies/about-our-material-studies.html) のプリセットを作成します",
+          "新しい機能を追加し、`v-badge`のコードスタイルを改善",
+          "新しい機能を追加し、`v-expansion-panels`のコードスタイルを改善",
+          "新しい `v-theme-provider` コンポーネント"
+        ]
+      }
+    },
+    {
+      "type": "パッケージ",
+      "title": "Vuetify Ecosystem Tools - **(Vue CLI Plugins)**",
+      "caption": "2020年Q1/2",
+      "text": "Vuetifyと連携しながら、生産性と効率を向上させるように設計された新しい開発ツール。[Vue CLI](https://cli.vuejs.org/) の上に構築されたこれらのプラグインは、既存のプロジェクトに簡単に統合され、Vuetify [remote preset](https://cli.vuejs.org/guide/plugins-and-presets.html#remote-presets) にデフォルトで含まれます。これらの機能は、最初に [Vue Conf Toronto in 2018](https://www.vuemastery.com/conferences/vueconf-toronto-2018/Vuetify-the-path-to-2-0) で説明され、公式に [Vue Conf Toronto in 2019](https://www.youtube.com/watch?v=B1oYaaMfHbw) で示されました。公式ビデオは近日公開予定です。",
+      "features": {
+        "#### Highlights": [
+          "Vuetify CLI",
+          "Vuetify Storybook",
+          "Vuetify Preset"
+        ]
+      },
+      "value": true
     },
     {
       "type": "リリース",
-      "title": "v2.3 リリース **(Orion)**",
-      "caption": "2020年Q1"
+      "title": "v3.0 リリース **(Titan)**",
+      "caption": "2020年Q1/2",
+      "text": "フレームワーク全体が Vue 3 に登場する新しい [composition api](https://vue-composition-api-rfc.netlify.com/) にコンバートされます。この変換プロセスの詳細は、リリーススケジュール、提案された新機能などと共に [v3 Notion Board](https://notion.vuetifyjs.com)で概説されています。Vuetify 3 は Vue 3 のプレリリース (アルファ/ベータ版) で開発されており、次の Vue バージョンが正式にリリースされた直後にリリースされる予定です。このため、ターゲットリリース四半期は可変であり、Vue 3の進捗状況に応じて変更されます。",
+      "features": {
+        "#### Objectives": [
+          "Vuetify 3の開発のイテレーション・リリースの方法に関する一連のガイドラインを作成します— [v3 Notion Board](https://notion.vuetifyjs.com)",
+          "Vue3と [composition api](https://vue-composition-api-rfc.netlify.com/) を使用したフレームワークの再構築",
+          "パフォーマンスの改善",
+          "Vue 3でTypescriptサポートを強化。型定義のアップデート",
+          "グローバルな設定不要で、ユニットテストを簡単に。",
+          "フレームワークコアを再構築してカスタムサービスをサポート",
+          "改良された例と詳細な情報でドキュメントを更新"
+        ]
+      },
+      "value": true
+    },
+    {
+      "type": "メンテナンス",
+      "title": "メンテナンス・サイクル",
+      "caption": "2020年Q2/3",
+      "text": "[Github issue board](https://github.com/vuetifyjs/vuetify/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+in%3Atitle+bug+) のバグの解決に焦点を当てたメンテナンスサイクル。これは、バージョン3のリリースと同時に開始されます。"
+    },
+    {
+      "type": "リリース",
+      "title": "v3.1 リリース **(Orion)**",
+      "caption": "2020年Q4",
+      "text": "Vuetifyのコンポーネントは、フレームワーク全体のデフォルトとして、事前に設定ができるようになります。これは **no-ripples** または、全ての入力を **outlined** タイプのようにグローバルな設定としてセットしたり、全てのカードを **tile** にするといったことができるようになります。",
+      "features": {
+        "#### Objectives": [
+          "ユーザーがコンポーネントのデフォルトをグローバルに定義できるようにします",
+          "Material Design specificationから欠落している機能を実装します。i.e. [Backdrop](https://material.io/components/backdrop/)"
+        ],
+        "#### New Components": [
+          "`v-file-upload`",
+          "`v-empty-state`",
+          "`v-feature-discovery`",
+          "新しいコンポーネントに関する詳細情報は、2020年の早い時期にリリースされる予定です。"
+        ]
+      }
     },
     {
       "type": "サイト",
+      "title": "テーマジェネレータ",
+      "caption": "2020年Q2",
+      "text": "アプリケーション用にカスタマイズされたプリセットを簡単に作成するためのテーマジェネレータ。"
+    },
+    {
+      "type": "snips",
       "title": "Vuetifyのスニペット",
       "caption": "未定",
-      "text": "Vuetifyのスニペットを作ったりシェアすることに特化した、Webサイト。"
+      "text": "Vuetifyコードのスニペットの作成と共有を目的としたウェブサイト。"
     }
   ]
 }

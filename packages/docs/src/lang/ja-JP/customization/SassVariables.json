@@ -1,1 +1,13 @@
-{}
+{
+  "heading": "# SASS variables",
+  "headingText": "Vuetify は、フレームワークのすべての側面のスタイルと外観を作成するために**SASS/SCSS**を使用しています。`vue.config.js` ファイルのoption__sass/scss データを利用して、オプションでカスタム変数を渡してグローバルデフォルトを上書きできます。使用可能な変数のリストは、各コンポーネントの API セクション内、およびこのページの [Variable API](#variable-api) にあります。この機能は [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugin-vuetify) によって自動的に処理されます。",
+  "variableApiDesc": "Vuetify フレームワーク全体でカスタマイズできる SASS/SCSS 変数は多数あります。以下はカスタム**variables**ファイルの例です。利用可能な [variables](#variable-api) の詳細については、以下をご覧ください:",
+  "setupHeading": "## Vue CLI のインストール",
+  "setupText1": "Vuetify をインストールしていない場合は、 [クイックスタートガイド](/getting-started/quick-start#vue-cli-3-install) を確認してください。インストールしたら、`variables.sass` または `variables.scss` という名前のファイルを、src ディレクトリ下に `sass`, `scss` あるいは `styles` という名前のフォルダ内に作成します。**vuetify-loader**は、フレームワークのデフォルトを上書きして、変数をVue CLIのコンパイルプロセスに自動的にブートストラップします。",
+  "nuxtHeading1": "## Nuxt のインストール",
+  "caveatsHeading1": "## 注意事項",
+  "caveatsText1a": "Sass 変数を使用する場合、注意すべき考慮事項がいくつかあります。",
+  "webpackText1": "このセクションでは、[クイックスタート](/getting-started/quick-start#webpack-install) ページのWebpackガイドを既に読んでいることを前提としています。このオプションは、使用している [sass-loader](https://github.com/webpack-contrib/sass-loader) のバージョンによって異なります。 SASS / SCSSデータオプションには異なる行末記号があるため、SASS / SCSSデータオプションを設定する際には、適切な構文を使用してください。 [prependData](https://github.com/webpack-contrib/sass-loader#prependdata) の詳細については、sass-loaderのGithubページを参照してください。",
+  "exampleHeading1": "## 変数定義ファイルの例",
+  "exampleText1a": "以下は、変数ファイルの例です。"
+}

@@ -71,22 +71,14 @@
     "offIcon": "不活动时使用的图标",
     "onIcon": "激活时使用的图标",
     "row": "单选框行显示",
-    "value": "设置选择控件组件的值",
-    "v-radio": {
-      "disabled": "Mixins.Validatable.props.disabled",
-      "label": "Components.Inputs.props.label",
-      "readonly": "Mixins.Validatable.props.readonly"
+    "v-simple-checkbox": {
+      "color": "Mixins.Colorable.props.color",
+      "light": "Mixins.Themeable.props.light",
+      "ripple": "Mixins.Rippleable.props.ripple"
     }
   },
-  "slots": {
-    "append": "Components.Selects.slots.append",
-    "prepend": "Components.Selects.slots.prepend"
-  },
   "events": {
-    "blur": "Components.Inputs.events.blur",
-    "change": "Components.Inputs.events.change",
-    "focus": "输入聚焦时发出",
     "update:indeterminate": "**indeterminate.sync** 事件。",
-    "update:error": "Mixins.Validatable.events['update:error']"
+    "change": "当用户交互更改输入时发出"
   }
 }

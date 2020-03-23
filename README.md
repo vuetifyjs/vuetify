@@ -38,19 +38,19 @@
 
 <h2 align="center">Supporting Vuetify</h2>
 
-<p>Vuetify is an open source MIT project that has been made possible due to the generous contributions by <a href="https://github.com/vuetifyjs/vuetify/blob/dev/BACKERS.md">community backers</a>. If you are interested in supporting this project, please consider:</p>
+Vuetify is a MIT licensed project that is developed and maintained full-time by [John Leider](https://github.com/johnleider) and [Heather Hill](https://github.com/heatherleider); with support from the entire [Core Team](https://vuetifyjs.com/introduction/meet-the-team/). Sponsor Vuetify and receive some **awesome perks** and support Open Source Software at the same time! 🎉
 
 <ul>
   <li>
-    <a href="https://github.com/users/johnleider/sponsorship">Becoming a sponsor on Github</a>
+    <a href="https://github.com/users/johnleider/sponsorship">Support through Github</a>
     <strong><small>(supports John)</small></strong>
   </li>
   <li>
-    <a href="https://opencollective.com/vuetify">Becoming a backer on OpenCollective</a>
+    <a href="https://opencollective.com/vuetify">Support through OpenCollective</a>
     <strong><small>(supports the Dev team)</small></strong>
   </li>
   <li>
-    <a href="https://tidelift.com/subscription/npm/vuetify?utm_source=vuetify&utm_medium=referral&utm_campaign=readme">Become a subscriber on Tidelift</a>
+    <a href="https://tidelift.com/subscription/request-a-demo?utm_source=npm-vuetify&utm_medium=referral&utm_campaign=enterprise">Become a subscriber on Tidelift</a>
   </li>
   <li>
     <a href="https://paypal.me/vuetify">Make a one-time payment with Paypal</a>
@@ -122,12 +122,17 @@
       </td>
       <td>
         <a href="https://www.digitalmaas.com/?ref=vuetify-github">
-          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/digital-maas.svg">
+          <img height="50px" src="https://cdn.vuetifyjs.com/images/backers/digital-maas.svg">
         </a>
       </td>
       <td>
         <a href="https://www.brightree.com/?ref=vuetify-github">
-          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/brightree-logo-light.png">
+          <img height="70px" src="https://cdn.vuetifyjs.com/images/backers/brightree-logo-light.png">
+        </a>
+      </td>
+      <td>
+        <a href="https://www.alv-software.com/?ref=vuetify-github">
+          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/alv-software-logo-light.png">
         </a>
       </td>
       </td>
@@ -164,18 +169,17 @@
 
 ### Introduction
 
-Vuetify is a Material Design Component Framework for the Vue framework. We believe that you shouldn't need design skills to build beautiful Vue applications. Vuetify takes the pain out of development by providing everything you need:
+Vuetify is a Vue UI Library with beautifully handcrafted Components using the [Material Design](https://material.io/guidelines/) specification. No design skills required — everything you need to create amazing applications is at your fingertips. Supercharge your development process with all of the tools that you need to succeed:
 
-- Over 80 beautiful hand crafted Material Components
-- Powerful and unique directives for customizing user experiences
-- WCAG accessibility (a11y) and Section 508 compliant
-- Full RTL support
-- Support for IE11 / Safari 9 with [polyfill](https://vuetifyjs.com/getting-started/browser-support)
-- Easily customizable with SASS variables and [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugins/tree/master/packages/vue-cli-plugin-vuetify)
-- Built with the [Material Design 2 Specification](https://material.io/guidelines/)
-- Designed for mobile to desktop
-
-Vuetify is expansive, powerful and provides tools required for large, robust applications.
+- WCAG **Accessibility** (a11y) / WCAG / Section 508 / RTL support
+- **30+** supported languages
+- _Smaller_ bundle sizes with **automatic** tree-shaking
+- A massive **Discord** [community](https://community.vuetifyjs.com)
+- **18 months** Long-term support for [Major releases](https://vuetifyjs.com/introduction/long-term-support/)
+- **IE11 / Safari 9** support with [polyfill](https://vuetifyjs.com/getting-started/browser-support/)
+- Extensive customization options with **SASS/SCSS** and [Presets](https://vuetifyjs.com/customization/presets/)
+- Responsive support down to _320px_ width
+- [Consulting](https://vuetifyjs.com/professional-support/consulting/) and [Business](https://vuetifyjs.com/professional-support/business/) support
 
 ###### Browser Support
 

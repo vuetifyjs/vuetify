@@ -67,6 +67,9 @@
       "uninverted": true
     }
   },
+  "accessibility": {
+    "desc": "crwdns56271:0crwdne56271:0"
+  },
   "props": {
     "closeOnClick": "crwdns34322:0crwdne34322:0",
     "closeOnContentClick": "crwdns34324:0crwdne34324:0",

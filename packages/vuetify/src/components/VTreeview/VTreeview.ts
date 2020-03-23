@@ -225,7 +225,7 @@ export default mixins(
         this.nodes[key] = !children.length ? node : this.calculateState(node, this.nodes)
 
         // Don't forget to rebuild cache
-        if (this.nodes[key].isSelected) this.selectedCache.add(key)
+        if (this.nodes[key].isSelected && (this.selectionType === 'independent' || node.children.length === 0)) this.selectedCache.add(key)
         if (this.nodes[key].isActive) this.activeCache.add(key)
         if (this.nodes[key].isOpen) this.openCache.add(key)
 

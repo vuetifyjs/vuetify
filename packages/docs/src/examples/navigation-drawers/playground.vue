@@ -42,6 +42,7 @@
 
     <v-card
       height="400"
+      class="overflow-hidden"
     >
       <v-navigation-drawer
         v-model="drawer"

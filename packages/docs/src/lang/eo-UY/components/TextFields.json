@@ -61,6 +61,10 @@
       "heading": "crwdns45740:0crwdne45740:0",
       "desc": "crwdns33442:0crwdne33442:0"
     },
+    "hide-details": {
+      "heading": "crwdns56305:0crwdne56305:0",
+      "desc": "crwdns56307:0crwdne56307:0"
+    },
     "prefixes-and-suffixes": {
       "heading": "crwdns45742:0crwdne45742:0",
       "desc": "crwdns39952:0crwdne39952:0"
@@ -120,25 +124,19 @@
     "textarea": "crwdns33518:0crwdne33518:0",
     "toggleKeys": "crwdns33520:0crwdne33520:0",
     "type": "crwdns33522:0crwdne33522:0",
-    "value": "crwdns33524:0crwdne33524:0",
     "shaped": "crwdns39984:0crwdne39984:0"
   },
   "slots": {
-    "append": "crwdns33526:0crwdne33526:0",
     "append-outer": "crwdns33528:0crwdne33528:0",
-    "prepend": "crwdns33530:0crwdne33530:0",
     "prepend-inner": "crwdns33532:0crwdne33532:0"
   },
   "events": {
-    "blur": "crwdns42408:0crwdne42408:0",
-    "change": "crwdns33534:0crwdne33534:0",
-    "click:append": "crwdns33536:0crwdne33536:0",
+    "blur": "crwdns56309:0crwdne56309:0",
+    "change": "crwdns56311:0crwdne56311:0",
     "click:append-outer": "crwdns33538:0crwdne33538:0",
     "click:clear": "crwdns33540:0crwdne33540:0",
-    "click:prepend": "crwdns33542:0crwdne33542:0",
     "click:prepend-inner": "crwdns33544:0crwdne33544:0",
     "focus": "crwdns42410:0crwdne42410:0",
-    "keydown": "crwdns42412:0crwdne42412:0",
-    "update:error": "crwdns33546:0crwdne33546:0"
+    "keydown": "crwdns56313:0crwdne56313:0"
   }
 }

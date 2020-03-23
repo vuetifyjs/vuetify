@@ -310,8 +310,9 @@ export default baseMixins.extend<options>().extend({
         !this._isDestroyed &&
 
         // Click originates from outside the menu content
-        this.getContent() &&
-        !this.getContent().contains(e.target as Node) &&
+        // Multiple selects don't close when an item is clicked
+        (!this.getContent() ||
+        !this.getContent().contains(e.target as Node)) &&
 
         // Click originates from outside the element
         this.$el &&
@@ -604,6 +605,8 @@ export default baseMixins.extend<options>().extend({
         this.isFocused = true
         this.$emit('focus')
       }
+
+      this.$emit('click', e)
     },
     onEscDown (e: Event) {
       e.preventDefault()

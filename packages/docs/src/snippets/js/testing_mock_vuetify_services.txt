@@ -3,31 +3,23 @@
 // Libraries
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-import { Breakpoint } from 'vuetify/lib/services'
 
 // Components
 import CustomNavigationDrawer from '@/components/CustomNavigationDrawer'
 
 // Utilities
 import {
+  createLocalVue,
   mount,
-  createLocalVue
 } from '@vue/test-utils'
 
 const localVue = createLocalVue()
 
 describe('CustomNavigationDrawer.vue', () => {
   let vuetify
-  const opts = {}
 
   beforeEach(() => {
-    vuetify = new Vuetify({
-      mocks: {
-        $vuetify: {
-          breakpoint: new Breakpoint(opts),
-        },
-      }
-    })
+    vuetify = new Vuetify()
   })
 
   it('should have a custom title and match snapshot', () => {

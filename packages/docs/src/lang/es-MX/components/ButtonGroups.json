@@ -1,15 +1,20 @@
 {
+  "heading": "# Grupos de Botones",
+  "headingText": "El componente `v-btn-toggle` es un simple envoltorio para `v-item-group` construido específicamente para usarse con `v-btn`.",
   "examples": {
     "usage": {
       "desc": "Los _toggle buttons_ te permiten crear un grupo estilizado de botones que pueden ser seleccionados o alternados bajo un solo `v-model`"
     },
     "app-bar": {
+      "heading": "### En un _toolbar_ (barra de herramientas)",
       "desc": "Integra fácilmente tus soluciones de botones personalizados con una `v-toolbar`"
     },
     "qwerty": {
+      "heading": "### Acción seleccionada",
       "desc": "Agrupa acciones similares y diseñar tu propio componente WYSIWYG."
     },
     "rounded": {
+      "heading": "### Botones redondeados",
       "desc": "Puedes hacer `VBtnToggle` redondeado usando la prop `rounded`."
     },
     "mandatory": {
@@ -20,6 +25,7 @@
     }
   },
   "props": {
+    "backgroundColor": "Cambia el color de fondo del componente.",
     "group": "Generalmente usado en [v-toolbar](/components/toolbars) y [v-app-bar](/components/app-bars). Elimina el color de fondo, el borde y aumenta el espacio entre los botones",
     "rounded": "Botones redondeados"
   }

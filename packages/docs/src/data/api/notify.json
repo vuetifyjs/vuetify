@@ -1,9 +1,9 @@
 {
   "color": "base",
   "close": true,
-  "id": "vuetify-italy",
-  "text": "More info",
-  "msg": "🌏 Come see the Author, [John Leider](https://twitter.com/@zeroskillz), speak in **Italy** this February!",
-  "href": "https://www.eventbrite.com/e/klab-2020-1-vuetify-in-depth-tickets-90932552713?ref=vuetifyjs.com",
+  "id": "vuetify-sponsors",
+  "text": "Show Me",
+  "msg": "🚀 Sponsor Vuetify and get awesome **perks** at the same time",
+  "href": "https://github.com/sponsors/johnleider",
   "timeout": 0
 }

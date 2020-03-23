@@ -86,9 +86,7 @@
 
     methods: {
       validate () {
-        if (this.$refs.form.validate()) {
-          this.snackbar = true
-        }
+        this.$refs.form.validate()
       },
       reset () {
         this.$refs.form.reset()

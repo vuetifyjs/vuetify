@@ -55,6 +55,23 @@ describe('VMenu.ts', () => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
+  it('should render multiple content nodes', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        eager: true,
+      },
+      scopedSlots: {
+        activator: '<button v-on="props.on"></button>',
+      },
+      slots: {
+        default: '<span>foo</span><span>bar</span>',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
   it('should round dimensions', async () => {
     const wrapper = mountFunction({
       propsData: {

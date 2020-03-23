@@ -1,6 +1,6 @@
 {
   "heading": "# Avvisi",
-  "headingText": "Il componente `v-alert`è usato per convogliare le informazioni importanti all'utente tramite luso di icone e colori dei tipi contestuali. Questi tipi predefiniti si presentano in 4 varianti: **successo**, **info**, **avviso** ed **errore**. Sono assegnate delle icone predefinite per ogni tipo di ritratto che aiutano a rappresentare azioni differenti. Molte parti di un avviso come `limite`, `icona` e `colore` possono essere personalizzate per adattarsi a quasi ogni situazione.",
+  "headingText": "Il componente `v-alert`è usato per convogliare le informazioni importanti all'utente tramite luso di icone e colori dei tipi contestuali. Questi tipi predefiniti si presentano in 4 varianti: **success**, **info**, **warning** ed **error**. Sono assegnate delle icone predefinite per ogni tipo di ritratto che aiutano a rappresentare azioni differenti. Molte parti di un avviso come `limite`, `icona` e `colore` possono essere personalizzate per adattarsi a quasi ogni situazione.",
   "usageText": "Gli avvisi nella loro forma più semplice sono un [foglio di carta] piatto (/componenti/foglio) che mostra un messaggio.",
   "examples": {
     "border": {
@@ -8,8 +8,7 @@
       "desc": "La prop **limite** aggiunge un limite semplice ad uno dei 4 lati dell'avviso. Questo può essere combinato con prop come **colore**, **scuro** e **tipo** per fornire accenti unici all'avviso."
     },
     "colored-border": {
-      "heading": "### Limite Colorato",
-      "desc": "Il prop **limite-colorato** rimuove lo sfondo dell'avviso per accentuare il prop **limite**. e un **tipo** è impostato, userà il colore predefinito dei tipi. Se non è impostato alcun **colore** o **tipo**, il colore sarà predefinito al colore del tema applicato invertito (nero per luminoso e bianco/grigio per scuro)."
+      "heading": "### Limite Colorato"
     },
     "dense": {
       "heading": "### Denso",
@@ -44,8 +43,7 @@
       "desc": "L'elemento **tipo** fornisce 4 stili 'v-alert- predefiniti: **successo**, **info**, **avviso** ed **errore**. Ognuno di questi stili fornisce un'icona ed un colore predefinito. I colori predefiniti possono essere configurati globalmente personalizzando il [tema di Vuetify](/personalizzazione/tema)."
     },
     "twitter": {
-      "heading": "### Avviso di Twitter",
-      "desc": "Combinando gli elementi **colore**, **disattivabile**, **limite**, **elevazione**, **icona** e **colore** puoi creare avvisi personalizzati di stile come questa notifica di twitter."
+      "heading": "### Avviso di Twitter"
     }
   }
 }

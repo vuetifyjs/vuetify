@@ -81,22 +81,16 @@
     "offIcon": "crwdns33704:0crwdne33704:0",
     "onIcon": "crwdns33702:0crwdne33702:0",
     "row": "crwdns33706:0crwdne33706:0",
-    "value": "crwdns33716:0crwdne33716:0",
-    "v-radio": {
-      "disabled": "crwdns33718:0crwdne33718:0",
-      "label": "crwdns33720:0crwdne33720:0",
-      "readonly": "crwdns33722:0crwdne33722:0"
+    "v-simple-checkbox": {
+      "color": "crwdns56277:0crwdne56277:0",
+      "disabled": "crwdns56279:0crwdne56279:0",
+      "light": "crwdns56281:0crwdne56281:0",
+      "ripple": "crwdns56283:0crwdne56283:0",
+      "value": "crwdns56285:0crwdne56285:0"
     }
   },
-  "slots": {
-    "append": "crwdns33724:0crwdne33724:0",
-    "prepend": "crwdns33726:0crwdne33726:0"
-  },
   "events": {
-    "blur": "crwdns43114:0crwdne43114:0",
-    "change": "crwdns33728:0crwdne33728:0",
-    "focus": "crwdns43116:0crwdne43116:0",
     "update:indeterminate": "crwdns40142:0crwdne40142:0",
-    "update:error": "crwdns33730:0crwdne33730:0"
+    "change": "crwdns56287:0crwdne56287:0"
   }
 }

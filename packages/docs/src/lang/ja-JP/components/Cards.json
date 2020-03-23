@@ -1,14 +1,67 @@
 {
   "heading": "# カード",
+  "headingText": "`v-card` コンポーネントは、パネルから画像まであらゆる用途に使用できる汎用的なコンポーネントです。**card** コンポーネントには、可能な限りマークアップを簡単にするためのたくさんのヘルパーコンポーネントが存在します。オプションを持たないコンポーネントはレンダリングを高速化し、構築を簡単にするための糖衣構文として機能するために、Vueのコンポーネント機能を使用しています。",
+  "usageText": "Card には `v-card-title`, `v-card-subtitle`, `v-card-text`, `v-card-actions`の4種類のベースとなるコンポーネントが用意されています。",
+  "functional": {
+    "desc": [
+      "`v-card-actions`: [v-btn](/components/buttons) や [v-menu](/components/menus) などのカードの **actions** を配置するために使用されるコンテナ。また、ボタンに _special margin_ を適用して、ボタンが他のカードコンテンツ領域と適切に並ぶようにします。 ",
+      "`v-card-subtitle`: カードのサブタイトルにデフォルトの**font-size**と**padding**を提供します。Font-sizeは[typography classes](/styles/typography)で上書きできます。",
+      "`v-card-text`: 主にカードの**テキストコンテンツ**に使用されます。テキストにパディングを適用し、そのフォントサイズを.875remに縮小します。",
+      "`v-card-title`: デフォルトの**font-size**と**padding**をカードのタイトルに提供します。フォントサイズは、[typography classes](/styles/typography) で上書きできます。"
+    ]
+  },
   "examples": {
+    "info-card": {
+      "heading": "### Information card",
+      "desc": "カードは、より詳細な情報への入り口です。簡潔にするために、ユーザーが実行できるアクションの数を制限してください。"
+    },
     "media-with-text": {
       "desc": "レイアウトシステムを使用すると、背景のどこにでもカスタムテキストを追加することができます。"
     },
     "horizontal": {
       "desc": "`v-flex` を使用することで、カスタマイズされた水平型Cardを作成することができます。`v-card-media` の `contain` プロパティを使用すると、コンテナの内側に収まるように縮小することができます。"
     },
+    "grids": {
+      "heading": "### グリッド",
+      "desc": "グリッドを使用すると、美しいレイアウトを作成することができます。"
+    },
     "custom-actions": {
+      "heading": "### カスタムアクション",
       "desc": "シンプルな条件によって、開くまで閉じられている補助的なテキストを簡単に追加できます。"
+    },
+    "twitter-card": {
+      "heading": "### ツイッター カード",
+      "desc": "`v-card`コンポーネントには複数の子コンポーネントがあり、間隔（spacing）を気にせずに複雑な例を作成できます。この例は、`v-card-title`, `v-card-text` および `v-card-actions` コンポーネントで構成されています。"
+    },
+    "loading": {
+      "heading": "### カードのローディング",
+      "desc": "カードは、ユーザーアクションを処理するときに読み込み状態に設定できます。これにより、以降のアクションが無効になり、不確定（indeterminate）な [v-progress-linear](/components/progress-linear) で視覚的なフィードバックが得られます。"
+    },
+    "weather": {
+      "heading": "### ウェザーカード",
+      "desc": "[v-list-items](/components/lists) と [v-slider](/components/sliders) を使用して、独自のウェザーカードを作成できます。リストコンポーネントにより、一貫した間隔と機能が確保され、スライダーコンポーネントにより、ユーザーに便利な選択インターフェイスを提供できます。"
+    },
+    "advanced": {
+      "heading": "### 高度な使い方",
+      "desc": "`v-list-item` と `v-img` を使用すると、高度な設定でユニークなカードレイアウトを作成できます"
+    },
+    "intermediate": {
+      "desc": "`v-card` コンポーネントは、コンテンツをラップするのに便利です。"
     }
+  },
+  "cardMediaWarning": "`v-card-media` は非推奨です。代わりに `v-img` を使用します。",
+  "props": {
+    "alt": "Components.Images.props.alt",
+    "aspectRatio": "Components.Images.props.aspectRatio",
+    "contain": "背景画像に **background-size: contain** を適用します(**img** propを使用する場合)。",
+    "flat": "カードのElevationを削除します。",
+    "gradient": "Components.Images.props.gradient",
+    "hover": "ホバー時に 4dp のElevationを適用します (デフォルト 2dp)。詳細は [elevationのページ](/styles/elevation) をご覧ください。",
+    "img": "カードのイメージの背景を指定します。より高度な実装を行う場合は、 [v-img](/components/images) コンポーネントを使用することをお勧めします。 [v-imgの例はこちら](#media-with-text) 。",
+    "outlined": "Elevationの影を削除し、細い枠線を追加します。",
+    "raised": "より高いデフォルトElevation (8dp) を指定します。詳細については、[elevationページ](/styles/elevation) をご覧ください。"
+  },
+  "events": {
+    "click": "コンポーネントがクリックされたときに発生 - `.native`修飾子を使用しない限り、クリックするとコンポーネントにリップル効果が適用されます。"
   }
 }

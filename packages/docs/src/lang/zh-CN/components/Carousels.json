@@ -5,10 +5,8 @@
   "subComponentsList": [
     "`v-carousel-item`：`v-carousel` 使用的图像容器。继承 `v-window-item`，且是可通过路由导航的，并使用 `v-img` 安装在其默认插槽。"
   ],
+  "usageText": "`v-carousel` 组件在 `v-window` 的基础上进行了扩展，提供了更多针对图像显示的功能。",
   "examples": {
-    "usage": {
-      "desc": "`v-carousel` 组件在 `v-window` 的基础上进行了扩展，提供了更多针对图像显示的功能。"
-    },
     "cycle": {
       "heading": "### 循环",
       "desc": "有了 **cycle** 属性，你可以让你的轮播每 6s（默认）自动转换到下一个。"
