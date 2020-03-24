@@ -6,7 +6,6 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
     <th role="columnheader"
         scope="col"
         aria-label="Dessert (100g serving)"
-        aria-sort="none"
         class="text-left"
     >
       <span>
@@ -105,7 +104,6 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
     <th role="columnheader"
         scope="col"
         aria-label="Dessert (100g serving)"
-        aria-sort="none"
         class="text-left"
     >
       <span>
@@ -207,7 +205,6 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
     <th role="columnheader"
         scope="col"
         aria-label="Dessert (100g serving)"
-        aria-sort="none"
         class="text-left"
     >
       <span>
@@ -324,7 +321,6 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
     <th role="columnheader"
         scope="col"
         aria-label="Dessert (100g serving)"
-        aria-sort="none"
         class="text-left"
     >
       <span>
@@ -423,7 +419,6 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
     <th role="columnheader"
         scope="col"
         aria-label="Dessert (100g serving)"
-        aria-sort="none"
         class="text-left"
     >
       <span>
