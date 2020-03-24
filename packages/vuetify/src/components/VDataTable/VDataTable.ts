@@ -10,6 +10,7 @@ import {
   DataPagination,
   DataTableCompareFunction,
   DataItemsPerPageOption,
+  ItemGroup,
 } from 'types'
 import { PropValidator } from 'vue/types/options'
 
@@ -293,21 +294,19 @@ export default VDataIterator.extend({
         ? this.genGroupedRows(props.groupedItems, props)
         : this.genRows(items, props)
     },
-    genGroupedRows (groupedItems: Record<string, any[]>, props: DataScopeProps) {
-      const groups = Object.keys(groupedItems || {})
-
-      return groups.map(group => {
-        if (!this.openCache.hasOwnProperty(group)) this.$set(this.openCache, group, true)
+    genGroupedRows (groupedItems: ItemGroup<any>[], props: DataScopeProps) {
+      return groupedItems.map(group => {
+        if (!this.openCache.hasOwnProperty(group.name)) this.$set(this.openCache, group.name, true)
 
         if (this.$scopedSlots.group) {
           return this.$scopedSlots.group({
-            group,
+            group: group.name,
             options: props.options,
-            items: groupedItems![group],
+            items: group.items,
             headers: this.computedHeaders,
           })
         } else {
-          return this.genDefaultGroupedRow(group, groupedItems[group], props)
+          return this.genDefaultGroupedRow(group.name, group.items, props)
         }
       })
     },

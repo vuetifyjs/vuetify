@@ -4617,16 +4617,16 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
       </thead>
       <tbody>
         <div>
-          {"group":"0","options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[],"mustSort":false,"multiSort":false},"items":[{"name":"Jelly bean","calories":375,"fat":0,"carbs":94,"protein":0,"iron":"0%"},{"name":"Lollipop","calories":392,"fat":0.2,"carbs":98,"protein":0,"iron":"2%"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
+          {"group":0,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[],"mustSort":false,"multiSort":false},"items":[{"name":"Jelly bean","calories":375,"fat":0,"carbs":94,"protein":0,"iron":"0%"},{"name":"Lollipop","calories":392,"fat":0.2,"carbs":98,"protein":0,"iron":"2%"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
         </div>
         <div>
-          {"group":"4","options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[],"mustSort":false,"multiSort":false},"items":[{"name":"Frozen Yogurt","calories":159,"fat":6,"carbs":24,"protein":4,"iron":"1%"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
+          {"group":3.9,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[],"mustSort":false,"multiSort":false},"items":[{"name":"Gingerbread","calories":356,"fat":16,"carbs":49,"protein":3.9,"iron":"16%"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
         </div>
         <div>
-          {"group":"3.9","options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[],"mustSort":false,"multiSort":false},"items":[{"name":"Gingerbread","calories":356,"fat":16,"carbs":49,"protein":3.9,"iron":"16%"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
+          {"group":4,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[],"mustSort":false,"multiSort":false},"items":[{"name":"Frozen Yogurt","calories":159,"fat":6,"carbs":24,"protein":4,"iron":"1%"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
         </div>
         <div>
-          {"group":"4.3","options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[],"mustSort":false,"multiSort":false},"items":[{"name":"Ice cream sandwich","calories":237,"fat":9,"carbs":37,"protein":4.3,"iron":"1%"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
+          {"group":4.3,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[],"mustSort":false,"multiSort":false},"items":[{"name":"Ice cream sandwich","calories":237,"fat":9,"carbs":37,"protein":4.3,"iron":"1%"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
         </div>
       </tbody>
     </table>
@@ -5305,52 +5305,6 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 </i>
               </span>
             </button>
-            protein: 4
-            <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
-            >
-              <span class="v-btn__content">
-                <i aria-hidden="true"
-                   class="v-icon notranslate material-icons theme--light"
-                >
-                  $close
-                </i>
-              </span>
-            </button>
-          </td>
-        </tr>
-        <tr class>
-          <td class="text-left">
-            Frozen Yogurt
-          </td>
-          <td class="text-start">
-            159
-          </td>
-          <td class="text-start">
-            6
-          </td>
-          <td class="text-start">
-            24
-          </td>
-          <td class="text-start">
-            1%
-          </td>
-        </tr>
-        <tr class="v-row-group__header">
-          <td colspan="5"
-              class="text-start"
-          >
-            <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
-            >
-              <span class="v-btn__content">
-                <i aria-hidden="true"
-                   class="v-icon notranslate material-icons theme--light"
-                >
-                  $minus
-                </i>
-              </span>
-            </button>
             protein: 3.9
             <button type="button"
                     class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
@@ -5380,6 +5334,52 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           </td>
           <td class="text-start">
             16%
+          </td>
+        </tr>
+        <tr class="v-row-group__header">
+          <td colspan="5"
+              class="text-start"
+          >
+            <button type="button"
+                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+            >
+              <span class="v-btn__content">
+                <i aria-hidden="true"
+                   class="v-icon notranslate material-icons theme--light"
+                >
+                  $minus
+                </i>
+              </span>
+            </button>
+            protein: 4
+            <button type="button"
+                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+            >
+              <span class="v-btn__content">
+                <i aria-hidden="true"
+                   class="v-icon notranslate material-icons theme--light"
+                >
+                  $close
+                </i>
+              </span>
+            </button>
+          </td>
+        </tr>
+        <tr class>
+          <td class="text-left">
+            Frozen Yogurt
+          </td>
+          <td class="text-start">
+            159
+          </td>
+          <td class="text-start">
+            6
+          </td>
+          <td class="text-start">
+            24
+          </td>
+          <td class="text-start">
+            1%
           </td>
         </tr>
         <tr class="v-row-group__header">
