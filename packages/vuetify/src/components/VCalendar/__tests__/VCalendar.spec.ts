@@ -78,6 +78,24 @@ describe('VCalendar', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render month view with show-week', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        type: 'month',
+        start: '2018-01-29',
+        end: '2018-02-04',
+        now: '2019-02-17',
+        'show-week': true,
+      },
+      methods: {
+        getNow: () => parseDate(new Date('2019-02-17')),
+      },
+    })
+
+    expect(wrapper.classes('v-calendar-monthly')).toBeTruthy()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should parse value', async () => {
     const wrapper = mountFunction({
       propsData: {

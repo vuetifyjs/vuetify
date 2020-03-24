@@ -16,6 +16,9 @@
     &.v-outside
       background-color: map-deep-get($material, 'calendar', 'outside-background-color')
 
+  .v-calendar-weekly__head-weeknumber
+    background-color: map-deep-get($material, 'calendar', 'weeknumber-color')
+
   .v-calendar-weekly__day
     border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
     border-bottom: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
@@ -23,6 +26,10 @@
 
     &.v-outside
       background-color: map-deep-get($material, 'calendar', 'outside-background-color')
+
+  .v-calendar-weekly__weeknumber
+      background-color: map-deep-get($material, 'calendar', 'weeknumber-color')
+      border-bottom: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
 
 .v-calendar-weekly
   width: 100%
@@ -47,12 +54,32 @@
   text-transform: uppercase
   white-space: nowrap
 
+.v-calendar-weekly__head-weeknumber
+  position: relative
+  border-top-left-radius: 4px
+  border-top-right-radius: 4px
+  flex: 0 0 24px
+  top: 0.2em
+
 .v-calendar-weekly__week
   display: flex
   flex: 1
   height: unset
   // https://github.com/vuetifyjs/vuetify/issues/8319
   min-height: 0
+
+.v-calendar-weekly__weeknumber
+  display: flex
+  flex: 0 0 24px
+  font-weight: 500
+  height: unset
+  // https://github.com/vuetifyjs/vuetify/issues/8319
+  min-height: 0
+  padding-top: 8px
+  text-align: center
+
+  > small
+    width: 100% !important
 
 .v-calendar-weekly__day
   flex: 1
@@ -90,3 +117,4 @@
   left: $calendar-weekly-day-month-left
   height: $calendar-weekly-day-label-size
   line-height: $calendar-weekly-day-label-size
+

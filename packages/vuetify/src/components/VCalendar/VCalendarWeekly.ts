@@ -92,7 +92,11 @@ export default CalendarBase.extend({
       }, this.genHeadDays())
     },
     genHeadDays (): VNode[] {
-      return this.todayWeek.map(this.genHeadDay)
+      const header = this.todayWeek.map(this.genHeadDay)
+      this.showWeek && header.unshift(this.$createElement('div', {
+        staticClass: 'v-calendar-weekly__head-weeknumber',
+      }))
+      return header
     },
     genHeadDay (day: CalendarTimestamp, index: number): VNode {
       const outside = this.isOutside(this.days[index])
@@ -109,16 +113,36 @@ export default CalendarBase.extend({
       const weekDays = this.parsedWeekdays.length
       const weeks: VNode[] = []
       for (let i = 0; i < days.length; i += weekDays) {
-        weeks.push(this.genWeek(days.slice(i, i + weekDays)))
+        weeks.push(this.genWeek(days.slice(i, i + weekDays), this.getWeekNumber(days[i + 3])))
       }
-
       return weeks
     },
-    genWeek (week: CalendarTimestamp[]): VNode {
+    genWeek (week: CalendarTimestamp[], weekNumber: number): VNode {
+      const weekNodes = week.map((day, index) => this.genDay(day, index, week))
+      this.showWeek && weekNodes.unshift(this.genWeekNumber(weekNumber))
       return this.$createElement('div', {
         key: week[0].date,
         staticClass: 'v-calendar-weekly__week',
-      }, week.map((day, index) => this.genDay(day, index, week)))
+      }, weekNodes)
+    },
+    getWeekNumber (day: CalendarTimestamp) {
+      var determineDate = new Date(`${day.year}-${String(day.month).padStart(2, '0')}-${String(day.day).padStart(2, '0')}T00:00:00+00:00`)
+      var dayNumber = (determineDate.getDay() + 6) % 7
+      determineDate.setDate(determineDate.getDate() - dayNumber + 3)
+      var firstThursday = determineDate.valueOf()
+      determineDate.setMonth(0, 1)
+      if (determineDate.getDay() !== 4) {
+        determineDate.setMonth(0, 1 + ((4 - determineDate.getDay()) + 7) % 7)
+      }
+      return 1 + Math.ceil((firstThursday - determineDate.valueOf()) / 604800000)
+    },
+    genWeekNumber (weekNumber: number) {
+      return this.$createElement('div', {
+        staticClass: 'v-calendar-weekly__weeknumber',
+      },
+      [
+        this.$createElement('small', { }, String(weekNumber).padStart(2, '0')),
+      ])
     },
     genDay (day: CalendarTimestamp, index: number, week: CalendarTimestamp[]): VNode {
       const outside = this.isOutside(day)
