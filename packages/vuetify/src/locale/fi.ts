@@ -45,4 +45,13 @@ export default {
     am: 'ap.',
     pm: 'ip.',
   },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Pagination Navigation',
+      next: 'Next page',
+      previous: 'Previous page',
+      page: 'Goto Page {0}',
+      currentPage: 'Current Page, Page {0}',
+    },
+  },
 }
