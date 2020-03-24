@@ -11,6 +11,40 @@ exports[`VData.ts should render data through default scoped slot 1`] = `
 </div>
 `;
 
+exports[`VData.ts should sort grouped column 1`] = `
+<div id="wrapper">
+  <div>
+    a
+  </div>
+  <div>
+    b
+  </div>
+  <div>
+    c
+  </div>
+  <div>
+    d
+  </div>
+</div>
+`;
+
+exports[`VData.ts should sort grouped column 2`] = `
+<div id="wrapper">
+  <div>
+    d
+  </div>
+  <div>
+    c
+  </div>
+  <div>
+    b
+  </div>
+  <div>
+    a
+  </div>
+</div>
+`;
+
 exports[`VData.ts should toggle grouping 1`] = `
 <div id="wrapper">
   <div>

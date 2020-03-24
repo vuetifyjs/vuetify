@@ -89,10 +89,16 @@ describe('VData.ts', () => {
     })
 
     expect(render).toHaveBeenCalledWith(expect.objectContaining({
-      groupedItems: {
-        one: [items[0], items[2]],
-        two: [items[1]],
-      },
+      groupedItems: [
+        {
+          name: 'one',
+          items: [items[0], items[2]],
+        },
+        {
+          name: 'two',
+          items: [items[1]],
+        },
+      ],
     }))
   })
 
@@ -115,10 +121,16 @@ describe('VData.ts', () => {
     })
 
     expect(render).toHaveBeenCalledWith(expect.objectContaining({
-      groupedItems: {
-        one: [items[0], items[2]],
-        two: [items[1]],
-      },
+      groupedItems: [
+        {
+          name: 'one',
+          items: [items[0], items[2]],
+        },
+        {
+          name: 'two',
+          items: [items[1]],
+        },
+      ],
     }))
   })
 
@@ -401,9 +413,9 @@ describe('VData.ts', () => {
   it('should toggle grouping', async () => {
     const unsorted = [
       { id: 1, text: 'c', group: 'foo' },
-      { id: 2, text: 'a', group: 'bar' },
+      { id: 4, text: 'a', group: 'bar' },
       { id: 3, text: 'd', group: 'foo' },
-      { id: 4, text: 'b', group: 'bar' },
+      { id: 2, text: 'b', group: 'bar' },
     ]
 
     const wrapper = mountFunction({
@@ -413,7 +425,7 @@ describe('VData.ts', () => {
       scopedSlots: {
         default (props) {
           const items = props.groupedItems
-            ? Object.keys(props.groupedItems)
+            ? props.groupedItems.map(group => group.name)
             : props.items.map(item => item.text)
 
           return this.$createElement('div', {
@@ -478,5 +490,44 @@ describe('VData.ts', () => {
         pageStop: 1,
       }),
     }))
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10627
+  it('should sort grouped column', async () => {
+    const unsorted = [
+      { id: 1, text: 'c', group: 'foo' },
+      { id: 4, text: 'a', group: 'bar' },
+      { id: 3, text: 'd', group: 'foo' },
+      { id: 2, text: 'b', group: 'bar' },
+    ]
+
+    const wrapper = mountFunction({
+      propsData: {
+        items: unsorted,
+        groupBy: ['text'],
+      },
+      scopedSlots: {
+        default (props) {
+          return this.$createElement('div', {
+            attrs: {
+              id: 'wrapper',
+            },
+            on: {
+              click: () => props.group('group'),
+            },
+          }, props.groupedItems.map(group => this.$createElement('div', [group.name])))
+        },
+      },
+    })
+
+    wrapper.setProps({ groupDesc: [false] })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ groupDesc: [true] })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })
