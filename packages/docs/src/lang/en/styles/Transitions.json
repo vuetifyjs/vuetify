@@ -25,6 +25,10 @@
       "heading": "### Scale transition",
       "desc": "Many of Vuetify's components contain a <code>transition</code> prop which allows you to specify your own."
     },
+    "fab-transition": {
+      "heading": "### Fab transition",
+      "desc": "An example of the fab transition can be found in the  the `v-speed-dial` component."
+    },
     "fade-transition": {
       "heading": "### Fade transition",
       "desc": "Another example of the fade transition can be found on the Carousel component."
