@@ -118,6 +118,7 @@ export default CalendarBase.extend({
       for (let i = 0; i < days.length; i += weekDays) {
         weeks.push(this.genWeek(days.slice(i, i + weekDays), this.getWeekNumber(days[i + 3])))
       }
+
       return weeks
     },
     genWeek (week: CalendarTimestamp[], weekNumber: number): VNode {
