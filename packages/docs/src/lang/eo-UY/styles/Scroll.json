@@ -1,6 +1,6 @@
 {
-  "heading": "crwdns44818:0crwdne44818:0",
-  "headingText": "crwdns44820:0$vuetifycrwdne44820:0",
+  "heading": "crwdns56727:0crwdne56727:0",
+  "headingText": "crwdns56729:0$vuetifycrwdne56729:0",
   "firstHeader": "crwdns37560:0crwdne37560:0",
   "secondHeader": "crwdns37562:0crwdne37562:0",
   "thirdHeader": "crwdns37564:0crwdne37564:0",
@@ -10,9 +10,6 @@
       "desc": "crwdns37568:0crwdne37568:0"
     }
   },
-  "components": [
-    "crwdns37570:0$vuetifycrwdne37570:0"
-  ],
   "routerHeading": "crwdns37572:0crwdne37572:0",
   "routerText1": "crwdns37574:0[vue-router]crwdne37574:0",
   "functions": {

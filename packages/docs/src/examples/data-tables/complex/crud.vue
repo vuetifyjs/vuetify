@@ -54,19 +54,19 @@
         </v-dialog>
       </v-toolbar>
     </template>
-    <template v-slot:item.action="{ item }">
+    <template v-slot:item.actions="{ item }">
       <v-icon
         small
         class="mr-2"
         @click="editItem(item)"
       >
-        edit
+        mdi-pencil
       </v-icon>
       <v-icon
         small
         @click="deleteItem(item)"
       >
-        delete
+        mdi-delete
       </v-icon>
     </template>
     <template v-slot:no-data>
@@ -82,7 +82,7 @@
       headers: [
         {
           text: 'Dessert (100g serving)',
-          align: 'left',
+          align: 'start',
           sortable: false,
           value: 'name',
         },
@@ -90,7 +90,7 @@
         { text: 'Fat (g)', value: 'fat' },
         { text: 'Carbs (g)', value: 'carbs' },
         { text: 'Protein (g)', value: 'protein' },
-        { text: 'Actions', value: 'action', sortable: false },
+        { text: 'Actions', value: 'actions', sortable: false },
       ],
       desserts: [],
       editedIndex: -1,

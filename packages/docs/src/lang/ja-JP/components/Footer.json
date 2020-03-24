@@ -1,5 +1,13 @@
 {
+  "heading": "# Footer",
+  "headingText": "`v-footer`コンポーネントは、あなたのサイト内のどのページからでもアクセスしたい一般的な情報を表示するために使われます。",
   "examples": {
+    "usage": {
+      "desc": "最も単純な形式の `v-footer` コンポーネントはコンテナです。"
+    },
+    "absolute": {
+      "desc": "`absolute` propを指定すると、フッターを親コンテナの一番下に絶対的に配置します。"
+    },
     "company-footer": {
       "desc": "フッターコンポーネントは、企業や団体のサイトでよくあるリンクを掲載した下部分になります。"
     },
@@ -11,6 +19,8 @@
     }
   },
   "props": {
+    "absolute": "Mixins.Positionable.props.absolute",
+    "fixed": "Mixins.Positionable.props.fixed",
     "inset": "アプリケーションからのツールバーの位置を `v-navigation-drawer`で指定します。"
   }
 }

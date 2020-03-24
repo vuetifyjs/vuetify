@@ -23,7 +23,10 @@
         v-for="item in items"
         :key="item"
       >
-        <v-card flat color="basil">
+        <v-card
+          color="basil"
+          flat
+        >
           <v-card-text>{{ text }}</v-card-text>
         </v-card>
       </v-tab-item>

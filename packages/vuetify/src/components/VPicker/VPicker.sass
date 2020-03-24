@@ -17,6 +17,7 @@
 
 .v-picker--full-width
   display: flex
+  width: 100%
 
   > .v-picker__body
     margin: initial
@@ -69,10 +70,21 @@
     width: $picker-landscape-title-width
     position: absolute
     top: 0
-    left: 0
     height: 100%
     z-index: 1
 
+    +ltr()
+      left: 0
+
+    +rtl()
+      right: 0
+
   .v-picker__body:not(.v-picker__body--no-title),
   .v-picker__actions:not(.v-picker__actions--no-title)
-    margin-left: $picker-landscape-title-width
+    +ltr()
+      margin-left: $picker-landscape-title-width
+      margin-right: 0
+
+    +rtl()
+      margin-right: $picker-landscape-title-width
+      margin-left: 0

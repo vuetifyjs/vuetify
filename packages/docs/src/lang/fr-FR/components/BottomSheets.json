@@ -1,8 +1,6 @@
 {
+  "usageText": "Ici, nous affichons une liste d’exemple d’actions pouvant être présentes dans une application.",
   "examples": {
-    "usage": {
-      "desc": "Ici, nous affichons une liste d’exemple d’actions pouvant être présentes dans une application."
-    },
     "inset": {
       "heading": "### Inset",
       "desc": "Les feuilles inférieures peuvent être inséparables, réduisant leur largeur maximale sur le bureau à 70%. Cela peut être réduit manuellement en utilisant le prop `width`."

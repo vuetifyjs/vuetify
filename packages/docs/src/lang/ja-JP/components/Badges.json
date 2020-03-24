@@ -1,16 +1,37 @@
 {
   "heading": "# バッジ",
   "headingText": "`v-badge`コンポーネントは、アバターのようなアイコンまたはテキストに上付きまたは下付きでコンテンツを表示し、情報を強調したり、特定の要素に注意を向けたりします。バッジ内のコンテンツには通常、数字またはアイコンが含まれています。",
+  "usageText": "最も単純な形式のバッジは、ラップするコンテンツの右上に表示され、badge slotが必要です。",
   "examples": {
-    "visibility": {
-      "heading": "表示"
+    "tabs": {
+      "heading": "### タブ",
+      "desc": "バッジは、さまざまな方法でユーザーに情報を伝える上で役立ちます。"
     },
-    "inline": {
-      "desc": "Badge はテキスト内部に配置することができます。"
+    "hover": {
+      "heading": "### ホバー表示",
+      "desc": "たとえば、ホバー時にバッジを表示するなど、可視性コントロールを使用して様々な操作を行えます。"
     },
-    "icon": {
-      "heading": "アイコン",
-      "desc": "現在サポートされているアイコンセットのすべてを使用することができます。"
+    "dynamic": {
+      "heading": "### 動的通知",
+      "desc": "動的コンテンツにバッジを組み込んで、通知システムなどを作成できます。"
+    },
+    "customization": {
+      "heading": "### カスタマイズのオプション",
+      "desc": "`v-badge`コンポーネントは柔軟性があり、多くの要素でさまざまなユースケースで使用できます。場所を微調整するオプションは、**offset-x** および **offset-y** propsからも利用できます。"
     }
+  },
+  "props": {
+    "avatar": "**badge**スロットで `v-avatar` を使用するためのバッジパディングを削除します。",
+    "bordered": "**dot**プロパティを使用する場合、デフォルトで**2px**およびバッジの周囲に**1.5px**のボーダーを適用します。",
+    "content": "バッジにテキストとして挿入するコンテンツ。",
+    "dot": "バッジのサイズを縮小し、その内容を非表示にします",
+    "icon": "バッジで使用される特定のアイコンを指定します。",
+    "inline": "ラッピング要素とインラインになるようにバッジを移動します。 **left** prop の使用をサポートします。",
+    "label": "バッジに使用される **aria-label** ",
+    "offsetX": "X軸のオフセット",
+    "offsetY": "Y軸のオフセット",
+    "bottom": "Mixins.Positionable.props.bottom",
+    "left": "Mixins.Positionable.props.left",
+    "transition": "Mixins.Transitionable.props.transition"
   }
 }

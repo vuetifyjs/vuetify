@@ -672,4 +672,166 @@ describe('VDataTable.ts', () => {
 
     expect(input).toHaveBeenNthCalledWith(2, [])
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10392
+  it('should search group-by column', async () => {
+    const headers = [
+      {
+        text: 'Name',
+        value: 'name',
+      },
+      {
+        text: 'ID',
+        value: 'id',
+      },
+    ]
+
+    const items = [
+      {
+        name: 'Assistance',
+        id: 1,
+      },
+      {
+        name: 'Candidat',
+        id: 2,
+      },
+    ]
+
+    const wrapper = mountFunction({
+      propsData: {
+        headers,
+        items,
+        itemKey: 'id',
+        groupBy: 'name',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ search: 'candidat' })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10289
+  it('should render item slot when using group-by function', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        itemKey: 'name',
+        items: testItems.slice(0, 2),
+        groupBy: 'name',
+      },
+      scopedSlots: {
+        item () {
+          return this.$createElement('div', ['scoped'])
+        },
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10392
+  it('should emit pagination event when filtering', async () => {
+    const headers = [
+      {
+        text: 'Name',
+        value: 'name',
+      },
+      {
+        text: 'ID',
+        value: 'id',
+      },
+    ]
+
+    const items = [
+      {
+        name: 'Assistance',
+        id: 1,
+      },
+      {
+        name: 'Candidat',
+        id: 2,
+      },
+    ]
+
+    const pagination = jest.fn()
+
+    const wrapper = mountFunction({
+      propsData: {
+        headers,
+        items,
+        itemKey: 'id',
+      },
+      listeners: {
+        pagination,
+      },
+    })
+
+    expect(pagination).toHaveBeenLastCalledWith({
+      itemsLength: 2,
+      itemsPerPage: 10,
+      page: 1,
+      pageCount: 1,
+      pageStart: 0,
+      pageStop: 2,
+    })
+
+    wrapper.setProps({ search: 'candidat' })
+    await wrapper.vm.$nextTick()
+
+    expect(pagination).toHaveBeenLastCalledWith({
+      itemsLength: 1,
+      itemsPerPage: 10,
+      page: 1,
+      pageCount: 1,
+      pageStart: 0,
+      pageStop: 1,
+    })
+
+    expect(pagination).toHaveBeenCalledTimes(2)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10715
+  // NOTE: This test currently succeeds regardless of fix
+  // It seems like the test environment does not double
+  // fire the events in the same way the browser does
+  it('should not emit too many pagination events', async () => {
+    const headers = [
+      {
+        text: 'Name',
+        value: 'name',
+      },
+      {
+        text: 'ID',
+        value: 'id',
+      },
+    ]
+
+    const items = [
+      {
+        name: 'Assistance',
+        id: 1,
+      },
+      {
+        name: 'Candidat',
+        id: 2,
+      },
+    ]
+
+    const wrapper = mountFunction({
+      propsData: {
+        headers,
+        itemKey: 'id',
+        serverItemsLength: 0,
+      },
+    })
+
+    wrapper.setProps({ items, serverItemsLength: items.length })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.emitted().pagination).toHaveLength(2)
+  })
 })

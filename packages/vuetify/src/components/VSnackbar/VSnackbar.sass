@@ -49,13 +49,15 @@
     padding: $snackbar-content-padding
     width: 100%
 
-    .v-btn.v-btn
-      color: $snackbar-color
+    .v-btn
       flex: 0 0 auto
       height: auto
       min-width: auto
       padding: 8px
       width: auto
+
+      &--text, &--icon, &--outlined
+        color: $snackbar-color
 
       +ltr()
         margin: 0 $snackbar-btn-margin-right 0 $snackbar-btn-margin-left
@@ -65,9 +67,6 @@
 
       &__content
         margin: -2px
-
-      &::before
-        display: none
 
   &--multi-line &__content
     height: auto

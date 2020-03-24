@@ -25,6 +25,8 @@
     <base-ecosystems-menu />
 
     <base-support-menu />
+
+    <base-locales-menu />
   </v-app-bar>
 </template>
 

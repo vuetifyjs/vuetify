@@ -36,6 +36,6 @@
     "shaped": "Applique un grand rayon de bordure en haut à gauche et en bas à droite de la carte."
   },
   "events": {
-    "change": "Components.Inputs.events.change"
+    "change": "Émis lorsque l'entrée est modifiée par l'interaction utilisateur"
   }
 }

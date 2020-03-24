@@ -27,7 +27,7 @@
     computed: {
       ...get('route/params@*'),
       contributionGuide () {
-        return this.parseLink('', 'contribute', `/${this.lang}/getting-started/contributing`)
+        return this.parseLink('', 'contribute', `/getting-started/contributing`)
       },
       contributionLanguageCrowdin () {
         return this.parseLink('', 'Crowdin', `/${this.namespace}/${this.page}`)

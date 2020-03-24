@@ -120,25 +120,18 @@
     "textarea": "Textarea 使用备用样式",
     "toggleKeys": "切换输入键值的数组（如果支持切换的话）",
     "type": "设置输入类型",
-    "value": "Components.Inputs.props.value",
     "shaped": "如果 `outlined` 则为圆形，如果 `filled` 则增加 `border-radius`。必须与 `outlined` 或 `filled` 一起使用"
   },
   "slots": {
-    "append": "Components.Inputs.slots.append",
     "append-outer": "在输入内容内追加一个项目",
-    "prepend": "Components.Inputs.slots.prepend",
     "prepend-inner": "在输入内容中预设一个项目"
   },
   "events": {
-    "blur": "当组件不再聚焦时发出",
-    "change": "Components.Inputs.events.change",
-    "click:append": "Components.Inputs.events['click:append']",
+    "blur": "当输入焦点时发出",
+    "change": "当用户交互更改输入时发出",
     "click:append-outer": "单击附加的外部图标时发出",
     "click:clear": "单击可清除图标时发出",
-    "click:prepend": "Components.Inputs.events['click:prepend']",
     "click:prepend-inner": "单击前置的内部图标时发出",
-    "focus": "组件聚焦时发出",
-    "keydown": "当 **any** 键被按下时，文本字段必须被聚焦",
-    "update:error": "Mixins.Validatable.events['update:error']"
+    "focus": "组件聚焦时发出"
   }
 }

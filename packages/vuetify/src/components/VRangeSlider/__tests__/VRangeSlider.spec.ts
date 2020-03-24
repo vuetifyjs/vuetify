@@ -220,4 +220,12 @@ describe('VRangeSlider.ts', () => {
       expect(wrapper.vm.internalValue).toEqual([0, 0])
     })
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/6843
+  it('should be uniq id', async () => {
+    const wrapper = mountFunction()
+    const [min, max] = wrapper.vm.genInput()
+
+    expect(min.data.attrs.id).not.toEqual(max.data.attrs.id)
+  })
 })

@@ -96,6 +96,32 @@ describe('VData.ts', () => {
     }))
   })
 
+  it('should group items by deep keys', async () => {
+    const render = jest.fn()
+    const items = [
+      { id: 1, text: 'foo', foo: { bar: 'one' } },
+      { id: 2, text: 'bar', foo: { bar: 'two' } },
+      { id: 3, text: 'baz', foo: { bar: 'one' } },
+    ]
+
+    const wrapper = mountFunction({
+      propsData: {
+        items,
+        groupBy: ['foo.bar'],
+      },
+      scopedSlots: {
+        default: render,
+      },
+    })
+
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
+      groupedItems: {
+        one: [items[0], items[2]],
+        two: [items[1]],
+      },
+    }))
+  })
+
   it('should group items with a custom group function', async () => {
     const render = jest.fn()
     const items = [
@@ -409,5 +435,48 @@ describe('VData.ts', () => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10372
+  it('should handle setting itemsPerPage to zero', async () => {
+    const render = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        items: [
+          { id: 1, text: 'foo' },
+          { id: 2, text: 'bar' },
+        ],
+        itemsPerPage: 0,
+      },
+      scopedSlots: {
+        default: render,
+      },
+    })
+
+    await wrapper.vm.$nextTick()
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
+      pagination: expect.objectContaining({
+        itemsPerPage: 0,
+        page: 1,
+        pageCount: 1,
+        pageStart: 0,
+        pageStop: 0,
+      }),
+    }))
+
+    wrapper.setProps({
+      itemsPerPage: 1,
+    })
+
+    await wrapper.vm.$nextTick()
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
+      pagination: expect.objectContaining({
+        itemsPerPage: 1,
+        page: 1,
+        pageCount: 2,
+        pageStart: 0,
+        pageStop: 1,
+      }),
+    }))
   })
 })

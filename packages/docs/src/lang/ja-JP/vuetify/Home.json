@@ -12,19 +12,24 @@
       "title": "セマンティックコンポーネント"
     },
     "scaffolding": {
-      "text": "Vuetifyは、Vueの機能をVue CLI 3のプラグインとしてサポートします。コマンドひとつで素晴らしいアイデアを形にしましょう。",
+      "text": "Vuetifyは、Vueの機能をVue CLI のプラグインとしてサポートします。コマンドひとつで素晴らしいアイデアを形にしましょう。",
       "title": "プロジェクトテンプレート"
     }
   },
   "getHelp": "ヘルプ",
   "getStarted": "はじめよう",
   "github": "Github",
+  "madeWithVuetify": "## Vuetifyで作成されたプロジェクト",
+  "madeWithVuetifyText": "Vuetifyで作成されたプロジェクトのコレクションです。エコシステムを用いて他の人が作成している事例をご覧ください。",
   "materialDesign": "マテリアルデザイン",
   "mit": "MIT ライセンス",
+  "openCollective": "Open Collective",
   "premiumThemes": "## プレミアムテーマ",
   "premiumThemesText": "公式ショップのプレミアムテーマでプロジェクトを次のレベルに引き上げましょう。いずれもVuetifyで構築されています。",
   "proudlySponsoredBy": "プロジェクトスポンサー",
+  "proundlySponsoredByText": "Vuetifyの継続的な開発と保守は、これらの寛大なスポンサーによって可能となりました:",
   "seeMoreThemes": "テーマをもっと見る",
   "whyVuetify": "Vuetifyを選ぶ理由",
+  "whyVuetifyText": "Vueを使用したアプリケーションの構築がかつてないほど容易になりました。成功するために必要なすべてのツールで開発プロセスを強化してください。",
   "whyVuetifyText2": "Vuetifyを選ぶ理由"
 }

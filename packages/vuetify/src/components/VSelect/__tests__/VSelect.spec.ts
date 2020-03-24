@@ -268,7 +268,7 @@ describe('VSelect.ts', () => {
 
     const wrapper = mountFunction({
       propsData: {
-        menuProps: { contentClass: 'v-menu-class' },
+        menuProps: { contentClass: 'v-menu-class', eager: true },
         items,
       },
     })

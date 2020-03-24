@@ -1,10 +1,8 @@
 {
   "heading": "# 横幅",
   "headingText": "`v-banner` 组件用于通过 1-2 个操作向用户发送中级中断消息。它有两个变量，**single-line** 和 **multi-line**。这些变量在和你的消息和动作一起使用时包含图标。",
+  "usageText": "横幅可以有 1-2 行文本、动作和图标。",
   "examples": {
-    "usage": {
-      "desc": "横幅可以有 1-2 行文本、动作和图标。"
-    },
     "single-line": {
       "heading": "### 单行（桌面端）",
       "desc": "**Single-line** VBanner 用于少量信息，推荐仅在桌面分辨率下实现。你可以启用 **sticky** 属性来保证内容被固定到屏幕上（注意：IE11 不工作）。参阅更多 [sticky positioning here](https://developer.mozilla.org/en-US/docs/Web/CSS/position)。"

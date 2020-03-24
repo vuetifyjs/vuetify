@@ -1,4 +1,55 @@
 {
-  "heading": "# Expansion Panels",
-  "headingText": "`v-expansion-panel`コンポーネントは、大量の情報から垂直方向のスペースを低減するために有用です。コンポーネントのデフォルトの機能は、一度に1つの拡張パネル本体を表示することです。しかし、 `multiple`プロパティで、明示的に開いたままにすることができます。"
+  "heading": "# エクスパンションパネル",
+  "headingText": "`v-expansion-panel`コンポーネントは、大量の情報から垂直方向のスペースを低減するために有用です。コンポーネントのデフォルトの機能は、一度に1つのエクスパンションパネル本体を表示することです。しかし、 `multiple`プロパティで、明示的に開いたままにすることができます。",
+  "examples": {
+    "usage": {
+      "desc": "最も単純な形式なエクスパンションパネルでは、項目のリストが表示されます。"
+    },
+    "external": {
+      "heading": "### 外部からの制御",
+      "desc": "エクスパンションパネルは、`v-model`を変更することで外部から制御できます。その値は、現在開いているエクスパンションパネルのコンテンツの 0 から始まるインデックスに対応します。`multiple`propが使用されている場合、それは開いている項目のインデックスを含む配列です。"
+    },
+    "disabled": {
+      "heading": "### 無効化",
+      "desc": "エクスパンションパネルとそのコンテンツの両方は、 `disabled`propを使用して無効にできます。"
+    },
+    "readonly": {
+      "heading": "### Readonly",
+      "desc": "`readonly` prop は`disabled`と同じことをしますが、外観はそのままでスタイルには触れません。"
+    },
+    "custom-icons": {
+      "heading": "### カスタムアイコン",
+      "desc": "展開アクションアイコンは、`expand-icon` prop または`actions` slotでカスタマイズすることができます。"
+    },
+    "focusable": {
+      "heading": "### Focusable",
+      "desc": "`focusable` propでフォーカス可能にすることができます。"
+    },
+    "advanced": {
+      "uninverted": true
+    }
+  },
+  "props": {
+    "v-expansion-panels": {
+      "disabled": "expansion-panel全体を無効にします。",
+      "focusable": "expansion-panel のヘッダーをフォーカス可能にします。",
+      "readonly": "expansion-panel 全体を読み取り専用にします。"
+    },
+    "v-expansion-panel": {
+      "disabled": "expansion-panelのコンテンツを無効にします。"
+    },
+    "v-expansion-panel-header": {
+      "expandIcon": "展開アクション アイコンを設定する",
+      "hideActions": "コンテンツ ヘッダーの展開アイコンを非表示にする",
+      "ripple": "Mixins.Rippleable.props.ripple"
+    }
+  },
+  "events": {
+    "v-expansion-panel": {
+      "click": "マウスクリック時のイベント"
+    },
+    "v-expansion-panel-header": {
+      "click": "マウスクリック時のイベント"
+    }
+  }
 }

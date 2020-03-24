@@ -29,9 +29,6 @@
     {
       "q": "### router 를 포함한 codepen 템플릿이 있나요?",
       "a": "네. [Vuetify Codepen Router Template](https://codepen.io/johnjleider/pen/PMZvpr)"
-    },
-    {
-      "q": "### 어플리케이션이 제대로 표시되지 않습니다."
     }
   ]
 }

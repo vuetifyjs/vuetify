@@ -40,6 +40,11 @@
       "a": "Yes. [Vuetify Codepen Router Template](https://codepen.io/johnjleider/pen/PMZvpr)."
     },
     {
+      "q": "### How do I extend Vuetify components",
+      "a": "Vuetify components are easily extendable by importing it and using the `extends` option in vue. [Codepen Example](https://codepen.io/whoistobias/pen/yLNgjwy)",
+      "s": "js_extend_component"
+    },
+    {
       "q": "### My application does not look correct",
       "a": "Vuetify requires the use of the `v-app` component. It should wrap your entire application and is the center point for much of the framework functionality including themes. Ensure that you are following the proper markup documented in the [Application](/components/application) page."
     },
@@ -75,7 +80,7 @@
     },
     {
       "q": "### Relative images are not working in `v-card` , `v-img` and other custom vuetify components",
-      "a": "Vue loader converts relative paths into require functions automatically for you. Unfortunately, this is not the case when it comes to custom components. You can circumvent this issue by using `require`. If you're using Vuetify as a Vue CLI 3 plugin, you can edit your project's [vue.config.js](https://cli.vuejs.org/config/#vue-config-js) file by modifying the options for [vue-loader](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader).",
+      "a": "Vue loader converts relative paths into require functions automatically for you. Unfortunately, this is not the case when it comes to custom components. You can circumvent this issue by using `require`. If you're using Vuetify as a Vue CLI plugin, you can edit your project's [vue.config.js](https://cli.vuejs.org/config/#vue-config-js) file by modifying the options for [vue-loader](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader).",
       "s": "html_img_require"
     },
     {

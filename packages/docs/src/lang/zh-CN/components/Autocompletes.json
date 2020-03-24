@@ -1,10 +1,8 @@
 {
   "heading": "# 自动完成",
   "headingText": "`v-autoompalty` 组件提供简单灵活的输入提示功能。当搜索大量数据甚至从 API 中动态请求信息时是十分有用的。",
+  "usageText": "自动完成组件扩展了`v-select`并为其增加了过滤项目的能力。",
   "examples": {
-    "usage": {
-      "desc": "自动完成组件扩展了`v-select`并为其增加了过滤项目的能力。"
-    },
     "api": {
       "heading": "### 搜索 API",
       "desc": "轻松绑定动态数据并创造独特的体验。`v-autocomplete` 的扩展的支持列表使得对输入的各个方面进行调优变得很容易。"
@@ -38,33 +36,8 @@
     "allowOverflow": "允许菜单溢出屏幕",
     "autoSelectFirst": "搜索时，总是选中第一个选项",
     "dark": "Components.Inputs.props.dark",
-    "filled": "Components.TextFields.props.filled",
     "filter": "搜索时使用的过滤算法。[example](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/components/VAutocomplete/VAutocomplete.ts#L36)",
     "hideNoData": "当没有要显示的选项时，隐藏菜单。用于防止在异步获取结果之前打开菜单。也有打开菜单的效果，当“ `items` 数组改变，如果还没有打开。",
-    "noFilter": "搜索时不要应用过滤。在过滤服务器端数据时非常有用",
-    "searchInput": "搜索值。 可以和 `.sync` 修饰符一起使用。",
-    "value": "Components.Inputs.props.value"
-  },
-  "slots": {
-    "append": "Components.Inputs.slots.append",
-    "append-item": "Components.Selects.slots.append-item",
-    "append-outer": "Components.TextFields.slots.append-outer",
-    "item": "Components.Selects.slots.item",
-    "no-data": "Mixins.Filterable.slots.noData",
-    "prepend": "Components.Inputs.slots.prepend",
-    "prepend-inner": "Components.TextFields.slots.prepend-inner",
-    "prepend-item": "Components.Selects.slots.prepend-item",
-    "selection": "Components.Selects.slots.selection"
-  },
-  "events": {
-    "change": "Components.Inputs.events.change",
-    "click:append": "Components.Inputs.events['click:append']",
-    "click:append-outer": "Components.TextFields.events['click:append-outer']",
-    "click:clear": "Components.TextFields.events['click:clear']",
-    "click:prepend": "Components.Inputs.events['click:prepend']",
-    "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
-    "update:error": "Mixins.Validatable.events['update:error']",
-    "update:list-index": "Components.Selects.events['update:list-index']",
-    "update:search-input": "`search-input.sync` 事件"
+    "noFilter": "搜索时不要应用过滤。在过滤服务器端数据时非常有用"
   }
 }

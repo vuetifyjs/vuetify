@@ -1,1 +1,15 @@
-{}
+{
+  "heading": "# プログラムによるスクロール",
+  "headingText": "`$vuetify`オブジェクトにある`goTo`メソッドを利用することで、アプリケーションをスクロールさせることができます。このメソッドは数種類のターゲットセレクタをサポートしています。また、組み込みのイージング関数を利用したスムーススクロールを含む、オプションをサポートしています。",
+  "loremIpsum": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
+  "examples": {
+    "usage": {
+      "desc": "`goTo`メソッドは`target`と`options`の2つの引数をとります。`target`には、ページトップからのオフセットをピクセル数で指定する、Css セレクタを指定する、もしくはElementの参照を指定することができます。`options`は`duration`、 `easing`、`container`、`offset`を含むオブジェクトを指定します。"
+    }
+  },
+  "routerHeading": "## routerでの使用",
+  "routerText1": "**goTo** 関数は、個別にインポートして、どこでも呼び出すことができます。これは、[vue-router](https://router.vuejs.org/ja/) にフックする場合に特に便利です。",
+  "functions": {
+    "goTo": "指定されたオプションを使用して、ターゲットで指定された場所にスクロールします。"
+  }
+}

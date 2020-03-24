@@ -1,7 +1,30 @@
 {
+  "heading": "# プログレスバー （円形）",
+  "headingText": "`v-progress-circular` コンポーネントは、円形でデータを表示します。また、ロードを描写するために不定状態にすることもできます。",
   "examples": {
+    "usage": {
+      "desc": "円形プログレスバーは、デフォルトで、セカンダリカラーを使用します。"
+    },
     "circular-colored": {
-      "heading": "### 色付き"
+      "heading": "### 色付き",
+      "desc": "`color` propを使用して、`v-progress-circular`に任意の色を設定できます。"
+    },
+    "circular-indeterminate": {
+      "heading": "### Indeterminate （スピナー）",
+      "desc": "`indeterminate` propを設定すると `v-progress-circular` は無期限でアニメーションし続けます。"
+    },
+    "circular-size-and-width": {
+      "heading": "### サイズ & 幅（太さ）",
+      "desc": "`size`および` width` propを使用すると、 `v-progress-circular`コンポーネントの大きさと円の太さを簡単に変更できます。"
+    },
+    "circular-rotate": {
+      "heading": "### ローテート",
+      "desc": "`rotate`propは、` v-progress-circular`の原点をカスタマイズする機能を提供します。"
     }
+  },
+  "props": {
+    "fill": "円の塗りつぶしの色を設定します。",
+    "indeterminate": "常にアニメーションします。読み込みの進行状況が不明な場合に使用します。",
+    "rotate": "円の始点を角度単位で指定します"
   }
 }

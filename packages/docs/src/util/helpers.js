@@ -1,3 +1,6 @@
+// Utilities
+import { preferredLanguage } from '@/router/util'
+
 // Must be called in Vue context
 export function goTo (id) {
   this.$vuetify.goTo(id).then(() => {
@@ -19,6 +22,7 @@ export function getComponent (type) {
     case 'checklist': return 'doc-checklist'
     case 'example': return 'doc-example'
     case 'examples': return 'doc-examples'
+    case 'functional': return 'doc-functional'
     case 'heading': return 'base-heading'
     case 'img': return 'doc-img'
     case 'text': return 'doc-text'
@@ -39,29 +43,30 @@ export function getComponent (type) {
 }
 
 export function parseLink (match, text, link) {
-  let attrs = ''
-  let icon = ''
-  let linkClass = 'v-markdown--link'
-
-  // External link
-  if (
+  const isInternal = !(
     link.indexOf('http') > -1 ||
     link.indexOf('mailto') > -1
-  ) {
-    attrs = `target="_blank" rel="noopener"`
-    icon = 'open-in-new'
-    linkClass += ' v-markdown--external'
-  // Same page internal link
-  } else if (link.charAt(0) === '#') {
-    icon = 'pound'
-    linkClass += ' v-markdown--same-internal'
-  // Different page internal link
-  } else {
-    icon = 'page-next'
-    linkClass += ' v-markdown--internal'
+  )
+  const isSamePage = link.startsWith('#')
+
+  const attrs = isInternal ? '' : `target="_blank" rel="noopener"`
+  const classes = 'v-markdown--link'
+  const icon = isInternal ? 'page-next' : 'open-in-new'
+  const [url = '', hash = ''] = link.split('#')
+
+  if (isInternal && !isSamePage) {
+    // Reset link
+    link = `/${preferredLanguage}`
+
+    // Remove leading/trailing slashes
+    if (url) link += `/${url.replace(/^\/|\/$/, '')}/`
+    // Append hash
+    if (hash) link += `#${hash}`
+  } else if (isInternal && hash) {
+    link = `#${hash}`
   }
 
-  return `<a href="${link}" ${attrs} class="${linkClass}">${text}<i class="v-icon mdi mdi-${icon}"></i></a>`
+  return `<a href="${link}" ${attrs} class="${classes}">${text}<i class="v-icon mdi mdi-${icon}"></i></a>`
 }
 
 export async function waitForReadystate () {

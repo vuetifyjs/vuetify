@@ -1,8 +1,26 @@
 {
   "heading": "# パンくずリスト (Breadcrumbs)",
+  "headingText": "`v-breadcrumbs` コンポーネントは、ページのナビゲーションヘルパーです。**Material Icons** のアイコンまたは文字を区切りとして使用できます。オブジェクトの配列は、コンポーネントの**items**プロパティに渡すことができます。さらに、`v-breadcrumbs-item`またはその他のカスタムマークアップを利用して、パンくずリストをより細かく制御するためのスロットが存在します。",
+  "headerAlert1": "デフォルトでは、 `v-breadcrumbs`はネストされたパスの現在のページまでの、すべてのbreadcrumbを無効にします。 `items`配列の該当する各breadcrumbで `exact: true` を使用することで、この動作を防ぐことができます。",
+  "usageText": "Breadcrumbs はデフォルトではテキストで区切られます。あらゆる文字を使用することができます。",
   "examples": {
     "icon-dividers": {
+      "heading": "### アイコンでの区切り",
       "desc": "icon 変数を使用することで、 Material Design Icon に存在するアイコンを Breadcrumbs に使用することができます。"
+    },
+    "item-slot": {
+      "heading": "### Item スロット",
+      "desc": "'item' スロットを使用して、各breadcrumbをカスタマイズできます。"
+    },
+    "large": {
+      "desc": "Large指定されたパンくずリストはフォント サイズが大きくなります。"
+    },
+    "divider": {
+      "desc": "区切り記号は、`divider` プロパティを使用して設定できます。"
     }
+  },
+  "props": {
+    "divider": "項目間の区切り文字を指定します。",
+    "icons": "アイテム間の区切りを [v-icon](/components/icons) で指定します。"
   }
 }

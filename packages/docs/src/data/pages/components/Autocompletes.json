@@ -34,6 +34,11 @@
         },
         {
           "type": "alert",
+          "lang": "Components.Selects.autoAlert",
+          "value": "warning"
+        },
+        {
+          "type": "alert",
           "lang": "Components.Selects.autocompleteAlert",
           "value": "info"
         }

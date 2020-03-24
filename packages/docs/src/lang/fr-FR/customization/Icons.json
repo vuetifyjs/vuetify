@@ -1,5 +1,6 @@
 {
   "heading": "# Icônes",
+  "headingText": "Vuetify est fourni avec la prise en charge de Material Icons, Material Design Icons, de Font Awesome 4 et de Font Awesome 5. Par défaut, les applications utiliseront [Material Design Icons](https://materialdesignicons.com/).",
   "usageText1": "Afin de changer votre bibliothèque de polices, ajoutez l'option `iconfont` lors de l'instanciation.",
   "usageText2": "L'utilisation d'une option prédéfinie préféra les valeurs par défaut basées sur le préréglage sélectionné. Ceci remplacera les valeurs par défaut des composants ayant des valeurs par défaut **icône** . Pour plus d'informations, consultez la valeur par défaut [valeurs de preset de l'icône](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/icons/presets).",
   "installHeader": "## Installation de polices d'icônes",
@@ -18,7 +19,7 @@
   "installFA": "### Installer Font Awesome 5 Icons",
   "installFAText1": "La façon la plus simple de commencer avec **FontAwesome** est d'utiliser un CDN. Dans la section head de votre `index.html` principal placez ce snippet :",
   "installFAText2": "Pour installer localement, vous pouvez pull la version [Free](https://fontawesome.com/) de **FontAwesome** en utilisant votre gestionnaire de paquets préféré :",
-  "installFAText3": "Dans votre point d'entrée principal, il vous suffit d'importer le paquet **all.css**. Si vous utilisez un projet configuré de webpack, vous devrez configurer le support des fichiers `.css` en utilisant le webpack [css loader](https://github.com/webpack-contrib/css-loader). Si vous utilisez déjà [Vue CLI 3](https://cli.vuejs.org/), cela est fait pour vous automatiquement.",
+  "installFAText3": "Dans votre point d'entrée principal, il vous suffit d'importer le paquet **all.css**. Si vous utilisez un projet configuré de webpack, vous devrez configurer le support des fichiers `.css` en utilisant le webpack [css loader](https://github.com/webpack-contrib/css-loader). Si vous utilisez déjà [Vue CLI](https://cli.vuejs.org/), cela est fait pour vous automatiquement.",
   "installFA4": "### Installer Font Awesome 4 Icons",
   "installFA4Text1": "Comme ci-dessus. Installer FontAwesome via CDN est la façon la plus simple de l'intégrer dans votre projet :",
   "installFA4Text2": "L'installation de FontAwesome**4** est la même que sa version plus récente, juste à partir d'un autre dépôt. Vous ciblerez le dépôt `font-awesome` par opposition au `@fortawesome`.",

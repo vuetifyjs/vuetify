@@ -17,12 +17,12 @@
     "price": "$99",
     "url": "https://store.vuetifyjs.com/product/shopify-e-commerce-theme",
     "demoUrl": [
-      "https://store-beta.vuetifyjs.com"
+      "https://store.vuetifyjs.com"
     ]
   },
   "material-kit": {
     "title": "Material Kit",
-    "description": "A complete set of Material Inspired themes built with Vuetify on top of Vue CLI 3.",
+    "description": "A complete set of Material Inspired themes built with Vuetify on top of Vue CLI.",
     "src": "https://cdn.vuetifyjs.com/images/starter/vuetify-material-kit.png",
     "price": "$55",
     "url": "https://store.vuetifyjs.com/product/material-kit-theme",
@@ -32,7 +32,7 @@
   },
   "alpha-theme": {
     "title": "Alpha Theme",
-    "description": "Complete theme experience including enhanced Vue CLI 3, full documentation, 5 custom components and much more!",
+    "description": "Complete theme experience including enhanced Vue CLI, full documentation, 5 custom components and much more!",
     "src": "https://cdn.vuetifyjs.com/images/starter/vuetify-alpha-theme.png",
     "price": "$25",
     "url": "https://store.vuetifyjs.com/product/vuetify-alpha-theme",
@@ -77,9 +77,9 @@
   "parallax": {
     "title": "Parallax",
     "description": "This beautiful single page parallax is a great home page for any application.",
-    "src": "https://cdn.vuetifyjs.com/images/starter/vuetify-parallax-starter.png",
+    "src": "https://cdn.vuetifyjs.com/images/starter/parallax-2020-large.png",
     "free": true,
-    "url": "https://github.com/vuetifyjs/parallax-starter",
+    "url": "https://github.com/vuetifyjs/vuetify/blob/master/packages/docs/src/themes/parallax-starter/index.html",
     "demoUrl": [
       "/themes/parallax-starter"
     ]

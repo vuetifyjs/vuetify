@@ -1,58 +1,76 @@
 <template>
-  <form>
-    <v-text-field
-      v-model="name"
-      v-validate="'required|max:10'"
-      :counter="10"
-      :error-messages="errors.collect('name')"
-      label="Name"
-      data-vv-name="name"
-      required
-    ></v-text-field>
-    <v-text-field
-      v-model="email"
-      v-validate="'required|email'"
-      :error-messages="errors.collect('email')"
-      label="E-mail"
-      data-vv-name="email"
-      required
-    ></v-text-field>
-    <v-select
-      v-model="select"
-      v-validate="'required'"
-      :items="items"
-      :error-messages="errors.collect('select')"
-      label="Select"
-      data-vv-name="select"
-      required
-    ></v-select>
-    <v-checkbox
-      v-model="checkbox"
-      v-validate="'required'"
-      :error-messages="errors.collect('checkbox')"
-      value="1"
-      label="Option"
-      data-vv-name="checkbox"
-      type="checkbox"
-      required
-    ></v-checkbox>
+  <ValidationObserver ref="observer" v-slot="{ validate, reset }">
+    <form>
+      <ValidationProvider v-slot="{ errors }" name="Name" rules="required|max:10">
+        <v-text-field
+          v-model="name"
+          :counter="10"
+          :error-messages="errors"
+          label="Name"
+          required
+        ></v-text-field>
+      </ValidationProvider>
+      <ValidationProvider v-slot="{ errors }" name="email" rules="required|email">
+        <v-text-field
+          v-model="email"
+          :error-messages="errors"
+          label="E-mail"
+          required
+        ></v-text-field>
+      </ValidationProvider>
+      <ValidationProvider v-slot="{ errors }" name="select" rules="required">
+        <v-select
+          v-model="select"
+          :items="items"
+          :error-messages="errors"
+          label="Select"
+          data-vv-name="select"
+          required
+        ></v-select>
+      </ValidationProvider>
+      <ValidationProvider v-slot="{ errors, valid }" rules="required" name="checkbox">
+        <v-checkbox
+          v-model="checkbox"
+          :error-messages="errors"
+          value="1"
+          label="Option"
+          type="checkbox"
+          required
+        ></v-checkbox>
+      </ValidationProvider>
 
-    <v-btn class="mr-4" @click="submit">submit</v-btn>
-    <v-btn @click="clear">clear</v-btn>
-  </form>
+      <v-btn class="mr-4" @click="submit">submit</v-btn>
+      <v-btn @click="clear">clear</v-btn>
+    </form>
+  </ValidationObserver>
 </template>
 
 <script>
-  import Vue from 'vue'
-  import VeeValidate from 'vee-validate'
+  import { required, email, max } from 'vee-validate/dist/rules'
+  import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
 
-  Vue.use(VeeValidate)
+  setInteractionMode('eager')
+
+  extend('required', {
+    ...required,
+    message: '{_field_} can not be empty',
+  })
+
+  extend('max', {
+    ...max,
+    message: '{_field_} may not be greater than {length} characters',
+  })
+
+  extend('email', {
+    ...email,
+    message: 'Email must be valid',
+  })
 
   export default {
-    $_veeValidate: {
-      validator: 'new',
+    components: {
+      ValidationProvider,
+      ValidationObserver,
     },
-
     data: () => ({
       name: '',
       email: '',
@@ -64,38 +82,18 @@
         'Item 4',
       ],
       checkbox: null,
-      dictionary: {
-        attributes: {
-          email: 'E-mail Address',
-          // custom attributes
-        },
-        custom: {
-          name: {
-            required: () => 'Name can not be empty',
-            max: 'The name field may not be greater than 10 characters',
-            // custom messages
-          },
-          select: {
-            required: 'Select field is required',
-          },
-        },
-      },
     }),
-
-    mounted () {
-      this.$validator.localize('en', this.dictionary)
-    },
 
     methods: {
       submit () {
-        this.$validator.validateAll()
+        this.$refs.observer.validate()
       },
       clear () {
         this.name = ''
         this.email = ''
         this.select = null
         this.checkbox = null
-        this.$validator.reset()
+        this.$refs.observer.reset()
       },
     },
   }
@@ -103,6 +101,6 @@
 
 <codepen-resources lang="json">
   {
-    "js": ["https://cdn.jsdelivr.net/npm/vee-validate@2.x/dist/vee-validate.js"]
+    "js": ["https://cdn.jsdelivr.net/npm/vee-validate@3.x/dist/vee-validate.js"]
   }
 </codepen-resources>

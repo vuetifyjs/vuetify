@@ -1,6 +1,6 @@
 {
   "heading": "# Бесплатные и премиальные темы",
-  "headingText": "Vuetify предлагает бесплатные и премиальные готовые темы, предназначенные для мгновенного запуска. Бесплатные темы доступны для установки через Vue CLI 3, или вы можете просто загрузить исходники.",
+  "headingText": "Vuetify предлагает бесплатные и премиальные готовые темы, предназначенные для мгновенного запуска. Бесплатные темы доступны для установки через Vue CLI, или вы можете просто загрузить исходники.",
   "buy": "Информация и демо",
   "free": "Бесплатно",
   "demo": "ДЕМОНСТРАЦИЯ",
@@ -16,7 +16,7 @@
       "demoUrl": ""
     },
     {
-      "screenshot": "https://cdn.vuetifyjs.com/images/starter/vuetify-parallax-starter.png",
+      "screenshot": "https://cdn.vuetifyjs.com/images/starter/parallax-2020-large.png",
       "title": "Parallax",
       "description": "Этот красивый параллакс с одной страницей - отличная домашняя страница для любого приложения.",
       "sourceUrl": "vuetifyjs/parallax-starter",

@@ -8,25 +8,25 @@
           </v-col>
 
           <v-col cols="12" sm="3">
-            <v-btn text icon color="pink">
+            <v-btn icon color="pink">
               <v-icon>mdi-heart</v-icon>
             </v-btn>
           </v-col>
 
           <v-col cols="12" sm="3">
-            <v-btn text icon color="indigo">
+            <v-btn icon color="indigo">
               <v-icon>mdi-star</v-icon>
             </v-btn>
           </v-col>
 
           <v-col cols="12" sm="3">
-            <v-btn text icon color="green">
+            <v-btn icon color="green">
               <v-icon>mdi-cached</v-icon>
             </v-btn>
           </v-col>
 
           <v-col cols="12" sm="3">
-            <v-btn text icon color="deep-orange">
+            <v-btn icon color="deep-orange">
               <v-icon>mdi-thumb-up</v-icon>
             </v-btn>
           </v-col>
