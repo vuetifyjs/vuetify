@@ -3,8 +3,16 @@ import './VVirtualScroll.sass'
 // Types
 import Vue, { VNode } from 'vue'
 
+// Directives
+import Scroll from '../../directives/scroll'
+
+// Helpers
+import { getSlot } from '../../util/helpers'
+
 export default Vue.extend({
   name: 'v-virtual-scroll',
+
+  directives: { Scroll },
 
   props: {
     height: {
@@ -39,11 +47,6 @@ export default Vue.extend({
 
   mounted (): void {
     this.last = this.getLast(0)
-    this.$el.addEventListener('scroll', this.onScroll, false)
-  },
-
-  beforeDestroy (): void {
-    this.$el.removeEventListener('scroll', this.onScroll, false)
   },
 
   methods: {
@@ -54,7 +57,7 @@ export default Vue.extend({
         style: {
           top: (this.firstToRender + i) * this.itemHeight + 'px',
         },
-      }, this.$scopedSlots.default && this.$scopedSlots.default(item)))
+      }, getSlot(this, 'default', item)))
     },
     getFirst (): number {
       return Math.floor(this.scrollTop / this.itemHeight)
@@ -71,7 +74,10 @@ export default Vue.extend({
   },
 
   render (h: Function): VNode {
+    const scrollTargetClass = 'v-virtual-scroll'
+
     const childrenVNodes: VNode[] = this.getChildrenVNodes(h)
+
     const parentVNode: VNode = h('div', {
       staticClass: 'v-virtual-scroll__container',
       style: {
@@ -79,10 +85,15 @@ export default Vue.extend({
       },
     }, childrenVNodes)
     const scrollVNode: VNode = h('div', {
-      staticClass: 'v-virtual-scroll',
+      staticClass: scrollTargetClass,
       style: {
         height: this.height,
       },
+      directives: [{
+        arg: `.${scrollTargetClass}`,
+        name: 'scroll',
+        value: this.onScroll,
+      }],
     }, [parentVNode])
     return scrollVNode
   },
