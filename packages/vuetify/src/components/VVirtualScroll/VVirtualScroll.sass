@@ -9,7 +9,13 @@
   &__container
     display: block
 
-  &__item
-    left: 0
-    position: absolute
-    right: 0
+  &--vertical
+    .v-virtual-scroll__item
+      left: 0
+      position: absolute
+      right: 0
+  &--horizontal
+    .v-virtual-scroll__item
+      bottom: 0
+      top: 0
+      position: absolute

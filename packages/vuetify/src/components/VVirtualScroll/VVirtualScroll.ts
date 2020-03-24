@@ -4,10 +4,7 @@ import './VVirtualScroll.sass'
 // Mixins
 import Measurable from '../../mixins/measurable'
 
-// Directives
-import Scroll from '../../directives/scroll'
-
-// Utilities
+// Helpers
 import {
   convertToUnit,
   getSlot,
@@ -19,35 +16,34 @@ import { VNode } from 'vue'
 export default Measurable.extend({
   name: 'v-virtual-scroll',
 
-  directives: { Scroll },
-
   props: {
     bench: {
       type: [Number, String],
       default: 0,
     },
-    itemHeight: {
+    itemSize: {
       type: [Number, String],
-      required: true,
+      required: false,
     },
     items: {
       type: Array,
       default: () => [],
     },
+    horizontal: Boolean,
   },
 
   data: () => ({
     first: 0,
     last: 0,
-    scrollTop: 0,
+    scrollAmount: 0,
   }),
 
   computed: {
     __bench (): number {
       return parseInt(this.bench, 10)
     },
-    __itemHeight (): number {
-      return parseInt(this.itemHeight, 10)
+    __itemSize (): number {
+      return parseInt(this.itemSize, 10)
     },
     firstToRender (): number {
       return Math.max(0, this.first - this.__bench)
@@ -57,8 +53,13 @@ export default Measurable.extend({
     },
   },
 
-  created () {
+  mounted () {
     this.last = this.getLast(0)
+    this.$el.addEventListener('scroll', this.onScroll, false)
+  },
+
+  beforeDestroy () {
+    this.$el.removeEventListener('scroll', this.onScroll, false)
   },
 
   methods: {
@@ -70,47 +71,55 @@ export default Measurable.extend({
     },
     genChild (item: any, index: number) {
       const firstToRender = this.firstToRender + index
-      const top = convertToUnit(firstToRender * this.__itemHeight)
+      let height
+      let left
+      let top
+      let width
+      if (this.horizontal) {
+        left = convertToUnit(firstToRender * this.__itemSize)
+        width = convertToUnit(this.__itemSize)
+      } else {
+        height = convertToUnit(this.__itemSize)
+        top = convertToUnit(firstToRender * this.__itemSize)
+      }
 
       return this.$createElement('div', {
         staticClass: 'v-virtual-scroll__item',
-        style: { top },
+        style: { height, left, top, width },
         key: index,
       }, getSlot(this, 'default', { item, index }))
     },
     getFirst (): number {
-      return Math.floor(this.scrollTop / this.__itemHeight)
+      return Math.floor(this.scrollAmount / this.__itemSize)
     },
     getLast (first: number): number {
-      const height = parseInt(this.height || 0, 10) || this.$el.clientHeight
-
-      return first + Math.ceil(height / this.__itemHeight)
+      return first + Math.ceil((this.horizontal ? this.$el.clientWidth : this.$el.clientHeight) / this.__itemSize)
     },
     onScroll (e: Event): void {
       const target = e.currentTarget as HTMLElement
 
-      this.scrollTop = target.scrollTop
+      this.scrollAmount = this.horizontal ? target.scrollLeft : target.scrollTop
       this.first = this.getFirst()
       this.last = this.getLast(this.first)
     },
   },
 
   render (h): VNode {
+    const style = this.horizontal ? {
+      height: '100%',
+      width: convertToUnit((this.items.length * this.__itemSize)),
+    } : {
+      height: convertToUnit((this.items.length * this.__itemSize)),
+    }
+
     const content = h('div', {
       staticClass: 'v-virtual-scroll__container',
-      style: {
-        height: convertToUnit((this.items.length * this.__itemHeight)),
-      },
+      style,
     }, this.getChildren())
 
     return h('div', {
-      staticClass: 'v-virtual-scroll',
+      staticClass: `v-virtual-scroll v-virtual-scroll--${this.horizontal ? 'horizontal' : 'vertical'}`,
       style: this.measurableStyles,
-      directives: [{
-        name: 'scroll',
-        modifiers: { self: true },
-        value: this.onScroll,
-      }],
     }, [content])
   },
 })
