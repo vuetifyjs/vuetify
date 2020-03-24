@@ -1,1 +1,41 @@
-{}
+{
+  "heading": "# Spacing",
+  "headingText": "新しいクラスを作成せずにレイアウトを更新します。Spacingヘルパーは、要素のパディングとマージンを変更する場合に便利です。",
+  "playgroundHeader": "## プレイグラウンド",
+  "playgroundText1": "プレイグラウンドを使用して、さまざまなヘルパークラスで何ができるかを試してください。それらがどのように機能するかの説明については、以下の**動作のしくみ**セクションを参照してください。",
+  "howText": "ヘルパークラスは* *margin** または **padding** を _0〜12_ の範囲で要素に適用します。各サイズ増分は、一般的なMaterial Design spacingsに合わせて設計されています。これらのクラスは、次の形式 `{property}{direction}-{size}` を使用して適用できます。",
+  "propertyText": "**property** は、間隔のタイプを適用します。",
+  "properties": [
+    "`m` - `margin`を適用します。",
+    "`p` - `padding`を適用します。"
+  ],
+  "directionText": "**direction**は、プロパティが適用される側を指定します。",
+  "directions": [
+    "`t` - `margin-top`と`padding-top`の間隔を適用します。",
+    "`b` - `margin-bottom` と `padding-bottom`の間隔を適用します。",
+    "`l` - `margin-left` と `padding-left`の間隔を適用します。",
+    "`r` - `margin-right` と `padding-right`の間隔を適用します。",
+    "`s` - `margin-left`/`padding-left` _(LTR modeの場合)_ と `margin-right`/`padding-right` _(RTL modeの場合)_ の間隔を適用します",
+    "`e` - `margin-right`/`padding-right` _(LTR modeの場合)_ と `margin-left`/`padding-left` _(RTL modeの場合)_ の間隔を適用します",
+    "`x` - `*-left` と `*-right` の両方の間隔を適用します。",
+    "`y` - `*-top` と `*-bottom` の両方の間隔を適用します。",
+    "`a` - プロパティの間隔をすべての方向に適用します。"
+  ],
+  "sizeText": "**size** は、プロパティの増分を 4px 間隔で制御します。",
+  "sizes": [
+    "`1` - `margin` または `padding` を4pxに設定します。",
+    "`2` - `margin` または `padding` を8pxに設定します。",
+    "`3` - `margin` または `padding` を12pxに設定します。",
+    "`4` - `margin` または `padding` を16pxに設定します。",
+    "`5` - `margin` または `padding` を20pxに設定します。",
+    "`6` - `margin` または `padding` を24pxに設定します。",
+    "`7` - `margin` または `padding` を28pxに設定します。",
+    "`8` - `margin` または `padding` を32pxに設定します。",
+    "`9` - `margin` または `padding` を36pxに設定します。",
+    "`10` - `margin` または `padding` を40pxに設定します。",
+    "`11` - `margin` または `padding` を44pxに設定します。",
+    "`12` - `margin` または `padding` を48pxに設定します。",
+    "'auto' - 間隔を `auto` に設定します。"
+  ],
+  "horizontalText": "指定した幅のブロック要素の場合は、コンテンツを水平方向に中央揃えする `.mx-auto`を適用できます。"
+}

@@ -1,5 +1,5 @@
 {
-  "heading": "#よくある質問 (FAQ)",
+  "heading": "# よくある質問 (FAQ)",
   "headingText": "特定の問題でお困りですか？まずは下記FAQをご確認ください。該当する内容が確認できない場合は、github：[issue](https://issues.vuetifyjs.com) もしくはコミュニティ：[community](https://community.vuetifyjs.com)でお聞きください。",
   "question": "質問:",
   "answer": "回答",
@@ -7,17 +7,17 @@
   "resetSearch": "検索をリセットする",
   "gotchas": [
     {
-      "q": "###Sass/Scssが原因でアプリケーションをコンパイルできない",
+      "q": "### Sass/Scssが原因でアプリケーションをコンパイルできない",
       "a": "ご使用のsass-loaderバージョンに従って、適切なオプションオブジェクトを使用していることを確認してください。",
       "s": "js_webpack_sass"
     },
     {
       "q": "### v2でのグリッドとv1.5の比較例はありますか？",
-      "a": "はい。Urlをご確認下さい。(https://gist.github.com/johnleider/207f63c9d30fb77042a0bb0258c5ab32)"
+      "a": "はい。[グリッドの例](https://gist.github.com/johnleider/207f63c9d30fb77042a0bb0258c5ab32) をご確認下さい。"
     },
     {
       "q": "### node-sassモジュールが見当たらない。(Error: Cannot find module 'node-sass')",
-      "a": "'package.json'内の'@vue/cli'のバージョンが**^3.5.0**以上であることをご確認ください。"
+      "a": "`package.json`内の`@vue/cli`のバージョンが**^3.5.0**以上であることをご確認ください。"
     },
     {
       "q": "###  不適切なCSS(Invalid CSS after \"    @content\": expected \"}\", was \"($material-light); \")",
@@ -25,106 +25,19 @@
     },
     {
       "q": "### 私のコードが動きません。どうしたらいいでしょうか？",
-      "a": "まず、最新バージョンのVue.jsおよびVuetifyを使用していることを確認してください。次の[テンプレート](https://template.vuetifyjs.com/) を使用してcodepenで再現してみてください。環境外で問題を再現できない場合、これは通常、問題がローカルに存在することを意味します。それでも問題を解決できない場合は、[コミュニティ] (https://chat.vuetifyjs.com)の **#need-help** でcodepenと問題を提供してください。"
+      "a": "まず、最新バージョンのVue.jsおよびVuetifyを使用していることを確認してください。次の [テンプレート](https://template.vuetifyjs.com/) を使用してcodepenで再現してみてください。環境外で問題を再現できない場合、これは通常、問題がローカルに存在することを意味します。それでも問題を解決できない場合は、 [コミュニティ](https://chat.vuetifyjs.com) の **#need-help** でcodepenと問題を提供してください。"
     },
     {
       "q": "### 下記エラーがコンソールに生じます。<br>**$attrs is readonly** and/or **$listeners is readonly**",
-      "a": "VuetifyはTypescriptを利用しており、現在Vueオブジェクトをimportおよびextendする必要があります。そのため一部のアプリケーションで警告メッセージを生成する可能性があります。現在、進行中の[Githubディスカッション] (https://github.com/vuetifyjs/vuetify/issues/4068) があり、さまざまなユースケースで回避策が考えられます。さらに質問がある場合は、[オンラインコミュニティ] (https://community.vuetifyjs.com) にご参加ください。"
+      "a": "VuetifyはTypescriptを利用しており、現在Vueオブジェクトをimportおよびextendする必要があります。そのため一部のアプリケーションで警告メッセージを生成する可能性があります。現在、進行中の [Githubディスカッション](https://github.com/vuetifyjs/vuetify/issues/4068) があり、さまざまなユースケースで回避策が考えられます。さらに質問がある場合は、 [オンラインコミュニティ](https://community.vuetifyjs.com) にご参加ください。"
     },
     {
-      "q": "###次のようなエラーが表示されます：<br> Error in ./node_modules/vuetify/src/dir/file.js Module parse \"failed\": Unexpected token (&lt;lineno&gt;:&lt;characterno&gt;)",
+      "q": "### 次のようなエラーが表示されます：<br> Error in ./node_modules/vuetify/src/dir/file.js Module parse \"failed\": Unexpected token (&lt;lineno&gt;:&lt;characterno&gt;)",
       "a": "IntelliJ IDEAやWebStormなどのIDEを使用している場合、使用するコンポーネントの `vuetify/src/` ディレクトリを指す自動インポートが追加されることがよくあります。インポート文のパスを`vuetify/src/`から`vuetify/es5/`に変更してください。"
     },
     {
       "q": "### vuerouter付きの codepen の例はありますか？",
       "a": "はい。[Vuetify Codepen Router Template](https://codepen.io/johnjleider/pen/PMZvpr)"
-    },
-    {
-      "q": "### 私のアプリが正しく描画されません。",
-      "a": "Vuetifyでは`v-app`コンポーネントを使用する必要があります。アプリケーション全体をラップする必要があり、テーマを含む多くのフレームワーク機能の中心点です。 [アプリケーション] (/components/application) ページに記載されている適切なマークアップに従っていることを確認してください。"
-    },
-    {
-      "q": "### Menu/Dialog/Navigation drawer が適切に表示できない。",
-      "a": "V-app要素でコンポーネントがラップされている事を確認してください。もし**activater**スロットを適応していないコンポーネントをアクティベートする要素を使用している場合、クリックイベントの伝達を止めている事を確認下さい。これらのコンポーネントは **v-outside-click** を使用しているため即時に閉じてしまいます。"
-    },
-    {
-      "q": "### コンテンツが縦にオーバーフローしていないはずなのに、スクロールバーが表示されてしまいます。",
-      "a": "Vuetify は [ress reset](https://github.com/filipelinhares/ress) を使用していて、ブラウザ間での動作を正規化するために html のスクロールバーを有効化します。これはデザイン上の1つの選択であり、今まで何度も議論が行われてきました。現時点では、スクロールバーの有無には利点と欠点の両方がありますが、投票の結果、スクロールバーを残すという判断が下されました。もしこの機能を無効化したい場合は、スタイルファイルに `html { overflow-y: auto }` を追加するだけで無効化できます。"
-    },
-    {
-      "q": "### 垂直方向の中心に配置したい。",
-      "a": "**fill-height** prop を `v-container` に適用してください。このヘルパークラスは通常 **height: 100%** を追加するだけですが、コンテナーに対しては、子要素の `v-layout` を探し、コンテンツを縦方向の中央に揃えるために必要なクラスを適用します。"
-    },
-    {
-      "q": "### _/home_ ページ上にいるときでも _/_ のリンクがアクティブになってしまいます",
-      "a": "絶対パスの / に**厳密に一致する** リンクを追加してください。これに関する詳しい情報は、公式の [Vue router のドキュメント](https://router.vuejs.org/en/api/router-link.html) で確認できます。"
-    },
-    {
-      "q": "### レスポンシブ対応できない。",
-      "a": "適切な meta タグが index.html の `<head>` セクションの中にあることを確認してください。",
-      "s": "html_mobile_viewport"
-    },
-    {
-      "q": "### Font Awesome, Material Design Icons, Material Iconsを使いたい。",
-      "a": "詳細については、[アイコンガイド] (/customization/icons) をご覧ください。"
-    },
-    {
-      "q": "### ダイアログがクリック後すぐに閉じてしまう。",
-      "a": "`v-menu` と `v-dialog` の **activator** slot を使用している場合などには、クリックイベントの _propagation_ を stop する必要があります。これは、click イベントに _.stop_ モディファイアを追加するだけで実現できます。",
-      "s": "html_stop_click_propagation"
-    },
-    {
-      "q": "### `v-card` , `v-img`等vuetifyコンポーネントにてイメージ参照がうまくいきません。",
-      "a": "Vue loader は相対パスを必要な関数に自動的に変換します。残念ながら、カスタムコンポーネントでは自動的な変換が機能しません。この問題を克服するには `require` を利用します。Vue CLI plugin を用いて Vuetify を使用している場合、プロジェクトの [vue.config.js](https://cli.vuejs.org/config/#vue-config-js) ファイルで [vue-loader](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader) のオプションを編集することで設定できます。",
-      "s": "html_img_require"
-    },
-    {
-      "q": "### 最新バージョンにアップグレードしたい。",
-      "a": "必要な変更はすべて、リリースの**アップグレードガイド**に記載されています。",
-      "a2": [
-        "[v2.0.0](https://github.com/vuetifyjs/vuetify/releases/tag/v2.0.0)",
-        "[v1.5.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0)",
-        "[v1.4.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.4.0)",
-        "[v1.3.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.3.0)",
-        "[v1.2.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.2.0)",
-        "[v1.1.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.1.0)",
-        "[v1.0.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.0.0)",
-        "[v0.17.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.17.0)",
-        "[v0.16.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.16.0)",
-        "[v0.15.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.15.0)",
-        "[v0.14.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.14.0)",
-        "[v0.13.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.13.0)",
-        "[v0.12.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.12.0)"
-      ]
-    },
-    {
-      "q": "### バグレポート、機能リクエストの方法",
-      "a": "必要な情報すべてを適切に提供できるようにするために、プロセス全体であなたを助けるための [Issue Generator](https://issues.vuetifyjs.com) を作りました。generator を使わずに作られた issue は自動的に閉じられるので、こちらの generator を必ず使うようにしてください。"
-    },
-    {
-      "q": "### vuetify-loader がコンポーネントをロードしない。",
-      "a": "Vuetify-loaderには、_dynamic_コンポーネントの制限があります。詳細については、[制限] (/customization/a-la-carte#limitations) セクションを確認してください。"
-    },
-    {
-      "q": "### version 1.5 はいつまでサポートされますか？",
-      "a": "期限は2020年7月までです。詳しい情報については、[長期間サポートのページ](/introduction/long-term-support) を参照してください。"
-    },
-    {
-      "q": "### v1.5 ドキュメントはどこにありますか？",
-      "a": "[https://v15.vuetifyjs.com](https://v15.vuetifyjs.com)"
-    },
-    {
-      "q": "### カスタム要素がない警告が発生する。[Vue warn]: Unknown custom element: <v-app>",
-      "a": "最新バージョンの [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugin-vuetify) と [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) が **package.json** にインストールされていることを確認してください。"
-    },
-    {
-      "q": "### SCRIPT5022: Expected identifier, string or number",
-      "a": "vue-cli-3 で **modern mode** をサポートするために、`vuetify/lib` はトランスパイルされません。そのため、vue-cli に `vuetify` パッケージをトランスパイルするように伝える必要があります。Vuetify cli プラグインをインストールした場合、この処理は自動的に行われます。もし古いバージョンを使用している場合は、`vue.config.js` の **transpileDependencies** の配列に 'vuetify' を追加してください。"
-    },
-    {
-      "q": "### typescript に追加したとき、Error: Could not find a declaration file for module 'vuetify/lib' というエラーが表示されてしまいます",
-      "a": "次の設定を tsconfig ファイルに追加してください。",
-      "s": "json_tsconfig_types"
     }
   ]
 }

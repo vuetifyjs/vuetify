@@ -1,4 +1,5 @@
 {
+  "api": "API",
   "archived": "архив документации",
   "bug": "Сообщить об ошибке",
   "codepen": "Шаблон Codepen",
@@ -18,5 +19,6 @@
   "stack": "Stack Overflow",
   "store": "Магазин",
   "support": "поддержка",
-  "themeGenerator": "Генератор тем"
+  "themeGenerator": "Генератор тем",
+  "translations": "Помочь с переводом"
 }

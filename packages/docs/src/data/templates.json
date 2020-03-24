@@ -77,9 +77,9 @@
   "parallax": {
     "title": "Parallax",
     "description": "This beautiful single page parallax is a great home page for any application.",
-    "src": "https://cdn.vuetifyjs.com/images/starter/vuetify-parallax-starter.png",
+    "src": "https://cdn.vuetifyjs.com/images/starter/parallax-2020-large.png",
     "free": true,
-    "url": "https://github.com/vuetifyjs/parallax-starter",
+    "url": "https://github.com/vuetifyjs/vuetify/blob/master/packages/docs/src/themes/parallax-starter/index.html",
     "demoUrl": [
       "/themes/parallax-starter"
     ]

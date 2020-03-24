@@ -1,0 +1,33 @@
+{
+  "heading": "# プリセット",
+  "headingText": "Material Design specificationのバージョン2では、Googleは架空のアプリを通じて現実世界のデザインの限界を探求するために [Material studies](https://material.io/design/material-studies/about-our-material-studies.html) を作成しました。Vuetifyプリセットは、事前に構成されたフレームワークオプション、SASS変数、​​およびアプリケーションのルックアンドフィールを即座に変更するカスタムスタイルを通じて、これらの調査を統合します。",
+  "defaultHeading1": "# デフォルトのプリセット",
+  "defaultText1a": "デフォルトのVuetifyプリセットは、すべてのフレームワークサービスにベースライン値を提供します。各オブジェクトキーは、`$vuetify` オブジェクトのサービスに対応し、Vuetifyコンストラクターの**preset**またはカスタム**user options**で上書きできます。",
+  "materialHeading1": "## Material Studies",
+  "materialText1a": "[Material Design](https://material.io/) は、高度にカスタマイズされたデザインを実装する際に使用すると非常に多くの作業を行うことができる可能性がある、独断的な視覚言語です。新しい研究では、マテリアルテーマの_柔軟性_を紹介し、デフォルトのマテリアルの外観なしで**ユニークな**アプリケーションを作成することがいかに簡単かを説明します。",
+  "materialText1b": "現在、合計**7 Material Studies**から選択でき、それぞれに対応するプリセットプラグインがあります。",
+  "materialText1c": [
+    "[Basil](https://material.io/design/material-studies/basil.html)",
+    "[Crane](https://material.io/design/material-studies/crane.html)",
+    "[Fortnightly](https://material.io/design/material-studies/fortnightly.html)",
+    "[Owl](https://material.io/design/material-studies/owl.html)",
+    "[Rally](https://material.io/design/material-studies/rally.html)",
+    "[Reply](https://material.io/design/material-studies/reply.html)",
+    "[Shrine](https://material.io/design/material-studies/shrine.html)"
+  ],
+  "installHeading2": "### インストール",
+  "installText2a": "コンソールで <kbd> vue add vuetify-preset- {name} </kbd> と入力します。ここでの「{name}」は利用可能な[Material Studies](#material-studies)のいずれかに対応します。プラグインがインストールされると、**vuetify.js**ファイルは選択したpresetをimportするように更新されます。",
+  "installText2b": "開発を開始するには、コマンドラインに<kbd> yarn serve </kbd>または<kbd> npm run serve </kbd>と入力します。 VuetifyサービスプラグインはVue CLIにブートストラップし、プリセットからのすべての変数とスタイルの変更を自動的に適用します。ジェネレーターとサービスプラグインの機能の詳細については、[Plugin Development Guide](#plugin-development-guide) をご覧ください。",
+  "limitationHeading1": "## 制限事項",
+  "limitationHeading2": "### Google fonts",
+  "limitationText2a": "プリセットをインストールすると、メインの **public/index.html** ファイルが必要なフォントとウェイトのみ更新されます。たとえば、Studyでは`400,500,600`フォントウェイトのみが必要な場合があります。これにより、Vuetify の一部のヘルパークラスが機能しなくなる可能性があります。例えば `font-weight-thin` は _300_ フォントウェイトが必要です。ウェイトは、後で `public.html` のフォントリンクを更新することで、いつでも変更できます。",
+  "devHeading2": "#### generator.js",
+  "devText2a": "このファイルは Vue CLI [Generator](https://cli.vuejs.org/dev-guide/generator-api.html)で、アプリケーション内の **vuetify.js** ファイルを更新して定義済みのプリセットを含めます。",
+  "devHeading3": "#### index.js",
+  "devText3a": "このファイルは、`yarn serve`または`npm run serve`の実行時にアプリケーションにフックするVue CLI [Plugin Service](https://cli.vuejs.org/dev-guide/plugin-api.html) です。`injectSassVariables`メソッドは、ターゲットファイルの変数をすべての SASS/SCSSファイルに注入します。",
+  "devHeading4": "#### preset/index.js",
+  "devText4a": "これには、Vuetifyコンストラクターに渡されるフレームワーク構成オプションが含まれます。これらのオプションは、ユーザーが指定した値と [フレームワークのデフォルト](#default-preset) と組み合わせます。",
+  "devHeading5": "#### preset/overrides.sass",
+  "devText5a": "これは、ターゲットに対応する変数を持たないスタイル変更に対するキャッチオールです。既存のコンポーネントに新しい CSS プロパティを追加する必要がある場合に便利です。",
+  "devHeading6": "#### preset/variables.scss"
+}

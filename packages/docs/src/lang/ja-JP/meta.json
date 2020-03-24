@@ -1,6 +1,6 @@
 {
   "": {
-    "title": "マテリアルデザインコンポーネントフレームワーク",
+    "title": "Vue Material Design Component Framework",
     "description": "VuetifyはVue.jsのマテリアルデザインコンポーネントフレームワークです。美しいコンテンツを持つリッチアプリケーションを作成するのに必要不可欠なツールを提供することを目的としています。",
     "keywords": "vue, material design components, vue components, material design components, vuetify, vuetify.js, component framework"
   },
@@ -10,21 +10,32 @@
   },
   "introduction/why-vuetify": {
     "title": "Vuetifyを選ぶ理由",
-    "description": "Vuetifyはとてもアクティブなコミュニティがあり、マテリアルデザインコンポーネントの簡単な使い方を提供しています。また、継続的にアップデートされています。"
+    "description": "Vuetifyはとてもアクティブなコミュニティがあり、マテリアルデザインコンポーネントの簡単な使い方を提供しています。また、継続的にアップデートされています。",
+    "keywords": "vuetifyの理由、vuetifyを選ぶ理由、ベストなvueフレームワーク、ベストなuiフレームワーク\n"
   },
   "introduction/frequently-asked-questions": {
     "title": "よくある質問（FAQ）",
+    "description": "問題が発生しましたか？ Vuetifyコミュニティでよく寄せられる質問をご覧ください。",
     "keywords": "よくある質問（FAQ）"
   },
   "introduction/long-term-support": {
     "title": "LTSバージョン",
+    "description": "Vuetifyは最新メジャーリリースの重大なバグとセキュリティの脆弱性について12か月間の長期サポートを提供します。",
     "keywords": "長期サポート (LTS)"
   },
   "introduction/meet-the-team": {
-    "title": "チーム紹介"
+    "title": "チーム紹介",
+    "description": "Vuetifyの構築を担当するチームに会います。フレームワークのビジョンを推進する中心的な人物です。",
+    "keywords": "vuetify開発チーム、vuetifyコアチーム"
+  },
+  "introduction/roadmap": {
+    "title": "Vuetifyロードマップ",
+    "description": "Vuetifyに予定されている予定の機能と新しい機能。 新しいコンポーネント、新しいディレクティブ、その他多数！",
+    "keywords": "vuetifyのロードマップ、将来の計画、新しいvuetifyの機能"
   },
   "introduction/sponsors-and-backers": {
-    "title": "スポンサーとバッカー"
+    "title": "スポンサーと後援者",
+    "description": "プロジェクトを支援することで Vuetify をサポートします。これは、既存機能のメンテナンスと新しい機能の開発に役立ちます。"
   },
   "getting-started/quick-start": {
     "title": "クイックスタート",
@@ -53,6 +64,9 @@
     "description": "アラカルトでは、vuetify-loader を用いた自動的な treeshaking の説明をします。アプリケーションが必要とする機能のみを使用することで、パッケージバンドルサイズを劇的に削減することができます。",
     "keywords": "アラカルト、vuetify single import、vuetify import、コンポーネント import、vuetify のサイズ削減"
   },
+  "customization/breakpoints": {
+    "title": "Breakpoints"
+  },
   "customization/icons": {
     "title": "アイコン"
   },
@@ -63,5 +77,14 @@
     "title": "テーマ",
     "description": "Setup your custom application theme by changing a few variables.",
     "keywords": "テーマ"
+  },
+  "styles/transitions": {
+    "title": "Transitions"
+  },
+  "components/api-explorer": {
+    "title": "API explorer"
+  },
+  "components/aspect-ratios": {
+    "title": "アスペクト比"
   }
 }

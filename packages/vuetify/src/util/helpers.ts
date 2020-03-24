@@ -1,6 +1,6 @@
 import { VNode, VNodeDirective } from 'vue/types'
 import { VuetifyIcon } from 'vuetify/types/services/icons'
-import { DataTableCompareFunction, SelectItemKey } from 'types'
+import { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'types'
 
 export function createSimpleFunctional (
   c: string,
@@ -222,13 +222,23 @@ export function groupItems<T extends any = any> (
   items: T[],
   groupBy: string[],
   groupDesc: boolean[]
-): Record<string, T[]> {
+): ItemGroup<T>[] {
   const key = groupBy[0]
-  return items.reduce((acc, item) => {
+  const groups: ItemGroup<T>[] = []
+  let current = null
+  for (var i = 0; i < items.length; i++) {
+    const item = items[i]
     const val = getObjectValueByPath(item, key)
-    ;(acc[val] = acc[val] || []).push(item)
-    return acc
-  }, {} as Record<string, T[]>)
+    if (current !== val) {
+      current = val
+      groups.push({
+        name: val,
+        items: [],
+      })
+    }
+    groups[groups.length - 1].items.push(item)
+  }
+  return groups
 }
 
 export function wrapInArray<T> (v: T | T[] | null | undefined): T[] { return v != null ? Array.isArray(v) ? v : [v] : [] }

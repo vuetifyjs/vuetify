@@ -1,33 +1,10 @@
 {
   "heading": "# 徽章",
   "headingText": "`v-badge` 组件的上标或下标是一个类似头像的图标或文本，用于向用户突出显示信息或将注意力吸引到特定元素上。徽章内的内容通常包含数字或图标。",
+  "usageText": "最简单形式的徽章显示在它包装的内容的右上角，并且需要徽章插槽。",
   "examples": {
-    "usage": {
-      "desc": "最简单形式的徽章显示在它包装的内容的右上角，并且需要徽章插槽。"
-    },
-    "bottom": {
-      "heading": "### 底部",
-      "desc": "`bottom` 属性将把徽章作为包装内容的下标。可与 `left` 属性一起使用，以达到左下角的位置。"
-    },
-    "left": {
-      "heading": "### 左侧",
-      "desc": "`left` 属性将把徽章放在包装内容的左边。可与`bottom` 属性一起使用，实现左下角的位置。"
-    },
-    "overlap": {
-      "heading": "### 重叠",
-      "desc": "`overlap` 属性会导致徽章内容重叠。"
-    },
-    "visibility": {
-      "heading": "### 可见性",
-      "desc": "`v-badge` 的可见性可以通过绑定 `v-model` 并将其设置为 true 或 false 来控制。"
-    },
-    "inline": {
-      "heading": "### 内联",
-      "desc": "徽章也可以内联文本放置。"
-    },
-    "icon": {
-      "heading": "### 图标",
-      "desc": "徽章可以使用所有当前支持的图标集。"
+    "tabs": {
+      "heading": "### 选项卡"
     },
     "hover": {
       "heading": "### 鼠标悬停显示",
@@ -36,6 +13,9 @@
     "dynamic": {
       "heading": "### 动态通知",
       "desc": "你可以将徽章与动态内容合并，以创建通知系统之类的东西。"
+    },
+    "customization": {
+      "heading": "### 自定义选项"
     }
   },
   "props": {

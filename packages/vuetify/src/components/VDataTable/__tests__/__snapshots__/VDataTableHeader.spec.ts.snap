@@ -6,7 +6,6 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
     <th role="columnheader"
         scope="col"
         aria-label="Dessert (100g serving)"
-        aria-sort="none"
         class="text-left"
     >
       <span>
@@ -105,7 +104,6 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
     <th role="columnheader"
         scope="col"
         aria-label="Dessert (100g serving)"
-        aria-sort="none"
         class="text-left"
     >
       <span>
@@ -207,7 +205,6 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
     <th role="columnheader"
         scope="col"
         aria-label="Dessert (100g serving)"
-        aria-sort="none"
         class="text-left"
     >
       <span>
@@ -324,7 +321,6 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
     <th role="columnheader"
         scope="col"
         aria-label="Dessert (100g serving)"
-        aria-sort="none"
         class="text-left"
     >
       <span>
@@ -423,7 +419,6 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
     <th role="columnheader"
         scope="col"
         aria-label="Dessert (100g serving)"
-        aria-sort="none"
         class="text-left"
     >
       <span>
@@ -587,18 +582,18 @@ exports[`VDataTableHeader.ts mobile should render with data-table-select header 
             <div role="button"
                  aria-haspopup="listbox"
                  aria-expanded="false"
-                 aria-owns="list-74"
+                 aria-owns="list-69"
                  class="v-input__slot"
             >
               <div class="v-select__slot">
-                <label for="input-74"
+                <label for="input-69"
                        class="v-label theme--light"
                        style="left: 0px; position: absolute;"
                 >
                   Sort by
                 </label>
                 <div class="v-select__selections">
-                  <input id="input-74"
+                  <input id="input-69"
                          readonly="readonly"
                          type="text"
                          aria-readonly="false"
@@ -637,11 +632,11 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
             <div role="button"
                  aria-haspopup="listbox"
                  aria-expanded="false"
-                 aria-owns="list-49"
+                 aria-owns="list-47"
                  class="v-input__slot"
             >
               <div class="v-select__slot">
-                <label for="input-49"
+                <label for="input-47"
                        class="v-label v-label--active theme--light"
                        style="left: 0px; position: absolute;"
                 >
@@ -661,7 +656,7 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
                       </div>
                     </span>
                   </span>
-                  <input id="input-49"
+                  <input id="input-47"
                          readonly="readonly"
                          type="text"
                          aria-readonly="false"
@@ -702,18 +697,18 @@ exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
             <div role="button"
                  aria-haspopup="listbox"
                  aria-expanded="false"
-                 aria-owns="list-43"
+                 aria-owns="list-42"
                  class="v-input__slot"
             >
               <div class="v-select__slot">
-                <label for="input-43"
+                <label for="input-42"
                        class="v-label theme--light"
                        style="left: 0px; position: absolute;"
                 >
                   Sort by
                 </label>
                 <div class="v-select__selections">
-                  <input id="input-43"
+                  <input id="input-42"
                          readonly="readonly"
                          type="text"
                          aria-readonly="false"
@@ -752,11 +747,11 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
             <div role="button"
                  aria-haspopup="listbox"
                  aria-expanded="false"
-                 aria-owns="list-57"
+                 aria-owns="list-54"
                  class="v-input__slot"
             >
               <div class="v-select__slot">
-                <label for="input-57"
+                <label for="input-54"
                        class="v-label v-label--active theme--light"
                        style="left: 0px; position: absolute;"
                 >
@@ -776,7 +771,7 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
                       </div>
                     </span>
                   </span>
-                  <input id="input-57"
+                  <input id="input-54"
                          readonly="readonly"
                          type="text"
                          aria-readonly="false"
@@ -817,11 +812,11 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
             <div role="button"
                  aria-haspopup="listbox"
                  aria-expanded="false"
-                 aria-owns="list-65"
+                 aria-owns="list-61"
                  class="v-input__slot"
             >
               <div class="v-select__slot">
-                <label for="input-65"
+                <label for="input-61"
                        class="v-label v-label--active theme--light"
                        style="left: 0px; position: absolute;"
                 >
@@ -841,7 +836,7 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
                       </div>
                     </span>
                   </span>
-                  <input id="input-65"
+                  <input id="input-61"
                          readonly="readonly"
                          type="text"
                          aria-readonly="false"

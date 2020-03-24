@@ -1,27 +1,66 @@
 {
+  "heading": "# ダイアログ",
+  "headingText": "`v-dialog`コンポーネントは、特定のタスクについてユーザに通知し、重要な情報を含んだり意思決定を必要とするような複数のタスクを伴う可能性があります。割り込み的な要素ですので、ダイアログは控えめに使用してください。",
   "examples": {
+    "usage": {
+      "desc": "ダイアログには、activatorとcontent（デフォルト）の2つのslotが含まれています。プライバシーポリシーに適しています。"
+    },
     "without-activator": {
-      "desc": "何らかの理由で `activator` slotを使用しない場合は、ダイアログをトリガするイベントに `.stop`修飾子を必ず追加してください。"
+      "heading": "activatorを使用しない場合",
+      "desc": "何らかの理由で `activator` slotを使用しない場合は、ダイアログをトリガするイベントに `.stop`修飾子を必ず追加してください。",
+      "uninverted": true
     },
     "modal": {
-      "desc": "シンプルなダイアログに似ていますが、モーダルの外側に触れてもモーダルは閉じません。"
+      "heading": "### モーダル",
+      "desc": "シンプルなダイアログに似ていますが、モーダルの外側に触れてもモーダルは閉じません。",
+      "uninverted": true
     },
     "fullscreen": {
-      "desc": "スペースが限られているため、モバイルデバイスにとって、フルスクリーンのダイアログは大画面のデバイスで使用されるダイアログよりも適している可能性があります。"
+      "heading": "### フルスクリーン",
+      "desc": "スペースが限られているため、モバイルデバイスにとって、フルスクリーンのダイアログは大画面のデバイスで使用されるダイアログよりも適している可能性があります。",
+      "uninverted": true
     },
     "form": {
-      "desc": "ダイアログ内のフォームのシンプルな例です。"
+      "heading": "### フォーム",
+      "desc": "ダイアログ内のフォームのシンプルな例です。",
+      "uninverted": true
     },
     "scrollable": {
       "heading": "スクロール可能なダイアログ",
-      "desc": "スクロール可能なコンテンツを持つダイアログの例です。"
+      "desc": "スクロール可能なコンテンツを持つダイアログの例です。",
+      "uninverted": true
     },
     "overflowed": {
-      "desc": "利用可能なウィンドウスペースに収まらないモーダルは、コンテナでスクロールされます。"
+      "desc": "利用可能なウィンドウスペースに収まらないモーダルは、コンテナでスクロールされます。",
+      "uninverted": true
+    },
+    "advanced": {
+      "heading": "### ネストしたダイアログ",
+      "desc": "ダイアログはネストできます: ダイアログから別のダイアログを開くことができます。",
+      "uninverted": true
+    },
+    "loader": {
+      "heading": "### ローディング",
+      "desc": "`v-dialog` コンポーネントを使用すると、アプリケーション用にカスタマイズされたローディングエクスペリエンスを簡単に作成できます。"
     }
   },
   "props": {
     "dark": "Mixins.Themeable.props.dark",
-    "light": "Mixins.Themeable.props.light"
+    "fullWidth": "ダイアログを使用可能な幅100％として強制的に展開します。",
+    "fullscreen": "フルスクリーン表示になるようレイアウトを変更します。",
+    "eager": "Mixins.Bootable.props.eager",
+    "light": "Mixins.Themeable.props.light",
+    "maxWidth": "Mixins.Measurable.props.maxWidth",
+    "noClickAnimation": "**persistent** propを使用時 `v-dialog`のコンテンツの外側をクリックしても、バウンス効果が無効になります。",
+    "openOnHover": "アクティベーターがホバリングされたときにコンポーネントをアクティブにするかどうかを指定します。",
+    "origin": "Mixins.Transitionable.props.origin",
+    "persistent": "要素の外側をクリックしても、アクティブなままになります。",
+    "retainFocus": "タブフォーカスは、デフォルトでダイアログの最初の子に戻ります。TinyMCE や vue-clipboardなどのフォーカスが必要な外部ツールを使用する場合は、これを無効にします。",
+    "transition": "Mixins.Transitionable.props.transition",
+    "width": "Mixins.Measurable.props.width"
+  },
+  "events": {
+    "click:outside": "アクティブなダイアログの外側をクリックしたときに発生するイベント",
+    "keydown": "キーが押されたときに発生するイベント。ダイアログがアクティブで、**persistent** propを使用していない場合、**esc** キーは無効になります。"
   }
 }

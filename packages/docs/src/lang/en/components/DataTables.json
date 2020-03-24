@@ -1,6 +1,6 @@
 {
   "heading": "# Data tables",
-  "headingText": "The `v-data-table` component is used for displaying tabular data. Features include sorting, searching, pagination, inline-editing, header tooltips, and row selection.",
+  "headingText": "The `v-data-table` component is used for displaying tabular data. Features include sorting, searching, pagination, inline-editing, and row selection.",
   "examples": {
     "usage": {
       "desc": "The standard data-table will by default render your data as simple rows."
@@ -114,7 +114,7 @@
       "fixedHeader": "Fixed header to top of table. **NOTE:** Does not work in IE11",
       "headerProps": "Pass props to the default header. See 'v-data-table-header' API for more information",
       "headers": "An array of objects that each describe a header column. See the example below for a definition of all properties",
-      "headersLength": "Can be used in combination with `hide-headers` to specify the number of columns in the table to allow expansion rows and loading bar to function properly",
+      "headersLength": "Can be used in combination with `hide-default-header` to specify the number of columns in the table to allow expansion rows and loading bar to function properly",
       "height": "Set an explicit height of table",
       "hideDefaultHeader": "Hide the default headers",
       "mobileBreakpoint": "Used to set when to toggle between regular table and mobile view",

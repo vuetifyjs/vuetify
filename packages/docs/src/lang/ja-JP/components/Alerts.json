@@ -1,12 +1,54 @@
 {
   "heading": "# アラート",
-  "headingText": "`v-alert` コンポーネントはコンテキストタイプのアイコンと色を使い重要な情報をユーザーに伝える際に使用します。 **success**、**info**、**warning** そして **error** の4つのバリエーションを備えています。 これらにはそれぞれ異なるアクションを表すデフォルトのアイコンが設定されており、必要に応じて変更が可能です。'border', 'iicon', 'color' 等多くのパーツが状況に合わせてカスタマイズできます。",
+  "headingText": "`v-alert` コンポーネントはコンテキストタイプのアイコンと色を使い重要な情報をユーザーに伝える際に使用します。 **success**、**info**、**warning** そして **error** の4つのバリエーションを備えています。 これらにはそれぞれ異なるアクションを表すデフォルトのアイコンが設定されており、必要に応じて変更が可能です。`border`, `icon`, `color` 等多くのパーツが状況に合わせてカスタマイズできます。",
+  "usageText": "最も単純な形式のアラートは、flatな [sheets of paper](/components/sheets) で表示するメッセージです。",
   "examples": {
+    "border": {
+      "heading": "### ボーダー",
+      "desc": "** border ** propを設定すると、アラートの4つの側面の1つにシンプルなボーダーを追加することができます。 ** color **、** dark **、** type **などのpropsと組み合わせて、アラートに独特なアクセントを与えることができます。"
+    },
+    "colored-border": {
+      "heading": "### 色付きボーダー",
+      "desc": "**colored-border** propは、**border** propを強調するためにアラートの背景を取り除きます。もし **type** が設定されていた場合、typeのデフォルト色が適用されます。 **color** または **type** が設定されていない場合、色はデフォルトで適用されたテーマの反転色になります。(lightの場合はblack、darkの場合はwhite/grayです)"
+    },
+    "dense": {
+      "heading": "### 高さが詰まったスタイル",
+      "desc": "** dense ** propは、アラートの高さを減らしシンプルでコンパクトなスタイルのアラートを作成します。 ** border ** propと同時に利用した場合、コンパクトなスタイルと協調させるためボーダーの太さは細くなります。"
+    },
+    "dismissible": {
+      "heading": "### 閉じるボタン付き",
+      "desc": "** dismissible ** propは、アラートコンポーネントの端に閉じるボタンを追加します。 このボタンをクリックすると、valueがfalseに設定され、アラートが非表示になります。 ** v-model ** をバインドしtrueに設定することにより、アラートを再度表示させることができます。 閉じるアイコンには自動的に `aria-label`が適用されます。これは、** close-label ** propで変更するか、ロケールの ** close ** の値を変更することで、値を変更することができます。 ロケール設定をグローバルに変更する方法の詳細については、 [Internationalization page](/customization/internationalization) を参照してください。"
+    },
     "icon": {
-      "heading": "アイコン"
+      "heading": "### アイコン",
+      "desc": "**icon** propを使用すると、アラートコンポーネントの先頭にアイコンを追加できます。**type** が指定されている場合、既定のタイプアイコンが上書きされます。さらに、**icon** propを _false_ に設定すると、アイコンが完全に削除されます。"
+    },
+    "outlined": {
+      "heading": "### アウトライン",
+      "desc": "**outlined** propはアラートのスタイルを反転し、現在適用されている**color**を継承してテキストと境界に適用し、背景を透明にします。"
+    },
+    "prominent": {
+      "heading": "### Prominent （目立たせる）",
+      "desc": "**prominent** propは高さを増やし、アイコンに光背を適用することで、はっきりとしたアラートを提供します。**prominent**と**dense**の両方を一緒に適用すると、アラートは通常のアラートの外観を引き受けますが、**prominent**アイコンの効果が表示されます。"
+    },
+    "text": {
+      "heading": "### テキスト",
+      "desc": "**text** propは、提供された**color**の不透明度の背景を減らした単純なアラートバリアントです。他のスタイルのpropと同様に、**text**は**dense**、**prominent**、**outlined**などの他のpropと組み合わせて、独自のカスタマイズされたコンポーネントを作成できます。"
+    },
+    "transition": {
+      "heading": "### トランジション",
+      "desc": "**transition** propを使用すると、コンポーネントを非表示および表示したときのトランジションをアラートに適用できます。詳細については、[Vuetify's prebuilt transitions](/styles/transitions#motion) のいずれかをチェックアウトするか、[独自作成](/styles/transitions#create-your-own) の方法を確認できます。"
+    },
+    "type": {
+      "heading": "### タイプ",
+      "desc": "**type** propは、4つのデフォルトの`v-alert` スタイルを提供します: **success**, **info**, **warning**, **error**。これらの各スタイルは、既定のアイコンと色を提供します。デフォルトの色は[Vuetifyのテーマ](/customization/theme) をカスタマイズすることでグローバルに設定することができます。"
     }
   },
   "props": {
-    "border": "ボーダーを表示します。**top** | **right** | **bottom** | **left** のいずれかの値を受け付けます。"
+    "border": "ボーダーを表示します。**top** | **right** | **bottom** | **left** のいずれかの値を受け付けます。",
+    "coloredBorder": "定義された **color** をAlertの境界線に適用します。",
+    "dense": "アラートアイコンを非表示にして、コンポーネントの高さを減らします。",
+    "dismissible": "アラートを非表示にする、閉じるアイコンを表示します。",
+    "outlined": "背景を透明にし、細い境界線を適用します。"
   }
 }

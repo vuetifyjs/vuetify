@@ -1,9 +1,4 @@
 {
-  "examples": {
-    "vee-validate": {
-      "desc": "Vee-validate es otro plugin de validación que te permite checar tus formularios. Algo a considerar es que debes agregar **type=\"checkbox\"** para validar apropiadamente un `v-checkbox` cuando utilizas la prop **value**"
-    }
-  },
   "props": {
     "lazyValidation": "Si se habilita, **value** siempre será _true_ a menos que haya errores de validación visibles. Puedes llamar `validate()` para ejecutar manualmente la validación"
   },

@@ -11,6 +11,9 @@ export default {
       sortDescending: ': Usporiadané zostupne. Aktivováním vypnete usporiadanie.',
       sortAscending: ': Usporiadané vzostupne. Aktivováním usporiadate zostupne.',
       sortNone: ': Neusporiadené. Aktivováním usporiadate vzostupne.',
+      activateNone: 'Aktivácia odstráni zoradenie.',
+      activateDescending: 'Aktivujte zoradenie zostupne.',
+      activateAscending: 'Aktiváciou zoradíte vzostupne.',
     },
     sortBy: 'Usporiadať podľa',
   },
@@ -44,5 +47,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Pagination Navigation',
+      next: 'Next page',
+      previous: 'Previous page',
+      page: 'Goto Page {0}',
+      currentPage: 'Current Page, Page {0}',
+    },
   },
 }

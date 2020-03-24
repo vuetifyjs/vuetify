@@ -1,8 +1,10 @@
 {
   "becomeSponsor": "Hỗ trợ Vuetify",
+  "text": "Vuetify là một thư viện Vue UI với các Material Components đẹp mắt. Không đòi hỏi kỹ năng thiết kế - mọi thứ bạn cần để tạo ra ứng dụng tuyệt vời đều nằm trong tầm tay bạn.",
   "features": {
     "community": {
-      "text": "Khi bạn gặp khó khăn, bạn cần hỗ trợ ngay lập tức. Vuetify cung cấp sự hỗ trợ cộng đồng trên Discord."
+      "text": "Khi bạn gặp khó khăn, bạn cần hỗ trợ ngay lập tức. Vuetify cung cấp sự hỗ trợ cộng đồng trên Discord.",
+      "title": "Cộng đồng hỗ trợ"
     },
     "components": {
       "text": "Hãy chuẩn bị sử dụng một đống các components theo ý bạn. Với tổng số hơn 80 cái, có một giải pháp cho mọi tình huống.",
@@ -15,7 +17,16 @@
   "getHelp": "Nhận hỗ trợ",
   "getStarted": "Bắt đầu",
   "github": "Github",
+  "madeWithVuetify": "## Dự Án Được Làm Ra Bằng Vuetify",
+  "madeWithVuetifyText": "Một tập hợp các dự án được làm ra bằng Vuetify. Xem những gì người khác đang tạo ra trong hệ sinh thái.",
   "materialDesign": "Material Design",
   "mit": "MIT License",
+  "premiumThemes": "## Chủ đề chất lượng cao",
+  "premiumThemesText": "Đưa dự án của bạn lên tầm cao mới với các chủ đề chất lượng cao từ cửa hàng chính thức của chúng tôi — tất cả đều được xây dựng bằng Vuetify.",
+  "proudlySponsoredBy": "## Các nhà tài trợ",
+  "proundlySponsoredByText": "Vuetify có thể phát triển và duy trì liên tục nhờ vào các nhà tài trợ sau:",
+  "seeMoreThemes": "Xem thêm những Theme khác",
+  "whyVuetify": "## Tại sao sử dụng Vuetify?",
+  "whyVuetifyText": "Xây dựng ứng dụng với Vue chưa bao giờ là dễ dàng. Tăng hiệu quả quá trình phát triển ứng dụng của bạn với tất cả các công cụ bạn cần để thành công.",
   "whyVuetifyText2": "Tại sao dùng Vuetify?"
 }

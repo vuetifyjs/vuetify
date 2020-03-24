@@ -32,6 +32,10 @@ export default Themeable.extend({
       type: Array as PropType<any[]>,
       default: () => [],
     },
+    mobileBreakpoint: {
+      type: [Number, String],
+      default: 600,
+    },
     singleExpand: Boolean,
     loading: [Boolean, String],
     noResultsText: {
@@ -72,6 +76,13 @@ export default Themeable.extend({
     },
     selectableItems (): any[] {
       return this.internalCurrentItems.filter(item => this.isSelectable(item))
+    },
+    isMobile (): boolean {
+      // Guard against SSR render
+      // https://github.com/vuetifyjs/vuetify/issues/7410
+      if (this.$vuetify.breakpoint.width === 0) return false
+
+      return this.$vuetify.breakpoint.width < parseInt(this.mobileBreakpoint, 10)
     },
   },
 
@@ -192,15 +203,14 @@ export default Themeable.extend({
       this.$emit('item-expanded', { item, value })
     },
     createItemProps (item: any) {
-      const props = {
+      return {
         item,
         select: (v: boolean) => this.select(item, v),
         isSelected: this.isSelected(item),
         expand: (v: boolean) => this.expand(item, v),
         isExpanded: this.isExpanded(item),
+        isMobile: this.isMobile,
       }
-
-      return props
     },
     genEmptyWrapper (content: VNodeChildren) {
       return this.$createElement('div', content)
@@ -295,6 +305,7 @@ export default Themeable.extend({
           this.internalCurrentItems = v
           this.$emit('current-items', v)
         },
+        'page-count': (v: number) => this.$emit('page-count', v),
       },
       scopedSlots: {
         default: this.genDefaultScopedSlot,

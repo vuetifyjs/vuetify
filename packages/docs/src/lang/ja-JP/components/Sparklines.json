@@ -1,16 +1,35 @@
 {
   "heading": "# スパークライン",
-  "headingText": "スパークラインコンポーネントを使用して、GitHubの貢献度チャートのようなグラフを作成できます。\n\n以下にリストされているものに加えて、[SVG属性] (https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute) を使用できます。",
+  "headingText": "スパークラインコンポーネントを使用して、GitHubの貢献度チャートのようなグラフを作成できます。\n\n以下にリストされているものに加えて、[SVG属性](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute) を使用できます。",
   "examples": {
     "usage": {
       "desc": "スパークラインは、データを視覚的に表現する小さなグラフです。"
+    },
+    "playground": {
+      "desc": "スパークライン コンポーネントには、**trend** (デフォルト) と**bar** という 2 つのバリエーションがあります。各オプションは、スパークラインの外観をカスタマイズするための多数のオプションをサポートします。"
     },
     "heart-rate": {
       "heading": "### ちょっと休憩",
       "desc": "簡潔な情報を得るために、完全なチャートはやり過ぎかもしれません。グラデーションをいれたトレンドラインを使用すると、あまり多くの情報を表示することなく、ユーザーに十分な詳細を提供します。"
     },
+    "dashboard-card": {
+      "heading": "### Dashboard カード",
+      "desc": "`v-sparkline` コンポーネントは、`v-card`および`v-sheet`とうまく組み合わせて、カスタマイズされた情報カードを作成し、管理用ダッシュボードを構築するのに最適です。ここでは、カスタムラベルを使用して、スパークラインに追加のコンテキストを提供します。"
+    },
+    "sales-card": {
+      "desc": "**label** スロットを提供することにより、ドル記号（$）を追加して表示コンテンツを変更できます。このスロットは、テキストコンテンツの場合は **_exclusively_** （排他的）です。 svg `<text>`要素の詳細については、[ここにナビゲート](https://developer.mozilla.org/ja/docs/Web/SVG/Element/text) 。"
+    },
     "fill": {
       "desc": "`fill`プロパティを使用すると、塗りつぶし付きの`v-sparkline`を作成できます。"
     }
+  },
+  "props": {
+    "data": "データ ポイントの配列",
+    "height": "SVGトレンドラインまたはバーの高さ",
+    "labelSize": "ラベルフォントサイズ",
+    "lineWidth": "線の太さ（px）",
+    "showLabels": "各データ ポイントの下にラベルを表示する",
+    "value": "数値の配列",
+    "width": "SVGトレンドラインまたはバーの幅"
   }
 }

@@ -1,8 +1,26 @@
 {
+  "heading": "# オートコンプリート",
   "headingText": "`v-autocomplete` コンポーネントはシンプルで柔軟な先行入力機能を提供します。これは大量のデータを検索するときや、APIから動的に情報を要求するときにも便利です。",
+  "usageText": "オートコンプリートコンポーネントは `v-select` を拡張し、要素をフィルタする機能を追加しています。",
   "examples": {
-    "usage": {
-      "desc": "オートコンプリートコンポーネントは `v-select` を拡張し、要素をフィルタする機能を追加しています。"
+    "slots": {
+      "heading": "### スロット",
+      "desc": "slotの活用により、選択の視覚的出力をカスタマイズできます。この例では、チップとリストアイテムの両方にプロファイル画像を追加します。"
+    },
+    "customFilter": {
+      "heading": "### オートコンプリートのカスタムフィルタ",
+      "desc": "'filter' propを使用して、カスタムロジックで個々の項目をフィルター処理できます。この例では、名前でアイテムをフィルタリングします"
+    },
+    "stateSelector": {
+      "desc": "`v-autocomplete` スロットとトランジションを組み合わせて使用すると、この状態セレクタのような、スタイリッシュな切り替え可能なオートコンプリートフィールドを作成できます。"
+    },
+    "dense": {
+      "heading": "### Dense （高さが詰まったスタイル）"
     }
+  },
+  "props": {
+    "dark": "Components.Inputs.props.dark",
+    "filter": "検索時に使用されるフィルター 処理アルゴリズム。[example](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/components/VAutocomplete/VAutocomplete.ts#L36)",
+    "searchInput": "検索値。`.sync` 修飾子と共に使用できます。"
   }
 }

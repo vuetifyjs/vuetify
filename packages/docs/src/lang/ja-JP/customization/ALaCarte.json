@@ -1,1 +1,19 @@
-{}
+{
+  "heading": "# A-la-carte (ツリーシェーキング)",
+  "headingText": "コンポーネントフレームワークであるVuetifyは、常に水平方向に成長します。プロジェクトによっては、小さな **パッケージサイズ** が必要な場合があります。アラカルトシステムを使用すると、インポートするコンポーネントを選択し、ビルドサイズを大幅に「小さくする」ことができます。 [Vue CLI プラグイン](/getting-started/quick-start#new-applications) で作成された新しいプロジェクトでは、デフォルトで有効になっています。",
+  "treeshakeWarning": "ツリーシェーキングは、**production mode** のWebpack 4でのみ機能します。 Vue CLI 3を使用する場合、自動的に適用されます。",
+  "loaderHeader1": "## vuetify-loader",
+  "loaderText1a": "使用しているすべてのコンポーネントを追跡するのは非常に面倒です。 [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) は使用するすべてのVuetifyコンポーネントを自動的にインポートすることで、この痛みを軽減します。これにより、webpackは表示するチャンクに必要なコンポーネントのみをロードするため、コード分割がより効果的になります。",
+  "loaderHeader2": "### インポート",
+  "loaderText2a": "アラカルトコンポーネントを利用するには、**vuetify/lib** からVuetifyをインポートする必要があります。",
+  "optionsInfo": "**Vue.use** に 2 番目の引数として渡す options オブジェクトには、コンポーネント、ディレクティブ、およびトランジションプロパティを含めることもできます。",
+  "loaderText3a": "推奨されませんが、Vue CLIプラグインの使用をオプトアウトし、代わりにVue CLIから[configure webpack](https://cli.vuejs.org/config/#configurewebpack) オプションを使用してローダーを手動で構成できます。",
+  "loaderText4a": "webpackベースのプロジェクトのローダーを明示的にインストールすることもできます。 vue.config.jsのセットアップと同様に、プロジェクトのwebpackプラグインにローダーを追加するだけです。",
+  "loaderHeader7": "## 制限事項",
+  "loaderText7a": "`vuetify-loaderを使用する場合、コンポーネントの手動インポートが必要なシナリオがいくつかあります。",
+  "loaderText8a": "`v-data-iterator` は、content-tag propを介して任意のコンポーネントを使用できます。このコンポーネントは [globally](#markup-js-a-la-carte-manual) に登録する必要があります。",
+  "loaderText8b": "`<component :is=\"my-component\">`で使用される動的コンポーネントは [locally](#markup-js-a-la-carte-destructuring) で登録できます:",
+  "loaderHeader10": "## 手動インポート",
+  "loaderText10a": "Vuetify loaderを使用していない場合は、コンポーネントを手動でインポートできます。また、明示的な使用法のみをパースするので、動的コンポーネントと **vuetify-loader** を使用する場合にもこれを行います。これは一般的に、Vue `<component is=\"my-component\" />` でビルドされたコンポーネントを使用している場合に発生します。動的コンポーネントの詳細については、公式 Vue [documentation](https://jp.vuejs.org/v2/guide/components.html#%E5%8B%95%E7%9A%84%E3%81%AA%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%8D%E3%83%B3%E3%83%88) をご覧ください。",
+  "loaderText10b": "以下に示すように、.vue ファイルのコンポーネントをインポートすることもできます。"
+}

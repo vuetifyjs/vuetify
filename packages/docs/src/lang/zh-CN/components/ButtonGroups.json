@@ -41,6 +41,6 @@
     "shaped": "在卡片的左上角和右下角应用一个较大的边框半径。"
   },
   "events": {
-    "change": "Components.Inputs.events.change"
+    "change": "当用户交互更改输入时发出"
   }
 }

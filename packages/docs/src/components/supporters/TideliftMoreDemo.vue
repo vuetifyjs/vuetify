@@ -5,7 +5,7 @@
       class="ma-1"
       color="#F6914D"
       height="32"
-      href="https://tidelift.com/subscription/pkg/npm-vuetify?utm_source=vuetify&utm_medium=referral&utm_campaign=enterprise"
+      href="https://tidelift.com/subscription/pkg/npm-vuetify?utm_source=npm-vuetify&utm_medium=referral&utm_campaign=enterprise"
       outlined
       rel="noopener"
       style="background-color: #FFF !important;"
@@ -21,7 +21,7 @@
       color="#F6914D"
       depressed
       height="32"
-      href="https://tidelift.com/subscription/request-a-demo?utm_source=vuetify&utm_medium=referral&utm_campaign=enterprise"
+      href="https://tidelift.com/subscription/request-a-demo?utm_source=npm-vuetify&utm_medium=referral&utm_campaign=enterprise"
       rel="noopener"
       target="_blank"
       title="Schedule a Tidelift demo"

@@ -1,5 +1,23 @@
 {
-  "heading": "#アプリケーション",
+  "heading": "# アプリケーション",
   "headingText": "Vuetify では、 `v-app` コンポーネントや `v-navigation-drawer`, `v-app-bar`, `v-footer`などの**app**プロパティが、`<v-content>`周りで適切なサイズになる事でアプリケーション作成を手助けします。レイアウトのサイズを決める事に苦労することなく本当にユニークなUIを実現することができます。`v-app` コンポーネントはすべてのアプリケーションで**必要**です。 `v-app` コンポーネントは多くのVuetifyコンポーネントのマウントポイントであり、デフォルトアプリケーションの_variant_ (**dark/light**) を子コンポーネントに伝達します。そしてsafariなど多種ブラウザに対応しています。 `v-app` はアプリケーションで一度のみ使用されるべきです。",
-  "alert1": "アプリケーションが適切に動作するために、**確実に** `v-app` コンポーネントでラップしてください。このコンポーネントがクロスブラウザ対応に必要です。Vuetifyは1ページでの複数の独立したVuetifyインスタンスをサポートしていません。'v-app'はアプリケーションの**どこにでも**配置できますが、1つであり、かつ**全て**のvuetifyコンポ―ネントの親でなくてはなりません。"
+  "markupText2": "[vue-router](https://router.vuejs.org/ja/) を使用する場合は、ビューを`v-content`の中に配置することをお勧めします。",
+  "alert1": "アプリケーションが適切に動作するために、**確実に** `v-app` コンポーネントでラップしてください。このコンポーネントがクロスブラウザ対応に必要です。Vuetifyは1ページでの複数の独立したVuetifyインスタンスをサポートしていません。'v-app'はアプリケーションの**どこにでも**配置できますが、1つであり、かつ**全て**のvuetifyコンポ―ネントの親でなくてはなりません。",
+  "componentText2": [
+    "[v-app-bar](/components/app-bars)",
+    "[v-bottom-navigation](/components/bottom-navigation)",
+    "[v-footer](/components/footer)",
+    "[v-navigation-drawer](/components/navigation-drawers)",
+    "[v-system-bar](/components/system-bars)"
+  ],
+  "componentText4": [
+    "**v-system-bar:**は常に`v-app-bar`よりも高い優先度を持ち、アプリケーションの最上部に配置されます。",
+    "**v-app-bar:** は常に、`v-system-bar`よりも低い優先度でアプリケーションの最上部に配置されます。"
+  ],
+  "componentImg": "Vuetify Application",
+  "props": {
+    "v-content": {
+      "tag": "Components.Sheets.props.tag"
+    }
+  }
 }

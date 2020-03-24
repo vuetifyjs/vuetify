@@ -2,9 +2,22 @@
   "props": {
     "customFilter": "Itemをfilterするための関数",
     "customSort": "Itemsをsortするために使われる関数",
+    "customGroup": "Itemsをgroup化するために使われる関数",
     "disableFiltering": "Filterを完全に無効化します。",
     "disablePagination": "Paginationを完全に無効化します。",
     "disableSort": "Sortingを完全に無効化します。",
     "items": "表示されるitemsのarray。"
+  },
+  "events": {
+    "current-items": "現在のページのアイテム",
+    "page-count": "総ページ数",
+    "update:page": "`page`プロパティの`.sync`イベント",
+    "update:items-per-page": "`items-per-page`プロパティの`.sync`イベント",
+    "update:sort-by": "`sort-by`プロパティの`.sync`イベント",
+    "update:sort-desc": "`sort-desc`プロパティの`.sync`イベント",
+    "update:group-by": "`group-by`プロパティの`.sync`イベント",
+    "update:group-desc": "`group-desc`プロパティの`.sync`イベント",
+    "update:multi-sort": "`multi-sort`プロパティの`.sync`イベント",
+    "update:must-sort": "`must-sort`プロパティの`.sync`イベント"
   }
 }

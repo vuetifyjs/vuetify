@@ -1,6 +1,6 @@
 {
-  "heading": "# 滚动",
-  "headingText": "你可以通过在 `$vuetify` 对象上找到的 `goTo` 方法来触发应用程序的滚动。 这个方法支持几种不同类型的目标选择器和选项，包含内置的平滑滚动功能。",
+  "heading": "# 程序滚动",
+  "headingText": "您可以使用 `$vuetify` 对象上的 `goTo` 方法以编程方式触发应用程序中的滚动。 此方法支持几种不同类型的目标选择器和选项，包括使用内置缓动功能的平滑滚动。",
   "firstHeader": "## First",
   "secondHeader": "## Second",
   "thirdHeader": "## Third",
@@ -10,9 +10,6 @@
       "desc": "`goTo` 方法需要两个参数 `target` 和 `options`。`target` 可以是相对于页面顶部偏移，也可以是一个有效的 css 选择器，也可以是元素引用。 `options` 是一个包含 `duration`, `easing` ,`container`, 和 `offset` 在内的对象。"
     }
   },
-  "components": [
-    "$vuetify"
-  ],
   "routerHeading": "## 和路由一起使用",
   "routerText1": "**goTo** 函数可以单独导入并在任何地方被调用。当绑定到 [vue-router](https://router.vuejs.org/) 时，这尤其有用。",
   "functions": {

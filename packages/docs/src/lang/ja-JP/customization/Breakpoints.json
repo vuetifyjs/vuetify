@@ -1,11 +1,29 @@
 {
-  "toc": {
-    "0": {
-      "text": "はじめに"
+  "heading": "# ブレークポイント",
+  "headingText": "Vuetifyを使用すると、ウィンドウサイズに応じてアプリケーションのレイアウトを制御できます。たとえば、特定のブレークポイントをターゲットとする特定の [grid](/components/grids) prop またはヘルパークラス（つまり [display](/styles/display) ）を使用することで実現できます。\nVuetifyは、以下で説明するように5つの定義済みブレークポイントを提供しますが、ニーズに合わせて簡単に変更できます。",
+  "components": [
+    "v-container",
+    "v-layout",
+    "v-flex",
+    "v-spacer"
+  ],
+  "toc": [
+    {
+      "text": "はじめに",
+      "href": "はじめに"
     },
-    "2": {
-      "text": "API"
+    {
+      "text": "使い方",
+      "href": "使い方"
+    },
+    {
+      "text": "API",
+      "href": "api"
     }
-  },
-  "breakpointHeader1a": "## 使い方"
+  ],
+  "breakpointText1": "Vuetify は、使用可能なブレークポイントをアプリケーション内からアクセス可能なオブジェクトに変換します。これにより、ビューポートのサイズに基づいて特定のプロパティと属性を割り当て/適用できます。オブジェクトは`$vuetify.breakpoint`にあります。",
+  "breakpointHeader1a": "## 使い方",
+  "breakpointText2": "実際の例を試してみましょう。モバイル デバイスで **フルスクリーン** ダイアログに変換する `v-dialog` コンポーネントがあります。通常は、ビューポートのサイズを監視したり、ページが読み込まれるたびにチェックしたりする必要があります。",
+  "breakpointText3": "これは多くの定型文です。組み込みの [v-resize](/directives/resizing) ディレクティブを使用することを選択した場合でも、サイズ変更メソッドを定義する必要があります。 **breakpoint**オブジェクトを使用すると、このロジックを完全にスキップして、アプリケーションのビルドに戻ることができます。",
+  "customizeThresholdsText1": "独自のブレークポイントで閾値をピクセル数で定義できますが、現在は 2 段階のプロセスです: 1. スタイルを更新するには、`$grid-breakpoints` SASS 変数をオーバーライドする必要があります（[SASS variables](/customization/sass-variables) を参照してください）。2. javascript 側で同じ値を使用するには、アプリケーションのブートストラップ中に次のように渡す必要があります："
 }

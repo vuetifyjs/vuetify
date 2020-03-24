@@ -1,14 +1,1 @@
-{
-  "examples": {
-    "visibility": {
-      "heading": "표시여부 (Visibility)"
-    },
-    "inline": {
-      "desc": "배지는 텍스트와 같은 줄 위에(inline) 놓일 수 있습니다."
-    },
-    "icon": {
-      "heading": "### 아이콘 (Icon)",
-      "desc": "배지는 적용된 모든 아이콘 셋을 사용할 수 있습니다."
-    }
-  }
-}
+{}
