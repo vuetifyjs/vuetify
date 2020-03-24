@@ -48,24 +48,30 @@ export default mixins(
     genTHead () {
       const days = this.weekDays.map(day => this.$createElement('th', day))
       this.showWeek && days.unshift(this.$createElement('th'))
+
       return this.$createElement('thead', this.genTR(days))
     },
     // Returns number of the days from the firstDayOfWeek to the first day of the current month
     weekDaysBeforeFirstDayOfTheMonth () {
       const firstDayOfTheMonth = new Date(`${this.displayedYear}-${pad(this.displayedMonth + 1)}-01T00:00:00+00:00`)
       const weekDay = firstDayOfTheMonth.getUTCDay()
+
       return (weekDay - parseInt(this.firstDayOfWeek) + 7) % 7
     },
     getWeekNumber (dayInMonth: number) {
-      var firstDayOfMonth = new Date(`${this.displayedYear}-${pad(this.displayedMonth + 1)}-01T00:00:00+00:00`)
-      var determineDate = new Date(firstDayOfMonth.valueOf() + 86400000 * dayInMonth)
-      var dayNumber = (determineDate.getDay() + 6) % 7
+      const firstDayOfMonth = new Date(`${this.displayedYear}-${pad(this.displayedMonth + 1)}-01T00:00:00+00:00`)
+      const determineDate = new Date(firstDayOfMonth.valueOf() + 86400000 * dayInMonth)
+      const dayNumber = (determineDate.getDay() + 6) % 7
+
       determineDate.setDate(determineDate.getDate() - dayNumber + 3)
-      var firstThursday = determineDate.valueOf()
+
+      const firstThursday = determineDate.valueOf()
+
       determineDate.setMonth(0, 1)
       if (determineDate.getDay() !== 4) {
         determineDate.setMonth(0, 1 + ((4 - determineDate.getDay()) + 7) % 7)
       }
+
       return 1 + Math.ceil((firstThursday - determineDate.valueOf()) / 604800000)
     },
     genWeekNumber (weekNumber: number) {
@@ -80,6 +86,7 @@ export default mixins(
       const daysInMonth = new Date(this.displayedYear, this.displayedMonth + 1, 0).getDate()
       let rows = []
       let day = this.weekDaysBeforeFirstDayOfTheMonth()
+
       this.showWeek && rows.push(this.genWeekNumber(this.getWeekNumber(-day + 3)))
 
       while (day--) rows.push(this.$createElement('td'))
