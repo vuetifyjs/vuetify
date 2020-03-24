@@ -7579,7 +7579,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-604"
+               aria-owns="list-619"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -7588,7 +7588,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 1`] = `
                   10
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-604"
+                       id="input-619"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -7868,7 +7868,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 2`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-604"
+               aria-owns="list-619"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -7877,7 +7877,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 2`] = `
                   10
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-604"
+                       id="input-619"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
