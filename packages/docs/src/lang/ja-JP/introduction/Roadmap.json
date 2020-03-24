@@ -7,56 +7,64 @@
       "complete": true,
       "title": "アルファ版立ち上げ",
       "caption": "2016年12月",
-      "text": "Vuetifyが公式公開されました。40個のコンポーネントで当初公開され、実に46KBでした。"
+      "text": "Vuetifyが公式公開されました。40個のコンポーネントで当初公開され、実に46KBでした。",
+      "value": false
     },
     {
       "type": "リリース",
       "complete": true,
       "title": "v1.0 リリース",
       "caption": "2018年2月",
-      "text": "公式v1.0リリースパーティー。 18か月とKaelによる動作確認の後、最初の**MAJOR**リリースに移行しました。これには、多数の新しいコンポーネント、機能が含まれていました。公式の [リリースノート](https://github.com/vuetifyjs/vuetify/releases/tag/v1.0.0) を確認してください。"
+      "text": "公式v1.0リリースパーティー。 18か月とKaelによる動作確認の後、最初の**MAJOR**リリースに移行しました。これには、多数の新しいコンポーネント、機能が含まれていました。公式の [リリースノート](https://github.com/vuetifyjs/vuetify/releases/tag/v1.0.0) を確認してください。",
+      "value": false
     },
     {
       "type": "リリース",
       "complete": true,
       "title": "v1.1 リリース",
       "caption": "2018年6月",
-      "text": "すべての入力および選択コントロールを含む、すべてのフォーム機能の完全な再構築。 `v-autocomplete`, `v-combobox`などの機能を抽象化し`v-select`などのコンポーネントから新しい実装とし、機能の範囲を広げ、テストを容易にしました。このリリースは、**RTL**言語の最初の公式サポートでもありました。公式の [リリースノート](https://github.com/vuetifyjs/vuetify/releases/tag/v1.1.0) を確認してください。"
+      "text": "すべての入力および選択コントロールを含む、すべてのフォーム機能の完全な再構築。 `v-autocomplete`, `v-combobox`などの機能を抽象化し`v-select`などのコンポーネントから新しい実装とし、機能の範囲を広げ、テストを容易にしました。このリリースは、**RTL**言語の最初の公式サポートでもありました。公式の [リリースノート](https://github.com/vuetifyjs/vuetify/releases/tag/v1.1.0) を確認してください。",
+      "value": false
     },
     {
       "type": "リリース",
       "complete": true,
       "title": "v1.2 リリース",
       "caption": "2018年7月",
-      "text": "新しいコンポーネント `v-img`, `v-rating`, `v-hover`を追加しました。テーマ伝播システムを改善し、HEXやRGBAなどのコンポーネントで使用される色の機能を拡張しました。Als は、多数の新しいロケールを追加しました。[release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.2.0) をご覧ください。"
+      "text": "新しいコンポーネント `v-img`, `v-rating`, `v-hover`を追加しました。テーマ伝播システムを改善し、HEXやRGBAなどのコンポーネントで使用される色の機能を拡張しました。Als は、多数の新しいロケールを追加しました。[release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.2.0) をご覧ください。",
+      "value": false
     },
     {
       "type": "リリース",
       "complete": true,
       "title": "v1.3 リリース",
       "caption": "2018年10月",
-      "text": "`v-treeview` と `v-timeline` と `v-item-group` を新規コンポーネントとして追加しました。 `v-tabs` と `v-carousel` で使われるインターフェースを統一しました。Vuetifyのコンポーネントでツリーシェイキングをサポートする楽なアプリケーションにするために、 **vuetify-loader** を改善しました。[release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.3.0) を参照してください。"
+      "text": "`v-treeview` と `v-timeline` と `v-item-group` を新規コンポーネントとして追加しました。 `v-tabs` と `v-carousel` で使われるインターフェースを統一しました。Vuetifyのコンポーネントでツリーシェイキングをサポートする楽なアプリケーションにするために、 **vuetify-loader** を改善しました。[release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.3.0) を参照してください。",
+      "value": false
     },
     {
       "type": "リリース",
       "complete": true,
       "title": "AWS Cognito Vuex モジュール",
       "caption": "2018年11月",
-      "text": "AWS Cognitoとやり取りするためのフル機能のVuexモジュール。認証が必要なWebサイトに役立ちます。 [AWS Cognito](https://aws.amazon.com/jp/cognito/dev-resources/) の詳細については、リンク先をご覧ください。"
+      "text": "AWS Cognitoとやり取りするためのフル機能のVuexモジュール。認証が必要なWebサイトに役立ちます。 [AWS Cognito](https://aws.amazon.com/jp/cognito/dev-resources/) の詳細については、リンク先をご覧ください。",
+      "value": false
     },
     {
       "type": "リリース",
       "complete": true,
       "title": "v1.4 リリース",
       "caption": "2018年12月",
-      "text": "新しいコンポーネント`v-sparkline` を追加し、`v-toolbar`'の機能を複数のコンポーネントに抽象化して、保守性とテストを容易にしました。チームの貢献者と保守を容易にするために、ドキュメント全体を再構築しました。[release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.4.0) を確認してください。"
+      "text": "新しいコンポーネント`v-sparkline` を追加し、`v-toolbar`'の機能を複数のコンポーネントに抽象化して、保守性とテストを容易にしました。チームの貢献者と保守を容易にするために、ドキュメント全体を再構築しました。[release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.4.0) を確認してください。",
+      "value": false
     },
     {
       "type": "リリース",
       "complete": true,
       "title": "v1.5 リリース",
       "caption": "2019年2月",
-      "text": "新しいコンポーネント`v-calendar`が追加されました。新しい**bar**および**fill**プロパティで`v-sparkline`の機能を改善しました。`v-treeview`を改善し、LTSに対応しました。 LTSの詳細については、[Long-term Support Page](/introduction/long-term-support) に移動してください。[release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0) を確認してください。"
+      "text": "新しいコンポーネント`v-calendar`が追加されました。新しい**bar**および**fill**プロパティで`v-sparkline`の機能を改善しました。`v-treeview`を改善し、LTSに対応しました。 LTSの詳細については、[Long-term Support Page](/introduction/long-term-support) に移動してください。[release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0) を確認してください。",
+      "value": false
     },
     {
       "type": "リリース",
@@ -82,7 +90,8 @@
           "`v-simple-table`",
           "`v-slide-group`"
         ]
-      }
+      },
+      "value": false
     },
     {
       "type": "リリース",
@@ -104,7 +113,8 @@
           "`v-intersect`",
           "`v-mutate`"
         ]
-      }
+      },
+      "value": false
     },
     {
       "type": "リリース",
@@ -121,7 +131,8 @@
           "新しい機能を追加し、`v-expansion-panels`のコードスタイルを改善",
           "新しい `v-theme-provider` コンポーネント"
         ]
-      }
+      },
+      "value": false
     },
     {
       "type": "パッケージ",
@@ -159,7 +170,8 @@
       "type": "メンテナンス",
       "title": "メンテナンス・サイクル",
       "caption": "2020年Q2/3",
-      "text": "[Github issue board](https://github.com/vuetifyjs/vuetify/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+in%3Atitle+bug+) のバグの解決に焦点を当てたメンテナンスサイクル。これは、バージョン3のリリースと同時に開始されます。"
+      "text": "[Github issue board](https://github.com/vuetifyjs/vuetify/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+in%3Atitle+bug+) のバグの解決に焦点を当てたメンテナンスサイクル。これは、バージョン3のリリースと同時に開始されます。",
+      "value": false
     },
     {
       "type": "リリース",
@@ -177,19 +189,22 @@
           "`v-feature-discovery`",
           "新しいコンポーネントに関する詳細情報は、2020年の早い時期にリリースされる予定です。"
         ]
-      }
+      },
+      "value": false
     },
     {
       "type": "サイト",
       "title": "テーマジェネレータ",
       "caption": "2020年Q2",
-      "text": "アプリケーション用にカスタマイズされたプリセットを簡単に作成するためのテーマジェネレータ。"
+      "text": "アプリケーション用にカスタマイズされたプリセットを簡単に作成するためのテーマジェネレータ。",
+      "value": false
     },
     {
       "type": "snips",
       "title": "Vuetifyのスニペット",
       "caption": "未定",
-      "text": "Vuetifyコードのスニペットの作成と共有を目的としたウェブサイト。"
+      "text": "Vuetifyコードのスニペットの作成と共有を目的としたウェブサイト。",
+      "value": false
     }
   ]
 }
