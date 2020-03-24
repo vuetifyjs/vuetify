@@ -23,7 +23,7 @@ function classToHex (
   const currentTheme = node.context
     ? node.context.$vuetify.theme.currentTheme : {}
 
-  let hexColor: string = ''
+  let hexColor = ''
   if (colorName && colorName in colors) {
     if (colorModifier && colorModifier in colors[colorName]) {
       hexColor = colors[colorName][colorModifier]
@@ -31,7 +31,7 @@ function classToHex (
       hexColor = colors[colorName].base
     }
   } else if (colorName && colorName in currentTheme) {
-    hexColor = <string>currentTheme[colorName]
+    hexColor = currentTheme[colorName] as string
   }
 
   return hexColor
@@ -70,37 +70,33 @@ function setBorderColor (
   }
 }
 
+function updateColor (
+  el: HTMLElement,
+  binding: VNodeDirective,
+  node: VNode
+) {
+  if (binding.arg === undefined) {
+    setBackgroundColor(el, binding.value, node)
+  } else if (binding.arg === 'text') {
+    setTextColor(el, binding.value, node)
+  } else if (binding.arg === 'border') {
+    setBorderColor(el, binding.value, node, binding.modifiers)
+  }
+}
+
+function update (
+  el: HTMLElement,
+  binding: VNodeDirective,
+  node: VNode
+) {
+  if (binding.value === binding.oldValue) return
+
+  updateColor(el, binding, node)
+}
+
 export const Color = {
-  bind (el: HTMLElement, binding: VNodeDirective, node: VNode) {
-    setTextColor(el, binding.value, node)
-  },
-  update (el: HTMLElement, binding: VNodeDirective, node: VNode) {
-    if (binding.value === binding.oldValue) return
-
-    setTextColor(el, binding.value, node)
-  },
+  bind: updateColor,
+  update,
 }
 
-export const BgColor = {
-  bind (el: HTMLElement, binding: VNodeDirective, node: VNode) {
-    setBackgroundColor(el, binding.value, node)
-  },
-  update (el: HTMLElement, binding: VNodeDirective, node: VNode) {
-    if (binding.value === binding.oldValue) return
-
-    setBackgroundColor(el, binding.value, node)
-  },
-}
-
-export const BorderColor = {
-  bind (el: HTMLElement, binding: VNodeDirective, node: VNode) {
-    setBorderColor(el, binding.value, node, binding.modifiers)
-  },
-  update (el: HTMLElement, binding: VNodeDirective, node: VNode) {
-    if (binding.value === binding.oldValue) return
-
-    setBorderColor(el, binding.value, node, binding.modifiers)
-  },
-}
-
-export default { Color, BgColor, BorderColor }
+export default Color
