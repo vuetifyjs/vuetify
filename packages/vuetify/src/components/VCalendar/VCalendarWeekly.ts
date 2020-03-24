@@ -93,9 +93,11 @@ export default CalendarBase.extend({
     },
     genHeadDays (): VNode[] {
       const header = this.todayWeek.map(this.genHeadDay)
+
       this.showWeek && header.unshift(this.$createElement('div', {
         staticClass: 'v-calendar-weekly__head-weeknumber',
       }))
+
       return header
     },
     genHeadDay (day: CalendarTimestamp, index: number): VNode {
@@ -121,9 +123,9 @@ export default CalendarBase.extend({
     },
     genWeek (week: CalendarTimestamp[], weekNumber: number): VNode {
       const weekNodes = week.map((day, index) => this.genDay(day, index, week))
-      
+
       this.showWeek && weekNodes.unshift(this.genWeekNumber(weekNumber))
-      
+
       return this.$createElement('div', {
         key: week[0].date,
         staticClass: 'v-calendar-weekly__week',
@@ -132,17 +134,17 @@ export default CalendarBase.extend({
     getWeekNumber (day: CalendarTimestamp) {
       const determineDate = new Date(`${day.year}-${String(day.month).padStart(2, '0')}-${String(day.day).padStart(2, '0')}T00:00:00+00:00`)
       const dayNumber = (determineDate.getDay() + 6) % 7
-      
+
       determineDate.setDate(determineDate.getDate() - dayNumber + 3)
-      
+
       const firstThursday = determineDate.valueOf()
-      
+
       determineDate.setMonth(0, 1)
-      
+
       if (determineDate.getDay() !== 4) {
         determineDate.setMonth(0, 1 + ((4 - determineDate.getDay()) + 7) % 7)
       }
-      
+
       return 1 + Math.ceil((firstThursday - determineDate.valueOf()) / 604800000)
     },
     genWeekNumber (weekNumber: number) {
