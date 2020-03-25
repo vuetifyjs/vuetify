@@ -1,5 +1,5 @@
 // Utilities
-import { isCssColor } from '../../util/colorUtils'
+import { isCssColor, parseHex, HexToRGBA } from '../../util/colorUtils'
 import colors from '../../util/colors'
 
 // Types
@@ -37,6 +37,13 @@ function classToHex (
   return hexColor
 }
 
+function parseGradient (gradient: string) {
+  return gradient.replace(/rgba\(#([0-9a-f]{3}|[0-9a-f]{6}),/gi, x => {
+    const rgba = HexToRGBA(parseHex(x.slice(5, -1)))
+    return `rgba(${rgba.r},${rgba.g},${rgba.b},`
+  })
+}
+
 function setTextColor (el: HTMLElement, color: string, node: VNode) {
   const cssColor = !isCssColor(color) ? classToHex(color, colors, node) : color
 
@@ -70,6 +77,10 @@ function setBorderColor (
   }
 }
 
+function setGradientColor (el: HTMLElement, gradient: string) {
+  el.style.backgroundImage = `linear-gradient(${parseGradient(gradient)})`
+}
+
 function updateColor (
   el: HTMLElement,
   binding: VNodeDirective,
@@ -81,6 +92,8 @@ function updateColor (
     setTextColor(el, binding.value, node)
   } else if (binding.arg === 'border') {
     setBorderColor(el, binding.value, node, binding.modifiers)
+  } else if (binding.arg === 'gradient') {
+    setGradientColor(el, binding.value)
   }
 }
 
