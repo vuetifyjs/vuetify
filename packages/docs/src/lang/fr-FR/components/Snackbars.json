@@ -1,7 +1,26 @@
 {
+  "heading": "Barre rapide",
+  "headingText": "Le composant `v-snackbar` est utilisé pour afficher un message rapide à un utilisateur. Les snackbars prennent en charge le positionnement, le délai de suppression et les rappels.",
   "examples": {
+    "usage": {
+      "desc": "`v-snackbar`'s dans leur forme la plus simple affiche une notification temporaire et fermée à l'utilisateur."
+    },
+    "multi-line": {
+      "heading": "### Ligne multiple(multi-line)",
+      "desc": "La propriété `multi-line` étend la hauteur du` v-snackbar` pour vous donner un peu plus de place pour le contenu."
+    },
+    "timeout": {
+      "heading": "### Temps libre",
+      "desc": "La propriété `timeout` vous permet de personnaliser le délai avant que le` v-snackbar` soit masqué."
+    },
     "vertical": {
-      "heading": "## Vertical"
+      "heading": "## Vertical",
+      "desc": "La propriété `vertical` vous permet d'empiler le contenu de votre` v-snackbar`."
     }
+  },
+  "props": {
+    "multiLine": "Donne au snack-bar une hauteur minimale plus grande.",
+    "timeout": "Temps (en millisecondes) d'attente jusqu'à ce que la barre de collation soit automatiquement cachée. Utilisez 0 pour rester ouverte indéfiniment.",
+    "vertical": "Pile le contenu de la barre de snackbar en haut des actions (bouton)."
   }
 }

@@ -1,1 +1,87 @@
-{}
+{
+  "heading": "# テキストフィールド",
+  "headingText": "テキスト フィールド コンポーネントは、ユーザーが入力した情報を収集するために使用されます。",
+  "examples": {
+    "usage": {
+      "desc": "単純なテキストフィールドはプレースホルダやラベルがあります。"
+    },
+    "single-line": {
+      "heading": "### シングルライン",
+      "desc": "シングルライン・テキストフィールドは、フォーカスされた時や入力済のとき、ラベルをフロートしません。"
+    },
+    "shaped": {
+      "heading": "### シェイプド",
+      "desc": "`shaped`テキストフィールドは、アウトラインが付いている（`outlined`prop指定）場合は丸められ、塗りつぶされた（`filled`prop指定）場合は境界線半径`border-radius`が大きくなります。"
+    },
+    "disabled-and-readonly": {
+      "heading": "### 無効 & 読み取り専用",
+      "desc": "テキストフィールドは `disabled` または `readonly` にすることができます。"
+    },
+    "dense": {
+      "heading": "### Dense （高さが詰まったスタイル）",
+      "desc": "`dense` propでテキストフィールドの高さを低くできます。"
+    },
+    "icon": {
+      "heading": "### アイコン",
+      "desc": "テキストフィールドの前後（内側・外側それぞれ）に`prepend-icon`, `append-icon`および`append-outer-icon`propで、指定したアイコンを追加できます。"
+    },
+    "clearable": {
+      "heading": "### Clearable",
+      "desc": "`clearable`で消去可能を設定した場合は、`clear-icon`propでアイコンをカスタマイズできます。"
+    },
+    "character-counter": {
+      "heading": "### 文字数カウンタ",
+      "desc": "文字制限をユーザーに通知するには、'counter' propを使用します。カウンタはそれ自体ではバリデーションを実行しません。バリデーションするには内蔵システムまたはサード パーティのライブラリとペアリングする必要があります。通常のテキスト フィールド、ボックスフィールド、またはアウトラインテキストフィールドで使用できます。"
+    },
+    "validation": {
+      "heading": "### バリデーション"
+    },
+    "hint": {
+      "desc": "テキスト フィールドの `hint` プロパティは、テキスト フィールドの下に指定された文字列を追加します。`persistent-hint` を使用すると、テキストフィールドがフォーカスされていないときでもヒントが表示されます。`hint` propは、ソロモードをサポート**していません**。"
+    },
+    "hide-details": {
+      "desc": "`hide-details`が`auto` に設定されている場合、表示するメッセージ(ヒント、エラーメッセージ、カウンタ値など) がある場合にのみ表示されます。"
+    },
+    "prefixes-and-suffixes": {
+      "heading": "### プレフィックスとサフィックス",
+      "desc": "`prefix` と `suffix` プロパティを使用すると、テキストフィールドの横にインラインの固定テキストを追加することができます。"
+    },
+    "box": {
+      "heading": "### ボックススタイル",
+      "desc": "テキスト フィールドは、ボックスデザインと共に使用できます。このモードでは、append および prepend アイコンprop は**サポートされません**。"
+    },
+    "solo": {
+      "heading": "## ソロスタイル",
+      "desc": "テキストフィールドは、ソロデザインで使用できます。"
+    },
+    "outlined": {
+      "heading": "### アウトラインスタイル",
+      "desc": "テキストフィールドは、アウトラインデザインで使用できます。"
+    },
+    "custom-colors": {
+      "heading": "### 色の変更"
+    }
+  },
+  "props": {
+    "appendOuterIcon": "`v-icon`と同じ構文を使用して、入力コンポーネント外側の後方にアイコンを追加します",
+    "dark": "Components.Inputs.props.dark",
+    "flat": "Mixins.Soloable.props.flat",
+    "noResize": "サイズ変更ハンドルを削除する（**multi-line**と**textarea** propsにのみ適用）",
+    "outlined": "アウトラインスタイルを適用します。",
+    "placeholder": "プレースホルダーを設定します",
+    "prefix": "前につけるプレフィックステキストを表示します",
+    "prependInnerIcon": "`v-icon`と同じ構文を使用して、入力コンポーネント内の先頭にアイコンを追加します",
+    "reverse": "入力方向を反転します。",
+    "rows": "テキストエリア内の行数を制御します。",
+    "solo": "Mixins.Soloable.props.solo",
+    "soloInverted": "Mixins.Soloable.props.soloInverted",
+    "suffix": "後につけるサフィックステキストを表示します",
+    "textarea": "代替スタイルのテキストエリアテキストフィールド"
+  },
+  "events": {
+    "change": "ユーザーの操作によって値が変更されたときに発生します。",
+    "click:clear": "クリアアイコンをクリックしたときに発生します。",
+    "focus": "コンポーネントがフォーカスされている場合に発生します。",
+    "keydown": "**any** キーが押されたときに発生します。"
+  }
+}

@@ -4,9 +4,9 @@
   "alert": "`v-btn` is the only component that behaves differently when using the **dark** prop. Normally components use the **dark** prop to denote that they have a dark colored background and need their text to be white. While this will work for `v-btn`, it is advised to only use the prop when the button **IS ON** a colored background due to the disabled state blending in with white backgrounds. If you need white text, simply add the **white--text** class.",
   "usageText": "Buttons in their simplest form contain uppercase text, a slight elevation, hover effect, and a ripple effect on click.",
   "examples": {
-    "flat": {
-      "heading": "### Flat",
-      "desc": "Flat buttons have no box shadow and no background. Only on hover is the container for the button shown."
+    "text": {
+      "heading": "### Text",
+      "desc": "Text buttons have no box shadow and no background. Only on hover is the container for the button shown."
     },
     "raised": {
       "heading": "### Raised",

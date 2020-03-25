@@ -21,15 +21,7 @@
     inheritAttrs: false,
 
     props: {
-      to: {
-        type: [Object, String],
-        default: () => ({
-          params: {
-            namespace: 'getting-started',
-            page: 'sponsors-and-backers',
-          },
-        }),
-      },
+      to: String,
       href: {
         type: String,
         default: undefined,

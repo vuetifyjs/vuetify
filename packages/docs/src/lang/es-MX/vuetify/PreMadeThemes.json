@@ -1,6 +1,6 @@
 {
     "heading": "# Temas gratuitos y premium",
-    "headingText": "Vuetify ofrece temas prefabricados **gratuitos** y **premium** para que comiences en un pestañeo. Los temas gratuitos están disponibles par ser instalados a través del Vue CLI 3 o puedes simplemente descargar el código fuente.",
+    "headingText": "Vuetify ofrece temas prefabricados **gratuitos** y **premium** para que comiences en un pestañeo. Los temas gratuitos están disponibles par ser instalados a través del Vue CLI o puedes simplemente descargar el código fuente.",
     "free": "Gratis",
     "demo": "Demo",
     "comingSoon": "próximamente",
@@ -15,7 +15,7 @@
             "demoUrl": ""
         },
         {
-            "screenshot": "/static/doc-images/starter/vuetify-parallax-starter.png",
+            "screenshot": "/static/doc-images/starter/parallax-2020-large.png",
             "title": "Parallax",
             "description": "Esta bella _single page_ con parallax es una gran página de inicio para cualquier aplicación.",
             "sourceUrl": "vuetifyjs/parallax-starter",

@@ -21,6 +21,9 @@
   "getting-started/quick-start": {
     "title": "Bắt đầu nhanh"
   },
+  "getting-started/unit-testing": {
+    "title": "Unit testing"
+  },
   "getting-started/contributing": {
     "title": "Đóng góp"
   },

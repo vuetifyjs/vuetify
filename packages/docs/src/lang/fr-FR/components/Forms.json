@@ -8,9 +8,6 @@
     },
     "validation-with-submit-and-clear": {
       "desc": "Le composant `v-form` a **trois** fonctions qui peuvent être accessibles en définissant un _ref_ sur le composant. Un ref nous permet d'accéder aux méthodes internes d'un composant, par exemple, `<v-form ref=\"form\">`. \n**ceci.$refs.form.validate()** validera toutes les entrées et retournera s'ils sont tous valides ou non. **ceci.$refs.form.reset()** effacera toutes les entrées et réinitialisera leurs erreurs de validation. **ceci.$refs.form.resetValidation()** ne réinitialisera la validation de l'entrée et ne modifiera pas leur état."
-    },
-    "vee-validate": {
-      "desc": "**vee-validate** est un Framework de Validation Basé sur des Templates pour Vue.js [Documentation](https://baianat.github.io/vee-validate/)"
     }
   },
   "props": {

@@ -227,7 +227,7 @@ export default baseMixins.extend({
       this.callUpdate()
     },
     invertedScroll (val: boolean) {
-      this.isActive = !val
+      this.isActive = !val || this.currentScroll !== 0
     },
   },
 

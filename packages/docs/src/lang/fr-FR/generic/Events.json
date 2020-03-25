@@ -1,3 +1,4 @@
 {
+  "click": "Événement qui est émis lorsque le composant est cliqué",
   "input": "Le modèle lié mis à jour"
 }

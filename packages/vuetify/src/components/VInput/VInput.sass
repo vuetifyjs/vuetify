@@ -5,18 +5,18 @@
   color: map-deep-get($material, 'text', 'primary')
 
   input,
-  textarea,
+  textarea
+    color: map-deep-get($material, 'text', 'primary')
+
   input::placeholder,
   textarea::placeholder
-    color: map-deep-get($material, 'text', 'primary')
+    color: map-deep-get($material, 'text', 'disabled')
 
   &--is-disabled
     color: map-deep-get($material, 'text', 'disabled')
 
     input,
-    textarea,
-    input::placeholder,
-    textarea::placeholder
+    textarea
       color: map-deep-get($material, 'text', 'disabled')
 
 .v-input
@@ -93,6 +93,9 @@
 
     &--clear
       border-radius: 50%
+
+      .v-icon--disabled
+        visibility: hidden
 
   &__slot
     align-items: center

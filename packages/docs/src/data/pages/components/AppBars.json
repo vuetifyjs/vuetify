@@ -51,6 +51,15 @@
       "type": "section",
       "children": [
         {
+          "type": "functional",
+          "value": "functional"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "api",
           "value": [
             "v-app-bar",
@@ -72,6 +81,7 @@
             "simple/collapse",
             "simple/elevate-on-scroll",
             "simple/inverted-scroll",
+            "intermediate/app-bar-nav",
             "intermediate/scroll-threshold",
             "complex/img-fade",
             "complex/menu"

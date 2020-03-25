@@ -1,0 +1,12 @@
+{
+  "examples": {
+    "advanced": {
+      "uninverted": true
+    }
+  },
+  "props": {
+    "v-expansion-panel-header": {
+      "ripple": "Mixins.Rippleable.props.ripple"
+    }
+  }
+}

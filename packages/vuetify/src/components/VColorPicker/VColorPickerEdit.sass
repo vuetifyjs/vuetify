@@ -12,7 +12,11 @@
   text-align: center
 
   &:not(:last-child)
-    margin-right: $color-picker-input-margin-right
+    +ltr()
+      margin-right: $color-picker-input-margin
+
+    +rtl()
+      margin-left: $color-picker-input-margin
 
   input
     border-radius: $color-picker-border-radius

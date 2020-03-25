@@ -93,6 +93,32 @@ describe('AppBar.ts', () => {
     expect(wrapper.vm.isActive).toBe(true)
   })
 
+  it('should hide when inverted scroll is enabled and page is scrolled to the top', async () => {
+    const wrapper = mountFunction({
+      attachToDocument: true,
+      propsData: { hideOnScroll: true, invertedScroll: true, scrollThreshold: 300 },
+    })
+
+    expect(wrapper.vm.currentScroll).toBe(0)
+    expect(wrapper.vm.isActive).toBe(false)
+
+    await scrollWindow(475)
+
+    expect(wrapper.vm.isActive).toBe(true)
+
+    await scrollWindow(0)
+    wrapper.setProps({ invertedScroll: false })
+    await wrapper.vm.$nextTick()
+    await scrollWindow(475)
+    wrapper.setProps({ invertedScroll: true })
+
+    expect(wrapper.vm.isActive).toBe(true)
+
+    await scrollWindow(0)
+
+    expect(wrapper.vm.isActive).toBe(false)
+  })
+
   it('should set active based on value', async () => {
     const wrapper = mountFunction({
       propsData: {

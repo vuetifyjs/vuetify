@@ -1,5 +1,10 @@
 {
-  "cm": "### Комьюнити-менеджер",
-  "founder": "### Основатель<br>CEO",
-  "heading": "# Наша команда"
+  "assistant": "### Jr.<br>UI Designer",
+  "cm": "### Community Manager",
+  "core": "### Core<br>Team",
+  "founder": "### Founder<br>CEO",
+  "heading": "# Наша команда",
+  "headingText": "Vuetify это _не_ один человек. У нас есть очень активная и энергичная команда, которая **безустанно стремится** помочь разработчикам получить лучший опыт. Имейте в виду, что ниже приведен далеко не весь список людей, которые помогают сделать Vuetify лучшим. **Спасибо** за вашу поддержку и спасибо за использование Vuetify!",
+  "keeper": "### Keeper of<br>the Grove",
+  "operations": "### Chief Operations Officer"
 }

@@ -12,15 +12,21 @@
       "title": "Composants sémantiques Material"
     },
     "scaffolding": {
-      "text": "Vuetify supporte le futur de Vue via son plugin sur Vue CLI 3. Avec une seule commande, vous êtes prêt à développer votre prochaine bonne idée.",
+      "text": "Vuetify supporte le futur de Vue via son plugin sur Vue CLI. Avec une seule commande, vous êtes prêt à développer votre prochaine bonne idée.",
       "title": "Des projets prêts à l'emploi"
     }
   },
   "getHelp": "Obtenir de l'aide",
   "getStarted": "Commencer",
   "github": "Github",
+  "madeWithVuetify": "## Projets réalisés avec Vuetify",
+  "madeWithVuetifyText": "Un ensemble de projets réalisés avec Vuetify. Voyez ce que d'autres créent avec cet écosystème.",
   "materialDesign": "Material Design",
   "mit": "Licence MIT",
+  "premiumThemes": "## Thèmes premium",
+  "premiumThemesText": "Faites passer votre projet au niveau supérieur grâce aux thèmes premium de notre boutique officielle - le tout construit avec Vuetify.",
+  "proudlySponsoredBy": "## Sponsors du projet",
+  "proundlySponsoredByText": "Le développement et la maintenance continus de Vuetify sont possibles grâce à ces généreux donateurs :",
   "seeMoreThemes": "Voir plus de thèmes",
   "whyVuetify": "Pourquoi Vuetify ?",
   "whyVuetifyText2": "Pourquoi Vuetify ?"

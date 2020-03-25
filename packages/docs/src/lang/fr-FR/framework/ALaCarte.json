@@ -1,6 +1,6 @@
 {
   "heading": "# Vue d'ensemble",
-  "headingText": "Vuetify sera toujours une croissance horizontale. Selon votre projet, une **taille réduite** peut être requise. Le système à la carte vous permet de choisir les composants à importer, réduisant considérablement la taille de votre application. Ceci est activé par défaut dans les nouveaux projets créés avec le [plugin Vue CLI 3](/getting-started/quick-start#new-applications).",
+  "headingText": "Vuetify sera toujours une croissance horizontale. Selon votre projet, une **taille réduite** peut être requise. Le système à la carte vous permet de choisir les composants à importer, réduisant considérablement la taille de votre application. Ceci est activé par défaut dans les nouveaux projets créés avec le [plugin Vue CLI](/getting-started/quick-start#new-applications).",
   "treeshakeWarning": "Le tree-shaking ne fonctionne qu'avec Webpack 4 en mode production",
   "loaderHeader9": "### Composants fonctionnels"
 }

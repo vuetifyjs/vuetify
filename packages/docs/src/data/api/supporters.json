@@ -5,12 +5,6 @@
       "href": "https://www.qomplx.com/",
       "logo": "backers/QOMPLX.png",
       "darkLogo": "backers/QOMPLX-dark.png"
-    },
-    {
-      "name": "Vueconf.US",
-      "href": "http://vueconf.us/",
-      "logo": "backers/vueconf_us.png",
-      "darkLogo": "backers/vueconf_us-dark.png"
     }
   ],
   "Diamond": [
@@ -61,6 +55,11 @@
       "name": "Quanted Square",
       "href": "https://analytics.quantedsquare.com/",
       "logo": "backers/quanted-square.svg"
+    },
+    {
+      "name": "ALV Digital",
+      "href": "https://www.alv-software.com/",
+      "logo": "backers/alv-software-logo-light.png"
     },
     {
       "name": "HYPE",
@@ -120,7 +119,8 @@
     {
       "name": "Elfo",
       "href": "https://www.elfo.net/",
-      "logo": "backers/elfo.svg"
+      "logo": "backers/elfo-logo-light.png",
+      "darkLogo": "backers/elfo-logo-dark.png"
     },
     {
       "name": "CodeFirst",
@@ -161,6 +161,11 @@
       "name": "ClothingRIC",
       "href": "https://www.clothingric.com/",
       "logo": "backers/clothingric.png"
+    },
+    {
+      "name": "jsDevJobs",
+      "href": "https://jsdevjobs.com/",
+      "logo": "backers/jsdevjobs-logo-light.png"
     }
   ],
   "affiliate": [

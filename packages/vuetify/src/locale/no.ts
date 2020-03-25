@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Rader per side:',
     ariaLabel: {
-      sortDescending: ': Sortert synkende. Aktiver for å fjerne sortering.',
-      sortAscending: ': Sortert stigende. Aktiver for å sortere synkende.',
-      sortNone: ': Ikke sortert. Aktiver for å sortere stigende.',
+      sortDescending: 'Sortert synkende.',
+      sortAscending: 'Sortert stigende.',
+      sortNone: 'Ikke sortert.',
+      activateNone: 'Aktiver for å fjerne sortering.',
+      activateDescending: 'Aktiver for å sortere synkende.',
+      activateAscending: 'Aktiver for å sortere stigende.',
     },
     sortBy: 'Sorter etter',
   },

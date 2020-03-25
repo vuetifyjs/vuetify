@@ -87,6 +87,9 @@ export default mixins(
       }, [
         h('div', this.setBackgroundColor(this.color, {
           staticClass: 'v-snack__wrapper',
+          attrs: {
+            role: 'alert',
+          },
         }), [
           h('div', {
             staticClass: 'v-snack__content',

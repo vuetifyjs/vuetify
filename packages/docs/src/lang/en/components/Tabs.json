@@ -10,6 +10,10 @@
       "heading": "### Fixed tabs",
       "desc": "The **fixed-tabs** prop forces `v-tab` to take up all available space up to the maximum width (300px)."
     },
+    "tab-items": {
+      "heading": "### Tab Items",
+      "desc": "The `v-tabs-items` component allows for you to customize the content per tab. Using a shared `v-model`, the `v-tabs-items` will sync with the currently selected `v-tab`."
+    },
     "right": {
       "heading": "### Right aligned tabs",
       "desc": "The **right** prop aligns the tabs to the right."

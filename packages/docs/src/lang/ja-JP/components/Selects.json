@@ -1,5 +1,59 @@
 {
+  "heading": "# セレクト",
+  "headingText": "選択フィールド コンポーネントは、オプションのリストからユーザーが提供した情報を収集するために使用されます。",
+  "objectAlert": "**items** propにオブジェクトを使用する場合は、オブジェクトの既存のプロパティに**item-text**と**item-value**を関連付ける必要があります。これらの値はデフォルトで **text** および **value** に設定され、変更もできます。",
+  "autoAlert": "**menu-props**の**auto**プロパティは、デフォルトの入力スタイルでのみサポートされています。",
+  "autocompleteAlert": "ブラウザのオートコンプリートはデフォルトでオフに設定されていますが、ブラウザによって異なる場合があり、無視される場合があります。 [MDN](https://developer.mozilla.org/ja/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion)",
+  "examples": {
+    "light": {
+      "heading": "### ライトテーマ",
+      "desc": "標準的なSingle selectには、多数の構成オプションがあります。"
+    },
+    "icons": {
+      "heading": "### アイコン",
+      "desc": "前後に任意のアイコンを配置します。"
+    },
+    "multiple": {
+      "heading": "### Multiple",
+      "desc": "複数選択では、選択した項目の表示に`v-chip`を使用できます。"
+    },
+    "disabled": {
+      "heading": "### 無効化",
+      "desc": "無効にされた `v-select` は使用できません。"
+    },
+    "dense": {
+      "heading": "### Dense （高さが詰まったスタイル）",
+      "desc": "`dense` propを使用して、フィールドの高さを減らし、リスト項目の最大高さを下げることができます。"
+    },
+    "readonly": {
+      "heading": "### Read-only",
+      "desc": "読み取り専用の `v-select`は使用はできませんが、デフォルトの外観です。"
+    }
+  },
   "props": {
-    "noDataText": "データが存在しない場合に表示するテキストです。"
+    "attach": "Mixins.Detachable.props.attach",
+    "chips": "選択項目の表示をチップに変更",
+    "contentClass": "Mixins.Detachable.props.contentClass",
+    "dark": "Components.Inputs.props.dark",
+    "deletableChips": "選択中のチップに削除アイコンを追加します（chipsオプションと併用）",
+    "disabled": "入力を無効にする",
+    "eager": "Mixins.Bootable.props.eager",
+    "itemColor": "選択した項目の色を設定します",
+    "itemText": "**items** のテキスト値のプロパティを設定します",
+    "itemValue": "**items**の値のプロパティを設定します - **primitiveでなければなりません** 。ドット表記がサポートされています",
+    "noDataText": "データが存在しない場合に表示するテキストです。",
+    "openOnClear": "**clearable** propを使用する場合、クリアすると、選択メニューは現在の状態に応じて開くか、開いたままになります",
+    "overflow": "オーバーフローボタンを作成します - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
+    "returnObject": "**item-value** で指定された値ではなく、オブジェクトを直接返すように選択動作を変更します。",
+    "searchInput": "**.sync** 修飾子を使用して、検索入力からのユーザー入力をキャッチします。",
+    "segmented": "セグメント化されたボタンを作成します - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
+    "value": "Components.Inputs.props.value"
+  },
+  "slots": {
+    "no-data": "Mixins.Filterable.slots.noData"
+  },
+  "events": {
+    "update:list-index": "キーボードの矢印を使用してメニュー項目を選択するときに発生します",
+    "update:search-input": "`search-input.sync` イベント"
   }
 }

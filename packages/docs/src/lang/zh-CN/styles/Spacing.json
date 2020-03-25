@@ -12,9 +12,9 @@
   "directionText": "占位符 _direction_ 指定属性所应用到的方向：",
   "directions": [
     "`t` - 应用 `margin-top` 和 `padding-top` 的间距。",
-    "`b` - 应用 `bankin-bow` 和 `padding-bow` 的间距。",
-    "`l` - 适用 `bomin-left` 和 `padding-left` 的间距。",
-    "`r` - 应用 `bomin-right` 和 `padding-right` 的间距。",
+    "`b` - 应用 `margin-bottom` 和 `padding-bottom` 的间距。",
+    "`l` - 适用 `margin-left` 和 `padding-left` 的间距。",
+    "`r` - 应用 `margin-right` 和 `padding-right` 的间距。",
     "`s` - 应用 `margin-left`/`padding-left` _(LTR mode)_ 和 `margin-right`/`padding-right` _(RTL mode)_",
     "`e` - 应用 `margin-right`/`padding-right` _(LTR model)_ 和 `margin-left`/`padding-left` _(RTL model)_",
     "`x` - 同时对应`*-left`和`*-right`属性",
@@ -54,7 +54,6 @@
   "horizontalText": "对于具有指定宽度的块元素，可以使用`.mx-auto`来使它的内容水平居中",
   "breakpointHeader": "## 和断点一起",
   "breakpointText": "Vuetify 有一个使用 Flexbox 构建的 12 格栅格系统。空格用于创建应用程序内容中的特定布局。 它由 5 个用于针对特定屏幕大小或方向的介质断点组成：**xs**, **sm**, **md**, **lg** 和 **xl**。 默认分辨率定义在 *Viewport Breakpoints* 表中，可以通过 [breakpoint service config](/customization/breakpoints) 进行修改。",
-  "breakpointHowText": "助手类在给定的断点上应用 **margin** 或 **padding**。这些类的格式遵循 `{property}{direction}-{breakpoint}-{size}`。",
   "examples": {
     "horizontal": {
       "heading": "### 水平布局",
@@ -65,7 +64,7 @@
       "desc": "也可以在相同的 **1 到 12** 间隔内应用负边距。"
     },
     "breakpoint-md": {
-      "heading": "### 和断电一起",
+      "heading": "### 和断点一起",
       "desc": "使用 `md` 和 `lg` 断点间距"
     }
   }

@@ -1,5 +1,21 @@
 @import '../tools/_functions.sass';
 
+$material-dark-elevation-colors: () !default;
+// https://material.io/design/color/dark-theme.html#properties
+// https://material.io/design/environment/elevation.html#default-elevations
+$material-dark-elevation-colors: (
+  '0': #000000,
+  '1': #1E1E1E,
+  '2': #222222,
+  '3': #252525,
+  '4': #272727,
+  '6': #2C2C2C,
+  '8': #2E2E2E,
+  '12': #333333,
+  '16': #363636,
+  '24': #373737
+);
+
 $material-dark: () !default;
 $material-dark: map-deep-merge(
   (
@@ -7,8 +23,10 @@ $material-dark: map-deep-merge(
       'regular': map-get($shades, 'black'),
       'lights-out': rgba(map-get($shades, 'black'), 0.2)
     ),
-    'app-bar': map-get($grey, 'darken-4'),
-    'background': #303030,
+    'app-bar': map-get($material-dark-elevation-colors, '4'),
+    'background': #121212,
+    'bottom-navigation': map-get($material-dark-elevation-colors, '8'),
+    'surface': #121212,
     'calendar': (
       'background-color': #303030,
       'outside-background-color': #202020,
@@ -17,8 +35,8 @@ $material-dark: map-deep-merge(
       'interval-line-color': map-get($grey, 'darken-2'),
       'text-color': map-get($shades, 'white'),
       'past-color': rgba(map-get($shades, 'white'), .50)
-    ),
-    'cards': map-get($grey, 'darken-3'),
+      ),
+    'cards': map-get($material-dark-elevation-colors, '1'),
     'chips': #555,
     'dividers': rgba(map-get($shades, 'white'), 0.12),
     'text': (
@@ -37,7 +55,9 @@ $material-dark: map-deep-merge(
       'box': map-get($shades, 'white'),
       'solo-inverted': rgba(map-get($shades, 'white'), 0.16),
       'solo-inverted-focused': map-get($shades, 'white'),
-      'solo-inverted-focused-text': map-get(map-get($material-light, 'text'), 'primary')
+      'solo-inverted-focused-label': rgba(map-get($shades, 'black'), .6),
+      'solo-inverted-focused-placeholder': rgba(map-get($shades, 'black'), 0.38),
+      'solo-inverted-focused-text': rgba(map-get($shades, 'black'), 0.87)
     ),
     'buttons': (
       'disabled': rgba(map-get($shades, 'white'), 0.3),
@@ -48,6 +68,7 @@ $material-dark: map-deep-merge(
     'expansion-panels': (
       'focus': #494949
     ),
+    'navigation-drawer': map-get($material-dark-elevation-colors, '16'),
     'selection-controls': (
       'disabled': rgba(map-get($shades, 'white'), 0.3),
       'thumb': (
@@ -96,6 +117,7 @@ $material-dark: map-deep-merge(
       'hover': map-get($grey, 'darken-2'),
       'group': map-get($grey, 'darken-2')
     ),
+    'toolbar': map-get($material-dark-elevation-colors, '4'),
     'picker': (
       'body': map-get($grey, 'darken-3'),
       'clock': map-get($grey, 'darken-2'),

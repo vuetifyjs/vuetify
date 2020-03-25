@@ -42,7 +42,7 @@ exports[`Icons.ts should use a custom iconfont preset 1`] = `
 Object {
   "cancel": "fa fa-times-circle",
   "checkboxIndeterminate": "fa fa-minus-square",
-  "checkboxOff": "far fa-square",
+  "checkboxOff": "fa fa-square-o",
   "checkboxOn": "fa fa-check-square",
   "clear": "fa fa-times-circle",
   "close": "fa fa-times",

@@ -1,9 +1,5 @@
 {
   "examples": {
-    "flat": {
-      "heading": "### Flat",
-      "desc": "Nút dạng `flat` không có đổ bóng và màu nền. Chỉ khi di chuột vào nút thì nút mới hiển thị."
-    },
     "raised": {
       "desc": "Nút dạng `Raised ` có hộp đổ bóng tăng cường khi được click. Đây là kiểu mặc định."
     },
@@ -44,11 +40,6 @@
       "right": "Canh phải nút. Sử dùng kèm với thuộc tính **absolute** hoặc **fixed**.",
       "text": "Chỉ hiển thị chữ. Tắt nền và viền.",
       "type": "Thiết lập kiểu của nút"
-    }
-  },
-  "events": {
-    "v-btn-toggle": {
-      "change": "Components.Inputs.events.change"
     }
   }
 }

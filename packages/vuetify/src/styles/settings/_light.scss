@@ -8,7 +8,9 @@ $material-light: map-deep-merge(
       'lights-out': rgba(map-get($shades, 'white'), 0.7)
     ),
     'app-bar': map-get($grey, 'lighten-4'),
-    'background': map-get($grey, 'lighten-5'),
+    'background': map-get($shades, 'white'),
+    'bottom-navigation': map-get($shades, 'white'),
+    'surface': map-get($shades, 'white'),
     'calendar': (
       'background-color': map-get($shades, 'white'),
       'outside-background-color': #f7f7f7,
@@ -35,8 +37,10 @@ $material-light: map-deep-merge(
     ),
     'inputs': (
       'box': rgba(map-get($shades, 'black'), 0.04),
-      'solo-inverted': rgba(map-get($shades, 'black'), 0.16),
+      'solo-inverted': rgba(map-get($shades, 'black'), 0.06),
       'solo-inverted-focused': map-get($grey, 'darken-3'),
+      'solo-inverted-focused-label': rgba(map-get($shades, 'white'), .7),
+      'solo-inverted-focused-placeholder': rgba(map-get($shades, 'white'), 0.5),
       'solo-inverted-focused-text': map-get($shades, 'white')
     ),
     'buttons': (
@@ -48,6 +52,7 @@ $material-light: map-deep-merge(
     'expansion-panels': (
       'focus': map-get($grey, 'lighten-3')
     ),
+    'navigation-drawer': map-get($shades, 'white'),
     'selection-controls': (
       'disabled': rgba(map-get($shades, 'black'), 0.26),
       'thumb': (
@@ -85,6 +90,7 @@ $material-light: map-deep-merge(
       'outlined-disabled': rgba(map-get($shades, 'black'), 0.26),
       'outlined-hover': rgba(map-get($shades, 'black'), 0.86)
     ),
+    'toolbar': map-get($shades, 'white'),
     'input-bottom-line': rgba(map-get($shades, 'black'), 0.42),
     'stepper': (
       'active': rgba(map-get($shades, 'white'), 1),
