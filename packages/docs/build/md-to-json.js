@@ -129,8 +129,12 @@ function parseLine (node, page) {
   return getLineMethod(node)(node, page)
 }
 
-function run () {
-  const page = setup()
+module.exports = function (content) {
+  this.cacheable()
+
+  const page = content.split('\n')
+    .filter(v => v)
+
   const output = []
   let children = []
 
@@ -158,7 +162,5 @@ function run () {
 
   const json = { children: output }
 
-  fs.writeFileSync(resolve('../packages/docs/src/data/pages/getting-started/QuickStart.json'), JSON.stringify(json, 2, 2), 'utf8')
+  return 'module.exports = ' + JSON.stringify(json, null, 2)
 }
-
-run()

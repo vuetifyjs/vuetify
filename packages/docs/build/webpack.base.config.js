@@ -27,7 +27,7 @@ module.exports = {
     chunkFilename: isProd ? '[name].[chunkhash].js' : '[name].js'
   },
   resolve: {
-    extensions: ['*', '.js', '.json', '.vue'],
+    extensions: ['*', '.js', '.json', '.vue', '.md'],
     alias: {
       '@': path.resolve(__dirname, '../src'),
       'vue$': 'vue/dist/vue.runtime.esm.js'
@@ -73,6 +73,10 @@ module.exports = {
       {
         test: /\.txt$/,
         use: ['raw-loader']
+      },
+      {
+        test: /\.md$/,
+        loader: require.resolve('./md-to-json')
       }
     ]
   },
