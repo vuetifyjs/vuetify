@@ -46,7 +46,7 @@ exports[`VIcon for component icon should render component 1`] = `
 exports[`VIcon for component icon should set font size from helper prop 1`] = `
 <div class="v-icon notranslate test-component v-icon--is-component theme--light"
      aria-hidden="true"
-     style="font-size: 16px; height: 16px;"
+     style="font-size: 16px; height: 16px; width: 16px;"
 >
   test icon
 </div>
@@ -63,7 +63,7 @@ exports[`VIcon for component icon should set font size from helper prop 2`] = `
 exports[`VIcon for component icon should set font size from helper prop 3`] = `
 <div class="v-icon notranslate test-component v-icon--is-component theme--light"
      aria-hidden="true"
-     style="font-size: 36px; height: 36px;"
+     style="font-size: 36px; height: 36px; width: 36px;"
 >
   test icon
 </div>
@@ -72,7 +72,7 @@ exports[`VIcon for component icon should set font size from helper prop 3`] = `
 exports[`VIcon for component icon should set font size from helper prop 4`] = `
 <div class="v-icon notranslate test-component v-icon--is-component theme--light"
      aria-hidden="true"
-     style="font-size: 40px; height: 40px;"
+     style="font-size: 40px; height: 40px; width: 40px;"
 >
   test icon
 </div>
