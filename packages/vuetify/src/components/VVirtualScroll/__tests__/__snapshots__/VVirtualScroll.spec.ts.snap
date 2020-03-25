@@ -1,0 +1,186 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VVirtualScroll.ts should render component with scopedSlot and match snapshot 1`] = `
+<div class="v-virtual-scroll"
+     style="height: 100px;"
+>
+  <div class="v-virtual-scroll__container"
+       style="height: 150px;"
+  >
+    <div class="v-virtual-scroll__item"
+         style="top: 0px;"
+    >
+      <div class="item">
+        1
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="top: 50px;"
+    >
+      <div class="item">
+        2
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="top: 100px;"
+    >
+      <div class="item">
+        3
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VVirtualScroll.ts should render not more than 5 hidden items and match snapshot 1`] = `
+<div class="v-virtual-scroll">
+  <div class="v-virtual-scroll__container"
+       style="height: 500px;"
+  >
+    <div class="v-virtual-scroll__item"
+         style="top: 0px;"
+    >
+      <div class="item">
+        1
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="top: 50px;"
+    >
+      <div class="item">
+        2
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="top: 100px;"
+    >
+      <div class="item">
+        3
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="top: 150px;"
+    >
+      <div class="item">
+        4
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="top: 200px;"
+    >
+      <div class="item">
+        5
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="top: 250px;"
+    >
+      <div class="item">
+        6
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="top: 300px;"
+    >
+      <div class="item">
+        7
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VVirtualScroll.ts should render right items on scroll and match snapshot 1`] = `
+<div class="v-virtual-scroll"
+     style="height: 100px;"
+>
+  <div class="v-virtual-scroll__container"
+       style="height: 1000px;"
+  >
+    <div class="v-virtual-scroll__item"
+         style="top: 250px;"
+    >
+      <div class="item">
+        6
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="top: 300px;"
+    >
+      <div class="item">
+        7
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="top: 350px;"
+    >
+      <div class="item">
+        8
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="top: 400px;"
+    >
+      <div class="item">
+        9
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="top: 450px;"
+    >
+      <div class="item">
+        10
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="top: 500px;"
+    >
+      <div class="item">
+        11
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="top: 550px;"
+    >
+      <div class="item">
+        12
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="top: 600px;"
+    >
+      <div class="item">
+        13
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="top: 650px;"
+    >
+      <div class="item">
+        14
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="top: 700px;"
+    >
+      <div class="item">
+        15
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="top: 750px;"
+    >
+      <div class="item">
+        16
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="top: 800px;"
+    >
+      <div class="item">
+        17
+      </div>
+    </div>
+  </div>
+</div>
+`;
