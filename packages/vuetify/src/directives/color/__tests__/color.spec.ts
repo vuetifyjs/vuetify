@@ -1,4 +1,4 @@
-// Libraries
+// Vue
 import Vue from 'vue'
 
 // Directives

@@ -20,8 +20,7 @@ function classToHex (
   const [colorName, colorModifier] = color
     .toString().trim().replace('-', '').split(' ', 2) as (string | undefined)[]
 
-  const currentTheme = node.context
-    ? node.context.$vuetify.theme.currentTheme : {}
+  const currentTheme = node.context!.$vuetify.theme.currentTheme
 
   let hexColor = ''
   if (colorName && colorName in colors) {
@@ -69,17 +68,17 @@ function setBorderColor (
   node: VNode,
   modifiers?: BorderModifiers,
 ) {
-  const hasModifiers = modifiers ? Object.keys(modifiers).length > 0 : false
   const cssColor = !isCssColor(color) ? classToHex(color, colors, node) : color
 
-  if (hasModifiers && modifiers) {
-    if (modifiers.top) el.style.borderTopColor = cssColor
-    if (modifiers.right) el.style.borderRightColor = cssColor
-    if (modifiers.bottom) el.style.borderBottomColor = cssColor
-    if (modifiers.left) el.style.borderLeftColor = cssColor
-  } else {
+  if (!modifiers || !Object.keys(modifiers).length) {
     el.style.borderColor = cssColor
+    return
   }
+
+  if (modifiers.top) el.style.borderTopColor = cssColor
+  if (modifiers.right) el.style.borderRightColor = cssColor
+  if (modifiers.bottom) el.style.borderBottomColor = cssColor
+  if (modifiers.left) el.style.borderLeftColor = cssColor
 }
 
 function setGradientColor (el: HTMLElement, gradient: string, node: VNode) {
