@@ -132,7 +132,10 @@ capacitor-text
 
 <br>
 
-**up-next**
-  * introduction/quick-start
-  * introduction/frequently-asked-questions
-  * introduction/sponsors-and-backers
+<up-next
+  value="[
+    'introduction/quick-start',
+    'introduction/frequently-asked-questions',
+    'introduction/sponsors-and-backers'
+  ]"
+></up-next>

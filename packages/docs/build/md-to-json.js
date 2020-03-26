@@ -16,14 +16,15 @@ function parse (type, lang, value) {
 
 function getNodeType (node) {
   switch (true) {
+    case node.startsWith(' '): return ''
+    case node.startsWith('></'): return ''
     case node.startsWith('<br>'): return 'break'
     case node.startsWith('#'): return 'heading'
     case node.startsWith('>'): return 'alert'
-    case node.startsWith('<'): return 'comment'
-    case node.startsWith('**'): return 'component'
-    case node.startsWith('`'): return 'code'
+    case node.startsWith('<!--'): return 'comment'
+    case node.startsWith('<'): return 'component'
+    case node.startsWith('```'): return 'code'
     case node.startsWith('!'): return 'img'
-    case node.startsWith(' '): return ''
     default: return 'text'
   }
 }
@@ -52,15 +53,18 @@ function parseAlert (index, page) {
 
 function parseComponent (index, page) {
   const node = page[index]
-  const values = []
+  const [,type] = node.match(/^<([a-z|-]*)/)
+  const stopRE = `</${type}>`
+  const stop = node.indexOf(stopRE) > -1
+    ? index
+    : page.findIndex(line => line.indexOf(stopRE) > -1)
+  const values = page
+    .slice(index, stop + 1)
+    .join(' ')
+    .match(/value="(.*)".+><\//)[1]
+    .replace(/'/g, '"')
 
-  for (const line of page.slice(index + 1)) {
-    if (!line.startsWith('  * ')) break
-
-    values.push(line.replace('  * ', ''))
-  }
-
-  return parse(node.replace(/\*\*/g, ''), undefined, values)
+  return parse(type, undefined, JSON.parse(values))
 }
 
 function parseHeading (index, page) {
