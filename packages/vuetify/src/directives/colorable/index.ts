@@ -37,10 +37,15 @@ function classToHex (
   return hexColor
 }
 
-function parseGradient (gradient: string) {
-  return gradient.replace(/rgba\(#([0-9a-f]{3}|[0-9a-f]{6}),/gi, x => {
-    const rgba = HexToRGBA(parseHex(x.slice(5, -1)))
-    return `rgba(${rgba.r},${rgba.g},${rgba.b},`
+function parseGradient (
+  gradient: string,
+  colors: Record<string, Record<string, string>>,
+  node: VNode,
+) {
+  return gradient.replace(/([a-z]+(\s[a-z]+-[1-5])?)(?=$|,)/gi, x => {
+    return classToHex(x, colors, node) || x
+  }).replace(/(?<=rgba\()#(([0-9a-f]{3}){1,2})(?=,)/gi, x => {
+    return Object.values(HexToRGBA(parseHex(x))).slice(0, 3).join(',')
   })
 }
 
@@ -77,8 +82,10 @@ function setBorderColor (
   }
 }
 
-function setGradientColor (el: HTMLElement, gradient: string) {
-  el.style.backgroundImage = `linear-gradient(${parseGradient(gradient)})`
+function setGradientColor (el: HTMLElement, gradient: string, node: VNode) {
+  el.style.backgroundImage = `linear-gradient(${
+    parseGradient(gradient, colors, node)
+  })`
 }
 
 function updateColor (
@@ -93,7 +100,7 @@ function updateColor (
   } else if (binding.arg === 'border') {
     setBorderColor(el, binding.value, node, binding.modifiers)
   } else if (binding.arg === 'gradient') {
-    setGradientColor(el, binding.value)
+    setGradientColor(el, binding.value, node)
   }
 }
 
