@@ -17,7 +17,7 @@ interface BorderModifiers {
   left?: Boolean
 }
 
-describe('colorable.ts', () => {
+describe('color.ts', () => {
   let mountFunction: () => Wrapper<Instance>
 
   beforeEach(() => {
