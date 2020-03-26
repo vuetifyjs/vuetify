@@ -21,7 +21,7 @@ function getNodeType (node) {
     case node.startsWith('>'): return 'alert'
     case node.startsWith('<'): return 'comment'
     case node.startsWith('**'): return 'component'
-    case node.startsWith('`'): return 'snippet'
+    case node.startsWith('`'): return 'code'
     case node.startsWith('!'): return 'img'
     case node.startsWith(' '): return ''
     default: return 'text'
@@ -31,18 +31,18 @@ function getNodeType (node) {
 function getLineMethod (node) {
   switch (getNodeType(node)) {
     case 'alert': return parseAlert
-    case 'comment': return parseComment
     case 'component': return parseComponent
     case 'heading': return parseHeading
     case 'img': return parseImg
-    case 'snippet': return parseSnippet
-    case 'break': return parseBreak
+    case 'code': return parseCode
     case 'text': return parseText
     default: return () => {}
   }
 }
 
-function parseAlert (node) {
+function parseAlert (index, page) {
+  const node = page[index]
+
   const [value, lang] = node
     .replace(/>/, '')
     .split(' ')
@@ -50,16 +50,8 @@ function parseAlert (node) {
   return parse('alert', camelCase(lang), value)
 }
 
-function parseComment () {
-  return undefined
-}
-
-function parseBreak () {
-  return undefined
-}
-
-function parseComponent (node, page) {
-  const index = page.indexOf(node)
+function parseComponent (index, page) {
+  const node = page[index]
   const values = []
 
   for (const line of page.slice(index + 1)) {
@@ -71,13 +63,15 @@ function parseComponent (node, page) {
   return parse(node.replace(/\*\*/g, ''), undefined, values)
 }
 
-function parseHeading (node) {
+function parseHeading (index, page) {
+  const node = page[index]
   const [, lang] = node.split(' ')
 
   return parse('heading', camelCase(lang))
 }
 
-function parseImg (node) {
+function parseImg (index, page) {
+  const node = page[index]
   const regexp = new RegExp(/!\[(.*)\]\((.*)\)/)
 
   const [lang, value] = node.match(regexp).slice(1, 3)
@@ -85,18 +79,16 @@ function parseImg (node) {
   return parse('img', camelCase(lang), value)
 }
 
-function parseSnippet (node) {
-  const value = node
-    .replace(/(`|-|\s)/g, (matched, i, original) => {
-      if (matched === '`') return ''
-      if (['-', ' '].includes(matched)) return '_'
-      return matched
-    })
+function parseCode (index, page) {
+  const type = page[index].replace(/```/g, '')
+  const file = page[index + 1].trim()
+  const value = `${type}_${file.replace(/-/g, '_')}`
 
   return parse('markup', undefined, value)
 }
 
-function parseText (node) {
+function parseText (index, page) {
+  const node = page[index]
   const text = camelCase(node)
 
   return parse('text', text)
@@ -105,7 +97,7 @@ function parseText (node) {
 function genSection (children = []) {
   return {
     type: 'section',
-    children,
+    children: children.filter(c => c),
   }
 }
 
@@ -117,16 +109,18 @@ function isBreak (node) {
   return getNodeType(node) === 'break'
 }
 
-function setup () {
-  const path = '../packages/docs/src/data/pages-new/getting-started/QuickStart.md'
+function parseLine (index, page) {
+  const node = page[index]
 
-  return fs.readFileSync(resolve(path), 'utf8')
-    .split('\n')
-    .filter(v => v)
+  return getLineMethod(node)(index, page)
 }
 
-function parseLine (node, page) {
-  return getLineMethod(node)(node, page)
+function shouldParse (line) {
+  return (
+    line &&
+    line !== '```' &&
+    !line.startsWith(' ')
+  )
 }
 
 module.exports = function (content) {
@@ -138,11 +132,10 @@ module.exports = function (content) {
   const output = []
   let children = []
 
-  for (const line of page) {
-    const parsed = parseLine(line, page)
+  page.forEach((line, index) => {
+    if (!shouldParse(line)) return
 
-    // Don't push empty lines
-    if (!parsed && !isBreak(line)) continue
+    const parsed = parseLine(index, page)
 
     // Push regular lines
     if (isHeading(line) || isBreak(line)) {
@@ -154,7 +147,7 @@ module.exports = function (content) {
     }
 
     children.push(parsed)
-  }
+  })
 
   children.length && output.push(
     genSection(children)
