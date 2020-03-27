@@ -21,16 +21,27 @@ function parse (child) {
   } = child
 
   switch (type) {
-    case 'alert': return `>${value} ${lang}`
-    case 'heading': return `## ${lang}`
+    case 'alert': return `>${value} ${kebabCase(lang)}`
+    case 'heading': return `## ${kebabCase(lang)}`
     case 'markup': return genCode(value)
     case 'text': return kebabCase(lang)
   }
 
-  // Assumed custom component
-  const values = value ? ` values="${JSON.stringify(value).replace(/"/g, "'")}"` : ''
+  const string = value ? JSON.stringify(value, null, 2) : ''
+  let values = ''
 
-  return `<${type}${values}></${type}>`
+  if (string) {
+    if (string.startsWith('[') || string.startsWith('{')) {
+      values = `value="${string.replace(/"/g, "'")}"`
+      values = `${values.slice(0, -2)}\xa0\xa0${values.slice(-2, -1)}"`
+    } else {
+      values = ` value=${string}`
+    }
+  }
+
+  return `<${type}
+\xa0\xa0${values}
+></${type}>`
 }
 
 function recurse (children = []) {
@@ -59,5 +70,5 @@ for (const file of files) {
   const children = recurse([read]).join('\n\n')
 
   fs.writeFileSync(loc(`${path}.md`), children, 'utf8')
-  fs.unlinkSync(file)
+  // fs.unlinkSync(file)
 }
