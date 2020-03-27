@@ -2,7 +2,7 @@
 import DatePickerTable from './mixins/date-picker-table'
 
 // Utils
-import { pad, createNativeLocaleFormatter, monthChange } from './util'
+import { pad, createNativeLocaleFormatter, monthChange, determineWeeknumber } from './util'
 import { createRange } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
@@ -20,6 +20,10 @@ export default mixins(
     firstDayOfWeek: {
       type: [String, Number],
       default: 0,
+    },
+    firstDayOfYear: {
+      type: [String, Number],
+      default: 4,
     },
     showWeek: Boolean,
     weekdayFormat: Function as PropType<DatePickerFormatter | undefined>,
@@ -59,20 +63,10 @@ export default mixins(
       return (weekDay - parseInt(this.firstDayOfWeek) + 7) % 7
     },
     getWeekNumber (dayInMonth: number) {
-      const firstDayOfMonth = new Date(`${this.displayedYear}-${pad(this.displayedMonth + 1)}-01T00:00:00+00:00`)
-      const determineDate = new Date(firstDayOfMonth.valueOf() + 86400000 * dayInMonth)
-      const dayNumber = (determineDate.getDay() + 6) % 7
+      console.log(parseInt(this.firstDayOfYear))
 
-      determineDate.setDate(determineDate.getDate() - dayNumber + 3)
-
-      const firstThursday = determineDate.valueOf()
-
-      determineDate.setMonth(0, 1)
-      if (determineDate.getDay() !== 4) {
-        determineDate.setMonth(0, 1 + ((4 - determineDate.getDay()) + 7) % 7)
-      }
-
-      return 1 + Math.ceil((firstThursday - determineDate.valueOf()) / 604800000)
+      return determineWeeknumber(this.displayedYear, this.displayedMonth, dayInMonth,
+        parseInt(this.firstDayOfWeek), parseInt(this.firstDayOfYear))
     },
     genWeekNumber (weekNumber: number) {
       return this.$createElement('td', [
@@ -87,7 +81,7 @@ export default mixins(
       let rows = []
       let day = this.weekDaysBeforeFirstDayOfTheMonth()
 
-      this.showWeek && rows.push(this.genWeekNumber(this.getWeekNumber(-day + 3)))
+      this.showWeek && rows.push(this.genWeekNumber(this.getWeekNumber(1)))
 
       while (day--) rows.push(this.$createElement('td'))
       for (day = 1; day <= daysInMonth; day++) {
@@ -100,7 +94,7 @@ export default mixins(
         if (rows.length % (this.showWeek ? 8 : 7) === 0) {
           children.push(this.genTR(rows))
           rows = []
-          day < daysInMonth && this.showWeek && rows.push(this.genWeekNumber(this.getWeekNumber(day + 3)))
+          day < daysInMonth && this.showWeek && rows.push(this.genWeekNumber(this.getWeekNumber(day + 7)))
         }
       }
 
