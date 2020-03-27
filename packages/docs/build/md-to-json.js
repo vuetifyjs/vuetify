@@ -3,12 +3,7 @@
 const fs = require('fs')
 const path = require('path')
 const resolve = file => path.resolve(__dirname, file)
-const marked = require('marked')
 const { camelCase, upperCase } = require('lodash')
-
-marked.setOptions({
-  headerIds: false,
-})
 
 function parse (type, lang, value) {
   return { type, lang, value }
@@ -58,13 +53,16 @@ function parseComponent (index, page) {
   const stop = node.indexOf(stopRE) > -1
     ? index
     : page.findIndex(line => line.indexOf(stopRE) > -1)
-  const values = page
-    .slice(index, stop + 1)
-    .join(' ')
-    .match(/value="(.*)".+><\//)[1]
-    .replace(/'/g, '"')
+  const values = (
+    (
+      page
+        .slice(index, stop + 1)
+        .join(' ')
+        .match(/value="(.*)".+><\//) || []
+    )[1] || ''
+  ).replace(/'/g, '"')
 
-  return parse(type, undefined, JSON.parse(values))
+  return parse(type, undefined, values && JSON.parse(values))
 }
 
 function parseHeading (index, page) {
