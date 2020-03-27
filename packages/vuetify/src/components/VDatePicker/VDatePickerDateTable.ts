@@ -51,7 +51,9 @@ export default mixins(
     },
     genTHead () {
       const days = this.weekDays.map(day => this.$createElement('th', day))
-      this.showWeek && days.unshift(this.$createElement('th'))
+      if (this.showWeek) {
+        days.unshift(this.$createElement('th'))
+      }
 
       return this.$createElement('thead', this.genTR(days))
     },
@@ -63,8 +65,6 @@ export default mixins(
       return (weekDay - parseInt(this.firstDayOfWeek) + 7) % 7
     },
     getWeekNumber (dayInMonth: number) {
-      console.log(parseInt(this.firstDayOfYear))
-
       return determineWeeknumber(this.displayedYear, this.displayedMonth, dayInMonth,
         parseInt(this.firstDayOfWeek), parseInt(this.firstDayOfYear))
     },
@@ -81,7 +81,9 @@ export default mixins(
       let rows = []
       let day = this.weekDaysBeforeFirstDayOfTheMonth()
 
-      this.showWeek && rows.push(this.genWeekNumber(this.getWeekNumber(1)))
+      if (this.showWeek) {
+        rows.push(this.genWeekNumber(this.getWeekNumber(1)))
+      }
 
       while (day--) rows.push(this.$createElement('td'))
       for (day = 1; day <= daysInMonth; day++) {
@@ -94,7 +96,9 @@ export default mixins(
         if (rows.length % (this.showWeek ? 8 : 7) === 0) {
           children.push(this.genTR(rows))
           rows = []
-          day < daysInMonth && this.showWeek && rows.push(this.genWeekNumber(this.getWeekNumber(day + 7)))
+          if (this.showWeek && day < daysInMonth) {
+            rows.push(this.genWeekNumber(this.getWeekNumber(day + 7)))
+          }
         }
       }
 
