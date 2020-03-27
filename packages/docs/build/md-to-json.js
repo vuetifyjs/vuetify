@@ -49,11 +49,11 @@ function parseAlert (index, page) {
 function parseComponent (index, page) {
   const node = page[index]
   const [,type] = node.match(/^<([a-z|-]*)/)
-  const stopRE = `</${type}>`
+  const stopRE = `<\/${type}>`
   const stop = node.indexOf(stopRE) > -1
     ? index
     : page.findIndex(line => line.indexOf(stopRE) > -1)
-  const values = (
+  let value = (
     (
       page
         .slice(index, stop + 1)
@@ -62,7 +62,11 @@ function parseComponent (index, page) {
     )[1] || ''
   ).replace(/'/g, '"')
 
-  return parse(type, undefined, values && JSON.parse(values))
+  try {
+    value = JSON.parse(value)
+  } catch (e) {}
+
+  return parse(type, undefined, value)
 }
 
 function parseHeading (index, page) {
