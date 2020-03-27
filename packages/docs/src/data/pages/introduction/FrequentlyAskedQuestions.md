@@ -1,0 +1,11 @@
+<getting-started-faq
+  
+></getting-started-faq>
+
+<up-next
+  value="[
+  'getting-started/contributing',
+  'professional-support/consulting',
+  'customization/a-la-carte'
+  ]"
+></up-next>

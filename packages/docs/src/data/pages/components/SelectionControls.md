@@ -1,0 +1,45 @@
+<usage
+   value="usage"
+></usage>
+
+<api
+  value="[
+  'v-checkbox',
+  'v-radio',
+  'v-radio-group',
+  'v-simple-checkbox',
+  'v-switch'
+  ]"
+></api>
+
+<playground
+   value="playground"
+></playground>
+
+<examples
+  value="[
+  'simple/checkboxes-boolean',
+  'simple/checkboxes-array',
+  'simple/checkboxes-states',
+  'simple/checkboxes-colors',
+  'intermediate/checkboxes-inline-textfield',
+  'simple/radios-default',
+  'simple/radios-direction',
+  'simple/radios-colors',
+  'simple/switches-boolean',
+  'simple/switches-array',
+  'simple/switches-states',
+  'simple/switches-colors',
+  'simple/switches-flat',
+  'simple/switches-inset',
+  'intermediate/label-slot'
+  ]"
+></examples>
+
+<up-next
+  value="[
+  'components/button-groups',
+  'components/forms',
+  'components/text-fields'
+  ]"
+></up-next>

@@ -1,0 +1,102 @@
+<usage-new
+  value="{
+  'booleans': [
+    'dismissible'
+  ],
+  'sliders': [
+    'elevation'
+  ],
+  'tabs': [
+    'normal',
+    'dense',
+    'prominent',
+    'outlined',
+    'text',
+    'tile'
+  ],
+  'selects': [
+    {
+      'prop': 'border',
+      'label': 'Border',
+      'attrs': {
+        'items': [
+          'top',
+          'right',
+          'left',
+          'bottom'
+        ]
+      }
+    },
+    {
+      'prop': 'color',
+      'label': 'Color',
+      'attrs': {
+        'items': [
+          'red',
+          'orange',
+          'yellow',
+          'green',
+          'blue',
+          'purple'
+        ]
+      }
+    },
+    {
+      'prop': 'icon',
+      'label': 'Icon',
+      'attrs': {
+        'items': [
+          'mdi-vuetify',
+          'mdi-account'
+        ]
+      }
+    },
+    {
+      'prop': 'type',
+      'label': 'Type',
+      'attrs': {
+        'items': [
+          'success',
+          'info',
+          'warning',
+          'error'
+        ]
+      }
+    }
+  ]
+  }"
+></usage-new>
+
+<api
+  value="[
+  'v-alert'
+  ]"
+></api>
+
+<examples
+  value="[
+  'simple/type',
+  'simple/border',
+  'simple/colored-border',
+  'simple/dense',
+  'simple/dismissible',
+  'simple/icon',
+  'simple/outlined',
+  'simple/prominent',
+  'simple/text',
+  'simple/transition',
+  'complex/twitter'
+  ]"
+></examples>
+
+<accessibility
+   value="accessibility"
+></accessibility>
+
+<up-next
+  value="[
+  'components/buttons',
+  'components/icons',
+  'components/snackbars'
+  ]"
+></up-next>

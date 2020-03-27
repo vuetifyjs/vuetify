@@ -1,0 +1,53 @@
+>info alert-1
+
+<usage
+   value="usage"
+></usage>
+
+<api
+  value="[
+  'v-list',
+  'v-list-item',
+  'v-list-group',
+  'v-list-item-action',
+  'v-list-item-avatar',
+  'v-list-item-content',
+  'v-list-item-icon',
+  'v-list-item-title',
+  'v-list-item-subtitle',
+  'v-list-item-action-text'
+  ]"
+></api>
+
+<playground
+   value="playground"
+></playground>
+
+<examples
+  value="[
+  'simple/disabled',
+  'simple/shaped',
+  'simple/dense',
+  'simple/flat',
+  'simple/rounded',
+  'intermediate/avatar-title-and-action',
+  'intermediate/icon-two-lines-and-action',
+  'intermediate/avatar-three-lines',
+  'intermediate/avatar-subheader-title-and-action',
+  'intermediate/nested',
+  'intermediate/subheadings-and-dividers',
+  'intermediate/card-list',
+  'intermediate/title-subtitle-actions-and-action-text',
+  'intermediate/action-title-and-subtitle',
+  'intermediate/expansion-lists',
+  'intermediate/nav'
+  ]"
+></examples>
+
+<up-next
+  value="[
+  'components/item-groups',
+  'components/list-item-groups',
+  'components/subheaders'
+  ]"
+></up-next>
