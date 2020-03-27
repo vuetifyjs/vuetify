@@ -95,9 +95,11 @@ export default CalendarBase.extend({
     genHeadDays (): VNode[] {
       const header = this.todayWeek.map(this.genHeadDay)
 
-      this.showWeek && header.unshift(this.$createElement('div', {
-        staticClass: 'v-calendar-weekly__head-weeknumber',
-      }))
+      if (this.showWeek) {
+        header.unshift(this.$createElement('div', {
+          staticClass: 'v-calendar-weekly__head-weeknumber',
+        }))
+      }
 
       return header
     },
@@ -125,7 +127,9 @@ export default CalendarBase.extend({
     genWeek (week: CalendarTimestamp[], weekNumber: number): VNode {
       const weekNodes = week.map((day, index) => this.genDay(day, index, week))
 
-      this.showWeek && weekNodes.unshift(this.genWeekNumber(weekNumber))
+      if (this.showWeek) {
+        weekNodes.unshift(this.genWeekNumber(weekNumber))
+      }
 
       return this.$createElement('div', {
         key: week[0].date,
@@ -133,8 +137,11 @@ export default CalendarBase.extend({
       }, weekNodes)
     },
     getWeekNumber (determineDay: CalendarTimestamp) {
-      return determineWeeknumber(determineDay.year, determineDay.month - 1, determineDay.day,
-        this.parsedWeekdays[0], parseInt(this.firstDayOfYear))
+      return determineWeeknumber(determineDay.year,
+        determineDay.month - 1,
+        determineDay.day,
+        this.parsedWeekdays[0],
+        parseInt(this.firstDayOfYear))
     },
     genWeekNumber (weekNumber: number) {
       return this.$createElement('div', {
