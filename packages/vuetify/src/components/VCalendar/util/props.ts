@@ -86,6 +86,10 @@ export default {
     },
   },
   weeks: {
+    firstDayOfYear: {
+      type: [Number, String],
+      default: 4,
+    },
     minWeeks: {
       validate: validateNumber,
       default: 1,

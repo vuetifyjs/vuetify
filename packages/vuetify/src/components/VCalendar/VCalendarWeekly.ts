@@ -12,6 +12,7 @@ import CalendarBase from './mixins/calendar-base'
 
 // Util
 import { getSlot } from '../../util/helpers'
+import determineWeeknumber from './util/determineWeeknumber'
 import props from './util/props'
 import {
   createDayList,
@@ -116,7 +117,7 @@ export default CalendarBase.extend({
       const weeks: VNode[] = []
 
       for (let i = 0; i < days.length; i += weekDays) {
-        weeks.push(this.genWeek(days.slice(i, i + weekDays), this.getWeekNumber(days[i + 3])))
+        weeks.push(this.genWeek(days.slice(i, i + weekDays), this.getWeekNumber(days[i])))
       }
 
       return weeks
@@ -131,21 +132,9 @@ export default CalendarBase.extend({
         staticClass: 'v-calendar-weekly__week',
       }, weekNodes)
     },
-    getWeekNumber (day: CalendarTimestamp) {
-      const determineDate = new Date(`${day.year}-${String(day.month).padStart(2, '0')}-${String(day.day).padStart(2, '0')}T00:00:00+00:00`)
-      const dayNumber = (determineDate.getDay() + 6) % 7
-
-      determineDate.setDate(determineDate.getDate() - dayNumber + 3)
-
-      const firstThursday = determineDate.valueOf()
-
-      determineDate.setMonth(0, 1)
-
-      if (determineDate.getDay() !== 4) {
-        determineDate.setMonth(0, 1 + ((4 - determineDate.getDay()) + 7) % 7)
-      }
-
-      return 1 + Math.ceil((firstThursday - determineDate.valueOf()) / 604800000)
+    getWeekNumber (determineDay: CalendarTimestamp) {
+      return determineWeeknumber(determineDay.year, determineDay.month - 1, determineDay.day,
+        this.parsedWeekdays[0], parseInt(this.firstDayOfYear))
     },
     genWeekNumber (weekNumber: number) {
       return this.$createElement('div', {
