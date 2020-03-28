@@ -1,3 +1,0 @@
-<layout-sandbox
-  
-></layout-sandbox>
