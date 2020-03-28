@@ -101,9 +101,9 @@ describe('VTab.ts', () => {
           const wrapper = mountFunction({
             propsData: {
               disabled,
-              href
+              href,
             },
-            methods: {toggle},
+            methods: { toggle },
           })
 
           wrapper.trigger(eventName, event)
@@ -148,6 +148,7 @@ describe('VTab.ts', () => {
     expect(wrapper.vm.getPrevTab()).toBe(prevTab)
   })
 
+  // eslint-disable-next-line max-statements
   it('should focus and possibly click tab on keydown depending on activation mode', () => {
     const keydowns = ['keydown.home', 'keydown.end', 'keydown.right', 'keydown.left', 'keydown.down', 'keydown.up']
     const activationModes = ['automatic', 'manual']
@@ -198,12 +199,12 @@ describe('VTab.ts', () => {
           } else {
             expect(getLastTab).not.toHaveBeenCalled()
           }
-          if (keydown === 'keydown.right' && !vertical || keydown === 'keydown.down' && vertical) {
+          if ((keydown === 'keydown.right' && !vertical) || (keydown === 'keydown.down' && vertical)) {
             expect(getNextTab).toHaveBeenCalled()
           } else {
             expect(getNextTab).not.toHaveBeenCalled()
           }
-          if (keydown === 'keydown.left' && !vertical || keydown === 'keydown.up' && vertical) {
+          if ((keydown === 'keydown.left' && !vertical) || (keydown === 'keydown.up' && vertical)) {
             expect(getPrevTab).toHaveBeenCalled()
           } else {
             expect(getPrevTab).not.toHaveBeenCalled()
@@ -211,7 +212,7 @@ describe('VTab.ts', () => {
 
           const horizontalKeys = ['keydown.right', 'keydown.left']
           const verticalKeys = ['keydown.down', 'keydown.up']
-          if (horizontalKeys.includes(keydown) && vertical || verticalKeys.includes(keydown) && !vertical) return
+          if ((horizontalKeys.includes(keydown) && vertical) || (verticalKeys.includes(keydown) && !vertical)) return
 
           expect(tab.$el.focus).toHaveBeenCalled()
           if (activationMode === 'automatic') {
