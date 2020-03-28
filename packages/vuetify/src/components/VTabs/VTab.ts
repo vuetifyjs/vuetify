@@ -104,7 +104,9 @@ export default baseMixins.extend<options>().extend(
 
       this.$emit('click', e)
 
-      this.to || this.toggle()
+      if (this.to) this.$router.push(this.to)
+
+      this.toggle()
     },
     getFirstTab () {
       return this.items[0]
@@ -119,15 +121,17 @@ export default baseMixins.extend<options>().extend(
       const tab = this.getFocusedTab()
       const currentIndex = this.items.findIndex((item: any) => item.value === tab.value)
       const targetIndex = (currentIndex + 1) % this.items.length
+
       return this.items[targetIndex]
     },
     getPrevTab () {
       const tab = this.getFocusedTab()
       const currentIndex = this.items.findIndex((item: any) => item.value === tab.value)
       const targetIndex = (currentIndex - 1 + this.items.length) % this.items.length
+
       return this.items[targetIndex]
     },
-    onKeyDown (e: KeyboardEvent): void {
+    keydown (e: KeyboardEvent): void {
       this.$emit('keydown', e)
 
       const { down, end, enter, home, left, right, space, up } = keyCodes
@@ -170,7 +174,7 @@ export default baseMixins.extend<options>().extend(
 
     data.attrs = {
       ...data.attrs,
-      'aria-controls': this.value,
+      'aria-controls': this.value || undefined,
       'aria-disabled': this.disabled,
       'aria-selected': this.isActive.toString(),
       role: 'tab',
@@ -178,7 +182,7 @@ export default baseMixins.extend<options>().extend(
     }
     data.on = {
       ...data.on,
-      keydown: this.onKeyDown,
+      keydown: this.keydown,
     }
 
     return h(tag, data, this.$slots.default)

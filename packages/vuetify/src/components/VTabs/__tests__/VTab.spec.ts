@@ -90,267 +90,137 @@ describe('VTab.ts', () => {
   })
 
   it('should toggle on click, keydown.enter, and keydown.space', () => {
-    const event = { preventDefault: jest.fn() }
-    const toggle = jest.fn()
-    const wrapper = mountFunction({
-      methods: { toggle },
-    })
     const eventNames = ['click', 'keydown.enter', 'keydown.space']
+    const disableds = [true, false]
+    const hrefs = [undefined, '#foo']
+    for (const eventName of eventNames) {
+      for (const disabled of disableds) {
+        for (const href of hrefs) {
+          const event = { preventDefault: jest.fn() }
+          const toggle = jest.fn()
+          const wrapper = mountFunction({
+            propsData: {
+              disabled,
+              href
+            },
+            methods: {toggle},
+          })
 
-    eventNames.forEach((eventName: string) => {
-      wrapper.trigger(eventName, event)
-      expect(event.preventDefault).not.toHaveBeenCalled()
-      expect(toggle).toHaveBeenCalled()
-    })
+          wrapper.trigger(eventName, event)
 
-    wrapper.setProps({ href: '#foo' })
-
-    eventNames.forEach((eventName: string) => {
-      wrapper.trigger(eventName, event)
-      expect(event.preventDefault).toHaveBeenCalled()
-      expect(toggle).toHaveBeenCalled()
-    })
+          if (href) {
+            expect(event.preventDefault).toHaveBeenCalled()
+            if (disabled) {
+              expect(toggle).not.toHaveBeenCalled()
+            } else {
+              expect(toggle).toHaveBeenCalled()
+            }
+          } else if (disabled) {
+            expect(event.preventDefault).toHaveBeenCalled()
+            expect(toggle).not.toHaveBeenCalled()
+          } else {
+            expect(event.preventDefault).not.toHaveBeenCalled()
+            expect(toggle).toHaveBeenCalled()
+          }
+        }
+      }
+    }
   })
 
-  it('should not toggle on click, keydown.enter, and keydown.space if disabled', () => {
-    const event = { preventDefault: jest.fn() }
-    const toggle = jest.fn()
-    const wrapper = mountFunction({
-      propsData: {
-        disabled: true,
-      },
-      methods: { toggle },
-    })
-    const eventNames = ['click', 'keydown.enter', 'keydown.space']
-
-    eventNames.forEach((eventName: string) => {
-      wrapper.trigger(eventName, event)
-      expect(event.preventDefault).toHaveBeenCalled()
-      expect(toggle).not.toHaveBeenCalled()
-    })
-  })
-
-  it('should get first tab', () => {
-    const firstItem = { first: 'item' }
-    const secondItem = { second: 'item' }
-    const wrapper = mountFunction({
-      provide: {
-        items: [firstItem, secondItem],
-      },
-    })
-
-    expect(wrapper.vm.getFirstTab()).toBe(firstItem)
-  })
-
-  it('should get last tab', () => {
-    const lastItem = { first: 'item' }
-    const secondToLastItem = { second: 'item' }
-    const wrapper = mountFunction({
-      provide: {
-        items: [secondToLastItem, lastItem],
-      },
-    })
-
-    expect(wrapper.vm.getLastTab()).toBe(lastItem)
-  })
-
-  it('should get next tab', () => {
-    const firstItem = { value: 1 }
-    const currentItem = { value: 2 }
-    const lastItem = { value: 3 }
+  it('should get first, last, next, and previous tabs', () => {
+    const firstTab = { value: 1 }
+    const prevTab = { value: 2 }
+    const focusedTab = { value: 3 }
+    const nextTab = { value: 4 }
+    const lastTab = { value: 5 }
     const getFocusedTab = jest.fn()
-    getFocusedTab.mockReturnValue(currentItem)
+    getFocusedTab.mockReturnValue(focusedTab)
     const wrapper = mountFunction({
       provide: {
-        items: [firstItem, currentItem, lastItem],
+        items: [firstTab, prevTab, focusedTab, nextTab, lastTab],
       },
       methods: { getFocusedTab },
     })
 
-    expect(wrapper.vm.getNextTab()).toBe(lastItem)
+    expect(wrapper.vm.getFirstTab()).toBe(firstTab)
+    expect(wrapper.vm.getLastTab()).toBe(lastTab)
+    expect(wrapper.vm.getNextTab()).toBe(nextTab)
+    expect(wrapper.vm.getPrevTab()).toBe(prevTab)
   })
 
-  it('should get previous tab', () => {
-    const firstItem = { value: 1 }
-    const currentItem = { value: 2 }
-    const lastItem = { value: 3 }
-    const getFocusedTab = jest.fn()
-    getFocusedTab.mockReturnValue(currentItem)
-    const wrapper = mountFunction({
-      provide: {
-        items: [firstItem, currentItem, lastItem],
-      },
-      methods: { getFocusedTab },
-    })
+  it('should focus and possibly click tab on keydown depending on activation mode', () => {
+    const keydowns = ['keydown.home', 'keydown.end', 'keydown.right', 'keydown.left', 'keydown.down', 'keydown.up']
+    const activationModes = ['automatic', 'manual']
+    const verticals = [true, false]
+    for (const keydown of keydowns) {
+      for (const activationMode of activationModes) {
+        for (const vertical of verticals) {
+          const getFirstTab = jest.fn()
+          const getLastTab = jest.fn()
+          const getNextTab = jest.fn()
+          const getPrevTab = jest.fn()
+          const tab = {
+            $el: {
+              focus: jest.fn(),
+            },
+            click: jest.fn(),
+          }
+          getFirstTab.mockReturnValue(tab)
+          getLastTab.mockReturnValue(tab)
+          getNextTab.mockReturnValue(tab)
+          getPrevTab.mockReturnValue(tab)
+          const wrapper = mountFunction({
+            provide: {
+              activationMode,
+              vertical,
+            },
+            methods: {
+              getFirstTab,
+              getLastTab,
+              getNextTab,
+              getPrevTab,
+            },
+          })
 
-    expect(wrapper.vm.getPrevTab()).toBe(firstItem)
-  })
+          expect(wrapper.emitted().keydown).not.toBeDefined()
 
-  it('should emit keydown', async () => {
-    const wrapper = mountFunction()
+          wrapper.trigger(keydown)
 
-    expect(wrapper.emitted().keydown).not.toBeDefined()
+          expect(wrapper.emitted().keydown).toBeDefined()
 
-    wrapper.trigger('keydown')
+          if (keydown === 'keydown.home') {
+            expect(getFirstTab).toHaveBeenCalled()
+          } else {
+            expect(getFirstTab).not.toHaveBeenCalled()
+          }
+          if (keydown === 'keydown.end') {
+            expect(getLastTab).toHaveBeenCalled()
+          } else {
+            expect(getLastTab).not.toHaveBeenCalled()
+          }
+          if (keydown === 'keydown.right' && !vertical || keydown === 'keydown.down' && vertical) {
+            expect(getNextTab).toHaveBeenCalled()
+          } else {
+            expect(getNextTab).not.toHaveBeenCalled()
+          }
+          if (keydown === 'keydown.left' && !vertical || keydown === 'keydown.up' && vertical) {
+            expect(getPrevTab).toHaveBeenCalled()
+          } else {
+            expect(getPrevTab).not.toHaveBeenCalled()
+          }
 
-    expect(wrapper.emitted().keydown).toBeDefined()
-  })
+          const horizontalKeys = ['keydown.right', 'keydown.left']
+          const verticalKeys = ['keydown.down', 'keydown.up']
+          if (horizontalKeys.includes(keydown) && vertical || verticalKeys.includes(keydown) && !vertical) return
 
-  it('should invoke getFirstTab on keydown.home', () => {
-    Array.from([true, false]).forEach(vertical => {
-      const getFirstTab = jest.fn()
-      const wrapper = mountFunction({
-        provide: {
-          vertical,
-        },
-        methods: { getFirstTab },
-      })
-
-      wrapper.trigger('keydown.home')
-
-      expect(getFirstTab).toHaveBeenCalled()
-    })
-  })
-
-  it('should invoke getLastTab on keydown.end', () => {
-    Array.from([true, false]).forEach(vertical => {
-      const getLastTab = jest.fn()
-      const wrapper = mountFunction({
-        provide: {
-          vertical,
-        },
-        methods: { getLastTab },
-      })
-
-      wrapper.trigger('keydown.end')
-
-      expect(getLastTab).toHaveBeenCalled()
-    })
-  })
-
-  it('should invoke getPrevTab on keydown.left when horizontal', () => {
-    Array.from([true, false]).forEach(vertical => {
-      const getPrevTab = jest.fn()
-      const wrapper = mountFunction({
-        provide: {
-          vertical,
-        },
-        methods: { getPrevTab },
-      })
-
-      wrapper.trigger('keydown.left')
-
-      if (!vertical) {
-        expect(getPrevTab).toHaveBeenCalled()
-      } else {
-        expect(getPrevTab).not.toHaveBeenCalled()
+          expect(tab.$el.focus).toHaveBeenCalled()
+          if (activationMode === 'automatic') {
+            expect(tab.click).toHaveBeenCalled()
+          } else {
+            expect(tab.click).not.toHaveBeenCalled()
+          }
+        }
       }
-    })
-  })
-
-  it('should invoke getPrevTab on keydown.up when vertical', () => {
-    Array.from([true, false]).forEach(vertical => {
-      const getPrevTab = jest.fn()
-      const wrapper = mountFunction({
-        provide: {
-          vertical,
-        },
-        methods: { getPrevTab },
-      })
-
-      wrapper.trigger('keydown.up')
-
-      if (vertical) {
-        expect(getPrevTab).toHaveBeenCalled()
-      } else {
-        expect(getPrevTab).not.toHaveBeenCalled()
-      }
-    })
-  })
-
-  it('should invoke getNextTab on keydown.right when horizontal', () => {
-    Array.from([true, false]).forEach(vertical => {
-      const getNextTab = jest.fn()
-      const wrapper = mountFunction({
-        provide: {
-          vertical,
-        },
-        methods: { getNextTab },
-      })
-
-      wrapper.trigger('keydown.right')
-
-      if (!vertical) {
-        expect(getNextTab).toHaveBeenCalled()
-      } else {
-        expect(getNextTab).not.toHaveBeenCalled()
-      }
-    })
-  })
-
-  it('should invoke getNextTab on keydown.down when vertical', () => {
-    Array.from([true, false]).forEach(vertical => {
-      const getNextTab = jest.fn()
-      const wrapper = mountFunction({
-        provide: {
-          vertical,
-        },
-        methods: { getNextTab },
-      })
-
-      wrapper.trigger('keydown.down')
-
-      if (!vertical) {
-        expect(getNextTab).not.toHaveBeenCalled()
-      } else {
-        expect(getNextTab).toHaveBeenCalled()
-      }
-    })
-  })
-
-  it('should only focus tab on keydown if activation mode is not automatic', () => {
-    const activationMode = 'manual'
-    const getLastTab = jest.fn()
-    const tab = {
-      $el: {
-        focus: jest.fn(),
-      },
-      click: jest.fn(),
     }
-    getLastTab.mockReturnValue(tab)
-    const wrapper = mountFunction({
-      provide: {
-        activationMode,
-      },
-      methods: { getLastTab },
-    })
-
-    wrapper.trigger('keydown.end')
-
-    expect(tab.$el.focus).toHaveBeenCalled()
-    expect(tab.click).not.toHaveBeenCalled()
-  })
-
-  it('should focus and click tab on keydown if activation mode is automatic', () => {
-    const activationMode = 'automatic'
-    const getLastTab = jest.fn()
-    const tab = {
-      $el: {
-        focus: jest.fn(),
-      },
-      click: jest.fn(),
-    }
-    getLastTab.mockReturnValue(tab)
-    const wrapper = mountFunction({
-      provide: {
-        activationMode,
-      },
-      methods: { getLastTab },
-    })
-
-    wrapper.trigger('keydown.end')
-
-    expect(tab.$el.focus).toHaveBeenCalled()
-    expect(tab.click).toHaveBeenCalled()
   })
 })

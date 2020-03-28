@@ -96,6 +96,7 @@ export default Vue.extend({
         [this.to ? 'nativeOn' : 'on']: {
           ...this.$listeners,
           click: this.click,
+          keydown: this.keydown,
         },
         ref: 'link',
       }
@@ -134,6 +135,9 @@ export default Vue.extend({
       if (this.target) data.attrs!.target = this.target
 
       return { tag, data }
+    },
+    keydown (e: KeyboardEvent): void {
+      this.$emit('keydown', e)
     },
     onRouteChange () {
       if (!this.to || !this.$refs.link || !this.$route) return
