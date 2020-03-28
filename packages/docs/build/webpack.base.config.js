@@ -27,7 +27,7 @@ module.exports = {
     chunkFilename: isProd ? '[name].[chunkhash].js' : '[name].js'
   },
   resolve: {
-    extensions: ['*', '.js', '.json', '.vue', '.md'],
+    extensions: ['*', '.js', '.json', '.vue', '.md', '.pug'],
     alias: {
       '@': path.resolve(__dirname, '../src'),
       'vue$': 'vue/dist/vue.runtime.esm.js'
@@ -60,7 +60,13 @@ module.exports = {
       },
       {
         test: /\.pug$/,
-        loader: 'pug-plain-loader'
+        oneOf: [
+          {
+            resourceQuery: /^\?vue/,
+            loader: 'pug-plain-loader'
+          },
+          require.resolve('./pug-to-json')
+        ]
       },
       {
         test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)(\?.*)?$/,
@@ -73,10 +79,6 @@ module.exports = {
       {
         test: /\.txt$/,
         use: ['raw-loader']
-      },
-      {
-        test: /\.md$/,
-        loader: require.resolve('./md-to-json')
       }
     ]
   },

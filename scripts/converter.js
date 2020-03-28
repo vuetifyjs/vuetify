@@ -1,16 +1,14 @@
 // Utilities
-const { kebabCase } = require('lodash')
 const fs = require('fs')
 const path = require('path')
 const glob = require('glob')
+const stringify = require('stringify-object')
 const resolve = file => path.resolve(__dirname, file)
 
 function genCode (value) {
-  const [file, ...strings] = value.split('_')
+  const [lang, name] = value.split('_', 2)
 
-  return `\`\`\`${file}
-  ${strings.join('-')}
-\`\`\``
+  return `:code(${lang} src="${name}")`
 }
 
 function parse (child) {
@@ -21,27 +19,26 @@ function parse (child) {
   } = child
 
   switch (type) {
-    case 'alert': return `>${value} ${kebabCase(lang)}`
-    case 'heading': return `## ${kebabCase(lang)}`
+    case 'alert': return `alert(value="${value}") lang`
+    case 'heading': return `h2 lang`
     case 'markup': return genCode(value)
-    case 'text': return kebabCase(lang)
+    case 'text': return `| ${lang}`
   }
 
-  const string = value ? JSON.stringify(value, null, 2) : ''
-  let values = ''
+  let ret = 'type'
 
-  if (string) {
-    if (string.startsWith('[') || string.startsWith('{')) {
-      values = `value="${string.replace(/"/g, "'")}"`
-      values = `${values.slice(0, -2)}\xa0\xa0${values.slice(-2, -1)}"`
-    } else {
-      values = ` value=${string}`
+  if (value) {
+    ret += ' ('
+    if (typeof value === 'string') {
+      ret += `value="${value}"`
+    } else if (typeof value === 'object') {
+      ret += `value=\`${stringify(value, { indent: '  ' })}\``
     }
+    ret += ')'
   }
+  if (lang) ret += ` ${lang}`
 
-  return `<${type}
-\xa0\xa0${values}
-></${type}>`
+  return ret
 }
 
 function recurse (children = []) {
@@ -69,6 +66,6 @@ for (const file of files) {
   const read = JSON.parse(fs.readFileSync(loc(`${path}.json`), 'utf8'))
   const children = recurse([read]).join('\n\n')
 
-  fs.writeFileSync(loc(`${path}.md`), children, 'utf8')
-  // fs.unlinkSync(file)
+  fs.writeFileSync(loc(`${path}.pug`), children, 'utf8')
+  fs.unlinkSync(file)
 }
