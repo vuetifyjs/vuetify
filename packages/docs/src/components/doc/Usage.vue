@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <base-heading>Generic.Pages.usage</base-heading>
     <doc-text>{{ `${namespace}.${page}.examples.${internalValue.file}.desc` }}</doc-text>
     <doc-example
@@ -7,7 +7,7 @@
       :value="internalValue"
       eager
     />
-  </div>
+  </section>
 </template>
 
 <script>
