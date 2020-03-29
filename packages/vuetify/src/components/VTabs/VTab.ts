@@ -99,7 +99,11 @@ export default baseMixins.extend<options>().extend(
       if (this.to) {
         this.$router.push(this.to)
       } else if (this.href && !this.href.startsWith('#')) {
-        window.location = this.href
+        if (this.href.startsWith('#') || this.href.startsWith('/')) {
+          this.$router.push(this.href)
+        } else {
+          window.location = this.href
+        }
       } else {
         this.toggle()
       }
