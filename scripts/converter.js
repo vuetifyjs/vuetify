@@ -5,10 +5,19 @@ const glob = require('glob')
 const stringify = require('stringify-object')
 const resolve = file => path.resolve(__dirname, file)
 
-function genCode (value) {
-  const [lang, name] = value.split('_', 2)
+const snippetsUsed = new Set()
 
-  return `:code(${lang} src="${name}")`
+function genCode (value) {
+  const [lang, ...rest] = value.split('_')
+  const name = rest.join('_')
+
+  const snippet = resolve(`../packages/docs/src/snippets/${lang}/${name}.txt`)
+  // const src = fs.readFileSync(snippet, 'utf8')
+  if (snippetsUsed.has(snippet)) console.log(`Snippet "${value}" used multiple times`)
+  snippetsUsed.add(snippet)
+
+  // return `code(lang="${lang}")\n` + src.split('\n').map(s => ('  | ' + s).trimEnd()).join('\n')
+  return `code(lang="${lang}" src="${name}")`
 }
 
 function parse (child) {
@@ -19,20 +28,20 @@ function parse (child) {
   } = child
 
   switch (type) {
-    case 'alert': return `alert(value="${value}") lang`
-    case 'heading': return `h2 lang`
+    case 'alert': return `alert(value="${value}") ${lang}`
+    case 'heading': return `\nh2 ${lang}`
     case 'markup': return genCode(value)
     case 'text': return `| ${lang}`
   }
 
-  let ret = 'type'
+  let ret = (type === 'up-next' ? '\n' : '') + type
 
   if (value) {
-    ret += ' ('
+    ret += '('
     if (typeof value === 'string') {
       ret += `value="${value}"`
     } else if (typeof value === 'object') {
-      ret += `value=\`${stringify(value, { indent: '  ' })}\``
+      ret += `:value=\`${stringify(value, { indent: '  ' })}\``
     }
     ret += ')'
   }
@@ -64,8 +73,10 @@ for (const file of files) {
     .map(i => i.replace(/\.json/, ''))
     .join('/')
   const read = JSON.parse(fs.readFileSync(loc(`${path}.json`), 'utf8'))
-  const children = recurse([read]).join('\n\n')
+  const children = recurse([read]).join('\n').trim() + '\n'
 
   fs.writeFileSync(loc(`${path}.pug`), children, 'utf8')
-  fs.unlinkSync(file)
+  // fs.unlinkSync(file)
 }
+
+// snippetsUsed.forEach(file => fs.unlinkSync(file))
