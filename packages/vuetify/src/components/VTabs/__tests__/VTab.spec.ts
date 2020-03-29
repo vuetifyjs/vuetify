@@ -119,7 +119,7 @@ describe('VTab.ts', () => {
             expect(event.preventDefault).toHaveBeenCalled()
             expect(toggle).not.toHaveBeenCalled()
           } else {
-            expect(event.preventDefault).not.toHaveBeenCalled()
+            expect(event.preventDefault).toHaveBeenCalled()
             expect(toggle).toHaveBeenCalled()
           }
         }

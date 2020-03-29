@@ -88,25 +88,21 @@ export default baseMixins.extend<options>().extend(
 
   methods: {
     click (e: KeyboardEvent | MouseEvent): void {
-      if (this.disabled) {
-        e.preventDefault()
-        return
-      }
+      e.preventDefault()
 
-      // If user provides an
-      // actual link, do not
-      // prevent default
-      if (this.href &&
-        this.href.indexOf('#') > -1
-      ) e.preventDefault()
+      if (this.disabled) return
 
       if (e.detail) this.$el.blur()
 
       this.$emit('click', e)
 
-      if (this.to) this.$router.push(this.to)
-
-      this.toggle()
+      if (this.to) {
+        this.$router.push(this.to)
+      } else if (this.href && !this.href.startsWith('#')) {
+        window.location = this.href
+      } else {
+        this.toggle()
+      }
     },
     getFirstTab () {
       return this.items[0]
@@ -164,7 +160,8 @@ export default baseMixins.extend<options>().extend(
       if (targetTab) {
         e.preventDefault()
         targetTab.$el.focus()
-        if (this.activationMode === 'automatic') targetTab.click(e)
+        const isLink = targetTab.to || (targetTab.href && !targetTab.href.startsWith('#'))
+        if (this.activationMode === 'automatic' && !isLink) targetTab.click(e)
       }
     },
   },
