@@ -6,19 +6,19 @@
   .v-data-table-header
     th.sortable
       .v-data-table-header__icon
-        color: map-deep-get($material, 'text', 'disabled')
+        color: map-deep-get($material, 'table', 'header', 'text-color-disabled')
 
       &:hover,
       &.active
-        color: map-deep-get($material, 'text', 'primary')
+        color: map-deep-get($material, 'table', 'header', 'text-color-active')
 
       &.active
         .v-data-table-header__icon
-          color: map-deep-get($material, 'text', 'primary')
+          color: map-deep-get($material, 'table', 'header', 'text-color-active')
 
     &__sort-badge
       background-color: map-get($material, 'dividers')
-      color: map-deep-get($material, 'text', 'primary')
+      color: map-deep-get($material, 'table', 'header', 'text-color-active')
 
 // Block
 .v-data-table-header

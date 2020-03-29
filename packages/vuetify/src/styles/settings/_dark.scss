@@ -113,6 +113,11 @@ $material-dark: map-deep-merge(
       'hover': rgba(map-get($shades, 'white'), 0.75)
     ),
     'table': (
+      'header': (
+        'text-color': rgba(map-get($shades, 'white'), 0.7),
+        'text-color-active': map-get($shades, 'white'),
+        'text-color-disabled': rgba(map-get($shades, 'white'), 0.5)
+      ),
       'active': #505050,
       'hover': map-get($grey, 'darken-2'),
       'group': map-get($grey, 'darken-2')
