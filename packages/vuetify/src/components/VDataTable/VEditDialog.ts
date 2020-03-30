@@ -26,6 +26,26 @@ export default mixins(Returnable, Themeable).extend({
     },
     large: Boolean,
     eager: Boolean,
+    nudgeBottom: {
+      type: [Number, String],
+      default: 0,
+    },
+    nudgeLeft: {
+      type: [Number, String],
+      default: 0,
+    },
+    nudgeRight: {
+      type: [Number, String],
+      default: 0,
+    },
+    nudgeTop: {
+      type: [Number, String],
+      default: 0,
+    },
+    nudgeWidth: {
+      type: [Number, String],
+      default: 0,
+    },
     persistent: Boolean,
     saveText: {
       default: 'Save',
@@ -116,6 +136,11 @@ export default mixins(Returnable, Themeable).extend({
         eager: this.eager,
         light: this.light,
         dark: this.dark,
+        nudgeBottom: this.nudgeBottom,
+        nudgeLeft: this.nudgeLeft,
+        nudgeRight: this.nudgeRight,
+        nudgeTop: this.nudgeTop,
+        nudgeWidth: this.nudgeWidth,
       },
       on: {
         input: (val: boolean) => (this.isActive = val),
