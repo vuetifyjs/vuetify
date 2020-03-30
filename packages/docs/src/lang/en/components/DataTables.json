@@ -104,7 +104,12 @@
       "eager": "Mixins.Bootable.props.eager",
       "large": "Attaches a submit and cancel button to the dialog",
       "saveText": "Sets the default text for the save button when using the **large** prop",
-      "transition": "Mixins.Transitionable.props.transition"
+      "transition": "Mixins.Transitionable.props.transition",
+      "nudgeBottom": "Mixins.Menuable.props.nudgeBottom",
+      "nudgeLeft": "Mixins.Menuable.props.nudgeLeft",
+      "nudgeRight": "Mixins.Menuable.props.nudgeRight",
+      "nudgeTop": "Mixins.Menuable.props.nudgeTop",
+      "nudgeWidth": "Mixins.Menuable.props.nudgeWidth"
     },
     "v-data-table": {
       "calculateWidths": "Enables calculation of column widths. `widths` property will be available in select scoped slots",
