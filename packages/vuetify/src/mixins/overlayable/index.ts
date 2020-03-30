@@ -93,9 +93,9 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
         } else if (this.$el) {
           this.overlay.zIndex = getZIndex(this.$el)
         }
-
-        this.overlay.value = true
       })
+
+      this.overlay.value = true
 
       return true
     },
