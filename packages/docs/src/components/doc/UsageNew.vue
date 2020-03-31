@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <base-heading>Generic.Pages.usage</base-heading>
 
     <doc-text>{{ `${namespace}.${page}.usageText` }}</doc-text>
@@ -9,7 +9,7 @@
       :value="value"
       eager
     />
-  </div>
+  </section>
 </template>
 
 <script>

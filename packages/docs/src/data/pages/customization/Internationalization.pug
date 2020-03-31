@@ -1,0 +1,27 @@
+h2 gettingStarted
+| gettingStartedText
+| availableLocalesText
+locales
+code(lang="js" src="vuetify_custom_locale")
+alert(value="info") alertInfo
+api(:value=`[
+  'internationalization'
+]`)
+
+h2 createTranslation
+| createTranslationText
+code(lang="ts" src="create_translation")
+
+h2 customComponents
+| customComponentsText
+code(lang="html" src="vuetify_t_function")
+
+h2 vueI18nHeader
+| vueI18nText1
+| vueI18nText2
+code(lang="js" src="vuei18n_import")
+
+up-next(:value=`[
+  'customization/accessibility',
+  'customization/rtl'
+]`)
