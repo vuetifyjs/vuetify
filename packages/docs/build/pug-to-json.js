@@ -46,10 +46,10 @@ module.exports = function (content) {
         } else if (node.name === 'code') {
           const lang = eval(node.attrs.find(attr => attr.name === 'lang').val)
           const src = eval(node.attrs.find(attr => attr.name === 'src').val)
-          // TODO: inline code
+
           pageSection.children.push({
             type: 'markup',
-            val: `${lang}_${src}`
+            value: `${lang}_${src}`
           })
         } else {
           // Pug doesn't deal with attrs in a way that I like, so we're going
