@@ -76,7 +76,7 @@ for (const file of files) {
   const children = recurse([read]).join('\n').trim() + '\n'
 
   fs.writeFileSync(loc(`${path}.pug`), children, 'utf8')
-  // fs.unlinkSync(file)
+  fs.unlinkSync(file)
 }
 
 // snippetsUsed.forEach(file => fs.unlinkSync(file))
