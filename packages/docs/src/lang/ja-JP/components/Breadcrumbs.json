@@ -12,6 +12,9 @@
       "heading": "### Item スロット",
       "desc": "'item' スロットを使用して、各breadcrumbをカスタマイズできます。"
     },
+    "large": {
+      "desc": "Large指定されたパンくずリストはフォント サイズが大きくなります。"
+    },
     "divider": {
       "desc": "区切り記号は、`divider` プロパティを使用して設定できます。"
     }

@@ -14,46 +14,165 @@
     "keywords": "warum vuetify, warum vuetify wählen, bestes vue Framework, bestes ui Framework"
   },
   "introduction/frequently-asked-questions": {
-    "title": "Häufig gestellte Fragen"
+    "title": "Häufig gestellte Fragen",
+    "description": "Hast du ein Problem? Schaue dir die am häufigsten gestellten Fragen der Vuetify Community an.",
+    "keywords": "häufig gestellte Fragen (FAQ)"
   },
   "introduction/long-term-support": {
-    "title": "Langfristige Unterstützung"
+    "title": "Langfristige Unterstützung",
+    "description": "Vuetify bietet langfristige Unterstützung für die letzte größere Veröffentlichung für 12 Monate mit updates bei kritischen Fehlern und Sicherheitslücken.",
+    "keywords": "LTS, Langzeit-Support"
   },
   "introduction/meet-the-team": {
-    "title": "Das Team"
+    "title": "Das Team",
+    "description": "Triff das Team hinter Vuetify. Das sind die Leute, die die Vision des Frameworks vorantreiben.",
+    "keywords": "Vuetify DEV-Team, Vuetify Kernteam"
   },
   "introduction/roadmap": {
-    "title": "Der Vuetify-Fahrplan"
+    "title": "Der Vuetify-Fahrplan",
+    "description": "Die nächsten Funktionen die für Vuetify geplant sind. Neue Komponenten, neue Direktiven und vieles mehr!.",
+    "keywords": "vuetify Roadmap, zukünftige Pläne, neue Features für Vuetify"
   },
   "introduction/sponsors-and-backers": {
-    "title": "Sponsoren & Unterstützer"
+    "title": "Sponsoren & Unterstützer",
+    "description": "Unterstützen Sie Vuetify durch Spenden für das Projekt. Dies hilft bei der Erhaltung bestehender Funktionen und der Entwicklung neuer Funktionen.",
+    "keywords": "sponsor, backer, spenden, patron, support vuetify, vuetify support"
   },
   "getting-started/quick-start": {
-    "title": "Schnellstart"
+    "title": "Schnellstart",
+    "description": "Beginnen Sie mit Vue und Vuetify in kürzester Zeit. Unterstützung für Vue CLI, Webpack, Nuxt und mehr.",
+    "keywords": "schnell starten, vuetify Templates, Installation vuetify"
+  },
+  "getting-started/pre-made-layouts": {
+    "title": "Anwendungs-Layouts",
+    "description": "Wählen Sie aus einer Vielzahl von Vuetify Material Design Layouts aus, die zum schnellen Start mit Ihrer Anwendung erstellt wurden.",
+    "keywords": "vordefinierte Layouts, Layouts, Anwendungs Layouts, Material design Layouts"
   },
   "getting-started/browser-support": {
-    "title": "Browserunterstützung"
+    "title": "Browserunterstützung",
+    "description": "Vuetify ist ein progressives Framework, das alle aktuellen (evergreen) Browser und IE11 / Safari mit Polyfill unterstützt.",
+    "keywords": "Vuetify Browser-Unterstützung"
   },
   "getting-started/unit-testing": {
-    "title": "Unit-Tests"
+    "title": "Unit-Tests",
+    "description": "Erfahren Sie, wie Sie in Ihrer Vue Anwendung Komponententests mit vue-test-utils und Vuetify-Components erstellen.",
+    "keywords": "unit testing vuetify, testing vuetify, vuetify spec tests"
+  },
+  "getting-started/releases-and-migrations": {
+    "title": "Veröffentlichungen und Migrationen",
+    "description": "Bleiben Sie auf dem Laufenden über die neuesten Versionshinweise. Die Migrationshinweise helfen beim update zu einer neuen Version.",
+    "keywords": "migrieren, veröffentlichen, upgraden vuetify"
   },
   "getting-started/contributing": {
-    "title": "Zum Projekt beitragen"
+    "title": "Zum Projekt beitragen",
+    "description": "Ein Beitrag zu Open Source ermöglicht Entwicklern den kostenlosen Zugriff auf erstaunliche Werkzeuge. Lernen Sie, wie Sie selbst beim weiterentwickeln des Vuetify Frameworks helfen können.",
+    "keywords": "beitrag, beitragende, Featureanfrage"
   },
   "customization/accessibility": {
-    "title": "Barrierefreiheit"
+    "title": "Barrierefreiheit",
+    "description": "Beispiele und die Vorteile der Barrierefreiheit (a11y) in Vuetify Components.",
+    "keywords": "a11y, Barrierefreiheit, Benutzerfreundlichkeit"
   },
   "customization/a-la-carte": {
-    "title": "A-la-carte (Treeshaking)"
+    "title": "A-la-carte (Treeshaking)",
+    "description": "A La Carte bietet automatisches treeshaking über den vuetify-laader. Verwenden Sie nur die Funktionen, die Sie benötigen und reduzieren Sie die Paketgröße drastisch.",
+    "keywords": "a la carte, a-la-carte, vuetify single import, vuetify import, Komponente importieren, verkleinern vuetify Größe"
   },
   "customization/breakpoints": {
-    "title": "Breakpoints"
+    "title": "Breakpoints",
+    "description": "Zugriff auf das Vuetify-Rastersystem innerhalb der Komponenten mit Hilfe des Haltepunkte-Services.",
+    "keywords": "haltepunkte am Raster, Haltepunkte"
+  },
+  "customization/icons": {
+    "title": "Icons",
+    "description": "Vuetify unterstützt Material Design Icons, Font awesome und andere Icons durch Präfixe und globale Optionen.",
+    "keywords": "vue Icon Komponente, Iconfont, Icon-Bibliotheken, vuetify Icons"
+  },
+  "customization/internationalization": {
+    "title": "Internationalisierung (i18n)",
+    "keywords": "i18n, Sprache, Internationalisierung"
+  },
+  "customization/rtl": {
+    "title": "RTL (Bidirektionalität)",
+    "keywords": "rtl, rechts nach links, Bidirektionalität"
+  },
+  "customization/presets": {
+    "title": "Vorlagen",
+    "description": "Presets sind Vue CLI Plugins, die das Aussehen und das Gefühl Ihrer Vuetify Anwendung drastisch verändern.",
+    "keywords": "vuetify Presets, individuelles Material Design"
+  },
+  "customization/sass-variables": {
+    "title": "SASS-Variablen",
+    "description": "Passen Sie Vuetifys interne Stile an, indem Sie SASS-Variablen ändern.",
+    "keywords": "sass Variablen, scss Variablen, Änderung von Vuetify Stilen"
+  },
+  "customization/theme": {
+    "title": "Theme",
+    "keywords": "Themes"
+  },
+  "styles/text": {
+    "title": "CSS-Text-Helfer"
+  },
+  "styles/colors": {
+    "title": "Material Farbpalette"
+  },
+  "styles/content": {
+    "title": "Content-Style",
+    "keywords": "content, html, markup"
+  },
+  "styles/display": {
+    "title": "CSS Display Helfer"
+  },
+  "styles/flex": {
+    "title": "CSS Flex-Helfer"
+  },
+  "styles/spacing": {
+    "title": "CSS-Abstandshelfer"
+  },
+  "styles/transitions": {
+    "title": "Übergänge"
+  },
+  "components/api-explorer": {
+    "title": "API-Explorer"
+  },
+  "components/categories/forms": {
+    "title": "Formular-Kategorie"
+  },
+  "components/categories/navigation": {
+    "title": "Navigationskategorie"
+  },
+  "components/categories/layout": {
+    "title": "Layout-Kategorie"
+  },
+  "components/categories/tables": {
+    "title": "Tabellenkategorie"
+  },
+  "components/application": {
+    "title": "Anwendungsdienst"
+  },
+  "components/app-bars": {
+    "title": "App-Bar-Komponente"
+  },
+  "components/aspect-ratios": {
+    "title": "Seitenverhältnisse",
+    "keywords": "Verhältnis, Reaktion, Seitenverhältnis"
+  },
+  "components/autocompletes": {
+    "title": "Automatische Vervollständigungskompontene",
+    "keywords": "autocomplete, vuetify Autocomplete component, vue Autocomplete component"
   },
   "components/avatars": {
-    "title": "Avatar-Komponente"
+    "title": "Avatar-Komponente",
+    "description": "Der Avatar-Component wird verwendet, um die Größe und den Randradius eines Bildes zu steuern. Es kann mit zahlreichen Components verwendet werden, um einen besseren visuellen Kontext zu schaffen.",
+    "keywords": "avatare, vuetify Avatar component, vue avatar component"
   },
   "components/badges": {
-    "title": "Badge-Komponente"
+    "title": "Badge-Komponente",
+    "description": "Der Badge-Component ist ein kleiner Status-Deskriptor für Elemente. Dies enthält in der Regel eine kleine Anzahl oder eine kurze Anzahl von Zeichen.",
+    "keywords": "badges, vuetify badge component, vue badge component"
+  },
+  "components/banners": {
+    "title": "Banner component"
   },
   "components/breadcrumbs": {
     "title": "Breadcrumbs-Komponente"
@@ -66,5 +185,17 @@
   },
   "components/buttons": {
     "title": "Button-Komponente"
+  },
+  "components/button-groups": {
+    "title": "Schaltflächengruppen-Komponente"
+  },
+  "components/floating-action-buttons": {
+    "title": "FAB-Komponente"
+  },
+  "components/carousels": {
+    "title": "Karussell-Komponente"
+  },
+  "components/chips": {
+    "title": "Chip-Komponente"
   }
 }

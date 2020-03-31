@@ -1,1 +1,4 @@
-{}
+{
+  "callback": "Die aufzurufende Callback-Methode",
+  "debounce": "Wartezeit vor dem Aufrufen der Callback-Methode"
+}

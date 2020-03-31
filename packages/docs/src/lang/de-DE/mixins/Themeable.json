@@ -1,1 +1,6 @@
-{}
+{
+  "props": {
+    "dark": "Wendet die dunkle Theme-Variante für die Komponente an. Mehr Informationen zur Material Design Dokumentation für [dunkle Themes](https://material.io/design/color/dark-theme.html).",
+    "light": "Wendet die helle Theme-Variante für die Komponente an."
+  }
+}

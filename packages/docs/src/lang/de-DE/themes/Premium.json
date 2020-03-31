@@ -1,1 +1,11 @@
-{}
+{
+  "heading": "# Premium & kostenlose Themes",
+  "headingText": "Vuetify bietet sowohl **kostenlose** als auch **Premium** vorgefertigte Themes an, die dir einen schnellen Start ermöglichen. Kostenlose Themes stehen zur Installation über Vue CLI zur Verfügung oder Sie können einfach den Source-Code herunterladen.",
+  "buy": "Informationen und Demos",
+  "buyNow": "Jetzt kaufen",
+  "free": "Kostenlos",
+  "live": "Live-Vorschau",
+  "premium": "Premium",
+  "downloadNow": "Jetzt herunterladen",
+  "viewDemo": "Demo ansehen"
+}

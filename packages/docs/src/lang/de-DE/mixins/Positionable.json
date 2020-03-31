@@ -1,1 +1,10 @@
-{}
+{
+  "props": {
+    "absolute": "Wendet den Style **position: absolute** auf einer Komponente an.",
+    "bottom": "Legt die Komponente nach unten aus.",
+    "fixed": "Wendet den Style **position: fixed** auf einer Komponente an.",
+    "left": "Legt die Komponente nach links aus.",
+    "right": "Legt die Komponente nach rechts aus.",
+    "top": "Legt die Komponente nach oben aus."
+  }
+}

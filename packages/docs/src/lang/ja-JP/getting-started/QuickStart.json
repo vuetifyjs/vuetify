@@ -32,7 +32,6 @@
   "pwaHeader": "## PWAでの利用",
   "pwaText": "Vue CLI で新しいアプリを作成する場合は、 `vue create my-app`を実行した後、最初のプロンプトで **Progressive Web App (PWA) Support** を選択するオプションがあります。このパッケージは、次のコマンドを入力して、既存の Vue CLI プロジェクトにインストールすることもできます。",
   "cordovaHeader": "## Cordovaでの利用",
-  "cordovaText": "Vuetify を **Corodova** で使用するには、Vue CLIで [Corodova](https://github.com/m0dch3n/vue-cli-plugin-cordova) プラグインを追加します。",
   "capacitorHeader": "## Capacitorでの利用",
   "capacitorText": "Vuetify を **Corodova** で使用するには、Vue CLIで [Capacitor](https://github.com/nklayman/vue-cli-plugin-capacitor) プラグインを追加します。"
 }

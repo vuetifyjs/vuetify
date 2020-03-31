@@ -1,1 +1,6 @@
-{}
+{
+  "heading": "# Bidirektionalität (RTL)",
+  "headingText": "Vuetify unterstützt RTL **(rechts nach links)**-Sprachen und kann über die **rtl**-Option aktiviert werden, wenn Sie Ihre Anwendung hochfahren. Weitere Informationen über die [Implementierung von Budirektionalität](https://material.io/design/usability/bidirectionality.html) finden Sie auf der Spezifikationsseite.",
+  "bidText1": "RTL Formular",
+  "bidText2": "Sie können dies auch jederzeit dynamisch ändern, indem du den **rtl**-Wert auf dem vuetify-Objekt änderst."
+}

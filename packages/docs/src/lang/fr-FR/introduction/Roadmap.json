@@ -1,64 +1,72 @@
 {
   "heading": "# La feuille de route de Vuetify",
   "headingText": "Vuetify est toujours en développement. Nous travaillons constamment à l'amélioration de la base de code existante, ainsi qu'à l'ajout de nouvelles fonctionnalités qui facilitent la création d'applications. Vous trouverez ci-dessous une liste provisoire des fonctionnalités prévues. Cette liste n’est pas exhaustive et peut être modifiée à tout moment sans préavis.",
-  "roadmapItems": {
-    "0": {
+  "roadmapItems": [
+    {
       "type": "version",
       "complete": true,
       "title": "Lancement Alpha",
       "caption": "Décembre 2016",
-      "text": "Vuetify est officiellement annoncé au public. Le framework, initialement livré avec 40 composants, pesait 46 Ko."
+      "text": "Vuetify est officiellement annoncé au public. Le framework, initialement livré avec 40 composants, pesait 46 Ko.",
+      "value": false
     },
-    "1": {
+    {
       "type": "version",
       "complete": true,
       "title": "v1.0 Release",
       "caption": "Février 2018",
-      "text": "La fête officielle de la version v1.0. Après 18 mois et la santé mentale de Kael, nous avons fait entrer notre première version **MAJEURE** qui comprenait une multitude de nouveaux composants et fonctionnalités. Regardez ici les [notes de version](https://github.com/vuetifyjs/vuetify/releases/tag/v1.0.0)."
+      "text": "La fête officielle de la version v1.0. Après 18 mois et la santé mentale de Kael, nous avons fait entrer notre première version **MAJEURE** qui comprenait une multitude de nouveaux composants et fonctionnalités. Regardez ici les [notes de version](https://github.com/vuetifyjs/vuetify/releases/tag/v1.0.0).",
+      "value": false
     },
-    "2": {
+    {
       "type": "version",
       "complete": true,
       "title": "v1.1 Release",
       "caption": "Juin 2018",
-      "text": "Une reconstruction complète de toutes les fonctionnalités de formulaire, y compris toutes les entrées et les contrôles de sélection. Abstraction de fonctionnalités de composants comme `v-select` dans de nouvelles implémentations, `v-autocomplete`, `v-combobox` pour des fonctionnalités plus étendues et des tests plus faciles. Cette version a également marqué le premier support officiel des langues **RTL** . Regardez ici les notes officielles [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.1.0)."
+      "text": "Une reconstruction complète de toutes les fonctionnalités de formulaire, y compris toutes les entrées et les contrôles de sélection. Abstraction de fonctionnalités de composants comme `v-select` dans de nouvelles implémentations, `v-autocomplete`, `v-combobox` pour des fonctionnalités plus étendues et des tests plus faciles. Cette version a également marqué le premier support officiel des langues **RTL** . Regardez ici les notes officielles [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.1.0).",
+      "value": false
     },
-    "3": {
+    {
       "type": "version",
       "complete": true,
       "title": "v1.2 Release",
       "caption": "Juillet 2018",
-      "text": "Ajout de nouveaux composants, `v-img`, `v-rating` et `v-hover`. Amélioration du système de propagation des thèmes et extension des fonctionnalités des couleurs utilisées avec des composants tels que HEX et RGBA. Als a ajouté de nombreuses nouvelles locales. Regardez ici les [notes de publication](https://github.com/vuetifyjs/vuetify/releases/tag/v1.2.0)."
+      "text": "Ajout de nouveaux composants, `v-img`, `v-rating` et `v-hover`. Amélioration du système de propagation des thèmes et extension des fonctionnalités des couleurs utilisées avec des composants tels que HEX et RGBA. Als a ajouté de nombreuses nouvelles locales. Regardez ici les [notes de publication](https://github.com/vuetifyjs/vuetify/releases/tag/v1.2.0).",
+      "value": false
     },
-    "4": {
+    {
       "type": "version",
       "complete": true,
       "title": "v1.3 Release",
       "caption": "Octobre 2018",
-      "text": "Ajout de nouveaux composants, `v-treeview`,` v-timeline` et `v-item-group`. Unification des interfaces utilisées dans `v-tabs` et` v-carousel`. Amélioration de **vuetify-loader** pour prendre en charge le tree-shaking sans effort des composants Vuetify. Regardez ici les [notes de publication](https://github.com/vuetifyjs/vuetify/releases/tag/v1.3.0)."
+      "text": "Ajout de nouveaux composants, `v-treeview`,` v-timeline` et `v-item-group`. Unification des interfaces utilisées dans `v-tabs` et` v-carousel`. Amélioration de **vuetify-loader** pour prendre en charge le tree-shaking sans effort des composants Vuetify. Regardez ici les [notes de publication](https://github.com/vuetifyjs/vuetify/releases/tag/v1.3.0).",
+      "value": false
     },
-    "5": {
+    {
       "type": "version",
       "complete": true,
       "title": "Module AWS Cognito Vuex",
       "caption": "Novembre 2018",
-      "text": "Un module Vuex complet pour interagir avec AWS Cognito. Utile pour les sites qui nécessitent une authentification. Regardez ici pour plus d'informations sur [AWS Cognito](https://aws.amazon.com/cognito/dev-resources/)."
+      "text": "Un module Vuex complet pour interagir avec AWS Cognito. Utile pour les sites qui nécessitent une authentification. Regardez ici pour plus d'informations sur [AWS Cognito](https://aws.amazon.com/cognito/dev-resources/).",
+      "value": false
     },
-    "6": {
+    {
       "type": "version",
       "complete": true,
       "title": "v1.4 Release",
       "caption": "Décembre 2018",
-      "text": "Ajout de nouveaux composants `v-sparkline` et abstraction de la fonctionnalité de `v-toolbar`'s dans plusieurs composants pour faciliter la maintenabilité et les tests. Reconstruction de l'ensemble de la documentation pour faciliter la tâche des contributeurs et la maintenance faite par l'équipe. Regardez ici les [notes de publication](https://github.com/vuetifyjs/vuetify/releases/tag/v1.4.0)."
+      "text": "Ajout de nouveaux composants `v-sparkline` et abstraction de la fonctionnalité de `v-toolbar`'s dans plusieurs composants pour faciliter la maintenabilité et les tests. Reconstruction de l'ensemble de la documentation pour faciliter la tâche des contributeurs et la maintenance faite par l'équipe. Regardez ici les [notes de publication](https://github.com/vuetifyjs/vuetify/releases/tag/v1.4.0).",
+      "value": false
     },
-    "7": {
+    {
       "type": "version",
       "complete": true,
       "title": "v1.5 Release",
       "caption": "Février 2019",
-      "text": "Ajout d'un nouveau composant, `v-calendar`. Amélioration des fonctionnalités de `v-sparkline` avec les propriétés **bar** et **fill**. Amélioration de `v-treeview` et préparation pour le LTS. Naviguez vers la [Page de support à long terme](/introduction/long-term-support) pour plus d'informations sur le LTS. Regardez ici les notes officielles [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0)."
+      "text": "Ajout d'un nouveau composant, `v-calendar`. Amélioration des fonctionnalités de `v-sparkline` avec les propriétés **bar** et **fill**. Amélioration de `v-treeview` et préparation pour le LTS. Naviguez vers la [Page de support à long terme](/introduction/long-term-support) pour plus d'informations sur le LTS. Regardez ici les notes officielles [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0).",
+      "value": false
     },
-    "8": {
+    {
       "type": "version",
       "complete": true,
       "title": "v2.0 Release **(Arcadia)**",
@@ -71,9 +79,10 @@
           "Conversion de Stylus en Sass",
           "Conversion de avoriaz vers vue-test-utils"
         ]
-      }
+      },
+      "value": false
     },
-    "9": {
+    {
       "type": "version",
       "complete": true,
       "title": "v2.1 Release **(Vanguard)**",
@@ -82,30 +91,35 @@
         "#### Highlights": [
           "2 Nouveaux composants"
         ]
-      }
+      },
+      "value": false
     },
-    "10": {
+    {
       "type": "version",
       "complete": true,
-      "title": "v2.2 Release **(Tigris)**"
+      "title": "v2.2 Release **(Tigris)**",
+      "value": false
     },
-    "11": {
+    {
       "value": true
     },
-    "12": {
+    {
       "type": "version",
       "value": true
     },
-    "14": {
+    {
       "type": "version",
-      "text": "Les composants Vuetify seront pré-configurables par défaut. Cela vous permettra de définir des paramètres globaux tels que **no-ripples** ou toutes les entrées sont de type **outlined** et même de définir toutes les cartes pour devenir **tile**s."
+      "text": "Les composants Vuetify seront pré-configurables par défaut. Cela vous permettra de définir des paramètres globaux tels que **no-ripples** ou toutes les entrées sont de type **outlined** et même de définir toutes les cartes pour devenir **tile**s.",
+      "value": false
     },
-    "15": {
-      "type": "site"
+    {
+      "type": "site",
+      "value": false
     },
-    "16": {
+    {
       "title": "Vuetify Snips",
-      "caption": "À DÉTERMINER"
+      "caption": "À DÉTERMINER",
+      "value": false
     }
-  }
+  ]
 }

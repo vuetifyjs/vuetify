@@ -1,1 +1,7 @@
-{}
+{
+  "props": {
+    "hideOverlay": "Versteckt das Overlay.",
+    "overlayColor": "Legt die Überlagerungsfarbe fest.",
+    "overlayOpacity": "Legt die Deckkraft des Overlays fest."
+  }
+}

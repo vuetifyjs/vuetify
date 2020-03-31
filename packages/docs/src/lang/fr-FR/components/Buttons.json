@@ -1,10 +1,6 @@
 {
   "alert": "`v-btn` est le seul composant qui se comporte différemment lorsque vous utilisez le prop **dark** normalement, les composants utilisent le prop **dark** pour indiquer qu'ils ont un fond de couleur foncé et ont besoin de leur texte pour être blanc. Bien que cela fonctionne pour `v-btn`, il est conseillé d'utiliser le prop uniquement lorsque le bouton **IS ON** un fond coloré en raison de l'état désactivé se mélangeant avec des fonds blancs. Si vous avez besoin de texte blanc, ajoutez simplement la classe **white--text** .",
   "examples": {
-    "flat": {
-      "heading": "### Plat",
-      "desc": "Les boutons plats n'ont pas d'ombre portée et aucun fond d'écran. Seulement au survol d'un conteneur pour le bouton affiché."
-    },
     "raised": {
       "desc": "Les boutons soulevés ont une ombre portée qui augmente lorsque vous cliquez dessus. C'est le style par défaut."
     },

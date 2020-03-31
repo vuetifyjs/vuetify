@@ -30,5 +30,10 @@
   "customComponentText1": "独自のカスタムコンポーネントで同じアイコン文字列を使用できます。**$vuetify.icons** (またはショートカット **$**) が _vtext_、 _vhtml_ またはテキストとして渡されるたびに、 `<v-icon>` は指定された値を検索します。これにより、構築が簡単で管理しやすいカスタマイズされたソリューションを作成できます。",
   "componentIconsHeader": "## コンポーネントアイコン",
   "componentIconsText1": "提供されているアイコンフォントプリセットの代わりに、独自のコンポーネントアイコンを使用できます。Vuetify コンポーネントで使用されているアイコンは、独自に切り替えることもできます。",
+  "usingMissingMaterialIconsHeader": "## 欠落しているMaterial Iconsの使用",
+  "usingMissingMaterialIconsText1": "一部のMaterial Iconsはデフォルトで欠落しています。たとえば、`person`と`person_outline`はそれぞれ使用できます。しかし`visibility`は使用できますが、`visibility_outline`は使用できません 。不足しているMaterial Iconsを使用するには、以下のフォントを含めます（既に登録されている場合は別のマテリアルフォントを削除します）。",
+  "usingMissingMaterialIconsText2": "カスタムコンポーネントを追加できます。 **@/components/MaterialIcon.vue** と仮定します。",
+  "usingMissingMaterialIconsText3": "つづいて、必要なMaterial iconsを正確に登録する必要があります。",
+  "usingMissingMaterialIconsText4": "そうすることで、このようにMaterial iconsを使用できます。",
   "customFASvgText1": "Font Awesome Proでコンポーネントアイコンを利用して、個々のアイコンの重みを選択できます:"
 }

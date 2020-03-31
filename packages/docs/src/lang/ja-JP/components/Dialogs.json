@@ -56,7 +56,6 @@
     "origin": "Mixins.Transitionable.props.origin",
     "persistent": "要素の外側をクリックしても、アクティブなままになります。",
     "retainFocus": "タブフォーカスは、デフォルトでダイアログの最初の子に戻ります。TinyMCE や vue-clipboardなどのフォーカスが必要な外部ツールを使用する場合は、これを無効にします。",
-    "scrollable": "true に設定すると、指定された高さの `v-card` と `v-card-text` コンポーネントが必要になります。詳細については、[scrollabelの例](/components/dialogs#scrollable) をチェックしてください。",
     "transition": "Mixins.Transitionable.props.transition",
     "width": "Mixins.Measurable.props.width"
   },

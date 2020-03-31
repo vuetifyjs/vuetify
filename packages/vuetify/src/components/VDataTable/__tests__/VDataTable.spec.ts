@@ -834,4 +834,26 @@ describe('VDataTable.ts', () => {
 
     expect(wrapper.emitted().pagination).toHaveLength(2)
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/4975
+  it('should show correct aria-labels when sorting', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        itemKey: 'name',
+        items: testItems.slice(0, 5),
+        sortBy: 'calories',
+      },
+    })
+
+    wrapper.setProps({ sortDesc: true })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ mustSort: true })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

@@ -1,1 +1,12 @@
-{}
+{
+  "heading": "# Inhalt",
+  "headingText": "Vuetify hat benutzerdefinierte Styling für mehrere Standardelemente.",
+  "blockquoteHeader": "## Blockzitat",
+  "paragraphsHeader": "## Absätze",
+  "codeHeader": "## Code",
+  "codeText": "Beispiel für ein inline `<code>` Element.",
+  "variablesHeader": "## Variablen",
+  "variablesText": "<var>v</var> = <var>u</var> * <var>e</var>",
+  "userInputHeader": "## Benutzereingabe",
+  "userInputText": "Um Vuetify zu installieren, tippen Sie <kbd>npm install vuetify</kbd> in Ihre Konsole. Sobald fertiggestellt, tippen Sie <kbd>cd `<project name>`</kbd> und führen Sie <kbd>npm install</kbd> aus"
+}

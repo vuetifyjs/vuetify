@@ -1,1 +1,8 @@
-{}
+{
+  "props": {
+    "activeClass": "Die **active-class** wurde bei der Aktivierung auf Kinder angewendet.",
+    "mandatory": "Erzwingt einen Wert immer ausgewählt zu sein (falls verfügbar).",
+    "max": "Legt eine maximale Anzahl von Auswahlen fest, die getroffen werden können.",
+    "multiple": "Erlaube mehrere Auswahlen. Der **value**-Props muss ein _Array_ sein."
+  }
+}

@@ -1,1 +1,15 @@
-{}
+{
+  "auto": "Zentriert die Liste auf dem selektierten Element",
+  "centered": "Zentriert die Tabs",
+  "clearable": "Fügt die Funktionalität zum Löschen der Eingabe hinzu, das Standard-Icon ist das Material Icon **clear**",
+  "falseValue": "Setzt den falsy Status-Wert",
+  "fullWidth": "Forciert 100% Breite",
+  "id": "Setzt den DOM identifier auf der Komponente",
+  "mobileBreakPoint": "Legt den festgelegten mobile breakpoint für die Komponente fest. Dadurch werden alternative Stile für mobile Geräte angewendet.",
+  "persistent": "Außerhalb des Dialogs klicken schließt diesen nicht",
+  "singleLine": "Das Label bewegt sich nicht für focus/dirty",
+  "size": "Setzt die Höhe und Breite der Komponente.",
+  "textColor": "Wendet eine bestimmte Farbe auf den Text des Controls an",
+  "tile": "Components.Sheets.props.tile",
+  "trueValue": "Setzt den truthy Status-Wert"
+}

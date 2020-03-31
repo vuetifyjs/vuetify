@@ -1,1 +1,8 @@
-{}
+{
+  "props": {
+    "noDataText": "Text wird angezeigt, wenn keine Daten vorhanden sind"
+  },
+  "slots": {
+    "noData": "Wird angezeigt, wenn keine gefilterten Elemente vorhanden sind"
+  }
+}

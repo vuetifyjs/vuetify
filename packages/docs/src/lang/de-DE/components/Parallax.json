@@ -1,1 +1,11 @@
-{}
+{
+  "heading": "# Parallax",
+  "examples": {
+    "content": {
+      "heading": "### Mit Inhalt"
+    },
+    "custom-height": {
+      "heading": "### Benutzerdefinierte Höhe"
+    }
+  }
+}

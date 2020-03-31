@@ -1,1 +1,5 @@
-{}
+{
+  "props": {
+    "eager": "Erzwingt den Inhalt der Komponenten unter mount gezeichnet zu werden. Dies ist nützlich, wenn Sie Inhalte haben, die nicht im DOM dargestellt werden, aber für SEO crawlebar sein soll."
+  }
+}

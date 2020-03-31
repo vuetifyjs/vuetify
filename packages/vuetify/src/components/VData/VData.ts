@@ -10,6 +10,7 @@ import {
   DataSortFunction,
   DataGroupFunction,
   DataSearchFunction,
+  ItemGroup,
 } from 'types'
 import { PropValidator, PropType } from 'vue/types/options'
 
@@ -155,7 +156,7 @@ export default Vue.extend({
 
       return items
     },
-    groupedItems (): Record<string, any[]> | null {
+    groupedItems (): ItemGroup<any>[] | null {
       return this.isGrouped ? this.groupItems(this.computedItems) : null
     },
     scopedProps (): DataScopeProps {
@@ -337,8 +338,14 @@ export default Vue.extend({
       }
     },
     sortItems (items: any[]) {
-      const sortBy = this.internalOptions.groupBy.concat(this.internalOptions.sortBy)
-      const sortDesc = this.internalOptions.groupDesc.concat(this.internalOptions.sortDesc)
+      let sortBy = this.internalOptions.sortBy
+      let sortDesc = this.internalOptions.sortDesc
+
+      if (this.internalOptions.groupBy.length) {
+        sortBy = [...this.internalOptions.groupBy, ...sortBy]
+        sortDesc = [...this.internalOptions.groupDesc, ...sortDesc]
+      }
+
       return this.customSort(items, sortBy, sortDesc, this.locale)
     },
     groupItems (items: any[]) {

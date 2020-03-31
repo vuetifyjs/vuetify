@@ -1,1 +1,5 @@
-{}
+{
+  "props": {
+    "color": "Wendet eine bestimmte Farbe für die Steuerung an - es kann der Name der Materialfarbe sein (zum Beispiel `success` oder `purple`) oder css-Farben (`#033` oder `rgba(255, 0, 0, 0.5)`). Sie finden eine Liste der eingebauten Klassen auf der [Farbseite](/styles/colors#material-colors)."
+  }
+}

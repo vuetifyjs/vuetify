@@ -8,7 +8,7 @@
     }
   },
   "routerHeading": "## routerでの使用",
-  "routerText1": "**goTo** 関数は、個別にインポートして、どこでも呼び出すことができます。これは、[vue-router](https://router.vuejs.org/) にフックする場合に特に便利です。",
+  "routerText1": "**goTo** 関数は、個別にインポートして、どこでも呼び出すことができます。これは、[vue-router](https://router.vuejs.org/ja/) にフックする場合に特に便利です。",
   "functions": {
     "goTo": "指定されたオプションを使用して、ターゲットで指定された場所にスクロールします。"
   }
