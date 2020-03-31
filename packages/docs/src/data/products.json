@@ -61,6 +61,12 @@
     "src": "https://cdn.vuetifyjs.com/images/vuetify-ads/shopify.png",
     "url": "https://store.vuetifyjs.com/product/shopify-e-commerce-theme"
   },
+  "daedal-pro": {
+    "title": "Daedal Theme Pro",
+    "description": "Daedal — is a carefully crafted multi-purpose, responsive, and gorgeous theme that showcases a clean interface for a sharp user experience. Built with Vue CLI, it comes with all of the tools that you need to start developing your application right now.",
+    "src": "https://cdn.vuetifyjs.com/images/themes/daedal/daedal-hero.png",
+    "url": "https://daedal-pro.zeroskillz.now.sh"
+  },
   "material-kit": {
     "title": "Material Kit",
     "description": "A complete set of Material Inspired themes built with Vuetify on top of Vue CLI.",

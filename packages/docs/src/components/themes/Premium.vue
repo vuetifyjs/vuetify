@@ -19,7 +19,7 @@
         >
           <v-img
             :src="template.src"
-            height="350px"
+            height="250px"
           />
 
           <v-card-title class="align-center">
