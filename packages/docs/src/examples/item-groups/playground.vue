@@ -19,6 +19,7 @@
     </v-row>
 
     <v-item-group
+      v-model="selected"
       :mandatory="mandatory"
       :multiple="multiple"
     >
@@ -75,13 +76,21 @@
 <script>
   export default {
     data: () => ({
+      mandatory: false,
+      multiple: true,
+      selected: null,
       types: [
         'cards',
         'images',
       ],
       type: 'cards',
-      mandatory: false,
-      multiple: true,
     }),
+    watch: {
+      multiple (val) {
+        this.selected = (val)
+          ? this.selected >= 0 ? [this.selected] : []
+          : this.selected.pop()
+      },
+    },
   }
 </script>
