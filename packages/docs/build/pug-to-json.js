@@ -68,10 +68,13 @@ module.exports = function (content) {
         return false
 
       case 'Text':
-        pageSection.children.push({
-          type: 'text',
-          lang: node.val,
-        })
+        const lang = node.val.trim()
+        if (lang) {
+          pageSection.children.push({
+            type: 'text',
+            lang: node.val,
+          })
+        }
         break
 
       case 'Block':
