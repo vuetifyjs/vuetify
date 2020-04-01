@@ -17,7 +17,16 @@ const TableHeader = {
 }
 
 const DataTableEvents = [
-  { name: 'click:row', source: 'v-data-table', value: 'any, { select: (value: boolean) => void, isSelected: boolean, expand: (value: boolean) => void, isExpanded: boolean }' },
+  {
+    name: 'click:row',
+    source: 'v-data-table',
+    value: 'any, { expand: (value: boolean) => void, headers: TableHeader[], isExpanded: boolean, isMobile: boolean, isSelected: boolean, item: any, select: (value: boolean) => void }',
+  },
+  {
+    name: 'contextmenu:row',
+    source: 'v-data-table',
+    value: 'MouseEvent, { expand: (value: boolean) => void, headers: TableHeader[], isExpanded: boolean, isMobile: boolean, isSelected: boolean, item: any, select: (value: boolean) => void }',
+  },
 ].concat(DataIteratorEvents)
 
 const DataTableHeaderScopedProps = {
