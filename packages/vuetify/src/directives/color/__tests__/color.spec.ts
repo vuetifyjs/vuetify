@@ -18,7 +18,7 @@ interface BorderModifiers {
 }
 
 describe('color.ts', () => {
-  let mountFunction: () => Wrapper<Instance>
+  let mountFunction: () => Wrapper<Vue>
 
   beforeEach(() => {
     mountFunction = (directive = {}) => {

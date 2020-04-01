@@ -1,9 +1,14 @@
 // Utilities
-import { isCssColor, parseHex, HexToRGBA } from '../../util/colorUtils'
+import {
+  isCssColor,
+  classToHex,
+  parseGradient,
+} from '../../util/colorUtils'
 import colors from '../../util/colors'
 
 // Types
 import { VNode, VNodeDirective } from 'vue'
+import { VuetifyThemeVariant } from 'types/services/theme'
 
 interface BorderModifiers {
   top?: Boolean
@@ -12,51 +17,23 @@ interface BorderModifiers {
   left?: Boolean
 }
 
-function classToHex (
+function setTextColor (
+  el: HTMLElement,
   color: string,
-  colors: Record<string, Record<string, string>>,
-  node: VNode,
-): string {
-  const [colorName, colorModifier] = color
-    .toString().trim().replace('-', '').split(' ', 2) as (string | undefined)[]
-
-  const currentTheme = node.context!.$vuetify.theme.currentTheme
-
-  let hexColor = ''
-  if (colorName && colorName in colors) {
-    if (colorModifier && colorModifier in colors[colorName]) {
-      hexColor = colors[colorName][colorModifier]
-    } else if ('base' in colors[colorName]) {
-      hexColor = colors[colorName].base
-    }
-  } else if (colorName && colorName in currentTheme) {
-    hexColor = currentTheme[colorName] as string
-  }
-
-  return hexColor
-}
-
-function parseGradient (
-  gradient: string,
-  colors: Record<string, Record<string, string>>,
-  node: VNode,
+  currentTheme: Partial<VuetifyThemeVariant>,
 ) {
-  return gradient.replace(/([a-z]+(\s[a-z]+-[1-5])?)(?=$|,)/gi, x => {
-    return classToHex(x, colors, node) || x
-  }).replace(/(?<=rgba\()#(([0-9a-f]{3}){1,2})(?=,)/gi, x => {
-    return Object.values(HexToRGBA(parseHex(x))).slice(0, 3).join(',')
-  })
-}
-
-function setTextColor (el: HTMLElement, color: string, node: VNode) {
-  const cssColor = !isCssColor(color) ? classToHex(color, colors, node) : color
+  const cssColor = !isCssColor(color) ? classToHex(color, colors, currentTheme) : color
 
   el.style.color = cssColor
   el.style.caretColor = cssColor
 }
 
-function setBackgroundColor (el: HTMLElement, color: string, node: VNode) {
-  const cssColor = !isCssColor(color) ? classToHex(color, colors, node) : color
+function setBackgroundColor (
+  el: HTMLElement,
+  color: string,
+  currentTheme: Partial<VuetifyThemeVariant>,
+) {
+  const cssColor = !isCssColor(color) ? classToHex(color, colors, currentTheme) : color
 
   el.style.backgroundColor = cssColor
   el.style.borderColor = cssColor
@@ -65,10 +42,10 @@ function setBackgroundColor (el: HTMLElement, color: string, node: VNode) {
 function setBorderColor (
   el: HTMLElement,
   color: string,
-  node: VNode,
+  currentTheme: Partial<VuetifyThemeVariant>,
   modifiers?: BorderModifiers,
 ) {
-  const cssColor = !isCssColor(color) ? classToHex(color, colors, node) : color
+  const cssColor = !isCssColor(color) ? classToHex(color, colors, currentTheme) : color
 
   if (!modifiers || !Object.keys(modifiers).length) {
     el.style.borderColor = cssColor
@@ -81,9 +58,13 @@ function setBorderColor (
   if (modifiers.left) el.style.borderLeftColor = cssColor
 }
 
-function setGradientColor (el: HTMLElement, gradient: string, node: VNode) {
+function setGradientColor (
+  el: HTMLElement,
+  gradient: string,
+  currentTheme: Partial<VuetifyThemeVariant>,
+) {
   el.style.backgroundImage = `linear-gradient(${
-    parseGradient(gradient, colors, node)
+    parseGradient(gradient, colors, currentTheme)
   })`
 }
 
@@ -92,14 +73,16 @@ function updateColor (
   binding: VNodeDirective,
   node: VNode
 ) {
+  const currentTheme = node.context!.$vuetify.theme.currentTheme
+
   if (binding.arg === undefined) {
-    setBackgroundColor(el, binding.value, node)
+    setBackgroundColor(el, binding.value, currentTheme)
   } else if (binding.arg === 'text') {
-    setTextColor(el, binding.value, node)
+    setTextColor(el, binding.value, currentTheme)
   } else if (binding.arg === 'border') {
-    setBorderColor(el, binding.value, node, binding.modifiers)
+    setBorderColor(el, binding.value, currentTheme, binding.modifiers)
   } else if (binding.arg === 'gradient') {
-    setGradientColor(el, binding.value, node)
+    setGradientColor(el, binding.value, currentTheme)
   }
 }
 
