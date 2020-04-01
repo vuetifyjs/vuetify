@@ -162,9 +162,9 @@ describe('VTab.ts', () => {
           const getPrevTab = jest.fn()
           const tab = {
             $el: {
+              click: jest.fn(),
               focus: jest.fn(),
             },
-            click: jest.fn(),
           }
           getFirstTab.mockReturnValue(tab)
           getLastTab.mockReturnValue(tab)
@@ -216,9 +216,9 @@ describe('VTab.ts', () => {
 
           expect(tab.$el.focus).toHaveBeenCalled()
           if (activationMode === 'automatic') {
-            expect(tab.click).toHaveBeenCalled()
+            expect(tab.$el.click).toHaveBeenCalled()
           } else {
-            expect(tab.click).not.toHaveBeenCalled()
+            expect(tab.$el.click).not.toHaveBeenCalled()
           }
         }
       }

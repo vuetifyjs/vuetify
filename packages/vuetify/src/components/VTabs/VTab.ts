@@ -63,6 +63,9 @@ export default baseMixins.extend<options>().extend(
         ...this.groupClasses,
       }
     },
+    hasRealLink (): boolean {
+      return this.href && !this.href.startsWith('#')
+    },
     value (): any {
       let to = this.to || this.href || ''
 
@@ -87,8 +90,11 @@ export default baseMixins.extend<options>().extend(
   },
 
   methods: {
-    click (e: KeyboardEvent | MouseEvent): void {
-      e.preventDefault()
+    click (e: MouseEvent): void {
+      // If user provides an
+      // actual link, do not
+      // prevent default
+      if (!this.hasRealLink) e.preventDefault()
 
       if (this.disabled) return
 
@@ -96,17 +102,7 @@ export default baseMixins.extend<options>().extend(
 
       this.$emit('click', e)
 
-      if (this.to) {
-        this.$router.push(this.to)
-      } else if (this.href && !this.href.startsWith('#')) {
-        if (this.href.startsWith('#') || this.href.startsWith('/')) {
-          this.$router.push(this.href)
-        } else {
-          window.location = this.href
-        }
-      } else {
-        this.toggle()
-      }
+      this.to || this.toggle()
     },
     getFirstTab () {
       return this.items[0]
@@ -140,7 +136,8 @@ export default baseMixins.extend<options>().extend(
       switch (e.keyCode) {
         case enter:
         case space:
-          this.click(e)
+          e.preventDefault()
+          this.$el.click()
           break
         case home:
           targetTab = this.getFirstTab()
@@ -164,8 +161,9 @@ export default baseMixins.extend<options>().extend(
       if (targetTab) {
         e.preventDefault()
         targetTab.$el.focus()
-        const isLink = targetTab.to || (targetTab.href && !targetTab.href.startsWith('#'))
-        if (this.activationMode === 'automatic' && !isLink) targetTab.click(e)
+        // Do not automatically click tab if it has a real link
+        console.log(targetTab.hasRealLink)
+        if (this.activationMode === 'automatic' && !targetTab.hasRealLink) targetTab.$el.click()
       }
     },
   },
