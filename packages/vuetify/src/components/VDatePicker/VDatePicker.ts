@@ -65,12 +65,12 @@ export default mixins(
       type: [String, Number],
       default: 0,
     },
+    // Function formatting the tableDate in the day/month table header
+    headerDateFormat: Function as PropType<DatePickerFormatter | undefined>,
     localeFirstDayOfYear: {
       type: [String, Number],
       default: 0,
     },
-    // Function formatting the tableDate in the day/month table header
-    headerDateFormat: Function as PropType<DatePickerFormatter | undefined>,
     max: String,
     min: String,
     // Function formatting month in the months table
@@ -388,10 +388,10 @@ export default mixins(
           events: this.events,
           eventColor: this.eventColor,
           firstDayOfWeek: this.firstDayOfWeek,
-          localeFirstDayOfYear: this.localeFirstDayOfYear,
           format: this.dayFormat,
           light: this.light,
           locale: this.locale,
+          localeFirstDayOfYear: this.localeFirstDayOfYear,
           min: this.min,
           max: this.max,
           range: this.range,

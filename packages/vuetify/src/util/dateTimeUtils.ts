@@ -1,5 +1,3 @@
-const DAY_OF_YEAR_PER_FIRST_OF_MONTH = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334]
-
 function createUTCDate (year: number, month = 0, day = 1) {
   var date
   if (year < 100 && year >= 0) {
@@ -22,7 +20,7 @@ function firstWeekOffset (year: number, firstDayOfWeek: number, firstDayOfYear: 
 }
 
 function dayOfYear (year: number, month: number, day: number, firstDayOfWeek: number) {
-  let dayOfYear = DAY_OF_YEAR_PER_FIRST_OF_MONTH[month]
+  let dayOfYear = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334][month]
   if (month > 1 && isLeapYear(year)) {
     dayOfYear++
   }
