@@ -30,19 +30,6 @@ function dayOfYear (year: number, month: number, day: number, firstDayOfWeek: nu
   return dayOfYear + day
 }
 
-function weekOfYear (year: number, month: number, day: number, firstDayOfWeek: number, firstDayOfYear: number) {
-  const weekOffset = firstWeekOffset(year, firstDayOfWeek, firstDayOfYear)
-  const week = Math.ceil((dayOfYear(year, month, day, firstDayOfWeek) - weekOffset) / 7)
-
-  if (week < 1) {
-    return week + weeksInYear(year - 1, firstDayOfWeek, firstDayOfYear)
-  } else if (week > weeksInYear(year, firstDayOfWeek, firstDayOfYear)) {
-    return week - weeksInYear(year, firstDayOfWeek, firstDayOfYear)
-  } else {
-    return week
-  }
-}
-
 function weeksInYear (year: number, firstDayOfWeek: number, firstDayOfYear: number) {
   const weekOffset = firstWeekOffset(year, firstDayOfWeek, firstDayOfYear)
   const weekOffsetNext = firstWeekOffset(year + 1, firstDayOfWeek, firstDayOfYear)
@@ -51,8 +38,17 @@ function weeksInYear (year: number, firstDayOfWeek: number, firstDayOfYear: numb
   return (daysInYear - weekOffset + weekOffsetNext) / 7
 }
 
-export function weekNumber (year: number, month: number, day: number, firstDayOfWeek: number, firstDayOfYear: number): number {
-  return weekOfYear(year, month, day, firstDayOfWeek, firstDayOfYear)
+export function weekNumber (year: number, month: number, day: number, firstDayOfWeek: number, localeFirstDayOfYear: number): number {
+  const weekOffset = firstWeekOffset(year, firstDayOfWeek, localeFirstDayOfYear)
+  const week = Math.ceil((dayOfYear(year, month, day, firstDayOfWeek) - weekOffset) / 7)
+
+  if (week < 1) {
+    return week + weeksInYear(year - 1, firstDayOfWeek, localeFirstDayOfYear)
+  } else if (week > weeksInYear(year, firstDayOfWeek, localeFirstDayOfYear)) {
+    return week - weeksInYear(year, firstDayOfWeek, localeFirstDayOfYear)
+  } else {
+    return week
+  }
 }
 
 export function isLeapYear (year: number): boolean {
