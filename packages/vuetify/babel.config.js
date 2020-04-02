@@ -53,5 +53,13 @@ if (['lib', 'es5'].includes(env)) {
 }
 
 if (env !== 'lib') {
+  module.exports.plugins.push([
+    '@babel/plugin-proposal-nullish-coalescing-operator',
+    { loose: true },
+  ])
+  module.exports.plugins.push([
+    '@babel/plugin-proposal-optional-chaining',
+    { loose: true },
+  ])
   module.exports.plugins.push('@babel/plugin-proposal-object-rest-spread')
 }
