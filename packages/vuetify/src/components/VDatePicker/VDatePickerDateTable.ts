@@ -2,9 +2,10 @@
 import DatePickerTable from './mixins/date-picker-table'
 
 // Utils
-import { pad, createNativeLocaleFormatter, monthChange, determineWeeknumber } from './util'
+import { pad, createNativeLocaleFormatter, monthChange } from './util'
 import { createRange } from '../../util/helpers'
 import mixins from '../../util/mixins'
+import { weekNumber } from '../../util/dateTimeUtils'
 
 // Types
 import { VNode, VNodeChildren, PropType } from 'vue'
@@ -21,9 +22,9 @@ export default mixins(
       type: [String, Number],
       default: 0,
     },
-    firstDayOfYear: {
+    localeFirstDayOfYear: {
       type: [String, Number],
-      default: 4,
+      default: 0,
     },
     showWeek: Boolean,
     weekdayFormat: Function as PropType<DatePickerFormatter | undefined>,
@@ -65,8 +66,11 @@ export default mixins(
       return (weekDay - parseInt(this.firstDayOfWeek) + 7) % 7
     },
     getWeekNumber (dayInMonth: number) {
-      return determineWeeknumber(this.displayedYear, this.displayedMonth, dayInMonth,
-        parseInt(this.firstDayOfWeek), parseInt(this.firstDayOfYear))
+      return weekNumber(this.displayedYear,
+        this.displayedMonth,
+        dayInMonth,
+        parseInt(this.firstDayOfWeek),
+        parseInt(this.localeFirstDayOfYear))
     },
     genWeekNumber (weekNumber: number) {
       return this.$createElement('td', [
