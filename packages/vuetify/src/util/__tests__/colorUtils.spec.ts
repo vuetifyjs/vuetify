@@ -1,8 +1,8 @@
 import {
-  isCssColor,
-  colorToInt,
   classToHex,
+  colorToInt,
   intToHex,
+  isCssColor,
   parseGradient,
 } from '../colorUtils'
 import * as transformSRGB from '../color/transformSRGB'

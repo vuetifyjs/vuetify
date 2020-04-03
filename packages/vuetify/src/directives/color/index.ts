@@ -1,14 +1,14 @@
 // Utilities
 import {
-  isCssColor,
   classToHex,
+  isCssColor,
   parseGradient,
 } from '../../util/colorUtils'
 import colors from '../../util/colors'
 
 // Types
-import { VNode, VNodeDirective } from 'vue'
 import { VuetifyThemeVariant } from 'types/services/theme'
+import { VNode, VNodeDirective } from 'vue'
 
 interface BorderModifiers {
   top?: Boolean
