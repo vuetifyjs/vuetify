@@ -1,6 +1,6 @@
 <template>
   <section>
-    <base-heading>{{ computedHeading }}</base-heading>
+    <base-heading id="api">{{ computedHeading }}</base-heading>
 
     <base-markdown>Generic.Pages.apiText</base-markdown>
 

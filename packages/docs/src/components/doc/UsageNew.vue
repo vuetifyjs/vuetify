@@ -1,6 +1,6 @@
 <template>
   <section>
-    <base-heading>Generic.Pages.usage</base-heading>
+    <base-heading id="usage">Generic.Pages.usage</base-heading>
 
     <doc-text>{{ `${namespace}.${page}.usageText` }}</doc-text>
 
