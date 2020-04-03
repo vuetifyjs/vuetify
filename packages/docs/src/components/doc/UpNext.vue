@@ -1,5 +1,5 @@
 <template>
-  <section id="up-next">
+  <div>
     <base-heading id="up-next">Generic.Pages.upNext</base-heading>
 
     <base-markdown>Generic.Pages.upNextText</base-markdown>
@@ -28,7 +28,7 @@
         </v-card>
       </v-col>
     </v-row>
-  </section>
+  </div>
 </template>
 
 <script>

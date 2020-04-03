@@ -46,5 +46,11 @@
     "title": "Vuetify Twitter",
     "src": "https://cdn.vuetifyjs.com/images/vuetify-ads/twitter.png",
     "url": "https://twitter.com/vuetifyjs"
+  },
+  "newsletter": {
+    "description": "See the latest and greatest Vuetify guides, upcoming releases, community projects and more!",
+    "title": "Vuetify Newsletter",
+    "src": "https://cdn.vuetifyjs.com/images/logos/v.png",
+    "url": "https://www.getrevue.co/profile/vuetify/add_subscriber"
   }
 }
