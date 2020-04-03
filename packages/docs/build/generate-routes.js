@@ -7,13 +7,13 @@ const { kebabCase } = require('lodash')
 
 const resolve = file => path.resolve(__dirname, file)
 
-const DATA_PATH_JSON_FILES = resolve('../src/data/pages/**/*.json')
+const DATA_PATH_PUG_FILES = resolve('../src/data/pages/**/*.pug')
 const languages = require('../src/data/i18n/languages.json')
   .map(lang => lang.alternate || lang.locale)
   .filter(lang => lang !== 'eo-UY')
 
 function genDocumentation () {
-  const files = glob.sync(DATA_PATH_JSON_FILES)
+  const files = glob.sync(DATA_PATH_PUG_FILES)
   const paths = ['/']
 
   for (const file of files) {
@@ -21,7 +21,7 @@ function genDocumentation () {
       .split('/pages/')
       .pop()
       .split('/')
-      .map(i => kebabCase(i.replace(/json/, '')).toLowerCase())
+      .map(i => kebabCase(i.replace(/pug/, '')).toLowerCase())
       .join('/')
 
     paths.push(`/${route}`)

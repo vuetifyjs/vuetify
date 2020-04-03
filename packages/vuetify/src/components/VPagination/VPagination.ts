@@ -6,15 +6,22 @@ import VIcon from '../VIcon'
 import Resize from '../../directives/resize'
 
 // Mixins
-import mixins from '../../util/mixins'
 import Colorable from '../../mixins/colorable'
+import Intersectable from '../../mixins/intersectable'
 import Themeable from '../../mixins/themeable'
+
+// Utilities
+import mixins from '../../util/mixins'
 
 // Types
 import { VNode, CreateElement } from 'vue'
 
 /* @vue/component */
-export default mixins(Colorable, Themeable).extend({
+export default mixins(
+  Colorable,
+  Intersectable({ onVisible: ['init'] }),
+  Themeable
+).extend({
   name: 'v-pagination',
 
   directives: { Resize },
