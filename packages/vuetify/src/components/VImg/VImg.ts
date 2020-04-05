@@ -11,7 +11,11 @@ import { PropValidator } from 'vue/types/options'
 // Components
 import VResponsive from '../VResponsive'
 
+// Mixins
+import Themeable from '../../mixins/themeable'
+
 // Utils
+import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
 
 // not intended for public use, this is passed in by vuetify-loader
@@ -25,7 +29,10 @@ export interface srcObject {
 const hasIntersect = typeof window !== 'undefined' && 'IntersectionObserver' in window
 
 /* @vue/component */
-export default VResponsive.extend({
+export default mixins(
+  VResponsive,
+  Themeable,
+).extend({
   name: 'v-img',
 
   directives: { intersect },
@@ -262,6 +269,8 @@ export default VResponsive.extend({
         },
       }]
     }
+
+    node.data!.class = this.themeClasses
 
     node.data!.attrs = {
       role: this.alt ? 'img' : undefined,
