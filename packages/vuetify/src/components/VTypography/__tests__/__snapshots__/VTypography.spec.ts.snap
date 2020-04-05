@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VTypography.ts should apply correct classes 1`] = `
+<div class="headline text-sm-display-1 text-md-display-2 text-lg-display-3 text-xl-display-4">
+</div>
+`;
