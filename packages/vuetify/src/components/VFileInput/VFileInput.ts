@@ -36,6 +36,7 @@ export default VTextField.extend({
       type: String,
       default: '$vuetify.fileInput.counter',
     },
+    hideInput: Boolean,
     placeholder: String,
     prependIcon: {
       type: String,
@@ -179,6 +180,20 @@ export default VTextField.extend({
           },
         },
       }, [text]))
+    },
+    genControl () {
+      if (this.hideInput) {
+        return this.$createElement('div', {
+          staticClass: 'v-input__control',
+          style: {
+            display: 'none',
+          },
+        }, [
+          this.genInputSlot(),
+        ])
+      }
+
+      return VTextField.options.methods.genControl.call(this)
     },
     genInput () {
       const input = VTextField.options.methods.genInput.call(this)
