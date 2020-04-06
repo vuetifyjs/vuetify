@@ -1,5 +1,6 @@
 <template>
   <v-system-bar
+    v-if="!hasClosedBanner"
     id="core-system-bar"
     app
     color="#1B2E83"
@@ -20,7 +21,7 @@
         style="color: inherit;"
       >
         <v-img
-        class="mx-3"
+          class="mx-3"
           contain
 
           src="https://cdn.vuetifyjs.com/images/vuetify-ads/vue-school-2.png"
