@@ -206,7 +206,7 @@ export function parseHex (hex: string): Hex {
 
   hex = hex.replace(/([^0-9a-f])/gi, 'F')
 
-  if (hex.length === 3) {
+  if (hex.length === 3 || hex.length === 4) {
     hex = hex.split('').map(x => x + x).join('')
   }
 
