@@ -348,6 +348,24 @@ describe('VDataTable.ts', () => {
     expect(fn).toHaveBeenCalled()
   })
 
+  it('should emit event when double-clicking on internally created row', async () => {
+    const fn = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+      },
+      listeners: {
+        'dblclick:row': fn,
+      },
+    })
+
+    wrapper.find('tbody tr').trigger('dblclick')
+    await wrapper.vm.$nextTick()
+
+    expect(fn).toHaveBeenCalled()
+  })
+
   // https://github.com/vuetifyjs/vuetify/issues/8254
   it('should pass kebab-case footer props correctly', () => {
     const wrapper = mountFunction({
