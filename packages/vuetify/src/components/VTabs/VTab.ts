@@ -133,6 +133,7 @@ export default baseMixins.extend<options>().extend(
       const { down, end, enter, home, left, right, space, up } = keyCodes
       const isVertical = this.vertical
       let targetTab
+
       switch (e.keyCode) {
         case enter:
         case space:
@@ -158,11 +159,11 @@ export default baseMixins.extend<options>().extend(
           if (isVertical) targetTab = this.getNextTab()
           break
       }
+
       if (targetTab) {
         e.preventDefault()
         targetTab.$el.focus()
         // Do not automatically click tab if it has a real link
-        console.log(targetTab.hasRealLink)
         if (this.activationMode === 'automatic' && !targetTab.hasRealLink) targetTab.$el.click()
       }
     },

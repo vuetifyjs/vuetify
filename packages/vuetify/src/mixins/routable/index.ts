@@ -136,7 +136,7 @@ export default Vue.extend({
 
       return { tag, data }
     },
-    keydown (e: KeyboardEvent): void {
+    keydown (e: KeyboardEvent) {
       this.$emit('keydown', e)
     },
     onRouteChange () {
