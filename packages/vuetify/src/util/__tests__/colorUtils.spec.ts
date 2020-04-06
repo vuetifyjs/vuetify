@@ -126,6 +126,9 @@ describe('parseGradient', () => {
     expect(
       parseGradient('to top, #fff, primary', colors, currentTheme)
     ).toBe('to top, #fff, #1976d2')
+    expect(
+      parseGradient('to top, var(--foo), rgba(#0000, .6)', colors, currentTheme)
+    ).toBe('to top, var(--foo), rgba(0,0,0, .6)')
   })
 })
 

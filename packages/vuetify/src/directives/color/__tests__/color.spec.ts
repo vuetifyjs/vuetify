@@ -10,13 +10,6 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-interface BorderModifiers {
-  top?: Boolean
-  right?: Boolean
-  bottom?: Boolean
-  left?: Boolean
-}
-
 describe('color.ts', () => {
   let mountFunction: () => Wrapper<Vue>
 
