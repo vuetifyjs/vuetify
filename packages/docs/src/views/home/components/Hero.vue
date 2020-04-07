@@ -4,7 +4,11 @@
     :class="$vuetify.theme.dark && 'theme--dark'"
     class="white--text py-4 py-md-12"
   >
-    <v-responsive min-height="30vh">
+    <v-responsive
+      :max-width="1280 + 24"
+      class="mx-auto pa-6"
+      min-height="30vh"
+    >
       <v-container class="pa-0">
         <v-row align="center">
           <v-col
@@ -25,9 +29,9 @@
 
               <base-btn
                 :block="$vuetify.breakpoint.smAndDown"
+                :to="`/${$route.params.lang}/introduction/why-vuetify/`"
                 class="primary--text my-6"
                 color="white"
-                to="introduction/why-vuetify"
                 x-large
               >
                 <v-icon

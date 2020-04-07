@@ -144,10 +144,12 @@ export default mixins(
         staticClass: 'v-chip__close',
         props: {
           right: true,
+          size: 18,
         },
         on: {
           click: (e: Event) => {
             e.stopPropagation()
+            e.preventDefault()
 
             this.$emit('click:close')
             this.$emit('update:active', false)

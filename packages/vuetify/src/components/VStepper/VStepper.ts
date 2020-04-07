@@ -44,12 +44,18 @@ export default baseMixins.extend({
   },
 
   data () {
-    return {
+    const data: Dictionary<any> = {
       isBooted: false,
       steps: [] as VStepperStepInstance[],
       content: [] as VStepperContentInstance[],
       isReverse: false,
     }
+
+    data.internalLazyValue = this.value != null
+      ? this.value
+      : (data[0] || {}).step || 1
+
+    return data
   },
 
   computed: {
@@ -82,7 +88,6 @@ export default baseMixins.extend({
   },
 
   mounted () {
-    this.internalLazyValue = this.value || (this.steps[0] || {}).step || 1
     this.updateView()
   },
 

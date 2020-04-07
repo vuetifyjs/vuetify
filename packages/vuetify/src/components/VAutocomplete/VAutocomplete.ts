@@ -6,7 +6,8 @@ import VSelect, { defaultMenuProps as VSelectMenuProps } from '../VSelect/VSelec
 import VTextField from '../VTextField/VTextField'
 
 // Utilities
-import { keyCodes } from '../../util/helpers'
+import mergeData from '../../util/mergeData'
+import { keyCodes, getObjectValueByPath } from '../../util/helpers'
 
 // Types
 import { PropType } from 'vue'
@@ -276,12 +277,13 @@ export default VSelect.extend({
     genInput () {
       const input = VTextField.options.methods.genInput.call(this)
 
-      input.data = input.data || {}
-      input.data.attrs = input.data.attrs || {}
-      input.data.attrs.autocomplete = input.data.attrs.autocomplete || 'off'
-
-      input.data.domProps = input.data.domProps || {}
-      input.data.domProps.value = this.internalSearch
+      input.data = mergeData(input.data!, {
+        attrs: {
+          'aria-activedescendant': getObjectValueByPath(this.$refs.menu, 'activeTile.id'),
+          autocomplete: getObjectValueByPath(input.data!, 'attrs.autocomplete', 'off'),
+        },
+        domProps: { value: this.internalSearch },
+      })
 
       return input
     },
@@ -297,14 +299,14 @@ export default VSelect.extend({
         ? VSelect.options.methods.genSelections.call(this)
         : []
     },
-    onClick () {
+    onClick (e: MouseEvent) {
       if (this.isDisabled) return
 
       this.selectedIndex > -1
         ? (this.selectedIndex = -1)
         : this.onFocus()
 
-      this.activateMenu()
+      if (!this.isAppendInner(e.target)) this.activateMenu()
     },
     onInput (e: Event) {
       if (
@@ -337,7 +339,10 @@ export default VSelect.extend({
       VSelect.options.methods.onTabDown.call(this, e)
       this.updateSelf()
     },
-    onUpDown () {
+    onUpDown (e: Event) {
+      // Prevent screen from scrolling
+      e.preventDefault()
+
       // For autocomplete / combobox, cycling
       // interfers with native up/down behavior
       // instead activate the menu

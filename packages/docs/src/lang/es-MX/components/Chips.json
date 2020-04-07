@@ -9,6 +9,7 @@
       "desc": "Los chips pueden usar texto o cualquier ícono disponible en la librería de Material Icons.."
     },
     "outlined": {
+      "heading": "### Contorno",
       "desc": "El color de contorno de los chips se hereda del color de texto actual."
     },
     "label": {

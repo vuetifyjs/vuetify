@@ -12,6 +12,6 @@
   "transformText2": "使用 `text-transform` 来达到文本的破坏和移除的效果也是有可能的。在第一个例子中，`text-transform: uppercase` 这个自定义类被覆盖，允许保留文本框。在第二个例子中，我们将一个较长的单词分离以适应可用的空间。",
   "weightsHeader": "## 字体宽度和斜体",
   "weightsText1": "Material design 默认支持 **100, 300, 400, 500, 700, 900** 字体宽度和斜体文本。",
-  "rtlHeader": "## RTL agnostic alignment",
-  "rtlText1": "当使用 [RTL](/customization/rtl) 时，无论使用的 **rtl** 名称如何，你都希望保持对其。"
+  "rtlHeader": "## RTL 对齐",
+  "rtlText1": "使用 [RTL](/customization/rtl) 时，无论使用 **rtl** 的指定如何，都可能希望保持对齐。 可以使用以下格式的文本对齐帮助程序类来实现此目的：`text-<breakpoint>-<direction>`，其中断点可以是 `sm`, `md`, `lg`, 或 `xl` ，而方向可以是 `left` 或 `right`。 您可能还希望对齐以创建响应式 rtl，这可以使用方向 `start` 和 `end` 来完成。"
 }

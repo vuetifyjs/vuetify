@@ -1,1 +1,40 @@
-{}
+{
+  "heading": "# プログレスバー",
+  "headingText": "`v-progress-linear`コンポーネントは、ユーザーに視覚的にデータを伝えるために使用されます。また、ロードや処理など、不定の量を表すこともあります。",
+  "examples": {
+    "usage": {
+      "desc": "最も単純な形式では、 `v-progress-linear`は水平のプログレスバー（進捗状況）を表示します。進捗を制御するには、 `value`プロパティを使用します。"
+    },
+    "file-loader": {
+      "heading": "### ファイルローダ",
+      "desc": "`v-progress-linear`コンポーネントは、応答を待っていることをユーザーに伝えるのに適しています。"
+    },
+    "linear-buffer": {
+      "heading": "### バッファ",
+      "desc": "バッファ状態は、2つの値を同時に表します。プライマリ値は`v-model`によって制御されますが、バッファは`buffer-value` propによって制御されます。"
+    },
+    "linear-custom-colors": {
+      "heading": "### 色の変更",
+      "desc": "`color`と`background-color`propを使用して、色と背景色を設定することもできます。"
+    },
+    "striped": {
+      "heading": "### ストライプ模様の指定",
+      "desc": "`v-progress-linear`の値部分をストライプ模様の縞々背景にします。"
+    },
+    "slot": {
+      "heading": "### スロット"
+    }
+  },
+  "props": {
+    "active": "Components.ProgressCircular.props.active",
+    "backgroundColor": "Components.ProgressCircular.props.backgroundColor",
+    "backgroundOpacity": "Components.ProgressCircular.props.backgroundOpacity",
+    "bufferValue": "Components.ProgressCircular.props.bufferValue",
+    "fill": "Components.ProgressCircular.props.fill",
+    "height": "Mixins.Measurable.props.height",
+    "indeterminate": "Components.ProgressCircular.props.indeterminate",
+    "size": "Components.ProgressCircular.props.size",
+    "stream": "**buffer-value** と連携して動作するローディングを描写するための代替スタイル",
+    "value": "Components.ProgressCircular.props.value"
+  }
+}

@@ -33,6 +33,7 @@ describe('VMenu.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         value: false,
+        eager: true,
       },
       scopedSlots: {
         activator: '<button v-on="props.on"></button>',
@@ -54,10 +55,28 @@ describe('VMenu.ts', () => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
+  it('should render multiple content nodes', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        eager: true,
+      },
+      scopedSlots: {
+        activator: '<button v-on="props.on"></button>',
+      },
+      slots: {
+        default: '<span>foo</span><span>bar</span>',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
   it('should round dimensions', async () => {
     const wrapper = mountFunction({
       propsData: {
         value: false,
+        eager: true,
       },
       scopedSlots: {
         activator: '<button v-on="props.on"></button>',
@@ -193,15 +212,21 @@ describe('VMenu.ts', () => {
   })
 
   it('should accept a custom role or use default', () => {
-    expect(mountFunction().vm.$refs.content.getAttribute('role')).toBe('menu')
     expect(mountFunction({
+      propsData: { eager: true },
+    }).vm.$refs.content.getAttribute('role')).toBe('menu')
+    expect(mountFunction({
+      propsData: { eager: true },
       attrs: { role: 'listbox' },
     }).vm.$refs.content.getAttribute('role')).toBe('listbox')
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should select first or last item when opening menu with up or down key', async () => {
     const event = (keyCode: number) => new KeyboardEvent('keydown', { keyCode })
     const wrapper = mountFunction({
+      propsData: { eager: true },
       scopedSlots: {
         default () {
           return this.$createElement('div', [

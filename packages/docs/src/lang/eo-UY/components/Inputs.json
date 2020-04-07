@@ -1,6 +1,7 @@
 {
   "heading": "crwdns45758:0crwdne45758:0",
   "headingText": "crwdns45760:0crwdne45760:0",
+  "attributesAlert": "crwdns56257:0crwdne56257:0",
   "examples": {
     "usage": {
       "desc": "crwdns33552:0crwdne33552:0"
@@ -25,6 +26,10 @@
       "heading": "crwdns45770:0crwdne45770:0",
       "desc": "crwdns40006:0crwdne40006:0"
     },
+    "hide-details": {
+      "header": "crwdns56259:0crwdne56259:0",
+      "desc": "crwdns56261:0crwdne56261:0"
+    },
     "slot-events": {
       "heading": "crwdns45772:0crwdne45772:0",
       "desc": "crwdns40010:0crwdne40010:0"
@@ -42,7 +47,7 @@
     "appendIcon": "crwdns33554:0crwdne33554:0",
     "backgroundColor": "crwdns33556:0crwdne33556:0",
     "dark": "crwdns40020:0crwdne40020:0",
-    "hideDetails": "crwdns33558:0crwdne33558:0",
+    "hideDetails": "crwdns56263:0crwdne56263:0",
     "dense": "crwdns43108:0crwdne43108:0",
     "height": "crwdns40022:0crwdne40022:0",
     "hint": "crwdns33560:0crwdne33560:0",
@@ -54,16 +59,15 @@
     "required": "crwdns40024:0crwdne40024:0",
     "tabindex": "crwdns40026:0crwdne40026:0",
     "toggleKeys": "crwdns33576:0crwdne33576:0",
-    "value": "crwdns33578:0crwdne33578:0"
+    "value": "crwdns56265:0crwdne56265:0"
   },
   "slots": {
     "append": "crwdns33580:0crwdne33580:0",
     "label": "crwdns40028:0crwdne40028:0",
+    "message": "crwdns56267:0crwdne56267:0",
     "prepend": "crwdns33582:0crwdne33582:0"
   },
   "events": {
-    "blur": "crwdns33584:0crwdne33584:0",
-    "change": "crwdns33586:0crwdne33586:0",
     "click": "crwdns40030:0crwdne40030:0",
     "click:append": "crwdns33588:0crwdne33588:0",
     "click:prepend": "crwdns33590:0crwdne33590:0",

@@ -181,6 +181,7 @@ describe('VRating.ts', () => {
 
   it('should check for half event in rtl', () => {
     const wrapper = mountFunction({
+      propsData: { halfIncrements: true },
       mocks: {
         $vuetify: {
           rtl: true,

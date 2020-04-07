@@ -21,6 +21,7 @@
             v-if="item.visible"
             :key="i"
             :class="{
+              'documentation-toc__link--subheader': item.subheader,
               'mb-2': i + 1 !== internalToc.length,
               'primary--text': activeIndex === i,
               'text--disabled': activeIndex !== i
@@ -40,11 +41,11 @@
         </template>
       </ul>
 
-      <div class="pl-5">
+      <div class="pl-6">
         <v-fade-transition appear>
           <supporters-supporter-group
             :group="supporters['Diamond']"
-            compact
+            small
             justify="start"
             title="Diamond Sponsors"
           />
@@ -94,10 +95,15 @@
             text.shift()
             text = text.join(' ')
 
+            const isSubheading = translation.substring(0, 3) === '###'
+            const isHeading = !isSubheading && translation.substring(0, 2) === '##'
+            const isIntroduction = !isHeading && translation.charAt(0) === '#'
+
             return {
               id: kebabCase(text),
+              subheader: isSubheading,
               text,
-              visible: translation.indexOf('###') === -1,
+              visible: isSubheading || isHeading || isIntroduction,
             }
           })
           .filter(h => h.visible)
@@ -157,7 +163,7 @@
 <style lang="sass">
   #documentation-toc
     .supporter-group__title
-      padding-left: 14px
+      padding-left: 8px
 
   .documentation-toc
     list-style-type: none !important
@@ -178,6 +184,8 @@
       transition: color .1s ease-in
 
     .supporter-group
-        justify-content: flex-start !important
-        margin-left: 20px !important
+      justify-content: flex-start !important
+
+    .documentation-toc__link--subheader
+      margin-left: 8px
 </style>

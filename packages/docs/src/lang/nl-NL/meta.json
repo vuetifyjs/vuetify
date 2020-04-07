@@ -19,7 +19,6 @@
   },
   "getting-started/quick-start": {
     "title": "Snel aan de slag",
-    "description": "Aan de slag met Vue en Vuetify in een handomdraai. Ondersteuning voor Vue-CLI 3, Webpack, Nuxt en meer.",
     "keywords": "snelle start, vuetify templates, installatie vuetify, installeer vuetify"
   },
   "getting-started/pre-made-layouts": {

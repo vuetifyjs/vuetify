@@ -1,12 +1,46 @@
 {
   "heading": "# File inputs",
   "headingText": "`v-file-input`コンポーネントは、ファイルを選択するためのクリーンなインターフェースを提供する特殊な入力であり、詳細な選択情報とアップロードの進行状況を表示します。これは、標準のファイル入力を直接置き換えるものです。",
+  "usageText": "`v-file-input`コンポーネントは[v-text-field](/components/text-fields) を拡張するコンテナです。",
   "examples": {
-    "usage": {
-      "desc": "`v-file-input`コンポーネントは[v-text-field](/components/text-fields) を拡張するコンテナです。"
+    "multiple": {
+      "heading": "### Multiple",
+      "desc": "**multiple** propを使用すると、`v-file-input` で一度に複数ファイルを指定できます。"
+    },
+    "accept": {
+      "heading": "### 許容するファイル形式",
+      "desc": "`v-file-input`コンポーネントは、必要に応じて特定のメディア形式/ファイルタイプのみを受け入れることができます。詳細については、[accept属性](https://developer.mozilla.org/ja/docs/Web/HTML/Element/Input/file#accept) のドキュメントをご覧ください。"
+    },
+    "chips": {
+      "heading": "### チップ付きでの利用",
+      "desc": "選択したファイルは [チップ](/components/chips) として表示できます。 **chips** と **multiple** propを使用する場合、(ファイル数表示と異なり) それぞれのチップで表示されます。"
+    },
+    "size": {
+      "heading": "### サイズ表示",
+      "desc": "選択したファイルのサイズ表示は、**show-size** プロパティで設定できます。サイズは _1024_ (**true** を指定する場合にデフォルト) または _1000_ のいずれかです。"
+    },
+    "counter": {
+      "heading": "### カウンタ",
+      "desc": "**show-size**プロパティを**counter**と一緒に使用すると、ファイル総数と合計サイズが入力部の下に表示されます。"
     },
     "custom-icon": {
       "heading": "### カスタムアイコン"
+    },
+    "validation": {
+      "heading": "### バリデーション",
+      "desc": "他の入力と同様に、**rules** propを使用して独自のカスタムバリデーションパラメータを作成できます。"
+    },
+    "dense": {
+      "heading": "### Dense （高さが詰まったスタイル）"
     }
+  },
+  "props": {
+    "accept": "許可するファイルの種類を記述する 1 つ以上の [固有ファイル型指定子](https://developer.mozilla.org/ja/docs/Web/HTML/Element/input/file#Unique_file_type_specifiers) を説明します。",
+    "chips": "Components.Selects.props.chips",
+    "smallChips": "Components.Selects.props.smallChips",
+    "value": "[File objects](https://developer.mozilla.org/ja/docs/Web/API/File)単体あるいは配列"
+  },
+  "slots": {
+    "selection": "選択したアイテムのカスタム外観を定義するスロット。現在の **index**, **text** (truncated) および [file](https://developer.mozilla.org/ja/docs/Web/API/File) を提供します。"
   }
 }

@@ -1,15 +1,57 @@
 {
+  "heading": "# タブ",
+  "headingText": "'v-tabs' コンポーネントは、選択可能な項目の背後にあるコンテンツを非表示にするために使用されます。これは、タブがリンクであり、タブ項目がコンテンツであるページの擬似ナビゲーションとしても使用できます。",
+  "alert": "**dark** propと **NOT** を使用してカスタム **color** を提供する場合、`v-tabs` コンポーネントはデフォルトで色を _white_ に設定します。",
   "examples": {
+    "usage": {
+      "desc": "'v-tabs' コンポーネントは、[v-item-group](/components/item-groups) のスタイル付き拡張です。これは、コンテンツのグループを整理するための使いやすいインターフェイスを提供します。"
+    },
+    "icons-and-text": {
+      "heading": "### アイコンとテキスト",
+      "desc": "`v-tab`はテキストだけでなく、アイコンを含めることができます。これにより `v-tabs`の高さが 72px に増加します。"
+    },
+    "grow": {
+      "heading": "### Grow"
+    },
     "overflow-to-menu": {
       "heading": "### メニュー付き"
     },
+    "pagination": {
+      "heading": "### ページネーション",
+      "desc": "タブ項目がコンテナをオーバーフローすると、ページネーションコントロールがデスクトップに表示されます。モバイルデバイスの場合、矢印は**show-arrows**プロパティでのみ表示されます。"
+    },
     "icons": {
-      "heading": "### カスタムアイコン"
+      "heading": "### カスタムアイコン",
+      "desc": "ページネーション用アイコンは**prev-icon**および**next-icon**で設定できます。"
     }
   },
   "props": {
+    "activeClass": "Mixins.BaseItemGroup.props.activeClass",
+    "backgroundColor": "コンポーネントの背景色を変更します。",
+    "centerActive": "選択したタブを強制的に中央に配置します",
     "dark": "Mixins.Themeable.props.dark",
     "light": "Mixins.Themeable.props.light",
-    "reverseTransition": "戻す際のトランジションを設定します。"
+    "prevIcon": "左ページネーションのアイコンを設定します。",
+    "nextIcon": "右ページネーションのアイコンを設定します。",
+    "reverseTransition": "戻す際のトランジションを設定します。",
+    "right": "タブを右揃えにします。",
+    "showArrows": "タブ項目がコンテナをオーバーフローした場合は、ページ番号の矢印を表示します。モバイル デバイスの場合、矢印は、このpropを使用する場合にのみ表示されます。",
+    "sliderColor": "自動生成された`v-tabs-slider`の背景色を変更します。",
+    "sliderSize": "スライダーのサイズを変更します。**height**は水平用、**width**は垂直用です。",
+    "touchless": "Components.NavigationDrawers.props.touchless",
+    "transition": "Mixins.Transitionable.props.transition"
+  },
+  "events": {
+    "v-tab": {
+      "change": "タブがアクティブになったときに発生します",
+      "click": "コンポーネントがクリックされたときに発生します",
+      "keydown": "**enter**キーが押されたときに発生する"
+    },
+    "v-tabs": {
+      "change": "ユーザー操作によってタブが変更されたときに発生します。"
+    },
+    "v-tabs-items": {
+      "change": "ユーザーがタブ間をスワイプすると発生します。"
+    }
   }
 }

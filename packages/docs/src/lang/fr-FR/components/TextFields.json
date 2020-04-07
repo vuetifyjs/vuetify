@@ -33,17 +33,10 @@
     "prefix": "Affiche le texte du préfixe",
     "prependInnerIcon": "Ajoute une icône dans l'entrée du composant, utilise la même syntaxe que `v-icon`",
     "reverse": "Inverse l'orientation de l'entrée",
-    "rounded": "Ajoute un rayon de bordure à l'entrée",
-    "value": "Components.Inputs.props.value"
-  },
-  "slots": {
-    "append": "Components.Inputs.slots.append",
-    "prepend": "Components.Inputs.slots.prepend"
+    "rounded": "Ajoute un rayon de bordure à l'entrée"
   },
   "events": {
-    "change": "Components.Inputs.events.change",
-    "click:append": "Components.Inputs.events['click:append']",
-    "click:prepend": "Components.Inputs.events['click:prepend']",
-    "update:error": "Mixins.Validatable.events['update:error']"
+    "blur": "Émis lorsque l'entrée est floue",
+    "change": "Émis lorsque l'entrée est modifiée par l'interaction utilisateur"
   }
 }

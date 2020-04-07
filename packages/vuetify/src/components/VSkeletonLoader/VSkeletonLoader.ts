@@ -13,6 +13,13 @@ import mixins from '../../util/mixins'
 import { VNode, PropType } from 'vue'
 import { getSlot } from '../../util/helpers'
 
+export interface HTMLSkeletonLoaderElement extends HTMLElement {
+  _initialStyle?: {
+    display: string | null
+    transition: string
+  }
+}
+
 /* @vue/component */
 export default mixins(
   Elevatable,
@@ -54,10 +61,7 @@ export default mixins(
       }
     },
     isLoading (): boolean {
-      return Boolean(
-        !getSlot(this) ||
-        this.loading
-      )
+      return !('default' in this.$scopedSlots) || this.loading
     },
     rootTypes (): Record<string, string> {
       return {
@@ -136,9 +140,8 @@ export default mixins(
     },
     genSkeleton () {
       const children = []
-      const slot = getSlot(this)
 
-      if (!this.isLoading) children.push(slot)
+      if (!this.isLoading) children.push(getSlot(this))
       else children.push(this.genStructure())
 
       /* istanbul ignore else */
@@ -152,18 +155,39 @@ export default mixins(
         // Only show transition when
         // content has been loaded
         on: {
-          enter: (el: HTMLElement) => {
-            if (this.isLoading) el.style.transition = 'none'
-          },
-          beforeLeave: (el: HTMLElement) => {
-            el.style.display = 'none'
-          },
+          afterEnter: this.resetStyles,
+          beforeEnter: this.onBeforeEnter,
+          beforeLeave: this.onBeforeLeave,
+          leaveCancelled: this.resetStyles,
         },
       }, children)
     },
     mapBones (bones: string) {
       // Remove spaces and return array of structures
       return bones.replace(/\s/g, '').split(',').map(this.genStructure)
+    },
+    onBeforeEnter (el: HTMLSkeletonLoaderElement) {
+      this.resetStyles(el)
+
+      if (!this.isLoading) return
+
+      el._initialStyle = {
+        display: el.style.display,
+        transition: el.style.transition,
+      }
+
+      el.style.setProperty('transition', 'none', 'important')
+    },
+    onBeforeLeave (el: HTMLSkeletonLoaderElement) {
+      el.style.setProperty('display', 'none', 'important')
+    },
+    resetStyles (el: HTMLSkeletonLoaderElement) {
+      if (!el._initialStyle) return
+
+      el.style.display = el._initialStyle.display || ''
+      el.style.transition = el._initialStyle.transition
+
+      delete el._initialStyle
     },
   },
 

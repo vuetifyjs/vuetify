@@ -1,4 +1,5 @@
 // Mixins
+import Measurable from '../../mixins/measurable'
 import Toggleable from '../../mixins/toggleable'
 
 // Directives
@@ -6,19 +7,21 @@ import intersect from '../../directives/intersect'
 
 // Utilities
 import mixins from '../../util/mixins'
-import { convertToUnit, getSlot } from '../../util/helpers'
+import { getSlot } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
-export default mixins(Toggleable).extend({
+export default mixins(
+  Measurable,
+  Toggleable
+).extend({
   name: 'VLazy',
 
   directives: { intersect },
 
   props: {
-    minHeight: [Number, String],
     options: {
       type: Object,
       // For more information on types, navigate to:
@@ -42,7 +45,7 @@ export default mixins(Toggleable).extend({
   computed: {
     styles (): object {
       return {
-        minHeight: parseInt(this.minHeight) ? convertToUnit(this.minHeight) : this.minHeight,
+        ...this.measurableStyles,
       }
     },
   },

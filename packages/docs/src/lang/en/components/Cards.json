@@ -2,12 +2,14 @@
   "heading": "# Cards",
   "headingText": "The `v-card` component is a versatile component that can be used for anything from a panel to a static image. The **card** component has numerous helper components to make markup as easy as possible. Components that have no listed options use **Vue's** functional component option for faster rendering and serve as markup sugar to make building easier.",
   "usageText": "A card has 4 basic components, `v-card-title`, `v-card-subtitle`, `v-card-text` and `v-card-actions`.",
-  "componentsHeader": "### Functional components",
-  "componentsList": [
-    "`v-card-actions`: The container used for placing **actions** for a card, such as [v-btn](/components/buttons) or [v-menu](/components/menus). Also applies _special margin_ to buttons so that they properly line up with other card content areas.",
-    "`v-card-text`: Primarily used for **text content** in a card. Applies padding for text, reduces its font-size to .875rem and changes its color to grey.",
-    "`v-card-title`: Provides a default **font-size** and **padding** for card titles. Font-size can be overwritten with typography classes, (/styles/typography)."
-  ],
+  "functional": {
+    "desc": [
+      "`v-card-actions`: The container used for placing **actions** for a card, such as [v-btn](/components/buttons) or [v-menu](/components/menus). Also applies _special margin_ to buttons so that they properly line up with other card content areas. ",
+      "`v-card-subtitle`: Provides a default **font-size** and **padding** for card subtitles.Font-size can be overwritten with [typography classes](/styles/typography).",
+      "`v-card-text`: Primarily used for **text content** in a card. Applies padding for text, reduces its font-size to .875rem.",
+      "`v-card-title`: Provides a default **font-size** and **padding** for card titles. Font-size can be overwritten with [typography classes](/styles/typography)."
+    ]
+  },
   "examples": {
     "info-card": {
       "heading": "### Information card",

@@ -5,6 +5,7 @@ import './VMenu.sass'
 import { VThemeProvider } from '../VThemeProvider'
 
 // Mixins
+import Activatable from '../../mixins/activatable'
 import Delayable from '../../mixins/delayable'
 import Dependent from '../../mixins/dependent'
 import Detachable from '../../mixins/detachable'
@@ -269,6 +270,18 @@ export default baseMixins.extend({
         this.closeOnClick &&
         !this.$refs.content.contains(target)
     },
+    genActivatorAttributes () {
+      const attributes = Activatable.options.methods.genActivatorAttributes.call(this)
+
+      if (this.activeTile && this.activeTile.id) {
+        return {
+          ...attributes,
+          'aria-activedescendant': this.activeTile.id,
+        }
+      }
+
+      return attributes
+    },
     genActivatorListeners () {
       const listeners = Menuable.options.methods.genActivatorListeners.call(this)
 
@@ -279,13 +292,15 @@ export default baseMixins.extend({
       return listeners
     },
     genTransition (): VNode {
-      if (!this.transition) return this.genContent()
+      const content = this.genContent()
+
+      if (!this.transition) return content
 
       return this.$createElement('transition', {
         props: {
           name: this.transition,
         },
-      }, [this.genContent()])
+      }, [content])
     },
     genDirectives (): VNodeDirective[] {
       const directives: VNodeDirective[] = [{
@@ -326,8 +341,6 @@ export default baseMixins.extend({
         ref: 'content',
         on: {
           click: (e: Event) => {
-            e.stopPropagation()
-
             const target = e.target as HTMLElement
 
             if (target.getAttribute('disabled')) return
@@ -347,13 +360,11 @@ export default baseMixins.extend({
         options.on.mouseleave = this.mouseLeaveHandler
       }
 
-      return this.$createElement(
-        'div',
-        options,
-        this.showLazyContent(this.getContentSlot())
-      )
+      return this.$createElement('div', options, this.getContentSlot())
     },
     getTiles () {
+      if (!this.$refs.content) return
+
       this.tiles = Array.from(this.$refs.content.querySelectorAll('.v-list-item'))
     },
     mouseEnterHandler () {
@@ -458,13 +469,15 @@ export default baseMixins.extend({
 
     return h('div', data, [
       !this.activator && this.genActivator(),
-      this.$createElement(VThemeProvider, {
-        props: {
-          root: true,
-          light: this.light,
-          dark: this.dark,
-        },
-      }, [this.genTransition()]),
+      this.showLazyContent(() => [
+        this.$createElement(VThemeProvider, {
+          props: {
+            root: true,
+            light: this.light,
+            dark: this.dark,
+          },
+        }, [this.genTransition()]),
+      ]),
     ])
   },
 })

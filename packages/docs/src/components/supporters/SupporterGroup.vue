@@ -1,9 +1,9 @@
 <template>
   <v-row
     :align="$attrs.align || 'center'"
-    :justify="$attrs.justify || 'center'"
+    :justify="$attrs['justify'] || 'center'"
     class="ma-0 supporter-group"
-    no-gutters
+    dense
     v-bind="$attrs"
   >
     <v-col
@@ -19,12 +19,15 @@
       <v-col
         v-if="i % 4 === 0 && group.length > 1"
         :key="`divider-${i}`"
+        class="pa-0"
         cols="12"
       />
 
       <v-col
         :key="i"
-        class="d-flex shrink"
+        class="d-flex shrink justify-center"
+        cols="6"
+        sm="auto"
       >
         <supporters-sponsor
           :large="$attrs.large"

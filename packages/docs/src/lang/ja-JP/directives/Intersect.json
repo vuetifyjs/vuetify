@@ -1,1 +1,20 @@
-{}
+{
+  "heading": "# Intersection observer",
+  "headingText": "'v-intersect' ディレクティブは[Intersection Observer API](https://developer.mozilla.org/ja/docs/Web/API/Intersection_Observer_API)を利用します。ユーザーのビューポート内に要素が表示されるタイミングを検出するための使いやすいインターフェイスを提供します。これは [v-lazy](/components/lazy) コンポーネントにも使用されます。",
+  "examples": {
+    "usage": {
+      "desc": "次のウィンドウ内でスクロールし、色付きのドットを見てください。[v-card](/components/cards) が error から success に変わることがわかります。"
+    },
+    "options": {
+      "heading": "### オプション指定",
+      "desc": "`v-intersect`ディレクティブはオプションを受け入れます。利用可能なオプションは、[Intersection Observer API](https://developer.mozilla.org/ja/docs/Web/API/Intersection_Observer_API) にあります。以下は、 `threshold`オプションを使用した例です。"
+    }
+  },
+  "options": {
+    "modifiers.once": "マウント時に指定されたユーザー コールバックのみを呼び出し、要素がビューポートに入ったときユーザー コールバックを 1 回だけ呼び出します。**quiet** 修飾子を使用する場合、呼び出されるのは 1 回だけです。",
+    "modifiers.quiet": "指定されたコールバックを、バインド時に自動的に呼び出しません。",
+    "value": "対象となる要素がIntersect（交差）したときに呼び出す関数。"
+  },
+  "polyfillHeading": "## Polyfill",
+  "polyfillText1": "[Intersection Observer API](https://developer.mozilla.org/ja/docs/Web/API/Intersection_Observer_API) は IE11 では既定では使用できませんが、 [polyfill](https://github.com/w3c/IntersectionObserver) を使用して実装できます。"
+}

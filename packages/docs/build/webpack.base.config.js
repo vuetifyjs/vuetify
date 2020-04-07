@@ -2,7 +2,6 @@ require('dotenv').config()
 
 const path = require('path')
 const webpack = require('webpack')
-const vueConfig = require('./vue-loader.config')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
@@ -23,12 +22,12 @@ module.exports = {
   devtool,
   output: {
     path: resolve('../dist'),
-    publicPath: '/dist/',
+    publicPath: '/',
     filename: isProd ? '[name].[chunkhash].js' : '[name].js',
     chunkFilename: isProd ? '[name].[chunkhash].js' : '[name].js'
   },
   resolve: {
-    extensions: ['*', '.js', '.json', '.vue'],
+    extensions: ['*', '.js', '.json', '.vue', '.pug'],
     alias: {
       '@': path.resolve(__dirname, '../src'),
       'vue$': 'vue/dist/vue.runtime.esm.js'
@@ -48,7 +47,11 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        options: vueConfig
+        options: {
+          compilerOptions: {
+            preserveWhitespace: false
+          }
+        }
       },
       {
         test: /\.js$/,
@@ -57,7 +60,13 @@ module.exports = {
       },
       {
         test: /\.pug$/,
-        loader: 'pug-plain-loader'
+        oneOf: [
+          {
+            resourceQuery: /^\?vue/,
+            loader: 'pug-plain-loader'
+          },
+          { loader: require.resolve('./pug-to-json') }
+        ]
       },
       {
         test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)(\?.*)?$/,

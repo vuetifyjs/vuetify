@@ -1,4 +1,5 @@
 {
+  "headingText": "Le composant « v-calendar » est utilisé pour afficher des informations dans une vue quotidienne, hebdomadaire ou mensuelle. La vue quotidienne a des créneaux pour tous les éléments de jour ou de minuit, et la vue hebdomadaire et mensuelle a un emplacement pour chaque jour. Vous pouvez peut-être passer dans un ensemble d'événements et ils seront rendus au cours des jours et des heures appropriés.",
   "examples": {
     "usage": {
       "desc": "Un calendrier a un type et une valeur qui détermine le type de calendrier affiché sur quelle durée. Ceci montre la configuration minimale minimale minimale minimale, un tableau d'événements avec les propriétés `name`, `start` et `end`. `end` est optionnel, il est par défaut à `start`. Si le `start` a une heure il est considéré comme un événement chronologique et sera affiché en conséquence dans les vues du jour. Un événement peut durer plusieurs jours et sera rendu en conséquence."
@@ -75,7 +76,6 @@
     "day-label": "Le contenu qui est placé dans le jour du mois dans la vue `week` ou `month`. L'objet jour et heure est passé à travers cette portée.",
     "day-month": "Le contenu placé dans l'espace du mois dans la vue `week` ou `month`. L'objet jour et heure est passé à travers cette portée.",
     "day": "Le contenu placé dans une vue `week` ou `month`. L'objet jour et heure est passé à travers cette portée.",
-    "event": "Le contenu placé dans un événement. Les variables suivantes sont disponibles : événement, jour, extérieur, début, fin, délai.",
     "interval": "Le contenu placé dans l'espace d'intervalle dans la vue `day`. L'objet jour et heure est passé à travers cette portée."
   },
   "events": {

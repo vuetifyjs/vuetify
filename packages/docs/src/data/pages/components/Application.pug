@@ -1,0 +1,32 @@
+api(:value=`[
+  'v-app',
+  'v-content'
+]`)
+alert(value="error") alert1
+
+h2 markupHeader
+| markupText
+| markupText2
+code(lang="html" src="default_markup")
+alert(value="info") alert2
+
+h2 componentHeader
+| componentText1
+| componentText2
+| componentText3
+| componentText4
+| componentText5
+img(value="layouts/app.png") componentImg
+
+h2 appHeader
+| appText1
+code(lang="ts" src="application_service_structure")
+| appText2
+code(lang="js" src="application_service_property_reference")
+accessibility(value="accessibility")
+
+up-next(:value=`[
+  'customization/theme',
+  'components/app-bars',
+  'components/navigation-drawers'
+]`)

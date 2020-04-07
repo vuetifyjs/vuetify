@@ -158,7 +158,7 @@ export default mixins(
 
   render (h): VNode {
     return h(VExpandTransition, [
-      h('div', {
+      h('div', this.setBackgroundColor(this.color, {
         staticClass: 'v-banner',
         attrs: this.attrs$,
         class: this.classes,
@@ -167,7 +167,7 @@ export default mixins(
           name: 'show',
           value: this.isActive,
         }],
-      }, [this.genWrapper()]),
+      }), [this.genWrapper()]),
     ])
   },
 })

@@ -1,8 +1,8 @@
 {
   "heading": "# 違いは何ですか?",
-  "headingText": "VuetifyはVue.js用コンポーネントライブラリ第1位で、2016年から活発に開発されています。プロジェクトの目標は、Material Design仕様(https://material.io/guidelines/)に沿ったリッチで魅力的なWebアプリケーションを構築するために必要なすべてをユーザーに提供することです。一貫性のある更新サイクル、以前のバージョンの長期サポート**（LTS）**、応答性の高いコミュニティエンゲージメント、広大なリソースエコシステム、および品質コンポーネントへの献身でそれを実現します。",
+  "headingText": "VuetifyはVue.js用コンポーネントライブラリ第1位で、2016年から活発に開発されています。プロジェクトの目標は、 [Material Design specification](https://material.io/guidelines/) に沿ったリッチで魅力的なWebアプリケーションを構築するために必要なすべてをユーザーに提供することです。一貫性のある更新サイクル、以前のバージョンの長期サポート **（LTS）** 、応答性の高いコミュニティエンゲージメント、広大なリソースエコシステム、および品質コンポーネントへの献身でそれを実現します。",
   "community": "コミュニティ",
-  "communityCaption": "Vueエコシステムのなかでも最も活発なコミュニティを楽しみましょう。問題が発生しましたか？今すぐ助けてください。バグを見つけた？ Firebaseについて話したい？素晴らしい作品ができた？ そんな時は、ぜひ知らせて下さい！ [awesome-vuetify]（https://github.com/vuetifyjs/awesome-vuetify）リポジトリでは様々な作品が見つけられます。",
+  "communityCaption": "Vueエコシステムのなかでも最も活発なコミュニティを楽しみましょう。問題が発生しましたか？今すぐ助けてください。バグを見つけた？ Firebaseについて話したい？素晴らしい作品ができた？ そんな時は、ぜひ知らせて下さい！ [awesome-vuetify](https://github.com/vuetifyjs/awesome-vuetify) リポジトリでは様々な作品が見つけられます。",
   "communityHeader": "## 開発者のサポート",
   "communityText": "Vuetify を使用して開発を行えば、あなたは決して独りにはなりません。公式の [Discord サーバー](https://community.vuetifyjs.com) に行けば、開発チームや他のコミュニティメンバーからすぐにサポートが得られます。あなたの努力が成功することを願っている世界中の才能のあるメンバーと話す機会が得られます。ヘルプやプロジェクトへのサポートが必要ですか？ [GitHub スポンサー](https://github.com/sponsors/johnleider) になってもらえた場合、プライベートチャンネルや作者との[スケジュールタイム](/professional-support/consulting)での相談が可能です。",
   "comparisonHeader": "## 他のフレームワークとの比較",

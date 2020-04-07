@@ -1,10 +1,8 @@
 {
   "heading": "# スライダー",
   "headingText": "`v-slider` コンポーネントは数値の入力をうまく可視化できます。数値のユーザーデータに利用されます。",
+  "usageText": "スライダーはバーの範囲の値を反映します。ユーザーは1つの値を指定することもできます。音量・明るさ・画像フィルタの設定の調整などに適しています。",
   "examples": {
-    "usage": {
-      "desc": "スライダーはバーの範囲の値を反映します。ユーザーは1つの値を指定することもできます。音量・明るさ・画像フィルタの設定の調整などに適しています。"
-    },
     "thumb": {
       "heading": "### Thumb",
       "desc": "`thumb-label` を表示するタイミングを、「スライド中のみ」または「常に表示する」かを選択できます。`thumb-color` でカスタムカラーを設定したり、`thumb-size` でカスタムサイズを指定することができます。`always-dirty` を設定すると、`min` の値であっても色が変化しないようになります。"
@@ -81,18 +79,11 @@
     "tickSize": "**tick** のサイズをコントロールします",
     "trackColor": "track の色を設定します",
     "trackFillColor": "track の塗りつぶしの色を設定します",
-    "value": "スライダーの現在の値をコントロールします",
     "vertical": "スライダーの方向を縦に変更します"
   },
   "events": {
-    "blur": "コンポーネントのフォーカスが失われたときに発生します",
-    "change": "Components.Inputs.events.change",
-    "click:append": "Components.Inputs.events['click:append']",
-    "click:prepend": "Components.Inputs.events['click:prepend']",
     "end": "スライダーの移動の最後に発生するスライダー値",
-    "focus": "コンポーネントにフォーカスしたときに発生します",
-    "start": "スライダーの移動の最初に発生するスライダー値",
-    "update:error": "Mixins.Validatable.events['update:error']"
+    "start": "スライダーの移動の最初に発生するスライダー値"
   },
   "slots": {
     "thumb-label": "thumb ラベルの内側のコンテンツを置き換える"

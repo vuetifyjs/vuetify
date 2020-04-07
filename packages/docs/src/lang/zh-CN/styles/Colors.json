@@ -1,6 +1,6 @@
 {
   "heading": "# 色彩",
-  "headingText": "你可以通过 **sass** 和 **javascript** 开箱即用 [Material Design spec](https://material.io/guidelines/style/color.html)。这些值可以在样式表、组件文件中使用，也可以通过 **color class** 系统在实际组件中使用。",
+  "headingText": "开箱即用，您可以通过 **sass** 和 **javascript** 访问 [Material Design spec](https://material.io/guidelines/style/color.html) 中的所有颜色。 这些值可通过 **color class** 系统在样式表，组件文件和实际组件中使用。",
   "classesHeader": "## 类",
   "classesText": "规范中的每种色彩都会被转换为 **background** 和 **text** 变量以便在应用程序中通过一个类进行样式化，比如：`<div class=\"red\">` 或者 `<span class=\"red--text\">`。这些类的色彩定义在 [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_colors.scss)。",
   "classesText2": "文本色彩还可以使用 `text--{lighten|darken}-{n}` 来支持 **darken** 和 **lighten** 变量",

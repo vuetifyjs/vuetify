@@ -1,38 +1,116 @@
 {
-  "headingText": "`v-data-table` コンポーネントは表形式のデータを表示するために使われます。ソート、検索、ページネーション、インライン編集、ヘッダーツールチップ、行の選択 などの機能があります。",
+  "heading": "# データテーブル",
   "examples": {
+    "usage": {
+      "desc": "データ テーブルは、デフォルトではデータを単純な行として表示します。"
+    },
     "slots": {
+      "heading": "### Slots",
       "desc": "`v-data-table` は、テーブルをカスタマイズするための slot を数多く用意しています。 この例では、いくつかの slot について紹介します。注意点として、コンポーネントの内部レンダリングを完全に引き継いで selection や expansion などの機能を再実装しなければならない slot (例：`item` / `body` / `header`) や、 `body` > `item` > `item.<name>` and `header`/`header.<name>` のように上書きしてしまう slot があります。"
+    },
+    "select": {
+      "heading": "### 行の選択",
+      "desc": "'show-select' propは、すべての行を切り替えるヘッダーのチェック ボックスと、各行のチェック ボックスをレンダリングします。これらをそれぞれスロット 'header.data-table-select' と 'item.data-table-select' でカスタマイズできます。また、複数の選択した行を同時に許可するか、`single-select` propで 1 つだけ許可するかを切り替えることもできます。"
+    },
+    "group": {
+      "heading": "### グループ化された行",
+      "desc": "`group-by` と `group-desc` propを使用すると、アイテムのプロパティの行をグループ化することができます。`show-group-by` propは、デフォルトヘッダーにグループ ボタンを表示します。"
+    },
+    "dense": {
+      "heading": "### Dense （高さが詰まったスタイル）",
+      "desc": "`dense` propを使用することで、データテーブルの各行が低くなった代替スタイルを与えることもできます。"
+    },
+    "loading": {
+      "heading": "### ローディング状態",
+      "desc": "テーブルのデータが現在読みこまれている途中であることを示すために、`loading` propを使用できます。テーブルにデータがない場合は、読み込み中のメッセージも表示されます。このメッセージは、 `loading-text` prop または `loading` slotを使用してカスタマイズできます。"
     },
     "headers": {
       "desc": "`items` と `headers` スロットは <kbd>td/th</kbd> タグを受け付けることができます。行の全体を制御したい場合は、 <kbd>tr</kbd> を受け付けることができます。"
     },
     "progress": {
+      "heading": "### スロット: progress",
       "desc": "`progress` スロットは、Data Table のローディング状態の表示をカスタマイズする際に使用します。デフォルトでは `indeterminate` が設定された `v-progress-linear` が使用されます。"
     },
     "search": {
+      "heading": "### 検索",
       "desc": "Data table ではデータをフィルタリングするために `search` prop が用意されています"
     },
     "paginate": {
+      "heading": "### 外部ページネーション",
       "desc": "`pagination` prop を使用することで外部からページネーションを制御できます。 使用するには `.sync` modifier を適用する必要があります。"
     },
     "sort": {
+      "heading": "### 外部からのソート指定",
       "desc": "`pagination` prop を使用することで外部からソートも制御できます。 使用するには `.sync` modifier を適用する必要があります。 prop でデフォルトでソートに使用するカラムを設定することもできます。"
     },
     "edit-dialog": {
-      "desc": "`v-edit-dialog` コンポーネントは Data table 内部でインライン編集する際に使用します。"
+      "desc": "`v-edit-dialog` コンポーネントは、 `v-data-table` 内でデータを直接編集するために使用できます。**persistent** propを追加することで、外側をクリックしたときに `v-edit-dialog` が閉じるのをブロックできます。"
     },
     "crud": {
+      "heading": "### CRUD アクション",
       "desc": "各行を編集するために `v-dialog` コンポーネントを使用した、CRUD アクション付き Data table のサンプルです。"
+    },
+    "custom-filter": {
+      "heading": "### カスタムフィルタ",
+      "desc": "`custom-filter`プロパティに関数を設定することにより、` search`プロパティで使用されるデフォルトのフィルタリングをオーバーライドできます。特定の列のフィルタリングをカスタマイズする必要がある場合、ヘッダー項目の `filter`プロパティに関数を提供できます。Singnatureは `(value: any, search: string | null, item: any) => boolean`です。 `search` propが提供されていなくても、この関数は常に実行されます。したがって、フィルタを適用しない場合は、 `true`の値で早期に終了することを確認する必要があります。"
+    },
+    "filterable-columns": {
+      "heading": "### フィルター可能な列の設定",
+      "desc": "ヘッダー項目でプロパティ `filterable` をfalseに設定することで、テーブルの行を検索するときに特定の列が含まれないように簡単に無効にできます。以下の例では、デザート名の列は検索できなくなりました。"
+    },
+    "simple-checkbox": {
+      "heading": "### シンプルチェックボックス",
+      "desc": "データテーブルのスロットテンプレート内でチェックボックスコンポーネントを使用する場合は `v-checkbox` コンポーネントではなく `v-simple-checkbox` コンポーネントを使用します。 `v-simple-checkbox` コンポーネントは内部的に使用され、ヘッダの位置合わせを考慮します。"
     }
   },
   "props": {
     "v-edit-dialog": {
       "cancelText": "**large** prop を使用した際に表示されるキャンセルボタンのデフォルトテキストを設定します。",
-      "saveText": "**large** prop を使用した際に表示される保存ボタンのデフォルトテキストを設定します。"
+      "eager": "Mixins.Bootable.props.eager",
+      "saveText": "**large** prop を使用した際に表示される保存ボタンのデフォルトテキストを設定します。",
+      "transition": "Mixins.Transitionable.props.transition"
     },
     "v-data-table": {
-      "headers": "ヘッダーのカラムとなる配列のオブジェクトを設定します。 全プロパティの定義については下記の例を参照してください。"
+      "caption": "キャプションを設定する(`<caption>`を使用)",
+      "headers": "ヘッダーのカラムとなる配列のオブジェクトを設定します。 全プロパティの定義については下記の例を参照してください。",
+      "hideDefaultHeader": "既定のヘッダーを非表示にする"
+    },
+    "v-simple-checkbox": {
+      "color": "Mixins.Colorable.props.color",
+      "dark": "Mixins.Themeable.props.dark",
+      "disabled": "シンプルチェック ボックスを無効にします。",
+      "light": "Mixins.Themeable.props.light",
+      "offIcon": "非アクティブな場合に使用するアイコン。",
+      "onIcon": "アクティブなときに使用するアイコン。",
+      "ripple": "Mixins.Rippleable.props.ripple",
+      "value": "シンプルチェック ボックスがオンになっているかどうかを表す真偽値。"
+    }
+  },
+  "slots": {
+    "v-data-table": {
+      "body": "デフォルトのテーブル `<tbody>` を置き換えるスロット",
+      "footer": "カスタム フッターを追加するスロット",
+      "heading": "カスタム ヘッダーを追加するスロット",
+      "header.<name>": "特定のヘッダー列をカスタマイズするためのスロット",
+      "header.data-table-select": "ヘッダーのデフォルトの `v-simple-checkbox` を置き換えるスロット",
+      "item.data-table-select": "行を選択するときに使用されるデフォルトの `v-simple-checkbox` を置き換えるスロット",
+      "item.<name>": "特定の列をカスタマイズするためのスロット",
+      "loading": "`loading` が true で、itemsが提供されない場合のコンテンツを定義します。",
+      "no-data": "itemsが提供されない場合のコンテンツを定義します",
+      "no-results": "`search` が提供されているが、結果が見つからない場合のコンテンツを定義します。",
+      "top": "テーブルの上にコンテンツを追加するスロット"
+    },
+    "v-edit-dialog": {
+      "input": "v-edit-dialogの入力コンポーネントを示すために使用されるスロット"
+    }
+  },
+  "events": {
+    "v-edit-dialog": {
+      "cancel": "編集がキャンセルされたときに発生します",
+      "save": "編集ダイアログ保存ボタンが押されたときに発生します"
+    },
+    "v-simple-checkbox": {
+      "click": "コンポーネントがクリックされたときに発生するイベント"
     }
   }
 }

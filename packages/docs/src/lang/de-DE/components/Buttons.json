@@ -1,0 +1,10 @@
+{
+  "examples": {
+    "dropdown": {
+      "uninverted": true
+    },
+    "icon": {
+      "heading": "### Icon"
+    }
+  }
+}

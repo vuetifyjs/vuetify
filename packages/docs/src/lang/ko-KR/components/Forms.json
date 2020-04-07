@@ -1,9 +1,4 @@
 {
-  "examples": {
-    "vee-validate": {
-      "desc": "Vee-validate 폼을 체크하는 것을 도와주는 또 다른 유효성 검사 플러그인입니다. 한가지 주의사항(caveat)은 **value** prop을 사용할때 `v-checkbox`를 제대로 검사하기 위해 반드시 **type=\"checkbox\"** 를 추가해야 한다는 점입니다"
-    }
-  },
   "props": {
     "lazyValidation": "**value** 는 검사 에러(validation error) 가 표시될때 까지 **vallue** 가 무조건 _true_가 됩니다. 검사를 수동으로 호출하려면 여전히 `validate()` 함수를 호출할 수 있습니다."
   },

@@ -1,10 +1,8 @@
 {
   "heading": "crwdns46262:0crwdne46262:0",
   "headingText": "crwdns46264:0crwdne46264:0",
+  "usageText": "crwdns56251:0{ wrapper }crwdne56251:0",
   "examples": {
-    "usage": {
-      "desc": "crwdns41044:0{ wrapper }crwdne41044:0"
-    },
     "disabled": {
       "heading": "crwdns46266:0crwdne46266:0",
       "desc": "crwdns41048:0crwdne41048:0"

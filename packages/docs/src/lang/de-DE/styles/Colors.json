@@ -1,0 +1,16 @@
+{
+  "heading": "# Farben",
+  "headingText": "Sie erhalten Zugriff auf alle Farben der [Materialdesign-Spezifikation](https://material.io/guidelines/style/color.html) durch **sass** und **javascript**. Diese Werte können in Ihren Stylesheets, Ihren Komponenten-Dateien und auf tatsächlichen Komponenten über das **color class**-System verwendet werden.",
+  "classesHeader": "## Klassen",
+  "classesText": "Jede Farbe aus der Spezifikation wird in eine **background**- und **text**-Variante zum Styling innerhalb Ihrer Anwendung durch eine Klasse, wie z.B. `<div class=\"red\">` oder `<span class=\"red--text\">` konvertiert. Diese Klassenfarben sind [hier](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_colors.scss) definiert.",
+  "classesText2": "Textfarben unterstützen auch **darken**- und **lighten**-Varianten mit `text--{lighten|darken}-{n}`",
+  "javascriptPackHeader": "## Javascript-Farbpaket",
+  "javascriptPackText": "Vuetify hat ein optionales Javascript-Farbpaket, das Sie in Ihrer Anwendung importieren und verwenden können. Dies kann auch verwendet werden, um das Theme Ihrer Anwendung festzulegen.",
+  "sassPackHeader": "## Sass-Farbpaket",
+  "sassPackText": "Das Farbpaket vergrößert die CSS-Exportgröße um ~30kb. Einige Projekte können nur die standardmäßig bereitgestellten Klassen erfordern, die zur Laufzeit durch Vuetify Bootstrap erstellt werden. Um diese Funktion zu deaktivieren, müssen Sie _manuel_ die Hauptdatei **sass** importieren und erstellen. Dies erfordert einen [Sass Loader](https://github.com/webpack-contrib/sass-loader) und einen `.sass`/`.scss` Dateieintrag.",
+  "sassPackText2": "Ihre erstellte `main.sass`-Datei muss dann in Ihr Projekt aufgenommen werden.",
+  "alert": "Sie **müssen** Ihr Webpack für die `sass`-Nutzung konfigurieren. Wenn Sie eine [vorgefertigte Vorlage](/getting-started/quick-start#new-applications) verwenden, wird dies bereits für Sie erledigt.",
+  "sassPackText3": "Dies kann auch innerhalb Ihrer Hauptdatei **App.vue** geschehen. Denken Sie daran, je nach Projekt-Einrichtung _wird_ dies die Erstellungszeit erhöhen, da jedes Mal, wenn Ihre Eintragsdatei aktualisiert wird, die Sass-Dateien neu generiert werden.",
+  "colorHeader": "## Material-Farben",
+  "colorText": "Unten ist eine Liste der Materialdesign-Farbpalette, sortiert nach Primärfarbe"
+}

@@ -33,27 +33,9 @@
     "dark": "Components.Inputs.props.dark",
     "noResize": "Remove resize handle",
     "rowHeight": "Valeur de hauteur pour chaque ligne. Nécessite l'utilisation de la prop **auto-grow** .",
-    "rows": "Nombre de lignes par défaut",
-    "value": "Components.Inputs.props.value",
-    "append": "Components.Inputs.props.append",
-    "append-outer": "Components.Inputs.props['append-outer']",
-    "prepend": "Components.Inputs.props.prepend",
-    "prepend-inner": "Components.Inputs.props['prepend-inner']"
-  },
-  "slots": {
-    "append": "Components.Inputs.slots.append",
-    "append-outer": "Ajoute un élément dans le contenu de l'entrée",
-    "prepend": "Components.Inputs.slots.prepend",
-    "prepend-inner": "Empêche un élément dans le contenu de l'entrée"
+    "rows": "Nombre de lignes par défaut"
   },
   "events": {
-    "change": "Components.Inputs.events.change",
-    "click:append": "Components.Inputs.events['click:append']",
-    "click:append-outer": "Components.TextFields.events['click:append-outer']",
-    "click:clear": "Components.TextFields.events['click:clear']",
-    "click:prepend": "Components.Inputs.events['click:prepend']",
-    "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
-    "keydown": "Émis lorsque **n'importe quelle** touche est pressée, la zone de texte doit être concentrée",
-    "update:error": "Mixins.Validatable.events['update:error']"
+    "keydown": "Émis lorsque **n'importe quelle** touche est pressée, la zone de texte doit être concentrée"
   }
 }

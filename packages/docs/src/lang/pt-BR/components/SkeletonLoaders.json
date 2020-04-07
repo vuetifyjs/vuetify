@@ -12,7 +12,6 @@
   },
   "props": {
     "boilerplate": "Remove a animação de carregamento do esqueleto",
-    "tile": "Components.Sheets.props.tile",
-    "loading": "Aplica o estilo de carregamento ao cursor quando hover"
+    "tile": "Components.Sheets.props.tile"
   }
 }

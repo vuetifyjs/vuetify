@@ -8,12 +8,12 @@
     "notSupported": "Non supporté",
     "polyfill": "Supporté avec polyfill"
   },
-  "ie11Header": "## Support d'IE11 et de Safari 9",
-  "ie11Text": "Vuetify utilise les fonctionnalités d'ES2015/2017 qui nécessitent l'utilisation de polyfills pour **Internet Explorer 11** et **Safari 9/10**. Si vous utilisez Vue CLI 3, cela est fait automatiquement pour vous. Sinon, dans votre répertoire de projet, vous pouvez installer `babel-polyfill`:",
-  "ie11Text1": "Vuetify utilise les fonctionnalités d'ES2015/2017 qui nécessitent l'utilisation de polyfills pour **Internet Explorer 11** et **Safari 9/10**. Si vous utilisez Vue CLI 3, cela est fait automatiquement pour vous. Sinon, dans votre répertoire de projet, vous pouvez installer `babel-polyfill`:",
+  "ie11Header": "## Support d'IE11&amp; de Safari 9",
+  "ie11Text": "Vuetify utilise les fonctionnalités d'ES2015/2017 qui nécessitent l'utilisation de polyfills pour **Internet Explorer 11** et **Safari 9/10**. Si vous utilisez Vue CLI, cela est fait automatiquement pour vous. Sinon, dans votre répertoire de projet, vous pouvez installer `babel-polyfill`:",
+  "ie11Text1": "Vuetify utilise les fonctionnalités d'ES2015/2017 qui nécessitent l'utilisation de polyfills pour **Internet Explorer 11** et **Safari 9/10**. Si vous utilisez Vue CLI, cela est fait automatiquement pour vous. Sinon, dans votre répertoire de projet, vous pouvez installer `babel-polyfill`:",
   "ie11Text2": "Il est important d'inclure le plugin dès que possible dans votre fichier **index.js** principal. Si vous utilisez un paquet Vuetify SSR, cela s'appliquera au fichier **client-entry.js**",
   "ie11Text3": "Il est recommandé d'utiliser `babel-preset-env` avec le polyremplissage correspondant pour s'assurer que seuls les polyfilles nécessaires sont ajoutés à votre application. Pour plus d'informations sur `babel-preset-env`, [visitez la documentation](https://babeljs.io/docs/fr/next/babel-preset-env.html)",
   "ie11Text4": "Une fois installé, ajoutez le preset à votre fichier `.babelrc` ou `babel.config.js`",
-  "ie11Text5": "Malheureusement Vue CLI 3 n'apporte pas automatiquement la compatibilité IE11 dans laquelle vous pouvez rencontrer diverses erreurs (comme <i>Symbol n'est pas défini</i>). Pour aider à résoudre ces erreurs, vous pouvez avoir besoin d'ajouter manuellement le paramètre `transpileDependencies` dans `vue.config.js`.",
+  "ie11Text5": "Malheureusement Vue CLI n'apporte pas automatiquement la compatibilité IE11 dans laquelle vous pouvez rencontrer diverses erreurs (comme <i>Symbol n'est pas défini</i>). Pour aider à résoudre ces erreurs, vous pouvez avoir besoin d'ajouter manuellement le paramètre `transpileDependencies` dans `vue.config.js`.",
   "ie11Text6": "En raison d'une prise en charge limitée des balises `<template>` par Internet Explorer, vous devez envoyer des éléments DOM entièrement compilés au navigateur. Cela peut être fait soit en compilant votre code Vue à l'avance, soit en créant des composants auxiliaires pour remplacer les éléments du DOM. Par exemple, si envoyé directement à IE, cela échouera :"
 }

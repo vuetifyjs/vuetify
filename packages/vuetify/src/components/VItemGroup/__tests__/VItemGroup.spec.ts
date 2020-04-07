@@ -185,6 +185,8 @@ describe('VItemGroup', () => {
     // Manually update selected items
     wrapper.vm.updateItemsState()
 
+    await wrapper.vm.$nextTick()
+
     expect(wrapper.vm.selectedItems).toHaveLength(1)
     expect(wrapper.vm.internalValue).toEqual([0])
   })
