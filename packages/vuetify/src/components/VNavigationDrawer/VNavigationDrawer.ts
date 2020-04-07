@@ -296,7 +296,14 @@ export default baseMixins.extend({
 
       if (val !== this.isActive) this.isActive = val
     },
-    expandOnHover: 'updateMiniVariant',
+    expandOnHover (val) {
+      if (!val && this.isMouseover) {
+        // updateMiniVariant will be trigger updateMiniVariant
+        this.isMouseover = false
+        return
+      }
+      this.updateMiniVariant(val)
+    },
     isMouseover (val) {
       this.updateMiniVariant(!val)
     },
