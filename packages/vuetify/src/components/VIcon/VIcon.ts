@@ -186,6 +186,7 @@ const VIcon = mixins(
         data.style = {
           fontSize: size,
           height: size,
+          width: size,
         }
       }
 
