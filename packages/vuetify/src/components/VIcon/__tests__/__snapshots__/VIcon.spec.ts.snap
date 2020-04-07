@@ -6,8 +6,8 @@ exports[`VIcon for component icon should render an svg icon 1`] = `
 >
   <svg xmlns="http://www.w3.org/2000/svg"
        viewbox="0 0 24 24"
-       height="32"
-       width="32"
+       height="24"
+       width="24"
        role="img"
        aria-hidden="true"
   >

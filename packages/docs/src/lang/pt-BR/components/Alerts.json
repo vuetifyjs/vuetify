@@ -8,8 +8,7 @@
       "desc": "A propriedade *borda** adiciona uma borda simples a um dos 4 lados do alerta. Isso pode ser combinado com propriedades como **color**, **dark** e **type** para fornecer destaques únicos ao alerta."
     },
     "colored-border": {
-      "heading": "### Borda Colorida",
-      "desc": "A propriedade **color-border** remove o fundo do alerta para acentuar a propriedade **border**. Se um **type** for definido, ele usará a cor padrão dos tipos. Se nenhuma **color** ou **type** for definida, a cor será padrão para a cor invertida do tema aplicado (preto para light e branco/cinza para dark)."
+      "heading": "### Borda Colorida"
     },
     "dense": {
       "heading": "### Denso",

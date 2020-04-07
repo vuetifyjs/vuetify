@@ -12,10 +12,7 @@
       :inline="inline"
     ><slot /></prism>
 
-    <div
-      v-if="filename"
-      class="v-markup__edit"
-    >
+    <div class="v-markup__edit">
       <a
         :href="href"
         target="_blank"
@@ -27,10 +24,7 @@
       </a>
     </div>
 
-    <div
-      v-if="!hideCopy"
-      class="v-markup__copy"
-    >
+    <div class="v-markup__copy">
       <v-icon
         title="Copy code"
         aria-label="Copy code"
@@ -95,7 +89,6 @@
         type: Boolean,
         default: process.env.NODE_ENV !== 'production',
       },
-      hideCopy: Boolean,
     },
 
     data: vm => ({
@@ -159,14 +152,13 @@
     display: flex
     border-radius: 4px
     position: relative
-    overflow-x: auto
-    overflow-y: hidden
+    overflow: hidden
     margin-bottom: 16px
     background: #2d2d2d
     color: #fff
 
     &.theme--dark
-      background: #424242
+      background: #1F1F1F
 
     pre, code
       margin: 0

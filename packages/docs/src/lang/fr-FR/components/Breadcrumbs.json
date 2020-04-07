@@ -1,9 +1,8 @@
 {
+  "headingText": "Le composant `v-breadcrumbs` est un outil de navigation pour les pages. Il peut accepter une icône **Material Icons** ou des caractères texte comme un séparateur. Un tableau d'objets peut être transmis à la propriété **items** du composant. De plus, des emplacements existent pour plus de contrôle des breadcrumbs, soit en utilisant `v-breadcrumbs-item` ou d'autres balisages personnalisés.",
   "headerAlert1": "Par défaut `v-breadcrumbs` désactivera toutes les miettes jusqu'à la page courante dans un chemin imbriqué. Vous pouvez empêcher ce comportement en utilisant `exact: true` sur chaque fil d'accès applicable dans le tableau `items`.",
+  "usageText": "Par défaut, le fil d'ariane utilise un séparateur de texte. Cela peut être n’importe quelle chaîne de caractère.",
   "examples": {
-    "usage": {
-      "desc": "Par défaut, le fil d'ariane utilise un séparateur de texte. Cela peut être n’importe quelle chaîne de caractère."
-    },
     "icon-dividers": {
       "desc": "Pour la variante d’icône, le fil d'ariane peut utiliser n’importe quelle icône du thème Material Design."
     },

@@ -1,0 +1,78 @@
+usage-new(:value=`{
+  booleans: [
+    'disabled',
+    'loading',
+    'block'
+  ],
+  sliders: [
+    {
+      prop: 'elevation',
+      attrs: {
+        min: 0,
+        max: 24
+      },
+      value: 2
+    }
+  ],
+  selects: [
+    {
+      prop: 'color',
+      label: 'Colors',
+      attrs: {
+        items: [
+          'deep-purple accent-4',
+          'primary',
+          'secondary',
+          'accent'
+        ]
+      }
+    },
+    {
+      prop: 'size',
+      label: 'Sizes',
+      attrs: {
+        items: [
+          'x-small',
+          'small',
+          'large',
+          'x-large'
+        ]
+      }
+    }
+  ],
+  tabs: [
+    'raised',
+    'depressed',
+    'outlined',
+    'rounded',
+    'text',
+    'fab',
+    'icon',
+    'tile'
+  ]
+}`)
+api(:value=`[
+  'v-btn',
+  'v-btn-toggle'
+]`)
+alert(value="warning") alert
+examples(:value=`[
+  'simple/text',
+  'simple/raised',
+  'simple/depressed',
+  'simple/dropdown',
+  'simple/icon',
+  'simple/floating',
+  'simple/sizing',
+  'simple/outlined',
+  'simple/rounded',
+  'simple/tile',
+  'simple/block',
+  'intermediate/loaders'
+]`)
+
+up-next(:value=`[
+  'components/button-groups',
+  'components/icons',
+  'components/floating-action-buttons'
+]`)

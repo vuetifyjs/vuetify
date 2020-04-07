@@ -43,5 +43,5 @@
   "breakpointText1a": "你可以指定自定义断点阈值和滚动条宽度。请记住，您仍然需要更新 css 栅格断点才能匹配。",
   "breakpointText2": "该对象包含与您已经习惯使用的栅格系统相同的语义属性。让我们尝试一个真实世界的例子。您有一个`v-dialog`组件，您想要在移动设备上转换成一个**全屏**对话框。通常情况下，您需要将视野大小绑定在观察者上，和/或在页面加载时进行检查。",
   "breakpointText3": "这是很多的样板文字。即使您选择使用内置的 [v-resize](/directives/resizing) \n 指令，仍然必须定义调整大小的方法。使用 **breakpoint** 对象，您可以完全跳过这个逻辑并重新构建您的应用程序。",
-  "customizeThresholdsText1": "你可以定义自己的断点阈值像素，这需要两个步骤：1，覆盖`$grid-breakpoint`样式变量(参见[SASS变量](/customization/sass-variables))。2，在应用初始化的时候，在javascript侧必须传递同样的值。"
+  "customizeThresholdsText1": "您可以定义自己的断点阈值像素值，但目前需要两个步骤：1. 要更新样式，您将必须覆盖 `$grid-breakpoints` SASS 变量（请参见 [SASS variables](/customization/sass-variables)）。 2. 若要在事物的 javascript 端使用相同的值，则必须在应用程序引导期间将它们传递给它们，如下所示："
 }

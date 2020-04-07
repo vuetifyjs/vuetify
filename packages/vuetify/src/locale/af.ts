@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Rye per bladsy:',
     ariaLabel: {
-      sortDescending: ': Sorted descending. Activate to remove sorting.',
-      sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.',
+      sortDescending: 'Sorted descending.',
+      sortAscending: 'Sorted ascending..',
+      sortNone: 'Not sorted.',
+      activateNone: 'Activate to remove sorting.',
+      activateDescending: 'Activate to sort descending.',
+      activateAscending: 'Activate to sort ascending.',
     },
     sortBy: 'Sort by',
   },
@@ -44,5 +47,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Paginasie-navigasie',
+      next: 'Volgende bladsy',
+      previous: 'Vorige bladsy',
+      page: 'Gaan na bladsy {0}',
+      currentPage: 'Huidige bladsy, Bladsy {0}',
+    },
   },
 }

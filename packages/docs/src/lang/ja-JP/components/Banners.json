@@ -1,8 +1,34 @@
 {
   "heading": "# バナー",
+  "headingText": "`v-banner`コンポーネントは、1-2個のアクションを持つ、ユーザーへの中間割り込みメッセージとして使用されます。 **single-line**と**multi-line**（暗黙）の2つのバリエーションがあります。これらには、メッセージやアクションで使用できるアイコンを含めることができます。",
+  "usageText": "バナーには、1〜2行のテキスト、アクション、およびアイコンを含めることができます。",
   "examples": {
-    "usage": {
-      "desc": "バナーには、1〜2行のテキスト、アクション、およびアイコンを含めることができます。"
+    "single-line": {
+      "heading": "### Single-line (desktop)",
+      "desc": "**Single-line** VBannerは少量の情報に使用され、デスクトップのみの実装に推奨されます。必要に応じて**sticky** propを有効にして、コンテンツが画面に固定されていることを確認できます（注:IE11では動作しません）。スティッキーポジショニングの詳細については、 [sticky positioning here](https://developer.mozilla.org/ja/docs/Web/CSS/position) をご覧ください。"
+    },
+    "two-line": {
+      "heading": "### Two-line (mobile)",
+      "desc": "**Two-line** VBannerはより長いメッセージに使用できます。"
+    },
+    "icon-slot": {
+      "heading": "### Icon スロット"
+    },
+    "icon-event": {
+      "heading": "### アイコンをクリックしたときのイベント",
+      "desc": "VBannerは、カスタムアイコンスロットがある場合でも、アイコンのクリック時に `click:icon` イベントを発生させます。"
+    },
+    "actions-slots": {
+      "heading": "### アクションスロット",
+      "desc": "`actions` slotのスコープには`dismiss`関数があり、これを使用してバナーを簡単に閉じることができます。"
     }
+  },
+  "props": {
+    "icon": "アイコンを指定します。",
+    "iconColor": "アイコンの色を指定します。",
+    "sticky": "**position: sticky** をコンポーネントに適用します（**Evergreenブラウザのみ**）。 [スティッキーポジションのMDNドキュメント](https://developer.mozilla.org/ja/docs/Web/CSS/position) で詳細を確認できます。"
+  },
+  "functions": {
+    "toggle": "Mixins.Toggleable.props.value"
   }
 }

@@ -1,9 +1,15 @@
 // All run from root directory
-// To start dev
+// To start vuetify dev
 $ yarn dev
+
+// To access your local vuetify playground:
+ http://localhost:8080
 
 // To start docs
 $ yarn dev docs
+
+// To access your local docs environment:
+ http://localhost:8095
 
 // To start a specific package
 $ yarn dev <package name>

@@ -125,7 +125,7 @@ describe('VColorPicker.ts', () => {
 
     await wrapper.vm.$nextTick()
 
-    expect(fn).toHaveBeenLastCalledWith({ r: 255, g: 0, b: 255, a: 1 })
+    expect(fn).toHaveBeenLastCalledWith({ r: 255, g: 0, b: 255 })
   })
 
   it('should not show alpha controls if given hex value without alpha', async () => {
@@ -163,6 +163,17 @@ describe('VColorPicker.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         elevation: 15,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10402
+  it('should not hide alpha if given initial value of null', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: null,
       },
     })
 

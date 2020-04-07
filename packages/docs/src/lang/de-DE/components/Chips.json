@@ -1,0 +1,13 @@
+{
+  "examples": {
+    "icon": {
+      "heading": "### Icon"
+    },
+    "closable": {
+      "uninverted": true
+    },
+    "in-selects": {
+      "uninverted": true
+    }
+  }
+}

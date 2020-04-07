@@ -11,6 +11,9 @@ import VColorPickerSwatches from './VColorPickerSwatches'
 // Helpers
 import { VColorPickerColor, parseColor, fromRGBA, extractColor, hasAlpha } from './util'
 import mixins from '../../util/mixins'
+import { deepEqual } from '../../util/helpers'
+
+// Mixins
 import Elevatable from '../../mixins/elevatable'
 import Themeable from '../../mixins/themeable'
 
@@ -60,7 +63,9 @@ export default mixins(Elevatable, Themeable).extend({
 
   computed: {
     hideAlpha (): boolean {
-      return this.value && !hasAlpha(this.value)
+      if (!this.value) return false
+
+      return !hasAlpha(this.value)
     },
   },
 
@@ -78,7 +83,7 @@ export default mixins(Elevatable, Themeable).extend({
       this.internalValue = color
       const value = extractColor(this.internalValue, this.value)
 
-      if (value !== this.value) {
+      if (!deepEqual(value, this.value)) {
         this.$emit('input', value)
         this.$emit('update:color', this.internalValue)
       }

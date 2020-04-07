@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'שורות לעמוד:',
     ariaLabel: {
-      sortDescending: ': ממוין לפי סדר עולה. לחץ להספקת המיון.',
-      sortAscending: ': ממוין לפי סדר יורד. לחץ למיון לפי סדר עולה.',
-      sortNone: ': לא ממוין. לחץ למיון לפי סדר עולה.',
+      sortDescending: 'ממוין לפי סדר עולה. לחץ להספקת המיון.',
+      sortAscending: 'ממוין לפי סדר יורד. לחץ למיון לפי סדר עולה.',
+      sortNone: 'לא ממוין. לחץ למיון לפי סדר עולה.',
+      activateNone: 'Activate to remove sorting.',
+      activateDescending: 'Activate to sort descending.',
+      activateAscending: 'Activate to sort ascending.',
     },
     sortBy: 'סדר לפי',
   },
@@ -44,5 +47,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'ניווט עימוד',
+      next: 'עמוד הבא',
+      previous: 'עמוד הקודם',
+      page: '{0} לך לעמוד',
+      currentPage: '{0} עמוד נוכחי, עמוד',
+    },
   },
 }

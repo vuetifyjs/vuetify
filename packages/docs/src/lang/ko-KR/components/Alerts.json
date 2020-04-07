@@ -8,8 +8,7 @@
       "desc": "**border** prop 을 추가하여 간단하게 경고창 4개면에 선을 추가할 수 있습니다. 이것은 **color**, **dark** 그리고 **type** 과 같은 props들과 조합되어 특별한 경고창에 특별한 강조를 줄 수 있습니다."
     },
     "colored-border": {
-      "heading": "### 색깔있는 테두리 (Colored Border)",
-      "desc": "***color-border** prop 은 **border** prop 을 강조하기 위해서 경고창의 배경을 제거합니다. 만약, **type** 이 적용되었다면, types 를 기본 색깔로 사용할 것입니다. **color** 또는 **type** 이 적용되어 있지 않다면, 경고창의 색깔은 테마에 따라 결정이 됩니다. (밝은 색의 테마는 검은색, 어두운 색의 테마는 흰색/회색)"
+      "heading": "### 색깔있는 테두리 (Colored Border)"
     },
     "dense": {
       "heading": "### 밀집형 (Dense)",
@@ -44,8 +43,7 @@
       "desc": "**type** prop은 4개의 `v-alert` 스타일을 제공합니다. (**success**, **info**, **warning**, 그리고 **error**). 각각의 스타일은 기본적인 아이콘과 색깔이 제공됩니다. 기본적인 색깔들은 전역적인 설정에 따라 커스트마이징 가능합니다. [Vuetify's theme](/customization/theme)."
     },
     "twitter": {
-      "heading": "### 트위터 경고창 (Twitter alert)",
-      "desc": "**color**, **dismissible**, **border**, **elevation**, **icon**, 그리고 **color-border** 를 조합하여 Twitter 와 같은 멋진 경고창을 구현할 수 있습니다."
+      "heading": "### 트위터 경고창 (Twitter alert)"
     }
   },
   "props": {

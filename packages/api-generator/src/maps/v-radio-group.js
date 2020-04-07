@@ -1,13 +1,11 @@
-const { inputSlots, validatableEvents } = require('../helpers/variables')
+const { VInput } = require('../helpers/variables')
+
+const ClickIndex = VInput.events.findIndex(e => e.name === 'click')
+VInput.events.splice(ClickIndex, 1, {
+  name: 'change',
+  value: 'any',
+})
 
 module.exports = {
-  'v-radio-group': {
-    slots: inputSlots.concat(['label']),
-    events: [
-      {
-        name: 'change',
-        value: 'any',
-      },
-    ].concat(validatableEvents),
-  },
+  'v-radio-group': VInput,
 }

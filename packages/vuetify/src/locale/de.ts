@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Zeilen pro Seite:',
     ariaLabel: {
-      sortDescending: ': Absteigend sortiert. Aktivieren um Sortierung zu entfernen.',
-      sortAscending: ': Aufsteigend sortiert. Aktivieren um absteigend zu sortieren.',
-      sortNone: ': Nicht sortiert. Aktivieren um aufsteigend zu sortieren.',
+      sortDescending: 'Absteigend sortiert.',
+      sortAscending: 'Aufsteigend sortiert.',
+      sortNone: 'Nicht sortiert.',
+      activateNone: 'Aktivieren um Sortierung zu entfernen.',
+      activateDescending: 'Aktivieren um absteigend zu sortieren.',
+      activateAscending: 'Aktivieren um aufsteigend zu sortieren.',
     },
     sortBy: 'Sortiere nach',
   },
@@ -31,7 +34,7 @@ export default {
     prev: 'Vorheriges Bild',
     next: 'Nächstes Bild',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Element {0} von {1}',
     },
   },
   calendar: {
@@ -44,5 +47,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Seitennavigation',
+      next: 'Nächste Seite',
+      previous: 'Vorherige Seite',
+      page: 'Gehe zu Seite {0}',
+      currentPage: 'Aktuelle Seite, Seite {0}',
+    },
   },
 }

@@ -33,13 +33,10 @@
 </template>
 
 <script>
+  import Usage from './usage'
+
   export default {
-    props: {
-      attrs: {
-        type: Object,
-        default: () => ({}),
-      },
-    },
+    mixins: [Usage],
 
     data: vm => ({
       internalAttrs: vm.attrs,

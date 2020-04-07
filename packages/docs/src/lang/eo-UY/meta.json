@@ -9,6 +9,11 @@
     "description": "crwdns29572:0crwdne29572:0",
     "keywords": "crwdns29574:0crwdne29574:0"
   },
+  "introduction/guide": {
+    "title": "crwdns56744:0crwdne56744:0",
+    "description": "crwdns56746:0crwdne56746:0",
+    "keywords": "crwdns56748:0crwdne56748:0"
+  },
   "introduction/why-vuetify": {
     "title": "crwdns44140:0crwdne44140:0",
     "description": "crwdns44142:0crwdne44142:0",
@@ -39,9 +44,14 @@
     "description": "crwdns44172:0crwdne44172:0",
     "keywords": "crwdns44174:0crwdne44174:0"
   },
+  "introduction/security-disclosure": {
+    "title": "crwdns56750:0crwdne56750:0",
+    "description": "crwdns56752:0crwdne56752:0",
+    "keywords": "crwdns56754:0crwdne56754:0"
+  },
   "getting-started/quick-start": {
     "title": "crwdns36258:0crwdne36258:0",
-    "description": "crwdns41542:0crwdne41542:0",
+    "description": "crwdns56099:0crwdne56099:0",
     "keywords": "crwdns29580:0crwdne29580:0"
   },
   "getting-started/pre-made-layouts": {
@@ -98,6 +108,11 @@
     "title": "crwdns36342:0crwdne36342:0",
     "description": "crwdns36344:0crwdne36344:0",
     "keywords": "crwdns36346:0crwdne36346:0"
+  },
+  "customization/presets": {
+    "title": "crwdns56101:0crwdne56101:0",
+    "description": "crwdns56103:0crwdne56103:0",
+    "keywords": "crwdns56105:0crwdne56105:0"
   },
   "customization/sass-variables": {
     "title": "crwdns36348:0crwdne36348:0",

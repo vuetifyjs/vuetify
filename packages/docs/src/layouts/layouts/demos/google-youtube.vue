@@ -61,7 +61,12 @@
       dense
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-icon class="mx-4">fab fa-youtube</v-icon>
+      <v-icon
+        class="mx-4"
+        large
+      >
+        mdi-youtube
+      </v-icon>
       <v-toolbar-title class="mr-12 align-center">
         <span class="title">Youtube</span>
       </v-toolbar-title>
@@ -74,7 +79,7 @@
           :append-icon-cb="() => {}"
           placeholder="Search..."
           single-line
-          append-icon="search"
+          append-icon="mdi-magnify"
           color="white"
           hide-details
         />
@@ -131,11 +136,11 @@
     data: () => ({
       drawer: null,
       items: [
-        { icon: 'trending_up', text: 'Most Popular' },
-        { icon: 'subscriptions', text: 'Subscriptions' },
-        { icon: 'history', text: 'History' },
-        { icon: 'featured_play_list', text: 'Playlists' },
-        { icon: 'watch_later', text: 'Watch Later' },
+        { icon: 'mdi-trending-up', text: 'Most Popular' },
+        { icon: 'mdi-youtube-subscription', text: 'Subscriptions' },
+        { icon: 'mdi-history', text: 'History' },
+        { icon: 'mdi-playlist-play', text: 'Playlists' },
+        { icon: 'mdi-clock', text: 'Watch Later' },
       ],
       items2: [
         { picture: 28, text: 'Joseph' },

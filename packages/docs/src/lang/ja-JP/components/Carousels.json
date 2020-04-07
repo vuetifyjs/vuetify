@@ -2,10 +2,11 @@
   "heading": "# カルーセル",
   "headingText": "`v-carousel` コンポーネントは、タイマーで入れ替わる数枚の大きなビジュアルコンテンツを表示するために使います。",
   "subComponentsHeader": "### サブコンポーネント",
+  "subComponentsList": [
+    "`v-carousel-item`: `v-carousel`によって使用されるイメージコンテナ。`v-window-item` を拡張し、ルーティング可能で、デフォルトのスロットで `v-img` を使用します。"
+  ],
+  "usageText": "`v-carousel`コンポーネントは、` v-window`を拡張し、画像の表示を目的とした追加機能を提供します。",
   "examples": {
-    "usage": {
-      "desc": "`v-carousel`コンポーネントは、` v-window`を拡張し、画像の表示を目的とした追加機能を提供します。"
-    },
     "cycle": {
       "desc": "** cycle ** propを使用すると、6秒(デフォルト) ごとに次の利用可能なスライドに自動的に移行させることができます。"
     },
@@ -15,7 +16,7 @@
     },
     "custom-icons": {
       "heading": "### カスタムデリミタ",
-      "desc": "カルーセルスライドのデリミタ(区切り) として利用可能なアイコンを使用します。"
+      "desc": "利用可能な任意のアイコンを、カルーセルスライドのデリミタ（区切り）として使用します。"
     },
     "hide-delimiters": {
       "heading": "### デリミタを非表示にする",
@@ -31,7 +32,27 @@
     }
   },
   "props": {
+    "activeClass": "Mixins.BaseItemGroup.props.activeClass",
+    "disabled": "Mixins.Groupable.props.disabled",
     "delimiterIcon": "Carousel のデリミターとして使用するアイコンを設定します。",
-    "reverseTransition": "戻す際のトランジションを設定します。"
+    "height": "Mixins.Measurable.props.height",
+    "hideDelimiters": "カルーセルの下の区切り記号を非表示にします。",
+    "hideDelimiterBackground": "下の区切り文字の背景を非表示にします。",
+    "link": "Mixins.Routable.props.link",
+    "mandatory": "Mixins.BaseItemGroup.props.mandatory",
+    "multiple": "Mixins.BaseItemGroup.props.multiple",
+    "progressColor": "指定した色をプログレス バーに適用します。",
+    "reverse": "Components.Windows.props.reverse",
+    "reverseTransition": "戻す際のトランジションを設定します。",
+    "showArrows": "前後ナビゲーションの矢印を表示します。",
+    "src": "Components.Images.props.src",
+    "touch": "Components.Windows.props.touch",
+    "touchless": "Components.Windows.props.touchless",
+    "transition": "Mixins.Transitionable.props.transition",
+    "vertical": "Components.Windows.props.vertical",
+    "verticalDelimiters": "カルーセル区切り記号を縦方向に表示します。",
+    "v-carousel-item": {
+      "value": "Mixins.Groupable.props.value"
+    }
   }
 }

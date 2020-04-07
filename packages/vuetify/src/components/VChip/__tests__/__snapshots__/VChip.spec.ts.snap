@@ -3,11 +3,12 @@
 exports[`VChip.ts should be removable 1`] = `
 <span class="v-chip v-chip--no-color v-chip--removable theme--light v-size--default">
   <span class="v-chip__content">
-    <i role="button"
-       class="v-icon notranslate v-chip__close v-icon--link v-icon--right material-icons theme--light"
+    <button type="button"
+            class="v-icon notranslate v-chip__close v-icon--link v-icon--right material-icons theme--light"
+            style="font-size: 18px;"
     >
       $delete
-    </i>
+    </button>
   </span>
 </span>
 `;

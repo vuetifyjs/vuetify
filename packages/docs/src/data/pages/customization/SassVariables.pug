@@ -1,0 +1,42 @@
+alert(value="warning") sassAlert1
+
+h2 setupHeading
+| setupText1
+| setupText2
+
+h2 nuxtHeading1
+| nuxtText1a
+
+h2 webpackHeading
+| webpackText1
+code(lang="js" src="webpack_sass_variables")
+variable-api
+
+h2 exampleHeading1
+| exampleText1a
+code(lang="sass" src="import_vuetify_css")
+
+h2 componentSassImportHeading1
+| componentSassImportText1a
+| componentSassImportText1b
+code(lang="sass" src="component_import_variables")
+| componentSassImportText1c
+code(lang="sass" src="local_variables")
+| componentSassImportText1d
+
+h2 caveatsHeading1
+| caveatsText1a
+
+h2 caveatsHeading2
+| caveatsText2a
+code(lang="sass" src="import_variables_limitation")
+
+h2 caveatsHeading3
+| caveatsText3a
+code(lang="js" src="preset_compilation")
+
+up-next(:value=`[
+  'styles/colors',
+  'customization/theme',
+  'customization/presets'
+]`)

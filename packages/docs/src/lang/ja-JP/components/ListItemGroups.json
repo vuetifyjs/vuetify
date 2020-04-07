@@ -1,1 +1,18 @@
-{}
+{
+  "heading": "# リストアイテム・グループ",
+  "headingText": "`v-list-item-group`は、選択可能な `v-list-item` のグループを作成する機能を提供します。 `v-list-item-group`コンポーネントは、コアで [v-item-group](/components/item-groups) を利用し、インタラクティブなリストのためのクリーンなインターフェースを提供します。",
+  "examples": {
+    "usage": {
+      "desc": "デフォルトでは、`v-list-item-group`は` v-item-group`と同様に動作します。 **value** が提供されない場合、グループはそのインデックスに基づいてデフォルト値を提供します。"
+    }
+  },
+  "api": {
+    "v-list-item": "Components.Lists",
+    "v-list-item-action": "Components.Lists",
+    "v-list-item-avatar": "Components.Lists",
+    "v-list-item-content": "Components.Lists",
+    "v-list-item-title": "Components.Lists",
+    "v-list-item-subtitle": "Components.Lists",
+    "v-list-item-action-text": "Components.Lists"
+  }
+}

@@ -105,9 +105,7 @@ export default BaseItemGroup.extend({
       })
     },
     internalReverse (): boolean {
-      if (this.reverse !== undefined) return this.reverse
-
-      return this.isReverse
+      return this.reverse ? !this.isReverse : this.isReverse
     },
   },
 

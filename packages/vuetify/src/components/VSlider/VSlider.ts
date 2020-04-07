@@ -448,6 +448,8 @@ export default mixins<options &
       }
     },
     onThumbMouseDown (e: MouseEvent) {
+      e.preventDefault()
+
       this.oldValue = this.internalValue
       this.keyPressed = 2
       this.isActive = true

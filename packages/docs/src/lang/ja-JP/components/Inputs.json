@@ -1,9 +1,54 @@
 {
-  "headingText": "`v-input`コンポーネントは、独自のカスタム入力を作成するためのベースラインを提供します。これは、プリペンド/アペンドスロット、メッセージ、およびデフォルトスロットで構成されます。このコンポーネントを拡張することを_推奨_しますが、単体でも使用できます。",
+  "heading": "# Inputs",
+  "headingText": "`v-input`コンポーネントは、独自のカスタム入力を作成するためのベースラインを提供します。これは、プリペンド/アペンドスロット、メッセージ、およびデフォルトスロットで構成されます。このコンポーネントを拡張することを _推奨_ しますが、単体でも使用できます。",
+  "attributesAlert": "`v-input`コンポーネントは、Vuetify フォームコントロールの全てのラッパーとして使用されます。内部入力に渡される予定であるため、属性は **継承されません** 。",
+  "examples": {
+    "usage": {
+      "desc": "`v-input` には4つの主要領域があります。prepended slot、appended slot、default slot、およびmessages。これらは、すべてのフォームコンポーネント間で共有されるコアロジックを構成します。"
+    },
+    "loading": {
+      "heading": "### ローディング状態表示",
+      "desc": "`v-input`は、データ読み込み表示などで使用できる `loading` 状態を持っています。注： `v-text-field`は単なる例です。"
+    },
+    "success": {
+      "heading": "### 成功状態表示",
+      "desc": "バリデーション可能なVuetifyコンポーネントとして、`success` propを使用して`v-input`を成功状態に設定することができ、`success-messages` propを使用してメッセージを追加することができます。"
+    },
+    "error": {
+      "heading": "### エラー状態表示",
+      "desc": "バリデーション可能なVuetifyコンポーネントとして、`error` propを使用して`v-input`をエラー状態に設定することができ、メッセージは`error-messages` propを使用して追加することができます。`error-count`プロパティを使用して、表示するエラー メッセージ数を決定できます。"
+    },
+    "multi-error": {
+      "desc": "`error-count`プロパティを使用することで、複数のエラーを`v-input`に追加することができます。"
+    },
+    "rules": {
+      "desc": "`true`もしくはエラーメッセージを返す関数を追加することで、`v-input`にカスタムバリデーションを追加することができます。"
+    },
+    "hide-details": {
+      "desc": "`hide-details`に`auto`を設定すると、の表示するべきメッセージ (ヒントやエラーメッセージなど) がある場合のみ表示されます。"
+    },
+    "slot-events": {
+      "desc": "`v-input`は`click:append`と`click:prepend`イベントをスロットに追加できます。注意：`v-text-field`は例として使用しています。"
+    },
+    "slots": {
+      "heading": "### スロット",
+      "desc": "`v-input`には `append` および`prepend` スロットがあります。それらにカスタムアイコンを配置できます。"
+    }
+  },
   "props": {
+    "hint": "ヒントを設定します。",
+    "label": "ラベルを設定します。",
+    "loading": "Mixins.Loadable.props.loading",
+    "persistentHint": "ヒントを常に表示します",
     "placeholder": "プレースホルダーを設定します"
   },
   "slots": {
     "label": "デフォルトのラベルを置き換えます"
+  },
+  "events": {
+    "click:append": "アペンドアイコンがクリックされたときに発生します",
+    "click:prepend": "プリペンドアイコンがクリックされたときに発生します",
+    "mousedown": "クリック時、押された（pressed）ときに発生します",
+    "mouseup": "クリック後、放された（released）ときに発生します"
   }
 }

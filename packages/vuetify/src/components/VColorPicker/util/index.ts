@@ -126,6 +126,16 @@ export function parseColor (color: any, oldColor: VColorPickerColor | null) {
   return fromRGBA({ r: 255, g: 0, b: 0, a: 1 })
 }
 
+function stripAlpha (color: any, stripAlpha: boolean) {
+  if (stripAlpha) {
+    const { a, ...rest } = color
+
+    return rest
+  }
+
+  return color
+}
+
 export function extractColor (color: VColorPickerColor, input: any) {
   if (input == null) return color
 
@@ -134,9 +144,9 @@ export function extractColor (color: VColorPickerColor, input: any) {
   }
 
   if (typeof input === 'object') {
-    if (has(input, ['r', 'g', 'b'])) return color.rgba
-    else if (has(input, ['h', 's', 'l'])) return color.hsla
-    else if (has(input, ['h', 's', 'v'])) return color.hsva
+    if (has(input, ['r', 'g', 'b'])) return stripAlpha(color.rgba, !input.a)
+    else if (has(input, ['h', 's', 'l'])) return stripAlpha(color.hsla, !input.a)
+    else if (has(input, ['h', 's', 'v'])) return stripAlpha(color.hsva, !input.a)
   }
 
   return color
@@ -150,7 +160,7 @@ export function hasAlpha (color: any) {
   }
 
   if (typeof color === 'object') {
-    return has(color, ['a'])
+    return has(color, ['a']) || has(color, ['alpha'])
   }
 
   return false

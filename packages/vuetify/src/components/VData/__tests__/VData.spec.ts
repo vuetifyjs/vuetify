@@ -89,10 +89,48 @@ describe('VData.ts', () => {
     })
 
     expect(render).toHaveBeenCalledWith(expect.objectContaining({
-      groupedItems: {
-        one: [items[0], items[2]],
-        two: [items[1]],
+      groupedItems: [
+        {
+          name: 'one',
+          items: [items[0], items[2]],
+        },
+        {
+          name: 'two',
+          items: [items[1]],
+        },
+      ],
+    }))
+  })
+
+  it('should group items by deep keys', async () => {
+    const render = jest.fn()
+    const items = [
+      { id: 1, text: 'foo', foo: { bar: 'one' } },
+      { id: 2, text: 'bar', foo: { bar: 'two' } },
+      { id: 3, text: 'baz', foo: { bar: 'one' } },
+    ]
+
+    const wrapper = mountFunction({
+      propsData: {
+        items,
+        groupBy: ['foo.bar'],
       },
+      scopedSlots: {
+        default: render,
+      },
+    })
+
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
+      groupedItems: [
+        {
+          name: 'one',
+          items: [items[0], items[2]],
+        },
+        {
+          name: 'two',
+          items: [items[1]],
+        },
+      ],
     }))
   })
 
@@ -375,9 +413,9 @@ describe('VData.ts', () => {
   it('should toggle grouping', async () => {
     const unsorted = [
       { id: 1, text: 'c', group: 'foo' },
-      { id: 2, text: 'a', group: 'bar' },
+      { id: 4, text: 'a', group: 'bar' },
       { id: 3, text: 'd', group: 'foo' },
-      { id: 4, text: 'b', group: 'bar' },
+      { id: 2, text: 'b', group: 'bar' },
     ]
 
     const wrapper = mountFunction({
@@ -387,7 +425,7 @@ describe('VData.ts', () => {
       scopedSlots: {
         default (props) {
           const items = props.groupedItems
-            ? Object.keys(props.groupedItems)
+            ? props.groupedItems.map(group => group.name)
             : props.items.map(item => item.text)
 
           return this.$createElement('div', {
@@ -406,6 +444,88 @@ describe('VData.ts', () => {
 
     const el = wrapper.find('#wrapper').element
     el.click()
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10372
+  it('should handle setting itemsPerPage to zero', async () => {
+    const render = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        items: [
+          { id: 1, text: 'foo' },
+          { id: 2, text: 'bar' },
+        ],
+        itemsPerPage: 0,
+      },
+      scopedSlots: {
+        default: render,
+      },
+    })
+
+    await wrapper.vm.$nextTick()
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
+      pagination: expect.objectContaining({
+        itemsPerPage: 0,
+        page: 1,
+        pageCount: 1,
+        pageStart: 0,
+        pageStop: 0,
+      }),
+    }))
+
+    wrapper.setProps({
+      itemsPerPage: 1,
+    })
+
+    await wrapper.vm.$nextTick()
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
+      pagination: expect.objectContaining({
+        itemsPerPage: 1,
+        page: 1,
+        pageCount: 2,
+        pageStart: 0,
+        pageStop: 1,
+      }),
+    }))
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10627
+  it('should sort grouped column', async () => {
+    const unsorted = [
+      { id: 1, text: 'c', group: 'foo' },
+      { id: 4, text: 'a', group: 'bar' },
+      { id: 3, text: 'd', group: 'foo' },
+      { id: 2, text: 'b', group: 'bar' },
+    ]
+
+    const wrapper = mountFunction({
+      propsData: {
+        items: unsorted,
+        groupBy: ['text'],
+      },
+      scopedSlots: {
+        default (props) {
+          return this.$createElement('div', {
+            attrs: {
+              id: 'wrapper',
+            },
+            on: {
+              click: () => props.group('group'),
+            },
+          }, props.groupedItems.map(group => this.$createElement('div', [group.name])))
+        },
+      },
+    })
+
+    wrapper.setProps({ groupDesc: [false] })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ groupDesc: [true] })
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()

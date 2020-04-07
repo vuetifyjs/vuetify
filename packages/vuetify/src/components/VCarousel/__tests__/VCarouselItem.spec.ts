@@ -24,18 +24,6 @@ describe('VCarouselItem.ts', () => {
       },
     })
 
-    expect(wrapper.html()).toMatchSnapshot()
-    expect(warning).toHaveBeenTipped()
-  })
-
-  it('should render component and match snapshot', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        src: imageSrc,
-      },
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
     expect(warning).toHaveBeenTipped()
   })
 })

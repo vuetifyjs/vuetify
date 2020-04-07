@@ -19,7 +19,11 @@ describe('VExpansionPanel', () => {
         slots: {
           default: [
             VExpansionPanelHeader,
-            VExpansionPanelContent,
+            {
+              render: h => h(VExpansionPanelContent, {
+                props: { eager: true },
+              }),
+            },
           ],
         },
         provide: {
@@ -131,16 +135,24 @@ describe('VExpansionPanel', () => {
 
   it('should toggle, boot content and emit a change', async () => {
     const change = jest.fn()
-    const wrapper = mountFunction()
-    const content = wrapper.find('.v-expansion-panel-content') as typeof VExpansionPanelContent
+    const wrapper = mountFunction({
+      slots: {
+        default: [
+          VExpansionPanelHeader,
+          VExpansionPanelContent,
+        ],
+      },
+    })
+    let content = wrapper.find('.v-expansion-panel-content')
 
     wrapper.vm.$on('change', change)
 
-    expect(content.vm.isBooted).toBe(false)
+    expect(content.exists()).toBeFalsy()
 
     wrapper.vm.toggle()
 
-    expect(content.vm.isBooted).toBe(true)
+    content = wrapper.find('.v-expansion-panel-content')
+    expect(content.exists()).toBeTruthy()
 
     await wrapper.vm.$nextTick()
 

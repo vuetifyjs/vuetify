@@ -44,7 +44,7 @@
     try {
       const res = await import(
         /* webpackChunkName: "documentation-pages" */
-        `@/data/pages/${namespace}/${page}.json`
+        `@/data/pages/${namespace}/${page}`
       )
 
       setStructure(res.default)

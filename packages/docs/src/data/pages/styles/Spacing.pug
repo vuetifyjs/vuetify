@@ -1,0 +1,31 @@
+h2 playgroundHeader
+| playgroundText1
+example(value="playground")
+
+h2 Generic.Pages.howItWorks
+| howText
+| propertyText
+| properties
+| directionText
+| directions
+| sizeText
+| sizes
+examples(:value=`[
+  'simple/horizontal',
+  'intermediate/negative-margin'
+]`)
+
+h2 breakpointHeader
+| breakpointText
+layout-grid
+
+h2 Generic.Pages.howItWorks
+| breakpointHowText
+examples(:value=`[
+  'simple/breakpoint-md'
+]`)
+
+up-next(:value=`[
+  'styles/alignment',
+  'styles/content'
+]`)

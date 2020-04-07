@@ -1,1 +1,12 @@
-{}
+{
+  "heading": "# アイテムグループ",
+  "headingText": "`v-item-group`は、任意のコンポーネントから選択可能な項目のグループを作成する機能を提供します。これは、`v-tabs`や`v-carousel`などのコンポーネントのベースライン機能です。",
+  "examples": {
+    "usage": {
+      "desc": "`v-item-group`の主要な使用法は、**model**によって制御されるべきもののグループを作成することです。"
+    },
+    "multiple": {
+      "heading": "### Multiple"
+    }
+  }
+}

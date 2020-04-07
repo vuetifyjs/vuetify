@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Righe per pagina:',
     ariaLabel: {
-      sortDescending: ': Ordinati in ordine decrescente. Attiva per rimuovere l\'ordinamento.',
-      sortAscending: ': Ordinati in ordine crescente. Attiva per ordinare in ordine decrescente.',
-      sortNone: ': Non ordinato. Attiva per ordinare in ordine crescente.',
+      sortDescending: 'Ordinati in ordine decrescente.',
+      sortAscending: 'Ordinati in ordine crescente.',
+      sortNone: 'Non ordinato.',
+      activateNone: 'Attiva per rimuovere l\'ordinamento.',
+      activateDescending: 'Attiva per ordinare in ordine decrescente.',
+      activateAscending: 'Attiva per ordinare in ordine crescente.',
     },
     sortBy: 'Ordina per',
   },
@@ -44,5 +47,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Navigazione impaginazione',
+      next: 'Pagina seguente',
+      previous: 'Pagina precedente',
+      page: 'Vai alla pagina {0}',
+      currentPage: 'Pagina corrente, pagina {0}',
+    },
   },
 }

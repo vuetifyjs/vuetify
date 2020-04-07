@@ -1,23 +1,12 @@
+const { VInput } = require('../helpers/variables')
+
 module.exports = {
   'v-radio': {
-    events: [
-      {
-        name: 'blur',
-        value: 'Event',
-      },
-      {
-        name: 'change',
-        value: 'any',
-      },
-      {
-        name: 'focus',
-        value: 'Event',
-      },
-    ],
+    ...VInput,
     slots: [
       {
         name: 'label',
-        value: undefined,
+        props: undefined,
       },
     ],
   },

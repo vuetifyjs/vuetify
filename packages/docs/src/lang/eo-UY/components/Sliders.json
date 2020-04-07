@@ -1,10 +1,8 @@
 {
   "heading": "crwdns45938:0crwdne45938:0",
   "headingText": "crwdns45940:0crwdne45940:0",
+  "usageText": "crwdns56297:0crwdne56297:0",
   "examples": {
-    "usage": {
-      "desc": "crwdns34024:0crwdne34024:0"
-    },
     "thumb": {
       "heading": "crwdns45942:0crwdne45942:0",
       "desc": "crwdns34028:0crwdne34028:0"
@@ -81,18 +79,11 @@
     "tickSize": "crwdns34086:0crwdne34086:0",
     "trackColor": "crwdns40400:0crwdne40400:0",
     "trackFillColor": "crwdns40402:0crwdne40402:0",
-    "value": "crwdns40404:0crwdne40404:0",
     "vertical": "crwdns40406:0crwdne40406:0"
   },
   "events": {
-    "blur": "crwdns42428:0crwdne42428:0",
-    "change": "crwdns34090:0crwdne34090:0",
-    "click:append": "crwdns34092:0crwdne34092:0",
-    "click:prepend": "crwdns34094:0crwdne34094:0",
     "end": "crwdns34096:0crwdne34096:0",
-    "focus": "crwdns42430:0crwdne42430:0",
-    "start": "crwdns34098:0crwdne34098:0",
-    "update:error": "crwdns34100:0crwdne34100:0"
+    "start": "crwdns34098:0crwdne34098:0"
   },
   "slots": {
     "thumb-label": "crwdns40408:0crwdne40408:0"

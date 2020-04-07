@@ -1,55 +1,56 @@
 <template>
-  <v-snackbar
-    v-model="snack"
-    :color="snackbar.color"
-    :style="{
-      marginBottom: $vuetify.breakpoint.smOnly ? '40px' : null
-    }"
-    :timeout="snackbar.timeout"
-    bottom
-  >
-    <v-row
-      align="center"
-      class="mx-0"
+  <v-theme-provider dark>
+    <v-snackbar
+      v-model="snack"
+      :color="snackbar.color"
+      :timeout="snackbar.timeout"
+      :vertical="$vuetify.breakpoint.xsOnly"
+      top
     >
-      <v-icon
-        v-if="computedIcon"
-        class="mr-4"
-        dark
+      <v-row
+        align="center"
+        class="mx-0"
       >
-        {{ computedIcon }}
-      </v-icon>
+        <v-icon
+          v-if="computedIcon"
+          class="mr-4"
+        >
+          {{ computedIcon }}
+        </v-icon>
 
-      <base-markdown
-        :code="snackbar.msg"
-        class="snack-markdown"
-      />
+        <base-markdown
+          :code="snackbar.msg"
+          class="snack-markdown"
+        />
 
-      <v-spacer />
+        <v-btn
+          :ripple="false"
+          class="black--text ml-auto ml-sm-4"
+          color="white"
+          depressed
+          v-bind="bind"
+          @click="onClick"
+        >
+          {{ snackbar.text }}
 
-      <v-btn
-        :ripple="false"
-        class="text--primary"
-        color="white"
-        depressed
-        v-bind="bind"
-        @click="onClick"
-      >
-        {{ snackbar.text }}
-      </v-btn>
+          <v-icon right>mdi-open-in-new</v-icon>
+        </v-btn>
 
-      <v-btn
-        v-if="snackbar.close"
-        :aria-label="$t('Vuetify.Snackbar.close')"
-        :ripple="false"
-        class="ml-4"
-        icon
-        @click="markViewed"
-      >
-        <v-icon>mdi-close</v-icon>
-      </v-btn>
-    </v-row>
-  </v-snackbar>
+        <v-btn
+          v-if="snackbar.close"
+          :aria-label="$t('Vuetify.Snackbar.close')"
+          :ripple="false"
+          class="ml-4"
+          color="grey darken-1"
+          icon
+          small
+          @click="markViewed"
+        >
+          <v-icon>$vuetify.cancel</v-icon>
+        </v-btn>
+      </v-row>
+    </v-snackbar>
+  </v-theme-provider>
 </template>
 
 <script>
