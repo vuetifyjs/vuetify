@@ -7,8 +7,8 @@
       id="search"
       ref="search"
       v-model="search"
+      :background-color="!theme.isDark ? 'grey lighten-3' : undefined"
       :label="label"
-      background-color="grey lighten-3"
       dense
       flat
       hide-details
@@ -25,6 +25,8 @@
 <script>
   export default {
     name: 'DocumentationSearch',
+
+    inject: ['theme'],
 
     data: () => ({
       docSearch: {},

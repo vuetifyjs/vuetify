@@ -1,10 +1,10 @@
 <template>
   <v-app-bar
     id="documentation-app-bar"
+    :color="!theme.isDark ? 'white' : undefined"
     app
     clipped-left
     clipped-right
-    color="white"
     flat
   >
     <v-app-bar-nav-icon
@@ -37,6 +37,8 @@
   export default {
     name: 'DocumentationAppBar',
 
+    inject: ['theme'],
+
     components: {
       DocumentationSearch: () => import('./Search'),
     },
@@ -47,5 +49,12 @@
 
 <style lang="sass">
   #documentation-app-bar
-    border-bottom: thin solid #0000001F !important
+    border-bottom-width: thin
+    border-style: solid
+
+    &.theme--light
+      border-bottom-color: #0000001F !important
+
+    &.theme--dark
+      border-bottom-color: #FFFFFF1F !important
 </style>
