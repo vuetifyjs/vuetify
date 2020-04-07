@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <base-heading>Generic.Pages.playground</base-heading>
+  <section>
+    <base-heading id="playground">Generic.Pages.playground</base-heading>
     <doc-example
       :id="`usage-${-1}`"
       :value="internalValue"
     />
-  </div>
+  </section>
 </template>
 
 <script>

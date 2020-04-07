@@ -1,5 +1,5 @@
 <template>
-  <section id="examples">
+  <section>
     <base-heading id="examples">Generic.Pages.examples</base-heading>
 
     <base-markdown>Generic.Pages.examplesText</base-markdown>
