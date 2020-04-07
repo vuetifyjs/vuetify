@@ -13,20 +13,27 @@
     @click.native="$vuetify.goTo(0)"
   >
     <v-img
+      :src="`https://cdn.vuetifyjs.com/images/logos/vuetify-logo-${theme.isDark ? 'dark' : 'light' }.png`"
       alt="Vuetify Logo"
       class="shrink mr-2"
       contain
-      src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-light.png"
       transition="scale-transition"
       width="40"
     />
 
-    <span class="display-1 hidden-sm-and-down font-weight-medium mr-0 mr-md-4">Vuetify</span>
+    <v-sheet
+      class="display-1 hidden-sm-and-down font-weight-medium mr-0 mr-md-4"
+      color="transparent"
+    >
+      Vuetify
+    </v-sheet>
   </router-link>
 </template>
 
 <script>
   export default {
     name: 'BaseVuetifyLogo',
+
+    inject: ['theme'],
   }
 </script>
