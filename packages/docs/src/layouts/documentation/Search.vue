@@ -1,20 +1,20 @@
 <template>
   <v-responsive
-    class="mr-0 mr-md-6 hidden-xs-only transition-swing"
-    :max-width="isFocused ? 300 : 250"
+    :max-width="450"
+    class="mr-0 mr-md-4 hidden-sm-and-down transition-swing"
   >
     <v-text-field
       id="search"
       ref="search"
       v-model="search"
       :label="label"
-      color="primary"
+      background-color="grey lighten-3"
       dense
       flat
       hide-details
       prepend-inner-icon="mdi-magnify"
       rounded
-      solo-inverted
+      solo
       @blur="onBlur"
       @focus="onFocus"
       @keydown.esc="onEsc"

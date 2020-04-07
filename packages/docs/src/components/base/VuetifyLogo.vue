@@ -7,7 +7,8 @@
       }
     }"
     aria-label="Vuetify Home Page"
-    class="d-flex align-center"
+    class="d-flex align-center text--primary"
+    style="text-decoration: none;"
     title="Vuetify Home Page"
     @click.native="$vuetify.goTo(0)"
   >
@@ -15,19 +16,12 @@
       alt="Vuetify Logo"
       class="shrink mr-2"
       contain
-      src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+      src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-light.png"
       transition="scale-transition"
       width="40"
     />
 
-    <v-img
-      alt="Vuetify Name"
-      class="shrink mt-1 hidden-sm-and-down"
-      contain
-      min-width="100"
-      src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-      width="100"
-    />
+    <span class="display-1 hidden-sm-and-down font-weight-medium mr-0 mr-md-4">Vuetify</span>
   </router-link>
 </template>
 

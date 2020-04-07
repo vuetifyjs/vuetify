@@ -4,8 +4,8 @@
     app
     clipped-left
     clipped-right
-    color="primary"
-    dark
+    color="white"
+    flat
   >
     <v-app-bar-nav-icon
       class="hidden-lg-and-up"
@@ -44,3 +44,8 @@
     computed: { drawer: sync('app/drawer') },
   }
 </script>
+
+<style lang="sass">
+  #documentation-app-bar
+    border-bottom: thin solid #0000001F !important
+</style>
