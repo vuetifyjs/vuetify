@@ -49,7 +49,7 @@
 
 <style lang="sass">
   #documentation-app-bar
-    border-bottom-width: thin
+    border-width: 0 0 thin 0
     border-style: solid
 
     &.theme--light
