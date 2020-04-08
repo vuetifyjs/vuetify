@@ -13,6 +13,8 @@ describe('ripple.ts', () => {
   let mountFunction: (options?: object) => Wrapper<Vue>
 
   beforeEach(() => {
+    jest.useFakeTimers()
+
     mountFunction = (options = {}) => {
       const testComponent = Vue.component('test', {
         directives: {
@@ -30,6 +32,10 @@ describe('ripple.ts', () => {
 
       return mount(testComponent, options)
     }
+  })
+
+  afterEach(() => {
+    jest.useRealTimers()
   })
 
   it('Ripple with no value should render element with ripple enabled', () => {
@@ -76,8 +82,6 @@ describe('ripple.ts', () => {
   })
 
   it('Ripple should be triggered by the mousedown event', () => {
-    jest.useFakeTimers()
-
     const wrapper = mountFunction()
 
     const mousedownEvent = new MouseEvent('mousedown', { detail: 1 })
@@ -93,8 +97,6 @@ describe('ripple.ts', () => {
   })
 
   it('Ripple should be triggered by the enter key', () => {
-    jest.useFakeTimers()
-
     const wrapper = mountFunction()
 
     const keydownEvent = new KeyboardEvent('keydown', { keyCode: 13 })
@@ -110,8 +112,6 @@ describe('ripple.ts', () => {
   })
 
   it('Ripple should be triggered by the space key', () => {
-    jest.useFakeTimers()
-
     const wrapper = mountFunction()
 
     const keydownEvent = new KeyboardEvent('keydown', { keyCode: 32 })
