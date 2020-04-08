@@ -8,5 +8,5 @@ jobs:
     steps:
       - uses: mschilde/auto-label-merge-conflicts@master
         with:
-          CONFLICT_LABEL_NAME: "has merge conflicts"
+          CONFLICT_LABEL_NAME: "S: has merge conflicts"
           GITHUB_TOKEN: ${{ secrets.MERGE_CONFLICT_WORKFLOW }}
