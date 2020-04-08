@@ -86,7 +86,7 @@
     name: 'CoreSystemBar',
 
     data: () => ({
-      hasClosedBanner: false,
+      hasClosedBanner: true,
     }),
   }
 </script>
