@@ -8,11 +8,16 @@ import {
 describe('size.ts', () => {
   it('should have the correct class', () => {
     const props: SizeProps[] = [
-      {},
-      { large: true },
-      { small: true },
-      { xLarge: true },
-      { xSmall: true },
+      undefined,
+      null,
+      0 as any,
+      '' as any,
+      { size: undefined },
+      { size: 'x-small' },
+      { size: 'small' },
+      { size: 'default' },
+      { size: 'large' },
+      { size: 'x-large' },
     ]
 
     for (const prop of props) {

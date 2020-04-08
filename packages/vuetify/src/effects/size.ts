@@ -1,57 +1,31 @@
 // Setup
-import { computed } from 'vue'
+import { computed, PropType } from 'vue'
 
 // Types
 export interface SizeProps {
-  large?: boolean
-  small?: boolean
-  xLarge?: boolean
-  xSmall?: boolean
+  size: Sizes
 }
 
+type Sizes = 'x-small' | 'small' | 'default' | undefined | 'large' | 'x-large'
+
 // Props
-export function sizeProps (
-  defaults: Partial<SizeProps> = {}
-) {
+export function sizeProps (defaults: Partial<SizeProps> = {}) {
   return {
-    large: {
-      type: Boolean,
-      default: defaults.large,
-    },
-    small: {
-      type: Boolean,
-      default: defaults.small,
-    },
-    xLarge: {
-      type: Boolean,
-      default: defaults.xLarge,
-    },
-    xSmall: {
-      type: Boolean,
-      default: defaults.xSmall,
-    },
+    size: String as PropType<Sizes>,
+    // TODO: Convert to optional chaining
+    // when updated to TS 3.7
+    default: (defaults || {}).size,
   }
 }
 
 // Effect
 export function useSizeClasses (props: SizeProps) {
-  const medium = computed(() => {
-    return (
-      !props.large &&
-      !props.small &&
-      !props.xLarge &&
-      !props.xSmall
-    ) ? true : undefined
-  })
-
   const sizeClasses = computed(() => {
-    return {
-      'v-size--x-small': props.xSmall,
-      'v-size--small': props.small,
-      'v-size--default': medium.value,
-      'v-size--large': props.large,
-      'v-size--x-large': props.xLarge,
-    }
+    // TODO: Convert to optional chaining
+    // when updated to TS 3.7
+    if (!props || typeof props !== 'object') return {}
+
+    return { [`v-size--${props.size}`]: true }
   })
 
   return { sizeClasses }
