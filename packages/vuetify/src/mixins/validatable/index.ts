@@ -133,12 +133,15 @@ export default mixins(
     validations (): InputValidationRules {
       return this.validationTarget.slice(0, Number(this.errorCount))
     },
-    validationState (): string | undefined {
-      if (this.disabled) return undefined
+    validationStateColor (): string | undefined {
       if (this.hasError && this.shouldValidate) return 'error'
       if (this.hasSuccess) return 'success'
       if (this.hasColor) return this.computedColor
       return undefined
+    },
+    validationState (): string | undefined {
+      if (this.disabled) return undefined
+      return this.validationStateColor
     },
     validationTarget (): InputValidationRules {
       if (this.internalErrorMessages.length > 0) {

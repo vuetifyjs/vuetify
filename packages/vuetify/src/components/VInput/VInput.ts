@@ -246,7 +246,7 @@ export default baseMixins.extend<options>().extend({
 
       return this.$createElement(VMessages, {
         props: {
-          color: this.hasHint ? '' : this.validationState,
+          color: this.hasHint ? '' : this.validationStateColor,
           dark: this.dark,
           light: this.light,
           value: this.messagesToDisplay,
