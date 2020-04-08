@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - master
+      - docs/add-auto-label-merge-action
 jobs:
   triage:
     runs-on: ubuntu-latest
