@@ -1,1 +1,39 @@
-{}
+{
+  "heading": "# 应用程序",
+  "headingText": "在 Vuetify 中，`v-app`组件和`v-navigation-drawer`、`v-app-bar`、`v-footer`等组件上的**app**属性会在您的应用程序启动时帮助`<v-content>`组件获得正确的大小。这样您就可以在创建独一无二的界面的同时无需为您布局的大小设置而烦恼。所有应用程序都**需要**`v-app`。它是许多 Vuetify 组件和功能的挂载点，并可以保证它将默认的应用程序**变种**（**暗色或亮色**）传递给子组件，还可以保证跨浏览器支持 Safari 等浏览器中某些点击事件。`v-app`应该在您的应用程序中仅使用**一次**。",
+  "markupHeader": "## 默认应用程序标记",
+  "markupText": "这是 Vuetify 默认应用程序标记的一个示例。只要您使用 **app** 属性，您就可以将您的布局元素放在任何地方。此处的关键组件是`v-content`。它将会根据您分配的 **app** 组件动态地调整大小。上述的组件的任意组合都可以使用，包括`v-bottom-navigation`。",
+  "markupText2": "当使用 [vue-router](https://router.vuejs.org/) 时，建议您将您的视图放到`v-content`内。",
+  "alert1": "为了让您的应用程序正常工作，您**必须**将其封装在一个`v-app`组件中。该组件是为保证正常的**跨浏览器支持**所必需的。Vuetify 不支持在单个页面中使用多个互相隔离的 Vuetify 实例。`v-app`可以存在于您应用程序 body 元素内的**任何地方**，但必须一个作为**所有** Vuetify 组件的父级元素的`v-app`。",
+  "alert2": "使用 **app** 属性会自动应用位置：**fixed** 到布局元素。如果你得应用程序需要一个 _absolute_ 元素，你可以通过使用 **absolute** 属性来覆盖此功能。",
+  "componentHeader": "## 应用程序组件",
+  "componentText1": "下面是支持 **app** 属性的所有组件列表，并可以在你的应用程序中用作布局元素。这些可以混合和匹配，每个特定组件中仅仅只能同时存在 **一个**。你也可以交换它们的位置，布局会自动适应。有关显示如何构建各种布局的示例请浏览 [Pre-made layouts](/getting-started/pre-made-layouts)。",
+  "componentText2": [
+    "[v-app-bar](/components/app-bars)",
+    "[v-bottom-navigation](/components/bottom-navigation)",
+    "[v-footer](/components/footer)",
+    "[v-navigation-drawer](/components/navigation-drawers)",
+    "[v-system-bar](/components/system-bars)"
+  ],
+  "componentText3": "这些应用程序组件中的每个组件都有一个指定的位置和优先级，它会影响布局系统中的位置。",
+  "componentText4": [
+    "**v-system-bar:** 始终位于优先于 `v-app-bar` 的应用程序顶部。",
+    "**v-app-bar:** 始终位于优先级低于 `v-system-bar` 的应用程序顶部。",
+    "**v-navigation-drawer:** 可以放置在应用程序的左侧或右侧，也可以配置为 `v-app-bar' 的旁边或下面。",
+    "**v-footer:** 始终位于优先级低于 `v-bottom-navigation` 的应用程序底部。",
+    "**v-bottom-navigation:** 始终位于优先级高于 `v-footer` 的应用程序底部。"
+  ],
+  "componentText5": "简而言之，这意味着 `v-system-bar` 始终在 `v-app-bar` 的顶部，`v-navigation-drawer` 可以占据左侧或右侧，`v-footer` 始种在 `v-bottom-navigation` 的顶部。",
+  "componentImg": "Vuetify 应用程序",
+  "appHeader": "## 应用程序服务",
+  "appText1": "**application service** 用来配置你得 Vuetify 布局。它与 `v-content` 组件通信，以便能够正确调整应用程序内容的大小。它具有许多可以访问的属性：",
+  "appText2": "当您使用 **app** 属性添加和删除组件时，这些值会自动更新。它们是 **不可** 编辑并且是 _只读_ 状态。你可以在 **$vuetify** 对象上通过引用应用程序属性来访问这些值。",
+  "accessibility": {
+    "desc": "默认情况下，`v-content` 被分配到 [**main**](https://www.w3.org/TR/html51/grouping-content.html#the-main-element) 的 [TR](https://www.w3.org/TR/html51/) 作用，这表示它是文档或应用程序 `body` 的主要内容区域。"
+  },
+  "props": {
+    "v-content": {
+      "tag": "Components.Sheets.props.tag"
+    }
+  }
+}

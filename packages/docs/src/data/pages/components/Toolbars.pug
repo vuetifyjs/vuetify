@@ -1,0 +1,62 @@
+usage-new(:value=`{
+  booleans: [
+    'image',
+    'collapse',
+    'dense',
+    'extended',
+    'flat',
+    'prominent',
+    'short'
+  ],
+  sliders: [
+    {
+      prop: 'elevation',
+      attrs: {
+        min: 2,
+        max: 24
+      },
+      value: 2
+    }
+  ],
+  selects: [
+    {
+      prop: 'color',
+      label: 'Color',
+      attrs: {
+        items: [
+          'primary',
+          'orange',
+          'yellow',
+          'green',
+          'blue',
+          'purple'
+        ]
+      }
+    }
+  ]
+}`)
+alert(value="warning") buttonMargin
+api(:value=`[
+  'v-toolbar',
+  'v-toolbar-title',
+  'v-toolbar-items'
+]`)
+examples(:value=`[
+  'simple/prominent',
+  'simple/dense',
+  'simple/light-and-dark',
+  'simple/variations',
+  'simple/background',
+  'simple/extended',
+  'simple/extension-height',
+  'simple/collapse',
+  'intermediate/flexible-and-card',
+  'intermediate/floating-with-search',
+  'intermediate/contextual-action-bar'
+]`)
+
+up-next(:value=`[
+  'components/buttons',
+  'components/footer',
+  'components/tabs'
+]`)

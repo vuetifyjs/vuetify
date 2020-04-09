@@ -1,1 +1,43 @@
-{}
+{
+  "heading": "# よくある質問 (FAQ)",
+  "headingText": "特定の問題でお困りですか？まずは下記FAQをご確認ください。該当する内容が確認できない場合は、github：[issue](https://issues.vuetifyjs.com) もしくはコミュニティ：[community](https://community.vuetifyjs.com)でお聞きください。",
+  "question": "質問:",
+  "answer": "回答",
+  "noResultsFound": "一致する結果が見つかりませんでした",
+  "resetSearch": "検索をリセットする",
+  "gotchas": [
+    {
+      "q": "### Sass/Scssが原因でアプリケーションをコンパイルできない",
+      "a": "ご使用のsass-loaderバージョンに従って、適切なオプションオブジェクトを使用していることを確認してください。",
+      "s": "js_webpack_sass"
+    },
+    {
+      "q": "### v2でのグリッドとv1.5の比較例はありますか？",
+      "a": "はい。[グリッドの例](https://gist.github.com/johnleider/207f63c9d30fb77042a0bb0258c5ab32) をご確認下さい。"
+    },
+    {
+      "q": "### node-sassモジュールが見当たらない。(Error: Cannot find module 'node-sass')",
+      "a": "`package.json`内の`@vue/cli`のバージョンが**^3.5.0**以上であることをご確認ください。"
+    },
+    {
+      "q": "###  不適切なCSS(Invalid CSS after \"    @content\": expected \"}\", was \"($material-light); \")",
+      "a": "**package.json**で `node-sass` の代わりに `sass` を使用していることを確認してください。"
+    },
+    {
+      "q": "### 私のコードが動きません。どうしたらいいでしょうか？",
+      "a": "まず、最新バージョンのVue.jsおよびVuetifyを使用していることを確認してください。次の [テンプレート](https://template.vuetifyjs.com/) を使用してcodepenで再現してみてください。環境外で問題を再現できない場合、これは通常、問題がローカルに存在することを意味します。それでも問題を解決できない場合は、 [コミュニティ](https://chat.vuetifyjs.com) の **#need-help** でcodepenと問題を提供してください。"
+    },
+    {
+      "q": "### 下記エラーがコンソールに生じます。<br>**$attrs is readonly** and/or **$listeners is readonly**",
+      "a": "VuetifyはTypescriptを利用しており、現在Vueオブジェクトをimportおよびextendする必要があります。そのため一部のアプリケーションで警告メッセージを生成する可能性があります。現在、進行中の [Githubディスカッション](https://github.com/vuetifyjs/vuetify/issues/4068) があり、さまざまなユースケースで回避策が考えられます。さらに質問がある場合は、 [オンラインコミュニティ](https://community.vuetifyjs.com) にご参加ください。"
+    },
+    {
+      "q": "### 次のようなエラーが表示されます：<br> Error in ./node_modules/vuetify/src/dir/file.js Module parse \"failed\": Unexpected token (&lt;lineno&gt;:&lt;characterno&gt;)",
+      "a": "IntelliJ IDEAやWebStormなどのIDEを使用している場合、使用するコンポーネントの `vuetify/src/` ディレクトリを指す自動インポートが追加されることがよくあります。インポート文のパスを`vuetify/src/`から`vuetify/es5/`に変更してください。"
+    },
+    {
+      "q": "### vuerouter付きの codepen の例はありますか？",
+      "a": "はい。[Vuetify Codepen Router Template](https://codepen.io/johnjleider/pen/PMZvpr)"
+    }
+  ]
+}

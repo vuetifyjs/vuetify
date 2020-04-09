@@ -1,4 +1,5 @@
 export default {
+  badge: 'Badge',
   close: 'Fermer',
   dataIterator: {
     noResultsText: 'Aucun enregistrement correspondant trouvé',
@@ -7,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Lignes par page:',
     ariaLabel: {
-      sortDescending: ': Tri décroissant. Activer pour supprimer le tri.',
-      sortAscending: ': Tri croissant. Activer pour trier par ordre décroissant.',
-      sortNone: ': Non trié. Activer pour trier par ordre croissant.',
+      sortDescending: 'Tri décroissant.',
+      sortAscending: 'Tri croissant.',
+      sortNone: 'Non trié.',
+      activateNone: 'Activer pour supprimer le tri.',
+      activateDescending: 'Activer pour trier par ordre décroissant.',
+      activateAscending: 'Activer pour trier par ordre croissant.',
     },
     sortBy: 'Trier par',
   },

@@ -1,4 +1,5 @@
 export default {
+  badge: 'badge',
   close: 'Close',
   dataIterator: {
     noResultsText: 'Geen ooreenstemmende resultate is gevind nie',
@@ -7,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Rye per bladsy:',
     ariaLabel: {
-      sortDescending: ': Sorted descending. Activate to remove sorting.',
-      sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.',
+      sortDescending: 'Sorted descending.',
+      sortAscending: 'Sorted ascending..',
+      sortNone: 'Not sorted.',
+      activateNone: 'Activate to remove sorting.',
+      activateDescending: 'Activate to sort descending.',
+      activateAscending: 'Activate to sort ascending.',
     },
     sortBy: 'Sort by',
   },

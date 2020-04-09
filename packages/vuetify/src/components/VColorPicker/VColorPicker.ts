@@ -11,11 +11,11 @@ import VColorPickerSwatches from './VColorPickerSwatches'
 // Helpers
 import { VColorPickerColor, parseColor, fromRGBA, extractColor, hasAlpha } from './util'
 import mixins from '../../util/mixins'
+import { deepEqual } from '../../util/helpers'
 import Themeable from '../../mixins/themeable'
 
 // Types
-import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { VNode, PropType } from 'vue'
 
 export default mixins(Themeable).extend({
   name: 'v-color-picker',
@@ -40,7 +40,7 @@ export default mixins(Themeable).extend({
       validator: (v: string) => Object.keys(modes).includes(v),
     },
     showSwatches: Boolean,
-    swatches: Array as PropValidator<string[][]>,
+    swatches: Array as PropType<string[][]>,
     swatchesMaxHeight: {
       type: [Number, String],
       default: 150,
@@ -60,7 +60,9 @@ export default mixins(Themeable).extend({
 
   computed: {
     hideAlpha (): boolean {
-      return this.value && !hasAlpha(this.value)
+      if (!this.value) return false
+
+      return !hasAlpha(this.value)
     },
   },
 
@@ -78,7 +80,7 @@ export default mixins(Themeable).extend({
       this.internalValue = color
       const value = extractColor(this.internalValue, this.value)
 
-      if (value !== this.value) {
+      if (!deepEqual(value, this.value)) {
         this.$emit('input', value)
         this.$emit('update:color', this.internalValue)
       }

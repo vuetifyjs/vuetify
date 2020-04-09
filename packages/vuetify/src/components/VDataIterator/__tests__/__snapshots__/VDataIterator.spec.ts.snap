@@ -33,7 +33,8 @@ exports[`VDataIterator.ts should render and match snapshot 1`] = `
                        id="input-4"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -44,12 +45,11 @@ exports[`VDataIterator.ts should render and match snapshot 1`] = `
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
-                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
-              >
-              </div>
             </div>
           </div>
         </div>
@@ -112,7 +112,7 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-18"
+               aria-owns="list-16"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -121,10 +121,11 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
                   10
                 </div>
                 <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                       id="input-18"
+                       id="input-16"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -135,12 +136,11 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
-                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
-              >
-              </div>
             </div>
           </div>
         </div>
@@ -194,7 +194,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-31"
+               aria-owns="list-27"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -203,10 +203,11 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                   10
                 </div>
                 <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                       id="input-31"
+                       id="input-27"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -217,12 +218,11 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
-                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
-              >
-              </div>
             </div>
           </div>
         </div>
@@ -276,7 +276,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-31"
+               aria-owns="list-27"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -285,10 +285,11 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                   10
                 </div>
                 <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                       id="input-31"
+                       id="input-27"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -299,12 +300,11 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
-                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
-              >
-              </div>
             </div>
           </div>
         </div>
@@ -358,7 +358,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-31"
+               aria-owns="list-27"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -367,10 +367,11 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                   10
                 </div>
                 <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                       id="input-31"
+                       id="input-27"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="true"
+                       aria-readonly="false"
+                       autocomplete="off"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -381,12 +382,11 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                   </i>
                 </div>
               </div>
+              <input type="hidden"
+                     value="10"
+              >
             </div>
             <div class="v-menu">
-              <div class="v-menu__content theme--light "
-                   style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
-              >
-              </div>
             </div>
           </div>
         </div>

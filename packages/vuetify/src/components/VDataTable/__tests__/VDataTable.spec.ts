@@ -5,13 +5,14 @@ import {
   MountOptions,
 } from '@vue/test-utils'
 import { Breakpoint } from '../../../services/breakpoint'
-import { Lang } from '../../../services/lang'
 import ripple from '../../../directives/ripple/index'
 import Vue from 'vue'
+import { Lang } from '../../../services/lang'
+import { preset } from '../../../presets/default'
 
 Vue.prototype.$vuetify = {
   rtl: false,
-  lang: new Lang(),
+  lang: new Lang(preset),
 }
 Vue.directive('ripple', ripple)
 
@@ -123,8 +124,8 @@ describe('VDataTable.ts', () => {
       return mount(VDataTable, {
         mocks: {
           $vuetify: {
-            breakpoint: new Breakpoint(),
-            lang: new Lang(),
+            breakpoint: new Breakpoint(preset),
+            lang: new Lang(preset),
             theme: {
               dark: false,
             },
@@ -581,5 +582,278 @@ describe('VDataTable.ts', () => {
     await wrapper.vm.$nextTick()
 
     expect(page).toHaveBeenCalledWith(1)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8477
+  it('should emit two item-selected events when using single-select prop and selecting new item', async () => {
+    const itemSelected = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        itemKey: 'name',
+        items: testItems.slice(0, 2),
+        value: [testItems[0]],
+        showSelect: true,
+        singleSelect: true,
+      },
+      listeners: {
+        'item-selected': itemSelected,
+      },
+    })
+
+    const checkbox = wrapper.findAll('.v-data-table__checkbox').at(1)
+    checkbox.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(itemSelected).toHaveBeenCalledTimes(2)
+    expect(itemSelected).toHaveBeenCalledWith({ item: testItems[0], value: false })
+    expect(itemSelected).toHaveBeenCalledWith({ item: testItems[1], value: true })
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8915
+  it('should not select item that is not selectable', async () => {
+    const items = [
+      { ...testItems[0], isSelectable: false },
+      { ...testItems[1] },
+    ]
+    const input = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items,
+        showSelect: true,
+      },
+      listeners: {
+        input,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    const selectAll = wrapper.findAll('.v-simple-checkbox').at(0)
+    selectAll.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(input).toHaveBeenNthCalledWith(1, [testItems[1]])
+
+    const single = wrapper.findAll('.v-simple-checkbox').at(1)
+    single.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(input.mock.calls).toHaveLength(1)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8915
+  it('should toggle all selectable items', async () => {
+    const items = [
+      { ...testItems[0], isSelectable: false },
+      { ...testItems[1] },
+    ]
+    const input = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items,
+        showSelect: true,
+      },
+      listeners: {
+        input,
+      },
+    })
+
+    const selectAll = wrapper.findAll('.v-simple-checkbox').at(0)
+    selectAll.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(input).toHaveBeenNthCalledWith(1, [testItems[1]])
+
+    selectAll.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(input).toHaveBeenNthCalledWith(2, [])
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10392
+  it('should search group-by column', async () => {
+    const headers = [
+      {
+        text: 'Name',
+        value: 'name',
+      },
+      {
+        text: 'ID',
+        value: 'id',
+      },
+    ]
+
+    const items = [
+      {
+        name: 'Assistance',
+        id: 1,
+      },
+      {
+        name: 'Candidat',
+        id: 2,
+      },
+    ]
+
+    const wrapper = mountFunction({
+      propsData: {
+        headers,
+        items,
+        itemKey: 'id',
+        groupBy: 'name',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ search: 'candidat' })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10289
+  it('should render item slot when using group-by function', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        itemKey: 'name',
+        items: testItems.slice(0, 2),
+        groupBy: 'name',
+      },
+      scopedSlots: {
+        item () {
+          return this.$createElement('div', ['scoped'])
+        },
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10392
+  it('should emit pagination event when filtering', async () => {
+    const headers = [
+      {
+        text: 'Name',
+        value: 'name',
+      },
+      {
+        text: 'ID',
+        value: 'id',
+      },
+    ]
+
+    const items = [
+      {
+        name: 'Assistance',
+        id: 1,
+      },
+      {
+        name: 'Candidat',
+        id: 2,
+      },
+    ]
+
+    const pagination = jest.fn()
+
+    const wrapper = mountFunction({
+      propsData: {
+        headers,
+        items,
+        itemKey: 'id',
+      },
+      listeners: {
+        pagination,
+      },
+    })
+
+    expect(pagination).toHaveBeenLastCalledWith({
+      itemsLength: 2,
+      itemsPerPage: 10,
+      page: 1,
+      pageCount: 1,
+      pageStart: 0,
+      pageStop: 2,
+    })
+
+    wrapper.setProps({ search: 'candidat' })
+    await wrapper.vm.$nextTick()
+
+    expect(pagination).toHaveBeenLastCalledWith({
+      itemsLength: 1,
+      itemsPerPage: 10,
+      page: 1,
+      pageCount: 1,
+      pageStart: 0,
+      pageStop: 1,
+    })
+
+    expect(pagination).toHaveBeenCalledTimes(2)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10715
+  // NOTE: This test currently succeeds regardless of fix
+  // It seems like the test environment does not double
+  // fire the events in the same way the browser does
+  it('should not emit too many pagination events', async () => {
+    const headers = [
+      {
+        text: 'Name',
+        value: 'name',
+      },
+      {
+        text: 'ID',
+        value: 'id',
+      },
+    ]
+
+    const items = [
+      {
+        name: 'Assistance',
+        id: 1,
+      },
+      {
+        name: 'Candidat',
+        id: 2,
+      },
+    ]
+
+    const wrapper = mountFunction({
+      propsData: {
+        headers,
+        itemKey: 'id',
+        serverItemsLength: 0,
+      },
+    })
+
+    wrapper.setProps({ items, serverItemsLength: items.length })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.emitted().pagination).toHaveLength(2)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/4975
+  it('should show correct aria-labels when sorting', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        itemKey: 'name',
+        items: testItems.slice(0, 5),
+        sortBy: 'calories',
+      },
+    })
+
+    wrapper.setProps({ sortDesc: true })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ mustSort: true })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

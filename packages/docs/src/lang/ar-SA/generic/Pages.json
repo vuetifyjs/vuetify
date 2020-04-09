@@ -1,1 +1,17 @@
-{}
+{
+  "default": "افتراضي",
+  "description": "الوصف",
+  "examples": "أمثلة",
+  "name": "اسم",
+  "options": "خيارات",
+  "props": "الخصائص",
+  "showExample": "عرض المثال",
+  "slots": "خانة",
+  "type": "نوع",
+  "introduction": "مقدمة",
+  "upNext": "التالي",
+  "parameters": "المتغيرات",
+  "return": "العودة",
+  "example": "مثال",
+  "value": "قيمة"
+}

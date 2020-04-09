@@ -1,10 +1,8 @@
 {
+  "headingText": "Le composant `v-alert` est utilisé pour transmettre des informations importantes à l'utilisateur grâce à des icônes et des couleurs liées au contexte. Il y a 4 types par défaut : **success**, **info**, **warning**, et **error**. Des icônes par défaut sont assignées afin de différencier la nature des différentes alertes. De nombreuses parties d'une alerte comme `border`, `icon`, et `color` peuvent également être personnalisées pour s'adapter à presque toutes les situations.",
   "examples": {
     "border": {
       "desc": "La prop **border** ajoute une bordure simple à l'un des 4 côtés de l'alerte. Cela peut être combiné avec **color**, **dark**, et **type** pour personnaliser l'alerte."
-    },
-    "colored-border": {
-      "desc": "La prop **color-border** supprime l'arrière-plan de l'alerte afin de mettre la prop **border**. Si un **type** est défini, il utilisera les types de couleur par défaut. Si aucune **couleur** ou **type** n'est définie, la couleur par défaut à la couleur inversée du thème appliqué (noir pour la lumière et blanc/gris pour la sombre)."
     },
     "dense": {
       "heading": "### Dense",
@@ -32,9 +30,6 @@
     },
     "type": {
       "desc": "La propriété **type** dispose par défaut de 4 styles `v-alert` possibles : **success**, **infor**, **warning** et **error**. Chacun de ces styles fospose d'une icône et d'un texte par défaut. Les couleurs par défaut peuvent être configurées globalement en personnalisant le [Thème Vuetify](/customization/theme)."
-    },
-    "twitter": {
-      "desc": "En combinant **color**, **dismissible**, **border**, **elevation**, **icon**, et **color-border** vous pouvez créer des alertes personnalisées élégantes telles que cette notification twitter."
     }
   },
   "accessibility": {

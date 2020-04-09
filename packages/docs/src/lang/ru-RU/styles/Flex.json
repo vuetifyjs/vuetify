@@ -1,1 +1,46 @@
-{}
+{
+  "heading": "# Flex",
+  "headingText": "Управляйте компоновкой flex контейнеров с помощью выравнивания, позиционирования и многого другого с помощью гибких утилит flexbox.",
+  "flexHeader": "## Применение flexbox",
+  "flexText1": "Используя утилиту `display`, вы можете превратить любой элемент в контейнер flexbox, превращая ** прямые дочерние элементы ** в flex элементы. Используя дополнительные утилиты flex-свойства, вы можете настроить их взаимодействие еще больше.",
+  "flexText2": "Вы также можете настроить flex утилиты для применения на основе различных точек останова.",
+  "flexList": [
+    "`.d-flex`",
+    "`.d-inline-flex`",
+    "`.d-sm-flex`",
+    "`.d-sm-inline-flex`",
+    "`.d-md-flex`",
+    "`.d-md-inline-flex`",
+    "`.d-lg-flex`",
+    "`.d-lg-inline-flex`",
+    "`.d-xl-flex`",
+    "`.d-xl-inline-flex`"
+  ],
+  "directionHeader": "## Flex direction",
+  "directionText1": "По умолчанию, `d-flex` применяется с `flex-direction: row` и, как правило, не используется. Тем не менее, могут быть ситуации, когда вам нужно явно определить его.",
+  "directionText2": "Вспомогательные классы `flex-column` и` flex-column-reverse` могут использоваться для изменения ориентации flexbox контейнера. Имейте в виду, что ** IE11 ** и ** Safari ** могут иметь проблемы с column direction.",
+  "directionText3": "Есть также адаптивные варианты для 'flex-direction'.",
+  "directionList": [
+    "`.flex-row`",
+    "`.flex-row-reverse`",
+    "`.flex-column`",
+    "`.flex-column-reverse`",
+    "`.flex-sm-row`",
+    "`.flex-sm-row-reverse`",
+    "`.flex-sm-column`",
+    "`.flex-sm-column-reverse`",
+    "`.flex-md-row`",
+    "`.flex-md-row-reverse`",
+    "`.flex-md-column`",
+    "`.flex-md-column-reverse`",
+    "`.flex-lg-row`",
+    "`.flex-lg-row-reverse`",
+    "`.flex-lg-column`",
+    "`.flex-lg-column-reverse`",
+    "`.flex-xl-row`",
+    "`.flex-xl-row-reverse`",
+    "`.flex-xl-column`",
+    "`.flex-xl-column-reverse`"
+  ],
+  "justifyHeader": "## Flex justify"
+}

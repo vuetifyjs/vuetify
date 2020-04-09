@@ -9,10 +9,8 @@ import { consoleError } from '../../util/console'
 import mixins from '../../util/mixins'
 
 // Types
-import { PropValidator } from 'vue/types/options'
-export type VuetifyRuleValidator = (value: any) => string | boolean
-export type VuetifyMessage = string | string[]
-export type VuetifyRuleValidations = (VuetifyRuleValidator | string)[]
+import { PropType } from 'vue'
+import { InputMessage, InputValidationRules } from 'types'
 
 /* @vue/component */
 export default mixins(
@@ -30,23 +28,23 @@ export default mixins(
       default: 1,
     },
     errorMessages: {
-      type: [String, Array],
+      type: [String, Array] as PropType<InputMessage>,
       default: () => [],
-    } as PropValidator<VuetifyMessage>,
+    },
     messages: {
-      type: [String, Array],
+      type: [String, Array] as PropType<InputMessage>,
       default: () => [],
-    } as PropValidator<VuetifyMessage>,
+    },
     readonly: Boolean,
     rules: {
-      type: Array,
+      type: Array as PropType<InputValidationRules>,
       default: () => [],
-    } as PropValidator<VuetifyRuleValidations>,
+    },
     success: Boolean,
     successMessages: {
-      type: [String, Array],
+      type: [String, Array] as PropType<InputMessage>,
       default: () => [],
-    } as PropValidator<VuetifyMessage>,
+    },
     validateOnBlur: Boolean,
     value: { required: false },
   },
@@ -105,13 +103,13 @@ export default mixins(
         (this.shouldValidate && this.hasError)
       )
     },
-    internalErrorMessages (): VuetifyRuleValidations {
+    internalErrorMessages (): InputValidationRules {
       return this.genInternalMessages(this.errorMessages)
     },
-    internalMessages (): VuetifyRuleValidations {
+    internalMessages (): InputValidationRules {
       return this.genInternalMessages(this.messages)
     },
-    internalSuccessMessages (): VuetifyRuleValidations {
+    internalSuccessMessages (): InputValidationRules {
       return this.genInternalMessages(this.successMessages)
     },
     internalValue: {
@@ -132,7 +130,7 @@ export default mixins(
         ? this.hasFocused && !this.isFocused
         : (this.hasInput || this.hasFocused)
     },
-    validations (): VuetifyRuleValidations {
+    validations (): InputValidationRules {
       return this.validationTarget.slice(0, Number(this.errorCount))
     },
     validationState (): string | undefined {
@@ -142,7 +140,7 @@ export default mixins(
       if (this.hasColor) return this.computedColor
       return undefined
     },
-    validationTarget (): VuetifyRuleValidations {
+    validationTarget (): InputValidationRules {
       if (this.internalErrorMessages.length > 0) {
         return this.internalErrorMessages
       } else if (this.successMessages.length > 0) {
@@ -177,7 +175,7 @@ export default mixins(
         !this.disabled
       ) {
         this.hasFocused = true
-        this.validateOnBlur && this.validate()
+        this.validateOnBlur && this.$nextTick(this.validate)
       }
     },
     isResetting () {
@@ -211,7 +209,7 @@ export default mixins(
   },
 
   methods: {
-    genInternalMessages (messages: VuetifyMessage): VuetifyRuleValidations {
+    genInternalMessages (messages: InputMessage): InputValidationRules {
       if (!messages) return []
       else if (Array.isArray(messages)) return messages
       else return [messages]
@@ -238,8 +236,8 @@ export default mixins(
         const rule = this.rules[index]
         const valid = typeof rule === 'function' ? rule(value) : rule
 
-        if (typeof valid === 'string') {
-          errorBucket.push(valid)
+        if (valid === false || typeof valid === 'string') {
+          errorBucket.push(valid || '')
         } else if (typeof valid !== 'boolean') {
           consoleError(`Rules should return a string or boolean, received '${typeof valid}' instead`, this)
         }

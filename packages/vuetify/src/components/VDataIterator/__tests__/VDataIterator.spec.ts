@@ -6,6 +6,8 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 import Vue from 'vue'
+import { Breakpoint } from '../../../services/breakpoint'
+import { preset } from '../../../presets/default'
 
 Vue.prototype.$vuetify = {
   icons: {
@@ -29,7 +31,8 @@ describe('VDataIterator.ts', () => {
       return mount(VDataIterator, {
         mocks: {
           $vuetify: {
-            lang: new Lang(),
+            breakpoint: new Breakpoint(preset),
+            lang: new Lang(preset),
             theme: {
               dark: false,
             },
@@ -202,7 +205,7 @@ describe('VDataIterator.ts', () => {
     await wrapper.vm.$nextTick()
 
     expect(input).toHaveBeenCalledWith(items)
-    expect(toggleSelectAll).toHaveBeenCalledWith({ value: true })
+    expect(toggleSelectAll).toHaveBeenCalledWith({ items, value: true })
   })
 
   it('should update expansion from the outside', async () => {
@@ -319,5 +322,29 @@ describe('VDataIterator.ts', () => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8886
+  it('should emit page-count event', async () => {
+    const pageCount = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        items: [
+          'foo',
+          'bar',
+          'baz',
+          'qux',
+        ],
+        itemsPerPage: 1,
+      },
+      listeners: {
+        pageCount,
+      },
+    })
+
+    wrapper.setProps({ itemsPerPage: 4 })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.emitted('page-count')).toEqual([[4], [1]])
   })
 })

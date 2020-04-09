@@ -1,0 +1,20 @@
+import 'variables.scss'
+
+import colors from 'vuetify/lib/util/colors'
+
+export default {
+  breakpoint: {
+    thresholds: { xs: 400 },
+  },
+  icons: { iconfont: 'mdiSvg' },
+  theme: {
+    dark: true,
+    themes: {
+      dark: {
+        primary: colors.blue.base,
+        secondary: colors.grey.lighten3,
+        accent: colors.pink.darken1,
+      },
+    },
+  },
+}

@@ -12,8 +12,7 @@ import mixins from '../../util/mixins'
 import Themeable from '../../mixins/themeable'
 
 // Types
-import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { VNode, PropType } from 'vue'
 import { contrastRatio } from '../../util/colorUtils'
 
 function parseDefaultColors (colors: Record<string, Record<string, string>>) {
@@ -46,10 +45,10 @@ export default mixins(Themeable).extend({
 
   props: {
     swatches: {
-      type: Array,
+      type: Array as PropType<string[][]>,
       default: () => parseDefaultColors(colors),
-    } as PropValidator<string[][]>,
-    color: Object as PropValidator<VColorPickerColor>,
+    },
+    color: Object as PropType<VColorPickerColor>,
     maxWidth: [Number, String],
     maxHeight: [Number, String],
   },

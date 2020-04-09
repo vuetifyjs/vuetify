@@ -7,9 +7,8 @@ import PickerButton from '../../mixins/picker-button'
 import { pad } from '../VDatePicker/util'
 import mixins from '../../util/mixins'
 
-import { SelectingTimes } from './VTimePicker'
-import { PropValidator } from 'vue/types/options'
-import { VNode } from 'vue'
+import { SelectingTimes } from './SelectingTimes'
+import { VNode, PropType } from 'vue'
 
 export default mixins(
   PickerButton
@@ -19,14 +18,15 @@ export default mixins(
 
   props: {
     ampm: Boolean,
+    ampmReadonly: Boolean,
     disabled: Boolean,
     hour: Number,
     minute: Number,
     second: Number,
     period: {
-      type: String,
+      type: String as PropType<'am' | 'pm'>,
       validator: period => period === 'am' || period === 'pm',
-    } as PropValidator<'am' | 'pm'>,
+    },
     readonly: Boolean,
     useSeconds: Boolean,
     selecting: Number,
@@ -59,9 +59,12 @@ export default mixins(
     genAmPm () {
       return this.$createElement('div', {
         staticClass: 'v-time-picker-title__ampm',
+        class: {
+          'v-time-picker-title__ampm--readonly': this.ampmReadonly,
+        },
       }, [
-        this.genPickerButton('period', 'am', this.$vuetify.lang.t('$vuetify.timePicker.am'), this.disabled || this.readonly),
-        this.genPickerButton('period', 'pm', this.$vuetify.lang.t('$vuetify.timePicker.pm'), this.disabled || this.readonly),
+        (!this.ampmReadonly || this.period === 'am') ? this.genPickerButton('period', 'am', this.$vuetify.lang.t('$vuetify.timePicker.am'), this.disabled || this.readonly) : null,
+        (!this.ampmReadonly || this.period === 'pm') ? this.genPickerButton('period', 'pm', this.$vuetify.lang.t('$vuetify.timePicker.pm'), this.disabled || this.readonly) : null,
       ])
     },
   },

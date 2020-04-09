@@ -1,21 +1,22 @@
 <template>
   <v-responsive
-    class="mr-0 mr-md-6 hidden-xs-only"
-    max-width="250"
+    :max-width="450"
+    class="mr-0 mr-md-4 hidden-sm-and-down transition-swing"
   >
     <v-text-field
       id="search"
       ref="search"
       v-model="search"
+      :background-color="!theme.isDark ? 'grey lighten-3' : undefined"
       :label="label"
-      color="primary"
       dense
       flat
       hide-details
       prepend-inner-icon="mdi-magnify"
       rounded
-      solo-inverted
+      solo
       @blur="onBlur"
+      @focus="onFocus"
       @keydown.esc="onEsc"
     />
   </v-responsive>
@@ -25,11 +26,15 @@
   export default {
     name: 'DocumentationSearch',
 
+    inject: ['theme'],
+
     data: () => ({
       docSearch: {},
+      isFocused: false,
       isSearching: false,
       label: 'Search ("/" to focus)',
       search: '',
+      timeout: null,
     }),
 
     watch: {
@@ -55,7 +60,7 @@
         e = e || window.event
 
         if (
-          e.keyCode === 191 && // Forward Slash '/'
+          e.key === '/' &&
           e.target !== this.$refs.search.$refs.input
         ) {
           e.preventDefault()
@@ -89,17 +94,14 @@
           apiKey: '259d4615e283a1bbaa3313b4eff7881c',
           autocompleteOptions: {
             appendTo: '#documentation-app-bar',
+            autoselect: true,
+            clearOnSelected: true,
             hint: false,
             debug: process.env.NODE_ENV === 'development',
           },
           handleSelected (input, event, suggestion) {
-            const url = suggestion.url
-            const loc = url.split('.com')
-
-            vm.$router.push(loc.pop())
-            vm.isSearching = false
-            vm.search = ''
-            vm.onEsc()
+            vm.$router.push(suggestion.url.split('.com').pop())
+            vm.resetSearch(400)
           },
           indexName: 'vuetifyjs',
           inputSelector: '#search',
@@ -111,8 +113,20 @@
       onEsc () {
         this.$refs.search.blur()
       },
-      resetSearch () {
-        this.$nextTick(() => (this.search = undefined))
+      onFocus () {
+        clearTimeout(this.timeout)
+
+        this.isFocused = true
+      },
+      resetSearch (timeout = 0) {
+        clearTimeout(this.timeout)
+
+        this.$nextTick(() => {
+          this.search = undefined
+          this.isSearching = false
+
+          this.timeout = setTimeout(() => (this.isFocused = false), timeout)
+        })
       },
     },
   }

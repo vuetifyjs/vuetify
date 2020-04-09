@@ -1,5 +1,5 @@
 // Components
-import VSkeletonLoader from '../VSkeletonLoader'
+import VSkeletonLoader, { HTMLSkeletonLoaderElement } from '../VSkeletonLoader'
 
 // Utilities
 import {
@@ -80,5 +80,52 @@ describe('VSkeletonLoader.ts', () => {
     })
 
     expect(wrapper.vm.attrs).toEqual({})
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/9459
+  // eslint-disable-next-line max-statements
+  it('should remove transition when loading content', () => {
+    const el = document.createElement('div') as HTMLSkeletonLoaderElement
+    const wrapper = mountFunction({
+      propsData: { loading: true },
+    })
+
+    wrapper.vm.onBeforeEnter(el)
+
+    expect(el._initialStyle).not.toBeUndefined()
+    expect(el._initialStyle).toMatchSnapshot()
+    expect(el.style.transition).toBe('none')
+    expect(el.style.display).toBe('')
+
+    // After enter
+    wrapper.vm.resetStyles(el)
+
+    expect(el.style.transition).toBe('')
+    expect(el.style.display).toBe('')
+
+    wrapper.vm.onBeforeLeave(el)
+
+    expect(el.style.display).toBe('none')
+
+    // Existing display/transition properties
+    el.style.display = 'inline-block'
+    el.style.transition = '.3s ease'
+
+    wrapper.vm.onBeforeEnter(el)
+
+    expect(el._initialStyle).not.toBeUndefined()
+    expect(el._initialStyle).toMatchSnapshot()
+    expect(el.style.transition).toBe('none')
+    expect(el.style.display).toBe('inline-block')
+
+    // After enter
+    wrapper.vm.resetStyles(el)
+
+    expect(el.style.transition).toBe('.3s ease')
+    expect(el.style.display).toBe('inline-block')
+
+    wrapper.vm.onBeforeLeave(el)
+
+    expect(el.style.display).toBe('none')
   })
 })

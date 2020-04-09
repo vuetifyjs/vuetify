@@ -1,0 +1,54 @@
+usage-new(:value=`{
+  booleans: [
+    'disabled',
+    'hide-canvas',
+    'hide-inputs',
+    'hide-mode-switch',
+    'show-swatches',
+    'flat'
+  ],
+  selects: [
+    {
+      prop: 'mode',
+      label: 'Mode',
+      attrs: {
+        items: [
+          'rgba',
+          'hsla',
+          'hexa'
+        ]
+      }
+    }
+  ],
+  sliders: [
+    {
+      prop: 'dot-size',
+      attrs: {
+        min: 0,
+        max: 50
+      }
+    },
+    {
+      prop: 'swatches-max-height',
+      attrs: {
+        min: 100,
+        max: 250
+      }
+    }
+  ]
+}`)
+api(:value=`[
+  'v-color-picker'
+]`)
+examples(:value=`[
+  'simple/model',
+  'intermediate/swatches',
+  'intermediate/inputs',
+  'intermediate/canvas'
+]`)
+
+up-next(:value=`[
+  'components/menus',
+  'styles/colors',
+  'customization/theme'
+]`)

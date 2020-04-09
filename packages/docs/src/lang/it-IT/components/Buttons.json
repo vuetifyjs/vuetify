@@ -1,1 +1,16 @@
-{}
+{
+  "examples": {
+    "text": {
+      "heading": "### Testo"
+    },
+    "dropdown": {
+      "uninverted": true
+    },
+    "icon": {
+      "heading": "### Icona"
+    },
+    "outlined": {
+      "heading": "### Delineato"
+    }
+  }
+}

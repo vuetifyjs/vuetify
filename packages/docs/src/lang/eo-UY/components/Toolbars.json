@@ -2,10 +2,8 @@
   "heading": "crwdns44878:0crwdne44878:0",
   "headingText": "crwdns44880:0[v-navigation-drawer]crwdnd44880:0[v-card]crwdne44880:0",
   "buttonMargin": "crwdns37882:0crwdne37882:0",
+  "usageText": "crwdns56319:0[v-btn]crwdne56319:0",
   "examples": {
-    "usage": {
-      "desc": "crwdns37884:0[v-btn]crwdne37884:0"
-    },
     "light-and-dark": {
       "heading": "crwdns44882:0crwdne44882:0",
       "desc": "crwdns37888:0crwdne37888:0"

@@ -1,10 +1,8 @@
 {
   "heading": "crwdns46274:0crwdne46274:0",
   "headingText": "crwdns46276:0crwdne46276:0",
+  "usageText": "crwdns56197:0crwdne56197:0",
   "examples": {
-    "usage": {
-      "desc": "crwdns43158:0crwdne43158:0"
-    },
     "slots": {
       "heading": "crwdns46278:0crwdne46278:0",
       "desc": "crwdns41070:0crwdne41070:0"
@@ -28,6 +26,7 @@
       "loadingText": "crwdns41090:0crwdne41090:0",
       "noDataText": "crwdns41092:0crwdne41092:0",
       "noResultsText": "crwdns41094:0crwdne41094:0",
+      "selectableKey": "crwdns56199:0crwdne56199:0",
       "singleExpand": "crwdns41096:0crwdne41096:0",
       "singleSelect": "crwdns41098:0crwdne41098:0",
       "value": "crwdns41100:0crwdne41100:0"

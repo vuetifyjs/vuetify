@@ -76,7 +76,7 @@
 
   export default {
     data: () => ({
-      branch: null,
+      branch: 'master',
       layouts: [
         { name: 'Baseline', href: '/layouts/layouts/demos/baseline' },
         { name: 'Baseline Flipped', href: '/layouts/layouts/demos/baseline-flipped' },

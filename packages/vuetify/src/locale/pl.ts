@@ -1,4 +1,5 @@
 export default {
+  badge: 'Odznaka',
   close: 'Zamknij',
   dataIterator: {
     noResultsText: 'Nie znaleziono danych odpowiadających wyszukiwaniu',
@@ -7,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Wierszy na stronie:',
     ariaLabel: {
-      sortDescending: ': Sortowanie malejąco. Kliknij aby zmienić.',
-      sortAscending: ': Sortowanie rosnąco. Kliknij aby zmienić.',
-      sortNone: ': Bez sortowania. Kliknij aby posortować rosnąco.',
+      sortDescending: 'Sortowanie malejąco. Kliknij aby zmienić.',
+      sortAscending: 'Sortowanie rosnąco. Kliknij aby zmienić.',
+      sortNone: 'Bez sortowania. Kliknij aby posortować rosnąco.',
+      activateNone: 'Kliknij aby usunąć sortowanie.',
+      activateDescending: 'Kliknij aby posortować malejąco.',
+      activateAscending: 'Kliknij aby posortować rosnąco.',
     },
     sortBy: 'Sortuj według',
   },

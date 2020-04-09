@@ -21,6 +21,12 @@
     .v-expansion-panel-header
       +states($material)
 
+  &.v-expansion-panels--hover
+    > .v-expansion-panel
+      > .v-expansion-panel-header
+        &:hover
+          +states($material)
+
 // Block
 .v-expansion-panels
   border-radius: $expansion-panel-border-radius
@@ -42,6 +48,24 @@
   > *:last-child
     border-bottom-left-radius: inherit
     border-bottom-right-radius: inherit
+
+  // round corners on non-accordion/tile panels
+  &:not(&--accordion):not(&--tile)
+    > .v-expansion-panel
+      &--active
+        border-radius: $expansion-panel-border-radius
+
+        + .v-expansion-panel
+          border-top-left-radius: $expansion-panel-border-radius
+          border-top-right-radius: $expansion-panel-border-radius
+
+      &--next-active
+        border-bottom-left-radius: $expansion-panel-border-radius
+        border-bottom-right-radius: $expansion-panel-border-radius
+
+        .v-expansion-panel-header
+          border-bottom-left-radius: inherit
+          border-bottom-right-radius: inherit
 
 // Element
 .v-expansion-panel
@@ -89,23 +113,6 @@
     > .v-expansion-panel-header--active .v-expansion-panel-header__icon
       &:not(.v-expansion-panel-header__icon--disable-rotate) .v-icon
         transform: rotate(-180deg)
-
-.v-expansion-panels:not(.v-expansion-panels--accordion)
-  > .v-expansion-panel
-    &--active
-      border-radius: $expansion-panel-border-radius
-
-      + .v-expansion-panel
-        border-top-left-radius: $expansion-panel-border-radius
-        border-top-right-radius: $expansion-panel-border-radius
-
-    &--next-active
-      border-bottom-left-radius: $expansion-panel-border-radius
-      border-bottom-right-radius: $expansion-panel-border-radius
-
-      .v-expansion-panel-header
-        border-bottom-left-radius: inherit
-        border-bottom-right-radius: inherit
 
 .v-expansion-panel-header__icon
   display: inline-flex
@@ -187,3 +194,18 @@
 
     &--active
       max-width: $expansion-panel-inset-active-max-width
+
+.v-expansion-panels--flat
+  > .v-expansion-panel
+    &::after
+      border-top: none
+
+    &::before
+      +elevation(0)
+
+.v-expansion-panels--tile
+  border-radius: 0
+
+  > .v-expansion-panel
+    &::before
+      border-radius: 0

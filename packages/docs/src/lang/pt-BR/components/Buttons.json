@@ -1,8 +1,7 @@
 {
   "examples": {
-    "flat": {
-      "heading": "Plano",
-      "desc": "Botões planos não tem sombra ou fundo. O contorno do botão é exibido somente ao passar o mouse."
+    "text": {
+      "heading": "### Texto"
     },
     "raised": {
       "desc": "Os botões em relevo têm sombra que aumenta quando clicado. Este é o estilo padrão."
@@ -15,6 +14,7 @@
       "uninverted": true
     },
     "icon": {
+      "heading": "### Ícone",
       "desc": "Ícones podem ser usados para o contúdo principal de um botão."
     },
     "loaders": {

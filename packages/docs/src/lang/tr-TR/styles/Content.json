@@ -1,1 +1,9 @@
-{}
+{
+  "heading": "# İçerik",
+  "headingText": "Vuetify birçok element için özel stillere sahiptir.",
+  "blockquoteHeader": "## Alıntı",
+  "paragraphsHeader": "## Paragraflar",
+  "codeHeader": "## Kod",
+  "variablesHeader": "## Değişkenler",
+  "userInputHeader": "## Kullanıcı girdisi"
+}

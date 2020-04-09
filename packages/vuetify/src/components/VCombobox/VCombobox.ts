@@ -9,7 +9,7 @@ import VAutocomplete from '../VAutocomplete/VAutocomplete'
 import { keyCodes } from '../../util/helpers'
 
 // Types
-import { PropValidator } from 'vue/types/options'
+import { PropType } from 'vue'
 
 /* @vue/component */
 export default VAutocomplete.extend({
@@ -17,9 +17,9 @@ export default VAutocomplete.extend({
 
   props: {
     delimiters: {
-      type: Array,
+      type: Array as PropType<string[]>,
       default: () => ([]),
-    } as PropValidator<any[]>,
+    },
     returnObject: {
       type: Boolean,
       default: true,
@@ -31,7 +31,7 @@ export default VAutocomplete.extend({
   }),
 
   computed: {
-    counterValue (): number {
+    computedCounterValue (): number {
       return this.multiple
         ? this.selectedItems.length
         : (this.internalSearch || '').toString().length
@@ -69,6 +69,7 @@ export default VAutocomplete.extend({
     genInput () {
       const input = VAutocomplete.options.methods.genInput.call(this)
 
+      delete input.data!.attrs!.name
       input.data!.on!.paste = this.onPaste
 
       return input
@@ -99,12 +100,10 @@ export default VAutocomplete.extend({
     // to overwrite removal in v-autocomplete
     onEnterDown (e: Event) {
       e.preventDefault()
+      // If has menu index, let v-select-list handle
+      if (this.getMenuIndex() > -1) return
 
-      this.$nextTick(() => {
-        // If has menu index, let v-select-list handle
-        if (this.getMenuIndex() > -1) return
-        this.updateSelf()
-      })
+      this.$nextTick(this.updateSelf)
     },
     onFilteredItemsChanged (val: never[], oldVal: never[]) {
       if (!this.autoSelectFirst) return

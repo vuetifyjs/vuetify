@@ -1,4 +1,5 @@
 export default {
+  badge: 'Jelvény',
   close: 'Close',
   dataIterator: {
     noResultsText: 'Nincs egyező találat',
@@ -7,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Elem oldalanként:',
     ariaLabel: {
-      sortDescending: ': Sorted descending. Activate to remove sorting.',
-      sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.',
+      sortDescending: 'Sorted descending. Activate to remove sorting.',
+      sortAscending: 'Sorted ascending. Activate to sort descending.',
+      sortNone: 'Not sorted. Activate to sort ascending.',
+      activateNone: 'Activate to remove sorting.',
+      activateDescending: 'Activate to sort descending.',
+      activateAscending: 'Activate to sort ascending.',
     },
     sortBy: 'Sort by',
   },

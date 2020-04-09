@@ -26,18 +26,18 @@
   align-items: center
   cursor: default
   display: inline-flex
-  line-height: 20px
+  line-height: $chip-line-height
   max-width: 100%
   outline: none
   overflow: hidden
-  padding: 0 12px
+  padding: $chip-padding
   position: relative
   text-decoration: none
   transition-duration: $chip-transition-duration
   transition-property: box-shadow, opacity
   transition-timing-function: $chip-transition-fn
   vertical-align: middle
-  white-space: nowrap
+  white-space: $chip-white-space
 
   &:before
     background-color: currentColor
@@ -85,29 +85,30 @@
       color: inherit
 
 // Elements
-.v-chip__close.v-icon
-  font-size: $chip-close-size
-  max-height: $chip-close-size
-  max-width: $chip-close-size
-  user-select: none
+.v-chip
+  .v-chip__close.v-icon
+    font-size: $chip-close-size
+    max-height: $chip-close-size
+    max-width: $chip-close-size
+    user-select: none
 
-  &.v-icon--right
-    +ltr()
-      margin-right: $chip-icon-right-margin-after
+    &.v-icon--right
+      +ltr()
+        margin-right: $chip-icon-right-margin-after
 
-    +rtl()
-      margin-left: $chip-icon-right-margin-after
+      +rtl()
+        margin-left: $chip-icon-right-margin-after
 
-  &:hover,
-  &:focus,
-  &:active
-    opacity: .72
+    &:hover,
+    &:focus,
+    &:active
+      opacity: .72
 
-.v-chip__content
-  align-items: center
-  display: inline-flex
-  height: 100%
-  max-width: 100%
+  .v-chip__content
+    align-items: center
+    display: inline-flex
+    height: 100%
+    max-width: 100%
 
 // Modifiers
 .v-chip--active
@@ -123,19 +124,20 @@
 
 .v-chip--clickable
   cursor: pointer
+  user-select: none
 
   &:active
     +elevation(2)
 
 .v-chip--disabled
-  opacity: .4
+  opacity: $chip-disabled-opacity
   pointer-events: none
   user-select: none
 
 .v-chip__filter
   // TODO: Figure out why the absence
   // of this breaks the transition
-  max-width: 24px
+  max-width: $chip-filter-max-width
 
   // Increase specificity to
   // overwrite theme style
@@ -180,7 +182,7 @@
     opacity: 0
 
   &.v-chip--active:before
-    opacity: 0.08
+    opacity: $chip-outlined-active-opacity
 
   .v-icon
     color: inherit
@@ -195,7 +197,7 @@
   background: transparent
 
   &:after
-    opacity: .28
+    opacity: $chip-selected-opacity
 
 .v-chip
   @each $name, $size in $icon-sizes

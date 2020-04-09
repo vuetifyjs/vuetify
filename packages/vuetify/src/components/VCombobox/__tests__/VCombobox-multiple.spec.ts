@@ -381,4 +381,29 @@ describe('VCombobox.ts', () => {
     expect(change).not.toHaveBeenCalled()
     // expect(input.element.value).toBe('ccc')  // can be checked only in browser environment
   })
+
+  it('should not add search to list when selecting items with keyboard', async () => {
+    const { wrapper, change } = createMultipleCombobox({
+      chips: true,
+      multiple: true,
+      items: ['aaa', 'bbb'],
+    })
+
+    const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
+
+    input.trigger('focus')
+    element.value = 'a'
+    input.trigger('input')
+    input.trigger('keydown.down')
+
+    await wrapper.vm.$nextTick()
+
+    input.trigger('keydown.enter')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.internalSearch).toBe('a')
+    expect(change).toHaveBeenCalledWith(['aaa'])
+  })
 })

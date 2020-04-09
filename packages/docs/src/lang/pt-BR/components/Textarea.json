@@ -1,1 +1,7 @@
-{}
+{
+  "examples": {
+    "clearable": {
+      "heading": "### Limpável"
+    }
+  }
+}

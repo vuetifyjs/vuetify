@@ -1,5 +1,30 @@
 {
+  "heading": "# Images",
+  "headingText": "`v-img` コンポーネントには、リッチメディアをサポートする機能が満載されています。[vuetify-loader](https://github.com/vuetifyjs/vuetify-loader)と組み合わせて、動的なプログレッシブ画像を追加して、ユーザーエクスペリエンスを向上させることができます。",
+  "alert1": "`v-img` コンポーネントは、IE11 と Safari に[Polyfill](/directives/intersect#polyfill) を必要とする [v-intersect](/directives/intersect) ディレクティブを使用します。この機能をサポートしていないブラウザが検出された場合でも、イメージは通常どおり読み込まれます。",
+  "usageText": "`v-img`コンポーネントは、遅延読み込みとプレースホルダを持つ応答性の高い画像を表示するために使用されます。",
+  "examples": {
+    "max-height": {
+      "heading": "### 高さ",
+      "desc": "`v-img`は自動的に `src` のサイズに拡大し、正しいアスペクト比を維持します。これは `height`と`max-height`のpropsで制限できます。"
+    },
+    "placeholder": {
+      "heading": "### プレースホルダ",
+      "desc": "`v-img` には、イメージの読み込み中に表示するプレースホルダー用の特別な `placeholder` スロットがあります。注: 以下の例は、プレースホルダを表示するために不正なsrcを指定しています。"
+    }
+  },
   "props": {
-    "alt": "スクリーンリーダー用の代替テキストです。装飾用の画像の場合空にしてください。"
+    "alt": "スクリーンリーダー用の代替テキストです。装飾用の画像の場合空にしてください。",
+    "aspectRatio": "`width/height`として計算されるため、1920x1080 px画像の場合、`1.7778`になります。省略すると自動的に計算されます",
+    "eager": "Mixins.Bootable.props.eager",
+    "sizes": "`srcset`で使用するには、[MDN](https://developer.mozilla.org/ja/docs/Web/HTML/Element/img#attr-sizes) を参照してください。",
+    "srcset": "デバイスのサイズに基づいて使用する代替画像のセット。 [続きを読む...](https://developer.mozilla.org/ja/docs/Web/HTML/Element/img#attr-srcset)"
+  },
+  "events": {
+    "error": "エラーがあった場合に発生します。",
+    "load": "画像が読み込まれたときに発生します"
+  },
+  "slots": {
+    "placeholder": "画像プレースホルダーのスロット"
   }
 }

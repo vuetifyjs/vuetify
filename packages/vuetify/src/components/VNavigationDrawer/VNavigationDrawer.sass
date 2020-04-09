@@ -1,8 +1,8 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 // Theme
 +theme(v-navigation-drawer) using ($material)
-  background-color: map-get($material, 'cards')
+  background-color: map-get($material, 'navigation-drawer')
 
   &:not(.v-navigation-drawer--floating)
     .v-navigation-drawer__border
@@ -24,7 +24,7 @@
   transition-duration: 0.2s
   transition-timing-function: map-get($transition, 'fast-out-slow-in')
   will-change: transform
-  transition-property: transform, width
+  transition-property: transform, visibility, width
   +bootable()
 
   &.v-navigation-drawer--right
@@ -37,11 +37,11 @@
 
 // Element
 .v-navigation-drawer__border
-    position: absolute
-    right: 0
-    top: 0
-    height: 100%
-    width: 1px
+  position: absolute
+  right: 0
+  top: 0
+  height: 100%
+  width: $navigation-drawer-border-width
 
 .v-navigation-drawer__content
   height: 100%
@@ -98,18 +98,20 @@
   overflow: hidden
 
   .v-list-item
-    justify-content: center
-
     > *:first-child
       margin-left: 0
       margin-right: 0
 
     > *:not(:first-child)
-      display: none
+      @include visually-hidden
 
   .v-list-group--no-action .v-list-group__items,
   .v-list-group--sub-group
     display: none
+
+  &.v-navigation-drawer--custom-mini-variant
+    .v-list-item
+      justify-content: center
 
 .v-navigation-drawer--temporary
   z-index: 7
@@ -117,7 +119,10 @@
 .v-navigation-drawer--mobile
   z-index: 6
 
+.v-navigation-drawer--close
+  visibility: hidden
+
 .v-navigation-drawer--is-mobile,
 .v-navigation-drawer--temporary
   &:not(.v-navigation-drawer--close)
-    +elevation(16)
+    +elevation($navigation-drawer-mobile-temporary-elevation)

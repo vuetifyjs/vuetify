@@ -55,7 +55,7 @@
           text: vm.$t('Vuetify.AppDrawer.consulting'),
         },
         {
-          href: 'https://community.vuetifyjs.com/',
+          href: 'https://community.vuetifyjs.com',
           icon: 'mdi-discord',
           text: vm.$t('Vuetify.AppToolbar.community'),
         },

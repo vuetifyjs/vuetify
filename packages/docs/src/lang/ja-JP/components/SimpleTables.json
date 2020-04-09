@@ -1,1 +1,27 @@
-{}
+{
+  "heading": "# シンプル・テーブル",
+  "headingText": "'v-simple-table' コンポーネントは、'<table>' 要素を囲む単純なラッパーコンポーネントです。コンポーネント内では、'<thead>'、'<tbody>'、'<tr>' などのすべての通常のテーブル要素を使用できます。",
+  "examples": {
+    "usage": {
+      "desc": "シンプル・テーブルは'<table>'要素を囲むラッパーコンポーネントです。"
+    },
+    "height": {
+      "desc": "テーブルの高さを設定するには、`height` propを使用します。"
+    },
+    "fixed-header": {
+      "desc": "`fixed-header` propを`height` propと一緒に使用して、ヘッダーをテーブルの一番上に固定します。"
+    },
+    "dense": {
+      "desc": "`dense` propを使用して、各行の高さが低くなったテーブルを表示できます。"
+    },
+    "dark": {
+      "heading": "### ダークテーマ",
+      "desc": "テーブルをダーク表示に切り替えるには、`dark` propを使用します。"
+    }
+  },
+  "props": {
+    "v-simple-table": {
+      "height": "Mixins.Measurable.props.height"
+    }
+  }
+}

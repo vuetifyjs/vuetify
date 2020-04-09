@@ -1,1 +1,14 @@
-{}
+{
+  "heading": "# リサイズ・ディレクティブ",
+  "headingText": "`v-resize`ディレクティブによって、ウィンドウサイズが変更されたときに特定の関数を呼び出すことができます。",
+  "examples": {
+    "usage": {
+      "desc": "ウィンドウサイズの変更を監視し、値を変更します。",
+      "uninverted": true
+    }
+  },
+  "options": {
+    "modifiers.quiet": "`v-resize.quiet=\"callback\"` バインド時に指定されたコールバックを自動的に**呼び出しません**。",
+    "value": "`v-resize=\"callback\"` ウィンドウのサイズ変更時に呼び出す関数"
+  }
+}

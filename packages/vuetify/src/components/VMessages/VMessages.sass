@@ -1,4 +1,4 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 /* Theme */
 +theme(v-messages) using ($material)
@@ -6,8 +6,8 @@
 
 .v-messages
   flex: 1 1 auto
-  font-size: 12px
-  min-height: 14px
+  font-size: $messages-font-size
+  min-height: $messages-min-height
   min-width: 1px // Ensure takes up space with no messages and inside of flex
   position: relative
 
@@ -18,7 +18,7 @@
     text-align: right
 
   &__message
-    line-height: normal
+    line-height: $messages-line-height
     word-break: break-word
     overflow-wrap: break-word
     word-wrap: break-word

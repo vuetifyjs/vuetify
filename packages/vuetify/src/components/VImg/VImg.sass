@@ -1,4 +1,4 @@
-@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 // Block
 .v-image
@@ -18,7 +18,7 @@
   background-repeat: no-repeat
 
   &--preload
-    filter: blur(2px)
+    filter: $img-preload-filter
 
   &--contain
     background-size: contain

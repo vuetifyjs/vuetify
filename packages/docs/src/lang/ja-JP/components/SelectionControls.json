@@ -1,1 +1,63 @@
-{}
+{
+  "heading": "# 選択コントロール",
+  "headingText": "選択コントロール・コンポーネントを使用すると、ユーザーはオプションを選択できます。これらのコンポーネントは、**状態を維持しない**ので、'v-model'propを使用する必要があります。",
+  "examples": {
+    "checkboxes-boolean": {
+      "heading": "### チェックボックス - 真偽値"
+    },
+    "checkboxes-array": {
+      "heading": "### チェックボックス - 配列"
+    },
+    "checkboxes-states": {
+      "heading": "### チェックボックス - 状態"
+    },
+    "checkboxes-colors": {
+      "heading": "### チェックボックス - カラー",
+      "desc": "チェックボックスは、組み込みの色とコンテキスト名を使用し、`color` propで色付けすることができます。"
+    },
+    "checkboxes-inline-textfield": {
+      "heading": "### チェックボックス - テキストフィールドを含むインライン"
+    },
+    "radios-direction": {
+      "desc": "ラジオグループは、それぞれのpropsを使用して、行（row）または列（column）にできます。既定値は column です。"
+    },
+    "radios-colors": {
+      "desc": "ラジオボタンは、組み込みの色とコンテキスト名を使用し、`color` propで色付けすることができます。"
+    },
+    "switches-boolean": {
+      "heading": "### スイッチ - 真偽値"
+    },
+    "switches-array": {
+      "heading": "### スイッチ - 配列"
+    },
+    "switches-states": {
+      "heading": "### スイッチ - 状態"
+    },
+    "switches-colors": {
+      "heading": "### スイッチ - カラー",
+      "desc": "スイッチは、組み込みの色とコンテキスト名を使用し、`color` propで色付けすることができます。"
+    },
+    "switches-flat": {
+      "heading": "### スイッチ - フラット"
+    },
+    "label-slot": {
+      "heading": "### Label スロット",
+      "desc": "選択コントロールのラベルは、`label` スロットで定義できます - HTML コンテンツを使用することができます"
+    }
+  },
+  "props": {
+    "column": "ラジオ ボタンを列表示します。",
+    "dark": "Components.Inputs.props.dark",
+    "row": "ラジオ ボタンを行表示します。",
+    "v-simple-checkbox": {
+      "color": "Mixins.Colorable.props.color",
+      "disabled": "シンプルチェック ボックスを無効にします。",
+      "light": "Mixins.Themeable.props.light",
+      "ripple": "Mixins.Rippleable.props.ripple",
+      "value": "シンプルチェック ボックスがオンになっているかどうかを表す真偽値。"
+    }
+  },
+  "events": {
+    "change": "ユーザーの操作によって値が変更されたときに発生します。"
+  }
+}

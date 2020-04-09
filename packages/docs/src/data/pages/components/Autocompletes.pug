@@ -1,0 +1,35 @@
+usage-new(:value=`{
+  selects: [
+    {
+      prop: 'filter',
+      label: 'Filter',
+      attrs: {
+        items: [
+          'Exact Match',
+          'Search Length > 2 & Loose Match'
+        ]
+      }
+    }
+  ]
+}`)
+alert(value="error") Components.Selects.objectAlert
+alert(value="warning") Components.Selects.autoAlert
+alert(value="info") Components.Selects.autocompleteAlert
+api(:value=`[
+  'v-autocomplete'
+]`)
+examples(:value=`[
+  'simple/api',
+  'simple/customFilter',
+  'simple/dense',
+  'intermediate/slots',
+  'intermediate/asynchronous',
+  'intermediate/advanced',
+  'complex/stateSelector'
+]`)
+
+up-next(:value=`[
+  'components/combobox',
+  'components/forms',
+  'components/selects'
+]`)

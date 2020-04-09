@@ -30,6 +30,7 @@ function getHeadings (children, toc = []) {
         'heading',
         'up-next',
         'usage-new',
+        'variable-api',
       ].includes(child.type)
     ) continue
 
@@ -55,10 +56,14 @@ function getNamespace (namespace) {
   }
 }
 
-function addFooterAd (children) {
+function addFooterAd (children = []) {
   if (!children.length) return
 
-  children[children.length - 1].children.push({ type: 'ad-exit' })
+  const index = children.length - 1
+  const childChildren = children[index].children || []
+
+  childChildren.push({ type: 'ad-exit' })
+  children[index].children = childChildren
 }
 
 const state = {
@@ -81,6 +86,9 @@ const getters = {
     if (!rootState.route) return []
 
     const namespace = rootState.route.params.namespace
+
+    if (!namespace) return []
+
     const lang = rootState.route.params.lang
     const path = rootState.route.path
     const text = getNamespace(namespace)

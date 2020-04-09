@@ -1,4 +1,5 @@
 export default {
+  badge: 'תג',
   close: 'סגור',
   dataIterator: {
     noResultsText: 'לא נמצאו תוצאות מתאימות',
@@ -7,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'שורות לעמוד:',
     ariaLabel: {
-      sortDescending: ': ממוין לפי סדר עולה. לחץ להספקת המיון.',
-      sortAscending: ': ממוין לפי סדר יורד. לחץ למיון לפי סדר עולה.',
-      sortNone: ': לא ממוין. לחץ למיון לפי סדר עולה.',
+      sortDescending: 'ממוין לפי סדר עולה. לחץ להספקת המיון.',
+      sortAscending: 'ממוין לפי סדר יורד. לחץ למיון לפי סדר עולה.',
+      sortNone: 'לא ממוין. לחץ למיון לפי סדר עולה.',
+      activateNone: 'הפעל להסרת המיון.',
+      activateDescending: 'הפעל למיון יורד.',
+      activateAscending: 'הפעל למיון עולה.',
     },
     sortBy: 'סדר לפי',
   },

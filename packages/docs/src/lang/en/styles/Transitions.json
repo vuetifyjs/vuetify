@@ -25,13 +25,17 @@
       "heading": "### Scale transition",
       "desc": "Many of Vuetify's components contain a <code>transition</code> prop which allows you to specify your own."
     },
+    "fab-transition": {
+      "heading": "### Fab transition",
+      "desc": "An example of the fab transition can be found in the `v-speed-dial` component."
+    },
     "fade-transition": {
       "heading": "### Fade transition",
-      "desc": "Another example of the fade transition can be found on the Carousel component."
+      "desc": "An example of the fade transition can be found on the Carousel component."
     },
     "expand-transition": {
       "heading": "### Expand transition",
-      "desc": "The expand transition is used in Expansion Panels and List Groups. There is also a horizonal version available with `v-expand-x-transition`."
+      "desc": "The expand transition is used in Expansion Panels and List Groups. There is also a horizontal version available with `v-expand-x-transition`."
     },
     "custom-origin": {
       "heading": "### Custom Origin",

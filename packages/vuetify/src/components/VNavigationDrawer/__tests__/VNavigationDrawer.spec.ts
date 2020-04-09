@@ -182,7 +182,7 @@ describe('VNavigationDrawer', () => { // eslint-disable-line max-statements
     expect(wrapper.vm.$vuetify.application.left).toBe(256)
 
     wrapper.setProps({ miniVariant: true })
-    expect(wrapper.vm.$vuetify.application.left).toBe(80)
+    expect(wrapper.vm.$vuetify.application.left).toBe(56)
 
     wrapper.setProps({ miniVariant: false })
     expect(wrapper.vm.$vuetify.application.left).toBe(256)
@@ -425,15 +425,15 @@ describe('VNavigationDrawer', () => { // eslint-disable-line max-statements
     })
 
     expect(wrapper.vm.isMouseover).toBe(false)
-    expect(wrapper.vm.computedWidth).toBe(80)
+    expect(wrapper.vm.computedNavigationWidth).toBe(56)
 
     wrapper.trigger('mouseenter')
     expect(wrapper.vm.isMouseover).toBe(true)
-    expect(wrapper.vm.computedWidth).toBe(256)
+    expect(wrapper.vm.computedNavigationWidth).toBe(256)
 
     wrapper.trigger('mouseleave')
     expect(wrapper.vm.isMouseover).toBe(false)
-    expect(wrapper.vm.computedWidth).toBe(80)
+    expect(wrapper.vm.computedNavigationWidth).toBe(56)
   })
 
   it('should clip top', () => {

@@ -1,1 +1,33 @@
-{}
+{
+  "heading": "# オーバーレイ",
+  "headingText": "`v-overlay`コンポーネントは、特定の要素またはその一部を強調するために使用されます。アプリケーション内の状態変更をユーザーに通知し、ローダー、ダイアログなどの作成に使用できます。",
+  "examples": {
+    "usage": {
+      "desc": "最も単純な形式では、 'v-overlay'コンポーネントはアプリケーションの上に淡色表示のレイヤーを追加します。"
+    },
+    "absolute": {
+      "heading": "### 絶対配置",
+      "desc": "`absolute` オーバーレイは絶対位置指定で配置され、親要素の内部に含まれます。"
+    },
+    "opacity": {
+      "heading": "### 不透明度",
+      "desc": "`opacity`を設定することで、`v-overlay`コンポーネントの透明度をカスタマイズできます。"
+    },
+    "z-index": {
+      "heading": "### Z Index （表示レイヤの順序指定）",
+      "desc": "`z-index`を使用すると、`v-overlay`コンポーネントのスタック順序を簡単に変更できます。"
+    },
+    "loader": {
+      "heading": "### ローディング",
+      "desc": "'v-overlay' を背景にし、進行状況表示コンポーネントを追加して、カスタム ローダーを簡単に作成できます。"
+    },
+    "advanced": {
+      "heading": "### 高度な使い方",
+      "desc": "[v-hover](/components/hover) を使用して、情報カードに素敵なスクリムを追加し、ユーザーが実行できるアクションを追加できます。"
+    }
+  },
+  "props": {
+    "absolute": "Mixins.Positionable.props.absolute",
+    "zIndex": "Mixins.Menuable.props.zIndex"
+  }
+}

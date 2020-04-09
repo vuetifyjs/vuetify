@@ -1,10 +1,23 @@
 {
-  "name": "vuetifyjs.com",
-  "alias": "vuetifyjs.com",
+  "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": true,
+  "rewrites": [
+    {
+      "source": "/eo-UY/(.*)",
+      "destination": "/_crowdin"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/_fallback"
+    }
+  ],
   "github": {
     "autoAlias": false,
     "silent": true
-  },
-  "version": 1,
-  "type": "docker"
+  }
 }

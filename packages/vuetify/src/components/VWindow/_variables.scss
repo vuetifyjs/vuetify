@@ -1,0 +1,5 @@
+@import '../../styles/styles.sass';
+
+$window-transition: .3s cubic-bezier(.25, .8, .50, 1) !default;
+$window-controls-margin: 0 16px !default;
+$window-controls-top: calc(50% - 20px) !default;

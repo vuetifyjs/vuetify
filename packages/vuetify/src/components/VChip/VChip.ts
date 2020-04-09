@@ -21,7 +21,7 @@ import Sizeable from '../../mixins/sizeable'
 import { breaking } from '../../util/console'
 
 // Types
-import { PropValidator } from 'vue/types/options'
+import { PropValidator, PropType } from 'vue/types/options'
 
 /* @vue/component */
 export default mixins(
@@ -68,7 +68,7 @@ export default mixins(
       default: 'span',
     },
     textColor: String,
-    value: null as any as PropValidator<any>,
+    value: null as any as PropType<any>,
   },
 
   data: () => ({
@@ -144,10 +144,12 @@ export default mixins(
         staticClass: 'v-chip__close',
         props: {
           right: true,
+          size: 18,
         },
         on: {
           click: (e: Event) => {
             e.stopPropagation()
+            e.preventDefault()
 
             this.$emit('click:close')
             this.$emit('update:active', false)

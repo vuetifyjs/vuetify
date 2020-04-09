@@ -1,13 +1,13 @@
 <template>
-  <div>
-    <base-heading>Generic.Pages.usage</base-heading>
+  <section>
+    <base-heading id="usage">Generic.Pages.usage</base-heading>
     <doc-text>{{ `${namespace}.${page}.examples.${internalValue.file}.desc` }}</doc-text>
     <doc-example
       :id="`usage-${-1}`"
       :value="internalValue"
       eager
     />
-  </div>
+  </section>
 </template>
 
 <script>

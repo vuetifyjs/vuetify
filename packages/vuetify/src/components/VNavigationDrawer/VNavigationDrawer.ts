@@ -15,15 +15,15 @@ import Themeable from '../../mixins/themeable'
 // Directives
 import ClickOutside from '../../directives/click-outside'
 import Resize from '../../directives/resize'
-import Touch, { TouchWrapper } from '../../directives/touch'
+import Touch from '../../directives/touch'
 
 // Utilities
 import { convertToUnit, getSlot } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
 // Types
-import { VNode, VNodeDirective } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { VNode, VNodeDirective, PropType } from 'vue'
+import { TouchWrapper } from 'types'
 
 const baseMixins = mixins(
   Applicationable('left', [
@@ -42,6 +42,9 @@ const baseMixins = mixins(
   SSRBootable,
   Themeable
 )
+
+const DEFAULT_WIDTH = 256
+const DEFAULT_MINI_VARIANT_WIDTH = 56
 
 /* @vue/component */
 export default baseMixins.extend({
@@ -75,7 +78,7 @@ export default baseMixins.extend({
     miniVariant: Boolean,
     miniVariantWidth: {
       type: [Number, String],
-      default: 80,
+      default: DEFAULT_MINI_VARIANT_WIDTH,
     },
     mobileBreakPoint: {
       type: [Number, String],
@@ -84,9 +87,9 @@ export default baseMixins.extend({
     permanent: Boolean,
     right: Boolean,
     src: {
-      type: [String, Object],
+      type: [String, Object] as PropType<string | srcObject>,
       default: '',
-    } as PropValidator<string | srcObject>,
+    },
     stateless: Boolean,
     tag: {
       type: String,
@@ -98,9 +101,9 @@ export default baseMixins.extend({
     touchless: Boolean,
     width: {
       type: [Number, String],
-      default: 256,
+      default: DEFAULT_WIDTH,
     },
-    value: { required: false } as PropValidator<any>,
+    value: null as unknown as PropType<any>,
   },
 
   data: () => ({
@@ -132,6 +135,7 @@ export default baseMixins.extend({
         'v-navigation-drawer--is-mobile': this.isMobile,
         'v-navigation-drawer--is-mouseover': this.isMouseover,
         'v-navigation-drawer--mini-variant': this.isMiniVariant,
+        'v-navigation-drawer--custom-mini-variant': Number(this.miniVariantWidth) !== 56,
         'v-navigation-drawer--open': this.isActive,
         'v-navigation-drawer--open-on-hover': this.expandOnHover,
         'v-navigation-drawer--right': this.right,
@@ -168,8 +172,15 @@ export default baseMixins.extend({
       if (this.isBottom) return 100
       return this.right ? 100 : -100
     },
-    computedWidth (): string | number {
-      return this.isMiniVariant ? this.miniVariantWidth : this.width
+    computedApplicationWidth (): string | number {
+      return this.expandOnHover || this.miniVariant
+        ? this.miniVariantWidth
+        : this.width
+    },
+    computedNavigationWidth (): string | number {
+      return this.isMiniVariant
+        ? this.miniVariantWidth
+        : this.width
     },
     hasApp (): boolean {
       return (
@@ -224,6 +235,7 @@ export default baseMixins.extend({
     },
     showOverlay (): boolean {
       return (
+        !this.hideOverlay &&
         this.isActive &&
         (this.isMobile || this.temporary)
       )
@@ -237,7 +249,7 @@ export default baseMixins.extend({
           ? `calc(100% - ${convertToUnit(this.computedMaxHeight)})`
           : undefined,
         transform: `${translate}(${convertToUnit(this.computedTransform, '%')})`,
-        width: convertToUnit(this.computedWidth),
+        width: convertToUnit(this.computedNavigationWidth),
       }
 
       return styles
@@ -444,9 +456,15 @@ export default baseMixins.extend({
         !this.$el
       ) return 0
 
-      const width = Number(this.computedWidth)
+      const width = Number(this.computedApplicationWidth)
 
-      return isNaN(width) ? this.$el.clientWidth : width
+      if (isNaN(width)) {
+        return this.expandOnHover || this.miniVariant
+          ? DEFAULT_MINI_VARIANT_WIDTH
+          : DEFAULT_WIDTH
+      }
+
+      return width
     },
     updateMiniVariant (val: boolean) {
       if (this.miniVariant !== val) this.$emit('update:mini-variant', val)

@@ -21,7 +21,7 @@ export default VSlider.extend({
     value: {
       type: Array,
       default: () => ([0, 0]),
-    } as PropValidator<number[]>,
+    } as unknown as PropValidator<[number, number]>,
   },
 
   data () {
@@ -46,7 +46,7 @@ export default VSlider.extend({
         // Round value to ensure the
         // entire slider range can
         // be selected with step
-        let value = val.map(v => this.roundValue(Math.min(Math.max(v, this.minValue), this.maxValue)))
+        let value = val.map((v = 0) => this.roundValue(Math.min(Math.max(v, this.minValue), this.maxValue)))
 
         // Switch values if range and wrong order
         if (value[0] > value[1] || value[1] < value[0]) {
@@ -107,6 +107,7 @@ export default VSlider.extend({
         input.data = input.data || {}
         input.data.attrs = input.data.attrs || {}
         input.data.attrs.value = this.internalValue[i]
+        input.data.attrs.id = `input-${i ? 'max' : 'min'}-${this._uid}`
 
         return input
       })

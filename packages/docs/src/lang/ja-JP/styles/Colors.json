@@ -1,1 +1,13 @@
-{}
+{
+  "heading": "# カラー",
+  "headingText": "追加設定なしに**Sass**と**javascript**から [Material Design spec](https://material.io/guidelines/style/color.html) のすべての色にアクセスできます。これらの値は、スタイルシート内、コンポーネントファイル内、および **color class** システムを介して実際のコンポーネントで使用できます。",
+  "classesHeader": "## クラス",
+  "classesText": "MD仕様の各色は、クラスを通じてアプリケーション内でスタイリングするための**background**と**text**バリアントに変換されます。これらのクラスの色は [こちら](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_colors.scss) で定義されています。",
+  "classesText2": "テキストの色は、`text--{lighten|darken}-{n}` を使用した **darken** と **lighten** のバリアントもサポートしています。",
+  "javascriptPackHeader": "## Javascript color pack",
+  "javascriptPackText": "Vuetify には、アプリケーション内でインポートして使用できるオプションの javascript カラーパックがあります。これは、アプリケーションのテーマを定義するのにも使用できます。",
+  "sassPackHeader": "## Sass color pack",
+  "sassPackText": "カラーパックは便利ですが、CSSエクスポートサイズを最大30 KB増やします。プロジェクトによっては、Vuetifyブートストラップから実行時に作成されるデフォルトの提供クラスのみが必要な場合があります。この機能を無効にするには、メインの**sass**ファイルを _手動でインポート_ してビルドする必要があります。これには [Sass loader](https://github.com/webpack-contrib/sass-loader) と `.sass` /`.scss`ファイルエントリが必要です。",
+  "sassPackText2": "作成した`main.sass`ファイルは、プロジェクトに含める必要があります。",
+  "alert": "`sass`を使用するには、webpackセットアップを設定する**必要**があります。 [既成のテンプレート](/getting-started/quick-start#new-applications) では設定済となっています。"
+}

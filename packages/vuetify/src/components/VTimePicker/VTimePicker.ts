@@ -12,18 +12,13 @@ import pad from '../VDatePicker/util/pad'
 import mixins from '../../util/mixins'
 
 // Types
-import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { VNode, PropType } from 'vue'
+import { SelectingTimes } from './SelectingTimes'
 
 const rangeHours24 = createRange(24)
 const rangeHours12am = createRange(12)
 const rangeHours12pm = rangeHours12am.map(v => v + 12)
 const range60 = createRange(60)
-enum SelectingTimes {
-  Hour = 1,
-  Minute = 2,
-  Second = 3
-}
 const selectingNames = { 1: 'hour', 2: 'minute', 3: 'second' }
 export { SelectingTimes }
 
@@ -38,29 +33,23 @@ export default mixins(
   name: 'v-time-picker',
 
   props: {
-    allowedHours: {
-      type: [Function, Array],
-    } as PropValidator<AllowFunction | number[]>,
-    allowedMinutes: {
-      type: [Function, Array],
-    } as PropValidator<AllowFunction | number[]>,
-    allowedSeconds: {
-      type: [Function, Array],
-    } as PropValidator<AllowFunction | number[]>,
+    allowedHours: [Function, Array] as PropType<AllowFunction | number[]>,
+    allowedMinutes: [Function, Array] as PropType<AllowFunction | number[]>,
+    allowedSeconds: [Function, Array] as PropType<AllowFunction | number[]>,
     disabled: Boolean,
     format: {
-      type: String,
+      type: String as PropType<'ampm' | '24hr'>,
       default: 'ampm',
       validator (val) {
         return ['ampm', '24hr'].includes(val)
       },
-    } as PropValidator<'ampm' | '24hr'>,
+    },
     min: String,
     max: String,
     readonly: Boolean,
     scrollable: Boolean,
     useSeconds: Boolean,
-    value: null as any as PropValidator<any>,
+    value: null as any as PropType<any>,
     ampmInTitle: Boolean,
   },
 
@@ -349,7 +338,8 @@ export default mixins(
     genPickerTitle () {
       return this.$createElement(VTimePickerTitle, {
         props: {
-          ampm: this.ampmInTitle && this.isAmPm,
+          ampm: this.isAmPm,
+          ampmReadonly: this.isAmPm && !this.ampmInTitle,
           disabled: this.disabled,
           hour: this.inputHour,
           minute: this.inputMinute,
@@ -361,7 +351,7 @@ export default mixins(
         },
         on: {
           'update:selecting': (value: 1 | 2 | 3) => (this.selecting = value),
-          'update:period': this.setPeriod,
+          'update:period': (period: string) => this.$emit('update:period', period),
         },
         ref: 'title',
         slot: 'title',

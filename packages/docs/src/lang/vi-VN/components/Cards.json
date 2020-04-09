@@ -1,10 +1,4 @@
 {
-  "componentsHeader": "### Các component chức năng",
-  "componentsList": [
-    "`v-card-actions`: Tạo ra một không gian dành cho các **actions** của card, như [v-btn](/components/buttons) hoặc [v-menu](/components/menus). Đồng thời áp dụng _special margin_ để nút nút có khoảng cách dòng khác với các khu vực khác của card.",
-    "`v-card-text`: Khu vực chính để đặt **nội dung** của card. Áp dụng padding, giảm kích thước font thành .875rem và màu chữ thành xám.",
-    "`v-card-title`: Khu vực để tiêu đề của thẻ được thiết lập **font-size** and **padding** riêng. Kích thước chữ có thể thay đổi trong classes typography (/styles/typography)."
-  ],
   "examples": {
     "horizontal": {
       "desc": "Sử dụng `v-flex`, bạn có thể tạo card dạng ngang. Sử dụng thuộc tính `contain` để shrink `v-img` component vừa với hình ảnh, thay vì dùng covering."

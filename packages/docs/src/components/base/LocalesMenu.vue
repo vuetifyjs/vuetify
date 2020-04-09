@@ -1,26 +1,34 @@
 <template>
   <v-menu
-    max-height="calc(100% - 16px)"
+    bottom
+    left
     offset-y
-    right
-    top
-    transition="slide-y-reverse-transition"
+    max-height="calc(100% - 16px)"
+    transition="slide-y-transition"
   >
     <template v-slot:activator="{ attrs, on }">
       <v-btn
         :aria-label="$t('Vuetify.AppToolbar.translations')"
-        class="text--secondary text-capitalize mr-3"
-        icon
+        class="text-capitalize"
+        text
         v-bind="attrs"
         v-on="on"
       >
-        <v-icon v-if="currentLanguage.locale === 'eo-UY'">mdi-web</v-icon>
+        <v-icon :left="$vuetify.breakpoint.mdAndUp">
+          mdi-{{ currentLanguage.locale === 'eo-UY' ? 'web' : 'translate' }}
+        </v-icon>
 
-        <v-img
-          v-else
-          :src="`https://cdn.vuetifyjs.com/images/flags/${currentLanguage.country}.png`"
-          max-width="22px"
+        <span
+          class="subtitle-1 text-capitalize font-weight-light hidden-sm-and-down"
+          v-text="currentLanguage.name"
         />
+
+        <v-icon
+          class="hidden-sm-and-down"
+          right
+        >
+          mdi-menu-down
+        </v-icon>
       </v-btn>
     </template>
 
@@ -28,25 +36,20 @@
       dense
       nav
     >
-      <v-list-item
-        v-for="language in languages"
-        :key="language.locale"
-        @click="translateI18n(language)"
-      >
-        <v-list-item-avatar
-          tile
-          size="24px"
+      <template v-for="(language, i) in languages">
+        <v-list-item
+          :key="language.locale"
+          @click="translateI18n(language)"
         >
-          <v-icon v-if="language.locale === 'eo-UY'">mdi-web</v-icon>
+          <v-list-item-title v-text="language.name" />
+        </v-list-item>
 
-          <v-img
-            v-else
-            :src="`https://cdn.vuetifyjs.com/images/flags/${language.country}.png`"
-            width="24px"
-          />
-        </v-list-item-avatar>
-        <v-list-item-title v-text="language.name" />
-      </v-list-item>
+        <v-divider
+          v-if="i === languages.length - 2"
+          :key="`divider-${i}`"
+          class="mb-1"
+        />
+      </template>
     </v-list>
   </v-menu>
 </template>
@@ -83,8 +86,8 @@
 
         this.$router.replace({ params: { lang } })
 
-        if (typeof document !== 'undefined') {
-          document.cookie = `currentLanguage=${lang};path=/;max-age=${60 * 60 * 24 * 7}` // expires in 7 days
+        if (lang !== 'eo-UY') {
+          window.localStorage.setItem('currentLanguage', lang)
         }
       },
     },

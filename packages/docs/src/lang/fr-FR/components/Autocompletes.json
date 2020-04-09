@@ -1,8 +1,6 @@
 {
+  "usageText": "Le composant d'auto-complétion hérite de `v-select` et ajoute la capacité de filtrer les éléments.",
   "examples": {
-    "usage": {
-      "desc": "Le composant d'auto-complétion hérite de `v-select` et ajoute la capacité de filtrer les éléments."
-    },
     "api": {
       "desc": "Branchez facilement les données dynamiques et créez une expérience unique. La liste de propriétés expansive de v-autocomplete`permet de régler facilement tous les aspects de l'entrée."
     },
@@ -31,33 +29,8 @@
     "allowOverflow": "Permet au menu de déborder hors de l'écran",
     "autoSelectFirst": "Lors de la recherche, la première option sera toujours mise en évidence",
     "dark": "Components.Inputs.props.dark",
-    "filled": "Components.TextFields.props.filled",
     "filter": "L'algorithme de filtrage utilisé lors de la recherche. [example](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/components/VAutocomplete/VAutocomplete.ts#L36)",
     "hideNoData": "Masque le menu lorsqu'il n'y a pas d'options à afficher. Utile pour empêcher le menu de s'ouvrir avant que les résultats ne soient récupérés de manière asynchrone. Il a également l'effet d'ouvrir le menu lorsque le tableau `items` change, s'il n'est pas déjà ouvert.",
-    "noFilter": "Ne pas appliquer le filtrage lors de la recherche. Utile lorsque les données sont filtrées côté serveur",
-    "searchInput": "Valeur de recherche. Peut être utilisé avec le modificateur `.sync`.",
-    "value": "Components.Inputs.props.value"
-  },
-  "slots": {
-    "append": "Components.Inputs.slots.append",
-    "append-item": "Components.Selects.slots.append-item",
-    "append-outer": "Components.TextFields.slots.append-outer",
-    "item": "Composants.Selects.slots.item",
-    "no-data": "Mixins.Filterable.slots.noData",
-    "prepend": "Components.Inputs.slots.prepend",
-    "prepend-inner": "Components.TextFields.slots.prepend-inner",
-    "prepend-item": "Components.Selects.slots.prepend-item",
-    "selection": "Sélection de Components.Selects.slots.selection"
-  },
-  "events": {
-    "change": "Components.Inputs.events.change",
-    "click:append": "Components.Inputs.events['click:append']",
-    "click:append-outer": "Components.TextFields.events['click:append-outer']",
-    "click:clear": "Components.TextFields.events['click:clear']",
-    "click:prepend": "Components.Inputs.events['click:prepend']",
-    "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
-    "update:error": "Mixins.Validatable.events['update:error']",
-    "update:list-index": "Components.Selects.events['update:list-index']",
-    "update:search-input": "L'événement `search-input.sync`"
+    "noFilter": "Ne pas appliquer le filtrage lors de la recherche. Utile lorsque les données sont filtrées côté serveur"
   }
 }

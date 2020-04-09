@@ -1,9 +1,10 @@
 {
   "heading": "# Internationalization (i18n)",
-  "headingText": "Vuetify supports language Internationalization (i18n) of its components. When bootstrapping your application you can specify available locales and the currently active locale with the **current** option. The **lang** service also supports easy integration with [vue-i18n](#vue-i18n).",
+  "headingText": "Vuetify supports language Internationalization (i18n) of its components. When bootstrapping your application you can specify available locales and the currently active locale with the **current** option. The **lang** service also supports easy integration with [vue-i18n](#vue-i-18-n).",
   "gettingStarted": "## Getting started",
   "gettingStartedText": "To set the available locales or the current locale, supply the `lang` option when installing Vuetify. The provided `locales` property will be merged with the already existing locales. You can change the locale during runtime through the `$vuetify` object on the Vue instance.",
   "availableLocalesText": "Currently Vuetify provides translations in the following languages:",
+  "alertInfo": "Vuetify provides only a basic translation function `t`. It is recommended for more advanced internationalization functions to make use of Vuetifys integration with [vue-i18n](#vue-i-18-n)",
   "createTranslation": "## Create a translation",
   "createTranslationText": "To create your own translation, use the code below or copy and rename the file `vuetify/src/locale/en.ts` to your project and make your changes.",
   "customComponents": "## Custom components",

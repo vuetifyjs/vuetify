@@ -1,14 +1,18 @@
 {
+  "heading": "# データイテレータ",
+  "headingText": "`v-data-iterator`コンポーネントはデータの表示に使用され、その機能の大部分を`v-data-table`コンポーネントと共有します。機能にはソート、検索、ページネーション、および選択が含まれます。",
+  "usageText": "`v-data-iterator`を使用すると、データの表示方法を正確にカスタマイズできます。この例では、カードのあるグリッドを使用しています。",
   "examples": {
     "slots": {
+      "heading": "### スロット",
       "desc": "`v-data-iterator`はその他のコンテンツの追加するためのheaderとfooterのslotを持っています。"
     },
     "expand": {
-      "desc": "`v-data-iterator` は選択されているか、ちょうど`v-data-table`のように拡大されているかの状態を持っています。このサンプルではデフォルトslotで`isExpanded`メソッドとに`expand`を使えるようになっています。"
+      "desc": "`v-data-iterator` は選択されているか、ちょうど`v-data-table`のように拡大されているかの状態を持っています。この例では、デフォルトのスロットで利用可能なメソッド `isExpanded`と` expand`を使用します。"
     },
     "filter": {
       "heading": "### フィルター",
-      "desc": "オーダー、フィルター、ページネーションが、それぞれのプロパティを使うことで外部からコントロールできます。"
+      "desc": "ソート順、フィルタ、ページネーションは、それぞれのプロパティを設定することで外部からコントロールできます。"
     }
   },
   "props": {
@@ -17,8 +21,30 @@
       "footerProps": "詳細は、`v-data-footer` APIを参照してください。",
       "hideDefaultFooter": "デフォルトのfooterを隠します。",
       "itemKey": "各itemでユニークキーとして使われるプロパティ。",
-      "loading": "もし`true`にして、itemsが設定されなかった場合、ローディングテキストが表示されます。",
+      "loading": "もし`true`にして、itemsが設定されなかった場合、ここに設定したローディングテキストが表示されます。",
       "loadingText": "`loading`がtrueで、itemsが何も設定されなかった場合に表示されるテキスト。"
+    },
+    "v-data-footer": {
+      "disablePagination": "ページネーションボタンを無効にします",
+      "showFirstLastPage": "最初/最後のアイコンを表示する"
+    }
+  },
+  "slots": {
+    "v-data-iterator": {
+      "loading": "`loading` が true で、itemsが何も設定されなかった場合のコンテンツを定義します。",
+      "no-data": "itemsが提供されない場合のコンテンツを定義します",
+      "no-results": "`search` が提供されているが、結果が見つからない場合のコンテンツを定義します。"
+    }
+  },
+  "events": {
+    "v-data-iterator": {
+      "input": "選択した項目の配列",
+      "item-expanded": "項目が展開または閉じられたときに発生するイベント",
+      "item-selected": "アイテムが選択または選択解除されたときに発生するイベント",
+      "update:expanded": "`expanded`プロパティの`.sync`イベント"
+    },
+    "v-data-footer": {
+      "update:options": "`options`プロパティの`.sync`イベント"
     }
   }
 }

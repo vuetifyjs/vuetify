@@ -1,7 +1,7 @@
 {
   "examples": {
-    "usage": {
-      "uninverted": true
+    "icon": {
+      "heading": "### Ícone"
     },
     "outlined": {
       "heading": "### Contorno"

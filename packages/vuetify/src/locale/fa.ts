@@ -1,4 +1,5 @@
 export default {
+  badge: 'نشان',
   close: 'بستن',
   dataIterator: {
     noResultsText: 'نتیجه‌ای یافت نشد',
@@ -7,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'ردیف در صفحه:',
     ariaLabel: {
-      sortDescending: ': نزولی مرتب شده است. فعال‌سازی برای حذف مرتب‌سازی.',
-      sortAscending: ': صعودی مرتب شده است. فعال‌سازی برای مرتب‌سازی نزولی.',
-      sortNone: ': مرتب نشده است. فعال‌سازی برای مرتب‌سازی صعودی.',
+      sortDescending: 'نزولی مرتب شده است. فعال‌سازی برای حذف مرتب‌سازی.',
+      sortAscending: 'صعودی مرتب شده است. فعال‌سازی برای مرتب‌سازی نزولی.',
+      sortNone: 'مرتب نشده است. فعال‌سازی برای مرتب‌سازی صعودی.',
+      activateNone: 'Activate to remove sorting.',
+      activateDescending: 'Activate to sort descending.',
+      activateAscending: 'Activate to sort ascending.',
     },
     sortBy: 'مرتب‌سازی براساس',
   },
@@ -41,7 +45,7 @@ export default {
     counterSize: '{0} پرونده ({1} در کل)',
   },
   timePicker: {
-    am: 'AM',
-    pm: 'PM',
+    am: 'قبل از ظهر',
+    pm: 'بعد از ظهر',
   },
 }

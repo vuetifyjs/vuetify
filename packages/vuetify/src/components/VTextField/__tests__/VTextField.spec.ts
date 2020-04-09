@@ -549,6 +549,42 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     expect(counter.element.innerHTML).toBe('0 / 50')
   })
 
+  it('should use counter value function', async () => {
+    const wrapper = mountFunction({
+      attrs: {
+        maxlength: 25,
+      },
+      propsData: {
+        counter: true,
+        counterValue: (value?: string): number => (value || '').replace(/\s/g, '').length,
+      },
+    })
+
+    const counter = wrapper.find('.v-counter')
+
+    expect(counter.element.innerHTML).toBe('0 / 25')
+
+    wrapper.setProps({ value: 'foo bar baz' })
+
+    await wrapper.vm.$nextTick()
+
+    expect(counter.element.innerHTML).toBe('9 / 25')
+
+    wrapper.setProps({ counter: '50' })
+
+    await wrapper.vm.$nextTick()
+
+    expect(counter.element.innerHTML).toBe('9 / 50')
+
+    wrapper.setProps({
+      counterValue: (value?: string): number => (value || '').replace(/ba/g, '').length,
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(counter.element.innerHTML).toBe('7 / 50')
+  })
+
   it('should set bad input on input', () => {
     const wrapper = mountFunction()
 
@@ -601,13 +637,12 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
 
   it('should have focus and blur methods', async () => {
     const wrapper = mountFunction()
-    const focus = jest.fn()
-    const blur = jest.fn()
-    wrapper.vm.$on('focus', focus)
-    wrapper.vm.$on('blur', blur)
+    const onBlur = jest.spyOn(wrapper.vm.$refs.input, 'blur')
+    const onFocus = jest.spyOn(wrapper.vm.$refs.input, 'focus')
 
     wrapper.vm.focus()
-    expect(focus).toHaveBeenCalledTimes(1)
+
+    expect(onFocus).toHaveBeenCalledTimes(1)
 
     wrapper.vm.blur()
 
@@ -616,7 +651,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     // to resolve a bug in MAC / Safari
     await new Promise(resolve => window.requestAnimationFrame(resolve))
 
-    expect(blur).toHaveBeenCalledTimes(1)
+    expect(onBlur).toHaveBeenCalledTimes(1)
   })
 
   // TODO: this fails without sync, nextTick doesn't help
@@ -680,6 +715,24 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     expect(focus).toHaveBeenCalledTimes(1)
   })
 
+  it('should hide messages if no messages and hide-details is auto', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        hideDetails: 'auto',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ counter: 7 })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ counter: null, errorMessages: 'required' })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   // https://github.com/vuetifyjs/vuetify/issues/8268
   // TODO: this fails without sync, nextTick doesn't help
   // https://github.com/vuejs/vue-test-utils/issues/1130
@@ -738,5 +791,70 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
       'blur',
     ])
     expect(inputElement.element.value).toBe('')
+  })
+
+  // https://material.io/components/text-fields/#filled-text-field
+  it('should be single if using the filled prop with no label', () => {
+    const wrapper = mountFunction({
+      propsData: { filled: true },
+    })
+
+    expect(wrapper.vm.isSingle).toBe(true)
+
+    wrapper.setProps({ label: 'Foobar ' })
+
+    expect(wrapper.vm.isSingle).toBe(false)
+  })
+
+  it('should autofocus text-field when intersected', async () => {
+    const wrapper = mountFunction({
+      propsData: { autofocus: true },
+    })
+    const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
+
+    expect(document.activeElement === element).toBe(true)
+
+    element.blur()
+
+    expect(document.activeElement === element).toBe(false)
+
+    // Simulate observe firing that is visible
+    wrapper.vm.onObserve([], [], true)
+    expect(document.activeElement === element).toBe(true)
+
+    element.blur()
+
+    // Simulate observe firing that is not visible
+    wrapper.vm.onObserve([], [], false)
+    expect(document.activeElement === element).toBe(false)
+
+    element.blur()
+
+    wrapper.setProps({ autofocus: false })
+
+    // Simulate observe firing with no autofocus
+    wrapper.vm.onObserve([], [], true)
+    expect(document.activeElement === element).toBe(false)
+  })
+
+  it('should use the correct icon color when using the solo inverted prop', () => {
+    const wrapper = mountFunction({
+      propsData: { soloInverted: true },
+      mocks: {
+        $vuetify: {
+          theme: { dark: false },
+        },
+      },
+      provide: {
+        theme: { isDark: true },
+      },
+    })
+
+    expect(wrapper.vm.computedColor).toBe('white')
+
+    wrapper.vm.focus()
+
+    expect(wrapper.vm.computedColor).toBe('primary')
   })
 })

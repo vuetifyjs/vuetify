@@ -200,6 +200,8 @@ describe('VAutocomplete.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         clearable: true,
+        items: ['foo'],
+        value: 'foo',
       },
     })
 
@@ -220,7 +222,7 @@ describe('VAutocomplete.ts', () => {
   it('should propagate content class', () => {
     const wrapper = mountFunction({
       propsData: {
-        menuProps: { contentClass: 'foobar' },
+        menuProps: { contentClass: 'foobar', eager: true },
       },
     })
 

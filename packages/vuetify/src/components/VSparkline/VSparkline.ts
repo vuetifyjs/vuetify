@@ -1,9 +1,5 @@
-// Styles
-import './VSparkline.sass'
-
 // Mixins
 import Colorable from '../../mixins/colorable'
-import Themeable from '../../mixins/themeable'
 
 // Utilities
 import mixins, { ExtractVue } from '../../util/mixins'
@@ -12,7 +8,7 @@ import { genPath } from './helpers/path'
 
 // Types
 import Vue, { VNode } from 'vue'
-import { Prop, PropValidator } from 'vue/types/options'
+import { Prop } from 'vue/types/options'
 
 export type SparklineItem = number | { value: number }
 
@@ -41,12 +37,6 @@ export interface Bar {
   value: number
 }
 
-export interface BarText {
-  points: Point[]
-  boundary: Boundary
-  offsetX: number
-}
-
 interface options extends Vue {
   $refs: {
     path: SVGPathElement
@@ -56,13 +46,11 @@ interface options extends Vue {
 export default mixins<options &
 /* eslint-disable indent */
   ExtractVue<[
-    typeof Colorable,
-    typeof Themeable
+    typeof Colorable
   ]>
 /* eslint-enable indent */
 >(
-  Colorable,
-  Themeable,
+  Colorable
 ).extend({
   name: 'VSparkline',
 
@@ -125,10 +113,10 @@ export default mixins<options &
       default: false,
     },
     type: {
-      type: String,
+      type: String as Prop<'trend' | 'bar'>,
       default: 'trend',
       validator: (val: string) => ['trend', 'bar'].includes(val),
-    } as PropValidator<'trend' | 'bar'>,
+    },
     value: {
       type: Array as Prop<SparklineItem[]>,
       default: () => ([]),
@@ -144,12 +132,6 @@ export default mixins<options &
   }),
 
   computed: {
-    classes (): object {
-      return {
-        'v-sparkline': true,
-        ...this.themeClasses,
-      }
-    },
     parsedPadding (): number {
       return Number(this.padding)
     },
@@ -249,7 +231,11 @@ export default mixins<options &
       immediate: true,
       handler () {
         this.$nextTick(() => {
-          if (!this.autoDraw || this.type === 'bar') return
+          if (
+            !this.autoDraw ||
+            this.type === 'bar' ||
+            !this.$refs.path
+          ) return
 
           const path = this.$refs.path
           const length = path.getTotalLength()
@@ -358,7 +344,6 @@ export default mixins<options &
           display: 'block',
           viewBox: `0 0 ${this.totalWidth} ${this.totalHeight}`,
         },
-        class: this.classes,
       }, [
         this.genGradient(),
         this.genClipPath(bars, offsetX, this._lineWidth, 'sparkline-bar-' + this._uid),
@@ -420,7 +405,6 @@ export default mixins<options &
           'stroke-width': this._lineWidth || 1,
           viewBox: `0 0 ${this.width} ${this.totalHeight}`,
         },
-        class: this.classes,
       }), [
         this.genGradient(),
         this.hasLabels && this.genLabels(-(this._lineWidth / 2)),

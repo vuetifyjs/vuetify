@@ -1,0 +1,39 @@
+alert(value="info") headerAlert1
+usage-new(:value=`{
+  booleans: [
+    'customDivider',
+    'large'
+  ],
+  selects: [
+    {
+      prop: 'divider',
+      label: 'Divider',
+      attrs: {
+        items: [
+          '/',
+          '\',
+          '.',
+          ';',
+          '>',
+          '-'
+        ]
+      }
+    }
+  ]
+}`)
+api(:value=`[
+  'v-breadcrumbs',
+  'v-breadcrumbs-item'
+]`)
+examples(:value=`[
+  'simple/large',
+  'simple/divider',
+  'intermediate/icon-dividers',
+  'intermediate/item-slot'
+]`)
+
+up-next(:value=`[
+  'components/buttons',
+  'components/navigation-drawers',
+  'components/icons'
+]`)

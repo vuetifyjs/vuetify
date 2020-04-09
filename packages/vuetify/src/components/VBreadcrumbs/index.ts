@@ -1,8 +1,6 @@
 import VBreadcrumbs from './VBreadcrumbs'
 import VBreadcrumbsItem from './VBreadcrumbsItem'
-import { createSimpleFunctional } from '../../util/helpers'
-
-const VBreadcrumbsDivider = createSimpleFunctional('v-breadcrumbs__divider', 'li')
+import VBreadcrumbsDivider from './VBreadcrumbsDivider'
 
 export { VBreadcrumbs, VBreadcrumbsItem, VBreadcrumbsDivider }
 

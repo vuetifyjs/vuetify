@@ -350,7 +350,7 @@ All event names has been changed from camelCase to kebab-case:
 <!-- v2.0 -->
 
 <v-dialog>
-  <template v-slot:activator="{ on }"
+  <template v-slot:activator="{ on }">
     <v-btn v-on="on">...</v-btn>
   </template>
 </v-dialog>
