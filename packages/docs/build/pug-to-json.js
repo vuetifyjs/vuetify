@@ -33,7 +33,17 @@ module.exports = function (content) {
 
   const parents = []
   walk(ast, node => {
-    if (!pageSection || ['h2'].includes(node.name)) {
+    if (!pageSection || [
+      'h2',
+      'accessibility',
+      'api',
+      'examples',
+      'parameters',
+      'supplemental',
+      'up-next',
+      'usage',
+      'usage-new',
+    ].includes(node.name)) {
       startSection()
     }
     switch (node.type) {

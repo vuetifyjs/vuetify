@@ -1,6 +1,6 @@
 <template>
-  <section>
-    <base-heading id="api">{{ computedHeading }}</base-heading>
+  <div>
+    <base-heading>{{ computedHeading }}</base-heading>
 
     <base-markdown>Generic.Pages.apiText</base-markdown>
 
@@ -8,7 +8,7 @@
       :lang="lang"
       :value="value"
     />
-  </section>
+  </div>
 </template>
 
 <script>

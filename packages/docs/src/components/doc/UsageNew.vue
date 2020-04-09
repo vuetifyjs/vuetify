@@ -1,6 +1,6 @@
 <template>
-  <section>
-    <base-heading id="usage">Generic.Pages.usage</base-heading>
+  <div>
+    <base-heading>Generic.Pages.usage</base-heading>
 
     <doc-text>{{ `${namespace}.${page}.usageText` }}</doc-text>
 
@@ -9,7 +9,7 @@
       :value="value"
       eager
     />
-  </section>
+  </div>
 </template>
 
 <script>
