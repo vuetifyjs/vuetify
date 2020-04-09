@@ -237,7 +237,7 @@ export default CalendarWithIntervals.extend({
   render (h): VNode {
     return h('div', {
       class: this.classes,
-      nativeOn: {
+      on: {
         dragstart: (e: MouseEvent) => {
           e.preventDefault()
         },
