@@ -38,14 +38,14 @@ describe('ripple.ts', () => {
     jest.useRealTimers()
   })
 
-  it('Ripple with no value should render element with ripple enabled', () => {
+  it('should render element with ripple enabled if no value is passed', () => {
     const wrapper = mountFunction()
 
     const div = wrapper.find('div')
     expect(div.element['_ripple'].enabled).toBe(true)
   })
 
-  it('Ripple should update element property reactively', () => {
+  it('should update element property reactively', () => {
     const testComponent = Vue.component('test', {
       directives: {
         Ripple,
@@ -81,7 +81,7 @@ describe('ripple.ts', () => {
     expect(div.element['_ripple'].enabled).toBe(true)
   })
 
-  it('Ripple should be triggered by the mousedown event', () => {
+  it('should trigger ripple on mousedown', () => {
     const wrapper = mountFunction()
 
     const mousedownEvent = new MouseEvent('mousedown', { detail: 1 })
@@ -96,7 +96,7 @@ describe('ripple.ts', () => {
     expect(wrapper.find('.v-ripple__container').exists()).toBe(false)
   })
 
-  it('Ripple should be triggered by the enter key', () => {
+  it('should trigger ripple on enter key press', () => {
     const wrapper = mountFunction()
 
     const keydownEvent = new KeyboardEvent('keydown', { keyCode: 13 })
@@ -111,7 +111,7 @@ describe('ripple.ts', () => {
     expect(wrapper.find('.v-ripple__container').exists()).toBe(false)
   })
 
-  it('Ripple should be triggered by the space key', () => {
+  it('should trigger ripple on space key press', () => {
     const wrapper = mountFunction()
 
     const keydownEvent = new KeyboardEvent('keydown', { keyCode: 32 })

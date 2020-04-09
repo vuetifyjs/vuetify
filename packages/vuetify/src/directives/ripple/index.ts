@@ -2,8 +2,8 @@
 import './VRipple.sass'
 
 // Utilities
-import { keyCodes } from '../../util/helpers'
 import { consoleWarn } from '../../util/console'
+import { keyCodes } from '../../util/helpers'
 
 // Types
 import { VNode, VNodeDirective } from 'vue'
