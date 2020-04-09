@@ -9,7 +9,7 @@
       "desc": "Avec la puissance des emplacements, vous pouvez personnaliser la sortie visuelle de la sélection. Dans cet exemple, nous ajoutons une image de profil pour les jetons et les éléments de liste."
     },
     "customFilter": {
-      "desc": "La propriété `filter` peut être utilisée pour que chaque élément puisse être filtrée en suivant sa propre logique. Dans cet exemple nous filtrons des éléments par leur nom"
+      "desc": "La propriété `filter` peut être utilisée pour que chaque élément puisse être filtré en suivant sa propre logique. Dans cet exemple nous filtrons des éléments par leur nom"
     },
     "asynchronous": {
       "desc": "Parfois vous avez besoin de récupérer des données externes via une requête de recherche. Utilisez la propriété `search-input` avec le modificateur **.sync** quand vous utilisez la propriété `autocomplete`. On peut également utiliser la nouvelle propriété `cache-items`. Ceci gardera une unique liste de tous les éléments qui ont été passés à la propriété `items` et est **REQUIRED** lors de l'utilisation d’éléments asynchrones et de la propriété **multiple**."
