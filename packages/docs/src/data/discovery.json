@@ -52,5 +52,11 @@
     "title": "Vuetify Newsletter",
     "src": "https://cdn.vuetifyjs.com/images/logos/v.png",
     "url": "https://www.getrevue.co/profile/vuetify/add_subscriber"
+  },
+  "cheat-sheet": {
+    "description": "Level-up your Vuetify skills and download our Fundamentals Cheat Sheet",
+    "title": "Vuetify Fundamentals Cheat Sheet",
+    "src": "https://cdn.vuetifyjs.com/images/resources/cheat-sheet-promo.png",
+    "url": "https://store.vuetifyjs.com/product/vuetify-fundamentals-cheat-sheet"
   }
 }
