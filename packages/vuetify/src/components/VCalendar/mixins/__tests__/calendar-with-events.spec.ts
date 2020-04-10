@@ -125,7 +125,7 @@ describe('calendar-with-events.ts', () => {
     expect(wrapper.vm.formatTime(testData1, true)).toMatch(/^0?8:30( AM)?$/)
     expect(wrapper.vm.formatTime(testData2, true)).toMatch(/^(0?5:45 PM|17:45)$/)
     expect(wrapper.vm.formatTime(testData3, true)).toMatch(/^0?9:05( AM)?$/)
-    expect(wrapper.vm.formatTime(testData4, true)).toMatch(/^(0?3 PM|10005)$/)
+    expect(wrapper.vm.formatTime(testData4, true)).toMatch(/^(0?3 PM|15)$/)
   })
 
   it('should get events map', async () => {
