@@ -111,7 +111,7 @@ describe('calendar-with-events.ts', () => {
     expect(wrapper.vm.eventNameFunction).toBeDefined()
     expect(typeof wrapper.vm.eventNameFunction).toBe('function')
     expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12' }, input: { Conference: 'Conference' } })).toBe('Conference')
-    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12', hour: 8, minute: 30, hasTime: true }, input: { Conference: 'Conference' } })).toBe('<strong>8:30 AM</strong> Conference')
+    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12', hour: 8, minute: 30, hasTime: true }, input: { Conference: 'Conference' } })).toMatch(/^<strong>(|0)8:30(|.AM)<\/strong> Conference/)
   })
 
   it('should format time', async () => {
@@ -122,10 +122,10 @@ describe('calendar-with-events.ts', () => {
 
     const wrapper = mount(Mock)
 
-    expect(wrapper.vm.formatTime(testData1, true)).toBe('8:30 AM')
-    expect(wrapper.vm.formatTime(testData2, true)).toBe('5:45 PM')
-    expect(wrapper.vm.formatTime(testData3, true)).toBe('9:05 AM')
-    expect(wrapper.vm.formatTime(testData4, true)).toBe('3 PM')
+    expect(wrapper.vm.formatTime(testData1, true)).toMatch(/^(|0)8:30( AM|$)/)
+    expect(wrapper.vm.formatTime(testData2, true)).toMatch(/^((|0)5:45( PM)|17:45$)/)
+    expect(wrapper.vm.formatTime(testData3, true)).toMatch(/^(|0)9:05( AM|$)/)
+    expect(wrapper.vm.formatTime(testData4, true)).toMatch(/^((|0)3( PM)|15$)/)
   })
 
   it('should get events map', async () => {
