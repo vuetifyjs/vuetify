@@ -5,7 +5,7 @@ module.exports = {
         name: 'default',
         props: {
           active: 'boolean',
-          toggle: 'boolean',
+          toggle: 'Function',
         },
       },
     ],
