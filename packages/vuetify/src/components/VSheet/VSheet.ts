@@ -6,6 +6,7 @@ import BindsAttrs from '../../mixins/binds-attrs'
 import Colorable from '../../mixins/colorable'
 import Elevatable from '../../mixins/elevatable'
 import Measurable from '../../mixins/measurable'
+import Roundable from '../../mixins/roundable'
 import Themeable from '../../mixins/themeable'
 
 // Helpers
@@ -20,6 +21,7 @@ export default mixins(
   Colorable,
   Elevatable,
   Measurable,
+  Roundable,
   Themeable
 ).extend({
   name: 'v-sheet',
@@ -29,7 +31,6 @@ export default mixins(
       type: String,
       default: 'div',
     },
-    tile: Boolean,
   },
 
   computed: {
@@ -39,6 +40,7 @@ export default mixins(
         'v-sheet--tile': this.tile,
         ...this.themeClasses,
         ...this.elevationClasses,
+        ...this.roundedClasses,
       }
     },
     styles (): object {

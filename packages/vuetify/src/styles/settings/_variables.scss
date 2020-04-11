@@ -5,7 +5,21 @@ $color-pack: true !default;
 $body-font-family: 'Roboto', sans-serif !default;
 $font-size-root: 16px !default;
 $line-height-root: 1.5 !default;
-$border-radius-root: 4px !default;
+$border-radius-root: 0.25rem !default;
+
+$rounded: () !default;
+$rounded: map-deep-merge(
+  (
+    '0': 0,
+    'sm': $border-radius-root / 2,
+    null: $border-radius-root,
+    'lg': $border-radius-root * 1.5,
+    'xl': $border-radius-root * 2,
+    'pill': 9999px,
+    'circle': 50%
+  ),
+  $rounded
+);
 
 $spacer: 4px !default;
 
