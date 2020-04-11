@@ -16,7 +16,12 @@
         },
         {
           "type": "alert",
-          "lang": "alert",
+          "lang": "alert1",
+          "value": "warning"
+        },
+        {
+          "type": "alert",
+          "lang": "alert2",
           "value": "warning"
         }
       ]
