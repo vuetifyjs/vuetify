@@ -20,8 +20,9 @@
         :chip="genChip(child)"
         :icon="child.icon"
         :subtext="child.subtext"
-        :to="child.to"
         :text="child.text"
+        :to="child.to"
+        :href="child.href"
       />
     </template>
   </v-list-group>
@@ -54,7 +55,7 @@
       children () {
         return this.item.children.map(item => ({
           ...item,
-          to: `${this.item.group}/${item.to}`
+          to: !item.href ? `${this.item.group}/${item.to}` : undefined
         }))
       },
       group () {

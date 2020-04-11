@@ -9,8 +9,8 @@
       { "text": "faq", "to": "frequently-asked-questions" },
       { "text": "meetTheTeam", "to": "meet-the-team" },
       { "text": "contributing", "to": "contributing" },
-      { "text": "roadmap", "href": "https://vuetifyjs.com/getting-started/roadmap" },
-      { "text": "consulting", "href": "https://vuetifyjs.com/getting-started/consulting-and-support" }
+      { "text": "roadmap", "href": "https://vuetifyjs.com/en/getting-started/roadmap" },
+      { "text": "consulting", "href": "https://vuetifyjs.com/en/getting-started/consulting-and-support" }
     ]
   },
   {
