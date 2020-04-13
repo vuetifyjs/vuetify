@@ -90,7 +90,9 @@
 
         <v-spacer />
 
-        <base-theme-toggle />
+        <app-notifications />
+
+        <base-theme-toggle class="ml-1" />
       </div>
     </template>
   </v-navigation-drawer>
