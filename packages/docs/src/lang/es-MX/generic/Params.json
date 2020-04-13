@@ -1,4 +1,0 @@
-{
-  "callback": "La función callback a ser invocada",
-  "debounce": "El tiempo de espera antes de invocar al método callback"
-}

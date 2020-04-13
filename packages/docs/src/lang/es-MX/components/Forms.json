@@ -1,8 +1,0 @@
-{
-  "props": {
-    "lazyValidation": "Si se habilita, **value** siempre será _true_ a menos que haya errores de validación visibles. Puedes llamar `validate()` para ejecutar manualmente la validación"
-  },
-  "functions": {
-    "validate": "Valida todos los inputs y regresa un resultado"
-  }
-}
