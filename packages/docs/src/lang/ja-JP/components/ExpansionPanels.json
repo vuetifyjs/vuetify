@@ -17,6 +17,18 @@
       "heading": "### Readonly",
       "desc": "`readonly` prop は`disabled`と同じことをしますが、外観はそのままでスタイルには触れません。"
     },
+    "popout": {
+      "heading": "### ポップアウト",
+      "desc": "エクスパンションパネルにも **popout** デザインがあります。これを使用すると、アクティブ化されると v-expansion-panel が拡大表示されます。"
+    },
+    "inset": {
+      "heading": "### Inset （差し込み）",
+      "desc": "**inset** を設定するとエクスパンションパネルは、アクティブ化時と小さく表示されます。"
+    },
+    "accordion": {
+      "heading": "### アコーディオン",
+      "desc": "**accordion**のエクスパンションパネルには、アクティブなパネルの周囲にマージンがありません。"
+    },
     "custom-icons": {
       "heading": "### カスタムアイコン",
       "desc": "展開アクションアイコンは、`expand-icon` prop または`actions` slotでカスタマイズすることができます。"

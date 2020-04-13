@@ -59,7 +59,8 @@
     "hover": "ホバー時に 4dp のElevationを適用します (デフォルト 2dp)。詳細は [elevationのページ](/styles/elevation) をご覧ください。",
     "img": "カードのイメージの背景を指定します。より高度な実装を行う場合は、 [v-img](/components/images) コンポーネントを使用することをお勧めします。 [v-imgの例はこちら](#media-with-text) 。",
     "outlined": "Elevationの影を削除し、細い枠線を追加します。",
-    "raised": "より高いデフォルトElevation (8dp) を指定します。詳細については、[elevationページ](/styles/elevation) をご覧ください。"
+    "raised": "より高いデフォルトElevation (8dp) を指定します。詳細については、[elevationページ](/styles/elevation) をご覧ください。",
+    "shaped": "カードの左上と右下の角を丸くします。"
   },
   "events": {
     "click": "コンポーネントがクリックされたときに発生 - `.native`修飾子を使用しない限り、クリックするとコンポーネントにリップル効果が適用されます。"

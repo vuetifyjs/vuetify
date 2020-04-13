@@ -1,6 +1,6 @@
 {
   "api": "## API",
-  "apiText": "Sélectionnez le composant désiré ci-dessous et afin de voir les accessoires, emplacements, événements et fonctions disponibles.",
+  "apiText": "Sélectionnez le composant désiré ci-dessous afin de voir les props, slots, événements et méthodes disponibles.",
   "accessibility": "## Accessibilité",
   "default": "Défaut",
   "description": "Description",

@@ -21,6 +21,15 @@
     "icon": {
       "heading": "### Icon"
     },
+    "outlined": {
+      "heading": "### Umriss"
+    },
+    "prominent": {
+      "heading": "### Prominent"
+    },
+    "text": {
+      "heading": "### Text"
+    },
     "type": {
       "heading": "### Type"
     },
@@ -30,6 +39,14 @@
   },
   "props": {
     "border": "Setzt einen Rand auf die Warnung. Akzeptiert **top** | **right** | **bottom** | **left**.",
-    "closeLabel": "Text für *aria-label* auf **dismissible** Alarmen. Kann auch global in [Internationalization](/customization/internationalization) angepasst werden."
+    "closeLabel": "Text für *aria-label* auf **dismissible** Alarmen. Kann auch global in [Internationalization](/customization/internationalization) angepasst werden.",
+    "dismissible": "Fügt ein Icon zum Schließen des Alarms hinzu.",
+    "icon": "Definiert ein bestimmtes Icon.",
+    "outlined": "Der Hintergrund wird transparent und ein dünner Rand wird hinzugefügt.",
+    "prominent": "Zeigt ein größeres vertikal zentriertes Icon, um mehr Aufmerksamkeit zu erregen."
+  },
+  "slots": {
+    "append": "Slot für Icon am Ende des Alarms.",
+    "prepend": "Slot für Symbol am Anfang des Alarms."
   }
 }

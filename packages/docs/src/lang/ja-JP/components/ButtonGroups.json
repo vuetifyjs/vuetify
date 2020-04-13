@@ -26,7 +26,8 @@
     "dense": "ボタンのサイズとパディングを縮小します。",
     "group": "一般的に [v-toolbar](/components/toolbars) および [v-app-bar](/components/app-bars) で使用されます。背景色、境界線を削除し、ボタン間のスペースを増やします",
     "mandatory": "Mixins.BaseItemGroup.props.mandatory",
-    "multiple": "Mixins.BaseItemGroup.props.multiple"
+    "multiple": "Mixins.BaseItemGroup.props.multiple",
+    "shaped": "カードの左上と右下の角を丸くします。"
   },
   "events": {
     "change": "ユーザーの操作によって値が変更されたときに発生します。"
