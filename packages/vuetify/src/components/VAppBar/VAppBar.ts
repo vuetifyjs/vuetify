@@ -259,7 +259,7 @@ export default baseMixins.extend({
       if (this.currentThreshold < this.computedScrollThreshold) return
 
       if (this.hideOnScroll) {
-        this.isActive = this.isScrollingUp
+        this.isActive = this.isScrollingUp || this.currentScroll === 0
       }
 
       this.savedScroll = this.currentScroll
