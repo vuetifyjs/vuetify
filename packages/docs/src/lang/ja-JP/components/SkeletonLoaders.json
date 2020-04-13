@@ -1,6 +1,9 @@
 {
   "heading": "# スケルトンローダ",
   "headingText": "`v-skeleton-loader`コンポーネントは、プロジェクト内の多くの役割を満たすことができる汎用性の高いツールです。このコンポーネントは、何かがまだ利用できないことをユーザーに示します。 30を超える事前定義されたオプションがあり、これらを組み合わせてカスタムできます。",
+  "accessibility": {
+    "desc": "デフォルトでは、`v-skeleton-loader` コンポーネントには [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) の [**alert**](https://www.w3.org/TR/wai-aria/#alert) のロールが割り当てられています。このロールを2つのariaプロパティで拡張します。[**aria-busy**](https://www.w3.org/TR/wai-aria-1.0/states_and_properties#aria-busy) の値が **true** の場合、必要な所有要素がウィジェットにないことを示します。 [**aria-live**](https://www.w3.org/TR/wai-aria-1.1/#aria-live) の値 **polite** は、ライブリージョンのスクリーンリーダーの優先度を設定します。"
+  },
   "examples": {
     "usage": {
       "desc": "`v-skeleton-loader` コンポーネントは、コンテンツがロードされていることを視覚的に表示します。これは、従来のフルスクリーンローダーよりも好評です。"

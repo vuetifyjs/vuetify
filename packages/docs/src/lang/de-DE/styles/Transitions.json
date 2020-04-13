@@ -26,12 +26,10 @@
       "desc": "Viele der Vuetify-Komponenten enthalten ein <code>transition</code>-Props, mit dem Sie Ihre eigenen definieren können."
     },
     "fade-transition": {
-      "heading": "### Blend-Übergänge",
-      "desc": "Ein weiteres Beispiel des Blend-Übergangs finden Sie auf der Carousel-Komponente."
+      "heading": "### Blend-Übergänge"
     },
     "expand-transition": {
-      "heading": "### Erweiterungs-Übergang",
-      "desc": "Der Erweiterungs-Übergang wird in Erweiterungs-Panels und Listen mit Gruppen verwendet. Es gibt auch eine horizontale Version mit `v-expand-x-transition`."
+      "heading": "### Erweiterungs-Übergang"
     },
     "custom-origin": {
       "heading": "### Benutzerdefinierter Ursprung",

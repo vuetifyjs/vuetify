@@ -18,12 +18,6 @@
     "scale-transition": {
       "desc": "De nombreux composants de Vuetify contiennent un <code>transition</code> prop qui vous permet de spécifier votre propre code."
     },
-    "fade-transition": {
-      "desc": "Un autre exemple de transition en fondu se trouve sur le composant Carousel."
-    },
-    "expand-transition": {
-      "desc": "La transition d'expansion est utilisée dans les groupes d'extension et de liste. Il y a aussi une version horizontale disponible avec `v-expansion-x-transition`."
-    },
     "custom-origin": {
       "desc": "Contrôlez l'origine de transition en codant avec un simple prop."
     },

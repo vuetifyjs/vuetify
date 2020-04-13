@@ -33,9 +33,14 @@
     "slots": {
       "heading": "### スロット",
       "desc": "`v-input`には `append` および`prepend` スロットがあります。それらにカスタムアイコンを配置できます。"
+    },
+    "hint": {
+      "desc": "`v-input` は `hint` を持つことができ、`hint` で入力の使い方をユーザに伝えることができます。`persistent-hint` propはメッセージが表示されていない場合に常にヒントを表示するようにします。"
     }
   },
   "props": {
+    "appendIcon": "`v-icon`と同じ構文を使用し、コンポーネントにアイコンを追加します",
+    "backgroundColor": "inputの背景色を変更します",
     "hint": "ヒントを設定します。",
     "label": "ラベルを設定します。",
     "loading": "Mixins.Loadable.props.loading",

@@ -1,8 +1,0 @@
-{
-  "props": {
-    "toggleKeys": "Array de códigos chave que irão alternar o campo de entrada (se ele suportar alternação)"
-  },
-  "slots": {
-    "label": "Substitui o label padrão"
-  }
-}

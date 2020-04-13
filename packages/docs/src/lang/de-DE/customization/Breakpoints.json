@@ -1,12 +1,46 @@
 {
   "heading": "# Haltepunkte",
-  "toc": {
-    "0": {
-      "text": "Einführung"
+  "headingText": "Mit Vuetify können Sie das Layout Ihrer Anwendung je nach Fenstergröße anpassen. Dies kann beispielsweise durch Verwendung bestimmter [grid](/components/grids)-Props oder Hilfsklassen erreicht werden (z.B. [display](/styles/display)), die einen bestimmten Haltepunkt anvisieren. Wie unten beschrieben bietet Vuetify fünf vordefinierte Haltepunkte an, die Sie aber ganz einfach an Ihre Bedürfnisse anpassen können.",
+  "components": [
+    "v-container",
+    "v-layout",
+    "v-flex",
+    "v-spacer"
+  ],
+  "toc": [
+    {
+      "text": "Einführung",
+      "href": "Einführung"
     },
-    "2": {
-      "text": "API"
+    {
+      "text": "Verwendung",
+      "href": "Verwendung"
+    },
+    {
+      "text": "API",
+      "href": "API"
+    },
+    {
+      "text": "Ergänzend",
+      "href": "Ergänzend"
+    },
+    {
+      "text": "Beispiele",
+      "href": "Beispiele"
+    },
+    {
+      "text": "Haltepunkt-Objekt",
+      "href": "Haltepunkt-Objekt"
+    },
+    {
+      "text": "Haltepunkte anpassen",
+      "href": "customize-breakpoint-thresholds"
     }
-  },
-  "breakpointHeader1a": "## Nutzung"
+  ],
+  "breakpointHeader": "## Haltepunkt-Service-Objekt",
+  "breakpointText1": "Vuetify wandelt die verfügbaren Haltepunkte in ein Objekt um, das aus Ihrer Anwendung zugänglich ist. Dies erlaubt Ihnen, basierend auf der Viewport-Größe bestimmte Eigenschaften und Attribute zuzuweisen/anzuwenden. Das Objekt ist unter `$vuetify.breakpoint` verfügbar.",
+  "breakpointHeader1a": "## Nutzung",
+  "breakpointText1a": "Sie können benutzerdefinierte Haltepunkte und Scrollleistenbreite angeben. Beachten Sie, dass Sie die css-Grid-Haltepunkte immer noch aktualisieren müssen, um übereinzustimmen.",
+  "breakpointText2": "Probieren wir ein Beispiel aus der realen Welt. Sie haben eine `v-dialog`-Komponente, die Sie in einen **full-screen*-Dialog auf mobilen Geräten konvertieren möchten. Normalerweise müssten Sie Watcher für die Größe des Viewports binden und/oder überprüfen, wann die Seite geladen wird.",
+  "breakpointText3": "Das ist eine Menge Boilerplate zu schreiben. Auch wenn Sie die eingebaute [v-resize](/directives/scaling)-Direktive verwenden, müssen Sie trotzdem eine Methode zum Anpassen der Größe definieren. Mit dem **breakpoint**-Objekt können Sie diese Logik komplett überspringen und direkt zum Aufbau Ihrer Anwendung kommen."
 }

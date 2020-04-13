@@ -26,12 +26,10 @@
       "desc": "许多 Vuetify 组件都包含一个 <code>transition</code> 属性允许你指定想要的效果。"
     },
     "fade-transition": {
-      "heading": "### 淡入淡出过渡",
-      "desc": "另一个淡入淡出过渡的示例可以在轮播组件上找到。"
+      "heading": "### 淡入淡出过渡"
     },
     "expand-transition": {
-      "heading": "### 展开过渡",
-      "desc": "展开过度和 Expansion Panels， List Groups 一起使用。还有一个水平版本的 `v-expand-x-transition`。"
+      "heading": "### 展开过渡"
     },
     "custom-origin": {
       "heading": "### 自定义原点",
