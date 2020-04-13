@@ -29,9 +29,9 @@
   "devAlert1": "カスタムプリセットは、それ自体が _preset_ プロパティを含むことは**できません**。",
   "devHeading1": "## プラグイン開発ガイド",
   "devText1a": "Vuetifyのプリセットは、Vue CLIを使ったフレームワークワイドなオプションとカスタムスタイリングを提供するnpmパッケージです。SASS 変数ファイル、CSS オーバーライドファイル、Vue CLI [Generator](https://cli.vuejs.org/dev-guide/generator-api.html) と [Plugin Service](https://cli.vuejs.org/dev-guide/plugin-api.html) で構成されています。プリセットによって提供される機能の一部は以下の通りです:",
-  "devText1b": {
-    "1": "既存のVuetify機能を構成するための**カスタムSASS変数**を注入します。例えばコンポーネント。プリセットは、[Vue CLIプラグインAPI](https://cli.vuejs.org/dev-guide/plugin-api.html#plugin-api) を使用して、コンパイル時にSASS変数を巻き上げます。"
-  },
+  "devText1b": [
+    "既存のVuetify機能を構成するための**カスタムSASS変数**を注入します。例えばコンポーネント。プリセットは、[Vue CLIプラグインAPI](https://cli.vuejs.org/dev-guide/plugin-api.html#plugin-api) を使用して、コンパイル時にSASS変数を巻き上げます。"
+  ],
   "devHeading2": "#### generator.js",
   "devText2a": "このファイルは Vue CLI [Generator](https://cli.vuejs.org/dev-guide/generator-api.html)で、アプリケーション内の **vuetify.js** ファイルを更新して定義済みのプリセットを含めます。",
   "devHeading3": "#### index.js",
