@@ -1,5 +1,5 @@
 module.exports = {
-  'v-carousel': {
+  'v-chip-group': {
     events: [
       {
         name: 'change',

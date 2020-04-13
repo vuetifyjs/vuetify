@@ -2,6 +2,10 @@ module.exports = {
   'v-slide-group': {
     events: [
       {
+        name: 'change',
+        value: 'number',
+      },
+      {
         name: 'click:location',
         value: 'void',
       },

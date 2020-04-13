@@ -1,5 +1,5 @@
 module.exports = {
-  'v-carousel': {
+  'v-item-group': {
     events: [
       {
         name: 'change',
