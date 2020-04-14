@@ -31,7 +31,7 @@
         },
         {
           title: 'operations',
-          name: 'Heather Hill',
+          name: 'Heather Leider',
           email: 'heather@vuetifyjs.com',
           avatar: 'avatarStyle=Transparent&topType=LongHairStraight2&accessoriesType=Blank&hairColor=Brown&facialHairType=Blank&clotheType=ShirtVNeck&clotheColor=Pink&eyeType=Hearts&eyebrowType=Default&mouthType=Tongue&skinColor=Light',
         },
