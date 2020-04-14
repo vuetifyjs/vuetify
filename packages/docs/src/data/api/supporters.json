@@ -66,6 +66,12 @@
       "href": "https://www.hypeinnovation.com/home",
       "darkLogo": "backers/hype-logo-dark.svg",
       "logo": "backers/hype-logo-light.svg"
+    },
+    {
+      "name": "COSMIC JS",
+      "href": "https://www.cosmicjs.com/",
+      "darkLogo": "backers/cosmicjs-logo-dark.svg",
+      "logo": "backers/cosmicjs-logo-light.svg"
     }
   ],
   "Collective": [
