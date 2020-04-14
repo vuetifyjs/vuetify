@@ -24,6 +24,8 @@
 
 <script>
   export default {
+    name: 'SupportersSponsor',
+
     props: {
       large: {
         type: Boolean,
@@ -45,16 +47,16 @@
 
     computed: {
       src () {
-        const { logo, darkLogo } = this.value
-        const cdn = !this.value.logo.match('http')
+        const { lightlogo = '', darklogo = '' } = this.value.metadata
+        const cdn = !(lightlogo || '').match('http')
           ? 'https://cdn.vuetifyjs.com/images/'
           : ''
 
-        if (this.$vuetify.theme.dark && darkLogo) {
-          return `${cdn}${darkLogo}`
+        if (this.$vuetify.theme.dark && darklogo) {
+          return `${cdn}${darklogo}`
         }
 
-        return `${cdn}${logo}`
+        return `${cdn}${lightlogo}`
       },
       width () {
         if (this.xLarge) return 175

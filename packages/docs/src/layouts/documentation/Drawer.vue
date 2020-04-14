@@ -10,7 +10,7 @@
       <div class="text-center">
         <v-responsive min-height="81">
           <supporters-supporter-group
-            :group="supporters['Premiere']"
+            :group="1"
             large
             title="Premiere sponsors"
           />
