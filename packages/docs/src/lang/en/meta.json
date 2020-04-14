@@ -134,6 +134,11 @@
     "description": "Text helpers assist in modifying your application layout on varying viewport sizes with pre-configured css classes.",
     "keywords": "Text helper classes, text classes, alignment helpers"
   },
+  "styles/border-radius": {
+    "title": "Border Radius",
+    "description": "Use border utilities to quickly style the border-radius of any element.",
+    "keywords": "border radius classes, radius utilities, vuetify radius helper classes"
+  },
   "styles/colors": {
     "title": "Material color palette",
     "description": "Learn about the colors of Material Design. Consume the javascript color pack directly in your application.",

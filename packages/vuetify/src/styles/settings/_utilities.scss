@@ -311,64 +311,46 @@ $utilities: map-deep-merge(
       class: rounded,
       values: $rounded
     ),
+    "rounded-top": (
+      property: border-top-left-radius border-top-right-radius,
+      class: rounded-t,
+      values: $rounded
+    ),
+    "rounded-right": (
+      property: border-top-right-radius border-bottom-right-radius,
+      class: rounded-r,
+      values: $rounded
+    ),
+    "rounded-bottom": (
+      property: border-bottom-left-radius border-bottom-right-radius,
+      class: rounded-b,
+      values: $rounded
+    ),
+    "rounded-left": (
+      property: border-top-left-radius border-bottom-left-radius,
+      class: rounded-l,
+      values: $rounded
+    ),
     "rounded-top-left": (
       property: border-top-left-radius,
       class: rounded-tl,
-      values: 0
+      values: $rounded
     ),
     "rounded-top-right": (
       property: border-top-right-radius,
       class: rounded-tr,
-      values: 0
-    ),
-    "rounded-bottom-left": (
-      property: border-bottom-left-radius,
-      class: rounded-bl,
-      values: 0
+      values: $rounded
     ),
     "rounded-bottom-right": (
       property: border-bottom-right-radius,
       class: rounded-br,
-      values: 0
+      values: $rounded
     ),
-
-    // Start
-    // "rounded-right": (
-    //   property: border-top-right-radius, border-bottom-right-radius,
-    //   class: rounded-r,
-    //   values: $rounded
-    // ),
-    // "rounded-bottom": (
-    //   property: border-bottom-left-radius, border-bottom-right-radius,
-    //   class: rounded-b,
-    //   values: $rounded
-    // ),
-    // "rounded-left": (
-    //   property: border-top-left-radius, border-bottom-left-radius,
-    //   class: rounded-l,
-    //   values: $rounded
-    // ),
-    // "rounded-top-left": (
-    //   property: border-top-left-radius,
-    //   class: rounded-tl,
-    //   values: $rounded
-    // ),
-    // "rounded-top-right": (
-    //   property: border-top-right-radius,
-    //   class: rounded-tr,
-    //   values: $rounded
-    // ),
-    // "rounded-bottom": (
-    //   property: border-bottom-left-radius, border-bottom-right-radius,
-    //   class: rounded-b,
-    //   values: $rounded
-    // ),
-    // "rounded-left": (
-    //   property: border-top-left-radius, border-bottom-left-radius,
-    //   class: rounded-l,
-    //   values: $rounded
-    // ),
-    // End
+    "rounded-bottom-left": (
+      property: border-bottom-left-radius,
+      class: rounded-bl,
+      values: $rounded
+    ),
 
     // Text
     "text-align": (
