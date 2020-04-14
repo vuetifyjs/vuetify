@@ -1,5 +1,5 @@
 function createUTCDate (year: number, month = 0, day = 1) {
-  var date
+  let date
   if (year < 100 && year >= 0) {
     date = new Date(Date.UTC(year, month, day))
     if (isFinite(date.getUTCFullYear())) {
