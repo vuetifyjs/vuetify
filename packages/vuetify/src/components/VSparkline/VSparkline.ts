@@ -275,7 +275,7 @@ export default mixins<options &
         this.$createElement('stop', {
           attrs: {
             offset: index / len,
-            'stop-color': color || this.color || 'currentColor',
+            'stop-color': color || 'currentColor',
           },
         })
       )
@@ -298,7 +298,7 @@ export default mixins<options &
           fontSize: '8',
           textAnchor: 'middle',
           dominantBaseline: 'mathematical',
-          fill: this.color || 'currentColor',
+          fill: 'currentColor',
         } as object, // TODO: TS 3.5 is too eager with the array type here
       }, children)
     },
