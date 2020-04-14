@@ -559,6 +559,11 @@
     "description": "The window component is a wrapper container that allows transitioning between content. It serves as the baseline for tabs and carousels.",
     "keywords": "windows, vuetify window component, vue window component"
   },
+  "directives/color": {
+    "title": "Color directive",
+    "description": "The color directive enables you to set text, background and border color of any given element.",
+    "keywords": "color, background, vuetify color directive, vue color directive"
+  },
   "directives/intersect": {
     "title": "Intersection observer directive",
     "description": "The intersection observer directive utilizes the Intersection observer API. It allows you to determine when elements are visible on the screen.",

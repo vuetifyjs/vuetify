@@ -1,0 +1,16 @@
+{
+  "heading": "# Color directive",
+  "headingText": "The `v-color` directive is used to set text, background and border color of any given element.",
+  "examples": {
+    "usage": {
+      "desc": "Use `v-color` directive on a component or an HTML element with an argument to specify the property that you want to set. By default it will set the **background-color** property if no argument is being passed."
+    }
+  },
+  "options": {
+    "arg:border": "Set border color",
+    "arg:gradient": "Set `linear-gradient`",
+    "arg:text": "Set text color",
+    "modifiers.top.right.bottom.left": "Specify which side of the border you want to style",
+    "value": "The color value - it can be the name of material color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). You can find list of built in classes on the [colors page](/styles/colors#material-colors)."
+  }
+}
