@@ -48,4 +48,13 @@ export default {
     am: 'قبل از ظهر',
     pm: 'بعد از ظهر',
   },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'جهت یابی صفحه',
+      next: 'صفحه بعد',
+      previous: 'صفحه قبلی',
+      page: '{0} صفحه بروید',
+      currentPage: '{0} صفحه فعلی ، صفحه',
+    },
+  },
 }
