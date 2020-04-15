@@ -65,27 +65,69 @@
   // Utilities
   import bucket from '@/plugins/cosmicjs'
   import { formatDate } from '@/util/date.js'
+  import {
+    get,
+    sync,
+  } from 'vuex-pathify'
 
   export default {
     name: 'AppNotifications',
 
     data: () => ({
+      snack: false,
       items: [],
     }),
 
+    computed: {
+      snackbar: sync('snackbar/snackbar'),
+      value: get('snackbar/value'),
+    },
+
+    watch: {
+      value (val) {
+        if (val) return
+
+        this.markViewed(this.snackbar.slug)
+      },
+    },
+
     async mounted () {
-      const { objects: items } = await bucket.getObjects({
+      const items = []
+      const { objects } = await bucket.getObjects({
         type: 'notifications',
         props: 'created_at,metadata,slug,title',
-        limit: 3,
+        limit: 4,
         sort: '-created_at',
       })
 
-      this.items = items.map(item => {
-        return Object.assign({}, item, {
-          created_at: formatDate(new Date(item.created_at)),
+      for (const object of objects) {
+        const item = Object.assign({}, object, {
+          created_at: formatDate(new Date(object.created_at)),
         })
-      })
+
+        if (!this.hasBeenViewed(item) && !this.snack) {
+          this.snack = true
+          this.snackbar = {
+            slug: item.slug,
+            ...item.metadata,
+          }
+
+          continue
+        }
+
+        items.push(item)
+      }
+
+      this.items = items
+    },
+
+    methods: {
+      hasBeenViewed (item) {
+        return Boolean(localStorage.getItem(`vuetify-notification-${item.slug}`))
+      },
+      markViewed (slug) {
+        localStorage.setItem(`vuetify-notification-${slug}`, true)
+      },
     },
   }
 </script>

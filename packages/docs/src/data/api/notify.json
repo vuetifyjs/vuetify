@@ -1,9 +1,0 @@
-{
-  "color": "base",
-  "close": true,
-  "id": "vuetify-community",
-  "text": "Join Now",
-  "msg": "💬 Join our **Discord** community and be part of the *discussion*",
-  "href": "https://community.vuetifyjs.com/?ref=vuetifyjs.com",
-  "timeout": 0
-}
