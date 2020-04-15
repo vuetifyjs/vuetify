@@ -398,4 +398,28 @@ describe('VSelect.ts', () => {
 
     expect(click).toHaveBeenCalledTimes(1)
   })
+
+  it.skip('should trigger updates on input change (#10922)', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: [{ id: 1 }],
+        items: [],
+        multiple: true,
+        returnObject: true,
+        itemText: 'name',
+        itemValue: 'id',
+      },
+    })
+
+    expect(wrapper.vm.selectedItems).toEqual([])
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+    wrapper.setProps({ items: [{ id: 1, name: 'testA' }, { id: 2, name: 'testB' }] })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selectedItems).toEqual(['testA'])
+    expect(change).toHaveBeenCalledWith([{ id: 1, name: 'testA' }])
+  })
 })

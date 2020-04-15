@@ -834,22 +834,26 @@ export default baseMixins.extend<options>().extend({
     },
     setSelectedItems () {
       const selectedItems = []
-      const values = !this.multiple || !Array.isArray(this.internalValue)
-        ? [this.internalValue]
-        : [...this.internalValue]
+
+      const internalValueIsArray = this.multiple && Array.isArray(this.internalValue)
+      const values = internalValueIsArray ? [...this.internalValue] : [this.internalValue]
 
       let hasUpdatedValue = false
       for (let i = 0; i < values.length; i++) {
-        const index = this.allItems.findIndex(v => this.valueComparator(
-          this.getValue(v),
-          this.getValue(values[i])
-        ))
+        const index = this.allItems.findIndex(v => {
+          return this.valueComparator(
+            this.getValue(v),
+            this.getValue(values[i])
+          )
+        })
 
         if (index > -1) {
-          const newValue = this.allItems[index]
-          selectedItems.push(newValue)
-          if (values[i] !== newValue) {
-            values[i] = newValue
+          const item = this.allItems[index]
+          selectedItems.push(item)
+
+          const value = this.returnObject ? item : this.getValue(item)
+          if (values[i] !== value) {
+            values[i] = value
             hasUpdatedValue = true
           }
         }
@@ -858,7 +862,7 @@ export default baseMixins.extend<options>().extend({
       this.selectedItems = selectedItems
 
       if (hasUpdatedValue) {
-        this.setValue(values)
+        this.setValue(internalValueIsArray ? values : values[0])
       }
     },
     setValue (value: any) {
