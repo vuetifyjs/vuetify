@@ -6,6 +6,6 @@
 
     <div class="text-decoration-overline">Overline text</div>
 
-    <div class="text-decoration-underline">Underlin text</div>
+    <div class="text-decoration-underline">Underline text</div>
   </div>
 </template>
