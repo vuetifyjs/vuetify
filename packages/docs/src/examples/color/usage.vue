@@ -38,7 +38,7 @@
   </v-container>
 </template>
 
-<style scoped>
+<style>
 .elem {
   border: solid 2px white;
 }
