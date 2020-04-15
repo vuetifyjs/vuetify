@@ -315,12 +315,7 @@ $utilities: map-deep-merge(
     "text-decoration": (
       property: text-decoration,
       class: text-decoration,
-      values: (
-        normal: none,
-        underline: underline,
-        overline: overline,
-        line-through: line-through,
-      )
+      values: line-through none overline underline
     ),
     "white-space": (
       property: white-space,
