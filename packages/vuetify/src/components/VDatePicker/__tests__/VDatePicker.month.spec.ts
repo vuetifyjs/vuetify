@@ -300,20 +300,22 @@ describe('VDatePicker.ts', () => {
   })
 
   it('should emit click/dblclick:month event', async () => {
+    const click = jest.fn()
+    const dblclick = jest.fn()
     const wrapper = mountFunction({
       propsData: {
         value: '2013-05',
         type: 'month',
       },
+      listeners: {
+        'click:month': click,
+        'dblclick:month': dblclick,
+      },
     })
 
-    const click = jest.fn()
-    wrapper.vm.$on(`click:month`, click)
     wrapper.findAll('.v-date-picker-table--month tbody tr+tr td:first-child button').at(0).trigger('click')
     expect(click).toHaveBeenCalledWith('2013-04')
 
-    const dblclick = jest.fn()
-    wrapper.vm.$on(`dblclick:month`, dblclick)
     wrapper.findAll('.v-date-picker-table--month tbody tr+tr td:first-child button').at(0).trigger('dblclick')
     expect(dblclick).toHaveBeenCalledWith('2013-04')
   })

@@ -406,8 +406,12 @@ export default mixins(
         on: {
           input: this.dateClick,
           'update:table-date': (value: string) => this.tableDate = value,
-          'click:date': (value: string) => this.$emit('click:date', value),
-          'dblclick:date': (value: string) => this.$emit('dblclick:date', value),
+          ...Object.keys(this.$listeners).reduce((on, eventName) => {
+            if (eventName.match(/:date$/)) {
+              Object.assign(on, { [eventName]: (value: string) => this.$emit(eventName, value) })
+            }
+            return on
+          }, {}),
         },
       })
     },
@@ -436,8 +440,12 @@ export default mixins(
         on: {
           input: this.monthClick,
           'update:table-date': (value: string) => this.tableDate = value,
-          'click:month': (value: string) => this.$emit('click:month', value),
-          'dblclick:month': (value: string) => this.$emit('dblclick:month', value),
+          ...Object.keys(this.$listeners).reduce((on, eventName) => {
+            if (eventName.match(/:month$/)) {
+              Object.assign(on, { [eventName]: (value: string) => this.$emit(eventName, value) })
+            }
+            return on
+          }, {}),
         },
       })
     },
@@ -453,6 +461,12 @@ export default mixins(
         },
         on: {
           input: this.yearClick,
+          ...Object.keys(this.$listeners).reduce((on, eventName) => {
+            if (eventName.match(/:year$/)) {
+              Object.assign(on, { [eventName]: (value: string) => this.$emit(eventName, value) })
+            }
+            return on
+          }, {}),
         },
       })
     },

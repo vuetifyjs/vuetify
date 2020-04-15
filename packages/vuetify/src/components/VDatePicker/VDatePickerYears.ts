@@ -7,6 +7,7 @@ import Localable from '../../mixins/localable'
 // Utils
 import { createNativeLocaleFormatter } from './util'
 import mixins, { ExtractVue } from '../../util/mixins'
+import mergeData from '../../util/mergeData'
 
 // Types
 import Vue, { VNode, PropType } from 'vue'
@@ -74,9 +75,19 @@ export default mixins<options &
       return this.$createElement('li', this.setTextColor(color, {
         key: year,
         class: { active },
-        on: {
-          click: () => this.$emit('input', year),
-        },
+        ...mergeData({
+          on: {
+            click: () => this.$emit('input', year),
+          },
+        }, {
+          on: Object.keys(this.$listeners).reduce((on, eventName) => {
+            const [, nativeEventName = null] = eventName.match(/^(.+):year$/) || []
+            if (nativeEventName) {
+              Object.assign(on, { [nativeEventName]: () => this.$emit(eventName, year) })
+            }
+            return on
+          }, {}),
+        }),
       }), formatted)
     },
 

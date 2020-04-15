@@ -11,6 +11,7 @@ import Themeable from '../../../mixins/themeable'
 // Utils
 import isDateAllowed from '../util/isDateAllowed'
 import mixins from '../../../util/mixins'
+import mergeData from '../../../util/mergeData'
 
 // Types
 import { VNodeChildren, PropType } from 'vue'
@@ -90,13 +91,21 @@ export default mixins(
     genButtonEvents (value: string, isAllowed: boolean, mouseEventType: string) {
       if (this.disabled) return undefined
 
-      return {
-        click: () => {
-          isAllowed && !this.readonly && this.$emit('input', value)
-          this.$emit(`click:${mouseEventType}`, value)
+      const re = new RegExp(`^(.+):${mouseEventType}$`)
+
+      return mergeData({
+        on: {
+          click: () => isAllowed && !this.readonly && this.$emit('input', value),
         },
-        dblclick: () => this.$emit(`dblclick:${mouseEventType}`, value),
-      }
+      }, {
+        on: Object.keys(this.$listeners).reduce((on, eventName) => {
+          const [, nativeEventName = null] = eventName.match(re) || []
+          if (nativeEventName) {
+            Object.assign(on, { [nativeEventName]: () => this.$emit(eventName, value) })
+          }
+          return on
+        }, {}),
+      })
     },
     genButton (value: string, isFloating: boolean, mouseEventType: string, formatter: DatePickerFormatter) {
       const isAllowed = isDateAllowed(value, this.min, this.max, this.allowedDates)
@@ -114,7 +123,7 @@ export default mixins(
         domProps: {
           disabled: this.disabled || !isAllowed,
         },
-        on: this.genButtonEvents(value, isAllowed, mouseEventType),
+        ...this.genButtonEvents(value, isAllowed, mouseEventType),
       }), [
         this.$createElement('div', {
           staticClass: 'v-btn__content',
