@@ -45,7 +45,6 @@ export default baseMixins.extend<options>().extend({
     block: Boolean,
     disabled: Boolean,
     depressed: Boolean,
-    fab: Boolean,
     icon: Boolean,
     loading: Boolean,
     outlined: Boolean,
@@ -81,7 +80,6 @@ export default baseMixins.extend<options>().extend({
         'v-btn--contained': this.contained,
         'v-btn--depressed': (this.depressed) || this.outlined,
         'v-btn--disabled': this.disabled,
-        'v-btn--fab': this.fab,
         'v-btn--fixed': this.fixed,
         'v-btn--flat': this.isFlat,
         'v-btn--icon': this.icon,
@@ -110,7 +108,7 @@ export default baseMixins.extend<options>().extend({
       )
     },
     computedRipple (): RippleOptions | boolean {
-      const defaultRipple = this.icon || this.fab ? { circle: true } : true
+      const defaultRipple = this.icon ? { circle: true } : true
       if (this.disabled) return false
       else return this.ripple != null ? this.ripple : defaultRipple
     },
@@ -122,10 +120,7 @@ export default baseMixins.extend<options>().extend({
       )
     },
     isRound (): boolean {
-      return Boolean(
-        this.icon ||
-        this.fab
-      )
+      return Boolean(this.icon)
     },
     styles (): object {
       return {
@@ -149,7 +144,7 @@ export default baseMixins.extend<options>().extend({
 
   methods: {
     click (e: MouseEvent): void {
-      !this.retainFocusOnClick && !this.fab && e.detail && this.$el.blur()
+      !this.retainFocusOnClick && e.detail && this.$el.blur()
       this.$emit('click', e)
 
       this.btnToggle && this.toggle()
