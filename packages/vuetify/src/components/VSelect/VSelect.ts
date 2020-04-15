@@ -836,20 +836,30 @@ export default baseMixins.extend<options>().extend({
       const selectedItems = []
       const values = !this.multiple || !Array.isArray(this.internalValue)
         ? [this.internalValue]
-        : this.internalValue
+        : [...this.internalValue]
 
-      for (const value of values) {
+      let hasUpdatedValue = false
+      for (let i = 0; i < values.length; i++) {
         const index = this.allItems.findIndex(v => this.valueComparator(
           this.getValue(v),
-          this.getValue(value)
+          this.getValue(values[i])
         ))
 
         if (index > -1) {
-          selectedItems.push(this.allItems[index])
+          const newValue = this.allItems[index]
+          selectedItems.push(newValue)
+          if (values[i] !== newValue) {
+            values[i] = newValue
+            hasUpdatedValue = true
+          }
         }
       }
 
       this.selectedItems = selectedItems
+
+      if (hasUpdatedValue) {
+        this.setValue(values)
+      }
     },
     setValue (value: any) {
       const oldValue = this.internalValue
