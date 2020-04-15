@@ -48,6 +48,10 @@ export default mixins(
     coloredBorder: Boolean,
     dense: Boolean,
     dismissible: Boolean,
+    dismissibleIcon: {
+      type: String,
+      default: '$cancel',
+    },
     icon: {
       default: '',
       type: [Boolean, String],
@@ -114,7 +118,7 @@ export default mixins(
       }, [
         this.$createElement(VIcon, {
           props: { color },
-        }, '$cancel'),
+        }, this.dismissibleIcon),
       ])
     },
     __cachedIcon (): VNode | null {
