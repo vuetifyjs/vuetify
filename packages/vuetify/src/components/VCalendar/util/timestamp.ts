@@ -5,7 +5,6 @@ export const PARSE_TIME: RegExp = /(\d\d?)(:(\d\d?)|)(:(\d\d?)|)/
 
 export const DAYS_IN_MONTH: number[] = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 export const DAYS_IN_MONTH_LEAP: number[] = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-export const WEEKDAYS_DEFAULT: number[] = [0, 1, 2, 3, 4, 5, 6]
 export const DAYS_IN_MONTH_MIN = 28
 export const DAYS_IN_MONTH_MAX = 31
 export const MONTH_MAX = 12

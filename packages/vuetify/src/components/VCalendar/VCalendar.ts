@@ -13,7 +13,6 @@ import {
   DAYS_IN_MONTH_MAX,
   DAY_MIN,
   DAYS_IN_WEEK,
-  WEEKDAYS_DEFAULT,
   parseTimestamp,
   validateTimestamp,
   relativeDays,
@@ -86,14 +85,19 @@ export default CalendarWithEvents.extend({
         case 'day':
           component = VCalendarDaily
           maxDays = 1
-          weekdays = WEEKDAYS_DEFAULT
+          weekdays = [start.weekday]
           break
         case '4day':
           component = VCalendarDaily
           end = relativeDays(copyTimestamp(end), nextDay, 4)
           updateFormatted(end)
           maxDays = 4
-          weekdays = WEEKDAYS_DEFAULT
+          weekdays = [
+            start.weekday,
+            (start.weekday + 1) % 7,
+            (start.weekday + 2) % 7,
+            (start.weekday + 3) % 7,
+          ]
           break
         case 'custom-weekly':
           component = VCalendarWeekly
@@ -110,6 +114,9 @@ export default CalendarWithEvents.extend({
       }
 
       return { component, start, end, maxDays, weekdays }
+    },
+    eventWeekdays (): number[] {
+      return this.renderProps.weekdays
     },
   },
 
