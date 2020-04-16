@@ -135,7 +135,7 @@
     "showWeek": "Toggles visibility of the week numbers in the body of the calendar",
     "titleDateFormat": "Allows you to customize the format of the date string that appears in the title of the date picker. Called with date (ISO 8601 string) arguments.",
     "type": "Determines the type of the picker - `date` for date picker, `month` for month picker",
-    "value": "Date picker model (ISO 8601 format, YY-mm-dd or YY-mm)",
+    "value": "Date picker model (ISO 8601 format, YYYY-mm-dd or YYYY-mm)",
     "weekdayFormat": "Allows you to customize the format of the weekday string that appears in the body of the calendar. Called with date (ISO 8601 string) arguments.",
     "width": "Width of the picker",
     "yearFormat": "Allows you to customize the format of the year string that appears in the header of the calendar. Called with date (ISO 8601 string) arguments.",
