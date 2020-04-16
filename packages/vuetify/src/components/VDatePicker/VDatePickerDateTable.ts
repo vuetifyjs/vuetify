@@ -71,7 +71,8 @@ export default mixins(
         this.displayedMonth,
         dayInMonth,
         parseInt(this.firstDayOfWeek),
-        parseInt(this.localeFirstDayOfYear))
+        parseInt(this.localeFirstDayOfYear)
+      )
     },
     genWeekNumber (weekNumber: number) {
       return this.$createElement('td', [
