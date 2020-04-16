@@ -12,6 +12,7 @@ import Themeable from '../../../mixins/themeable'
 import isDateAllowed from '../util/isDateAllowed'
 import mixins from '../../../util/mixins'
 import mergeData from '../../../util/mergeData'
+import { createItemTypeNativeListeners } from '../util'
 
 // Types
 import { VNodeChildren, PropType } from 'vue'
@@ -91,20 +92,12 @@ export default mixins(
     genButtonEvents (value: string, isAllowed: boolean, mouseEventType: string) {
       if (this.disabled) return undefined
 
-      const re = new RegExp(`^(.+):${mouseEventType}$`)
-
       return mergeData({
         on: {
           click: () => isAllowed && !this.readonly && this.$emit('input', value),
         },
       }, {
-        on: Object.keys(this.$listeners).reduce((on, eventName) => {
-          const [, nativeEventName = null] = eventName.match(re) || []
-          if (nativeEventName) {
-            Object.assign(on, { [nativeEventName]: () => this.$emit(eventName, value) })
-          }
-          return on
-        }, {}),
+        on: createItemTypeNativeListeners(this, `:${mouseEventType}`, value),
       })
     },
     genButton (value: string, isFloating: boolean, mouseEventType: string, formatter: DatePickerFormatter) {

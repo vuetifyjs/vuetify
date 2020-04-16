@@ -10,7 +10,7 @@ import Localable from '../../mixins/localable'
 import Picker from '../../mixins/picker'
 
 // Utils
-import { pad, createNativeLocaleFormatter } from './util'
+import { pad, createNativeLocaleFormatter, createItemTypeListeners } from './util'
 import isDateAllowed from './util/isDateAllowed'
 import { consoleWarn } from '../../util/console'
 import { daysInMonth } from '../VCalendar/util/timestamp'
@@ -406,12 +406,7 @@ export default mixins(
         on: {
           input: this.dateClick,
           'update:table-date': (value: string) => this.tableDate = value,
-          ...Object.keys(this.$listeners).reduce((on, eventName) => {
-            if (eventName.match(/:date$/)) {
-              Object.assign(on, { [eventName]: (value: string) => this.$emit(eventName, value) })
-            }
-            return on
-          }, {}),
+          ...createItemTypeListeners(this, ':date'),
         },
       })
     },
@@ -440,12 +435,7 @@ export default mixins(
         on: {
           input: this.monthClick,
           'update:table-date': (value: string) => this.tableDate = value,
-          ...Object.keys(this.$listeners).reduce((on, eventName) => {
-            if (eventName.match(/:month$/)) {
-              Object.assign(on, { [eventName]: (value: string) => this.$emit(eventName, value) })
-            }
-            return on
-          }, {}),
+          ...createItemTypeListeners(this, ':month'),
         },
       })
     },
@@ -461,12 +451,7 @@ export default mixins(
         },
         on: {
           input: this.yearClick,
-          ...Object.keys(this.$listeners).reduce((on, eventName) => {
-            if (eventName.match(/:year$/)) {
-              Object.assign(on, { [eventName]: (value: string) => this.$emit(eventName, value) })
-            }
-            return on
-          }, {}),
+          ...createItemTypeListeners(this, ':year'),
         },
       })
     },

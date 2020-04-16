@@ -5,7 +5,7 @@ import Colorable from '../../mixins/colorable'
 import Localable from '../../mixins/localable'
 
 // Utils
-import { createNativeLocaleFormatter } from './util'
+import { createNativeLocaleFormatter, createItemTypeNativeListeners } from './util'
 import mixins, { ExtractVue } from '../../util/mixins'
 import mergeData from '../../util/mergeData'
 
@@ -80,13 +80,7 @@ export default mixins<options &
             click: () => this.$emit('input', year),
           },
         }, {
-          on: Object.keys(this.$listeners).reduce((on, eventName) => {
-            const [, nativeEventName = null] = eventName.match(/^(.+):year$/) || []
-            if (nativeEventName) {
-              Object.assign(on, { [nativeEventName]: () => this.$emit(eventName, year) })
-            }
-            return on
-          }, {}),
+          on: createItemTypeNativeListeners(this, ':year', year),
         }),
       }), formatted)
     },

@@ -308,16 +308,16 @@ describe('VDatePicker.ts', () => {
         type: 'month',
       },
       listeners: {
-        'click:month': click,
-        'dblclick:month': dblclick,
+        'click:month': (value: any, event: any) => click(value, event instanceof Event),
+        'dblclick:month': (value: any, event: any) => dblclick(value, event instanceof Event),
       },
     })
 
     wrapper.findAll('.v-date-picker-table--month tbody tr+tr td:first-child button').at(0).trigger('click')
-    expect(click).toHaveBeenCalledWith('2013-04')
+    expect(click).toHaveBeenCalledWith('2013-04', true)
 
     wrapper.findAll('.v-date-picker-table--month tbody tr+tr td:first-child button').at(0).trigger('dblclick')
-    expect(dblclick).toHaveBeenCalledWith('2013-04')
+    expect(dblclick).toHaveBeenCalledWith('2013-04', true)
   })
 
   it('should handle date range select', async () => {
