@@ -12,7 +12,10 @@
       :inline="inline"
     ><slot /></prism>
 
-    <div class="v-markup__edit">
+    <div
+      v-if="href"
+      class="v-markup__edit"
+    >
       <a
         :href="href"
         target="_blank"
@@ -104,10 +107,12 @@
         const folder = split.shift()
         const file = split.join('_')
 
-        return `${folder}/${file}.txt`
+        return file ? `${folder}/${file}.txt` : null
       },
       href () {
-        return `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/snippets/${this.file}`
+        return this.file
+          ? `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/snippets/${this.file}`
+          : null
       },
       id () {
         if (this.value === 'markup') return
