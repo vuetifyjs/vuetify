@@ -105,7 +105,7 @@ $headings: map-deep-merge(
       'size': 6rem,
       'weight': 300,
       'line-height': 6rem,
-      'letter-spacing': -.015625em,
+      'letter-spacing': -0.09375rem,
       'font-family': $heading-font-family,
       'text-transform': false
     ),
@@ -113,7 +113,7 @@ $headings: map-deep-merge(
       'size': 3.75rem,
       'weight': 300,
       'line-height': 3.75rem,
-      'letter-spacing': -.0083333333em,
+      'letter-spacing': -0.03125rem,
       'font-family': $heading-font-family,
       'text-transform': false
     ),
@@ -201,27 +201,11 @@ $headings: map-deep-merge(
   $headings
 );
 
-// Deprecate in v3.0, change
-// keys to match the map
-$heading-map: (
-  'h1': 'display-4',
-  'h2': 'display-3',
-  'h3': 'display-2',
-  'h4': 'display-1',
-  'h5': 'headline',
-  'h6': 'title'
-);
-
 $typography: () !default;
 @each $type, $values in $headings {
-  $key: if(
-    map-has-key($heading-map, $type),
-    map-get($heading-map, $type),
-    $type
-  );
   $typography: map-deep-merge(
     $typography,
-    (#{$key}: map-values($values))
+    (#{$type}: map-values($values))
   );
 }
 

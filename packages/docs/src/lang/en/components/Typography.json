@@ -1,0 +1,22 @@
+{
+  "heading": "# Typography",
+  "headingText": "The `v-typography` component provides a clean interface for controlling content `font-size` on a *per* breakpoint basis.",
+  "headingAlert": "The `v-typography` component is a simple wrapper for global [Typography classes](/styles/typography).",
+  "examples": {
+    "usage": {
+      "heading": "## Usage",
+      "desc": "The `v-typography` component is a simple wrapper for global [Typography classes](/styles/typography). It aims to provide a clean interface, similar to [`v-col`](/components/grids). Resize your screen from *large* to *small* and vice versa; watch for the text to __change__ size."
+    },
+    "foxy": {
+      "heading": "## Responsive",
+      "desc": "Typography supports the Material Design breakpoints with the ability to set a specific `font-size` based upon how wide the user's viewport is."
+    }
+  },
+  "props": {
+    "sm": "Changes the `text-size` on small and greater breakpoints.",
+    "md": "Changes the `text-size` on medium and greater breakpoints.",
+    "lg": "Changes the `text-size` on large and greater breakpoints.",
+    "xl": "Changes the `text-size` on small and extra large breakpoints.",
+    "tag": "Components.Sheets.props.tag"
+  }
+}
