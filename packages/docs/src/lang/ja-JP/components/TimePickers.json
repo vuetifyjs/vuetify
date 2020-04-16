@@ -10,13 +10,19 @@
       "desc": "タイムピッカーの色は、 `color`および`header-color`プロパティを使用して設定できます。 `header-color` propが提供されない場合、ヘッダーは`color` prop値を使用します。"
     },
     "disabled": {
-      "heading": "### 無効化"
+      "heading": "### 無効化",
+      "desc": "無効にされたピッカーを操作することはできません。"
     },
     "readonly": {
-      "heading": "### Read-only"
+      "heading": "### Read-only",
+      "desc": "読み取り専用ピッカーは無効化されたものと同じ動作をしますが、デフォルトのものと同じように見えます。"
+    },
+    "use-seconds": {
+      "desc": "タイムピッカーに秒数を入力することができます。"
     },
     "scrollable": {
-      "heading": "スクロール可能なダイアログ"
+      "heading": "スクロール可能なダイアログ",
+      "desc": "マウスホイールを使ってタイムピッカーの値を編集することができます。"
     }
   },
   "events": {

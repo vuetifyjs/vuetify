@@ -25,5 +25,8 @@
       "heading": "### With active class",
       "desc": "**activeClass** property allows you to set custom CSS class on active items."
     }
+  },
+  "events": {
+    "change": "Emitted when the component value is changed by user interaction"
   }
 }

@@ -1,4 +1,0 @@
-{
-  "heading": "# Elevación",
-  "headingText": "Los auxiliares de elevación te permiten controlar la profundidad relativa, o la distancia entre dos superficies en el **eje-z**. Hay un total de 25 niveles de elevación. Puedes configurar la elevación de un elmento usando la clase `elevation-{n}`, donde `n` es un entero entre 0-24 que corresponde a la elevación deseada."
-}

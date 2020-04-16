@@ -32,6 +32,10 @@
     "offsetY": "Y軸のオフセット",
     "bottom": "Mixins.Positionable.props.bottom",
     "left": "Mixins.Positionable.props.left",
+    "overlap": "コンポーネントの上にスロットされたコンテンツをオーバーラップします。",
     "transition": "Mixins.Transitionable.props.transition"
+  },
+  "slots": {
+    "badge": "バッジのコンテンツに使用されているスロット。"
   }
 }

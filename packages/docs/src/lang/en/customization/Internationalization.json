@@ -6,7 +6,7 @@
   "availableLocalesText": "Currently Vuetify provides translations in the following languages:",
   "alertInfo": "Vuetify provides only a basic translation function `t`. It is recommended for more advanced internationalization functions to make use of Vuetifys integration with [vue-i18n](#vue-i-18-n)",
   "createTranslation": "## Create a translation",
-  "createTranslationText": "To create your own translation, use the code below or copy and rename the file `vuetify/src/locale/en.ts` to your project and make your changes.",
+  "createTranslationText": "To create your own translation, use the code below. You will inherit Vuetify's translations, but also can add your own. Alternatively, you can copy and paste the content of `vuetify/src/locale/en.ts`, but it'll require manual file syncing during updates.",
   "customComponents": "## Custom components",
   "customComponentsText": "If you are building custom Vuetify components that need to hook into the internationalization engine, you can use the `t` function which is part of the `$vuetify.lang` API.",
   "api": {

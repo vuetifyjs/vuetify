@@ -11,7 +11,7 @@
       "desc": "Tooltipは対象になる要素の四方向のどこにでも配置することができます。"
     },
     "visibility": {
-      "heading": "表示",
+      "heading": "### 表示",
       "desc": "`v-model`を使用してTooltipの表示を制御できます。"
     }
   },

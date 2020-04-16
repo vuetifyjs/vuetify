@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <div>
     <base-heading>{{ computedHeading }}</base-heading>
 
     <base-markdown>Generic.Pages.apiText</base-markdown>
@@ -8,7 +8,7 @@
       :lang="lang"
       :value="value"
     />
-  </section>
+  </div>
 </template>
 
 <script>

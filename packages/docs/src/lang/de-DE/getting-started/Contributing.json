@@ -1,4 +1,5 @@
 {
+  "heading": "# Anleitung zur Mitarbeit",
   "headingText": "Vuetify wird durch eine erstaunliche Community ermöglicht, die Probleme meldet, Pull-Requests erstellt und wertvolles Feedback liefert. Es ist unsere Aufgabe, Ihnen die Erstellung einzigartiger Anwendungen zu ermöglichen. Die meiste Zeit stößt man auf etwas, das besser gemacht werden kann. Vielleicht finden Sie einen Fehler oder haben eine Idee für zusätzliche Funktionen. Das ist großartig! Es ist so einfach wie das Klonen des Vuetify-Repositorys, um mit der Arbeit in einer Entwicklungsumgebung zu beginnen.",
   "issueHeader": "## Probleme melden",
   "issue1": "Die Problemliste dieses Repos ist ausschließlich für Fehlerberichte und Funktionsanforderungen vorgesehen. Nicht konforme Probleme werden sofort geschlossen.",

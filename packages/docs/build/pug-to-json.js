@@ -33,12 +33,23 @@ module.exports = function (content) {
 
   const parents = []
   walk(ast, node => {
-    if (!pageSection || ['h2'].includes(node.name)) {
+    const name = node.name || ''
+
+    if (!pageSection || name.startsWith('h') || [
+      'accessibility',
+      'api',
+      'examples',
+      'parameters',
+      'supplemental',
+      'up-next',
+      'usage',
+      'usage-new',
+    ].includes(name)) {
       startSection()
     }
     switch (node.type) {
       case 'Tag':
-        if (node.name === 'h2') {
+        if (name.startsWith('h')) {
           pageSection.children.push({
             type: 'heading',
             lang: node.block.nodes[0].val

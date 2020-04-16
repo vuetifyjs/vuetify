@@ -1,4 +1,5 @@
 {
+  "headingText": "Le composant `v-combobox` est un [v-autocomplete](/components/autocompletes) qui permet à l'utilisateur d'entrer des valeurs qui n'existent pas dans les **éléments fournis. Les éléments ainsi créés seront retournés sous forme de strings.",
   "usageText": "Avec Combobox, vous pouvez permettre à un utilisateur de créer de nouvelles valeurs qui ne sont pas présentes dans une liste d'éléments fournis.",
   "examples": {
     "no-data": {
@@ -8,11 +9,11 @@
       "desc": "Le `v-combobox` améliore les fonctionnalités ajoutées de `v-select` et `v-autocomplete`. Cela vous permet d'avoir une interface expansive pour créer des implémentations vraiment personnalisées. Cet exemple profite de certaines fonctionnalités plus avancées telles qu'un algorithme **filter** personnalisé, l'édition de liste d'entrées et d'éléments d'entrée dynamiques."
     },
     "combobox-multiple": {
-      "desc": "Précédemment connu sous le nom de **tags** - l'utilisateur est autorisé à saisir plus d'une valeur"
+      "desc": "Communément connus sous le nom de **tags** - l'utilisateur est autorisé ici à saisir plus d'une valeur"
     },
     "dense": {
       "heading": "### Dense",
-      "desc": "Vous pouvez utiliser le prop`dense` pour réduire la hauteur des combobox et la hauteur maximale inférieure des éléments de liste."
+      "desc": "Vous pouvez utiliser la prop`dense` pour réduire la hauteur des combobox et la hauteur maximale inférieure des éléments de liste."
     }
   },
   "props": {

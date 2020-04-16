@@ -3,7 +3,8 @@
     <v-snackbar
       v-model="snack"
       :color="snackbar.color"
-      :timeout="snackbar.timeout"
+      :style="styles"
+      :timeout="0"
       :vertical="$vuetify.breakpoint.xsOnly"
       top
     >
@@ -13,13 +14,19 @@
       >
         <v-icon
           v-if="computedIcon"
-          class="mr-4"
+          class="mr-2"
         >
           {{ computedIcon }}
         </v-icon>
 
+        <span
+          v-if="snackbar.emoji"
+          class="mr-2"
+          v-text="snackbar.emoji"
+        />
+
         <base-markdown
-          :code="snackbar.msg"
+          :code="snackbar.text"
           class="snack-markdown"
         />
 
@@ -29,22 +36,21 @@
           color="white"
           depressed
           v-bind="bind"
-          @click="onClick"
+          @click="$ga.event('snackbar', 'click', snackbar.metadata.slug)"
         >
-          {{ snackbar.text }}
+          {{ snackbar.action_text }}
 
           <v-icon right>mdi-open-in-new</v-icon>
         </v-btn>
 
         <v-btn
-          v-if="snackbar.close"
           :aria-label="$t('Vuetify.Snackbar.close')"
           :ripple="false"
           class="ml-4"
           color="grey darken-1"
           icon
           small
-          @click="markViewed"
+          @click="onClick"
         >
           <v-icon>$vuetify.cancel</v-icon>
         </v-btn>
@@ -55,24 +61,24 @@
 
 <script>
   import {
-    mapMutations,
-    mapState,
-  } from 'vuex'
+    get,
+    sync,
+  } from 'vuex-pathify'
 
   export default {
-    computed: {
-      ...mapState('snackbar', ['snackbar', 'value']),
-      bind () {
-        if (this.snackbar.to) return { to: this.snackbar.to }
-        if (this.snackbar.href) {
-          return {
-            href: this.snackbar.href,
-            target: '_blank',
-            rel: 'noopener',
-          }
-        }
+    name: 'CoreSnackbar',
 
-        return {}
+    computed: {
+      snack: sync('snackbar/value'),
+      snackbar: get('snackbar/snackbar'),
+      bind () {
+        const { action } = this.snackbar
+        const isExternal = action.indexOf('http') > -1
+
+        return !isExternal ? { to: action } : {
+          href: action,
+          target: '_blank',
+        }
       },
       computedColor () {
         if (this.snackbar.color !== 'store') {
@@ -91,56 +97,26 @@
           default: return false
         }
       },
-      snack: {
-        get () {
-          return this.value
-        },
-        set (val) {
-          this.setValue(val)
-        },
+      styles () {
+        const { top, bar } = this.$vuetify.application
+
+        return { top: `${top + bar + 16}px` }
       },
     },
 
     watch: {
-      $route () {
-        this.snack = false
+      snackbar: {
+        deep: true,
+        handler () {
+          this.snack = true
+        },
       },
-      snackbar () {
-        if (localStorage.getItem(this.snackbar.id)) return
-
-        this.snack = true
-      },
-    },
-
-    async created () {
-      // if (this.$ssrContext) return
-
-      const notify = require('@/data/api/notify.json')
-
-      // const notify = await fetch('https://cdn.vuetifyjs.com/notify.json', {
-      //   headers: {
-      //     'Access-Control-Allow-Origin': '*'
-      //   }
-      // }).then(res => res.json())
-
-      if (notify.href) this.setSnackbar(notify)
     },
 
     methods: {
-      ...mapMutations('snackbar', ['setSnackbar', 'setValue']),
-      markViewed () {
-        if (this.snackbar.id) {
-          localStorage.setItem(this.snackbar.id, true)
-        }
-        this.snack = false
-      },
       onClick () {
-        this.$ga.event('snackbar', 'click', this.snackbar.id)
-
-        this.markViewed()
-
-        this.snackbar.handler &&
-          this.snackbar.handler()
+        this.$ga.event('snackbar', 'click', `dismissed ${this.snackbar.slug}`)
+        this.snack = false
       },
     },
   }

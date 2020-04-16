@@ -95,7 +95,7 @@
       code: null,
       copied: false,
       language: vm.lang,
-      branch: null,
+      branch: 'master',
     }),
 
     computed: {

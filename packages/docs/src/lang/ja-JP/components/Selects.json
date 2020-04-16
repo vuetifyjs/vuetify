@@ -40,7 +40,6 @@
     "eager": "Mixins.Bootable.props.eager",
     "itemColor": "選択した項目の色を設定します",
     "itemText": "**items** のテキスト値のプロパティを設定します",
-    "itemValue": "**items**の値のプロパティを設定します - **primitiveでなければなりません** 。ドット表記がサポートされています",
     "noDataText": "データが存在しない場合に表示するテキストです。",
     "openOnClear": "**clearable** propを使用する場合、クリアすると、選択メニューは現在の状態に応じて開くか、開いたままになります",
     "overflow": "オーバーフローボタンを作成します - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",

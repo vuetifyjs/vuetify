@@ -4,6 +4,7 @@
   "clearable": "Fügt die Funktionalität zum Löschen der Eingabe hinzu, das Standard-Icon ist das Material Icon **clear**",
   "falseValue": "Setzt den falsy Status-Wert",
   "fullWidth": "Forciert 100% Breite",
+  "fixedTabs": "`v-tabs-item` min-width 160px, max-width 360px",
   "id": "Setzt den DOM identifier auf der Komponente",
   "mobileBreakPoint": "Legt den festgelegten mobile breakpoint für die Komponente fest. Dadurch werden alternative Stile für mobile Geräte angewendet.",
   "persistent": "Außerhalb des Dialogs klicken schließt diesen nicht",

@@ -1,8 +1,31 @@
 {
+  "heading": "# ツールバー",
+  "headingText": "`v-toolbar`コンポーネントは、一般的にサイトナビゲーションの主要なソースであるため、あらゆるGUIにとって極めて重要です。ツールバーコンポーネントは、 [v-navigation-drawer](/components/navigation-drawers) および [v-card](/components/cards) と組み合わせて使用​​すると効果的です。",
   "buttonMargin": "`icon` propsを使用している `<v-btn>` ​を `v-toolbar` および `v-app-bar` 内で使用すると、自動的にサイズを大きくし、マテリアルデザインの仕様に従って負のマージンを適用することで、適切な間隔を確保します。`<div`> などのコンテナでボタンをラップする場合、ボタンを適切に配置するには、そのコンテナに負のマージンを適用する必要があります。",
+  "usageText": "ツールバーはさまざまな方法で柔軟に使えるコンテナです。デフォルトでは、ツールバーの高さはデスクトップでは64px、モバイルでは56pxです。ツールバーで使用できるヘルパーコンポーネントがいくつかあります。`v-toolbar-title`はタイトルを表示するために使われ、`v-toolbar-items` は[v-btn](/components/buttons) が高さ全体を拡張できるようにします。",
   "examples": {
+    "light-and-dark": {
+      "desc": "ツールバーには、lightとdarkの **2種類** があります。lightツールバーには暗い色調のボタンと暗いテキストがあり、darkツールバーには白い色調のボタンと白いテキストがあります。"
+    },
+    "flexible-and-card": {
+      "desc": "この例では、**extended** propを使用して、ツールバーの拡張コンテンツ領域にカードをオフセットしています。"
+    },
+    "floating-with-search": {
+      "desc": "フローティングツールバーは、必要なだけのスペースを取るインライン要素に変わります。これは、コンテンツの上にツールバーを配置する場合に特に便利です。"
+    },
     "variations": {
+      "heading": "### バリエーション",
+      "desc": "`v-toolbar` には、テーマやヘルパークラスを使って適用できる複数のバリエーションがあります。これらは、light / darkテーマ、色付き、透明など、さまざまなバリエーションを持っています。",
       "uninverted": true
+    },
+    "background": {
+      "desc": "ツールバーは、ソリッドカラーではなく背景を表示することができます。これは **img** スロットを使用して、独自の [v-img](/components/images) コンポーネントを提供することで変更することができます。背景は、[v-app-bar](/components/app-bar#prominent-w-scroll-shrink-and-image) コンポーネントを使用してフェードすることができます。"
+    },
+    "extended": {
+      "desc": "ツールバーは `extension` スロットを使わずに拡張することができます。"
+    },
+    "collapse": {
+      "desc": "ツールバーは、画面のスペースを節約するために折りたたむことができます。"
     }
   },
   "props": {

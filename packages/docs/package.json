@@ -3,7 +3,7 @@
   "description": "A Vue.js project",
   "private": true,
   "author": "John Leider <john@vuetifyjs.com>",
-  "version": "2.2.20",
+  "version": "2.2.22",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.client.config.js --hot --progress",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config build/webpack.prod.config.js --no-progress --hide-modules && yarn prerender",
@@ -13,11 +13,12 @@
     "lint:fix": "yarn lint --fix"
   },
   "dependencies": {
-    "@vuetify/api-generator": "^2.2.20",
+    "@vuetify/api-generator": "^2.2.22",
     "babel-polyfill": "^6.26.0",
     "chokidar": "^3.0.2",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.4",
+    "cosmicjs": "^3.2.40",
     "cross-env": "^5.2.0",
     "date-fns": "^1.30.1",
     "dotenv": "^8.0.0",
@@ -43,7 +44,7 @@
     "vue-router": "^3.0.7",
     "vue-server-renderer": "^2.6.10",
     "vuelidate": "^0.7.4",
-    "vuetify": "^2.2.20",
+    "vuetify": "^2.2.22",
     "vuex": "^3.1.1",
     "vuex-pathify": "^1.4.0",
     "vuex-router-sync": "^5.0.0",
@@ -59,6 +60,7 @@
     "concurrently": "^4.1.1",
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.1.0",
+    "date-fns": "^2.12.0",
     "deepmerge": "^4.0.0",
     "docsearch.js": "^2.6.3",
     "eslint": "^6.1.0",
@@ -92,7 +94,6 @@
     "vue-color": "^2.7.0",
     "vue-prism-component": "^1.1.1",
     "vue-style-loader": "^4.1.2",
-    "vue-the-mask": "^0.11.1",
     "webpack-dev-middleware": "^3.7.0",
     "webpack-hot-middleware": "^2.25.0",
     "webpack-node-externals": "^1.7.2"

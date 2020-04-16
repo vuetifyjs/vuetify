@@ -1,9 +1,13 @@
 <template>
-  <base-markdown
-    v-if="count"
-    class="mb-4"
-    :code="text"
-  />
+  <div class="mb-4">
+    <base-markdown
+      v-if="count"
+      class="mb-4"
+      :code="text"
+    />
+
+    <core-github-btn />
+  </div>
 </template>
 
 <script>
@@ -25,7 +29,9 @@
     computed: {
       supporters: sync('app/supporters'),
       count () {
-        return Object.keys(this.supporters[this.value] || {}).length
+        const count = this.supporters.filter(supporter => supporter.metadata.tier === this.value)
+
+        return count ? count.length : 0
       },
       text () {
         return this.$t('ProfessionalSupport.Business.sponsor', {
