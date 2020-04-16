@@ -4,9 +4,6 @@ import './VSimpleBtn.sass'
 // Extensions
 import VSheet from '../VSheet'
 
-// Components
-import VProgressCircular from '../VProgressCircular'
-
 // Mixins
 import { factory as GroupableFactory } from '../../mixins/groupable'
 import { factory as ToggleableFactory } from '../../mixins/toggleable'
@@ -45,8 +42,6 @@ export default baseMixins.extend<options>().extend({
     block: Boolean,
     disabled: Boolean,
     depressed: Boolean,
-    icon: Boolean,
-    loading: Boolean,
     outlined: Boolean,
     retainFocusOnClick: Boolean,
     ripple: {
@@ -82,12 +77,9 @@ export default baseMixins.extend<options>().extend({
         'v-btn--disabled': this.disabled,
         'v-btn--fixed': this.fixed,
         'v-btn--flat': this.isFlat,
-        'v-btn--icon': this.icon,
         'v-btn--left': this.left,
-        'v-btn--loading': this.loading,
         'v-btn--outlined': this.outlined,
         'v-btn--right': this.right,
-        'v-btn--round': this.isRound,
         'v-btn--rounded': this.rounded,
         'v-btn--text': this.text,
         'v-btn--tile': this.tile,
@@ -108,19 +100,14 @@ export default baseMixins.extend<options>().extend({
       )
     },
     computedRipple (): RippleOptions | boolean {
-      const defaultRipple = this.icon ? { circle: true } : true
       if (this.disabled) return false
-      else return this.ripple != null ? this.ripple : defaultRipple
+      else return this.ripple != null ? this.ripple : true
     },
     isFlat (): boolean {
       return Boolean(
-        this.icon ||
         this.text ||
         this.outlined
       )
-    },
-    isRound (): boolean {
-      return Boolean(this.icon)
     },
     styles (): object {
       return {
@@ -154,26 +141,13 @@ export default baseMixins.extend<options>().extend({
         staticClass: 'v-btn__content',
       }, this.$slots.default)
     },
-    genLoader (): VNode {
-      return this.$createElement('span', {
-        class: 'v-btn__loader',
-      }, this.$slots.loader || [this.$createElement(VProgressCircular, {
-        props: {
-          indeterminate: true,
-          size: 23,
-          width: 2,
-        },
-      })])
-    },
   },
 
   render (h): VNode {
-    const children = [
-      this.genContent(),
-      this.loading && this.genLoader(),
-    ]
+    const children = [this.genContent()]
     const setColor = !this.isFlat ? this.setBackgroundColor : this.setTextColor
     const data: VNodeData = {
+      attrs: {},
       class: this.classes,
       style: this.styles,
       props: {},
@@ -184,6 +158,11 @@ export default baseMixins.extend<options>().extend({
       on: {
         click: this.click,
       },
+    }
+
+    if (this.tag === 'button') {
+      data.attrs!.type = this.type
+      data.attrs!.disabled = this.disabled
     }
 
     return h(this.tag, this.disabled ? data : setColor(this.color, data), children)
