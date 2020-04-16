@@ -13,6 +13,7 @@ import {
   DAYS_IN_MONTH_MAX,
   DAY_MIN,
   DAYS_IN_WEEK,
+  WEEKDAYS_DEFAULT,
   parseTimestamp,
   validateTimestamp,
   relativeDays,
@@ -39,6 +40,7 @@ interface VCalendarRenderProps {
   end: CalendarTimestamp
   component: string | Component
   maxDays: number
+  weekdays: number[]
 }
 
 /* @vue/component */
@@ -66,6 +68,7 @@ export default CalendarWithEvents.extend({
       const around = this.parsedValue
       let component: any = null
       let maxDays = this.maxDays
+      let weekdays = this.parsedWeekdays
       let start = around
       let end = around
       switch (this.type) {
@@ -83,12 +86,14 @@ export default CalendarWithEvents.extend({
         case 'day':
           component = VCalendarDaily
           maxDays = 1
+          weekdays = WEEKDAYS_DEFAULT
           break
         case '4day':
           component = VCalendarDaily
           end = relativeDays(copyTimestamp(end), nextDay, 4)
           updateFormatted(end)
           maxDays = 4
+          weekdays = WEEKDAYS_DEFAULT
           break
         case 'custom-weekly':
           component = VCalendarWeekly
@@ -104,7 +109,7 @@ export default CalendarWithEvents.extend({
           throw new Error(this.type + ' is not a valid Calendar type')
       }
 
-      return { component, start, end, maxDays }
+      return { component, start, end, maxDays, weekdays }
     },
   },
 
@@ -150,9 +155,7 @@ export default CalendarWithEvents.extend({
             relativeDays(moved, mover, DAYS_IN_WEEK)
             break
           case 'day':
-            const index = moved.weekday
-            const days = forward ? this.weekdaySkips[index] : this.weekdaySkipsReverse[index]
-            relativeDays(moved, mover, days)
+            relativeDays(moved, mover, 1)
             break
           case '4day':
             relativeDays(moved, mover, 4)
@@ -200,7 +203,7 @@ export default CalendarWithEvents.extend({
   },
 
   render (h): VNode {
-    const { start, end, maxDays, component } = this.renderProps
+    const { start, end, maxDays, component, weekdays } = this.renderProps
 
     return h(component, {
       staticClass: 'v-calendar',
@@ -212,6 +215,7 @@ export default CalendarWithEvents.extend({
         start: start.date,
         end: end.date,
         maxDays,
+        weekdays,
       },
       directives: [{
         modifiers: { quiet: true },

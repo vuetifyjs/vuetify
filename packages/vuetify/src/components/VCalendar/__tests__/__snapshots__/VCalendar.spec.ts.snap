@@ -317,14 +317,14 @@ exports[`VCalendar should go to correct day when using next/prev public function
     </div>
     <div class="v-calendar-daily_head-day v-past">
       <div class="v-calendar-daily_head-weekday">
-        Mon
+        Sat
       </div>
       <div class="v-calendar-daily_head-day-label">
         <button type="button"
                 class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
         >
           <span class="v-btn__content">
-            14
+            12
           </span>
         </button>
       </div>
