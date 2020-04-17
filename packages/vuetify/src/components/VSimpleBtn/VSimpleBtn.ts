@@ -49,15 +49,7 @@ export default baseMixins.extend<options>().extend({
       default: null,
     },
     rounded: Boolean,
-    tag: {
-      type: String,
-      default: 'button',
-    },
     text: Boolean,
-    type: {
-      type: String,
-      default: 'button',
-    },
     value: null as any as PropType<any>,
   },
 
@@ -68,22 +60,22 @@ export default baseMixins.extend<options>().extend({
   computed: {
     classes (): any {
       return {
-        'v-btn': true,
-        'v-btn--absolute': this.absolute,
-        'v-btn--block': this.block,
-        'v-btn--bottom': this.bottom,
-        'v-btn--contained': this.contained,
-        'v-btn--depressed': (this.depressed) || this.outlined,
-        'v-btn--disabled': this.disabled,
-        'v-btn--fixed': this.fixed,
-        'v-btn--flat': this.isFlat,
-        'v-btn--left': this.left,
-        'v-btn--outlined': this.outlined,
-        'v-btn--right': this.right,
-        'v-btn--rounded': this.rounded,
-        'v-btn--text': this.text,
-        'v-btn--tile': this.tile,
-        'v-btn--top': this.top,
+        'v-simple-btn': true,
+        'v-simple-btn--absolute': this.absolute,
+        'v-simple-btn--block': this.block,
+        'v-simple-btn--bottom': this.bottom,
+        'v-simple-btn--contained': this.contained,
+        'v-simple-btn--depressed': (this.depressed) || this.outlined,
+        'v-simple-btn--disabled': this.disabled,
+        'v-simple-btn--fixed': this.fixed,
+        'v-simple-btn--flat': this.isFlat,
+        'v-simple-btn--left': this.left,
+        'v-simple-btn--outlined': this.outlined,
+        'v-simple-btn--right': this.right,
+        'v-simple-btn--rounded': this.rounded,
+        'v-simple-btn--text': this.text,
+        'v-simple-btn--tile': this.tile,
+        'v-simple-btn--top': this.top,
         ...this.themeClasses,
         ...this.groupClasses,
         ...this.elevationClasses,
@@ -138,7 +130,7 @@ export default baseMixins.extend<options>().extend({
     },
     genContent (): VNode {
       return this.$createElement('span', {
-        staticClass: 'v-btn__content',
+        staticClass: 'v-simple-btn__content',
       }, this.$slots.default)
     },
   },
@@ -147,7 +139,12 @@ export default baseMixins.extend<options>().extend({
     const children = [this.genContent()]
     const setColor = !this.isFlat ? this.setBackgroundColor : this.setTextColor
     const data: VNodeData = {
-      attrs: {},
+      attrs: {
+        disabled: this.disabled,
+        value: ['string', 'number'].includes(typeof this.value)
+          ? this.value
+          : JSON.stringify(this.value),
+      },
       class: this.classes,
       style: this.styles,
       props: {},
@@ -160,11 +157,6 @@ export default baseMixins.extend<options>().extend({
       },
     }
 
-    if (this.tag === 'button') {
-      data.attrs!.type = this.type
-      data.attrs!.disabled = this.disabled
-    }
-
-    return h(this.tag, this.disabled ? data : setColor(this.color, data), children)
+    return h('button', this.disabled ? data : setColor(this.color, data), children)
   },
 })
