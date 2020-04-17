@@ -73,6 +73,7 @@
     "html-webpack-plugin": "^3.2.0",
     "markdown-it": "^10.0.0",
     "mini-css-extract-plugin": "^0.8.0",
+    "minify-css-string": "^1.0.0",
     "mkdirp": "^1.0.3",
     "null-loader": "^3.0.0",
     "prismjs": "^1.17.1",

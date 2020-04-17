@@ -124,6 +124,11 @@
     "description": "Setup your application's theme and supplemental colors in a flash.",
     "keywords": "themes"
   },
+  "styles/css-reset": {
+    "title": "CSS Reset",
+    "description": "Vuetify uses ress.min, a complete browser reset based off or normalize.css.",
+    "keywords": "ress.min, css reset, vuetify css reset"
+  },
   "styles/text": {
     "title": "CSS Text helpers",
     "description": "Text helpers assist in modifying your application layout on varying viewport sizes with pre-configured css classes.",

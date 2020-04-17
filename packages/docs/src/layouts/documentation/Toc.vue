@@ -44,7 +44,7 @@
       <div class="pl-6">
         <v-fade-transition appear>
           <supporters-supporter-group
-            :group="supporters['Diamond']"
+            :group="2"
             small
             justify="start"
             title="Diamond Sponsors"
