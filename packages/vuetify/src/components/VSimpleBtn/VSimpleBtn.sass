@@ -1,2 +1,167 @@
 // Imports
 @import './_variables.scss'
+
+// Theme
+.v-simple-btn:not(.v-simple-btn--outlined)
+  &.primary,
+  &.secondary,
+  &.accent,
+  &.success,
+  &.error,
+  &.warning,
+  &.info
+    color: map-deep-get($material-dark, 'text', 'primary')
+
++theme(v-simple-btn) using ($material)
+  color: map-deep-get($material, 'text', 'primary')
+
+  &.v-simple-btn--disabled
+    color: map-deep-get($material, 'buttons', 'disabled') !important
+
+    &:not(.v-simple-btn--flat):not(.v-simple-btn--text):not(.v-simple-btn--outlined)
+      background-color: map-deep-get($material, 'buttons', 'focused') !important
+
+  &:not(.v-simple-btn--flat):not(.v-simple-btn--text):not(.v-simple-btn--outlined)
+    background-color: map-get($material, 'app-bar')
+
+  &.v-simple-btn--outlined.v-simple-btn--text
+    border-color: map-get($material, 'dividers')
+
+  +states($material)
+
+// Block
+.v-simple-btn
+  align-items: center
+  border-radius: $simple-btn-border-radius
+  display: inline-flex
+  flex: 0 0 auto
+  font-weight: $simple-btn-font-weight
+  letter-spacing: $simple-btn-letter-spacing
+  justify-content: center
+  outline: 0
+  position: relative
+  text-decoration: none
+  text-indent: $simple-btn-letter-spacing
+  text-transform: $simple-btn-text-transform
+  transition-duration: $simple-btn-transition-duration
+  transition-property: box-shadow, transform, opacity
+  transition-timing-function: $simple-btn-transition-fn
+  user-select: none
+  vertical-align: middle
+  white-space: nowrap
+
+  @each $name, $size in $simple-btn-font-sizes
+    &.v-size--#{$name}
+      font-size: $size
+
+  &:before
+    border-radius: inherit
+    bottom: 0
+    color: inherit
+    content: ''
+    left: 0
+    opacity: 0
+    pointer-events: none
+    position: absolute
+    right: 0
+    top: 0
+    transition: $simple-btn-transition
+
+  &:before
+    background-color: currentColor
+
+  &:not(.v-simple-btn--disabled)
+    will-change: box-shadow
+
+  &:not(.v-simple-btn--round)
+    @each $name, $size in $simple-btn-sizes
+      &.v-size--#{$name}
+        height: #{$size}px
+        min-width: #{round($size * 1.777777777777778)}px // default ratio
+        padding: 0 #{$size / 2.25}px
+
+  > .v-btn__content
+    color: inherit
+
+.v-simple-btn__content
+  align-items: center
+  color: inherit
+  display: flex
+  flex: 1 0 auto
+  justify-content: inherit
+  line-height: normal
+  position: relative
+
+// Modifiers
+.v-simple-btn:not(.v-simple-btn__text):not(.v-simple-btn--outlined)
+  &.v-simple-btn--active:before
+    opacity: $simple-btn-active-opacity
+
+  &:hover:before
+    opacity: $simple-btn-hover-opacity
+
+  &:focus:before
+    opacity: $simple-btn-focus-opacity
+
+.v-simple-btn--absolute,
+.v-simple-btn--fixed
+  position: absolute
+
+  &.v-simple-btn--right
+    right: map-get($grid-gutters, 'lg')
+
+  &.v-simple-btn--left
+    left: map-get($grid-gutters, 'lg')
+
+  &.v-simple-btn--top
+    top: map-get($grid-gutters, 'lg')
+
+  &.v-simple-btn--bottom
+    bottom: map-get($grid-gutters, 'lg')
+
+.v-simple-btn--block
+  display: flex
+  flex: 1 0 auto
+  min-width: 100% !important
+  max-width: auto
+
+.v-simple-btn--contained
+  +elevation(2)
+
+  &:after
+    +elevation(4)
+
+  &:active
+    +elevation(8)
+
+.v-simple-btn--depressed
+  box-shadow: none !important
+
+.v-simple-btn--disabled
+  box-shadow: none
+  pointer-events: none
+
+.v-simple-btn--fixed
+  position: fixed
+
+  .v-simple-btn__content
+    opacity: 0
+
+.v-simple-btn--outlined
+    border: $simple-btn-outline-border-width solid currentColor
+
+.v-simple-btn--outlined,
+.v-simple-btn--flat,
+.v-simple-btn--text
+  background-color: transparent
+
+.v-simple-btn--outlined,
+.v-simple-btn--rounded
+  &:before
+    border-radius: inherit
+
+.v-simple-btn--rounded
+  border-radius: $simple-btn-rounded-border-radius
+
+.v-simple-btn--tile
+  border-radius: 0
