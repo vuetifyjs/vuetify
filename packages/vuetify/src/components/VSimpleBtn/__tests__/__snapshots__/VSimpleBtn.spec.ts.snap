@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VSimpleBtn should not add color classes if disabled 1`] = `
+<button class="v-simple-btn v-simple-btn--contained theme--light v-size--default red lighten-1">
+  <span class="v-simple-btn__content">
+  </span>
+</button>
+`;
+
+exports[`VSimpleBtn should not add color classes if disabled 2`] = `
+<button class="v-simple-btn v-simple-btn--contained v-simple-btn--disabled theme--light v-size--default"
+        disabled="disabled"
+>
+  <span class="v-simple-btn__content">
+  </span>
+</button>
+`;
+
+exports[`VSimpleBtn should render component and match snapshot 1`] = `
+<button class="v-simple-btn v-simple-btn--contained theme--light v-size--default">
+  <span class="v-simple-btn__content">
+  </span>
+</button>
+`;
+
+exports[`VSimpleBtn should render component with a color prop and match snapshot 1`] = `
+<button class="v-simple-btn v-simple-btn--contained theme--light v-size--default red">
+  <span class="v-simple-btn__content">
+  </span>
+</button>
+`;
+
+exports[`VSimpleBtn should render component with a color prop and match snapshot 2`] = `
+<button class="v-simple-btn v-simple-btn--flat v-simple-btn--text theme--light v-size--default red--text text--lighten-1">
+  <span class="v-simple-btn__content">
+  </span>
+</button>
+`;
+
+exports[`VSimpleBtn should render component with tile prop and match snapshot 1`] = `
+<button class="v-simple-btn v-simple-btn--contained v-simple-btn--tile theme--light v-size--default">
+  <span class="v-simple-btn__content">
+  </span>
+</button>
+`;
