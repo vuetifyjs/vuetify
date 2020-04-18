@@ -28,7 +28,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
-    "@vue/compiler-sfc": "^3.0.0-alpha.5",
+    "@vue/compiler-sfc": "^3.0.0-beta.2",
     "babel-jest": "^24.8.0",
     "cross-spawn": "^6.0.5",
     "eslint": "^6.1.0",
