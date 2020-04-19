@@ -1,0 +1,18 @@
+{
+  "heading": "# Simple buttons",
+  "headingText": "The `v-simple-btn` component is a simple wrapper component around the `<button>` element.",
+  "examples": {},
+  "props": {
+    "block": "Expands the button to 100% of available space.",
+    "depressed": "Removes the button box shadow.",
+    "inputValue": "Controls the button's active state.",
+    "left": "Aligns the component towards the left. This should be used with the **absolute** or **fixed** props.",
+    "outlined": "Makes the background transparent and applies a thin border.",
+    "right": "Aligns the component towards the right. This should be used with the **absolute** or **fixed** props.",
+    "ripple": "Mixins.Rippleable.props.ripple",
+    "rounded": "Applies a large border radius on the button.",
+    "text": "Makes the background transparent.",
+    "value": "Mixins.Groupable.props.value",
+    "retainFocusOnClick": "Don't blur on click."
+  }
+}
