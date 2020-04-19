@@ -59,6 +59,7 @@ export default baseMixins.extend<options>().extend({
   props: {
     appendOuterIcon: String,
     autofocus: Boolean,
+    autoselect:Boolean
     clearable: Boolean,
     clearIcon: {
       type: String,
@@ -249,7 +250,10 @@ export default baseMixins.extend<options>().extend({
       })
     },
     clearableCallback () {
-      this.$refs.input && this.$refs.input.focus()
+      if (this.$refs.input) {
+        this.$refs.input.focus()
+        if (this.autoselect) this.$refs.input.select()
+      }
       this.$nextTick(() => this.internalValue = null)
     },
     genAppendSlot () {
@@ -382,6 +386,7 @@ export default baseMixins.extend<options>().extend({
         attrs: {
           ...this.attrs$,
           autofocus: this.autofocus,
+          autoselect: this.autoselect,
           disabled: this.disabled,
           id: this.computedId,
           placeholder: this.placeholder,
@@ -434,12 +439,14 @@ export default baseMixins.extend<options>().extend({
       if (this.isFocused || this.disabled || !this.$refs.input) return
 
       this.$refs.input.focus()
+      if (this.autoselect) this.$refs.input.select()
     },
     onFocus (e?: Event) {
       if (!this.$refs.input) return
 
       if (document.activeElement !== this.$refs.input) {
-        return this.$refs.input.focus()
+        this.$refs.input.focus()
+        if (this.autoselect) this.$refs.input.select()
       }
 
       if (!this.isFocused) {
@@ -467,7 +474,10 @@ export default baseMixins.extend<options>().extend({
       VInput.options.methods.onMouseDown.call(this, e)
     },
     onMouseUp (e: Event) {
-      if (this.hasMouseDown) this.focus()
+      if (this.hasMouseDown) {
+        this.focus()
+        if (this.autoselect) this.select()
+      }
 
       VInput.options.methods.onMouseUp.call(this, e)
     },
@@ -495,7 +505,7 @@ export default baseMixins.extend<options>().extend({
       ) return false
 
       this.$refs.input.focus()
-
+      if (this.autoselect) this.$refs.input.select()
       return true
     },
     updateValue (val: boolean) {
