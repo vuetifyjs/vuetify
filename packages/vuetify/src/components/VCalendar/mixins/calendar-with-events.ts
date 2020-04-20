@@ -365,7 +365,7 @@ export default CalendarBase.extend({
     },
     getScopedSlots () {
       if (this.noEvents) {
-        return this.$scopedSlots
+        return { ...this.$scopedSlots }
       }
 
       const mode = this.eventModeFunction(
