@@ -463,7 +463,9 @@ export default baseMixins.extend<options>().extend({
       }
     },
     onKeyDown (e: KeyboardEvent) {
-      if (!e.isComposing && e.keyCode === keyCodes.enter) { this.$emit('change', this.internalValue) }
+      if (!e.isComposing && e.keyCode === keyCodes.enter) {
+        this.$emit('change', this.internalValue)
+      }
 
       this.$emit('keydown', e)
     },
