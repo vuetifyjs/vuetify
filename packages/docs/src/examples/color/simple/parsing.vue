@@ -2,7 +2,7 @@
   <v-container>
     <v-row justify="center">
       <v-col
-        v-for="color in ['primary', 'blue darken-3', '#1976D2', 'rgb(25, 118, 210)', 'rgba(25, 118, 210, 1)', 'hsl(210, 79%, 46%)']"
+        v-for="color in colors"
         :key="color"
         cols="12"
         md="4"
@@ -14,3 +14,18 @@
     </v-row>
   </v-container>
 </template>
+
+<script>
+  export default {
+    data: () => ({
+      colors: [
+        'primary',
+        'blue darken-3',
+        '#1976D2',
+        'rgb(25, 118, 210)',
+        'rgba(25, 118, 210, 1)',
+        'hsl(210, 79%, 46%)',
+      ],
+    }),
+  }
+</script>
