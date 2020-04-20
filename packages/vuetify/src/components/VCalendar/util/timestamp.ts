@@ -1,4 +1,5 @@
 import { CalendarTimestamp, CalendarFormatter } from 'types'
+import { isLeapYear } from '../../../util/dateTimeUtils'
 
 export const PARSE_REGEX: RegExp = /^(\d{4})-(\d{1,2})(-(\d{1,2}))?([^\d]+(\d{1,2}))?(:(\d{1,2}))?(:(\d{1,2}))?$/
 export const PARSE_TIME: RegExp = /(\d\d?)(:(\d\d?)|)(:(\d\d?)|)/
@@ -29,6 +30,7 @@ export function getStartOfWeek (timestamp: CalendarTimestamp, weekdays: number[]
   if (today) {
     updateRelative(start, today, start.hasTime)
   }
+
   return start
 }
 
@@ -39,6 +41,7 @@ export function getEndOfWeek (timestamp: CalendarTimestamp, weekdays: number[], 
   if (today) {
     updateRelative(end, today, end.hasTime)
   }
+
   return end
 }
 
@@ -47,6 +50,7 @@ export function getStartOfMonth (timestamp: CalendarTimestamp): CalendarTimestam
   start.day = DAY_MIN
   updateWeekday(start)
   updateFormatted(start)
+
   return start
 }
 
@@ -55,6 +59,7 @@ export function getEndOfMonth (timestamp: CalendarTimestamp): CalendarTimestamp 
   end.day = daysInMonth(end.year, end.month)
   updateWeekday(end)
   updateFormatted(end)
+
   return end
 }
 
@@ -68,12 +73,14 @@ export function parseTime (input: any): number | false {
     if (!parts) {
       return false
     }
+
     return parseInt(parts[1]) * 60 + parseInt(parts[3] || 0)
   } else if (typeof input === 'object') {
     // when an object is given, it must have hour and minute
     if (typeof input.hour !== 'number' || typeof input.minute !== 'number') {
       return false
     }
+
     return input.hour * 60 + input.minute
   } else {
     // unsupported type
@@ -95,6 +102,7 @@ export function parseTimestamp (input: string, required = false, now?: CalendarT
     if (required) {
       throw new Error(`${input} is not a valid timestamp. It must be in the format of YYYY-MM-DD or YYYY-MM-DD hh:mm. Zero-padding is optional and seconds are ignored.`)
     }
+
     return null
   }
 
@@ -211,10 +219,6 @@ export function getWeekday (timestamp: CalendarTimestamp): number {
   return timestamp.weekday
 }
 
-export function isLeapYear (year: number): boolean {
-  return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0)
-}
-
 export function daysInMonth (year: number, month: number) {
   return isLeapYear(year) ? DAYS_IN_MONTH_LEAP[month] : DAYS_IN_MONTH[month]
 }
@@ -300,6 +304,7 @@ export function relativeDays (
   days = 1
 ): CalendarTimestamp {
   while (--days >= 0) mover(timestamp)
+
   return timestamp
 }
 
@@ -403,6 +408,7 @@ export function createNativeLocaleFormatter (locale: string, getOptions: Calenda
       const intlFormatter = new Intl.DateTimeFormat(locale || undefined, getOptions(timestamp, short))
       const time = `${padNumber(timestamp.hour, 2)}:${padNumber(timestamp.minute, 2)}`
       const date = timestamp.date
+
       return intlFormatter.format(new Date(`${date}T${time}:00+00:00`))
     } catch (e) {
       return ''
