@@ -55,11 +55,17 @@
     "url": "https://www.creative-tim.com/product/vuetify-material-dashboard-pro",
     "query": "&partner=116160"
   },
-  "shopify-e-commerce": {
-    "title": "Shopify E-commerce",
-    "description": "A handcrafted Vuetify e-commerce application built on top of Shopify. Meticulous tweaks for optimal performance, user experience and accessibility make this theme stand out as a must have for anyone selling or wanting to sell with Shopify.",
-    "src": "https://cdn.vuetifyjs.com/images/vuetify-ads/shopify.png",
-    "url": "https://store.vuetifyjs.com/product/shopify-e-commerce-theme"
+  "daedal-pro": {
+    "title": "Daedal Theme Pro",
+    "description": "Daedal Theme PRO — is a carefully crafted multi-purpose, responsive, and gorgeous theme.",
+    "src": "https://cdn.vuetifyjs.com/images/themes/daedal/daedal-hero.png",
+    "url": "https://store.vuetifyjs.com/product/daedal-responsive-multi-purpose-theme-pro"
+  },
+  "daedal-free": {
+    "title": "Daedal Theme Free",
+    "description": "Daedal Theme Free — is a carefully crafted multi-purpose, responsive, and gorgeous theme.",
+    "src": "https://cdn.vuetifyjs.com/images/themes/daedal/daedal-free-hero.png",
+    "url": "https://store.vuetifyjs.com/product/daedal-responsive-multi-purpose-theme-free"
   },
   "material-kit": {
     "title": "Material Kit",
@@ -71,7 +77,7 @@
     "title": "Alpha Theme",
     "description": "Complete theme experience including enhanced Vue CLI, full documentation, 5 custom components and much more!",
     "src": "https://cdn.vuetifyjs.com/images/vuetify-ads/alpha.png",
-    "url": "https://store.vuetifyjs.com/product/vuetify-alpha-theme"
+    "url": "https://store.vuetifyjs.com/product/alpha-theme"
   },
   "dashboard": {
     "title": "Material Dashboard Free",

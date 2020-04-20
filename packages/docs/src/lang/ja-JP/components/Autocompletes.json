@@ -3,6 +3,10 @@
   "headingText": "`v-autocomplete` コンポーネントはシンプルで柔軟な先行入力機能を提供します。これは大量のデータを検索するときや、APIから動的に情報を要求するときにも便利です。",
   "usageText": "オートコンプリートコンポーネントは `v-select` を拡張し、要素をフィルタする機能を追加しています。",
   "examples": {
+    "api": {
+      "heading": "### APIの検索",
+      "desc": "動的データを簡単にフックアップして、独自のエクスペリエンスを作りましょう。`v-autocomplete`の豊富なpropリストにより、入力のあらゆる面を簡単に微調整することができます。"
+    },
     "slots": {
       "heading": "### スロット",
       "desc": "slotの活用により、選択の視覚的出力をカスタマイズできます。この例では、チップとリストアイテムの両方にプロファイル画像を追加します。"
@@ -11,14 +15,20 @@
       "heading": "### オートコンプリートのカスタムフィルタ",
       "desc": "'filter' propを使用して、カスタムロジックで個々の項目をフィルター処理できます。この例では、名前でアイテムをフィルタリングします"
     },
+    "advanced": {
+      "heading": "### 高度なスロット",
+      "desc": "`v-autocomplete` コンポーネントは非常に柔軟性が高く、あらゆるユースケースに対応できます。**no-data** 、 **item** および **selection**スロットのカスタム表示を作成して、ユニークなユーザー体験を提供します。_slots_ を使用すると、アプリケーションの外観を簡単にカスタマイズすることができます。"
+    },
     "stateSelector": {
       "desc": "`v-autocomplete` スロットとトランジションを組み合わせて使用すると、この状態セレクタのような、スタイリッシュな切り替え可能なオートコンプリートフィールドを作成できます。"
     },
     "dense": {
-      "heading": "### Dense （高さが詰まったスタイル）"
+      "heading": "### Dense （高さが詰まったスタイル）",
+      "desc": "`dense` propを使うと、オートコンプリートの高さを減らし、リスト項目の最大高さを下げることができます。"
     }
   },
   "props": {
+    "allowOverflow": "メニューが画面からオーバーフローするのを許可する",
     "dark": "Components.Inputs.props.dark",
     "filter": "検索時に使用されるフィルター 処理アルゴリズム。[example](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/components/VAutocomplete/VAutocomplete.ts#L36)",
     "searchInput": "検索値。`.sync` 修飾子と共に使用できます。"

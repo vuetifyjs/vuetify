@@ -23,21 +23,36 @@
       "heading": "### カウンタ",
       "desc": "**show-size**プロパティを**counter**と一緒に使用すると、ファイル総数と合計サイズが入力部の下に表示されます。"
     },
+    "selection": {
+      "heading": "### 選択スロット",
+      "desc": "`selection` slotを使うと、入力された選択項目の外観をカスタマイズすることができます。これは通常は [chips](/components/chips) で行われますが、どんなコンポーネントやマークアップでも使用できます。"
+    },
     "custom-icon": {
-      "heading": "### カスタムアイコン"
+      "heading": "### カスタムアイコン",
+      "desc": "`v-file-input`にはデフォルトで付加されたアイコンがあり、これをコンポーネントに設定したり、グローバルに調整することができます。グローバルコンポーネントの変更に関する詳細な情報は、[アイコンのカスタマイズページ](/customization/icon) を参照してください。"
     },
     "validation": {
       "heading": "### バリデーション",
       "desc": "他の入力と同様に、**rules** propを使用して独自のカスタムバリデーションパラメータを作成できます。"
     },
+    "advanced": {
+      "heading": "### 複雑な選択スロット",
+      "desc": "選択スロットの柔軟性により、複雑なユースケースにも対応できます。この例では、複数ファイル選択時に、最初の2つの選択項目をチップとして、残りをインジケーターとして表示しています。"
+    },
     "dense": {
-      "heading": "### Dense （高さが詰まったスタイル）"
+      "heading": "### Dense （高さが詰まったスタイル）",
+      "desc": "`dense` propでfile inputの高さを低くできます。"
     }
   },
   "props": {
     "accept": "許可するファイルの種類を記述する 1 つ以上の [固有ファイル型指定子](https://developer.mozilla.org/ja/docs/Web/HTML/Element/input/file#Unique_file_type_specifiers) を説明します。",
     "chips": "Components.Selects.props.chips",
+    "counterSizeString": "**counter**および **show-size** propを使用するときに表示されるテキスト。 [国際化](/customization/internationalization) 設定でグローバルにカスタマイズすることもできます。",
+    "counterString": "**counter** propを使用するときに表示されるテキスト。 [国際化](/customization/internationalization) 設定でグローバルにカスタマイズすることもできます。",
+    "multiple": "**multiple** 属性を追加し、複数のファイルを選択できるようにします。",
+    "showSize": "選択したファイルの表示サイズを設定します。**true**を使用している場合、デフォルトでは _1000_ には (**kB、MB、GB**) が表示され、 _1024_ には (**KiB、MiB、GiB**) が表示されます。",
     "smallChips": "Components.Selects.props.smallChips",
+    "truncateLength": "省略記号で切り捨てられる前のファイル名の長さ",
     "value": "[File objects](https://developer.mozilla.org/ja/docs/Web/API/File)単体あるいは配列"
   },
   "slots": {

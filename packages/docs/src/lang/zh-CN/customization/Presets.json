@@ -1,3 +1,21 @@
 {
+  "heading": "# 预设",
+  "headingText": "对于第 2 版 Material Design 规范，Google 创建了 [Material studies](https://material.io/design/material-studies/about-our-material-studies.html)，目的是通过虚构的应用程序来探索现实世界的设计局限性，每个应用程序都有自己独特的属性和用例。Vuetify 预设通过预先配置的框架选项、SASS 变量和自定义样式整合了这些研究，这些预设可以立即改变你的应用程序的外观和感觉。",
+  "defaultHeading1": "## 默认预设",
+  "defaultText1a": "默认的 Vuetify 预设提供了所有框架服务的基线值。每个对象键(object key) 对应于 `$vuetify` 对象上的一个服务，并且可以通过 Vuetify 构造函数中的 **preset** 或自定义 **user options** 来覆盖。",
+  "materialHeading1": "## Material Studies",
+  "materialText1a": "[Material Design](https://material.io/) 是一种固执己见的视觉语言，在实现高度定制的设计时，可能难以使用。新的研究展示了材料主题化的灵活性，并告诉你在没有默认材料外观的情况下创建 **独特的** 应用程序是多么容易。",
+  "materialText1b": "目前共有 **7 个 Material Studies**，每个都有相应的预设插件：",
+  "materialText1c": [
+    "[Basil](https://material.io/design/material-studies/basil.html)",
+    "[Crane](https://material.io/design/material-studies/crane.html)",
+    "[Fortnightly](https://material.io/design/material-studies/fortnightly.html)",
+    "[Owl](https://material.io/design/material-studies/owl.html)",
+    "[Rally](https://material.io/design/material-studies/rally.html)",
+    "[Reply](https://material.io/design/material-studies/reply.html)",
+    "[Shrine](https://material.io/design/material-studies/shrine.html)"
+  ],
+  "installHeading2": "### 安装",
+  "installText2a": "在你的控制台中键入 <kbd>vue add vuetify-preset-{name}</kbd>, 其中 `{name}` 对应于可用的 [Material Studies](#material-studies) 之一。 安装插件后，您的 **vuetify.js** 文件将更新为包括所选的预设。",
   "limitationHeading1": "## 局限性"
 }

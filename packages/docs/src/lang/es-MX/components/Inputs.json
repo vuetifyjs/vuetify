@@ -1,8 +1,0 @@
-{
-  "props": {
-    "toggleKeys": "Arreglo de códigos de teclas que alternarán el valor del input (toggle) si es que lo soporta"
-  },
-  "slots": {
-    "label": "Reemplaza la etiqueta default"
-  }
-}

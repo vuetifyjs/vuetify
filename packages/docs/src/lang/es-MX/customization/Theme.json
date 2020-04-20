@@ -1,8 +1,0 @@
-{
-  "lightAndDarkHeader": "## Light y Dark",
-  "customizingHeader": "## Personalizar",
-  "customizingText1": "Por default, Vuetify tiene un tema estándar aplicado a todos sus componentes.",
-  "customizingText3": "También puedes usar los colores de Material predefinidos..",
-  "customizingText4": "Por debajo, Vuetify generará las clases de CSS que serán accesibles en el DOM basado en estos valores. Estas clases seguirán el mismo markup que otras clases auxiliares, por ejemplo `primary` o `secondary--text`.",
-  "customizingText5": "Estos valores también estarán disponibles en el objeto instancia **$vuetify** en la propiedad **theme**. Esto permite que puedas modificar tu tema _dinámicamente_. Tras bambalinas, Vuetify regenerará y actualizará tus clases del tema, haciendo que tu aplicación se vea diferente de manera fluida."
-}

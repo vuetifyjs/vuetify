@@ -3,9 +3,15 @@
   "headingText": "`v-combobox`コンポーネントは選択肢**items**に存在しない値を入力できる [v-autocomplete](/components/autocompletes) です。作成されたアイテムは文字列として返されます。",
   "usageText": "コンボボックスを使用すると、提供されたアイテムリストに存在しない値をユーザーが作成できるようにすることができます。",
   "examples": {
+    "no-data": {
+      "desc": "この例では、アイテムの検索や作成時にユーザーにコンテキストを提供するために、カスタムの**no-data**スロットを利用しています。"
+    },
     "advanced": {
       "heading": "### 高度なカスタムオプション",
       "desc": "`v-combobox`は、`v-select`と`v-autocomplete`から追加された機能で改善されました。これにより、真にカスタマイズされた実装を作成するための拡張インターフェースが提供されます。この例では、カスタム **filter** アルゴリズム、インラインリスト編集、動的入力項目など、より高度な機能を利用しています。"
+    },
+    "combobox-multiple": {
+      "desc": "以前は**tags**と呼ばれていました - ユーザーは複数の値を入力できます"
     },
     "dense": {
       "heading": "### Dense （高さが詰まったスタイル）",
@@ -13,6 +19,7 @@
     }
   },
   "props": {
-    "dark": "Components.Inputs.props.dark"
+    "dark": "Components.Inputs.props.dark",
+    "delimiters": "入力時に、新しいタグをトリガーする、文字列の配列を受け入れます。通常の Tab キーと Enter キーの代わりにはなりません。"
   }
 }

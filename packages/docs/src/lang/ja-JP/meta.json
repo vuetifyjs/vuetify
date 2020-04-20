@@ -8,6 +8,9 @@
     "title": "おっと、404のようです。",
     "description": "おっと、あなたが探しているものはここにはないようです。"
   },
+  "introduction/guide": {
+    "title": "初心者向けのガイド"
+  },
   "introduction/why-vuetify": {
     "title": "Vuetifyを選ぶ理由",
     "description": "Vuetifyはとてもアクティブなコミュニティがあり、マテリアルデザインコンポーネントの簡単な使い方を提供しています。また、継続的にアップデートされています。",
@@ -44,6 +47,9 @@
   "getting-started/pre-made-layouts": {
     "title": "アプリケーションレイアウト",
     "keywords": "事前定義されたレイアウト、レイアウト、アプリケーションレイアウト、マテリアルデザインレイアウト"
+  },
+  "getting-started/browser-support": {
+    "title": "ブラウザ対応"
   },
   "getting-started/unit-testing": {
     "title": "ユニットテスト",
@@ -83,6 +89,9 @@
   },
   "components/api-explorer": {
     "title": "API explorer"
+  },
+  "components/app-bars": {
+    "description": "app barコンポーネントは、高度なスクロールテクニックとアプリのレイアウトをサポートする強化されたツールバーです。"
   },
   "components/aspect-ratios": {
     "title": "アスペクト比"

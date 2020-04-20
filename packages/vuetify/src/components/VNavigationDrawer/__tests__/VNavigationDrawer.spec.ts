@@ -425,15 +425,15 @@ describe('VNavigationDrawer', () => { // eslint-disable-line max-statements
     })
 
     expect(wrapper.vm.isMouseover).toBe(false)
-    expect(wrapper.vm.computedNavigationWidth).toBe(56)
+    expect(wrapper.vm.computedWidth).toBe(56)
 
     wrapper.trigger('mouseenter')
     expect(wrapper.vm.isMouseover).toBe(true)
-    expect(wrapper.vm.computedNavigationWidth).toBe(256)
+    expect(wrapper.vm.computedWidth).toBe(256)
 
     wrapper.trigger('mouseleave')
     expect(wrapper.vm.isMouseover).toBe(false)
-    expect(wrapper.vm.computedNavigationWidth).toBe(56)
+    expect(wrapper.vm.computedWidth).toBe(56)
   })
 
   it('should clip top', () => {

@@ -1,5 +1,4 @@
 node_modules
-packages/kitchen
 packages/api-generator/dist
 packages/docs/dist
 packages/vuetify/coverage

@@ -1,5 +1,6 @@
 {
   "heading": "# データテーブル",
+  "headingText": "`v-data-table` コンポーネントは表形式のデータを表示するために使われます。ソート、検索、ページネーション、インライン編集、行の選択 などの機能を含んでいます。",
   "examples": {
     "usage": {
       "desc": "データ テーブルは、デフォルトではデータを単純な行として表示します。"
@@ -11,6 +12,10 @@
     "select": {
       "heading": "### 行の選択",
       "desc": "'show-select' propは、すべての行を切り替えるヘッダーのチェック ボックスと、各行のチェック ボックスをレンダリングします。これらをそれぞれスロット 'header.data-table-select' と 'item.data-table-select' でカスタマイズできます。また、複数の選択した行を同時に許可するか、`single-select` propで 1 つだけ許可するかを切り替えることもできます。"
+    },
+    "expand": {
+      "heading": "### 展開可能な行",
+      "desc": "`show-expand` prop はデフォルトの各行に展開アイコンを表示します。これは `item.data-table-expand` スロットでカスタマイズすることができます。このスロットの位置は、ヘッダ配列に `value: 'data-table-expand'` のカラムを追加することでカスタマイズできます。また、`single-expand` propで複数の展開された行を同時に許可するか、1つだけ許可するかを切り替えることもできます。拡張された行は同期されたprop `expanded.sync` で利用できます。"
     },
     "group": {
       "heading": "### グループ化された行",

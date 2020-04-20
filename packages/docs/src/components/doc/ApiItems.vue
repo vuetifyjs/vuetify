@@ -25,7 +25,11 @@
               label="Available Component(s)"
               outlined
               prepend-inner-icon="mdi-view-dashboard"
-            />
+            >
+              <template v-slot:item="{ item }">
+                <span class="comp-name">{{ item }}</span>
+              </template>
+            </v-select>
           </v-col>
 
           <v-col

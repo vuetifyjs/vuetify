@@ -3,6 +3,9 @@
     "icon": {
       "heading": "### Icon"
     },
+    "outlined": {
+      "heading": "### Umriss"
+    },
     "closable": {
       "uninverted": true
     },

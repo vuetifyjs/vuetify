@@ -19,6 +19,7 @@
   "installFA": "### 安装 Font Awesome 5 Icons",
   "installFAText1": "安装 **FontAwesome** 最简单的方法是使用 cdn。在你主要的 `index.html` 的头部里放置这个代码：",
   "installFAText2": "要在本地安装，你可以使用你喜欢的软件包管理器版本 [Free](https://fontawesome.com/) 安装 **FontAwesome**：",
+  "installFAText3": "在你的主入口中，只需导入包中的 **all.css**。如果你正在操作一个 webpack 项目，你需要使用 webpack [css loader](https://github.com/webpack-contrib/css-loader) 来设置对 `.css` 文件的支持。如果你已经在使用 [Vue CLI](https://cli.vuejs.org/)，那么这些都会自动完成。",
   "installFA4": "### 安装 Font Awesome 4 Icons",
   "installFA4Text1": "与上面相同。通过 cdn 安装 FontAwesome 在你的项目内是最简单方式：",
   "installFA4Text2": "安装 FontAwesome**4** 的方法与它的新版本相同，只是从一个不同的仓库安装。 你将看准是 `font-awesome` 而不是 `@fortawesome`。",

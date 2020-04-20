@@ -1,0 +1,40 @@
+usage-new(:value=`{
+  booleans: [
+    'hide-selected',
+    'multiple',
+    'persistent-hint',
+    'small-chips',
+    'clearable'
+  ],
+  selects: [
+    {
+      prop: 'type',
+      label: 'Type',
+      attrs: {
+        items: [
+          'filled',
+          'outlined',
+          'solo'
+        ]
+      }
+    }
+  ]
+}`)
+alert(value="error") Components.Combobox.objectReturnAlert
+alert(value="warning") Components.Selects.autoAlert
+alert(value="info") Components.Selects.autocompleteAlert
+api(:value=`[
+  'v-combobox'
+]`)
+examples(:value=`[
+  'simple/combobox-multiple',
+  'simple/dense',
+  'intermediate/no-data',
+  'intermediate/advanced'
+]`)
+
+up-next(:value=`[
+  'components/autocompletes',
+  'components/forms',
+  'components/selects'
+]`)

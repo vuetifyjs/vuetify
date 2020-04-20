@@ -12,6 +12,8 @@
   "transformText2": "Textbruch und das Entfernen von `text-transform` ist ebenfalls möglich. Im ersten Beispiel wird die benutzerdefinierte Klasse `text-transform: uppercase` überschrieben und erlaubt den Verbleib des Textes. Im zweiten Beispiel zerbrechen wir ein längeres Wort, um in den verfügbaren Raum zu passen.`",
   "weightsHeader": "## Schriftgewichte und Kursiv",
   "weightsText1": "Standardmäßig unterstützt das Material Design **100, 300, 400, 500, 700, 900** Schriftgewichte und kursiven Text.",
+  "opacityHeader": "##Texttransparenz",
+  "opacityText1": "Die Hilfsklassen für die Texttransparenz machen es Ihnen leicht die Betonung des Textes anzupassen. `text--primary` hat die gleiche Deckkraft wie Standardtext. `text--secondary` wird für Hinweise und Helfertext verwendet. Mit `text--disabled` lässt sich der Text komplett deaktivieren.",
   "rtlHeader": "## RTL-Ausrichtung",
   "rtlText1": "Wenn Sie [RTL](/customization/rtl) verwenden, können Sie die Ausrichtung unabhängig von der **rtl**-Bezeichnung behalten wollen. Dies kann mit Hilfe von Textausrichtungshilfeklassen im folgenden Format erreicht werden: `text-<breakpoint>-<direction>`, wobei der Haltepunkt `sm`, `md`, `lg` oder `xl` und Richtung `links` oder `rechts` sein kann. Auch wenn Sie wollen, dass die Ausrichtung auf rtl reagiert, können Sie dies mit den Anweisungen `start` und `end` umsetzen."
 }

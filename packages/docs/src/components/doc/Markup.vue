@@ -13,7 +13,7 @@
     ><slot /></prism>
 
     <div
-      v-if="filename"
+      v-if="href"
       class="v-markup__edit"
     >
       <a
@@ -27,10 +27,7 @@
       </a>
     </div>
 
-    <div
-      v-if="!hideCopy"
-      class="v-markup__copy"
-    >
+    <div class="v-markup__copy">
       <v-icon
         title="Copy code"
         aria-label="Copy code"
@@ -95,14 +92,13 @@
         type: Boolean,
         default: process.env.NODE_ENV !== 'production',
       },
-      hideCopy: Boolean,
     },
 
     data: vm => ({
       code: null,
       copied: false,
       language: vm.lang,
-      branch: null,
+      branch: 'master',
     }),
 
     computed: {
@@ -111,10 +107,12 @@
         const folder = split.shift()
         const file = split.join('_')
 
-        return `${folder}/${file}.txt`
+        return file ? `${folder}/${file}.txt` : null
       },
       href () {
-        return `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/snippets/${this.file}`
+        return this.file
+          ? `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/snippets/${this.file}`
+          : null
       },
       id () {
         if (this.value === 'markup') return
