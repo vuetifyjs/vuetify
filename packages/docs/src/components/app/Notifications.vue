@@ -65,6 +65,7 @@
   // Utilities
   import bucket from '@/plugins/cosmicjs'
   import { formatDate } from '@/util/date.js'
+  import { differenceInDays, parseISO } from 'date-fns'
   import {
     get,
     sync,
@@ -105,7 +106,11 @@
           created_at: formatDate(new Date(object.created_at)),
         })
 
-        if (!this.hasBeenViewed(item) && !this.snack) {
+        if (
+          !this.hasRecentlyViewed() &&
+          !this.hasBeenViewed(item) &&
+          !this.snack
+        ) {
           this.snack = true
           this.snackbar = {
             slug: item.slug,
@@ -122,11 +127,23 @@
     },
 
     methods: {
+      getNow () {
+        return (new Date()).toISOString()
+      },
       hasBeenViewed (item) {
         return Boolean(localStorage.getItem(`vuetify-notification-${item.slug}`))
       },
       markViewed (slug) {
         localStorage.setItem(`vuetify-notification-${slug}`, true)
+        localStorage.setItem('vuetify-notification-last-time', this.getNow())
+      },
+      hasRecentlyViewed () {
+        const last = (
+          localStorage.getItem('vuetify-notification-last-time') ||
+          this.getNow()
+        )
+
+        return differenceInDays(parseISO(this.getNow()), parseISO(last)) < 2
       },
     },
   }
