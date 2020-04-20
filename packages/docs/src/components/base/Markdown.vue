@@ -52,7 +52,7 @@
         clearTimeout(this.timeout)
 
         this.timeout = setTimeout(() => {
-          const links = this.$el.querySelectorAll('a.v-markdown--link')
+          const links = this.$el.querySelectorAll('a.v-markdown--link[href^="#"]')
 
           Array.prototype.forEach.call(links, el => {
             el.addEventListener('click', this.onLinkClick)
