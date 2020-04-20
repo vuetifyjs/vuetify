@@ -1,5 +1,5 @@
-import format from 'date-fns/format'
+import { format, parseISO } from 'date-fns'
 
 export function formatDate (date) {
-  return format(date, 'MMMM d')
+  return format(parseISO(date.toISOString().substr(0, 10)), 'MMMM d')
 }

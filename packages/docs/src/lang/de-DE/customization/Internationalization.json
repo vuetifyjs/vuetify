@@ -15,6 +15,6 @@
     "t": "Übersetzungsfunktion intern verwendet"
   },
   "vueI18nHeader": "## Vue i18n",
-  "vueI18nText1": "Wenn Sie das vue-i18n Paket verwenden, können Sie es sehr einfach mit Vuetify integrieren. Dadurch können Sie alle Ihre Übersetzungen an einem Ort handhaben. Erstellen Sie einfach einen Eintrag für $vuetify innerhalb Ihrer Nachrichten und fügen Sie die entsprechenden Sprachänderungen hinzu. Dann hängen Sie vue-i18n in Vuetify mit einer benutzerdefinierten Übersetzungsfunktion (wie im folgenden Beispiel zu sehen) ein. Für eine vollständige Liste aller verfügbaren Schlüssel [navigieren Sie hier](#Create-translation).",
+  "vueI18nText1": "Wenn Sie das vue-i18n Paket verwenden, können Sie es sehr einfach mit Vuetify integrieren. Dadurch können Sie alle Ihre Übersetzungen an einem Ort handhaben. Erstellen Sie einfach einen Eintrag für $vuetify innerhalb Ihrer Nachrichten und fügen Sie die entsprechenden Sprachänderungen hinzu. Dann hängen Sie vue-i18n in Vuetify mit einer benutzerdefinierten Übersetzungsfunktion (wie im folgenden Beispiel zu sehen) ein. Für eine vollständige Liste aller verfügbaren Schlüssel [navigieren Sie hier](#create-a-translation).",
   "vueI18nText2": "Ein wichtiger Hinweis bei der Verwendung externer Lokalisierungs-Plugins ist, dass vuetify nicht automatisch auf Englisch zurückfällt, wenn keine Lokalisierung für die aktuelle Lokalisierung existiert. Stellen Sie also sicher, dass Sie das Plugin sowohl mit den englischen als auch mit Ihren eigenen Lokalisierungen versorgen."
 }
