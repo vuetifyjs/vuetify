@@ -61,16 +61,8 @@
       },
       onLinkClick (e) {
         e.preventDefault()
-        const href = e.target.getAttribute('href')
-        const isExternal = (
-          (href.indexOf('http') > -1 && href.indexOf(`${window.document.domain}/`) === -1) ||
-          href.indexOf('mailto') > -1
-        )
-        if (isExternal) {
-          window.location = href
-        } else {
-          this.$router.push(href)
-        }
+
+        this.$router.push(e.target.getAttribute('href'))
       },
     },
 
