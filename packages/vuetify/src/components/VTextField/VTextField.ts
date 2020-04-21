@@ -59,7 +59,7 @@ export default baseMixins.extend<options>().extend({
   props: {
     appendOuterIcon: String,
     autofocus: Boolean,
-    autoselect:Boolean
+    autoselect:Boolean,
     clearable: Boolean,
     clearIcon: {
       type: String,
