@@ -6,19 +6,9 @@
     "fallback": true
   },
   {
-    "name": "عربى",
-    "locale": "ar-SA",
-    "country": "ar"
-  },
-  {
     "name": "Deutsch",
     "locale": "de-DE",
     "country": "de"
-  },
-  {
-    "name": "Español",
-    "locale": "es-MX",
-    "country": "mx"
   },
   {
     "name": "Français",
@@ -26,40 +16,10 @@
     "country": "fr"
   },
   {
-    "name": "Italiano",
-    "locale": "it-IT",
-    "country": "it"
-  },
-  {
-    "name": "ខ្មែរ",
-    "locale": "km-KH",
-    "country": "kh"
-  },
-  {
-    "name": "Nederlands",
-    "locale": "nl-NL",
-    "country": "nl"
-  },
-  {
-    "name": "Português",
-    "locale": "pt-BR",
-    "country": "br"
-  },
-  {
     "name": "Русский",
     "locale": "ru-RU",
     "alternate": "ru",
     "country": "ru"
-  },
-  {
-    "name": "Svenska",
-    "locale": "sv-SE",
-    "country": "se"
-  },
-  {
-    "name": "Türk",
-    "locale": "tr-TR",
-    "country": "tr"
   },
   {
     "name": "简体中文",
@@ -78,11 +38,6 @@
     "locale": "ja-JP",
     "alternate": "ja",
     "country": "jp"
-  },
-  {
-    "name": "Tiếng Việt",
-    "locale": "vi-VN",
-    "country": "vn"
   },
   {
     "name": "Help translate",

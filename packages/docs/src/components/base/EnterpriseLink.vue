@@ -1,7 +1,7 @@
 <template>
   <v-btn
     :aria-label="$t('Vuetify.AppToolbar.enterprise')"
-    class="hidden-sm-and-down"
+    class="hidden-md-and-down"
     min-width="48"
     text
     :to="path"

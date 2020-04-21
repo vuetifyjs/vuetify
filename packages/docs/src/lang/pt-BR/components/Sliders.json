@@ -1,8 +1,0 @@
-{
-  "examples": {
-    "validation": {
-      "heading": "Validação",
-      "desc": "Vuetify inclui uma validação simples através da propriedade `rules`. Esta propriedade aceita um array de funções de retorno (callbacks). Enquanto estiver validando as regras, o valor do v-model atual será passado para a função de retorno. Esta função de retorno deve retornar `true` ou `String`, com a mensagem de erro."
-    }
-  }
-}

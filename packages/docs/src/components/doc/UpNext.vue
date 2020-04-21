@@ -1,6 +1,6 @@
 <template>
   <div>
-    <base-heading id="up-next">Generic.Pages.upNext</base-heading>
+    <base-heading>Generic.Pages.upNext</base-heading>
 
     <base-markdown>Generic.Pages.upNextText</base-markdown>
 

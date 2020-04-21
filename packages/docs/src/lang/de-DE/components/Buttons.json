@@ -1,10 +1,21 @@
 {
   "examples": {
+    "text": {
+      "heading": "### Text"
+    },
     "dropdown": {
       "uninverted": true
     },
     "icon": {
       "heading": "### Icon"
+    },
+    "outlined": {
+      "heading": "### Umriss"
+    }
+  },
+  "props": {
+    "v-btn": {
+      "outlined": "Der Hintergrund wird transparent und ein dünner Rand wird hinzugefügt."
     }
   }
 }

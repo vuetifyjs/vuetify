@@ -1,1 +1,25 @@
-{}
+{
+  "heading": "# Langfristige Unterstützung",
+  "headingText": "Als Komponenten-Framework verstehen wir, dass viele Projekte, die Vuetify verwenden, Entwicklungszyklen haben, die ein Upgrade auf die neueste Version verhindern. Um Entwicklern und Unternehmen Sicherheit zu bieten, bieten wir **Langzeitunterstützung** für die neueste _minor_ der letzten _major_ Veröffentlichung an. Dies bedeutet, dass Sie mit jeder _major_ Version beruhigt sein können, da Sie wissen, dass **12 Monate** nach einer neuen Veröffentlichung Ihre existierende Version Aktualisierungen für kritische Fehler und Sicherheitslücken erhält.",
+  "2header": "## Vuetify 2.0",
+  "2text": "Die neueste Version von Vuetify, basierend auf der Material-Design 2 Spezifikation. Es enthält zahlreiche Vorteile gegenüber Version v1.5 und ist die empfohlene Version für die aktuellsten Funktionen und Fehlerbehebungen. Diese Version wird aktiv gepflegt und hat eine [Roadmap](/introduction/roadmap) mit kommenden Funktionen.",
+  "2features": [
+    "**7 neue Komponenten**",
+    "**Upgrade zur MD2-Spezifikation abgeschlossen**",
+    "**Vollständige Typescript-Unterstützung**",
+    "**Verbesserte Barrierefreiheit und RTL-Unterstützung**",
+    "**Zahlreiche Fehlerbehebungen, QOL-Änderungen und Leistungsverbesserungen**"
+  ],
+  "2upgrade": "Upgrade von v1.5? Beachten Sie die verfügbare [Upgrade-Anleitung](https://github.com/vuetifyjs/vuetify/releases/tag/v2.0.0#user-content-upgrade-guide).",
+  "15header": "## Vuetify 1.5 LTS",
+  "15text": "Die neueste LTS Version von Vuetify, basierend auf der Material Design 1 Spezifikation. LTS steht für langfristige Unterstützung – das heißt 12 Monate, bis Juli 2020, kostenlose Sicherheitsupdates und kritische Fehlerbetreuung, garantiert.",
+  "15text2": "Upgrade auf v1.5? Beachten Seie die verfügbaren Upgrade-Anleitungen:",
+  "15versions": [
+    "[Vuetify v1.5](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0)",
+    "[Vuetify v1.4](https://github.com/vuetifyjs/vuetify/releases/tag/v1.4.0)",
+    "[Vuetify v1.3](https://github.com/vuetifyjs/vuetify/releases/tag/v1.3.0)",
+    "[Vuetify v1.2](https://github.com/vuetifyjs/vuetify/releases/tag/v1.2.0)",
+    "[Vuetify v1.1](https://github.com/vuetifyjs/vuetify/releases/tag/v1.1.0)"
+  ],
+  "15text3": "Wenn Sie weitere Fragen haben, treten Sie bitte unserer [Discord Community](https://community.vuetifyjs.com) bei."
+}

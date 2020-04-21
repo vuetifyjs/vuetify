@@ -185,7 +185,7 @@
     },
 
     data: vm => ({
-      branch: undefined,
+      branch: 'master',
       component: undefined,
       dark: false,
       expand: false,

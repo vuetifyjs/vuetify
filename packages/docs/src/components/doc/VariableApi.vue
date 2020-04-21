@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <base-heading>Generic.Pages.variableApi</base-heading>
+  <section>
+    <base-heading id="variable-api">Generic.Pages.variableApi</base-heading>
 
     <base-markdown>Customization.SassVariables.variableApiDesc</base-markdown>
 
@@ -75,7 +75,7 @@
         </template>
       </v-data-iterator>
     </v-card>
-  </div>
+  </section>
 </template>
 
 <script>

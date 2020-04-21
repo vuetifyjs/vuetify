@@ -21,11 +21,5 @@ module.exports = {
       cwd: './packages/docs/',
       args: 'dev',
     },
-    {
-      name: 'vuetify-kitchen',
-      script: 'yarn.js',
-      cwd: './packages/kitchen/',
-      args: 'dev',
-    },
   ],
 }

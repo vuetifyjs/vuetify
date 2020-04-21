@@ -4,6 +4,8 @@
   "alignmentHeader": "## Text alignment",
   "alignmentText1": "Alignment helper classes allow you to easily re-align text.",
   "alignmentText2": "There are also available alignment classes that support responsive displays.",
+  "decorationHeader": "## Text decoration",
+  "decorationText1": "Remove text decoration with the `.text-decoration-none` class or add an *overline, underline or line-through* by using `.text-decoration-overline`, `.text-decoration-underline`, and `.text-decoration-line-through`.",
   "overflowHeader": "## Text wrapping and overflow",
   "overflowText1": "You can prevent wrapping text with the `.text-no-wrap` utility class.",
   "overflowText2": "Longer content can be truncated with a text ellipsis. **Requires** `display: inline-block` **or** `display: block`.",
