@@ -166,7 +166,7 @@ describe('VSelect.ts', () => {
     expect(wrapper.vm.isFocused).toBe(false)
     expect(wrapper.vm.isMenuActive).toBe(false)
   })
-                               
+
   // https://github.com/vuetifyjs/vuetify/issues/4853
   it('should select item after typing its first few letters', async () => {
     const wrapper = mountFunction({
@@ -199,7 +199,7 @@ describe('VSelect.ts', () => {
     const input = wrapper.find('input')
     input.trigger('focus')
     await wrapper.vm.$nextTick()
-                               
+
     expect(wrapper.vm.virtualizedItems).toHaveLength(20)
 
     input.trigger('keypress', { key: 'f' })
