@@ -139,7 +139,7 @@ describe('VAlert.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         dismissible: true,
-        dismissibleIcon: 'foo',
+        closeIcon: 'foo',
       },
     })
 
