@@ -6,6 +6,7 @@ node_modules/
 .vscode/
 .idea/
 .vs/
+*.iml
 
 # Logs
 yarn-error.log
