@@ -87,10 +87,11 @@ export default mixins(
     return h('div', {
       staticClass: 'v-picker v-card',
       class: {
+        'v-picker--flat': this.flat,
         'v-picker--landscape': this.landscape,
         'v-picker--full-width': this.fullWidth,
         ...this.themeClasses,
-        ...(this.flat ? { 'elevation-0': true } : this.elevationClasses),
+        ...this.elevationClasses,
       },
     }, [
       this.$slots.title ? this.genTitle() : null,

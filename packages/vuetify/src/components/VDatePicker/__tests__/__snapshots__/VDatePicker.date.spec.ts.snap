@@ -3449,7 +3449,7 @@ exports[`VDatePicker.ts should render disabled picker 1`] = `
 `;
 
 exports[`VDatePicker.ts should render flat picker 1`] = `
-<div class="v-picker v-card v-picker--date theme--light elevation-0">
+<div class="v-picker v-card v-picker--date v-picker--flat theme--light">
   <div class="v-picker__title primary">
     <div class="v-date-picker-title">
       <div class="v-picker__title__btn v-date-picker-title__year">

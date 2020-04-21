@@ -2145,7 +2145,7 @@ exports[`VTimePicker.ts should render disabled component. with useSeconds 1`] = 
 `;
 
 exports[`VTimePicker.ts should render flat component 1`] = `
-<div class="v-picker v-card v-picker--time theme--light elevation-0">
+<div class="v-picker v-card v-picker--time v-picker--flat theme--light">
   <div class="v-picker__title primary">
     <div class="v-time-picker-title">
       <div class="v-time-picker-title__time">
@@ -2276,7 +2276,7 @@ exports[`VTimePicker.ts should render flat component 1`] = `
 `;
 
 exports[`VTimePicker.ts should render flat component. with useSeconds 1`] = `
-<div class="v-picker v-card v-picker--time theme--light elevation-0">
+<div class="v-picker v-card v-picker--time v-picker--flat theme--light">
   <div class="v-picker__title primary">
     <div class="v-time-picker-title">
       <div class="v-time-picker-title__time">
