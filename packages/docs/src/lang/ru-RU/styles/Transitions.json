@@ -26,12 +26,10 @@
       "desc": "Многие компоненты Vuetify содержит <code>transition</code> prop, который позволяет вам указать собственный переход."
     },
     "fade-transition": {
-      "heading": "### Fade transition",
-      "desc": "Такой же пример затухания можно найти в компоненте Carousel."
+      "heading": "### Fade transition"
     },
     "expand-transition": {
-      "heading": "### Expand transition",
-      "desc": "Expand transition используется в Expansion Panels и List Groups. Существует также горизонтальная версия, доступная с `v-expand-x-transition`."
+      "heading": "### Expand transition"
     },
     "custom-origin": {
       "heading": "### Custom Origin",

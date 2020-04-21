@@ -1,8 +1,0 @@
-{
-  "props": {
-    "allowOverflow": "Quita el reposicionamiento overflow para el componente.",
-    "maxWidth": "Configura el ancho máximo para el componente.",
-    "minWidth": "Configura el ancho mínimo para el componente.",
-    "nudgeBottom": "Empujar el contenido hasta la parte de abajo."
-  }
-}

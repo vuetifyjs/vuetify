@@ -2,11 +2,11 @@
   "usageText": "Le composant d'auto-complétion hérite de `v-select` et ajoute la capacité de filtrer les éléments.",
   "examples": {
     "api": {
-      "desc": "Branchez facilement les données dynamiques et créez une expérience unique. La liste de propriétés expansive de v-autocomplete`permet de régler facilement tous les aspects de l'entrée."
+      "desc": "Connectez facilement des données dynamiques et créez une expérience unique. La liste de propriétés étendues de `v-autocomplete` permet d'adapter facilement et dans le détail tous les aspects de l'entrée."
     },
     "slots": {
       "heading": "### Champs",
-      "desc": "Avec la puissance des emplacements, vous pouvez personnaliser la sortie visuelle de la sélection. Dans cet exemple, nous ajoutons une image de profil pour les jetons et les éléments de liste."
+      "desc": "Avec la puissance des slots, vous pouvez personnaliser la sortie visuelle de la sélection. Dans cet exemple, nous ajoutons une image de profil pour les chips et les éléments de liste."
     },
     "customFilter": {
       "desc": "La propriété `filter` peut être utilisée pour que chaque élément puissent être filtrer en suivant sa propre logique. Dans cet exemple nous filtrons des éléments par leur nom"
@@ -22,7 +22,7 @@
     },
     "dense": {
       "heading": "### Dense",
-      "desc": "Vous pouvez utiliser le prop`dense` pour réduire la hauteur de l'autocomplete et la hauteur maximale inférieure des éléments de liste."
+      "desc": "Vous pouvez utiliser la prop`dense` pour réduire la hauteur de l'autocomplete et la hauteur maximale inférieure des éléments de liste."
     }
   },
   "props": {

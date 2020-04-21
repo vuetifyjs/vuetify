@@ -18,6 +18,9 @@
     "checkboxes-inline-textfield": {
       "heading": "### チェックボックス - テキストフィールドを含むインライン"
     },
+    "radios-default": {
+      "desc": "ラジオグループはデフォルトでは「必須」（mandatory）です。これは `mandatory` propで変更できます。"
+    },
     "radios-direction": {
       "desc": "ラジオグループは、それぞれのpropsを使用して、行（row）または列（column）にできます。既定値は column です。"
     },

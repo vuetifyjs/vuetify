@@ -1,8 +1,5 @@
 {
   "examples": {
-    "avatar-title-and-action": {
-      "desc": "리스트는 더 명시적인 접근을 위해 슬롯을 가지고 있습니다. 만약 이 접근방식을 택한다면, 정확한 간격(spacing)을 위해 추가적인 props을 반드시 제공해야 한다는 점을 기억하세요. 예를 들어 아바타를 가진 타일(tile)의 경우 반드시 `avatar` 프로퍼티를 제공해야합니다."
-    },
     "icon-two-lines-and-action": {
       "desc": "리스트는 서브헤더, 구분자 그리고 하나의 또는 여러 라인을 포함할 수 있습니다. The subtitle will overflow with ellipsis if it extends past one line."
     },

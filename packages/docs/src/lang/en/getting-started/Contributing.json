@@ -38,15 +38,17 @@
   "commitText7": "- **refactor:** Commits that neither fixes a bug nor adds a feature.",
   "commitText8": "- **perf:** Commits that improve performance.",
   "commitText9": "- **test:** Commits that add missing or correct existing tests.",
-  "commitText10": "- **chore:** Other commits that dont modify src or test files.",
+  "commitText10": "- **chore:** Other commits that don't modify src or test files.",
   "commitText11": "- **revert:** Commits that revert previous commits.",
   "changesHeader": "## Submitting Changes / Pull Requests",
   "changesText1": "Before doing any commits, you will want to pull down the latest and greatest from dev. From here, merge, and resolve any conflicts between your branch and dev. Its a good rule of thumb to pull frequently as development is constantly happening.",
-  "changesText2": "In git, add all relevent files.",
-  "changesText3": "Commit with commitizen using the command `git cz`. From here you will follow through a series of props. Make sure to select the appropiate type (see **Commit Guidelines w/Commitizen** above)",
+  "changesText2": "In git, add all relevant files.",
+  "changesText3": "Commit with commitizen using the command `git cz`. From here you will follow through a series of props. Make sure to select the appropriate type (see **Commit Guidelines w/Commitizen** above)",
   "changesText4": "Lastly, `git push` and open a pull request.",
   "changesSubHeader1": "### Pull Requests For Vuetify",
   "changesText7": "Pull requests related to Vuetify:   \n* For **bug fixes** and **documentation updates** submit pull requests to `master`.   \n* For **new features** and **enhancements** submit pull requests to `dev`   \n* For **bugs** and **critical fixes** related to **v1.5/LTS** submit pull requests to `stable`   \n* For any **features** that contain **breaking changes** submit pull requests to `next` ",
   "changesSubHeader2": "### Pull Requests For Docs",
-  "changesText8": "For any pull requests related to Vuetify docs, submit your pull request to the `master` branch."
+  "changesText8": "For any pull requests related to Vuetify docs, submit your pull request to the `master` branch.",
+  "changesSubHeader3": "### Pull Requests For Docs - Language",
+  "changesText9": "We do not accept PR's for any doc changes pertaining to language other than `en`. All changes for languages other than `en` are to be submitting through our Crowdin project. To get started simply select `Help Translate` in the language drop down of the docs. Languages will not be added until having more than 15% of their translations completed."
 }

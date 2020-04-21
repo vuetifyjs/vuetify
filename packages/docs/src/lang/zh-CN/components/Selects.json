@@ -63,7 +63,6 @@
     "itemDisabled": " 禁用 **items** 的属性值",
     "items": "可以是对象数组或字符串数组。当使用对象时，将寻找文本和值字段。 这可以使用 **item-text** 和 **item-value** 属性来更改。 具有 **header** 或 **divider** 属性的对象被视为特殊情况并生成列表头或分隔符；这些是不可选择的。",
     "itemText": "设置**items**'属性的文本值",
-    "itemValue": "设置 **items** 值的属性 - **must be primitive**。 支持点表示法",
     "menuProps": "将属性传递到 `v-menu` 组件。接受布尔属性 `menu-props=\"auto, overflowY\"` ，或一个对象 `:menu-props=\"{ auto: true, overflowY: true }\"`",
     "minWidth": "Mixins.Menuable.props.minWidth",
     "multiple": "多选，接受数组作为值",

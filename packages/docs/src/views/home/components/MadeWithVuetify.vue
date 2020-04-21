@@ -1,7 +1,10 @@
 <template>
   <base-section
     id="home-made-with-vuetify"
-    v-intersect.once="init"
+    v-intersect.once="{
+      handler: init,
+      options: { rootMargin: '600px 0px' }
+    }"
   >
     <home-cards
       :cards="featured"
@@ -56,7 +59,7 @@
       ) {
         if (!isVisible) return
 
-        const storage = localStorage.getItem('vuetify__featured__projects') || '{}'
+        const storage = localStorage.getItem('vuetify-featured-mwvjs-projects') || '{}'
         const featured = JSON.parse(storage)
         // Cache for 24hrs
         const cacheTime = 24 * 60 * 60 * 1000
@@ -101,7 +104,7 @@
           updatedAt: Date.now(),
         }
 
-        localStorage.setItem('vuetify__featured__projects', JSON.stringify(storage))
+        localStorage.setItem('vuetify-featured-mwvjs-projects', JSON.stringify(storage))
       },
       shuffle (array) {
         let currentIndex = array.length

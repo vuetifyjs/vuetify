@@ -1,7 +1,0 @@
-{
-  "issue1": "La lista de issues de este repo es exclusivamente para reportar bugs y hacer peticiones de características nuevas. Las issues que no cumplan con estas caracetrísticas serán cerradas inmediatamente.",
-  "issue2": "Para preguntas en general, por favor únete a nuestra [comunidad](https://chat.vuetifyjs.com).",
-  "issue3": "Trata de buscar tu issue, tal vez el tema ya fue resuelto.",
-  "issue4": "Fíjate si el error puede reproducirse con la versión más actual.",
-  "issue5": "En caso de ser reproducible, por favor provee un simple [codepen](https://template.vuetifyjs.com) o un repositorio que pueda ser clonado para producir el comportamiento esperado."
-}

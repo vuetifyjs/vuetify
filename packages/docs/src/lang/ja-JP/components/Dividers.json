@@ -23,6 +23,9 @@
       "desc": "横長のコンポーネント内でも区切り線は問題なく表示できます。"
     }
   },
+  "accessibility": {
+    "desc": "デフォルトでは、`v-divider` コンポーネントには [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) の [**separator**](https://www.w3.org/TR/wai-aria/#separator) の役割が割り当てられています。しかし、時には区切りはインターフェイスを美しく見せるための方法にすぎないこともあります。このような場合は、[**presentation**](https://www.w3.org/TR/wai-aria/#presentation)のロールを使用して、「暗黙のネイティブロールセマンティクスがアクセシビリティAPIにマッピングされない要素」を表します。 `v-divider` のデフォルトの**separator**ロールを上書きするには、単に `role=\"presentation\"` propをコンポーネントに追加してください。さらに、`v-divider`コンポーネントには、`aria-orientation=\"horizontal\"`があります。`vertical=\"true\"`ならば、`aria-orientation=\"vertical\"`も自動的に設定されます。`role=\"presentation\"`の場合、`aria-orientation=\"undefined\"`がデフォルト値となります。"
+  },
   "props": {
     "inset": "インデントを加えます。 (72px)",
     "vertical": "区切り線を縦方向に表示します"

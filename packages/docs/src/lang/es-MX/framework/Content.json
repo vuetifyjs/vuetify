@@ -1,9 +1,0 @@
-{
-  "heading": "# Contenido",
-  "headingText": "Vuetify tiene personalización de estilos para múltiples elementos estándar.",
-  "blockquoteHeader": "## Citas",
-  "paragraphsHeader": "## Párrafos",
-  "codeHeader": "## Código",
-  "codeText": "Ejemplo de un elemento `<code>`.",
-  "userInputText": "Para instalar Vuetify, escribe <kbd>npm install vuetify</kbd> en tu terminal. Una vez completado, escribe <kbd>cd `<nombre del proyecto>`</kbd> y ejecuta <kbd>npm install</kbd>"
-}
