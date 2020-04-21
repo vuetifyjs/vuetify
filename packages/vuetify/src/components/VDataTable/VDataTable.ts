@@ -461,6 +461,7 @@ export default VDataIterator.extend({
           // TODO: first argument should be the data object
           // but this is a breaking change so it's for v3
           click: () => this.$emit('click:row', item, data),
+          contextmenu: (event: MouseEvent) => this.$emit('contextmenu:row', event, data),
         },
       })
     },
