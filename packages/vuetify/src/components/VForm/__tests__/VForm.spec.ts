@@ -7,6 +7,7 @@ import {
 import VTextField from '../../VTextField'
 import VBtn from '../../VBtn'
 import VForm from '../VForm'
+import { wait } from '../../../../test'
 
 const inputOne = Vue.component('input-one', {
   render (h) {
@@ -153,7 +154,7 @@ describe('VForm.ts', () => {
     expect(Object.keys(wrapper.vm.errorBag)).toHaveLength(1)
 
     wrapper.vm.reset()
-    await new Promise(resolve => setTimeout(resolve, 0))
+    await wait()
     expect(Object.keys(wrapper.vm.errorBag)).toHaveLength(0)
   })
 
