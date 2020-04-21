@@ -355,7 +355,7 @@ export default VDataIterator.extend({
 
       if (this.$scopedSlots['group.summary']) {
         children.push(this.$createElement('template', { slot: 'column.summary' }, [
-          this.$scopedSlots['group.summary']!({ group, groupBy: props.options.groupBy, items, headers: this.computedHeaders }),
+          this.$scopedSlots['group.summary']!({ group, groupBy: props.options.groupBy, items, headers: this.computedHeaders, isOpen, toggle: toggleFn }),
         ]))
       }
 

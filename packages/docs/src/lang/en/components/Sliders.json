@@ -5,7 +5,7 @@
   "examples": {
     "thumb": {
       "heading": "### Thumb",
-      "desc": "You can display a `thumb-label` while sliding or always. It It can have a custom color by setting `thumb-color` and a custom size with `thumb-size`. With `always-dirty` its color will never change, even when on `min` value."
+      "desc": "You can display a `thumb-label` while sliding or always. It can have a custom color by setting `thumb-color` and a custom size with `thumb-size`. With `always-dirty` its color will never change, even when on `min` value."
     },
     "custom-thumb": {
       "heading": "### Custom Range slider",

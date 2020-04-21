@@ -8,6 +8,8 @@ import { keyCodes } from '../../util/helpers'
 // Types
 import { VNode, VNodeDirective } from 'vue'
 
+type VuetifyRippleEvent = MouseEvent | TouchEvent | KeyboardEvent
+
 function transform (el: HTMLElement, value: string) {
   el.style['transform'] = value
   el.style['webkitTransform'] = value
@@ -23,16 +25,16 @@ export interface RippleOptions {
   circle?: boolean
 }
 
-function isTouchEvent (e: MouseEvent | TouchEvent | KeyboardEvent): e is TouchEvent {
+function isTouchEvent (e: VuetifyRippleEvent): e is TouchEvent {
   return e.constructor.name === 'TouchEvent'
 }
 
-function isKeyboardEvent (e: MouseEvent | TouchEvent | KeyboardEvent): e is KeyboardEvent {
+function isKeyboardEvent (e: VuetifyRippleEvent): e is KeyboardEvent {
   return e.constructor.name === 'KeyboardEvent'
 }
 
 const calculate = (
-  e: MouseEvent | TouchEvent | KeyboardEvent,
+  e: VuetifyRippleEvent,
   el: HTMLElement,
   value: RippleOptions = {}
 ) => {
@@ -69,7 +71,7 @@ const calculate = (
 const ripples = {
   /* eslint-disable max-statements */
   show (
-    e: MouseEvent | TouchEvent | KeyboardEvent,
+    e: VuetifyRippleEvent,
     el: HTMLElement,
     value: RippleOptions = {}
   ) {
@@ -152,7 +154,7 @@ function isRippleEnabled (value: any): value is true {
   return typeof value === 'undefined' || !!value
 }
 
-function rippleShow (e: MouseEvent | TouchEvent | KeyboardEvent) {
+function rippleShow (e: VuetifyRippleEvent) {
   const value: RippleOptions = {}
   const element = e.currentTarget as HTMLElement
   if (!element || !element._ripple || element._ripple.touched) return
