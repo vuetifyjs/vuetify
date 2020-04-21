@@ -17,6 +17,9 @@
     "alt": "スクリーンリーダー用の代替テキストです。装飾用の画像の場合空にしてください。",
     "aspectRatio": "`width/height`として計算されるため、1920x1080 px画像の場合、`1.7778`になります。省略すると自動的に計算されます",
     "eager": "Mixins.Bootable.props.eager",
+    "gradient": "画像の上にグラデーションをオーバーレイします。 [linear-gradient](https://developer.mozilla.org/ja/docs/Web/CSS/linear-gradient) の構文のみをサポートしており、それ以外のものはクラスで行う必要があります (例を参照)。",
+    "lazySrc": "メイン画像が読み込まれるのを待っている間に表示されるもので、通常は小さなbase64でエンコードされたサムネイルです。若干のぼかしフィルタが適用されています。\n\n自動生成するには [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) を使用してください。",
+    "position": "切り取られるパーツを変更するには、既定値をオーバーライドします。[`background-position`](https://developer.mozilla.org/ja/docs/Web/CSS/background-position)と同じ構文を使用します。",
     "sizes": "`srcset`で使用するには、[MDN](https://developer.mozilla.org/ja/docs/Web/HTML/Element/img#attr-sizes) を参照してください。",
     "srcset": "デバイスのサイズに基づいて使用する代替画像のセット。 [続きを読む...](https://developer.mozilla.org/ja/docs/Web/HTML/Element/img#attr-srcset)"
   },

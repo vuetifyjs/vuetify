@@ -17,7 +17,7 @@
           >
             <v-responsive
               class="overflow-visible"
-              max-width="550"
+              max-width="625"
             >
               <base-title class="home-hero__title mb-4">
                 <base-markdown>Vuetify.Home.callout</base-markdown>
@@ -27,43 +27,64 @@
 
               <div class="py-4" />
 
-              <base-btn
-                :block="$vuetify.breakpoint.smAndDown"
-                :to="`/${$route.params.lang}/introduction/why-vuetify/`"
-                class="primary--text my-6"
-                color="white"
-                x-large
-              >
-                <v-icon
-                  left
-                  size="20"
+              <div class="d-flex flex-wrap justify-left justify-sm-center justify-md-start align-center mx-n2">
+                <base-btn
+                  :to="`/${$route.params.lang}/getting-started/quick-start/`"
+                  class="primary--text ma-2 grow"
+                  color="white"
+                  x-large
+                  @click="$ga.event('home', 'click', 'get-started')"
                 >
-                  mdi-speedometer
-                </v-icon>
+                  <v-icon
+                    left
+                    size="20"
+                  >
+                    mdi-speedometer
+                  </v-icon>
 
-                {{ $t('Vuetify.Home.getStarted') }}
-              </base-btn>
+                  {{ $t('Vuetify.Home.getStarted') }}
+                </base-btn>
 
-              <v-btn
-                :block="$vuetify.breakpoint.smAndDown"
-                class="my-6 ma-md-6"
-                color="white"
-                href="https://github.com/vuetifyjs/vuetify"
-                min-width="187"
-                outlined
-                rel="nofollower noopener"
-                target="_blank"
-                x-large
-              >
-                <v-icon
-                  left
-                  size="20"
+                <v-btn
+                  :to="`/${$route.params.lang}/introduction/why-vuetify/`"
+                  class="ma-2 grow"
+                  color="white"
+                  outlined
+                  x-large
+                  @click="$ga.event('home', 'click', 'why-vuetify')"
                 >
-                  mdi-github-face
-                </v-icon>
+                  <v-icon
+                    left
+                    size="20"
+                  >
+                    mdi-vuetify
+                  </v-icon>
 
-                Github
-              </v-btn>
+                  {{ $t('Vuetify.Home.whyVuetifyText2') }}
+                </v-btn>
+
+                <v-btn
+                  class="ma-2 grow"
+                  color="grey lighten-5"
+                  href="https://github.com/vuetifyjs/vuetify"
+                  rel="nofollower noopener"
+                  target="_blank"
+                  min-width="187"
+                  light
+                  x-large
+                  depressed
+                  @click="$ga.event('home', 'click', 'github')"
+                >
+                  <v-icon
+                    left
+                    size="20"
+                  >
+                    mdi-github-face
+                  </v-icon>
+
+                  Github
+                </v-btn>
+              </div>
             </v-responsive>
           </v-col>
 
@@ -119,7 +140,7 @@
     &.theme--dark
       background: linear-gradient(to bottom, #2196F3, #5CBBF6)
 
-    a
+    a:not(.v-btn)
       color: inherit
       text-decoration: none
 

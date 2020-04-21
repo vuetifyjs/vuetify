@@ -6,7 +6,7 @@
       "desc": "Le fichier `v-input` peut contenir plusieurs fichiers en même temps lorsque vous utilisez le prop **multiple**."
     },
     "accept": {
-      "desc": "Le composant`v-file-input` ne peut accepter que des formats/types de fichiers spécifiques si vous le souhaitez. Pour plus d'informations, veuillez vérifier la documentation sur l'attribut [accept](https://developer.mozilla.org/fr-US/docs/Web/HTML/Element/input/file#accept)."
+      "desc": "Le composant`v-file-input` peut n'accepter que des formats/types de fichiers spécifiques si vous le souhaitez. Pour plus d'informations, consultez la documentation de l'attribut [accept](https://developer.mozilla.org/fr-US/docs/Web/HTML/Element/input/file#accept)."
     },
     "chips": {
       "desc": "Un fichier sélectionné peut être affiché comme [chip](/components/chips). Lorsque vous utilisez les **chips** et **multiple** props, chaque puce sera affichée (par opposition au nombre de fichiers)."
@@ -16,19 +16,19 @@
     },
     "counter": {
       "heading": "### Compteur",
-      "desc": "Lorsque vous utilisez la propriété **show-size** avec **counter**, le nombre total de fichiers et de taille sera affiché sous l'entrée."
+      "desc": "Lorsque vous utilisez la propriété **show-size** avec **counter**, le nombre de fichiers ainsi que le poids total seront affichés sous le champ."
     },
     "selection": {
       "desc": "En utilisant l'emplacement `selection`, vous pouvez personnaliser l'apparence de vos sélections d'entrée. Ceci est généralement fait avec [chips](/components/chips), mais n'importe quel composant ou balisage peut être utilisé."
     },
     "custom-icon": {
-      "desc": "L'icône \"v-file-input\" est prédéfinie par défaut, qui peut être réglée sur le composant ou ajustée globalement. Plus d'informations sur le changement de composants globaux peuvent être trouvées sur la [page des icônes de personnalisation](/customization/icônes)."
+      "desc": "Le composant \"v-file-input\" a une icône prédéfinie par défaut. Cette icône peut être modifiée sur le composant lui même ou ajustée globalement. Plus d'informations sur le changement de composants globaux sont disponibles sur la [page des icônes de personnalisation](/customization/icônes)."
     },
     "validation": {
-      "desc": "Comme pour les autres entrées, vous pouvez utiliser le prop **rules** pour créer vos propres paramètres de validation personnalisés."
+      "desc": "Comme pour les autres entrées, vous pouvez utiliser la prop **rules** pour créer et personnaliser vos propres règles de validation."
     },
     "advanced": {
-      "desc": "La flexibilité de la sélection vous permet d'héberger des cas d'utilisation complexes. Dans cet exemple, nous montrons les deux premières sélections comme des champs, tout en ajoutant un indicateur de nombre pour le fichiers restant."
+      "desc": "La flexibilité du slot selection permet de gérer des cas d'utilisation complexes. Dans cet exemple, nous affichons les deux premières sélections de fichiers sous forme de chips, les fichiers suivants sont mentionnés plus discrètement par un compteur. Essayez de sélectionner au moins trois fichiers pour constater par vous même ce comportement."
     },
     "dense": {
       "heading": "### Dense",

@@ -7,8 +7,10 @@
       "desc": "リストには主に **single-line** (デフォルト)、 **two-line** 、 **three-line** の3つのバリエーションがあります。行宣言はアイテムの最小の高さを指定し、 `v-list` の同じプロップから制御することもできます。"
     },
     "avatar-title-and-action": {
-      "heading": "### タイトルとアクションを持つAvatar",
-      "desc": "リストには、より明示的なアプローチのためのスロットも含まれています。この方法を選択する場合は、正しい間隔を設定するために追加のpropsを用意する必要があります。この例では、アバターを含むタイルがあるため、 `avatar`プロパティを提供する必要があります。"
+      "heading": "### タイトルとアクションを持つAvatar"
+    },
+    "avatar-three-lines": {
+      "desc": "3行リストの場合、サブタイトルは2行で垂直方向にクランプされ、次に省略記号が表示されます。この機能は[line-clamp](https://developer.mozilla.org/ja/docs/Web/CSS/-webkit-line-clamp) を使用しており、すべてのブラウザーでサポートされているわけではありません。"
     },
     "avatar-subheader-title-and-action": {
       "heading": "### タイトルとアクションを持つAvatar",
@@ -35,6 +37,8 @@
     }
   },
   "props": {
+    "threeLine": "3行用にリスト項目の高さを増やします。このpropは [line-clamp](https://developer.mozilla.org/ja/docs/Web/CSS/-webkit-line-clamp) を使用しており、すべてのブラウザでサポートされているわけではありません。",
+    "twoLine": "2行用にリスト項目の高さを増やします。このpropは [line-clamp](https://developer.mozilla.org/ja/docs/Web/CSS/-webkit-line-clamp) を使用しており、すべてのブラウザでサポートされているわけではありません。",
     "v-list-item": {
       "disabled": "コンポーネントを無効にします。",
       "selectable": "`v-list-item`内でテキストを選択できるようにします。このpropは[user-select](https://developer.mozilla.org/ja/docs/Web/CSS/user-select) を使用します。",

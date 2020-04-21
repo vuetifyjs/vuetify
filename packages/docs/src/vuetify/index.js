@@ -1,13 +1,20 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
+import minifyTheme from 'minify-css-string'
 import goTo from 'vuetify/es5/services/goto'
 
 Vue.use(Vuetify)
 
-export function createVuetify (ssrContext) {
+export function createVuetify () {
   const vuetify = new Vuetify({
-    ssr: Boolean(ssrContext),
     theme: {
+      options: {
+        themeCache: typeof document !== 'undefined' ? {
+          get: key => localStorage.getItem(key),
+          set: (key, value) => localStorage.setItem(key, value),
+        } : undefined,
+        minifyTheme,
+      },
       themes: {
         light: {
           primary: '#1867C0',
@@ -15,13 +22,6 @@ export function createVuetify (ssrContext) {
           tertiary: '#E57373',
           accent: '#005CAF',
         },
-      },
-    },
-    options: {
-      minifyTheme: css => {
-        return process.env.NODE_ENV === 'production'
-          ? css.replace(/[\s|\r\n|\r|\n]/g, '')
-          : css
       },
     },
   })

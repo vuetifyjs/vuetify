@@ -1,6 +1,5 @@
 {
   "becomeSponsor": "支持 Vuetify",
-  "callout": "# Material Design 组件框架",
   "text": "Vuetify 是一个 Vue UI 库，包含手工制作的精美材料组件。不需要设计技能 - 创建令人惊叹的应用程序所需的一切都触手可及。",
   "features": {
     "community": {

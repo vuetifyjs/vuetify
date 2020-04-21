@@ -22,15 +22,21 @@
       "hideDefaultFooter": "デフォルトのfooterを隠します。",
       "itemKey": "各itemでユニークキーとして使われるプロパティ。",
       "loading": "もし`true`にして、itemsが設定されなかった場合、ここに設定したローディングテキストが表示されます。",
-      "loadingText": "`loading`がtrueで、itemsが何も設定されなかった場合に表示されるテキスト。"
+      "loadingText": "`loading`がtrueで、itemsが何も設定されなかった場合に表示されるテキスト。",
+      "noDataText": "コンポーネントにアイテムが提供されていない場合に表示されるテキスト。",
+      "noResultsText": "`search` propが使われ、結果が得られなかった場合に表示されるテキスト。",
+      "selectableKey": "選択可能かどうかを判断するために使用される各項目のプロパティ。",
+      "value": "選択された行を制御するために使用します。"
     },
     "v-data-footer": {
+      "disableItemsPerPage": "items-per-page ドロップダウンを無効にします。",
       "disablePagination": "ページネーションボタンを無効にします",
       "showFirstLastPage": "最初/最後のアイコンを表示する"
     }
   },
   "slots": {
     "v-data-iterator": {
+      "default": "デフォルトのスロット。これを使用してアイテムをレンダリングします。",
       "loading": "`loading` が true で、itemsが何も設定されなかった場合のコンテンツを定義します。",
       "no-data": "itemsが提供されない場合のコンテンツを定義します",
       "no-results": "`search` が提供されているが、結果が見つからない場合のコンテンツを定義します。"

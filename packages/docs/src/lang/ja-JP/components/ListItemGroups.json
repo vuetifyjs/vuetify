@@ -4,6 +4,9 @@
   "examples": {
     "usage": {
       "desc": "デフォルトでは、`v-list-item-group`は` v-item-group`と同様に動作します。 **value** が提供されない場合、グループはそのインデックスに基づいてデフォルト値を提供します。"
+    },
+    "multiple": {
+      "desc": "複数の項目を一度に選択できます。"
     }
   },
   "api": {

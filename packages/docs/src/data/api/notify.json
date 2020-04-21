@@ -1,9 +1,0 @@
-{
-  "color": "base",
-  "close": true,
-  "id": "vuetify-sponsors",
-  "text": "Show Me",
-  "msg": "🚀 Sponsor Vuetify and get awesome **perks** at the same time",
-  "href": "https://github.com/sponsors/johnleider",
-  "timeout": 0
-}

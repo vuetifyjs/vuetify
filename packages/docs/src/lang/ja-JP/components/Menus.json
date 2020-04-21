@@ -7,6 +7,7 @@
       "uninverted": true
     },
     "absolute": {
+      "desc": "メニューは、`absolute` propを使って、アクティベーター要素の上に絶対的に配置することもできる。画像のどこかをクリックしてみてください。",
       "uninverted": true
     },
     "disabled": {
@@ -15,15 +16,22 @@
       "uninverted": true
     },
     "offset-x": {
+      "heading": "### 横（X軸）方向へのオフセット",
+      "desc": "メニューをX軸でオフセットして、アクティベータを隠さないようにすることができます。",
       "uninverted": true
     },
     "offset-y": {
+      "heading": "### 縦（Y軸）方向へのオフセット",
+      "desc": "メニューをY軸でオフセットして、アクティベータを隠さないようにすることができます。",
       "uninverted": true
     },
     "close-on-click": {
+      "heading": "### クリック時に閉じる",
+      "desc": "フォーカスが失ったときメニューを閉じることができます。",
       "uninverted": true
     },
     "close-on-content-click": {
+      "desc": "コンテンツがクリックされたときに `v-menu` を閉じるかどうかを設定することができます。",
       "uninverted": true
     },
     "absolute-without-activator": {
@@ -44,6 +52,9 @@
     "popover": {
       "uninverted": true
     }
+  },
+  "accessibility": {
+    "desc": "デフォルトでは、`v-menu` コンポーネントは _切り離されて_ アプリケーションのルートに移動します。[動的コンテンツのDOMへの挿入](https://www.w3.org/WAI/WCAG21/Techniques/client-side-script/SCR26) を適切にサポートするためには、**attach** propを使用する必要があります。これにより、<kbd>tab</kbd>キーを押したときに、フォーカスがアクティベーターからコンテンツに転送されるようになります。"
   },
   "props": {
     "closeOnClick": "外側アクティベータークリック時にメニューを閉じるかどうかを指定します。",

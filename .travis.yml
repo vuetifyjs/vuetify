@@ -17,7 +17,6 @@ install:
   - yarn --frozen-lockfile --non-interactive
 
 stages:
-  # - name: kitchen
   #   if: (branch = master) AND (type = push) AND (repo = vuetifyjs/vuetify)
   - name: test
     if: (tag IS blank) OR (type != push) OR (repo != vuetifyjs/vuetify)
@@ -45,10 +44,8 @@ jobs:
       after_script:
         - codecov
 
-    # - stage: kitchen
     #   before_script: yarn global add now
     #   script:
-    #     - cd packages/kitchen
     #     - yarn build
     #     - now --team=vuetifyjs --token=$NOW_TOKEN --npm
     #     - now alias --team=vuetifyjs --token=$NOW_TOKEN

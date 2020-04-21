@@ -1,5 +1,0 @@
-{
-  "props": {
-    "color": "Gán màu cho nút, bạn có thể sử dụng tên trong bảng màu Material (như `success` or `blue`) hay mã màu (như `#033` or `rgba(255, 0, 0, 0.5)`). Xem thêm tại [colors page](/styles/colors#material-colors)."
-  }
-}

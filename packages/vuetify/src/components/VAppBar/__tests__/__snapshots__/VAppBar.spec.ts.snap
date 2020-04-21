@@ -5,7 +5,7 @@ exports[`AppBar.ts should render with background 1`] = `
         style="height: 64px; margin-top: 0px; transform: translateY(0px); left: 0px; right: 0px;"
 >
   <div class="v-toolbar__image">
-    <div class="v-responsive v-image"
+    <div class="v-image v-responsive theme--light"
          style="height: 64px;"
     >
       <div class="v-image__image v-image__image--preload v-image__image--cover"

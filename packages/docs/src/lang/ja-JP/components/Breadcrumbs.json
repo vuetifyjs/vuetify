@@ -21,6 +21,14 @@
   },
   "props": {
     "divider": "項目間の区切り文字を指定します。",
-    "icons": "アイテム間の区切りを [v-icon](/components/icons) で指定します。"
+    "icons": "アイテム間の区切りを [v-icon](/components/icons) で指定します。",
+    "items": "各パンくずのオブジェクトの配列。",
+    "justifyCenter": "パンくずリストを中央寄せにします。",
+    "justifyEnd": "パンくずリストを右側寄せにします。",
+    "large": "パンくず項目のテキストのフォントサイズを16px（デフォルトは14px）にします。"
+  },
+  "slots": {
+    "divider": "区切りに使うスロット",
+    "item": "**items** propを使用する際に、デフォルトの `v-breadcrumbs-item` の動作を上書きするために使用されるスロットです。"
   }
 }

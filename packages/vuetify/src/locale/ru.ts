@@ -13,7 +13,7 @@ export default {
       sortNone: 'Не упорядочено.',
       activateNone: 'Активируйте, чтобы убрать сортировку.',
       activateDescending: 'Активируйте для упорядочивания убыванию.',
-      activateAscending: 'Активируйте для упорядочивания по возрастанию.Activate to sort ascending.',
+      activateAscending: 'Активируйте для упорядочивания по возрастанию.',
     },
     sortBy: 'Сортировать по',
   },

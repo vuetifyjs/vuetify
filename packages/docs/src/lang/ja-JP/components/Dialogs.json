@@ -48,6 +48,7 @@
     "dark": "Mixins.Themeable.props.dark",
     "fullWidth": "ダイアログを使用可能な幅100％として強制的に展開します。",
     "fullscreen": "フルスクリーン表示になるようレイアウトを変更します。",
+    "internalActivator": "ドキュメントではなく、コンポーネント内のメニューコンテンツを切り離します。",
     "eager": "Mixins.Bootable.props.eager",
     "light": "Mixins.Themeable.props.light",
     "maxWidth": "Mixins.Measurable.props.maxWidth",
@@ -56,6 +57,7 @@
     "origin": "Mixins.Transitionable.props.origin",
     "persistent": "要素の外側をクリックしても、アクティブなままになります。",
     "retainFocus": "タブフォーカスは、デフォルトでダイアログの最初の子に戻ります。TinyMCE や vue-clipboardなどのフォーカスが必要な外部ツールを使用する場合は、これを無効にします。",
+    "scrollable": "true に設定すると、指定された高さの `v-card` と `v-card-text` コンポーネントが必要になります。詳細については、[scrollableの例](/components/dialogs#scrollable) をチェックしてください。",
     "transition": "Mixins.Transitionable.props.transition",
     "width": "Mixins.Measurable.props.width"
   },

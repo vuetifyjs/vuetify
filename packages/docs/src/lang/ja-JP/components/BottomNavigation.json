@@ -23,6 +23,10 @@
     "toggle": {
       "desc": "`v-bottom-navigation`の表示状態は、`input-value` propを使用して切り替えることができます。 `v-model`を使用して現在アクティブなボタンを制御することもできます。"
     },
+    "hide-on-scroll": {
+      "heading": "### スクロール時に非表示にする",
+      "desc": "対象要素がスクロールしたときに `v-bottom-navigation` を非表示にします。"
+    },
     "scroll-threshold": {
       "heading": "### スクロールのしきい値",
       "desc": "`scroll-threshold` プロパティを使用すると、`v-bottom-navigation` が消える前にスクロールできる閾値をカスタマイズできます。"
@@ -30,11 +34,16 @@
   },
   "props": {
     "absolute": "Mixins.Positionable.props.absolute",
+    "activeClass": "アクティブ化すると [v-btn](/components/buttons) に適用されるクラス。",
+    "backgroundColor": "コンポーネントの背景色を変更します。",
     "fixed": "Mixins.Positionable.props.fixed",
+    "hideOnScroll": "上にスクロールすると、ナビゲーションが画面外に遷移します。",
+    "inputValue": "コンポーネントを表示するか非表示にするかを制御します。**.sync** 修飾子をサポートします。",
     "mandatory": "Mixins.BaseItemGroup.props.mandatory",
     "shift": "[v-btn](/components/buttons) がアクティブでない場合は、テキストを非表示にします。"
   },
   "events": {
+    "change": "現在選択されているボタンの値。値が割り当てられていない場合は、ボタンの現在のインデックスになります。",
     "update:input-value": "`input-value.sync` 用のイベント"
   }
 }

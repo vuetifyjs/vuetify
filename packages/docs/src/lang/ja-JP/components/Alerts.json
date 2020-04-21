@@ -5,7 +5,7 @@
   "examples": {
     "border": {
       "heading": "### ボーダー",
-      "desc": "** border ** propを設定すると、アラートの4つの側面の1つにシンプルなボーダーを追加することができます。 ** color **、** dark **、** type **などのpropsと組み合わせて、アラートに独特なアクセントを与えることができます。"
+      "desc": "**border** propを設定すると、アラートの4つの側面の1つにシンプルなボーダーを追加することができます。 **color**、**dark**、**type** などのpropsと組み合わせて、アラートに独特なアクセントを与えることができます。"
     },
     "colored-border": {
       "heading": "### 色付きボーダー",
@@ -13,11 +13,11 @@
     },
     "dense": {
       "heading": "### 高さが詰まったスタイル",
-      "desc": "** dense ** propは、アラートの高さを減らしシンプルでコンパクトなスタイルのアラートを作成します。 ** border ** propと同時に利用した場合、コンパクトなスタイルと協調させるためボーダーの太さは細くなります。"
+      "desc": "**dense** propは、アラートの高さを減らしシンプルでコンパクトなスタイルのアラートを作成します。 **border** propと同時に利用した場合、コンパクトなスタイルと協調させるためボーダーの太さは細くなります。"
     },
     "dismissible": {
       "heading": "### 閉じるボタン付き",
-      "desc": "** dismissible ** propは、アラートコンポーネントの端に閉じるボタンを追加します。 このボタンをクリックすると、valueがfalseに設定され、アラートが非表示になります。 ** v-model ** をバインドしtrueに設定することにより、アラートを再度表示させることができます。 閉じるアイコンには自動的に `aria-label`が適用されます。これは、** close-label ** propで変更するか、ロケールの ** close ** の値を変更することで、値を変更することができます。 ロケール設定をグローバルに変更する方法の詳細については、 [Internationalization page](/customization/internationalization) を参照してください。"
+      "desc": "**dismissible** propは、アラートコンポーネントの端に閉じるボタンを追加します。 このボタンをクリックすると、valueがfalseに設定され、アラートが非表示になります。 **v-model** をバインドしtrueに設定することにより、アラートを再度表示させることができます。 閉じるアイコンには自動的に `aria-label`が適用されます。これは、**close-label** propで変更するか、ロケールの **close** の値を変更することで、値を変更することができます。 ロケール設定をグローバルに変更する方法の詳細については、 [Internationalization page](/customization/internationalization) を参照してください。"
     },
     "icon": {
       "heading": "### アイコン",
@@ -42,13 +42,24 @@
     "type": {
       "heading": "### タイプ",
       "desc": "**type** propは、4つのデフォルトの`v-alert` スタイルを提供します: **success**, **info**, **warning**, **error**。これらの各スタイルは、既定のアイコンと色を提供します。デフォルトの色は[Vuetifyのテーマ](/customization/theme) をカスタマイズすることでグローバルに設定することができます。"
+    },
+    "twitter": {
+      "heading": "### Twitter アラート",
+      "desc": "**color**、**dismissible**、 **border**、 **elevation**、**icon**、**colored-border** propを組み合わせることで、このtwitter通知のようなスタイリッシュなカスタムアラートを作成することができます。"
     }
+  },
+  "accessibility": {
+    "desc": "デフォルトでは、`v-alert`コンポーネントには [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) の [**alert**](https://www.w3.org/TR/wai-aria/#alert) の役割が割り当てられます。**dismissible** prop を使用している場合、クローズアイコンには対応する `aria-label` が表示されます。この値は **close-label** prop を変更するか、[Internationalization](/customization/internationalization) の _close_ プロパティのデフォルト値をカスタマイズすることでグローバルに変更することができます。"
   },
   "props": {
     "border": "ボーダーを表示します。**top** | **right** | **bottom** | **left** のいずれかの値を受け付けます。",
+    "closeLabel": "**dismissible**アラートの *aria-label* に使用されるテキストです。 [Internationalization](/customization/internationalization) でグローバルにカスタマイズすることもできます。",
     "coloredBorder": "定義された **color** をAlertの境界線に適用します。",
     "dense": "アラートアイコンを非表示にして、コンポーネントの高さを減らします。",
     "dismissible": "アラートを非表示にする、閉じるアイコンを表示します。",
-    "outlined": "背景を透明にし、細い境界線を適用します。"
+    "icon": "アイコンを指定します。",
+    "outlined": "背景を透明にし、細い境界線を適用します。",
+    "prominent": "縦方向中央に大きなアイコンを表示して、より注目を集めます。",
+    "text": "定義された**color**をテキストに適用し、同じ色の低い不透明度の背景を適用します。"
   }
 }

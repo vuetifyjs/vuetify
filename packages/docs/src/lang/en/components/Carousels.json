@@ -63,5 +63,8 @@
     "v-carousel-item": {
       "value": "Mixins.Groupable.props.value"
     }
+  },
+  "events": {
+    "change": "Emitted when the component value is changed by user interaction"
   }
 }

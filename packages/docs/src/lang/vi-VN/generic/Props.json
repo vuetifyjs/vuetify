@@ -1,8 +1,0 @@
-{
-  "centered": "Canh giữa các thẻ",
-  "clearable": "Thêm chức năng xóa giá trị đầu vào, Icon mặc định là Material Icons **clear**",
-  "falseValue": "Giá trị của trạng thái sai",
-  "fullWidth": "Bắt buộc chiều rộng là 100%",
-  "id": "Đặt id cho component",
-  "trueValue": "Giá trị của trạng thái đúng"
-}

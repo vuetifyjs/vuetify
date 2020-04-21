@@ -1,6 +1,6 @@
 {
   "heading": "# A-la-carte (treeshaking)",
-  "headingText": "Being a component framework, Vuetify will always grow horizontally. Depending on your project, a small **package size** may be a requirement. The A la carte system enables you to pick and choose which components to import, drastically _lowering_ your build size. New projects created with the [Vue CLI plugin](/getting-started/quick-start#new-applications) have this enabled by default.",
+  "headingText": "Being a component framework, Vuetify will always grow horizontally. Depending on your project, a small **package size** may be a requirement. The A la carte system enables you to pick and choose which components to import, drastically _lowering_ your build size. New projects created with the [Vue CLI plugin](/getting-started/quick-start#vue-cli-install) have this enabled by default.",
   "treeshakeWarning": "Treeshaking will only work with Webpack 4 in **production mode**. This is automatic when using Vue CLI.",
   "loaderHeader1": "## vuetify-loader",
   "loaderText1a": "Keeping track of all the components you're using can be a real chore. The [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) alleviates this pain by automatically importing all the Vuetify components you use, where you use them. This will also make code-splitting more effective, as webpack will only load the components required for that chunk to be displayed.",
