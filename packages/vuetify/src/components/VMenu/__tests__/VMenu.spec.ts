@@ -9,6 +9,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 import { keyCodes } from '../../../util/helpers'
+import { waitAnimationFrame } from '../../../../test'
 
 describe('VMenu.ts', () => {
   type Instance = InstanceType<typeof VMenu>
@@ -106,7 +107,7 @@ describe('VMenu.ts', () => {
 
     wrapper.setProps({ value: true })
 
-    await new Promise(resolve => requestAnimationFrame(resolve))
+    await waitAnimationFrame()
 
     expect(content.attributes('style')).toMatchSnapshot()
     expect('Unable to locate target [data-app]').toHaveBeenTipped()

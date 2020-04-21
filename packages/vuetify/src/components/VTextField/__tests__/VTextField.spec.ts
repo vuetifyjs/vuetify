@@ -6,6 +6,7 @@ import {
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
+import { waitAnimationFrame } from '../../../../test'
 
 describe('VTextField.ts', () => { // eslint-disable-line max-statements
   type Instance = InstanceType<typeof VTextField>
@@ -649,7 +650,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     // https://github.com/vuetifyjs/vuetify/issues/5913
     // Blur waits a requestAnimationFrame
     // to resolve a bug in MAC / Safari
-    await new Promise(resolve => window.requestAnimationFrame(resolve))
+    await waitAnimationFrame()
 
     expect(onBlur).toHaveBeenCalledTimes(1)
   })
