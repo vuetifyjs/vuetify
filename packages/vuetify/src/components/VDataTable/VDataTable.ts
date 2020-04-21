@@ -458,10 +458,11 @@ export default VDataIterator.extend({
         },
         scopedSlots,
         on: {
-          // TODO: first argument should be the data object
+          // TODO: for click, the first argument should be the event, and the second argument should be data,
           // but this is a breaking change so it's for v3
           click: () => this.$emit('click:row', item, data),
           contextmenu: (event: MouseEvent) => this.$emit('contextmenu:row', event, data),
+          dblclick: (event: MouseEvent) => this.$emit('dblclick:row', event, data),
         },
       })
     },

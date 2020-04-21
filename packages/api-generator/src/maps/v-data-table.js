@@ -36,6 +36,11 @@ const DataTableEvents = [
     source: 'v-data-table',
     value: `MouseEvent, ${dataString}`,
   },
+  {
+    name: 'dblclick:row',
+    source: 'v-data-table',
+    value: `MouseEvent, ${dataString}`,
+  },
 ].concat(DataIteratorEvents)
 
 const DataTableHeaderScopedProps = {
