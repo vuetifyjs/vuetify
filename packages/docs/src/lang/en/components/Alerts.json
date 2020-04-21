@@ -57,7 +57,7 @@
     "coloredBorder": "Applies the defined **color** to the alert's border.",
     "dense": "Hides the alert icon and decreases component's height.",
     "dismissible": "Adds a close icon that can hide the alert.",
-    "closeIcon": "Sets the icon used for button closing dismissible alert.",
+    "closeIcon": "Change the default icon used for **dismissible** alerts.",
     "icon": "Designates a specific icon.",
     "outlined": "Makes the background transparent and applies a thin border.",
     "prominent": "Displays a larger vertically centered icon to draw more attention.",
