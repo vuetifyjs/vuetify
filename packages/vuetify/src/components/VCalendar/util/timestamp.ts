@@ -15,6 +15,10 @@ export const DAYS_IN_WEEK = 7
 export const MINUTES_IN_HOUR = 60
 export const HOURS_IN_DAY = 24
 export const FIRST_HOUR = 0
+export const OFFSET_YEAR = 10000
+export const OFFSET_MONTH = 100
+export const OFFSET_HOUR = 100
+export const OFFSET_TIME = 10000
 
 type CalendarTimestampFormatOptions = (timestamp: CalendarTimestamp, short: boolean) => object
 type CalendarTimestampOperation = (timestamp: CalendarTimestamp) => CalendarTimestamp
@@ -151,15 +155,15 @@ export function parseDate (date: Date): CalendarTimestamp {
 }
 
 export function getDayIdentifier (timestamp: { year: number, month: number, day: number }): number {
-  return timestamp.year * 10000 + timestamp.month * 100 + timestamp.day
+  return timestamp.year * OFFSET_YEAR + timestamp.month * OFFSET_MONTH + timestamp.day
 }
 
 export function getTimeIdentifier (timestamp: { hour: number, minute: number }): number {
-  return timestamp.hour * 100 + timestamp.minute
+  return timestamp.hour * OFFSET_HOUR + timestamp.minute
 }
 
 export function getTimestampIdentifier (timestamp: CalendarTimestamp): number {
-  return getDayIdentifier(timestamp) * 10000 + getTimeIdentifier(timestamp)
+  return getDayIdentifier(timestamp) * OFFSET_TIME + getTimeIdentifier(timestamp)
 }
 
 export function updateRelative (timestamp: CalendarTimestamp, now: CalendarTimestamp, time = false): CalendarTimestamp {

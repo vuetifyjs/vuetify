@@ -37,7 +37,7 @@ describe('events.ts', () => {
     expect(isEventOn(parsed, getDayIdentifier(parseTimestamp('2019-02-12')))).toBeFalsy()
     expect(isEventOn(parsed, getDayIdentifier(parseTimestamp('2019-02-13')))).toBeTruthy()
     expect(isEventOn(parsed, getDayIdentifier(parseTimestamp('2019-02-14')))).toBeTruthy()
-    expect(isEventOn(parsed, getDayIdentifier(parseTimestamp('2019-02-15')))).toBeTruthy()
+    expect(isEventOn(parsed, getDayIdentifier(parseTimestamp('2019-02-15')))).toBeFalsy()
     expect(isEventOn(parsed, getDayIdentifier(parseTimestamp('2019-02-16')))).toBeFalsy()
   })
 
