@@ -166,6 +166,7 @@ describe('VSelect.ts', () => {
     expect(wrapper.vm.isFocused).toBe(false)
     expect(wrapper.vm.isMenuActive).toBe(false)
   })
+
   // https://github.com/vuetifyjs/vuetify/issues/4853
   it('should select item after typing its first few letters', async () => {
     const wrapper = mountFunction({
@@ -185,6 +186,26 @@ describe('VSelect.ts', () => {
     input.trigger('keypress', { key: 'a' })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalValue).toEqual('faa')
+  })
+                               
+  // https://github.com/vuetifyjs/vuetify/issues/10406
+  it('should load more items when typing', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: Array.from({ length: 24 }, (_, i) => 'Item ' + i).concat('foo'),
+      },
+    })
+
+    const input = wrapper.find('input')
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.virtualizedItems).toHaveLength(20)
+
+    input.trigger('keypress', { key: 'f' })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalValue).toEqual('foo')
+    expect(wrapper.vm.virtualizedItems).toHaveLength(25)
   })
 
   // TODO: this fails without sync, nextTick doesn't help

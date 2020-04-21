@@ -8,6 +8,8 @@ exports[`VChipGroup.ts should have a v-chip-group class 1`] = `
     <div class="v-slide-group__content">
     </div>
   </div>
+  <div class="v-slide-group__next v-slide-group__next--disabled">
+  </div>
 </div>
 `;
 
@@ -18,6 +20,8 @@ exports[`VChipGroup.ts should render column 1`] = `
   <div class="v-slide-group__wrapper">
     <div class="v-slide-group__content">
     </div>
+  </div>
+  <div class="v-slide-group__next v-slide-group__next--disabled">
   </div>
 </div>
 `;
@@ -30,6 +34,8 @@ exports[`VChipGroup.ts should switch to column 1`] = `
     <div class="v-slide-group__content">
     </div>
   </div>
+  <div class="v-slide-group__next v-slide-group__next--disabled">
+  </div>
 </div>
 `;
 
@@ -40,6 +46,8 @@ exports[`VChipGroup.ts should switch to column 2`] = `
   <div class="v-slide-group__wrapper">
     <div class="v-slide-group__content">
     </div>
+  </div>
+  <div class="v-slide-group__next v-slide-group__next--disabled">
   </div>
 </div>
 `;
