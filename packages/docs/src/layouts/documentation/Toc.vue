@@ -6,7 +6,6 @@
     :right="!$vuetify.rtl"
     app
     clipped
-    color="transparent"
   >
     <template v-if="structure !== false">
       <ul class="pt-8 mb-6 documentation-toc">
