@@ -7,6 +7,7 @@
       v-model="picker"
       flat
     ></v-color-picker>
+
     <v-color-picker
       v-model="picker"
       elevation="15"
