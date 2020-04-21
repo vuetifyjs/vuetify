@@ -9,5 +9,11 @@ module.exports = {
         },
       },
     ],
+    events: [
+      {
+        name: 'change',
+        value: 'number',
+      },
+    ],
   },
 }

@@ -1,4 +1,7 @@
 {
+  "objectAlert": "Si vous utilisez des objets pour la propriété **items**, vous devrez probablement associer **item-text** et **item-value** aux propriétés correspondantes sur vos propres objets. Ces valeurs sont par défaut **text** et **value** mais peuvent être modifiées pour coller à votre structure de données.",
+  "autoAlert": "La propriété **auto** de **menu-props** n'est supportée que pour le style d'inputs par défaut.",
+  "autocompleteAlert": "La saisie automatique du navigateur est désactivée par défaut, ceci peut varier selon les navigateurs et peut même être ignoré. [MDN](https://developer.mozilla.org/fr-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion)",
   "examples": {
     "icons": {
       "heading": "### Icônes"

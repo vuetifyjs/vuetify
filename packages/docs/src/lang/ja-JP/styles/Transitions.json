@@ -26,12 +26,10 @@
       "desc": "Vuetifyのコンポーネントの多くは`transition`プロパティを含んでいます。"
     },
     "fade-transition": {
-      "heading": "### Fade transition",
-      "desc": "フェードはCarouselでも見ることができます。"
+      "heading": "### Fade transition"
     },
     "expand-transition": {
-      "heading": "### Expand transition",
-      "desc": "expandトランジションは、エクスパンションパネルとリストグループで使用されます。 `v-expand-x-transition`で利用できる水平バージョンもあります。"
+      "heading": "### Expand transition"
     },
     "custom-origin": {
       "desc": "シンプルなプロパティでトランジションのoriginを制御することができます。"

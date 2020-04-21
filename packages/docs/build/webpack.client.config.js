@@ -6,6 +6,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const TerserJSPlugin = require('terser-webpack-plugin')
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -105,6 +107,7 @@ const config = merge(base, {
   },
   optimization: {
     minimize: isProd,
+    minimizer: [new TerserJSPlugin({}), new OptimizeCssAssetsPlugin({})],
     runtimeChunk: true,
     removeAvailableModules: isProd,
     removeEmptyChunks: isProd,

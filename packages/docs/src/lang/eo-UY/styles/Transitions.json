@@ -25,13 +25,17 @@
       "heading": "crwdns44860:0crwdne44860:0",
       "desc": "crwdns37816:0crwdne37816:0"
     },
+    "fab-transition": {
+      "heading": "crwdns56940:0crwdne56940:0",
+      "desc": "crwdns56942:0crwdne56942:0"
+    },
     "fade-transition": {
       "heading": "crwdns44862:0crwdne44862:0",
-      "desc": "crwdns37820:0crwdne37820:0"
+      "desc": "crwdns56944:0crwdne56944:0"
     },
     "expand-transition": {
       "heading": "crwdns44864:0crwdne44864:0",
-      "desc": "crwdns37824:0crwdne37824:0"
+      "desc": "crwdns56946:0crwdne56946:0"
     },
     "custom-origin": {
       "heading": "crwdns44866:0crwdne44866:0",

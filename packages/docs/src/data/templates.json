@@ -1,4 +1,21 @@
 {
+  "daedal-pro": {
+    "title": "Daedal Theme Pro",
+    "description": "Daedal — is a carefully crafted multi-purpose, responsive, and gorgeous theme that showcases a clean interface for a sharp user experience. Built with Vue CLI, it comes with all of the tools that you need to start developing your application right now.",
+    "src": "https://cdn.vuetifyjs.com/images/themes/daedal/daedal-hero.png",
+    "price": "$60",
+    "url": "https://store.vuetifyjs.com/product/daedal-responsive-multi-purpose-theme-pro",
+    "demoUrl": [
+      [
+        "Pro Demo",
+        "https://daedal-pro.zeroskillz.now.sh"
+      ],
+      [
+        "Free Demo",
+        "https://daedal-free.zeroskillz.now.sh"
+      ]
+    ]
+  },
   "dashboard-pro": {
     "title": "Material Dashboard Pro",
     "description": "Vuetify Material Dashboard PRO is a beautiful theme built over Vuetify, Vuex and Vuejs. Vuetify Material Dashboard PRO is the official Vuejs version of the Original Material Dashboard PRO.",
@@ -9,16 +26,6 @@
       "https://demos.creative-tim.com/vuetify-material-dashboard-pro/"
     ],
     "query": "&partner=116160"
-  },
-  "shopify-e-commerce": {
-    "title": "Shopify E-commerce",
-    "description": "A handcrafted Vuetify e-commerce application built on top of Shopify. Meticulous tweaks for optimal performance, user experience and accessibility make this theme stand out as a must have for anyone selling or wanting to sell with Shopify.",
-    "src": "https://cdn.vuetifyjs.com/images/starter/shopify-e-commerce.png",
-    "price": "$99",
-    "url": "https://store.vuetifyjs.com/product/shopify-e-commerce-theme",
-    "demoUrl": [
-      "https://store.vuetifyjs.com"
-    ]
   },
   "material-kit": {
     "title": "Material Kit",
@@ -35,7 +42,7 @@
     "description": "Complete theme experience including enhanced Vue CLI, full documentation, 5 custom components and much more!",
     "src": "https://cdn.vuetifyjs.com/images/starter/vuetify-alpha-theme.png",
     "price": "$25",
-    "url": "https://store.vuetifyjs.com/product/vuetify-alpha-theme",
+    "url": "https://store.vuetifyjs.com/product/alpha-theme",
     "demoUrl": [
       [
         "Construction",

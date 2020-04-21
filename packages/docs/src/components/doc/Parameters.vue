@@ -33,6 +33,10 @@
           </template>
         </div>
       </template>
+
+      <template v-slot:no-results>
+        <div class="text-center pa-6 title font-weight-regular">No matching records found</div>
+      </template>
     </v-data-iterator>
   </div>
 </template>

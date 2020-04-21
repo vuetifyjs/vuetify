@@ -1,7 +1,6 @@
 {
   "heading": "# 选项卡",
   "headingText": "`v-tabs` 组件用于将内容隐藏在可选项之后。这还可以用作页面的伪导航，其中选项卡是链接，选项卡项是内容。",
-  "alert": "当使用 **dark** 属性和 **不** 提供自定义 **color** 时，`v-tabs` 组件会将其颜色默认为 _white_。",
   "examples": {
     "usage": {
       "desc": "`v-tabs` 组件是 [v-item-group](/components/item-groups) 的样式扩展。它提供了一个易于使用的接口来组织内容组。"

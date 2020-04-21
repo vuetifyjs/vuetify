@@ -1,8 +1,0 @@
-{
-  "getting-started/quick-start": {
-    "keywords": "quick start, vuetify templates, get started"
-  },
-  "customization/theme": {
-    "description": "Setup your custom application theme by changing a few variables."
-  }
-}

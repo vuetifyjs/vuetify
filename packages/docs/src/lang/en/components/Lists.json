@@ -8,7 +8,7 @@
     },
     "avatar-title-and-action": {
       "heading": "### Avatar with title and action",
-      "desc": "Lists also contain slots for a more explicit approach. If you choose this approach, remember you must provide additional props for correct spacing. In this example, we have a tile with an avatar, so we must provide an `avatar` property."
+      "desc": "Lists also contain slots for a more explicit approach. If you choose this approach, remember you must provide additional props for correct spacing. In this example, we have a title with an avatar, so we must provide an `avatar` property."
     },
     "icon-two-lines-and-action": {
       "heading": "### Icon with 2 lines and action",

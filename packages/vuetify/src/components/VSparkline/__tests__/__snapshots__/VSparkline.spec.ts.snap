@@ -14,12 +14,12 @@ exports[`VSparkline.ts should position labels correctly 1`] = `
                     y2="0"
     >
       <stop offset="0"
-            stop-color="primary"
+            stop-color="currentColor"
       >
       </stop>
     </linearGradient>
   </defs>
-  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
+  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: currentColor;">
     <text x="8"
           y="76.25"
           font-size="7"
@@ -62,7 +62,7 @@ exports[`VSparkline.ts should render component and match a snapshot 1`] = `
                     y2="0"
     >
       <stop offset="0"
-            stop-color="primary"
+            stop-color="currentColor"
       >
       </stop>
     </linearGradient>
@@ -88,7 +88,7 @@ exports[`VSparkline.ts should render component with bars and auto-line-width and
                     y2="0"
     >
       <stop offset="0"
-            stop-color="primary"
+            stop-color="currentColor"
       >
       </stop>
     </linearGradient>
@@ -144,7 +144,7 @@ exports[`VSparkline.ts should render component with bars and auto-line-width wit
                     y2="0"
     >
       <stop offset="0"
-            stop-color="primary"
+            stop-color="currentColor"
       >
       </stop>
     </linearGradient>
@@ -200,7 +200,7 @@ exports[`VSparkline.ts should render component with bars and correct bar lengths
                     y2="0"
     >
       <stop offset="0"
-            stop-color="primary"
+            stop-color="currentColor"
       >
       </stop>
     </linearGradient>
@@ -248,7 +248,7 @@ exports[`VSparkline.ts should render component with bars and correct bar lengths
                     y2="0"
     >
       <stop offset="0"
-            stop-color="primary"
+            stop-color="currentColor"
       >
       </stop>
     </linearGradient>
@@ -296,7 +296,7 @@ exports[`VSparkline.ts should render component with bars and custom label size a
                     y2="0"
     >
       <stop offset="0"
-            stop-color="primary"
+            stop-color="currentColor"
       >
       </stop>
     </linearGradient>
@@ -327,7 +327,7 @@ exports[`VSparkline.ts should render component with bars and custom label size a
     >
     </rect>
   </clipPath>
-  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
+  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: currentColor;">
     <text x="50"
           y="86.25"
           font-size="15"
@@ -372,7 +372,7 @@ exports[`VSparkline.ts should render component with bars and custom padding and 
                     y2="0"
     >
       <stop offset="0"
-            stop-color="primary"
+            stop-color="currentColor"
       >
       </stop>
     </linearGradient>
@@ -492,7 +492,7 @@ exports[`VSparkline.ts should render component with bars and labels and match a 
                     y2="0"
     >
       <stop offset="0"
-            stop-color="primary"
+            stop-color="currentColor"
       >
       </stop>
     </linearGradient>
@@ -523,7 +523,7 @@ exports[`VSparkline.ts should render component with bars and labels and match a 
     >
     </rect>
   </clipPath>
-  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
+  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: currentColor;">
     <text x="50"
           y="80.25"
           font-size="7"
@@ -568,7 +568,7 @@ exports[`VSparkline.ts should render component with bars and line width and matc
                     y2="0"
     >
       <stop offset="0"
-            stop-color="primary"
+            stop-color="currentColor"
       >
       </stop>
     </linearGradient>
@@ -624,7 +624,7 @@ exports[`VSparkline.ts should render component with bars and match a snapshot 1`
                     y2="0"
     >
       <stop offset="0"
-            stop-color="primary"
+            stop-color="currentColor"
       >
       </stop>
     </linearGradient>
@@ -680,7 +680,7 @@ exports[`VSparkline.ts should render component with bars and negative and match 
                     y2="0"
     >
       <stop offset="0"
-            stop-color="primary"
+            stop-color="currentColor"
       >
       </stop>
     </linearGradient>
@@ -782,12 +782,12 @@ exports[`VSparkline.ts should render component with label size and match a snaps
                     y2="0"
     >
       <stop offset="0"
-            stop-color="primary"
+            stop-color="currentColor"
       >
       </stop>
     </linearGradient>
   </defs>
-  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
+  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: currentColor;">
     <text x="8"
           y="81.5"
           font-size="14"
@@ -830,7 +830,7 @@ exports[`VSparkline.ts should render component with line width and match a snaps
                     y2="0"
     >
       <stop offset="0"
-            stop-color="primary"
+            stop-color="currentColor"
       >
       </stop>
     </linearGradient>
@@ -858,7 +858,7 @@ exports[`VSparkline.ts should render component with padding and match a snapshot
                     y2="0"
     >
       <stop offset="0"
-            stop-color="primary"
+            stop-color="currentColor"
       >
       </stop>
     </linearGradient>
@@ -886,12 +886,12 @@ exports[`VSparkline.ts should render component with string labels and match a sn
                     y2="0"
     >
       <stop offset="0"
-            stop-color="primary"
+            stop-color="currentColor"
       >
       </stop>
     </linearGradient>
   </defs>
-  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
+  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: currentColor;">
     <text x="8"
           y="76.25"
           font-size="7"
@@ -934,12 +934,12 @@ exports[`VSparkline.ts should render component with string labels and match a sn
                     y2="0"
     >
       <stop offset="0"
-            stop-color="primary"
+            stop-color="currentColor"
       >
       </stop>
     </linearGradient>
   </defs>
-  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
+  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: currentColor;">
     <text x="8"
           y="76.25"
           font-size="7"
@@ -982,12 +982,12 @@ exports[`VSparkline.ts should render component with string labels and match a sn
                     y2="0"
     >
       <stop offset="0"
-            stop-color="primary"
+            stop-color="currentColor"
       >
       </stop>
     </linearGradient>
   </defs>
-  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
+  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: currentColor;">
     <text x="8"
           y="76.25"
           font-size="7"
@@ -1030,7 +1030,7 @@ exports[`VSparkline.ts should render component with trend and equal values and m
                     y2="0"
     >
       <stop offset="0"
-            stop-color="primary"
+            stop-color="currentColor"
       >
       </stop>
     </linearGradient>
@@ -1058,7 +1058,7 @@ exports[`VSparkline.ts should render smooth component and match a snapshot 1`] =
                     y2="0"
     >
       <stop offset="0"
-            stop-color="primary"
+            stop-color="currentColor"
       >
       </stop>
     </linearGradient>

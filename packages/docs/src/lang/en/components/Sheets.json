@@ -15,7 +15,7 @@
     },
     "colors-sizes": {
       "heading": "### Colors & sizes",
-      "desc": "Sheets and components based on then can have different sizes and colors."
+      "desc": "Sheets and components based on them can have different sizes and colors."
     }
   },
   "props": {

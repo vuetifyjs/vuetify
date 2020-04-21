@@ -11,7 +11,12 @@ import { PropValidator } from 'vue/types/options'
 // Components
 import VResponsive from '../VResponsive'
 
+// Mixins
+import Themeable from '../../mixins/themeable'
+
 // Utils
+import mixins from '../../util/mixins'
+import mergeData from '../../util/mergeData'
 import { consoleWarn } from '../../util/console'
 
 // not intended for public use, this is passed in by vuetify-loader
@@ -25,7 +30,10 @@ export interface srcObject {
 const hasIntersect = typeof window !== 'undefined' && 'IntersectionObserver' in window
 
 /* @vue/component */
-export default VResponsive.extend({
+export default mixins(
+  VResponsive,
+  Themeable,
+).extend({
   name: 'v-img',
 
   directives: { intersect },
@@ -248,25 +256,26 @@ export default VResponsive.extend({
   render (h): VNode {
     const node = VResponsive.options.render.call(this, h)
 
-    node.data!.staticClass += ' v-image'
-
-    // Only load intersect directive if it
-    // will work in the current browser.
-    if (hasIntersect) {
-      node.data!.directives = [{
-        name: 'intersect',
-        modifiers: { once: true },
-        value: {
-          handler: this.init,
-          options: this.options,
-        },
-      }]
-    }
-
-    node.data!.attrs = {
-      role: this.alt ? 'img' : undefined,
-      'aria-label': this.alt,
-    }
+    const data = mergeData(node.data!, {
+      staticClass: 'v-image',
+      attrs: {
+        'aria-label': this.alt,
+        role: this.alt ? 'img' : undefined,
+      },
+      class: this.themeClasses,
+      // Only load intersect directive if it
+      // will work in the current browser.
+      directives: hasIntersect
+        ? [{
+          name: 'intersect',
+          modifiers: { once: true },
+          value: {
+            handler: this.init,
+            options: this.options,
+          },
+        }]
+        : undefined,
+    })
 
     node.children = [
       this.__cachedSizer,
@@ -275,6 +284,6 @@ export default VResponsive.extend({
       this.genContent(),
     ] as VNode[]
 
-    return h(node.tag, node.data, node.children)
+    return h(node.tag, data, node.children)
   },
 })
