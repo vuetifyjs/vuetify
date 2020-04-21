@@ -88,7 +88,7 @@
       value (val) {
         if (val) return
 
-        this.markViewed(this.snackbar.slug)
+        this.markViewed()
       },
     },
 
@@ -133,15 +133,18 @@
       hasBeenViewed (item) {
         return Boolean(localStorage.getItem(`vuetify-notification-${item.slug}`))
       },
-      markViewed (slug) {
+      markViewed () {
+        const slug = this.snackbar.slug
+
+        if (!slug) return
+
         localStorage.setItem(`vuetify-notification-${slug}`, true)
         localStorage.setItem('vuetify-notification-last-time', this.getNow())
       },
       hasRecentlyViewed () {
-        const last = (
-          localStorage.getItem('vuetify-notification-last-time') ||
-          this.getNow()
-        )
+        const last = localStorage.getItem('vuetify-notification-last-time')
+
+        if (!last) return false
 
         return differenceInDays(parseISO(this.getNow()), parseISO(last)) < 2
       },

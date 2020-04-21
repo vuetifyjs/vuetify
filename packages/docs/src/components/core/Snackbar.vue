@@ -36,7 +36,7 @@
           color="white"
           depressed
           v-bind="bind"
-          @click="$ga.event('snackbar', 'click', snackbar.metadata.slug)"
+          @click="onClick('opened')"
         >
           {{ snackbar.action_text }}
 
@@ -50,7 +50,7 @@
           color="grey darken-1"
           icon
           small
-          @click="onClick"
+          @click="onClick('closed')"
         >
           <v-icon>$vuetify.cancel</v-icon>
         </v-btn>
@@ -114,8 +114,13 @@
     },
 
     methods: {
-      onClick () {
-        this.$ga.event('snackbar', 'click', `dismissed ${this.snackbar.slug}`)
+      onClick (event) {
+        const slug = this.snackbar.slug
+
+        if (slug) {
+          this.$ga.event('snackbar', 'click', `${event}-${slug}`)
+        }
+
         this.snack = false
       },
     },
