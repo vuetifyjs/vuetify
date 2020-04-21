@@ -9,14 +9,24 @@ import Localable from '../../../mixins/localable'
 import Themeable from '../../../mixins/themeable'
 
 // Utils
-import isDateAllowed from '../util/isDateAllowed'
-import mixins from '../../../util/mixins'
-import mergeData from '../../../util/mergeData'
 import { createItemTypeNativeListeners } from '../util'
+import isDateAllowed from '../util/isDateAllowed'
+import mergeData from '../../../util/mergeData'
+import mixins from '../../../util/mixins'
 
 // Types
-import { VNodeChildren, PropType } from 'vue'
-import { DatePickerAllowedDatesFunction, DatePickerFormatter, DatePickerEvents, DatePickerEventColors, DatePickerEventColorValue, TouchWrapper } from 'types'
+import {
+  VNodeChildren,
+  PropType,
+} from 'vue'
+import {
+  DatePickerAllowedDatesFunction,
+  DatePickerFormatter,
+  DatePickerEvents,
+  DatePickerEventColors,
+  DatePickerEventColorValue,
+  TouchWrapper,
+} from 'types'
 
 type CalculateTableDateFunction = (v: number) => string
 
@@ -94,7 +104,9 @@ export default mixins(
 
       return mergeData({
         on: {
-          click: () => isAllowed && !this.readonly && this.$emit('input', value),
+          click: () => {
+            if (isAllowed && !this.readonly) this.$emit('input', value)
+          },
         },
       }, {
         on: createItemTypeNativeListeners(this, `:${mouseEventType}`, value),

@@ -7,17 +7,24 @@ import VDatePickerYears from './VDatePickerYears'
 
 // Mixins
 import Localable from '../../mixins/localable'
+import mixins from '../../util/mixins'
 import Picker from '../../mixins/picker'
 
 // Utils
-import { pad, createNativeLocaleFormatter, createItemTypeListeners } from './util'
+import {
+  createItemTypeListeners,
+  createNativeLocaleFormatter,
+  pad,
+} from './util'
 import isDateAllowed from './util/isDateAllowed'
 import { consoleWarn } from '../../util/console'
 import { daysInMonth } from '../VCalendar/util/timestamp'
-import mixins from '../../util/mixins'
 
 // Types
-import { PropType, PropValidator } from 'vue/types/options'
+import {
+  PropType,
+  PropValidator,
+} from 'vue/types/options'
 import { VNode } from 'vue'
 import {
   DatePickerFormatter,

@@ -5,9 +5,12 @@ import Colorable from '../../mixins/colorable'
 import Localable from '../../mixins/localable'
 
 // Utils
-import { createNativeLocaleFormatter, createItemTypeNativeListeners } from './util'
-import mixins, { ExtractVue } from '../../util/mixins'
+import {
+  createItemTypeNativeListeners,
+  createNativeLocaleFormatter,
+} from './util'
 import mergeData from '../../util/mergeData'
+import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
 import Vue, { VNode, PropType } from 'vue'
