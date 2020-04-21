@@ -21,7 +21,7 @@
       "heading": "### Date pickers - current date indicator"
     },
     "date-button-events": {
-      "desc": "You can handle DOM events like `click`, `dblclick`, `mouseenter` etc that are triggered on each date/month/year button.",
+      "desc": "Handle events such as `@click`, `@dblclick`, `@mouseenter`, and more when interacting with *date, month, and year* buttons.",
       "heading": "### Date pickers - DOM events for year/month/date buttons"
     },
     "date-dialog-and-menu": {
