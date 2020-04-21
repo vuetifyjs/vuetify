@@ -187,7 +187,7 @@ describe('VSelect.ts', () => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalValue).toEqual('faa')
   })
-                               
+
   // https://github.com/vuetifyjs/vuetify/issues/10406
   it('should load more items when typing', async () => {
     const wrapper = mountFunction({
