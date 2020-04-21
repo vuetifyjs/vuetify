@@ -55,6 +55,7 @@ module.exports = [
   'v-rating',
   'v-responsive',
   'v-sheet',
+  'v-simple-btn',
   'v-simple-table',
   'v-slide-group',
   'v-slide-item',
