@@ -5,6 +5,10 @@ module.exports = {
         name: 'input',
         value: 'boolean',
       },
+      {
+        name: 'closed',
+        value: 'Event',
+      },
     ],
   },
 }

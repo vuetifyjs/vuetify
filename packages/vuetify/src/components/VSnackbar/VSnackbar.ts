@@ -71,8 +71,12 @@ export default mixins(
       if (this.isActive && this.timeout) {
         this.activeTimeout = window.setTimeout(() => {
           this.isActive = false
+          this.closed(new Event('closed'))
         }, this.timeout)
       }
+    },
+    closed (e: Event): void {
+      this.$emit('closed', e)
     },
   },
 
