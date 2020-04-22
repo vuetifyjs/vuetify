@@ -33,9 +33,11 @@ import {
   CalendarEventVisual,
   CalendarEventColorFunction,
   CalendarEventNameFunction,
+  CalendarEventTimedFunction,
   CalendarDaySlotScope,
   CalendarDayBodySlotScope,
   CalendarEventOverlapMode,
+  CalendarEvent,
 } from 'types'
 
 // Types
@@ -76,7 +78,7 @@ export default CalendarBase.extend({
       return this.events.length === 0
     },
     parsedEvents (): CalendarEventParsed[] {
-      return this.events.map((input, index) => parseEvent(input, index, this.eventStart, this.eventEnd))
+      return this.events.map(this.parseEvent)
     },
     parsedEventOverlapThreshold (): number {
       return parseInt(this.eventOverlapThreshold)
@@ -85,6 +87,11 @@ export default CalendarBase.extend({
       return typeof this.eventColor === 'function'
         ? this.eventColor as CalendarEventColorFunction
         : () => (this.eventColor as string)
+    },
+    eventTimedFunction (): CalendarEventTimedFunction {
+      return typeof this.eventTimed === 'function'
+        ? this.eventTimed as CalendarEventTimedFunction
+        : event => !!event[this.eventTimed as string]
     },
     eventTextColorFunction (): CalendarEventColorFunction {
       return typeof this.eventTextColor === 'function'
@@ -123,6 +130,9 @@ export default CalendarBase.extend({
   },
 
   methods: {
+    parseEvent (input: CalendarEvent, index = 0): CalendarEventParsed {
+      return parseEvent(input, index, this.eventStart, this.eventEnd, this.eventTimedFunction(input))
+    },
     formatTime (withTime: CalendarTimestamp, ampm: boolean): string {
       const formatter = this.getFormatter({
         timeZone: 'UTC',

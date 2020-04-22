@@ -38,6 +38,7 @@
     "events": "An array of event objects with a property for a start timestamp and optionally a name and end timestamp. If an end timestamp is not given, the value of start will be used. If no name is given, you must provide an implementation for the `event` slot.",
     "eventStart": "Set property of *event*'s start timestamp.",
     "eventTextColor": "A text color for all events or a function which accepts an event object passed to the calendar to return a color.",
+    "eventTimed": "If Dates or seconds are used as the start or end timestamp of an event, this prop can be a string to a property on the event that is truthy if the event is a timed event or a function which takes the event and returns a truthy value if the event is a timed event.",
     "firstInterval": "The first interval to display in the `day` view. If `intervalMinutes` is set to 60 and this is set to 9 the first time in the view is 9am.",
     "hideHeader": "If the header at the top of the `day` view should be visible.",
     "intervalCount": "The number of intervals to display in the `day` view.",
@@ -75,7 +76,9 @@
     "timeToY": "Converts a time to a pixel value on the y-axis for the `day` view. If the time is not in a valid format or if the calendar is not in the `day` view then false is returned.",
     "updateEventVisibility": "If the calendar has events and `event-more` is truthy the days with too many events contain a 'button' to represent how many events had to be hidden.",
     "updateTimes": "Updates now & today in the calendar, possibly updating the styles in the calendar.",
-    "getVisibleEvents": "Returns the list of events seen on the current calendar where each element returned has the following properties:<br>- `input`: the event passed in the `events` prop.<br>- `start`: a CalendarTimestamp of the start timestamp parsed.<br>- `startIdentifier`: a number which represents the day the event starts on.<br>- `startTimestampIdentifier`: a number which represents the day and time the event starts on.<br>- `end`: a CalendarTimestamp of the end timestamp parsed.<br>- `endIdentifier`: a number which represents the day the event ends on.<br>- `endTimestampIdentifier`: a number which represents the day & time the event ends on.<br>- `allDay`: if this is an all-day event (has no time specified in the `start`/`end` on the event).<br>- `index`: the index of the event in the given array."
+    "getVisibleEvents": "Returns the list of events seen on the current calendar where each element returned has the following properties:<br>- `input`: the event passed in the `events` prop.<br>- `start`: a CalendarTimestamp of the start timestamp parsed.<br>- `startIdentifier`: a number which represents the day the event starts on.<br>- `startTimestampIdentifier`: a number which represents the day and time the event starts on.<br>- `end`: a CalendarTimestamp of the end timestamp parsed.<br>- `endIdentifier`: a number which represents the day the event ends on.<br>- `endTimestampIdentifier`: a number which represents the day & time the event ends on.<br>- `allDay`: if this is an all-day event (has no time specified in the `start`/`end` on the event).<br>- `index`: the index of the event in the given array.",
+    "parseTimestamp": "A utility function which takes timestamp input and returns a timestamp object.",
+    "parseEvent": "A utility function which takes an event and returns the parsed version of that event."
   },
   "slots": {
     "day-body": "The content that is placed in a `day` view in the scrollable interval container. The day & time object is passed through this slots scope.",

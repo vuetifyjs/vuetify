@@ -73,6 +73,14 @@ module.exports = {
         name: 'getVisibleEvents',
         signature: '(): CalendarEventParsed[]',
       },
+      {
+        name: 'parseEvent',
+        signature: '(input: CalendarEvent, index: number = 0): CalendarEventParsed',
+      },
+      {
+        name: 'parseTimestamp',
+        signature: '(input: VTimestampInput, required?: false): CalendarTimestamp | null',
+      },
     ],
     events: [
       {

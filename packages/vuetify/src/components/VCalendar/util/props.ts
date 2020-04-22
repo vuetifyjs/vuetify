@@ -8,12 +8,12 @@ import { PropValidator } from 'vue/types/options'
 export default {
   base: {
     start: {
-      type: String,
+      type: [String, Number, Date],
       validate: validateTimestamp,
       default: () => parseDate(new Date()).date,
     },
     end: {
-      type: String,
+      type: [String, Number, Date],
       validate: validateTimestamp,
     },
     weekdays: {
@@ -109,7 +109,7 @@ export default {
       default: 'month',
     },
     value: {
-      type: String,
+      type: [String, Number, Date],
       validate: validateTimestamp,
     },
   },
@@ -125,6 +125,10 @@ export default {
     eventEnd: {
       type: String,
       default: 'end',
+    },
+    eventTimed: {
+      type: [String, Function],
+      default: 'timed',
     },
     eventHeight: {
       type: Number,

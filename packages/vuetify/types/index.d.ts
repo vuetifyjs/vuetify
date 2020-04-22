@@ -233,6 +233,8 @@ export type CalendarEventOverlapMode = (events: CalendarEventParsed[], firstWeek
 
 export type CalendarEventColorFunction = (event: CalendarEvent) => string
 
+export type CalendarEventTimedFunction = (event: CalendarEvent) => boolean
+
 export type CalendarEventNameFunction = (event: CalendarEventParsed, timedEvent: boolean) => string
 
 export type DataTableFilterFunction = (value: any, search: string | null, item: any) => boolean

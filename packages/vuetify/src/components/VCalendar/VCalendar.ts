@@ -25,6 +25,7 @@ import {
   getStartOfMonth,
   getEndOfMonth,
   VTime,
+  VTimestampInput,
 } from './util/timestamp'
 
 // Calendars
@@ -206,6 +207,9 @@ export default CalendarWithEvents.extend({
       } else {
         return false
       }
+    },
+    parseTimestamp (input: VTimestampInput, required?: false): CalendarTimestamp | null {
+      return parseTimestamp(input, required, this.times.now)
     },
   },
 

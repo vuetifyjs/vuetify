@@ -71,8 +71,8 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
     expect(validateTimestamp('not a timestamp')).toBe(false)
     expect(validateTimestamp([])).toBe(false)
     expect(validateTimestamp({})).toBe(false)
-    expect(validateTimestamp(new Date())).toBe(false)
-    expect(validateTimestamp(2345)).toBe(false)
+    expect(validateTimestamp(new Date())).toBe(true)
+    expect(validateTimestamp(2345)).toBe(true)
   })
 
   it('should parse timestamp', () => {

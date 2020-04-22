@@ -13,7 +13,9 @@ export const MONTH_MIN = 1
 export const DAY_MIN = 1
 export const DAYS_IN_WEEK = 7
 export const MINUTES_IN_HOUR = 60
+export const MINUTE_MAX = 59
 export const HOURS_IN_DAY = 24
+export const HOUR_MAX = 23
 export const FIRST_HOUR = 0
 export const OFFSET_YEAR = 10000
 export const OFFSET_MONTH = 100
@@ -26,6 +28,8 @@ export type VTime = number | string | {
   hour: number
   minute: number
 }
+
+export type VTimestampInput = number | string | Date;
 
 export function getStartOfWeek (timestamp: CalendarTimestamp, weekdays: number[], today?: CalendarTimestamp): CalendarTimestamp {
   const start = copyTimestamp(timestamp)
@@ -92,19 +96,42 @@ export function parseTime (input: any): number | false {
   }
 }
 
-export function validateTimestamp (input: any): boolean {
-  return !!PARSE_REGEX.exec(input)
+export function validateTimestamp (input: any): input is VTimestampInput {
+  return (typeof input === 'number' && isFinite(input)) ||
+    (typeof input === 'string' && !!PARSE_REGEX.exec(input)) ||
+    (input instanceof Date)
 }
 
-export function parseTimestamp (input: string, required?: false, now?: CalendarTimestamp): CalendarTimestamp | null
-export function parseTimestamp (input: string, required: true, now?: CalendarTimestamp): CalendarTimestamp
-export function parseTimestamp (input: string, required = false, now?: CalendarTimestamp): CalendarTimestamp | null {
+export function parseTimestamp (input: VTimestampInput, required?: false, now?: CalendarTimestamp): CalendarTimestamp | null
+export function parseTimestamp (input: VTimestampInput, required: true, now?: CalendarTimestamp): CalendarTimestamp
+export function parseTimestamp (input: VTimestampInput, required = false, now?: CalendarTimestamp): CalendarTimestamp | null {
+  if (typeof input === 'number' && isFinite(input)) {
+    input = new Date(input)
+  }
+
+  if (input instanceof Date) {
+    const date: CalendarTimestamp = parseDate(input)
+
+    if (now) {
+      updateRelative(date, now, date.hasTime)
+    }
+
+    return date
+  }
+
+  if (typeof input !== 'string') {
+    if (required) {
+      throw new Error(`${input} is not a valid timestamp. It must be a Date, number of seconds since Epoch, or a string in the format of YYYY-MM-DD or YYYY-MM-DD hh:mm. Zero-padding is optional and seconds are ignored.`)
+    }
+    return null
+  }
+
   // YYYY-MM-DD hh:mm:ss
   const parts = PARSE_REGEX.exec(input)
 
   if (!parts) {
     if (required) {
-      throw new Error(`${input} is not a valid timestamp. It must be in the format of YYYY-MM-DD or YYYY-MM-DD hh:mm. Zero-padding is optional and seconds are ignored.`)
+      throw new Error(`${input} is not a valid timestamp. It must be a Date, number of seconds since Epoch, or a string in the format of YYYY-MM-DD or YYYY-MM-DD hh:mm. Zero-padding is optional and seconds are ignored.`)
     }
 
     return null
@@ -180,6 +207,26 @@ export function updateRelative (timestamp: CalendarTimestamp, now: CalendarTimes
   timestamp.past = b < a
   timestamp.present = present
   timestamp.future = b > a
+
+  return timestamp
+}
+
+export function isTimedless (input: VTimestampInput): input is (Date | number) {
+  return (input instanceof Date) || (typeof input === 'number' && isFinite(input))
+}
+
+export function updateHasTime (timestamp: CalendarTimestamp, hasTime: boolean, now?: CalendarTimestamp): CalendarTimestamp {
+  if (timestamp.hasTime !== hasTime) {
+    timestamp.hasTime = hasTime
+    if (!hasTime) {
+      timestamp.hour = HOUR_MAX
+      timestamp.minute = MINUTE_MAX
+      timestamp.time = getTime(timestamp)
+    }
+    if (now) {
+      updateRelative(timestamp, now, timestamp.hasTime)
+    }
+  }
 
   return timestamp
 }
