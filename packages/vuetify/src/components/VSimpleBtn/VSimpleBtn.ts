@@ -12,7 +12,6 @@ import Sizeable from '../../mixins/sizeable'
 
 // Utilities
 import mixins, { ExtractVue } from '../../util/mixins'
-import { breaking } from '../../util/console'
 
 // Types
 import { VNode, VNodeData } from 'vue'
@@ -106,19 +105,6 @@ export default baseMixins.extend<options>().extend({
         ...this.measurableStyles,
       }
     },
-  },
-
-  created () {
-    const breakingProps = [
-      ['flat', 'text'],
-      ['outline', 'outlined'],
-      ['round', 'rounded'],
-    ]
-
-    /* istanbul ignore next */
-    breakingProps.forEach(([original, replacement]) => {
-      if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement, this)
-    })
   },
 
   methods: {
