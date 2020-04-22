@@ -59,6 +59,14 @@ type VDailyEventsMap = {
   }
 }
 
+interface VEventScopeInput {
+  eventParsed: CalendarEventParsed
+  day: CalendarDaySlotScope
+  start: boolean
+  end: boolean
+  timed: boolean
+}
+
 const WIDTH_FULL = 100
 const WIDTH_START = 95
 const MINUTES_IN_DAY = 1440
@@ -101,23 +109,7 @@ export default CalendarBase.extend({
     eventNameFunction (): CalendarEventNameFunction {
       return typeof this.eventName === 'function'
         ? this.eventName as CalendarEventNameFunction
-        : (event, timedEvent) => {
-          const name = escapeHTML(event.input[this.eventName as string] as string)
-          if (event.start.hasTime) {
-            if (timedEvent) {
-              const showStart = event.start.hour < 12 && event.end.hour >= 12
-              const start = this.formatTime(event.start, showStart)
-              const end = this.formatTime(event.end, true)
-              const singline = diffMinutes(event.start, event.end) <= this.parsedEventOverlapThreshold
-              const separator = singline ? ', ' : '<br>'
-              return `<strong>${name}</strong>${separator}${start} - ${end}`
-            } else {
-              const time = this.formatTime(event.start, true)
-              return `<strong>${time}</strong> ${name}`
-            }
-          }
-          return name
-        }
+        : (event, timedEvent) => escapeHTML(event.input[this.eventName as string] as string)
     },
     eventModeFunction (): CalendarEventOverlapMode {
       return typeof this.eventOverlapMode === 'function'
@@ -231,7 +223,7 @@ export default CalendarBase.extend({
           break
         }
       }
-      const scope = { event: event.input, day, outside: day.outside, start, end, timed: false }
+      const scope = { eventParsed: event, day, start, end, timed: false }
 
       return this.genEvent(event, scope, false, {
         staticClass: 'v-event',
@@ -259,7 +251,7 @@ export default CalendarBase.extend({
       const top = start ? day.timeToY(event.start) : 0
       const bottom = end ? day.timeToY(MINUTES_IN_DAY) : day.timeToY(event.end)
       const height = Math.max(this.eventHeight, bottom - top)
-      const scope = { event: event.input, day, outside: day.outside, start, end, timed: true }
+      const scope = { eventParsed: event, day, start, end, timed: true }
 
       return this.genEvent(event, scope, true, {
         staticClass: 'v-event-timed',
@@ -271,10 +263,43 @@ export default CalendarBase.extend({
         },
       })
     },
-    genEvent (event: CalendarEventParsed, scope: object, timedEvent: boolean, data: VNodeData): VNode {
+    genEvent (event: CalendarEventParsed, scopeInput: VEventScopeInput, timedEvent: boolean, data: VNodeData): VNode {
       const slot = this.$scopedSlots.event
       const text = this.eventTextColorFunction(event.input)
       const background = this.eventColorFunction(event.input)
+      const overlapsNoon = event.start.hour < 12 && event.end.hour >= 12
+      const singline = diffMinutes(event.start, event.end) <= this.parsedEventOverlapThreshold
+      const formatTime = this.formatTime
+      const timeSummary = () => formatTime(event.start, overlapsNoon) + ' - ' + formatTime(event.end, true)
+      const eventSummary = () => {
+        const name = this.eventNameFunction(event, timedEvent)
+
+        if (event.start.hasTime) {
+          if (timedEvent) {
+            const time = timeSummary()
+            const delimiter = singline ? ', ' : '<br>'
+
+            return `<strong>${name}</strong>${delimiter}${time}`
+          } else {
+            const time = formatTime(event.start, true)
+
+            return `<strong>${time}</strong> ${name}`
+          }
+        }
+
+        return name
+      }
+
+      const scope = {
+        ...scopeInput,
+        event: event.input,
+        outside: scopeInput.day.outside,
+        singline,
+        overlapsNoon,
+        formatTime,
+        timeSummary,
+        eventSummary,
+      }
 
       return this.$createElement('div',
         this.setTextColor(text,
@@ -288,14 +313,14 @@ export default CalendarBase.extend({
           })
         ), slot
           ? slot(scope)
-          : [this.genName(event, timedEvent)]
+          : [this.genName(eventSummary)]
       )
     },
-    genName (event: CalendarEventParsed, timedEvent: boolean): VNode {
+    genName (eventSummary: () => string): VNode {
       return this.$createElement('div', {
         staticClass: 'pl-1',
         domProps: {
-          innerHTML: this.eventNameFunction(event, timedEvent),
+          innerHTML: eventSummary(),
         },
       })
     },
@@ -386,11 +411,6 @@ export default CalendarBase.extend({
 
       const getSlotChildren: VEventsToNodes = (day, getter, mapper, timed) => {
         const events = getter(day)
-
-        if (events.length === 0) {
-          return
-        }
-
         const visuals = mode(day, events, timed)
 
         if (timed) {

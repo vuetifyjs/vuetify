@@ -287,13 +287,31 @@ const VCalendarDay = {
   future: 'boolean',
 }
 
+const VCalendarEvent = {
+  input: 'any',
+  start: VTimestamp,
+  startIdentifier: 'number',
+  startTimestampIdentifier: 'number',
+  end: VTimestamp,
+  endIdentifier: 'number',
+  endTimestampIdentifier: 'number',
+  allDay: 'boolean',
+  index: 'number',
+}
+
 const VCalendarEventSlot = {
   event: 'any',
+  eventParsed: VCalendarEvent,
   day: VCalendarDay,
   outside: 'boolean',
   start: 'boolean',
   end: 'boolean',
   timed: 'boolean',
+  singleline: 'boolean',
+  overlapsNoon: 'boolean',
+  formatTime: '(time: VTimestamp, ampm: boolean): string',
+  timeSummary: '(): string',
+  eventSummary: '(): string',
 }
 
 const VTimestampWithTime = {
@@ -318,6 +336,7 @@ const VTimestampWithTime = {
 module.exports = {
   createItems,
   VCalendarDay,
+  VCalendarEvent,
   VCalendarEventSlot,
   VGridProps,
   VInput,

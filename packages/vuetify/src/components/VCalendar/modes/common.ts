@@ -87,7 +87,7 @@ export function getOverlapGroupHandler (firstWeekday: number) {
       handler.min = handler.max = -1
     },
     getVisuals: (day: CalendarTimestamp, dayEvents: CalendarEventParsed[], timed: boolean) => {
-      if (day.weekday === firstWeekday || timed) {
+      if (day.weekday === firstWeekday) {
         handler.reset()
       }
 
@@ -127,6 +127,10 @@ export function getOverlapGroupHandler (firstWeekday: number) {
       })
 
       setColumnCount(handler.groups)
+
+      if (timed) {
+        handler.reset()
+      }
 
       return visuals
     },
