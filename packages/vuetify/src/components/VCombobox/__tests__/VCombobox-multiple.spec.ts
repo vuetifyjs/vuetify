@@ -406,4 +406,25 @@ describe('VCombobox.ts', () => {
     expect(wrapper.vm.internalSearch).toBe('a')
     expect(change).toHaveBeenCalledWith(['aaa'])
   })
+
+  it('should apply user provided callback when using the create-item prop', async () => {
+    const { wrapper, change } = createMultipleCombobox({
+      createItem: value => ({ text: value, value }),
+    })
+
+    const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
+
+    input.trigger('focus')
+    element.value = 'foo'
+    input.trigger('input')
+    input.trigger('keydown.enter')
+
+    await wrapper.vm.$nextTick()
+
+    expect(change).toHaveBeenCalledWith([{
+      text: 'foo',
+      value: 'foo',
+    }])
+  })
 })

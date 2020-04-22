@@ -16,6 +16,7 @@ export default VAutocomplete.extend({
   name: 'v-combobox',
 
   props: {
+    createItem: Function,
     delimiters: {
       type: Array as PropType<string[]>,
       default: () => ([]),
@@ -208,7 +209,12 @@ export default VAutocomplete.extend({
         return this.updateEditing()
       }
 
-      const index = this.selectedItems.indexOf(this.internalSearch)
+      let internalSearch = this.internalSearch
+
+      const index = this.selectedItems.findIndex(item => {
+        return this.getValue(item) === internalSearch
+      })
+
       // If it already exists, do nothing
       // this might need to change to bring
       // the duplicated item to the last entered
@@ -217,6 +223,10 @@ export default VAutocomplete.extend({
         internalValue.splice(index, 1)
 
         this.setValue(internalValue)
+      } else if (typeof this.createItem === 'function') {
+        // If we hit this conditional, the user
+        // provided a custom mutator function
+        internalSearch = this.createItem(internalSearch)
       }
 
       // If menu index is greater than 1
@@ -224,7 +234,7 @@ export default VAutocomplete.extend({
       // TODO: find out where
       if (menuIndex > -1) return (this.internalSearch = null)
 
-      this.selectItem(this.internalSearch)
+      this.selectItem(internalSearch)
       this.internalSearch = null
     },
     onPaste (event: ClipboardEvent) {
