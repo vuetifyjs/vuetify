@@ -73,6 +73,17 @@
     },
     "v-btn-toggle": {
       "rounded": "Applies a large border radius on the buttons."
+    },
+    "v-simple-btn": {
+      "block": "Expands the button to 100% of available space.",
+      "depressed": "Removes the button box shadow.",
+      "inputValue": "Controls the button's active state.",
+      "outlined": "Makes the background transparent and applies a thin border.",
+      "retainFocusOnClick": "Don't blur on click.",
+      "ripple": "Mixins.Rippleable.props.ripple",
+      "rounded": "Applies a large border radius on the button.",
+      "text": "Makes the background transparent.",
+      "value": "Mixins.Groupable.props.value"
     }
   },
   "events": {
