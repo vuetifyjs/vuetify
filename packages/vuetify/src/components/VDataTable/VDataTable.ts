@@ -49,17 +49,13 @@ function searchTableItems (
   headersWithoutCustomFilters: DataTableHeader[],
   customFilter: DataTableFilterFunction
 ) {
-  let filtered = items
   search = typeof search === 'string' ? search.trim() : null
-  if (search && headersWithoutCustomFilters.length) {
-    filtered = items.filter(item => headersWithoutCustomFilters.some(filterFn(item, search, customFilter)))
-  }
+  if (!(search && headersWithoutCustomFilters.length) && !headersWithCustomFilters.length) return items
 
-  if (headersWithCustomFilters.length) {
-    filtered = filtered.filter(item => headersWithCustomFilters.every(filterFn(item, search, defaultFilter)))
-  }
-
-  return filtered
+  return items.filter(item =>
+    (headersWithCustomFilters.length && headersWithCustomFilters.every(filterFn(item, search, defaultFilter))) ||
+    (search && headersWithoutCustomFilters.some(filterFn(item, search, customFilter)))
+  )
 }
 
 /* @vue/component */
