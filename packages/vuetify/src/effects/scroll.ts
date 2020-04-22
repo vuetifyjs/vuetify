@@ -5,6 +5,7 @@ import {
   Ref,
   ref,
   watch,
+  onMounted,
 } from 'vue'
 import { consoleWarn } from '../util/console'
 import { passiveEventOptions } from '../util/events'
@@ -76,24 +77,33 @@ export function useScroll (
     currentThreshold.value = Math.abs(currentScroll.value - computedScrollThreshold.value)
   }
 
-  watch(isScrollingUp, () => (savedScroll.value = savedScroll.value || currentScroll.value))
-
-  watch(isScrollActive, () => (savedScroll.value = 0))
-
-  watch(() => props.scrollTarget, () => {
-    const newTarget = props.scrollTarget ? document.querySelector(props.scrollTarget) : window
-
-    if (!newTarget) {
-      consoleWarn(`Unable to locate element with identifier ${props.scrollTarget}`, getCurrentInstance())
-      return
-    }
-
-    if (newTarget === target.value) return
-
-    target.value && target.value.removeEventListener('scroll', onScroll, passiveEventOptions())
-    target.value = newTarget
-    target.value.addEventListener('scroll', onScroll, passiveEventOptions())
+  watch(isScrollingUp, () => (savedScroll.value = savedScroll.value || currentScroll.value), {
+    immediate: true,
   })
+
+  watch(isScrollActive, () => (savedScroll.value = 0), {
+    immediate: true,
+  })
+
+  onMounted(() => {
+    watch(() => props.scrollTarget, () => {
+      const newTarget = props.scrollTarget ? document.querySelector(props.scrollTarget) : window
+
+      if (!newTarget) {
+        consoleWarn(`Unable to locate element with identifier ${props.scrollTarget}`, getCurrentInstance())
+        return
+      }
+
+      if (newTarget === target.value) return
+
+      target.value && target.value.removeEventListener('scroll', onScroll, passiveEventOptions())
+      target.value = newTarget
+      target.value.addEventListener('scroll', onScroll, passiveEventOptions())
+    }, {
+      immediate: true,
+    })
+  })
+
 
   thresholdMetCallback && watch(() => (
     Math.abs(currentScroll.value - savedScroll.value) > computedScrollThreshold.value
@@ -103,11 +113,15 @@ export function useScroll (
       isScrollingUp: isScrollingUp.value,
       savedScroll,
     })
+  }, {
+    immediate: true,
   })
 
   // Do we need this? If yes - seems that
   // there's no need to expose onScroll
-  canScroll && watch(canScroll, onScroll)
+  canScroll && watch(canScroll, onScroll, {
+    immediate: true,
+  })
 
   // TODO: get rid of getCurrentInstance, it is
   // required only for tests to avoid warning
