@@ -15,26 +15,27 @@ describe('scroll.ts', () => {
   const mountFunction = (value: EventListenerOrEventListenerObject, selector?: string): HTMLElement => {
     const Test = defineComponent(() => () => withDirectives(h('div', { class: 'test' }), [[Scroll, value, selector]]))
 
-    createApp().mount(Test, el)
+    createApp(Test).mount(el)
     return el.querySelector('.test')
   }
 
   it('shoud bind event on inserted (selector)', () => {
     const value = () => {}
     const targetElement = { addEventListener: jest.fn(), removeEventListener: jest.fn() } as any as Element
-    const el = {}
+    const el = {} as HTMLElement
+    const querySelector = jest.spyOn(window.document, 'querySelector').mockImplementation(selector => selector === '.selector' ? targetElement : undefined)
 
-    jest.spyOn(window.document, 'querySelector').mockImplementation(selector => selector === '.selector' ? targetElement : undefined)
-
-    Scroll.mounted(el as HTMLElement, { value, arg: '.selector' } as any, null, null)
+    Scroll.mounted(el, { value, arg: '.selector' } as any, null, null)
     expect(targetElement.addEventListener).toHaveBeenCalledWith('scroll', value, { passive: true })
-    Scroll.unmounted(el as HTMLElement, null, null, null)
+    Scroll.unmounted(el, null, null, null)
     expect(targetElement.removeEventListener).toHaveBeenCalledWith('scroll', value, { passive: true })
 
-    Scroll.mounted(el as HTMLElement, { value, arg: '.selector' } as any, null, null)
+    Scroll.mounted(el, { value, arg: '.selector' } as any, null, null)
     expect(targetElement.addEventListener).toHaveBeenCalledWith('scroll', value, { passive: true })
-    Scroll.unmounted(el as HTMLElement, null, null, null)
+    Scroll.unmounted(el, null, null, null)
     expect(targetElement.removeEventListener).toHaveBeenCalledWith('scroll', value, { passive: true })
+
+    querySelector.mockRestore()
   })
 
   it('shoud bind event on inserted (window)', () => {
@@ -48,8 +49,8 @@ describe('scroll.ts', () => {
     Scroll.unmounted(el as HTMLElement, null, null, null)
     expect(removeListener).toHaveBeenCalledWith('scroll', value, { passive: true })
 
-    addListener.mockClear()
-    removeListener.mockClear()
+    addListener.mockRestore()
+    removeListener.mockRestore()
   })
 
   it('shoud rebind event on updated', () => {
@@ -69,8 +70,8 @@ describe('scroll.ts', () => {
     expect(addListener).toHaveBeenCalledTimes(2)
     expect(addListener).toHaveBeenCalledWith('scroll', value2, { passive: true })
 
-    addListener.mockClear()
-    removeListener.mockClear()
+    addListener.mockRestore()
+    removeListener.mockRestore()
   })
 
   it('should not fail when unbinding element without _onScroll', () => {
