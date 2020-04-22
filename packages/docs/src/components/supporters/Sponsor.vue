@@ -1,7 +1,7 @@
 <template>
   <v-card
-    :aria-label="`Supporter ${value.name}`"
-    :href="value.href"
+    :aria-label="`Supporter ${value.metadata.name}`"
+    :href="value.metadata.href"
     :ripple="false"
     class="pa-1"
     color="transparent"
@@ -11,13 +11,12 @@
     tile
   >
     <v-img
-      :alt="value.name"
-      :class="value.dark ? 'black' : ''"
+      :alt="value.metadata.name"
       :src="src"
       :width="width"
       class="flex-shrink-1"
       contain
-      @click="$ga.event('patrons', 'click', value.name)"
+      @click="$ga.event('patrons', 'click', value.metadata.name)"
     />
   </v-card>
 </template>

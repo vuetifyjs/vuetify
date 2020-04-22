@@ -6,6 +6,7 @@ import {
 } from '@vue/test-utils'
 import VTreeview from '../VTreeview'
 import { ExtractVue } from '../../../util/mixins'
+import { wait } from '../../../../test'
 
 const singleRootTwoChildren = [
   { id: 0, name: 'Root', children: [{ id: 1, name: 'Child' }, { id: 2, name: 'Child 2' }] },
@@ -157,7 +158,7 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.find('.v-treeview-node__checkbox').trigger('click')
-    await new Promise(resolve => setTimeout(resolve))
+    await wait()
 
     expect(fn).toHaveBeenCalledTimes(1)
     expect(fn).toHaveBeenCalledWith([0])

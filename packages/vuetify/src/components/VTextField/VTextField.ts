@@ -48,6 +48,14 @@ interface options extends InstanceType<typeof baseMixins> {
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
+interface InputEvent extends UIEvent {
+  isComposing: Boolean
+}
+interface KeyboardEvent extends UIEvent {
+  keyCode: Number
+  isComposing: Boolean
+}
+
 /* @vue/component */
 export default baseMixins.extend<options>().extend({
   name: 'v-text-field',
@@ -448,12 +456,16 @@ export default baseMixins.extend<options>().extend({
       }
     },
     onInput (e: Event) {
-      const target = e.target as HTMLInputElement
-      this.internalValue = target.value
-      this.badInput = target.validity && target.validity.badInput
+      if (!(e as InputEvent).isComposing) {
+        const target = e.target as HTMLInputElement
+        this.internalValue = target.value
+        this.badInput = target.validity && target.validity.badInput
+      }
     },
     onKeyDown (e: KeyboardEvent) {
-      if (e.keyCode === keyCodes.enter) this.$emit('change', this.internalValue)
+      if (!e.isComposing && e.keyCode === keyCodes.enter) {
+        this.$emit('change', this.internalValue)
+      }
 
       this.$emit('keydown', e)
     },

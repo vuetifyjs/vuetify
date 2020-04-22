@@ -14,7 +14,7 @@ function exec (command) {
 }
 
 const branch = exec('git symbolic-ref --short HEAD')
-const tag = semver.prerelease(version) == null ? 'latest' : 'next'
+const tag = semver.prerelease(version) == null ? 'latest' : branch
 
 shell.echo(`Releasing ${version} on ${branch}`)
 shell.echo(`Tag: ${tag}`)

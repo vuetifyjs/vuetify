@@ -637,7 +637,9 @@ export default baseMixins.extend<options>().extend({
       })
       const item = this.allItems[index]
       if (index !== -1) {
+        this.lastItem = Math.max(this.lastItem, index + 5)
         this.setValue(this.returnObject ? item : this.getValue(item))
+        this.$nextTick(() => this.$refs.menu.getTiles())
         setTimeout(() => this.setMenuIndex(index))
       }
     },

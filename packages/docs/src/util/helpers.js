@@ -100,3 +100,13 @@ export function getBranch () {
 
   return ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
 }
+
+export function copyElementContent (el) {
+  el.setAttribute('contenteditable', 'true')
+  el.focus()
+
+  document.execCommand('selectAll', false, null)
+  document.execCommand('copy')
+
+  el.removeAttribute('contenteditable')
+}

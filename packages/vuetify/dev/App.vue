@@ -11,7 +11,7 @@
 
   export default {
     components: {
-      Playground
-    }
+      Playground,
+    },
   }
 </script>

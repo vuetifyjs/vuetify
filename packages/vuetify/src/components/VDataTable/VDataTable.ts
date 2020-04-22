@@ -355,7 +355,7 @@ export default VDataIterator.extend({
 
       if (this.$scopedSlots['group.summary']) {
         children.push(this.$createElement('template', { slot: 'column.summary' }, [
-          this.$scopedSlots['group.summary']!({ group, groupBy: props.options.groupBy, items, headers: this.computedHeaders }),
+          this.$scopedSlots['group.summary']!({ group, groupBy: props.options.groupBy, items, headers: this.computedHeaders, isOpen, toggle: toggleFn }),
         ]))
       }
 
@@ -458,9 +458,11 @@ export default VDataIterator.extend({
         },
         scopedSlots,
         on: {
-          // TODO: first argument should be the data object
+          // TODO: for click, the first argument should be the event, and the second argument should be data,
           // but this is a breaking change so it's for v3
           click: () => this.$emit('click:row', item, data),
+          contextmenu: (event: MouseEvent) => this.$emit('contextmenu:row', event, data),
+          dblclick: (event: MouseEvent) => this.$emit('dblclick:row', event, data),
         },
       })
     },
