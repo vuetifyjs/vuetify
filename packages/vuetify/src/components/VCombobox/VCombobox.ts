@@ -16,11 +16,11 @@ export default VAutocomplete.extend({
   name: 'v-combobox',
 
   props: {
-    createItem: Function,
     delimiters: {
       type: Array as PropType<string[]>,
       default: () => ([]),
     },
+    itemMutate: Function,
     returnObject: {
       type: Boolean,
       default: true,
@@ -223,18 +223,20 @@ export default VAutocomplete.extend({
         internalValue.splice(index, 1)
 
         this.setValue(internalValue)
-      } else if (typeof this.createItem === 'function') {
+      } else if (typeof this.itemMutate === 'function') {
         // If we hit this conditional, the user
         // provided a custom mutator function
-        internalSearch = this.createItem(internalSearch)
+        internalSearch = this.itemMutate(internalSearch)
       }
 
       // If menu index is greater than 1
       // the selection is handled elsewhere
       // TODO: find out where
-      if (menuIndex > -1) return (this.internalSearch = null)
+      if (menuIndex < 0) {
+        this.selectItem(internalSearch)
+        this.$emit('item:created', internalSearch)
+      }
 
-      this.selectItem(internalSearch)
       this.internalSearch = null
     },
     onPaste (event: ClipboardEvent) {

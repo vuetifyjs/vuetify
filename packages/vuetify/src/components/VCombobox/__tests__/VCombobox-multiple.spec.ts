@@ -49,7 +49,9 @@ describe('VCombobox.ts', () => {
   }
 
   it('should create new values when tagging', async () => {
+    const itemCreated = jest.fn()
     const { wrapper, change } = createMultipleCombobox({})
+    wrapper.vm.$on('item:created', itemCreated)
 
     const input = wrapper.find('input')
     const element = input.element as HTMLInputElement
@@ -62,6 +64,7 @@ describe('VCombobox.ts', () => {
     await wrapper.vm.$nextTick()
 
     expect(change).toHaveBeenCalledWith(['foo'])
+    expect(itemCreated).toHaveBeenCalledWith('foo')
   })
 
   it('should change selectedIndex with keyboard', async () => {
@@ -82,9 +85,11 @@ describe('VCombobox.ts', () => {
   })
 
   it('should delete a tagged item when selected and backspace/delete is pressed', async () => {
+    const itemDeleted = jest.fn()
     const { wrapper, change } = createMultipleCombobox({
       value: ['foo', 'bar'],
     })
+    wrapper.vm.$on('item:deleted', itemDeleted)
 
     const input = wrapper.find('input')
 
@@ -104,6 +109,7 @@ describe('VCombobox.ts', () => {
     await wrapper.vm.$nextTick()
     expect(change).toHaveBeenCalledWith([])
     expect(wrapper.vm.selectedIndex).toBe(-1)
+    expect(itemDeleted).toHaveBeenCalledWith('foo')
   })
 
   it('should add a tag on enter using the current searchValue', async () => {
@@ -409,7 +415,7 @@ describe('VCombobox.ts', () => {
 
   it('should apply user provided callback when using the create-item prop', async () => {
     const { wrapper, change } = createMultipleCombobox({
-      createItem: value => ({ text: value, value }),
+      itemMutate: value => ({ text: value, value }),
     })
 
     const input = wrapper.find('input')

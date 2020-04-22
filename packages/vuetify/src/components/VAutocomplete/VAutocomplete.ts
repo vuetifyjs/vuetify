@@ -263,6 +263,7 @@ export default VSelect.extend({
         this.selectItem(curItem)
       }
 
+      this.$emit('item:deleted', curItem)
       this.selectedIndex = nextIndex
     },
     clearableCallback () {
