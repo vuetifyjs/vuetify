@@ -38,6 +38,10 @@ module.exports = {
     ],
     functions: [
       {
+        name: 'title',
+        signature: 'string',
+      },
+      {
         name: 'checkChange',
         signature: '(): void',
       },

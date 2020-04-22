@@ -32,7 +32,7 @@ import {
 import VCalendarMonthly from './VCalendarMonthly'
 import VCalendarDaily from './VCalendarDaily'
 import VCalendarWeekly from './VCalendarWeekly'
-import { CalendarTimestamp } from 'types'
+import { CalendarTimestamp, CalendarFormatter } from 'types'
 
 // Types
 interface VCalendarRenderProps {
@@ -118,6 +118,27 @@ export default CalendarWithEvents.extend({
     },
     eventWeekdays (): number[] {
       return this.renderProps.weekdays
+    },
+    title (): string {
+      const { start, end } = this.renderProps
+      const spanYears = start.year !== end.year
+      const spanMonths = spanYears || start.month !== end.month
+
+      return spanYears
+        ? this.monthShortFormatter(start, true) + ' ' + start.year + ' - ' + this.monthShortFormatter(end, true) + ' ' + end.year
+        : spanMonths
+          ? this.monthShortFormatter(start, true) + ' - ' + this.monthShortFormatter(end, true) + ' ' + end.year
+          : this.monthLongFormatter(start, false) + ' ' + start.year
+    },
+    monthLongFormatter (): CalendarFormatter {
+      return this.getFormatter({
+        timeZone: 'UTC', month: 'long',
+      })
+    },
+    monthShortFormatter (): CalendarFormatter {
+      return this.getFormatter({
+        timeZone: 'UTC', month: 'short',
+      })
     },
   },
 
