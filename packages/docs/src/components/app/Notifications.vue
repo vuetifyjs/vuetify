@@ -124,11 +124,12 @@
       const { objects } = await bucket.getObjects({
         type: 'notifications',
         props: 'created_at,metadata,slug,title',
-        limit: 4,
+        status: 'published',
+        limit: 5,
         sort: '-created_at',
       })
 
-      this.updateItems(objects)
+      if (objects) this.updateItems(objects)
     },
 
     methods: {
