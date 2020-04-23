@@ -77,10 +77,7 @@
   import bucket from '@/plugins/cosmicjs'
   import { formatDate } from '@/util/date.js'
   import { differenceInDays, parseISO } from 'date-fns'
-  import {
-    get,
-    sync,
-  } from 'vuex-pathify'
+  import { sync } from 'vuex-pathify'
 
   export default {
     name: 'AppNotifications',
@@ -88,12 +85,11 @@
     data: () => ({
       menu: false,
       items: [],
-      snack: false,
     }),
 
     computed: {
+      snack: sync('snackbar/value'),
       snackbar: sync('snackbar/snackbar'),
-      value: get('snackbar/value'),
       unreadMsgs () {
         return this.items.filter(item => !this.hasBeenViewed(item))
       },
@@ -112,7 +108,7 @@
 
         this.updateItems(this.items)
       },
-      value (val) {
+      snack (val) {
         if (val) return
 
         this.markViewed()
