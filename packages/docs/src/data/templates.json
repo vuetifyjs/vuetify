@@ -1,26 +1,17 @@
 {
   "daedal-pro": {
     "title": "Daedal Theme Pro",
-    "description": "Daedal — is a carefully crafted multi-purpose, responsive, and gorgeous theme that showcases a clean interface for a sharp user experience. Built with Vue CLI, it comes with all of the tools that you need to start developing your application right now.",
+    "description": "Daedal is a carefully crafted multi-purpose, responsive, and gorgeous theme that delivers a clean user experience.",
     "src": "https://cdn.vuetifyjs.com/images/themes/daedal/daedal-hero.png",
-    "price": "$60",
+    "free": false,
     "url": "https://store.vuetifyjs.com/product/daedal-responsive-multi-purpose-theme-pro",
-    "demoUrl": [
-      [
-        "Pro Demo",
-        "https://daedal-pro.zeroskillz.now.sh"
-      ],
-      [
-        "Free Demo",
-        "https://daedal-free.zeroskillz.now.sh"
-      ]
-    ]
+    "demoUrl": ["https://daedal-pro.zeroskillz.now.sh"]
   },
   "dashboard-pro": {
     "title": "Material Dashboard Pro",
-    "description": "Vuetify Material Dashboard PRO is a beautiful theme built over Vuetify, Vuex and Vuejs. Vuetify Material Dashboard PRO is the official Vuejs version of the Original Material Dashboard PRO.",
+    "description": "Vuetify Material Dashboard PRO is a beautiful theme built over Vuetify, Vuex and Vuejs.",
     "src": "https://cdn.vuetifyjs.com/images/starter/vuetify-admin-dashboard-pro.jpg",
-    "price": "$79",
+    "free": false,
     "url": "https://www.creative-tim.com/product/vuetify-material-dashboard-pro",
     "demoUrl": [
       "https://demos.creative-tim.com/vuetify-material-dashboard-pro/"
@@ -31,7 +22,7 @@
     "title": "Material Kit",
     "description": "A complete set of Material Inspired themes built with Vuetify on top of Vue CLI.",
     "src": "https://cdn.vuetifyjs.com/images/starter/vuetify-material-kit.png",
-    "price": "$55",
+    "free": false,
     "url": "https://store.vuetifyjs.com/product/material-kit-theme",
     "demoUrl": [
       "https://material-kit.vuetifyjs.com"
@@ -41,7 +32,7 @@
     "title": "Alpha Theme",
     "description": "Complete theme experience including enhanced Vue CLI, full documentation, 5 custom components and much more!",
     "src": "https://cdn.vuetifyjs.com/images/starter/vuetify-alpha-theme.png",
-    "price": "$25",
+    "free": false,
     "url": "https://store.vuetifyjs.com/product/alpha-theme",
     "demoUrl": [
       [
@@ -62,9 +53,19 @@
       ]
     ]
   },
+  "daedal-free": {
+    "title": "Daedal Theme Free",
+    "description": "The Free version of the Daedal PRO theme.",
+    "src": "https://cdn.vuetifyjs.com/images/themes/daedal/daedal-free-hero.png",
+    "free": true,
+    "url": "https://store.vuetifyjs.com/product/daedal-responsive-multi-purpose-theme-free",
+    "demoUrl": [
+      ["https://daedal-free.zeroskillz.now.sh"]
+    ]
+  },
   "dashboard": {
     "title": "Material Dashboard Free",
-    "description": "Vuetify Material Dashboard is a beautiful resource built over Vuetify, Vuex and Vuejs. It will help you get started developing dashboards in no time.",
+    "description": "Vuetify Material Dashboard is a beautiful resource built over Vuetify, Vuex and Vue.js.",
     "src": "https://cdn.vuetifyjs.com/images/starter/vuetify-admin-dashboard.jpg",
     "free": true,
     "url": "https://www.creative-tim.com/product/vuetify-material-dashboard",
