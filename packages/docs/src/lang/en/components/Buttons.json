@@ -75,14 +75,14 @@
       "rounded": "Applies a large border radius on the buttons."
     },
     "v-simple-btn": {
-      "block": "Expands the button to 100% of available space.",
-      "depressed": "Removes the button box shadow.",
-      "inputValue": "Controls the button's active state.",
-      "outlined": "Makes the background transparent and applies a thin border.",
-      "retainFocusOnClick": "Don't blur on click.",
+      "block": "Components.SimpleButtons.props.block",
+      "depressed": "Components.SimpleButtons.props.depressed",
+      "inputValue": "Components.SimpleButtons.props.inputValue",
+      "outlined": "Components.SimpleButtons.props.outlined",
+      "retainFocusOnClick": "Components.SimpleButtons.props.retainFocusOnClick",
       "ripple": "Mixins.Rippleable.props.ripple",
-      "rounded": "Applies a large border radius on the button.",
-      "text": "Makes the background transparent.",
+      "rounded": "Components.SimpleButtons.props.rounded",
+      "text": "Components.SimpleButtons.props.text",
       "value": "Mixins.Groupable.props.value"
     }
   },
