@@ -15,7 +15,7 @@
     },
     "mini": {
       "heading": "### Mini",
-      "desc": "When using the **mini-variant** prop, the drawer will shrink (default 80px) and hide everything inside of `v-list` except the first element. In this example we use the **.sync** modifier that allows us to tie the expanding/contracting of the drawer programmatically."
+      "desc": "When using the **mini-variant** prop, the drawer will shrink (default 56px) and hide everything inside of `v-list` except the first element. In this example we use the **.sync** modifier that allows us to tie the expanding/contracting of the drawer programmatically."
     },
     "temporary": {
       "heading": "### Temporary",
