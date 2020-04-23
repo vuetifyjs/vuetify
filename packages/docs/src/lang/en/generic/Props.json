@@ -6,7 +6,6 @@
   "fullWidth": "Forces 100% width",
   "fixedTabs": "`v-tabs-item` min-width 160px, max-width 360px",
   "id": "Sets the DOM id on the component",
-  "mobileBreakPoint": "Sets the designated mobile breakpoint for the component. This will apply alternate styles for mobile devices.",
   "persistent": "Clicking outside will not dismiss the dialog",
   "singleLine": "Label does not move on focus/dirty",
   "size": "Sets the height and width of the component.",
