@@ -43,7 +43,7 @@ import {
 // Types
 type VEventGetter = (day: CalendarTimestamp) => CalendarEventParsed[]
 
-type VEventVisualToNode<D> = (visual: CalendarEventVisual, day: D) => VNode
+type VEventVisualToNode<D> = (visual: CalendarEventVisual, day: D) => VNode | false
 
 type VEventsToNodes = <D extends CalendarDaySlotScope>(
   day: D,
@@ -244,7 +244,11 @@ export default CalendarBase.extend({
         refInFor: true,
       })
     },
-    genTimedEvent ({ event, left, width }: CalendarEventVisual, day: CalendarDayBodySlotScope): VNode {
+    genTimedEvent ({ event, left, width }: CalendarEventVisual, day: CalendarDayBodySlotScope): VNode | false {
+      if (day.timeDelta(event.end) <= 0 || day.timeDelta(event.start) >= 1) {
+        return false
+      }
+
       const dayIdentifier = getDayIdentifier(day)
       const start = event.startIdentifier >= dayIdentifier
       const end = event.endIdentifier > dayIdentifier
@@ -409,12 +413,14 @@ export default CalendarBase.extend({
         this.parsedEventOverlapThreshold
       )
 
+      const isNode = (input: VNode | false): input is VNode => !!input
+
       const getSlotChildren: VEventsToNodes = (day, getter, mapper, timed) => {
         const events = getter(day)
         const visuals = mode(day, events, timed)
 
         if (timed) {
-          return visuals.map(visual => mapper(visual, day))
+          return visuals.map(visual => mapper(visual, day)).filter(isNode)
         }
 
         const children: VNode[] = []
@@ -423,7 +429,11 @@ export default CalendarBase.extend({
           while (children.length < visual.column) {
             children.push(this.genPlaceholder(day))
           }
-          children.push(mapper(visual, day))
+
+          const mapped = mapper(visual, day)
+          if (mapped) {
+            children.push(mapped)
+          }
         })
 
         return children

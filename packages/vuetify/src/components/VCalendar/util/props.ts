@@ -1,5 +1,5 @@
 
-import { validateTimestamp, parseDate, DAYS_IN_WEEK } from './timestamp'
+import { validateTimestamp, parseDate, DAYS_IN_WEEK, validateTime } from './timestamp'
 import { PropType } from 'vue'
 import { CalendarEvent, CalendarFormatter, CalendarTimestamp, CalendarEventOverlapMode } from 'types'
 import { CalendarEventOverlapModes } from '../modes'
@@ -66,6 +66,10 @@ export default {
       type: [Number, String],
       default: 0,
       validate: validateNumber,
+    },
+    firstTime: {
+      type: [Number, String, Object],
+      validate: validateTime,
     },
     intervalCount: {
       type: [Number, String],

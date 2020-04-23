@@ -223,10 +223,13 @@ export interface CalendarDaySlotScope extends CalendarTimestamp {
   week: CalendarTimestamp[]
 }
 
-export type CalendarTimeToY = (time: CalendarTimestamp | number | string) => number
+export type CalendarTimeToY = (time: CalendarTimestamp | number | string, clamp?: boolean) => number
+
+export type CalendarTimeDelta = (time: CalendarTimestamp | number | string) => number | false
 
 export interface CalendarDayBodySlotScope extends CalendarDaySlotScope {
   timeToY: CalendarTimeToY
+  timeDelta: CalendarTimeDelta
 }
 
 export type CalendarEventOverlapMode = (events: CalendarEventParsed[], firstWeekday: number, overlapThreshold: number) => (day: CalendarDaySlotScope, dayEvents: CalendarEventParsed[], timed: boolean) => CalendarEventVisual[]

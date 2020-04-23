@@ -66,6 +66,10 @@ module.exports = {
         signature: '(time: number | string | { hour: number, minute: number }, clamp: boolean = true): number | false',
       },
       {
+        name: 'timeDelta',
+        signature: '(time: number | string | { hour: number, minute: number }): number | false',
+      },
+      {
         name: 'minutesToPixels',
         signature: '(minutes: number): number',
       },

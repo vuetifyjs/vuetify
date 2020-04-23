@@ -328,7 +328,8 @@ const VTimestampWithTime = {
   past: 'boolean',
   present: 'boolean',
   future: 'boolean',
-  timeToY: '(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number',
+  timeToY: '(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number | false',
+  timeDelta: '(time: string | number | {hour: number, minute: number}): number | false',
   minutesToPixels: '(minutes: number): number',
   week: [VTimestamp],
 }

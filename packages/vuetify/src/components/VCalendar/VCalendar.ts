@@ -213,6 +213,14 @@ export default CalendarWithEvents.extend({
         return false
       }
     },
+    timeDelta (time: VTime): number | false {
+      const c = this.$children[0] as any
+      if (c && c.timeDelta) {
+        return c.timeDelta(time)
+      } else {
+        return false
+      }
+    },
     minutesToPixels (minutes: number): number {
       const c = this.$children[0] as any
       if (c && c.minutesToPixels) {

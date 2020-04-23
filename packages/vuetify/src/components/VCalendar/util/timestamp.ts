@@ -14,6 +14,7 @@ export const DAY_MIN = 1
 export const DAYS_IN_WEEK = 7
 export const MINUTES_IN_HOUR = 60
 export const MINUTE_MAX = 59
+export const MINUTES_IN_DAY = 24 * 60
 export const HOURS_IN_DAY = 24
 export const HOUR_MAX = 23
 export const FIRST_HOUR = 0
@@ -69,6 +70,12 @@ export function getEndOfMonth (timestamp: CalendarTimestamp): CalendarTimestamp 
   updateFormatted(end)
 
   return end
+}
+
+export function validateTime (input: any): input is VTime {
+  return (typeof input === 'number' && isFinite(input)) ||
+    (!!PARSE_TIME.exec(input)) ||
+    (typeof input === 'object' && isFinite(input.hour) && isFinite(input.minute))
 }
 
 export function parseTime (input: any): number | false {
@@ -439,7 +446,7 @@ export function createIntervalList (timestamp: CalendarTimestamp, first: number,
   const intervals: CalendarTimestamp[] = []
 
   for (let i = 0; i < count; i++) {
-    const mins = (first + i) * minutes
+    const mins = first + (i * minutes)
     const int = copyTimestamp(timestamp)
     intervals.push(updateMinutes(int, mins, now))
   }
