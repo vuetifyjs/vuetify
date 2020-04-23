@@ -113,8 +113,31 @@ export default {
       default: 'month',
     },
     value: {
-      type: [String, Number, Date],
+      type: [String, Number, Date] as PropType<string | number | Date>,
       validate: validateTimestamp,
+    },
+  },
+  category: {
+    categories: {
+      type: [Array, String],
+      default: '',
+    },
+    categoryHideDynamic: {
+      type: Boolean,
+      default: false,
+    },
+    categoryShowAll: {
+      type: Boolean,
+      default: false,
+    },
+    categoryForInvalid: {
+      type: String,
+      default: '',
+    },
+    categoryDays: {
+      type: [Number, String],
+      default: 1,
+      validate: (x: any) => isFinite(parseInt(x)) && parseInt(x) > 0,
     },
   },
   events: {
@@ -133,6 +156,10 @@ export default {
     eventTimed: {
       type: [String, Function],
       default: 'timed',
+    },
+    eventCategory: {
+      type: [String, Function],
+      default: 'category',
     },
     eventHeight: {
       type: Number,

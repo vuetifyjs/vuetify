@@ -207,6 +207,7 @@ export interface CalendarEventParsed {
   endTimestampIdentifier: number
   allDay: boolean
   index: number
+  category: string | false
 }
 
 export interface CalendarEventVisual {
@@ -221,6 +222,7 @@ export interface CalendarDaySlotScope extends CalendarTimestamp {
   outside: boolean
   index: number
   week: CalendarTimestamp[]
+  category: string | undefined | null
 }
 
 export type CalendarTimeToY = (time: CalendarTimestamp | number | string, clamp?: boolean) => number
@@ -232,11 +234,13 @@ export interface CalendarDayBodySlotScope extends CalendarDaySlotScope {
   timeDelta: CalendarTimeDelta
 }
 
-export type CalendarEventOverlapMode = (events: CalendarEventParsed[], firstWeekday: number, overlapThreshold: number) => (day: CalendarDaySlotScope, dayEvents: CalendarEventParsed[], timed: boolean) => CalendarEventVisual[]
+export type CalendarEventOverlapMode = (events: CalendarEventParsed[], firstWeekday: number, overlapThreshold: number) => (day: CalendarDaySlotScope, dayEvents: CalendarEventParsed[], timed: boolean, reset: boolean) => CalendarEventVisual[]
 
 export type CalendarEventColorFunction = (event: CalendarEvent) => string
 
 export type CalendarEventTimedFunction = (event: CalendarEvent) => boolean
+
+export type CalendarEventCategoryFunction = (event: CalendarEvent) => string
 
 export type CalendarEventNameFunction = (event: CalendarEventParsed, timedEvent: boolean) => string
 

@@ -297,6 +297,7 @@ const VCalendarEvent = {
   endTimestampIdentifier: 'number',
   allDay: 'boolean',
   index: 'number',
+  category: 'string',
 }
 
 const VCalendarEventSlot = {
@@ -334,6 +335,45 @@ const VTimestampWithTime = {
   week: [VTimestamp],
 }
 
+const VTimestampWithCategory = {
+  date: 'string',
+  time: 'string',
+  year: 'number',
+  month: 'number',
+  day: 'number',
+  hour: 'number',
+  minute: 'number',
+  weekday: 'number',
+  hasDay: 'boolean',
+  hasTime: 'boolean',
+  past: 'boolean',
+  present: 'boolean',
+  future: 'boolean',
+  week: [VTimestamp],
+  category: 'string | null',
+}
+
+const VTimestampWithTimeCategory = {
+  date: 'string',
+  time: 'string',
+  year: 'number',
+  month: 'number',
+  day: 'number',
+  hour: 'number',
+  minute: 'number',
+  weekday: 'number',
+  hasDay: 'boolean',
+  hasTime: 'boolean',
+  past: 'boolean',
+  present: 'boolean',
+  future: 'boolean',
+  timeToY: '(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number | false',
+  timeDelta: '(time: string | number | {hour: number, minute: number}): number | false',
+  minutesToPixels: '(minutes: number): number',
+  week: [VTimestamp],
+  category: 'string | null',
+}
+
 module.exports = {
   createItems,
   VCalendarDay,
@@ -345,6 +385,8 @@ module.exports = {
   VSlider,
   VTextField,
   VTimestamp,
+  VTimestampWithCategory,
   VTimestampWithTime,
+  VTimestampWithTimeCategory,
   VTreeviewScopedProps,
 }

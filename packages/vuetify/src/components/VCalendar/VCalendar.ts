@@ -26,12 +26,14 @@ import {
   getEndOfMonth,
   VTime,
   VTimestampInput,
+  timestampToDate,
 } from './util/timestamp'
 
 // Calendars
 import VCalendarMonthly from './VCalendarMonthly'
 import VCalendarDaily from './VCalendarDaily'
 import VCalendarWeekly from './VCalendarWeekly'
+import VCalendarCategory from './VCalendarCategory'
 import { CalendarTimestamp, CalendarFormatter } from 'types'
 
 // Types
@@ -41,6 +43,7 @@ interface VCalendarRenderProps {
   component: string | Component
   maxDays: number
   weekdays: number[]
+  categories: string[]
 }
 
 /* @vue/component */
@@ -51,6 +54,7 @@ export default CalendarWithEvents.extend({
     ...props.calendar,
     ...props.weeks,
     ...props.intervals,
+    ...props.category,
   },
 
   data: () => ({
@@ -64,11 +68,15 @@ export default CalendarWithEvents.extend({
         ? parseTimestamp(this.value, true)
         : (this.parsedStart || this.times.today))
     },
+    parsedCategoryDays (): number {
+      return parseInt(this.categoryDays) || 1
+    },
     renderProps (): VCalendarRenderProps {
       const around = this.parsedValue
       let component: any = null
       let maxDays = this.maxDays
       let weekdays = this.parsedWeekdays
+      let categories = this.parsedCategories
       let start = around
       let end = around
       switch (this.type) {
@@ -110,14 +118,29 @@ export default CalendarWithEvents.extend({
           start = this.parsedStart || around
           end = this.parsedEnd
           break
+        case 'category':
+          const days = this.parsedCategoryDays
+          component = VCalendarCategory
+          end = relativeDays(copyTimestamp(end), nextDay, days)
+          updateFormatted(end)
+          maxDays = days
+          weekdays = []
+          for (let i = 0; i < days; i++) {
+            weekdays.push((start.weekday + i) % 7)
+          }
+          categories = this.getCategoryList(categories)
+          break
         default:
           throw new Error(this.type + ' is not a valid Calendar type')
       }
 
-      return { component, start, end, maxDays, weekdays }
+      return { component, start, end, maxDays, weekdays, categories }
     },
     eventWeekdays (): number[] {
       return this.renderProps.weekdays
+    },
+    categoryMode (): boolean {
+      return this.type === 'category'
     },
     title (): string {
       const { start, end } = this.renderProps
@@ -139,6 +162,13 @@ export default CalendarWithEvents.extend({
       return this.getFormatter({
         timeZone: 'UTC', month: 'short',
       })
+    },
+    parsedCategories (): string[] {
+      return typeof this.categories === 'string' && this.categories
+        ? this.categories.split(/\s*,\s*/)
+        : Array.isArray(this.categories)
+          ? this.categories as string[]
+          : []
     },
   },
 
@@ -189,6 +219,9 @@ export default CalendarWithEvents.extend({
           case '4day':
             relativeDays(moved, mover, 4)
             break
+          case 'category':
+            relativeDays(moved, mover, this.parsedCategoryDays)
+            break
         }
       }
 
@@ -196,7 +229,14 @@ export default CalendarWithEvents.extend({
       updateFormatted(moved)
       updateRelative(moved, this.times.now)
 
-      this.$emit('input', moved.date)
+      if (this.value instanceof Date) {
+        this.$emit('input', timestampToDate(moved))
+      } else if (typeof this.value === 'number') {
+        this.$emit('input', timestampToDate(moved).getTime())
+      } else {
+        this.$emit('input', moved.date)
+      }
+
       this.$emit('moved', moved)
     },
     next (amount = 1): void {
@@ -240,10 +280,59 @@ export default CalendarWithEvents.extend({
     parseTimestamp (input: VTimestampInput, required?: false): CalendarTimestamp | null {
       return parseTimestamp(input, required, this.times.now)
     },
+    timestampToDate (timestamp: CalendarTimestamp): Date {
+      return timestampToDate(timestamp)
+    },
+    getCategoryList (categories: string[]): string[] {
+      if (!this.noEvents) {
+        const categoryMap = categories.reduce((map, category, index) => {
+          map[category] = { index, count: 0 }
+
+          return map
+        }, Object.create(null))
+
+        if (!this.categoryHideDynamic || !this.categoryShowAll) {
+          let categoryLength = categories.length
+
+          this.parsedEvents.forEach(ev => {
+            let category = ev.category
+
+            if (typeof category !== 'string') {
+              category = this.categoryForInvalid
+            }
+
+            if (!category) {
+              return
+            }
+
+            if (category in categoryMap) {
+              categoryMap[category].count++
+            } else if (!this.categoryHideDynamic) {
+              categoryMap[category] = {
+                index: categoryLength++,
+                count: 1,
+              }
+            }
+          })
+        }
+
+        if (!this.categoryShowAll) {
+          for (const category in categoryMap) {
+            if (categoryMap[category].count === 0) {
+              delete categoryMap[category]
+            }
+          }
+        }
+
+        categories = Object.keys(categoryMap)
+      }
+
+      return categories
+    },
   },
 
   render (h): VNode {
-    const { start, end, maxDays, component, weekdays } = this.renderProps
+    const { start, end, maxDays, component, weekdays, categories } = this.renderProps
 
     return h(component, {
       staticClass: 'v-calendar',
@@ -256,6 +345,7 @@ export default CalendarWithEvents.extend({
         end: end.date,
         maxDays,
         weekdays,
+        categories,
       },
       directives: [{
         modifiers: { quiet: true },

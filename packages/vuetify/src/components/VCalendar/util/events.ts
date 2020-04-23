@@ -13,7 +13,8 @@ export function parseEvent (
   index: number,
   startProperty: string,
   endProperty: string,
-  timed = false
+  timed = false,
+  category: string | false = false,
 ): CalendarEventParsed {
   const startInput = input[startProperty]
   const endInput = input[endProperty]
@@ -32,7 +33,7 @@ export function parseEvent (
   const endTimestampIdentifier: number = getTimestampIdentifier(end) + endOffset
   const allDay: boolean = !start.hasTime
 
-  return { input, start, startIdentifier, startTimestampIdentifier, end, endIdentifier, endTimestampIdentifier, allDay, index }
+  return { input, start, startIdentifier, startTimestampIdentifier, end, endIdentifier, endTimestampIdentifier, allDay, index, category }
 }
 
 export function isEventOn (event: CalendarEventParsed, dayIdentifier: number): boolean {

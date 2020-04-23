@@ -28,6 +28,7 @@ declare module 'vuetify/lib' {
   const VBtn: Component
   const VBtnToggle: Component
   const VCalendar: Component
+  const VCalendarCategory: Component
   const VCalendarDaily: Component
   const VCalendarWeekly: Component
   const VCalendarMonthly: Component
@@ -196,6 +197,7 @@ declare module 'vuetify/lib' {
     VBtn,
     VBtnToggle,
     VCalendar,
+    VCalendarCategory,
     VCalendarDaily,
     VCalendarWeekly,
     VCalendarMonthly,

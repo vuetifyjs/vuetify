@@ -86,8 +86,8 @@ export function getOverlapGroupHandler (firstWeekday: number) {
       handler.groups = []
       handler.min = handler.max = -1
     },
-    getVisuals: (day: CalendarTimestamp, dayEvents: CalendarEventParsed[], timed: boolean) => {
-      if (day.weekday === firstWeekday) {
+    getVisuals: (day: CalendarTimestamp, dayEvents: CalendarEventParsed[], timed: boolean, reset = false) => {
+      if (day.weekday === firstWeekday || reset) {
         handler.reset()
       }
 

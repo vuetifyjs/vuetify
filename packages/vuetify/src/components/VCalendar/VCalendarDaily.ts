@@ -78,10 +78,6 @@ export default CalendarWithIntervals.extend({
       return this.days.map(this.genHeadDay)
     },
     genHeadDay (day: CalendarTimestamp, index: number): VNode {
-      const header = getSlot(this, 'day-header', () => ({
-        week: this.days, ...day, index,
-      }))
-
       return this.$createElement('div', {
         key: day.date,
         staticClass: 'v-calendar-daily_head-day',
@@ -92,8 +88,13 @@ export default CalendarWithIntervals.extend({
       }, [
         this.genHeadWeekday(day),
         this.genHeadDayLabel(day),
-        ...(header || []),
+        ...this.genDayHeader(day, index),
       ])
+    },
+    genDayHeader (day: CalendarTimestamp, index: number): VNode[] {
+      return getSlot(this, 'day-header', () => ({
+        week: this.days, ...day, index,
+      })) || []
     },
     genHeadWeekday (day: CalendarTimestamp): VNode {
       const color = day.present ? this.color : undefined
@@ -171,8 +172,11 @@ export default CalendarWithIntervals.extend({
         }),
       }, [
         ...this.genDayIntervals(index),
-        ...(getSlot(this, 'day-body', () => this.getSlotScope(day)) || []),
+        ...this.genDayBody(day),
       ])
+    },
+    genDayBody (day: CalendarTimestamp): VNode[] {
+      return getSlot(this, 'day-body', () => this.getSlotScope(day)) || []
     },
     genDayIntervals (index: number): VNode[] {
       return this.intervals[index].map(this.genDayInterval)

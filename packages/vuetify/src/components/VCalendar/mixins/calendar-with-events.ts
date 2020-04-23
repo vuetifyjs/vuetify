@@ -38,16 +38,17 @@ import {
   CalendarDayBodySlotScope,
   CalendarEventOverlapMode,
   CalendarEvent,
+  CalendarEventCategoryFunction,
 } from 'types'
 
 // Types
-type VEventGetter = (day: CalendarTimestamp) => CalendarEventParsed[]
+type VEventGetter<D> = (day: D) => CalendarEventParsed[]
 
 type VEventVisualToNode<D> = (visual: CalendarEventVisual, day: D) => VNode | false
 
 type VEventsToNodes = <D extends CalendarDaySlotScope>(
   day: D,
-  getter: VEventGetter,
+  getter: VEventGetter<D>,
   mapper: VEventVisualToNode<D>,
   timed: boolean) => VNode[] | undefined
 
@@ -101,6 +102,11 @@ export default CalendarBase.extend({
         ? this.eventTimed as CalendarEventTimedFunction
         : event => !!event[this.eventTimed as string]
     },
+    eventCategoryFunction (): CalendarEventCategoryFunction {
+      return typeof this.eventCategory === 'function'
+        ? this.eventCategory as CalendarEventCategoryFunction
+        : event => event[this.eventCategory as string]
+    },
     eventTextColorFunction (): CalendarEventColorFunction {
       return typeof this.eventTextColor === 'function'
         ? this.eventTextColor as CalendarEventColorFunction
@@ -119,11 +125,21 @@ export default CalendarBase.extend({
     eventWeekdays (): number[] {
       return this.parsedWeekdays
     },
+    categoryMode (): boolean {
+      return false
+    },
   },
 
   methods: {
     parseEvent (input: CalendarEvent, index = 0): CalendarEventParsed {
-      return parseEvent(input, index, this.eventStart, this.eventEnd, this.eventTimedFunction(input))
+      return parseEvent(
+        input,
+        index,
+        this.eventStart,
+        this.eventEnd,
+        this.eventTimedFunction(input),
+        this.categoryMode ? this.eventCategoryFunction(input) : false,
+      )
     },
     formatTime (withTime: CalendarTimestamp, ampm: boolean): string {
       const formatter = this.getFormatter({
@@ -211,16 +227,18 @@ export default CalendarBase.extend({
       const start = dayIdentifier === event.startIdentifier
       let end = dayIdentifier === event.endIdentifier
       let width = WIDTH_START
-      for (let i = day.index + 1; i < week.length; i++) {
-        const weekdayIdentifier = getDayIdentifier(week[i])
-        if (event.endIdentifier >= weekdayIdentifier) {
-          width += WIDTH_FULL
-          if (weekdayIdentifier === event.endIdentifier) {
+      if (!this.categoryMode) {
+        for (let i = day.index + 1; i < week.length; i++) {
+          const weekdayIdentifier = getDayIdentifier(week[i])
+          if (event.endIdentifier >= weekdayIdentifier) {
+            width += WIDTH_FULL
+            if (weekdayIdentifier === event.endIdentifier) {
+              end = true
+            }
+          } else {
             end = true
+            break
           }
-        } else {
-          end = true
-          break
         }
       }
       const scope = { eventParsed: event, day, start, end, timed: false }
@@ -379,7 +397,12 @@ export default CalendarBase.extend({
         event => isEventOverlapping(event, start, end)
       )
     },
-    getEventsForDay (day: CalendarTimestamp): CalendarEventParsed[] {
+    isEventForCategory (event: CalendarEventParsed, category: string | undefined | null): boolean {
+      return !this.categoryMode ||
+        category === event.category ||
+        (typeof event.category !== 'string' && category === null)
+    },
+    getEventsForDay (day: CalendarDaySlotScope): CalendarEventParsed[] {
       const identifier = getDayIdentifier(day)
       const firstWeekday = this.eventWeekdays[0]
 
@@ -387,19 +410,23 @@ export default CalendarBase.extend({
         event => isEventStart(event, day, identifier, firstWeekday)
       )
     },
-    getEventsForDayAll (day: CalendarTimestamp): CalendarEventParsed[] {
+    getEventsForDayAll (day: CalendarDaySlotScope): CalendarEventParsed[] {
       const identifier = getDayIdentifier(day)
       const firstWeekday = this.eventWeekdays[0]
 
       return this.parsedEvents.filter(
-        event => event.allDay && isEventStart(event, day, identifier, firstWeekday)
+        event => event.allDay &&
+          (this.categoryMode ? isEventOn(event, identifier) : isEventStart(event, day, identifier, firstWeekday)) &&
+          this.isEventForCategory(event, day.category)
       )
     },
-    getEventsForDayTimed (day: CalendarTimestamp): CalendarEventParsed[] {
+    getEventsForDayTimed (day: CalendarDaySlotScope): CalendarEventParsed[] {
       const identifier = getDayIdentifier(day)
 
       return this.parsedEvents.filter(
-        event => !event.allDay && isEventOn(event, identifier)
+        event => !event.allDay &&
+          isEventOn(event, identifier) &&
+          this.isEventForCategory(event, day.category)
       )
     },
     getScopedSlots () {
@@ -414,10 +441,9 @@ export default CalendarBase.extend({
       )
 
       const isNode = (input: VNode | false): input is VNode => !!input
-
       const getSlotChildren: VEventsToNodes = (day, getter, mapper, timed) => {
         const events = getter(day)
-        const visuals = mode(day, events, timed)
+        const visuals = mode(day, events, timed, this.categoryMode)
 
         if (timed) {
           return visuals.map(visual => mapper(visual, day)).filter(isNode)

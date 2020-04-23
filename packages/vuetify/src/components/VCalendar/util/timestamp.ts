@@ -404,6 +404,13 @@ export function getWeekdaySkips (weekdays: number[]): number[] {
   return skips
 }
 
+export function timestampToDate (timestamp: CalendarTimestamp): Date {
+  const time = `${padNumber(timestamp.hour, 2)}:${padNumber(timestamp.minute, 2)}`
+  const date = timestamp.date
+
+  return new Date(`${date}T${time}:00+00:00`)
+}
+
 export function createDayList (
   start: CalendarTimestamp,
   end: CalendarTimestamp,
@@ -464,10 +471,8 @@ export function createNativeLocaleFormatter (locale: string, getOptions: Calenda
   return (timestamp, short) => {
     try {
       const intlFormatter = new Intl.DateTimeFormat(locale || undefined, getOptions(timestamp, short))
-      const time = `${padNumber(timestamp.hour, 2)}:${padNumber(timestamp.minute, 2)}`
-      const date = timestamp.date
 
-      return intlFormatter.format(new Date(`${date}T${time}:00+00:00`))
+      return intlFormatter.format(timestampToDate(timestamp))
     } catch (e) {
       return ''
     }
