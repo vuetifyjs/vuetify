@@ -1677,7 +1677,7 @@ exports[`VCalendar should render month view with show-week 1`] = `
   <div class="v-calendar-weekly__week">
     <div class="v-calendar-weekly__weeknumber">
       <small>
-        01
+        53
       </small>
     </div>
     <div class="v-calendar-weekly__day v-past v-outside">
@@ -1761,7 +1761,7 @@ exports[`VCalendar should render month view with show-week 1`] = `
   <div class="v-calendar-weekly__week">
     <div class="v-calendar-weekly__weeknumber">
       <small>
-        02
+        01
       </small>
     </div>
     <div class="v-calendar-weekly__day v-past">
@@ -1845,7 +1845,7 @@ exports[`VCalendar should render month view with show-week 1`] = `
   <div class="v-calendar-weekly__week">
     <div class="v-calendar-weekly__weeknumber">
       <small>
-        03
+        02
       </small>
     </div>
     <div class="v-calendar-weekly__day v-past">
@@ -1929,7 +1929,7 @@ exports[`VCalendar should render month view with show-week 1`] = `
   <div class="v-calendar-weekly__week">
     <div class="v-calendar-weekly__weeknumber">
       <small>
-        04
+        03
       </small>
     </div>
     <div class="v-calendar-weekly__day v-past">
@@ -2013,7 +2013,7 @@ exports[`VCalendar should render month view with show-week 1`] = `
   <div class="v-calendar-weekly__week">
     <div class="v-calendar-weekly__weeknumber">
       <small>
-        05
+        04
       </small>
     </div>
     <div class="v-calendar-weekly__day v-past">

@@ -12,7 +12,7 @@ import CalendarBase from './mixins/calendar-base'
 
 // Util
 import { getSlot } from '../../util/helpers'
-import determineWeeknumber from './util/determineWeeknumber'
+import { weekNumber } from '../../util/dateTimeUtils'
 import props from './util/props'
 import {
   createDayList,
@@ -137,11 +137,13 @@ export default CalendarBase.extend({
       }, weekNodes)
     },
     getWeekNumber (determineDay: CalendarTimestamp) {
-      return determineWeeknumber(determineDay.year,
+      return weekNumber(
+        determineDay.year,
         determineDay.month - 1,
         determineDay.day,
         this.parsedWeekdays[0],
-        parseInt(this.firstDayOfYear))
+        parseInt(this.localeFirstDayOfYear)
+      )
     },
     genWeekNumber (weekNumber: number) {
       return this.$createElement('div', {
