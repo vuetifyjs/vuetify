@@ -20,6 +20,7 @@ import { removed } from '../../util/console'
 import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 import { PropType, PropValidator } from 'vue/types/options'
+import mergeData from '../../util/mergeData'
 
 const baseMixins = mixins(
   Colorable,
@@ -155,19 +156,22 @@ export default baseMixins.extend<options>().extend({
   render (h): VNode {
     let { tag, data } = this.generateRouteLink()
 
-    data.attrs = {
-      ...data.attrs,
-      ...this.genAttrs(),
-    }
-    data.on = {
-      ...data.on,
-      click: this.click,
-      keydown: (e: KeyboardEvent) => {
-        /* istanbul ignore else */
-        if (e.keyCode === keyCodes.enter) this.click(e)
+    data = mergeData(data, {
+      attrs: this.genAttrs(),
+      [this.to ? 'nativeOn' : 'on']: {
+        keydown: (e: KeyboardEvent) => {
+          /* istanbul ignore else */
+          if (e.keyCode === keyCodes.enter) this.click(e)
 
-        this.$emit('keydown', e)
+          this.$emit('keydown', e)
+        },
       },
+    })
+
+    if (this.inactive) tag = 'div'
+    if (this.inactive && this.to) {
+      data.on = data.nativeOn
+      delete data.nativeOn
     }
 
     const children = this.$scopedSlots.default
@@ -176,8 +180,6 @@ export default baseMixins.extend<options>().extend({
         toggle: this.toggle,
       })
       : this.$slots.default
-
-    tag = this.inactive ? 'div' : tag
 
     return h(tag, this.setTextColor(this.color, data), children)
   },
