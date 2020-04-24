@@ -446,6 +446,7 @@ export default baseMixins.extend<options>().extend({
     },
     onCompositionEnd (e: Event) {
       const target = e.target as HTMLInputElement
+
       this.internalValue = target.value
       this.badInput = target.validity && target.validity.badInput
     },
