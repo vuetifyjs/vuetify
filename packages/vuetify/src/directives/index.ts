@@ -1,3 +1,5 @@
+export { Bg } from './bg'
+export { Border } from './border'
 export { ClickOutside } from './click-outside'
 export { Color } from './color'
 export { Intersect } from './intersect'
