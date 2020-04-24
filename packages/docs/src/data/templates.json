@@ -97,9 +97,9 @@
     "description": "A simple template that features a clean interface for creating a blog or blog-like application.",
     "src": "https://cdn.vuetifyjs.com/images/starter/blog.png",
     "free": true,
-    "url": "https://github.com/vuetifyjs/theme-blog",
+    "url": "https://store.vuetifyjs.com/product/blog-theme-free/",
     "demoUrl": [
-      "https://free-blog.vuetifyjs.com"
+      "https://free-blog.johnleider.com"
     ]
   }
 }
