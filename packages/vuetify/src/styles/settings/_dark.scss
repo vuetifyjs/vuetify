@@ -32,7 +32,6 @@ $material-dark: map-deep-merge(
       'outside-background-color': #202020,
       'line-color': map-get($grey, 'base'),
       'interval-color': map-get($grey, 'lighten-3'),
-      'weeknumber-color': map-get($grey, 'lighten-3'),
       'interval-line-color': map-get($grey, 'darken-2'),
       'text-color': map-get($shades, 'white'),
       'past-color': rgba(map-get($shades, 'white'), .50)

@@ -17,7 +17,7 @@
       background-color: map-deep-get($material, 'calendar', 'outside-background-color')
 
   .v-calendar-weekly__head-weeknumber
-    background-color: map-deep-get($material, 'calendar', 'weeknumber-color')
+    border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
 
   .v-calendar-weekly__day
     border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
@@ -28,8 +28,9 @@
       background-color: map-deep-get($material, 'calendar', 'outside-background-color')
 
   .v-calendar-weekly__weeknumber
-      background-color: map-deep-get($material, 'calendar', 'weeknumber-color')
+      border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
       border-bottom: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
+      color: map-deep-get($material, 'text', 'disabled')
 
 .v-calendar-weekly
   width: 100%
@@ -56,10 +57,7 @@
 
 .v-calendar-weekly__head-weeknumber
   position: relative
-  border-top-left-radius: 4px
-  border-top-right-radius: 4px
-  flex: 0 0 24px
-  top: 0.2em
+  flex: 0 0 $calendar-weekly-weeknumber-flex-basis
 
 .v-calendar-weekly__week
   display: flex
@@ -70,11 +68,10 @@
 
 .v-calendar-weekly__weeknumber
   display: flex
-  flex: 0 0 24px
-  font-weight: 500
+  flex: 0 0 $calendar-weekly-weeknumber-flex-basis
   height: unset
   min-height: 0
-  padding-top: 8px
+  padding-top: $calendar-weekly-weeknumber-padding-top
   text-align: center
 
   > small

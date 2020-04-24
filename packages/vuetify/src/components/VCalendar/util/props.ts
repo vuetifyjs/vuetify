@@ -102,10 +102,7 @@ export default {
       type: Boolean,
       default: true,
     },
-    showWeek: {
-      type: Boolean,
-      default: false,
-    },
+    showWeek: Boolean,
     monthFormat: {
       type: Function as PropType<CalendarFormatter>,
       default: null,

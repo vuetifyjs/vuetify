@@ -85,7 +85,7 @@ describe('VCalendar', () => {
         start: '2018-01-29',
         end: '2018-02-04',
         now: '2019-02-17',
-        'show-week': true,
+        showWeek: true,
       },
       methods: {
         getNow: () => parseDate(new Date('2019-02-17')),
