@@ -17,6 +17,14 @@
       "heading": "### Category",
       "desc": "This is an example of an event calendar with a type of `category` that allows you to compare two schedules side-by-side."
     },
+    "dragndrop": {
+      "heading": "### Drag and Drop",
+      "desc": "This is an example of an event calendar where you can drag events, extend their length, and create events."
+    },
+    "nowline": {
+      "heading": "### Now Line",
+      "desc": "This is an example of an calendar with a line for the current time."
+    },
     "weekly": {
       "heading": "### Weekly",
       "desc": "This is an example of an event calendar with all-day and timed events with a type of `week`."

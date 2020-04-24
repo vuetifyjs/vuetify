@@ -28,7 +28,6 @@
           :categories="categories"
           :events="events"
           :event-color="getEventColor"
-          :now="today"
           @change="fetchEvents"
         ></v-calendar>
       </v-sheet>
@@ -53,7 +52,7 @@
         return event.color
       },
       setToday () {
-        this.focus = this.today
+        this.focus = ''
       },
       prev () {
         this.$refs.calendar.prev()

@@ -51,7 +51,6 @@
           color="primary"
           :events="events"
           :event-color="getEventColor"
-          :now="today"
           :type="type"
           @click:event="showEvent"
           @click:more="viewDay"
@@ -134,7 +133,7 @@
         return event.color
       },
       setToday () {
-        this.focus = this.today
+        this.focus = ''
       },
       prev () {
         this.$refs.calendar.prev()
