@@ -75,11 +75,6 @@ export default mixins(
       default: false, // TODO: Should be true in next major
     },
     search: String,
-    selectionType: {
-      type: String as PropType<'leaf' | 'independent'>,
-      default: 'leaf',
-      validator: (v: string) => ['leaf', 'independent'].includes(v),
-    },
     value: {
       type: Array as PropType<NodeArray>,
       default: () => ([]),

@@ -81,6 +81,11 @@ export const VTreeviewNodeProps = {
   },
   shaped: Boolean,
   transition: Boolean,
+  selectionType: {
+    type: String as PropType<'leaf' | 'independent'>,
+    default: 'leaf',
+    validator: (v: string) => ['leaf', 'independent'].includes(v),
+  },
 }
 
 /* @vue/component */
@@ -213,11 +218,14 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
         class: {
           'v-treeview-node__toggle--open': this.isOpen,
           'v-treeview-node__toggle--loading': this.isLoading,
+          'v-treeview-node__toggle--disabled': this.disabled && this.selectionType === 'leaf',
         },
         slot: 'prepend',
         on: {
           click: (e: MouseEvent) => {
-            if (this.disabled) return
+            if (this.disabled && this.selectionType === 'leaf') {
+              return
+            }
 
             e.stopPropagation()
 
@@ -233,6 +241,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
         staticClass: 'v-treeview-node__checkbox',
         props: {
           color: this.isSelected || this.isIndeterminate ? this.selectedColor : undefined,
+          disabled: this.disabled,
         },
         on: {
           click: (e: MouseEvent) => {
@@ -281,11 +290,13 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
         },
         on: {
           click: () => {
-            if (this.disabled) return
+            if (this.disabled && this.selectionType === 'leaf') {
+              return
+            }
 
             if (this.openOnClick && this.hasChildren) {
               this.open()
-            } else if (this.activatable) {
+            } else if (this.activatable && !this.disabled) {
               this.isActive = !this.isActive
               this.treeview.updateActive(this.key, this.isActive)
               this.treeview.emitActive()
@@ -319,6 +330,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
           rounded: this.rounded,
           shaped: this.shaped,
           level: this.level + 1,
+          selectionType: this.selectionType,
         },
         scopedSlots: this.$scopedSlots,
       })
