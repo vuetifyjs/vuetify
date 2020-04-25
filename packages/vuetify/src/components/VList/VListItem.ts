@@ -20,7 +20,6 @@ import { removed } from '../../util/console'
 import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 import { PropType, PropValidator } from 'vue/types/options'
-import mergeData from '../../util/mergeData'
 
 const baseMixins = mixins(
   Colorable,
