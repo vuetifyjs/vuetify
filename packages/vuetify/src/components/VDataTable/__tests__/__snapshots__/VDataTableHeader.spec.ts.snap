@@ -643,7 +643,7 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
                   Sort by
                 </label>
                 <div class="v-select__selections">
-                  <span class="sortable v-chip v-chip--clickable v-chip--no-color theme--light v-size--default">
+                  <span class="sortable v-chip v-chip--no-color theme--light v-size--default">
                     <span class="v-chip__content">
                       Iron (%)
                       <div class="v-chip__close sortable active desc">
@@ -758,7 +758,7 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
                   Sort by
                 </label>
                 <div class="v-select__selections">
-                  <span class="sortable v-chip v-chip--clickable v-chip--no-color theme--light v-size--default">
+                  <span class="sortable v-chip v-chip--no-color theme--light v-size--default">
                     <span class="v-chip__content">
                       Iron (%)
                       <div class="v-chip__close sortable active desc">
@@ -823,7 +823,7 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
                   Sort by
                 </label>
                 <div class="v-select__selections">
-                  <span class="sortable v-chip v-chip--clickable v-chip--no-color theme--light v-size--default">
+                  <span class="sortable v-chip v-chip--no-color theme--light v-size--default">
                     <span class="v-chip__content">
                       Iron (%)
                       <div class="v-chip__close sortable active asc">

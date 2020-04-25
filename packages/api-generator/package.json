@@ -14,8 +14,8 @@
   "license": "ISC",
   "dependencies": {
     "deepmerge": "^4.0.0",
-    "vue": "^2.6.11",
-    "vuetify": "^2.2.24"
+    "vue": "^2.6.10",
+    "vuetify": "^2.2.23"
   },
   "devDependencies": {
     "@babel/node": "^7.5.5",
