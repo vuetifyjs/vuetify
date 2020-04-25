@@ -18,7 +18,6 @@
 
         <supporters-sponsor-btn
           class="my-4"
-          href="https://github.com/users/johnleider/sponsorship"
           small
         />
 
