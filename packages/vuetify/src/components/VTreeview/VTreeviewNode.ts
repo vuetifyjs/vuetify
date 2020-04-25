@@ -232,7 +232,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
       return this.$createElement(VIcon, {
         staticClass: 'v-treeview-node__checkbox',
         props: {
-          color: this.isSelected ? this.selectedColor : undefined,
+          color: this.isSelected || this.isIndeterminate ? this.selectedColor : undefined,
         },
         on: {
           click: (e: MouseEvent) => {

@@ -157,7 +157,7 @@ export default mixins(
 
   created () {
     this.buildTree(this.items)
-    this.value.forEach(key => this.updateSelected(this.returnObject ? getObjectValueByPath(key, this.itemKey) : key, true))
+    this.value.forEach(key => this.updateSelected(this.returnObject ? getObjectValueByPath(key, this.itemKey) : key, true, true))
     this.active.forEach(key => this.updateActive(this.returnObject ? getObjectValueByPath(key, this.itemKey) : key, true))
   },
 
@@ -322,18 +322,23 @@ export default mixins(
 
       this.updateVnodeState(key)
     },
-    updateSelected (key: string | number, isSelected: boolean) {
+    updateSelected (key: string | number, isSelected: boolean, isForced = false) {
       if (!this.nodes.hasOwnProperty(key)) return
 
       const changed = new Map()
 
       if (this.selectionType !== 'independent') {
-        const descendants = [key, ...this.getDescendants(key)]
-        descendants.forEach(descendant => {
-          this.nodes[descendant].isSelected = isSelected
-          this.nodes[descendant].isIndeterminate = false
-          changed.set(descendant, isSelected)
+        this.getDescendants(key).forEach(descendant => {
+          if (!getObjectValueByPath(this.nodes[descendant].item, this.itemDisabled) || isForced) {
+            this.nodes[descendant].isSelected = isSelected
+            this.nodes[descendant].isIndeterminate = false
+            changed.set(descendant, isSelected)
+          }
         })
+
+        this.nodes[key].isSelected = isSelected
+        this.nodes[key].isIndeterminate = this.getDescendants(key).some(descendant => !this.nodes[descendant].isSelected)
+        changed.set(key, isSelected)
 
         const parents = this.getParents(key)
         parents.forEach(parent => {

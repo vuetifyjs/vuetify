@@ -749,4 +749,55 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
 
     expect(input).not.toHaveBeenCalled()
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/8244
+  it('should not touch disabled items when selecting', async () => {
+    const items = [{
+      id: 1,
+      name: 'Foo',
+      children: [
+        { id: 2, name: 'Bar', disabled: true },
+        { id: 3, name: 'Fizz' },
+        { id: 4, name: 'Buzz' },
+      ],
+    }]
+
+    const input = jest.fn()
+
+    const wrapper = mountFunction({
+      propsData: {
+        items,
+        value: [],
+        selectionType: 'leaf',
+        selectable: true,
+      },
+      listeners: {
+        input,
+      },
+    })
+
+    wrapper.find('.v-treeview-node__checkbox').trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(input).toHaveBeenLastCalledWith([3, 4])
+
+    wrapper.setProps({
+      value: [2, 3, 4],
+      items: [{
+        id: 1,
+        name: 'Foo',
+        children: [
+          { id: 2, name: 'Bar', disabled: true },
+          { id: 3, name: 'Fizz' },
+          { id: 4, name: 'Buzz' },
+        ],
+      }],
+    })
+    await wrapper.vm.$nextTick()
+
+    wrapper.find('.v-treeview-node__checkbox').trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(input).toHaveBeenLastCalledWith([2])
+  })
 })
