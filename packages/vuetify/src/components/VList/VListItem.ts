@@ -156,17 +156,19 @@ export default baseMixins.extend<options>().extend({
   render (h): VNode {
     let { tag, data } = this.generateRouteLink()
 
-    data = mergeData(data, {
-      attrs: this.genAttrs(),
-      [this.to ? 'nativeOn' : 'on']: {
-        keydown: (e: KeyboardEvent) => {
-          /* istanbul ignore else */
-          if (e.keyCode === keyCodes.enter) this.click(e)
+    data.attrs = {
+      ...data.attrs,
+      ...this.genAttrs(),
+    }
+    data[this.to ? 'nativeOn' : 'on'] = {
+      ...data[this.to ? 'nativeOn' : 'on'],
+      keydown: (e: KeyboardEvent) => {
+        /* istanbul ignore else */
+        if (e.keyCode === keyCodes.enter) this.click(e)
 
-          this.$emit('keydown', e)
-        },
+        this.$emit('keydown', e)
       },
-    })
+    }
 
     if (this.inactive) tag = 'div'
     if (this.inactive && this.to) {
