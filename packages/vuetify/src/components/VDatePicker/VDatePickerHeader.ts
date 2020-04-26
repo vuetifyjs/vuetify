@@ -73,13 +73,14 @@ export default mixins(
 
   methods: {
     genBtn (change: number) {
-      const ariaLabel = this.$vuetify.lang.t((change > 0 ? this.nextAriaLabel : this.prevAriaLabel) || '')
+      const ariaLabelId = change > 0 ? this.nextAriaLabel : this.prevAriaLabel
+      const ariaLabel = this.$vuetify.lang.t(ariaLabelId)
       const disabled = this.disabled ||
         (change < 0 && this.min && this.calculateChange(change) < this.min) ||
         (change > 0 && this.max && this.calculateChange(change) > this.max)
 
       return this.$createElement(VBtn, {
-        attrs: ariaLabel ? { 'aria-label': ariaLabel } : undefined,
+        attrs: { 'aria-label': ariaLabel },
         props: {
           dark: this.dark,
           disabled,
