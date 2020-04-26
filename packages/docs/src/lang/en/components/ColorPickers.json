@@ -13,7 +13,7 @@
     },
     "elevation": {
       "heading": "### Picker's elevation",
-      "desc": "You can set picker's elevation using `elevation` prop or `flat` (the latter sets the elevation to 0)."
+      "desc": "Adjust the elevation of the `v-color-picker` component using the **elevation** or **flat** prop. The **flat** is equivalent to setting **elevation** to 0."
     },
     "inputs": {
       "heading": "### Inputs",
