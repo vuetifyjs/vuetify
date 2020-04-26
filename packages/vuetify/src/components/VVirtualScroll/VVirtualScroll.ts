@@ -27,7 +27,7 @@ export default Measurable.extend({
     },
     items: {
       type: Array,
-      default: () => ([]),
+      default: () => [],
     },
   },
 
