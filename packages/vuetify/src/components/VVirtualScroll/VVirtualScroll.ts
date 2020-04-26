@@ -3,16 +3,11 @@ import './VVirtualScroll.sass'
 // Types
 import Vue, { VNode } from 'vue'
 
-// Directives
-import Scroll from '../../directives/scroll'
-
 // Helpers
 import { getSlot } from '../../util/helpers'
 
 export default Vue.extend({
   name: 'v-virtual-scroll',
-
-  directives: { Scroll },
 
   props: {
     height: {
@@ -47,6 +42,11 @@ export default Vue.extend({
 
   mounted (): void {
     this.last = this.getLast(0)
+    this.$el.addEventListener('scroll', this.onScroll, false)
+  },
+
+  beforeDestroy (): void {
+    this.$el.removeEventListener('scroll', this.onScroll, false)
   },
 
   methods: {
@@ -89,11 +89,6 @@ export default Vue.extend({
       style: {
         height: this.height,
       },
-      directives: [{
-        arg: `.${scrollTargetClass}`,
-        name: 'scroll',
-        value: this.onScroll,
-      }],
     }, [parentVNode])
     return scrollVNode
   },
