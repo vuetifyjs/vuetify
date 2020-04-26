@@ -1,0 +1,21 @@
+{
+  "heading": "# VirtualScroll",
+  "headingText": "The `v-virtual-scroll` component is useful for displaying large amounts of similar data.",
+  "examples": {
+    "usage": {
+      "desc": "A basic example"
+    },
+    "pretty": {
+      "heading": "### A more realistic example",
+      "desc": "Long list of users"
+    }
+  },
+  "props": {
+    "height": "Height of the component as a css value",
+    "itemHeight": "Height in pixels of the items to display",
+    "items": "The array of items to display"
+  },
+  "slots": {
+    "default": "Default slot to customize items appearance"
+  }
+}
