@@ -10,7 +10,7 @@
     },
     "elevation": {
       "heading": "### Picker's elevation",
-      "desc": "You can set picker's elevation using `elevation` prop or `flat` (the latter sets the elevation to 0)."
+      "desc": "The `v-date-picker` component supports elevation up to a maximum value of 24. For more information on elevations, visit the official [Material Design elevations](https://material.io/design/environment/elevation.html) page."
     },
     "date-colorable": {
       "desc": "Date picker colors can be set using the `color` and `header-color` props. If `header-color` prop is not provided header will use the `color` prop value.",
