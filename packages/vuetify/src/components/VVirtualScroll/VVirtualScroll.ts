@@ -1,26 +1,33 @@
+// Styles
 import './VVirtualScroll.sass'
 
-// Types
-import Vue, { VNode } from 'vue'
+// Mixins
+import Measurable from '../../mixins/measurable'
 
 // Helpers
-import { getSlot } from '../../util/helpers'
+import {
+  convertToUnit,
+  getSlot,
+} from '../../util/helpers'
 
-export default Vue.extend({
+// Types
+import { VNode } from 'vue'
+
+export default Measurable.extend({
   name: 'v-virtual-scroll',
 
   props: {
     height: {
-      type: String,
+      type: [Number, String],
       default: '100%',
     },
     itemHeight: {
-      type: Number,
+      type: [Number, String],
       required: true,
     },
     items: {
       type: Array,
-      required: true,
+      default: () => ([]),
     },
   },
 
@@ -32,6 +39,9 @@ export default Vue.extend({
   }),
 
   computed: {
+    __itemHeight (): number {
+      return parseInt(this.itemHeight)
+    },
     firstToRender (): number {
       return Math.max(0, this.first - this.bench)
     },
@@ -50,23 +60,29 @@ export default Vue.extend({
   },
 
   methods: {
-    getChildrenVNodes (h: Function): VNode[] {
-      const vNodes: any[] = this.items.slice(this.firstToRender, this.lastToRender)
-      return vNodes.map((item, i): VNode => h('div', {
+    getChildren (): VNode[] {
+      return this.items.slice(
+        this.firstToRender,
+        this.lastToRender,
+      ).map(this.genChild)
+    },
+    genChild (item: any, i: number) {
+      const top = convertToUnit((this.firstToRender + i) * this.__itemHeight)
+
+      return this.$createElement('div', {
         staticClass: 'v-virtual-scroll__item',
-        style: {
-          top: (this.firstToRender + i) * this.itemHeight + 'px',
-        },
-      }, getSlot(this, 'default', item)))
+        style: { top },
+      }, getSlot(this, 'default', item))
     },
     getFirst (): number {
-      return Math.floor(this.scrollTop / this.itemHeight)
+      return Math.floor(this.scrollTop / this.__itemHeight)
     },
     getLast (first: number): number {
-      return first + Math.ceil(this.$el.clientHeight / this.itemHeight)
+      return first + Math.ceil(this.$el.clientHeight / this.__itemHeight)
     },
     onScroll (e: Event): void {
       const target = e.currentTarget as HTMLElement
+
       this.scrollTop = target.scrollTop
       this.first = this.getFirst()
       this.last = this.getLast(this.first)
@@ -74,22 +90,16 @@ export default Vue.extend({
   },
 
   render (h): VNode {
-    const childrenVNodes = this.getChildrenVNodes(h)
-
-    const parentVNode = h('div', {
+    const content = h('div', {
       staticClass: 'v-virtual-scroll__container',
       style: {
-        height: (this.items.length * this.itemHeight) + 'px',
+        height: convertToUnit((this.items.length * this.__itemHeight)),
       },
-    }, childrenVNodes)
+    }, this.getChildren())
 
-    const scrollVNode = h('div', {
+    return h('div', {
       staticClass: 'v-virtual-scroll',
-      style: {
-        height: this.height,
-      },
-    }, [parentVNode])
-
-    return scrollVNode
+      style: this.measurableStyles,
+    }, [content])
   },
 })
