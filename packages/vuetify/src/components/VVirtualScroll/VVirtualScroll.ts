@@ -17,10 +17,6 @@ export default Measurable.extend({
   name: 'v-virtual-scroll',
 
   props: {
-    height: {
-      type: [Number, String],
-      default: '100%',
-    },
     itemHeight: {
       type: [Number, String],
       required: true,
