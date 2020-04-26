@@ -40,19 +40,19 @@ export default Vue.extend({
     },
   },
 
-  mounted (): void {
+  mounted () {
     this.last = this.getLast(0)
     this.$el.addEventListener('scroll', this.onScroll, false)
   },
 
-  beforeDestroy (): void {
+  beforeDestroy () {
     this.$el.removeEventListener('scroll', this.onScroll, false)
   },
 
   methods: {
     getChildrenVNodes (h: Function): VNode[] {
       const vNodes: any[] = this.items.slice(this.firstToRender, this.lastToRender)
-      return vNodes.map((item: any, i: number): VNode => h('div', {
+      return vNodes.map((item, i): VNode => h('div', {
         staticClass: 'v-virtual-scroll__item',
         style: {
           top: (this.firstToRender + i) * this.itemHeight + 'px',
@@ -73,23 +73,23 @@ export default Vue.extend({
     },
   },
 
-  render (h: Function): VNode {
-    const scrollTargetClass = 'v-virtual-scroll'
+  render (h): VNode {
+    const childrenVNodes = this.getChildrenVNodes(h)
 
-    const childrenVNodes: VNode[] = this.getChildrenVNodes(h)
-
-    const parentVNode: VNode = h('div', {
+    const parentVNode = h('div', {
       staticClass: 'v-virtual-scroll__container',
       style: {
         height: (this.items.length * this.itemHeight) + 'px',
       },
     }, childrenVNodes)
-    const scrollVNode: VNode = h('div', {
-      staticClass: scrollTargetClass,
+
+    const scrollVNode = h('div', {
+      staticClass: 'v-virtual-scroll',
       style: {
         height: this.height,
       },
     }, [parentVNode])
+
     return scrollVNode
   },
 })
