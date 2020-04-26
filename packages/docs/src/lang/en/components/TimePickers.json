@@ -31,7 +31,7 @@
     },
     "elevation": {
       "heading": "### Picker's elevation",
-      "desc": "You can set picker's elevation using `elevation` prop or `flat` (the latter sets the elevation to 0)."
+      "desc": "Emphasize the `v-time-picker` component by providing an **elevation** from 0 to 24. Elevation modifies the `box-shadow` css property."
     },
     "no-title": {
       "heading": "### No title",
