@@ -5,8 +5,8 @@
     <v-card outlined>
       <v-virtual-scroll
         :height="attrs.height"
-        item-height="25"
         :items="items"
+        item-height="25"
       >
         <template v-slot="{ item }">
           <div class="pa-4">
