@@ -173,7 +173,7 @@
       { "text": "timelines", "to": "timelines" },
       { "text": "tooltips", "to": "tooltips" },
       { "text": "treeview", "to": "treeview" },
-      { "text": "virtualScroll", "to": "virtual-scroll" }
+      { "new": true, "text": "virtualScroll", "to": "virtual-scrollers" }
     ]
   },
   {

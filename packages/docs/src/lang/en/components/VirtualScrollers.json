@@ -1,7 +1,8 @@
 {
-  "heading": "# VirtualScroll",
+  "heading": "# Virtual scroller",
   "headingText": "The `v-virtual-scroll` component displays a virtual, *infinite* list. It supports dynamic height and scrolling vertically or horizontally.",
   "usageText": "The virtual scroller displays just enough records to fill the viewport and uses the existing component, rehydrating it with new data.",
+  "usageAlert": "We are in the *process* of integrating the `v-virtual-scroller` component into existing features and components. If you are interested in helping, please reach out to **John Leider** in the [Discord Community](https://community.vuetifyjs.com).",
   "examples": {
     "user-directory": {
       "heading": "### User directory",
