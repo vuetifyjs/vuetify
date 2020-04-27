@@ -68,7 +68,7 @@ export default Measurable.extend({
       return this.$createElement('div', {
         staticClass: 'v-virtual-scroll__item',
         style: { top },
-      }, getSlot(this, 'default', item))
+      }, getSlot(this, 'default', { item, index: i }))
     },
     getFirst (): number {
       return Math.floor(this.scrollTop / this.__itemHeight)

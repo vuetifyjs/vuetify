@@ -19,14 +19,14 @@ describe('VVirtualScroll.ts', () => {
       return shallowMount(VVirtualScroll, {
         ...options,
         scopedSlots: {
-          default (item) {
+          default ({ item }) {
             return this.$createElement('div', { class: 'item' }, item)
           },
         },
       })
     }
     propsData = {
-      height: `${elementHeight}px`,
+      height: elementHeight,
       items: [1, 2, 3],
       itemHeight: 50,
     }
