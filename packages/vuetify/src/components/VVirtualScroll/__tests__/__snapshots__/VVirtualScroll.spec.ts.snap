@@ -33,7 +33,9 @@ exports[`VVirtualScroll.ts should render component with scopedSlot and match sna
 `;
 
 exports[`VVirtualScroll.ts should render not more than 5 hidden items and match snapshot 1`] = `
-<div class="v-virtual-scroll">
+<div class="v-virtual-scroll"
+     style="height: 100px;"
+>
   <div class="v-virtual-scroll__container"
        style="height: 500px;"
   >
