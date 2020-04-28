@@ -15,7 +15,7 @@
     },
     "mini": {
       "heading": "### Mini",
-      "desc": "When using the **mini-variant** prop, the drawer will shrink (default 80px) and hide everything inside of `v-list` except the first element. In this example we use the **.sync** modifier that allows us to tie the expanding/contracting of the drawer programmatically."
+      "desc": "When using the **mini-variant** prop, the drawer will shrink (default 56px) and hide everything inside of `v-list` except the first element. In this example we use the **.sync** modifier that allows us to tie the expanding/contracting of the drawer programmatically."
     },
     "temporary": {
       "heading": "### Temporary",
@@ -52,6 +52,7 @@
     "fixed": "Mixins.Positionable.props.fixed",
     "floating": "A floating drawer has no visible container (no border-right)",
     "height": "Sets the height of the navigation drawer",
+    "mobileBreakPoint": "Sets the designated mobile breakpoint for the component. This will apply alternate styles for mobile devices such as the `temporary` prop, or activate the `bottom` prop when the breakpoint value is met. Setting the value to `0` will disable this functionality.",
     "miniVariantWidth": "Designates the width assigned when the `mini` prop is turned on",
     "miniVariant": "Condenses navigation drawer width, also accepts the **.sync** modifier. With this, the drawer will re-open when clicking it",
     "permanent": "The drawer remains visible regardless of screen size",

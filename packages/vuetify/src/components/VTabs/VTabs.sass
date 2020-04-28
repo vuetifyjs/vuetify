@@ -7,6 +7,7 @@
 
     .v-tab:not(.v-tab--active),
     .v-tab:not(.v-tab--active) > .v-icon,
+    .v-tab:not(.v-tab--active) > .v-btn,
     .v-tab--disabled
       color: map-get($material, 'tabs')
 
@@ -213,7 +214,8 @@
   &.v-tab:not(:focus)::before
     opacity: 0
 
-  .v-icon
+  .v-icon,
+  .v-btn.v-btn--flat
     color: inherit
 
 .v-tab--disabled

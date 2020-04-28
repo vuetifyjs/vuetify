@@ -42,11 +42,11 @@ Vuetify is a MIT licensed project that is developed and maintained full-time by 
 
 <ul>
   <li>
-    <a href="https://github.com/users/johnleider/sponsorship">Support through Github</a>
-    <strong><small>(supports John)</small></strong>
+    <a href="https://github.com/users/johnleider/sponsorship">Become a backer or sponsor on GitHub</a>
+    or <a href="https://www.patreon.com/vuetify">Patreon</a> <small>(supports John and Heather)</small>
   </li>
   <li>
-    <a href="https://opencollective.com/vuetify">Support through OpenCollective</a>
+    <a href="https://opencollective.com/vuetify">Become a backer or sponsor on Open Collective</a>
     <strong><small>(supports the Dev team)</small></strong>
   </li>
   <li>
@@ -56,13 +56,14 @@ Vuetify is a MIT licensed project that is developed and maintained full-time by 
     <a href="https://paypal.me/vuetify">Make a one-time payment with Paypal</a>
   </li>
   <li>
-    <a href="https://vuetifyjs.com/professional-support/consulting?ref=github">Book time with John</a>
+    <a href="https://vuetifyjs.com/professional-support/consulting?ref=github">Book time with the Team</a>
   </li>
 </ul>
 
-<h2 align="center"><b>Sponsors</b></h2>
+### What's the difference between Patreon and OpenCollective?
+Funds donated via Patreon go directly to support John and Heather's full-time work on Vuetify. Funds donated via Open Collective are managed with transparent expenses and will be used for compensating work and expenses for Core team members. Your name/logo will receive proper recognition and exposure by donating on either platform.
 
-<h4 align="center"><b>Premiere</b></h4>
+<h3 align="center"><b>Premiere Sponsors</b></h3>
 
 <table>
   <tbody>
@@ -76,7 +77,7 @@ Vuetify is a MIT licensed project that is developed and maintained full-time by 
   </tbody>
 </table>
 
-<h4 align="center"><b>Diamond</b></h4>
+<h3 align="center"><b>Diamond Sponsors</b></h3>
 
 <table>
   <tbody>
@@ -105,7 +106,7 @@ Vuetify is a MIT licensed project that is developed and maintained full-time by 
   </tbody>
 </table>
 
-<h4 align="center">Platinum</h4>
+<h3 align="center"><b>Platinum Sponsors</b></h3>
 
 <table>
   <tbody>
@@ -147,7 +148,7 @@ Vuetify is a MIT licensed project that is developed and maintained full-time by 
 
 <br>
 
-<h4 align="center"><b>Open Collective Sponsors</b></h4>
+<h3 align="center"><b>Sponsors via <a href="https://opencollective.com/vuetify">Open Collective</a></b></h3>
 
 <div align="center">
   <a href="https://opencollective.com/vuetify">
