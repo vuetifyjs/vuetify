@@ -18,7 +18,7 @@
           open-on-click
           transition
         >
-          <template v-slot:prepend="{ item, active }">
+          <template v-slot:prepend="{ item }">
             <v-icon v-if="!item.children">mdi-account</v-icon>
           </template>
         </v-treeview>

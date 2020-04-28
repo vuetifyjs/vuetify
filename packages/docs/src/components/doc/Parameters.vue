@@ -17,9 +17,9 @@
       hide-default-footer
       sort-by="name"
     >
-      <template v-slot="{ items }">
+      <template v-slot="props">
         <div>
-          <template v-for="(item, i) in items">
+          <template v-for="(item, i) in props.items">
             <doc-api-item
               :key="item.name"
               :headers="headers"
@@ -27,7 +27,7 @@
             />
 
             <v-divider
-              v-if="i + 1!== items.length"
+              v-if="i + 1!== props.items.length"
               :key="`divider-${i}`"
             />
           </template>

@@ -70,6 +70,8 @@
       return { id: this.id }
     },
 
+    asyncData: load,
+
     data: () => ({ isLoading: false }),
 
     computed: {
@@ -89,8 +91,6 @@
     },
 
     watch: { '$route.path': 'onRouteChange' },
-
-    asyncData: load,
 
     methods: {
       getComponent,

@@ -20,10 +20,10 @@
         <v-simple-checkbox color="purple" v-bind="props" v-on="on"></v-simple-checkbox>
       </template>
 
-      <template v-if="isEnabled('header')" v-slot:header="{ props: { headers } }">
+      <template v-if="isEnabled('header')" v-slot:header="{ props: props }">
         <thead>
           <tr>
-            <th :colspan="headers.length">
+            <th :colspan="props.headers.length">
               This is a header
             </th>
           </tr>
@@ -42,17 +42,17 @@
         {{ item.name.toUpperCase() }}
       </template>
 
-      <template v-if="isEnabled('body.prepend')" v-slot:body.prepend="{ headers }">
+      <template v-if="isEnabled('body.prepend')" v-slot:body.prepend="props">
         <tr>
-          <td :colspan="headers.length">
+          <td :colspan="props.headers.length">
             This is a prepended row
           </td>
         </tr>
       </template>
 
-      <template v-if="isEnabled('body')" v-slot:body="{ items }">
+      <template v-if="isEnabled('body')" v-slot:body="props">
         <tbody>
-          <tr v-for="item in items" :key="item.name">
+          <tr v-for="item in props.items" :key="item.name">
             <td>{{ item.name }}</td>
             <td>CONTENT</td>
             <td>CONTENT</td>
@@ -71,9 +71,9 @@
         NO RESULTS HERE!
       </template>
 
-      <template v-if="isEnabled('body.append')" v-slot:body.append="{ headers }">
+      <template v-if="isEnabled('body.append')" v-slot:body.append="props">
         <tr>
-          <td :colspan="headers.length">
+          <td :colspan="props.headers.length">
             This is an appended row
           </td>
         </tr>

@@ -65,7 +65,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
-    "@babel/core": "^7.5.5",
+    "@babel/core": "^7.0.0-0",
     "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@mdi/font": "^4.5.95",
@@ -110,7 +110,7 @@
     "url-loader": "^2.1.0",
     "vue-meta": "^2.0.5",
     "vue-router": "^3.0.7",
-    "vuetify-loader": "^1.2.2",
+    "vuetify-loader": "^1.4.3",
     "webpack-dev-server": "^3.7.2"
   },
   "peerDependencies": {

@@ -50,7 +50,7 @@
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.5",
+    "@babel/core": "^7.0.0-0",
     "@babel/preset-env": "^7.5.5",
     "@mdi/js": "^3.8.95",
     "@types/marked": "^0.7.3",
@@ -64,7 +64,6 @@
     "docsearch.js": "^2.6.3",
     "eslint": "^6.1.0",
     "eslint-plugin-json": "^1.4.0",
-    "eslint-plugin-vuetify": "^1.0.0-beta.4",
     "fibers": "^4.0.1",
     "file-loader": "^4.1.0",
     "friendly-errors-webpack-plugin": "^1.7.0",

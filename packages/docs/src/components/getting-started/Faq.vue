@@ -22,7 +22,7 @@
         disable-pagination
         hide-default-footer
       >
-        <template v-slot:item="{ item: gotcha, index }">
+        <template v-slot:item="{ item: gotcha }">
           <section
             :id="gotcha.id"
             class="mb-12"

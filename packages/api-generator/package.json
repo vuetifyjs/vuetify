@@ -18,6 +18,7 @@
     "vuetify": "^2.2.28"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0-0",
     "@babel/node": "^7.5.5",
     "@babel/preset-env": "^7.5.5"
   }

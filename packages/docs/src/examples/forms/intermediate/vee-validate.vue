@@ -1,7 +1,14 @@
 <template>
-  <ValidationObserver ref="observer" v-slot="{ validate, reset }">
+  <ValidationObserver
+    ref="observer"
+    v-slot="{ validate, reset }"
+  >
     <form>
-      <ValidationProvider v-slot="{ errors }" name="Name" rules="required|max:10">
+      <ValidationProvider
+        v-slot="{ errors }"
+        name="Name"
+        rules="required|max:10"
+      >
         <v-text-field
           v-model="name"
           :counter="10"
@@ -10,7 +17,11 @@
           required
         ></v-text-field>
       </ValidationProvider>
-      <ValidationProvider v-slot="{ errors }" name="email" rules="required|email">
+      <ValidationProvider
+        v-slot="{ errors }"
+        name="email"
+        rules="required|email"
+      >
         <v-text-field
           v-model="email"
           :error-messages="errors"
@@ -18,7 +29,11 @@
           required
         ></v-text-field>
       </ValidationProvider>
-      <ValidationProvider v-slot="{ errors }" name="select" rules="required">
+      <ValidationProvider
+        v-slot="{ errors }"
+        name="select"
+        rules="required"
+      >
         <v-select
           v-model="select"
           :items="items"
@@ -28,7 +43,11 @@
           required
         ></v-select>
       </ValidationProvider>
-      <ValidationProvider v-slot="{ errors, valid }" rules="required" name="checkbox">
+      <ValidationProvider
+        v-slot="{ errors }"
+        rules="required"
+        name="checkbox"
+      >
         <v-checkbox
           v-model="checkbox"
           :error-messages="errors"
@@ -39,8 +58,14 @@
         ></v-checkbox>
       </ValidationProvider>
 
-      <v-btn class="mr-4" @click="submit">submit</v-btn>
-      <v-btn @click="clear">clear</v-btn>
+      <v-btn
+        class="mr-4"
+        @click="validate"
+      >
+        submit
+      </v-btn>
+
+      <v-btn @click="reset(), clear()">clear</v-btn>
     </form>
   </ValidationObserver>
 </template>
@@ -85,15 +110,11 @@
     }),
 
     methods: {
-      submit () {
-        this.$refs.observer.validate()
-      },
       clear () {
         this.name = ''
         this.email = ''
         this.select = null
         this.checkbox = null
-        this.$refs.observer.reset()
       },
     },
   }
