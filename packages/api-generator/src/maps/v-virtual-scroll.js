@@ -4,7 +4,8 @@ module.exports = {
       {
         name: 'default',
         props: {
-          item: 'Object',
+          index: 'number',
+          item: 'any',
         },
       },
     ],
