@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VVirtualScroll.ts should render component with scopedSlot and match snapshot 1`] = `
+<div class="v-virtual-scroll"
+     style="height: 100px;"
+>
+  <div class="v-virtual-scroll__container"
+       style="height: 150px;"
+  >
+    <div class="v-virtual-scroll__item"
+         style="top: 0px;"
+    >
+      <div class="item">
+        1
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="top: 50px;"
+    >
+      <div class="item">
+        2
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VVirtualScroll.ts should render not more than 5 hidden items and match snapshot 1`] = `
+<div class="v-virtual-scroll"
+     style="height: 100px;"
+>
+  <div class="v-virtual-scroll__container"
+       style="height: 500px;"
+  >
+    <div class="v-virtual-scroll__item"
+         style="top: 0px;"
+    >
+      <div class="item">
+        1
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="top: 50px;"
+    >
+      <div class="item">
+        2
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VVirtualScroll.ts should render right items on scroll and match snapshot 1`] = `
+<div class="v-virtual-scroll"
+     style="height: 100px;"
+>
+  <div class="v-virtual-scroll__container"
+       style="height: 1000px;"
+  >
+    <div class="v-virtual-scroll__item"
+         style="top: 0px;"
+    >
+      <div class="item">
+        1
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="top: 50px;"
+    >
+      <div class="item">
+        2
+      </div>
+    </div>
+  </div>
+</div>
+`;
