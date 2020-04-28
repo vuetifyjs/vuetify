@@ -97,6 +97,10 @@ export default VDataIterator.extend({
       type: Function as PropType<typeof defaultFilter>,
       default: defaultFilter,
     },
+    rowClass: {
+      type: Object,
+      default: () => Object(),
+    },
   },
 
   data () {
@@ -197,6 +201,13 @@ export default VDataIterator.extend({
   methods: {
     calcWidths () {
       this.widths = Array.from(this.$el.querySelectorAll('th')).map(e => e.clientWidth)
+    },
+    createRowClass (data: Object) {
+      const classes = Object()
+      Object.keys(this.rowClass).forEach(key => {
+        classes[key] = this.rowClass[key](data)
+      })
+      return classes
     },
     customFilterWithColumns (items: any[], search: string) {
       return searchTableItems(items, search, this.headersWithCustomFilters, this.headersWithoutCustomFilters, this.customFilter)
@@ -449,6 +460,7 @@ export default VDataIterator.extend({
         key: getObjectValueByPath(item, this.itemKey),
         class: {
           ...classes,
+          ...this.createRowClass(item),
           'v-data-table__selected': data.isSelected,
         },
         props: {
