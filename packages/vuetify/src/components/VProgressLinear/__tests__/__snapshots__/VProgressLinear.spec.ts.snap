@@ -26,7 +26,7 @@ exports[`VProgressLinear.ts should render component in RTL mode 1`] = `
      aria-valuemin="0"
      aria-valuemax="100"
      aria-valuenow="33"
-     class="v-progress-linear theme--light"
+     class="v-progress-linear v-progress-linear--reverse theme--light"
      style="height: 4px;"
 >
   <div class="v-progress-linear__background primary"

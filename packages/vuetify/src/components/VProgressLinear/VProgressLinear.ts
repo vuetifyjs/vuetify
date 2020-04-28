@@ -58,6 +58,7 @@ export default baseMixins.extend({
     },
     indeterminate: Boolean,
     query: Boolean,
+    reverse: Boolean,
     rounded: Boolean,
     stream: Boolean,
     striped: Boolean,
@@ -125,10 +126,11 @@ export default baseMixins.extend({
       const backgroundOpacity = this.backgroundOpacity == null
         ? (this.backgroundColor ? 1 : 0.3)
         : parseFloat(this.backgroundOpacity)
+      const isReversed = this.$vuetify.rtl !== this.reverse
 
       return {
         opacity: backgroundOpacity,
-        [this.$vuetify.rtl ? 'right' : 'left']: convertToUnit(this.normalizedValue, '%'),
+        [isReversed ? 'right' : 'left']: convertToUnit(this.normalizedValue, '%'),
         width: convertToUnit(this.normalizedBuffer - this.normalizedValue, '%'),
       }
     },
@@ -138,6 +140,7 @@ export default baseMixins.extend({
         'v-progress-linear--fixed': this.fixed,
         'v-progress-linear--query': this.query,
         'v-progress-linear--reactive': this.reactive,
+        'v-progress-linear--reverse': this.$vuetify.rtl !== this.reverse,
         'v-progress-linear--rounded': this.rounded,
         'v-progress-linear--striped': this.striped,
         ...this.themeClasses,
