@@ -4,7 +4,6 @@ const merge = require('webpack-merge')
 const base = require('./webpack.base.config')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
-const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserJSPlugin = require('terser-webpack-plugin')
@@ -78,10 +77,6 @@ const config = merge(base, {
     new webpack.DefinePlugin({
       'process.env.VUE_ENV': '"client"'
     }),
-    new CopyPlugin([
-      { from: 'src/public' },
-      { from: 'src/themes', to: 'themes' },
-    ]),
     new HtmlWebpackPlugin({
       filename: '_crowdin.html',
       template: resolve('../src/crowdin.template.html')
