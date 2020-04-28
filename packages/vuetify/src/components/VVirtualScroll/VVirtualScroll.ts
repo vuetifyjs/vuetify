@@ -17,6 +17,10 @@ export default Measurable.extend({
   name: 'v-virtual-scroll',
 
   props: {
+    bench: {
+      type: [Number, String],
+      default: 0,
+    },
     itemHeight: {
       type: [Number, String],
       required: true,
@@ -28,21 +32,23 @@ export default Measurable.extend({
   },
 
   data: () => ({
-    bench: 5,
     first: 0,
     last: 0,
     scrollTop: 0,
   }),
 
   computed: {
+    __bench (): number {
+      return parseInt(this.bench, 10)
+    },
     __itemHeight (): number {
-      return parseInt(this.itemHeight)
+      return parseInt(this.itemHeight, 10)
     },
     firstToRender (): number {
-      return Math.max(0, this.first - this.bench)
+      return Math.max(0, this.first - this.__bench)
     },
     lastToRender (): number {
-      return Math.min(this.items.length, this.last + this.bench)
+      return Math.min(this.items.length, this.last + this.__bench)
     },
   },
 
@@ -62,13 +68,15 @@ export default Measurable.extend({
         this.lastToRender,
       ).map(this.genChild)
     },
-    genChild (item: any, i: number) {
-      const top = convertToUnit((this.firstToRender + i) * this.__itemHeight)
+    genChild (item: any, index: number) {
+      const firstToRender = this.firstToRender + index
+      const top = convertToUnit(firstToRender * this.__itemHeight)
 
       return this.$createElement('div', {
         staticClass: 'v-virtual-scroll__item',
         style: { top },
-      }, getSlot(this, 'default', { item, index: i }))
+        key: index,
+      }, getSlot(this, 'default', { item, index }))
     },
     getFirst (): number {
       return Math.floor(this.scrollTop / this.__itemHeight)
