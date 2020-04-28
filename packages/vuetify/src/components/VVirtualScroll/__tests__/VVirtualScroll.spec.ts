@@ -59,7 +59,7 @@ describe('VVirtualScroll.ts', () => {
   it('should render not more than 5 hidden items and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        height: `${elementHeight}`,
+        height: elementHeight,
         items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
         itemHeight: 50,
       },
@@ -68,17 +68,17 @@ describe('VVirtualScroll.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render right items on scroll and match snapshot', async () => {
+  it('should render right items on scroll and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        height: `${elementHeight}px`,
+        height: elementHeight,
         items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
         itemHeight: 50,
       },
     })
 
-    const evtPayload = new CustomEvent('scroll', { detail: { currentTarget: { scrollTop: 500 } } })
-    wrapper.vm.onScroll(evtPayload.detail as unknown as Event) // can't make ts work here
+    wrapper.vm.scrollTop = 500
+    wrapper.trigger('scroll')
 
     expect(wrapper.html()).toMatchSnapshot()
   })

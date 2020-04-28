@@ -4,7 +4,10 @@ import './VVirtualScroll.sass'
 // Mixins
 import Measurable from '../../mixins/measurable'
 
-// Helpers
+// Directives
+import Scroll from '../../directives/scroll'
+
+// Utilities
 import {
   convertToUnit,
   getSlot,
@@ -15,6 +18,8 @@ import { VNode } from 'vue'
 
 export default Measurable.extend({
   name: 'v-virtual-scroll',
+
+  directives: { Scroll },
 
   props: {
     bench: {
@@ -52,13 +57,8 @@ export default Measurable.extend({
     },
   },
 
-  mounted () {
+  created () {
     this.last = this.getLast(0)
-    this.$el.addEventListener('scroll', this.onScroll, false)
-  },
-
-  beforeDestroy () {
-    this.$el.removeEventListener('scroll', this.onScroll, false)
   },
 
   methods: {
@@ -82,7 +82,9 @@ export default Measurable.extend({
       return Math.floor(this.scrollTop / this.__itemHeight)
     },
     getLast (first: number): number {
-      return first + Math.ceil(this.$el.clientHeight / this.__itemHeight)
+      const height = parseInt(this.height || 0, 10) || this.$el.clientHeight
+
+      return first + Math.ceil(height / this.__itemHeight)
     },
     onScroll (e: Event): void {
       const target = e.currentTarget as HTMLElement
@@ -104,6 +106,11 @@ export default Measurable.extend({
     return h('div', {
       staticClass: 'v-virtual-scroll',
       style: this.measurableStyles,
+      directives: [{
+        name: 'scroll',
+        modifiers: { self: true },
+        value: this.onScroll,
+      }],
     }, [content])
   },
 })
