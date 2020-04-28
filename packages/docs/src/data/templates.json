@@ -87,9 +87,9 @@
     "description": "This beautiful single page parallax is a great home page for any application.",
     "src": "https://cdn.vuetifyjs.com/images/starter/parallax-2020-large.png",
     "free": true,
-    "url": "https://github.com/vuetifyjs/vuetify/blob/master/packages/docs/src/themes/parallax-starter/index.html",
+    "url": "https://store.vuetifyjs.com/product/parallax-theme-free",
     "demoUrl": [
-      "/themes/parallax-starter"
+      "https://parallax.johnleider.com"
     ]
   },
   "blog": {
