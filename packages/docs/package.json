@@ -50,7 +50,6 @@
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-0",
     "@babel/preset-env": "^7.5.5",
     "@mdi/js": "^3.8.95",
     "@types/marked": "^0.7.3",

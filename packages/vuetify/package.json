@@ -65,7 +65,6 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
-    "@babel/core": "^7.0.0-0",
     "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@mdi/font": "^4.5.95",
