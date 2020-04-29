@@ -31,7 +31,7 @@
         v-for="job in jobs"
         :key="job.id"
         :job="job"
-      ></jobs-card>
+      />
     </v-fade-transition>
 
     <div
