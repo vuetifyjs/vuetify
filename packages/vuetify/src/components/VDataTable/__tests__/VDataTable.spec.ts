@@ -861,4 +861,44 @@ describe('VDataTable.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should apply class list to rows', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+        itemsPerPage: 5,
+        'item-class': { 'my-class': true, 'my-other-class': true, 'my-none-class': false },
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should apply class unique to rows', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+        itemsPerPage: 5,
+        'item-class': 'my-unique-class',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should apply class function to rows', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+        itemsPerPage: 5,
+        'item-class': { 'first-class': (item: Object) => { return item.fat < 10 },
+          'second-class': (item: Object) => { return item.protein > 4.0 } },
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
