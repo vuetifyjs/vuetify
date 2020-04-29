@@ -93,7 +93,15 @@ export default Measurable.extend({
       return Math.floor(this.scrollAmount / this.__itemSize)
     },
     getLast (first: number): number {
-      return first + Math.ceil((this.horizontal ? this.$el.clientWidth : this.$el.clientHeight) / this.__itemSize)
+      const size = this.getSize()
+
+      return first + Math.ceil(size / this.__itemSize) + 1
+    },
+    getSize (): number {
+      const getWidth = () => parseInt(this.width || 0, 10) || this.$el.clientWidth
+      const getHeight = () => parseInt(this.height || 0, 10) || this.$el.clientHeight
+
+      return this.horizontal ? getWidth() : getHeight()
     },
     onScroll (e: Event): void {
       const target = e.currentTarget as HTMLElement

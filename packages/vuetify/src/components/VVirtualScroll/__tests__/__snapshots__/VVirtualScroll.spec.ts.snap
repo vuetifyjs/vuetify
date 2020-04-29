@@ -32,7 +32,7 @@ exports[`VVirtualScroll.ts should render component with scopedSlot and match sna
 </div>
 `;
 
-exports[`VVirtualScroll.ts should render not more than 5 hidden items and match snapshot 1`] = `
+exports[`VVirtualScroll.ts should render just the visible items and match snapshot 1`] = `
 <div class="v-virtual-scroll v-virtual-scroll--vertical"
      style="height: 100px;"
 >
@@ -60,39 +60,11 @@ exports[`VVirtualScroll.ts should render not more than 5 hidden items and match 
         3
       </div>
     </div>
-    <div class="v-virtual-scroll__item"
-         style="height: 50px; top: 150px;"
-    >
-      <div class="item">
-        4
-      </div>
-    </div>
-    <div class="v-virtual-scroll__item"
-         style="height: 50px; top: 200px;"
-    >
-      <div class="item">
-        5
-      </div>
-    </div>
-    <div class="v-virtual-scroll__item"
-         style="height: 50px; top: 250px;"
-    >
-      <div class="item">
-        6
-      </div>
-    </div>
-    <div class="v-virtual-scroll__item"
-         style="height: 50px; top: 300px;"
-    >
-      <div class="item">
-        7
-      </div>
-    </div>
   </div>
 </div>
 `;
 
-exports[`VVirtualScroll.ts should render right items on scroll and match snapshot 1`] = `
+exports[`VVirtualScroll.ts should render right items (with hidden bench) on scroll and match snapshot 1`] = `
 <div class="v-virtual-scroll v-virtual-scroll--vertical"
      style="height: 100px;"
 >
@@ -183,11 +155,18 @@ exports[`VVirtualScroll.ts should render right items on scroll and match snapsho
         17
       </div>
     </div>
+    <div class="v-virtual-scroll__item"
+         style="height: 50px; top: 850px;"
+    >
+      <div class="item">
+        18
+      </div>
+    </div>
   </div>
 </div>
 `;
 
-exports[`VVirtualScroll.ts should render right items on scroll in horizontal mode and match snapshot 1`] = `
+exports[`VVirtualScroll.ts should render right items (with hidden bench) on scroll in horizontal mode and match snapshot 1`] = `
 <div class="v-virtual-scroll v-virtual-scroll--horizontal"
      style="width: 300px;"
 >
@@ -276,6 +255,144 @@ exports[`VVirtualScroll.ts should render right items on scroll in horizontal mod
     >
       <div class="item">
         17
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="left: 2550px; width: 150px;"
+    >
+      <div class="item">
+        18
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VVirtualScroll.ts should render right items on scroll and match snapshot 1`] = `
+<div class="v-virtual-scroll v-virtual-scroll--vertical"
+     style="height: 100px;"
+>
+  <div class="v-virtual-scroll__container"
+       style="height: 1000px;"
+  >
+    <div class="v-virtual-scroll__item"
+         style="height: 50px; top: 500px;"
+    >
+      <div class="item">
+        11
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="height: 50px; top: 550px;"
+    >
+      <div class="item">
+        12
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="height: 50px; top: 600px;"
+    >
+      <div class="item">
+        13
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VVirtualScroll.ts should render right items on scroll in horizontal mode and match snapshot 1`] = `
+<div class="v-virtual-scroll v-virtual-scroll--horizontal"
+     style="width: 300px;"
+>
+  <div class="v-virtual-scroll__container"
+       style="height: 100%; width: 3000px;"
+  >
+    <div class="v-virtual-scroll__item"
+         style="left: 1500px; width: 150px;"
+    >
+      <div class="item">
+        11
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="left: 1650px; width: 150px;"
+    >
+      <div class="item">
+        12
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="left: 1800px; width: 150px;"
+    >
+      <div class="item">
+        13
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VVirtualScroll.ts should render some hidden items (bench) and match snapshot 1`] = `
+<div class="v-virtual-scroll v-virtual-scroll--vertical"
+     style="height: 100px;"
+>
+  <div class="v-virtual-scroll__container"
+       style="height: 500px;"
+  >
+    <div class="v-virtual-scroll__item"
+         style="height: 50px; top: 0px;"
+    >
+      <div class="item">
+        1
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="height: 50px; top: 50px;"
+    >
+      <div class="item">
+        2
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="height: 50px; top: 100px;"
+    >
+      <div class="item">
+        3
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="height: 50px; top: 150px;"
+    >
+      <div class="item">
+        4
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="height: 50px; top: 200px;"
+    >
+      <div class="item">
+        5
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="height: 50px; top: 250px;"
+    >
+      <div class="item">
+        6
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="height: 50px; top: 300px;"
+    >
+      <div class="item">
+        7
+      </div>
+    </div>
+    <div class="v-virtual-scroll__item"
+         style="height: 50px; top: 350px;"
+    >
+      <div class="item">
+        8
       </div>
     </div>
   </div>
