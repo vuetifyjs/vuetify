@@ -7,6 +7,11 @@ module.exports = {
         type: 'string',
       },
       {
+        name: 'arg:self',
+        default: false,
+        type: 'boolean',
+      },
+      {
         name: 'value',
         default: '(): {}',
         type: 'Function',

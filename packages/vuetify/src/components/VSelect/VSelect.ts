@@ -644,6 +644,8 @@ export default baseMixins.extend<options>().extend({
       }
     },
     onKeyDown (e: KeyboardEvent) {
+      if (this.readonly) return
+
       const keyCode = e.keyCode
       const menu = this.$refs.menu
 

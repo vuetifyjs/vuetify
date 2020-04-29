@@ -7,7 +7,7 @@ export default {
 
   computed: {
     title () {
-      return this.meta.title || 'Material Component Framework'
+      return this.meta.title || 'Vue Material Component Framework'
     },
     description () {
       return this.meta.description

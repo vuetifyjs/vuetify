@@ -2,6 +2,7 @@
 import VSelect from '../VSelect'
 
 // Utilities
+import { waitAnimationFrame } from '../../../../test'
 import {
   mount,
   Wrapper,
@@ -302,6 +303,16 @@ describe('VSelect.ts', () => {
     input.trigger('keypress', { key: 'b' })
 
     await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.internalValue).toBe('Foo')
+
+    input.trigger('keydown.up')
+
+    // Wait for keydown event to propagate
+    await wrapper.vm.$nextTick()
+
+    // Waiting for items to be rendered
+    await waitAnimationFrame()
 
     expect(wrapper.vm.internalValue).toBe('Foo')
   })
