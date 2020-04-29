@@ -104,6 +104,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
       type: Object,
       default: () => null,
     },
+    parentIsDisabled: Boolean,
     ...VTreeviewNodeProps,
   },
 
@@ -118,7 +119,8 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
 
   computed: {
     disabled (): boolean {
-      return getObjectValueByPath(this.item, this.itemDisabled)
+      return getObjectValueByPath(this.item, this.itemDisabled) ||
+        (this.parentIsDisabled && this.selectionType === 'leaf')
     },
     key (): string {
       return getObjectValueByPath(this.item, this.itemKey)
@@ -146,9 +148,6 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
     },
     hasChildren (): boolean {
       return !!this.children && (!!this.children.length || !!this.loadChildren)
-    },
-    isLeafSelectionAndDisabled (): boolean {
-      return this.disabled && this.selectionType === 'leaf'
     },
   },
 
@@ -221,15 +220,10 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
         class: {
           'v-treeview-node__toggle--open': this.isOpen,
           'v-treeview-node__toggle--loading': this.isLoading,
-          'v-treeview-node__toggle--disabled': this.isLeafSelectionAndDisabled,
         },
         slot: 'prepend',
         on: {
           click: (e: MouseEvent) => {
-            if (this.isLeafSelectionAndDisabled) {
-              return
-            }
-
             e.stopPropagation()
 
             if (this.isLoading) return
@@ -248,8 +242,6 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
         },
         on: {
           click: (e: MouseEvent) => {
-            if (this.disabled) return
-
             e.stopPropagation()
 
             if (this.isLoading) return
@@ -293,10 +285,6 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
         },
         on: {
           click: () => {
-            if (this.isLeafSelectionAndDisabled) {
-              return
-            }
-
             if (this.openOnClick && this.hasChildren) {
               this.open()
             } else if (this.activatable && !this.disabled) {
@@ -308,7 +296,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
         },
       }), children)
     },
-    genChild (item: any): VNode {
+    genChild (item: any, parentIsDisabled: boolean): VNode {
       return this.$createElement(VTreeviewNode, {
         key: getObjectValueByPath(item, this.itemKey),
         props: {
@@ -334,6 +322,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
           shaped: this.shaped,
           level: this.level + 1,
           selectionType: this.selectionType,
+          parentIsDisabled,
         },
         scopedSlots: this.$scopedSlots,
       })
@@ -341,7 +330,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
     genChildrenWrapper (): any {
       if (!this.isOpen || !this.children) return null
 
-      const children = [this.children.map(this.genChild)]
+      const children = [this.children.map(c => this.genChild(c, this.disabled))]
 
       return this.$createElement('div', {
         staticClass: 'v-treeview-node__children',

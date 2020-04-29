@@ -72,7 +72,7 @@ exports[`VTreeViewNode.ts should render disabled item 1`] = `
 >
   <div class="v-treeview-node__root">
     <button type="button"
-            class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--disabled"
+            class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
     >
       arrow_drop_down
     </button>

@@ -409,7 +409,10 @@ export default mixins(
 
   render (h): VNode {
     const children: VNodeChildrenArrayContents = this.items.length
-      ? this.items.map(VTreeviewNode.options.methods.genChild.bind(this))
+      ? this.items.map(item => {
+        const genChild = VTreeviewNode.options.methods.genChild.bind(this)
+        return genChild(item, getObjectValueByPath(item, this.itemDisabled))
+      })
       /* istanbul ignore next */
       : this.$slots.default! // TODO: remove type annotation with TS 3.2
 
