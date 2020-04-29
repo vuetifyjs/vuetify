@@ -99,7 +99,7 @@ export default VDataIterator.extend({
     },
     itemClass: {
       type: Function,
-      default: () => Object(),
+      default: (item: Object) => (Object()),
     },
   },
 
