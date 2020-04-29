@@ -117,7 +117,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
   }),
 
   computed: {
-    disabled (): string {
+    disabled (): boolean {
       return getObjectValueByPath(this.item, this.itemDisabled)
     },
     key (): string {
@@ -146,6 +146,9 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
     },
     hasChildren (): boolean {
       return !!this.children && (!!this.children.length || !!this.loadChildren)
+    },
+    isLeafSelectionAndDisabled (): boolean {
+      return this.disabled && this.selectionType === 'leaf'
     },
   },
 
@@ -218,12 +221,12 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
         class: {
           'v-treeview-node__toggle--open': this.isOpen,
           'v-treeview-node__toggle--loading': this.isLoading,
-          'v-treeview-node__toggle--disabled': this.disabled && this.selectionType === 'leaf',
+          'v-treeview-node__toggle--disabled': this.isLeafSelectionAndDisabled,
         },
         slot: 'prepend',
         on: {
           click: (e: MouseEvent) => {
-            if (this.disabled && this.selectionType === 'leaf') {
+            if (this.isLeafSelectionAndDisabled) {
               return
             }
 
@@ -290,7 +293,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
         },
         on: {
           click: () => {
-            if (this.disabled && this.selectionType === 'leaf') {
+            if (this.isLeafSelectionAndDisabled) {
               return
             }
 
