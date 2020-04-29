@@ -97,8 +97,8 @@ export default VDataIterator.extend({
       type: Function as PropType<typeof defaultFilter>,
       default: defaultFilter,
     },
-    rowClass: {
-      type: Object,
+    itemClass: {
+      type: [String, Array, Object],
       default: () => Object(),
     },
   },
@@ -202,11 +202,23 @@ export default VDataIterator.extend({
     calcWidths () {
       this.widths = Array.from(this.$el.querySelectorAll('th')).map(e => e.clientWidth)
     },
-    createRowClass (data: Object) {
-      const classes = Object()
-      Object.keys(this.rowClass).forEach(key => {
-        classes[key] = this.rowClass[key](data)
-      })
+    createItemClass (data: Object) {
+      let classes = null
+      if (typeof this.itemClass === 'string') {
+        classes = Object()
+        classes[this.itemClass] = true
+      } else {
+        classes = Object.keys(this.itemClass).reduce<Record<string, boolean>>((o, key) => {
+          if (!isNaN(parseInt(key))) {
+            o[this.itemClass[key]] = true
+          } else if (typeof this.itemClass[key] === 'boolean') {
+            o[key] = this.itemClass[key]
+          } else {
+            o[key] = this.itemClass[key](data)
+          }
+          return o
+        }, {})
+      }
       return classes
     },
     customFilterWithColumns (items: any[], search: string) {
@@ -460,7 +472,7 @@ export default VDataIterator.extend({
         key: getObjectValueByPath(item, this.itemKey),
         class: {
           ...classes,
-          ...this.createRowClass(item),
+          ...this.createItemClass(item),
           'v-data-table__selected': data.isSelected,
         },
         props: {
