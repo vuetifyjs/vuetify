@@ -202,6 +202,19 @@ export default VDataIterator.extend({
     calcWidths () {
       this.widths = Array.from(this.$el.querySelectorAll('th')).map(e => e.clientWidth)
     },
+    createItemClass (classes: string|string[]|Record<string, boolean>) {
+      let finalClasses = Object()
+      if (typeof classes === 'string') {
+        finalClasses[classes] = true
+      } else if (classes instanceof Array) {
+        classes.forEach(klass => {
+          finalClasses[klass] = true
+        })
+      } else {
+        finalClasses = classes
+      }
+      return finalClasses
+    },
     customFilterWithColumns (items: any[], search: string) {
       return searchTableItems(items, search, this.headersWithCustomFilters, this.headersWithoutCustomFilters, this.customFilter)
     },
@@ -453,7 +466,7 @@ export default VDataIterator.extend({
         key: getObjectValueByPath(item, this.itemKey),
         class: {
           ...classes,
-          ...this.itemClass(item),
+          ...this.createItemClass(this.itemClass(item)),
           'v-data-table__selected': data.isSelected,
         },
         props: {
