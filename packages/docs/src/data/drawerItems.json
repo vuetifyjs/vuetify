@@ -202,5 +202,11 @@
     "text": "premiumThemes",
     "icon": "mdi-vuetify",
     "to": "themes/premium"
+  },
+  {
+    "new": true,
+    "text": "jobs",
+    "icon": "mdi-briefcase-search",
+    "to": "jobs/for-vue"
   }
 ]
