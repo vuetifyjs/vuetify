@@ -157,8 +157,9 @@ export default mixins(
 
   created () {
     this.buildTree(this.items)
-    this.value.forEach(key => this.updateSelected(this.returnObject ? getObjectValueByPath(key, this.itemKey) : key, true, true))
-    this.active.forEach(key => this.updateActive(this.returnObject ? getObjectValueByPath(key, this.itemKey) : key, true))
+    const getValue = (key: string | number) => this.returnObject ? getObjectValueByPath(key, this.itemKey) : key
+    this.value.map(getValue).forEach(value => this.updateSelected(value, true, true))
+    this.active.map(getValue).forEach(value => this.updateActive(value, true))
   },
 
   mounted () {
@@ -222,7 +223,13 @@ export default mixins(
         node.isActive = oldNode.isActive
         node.isOpen = oldNode.isOpen
 
-        this.nodes[key] = !children.length ? node : this.calculateState(node, this.nodes)
+        this.nodes[key] = node
+
+        if (children.length) {
+          const { isSelected, isIndeterminate } = this.calculateState(key, this.nodes)
+          node.isSelected = isSelected
+          node.isIndeterminate = isIndeterminate
+        }
 
         // Don't forget to rebuild cache
         if (this.nodes[key].isSelected && (this.selectionType === 'independent' || node.children.length === 0)) this.selectedCache.add(key)
@@ -232,17 +239,20 @@ export default mixins(
         this.updateVnodeState(key)
       }
     },
-    calculateState (node: NodeState, state: Record<string | number, NodeState>) {
-      const counts = node.children.reduce((counts: number[], child: string | number) => {
+    calculateState (node: string | number, state: Record<string | number, NodeState>) {
+      const counts = state[node].children.reduce((counts: number[], child: string | number) => {
         counts[0] += +Boolean(state[child].isSelected)
         counts[1] += +Boolean(state[child].isIndeterminate)
         return counts
       }, [0, 0])
 
-      node.isSelected = !!node.children.length && counts[0] === node.children.length
-      node.isIndeterminate = !node.isSelected && (counts[0] > 0 || counts[1] > 0)
+      const isSelected = !!state[node].children.length && counts[0] === state[node].children.length
+      const isIndeterminate = !isSelected && (counts[0] > 0 || counts[1] > 0)
 
-      return node
+      return {
+        isSelected,
+        isIndeterminate,
+      }
     },
     emitOpen () {
       this.emitNodeCache('update:open', this.openCache)
@@ -337,13 +347,16 @@ export default mixins(
         })
 
         this.nodes[key].isSelected = isSelected
-        this.nodes[key].isIndeterminate = this.getDescendants(key).some(descendant => !this.nodes[descendant].isSelected)
+        const calculated = this.calculateState(key, this.nodes)
+        this.nodes[key].isIndeterminate = calculated.isIndeterminate
         changed.set(key, isSelected)
 
         const parents = this.getParents(key)
         parents.forEach(parent => {
-          this.nodes[parent] = this.calculateState(this.nodes[parent], this.nodes)
-          changed.set(parent, this.nodes[parent].isSelected)
+          const calculated = this.calculateState(parent, this.nodes)
+          this.nodes[parent].isSelected = calculated.isSelected
+          this.nodes[parent].isIndeterminate = calculated.isIndeterminate
+          changed.set(parent, calculated.isSelected)
         })
       } else {
         this.nodes[key].isSelected = isSelected
