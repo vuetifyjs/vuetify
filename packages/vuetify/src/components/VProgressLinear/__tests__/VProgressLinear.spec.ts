@@ -93,6 +93,33 @@ describe('VProgressLinear.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render reversed component', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: 33,
+        reverse: true,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render reverse component in RTL mode', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: 33,
+        reverse: true,
+      },
+      mocks: {
+        $vuetify: {
+          rtl: true,
+        },
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render component with color and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
