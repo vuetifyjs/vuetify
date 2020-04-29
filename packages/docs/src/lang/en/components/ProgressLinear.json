@@ -45,6 +45,10 @@
       "heading": "### Striped",
       "desc": "This applies a striped background over the value portion of the `v-progress-linear`."
     },
+    "reverse": {
+      "heading": "### Reversed",
+      "desc": "Displays reversed progress (right to left in LTR mode and left to right in RTL)."
+    },
     "slot": {
       "heading": "### Slots",
       "desc": "The `v-progress-linear` component will be responsive to user input when using `v-model`. You can use the default slot or bind a local model to display inside of the progress. If you are looking for advanced features on a linear type component, check out [v-slider](/components/sliders)."
@@ -59,6 +63,7 @@
     "height": "Mixins.Measurable.props.height",
     "indeterminate": "Components.ProgressCircular.props.indeterminate",
     "query": "Animates like **indeterminate** prop but inverse",
+    "reverse": "Displays reversed progress (right to left in LTR mode and left to right in RTL)",
     "rounded": "Adds a border radius to the progress component",
     "size": "Components.ProgressCircular.props.size",
     "stream": "An alternative style for portraying loading that works in tandem with **buffer-value**",
