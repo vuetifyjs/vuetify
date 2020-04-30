@@ -149,7 +149,7 @@ export default CalendarBase.extend({
       return this.$createElement('div', {
         staticClass: 'v-calendar-weekly__weeknumber',
       }, [
-        this.$createElement('small', String(weekNumber).padStart(2, '0')),
+        this.$createElement('small', String(weekNumber)),
       ])
     },
     genDay (day: CalendarTimestamp, index: number, week: CalendarTimestamp[]): VNode {
