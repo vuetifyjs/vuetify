@@ -99,7 +99,6 @@
     "postcss-loader": "^3.0.0",
     "pug": "^2.0.4",
     "pug-loader": "^2.4.0",
-    "ress": "^2.0.4",
     "rimraf": "^2.6.3",
     "sass": "^1.22.7",
     "sass-loader": "^7.1.0",
