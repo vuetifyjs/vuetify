@@ -74,7 +74,7 @@ export default mixins(
   methods: {
     genBtn (change: number) {
       const ariaLabelId = change > 0 ? this.nextAriaLabel : this.prevAriaLabel
-      const ariaLabel = this.$vuetify.lang.t(ariaLabelId)
+      const ariaLabel = ariaLabelId ? this.$vuetify.lang.t(ariaLabelId) : undefined
       const disabled = this.disabled ||
         (change < 0 && this.min && this.calculateChange(change) < this.min) ||
         (change > 0 && this.max && this.calculateChange(change) > this.max)
