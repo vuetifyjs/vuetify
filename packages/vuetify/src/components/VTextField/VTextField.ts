@@ -401,6 +401,7 @@ export default baseMixins.extend<options>().extend({
           input: this.onInput,
           focus: this.onFocus,
           keydown: this.onKeyDown,
+          compositionend: this.onCompositionEnd,
         }),
         ref: 'input',
       })
@@ -443,6 +444,12 @@ export default baseMixins.extend<options>().extend({
 
       this.$refs.input.focus()
     },
+    onCompositionEnd (e: Event) {
+      const target = e.target as HTMLInputElement
+
+      this.internalValue = target.value
+      this.badInput = target.validity && target.validity.badInput
+    },
     onFocus (e?: Event) {
       if (!this.$refs.input) return
 
@@ -457,9 +464,7 @@ export default baseMixins.extend<options>().extend({
     },
     onInput (e: Event) {
       if (!(e as InputEvent).isComposing) {
-        const target = e.target as HTMLInputElement
-        this.internalValue = target.value
-        this.badInput = target.validity && target.validity.badInput
+        this.onCompositionEnd(e)
       }
     },
     onKeyDown (e: KeyboardEvent) {

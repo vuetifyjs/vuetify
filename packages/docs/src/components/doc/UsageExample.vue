@@ -33,14 +33,14 @@
         <v-responsive
           v-if="component"
           class="child-flex overflow-hidden"
-          height="300"
+          height="400"
         >
           <v-sheet
             id="usage-example"
             :dark="dark || $vuetify.theme.dark"
             class="d-inline-block"
             width="calc(100% - 1px)"
-            height="300"
+            height="400"
             style="overflow-y: auto;"
             tile
           >
