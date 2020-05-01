@@ -226,8 +226,8 @@ export function parseGradient (
 ) {
   return gradient.replace(/([a-z]+(\s[a-z]+-[1-5])?)(?=$|,)/gi, x => {
     return classToHex(x, colors, currentTheme) || x
-  }).replace(/(?<=rgba\()#[0-9a-f]+(?=,)/gi, x => {
-    return Object.values(HexToRGBA(parseHex(x))).slice(0, 3).join(',')
+  }).replace(/(rgba\()#[0-9a-f]+(?=,)/gi, x => {
+    return 'rgba(' + Object.values(HexToRGBA(parseHex(x.replace(/rgba\(/, '')))).slice(0, 3).join(',')
   })
 }
 

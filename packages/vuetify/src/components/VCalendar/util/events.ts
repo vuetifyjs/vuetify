@@ -2,6 +2,7 @@ import {
   parseTimestamp,
   getDayIdentifier,
   getTimestampIdentifier,
+  OFFSET_TIME,
 } from './timestamp'
 import { CalendarTimestamp, CalendarEvent, CalendarEventParsed } from 'types'
 
@@ -19,7 +20,9 @@ export function parseEvent (input: CalendarEvent, index: number, startProperty: 
 }
 
 export function isEventOn (event: CalendarEventParsed, dayIdentifier: number): boolean {
-  return dayIdentifier >= event.startIdentifier && dayIdentifier <= event.endIdentifier
+  return dayIdentifier >= event.startIdentifier &&
+    dayIdentifier <= event.endIdentifier &&
+    dayIdentifier * OFFSET_TIME !== event.endTimestampIdentifier
 }
 
 export function isEventStart (event: CalendarEventParsed, day: CalendarTimestamp, dayIdentifier: number, firstWeekday: number): boolean {

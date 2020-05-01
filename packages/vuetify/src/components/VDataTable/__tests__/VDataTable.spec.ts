@@ -330,7 +330,12 @@ describe('VDataTable.ts', () => {
     expect(wrapper2.html()).toMatchSnapshot()
   })
 
-  it('should emit event when clicking on internally created row', async () => {
+  it.each([
+    'click',
+    'contextmenu',
+    'dblclick',
+  ])('should emit event when %sing on internally created row', async event => {
+    const eventToEmit = event + ':row'
     const fn = jest.fn()
     const wrapper = mountFunction({
       propsData: {
@@ -338,29 +343,11 @@ describe('VDataTable.ts', () => {
         items: testItems,
       },
       listeners: {
-        'click:row': fn,
+        [eventToEmit]: fn,
       },
     })
 
-    wrapper.find('tbody tr').trigger('click')
-    await wrapper.vm.$nextTick()
-
-    expect(fn).toHaveBeenCalled()
-  })
-
-  it('should emit event when contextmenu is triggered on internally created row', async () => {
-    const fn = jest.fn()
-    const wrapper = mountFunction({
-      propsData: {
-        headers: testHeaders,
-        items: testItems,
-      },
-      listeners: {
-        'contextmenu:row': fn,
-      },
-    })
-
-    wrapper.find('tbody tr').trigger('contextmenu')
+    wrapper.find('tbody tr').trigger(event)
     await wrapper.vm.$nextTick()
 
     expect(fn).toHaveBeenCalled()
