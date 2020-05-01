@@ -63,7 +63,12 @@ export default baseMixins.extend<options>().extend({
     text: Boolean,
     type: {
       type: String,
-      default: 'button',
+      default (): string | undefined {
+        if (this.href) return undefined
+        if (this.tag === 'button') return 'button'
+
+        return undefined
+      },
     },
     value: null as any as PropType<any>,
   },
@@ -183,10 +188,8 @@ export default baseMixins.extend<options>().extend({
     const setColor = !this.isFlat ? this.setBackgroundColor : this.setTextColor
     const { tag, data } = this.generateRouteLink()
 
-    if (tag === 'button') {
-      data.attrs!.type = this.type
-      data.attrs!.disabled = this.disabled
-    }
+    data.attrs!.type = this.type
+    data.attrs!.disabled = this.disabled
     data.attrs!.value = ['string', 'number'].includes(typeof this.value)
       ? this.value
       : JSON.stringify(this.value)

@@ -96,6 +96,17 @@ describe('VBtn.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should should render disabled on an <a> tag when using href prop', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        href: 'http://www.google.com',
+        disabled: true,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render specified tag when using tag prop', () => {
     const wrapper = mountFunction({
       propsData: {
@@ -304,5 +315,28 @@ describe('VBtn.ts', () => {
     wrapper.element.dispatchEvent(event)
 
     expect(blur).toHaveBeenCalled()
+  })
+
+  it('should render <input type="submit"> when tag is "input" and type is "submit"', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        tag: 'input',
+        type: 'submit',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render <input type="submit" disabled> when tag is "input" and type is "submit" and "disabled"', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        tag: 'input',
+        type: 'submit',
+        disabled: true,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

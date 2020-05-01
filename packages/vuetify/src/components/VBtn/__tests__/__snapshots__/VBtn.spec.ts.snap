@@ -19,6 +19,19 @@ exports[`VBtn.ts should not add color classes if disabled 2`] = `
 </button>
 `;
 
+exports[`VBtn.ts should render <input type="submit" disabled> when tag is "input" and type is "submit" and "disabled" 1`] = `
+<input type="submit"
+       disabled="disabled"
+       class="v-btn v-btn--contained v-btn--disabled theme--light v-size--default"
+>
+`;
+
+exports[`VBtn.ts should render <input type="submit"> when tag is "input" and type is "submit" 1`] = `
+<input type="submit"
+       class="v-btn v-btn--contained theme--light v-size--default"
+>
+`;
+
 exports[`VBtn.ts should render an <a> tag when using href prop 1`] = `
 <a href="http://www.google.com"
    class="v-btn v-btn--contained theme--light v-size--default"
@@ -118,4 +131,14 @@ exports[`VBtn.ts should render tile button and match snapshot 1`] = `
   <span class="v-btn__content">
   </span>
 </button>
+`;
+
+exports[`VBtn.ts should should render disabled on an <a> tag when using href prop 1`] = `
+<a href="http://www.google.com"
+   disabled="disabled"
+   class="v-btn v-btn--contained v-btn--disabled theme--light v-size--default"
+>
+  <span class="v-btn__content">
+  </span>
+</a>
 `;
