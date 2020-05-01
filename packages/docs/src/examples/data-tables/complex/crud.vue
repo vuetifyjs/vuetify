@@ -215,7 +215,7 @@
 
       close () {
         this.dialog = false
-        this.$nextTick().then(() => {
+        this.$nextTick(() => {
           this.editedItem = Object.assign({}, this.defaultItem)
           this.editedIndex = -1
         })
