@@ -371,6 +371,7 @@ export default mixins<options &
 
       return this.$createElement('div', this.setTextColor(this.computedThumbColor, {
         ref,
+        key: ref,
         staticClass: 'v-slider__thumb-container',
         class: {
           'v-slider__thumb-container--active': isActive,
