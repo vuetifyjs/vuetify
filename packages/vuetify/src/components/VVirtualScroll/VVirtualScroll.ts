@@ -70,23 +70,23 @@ export default Measurable.extend({
       ).map(this.genChild)
     },
     genChild (item: any, index: number) {
-      const firstToRender = this.firstToRender + index
+      const indexToRender = this.firstToRender + index
       let height
       let left
       let top
       let width
       if (this.horizontal) {
-        left = convertToUnit(firstToRender * this.__itemSize)
+        left = convertToUnit(indexToRender * this.__itemSize)
         width = convertToUnit(this.__itemSize)
       } else {
         height = convertToUnit(this.__itemSize)
-        top = convertToUnit(firstToRender * this.__itemSize)
+        top = convertToUnit(indexToRender * this.__itemSize)
       }
 
       return this.$createElement('div', {
         staticClass: 'v-virtual-scroll__item',
         style: { height, left, top, width },
-        key: index,
+        key: indexToRender,
       }, getSlot(this, 'default', { item, index }))
     },
     getFirst (): number {
