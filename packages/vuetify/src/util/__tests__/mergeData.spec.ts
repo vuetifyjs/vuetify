@@ -34,8 +34,8 @@ describe('mergeStyles', () => {
   it('should merge styles', () => {
     const cUndefined = undefined
     const cEmptyString = ''
-    const cString = 'foo: bar; fizz-buzz: 10px'
-    const cObject = { foo: 'bar', fizzBuzz: '10px' }
+    const cString = 'foo: bar; fizz-buzz: 10px; background: var(--background)'
+    const cObject = { foo: 'bar', fizzBuzz: '10px', background: 'var(--background)' }
 
     expect(mergeStyles(cUndefined, cUndefined)).toBeUndefined()
     expect(mergeStyles(cUndefined, cObject)).toBe(cObject)
