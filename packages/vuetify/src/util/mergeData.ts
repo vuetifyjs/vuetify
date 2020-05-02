@@ -102,13 +102,7 @@ export default function mergeData (): VNodeData {
           mergeTarget[prop] = { ...arguments[i][prop], ...mergeTarget[prop] }
           break
         // Reassignment strategy (no merge)
-        case 'slot':
-        case 'key':
-        case 'ref':
-        case 'tag':
-        case 'show':
-        case 'keepAlive':
-        default:
+        default: // slot, key, ref, tag, show, keepAlive
           if (!mergeTarget[prop]) {
             mergeTarget[prop] = arguments[i][prop]
           }
