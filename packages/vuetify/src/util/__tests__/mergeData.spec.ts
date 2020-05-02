@@ -53,7 +53,7 @@ describe('mergeStyles', () => {
 })
 
 describe('mergeListeners', () => {
-  it('should merge styles', () => {
+  it('should merge listeners', () => {
     const listener1 = () => {}
     const listener2 = () => {}
 
