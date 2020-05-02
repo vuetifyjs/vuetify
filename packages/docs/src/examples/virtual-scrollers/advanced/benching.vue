@@ -22,7 +22,7 @@
         :bench="benched"
         :items="items"
         height="300"
-        item-height="64"
+        item-size="64"
       >
         <template v-slot="{ item }">
           <v-list-item :key="item">

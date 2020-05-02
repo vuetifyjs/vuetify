@@ -6,7 +6,7 @@
       <v-virtual-scroll
         :height="attrs.height"
         :items="items"
-        item-height="25"
+        item-size="25"
       >
         <template v-slot="{ item }">
           <div class="pa-4">
