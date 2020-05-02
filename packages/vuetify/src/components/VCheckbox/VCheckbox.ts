@@ -53,6 +53,9 @@ export default Selectable.extend({
         return this.offIcon
       }
     },
+    currentColor (): string {
+      return this.color || 'primary'
+    },
     // Do not return undefined if disabled,
     // according to spec, should still show
     // a color when disabled and active

@@ -100,6 +100,9 @@ export default baseMixins.extend<options>().extend({
 
       return this.radioGroup.name || `radio-${this.radioGroup._uid}`
     },
+    currentColor (): string {
+      return this.color || 'primary'
+    },
     rippleState (): string | undefined {
       return Selectable.options.computed.rippleState.call(this)
     },
