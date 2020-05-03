@@ -1,6 +1,6 @@
 {
   "heading": "# Accessibility",
-  "headingText": "Web accessibility **(a11y for short)**, is the inclusive practice of ensuring there are no barriers that prevent the interaction with, or access to, websites on the World Wide Web by people with disabilities. Vuetify components are built to provide keyboard interactions for all mouse-based actions and utilize HTML5 semantic elements where applicatable.",
+  "headingText": "Web accessibility **(a11y for short)**, is the inclusive practice of ensuring there are no barriers that prevent the interaction with, or access to, websites on the World Wide Web by people with disabilities. Vuetify components are built to provide keyboard interactions for all mouse-based actions and utilize HTML5 semantic elements where applicable.",
   "accessibilityHeader": "## Material Design Accessibility",
   "accessibilityText": "Google provides a detailed overview on how their components are created with a11y in mind. They also provide examples of how you can ensure that you are using best practices when creating applications (beyond what is supported by default with Vuetify). You can find more information about [implementing accessibility](https://material.io/design/usability/accessibility.html) on the specification site.",
   "activatorHeader": "## Activator slots",
