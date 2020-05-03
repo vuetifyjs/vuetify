@@ -4,6 +4,9 @@ import './VVirtualScroll.sass'
 // Mixins
 import Measurable from '../../mixins/measurable'
 
+// Directives
+import Scroll from '../../directives/scroll'
+
 // Helpers
 import {
   convertToUnit,
@@ -15,6 +18,8 @@ import { VNode } from 'vue'
 
 export default Measurable.extend({
   name: 'v-virtual-scroll',
+
+  directives: { Scroll },
 
   props: {
     bench: {
@@ -53,13 +58,8 @@ export default Measurable.extend({
     },
   },
 
-  mounted () {
+  created () {
     this.last = this.getLast(0)
-    this.$el.addEventListener('scroll', this.onScroll, false)
-  },
-
-  beforeDestroy () {
-    this.$el.removeEventListener('scroll', this.onScroll, false)
   },
 
   methods: {
@@ -128,6 +128,11 @@ export default Measurable.extend({
     return h('div', {
       staticClass: `v-virtual-scroll v-virtual-scroll--${this.horizontal ? 'horizontal' : 'vertical'}`,
       style: this.measurableStyles,
+      directives: [{
+        name: 'scroll',
+        modifiers: { self: true },
+        value: this.onScroll,
+      }],
     }, [content])
   },
 })
