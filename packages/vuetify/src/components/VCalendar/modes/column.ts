@@ -1,4 +1,4 @@
-import { CalendarEventOverlapMode } from 'types'
+import { CalendarEventOverlapMode } from 'vuetify/types'
 import { getOverlapGroupHandler } from './common'
 
 const FULL_WIDTH = 100

@@ -11,7 +11,7 @@ import {
   DataGroupFunction,
   DataSearchFunction,
   ItemGroup,
-} from 'types'
+} from 'vuetify/types'
 import { PropValidator, PropType } from 'vue/types/options'
 
 export default Vue.extend({

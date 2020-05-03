@@ -11,7 +11,7 @@ import {
   DataTableCompareFunction,
   DataItemsPerPageOption,
   ItemGroup,
-} from 'types'
+} from 'vuetify/types'
 import { PropValidator } from 'vue/types/options'
 
 // Components
