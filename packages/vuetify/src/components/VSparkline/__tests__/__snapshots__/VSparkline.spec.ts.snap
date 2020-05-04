@@ -47,6 +47,62 @@ exports[`VSparkline.ts should position labels correctly 1`] = `
 </svg>
 `;
 
+exports[`VSparkline.ts should render bar component with all values 0 1`] = `
+<svg display="block"
+     viewbox="0 0 300 75"
+>
+  <defs>
+    <linearGradient id="39"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="currentColor"
+      >
+      </stop>
+    </linearGradient>
+  </defs>
+  <clipPath id="sparkline-bar-39-clip">
+    <rect x="48"
+          y="75"
+          width="4"
+          height="0"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="148"
+          y="75"
+          width="4"
+          height="0"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="248"
+          y="75"
+          width="4"
+          height="0"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+  </clipPath>
+  <g clip-path="url(#sparkline-bar-39-clip)"
+     fill="url(#39)"
+  >
+    <rect x="0"
+          y="0"
+          width="300"
+          height="75"
+    >
+    </rect>
+  </g>
+</svg>
+`;
+
 exports[`VSparkline.ts should render component and match a snapshot 1`] = `
 <svg display="block"
      stroke-width="4"
