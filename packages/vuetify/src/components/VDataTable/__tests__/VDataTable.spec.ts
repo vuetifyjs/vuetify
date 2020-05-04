@@ -868,7 +868,7 @@ describe('VDataTable.ts', () => {
         headers: testHeaders,
         items: testItems,
         itemsPerPage: 5,
-        itemClass: () => { return ['my-class', 'my-other-class'] },
+        itemClass: () => ['my-class', 'my-other-class'],
       },
     })
 
@@ -881,7 +881,7 @@ describe('VDataTable.ts', () => {
         headers: testHeaders,
         items: testItems,
         itemsPerPage: 5,
-        itemClass: () => { return 'my-unique-class' },
+        itemClass: () => 'my-unique-class',
       },
     })
 
@@ -894,10 +894,10 @@ describe('VDataTable.ts', () => {
         headers: testHeaders,
         items: testItems,
         itemsPerPage: 5,
-        itemClass: (item: Object) => {
-          return { 'first-class': item.fat < 10,
-            'second-class': item.protein > 4.0 }
-        },
+        itemClass: (item: Object) => ({
+          'first-class': item.fat < 10,
+          'second-class': item.protein > 4.0,
+        }),
       },
     })
 
