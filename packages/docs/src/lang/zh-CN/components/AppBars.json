@@ -2,6 +2,11 @@
   "heading": "# 应用栏",
   "headingText": "`v-app-bar` 组件对于任何图形用户界面 (GUI) 都是至关重要的，因为它通常是网站导航的主要来源。app-bar 和 [v-navigation-drawer](/components/navigation-drawers) 结合在一起为应用程序提供站点导航。",
   "usageText": "`v-app-bar` 组件用于应用程序范围内的操作和信息。",
+  "functional": {
+    "desc": [
+      "`v-app-bar-nav-icon`：专门为 [v-toolbar](/components/toolbars) 和 `v-app-bar` 创建的图标按钮组件。通常作为汉堡包菜单出现在工具栏的左侧，它通常用于控制导航抽屉的状态。`default` 插槽可以用来定制这个组件的图标和功能。"
+    ]
+  },
   "examples": {
     "dense": {
       "heading": "### 密集",
@@ -22,6 +27,10 @@
     "hide": {
       "heading": "### 滚动时隐藏",
       "desc": "`v-app-bar` 可以在滚动中隐藏。为此使用 `hide-on-scroll` 属性。"
+    },
+    "app-bar-nav": {
+      "heading": "### 切换导航抽屉",
+      "desc": "使用功能组件 `v-app-bar-nav-icon` 可以切换其他组件的状态，比如 [v-navigation-drawer](/components/navigation-drawer)。"
     },
     "scroll-threshold": {
       "heading": "### 滚动阈值",

@@ -26,5 +26,6 @@
   "return": "返回",
   "example": "示例",
   "signature": "签名",
-  "value": "值"
+  "value": "值",
+  "variableApi": "## Variable API"
 }

@@ -61,6 +61,10 @@
       "heading": "### 提示文本",
       "desc": "在文本框组件使用 `hint` 来设置将提示的文本添加到文本字段下。使用 `persistent-hint` 保持提示文本在文本字段未被聚焦时保持可见性。"
     },
+    "hide-details": {
+      "heading": "### 自动隐藏详细信息",
+      "desc": "当 `hide-details` 设置为 `auto` 时，只有在有消息（提示、错误消息、计数器值等）要显示时，才会显示消息。"
+    },
     "prefixes-and-suffixes": {
       "heading": "### 前缀和后缀",
       "desc": " `prefix` 和 `suffix` 属性允许你在文本字段旁添加一段不可修改的文本。"
@@ -128,6 +132,7 @@
     "click:append-outer": "单击附加的外部图标时发出",
     "click:clear": "单击可清除图标时发出",
     "click:prepend-inner": "单击前置的内部图标时发出",
-    "focus": "组件聚焦时发出"
+    "focus": "组件聚焦时发出",
+    "keydown": "按下 **任何** 键时发送"
   }
 }

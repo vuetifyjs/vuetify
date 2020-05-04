@@ -15,7 +15,7 @@
     },
     "mini": {
       "heading": "### 迷你",
-      "desc": "当使用 **mini-variant** 属性时，抽屉会缩小（默认为 80px），并将除第一个元素之外的所有内容隐藏在 `v-list` 内部。 在此示例中，我们使用 **.sync** ，该修饰符允许我们以编程方式绑定抽屉的 展开/收缩。"
+      "desc": "当使用 **mini-variant** prop 时，抽屉会缩小（默认 56px），并隐藏 `v-list` 中除了第一个元素之外的所有内容。在这个例子中，我们使用了 **.sync** 修改器，它允许我们以程序化的方式绑定抽屉的扩展/收缩。"
     },
     "temporary": {
       "heading": "### 临时的",
@@ -52,6 +52,7 @@
     "fixed": "Mixins.Positionable.props.fixed",
     "floating": "浮动抽屉没有可见的容器（没有右边框）",
     "height": "设置导航抽屉高度",
+    "mobileBreakPoint": "为组件设置指定的移动断点。这将为移动设备应用替代样式，如 `temporary` prop，或在满足断点值时激活 `bottom` prop。将值设置为 `0` 将禁用此功能。",
     "miniVariantWidth": "指定`mini`属性开期时指定的宽度",
     "miniVariant": "凝结导航抽屉宽度，也接受**.sync**修饰符。这样，抽屉在点击时会重新打开",
     "permanent": "不管屏幕尺寸如何，抽屉都可以看到",

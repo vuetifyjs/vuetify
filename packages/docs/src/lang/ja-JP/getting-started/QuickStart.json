@@ -28,6 +28,7 @@
   "cdnText": "Vue CLIのテンプレートを使わずにVuetify.jsを試すには、下記のコードを`index.html`に貼り付けてください。最新のVueとVuetifyを使って、コンポーネントを試すことができます。codepenの[Vuetify starter](https://template.vuetifyjs.com)を使うこともできます。おすすめはされていませんが、もし本番環境でCDNパッケージを利用する場合は、アセットのバージョンを指定するようにしましょう。詳しいやり方は[jsdelivr](https://www.jsdelivr.com/)を参照してください。",
   "cdnAlert": "アプリケーションを正しく動作させるには、アプリケーションを `v-app` コンポーネントでラップする必要があります。詳細については、 [Application](/components/application) コンポーネントページを参照してください。",
   "electronHeader": "## Electronでの利用",
+  "electronText": "Vuetifyを **Electron** で使用するには、Vue CLIで[electron-builder](https://github.com/nklayman/vue-cli-plugin-electron-builder) プラグインを追加します。",
   "pwaHeader": "## PWAでの利用",
   "pwaText": "Vue CLI で新しいアプリを作成する場合は、 `vue create my-app`を実行した後、最初のプロンプトで **Progressive Web App (PWA) Support** を選択するオプションがあります。このパッケージは、次のコマンドを入力して、既存の Vue CLI プロジェクトにインストールすることもできます。",
   "cordovaHeader": "## Cordovaでの利用",

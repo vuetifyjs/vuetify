@@ -37,6 +37,7 @@
     "showArrows": "总是显示分页箭头"
   },
   "events": {
+    "change": "当组件值被用户交互改变时发出。",
     "click:location": "在幻灯片组内选择幻灯片项时发出"
   },
   "slots": {

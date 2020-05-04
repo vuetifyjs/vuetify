@@ -38,6 +38,98 @@
     {
       "q": "### 在 codepen 上是否有带有路由的模板",
       "a": "有，[Vuetify Codepen Router Template](https://codepen.io/johnjleider/pen/PMZvpr)。"
+    },
+    {
+      "q": "### 我如何扩展 Vuetify 组件",
+      "a": "通过导入 Vuetify 组件，并使用 vue 中的 `extends` 选项，就可以很容易地进行扩展。[Codepen 示例](https://codepen.io/whoistobias/pen/yLNgjwy)",
+      "s": "js_extend_component"
+    },
+    {
+      "q": "### 我的应用程序看起来不正常",
+      "a": "Vuetify 需要使用 `v-app` 组件。它应该包裹着你的整个应用程序，是包括主题在内的大部分框架功能的中心点。请确保你在 [Application](/components/application) 页面中使用了正确的标记方式。"
+    },
+    {
+      "q": "### 菜单/对话框/侧边导航没有正常打开。",
+      "a": "请检查你的组件在 `v-app` 在元素之中。如果你激活的元素未放入 **activator** 插槽里，请确保停止单击事件的传播。这些组件使用 **v-outside-click** 指令并且会立即关闭。"
+    },
+    {
+      "q": "### 即使我的内容没有垂直溢出，但是滚动条也会显示。",
+      "a": "Vuetify 使用 [ress reset](https://github.com/filipelinhares/ress) 来重置滚动条在不同浏览器中的默认行为。我们对这个选择进行了多次讨论。使用它有利有弊，目前社区投票的结果是保留使用它。如果你希望禁用此功能，请在你的样式文件中添加 `html { overflow-y: auto }`。"
+    },
+    {
+      "q": "### 如何垂直居中",
+      "a": "将 **fill-height** prop 应用在 `v-container`。这个助手类只会添加 **height: 100%**，但是对于 container 来说，它会寻找子元素 `v-layout` 并且按照所需的类来垂直居中你的内容。"
+    },
+    {
+      "q": "### 我访问 _/_ 和 _/home_ page 都会出现 active 样式",
+      "a": "为指向路由的绝对链接 /. 添加 **exact**。更多信息请查阅官方路由 [文档](https://router.vuejs.org/en/api/router-link.html)。"
+    },
+    {
+      "q": "### 我的页面在手机中不是响应式的",
+      "a": "请检查在 index.html 中 `<head>` 部分拥有正确的 meta 标记。",
+      "s": "html_mobile_viewport"
+    },
+    {
+      "q": "### 我应该怎么使用 Font Awesome, Material Design Icons or Material Icons?",
+      "a": "请参阅我们的 [icon guide](/customization/icons)。"
+    },
+    {
+      "q": "### 我的对话框中点击按钮后立即关闭",
+      "a": "例如，在 `v-menu` 和 `v-dialog` 未使用 **activator** 插槽时，你必须使用点击事件来手动停止 _propagation_。非常简单的，添加 _.stop_ 来修改点击事件。",
+      "s": "html_stop_click_propagation"
+    },
+    {
+      "q": "### Relative 图像在 `v-card` , `v-img` 和其他自定义 vuetify 组件中无法正常工作",
+      "a": "Vue loader 会自动地把相对路径转换为 require 函数。然而在定制组件中 Vue loader 不会做这样的处理。您可以通过显式使用 require 函数来避免这个问题。如果您正在使用 Vuetify 为 Vue CLI 提供的插件，您可以编辑项目中的 [vue.config.js](https://cli.vuejs.org/config/#vue-config-js) 来修改 [vue-loader](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader) 的配置项。",
+      "s": "html_img_require"
+    },
+    {
+      "q": "### 我应该如何升级到最新版本",
+      "a": "所有需要的更改都在我们发布的 **升级指南** 中注明。",
+      "a2": [
+        "[v2.0.0](https://github.com/vuetifyjs/vuetify/releases/tag/v2.0.0)",
+        "[v1.5.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0)",
+        "[v1.4.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.4.0)",
+        "[v1.3.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.3.0)",
+        "[v1.2.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.2.0)",
+        "[v1.1.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.1.0)",
+        "[v1.0.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.0.0)",
+        "[v0.17.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.17.0)",
+        "[v0.16.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.16.0)",
+        "[v0.15.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.15.0)",
+        "[v0.14.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.14.0)",
+        "[v0.13.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.13.0)",
+        "[v0.12.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.12.0)"
+      ]
+    },
+    {
+      "q": "### 如何报告错误或请求一个功能",
+      "a": "为了确保提供所有所需的信息，我们已经创建了一个 [Issue Generator](https://issues.vuetifyjs.com) 帮助您实现这个过程。任何不使用生成器创建的问题将自动关闭，所以请使用它。"
+    },
+    {
+      "q": "### vuetify-loader 没有加载所有组件",
+      "a": "Vuetify-loader 在 _dynamic_ 组件中有局限性。请查阅 [limitations](/customization/a-la-carte#limitations) 获取更多信息。"
+    },
+    {
+      "q": "### 1.5 版本将被支持多久？",
+      "a": "到 2020 年 7 月，可以在 [Long-term Support page](/introduction/long-term-support) 上参阅更多信息。"
+    },
+    {
+      "q": "### 我在哪里能看到 v1.5 的文档？",
+      "a": "[https://v15.vuetifyjs.com](https://v15.vuetifyjs.com)"
+    },
+    {
+      "q": "### [Vue warn]: Unknown custom element: <v-app>",
+      "a": "请检查 **package.json** 中使用的是最新版本的 [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugin-vuetify) 和 [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader)"
+    },
+    {
+      "q": "### SCRIPT5022: Expected identifier, string or number",
+      "a": "为了支持 vue-cli-3 中的 **modern mode**，`vuetify/lib` 没有被转译。你必须告诉 vue-cli 转译 `vuetify` 包。这在安装 Vuetify cli 插件时就自动配置了。如果你使用的是老版本，只需要简单的将 'vuetify' 添加到 `vue.config.js` 中的 **transpileDependencies** 数组里面。"
+    },
+    {
+      "q": "### 添加 typescript 时 - Error: Could not find a declaration file for module 'vuetify/lib'",
+      "a": "在您的 tsconfig 文件中添加以下内容：",
+      "s": "json_tsconfig_types"
     }
   ]
 }

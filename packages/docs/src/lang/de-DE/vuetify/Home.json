@@ -1,5 +1,5 @@
 {
-  "becomeSponsor": "Unterstütze Vuetify",
+  "callout": "# Material Design<br>Komponenten-Framework",
   "text": "Vuetify ist eine Vue UI Bibliothek mit handgefertigten Material-Komponenten. Keine Designfähigkeiten erforderlich – alles, was du brauchst, um erstaunliche Anwendungen zu erstellen, steht dir zur Verfügung.",
   "features": {
     "community": {
