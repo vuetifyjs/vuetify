@@ -1,6 +1,5 @@
 {
   "heading": "# Accessibilité",
-  "headingText": "L'accessibilité Web **(a11y abrégé)**, est la pratique inclusive de s'assurer qu'il n'y a pas d'obstacles qui empêchent l'interaction ou l'accès avec les sites Web du monde entier par les personnes handicapées. Les composants Vuetify sont construits de manière à fournir une interaction avec le clavier pour chaque interaction à la souris et utilise les éléments sémantiques HTML5 lorsqu'ils sont applicables.",
   "accessibilityHeader": "## Accessibilité Material Design",
   "accessibilityText": "Google fournit un aperçu détaillé de la façon dont leurs composants sont créés avec a11y à l'esprit. Ils fournissent également des exemples de la façon dont vous pouvez vous assurer que vous utilisez les meilleures pratiques lors de la création d'applications (au-delà de ce qui est supporté par défaut par Vuetify). Vous pouvez trouver plus d'informations sur [implémenter l'accessibilité](https://material.io/design/usability/accessibilité.html) sur le site de spécification.",
   "activatorHeader": "## Emplacements d'activation",

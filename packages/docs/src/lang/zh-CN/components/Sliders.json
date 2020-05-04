@@ -5,7 +5,7 @@
   "examples": {
     "thumb": {
       "heading": "### 拇指",
-      "desc": "您可以在滑动时或始终显示 `thumb-label`。\n它可以通过设置 `thumb-color` 自定义颜色，并使用 `thumb-size` 自定义大小。\n对于 `always-dirty` ，它的颜色永远不会改变，即使在 `min` 值上也是如此。"
+      "desc": "您可以在滑动或总是显示“缩略图标签”。它可以通过设置“缩略图-颜色”和自定义大小，设置“缩略图-大小”来显示自定义颜色。 使用 `always-dirty` 时，即使在 `min` 值上，其颜色永远不会改变。"
     },
     "custom-thumb": {
       "heading": "### 自定义范围滑块",

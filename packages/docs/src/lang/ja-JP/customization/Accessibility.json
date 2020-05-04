@@ -1,6 +1,5 @@
 {
   "heading": "# アクセシビリティ （ユーザ補助）",
-  "headingText": "Web アクセシビリティ （略して a11y） は、障碍を持つユーザーがワールドワイドウェブ上の Web サイトでの操作やアクセスを妨げる障壁がないことを確認する包括的なプラクティスです。Vuetify コンポーネントは、すべてのマウスベースのアクションにキーボード操作を提供し、適用可能な HTML5 セマンティック要素を利用するように構築されています。",
   "accessibilityHeader": "## Material Design Accessibility",
   "accessibilityText": "Google が a11y を念頭に置いてコンポーネントを作成する方法について詳しく説明しています。また、アプリケーションの作成時にベスト プラクティスを使用していることを確認する方法の例も示します（Vuetify でデフォルトでサポートされている範囲を超えています）。アクセシビリティの実装の詳細については、[implementing accessibility](https://material.io/design/usability/accessibility.html) を参照してください。",
   "activatorText1": "Vuetifyは `v-menu` や `v-dialog`などの多くのコンポーネントにアクティベータスロットを使用します。場合によっては、これらの activator 要素は、対応するコンテンツに関連付ける特定の a11y 属性を持つ必要があります。これを実現するために、スロットスコープを介して必要なa11yオプションを渡します。",

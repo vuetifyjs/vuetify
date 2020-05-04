@@ -25,6 +25,7 @@
     }
   },
   "props": {
+    "app": "当在 `v-content` 中使用时，将根据应用程序 `v-toolbar` 和 `v-system-bar` 来计算顶部位置。",
     "icon": "指定特定的图标。",
     "iconColor": "指定特定的图标颜色。",
     "singleLine": "强制横幅变为一行。",

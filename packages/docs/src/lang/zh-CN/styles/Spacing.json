@@ -54,6 +54,7 @@
   "horizontalText": "对于具有指定宽度的块元素，可以使用`.mx-auto`来使它的内容水平居中",
   "breakpointHeader": "## 和断点一起",
   "breakpointText": "Vuetify 有一个使用 Flexbox 构建的 12 格栅格系统。空格用于创建应用程序内容中的特定布局。 它由 5 个用于针对特定屏幕大小或方向的介质断点组成：**xs**, **sm**, **md**, **lg** 和 **xl**。 默认分辨率定义在 *Viewport Breakpoints* 表中，可以通过 [breakpoint service config](/customization/breakpoints) 进行修改。",
+  "breakpointHowText": "辅助类在给定的断点处应用 **margin** 或 **padding**。这些类可以使用以下格式应用。`{property}{direction}-{breakpoint}-{size}`。这并不适用于 **xs**，因为它是推断出来的；例如，`ma-xs-2` 等于 `ma-2`。",
   "examples": {
     "horizontal": {
       "heading": "### 水平布局",

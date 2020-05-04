@@ -2,6 +2,14 @@
   "heading": "# 卡片",
   "headingText": "`v-card` 组件是一种多功能组件，可用于从面板到静态图像的任何东西。\n **card** 组件有许多助手组件，以使标记尽可能简单。没有列出选项的组件使用 **Vue的** 功能组件选项来加快渲染速度，并充当标记糖来简化构建。",
   "usageText": "卡片有 4 个基本组件：`v-card-title`, `v-card-subtitle`, `v-card-text` 和 `v-card-actions`。",
+  "functional": {
+    "desc": [
+      "`v-card-actions`：用于放置卡片的 **动作** 的容器，例如 [v-btn](/components/buttons) 或 [v-menu](/components/menus)。也为按钮应用了 _special margin_ 以使它们与其他卡的内容区域保持一致。 ",
+      "`v-card-subtitle`：为卡片字幕提供了一个默认的 **字体大小** 和 **间距**，字体大小可以用 [typography classes](/styles/typography) 覆盖。",
+      "`v-card-text`：主要用于卡片中的 **文字内容**。对文字进行填充，将其字体大小减少到 .875rem。",
+      "`v-card-title`：为卡片标题提供一个默认的 **字体大小** 和 **间距**。字体大小可以用 [typography classes](/styles/typography) 覆盖。"
+    ]
+  },
   "examples": {
     "info-card": {
       "heading": "### 信息卡片",

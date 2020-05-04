@@ -1,17 +1,1 @@
-{
-  "heading": "# Vuetifyの開発をサポート",
-  "headingText": "Vuetifyは、[MITライセンス](https://opensource.org/licenses/MIT)に基づく、オープンソースプロジェクトです。現在もこれからも無料で使うことができます。コアのフレームワークと追加のパッケージを維持するための時間や献身は相当なものになります。一時的な寄付、Patreonでの支援、アフィリエイト、そしてスペシャルスポンサーの寄付によりマテリアルデザイン仕様の実装完了した後も、継続的な追加機能の開発を可能にします。次のいずれかの方法で支援者になることで、オープンソースプロジェクトのVuetifyを支援することができます：",
-  "affiliatesHeader": "### Affiliates",
-  "openCollective": "### Open Collective",
-  "openCollectiveBlurb": "Open Collectiveでの支援は、コア開発チームを直接サポートする毎月の寄付になります。",
-  "sponsors": "### スポンサー",
-  "github": "### Github",
-  "githubBlurb": "プロジェクトのスポンサーは、毎月の寄付を行って、Vuetify の作者 John Leider を直接サポートしています。",
-  "serviceSponsorsHeader": "## サービススポンサー",
-  "tidelift": "### Tidelift",
-  "tideliftBlurb": "Vuetify に対するエンタープライズのサポートは、Tidelift Subscription の一部として受けられます。",
-  "oneTime": "### 一時的な寄付",
-  "oneTimeBlurb": "Vuetifyは次の方法による、一時的な寄付に感謝します：",
-  "questionHeader": "## 追加の質問はありますか？",
-  "questionButton": "お問い合わせ"
-}
+{}

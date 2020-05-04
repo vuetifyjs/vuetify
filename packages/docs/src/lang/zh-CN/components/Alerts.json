@@ -8,7 +8,8 @@
       "desc": "**border** 属性支持将一个简单的边框添加到提示框的 4 个边。这可以和 **color**, **dark**, **type** 这些属性一起使用来为提示框提供强调作用。"
     },
     "colored-border": {
-      "heading": "### 彩色边框"
+      "heading": "### 彩色边框",
+      "desc": "**colored-border** prop 会移除警报背景，以突出 **border** prop 。如果设置了 **type**，它将使用类型的默认颜色。如果没有设置 **color** 或 **type**，颜色将默认为所应用的主题的反色（黑色代表浅色，白色/灰色代表深色）。"
     },
     "dense": {
       "heading": "### 密集",
@@ -43,7 +44,8 @@
       "desc": "**type** 属性提供 4 种默认的 `v-alert` 样式：**success**, **info**, **warning**, 和 **error**。每个样式都提供默认图标和颜色。默认颜色可通过 [Vuetify's theme](/customization/theme) 进行全局配置。"
     },
     "twitter": {
-      "heading": "### Twitter 提醒"
+      "heading": "### Twitter 提醒",
+      "desc": "通过将 **color**、**dismissible**、**border**、**elevation**、**icon** 和 **colored-border** props 组合在一起，你可以创建时尚的自定义提醒，比如这个 twitter 通知。"
     }
   },
   "accessibility": {

@@ -1,3 +1,49 @@
 {
-  "heading": "# Karten"
+  "heading": "# Karten",
+  "headingText": "Die `v-card`-Komponente ist eine vielseitige Komponente, die für alles von einem Panel bis hin zu einem statischen Bild verwendet werden kann. Die **card**-Komponente verfügt über zahlreiche Hilfskomponenten, um das Markup so einfach wie möglich zu gestalten. Komponenten, die keine aufgelisteten Optionen besitzen, verwenden **Vue**-Funktionskomponenten zur schnelleren Darstellung und vereinfachen die Entwicklung durch einfache Auszeichnungen.",
+  "usageText": "Eine Karte besitzt 4 grundlegende Komponenten: `v-card-title`, `v-card-subtitle`, `v-card-text` und `v-card-actions`.",
+  "functional": {
+    "desc": [
+      "`v-card-title`: Stellt eine Standard **Schriftgröße** (font-size) und **Padding** für Kartentitel bereit. Schriftgröße kann mit [Typographieklassen](/styles/typography) überschrieben werden."
+    ]
+  },
+  "examples": {
+    "info-card": {
+      "heading": "### Informationskarte"
+    },
+    "media-with-text": {
+      "heading": "### Medien mit Text"
+    },
+    "outlined": {
+      "heading": "### Einfach umrandete Karten",
+      "desc": "Eine Karte mit **outlined** besitzt keine Höhe und nur einen dünnen Rand."
+    },
+    "horizontal": {
+      "heading": "### Horizontale Karten"
+    },
+    "grids": {
+      "heading": "### Grids",
+      "desc": "Mit Grids können Sie schöne Layouts erstellen."
+    },
+    "custom-actions": {
+      "heading": "### Benutzerdefinierte Aktionen"
+    },
+    "twitter-card": {
+      "heading": "### Twitter-Karte"
+    },
+    "loading": {
+      "heading": "### Ladende Karte"
+    },
+    "weather": {
+      "heading": "### Wetter-Karte"
+    }
+  },
+  "props": {
+    "alt": "Components.Images.props.alt",
+    "aspectRatio": "Components.Images.props.aspectRatio",
+    "flat": "Entfernt die Höhe der Karte.",
+    "outlined": "Entfernt den Höhen-Schatten und verwendet einen dünnen Rand.",
+    "raised": "Verwendet eine höhere Standardhöhe (8dp). Weitere Informationen sind zu finden unter [elevation page](/styles/elevation).",
+    "shaped": "Erstellt einen großen runden Rand oben links und unten rechts auf die Karte."
+  }
 }

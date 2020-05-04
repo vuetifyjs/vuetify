@@ -3,7 +3,10 @@
   "headingText": "单元测试是开发应用程序的一个重要（有时被忽略）部分。它们有助于我们的开发流程，确保我们项目的最关键部分不受开发过程中意外错误或疏忽的影响。因此，Vue有自己的测试程序 [vue-test-utils](https://vue-test-utils.vuejs.org/)。它提供了与 Vue 组件交互的功能，并与许多流行的测试框架一起使用。",
   "alert": "Vuetify 使用 Typescript，目前必须导入和继承 Vue 对象。在某些应用程序中，这可能会生成一个 **$attrs** 或 **$listeners** 只读警告。目前有一个正在进行的 [Github 讨论](https://github.com/vuetifyjs/vuetify/issues/4068)，为各种测试用例提供潜在的解决方案。如果你还有额外的问题，请加入我们的 [在线社区](https://community.vuetifyjs.com)。",
   "runnerHeader": "## 测试环境设置",
+  "runnerText1": "关于如何使用 Vue CLI 设置测试运行程序的信息可以在 [官方文档](https://vue-test-utils.vuejs.org/guides/getting-started.html) 中找到。一目了然，Vue CLI 为以下测试运行程序提供了入门资源库。",
   "runnerText2": [
+    "[Jest](https://cli.vuejs.org/core-plugins/unit-jest.html)",
+    "[Mocha](https://cli.vuejs.org/core-plugins/unit-mocha.html)",
     "[tape](https://github.com/eddyerburgh/vue-test-utils-tape-example)",
     "[AVA](https://github.com/eddyerburgh/vue-test-utils-ava-example)"
   ],
