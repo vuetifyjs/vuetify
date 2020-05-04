@@ -267,7 +267,7 @@ describe('VSparkline.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render bar component with all values 0', async () => {
+  it('should render bar component with all values 0', () => {
     const wrapper = mountFunction({
       propsData: {
         value: [0, 0, 0],
