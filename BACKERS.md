@@ -66,7 +66,7 @@ You can join them in supporting Vuetify.js by [sponsoring through Github](https:
 - ikedaosushi
 - mantis
 - flipvh
-- hueachilles
+- [quickytools](https://www.quickytools.com) <!-- hueachilles -->
 - J-Sek
 - erichelgeson
 - dylancopeland

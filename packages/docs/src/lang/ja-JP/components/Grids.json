@@ -17,6 +17,24 @@
     "playground": {
       "desc": "簡単ですが以下のplaygroundでレイアウトに関するpropsを試すことができます。"
     },
+    "auto": {
+      "heading": "### カラムの自動サイズ変更",
+      "desc": "カラムは自動的に親コンテナ内で同じ量のスペースを占有します。これは **cols** propを使用して変更することができます。また、**sm**, **md**, **lg**, **xl** propを使用して、ビューポートのサイズが異なる場合のカラムのサイズを定義することもできます。"
+    },
+    "equal": {
+      "heading": "### 等幅のカラム",
+      "desc": "同じ幅のカラムを複数行に分割することができます。古いブラウザのバージョンでは回避策はあるものの、[Safari flexboxのバグ](https://github.com/philipwalton/flexbugs#11-min-and-max-size-declarations-are-ignored-when-wrapping-flex-items) がありました。これは最新版であれば必要ないはずです。"
+    },
+    "one-column-width": {
+      "heading": "### 1列の幅",
+      "desc": "自動レイアウトを使用する場合、1つの列の幅のみを定義でき、その前後に自動的にサイズを変更する兄弟要素が含まれます。"
+    },
+    "variable-content": {
+      "desc": "カラムのブレークポイント幅の割り当ては、コンテンツの幅に基づいてサイズ変更するように設定できます。"
+    },
+    "no-gutters": {
+      "desc": "**no-gutters** プロパティを使用して、直接の`v-col`の子から`v-row`とパディングから負のマージンを削除することができます。"
+    },
     "order": {
       "desc": "グリッドの順序を制御できます。 Offsetと同様に、サイズごとに異なる順序を設定できます。あらゆるアプリケーションに対応できるレイアウトを設計します。"
     },
@@ -24,6 +42,7 @@
       "desc": "Offsetは、まだ表示されていない可能性のある要素を補正したり、コンテンツの位置を制御したりするのに役立ちます。 ブレークポイントと同様に、利用可能なサイズにオフセットを設定できます。 これにより、アプリケーションのレイアウトを必要に合わせて微調整できます。"
     },
     "nested-grid": {
+      "heading": "### ネストしたグリッド",
       "desc": "非常にカスタマイズされたレイアウトを実現するために、他のフレームワークと同様にグリッドをネストすることができます。"
     },
     "unique-layouts": {
@@ -33,7 +52,23 @@
       "desc": "`v-spacer`コンポーネントは利用可能なスペースを埋めるときや2つのコンポーネントの間にスペースを作りたいときに便利です。"
     },
     "tags": {
-      "desc": "`section`や` li`要素のように、レイアウトアイテムを特定のタグとして指定したいことがあるでしょう。"
+      "heading": "### HTML タグ",
+      "desc": "`section`や`li`要素のように、レイアウトアイテムを特定のタグとして指定したいことがあるでしょう。"
+    }
+  },
+  "props": {
+    "tag": "Components.Sheets.props.tag",
+    "v-col": {
+      "alignSelf": "[align-items](https://developer.mozilla.org/ja/docs/Web/CSS/align-items) cssプロパティを適用します。使用可能なオプションは、 **start** 、 **center** 、 **end** 、 **auto** 、 **baseline** および **stretch** です。",
+      "cols": "コンポーネントが拡張するカラムのデフォルト数を設定します。利用可能なオプションは **1 -> 12** および **auto** です。",
+      "offset": "カラムの既定のオフセットを設定します。",
+      "order": "カラムのデフォルト [order](https://developer.mozilla.org/ja/docs/Web/CSS/order) を設定します。"
+    },
+    "v-row": {
+      "align": "[align-items](https://developer.mozilla.org/ja/docs/Web/CSS/align-items) cssプロパティを適用します。使用可能なオプションは、**start**、**center**、**end**、**baseline**および**stretch**です。",
+      "alignContent": "[align-content](https://developer.mozilla.org/ja/docs/Web/CSS/align-content) cssプロパティを適用します。利用可能なオプションは **start** 、 **center** 、 **end** 、 **space-between** 、 **space-around** および **stretch** です。",
+      "justify": "[justify-content](https://developer.mozilla.org/ja/docs/Web/CSS/justify-content) cssプロパティを適用します。使用可能なオプションは、 **start** 、 **center** 、 **end** 、 **space-between** および **space-around** です。",
+      "noGutters": "`v-col`間のガターを削除します。"
     }
   }
 }

@@ -40,6 +40,11 @@
       "a": "Yes. [Vuetify Codepen Router Template](https://codepen.io/johnjleider/pen/PMZvpr)."
     },
     {
+      "q": "### How do I extend Vuetify components",
+      "a": "Vuetify components are easily extendable by importing it and using the `extends` option in vue. [Codepen Example](https://codepen.io/whoistobias/pen/yLNgjwy)",
+      "s": "js_extend_component"
+    },
+    {
       "q": "### My application does not look correct",
       "a": "Vuetify requires the use of the `v-app` component. It should wrap your entire application and is the center point for much of the framework functionality including themes. Ensure that you are following the proper markup documented in the [Application](/components/application) page."
     },

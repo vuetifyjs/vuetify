@@ -1,10 +1,8 @@
 {
   "heading": "# 悬停",
   "headingText": "`v-hover` 组件为任何组件处理悬停状态提供了一个干净的接口。",
+  "usageText": "`v-hover` 组件是一个包装器，它只能包含一个子元素，并且可以在悬停时触发事件。 为了让 `v-hover` 正常工作，`value 属性应该设置为 `true`，或者包裹元素应该包含 `slot-scope=\"{ wrapper }\"。",
   "examples": {
-    "usage": {
-      "desc": "`v-hover` 组件是一个包装器，它只能包含一个子元素，并且可以在悬停时触发事件。 为了让 `v-hover` 正常工作，`value 属性应该设置为 `true`，或者包裹元素应该包含 `slot-scope=\"{ wrapper }\"。"
-    },
     "disabled": {
       "heading": "### 禁用",
       "desc": "`disabled` 属性支持禁用悬停功能。"

@@ -5,13 +5,14 @@
   "runnerHeader": "## Mise en place du lanceur de tests",
   "runnerText1": "Vous trouverez d'autres informations sur la façon de configurer un lancement de test avec Vue CLI sur la [documentation officielle](https://vue-test-utils.vuejs.org/guides/getting-started.html). En un coup d'oeil, Vue CLI a commencé des dépôts pour les lanceurs de test suivants :",
   "runnerText2": [
-    "[Jest](https://github.com/vuejs/vue-test-utils-jest-example)",
-    "[Mocha](https://github.com/vuejs/vue-test-utils-mocha-webpack-example)",
+    "[Jest](https://cli.vuejs.org/core-plugins/unit-jest.html)",
+    "[Mocha](https://cli.vuejs.org/core-plugins/unit-mocha.html)",
     "[tape](https://github.com/eddyerburgh/vue-test-utils-tape-example)",
     "[AVA](https://github.com/eddyerburgh/vue-test-utils-ava-example)"
   ],
   "setupHeading": "## Bootstrapping Vuetify",
   "setupText1": "Afin d'utiliser correctement Typescript, Vuetify étend l'objet Vue. Ceci a le potentiel de [cause problèmes](https://github.com/vuetifyjs/vuetify/issues/4068) comme indiqué dans l'alerte ci-dessus. Au lieu d'utiliser une [instance localVue](https://vue-test-utils.vuejs.org/api/options.html#localvue), nous devons plutôt installer Vuetify globalement dans le fichier de configuration des tests unitaires. Cela peut varier entre les coureurs de test. Assurez-vous de consulter la documentation appropriée sur les fichiers de configuration.",
+  "setupInfo1": "Si vous n'utilisez pas un fichier `setup.js`, vous devez ajouter `Vue.use(Vuetify)` dans la section utilitaires de votre test.",
   "specHeader": "## Tests de Spec",
   "specText1": "La création de tests unitaires dans Vuetify est similaire à **vuex** et **vue-router** en ce sens que vous utiliserez l'objet Vuetify dans une instance **localVue** et passerez une instance aux options de la fonction mount.",
   "specText2": "Créons un exemple de cas d'utilisation de test que nous pourrions trouver dans notre application.",

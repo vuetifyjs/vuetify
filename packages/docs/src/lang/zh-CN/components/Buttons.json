@@ -4,9 +4,8 @@
   "alert": "当使用 **dark** 属性时，`v-btn` 是唯一表现不同的组件。 通常，组件使用 **dark** 属性来表示它们具有深色背景，并且其文本必须为白色。 虽然这对`v-btn` 起作用，但由于禁用状态与白色背景混合，建议仅在按钮 **IS ON**为彩色背景时使用属性。 如果您需要白色文本，只需添加 **white--text** 类。",
   "usageText": "最简单的按钮包含大写文本、轻微的仰角、悬停效果和单击时的波纹效果。",
   "examples": {
-    "flat": {
-      "heading": "### 扁平",
-      "desc": "扁平按钮没有巷子箱子阴影，也没有背景。只有鼠标悬浮时才显示按钮的容器。"
+    "text": {
+      "heading": "### 文本"
     },
     "raised": {
       "heading": "### 凸起",
@@ -77,7 +76,7 @@
   },
   "events": {
     "v-btn-toggle": {
-      "change": "Components.Inputs.events.change"
+      "change": "当用户交互更改输入时发出"
     }
   },
   "slots": {

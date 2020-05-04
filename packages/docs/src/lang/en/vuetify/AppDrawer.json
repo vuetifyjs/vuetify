@@ -33,6 +33,7 @@
   "consulting": "Consulting",
   "content": "Content",
   "contributing": "Contributing",
+  "cssReset": "CSS Reset",
   "customization": "Customization",
   "dataIterators": "Data iterators",
   "dataTables": "Data tables",
@@ -46,6 +47,7 @@
   "elevation": "Elevation",
   "enterprise": "For Enterprise",
   "expansionPanels": "Expansion panels",
+  "guide": "Beginner's Guide",
   "fabs": "Buttons: Floating action buttons",
   "faq": "Frequently asked questions",
   "fileInputs": "File inputs",
@@ -96,6 +98,7 @@
   "rtl": "RTL (bidirectionality)",
   "sandbox": "Sandbox",
   "sass-variables": "SASS variables",
+  "security": "Security Disclosure",
   "services": "Services",
   "scroll": "Programmatic scrolling",
   "scrolling": "Scrolling",
@@ -130,6 +133,7 @@
   "transitions": "Transitions",
   "treeview": "Treeview",
   "typography": "Typography",
+  "virtualScroll": "Virtual scrollers",
   "whyVuetify": "Why Vuetify?",
   "windows": "Windows"
 }

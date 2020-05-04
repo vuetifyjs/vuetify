@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Lignes par page:',
     ariaLabel: {
-      sortDescending: ': Tri décroissant. Activer pour supprimer le tri.',
-      sortAscending: ': Tri croissant. Activer pour trier par ordre décroissant.',
-      sortNone: ': Non trié. Activer pour trier par ordre croissant.',
+      sortDescending: 'Tri décroissant.',
+      sortAscending: 'Tri croissant.',
+      sortNone: 'Non trié.',
+      activateNone: 'Activer pour supprimer le tri.',
+      activateDescending: 'Activer pour trier par ordre décroissant.',
+      activateAscending: 'Activer pour trier par ordre croissant.',
     },
     sortBy: 'Trier par',
   },
@@ -44,5 +47,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Navigation de pagination',
+      next: 'Page suivante',
+      previous: 'Page précédente',
+      page: 'Aller à la page {0}',
+      currentPage: 'Page actuelle, Page {0}',
+    },
   },
 }

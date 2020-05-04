@@ -1,0 +1,16 @@
+{
+  "examples": {
+    "icon": {
+      "heading": "### Icon"
+    },
+    "outlined": {
+      "heading": "### Umriss"
+    },
+    "closable": {
+      "uninverted": true
+    },
+    "in-selects": {
+      "uninverted": true
+    }
+  }
+}

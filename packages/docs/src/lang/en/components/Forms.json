@@ -19,7 +19,7 @@
     },
     "vee-validate": {
       "heading": "### Vee-validate",
-      "desc": "**vee-validate** is a template Based Validation Framework for Vue.js. [Documentation](https://baianat.github.io/vee-validate/)"
+      "desc": "**vee-validate** is a template Based Validation Framework for Vue.js. [Documentation](https://logaretm.github.io/vee-validate/)"
     }
   },
   "props": {

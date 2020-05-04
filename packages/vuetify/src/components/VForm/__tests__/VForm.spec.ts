@@ -13,6 +13,8 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
+import { wait } from '../../../../test'
+
 Vue.use(Vuetify)
 
 describe('VForm.ts', () => {
@@ -173,7 +175,7 @@ describe('VForm.ts', () => {
     expect(Object.keys(wrapper.vm.errorBag)).toHaveLength(1)
 
     wrapper.vm.reset()
-    await new Promise(resolve => setTimeout(resolve, 0))
+    await wait()
     expect(Object.keys(wrapper.vm.errorBag)).toHaveLength(0)
   })
 

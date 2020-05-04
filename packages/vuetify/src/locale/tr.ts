@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Sayfa başına satır:',
     ariaLabel: {
-      sortDescending: ': Z den A ya sıralı. Sıralamayı kaldırmak için etkinleştir.',
-      sortAscending: ': A dan Z ye sıralı. Z den A ya sıralamak için etkinleştir.',
-      sortNone: ': Sıralı değil. A dan Z ye sıralamak için etkinleştir.',
+      sortDescending: 'Z den A ya sıralı.',
+      sortAscending: 'A dan Z ye sıralı.',
+      sortNone: 'Sıralı değil. ',
+      activateNone: 'Sıralamayı kaldırmak için etkinleştir.',
+      activateDescending: 'Z den A ya sıralamak için etkinleştir.',
+      activateAscending: 'A dan Z ye sıralamak için etkinleştir.',
     },
     sortBy: 'Sırala',
   },
@@ -44,5 +47,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Sayfalandırma Navigasyonu',
+      next: 'Sonraki sayfa',
+      previous: 'Önceki sayfa',
+      page: 'Sayfaya git {0}',
+      currentPage: 'Geçerli Sayfa, Sayfa {0}',
+    },
   },
 }

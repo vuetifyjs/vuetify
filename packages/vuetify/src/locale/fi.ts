@@ -11,6 +11,9 @@ export default {
       sortDescending: ': Järjestetty laskevasti. Poista järjestäminen aktivoimalla.',
       sortAscending: ': Järjestetty nousevasti. Järjestä laskevasti aktivoimalla.',
       sortNone: ': Ei järjestetty. Järjestä nousevasti aktivoimalla.',
+      activateNone: 'Aktivoi lajittelun poistamiseksi.',
+      activateDescending: 'Aktivoi laskevien laskevien lajittelemiseksi.',
+      activateAscending: 'Aktivoi lajitella nouseva.',
     },
     sortBy: 'Järjestä',
   },
@@ -44,5 +47,14 @@ export default {
   timePicker: {
     am: 'ap.',
     pm: 'ip.',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Pagination Navigation',
+      next: 'Next page',
+      previous: 'Previous page',
+      page: 'Goto Page {0}',
+      currentPage: 'Current Page, Page {0}',
+    },
   },
 }

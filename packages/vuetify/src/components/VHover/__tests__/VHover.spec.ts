@@ -9,6 +9,7 @@ import {
   mount,
   Wrapper,
 } from '@vue/test-utils'
+import { wait } from '../../../../test'
 
 describe('VHover.ts', () => {
   let mountFunction: (options?: object) => Wrapper<Vue>
@@ -38,14 +39,14 @@ describe('VHover.ts', () => {
 
     div.trigger('mouseenter')
 
-    await new Promise(resolve => setTimeout(resolve, 0))
+    await wait()
 
     expect(div.element.classList.contains('fizzbuzz')).toBe(true)
 
     div.trigger('mouseleave')
 
     // Wait for runDelay
-    await new Promise(resolve => setTimeout(resolve, 200))
+    await wait(200)
 
     expect(div.element.classList.contains('fizzbuzz')).toBe(false)
   })
@@ -71,14 +72,14 @@ describe('VHover.ts', () => {
 
     div.trigger('mouseenter')
 
-    await new Promise(resolve => setTimeout(resolve, 0))
+    await wait()
 
     expect(div.classes('fizzbuzz')).toBe(true)
 
     div.trigger('mouseleave')
 
     // Wait for runDelay
-    await new Promise(resolve => setTimeout(resolve, 200))
+    await wait(200)
 
     expect(div.classes('fizzbuzz')).toBe(true)
   })

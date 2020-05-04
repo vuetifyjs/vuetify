@@ -1,0 +1,40 @@
+alert(value="info") headerAlert1
+layout-grid
+usage(value="usage")
+| usageText2
+| usageList
+| usageText3
+alert(value="info") usageAlert1
+api(:value=`[
+  'v-container',
+  'v-row',
+  'v-col',
+  'v-spacer'
+]`)
+playground(value="playground")
+examples(:value=`[
+  'simple/auto',
+  'simple/equal',
+  'simple/one-column-width',
+  'intermediate/variable-content',
+  'intermediate/grow-shrink',
+  'intermediate/row-column-breakpoint',
+  'intermediate/unique-layouts',
+  'simple/vertical-alignment',
+  'simple/horizontal-alignment',
+  'simple/no-gutters',
+  'intermediate/wrapping',
+  'advanced/order',
+  'advanced/order-first-last',
+  'advanced/offset',
+  'advanced/offset-breakpoint',
+  'intermediate/margin',
+  'advanced/nested-grid',
+  'simple/spacer'
+]`)
+
+up-next(:value=`[
+  'styles/flex',
+  'customization/breakpoints',
+  'styles/display'
+]`)

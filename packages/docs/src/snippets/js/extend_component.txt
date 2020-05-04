@@ -1,0 +1,16 @@
+import { VBtn } from 'vuetify/lib'
+
+const ActivateButton = {
+  extends: VBtn,
+  methods: {
+    genContent() {
+      return this.$createElement(
+        "div",
+        {
+          staticClass: "v-btn__contents "
+        },
+        ['Activate ', this.$slots.default]
+      );
+    }
+  }
+};

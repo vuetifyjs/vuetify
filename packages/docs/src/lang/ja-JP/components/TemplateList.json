@@ -1,3 +1,31 @@
 {
-  "close": "閉じる"
+  "close": "閉じる",
+  "webpack": {
+    "title": "Webpack"
+  },
+  "webpackSimple": {
+    "title": "Webpack Simple"
+  },
+  "webpackSSR": {
+    "title": "Webpack SSR"
+  },
+  "nuxt": {
+    "title": "NUXT"
+  },
+  "pwa": {
+    "title": "PWA",
+    "desc": "事前に構成されたPWA（プログレッシブWebアプリケーション）テンプレートを自由に使用できます。サービスワーカー、アプリケーションマニフェスト、90+/100 Lighthouseスコアでブートストラップされています。"
+  },
+  "electron": {
+    "title": "Electron",
+    "desc": "Vuetifyのデスクトップアプリケーションを作成するための公式Electronテンプレート。"
+  },
+  "aLaCarte": {
+    "title": "A La Carte",
+    "desc": "このテンプレートでは、使用するコンポーネントのみを選択する方法の例を示します。これは、未使用のコンポーネントを含むパッケージサイズを縮小する場合に便利です。"
+  },
+  "cordova": {
+    "title": "Cordova",
+    "desc": "このテンプレートは、Apache Cordovaを使用して、Web アプリをネイティブの Android アプリまたは iOS アプリに簡単に変換するのに役立ちます。"
+  }
 }

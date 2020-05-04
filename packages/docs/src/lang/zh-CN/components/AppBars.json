@@ -1,10 +1,8 @@
 {
   "heading": "# 应用栏",
   "headingText": "`v-app-bar` 组件对于任何图形用户界面 (GUI) 都是至关重要的，因为它通常是网站导航的主要来源。app-bar 和 [v-navigation-drawer](/components/navigation-drawers) 结合在一起为应用程序提供站点导航。",
+  "usageText": "`v-app-bar` 组件用于应用程序范围内的操作和信息。",
   "examples": {
-    "usage": {
-      "desc": "`v-app-bar` 组件用于应用程序范围内的操作和信息。"
-    },
     "dense": {
       "heading": "### 密集",
       "desc": "你可以使 **app-bar** 密集。 密集的应用栏的高度低于常规应用栏"

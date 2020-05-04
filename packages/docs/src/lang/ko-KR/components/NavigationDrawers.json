@@ -11,6 +11,7 @@
     }
   },
   "props": {
+    "bottom": "휴대용 기기의 화면 아래에서 올라오도록 합니다",
     "disableResizeWatcher": "모바일과 데스크탑에서 서랍의 크기가 재조정 될 경우 자동으로 서랍을 열거나 닫습니다.",
     "disableRouteWatcher": "라우트가 변경될때 서랍을 열지 않습니다.",
     "miniVariantWidth": "`mini` 프롭이 활성화 될때, 너비를 지정",

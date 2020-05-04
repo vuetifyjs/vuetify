@@ -4,12 +4,14 @@
     "text": "introduction",
     "icon": "mdi-book-open-page-variant",
     "children": [
+      { "text": "guide", "to": "guide" },
       { "text": "whyVuetify", "to": "why-vuetify" },
       { "text": "faq", "to": "frequently-asked-questions" },
       { "text": "meetTheTeam", "to": "meet-the-team" },
       { "text": "sponsorsAndBackers", "to": "sponsors-and-backers" },
       { "text": "roadmap", "to": "roadmap" },
-      { "text": "lts", "to": "long-term-support" }
+      { "text": "lts", "to": "long-term-support" },
+      { "new": true, "text": "security", "to": "security-disclosure" }
     ]
   },
   {
@@ -46,6 +48,7 @@
     "text": "styles",
     "icon": "mdi-palette",
     "children": [
+      { "text": "cssReset", "to": "css-reset" },
       { "text": "colors", "to": "colors" },
       { "text": "content", "to": "content" },
       { "text": "display", "to": "display" },
@@ -169,7 +172,8 @@
       { "text": "tabs", "to": "tabs" },
       { "text": "timelines", "to": "timelines" },
       { "text": "tooltips", "to": "tooltips" },
-      { "text": "treeview", "to": "treeview" }
+      { "text": "treeview", "to": "treeview" },
+      { "new": true, "text": "virtualScroll", "to": "virtual-scrollers" }
     ]
   },
   {

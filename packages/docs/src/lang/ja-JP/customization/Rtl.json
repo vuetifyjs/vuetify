@@ -1,5 +1,5 @@
 {
-  "heading": "# 双方向性 (RTL)",
+  "heading": "# 右書き言語対応 （RTL）",
   "headingText": "Vuetify は RTL **(right to left の略で、文字を右から左に書く)** の言語をサポートしており、アプリケーションのブートストラップ時に **rtl** オプションを使用することで有効にできます。[双方向性の実装](https://material.io/design/usability/bidirectionality.html)についての追加情報は、仕様のサイトで確認できます。",
   "bidText1": "RTL Form",
   "bidText2": "vuetify オブジェクトの **rtl** の値を修正することで、任意のタイミングで動的に文章の方向を変更できます。"

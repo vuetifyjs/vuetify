@@ -1,17 +1,34 @@
 // Utilities
 import { make } from 'vuex-pathify'
+import bucket from '@/plugins/cosmicjs'
 
 const state = {
   currentVersion: null,
   drawer: null,
   isLoading: false,
   releases: [],
-  supporters: require('@/data/api/supporters.json'),
+  supporters: [],
 }
 
 const mutations = make.mutations(state)
 
-const actions = {}
+const actions = {
+  fetchSponsors: async ({ commit, state }) => {
+    if (state.supporters.length > 0) return
+
+    const { objects: items } = await bucket.getObjects({
+      type: 'sponsors',
+      props: 'title,metadata',
+      sort: 'created_at',
+      'metadata[status]': true,
+    })
+
+    commit('SET_SUPPORTERS', items)
+  },
+  init: ({ dispatch }) => {
+    dispatch('fetchSponsors')
+  },
+}
 
 const getters = {}
 

@@ -312,6 +312,11 @@ $utilities: map-deep-merge(
       class: text,
       values: left right center justify start end
     ),
+    "text-decoration": (
+      property: text-decoration,
+      class: text-decoration,
+      values: line-through none overline underline
+    ),
     "white-space": (
       property: white-space,
       class: text,

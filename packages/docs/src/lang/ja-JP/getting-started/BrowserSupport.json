@@ -9,8 +9,8 @@
     "polyfill": "Polyfillによって対応済"
   },
   "ie11Header": "## IE11とSafari 9のサポート",
-  "ie11Text": "VuetifyはES2015/2017の機能を使用しており、**Internet Explorer 11**と**Safari 9/10**で動作させるためにPolyfillを使う必要があります。Vue CLIを使っている場合、この対応は自動的に行われます。使っていない場合はプロジェクトのディレクトリで`babel-polyfill`をインストールします:",
-  "ie11Text1": "VuetifyはES2015/2017の機能を使用しており、**Internet Explorer 11**と**Safari 9/10**で動作させるためにPolyfillを使う必要があります。Vue CLIを使っている場合、この対応は自動的に行われます。使っていない場合はプロジェクトのディレクトリで`babel-polyfill`をインストールします:",
+  "ie11Text": "VuetifyはES2015/2017の機能を使用しており、**Internet Explorer 11**と**Safari 9/10**で動作させるためにPolyfillを使う必要があります。Vue CLI を使っている場合、この対応は自動的に行われます。使っていない場合はプロジェクトのディレクトリで`babel-polyfill`をインストールします:",
+  "ie11Text1": "VuetifyはES2015/2017の機能を使用しており、**Internet Explorer 11**と**Safari 9/10**で動作させるためにPolyfillを使う必要があります。Vue CLI を使っている場合、この対応は自動的に行われます。使っていない場合はプロジェクトのディレクトリで`babel-polyfill`をインストールします:",
   "ie11Text2": "その際、メインとなる**index.js**ファイルで可能な限り早いタイミングでプラグインをインクルードするのが重要です。Vuetify SSRパッケージの場合は, **client-entry.js**ファイルになります。",
   "ie11Text3": "`babel-preset-env`と対応するPolyfillを使って、アプリケーションに必要なPolyfillのみが追加されていることを確認するのをおすすめします。詳しい情報は[ドキュメント](https://babeljs.io/docs/en/next/babel-preset-env.html)を参照してください。",
   "ie11Text4": "インストールが終わったら、`.babelrc` または `babel.config.js`にプリセットを追加します。",

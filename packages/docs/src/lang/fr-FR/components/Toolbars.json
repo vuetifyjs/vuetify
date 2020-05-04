@@ -1,8 +1,6 @@
 {
+  "usageText": "Une barre d'outils est un conteneur flexible qui peut être utilisé de plusieurs façons. Par défaut, la barre d'outils est de 64 px haut sur le bureau et 56px haut sur le mobile. Il y a un certain nombre de composants d'aide disponibles avec la barre d'outils. La barre d'outils `v-title` est utilisée pour afficher un titre et `v-toolbar-items` permet de dépasser la hauteur totale de [v-btn](/components/boutons).",
   "examples": {
-    "usage": {
-      "desc": "Une barre d'outils est un conteneur flexible qui peut être utilisé de plusieurs façons. Par défaut, la barre d'outils est de 64 px haut sur le bureau et 56px haut sur le mobile. Il y a un certain nombre de composants d'aide disponibles avec la barre d'outils. La barre d'outils `v-title` est utilisée pour afficher un titre et `v-toolbar-items` permet de dépasser la hauteur totale de [v-btn](/components/boutons)."
-    },
     "variations": {
       "uninverted": true
     },

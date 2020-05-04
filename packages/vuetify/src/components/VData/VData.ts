@@ -10,6 +10,7 @@ import {
   DataSortFunction,
   DataGroupFunction,
   DataSearchFunction,
+  ItemGroup,
 } from 'types'
 import { PropValidator, PropType } from 'vue/types/options'
 
@@ -105,9 +106,9 @@ export default Vue.extend({
       return this.serverItemsLength >= 0 ? this.serverItemsLength : this.filteredItems.length
     },
     pageCount (): number {
-      return this.internalOptions.itemsPerPage === -1
+      return this.internalOptions.itemsPerPage <= 0
         ? 1
-        : Math.ceil(this.itemsLength / this.internalOptions.itemsPerPage) // TODO: can't use items.length here
+        : Math.ceil(this.itemsLength / this.internalOptions.itemsPerPage)
     },
     pageStart (): number {
       if (this.internalOptions.itemsPerPage === -1 || !this.items.length) return 0
@@ -155,7 +156,7 @@ export default Vue.extend({
 
       return items
     },
-    groupedItems (): Record<string, any[]> | null {
+    groupedItems (): ItemGroup<any>[] | null {
       return this.isGrouped ? this.groupItems(this.computedItems) : null
     },
     scopedProps (): DataScopeProps {
@@ -192,7 +193,6 @@ export default Vue.extend({
       handler (options: DataOptions, old: DataOptions) {
         if (deepEqual(options, old)) return
         this.$emit('update:options', options)
-        this.$emit('pagination', this.pagination)
       },
       deep: true,
       immediate: true,
@@ -254,6 +254,13 @@ export default Vue.extend({
     computedItems: {
       handler (computedItems: any[]) {
         this.$emit('current-items', computedItems)
+      },
+      immediate: true,
+    },
+    pagination: {
+      handler (pagination: DataPagination, old: DataPagination) {
+        if (deepEqual(pagination, old)) return
+        this.$emit('pagination', this.pagination)
       },
       immediate: true,
     },
@@ -331,8 +338,14 @@ export default Vue.extend({
       }
     },
     sortItems (items: any[]) {
-      const sortBy = this.internalOptions.groupBy.concat(this.internalOptions.sortBy)
-      const sortDesc = this.internalOptions.groupDesc.concat(this.internalOptions.sortDesc)
+      let sortBy = this.internalOptions.sortBy
+      let sortDesc = this.internalOptions.sortDesc
+
+      if (this.internalOptions.groupBy.length) {
+        sortBy = [...this.internalOptions.groupBy, ...sortBy]
+        sortDesc = [...this.internalOptions.groupDesc, ...sortDesc]
+      }
+
       return this.customSort(items, sortBy, sortDesc, this.locale)
     },
     groupItems (items: any[]) {

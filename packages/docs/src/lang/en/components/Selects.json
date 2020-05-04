@@ -2,6 +2,7 @@
   "heading": "# Selects",
   "headingText": "Select fields components are used for collecting user provided information from a list of options.",
   "objectAlert": "When using objects for the **items** prop, you must associate **item-text** and **item-value** with existing properties on your objects. These values are defaulted to **text** and **value** and can be changed.",
+  "autoAlert": "The **auto** property of **menu-props** is only supported for the default input style.",
   "autocompleteAlert": "Browser autocomplete is set to off by default, may vary by browser and may be ignored. [MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion)",
   "examples": {
     "usage": {
@@ -68,7 +69,7 @@
     "itemDisabled": "Set property of **items**'s disabled value",
     "items": "Can be an array of objects or array of strings. When using objects, will look for a text and value field. This can be changed using the **item-text** and **item-value** props.  Objects that have a **header** or **divider** property are considered special cases and generate a list header or divider; these items are not selectable.",
     "itemText": "Set property of **items**'s text value",
-    "itemValue": "Set property of **items**'s value - **must be primitive**. Dot notation is supported",
+    "itemValue": "Set property of **items**'s value - **must be primitive**. Dot notation is supported. **Note:** This is currently not supported with `v-combobox` [GitHub Issue](https://github.com/vuetifyjs/vuetify/issues/5479)",
     "menuProps": "Pass props through to the `v-menu` component. Accepts either a string for boolean props `menu-props=\"auto, overflowY\"`, or an object `:menu-props=\"{ auto: true, overflowY: true }\"`",
     "minWidth": "Sets the minimum width of the select's `v-menu` content",
     "multiple": "Changes select to multiple. Accepts array for value",

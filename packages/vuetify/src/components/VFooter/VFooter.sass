@@ -25,7 +25,11 @@
 
 .v-footer--absolute
   position: absolute
-  width: 100%
+
+  &:not(.v-footer--inset)
+    // Component already uses measurable
+    // Remove in v3.0
+    width: 100%
 
 .v-footer--fixed
   position: fixed

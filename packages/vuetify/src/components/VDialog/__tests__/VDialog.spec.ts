@@ -301,7 +301,9 @@ describe('VDialog.ts', () => {
   })
 
   it('should only set tabindex if active', () => {
-    const wrapper = mountFunction()
+    const wrapper = mountFunction({
+      propsData: { eager: true },
+    })
 
     const content = wrapper.find('.v-dialog__content')
 

@@ -11,6 +11,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
+import { wait } from '../../../../test'
 
 describe('activatable.ts', () => {
   const Mock = Activatable.extend({
@@ -140,12 +141,12 @@ describe('activatable.ts', () => {
     expect(wrapper.vm.isActive).toBe(false)
     el.dispatchEvent(new Event('mouseenter'))
 
-    await new Promise(resolve => setTimeout(resolve, wrapper.vm.openDelay))
+    await wait(wrapper.vm.openDelay)
 
     expect(wrapper.vm.isActive).toBe(true)
 
     el.dispatchEvent(new Event('mouseleave'))
-    await new Promise(resolve => setTimeout(resolve, wrapper.vm.leaveDelay))
+    await wait(wrapper.vm.leaveDelay)
 
     expect(wrapper.vm.isActive).toBe(false)
 

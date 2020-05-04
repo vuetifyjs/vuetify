@@ -1,1 +1,29 @@
-{}
+{
+  "heading": "# アクセシビリティ （ユーザ補助）",
+  "headingText": "Web アクセシビリティ （略して a11y） は、障碍を持つユーザーがワールドワイドウェブ上の Web サイトでの操作やアクセスを妨げる障壁がないことを確認する包括的なプラクティスです。Vuetify コンポーネントは、すべてのマウスベースのアクションにキーボード操作を提供し、適用可能な HTML5 セマンティック要素を利用するように構築されています。",
+  "accessibilityHeader": "## Material Design Accessibility",
+  "accessibilityText": "Google が a11y を念頭に置いてコンポーネントを作成する方法について詳しく説明しています。また、アプリケーションの作成時にベスト プラクティスを使用していることを確認する方法の例も示します（Vuetify でデフォルトでサポートされている範囲を超えています）。アクセシビリティの実装の詳細については、[implementing accessibility](https://material.io/design/usability/accessibility.html) を参照してください。",
+  "activatorText1": "Vuetifyは `v-menu` や `v-dialog`などの多くのコンポーネントにアクティベータスロットを使用します。場合によっては、これらの activator 要素は、対応するコンテンツに関連付ける特定の a11y 属性を持つ必要があります。これを実現するために、スロットスコープを介して必要なa11yオプションを渡します。",
+  "activatorText2": "activator要素がレンダリングされると、バインドされたa11y属性が含まれるようになります。",
+  "focusHeader1": "## フォーカス管理とキーボード操作",
+  "focusText1": "属性以外にも、`v-menu` などのコンポーネントで<kbd>↑</kbd>と<kbd>↓</kbd>のキーによるオプション間移動のような操作もサポートされます。",
+  "focusHeader2": "### v-menu",
+  "focusText2": "`v-menu`の内部では、`v-list-item`は**menuitem**のロールを持つように自動的に設定されます。コンポーネント機能の詳細については、 [Menu](/components/menus) に移動してください。",
+  "focusHeader3": "### v-list-item-group",
+  "focusText3": "`v-list-item-group`コンポーネントは、<kbd>tab</kbd>キーを押したときに`v-list-item`を対話可能かつナビゲート可能にします。また、`v-list-item`が**listitem**のロールを持つように設定します。コンポーネント機能の詳細については、[List-item group](/components/list-item-groups) に移動してください。",
+  "scopedHeader1": "## Item スロット",
+  "scopedText1": "コンポーネントのスロットを利用し、要素にバインドするために適切な aria 属性が必要な場合があります。(**v-slot**) を使用する場合、上記の`v-menu`の例のように、スロットスコープでこの方法が受け渡されます。ただし、適切なサポートを確実にするために属性を適切なコンポーネントにバインドする必要がある、より複雑なコンポーネントもあります。",
+  "scopedHeader2": "### v-select",
+  "scopedText2": "`v-select` コンポーネントは、必要なすべての a11y 属性を自動的に構成します。各項目は、デフォルトで対応する**id**、**aria-labelledby**、**aria-selected**および**roles**を生成します。",
+  "scopedText3": "レンダリングされると、`v-select`コンポーネントのコンテンツは次のようになります:",
+  "scopedText4": "しかし、スロットを使用する場合、適切なアリアのセットアップを取得するために、渡されたプロパティを利用する必要がある条件があります。この情報は、`v-autocomplete`、`v-combobox`、および`v-overflow-btn`にも適用され、それらがすべて`v-select`コンポーネントを拡張します。",
+  "scopedText5": "スロットに`v-list-item` コンポーネントを提供する場合、aria属性は **attrs** データプロパティを通じて渡され、`v-bind`でバインドできます。",
+  "scopedText6": "ラベルを正しい _option_ に適切に関連付けるには、`attrs.id` を`v-list-item-title`の `aria-labelled-by` にバインドする必要があります。これにより、テキストが適切に関連付けられます。スロットを使用していない場合は、自動的に行われます。",
+  "resourcesHeader": "## 追加リソース",
+  "resourcesText1": "Vuetify は、アプリケーションで a11y をできるだけ簡単にしようと試みますが、追加の情報が必要な場合があります。役に立つリソースのリストを以下に示します。",
+  "resourcesText2": [
+    "[W3C Web Accessibility Initiative](https://www.w3.org/WAI/)",
+    "[WAI-ARIA Authoring Practices](https://www.w3.org/TR/wai-aria-practices-1.1/)",
+    "[The A11Y Project](https://a11yproject.com/)"
+  ]
+}

@@ -8,7 +8,7 @@
     },
     "options": {
       "heading": "### Défilement avec options",
-      "desc": "Pour une approche plus précise, vous pouvez désigner la cible pour lier l'écouteur d'événements de défilement.",
+      "desc": "Pour une approche plus précise, vous pouvez désigner la cible pour lier l'écouteur d'événements de scroll.",
       "uninverted": true
     }
   },

@@ -36,7 +36,6 @@
     &:not(.v-input--is-focused)
       .v-text-field__prefix
           line-height: $select-prefix-line-height
-          position: absolute
           top: $select-prefix-top
           transition: $primary-transition
 
@@ -126,6 +125,13 @@
       overflow: hidden
       text-overflow: ellipsis
       white-space: nowrap
+
+  &.v-input--dense
+    .v-select__selection--comma
+      margin: $select-dense-selections-margin
+
+    .v-chip
+      margin: $select-dense-chip-margin
 
   &__slot
     position: relative

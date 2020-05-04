@@ -1,10 +1,8 @@
 {
   "heading": "crwdns45534:0crwdne45534:0",
   "headingText": "crwdns45536:0crwdne45536:0",
+  "usageText": "crwdns56247:0[v-text-field]crwdne56247:0",
   "examples": {
-    "usage": {
-      "desc": "crwdns39376:0[v-text-field]crwdne39376:0"
-    },
     "multiple": {
       "heading": "crwdns45538:0crwdne45538:0",
       "desc": "crwdns39380:0crwdne39380:0"
@@ -59,8 +57,5 @@
   },
   "slots": {
     "selection": "crwdns39432:0[file]crwdne39432:0"
-  },
-  "events": {
-    "change": "crwdns39434:0crwdne39434:0"
   }
 }

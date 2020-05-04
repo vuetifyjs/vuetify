@@ -45,7 +45,7 @@ exports[`VDatePickerMonthTable.ts should render component and match snapshot (mu
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-size--default v-btn--outlined theme--light accent--text"
+                  class="v-btn v-size--default v-date-picker-table__current v-btn--outlined theme--light accent--text"
           >
             <div class="v-btn__content">
               May
@@ -170,7 +170,7 @@ exports[`VDatePickerMonthTable.ts should render component and match snapshot 1`]
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-size--default v-btn--outlined theme--light accent--text"
+                  class="v-btn v-size--default v-date-picker-table__current v-btn--outlined theme--light accent--text"
           >
             <div class="v-btn__content">
               May

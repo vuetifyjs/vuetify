@@ -65,7 +65,7 @@
           large
           outlined
           rounded
-          to="introduction/why-vuetify"
+          :to="`/${$route.params.lang}/introduction/why-vuetify/`"
         >
           <span
             class="caption font-weight-bold"
