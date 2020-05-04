@@ -11,7 +11,7 @@ import {
   DataTableCompareFunction,
   DataItemsPerPageOption,
   ItemGroup,
-  RowClassProp,
+  RowClassFunction,
 } from 'types'
 import { PropValidator } from 'vue/types/options'
 
@@ -99,7 +99,7 @@ export default VDataIterator.extend({
       default: defaultFilter,
     },
     itemClass: {
-      type: Function as PropType<RowClassProp>,
+      type: Function as PropType<RowClassFunction>,
       default: () => '',
     },
   },
@@ -203,7 +203,7 @@ export default VDataIterator.extend({
     calcWidths () {
       this.widths = Array.from(this.$el.querySelectorAll('th')).map(e => e.clientWidth)
     },
-    createItemClass (classes: ReturnType<RowClassProp>) {
+    createItemClass (classes: ReturnType<RowClassFunction>) {
       const finalClasses: { [id: string]: boolean } = {}
       if (typeof classes === 'string') {
         if (classes !== '') {
