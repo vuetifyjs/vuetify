@@ -26,7 +26,7 @@ exports[`VCheckbox.ts should be render colored checkbox 1`] = `
                type="checkbox"
                value
         >
-        <div class="v-input--selection-controls__ripple yellow--text">
+        <div class="v-input--selection-controls__ripple">
         </div>
       </div>
     </div>
@@ -57,7 +57,7 @@ exports[`VCheckbox.ts should render themed component 1`] = `
                type="checkbox"
                value
         >
-        <div class="v-input--selection-controls__ripple primary--text">
+        <div class="v-input--selection-controls__ripple">
         </div>
       </div>
     </div>
@@ -88,7 +88,7 @@ exports[`VCheckbox.ts should use custom icons 1`] = `
                type="checkbox"
                value="fizz"
         >
-        <div class="v-input--selection-controls__ripple primary--text">
+        <div class="v-input--selection-controls__ripple">
         </div>
       </div>
     </div>
@@ -119,7 +119,7 @@ exports[`VCheckbox.ts should use custom icons 2`] = `
                type="checkbox"
                value="fizz"
         >
-        <div class="v-input--selection-controls__ripple primary--text">
+        <div class="v-input--selection-controls__ripple">
         </div>
       </div>
     </div>
@@ -150,7 +150,7 @@ exports[`VCheckbox.ts should use custom icons 3`] = `
                type="checkbox"
                value="fizz"
         >
-        <div class="v-input--selection-controls__ripple primary--text">
+        <div class="v-input--selection-controls__ripple">
         </div>
       </div>
     </div>

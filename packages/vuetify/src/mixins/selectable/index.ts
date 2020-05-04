@@ -71,12 +71,9 @@ export default mixins(
     isDirty (): boolean {
       return this.isActive
     },
-    currentColor (): string {
-      return 'primary'
-    },
     rippleState (): string | undefined {
       return !this.disabled && !this.validationState
-        ? this.currentColor
+        ? undefined
         : this.validationState
     },
   },

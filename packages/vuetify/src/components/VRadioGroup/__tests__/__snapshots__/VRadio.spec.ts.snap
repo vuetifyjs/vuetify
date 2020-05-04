@@ -14,7 +14,7 @@ exports[`VRadio.ts should be render colored radio 1`] = `
            type="radio"
            value
     >
-    <div class="v-input--selection-controls__ripple yellow--text">
+    <div class="v-input--selection-controls__ripple">
     </div>
   </div>
 </div>
@@ -34,7 +34,7 @@ exports[`VRadio.ts should not render aria-label attribute with no label value on
            type="radio"
            value
     >
-    <div class="v-input--selection-controls__ripple primary--text">
+    <div class="v-input--selection-controls__ripple">
     </div>
   </div>
 </div>
@@ -55,7 +55,7 @@ exports[`VRadio.ts should render proper input name 1`] = `
            name="name"
            value
     >
-    <div class="v-input--selection-controls__ripple primary--text">
+    <div class="v-input--selection-controls__ripple">
     </div>
   </div>
 </div>
@@ -95,7 +95,7 @@ exports[`VRadio.ts should use custom icons 1`] = `
            type="radio"
            value
     >
-    <div class="v-input--selection-controls__ripple primary--text">
+    <div class="v-input--selection-controls__ripple">
     </div>
   </div>
 </div>
