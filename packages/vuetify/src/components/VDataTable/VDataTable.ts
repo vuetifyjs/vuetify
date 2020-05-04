@@ -49,17 +49,20 @@ function searchTableItems (
   headersWithoutCustomFilters: DataTableHeader[],
   customFilter: DataTableFilterFunction
 ) {
-  let filtered = items
   search = typeof search === 'string' ? search.trim() : null
-  if (search && headersWithoutCustomFilters.length) {
-    filtered = items.filter(item => headersWithoutCustomFilters.some(filterFn(item, search, customFilter)))
-  }
 
-  if (headersWithCustomFilters.length) {
-    filtered = filtered.filter(item => headersWithCustomFilters.every(filterFn(item, search, defaultFilter)))
-  }
+  // If the `search` property is empty and there are no custom filters in use, there is nothing to do.
+  if (!(search && headersWithoutCustomFilters.length) && !headersWithCustomFilters.length) return items
 
-  return filtered
+  return items.filter(item => {
+    // Headers with custom filters are evaluated whether or not a search term has been provided.
+    if (headersWithCustomFilters.length && headersWithCustomFilters.every(filterFn(item, search, defaultFilter))) {
+      return true
+    }
+
+    // Otherwise, the `search` property is used to filter columns without a custom filter.
+    return (search && headersWithoutCustomFilters.some(filterFn(item, search, customFilter)))
+  })
 }
 
 /* @vue/component */
