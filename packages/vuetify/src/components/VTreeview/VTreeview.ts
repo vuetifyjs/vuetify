@@ -156,10 +156,17 @@ export default mixins(
   },
 
   created () {
-    this.buildTree(this.items)
     const getValue = (key: string | number) => this.returnObject ? getObjectValueByPath(key, this.itemKey) : key
-    this.value.map(getValue).forEach(value => this.updateSelected(value, true, true))
-    this.active.map(getValue).forEach(value => this.updateActive(value, true))
+
+    this.buildTree(this.items)
+
+    for (const value of this.value.map(getValue)) {
+      this.updateSelected(value, true, true)
+    }
+
+    for (const active of this.active.map(getValue)) {
+      this.updateActive(active, true)
+    }
   },
 
   mounted () {
@@ -227,6 +234,7 @@ export default mixins(
 
         if (children.length) {
           const { isSelected, isIndeterminate } = this.calculateState(key, this.nodes)
+
           node.isSelected = isSelected
           node.isIndeterminate = isIndeterminate
         }
@@ -240,13 +248,15 @@ export default mixins(
       }
     },
     calculateState (node: string | number, state: Record<string | number, NodeState>) {
-      const counts = state[node].children.reduce((counts: number[], child: string | number) => {
+      const children = state[node].children
+      const counts = children.reduce((counts: number[], child: string | number) => {
         counts[0] += +Boolean(state[child].isSelected)
         counts[1] += +Boolean(state[child].isIndeterminate)
+
         return counts
       }, [0, 0])
 
-      const isSelected = !!state[node].children.length && counts[0] === state[node].children.length
+      const isSelected = !!children.length && counts[0] === children.length
       const isIndeterminate = !isSelected && (counts[0] > 0 || counts[1] > 0)
 
       return {
@@ -338,26 +348,25 @@ export default mixins(
       const changed = new Map()
 
       if (this.selectionType !== 'independent') {
-        this.getDescendants(key).forEach(descendant => {
+        for (const descendant of this.getDescendants(key)) {
           if (!getObjectValueByPath(this.nodes[descendant].item, this.itemDisabled) || isForced) {
             this.nodes[descendant].isSelected = isSelected
             this.nodes[descendant].isIndeterminate = false
             changed.set(descendant, isSelected)
           }
-        })
+        }
 
-        this.nodes[key].isSelected = isSelected
         const calculated = this.calculateState(key, this.nodes)
+        this.nodes[key].isSelected = isSelected
         this.nodes[key].isIndeterminate = calculated.isIndeterminate
         changed.set(key, isSelected)
 
-        const parents = this.getParents(key)
-        parents.forEach(parent => {
+        for (const parent of this.getParents(key)) {
           const calculated = this.calculateState(parent, this.nodes)
           this.nodes[parent].isSelected = calculated.isSelected
           this.nodes[parent].isIndeterminate = calculated.isIndeterminate
           changed.set(parent, calculated.isSelected)
-        })
+        }
       } else {
         this.nodes[key].isSelected = isSelected
         this.nodes[key].isIndeterminate = false
