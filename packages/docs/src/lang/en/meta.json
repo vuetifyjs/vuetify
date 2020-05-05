@@ -174,11 +174,6 @@
     "description": "Utilize Vuetify's built in CSS and Javascript transitions within components.",
     "keywords": "motion, transitions, vuetify transitions"
   },
-  "styles/typography": {
-    "title": "Application typography",
-    "description": "View the various typography styles. From headings to captions, with various weights, sizes and italics.",
-    "keywords": "typography, headings, titles"
-  },
   "components/api-explorer": {
     "title": "API explorer",
     "description": "Search the API of Vuetify components or browse common categories.",
