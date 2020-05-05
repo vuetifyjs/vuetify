@@ -4,20 +4,27 @@ export default Vue.extend({
   name: 'roundable',
 
   props: {
-    rounded: [Boolean, String],
+    rounded: [Boolean, Number, String],
     tile: Boolean,
   },
 
   computed: {
     roundedClasses (): Record<string, boolean> {
       let composite = ''
+      const rounded = typeof this.rounded === 'boolean'
+        ? this.rounded
+        : String(this.rounded || '')
 
-      if (this.rounded === true) {
+      console.log(rounded)
+
+      if (rounded === true) {
         composite = 'rounded'
       } else if (this.tile) {
         composite = 'rounded-0'
-      } else if (this.rounded) {
-        const values = this.rounded.split(' ')
+      } else if (rounded != null) {
+        const values = (rounded || '').split(' ')
+
+        console.log(values)
 
         for (const value of values) {
           composite += ` rounded-${value}`
