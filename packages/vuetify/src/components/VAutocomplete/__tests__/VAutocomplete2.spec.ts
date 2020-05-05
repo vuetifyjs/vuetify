@@ -53,6 +53,7 @@ describe('VAutocomplete.ts', () => {
   })
 
   it('should not remove a disabled item', () => {
+    const itemDeleted = jest.fn()
     const wrapper = mountFunction({
       propsData: {
         chips: true,
@@ -63,6 +64,7 @@ describe('VAutocomplete.ts', () => {
         ],
         value: ['foo', 'bar'],
       },
+      listeners: { 'item:deleted': itemDeleted },
     })
 
     const chips = wrapper.find('.v-chip')
@@ -78,6 +80,7 @@ describe('VAutocomplete.ts', () => {
     input.trigger('keydown.delete')
 
     expect(wrapper.vm.internalValue).toEqual(['foo'])
+    expect(itemDeleted).toHaveBeenCalled()
 
     input.trigger('keydown.delete')
 
