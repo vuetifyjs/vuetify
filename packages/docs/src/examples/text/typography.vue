@@ -92,12 +92,12 @@
     data: () => ({
       model: null,
       classes: [
-        ['h1', 'Headline 1', '6rem', '300', '-0.09375rem', -1],
-        ['h2', 'Headline 2', '3.75rem', '300', '-0.03125rem', 0],
-        ['h3', 'Headline 3', '3rem', '300', 'normal', 1],
-        ['h4', 'Headline 4', '2.125rem', '300', '0.015625rem', 2],
-        ['h5', 'Headline 5', '1.5rem', '300', 'normal', 2],
-        ['h6', 'Headline 6', '1.25rem', '300', '0.009375rem', 3],
+        ['h1', 'Heading 1', '6rem', '300', '-0.09375rem', -1],
+        ['h2', 'Heading 2', '3.75rem', '300', '-0.03125rem', 0],
+        ['h3', 'Heading 3', '3rem', '300', 'normal', 1],
+        ['h4', 'Heading 4', '2.125rem', '300', '0.015625rem', 2],
+        ['h5', 'Heading 5', '1.5rem', '300', 'normal', 2],
+        ['h6', 'Heading 6', '1.25rem', '300', '0.009375rem', 3],
         ['subtitle-1', 'Subtitle 1', '1rem', '300', '0.009375rem', 4],
         ['subtitle-2', 'Subtitle 2', '0.875rem', '300', '0.00625rem', 4],
         ['body-1', 'Body 1', '1rem', '300', '0.03125rem', 4],
