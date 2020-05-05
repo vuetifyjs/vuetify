@@ -11,7 +11,7 @@
         :value="size"
       >
         <template v-slot="{ active, toggle }">
-          <v-hover #default="{ hover }">
+          <v-hover v-slot:default="{ hover }">
             <div
               :class="[(active || hover) ? 'text--primary' : 'text--secondary', hover ? 'elevation-1' : '']"
               class="ma-3 text-center"
