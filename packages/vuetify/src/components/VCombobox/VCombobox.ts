@@ -234,7 +234,6 @@ export default VAutocomplete.extend({
       // TODO: find out where
       if (menuIndex < 0) {
         this.selectItem(internalSearch)
-        this.$emit('item:created', internalSearch)
       }
 
       this.internalSearch = null
