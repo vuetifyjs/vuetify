@@ -242,7 +242,7 @@ export default VSelect.extend({
       }
     },
     deleteCurrentItem () {
-      const curIndex = this.selectedIndex
+      const curIndex = this.multiple ? this.selectedIndex : 0
       const curItem = this.selectedItems[curIndex]
 
       // Do nothing if input or item is disabled
