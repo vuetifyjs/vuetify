@@ -27,6 +27,8 @@
     <base-support-menu />
 
     <base-locales-menu />
+
+    <v-spacer class="d-sm-none" />
   </v-app-bar>
 </template>
 
@@ -48,13 +50,15 @@
 </script>
 
 <style lang="sass">
-  #documentation-app-bar
-    border-width: 0 0 thin 0
-    border-style: solid
+  .theme--light,
+  .theme--dark
+    #documentation-app-bar
+      border-width: 0 0 thin 0
+      border-style: solid
 
-    &.theme--light
-      border-bottom-color: #0000001F !important
+      &.theme--light
+        border-bottom-color: #0000001F !important
 
-    &.theme--dark
-      border-bottom-color: #FFFFFF1F !important
+      &.theme--dark
+        border-bottom-color: #FFFFFF1F !important
 </style>
