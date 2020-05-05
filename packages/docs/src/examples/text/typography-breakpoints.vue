@@ -11,22 +11,25 @@
         :value="size"
       >
         <template v-slot="{ active, toggle }">
-          <div
-            :class="active ? 'text--primary' : 'text--secondary'"
-            class="ma-3 text-center"
-          >
-            <v-icon
-              :color="active ? 'grey darken-4' : 'grey lighten-1'"
-              class="pa-1 mb-1"
-              @click="toggle"
-              v-text="icon"
-            ></v-icon>
-
+          <v-hover #default="{ hover }">
             <div
-              class="caption"
-              v-text="bp"
-            ></div>
-          </div>
+              :class="[(active || hover) ? 'text--primary' : 'text--secondary', hover ? 'elevation-1' : '']"
+              class="ma-3 text-center"
+              style="cursor: pointer"
+              @click="toggle"
+            >
+              <v-icon
+                :color="(active || hover) ? 'grey darken-4' : 'grey lighten-1'"
+                class="pa-1 mb-1"
+                v-text="icon"
+              ></v-icon>
+
+              <div
+                class="caption"
+                v-text="bp"
+              ></div>
+            </div>
+          </v-hover>
         </template>
       </v-item>
     </v-item-group>
