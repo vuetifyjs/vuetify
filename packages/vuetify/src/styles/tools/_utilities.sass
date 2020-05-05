@@ -46,4 +46,5 @@
       $val: $value
       @if type-of($value) == 'list' and length($properties) == length($value)
         $val: nth($value, $i)
-      #{$property}: $val !important
+      @if $val != false
+        #{$property}: $val !important

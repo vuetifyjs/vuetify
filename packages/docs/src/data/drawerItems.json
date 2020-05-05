@@ -56,8 +56,7 @@
       { "text": "flex", "to": "flex" },
       { "text": "float", "to": "float" },
       { "text": "spacing", "to": "spacing" },
-      { "text": "text", "to": "text" },
-      { "text": "typography", "to": "typography" },
+      { "text": "text", "to": "text-and-typography" },
       { "text": "transitions", "to": "transitions" },
       { "text": "scroll", "to": "scroll" }
     ]

@@ -129,10 +129,10 @@
     "description": "Vuetify uses ress.min, a complete browser reset based off or normalize.css.",
     "keywords": "ress.min, css reset, vuetify css reset"
   },
-  "styles/text": {
-    "title": "CSS Text helpers",
-    "description": "Text helpers assist in modifying your application layout on varying viewport sizes with pre-configured css classes.",
-    "keywords": "Text helper classes, text classes, alignment helpers"
+  "styles/text-and-typography": {
+    "title": "CSS Text and Typography helpers",
+    "description": "Text and typography helpers classes assist in modifying text on varying viewport sizes with pre-configured css classes.",
+    "keywords": "text helper classes, text classes, alignment helpers, typography, typography helper classes"
   },
   "styles/colors": {
     "title": "Material color palette",
@@ -173,11 +173,6 @@
     "title": "Transitions",
     "description": "Utilize Vuetify's built in CSS and Javascript transitions within components.",
     "keywords": "motion, transitions, vuetify transitions"
-  },
-  "styles/typography": {
-    "title": "Application typography",
-    "description": "View the various typography styles. From headings to captions, with various weights, sizes and italics.",
-    "keywords": "typography, headings, titles"
   },
   "components/api-explorer": {
     "title": "API explorer",

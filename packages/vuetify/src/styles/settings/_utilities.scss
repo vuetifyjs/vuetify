@@ -339,6 +339,19 @@ $utilities: map-deep-merge(
       property: text-transform,
       class: text,
       values: none capitalize lowercase uppercase
+    ),
+    "typography": (
+      responsive: true,
+      property: (
+        font-size,
+        font-weight,
+        line-height,
+        letter-spacing,
+        font-family,
+        text-transform
+      ),
+      class: text,
+      values: $typography
     )
   ),
   $utilities
