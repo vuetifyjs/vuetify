@@ -15,7 +15,7 @@
           mini-variant-width="56"
           permanent
         >
-          <v-list-item>
+          <v-list-item class="px-2">
             <v-list-item-avatar>
               <v-img src="https://randomuser.me/api/portraits/women/75.jpg"></v-img>
             </v-list-item-avatar>

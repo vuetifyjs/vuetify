@@ -1,5 +1,8 @@
 @import './_variables.scss'
 
++theme('v-toolbar.v-sheet') using ($material)
+  background-color: map-get($material, 'toolbar')
+
 // Block
 .v-toolbar
   contain: layout
@@ -50,7 +53,8 @@
     margin-top: -#{$toolbar-content-padding-y}
     margin-bottom: -#{$toolbar-content-padding-y}
 
-    .v-tabs-bar
+    > .v-slide-group.v-tabs-bar
+      background-color: inherit
       height: inherit
 
     &:first-child

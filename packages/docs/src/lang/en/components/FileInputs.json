@@ -1,10 +1,8 @@
 {
   "heading": "# File inputs",
   "headingText": "The `v-file-input` component is a specialized input that provides a clean interface for selecting files, showing detailed selection information and upload progress. It is meant to be a direct replacement for a standard file input.",
+  "usageText": "At its core, the `v-file-input` component is a basic container that extends [v-text-field](/components/text-fields).",
   "examples": {
-    "usage": {
-      "desc": "At its core, the `v-file-input` component is a basic container that extends [v-text-field](/components/text-fields)."
-    },
     "multiple": {
       "heading": "### Multiple",
       "desc": "The `v-file-input` can contain multiple files at the same time when using the **multiple** prop."
@@ -59,8 +57,5 @@
   },
   "slots": {
     "selection": "Slot for defining a custom appearance for selected item(s). Provides the current **index**, **text** (truncated) and [file](https://developer.mozilla.org/en-US/docs/Web/API/File)."
-  },
-  "events": {
-    "change": "Components.Inputs.events.change"
   }
 }

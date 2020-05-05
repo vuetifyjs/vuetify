@@ -1,9 +1,0 @@
-{
-  "color": "green",
-  "close": true,
-  "id": "new-store",
-  "text": "Check it Out",
-  "msg": "💖 New Vuetify Store in Beta 🛒",
-  "href": "https://store-beta.vuetifyjs.com/",
-  "timeout": 0
-}

@@ -5,7 +5,8 @@
   >
     <v-sheet
       :color="$vuetify.theme.dark ? undefined : 'grey lighten-5'"
-      class="pa-12"
+      :max-width="1280 + ($vuetify.breakpoint.mdAndUp ? 48 : 0)"
+      class="pa-0 pa-md-12 mx-auto"
       tag="v-container"
     >
       <base-heading>Vuetify.Home.proudlySponsoredBy</base-heading>
@@ -16,17 +17,13 @@
       >Vuetify.Home.proundlySponsoredByText</base-text>
 
       <supporters-sponsors
-        :tier="[0, 1, 2, 3, 5, 6]"
+        :tier="tier"
         class="mb-12"
         dense
         hide-titles
       />
 
-      <supporters-sponsor-btn
-        append
-        to="introduction/sponsors-and-backers"
-        large
-      />
+      <supporters-sponsor-btn large />
     </v-sheet>
   </base-section>
 </template>
@@ -36,6 +33,14 @@
     name: 'HomeSponsors',
 
     provide: { id: 'home-sponsors' },
+
+    computed: {
+      tier () {
+        return this.$vuetify.breakpoint.smAndUp
+          ? [1, 2, 3, 4, 5, 6, 7]
+          : [1, 2, 3]
+      },
+    },
   }
 </script>
 

@@ -1,0 +1,18 @@
+{
+  "heading": "# Verfahren zur Offenlegung der Sicherheit",
+  "headingText": "Dieses Dokument beschreibt die Sicherheitsverfahren und die allgemeinen Richtlinien für das Vuetify-Projekt.",
+  "bugHeading": "## Fehler melden",
+  "bugText1": "Das Vuetify-Team und die Community nehmen alle Sicherheitsfehler in Vuetify ernst. Wir schätzen Ihre Bemühungen und die verantwortungsvolle Offenlegung und werden alles tun, um Ihre Beiträge zu würdigen.",
+  "bugText2": "Um ein Sicherheitsproblem zu melden, schreiben Sie eine E-Mail an [security@vuetifyjs.com](mailto:security@vuetifyjs.com?subject=SECURITY) und fügen das Wort **\"SECURITY\"** in die Betreffzeile ein.",
+  "bugText3": "Das Vuetify-Team wird Ihnen eine Antwort senden, die die nächsten Schritte in der Bearbeitung Ihres Berichts beschreiben. Nach der ersten Antwort auf Ihren Bericht wird Sie das Sicherheitsteam über die Fortschritte auf dem Weg zu einer Korrektur und vollständigen Ankündigung auf dem Laufenden halten und kann nach zusätzlichen Informationen oder Anleitungen fragen.",
+  "bugText4": "Sicherheitsfehler in Modulen von Drittanbietern melden Sie an die Person oder das Team, das das Modul betreut. Sie können auch eine Verwundbarkeit über das [Node Security Project](https://nodesecurity.io/report) melden.",
+  "policyHeading": "## Offenlegungsrichtlinie",
+  "policyText1": "Wenn das Sicherheitsteam einen Sicherheitsfehlerbericht erhält, wird es einem primären Handler zugewiesen. Diese Person koordiniert den Fix- und Release-Prozess, an dem folgende Schritte beteiligt sind:",
+  "policyText2": [
+    "Bestätigen Sie das Problem und bestimmen Sie die betroffenen Versionen.",
+    "Code auditieren, um mögliche ähnliche Probleme zu finden.",
+    "Bereiten Sie Korrekturen für alle noch in Wartung befindlichen Versionen vor. Diese Korrekturen werden so schnell wie möglich nach npm freigegeben."
+  ],
+  "commentsHeading": "## Kommentare zu dieser Richtlinie",
+  "commentsText1": "Falls Sie Vorschläge haben, wie dieser Prozess verbessert werden könnte, schicken Sie bitte einen Pull-Request mit dem [Issue-Creator](https://issues.vuetifyjs.com)."
+}

@@ -29,15 +29,12 @@
 </template>
 
 <script>
+  import Usage from './usage'
+
   export default {
     name: 'BannersUsage',
 
-    props: {
-      attrs: {
-        type: Object,
-        default: () => ({}),
-      },
-    },
+    mixins: [Usage],
 
     computed: {
       $_attrs () {

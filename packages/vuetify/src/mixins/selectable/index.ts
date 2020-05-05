@@ -45,7 +45,7 @@ export default mixins(
       if (!this.isActive) return undefined
       if (this.color) return this.color
       if (this.isDark && !this.appIsDark) return 'white'
-      return 'accent'
+      return 'primary'
     },
     isMultiple (): boolean {
       return this.multiple === true || (this.multiple === null && Array.isArray(this.internalValue))
@@ -70,6 +70,11 @@ export default mixins(
     },
     isDirty (): boolean {
       return this.isActive
+    },
+    rippleState (): string | undefined {
+      return !this.disabled && !this.validationState
+        ? 'primary'
+        : this.validationState
     },
   },
 

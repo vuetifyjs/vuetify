@@ -1,10 +1,13 @@
 {
   "heading": "crwdns45092:0crwdne45092:0",
   "headingText": "crwdns45094:0[v-navigation-drawer]crwdne45094:0",
+  "usageText": "crwdns56111:0crwdne56111:0",
+  "functional": {
+    "desc": [
+      "crwdns56113:0[v-toolbar]crwdne56113:0"
+    ]
+  },
   "examples": {
-    "usage": {
-      "desc": "crwdns38450:0crwdne38450:0"
-    },
     "dense": {
       "heading": "crwdns45096:0crwdne45096:0",
       "desc": "crwdns38454:0crwdne38454:0"
@@ -24,6 +27,10 @@
     "hide": {
       "heading": "crwdns45104:0crwdne45104:0",
       "desc": "crwdns38470:0crwdne38470:0"
+    },
+    "app-bar-nav": {
+      "heading": "crwdns56115:0crwdne56115:0",
+      "desc": "crwdns56117:0[v-navigation-drawer]crwdne56117:0"
     },
     "scroll-threshold": {
       "heading": "crwdns45106:0crwdne45106:0",

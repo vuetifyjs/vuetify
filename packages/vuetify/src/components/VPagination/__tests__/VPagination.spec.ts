@@ -14,6 +14,9 @@ Vue.prototype.$vuetify = {
       prev: 'mdi-chevron-left',
     },
   },
+  lang: {
+    t: str => str,
+  },
 }
 
 describe('VPagination.ts', () => {
@@ -23,7 +26,16 @@ describe('VPagination.ts', () => {
     jest.useFakeTimers()
 
     mountFunction = (options?: MountOptions<Instance>) => {
-      return mount(VPagination, options)
+      return mount(VPagination, {
+        mocks: {
+          $vuetify: {
+            lang: {
+              t: str => str,
+            },
+          },
+        },
+        ...options,
+      })
     }
   })
 

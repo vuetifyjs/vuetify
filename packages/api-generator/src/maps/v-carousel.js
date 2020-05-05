@@ -2,7 +2,7 @@ module.exports = {
   'v-carousel': {
     events: [
       {
-        name: 'input',
+        name: 'change',
         value: 'number',
       },
     ],

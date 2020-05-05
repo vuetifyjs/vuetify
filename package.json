@@ -22,7 +22,7 @@
     "clean": "lerna clean"
   },
   "engines": {
-    "node": ">= 10",
+    "node": ">= 11.7.1",
     "yarn": ">= 1.12.0"
   },
   "devDependencies": {

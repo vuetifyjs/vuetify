@@ -50,9 +50,9 @@ declare global {
       observer: MutationObserver
     }
     _onScroll?: {
-      callback: EventListenerOrEventListenerObject
+      handler: EventListenerOrEventListenerObject
       options: boolean | AddEventListenerOptions
-      target: EventTarget
+      target?: EventTarget
     }
     _touchHandlers?: {
       [_uid: number]: TouchStoredHandlers

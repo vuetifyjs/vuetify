@@ -6,6 +6,7 @@ import {
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
+import { waitAnimationFrame } from '../../../../test'
 
 describe('VTextField.ts', () => { // eslint-disable-line max-statements
   type Instance = InstanceType<typeof VTextField>
@@ -637,22 +638,21 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
 
   it('should have focus and blur methods', async () => {
     const wrapper = mountFunction()
-    const focus = jest.fn()
-    const blur = jest.fn()
-    wrapper.vm.$on('focus', focus)
-    wrapper.vm.$on('blur', blur)
+    const onBlur = jest.spyOn(wrapper.vm.$refs.input, 'blur')
+    const onFocus = jest.spyOn(wrapper.vm.$refs.input, 'focus')
 
     wrapper.vm.focus()
-    expect(focus).toHaveBeenCalledTimes(1)
+
+    expect(onFocus).toHaveBeenCalledTimes(1)
 
     wrapper.vm.blur()
 
     // https://github.com/vuetifyjs/vuetify/issues/5913
     // Blur waits a requestAnimationFrame
     // to resolve a bug in MAC / Safari
-    await new Promise(resolve => window.requestAnimationFrame(resolve))
+    await waitAnimationFrame()
 
-    expect(blur).toHaveBeenCalledTimes(1)
+    expect(onBlur).toHaveBeenCalledTimes(1)
   })
 
   // TODO: this fails without sync, nextTick doesn't help
@@ -716,20 +716,22 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     expect(focus).toHaveBeenCalledTimes(1)
   })
 
-  it('should hide messages if no messages and hide-details is auto', () => {
+  it('should hide messages if no messages and hide-details is auto', async () => {
     const wrapper = mountFunction({
       propsData: {
         hideDetails: 'auto',
       },
     })
 
-    expect(wrapper.vm.genMessages()).toBeNull()
+    expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({ counter: 7 })
-    expect(wrapper.vm.genMessages()).not.toBeNull()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({ counter: null, errorMessages: 'required' })
-    expect(wrapper.vm.genMessages()).not.toBeNull()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/8268
@@ -803,5 +805,57 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     wrapper.setProps({ label: 'Foobar ' })
 
     expect(wrapper.vm.isSingle).toBe(false)
+  })
+
+  it('should autofocus text-field when intersected', async () => {
+    const wrapper = mountFunction({
+      propsData: { autofocus: true },
+    })
+    const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
+
+    expect(document.activeElement === element).toBe(true)
+
+    element.blur()
+
+    expect(document.activeElement === element).toBe(false)
+
+    // Simulate observe firing that is visible
+    wrapper.vm.onObserve([], [], true)
+    expect(document.activeElement === element).toBe(true)
+
+    element.blur()
+
+    // Simulate observe firing that is not visible
+    wrapper.vm.onObserve([], [], false)
+    expect(document.activeElement === element).toBe(false)
+
+    element.blur()
+
+    wrapper.setProps({ autofocus: false })
+
+    // Simulate observe firing with no autofocus
+    wrapper.vm.onObserve([], [], true)
+    expect(document.activeElement === element).toBe(false)
+  })
+
+  it('should use the correct icon color when using the solo inverted prop', () => {
+    const wrapper = mountFunction({
+      propsData: { soloInverted: true },
+      mocks: {
+        $vuetify: {
+          theme: { dark: false },
+        },
+      },
+      provide: {
+        theme: { isDark: true },
+      },
+    })
+
+    expect(wrapper.vm.computedColor).toBe('white')
+
+    wrapper.vm.focus()
+
+    expect(wrapper.vm.computedColor).toBe('primary')
   })
 })

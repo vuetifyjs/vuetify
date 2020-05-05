@@ -12,19 +12,28 @@
       "desc": "`icon`スロットと` v-avatar`を使用して、アバターをドットに挿入します。"
     },
     "card": {
+      "heading": "### タイムライン・カード",
       "desc": "`v-timeline-item`の中に` v-card`を置くと、カードの横にCaret(吹き出し) が表示されます。"
     },
     "color": {
+      "heading": "### カラー・ドット",
       "desc": "色付きのドットで、タイムラインを読みやすくする視覚的なブレークポイントを作成します。"
     },
     "slot": {
-      "desc": "**opposite**スロットは、カスタマイズの追加レイヤーを提供します。"
+      "heading": "### Opposite slot",
+      "desc": "**opposite**スロットにより、向かい側にレイヤーを追加してカスタマイズできます。"
     },
     "alert": {
       "desc": "`dense`タイムラインは、すべてのコンテンツを右に配置します。この例では `v-alert` がカードを置き換えて、異なるデザインを提供します。"
     },
     "reverse": {
       "desc": "`reverse`propを使用して、タイムライン項目の方向を反転できます。これはデフォルトモードと `dense`モードの両方で機能します。"
+    }
+  },
+  "props": {
+    "v-timeline-item": {
+      "hideDot": "タイムラインドットの非表示にする",
+      "iconColor": "Mixins.Colorable.props.color"
     }
   }
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Vuetify.js</title>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimal-ui">
+    <meta name="description" content="">
+    <meta name="twitter:card" content="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-300.png">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-300.png">
+    <meta property="fb:app_id" content="542948969434243">
+    <meta name="keywords" content="">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="manifest" href="/manifest.json">
+    <script type="text/javascript">
+      var _jipt = []
+      _jipt.push(['project', 'vuetify'])
+      _jipt.push(['before_dom_insert', function (text, node, attribute) {
+        if (text.startsWith('##')) return '<h2>' + text + '</h2>'
+        else if (text.startsWith('#')) return '<h1>' + text + '</h1>'
+        else return text
+      }])
+    </script>
+    <script type="text/javascript" src="//cdn.crowdin.com/jipt/jipt.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>

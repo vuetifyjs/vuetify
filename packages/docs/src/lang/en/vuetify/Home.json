@@ -1,6 +1,6 @@
 {
-  "becomeSponsor": "Support Vuetify",
-  "callout": "# Material Design Component Framework",
+  "becomeSponsor": "Become a Sponsor",
+  "callout": "# Material Design<br>Component Framework",
   "text": "Vuetify is a Vue UI Library with beautifully handcrafted Material Components. No design skills required — everything you need to create amazing applications is at your fingertips.",
   "features": {
     "community": {
@@ -12,7 +12,7 @@
       "title": "Semantic Material Components"
     },
     "scaffolding": {
-      "text": "Vuetify supports the future of Vue tooling through its Vue CLI 3 plugin. With one command you are ready to start building your next great idea.",
+      "text": "Vuetify supports the future of Vue tooling through its Vue CLI plugin. With one command you are ready to start building your next great idea.",
       "title": "Ready-Made Project Scaffolding"
     }
   },

@@ -4,6 +4,10 @@
   "examples": {
     "usage": {
       "desc": "滚动窗口并观看彩色的点。注意 [v-card](/components/cards) 会从 error 变为 success"
+    },
+    "options": {
+      "heading": "### 和选项一起使用",
+      "desc": "`v-intersect` 指令接受选项。 可用的选项可以在 [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) 中找到。 以下是使用 `threshold` 选项的示例。"
     }
   },
   "options": {

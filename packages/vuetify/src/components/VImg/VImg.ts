@@ -11,8 +11,13 @@ import { PropValidator } from 'vue/types/options'
 // Components
 import VResponsive from '../VResponsive'
 
+// Mixins
+import Themeable from '../../mixins/themeable'
+
 // Utils
-import { consoleError, consoleWarn } from '../../util/console'
+import mixins from '../../util/mixins'
+import mergeData from '../../util/mergeData'
+import { consoleWarn } from '../../util/console'
 
 // not intended for public use, this is passed in by vuetify-loader
 export interface srcObject {
@@ -22,8 +27,13 @@ export interface srcObject {
   aspect: number
 }
 
+const hasIntersect = typeof window !== 'undefined' && 'IntersectionObserver' in window
+
 /* @vue/component */
-export default VResponsive.extend({
+export default mixins(
+  VResponsive,
+  Themeable,
+).extend({
   name: 'v-img',
 
   directives: { intersect },
@@ -73,12 +83,6 @@ export default VResponsive.extend({
   computed: {
     computedAspectRatio (): number {
       return Number(this.normalisedSrc.aspect || this.calculatedAspectRatio)
-    },
-    hasIntersect () {
-      return (
-        typeof window !== 'undefined' &&
-        'IntersectionObserver' in window
-      )
     },
     normalisedSrc (): srcObject {
       return typeof this.src === 'string'
@@ -152,7 +156,7 @@ export default VResponsive.extend({
       // observer api, the image is not observable, and
       // the eager prop isn't being used, do not load
       if (
-        this.hasIntersect &&
+        hasIntersect &&
         !isIntersecting &&
         !this.eager
       ) return
@@ -171,11 +175,6 @@ export default VResponsive.extend({
       this.$emit('load', this.src)
     },
     onError () {
-      consoleError(
-        `Image load failed\n\n` +
-        `src: ${this.normalisedSrc.src}`,
-        this
-      )
       this.$emit('error', this.src)
     },
     getSrc () {
@@ -257,21 +256,26 @@ export default VResponsive.extend({
   render (h): VNode {
     const node = VResponsive.options.render.call(this, h)
 
-    node.data!.staticClass += ' v-image'
-
-    // Only load intersect directive if it
-    // will work in the current browser.
-    node.data!.directives = this.hasIntersect ? [{
-      name: 'intersect',
-      options: this.options,
-      modifiers: { once: true },
-      value: this.init,
-    } as any] : []
-
-    node.data!.attrs = {
-      role: this.alt ? 'img' : undefined,
-      'aria-label': this.alt,
-    }
+    const data = mergeData(node.data!, {
+      staticClass: 'v-image',
+      attrs: {
+        'aria-label': this.alt,
+        role: this.alt ? 'img' : undefined,
+      },
+      class: this.themeClasses,
+      // Only load intersect directive if it
+      // will work in the current browser.
+      directives: hasIntersect
+        ? [{
+          name: 'intersect',
+          modifiers: { once: true },
+          value: {
+            handler: this.init,
+            options: this.options,
+          },
+        }]
+        : undefined,
+    })
 
     node.children = [
       this.__cachedSizer,
@@ -280,6 +284,6 @@ export default VResponsive.extend({
       this.genContent(),
     ] as VNode[]
 
-    return h(node.tag, node.data, node.children)
+    return h(node.tag, data, node.children)
   },
 })

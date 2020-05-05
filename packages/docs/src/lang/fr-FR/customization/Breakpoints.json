@@ -1,4 +1,6 @@
 {
+  "heading": "# Breakpoints",
+  "headingText": "Vuetify vous permet de contrôler la disposition de votre application en fonction de la taille de la fenêtre. Cela peut être réalisé par exemple en utilisant des accessoires spécifiques[grid](/components/grids) ou des classes d'aide (i.e.[display](/styles/display)) qui vont cibler des points d'arrêt particuliers. Vuetify fournit 5 points d'arrêt prédéfinis définis comme décrit ci-dessous, mais vous pouvez facilement les modifier pour répondre à vos besoins.",
   "components": [
     "v-container",
     "v-layout",

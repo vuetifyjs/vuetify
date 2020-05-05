@@ -13,7 +13,7 @@
     ><slot /></prism>
 
     <div
-      v-if="filename"
+      v-if="href"
       class="v-markup__edit"
     >
       <a
@@ -28,7 +28,7 @@
     </div>
 
     <div
-      v-if="!hideCopy"
+      v-if="!noCopy"
       class="v-markup__copy"
     >
       <v-icon
@@ -72,7 +72,10 @@
   import 'prismjs/components/prism-typescript.js'
 
   // Utilities
-  import { getBranch } from '@/util/helpers'
+  import {
+    copyElementContent,
+    getBranch,
+  } from '@/util/helpers'
 
   export default {
     name: 'Markup',
@@ -87,6 +90,7 @@
         default: undefined,
       },
       inline: Boolean,
+      noCopy: Boolean,
       value: {
         type: String,
         default: 'markup',
@@ -95,14 +99,13 @@
         type: Boolean,
         default: process.env.NODE_ENV !== 'production',
       },
-      hideCopy: Boolean,
     },
 
     data: vm => ({
       code: null,
       copied: false,
       language: vm.lang,
-      branch: null,
+      branch: 'master',
     }),
 
     computed: {
@@ -111,10 +114,12 @@
         const folder = split.shift()
         const file = split.join('_')
 
-        return `${folder}/${file}.txt`
+        return file ? `${folder}/${file}.txt` : null
       },
       href () {
-        return `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/snippets/${this.file}`
+        return this.file
+          ? `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/snippets/${this.file}`
+          : null
       },
       id () {
         if (this.value === 'markup') return
@@ -129,12 +134,9 @@
 
     methods: {
       copyMarkup () {
-        const markup = this.$el.querySelector('pre')
-        markup.setAttribute('contenteditable', 'true')
-        markup.focus()
-        document.execCommand('selectAll', false, null)
-        this.copied = document.execCommand('copy')
-        markup.removeAttribute('contenteditable')
+        copyElementContent(this.$el.querySelector('pre'))
+
+        this.copied = true
         setTimeout(() => { this.copied = false }, 2000)
       },
       init () {
@@ -159,14 +161,13 @@
     display: flex
     border-radius: 4px
     position: relative
-    overflow-x: auto
-    overflow-y: hidden
+    overflow: hidden
     margin-bottom: 16px
     background: #2d2d2d
     color: #fff
 
     &.theme--dark
-      background: #424242
+      background: #1F1F1F
 
     pre, code
       margin: 0

@@ -6,7 +6,8 @@ import VSelect, { defaultMenuProps as VSelectMenuProps } from '../VSelect/VSelec
 import VTextField from '../VTextField/VTextField'
 
 // Utilities
-import { keyCodes } from '../../util/helpers'
+import mergeData from '../../util/mergeData'
+import { keyCodes, getObjectValueByPath } from '../../util/helpers'
 
 // Types
 import { PropType } from 'vue'
@@ -241,32 +242,28 @@ export default VSelect.extend({
       }
     },
     deleteCurrentItem () {
-      if (this.readonly) return
+      const curIndex = this.selectedIndex
+      const curItem = this.selectedItems[curIndex]
 
-      const index = this.selectedItems.length - 1
+      // Do nothing if input or item is disabled
+      if (
+        this.isDisabled ||
+        this.getDisabled(curItem)
+      ) return
 
-      if (this.selectedIndex === -1 && index !== 0) {
-        this.selectedIndex = index
-        return
-      }
+      const length = this.selectedItems.length
+      const nextIndex = curIndex !== length - 1
+        ? curIndex
+        : curIndex - 1
+      const nextItem = this.selectedItems[nextIndex]
 
-      const currentItem = this.selectedItems[this.selectedIndex]
-
-      if (this.getDisabled(currentItem)) return
-
-      const newIndex = this.selectedIndex === index
-        ? this.selectedIndex - 1
-        : this.selectedItems[this.selectedIndex + 1]
-          ? this.selectedIndex
-          : -1
-
-      if (newIndex === -1) {
+      if (!nextItem) {
         this.setValue(this.multiple ? [] : undefined)
       } else {
-        this.selectItem(currentItem)
+        this.selectItem(curItem)
       }
 
-      this.selectedIndex = newIndex
+      this.selectedIndex = nextIndex
     },
     clearableCallback () {
       this.internalSearch = undefined
@@ -276,12 +273,13 @@ export default VSelect.extend({
     genInput () {
       const input = VTextField.options.methods.genInput.call(this)
 
-      input.data = input.data || {}
-      input.data.attrs = input.data.attrs || {}
-      input.data.attrs.autocomplete = input.data.attrs.autocomplete || 'off'
-
-      input.data.domProps = input.data.domProps || {}
-      input.data.domProps.value = this.internalSearch
+      input.data = mergeData(input.data!, {
+        attrs: {
+          'aria-activedescendant': getObjectValueByPath(this.$refs.menu, 'activeTile.id'),
+          autocomplete: getObjectValueByPath(input.data!, 'attrs.autocomplete', 'off'),
+        },
+        domProps: { value: this.internalSearch },
+      })
 
       return input
     },
@@ -297,14 +295,14 @@ export default VSelect.extend({
         ? VSelect.options.methods.genSelections.call(this)
         : []
     },
-    onClick () {
+    onClick (e: MouseEvent) {
       if (this.isDisabled) return
 
       this.selectedIndex > -1
         ? (this.selectedIndex = -1)
         : this.onFocus()
 
-      this.activateMenu()
+      if (!this.isAppendInner(e.target)) this.activateMenu()
     },
     onInput (e: Event) {
       if (
@@ -337,7 +335,10 @@ export default VSelect.extend({
       VSelect.options.methods.onTabDown.call(this, e)
       this.updateSelf()
     },
-    onUpDown () {
+    onUpDown (e: Event) {
+      // Prevent screen from scrolling
+      e.preventDefault()
+
       // For autocomplete / combobox, cycling
       // interfers with native up/down behavior
       // instead activate the menu

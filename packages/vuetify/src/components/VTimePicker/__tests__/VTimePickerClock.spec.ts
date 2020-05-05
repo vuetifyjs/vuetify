@@ -2,18 +2,28 @@ import VTimePickerClock from '../VTimePickerClock'
 import { touch } from '../../../../test'
 import { mount } from '@vue/test-utils'
 
+const CLOCK_SIZE = 300
+const INNER_SIZE = 246
+
 describe('VTimePickerClock.js', () => {
   (window as any).TouchEvent = Event
+
+  function anglePosition (angle: number): [number, number] {
+    return [
+      CLOCK_SIZE / 2 + INNER_SIZE / 2 * Math.sin(angle / (180 / Math.PI)),
+      CLOCK_SIZE / 2 - INNER_SIZE / 2 * Math.cos(angle / (180 / Math.PI)),
+    ]
+  }
 
   function createBoundingRect (wrapper) {
     wrapper.vm.$refs.clock.getBoundingClientRect = () => {
       return {
-        width: 300,
-        height: 300,
+        width: CLOCK_SIZE,
+        height: CLOCK_SIZE,
         top: 0,
         left: 0,
-        right: 300,
-        bottom: 300,
+        right: CLOCK_SIZE,
+        bottom: CLOCK_SIZE,
         x: 0,
         y: 0,
       }
@@ -21,12 +31,12 @@ describe('VTimePickerClock.js', () => {
 
     wrapper.vm.$refs.innerClock.getBoundingClientRect = () => {
       return {
-        width: 246,
-        height: 246,
+        width: INNER_SIZE,
+        height: INNER_SIZE,
         top: 0,
         left: 0,
-        right: 246,
-        bottom: 246,
+        right: INNER_SIZE,
+        bottom: INNER_SIZE,
         x: 0,
         y: 0,
       }
@@ -223,23 +233,63 @@ describe('VTimePickerClock.js', () => {
     expect(angle({ x: 2, y: 0 })).toBe(135)
   })
 
-  it('should not emit input event when clicked disabled value (#5897)', () => {
+  it('should calculate position from angle', () => {
     const wrapper = mount(VTimePickerClock, {
       propsData: {
-        allowedValues: value => value >= 59 && value <= 60,
         min: 0,
-        max: 59,
-        size: 320,
+        max: 6,
       },
     })
 
     createBoundingRect(wrapper)
 
+    const degreesPerUnit = wrapper.vm.degreesPerUnit
     const input = jest.fn()
-    wrapper.vm.$on('input', input)
-    touch(wrapper).start(0, 0).move(141, 0)
 
+    touch(wrapper).start(0, 0)
+    wrapper.vm.$on('input', input)
+
+    for (let i = 0; i <= 6; i++) {
+      touch(wrapper).move(...anglePosition(i * degreesPerUnit))
+      expect(input).toHaveBeenCalledWith(i)
+    }
+  })
+
+  it('should not emit input event when clicked disabled value (#5897)', () => {
+    const ALLOWED_VALUE = 15
+    const ACCURACY_ANGLE = 15
+    const wrapper = mount(VTimePickerClock, {
+      propsData: {
+        allowedValues: value => value === ALLOWED_VALUE || value === 60 - ALLOWED_VALUE,
+        min: 0,
+        max: 59,
+      },
+    })
+
+    createBoundingRect(wrapper)
+
+    const degreesPerUnit = wrapper.vm.degreesPerUnit
+    const input = jest.fn()
+
+    touch(wrapper).start(0, 0)
+    wrapper.vm.$on('input', input)
+
+    // Click on disabled value and more than 15 degrees away from the allowed value
+    touch(wrapper).move(...anglePosition(ALLOWED_VALUE * degreesPerUnit + ACCURACY_ANGLE + 1))
     expect(input).not.toHaveBeenCalled()
+    touch(wrapper).move(...anglePosition(ALLOWED_VALUE * degreesPerUnit - ACCURACY_ANGLE - 1))
+    expect(input).not.toHaveBeenCalled()
+
+    // Click on disabled value and less than 15 degrees away from the allowed value
+    touch(wrapper).move(...anglePosition(ALLOWED_VALUE * degreesPerUnit + ACCURACY_ANGLE - 1))
+    expect(input).toHaveBeenCalledTimes(1)
+    expect(input).toHaveBeenCalledWith(ALLOWED_VALUE)
+    touch(wrapper).move(...anglePosition((60 - ALLOWED_VALUE) * degreesPerUnit + ACCURACY_ANGLE - 1))
+    expect(input).toHaveBeenCalledTimes(2)
+    expect(input).toHaveBeenCalledWith(60 - ALLOWED_VALUE)
+    touch(wrapper).move(...anglePosition(ALLOWED_VALUE * degreesPerUnit - ACCURACY_ANGLE + 1))
+    expect(input).toHaveBeenCalledTimes(3)
+    expect(input).toHaveBeenCalledWith(ALLOWED_VALUE)
   })
 
   it('should change with touch move', () => {
@@ -248,7 +298,6 @@ describe('VTimePickerClock.js', () => {
         min: 0,
         max: 7,
         value: 0,
-        size: 320,
         double: true,
       },
     })

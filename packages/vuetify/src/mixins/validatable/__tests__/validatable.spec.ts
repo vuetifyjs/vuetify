@@ -4,6 +4,7 @@ import {
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
+import { wait } from '../../../../test'
 
 describe('validatable.ts', () => {
   const Mock = Validatable.extend({
@@ -102,7 +103,8 @@ describe('validatable.ts', () => {
 
     wrapper.vm.validate()
 
-    expect(wrapper.vm.errorBucket).toEqual([])
+    // https://github.com/vuetifyjs/vuetify/issues/9976
+    expect(wrapper.vm.errorBucket).toEqual([''])
 
     // Boolean true sets no messages
     wrapper.setProps({ rules: [true] })
@@ -337,7 +339,7 @@ describe('validatable.ts', () => {
     await wrapper.vm.$nextTick()
 
     // Wait for watcher's timeout
-    await new Promise(resolve => setTimeout(resolve, 0))
+    await wait()
 
     expect(wrapper.vm.hasInput).toBe(false)
     expect(wrapper.vm.hasFocused).toBe(false)
@@ -442,5 +444,36 @@ describe('validatable.ts', () => {
     expect(wrapper.vm.computedColor).toBeUndefined()
     expect(wrapper.vm.validationState).toBeUndefined()
     expect(wrapper.vm.hasState).toBe(false)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10174
+  it('should validate correct value when blurring', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        rules: [v => !!v || 'Mandatory Field'],
+        validateOnBlur: true,
+        value: 'Foo',
+      },
+    })
+
+    wrapper.setData({ isFocused: true })
+
+    wrapper.setProps({ value: '' })
+    await wrapper.vm.$nextTick()
+
+    wrapper.setData({ isFocused: false })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.hasError).toBe(true)
+
+    wrapper.setData({ isFocused: true })
+
+    wrapper.setProps({ value: 'Bar' })
+    await wrapper.vm.$nextTick()
+
+    wrapper.setData({ isFocused: false })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.hasError).toBe(false)
   })
 })

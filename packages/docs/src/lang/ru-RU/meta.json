@@ -1,15 +1,27 @@
 {
+  "": {
+    "title": "Vue Material Design Component Framework",
+    "description": "Vuetify - это компоненты Material Design для Vue.js. Он призван предоставить все инструменты, необходимые для создания красивых приложений, насыщенных контентом.",
+    "keywords": "vue, material design components, vue components, material design components, vuetify, vuetify.js, component framework"
+  },
   "404": {
+    "title": "Упс, 404",
     "description": "Ой, похоже, того что вы искали здесь нет!"
   },
   "introduction/why-vuetify": {
-    "title": "Почему Vuetify?"
+    "title": "Почему Vuetify?",
+    "description": "Vuetify имеет очень активное сообщество, обеспечивает простые в использовании компоненты Material Design и постоянно обновляется.",
+    "keywords": "почему vuetify, почему выбирают vuetify, лучший vue framework, лучший ui framework"
   },
   "introduction/frequently-asked-questions": {
-    "title": "Часто задаваемые вопросы"
+    "title": "Часто задаваемые вопросы",
+    "description": "Застряли на проблеме? Ознакомьтесь с наиболее часто задаваемыми вопросами сообщества Vuetify.",
+    "keywords": "часто задаваемые вопросы, (FAQ)"
   },
   "introduction/long-term-support": {
-    "title": "Долгосрочная поддержка"
+    "title": "Долгосрочная поддержка",
+    "description": "Vuetify обеспечивает долгосрочную поддержку последнего основного релиза в течение 12 месяцев для критических ошибок и уязвимостей безопасности.",
+    "keywords": "lts, долгосрочная поддержка"
   },
   "introduction/meet-the-team": {
     "title": "Познакомьтесь с командой"

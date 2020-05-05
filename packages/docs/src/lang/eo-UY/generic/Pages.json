@@ -14,6 +14,7 @@
   "showExample": "crwdns35524:0crwdne35524:0",
   "slots": "crwdns35526:0crwdne35526:0",
   "supplemental": "crwdns41536:0crwdne41536:0",
+  "functional": "crwdns56497:0crwdne56497:0",
   "type": "crwdns35530:0crwdne35530:0",
   "introduction": "crwdns35532:0crwdne35532:0",
   "upNext": "crwdns35534:0crwdne35534:0",
@@ -25,5 +26,6 @@
   "return": "crwdns35540:0crwdne35540:0",
   "example": "crwdns35542:0crwdne35542:0",
   "signature": "crwdns35544:0crwdne35544:0",
-  "value": "crwdns35546:0crwdne35546:0"
+  "value": "crwdns35546:0crwdne35546:0",
+  "variableApi": "crwdns56499:0crwdne56499:0"
 }

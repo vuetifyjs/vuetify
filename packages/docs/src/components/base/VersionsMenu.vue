@@ -1,5 +1,6 @@
 <template>
   <v-menu
+    v-model="menu"
     max-height="500"
     offset-y
     right
@@ -14,12 +15,17 @@
         v-bind="attrs"
         v-on="on"
       >
+        <v-icon left>mdi-tag-outline</v-icon>
+
         <span v-text="version" />
+
+        <v-icon right>mdi-menu-{{ menu ? 'up' : 'down' }}</v-icon>
       </v-btn>
     </template>
 
     <v-card>
       <v-list
+        class="px-0 py-1"
         dense
         nav
       >
@@ -57,6 +63,10 @@
 
   export default {
     name: 'BaseVersionsMenu',
+
+    data: () => ({
+      menu: false,
+    }),
 
     computed: {
       currentVersion: sync('app/currentVersion'),

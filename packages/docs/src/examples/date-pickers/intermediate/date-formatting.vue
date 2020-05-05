@@ -8,7 +8,6 @@
           :close-on-content-click="false"
           transition="scale-transition"
           offset-y
-          full-width
           max-width="290px"
           min-width="290px"
         >
@@ -34,7 +33,6 @@
           :close-on-content-click="false"
           transition="scale-transition"
           offset-y
-          full-width
           max-width="290px"
           min-width="290px"
         >

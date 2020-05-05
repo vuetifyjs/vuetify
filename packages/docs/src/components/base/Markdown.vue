@@ -52,41 +52,17 @@
         clearTimeout(this.timeout)
 
         this.timeout = setTimeout(() => {
-          const sameInternal = this.$el.querySelectorAll('a.v-markdown--same-internal')
-          const internal = this.$el.querySelectorAll('a.v-markdown--internal')
+          const links = this.$el.querySelectorAll('a.v-markdown--link[href^="#"]')
 
-          Array.prototype.forEach.call(sameInternal, el => {
-            el.addEventListener('click', this.onSameInternalClick)
-          })
-
-          Array.prototype.forEach.call(internal, el => {
-            el.addEventListener('click', this.onInternalClick)
+          Array.prototype.forEach.call(links, el => {
+            el.addEventListener('click', this.onLinkClick)
           })
         }, 300)
       },
-      onSameInternalClick (e) {
+      onLinkClick (e) {
         e.preventDefault()
 
-        this.$router.push(e.target)
-      },
-      onInternalClick (e) {
-        e.preventDefault()
-
-        const target = e.target.tagName === 'A'
-          ? e.target
-          : e.target.parentElement
-
-        const lang = `/${this.lang}`
-        const length = lang.length
-        let href = target.getAttribute('href')
-
-        // If missing leading forward slash
-        if (href.charAt(0) !== '/') href = `/${href}`
-
-        // If missing language
-        if (href.slice(0, length) !== lang) href = `${lang}${href}`
-
-        this.$router.push(href)
+        this.$router.push(e.target.getAttribute('href'))
       },
     },
 
@@ -116,7 +92,7 @@
       if (wantsList) code = code.map(c => `- ${c}\n`).join('')
 
       if (typeof code !== 'string') {
-        console.log(code, typeof code)
+        console.log(`Invalid type ${typeof code}, expected string`, code)
         code = ''
       }
 

@@ -8,7 +8,7 @@
     }
   },
   "options": {
-    "{ move, start, end }": "Attribue un rappel lorsque l'événement tactile commence, se termine et pendant qu'il est en cours",
+    "{ move, start, end }": "Attribue un callback lorsque l'événement tactile commence, se termine et pendant qu'il est en cours",
     "{ up, down, left, right }": "Attribue une fonction de rappel en fonction de la direction du balayage. L'association de fonctions de rappel sur les axes x et y n'est pas recommandée pour le moment"
   }
 }

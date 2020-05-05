@@ -992,3 +992,17 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 30`] = `
   </div>
 </div>
 `;
+
+exports[`VSkeletonLoader.ts should remove transition when loading content 1`] = `
+Object {
+  "display": "",
+  "transition": "",
+}
+`;
+
+exports[`VSkeletonLoader.ts should remove transition when loading content 2`] = `
+Object {
+  "display": "inline-block",
+  "transition": ".3s ease",
+}
+`;

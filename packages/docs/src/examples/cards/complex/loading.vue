@@ -28,11 +28,11 @@
         <div class="grey--text ml-4">4.5 (413)</div>
       </v-row>
 
-      <div class="my-4 subtitle-1 black--text">
+      <div class="my-4 subtitle-1">
         $ • Italian, Cafe
       </div>
 
-      <div>Small plates, salads & sandwiches an inteimate setting with 12 indoor seats plus patio seating.</div>
+      <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
     </v-card-text>
 
     <v-divider class="mx-4"></v-divider>
@@ -57,7 +57,7 @@
 
     <v-card-actions>
       <v-btn
-        color="deep-purple accent-4"
+        color="deep-purple lighten-2"
         text
         @click="reserve"
       >

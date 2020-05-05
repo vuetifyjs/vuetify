@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'الصفوف لكل صفحة:',
     ariaLabel: {
-      sortDescending: ': مفروز تنازلي. تنشيط لإزالة الفرز.',
-      sortAscending: ': مفروز تصاعدي. تنشيط للفرز التنازلي.',
-      sortNone: ': غير مفروزة. تفعيل لفرز تصاعدي.',
+      sortDescending: 'مفروز تنازلي. تنشيط لإزالة الفرز.',
+      sortAscending: 'مفروز تصاعدي. تنشيط للفرز التنازلي.',
+      sortNone: 'غير مفروزة. تفعيل لفرز تصاعدي.',
+      activateNone: 'Activate to remove sorting.',
+      activateDescending: 'Activate to sort descending.',
+      activateAscending: 'Activate to sort ascending.',
     },
     sortBy: 'مفروزة حسب',
   },
@@ -44,5 +47,14 @@ export default {
   timePicker: {
     am: 'صباحاً',
     pm: 'مساءً',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'ترقيم الصفحات الملاحة',
+      next: 'الصفحة التالية',
+      previous: 'الصفحة السابقة',
+      page: '{0} انتقل إلى صفحة',
+      currentPage: '{0} الصفحة الحالية ، الصفحة',
+    },
   },
 }

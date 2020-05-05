@@ -1,6 +1,6 @@
 <template>
-  <section id="examples">
-    <base-heading id="examples">Generic.Pages.examples</base-heading>
+  <div>
+    <base-heading>Generic.Pages.examples</base-heading>
 
     <base-markdown>Generic.Pages.examplesText</base-markdown>
 
@@ -23,7 +23,7 @@
         :key="`ad-${i}`"
       />
     </section>
-  </section>
+  </div>
 </template>
 
 <script>

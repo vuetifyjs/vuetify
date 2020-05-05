@@ -1,0 +1,38 @@
+alert(value="info") usageAlert
+
+usage-new(:value=`{
+  sliders: [
+    {
+      prop: 'count',
+      label: 'Item Count',
+      attrs: {
+        min: 7000,
+        max: 15000
+      }
+    },
+    {
+      prop: 'height',
+      label: 'Height',
+      value: 200,
+      attrs: {
+        min: 175,
+        max: 275
+      }
+    }
+  ]
+}`)
+
+api(:value=`[
+  'v-virtual-scroll'
+]`)
+
+examples(:value=`[
+  'simple/user-directory',
+  'advanced/benching',
+]`)
+
+up-next(:value=`[
+  'components/lists',
+  'components/data-tables',
+  'components/data-iterators',
+]`)

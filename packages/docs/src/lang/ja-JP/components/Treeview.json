@@ -1,10 +1,35 @@
 {
+  "heading": "# Treeview",
+  "headingText": "`v-treeview` コンポーネントは大量のネストされたデータを表示するのに便利です。",
   "examples": {
     "usage": {
       "desc": "基本的な使い方の例"
     },
+    "dense": {
+      "heading": "### Dense mode",
+      "desc": "Dense（高密度）モードでは、アイテムの高さが減少し、よりコンパクトなレイアウトが提供されます。"
+    },
     "color": {
-      "heading": "色"
+      "heading": "色",
+      "desc": "アクティブなツリービューノードのテキストと背景色をコントロールできます。"
+    },
+    "shaped": {
+      "desc": "シェイプされたツリービューでは、ノードの片側は丸い境界線になります。"
+    },
+    "rounded": {
+      "desc": "ツリービューノードを丸めることができます。"
+    },
+    "file-explorer": {
+      "heading": "### スロット",
+      "desc": "スロットを使用して、直感的なファイルエクスプローラーを作成できます。 `prepend` スロットの他に、`label`用のスロットと`append` スロットもあります。"
+    },
+    "selectable": {
+      "heading": "### Selectable",
+      "desc": "ツリービューノードと子を簡単に選択できます。"
+    },
+    "hoverable": {
+      "heading": "### Hoverable",
+      "desc": "ツリービューノードは、ホバー効果を設定できます。"
     }
   },
   "props": {
@@ -18,8 +43,12 @@
       "hoverable": "ノードの上にマウスオーバーする時、hover クラスを適用します。",
       "filter": "項目をフィルタリングするカスタム関数です。デフォルトでは項目のラベルで大文字と小文字の区別をしない検索を使用します。",
       "indeterminateIcon": "ノードが選択されていない時に使われるアイコンです。`selectable` が `true` の場合のみ表示されます。",
-      "itemChildren": "子要素を含む項目のプロパティです。",
-      "itemDisabled": "無効化された状態の項目プロパティです。"
+      "itemChildren": "子要素を含む`items`のプロパティ",
+      "itemDisabled": "無効化された状態の項目プロパティです。",
+      "items": "ツリービューの構築に使用される項目の配列",
+      "itemText": "ラベル テキストを含む、指定された `items` のプロパティ",
+      "loadingIcon": "ノード読み込み中に使用されるアイコン",
+      "multipleActive": "`true`の場合、ユーザーは同時に複数のアクティブノードを持つことができます。"
     }
   }
 }

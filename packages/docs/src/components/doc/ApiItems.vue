@@ -25,7 +25,11 @@
               label="Available Component(s)"
               outlined
               prepend-inner-icon="mdi-view-dashboard"
-            />
+            >
+              <template v-slot:item="{ item }">
+                <span class="comp-name">{{ item }}</span>
+              </template>
+            </v-select>
           </v-col>
 
           <v-col
@@ -53,7 +57,6 @@
       v-model="tab"
       :slider-color="computedTabs.length ? 'primary' : 'transparent'"
       :vertical="$vuetify.breakpoint.smAndUp"
-      background-color="transparent"
     >
       <v-tab
         v-for="(tab, i) in computedTabs"

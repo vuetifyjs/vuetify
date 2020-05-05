@@ -11,11 +11,11 @@
     />
 
     <v-btn
+      :to="`/${$route.params.lang}/themes/premium/`"
       color="primary"
       large
       outlined
       rounded
-      to="themes/premium"
     >
       <span class="caption font-weight-bold">
         {{ $t("Vuetify.Home.seeMoreThemes") }}
