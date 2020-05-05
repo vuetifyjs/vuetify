@@ -2,9 +2,11 @@
 
 export default new Vuetify({
   theme: {
-    themeCache: {
-      get: key => localStorage.getItem(key),
-      set: (key, value) => localStorage.setItem(key, value),
+    options: {
+      themeCache: {
+        get: key => localStorage.getItem(key),
+        set: (key, value) => localStorage.setItem(key, value),
+      },
     },
   },
 })

@@ -1,5 +1,26 @@
 {
   "heading": "# SASS 变量",
+  "headingText": "Vuetify 使用 **SASS/SCSS** 来制作框架的风格和外观。利用你的 `vue.config.js` 文件中的 _sass/scss 数据选项_，你可以选择性地传递自定义变量来覆盖全局默认值。可用变量的列表位于每个组件的API部分和本页面的 [Variable API](#variable-api) 中。此功能由 [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugin-vuetify) 自动处理。",
+  "variableApiDesc": "在整个 Vuetify 框架中，有很多 SASS/SCSS 变量可以被自定义。下面是一个自定义的 **variables** 文件的例子。你可以在下面找到更多关于可用的 [变量](#variable-api) 信息。",
+  "setupHeading": "## Vue CLI 安装",
+  "setupText1": "如果你还没有安装 Vuetify，请查看 [快速启动指南](/getting-started/quick-start#vue-cli-3-install)。安装完成后，在你的 src 目录下创建一个名为 `sass`、`scss` 或 `styles` 的文件夹，文件名为 `variables.scss` 或 `variables.sass`。**vuetify-loader** 会自动将你的变量引导到 Vue CLI 的编译过程中，覆盖框架的默认值。",
+  "setupText2": "当你运行 yarn serve 时，vuetify-cli-plugin 会自动将全局的 Vuetify 变量提升到你所有的 sass/scss 文件中。当对单个组件变量进行修改时，你仍然需要手动包含它的变量文件。你可以在下面找到一个 [自定义变量](#example-variable-file) 文件的例子。",
+  "sassAlert1": "注意：只有使用 [A-la-carte 安装](/customization/a-la-carte) 才支持 SASS/SCSS 变量。使用 **vue-cli-plugin-vuetify* *插件时这将会自动设置。",
   "nuxtHeading1": "## Nuxt 安装",
-  "webpackHeading": "## Webpack 安装"
+  "nuxtText1a": "即将推出。如果你有兴趣在这部分的合作，请联系 [社区](https://community.vuetifyjs.com) 中的 _johnleider_。",
+  "caveatsHeading1": "## 注意事项",
+  "caveatsText1a": "使用 sass 变量时，有几个注意事项需要注意。",
+  "caveatsHeading2": "### 导入变量文件",
+  "caveatsText2a": "当使用变量文件时，请确保你 **只** 定义或导入其他变量。引导的文件会被添加到每个组件中，并且会导致你的应用程序中的 CSS 重复。下面是 **不** 要这么做的一个例子。",
+  "caveatsHeading3": "### 编译时间",
+  "caveatsText3a": "当使用变量时，你的应用程序的初始编译工作会增加。这是由于每当你对挂起的变量文件进行修改时，样式会实时更新。这种情况只有在初始编译步骤中才会出现，可以通过改变你从哪里导入 Vuetify 来改善。请记住，如果你的应用程序受到任何 [Vuetify  loader 限制](/customization/a-la-carte#limitations) 的影响，则此方法 _将无法_ 正常使用；你的应用程序仍然可以运行，但不会得到性能的提升。",
+  "componentSassImportHeading1": "## 组件中的使用",
+  "componentSassImportText1a": "有两种方法可以在你的组件中导入和使用 Vuetify 变量，这两种方法提供了相同的结果。第一种方法是导入默认的框架样式文件：",
+  "componentSassImportText1b": "如果你使用 [预设](/customization/presets) 或根本 **不** 使用变量文件，这是首选的方法。",
+  "componentSassImportText1c": "第二种方法是导入你的项目的 _specific_ 变量文件。如果你使用自己的变量文件导入全局的 Vuetify 样式，建议使用这个方法。",
+  "componentSassImportText1d": "请记住，在导入和使用变量文件时，你使用的 SASS 或 SCSS 这些语法 _并不重要_。",
+  "webpackHeading": "## Webpack 安装",
+  "webpackText1": "本节假设你已经按照我们在 [快速启动](/getting-started/quick-start#webpack-install) 页面上的 Webpack 指南进行了操作。这个选项会根据你所使用的 [sass-loader](https://github.com/webpack-contrib/sass-loader) 的版本而有所不同。确保你在设置 SASS/SCSS 数据选项时使用正确的语法，因为它们有不同的行尾。你可以在 sass-loader 的 Github 页面上找到更多关于 [prependData](https://github.com/webpack-contrib/sass-loader#prependdata) 的信息。",
+  "exampleHeading1": "## 变量文件示例",
+  "exampleText1a": "下面是变量文件的示例："
 }

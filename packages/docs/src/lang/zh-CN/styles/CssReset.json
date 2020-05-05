@@ -1,0 +1,28 @@
+{
+  "heading": "# CSS 重置",
+  "headingText": "Vuetify 项目的基础风格。",
+  "normalizeHeading": "## 启动器",
+  "normalizeText1": "ress 是一个现代的 CSS 重置库，它为样式表打下了坚实的基础。它在 [normalize.css](https://github.com/necolas/normalize.css) 的基础上，并增加了一些新的功能，例如为 `<code>` 元素指定 `font-family: monospace`，在悬停时从元素中移除所有 `outlines` 等等。更多信息可以在 [ress GitHub 仓库](https://github.com/filipelinhares/ress) 中找到。",
+  "normalizeText2": "这些样式会在 **src/styles/generic/_reset.scss** 中自动导入，并在 **src/styles/generic/_index.scss** 中作为 **Generic** 样式引导。",
+  "warning": "Vuetify 样式重置已全局应用，并影响默认元素，如 `buton` 和 `input`。 这也包括位于 [v-app](/components/application) 组件之外的任何东西。",
+  "resetHeading": "## 重置功能",
+  "resetText1": "以下是 ress 在默认的 **normalize.css** 功能基础上提供的额外 *功能* 列表",
+  "resetText2": [
+    "在所有元素中应用 `box-sizing: border-box;`。",
+    "在所有元素中重置 `padding` 和 `margin`。",
+    "在所有元素和伪元素中指定 `background-repeat: no-repeat`。",
+    "继承 `text-decoration` 和 `vertical-align` 到 `::before` 和 `::after`。",
+    "当在所有浏览器中悬停时，删除 `outline`。",
+    "在代码元素中指定 `font-family: monospace`。",
+    "重置输入元素中的 `border-radius`。",
+    "指定表单元素的字体继承。",
+    "移除所有浏览器中的默认按钮样式。",
+    "指定文本区域的大小调整为垂直。",
+    "对按钮元素应用 `cursor: pointer`。",
+    "在 `html` 中应用 `tab-size: 4` 。",
+    "像标准输入一样的 `select` 样式。",
+    "aria 属性的 `cursor` 样式。",
+    "隐藏屏幕上的内容，但不隐藏读屏器。"
+  ],
+  "resetText3": "关于所有应用样式的完整列表，请参阅 [ress css样式表](https://github.com/filipelinhares/ress/blob/master/ress.css)。"
+}

@@ -1,17 +1,16 @@
 {
-  "heading": "# 支持 Vuetify 的开发",
-  "headingText": "Vuetify 是一个基于 [MIT license](https://opensource.org/licenses/MIT) 的开源项目。它将会一直免费。但是我们需要花费大量时间来维护框架核心和所有补充功能。一次性捐助者、Github 赞助者、公司和特殊赞助商的捐赠来支持我们在完成了 Material Design spec 之后，也可以继续开发额外的功能。你可以通过以下方式支持 Vuetify 的开源项目：",
-  "affiliatesHeader": "接入商:",
-  "openCollective": "### Open Collective",
-  "openCollectiveBlurb": "Open Collective 是每月直接支持核心开发团队",
-  "sponsors": "### 赞助商",
-  "github": "### Github",
-  "githubBlurb": "赞助者每月直接支持作者 John Leider。",
-  "serviceSponsorsHeader": "服务赞助商：",
-  "tidelift": "### Tidelift",
-  "tideliftBlurb": "要获得 Vuetify 企业支持，请使用 Tidelift 订阅。",
-  "oneTime": "### 一次性捐助",
-  "oneTimeBlurb": "Vuetify 感谢通过以下途径收到的任何一次性捐款：",
-  "questionHeader": "还有其他问题吗？",
-  "questionButton": "联系我们"
+  "heading": "# 赞助Vuetify开发",
+  "headingText": "Vuetify是一个 [MIT licensed](https://opensource.org/licenses/MIT) 的开源项目，完全可以免费使用。它由 [John](https://github.com/johnleider) 和 [Heather](https://github.com/heatherleider) Leider 作为全职工作积极维护。此外，一个由开源贡献者组成的核心团队帮助维护和指导框架的未来发展。维护核心框架和生态系统包所需的时间和投入是非常大的。您可以通过以下方式支持 Vuetify 的开源项目。",
+  "oneTimeHeading": "### 一次性捐款",
+  "oneTimeText1": "一次性捐款可以通过 [Paypal](https://paypal.me/vuetify)。",
+  "recurringHeading": "### 定期捐款",
+  "recurringText1": "定期捐款会带来 **专属** 的好处，比如 GitHub 的优先级问题、应用审核，以及将您的标志放在这个网站上。",
+  "recurringText2": [
+    "[通过 GitHub 成为一个支持者或赞助者](https://github.com/sponsors/johnleider) 或 [Patreon](https://www.patreon.com/vuetify) (直接前往 Vuetify 支持 John and Heather)。",
+    "[通过 Open Collective 成为支持者或赞助商](https://opencollective.com/vuetify) （一个支持 Vuetify 发展和维护的透明基金）。"
+  ],
+  "sponsorsHeading": "### 当前项目赞助者",
+  "cursoryHeading": "## 粗略",
+  "cursoryText1": "如果您经营着一家企业，并且在一个能带来收入的产品中使用 Vuetify，那么赞 助Vuetify 开发是有商业意义的。*它可以确保您的产品所依赖的项目保持健康并积极维护*。Vuetify 是 John 和 Heather 的 **全职** 工作；您的赞助和贡献有助于支持他们。",
+  "cursoryText2": "如果您有任何疑问，请联系 [John](mailto:john@vuetifyjs.com) 或 [Heather](mailto:heather@vuetifyjs.com)。"
 }

@@ -85,6 +85,7 @@
     "rimraf": "^2.6.3",
     "sass": "^1.22.7",
     "sass-loader": "^7.1.0",
+    "sitemap-webpack-plugin": "^0.7.1",
     "source-map-loader": "^0.2.4",
     "stringify-object": "^3.3.0",
     "style-loader": "^0.23.1",

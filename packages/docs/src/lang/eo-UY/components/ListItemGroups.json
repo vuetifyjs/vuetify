@@ -34,5 +34,8 @@
     "v-list-item-title": "crwdns38440:0crwdne38440:0",
     "v-list-item-subtitle": "crwdns38442:0crwdne38442:0",
     "v-list-item-action-text": "crwdns38444:0crwdne38444:0"
+  },
+  "events": {
+    "change": "crwdns56980:0crwdne56980:0"
   }
 }

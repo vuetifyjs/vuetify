@@ -1,5 +1,6 @@
 {
   "heading": "# 数据表格",
+  "headingText": "`v-data-table` 组件用于显示表格数据。功能包括排序、搜索、分页、内嵌式编辑和行选择。",
   "examples": {
     "usage": {
       "desc": "标准数据表格默认将您的数据作为简单行渲染。"
@@ -91,6 +92,10 @@
     "filterable-columns": {
       "heading": "### 过滤列",
       "desc": "通过在标题项上将 `filterable` 的属性设置为 false，可以轻松地禁止在搜索表行时包括特定列。 在下面的示例中，甜点名称列不再可搜索。"
+    },
+    "simple-checkbox": {
+      "heading": "### 简单复选框",
+      "desc": "当想在你的数据表中的插槽模板中使用复选框组件时，请使用 `v-simple-checkbox` 组件，而不是 `v-checkbox` 组件。`v-simple-checkbox` 组件是内部使用的，并且会将表头对齐。"
     }
   },
   "props": {
@@ -109,6 +114,7 @@
       "fixedHeader": "固定页眉至表格顶部。**注意：** 在 IE11 中不可用",
       "headerProps": "将属性传递到默认标题。 有关更多信息，请参见 'v-data-table-header' API",
       "headers": "表头数组",
+      "headersLength": "可与 `hide-default-header` 结合使用，指定表格中的列数，以使扩展行和加载条正常运行。",
       "height": "设置表的显式高度",
       "hideDefaultHeader": "隐藏默认标题",
       "mobileBreakpoint": "用于设置何时在常规表和移动视图之间切换",
@@ -120,12 +126,19 @@
     "v-simple-checkbox": {
       "color": "Mixins.Colorable.props.color",
       "dark": "Mixins.Themeable.props.dark",
+      "disabled": "禁用简单复选框。",
+      "indeterminate": "为简单复选框设置一个不确定的状态。",
+      "indeterminateIcon": "处于不确定状态时使用的图标。",
       "light": "Mixins.Themeable.props.light",
-      "ripple": "Mixins.Rippleable.props.ripple"
+      "offIcon": "处于不活动状态时使用的图标。",
+      "onIcon": "处于激活状态时使用的图标.",
+      "ripple": "Mixins.Rippleable.props.ripple",
+      "value": "一个 boolean，表示简单的复选框是否被选中。"
     }
   },
   "slots": {
     "v-data-table": {
+      "body": "替换默认表 `<tbody>` 的插槽",
       "body.append": "将元素追加到默认表 `<tbody>` 的末尾",
       "body.prepend": "将元素添加到默认表 `<tbody>` 的开头",
       "expanded-item": "插槽自定义展开的行",
