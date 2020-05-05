@@ -129,6 +129,11 @@
     "description": "Vuetify uses ress.min, a complete browser reset based off or normalize.css.",
     "keywords": "ress.min, css reset, vuetify css reset"
   },
+  "styles/border-radius": {
+    "title": "Border Radius",
+    "description": "Use border utilities to quickly style the border-radius of any element.",
+    "keywords": "border radius classes, radius utilities, vuetify radius helper classes"
+  },
   "styles/text-and-typography": {
     "title": "CSS Text and Typography helpers",
     "description": "Text and typography helpers classes assist in modifying text on varying viewport sizes with pre-configured css classes.",

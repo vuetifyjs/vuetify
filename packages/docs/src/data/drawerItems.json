@@ -49,6 +49,7 @@
     "icon": "mdi-palette",
     "children": [
       { "text": "cssReset", "to": "css-reset" },
+      { "new": true, "text": "borderRadius", "to": "border-radius" },
       { "text": "colors", "to": "colors" },
       { "text": "content", "to": "content" },
       { "text": "display", "to": "display" },
