@@ -20,7 +20,10 @@ export default VAutocomplete.extend({
       type: Array as PropType<string[]>,
       default: () => ([]),
     },
-    itemMutate: Function,
+    itemMutate: {
+      type: Function,
+      default: (value: any) => value,
+    },
     returnObject: {
       type: Boolean,
       default: true,
@@ -186,7 +189,9 @@ export default VAutocomplete.extend({
 
       // The internal search is not matching
       // the internal value, update the input
-      if (this.internalSearch !== this.getText(this.internalValue)) this.setValue()
+      if (this.internalSearch !== this.getText(this.internalValue)) {
+        this.setValue(this.itemMutate(this.internalSearch))
+      }
 
       // Reset search if using slot
       // to avoid a double input
@@ -209,7 +214,7 @@ export default VAutocomplete.extend({
         return this.updateEditing()
       }
 
-      let internalSearch = this.internalSearch
+      const internalSearch = this.internalSearch
 
       const index = this.selectedItems.findIndex(item => {
         return this.getValue(item) === internalSearch
@@ -223,17 +228,13 @@ export default VAutocomplete.extend({
         internalValue.splice(index, 1)
 
         this.setValue(internalValue)
-      } else if (typeof this.itemMutate === 'function') {
-        // If we hit this conditional, the user
-        // provided a custom mutator function
-        internalSearch = this.itemMutate(internalSearch)
       }
 
       // If menu index is greater than 1
       // the selection is handled elsewhere
       // TODO: find out where
       if (menuIndex < 0) {
-        this.selectItem(internalSearch)
+        this.selectItem(this.itemMutate(internalSearch))
       }
 
       this.internalSearch = null
