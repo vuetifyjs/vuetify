@@ -1,0 +1,25 @@
+{
+  "heading": "# Virtual scroller",
+  "headingText": "The `v-virtual-scroll` component displays a virtual, *infinite* list. It supports dynamic height and scrolling vertically.",
+  "usageText": "The virtual scroller displays just enough records to fill the viewport and uses the existing component, rehydrating it with new data.",
+  "usageAlert": "We are in the *process* of integrating the `v-virtual-scroller` component into existing features and components. If you are interested in helping, please reach out to **John Leider** in the [Discord Community](https://community.vuetifyjs.com).",
+  "examples": {
+    "user-directory": {
+      "heading": "### User directory",
+      "desc": "The `v-virtual-scroll` component can render an __unlimited__ amount of items by rendering **only** what it needs to fill the scroller's viewport."
+    },
+    "benching": {
+      "heading": "### Pre-rendering items",
+      "desc": "By default the `v-virtual-scroller` does not pre-render additional items outside of the viewport. Increasing this value causes the scroller to render additional items as **padding**. It is **recommended** to keep this number as low as possible for the best possible `performance`."
+    }
+  },
+  "props": {
+    "bench": "The number of items **outside** the user view that are rendered (even if they are **not** viewable); to help prevent empty white space when scrolling *fast*.",
+    "height": "Height of the component as a css value",
+    "itemHeight": "Height in pixels of the items to display",
+    "items": "The array of items to display"
+  },
+  "slots": {
+    "default": "Default slot to customize items appearance"
+  }
+}

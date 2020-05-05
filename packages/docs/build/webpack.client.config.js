@@ -8,6 +8,8 @@ const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserJSPlugin = require('terser-webpack-plugin')
+const sitemap = require('./sitemap')
+
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -89,6 +91,7 @@ const config = merge(base, {
       filename: '_fallback.html',
       template: resolve('../src/spa.template.html')
     }),
+    sitemap
   ],
   devServer: {
     publicPath: '/',

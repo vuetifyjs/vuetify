@@ -135,6 +135,19 @@ describe('VAlert.ts', () => {
     expect(icon.text()).toBe('block')
   })
 
+  it('should render custom dismissible icon', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        dismissible: true,
+        closeIcon: 'foo',
+      },
+    })
+
+    const icon = wrapper.find('.v-alert__content + .v-btn')
+
+    expect(icon.text()).toBe('foo')
+  })
+
   it('should show border', async () => {
     const directions = ['top', 'right', 'bottom', 'left']
     const wrapper = mountFunction()
