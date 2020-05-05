@@ -2,7 +2,7 @@
   <div>
     <v-item-group
       v-model="model"
-      class="pa-2 mb-4 d-flex justify-center"
+      class="pa-2 d-flex justify-center"
       mandatory
     >
       <v-item
@@ -31,10 +31,19 @@
       </v-item>
     </v-item-group>
 
-    <v-card class="text-center pa-4">
-      <v-typography :size="model">
-        The quick brown fox jumped over the lazy dog.
-      </v-typography>
+    <div class="text-h5 mb-6 text-center">
+      <code v-text="typeClass"></code>
+    </div>
+
+    <v-card
+      class="d-flex align-center justify-center pa-4 mx-auto"
+      max-width="550"
+      min-height="76"
+      outlined
+    >
+      <div :class="`text-${model}`">
+        Example Heading
+      </div>
     </v-card>
   </div>
 </template>
@@ -47,9 +56,25 @@
         ['mdi-devices', 'all', 'caption'],
         ['mdi-cellphone-iphone', 'sm', 'body-2'],
         ['mdi-laptop', 'md', 'body-1'],
-        ['mdi-monitor', 'lg', 'title'],
-        ['mdi-television', 'xl', 'display-1'],
+        ['mdi-monitor', 'lg', 'h6'],
+        ['mdi-television', 'xl', 'h4'],
       ],
     }),
+
+    computed: {
+      typeClass () {
+        const type = ['text', this.model]
+        const [, breakpoint] = this.current
+
+        if (breakpoint !== 'all') {
+          type.splice(1, 0, breakpoint)
+        }
+
+        return `.${type.join('-')}`
+      },
+      current () {
+        return this.sizes.find(size => size[2] === this.model)
+      },
+    },
   }
 </script>
