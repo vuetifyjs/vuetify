@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const base = require('./webpack.base.config')
+const CopyPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -77,6 +78,9 @@ const config = merge(base, {
     new webpack.DefinePlugin({
       'process.env.VUE_ENV': '"client"'
     }),
+    new CopyPlugin([
+      { from: 'public' },
+    ]),
     new HtmlWebpackPlugin({
       filename: '_crowdin.html',
       template: resolve('../src/crowdin.template.html')
