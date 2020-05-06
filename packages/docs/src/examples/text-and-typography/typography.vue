@@ -9,8 +9,8 @@
         v-for="[
           c,
           text,
-          weight,
           size,
+          weight,
           spacing,
           margin
         ] in classes"
