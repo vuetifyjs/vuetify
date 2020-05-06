@@ -52,6 +52,9 @@ export default mixins(header).extend({
           hideDetails: true,
           multiple: this.options.multiSort,
           value: this.options.multiSort ? this.options.sortBy : this.options.sortBy[0],
+          menuProps: {
+            closeOnContentClick: true,
+          },
         },
         on: {
           change: (v: string | string[]) => this.$emit('sort', v),
