@@ -889,4 +889,30 @@ describe('VDataTable.ts', () => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalCurrentItems).toHaveLength(1)
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10244
+  it('should respect mustSort property on options', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: testItems,
+        headers: [
+          { text: 'Dessert (100g serving)', value: 'name' },
+        ],
+        options: {
+          mustSort: true,
+        },
+      },
+    })
+
+    wrapper.find('th').trigger('click')
+    await wrapper.vm.$nextTick()
+
+    wrapper.find('th').trigger('click')
+    await wrapper.vm.$nextTick()
+
+    wrapper.find('th').trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
