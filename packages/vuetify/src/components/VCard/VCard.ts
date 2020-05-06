@@ -23,7 +23,6 @@ export default mixins(
   name: 'v-card',
 
   props: {
-    flat: Boolean,
     hover: Boolean,
     img: String,
     link: Boolean,
@@ -31,7 +30,6 @@ export default mixins(
       type: [Number, String],
       default: 4,
     },
-    outlined: Boolean,
     raised: Boolean,
     shaped: Boolean,
   },
@@ -41,12 +39,10 @@ export default mixins(
       return {
         'v-card': true,
         ...Routable.options.computed.classes.call(this),
-        'v-card--flat': this.flat,
         'v-card--hover': this.hover,
         'v-card--link': this.isClickable,
         'v-card--loading': this.loading,
         'v-card--disabled': this.disabled,
-        'v-card--outlined': this.outlined,
         'v-card--raised': this.raised,
         'v-card--shaped': this.shaped,
         ...VSheet.options.computed.classes.call(this),

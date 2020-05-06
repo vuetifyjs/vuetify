@@ -1,0 +1,14 @@
+@mixin paper ($elevation, $radius)
+  +radius($radius)
+
+  &:not(.v-sheet--outlined)
+    +elevation($elevation)
+    +elevationTransition()
+
+@mixin sheet ($component, $elevation, $radius)
+  .v-sheet
+    @if ($component)
+      &.#{$component}
+        +paper($elevation, $radius)
+    @else
+      +paper($elevation, $radius)
