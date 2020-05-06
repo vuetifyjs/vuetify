@@ -96,8 +96,8 @@ describe('VProgressLinear.ts', () => {
   it('should render reversed component', () => {
     const wrapper = mountFunction({
       propsData: {
-        value: 33,
         reverse: true,
+        value: 33,
       },
     })
 
@@ -107,13 +107,11 @@ describe('VProgressLinear.ts', () => {
   it('should render reverse component in RTL mode', () => {
     const wrapper = mountFunction({
       propsData: {
-        value: 33,
         reverse: true,
+        value: 33,
       },
       mocks: {
-        $vuetify: {
-          rtl: true,
-        },
+        $vuetify: { rtl: true },
       },
     })
 
