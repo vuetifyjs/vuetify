@@ -702,4 +702,14 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     expect(input.mock.calls[1][0]).toEqual(expect.arrayContaining(['2019-01-06']))
     expect(change.mock.calls).toHaveLength(1)
   })
+
+  it('should set proper tableDate', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        showCurrent: '2030-04-04',
+      },
+    })
+
+    expect(wrapper.vm.tableDate).toBe('2030-04')
+  })
 })
