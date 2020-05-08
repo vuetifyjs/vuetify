@@ -8,6 +8,10 @@
       "desc": "Starting with year picker by default, resticting dates range and closing the picker menu after selecting the day make the perfect birthday picker.",
       "heading": "### Date pickers - birthday picker"
     },
+    "elevation": {
+      "heading": "### Picker's elevation",
+      "desc": "The `v-date-picker` component supports elevation up to a maximum value of 24. For more information on elevations, visit the official [Material Design elevations](https://material.io/design/environment/elevation.html) page."
+    },
     "date-colorable": {
       "desc": "Date picker colors can be set using the `color` and `header-color` props. If `header-color` prop is not provided header will use the `color` prop value.",
       "heading": "### Date pickers - Colors"
@@ -118,6 +122,7 @@
     "eventColor": "Sets the color for event dot. It can be string (all events will have the same color) or `object` where attribute is the event date and value is boolean/color/array of colors for specified date or `function` taking date as a parameter and returning boolean/color/array of colors for that date",
     "events": "Array of dates or object defining events or colors or function returning boolean/color/array of colors",
     "firstDayOfWeek": "Sets the first day of the week, starting with 0 for Sunday.",
+    "flat": "Removes  elevation",
     "headerDateFormat": "Allows you to customize the format of the month string that appears in the header of the calendar. Called with date (ISO 8601 string) arguments.",
     "locale": "Sets the locale. Accepts a string with a BCP 47 language tag.",
     "localeFirstDayOfYear": "Sets the day that determines the first week of the year, starting with 0 for **Sunday**. For ISO 8601 this should be 4.",

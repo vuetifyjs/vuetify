@@ -72,6 +72,30 @@ describe('VDatePicker.ts', () => {
     expect(change).not.toHaveBeenCalled()
   })
 
+  it('should render flat picker', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: '2013-05',
+        flat: true,
+        type: 'month',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render picker with elevation', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: '2013-05',
+        elevation: 15,
+        type: 'month',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should not emit input event on year click if month is not allowed', async () => {
     const cb = jest.fn()
     const wrapper = mountFunction({
