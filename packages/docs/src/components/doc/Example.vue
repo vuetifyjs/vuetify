@@ -87,7 +87,7 @@
       </v-tooltip>
     </v-toolbar>
 
-    <v-expand-transition v-if="parsed">
+    <v-expand-transition v-if="pen">
       <v-card
         v-show="expand"
         color="#2d2d2d"
@@ -160,7 +160,7 @@
                   :value="file"
                   class="mb-0"
                   no-copy
-                >{{ parsed[section] }}</doc-markup>
+                >{{ pen[section] }}</doc-markup>
               </div>
             </v-window-item>
           </template>
@@ -169,9 +169,9 @@
     </v-expand-transition>
 
     <doc-codepen
-      v-if="parsed"
+      v-if="pen"
       ref="codepen"
-      :pen="parsed"
+      :pen="pen"
     />
 
     <v-fade-transition>
@@ -199,8 +199,11 @@
     copyElementContent,
     getBranch,
   } from '@/util/helpers'
+  import codepen from '@/mixins/codepen'
 
   export default {
+    mixins: [codepen],
+
     props: {
       eager: Boolean,
       value: {
@@ -217,7 +220,6 @@
       expand: false,
       loading: false,
       observer: null,
-      parsed: undefined,
       selected: 'template',
       template: false,
     }),
@@ -237,7 +239,7 @@
         return this.internalValue.newIn
       },
       sections () {
-        return ['template', 'script', 'style'].filter(section => this.parsed[section])
+        return ['template', 'script', 'style'].filter(section => this.pen[section])
       },
     },
 
@@ -265,21 +267,6 @@
     },
 
     methods: {
-      boot (res) {
-        const template = this.parseTemplate('template', res)
-        const style = this.parseTemplate('style', res)
-        const script = this.parseTemplate('script', res)
-        const codepenResources = this.parseTemplate('codepen-resources', res)
-        const codepenAdditional = this.parseTemplate('codepen-additional', res)
-
-        this.parsed = {
-          template,
-          style,
-          script,
-          codepenResources,
-          codepenAdditional,
-        }
-      },
       async getFiles () {
         this.loading = true
         await this.importTemplate()
