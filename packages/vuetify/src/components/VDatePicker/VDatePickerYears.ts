@@ -9,7 +9,7 @@ import {
   createItemTypeNativeListeners,
   createNativeLocaleFormatter,
 } from './util'
-import mergeData from '../../util/mergeData'
+import { mergeListeners } from '../../util/mergeData'
 import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
@@ -78,13 +78,9 @@ export default mixins<options &
       return this.$createElement('li', this.setTextColor(color, {
         key: year,
         class: { active },
-        ...mergeData({
-          on: {
-            click: () => this.$emit('input', year),
-          },
-        }, {
-          on: createItemTypeNativeListeners(this, ':year', year),
-        }),
+        on: mergeListeners({
+          click: () => this.$emit('input', year),
+        }, createItemTypeNativeListeners(this, ':year', year)),
       }), formatted)
     },
 
