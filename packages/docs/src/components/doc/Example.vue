@@ -312,12 +312,6 @@
         this.template = false
       },
       kebabCase,
-      parseTemplate (target, template) {
-        const string = `(<${target}(.*)?>[\\w\\W]*<\\/${target}>)`
-        const regex = new RegExp(string, 'g')
-        const parsed = regex.exec(template) || []
-        return parsed[1] || ''
-      },
       sendToCodepen () {
         this.$refs.codepen.submit()
       },
