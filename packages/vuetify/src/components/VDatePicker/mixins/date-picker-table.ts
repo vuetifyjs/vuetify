@@ -16,15 +16,15 @@ import mixins from '../../../util/mixins'
 
 // Types
 import {
-  VNodeChildren,
   PropType,
+  VNodeChildren,
 } from 'vue'
 import {
   DatePickerAllowedDatesFunction,
-  DatePickerFormatter,
-  DatePickerEvents,
   DatePickerEventColors,
   DatePickerEventColorValue,
+  DatePickerEvents,
+  DatePickerFormatter,
   TouchWrapper,
 } from 'types'
 
