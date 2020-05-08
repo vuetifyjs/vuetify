@@ -116,7 +116,7 @@
     "webpack-dev-server": "^3.7.2"
   },
   "peerDependencies": {
-    "vue": "^3.0.0-alpha.5"
+    "vue": "^3.0.0-alpha.10"
   },
   "publishConfig": {
     "access": "public"
