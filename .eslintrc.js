@@ -117,7 +117,11 @@ module.exports = {
           }
         }],
         '@typescript-eslint/member-ordering': 'error',
-        '@typescript-eslint/type-annotation-spacing': 'error'
+        '@typescript-eslint/type-annotation-spacing': 'error',
+        '@typescript-eslint/array-type': 'error',
+        '@typescript-eslint/no-inferrable-types': 'error',
+        '@typescript-eslint/unified-signatures': 'error',
+        '@typescript-eslint/no-invalid-this': 'error',
       }
     }
   ]

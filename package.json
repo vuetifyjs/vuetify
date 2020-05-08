@@ -26,8 +26,6 @@
     "yarn": ">= 1.12.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^1.13.0",
-    "@typescript-eslint/parser": "^1.13.0",
     "@vue/compiler-sfc": "^3.0.0-beta.2",
     "babel-jest": "^24.8.0",
     "cross-spawn": "^6.0.5",
@@ -51,9 +49,6 @@
     "semver": "^6.2.0",
     "shelljs": "^0.8.3",
     "ts-jest": "^24.0.2",
-    "tslint": "^5.18.0",
-    "typescript": "^3.8.2",
-    "typestrict": "^1.0.2",
     "vue": "^3.0.0-beta.2",
     "vue-loader": "^16.0.0-alpha.1",
     "webpack": "^4.39.1",
