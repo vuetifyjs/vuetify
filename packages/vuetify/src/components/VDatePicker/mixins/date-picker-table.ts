@@ -9,12 +9,24 @@ import Localable from '../../../mixins/localable'
 import Themeable from '../../../mixins/themeable'
 
 // Utils
+import { createItemTypeNativeListeners } from '../util'
 import isDateAllowed from '../util/isDateAllowed'
+import mergeData from '../../../util/mergeData'
 import mixins from '../../../util/mixins'
 
 // Types
-import { VNodeChildren, PropType } from 'vue'
-import { DatePickerAllowedDatesFunction, DatePickerFormatter, DatePickerEvents, DatePickerEventColors, DatePickerEventColorValue, TouchWrapper } from 'types'
+import {
+  PropType,
+  VNodeChildren,
+} from 'vue'
+import {
+  DatePickerAllowedDatesFunction,
+  DatePickerEventColors,
+  DatePickerEventColorValue,
+  DatePickerEvents,
+  DatePickerFormatter,
+  TouchWrapper,
+} from 'types'
 
 type CalculateTableDateFunction = (v: number) => string
 
@@ -90,13 +102,15 @@ export default mixins(
     genButtonEvents (value: string, isAllowed: boolean, mouseEventType: string) {
       if (this.disabled) return undefined
 
-      return {
-        click: () => {
-          isAllowed && !this.readonly && this.$emit('input', value)
-          this.$emit(`click:${mouseEventType}`, value)
+      return mergeData({
+        on: {
+          click: () => {
+            if (isAllowed && !this.readonly) this.$emit('input', value)
+          },
         },
-        dblclick: () => this.$emit(`dblclick:${mouseEventType}`, value),
-      }
+      }, {
+        on: createItemTypeNativeListeners(this, `:${mouseEventType}`, value),
+      })
     },
     genButton (value: string, isFloating: boolean, mouseEventType: string, formatter: DatePickerFormatter) {
       const isAllowed = isDateAllowed(value, this.min, this.max, this.allowedDates)
@@ -114,7 +128,7 @@ export default mixins(
         domProps: {
           disabled: this.disabled || !isAllowed,
         },
-        on: this.genButtonEvents(value, isAllowed, mouseEventType),
+        ...this.genButtonEvents(value, isAllowed, mouseEventType),
       }), [
         this.$createElement('div', {
           staticClass: 'v-btn__content',

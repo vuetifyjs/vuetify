@@ -657,22 +657,24 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
   })
 
   it('should emit click/dblclick:date event', async () => {
+    const click = jest.fn()
+    const dblclick = jest.fn()
     const wrapper = mountFunction({
       propsData: {
         value: '2013-05-20',
         type: 'date',
       },
+      listeners: {
+        'click:date': (value: any, event: any) => click(value, event instanceof Event),
+        'dblclick:date': (value: any, event: any) => dblclick(value, event instanceof Event),
+      },
     })
 
-    const click = jest.fn()
-    wrapper.vm.$on(`click:date`, click)
     wrapper.findAll('.v-date-picker-table--date tbody tr+tr td:first-child button').at(0).trigger('click')
-    expect(click).toHaveBeenCalledWith('2013-05-05')
+    expect(click).toHaveBeenCalledWith('2013-05-05', true)
 
-    const dblclick = jest.fn()
-    wrapper.vm.$on(`dblclick:date`, dblclick)
     wrapper.findAll('.v-date-picker-table--date tbody tr+tr td:first-child button').at(0).trigger('dblclick')
-    expect(dblclick).toHaveBeenCalledWith('2013-05-05')
+    expect(dblclick).toHaveBeenCalledWith('2013-05-05', true)
   })
 
   it('should handle date range select', async () => {
