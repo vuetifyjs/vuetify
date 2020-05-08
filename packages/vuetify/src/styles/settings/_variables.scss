@@ -231,11 +231,6 @@ $typography: () !default;
   );
 }
 
-@if (type-of($spacers) == list) {
-  @for $i from 0 through 12 {
-    $spacers: map-merge($spacers, ($i: $spacer * $i))
-  }
-}
 $transition: () !default;
 $transition: map-deep-merge(
   (
