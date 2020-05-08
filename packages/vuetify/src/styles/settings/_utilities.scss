@@ -398,6 +398,10 @@ $utilities: map-deep-merge(
         text-transform
       ),
       class: text,
+      unimportant: (
+        font-weight,
+        line-height
+      ),
       values: $typography
     )
   ),

@@ -47,4 +47,8 @@
       @if type-of($value) == 'list' and length($properties) == length($value)
         $val: nth($value, $i)
       @if $val != false
-        #{$property}: $val !important
+        // Check if unimportant property exists.
+        // This allows you to conditional skip
+        // defining a property as important.
+        $unimportant: map-get($utility, unimportant)
+        #{$property}: $val if(index($unimportant, $property), null, !important)
