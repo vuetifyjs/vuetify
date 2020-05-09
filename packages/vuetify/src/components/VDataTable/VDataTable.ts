@@ -35,6 +35,7 @@ import ripple from '../../directives/ripple'
 // Helpers
 import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, defaultFilter, camelizeObjectKeys } from '../../util/helpers'
 import { breaking } from '../../util/console'
+import { mergeClasses } from '../../util/mergeData'
 
 function filterFn (item: any, search: string | null, filter: DataTableFilterFunction) {
   return (header: DataTableHeader) => {
@@ -205,19 +206,6 @@ export default VDataIterator.extend({
   methods: {
     calcWidths () {
       this.widths = Array.from(this.$el.querySelectorAll('th')).map(e => e.clientWidth)
-    },
-    createItemClass (classes: ReturnType<RowClassFunction>) {
-      const finalClasses: { [id: string]: boolean } = {}
-      if (typeof classes === 'string') {
-        if (classes !== '') {
-          finalClasses[classes] = true
-        }
-      } else if (classes instanceof Array) {
-        classes.forEach(className => (finalClasses[className] = true))
-      } else if (classes !== null && classes !== undefined) {
-        return classes
-      }
-      return finalClasses
     },
     customFilterWithColumns (items: any[], search: string) {
       return searchTableItems(items, search, this.headersWithCustomFilters, this.headersWithoutCustomFilters, this.customFilter)
@@ -468,11 +456,9 @@ export default VDataIterator.extend({
 
       return this.$createElement(this.isMobile ? MobileRow : Row, {
         key: getObjectValueByPath(item, this.itemKey),
-        class: {
-          ...classes,
-          ...this.createItemClass(this.itemClass(item)),
-          'v-data-table__selected': data.isSelected,
-        },
+        class: mergeClasses(
+          { ...classes, 'v-data-table__selected': data.isSelected },
+          this.itemClass(item)),
         props: {
           headers: this.computedHeaders,
           item,
