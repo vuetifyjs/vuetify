@@ -14,7 +14,7 @@ describe('VSimpleCheckbox.ts', () => {
     }
   })
 
-  it('should be accept listeners', () => {
+  it('should pass down listeners', () => {
     const mouseleave = jest.fn()
     const wrapper = mountFunction({
       propsData: { disabled: true },
