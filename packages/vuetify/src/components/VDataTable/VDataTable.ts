@@ -458,7 +458,8 @@ export default VDataIterator.extend({
         key: getObjectValueByPath(item, this.itemKey),
         class: mergeClasses(
           { ...classes, 'v-data-table__selected': data.isSelected },
-          this.itemClass(item)),
+          this.itemClass(item)
+        ),
         props: {
           headers: this.computedHeaders,
           item,
