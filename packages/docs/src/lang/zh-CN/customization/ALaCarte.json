@@ -1,6 +1,6 @@
 {
   "heading": "# A-la-carte (treeshaking)",
-  "headingText": "作为一个组件框架，Vuetify 总是会水平增长。根据你的项目，可能只需要一个小组件的 **包大小**。A la carte 系统让你可以挑选和选择要导入的组件，大大 _降低了_ 你的构建规模。当你使用 [Vue CLI 插件](/getting-started/quick-start#vue-cli-install) 创建的新项目时，这个功能已经默认启用。",
+  "headingText": "作为一个组件框架，Vuetify 总是会横向增长。根据你的项目，可能需要一个小的 **包大小**。A la carte 系统让你可以挑选和选择要导入的组件，大大 _降低_ 了你的构建规模。使用 [Vue CLI插件](/getting-started/quick-start#vue-cli-install) 创建的新项目默认情况下会启用这个功能。",
   "treeshakeWarning": "只有在 **生产模式** 下，Treeshaking 才会在 Webpack 4 中工作。如果你使用的是 Vue CLI，那么这个功能将会自动启动。",
   "loaderHeader1": "## vuetify-loader",
   "loaderText1a": "跟踪正在使用的所有组件可能是一件很麻烦的事。[vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) 通过自动导入你使用的所有 Vuetify 组件来减轻这种痛苦。这也将使代码的分割更加有效，因为 webpack 只加载显示该块所需的组件。",

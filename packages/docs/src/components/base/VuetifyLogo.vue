@@ -7,7 +7,7 @@
       }
     }"
     aria-label="Vuetify Home Page"
-    class="d-flex align-center text--primary"
+    class="d-none d-sm-flex align-center text--primary"
     style="text-decoration: none;"
     title="Vuetify Home Page"
     @click.native="$vuetify.goTo(0)"

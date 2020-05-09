@@ -63,5 +63,8 @@
     "v-carousel-item": {
       "value": "crwdns38196:0crwdne38196:0"
     }
+  },
+  "events": {
+    "change": "crwdns56968:0crwdne56968:0"
   }
 }

@@ -1,11 +1,12 @@
 {
   "centered": "タブを中央寄せにします。",
   "clearable": "入力クリア機能を追加します（デフォルトのアイコンは、Material Icons の **clear** ）",
+  "falseValue": "falseとみなされる状態の値を設定します。",
   "fullWidth": "幅を強制的に 100% にする",
   "id": "コンポーネントにDOM idを設定します",
-  "mobileBreakPoint": "コンポーネントに指定されたモバイルブレークポイントを設定します。これにより、モバイル デバイスに代替スタイルが適用されます。",
   "persistent": "ダイアログの外側をクリックしてもダイアログを消しません。",
   "size": "コンポーネントの幅と高さを設定します.",
   "textColor": "コントロール テキストに指定した色を適用します。",
-  "tile": "Components.Sheets.props.tile"
+  "tile": "Components.Sheets.props.tile",
+  "trueValue": "trueとみなされる状態の値を設定します。"
 }

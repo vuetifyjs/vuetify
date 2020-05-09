@@ -123,6 +123,9 @@
   "styles/display": {
     "title": "CSS Display Helfer"
   },
+  "styles/float": {
+    "title": "CSS Float-Helfer"
+  },
   "styles/flex": {
     "title": "CSS Flex-Helfer"
   },

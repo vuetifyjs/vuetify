@@ -73,6 +73,9 @@
     }
   },
   "events": {
+    "v-stepper": {
+      "change": "通过用户交互改变步骤时发出的信号"
+    },
     "v-stepper-step": {
       "click": "单击组件时发出"
     }

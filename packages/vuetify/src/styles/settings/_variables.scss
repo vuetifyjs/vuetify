@@ -7,6 +7,20 @@ $font-size-root: 16px !default;
 $line-height-root: 1.5 !default;
 $border-radius-root: 4px !default;
 
+$rounded: () !default;
+$rounded: map-deep-merge(
+  (
+    '0': 0,
+    'sm': $border-radius-root / 2,
+    null: $border-radius-root,
+    'lg': $border-radius-root * 1.5,
+    'xl': $border-radius-root * 2,
+    'pill': 9999px,
+    'circle': 50%
+  ),
+  $rounded
+);
+
 $spacer: 4px !default;
 
 $spacers: () !default;
@@ -104,90 +118,118 @@ $headings: map-deep-merge(
     'h1': (
       'size': 6rem,
       'weight': 300,
-      'line-height': 6rem,
-      'letter-spacing': -.015625em,
-      'font-family': $heading-font-family
+      'line-height': normal,
+      'letter-spacing': -0.09375rem,
+      'font-family': $heading-font-family,
+      'text-transform': false
     ),
     'h2': (
       'size': 3.75rem,
       'weight': 300,
-      'line-height': 3.75rem,
-      'letter-spacing': -.0083333333em,
-      'font-family': $heading-font-family
+      'line-height': normal,
+      'letter-spacing': -0.03125rem,
+      'font-family': $heading-font-family,
+      'text-transform': false
     ),
     'h3': (
       'size': 3rem,
-      'weight': 400,
-      'line-height': 3.125rem,
+      'weight': normal,
+      'line-height': normal,
       'letter-spacing': normal,
-      'font-family': $heading-font-family
+      'font-family': $heading-font-family,
+      'text-transform': false
     ),
     'h4': (
       'size': 2.125rem,
-      'weight': 400,
-      'line-height': 2.5rem,
-      'letter-spacing': .0073529412em,
-      'font-family': $heading-font-family
+      'weight': normal,
+      'line-height': normal,
+      'letter-spacing': 0.015625rem,
+      'font-family': $heading-font-family,
+      'text-transform': false
     ),
     'h5': (
       'size': 1.5rem,
-      'weight': 400,
+      'weight': normal,
       'line-height': 2rem,
       'letter-spacing': normal,
-      'font-family': $heading-font-family
+      'font-family': $heading-font-family,
+      'text-transform': false
     ),
     'h6': (
       'size': 1.25rem,
       'weight': 500,
-      'line-height': 2rem,
-      'letter-spacing': .0125em,
-      'font-family': $heading-font-family
+      'line-height': normal,
+      'letter-spacing': 0.009375rem,
+      'font-family': $heading-font-family,
+      'text-transform': false
     ),
     'subtitle-1': (
       'size': 1rem,
-      'weight': 400,
-      'line-height': 1.75rem,
-      'letter-spacing': .009375em,
-      'font-family': $body-font-family
+      'weight': normal,
+      'line-height': normal,
+      'letter-spacing': 0.009375rem,
+      'font-family': $body-font-family,
+      'text-transform': false
     ),
     'subtitle-2': (
       'size': .875rem,
       'weight': 500,
-      'line-height': 1.375rem,
-      'letter-spacing': .0071428571em,
-      'font-family': $body-font-family
-    ),
-    'body-2': (
-      'size': .875rem,
-      'weight': 400,
-      'letter-spacing': .0178571429em,
-      'line-height': 1.25rem,
-      'font-family': $body-font-family
+      'line-height': normal,
+      'letter-spacing': 0.00625rem,
+      'font-family': $body-font-family,
+      'text-transform': false
     ),
     'body-1': (
       'size': 1rem,
-      'weight': 400,
-      'letter-spacing': .03125em,
-      'line-height': 1.5rem,
-      'font-family': $body-font-family
+      'weight': normal,
+      'line-height': normal,
+      'letter-spacing': 0.03125rem,
+      'font-family': $body-font-family,
+      'text-transform': false
+    ),
+    'body-2': (
+      'size': .875rem,
+      'weight': normal,
+      'line-height': normal,
+      'letter-spacing': 0.015625rem,
+      'font-family': $body-font-family,
+      'text-transform': false
+    ),
+    'button': (
+      'size': .875rem,
+      'weight': 500,
+      'line-height': normal,
+      'letter-spacing': 0.078125rem,
+      'font-family': $body-font-family,
+      'text-transform': uppercase
     ),
     'caption': (
       'size': .75rem,
-      'weight': 400,
-      'letter-spacing': .0333333333em,
-      'line-height': 1.25rem,
-      'font-family': $body-font-family
+      'weight': normal,
+      'line-height': normal,
+      'letter-spacing': 0.025rem,
+      'font-family': $body-font-family,
+      'text-transform': false
     ),
     'overline': (
       'size': .625rem,
-      'weight': 400,
-      'letter-spacing': .1666666667em,
-      'line-height': 1rem,
-      'font-family': $body-font-family
+      'weight': normal,
+      'line-height': normal,
+      'letter-spacing': 0.09375rem,
+      'font-family': $body-font-family,
+      'text-transform': uppercase
     )
   ),
   $headings
 );
+
+$typography: () !default;
+@each $type, $values in $headings {
+  $typography: map-deep-merge(
+    $typography,
+    (#{$type}: map-values($values))
+  );
+}
 
 $transition: () !default;
 $transition: map-deep-merge(

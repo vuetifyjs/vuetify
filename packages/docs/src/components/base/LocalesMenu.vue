@@ -9,7 +9,7 @@
     <template v-slot:activator="{ attrs, on }">
       <v-btn
         :aria-label="$t('Vuetify.AppToolbar.translations')"
-        class="text-capitalize"
+        class="text-capitalize hidden-xs-only"
         text
         v-bind="attrs"
         v-on="on"

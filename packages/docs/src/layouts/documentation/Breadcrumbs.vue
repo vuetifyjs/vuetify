@@ -2,7 +2,7 @@
   <v-breadcrumbs
     v-if="structure !== false"
     :items="breadcrumbs"
-    class="px-0 py-5"
+    class="px-0 py-5 text-capitalize"
   />
 </template>
 

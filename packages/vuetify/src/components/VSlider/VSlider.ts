@@ -314,13 +314,12 @@ export default mixins<options &
 
       const tickSize = parseFloat(this.tickSize)
       const range = createRange(this.numTicks + 1)
-      const direction = this.vertical ? 'bottom' : 'left'
-      const offsetDirection = this.vertical ? 'right' : 'top'
+      const direction = this.vertical ? 'bottom' : (this.$vuetify.rtl ? 'right' : 'left')
+      const offsetDirection = this.vertical ? (this.$vuetify.rtl ? 'left' : 'right') : 'top'
 
       if (this.vertical) range.reverse()
 
-      const ticks = range.map(i => {
-        const index = this.$vuetify.rtl ? this.maxValue - i : i
+      const ticks = range.map(index => {
         const children = []
 
         if (this.tickLabels[index]) {
@@ -329,11 +328,11 @@ export default mixins<options &
           }, this.tickLabels[index]))
         }
 
-        const width = i * (100 / this.numTicks)
+        const width = index * (100 / this.numTicks)
         const filled = this.$vuetify.rtl ? (100 - this.inputWidth) < width : width < this.inputWidth
 
         return this.$createElement('span', {
-          key: i,
+          key: index,
           staticClass: 'v-slider__tick',
           class: {
             'v-slider__tick--filled': filled,
@@ -371,6 +370,7 @@ export default mixins<options &
 
       return this.$createElement('div', this.setTextColor(this.computedThumbColor, {
         ref,
+        key: ref,
         staticClass: 'v-slider__thumb-container',
         class: {
           'v-slider__thumb-container--active': isActive,

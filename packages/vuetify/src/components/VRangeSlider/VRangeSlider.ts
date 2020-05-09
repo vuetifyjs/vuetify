@@ -69,17 +69,6 @@ export default VSlider.extend({
         this.roundValue(v) - this.minValue) / (this.maxValue - this.minValue) * 100
       )
     },
-    trackFillStyles (): Partial<CSSStyleDeclaration> {
-      const styles = VSlider.options.computed.trackFillStyles.call(this)
-      const fillPercent = Math.abs(this.inputWidth[0] - this.inputWidth[1])
-      const dir = this.vertical ? 'height' : 'width'
-      const start = this.vertical ? this.$vuetify.rtl ? 'top' : 'bottom' : this.$vuetify.rtl ? 'right' : 'left'
-
-      styles[dir] = `${fillPercent}%`
-      styles[start] = `${this.inputWidth[0]}%`
-
-      return styles
-    },
   },
 
   methods: {
@@ -115,32 +104,31 @@ export default VSlider.extend({
     genTrackContainer () {
       const children = []
 
-      if (this.disabled) {
-        const disabledPadding = 10
-        const sections: [number, number, number, number][] = [
-          [0, this.inputWidth[0], 0, -disabledPadding],
-          [this.inputWidth[0], Math.abs(this.inputWidth[1] - this.inputWidth[0]), disabledPadding, disabledPadding * -2],
-          [this.inputWidth[1], Math.abs(100 - this.inputWidth[1]), disabledPadding, 0],
-        ]
+      const padding = this.disabled ? 10 : 0
+      const sections: { class: string, color: string | undefined, styles: [number, number, number, number] }[] = [
+        {
+          class: 'v-slider__track-background',
+          color: this.computedTrackColor,
+          styles: [0, this.inputWidth[0], 0, -padding],
+        },
+        {
+          class: this.disabled ? 'v-slider__track-background' : 'v-slider__track-fill',
+          color: this.disabled ? this.computedTrackColor : this.computedColor,
+          styles: [this.inputWidth[0], Math.abs(this.inputWidth[1] - this.inputWidth[0]), padding, padding * -2],
+        },
+        {
+          class: 'v-slider__track-background',
+          color: this.computedTrackColor,
+          styles: [this.inputWidth[1], Math.abs(100 - this.inputWidth[1]), padding, -padding],
+        },
+      ]
 
-        if (this.$vuetify.rtl) sections.reverse()
+      if (this.$vuetify.rtl) sections.reverse()
 
-        children.push(...sections.map(section => this.$createElement('div', this.setBackgroundColor(this.computedTrackColor, {
-          staticClass: 'v-slider__track-background',
-          style: this.getTrackStyle(...section),
-        }))))
-      } else {
-        children.push(
-          this.$createElement('div', this.setBackgroundColor(this.computedTrackColor, {
-            staticClass: 'v-slider__track-background',
-            style: this.getTrackStyle(0, 100),
-          })),
-          this.$createElement('div', this.setBackgroundColor(this.computedColor, {
-            staticClass: 'v-slider__track-fill',
-            style: this.trackFillStyles,
-          }))
-        )
-      }
+      children.push(...sections.map(section => this.$createElement('div', this.setBackgroundColor(section.color, {
+        staticClass: section.class,
+        style: this.getTrackStyle(...section.styles),
+      }))))
 
       return this.$createElement('div', {
         staticClass: 'v-slider__track-container',

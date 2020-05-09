@@ -1,7 +1,7 @@
 <template>
   <v-responsive
     :max-width="450"
-    class="mr-0 mr-md-4 hidden-sm-and-down transition-swing"
+    class="mr-auto mr-md-4 transition-swing"
   >
     <v-text-field
       id="search"

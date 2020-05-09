@@ -139,9 +139,6 @@
   #home-hero
     background: linear-gradient(to bottom, #1867c0, #5CBBF6)
 
-    &.theme--dark
-      background: linear-gradient(to bottom, #2196F3, #5CBBF6)
-
     a:not(.v-btn)
       color: inherit
       text-decoration: none

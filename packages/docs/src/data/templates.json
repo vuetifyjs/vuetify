@@ -79,17 +79,19 @@
     "description": "A single page Material inspired theme for Freelancers.",
     "src": "https://cdn.vuetifyjs.com/images/starter/freelancer.png",
     "free": true,
-    "url": "https://github.com/vuetifyjs/theme-freelancer",
-    "demoUrl": []
+    "url": "https://store.vuetifyjs.com/product/freelancer-theme-free/",
+    "demoUrl": [
+      "https://freelancer-free.johnleider.com/"
+    ]
   },
   "parallax": {
     "title": "Parallax",
     "description": "This beautiful single page parallax is a great home page for any application.",
     "src": "https://cdn.vuetifyjs.com/images/starter/parallax-2020-large.png",
     "free": true,
-    "url": "https://store.vuetifyjs.com/product/parallax-theme-free",
+    "url": "https://store.vuetifyjs.com/product/parallax-theme-free/",
     "demoUrl": [
-      "https://parallax.johnleider.com"
+      "https://parallax-theme-free.johnleider.com/"
     ]
   },
   "blog": {

@@ -1,6 +1,7 @@
 {
   "heading": "# 输入",
   "headingText": "`v-input` 组件为您提供创建自己的自定义输入的基础。 它由一个 前置/追加 插槽，消息和一个默认插槽组成。 _recommended_ 扩展了此组件，但可以将其用作独立组件。",
+  "attributesAlert": "`v-input` 组件是作为 Vuetify 所有表单控件的包装器。它 **不会** 继承属性，因为它们会被传递给内部输入。",
   "examples": {
     "usage": {
       "desc": "`v-input` 有四个主要区域。前列位置、附加位置、默认位置和消息。 这些构成了所有形式组件之间共享的核心逻辑。"
@@ -25,6 +26,10 @@
       "heading": "### 规则",
       "desc": "您可以将自定义验证规则添加到 `v-input`，将其添加为返回 `true`/error 消息的函数。 注意：仅以 `v-text-field` 为例。"
     },
+    "hide-details": {
+      "header": "### 自动隐藏详细信息",
+      "desc": "当 `hide-details` 设置为 `auto` 时，只有在有信息（提示、错误信息等）显示的情况下，才会显示信息。"
+    },
     "slot-events": {
       "heading": "### 插槽事件",
       "desc": "`v-input` 可以可以具有插槽的 `click:append` 和 `click:prepend` 两个事件。注意：仅以 `v-text-field` 为例。"
@@ -42,6 +47,7 @@
     "appendIcon": "在组件上附加一个图标，使用与 `v-icon` 相同的语法",
     "backgroundColor": "更改输入的背景颜色",
     "dark": "将深色主题变量应用于组件。 除非您已将 [application theme](/customization/theme) 配置为 **dark** 或在组件上使用 **color** 属性，否则组件的颜色默认为 _white_。 您可以在材料设计文档中找到更多信息 [dark themes](https://material.io/design/color/dark-theme.html)。",
+    "hideDetails": "隐藏提示和验证错误。当设置为 `auto` 时，只有在有信息（提示、错误信息、计数器值等）要显示时，才会显示信息。",
     "dense": "降低输入高度",
     "height": "设置输入的高度",
     "hint": "提示文本",
@@ -52,11 +58,13 @@
     "prependIcon": "在组件前添加一个图标，使用与 `v-icon` 相同的语法",
     "required": "根据需要指定输入； 在标签的末尾添加一个星号； 不执行任何验证。",
     "tabindex": "输入的选项卡索引",
-    "toggleKeys": "切换输入键值的数组（如果支持切换的话）"
+    "toggleKeys": "切换输入键值的数组（如果支持切换的话）",
+    "value": "输入的值"
   },
   "slots": {
     "append": "在输入内容后添加一个项目",
     "label": "替换默认标签",
+    "message": "自定义消息插槽。",
     "prepend": "在输入内容之前添加一个项目"
   },
   "events": {

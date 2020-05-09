@@ -49,6 +49,7 @@
     "icon": "mdi-palette",
     "children": [
       { "text": "cssReset", "to": "css-reset" },
+      { "new": true, "text": "borderRadius", "to": "border-radius" },
       { "text": "colors", "to": "colors" },
       { "text": "content", "to": "content" },
       { "text": "display", "to": "display" },
@@ -56,8 +57,7 @@
       { "text": "flex", "to": "flex" },
       { "text": "float", "to": "float" },
       { "text": "spacing", "to": "spacing" },
-      { "text": "text", "to": "text" },
-      { "text": "typography", "to": "typography" },
+      { "text": "text", "to": "text-and-typography" },
       { "text": "transitions", "to": "transitions" },
       { "text": "scroll", "to": "scroll" }
     ]
@@ -203,5 +203,11 @@
     "text": "premiumThemes",
     "icon": "mdi-vuetify",
     "to": "themes/premium"
+  },
+  {
+    "new": true,
+    "text": "jobs",
+    "icon": "mdi-briefcase-search",
+    "to": "jobs/for-vue"
   }
 ]
