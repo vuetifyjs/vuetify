@@ -902,6 +902,7 @@ describe('VDataTable.ts', () => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+  })
 
   // https://github.com/vuetifyjs/vuetify/issues/11179
   it('should return rows from columns that exclusively match custom filters', async () => {
@@ -934,6 +935,5 @@ describe('VDataTable.ts', () => {
     wrapper.setProps({ search: 'Eclair' })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalCurrentItems).toHaveLength(1)
-
   })
 })
