@@ -73,15 +73,15 @@
       cards: ['Good', 'Best', 'Finest'],
       socials: [
         {
-          icon: 'fab fa-facebook',
+          icon: 'mdi-facebook',
           color: 'indigo',
         },
         {
-          icon: 'fab fa-linkedin',
+          icon: 'mdi-linkedin',
           color: 'cyan darken-1',
         },
         {
-          icon: 'fab fa-instagram',
+          icon: 'mdi-instagram',
           color: 'red lighten-3',
         },
       ],
@@ -97,9 +97,3 @@
     },
   }
 </script>
-
-<codepen-resources lang="json">
-  {
-  "js": ["https://use.fontawesome.com/releases/v5.0.6/js/all.js"]
-  }
-</codepen-resources>

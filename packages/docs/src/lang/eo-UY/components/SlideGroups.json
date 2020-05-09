@@ -37,6 +37,7 @@
     "showArrows": "crwdns40576:0crwdne40576:0"
   },
   "events": {
+    "change": "crwdns56986:0crwdne56986:0",
     "click:location": "crwdns42570:0crwdne42570:0"
   },
   "slots": {

@@ -305,6 +305,53 @@ $utilities: map-deep-merge(
       values: $spacers
     ),
 
+    // Border
+    "rounded": (
+      property: border-radius,
+      class: rounded,
+      values: $rounded
+    ),
+    "rounded-top": (
+      property: border-top-left-radius border-top-right-radius,
+      class: rounded-t,
+      values: $rounded
+    ),
+    "rounded-right": (
+      property: border-top-right-radius border-bottom-right-radius,
+      class: rounded-r,
+      values: $rounded
+    ),
+    "rounded-bottom": (
+      property: border-bottom-left-radius border-bottom-right-radius,
+      class: rounded-b,
+      values: $rounded
+    ),
+    "rounded-left": (
+      property: border-top-left-radius border-bottom-left-radius,
+      class: rounded-l,
+      values: $rounded
+    ),
+    "rounded-top-left": (
+      property: border-top-left-radius,
+      class: rounded-tl,
+      values: $rounded
+    ),
+    "rounded-top-right": (
+      property: border-top-right-radius,
+      class: rounded-tr,
+      values: $rounded
+    ),
+    "rounded-bottom-right": (
+      property: border-bottom-right-radius,
+      class: rounded-br,
+      values: $rounded
+    ),
+    "rounded-bottom-left": (
+      property: border-bottom-left-radius,
+      class: rounded-bl,
+      values: $rounded
+    ),
+
     // Text
     "text-align": (
       responsive: true,
@@ -339,6 +386,23 @@ $utilities: map-deep-merge(
       property: text-transform,
       class: text,
       values: none capitalize lowercase uppercase
+    ),
+    "typography": (
+      responsive: true,
+      property: (
+        font-size,
+        font-weight,
+        line-height,
+        letter-spacing,
+        font-family,
+        text-transform
+      ),
+      class: text,
+      unimportant: (
+        font-weight,
+        line-height
+      ),
+      values: $typography
     )
   ),
   $utilities

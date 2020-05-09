@@ -92,6 +92,28 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render flat picker', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: '2013-05-07',
+        flat: true,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render picker with elevation', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: '2013-05-07',
+        elevation: 15,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render disabled picker', () => {
     const wrapper = mountFunction({
       propsData: {
@@ -625,22 +647,24 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
   })
 
   it('should emit click/dblclick:date event', async () => {
+    const click = jest.fn()
+    const dblclick = jest.fn()
     const wrapper = mountFunction({
       propsData: {
         value: '2013-05-20',
         type: 'date',
       },
+      listeners: {
+        'click:date': (value: any, event: any) => click(value, event instanceof Event),
+        'dblclick:date': (value: any, event: any) => dblclick(value, event instanceof Event),
+      },
     })
 
-    const click = jest.fn()
-    wrapper.vm.$on(`click:date`, click)
     wrapper.findAll('.v-date-picker-table--date tbody tr+tr td:first-child button').at(0).trigger('click')
-    expect(click).toHaveBeenCalledWith('2013-05-05')
+    expect(click).toHaveBeenCalledWith('2013-05-05', true)
 
-    const dblclick = jest.fn()
-    wrapper.vm.$on(`dblclick:date`, dblclick)
     wrapper.findAll('.v-date-picker-table--date tbody tr+tr td:first-child button').at(0).trigger('dblclick')
-    expect(dblclick).toHaveBeenCalledWith('2013-05-05')
+    expect(dblclick).toHaveBeenCalledWith('2013-05-05', true)
   })
 
   it('should handle date range select', async () => {
@@ -667,5 +691,15 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     // Lead to [from,], only 'input' should be called
     expect(input.mock.calls[1][0]).toEqual(expect.arrayContaining(['2019-01-06']))
     expect(change.mock.calls).toHaveLength(1)
+  })
+
+  it('should set proper tableDate', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        showCurrent: '2030-04-04',
+      },
+    })
+
+    expect(wrapper.vm.tableDate).toBe('2030-04')
   })
 })

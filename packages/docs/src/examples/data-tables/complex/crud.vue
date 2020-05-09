@@ -215,10 +215,10 @@
 
       close () {
         this.dialog = false
-        setTimeout(() => {
+        this.$nextTick(() => {
           this.editedItem = Object.assign({}, this.defaultItem)
           this.editedIndex = -1
-        }, 300)
+        })
       },
 
       save () {

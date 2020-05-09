@@ -129,10 +129,15 @@
     "description": "Vuetify uses ress.min, a complete browser reset based off or normalize.css.",
     "keywords": "ress.min, css reset, vuetify css reset"
   },
-  "styles/text": {
-    "title": "CSS Text helpers",
-    "description": "Text helpers assist in modifying your application layout on varying viewport sizes with pre-configured css classes.",
-    "keywords": "Text helper classes, text classes, alignment helpers"
+  "styles/border-radius": {
+    "title": "Border Radius",
+    "description": "Use border utilities to quickly style the border-radius of any element.",
+    "keywords": "border radius classes, radius utilities, vuetify radius helper classes"
+  },
+  "styles/text-and-typography": {
+    "title": "CSS Text and Typography helpers",
+    "description": "Text and typography helpers classes assist in modifying text on varying viewport sizes with pre-configured css classes.",
+    "keywords": "text helper classes, text classes, alignment helpers, typography, typography helper classes"
   },
   "styles/colors": {
     "title": "Material color palette",
@@ -173,11 +178,6 @@
     "title": "Transitions",
     "description": "Utilize Vuetify's built in CSS and Javascript transitions within components.",
     "keywords": "motion, transitions, vuetify transitions"
-  },
-  "styles/typography": {
-    "title": "Application typography",
-    "description": "View the various typography styles. From headings to captions, with various weights, sizes and italics.",
-    "keywords": "typography, headings, titles"
   },
   "components/api-explorer": {
     "title": "API explorer",
@@ -658,5 +658,10 @@
     "title": "Premium & free themes",
     "description": "Vuetify offers numerous pre-build starter and premium themes. Kickstart your next application today, no design skills needed.",
     "keywords": "vuetify themes, pre-built material themes, premium themes"
+  },
+  "jobs/for-vue": {
+    "title": "Vue & Vuetify jobs",
+    "description": "Vue.js & Vuetify jobs for developers and businesses. Apply to Software Engineer, Full Stack Developer, Senior Software Engineer and more!",
+    "keywords": "Vue.js Jobs, Vue.js careers, Vue.js job search, work in Vue.js, Vuetify jobs for Vue"
   }
 }

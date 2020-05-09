@@ -1,6 +1,6 @@
 {
   "name": "@vuetify/api-generator",
-  "version": "2.3.0-beta.1",
+  "version": "2.3.0-beta.4",
   "private": true,
   "description": "",
   "main": "dist/api.js",
@@ -15,7 +15,7 @@
   "dependencies": {
     "deepmerge": "^4.0.0",
     "vue": "^2.6.10",
-    "vuetify": "^2.3.0-beta.1"
+    "vuetify": "^2.3.0-beta.4"
   },
   "devDependencies": {
     "@babel/node": "^7.5.5",

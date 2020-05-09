@@ -9,7 +9,6 @@
   "sassPackHeader": "## Sass-Farbpaket",
   "sassPackText": "Das Farbpaket vergrößert die CSS-Exportgröße um ~30kb. Einige Projekte können nur die standardmäßig bereitgestellten Klassen erfordern, die zur Laufzeit durch Vuetify Bootstrap erstellt werden. Um diese Funktion zu deaktivieren, müssen Sie _manuel_ die Hauptdatei **sass** importieren und erstellen. Dies erfordert einen [Sass Loader](https://github.com/webpack-contrib/sass-loader) und einen `.sass`/`.scss` Dateieintrag.",
   "sassPackText2": "Ihre erstellte `main.sass`-Datei muss dann in Ihr Projekt aufgenommen werden.",
-  "alert": "Sie **müssen** Ihr Webpack für die `sass`-Nutzung konfigurieren. Wenn Sie eine [vorgefertigte Vorlage](/getting-started/quick-start#vue-cli-install) verwenden, wird dies bereits für Sie erledigt.",
   "sassPackText3": "Dies kann auch innerhalb Ihrer Hauptdatei **App.vue** geschehen. Denken Sie daran, je nach Projekt-Einrichtung _wird_ dies die Erstellungszeit erhöhen, da jedes Mal, wenn Ihre Eintragsdatei aktualisiert wird, die Sass-Dateien neu generiert werden.",
   "colorHeader": "## Material-Farben",
   "colorText": "Unten ist eine Liste der Materialdesign-Farbpalette, sortiert nach Primärfarbe"

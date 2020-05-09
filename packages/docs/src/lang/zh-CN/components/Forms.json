@@ -18,7 +18,8 @@
       "desc": "**vuelidate** 是 Vue.js 的简单、轻量模型验证。[Documentation](https://vuelidate.netlify.com/)"
     },
     "vee-validate": {
-      "heading": "### Vee-validate"
+      "heading": "### Vee-validate",
+      "desc": "**vee-validate** 是用于 Vue.js 的基于模板的验证框架。[文档](https://logaretm.github.io/vee-validate/)"
     }
   },
   "props": {

@@ -861,4 +861,37 @@ describe('VDataTable.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/11179
+  it('should return rows from columns that exclusively match custom filters', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: testItems,
+        headers: [
+          {
+            text: 'Dessert (100g serving)',
+            align: 'left',
+            filter: (value, search) => {
+              if (!search) return true
+              return value === search
+            },
+            value: 'name',
+          },
+          { text: 'Calories', value: 'calories' },
+          { text: 'Fat (g)', value: 'fat' },
+          { text: 'Carbs (g)', value: 'carbs' },
+          { text: 'Protein (g)', value: 'protein' },
+          { text: 'Iron (%)', value: 'iron' },
+        ],
+      },
+    })
+
+    wrapper.setProps({ search: 'eclair' })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalCurrentItems).toHaveLength(0)
+
+    wrapper.setProps({ search: 'Eclair' })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalCurrentItems).toHaveLength(1)
+  })
 })

@@ -58,6 +58,7 @@
     "origin": "Mixins.Transitionable.props.origin",
     "persistent": "在元素外部单击不会将其停用。",
     "retainFocus": "默认情况下，制表符焦点将返回到对话框的第一个子级。在使用需要焦点的外部工具（如 TinyMCE 或 vue-clipboard）时禁用此选项。",
+    "scrollable": "当设置为 true 时，期望有一个 `v-card` 和一个 `v-card-text` 组件，并有指定的高度。更多信息，请查看 [可滚动示例](/components/dialogs#scrollable)。",
     "transition": "Mixins.Transitionable.props.transition",
     "width": "Mixins.Measurable.props.width"
   },

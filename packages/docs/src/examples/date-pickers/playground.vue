@@ -4,6 +4,7 @@
       <v-row justify="space-around">
         <v-switch v-model="landscape" class="ma-4" label="Landscape"></v-switch>
         <v-switch v-model="reactive" class="ma-4" label="Reactive"></v-switch>
+        <v-switch v-model="flat" class="ma-4" label="Flat"></v-switch>
         <v-switch v-model="fullWidth" class="ma-4" label="Full width"></v-switch>
         <v-switch v-model="showCurrent" class="ma-4" label="Show current date"></v-switch>
         <v-switch v-model="month" class="ma-4" label="Month picker"></v-switch>
@@ -18,6 +19,7 @@
       v-model="picker"
       :landscape="landscape"
       :reactive="reactive"
+      :flat="flat"
       :full-width="fullWidth"
       :show-current="showCurrent"
       :type="month ? 'month' : 'date'"
@@ -37,6 +39,7 @@
         landscape: false,
         reactive: false,
         fullWidth: false,
+        flat: false,
         showCurrent: true,
         month: false,
         multiple: false,

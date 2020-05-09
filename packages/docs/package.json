@@ -3,7 +3,7 @@
   "description": "A Vue.js project",
   "private": true,
   "author": "John Leider <john@vuetifyjs.com>",
-  "version": "2.3.0-beta.1",
+  "version": "2.3.0-beta.4",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.client.config.js --hot --progress",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config build/webpack.prod.config.js --no-progress --hide-modules && yarn prerender",
@@ -13,7 +13,7 @@
     "lint:fix": "yarn lint --fix"
   },
   "dependencies": {
-    "@vuetify/api-generator": "^2.3.0-beta.1",
+    "@vuetify/api-generator": "^2.3.0-beta.4",
     "babel-polyfill": "^6.26.0",
     "chokidar": "^3.0.2",
     "compression": "^1.7.4",
@@ -43,7 +43,7 @@
     "vue-router": "^3.0.7",
     "vue-server-renderer": "^2.6.10",
     "vuelidate": "^0.7.4",
-    "vuetify": "^2.3.0-beta.1",
+    "vuetify": "^2.3.0-beta.4",
     "vuex": "^3.1.1",
     "vuex-pathify": "^1.4.0",
     "vuex-router-sync": "^5.0.0",
@@ -85,6 +85,7 @@
     "rimraf": "^2.6.3",
     "sass": "^1.22.7",
     "sass-loader": "^7.1.0",
+    "sitemap-webpack-plugin": "^0.7.1",
     "source-map-loader": "^0.2.4",
     "stringify-object": "^3.3.0",
     "style-loader": "^0.23.1",

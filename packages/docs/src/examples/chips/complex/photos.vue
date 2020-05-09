@@ -57,12 +57,12 @@
     <v-divider v-if="!allSelected"></v-divider>
 
     <v-list>
-      <template v-for="(item, i) in categories">
+      <template v-for="item in categories">
         <v-list-item
-          v-if="!selected.includes(i)"
-          :key="i"
+          v-if="!selected.includes(item)"
+          :key="item.text"
           :disabled="loading"
-          @click="selected.push(i)"
+          @click="selected.push(item)"
         >
           <v-list-item-avatar>
             <v-icon
@@ -139,7 +139,7 @@
         const selections = []
 
         for (const selection of this.selected) {
-          selections.push(this.items[selection])
+          selections.push(selection)
         }
 
         return selections

@@ -3,7 +3,7 @@
     class="base-title"
     @click.prevent="onClick"
   >
-    <slot attrs="$attrs" />
+    <slot :attrs="$attrs" />
   </div>
 </template>
 
@@ -18,6 +18,8 @@
 
     methods: {
       onClick (e) {
+        if (!this.href) return
+
         e.stopPropagation()
 
         this.$router.push(this.href)
