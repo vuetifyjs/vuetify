@@ -975,6 +975,28 @@ describe('VDataTable.ts', () => {
 
     wrapper.find('th').trigger('click')
     await wrapper.vm.$nextTick()
+  })
+
+  it('should hide group button when column is not groupable', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        showGroupBy: true,
+        items: testItems,
+        headers: [
+          {
+            text: 'Dessert (100g serving)',
+            align: 'left',
+            value: 'name',
+            groupable: false,
+          },
+          { text: 'Calories', value: 'calories' },
+          { text: 'Fat (g)', value: 'fat' },
+          { text: 'Carbs (g)', value: 'carbs' },
+          { text: 'Protein (g)', value: 'protein' },
+          { text: 'Iron (%)', value: 'iron' },
+        ],
+      },
+    })
 
     expect(wrapper.html()).toMatchSnapshot()
   })
