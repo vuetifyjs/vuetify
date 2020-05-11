@@ -365,13 +365,13 @@ export function debounce (fn: Function, delay: number) {
   }
 }
 
-export function throttle (fn: Function, limit: number) {
+export function throttle<T extends (...args: any[]) => any> (fn: T, limit: number) {
   let throttling = false
-  return (...args: any[]) => {
+  return (...args: Parameters<T>): void | ReturnType<T> => {
     if (!throttling) {
-      fn(...args)
       throttling = true
       setTimeout(() => throttling = false, limit)
+      return fn(...args)
     }
   }
 }
