@@ -365,6 +365,17 @@ export function debounce (fn: Function, delay: number) {
   }
 }
 
+export function throttle (fn: Function, limit: number) {
+  let throttling = false
+  return (...args: any[]) => {
+    if (!throttling) {
+      fn(...args)
+      throttling = true
+      setTimeout(() => throttling = false, limit)
+    }
+  }
+}
+
 export function getPrefixedScopedSlots (prefix: string, scopedSlots: any) {
   return Object.keys(scopedSlots).filter(k => k.startsWith(prefix)).reduce((obj: any, k: string) => {
     obj[k.replace(prefix, '')] = scopedSlots[k]
