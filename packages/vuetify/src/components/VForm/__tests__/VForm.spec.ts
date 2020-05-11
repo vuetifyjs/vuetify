@@ -15,8 +15,6 @@ import {
 
 import { wait } from '../../../../test'
 
-Vue.use(Vuetify)
-
 describe('VForm.ts', () => {
   type Instance = InstanceType<typeof VForm>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
@@ -268,17 +266,11 @@ describe('VForm.ts', () => {
   })
 
   it('should disable all inputs', async () => {
-    const inputs = [
-      VTextField,
-    ]
+    const inputs = [VTextField]
 
     const wrapper = mountFunction({
-      propsData: {
-        disabled: true,
-      },
-      slots: {
-        default: inputs,
-      },
+      propsData: { disabled: true },
+      slots: { default: inputs },
     })
 
     await wrapper.vm.$nextTick()
