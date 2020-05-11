@@ -430,7 +430,7 @@ For help and support questions, please use our [community chat](https://communit
 ### Issues
 Please make sure to read the [Important Information](https://github.com/vuetifyjs/vuetify/blob/master/.github/CONTRIBUTING.md#important-information) before opening an issue. Issues not confirming to the guidelines may be closed immediately.
 
-### Changlog
+### Changelog
 Detailed changes for each release are documented in the [release notes](https://github.com/vuetifyjs/vuetify/releases).
 
 ### Contributing
