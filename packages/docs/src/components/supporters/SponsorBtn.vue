@@ -8,6 +8,8 @@
     v-on="$listeners"
     @click="$ga.event('sponsors', 'click', 'sponsor-btn')"
   >
+    <v-icon left>mdi-vuetify</v-icon>
+
     <span class="caption font-weight-bold">
       {{ $t("Vuetify.Home.becomeSponsor") }}
     </span>
