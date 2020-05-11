@@ -6,6 +6,7 @@ import rebuildSlots from '../../util/rebuildFunctionalSlots'
 
 import VDataTableHeaderMobile from './VDataTableHeaderMobile'
 import VDataTableHeaderDesktop from './VDataTableHeaderDesktop'
+import header from './mixins/header'
 
 export default Vue.extend({
   name: 'v-data-table-header',
@@ -13,6 +14,7 @@ export default Vue.extend({
   functional: true,
 
   props: {
+    ...header.options.props,
     mobile: Boolean,
   },
 
