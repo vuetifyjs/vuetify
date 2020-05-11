@@ -1,11 +1,11 @@
 {
-  "daedal-pro": {
-    "title": "Daedal Theme Pro",
-    "description": "Daedal is a carefully crafted multi-purpose, responsive, and gorgeous theme that delivers a clean user experience.",
-    "src": "https://cdn.vuetifyjs.com/images/themes/daedal/daedal-hero.png",
+  "zero-pro": {
+    "title": "Zero Theme Pro",
+    "description": "Zero is a carefully crafted multi-purpose, responsive, and gorgeous theme that delivers a clean user experience.",
+    "src": "https://cdn.vuetifyjs.com/store/themes/zero/main.png",
     "free": false,
-    "url": "https://store.vuetifyjs.com/product/daedal-responsive-multi-purpose-theme-pro",
-    "demoUrl": ["https://daedal-pro.zeroskillz.now.sh"]
+    "url": "https://store.vuetifyjs.com/product/zero/main.png",
+    "demoUrl": ["https://zero-theme-pro.johnleider.com"]
   },
   "dashboard-pro": {
     "title": "Material Dashboard Pro",
@@ -53,14 +53,14 @@
       ]
     ]
   },
-  "daedal-free": {
-    "title": "Daedal Theme Free",
-    "description": "The Free version of the Daedal PRO theme.",
-    "src": "https://cdn.vuetifyjs.com/images/themes/daedal/daedal-free-hero.png",
+  "zero-free": {
+    "title": "Zero Theme Free",
+    "description": "The Free version of the Zero theme.",
+    "src": "https://cdn.vuetifyjs.com/store/themes/zero/free.png",
     "free": true,
-    "url": "https://store.vuetifyjs.com/product/daedal-responsive-multi-purpose-theme-free",
+    "url": "https://store.vuetifyjs.com/product/zero-theme-free",
     "demoUrl": [
-      ["https://daedal-free.zeroskillz.now.sh"]
+      ["https://zero-theme-free.johnleider.com"]
     ]
   },
   "dashboard": {
