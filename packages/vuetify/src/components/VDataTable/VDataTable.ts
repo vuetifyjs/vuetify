@@ -11,6 +11,7 @@ import {
   DataTableCompareFunction,
   DataItemsPerPageOption,
   ItemGroup,
+  RowClassFunction,
 } from 'types'
 import { PropValidator } from 'vue/types/options'
 
@@ -32,8 +33,9 @@ import MobileRow from './MobileRow'
 import ripple from '../../directives/ripple'
 
 // Helpers
-import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, defaultFilter, camelizeObjectKeys } from '../../util/helpers'
+import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, defaultFilter, camelizeObjectKeys, getPropertyFromItem } from '../../util/helpers'
 import { breaking } from '../../util/console'
+import { mergeClasses } from '../../util/mergeData'
 
 function filterFn (item: any, search: string | null, filter: DataTableFilterFunction) {
   return (header: DataTableHeader) => {
@@ -99,6 +101,10 @@ export default VDataIterator.extend({
     customFilter: {
       type: Function as PropType<typeof defaultFilter>,
       default: defaultFilter,
+    },
+    itemClass: {
+      type: [String, Function] as PropType<RowClassFunction | string>,
+      default: () => '',
     },
   },
 
@@ -450,10 +456,10 @@ export default VDataIterator.extend({
 
       return this.$createElement(this.isMobile ? MobileRow : Row, {
         key: getObjectValueByPath(item, this.itemKey),
-        class: {
-          ...classes,
-          'v-data-table__selected': data.isSelected,
-        },
+        class: mergeClasses(
+          { ...classes, 'v-data-table__selected': data.isSelected },
+          getPropertyFromItem(item, this.itemClass)
+        ),
         props: {
           headers: this.computedHeaders,
           item,
