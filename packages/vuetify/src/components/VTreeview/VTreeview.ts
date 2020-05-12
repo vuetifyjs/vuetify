@@ -411,6 +411,7 @@ export default mixins(
     const children: VNodeChildrenArrayContents = this.items.length
       ? this.items.map(item => {
         const genChild = VTreeviewNode.options.methods.genChild.bind(this)
+
         return genChild(item, getObjectValueByPath(item, this.itemDisabled))
       })
       /* istanbul ignore next */

@@ -119,8 +119,10 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
 
   computed: {
     disabled (): boolean {
-      return getObjectValueByPath(this.item, this.itemDisabled) ||
+      return (
+        getObjectValueByPath(this.item, this.itemDisabled) ||
         (this.parentIsDisabled && this.selectionType === 'leaf')
+      )
     },
     key (): string {
       return getObjectValueByPath(this.item, this.itemKey)
