@@ -1,5 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VRadio.ts should be render colored radio 1`] = `
+<div class="v-radio theme--light">
+  <div class="v-input--selection-controls__input">
+    <i aria-hidden="true"
+       class="v-icon notranslate material-icons theme--light"
+    >
+      $radioOff
+    </i>
+    <input aria-checked="false"
+           id="input-25"
+           role="radio"
+           type="radio"
+           value
+    >
+    <div class="v-input--selection-controls__ripple">
+    </div>
+  </div>
+</div>
+`;
+
 exports[`VRadio.ts should not render aria-label attribute with no label value on input group 1`] = `
 <div class="v-radio theme--light">
   <div class="v-input--selection-controls__input">
@@ -14,7 +34,7 @@ exports[`VRadio.ts should not render aria-label attribute with no label value on
            type="radio"
            value
     >
-    <div class="v-input--selection-controls__ripple primary--text">
+    <div class="v-input--selection-controls__ripple">
     </div>
   </div>
 </div>
@@ -35,7 +55,7 @@ exports[`VRadio.ts should render proper input name 1`] = `
            name="name"
            value
     >
-    <div class="v-input--selection-controls__ripple primary--text">
+    <div class="v-input--selection-controls__ripple">
     </div>
   </div>
 </div>
@@ -75,7 +95,7 @@ exports[`VRadio.ts should use custom icons 1`] = `
            type="radio"
            value
     >
-    <div class="v-input--selection-controls__ripple primary--text">
+    <div class="v-input--selection-controls__ripple">
     </div>
   </div>
 </div>
