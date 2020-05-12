@@ -40,6 +40,7 @@ export default mixins(
       return {
         'v-card': true,
         ...Routable.options.computed.classes.call(this),
+        'v-card--flat': this.flat,
         'v-card--hover': this.hover,
         'v-card--link': this.isClickable,
         'v-card--loading': this.loading,

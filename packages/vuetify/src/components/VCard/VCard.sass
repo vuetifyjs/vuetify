@@ -106,6 +106,11 @@
       .v-icon--right
         margin-left: $card-btn-small-margin-x
 
+// TODO: Remove in v3
+// Kept for backwards compat
+.v-card--flat
+  +elevation(0, true)
+
 .v-card--hover
   cursor: pointer
   transition: box-shadow .4s cubic-bezier(.25, .8, .25, 1)
