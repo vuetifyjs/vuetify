@@ -1,6 +1,6 @@
-
 import Vue from 'vue'
 
+/* @vue/component */
 export default Vue.extend({
   name: 'roundable',
 
