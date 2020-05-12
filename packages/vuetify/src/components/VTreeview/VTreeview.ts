@@ -75,11 +75,6 @@ export default mixins(
       default: false, // TODO: Should be true in next major
     },
     search: String,
-    selectionType: {
-      type: String as PropType<'leaf' | 'independent'>,
-      default: 'leaf',
-      validator: (v: string) => ['leaf', 'independent'].includes(v),
-    },
     value: {
       type: Array as PropType<NodeArray>,
       default: () => ([]),
@@ -414,7 +409,11 @@ export default mixins(
 
   render (h): VNode {
     const children: VNodeChildrenArrayContents = this.items.length
-      ? this.items.map(VTreeviewNode.options.methods.genChild.bind(this))
+      ? this.items.map(item => {
+        const genChild = VTreeviewNode.options.methods.genChild.bind(this)
+
+        return genChild(item, getObjectValueByPath(item, this.itemDisabled))
+      })
       /* istanbul ignore next */
       : this.$slots.default! // TODO: remove type annotation with TS 3.2
 
