@@ -4,7 +4,7 @@
     class="mr-auto mr-md-4 transition-swing"
   >
     <v-text-field
-      id="search"
+      id="doc-search"
       ref="search"
       v-model="search"
       :background-color="!theme.isDark ? 'grey lighten-3' : undefined"
