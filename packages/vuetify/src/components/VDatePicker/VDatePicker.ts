@@ -7,19 +7,19 @@ import VDatePickerYears from './VDatePickerYears'
 
 // Mixins
 import Localable from '../../mixins/localable'
-import mixins from '../../util/mixins'
 import Picker from '../../mixins/picker'
 
 // Utils
+import mixins from '../../util/mixins'
+import isDateAllowed from './util/isDateAllowed'
+import { wrapInArray } from '../../util/helpers'
+import { daysInMonth } from '../VCalendar/util/timestamp'
+import { consoleWarn } from '../../util/console'
 import {
   createItemTypeListeners,
   createNativeLocaleFormatter,
   pad,
 } from './util'
-import isDateAllowed from './util/isDateAllowed'
-import { consoleWarn } from '../../util/console'
-import { daysInMonth } from '../VCalendar/util/timestamp'
-import { wrapInArray } from '../../util/helpers'
 
 // Types
 import {
