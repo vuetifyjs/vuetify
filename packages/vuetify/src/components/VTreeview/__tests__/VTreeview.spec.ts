@@ -842,4 +842,30 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
 
     expect(input).toHaveBeenCalledTimes(1)
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/9693
+  it('should emit opened node when using open-on-click and load-children', async () => {
+    const open = jest.fn()
+
+    const wrapper = mountFunction({
+      propsData: {
+        items: [{ id: 0, name: 'Root', children: [] }],
+        loadChildren: () => wrapper.setProps({
+          items: [{ id: 0, name: 'Root', children: [{ id: 1, name: 'Child' }] }],
+        }),
+        openOnClick: true,
+      },
+      listeners: {
+        'update:open': open,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.find('.v-treeview-node__root').trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(open).toHaveBeenLastCalledWith([0])
+  })
 })

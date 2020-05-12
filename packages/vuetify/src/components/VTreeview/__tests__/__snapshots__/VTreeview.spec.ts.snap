@@ -1,5 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VTreeView.ts should emit opened node when using open-on-click and load-children 1`] = `
+<div class="v-treeview theme--light">
+  <div aria-expanded="false"
+       class="v-treeview-node v-treeview-node--click"
+  >
+    <div class="v-treeview-node__root">
+      <button type="button"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
+      >
+        $subgroup
+      </button>
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          Root
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts should emit opened node when using open-on-click and load-children 2`] = `
+<div class="v-treeview theme--light">
+  <div aria-expanded="true"
+       class="v-treeview-node v-treeview-node--click"
+  >
+    <div class="v-treeview-node__root">
+      <button type="button"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          Root
+        </div>
+      </div>
+    </div>
+    <div class="v-treeview-node__children">
+      <div aria-expanded="false"
+           class="v-treeview-node v-treeview-node--leaf v-treeview-node--click"
+      >
+        <div class="v-treeview-node__root">
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__content">
+            <div class="v-treeview-node__label">
+              Child
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`VTreeView.ts should filter items 1`] = `
 <div class="v-treeview theme--light">
   <div aria-expanded="false"
