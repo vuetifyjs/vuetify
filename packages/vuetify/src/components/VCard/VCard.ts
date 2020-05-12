@@ -23,6 +23,7 @@ export default mixins(
   name: 'v-card',
 
   props: {
+    flat: Boolean,
     hover: Boolean,
     img: String,
     link: Boolean,
