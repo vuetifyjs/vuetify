@@ -33,7 +33,7 @@ import MobileRow from './MobileRow'
 import ripple from '../../directives/ripple'
 
 // Helpers
-import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, defaultFilter, camelizeObjectKeys } from '../../util/helpers'
+import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, defaultFilter, camelizeObjectKeys, getPropertyFromItem } from '../../util/helpers'
 import { breaking } from '../../util/console'
 import { mergeClasses } from '../../util/mergeData'
 
@@ -102,7 +102,10 @@ export default VDataIterator.extend({
       type: Function as PropType<typeof defaultFilter>,
       default: defaultFilter,
     },
-    itemClass: [String, Function] as PropType<RowClassFunction | string>,
+    itemClass: {
+      type: [String, Function] as PropType<RowClassFunction | string>,
+      default: () => '',
+    },
   },
 
   data () {
@@ -455,7 +458,7 @@ export default VDataIterator.extend({
         key: getObjectValueByPath(item, this.itemKey),
         class: mergeClasses(
           { ...classes, 'v-data-table__selected': data.isSelected },
-          typeof this.itemClass === 'function' ? this.itemClass(item) : getObjectValueByPath(item, this.itemClass)
+          getPropertyFromItem(item, this.itemClass)
         ),
         props: {
           headers: this.computedHeaders,
