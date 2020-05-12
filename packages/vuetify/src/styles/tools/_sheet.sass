@@ -1,13 +1,18 @@
-@mixin paper ($elevation, $radius)
+@mixin paper ($elevation, $radius, $shaped-radius)
   +radius($radius)
 
   &:not(.v-sheet--outlined)
     +elevation($elevation)
 
-@mixin sheet ($component, $elevation, $radius)
-  .v-sheet
-    @if ($component)
-      &.#{$component}
-        +paper($elevation, $radius)
-    @else
-      +paper($elevation, $radius)
+  @if ($shaped-radius)
+    &--shaped
+      +ltr()
+        +radius($shaped-radius $radius)
+
+      +rtl()
+        +radius($radius $shaped-radius)
+
+
+@mixin sheet ($component, $elevation, $radius, $shaped-radius)
+  .v-sheet.#{$component}
+    +paper($elevation, $radius, $shaped-radius)

@@ -28,6 +28,7 @@ export default mixins(
 
   props: {
     outlined: Boolean,
+    shaped: Boolean,
     tag: {
       type: String,
       default: 'div',
@@ -39,6 +40,7 @@ export default mixins(
       return {
         'v-sheet': true,
         'v-sheet--outlined': this.outlined,
+        'v-sheet--shaped': this.shaped,
         ...this.themeClasses,
         ...this.elevationClasses,
         ...this.roundedClasses,

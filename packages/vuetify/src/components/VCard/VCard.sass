@@ -10,7 +10,7 @@
     color: map-deep-get($material, 'text', 'secondary')
 
 // Sheet
-+sheet(v-card, $card-elevation, $card-border-radius)
++sheet(v-card, $card-elevation, $card-border-radius, $card-shaped-border-radius)
 
 // Block
 .v-card
@@ -153,8 +153,3 @@
 
 .v-card--raised
   +elevation($card-raised-elevation)
-
-// @deprecated
-// TODO: Remove in v3
-.v-card--shaped
-  border-radius: $card-shaped-border-radius $card-border-radius

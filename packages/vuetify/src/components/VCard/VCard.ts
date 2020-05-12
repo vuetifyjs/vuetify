@@ -32,7 +32,6 @@ export default mixins(
       default: 4,
     },
     raised: Boolean,
-    shaped: Boolean,
   },
 
   computed: {
@@ -46,7 +45,6 @@ export default mixins(
         'v-card--loading': this.loading,
         'v-card--disabled': this.disabled,
         'v-card--raised': this.raised,
-        'v-card--shaped': this.shaped,
         ...VSheet.options.computed.classes.call(this),
       }
     },
