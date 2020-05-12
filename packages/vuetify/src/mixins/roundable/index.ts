@@ -12,7 +12,7 @@ export default Vue.extend({
   computed: {
     roundedClasses (): Record<string, boolean> {
       const composite = []
-      const rounded = ['string', 'number'].includes(typeof this.rounded)
+      const rounded = typeof this.rounded === 'string'
         ? String(this.rounded)
         : this.rounded === true
 

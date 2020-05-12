@@ -28,6 +28,7 @@ describe('rippleable.ts', () => {
     [{ rounded: true, tile: true }, { 'rounded-0': true }],
     [{ rounded: '0' }, { 'rounded-0': true }],
     [{ rounded: true }, { rounded: true }],
+    [{ rounded: false }, {}],
     [{ rounded: 'tr-xl br-lg' }, { 'rounded-tr-xl rounded-br-lg': true }],
   ])('should return correct rounded classes', (propsData, expected: any) => {
     const wrapper = mountFunction({ propsData })
