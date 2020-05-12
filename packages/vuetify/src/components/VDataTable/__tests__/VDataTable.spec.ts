@@ -38,6 +38,7 @@ const testItems = [
     carbs: 24,
     protein: 4.0,
     iron: '1%',
+    class: 'test',
   },
   {
     name: 'Ice cream sandwich',
@@ -46,6 +47,7 @@ const testItems = [
     carbs: 37,
     protein: 4.3,
     iron: '1%',
+    class: ['test', 'second'],
   },
   {
     name: 'Eclair',
@@ -54,6 +56,7 @@ const testItems = [
     carbs: 23,
     protein: 6.0,
     iron: '7%',
+    class: { test: true, second: false },
   },
   {
     name: 'Cupcake',
@@ -898,6 +901,19 @@ describe('VDataTable.ts', () => {
           'first-class': item.fat < 10,
           'second-class': item.protein > 4.0,
         }),
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should apply class from item to rows', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+        itemsPerPage: 5,
+        itemClass: 'class',
       },
     })
 

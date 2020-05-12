@@ -102,10 +102,7 @@ export default VDataIterator.extend({
       type: Function as PropType<typeof defaultFilter>,
       default: defaultFilter,
     },
-    itemClass: {
-      type: Function as PropType<RowClassFunction>,
-      default: () => '',
-    },
+    itemClass: [String, Function] as PropType<RowClassFunction | string>,
   },
 
   data () {
@@ -458,7 +455,7 @@ export default VDataIterator.extend({
         key: getObjectValueByPath(item, this.itemKey),
         class: mergeClasses(
           { ...classes, 'v-data-table__selected': data.isSelected },
-          this.itemClass(item)
+          typeof this.itemClass === 'function' ? this.itemClass(item) : getObjectValueByPath(item, this.itemClass)
         ),
         props: {
           headers: this.computedHeaders,
