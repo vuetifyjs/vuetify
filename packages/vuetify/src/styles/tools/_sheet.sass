@@ -6,11 +6,7 @@
 
   @if ($shaped-radius)
     &.v-sheet--shaped
-      +ltr()
-        +radius($shaped-radius $radius)
-
-      +rtl()
-        +radius($shaped-radius)
+      +radius($shaped-radius)
 
 
 @mixin sheet ($component, $elevation, $radius, $shaped-radius)
