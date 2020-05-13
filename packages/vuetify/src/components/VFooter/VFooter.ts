@@ -41,11 +41,11 @@ export default mixins(
     },
     classes (): object {
       return {
+        ...VSheet.options.computed.classes.call(this),
         'v-footer--absolute': this.absolute,
         'v-footer--fixed': !this.absolute && (this.app || this.fixed),
         'v-footer--padless': this.padless,
         'v-footer--inset': this.inset,
-        ...VSheet.options.computed.classes.call(this),
       }
     },
     computedBottom (): number | undefined {
