@@ -16,4 +16,4 @@ $banner-mobile-start-padding: 16px !default;
 $banner-mobile-top-padding: 16px !default;
 $banner-mobile-actions-top-padding: 12px !default;
 $banner-mobile-singleline-padding: 36px !default;
-$banner-shaped-border-radius: map-get($rounded, 'xl') !default;
+$banner-shaped-border-radius: map-get($rounded, 'xl') $banner-border-radius !default;

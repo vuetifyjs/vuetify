@@ -3,4 +3,4 @@
 $sheet-border-radius: 0 !default;
 $sheet-elevation: 0 !default;
 $sheet-outlined-border-width: thin !default;
-$sheet-shaped-border-radius: map-get($rounded, 'xl') !default;
+$sheet-shaped-border-radius: map-get($rounded, 'xl') $sheet-border-radius !default;

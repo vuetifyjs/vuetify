@@ -5,7 +5,7 @@ $list-border-radius: 0 !default;
 $list-elevation: 0 !default;
 $list-dense-subheader-font-size: 0.75rem !default;
 $list-dense-subheader-height: 40px !default;
-$list-shaped-border-radius: map-get($rounded, 'xl') !default;
+$list-shaped-border-radius: map-get($rounded, 'xl') $list-border-radius !default;
 
 $list-item-avatar-margin-y: 8px !default;
 $list-item-avatar-horizontal-margin-x: -16px !default;
