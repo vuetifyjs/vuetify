@@ -1,4 +1,7 @@
 @import '../../styles/styles.sass';
 
-$app-bar-transition: .4s opacity map-get($transition, 'fast-out-slow-in') !default;
+$app-bar-border-radius: 0 !default;
+$app-bar-elevation: 4 !default;
 $app-bar-scrolled-title-padding-bottom: 9px !default;
+$app-bar-shaped-border-radius: map-get($rounded, 'xl') $app-bar-border-radius !default;
+$app-bar-transition: .4s opacity map-get($transition, 'fast-out-slow-in') !default;
