@@ -10,6 +10,6 @@
   "singleLine": "Label does not move on focus/dirty",
   "size": "Sets the height and width of the component.",
   "textColor": "Applies a specified color to the control text",
-  "tile": "Components.Sheets.props.tile",
+  "tile": "Mixins.Roundable.props.tile",
   "trueValue": "Sets value for truthy state"
 }
