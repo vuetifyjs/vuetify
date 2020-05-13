@@ -104,7 +104,7 @@
             vm.resetSearch(400)
           },
           indexName: 'vuetifyjs',
-          inputSelector: '#search',
+          inputSelector: '#doc-search',
         })
       },
       onBlur () {
