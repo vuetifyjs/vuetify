@@ -1,5 +1,8 @@
 @import '../../styles/styles.sass';
 
+$footer-elevation: 0 !default;
+$footer-border-radius: 0 !default;
+$footer-shaped-border-radius: map-get($rounded, 'xl') !default;
 $footer-padding: 6px 16px !default;
 $footer-padless-padding: 0px !default;
 $footer-transition-duration: 0.2s !default;

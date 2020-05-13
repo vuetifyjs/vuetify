@@ -1,6 +1,8 @@
 @import '../../styles/styles.sass';
 
+$color-picker-elevation: 0 !default;
 $color-picker-border-radius: $border-radius-root !default;
+$color-picker-shaped-border-radius: map-get($rounded, 'xl') !default;
 $color-picker-checkerboard: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGElEQVQYlWNgYGCQwoKxgqGgcJA5h3yFAAs8BRWVSwooAAAAAElFTkSuQmCC) repeat;
 $color-picker-swatch-color-width: 45px !default;
 $color-picker-swatch-color-height: 18px !default;

@@ -1,9 +1,11 @@
 // Styles
 import './VFooter.sass'
 
+// Components
+import VSheet from '../VSheet/VSheet'
+
 // Mixins
 import Applicationable from '../../mixins/applicationable'
-import VSheet from '../VSheet/VSheet'
 import SSRBootable from '../../mixins/ssr-bootable'
 
 // Utilities
@@ -31,10 +33,6 @@ export default mixins(
     },
     inset: Boolean,
     padless: Boolean,
-    tile: {
-      type: Boolean,
-      default: true,
-    },
   },
 
   computed: {
@@ -43,11 +41,11 @@ export default mixins(
     },
     classes (): object {
       return {
-        ...VSheet.options.computed.classes.call(this),
         'v-footer--absolute': this.absolute,
         'v-footer--fixed': !this.absolute && (this.app || this.fixed),
         'v-footer--padless': this.padless,
         'v-footer--inset': this.inset,
+        ...VSheet.options.computed.classes.call(this),
       }
     },
     computedBottom (): number | undefined {

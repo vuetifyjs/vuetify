@@ -3,6 +3,8 @@
 +theme('v-app-bar.v-toolbar.v-sheet') using ($material)
   background-color: map-get($material, 'app-bar')
 
++sheet('v-app-bar.v-toolbar', $app-bar-elevation, $app-bar-border-radius, $app-bar-shaped-border-radius)
+
 // Block
 .v-app-bar
   +bootable()

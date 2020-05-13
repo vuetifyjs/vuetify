@@ -24,9 +24,11 @@
   .v-list-group--active:after
     background: map-get($material, 'dividers')
 
+// Sheet
++sheet(v-list, $list-elevation, $list-border-radius, $list-shaped-border-radius)
+
 // Block
 .v-list
-  border-radius: $list-border-radius
   display: block
   padding: $list-padding
   position: static
