@@ -8,10 +8,11 @@
           <v-spacer></v-spacer>
 
           <v-menu bottom left>
-            <template v-slot:activator="{ on }">
+            <template v-slot:activator="{ on, attrs }">
               <v-btn
                 dark
                 icon
+                v-bind="attrs"
                 v-on="on"
               >
                 <v-icon>mdi-dots-vertical</v-icon>
