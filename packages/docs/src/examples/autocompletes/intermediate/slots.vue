@@ -26,9 +26,10 @@
             left
             transition="slide-y-transition"
           >
-            <template v-slot:activator="{ on }">
+            <template v-slot:activator="{ on, attrs }">
               <v-btn
                 icon
+                v-bind="attrs"
                 v-on="on"
               >
                 <v-icon>mdi-dots-vertical</v-icon>

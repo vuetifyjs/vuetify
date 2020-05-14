@@ -36,8 +36,11 @@
                 style="top: -12px"
                 offset-y
               >
-                <template v-slot:activator="{ on }">
-                  <v-btn v-on="on">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    v-bind="attrs"
+                    v-on="on"
+                  >
                     <v-icon left>mdi-menu</v-icon>
                     Menu
                   </v-btn>
