@@ -49,7 +49,7 @@ export default Selectable.extend({
     attrs (): object {
       return {
         'aria-checked': String(this.isActive),
-        'aria-disabled': String(this.disabled),
+        'aria-disabled': String(this.isDisabled),
         role: 'switch',
       }
     },
