@@ -5,10 +5,8 @@
   "subComponentsList": [
     "crwdns42352:0crwdne42352:0"
   ],
+  "usageText": "crwdns56181:0crwdne56181:0",
   "examples": {
-    "usage": {
-      "desc": "crwdns38130:0crwdne38130:0"
-    },
     "cycle": {
       "heading": "crwdns44972:0crwdne44972:0",
       "desc": "crwdns38134:0crwdne38134:0"
@@ -65,5 +63,8 @@
     "v-carousel-item": {
       "value": "crwdns38196:0crwdne38196:0"
     }
+  },
+  "events": {
+    "change": "crwdns56968:0crwdne56968:0"
   }
 }

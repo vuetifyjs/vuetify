@@ -1,6 +1,9 @@
 {
   "props": {
-    "large": "コンポーネントを大きくします。",
-    "small": "コンポーネントを小さくします。"
+    "large": "コンポーネントをlargeにします。",
+    "medium": "コンポーネントをmediumにします。",
+    "small": "コンポーネントをsmallにします。",
+    "xSmall": "コンポーネントをextra smallにします。",
+    "xLarge": "コンポーネントをextra largeにします。"
   }
 }

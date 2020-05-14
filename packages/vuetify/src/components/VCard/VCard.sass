@@ -9,11 +9,12 @@
   .v-card__subtitle
     color: map-deep-get($material, 'text', 'secondary')
 
-  &.v-card--outlined
-    border: $card-outlined-border-width solid map-get($material, 'dividers')
+// Sheet
++sheet(v-card, $card-elevation, $card-border-radius, $card-shaped-border-radius)
 
 // Block
 .v-card
+  border-width: $card-outlined-border-width
   display: block
   max-width: 100%
   outline: none
@@ -22,11 +23,6 @@
   overflow-wrap: $card-overflow-wrap
   position: relative
   white-space: $card-white-space
-  +elevationTransition()
-  +elevation($card-elevation)
-
-  &:not(.v-sheet--tile):not(.v-card--shaped)
-    border-radius: $card-border-radius
 
   > *:first-child:not(.v-btn):not(.v-chip),
   > .v-card__progress + *:not(.v-btn):not(.v-chip)
@@ -110,9 +106,10 @@
       .v-icon--right
         margin-left: $card-btn-small-margin-x
 
-// Modifier
+// @deprecated
+// TODO: Remove in v3
 .v-card--flat
-  +elevation(0)
+  +elevation(0, true)
 
 .v-card--hover
   cursor: pointer
@@ -154,11 +151,5 @@
 .v-card--loading
   overflow: hidden
 
-.v-card--outlined
-  box-shadow: none
-
 .v-card--raised
   +elevation($card-raised-elevation)
-
-.v-card--shaped
-  border-radius: $card-shaped-border-radius $card-border-radius

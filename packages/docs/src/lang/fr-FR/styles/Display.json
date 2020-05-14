@@ -1,4 +1,5 @@
 {
+  "headingText": "Les aides à l’affichage vous permettent de contrôler l’affichage du contenu. Cela inclut la visibilité conditionnelle en fonction de la fenêtre d'affichage actuelle ou du type d'affichage de l'élément actuel.",
   "displayHeader": "## Affichage",
   "displayText": "Spécifiez les propriétés des éléments `display`. Ces classes peuvent être appliquées à tous les points d'arrêt, de `xs` à `xl` et n'ont pas de point d'arrêt spécifié.",
   "displayFormats": [

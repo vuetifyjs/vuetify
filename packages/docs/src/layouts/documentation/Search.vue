@@ -1,20 +1,20 @@
 <template>
   <v-responsive
-    class="mr-0 mr-md-6 hidden-xs-only transition-swing"
-    :max-width="isFocused ? 300 : 250"
+    :max-width="450"
+    class="mr-auto mr-md-4 transition-swing"
   >
     <v-text-field
-      id="search"
+      id="doc-search"
       ref="search"
       v-model="search"
+      :background-color="!theme.isDark ? 'grey lighten-3' : undefined"
       :label="label"
-      color="primary"
       dense
       flat
       hide-details
       prepend-inner-icon="mdi-magnify"
       rounded
-      solo-inverted
+      solo
       @blur="onBlur"
       @focus="onFocus"
       @keydown.esc="onEsc"
@@ -25,6 +25,8 @@
 <script>
   export default {
     name: 'DocumentationSearch',
+
+    inject: ['theme'],
 
     data: () => ({
       docSearch: {},
@@ -58,7 +60,7 @@
         e = e || window.event
 
         if (
-          e.keyCode === 191 && // Forward Slash '/'
+          e.key === '/' &&
           e.target !== this.$refs.search.$refs.input
         ) {
           e.preventDefault()
@@ -102,7 +104,7 @@
             vm.resetSearch(400)
           },
           indexName: 'vuetifyjs',
-          inputSelector: '#search',
+          inputSelector: '#doc-search',
         })
       },
       onBlur () {

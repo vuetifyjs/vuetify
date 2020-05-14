@@ -10,7 +10,7 @@
         v-for="template in templates"
         :key="template.title"
         cols="12"
-        md="6"
+        md="4"
       >
         <v-card
           class="d-flex flex-column"
@@ -19,34 +19,30 @@
         >
           <v-img
             :src="template.src"
-            height="350px"
-          />
+            height="175"
+          >
+            <v-chip
+              :color="template.free ? 'blue-grey' : 'success'"
+              class="text-uppercase ma-3"
+              label
+              small
+              text-color="white"
+            >
+              {{ $t(`Themes.Premium.${template.free ? 'free' : 'premium'}`) }}
+            </v-chip>
+          </v-img>
 
-          <v-card-title class="align-center">
-            <h2 class="headline mb-0">{{ template.title }}
-              <v-chip
-                :color="template.free ? 'blue-grey' : 'indigo'"
-                class="text-uppercase"
-                label
-                small
-                text-color="white"
-              >
-                {{ $t(`Themes.Premium.${template.free || !template.price ? 'free' : 'premium'}`) }}
-              </v-chip>
-            </h2>
-            <v-spacer />
-
-            <div
-              v-if="template.price"
-              class="headline font-weight-bold primary--text"
-              v-text="template.price"
+          <v-card-title class="align-center py-2">
+            <h2
+              class="title font-weight-regular mb-0"
+              v-text="template.title"
             />
           </v-card-title>
 
           <v-divider />
 
           <v-responsive
-            class="pa-4"
+            class="pa-4 body-2"
             min-height="95"
             v-text="template.description"
           />
@@ -101,16 +97,16 @@
             <v-spacer />
 
             <v-btn
-              :color="template.price ? 'success' : 'indigo'"
               :href="`${template.url}?ref=vuetifyjs.com${template.query || ''}`"
-              :outlined="!template.price"
+              :outlined="template.free"
+              color="indigo"
               dark
+              depressed
               min-width="100"
               target="_blank"
-              rel="noopener"
-              @click="$ga.event('themes', 'click', template.title)"
+              @click="$ga.event('premium-themes-page', 'click', template.title)"
             >
-              {{ $t(`Themes.Premium.${template.price ? 'buyNow' : 'downloadNow'}`) }}
+              {{ $t(`Themes.Premium.${template.free ? 'downloadNow' : 'buyNow'}`) }}
             </v-btn>
           </v-card-actions>
         </v-card>

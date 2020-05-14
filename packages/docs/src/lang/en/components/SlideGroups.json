@@ -37,6 +37,7 @@
     "showArrows": "Always show pagination arrows"
   },
   "events": {
+    "change": "Emitted when the component value is changed by user interaction",
     "click:location": "Emitted when a slide item is selected inside of the slide group"
   },
   "slots": {

@@ -28,11 +28,11 @@
   "cdnText": "To test using Vuetify.js without installing a template from Vue CLI, copy the code below into your `index.html`. This will pull the latest version of Vue and Vuetify, allowing you to start playing with components. You can also use the [Vuetify starter](https://template.vuetifyjs.com) on codepen. While not recommended, if you need to utilize the cdn packages in a _production_ environment, it is recommended that you scope the versions of your assets. For more information on how to do this, navigate to the [jsdelivr](https://www.jsdelivr.com/) website.",
   "cdnAlert": "In order for your application to work properly, you must wrap it in a `v-app` component. See the [Application](/components/application) component page for more information.",
   "electronHeader": "## Usage with Electron",
-  "electronText": "To use Vuetify with **Electron**, add the [electron-builder](https://github.com/nklayman/Vue CLI-plugin-electron-builder) plugin via Vue CLI.",
+  "electronText": "To use Vuetify with **Electron**, add the [electron-builder](https://github.com/nklayman/vue-cli-plugin-electron-builder) plugin via Vue CLI.",
   "pwaHeader": "## Usage with PWA",
   "pwaText": "If you are creating a new app with Vue CLI, you have the option to select **Progressive Web App (PWA) Support** in the first prompt after initiating `vue create my-app`. This package can also be installed into existing Vue CLI projects by entering the following command:",
   "cordovaHeader": "## Usage with Cordova",
-  "cordovaText": "To use Vuetify with **Corodova**, add the [Corodova](https://github.com/m0dch3n/vue-cli-plugin-cordova) plugin via Vue CLI:",
+  "cordovaText": "To use Vuetify with **Cordova**, add the [Cordova](https://github.com/m0dch3n/vue-cli-plugin-cordova) plugin via Vue CLI:",
   "capacitorHeader": "## Usage with Capacitor",
   "capacitorText": "To use Vuetify with **Capacitor**, add the [Capacitor](https://github.com/nklayman/vue-cli-plugin-capacitor) plugin via Vue CLI:"
 }

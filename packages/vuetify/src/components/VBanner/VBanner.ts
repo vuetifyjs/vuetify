@@ -41,10 +41,6 @@ export default mixins(
     },
     singleLine: Boolean,
     sticky: Boolean,
-    tile: {
-      type: Boolean,
-      default: true,
-    },
     value: {
       type: Boolean,
       default: true,

@@ -36,6 +36,7 @@
   },
   "props": {
     "backgroundColor": "使用空图标的颜色",
+    "clearable": "允许清空该组件。当包含当前值的图标被点击时触发。",
     "dense": "图标大小较小",
     "emptyIcon": "空时显示的图标",
     "fullIcon": "满时显示的图标",

@@ -113,7 +113,7 @@ exports[`VBtn.ts should render specified tag when using tag prop 1`] = `
 
 exports[`VBtn.ts should render tile button and match snapshot 1`] = `
 <button type="button"
-        class="v-btn v-btn--contained v-btn--tile theme--light v-size--default"
+        class="v-btn v-btn--contained theme--light v-size--default"
 >
   <span class="v-btn__content">
   </span>

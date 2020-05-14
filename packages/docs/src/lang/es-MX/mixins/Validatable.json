@@ -1,6 +1,0 @@
-{
-  "props": {
-    "error": "Pone el input en un estado de error manual",
-    "validateOnBlur": "Retrasa la validación hasta el evento blur"
-  }
-}

@@ -16,6 +16,12 @@
       ></v-switch>
 
       <v-switch
+        v-model="permanent"
+        class="ma-2"
+        label="Permanent"
+      ></v-switch>
+
+      <v-switch
         v-model="miniVariant"
         class="ma-2"
         label="Mini variant"
@@ -42,6 +48,7 @@
 
     <v-card
       height="400"
+      class="overflow-hidden"
     >
       <v-navigation-drawer
         v-model="drawer"
@@ -49,6 +56,7 @@
         :expand-on-hover="expandOnHover"
         :mini-variant="miniVariant"
         :right="right"
+        :permanent="permanent"
         :src="bg"
         absolute
         dark
@@ -108,7 +116,8 @@
           'red',
           'teal',
         ],
-        right: true,
+        right: false,
+        permanent: true,
         miniVariant: false,
         expandOnHover: false,
         background: false,

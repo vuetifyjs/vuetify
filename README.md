@@ -38,31 +38,32 @@
 
 <h2 align="center">Supporting Vuetify</h2>
 
-<p>Vuetify is an open source MIT project that has been made possible due to the generous contributions by <a href="https://github.com/vuetifyjs/vuetify/blob/dev/BACKERS.md">community backers</a>. If you are interested in supporting this project, please consider:</p>
+Vuetify is a MIT licensed project that is developed and maintained full-time by [John Leider](https://github.com/johnleider) and [Heather Leider](https://github.com/heatherleider); with support from the entire [Core Team](https://vuetifyjs.com/introduction/meet-the-team/). Sponsor Vuetify and receive some **awesome perks** and support Open Source Software at the same time! 🎉
 
 <ul>
   <li>
-    <a href="https://github.com/users/johnleider/sponsorship">Becoming a sponsor on Github</a>
-    <strong><small>(supports John)</small></strong>
+    <a href="https://github.com/users/johnleider/sponsorship">Become a backer or sponsor on GitHub</a>
+    or <a href="https://www.patreon.com/vuetify">Patreon</a> <small>(supports John and Heather)</small>
   </li>
   <li>
-    <a href="https://opencollective.com/vuetify">Becoming a backer on OpenCollective</a>
+    <a href="https://opencollective.com/vuetify">Become a backer or sponsor on Open Collective</a>
     <strong><small>(supports the Dev team)</small></strong>
   </li>
   <li>
-    <a href="https://tidelift.com/subscription/npm/vuetify?utm_source=vuetify&utm_medium=referral&utm_campaign=readme">Become a subscriber on Tidelift</a>
+    <a href="https://tidelift.com/subscription/request-a-demo?utm_source=npm-vuetify&utm_medium=referral&utm_campaign=enterprise">Become a subscriber on Tidelift</a>
   </li>
   <li>
     <a href="https://paypal.me/vuetify">Make a one-time payment with Paypal</a>
   </li>
   <li>
-    <a href="https://vuetifyjs.com/professional-support/consulting?ref=github">Book time with John</a>
+    <a href="https://vuetifyjs.com/professional-support/consulting?ref=github">Book time with the Team</a>
   </li>
 </ul>
 
-<h2 align="center"><b>Sponsors</b></h2>
+### What's the difference between Patreon and OpenCollective?
+Funds donated via Patreon go directly to support John and Heather's full-time work on Vuetify. Funds donated via Open Collective are managed with transparent expenses and will be used for compensating work and expenses for Core team members. Your name/logo will receive proper recognition and exposure by donating on either platform.
 
-<h4 align="center"><b>Premiere</b></h4>
+<h3 align="center"><b>Premiere Sponsors</b></h3>
 
 <table>
   <tbody>
@@ -76,7 +77,7 @@
   </tbody>
 </table>
 
-<h4 align="center"><b>Diamond</b></h4>
+<h3 align="center"><b>Diamond Sponsors</b></h3>
 
 <table>
   <tbody>
@@ -105,7 +106,7 @@
   </tbody>
 </table>
 
-<h4 align="center">Platinum</h4>
+<h3 align="center"><b>Platinum Sponsors</b></h3>
 
 <table>
   <tbody>
@@ -122,12 +123,17 @@
       </td>
       <td>
         <a href="https://www.digitalmaas.com/?ref=vuetify-github">
-          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/digital-maas.svg">
+          <img height="50px" src="https://cdn.vuetifyjs.com/images/backers/digital-maas.svg">
         </a>
       </td>
       <td>
         <a href="https://www.brightree.com/?ref=vuetify-github">
-          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/brightree-logo-light.png">
+          <img height="70px" src="https://cdn.vuetifyjs.com/images/backers/brightree-logo-light.png">
+        </a>
+      </td>
+      <td>
+        <a href="https://www.alv-software.com/?ref=vuetify-github">
+          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/alv-software-logo-light.png">
         </a>
       </td>
       </td>
@@ -142,7 +148,7 @@
 
 <br>
 
-<h4 align="center"><b>Open Collective Sponsors</b></h4>
+<h3 align="center"><b>Sponsors via <a href="https://opencollective.com/vuetify">Open Collective</a></b></h3>
 
 <div align="center">
   <a href="https://opencollective.com/vuetify">
@@ -164,18 +170,17 @@
 
 ### Introduction
 
-Vuetify is a Material Design Component Framework for the Vue framework. We believe that you shouldn't need design skills to build beautiful Vue applications. Vuetify takes the pain out of development by providing everything you need:
+Vuetify is a Vue UI Library with beautifully handcrafted Components using the [Material Design](https://material.io/guidelines/) specification. No design skills required — everything you need to create amazing applications is at your fingertips. Supercharge your development process with all of the tools that you need to succeed:
 
-- Over 80 beautiful hand crafted Material Components
-- Powerful and unique directives for customizing user experiences
-- WCAG accessibility (a11y) and Section 508 compliant
-- Full RTL support
-- Support for IE11 / Safari 9 with [polyfill](https://vuetifyjs.com/getting-started/browser-support)
-- Easily customizable with SASS variables and [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugins/tree/master/packages/vue-cli-plugin-vuetify)
-- Built with the [Material Design 2 Specification](https://material.io/guidelines/)
-- Designed for mobile to desktop
-
-Vuetify is expansive, powerful and provides tools required for large, robust applications.
+- WCAG **Accessibility** (a11y) / WCAG / Section 508 / RTL support
+- **30+** supported languages
+- _Smaller_ bundle sizes with **automatic** tree-shaking
+- A massive **Discord** [community](https://community.vuetifyjs.com)
+- **18 months** Long-term support for [Major releases](https://vuetifyjs.com/introduction/long-term-support/)
+- **IE11 / Safari 9** support with [polyfill](https://vuetifyjs.com/getting-started/browser-support/)
+- Extensive customization options with **SASS/SCSS** and [Presets](https://vuetifyjs.com/customization/presets/)
+- Responsive support down to _320px_ width
+- [Consulting](https://vuetifyjs.com/professional-support/consulting/) and [Business](https://vuetifyjs.com/professional-support/business/) support
 
 ###### Browser Support
 
@@ -425,7 +430,7 @@ For help and support questions, please use our [community chat](https://communit
 ### Issues
 Please make sure to read the [Important Information](https://github.com/vuetifyjs/vuetify/blob/master/.github/CONTRIBUTING.md#important-information) before opening an issue. Issues not confirming to the guidelines may be closed immediately.
 
-### Changlog
+### Changelog
 Detailed changes for each release are documented in the [release notes](https://github.com/vuetifyjs/vuetify/releases).
 
 ### Contributing

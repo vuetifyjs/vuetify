@@ -222,7 +222,7 @@ describe('VAutocomplete.ts', () => {
   it('should propagate content class', () => {
     const wrapper = mountFunction({
       propsData: {
-        menuProps: { contentClass: 'foobar' },
+        menuProps: { contentClass: 'foobar', eager: true },
       },
     })
 

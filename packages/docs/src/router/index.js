@@ -10,9 +10,9 @@ import scrollBehavior from './scroll-behavior'
 // Utilities
 import {
   layout,
-  redirectLang,
   root,
   route,
+  trailingSlash,
 } from './util'
 
 Vue.use(Router)
@@ -28,9 +28,16 @@ const routes = root([
   layout('examples/layouts/:page', 'Layouts'),
   layout(':namespace/:page/:section?', 'Documentation', [
     route('', 'Page'),
-    redirectLang('/404'),
   ]),
-  redirectLang(),
+  {
+    component: () => import('@/layouts/frontend/Index.vue'),
+    path: '*',
+    children: [{
+      name: 'NotFound',
+      path: '',
+      component: () => import('@/pages/general/404.vue'),
+    }],
+  },
 ])
 
 export function createRouter () {
@@ -39,6 +46,10 @@ export function createRouter () {
     mode: 'history',
     routes,
     scrollBehavior,
+  })
+
+  router.beforeEach((to, from, next) => {
+    return to.path.endsWith('/') ? next() : next(trailingSlash(to.path))
   })
 
   Vue.use(VueAnalytics, {

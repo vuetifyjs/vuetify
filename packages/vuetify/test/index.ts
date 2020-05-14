@@ -33,18 +33,26 @@ export function touch (element: Wrapper<any>) {
   }
 }
 
+export const wait = (timeout?: number) => {
+  return new Promise(resolve => setTimeout(resolve, timeout))
+}
+
+export const waitAnimationFrame = (timeout?: number) => {
+  return new Promise(resolve => requestAnimationFrame(resolve))
+}
+
 export const resizeWindow = (width = window.innerWidth, height = window.innerHeight) => {
   (window as any).innerWidth = width
   ;(window as any).innerHeight = height
   window.dispatchEvent(new Event('resize'))
-  return new Promise(resolve => setTimeout(resolve, 200))
+  return wait(200)
 }
 
 export const scrollWindow = (y: number) => {
   (window as any).pageYOffset = y
   window.dispatchEvent(new Event('scroll'))
 
-  return new Promise(resolve => setTimeout(resolve, 200))
+  return wait(200)
 }
 
 // Add a global mockup for IntersectionObserver

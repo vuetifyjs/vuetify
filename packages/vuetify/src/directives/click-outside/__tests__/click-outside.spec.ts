@@ -1,5 +1,6 @@
 // Directives
 import ClickOutside from '../'
+import { wait } from '../../../../test'
 
 function bootstrap (args?: object) {
   let registeredHandler
@@ -38,7 +39,7 @@ describe('click-outside.js', () => {
     const event = { target: document.createElement('div') }
 
     registeredHandler(event)
-    await new Promise(resolve => setTimeout(resolve))
+    await wait()
     expect(callback).toHaveBeenCalledWith(event)
   })
 
@@ -46,7 +47,7 @@ describe('click-outside.js', () => {
     const { registeredHandler, callback, el } = bootstrap({ closeConditional: () => false })
 
     registeredHandler({ target: el })
-    await new Promise(resolve => setTimeout(resolve))
+    await wait()
     expect(callback).not.toHaveBeenCalled()
   })
 
@@ -54,7 +55,7 @@ describe('click-outside.js', () => {
     const { registeredHandler, callback, el } = bootstrap()
 
     registeredHandler({ target: el })
-    await new Promise(resolve => setTimeout(resolve))
+    await wait()
     expect(callback).not.toHaveBeenCalled()
   })
 
@@ -62,7 +63,7 @@ describe('click-outside.js', () => {
     const { registeredHandler, callback, el } = bootstrap({ closeConditional: () => true })
 
     registeredHandler({ target: el })
-    await new Promise(resolve => setTimeout(resolve))
+    await wait()
     expect(callback).not.toHaveBeenCalledWith()
   })
 
@@ -73,7 +74,7 @@ describe('click-outside.js', () => {
     })
 
     registeredHandler({ target: document.createElement('div') })
-    await new Promise(resolve => setTimeout(resolve))
+    await wait()
     expect(callback).not.toHaveBeenCalledWith()
   })
 
@@ -81,11 +82,11 @@ describe('click-outside.js', () => {
     const { registeredHandler, callback } = bootstrap({ closeConditional: () => true })
 
     registeredHandler({ isTrusted: false })
-    await new Promise(resolve => setTimeout(resolve))
+    await wait()
     expect(callback).not.toHaveBeenCalledWith()
 
     registeredHandler({ pointerType: false })
-    await new Promise(resolve => setTimeout(resolve))
+    await wait()
     expect(callback).not.toHaveBeenCalledWith()
   })
 })

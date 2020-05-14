@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Řádků na stránku:',
     ariaLabel: {
-      sortDescending: ': Řazeno sestupně. Aktivováním vypnete řazení.',
-      sortAscending: ': Řazeno vzestupně. Aktivováním se bude řadit sestupně.',
-      sortNone: ': Neseřazeno. Aktivováním se bude řadit vzestupně.',
+      sortDescending: 'Řazeno sestupně.',
+      sortAscending: 'Řazeno vzestupně.',
+      sortNone: 'Neseřazeno.',
+      activateNone: 'Aktivováním vypnete řazení.',
+      activateDescending: 'Aktivováním se bude řadit sestupně.',
+      activateAscending: 'Aktivováním se bude řadit vzestupně.',
     },
     sortBy: 'Řadit dle',
   },
@@ -44,5 +47,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Navigace stránkování',
+      next: 'Další strana',
+      previous: 'Předchozí strana',
+      page: 'Přejít na stránku {0}',
+      currentPage: 'Aktuální stránka, stránka {0}',
+    },
   },
 }

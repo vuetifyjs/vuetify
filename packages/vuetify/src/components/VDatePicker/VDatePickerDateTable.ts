@@ -2,6 +2,7 @@
 import DatePickerTable from './mixins/date-picker-table'
 
 // Utils
+import { weekNumber } from '../../util/dateTimeUtils'
 import { pad, createNativeLocaleFormatter, monthChange } from './util'
 import { createRange } from '../../util/helpers'
 import mixins from '../../util/mixins'
@@ -18,6 +19,10 @@ export default mixins(
 
   props: {
     firstDayOfWeek: {
+      type: [String, Number],
+      default: 0,
+    },
+    localeFirstDayOfYear: {
       type: [String, Number],
       default: 0,
     },
@@ -47,30 +52,27 @@ export default mixins(
     },
     genTHead () {
       const days = this.weekDays.map(day => this.$createElement('th', day))
-      this.showWeek && days.unshift(this.$createElement('th'))
+      if (this.showWeek) {
+        days.unshift(this.$createElement('th'))
+      }
+
       return this.$createElement('thead', this.genTR(days))
     },
     // Returns number of the days from the firstDayOfWeek to the first day of the current month
     weekDaysBeforeFirstDayOfTheMonth () {
       const firstDayOfTheMonth = new Date(`${this.displayedYear}-${pad(this.displayedMonth + 1)}-01T00:00:00+00:00`)
       const weekDay = firstDayOfTheMonth.getUTCDay()
+
       return (weekDay - parseInt(this.firstDayOfWeek) + 7) % 7
     },
-    getWeekNumber () {
-      let dayOfYear = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334][this.displayedMonth]
-      if (this.displayedMonth > 1 &&
-        (((this.displayedYear % 4 === 0) && (this.displayedYear % 100 !== 0)) || (this.displayedYear % 400 === 0))
-      ) {
-        dayOfYear++
-      }
-      const offset = (
-        this.displayedYear +
-        ((this.displayedYear - 1) >> 2) -
-        Math.floor((this.displayedYear - 1) / 100) +
-        Math.floor((this.displayedYear - 1) / 400) -
-        Number(this.firstDayOfWeek)
-      ) % 7 // https://en.wikipedia.org/wiki/Zeller%27s_congruence
-      return Math.floor((dayOfYear + offset) / 7) + 1
+    getWeekNumber (dayInMonth: number) {
+      return weekNumber(
+        this.displayedYear,
+        this.displayedMonth,
+        dayInMonth,
+        parseInt(this.firstDayOfWeek),
+        parseInt(this.localeFirstDayOfYear)
+      )
     },
     genWeekNumber (weekNumber: number) {
       return this.$createElement('td', [
@@ -84,9 +86,10 @@ export default mixins(
       const daysInMonth = new Date(this.displayedYear, this.displayedMonth + 1, 0).getDate()
       let rows = []
       let day = this.weekDaysBeforeFirstDayOfTheMonth()
-      let weekNumber = this.getWeekNumber()
 
-      this.showWeek && rows.push(this.genWeekNumber(weekNumber++))
+      if (this.showWeek) {
+        rows.push(this.genWeekNumber(this.getWeekNumber(1)))
+      }
 
       while (day--) rows.push(this.$createElement('td'))
       for (day = 1; day <= daysInMonth; day++) {
@@ -99,7 +102,9 @@ export default mixins(
         if (rows.length % (this.showWeek ? 8 : 7) === 0) {
           children.push(this.genTR(rows))
           rows = []
-          day < daysInMonth && this.showWeek && rows.push(this.genWeekNumber(weekNumber++))
+          if (this.showWeek && (day < daysInMonth)) {
+            rows.push(this.genWeekNumber(this.getWeekNumber(day + 7)))
+          }
         }
       }
 

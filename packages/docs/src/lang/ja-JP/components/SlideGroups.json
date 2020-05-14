@@ -1,7 +1,27 @@
 {
+  "heading": "# スライド・グループ",
+  "headingText": "`v-slide-group`コンポーネントは、疑似的にページ分割した情報を表示するために使用されます。コアで [v-item-group](/components/item-groups) を使用し、 [v-tabs](/components/tabs) や[v-chip-group] (/components/chip-groups) などのコンポーネントのベースラインを提供します。",
   "examples": {
+    "usage": {
+      "desc": "[v-window](/components/windows) コンポーネントと同様に、 `v-slide-group`を使用すると、アイテムが必要なだけスペースを占有できるため、ユーザーは提供された情報を水平方向に移動できます。"
+    },
+    "carousel": {
+      "heading": "### 擬似カルーセル"
+    },
     "custom-icons": {
       "heading": "### カスタムアイコン"
+    },
+    "active-class": {
+      "heading": "### Active class",
+      "desc": "アクティブクラスをカスタマイズできます"
+    },
+    "multiple": {
+      "heading": "### Multiple",
+      "desc": "複数のアイテムを選択できます。"
     }
+  },
+  "slots": {
+    "next": "次のslot",
+    "prev": "前のslot"
   }
 }

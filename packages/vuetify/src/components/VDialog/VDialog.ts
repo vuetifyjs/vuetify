@@ -25,7 +25,7 @@ import {
 } from '../../util/helpers'
 
 // Types
-import { VNode } from 'vue'
+import { VNode, VNodeData } from 'vue'
 
 const baseMixins = mixins(
   Activatable,
@@ -238,8 +238,31 @@ export default baseMixins.extend({
         focusable.length && (focusable[0] as HTMLElement).focus()
       }
     },
+    genContent () {
+      return this.showLazyContent(() => [
+        this.$createElement(VThemeProvider, {
+          props: {
+            root: true,
+            light: this.light,
+            dark: this.dark,
+          },
+        }, [
+          this.$createElement('div', {
+            class: this.contentClasses,
+            attrs: {
+              role: 'document',
+              tabindex: this.isActive ? 0 : undefined,
+              ...this.getScopeIdAttrs(),
+            },
+            on: { keydown: this.onKeydown },
+            style: { zIndex: this.activeZIndex },
+            ref: 'content',
+          }, [this.genTransition()]),
+        ]),
+      ])
+    },
     genTransition () {
-      const content = this.genContent()
+      const content = this.genInnerContent()
 
       if (!this.transition) return content
 
@@ -247,11 +270,12 @@ export default baseMixins.extend({
         props: {
           name: this.transition,
           origin: this.origin,
+          appear: true,
         },
-      }, this.showLazyContent(() => [content]))
+      }, [content])
     },
-    genContent () {
-      const data = {
+    genInnerContent () {
+      const data: VNodeData = {
         class: this.classes,
         ref: 'dialog',
         directives: [
@@ -262,40 +286,23 @@ export default baseMixins.extend({
               closeConditional: this.closeConditional,
               include: this.getOpenDependentElements,
             },
-          },
+          } as any,
           { name: 'show', value: this.isActive },
         ],
-        style: {},
+        style: {
+          transformOrigin: this.origin,
+        },
       }
 
       if (!this.fullscreen) {
         data.style = {
+          ...data.style as object,
           maxWidth: this.maxWidth === 'none' ? undefined : convertToUnit(this.maxWidth),
           width: this.width === 'auto' ? undefined : convertToUnit(this.width),
         }
       }
 
-      return this.$createElement('div', {
-        class: this.contentClasses,
-        attrs: {
-          role: 'document',
-          tabindex: this.isActive ? 0 : undefined,
-          ...this.getScopeIdAttrs(),
-        },
-        on: { keydown: this.onKeydown },
-        style: { zIndex: this.activeZIndex },
-        ref: 'content',
-      }, [
-        this.$createElement('div', data, [
-          this.$createElement(VThemeProvider, {
-            props: {
-              root: true,
-              light: this.light,
-              dark: this.dark,
-            },
-          }, this.getContentSlot()),
-        ]),
-      ])
+      return this.$createElement('div', data, this.getContentSlot())
     },
   },
 
@@ -311,7 +318,7 @@ export default baseMixins.extend({
       attrs: { role: 'dialog' },
     }, [
       this.genActivator(),
-      this.genTransition(),
+      this.genContent(),
     ])
   },
 })

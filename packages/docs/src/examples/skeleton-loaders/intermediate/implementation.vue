@@ -1,5 +1,5 @@
 <template>
-  <v-container class="grey lighten-4">
+  <v-container class="grey">
     <div class="text-center d-flex justify-center align-center mb-12 flex-wrap">
       <v-btn
         class="mx-12 my-4"
@@ -12,7 +12,6 @@
         v-model="transition"
         label="Transition"
         hide-details
-        filled
         :items="transitions"
         style="max-width: 200px;"
       ></v-select>

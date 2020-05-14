@@ -11,7 +11,7 @@
 
     <v-btn>
       <span>Music</span>
-      <v-icon>music_note</v-icon>
+      <v-icon>mdi-music-note</v-icon>
     </v-btn>
 
     <v-btn>

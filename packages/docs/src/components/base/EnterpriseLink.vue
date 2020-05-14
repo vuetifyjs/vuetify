@@ -1,7 +1,7 @@
 <template>
   <v-btn
     :aria-label="$t('Vuetify.AppToolbar.enterprise')"
-    class="hidden-sm-and-down"
+    class="hidden-md-and-down"
     min-width="48"
     text
     :to="path"
@@ -18,7 +18,7 @@
         const lang = this.$route.params.lang || this.$i18n.fallbackLocale
 
         return {
-          path: `/${lang}/professional-support/enterprise`,
+          path: `/${lang}/professional-support/enterprise/`,
         }
       },
     },

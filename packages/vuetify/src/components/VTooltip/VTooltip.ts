@@ -191,7 +191,7 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
         props: {
           name: this.computedTransition,
         },
-      }, this.showLazyContent(() => [content]))
+      }, [content])
     },
     genContent () {
       return this.$createElement(
@@ -221,7 +221,7 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
       staticClass: 'v-tooltip',
       class: this.classes,
     }, [
-      this.genTransition(),
+      this.showLazyContent(() => [this.genTransition()]),
       this.genActivator(),
     ])
   },

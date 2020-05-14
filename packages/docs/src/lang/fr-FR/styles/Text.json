@@ -9,7 +9,5 @@
   "transformText1": "Le texte peut être transformé avec des classes de mise en majuscules.",
   "transformText2": "La casse de texte et la suppression de `text-transform` est également possible. Dans le premier exemple, la classe personnalisée `text-transform: uppercase` est écrasée et permet au boîtier de texte de rester. Dans le second exemple, nous casserons un mot plus long pour s'adapter à l'espace disponible.`",
   "weightsHeader": "## Poids de police et italiques",
-  "weightsText1": "Le design de matériaux, par défaut, supporte **100, 300, 400, 500, 700, 900** les tailles de police et le texte italique.",
-  "rtlHeader": "## Alignement flexible RTL",
-  "rtlText1": "En utilisant [RTL](/customization/rtl), vous pouvez conserver l'alignement indépendamment de la désignation **rtl**."
+  "weightsText1": "Le design de matériaux, par défaut, supporte **100, 300, 400, 500, 700, 900** les tailles de police et le texte italique."
 }

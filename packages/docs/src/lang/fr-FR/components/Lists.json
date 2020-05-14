@@ -4,9 +4,6 @@
     "usage": {
       "desc": "Les listes sont en trois variantes principales. **monoline** (par défaut), **deux lignes** et **trois lignes**. La déclaration de ligne spécifie la hauteur minimale de l'élément et peut également être contrôlée à partir de `v-list` avec le même prop."
     },
-    "avatar-title-and-action": {
-      "desc": "Les listes contiennent également des créneaux pour une approche plus explicite. Si vous choisissez cette approche, rappelez-vous que vous devez fournir des props supplémentaires pour un espacement correct. Dans cet exemple, nous avons une tuile avec un avatar, donc nous devons fournir une propriété `avatar`."
-    },
     "icon-two-lines-and-action": {
       "desc": "Les listes peuvent contenir des sous-titres, des diviseurs et peuvent contenir 1 ou plusieurs lignes. Le sous-titre débordera avec des ellipsis s'il s'étend sur une ligne."
     },

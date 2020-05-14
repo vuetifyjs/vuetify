@@ -1,10 +1,8 @@
 {
   "heading": "crwdns46122:0crwdne46122:0",
   "headingText": "crwdns46124:0crwdne46124:0",
+  "usageText": "crwdns56151:0crwdne56151:0",
   "examples": {
-    "usage": {
-      "desc": "crwdns40756:0crwdne40756:0"
-    },
     "single-line": {
       "heading": "crwdns46126:0crwdne46126:0",
       "desc": "crwdns40760:0crwdne40760:0"
@@ -27,6 +25,7 @@
     }
   },
   "props": {
+    "app": "crwdns56153:0crwdne56153:0",
     "icon": "crwdns40778:0crwdne40778:0",
     "iconColor": "crwdns40780:0crwdne40780:0",
     "singleLine": "crwdns40782:0crwdne40782:0",

@@ -1,10 +1,8 @@
 {
   "heading": "# 数据迭代器",
   "headingText": "`v-data-iterator` 组件用于显示数据，并将其大部分功能与 `v-data-table` 组件共享。功能包括排序、搜索、分页和选择。",
+  "usageText": "`v-data-iterator` 允许您精确地自定义如何显示数据。在本例中，我们使用带有卡片的网格。",
   "examples": {
-    "usage": {
-      "desc": "`v-data-iterator` 允许您精确地自定义如何显示数据。在本例中，我们使用带有卡片的网格。"
-    },
     "slots": {
       "heading": "### 插槽",
       "desc": "`v-data-iterator` 同时具有页眉和页脚插槽，用于添加额外的内容。"
@@ -28,6 +26,7 @@
       "loadingText": "当 `loading` 为 true 且未提供任何物品时显示的文本",
       "noDataText": "未向组件提供任何项目时显示的文本",
       "noResultsText": "使用 `search` 属性时显示的文本，但没有结果",
+      "selectableKey": "每个项目上的属性，用于确定其是否可选择。",
       "singleExpand": "将扩展模式更改为单个扩展",
       "singleSelect": "将选择模式更改为单选",
       "value": "用于控制选定的行"

@@ -7,6 +7,7 @@
 
     .v-tab:not(.v-tab--active),
     .v-tab:not(.v-tab--active) > .v-icon,
+    .v-tab:not(.v-tab--active) > .v-btn,
     .v-tab--disabled
       color: map-get($material, 'tabs')
 
@@ -40,16 +41,24 @@
     .v-tab
       white-space: normal
 
+    // https://github.com/vuetifyjs/vuetify/issues/8294
+    &.v-tabs--right
+      > .v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows):not(.v-slide-group--has-affixes)
+        .v-slide-group__next
+          display: initial
+          visibility: hidden
+
+    // https://github.com/vuetifyjs/vuetify/issues/6932
+    &:not(.v-tabs--right)
+      > .v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows):not(.v-slide-group--has-affixes)
+        .v-slide-group__prev
+          display: initial
+          visibility: hidden
+
 // Element
 .v-tabs-bar
   border-radius: inherit
   height: $tabs-bar-height
-
-  // https://github.com/vuetifyjs/vuetify/issues/6932
-  &.v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows):not(.v-slide-group--has-affixes)
-    .v-slide-group__prev
-      display: initial
-      visibility: hidden
 
   &.v-item-group > *
     cursor: initial
@@ -205,7 +214,8 @@
   &.v-tab:not(:focus)::before
     opacity: 0
 
-  .v-icon
+  .v-icon,
+  .v-btn.v-btn--flat
     color: inherit
 
 .v-tab--disabled

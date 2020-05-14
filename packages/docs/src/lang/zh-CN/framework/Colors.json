@@ -9,7 +9,7 @@
   "stylusPackHeader": "## Stylus色彩包",
   "stylusPackText": "虽然方便，但是Stylus色彩包增加了输出文件约~30kb的大小。有些项目可能只需要Vuetify在运行时引导创建的那些默认提供的类。要禁用此功能，您将不得不 _手动_导入并构建**stylus**主文件。这将需要[stylus loader](https://github.com/shama/stylus-loader)和应该`*.styl`文件条目（Webpack中的entry）",
   "stylusPackText2": "您创建的`main.styl`文件将需要包含在您的项目中。",
-  "alert": "您**必须**配置您的webpack安装程序来使用`stylus`。如果您正在使用[预制模版](/getting-started/quick-start#new-applications)，这些都已经为您完成了。",
+  "alert": "您**必须**配置您的webpack安装程序来使用`stylus`。如果您正在使用[预制模版](/getting-started/quick-start#vue-cli-install)，这些都已经为您完成了。",
   "stylusPackText3": "这也可以在您的**App.vue** 主文件中完成。请记住，根据您的项目设置，它_将_增加每次更新输入文件时的构建时间，因为stylus文件将会被重新生成。",
   "colorHeader": "## Material 色彩表",
   "colorText": "以下是按原色分组的Material Design调色板列表。"

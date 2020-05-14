@@ -103,7 +103,6 @@ describe('VImg.ts', () => {
 
     expect(error).toHaveBeenCalledTimes(2)
     expect(error).toHaveBeenCalledWith(LOAD_FAILURE_SRC)
-    expect('Image load failed').toHaveBeenWarned()
   })
 
   it('should have aria attributes', async () => {

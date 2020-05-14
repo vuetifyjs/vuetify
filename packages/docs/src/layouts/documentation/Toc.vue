@@ -6,13 +6,12 @@
     :right="!$vuetify.rtl"
     app
     clipped
-    color="transparent"
   >
     <template v-if="structure !== false">
       <ul class="pt-8 mb-6 documentation-toc">
-        <li class="mb-2">
-          <h3 class="body-1 text--primary">
-            Contents
+        <li class="mb-4">
+          <h3 class="caption font-weight-bold text-uppercase grey--text">
+            <base-markdown>Vuetify.Toc.onThisPage</base-markdown>
           </h3>
         </li>
 
@@ -33,7 +32,7 @@
           >
             <a
               :href="`#${item.id}`"
-              class="d-block"
+              class="d-block font-weight-medium"
               @click.stop.prevent="goTo(`#${item.id}`)"
               v-html="item.text"
             />
@@ -44,10 +43,9 @@
       <div class="pl-6">
         <v-fade-transition appear>
           <supporters-supporter-group
-            :group="supporters['Diamond']"
+            :group="2"
             small
             justify="start"
-            title="Diamond Sponsors"
           />
         </v-fade-transition>
       </div>
