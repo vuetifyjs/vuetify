@@ -10,8 +10,8 @@
 
       <v-col cols="12" class="mt-12">
         <v-tooltip v-model="show" top>
-          <template v-slot:activator="{ on }">
-            <v-btn icon v-on="on">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon v-bind="attrs" v-on="on">
               <v-icon color="grey lighten-1">mdi-cart</v-icon>
             </v-btn>
           </template>
