@@ -11,12 +11,13 @@
         max-width="290px"
         min-width="290px"
       >
-        <template v-slot:activator="{ on }">
+        <template v-slot:activator="{ on, attrs }">
           <v-text-field
             v-model="date"
             label="Picker in menu"
             prepend-icon="event"
             readonly
+            v-bind="attrs"
             v-on="on"
           ></v-text-field>
         </template>
