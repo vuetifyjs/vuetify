@@ -24,7 +24,7 @@ function chunk (arr, chunkSize) {
   const chunks = []
 
   for (let i = 0; i < arr.length; i += chunkSize) {
-    chunks.push(arr.slice(i , i + chunkSize))
+    chunks.push(arr.slice(i, i + chunkSize))
   }
 
   return chunks
@@ -93,7 +93,7 @@ if (isMainThread) {
   })
 
   parentPort.postMessage({
-    message: `Renderer ${index} created`
+    message: `Renderer ${index} created`,
   })
 
   // Redirect console.log to the main thread
@@ -101,7 +101,7 @@ if (isMainThread) {
   const write = process.stdout.write
   process.stdout.write = data => {
     parentPort.postMessage({
-      message: '\n' + currentRoute.fullPath + '\n' + data.toString()
+      message: '\n' + currentRoute.fullPath + '\n' + data.toString(),
     })
     return write.call(process.stdout, data)
   }
@@ -126,7 +126,7 @@ if (isMainThread) {
       const dir = path.join('./dist/', route.fullPath)
 
       return mkdirp(dir).then(() =>
-        writeFile(path.join(dir, 'index.html'), html, { encoding: 'utf-8' })
+        writeFile(path.join(dir, 'index.html'), html, { encoding: 'utf-8' }),
       ).then(() => {
         parentPort.postMessage({
           lastFile: route.fullPath,
