@@ -1,5 +1,6 @@
 import pad from './pad'
 import { DatePickerFormatter } from 'types'
+import { jalaliToGregorian } from './jdf'
 
 interface SubstrOptions {
   start?: number
@@ -24,6 +25,10 @@ function createNativeLocaleFormatter (
 ): DatePickerFormatter | undefined {
   const makeIsoString = (dateString: string) => {
     const [year, month, date] = dateString.trim().split(' ')[0].split('-')
+    if (locale === 'fa-IR') {
+      const [gYear, gMonth, gDate] = jalaliToGregorian(parseInt(year), parseInt(month) || 1, parseInt(date) || 1)
+      return [pad(gYear, 4), pad(gMonth || 1), pad(gDate || 1)].join('-')
+    }
     return [pad(year, 4), pad(month || 1), pad(date || 1)].join('-')
   }
 

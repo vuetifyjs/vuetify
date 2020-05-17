@@ -6,6 +6,7 @@ import { weekNumber } from '../../util/dateTimeUtils'
 import { pad, createNativeLocaleFormatter, monthChange } from './util'
 import { createRange } from '../../util/helpers'
 import mixins from '../../util/mixins'
+import { jalaliToGregorian, gregorianToJalali } from './util/jdf'
 
 // Types
 import { VNode, VNodeChildren, PropType } from 'vue'
@@ -40,6 +41,11 @@ export default mixins(
     weekDays (): string[] {
       const first = parseInt(this.firstDayOfWeek, 10)
 
+      if (this.currentLocale === 'fa-IR') {
+        return this.weekdayFormatter
+          ? createRange(7).map(i => this.weekdayFormatter!(gregorianToJalali(2017, 1, first + i + 15).join('-'))) // 2017-01-15 is Sunday
+          : createRange(7).map(i => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][(i + first) % 7])
+      }
       return this.weekdayFormatter
         ? createRange(7).map(i => this.weekdayFormatter!(`2017-01-${first + i + 15}`)) // 2017-01-15 is Sunday
         : createRange(7).map(i => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][(i + first) % 7])
@@ -60,7 +66,11 @@ export default mixins(
     },
     // Returns number of the days from the firstDayOfWeek to the first day of the current month
     weekDaysBeforeFirstDayOfTheMonth () {
-      const firstDayOfTheMonth = new Date(`${this.displayedYear}-${pad(this.displayedMonth + 1)}-01T00:00:00+00:00`)
+      let firstDayOfTheMonth = new Date(`${this.displayedYear}-${pad(this.displayedMonth + 1)}-01T00:00:00+00:00`)
+      if (this.currentLocale === 'fa-IR') {
+        const gDate = jalaliToGregorian(this.displayedYear, this.displayedMonth + 1, 1)
+        firstDayOfTheMonth = new Date(`${gDate[0]}-${pad(gDate[1])}-${pad(gDate[2])}T00:00:00+00:00`)
+      }
       const weekDay = firstDayOfTheMonth.getUTCDay()
 
       return (weekDay - parseInt(this.firstDayOfWeek) + 7) % 7
@@ -83,7 +93,13 @@ export default mixins(
     },
     genTBody () {
       const children = []
-      const daysInMonth = new Date(this.displayedYear, this.displayedMonth + 1, 0).getDate()
+      let daysInMonth = new Date(this.displayedYear, this.displayedMonth + 1, 0).getDate()
+      if (this.currentLocale === 'fa-IR') {
+        daysInMonth = this.displayedMonth + 1 > 6 ? 30 : 31
+        if (this.displayedMonth + 1 === 12 && this.displayedYear % 4 !== 3) {
+          daysInMonth = 29
+        }
+      }
       let rows = []
       let day = this.weekDaysBeforeFirstDayOfTheMonth()
 

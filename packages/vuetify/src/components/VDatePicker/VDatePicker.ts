@@ -19,6 +19,7 @@ import {
 import isDateAllowed from './util/isDateAllowed'
 import { consoleWarn } from '../../util/console'
 import { daysInMonth } from '../VCalendar/util/timestamp'
+import { gregorianToJalali } from './util/jdf'
 
 // Types
 import {
@@ -134,8 +135,15 @@ export default mixins(
           return this.pickerDate
         }
 
-        const date = (this.multiple || this.range ? (this.value as string[])[(this.value as string[]).length - 1] : this.value) ||
+        let date = (this.multiple || this.range ? (this.value as string[])[(this.value as string[]).length - 1] : this.value) ||
           (typeof this.showCurrent === 'string' ? this.showCurrent : `${now.getFullYear()}-${now.getMonth() + 1}`)
+        if (this.locale === 'fa-IR') {
+          const jdate = gregorianToJalali(parseInt((date as string).split('-')[0]),
+            parseInt((date as string).split('-')[1]),
+            parseInt((date as string).split('-')[2] || 1)
+          )
+          date = `${jdate[0]}-${pad(jdate[1])}-${pad(jdate[2])}`
+        }
         return sanitizeDateString(date as string, this.type === 'date' ? 'month' : 'year')
       })(),
     }
