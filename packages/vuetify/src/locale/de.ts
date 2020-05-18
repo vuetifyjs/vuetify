@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} ausgewählt',
+    nextMonthAriaLabel: 'Nächsten Monat',
+    nextYearAriaLabel: 'Nächstes Jahr',
+    prevMonthAriaLabel: 'Vorheriger Monat',
+    prevYearAriaLabel: 'Vorheriges Jahr',
   },
   noDataText: 'Keine Daten vorhanden',
   carousel: {

@@ -87,10 +87,26 @@ export default mixins(
       type: String,
       default: '$next',
     },
+    nextMonthAriaLabel: {
+      type: String,
+      default: '$vuetify.datePicker.nextMonthAriaLabel',
+    },
+    nextYearAriaLabel: {
+      type: String,
+      default: '$vuetify.datePicker.nextYearAriaLabel',
+    },
     pickerDate: String,
     prevIcon: {
       type: String,
       default: '$prev',
+    },
+    prevMonthAriaLabel: {
+      type: String,
+      default: '$vuetify.datePicker.prevMonthAriaLabel',
+    },
+    prevYearAriaLabel: {
+      type: String,
+      default: '$vuetify.datePicker.prevYearAriaLabel',
     },
     range: Boolean,
     reactive: Boolean,
@@ -374,6 +390,8 @@ export default mixins(
           locale: this.locale,
           min: this.activePicker === 'DATE' ? this.minMonth : this.minYear,
           max: this.activePicker === 'DATE' ? this.maxMonth : this.maxYear,
+          nextAriaLabel: this.activePicker === 'DATE' ? this.nextMonthAriaLabel : this.nextYearAriaLabel,
+          prevAriaLabel: this.activePicker === 'DATE' ? this.prevMonthAriaLabel : this.prevYearAriaLabel,
           prevIcon: this.prevIcon,
           readonly: this.readonly,
           value: this.activePicker === 'DATE' ? `${pad(this.tableYear, 4)}-${pad(this.tableMonth + 1)}` : `${pad(this.tableYear, 4)}`,

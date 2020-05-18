@@ -30,17 +30,6 @@ describe('VDatePicker.ts', () => {
             rtl: false,
             lang: new Lang({
               ...preset,
-              lang: {
-                current: 'en',
-                locales: {
-                  en: {
-                    ...en,
-                    datePicker: {
-                      itemsSelected: 'i has {0} items',
-                    },
-                  },
-                },
-              },
             }),
           },
         },
@@ -296,7 +285,7 @@ describe('VDatePicker.ts', () => {
     wrapper.setProps({
       value: ['2013-05', '2013-06', '2013-07'],
     })
-    expect(wrapper.find('.v-date-picker-title__date').text()).toBe('i has 3 items')
+    expect(wrapper.find('.v-date-picker-title__date').text()).toBe('3 selected')
   })
 
   it('should emit click/dblclick:month event', async () => {

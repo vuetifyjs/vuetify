@@ -29,16 +29,6 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
           $vuetify: {
             lang: new Lang({
               ...preset,
-              lang: {
-                current: 'en',
-                locales: {
-                  en: {
-                    datePicker: {
-                      itemsSelected: 'i has {0} items',
-                    },
-                  },
-                },
-              },
             }),
           },
         },
@@ -245,7 +235,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     wrapper.setProps({
       value: ['2013-05-07', '2013-05-08', '2013-05-09'],
     })
-    expect(wrapper.find('.v-date-picker-title__date').text()).toBe('i has 3 items')
+    expect(wrapper.find('.v-date-picker-title__date').text()).toBe('3 selected')
   })
 
   it('should emit input without unselected dates after click', async () => {
