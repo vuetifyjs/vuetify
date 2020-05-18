@@ -9,7 +9,7 @@
     "The reproduction is **MINIMAL** and concise"
   ],
   "reportingText3": "These steps ensure that we have all of the information *necessary* to quickly triage and resolve your issue. Once your reproduction is complete, submit a new issue using the [Vuetify Issue Creator](https://issues.vuetifyjs.com/).",
-  "setupHeader": "## Setting up your environment",
+  "setupHeading": "## Setting up your environment",
   "setupText1": "If you are making a [Pull Request](https://github.com/vuetifyjs/vuetify/pulls), please [fork the Vuetify repository](https://github.com/vuetifyjs/vuetify) before continuing; More information on forking repositories is located in the [Fork a Repo](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) documentation. Otherwise you can simply click the <kbd>Clone or download</kbd> option on the Vuetify repository page.",
   "setupText1a": "If you are new to the process of contributing to Open Source, it's recommended that you clone using **https**. More information on [Which remote URL](https://help.github.com/en/github/using-git/which-remote-url-should-i-use) to use can be found on the GitHub documenation page.",
   "setupText1b": "Once cloned, navigate to the folder by typing <kbd>cd vuetify</kbd> and then running the following commands:",
