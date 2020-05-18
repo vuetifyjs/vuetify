@@ -8,6 +8,7 @@ export interface Theme {
     customProperties?: boolean
     minifyTheme?: ThemeMinifyTheme
     themeCache?: VuetifyThemeCache
+    variations?: boolean
   }
   themes: {
     dark: VuetifyThemeVariant

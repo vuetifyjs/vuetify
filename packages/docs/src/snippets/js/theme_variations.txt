@@ -1,0 +1,7 @@
+// src/plugins/vuetify.js
+
+export default new Vuetify({
+  theme: {
+    options: { variations: false },
+  },
+})

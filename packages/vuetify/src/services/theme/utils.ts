@@ -8,7 +8,8 @@ import {
 
 export function parse (
   theme: Record<string, VuetifyThemeItem>,
-  isItem = false
+  isItem = false,
+  variations = true,
 ): VuetifyParsedTheme {
   const { anchor, ...variant } = theme
   const colors = Object.keys(variant)
@@ -28,7 +29,11 @@ export function parse (
     } else if (typeof value === 'object') {
       parsedTheme[name] = parse(value, true)
     } else {
-      parsedTheme[name] = genVariations(name, colorToInt(value))
+      const intColor = colorToInt(value)
+
+      parsedTheme[name] = variations
+        ? genVariations(name, intColor)
+        : { base: intToHex(intColor) }
     }
   }
 

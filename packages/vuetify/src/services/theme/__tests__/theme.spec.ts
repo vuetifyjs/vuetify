@@ -318,4 +318,17 @@ describe('Theme.ts', () => {
 
     expect(set).toHaveBeenCalled()
   })
+
+  it('should generate theme without variations', () => {
+    const theme = new Theme({
+      ...preset,
+      theme: mock,
+    })
+
+    expect(Object.values(theme.parsedTheme)).toMatchSnapshot()
+
+    theme.options.variations = false
+
+    expect(Object.values(theme.parsedTheme)).toMatchSnapshot()
+  })
 })

@@ -46,7 +46,7 @@ export class Theme extends Service {
 
     this.dark = Boolean(dark)
     this.defaults = this.themes = themes
-    this.options = options
+    this.options = options || {}
 
     if (disable) {
       this.disabled = true
@@ -157,7 +157,7 @@ export class Theme extends Service {
     if (typeof document === 'undefined') return
 
     /* istanbul ignore next */
-    const options = this.options || {}
+    const options = this.options
 
     this.styleEl = document.createElement('style')
     this.styleEl.type = 'text/css'
@@ -193,7 +193,7 @@ export class Theme extends Service {
           cssText: this.generatedStyles,
           type: 'text/css',
           id: 'vuetify-theme-stylesheet',
-          nonce: (this.options || {}).cspNonce,
+          nonce: this.options.cspNonce,
         })
       } else {
         vuetifyStylesheet.cssText = this.generatedStyles
@@ -211,13 +211,13 @@ export class Theme extends Service {
         cssText: this.generatedStyles,
         type: 'text/css',
         id: 'vuetify-theme-stylesheet',
-        nonce: (this.options || {}).cspNonce,
+        nonce: this.options.cspNonce,
       }],
     })
   }
 
   private initSSR (ssrContext?: any) {
-    const options = this.options || {}
+    const options = this.options
     // SSR
     const nonce = options.cspNonce ? ` nonce="${options.cspNonce}"` : ''
     ssrContext.head = ssrContext.head || ''
@@ -257,7 +257,7 @@ export class Theme extends Service {
   get generatedStyles (): string {
     const theme = this.parsedTheme
     /* istanbul ignore next */
-    const options = this.options || {}
+    const options = this.options
     let css
 
     if (options.themeCache != null) {
@@ -282,7 +282,7 @@ export class Theme extends Service {
   get parsedTheme (): VuetifyParsedTheme {
     /* istanbul ignore next */
     const theme = this.currentTheme || {}
-    return ThemeUtils.parse(theme)
+    return ThemeUtils.parse(theme, false, this.options.variations)
   }
 
   // Is using v2.3 of vue-meta
