@@ -11,7 +11,7 @@ import { breaking, removed } from '../../util/console'
 
 // Types
 import { VNode, VNodeChildren, PropType } from 'vue'
-import { DataScopeProps } from 'types'
+import { DataScopeProps } from 'vuetify/types'
 
 /* @vue/component */
 export default Themeable.extend({

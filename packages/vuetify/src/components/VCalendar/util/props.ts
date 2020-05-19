@@ -1,7 +1,7 @@
 
 import { validateTimestamp, parseDate, DAYS_IN_WEEK } from './timestamp'
 import { PropType } from 'vue'
-import { CalendarEvent, CalendarFormatter, CalendarTimestamp, CalendarEventOverlapMode } from 'types'
+import { CalendarEvent, CalendarFormatter, CalendarTimestamp, CalendarEventOverlapMode } from 'vuetify/types'
 import { CalendarEventOverlapModes } from '../modes'
 import { PropValidator } from 'vue/types/options'
 

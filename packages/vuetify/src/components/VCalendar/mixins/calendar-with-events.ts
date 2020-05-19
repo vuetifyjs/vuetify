@@ -36,7 +36,7 @@ import {
   CalendarDaySlotScope,
   CalendarDayBodySlotScope,
   CalendarEventOverlapMode,
-} from 'types'
+} from 'vuetify/types'
 
 // Types
 type VEventGetter = (day: CalendarTimestamp) => CalendarEventParsed[]

@@ -4,7 +4,7 @@ import {
   getTimestampIdentifier,
   OFFSET_TIME,
 } from './timestamp'
-import { CalendarTimestamp, CalendarEvent, CalendarEventParsed } from 'types'
+import { CalendarTimestamp, CalendarEvent, CalendarEventParsed } from 'vuetify/types'
 
 export function parseEvent (input: CalendarEvent, index: number, startProperty: string, endProperty: string): CalendarEventParsed {
   const start: CalendarTimestamp = parseTimestamp(input[startProperty], true)
