@@ -1,38 +1,32 @@
 <template>
   <v-app-bar
-    id="app-toolbar"
+    id="documentation-app-bar"
     app
-    color="primary"
+    color="#1867c0"
     dark
     elevate-on-scroll
     extension-height="40"
   >
-    <v-container class="pa-0 d-flex">
+    <v-container class="pa-0 d-flex align-center">
       <base-vuetify-logo />
 
       <v-spacer />
 
-      <v-toolbar-items>
-        <v-btn
-          :aria-label="$t('Vuetify.AppToolbar.documentation')"
-          exact
-          min-width="48"
-          text
-          :to="`/${$route.params.lang}/getting-started/quick-start/`"
-        >
-          <base-nav-text class="hidden-sm-and-down">Vuetify.AppToolbar.documentation</base-nav-text>
+      <v-theme-provider light>
+        <documentation-search />
+      </v-theme-provider>
 
-          <v-icon class="hidden-md-and-up">mdi-speedometer</v-icon>
-        </v-btn>
+      <v-spacer class="d-sm-none" />
 
-        <base-store-link />
+      <base-store-link />
 
-        <base-ecosystems-menu />
+      <base-enterprise-link />
 
-        <base-support-menu />
+      <base-ecosystems-menu />
 
-        <base-locales-menu />
-      </v-toolbar-items>
+      <base-support-menu />
+
+      <base-locales-menu />
     </v-container>
   </v-app-bar>
 </template>
@@ -40,5 +34,9 @@
 <script>
   export default {
     name: 'FrontendAppBar',
+
+    components: {
+      DocumentationSearch: () => import('../documentation/Search'),
+    },
   }
 </script>

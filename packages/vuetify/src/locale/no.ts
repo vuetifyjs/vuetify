@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} valgt',
+    nextMonthAriaLabel: 'Neste måned',
+    nextYearAriaLabel: 'Neste år',
+    prevMonthAriaLabel: 'Forrige måned',
+    prevYearAriaLabel: 'Forrige år',
   },
   noDataText: 'Ingen data er tilgjengelig',
   carousel: {

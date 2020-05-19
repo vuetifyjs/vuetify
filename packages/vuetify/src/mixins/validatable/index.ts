@@ -15,7 +15,7 @@ import { InputMessage, InputValidationRules } from 'types'
 /* @vue/component */
 export default mixins(
   Colorable,
-  RegistrableInject('form'),
+  RegistrableInject<'form', any>('form'),
   Themeable
 ).extend({
   name: 'validatable',
@@ -121,6 +121,10 @@ export default mixins(
 
         this.$emit('input', val)
       },
+    },
+    isDisabled (): boolean {
+      if (this.form && this.form.disabled) return true
+      return this.disabled || this.readonly
     },
     shouldValidate (): boolean {
       if (this.externalError) return true

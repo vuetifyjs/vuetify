@@ -6,7 +6,7 @@
   "availableLocalesText": "crwdns37196:0crwdne37196:0",
   "alertInfo": "crwdns56339:0[vue-i18n]crwdne56339:0",
   "createTranslation": "crwdns37198:0crwdne37198:0",
-  "createTranslationText": "crwdns37200:0crwdne37200:0",
+  "createTranslationText": "crwdns56996:0crwdne56996:0",
   "customComponents": "crwdns37202:0crwdne37202:0",
   "customComponentsText": "crwdns41586:0$vuetifycrwdne41586:0",
   "api": {
@@ -15,6 +15,6 @@
     "t": "crwdns37210:0crwdne37210:0"
   },
   "vueI18nHeader": "crwdns37212:0crwdne37212:0",
-  "vueI18nText1": "crwdns37214:0$vuetifycrwdne37214:0",
+  "vueI18nText1": "crwdns56998:0$vuetifycrwdne56998:0",
   "vueI18nText2": "crwdns37216:0crwdne37216:0"
 }

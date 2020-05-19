@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} öge seçildi',
+    nextMonthAriaLabel: 'Gelecek ay',
+    nextYearAriaLabel: 'Gelecek yıl',
+    prevMonthAriaLabel: 'Geçtiğimiz ay',
+    prevYearAriaLabel: 'Geçen yıl',
   },
   noDataText: 'Bu görünümde veri yok.',
   carousel: {

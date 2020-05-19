@@ -1,4 +1,5 @@
 {
+  "heading": "# 贡献指南",
   "headingText": "Vuetify 是由一个惊人的社区打造的，社区中提交问题，创建拉取请求，并提供宝贵的反馈才使 Vuetify 成为可能。这是我们的工作，使你能够创建惊人的应用程序。很多时候，你会遇到一些可以做得更好的事情。也许你发现了一个 bug，或者你对附加功能有了一个想法。太好了！要开始在开发环境中工作，只需克隆 Vuetify 存储库即可。",
   "issueHeader": "## 报告问题",
   "issue1": "仓库的工单列表是专门用来提交 bug 报告和特性请求的。其它无关紧要的问题将会被立即关闭。",
@@ -41,11 +42,13 @@
   "commitText11": "- **revert:** 恢复以前的提交。",
   "changesHeader": "## 提交更改/Pull requests",
   "changesText1": "在进行任何提交之前，你会想要从开发中拉取最新和最好的。从这里开始，合并，并解决分支和开发之间的任何冲突。随着开发的不断推进，频繁地拉取是一个很好的经验法则。",
-  "changesText2": "在 git 中，添加所有相关的文件。",
-  "changesText3": "利用 commitizen 命令 `git cz` 提交。在一系列的选项中，请确保选择恰当的类型（参阅上面的 **提交指南 w/Commitizen**）",
+  "changesText2": "在 git 中，添加所有相关文件。",
+  "changesText3": "使用 `git cz` 命令来通过 commitizen 提交。从这里开始，你将通过一系列的 props 进行提交。请确保选择合适的类型（参见上面的 **提交指南 w/Commitizen**）。",
   "changesText4": "最后，`git push` 并且打开一个 Pull requests。",
   "changesSubHeader1": "### Pull Requests For Vuetify",
   "changesText7": "Pull requests 与 Vuetify 有关的问题： \n* 对于 **bug fixes** 和 **documentation updates** 的提交请合并至 `master`。     \n* 对于 **new features** 和 **enhancements** 的提交请合并至 `dev`   \n* 对于 **bugs** 和 **critical fixes** 有关 **v1.5/LTS** 的提交请合并至 `stable`   \n* 对于任何 包含 **breaking changes** 的 **features** 提交提交请合并至 \n `next` ",
   "changesSubHeader2": "### Pull Requests For Docs",
-  "changesText8": "对于任何与 Vuetify 文档相关的 pull requests，请将你的 pull requests 提交至 `master` 分支。"
+  "changesText8": "对于任何与 Vuetify 文档相关的 pull requests，请将你的 pull requests 提交至 `master` 分支。",
+  "changesSubHeader3": "### 文档的拉取请求 - 语言",
+  "changesText9": "我们不接受除 `en` 以外的任何语言的文档修改。除 `en` 以外的所有语言的修改都必须通过我们的 Crowdin 项目提交。只需在文档的语言下拉菜单中选择 `Help Translate` 即可开始。在翻译完成 15% 以上的语言后才会被添加。"
 }

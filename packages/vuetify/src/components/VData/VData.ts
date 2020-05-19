@@ -315,8 +315,8 @@ export default Vue.extend({
         this.internalOptions.sortBy,
         this.internalOptions.sortDesc,
         this.internalOptions.page,
-        this.mustSort,
-        this.multiSort
+        this.internalOptions.mustSort,
+        this.internalOptions.multiSort
       )
       this.updateOptions({ sortBy, sortDesc, page })
     },

@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} انتخاب شده است',
+    nextMonthAriaLabel: 'ماه بعد',
+    nextYearAriaLabel: 'سال آینده',
+    prevMonthAriaLabel: 'ماه گذشته',
+    prevYearAriaLabel: 'پارسال',
   },
   noDataText: 'اطلاعاتی یافت نشد',
   carousel: {

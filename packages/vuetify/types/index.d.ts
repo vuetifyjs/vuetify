@@ -263,3 +263,5 @@ export type DataItemsPerPageOption = (number | {
   text: string
   value: number
 });
+
+export type RowClassFunction = (item: any) => null | undefined | string | string[] | Record<string, boolean>

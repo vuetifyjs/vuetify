@@ -39,12 +39,67 @@ exports[`VSparkline.ts should position labels correctly 1`] = `
       42
     </text>
   </g>
-  <path id="35"
-        d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
+  <path d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
         fill="none"
         stroke="url(#35)"
   >
   </path>
+</svg>
+`;
+
+exports[`VSparkline.ts should render bar component with all values 0 1`] = `
+<svg display="block"
+     viewbox="0 0 300 75"
+>
+  <defs>
+    <linearGradient id="39"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="currentColor"
+      >
+      </stop>
+    </linearGradient>
+  </defs>
+  <clipPath id="sparkline-bar-39-clip">
+    <rect x="48"
+          y="75"
+          width="4"
+          height="0"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="148"
+          y="75"
+          width="4"
+          height="0"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="248"
+          y="75"
+          width="4"
+          height="0"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+  </clipPath>
+  <g clip-path="url(#sparkline-bar-39-clip)"
+     fill="url(#39)"
+  >
+    <rect x="0"
+          y="0"
+          width="300"
+          height="75"
+    >
+    </rect>
+  </g>
 </svg>
 `;
 
@@ -67,8 +122,7 @@ exports[`VSparkline.ts should render component and match a snapshot 1`] = `
       </stop>
     </linearGradient>
   </defs>
-  <path id="1"
-        d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
+  <path d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
         fill="none"
         stroke="url(#1)"
   >
@@ -759,8 +813,7 @@ exports[`VSparkline.ts should render component with gradient and match a snapsho
       </stop>
     </linearGradient>
   </defs>
-  <path id="9"
-        d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
+  <path d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
         fill="none"
         stroke="url(#9)"
   >
@@ -807,8 +860,7 @@ exports[`VSparkline.ts should render component with label size and match a snaps
       42
     </text>
   </g>
-  <path id="33"
-        d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
+  <path d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
         fill="none"
         stroke="url(#33)"
   >
@@ -835,8 +887,7 @@ exports[`VSparkline.ts should render component with line width and match a snaps
       </stop>
     </linearGradient>
   </defs>
-  <path id="7"
-        d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
+  <path d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
         fill="none"
         stroke="url(#7)"
   >
@@ -863,8 +914,7 @@ exports[`VSparkline.ts should render component with padding and match a snapshot
       </stop>
     </linearGradient>
   </defs>
-  <path id="3"
-        d="M20 54.99999L150 49.8780487804878S150 49.8780487804878 150 49.8780487804878L280 20.00001"
+  <path d="M20 54.99999L150 49.8780487804878S150 49.8780487804878 150 49.8780487804878L280 20.00001"
         fill="none"
         stroke="url(#3)"
   >
@@ -911,8 +961,7 @@ exports[`VSparkline.ts should render component with string labels and match a sn
       42
     </text>
   </g>
-  <path id="11"
-        d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
+  <path d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
         fill="none"
         stroke="url(#11)"
   >
@@ -959,8 +1008,7 @@ exports[`VSparkline.ts should render component with string labels and match a sn
       43
     </text>
   </g>
-  <path id="11"
-        d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
+  <path d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
         fill="none"
         stroke="url(#11)"
   >
@@ -1007,8 +1055,7 @@ exports[`VSparkline.ts should render component with string labels and match a sn
       baz
     </text>
   </g>
-  <path id="11"
-        d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
+  <path d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
         fill="none"
         stroke="url(#11)"
   >
@@ -1035,8 +1082,7 @@ exports[`VSparkline.ts should render component with trend and equal values and m
       </stop>
     </linearGradient>
   </defs>
-  <path id="31"
-        d="M8 66.99999L150 67L292 67.00001"
+  <path d="M8 66.99999L150 67L292 67.00001"
         fill="none"
         stroke="url(#31)"
   >
@@ -1063,8 +1109,7 @@ exports[`VSparkline.ts should render smooth component and match a snapshot 1`] =
       </stop>
     </linearGradient>
   </defs>
-  <path id="5"
-        d="M8 66.99999L130.03686879378304 59.579687437670394S150 58.36585365853659 168.8494438621337 51.6801625133916L292 8.00001"
+  <path d="M8 66.99999L130.03686879378304 59.579687437670394S150 58.36585365853659 168.8494438621337 51.6801625133916L292 8.00001"
         fill="none"
         stroke="url(#5)"
   >

@@ -15,7 +15,7 @@
     },
     "mini": {
       "heading": "crwdns45924:0crwdne45924:0",
-      "desc": "crwdns40302:0crwdne40302:0"
+      "desc": "crwdns56982:0crwdne56982:0"
     },
     "temporary": {
       "heading": "crwdns45926:0crwdne45926:0",
@@ -52,6 +52,7 @@
     "fixed": "crwdns33928:0crwdne33928:0",
     "floating": "crwdns33930:0crwdne33930:0",
     "height": "crwdns40328:0crwdne40328:0",
+    "mobileBreakPoint": "crwdns56984:0crwdne56984:0",
     "miniVariantWidth": "crwdns33934:0crwdne33934:0",
     "miniVariant": "crwdns33936:0crwdne33936:0",
     "permanent": "crwdns33938:0crwdne33938:0",

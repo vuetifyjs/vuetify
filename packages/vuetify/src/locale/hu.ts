@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} kiválaszta/-ott',
+    nextMonthAriaLabel: 'Következő hónap',
+    nextYearAriaLabel: 'Következő év',
+    prevMonthAriaLabel: 'Előző hónap',
+    prevYearAriaLabel: 'Előző év',
   },
   noDataText: 'Nincs elérhető adat',
   carousel: {

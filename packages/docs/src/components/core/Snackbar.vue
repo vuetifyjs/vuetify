@@ -5,38 +5,32 @@
       :color="snackbar.color"
       :style="styles"
       :timeout="0"
-      :vertical="$vuetify.breakpoint.xsOnly"
       top
     >
       <v-row
         align="center"
-        class="mx-0"
+        class="mx-0 flex-wrap flex-md-nowrap"
       >
-        <v-icon
-          v-if="computedIcon"
-          class="mr-2"
-        >
-          {{ computedIcon }}
-        </v-icon>
+        <div class="d-flex align-center">
+          <span
+            v-if="snackbar.emoji"
+            class="mr-2"
+            v-text="snackbar.emoji"
+          />
 
-        <span
-          v-if="snackbar.emoji"
-          class="mr-2"
-          v-text="snackbar.emoji"
-        />
-
-        <base-markdown
-          :code="snackbar.text"
-          class="snack-markdown"
-        />
+          <base-markdown
+            :code="snackbar.text"
+            class="snack-markdown"
+          />
+        </div>
 
         <v-btn
           :ripple="false"
-          class="black--text ml-auto ml-sm-4"
+          class="black--text mt-3 mt-sm-0 ml-auto ml-sm-4"
           color="white"
           depressed
           v-bind="bind"
-          @click="$ga.event('snackbar', 'click', snackbar.metadata.slug)"
+          @click="snack = false"
         >
           {{ snackbar.action_text }}
 
@@ -46,11 +40,11 @@
         <v-btn
           :aria-label="$t('Vuetify.Snackbar.close')"
           :ripple="false"
-          class="ml-4"
-          color="grey darken-1"
+          class="ml-8 mt-3 mt-sm-0"
+          color="white"
           icon
-          small
-          @click="onClick"
+          x-small
+          @click="snack = false"
         >
           <v-icon>$vuetify.cancel</v-icon>
         </v-btn>
@@ -75,26 +69,9 @@
         const { action } = this.snackbar
         const isExternal = action.indexOf('http') > -1
 
-        return !isExternal ? { to: action } : {
+        return !isExternal ? { to: `/${this.$route.params.lang}${action}` } : {
           href: action,
           target: '_blank',
-        }
-      },
-      computedColor () {
-        if (this.snackbar.color !== 'store') {
-          return !this.computedIcon ? 'primary lighten-3' : null
-        }
-
-        return 'green'
-      },
-      computedIcon () {
-        switch (this.snackbar.color) {
-          case 'store': return 'mdi-cart'
-          case 'success': return 'mdi-check'
-          case 'info': return 'mdi-information'
-          case 'warning': return 'mdi-alert'
-          case 'error': return 'mdi-alert-circle'
-          default: return false
         }
       },
       styles () {
@@ -110,13 +87,6 @@
         handler () {
           this.snack = true
         },
-      },
-    },
-
-    methods: {
-      onClick () {
-        this.$ga.event('snackbar', 'click', `dismissed ${this.snackbar.slug}`)
-        this.snack = false
       },
     },
   }

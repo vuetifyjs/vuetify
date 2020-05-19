@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} נבחרו',
+    nextMonthAriaLabel: 'חודש הבא',
+    nextYearAriaLabel: 'שנה הבאה',
+    prevMonthAriaLabel: 'חודש שעבר',
+    prevYearAriaLabel: 'שנה שעברה',
   },
   noDataText: 'אין נתונים זמינים',
   carousel: {
