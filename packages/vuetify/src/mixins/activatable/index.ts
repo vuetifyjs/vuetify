@@ -10,6 +10,8 @@ import { consoleError } from '../../util/console'
 // Types
 import { VNode, PropType } from 'vue'
 
+type Listeners = Record<string, (e: MouseEvent & KeyboardEvent & FocusEvent) => void>
+
 const baseMixins = mixins(
   Delayable,
   Toggleable
@@ -37,16 +39,13 @@ export default baseMixins.extend({
     activatorElement: null as HTMLElement | null,
     activatorNode: [] as VNode[],
     events: ['click', 'mouseenter', 'mouseleave', 'focus'],
-    listeners: {} as Record<
-      string,
-      (e: MouseEvent & KeyboardEvent & FocusEvent) => void
-    >,
+    listeners: {} as Listeners,
   }),
 
   watch: {
     activator: 'resetActivator',
-    openOnHover: 'resetActivator',
     openOnFocus: 'resetActivator',
+    openOnHover: 'resetActivator',
   },
 
   mounted () {
@@ -98,10 +97,7 @@ export default baseMixins.extend({
     genActivatorListeners () {
       if (this.disabled) return {}
 
-      const listeners: Record<
-        string,
-        (e: MouseEvent & KeyboardEvent & FocusEvent) => void
-      > = {}
+      const listeners: Listeners = {}
 
       if (this.openOnHover) {
         listeners.mouseenter = (e: MouseEvent) => {
