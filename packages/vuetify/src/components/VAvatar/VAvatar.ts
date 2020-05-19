@@ -34,7 +34,7 @@ export default mixins(
       return {
         'v-avatar--left': this.left,
         'v-avatar--right': this.right,
-        'v-avatar--tile': this.tile,
+        ...this.roundedClasses,
       }
     },
     styles (): object {
@@ -43,7 +43,6 @@ export default mixins(
         minWidth: convertToUnit(this.size),
         width: convertToUnit(this.size),
         ...this.measurableStyles,
-        ...this.roundedClasses,
       }
     },
   },
