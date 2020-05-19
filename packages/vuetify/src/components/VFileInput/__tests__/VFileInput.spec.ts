@@ -284,4 +284,12 @@ describe('VFileInput.ts', () => {
       expect(wrapper.vm.internalArrayValue).toEqual([])
     }
   })
+
+  it('should set display none if hide-input prop is set', () => {
+    const wrapper = mountFunction({
+      propsData: { hideInput: true },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

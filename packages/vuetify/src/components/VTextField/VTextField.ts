@@ -320,6 +320,9 @@ export default baseMixins.extend<options>().extend({
         },
       })
     },
+    genControl () {
+      return VInput.options.methods.genControl.call(this)
+    },
     genDefaultSlot () {
       return [
         this.genFieldset(),

@@ -33,7 +33,7 @@ import {
   DatePickerEventColors,
   DatePickerEvents,
   DatePickerType,
-} from 'types'
+} from 'vuetify/types'
 
 type DatePickerValue = string | string[] | undefined
 interface Formatters {

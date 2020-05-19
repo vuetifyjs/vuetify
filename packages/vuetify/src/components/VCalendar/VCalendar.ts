@@ -34,7 +34,7 @@ import VCalendarMonthly from './VCalendarMonthly'
 import VCalendarDaily from './VCalendarDaily'
 import VCalendarWeekly from './VCalendarWeekly'
 import VCalendarCategory from './VCalendarCategory'
-import { CalendarTimestamp, CalendarFormatter } from 'types'
+import { CalendarTimestamp, CalendarFormatter } from 'vuetify/types'
 
 // Types
 interface VCalendarRenderProps {

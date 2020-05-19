@@ -39,7 +39,7 @@ import {
   CalendarEventOverlapMode,
   CalendarEvent,
   CalendarEventCategoryFunction,
-} from 'types'
+} from 'vuetify/types'
 
 // Types
 type VEventGetter<D> = (day: D) => CalendarEventParsed[]

@@ -26,7 +26,7 @@ import {
   DatePickerEvents,
   DatePickerFormatter,
   TouchWrapper,
-} from 'types'
+} from 'vuetify/types'
 
 type CalculateTableDateFunction = (v: number) => string
 
