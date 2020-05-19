@@ -491,6 +491,15 @@ exports[`VFileInput.ts should set display none if hide-input prop is set 1`] = `
         </div>
       </div>
     </div>
+    <div class="v-text-field__details">
+      <div class="v-messages theme--light">
+        <span name="message-transition"
+              tag="div"
+              class="v-messages__wrapper"
+        >
+        </span>
+      </div>
+    </div>
   </div>
 </div>
 `;
