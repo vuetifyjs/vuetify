@@ -79,6 +79,11 @@
     "description": "Contributing to open source helps developers access amazing tools for free. Learn how you can help develop in the Vuetify framework.",
     "keywords": "contribute, contributing, feature request"
   },
+  "customization/global-config": {
+    "title": "Global Config",
+    "description": "Vuetify.config is an object containing global configuration options that modify the bootstrapping of your project.",
+    "keywords": "vuetify config, global config, global vuetify config, configure vuetify options"
+  },
   "customization/accessibility": {
     "title": "Accessibility",
     "description": "See examples and the advantages of having accessibility (a11y) support in Vuetify components.",

@@ -1,4 +1,8 @@
+import Vuetify from '../framework'
+
 function createMessage (message: string, vm?: any, parent?: any): string | void {
+  if (Vuetify.config.silent) return
+
   if (parent) {
     vm = {
       _isVue: true,
