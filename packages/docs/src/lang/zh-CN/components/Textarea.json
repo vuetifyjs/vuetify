@@ -47,27 +47,9 @@
     "dark": "Components.Inputs.props.dark",
     "noResize": "移除调整大小的句柄",
     "rowHeight": "每行的高度值。 需要使用 **auto-grow** 属性。",
-    "rows": "默认行数",
-    "value": "Components.Inputs.props.value",
-    "append": "Components.Inputs.props.append",
-    "append-outer": "Components.Inputs.props['append-outer']",
-    "prepend": "Components.Inputs.props.prepend",
-    "prepend-inner": "Components.Inputs.props['prepend-inner']"
-  },
-  "slots": {
-    "append": "Components.Inputs.slots.append",
-    "append-outer": "在输入内容内追加一个项目",
-    "prepend": "Components.Inputs.slots.prepend",
-    "prepend-inner": "在输入内容中预设一个项目"
+    "rows": "默认行数"
   },
   "events": {
-    "change": "Components.Inputs.events.change",
-    "click:append": "Components.Inputs.events['click:append']",
-    "click:append-outer": "Components.TextFields.events['click:append-outer']",
-    "click:clear": "Components.TextFields.events['click:clear']",
-    "click:prepend": "Components.Inputs.events['click:prepend']",
-    "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
-    "keydown": "当 **any** 键被按下时发出。文本必须对焦。",
-    "update:error": "Mixins.Validatable.events['update:error']"
+    "keydown": "当 **any** 键被按下时发出。文本必须对焦。"
   }
 }

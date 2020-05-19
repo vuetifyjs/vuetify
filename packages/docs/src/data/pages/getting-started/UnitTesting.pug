@@ -1,0 +1,43 @@
+alert(value="warning") alert
+
+h2 runnerHeader
+| runnerText1
+| runnerText2
+
+h2 setupHeading
+| setupText1
+code(lang="js" src="testing_vue_setup")
+alert(value="info") setupInfo1
+
+h2 specHeader
+| specText1
+| specText2
+code(lang="html" src="testing_mock_component")
+| specText3
+code(lang="js" src="testing_mock_component_spec")
+alert(value="info") specAlert
+
+h2 efficiencyHeader
+| efficiencyText1
+| efficiencyText2
+code(lang="js" src="testing_efficiency")
+
+h2 mockHeader
+| mockText1
+code(lang="js" src="testing_mock_vuetify")
+| mockText2
+code(lang="js" src="testing_mock_vuetify_services")
+| mockText3
+| mockList
+
+h2 e2eHeader
+| e2eText1
+| e2eText2
+code(lang="html" src="testing_e2e_data_attributes")
+code(lang="js" src="testing_e2e_data_attributes")
+
+up-next(:value=`[
+  'introduction/long-term-support',
+  'getting-started/contributing',
+  'professional-support/consulting'
+]`)

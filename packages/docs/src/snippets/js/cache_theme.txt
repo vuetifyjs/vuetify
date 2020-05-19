@@ -1,12 +1,12 @@
-const themeCache = new LRU({
-  max: 10,
-  maxAge: 1000 * 60 * 60, // 1 hour
-})
+// src/plugins/vuetify.js
 
 export default new Vuetify({
   theme: {
     options: {
-      themeCache,
+      themeCache: {
+        get: key => localStorage.getItem(key),
+        set: (key, value) => localStorage.setItem(key, value),
+      },
     },
   },
 })

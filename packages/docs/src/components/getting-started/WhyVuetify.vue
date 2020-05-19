@@ -13,6 +13,7 @@
         lg="6"
       >
         <v-card
+          :id="philosophy.title"
           :color="philosophy.color"
           class="mx-auto why-vuetify__philosophies"
           dark
@@ -119,7 +120,7 @@
             subtitle: 'support',
             caption: 'supportCaption',
             src: 'https://cdn.vuetifyjs.com/images/why-vuetify/support.png',
-            to: `/${this.$route.params.lang}/professional-support/consulting`,
+            to: `/${this.$route.params.lang}/professional-support/consulting/`,
           },
         ],
       }
@@ -128,10 +129,11 @@
 </script>
 
 <style lang="sass">
-#why-vuetify p
-  margin-bottom: 0
+#why-vuetify
+  p
+    margin-bottom: 0
 
-  .why-vuetify__philosophies a
-    color: white
-
+  #vibrant a
+    color: white !important
+    text-decoration: underline
 </style>

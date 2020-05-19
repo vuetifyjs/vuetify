@@ -33,7 +33,10 @@
 
 =make-col-offset($size, $columns: $grid-columns)
   $num: $size / $columns
-  margin-left: if($num == 0, 0, percentage($num))
+  +ltr()
+    margin-left: if($num == 0, 0, percentage($num))
+  +rtl()
+    margin-right: if($num == 0, 0, percentage($num))
 
 =make-grid-columns($columns: $grid-columns, $gutter: $grid-gutter, $breakpoints: $grid-breakpoints)
   // Common properties for all breakpoints

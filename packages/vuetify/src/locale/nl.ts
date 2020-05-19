@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Rijen per pagina:',
     ariaLabel: {
-      sortDescending: ': Aflopend gesorteerd. Activeer om de sortering te verwijderen.',
-      sortAscending: ': Oplopend gesorteerd. Activeer om aflopend te sorteren.',
-      sortNone: ': Niet gesorterrd. Activeer om oplopend te sorteren.',
+      sortDescending: 'Aflopend gesorteerd.',
+      sortAscending: 'Oplopend gesorteerd.',
+      sortNone: 'Niet gesorterrd.',
+      activateNone: 'Activeer om de sortering te verwijderen.',
+      activateDescending: 'Activeer om aflopend te sorteren.',
+      activateAscending: 'Activeer om oplopend te sorteren.',
     },
     sortBy: 'Sorteer volgens',
   },
@@ -25,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} geselecteerd',
+    nextMonthAriaLabel: 'Volgende maand',
+    nextYearAriaLabel: 'Volgend jaar',
+    prevMonthAriaLabel: 'Vorige maand',
+    prevYearAriaLabel: 'Vorig jaar',
   },
   noDataText: 'Geen gegevens beschikbaar',
   carousel: {
@@ -44,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Paginanavigatie',
+      next: 'Volgende pagina',
+      previous: 'Vorige pagina',
+      page: 'Ga naar pagina {0}',
+      currentPage: 'Huidige pagina, pagina {0}',
+    },
   },
 }

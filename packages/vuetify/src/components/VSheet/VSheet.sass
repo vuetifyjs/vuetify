@@ -7,8 +7,9 @@
   border-color: map-get($material, 'cards')
   color: map-deep-get($material, 'text', 'primary')
 
-.v-sheet
-  border-radius: $sheet-border-radius
+  &--outlined
+    border: $sheet-outlined-border-width solid map-get($material, 'dividers')
 
-  &--tile
-    border-radius: 0
+// Sheet
+.v-sheet
+  +paper($sheet-elevation, $sheet-border-radius, $sheet-shaped-border-radius)

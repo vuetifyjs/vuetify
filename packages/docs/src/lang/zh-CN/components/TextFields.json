@@ -61,6 +61,10 @@
       "heading": "### 提示文本",
       "desc": "在文本框组件使用 `hint` 来设置将提示的文本添加到文本字段下。使用 `persistent-hint` 保持提示文本在文本字段未被聚焦时保持可见性。"
     },
+    "hide-details": {
+      "heading": "### 自动隐藏详细信息",
+      "desc": "当 `hide-details` 设置为 `auto` 时，只有在有消息（提示、错误消息、计数器值等）要显示时，才会显示消息。"
+    },
     "prefixes-and-suffixes": {
       "heading": "### 前缀和后缀",
       "desc": " `prefix` 和 `suffix` 属性允许你在文本字段旁添加一段不可修改的文本。"
@@ -84,10 +88,6 @@
     "custom-colors": {
       "heading": "### 自定义颜色",
       "desc": "你可以将文本框的颜色更改为 Material design 调色板中的任何颜色。下面是带验证的自定义表单的示例实现。"
-    },
-    "masks": {
-      "heading": "### 马赛克（使用 vue-the-mask）",
-      "desc": "您可以使用第三方库（例如 vue-the-mask）添加马赛克功能。"
     },
     "progress-bar": {
       "heading": "### 进度条",
@@ -120,25 +120,19 @@
     "textarea": "Textarea 使用备用样式",
     "toggleKeys": "切换输入键值的数组（如果支持切换的话）",
     "type": "设置输入类型",
-    "value": "Components.Inputs.props.value",
     "shaped": "如果 `outlined` 则为圆形，如果 `filled` 则增加 `border-radius`。必须与 `outlined` 或 `filled` 一起使用"
   },
   "slots": {
-    "append": "Components.Inputs.slots.append",
     "append-outer": "在输入内容内追加一个项目",
-    "prepend": "Components.Inputs.slots.prepend",
     "prepend-inner": "在输入内容中预设一个项目"
   },
   "events": {
-    "blur": "当组件不再聚焦时发出",
-    "change": "Components.Inputs.events.change",
-    "click:append": "Components.Inputs.events['click:append']",
+    "blur": "当输入焦点时发出",
+    "change": "当用户交互更改输入时发出",
     "click:append-outer": "单击附加的外部图标时发出",
     "click:clear": "单击可清除图标时发出",
-    "click:prepend": "Components.Inputs.events['click:prepend']",
     "click:prepend-inner": "单击前置的内部图标时发出",
     "focus": "组件聚焦时发出",
-    "keydown": "当 **any** 键被按下时，文本字段必须被聚焦",
-    "update:error": "Mixins.Validatable.events['update:error']"
+    "keydown": "按下 **任何** 键时发送"
   }
 }

@@ -4,6 +4,7 @@ import {
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
+import { wait } from '../../../../test'
 
 describe('validatable.ts', () => {
   const Mock = Validatable.extend({
@@ -338,7 +339,7 @@ describe('validatable.ts', () => {
     await wrapper.vm.$nextTick()
 
     // Wait for watcher's timeout
-    await new Promise(resolve => setTimeout(resolve, 0))
+    await wait()
 
     expect(wrapper.vm.hasInput).toBe(false)
     expect(wrapper.vm.hasFocused).toBe(false)

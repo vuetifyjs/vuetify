@@ -14,6 +14,8 @@ exports[`VTabs.ts should render generic elements in the tab container 1`] = `
         </div>
       </div>
     </div>
+    <div class="v-slide-group__next v-slide-group__next--disabled">
+    </div>
   </div>
 </div>
 `;

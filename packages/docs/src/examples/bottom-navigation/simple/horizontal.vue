@@ -1,7 +1,7 @@
 <template>
   <v-bottom-navigation
     :value="activeBtn"
-    color="deep-purple"
+    color="primary"
     horizontal
   >
     <v-btn>

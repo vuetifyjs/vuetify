@@ -3,7 +3,6 @@ const spawn = require('cross-spawn')
 let target = process.argv[2]
 const alias = {
   docs: 'vuetifyjs.com',
-  kitchen: '@vuetify/kitchen',
 }
 target = alias[target] || target
 

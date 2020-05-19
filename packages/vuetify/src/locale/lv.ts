@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Rādīt lapā:',
     ariaLabel: {
-      sortDescending: ': Sakārtots dilstošā secībā. Aktivizēt, lai noņemtu kārtošanu.',
-      sortAscending: ': Sakārtots augošā secībā. Aktivizēt, lai sakārtotu dilstošā secībā.',
-      sortNone: ': Nav sakārtots. Aktivizēt, lai sakārtotu augošā secībā.',
+      sortDescending: 'Sakārtots dilstošā secībā.',
+      sortAscending: 'Sakārtots augošā secībā.',
+      sortNone: 'Nav sakārtots.',
+      activateNone: 'Aktivizēt, lai noņemtu kārtošanu.',
+      activateDescending: 'Aktivizēt, lai sakārtotu dilstošā secībā.',
+      activateAscending: 'Aktivizēt, lai sakārtotu augošā secībā.',
     },
     sortBy: 'Sort by',
   },
@@ -25,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} izvēlēts',
+    nextMonthAriaLabel: 'Nākammēnes',
+    nextYearAriaLabel: 'Nākamgad',
+    prevMonthAriaLabel: 'Iepriekšējais mēnesis',
+    prevYearAriaLabel: 'Iepriekšējais gads',
   },
   noDataText: 'Nav pieejamu datu',
   carousel: {
@@ -44,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Navigācija paginationā',
+      next: 'Nākamā lapa',
+      previous: 'Iepriekšējā lapa',
+      page: 'Iet uz lapu {0}',
+      currentPage: 'Pašreizējā lapa, lapa {0}',
+    },
   },
 }

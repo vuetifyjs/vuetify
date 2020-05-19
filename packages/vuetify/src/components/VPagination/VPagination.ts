@@ -6,15 +6,22 @@ import VIcon from '../VIcon'
 import Resize from '../../directives/resize'
 
 // Mixins
-import mixins from '../../util/mixins'
 import Colorable from '../../mixins/colorable'
+import Intersectable from '../../mixins/intersectable'
 import Themeable from '../../mixins/themeable'
 
+// Utilities
+import mixins from '../../util/mixins'
+
 // Types
-import { VNode, CreateElement } from 'vue'
+import { VNode, CreateElement, VNodeChildrenArrayContents } from 'vue'
 
 /* @vue/component */
-export default mixins(Colorable, Themeable).extend({
+export default mixins(
+  Colorable,
+  Intersectable({ onVisible: ['init'] }),
+  Themeable
+).extend({
   name: 'v-pagination',
 
   directives: { Resize },
@@ -39,6 +46,26 @@ export default mixins(Colorable, Themeable).extend({
     value: {
       type: Number,
       default: 0,
+    },
+    pageAriaLabel: {
+      type: String,
+      default: '$vuetify.pagination.ariaLabel.page',
+    },
+    currentPageAriaLabel: {
+      type: String,
+      default: '$vuetify.pagination.ariaLabel.currentPage',
+    },
+    previousAriaLabel: {
+      type: String,
+      default: '$vuetify.pagination.ariaLabel.previous',
+    },
+    nextAriaLabel: {
+      type: String,
+      default: '$vuetify.pagination.ariaLabel.next',
+    },
+    wrapperAriaLabel: {
+      type: String,
+      default: '$vuetify.pagination.ariaLabel.wrapper',
     },
   },
 
@@ -143,7 +170,7 @@ export default mixins(Colorable, Themeable).extend({
 
       return range
     },
-    genIcon (h: CreateElement, icon: string, disabled: boolean, fn: EventListener): VNode {
+    genIcon (h: CreateElement, icon: string, disabled: boolean, fn: EventListener, label: String): VNode {
       return h('li', [
         h('button', {
           staticClass: 'v-pagination__navigation',
@@ -152,6 +179,7 @@ export default mixins(Colorable, Themeable).extend({
           },
           attrs: {
             type: 'button',
+            'aria-label': label,
           },
           on: disabled ? {} : { click: fn },
         }, [h(VIcon, [icon])]),
@@ -159,6 +187,9 @@ export default mixins(Colorable, Themeable).extend({
     },
     genItem (h: CreateElement, i: string | number): VNode {
       const color: string | false = (i === this.value) && (this.color || 'primary')
+      const isCurrentPage = i === this.value
+      const ariaLabel = isCurrentPage ? this.currentPageAriaLabel : this.pageAriaLabel
+
       return h('button', this.setBackgroundColor(color, {
         staticClass: 'v-pagination__item',
         class: {
@@ -166,6 +197,8 @@ export default mixins(Colorable, Themeable).extend({
         },
         attrs: {
           type: 'button',
+          'aria-current': isCurrentPage,
+          'aria-label': this.$vuetify.lang.t(ariaLabel, i),
         },
         on: {
           click: () => this.$emit('input', i),
@@ -179,22 +212,38 @@ export default mixins(Colorable, Themeable).extend({
         ])
       })
     },
+    genList (h: CreateElement, children: VNodeChildrenArrayContents): VNode {
+      return h('ul', {
+        directives: [{
+          modifiers: { quiet: true },
+          name: 'resize',
+          value: this.onResize,
+        }],
+        class: this.classes,
+      }, children)
+    },
   },
 
   render (h): VNode {
     const children = [
-      this.genIcon(h, this.$vuetify.rtl ? this.nextIcon : this.prevIcon, this.value <= 1, this.previous),
+      this.genIcon(h,
+        this.$vuetify.rtl ? this.nextIcon : this.prevIcon,
+        this.value <= 1,
+        this.previous,
+        this.$vuetify.lang.t(this.previousAriaLabel)),
       this.genItems(h),
-      this.genIcon(h, this.$vuetify.rtl ? this.prevIcon : this.nextIcon, this.value >= this.length, this.next),
+      this.genIcon(h,
+        this.$vuetify.rtl ? this.prevIcon : this.nextIcon,
+        this.value >= this.length,
+        this.next,
+        this.$vuetify.lang.t(this.nextAriaLabel)),
     ]
 
-    return h('ul', {
-      directives: [{
-        modifiers: { quiet: true },
-        name: 'resize',
-        value: this.onResize,
-      }],
-      class: this.classes,
-    }, children)
+    return h('nav', {
+      attrs: {
+        role: 'navigation',
+        'aria-label': this.$vuetify.lang.t(this.wrapperAriaLabel),
+      },
+    }, [this.genList(h, children)])
   },
 })

@@ -17,6 +17,11 @@
   "props": {
     "v-edit-dialog": {
       "transition": "Mixins.Transitionable.props.transition"
+    },
+    "v-simple-checkbox": {
+      "dark": "Mixins.Themeable.props.dark",
+      "light": "Mixins.Themeable.props.light",
+      "ripple": "Mixins.Rippleable.props.ripple"
     }
   }
 }

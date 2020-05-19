@@ -1,51 +1,50 @@
 <template>
-  <no-ssr>
-    <v-card
-      v-if="activeTemplate"
-      class="mb-12"
-      outlined
+  <v-card
+    v-if="activeTemplate"
+    class="mb-12"
+    outlined
+  >
+    <v-list
+      class="py-0"
+      color="transparent"
     >
-      <v-list
-        class="py-0"
-        color="transparent"
+      <v-list-item
+        v-bind="adAttrs"
+        @click="$ga.event('vuetify-ad', 'click', activeTemplate.title)"
       >
-        <v-list-item
-          v-bind="adAttrs"
-          @click="$ga.event('vuetify-ad', 'click', activeTemplate.title)"
+        <v-list-item-avatar
+          size="56"
+          tile
         >
-          <v-list-item-avatar
-            size="56"
-            tile
-          >
-            <v-img
-              :alt="`Link to ${activeTemplate.title}`"
-              :src="activeTemplate.src"
-              style="border-radius: 4px 0 0 4px"
-            />
-          </v-list-item-avatar>
+          <v-img
+            :alt="`Link to ${activeTemplate.title}`"
+            :src="activeTemplate.metadata.src"
+            style="border-radius: 4px 0 0 4px"
+          />
+        </v-list-item-avatar>
 
-          <v-list-item-content class="align-self-center">
-            <v-list-item-title v-text="activeTemplate.title" />
+        <v-list-item-content class="align-self-center">
+          <v-list-item-title v-text="activeTemplate.title" />
 
-            <v-list-item-subtitle v-text="activeTemplate.description" />
-          </v-list-item-content>
+          <v-list-item-subtitle>
+            <base-markdown :code="activeTemplate.metadata.description" />
+          </v-list-item-subtitle>
+        </v-list-item-content>
 
-          <v-list-item-action>
-            <v-icon class="mb-3">mdi-open-in-new</v-icon>
+        <v-list-item-action>
+          <v-icon class="mb-3">mdi-open-in-new</v-icon>
 
-            <span class="caption text--secondary">ads by Vuetify</span>
-          </v-list-item-action>
-        </v-list-item>
-      </v-list>
-    </v-card>
-  </no-ssr>
+          <span class="caption text--secondary">ads by Vuetify</span>
+        </v-list-item-action>
+      </v-list-item>
+    </v-list>
+  </v-card>
 </template>
 
 <script>
   // Utilities
-  import {
-    sync,
-  } from 'vuex-pathify'
+  import bucket from '@/plugins/cosmicjs'
+  import { get } from 'vuex-pathify'
 
   export default {
     name: 'AdCard',
@@ -58,40 +57,38 @@
     },
 
     data: () => ({
-      discovery: require('@/data/discovery'),
-      products: require('@/data/products'),
+      ads: [],
     }),
 
     computed: {
-      lang: sync('route/params@lang'),
+      lang: get('route/params@lang'),
       activeTemplate () {
-        const templates = Object.keys(this.templates)
+        const length = this.ads.length
 
-        return this.templates[
-          templates[Math.floor(Math.random() * templates.length)]
-        ]
+        return this.ads[Math.floor(Math.random() * length)]
       },
       adAttrs () {
-        const url = this.activeTemplate.url
+        const [url, query] = this.activeTemplate.metadata.url.split('?')
 
         if (url.charAt(0) === '/') {
           return { to: `/${this.lang}${url}` }
         }
 
-        const query = this.activeTemplate.query
-
         return {
           target: '_blank',
-          rel: 'sponsored',
-          href: `${url}?ref=vuetifyjs.com${query || ''}`,
+          href: `${url}?ref=vuetifyjs.com${query ? `&${query}` : ''}`,
         }
       },
-      templates () {
-        return {
-          ...this.products,
-          ...this.discovery,
-        }
-      },
+    },
+
+    async mounted () {
+      const { objects } = await bucket.getObjects({
+        type: 'ads',
+        props: 'metadata,title',
+        status: 'published',
+      })
+
+      if (objects) this.ads = objects
     },
   }
 </script>

@@ -1,6 +1,6 @@
 {
   "heading": "# Scrolling directive",
-  "headingText": "The `v-scroll` directive allows you to provide callbacks when the window or a specifically defined element are scrolled.",
+  "headingText": "The `v-scroll` directive allows you to provide callbacks when the window, specified target or element itself (with `.self` modifier) is scrolled.",
   "examples": {
     "usage": {
       "desc": "The default behavior is to bind to the window. If no additional configuration options are needed, you can simply pass your callback function.",
@@ -10,10 +10,15 @@
       "heading": "### Scroll with options",
       "desc": "For a more fine tuned approach, you can designate the target to bind the scroll event listener.",
       "uninverted": true
+    },
+    "self": {
+      "heading": "### Watching bound element",
+      "desc": "`v-scroll` targets the `window` by default but can also watch the element it's being bound to. In the following example we use the **self** modifier, `v-scroll.self`, to watch the [`v-card`](/components/cards) element specifically. This causes the method `onScroll` to invoke as you scroll the card contents; incrementing the counter."
     }
   },
   "options": {
     "arg:target": "`v-scroll:#target=\"callback\"` The target watched for scroll changes. Defaults to window but can be changed to any valid id selector.",
+    "arg:self": "`v-scroll.self=\"callback\"` Binds to the element that the the directive is attached.",
     "value": "`v-scroll=\"callback\"` The function to invoke on target scroll"
   }
 }

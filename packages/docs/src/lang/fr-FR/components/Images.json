@@ -1,8 +1,6 @@
 {
+  "usageText": "Le composant`v-img` est utilisé pour afficher une image réactive avec un support lazy-load et placeholder.",
   "examples": {
-    "usage": {
-      "desc": "Le composant`v-img` est utilisé pour afficher une image réactive avec un support lazy-load et placeholder."
-    },
     "contain-cover": {
       "desc": "Si le ratio d'aspect fourni ne correspond pas à celui de l'image réelle, le comportement par défaut est de remplir autant d'espace que possible, en tronquant les côtés de l'image. L'activation de la propriété `contain` évitera cela, mais se traduira par un espace vide sur les côtés."
     },

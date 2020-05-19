@@ -1,15 +1,17 @@
-# Vuetify.js Contributing Guide
-Hello and thank you for interest in helping make Vuetify better. Please take a few moments to review the following guidelines.
+# Vuetify Contributing Guide
+Hello and thank you for your interest in helping make Vuetify better. Please take a few moments to review the following guidelines:
 
 ## IMPORTANT INFORMATION
-Use https://issues.vuetifyjs.com/ for submitting new bug reports or feature requests, otherwise they will be closed immediately
+* A detailed guide on how to [develop in Vuetify](https://vuetifyjs.com/getting-started/contributing/) is located in the documentation.
+* For general questions, please join [our Discord Community](https://community.vuetifyjs.com/).
 
 ## Reporting Issues
-* The issue list of this repo is <strong>exclusively</strong> for bug reports and feature requests. Non-conforming issues will be closed immediately.
-  * For general questions, please join <a href="https://chat.vuetifyjs.com">the Discord chat room</a>.
-* Try to search for your issue, it may have been answered.
-* See if the error is reproduceable with the latest version.
-* If reproduceable, please provide a [simple codepen](https://template.vuetifyjs.com) or repository that can be cloned to produce the expected behavior. It is preferred that you create an initial commit with no changes first, then another one that will cause the issue. 
+* Issues **not** created with https://issues.vuetifyjs.com/ will be immediately closed.
+* The issue list of this repo is **exclusively** for Bug Reports and Feature Requests.
+* Bug reproductions should be as **concise** as possible.
+* **Search** for your issue, it _may_ have been answered.
+* See if the error is **reproduceable** with the latest version.
+* If reproduceable, please provide a [Codepen](https://template.vuetifyjs.com) or public repository that can be cloned to produce the expected behavior. It is preferred that you create an initial commit with no changes first, then another one that will cause the issue. 
 * **Never** comment "+1" or "me too!" on issues without leaving additional information, use the :+1: button in the top right instead.
 
 ## Pull Requests

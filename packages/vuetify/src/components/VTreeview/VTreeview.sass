@@ -13,16 +13,10 @@
     +active-states($material)
 
   .v-treeview-node--disabled
-    color: map-deep-get($material, 'text', 'disabled')
-
-    .v-treeview-node__toggle,
-    .v-treeview-node__checkbox
+    > .v-treeview-node__root > .v-treeview-node__content
       color: map-deep-get($material, 'text', 'disabled') !important
 
 .v-treeview-node
-  &--disabled
-    pointer-events: none
-
   &.v-treeview-node--shaped
     +treeview-shaped($treeview-node-height, $treeview-node-shaped-margin)
 
@@ -60,6 +54,14 @@
     right: 0
     top: 0
     transition: $primary-transition
+
+  // Fix for IE11 where min-height does not work with
+  // align-items: center in flex containers
+  // https://github.com/philipwalton/flexbugs/issues/231
+  &::after
+    content: ''
+    font-size: 0
+    min-height: inherit
 
 .v-treeview-node__children
   transition: all $treeview-transition

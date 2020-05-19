@@ -1,1 +1,34 @@
-{}
+{
+  "heading": "# オーバーフロー・ボタン",
+  "headingText": "'v-overflow-btn' は、ユーザーがリストから項目を選択できるようにするために使用されます。`editable`, `overflow`, `segmented`の3つのバリエーションがあります。",
+  "examples": {
+    "usage": {
+      "desc": "`v-overflow-btn`は選択リストの作成に使用されます。"
+    },
+    "disabled": {
+      "heading": "### 無効化",
+      "desc": "`v-overflow-btn`は、ユーザーが操作するのを防ぐために無効にすることができます。"
+    },
+    "filled": {
+      "desc": "テキスト フィールドは、ボックスデザインと共に使用できます。このモードでは、append および prepend アイコンprop は**サポートされません**。"
+    },
+    "hint": {
+      "desc": "`hint` プロパティを使用して、ヒントを追加できます。"
+    },
+    "loading": {
+      "heading": "### ローディング状態表示",
+      "desc": "`v-overflow-btn` は、下にlinear progress bar を表示する `loading` 状態を持つことができます。"
+    },
+    "readonly": {
+      "heading": "### Read-only",
+      "desc": "`v-overflow-btn`は `readonly` モードにすることができ、非アクティブになりますが、色は変更されません。"
+    },
+    "dense": {
+      "heading": "### Dense （高さが詰まったスタイル）",
+      "desc": "`dense` propを使用して、オーバーフローボタンの高さを減らし、リスト項目の最大高さを下げることができます。"
+    }
+  },
+  "props": {
+    "dark": "Components.Inputs.props.dark"
+  }
+}

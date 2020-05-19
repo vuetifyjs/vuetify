@@ -9,6 +9,7 @@
     <template v-slot:activator="{ on: menu }">
       <v-btn
         :aria-label="$t('Vuetify.AppToolbar.support')"
+        class="hidden-md-and-down"
         text
         style="min-width: 48px"
         v-on="menu"
@@ -55,7 +56,7 @@
           text: vm.$t('Vuetify.AppDrawer.consulting'),
         },
         {
-          href: 'https://community.vuetifyjs.com/',
+          href: 'https://community.vuetifyjs.com',
           icon: 'mdi-discord',
           text: vm.$t('Vuetify.AppToolbar.community'),
         },

@@ -7,6 +7,10 @@
   .v-select__selection--disabled
     color: map-deep-get($material, 'text', 'disabled')
 
+  &.v-text-field--solo-inverted.v-input--is-focused
+    .v-select__selection--comma
+      color: map-deep-get($material, 'inputs', 'solo-inverted-focused-text')
+
 .v-select
   position: relative // For **attach** prop
 
@@ -36,7 +40,6 @@
     &:not(.v-input--is-focused)
       .v-text-field__prefix
           line-height: $select-prefix-line-height
-          position: absolute
           top: $select-prefix-top
           transition: $primary-transition
 
@@ -126,6 +129,13 @@
       overflow: hidden
       text-overflow: ellipsis
       white-space: nowrap
+
+  &.v-input--dense
+    .v-select__selection--comma
+      margin: $select-dense-selections-margin
+
+    .v-chip
+      margin: $select-dense-chip-margin
 
   &__slot
     position: relative

@@ -19,10 +19,11 @@
     },
     "vee-validate": {
       "heading": "### Vee-validate",
-      "desc": "**vee-validate** is a template Based Validation Framework for Vue.js. [Documentation](https://baianat.github.io/vee-validate/)"
+      "desc": "**vee-validate** is a template Based Validation Framework for Vue.js. [Documentation](https://logaretm.github.io/vee-validate/)"
     }
   },
   "props": {
+    "disabled": "Disables all child inputs",
     "lazyValidation": "If enabled, **value** will always be _true_ unless there are visible validation errors. You can still call `validate()` to manually trigger validation",
     "value": "A boolean value representing the validity of the form."
   },

@@ -9,7 +9,7 @@
     },
     "colored-border": {
       "heading": "### 彩色边框",
-      "desc": "**color-border** 属性会移除提示框背景，以便强调 **border** 属性。如果 **type** 已经被设置，那么它讲使用默认的类型颜色。如果没有设置 **color** 或 **type**，那么颜色将为应用主题的反转（白-黑 和 黑-白/灰）。"
+      "desc": "**colored-border** prop 会移除警报背景，以突出 **border** prop 。如果设置了 **type**，它将使用类型的默认颜色。如果没有设置 **color** 或 **type**，颜色将默认为所应用的主题的反色（黑色代表浅色，白色/灰色代表深色）。"
     },
     "dense": {
       "heading": "### 密集",
@@ -45,7 +45,7 @@
     },
     "twitter": {
       "heading": "### Twitter 提醒",
-      "desc": "通过讲 **color**, **dismissible**, **border**, **elevation**, **icon**, 和 \n **color-border** 这些属性一起组合，你可以创建像 twitter 这样的自定义提醒。"
+      "desc": "通过将 **color**、**dismissible**、**border**、**elevation**、**icon** 和 **colored-border** props 组合在一起，你可以创建时尚的自定义提醒，比如这个 twitter 通知。"
     }
   },
   "accessibility": {

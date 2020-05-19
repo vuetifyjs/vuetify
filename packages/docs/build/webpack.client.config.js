@@ -1,10 +1,19 @@
+const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const base = require('./webpack.base.config')
+const CopyPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const TerserJSPlugin = require('terser-webpack-plugin')
+const sitemap = require('./sitemap')
+
 
 const isProd = process.env.NODE_ENV === 'production'
+
+const resolve = file => path.resolve(__dirname, file)
 
 const cssLoaders = [
   isProd ? MiniCssExtractPlugin.loader : {
@@ -71,10 +80,36 @@ const config = merge(base, {
     new webpack.DefinePlugin({
       'process.env.VUE_ENV': '"client"'
     }),
-    new VueSSRClientPlugin()
+    new CopyPlugin([
+      { from: 'public' },
+    ]),
+    new HtmlWebpackPlugin({
+      filename: '_crowdin.html',
+      template: resolve('../src/crowdin.template.html')
+    }),
+    new HtmlWebpackPlugin({
+      filename: '_fallback.html',
+      template: resolve('../src/spa.template.html')
+    }),
+    sitemap
   ],
+  devServer: {
+    publicPath: '/',
+    host: process.env.HOST || '0.0.0.0',
+    port: process.env.PORT || '8095',
+    disableHostCheck: true,
+    historyApiFallback: {
+      rewrites: [
+        { from: /eo-UY\/.*/, to: '/_crowdin.html' },
+        { from: /.*/, to: '/_fallback.html' },
+      ],
+    },
+    serveIndex: true,
+    quiet: true
+  },
   optimization: {
     minimize: isProd,
+    minimizer: [new TerserJSPlugin({}), new OptimizeCssAssetsPlugin({})],
     runtimeChunk: true,
     removeAvailableModules: isProd,
     removeEmptyChunks: isProd,
@@ -104,7 +139,8 @@ if (isProd) {
   config.plugins.push(
     new MiniCssExtractPlugin({
       filename: 'common.[chunkhash].css'
-    })
+    }),
+    new VueSSRClientPlugin(),
   )
 }
 

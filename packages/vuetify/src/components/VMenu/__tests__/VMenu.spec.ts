@@ -9,6 +9,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 import { keyCodes } from '../../../util/helpers'
+import { waitAnimationFrame } from '../../../../test'
 
 describe('VMenu.ts', () => {
   type Instance = InstanceType<typeof VMenu>
@@ -55,6 +56,23 @@ describe('VMenu.ts', () => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
+  it('should render multiple content nodes', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        eager: true,
+      },
+      scopedSlots: {
+        activator: '<button v-on="props.on"></button>',
+      },
+      slots: {
+        default: '<span>foo</span><span>bar</span>',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
   it('should round dimensions', async () => {
     const wrapper = mountFunction({
       propsData: {
@@ -89,7 +107,7 @@ describe('VMenu.ts', () => {
 
     wrapper.setProps({ value: true })
 
-    await new Promise(resolve => requestAnimationFrame(resolve))
+    await waitAnimationFrame()
 
     expect(content.attributes('style')).toMatchSnapshot()
     expect('Unable to locate target [data-app]').toHaveBeenTipped()

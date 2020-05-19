@@ -61,6 +61,7 @@ export default baseMixins.extend<options>().extend({
       default: 'button',
     },
     text: Boolean,
+    tile: Boolean,
     type: {
       type: String,
       default: 'button',

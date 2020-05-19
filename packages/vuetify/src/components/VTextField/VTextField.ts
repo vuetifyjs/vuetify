@@ -131,6 +131,12 @@ export default baseMixins.extend<options>().extend({
       }
       return (this.internalValue || '').toString().length
     },
+    hasCounter (): boolean {
+      return this.counter !== false && this.counter != null
+    },
+    hasDetails (): boolean {
+      return VInput.options.computed.hasDetails.call(this) || this.hasCounter
+    },
     internalValue: {
       get (): any {
         return this.lazyValue
@@ -301,7 +307,7 @@ export default baseMixins.extend<options>().extend({
       ])
     },
     genCounter () {
-      if (this.counter === false || this.counter == null) return null
+      if (!this.hasCounter) return null
 
       const max = this.counter === true ? this.attrs$.maxlength : this.counter
 
@@ -340,7 +346,7 @@ export default baseMixins.extend<options>().extend({
           absolute: true,
           color: this.validationState,
           dark: this.dark,
-          disabled: this.disabled,
+          disabled: this.isDisabled,
           focused: !this.isSingle && (this.isFocused || !!this.validationState),
           for: this.computedId,
           left: this.labelPosition.left,
@@ -376,7 +382,7 @@ export default baseMixins.extend<options>().extend({
         attrs: {
           ...this.attrs$,
           autofocus: this.autofocus,
-          disabled: this.disabled,
+          disabled: this.isDisabled,
           id: this.computedId,
           placeholder: this.placeholder,
           readonly: this.readonly,
@@ -392,12 +398,10 @@ export default baseMixins.extend<options>().extend({
       })
     },
     genMessages () {
-      if (this.hideDetails === true) return null
+      if (!this.showDetails) return null
 
       const messagesNode = VInput.options.methods.genMessages.call(this)
       const counterNode = this.genCounter()
-
-      if (this.hideDetails === 'auto' && !messagesNode && !counterNode) return null
 
       return this.$createElement('div', {
         staticClass: 'v-text-field__details',
@@ -427,7 +431,7 @@ export default baseMixins.extend<options>().extend({
       e && this.$nextTick(() => this.$emit('blur', e))
     },
     onClick () {
-      if (this.isFocused || this.disabled || !this.$refs.input) return
+      if (this.isFocused || this.isDisabled || !this.$refs.input) return
 
       this.$refs.input.focus()
     },
@@ -468,9 +472,11 @@ export default baseMixins.extend<options>().extend({
       VInput.options.methods.onMouseUp.call(this, e)
     },
     setLabelWidth () {
-      if (!this.outlined || !this.$refs.label) return
+      if (!this.outlined) return
 
-      this.labelWidth = Math.min(this.$refs.label.scrollWidth * 0.75 + 6, (this.$el as HTMLElement).offsetWidth - 24)
+      this.labelWidth = this.$refs.label
+        ? Math.min(this.$refs.label.scrollWidth * 0.75 + 6, (this.$el as HTMLElement).offsetWidth - 24)
+        : 0
     },
     setPrefixWidth () {
       if (!this.$refs.prefix) return

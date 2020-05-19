@@ -1,33 +1,11 @@
 {
   "heading": "# 徽章",
   "headingText": "`v-badge` 组件的上标或下标是一个类似头像的图标或文本，用于向用户突出显示信息或将注意力吸引到特定元素上。徽章内的内容通常包含数字或图标。",
+  "usageText": "最简单形式的徽章显示在它包装的内容的右上角，并且需要徽章插槽。",
   "examples": {
-    "usage": {
-      "desc": "最简单形式的徽章显示在它包装的内容的右上角，并且需要徽章插槽。"
-    },
-    "bottom": {
-      "heading": "### 底部",
-      "desc": "`bottom` 属性将把徽章作为包装内容的下标。可与 `left` 属性一起使用，以达到左下角的位置。"
-    },
-    "left": {
-      "heading": "### 左侧",
-      "desc": "`left` 属性将把徽章放在包装内容的左边。可与`bottom` 属性一起使用，实现左下角的位置。"
-    },
-    "overlap": {
-      "heading": "### 重叠",
-      "desc": "`overlap` 属性会导致徽章内容重叠。"
-    },
-    "visibility": {
-      "heading": "### 可见性",
-      "desc": "`v-badge` 的可见性可以通过绑定 `v-model` 并将其设置为 true 或 false 来控制。"
-    },
-    "inline": {
-      "heading": "### 内联",
-      "desc": "徽章也可以内联文本放置。"
-    },
-    "icon": {
-      "heading": "### 图标",
-      "desc": "徽章可以使用所有当前支持的图标集。"
+    "tabs": {
+      "heading": "### 选项卡",
+      "desc": "徽章有助于以各种方式向用户传递信息。"
     },
     "hover": {
       "heading": "### 鼠标悬停显示",
@@ -36,9 +14,22 @@
     "dynamic": {
       "heading": "### 动态通知",
       "desc": "你可以将徽章与动态内容合并，以创建通知系统之类的东西。"
+    },
+    "customization": {
+      "heading": "### 自定义选项",
+      "desc": "`v-badge` 组件是灵活的，可以在各种使用场景中使用，并可以在众多元素上使用。还可以通过 **offset-x** 和 **offset-y** props 来调整位置。"
     }
   },
   "props": {
+    "avatar": "去掉了 **badge** 插槽中使用 `v-avatar` 的徽章边距。",
+    "bordered": "当使用 **dot** 属性时，默认情况下会在徽章上应用一个 **2px** 和它的周围应用一个 **1.5px** 的边框。",
+    "content": "任何你想要的内容都可以作为文字注入到徽章中。",
+    "dot": "缩小徽章的尺寸并隐藏其内容",
+    "icon": "指定徽章中使用的具体图标。",
+    "inline": "移动徽章，使其与包装元素保持一致。支持使用 **left** prop。",
+    "label": "用于徽章的 **aria-label**",
+    "offsetX": "将徽章在 x 轴上偏移。",
+    "offsetY": "将徽章在 y 轴上偏移。",
     "bottom": "Mixins.Positionable.props.bottom",
     "left": "Mixins.Positionable.props.left",
     "overlap": "与组件顶部的开槽内容重叠。",

@@ -25,13 +25,17 @@
       "heading": "### 缩放过渡",
       "desc": "许多 Vuetify 组件都包含一个 <code>transition</code> 属性允许你指定想要的效果。"
     },
+    "fab-transition": {
+      "heading": "### Fab 过渡",
+      "desc": "在 `v-speed-dial` 组件中可以找到动画过渡的例子。"
+    },
     "fade-transition": {
       "heading": "### 淡入淡出过渡",
-      "desc": "另一个淡入淡出过渡的示例可以在轮播组件上找到。"
+      "desc": "在 Carousel 组件上可以找到淡入淡出的过渡示例。"
     },
     "expand-transition": {
       "heading": "### 展开过渡",
-      "desc": "展开过度和 Expansion Panels， List Groups 一起使用。还有一个水平版本的 `v-expand-x-transition`。"
+      "desc": "扩展过渡用于扩展面板和列表组中。也有一个横向版本的 `v-expand-x-transition`。"
     },
     "custom-origin": {
       "heading": "### 自定义原点",

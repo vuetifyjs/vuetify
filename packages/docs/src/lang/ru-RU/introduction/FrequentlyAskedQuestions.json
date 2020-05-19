@@ -1,7 +1,43 @@
 {
   "heading": "# Часто задаваемые вопросы",
+  "headingText": "Застрял на какой-то конкретной проблеме? Проверьте некоторые из этих распространенных проблем, прежде чем создавать тикет. Если вы не можете найти то, что искали, вы можете отправить [issue](https://issues. uetifyjs.com) на Github или спросите в нашем [community](https://community.vuetifyjs.com).",
   "question": "Вопрос:",
   "answer": "Ответ",
   "noResultsFound": "результатов не найдено",
-  "resetSearch": "Сбросить поиск"
+  "resetSearch": "Сбросить поиск",
+  "gotchas": [
+    {
+      "q": "### Мое приложение не компилируется из-за ошибок sass / scss",
+      "a": "Убедитесь, что вы используете правильный объект options в соответствии с вашей версией sass-loader.",
+      "s": "js_webpack_sass"
+    },
+    {
+      "q": "### Есть ли примеры того, как grid v2 сравнивается с v1.5?",
+      "a": "Да, вы можете просмотреть это [здесь](https://gist.github.com/johnleider/207f63c9d30fb77042a0bb0258c5ab32)."
+    },
+    {
+      "q": "### Error: Cannot find module 'node-sass'",
+      "a": "Убедитесь, что ваши пакеты `@vue/cli packages` находятся в `package.json` и имеют как минимум версию **^3.5.0**."
+    },
+    {
+      "q": "###  Invalid CSS after \"    @content\": expected \"}\", was \"($material-light); \"",
+      "a": "Убедитесь, что вы используете `sass` вместо `node-sass` в **package.json**."
+    },
+    {
+      "q": "### Мой код не работает - что делать?",
+      "a": "Во-первых, убедитесь, что вы используете последнюю версию Vue.js и Vuetify. Попробуйте воспроизвести ее в codepen, используя следующий [template](https://template.vuetifyjs.com/). Если вы не можете воспроизвести проблему за пределами вашего окружения, это обычно означает, что проблема находится локально. Если у вас все еще не получилось решить вашу проблему, пожалуйста, предоставьте свой код на codepen и отправьте вопрос в **#need-help** в [community](https://chat.vuetifyjs.com)."
+    },
+    {
+      "q": "### Я получаю ошибку, похожую на следующее:<br>**$attrs is readonly** и/или **$listeners is readonly** в консоли",
+      "a": "Vuetify использует Typescript и в настоящее время должен импортировать и расширять объект Vue. В некоторых приложениях есть потенциал для создания предупреждающих сообщений. В настоящее время идет [обсуждение на Github](https://github. om/vuetifyjs/vuetify/issues/4068) с потенциальными проблемами в различных use-cases. Если у вас есть дополнительные вопросы, пожалуйста, присоединяйтесь к нам в нашем [онлайн-сообществе](https://community.vuetifyjs.com)."
+    },
+    {
+      "q": "### Я получаю сообщения об ошибке, похожее на следующее:<br>Error in ./node_modules/vuetify/src/dir/file.js Module parse \"failed\": Unexpected token (&lt;lineno&gt;:&lt;characterno&gt;)",
+      "a": "Если вы используете IDE, такие как IntelliJ IDEA или WebStorm, часто добавляется автоматический импорт, указывающий на каталог `vuetify/src/` для используемых вами компонентов. Измените путь к импортируемому выражению из `vuetify/src/` на `vuetify/es5/`."
+    },
+    {
+      "q": "### Есть ли пример шаблона на codepen с использованием router",
+      "a": "Да. [Vuetify Codepen Router Template](https://codepen.io/johnjleider/pen/PMZvpr)."
+    }
+  ]
 }

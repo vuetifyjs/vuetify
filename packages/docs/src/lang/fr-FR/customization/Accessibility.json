@@ -1,4 +1,5 @@
 {
+  "heading": "# Accessibilité",
   "accessibilityHeader": "## Accessibilité Material Design",
   "accessibilityText": "Google fournit un aperçu détaillé de la façon dont leurs composants sont créés avec a11y à l'esprit. Ils fournissent également des exemples de la façon dont vous pouvez vous assurer que vous utilisez les meilleures pratiques lors de la création d'applications (au-delà de ce qui est supporté par défaut par Vuetify). Vous pouvez trouver plus d'informations sur [implémenter l'accessibilité](https://material.io/design/usability/accessibilité.html) sur le site de spécification.",
   "activatorHeader": "## Emplacements d'activation",

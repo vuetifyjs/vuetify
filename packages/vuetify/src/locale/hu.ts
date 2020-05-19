@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Elem oldalanként:',
     ariaLabel: {
-      sortDescending: ': Sorted descending. Activate to remove sorting.',
-      sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.',
+      sortDescending: 'Sorted descending. Activate to remove sorting.',
+      sortAscending: 'Sorted ascending. Activate to sort descending.',
+      sortNone: 'Not sorted. Activate to sort ascending.',
+      activateNone: 'Activate to remove sorting.',
+      activateDescending: 'Activate to sort descending.',
+      activateAscending: 'Activate to sort ascending.',
     },
     sortBy: 'Sort by',
   },
@@ -25,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} kiválaszta/-ott',
+    nextMonthAriaLabel: 'Következő hónap',
+    nextYearAriaLabel: 'Következő év',
+    prevMonthAriaLabel: 'Előző hónap',
+    prevYearAriaLabel: 'Előző év',
   },
   noDataText: 'Nincs elérhető adat',
   carousel: {
@@ -44,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Lapszámozásának navigáció',
+      next: 'Következő oldal',
+      previous: 'Előző oldal',
+      page: 'Menj az oldalra {0}',
+      currentPage: 'Aktuális oldal, oldal {0}',
+    },
   },
 }

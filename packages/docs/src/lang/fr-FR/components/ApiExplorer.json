@@ -1,5 +1,7 @@
 {
-  "search": "Recherche",
+  "heading": "# Aperçu de l'API des composants",
+  "headingText": "Recherchez et naviguez rapidement dans les composants dans les spécificités du Material Design, et bien plus ! Sélectionnez un composant et regardez rapidement son API et ses examples d'utilisations",
+  "search": "Rechercher",
   "searchText": "Sélectionnez un composant pour afficher son API",
   "select": "Rechercher un composant",
   "or": "OU",
