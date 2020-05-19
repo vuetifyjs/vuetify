@@ -1,0 +1,26 @@
+<script src="https://unpkg.com/vue@3.0.0-beta.14/dist/vue.global.js"></script>
+<script src="../../dist/vuetify.umd.js"></script>
+<link type="text/css" href="../../dist/vuetify.css" rel="stylesheet">
+
+<div id="demo">
+  <v-app>
+    <v-alert>this is an alert</v-alert>
+  </v-app>
+</div>
+
+<script>
+  const app = Vue.createApp({
+  })
+
+  app.use(Vuetify)
+
+  app.mount('#demo')
+</script>
+
+<style>
+  #demo {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+

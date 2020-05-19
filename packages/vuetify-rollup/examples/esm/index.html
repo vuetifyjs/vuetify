@@ -1,0 +1,26 @@
+<link type="text/css" href="http://localhost:8080/node_modules/vuetify/dist/vuetify.css" rel="stylesheet">
+
+<div id="demo">
+  <v-app>
+    <v-alert>this is an alert</v-alert>
+  </v-app>
+</div>
+
+<script type="module">
+  import { createApp } from 'http://localhost:8080/node_modules/vue/dist/vue.esm-browser.js'
+  import Vuetify from 'http://localhost:8080/node_modules/vuetify/dist/vuetify.esm.js'
+
+  const app = createApp({
+  })
+
+  app.use(Vuetify)
+
+  app.mount('#demo')
+</script>
+
+<style>
+  #demo {
+    width: 100%;
+    height: 100%;
+  }
+</style>
