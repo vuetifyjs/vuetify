@@ -38,7 +38,9 @@
   },
   "events": {
     "change": "Emitted when the component value is changed by user interaction",
-    "click:location": "Emitted when a slide item is selected inside of the slide group"
+    "click:location": "Emitted when a slide item is selected inside of the slide group",
+    "near:start": "Emitted when the slide group is approaching within one scroll of the start",
+    "near:end": "Emitted when the slide group is approaching within one scroll of the end"
   },
   "slots": {
     "next": "The next slot",

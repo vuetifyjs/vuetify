@@ -128,8 +128,29 @@ export const BaseSlideGroup = mixins<options &
     // the widths of the content and wrapper
     // and need to be recalculated
     isOverflowing: 'setWidths',
-    scrollOffset (val) {
+    scrollOffset (val, oldVal) {
       this.$refs.content.style.transform = `translateX(${-val}px)`
+
+      const offset = Math.abs(val)
+      const oldOffset = Math.abs(oldVal)
+      const { content, wrapper } = this.widths
+      const twoWrapperWidths = 2 * wrapper
+      if (content > twoWrapperWidths) {
+        if (offset >= content - twoWrapperWidths && offset < content - wrapper && oldOffset < content - twoWrapperWidths) {
+          // scrollOffset is 1 scroll away from right-most item, from > 1 scroll away
+          this.$emit('near:end')
+        } else if (offset > 0 && offset <= wrapper && oldOffset > wrapper) {
+          // scrollOffset has come to within 1 scroll away of left-most item, from > 1 scroll away
+          this.$emit('near:start')
+        }
+      } else if (content > wrapper) {
+        // if content spans 1-2 wrapper widths
+        if (!this.hasNext) {
+          this.$emit('near:end')
+        } else if (!this.hasPrev) {
+          this.$emit('near:start')
+        }
+      }
     },
   },
 

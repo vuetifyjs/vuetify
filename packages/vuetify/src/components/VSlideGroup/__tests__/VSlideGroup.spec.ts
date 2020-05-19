@@ -311,4 +311,121 @@ describe('VSlideGroup.ts', () => {
     expect(html1).not.toEqual(html2)
     expect(html2).toMatchSnapshot()
   })
+
+  it('should emit events when near the start and end for content > 2 * wrapper', async () => {
+    const nearStart = jest.fn()
+    const nearEnd = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        showArrows: true,
+      },
+      data: () => ({
+        isOverflowing: true,
+        scrollOffset: 0,
+        widths: {
+          content: 1000,
+          wrapper: 400,
+        },
+      }),
+      listeners: {
+        'near:start': nearStart,
+        'near:end': nearEnd,
+      },
+      mocks: {
+        $vuetify: {
+          rtl: false,
+        },
+      },
+    })
+
+    const testNearEventsOnScroll = (isNearStart: boolean, isNearEnd: boolean) => {
+      if (isNearStart) {
+        expect(nearStart).toHaveBeenCalled()
+      } else {
+        expect(nearStart).not.toHaveBeenCalled()
+      }
+      if (isNearEnd) {
+        expect(nearEnd).toHaveBeenCalled()
+      } else {
+        expect(nearEnd).not.toHaveBeenCalled()
+      }
+      nearStart.mockReset()
+      nearEnd.mockReset()
+    }
+
+    wrapper.setData({ scrollOffset: 400 })
+    await wrapper.vm.$nextTick()
+    testNearEventsOnScroll(false, true)
+
+    wrapper.setData({ scrollOffset: 450 })
+    await wrapper.vm.$nextTick()
+    testNearEventsOnScroll(false, false)
+
+    wrapper.setData({ scrollOffset: 600 })
+    await wrapper.vm.$nextTick()
+    testNearEventsOnScroll(false, false)
+
+    wrapper.setData({ scrollOffset: 450 })
+    await wrapper.vm.$nextTick()
+    testNearEventsOnScroll(false, false)
+
+    wrapper.setData({ scrollOffset: 200 })
+    await wrapper.vm.$nextTick()
+    testNearEventsOnScroll(true, false)
+
+    wrapper.setData({ scrollOffset: 0 })
+    await wrapper.vm.$nextTick()
+    testNearEventsOnScroll(false, false)
+  })
+
+  it('should emit events when near the start and end for content < 2 * wrapper', async () => {
+    const nearStart = jest.fn()
+    const nearEnd = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        showArrows: true,
+      },
+      data: () => ({
+        isOverflowing: true,
+        scrollOffset: 0,
+        widths: {
+          content: 150,
+          wrapper: 100,
+        },
+      }),
+      listeners: {
+        'near:start': nearStart,
+        'near:end': nearEnd,
+      },
+      mocks: {
+        $vuetify: {
+          rtl: false,
+        },
+      },
+    })
+
+    const testNearEventsOnScroll = (isNearStart: boolean, isNearEnd: boolean) => {
+      if (isNearStart) {
+        expect(nearStart).toHaveBeenCalled()
+      } else {
+        expect(nearStart).not.toHaveBeenCalled()
+      }
+      if (isNearEnd) {
+        expect(nearEnd).toHaveBeenCalled()
+      } else {
+        expect(nearEnd).not.toHaveBeenCalled()
+      }
+      nearStart.mockReset()
+      nearEnd.mockReset()
+    }
+
+    // RTL false, content < 2 * wrapper
+    wrapper.setData({ scrollOffset: 50 })
+    await wrapper.vm.$nextTick()
+    testNearEventsOnScroll(false, true)
+
+    wrapper.setData({ scrollOffset: 0 })
+    await wrapper.vm.$nextTick()
+    testNearEventsOnScroll(true, false)
+  })
 })
