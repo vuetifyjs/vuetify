@@ -94,32 +94,32 @@ export default CalendarBase.extend({
     },
     eventColorFunction (): CalendarEventColorFunction {
       return typeof this.eventColor === 'function'
-        ? this.eventColor as CalendarEventColorFunction
+        ? this.eventColor
         : () => (this.eventColor as string)
     },
     eventTimedFunction (): CalendarEventTimedFunction {
       return typeof this.eventTimed === 'function'
-        ? this.eventTimed as CalendarEventTimedFunction
+        ? this.eventTimed
         : event => !!event[this.eventTimed as string]
     },
     eventCategoryFunction (): CalendarEventCategoryFunction {
       return typeof this.eventCategory === 'function'
-        ? this.eventCategory as CalendarEventCategoryFunction
+        ? this.eventCategory
         : event => event[this.eventCategory as string]
     },
     eventTextColorFunction (): CalendarEventColorFunction {
       return typeof this.eventTextColor === 'function'
-        ? this.eventTextColor as CalendarEventColorFunction
-        : () => (this.eventTextColor as string)
+        ? this.eventTextColor
+        : () => this.eventTextColor as string
     },
     eventNameFunction (): CalendarEventNameFunction {
       return typeof this.eventName === 'function'
-        ? this.eventName as CalendarEventNameFunction
+        ? this.eventName
         : (event, timedEvent) => escapeHTML(event.input[this.eventName as string] as string)
     },
     eventModeFunction (): CalendarEventOverlapMode {
       return typeof this.eventOverlapMode === 'function'
-        ? this.eventOverlapMode as CalendarEventOverlapMode
+        ? this.eventOverlapMode
         : CalendarEventOverlapModes[this.eventOverlapMode]
     },
     eventWeekdays (): number[] {
@@ -227,14 +227,13 @@ export default CalendarBase.extend({
       const start = dayIdentifier === event.startIdentifier
       let end = dayIdentifier === event.endIdentifier
       let width = WIDTH_START
+
       if (!this.categoryMode) {
         for (let i = day.index + 1; i < week.length; i++) {
           const weekdayIdentifier = getDayIdentifier(week[i])
           if (event.endIdentifier >= weekdayIdentifier) {
             width += WIDTH_FULL
-            if (weekdayIdentifier === event.endIdentifier) {
-              end = true
-            }
+            end = end || weekdayIdentifier === event.endIdentifier
           } else {
             end = true
             break

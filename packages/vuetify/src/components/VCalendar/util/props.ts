@@ -1,7 +1,7 @@
 
 import { validateTimestamp, parseDate, DAYS_IN_WEEK, validateTime } from './timestamp'
 import { PropType } from 'vue'
-import { CalendarEvent, CalendarFormatter, CalendarTimestamp, CalendarEventOverlapMode } from 'types'
+import { CalendarEvent, CalendarFormatter, CalendarTimestamp, CalendarEventOverlapMode, CalendarEventNameFunction, CalendarEventColorFunction, CalendarEventCategoryFunction, CalendarEventTimedFunction } from 'types'
 import { CalendarEventOverlapModes } from '../modes'
 import { PropValidator } from 'vue/types/options'
 
@@ -17,13 +17,12 @@ export default {
       validate: validateTimestamp,
     },
     weekdays: {
-      type: [Array, String],
+      type: [Array, String] as PropType<number[] | string>,
       default: () => [0, 1, 2, 3, 4, 5, 6],
       validate: validateWeekdays,
-    } as PropValidator<number[] | string>,
+    },
     hideHeader: {
       type: Boolean,
-      default: false,
     },
     shortWeekdays: {
       type: Boolean,
@@ -124,11 +123,9 @@ export default {
     },
     categoryHideDynamic: {
       type: Boolean,
-      default: false,
     },
     categoryShowAll: {
       type: Boolean,
-      default: false,
     },
     categoryForInvalid: {
       type: String,
@@ -154,11 +151,11 @@ export default {
       default: 'end',
     },
     eventTimed: {
-      type: [String, Function],
+      type: [String, Function] as PropType<string | CalendarEventTimedFunction>,
       default: 'timed',
     },
     eventCategory: {
-      type: [String, Function],
+      type: [String, Function] as PropType<string | CalendarEventCategoryFunction>,
       default: 'category',
     },
     eventHeight: {
@@ -166,15 +163,15 @@ export default {
       default: 20,
     },
     eventColor: {
-      type: [String, Function],
+      type: [String, Function] as PropType<string | CalendarEventColorFunction>,
       default: 'primary',
     },
     eventTextColor: {
-      type: [String, Function],
+      type: [String, Function] as PropType<string | CalendarEventColorFunction>,
       default: 'white',
     },
     eventName: {
-      type: [String, Function],
+      type: [String, Function] as PropType<string | CalendarEventNameFunction>,
       default: 'name',
     },
     eventOverlapThreshold: {

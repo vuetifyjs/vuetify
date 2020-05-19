@@ -125,6 +125,7 @@ export default CalendarWithEvents.extend({
           updateFormatted(end)
           maxDays = days
           weekdays = []
+
           for (let i = 0; i < days; i++) {
             weekdays.push((start.weekday + i) % 7)
           }
@@ -147,11 +148,15 @@ export default CalendarWithEvents.extend({
       const spanYears = start.year !== end.year
       const spanMonths = spanYears || start.month !== end.month
 
-      return spanYears
-        ? this.monthShortFormatter(start, true) + ' ' + start.year + ' - ' + this.monthShortFormatter(end, true) + ' ' + end.year
-        : spanMonths
-          ? this.monthShortFormatter(start, true) + ' - ' + this.monthShortFormatter(end, true) + ' ' + end.year
-          : this.monthLongFormatter(start, false) + ' ' + start.year
+      if (spanYears) {
+        return this.monthShortFormatter(start, true) + ' ' + start.year + ' - ' + this.monthShortFormatter(end, true) + ' ' + end.year
+      }
+
+      if (spanMonths) {
+        return this.monthShortFormatter(start, true) + ' - ' + this.monthShortFormatter(end, true) + ' ' + end.year
+      } else {
+        return this.monthLongFormatter(start, false) + ' ' + start.year
+      }
     },
     monthLongFormatter (): CalendarFormatter {
       return this.getFormatter({
@@ -247,6 +252,7 @@ export default CalendarWithEvents.extend({
     },
     timeToY (time: VTime, clamp = true): number | false {
       const c = this.$children[0] as any
+
       if (c && c.timeToY) {
         return c.timeToY(time, clamp)
       } else {
@@ -255,6 +261,7 @@ export default CalendarWithEvents.extend({
     },
     timeDelta (time: VTime): number | false {
       const c = this.$children[0] as any
+
       if (c && c.timeDelta) {
         return c.timeDelta(time)
       } else {
@@ -263,6 +270,7 @@ export default CalendarWithEvents.extend({
     },
     minutesToPixels (minutes: number): number {
       const c = this.$children[0] as any
+
       if (c && c.minutesToPixels) {
         return c.minutesToPixels(minutes)
       } else {
@@ -271,6 +279,7 @@ export default CalendarWithEvents.extend({
     },
     scrollToTime (time: VTime): boolean {
       const c = this.$children[0] as any
+
       if (c && c.scrollToTime) {
         return c.scrollToTime(time)
       } else {
