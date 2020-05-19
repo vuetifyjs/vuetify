@@ -129,6 +129,7 @@ export default CalendarWithEvents.extend({
           for (let i = 0; i < days; i++) {
             weekdays.push((start.weekday + i) % 7)
           }
+
           categories = this.getCategoryList(categories)
           break
         default:
