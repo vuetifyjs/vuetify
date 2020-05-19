@@ -10,7 +10,7 @@ import { consoleError } from '../../util/console'
 // Types
 import { VNode, PropType } from 'vue'
 
-type Listeners = Record<string, (e: MouseEvent & KeyboardEvent & FocusEvent) => void>
+type Listeners = Dictionary<(e: MouseEvent & KeyboardEvent & FocusEvent) => void>
 
 const baseMixins = mixins(
   Delayable,
