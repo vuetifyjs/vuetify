@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} вибрано',
+    nextMonthAriaLabel: 'Наступного місяця',
+    nextYearAriaLabel: 'Наступного року',
+    prevMonthAriaLabel: 'Попередній місяць',
+    prevYearAriaLabel: 'Попередній рік',
   },
   noDataText: 'Немає даних для відображення',
   carousel: {

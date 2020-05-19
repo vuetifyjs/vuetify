@@ -307,7 +307,6 @@ export default mixins<options &
 
       return this.$createElement('path', {
         attrs: {
-          id: this._uid,
           d: genPath(points, this._radius, this.fill, this.parsedHeight),
           fill: this.fill ? `url(#${this._uid})` : 'none',
           stroke: this.fill ? 'none' : `url(#${this._uid})`,

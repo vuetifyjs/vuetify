@@ -303,6 +303,23 @@ describe('AppBar.ts', () => {
     expect(wrapper.vm.hideShadow).toBe(true)
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/9993
+  it('should be active when hide-on-scroll and within threshold', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        hideOnScroll: true,
+        scrollThreshold: 100,
+      },
+    })
+
+    wrapper.setProps({ value: false })
+    await scrollWindow(-100)
+    expect(wrapper.vm.isActive).toBe(false)
+
+    await scrollWindow(1)
+    expect(wrapper.vm.isActive).toBe(true)
+  })
+
   // https://github.com/vuetifyjs/vuetify/issues/8583
   it('when scroll position is 0, v-model should be able to be control visibility regardless of other props', () => {
     const wrapper = mountFunction({

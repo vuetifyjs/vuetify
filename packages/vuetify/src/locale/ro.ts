@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} selectate',
+    nextMonthAriaLabel: 'Luna viitoare',
+    nextYearAriaLabel: 'Anul urmator',
+    prevMonthAriaLabel: 'Luna trecută',
+    prevYearAriaLabel: 'Anul precedent',
   },
   noDataText: 'Nu există date disponibile',
   carousel: {

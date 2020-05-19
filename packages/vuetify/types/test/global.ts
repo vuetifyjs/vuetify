@@ -1,4 +1,7 @@
 import Vue from 'vue'
+import Vuetify from 'vuetify'
+
+Vuetify.config.silent = true
 
 Vue.component('breakpoint', {
   created () {

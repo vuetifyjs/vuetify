@@ -9,7 +9,7 @@
       :temporary="primaryDrawer.type === 'temporary'"
       app
       overflow
-    />
+    ></v-navigation-drawer>
 
     <v-app-bar
       :clipped-left="primaryDrawer.clipped"
@@ -18,7 +18,7 @@
       <v-app-bar-nav-icon
         v-if="primaryDrawer.type !== 'permanent'"
         @click.stop="primaryDrawer.model = !primaryDrawer.model"
-      />
+      ></v-app-bar-nav-icon>
       <v-toolbar-title>Vuetify</v-toolbar-title>
     </v-app-bar>
 
@@ -41,7 +41,7 @@
                       v-model="$vuetify.theme.dark"
                       primary
                       label="Dark"
-                    />
+                    ></v-switch>
                   </v-col>
                   <v-col
                     cols="12"
@@ -58,23 +58,23 @@
                         :label="drawer"
                         :value="drawer.toLowerCase()"
                         primary
-                      />
+                      ></v-radio>
                     </v-radio-group>
                     <v-switch
                       v-model="primaryDrawer.clipped"
                       label="Clipped"
                       primary
-                    />
+                    ></v-switch>
                     <v-switch
                       v-model="primaryDrawer.floating"
                       label="Floating"
                       primary
-                    />
+                    ></v-switch>
                     <v-switch
                       v-model="primaryDrawer.mini"
                       label="Mini"
                       primary
-                    />
+                    ></v-switch>
                   </v-col>
                   <v-col
                     cols="12"
@@ -85,12 +85,12 @@
                       v-model="footer.inset"
                       label="Inset"
                       primary
-                    />
+                    ></v-switch>
                   </v-col>
                 </v-row>
               </v-card-text>
               <v-card-actions>
-                <v-spacer />
+                <v-spacer></v-spacer>
                 <v-btn text>Cancel</v-btn>
                 <v-btn
                   text

@@ -25,11 +25,11 @@
       "desc": "L'image d'arrière-plan d'une barre `v-app` peut s'effacer au défilement. Utilisez la propriété `fade-img-on-scroll` pour avoir cet effet."
     },
     "hide": {
-      "heading": "###Masquer le défilement",
+      "heading": "### Masquer le défilement",
       "desc": "`v-app-bar` peut être masqué lors du défilement. Pour cela, utilisez la propriété `hide-on-scroll`."
     },
     "app-bar-nav": {
-      "heading": "###Permuter les tiroires de navigation",
+      "heading": "### Permuter les tiroires de navigation",
       "desc": "En utilisant le composant fonctionnel `v-app-bar-nav-icon` vous pouvez permutter l'état des autres composants tel qu'un [v-navigation-drawer](/components/navigation-drawer)."
     },
     "scroll-threshold": {
@@ -37,15 +37,15 @@
       "desc": "`v-app-bar` peut avoir un seuil de défilement. Il commencera à réagir au défillement seulement après avoir définit via la propriété `scroll-threshold` le nombre de pixels."
     },
     "collapse": {
-      "heading": "###Barres repliables",
+      "heading": "### Barres repliables",
       "desc": "Avec les props **collapse** et **collapse-on-scroll** vous pouvez facilement contrôler l'état de la barre d'outils avec laquelle l'utilisateur interagit."
     },
     "elevate-on-scroll": {
-      "heading": "###Elever la bar au scroll",
+      "heading": "### Élever la bar au scroll",
       "desc": "Lorsque vous utilisez le prop **elevate-on-scroll** , `v-app-bar` restera à une hauteur de 0dp jusqu'à ce que l'utilisateur commence à défiler vers le bas. Une fois défilé, la barre monte à 4dp."
     },
     "inverted-scroll": {
-      "heading": "###Défilement inversé",
+      "heading": "### Défilement inversé",
       "desc": "Lorsque vous utilisez la propriété **inverted-scroll** la barre se cache jusqu'à ce que l'utilisateur défile au-delà du seuil désigné. Une fois le seuil dépassé, `v-app-bar` continuera d'être affiché jusqu'à ce que les utilisateurs défilent au-delà du seuil. Si aucune valeur **scroll-threshold** n'est fournie une valeur par défaut de _0_ sera utilisée."
     },
     "menu": {

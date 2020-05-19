@@ -2,12 +2,14 @@ const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const base = require('./webpack.base.config')
+const CopyPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
-const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserJSPlugin = require('terser-webpack-plugin')
+const sitemap = require('./sitemap')
+
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -79,8 +81,7 @@ const config = merge(base, {
       'process.env.VUE_ENV': '"client"'
     }),
     new CopyPlugin([
-      { from: 'src/public' },
-      { from: 'src/themes', to: 'themes' },
+      { from: 'public' },
     ]),
     new HtmlWebpackPlugin({
       filename: '_crowdin.html',
@@ -90,6 +91,7 @@ const config = merge(base, {
       filename: '_fallback.html',
       template: resolve('../src/spa.template.html')
     }),
+    sitemap
   ],
   devServer: {
     publicPath: '/',

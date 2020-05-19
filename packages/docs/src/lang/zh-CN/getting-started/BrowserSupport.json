@@ -9,8 +9,11 @@
     "polyfill": "需要 polyfill"
   },
   "ie11Header": "## IE11 &amp; Safari 9 支持",
+  "ie11Text": "Vuetify 利用 ES2015/2017 的功能，需要使用 **Internet Explorer 11** 和 **Safari 9/10** 的 polyfills。如果您使用的是 Vue CLI，这将自动为您完成。否则，在你的项目目录下，你需要安装 `babel-polyfill`。",
+  "ie11Text1": "Vuetify 利用 ES2015/2017 的功能，需要使用 **Internet Explorer 11** 和 **Safari 9/10** 的 polyfills。如果您使用的是 Vue CLI，这将自动为您完成。否则，在你的项目目录下，你需要安装 `babel-polyfill`。",
   "ie11Text2": "重要的是，要尽早将插件纳入你的主文件 **index.js**。如果使用 Vuetify SSR ，这将加载为 **client-entry.js** 文件",
   "ie11Text3": "建议使用 `babel-preset-env` 以及相应的 polyfill 来确保向应用程序添加必要的 polyfill。有关 `babel-preset-env` 的更多信息，[请参阅文档](https://babeljs.io/docs/en/next/babel-preset-env.html)",
   "ie11Text4": "安装完成后，在你的 `.babelrc` 或者 `babel.config.js` 配置 preset",
+  "ie11Text5": "不幸的是，Vue CLI 不会自动带来 IE11 的兼容性，在这种情况下，你可能会遇到各种错误（例如 <i>符号未定义</i>）。为了解决这些错误，你可能需要在 `vue.config.js` 中手动添加 `transpileDependencies` 参数。",
   "ie11Text6": "由于 Internet Explorer 对 `<template>` 标签的支持有限，你必须将完全编译后的 dom 元素发送到浏览器。这可以通过提前构建 Vue 代码或通过创建辅助组件来替换 dom 元素来完成。如果不经过处理就发送给 IE 浏览器，那么在通常情况下都会失败。"
 }

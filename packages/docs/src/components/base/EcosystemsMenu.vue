@@ -9,6 +9,7 @@
     <template v-slot:activator="{ attrs, on }">
       <v-btn
         :aria-label="$t('Vuetify.AppToolbar.ecosystem')"
+        class="hidden-md-and-down"
         text
         v-bind="attrs"
         v-on="on"

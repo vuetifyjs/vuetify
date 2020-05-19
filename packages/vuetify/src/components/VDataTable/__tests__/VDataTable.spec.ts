@@ -38,6 +38,7 @@ const testItems = [
     carbs: 24,
     protein: 4.0,
     iron: '1%',
+    class: 'test',
   },
   {
     name: 'Ice cream sandwich',
@@ -46,6 +47,7 @@ const testItems = [
     carbs: 37,
     protein: 4.3,
     iron: '1%',
+    class: ['test', 'second'],
   },
   {
     name: 'Eclair',
@@ -54,6 +56,7 @@ const testItems = [
     carbs: 23,
     protein: 6.0,
     iron: '7%',
+    class: { test: true, second: false },
   },
   {
     name: 'Cupcake',
@@ -857,6 +860,120 @@ describe('VDataTable.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({ mustSort: true })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should apply class list to rows', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+        itemsPerPage: 5,
+        itemClass: () => ['my-class', 'my-other-class'],
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should apply class unique to rows', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+        itemsPerPage: 5,
+        itemClass: () => 'my-unique-class',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should apply class function to rows', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+        itemsPerPage: 5,
+        itemClass: (item: Object) => ({
+          'first-class': item.fat < 10,
+          'second-class': item.protein > 4.0,
+        }),
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should apply class from item to rows', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+        itemsPerPage: 5,
+        itemClass: 'class',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/11179
+  it('should return rows from columns that exclusively match custom filters', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: testItems,
+        headers: [
+          {
+            text: 'Dessert (100g serving)',
+            align: 'left',
+            filter: (value, search) => {
+              if (!search) return true
+              return value === search
+            },
+            value: 'name',
+          },
+          { text: 'Calories', value: 'calories' },
+          { text: 'Fat (g)', value: 'fat' },
+          { text: 'Carbs (g)', value: 'carbs' },
+          { text: 'Protein (g)', value: 'protein' },
+          { text: 'Iron (%)', value: 'iron' },
+        ],
+      },
+    })
+
+    wrapper.setProps({ search: 'eclair' })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalCurrentItems).toHaveLength(0)
+
+    wrapper.setProps({ search: 'Eclair' })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalCurrentItems).toHaveLength(1)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10244
+  it('should respect mustSort property on options', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: testItems,
+        headers: [
+          { text: 'Dessert (100g serving)', value: 'name' },
+        ],
+        options: {
+          mustSort: true,
+        },
+      },
+    })
+
+    wrapper.find('th').trigger('click')
+    await wrapper.vm.$nextTick()
+
+    wrapper.find('th').trigger('click')
+    await wrapper.vm.$nextTick()
+
+    wrapper.find('th').trigger('click')
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()

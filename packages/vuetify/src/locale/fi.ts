@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} valittu',
+    nextMonthAriaLabel: 'Seuraava kuukausi',
+    nextYearAriaLabel: 'Ensi vuosi',
+    prevMonthAriaLabel: 'Edellinen kuukausi',
+    prevYearAriaLabel: 'Edellinen vuosi',
   },
   noDataText: 'Ei dataa',
   carousel: {

@@ -1,15 +1,15 @@
 <template>
   <v-btn
-    v-bind="$attrs"
-    :to="!href && to ? to : undefined"
-    :href="href"
-    :target="href ? '_blank' : undefined"
+    :to="`/${$route.params.lang}/introduction/sponsors-and-backers/`"
     color="primary"
     outlined
     rounded
-    rel="noopener"
+    v-bind="$attrs"
     v-on="$listeners"
+    @click="$ga.event('sponsors', 'click', 'sponsor-btn')"
   >
+    <v-icon left>mdi-vuetify</v-icon>
+
     <span class="caption font-weight-bold">
       {{ $t("Vuetify.Home.becomeSponsor") }}
     </span>
@@ -18,14 +18,6 @@
 
 <script>
   export default {
-    inheritAttrs: false,
-
-    props: {
-      to: String,
-      href: {
-        type: String,
-        default: undefined,
-      },
-    },
+    name: 'SponsorBtn',
   }
 </script>
