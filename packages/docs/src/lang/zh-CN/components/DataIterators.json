@@ -26,6 +26,7 @@
       "loadingText": "当 `loading` 为 true 且未提供任何物品时显示的文本",
       "noDataText": "未向组件提供任何项目时显示的文本",
       "noResultsText": "使用 `search` 属性时显示的文本，但没有结果",
+      "selectableKey": "每个项目上的属性，用于确定其是否可选择。",
       "singleExpand": "将扩展模式更改为单个扩展",
       "singleSelect": "将选择模式更改为单选",
       "value": "用于控制选定的行"

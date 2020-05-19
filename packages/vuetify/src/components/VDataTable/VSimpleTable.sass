@@ -14,56 +14,66 @@
       background: map-get($material, 'cards')
       box-shadow: inset 0 -1px 0 map-get($material, 'dividers')
 
-  thead
-    tr
-      &:last-child th
-        border-bottom: thin solid map-get($material, 'dividers')
-
-      th
-        color: map-deep-get($material, 'text', 'secondary')
-
-  tbody
-    tr
-      &:not(:last-child)
-        td,
-        th
-          &:not(.v-data-table__mobile-row)
+  > .v-data-table__wrapper
+    > table
+      > thead
+        > tr
+          > &:last-child th
             border-bottom: thin solid map-get($material, 'dividers')
 
-          &:last-child
-            border-bottom: thin solid map-get($material, 'dividers')
+          > th
+            color: map-deep-get($material, 'text', 'secondary')
 
-      &.active
-        background: map-deep-get($material, 'table', 'active')
+  > .v-data-table__wrapper
+    > table
+      > tbody
+        > tr
+          &:not(:last-child)
+            > td,
+            > th
+              &:not(.v-data-table__mobile-row)
+                border-bottom: thin solid map-get($material, 'dividers')
 
-      &:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper)
-        background: map-deep-get($material, 'table', 'hover')
+              &:last-child
+                border-bottom: thin solid map-get($material, 'dividers')
+
+          &.active
+            background: map-deep-get($material, 'table', 'active')
+
+          &:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper)
+            background: map-deep-get($material, 'table', 'hover')
 
 // Block
 .v-data-table
   max-width: 100%
 
-  table
-    width: 100%
-    border-spacing: 0
+  > .v-data-table__wrapper
+    > table
+      width: 100%
+      border-spacing: 0
 
-  td, th
-    padding: 0 16px
+      > tbody,
+      > thead,
+      > tfoot
+        > tr
+          > td,
+          > th
+            padding: 0 16px
 
-  th
-    user-select: none
-    font-size: $data-table-regular-header-font-size
-    height: $data-table-regular-header-height
+          > th
+            user-select: none
+            font-size: $data-table-regular-header-font-size
+            height: $data-table-regular-header-height
 
-    +ltr()
-      text-align: left
+            +ltr()
+              text-align: left
 
-    +rtl()
-      text-align: right
+            +rtl()
+              text-align: right
 
-  td
-    font-size: $data-table-regular-row-font-size
-    height: $data-table-regular-row-height
+          > td
+            font-size: $data-table-regular-row-font-size
+            height: $data-table-regular-row-height
 
 // Elements
 .v-data-table__wrapper
@@ -84,29 +94,35 @@
 
 // Modifiers
 .v-data-table--dense
-  td
-    height: $data-table-dense-row-height
-  th
-    height: $data-table-dense-header-height
+  > .v-data-table__wrapper
+    > table
+      > tbody,
+      > thead,
+      > tfoot
+        > td
+          height: $data-table-dense-row-height
+        > th
+          height: $data-table-dense-header-height
 
 .v-data-table--fixed-height
   .v-data-table__wrapper
     overflow-y: auto
 
 .v-data-table--fixed-header
-  .v-data-table__wrapper
+  > .v-data-table__wrapper
     overflow-y: auto
 
-  thead
-    th
-      border-bottom: 0px !important
-      position: sticky
-      top: 0
-      z-index: 2
+    > table
+      > thead
+        > th
+          border-bottom: 0px !important
+          position: sticky
+          top: 0
+          z-index: 2
 
-    tr:nth-child(2)
-      th
-        top: $data-table-regular-header-height
+        > tr:nth-child(2)
+          > th
+            top: $data-table-regular-header-height
 
   // Account for scroll bar
   .v-data-footer
@@ -117,7 +133,9 @@
       margin-left: $data-table-scroll-bar-width
 
 .v-data-table--fixed.v-data-table--dense
-  thead
-    tr:nth-child(2)
-      th
-        top: $data-table-dense-header-height
+  > .v-data-table__wrapper
+    > table
+      > thead
+        > tr:nth-child(2)
+          > th
+            top: $data-table-dense-header-height

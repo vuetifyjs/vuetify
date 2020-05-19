@@ -117,6 +117,7 @@
       "headersLength": "Can be used in combination with `hide-default-header` to specify the number of columns in the table to allow expansion rows and loading bar to function properly",
       "height": "Set an explicit height of table",
       "hideDefaultHeader": "Hide the default headers",
+      "itemClass": "Property on supplied `items` that contains item's row class or function that takes an item as an argument and returns the class of corresponding row",
       "mobileBreakpoint": "Used to set when to toggle between regular table and mobile view",
       "showSelect": "Shows the select checkboxes in both the header and rows (if using default rows)",
       "showExpand": "Shows the expand toggle in default rows",

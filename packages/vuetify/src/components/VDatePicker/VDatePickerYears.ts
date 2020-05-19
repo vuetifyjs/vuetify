@@ -5,7 +5,11 @@ import Colorable from '../../mixins/colorable'
 import Localable from '../../mixins/localable'
 
 // Utils
-import { createNativeLocaleFormatter } from './util'
+import {
+  createItemTypeNativeListeners,
+  createNativeLocaleFormatter,
+} from './util'
+import { mergeListeners } from '../../util/mergeData'
 import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
@@ -74,9 +78,9 @@ export default mixins<options &
       return this.$createElement('li', this.setTextColor(color, {
         key: year,
         class: { active },
-        on: {
+        on: mergeListeners({
           click: () => this.$emit('input', year),
-        },
+        }, createItemTypeNativeListeners(this, ':year', year)),
       }), formatted)
     },
 

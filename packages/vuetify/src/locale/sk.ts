@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} vybrané',
+    nextMonthAriaLabel: 'Ďalší mesiac',
+    nextYearAriaLabel: 'Ďalší rok',
+    prevMonthAriaLabel: 'Predchádzajúci mesiac',
+    prevYearAriaLabel: 'Minulý rok',
   },
   noDataText: 'Nie sú dostupné žiadne dáta',
   carousel: {

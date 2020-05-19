@@ -28,9 +28,11 @@
   "cdnText": "要在不安装 Vue CLI 模板的情况下使用 Vuetify.js 进行测试，请将下面的代码复制到您的 `index.html` 中。这将拉取最新版本的 Vue 和 Vuetify，从而允许你开始使用组件。您还可以在 codepen 上使用 [Vuetify starter](https://template.vuetifyjs.com) 。虽然不建议这样做，但是如果需要在 _生产_ 环境中使用 cdn，请对包的版本进行范围限定。有关如何做到这一点的更多信息，请浏览 [jsdelivr](https://www.jsdelivr.com/) 。",
   "cdnAlert": "为了使您的应用能正常运行，您必须用 `v-app` 组件包裹您的应用。请参阅 [Application](/components/application) 组件的文档。",
   "electronHeader": "## 结合 Electron",
+  "electronText": "要让 Vuetify 与 **Electron** 一起使用，请通过 Vue CLI 添加 [electron-builder](https://github.com/nklayman/vue-cli-plugin-electron-builder) 插件。",
   "pwaHeader": "## 结合 PWA",
   "pwaText": "如果您使用 Vue CLI 创建新项目，在 `vue create my-app` 提供的选项中您可以选择 **Progressive Web App (PWA) Support** 。对于已经存在的 Vue CLI 项目，您可以通过如下命令安装该依赖库。",
   "cordovaHeader": "## 结合 Cordova",
+  "cordovaText": "要将 Vuetify 与 **Cordova** 一起使用，请通过 Vue CLI 添加 [Cordova](https://github.com/m0dch3n/vue-cli-plugin-cordova) 插件。",
   "capacitorHeader": "## 结合 Capacitor",
   "capacitorText": "想要在 **Capacitor** 中使用 Vuetify，请先安装 Vue CLI 插件 [Capacitor](https://github.com/nklayman/vue-cli-plugin-capacitor) 。"
 }

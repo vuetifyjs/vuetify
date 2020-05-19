@@ -31,6 +31,7 @@ export default baseMixins.extend<options>().extend({
       default: 500,
     },
     src: String,
+    srcset: String,
   },
 
   data: () => ({
@@ -80,6 +81,7 @@ export default baseMixins.extend<options>().extend({
       style: this.styles,
       attrs: {
         src: this.src,
+        srcset: this.srcset,
         alt: this.alt,
       },
       ref: 'img',

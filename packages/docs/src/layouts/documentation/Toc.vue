@@ -46,7 +46,6 @@
             :group="2"
             small
             justify="start"
-            title="Diamond Sponsors"
           />
         </v-fade-transition>
       </div>

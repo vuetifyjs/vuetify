@@ -48,14 +48,6 @@ interface options extends InstanceType<typeof baseMixins> {
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
-interface InputEvent extends UIEvent {
-  isComposing: Boolean
-}
-interface KeyboardEvent extends UIEvent {
-  keyCode: Number
-  isComposing: Boolean
-}
-
 /* @vue/component */
 export default baseMixins.extend<options>().extend({
   name: 'v-text-field',
@@ -328,6 +320,9 @@ export default baseMixins.extend<options>().extend({
         },
       })
     },
+    genControl () {
+      return VInput.options.methods.genControl.call(this)
+    },
     genDefaultSlot () {
       return [
         this.genFieldset(),
@@ -354,7 +349,7 @@ export default baseMixins.extend<options>().extend({
           absolute: true,
           color: this.validationState,
           dark: this.dark,
-          disabled: this.disabled,
+          disabled: this.isDisabled,
           focused: !this.isSingle && (this.isFocused || !!this.validationState),
           for: this.computedId,
           left: this.labelPosition.left,
@@ -390,7 +385,7 @@ export default baseMixins.extend<options>().extend({
         attrs: {
           ...this.attrs$,
           autofocus: this.autofocus,
-          disabled: this.disabled,
+          disabled: this.isDisabled,
           id: this.computedId,
           placeholder: this.placeholder,
           readonly: this.readonly,
@@ -401,7 +396,6 @@ export default baseMixins.extend<options>().extend({
           input: this.onInput,
           focus: this.onFocus,
           keydown: this.onKeyDown,
-          compositionend: this.onCompositionEnd,
         }),
         ref: 'input',
       })
@@ -440,15 +434,9 @@ export default baseMixins.extend<options>().extend({
       e && this.$nextTick(() => this.$emit('blur', e))
     },
     onClick () {
-      if (this.isFocused || this.disabled || !this.$refs.input) return
+      if (this.isFocused || this.isDisabled || !this.$refs.input) return
 
       this.$refs.input.focus()
-    },
-    onCompositionEnd (e: Event) {
-      const target = e.target as HTMLInputElement
-
-      this.internalValue = target.value
-      this.badInput = target.validity && target.validity.badInput
     },
     onFocus (e?: Event) {
       if (!this.$refs.input) return
@@ -463,14 +451,12 @@ export default baseMixins.extend<options>().extend({
       }
     },
     onInput (e: Event) {
-      if (!(e as InputEvent).isComposing) {
-        this.onCompositionEnd(e)
-      }
+      const target = e.target as HTMLInputElement
+      this.internalValue = target.value
+      this.badInput = target.validity && target.validity.badInput
     },
     onKeyDown (e: KeyboardEvent) {
-      if (!e.isComposing && e.keyCode === keyCodes.enter) {
-        this.$emit('change', this.internalValue)
-      }
+      if (e.keyCode === keyCodes.enter) this.$emit('change', this.internalValue)
 
       this.$emit('keydown', e)
     },
@@ -489,9 +475,11 @@ export default baseMixins.extend<options>().extend({
       VInput.options.methods.onMouseUp.call(this, e)
     },
     setLabelWidth () {
-      if (!this.outlined || !this.$refs.label) return
+      if (!this.outlined) return
 
-      this.labelWidth = Math.min(this.$refs.label.scrollWidth * 0.75 + 6, (this.$el as HTMLElement).offsetWidth - 24)
+      this.labelWidth = this.$refs.label
+        ? Math.min(this.$refs.label.scrollWidth * 0.75 + 6, (this.$el as HTMLElement).offsetWidth - 24)
+        : 0
     },
     setPrefixWidth () {
       if (!this.$refs.prefix) return

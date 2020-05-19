@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} 선택됨',
+    nextMonthAriaLabel: '다음 달',
+    nextYearAriaLabel: '내년',
+    prevMonthAriaLabel: '지난달',
+    prevYearAriaLabel: '전년도',
   },
   noDataText: '데이터가 없습니다.',
   carousel: {

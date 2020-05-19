@@ -4,7 +4,8 @@
   "usageText": "最简单形式的徽章显示在它包装的内容的右上角，并且需要徽章插槽。",
   "examples": {
     "tabs": {
-      "heading": "### 选项卡"
+      "heading": "### 选项卡",
+      "desc": "徽章有助于以各种方式向用户传递信息。"
     },
     "hover": {
       "heading": "### 鼠标悬停显示",
@@ -15,10 +16,20 @@
       "desc": "你可以将徽章与动态内容合并，以创建通知系统之类的东西。"
     },
     "customization": {
-      "heading": "### 自定义选项"
+      "heading": "### 自定义选项",
+      "desc": "`v-badge` 组件是灵活的，可以在各种使用场景中使用，并可以在众多元素上使用。还可以通过 **offset-x** 和 **offset-y** props 来调整位置。"
     }
   },
   "props": {
+    "avatar": "去掉了 **badge** 插槽中使用 `v-avatar` 的徽章边距。",
+    "bordered": "当使用 **dot** 属性时，默认情况下会在徽章上应用一个 **2px** 和它的周围应用一个 **1.5px** 的边框。",
+    "content": "任何你想要的内容都可以作为文字注入到徽章中。",
+    "dot": "缩小徽章的尺寸并隐藏其内容",
+    "icon": "指定徽章中使用的具体图标。",
+    "inline": "移动徽章，使其与包装元素保持一致。支持使用 **left** prop。",
+    "label": "用于徽章的 **aria-label**",
+    "offsetX": "将徽章在 x 轴上偏移。",
+    "offsetY": "将徽章在 y 轴上偏移。",
     "bottom": "Mixins.Positionable.props.bottom",
     "left": "Mixins.Positionable.props.left",
     "overlap": "与组件顶部的开槽内容重叠。",

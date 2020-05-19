@@ -19,8 +19,7 @@
         >
           <v-img
             :src="template.src"
-            gradient="to bottom, #00000080, #1867c04D"
-            height="150px"
+            height="175"
           >
             <v-chip
               :color="template.free ? 'blue-grey' : 'success'"

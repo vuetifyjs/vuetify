@@ -6,7 +6,6 @@
   "fullWidth": "Forciert 100% Breite",
   "fixedTabs": "`v-tabs-item` min-width 160px, max-width 360px",
   "id": "Setzt den DOM identifier auf der Komponente",
-  "mobileBreakPoint": "Legt den festgelegten mobile breakpoint für die Komponente fest. Dadurch werden alternative Stile für mobile Geräte angewendet.",
   "persistent": "Außerhalb des Dialogs klicken schließt diesen nicht",
   "singleLine": "Das Label bewegt sich nicht für focus/dirty",
   "size": "Setzt die Höhe und Breite der Komponente.",

@@ -28,6 +28,7 @@
   "cdnText": "Um die Verwendung von Vuetify.js zu testen, ohne eine Vorlage von Vue CLI zu installieren, kopieren Sie den folgenden Code in Ihre `index.html`. Dadurch wird die neueste Version von Vue und Vuetify abgerufen, sodass Sie mit Komponenten spielen können. Sie können auch den [Vuetify-Starter](https://template.vuetifyjs.com) für Codepen verwenden. Obwohl dies nicht empfohlen wird, wird empfohlen, die Versionen Ihrer Assets zu erweitern, wenn Sie die CDN-Pakete in einer _production_-Umgebung verwenden müssen. Weitere Informationen hierzu finden Sie auf der Website [jsdelivr](https://www.jsdelivr.com/).",
   "cdnAlert": "Damit Ihre Anwendung einwandfrei funktioniert, müssen Sie diese in eine `v-app`-Komponente packen. Besuchen Sie für weitere Informationen die Seite der [Anwendungs](/components/application)-Komponente.",
   "electronHeader": "## Verwendung mit Electron",
+  "electronText": "Um Vuetify mit **Electron** zu verwenden, fügen Sie das [electron-builder](https://github.com/nklayman/vue-cli-plugin-electron-builder)-Plugin über die Vue CLI hinzu.",
   "pwaHeader": "## Verwendung mit PWA",
   "pwaText": "Wenn Sie eine neue Anwendung mit der Vue CLI erstellen, haben Sie die Möglichkeit, in der ersten Eingabeaufforderung nach dem Starten von `vue create my-app` die Option `**Progressive Web App (PWA) Support**` auszuwählen. Dieses Paket kann auch in vorhandene Vue CLI-Projekte installiert werden, indem Sie den folgenden Befehl eingeben:",
   "cordovaHeader": "## Verwendung mit Cordova",

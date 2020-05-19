@@ -69,13 +69,13 @@ export default Measurable.extend({
       ).map(this.genChild)
     },
     genChild (item: any, index: number) {
-      const firstToRender = this.firstToRender + index
-      const top = convertToUnit(firstToRender * this.__itemHeight)
+      const indexToRender = this.firstToRender + index
+      const top = convertToUnit(indexToRender * this.__itemHeight)
 
       return this.$createElement('div', {
         staticClass: 'v-virtual-scroll__item',
         style: { top },
-        key: index,
+        key: indexToRender,
       }, getSlot(this, 'default', { item, index }))
     },
     getFirst (): number {

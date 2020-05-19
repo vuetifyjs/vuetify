@@ -289,7 +289,7 @@ export default baseMixins.extend<options>().extend({
     /** @public */
     activateMenu () {
       if (
-        this.disabled ||
+        this.isDisabled ||
         this.readonly ||
         this.isMenuActive
       ) return
@@ -341,7 +341,7 @@ export default baseMixins.extend<options>().extend({
     },
     genChipSelection (item: object, index: number) {
       const isDisabled = (
-        this.disabled ||
+        this.isDisabled ||
         this.readonly ||
         this.getDisabled(item)
       )
@@ -371,7 +371,7 @@ export default baseMixins.extend<options>().extend({
     genCommaSelection (item: object, index: number, last: boolean) {
       const color = index === this.selectedIndex && this.computedColor
       const isDisabled = (
-        this.disabled ||
+        this.isDisabled ||
         this.getDisabled(item)
       )
 

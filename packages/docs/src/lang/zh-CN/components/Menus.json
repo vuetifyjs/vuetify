@@ -67,6 +67,9 @@
       "uninverted": true
     }
   },
+  "accessibility": {
+    "desc": "默认情况下，`v-menu` 组件被 _detached_ 并移动到你的应用程序的根目录下。为了正确地支持 [将动态内容插入到 DOM](https://www.w3.org/WAI/WCAG21/Techniques/client-side-script/SCR26)，你必须_使用 **attach** prop。这将确保在按 <kbd>tab</kbd> 键时，焦点从激活器转移到内容上。"
+  },
   "props": {
     "closeOnClick": "指定菜应该在外部激活器被点击时关闭。",
     "closeOnContentClick": "指定点击内容时菜单是否应该关闭。",

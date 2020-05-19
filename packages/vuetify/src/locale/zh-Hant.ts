@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '已選擇 {0}',
+    nextMonthAriaLabel: '下個月',
+    nextYearAriaLabel: '明年',
+    prevMonthAriaLabel: '前一個月',
+    prevYearAriaLabel: '前一年',
   },
   noDataText: '沒有資料',
   carousel: {

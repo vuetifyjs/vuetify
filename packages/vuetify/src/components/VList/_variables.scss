@@ -1,9 +1,13 @@
 @import '../../styles/styles.sass';
 
 $avatar-margin-x: 16px !default;
-$list-border-radius: $border-radius-root !default;
+$list-border-radius: 0 !default;
+$list-elevation: 0 !default;
 $list-dense-subheader-font-size: 0.75rem !default;
 $list-dense-subheader-height: 40px !default;
+// TODO: Resolve naming conflicts for
+// shaped style propagation to items
+$list-shaped-border-radius: 0 !default;
 
 $list-item-avatar-margin-y: 8px !default;
 $list-item-avatar-horizontal-margin-x: -16px !default;
@@ -21,6 +25,7 @@ $list-item-dense-title-font-size: 0.8125rem !default;
 $list-item-dense-title-font-weight: 500 !default;
 $list-padding: 8px 0 !default;
 $list-dense-subheading-padding: 0 8px !default;
+$list-nav-border-radius: $border-radius-root !default;
 $list-nav-rounded-item-margin-bottom: 8px !default;
 $list-nav-rounded-item-dense-margin-bottom: 4px !default;
 $list-nav-padding-left: 8px !default;

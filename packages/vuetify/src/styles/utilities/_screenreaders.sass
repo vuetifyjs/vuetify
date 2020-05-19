@@ -1,0 +1,13 @@
+// Source: https://github.com/twbs/bootstrap/blob/master/scss/mixins/_screen-reader.scss
+
+.d-sr-only,
+.d-sr-only-focusable:not(:focus)
+  border: 0 !important
+  clip: rect(0, 0, 0, 0) !important
+  height: 1px !important
+  margin: -1px !important // Fix for https://github.com/twbs/bootstrap/issues/25686
+  overflow: hidden !important
+  padding: 0 !important
+  position: absolute !important
+  white-space: nowrap !important
+  width: 1px !important

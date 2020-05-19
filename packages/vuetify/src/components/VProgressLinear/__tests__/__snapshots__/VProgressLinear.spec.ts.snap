@@ -26,7 +26,7 @@ exports[`VProgressLinear.ts should render component in RTL mode 1`] = `
      aria-valuemin="0"
      aria-valuemax="100"
      aria-valuenow="33"
-     class="v-progress-linear theme--light"
+     class="v-progress-linear v-progress-linear--reverse theme--light"
      style="height: 4px;"
 >
   <div class="v-progress-linear__background primary"
@@ -307,6 +307,48 @@ exports[`VProgressLinear.ts should render indeterminate progress with query prop
     </div>
     <div class="v-progress-linear__indeterminate short primary">
     </div>
+  </div>
+</div>
+`;
+
+exports[`VProgressLinear.ts should render reverse component in RTL mode 1`] = `
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-valuenow="33"
+     class="v-progress-linear theme--light"
+     style="height: 4px;"
+>
+  <div class="v-progress-linear__background primary"
+       style="opacity: 0.3; left: 33%; width: 67%;"
+  >
+  </div>
+  <div class="v-progress-linear__buffer">
+  </div>
+  <div class="v-progress-linear__determinate primary"
+       style="width: 33%;"
+  >
+  </div>
+</div>
+`;
+
+exports[`VProgressLinear.ts should render reversed component 1`] = `
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-valuenow="33"
+     class="v-progress-linear v-progress-linear--reverse theme--light"
+     style="height: 4px;"
+>
+  <div class="v-progress-linear__background primary"
+       style="opacity: 0.3; right: 33%; width: 67%;"
+  >
+  </div>
+  <div class="v-progress-linear__buffer">
+  </div>
+  <div class="v-progress-linear__determinate primary"
+       style="width: 33%;"
+  >
   </div>
 </div>
 `;

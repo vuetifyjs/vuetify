@@ -1,6 +1,5 @@
 {
   "heading": "# Barrierefreiheit",
-  "headingText": "Web-Zugänglichkeit **(a11y als Abkürzung)**, ist die integrative Praxis, sicherzustellen, dass es keine Hindernisse gibt, die die Interaktion mit oder Zugang zu Websites im World Wide Web von Menschen mit Behinderungen beinschränken. Vuetify-Components sind entwickelt, um Tastatur-Interaktionen für alle Maus-basierte Aktionen bereitzustellen und HTML5 semantische Elemente zu verwenden, sofern diese anwendbar sind.",
   "accessibilityHeader": "## Material Design Barrierefreiheit",
   "accessibilityText": "Google bietet einen detaillierten Überblick darüber, wie ihre Komponenten mit Blick auf a11y erstellt werden. Sie bieten auch Beispiele dafür, wie Sie sicherstellen können, dass Sie bewährte Methoden verwenden, wenn Sie Anwendungen erstellen (über das, was standardmäßig mit Vuetify unterstützt wird). Weitere Informationen über [Implementierung von Zugänglichkeit](https://material.io/design/usability/accessibility.html) findest du auf der Spezifikationsseite.",
   "activatorHeader": "## Aktivierungs Slots",
