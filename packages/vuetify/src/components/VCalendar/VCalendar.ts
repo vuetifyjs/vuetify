@@ -120,6 +120,7 @@ export default CalendarWithEvents.extend({
           break
         case 'category':
           const days = this.parsedCategoryDays
+
           component = VCalendarCategory
           end = relativeDays(copyTimestamp(end), nextDay, days)
           updateFormatted(end)
