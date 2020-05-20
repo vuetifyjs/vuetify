@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Redaka po stranici:',
     ariaLabel: {
-      sortDescending: ': Sortirano silazno. Odaberite za uklanjanje sortiranja.',
-      sortAscending: ': Sortirano uzlazno. Odaberite za silazno sortiranje.',
-      sortNone: ': Nije sortirano. Odaberite za uzlazno sortiranje.',
+      sortDescending: 'Sortirano silazno.',
+      sortAscending: 'Sortirano uzlazno.',
+      sortNone: 'Nije sortirano.',
+      activateNone: 'Odaberite za uklanjanje sortiranja.',
+      activateDescending: 'Odaberite za silazno sortiranje.',
+      activateAscending: 'Odaberite za uzlazno sortiranje.',
     },
     sortBy: 'Sortirajte po',
   },
@@ -25,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} odabrano',
+    nextMonthAriaLabel: 'Sljedeći mjesec',
+    nextYearAriaLabel: 'Slijedeće godine',
+    prevMonthAriaLabel: 'Prethodni mjesec',
+    prevYearAriaLabel: 'Prošla godina',
   },
   noDataText: 'Nema dostupnih podataka',
   carousel: {
@@ -44,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Navigacija stranicama',
+      next: 'Sljedeća stranica',
+      previous: 'Prethodna stranica',
+      page: 'Idi na stranicu {0}',
+      currentPage: 'Trenutna stranica, stranica {0}',
+    },
   },
 }

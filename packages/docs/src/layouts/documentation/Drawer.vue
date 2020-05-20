@@ -8,39 +8,17 @@
   >
     <v-container>
       <div class="text-center">
-        <v-responsive min-height="81">
+        <v-responsive
+          class="mb-3"
+          height="57"
+        >
           <supporters-supporter-group
-            :group="supporters['Premiere']"
+            :group="1"
             large
-            title="Premiere sponsors"
           />
         </v-responsive>
 
-        <supporters-sponsor-btn
-          class="my-4"
-          href="https://github.com/users/johnleider/sponsorship"
-          small
-        />
-
-        <a
-          aria-label="VueJobs"
-          class="d-block"
-          href="https://vuejobs.com/?utm_source=vuejobs&utm_medium=banner&utm_campaign=linking&ref=vuetifyjs.com"
-          rel="noopener"
-          target="_blank"
-          title="VueJobs"
-          @click="$ga.event('drawer', 'click', 'vuejobs')"
-        >
-          <v-img
-            alt="VueJobs"
-            class="mx-auto"
-            contain
-            height="18"
-            src="https://cdn.vuetifyjs.com/images/affiliates/vuejobs-logo.svg"
-            title="VueJobs"
-            width="60"
-          />
-        </a>
+        <supporters-sponsor-btn small />
       </div>
     </v-container>
 
@@ -90,7 +68,9 @@
 
         <v-spacer />
 
-        <base-theme-toggle />
+        <app-notifications />
+
+        <base-theme-toggle class="ml-1" />
       </div>
     </template>
   </v-navigation-drawer>

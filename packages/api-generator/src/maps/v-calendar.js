@@ -24,6 +24,10 @@ module.exports = {
         props: VTimestamp,
       },
       {
+        name: 'day-label-header',
+        props: VTimestamp,
+      },
+      {
         name: 'day-month',
         props: VTimestamp,
       },

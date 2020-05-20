@@ -1,14 +1,25 @@
 import { VNodeDirective } from 'vue/types/vnode'
 
-interface ObserveVNodeDirective extends VNodeDirective {
-  options?: IntersectionObserverInit
+type ObserveHandler = (
+  entries: IntersectionObserverEntry[],
+  observer: IntersectionObserver,
+  isIntersecting: boolean,
+) => void
+
+interface ObserveVNodeDirective extends Omit<VNodeDirective, 'modifiers'> {
+  value?: ObserveHandler | { handler: ObserveHandler, options?: IntersectionObserverInit }
+  modifiers?: {
+    once?: boolean
+    quiet?: boolean
+  }
 }
 
 function inserted (el: HTMLElement, binding: ObserveVNodeDirective) {
-  const modifiers = binding.modifiers || /* istanbul ignore next */ {}
+  const modifiers = binding.modifiers || {}
   const value = binding.value
-  const isObject = typeof value === 'object'
-  const callback = isObject ? value.handler : value
+  const { handler, options } = typeof value === 'object'
+    ? value
+    : { handler: value, options: {} }
   const observer = new IntersectionObserver((
     entries: IntersectionObserverEntry[] = [],
     observer: IntersectionObserver
@@ -19,14 +30,14 @@ function inserted (el: HTMLElement, binding: ObserveVNodeDirective) {
     // If is not quiet or has already been
     // initted, invoke the user callback
     if (
-      callback && (
+      handler && (
         !modifiers.quiet ||
         el._observe.init
       )
     ) {
       const isIntersecting = Boolean(entries.find(entry => entry.isIntersecting))
 
-      callback(entries, observer, isIntersecting)
+      handler(entries, observer, isIntersecting)
     }
 
     // If has already been initted and
@@ -34,7 +45,7 @@ function inserted (el: HTMLElement, binding: ObserveVNodeDirective) {
     if (el._observe.init && modifiers.once) unbind(el)
     // Otherwise, mark the observer as initted
     else (el._observe.init = true)
-  }, value.options || {})
+  }, options)
 
   el._observe = { init: false, observer }
 

@@ -1,1 +1,7 @@
-{}
+{
+  "props": {
+    "mode": "トランジション モードを設定します(transition-groupには適用されません)。詳細については、Vue のドキュメント [トランジションモード](https://jp.vuejs.org/v2/api/#transition) を参照してください。",
+    "origin": "要素にトランジションの起点を設定します。 MDNドキュメントで [for transition origin](https://developer.mozilla.org/ja/docs/Web/CSS/transform-origin) の詳細を参照できます。",
+    "transition": "コンポーネントのトランジションを設定します。 [組み込みトランジション](/styles/transitions) のいずれか、または独自のものを使用できます。"
+  }
+}

@@ -80,7 +80,8 @@
   "slots": {
     "day-body": "The content that is placed in a `day` view in the scrollable interval container. The day & time object is passed through this slots scope.",
     "day-header": "The content that is placed in a `day` view in the top container. The day & time object is passed through this slots scope.",
-    "day-label": "The content that is placed in the day of the month space in the `week` or `month` view. The day & time object is passed through this slots scope.",
+    "day-label": "The content that is placed in the day of the month space in the `custom-weekly` or `month` view. The day & time object is passed through this slots scope.",
+    "day-label-header": "The content that is placed in the day of the month space in the `week`, `day`, `4day`, or `custom-daily` view. The day & time object is passed through this slots scope.",
     "day-month": "The content that is placed in the month space in the `week` or `month` view. The day & time object is passed through this slots scope.",
     "day": "The content that is placed in a `week` or `month` view. The day & time object is passed through this slots scope.",
     "event": "The content placed in an event. This ignores the `event-name` prop.",

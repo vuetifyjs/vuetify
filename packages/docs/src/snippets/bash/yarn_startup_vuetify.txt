@@ -1,18 +1,22 @@
-// All run from root directory
-// To start dev
-$ yarn dev
+# All run from root directory
+# To start vuetify dev
+yarn dev
 
-// To start docs
-$ yarn dev docs
+# To access your local vuetify playground: http://localhost:8080
 
-// To start a specific package
-$ yarn dev <package name>
+# To start docs
+yarn dev docs
 
-// To build all packages
-$ yarn build
+# To access your local docs environment: http://localhost:8095
 
-// To build a specific package
-$ yarn build <package name>
+# To start a specific package
+yarn dev <package name>
 
-// Package alias
+# To build all packages
+yarn build
+
+# To build a specific package
+yarn build <package name>
+
+# Package alias
 api-generator: api

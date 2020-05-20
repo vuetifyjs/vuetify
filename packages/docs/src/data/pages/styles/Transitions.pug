@@ -1,0 +1,39 @@
+usage(value="usage")
+api(:value=`[
+  'v-fab-transition',
+  'v-fade-transition',
+  'v-expand-transition',
+  'v-scale-transition',
+  'v-scroll-x-transition',
+  'v-scroll-x-reverse-transition',
+  'v-scroll-y-transition',
+  'v-scroll-y-reverse-transition',
+  'v-slide-x-transition',
+  'v-slide-x-reverse-transition',
+  'v-slide-y-transition',
+  'v-slide-y-reverse-transition'
+]`)
+examples(:value=`[
+  'slide-x-transitions',
+  'slide-y-transitions',
+  'scroll-x-transitions',
+  'scroll-y-transitions',
+  'scale-transition',
+  'fab-transition',
+  'fade-transition',
+  'expand-transition',
+  'custom-origin',
+  'todo'
+]`)
+
+h2 createYourOwnHeader
+| createYourOwnText1
+code(lang="js" src="custom_transition")
+| createYourOwnText2
+code(lang="stylus" src="custom_transition")
+
+up-next(:value=`[
+  'components/menus',
+  'styles/colors',
+  'components/expansion-panels'
+]`)

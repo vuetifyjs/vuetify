@@ -1,7 +1,33 @@
 {
+  "heading": "# ボトムシート",
+  "headingText": "ボトムシートは、画面の下部からスライドする変更された`v-dialog`で、 `v-bottom-navigation`と同様です。ボトムナビゲーション コンポーネントはボタンと特定のアプリケーション レベルアクション用ですが、ボトムシートには何でも含めることができます。",
+  "usageText": "アプリケーションでよく使われるアクションの例を下に示します。",
   "examples": {
+    "inset": {
+      "heading": "## Inset"
+    },
+    "persistent": {
+      "heading": "### Persistent （永続的表示）",
+      "desc": "永続的な（Persistent）ボトムシートは、外側をクリックしても閉じることはできません。"
+    },
     "model": {
-      "heading": "### `v-model`による制御"
+      "heading": "### `v-model`による制御",
+      "desc": "ボトムシートは`v-model`で制御できます。`activator` slotを使用できない場合などに使用します。"
+    },
+    "open-in-list": {
+      "heading": "### リストで開く",
+      "desc": "機能をもつリストをボトムシートに結合することで、単純な`open in`コンポーネントを作成できます。"
+    },
+    "player": {
+      "heading": "### Music Player",
+      "desc": " Insetボトムシートを使用すると、シンプルな音楽プレーヤーなどの実用的なコンポーネントを作ることができます。"
     }
+  },
+  "props": {
+    "eager": "Mixins.Bootable.props.eager",
+    "inset": "シートの最大の横幅を 70% に縮小します。",
+    "internalActivator": "Components.Dialogs.props.internalActivator",
+    "openOnHover": "Components.Dialogs.props.openOnHover",
+    "maxWidth": "Components.Dialogs.props.maxWidth"
   }
 }

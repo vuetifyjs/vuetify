@@ -7,17 +7,24 @@ import VDatePickerYears from './VDatePickerYears'
 
 // Mixins
 import Localable from '../../mixins/localable'
+import mixins from '../../util/mixins'
 import Picker from '../../mixins/picker'
 
 // Utils
-import { pad, createNativeLocaleFormatter } from './util'
+import {
+  createItemTypeListeners,
+  createNativeLocaleFormatter,
+  pad,
+} from './util'
 import isDateAllowed from './util/isDateAllowed'
 import { consoleWarn } from '../../util/console'
 import { daysInMonth } from '../VCalendar/util/timestamp'
-import mixins from '../../util/mixins'
 
 // Types
-import { PropType, PropValidator } from 'vue/types/options'
+import {
+  PropType,
+  PropValidator,
+} from 'vue/types/options'
 import { VNode } from 'vue'
 import {
   DatePickerFormatter,
@@ -26,7 +33,7 @@ import {
   DatePickerEventColors,
   DatePickerEvents,
   DatePickerType,
-} from 'types'
+} from 'vuetify/types'
 
 type DatePickerValue = string | string[] | undefined
 interface Formatters {
@@ -67,6 +74,10 @@ export default mixins(
     },
     // Function formatting the tableDate in the day/month table header
     headerDateFormat: Function as PropType<DatePickerFormatter | undefined>,
+    localeFirstDayOfYear: {
+      type: [String, Number],
+      default: 0,
+    },
     max: String,
     min: String,
     // Function formatting month in the months table
@@ -76,10 +87,26 @@ export default mixins(
       type: String,
       default: '$next',
     },
+    nextMonthAriaLabel: {
+      type: String,
+      default: '$vuetify.datePicker.nextMonthAriaLabel',
+    },
+    nextYearAriaLabel: {
+      type: String,
+      default: '$vuetify.datePicker.nextYearAriaLabel',
+    },
     pickerDate: String,
     prevIcon: {
       type: String,
       default: '$prev',
+    },
+    prevMonthAriaLabel: {
+      type: String,
+      default: '$vuetify.datePicker.prevMonthAriaLabel',
+    },
+    prevYearAriaLabel: {
+      type: String,
+      default: '$vuetify.datePicker.prevYearAriaLabel',
     },
     range: Boolean,
     reactive: Boolean,
@@ -124,7 +151,7 @@ export default mixins(
         }
 
         const date = (this.multiple || this.range ? (this.value as string[])[(this.value as string[]).length - 1] : this.value) ||
-          `${now.getFullYear()}-${now.getMonth() + 1}`
+          (typeof this.showCurrent === 'string' ? this.showCurrent : `${now.getFullYear()}-${now.getMonth() + 1}`)
         return sanitizeDateString(date as string, this.type === 'date' ? 'month' : 'year')
       })(),
     }
@@ -267,7 +294,7 @@ export default mixins(
   methods: {
     emitInput (newInput: string) {
       if (this.range && this.value) {
-        if (this.value.length === 2) {
+        if (this.value.length !== 1) {
           this.$emit('input', [newInput])
         } else {
           const output = [...this.value, newInput]
@@ -363,6 +390,8 @@ export default mixins(
           locale: this.locale,
           min: this.activePicker === 'DATE' ? this.minMonth : this.minYear,
           max: this.activePicker === 'DATE' ? this.maxMonth : this.maxYear,
+          nextAriaLabel: this.activePicker === 'DATE' ? this.nextMonthAriaLabel : this.nextYearAriaLabel,
+          prevAriaLabel: this.activePicker === 'DATE' ? this.prevMonthAriaLabel : this.prevYearAriaLabel,
           prevIcon: this.prevIcon,
           readonly: this.readonly,
           value: this.activePicker === 'DATE' ? `${pad(this.tableYear, 4)}-${pad(this.tableMonth + 1)}` : `${pad(this.tableYear, 4)}`,
@@ -387,6 +416,7 @@ export default mixins(
           format: this.dayFormat,
           light: this.light,
           locale: this.locale,
+          localeFirstDayOfYear: this.localeFirstDayOfYear,
           min: this.min,
           max: this.max,
           range: this.range,
@@ -401,8 +431,7 @@ export default mixins(
         on: {
           input: this.dateClick,
           'update:table-date': (value: string) => this.tableDate = value,
-          'click:date': (value: string) => this.$emit('click:date', value),
-          'dblclick:date': (value: string) => this.$emit('dblclick:date', value),
+          ...createItemTypeListeners(this, ':date'),
         },
       })
     },
@@ -431,8 +460,7 @@ export default mixins(
         on: {
           input: this.monthClick,
           'update:table-date': (value: string) => this.tableDate = value,
-          'click:month': (value: string) => this.$emit('click:month', value),
-          'dblclick:month': (value: string) => this.$emit('dblclick:month', value),
+          ...createItemTypeListeners(this, ':month'),
         },
       })
     },
@@ -448,6 +476,7 @@ export default mixins(
         },
         on: {
           input: this.yearClick,
+          ...createItemTypeListeners(this, ':year'),
         },
       })
     },

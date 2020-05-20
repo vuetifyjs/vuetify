@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Baris per halaman:',
     ariaLabel: {
-      sortDescending: ': Diurutkan kebawah. Aktifkan untuk menghapus penyortiran.',
-      sortAscending: ': Diurutkan keatas. Aktifkan untuk mengurutkan kebawah.',
-      sortNone: ': Tidak diurutkan. Aktifkan untuk mengurutkan keatas.',
+      sortDescending: 'Diurutkan kebawah.',
+      sortAscending: 'Diurutkan keatas.',
+      sortNone: 'Tidak diurutkan.',
+      activateNone: 'Aktifkan untuk menghapus penyortiran.',
+      activateDescending: 'Aktifkan untuk mengurutkan kebawah.',
+      activateAscending: 'Aktifkan untuk mengurutkan keatas.',
     },
     sortBy: 'Urutkan berdasar',
   },
@@ -25,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} dipilih',
+    nextMonthAriaLabel: 'Bulan depan',
+    nextYearAriaLabel: 'Tahun depan',
+    prevMonthAriaLabel: 'Bulan sebelumnya',
+    prevYearAriaLabel: 'Tahun sebelumnya',
   },
   noDataText: 'Tidak ada data tersedia',
   carousel: {
@@ -44,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Navigasi Pagination',
+      next: 'Halaman selanjutnya',
+      previous: 'Halaman sebelumnya',
+      page: 'Buka halaman {0}',
+      currentPage: 'Halaman Saat Ini, Halaman {0}',
+    },
   },
 }

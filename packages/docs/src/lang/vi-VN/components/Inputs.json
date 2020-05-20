@@ -1,5 +1,0 @@
-{
-  "props": {
-    "appendIcon": "Biệu tượng hiện thị phía trước thành phần, sử dụng cú pháp giống `v-icon`"
-  }
-}

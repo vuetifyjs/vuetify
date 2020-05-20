@@ -15,7 +15,7 @@ import CalendarWithIntervals from './mixins/calendar-with-intervals'
 
 // Util
 import { convertToUnit, getSlot } from '../../util/helpers'
-import { CalendarTimestamp } from 'types'
+import { CalendarTimestamp } from 'vuetify/types'
 
 /* @vue/component */
 export default CalendarWithIntervals.extend({
@@ -105,9 +105,7 @@ export default CalendarWithIntervals.extend({
     genHeadDayLabel (day: CalendarTimestamp): VNode {
       return this.$createElement('div', {
         staticClass: 'v-calendar-daily_head-day-label',
-      }, [
-        this.genHeadDayButton(day),
-      ])
+      }, getSlot(this, 'day-label-header', day) || [this.genHeadDayButton(day)])
     },
     genHeadDayButton (day: CalendarTimestamp): VNode {
       const color = day.present ? this.color : 'transparent'

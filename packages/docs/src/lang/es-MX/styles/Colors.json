@@ -1,7 +1,0 @@
-{
-  "classesHeader": "## Clases",
-  "classesText2": "El color del texto también tiene soporte para variantes de **darken** y **lighten** si usas `text--{lighten|darken}-{n}`",
-  "javascriptPackText": "Vuetify tiene un color pack de javascript que puedes importar y utilizar dentro de tu aplicación. Esto puede también ser usado para ayudarte a definir el tema de tu aplicación.",
-  "colorHeader": "## Colores Material",
-  "colorText": "A continuación hay una lista de la paleta de colores de MAterial agrupada por color primario"
-}

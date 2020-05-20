@@ -5,7 +5,7 @@
       clipped-left
       color="amber"
     >
-      <v-app-bar-nav-icon @click="drawer = !drawer" />
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <span class="title ml-3 mr-5">Google&nbsp;<span class="font-weight-light">Keep</span></span>
       <v-text-field
         solo-inverted
@@ -13,9 +13,9 @@
         hide-details
         label="Search"
         prepend-inner-icon="search"
-      />
+      ></v-text-field>
 
-      <v-spacer />
+      <v-spacer></v-spacer>
     </v-app-bar>
 
     <v-navigation-drawer
@@ -54,7 +54,7 @@
             :key="i"
             dark
             class="my-4"
-          />
+          ></v-divider>
           <v-list-item
             v-else
             :key="i"
@@ -96,20 +96,6 @@
                 </v-btn>
               </template>
               <span>Source</span>
-            </v-tooltip>
-            <v-tooltip right>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  icon
-                  large
-                  href="https://codepen.io/johnjleider/pen/zgxbYO"
-                  target="_blank"
-                  v-on="on"
-                >
-                  <v-icon large>mdi-codepen</v-icon>
-                </v-btn>
-              </template>
-              <span>Codepen</span>
             </v-tooltip>
           </v-col>
         </v-row>

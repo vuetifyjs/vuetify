@@ -3,7 +3,7 @@
     aria-label="Support Vuetify through Tidelift"
     color="#4B5168"
     dark
-    href="https://tidelift.com/subscription/npm/vuetify"
+    href="https://tidelift.com/subscription/pkg/npm-vuetify?utm_source=npm-vuetify&utm_medium=referral&utm_campaign=enterprise"
     large
     rel="noopener"
     target="_blank"

@@ -1,9 +1,6 @@
 {
+  "usageText": "Les puces sont présentes dans les variantes suivantes : Default, closeable, filter, outlined, pill. Le champ par défaut de `v-chip` accepte également les avatars et les icônes aux côtés du texte.",
   "examples": {
-    "usage": {
-      "desc": "Les puces sont présentes dans les variantes suivantes : Default, closeable, filter, outlined, pill. Le champ par défaut de `v-chip` accepte également les avatars et les icônes aux côtés du texte.",
-      "uninverted": true
-    },
     "colored": {
       "heading": "### Coloré",
       "desc": "Toute couleur de la palette Material Design peut être utilisée pour changer une couleur de puce."

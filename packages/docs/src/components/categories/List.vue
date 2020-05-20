@@ -38,11 +38,13 @@
     computed: {
       ...mapState('route', ['params']),
       items () {
-        return this.value.map(item => ({
-          title: this.$t(`Components.Categories.${item}`),
-          text: this.$t(`Components.Categories.${item}Text`),
-          to: `/${this.params.lang}/components/categories/${kebabCase(item)}`,
-        }))
+        return this.value
+          ? this.value.map(item => ({
+            title: this.$t(`Components.Categories.${item}`),
+            text: this.$t(`Components.Categories.${item}Text`),
+            to: `/${this.params.lang}/components/categories/${kebabCase(item)}`,
+          }))
+          : []
       },
     },
   }

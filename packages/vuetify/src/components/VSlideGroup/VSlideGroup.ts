@@ -143,9 +143,8 @@ export const BaseSlideGroup = mixins<options &
   },
 
   methods: {
+    // Always generate next for scrollable hint
     genNext (): VNode | null {
-      if (!this.hasAffixes) return null
-
       const slot = this.$scopedSlots.next
         ? this.$scopedSlots.next({})
         : this.$slots.next || this.__cachedNext

@@ -11,6 +11,10 @@
       "heading": "### Swatches",
       "desc": "Using the `show-swatches` prop you can display an array of color swatches that users can pick from. It is also possible to customize what colors are shown using the `swatches` prop. This prop accepts a two-dimensional array, where the first dimension defines a column, and second dimension defines the swatches from top to bottom by providing rgba hex strings. You can also set the max height of the swatches section with the `swatches-max-height` prop."
     },
+    "elevation": {
+      "heading": "### Picker's elevation",
+      "desc": "Adjust the elevation of the `v-color-picker` component using the **elevation** or **flat** prop. The **flat** is equivalent to setting **elevation** to 0."
+    },
     "inputs": {
       "heading": "### Inputs",
       "desc": "The number inputs can be hidden with the `hide-inputs` prop. You can also hide the mode switch icon with the `hide-mode-switch` prop. The mode can also be controlled externally through the `mode` prop."

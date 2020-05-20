@@ -26,10 +26,15 @@ export interface Vuetify {
   preset: VuetifyPreset
   userPreset: UserVuetifyPreset
   version: string
+  config: Config
   new (preset?: Partial<UserVuetifyPreset>): Vuetify
 }
 
-export { Presets, VuetifyPreset, UserVuetifyPreset } from './services/presets';
+export interface Config {
+  silent: boolean
+}
+
+export { Presets, VuetifyPreset, UserVuetifyPreset } from './services/presets'
 
 export type ComponentOrPack = Component & {
   $_vuetify_subcomponents?: Record<string, ComponentOrPack>
@@ -75,6 +80,11 @@ export type TreeviewItemFunction = (item: object, search: string, textKey: strin
 
 export type SelectItemKey = string | (string | number)[] | ((item: object, fallback?: any) => any)
 
+export interface ItemGroup<T> {
+  name: string
+  items: T[]
+}
+
 export interface DataOptions {
   page: number
   itemsPerPage: number
@@ -103,7 +113,7 @@ export interface DataScopeProps {
   updateOptions: (obj: any) => void
   sort: (value: string) => void
   group: (value: string) => void
-  groupedItems: Record<string, any[]> | null
+  groupedItems: ItemGroup<any>[] | null
 }
 
 export type DataTableCompareFunction<T = any> = (a: T, b: T) => number
@@ -118,11 +128,9 @@ export type DataSortFunction<T extends any = any> = (
 
 export type DataGroupFunction<T extends any = any> = (
   items: T[],
-  sortBy: string[],
-  sortDesc: boolean[],
-  locale?: string,
-  customSorters?: Record<string, DataTableCompareFunction<T>>
-) => Record<string, T[]>
+  groupBy: string[],
+  groupDesc: boolean[],
+) => ItemGroup<T>[]
 
 export type DataSearchFunction<T extends any = any> = (items: T[], search: string) => T[]
 
@@ -251,3 +259,5 @@ export type DataItemsPerPageOption = (number | {
   text: string
   value: number
 });
+
+export type RowClassFunction = (item: any) => null | undefined | string | string[] | Record<string, boolean>

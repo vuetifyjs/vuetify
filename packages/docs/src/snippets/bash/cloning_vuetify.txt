@@ -1,0 +1,7 @@
+# Example of cloning the Vuetify repository (non fork)
+
+# Using HTTPS
+git clone https://github.com/vuetifyjs/vuetify.git
+
+# Using SSH
+git clone git@github.com:vuetifyjs/vuetify.git

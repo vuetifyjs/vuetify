@@ -2,8 +2,9 @@ import {
   parseTimestamp,
   getDayIdentifier,
   getTimestampIdentifier,
+  OFFSET_TIME,
 } from './timestamp'
-import { CalendarTimestamp, CalendarEvent, CalendarEventParsed } from 'types'
+import { CalendarTimestamp, CalendarEvent, CalendarEventParsed } from 'vuetify/types'
 
 export function parseEvent (input: CalendarEvent, index: number, startProperty: string, endProperty: string): CalendarEventParsed {
   const start: CalendarTimestamp = parseTimestamp(input[startProperty], true)
@@ -19,7 +20,9 @@ export function parseEvent (input: CalendarEvent, index: number, startProperty: 
 }
 
 export function isEventOn (event: CalendarEventParsed, dayIdentifier: number): boolean {
-  return dayIdentifier >= event.startIdentifier && dayIdentifier <= event.endIdentifier
+  return dayIdentifier >= event.startIdentifier &&
+    dayIdentifier <= event.endIdentifier &&
+    dayIdentifier * OFFSET_TIME !== event.endTimestampIdentifier
 }
 
 export function isEventStart (event: CalendarEventParsed, day: CalendarTimestamp, dayIdentifier: number, firstWeekday: number): boolean {

@@ -1,1 +1,30 @@
-{}
+{
+  "heading": "# Windows",
+  "headingText": "`v-window`コンポーネントは、1 つのペインから別のペインにコンテンツを遷移するためのベースライン機能を提供します。`v-tabs`, `v-carousel`, `v-stepper`などの他のコンポーネントは、このコンポーネントをコアとして利用します。",
+  "examples": {
+    "usage": {
+      "desc": "コンテンツを簡単に循環するように設計された`v-window`は、真のカスタム実装を作成するためのシンプルなインターフェイスを提供します。"
+    },
+    "vertical": {
+      "desc": "`v-window`は垂直にすることができます。垂直ウィンドウには、X 軸のトランジションではなく Y 軸の遷移があります。"
+    },
+    "account": {
+      "desc": "スムーズなアニメーションのリッチなフォームを作成します。 `v-window` は現在の選択インデックスを自動的にトラックし、トランジションの方向を自動的に変更します。これは、`reverse` propを使用して手動で制御できます。"
+    }
+  },
+  "props": {
+    "activeClass": "Mixins.BaseItemGroup.props.activeClass",
+    "nextIcon": "`show-arrows` が `true` の場合、\"next\" ボタンに使用されるアイコン",
+    "prevIcon": "`show-arrows` が `true` の場合、\"prev\" ボタンに使用されるアイコン",
+    "reverse": "トランジションの方向を逆にします。",
+    "reverseTransition": "コンポーネントがアイテムを反転するときに使用されるトランジション。 [組み込みトランジション](/styles/transitions) のいずれか、または独自のものを使用できます。",
+    "showArrows": "\"prev\" ボタンと \"next\" ボタンを表示する",
+    "showArrowsOnHover": "ホバー時に \"next\" ボタンと \"prev\" ボタンを表示します。`show-arrows` も設定する **必要が** あります。",
+    "touchless": "タッチ サポートを無効にします。",
+    "transition": "コンポーネントが項目を進行するときに使用するときに使用されるトランジション。 [組み込みトランジション](/styles/transitions) のいずれか、または独自のものを使用できます。",
+    "v-window-item": {
+      "transition": "Mixins.Transitionable.props.transition",
+      "value": "Mixins.Groupable.props.value"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+# Install commitizen and the conventional changelog adapter
+yarn global add commitizen cz-conventional-changelog
+
+# Then create a .czrc file that tells commitizen
+# which adapter to use globally.
+echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc

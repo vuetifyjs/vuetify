@@ -42,13 +42,8 @@ export default VSheet.extend<options>().extend({
     flat: Boolean,
     nav: Boolean,
     rounded: Boolean,
-    shaped: Boolean,
     subheader: Boolean,
     threeLine: Boolean,
-    tile: {
-      type: Boolean,
-      default: true,
-    },
     twoLine: Boolean,
   },
 
@@ -65,7 +60,6 @@ export default VSheet.extend<options>().extend({
         'v-list--flat': this.flat,
         'v-list--nav': this.nav,
         'v-list--rounded': this.rounded,
-        'v-list--shaped': this.shaped,
         'v-list--subheader': this.subheader,
         'v-list--two-line': this.twoLine,
         'v-list--three-line': this.threeLine,
@@ -102,6 +96,6 @@ export default VSheet.extend<options>().extend({
       },
     }
 
-    return h('div', this.setBackgroundColor(this.color, data), [this.$slots.default])
+    return h(this.tag, this.setBackgroundColor(this.color, data), [this.$slots.default])
   },
 })

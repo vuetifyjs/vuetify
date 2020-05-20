@@ -5,8 +5,21 @@
     "usage": {
       "desc": "最もシンプルな形式の `v-system-bar`は、デフォルトのテーマを持つ小さなコンテナに表示されます。"
     },
+    "color": {
+      "heading": "### 色付きバー",
+      "desc": "オプションで、 `color` プロパティを使用して`v-system-bar` の色を変更できます。"
+    },
+    "window": {
+      "heading": "### Window bar",
+      "desc": "ウィンドウ コントロールとステータス情報を備えたウィンドウ バー。"
+    },
     "themes": {
-      "heading": "### テーマ"
+      "heading": "### テーマ",
+      "desc": "DarkまたはLightテーマを、 `v-system-bar` に適用することができます。"
     }
+  },
+  "props": {
+    "height": "Mixins.Measurable.props.height",
+    "lightsOut": "システム バーの不透明度を減らします。"
   }
 }

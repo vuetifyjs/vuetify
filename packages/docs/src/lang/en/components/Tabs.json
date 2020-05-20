@@ -1,7 +1,8 @@
 {
   "heading": "# Tabs",
   "headingText": "The `v-tabs` component is used for hiding content behind a selectable item. This can also be used as a pseudo-navigation for a page, where the tabs are links and the tab-items are the content.",
-  "alert": "When using the **dark** prop and **NOT** providing a custom **color**, the `v-tabs` component will default its color to _white_.",
+  "alert1": "When using the **dark** prop and **NOT** providing a custom **color**, the `v-tabs` component will default its color to _white_.",
+  "alert2": "When using `v-tab-item`'s that contain required input fields you must use the **eager** prop in order to validate the required fields that are not yet visible.",
   "examples": {
     "usage": {
       "desc": "The `v-tabs` component is a styled extension of [v-item-group](/components/item-groups). It provides an easy to use interface for organizing groups of content."

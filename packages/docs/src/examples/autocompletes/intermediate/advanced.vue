@@ -89,10 +89,10 @@
         this.isLoading = true
 
         // Lazily load input items
-        fetch('https://api.coinmarketcap.com/v2/listings/')
-          .then(res => res.json())
+        fetch('https://api.coingecko.com/api/v3/coins/list')
+          .then(res => res.clone().json())
           .then(res => {
-            this.items = res.data
+            this.items = res
           })
           .catch(err => {
             console.log(err)

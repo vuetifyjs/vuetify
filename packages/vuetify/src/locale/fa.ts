@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'ردیف در صفحه:',
     ariaLabel: {
-      sortDescending: ': نزولی مرتب شده است. فعال‌سازی برای حذف مرتب‌سازی.',
-      sortAscending: ': صعودی مرتب شده است. فعال‌سازی برای مرتب‌سازی نزولی.',
-      sortNone: ': مرتب نشده است. فعال‌سازی برای مرتب‌سازی صعودی.',
+      sortDescending: 'نزولی مرتب شده است. فعال‌سازی برای حذف مرتب‌سازی.',
+      sortAscending: 'صعودی مرتب شده است. فعال‌سازی برای مرتب‌سازی نزولی.',
+      sortNone: 'مرتب نشده است. فعال‌سازی برای مرتب‌سازی صعودی.',
+      activateNone: 'Activate to remove sorting.',
+      activateDescending: 'Activate to sort descending.',
+      activateAscending: 'Activate to sort ascending.',
     },
     sortBy: 'مرتب‌سازی براساس',
   },
@@ -25,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} انتخاب شده است',
+    nextMonthAriaLabel: 'ماه بعد',
+    nextYearAriaLabel: 'سال آینده',
+    prevMonthAriaLabel: 'ماه گذشته',
+    prevYearAriaLabel: 'پارسال',
   },
   noDataText: 'اطلاعاتی یافت نشد',
   carousel: {
@@ -44,5 +51,14 @@ export default {
   timePicker: {
     am: 'قبل از ظهر',
     pm: 'بعد از ظهر',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'جهت یابی صفحه',
+      next: 'صفحه بعد',
+      previous: 'صفحه قبلی',
+      page: '{0} صفحه بروید',
+      currentPage: '{0} صفحه فعلی ، صفحه',
+    },
   },
 }

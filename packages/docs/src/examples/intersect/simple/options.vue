@@ -2,7 +2,7 @@
   <div>
     <div class="d-flex align-center text-center justify-center">
       <v-avatar
-        :color="isIntersecting ? 'success' : 'error'"
+        :color="isIntersecting ? 'green lighten-1' : 'red darken-2'"
         class="mr-3 swing-transition"
         size="32"
       ></v-avatar>

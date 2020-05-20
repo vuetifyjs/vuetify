@@ -1,4 +1,5 @@
 {
+  "heading": "# Panneaux d'extension",
   "examples": {
     "usage": {
       "desc": "Les panneaux d'extension dans leur forme la plus simple affichent une liste d'objets extensibles."

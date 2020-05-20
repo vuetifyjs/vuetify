@@ -1,8 +1,6 @@
 {
+  "usageText": "Les bannières peuvent avoir 1-2 lignes de texte, d'actions et d'icône.",
   "examples": {
-    "usage": {
-      "desc": "Les bannières peuvent avoir 1-2 lignes de texte, d'actions et d'icône."
-    },
     "single-line": {
       "desc": "**Single-line** VBanner est utilisé pour une petite quantité d'informations et est recommandé pour les implémentations de bureau uniquement. Vous pouvez activer optionnellement le prop **sticky** pour s'assurer que le contenu est épinglé à l'écran (note: ne fonctionne pas dans IE11). Vous pouvez trouver plus d'informations sur [sticky positioning here](https://developer.mozilla.org/fr-US/docs/Web/CSS/position)."
     },

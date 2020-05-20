@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Ridu leheküljel:',
     ariaLabel: {
-      sortDescending: ': Kahanevalt sorteeritud. Vajuta uuesti sorteerimise eemaldamiseks.',
-      sortAscending: ': Kasvavalt sorteeritud. Vajuta uuesti, et sorteerida kahanevalt.',
-      sortNone: ': Ei ole sorteeritud. Vajuta kasvavalt sorteerimiseks.',
+      sortDescending: 'Kahanevalt sorteeritud.',
+      sortAscending: 'Kasvavalt sorteeritud.',
+      sortNone: 'Ei ole sorteeritud.',
+      activateNone: 'Vajuta uuesti sorteerimise eemaldamiseks.',
+      activateDescending: 'Vajuta uuesti, et sorteerida kahanevalt.',
+      activateAscending: 'Vajuta kasvavalt sorteerimiseks.',
     },
     sortBy: 'Sorteerimise alus',
   },
@@ -25,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} valitud',
+    nextMonthAriaLabel: 'Järgmine kuu',
+    nextYearAriaLabel: 'Järgmine aasta',
+    prevMonthAriaLabel: 'Eelmine kuu',
+    prevYearAriaLabel: 'Eelmine aasta',
   },
   noDataText: 'Andmed puuduvad',
   carousel: {
@@ -44,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Pagination Navigation',
+      next: 'Järgmine lehekülg',
+      previous: 'Eelmine lehekülg',
+      page: 'Mine lehele {0}',
+      currentPage: 'Praegune leht, leht {0}',
+    },
   },
 }

@@ -1,4 +1,5 @@
 {
+  "api": "API",
   "archived": "архив документации",
   "bug": "Сообщить об ошибке",
   "codepen": "Шаблон Codepen",
@@ -10,7 +11,6 @@
   "enterprise": "Для бизнеса",
   "eslint": "Конфигурация ESLint",
   "getHelp": "Поддержка",
-  "issues": "Github issue board",
   "latest": "Последние релизы",
   "medium": "Публикации на Medium",
   "quickLinks": "Быстрые ссылки",
@@ -18,5 +18,6 @@
   "stack": "Stack Overflow",
   "store": "Магазин",
   "support": "поддержка",
-  "themeGenerator": "Генератор тем"
+  "themeGenerator": "Генератор тем",
+  "translations": "Помочь с переводом"
 }

@@ -4,9 +4,11 @@
   "usageText": "最も単純なアバターは、円形のコンテナ内にコンテンツを表示します。",
   "examples": {
     "size": {
+      "heading": "### サイズ",
       "desc": "`size`プロパティを使用すると、` v-avatar`の高さと幅を定義できます。このpropはアスペクト比1で均等にスケーリングします。`height`と`width`のpropは、`size`をオーバーライドします。"
     },
     "tile": {
+      "heading": "### タイル",
       "desc": "`tile`propは、シンプルな正方形のアバターになります。"
     },
     "default": {
@@ -15,5 +17,9 @@
     "advanced": {
       "desc": "Avatar と他のコンポーネントを組み合わせることで、革新的で美しいユーザーインターフェイスをすぐに構築することができます。"
     }
+  },
+  "props": {
+    "left": "アバターがコンポーネントの左側にあることを指定します。これは [v-chip](/components/chips) や [v-btn](/components/buttons) などのコンポーネントによってフックされます。",
+    "right": "アバターがコンポーネントの右側にあることを指定します。これは [v-chip](/components/chips) や [v-btn](/components/buttons) などのコンポーネントによってフックされます。"
   }
 }

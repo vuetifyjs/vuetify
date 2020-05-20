@@ -1,1 +1,5 @@
-{}
+{
+  "props": {
+    "app": "해당 컴포넌트를 애플리케이션 레이아웃의 일부로 지정합니다. content sizing을 동적으로 조정하는데 사용됩니다. 이 prop을 사용하는 컴포넌트는 기능을 적절히 수행하기 위해 `v-content`의 **바깥에** 위치해야 합니다. [application page](/components/application)에서 레이아웃에 대한 더 많은 내용을 확인할 수 있습니다. **Note:** 이 prop은 레이아웃 요소에 자동으로 **position: fixed**를 적용합니다. `absolute` prop을 사용하면 덮어쓸 수 있습니다."
+  }
+}

@@ -26,7 +26,7 @@ import { consoleError } from '../../util/console'
 // Types
 import mixins from '../../util/mixins'
 import { VNode, VNodeDirective, PropType, VNodeData } from 'vue'
-import { SelectItemKey } from 'types'
+import { SelectItemKey } from 'vuetify/types'
 
 export const defaultMenuProps = {
   closeOnClick: false,
@@ -289,7 +289,7 @@ export default baseMixins.extend<options>().extend({
     /** @public */
     activateMenu () {
       if (
-        this.disabled ||
+        this.isDisabled ||
         this.readonly ||
         this.isMenuActive
       ) return
@@ -310,8 +310,9 @@ export default baseMixins.extend<options>().extend({
         !this._isDestroyed &&
 
         // Click originates from outside the menu content
-        this.getContent() &&
-        !this.getContent().contains(e.target as Node) &&
+        // Multiple selects don't close when an item is clicked
+        (!this.getContent() ||
+        !this.getContent().contains(e.target as Node)) &&
 
         // Click originates from outside the element
         this.$el &&
@@ -340,7 +341,7 @@ export default baseMixins.extend<options>().extend({
     },
     genChipSelection (item: object, index: number) {
       const isDisabled = (
-        this.disabled ||
+        this.isDisabled ||
         this.readonly ||
         this.getDisabled(item)
       )
@@ -370,7 +371,7 @@ export default baseMixins.extend<options>().extend({
     genCommaSelection (item: object, index: number, last: boolean) {
       const color = index === this.selectedIndex && this.computedColor
       const isDisabled = (
-        this.disabled ||
+        this.isDisabled ||
         this.getDisabled(item)
       )
 
@@ -514,7 +515,7 @@ export default baseMixins.extend<options>().extend({
       }
 
       return this.$createElement(VMenu, {
-        attrs: { role: undefined },
+        attrs: { role: undefined, offsetY: true },
         props,
         on: {
           input: (val: boolean) => {
@@ -604,6 +605,8 @@ export default baseMixins.extend<options>().extend({
         this.isFocused = true
         this.$emit('focus')
       }
+
+      this.$emit('click', e)
     },
     onEscDown (e: Event) {
       e.preventDefault()
@@ -634,11 +637,15 @@ export default baseMixins.extend<options>().extend({
       })
       const item = this.allItems[index]
       if (index !== -1) {
+        this.lastItem = Math.max(this.lastItem, index + 5)
         this.setValue(this.returnObject ? item : this.getValue(item))
+        this.$nextTick(() => this.$refs.menu.getTiles())
         setTimeout(() => this.setMenuIndex(index))
       }
     },
     onKeyDown (e: KeyboardEvent) {
+      if (this.readonly) return
+
       const keyCode = e.keyCode
       const menu = this.$refs.menu
 

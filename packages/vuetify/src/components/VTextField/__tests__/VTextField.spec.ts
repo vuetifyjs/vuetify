@@ -6,6 +6,7 @@ import {
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
+import { waitAnimationFrame } from '../../../../test'
 
 describe('VTextField.ts', () => { // eslint-disable-line max-statements
   type Instance = InstanceType<typeof VTextField>
@@ -649,7 +650,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     // https://github.com/vuetifyjs/vuetify/issues/5913
     // Blur waits a requestAnimationFrame
     // to resolve a bug in MAC / Safari
-    await new Promise(resolve => window.requestAnimationFrame(resolve))
+    await waitAnimationFrame()
 
     expect(onBlur).toHaveBeenCalledTimes(1)
   })
@@ -715,20 +716,22 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     expect(focus).toHaveBeenCalledTimes(1)
   })
 
-  it('should hide messages if no messages and hide-details is auto', () => {
+  it('should hide messages if no messages and hide-details is auto', async () => {
     const wrapper = mountFunction({
       propsData: {
         hideDetails: 'auto',
       },
     })
 
-    expect(wrapper.vm.genMessages()).toBeNull()
+    expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({ counter: 7 })
-    expect(wrapper.vm.genMessages()).not.toBeNull()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({ counter: null, errorMessages: 'required' })
-    expect(wrapper.vm.genMessages()).not.toBeNull()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/8268

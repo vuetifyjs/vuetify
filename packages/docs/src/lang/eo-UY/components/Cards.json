@@ -2,12 +2,14 @@
   "heading": "crwdns45442:0crwdne45442:0",
   "headingText": "crwdns45444:0crwdne45444:0",
   "usageText": "crwdns45446:0crwdne45446:0",
-  "componentsHeader": "crwdns39226:0crwdne39226:0",
-  "componentsList": [
-    "crwdns39228:0[v-btn]crwdnd39228:0[v-menu]crwdne39228:0",
-    "crwdns39230:0crwdne39230:0",
-    "crwdns39232:0crwdne39232:0"
-  ],
+  "functional": {
+    "desc": [
+      "crwdns56173:0[v-btn]crwdnd56173:0[v-menu]crwdne56173:0",
+      "crwdns56175:0crwdne56175:0",
+      "crwdns56177:0crwdne56177:0",
+      "crwdns56179:0crwdne56179:0"
+    ]
+  },
   "examples": {
     "info-card": {
       "heading": "crwdns45448:0crwdne45448:0",

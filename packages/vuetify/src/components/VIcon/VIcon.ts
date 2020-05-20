@@ -157,8 +157,8 @@ const VIcon = mixins(
         attrs: {
           xmlns: 'http://www.w3.org/2000/svg',
           viewBox: '0 0 24 24',
-          height: fontSize || '32',
-          width: fontSize || '32',
+          height: fontSize || '24',
+          width: fontSize || '24',
           role: 'img',
           'aria-hidden': true,
         },
@@ -186,6 +186,7 @@ const VIcon = mixins(
         data.style = {
           fontSize: size,
           height: size,
+          width: size,
         }
       }
 

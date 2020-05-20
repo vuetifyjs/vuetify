@@ -1,6 +1,6 @@
 {
   "props": {
     "attach": "このコンポーネントが detach するべき DOM 要素を指定します。String の場合、任意の有効な querySelector が指定でき、Object の場合、任意の有効な Node が指定できます。デフォルトでは、root の `v-app` コンポーネントを attach します。",
-    "contentClass": "detach された要素にカスタムのクラスを適用します。この機能は、コンテンツが `v-app` コンポーネントの最初に移動されて (**attach** prop が与えられない限り)、コンポーネントに直接渡されたクラスによって targettable でない場合に便利です。\nApplies a custom class to the detached element. This is useful because the content is moved to the beginning of the `v-app` component (unless the **attach** prop is provided) and is not targettable by classes passed directly on the component."
+    "contentClass": "デタッチされた要素にカスタムクラスを適用します。コンテンツが `v-app`コンポーネントの先頭に移動され(**attach** propが与えられない限り)、コンポーネントに直接渡されたクラスが対象とならないので便利です。"
   }
 }

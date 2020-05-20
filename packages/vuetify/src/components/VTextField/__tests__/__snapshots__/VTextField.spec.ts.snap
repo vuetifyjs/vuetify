@@ -98,6 +98,74 @@ exports[`VTextField.ts should have prefix and suffix 1`] = `
 </div>
 `;
 
+exports[`VTextField.ts should hide messages if no messages and hide-details is auto 1`] = `
+<div class="v-input v-input--hide-details theme--light v-text-field">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-text-field__slot">
+        <input id="input-141"
+               type="text"
+        >
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTextField.ts should hide messages if no messages and hide-details is auto 2`] = `
+<div class="v-input theme--light v-text-field">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-text-field__slot">
+        <input id="input-141"
+               type="text"
+        >
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages theme--light">
+        <span name="message-transition"
+              tag="div"
+              class="v-messages__wrapper"
+        >
+        </span>
+      </div>
+      <div class="v-counter theme--light">
+        0 / 7
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTextField.ts should hide messages if no messages and hide-details is auto 3`] = `
+<div class="v-input v-input--has-state theme--light v-text-field error--text">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-text-field__slot">
+        <input id="input-141"
+               type="text"
+        >
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages theme--light error--text"
+           role="alert"
+      >
+        <span name="message-transition"
+              tag="div"
+              class="v-messages__wrapper"
+        >
+          <div class="v-messages__message">
+            required
+          </div>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`VTextField.ts should not display counter when set to false/undefined/null 1`] = `
 <div class="v-input theme--light v-text-field">
   <div class="v-input__control">

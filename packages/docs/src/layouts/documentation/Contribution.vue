@@ -1,7 +1,11 @@
 <template>
   <div class="py-4 mb-12">
     Caught a mistake or want to <strong v-html="contributionGuide" /> to the documentation?
-    <strong v-html="contributionPageGithub" />
+    Edit <strong v-html="contributionGithub" />
+    <template v-if="lang === 'en'">
+      or <strong v-html="contributionLanguage" />
+    </template>
+    on GitHub!
   </div>
 </template>
 
@@ -27,17 +31,18 @@
     computed: {
       ...get('route/params@*'),
       contributionGuide () {
-        return this.parseLink('', 'contribute', `/${this.lang}/getting-started/contributing`)
+        return this.parseLink(this.lang, 'contribute', '/getting-started/contributing')
       },
-      contributionLanguageCrowdin () {
-        return this.parseLink('', 'Crowdin', `/${this.namespace}/${this.page}`)
+      contributionLanguage () {
+        const page = `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/lang/en/${this.file}.json`
+        return this.parseLink('', 'Content', page)
       },
-      contributionPageGithub () {
-        return this.parseLink('', 'Edit this page on GitHub!', this.contributionPageLink)
+      contributionGithub () {
+        const page = `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/data/pages/${this.file}.pug`
+        return this.parseLink('', 'Layout', page)
       },
-      contributionPageLink () {
-        const file = `${this.namespace}/${upperFirst(camelCase(this.page))}.json`
-        return `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/data/pages/${file}`
+      file () {
+        return `${this.namespace}/${upperFirst(camelCase(this.page))}`
       },
     },
 

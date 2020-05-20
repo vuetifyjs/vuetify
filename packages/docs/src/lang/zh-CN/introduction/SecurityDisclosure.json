@@ -1,0 +1,18 @@
+{
+  "heading": "# 安全披露程序",
+  "headingText": "本文件概述了 Vuetify 项目的安全程序和一般政策。",
+  "bugHeading": "## 报告错误",
+  "bugText1": "Vuetify 团队和社区认真对待 Vuetify 中的所有安全漏洞。我们感谢您的努力和负责任的披露，并将尽一切努力感谢您的贡献。",
+  "bugText2": "若要报告安全问题，请发送电子邮件至 [security@vuetifyjs.com](mailto:security@vuetifyjs.com?subject=SECURITY)，并在主题行中注明 **\"SECURITY \"**。",
+  "bugText3": "Vuetify 团队将发送回复，说明下一步处理您的报告的步骤。在对您的报告作出初步回复后，安全团队将随时向您通报修复的进展和完整的公告，并可能要求您提供额外的信息或指导。",
+  "bugText4": "向维护该模块的人员或团队报告第三方模块的安全漏洞。你也可以通过 [Node Security Project](https://nodesecurity.io/report) 报告漏洞。",
+  "policyHeading": "## 披露政策",
+  "policyText1": "当安全团队收到安全错误报告时，他们会将其分配给一个主要处理人。此人将协调修复和发布过程，包括以下步骤：",
+  "policyText2": [
+    "确认问题并确定受影响的版本。",
+    "审计代码，以发现任何潜在的类似问题。",
+    "为所有仍在维护中的版本准备修复。这些修复将尽快发布到 npm 中。"
+  ],
+  "commentsHeading": "## 对本政策的建议",
+  "commentsText1": "如果您有关于如何改进这个过程的建议，请使用 [issue creator](https://issues.vuetifyjs.com) 提交拉取请求。"
+}

@@ -2,17 +2,12 @@
 
 import Vue from 'vue'
 import Vuetify from 'vuetify/lib'
+import minifyTheme from 'minify-css-string'
 
 Vue.use(Vuetify)
 
 export default new Vuetify({
   theme: {
-    options: {
-      minifyTheme: function (css) {
-        return process.env.NODE_ENV === 'production'
-          ? css.replace(/[\r\n|\r|\n]/g, '')
-          : css
-      },
-    },
+    options: { minifyTheme },
   },
 })

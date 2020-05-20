@@ -3,7 +3,7 @@
   "headingText": "`v-mutate` 指令使用了 [Mutation Observer API](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver)。它提供了一个易于使用的接口，用于检测元素被更新的时间。",
   "examples": {
     "usage": {
-      "desc": "默认情况下，`v-mutate` 指令将启用 [Mutation Observer API](https://developer.mozilla.org/en-US/docs/Web/ADI/MutationObserver) 中所有可用的选项。 这可以通过两种方式之一加以修改。你可以使用 **handler** 和 **options** 传递对象，也可以使用 `v-mutate.attr.sub=\"onMutate\"` 的 _modifier_ 属性"
+      "desc": "默认情况下，`v-mutate` 指令将启用 [Mutation Observer API](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) 中所有可用的选项。 这可以通过两种方式之一加以修改。你可以使用 **handler** 和 **options** 传递对象，也可以使用 `v-mutate.attr.sub=\"onMutate\"` 的 _modifier_ 属性"
     },
     "once": {
       "heading": "### Modifiers",
@@ -12,10 +12,10 @@
   },
   "options": {
     "modifiers.once": "将只调用提供的用户回调一次，然后指令将被解除绑定。",
-    "modifiers.attr": "设置 [attributes](https://developer.mozilla.org/en-US/docs/Web/ADI/MutationObserverInit/attributes) 为 true。",
-    "modifiers.child": "设置 [childList](https://developer.mozilla.org/en-US/docs/Web/ADI/MutationObserverInit/childList) 为 true。",
-    "modifiers.char": "设置 [characterData](https://developer.mozilla.org/en-US/docs/Web/ADI/MutationObserverInit/characterData) 为 true。",
-    "modifiers.sub": "设置 [subtree](https://developer.mozilla.org/en-US/docs/Web/ADI/MutationObserver/observeve#Paramets) 为true。",
+    "modifiers.attr": "设置 [attributes](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/attributes) 为 true。",
+    "modifiers.child": "设置 [childList](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/childList) 为 true。",
+    "modifiers.char": "设置 [characterData](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/characterData) 为 true。",
+    "modifiers.sub": "设置 [subtree](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/observeve#Paramets) 为true。",
     "value": "当目标元素更新时要调用的函数。"
   }
 }
