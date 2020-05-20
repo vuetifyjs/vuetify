@@ -60,7 +60,7 @@ export default baseMixins.extend<options>().extend(
       }
     },
     hasRealLink (): boolean {
-      return this.href && !this.href.startsWith('#')
+      return this.href && this.href[0] !== '#'
     },
     value (): any {
       let to = this.to || this.href || ''
