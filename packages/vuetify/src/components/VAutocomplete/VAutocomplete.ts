@@ -83,7 +83,17 @@ export default VSelect.extend({
     filteredItems (): object[] {
       if (!this.isSearching || this.noFilter || this.internalSearch == null) return this.allItems
 
-      return this.allItems.filter(item => this.filter(item, String(this.internalSearch), String(this.getText(item))))
+      return this.allItems.filter(item => {
+        const text = this.getText(item)
+
+        // Remove items without text to match
+        if (
+          text == null ||
+          typeof text === 'object'
+        ) return false
+
+        return this.filter(item, String(this.internalSearch), String(text))
+      })
     },
     internalSearch: {
       get (): string | undefined {

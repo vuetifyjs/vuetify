@@ -21,7 +21,9 @@ function missingMaterialIcons(ids) {
 Vue.use(Vuetify, {
   // iconfont: 'md',
   icons: {
-    ...missingMaterialIcons(['visibility', 'visibility_off'])
-    // This will enable 'visibility_outline', 'visibility_off_round' and so on.
+    values: {
+      ...missingMaterialIcons(['visibility', 'visibility_off'])
+      // This will enable 'visibility_outline', 'visibility_off_round' and so on.
+    }
   }
 })
