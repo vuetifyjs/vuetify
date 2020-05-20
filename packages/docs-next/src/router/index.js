@@ -21,11 +21,23 @@ const router = new Router({
   },
   routes: [
     {
-      path: '/',
-      // Layouts allow you to define different
-      // structures for different view
-      component: () => import('@/layouts/default/Index.vue'),
-      children: [],
+      path: '/:lang',
+      component: () => import('@/layouts/root/Index'),
+      children: [
+        {
+          path: ':category/:page',
+          // Layouts allow you to define different
+          // structures for different view
+          component: () => import('@/layouts/default/Index'),
+          children: [
+            {
+              path: '',
+              name: 'Documentation',
+              component: () => import('@/views/Documentation'),
+            },
+          ],
+        },
+      ],
     },
   ],
 })

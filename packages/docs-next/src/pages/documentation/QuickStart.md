@@ -8,7 +8,7 @@ url: getting-started/quick-start
 ---
 
 # Quick start
-Get started with Vuetify, the world’s most popular Vue.js framework for building feature rich, blazing fast applications.
+Get started with Vuetify, the world’s most popular Vue.js framework for building feature rich, blazing fast application.
 
 <carbon-ad />
 
@@ -43,7 +43,7 @@ vue ui
 
 This will start the Vue User Interface and open a [new window]() in your browser. On the left side of your screen, click on **Plugins**. Once navigated, search for Vuetify in the input field.
 
-![Install Vuetify Plugin](https://cdn.vuetifyjs.com/images/logos/vuetify-logo-light.png)
+![Install Vuetify Plugin](https://cdn.vuetifyjs.com/images/quick-start/vue_ui.png)
 
 ## Usage with Capacitor
 To use Vuetify with **Capacitor**, add the [Capacitor]() plugin via Vue CLI:
