@@ -2,16 +2,38 @@
 // Utilities
 const Mode = require('frontmatter-markdown-loader/mode')
 const md = require('markdown-it')({
-  // html: true,
-  // xhtmlOut: true,
-  // breaks: true,
+  html: true,
+  xhtmlOut: true,
+  breaks: true,
 })
+
+function VuetifyMDCompiler (md) {
+  addHeadingRules(md)
+}
+
+function addHeadingRules (md) {
+  const map = {
+    h1: 'text-h3',
+    h2: 'text-h4',
+    h3: 'text-h5',
+  }
+
+  md.renderer.rules.heading_open = (tokens, idx, options, env, self) => {
+    const token = tokens[idx]
+
+    token.attrSet('class', map[token.tag])
+
+    return self.renderToken(tokens, idx, options)
+  }
+}
 
 module.exports = {
   devServer: {
     disableHostCheck: true,
   },
   chainWebpack: config => {
+    VuetifyMDCompiler(md)
+
     config.module
       .rule('markdown')
       .test(/\.md$/)
@@ -20,30 +42,16 @@ module.exports = {
         .tap(options => {
           return {
             markdown: body => {
-              return VuetifyMDCompiler(body)
+              return md.render(body)
             },
             mode: [Mode.VUE_COMPONENT],
+            vue: {
+              root: 'markdown-body',
+            },
           }
         })
   },
   transpileDependencies: [
     'vuetify',
   ],
-}
-
-function VuetifyMDCompiler (body) {
-  const page = []
-
-  const render = md.renderer.rules.link_open || function (tokens, idx, options, env, self) {
-    return self.renderToken(tokens, idx, options)
-  }
-
-  md.renderer.rules.heading_open = (tokens, idx, options, env, self) => {
-    tokens[idx].attrSet('class', 'text-h3')
-
-    // console.log(args)
-    return render(tokens, idx, options, env, self)
-  }
-
-  return md.render(body)
 }
