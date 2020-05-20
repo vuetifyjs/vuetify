@@ -149,79 +149,95 @@ describe('VTab.ts', () => {
   })
 
   // eslint-disable-next-line max-statements
-  it('should focus and possibly click tab on keydown depending on activation mode', () => {
-    const keydowns = ['keydown.home', 'keydown.end', 'keydown.right', 'keydown.left', 'keydown.down', 'keydown.up']
-    const activationModes = ['automatic', 'manual']
-    const verticals = [true, false]
-    for (const keydown of keydowns) {
-      for (const activationMode of activationModes) {
-        for (const vertical of verticals) {
-          const getFirstTab = jest.fn()
-          const getLastTab = jest.fn()
-          const getNextTab = jest.fn()
-          const getPrevTab = jest.fn()
-          const tab = {
-            $el: {
-              click: jest.fn(),
-              focus: jest.fn(),
-            },
-          }
-          getFirstTab.mockReturnValue(tab)
-          getLastTab.mockReturnValue(tab)
-          getNextTab.mockReturnValue(tab)
-          getPrevTab.mockReturnValue(tab)
-          const wrapper = mountFunction({
-            provide: {
-              activationMode,
-              vertical,
-            },
-            methods: {
-              getFirstTab,
-              getLastTab,
-              getNextTab,
-              getPrevTab,
-            },
-          })
+  it.each([
+    ['keydown.home', 'automatic', true],
+    ['keydown.home', 'automatic', false],
+    ['keydown.home', 'manual', true],
+    ['keydown.home', 'manual', false],
+    ['keydown.end', 'automatic', true],
+    ['keydown.end', 'automatic', false],
+    ['keydown.end', 'manual', true],
+    ['keydown.end', 'manual', false],
+    ['keydown.right', 'automatic', true],
+    ['keydown.right', 'automatic', false],
+    ['keydown.right', 'manual', true],
+    ['keydown.right', 'manual', false],
+    ['keydown.left', 'automatic', true],
+    ['keydown.left', 'automatic', false],
+    ['keydown.left', 'manual', true],
+    ['keydown.left', 'manual', false],
+    ['keydown.down', 'automatic', true],
+    ['keydown.down', 'automatic', false],
+    ['keydown.down', 'manual', true],
+    ['keydown.down', 'manual', false],
+    ['keydown.up', 'automatic', true],
+    ['keydown.up', 'automatic', false],
+    ['keydown.up', 'manual', true],
+    ['keydown.up', 'manual', false],
+  ])('should focus and possibly click tab on keydown depending on activation mode (%s, %s, %s)', (keydown, activationMode, vertical) => {
+    const getFirstTab = jest.fn()
+    const getLastTab = jest.fn()
+    const getNextTab = jest.fn()
+    const getPrevTab = jest.fn()
+    const tab = {
+      $el: {
+        click: jest.fn(),
+        focus: jest.fn(),
+      },
+    }
+    getFirstTab.mockReturnValue(tab)
+    getLastTab.mockReturnValue(tab)
+    getNextTab.mockReturnValue(tab)
+    getPrevTab.mockReturnValue(tab)
+    const wrapper = mountFunction({
+      provide: {
+        activationMode,
+        vertical,
+      },
+      methods: {
+        getFirstTab,
+        getLastTab,
+        getNextTab,
+        getPrevTab,
+      },
+    })
 
-          expect(wrapper.emitted().keydown).not.toBeDefined()
+    expect(wrapper.emitted().keydown).not.toBeDefined()
 
-          wrapper.trigger(keydown)
+    wrapper.trigger(keydown)
 
-          expect(wrapper.emitted().keydown).toBeDefined()
+    expect(wrapper.emitted().keydown).toBeDefined()
 
-          if (keydown === 'keydown.home') {
-            expect(getFirstTab).toHaveBeenCalled()
-          } else {
-            expect(getFirstTab).not.toHaveBeenCalled()
-          }
-          if (keydown === 'keydown.end') {
-            expect(getLastTab).toHaveBeenCalled()
-          } else {
-            expect(getLastTab).not.toHaveBeenCalled()
-          }
-          if ((keydown === 'keydown.right' && !vertical) || (keydown === 'keydown.down' && vertical)) {
-            expect(getNextTab).toHaveBeenCalled()
-          } else {
-            expect(getNextTab).not.toHaveBeenCalled()
-          }
-          if ((keydown === 'keydown.left' && !vertical) || (keydown === 'keydown.up' && vertical)) {
-            expect(getPrevTab).toHaveBeenCalled()
-          } else {
-            expect(getPrevTab).not.toHaveBeenCalled()
-          }
+    if (keydown === 'keydown.home') {
+      expect(getFirstTab).toHaveBeenCalled()
+    } else {
+      expect(getFirstTab).not.toHaveBeenCalled()
+    }
+    if (keydown === 'keydown.end') {
+      expect(getLastTab).toHaveBeenCalled()
+    } else {
+      expect(getLastTab).not.toHaveBeenCalled()
+    }
+    if ((keydown === 'keydown.right' && !vertical) || (keydown === 'keydown.down' && vertical)) {
+      expect(getNextTab).toHaveBeenCalled()
+    } else {
+      expect(getNextTab).not.toHaveBeenCalled()
+    }
+    if ((keydown === 'keydown.left' && !vertical) || (keydown === 'keydown.up' && vertical)) {
+      expect(getPrevTab).toHaveBeenCalled()
+    } else {
+      expect(getPrevTab).not.toHaveBeenCalled()
+    }
 
-          const horizontalKeys = ['keydown.right', 'keydown.left']
-          const verticalKeys = ['keydown.down', 'keydown.up']
-          if ((horizontalKeys.includes(keydown) && vertical) || (verticalKeys.includes(keydown) && !vertical)) return
+    const horizontalKeys = ['keydown.right', 'keydown.left']
+    const verticalKeys = ['keydown.down', 'keydown.up']
+    if ((horizontalKeys.includes(keydown) && vertical) || (verticalKeys.includes(keydown) && !vertical)) return
 
-          expect(tab.$el.focus).toHaveBeenCalled()
-          if (activationMode === 'automatic') {
-            expect(tab.$el.click).toHaveBeenCalled()
-          } else {
-            expect(tab.$el.click).not.toHaveBeenCalled()
-          }
-        }
-      }
+    expect(tab.$el.focus).toHaveBeenCalled()
+    if (activationMode === 'automatic') {
+      expect(tab.$el.click).toHaveBeenCalled()
+    } else {
+      expect(tab.$el.click).not.toHaveBeenCalled()
     }
   })
 })
