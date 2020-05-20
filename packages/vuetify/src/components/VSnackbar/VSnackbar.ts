@@ -46,6 +46,18 @@ export default mixins(
         'v-snack--vertical': this.vertical,
       }
     },
+    styles (): object {
+      const {
+        bar, top, right, footer, insetFooter, bottom, left,
+      } = this.$vuetify.application
+
+      return {
+        paddingTop: `${top + bar}px`,
+        paddingRight: `${right}px`,
+        paddingBottom: `${footer + insetFooter + bottom}px`,
+        paddingLeft: `${left}px`,
+      }
+    },
   },
 
   watch: {
@@ -84,6 +96,7 @@ export default mixins(
         staticClass: 'v-snack',
         class: this.classes,
         on: this.$listeners,
+        style: this.styles,
       }, [
         h('div', this.setBackgroundColor(this.color, {
           staticClass: 'v-snack__wrapper',

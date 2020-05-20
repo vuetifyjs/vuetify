@@ -14,7 +14,22 @@ describe('VSnackbar.ts', () => {
 
   beforeEach(() => {
     mountFunction = (options = {} as MountOptions<Instance>) => {
-      return mount(VSnackbar, options)
+      return mount(VSnackbar, {
+        mocks: {
+          $vuetify: {
+            application: {
+              bar: 24,
+              top: 64,
+              left: 256,
+              right: 256,
+              footer: 48,
+              insetFooter: 32,
+              bottom: 56,
+            },
+          },
+        },
+        ...options,
+      })
     }
   })
 
@@ -109,5 +124,15 @@ describe('VSnackbar.ts', () => {
 
     expect(wrapper.vm.isActive).toBe(false)
     expect(value).toHaveBeenCalledWith(false)
+  })
+
+  it('should be the same', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: true,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })
