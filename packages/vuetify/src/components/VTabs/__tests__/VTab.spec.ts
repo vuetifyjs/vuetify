@@ -89,41 +89,46 @@ describe('VTab.ts', () => {
     expect(toggle).toHaveBeenCalledTimes(1)
   })
 
-  it('should toggle on click, keydown.enter, and keydown.space', () => {
-    const eventNames = ['click', 'keydown.enter', 'keydown.space']
-    const disableds = [true, false]
-    const hrefs = [undefined, '#foo']
-    for (const eventName of eventNames) {
-      for (const disabled of disableds) {
-        for (const href of hrefs) {
-          const event = { preventDefault: jest.fn() }
-          const toggle = jest.fn()
-          const wrapper = mountFunction({
-            propsData: {
-              disabled,
-              href,
-            },
-            methods: { toggle },
-          })
+  it.each([
+    ['click', true, undefined],
+    ['click', true, '#foo'],
+    ['click', false, undefined],
+    ['click', false, '#foo'],
+    ['keydown.enter', true, undefined],
+    ['keydown.enter', true, '#foo'],
+    ['keydown.enter', false, undefined],
+    ['keydown.enter', false, '#foo'],
+    ['keydown.space', true, undefined],
+    ['keydown.space', true, '#foo'],
+    ['keydown.space', false, undefined],
+    ['keydown.space', false, '#foo'],
+    // eslint-disable-next-line max-statements
+  ])('should (not) toggle (%s, %s, %s)', (eventName, disabled, href) => {
+    const event = { preventDefault: jest.fn() }
+    const toggle = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        disabled,
+        href,
+      },
+      methods: { toggle },
+    })
 
-          wrapper.trigger(eventName, event)
+    wrapper.trigger(eventName, event)
 
-          if (href) {
-            expect(event.preventDefault).toHaveBeenCalled()
-            if (disabled) {
-              expect(toggle).not.toHaveBeenCalled()
-            } else {
-              expect(toggle).toHaveBeenCalled()
-            }
-          } else if (disabled) {
-            expect(event.preventDefault).toHaveBeenCalled()
-            expect(toggle).not.toHaveBeenCalled()
-          } else {
-            expect(event.preventDefault).toHaveBeenCalled()
-            expect(toggle).toHaveBeenCalled()
-          }
-        }
+    if (href) {
+      expect(event.preventDefault).toHaveBeenCalled()
+      if (disabled) {
+        expect(toggle).not.toHaveBeenCalled()
+      } else {
+        expect(toggle).toHaveBeenCalled()
       }
+    } else if (disabled) {
+      expect(event.preventDefault).toHaveBeenCalled()
+      expect(toggle).not.toHaveBeenCalled()
+    } else {
+      expect(event.preventDefault).toHaveBeenCalled()
+      expect(toggle).toHaveBeenCalled()
     }
   })
 
@@ -148,7 +153,6 @@ describe('VTab.ts', () => {
     expect(wrapper.vm.getPrevTab()).toBe(prevTab)
   })
 
-  // eslint-disable-next-line max-statements
   it.each([
     ['keydown.home', 'automatic', true],
     ['keydown.home', 'automatic', false],
@@ -174,6 +178,7 @@ describe('VTab.ts', () => {
     ['keydown.up', 'automatic', false],
     ['keydown.up', 'manual', true],
     ['keydown.up', 'manual', false],
+    // eslint-disable-next-line max-statements
   ])('should focus and possibly click tab on keydown depending on activation mode (%s, %s, %s)', (keydown, activationMode, vertical) => {
     const getFirstTab = jest.fn()
     const getLastTab = jest.fn()
