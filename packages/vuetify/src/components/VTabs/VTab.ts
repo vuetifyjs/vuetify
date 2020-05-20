@@ -1,3 +1,6 @@
+// Components
+import VTabsBar from './VTabsBar'
+
 // Mixins
 import { factory as GroupableFactory } from '../../mixins/groupable'
 import Routable from '../../mixins/routable'
@@ -21,9 +24,8 @@ const baseMixins = mixins(
 
 interface options extends ExtractVue<typeof baseMixins> {
   $el: HTMLElement
-  activationMode: string
   items: any[]
-  vertical: boolean
+  tabsBar: InstanceType<typeof VTabsBar>
 }
 
 export default baseMixins.extend<options>().extend(
@@ -32,14 +34,8 @@ export default baseMixins.extend<options>().extend(
   name: 'v-tab',
 
   inject: {
-    activationMode: {
-      default: 'manual',
-    },
     items: {
       default: () => [],
-    },
-    vertical: {
-      default: false,
     },
   },
 
@@ -131,7 +127,7 @@ export default baseMixins.extend<options>().extend(
       this.$emit('keydown', e)
 
       const { down, end, enter, home, left, right, space, up } = keyCodes
-      const isVertical = this.vertical
+      const isVertical = this.tabsBar.vertical
       let targetTab
 
       switch (e.keyCode) {
@@ -164,7 +160,7 @@ export default baseMixins.extend<options>().extend(
         e.preventDefault()
         targetTab.$el.focus()
         // Do not automatically click tab if it has a real link
-        if (this.activationMode === 'automatic' && !targetTab.hasRealLink) targetTab.$el.click()
+        if (this.tabsBar.activationMode === 'automatic' && !targetTab.hasRealLink) targetTab.$el.click()
       }
     },
   },

@@ -27,10 +27,8 @@ export default mixins(
 
   provide () {
     return {
-      activationMode: this.activationMode,
       items: this.items,
       tabsBar: this,
-      vertical: this.vertical,
     }
   },
 

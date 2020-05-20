@@ -107,6 +107,12 @@ describe('VTab.ts', () => {
     const event = { preventDefault: jest.fn() }
     const toggle = jest.fn()
     const wrapper = mountFunction({
+      provide: {
+        tabsBar: {
+          register: () => {},
+          unregister: () => {},
+        },
+      },
       propsData: {
         disabled,
         href,
@@ -196,8 +202,12 @@ describe('VTab.ts', () => {
     getPrevTab.mockReturnValue(tab)
     const wrapper = mountFunction({
       provide: {
-        activationMode,
-        vertical,
+        tabsBar: {
+          activationMode,
+          register: () => {},
+          unregister: () => {},
+          vertical,
+        },
       },
       methods: {
         getFirstTab,
