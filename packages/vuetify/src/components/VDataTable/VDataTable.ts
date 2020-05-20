@@ -12,7 +12,7 @@ import {
   DataItemsPerPageOption,
   ItemGroup,
   RowClassFunction,
-} from 'types'
+} from 'vuetify/types'
 import { PropValidator } from 'vue/types/options'
 
 // Components

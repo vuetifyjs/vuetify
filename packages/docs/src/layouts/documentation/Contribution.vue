@@ -31,7 +31,7 @@
     computed: {
       ...get('route/params@*'),
       contributionGuide () {
-        return this.parseLink('', 'contribute', `/getting-started/contributing`)
+        return this.parseLink(this.lang, 'contribute', '/getting-started/contributing')
       },
       contributionLanguage () {
         const page = `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/lang/en/${this.file}.json`

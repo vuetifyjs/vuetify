@@ -13,7 +13,7 @@ import {
   createNativeLocaleFormatter,
   VTime,
 } from '../util/timestamp'
-import { CalendarTimestamp, CalendarFormatter } from 'types'
+import { CalendarTimestamp, CalendarFormatter } from 'vuetify/types'
 
 /* @vue/component */
 export default CalendarBase.extend({

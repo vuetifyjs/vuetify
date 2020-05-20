@@ -14,7 +14,7 @@ import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
 import Vue, { VNode, PropType } from 'vue'
-import { DatePickerFormatter } from 'types'
+import { DatePickerFormatter } from 'vuetify/types'
 
 interface options extends Vue {
   $el: HTMLElement

@@ -35,6 +35,7 @@
       { "text": "accessibility", "to": "accessibility" },
       { "text": "aLaCarte", "to": "a-la-carte" },
       { "text": "breakpoints", "to": "breakpoints" },
+      { "new": true, "text": "globalConfig", "to": "global-config" },
       { "text": "icons", "to": "icons" },
       { "text": "i18n", "to": "internationalization" },
       { "text": "rtl", "to": "rtl" },

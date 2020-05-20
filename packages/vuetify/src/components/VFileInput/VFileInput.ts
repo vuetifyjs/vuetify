@@ -13,6 +13,7 @@ import { PropValidator } from 'vue/types/options'
 // Utilities
 import { deepEqual, humanReadableFileSize, wrapInArray } from '../../util/helpers'
 import { consoleError } from '../../util/console'
+import { mergeStyles } from '../../util/mergeData'
 
 export default VTextField.extend({
   name: 'v-file-input',
@@ -36,6 +37,7 @@ export default VTextField.extend({
       type: String,
       default: '$vuetify.fileInput.counter',
     },
+    hideInput: Boolean,
     placeholder: String,
     prependIcon: {
       type: String,
@@ -179,6 +181,18 @@ export default VTextField.extend({
           },
         },
       }, [text]))
+    },
+    genControl () {
+      const render = VTextField.options.methods.genControl.call(this)
+
+      if (this.hideInput) {
+        render.data!.style = mergeStyles(
+          render.data!.style,
+          { display: 'none' }
+        )
+      }
+
+      return render
     },
     genInput () {
       const input = VTextField.options.methods.genInput.call(this)

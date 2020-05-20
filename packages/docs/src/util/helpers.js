@@ -56,7 +56,7 @@ export function parseLink (match, text, link) {
 
   if (isInternal && !isSamePage) {
     // Reset link
-    link = `/${preferredLanguage}`
+    link = `/${preferredLanguage()}`
 
     // Remove leading/trailing slashes
     if (url) link += `/${url.replace(/^\/|\/$/, '')}/`

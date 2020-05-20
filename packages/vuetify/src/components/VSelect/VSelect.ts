@@ -26,7 +26,7 @@ import { consoleError } from '../../util/console'
 // Types
 import mixins from '../../util/mixins'
 import { VNode, VNodeDirective, PropType, VNodeData } from 'vue'
-import { SelectItemKey } from 'types'
+import { SelectItemKey } from 'vuetify/types'
 
 export const defaultMenuProps = {
   closeOnClick: false,
