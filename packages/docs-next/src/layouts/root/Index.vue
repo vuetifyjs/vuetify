@@ -7,7 +7,3 @@
     //
   }
 </script>
-
-<style>
-  /*  */
-</style>

@@ -11,7 +11,7 @@
 
 <script>
   export default {
-    name: 'Btn',
+    name: 'AppBtn',
 
     props: {
       color: {

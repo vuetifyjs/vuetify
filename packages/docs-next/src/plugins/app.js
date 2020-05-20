@@ -7,21 +7,17 @@
 
 // Imports
 import Vue from 'vue'
-import {
-  camelCase,
-  upperFirst,
-} from 'lodash'
 
 // Get all .vue files within `src/components/app`
-const requireComponent = require.context('@/components/app', true, /\.vue$/)
+const requireComponent = require.context('@/components', true, /\.vue$/)
 
 for (const file of requireComponent.keys()) {
   const componentConfig = requireComponent(file)
-  const name = file
-    .replace(/index.js/, '')
-    .replace(/^\.\//, '')
-    .replace(/\.\w+$/, '')
-  const componentName = upperFirst(camelCase(name))
 
-  Vue.component(`App${componentName}`, componentConfig.default || componentConfig)
+  console.log(componentConfig.default.name)
+
+  Vue.component(
+    componentConfig.default.name,
+    componentConfig.default || componentConfig,
+  )
 }

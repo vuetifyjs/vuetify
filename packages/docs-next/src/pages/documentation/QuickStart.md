@@ -262,11 +262,11 @@ $ yarn capacitor:serve
 [Looking for Web Developer jobs? Try Jooble](https://jooble.org/jobs-web-developer)
 
 ## Related Topics
-<related-topics></related-topics>
+<related-topics />
 
 ## Up Next
-<up-next></up-next>
+<up-next />
 
-<vuetify-ad></vuetify-ad>
+<vuetify-ad />
 
-<contribute></contribute>
+<contribute />
