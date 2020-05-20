@@ -22,7 +22,7 @@ export default mixins<options>().extend({
   props: {
     headers: {
       type: Array as PropType<DataTableHeader[]>,
-      required: true,
+      default: () => ([]),
     },
     options: {
       type: Object as PropType<DataOptions>,

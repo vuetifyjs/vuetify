@@ -1,13 +1,22 @@
+// Styles
 import './VDataTableHeader.sass'
 
-import Vue from 'vue'
-import dedupeModelListeners from '../../util/dedupeModelListeners'
-import rebuildSlots from '../../util/rebuildFunctionalSlots'
-
+// Components
 import VDataTableHeaderMobile from './VDataTableHeaderMobile'
 import VDataTableHeaderDesktop from './VDataTableHeaderDesktop'
+
+// Mixins
 import header from './mixins/header'
 
+// Utilities
+import dedupeModelListeners from '../../util/dedupeModelListeners'
+import mergeData from '../../util/mergeData'
+import rebuildSlots from '../../util/rebuildFunctionalSlots'
+
+// Types
+import Vue from 'vue'
+
+/* @vue/component */
 export default Vue.extend({
   name: 'v-data-table-header',
 
@@ -21,6 +30,8 @@ export default Vue.extend({
   render (h, { props, data, slots }) {
     dedupeModelListeners(data)
     const children = rebuildSlots(slots(), h)
+
+    data = mergeData(data, { props })
 
     if (props.mobile) {
       return h(VDataTableHeaderMobile, data, children)
