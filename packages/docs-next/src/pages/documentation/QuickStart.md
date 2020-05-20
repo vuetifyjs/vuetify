@@ -10,7 +10,7 @@ url: getting-started/quick-start
 # Quick start
 Get started with Vuetify, the world’s most popular Vue.js framework for building feature rich, blazing fast application.
 
-<carbon-ad />
+<carbon-ad></carbon-ad>
 
 ## Vue CLI Install
 
@@ -59,8 +59,8 @@ $ yarn capacitor:serve
 [Looking for Web Developer jobs? Try Jooble](https://jooble.org/jobs-web-developer)
 
 ## Up Next
-<up-next />
+<up-next></up-next>
 
-<vuetify-ad />
+<vuetify-ad></vuetify-ad>
 
-<contribute />
+<contribute></contribute>
