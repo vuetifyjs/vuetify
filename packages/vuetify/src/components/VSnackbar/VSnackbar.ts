@@ -20,10 +20,7 @@ export default mixins(
   name: 'v-snackbar',
 
   props: {
-    app: {
-      type: Boolean,
-      default: false,
-    },
+    app: Boolean,
     multiLine: Boolean,
     // TODO: change this to closeDelay to match other API in delayable.js
     timeout: {
