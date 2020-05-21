@@ -1,13 +1,9 @@
-const {
-  addBlockQuoteRules,
-  addHeadingRules,
-  addImageRules,
-} = require('./rules')
+const rules = require('./rules')
 
 function VuetifyMDCompiler (md) {
-  addBlockQuoteRules(md)
-  addHeadingRules(md)
-  addImageRules(md)
+  for (const key in rules) {
+    rules[key](md)
+  }
 }
 
 module.exports = {
