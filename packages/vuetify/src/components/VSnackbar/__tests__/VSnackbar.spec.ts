@@ -126,9 +126,20 @@ describe('VSnackbar.ts', () => {
     expect(value).toHaveBeenCalledWith(false)
   })
 
-  it('should be the same', () => {
+  it('should be the same without app prop', () => {
     const wrapper = mountFunction({
       propsData: {
+        value: true,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should be the same with app prop', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        app: true,
         value: true,
       },
     })

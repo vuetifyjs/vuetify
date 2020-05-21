@@ -20,6 +20,10 @@ export default mixins(
   name: 'v-snackbar',
 
   props: {
+    app: {
+      type: Boolean,
+      default: false,
+    },
     multiLine: Boolean,
     // TODO: change this to closeDelay to match other API in delayable.js
     timeout: {
@@ -37,6 +41,7 @@ export default mixins(
     classes (): object {
       return {
         'v-snack--active': this.isActive,
+        'v-snack--app': this.app,
         'v-snack--absolute': this.absolute,
         'v-snack--bottom': this.bottom || !this.top,
         'v-snack--left': this.left,
@@ -47,6 +52,8 @@ export default mixins(
       }
     },
     styles (): object {
+      if (!this.app) return {}
+
       const {
         bar, top, right, footer, insetFooter, bottom, left,
       } = this.$vuetify.application
