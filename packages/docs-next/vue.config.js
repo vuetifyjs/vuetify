@@ -2,9 +2,7 @@
 // Utilities
 const Mode = require('frontmatter-markdown-loader/mode')
 const prism = require('markdown-it-prism')
-const md = require('markdown-it')({
-  html: true,
-}).use(prism)
+const md = require('markdown-it')().use(prism)
 const { VuetifyMDCompiler } = require('./build/vuetify-md')
 
 module.exports = {
