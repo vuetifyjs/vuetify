@@ -18,6 +18,7 @@
     "vuex": "^3.4.0"
   },
   "devDependencies": {
+    "@mdi/js": "^5.2.45",
     "@vue/cli-plugin-babel": "~4.3.0",
     "@vue/cli-plugin-eslint": "~4.3.0",
     "@vue/cli-plugin-pwa": "~4.3.0",
