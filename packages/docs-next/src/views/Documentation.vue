@@ -38,14 +38,5 @@
         })
       })
     },
-
-    updated () {
-      load(this.$route, this.$store).then(component => {
-        const { attributes, vue } = component.default
-
-        this.attributes = attributes
-        this.page = vue.component
-      })
-    },
   }
 </script>

@@ -1,15 +1,18 @@
 import Vue from 'vue'
 import App from './App.vue'
-import vuetify from './plugins/vuetify'
 import './plugins'
+import { createVuetify } from './plugins/vuetify'
 import { createStore } from '@/store/index'
 import { createRouter } from '@/router/index'
 import './registerServiceWorker'
+
+import 'github-markdown-css/github-markdown.css'
 
 Vue.config.productionTip = false
 
 const store = createStore()
 const router = createRouter()
+const vuetify = createVuetify()
 
 new Vue({
   router,

@@ -3,11 +3,10 @@
 const Mode = require('frontmatter-markdown-loader/mode')
 const md = require('markdown-it')({
   html: true,
-  xhtmlOut: true,
-  breaks: true,
 })
 
 function VuetifyMDCompiler (md) {
+  addBlockQuoteRules(md)
   addHeadingRules(md)
 }
 
@@ -22,6 +21,35 @@ function addHeadingRules (md) {
     const token = tokens[idx]
 
     token.attrSet('class', map[token.tag])
+
+    return self.renderToken(tokens, idx, options)
+  }
+}
+
+function addBlockQuoteRules (md) {
+  md.renderer.rules.blockquote_open = (tokens, idx, options, env, self) => {
+    const token = tokens[idx]
+    const paragraph = tokens[idx + 1]
+    const inline = tokens[idx + 2]
+    const text = inline.children.find(child => child.type === 'text')
+    const [type, ...content] = text.content.split(' ')
+
+    paragraph.attrSet('class', 'mb-0')
+
+    text.content = content.join(' ')
+
+    token.attrSet('type', type)
+    token.type = 'inline'
+    token.tag = 'app-alert'
+
+    return self.renderToken(tokens, idx, options)
+  }
+
+  md.renderer.rules.blockquote_close = (tokens, idx, options, env, self) => {
+    const token = tokens[idx]
+
+    token.type = 'inline'
+    token.tag = 'app-alert'
 
     return self.renderToken(tokens, idx, options)
   }
@@ -42,12 +70,12 @@ module.exports = {
         .tap(options => {
           return {
             markdown: body => {
-              return md.render(body)
+              const render = md.render(body)
+
+              return render
             },
             mode: [Mode.VUE_COMPONENT],
-            vue: {
-              root: 'markdown-body',
-            },
+            vue: { root: 'markdown-body' },
           }
         })
   },
