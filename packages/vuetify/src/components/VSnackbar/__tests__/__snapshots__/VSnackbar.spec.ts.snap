@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VSnackbar.ts should be the same with app prop 1`] = `
-<div class="v-snack v-snack--active v-snack--app v-snack--bottom"
+<div class="v-snack v-snack--active v-snack--bottom"
      style="padding: 88px 256px 136px 256px;"
      name="v-snack-transition"
 >

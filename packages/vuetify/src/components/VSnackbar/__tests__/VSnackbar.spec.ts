@@ -19,12 +19,12 @@ describe('VSnackbar.ts', () => {
           $vuetify: {
             application: {
               bar: 24,
-              top: 64,
-              left: 256,
-              right: 256,
+              bottom: 56,
               footer: 48,
               insetFooter: 32,
-              bottom: 56,
+              left: 256,
+              right: 256,
+              top: 64,
             },
           },
         },
@@ -128,9 +128,7 @@ describe('VSnackbar.ts', () => {
 
   it('should be the same without app prop', () => {
     const wrapper = mountFunction({
-      propsData: {
-        value: true,
-      },
+      propsData: { value: true },
     })
 
     expect(wrapper.html()).toMatchSnapshot()

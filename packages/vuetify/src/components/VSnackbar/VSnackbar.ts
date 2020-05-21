@@ -38,7 +38,6 @@ export default mixins(
     classes (): object {
       return {
         'v-snack--active': this.isActive,
-        'v-snack--app': this.app,
         'v-snack--absolute': this.absolute,
         'v-snack--bottom': this.bottom || !this.top,
         'v-snack--left': this.left,
@@ -52,14 +51,20 @@ export default mixins(
       if (!this.app) return {}
 
       const {
-        bar, top, right, footer, insetFooter, bottom, left,
+        bar,
+        bottom,
+        footer,
+        insetFooter,
+        left,
+        right,
+        top,
       } = this.$vuetify.application
 
       return {
-        paddingTop: `${top + bar}px`,
-        paddingRight: `${right}px`,
-        paddingBottom: `${footer + insetFooter + bottom}px`,
+        paddingBottom: `${bottom + footer + insetFooter}px`,
         paddingLeft: `${left}px`,
+        paddingRight: `${right}px`,
+        paddingTop: `${bar + top}px`,
       }
     },
   },
