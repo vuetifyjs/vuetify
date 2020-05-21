@@ -1,17 +1,13 @@
 
 // Utilities
 const Mode = require('frontmatter-markdown-loader/mode')
-const prism = require('markdown-it-prism')
-const md = require('markdown-it')().use(prism)
-const { VuetifyMDCompiler } = require('./build/vuetify-md')
+const { md } = require('./build/vuetify-md')
 
 module.exports = {
   devServer: {
     disableHostCheck: true,
   },
   chainWebpack: config => {
-    VuetifyMDCompiler(md)
-
     config.module
       .rule('markdown')
       .test(/\.md$/)
@@ -19,11 +15,7 @@ module.exports = {
         .loader('frontmatter-markdown-loader')
         .tap(options => {
           return {
-            markdown: body => {
-              const render = md.render(body)
-
-              return render
-            },
+            markdown: body => md.render(body),
             mode: [Mode.VUE_COMPONENT],
             vue: { root: 'markdown-body' },
           }
