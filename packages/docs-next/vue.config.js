@@ -1,9 +1,10 @@
 
 // Utilities
 const Mode = require('frontmatter-markdown-loader/mode')
+const prism = require('markdown-it-prism')
 const md = require('markdown-it')({
   html: true,
-})
+}).use(prism)
 
 function VuetifyMDCompiler (md) {
   addBlockQuoteRules(md)

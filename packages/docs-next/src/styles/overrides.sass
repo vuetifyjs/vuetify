@@ -1,0 +1,19 @@
+pre[class*=language],
+code[class*=language]
+  font-size: 1rem
+  font-weight: 500
+  position: relative
+
+pre[class*=language]
+  &::after
+    color: hsla(0, 0%, 19%, 0.5)
+    font-family: inherit
+    font-size: 0.7rem
+    font-weight: 700
+    position: absolute
+    right: 8px
+    text-transform: uppercase
+    top: 4px
+
+pre.language-bash::after
+  content: 'sh'

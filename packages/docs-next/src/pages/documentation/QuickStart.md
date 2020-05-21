@@ -18,7 +18,7 @@ Get started with Vuetify, the world’s most popular Vue.js framework for buildi
 
 If you have not already created a new Vue.js project using **Vue CLI**, you can do so by typing:
 
-```sh
+```bash
 vue create my-app
 # navigate to new project directory
 cd my-app
@@ -26,14 +26,14 @@ cd my-app
 
 Now that you have an instantiated project, you can add the Vuetify [Vue CLI package]() using the cli.
 
-```sh
+```bash
 vue add vuetify
 ```
 
 ### Vue UI install
 Vuetify can also be installed using **Vue UI**, the new visual application for Vue CLI. Ensure that you have the latest version of Vue CLI installed, then from your terminal type:
 
-```sh
+```bash
 # ensure Vue CLI is >= 3.0
 vue --version
 
@@ -48,7 +48,7 @@ This will start the Vue User Interface and open a [new window]() in your browser
 ## Nuxt install
 Vuetify can be added by installing the Nuxt Vuetify module.
 
-```sh
+```bash
 yarn add @nuxtjs/vuetify -D
 # OR
 npm install @nuxtjs/vuetify -D
@@ -75,13 +75,13 @@ More information on installing Nuxt can be found on the official documentation.
 ## Webpack install
 To install Vuetify into a Webpack project you need to add a few dependencies:
 
-```sh
+```bash
 yarn add vuetify
 # OR
 npm install vuetify
 ```
 
-```sh
+```bash
 yarn add sass sass-loader fibers deepmerge -D
 # OR
 npm install sass sass-loader fibers deepmerge -D
@@ -213,7 +213,7 @@ To test using Vuetify.js without installing a template from Vue CLI, copy the co
 ## Usage with Electron
 To use Vuetify with Electron, add the electron-builder plugin via Vue CLI.
 
-```sh
+```bash
 # Install
 vue add electron-builder
 
@@ -225,14 +225,14 @@ yarn electron:serve
 ## Usage with PWA
 If you are creating a new app with Vue CLI, you have the option to select Progressive Web App (PWA) Support in the first prompt after initiating vue create my-app. This package can also be installed into existing Vue CLI projects by entering the following command:
 
-```sh
+```bash
 vue add pwa
 ```
 
 ## Usage with Cordova
 To use Vuetify with Cordova, add the Cordova plugin via Vue CLI:
 
-```sh
+```bash
 # If cordova is not already installed
 yarn global add cordova
 
@@ -251,7 +251,7 @@ yarn cordova-build-browser # Build Browser
 ## Usage with Capacitor
 To use Vuetify with **Capacitor**, add the [Capacitor]() plugin via Vue CLI:
 
-```sh
+```bash
 # Install
 $ vue add @nklayman/capacitor
 

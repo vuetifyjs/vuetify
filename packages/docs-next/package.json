@@ -41,6 +41,7 @@
     "http-server": "^0.12.3",
     "lodash": "^4.17.15",
     "markdown-it": "^11.0.0",
+    "markdown-it-prism": "^2.0.5",
     "marked": "^1.1.0",
     "sass": "^1.26.3",
     "sass-loader": "^8.0.2",
