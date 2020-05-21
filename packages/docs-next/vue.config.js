@@ -51,6 +51,21 @@ module.exports = {
           }
         })
   },
+  pwa: {
+    name: 'Vuetify-Docs',
+    themeColor: '#4DBA87',
+    msTileColor: '#000000',
+    appleMobileWebAppCapable: 'yes',
+    appleMobileWebAppStatusBarStyle: 'black',
+
+    // configure the workbox plugin
+    workboxPluginMode: 'GenerateSW',
+    workboxOptions: {
+      // swSrc is required in InjectManifest mode.
+      // swSrc: 'dist/service-worker.js',
+      // ...other Workbox options...
+    },
+  },
   transpileDependencies: [
     'vuetify',
   ],
