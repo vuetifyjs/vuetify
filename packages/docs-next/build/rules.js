@@ -1,3 +1,13 @@
+function addCodeRules (md) {
+  const fence = md.renderer.rules.fence
+
+  md.renderer.rules.fence = function (tokens, idx, options, env, self) {
+    const handler = fence || self.renderToken
+
+    return `<app-code>${handler(tokens, idx, options)}</app-code>`
+  }
+}
+
 function addImageRules (md) {
   md.renderer.rules.image = (tokens, idx, options, env, self) => {
     const token = tokens[idx]
@@ -56,6 +66,7 @@ function addBlockQuoteRules (md) {
 
 module.exports = {
   addBlockQuoteRules,
+  addCodeRules,
   addHeadingRules,
   addImageRules,
 }
