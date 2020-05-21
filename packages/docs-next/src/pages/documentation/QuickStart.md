@@ -43,7 +43,7 @@ vue ui
 
 This will start the Vue User Interface and open a [new window]() in your browser. On the left side of your screen, click on **Plugins**. Once navigated, search for Vuetify in the input field.
 
-![Install Vuetify Plugin](https://cdn.vuetifyjs.com/images/quick-start/vue_ui.png)
+![Install Vuetify Plugin](https://cdn.vuetifyjs.com/images/quick-start/vue_ui.png "Vue UI Vuetify Plugin")
 
 ## Nuxt install
 Vuetify can be added by installing the Nuxt Vuetify module.

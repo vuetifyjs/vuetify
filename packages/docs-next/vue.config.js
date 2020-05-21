@@ -8,6 +8,18 @@ const md = require('markdown-it')({
 function VuetifyMDCompiler (md) {
   addBlockQuoteRules(md)
   addHeadingRules(md)
+  addImageRules(md)
+}
+
+function addImageRules (md) {
+  md.renderer.rules.image = (tokens, idx, options, env, self) => {
+    const token = tokens[idx]
+    const alt = token.content
+    const src = token.attrGet('src')
+    const title = token.attrGet('title')
+
+    return `<app-img src="${src}" alt="${alt}" title="${title}" />`
+  }
 }
 
 function addHeadingRules (md) {
