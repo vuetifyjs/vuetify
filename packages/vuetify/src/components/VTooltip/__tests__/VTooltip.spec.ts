@@ -129,4 +129,16 @@ describe('VTooltip', () => {
     expect((setTimeout as any).mock.calls[1][1]).toBe(321)
     expect(cb).toHaveBeenCalledWith(false)
   })
+
+  it('should display the tooltip with a given opacity', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        opacity: 0.2,
+      },
+    })
+
+    expect(wrapper.vm.styles.opacity).toBe(0)
+    wrapper.setData({ isActive: 0.2 })
+    expect(wrapper.vm.styles.opacity).toBe(0.2)
+  })
 })

@@ -1,1 +1,5 @@
-{}
+{
+  "props": {
+    "opacity": "Verändert die Deckkraft des Tooltips, wenn dieser aktiv ist"
+  }
+}

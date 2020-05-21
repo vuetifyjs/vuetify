@@ -26,6 +26,7 @@
     "openOnClick": "Designates whether the tooltip should open on activator click",
     "openOnHover": "Designates whether the tooltip should open on activator hover",
     "tag": "Specifies a custom tag for the activator wrapper",
-    "transition": "Mixins.Transitionable.props.transition"
+    "transition": "Mixins.Transitionable.props.transition",
+    "opacity": "Controls the opacity of the tooltip when it is active"
   }
 }

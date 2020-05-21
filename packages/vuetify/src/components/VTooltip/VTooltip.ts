@@ -47,6 +47,10 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
     zIndex: {
       default: null,
     },
+    opacity: {
+      type: Number,
+      default: 0.9,
+    },
   },
 
   data: () => ({
@@ -132,7 +136,7 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
         left: this.calculatedLeft,
         maxWidth: convertToUnit(this.maxWidth),
         minWidth: convertToUnit(this.minWidth),
-        opacity: this.isActive ? 0.9 : 0,
+        opacity: this.isActive ? this.opacity : 0,
         top: this.calculatedTop,
         zIndex: this.zIndex || this.activeZIndex,
       }
