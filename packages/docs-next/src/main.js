@@ -6,8 +6,6 @@ import { createStore } from '@/store/index'
 import { createRouter } from '@/router/index'
 import './registerServiceWorker'
 
-import 'github-markdown-css/github-markdown.css'
-
 Vue.config.productionTip = false
 
 const store = createStore()
