@@ -287,13 +287,32 @@ const VCalendarDay = {
   future: 'boolean',
 }
 
+const VCalendarEvent = {
+  input: 'any',
+  start: VTimestamp,
+  startIdentifier: 'number',
+  startTimestampIdentifier: 'number',
+  end: VTimestamp,
+  endIdentifier: 'number',
+  endTimestampIdentifier: 'number',
+  allDay: 'boolean',
+  index: 'number',
+  category: 'string',
+}
+
 const VCalendarEventSlot = {
   event: 'any',
+  eventParsed: VCalendarEvent,
   day: VCalendarDay,
   outside: 'boolean',
   start: 'boolean',
   end: 'boolean',
   timed: 'boolean',
+  singleline: 'boolean',
+  overlapsNoon: 'boolean',
+  formatTime: '(time: VTimestamp, ampm: boolean): string',
+  timeSummary: '(): string',
+  eventSummary: '(): string',
 }
 
 const VTimestampWithTime = {
@@ -310,14 +329,55 @@ const VTimestampWithTime = {
   past: 'boolean',
   present: 'boolean',
   future: 'boolean',
-  timeToY: '(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number',
+  timeToY: '(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number | false',
+  timeDelta: '(time: string | number | {hour: number, minute: number}): number | false',
   minutesToPixels: '(minutes: number): number',
   week: [VTimestamp],
+}
+
+const VTimestampWithCategory = {
+  date: 'string',
+  time: 'string',
+  year: 'number',
+  month: 'number',
+  day: 'number',
+  hour: 'number',
+  minute: 'number',
+  weekday: 'number',
+  hasDay: 'boolean',
+  hasTime: 'boolean',
+  past: 'boolean',
+  present: 'boolean',
+  future: 'boolean',
+  week: [VTimestamp],
+  category: 'string | null',
+}
+
+const VTimestampWithTimeCategory = {
+  date: 'string',
+  time: 'string',
+  year: 'number',
+  month: 'number',
+  day: 'number',
+  hour: 'number',
+  minute: 'number',
+  weekday: 'number',
+  hasDay: 'boolean',
+  hasTime: 'boolean',
+  past: 'boolean',
+  present: 'boolean',
+  future: 'boolean',
+  timeToY: '(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number | false',
+  timeDelta: '(time: string | number | {hour: number, minute: number}): number | false',
+  minutesToPixels: '(minutes: number): number',
+  week: [VTimestamp],
+  category: 'string | null',
 }
 
 module.exports = {
   createItems,
   VCalendarDay,
+  VCalendarEvent,
   VCalendarEventSlot,
   VGridProps,
   VInput,
@@ -325,6 +385,8 @@ module.exports = {
   VSlider,
   VTextField,
   VTimestamp,
+  VTimestampWithCategory,
   VTimestampWithTime,
+  VTimestampWithTimeCategory,
   VTreeviewScopedProps,
 }
