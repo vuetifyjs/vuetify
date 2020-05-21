@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "declaration": true,
+    "declarationMap": false,
+    "skipLibCheck": true,
+    "emitDeclarationOnly": true,
+    "importsNotUsedAsValues": "remove",
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    // "outDir": "tsc",
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/**/*.spec.ts"
+  ]
+}

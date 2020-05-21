@@ -1,8 +1,9 @@
 import './VApp.sass'
 
 import { h, defineComponent } from 'vue'
+import { publicComponent } from '../../util/helpers'
 
-export const VApp = defineComponent({
+const VAppImpl = defineComponent({
   setup (props, { slots, ...ctx }) {
     const obj = Object.assign({}, { padding: '10px' })
     return () => h('div', {
@@ -11,3 +12,5 @@ export const VApp = defineComponent({
     }, slots.default!())
   },
 })
+
+export const VApp = publicComponent(VAppImpl)

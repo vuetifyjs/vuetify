@@ -25,3 +25,14 @@ export function rewriteVueEsmPath () {
     },
   }
 }
+
+export function test () {
+  return {
+    name: 'test',
+    async resolveId (source) {
+      console.log(source)
+      if (source.endsWith('.sass')) return source
+      return null
+    },
+  }
+}

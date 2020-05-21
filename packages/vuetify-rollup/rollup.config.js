@@ -1,15 +1,17 @@
+// import typescript from 'rollup-plugin-typescript2'
 import typescript from 'rollup-plugin-typescript2'
 import replace from '@rollup/plugin-replace'
 import postcss from 'rollup-plugin-postcss'
 import externals from 'rollup-plugin-node-externals'
-import babel from "@rollup/plugin-babel";
-import babelRuntimeExternal from 'rollup-plugin-babel-runtime-external';
+import babel from '@rollup/plugin-babel'
+import babelRuntimeExternal from 'rollup-plugin-babel-runtime-external'
+import dts from 'rollup-plugin-dts'
 import { rewriteSassPaths, rewriteVueEsmPath } from './scripts/rollup-plugins'
 import pkg from './package.json'
 
 const base = {
   plugins: [
-    typescript({}),
+    typescript(),
     replace({
       __VUETIFY_VERSION__: JSON.stringify(pkg.version),
     }),
@@ -36,20 +38,20 @@ const createConfig = format => {
         exclude: ['node_modules'],
         presets: [
           [
-            "@babel/preset-env",
+            '@babel/preset-env',
             {
               modules: false,
-            }
-          ]
+            },
+          ],
         ],
         plugins: [
           [
             '@babel/plugin-transform-runtime',
             {
-              useESModules: true
-            }
-          ]
-        ]
+              useESModules: true,
+            },
+          ],
+        ],
       }),
       postcss({
         extract: 'vuetify.css',
@@ -60,7 +62,7 @@ const createConfig = format => {
       }),
       // format === 'esm' && rewriteVueEsmPath(),
       externals(),
-      babelRuntimeExternal()
+      babelRuntimeExternal(),
     ],
   }
 }
@@ -82,9 +84,39 @@ const createLib = format => {
   }
 }
 
+const createDts = () => {
+  return [
+    {
+      input: 'src/index.ts',
+      output: {
+        dir: 'types',
+        format: 'es',
+      },
+      plugins: [
+        typescript({
+          clean: true,
+          tsconfig: 'tsconfig.types.json',
+        }),
+      ],
+    },
+    {
+      input: 'types/index.d.ts',
+      output: {
+        file: 'dist/vuetify.d.ts',
+        format: 'es',
+      },
+      plugins: [
+        rewriteSassPaths(),
+        dts(),
+      ],
+    },
+  ]
+}
+
 export default [
-  createConfig('esm'),
-  createConfig('cjs'),
-  createConfig('umd'),
-  createLib('esm'),
+  // createConfig('esm'),
+  // createConfig('cjs'),
+  // createConfig('umd'),
+  // createLib('esm'),
+  ...createDts(),
 ]
