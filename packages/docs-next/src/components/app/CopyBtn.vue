@@ -1,7 +1,6 @@
 <template>
   <v-btn
     absolute
-    class="mt-2"
     icon
     right
     top
@@ -10,6 +9,7 @@
     <v-fade-transition hide-on-leave>
       <v-icon
         :key="String(copied)"
+        color="grey"
         v-text="copied ? '$complete' : '$copy'"
       />
     </v-fade-transition>

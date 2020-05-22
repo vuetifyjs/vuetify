@@ -5,7 +5,10 @@
   >
     <slot />
 
-    <app-copy-btn :target="target" />
+    <app-copy-btn
+      :target="target"
+      class="mr-n2"
+    />
   </v-sheet>
 </template>
 
@@ -46,10 +49,16 @@
         font-size: 0.7rem
         font-weight: 700
         position: absolute
-        right: 8px
+        right: 16px
         text-transform: uppercase
-        top: 4px
+        bottom: 8px
 
     pre.language-bash::after
       content: 'sh'
+
+    pre.language-html::after
+      content: 'html'
+
+    pre.language-js::after
+      content: 'js'
 </style>
