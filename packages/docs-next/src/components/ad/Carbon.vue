@@ -1,9 +1,11 @@
 <template>
-  <base-ad
-    id="carbonads"
-    script-id="_carbonads_js"
-    src="//cdn.carbonads.com/carbon.js?serve=CKYI5KQY&placement=vuetifyjscom"
-  />
+  <app-ad max-width="360">
+    <ad-script
+      id="carbonads"
+      script-id="_carbonads_js"
+      src="//cdn.carbonads.com/carbon.js?serve=CKYI5KQY&placement=vuetifyjscom"
+    />
+  </app-ad>
 </template>
 
 <script>

@@ -1,18 +1,10 @@
 <template>
-  <v-sheet
-    outlined
-    rounded
-    width="362"
-  >
-    <div :id="id">
-      <!-- Ad -->
-    </div>
-  </v-sheet>
+  <div :id="id" />
 </template>
 
 <script>
   export default {
-    name: 'BaseAd',
+    name: 'AdScript',
 
     props: {
       id: {
