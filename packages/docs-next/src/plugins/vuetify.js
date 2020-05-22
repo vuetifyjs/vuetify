@@ -11,6 +11,7 @@ import Vuetify from 'vuetify/lib/framework'
 import {
   mdiContentCopy,
   mdiOpenInNew,
+  mdiTranslate,
 } from '@mdi/js'
 
 Vue.use(Vuetify)
@@ -20,6 +21,7 @@ const icons = {
   values: {
     copy: mdiContentCopy,
     open: mdiOpenInNew,
+    translate: mdiTranslate,
   },
 }
 

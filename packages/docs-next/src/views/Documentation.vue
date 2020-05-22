@@ -53,6 +53,14 @@
 
           vm.attributes = attributes
           vm.page = vue.component
+
+          const { lang } = to.params
+          if (lang === 'eo-UY') {
+            console.log(lang)
+            const crowdin = document.createElement('script')
+            crowdin.setAttribute('src', 'https://cdn.crowdin.com/jipt/jipt.js')
+            document.head.appendChild(crowdin)
+          }
         })
       })
     },
