@@ -146,6 +146,7 @@ new Vuetify({
         get: (parsedTheme: VuetifyParsedTheme) => '',
         set: (parsedTheme: VuetifyParsedTheme, css: string) => {},
       },
+      variations: false,
     },
   },
 })

@@ -1696,6 +1696,66 @@ exports[`Theme.ts should minify theme 1`] = `
 }foobar"
 `;
 
+exports[`Theme.ts should not generate variations 1`] = `
+".v-application a { color: 1668818; }
+.v-application .primary {
+  background-color: 1668818 !important;
+  border-color: 1668818 !important;
+}
+.v-application .primary--text {
+  color: 1668818 !important;
+  caret-color: 1668818 !important;
+}
+.v-application .secondary {
+  background-color: 4342338 !important;
+  border-color: 4342338 !important;
+}
+.v-application .secondary--text {
+  color: 4342338 !important;
+  caret-color: 4342338 !important;
+}
+.v-application .accent {
+  background-color: 8565247 !important;
+  border-color: 8565247 !important;
+}
+.v-application .accent--text {
+  color: 8565247 !important;
+  caret-color: 8565247 !important;
+}
+.v-application .error {
+  background-color: 16732754 !important;
+  border-color: 16732754 !important;
+}
+.v-application .error--text {
+  color: 16732754 !important;
+  caret-color: 16732754 !important;
+}
+.v-application .info {
+  background-color: 2201331 !important;
+  border-color: 2201331 !important;
+}
+.v-application .info--text {
+  color: 2201331 !important;
+  caret-color: 2201331 !important;
+}
+.v-application .success {
+  background-color: 5025616 !important;
+  border-color: 5025616 !important;
+}
+.v-application .success--text {
+  color: 5025616 !important;
+  caret-color: 5025616 !important;
+}
+.v-application .warning {
+  background-color: 16761095 !important;
+  border-color: 16761095 !important;
+}
+.v-application .warning--text {
+  color: 16761095 !important;
+  caret-color: 16761095 !important;
+}"
+`;
+
 exports[`Theme.ts should reset themes 1`] = `
 ".v-application a { color: #1976d2; }
 .v-application .primary {

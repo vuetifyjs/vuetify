@@ -24,6 +24,8 @@
   "customPropertiesAlert": "Custom properties are not natively supported in Internet Explorer. Polyfills (with some limitations) are available: [https://github.com/nuxodin/ie11CustomProperties](https://github.com/nuxodin/ie11CustomProperties), [https://github.com/jhildenbiddle/css-vars-ponyfill](https://github.com/jhildenbiddle/css-vars-ponyfill).",
   "optionHeader5": "### CSP Nonce",
   "optionText6": "Pages with the `script-src` or `style-src` CSP rules enabled may require a **nonce** to be specified for embedded style tags.",
+  "optionHeader6": "### Variations",
+  "optionText7": "When Vuetify generates your *application's theme*, it creates **9 variants** for each color. For majority of users, these variants are rarely used. This is an **opt in** feature that will be __false by default__ in the next major version.",
   "themeGeneratorHeader": "## Theme generator",
   "themeGeneratorText1": "Discover and generate new color themes for your **Vuetify** applications using our [Theme Generator](https://theme-generator.vuetifyjs.com) tool.",
   "variantsSubheader": "### Custom theme variants",
