@@ -10,6 +10,7 @@
     camelCase,
     upperFirst,
   } from 'lodash'
+  import { genMetaData } from '@/util/metadata'
 
   async function load (route, store) {
     const page = upperFirst(camelCase(route.params.page))
@@ -23,8 +24,24 @@
   export default {
     name: 'DocumentationView',
 
+    metaInfo () {
+      if (!this.attributes) return {}
+
+      const {
+        description,
+        keywords,
+        title,
+      } = this.attributes
+
+      return genMetaData(
+        title,
+        description,
+        keywords,
+      )
+    },
+
     data: () => ({
-      attributes: {},
+      attributes: undefined,
       page: undefined,
     }),
 

@@ -7,5 +7,10 @@
 <script>
   export default {
     name: 'App',
+
+    metaInfo: {
+      title: 'Welcome to Vuetify',
+      titleTemplate: '%s | Vuetify.js',
+    },
   }
 </script>

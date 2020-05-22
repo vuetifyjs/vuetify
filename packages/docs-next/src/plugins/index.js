@@ -6,3 +6,4 @@
 
 import './app'
 import './webfontloader'
+import './vue-meta'

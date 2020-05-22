@@ -1,10 +1,7 @@
 ---
-layout: documentation
 title: Quick Start
-description: Foobar
-keywords: fizz, buzz
-nav: Getting Started > Quick Start
-url: getting-started/quick-start
+description: Get started with Vue and Vuetify in no time. Support for Vue CLI, Webpack, Nuxt and more.
+keywords: quick start, vuetify templates, installing vuetify, install vuetify
 ---
 
 # Quick start
