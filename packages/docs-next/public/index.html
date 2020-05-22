@@ -10,8 +10,10 @@
       var _jipt = [
         ['project', 'vuetify'],
         ['before_dom_insert', function (text, node, attribute) {
-          if (text.startsWith('##')) return '<h2>' + text + '</h2>'
-          else if (text.startsWith('#')) return '<h1>' + text + '</h1>'
+          if (text.substr(0, 4) === '####') return '<h4>' + text + '</h4>'
+          else if (text.substr(0, 3) === '###') return '<h3>' + text + '</h3>'
+          else if (text.substr(0, 2) === '##') return '<h2>' + text + '</h2>'
+          else if (text.substr(0, 1) === '#') return '<h1>' + text + '</h1>'
           else return text
         }]
       ]
