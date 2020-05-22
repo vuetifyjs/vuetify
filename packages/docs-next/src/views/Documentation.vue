@@ -14,10 +14,11 @@
 
   async function load (route, store) {
     const page = upperFirst(camelCase(route.params.page))
+    const { category, lang } = route.params
 
     return await import(
       /* webpackChunkName: "documentation-pages" */
-      `@/pages/documentation/${page}.md`
+      `@/pages/${lang}/${category}/${page}.md`
     )
   }
 
