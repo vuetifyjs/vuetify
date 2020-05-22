@@ -7042,6 +7042,21 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
+markdown-it-anchor@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/markdown-it-anchor/-/markdown-it-anchor-5.3.0.tgz#d549acd64856a8ecd1bea58365ef385effbac744"
+  integrity sha512-/V1MnLL/rgJ3jkMWo84UR+K+jF1cxNG1a+KwqeXqTIJ+jtA8aWSHuigx8lTzauiIjBDbwF3NcWQMotd0Dm39jA==
+
+markdown-it-attrs@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/markdown-it-attrs/-/markdown-it-attrs-3.0.2.tgz#55a466b2b60d755b2a77288dff175e741fc1143d"
+  integrity sha512-q45vdXU9TSWaHgFkWEFM97YHEoCmOyG9csLLdv3oVC6ARjT77u4wfng9rRtSOMb5UpxzT7zTX5GBbwm15H40dw==
+
+markdown-it-header-sections@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/markdown-it-header-sections/-/markdown-it-header-sections-1.0.0.tgz#f9097fbe15188f671beff362c22e706b4d286090"
+  integrity sha512-GndZbs+iTo7NkNRf00VmT4mtFql7VoJNnSwB7hP5xkomGUTdQ78siVZIuRco4fbiWJd45JUemLxUS9vO8luPSA==
+
 markdown-it-prism@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/markdown-it-prism/-/markdown-it-prism-2.0.5.tgz#4bbf46be47878f227678dd83ed97f6c9b07a4094"

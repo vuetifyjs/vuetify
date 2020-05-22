@@ -5,6 +5,7 @@ keywords: quick start, vuetify templates, installing vuetify, install vuetify
 ---
 
 # Quick start
+
 Get started with Vuetify, the world’s most popular Vue.js framework for building feature rich, blazing fast application.
 
 <carbon-ad></carbon-ad>

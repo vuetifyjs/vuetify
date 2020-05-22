@@ -12,5 +12,7 @@
 <script>
   export default {
     name: 'AppAlert',
+
+    inheritAttrs: false,
   }
 </script>

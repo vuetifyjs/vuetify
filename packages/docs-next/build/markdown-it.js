@@ -1,10 +1,19 @@
 // Imports
-const prism = require('markdown-it-prism')
 const rules = require('./rules')
 const md = require('markdown-it')({
   html: true,
   linkify: true,
-}).use(prism)
+  typographer: true,
+})
+  .use(require('markdown-it-attrs'))
+  .use(require('markdown-it-anchor'), {
+    permalink: true,
+    permalinkSymbol: '#',
+    permalinkBefore: true,
+    permalinkClass: 'text-decoration-none',
+  })
+  .use(require('markdown-it-prism'))
+  .use(require('markdown-it-header-sections'))
 
 for (const key in rules) rules[key](md)
 

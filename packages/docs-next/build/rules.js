@@ -24,6 +24,7 @@ function addHeadingRules (md) {
     h1: 'text-h3',
     h2: 'text-h4',
     h3: 'text-h5',
+    h4: 'text-h6',
   }
 
   md.renderer.rules.heading_open = (tokens, idx, options, env, self) => {
@@ -48,17 +49,13 @@ function addBlockQuoteRules (md) {
     text.content = content.join(' ')
 
     token.attrSet('type', type)
-    token.type = 'inline'
     token.tag = 'app-alert'
 
     return self.renderToken(tokens, idx, options)
   }
 
   md.renderer.rules.blockquote_close = (tokens, idx, options, env, self) => {
-    const token = tokens[idx]
-
-    token.type = 'inline'
-    token.tag = 'app-alert'
+    tokens[idx].tag = 'app-alert'
 
     return self.renderToken(tokens, idx, options)
   }
