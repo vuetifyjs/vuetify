@@ -1,0 +1,10 @@
+"project_identifier": "vuetify"
+"api_key": "<api-key>"
+"base_path": "<path to folder>\\src\\pages"
+"preserve_hierarchy": true
+"files": [
+  {
+    "source": "en\\**\\*.md",
+    "translation": "%locale%\\**\\%original_file_name%",
+  }
+]
