@@ -1,7 +1,7 @@
 // Vue
 import Vue from 'vue'
 import Vuex from 'vuex'
-import pathify from 'vuex-pathify'
+import pathify from '@/plugins/vuex-pathify'
 
 // Modules
 import * as modules from './modules'
@@ -13,6 +13,8 @@ export function createStore () {
     modules,
     plugins: [pathify.plugin],
   })
+
+  store.dispatch('app/init')
 
   return store
 }
