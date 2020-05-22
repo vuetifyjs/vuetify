@@ -1,12 +1,7 @@
-/**
- * router/index.js
- *
- * vue-router documentation: https://router.vuejs.org/
- */
-
 // Imports
 import Vue from 'vue'
 import Router from 'vue-router'
+import VueGtag from 'vue-gtag'
 
 Vue.use(Router)
 
@@ -42,6 +37,11 @@ export function createRouter () {
       },
     ],
   })
+
+  Vue.use(VueGtag, {
+    bootstrap: process.env.NODE_ENV === 'production',
+    config: { id: process.env.VUE_APP_GOOGLE_ANALYTICS },
+  }, router)
 
   return router
 }
