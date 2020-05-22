@@ -7,7 +7,7 @@
 
     <app-copy-btn
       :target="target"
-      class="mr-n2"
+      class="mr-n2 mt-n1"
     />
   </v-sheet>
 </template>

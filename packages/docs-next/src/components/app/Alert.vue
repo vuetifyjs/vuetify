@@ -2,6 +2,7 @@
   <v-alert
     v-bind="$attrs"
     text
+    border="left"
     v-on="$listeners"
   >
     <slot />

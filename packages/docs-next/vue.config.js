@@ -1,7 +1,7 @@
 
 // Utilities
 const Mode = require('frontmatter-markdown-loader/mode')
-const { md } = require('./build/vuetify-md')
+const { md } = require('./build/markdown-it')
 
 module.exports = {
   devServer: {
@@ -13,13 +13,11 @@ module.exports = {
       .test(/\.md$/)
       .use('frontmatter-markdown-loader')
         .loader('frontmatter-markdown-loader')
-        .tap(options => {
-          return {
-            markdown: body => md.render(body),
-            mode: [Mode.VUE_COMPONENT],
-            vue: { root: 'markdown-body' },
-          }
-        })
+        .tap(() => ({
+          markdown: body => md.render(body),
+          mode: [Mode.VUE_COMPONENT],
+          vue: { root: 'markdown-body' },
+        }))
   },
   pwa: {
     name: 'Vuetify-Docs',

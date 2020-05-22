@@ -37,6 +37,7 @@
     "eslint-plugin-vue": "^6.2.2",
     "eslint-plugin-vuetify": "^1.0.0-beta.6",
     "frontmatter-markdown-loader": "^3.4.3",
+    "github-markdown-css": "^4.0.0",
     "html-loader": "^1.1.0",
     "http-server": "^0.12.3",
     "lodash": "^4.17.15",
