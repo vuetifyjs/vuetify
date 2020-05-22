@@ -10926,6 +10926,11 @@ vue-cli-plugin-vuetify@latest:
     semver "^7.1.2"
     shelljs "^0.8.3"
 
+vue-cookies@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/vue-cookies/-/vue-cookies-1.7.0.tgz#dd8f147ff1579e0cbd5f352dc5dff2696d8760b8"
+  integrity sha512-vuEUm6wYMMrFAHFCrkzIUAy8+MgPAbBGmYXnk2M6X6O2KHbMT1wuDD2izacmsSUp6ZM02e23MJRtPRobl88VMg==
+
 vue-eslint-parser@^7.0.0:
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-7.1.0.tgz#9cdbcc823e656b087507a1911732b867ac101e83"
