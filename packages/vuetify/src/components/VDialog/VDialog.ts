@@ -80,6 +80,7 @@ export default baseMixins.extend({
       animateTimeout: -1,
       isActive: !!this.value,
       stackMinZIndex: 200,
+      previousDocumentElementClasses: [],
     }
   },
 
@@ -111,11 +112,15 @@ export default baseMixins.extend({
   watch: {
     isActive (val) {
       if (val) {
+        this.$data.previousDocumentElementClasses = [...document.documentElement.classList.values()]
         this.show()
         this.hideScroll()
       } else {
         this.removeOverlay()
         this.unbind()
+        for (const c of this.$data.previousDocumentElementClasses) {
+          document.documentElement.classList.add(c)
+        }
       }
     },
     fullscreen (val) {
