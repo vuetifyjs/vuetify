@@ -23,6 +23,7 @@
     }
   },
   "props": {
+    "app": "Respects boundaries of—and will not overlap with—other `app` components like `v-app-bar`, `v-navigation-drawer`, and `v-footer`.",
     "multiLine": "Gives the snackbar a larger minimum height.",
     "timeout": "Time (in milliseconds) to wait until snackbar is automatically hidden.  Use 0 to keep open indefinitely.",
     "vertical": "Stacks snackbar content on top of the actions (button)."
