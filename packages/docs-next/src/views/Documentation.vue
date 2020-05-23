@@ -12,11 +12,11 @@
   } from 'lodash'
   import { genMetaData } from '@/util/metadata'
 
-  async function load (route, store) {
+  async function load (route) {
     const page = upperFirst(camelCase(route.params.page))
     const { category, lang } = route.params
 
-    return await import(
+    return import(
       /* webpackChunkName: "documentation-pages" */
       `@/pages/${lang}/${category}/${page}.md`
     )
@@ -46,22 +46,22 @@
       page: undefined,
     }),
 
+    async created () {
+      const { attributes, vue } = await load(this.$route)
+
+      this.attributes = attributes
+      this.page = vue.component
+    },
+
     beforeRouteEnter (to, from, next) {
       next(vm => {
-        load(vm.$route, vm.$store).then(component => {
-          const { attributes, vue } = component.default
-
-          vm.attributes = attributes
-          vm.page = vue.component
-
-          const { lang } = to.params
-          if (lang === 'eo-UY') {
-            console.log(lang)
-            const crowdin = document.createElement('script')
-            crowdin.setAttribute('src', 'https://cdn.crowdin.com/jipt/jipt.js')
-            document.head.appendChild(crowdin)
-          }
-        })
+        const { lang } = to.params
+        if (lang === 'eo-UY') {
+          console.log(lang)
+          const crowdin = document.createElement('script')
+          crowdin.setAttribute('src', 'https://cdn.crowdin.com/jipt/jipt.js')
+          document.head.appendChild(crowdin)
+        }
       })
     },
   }
