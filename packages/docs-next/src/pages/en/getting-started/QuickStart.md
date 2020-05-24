@@ -12,7 +12,7 @@ Get started with Vuetify, the world’s most popular Vue.js framework for buildi
 
 ## Vue CLI Install
 
->warning For information on how to use Vue CLI, visit the [official documentation]().
+<warning>For information on how to use Vue CLI, visit the [official documentation]().</warning>
 
 If you have not already created a new Vue.js project using **Vue CLI**, you can do so by typing:
 
@@ -176,7 +176,7 @@ Vuetify uses Google's Roboto font and Material Design Icons. The simplest way to
 ## CDN usage
 To test using Vuetify.js without installing a template from Vue CLI, copy the code below into your index.html. This will pull the latest version of Vue and Vuetify, allowing you to start playing with components. You can also use the Vuetify starter on codepen. While not recommended, if you need to utilize the cdn packages in a production environment, it is recommended that you scope the versions of your assets. For more information on how to do this, navigate to the jsdelivr website.
 
->info In order for your application to work properly, you must wrap it in a v-app component. See the Application component page for more information.
+<info>In order for your application to work properly, you must wrap it in a v-app component. See the Application component page for more information.</info>
 
 ```html
 <!DOCTYPE html>

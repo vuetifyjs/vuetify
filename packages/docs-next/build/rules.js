@@ -36,33 +36,7 @@ function addHeadingRules (md) {
   }
 }
 
-function addBlockQuoteRules (md) {
-  md.renderer.rules.blockquote_open = (tokens, idx, options, env, self) => {
-    const token = tokens[idx]
-    const paragraph = tokens[idx + 1]
-    const inline = tokens[idx + 2]
-    const text = inline.children.find(child => child.type === 'text')
-    const [type, ...content] = text.content.split(' ')
-
-    paragraph.attrSet('class', 'mb-0')
-
-    text.content = content.join(' ')
-
-    token.attrSet('type', type)
-    token.tag = 'app-alert'
-
-    return self.renderToken(tokens, idx, options)
-  }
-
-  md.renderer.rules.blockquote_close = (tokens, idx, options, env, self) => {
-    tokens[idx].tag = 'app-alert'
-
-    return self.renderToken(tokens, idx, options)
-  }
-}
-
 module.exports = {
-  addBlockQuoteRules,
   addCodeRules,
   addHeadingRules,
   addImageRules,

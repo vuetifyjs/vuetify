@@ -1,9 +1,8 @@
 <template>
   <v-alert
-    v-bind="$attrs"
     text
     border="left"
-    v-on="$listeners"
+    type="info"
   >
     <slot />
   </v-alert>
@@ -11,8 +10,6 @@
 
 <script>
   export default {
-    name: 'AppAlert',
-
-    inheritAttrs: false,
+    name: 'Info',
   }
 </script>
