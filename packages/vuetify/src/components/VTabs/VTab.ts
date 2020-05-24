@@ -60,7 +60,7 @@ export default baseMixins.extend<options>().extend(
       }
     },
     hasRealLink (): boolean {
-      return this.href && this.href[0] !== '#'
+      return !!this.href && this.href[0] !== '#'
     },
     value (): any {
       let to = this.to || this.href || ''
@@ -111,14 +111,14 @@ export default baseMixins.extend<options>().extend(
     },
     getNextTab () {
       const tab = this.getFocusedTab()
-      const currentIndex = this.items.findIndex((item: any) => item.value === tab.value)
+      const currentIndex = this.items.findIndex((item: any) => item.$el === tab.$el)
       const targetIndex = (currentIndex + 1) % this.items.length
 
       return this.items[targetIndex]
     },
     getPrevTab () {
       const tab = this.getFocusedTab()
-      const currentIndex = this.items.findIndex((item: any) => item.value === tab.value)
+      const currentIndex = this.items.findIndex((item: any) => item.$el === tab.$el)
       const targetIndex = (currentIndex - 1 + this.items.length) % this.items.length
 
       return this.items[targetIndex]

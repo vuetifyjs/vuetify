@@ -139,11 +139,11 @@ describe('VTab.ts', () => {
   })
 
   it('should get first, last, next, and previous tabs', () => {
-    const firstTab = { value: 1 }
-    const prevTab = { value: 2 }
-    const focusedTab = { value: 3 }
-    const nextTab = { value: 4 }
-    const lastTab = { value: 5 }
+    const firstTab = { $el: 1 }
+    const prevTab = { $el: 2 }
+    const focusedTab = { $el: 3 }
+    const nextTab = { $el: 4 }
+    const lastTab = { $el: 5 }
     const getFocusedTab = jest.fn()
     getFocusedTab.mockReturnValue(focusedTab)
     const wrapper = mountFunction({
