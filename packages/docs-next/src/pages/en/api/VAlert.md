@@ -3,6 +3,7 @@ layout: documentation
 title: V-Alert API
 description: API for the v-alert component.
 keywords: v-alert, alerts, api, vue alert component, vuetify alert component
+nav: v-alert
 ---
 
 # V-Alert API

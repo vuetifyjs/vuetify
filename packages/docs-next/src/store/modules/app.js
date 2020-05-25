@@ -1,7 +1,10 @@
 // Pathify
 import { make } from 'vuex-pathify'
+import pages from '@docs/pages'
 
-const state = {}
+const state = {
+  pages,
+}
 
 const mutations = make.mutations(state)
 

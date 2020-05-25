@@ -11170,6 +11170,13 @@ webpack-sources@^1.1.0, webpack-sources@^1.4.0, webpack-sources@^1.4.1, webpack-
     source-list-map "^2.0.0"
     source-map "~0.6.1"
 
+webpack-virtual-modules@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/webpack-virtual-modules/-/webpack-virtual-modules-0.2.2.tgz#20863dc3cb6bb2104729fff951fbe14b18bd0299"
+  integrity sha512-kDUmfm3BZrei0y+1NTHJInejzxfhtU8eDj2M7OKb2IWrPFAeO1SOH2KuQ68MSZu9IGEHcxbkKKR1v18FrUSOmA==
+  dependencies:
+    debug "^3.0.0"
+
 webpack@^4.0.0:
   version "4.43.0"
   resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.43.0.tgz#c48547b11d563224c561dad1172c8aa0b8a678e6"

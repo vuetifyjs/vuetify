@@ -9,9 +9,12 @@ import Vue from 'vue'
 import Vuetify from 'vuetify/lib/framework'
 
 import {
+  mdiBeaker,
   mdiContentCopy,
   mdiOpenInNew,
+  mdiSpeedometer,
   mdiTranslate,
+  mdiViewDashboard,
 } from '@mdi/js'
 
 Vue.use(Vuetify)
@@ -19,9 +22,12 @@ Vue.use(Vuetify)
 const icons = {
   iconfont: 'mdiSvg',
   values: {
-    copy: mdiContentCopy,
-    open: mdiOpenInNew,
-    translate: mdiTranslate,
+    mdiBeaker,
+    mdiSpeedometer,
+    mdiContentCopy,
+    mdiOpenInNew,
+    mdiTranslate,
+    mdiViewDashboard,
   },
 }
 

@@ -2,6 +2,7 @@
 title: Quick Start
 description: Get started with Vue and Vuetify in no time. Support for Vue CLI, Webpack, Nuxt and more.
 keywords: quick start, vuetify templates, installing vuetify, install vuetify
+nav: true
 ---
 
 # Quick start

@@ -10,7 +10,7 @@
       <v-icon
         :key="String(copied)"
         color="grey"
-        v-text="copied ? '$complete' : '$copy'"
+        v-text="copied ? '$complete' : '$mdiContentCopy'"
       />
     </v-fade-transition>
   </v-btn>

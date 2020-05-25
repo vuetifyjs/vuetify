@@ -27,9 +27,7 @@
         </v-list-item-content>
 
         <v-list-item-action class="shrink">
-          <v-icon>
-            $open
-          </v-icon>
+          <v-icon>$mdiOpenInNew</v-icon>
         </v-list-item-action>
       </v-list-item>
     </v-list>

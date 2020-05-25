@@ -1,5 +1,6 @@
 
 // Utilities
+const path = require('path')
 const Mode = require('frontmatter-markdown-loader/mode')
 const { md } = require('./build/markdown-it')
 
@@ -8,6 +9,10 @@ module.exports = {
     disableHostCheck: true,
   },
   chainWebpack: config => {
+    config
+      .plugin('drawer-items-plugin')
+      .use(path.resolve('./build/drawer-items-plugin.js'))
+
     config.module
       .rule('markdown')
       .test(/\.md$/)

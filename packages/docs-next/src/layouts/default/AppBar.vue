@@ -7,7 +7,7 @@
         text
         @click="translate"
       >
-        <v-icon>$translate</v-icon>
+        <v-icon>$mdiTranslate</v-icon>
       </v-btn>
     </v-toolbar-items>
   </v-app-bar>

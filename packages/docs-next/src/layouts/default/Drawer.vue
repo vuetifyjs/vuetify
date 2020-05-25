@@ -1,15 +1,78 @@
 <template>
   <v-navigation-drawer app>
-    <v-list>
-      <v-list-item>
-        <v-list-item-title>Drawer Item</v-list-item-title>
-      </v-list-item>
+    <v-list
+      dense
+      nav
+    >
+      <v-list-group
+        v-for="item in items"
+        :key="item.title"
+        :group="genGroup(item.group)"
+        :prepend-icon="item.icon"
+        no-action
+      >
+        <template v-slot:activator>
+          <v-list-item-content>
+            <v-list-item-title v-text="item.title" />
+          </v-list-item-content>
+        </template>
+
+        <v-list-item
+          v-for="page in pages[item.group]"
+          :key="page.title"
+          :to="`/${lang}${page.to}`"
+        >
+          <v-list-item-content>
+            <v-list-item-title v-text="page.title" />
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-group>
     </v-list>
   </v-navigation-drawer>
 </template>
 
 <script>
+  // Utilities
+  import { get } from 'vuex-pathify'
+
   export default {
     name: 'DefaultDrawer',
+
+    computed: {
+      lang: get('route/params@lang'),
+      pages: get('app/pages'),
+      items () {
+        return [
+          {
+            title: 'Getting started',
+            icon: '$mdiSpeedometer',
+            group: 'getting-started',
+          },
+          {
+            title: 'Components',
+            icon: '$mdiViewDashboard',
+            group: 'components',
+          },
+          {
+            title: 'API',
+            icon: '$mdiBeaker',
+            group: 'api',
+          },
+        ]
+      },
+    },
+
+    methods: {
+      genGroup (group) {
+        return this.pages[group].reduce((group, { to }) => {
+          // Pages are expected to have a leading slash
+          const path = to.split('/').slice(1).join('/')
+
+          if (!group.includes(path)) group.push(path)
+
+          return group
+        }, []).join('|')
+      },
+    },
   }
 </script>
