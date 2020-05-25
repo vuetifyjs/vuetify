@@ -8,12 +8,12 @@ import { VFadeTransition } from '../transitions'
 // Extensions
 import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 
+// Mixins
+import Mobile from '../../mixins/mobile'
+
 // Directives
 import Resize from '../../directives/resize'
 import Touch from '../../directives/touch'
-
-// Mixins
-import Mobile from '../../mixins/mobile'
 
 // Utilities
 import mixins, { ExtractVue } from '../../util/mixins'
