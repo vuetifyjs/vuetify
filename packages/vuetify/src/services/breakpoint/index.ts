@@ -47,6 +47,8 @@ export class Breakpoint extends Service implements IBreakpoint {
 
   public width = 0
 
+  // TODO: Add functionality to detect this dynamically in v3
+  // Value is true to match v2.x functionality
   public mobile = true
 
   public mobileBreakPoint: IBreakpoint['mobileBreakPoint']

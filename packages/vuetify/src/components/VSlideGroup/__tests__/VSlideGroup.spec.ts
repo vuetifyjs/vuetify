@@ -297,9 +297,7 @@ describe('VSlideGroup.ts', () => {
       mocks: {
         $vuetify: {
           rtl: true,
-          breakpoint: {
-            mobileBreakPoint: 1280,
-          },
+          breakpoint: { mobileBreakPoint: 1280 },
         },
       },
     })
