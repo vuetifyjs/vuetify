@@ -8,6 +8,7 @@ import VImg, { srcObject } from '../VImg/VImg'
 import Applicationable from '../../mixins/applicationable'
 import Colorable from '../../mixins/colorable'
 import Dependent from '../../mixins/dependent'
+import Mobile from '../../mixins/mobile'
 import Overlayable from '../../mixins/overlayable'
 import SSRBootable from '../../mixins/ssr-bootable'
 import Themeable from '../../mixins/themeable'
@@ -38,6 +39,7 @@ const baseMixins = mixins(
   ]),
   Colorable,
   Dependent,
+  Mobile,
   Overlayable,
   SSRBootable,
   Themeable
@@ -76,10 +78,6 @@ export default baseMixins.extend({
     miniVariantWidth: {
       type: [Number, String],
       default: 56,
-    },
-    mobileBreakPoint: {
-      type: [Number, String],
-      default: 1264,
     },
     permanent: Boolean,
     right: Boolean,
@@ -194,7 +192,7 @@ export default baseMixins.extend({
       return (
         !this.stateless &&
         !this.permanent &&
-        this.$vuetify.breakpoint.width < parseInt(this.mobileBreakPoint, 10)
+        Mobile.options.computed.isMobile.call(this)
       )
     },
     reactsToClick (): boolean {

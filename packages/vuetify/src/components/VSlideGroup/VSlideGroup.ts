@@ -12,6 +12,9 @@ import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 import Resize from '../../directives/resize'
 import Touch from '../../directives/touch'
 
+// Mixins
+import Mobile from '../../mixins/mobile'
+
 // Utilities
 import mixins, { ExtractVue } from '../../util/mixins'
 
@@ -38,10 +41,14 @@ interface options extends Vue {
 
 export const BaseSlideGroup = mixins<options &
 /* eslint-disable indent */
-  ExtractVue<typeof BaseItemGroup>
+  ExtractVue<[
+    typeof BaseItemGroup,
+    typeof Mobile,
+  ]>
 /* eslint-enable indent */
 >(
-  BaseItemGroup
+  BaseItemGroup,
+  Mobile,
   /* @vue/component */
 ).extend({
   name: 'base-slide-group',
@@ -60,11 +67,6 @@ export const BaseSlideGroup = mixins<options &
     nextIcon: {
       type: String,
       default: '$next',
-    },
-    mobileBreakPoint: {
-      type: [Number, String],
-      default: 1264,
-      validator: (v: any) => !isNaN(parseInt(v)),
     },
     prevIcon: {
       type: String,
@@ -102,8 +104,8 @@ export const BaseSlideGroup = mixins<options &
     },
     hasAffixes (): Boolean {
       return (
-        (this.showArrows || !this.isMobile) &&
-        this.isOverflowing
+        (this.isOverflowing && !this.isMobile) ||
+        this.showArrows
       )
     },
     hasNext (): boolean {
@@ -116,9 +118,6 @@ export const BaseSlideGroup = mixins<options &
     },
     hasPrev (): boolean {
       return this.hasAffixes && this.scrollOffset !== 0
-    },
-    isMobile (): boolean {
-      return this.$vuetify.breakpoint.width < this.mobileBreakPoint
     },
   },
 

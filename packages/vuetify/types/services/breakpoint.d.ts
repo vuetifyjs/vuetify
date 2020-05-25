@@ -1,4 +1,5 @@
 export interface BreakpointOptions {
+  mobileBreakPoint: number
   scrollBarWidth?: number
   thresholds?: Partial<BreakpointThresholds>
 }
@@ -30,6 +31,8 @@ export interface Breakpoint {
   xlOnly: boolean
   xs: boolean
   xsOnly: boolean
+  mobile: boolean
+  mobileBreakPoint: number
   thresholds: BreakpointThresholds
   scrollBarWidth: number
 }
