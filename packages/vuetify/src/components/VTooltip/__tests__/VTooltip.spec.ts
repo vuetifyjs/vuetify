@@ -129,4 +129,35 @@ describe('VTooltip', () => {
     expect((setTimeout as any).mock.calls[1][1]).toBe(321)
     expect(cb).toHaveBeenCalledWith(false)
   })
+
+  it('should display tooltip after mouseenter and hide after mouseleave', async () => {
+    jest.useFakeTimers()
+    const wrapper = mountFunction({
+      propsData: {
+        debounce: 2000
+      },
+      scopedSlots: {
+        activator: '<span v-on="props.on" class="activator">activator</span>',
+      },
+      slots: {
+        default: '<span class="content">content</span>',
+      },
+    })
+
+    const activator = wrapper.find('.activator')
+    const cb = jest.fn()
+    wrapper.vm.$on('input', cb)
+
+    activator.trigger('mouseenter')
+    jest.runAllTimers()
+    await wrapper.vm.$nextTick()
+    expect((setTimeout as any).mock.calls[0][1]).toBe(2000)
+    expect(cb).toHaveBeenCalledWith(true)
+
+    activator.trigger('mouseleave')
+    jest.runAllTimers()
+    await wrapper.vm.$nextTick()
+    expect((setTimeout as any).mock.calls[1][1]).toBe(2000)
+    expect(cb).toHaveBeenCalledWith(false)
+  })
 })
