@@ -19,6 +19,10 @@ export default Vue.extend<Vue & { isActive?: boolean }>().extend({
       type: [Number, String],
       default: 0,
     },
+    debounce: {
+      type: [Number, String],
+      default: 0,
+    },
   },
 
   data: () => ({
@@ -40,7 +44,12 @@ export default Vue.extend<Vue & { isActive?: boolean }>().extend({
     runDelay (type: 'open' | 'close', cb?: () => void): void {
       this.clearDelay()
 
-      const delay = parseInt((this as any)[`${type}Delay`], 10)
+      let delay
+      if (this.debounce) {
+        delay = parseInt((this as any)['debounce'], 10)
+      } else {
+        delay = parseInt((this as any)[`${type}Delay`], 10)
+      }
 
       ;(this as any)[`${type}Timeout`] = setTimeout(cb || (() => {
         this.isActive = { open: true, close: false }[type]

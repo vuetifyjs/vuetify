@@ -47,6 +47,10 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
     zIndex: {
       default: null,
     },
+    debounce: {
+      type: [Number, String],
+      default: 0,
+    },
   },
 
   data: () => ({
