@@ -321,15 +321,15 @@ export default baseMixins.extend<options>().extend({
       )
     },
     filterDuplicates (arr: any[]) {
-      const uniqueValues = new Map()
+      const uniqueText = new Map()
       for (let index = 0; index < arr.length; ++index) {
         const item = arr[index]
-        const val = this.getValue(item)
+        const text = this.getText(item)
 
         // TODO: comparator
-        !uniqueValues.has(val) && uniqueValues.set(val, item)
+        !uniqueText.has(text) && uniqueText.set(text, item)
       }
-      return Array.from(uniqueValues.values())
+      return Array.from(uniqueText.values())
     },
     findExistingIndex (item: object) {
       const itemValue = this.getValue(item)
