@@ -1,6 +1,7 @@
 <template>
   <app-ad width="100%">
     <v-list
+      v-if="hasAvailableAds"
       class="py-0"
       color="transparent"
     >
@@ -44,12 +45,17 @@
 
     computed: {
       ads: get('ads/available'),
+      hasAvailableAds () {
+        return !!this.ads.length
+      },
       activeTemplate () {
         const length = this.ads.length
 
         return this.ads[Math.floor(Math.random() * length)]
       },
       adAttrs () {
+        if (!this.activeTemplate) return null
+
         const [url, query] = this.activeTemplate.metadata.url.split('?')
 
         if (url.charAt(0) === '/') {
