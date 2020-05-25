@@ -11,7 +11,7 @@ interface ClickOutsideDirective extends VNodeDirective {
 }
 
 function defaultConditional () {
-  return false
+  return true
 }
 
 function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirective): void {
