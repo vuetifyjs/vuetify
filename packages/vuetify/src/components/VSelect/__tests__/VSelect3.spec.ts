@@ -288,7 +288,7 @@ describe('VSelect.ts', () => {
       propsData: {
         items: [
           { text: 'foo', value: { id: { subid: 1 } } },
-          { text: 'foo', value: { id: { subid: 2 } } },
+          { text: 'bar', value: { id: { subid: 2 } } },
         ],
         multiple: false,
         value: { id: { subid: 2 } },
