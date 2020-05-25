@@ -451,7 +451,7 @@ describe('VNavigationDrawer', () => { // eslint-disable-line max-statements
     expect(wrapper.vm.computedMaxHeight).toBe(60)
   })
 
-  it.only('should close when route changes on mobile', async () => {
+  it('should close when route changes on mobile', async () => {
     const wrapper = mountFunction({
       propsData: {
         app: true,

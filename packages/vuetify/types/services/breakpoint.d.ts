@@ -1,5 +1,5 @@
 export interface BreakpointOptions {
-  mobileBreakPoint: number
+  mobileBreakPoint?: number
   scrollBarWidth?: number
   thresholds?: Partial<BreakpointThresholds>
 }
