@@ -25,6 +25,7 @@ describe('VNavigationDrawer', () => { // eslint-disable-line max-statements
               dark: false,
             },
             breakpoint: {
+              mobileBreakPoint: 1280,
               width: 1920,
             },
             application: new Application(),

@@ -25,6 +25,7 @@ describe('VBanner.ts', () => {
               bar: 0,
             },
             breakpoint: {
+              mobileBreakPoint: 1280,
               width: 1000,
             },
           },
@@ -180,7 +181,7 @@ describe('VBanner.ts', () => {
     expect(wrapper.vm.isActive).toBeFalsy()
   })
 
-  it.only('should be responsive', () => {
+  it('should be responsive', () => {
     const wrapper = mount(VBanner, {
       slots: {
         default: 'Hello, World!',
@@ -188,15 +189,14 @@ describe('VBanner.ts', () => {
       mocks: {
         $vuetify: {
           breakpoint: {
+            mobileBreakPoint: 1280,
             width: 900,
           },
         },
       },
     })
 
-    console.log(wrapper.vm.mobileBreakPoint)
-
-    // expect(wrapper.classes('v-banner--is-mobile')).toBeTruthy()
+    expect(wrapper.classes('v-banner--is-mobile')).toBeTruthy()
   })
 
   it('should apply sticky when using the app prop', () => {

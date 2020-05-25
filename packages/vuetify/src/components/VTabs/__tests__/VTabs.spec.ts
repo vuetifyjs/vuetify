@@ -31,7 +31,9 @@ describe('VTabs.ts', () => {
         mocks: {
           $vuetify: {
             application: { left: 0, right: 0 },
-            breakpoint: {},
+            breakpoint: {
+              mobileBreakPoint: 1280,
+            },
             theme: { dark: false },
           },
         },
@@ -107,13 +109,7 @@ describe('VTabs.ts', () => {
         ])
       },
     }
-    const wrapper = mount(component, {
-      mocks: {
-        $vuetify: {
-          breakpoint: {},
-        },
-      },
-    })
+    const wrapper = mountFunction(component)
 
     expect(wrapper.html()).toMatchSnapshot()
   })

@@ -21,6 +21,7 @@ describe('VSlideGroup.ts', () => {
           $vuetify: {
             rtl: false,
             breakpoint: {
+              mobileBreakPoint: 1280,
               width: 1920,
             },
           },
@@ -255,7 +256,7 @@ describe('VSlideGroup.ts', () => {
   })
 
   it('should accept scoped slots', () => {
-    const wrapper = mount(VSlideGroup, {
+    const wrapper = mountFunction({
       computed: {
         hasAffixes: () => true,
         hasNext: () => true,
@@ -296,6 +297,9 @@ describe('VSlideGroup.ts', () => {
       mocks: {
         $vuetify: {
           rtl: true,
+          breakpoint: {
+            mobileBreakPoint: 1280,
+          },
         },
       },
     })
