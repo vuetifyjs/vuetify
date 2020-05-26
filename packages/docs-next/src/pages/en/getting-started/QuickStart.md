@@ -263,7 +263,6 @@ $ yarn capacitor:serve
 ## Related Topics
 <related-topics />
 
-## Up Next
 <up-next />
 
 <vuetify-ad />

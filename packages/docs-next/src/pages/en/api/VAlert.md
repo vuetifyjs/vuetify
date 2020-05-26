@@ -23,7 +23,6 @@ nav: v-alert
 
 <carbon-ad />
 
-## Up Next
 <up-next />
 
 <vuetify-ad />
