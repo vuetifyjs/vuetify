@@ -2,7 +2,8 @@
   <v-alert
     text
     border="left"
-    type="info"
+    v-bind="$attrs"
+    v-on="$listeners"
   >
     <slot />
   </v-alert>
@@ -10,6 +11,6 @@
 
 <script>
   export default {
-    name: 'Info',
+    name: 'Alert',
   }
 </script>

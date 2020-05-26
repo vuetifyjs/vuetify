@@ -60,7 +60,7 @@ module.exports = {
 }
 ```
 
-<info>Unfortunately Vue CLI doesn't automatically bring IE11 compatibility in which you may encounter various errors (such as Symbol is not defined). To assist in resolving these errors you may need to manually add `transpileDependencies` parameter in `vue.config.js`.</info>
+<alert type="info">Unfortunately Vue CLI doesn't automatically bring IE11 compatibility in which you may encounter various errors (such as Symbol is not defined). To assist in resolving these errors you may need to manually add `transpileDependencies` parameter in `vue.config.js`.</alert>
 
 Due to Internet Explorer's limited support for `<template>` tags, you must send fully compiled dom elements to the browser. This can be done by either building your Vue code in advance or by creating helper components to replace the dom elements. For instance, if sent directly to IE, this will fail:
 

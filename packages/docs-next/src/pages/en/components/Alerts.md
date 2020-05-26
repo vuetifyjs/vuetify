@@ -20,7 +20,7 @@ Alerts in their simplest form are a flat sheets of paper that display a message.
 None
 
 ## Caveats
-<warning>I'm an alert. Fear My Alertness!</warning>
+<alert type="warning">I'm an alert. Fear My Alertness!</alert>
 
 ## Examples
 Below is a collection of simple to complex examples.
