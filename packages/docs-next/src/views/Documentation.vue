@@ -6,11 +6,11 @@
 
 <script>
   // Utilities
+  import { genMetaData } from '@/util/metadata'
   import {
     camelCase,
     upperFirst,
   } from 'lodash'
-  import { genMetaData } from '@/util/metadata'
 
   async function load (route) {
     const page = upperFirst(camelCase(route.params.page))
