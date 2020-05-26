@@ -88,19 +88,16 @@ class Plugin {
 
     virtualModules.apply(compiler)
 
-    compiler.hooks.compilation.tap('@docs/pages', () => {
+    compiler.hooks.compilation.tap('PagesPlugin', () => {
       if (!shouldWrite) return
 
       virtualModules.writeModule('node_modules/@docs/pages.js', pages(files))
+      virtualModules.writeModule('node_modules/@docs/headings.js', headings(files))
 
       shouldWrite = false
     })
 
-    compiler.hooks.compilation.tap('@docs/headings', () => {
-      virtualModules.writeModule('node_modules/@docs/headings.js', headings(files))
-    })
-
-    compiler.hooks.watchRun.tap('@docs/pages', (comp) => {
+    compiler.hooks.watchRun.tap('PagesPlugin', (comp) => {
       const changedTimes = comp.watchFileSystem.watcher.mtimes
       const changedFiles = Object.keys(changedTimes)
         .filter(file => files.find(f => f.indexOf(path.basename(file)) >= 0))
