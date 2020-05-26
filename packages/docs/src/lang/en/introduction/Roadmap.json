@@ -133,12 +133,27 @@
         ]
       },
       "value": false
+    },    {
+      "type": "release",
+      "complete": false,
+      "title": "v2.3 Release **(Liberator)**",
+      "caption": "June 2020",
+      "text": "The v2.3 release was dropped earlier in the year to focus on v3 development but was revived when COVID-19 showed up. This release is packed full of quality of life changes, new features such as the `v-virtual-scroller` component, responsive typography css classes, ",
+      "features": {
+        "#### Objectives": [
+          "Add new css helper classes for `text-decoration`, `border-radius`, `typography`, and more.",
+          "Add new `v-virtual-scroll` component",
+          "Massive improvements to *Date Pickers, Data Tables, and Calendars*",
+          "Framework hardening and preparation for **LTS version**"
+        ]
+      },
+      "value": true
     },
     {
       "type": "packages",
       "complete": false,
       "title": "Vuetify Ecosystem Tools - **(Vue CLI Plugins)**",
-      "caption": "Q1/2 2020",
+      "caption": "Q4 2020",
       "text": "Brand new development tools designed to improve your productivity and efficiency while working with Vuetify. Built on top of [Vue CLI](https://cli.vuejs.org/), these plugins will easily integrate into existing projects and will be included by default in the Vuetify [remote preset](https://cli.vuejs.org/guide/plugins-and-presets.html#remote-presets). These features were first discussed at [Vue Conf Toronto in 2018](https://www.vuemastery.com/conferences/vueconf-toronto-2018/Vuetify-the-path-to-2-0) and officially shown at [Vue Conf Toronto in 2019](https://www.youtube.com/watch?v=B1oYaaMfHbw); official video coming soon.",
       "features": {
         "#### Highlights": [
@@ -147,13 +162,13 @@
           "Vuetify Preset"
         ]
       },
-      "value": true
+      "value": false
     },
     {
       "type": "release",
       "complete": false,
       "title": "v3.0 Release **(Titan)**",
-      "caption": "Q1/2 2020",
+      "caption": "Q3/4 2020",
       "text": "The entire framework will be converted to the new [composition api](https://vue-composition-api-rfc.netlify.com/) coming in Vue 3. Details of this conversion process are outlined in our [v3 Notion Board](https://notion.vuetifyjs.com) along with information about release schedules, proposed new functionality and more. Vuetify 3 is being developed with the pre-releases (alpha/beta) of Vue 3 and is expected to release shortly after the next Vue version is officially released. Due to this, the target release quarter is variable and will change according to the progress of Vue 3.",
       "features": {
         "#### Objectives": [
@@ -166,50 +181,6 @@
           "Update the Documentation with improved examples and more information"
         ]
       },
-      "value": true
-    },
-    {
-      "type": "maintenance",
-      "complete": false,
-      "title": "Maintenance Cycle",
-      "caption": "Q2/3 2020",
-      "text": "A maintenance cycle to focus on resolving bugs on our [Github issue board](https://github.com/vuetifyjs/vuetify/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+in%3Atitle+bug+). This will begin immediately upon the release of version 3.",
-      "value": false
-    },
-    {
-      "type": "release",
-      "complete": false,
-      "title": "v3.1 Release **(Orion)**",
-      "caption": "Q4 2020",
-      "text": "Vuetify components will be pre-configurable through framework wide defaults. This will allow you to set global settings such as **no-ripples** or all inputs are of **outlined** type and even set all cards to become **tile**s.",
-      "features": {
-        "#### Objectives": [
-          "Create the ability for users to globally define component defaults",
-          "Implement any missing features from the Material Design specification; i.e. [Backdrop](https://material.io/components/backdrop/)"
-        ],
-        "#### New Components": [
-          "`v-file-upload`",
-          "`v-empty-state`",
-          "`v-feature-discovery`",
-          "Detailed information regarding the new components will be released early 2020"
-        ]
-      },
-      "value": false
-    },
-    {
-      "type": "site",
-      "complete": false,
-      "title": "Theme Generator",
-      "caption": "Q2 2020",
-      "text": "A complete theme generator for easily creating customized presets for your application.",
-      "value": false
-    },
-    {
-      "type": "snips",
-      "complete": false,
-      "title": "Vuetify Snips",
-      "caption": "TBD",
-      "text": "Website geared towards creating and sharing snippets of Vuetify code.",
       "value": false
     }
   ]
