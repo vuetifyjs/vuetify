@@ -5,7 +5,7 @@ import Colorable from '../../mixins/colorable'
 import Measurable from '../../mixins/measurable'
 import Roundable from '../../mixins/roundable'
 
-// Helpers
+// Utilities
 import { convertToUnit } from '../../util/helpers'
 
 // Types
