@@ -6111,7 +6111,7 @@ dot-prop@^5.2.0:
   dependencies:
     is-obj "^2.0.0"
 
-dotenv@^8.0.0:
+dotenv@^8.0.0, dotenv@^8.2.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
   integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
@@ -6714,6 +6714,21 @@ execa@^4.0.0, execa@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/execa/-/execa-4.0.1.tgz#988488781f1f0238cd156f7aaede11c3e853b4c1"
   integrity sha512-SCjM/zlBdOK8Q5TIjOn6iEHZaPHFsMoTxXQ2nvUvtPnuohz3H2dIozSg+etNR98dGoYUp2ENSKLL/XaMmbxVgw==
+  dependencies:
+    cross-spawn "^7.0.0"
+    get-stream "^5.0.0"
+    human-signals "^1.1.1"
+    is-stream "^2.0.0"
+    merge-stream "^2.0.0"
+    npm-run-path "^4.0.0"
+    onetime "^5.1.0"
+    signal-exit "^3.0.2"
+    strip-final-newline "^2.0.0"
+
+execa@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/execa/-/execa-4.0.2.tgz#ad87fb7b2d9d564f70d2b62d511bee41d5cbb240"
+  integrity sha512-QI2zLa6CjGWdiQsmSkZoGtDx2N+cQIGb3yNolGTdjSQzydzLgYYf8LRuagp7S7fPimjcrzUDSUFd/MgzELMi4Q==
   dependencies:
     cross-spawn "^7.0.0"
     get-stream "^5.0.0"
@@ -13769,6 +13784,14 @@ rollup-plugin-postcss@^3.1.1:
     safe-identifier "^0.4.1"
     style-inject "^0.3.0"
 
+rollup-plugin-replace@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-replace/-/rollup-plugin-replace-2.2.0.tgz#f41ae5372e11e7a217cde349c8b5d5fd115e70e3"
+  integrity sha512-/5bxtUPkDHyBJAKketb4NfaeZjL5yLZdeUihSfbF2PQMz+rSTEb8ARKoOl3UBT4m7/X+QOXJo3sLTcq+yMMYTA==
+  dependencies:
+    magic-string "^0.25.2"
+    rollup-pluginutils "^2.6.0"
+
 rollup-plugin-scss@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/rollup-plugin-scss/-/rollup-plugin-scss-2.5.0.tgz#ce97d829b27d053007a0e7bd22269eb9af3e7705"
@@ -13834,7 +13857,7 @@ rollup-plugin-vue@^6.0.0-beta.1:
     hash-sum "^2.0.0"
     rollup-pluginutils "^2.8.2"
 
-rollup-pluginutils@2, rollup-pluginutils@^2.8.2:
+rollup-pluginutils@2, rollup-pluginutils@^2.6.0, rollup-pluginutils@^2.8.2:
   version "2.8.2"
   resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-2.8.2.tgz#72f2af0748b592364dbd3389e600e5a9444a351e"
   integrity sha512-EEp9NhnUkwY8aif6bxgovPHMoMoNr2FulJziTndpt5H9RdwC47GSGuII9XxpSdzVGM0GWrNPHV6ie1LTNJPaLQ==
@@ -15962,10 +15985,10 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-vite@^0.16.0:
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-0.16.0.tgz#c27317b66c44685d4cd19c2dd81d7953ac5cad04"
-  integrity sha512-JBgdl2qwfcgGciBYo/duMqjuQEFaH/Fwx5rGeEMIz/DxsaHEjscK8xigYfzvZ+UVnoC+VtmnnTGW5RiP3SCkLg==
+vite@^0.16.12:
+  version "0.16.12"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-0.16.12.tgz#eebfb3aadd8ae4f73c46bdb1512c0f1574bdf05e"
+  integrity sha512-/sVztpsjul+JgXg9enowHvh2zfrtOBV6dychZLkwNcL6PPAlfLebA2ln15a6wdCMcEkvwK6jWJhdXPfFfWcgzw==
   dependencies:
     "@babel/parser" "^7.9.4"
     "@rollup/plugin-commonjs" "~11.0.0"
@@ -15979,6 +16002,7 @@ vite@^0.16.0:
     chokidar "^3.3.1"
     cssnano "^4.1.10"
     debug "^4.1.1"
+    dotenv "^8.2.0"
     es-module-lexer "^0.3.18"
     esbuild "^0.3.2"
     etag "^1.8.1"
@@ -16000,9 +16024,11 @@ vite@^0.16.0:
     postcss "^7.0.28"
     postcss-load-config "^2.1.0"
     postcss-modules "^2.0.0"
+    resolve "^1.17.0"
     rollup "^2.7.2"
     rollup-plugin-terser "^5.3.0"
     rollup-plugin-vue "^6.0.0-beta.1"
+    selfsigned "^1.10.7"
     slash "^3.0.0"
     vue "^3.0.0-beta.14"
     ws "^7.2.3"

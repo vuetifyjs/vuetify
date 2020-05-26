@@ -9,7 +9,7 @@ const VAppImpl = defineComponent({
     return () => h('div', {
       class: 'v-application',
       styles: obj,
-    }, slots.default!())
+    }, [slots.default!()])
   },
 })
 

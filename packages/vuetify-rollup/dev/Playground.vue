@@ -1,14 +1,11 @@
 <template>
   <v-app>
-    hello!
+    <v-alert type="error">hello this is an alert!!</v-alert>
   </v-app>
 </template>
 
 <script>
-
-export default {
-  name: 'Playground',
-  components: {
+  export default {
+    name: 'Playground',
   }
-}
 </script>

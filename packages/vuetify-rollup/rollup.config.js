@@ -1,24 +1,24 @@
-// import typescript from 'rollup-plugin-typescript2'
 import typescript from 'rollup-plugin-typescript2'
 import replace from '@rollup/plugin-replace'
 import postcss from 'rollup-plugin-postcss'
 import externals from 'rollup-plugin-node-externals'
 import babel from '@rollup/plugin-babel'
 import babelRuntimeExternal from 'rollup-plugin-babel-runtime-external'
-import dts from 'rollup-plugin-dts'
-import { rewriteSassPaths, rewriteVueEsmPath } from './scripts/rollup-plugins'
+import { rewriteSassPaths } from './scripts/rollup-plugins'
 import pkg from './package.json'
 
 const base = {
   plugins: [
     typescript(),
     replace({
-      __VUETIFY_VERSION__: JSON.stringify(pkg.version),
+      'process.env.__VUETIFY_VERSION__': JSON.stringify(pkg.version),
     }),
   ],
 }
 
 const createConfig = format => {
+  if (format === 'lib') return createLib('esm')
+
   return {
     ...base,
     input: 'src/full.ts',
@@ -60,7 +60,6 @@ const createConfig = format => {
         minimize: false,
         sourceMap: false,
       }),
-      // format === 'esm' && rewriteVueEsmPath(),
       externals(),
       babelRuntimeExternal(),
     ],
@@ -84,39 +83,12 @@ const createLib = format => {
   }
 }
 
-const createDts = () => {
-  return [
-    {
-      input: 'src/index.ts',
-      output: {
-        dir: 'types',
-        format: 'es',
-      },
-      plugins: [
-        typescript({
-          clean: true,
-          tsconfig: 'tsconfig.types.json',
-        }),
-      ],
-    },
-    {
-      input: 'types/index.d.ts',
-      output: {
-        file: 'dist/vuetify.d.ts',
-        format: 'es',
-      },
-      plugins: [
-        rewriteSassPaths(),
-        dts(),
-      ],
-    },
-  ]
-}
+const packageOptions = pkg.buildOptions || {}
 
-export default [
-  // createConfig('esm'),
-  // createConfig('cjs'),
-  // createConfig('umd'),
-  // createLib('esm'),
-  ...createDts(),
-]
+const allFormats = ['esm', 'cjs', 'umd', 'lib']
+const inlineFormats = process.env.FORMATS && process.env.FORMATS.split(',')
+const packageFormats = inlineFormats || packageOptions.formats || allFormats
+
+const packageConfigs = packageFormats.map(createConfig)
+
+export default packageConfigs

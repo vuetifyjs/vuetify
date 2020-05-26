@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import Playground from './Playground.vue'
-import Vuetify from 'vuetify-rollup/dist/vuetify.esm.js'
-import 'vuetify-rollup/dist/vuetify.css'
+import Vuetify from '/src/full.ts'
 
 const app = createApp(Playground)
 

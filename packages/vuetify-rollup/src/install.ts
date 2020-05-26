@@ -28,4 +28,4 @@ export function VuetifyInstall (app: App, options: any = {}) {
   // app.provide(VuetifySymbol, vuetify.framework)
 }
 
-VuetifyInstall.version = __VUETIFY_VERSION__
+VuetifyInstall.version = process.env.__VUETIFY_VERSION__

@@ -1,16 +1,22 @@
-// import './VAlert.sass'
+import './VAlert.sass'
 
 import { defineComponent, h } from 'vue'
 import { publicComponent } from '../../util/helpers'
 
 const VAlertImpl = defineComponent({
   props: {
-    type: String,
+    type: {
+      type: String,
+      default: 'info',
+    },
   },
   setup (props, context) {
     return () => h('div', {
-      class: 'foo',
-    }, context.slots.default!())
+      class: {
+        foo: true,
+        [props.type]: true,
+      },
+    }, [context.slots.default!()])
   },
 })
 
