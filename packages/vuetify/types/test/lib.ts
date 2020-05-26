@@ -25,3 +25,9 @@ Vuetify.install(Vue, {
 new Vue({
   vuetify: new Vuetify(),
 })
+
+VBtn.extend()
+
+Vue.extend({
+  extends: VBtn,
+})
