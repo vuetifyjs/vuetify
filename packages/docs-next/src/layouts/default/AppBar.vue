@@ -1,5 +1,8 @@
 <template>
-  <v-app-bar app>
+  <v-app-bar
+    app
+    clipped-right
+  >
     <v-toolbar-title>Application</v-toolbar-title>
     <v-spacer />
     <v-toolbar-items>
