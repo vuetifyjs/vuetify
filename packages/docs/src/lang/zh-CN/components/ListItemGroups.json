@@ -34,5 +34,8 @@
     "v-list-item-title": "Components.Lists",
     "v-list-item-subtitle": "Components.Lists",
     "v-list-item-action-text": "Components.Lists"
+  },
+  "events": {
+    "change": "当组件值被用户交互改变时发出。"
   }
 }

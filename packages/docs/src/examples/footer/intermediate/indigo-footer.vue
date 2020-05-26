@@ -36,18 +36,11 @@
   export default {
     data: () => ({
       icons: [
-        'fab fa-facebook',
-        'fab fa-twitter',
-        'fab fa-google-plus',
-        'fab fa-linkedin',
-        'fab fa-instagram',
+        'mdi-facebook',
+        'mdi-twitter',
+        'mdi-linkedin',
+        'mdi-instagram',
       ],
     }),
   }
 </script>
-
-<codepen-resources lang="json">
-  {
-  "js": ["https://use.fontawesome.com/releases/v5.0.6/js/all.js"]
-  }
-</codepen-resources>

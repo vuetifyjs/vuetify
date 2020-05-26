@@ -44,7 +44,7 @@
 
       script.type = 'text/javascript'
       script.id = this.scriptId
-      script.src = '//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuetifyjscom'
+      script.src = '//cdn.carbonads.com/carbon.js?serve=CKYI5KQY&placement=vuetifyjscom'
       script.onerror = () => (this.hasError = true)
 
       this.$el && this.$el.appendChild(script)

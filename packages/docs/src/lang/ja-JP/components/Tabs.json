@@ -1,12 +1,16 @@
 {
   "heading": "# タブ",
   "headingText": "'v-tabs' コンポーネントは、選択可能な項目の背後にあるコンテンツを非表示にするために使用されます。これは、タブがリンクであり、タブ項目がコンテンツであるページの擬似ナビゲーションとしても使用できます。",
+  "alert1": "**dark** propと **NOT** を使用してカスタム **color** を提供する場合、`v-tabs` コンポーネントはデフォルトで色を _white_ に設定します。",
   "examples": {
     "usage": {
       "desc": "'v-tabs' コンポーネントは、[v-item-group](/components/item-groups) のスタイル付き拡張です。これは、コンテンツのグループを整理するための使いやすいインターフェイスを提供します。"
     },
     "fixed-tabs": {
       "desc": "**fixed-tabs** prop は `v-tab` が最大幅 (300px) までのスペースを占有するように強制します。"
+    },
+    "right": {
+      "desc": "**right** propを使用すると、タブを右寄せにします。"
     },
     "icons-and-text": {
       "heading": "### アイコンとテキスト",

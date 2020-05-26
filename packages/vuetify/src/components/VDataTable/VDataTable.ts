@@ -11,7 +11,8 @@ import {
   DataTableCompareFunction,
   DataItemsPerPageOption,
   ItemGroup,
-} from 'types'
+  RowClassFunction,
+} from 'vuetify/types'
 import { PropValidator } from 'vue/types/options'
 
 // Components
@@ -32,8 +33,9 @@ import MobileRow from './MobileRow'
 import ripple from '../../directives/ripple'
 
 // Helpers
-import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, defaultFilter, camelizeObjectKeys } from '../../util/helpers'
+import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, defaultFilter, camelizeObjectKeys, getPropertyFromItem } from '../../util/helpers'
 import { breaking } from '../../util/console'
+import { mergeClasses } from '../../util/mergeData'
 
 function filterFn (item: any, search: string | null, filter: DataTableFilterFunction) {
   return (header: DataTableHeader) => {
@@ -49,17 +51,20 @@ function searchTableItems (
   headersWithoutCustomFilters: DataTableHeader[],
   customFilter: DataTableFilterFunction
 ) {
-  let filtered = items
   search = typeof search === 'string' ? search.trim() : null
-  if (search && headersWithoutCustomFilters.length) {
-    filtered = items.filter(item => headersWithoutCustomFilters.some(filterFn(item, search, customFilter)))
-  }
 
-  if (headersWithCustomFilters.length) {
-    filtered = filtered.filter(item => headersWithCustomFilters.every(filterFn(item, search, defaultFilter)))
-  }
+  // If the `search` property is empty and there are no custom filters in use, there is nothing to do.
+  if (!(search && headersWithoutCustomFilters.length) && !headersWithCustomFilters.length) return items
 
-  return filtered
+  return items.filter(item => {
+    // Headers with custom filters are evaluated whether or not a search term has been provided.
+    if (headersWithCustomFilters.length && headersWithCustomFilters.every(filterFn(item, search, defaultFilter))) {
+      return true
+    }
+
+    // Otherwise, the `search` property is used to filter columns without a custom filter.
+    return (search && headersWithoutCustomFilters.some(filterFn(item, search, customFilter)))
+  })
 }
 
 /* @vue/component */
@@ -96,6 +101,10 @@ export default VDataIterator.extend({
     customFilter: {
       type: Function as PropType<typeof defaultFilter>,
       default: defaultFilter,
+    },
+    itemClass: {
+      type: [String, Function] as PropType<RowClassFunction | string>,
+      default: () => '',
     },
   },
 
@@ -447,10 +456,10 @@ export default VDataIterator.extend({
 
       return this.$createElement(this.isMobile ? MobileRow : Row, {
         key: getObjectValueByPath(item, this.itemKey),
-        class: {
-          ...classes,
-          'v-data-table__selected': data.isSelected,
-        },
+        class: mergeClasses(
+          { ...classes, 'v-data-table__selected': data.isSelected },
+          getPropertyFromItem(item, this.itemClass)
+        ),
         props: {
           headers: this.computedHeaders,
           item,

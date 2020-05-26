@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} επιλεγμένα',
+    nextMonthAriaLabel: 'Τον επόμενο μήνα',
+    nextYearAriaLabel: 'Του χρόνου',
+    prevMonthAriaLabel: 'Προηγούμενος μήνας',
+    prevYearAriaLabel: 'Προηγούμενο έτος',
   },
   noDataText: 'Χωρίς δεδομένα',
   carousel: {

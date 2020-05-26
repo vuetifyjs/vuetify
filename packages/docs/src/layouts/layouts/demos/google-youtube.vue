@@ -33,7 +33,7 @@
                 alt=""
               >
             </v-list-item-avatar>
-            <v-list-item-title v-text="item.text" />
+            <v-list-item-title v-text="item.text"></v-list-item-title>
           </v-list-item>
         </v-list>
         <v-list-item
@@ -60,7 +60,7 @@
       color="red"
       dense
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-icon
         class="mx-4"
         large
@@ -70,7 +70,7 @@
       <v-toolbar-title class="mr-12 align-center">
         <span class="title">Youtube</span>
       </v-toolbar-title>
-      <v-spacer />
+      <v-spacer></v-spacer>
       <v-row
         align="center"
         style="max-width: 650px"
@@ -82,7 +82,7 @@
           append-icon="mdi-magnify"
           color="white"
           hide-details
-        />
+        ></v-text-field>
       </v-row>
     </v-app-bar>
 
@@ -106,20 +106,6 @@
                 </v-btn>
               </template>
               <span>Source</span>
-            </v-tooltip>
-            <v-tooltip right>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  icon
-                  large
-                  href="https://codepen.io/johnjleider/pen/aezMOO"
-                  target="_blank"
-                  v-on="on"
-                >
-                  <v-icon large>mdi-codepen</v-icon>
-                </v-btn>
-              </template>
-              <span>Codepen</span>
             </v-tooltip>
           </v-col>
         </v-row>

@@ -149,6 +149,26 @@ describe('VColorPicker.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render flat picker', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        flat: true,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render picker with elevation', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        elevation: 15,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   // https://github.com/vuetifyjs/vuetify/issues/10402
   it('should not hide alpha if given initial value of null', () => {
     const wrapper = mountFunction({

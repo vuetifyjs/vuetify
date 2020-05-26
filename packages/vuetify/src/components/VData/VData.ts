@@ -11,7 +11,7 @@ import {
   DataGroupFunction,
   DataSearchFunction,
   ItemGroup,
-} from 'types'
+} from 'vuetify/types'
 import { PropValidator, PropType } from 'vue/types/options'
 
 export default Vue.extend({
@@ -315,8 +315,8 @@ export default Vue.extend({
         this.internalOptions.sortBy,
         this.internalOptions.sortDesc,
         this.internalOptions.page,
-        this.mustSort,
-        this.multiSort
+        this.internalOptions.mustSort,
+        this.internalOptions.multiSort
       )
       this.updateOptions({ sortBy, sortDesc, page })
     },

@@ -75,6 +75,10 @@
     "click:hour": "当用户选择小时时发出",
     "click:minute": "当用户选择分钟时发出",
     "click:second": "当用户选择秒时发出",
-    "change": "当时间选择完成时发出通知（当用户更改 HH:MM 选择器的分钟数时, HH:MM:SS 选择器的秒数"
+    "change": "当时间选择完成时发出通知（当用户更改 HH:MM 选择器的分钟数时, HH:MM:SS 选择器的秒数",
+    "update:period": "当用户点击 AM/PM 按钮时发出。"
+  },
+  "slots": {
+    "default": "显示在时钟下方，可用于添加动作按钮（`OK` 和 `Cancel`）。"
   }
 }

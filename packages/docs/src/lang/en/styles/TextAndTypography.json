@@ -1,6 +1,30 @@
 {
-  "heading": "# Text",
-  "headingText": "Control text alignment, wrapping, overflow, transforms and more.",
+  "heading": "# Text and typography",
+  "headingText": "Control text size, alignment, wrapping, overflow, transforms and more.",
+  "typographyHeader": "## Typography",
+  "typographyText1": "Control the size and style of text using the Typography helper classes. These values are based upon the [Material Design type specification](https://material.io/design/typography/the-type-system.html).",
+  "typographyText2": "These classes can be applied to all breakpoints from `xs` to `xl`. When using a base class,`.text-{value}`, it is inferred to be `.text-${value}-xs`.",
+  "typographyFormats": [
+    "`.text-{value}` for `xs`",
+    "`.text-{breakpoint}-{value}` for `sm`, `md`, `lg` and `xl`"
+  ],
+  "typographyText3": "The _value_ property is one of:",
+  "typographyClasses": [
+    "`h1`",
+    "`h2`",
+    "`h3`",
+    "`h4`",
+    "`h5`",
+    "`h6`",
+    "`subtitle-1`",
+    "`subtitle-2`",
+    "`body-1`",
+    "`body-2`",
+    "`button`",
+    "`caption`",
+    "`overline`"
+  ],
+  "typographyText4": "The following example demonstrates how the various sizes would appear at different breakpoints:",
   "alignmentHeader": "## Text alignment",
   "alignmentText1": "Alignment helper classes allow you to easily re-align text.",
   "alignmentText2": "There are also available alignment classes that support responsive displays.",

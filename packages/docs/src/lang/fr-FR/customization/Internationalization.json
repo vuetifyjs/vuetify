@@ -6,7 +6,6 @@
   "availableLocalesText": "Actuellement, Vuetify fournit des traductions dans les langues suivantes :",
   "alertInfo": "Vuetify fournit seulement une fonction de traduction de base `t`. Il est recommandé pour des fonctions d'internationalisation plus avancées pour utiliser l'intégration de Vuetifys avec [vue-i18n](#vue-i-18-n)",
   "createTranslation": "## Créer une traduction",
-  "createTranslationText": "Pour créer votre propre traduction, utilisez le code ci-dessous ou copiez et renommez le fichier `vuetify/src/locale/en.ts` dans votre projet et apportez vos modifications.",
   "customComponents": "## Composants personnalisés",
   "customComponentsText": "Si vous construisez des composants Vuetify personnalisés qui doivent s'accrocher au moteur d'internationalisation, vous pouvez utiliser la fonction `t` qui fait partie de l'API `$vuetify.lang`.",
   "api": {
@@ -15,6 +14,5 @@
     "t": "Fonction de traduction utilisée en interne"
   },
   "vueI18nHeader": "## Vue i18n",
-  "vueI18nText1": "Si vous utilisez le paquet vue-i18n, vous pouvez l’intégrer très facilement avec Vuetify. Cela vous permet de conserver toutes vos traductions au même endroit. Créez simplement une entrée pour $vuetify dans vos messages et ajoutez les modifications de langue correspondantes. Puis connectez vue-i18n à Vuetify en fournissant une fonction de traduction personnalisée (comme dans l'exemple ci-dessous). Pour une liste complète de toutes les clés disponibles, [naviguez ici](# create-translation).",
   "vueI18nText2": "Une remarque importante lors de l’utilisation de plugins de localisation externes est que vuetify ne retombera pas automatiquement en anglais si aucune localisation n’existe pour les langues actuelles. Assurez-vous donc de fournir au plugin les localisations anglaises ainsi que les vôtres."
 }

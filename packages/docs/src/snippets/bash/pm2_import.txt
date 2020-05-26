@@ -1,9 +1,9 @@
-// Import and start all services into PM2
-$ pm2 start ecosystem.config.js
+# Import and start all services into PM2
+pm2 start ecosystem.config.js
 
-// Import and start all services into PM2 (for Windows Only)
-// Currently only supports vuetify-docs
-$ pm2 start ecosystem-win.config.js
+# Import and start all services into PM2 (for Windows Only)
+# Currently only supports vuetify-docs
+pm2 start ecosystem-win.config.js
 
-// Import and start single service
-$ pm2 start ecosystem.config.js --only <process name>
+# Import and start single service
+pm2 start ecosystem.config.js --only <process name>

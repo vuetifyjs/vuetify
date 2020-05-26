@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} dipilih',
+    nextMonthAriaLabel: 'Bulan depan',
+    nextYearAriaLabel: 'Tahun depan',
+    prevMonthAriaLabel: 'Bulan sebelumnya',
+    prevYearAriaLabel: 'Tahun sebelumnya',
   },
   noDataText: 'Tidak ada data tersedia',
   carousel: {

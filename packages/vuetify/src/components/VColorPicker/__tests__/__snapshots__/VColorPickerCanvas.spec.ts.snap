@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VColorPickerCanvas.ts should emit event on click 1`] = `
+Object {
+  "alpha": 0,
+  "hex": "#E6CFCF",
+  "hexa": "#E6CFCF00",
+  "hsla": Object {
+    "a": 0,
+    "h": 0,
+    "l": 0.855,
+    "s": 0.31034482758620713,
+  },
+  "hsva": Object {
+    "a": 0,
+    "h": 0,
+    "s": 0.1,
+    "v": 0.9,
+  },
+  "hue": 0,
+  "rgba": Object {
+    "a": 0,
+    "b": 207,
+    "g": 207,
+    "r": 230,
+  },
+}
+`;
+
+exports[`VColorPickerCanvas.ts should emit event on mouse move 1`] = `
+Object {
+  "alpha": 0,
+  "hex": "#E6CFCF",
+  "hexa": "#E6CFCF00",
+  "hsla": Object {
+    "a": 0,
+    "h": 0,
+    "l": 0.855,
+    "s": 0.31034482758620713,
+  },
+  "hsva": Object {
+    "a": 0,
+    "h": 0,
+    "s": 0.1,
+    "v": 0.9,
+  },
+  "hue": 0,
+  "rgba": Object {
+    "a": 0,
+    "b": 207,
+    "g": 207,
+    "r": 230,
+  },
+}
+`;
+
+exports[`VColorPickerCanvas.ts should emit event on mouse move 2`] = `
+Object {
+  "alpha": 0,
+  "hex": "#000000",
+  "hexa": "#00000000",
+  "hsla": Object {
+    "a": 0,
+    "h": 0,
+    "l": 0,
+    "s": 0,
+  },
+  "hsva": Object {
+    "a": 0,
+    "h": 0,
+    "s": 1,
+    "v": 0,
+  },
+  "hue": 0,
+  "rgba": Object {
+    "a": 0,
+    "b": 0,
+    "g": 0,
+    "r": 0,
+  },
+}
+`;

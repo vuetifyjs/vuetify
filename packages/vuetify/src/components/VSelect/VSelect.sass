@@ -7,6 +7,10 @@
   .v-select__selection--disabled
     color: map-deep-get($material, 'text', 'disabled')
 
+  &.v-text-field--solo-inverted.v-input--is-focused
+    .v-select__selection--comma
+      color: map-deep-get($material, 'inputs', 'solo-inverted-focused-text')
+
 .v-select
   position: relative // For **attach** prop
 

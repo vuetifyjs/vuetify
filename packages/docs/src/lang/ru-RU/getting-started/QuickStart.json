@@ -28,9 +28,11 @@
   "cdnText": "Чтобы протестировать использование Vuetify.js без установки шаблона из Vue CLI, скопируйте код ниже в ваш `index.html`. Будет использована последняя версия Vue и Vuetify, позволяющая начать играть с компонентами. Вы также можете использовать [Vuetify starter](https://template.vuetifyjs.сom) на codepen. Не рекомендуется, но если вам нужно использовать пакеты cdn в среде _production_ рекомендуем вам зафиксировать определенную версию пакетов. Для получения дополнительной информации о том, как это сделать, перейдите на сайт [jsdelivr](https://www.jsdelivr.com/).",
   "cdnAlert": "Чтобы ваше приложение работало правильно, вы должны обернуть его в компоненте `v-app`. Смотрите страницу компонента [Application](/components/application) для получения дополнительной информации.",
   "electronHeader": "## Использование с Electron",
+  "electronText": "Чтобы использовать Vuetify с **Electron**, добавьте плагин [electron-builder](https://github.com/nklayman/vue-cli-plugin-electron-builder) через Vue CLI.",
   "pwaHeader": "## Использование с PWA",
   "pwaText": "Если вы создаете новое приложение с Vue CLI, вы можете выбрать **Progressive Web App (PWA) Support** в первом запросе после инициализации `vue create my-app`. Этот пакет также может быть установлен в существующие Vue CLI проекты, введя следующую команду:",
   "cordovaHeader": "## Использование с Cordova",
+  "cordovaText": "Чтобы использовать Vuetify с **Corodova**, добавьте [Cordova](https://github.com/m0dch3n/vue-cli-plugin-cordova) через Vue CLI:",
   "capacitorHeader": "## Использование с Capacitor",
   "capacitorText": "Чтобы использовать Vuetify с **Capacitor**, добавьте плагин [Capacitor](https://github.com/nklayman/vue-cli-plugin-capacitor) через Vue CLI:"
 }

@@ -26,10 +26,15 @@ export interface Vuetify {
   preset: VuetifyPreset
   userPreset: UserVuetifyPreset
   version: string
+  config: Config
   new (preset?: Partial<UserVuetifyPreset>): Vuetify
 }
 
-export { Presets, VuetifyPreset, UserVuetifyPreset } from './services/presets';
+export interface Config {
+  silent: boolean
+}
+
+export { Presets, VuetifyPreset, UserVuetifyPreset } from './services/presets'
 
 export type ComponentOrPack = Component & {
   $_vuetify_subcomponents?: Record<string, ComponentOrPack>
@@ -207,6 +212,7 @@ export interface CalendarEventParsed {
   endTimestampIdentifier: number
   allDay: boolean
   index: number
+  category: string | false
 }
 
 export interface CalendarEventVisual {
@@ -221,17 +227,25 @@ export interface CalendarDaySlotScope extends CalendarTimestamp {
   outside: boolean
   index: number
   week: CalendarTimestamp[]
+  category: string | undefined | null
 }
 
-export type CalendarTimeToY = (time: CalendarTimestamp | number | string) => number
+export type CalendarTimeToY = (time: CalendarTimestamp | number | string, clamp?: boolean) => number
+
+export type CalendarTimeDelta = (time: CalendarTimestamp | number | string) => number | false
 
 export interface CalendarDayBodySlotScope extends CalendarDaySlotScope {
   timeToY: CalendarTimeToY
+  timeDelta: CalendarTimeDelta
 }
 
-export type CalendarEventOverlapMode = (events: CalendarEventParsed[], firstWeekday: number, overlapThreshold: number) => (day: CalendarDaySlotScope, dayEvents: CalendarEventParsed[], timed: boolean) => CalendarEventVisual[]
+export type CalendarEventOverlapMode = (events: CalendarEventParsed[], firstWeekday: number, overlapThreshold: number) => (day: CalendarDaySlotScope, dayEvents: CalendarEventParsed[], timed: boolean, reset: boolean) => CalendarEventVisual[]
 
 export type CalendarEventColorFunction = (event: CalendarEvent) => string
+
+export type CalendarEventTimedFunction = (event: CalendarEvent) => boolean
+
+export type CalendarEventCategoryFunction = (event: CalendarEvent) => string
 
 export type CalendarEventNameFunction = (event: CalendarEventParsed, timedEvent: boolean) => string
 
@@ -254,3 +268,5 @@ export type DataItemsPerPageOption = (number | {
   text: string
   value: number
 });
+
+export type RowClassFunction = (item: any) => null | undefined | string | string[] | Record<string, boolean>

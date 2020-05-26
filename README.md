@@ -272,7 +272,7 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [p
         </a>
       </td>
       <td>
-        A supplementary Vue CLI plugin used by <a href="https:/github.com/vuetifyjs.com/vue-cli-preset-vuetify">vue-cli-preset-vuetify</a>
+        A supplementary Vue CLI plugin used by <a href="https:/github.com/vuetifyjs/preset">@vuetify/preset</a>
       </td>
     </tr>
     <tr>
@@ -381,7 +381,7 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [p
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/vuetifyjs/vue-cli-preset-vuetify">vue-cli-preset-vuetify</a>
+        <a href="https://github.com/vuetifyjs/preset">@vuetify/preset</a>
       </td>
       <td>
         n/a
@@ -430,7 +430,7 @@ For help and support questions, please use our [community chat](https://communit
 ### Issues
 Please make sure to read the [Important Information](https://github.com/vuetifyjs/vuetify/blob/master/.github/CONTRIBUTING.md#important-information) before opening an issue. Issues not confirming to the guidelines may be closed immediately.
 
-### Changlog
+### Changelog
 Detailed changes for each release are documented in the [release notes](https://github.com/vuetifyjs/vuetify/releases).
 
 ### Contributing

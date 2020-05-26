@@ -4,7 +4,7 @@ import VSelect from '../VSelect/VSelect'
 import VChip from '../VChip'
 import header from './mixins/header'
 import { wrapInArray } from '../../util/helpers'
-import { DataTableHeader } from 'types'
+import { DataTableHeader } from 'vuetify/types'
 
 export default mixins(header).extend({
   name: 'v-data-table-header-mobile',
@@ -52,6 +52,7 @@ export default mixins(header).extend({
           hideDetails: true,
           multiple: this.options.multiSort,
           value: this.options.multiSort ? this.options.sortBy : this.options.sortBy[0],
+          menuProps: { closeOnContentClick: true },
         },
         on: {
           change: (v: string | string[]) => this.$emit('sort', v),
