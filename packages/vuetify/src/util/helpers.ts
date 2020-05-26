@@ -447,3 +447,7 @@ export function mergeDeep (
 
   return source
 }
+
+export function fillArray<T> (length: number, obj: T) {
+  return Array(length).fill(obj)
+}

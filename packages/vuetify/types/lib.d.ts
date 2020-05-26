@@ -343,6 +343,7 @@ declare module 'vuetify/lib' {
 }
 
 declare module 'vuetify/lib/directives' {
+  // eslint-disable-next-line import/no-duplicates
   import { DirectiveOptions } from 'vue'
 
   const ClickOutside: DirectiveOptions
@@ -360,6 +361,6 @@ declare module 'vuetify/lib/directives' {
     Ripple,
     Resize,
     Scroll,
-    Touch
+    Touch,
   }
 }

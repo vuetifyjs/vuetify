@@ -261,6 +261,7 @@ svg:not([fill]) {
   [hidden~="screen"] {
     display: inherit;
   }
+
   [hidden~="screen"]:not(:active):not(:focus):not(:target) {
     position: absolute !important;
     clip: rect(0 0 0 0) !important;
@@ -278,6 +279,6 @@ svg:not([fill]) {
 }
 
 /* Specify the unstyled cursor of disabled, not-editable, or otherwise inoperable elements */
-[aria-disabled] {
+[aria-disabled="true"] {
   cursor: default;
 }
