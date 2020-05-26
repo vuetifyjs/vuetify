@@ -10,8 +10,8 @@ module.exports = {
   },
   chainWebpack: config => {
     config
-      .plugin('drawer-items-plugin')
-      .use(path.resolve('./build/drawer-items-plugin.js'))
+      .plugin('pages-plugin')
+      .use(path.resolve('./build/pages-plugin.js'))
 
     config.module
       .rule('markdown')

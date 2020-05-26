@@ -1,8 +1,10 @@
 // Pathify
 import { make } from 'vuex-pathify'
+import headings from '@docs/headings'
 import pages from '@docs/pages'
 
 const state = {
+  headings,
   pages,
 }
 
