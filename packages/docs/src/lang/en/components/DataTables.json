@@ -19,7 +19,7 @@
     },
     "group": {
       "heading": "### Grouped rows",
-      "desc": "Using the `group-by` and `group-desc` props you can group rows on an item property. The `show-group-by` prop will show a group button in the default header."
+      "desc": "Using the `group-by` and `group-desc` props you can group rows on an item property. The `show-group-by` prop will show a group button in the default header. You can use the `groupable` property on header items to disable the group button."
     },
     "dense": {
       "heading": "### Dense",

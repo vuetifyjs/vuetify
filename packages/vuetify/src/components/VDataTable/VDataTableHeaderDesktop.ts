@@ -105,7 +105,7 @@ export default mixins(header).extend({
         }
       }
 
-      if (this.showGroupBy) children.push(this.genGroupByToggle(header))
+      if (this.showGroupBy && header.groupable !== false) children.push(this.genGroupByToggle(header))
 
       return this.$createElement('th', data, children)
     },
