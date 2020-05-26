@@ -89,6 +89,10 @@ export default {
     },
   },
   weeks: {
+    localeFirstDayOfYear: {
+      type: [String, Number],
+      default: 0,
+    },
     minWeeks: {
       validate: validateNumber,
       default: 1,
@@ -101,6 +105,7 @@ export default {
       type: Boolean,
       default: true,
     },
+    showWeek: Boolean,
     monthFormat: {
       type: Function as PropType<CalendarFormatter>,
       default: null,
