@@ -1,0 +1,16 @@
+{
+  "heading": "# Click outside",
+  "headingText": "The `v-click-outside` directive calls a function when something outside of the target element is clicked on. This is used internally by components like `v-menu` and `v-dialog`.",
+  "examples": {
+    "usage": {
+      "desc": "The `v-click-outside` directive allows you to provide a handler to be invoked when the user clicks outside of the target element."
+    },
+    "close-conditional": {
+      "heading": "### Conditional handler",
+      "desc": "Optionally provide a `closeOnOutsideClick` handler that returns `true` or `false`. This function determines whether the outside click function is invoked or not."
+    }
+  },
+  "options": {
+    "value": "A callback or options object."
+  }
+}

@@ -114,7 +114,7 @@ describe('scroll.ts', () => {
     expect(el._onScroll).toEqual({
       handler,
       target: window,
-      options: {},
+      options: { passive: true },
     })
 
     binding.value = { handler, options: { passive: false } }

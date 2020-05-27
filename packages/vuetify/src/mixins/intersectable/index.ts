@@ -19,9 +19,7 @@ export default function intersectable (options: { onVisible: string[] }) {
     mounted () {
       Intersect.inserted(this.$el as HTMLElement, {
         name: 'intersect',
-        value: {
-          handler: this.onObserve,
-        },
+        value: this.onObserve,
       })
     },
 

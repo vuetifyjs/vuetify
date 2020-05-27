@@ -333,8 +333,8 @@ export default baseMixins.extend({
     genDirectives (): VNodeDirective[] {
       const directives = [{
         name: 'click-outside',
-        value: () => (this.isActive = false),
-        args: {
+        value: {
+          handler: () => { this.isActive = false },
           closeConditional: this.closeConditional,
           include: this.getOpenDependentElements,
         },

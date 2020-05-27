@@ -312,12 +312,12 @@ export default baseMixins.extend({
       if (!this.openOnHover && this.closeOnClick) {
         directives.push({
           name: 'click-outside',
-          value: () => { this.isActive = false },
-          args: {
+          value: {
+            handler: () => { this.isActive = false },
             closeConditional: this.closeConditional,
             include: () => [this.$el, ...this.getOpenDependentElements()],
           },
-        } as any)
+        })
       }
 
       return directives

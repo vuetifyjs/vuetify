@@ -158,11 +158,11 @@ export default baseMixins.extend<options>().extend({
     directives (): VNodeDirective[] | undefined {
       return this.isFocused ? [{
         name: 'click-outside',
-        value: this.blur,
-        args: {
+        value: {
+          handler: this.blur,
           closeConditional: this.closeConditional,
         },
-      } as VNodeDirective] : undefined
+      }] : undefined
     },
     dynamicHeight () {
       return 'auto'

@@ -1,25 +1,23 @@
 import { VNodeDirective } from 'vue/types/vnode'
 
 interface ClickOutsideBindingArgs {
+  handler: (e: Event) => void
   closeConditional?: (e: Event) => boolean
   include?: () => HTMLElement[]
 }
 
 interface ClickOutsideDirective extends VNodeDirective {
-  value?: (e: Event) => void
-  args?: ClickOutsideBindingArgs
+  value?: ((e: Event) => void) | ClickOutsideBindingArgs
 }
 
-function closeConditional () {
-  return false
+function defaultConditional () {
+  return true
 }
 
 function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirective): void {
-  // Args may not always be supplied
-  binding.args = binding.args || {}
+  const handler = typeof binding.value === 'function' ? binding.value : binding.value!.handler
 
-  // If no closeConditional was supplied assign a default
-  const isActive = (binding.args.closeConditional || closeConditional)
+  const isActive = (typeof binding.value === 'object' && binding.value.closeConditional) || defaultConditional
 
   // The include element callbacks below can be expensive
   // so we should avoid calling them when we're not active.
@@ -38,7 +36,7 @@ function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirec
 
   // Check if additional elements were passed to be included in check
   // (click must be outside all included elements, if any)
-  const elements = (binding.args.include || (() => []))()
+  const elements = ((typeof binding.value === 'object' && binding.value.include) || (() => []))()
   // Add the root element for the component this directive was defined on
   elements.push(el)
 
@@ -48,7 +46,7 @@ function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirec
   // Note that, because we're in the capture phase, this callback will occur before
   // the bubbling click event on any outside elements.
   !elements.some(el => el.contains(e.target as Node)) && setTimeout(() => {
-    isActive(e) && binding.value && binding.value(e)
+    isActive(e) && handler && handler(e)
   }, 0)
 }
 
