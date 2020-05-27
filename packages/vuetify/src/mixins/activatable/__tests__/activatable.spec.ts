@@ -74,7 +74,7 @@ describe('activatable.ts', () => {
 
     expect(wrapper.find('button').text()).toBe('true')
   })
-  
+
   it('should render activator slot with hover', async () => {
     const runDelay = jest.fn()
 
@@ -103,7 +103,6 @@ describe('activatable.ts', () => {
     btn.trigger('mouseleave')
     expect(runDelay).toHaveBeenLastCalledWith('close')
   })
-
 
   it('should warn when activator hasn\'t got a scope', () => {
     mountFunction({
