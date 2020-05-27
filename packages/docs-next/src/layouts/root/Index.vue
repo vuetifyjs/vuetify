@@ -17,7 +17,31 @@
   import '@/styles/overrides.sass'
   import 'github-markdown-css/github-markdown.css'
 
+  // Utilities
+  import { get } from 'vuex-pathify'
+
+  // Language
+  import { loadLocale } from '@/plugins/i18n'
+
   export default {
-    //
+    name: 'RootLayout',
+
+    computed: {
+      translating: get('app/translating'),
+    },
+
+    created () {
+      if (!this.translating) return
+
+      const crowdin = document.createElement('script')
+
+      crowdin.src = 'https://cdn.crowdin.com/jipt/jipt.js'
+
+      document.head.appendChild(crowdin)
+    },
+
+    beforeRouteUpdate: (to, _, next) => {
+      loadLocale(to.params.locale).then(next)
+    },
   }
 </script>

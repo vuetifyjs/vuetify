@@ -13,6 +13,7 @@
     "core-js": "^3.6.4",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.11",
+    "vue-i18n": "^8.17.7",
     "vue-router": "^3.1.6",
     "vuetify": "^2.3.0-beta.6",
     "vuex": "^3.4.0"

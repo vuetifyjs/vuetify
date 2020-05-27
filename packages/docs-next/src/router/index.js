@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import VueGtag from 'vue-gtag'
+import { loadLocale } from '../plugins/i18n'
 
 Vue.use(Router)
 
@@ -17,7 +18,7 @@ export function createRouter () {
     },
     routes: [
       {
-        path: '/:lang',
+        path: '/:locale',
         component: () => import('@/layouts/root/Index'),
         children: [
           {
@@ -34,6 +35,10 @@ export function createRouter () {
             ],
           },
         ],
+        beforeEnter: (to, _, next) => {
+          const locale = to.params.locale
+          loadLocale(locale).then(next)
+        },
       },
     ],
   })

@@ -14,11 +14,11 @@
 
   async function load (route) {
     const page = upperFirst(camelCase(route.params.page))
-    const { category, lang } = route.params
+    const { category, locale } = route.params
 
     return import(
       /* webpackChunkName: "documentation-pages" */
-      `@/pages/${lang}/${category}/${page}.md`
+      `@/pages/${locale}/${category}/${page}.md`
     )
   }
 
@@ -46,23 +46,21 @@
       page: undefined,
     }),
 
-    async created () {
-      const { attributes, vue } = await load(this.$route)
-
-      this.attributes = attributes
-      this.page = vue.component
+    watch: {
+      '$route.params.locale': 'loadComponent',
     },
 
-    beforeRouteEnter (to, from, next) {
-      next(vm => {
-        const { lang } = to.params
-        if (lang === 'eo-UY') {
-          console.log(lang)
-          const crowdin = document.createElement('script')
-          crowdin.setAttribute('src', 'https://cdn.crowdin.com/jipt/jipt.js')
-          document.head.appendChild(crowdin)
-        }
-      })
+    created () {
+      this.loadComponent()
+    },
+
+    methods: {
+      async loadComponent () {
+        const { attributes, vue } = await load(this.$route)
+
+        this.attributes = attributes
+        this.page = vue.component
+      },
     },
   }
 </script>

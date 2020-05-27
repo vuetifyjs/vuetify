@@ -1,10 +1,14 @@
 "project_identifier": "vuetify"
-"api_key": "<api-key>"
-"base_path": "<path to folder>\\src\\pages"
+"api_key_env": "CROWDIN_API_KEY"
+"base_path": "src"
 "preserve_hierarchy": true
 "files": [
   {
-    "source": "en\\**\\*.md",
-    "translation": "%locale%\\**\\%original_file_name%",
+    "source": "pages\\en\\**\\*.md",
+    "translation": "pages\\%locale%\\**\\%original_file_name%",
+  },
+  {
+    "source": "i18n\\messages\\en.json",
+    "translation": "i18n\\message\\%locale%.json"
   }
 ]

@@ -20,7 +20,7 @@
         <v-list-item
           v-for="page in pages[item.group]"
           :key="page.title"
-          :to="`/${lang}${page.to}`"
+          :to="`/${locale}${page.to}`"
         >
           <v-list-item-content>
             <v-list-item-title v-text="page.title" />
@@ -39,22 +39,22 @@
     name: 'DefaultDrawer',
 
     computed: {
-      lang: get('route/params@lang'),
+      locale: get('route/params@locale'),
       pages: get('app/pages'),
       items () {
         return [
           {
-            title: 'Getting started',
+            title: this.$t('getting-started'),
             icon: '$mdiSpeedometer',
             group: 'getting-started',
           },
           {
-            title: 'Components',
+            title: this.$t('components'),
             icon: '$mdiViewDashboard',
             group: 'components',
           },
           {
-            title: 'API',
+            title: this.$t('api'),
             icon: '$mdiBeaker',
             group: 'api',
           },
