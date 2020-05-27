@@ -13,7 +13,6 @@ nav: v-alert
 | 이름     |   타입   |    디폴트    | 설명                                                                                     |
 |:------ |:------:|:---------:|:-------------------------------------------------------------------------------------- |
 | border | string | undefined | Puts a border on the alert. Accepts **top** \| **right** \| **bottom** \| **left**. |
-</api-table>
 
 ## 슬롯
 
