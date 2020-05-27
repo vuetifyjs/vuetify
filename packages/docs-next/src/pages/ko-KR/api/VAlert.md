@@ -10,12 +10,12 @@ nav: v-alert
 
 ## Props
 <api-table>
-| Name | Type   | Default | Description |
-| :--- | :---:  | :---:   | :---        |
+| 이름     |   타입   |    디폴트    | 설명                                                                                     |
+|:------ |:------:|:---------:|:-------------------------------------------------------------------------------------- |
 | border | string | undefined | Puts a border on the alert. Accepts **top** \| **right** \| **bottom** \| **left**. |
 </api-table>
 
-## Slots
+## 슬롯
 
 ## Events
 
