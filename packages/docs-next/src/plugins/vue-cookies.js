@@ -1,4 +1,5 @@
-import Vue from 'vue'
 import Cookies from 'vue-cookies'
 
-Vue.use(Cookies)
+export function useCookies (app) {
+  app.use(Cookies)
+}

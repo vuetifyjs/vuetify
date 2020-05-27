@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import './plugins'
+import { registerPlugins } from './plugins'
 import { createVuetify } from './plugins/vuetify'
 import { createStore } from '@/store/index'
 import { createRouter } from '@/router/index'
@@ -14,6 +14,8 @@ const router = createRouter()
 const vuetify = createVuetify()
 
 sync(store, router)
+
+registerPlugins(Vue)
 
 new Vue({
   router,

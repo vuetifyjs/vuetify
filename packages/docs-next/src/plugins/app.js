@@ -5,17 +5,16 @@
  * in the `./src/components/` folder.
  */
 
-// Imports
-import Vue from 'vue'
+export function registerComponents (app) {
+  // Get all .vue files within `src/components/app`
+  const requireComponent = require.context('@/components', true, /\.vue$/)
 
-// Get all .vue files within `src/components/app`
-const requireComponent = require.context('@/components', true, /\.vue$/)
+  for (const file of requireComponent.keys()) {
+    const componentConfig = requireComponent(file)
 
-for (const file of requireComponent.keys()) {
-  const componentConfig = requireComponent(file)
-
-  Vue.component(
-    componentConfig.default.name,
-    componentConfig.default || componentConfig,
-  )
+    app.component(
+      componentConfig.default.name,
+      componentConfig.default || componentConfig,
+    )
+  }
 }

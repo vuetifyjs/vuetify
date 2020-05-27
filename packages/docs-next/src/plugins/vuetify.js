@@ -5,7 +5,6 @@
  */
 
 // Imports
-import Vue from 'vue'
 import Vuetify from 'vuetify/lib/framework'
 
 import {
@@ -17,8 +16,6 @@ import {
   mdiViewDashboard,
 } from '@mdi/js'
 
-Vue.use(Vuetify)
-
 const icons = {
   iconfont: 'mdiSvg',
   values: {
@@ -29,6 +26,10 @@ const icons = {
     mdiTranslate,
     mdiViewDashboard,
   },
+}
+
+export function useVuetify (app) {
+  app.use(Vuetify)
 }
 
 export function createVuetify () {
