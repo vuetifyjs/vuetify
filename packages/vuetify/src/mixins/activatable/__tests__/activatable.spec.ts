@@ -74,32 +74,6 @@ describe('activatable.ts', () => {
 
     expect(wrapper.find('button').text()).toBe('true')
   })
-
-  it('should render activator slot with focus', async () => {
-    const runDelay = jest.fn()
-
-    const wrapper = mountFunction({
-      propsData: {
-        openOnFocus: true,
-      },
-      scopedSlots: {
-        activator: props => vm.$createElement('button', props),
-      },
-      render (h) {
-        return h('div', [this.genActivator()])
-      },
-      methods: {
-        runDelay,
-      },
-    })
-
-    // expect(wrapper.html()).toMatchSnapshot()
-
-    const btn = wrapper.find('button')
-
-    btn.trigger('focus')
-    expect(runDelay).toHaveBeenLastCalledWith('open')
-  })
   
   it('should render activator slot with hover', async () => {
     const runDelay = jest.fn()
