@@ -20,13 +20,9 @@ describe('CustomAlert.vue', () => {
 
   beforeEach(() => {
     vuetify = new Vuetify({
-      mocks: {
-        $vuetify: {
-          lang: {
-            t: (val: string) => val,
-          },
-        },
-      }
+      lang: {
+        t: (val: string) => val,
+      },
     })
   })
 
