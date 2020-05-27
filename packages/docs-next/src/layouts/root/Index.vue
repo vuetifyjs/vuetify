@@ -18,19 +18,18 @@
   import 'github-markdown-css/github-markdown.css'
 
   // Utilities
-  import { get } from 'vuex-pathify'
-
-  // Language
-  import { loadLocale } from '@/plugins/i18n'
+  import { get, call } from 'vuex-pathify'
 
   export default {
     name: 'RootLayout',
 
     computed: {
-      translating: get('app/translating'),
+      translating: get('i18n/translating'),
     },
 
     created () {
+      this.init()
+
       if (!this.translating) return
 
       const crowdin = document.createElement('script')
@@ -40,8 +39,13 @@
       document.head.appendChild(crowdin)
     },
 
-    beforeRouteUpdate: (to, _, next) => {
-      loadLocale(to.params.locale).then(next)
+    methods: {
+      init: call('app/init'),
+      switchLocale: call('i18n/switch'),
+    },
+
+    beforeRouteUpdate (to, _, next) {
+      this.switchLocale({ locale: to.params.locale }).then(next)
     },
   }
 </script>

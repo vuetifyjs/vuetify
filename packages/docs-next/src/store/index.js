@@ -14,7 +14,5 @@ export function createStore () {
     plugins: [pathify.plugin],
   })
 
-  store.dispatch('app/init')
-
   return store
 }

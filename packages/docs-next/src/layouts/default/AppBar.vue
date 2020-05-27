@@ -45,7 +45,7 @@
     data: () => ({ locales }),
 
     computed: {
-      translating: get('app/translating'),
+      translating: get('i18n/translating'),
     },
 
     methods: {
@@ -54,14 +54,14 @@
 
         const to = this.$router.resolve({ params: { locale } })
 
-        await this.$router.replace(to.location)
-
         // If we're moving to or from crowdin language, we should
         // refresh so that jipt script can be loaded or unloaded
         if (
           this.translating ||
           locale === 'eo-UY'
-        ) window.location.reload()
+        ) setTimeout(() => this.$router.go(), 250)
+
+        await this.$router.replace(to.location)
       },
     },
   }

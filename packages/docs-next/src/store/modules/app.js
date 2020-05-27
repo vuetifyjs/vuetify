@@ -1,26 +1,18 @@
 // Pathify
 import { make } from 'vuex-pathify'
-import headings from '@docs/headings'
-import pages from '@docs/pages'
 
-const state = {
-  headings,
-  pages,
-}
+const state = {}
 
 const mutations = make.mutations(state)
 
 const actions = {
-  init: ({ dispatch }) => {
+  init: ({ dispatch, rootState }) => {
     dispatch('ads/fetch', null, { root: true })
+    dispatch('i18n/switch', { locale: rootState.route.params.locale }, { root: true })
   },
 }
 
-const getters = {
-  translating: (state, getters, rootState) => {
-    return rootState.route.params.locale === 'eo-UY'
-  },
-}
+const getters = {}
 
 export default {
   namespaced: true,

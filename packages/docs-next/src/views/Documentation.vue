@@ -7,14 +7,9 @@
 <script>
   // Utilities
   import { genMetaData } from '@/util/metadata'
-  import {
-    camelCase,
-    upperFirst,
-  } from 'lodash'
 
   async function load (route) {
-    const page = upperFirst(camelCase(route.params.page))
-    const { category, locale } = route.params
+    const { category, locale, page } = route.params
 
     return import(
       /* webpackChunkName: "documentation-pages" */

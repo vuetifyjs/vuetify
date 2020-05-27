@@ -41,9 +41,9 @@
     computed: {
       category: get('route/params@category'),
       page: get('route/params@page'),
-      headings: get('app/headings'),
+      tocs: get('i18n/tocs'),
       toc () {
-        return this.headings[this.category][this.page]
+        return this.tocs && this.tocs[this.category] && this.tocs[this.category][this.page]
       },
     },
   }

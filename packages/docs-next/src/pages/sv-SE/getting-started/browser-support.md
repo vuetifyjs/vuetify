@@ -1,8 +1,6 @@
 ---
-title: Browser support
 description: Vuetify is a progressive framework that supports all evergreen browsers and IE11 / Safari with polyfill.
 keywords: vuetify browser support
-nav: true
 ---
 
 # Browser support

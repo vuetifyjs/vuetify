@@ -1,12 +1,10 @@
 ---
-title: 경고창 (Alerts)
 layout: documentation
 description: The v-alert component is used to convey information to the user. Designed to stand out, the alerts come in four contextual styles.
 keywords: v-alert, alerts, vue alert component, vuetify alert component
-nav: true
 ---
 
-# V-Alert
+# Alerts
 The `v-alert` component is used to convey important information to the user through the use contextual types icons and color. These default types come in in 4 variations: `success`, `info`, `warning`, and `error`. Default icons are assigned which help represent different actions each type portrays. Many parts of an alert such as border, icon, and color can also be customized to fit almost any situation.
 
 <carbon-ad />
@@ -22,7 +20,7 @@ None
 <alert type="warning">I'm an alert. Fear My Alertness!</alert>
 
 ## Examples
-간단한 예재부터 복잡한 예제까지 아래를 참고해서 앱 개발을 시작해 보세요.
+Below is a collection of simple to complex examples.
 
   ### Type Lorem ipsum <example>v-alert.type</example>
 

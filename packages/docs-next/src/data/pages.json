@@ -1,0 +1,22 @@
+[
+  {
+    "title": "getting-started",
+    "icon": "$mdiSpeedometer",
+    "items": [
+      {
+        "title": "quick-start"
+      },
+      {
+        "title": "browser-support"
+      }
+    ]
+  },
+  {
+    "title": "components",
+    "icon": "$mdiViewDashboard"
+  },
+  {
+    "title": "api",
+    "icon": "$mdiBeaker"
+  }
+]

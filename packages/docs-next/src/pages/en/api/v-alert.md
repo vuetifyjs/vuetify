@@ -1,20 +1,17 @@
 ---
 layout: documentation
-title: V-Alert API
 description: API for the v-alert component.
 keywords: v-alert, alerts, api, vue alert component, vuetify alert component
-nav: v-alert
 ---
 
-# V-Alert API
+# V-Alert
 
 ## Props
-<api-table>
-| 이름     |   타입   |    디폴트    | 설명                                                                                     |
-|:------ |:------:|:---------:|:-------------------------------------------------------------------------------------- |
+| Name | Type   | Default | Description |
+| :--- | :---:  | :---:   | :---        |
 | border | string | undefined | Puts a border on the alert. Accepts **top** \| **right** \| **bottom** \| **left**. |
 
-## 슬롯
+## Slots
 
 ## Events
 

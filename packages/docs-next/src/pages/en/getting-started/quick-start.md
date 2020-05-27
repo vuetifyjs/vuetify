@@ -1,11 +1,9 @@
 ---
-title: Quick Start
 description: Get started with Vue and Vuetify in no time. Support for Vue CLI, Webpack, Nuxt and more.
-keywords: quick start, vuetify templates, get started
-nav: true
+keywords: quick start, vuetify templates, installing vuetify, install vuetify
 ---
 
-# 빠른 시작
+# Quick start
 
 Get started with Vuetify, the world’s most popular Vue.js framework for building feature rich, blazing fast application.
 
@@ -42,7 +40,7 @@ vue ui
 
 This will start the Vue User Interface and open a [new window]() in your browser. On the left side of your screen, click on **Plugins**. Once navigated, search for Vuetify in the input field.
 
-![Vuetify 플러그인 설치하기](https://cdn.vuetifyjs.com/images/quick-start/vue_ui.png "Vue UI Vuetify Plugin")
+![Install Vuetify Plugin](https://cdn.vuetifyjs.com/images/quick-start/vue_ui.png "Vue UI Vuetify Plugin")
 
 ## Nuxt install
 Vuetify can be added by installing the Nuxt Vuetify module.
@@ -72,7 +70,7 @@ Once installed, update your nuxt.config.js file to include the Vuetify module in
 More information on installing Nuxt can be found on the official documentation.
 
 ## Webpack install
-Vuetify 를 Webpack 프로젝트에 추가하기 위해선 몇가지 의존성들을 추가해야 합니다.
+To install Vuetify into a Webpack project you need to add a few dependencies:
 
 ```bash
 yarn add vuetify
@@ -153,7 +151,7 @@ const opts = {}
 export default new Vuetify(opts)
 ```
 
-설정된 Main Entry Point(보통 `src/main. js`) 로 이동하여 Vuetify object를 Vue 인스턴스에 옵션으로 추가 하세요.
+Navigate to your main entry point where you instantiate your Vue instance and pass the Vuetify object in as an option.
 
 ```js
 // src/main.js

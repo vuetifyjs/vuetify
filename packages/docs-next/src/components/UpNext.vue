@@ -38,23 +38,26 @@
         'params@page',
         'params@lang',
       ]),
-      pages: get('app/pages'),
+      pages: get('i18n/pages'),
       page: get('route/params@page'),
+      currentCategory () {
+        return this.pages && this.pages[this.category]
+      },
       current () {
-        return this.pages[this.category][this.currentIndex]
+        return this.currentCategory && this.currentCategory[this.currentIndex]
       },
       currentIndex () {
         const current = `/${this.category}/${this.page}`
 
-        return this.pages[this.category].findIndex(page => {
+        return this.currentCategory && this.currentCategory.findIndex(page => {
           return page.to === current
         })
       },
       prev () {
-        return this.pages[this.category][this.currentIndex - 1]
+        return this.currentCategory && this.currentCategory[this.currentIndex - 1]
       },
       next () {
-        return this.pages[this.category][this.currentIndex + 1]
+        return this.currentCategory && this.currentCategory[this.currentIndex + 1]
       },
     },
   }
