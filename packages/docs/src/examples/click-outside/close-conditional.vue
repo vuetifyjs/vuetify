@@ -38,10 +38,10 @@
 
     methods: {
       onClickOutsideStandard () {
-        this.value1 = false
+        this.models.base = false
       },
       onClickOutsideWithConditional () {
-        this.value2 = false
+        this.models.conditional = false
       },
       closeConditional (e) {
         return this.models.conditional
