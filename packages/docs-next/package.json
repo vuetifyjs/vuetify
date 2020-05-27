@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "vue-cli-service build",
-    "build-api": "node build/api-gen.js",
+    "build:api": "node build/api-gen.js",
     "dev": "yarn serve",
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
