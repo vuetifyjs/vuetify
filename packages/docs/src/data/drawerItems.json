@@ -182,6 +182,7 @@
     "text": "directives",
     "icon": "mdi-function",
     "children": [
+      { "new": true, "text": "clickOutside", "to": "click-outside" },
       { "new": true, "text": "intersect", "to": "intersect" },
       { "new": true, "text": "mutate", "to": "mutate" },
       { "text": "resizing", "to": "resizing" },
