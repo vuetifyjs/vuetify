@@ -9,6 +9,7 @@ const TableHeader = {
   'align?': '\'start\' | \'center\' | \'end\'',
   'sortable?': 'boolean',
   'filterable?': 'boolean',
+  'groupable?': 'boolean',
   'divider?': 'boolean',
   'class?': 'string | string[]',
   'width?': 'string | number',

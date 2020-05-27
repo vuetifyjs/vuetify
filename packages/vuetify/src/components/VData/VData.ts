@@ -1,5 +1,5 @@
 // Helpers
-import { wrapInArray, sortItems, deepEqual, groupItems, searchItems } from '../../util/helpers'
+import { wrapInArray, sortItems, deepEqual, groupItems, searchItems, fillArray } from '../../util/helpers'
 import Vue, { VNode } from 'vue'
 
 // Types
@@ -94,6 +94,18 @@ export default Vue.extend({
 
     if (this.options) {
       internalOptions = Object.assign(internalOptions, this.options)
+    }
+
+    const { sortBy, sortDesc, groupBy, groupDesc } = internalOptions
+    const sortDiff = sortBy.length - sortDesc.length
+    const groupDiff = groupBy.length - groupDesc.length
+
+    if (sortDiff > 0) {
+      internalOptions.sortDesc.push(...fillArray(sortDiff, false))
+    }
+
+    if (groupDiff > 0) {
+      internalOptions.groupDesc.push(...fillArray(groupDiff, false))
     }
 
     return {

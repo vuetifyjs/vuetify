@@ -3,6 +3,9 @@ import './VAvatar.sass'
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Measurable from '../../mixins/measurable'
+import Roundable from '../../mixins/roundable'
+
+// Utilities
 import { convertToUnit } from '../../util/helpers'
 
 // Types
@@ -11,7 +14,8 @@ import mixins from '../../util/mixins'
 
 export default mixins(
   Colorable,
-  Measurable
+  Measurable,
+  Roundable,
   /* @vue/component */
 ).extend({
   name: 'v-avatar',
@@ -23,7 +27,6 @@ export default mixins(
       type: [Number, String],
       default: 48,
     },
-    tile: Boolean,
   },
 
   computed: {
@@ -31,7 +34,7 @@ export default mixins(
       return {
         'v-avatar--left': this.left,
         'v-avatar--right': this.right,
-        'v-avatar--tile': this.tile,
+        ...this.roundedClasses,
       }
     },
     styles (): object {

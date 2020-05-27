@@ -2,11 +2,10 @@ import { VNodeDirective } from 'vue/types/vnode'
 import { DirectiveOptions } from 'vue'
 
 interface ScrollVNodeDirective extends Omit<VNodeDirective, 'modifiers'> {
-  arg: string
   value: EventListener | {
     handler: EventListener
     options?: boolean | AddEventListenerOptions
-  }
+  } | EventListenerObject & { options?: boolean | AddEventListenerOptions }
   modifiers?: {
     self?: boolean
   }
@@ -15,10 +14,8 @@ interface ScrollVNodeDirective extends Omit<VNodeDirective, 'modifiers'> {
 function inserted (el: HTMLElement, binding: ScrollVNodeDirective) {
   const { self = false } = binding.modifiers || {}
   const value = binding.value
-  // Add fallback to value
-  const { handler, options = {} } = typeof value === 'object'
-    ? value
-    : { handler: value, options: { passive: true } }
+  const options = (typeof value === 'object' && value.options) || { passive: true }
+  const handler = typeof value === 'function' || 'handleEvent' in value ? value : value.handler
 
   const target = self
     ? el

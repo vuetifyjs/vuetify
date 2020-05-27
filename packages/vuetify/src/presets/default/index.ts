@@ -42,6 +42,7 @@ export const preset: VuetifyPreset = {
       customProperties: undefined,
       minifyTheme: undefined,
       themeCache: undefined,
+      variations: true,
     },
     themes: {
       light: {

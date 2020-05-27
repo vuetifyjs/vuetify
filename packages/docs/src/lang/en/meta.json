@@ -569,6 +569,11 @@
     "description": "The window component is a wrapper container that allows transitioning between content. It serves as the baseline for tabs and carousels.",
     "keywords": "windows, vuetify window component, vue window component"
   },
+  "directives/click-outside": {
+    "title": "Click outside directive",
+    "description": "The v-click-outside directive calls a function when something outside of the target element is clicked on.",
+    "keywords": "click outside, click directive, vue click directive, vuetify click directives"
+  },
   "directives/intersect": {
     "title": "Intersection observer directive",
     "description": "The intersection observer directive utilizes the Intersection observer API. It allows you to determine when elements are visible on the screen.",
