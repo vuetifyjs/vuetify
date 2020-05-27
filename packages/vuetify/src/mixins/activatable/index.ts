@@ -120,7 +120,7 @@ export default baseMixins.extend({
         }
       }
       
-      if(listeners === {}) {
+      if (listeners === {}) {
         listeners.click = (e: MouseEvent) => {
           const activator = this.getActivator(e)
           if (activator) activator.focus()
