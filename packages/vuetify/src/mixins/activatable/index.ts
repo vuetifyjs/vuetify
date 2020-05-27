@@ -108,7 +108,9 @@ export default baseMixins.extend({
           this.getActivator(e)
           this.runDelay('close')
         }
-      } else if (this.openOnFocus) {
+      }
+      
+      if (this.openOnFocus) {
         listeners.focus = (e: FocusEvent) => {
           this.getActivator(e)
 
@@ -116,7 +118,9 @@ export default baseMixins.extend({
 
           this.isActive = !this.isActive
         }
-      } else {
+      }
+      
+      if(listeners === {}) {
         listeners.click = (e: MouseEvent) => {
           const activator = this.getActivator(e)
           if (activator) activator.focus()
