@@ -21,7 +21,7 @@ describe('VSlideGroup.ts', () => {
           $vuetify: {
             rtl: false,
             breakpoint: {
-              mobileBreakPoint: 1280,
+              mobileBreakPoint: 1264,
               width: 1920,
             },
           },
@@ -297,7 +297,7 @@ describe('VSlideGroup.ts', () => {
       mocks: {
         $vuetify: {
           rtl: true,
-          breakpoint: { mobileBreakPoint: 1280 },
+          breakpoint: { mobileBreakPoint: 1264 },
         },
       },
     })

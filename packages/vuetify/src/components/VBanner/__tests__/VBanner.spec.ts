@@ -25,7 +25,7 @@ describe('VBanner.ts', () => {
               bar: 0,
             },
             breakpoint: {
-              mobileBreakPoint: 1280,
+              mobileBreakPoint: 1264,
               width: 1000,
             },
           },
@@ -189,7 +189,7 @@ describe('VBanner.ts', () => {
       mocks: {
         $vuetify: {
           breakpoint: {
-            mobileBreakPoint: 1280,
+            mobileBreakPoint: 1264,
             width: 900,
           },
         },
