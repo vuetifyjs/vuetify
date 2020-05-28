@@ -4,5 +4,5 @@
 <Description>Vuetify documentation</Description>
 <InputEncoding>UTF-8</InputEncoding>
 <Image width="16" height="16" type="image/x-icon">https://vuetifyjs.com/favicon.ico</Image>
-<Url type="text/html" method="get" template="http://vuetifyjs.com/?search={searchTerms}"/>
+<Url type="text/html" method="get" template="https://vuetifyjs.com/?search={searchTerms}"/>
 </OpenSearchDescription>
