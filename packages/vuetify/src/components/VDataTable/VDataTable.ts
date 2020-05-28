@@ -1,7 +1,8 @@
 import './VDataTable.sass'
 
 // Types
-import { VNode, VNodeChildrenArrayContents, VNodeChildren, PropType } from 'vue'
+import { VNode, VNodeChildrenArrayContents, VNodeChildren } from 'vue'
+import { PropValidator } from 'vue/types/options'
 import {
   DataTableHeader,
   DataTableFilterFunction,
@@ -12,7 +13,6 @@ import {
   DataItemsPerPageOption,
   ItemGroup,
 } from 'types'
-import { PropValidator } from 'vue/types/options'
 
 // Components
 import { VData } from '../VData'
@@ -97,9 +97,9 @@ export default VDataIterator.extend({
       default: '$expand',
     },
     customFilter: {
-      type: Function as PropType<typeof defaultFilter>,
+      type: Function,
       default: defaultFilter,
-    },
+    } as PropValidator<typeof defaultFilter>,
   },
 
   data () {

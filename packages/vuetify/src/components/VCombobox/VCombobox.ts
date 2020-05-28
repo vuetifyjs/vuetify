@@ -9,7 +9,7 @@ import VAutocomplete from '../VAutocomplete/VAutocomplete'
 import { keyCodes } from '../../util/helpers'
 
 // Types
-import { PropType } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
 /* @vue/component */
 export default VAutocomplete.extend({
@@ -17,9 +17,9 @@ export default VAutocomplete.extend({
 
   props: {
     delimiters: {
-      type: Array as PropType<string[]>,
+      type: Array,
       default: () => ([]),
-    },
+    } as PropValidator<string[]>,
     returnObject: {
       type: Boolean,
       default: true,

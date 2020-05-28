@@ -24,6 +24,7 @@ import {
   filterTreeItem,
 } from './util/filterTreeItems'
 import { TreeviewItemFunction } from 'types'
+import { PropValidator } from 'vue/types/options'
 
 type VTreeviewNodeInstance = InstanceType<typeof VTreeviewNode>
 
@@ -54,21 +55,21 @@ export default mixins(
 
   props: {
     active: {
-      type: Array as PropType<NodeArray>,
+      type: Array,
       default: () => ([]),
-    },
+    } as PropValidator<NodeArray>,
     dense: Boolean,
     filter: Function as PropType<TreeviewItemFunction>,
     hoverable: Boolean,
     items: {
-      type: Array as PropType<any[]>,
+      type: Array,
       default: () => ([]),
-    },
+    } as PropValidator<any[]>,
     multipleActive: Boolean,
     open: {
-      type: Array as PropType<NodeArray>,
+      type: Array,
       default: () => ([]),
-    },
+    } as PropValidator<NodeArray>,
     openAll: Boolean,
     returnObject: {
       type: Boolean,
@@ -76,9 +77,9 @@ export default mixins(
     },
     search: String,
     value: {
-      type: Array as PropType<NodeArray>,
+      type: Array,
       default: () => ([]),
-    },
+    } as PropValidator<NodeArray>,
     ...VTreeviewNodeProps,
   },
 

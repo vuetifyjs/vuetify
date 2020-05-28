@@ -13,6 +13,7 @@ import { getObjectValueByPath, createRange } from '../../util/helpers'
 
 // Types
 import { VNode, VNodeChildren, PropType } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
 type VTreeViewInstance = InstanceType<typeof VTreeview>
 
@@ -103,7 +104,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
     item: {
       type: Object,
       default: () => null,
-    },
+    } as PropValidator<{}>,
     parentIsDisabled: Boolean,
     ...VTreeviewNodeProps,
   },
@@ -154,13 +155,11 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
   },
 
   created () {
-    // TODO: ts 3.7 broke recursive types
-    (this.treeview as any).register(this)
+    this.treeview.register(this)
   },
 
   beforeDestroy () {
-    // TODO: ts 3.7 broke recursive types
-    (this.treeview as any).unregister(this)
+    this.treeview.unregister(this)
   },
 
   methods: {

@@ -27,6 +27,7 @@ import {
 import mixins from '../../util/mixins'
 import { VNode, PropType, VNodeChildren } from 'vue'
 import { SelectItemKey } from 'types'
+import { PropValidator } from 'vue/types/options'
 
 type ListTile = { item: any, disabled?: null | boolean, value?: boolean, index: number };
 
@@ -44,9 +45,9 @@ export default mixins(Colorable, Themeable).extend({
     dense: Boolean,
     hideSelected: Boolean,
     items: {
-      type: Array as PropType<any[]>,
+      type: Array,
       default: () => [],
-    },
+    } as PropValidator<any[]>,
     itemDisabled: {
       type: [String, Array, Function] as PropType<SelectItemKey>,
       default: 'disabled',
@@ -63,9 +64,9 @@ export default mixins(Colorable, Themeable).extend({
     noFilter: Boolean,
     searchInput: null as unknown as PropType<any>,
     selectedItems: {
-      type: Array as PropType<any[]>,
+      type: Array,
       default: () => [],
-    },
+    } as PropValidator<any[]>,
   },
 
   computed: {

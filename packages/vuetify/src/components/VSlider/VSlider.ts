@@ -18,6 +18,7 @@ import { consoleWarn } from '../../util/console'
 // Types
 import Vue, { VNode, VNodeChildrenArrayContents, PropType } from 'vue'
 import { ScopedSlotChildren } from 'vue/types/vnode'
+import { PropValidator } from 'vue/types/options'
 
 interface options extends Vue {
   $refs: {
@@ -71,9 +72,9 @@ export default mixins<options &
       default: 32,
     },
     tickLabels: {
-      type: Array as PropType<string[]>,
+      type: Array,
       default: () => ([]),
-    },
+    } as PropValidator<string[]>,
     ticks: {
       type: [Boolean, String] as PropType<boolean | 'always'>,
       default: false,

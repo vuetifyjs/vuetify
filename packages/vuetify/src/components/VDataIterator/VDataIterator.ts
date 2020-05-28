@@ -10,7 +10,8 @@ import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, camel
 import { breaking, removed } from '../../util/console'
 
 // Types
-import { VNode, VNodeChildren, PropType } from 'vue'
+import { VNode, VNodeChildren } from 'vue'
+import { PropValidator } from 'vue/types/options'
 import { DataScopeProps } from 'types'
 
 /* @vue/component */
@@ -24,14 +25,14 @@ export default Themeable.extend({
       default: 'id',
     },
     value: {
-      type: Array as PropType<any[]>,
+      type: Array,
       default: () => [],
-    },
+    } as PropValidator<any[]>,
     singleSelect: Boolean,
     expanded: {
-      type: Array as PropType<any[]>,
+      type: Array,
       default: () => [],
-    },
+    } as PropValidator<any[]>,
     mobileBreakpoint: {
       type: [Number, String],
       default: 600,

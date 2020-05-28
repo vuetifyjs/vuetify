@@ -10,7 +10,7 @@ import mergeData from '../../util/mergeData'
 import { keyCodes, getObjectValueByPath } from '../../util/helpers'
 
 // Types
-import { PropType } from 'vue'
+import { PropType, VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
 const defaultMenuProps = {
@@ -305,7 +305,7 @@ export default VSelect.extend({
 
       return slot
     },
-    genSelections () {
+    genSelections (): VNode | never[] {
       return this.hasSlot || this.multiple
         ? VSelect.options.methods.genSelections.call(this)
         : []
@@ -401,7 +401,7 @@ export default VSelect.extend({
         this.setSearch()
       }
     },
-    hasItem (item: any) {
+    hasItem (item: any): boolean {
       return this.selectedValues.indexOf(this.getValue(item)) > -1
     },
     onCopy (event: ClipboardEvent) {

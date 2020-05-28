@@ -45,7 +45,7 @@ export default VResponsive.extend({
         rootMargin: undefined,
         threshold: undefined,
       }),
-    },
+    } as PropValidator<IntersectionObserverInit>,
     position: {
       type: String,
       default: 'center center',
