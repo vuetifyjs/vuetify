@@ -3,7 +3,7 @@ description: Get started with Vue and Vuetify in no time. Support for Vue CLI, W
 keywords: quick start, vuetify templates, installing vuetify, install vuetify
 ---
 
-# Snabbstart
+# Quick start
 
 Get started with Vuetify, the world’s most popular Vue.js framework for building feature rich, blazing fast application.
 
