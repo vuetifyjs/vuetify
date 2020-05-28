@@ -72,7 +72,15 @@ export const BaseSlideGroup = mixins<options &
       type: String,
       default: '$prev',
     },
-    showArrows: Boolean,
+    showArrows: {
+      type: [Boolean, String],
+      validator: v => (
+        typeof v === 'boolean' || [
+          'always',
+          'desktop',
+        ].includes(v)
+      ),
+    },
   },
 
   data: () => ({
@@ -103,10 +111,28 @@ export const BaseSlideGroup = mixins<options &
       }
     },
     hasAffixes (): Boolean {
-      return (
-        (this.isOverflowing && !this.isMobile) ||
-        this.showArrows
-      )
+      switch (this.showArrows) {
+        // Always show arrows on desktop & mobile
+        case 'always': return true
+
+        // Always show arrows on desktop
+        case 'desktop': return !this.isMobile
+
+        // Always show on mobile or
+        // when overflowed on desktop
+        case true: return (
+          this.isMobile ||
+          this.isOverflowing
+        )
+
+        // https://material.io/components/tabs#scrollable-tabs
+        // Always show arrows when
+        // overflowed on desktop
+        default: return (
+          !this.isMobile &&
+          this.isOverflowing
+        )
+      }
     },
     hasNext (): boolean {
       if (!this.hasAffixes) return false

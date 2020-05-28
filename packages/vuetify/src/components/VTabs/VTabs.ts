@@ -69,7 +69,7 @@ export default baseMixins.extend<options>().extend({
       default: '$prev',
     },
     right: Boolean,
-    showArrows: Boolean,
+    showArrows: [Boolean, String],
     sliderColor: String,
     sliderSize: {
       type: [Number, String],

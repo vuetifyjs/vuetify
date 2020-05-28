@@ -313,4 +313,36 @@ describe('VSlideGroup.ts', () => {
     expect(html1).not.toEqual(html2)
     expect(html2).toMatchSnapshot()
   })
+
+  // showArrows | isOverflowing | isMobile | hasAffixes
+  it.each([
+    [true, true, true, true],
+    [true, true, false, true],
+    [true, false, true, true],
+    [true, false, false, false],
+    ['desktop', true, false, true],
+    ['desktop', true, true, false],
+    ['desktop', false, false, true],
+    ['desktop', false, true, false],
+    ['always', true, true, true],
+    ['always', true, false, true],
+    ['always', false, false, true],
+  ])('should conditionally show arrows with %s %s %s %s', (...opts) => {
+    const [
+      showArrows,
+      isOverflowing,
+      isMobile,
+      hasAffixes,
+    ] = opts
+
+    const wrapper = mountFunction({
+      data: () => ({ isOverflowing }),
+
+      computed: { isMobile: () => isMobile },
+
+      propsData: { showArrows },
+    })
+
+    expect(wrapper.vm.hasAffixes).toBe(hasAffixes)
+  })
 })
