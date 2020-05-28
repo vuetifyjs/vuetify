@@ -26,6 +26,7 @@
     "yarn": ">= 1.12.0"
   },
   "devDependencies": {
+    "@babel/helper-create-regexp-features-plugin": "^7.8.8",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
     "babel-jest": "^24.8.0",

@@ -1,7 +1,6 @@
 .DS_Store
 node_modules/
 dist/
-/public/
 npm-debug.log
 .idea/
 .env

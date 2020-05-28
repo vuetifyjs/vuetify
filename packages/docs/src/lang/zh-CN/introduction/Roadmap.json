@@ -7,64 +7,56 @@
       "complete": true,
       "title": "Alpha 版本",
       "caption": "2016年12月",
-      "text": "Vuetify向公众发布了。整个框架有40个组件，总大小低至46kb。",
-      "value": false
+      "text": "Vuetify向公众发布了。整个框架有40个组件，总大小低至46kb。"
     },
     {
       "type": "发布",
       "complete": true,
       "title": "v1.0 版本",
       "caption": "2018年2月",
-      "text": "官方 v1.0 正式版发布。在18个月的时间和 Kael 的工作，我们发布了第一个 **主要** 版本。这包括许多全新的组件、特性和功能。查阅官方的 [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.0.0)。",
-      "value": false
+      "text": "官方 v1.0 正式版发布。在18个月的时间和 Kael 的工作，我们发布了第一个 **主要** 版本。这包括许多全新的组件、特性和功能。查阅官方的 [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.0.0)。"
     },
     {
       "type": "发布",
       "complete": true,
       "title": "v1.1 版本",
       "caption": "2018年6月",
-      "text": "重构 inputs 和 selection controls。将 `v-select` 之类的组件抽象为新的实现，`v-autocomplete`、 `v-combobox` ，以实现范围更广、测试更容易的功能。这个版本也标志着 **RTL** 语言获得官方支持。查阅官方 [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.1.0)。",
-      "value": false
+      "text": "重构 inputs 和 selection controls。将 `v-select` 之类的组件抽象为新的实现，`v-autocomplete`、 `v-combobox` ，以实现范围更广、测试更容易的功能。这个版本也标志着 **RTL** 语言获得官方支持。查阅官方 [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.1.0)。"
     },
     {
       "type": "发布",
       "complete": true,
       "title": "v1.2 版本",
       "caption": "2018年7月",
-      "text": "添加了新组件 `v-img`, `v-rating` 和 `v-hover`。改进了主题系统，扩展了HEX \n 和 RGBA 等需要使用的颜色的组件功能。Als 增加了许多新的语言环境。查阅官方 [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.2.0)。",
-      "value": false
+      "text": "添加了新组件 `v-img`, `v-rating` 和 `v-hover`。改进了主题系统，扩展了HEX \n 和 RGBA 等需要使用的颜色的组件功能。Als 增加了许多新的语言环境。查阅官方 [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.2.0)。"
     },
     {
       "type": "发布",
       "complete": true,
       "title": "v1.3 版本",
       "caption": "2018年10月",
-      "text": "添加了新组件 `v-treeview`, `v-timeline` and `v-item-group`。统一 `v-tabs` 和 `v-carousel` 的接口。改进 **vuetify-loader** 以支持 Vuetify 组件的 tree-shaking。查阅官方 [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.3.0)。",
-      "value": false
+      "text": "添加了新组件 `v-treeview`, `v-timeline` and `v-item-group`。统一 `v-tabs` 和 `v-carousel` 的接口。改进 **vuetify-loader** 以支持 Vuetify 组件的 tree-shaking。查阅官方 [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.3.0)。"
     },
     {
       "type": "发布",
       "complete": true,
       "title": "AWS Cognito Vuex Module",
       "caption": "2018年12月",
-      "text": "与 AWS Cognito 交互的功能齐全的 Vuex module。适用于需要身份验证的网站。查阅更多信息 [AWS Cognito](https://aws.amazon.com/cognito/dev-resources/)。",
-      "value": false
+      "text": "与 AWS Cognito 交互的功能齐全的 Vuex module。适用于需要身份验证的网站。查阅更多信息 [AWS Cognito](https://aws.amazon.com/cognito/dev-resources/)。"
     },
     {
       "type": "发布",
       "complete": true,
       "title": "v1.4 发布",
       "caption": "2018年12月",
-      "text": "添加了新组件 `v-sparkline` 并将 `v-toolbar` 抽象为多个组件，以便维护和测试。重新构建整个文档，使贡献者和团队维护更加容易。查阅官方 [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.4.0)。",
-      "value": false
+      "text": "添加了新组件 `v-sparkline` 并将 `v-toolbar` 抽象为多个组件，以便维护和测试。重新构建整个文档，使贡献者和团队维护更加容易。查阅官方 [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.4.0)。"
     },
     {
       "type": "发布",
       "complete": true,
       "title": "v1.5 发布",
       "caption": "2019年2月",
-      "text": "添加了新组件 `v-calendar`。 使用新 **bar** 和 **fill** 属性，改进了 `v-sparkline` 的功能。 改进了 `v-treeview` 并为 LTS 做好了准备。 查阅 [Long-term Support Page](/getting-started/long-term-support) 以获取有关 LTS 的更多信息。 点击此处查看官方 [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0)。",
-      "value": false
+      "text": "添加了新组件 `v-calendar`。 使用新 **bar** 和 **fill** 属性，改进了 `v-sparkline` 的功能。 改进了 `v-treeview` 并为 LTS 做好了准备。 查阅 [Long-term Support Page](/getting-started/long-term-support) 以获取有关 LTS 的更多信息。 点击此处查看官方 [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0)。"
     },
     {
       "type": "发布",
@@ -90,8 +82,7 @@
           "`v-simple-table`",
           "`v-slide-group`"
         ]
-      },
-      "value": false
+      }
     },
     {
       "type": "发布",
@@ -113,37 +104,92 @@
           "`v-intersect`",
           "`v-mutate`"
         ]
-      },
-      "value": false
+      }
     },
     {
       "type": "发布",
       "complete": true,
       "title": "v2.2 发布 **(Tigris)**",
       "caption": "2020年1月",
-      "value": false
+      "text": "Vuetify 预设的引入。将包括整个材料设计研究系列，并且可有 _用户自定义_。这将简化改变框架的默认样式的过程。增加数千个 SASS 变量，并在文档中放入查找这些变量的查找树。更多关于 Google 的研究报告，请 [导航到这里](https://material.io/design/material-studies/about-our-material-studies.html)。",
+      "features": {
+        "#### Objectives": [
+          "增加 _数千_ 个新的 SASS 变量",
+          "创建一个新的 Vuetify 服务，用于引导预配置的框架选项； **预设**",
+          "创建官方预设 [Material Design Studies](https://material.io/design/material-studies/about-our-material-studies.html)",
+          "增加新功能，并改进 `v-badge` 的代码样式。",
+          "增加新的功能并改进 `v-expansion-panels` 的代码样式。",
+          "新的 `v-theme-provider` 组件"
+        ]
+      }
     },
     {
+      "type": "包",
+      "title": "Vuetify 生态系统工具 - **(Vue CLI 插件)**",
+      "caption": "Q1/2 2020",
+      "text": "全新的开发工具，旨在提高您在使用 Vuetify 工作时的生产力和效率。这些插件建立在 [Vue CLI](https://cli.vuejs.org/) 之上，这些插件将轻松集成到现有的项目中，并将默认包含在 Vuetify [remote preset](https://cli.vuejs.org/guide/plugins-and-presets.html#remote-presets) 中。这些功能首次在 [2018 Vue Conf Toronto](https://www.vuemastery.com/conferences/vueconf-toronto-2018/Vuetify-the-path-to-2-0) 上进行了讨论，并在 [2019 Vue Conf Toronto](https://www.youtube.com/watch?v=B1oYaaMfHbw) 上正式展示了这些功能；官方视频即将发布。",
+      "features": {
+        "#### Highlights": [
+          "Vuetify CLI",
+          "Vuetify Storybook",
+          "Vuetify Preset"
+        ]
+      },
       "value": true
     },
     {
       "type": "发布",
+      "title": "v3.0 Release **(Titan)**",
+      "caption": "Q1/2 2020",
+      "text": "整个框架将被转换到 Vue 3 中新的 [composition api](https://vue-composition-api-rfc.netlify.com/)。关于这个转换过程的细节，我们将在我们的 [v3 Notion Board](https://notion.vuetifyjs.com) 中概述，同时也会有关于发布时间表、建议的新功能等信息。Vuetify 3 正在与 Vue 3 的预发布版本 (alpha/beta) 一起开发，预计将在下一个 Vue 版本正式发布后不久发布。正因为如此，目标发布季度是不固定的，会根据 Vue 3 的进度而变化。",
+      "features": {
+        "#### Objectives": [
+          "创建一套关于 Vuetify 3 的开发、迭代和发布指南 - [v3 Notion Board](https://notion.vuetifyjs.com)",
+          "使用 Vue 3 和 [composition api](https://vue-composition-api-rfc.netlify.com/) 重建框架。",
+          "改进框架性能",
+          "增强对 Vue 3 与 Typescript 的支持；更新了类型方式",
+          "更容易进行单元测试，不需要全局设置。",
+          "重构框架核心，支持自定义服务",
+          "更新文件，提供更好的例子和更多信息"
+        ]
+      },
       "value": true
     },
     {
+      "type": "维护",
+      "title": "维护周期",
+      "caption": "Q2/3 2020",
+      "text": "一个维护周期，集中解决我们 [Github issue board](https://github.com/vuetifyjs/vuetify/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+in%3Atitle+bug+) 上的 bug。这将在 V3 发布后立即开始。"
+    },
+    {
       "type": "发布",
+      "title": "v3.1 发布 **(Orion)**",
+      "caption": "Q4 2020",
       "text": "Vuetify 组件将通过框架范围的默认值进行预配置。这将允许您设置全局设置，例如 **no-ripples** 或所有 inputs 都是 **outlined** 类型，甚至将所有卡片设置为 **tile**。",
-      "value": false
+      "features": {
+        "#### Objectives": [
+          "为用户创建全局定义组件默认值的能力。",
+          "实现材料设计规格中缺少的任何功能；例如：[Backdrop](https://material.io/components/backdrop/)"
+        ],
+        "#### New Components": [
+          "`v-file-upload`",
+          "`v-empty-state`",
+          "`v-feature-discovery`",
+          "有关新部件的详细信息将于2020年初发布。"
+        ]
+      }
     },
     {
       "type": "网站",
-      "value": false
+      "title": "主题生成器",
+      "caption": "Q2 2020",
+      "text": "一个完整的主题生成器，便于为您的应用程序创建自定义预置。"
     },
     {
       "type": "snips",
       "title": "Vuetify Snips",
       "caption": "待定",
-      "value": false
+      "text": "面向创建和分享 Vuetify 代码片段的网站。"
     }
   ]
 }

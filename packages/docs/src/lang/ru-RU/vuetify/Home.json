@@ -1,5 +1,4 @@
 {
-  "becomeSponsor": "Поддержать Vuetify",
   "features": {
     "community": {
       "text": "Когда у вас возникают трудности срочно нужна помощь. Огромное сообщество Vuetify в Discord готово предложить вам поддержку.",
@@ -10,10 +9,14 @@
       "title": "Семантика Material Components"
     },
     "scaffolding": {
+      "text": "Vuetify поддерживает будущее инструментов Vue с помощью Vue CLI плагина. Одна команда и вы можете воплотить в жизнь свою мечту.",
       "title": "Хорошее сообщество"
     }
   },
   "getHelp": "Получить помощь",
   "getStarted": "Начать",
+  "proudlySponsoredBy": "## Спонсоры проекта",
+  "whyVuetify": "## Почему Vuetify?",
+  "whyVuetifyText": "Создание приложений с помощью Vue никогда не было настолько простым. Ускорьте процесс разработки.",
   "whyVuetifyText2": "Почему Vuetify?"
 }

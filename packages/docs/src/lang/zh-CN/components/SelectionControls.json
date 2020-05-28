@@ -73,8 +73,10 @@
     "row": "单选框行显示",
     "v-simple-checkbox": {
       "color": "Mixins.Colorable.props.color",
+      "disabled": "禁用简单复选框。",
       "light": "Mixins.Themeable.props.light",
-      "ripple": "Mixins.Rippleable.props.ripple"
+      "ripple": "Mixins.Rippleable.props.ripple",
+      "value": "一个 boolean，表示简单的复选框是否被选中。"
     }
   },
   "events": {

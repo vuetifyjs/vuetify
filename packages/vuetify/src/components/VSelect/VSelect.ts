@@ -515,7 +515,7 @@ export default baseMixins.extend<options>().extend({
       }
 
       return this.$createElement(VMenu, {
-        attrs: { role: undefined, offsetY: true },
+        attrs: { role: undefined },
         props,
         on: {
           input: (val: boolean) => {
@@ -644,6 +644,8 @@ export default baseMixins.extend<options>().extend({
       }
     },
     onKeyDown (e: KeyboardEvent) {
+      if (this.readonly && e.keyCode !== keyCodes.tab) return
+
       const keyCode = e.keyCode
       const menu = this.$refs.menu
 

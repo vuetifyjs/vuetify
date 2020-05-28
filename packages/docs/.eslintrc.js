@@ -8,7 +8,10 @@ module.exports = {
   },
   overrides: [
     {
-      files: 'src/examples/**/*.vue',
+      files: [
+        'src/examples/**/*.vue',
+        'src/layouts/layouts/demos/*.vue'
+      ],
       rules: {
         'max-len': 'off', // lorem ipsum is long
         'vue/html-self-closing': ['error', {

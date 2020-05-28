@@ -16,7 +16,7 @@
       :width="width"
       class="flex-shrink-1"
       contain
-      @click="$ga.event('patrons', 'click', value.metadata.name)"
+      @click="$ga.event('sponsors', 'click', value.metadata.name)"
     />
   </v-card>
 </template>

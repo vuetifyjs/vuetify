@@ -123,7 +123,7 @@ const DataTableSlots = [
   { name: 'header.data-table-select', props: DataTableHeaderSelectScopedProps },
   { name: 'header.<name>', props: DataTableHeaderColumnScopedProps },
   { name: 'top', props: DataDefaultScopedSlotProps },
-  { name: 'progress', props: DataDefaultScopedSlotProps },
+  { name: 'progress' },
   { name: 'group', props: DataGroupScopedProps },
   { name: 'group.header', props: DataGroupHeaderScopedProps },
   { name: 'group.summary', props: DataGroupSummaryScopedProps },

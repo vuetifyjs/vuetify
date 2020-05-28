@@ -25,11 +25,17 @@
       "heading": "### Skalierungs-Übergänge",
       "desc": "Viele der Vuetify-Komponenten enthalten ein <code>transition</code>-Props, mit dem Sie Ihre eigenen definieren können."
     },
+    "fab-transition": {
+      "heading": "### Fab Übergang",
+      "desc": "Ein Beispiel für den Fab-Übergang finden Sie in der `v-speed dial`-Komponente."
+    },
     "fade-transition": {
-      "heading": "### Blend-Übergänge"
+      "heading": "### Blend-Übergänge",
+      "desc": "Ein Beispiel für den Fade-Übergang finden Sie in der Karussell-Komponente."
     },
     "expand-transition": {
-      "heading": "### Erweiterungs-Übergang"
+      "heading": "### Erweiterungs-Übergang",
+      "desc": "Der Erweiterungs-Übergang wird in Erweiterungs-Panels und Listen-Gruppen verwendet. Es existiert auch eine horizontale Version mit `v-expand-x-transition`."
     },
     "custom-origin": {
       "heading": "### Benutzerdefinierter Ursprung",

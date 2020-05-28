@@ -1,7 +1,61 @@
 {
+  "heading": "# Listen",
+  "headingText": "Die Komponente `v-list` kann strukturierte Informationen anzuzeigen. So kann sie neben dem Inhalt ein Avatar-Icon, Aktionsbereiche, Unterüberschriften und vieles mehr enthalten. Listen erleichtern das Erkennen einzelner Elemente in einer Sammlung. Sie bieten außerdem ein konsistentes Styling von Text- und Bild-Gruppen.",
+  "examples": {
+    "usage": {
+      "desc": "Die Listen werden in drei Varianten ausgeliefert: **einzeilig** (Standard), **zweizeilig** und **dreizeilig**. Die Zeilendeklaration legt die minimale Höhe des Elements fest und kann auch von `v-list` mit dem selben Prop gesteuert werden."
+    },
+    "avatar-title-and-action": {
+      "heading": "### Avatar mit Titel und Aktion"
+    },
+    "icon-two-lines-and-action": {
+      "heading": "### Symbol mit 2 Zeilen und Aktion"
+    },
+    "avatar-three-lines": {
+      "heading": "### Avatar mit 3 Zeilen"
+    },
+    "avatar-subheader-title-and-action": {
+      "heading": "### Avatar mit Titel und Aktion"
+    },
+    "nested": {
+      "heading": "### Verschachtelte Listen"
+    },
+    "title-subtitle-actions-and-action-text": {
+      "heading": "### Titel mit Untertitel, Aktionen und Aktionstext"
+    },
+    "nav": {
+      "heading": "### Navigationslisten"
+    },
+    "disabled": {
+      "heading": "### Deaktivierte Listen"
+    },
+    "dense": {
+      "heading": "### Kompakt"
+    },
+    "flat": {
+      "heading": "### Flach"
+    },
+    "rounded": {
+      "heading": "### Abgerundet"
+    }
+  },
   "props": {
     "v-list-group": {
-      "ripple": "Mixins.Rippleable.props.ripple"
+      "appendIcon": "Components.Inputs.props.appendIcon",
+      "prependIcon": "Components.Inputs.props.prependIcon",
+      "ripple": "Mixins.Rippleable.props.ripple",
+      "value": "Listengruppe erweitern / einklappen"
+    }
+  },
+  "slots": {
+    "v-list-group": {
+      "appendIcon": "Components.Inputs.props.appendIcon",
+      "prependIcon": "Components.Inputs.props.prependIcon"
+    }
+  },
+  "events": {
+    "v-list-group": {
+      "click": "Wird beim Anklicken der Komponente ausgelöst. Wird das Kräuseln der Komponente auslösen, es sei denn, der Modifikator `.native` wird verwendet."
     }
   }
 }

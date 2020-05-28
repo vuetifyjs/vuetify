@@ -5,6 +5,5 @@
   "customizingText3": "또한 미리 정의된 메테리얼 색상표를 사용할 수 있습니다.",
   "customizingText4": "내부적으로, Vuetify는 이 값들을 기반으로 DOM에서 사용될 수 있는 css 클래스들을 생성합니다. 이 클래스들은 예를 들어  `primary` or `secondary--text` 같은 다른 헬퍼 클래스들과 같은 형식으로 쓰입니다.",
   "customizingText5": "또한 이 값들은 **$vuetify** 인스턴스의 **theme** 속성아래 오브젝트로 설정할 수 있습니다. 이는 테마를 _동적으로_ 바꾸는 것을 가능하게 합니다. 내부적으로는 Vuetifys는 테마 클래스들을 재생성하고 어플리케이션이 중단 없이 업데이트 되도록 클래스를 업데이트 합니다.",
-  "optionHeader": "## 옵션 (Options)",
-  "optionText4": "A custom caching object and be provided (works in tandem with **minifyTheme**) to increase SSR efficiency. The object must contain a **get** and a **set** method. Below is an example using [LRU cache](https://www.npmjs.com/package/lru-cache)."
+  "optionHeader": "## 옵션 (Options)"
 }

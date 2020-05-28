@@ -5,27 +5,28 @@
       :color="snackbar.color"
       :style="styles"
       :timeout="0"
-      :vertical="$vuetify.breakpoint.xsOnly"
       top
     >
       <v-row
         align="center"
-        class="mx-0 flex-nowrap"
+        class="mx-0 flex-wrap flex-md-nowrap"
       >
-        <span
-          v-if="snackbar.emoji"
-          class="mr-2"
-          v-text="snackbar.emoji"
-        />
+        <div class="d-flex align-center">
+          <span
+            v-if="snackbar.emoji"
+            class="mr-2"
+            v-text="snackbar.emoji"
+          />
 
-        <base-markdown
-          :code="snackbar.text"
-          class="snack-markdown"
-        />
+          <base-markdown
+            :code="snackbar.text"
+            class="snack-markdown"
+          />
+        </div>
 
         <v-btn
           :ripple="false"
-          class="black--text ml-auto ml-sm-4"
+          class="black--text mt-3 mt-sm-0 ml-auto ml-sm-4"
           color="white"
           depressed
           v-bind="bind"
@@ -39,7 +40,7 @@
         <v-btn
           :aria-label="$t('Vuetify.Snackbar.close')"
           :ripple="false"
-          class="ml-8"
+          class="ml-8 mt-3 mt-sm-0"
           color="white"
           icon
           x-small

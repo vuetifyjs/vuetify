@@ -14,7 +14,8 @@
       "desc": "延展纸可以接受将其设为矩形的 `tile` 属性（不包含 `border-radius`）。"
     },
     "colors-sizes": {
-      "heading": "### 颜色和大小"
+      "heading": "### 颜色和大小",
+      "desc": "纸张和基于它们的部件可以有不同的尺寸和颜色。"
     }
   },
   "props": {

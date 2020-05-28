@@ -124,6 +124,11 @@
     "description": "crwdns36356:0crwdne36356:0",
     "keywords": "crwdns36358:0crwdne36358:0"
   },
+  "styles/css-reset": {
+    "title": "crwdns56952:0crwdne56952:0",
+    "description": "crwdns56954:0crwdne56954:0",
+    "keywords": "crwdns56956:0crwdne56956:0"
+  },
   "styles/text": {
     "title": "crwdns41544:0crwdne41544:0",
     "description": "crwdns41546:0crwdne41546:0",
@@ -648,5 +653,10 @@
     "title": "crwdns36936:0crwdne36936:0",
     "description": "crwdns30190:0crwdne30190:0",
     "keywords": "crwdns30192:0crwdne30192:0"
+  },
+  "jobs/for-vue": {
+    "title": "crwdns56958:0crwdne56958:0",
+    "description": "crwdns56960:0crwdne56960:0",
+    "keywords": "crwdns56962:0crwdne56962:0"
   }
 }

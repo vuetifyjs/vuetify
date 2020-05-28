@@ -20,6 +20,7 @@
   "props": {
     "boilerplate": "从骨架中移除加载动画",
     "tile": "Components.Sheets.props.tile",
+    "loading": "应用一个加载动画，加载光标在悬停时加载。**false** 的值只有在 `default` 槽中有内容时才会工作。",
     "type": "字符串分隔要创建的骨架组件列表，例如 `type=\"text@3\"` 和 `type=\"card, list-item\"`。将根据提供的字符串递归生成相应的框架。 还支持多个元素的简写，例如 **article@3** 和 **paragraph@2** ，它们将生成 3 _article_ skeletons and 2 _paragraph_ 骨架。 请参阅下面的可用预定义选项列表。",
     "types": "将与预定义选项结合使用的自定义类型对象。 有关可用的预定义选项的列表，请参见 **type** 属性。"
   }

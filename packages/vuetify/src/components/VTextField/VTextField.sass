@@ -46,8 +46,9 @@
         > .v-input__control > .v-input__slot fieldset
           color: map-deep-get($material, 'text-fields', 'outlined')
 
-        > .v-input__control > .v-input__slot:hover fieldset
-          color: map-deep-get($material, 'text-fields', 'outlined-hover')
+        &:not(.v-input--is-disabled)
+          > .v-input__control > .v-input__slot:hover fieldset
+            color: map-deep-get($material, 'text-fields', 'outlined-hover')
 
       &.v-input--is-disabled
         > .v-input__control > .v-input__slot fieldset
