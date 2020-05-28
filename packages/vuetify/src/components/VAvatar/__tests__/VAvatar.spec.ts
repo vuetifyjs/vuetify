@@ -32,14 +32,4 @@ describe('VAvatar', () => {
     expect(wrapper.classes()).toContain('v-avatar')
     expect(wrapper.html()).toMatchSnapshot()
   })
-
-  it('should have an proper class with tile prop', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        tile: true,
-      },
-    })
-
-    expect(wrapper.classes()).toContain('v-avatar--tile')
-  })
 })

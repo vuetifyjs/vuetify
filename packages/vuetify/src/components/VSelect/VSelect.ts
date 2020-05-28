@@ -26,7 +26,7 @@ import { consoleError } from '../../util/console'
 // Types
 import mixins from '../../util/mixins'
 import { VNode, VNodeDirective, PropType, VNodeData } from 'vue'
-import { SelectItemKey } from 'types'
+import { SelectItemKey } from 'vuetify/types'
 
 export const defaultMenuProps = {
   closeOnClick: false,
@@ -158,11 +158,11 @@ export default baseMixins.extend<options>().extend({
     directives (): VNodeDirective[] | undefined {
       return this.isFocused ? [{
         name: 'click-outside',
-        value: this.blur,
-        args: {
+        value: {
+          handler: this.blur,
           closeConditional: this.closeConditional,
         },
-      } as VNodeDirective] : undefined
+      }] : undefined
     },
     dynamicHeight () {
       return 'auto'
@@ -644,7 +644,7 @@ export default baseMixins.extend<options>().extend({
       }
     },
     onKeyDown (e: KeyboardEvent) {
-      if (this.readonly) return
+      if (this.readonly && e.keyCode !== keyCodes.tab) return
 
       const keyCode = e.keyCode
       const menu = this.$refs.menu

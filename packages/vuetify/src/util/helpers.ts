@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { VNode, VNodeDirective } from 'vue/types'
 import { VuetifyIcon } from 'vuetify/types/services/icons'
-import { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'types'
+import { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'vuetify/types'
 
 export function createSimpleFunctional (
   c: string,
@@ -446,4 +446,8 @@ export function mergeDeep (
   }
 
   return source
+}
+
+export function fillArray<T> (length: number, obj: T) {
+  return Array(length).fill(obj)
 }

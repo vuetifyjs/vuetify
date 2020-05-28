@@ -28,6 +28,7 @@ declare module 'vuetify/lib' {
   const VBtn: Component
   const VBtnToggle: Component
   const VCalendar: Component
+  const VCalendarCategory: Component
   const VCalendarDaily: Component
   const VCalendarWeekly: Component
   const VCalendarMonthly: Component
@@ -196,6 +197,7 @@ declare module 'vuetify/lib' {
     VBtn,
     VBtnToggle,
     VCalendar,
+    VCalendarCategory,
     VCalendarDaily,
     VCalendarWeekly,
     VCalendarMonthly,
@@ -341,6 +343,7 @@ declare module 'vuetify/lib' {
 }
 
 declare module 'vuetify/lib/directives' {
+  // eslint-disable-next-line import/no-duplicates
   import { DirectiveOptions } from 'vue'
 
   const ClickOutside: DirectiveOptions
@@ -358,6 +361,6 @@ declare module 'vuetify/lib/directives' {
     Ripple,
     Resize,
     Scroll,
-    Touch
+    Touch,
   }
 }

@@ -10,7 +10,7 @@ import mixins from '../../util/mixins'
 
 // Types
 import { PropType } from 'vue'
-import { InputMessage, InputValidationRules } from 'types'
+import { InputMessage, InputValidationRules } from 'vuetify/types'
 
 /* @vue/component */
 export default mixins(

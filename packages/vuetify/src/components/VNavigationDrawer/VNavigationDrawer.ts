@@ -23,7 +23,7 @@ import mixins from '../../util/mixins'
 
 // Types
 import { VNode, VNodeDirective, PropType } from 'vue'
-import { TouchWrapper } from 'types'
+import { TouchWrapper } from 'vuetify/types'
 
 const baseMixins = mixins(
   Applicationable('left', [
@@ -333,8 +333,8 @@ export default baseMixins.extend({
     genDirectives (): VNodeDirective[] {
       const directives = [{
         name: 'click-outside',
-        value: () => (this.isActive = false),
-        args: {
+        value: {
+          handler: () => { this.isActive = false },
           closeConditional: this.closeConditional,
           include: this.getOpenDependentElements,
         },

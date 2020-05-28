@@ -14,6 +14,7 @@ $material-light: map-deep-merge(
     'calendar': (
       'background-color': map-get($shades, 'white'),
       'outside-background-color': #f7f7f7,
+      'weeknumber-background-color': #f1f3f4,
       'line-color': map-get($grey, 'lighten-2'),
       'interval-color': map-get($grey, 'darken-3'),
       'interval-line-color': map-get($grey, 'lighten-2'),

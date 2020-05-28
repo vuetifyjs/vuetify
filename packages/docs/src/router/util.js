@@ -26,9 +26,11 @@ export const languageRegexp = new RegExp('^(' + languagePattern + ')$')
 // Matches any language identifier
 export const genericLanguageRegexp = /[a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3}/
 
-export const preferredLanguage = typeof document === 'undefined'
-  ? 'en'
-  : window.localStorage.getItem('currentLanguage') || navigator.languages.find(l => l.match(languageRegexp)) || 'en'
+export function preferredLanguage () {
+  return typeof document === 'undefined'
+    ? 'en'
+    : window.localStorage.getItem('currentLanguage') || navigator.languages.find(l => l.match(languageRegexp)) || 'en'
+}
 
 export function root (children) {
   return [
@@ -39,14 +41,14 @@ export function root (children) {
     ),
     {
       path: `/:lang(${genericLanguageRegexp.source})/*`,
-      redirect: to => trailingSlash(`/${preferredLanguage}/${to.params.pathMatch || ''}`),
+      redirect: to => trailingSlash(`/${preferredLanguage()}/${to.params.pathMatch || ''}`),
     },
     {
       // The previous one doesn't match if there's no slash after the language code
       path: `/:lang(${genericLanguageRegexp.source})`,
-      redirect: () => `/${preferredLanguage}/`,
+      redirect: () => `/${preferredLanguage()}/`,
     },
-    redirect(to => trailingSlash(`/${preferredLanguage}${to.path}`)),
+    redirect(to => trailingSlash(`/${preferredLanguage()}${to.path}`)),
   ]
 }
 
