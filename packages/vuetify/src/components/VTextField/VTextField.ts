@@ -472,9 +472,11 @@ export default baseMixins.extend<options>().extend({
       VInput.options.methods.onMouseUp.call(this, e)
     },
     setLabelWidth () {
-      if (!this.outlined || !this.$refs.label) return
+      if (!this.outlined) return
 
-      this.labelWidth = Math.min(this.$refs.label.scrollWidth * 0.75 + 6, (this.$el as HTMLElement).offsetWidth - 24)
+      this.labelWidth = this.$refs.label
+        ? Math.min(this.$refs.label.scrollWidth * 0.75 + 6, (this.$el as HTMLElement).offsetWidth - 24)
+        : 0
     },
     setPrefixWidth () {
       if (!this.$refs.prefix) return

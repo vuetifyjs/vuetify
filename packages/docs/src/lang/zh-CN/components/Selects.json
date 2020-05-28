@@ -2,6 +2,8 @@
   "heading": "# 选择器",
   "headingText": "选择器组件用于从选项列表中收集用户提供的信息。",
   "objectAlert": "在为 **items** 属性使用对象时，您必须将 **item-text** 和 **item-value** 与对象上的现有属性关联。这些值默认为 **text** 和 **value**，可以更改。",
+  "autoAlert": "**menu-props** 的 **auto** 属性只支持默认输入样式。",
+  "autocompleteAlert": "浏览器自动完成默认设置为关闭，可能因浏览器而异，可能会被忽略。[MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion)",
   "examples": {
     "light": {
       "heading": "### 浅色主题",
@@ -55,6 +57,7 @@
     "debounceSearch": "去除搜索框正在 emitted 的值",
     "deletableChips": "添加一个去除图标的到选定的小纸片（chips）",
     "disabled": "禁用输入",
+    "disableLookup": "禁用键盘查询",
     "eager": "Mixins.Bootable.props.eager",
     "editable": " 创建一个可编辑按钮 - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "filter": "用于过滤条目的功能",
@@ -63,7 +66,7 @@
     "itemDisabled": " 禁用 **items** 的属性值",
     "items": "可以是对象数组或字符串数组。当使用对象时，将寻找文本和值字段。 这可以使用 **item-text** 和 **item-value** 属性来更改。 具有 **header** 或 **divider** 属性的对象被视为特殊情况并生成列表头或分隔符；这些是不可选择的。",
     "itemText": "设置**items**'属性的文本值",
-    "itemValue": "设置 **items** 值的属性 - **must be primitive**。 支持点表示法",
+    "itemValue": "设置 **items** 的值的属性 - **必须是 primitive**。支持点符号。**注意：** 目前不支持 `v-combobox` [GitHub问题](https://github.com/vuetifyjs/vuetify/issues/5479)。",
     "menuProps": "将属性传递到 `v-menu` 组件。接受布尔属性 `menu-props=\"auto, overflowY\"` ，或一个对象 `:menu-props=\"{ auto: true, overflowY: true }\"`",
     "minWidth": "Mixins.Menuable.props.minWidth",
     "multiple": "多选，接受数组作为值",

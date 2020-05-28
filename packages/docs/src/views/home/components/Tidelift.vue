@@ -8,6 +8,7 @@
     rel="noopener"
     target="_blank"
     tile
+    @click="$ga.event('home', 'click', ' tidelift')"
   >
     <v-img
       alt="Tidelift"

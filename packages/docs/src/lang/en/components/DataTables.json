@@ -134,6 +134,17 @@
       "onIcon": "The icon used when active.",
       "ripple": "Mixins.Rippleable.props.ripple",
       "value": "A boolean value that represents whether the simple checkbox is checked."
+    },
+    "v-data-table-header": {
+      "disableSort": "Toggles rendering of sort button",
+      "everyItem": "Indicates if all items in table are selected",
+      "headers": "Array of header items to display",
+      "mobile": "Renders mobile view of headers",
+      "options": "Options object. Identical to the one on `v-data-table`",
+      "showGroupBy": "Shows group by button",
+      "singleSelect": "Toggles rendering of select-all checkbox",
+      "someItems": "Indicates if one or more items in table are selected",
+      "sortIcon": "Icon used for sort button"
     }
   },
   "slots": {

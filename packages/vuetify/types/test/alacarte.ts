@@ -26,3 +26,9 @@ Vue.extend({
     Ripple
   }
 })
+
+VBtn.extend()
+
+Vue.extend({
+  extends: VBtn,
+})

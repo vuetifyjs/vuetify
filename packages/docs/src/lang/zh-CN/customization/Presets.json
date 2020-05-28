@@ -1,3 +1,54 @@
 {
-  "limitationHeading1": "## 局限性"
+  "heading": "# 预设",
+  "headingText": "对于第 2 版 Material Design 规范，Google 创建了 [Material studies](https://material.io/design/material-studies/about-our-material-studies.html)，目的是通过虚构的应用程序来探索现实世界的设计局限性，每个应用程序都有自己独特的属性和用例。Vuetify 预设通过预先配置的框架选项、SASS 变量和自定义样式整合了这些研究，这些预设可以立即改变你的应用程序的外观和感觉。",
+  "defaultHeading1": "## 默认预设",
+  "defaultText1a": "默认的 Vuetify 预设提供了所有框架服务的基线值。每个对象键(object key) 对应于 `$vuetify` 对象上的一个服务，并且可以通过 Vuetify 构造函数中的 **preset** 或自定义 **user options** 来覆盖。",
+  "materialHeading1": "## Material Studies",
+  "materialText1a": "[Material Design](https://material.io/) 是一种固执己见的视觉语言，在实现高度定制的设计时，可能难以使用。新的研究展示了材料主题化的灵活性，并告诉你在没有默认材料外观的情况下创建 **独特的** 应用程序是多么容易。",
+  "materialText1b": "目前共有 **7 个 Material Studies**，每个都有相应的预设插件：",
+  "materialText1c": [
+    "[Basil](https://material.io/design/material-studies/basil.html)",
+    "[Crane](https://material.io/design/material-studies/crane.html)",
+    "[Fortnightly](https://material.io/design/material-studies/fortnightly.html)",
+    "[Owl](https://material.io/design/material-studies/owl.html)",
+    "[Rally](https://material.io/design/material-studies/rally.html)",
+    "[Reply](https://material.io/design/material-studies/reply.html)",
+    "[Shrine](https://material.io/design/material-studies/shrine.html)"
+  ],
+  "installHeading2": "### 安装",
+  "installText2a": "在你的控制台中键入 <kbd>vue add vuetify-preset-{name}</kbd>, 其中 `{name}` 对应于可用的 [Material Studies](#material-studies) 之一。 安装插件后，您的 **vuetify.js** 文件将更新为包括所选的预设。",
+  "installText2b": "要开始开发，命令行里需要键入 <kbd>yarn serve</kbd> 或者 <kbd>npm run serve</kbd>。 Vuetify 服务插件将引导到 Vue CLI 并自动应用预设变量和风格的所有更改。 欲了解更多关于生成器和服务插件如何工作的信息，请查看 [Plugin Development Guide](#plugin-development-guide)。",
+  "mergeHeading3": "### 合并策略",
+  "mergeText3a": "Vuetify 选项从上往下合并 — _Defaults, Preset and User_。[default](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/presets/default/index.ts) 预设首先会与 Vuetify 构造函数选项中提供的 **preset** 属性合并。如果适用，用户提供的选项将与全局默认值和预设合并。",
+  "limitationHeading1": "## 局限性",
+  "limitationText1a": "由于 [studies](https://material.io/design/material-studies/about-our-material-studies.html) 更多的是可视化而不是技术性的，所以预设是我们的 _best-guess_ 实现。在许多情况下，由于缺乏研究报告中的信息，风格和功能必须由研究报告中的准则来推断。也有一些情况下，研究报告的部分内容 _**不能**_ 或者 _**不被**_  支持。",
+  "limitationText1b": [
+    "需要对框架进行修改",
+    "目前无法使用 CSS",
+    "我们还没有找到支持它的方法"
+  ],
+  "limitationAlert1": "Vuetify 预设是一个正在进行中的功能，随着 Vuetify 获得新功能，它将随着时间的推移得到增强。",
+  "limitationHeading2": "### Google 字体",
+  "limitationText2a": "当您安装预设时，它将只用它所需要的字体和权重更新您的主要 **public/index.html** 文件。例如，一个研究报告可能只需要 `400,500,600` 字体权重。这将导致 Vuetify 中的一些辅助类无法工作；例如 `font-weight-thin` 需要 _300_ 字体权重。权重可以通过更新你的 `public.html` 中的字体链接来修改。",
+  "limitationHeading3": "### 编译时间",
+  "limitationText3a": "为了更新Vuetify中的SASS变量，在开发过程中以及当你的应用程序为生产模式构建时，样式会被重新编译。这将 _会_ 增加你的初始编译时间，并且 _会_ 在你编辑 **variables** 文件时被触发。如果你的应用程序没有受到任何 [Vuetify加载器限制](/customization/a-la-carte#limitations) 的影响，你可以选择从 `vuetify/lib/framework` 导入 Vuetify。这可以将编译时间减少 _50%_。",
+  "devAlert1": "自定义预设 **不能** 本身包含一个 _preset_ 属性。",
+  "devHeading1": "## 插件开发指南",
+  "devText1a": "Vuetify 预设是一个 npm 包，它提供了框架范围内的选项和使用 Vue CLI 进行自定义风格设计。它由一个 SASS 变量文件、一个 CSS 覆盖文件以及 Vue CLI [Generator](https://cli.vuejs.org/dev-guide/generator-api.html) 和 [Plugin Service](https://cli.vuejs.org/dev-guide/plugin-api.html) 组成。预设所提供的一些功能包括：",
+  "devText1b": [
+    "使用 **预定义的** 值配置框架选项 - 可以使用任何可用的 [Vuetify 选项](#default-preset) 的组合。",
+    "注入 **自定义 SASS 变量**，用于配置现有的 Vuetify 功能；例如组件。预设在编译时使用 [Vue CLI 插件API](https://cli.vuejs.org/dev-guide/plugin-api.html#plugin-api) 来提升 SASS 变量。",
+    "提供 **全局覆盖** 的样式无法通过变量覆盖。",
+    "修改 Vuetify 应用程序的风格和选项的 _简化方法_"
+  ],
+  "devHeading2": "#### generator.js",
+  "devText2a": "此文件是 Vue CLI [Generator](https://cli.vuejs.org/dev-guide/generator-api.html)，用于更新您应用程序中的 **vuetify.js** 文件以包含定义的预设。",
+  "devHeading3": "#### index.js",
+  "devText3a": "此文件是 Vue CLI [Plugin Service](https://cli.vuejs.org/dev-guide/plugin-api.html)，在运行 `yarn serve` 或 `npm run serve` 时将绑定到您的应用程序中。 `injectSassVariables` 方法将目标文件的变量注入到所有 SASS/SCSS 文件中。",
+  "devHeading4": "#### preset/index.js",
+  "devText4a": "这包含了传递给 Vuetify 构造函数的框架配置选项。这些选项与任何用户提供的值和 [框架默认值](#default-preet) 相结合。",
+  "devHeading5": "#### preset/overrides.sass",
+  "devText5a": "这是对没有相应的变量的样式修改的全部内容。当你需要在现有组件中添加新的 CSS 属性时，这很有用。",
+  "devHeading6": "#### preset/variables.scss",
+  "devText6a": "这是一个 SASS/SCSS 变量文件，它将覆盖现有的框架值。你可以在 [Vuetify SASS变量](/customization/sass-variables#variable-api) 文档页面或组件的 API 部分找到更多关于可用变量的信息。"
 }

@@ -2,6 +2,12 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": true,
+  "build": {
+    "env": {
+      "COSMIC_BUCKET_SLUG": "@cosmic-bucket-slug",
+      "COSMIC_BUCKET_READ_KEY": "@cosmic-bucket-read-key"
+    }
+  },
   "rewrites": [
     {
       "source": "/eo-UY/(.*)",

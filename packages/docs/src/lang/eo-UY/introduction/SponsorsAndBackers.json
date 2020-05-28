@@ -1,17 +1,16 @@
 {
-  "heading": "crwdns44552:0crwdne44552:0",
-  "headingText": "crwdns44554:0crwdne44554:0",
-  "affiliatesHeader": "crwdns44556:0crwdne44556:0",
-  "openCollective": "crwdns44558:0crwdne44558:0",
-  "openCollectiveBlurb": "crwdns44560:0crwdne44560:0",
-  "sponsors": "crwdns44562:0crwdne44562:0",
-  "github": "crwdns44564:0crwdne44564:0",
-  "githubBlurb": "crwdns44566:0crwdne44566:0",
-  "serviceSponsorsHeader": "crwdns44568:0crwdne44568:0",
-  "tidelift": "crwdns44570:0crwdne44570:0",
-  "tideliftBlurb": "crwdns44572:0crwdne44572:0",
-  "oneTime": "crwdns44574:0crwdne44574:0",
-  "oneTimeBlurb": "crwdns44576:0crwdne44576:0",
-  "questionHeader": "crwdns44578:0crwdne44578:0",
-  "questionButton": "crwdns44580:0crwdne44580:0"
+  "heading": "crwdns57026:0crwdne57026:0",
+  "headingText": "crwdns57028:0[John]crwdnd57028:0[Heather]crwdne57028:0",
+  "oneTimeHeading": "crwdns57030:0crwdne57030:0",
+  "oneTimeText1": "crwdns57032:0[Paypal]crwdne57032:0",
+  "recurringHeading": "crwdns57034:0crwdne57034:0",
+  "recurringText1": "crwdns57036:0crwdne57036:0",
+  "recurringText2": [
+    "crwdns57038:0[Patreon]crwdne57038:0",
+    "crwdns57040:0crwdne57040:0"
+  ],
+  "sponsorsHeading": "crwdns57042:0crwdne57042:0",
+  "cursoryHeading": "crwdns57044:0crwdne57044:0",
+  "cursoryText1": "crwdns57046:0crwdne57046:0",
+  "cursoryText2": "crwdns57048:0[John]crwdnd57048:0[Heather]crwdne57048:0"
 }

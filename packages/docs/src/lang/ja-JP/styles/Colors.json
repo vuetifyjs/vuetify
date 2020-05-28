@@ -9,5 +9,6 @@
   "sassPackHeader": "## Sass color pack",
   "sassPackText": "カラーパックは便利ですが、CSSエクスポートサイズを最大30 KB増やします。プロジェクトによっては、Vuetifyブートストラップから実行時に作成されるデフォルトの提供クラスのみが必要な場合があります。この機能を無効にするには、メインの**sass**ファイルを _手動でインポート_ してビルドする必要があります。これには [Sass loader](https://github.com/webpack-contrib/sass-loader) と `.sass` /`.scss`ファイルエントリが必要です。",
   "sassPackText2": "作成した`main.sass`ファイルは、プロジェクトに含める必要があります。",
-  "alert": "`sass`を使用するには、webpackセットアップを設定する**必要**があります。 [既成のテンプレート](/getting-started/quick-start#new-applications) では設定済となっています。"
+  "colorHeader": "## マテリアルカラー",
+  "colorText": "以下は、原色ごとにグループ化されたマテリアルデザインのカラーパレットの一覧です。"
 }

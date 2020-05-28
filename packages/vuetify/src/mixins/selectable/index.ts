@@ -73,7 +73,7 @@ export default mixins(
     },
     rippleState (): string | undefined {
       return !this.disabled && !this.validationState
-        ? 'primary'
+        ? undefined
         : this.validationState
     },
   },

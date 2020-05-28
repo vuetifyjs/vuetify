@@ -4,54 +4,47 @@
     tag="section"
   >
     <supporters-supporter-group
-      v-show="tier.includes(0)"
-      :group="supporters['Premiere']"
+      v-show="tier.includes(1)"
+      :group="1"
       :title="!hideTitles ? 'Premiere' : undefined"
       :class="classes"
       :x-large="!compact"
     />
 
     <supporters-supporter-group
-      v-show="tier.includes(1)"
-      :group="supporters['Diamond']"
+      v-show="tier.includes(2)"
+      :group="2"
       :title="!hideTitles ? 'Diamond' : undefined"
       :class="classes"
       :large="!compact"
     />
 
     <supporters-supporter-group
-      v-show="tier.includes(2)"
-      :group="supporters['Platinum']"
+      v-show="tier.includes(3)"
+      :group="3"
       :title="!hideTitles ? 'Platinum' : undefined"
       :class="classes"
     />
 
     <supporters-supporter-group
-      v-show="tier.includes(6)"
-      :group="supporters['Collective']"
-      :title="!hideTitles ? 'Open Collective' : undefined"
-      :class="classes"
-    />
-
-    <supporters-supporter-group
-      v-show="tier.includes(3)"
-      :group="supporters['Gold']"
+      v-show="tier.includes(4)"
+      :group="4"
       :title="!hideTitles ? 'Gold' : undefined"
       :class="classes"
       small
     />
 
     <supporters-supporter-group
-      v-show="tier.includes(4)"
-      :group="supporters.affiliate"
+      v-show="tier.includes(5)"
+      :group="5"
       :title="!hideTitles ? 'Affiliate' : undefined"
       :class="classes"
       small
     />
 
     <supporters-supporter-group
-      v-show="tier.includes(5)"
-      :group="supporters.service"
+      v-show="tier.includes(6)"
+      :group="6"
       :title="!hideTitles ? 'Service' : undefined"
       small
     />
@@ -80,7 +73,7 @@
       },
       tier: {
         type: Array,
-        default: () => ([0, 1, 2, 3, 4, 5, 6]),
+        default: () => ([1, 2, 3, 4, 5, 6, 7]),
       },
     },
 

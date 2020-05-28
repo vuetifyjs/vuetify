@@ -1,7 +1,0 @@
-{
-  "examples": {
-    "api": {
-      "desc": "Dễ dàng \"bắt\" các dữ liệu động và tạo ra trải nghiệm duy nhất. Component `v-autocomplete` dễ dàng mở rộng và tinh chỉnh nguồn dữ liệu đầu vào."
-    }
-  }
-}

@@ -117,6 +117,9 @@ export default CalendarBase.extend({
         ? this.eventOverlapMode as CalendarEventOverlapMode
         : CalendarEventOverlapModes[this.eventOverlapMode]
     },
+    eventWeekdays (): number[] {
+      return this.parsedWeekdays
+    },
   },
 
   methods: {
@@ -339,7 +342,7 @@ export default CalendarBase.extend({
     },
     getEventsForDay (day: CalendarTimestamp): CalendarEventParsed[] {
       const identifier = getDayIdentifier(day)
-      const firstWeekday = this.parsedWeekdays[0]
+      const firstWeekday = this.eventWeekdays[0]
 
       return this.parsedEvents.filter(
         event => isEventStart(event, day, identifier, firstWeekday)
@@ -347,7 +350,7 @@ export default CalendarBase.extend({
     },
     getEventsForDayAll (day: CalendarTimestamp): CalendarEventParsed[] {
       const identifier = getDayIdentifier(day)
-      const firstWeekday = this.parsedWeekdays[0]
+      const firstWeekday = this.eventWeekdays[0]
 
       return this.parsedEvents.filter(
         event => event.allDay && isEventStart(event, day, identifier, firstWeekday)
@@ -362,12 +365,12 @@ export default CalendarBase.extend({
     },
     getScopedSlots () {
       if (this.noEvents) {
-        return this.$scopedSlots
+        return { ...this.$scopedSlots }
       }
 
       const mode = this.eventModeFunction(
         this.parsedEvents,
-        this.parsedWeekdays[0],
+        this.eventWeekdays[0],
         this.parsedEventOverlapThreshold
       )
 

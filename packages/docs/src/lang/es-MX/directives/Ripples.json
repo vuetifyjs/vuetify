@@ -1,7 +1,0 @@
-{
-  "examples": {
-    "custom-color": {
-      "desc": "Usando una clase auxiliar, puedes cambiar el color del ripple."
-    }
-  }
-}

@@ -1,8 +1,14 @@
 // Styles
 import './VRipple.sass'
 
-import { VNode, VNodeDirective } from 'vue'
+// Utilities
 import { consoleWarn } from '../../util/console'
+import { keyCodes } from '../../util/helpers'
+
+// Types
+import { VNode, VNodeDirective } from 'vue'
+
+type VuetifyRippleEvent = MouseEvent | TouchEvent | KeyboardEvent
 
 function transform (el: HTMLElement, value: string) {
   el.style['transform'] = value
@@ -19,15 +25,29 @@ export interface RippleOptions {
   circle?: boolean
 }
 
-function isTouchEvent (e: MouseEvent | TouchEvent): e is TouchEvent {
+function isTouchEvent (e: VuetifyRippleEvent): e is TouchEvent {
   return e.constructor.name === 'TouchEvent'
 }
 
-const calculate = (e: MouseEvent | TouchEvent, el: HTMLElement, value: RippleOptions = {}) => {
-  const offset = el.getBoundingClientRect()
-  const target = isTouchEvent(e) ? e.touches[e.touches.length - 1] : e
-  const localX = target.clientX - offset.left
-  const localY = target.clientY - offset.top
+function isKeyboardEvent (e: VuetifyRippleEvent): e is KeyboardEvent {
+  return e.constructor.name === 'KeyboardEvent'
+}
+
+const calculate = (
+  e: VuetifyRippleEvent,
+  el: HTMLElement,
+  value: RippleOptions = {}
+) => {
+  let localX = 0
+  let localY = 0
+
+  if (!isKeyboardEvent(e)) {
+    const offset = el.getBoundingClientRect()
+    const target = isTouchEvent(e) ? e.touches[e.touches.length - 1] : e
+
+    localX = target.clientX - offset.left
+    localY = target.clientY - offset.top
+  }
 
   let radius = 0
   let scale = 0.3
@@ -50,7 +70,11 @@ const calculate = (e: MouseEvent | TouchEvent, el: HTMLElement, value: RippleOpt
 
 const ripples = {
   /* eslint-disable max-statements */
-  show (e: MouseEvent | TouchEvent, el: HTMLElement, value: RippleOptions = {}) {
+  show (
+    e: VuetifyRippleEvent,
+    el: HTMLElement,
+    value: RippleOptions = {}
+  ) {
     if (!el._ripple || !el._ripple.enabled) {
       return
     }
@@ -130,7 +154,7 @@ function isRippleEnabled (value: any): value is true {
   return typeof value === 'undefined' || !!value
 }
 
-function rippleShow (e: MouseEvent | TouchEvent) {
+function rippleShow (e: VuetifyRippleEvent) {
   const value: RippleOptions = {}
   const element = e.currentTarget as HTMLElement
   if (!element || !element._ripple || element._ripple.touched) return
@@ -144,7 +168,7 @@ function rippleShow (e: MouseEvent | TouchEvent) {
     // already been registered as touch
     if (element._ripple.isTouch) return
   }
-  value.center = element._ripple.centered
+  value.center = element._ripple.centered || isKeyboardEvent(e)
   if (element._ripple.class) {
     value.class = element._ripple.class
   }
@@ -161,6 +185,18 @@ function rippleHide (e: Event) {
     }
   })
   ripples.hide(element)
+}
+
+let keyboardRipple = false
+function keyboardRippleShow (e: KeyboardEvent) {
+  if (!keyboardRipple && (e.keyCode === keyCodes.enter || e.keyCode === keyCodes.space)) {
+    keyboardRipple = true
+    rippleShow(e)
+  }
+}
+function keyboardRippleHide (e: KeyboardEvent) {
+  keyboardRipple = false
+  rippleHide(e)
 }
 
 function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boolean) {
@@ -188,6 +224,10 @@ function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boo
     el.addEventListener('mousedown', rippleShow)
     el.addEventListener('mouseup', rippleHide)
     el.addEventListener('mouseleave', rippleHide)
+
+    el.addEventListener('keydown', keyboardRippleShow)
+    el.addEventListener('keyup', keyboardRippleHide)
+
     // Anchor tags can be dragged, causes other hides to fail - #1537
     el.addEventListener('dragstart', rippleHide, { passive: true })
   } else if (!enabled && wasEnabled) {
@@ -202,6 +242,8 @@ function removeListeners (el: HTMLElement) {
   el.removeEventListener('touchcancel', rippleHide)
   el.removeEventListener('mouseup', rippleHide)
   el.removeEventListener('mouseleave', rippleHide)
+  el.removeEventListener('keydown', keyboardRippleShow)
+  el.removeEventListener('keyup', keyboardRippleHide)
   el.removeEventListener('dragstart', rippleHide)
 }
 

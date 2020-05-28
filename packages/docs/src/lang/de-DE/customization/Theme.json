@@ -1,1 +1,35 @@
-{}
+{
+  "heading": "# Theme",
+  "headingText": "Sie können die Farben Ihrer Anwendung einfach programmatisch ändern. Erstellen Sie das Standard-Stylesheet neu und passen Sie verschiedene Aspekte des Frameworks an Ihre speziellen Bedürfnisse an.",
+  "lightAndDarkHeader": "## Hell und Dunkel",
+  "lightAndDarkText1": "Vuetify unterstützt sowohl die **helle** als auch die **dunkle** Variante der Materialdesign-Spezifikation. Dies beginnt mit der Basis-Anwendungskomponente `v-app` und wird von den meisten Komponenten unterstützt. Standardmäßig wird Ihre Anwendung das **helle** Theme verwenden, aber dies kann leicht überschrieben werden, indem Sie die Option **dark** im Theme-Service hinzufügen.",
+  "lightAndDarkText2": "Wenn Sie eine Komponente als Hell oder Dunkel markieren, werden alle Kinder dieser Komponente dieses erben und anwenden, sofern nicht anders angegeben. Sie können die Option **Dark** manuell ein- und ausschalten, indem Sie `this.$vuetify.theme.dark` zu **true** oder **false** ändern.",
+  "customizingHeader": "## Anpassungen",
+  "customizingText1": "Standardmäßig hat Vuetify ein Standard-Theme für alle Komponenten.",
+  "customizingText2": "Dies kann leicht geändert werden. Übergeben Sie einfach die Eigenschaft **theme** an den Vuetify-Konstruktor. Sie können alle oder nur einige der Theme-Eigenschaften ändern, wobei die restlichen Eigenschaften von der Standardeinstellung übernommen werden.",
+  "customizingText3": "Sie können auch die vordefinierten Materialfarben verwenden.",
+  "customizingText3a": "Standardmäßig wird der Theme-Service die primäre Farbe der Anwendung für **anchor**-Tags verwenden. Sie können dies überschreiben, indem Sie dem Theme eine anchor-Eigenschaft hinzufügen:",
+  "customizingText4": "Im Hintergrund generiert Vuetify CSS-Klassen, die auf diesen Werten basieren und im DOM zugänglich sein werden. Diese Klassen folgen dem gleichen Markup wie andere Helferklassen z.B. `primary` oder `secondary--text`. Wenn Sie ein ganzes Farbobjekt angeben (wie in `colors.purple` oben), werden die lighten/darken-Variationen direkt verwendeet, anstatt generiert zu werden.",
+  "customizingText5": "Diese Werte werden auch im Instanz-Objeckt **$vuetify** in der Eigenschaft **theme** verfügbar gemacht. Dadurch können Sie Ihr Theme _dynamisch_ ändern. Im Hintergrund wird Vuetify Ihre Theme-Klassen regenerieren und aktualisieren, um Ihre Anwendung sofort zu aktualisieren.",
+  "optionHeader": "## Optionen",
+  "optionHeader2": "### Minifizierung",
+  "optionHeader3": "### Caching",
+  "optionHeader4": "### Benutzerdefinierte Eigenschaften",
+  "optionHeader5": "### CSP Nonce",
+  "optionText6": "Seiten mit aktivierten `script-src`- oder `style-src`-CSP-Regeln können eine **nonce** für eingebettete Tags erfordern.",
+  "themeGeneratorHeader": "## Theme-Generator",
+  "themeGeneratorText1": "Entdecken und generieren Sie neue Farbthemen für Ihre **Vuetify**-Anwendungen mit unserem [Theme-Generator](https://theme-generator.vuetifyjs.com).",
+  "variantsSubheader": "### Benutzerdefinierte Theme-Varianten",
+  "variantsText1": "Während Vuetify automatisch _lighten_- und _darken_-Varianten für Ihre Themenfarben erzeugt, sollten Sie dies selbst kontrollieren. Übergeben Sie einfach ein Theme-Objekt, das die Varianten enthält, die Sie ändern möchten. Alles, was nicht zur Verfügung steht, wird für Sie generiert.",
+  "variantsText2": "Sie können jetzt Ihr individuelles Theme-Objekt importieren und es auf Vuetify anwenden",
+  "variantsText3": "Unten ist eine vollständige Liste der überschreibbaren Schlüssel zum Theme-Objekt:",
+  "disableSubheader": "### Theme deaktivieren",
+  "disableText1": "Sie können die Theme-Funktionalität deaktivieren, indem Sie die Eigenschaft **disable** auf den Wert **true** setzen. Dies verhindert die Erstellung des Vuetify Stylesheets.",
+  "provideHeading1": "## Theme-Anbieter",
+  "provideText1": "Das Vuetify Theme-System wird durch die [provide](https://vuejs.org/v2/api/#provide-inject)-Funktionalität in Vue verbreitet. Es kann Situationen geben, in denen Sie das zur Verfügung gestellte Theme manuell ändern müssen (dark oder light).",
+  "provideHeading2": "### Verwendung",
+  "provideText2": "In diesem Beispiel erbt die untere Karte von der Basis von **$vuetify.theme.dark**.",
+  "props": {
+    "root": "Verwenden Sie den aktuellen Wert von `$vuetify.theme.dark` im Gegensatz zum angegebenen Wert."
+  }
+}

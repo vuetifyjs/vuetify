@@ -25,9 +25,13 @@
       "heading": "### Scale transition",
       "desc": "Vuetifyのコンポーネントの多くは`transition`プロパティを含んでいます。"
     },
+    "fab-transition": {
+      "heading": "### Fab transition",
+      "desc": "FABトランジションの例は、`v-speed-dial`コンポーネントにあります。"
+    },
     "fade-transition": {
       "heading": "### Fade transition",
-      "desc": "フェードはCarouselでも見ることができます。"
+      "desc": "Fadeトランジションの例はCarouselで見ることができます。"
     },
     "expand-transition": {
       "heading": "### Expand transition",
@@ -37,6 +41,7 @@
       "desc": "シンプルなプロパティでトランジションのoriginを制御することができます。"
     },
     "todo": {
+      "heading": "### Todo リスト",
       "desc": "複数のトランジションを使用すれば、簡単にToDoリストを作成することができます！"
     }
   },

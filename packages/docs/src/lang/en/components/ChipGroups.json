@@ -39,5 +39,8 @@
     "prependIcon": "This icon used in the prepend slot (if shown)",
     "prevIcon": "Specify the icon to use for the prev icon",
     "showArrows": "Force the display of the pagination arrows"
+  },
+  "events": {
+    "change": "Emitted when the component value is changed by user interaction"
   }
 }

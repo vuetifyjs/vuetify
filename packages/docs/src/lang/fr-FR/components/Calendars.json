@@ -73,7 +73,6 @@
   "slots": {
     "day-body": "Le contenu placé dans une vue `day` dans le conteneur d'intervalle défilé. L'objet jour et heure est passé à travers cette portée.",
     "day-header": "Le contenu placé dans une vue `day` dans le conteneur en haut. L'objet jour et heure est passé à travers cette portée.",
-    "day-label": "Le contenu qui est placé dans le jour du mois dans la vue `week` ou `month`. L'objet jour et heure est passé à travers cette portée.",
     "day-month": "Le contenu placé dans l'espace du mois dans la vue `week` ou `month`. L'objet jour et heure est passé à travers cette portée.",
     "day": "Le contenu placé dans une vue `week` ou `month`. L'objet jour et heure est passé à travers cette portée.",
     "interval": "Le contenu placé dans l'espace d'intervalle dans la vue `day`. L'objet jour et heure est passé à travers cette portée."

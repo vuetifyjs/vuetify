@@ -9,7 +9,7 @@
   "sassPackHeader": "## Sass 色彩包",
   "sassPackText": "虽然方便，但是色彩包增加了约 ~30kb 的大小的输出文件。有些项目可能只需要 Vuetify 在运行时引导创建的那些默认提供的类。要禁用此功能，你将不得不 _手动_ 导入并构建 **sass** 主文件。这将需要 [Sass loader](https://github.com/webpack-contrib/sass-loader) 和应该 `.sass`/`.scss` 文件条目。",
   "sassPackText2": "你创建的 `main.sass` 文件将需要包含在您的项目中。",
-  "alert": "你 **必须** 配置你的 webpack 安装程序来使用 `sass`。如果你正在使用 [pre-made template](/getting-started/quick-start#new-applications)，这些都已经为你完成了。",
+  "alert": "你必须 **必须** 配置你的 webpack 设置为使用 `sass`。如果你使用的是 [预制模板](/getting-started/quick-start#vue-cli-install)，这已经为你完成了。",
   "sassPackText3": "这也可以在您的 **App.vue** 主文件中完成。请记住，根据您的项目设置，这 _将_ 增加每次更新输入文件时的构建时间，因为 sass 文件将会被重新生成。",
   "colorHeader": "## Material 色彩表",
   "colorText": "下面是按基色分组的 Material design 调色板列表"

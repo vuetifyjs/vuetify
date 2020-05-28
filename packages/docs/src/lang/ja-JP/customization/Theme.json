@@ -6,8 +6,22 @@
   "lightAndDarkText2": "コンポーネントを \"light\" または \"dark\" として指定すると、特に指定がない限り、そのコンポーネントはすべて同じコンポーネントを継承して適用します。'this.$vuetify.theme.dark' を **true** または **false** に変更することで、手動で **dark** のオンとオフを切り替えることができます。",
   "customizingHeader": "## カスタマイズ",
   "customizingText1": "デフォルトでは、Vuetify はすべてのコンポーネントに適用される標準テーマを持っています。",
+  "customizingText2": "次のように簡単に変更できます。**theme** プロパティを Vuetifyコンストラクタに渡すだけです。テーマプロパティのすべてを変更するか、一部のみを変更するかを選択でき、未指定の残りはデフォルトのものを継承します。",
   "customizingText3": "定義済みのマテリアルカラーを使用することもできます。",
   "customizingText3a": "デフォルトでは、theme serviceはアプリケーションのprimaryカラーを **anchor** タグに使用します。これをオーバーライドするには、テーマにanchorプロパティを追加します。",
+  "customizingText4": "Vuetify はこれらの値に基づいて css クラスを生成し、DOM でアクセスできるようにします。これらのクラスは他のヘルパークラス、例えば `primary` や `secondary--text` と同じマークアップに従います。カラーオブジェクト全体を指定した場合 (上記の `colors.purple` のように)、lighten/darken のバリエーションが生成されるのではなく、直接使われます。",
+  "customizingText5": "これらの値は、インスタンス **$vuetify** オブジェクトの **theme** プロパティでも利用可能になります。これにより、テーマを _動的に_ 変更することができます。裏では、Vuetifyがテーマクラスを再生成して更新し、アプリケーションをシームレスに更新します。",
+  "optionHeader": "## オプション",
+  "optionText6": "`script-src` または `style-src` の CSP ルールを有効にしたページでは、埋め込まれたスタイルタグに **nonce** を指定する必要があるかもしれません。",
   "themeGeneratorHeader": "## テーマジェネレータ",
-  "themeGeneratorText1": "[テーマジェネレータ](https://theme-generator.vuetifyjs.com) を使用して**Vuetify**アプリケーションの新しいカラーテーマを見つけて、生成してみてください。"
+  "themeGeneratorText1": "[テーマジェネレータ](https://theme-generator.vuetifyjs.com) を使用して**Vuetify**アプリケーションの新しいカラーテーマを見つけて、生成してみてください。",
+  "variantsText1": "Vuetifyはテーマカラーの _lighten_ および _darken_ バリアントを自動的に生成しますが、これを自分で制御することもできます。変更するバリアントを含むテーマオブジェクトを渡すだけです。提供されないものは引き続き生成されます。",
+  "variantsText2": "これで、カスタムテーマオブジェクトをインポートしてVuetifyに適用できます。",
+  "variantsText3": "以下は、themeオブジェクトの上書き可能なキーの完全なリストです:",
+  "disableText1": "テーマの機能を無効にするには、**disable**プロパティに**true**の値を指定します。これにより、Vuetifyスタイルシートの作成ができなくなります。",
+  "provideText1": "Vuetifyのテーマシステムは、Vueの [provide](https://jp.vuejs.org/v2/api/index.html#provide-inject) 機能を介して伝搬されます。提供されたテーマを手動で変更する必要がある状況があるかもしれません（ダークまたはライト）。",
+  "provideText2": "この例では、ボトムカードは **$vuetify.theme.dark** のルートを継承しています。",
+  "props": {
+    "root": "指定された値とは対照的に、'$vuetify.theme.dark' の現在の値を使用します。"
+  }
 }

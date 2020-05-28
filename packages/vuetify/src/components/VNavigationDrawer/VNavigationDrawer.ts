@@ -43,9 +43,6 @@ const baseMixins = mixins(
   Themeable
 )
 
-const DEFAULT_WIDTH = 256
-const DEFAULT_MINI_VARIANT_WIDTH = 56
-
 /* @vue/component */
 export default baseMixins.extend({
   name: 'v-navigation-drawer',
@@ -78,7 +75,7 @@ export default baseMixins.extend({
     miniVariant: Boolean,
     miniVariantWidth: {
       type: [Number, String],
-      default: DEFAULT_MINI_VARIANT_WIDTH,
+      default: 56,
     },
     mobileBreakPoint: {
       type: [Number, String],
@@ -101,7 +98,7 @@ export default baseMixins.extend({
     touchless: Boolean,
     width: {
       type: [Number, String],
-      default: DEFAULT_WIDTH,
+      default: 256,
     },
     value: null as unknown as PropType<any>,
   },
@@ -172,15 +169,8 @@ export default baseMixins.extend({
       if (this.isBottom) return 100
       return this.right ? 100 : -100
     },
-    computedApplicationWidth (): string | number {
-      return this.expandOnHover || this.miniVariant
-        ? this.miniVariantWidth
-        : this.width
-    },
-    computedNavigationWidth (): string | number {
-      return this.isMiniVariant
-        ? this.miniVariantWidth
-        : this.width
+    computedWidth (): string | number {
+      return this.isMiniVariant ? this.miniVariantWidth : this.width
     },
     hasApp (): boolean {
       return (
@@ -249,7 +239,7 @@ export default baseMixins.extend({
           ? `calc(100% - ${convertToUnit(this.computedMaxHeight)})`
           : undefined,
         transform: `${translate}(${convertToUnit(this.computedTransform, '%')})`,
-        width: convertToUnit(this.computedNavigationWidth),
+        width: convertToUnit(this.computedWidth),
       }
 
       return styles
@@ -456,15 +446,9 @@ export default baseMixins.extend({
         !this.$el
       ) return 0
 
-      const width = Number(this.computedApplicationWidth)
+      const width = Number(this.computedWidth)
 
-      if (isNaN(width)) {
-        return this.expandOnHover || this.miniVariant
-          ? DEFAULT_MINI_VARIANT_WIDTH
-          : DEFAULT_WIDTH
-      }
-
-      return width
+      return isNaN(width) ? this.$el.clientWidth : width
     },
     updateMiniVariant (val: boolean) {
       if (this.miniVariant !== val) this.$emit('update:mini-variant', val)

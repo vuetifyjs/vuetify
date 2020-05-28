@@ -2,6 +2,11 @@
   "heading": "# App Bars",
   "headingText": "`v-app-bar` は、一般にサイトナビゲーションとして一番最初に使われるため、どんな GUI にとっても重要なコンポーネントです。app-bar コンポーネントは、[v-navigation-drawer](/components/navigation-drawers) と連携して、あなたのアプリケーションにサイトナビゲーションを提供します。",
   "usageText": "`v-app-bar` コンポーネントは、アプリケーション全体のアクションと情報に対して使用します。",
+  "functional": {
+    "desc": [
+      "`v-app-bar-nav-icon`: [v-toolbar](/components/toolbars) および`v-app-bar`で使用するために特別に作成されたスタイル付きアイコンボタンコンポーネント。通常、ハンバーガーメニューとしてツールバーの左側に表示され、ナビゲーションドロワーの状態を制御するためによく使用されます。 `default`スロットで、このコンポーネントのアイコンと機能をカスタマイズできます。"
+    ]
+  },
   "examples": {
     "dense": {
       "heading": "### 高さが詰まったスタイル",
@@ -24,6 +29,7 @@
       "desc": "`v-app-bar` はスクロール時に隠すことができます。この機能を利用するには、`hide-on-scroll` プロパティを使用してください。"
     },
     "app-bar-nav": {
+      "heading": "### ナビゲーションドロワーの切り替え",
       "desc": "機能的なコンポーネント`v-app-bar-nav-icon`を使用すると、[v-navigation-drawer](/components/navigation-drawer) などの他のコンポーネントの状態を切り替えることができます。"
     },
     "scroll-threshold": {

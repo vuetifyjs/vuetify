@@ -1,20 +1,23 @@
-// Start all services
-$ pm2 start all
+# Status of all services
+pm2 status
 
-// Stop all services
-$ pm2 stop all
+# Start all services
+pm2 start all
 
-// Restart all services
-$ pm2 restart all
+# Stop all services
+pm2 stop all
 
-// Start/Stop/Restart single service
-$ pm2 <task> <process name>
+# Restart all services
+pm2 restart all
 
-// Stop and remove all services
-$ pm2 kill
+# Start/Stop/Restart single service
+pm2 <task> <process name>
 
-// Save config
-$ pm2 save
+# Stop and remove all services
+pm2 kill
 
-// Load your saved config
-$ pm2 resurrect
+# Save config
+pm2 save
+
+# Load your saved config
+pm2 resurrect

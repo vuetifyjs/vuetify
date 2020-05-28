@@ -32,6 +32,7 @@
     "eventMore": "在给定日期内事件太多的日历上是否显示更多 'button'。它将显示类似于 '5 more' 的内容，当单击时会生成一个 `click:more` 事件。",
     "eventMoreText": "在给定隐藏事件数量的情况下，在更多 'button' 中显示的文本。",
     "eventName": "设置 *event* 的显示名称的属性，或接受作为第一个参数传递给日历的事件对象的函数，并设置一个标志，指示该名称是用于一个定时事件 (true) 或是一个超过一天的事件。",
+    "eventOverlapMode": "`stack`, `column` 或自定义渲染函数之一",
     "eventOverlapThreshold": "以分钟为单位的值，用于确定两个定时事件应在彼此相邻的列中放置还是应视为稍微重叠的事件。",
     "eventRipple": "应用 `v-ripple` 指令。",
     "events": "事件对象数组，具有开始时间戳（可选）和名称及结束时间戳的属性。 如果未提供结束时间戳，则将使用开始值。 如果没有给出名称，则必须为 `event` \n 插槽提供一个实现。",
@@ -42,6 +43,7 @@
     "intervalCount": "在 `day` 视图中显示的间隔数。",
     "intervalFormat": "将出现在 `day` 和 `week` 视图的间隔栏中的一天中的时间字符串格式化为指定的区域设置",
     "intervalHeight": "`day` 视图中间隔的高度（以像素为单位）。",
+    "intervalWidth": "`day` 视图中左侧的间隔宽度。",
     "intervalMinutes": "间隔在 `day` 视图中的分钟数。普通间隔为 60 分钟，因此间隔为 1 小时。",
     "intervalStyle": "返回要应用于间隔的 CSS 样式。",
     "locale": "日历的区域设置。",
@@ -72,15 +74,19 @@
     "scrollToTime": "将 `day` 视图中的可滚动区域滚动到给定时间。 如果时间格式无效，或者日历不在 `day` 视图中，则返回 false。",
     "timeToY": "将 `day` 视图的时间转换为 y轴 上的像素值。 如果时间格式无效，或者日历不在 `day` 视图中，则返回 false。",
     "updateEventVisibility": "如果日历中包含事件，并且 `event-more` 被启用，那么具有太多事件的日子将包含一个 'button' 以表示必须隐藏多少事件。",
-    "updateTimes": "现在和今天在日历中更新，可能会更新日历中的样式。"
+    "updateTimes": "现在和今天在日历中更新，可能会更新日历中的样式。",
+    "getVisibleEvents": "返回当前日历上看到的事件列表，其中每个返回的元素都具有以下属性：<br>- `input`：`events` prop 中传递的事件。<br>- `start`: 解析起始时间戳的日历时间戳。<br>- `startIdentifier`：代表事件开始日期的数字。<br>- `startTimestampIdentifier`：代表事件开始的日期和时间的数字。<br>- `end`: 解析结束的时间戳的 CalendarTimestamp 。<br>- `endIdentifier`: 表示事件结束日期的数字。<br>- `endTimestampIdentifier`：一个代表事件结束日期和时间的数字。<br>- `allDay`：如果这是一个全天事件（事件的 `start`/`end` 中没有指定时间）。<br>- `index`: 给定数组中事件的索引。"
   },
   "slots": {
     "day-body": "放置在可滚动间隔容器的 `day` 视图中的内容。day & time 对象通过此插槽作用域传递。",
     "day-header": "顶部容器中 `day` 视图中放置的内容。day & time 对象通过此插槽作用域传递。",
-    "day-label": "在 `week` 或 `month` 视图中放置在月份的第几天的内容。day & time 对象通过此插槽作用域传递。",
+    "day-label": "放在 `custom-weekly` 或 `month` 视图中的/日空间中的内容。日期和时间对象会通过这个插槽范围。",
+    "day-label-header": "在 `week`, `day`, `4day`, 或 `custom-daily` 视图中的月/日空间中放置的内容。日期和时间对象会通过这个插槽范围。",
     "day-month": "在 `week` 或 `month` 视图中放置在月份空间的内容。day & time 对象通过此插槽作用域传递。",
     "day": "放置在 `week` 或 `month` 视图中的内容。day & time 对象通过此插槽作用域传递。",
-    "interval": "在 `day` 视图中放置在间隔空间中的内容。day & time 对象通过此插槽作用域传递。"
+    "event": "放在事件中的内容。这就忽略了 `event-name` prop。",
+    "interval": "在 `day` 视图中放置在间隔空间中的内容。day & time 对象通过此插槽作用域传递。",
+    "interval-header": "放在 `day` 视图左上方的间隔空间中的内容。"
   },
   "events": {
     "change": "日历上显示的天数范围已更改。这在初始化时触发。传递的事件是一个具有开始日期和结束日期对象的对象。",

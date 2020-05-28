@@ -1,6 +1,6 @@
 {
   "heading": "# 自动完成",
-  "headingText": "`v-autoompalty` 组件提供简单灵活的输入提示功能。当搜索大量数据甚至从 API 中动态请求信息时是十分有用的。",
+  "headingText": "`v-autocomplete` 组件提供简单灵活的输入提示功能。当搜索大量数据甚至从 API 中动态请求信息时是十分有用的。",
   "usageText": "自动完成组件扩展了`v-select`并为其增加了过滤项目的能力。",
   "examples": {
     "api": {
@@ -38,6 +38,7 @@
     "dark": "Components.Inputs.props.dark",
     "filter": "搜索时使用的过滤算法。[example](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/components/VAutocomplete/VAutocomplete.ts#L36)",
     "hideNoData": "当没有要显示的选项时，隐藏菜单。用于防止在异步获取结果之前打开菜单。也有打开菜单的效果，当“ `items` 数组改变，如果还没有打开。",
-    "noFilter": "搜索时不要应用过滤。在过滤服务器端数据时非常有用"
+    "noFilter": "搜索时不要应用过滤。在过滤服务器端数据时非常有用",
+    "searchInput": "搜索值。可与 `.sync` 修改器一起使用。"
   }
 }

@@ -11,6 +11,12 @@
       "desc": "日付ピッカーの色は、 `color`および`header-color`プロパティを使用して設定できます。 `header-color` propが提供されない場合、ヘッダーは`color` prop値を使用します。",
       "heading": "### Date pickers - カラー"
     },
+    "date-current": {
+      "desc": "デフォルトでは、現在の日付はアウトライン化されたボタンを使用して表示されます - **show-current** prop を使用すると、現在のものとして表示されるようにボーダーを削除したり、別の日付を選択することができます。"
+    },
+    "date-dialog-and-menu": {
+      "desc": "ピッカーを `v-text-field` に統合するときは、**readonly** propを使用することを推奨します。これにより、モバイルキーボードがトリガーされるのを防ぐことができます。縦方向のスペースを節約するために、ピッカーのタイトルを隠すこともできます。 \n\n  ピッカーは、保存やキャンセル機能にフックできるスロットを公開しています。これにより、ユーザーがキャンセルした場合に置き換えることができる古い値を維持されます。"
+    },
     "date-events": {
       "desc": "You can specify events using arrays, objects, and functions. To change the default color of the event use **event-color** prop."
     },
@@ -50,6 +56,15 @@
     "month-allowed-months": {
       "desc": "You can specify allowed months using arrays, objects, and functions."
     },
+    "month-colorable": {
+      "desc": "月ピッカーの色は `color` と `header-color` propを用いて設定できます。`header-color` propが指定されていない場合、ヘッダは `color` propの値を使用します。"
+    },
+    "month-current": {
+      "desc": "デフォルトでは、現在の月はアウトライン化されたボタンを使用して表示されます - **show-current** propを使用すると、現在の月として表示されるようにボーダーを削除したり、別の月を選択することができます。"
+    },
+    "month-dialog-and-menu": {
+      "desc": "ピッカーを `v-text-field` に統合するときは、**readonly** propを使用することを推奨します。これにより、モバイルキーボードがトリガーされるのを防ぐことができます。縦方向のスペースを節約するために、ピッカーのタイトルを隠すこともできます。 \n\n  ピッカーは、保存やキャンセル機能にフックできるスロットを公開しています。これにより、ユーザーがキャンセルした場合に置き換えることができる古い値を維持されます。"
+    },
     "month-events": {
       "desc": "You can specify events using arrays, objects, and functions. To change the default color of the event use **event-color** prop."
     },
@@ -61,8 +76,17 @@
       "desc": "月ピッカーは、JavaScript Dateオブジェクトを介した国際化をサポートしています。 `locale` prop を使用してBCP 47言語タグを指定し、`first-day-of-week` propで週の最初の日を設定します。",
       "heading": "### Month pickers - 国際化"
     },
+    "month-light": {
+      "desc": "月ピッカーは、portrait **(デフォルト)** とlandscapeの2つの方向のバリエーションがあります。"
+    },
+    "month-multiple": {
+      "desc": "月ピッカーは、`multiple` propの設定で複数の月を選択できるようになりました。`multiple`を使用する場合、月ピッカーは、モデルが配列であることを期待します。"
+    },
     "month-readonly": {
       "desc": "**readonly** propを追加することにより、新しい日付の選択を無効にすることができます。"
+    },
+    "month-width": {
+      "desc": "ピッカーの幅を指定するか、全幅にすることができます。"
     },
     "usage": {
       "desc": "デートピッカーには、縦 **（デフォルト）**と横のバリエーションがあります。デフォルトでは、日（日ピッカーの場合）または月（月ピッカーの場合）に`input`イベントを発生させますが、**reactive** propを使用すると、年/月をクリックした後でもモデルを更新できます。"
@@ -71,7 +95,10 @@
   "heading": "# Date/month pickers",
   "headingText": "`v-date-picker`は、多くの既存のVuetifyコンポーネントで利用できるスタンドアロンコンポーネントです。日付/月を選択するための視覚的な表現をユーザーに提供します。",
   "props": {
+    "dayFormat": "日付テーブルに表示されるdayの文字列の書式をカスタマイズできます。date (ISO 8601文字列) 引数で呼び出されます。",
     "headerDateFormat": "カレンダーのヘッダーに表示される月の文字列の書式をカスタマイズできます。date (ISO 8601 文字列) 引数を使用して呼び出されます。",
+    "locale": "ロケールを設定します。 BCP 47言語タグを含む文字列を受け入れます。",
+    "multiple": "複数の日付の選択を許可します",
     "nextIcon": "翌月/年ボタンのアイコンを設定します。",
     "prevIcon": "前月/年ボタンのアイコンを設定します。"
   },

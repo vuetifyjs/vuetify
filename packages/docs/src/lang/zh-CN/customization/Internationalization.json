@@ -6,7 +6,7 @@
   "availableLocalesText": "目前，Vuetify 提供以下语言的翻译：",
   "alertInfo": "Vuetify 只提供了一个基本的翻译功能 `t`。对于更高级的国际化功能，建议将 Vuetifys 与 [vue-i18n](#vue-i-18-n) 的集成。",
   "createTranslation": "## 创建翻译",
-  "createTranslationText": "若要创建自己的翻译, 请使用下面的代码或复制并重命名 `vuetify/src/locale/en.ts` 文件到你的项目并进行更改。",
+  "createTranslationText": "要创建您自己的翻译，请使用下面的代码。你将继承 Vuetify 的翻译，但也可以添加你自己的翻译。另外，你也可以复制并粘贴 `vuetify/src/locale/en.ts` 的内容，但这需要在更新时手动同步文件。",
   "customComponents": "## 自定义组件",
   "customComponentsText": "如果要构建需要国际化的自定义 Vuetify 组件，可以使用 `t` 函数，该函数是 `$vuetify.lang` API 的一部分。",
   "api": {
@@ -15,6 +15,6 @@
     "t": "内部使用的翻译函数"
   },
   "vueI18nHeader": "## Vue i18n",
-  "vueI18nText1": "如果你使用的是 vue-i18n 软件包，则可以非常轻松地将其与 Vuetify 集成。 这使你可以将所有翻译保存在一个位置。 只需在 messages 中为 $vuetify 创建一个条目，并添加相应的语言更改。 然后通过提供自定义翻译功能将 vue-i18n 应用到 Vuetify（如下例所示）。 有关所有可用键的完整列表，[navigate here](#create-translation)。",
+  "vueI18nText1": "如果您使用的是 vue-i18n 软件包，您可以非常容易地将其与 Vuetify 集成。这让你可以将所有的翻译都保存在一个地方。只需在你的消息中为 $vuetify 创建一个条目，然后添加相应的语言更改。然后通过提供一个自定义翻译功能将 vue-i18n 与 Vuetify 挂钩（如下图所示）。欲知所有可用按键的完整列表，请 [导航这里](#creative-a-translation)。",
   "vueI18nText2": "一个重要注意事项是，在使用外部本地化插件时，如果当前语言环境不存在本地化，vuetify 不会自动默认使用英语。 因此，请确保为插件提供尽可能完整的本地化。"
 }

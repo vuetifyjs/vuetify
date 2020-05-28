@@ -2,7 +2,7 @@
   "heading": "# Display",
   "headingText": "The display helpers allow you to control the display of content. This includes being conditionally visible based upon the current viewport, or the actual element display type.",
   "displayHeader": "## Display",
-  "displayText": "Specify the elements `display` property. These classes can be applied to all breakpoints, from `xs` to `xl` and have no specified breakpoint.",
+  "displayText": "Specify the elements `display` property. These classes can be applied to all breakpoints from `xs` to `xl`. When using a base class,`.d-{value}`, it is inferred to be `.d-${value}-xs`.",
   "displayFormats": [
     "`.d-{value}` for `xs`",
     "`.d-{breakpoint}-{value}` for `sm`, `md`, `lg` and `xl`"

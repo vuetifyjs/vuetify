@@ -12,7 +12,10 @@
       :inline="inline"
     ><slot /></prism>
 
-    <div class="v-markup__edit">
+    <div
+      v-if="href"
+      class="v-markup__edit"
+    >
       <a
         :href="href"
         target="_blank"
@@ -24,7 +27,10 @@
       </a>
     </div>
 
-    <div class="v-markup__copy">
+    <div
+      v-if="!noCopy"
+      class="v-markup__copy"
+    >
       <v-icon
         title="Copy code"
         aria-label="Copy code"
@@ -66,7 +72,10 @@
   import 'prismjs/components/prism-typescript.js'
 
   // Utilities
-  import { getBranch } from '@/util/helpers'
+  import {
+    copyElementContent,
+    getBranch,
+  } from '@/util/helpers'
 
   export default {
     name: 'Markup',
@@ -81,6 +90,7 @@
         default: undefined,
       },
       inline: Boolean,
+      noCopy: Boolean,
       value: {
         type: String,
         default: 'markup',
@@ -104,10 +114,12 @@
         const folder = split.shift()
         const file = split.join('_')
 
-        return `${folder}/${file}.txt`
+        return file ? `${folder}/${file}.txt` : null
       },
       href () {
-        return `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/snippets/${this.file}`
+        return this.file
+          ? `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/snippets/${this.file}`
+          : null
       },
       id () {
         if (this.value === 'markup') return
@@ -122,12 +134,9 @@
 
     methods: {
       copyMarkup () {
-        const markup = this.$el.querySelector('pre')
-        markup.setAttribute('contenteditable', 'true')
-        markup.focus()
-        document.execCommand('selectAll', false, null)
-        this.copied = document.execCommand('copy')
-        markup.removeAttribute('contenteditable')
+        copyElementContent(this.$el.querySelector('pre'))
+
+        this.copied = true
         setTimeout(() => { this.copied = false }, 2000)
       },
       init () {

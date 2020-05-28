@@ -56,7 +56,7 @@ export function parseLink (match, text, link) {
 
   if (isInternal && !isSamePage) {
     // Reset link
-    link = `/${preferredLanguage}`
+    link = `/${preferredLanguage()}`
 
     // Remove leading/trailing slashes
     if (url) link += `/${url.replace(/^\/|\/$/, '')}/`
@@ -99,4 +99,14 @@ export function getBranch () {
     : 'master'
 
   return ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
+}
+
+export function copyElementContent (el) {
+  el.setAttribute('contenteditable', 'true')
+  el.focus()
+
+  document.execCommand('selectAll', false, null)
+  document.execCommand('copy')
+
+  el.removeAttribute('contenteditable')
 }

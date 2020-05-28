@@ -6,7 +6,6 @@
     :right="!$vuetify.rtl"
     app
     clipped
-    color="transparent"
   >
     <template v-if="structure !== false">
       <ul class="pt-8 mb-6 documentation-toc">
@@ -44,10 +43,9 @@
       <div class="pl-6">
         <v-fade-transition appear>
           <supporters-supporter-group
-            :group="supporters['Diamond']"
+            :group="2"
             small
             justify="start"
-            title="Diamond Sponsors"
           />
         </v-fade-transition>
       </div>

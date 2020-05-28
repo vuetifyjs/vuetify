@@ -1,7 +1,8 @@
 {
   "heading": "# 选项卡",
   "headingText": "`v-tabs` 组件用于将内容隐藏在可选项之后。这还可以用作页面的伪导航，其中选项卡是链接，选项卡项是内容。",
-  "alert": "当使用 **dark** 属性和 **不** 提供自定义 **color** 时，`v-tabs` 组件会将其颜色默认为 _white_。",
+  "alert1": "当使用 **dark** 属性和 **不** 提供自定义 **color** 时，`v-tabs` 组件会将其颜色默认为 _white_。",
+  "alert2": "当使用包含必填输入字段的 `v-tab-item` 时，你必须使用 **eager** prop 来验证尚未显示的必填字段。",
   "examples": {
     "usage": {
       "desc": "`v-tabs` 组件是 [v-item-group](/components/item-groups) 的样式扩展。它提供了一个易于使用的接口来组织内容组。"
@@ -9,6 +10,10 @@
     "fixed-tabs": {
       "heading": "### 固定选项卡",
       "desc": "**fixed-tabs** 属性强制 `v-tab` 占用所有可用空间，直到最大宽度（300px）。"
+    },
+    "tab-items": {
+      "heading": "### 选项卡项目",
+      "desc": "`v-tabs-items` 组件允许你自定义每个标签的内容。使用共享的 `v-model`，`v-tabs-items` 将与当前选择的 `v-tab` 同步。"
     },
     "right": {
       "heading": "### 右对齐选项卡",

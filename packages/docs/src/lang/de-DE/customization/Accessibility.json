@@ -1,1 +1,23 @@
-{}
+{
+  "heading": "# Barrierefreiheit",
+  "accessibilityHeader": "## Material Design Barrierefreiheit",
+  "accessibilityText": "Google bietet einen detaillierten Überblick darüber, wie ihre Komponenten mit Blick auf a11y erstellt werden. Sie bieten auch Beispiele dafür, wie Sie sicherstellen können, dass Sie bewährte Methoden verwenden, wenn Sie Anwendungen erstellen (über das, was standardmäßig mit Vuetify unterstützt wird). Weitere Informationen über [Implementierung von Zugänglichkeit](https://material.io/design/usability/accessibility.html) findest du auf der Spezifikationsseite.",
+  "activatorHeader": "## Aktivierungs Slots",
+  "activatorText1": "Vuetify verwendet Aktivierungs Slots für viele Komponenten wie `v-menu`, `v-dialog` und mehr. In einigen Fällen sollten diese Aktivierungselemente spezifische a11y-Attribute haben, die sie mit dem entsprechenden Inhalt assoziieren. Um dies zu erreichen, übergeben wir die notwendigen a11y Optionen über den Slots-Bereich.",
+  "activatorText2": "Wenn das Aktivierer-Element gerendert wird, enthält es nun die gebundenen a11y-Attribute:",
+  "focusHeader1": "## Fokus-Verwaltung und Tastatur-Interaktionen",
+  "focusText1": "Neben Attributen unterstützen Komponenten wie `v-menu` auch Interaktionen durch Drücken von <kbd>↑</kbd> und <kbd>↓</kbd> für die Navigation zwischen Optionen.",
+  "focusHeader2": "### v-menu",
+  "focusText2": "Inerhalb eines `v-menu`-Elements wird `v-list-item` automatisch so konfiguriert, dass es die Rolle **menuitem** einnimmt. Navigieren Sie zum [Menu](/components/menus) für weitere Informationen über die Komponentenfunktionen.",
+  "focusHeader3": "### v-list-item-group",
+  "focusText3": "Die Komponente `v-list-item-group` erweitert die Komponente `v-list-item` um Interaktionen und Navigation durch das Drücken von <kbd>tab</kbd>. Weiterhin wird `v-list-item` so konfigurtiert, dass es die Rolle **listitem** einnimmt. Navigieren Sie zum [List-item group](/components/list-item-groups) für weitere Informationen über die Komponentenfunktionen.",
+  "scopedHeader1": "## Item slots",
+  "scopedHeader2": "### v-select",
+  "resourcesHeader": "## Zusätzliche Ressourcen",
+  "resourcesText1": "Während Vuetify versucht, a11y in Ihrer Anwendung so einfach wie möglich zu machen, werden manchmal zusätzliche Informationen benötigt. Nachfolgend finden Sie eine Liste hilfreicher Ressourcen.",
+  "resourcesText2": [
+    "[W3C Web Accessibility Initiative](https://www.w3.org/WAI/)",
+    "[WAI-ARIA Authoring Practices](https://www.w3.org/TR/wai-aria-practices-1.1/)",
+    "[Das A11Y Projekt](https://a11yproject.com/)"
+  ]
+}
