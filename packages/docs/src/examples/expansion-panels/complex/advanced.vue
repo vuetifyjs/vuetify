@@ -223,7 +223,7 @@
         start: null,
         end: null,
       },
-      locations: ['Australia', 'Barbados', 'Chile', 'Denmark', 'Equador', 'France'],
+      locations: ['Australia', 'Barbados', 'Chile', 'Denmark', 'Ecuador', 'France'],
     }),
   }
 </script>
