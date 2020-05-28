@@ -1,4 +1,6 @@
-![Crowdin Action - Upload](https://github.com/vuetifyjs/docs-next/workflows/Crowdin%20Action%20-%20Upload/badge.svg)
+![Crowdin Uploads](https://github.com/vuetifyjs/docs-next/workflows/Crowdin%20Uploads/badge.svg)
+
+![Crowdin Downloads](https://github.com/vuetifyjs/docs-next/workflows/Crowdin%20Downloads/badge.svg)
 
 # docs-next
 
