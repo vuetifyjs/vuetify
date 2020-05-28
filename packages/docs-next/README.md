@@ -1,3 +1,5 @@
+![Crowdin Action - Upload](https://github.com/vuetifyjs/docs-next/workflows/Crowdin%20Action%20-%20Upload/badge.svg)
+
 # docs-next
 
 ## Project setup
