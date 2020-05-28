@@ -1,0 +1,28 @@
+name: Crowdin Uploads
+
+on:
+  push:
+    branches: [ master ]
+    paths: 
+      - src/paths/**/*.md
+      - src/i18n/messages/en.json
+
+env:
+  CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+  CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+  CROWDIN_BRANCH: docs-next
+  
+jobs:
+  upload-to-crowdin:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Upload
+      uses: crowdin/github-action@1.0.6
+      with:
+        config: crowdin.yml
+        crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
