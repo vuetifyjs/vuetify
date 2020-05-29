@@ -1,6 +1,6 @@
 {
   "heading": "# Breakpoints",
-  "headingText": "With Vuetify you can control the layout of your application depending on the window size. That can be achieved for example by using specific [grid](/components/grids) props or helper classes (i.e. [display](/styles/display)) that will target particular breakpoint. Vuetify provides 5 predefined breakpoints defined as described below, but you can easily change them to meet your needs.",
+  "headingText": "With Vuetify you can control the layout of your application depending on the `window` size. That can be achieved for example by using specific [grid](/components/grids) props or helper classes (i.e. [display](/styles/display)) that will target particular breakpoint. Vuetify provides 5 predefined breakpoints defined as described below, but you can easily change them to meet your needs.",
   "components": [
     "v-container",
     "v-layout",
@@ -38,10 +38,11 @@
     }
   ],
   "breakpointHeader": "## Breakpoint service object",
-  "breakpointText1": "Vuetify converts the available breakpoints into an accessible object from within your application. This will allow you to assign/apply specific properties and attributes based upon viewport size. The object is available at `$vuetify.breakpoint`.",
+  "breakpointText1": "The **breakpoint service** is a programmatic way to access Vuetify viewport breakpoints; *xs, sm, md, lg, and xl*. This service exposes the the current `window's` **height** and **width**, the name of the current breakpoint and more; e.g. A value of **md** for `name` property indicates that the screen is currently on the medium breakpoint. Finally, check the mobile status of your application with the `mobile` property. These properties are accessible globally via `this.$vuetify.breakpoint`.",
   "breakpointHeader1a": "## Usage",
-  "breakpointText1a": "You can specify custom breakpoint thresholds and scrollbar width. Keep in mind that you will still need to update the css grid breakpoints to match.",
+  "breakpointText1a": "The **Breakpoint service** has 3 configurable options, **mobileBreakPoint**, **thresholds**, and **scrollBarWidth**. The mobileBreakPoint option provides a global default width that your application is considered to be on a smaller (mobile) screen. When screen dimensions are calculated, if the current width is less than the defined break-point, the **mobile** property of the `$vuetify` object will equal `true`. Breakpoint **threshholds** overwrite the designated widths for each screen size *(xs, sm, md, lg, xl)* while the **scrollBarWidth** property aids in the calculation of the screen size.",
   "breakpointText2": "Let's try a real world example. You have a `v-dialog` component that you want to convert to a **full-screen** dialog on mobile devices. Normally you would need to bind watchers for the viewport size, and/or check whenever the page loads.",
-  "breakpointText3": "That's a lot of boilerplate to write. Even if you opt to use the built in [v-resize](/directives/resizing) directive, you are still going to have to define a resize method. With the **breakpoint** object you can completely skip this logic and get back to building your application.",
+  "breakpointText3": "That's a lot of boilerplate to write. Even if you opt to use the built in [v-resize](/directives/resizing) directive, you are still going to have to define a resize method.",
+  "breakpointText4": "We can simplify this process by simply checking the value of the `mobile` property on the `$vuetify.breakpoint` object.",
   "customizeThresholdsText1": "You can define your own breakpoint threshold pixel values, but it is currently a two-step process: 1. To update the styles you will have to override the `$grid-breakpoints` SASS variables (please see [SASS variables](/customization/sass-variables)). 2. To use the same values on the javascript side of things you must pass them during the application bootstrap like so:"
 }
