@@ -4,7 +4,6 @@ import VSlideGroup from '../VSlideGroup'
 // Utilities
 import { ExtractVue } from '../../../util/mixins'
 import {
-  mount,
   shallowMount,
   Wrapper,
 } from '@vue/test-utils'
@@ -337,9 +336,7 @@ describe('VSlideGroup.ts', () => {
 
     const wrapper = mountFunction({
       data: () => ({ isOverflowing }),
-
       computed: { isMobile: () => isMobile },
-
       propsData: { showArrows },
     })
 
