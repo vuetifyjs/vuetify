@@ -1,16 +1,10 @@
 <template>
   <v-card
-    :id="id"
     :color="$vuetify.theme.dark ? undefined : 'grey darken-4'"
     class="v-markup"
     outlined
   >
-    <prism
-      :language="language"
-      :inline="inline"
-    >
-      <slot />
-    </prism>
+    <prism :code="code" />
 
     <div
       v-if="!noCopy"
@@ -28,7 +22,9 @@
         <span
           v-if="copied"
           class="v-markup__copied"
-        >Copied</span>
+        >
+          Copied
+        </span>
       </v-slide-x-transition>
     </div>
   </v-card>
@@ -57,11 +53,10 @@
     },
 
     props: {
-      lang: {
+      code: {
         type: String,
         default: undefined,
       },
-      inline: Boolean,
       noCopy: Boolean,
       value: {
         type: String,
@@ -70,17 +65,9 @@
     },
 
     data: vm => ({
-      code: null,
       copied: false,
       language: vm.lang,
     }),
-
-    computed: {
-      id () {
-        if (this.value === 'markup') return
-        return 'markup-' + this.value.replace(/_/g, '-')
-      },
-    },
 
     methods: {
       copyMarkup () {
@@ -195,6 +182,7 @@
       line-height: 1.5
       tab-size: 4
       hyphens: none
+      padding: 0
 
     pre[class*="language-"]
       padding: 1rem

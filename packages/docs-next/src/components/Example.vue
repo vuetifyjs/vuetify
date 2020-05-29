@@ -103,9 +103,7 @@
               eager
             >
               <div :class="($vuetify.breakpoint.smAndUp) ? 'v-example__container' : ''">
-                <markup>
-                  {{ pen[section] }}
-                </markup>
+                <markup :code="pen[section]" />
               </div>
             </v-window-item>
           </template>
