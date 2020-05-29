@@ -14,30 +14,34 @@
       background: map-get($material, 'cards')
       box-shadow: inset 0 -1px 0 map-get($material, 'dividers')
 
-  thead
-    tr
-      &:last-child th
-        border-bottom: thin solid map-get($material, 'dividers')
-
-      th
-        color: map-deep-get($material, $data-table-header-icon-color, 'text', 'secondary')
-
-  tbody
-    tr
-      &:not(:last-child)
-        td,
-        th
-          &:not(.v-data-table__mobile-row)
+  > .v-data-table__wrapper
+    > table
+      > thead
+        > tr
+          > &:last-child th
             border-bottom: thin solid map-get($material, 'dividers')
 
-          &:last-child
-            border-bottom: thin solid map-get($material, 'dividers')
+          > th
+            color: map-deep-get($material, 'table', 'header', 'text-color')
 
-      &.active
-        background: map-deep-get($material, 'table', 'active')
+  > .v-data-table__wrapper
+    > table
+      > tbody
+        > tr
+          &:not(:last-child)
+            > td,
+            > th
+              &:not(.v-data-table__mobile-row)
+                border-bottom: thin solid map-get($material, 'dividers')
 
-      &:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper)
-        background: map-deep-get($material, 'table', 'hover')
+              &:last-child
+                border-bottom: thin solid map-get($material, 'dividers')
+
+          &.active
+            background: map-deep-get($material, 'table', 'active')
+
+          &:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper)
+            background: map-deep-get($material, 'table', 'hover')
 
 // Block
 .v-data-table
