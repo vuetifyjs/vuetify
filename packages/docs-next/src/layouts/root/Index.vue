@@ -15,7 +15,6 @@
   import 'prismjs/components/prism-stylus'
   import 'prismjs/components/prism-typescript'
   import '@/styles/overrides.sass'
-  import 'github-markdown-css/github-markdown.css'
 
   // Utilities
   import { get, call } from 'vuex-pathify'
