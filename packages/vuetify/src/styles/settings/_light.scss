@@ -98,11 +98,6 @@ $material-light: map-deep-merge(
       'hover': rgba(map-get($shades, 'black'), 0.54)
     ),
     'table': (
-      'header': (
-        'text-color': rgba(map-get($shades, 'black'), 0.6),
-        'text-color-active': rgba(map-get($shades, 'black'), 0.87),
-        'text-color-disabled': rgba(map-get($shades, 'black'), 0.38)
-      ),
       'active': map-get($grey, 'lighten-4'),
       'hover': map-get($grey, 'lighten-3'),
       'group': map-get($grey, 'lighten-3')

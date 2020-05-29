@@ -22,7 +22,9 @@
             border-bottom: thin solid map-get($material, 'dividers')
 
           > th
-            color: map-deep-get($material, 'table', 'header', 'text-color')
+            color: map-deep-get($material, $data-table-header-icon-color...)
+            // color: red
+            // color: map-get($material, $data-table-header-icon-color)
 
   > .v-data-table__wrapper
     > table
