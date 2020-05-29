@@ -13,7 +13,7 @@ function readFile (filePath) {
 function getPages (files) {
   return files.reduce((pages, filePath) => {
     const { body } = frontmatter(readFile(filePath))
-    const dir = filePath.replace(/^\.\/src\/pages\/\w+(-\w+)?/, '').replace(/\.\w+$/, '')
+    const dir = filePath.replace(/^\.\/src\/pages/, '').replace(/\.\w+$/, '/')
     const tokens = md.parse(body)
     const firstIndex = tokens.findIndex(({ type }) => type === 'heading_open')
     const text = tokens[firstIndex + 1].content

@@ -16,3 +16,5 @@ export function createStore () {
 
   return store
 }
+
+export const ROOT_DISPATCH = Object.freeze({ root: true })
