@@ -21,3 +21,6 @@ $edit-dialog-content-padding: 0 16px !default;
 $edit-dialog-actions-padding: 8px !default;
 $data-table-regular-header-font-size: map-deep-get($headings, 'caption', 'size') !default;
 $data-table-regular-row-font-size: map-deep-get($headings, 'subtitle-2', 'size') !default;
+$data-table-header-icon-color: 'text' !default;
+$data-table-header-icon-color-active: 'text' !default;
+$data-table-header-icon-color-disabled: 'disabled' !default;
