@@ -9,7 +9,11 @@ import Vuetify from 'vuetify/lib/framework'
 
 import {
   mdiBeaker,
+  mdiCodepen,
+  mdiCodeTags,
   mdiContentCopy,
+  mdiGithub,
+  mdiInvertColors,
   mdiOpenInNew,
   mdiSpeedometer,
   mdiTranslate,
@@ -20,9 +24,13 @@ const icons = {
   iconfont: 'mdiSvg',
   values: {
     mdiBeaker,
-    mdiSpeedometer,
+    mdiCodepen,
+    mdiCodeTags,
     mdiContentCopy,
+    mdiGithub,
+    mdiInvertColors,
     mdiOpenInNew,
+    mdiSpeedometer,
     mdiTranslate,
     mdiViewDashboard,
   },
