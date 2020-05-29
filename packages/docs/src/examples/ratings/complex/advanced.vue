@@ -69,13 +69,13 @@
           <v-list>
             <v-list-item @click="">
               <v-list-item-action>
-                <v-icon color="indigo">mdi-facebook-box</v-icon>
+                <v-icon color="indigo">mdi-facebook</v-icon>
               </v-list-item-action>
               <v-card-title>Facebook</v-card-title>
             </v-list-item>
             <v-list-item @click="">
               <v-list-item-action>
-                <v-icon color="cyan">mdi-twitter-box</v-icon>
+                <v-icon color="cyan">mdi-twitter</v-icon>
               </v-list-item-action>
               <v-card-title>Twitter</v-card-title>
             </v-list-item>

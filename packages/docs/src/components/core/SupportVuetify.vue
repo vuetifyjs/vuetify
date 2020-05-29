@@ -30,7 +30,7 @@
               <v-icon
                 x-large
                 class="mr-3"
-              >mdi-github-circle</v-icon>
+              >mdi-github</v-icon>
               GITHUB
             </v-flex>
             <v-flex

@@ -157,7 +157,7 @@
           title: 'Medium',
         },
         {
-          icon: 'mdi-github-circle',
+          icon: 'mdi-github',
           href: 'https://github.com/vuetifyjs/vuetify',
           title: 'Github',
         },
