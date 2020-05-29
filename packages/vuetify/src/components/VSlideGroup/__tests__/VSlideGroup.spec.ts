@@ -63,6 +63,7 @@ describe('VSlideGroup.ts', () => {
     })
 
     expect(wrapper.vm.hasNext).toBe(true)
+    expect(`[Vuetify] [UPGRADE] 'true' is deprecated, use 'mobile' instead`).toHaveBeenTipped()
   })
 
   it('should be considered mobile', async () => {
@@ -252,6 +253,7 @@ describe('VSlideGroup.ts', () => {
     next.trigger('click')
     expect(scrollTo).toHaveBeenCalledTimes(2)
     expect(onClick).toHaveBeenCalledTimes(2)
+    expect(`[Vuetify] [UPGRADE] 'true' is deprecated, use 'mobile' instead`).toHaveBeenTipped()
   })
 
   it('should accept scoped slots', () => {
@@ -341,5 +343,9 @@ describe('VSlideGroup.ts', () => {
     })
 
     expect(wrapper.vm.hasAffixes).toBe(hasAffixes)
+
+    if (showArrows === true) {
+      expect(`[Vuetify] [UPGRADE] 'true' is deprecated, use 'mobile' instead`).toHaveBeenTipped()
+    }
   })
 })
