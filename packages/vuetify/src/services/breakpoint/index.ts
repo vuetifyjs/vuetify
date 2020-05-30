@@ -109,7 +109,6 @@ export class Breakpoint extends Service implements IBreakpoint {
     const lg = width < (this.thresholds.lg - this.scrollBarWidth) && !(md || sm || xs)
     const xl = width >= (this.thresholds.lg - this.scrollBarWidth)
 
-    this.mobile = width < this.mobileBreakPoint
     this.height = height
     this.width = width
 
@@ -148,6 +147,10 @@ export class Breakpoint extends Service implements IBreakpoint {
         this.name = 'xl'
         break
     }
+
+    this.mobile = !isNaN(parseInt(this.mobileBreakPoint))
+      ? width < parseInt(this.mobileBreakPoint, 10)
+      : this.name === this.mobileBreakPoint
   }
 
   // Cross-browser support as described in:

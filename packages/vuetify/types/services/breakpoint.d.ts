@@ -11,6 +11,8 @@ export interface BreakpointThresholds {
   lg: number
 }
 
+export type BreakpointName = number | 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+
 export interface Breakpoint {
   height: number
   lg: boolean
@@ -32,7 +34,7 @@ export interface Breakpoint {
   xs: boolean
   xsOnly: boolean
   mobile: boolean
-  mobileBreakPoint: number
+  mobileBreakPoint: BreakpointName
   thresholds: BreakpointThresholds
   scrollBarWidth: number
 }

@@ -1,24 +1,43 @@
-import Vue from 'vue'
+// Types
+import { BreakpointName } from 'vuetify/types/services/breakpoint'
+import Vue, { PropType } from 'vue'
 
+/* @vue/component */
 export default Vue.extend({
   name: 'mobile',
 
   props: {
     mobileBreakPoint: {
-      type: [Number, String],
-      default (): number {
+      type: [Number, String] as PropType<BreakpointName>,
+      default () {
         return this.$vuetify.breakpoint.mobileBreakPoint
       },
-      validator: (v: any) => !isNaN(parseInt(v)),
+      validator: (v: BreakpointName) => (
+        !isNaN(Number(v)) ||
+        ['xs', 'sm', 'md', 'lg', 'xl'].includes(String(v))
+      ),
     },
   },
 
   computed: {
     isMobile (): boolean {
-      return (
-        this.$vuetify.breakpoint.mobile ||
-        this.$vuetify.breakpoint.width < parseInt(this.mobileBreakPoint, 10)
-      )
+      const {
+        mobile,
+        width,
+        name,
+        mobileBreakPoint,
+      } = this.$vuetify.breakpoint
+
+      // Check if local mobileBreakPoint matches
+      // the application's mobileBreakPoint
+      if (mobileBreakPoint === this.mobileBreakPoint) return mobile
+
+      const mobileWidth = parseInt(this.mobileBreakPoint, 10)
+      const isNumber = !isNaN(mobileWidth)
+
+      return isNumber
+        ? width < mobileWidth
+        : name === this.mobileBreakPoint
     },
   },
 })
