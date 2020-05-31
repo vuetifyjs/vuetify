@@ -148,6 +148,8 @@ export class Breakpoint extends Service implements IBreakpoint {
         break
     }
 
+    // Check if value is a valid number
+    // or an explicit breakpoint name
     this.mobile = !isNaN(parseInt(this.mobileBreakPoint))
       ? width < parseInt(this.mobileBreakPoint, 10)
       : this.name === this.mobileBreakPoint
