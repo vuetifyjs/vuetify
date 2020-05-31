@@ -2,9 +2,9 @@
 import Mobile from '../'
 
 // Utilities
-import { resizeWindow } from '../../../../test'
-import { preset } from '../../../presets/default'
 import { mount, Wrapper } from '@vue/test-utils'
+import { preset } from '../../../presets/default'
+import { resizeWindow } from '../../../../test'
 
 // Types
 import { Breakpoint } from '../../../services/breakpoint'
@@ -23,9 +23,7 @@ describe('mobile.ts', () => {
       return mount(Mock, {
         ...options,
         mocks: {
-          $vuetify: {
-            breakpoint: new Breakpoint(preset),
-          },
+          $vuetify: { breakpoint: new Breakpoint(preset) },
         },
       })
     }
