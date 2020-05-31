@@ -28,7 +28,7 @@
     },
     "rounded": {
       "heading": "### Rounded",
-      "desc": "Menus can have their border-radius set by the `rounded` prop. For more information see the [Border Radius Page](/styles/border-radius)",
+      "desc": "Menus can have their border-radius set by the `rounded` prop. Additional information about rounded classes is on the [Border Radius page](/styles/border-radius).",
       "uninverted": true
     },
     "close-on-click": {

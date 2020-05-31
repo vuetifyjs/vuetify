@@ -1,67 +1,29 @@
 <template>
-  <div class="text-center d-flex justify-space-around">
-    <v-menu top rounded="0">
-      <template v-slot:activator="{ on }">
+  <div class="d-flex justify-center align-center">
+    <v-menu
+      v-for="([text, rounded], index) in btns"
+      :key="text"
+      :rounded="rounded"
+      offset-y
+    >
+      <template v-slot:activator="{ attrs, on }">
         <v-btn
-          class="rounded-0"
-          color="primary"
-          dark
+          :color="colors[index]"
+          class="white--text ma-8"
+          v-bind="attrs"
           v-on="on"
         >
-          rounded="0"
+          {{ text }} Radius
         </v-btn>
       </template>
 
       <v-list>
         <v-list-item
-          v-for="(item, index) in items"
-          :key="index"
-          @click=""
+          v-for="item in items"
+          :key="item"
+          link
         >
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu>
-    <v-menu top :rounded="true">
-      <template v-slot:activator="{ on }">
-        <v-btn
-          color="primary"
-          dark
-          v-on="on"
-        >
-          :rounded="true"
-        </v-btn>
-      </template>
-
-      <v-list>
-        <v-list-item
-          v-for="(item, index) in items"
-          :key="index"
-          @click=""
-        >
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu>
-    <v-menu top rounded="lg">
-      <template v-slot:activator="{ on }">
-        <v-btn
-          class="rounded-lg"
-          color="primary"
-          dark
-          v-on="on"
-        >
-          rounded="lg"
-        </v-btn>
-      </template>
-
-      <v-list>
-        <v-list-item
-          v-for="(item, index) in items"
-          :key="index"
-          @click=""
-        >
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
+          <v-list-item-title v-text="item"></v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -71,13 +33,13 @@
 <script>
   export default {
     data: () => ({
-      items: [
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me 2' },
+      btns: [
+        ['Removed', '0'],
+        ['Large', 'lg'],
+        ['Custom', 'b-xl'],
       ],
-      offset: true,
+      colors: ['deep-purple accent-4', 'error', 'teal darken-1'],
+      items: [...Array(4)].map((_, i) => `Item ${i}`),
     }),
   }
 </script>
