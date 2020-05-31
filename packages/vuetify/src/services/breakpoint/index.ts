@@ -47,6 +47,12 @@ export class Breakpoint extends Service implements IBreakpoint {
 
   public width = 0
 
+  // TODO: Add functionality to detect this dynamically in v3
+  // Value is true to match v2.x functionality
+  public mobile = true
+
+  public mobileBreakPoint: IBreakpoint['mobileBreakPoint']
+
   public thresholds: IBreakpoint['thresholds']
 
   public scrollBarWidth: IBreakpoint['scrollBarWidth']
@@ -57,10 +63,12 @@ export class Breakpoint extends Service implements IBreakpoint {
     super()
 
     const {
+      mobileBreakPoint,
       scrollBarWidth,
       thresholds,
     } = preset[Breakpoint.property]
 
+    this.mobileBreakPoint = mobileBreakPoint
     this.scrollBarWidth = scrollBarWidth
     this.thresholds = thresholds
 
@@ -139,6 +147,12 @@ export class Breakpoint extends Service implements IBreakpoint {
         this.name = 'xl'
         break
     }
+
+    // Check if value is a valid number
+    // or an explicit breakpoint name
+    this.mobile = !isNaN(parseInt(this.mobileBreakPoint))
+      ? width < parseInt(this.mobileBreakPoint, 10)
+      : this.name === this.mobileBreakPoint
   }
 
   // Cross-browser support as described in:

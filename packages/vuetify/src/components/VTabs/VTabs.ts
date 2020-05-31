@@ -58,10 +58,7 @@ export default baseMixins.extend<options>().extend({
     },
     hideSlider: Boolean,
     iconsAndText: Boolean,
-    mobileBreakPoint: {
-      type: [Number, String],
-      default: 1264,
-    },
+    mobileBreakPoint: [String, Number],
     nextIcon: {
       type: String,
       default: '$next',
@@ -72,7 +69,7 @@ export default baseMixins.extend<options>().extend({
       default: '$prev',
     },
     right: Boolean,
-    showArrows: Boolean,
+    showArrows: [Boolean, String],
     sliderColor: String,
     sliderSize: {
       type: [Number, String],
