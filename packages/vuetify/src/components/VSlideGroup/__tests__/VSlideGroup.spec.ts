@@ -1,6 +1,10 @@
 // Components
 import VSlideGroup from '../VSlideGroup'
 
+// Services
+import { Breakpoint } from '../../../services/breakpoint'
+import { preset } from '../../../presets/default'
+
 // Utilities
 import { ExtractVue } from '../../../util/mixins'
 import {
@@ -19,10 +23,7 @@ describe('VSlideGroup.ts', () => {
         mocks: {
           $vuetify: {
             rtl: false,
-            breakpoint: {
-              mobileBreakPoint: 1264,
-              width: 1920,
-            },
+            breakpoint: new Breakpoint(preset),
           },
         },
         ...options,
@@ -64,16 +65,6 @@ describe('VSlideGroup.ts', () => {
 
     expect(wrapper.vm.hasNext).toBe(true)
     expect(`[Vuetify] [UPGRADE] 'true' is deprecated, use 'mobile' instead`).toHaveBeenTipped()
-  })
-
-  it('should be considered mobile', async () => {
-    const wrapper = mountFunction()
-
-    expect(wrapper.vm.isMobile).toBe(false)
-
-    wrapper.vm.$vuetify.breakpoint.width = 700
-
-    expect(wrapper.vm.isMobile).toBe(true)
   })
 
   it('should compute newOffset for active element', async () => {

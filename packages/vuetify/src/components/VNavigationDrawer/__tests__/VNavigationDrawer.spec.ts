@@ -1,7 +1,16 @@
-import { Application } from '../../../services/application'
+// Components
 import VNavigationDrawer from '../VNavigationDrawer'
-import { resizeWindow, touch } from '../../../../test'
 
+// Services
+import { Application } from '../../../services/application'
+import { Breakpoint } from '../../../services/breakpoint'
+import { preset } from '../../../presets/default'
+
+// Utilities
+import {
+  resizeWindow,
+  touch,
+} from '../../../../test'
 import {
   mount,
   MountOptions,
@@ -24,10 +33,7 @@ describe('VNavigationDrawer', () => { // eslint-disable-line max-statements
             theme: {
               dark: false,
             },
-            breakpoint: {
-              mobileBreakPoint: 1264,
-              width: 1920,
-            },
+            breakpoint: new Breakpoint(preset),
             application: new Application(),
           },
         },
