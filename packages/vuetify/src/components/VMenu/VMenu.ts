@@ -11,6 +11,7 @@ import Dependent from '../../mixins/dependent'
 import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable'
 import Returnable from '../../mixins/returnable'
+import Roundable from '../../mixins/roundable'
 import Toggleable from '../../mixins/toggleable'
 import Themeable from '../../mixins/themeable'
 
@@ -35,6 +36,7 @@ const baseMixins = mixins(
   Detachable,
   Menuable,
   Returnable,
+  Roundable,
   Toggleable,
   Themeable
 )
@@ -331,6 +333,7 @@ export default baseMixins.extend({
         staticClass: 'v-menu__content',
         class: {
           ...this.rootThemeClasses,
+          ...this.roundedClasses,
           'v-menu__content--auto': this.auto,
           'v-menu__content--fixed': this.activatorFixed,
           menuable__content__active: this.isActive,

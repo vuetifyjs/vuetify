@@ -132,7 +132,7 @@
       { "text": "images", "to": "images" },
       { "new": true, "text": "lazy", "to": "lazy" },
       { "text": "lists", "to": "lists" },
-      { "text": "menus", "to": "menus" },
+      { "updated": true, "text": "menus", "to": "menus" },
       { "text": "navigationDrawers", "to": "navigation-drawers" },
       { "text": "overlays", "to": "overlays" },
       { "text": "paginations", "to": "paginations" },
