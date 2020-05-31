@@ -18,6 +18,7 @@ import {
 
 export interface VuetifyPreset {
   breakpoint: {
+    mobileBreakPoint: Breakpoint['mobileBreakPoint']
     scrollBarWidth: Breakpoint['scrollBarWidth']
     thresholds: Breakpoint['thresholds']
   }
