@@ -22,13 +22,15 @@ crwdns59184:0crwdne59184:0
 ## crwdns59192:0crwdne59192:0
 crwdns59194:0crwdne59194:0
 
-  crwdns59196:0crwdne59196:0 <example>crwdns59198:0crwdne59198:0</example>
+  crwdns60018:0crwdne60018:0<example file="v-alert/simple/type" />
+
+  crwdns60020:0crwdne60020:0<example file="v-alert/simple/dense" />
 
 ## crwdns59200:0crwdne59200:0
-crwdns59202:0crwdne59202:0 crwdns59204:0crwdne59204:0 crwdns59206:0crwdne59206:0
+crwdns60022:0crwdne60022:0 crwdns60024:0crwdne60024:0 crwdns60026:0crwdne60026:0
 
 ## crwdns59208:0crwdne59208:0
-
+  - [crwdns60030:0crwdne60030:0](crwdns60028:0crwdne60028:0)
 
 ## crwdns59210:0crwdne59210:0
 <up-next />
