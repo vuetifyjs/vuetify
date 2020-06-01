@@ -173,9 +173,7 @@
 
     mounted () {
       this.branch = getBranch()
-      const file = this.$slots.default[0].text
-      this.file = file.replace(/[.]/g, '/')
-
+      this.file = this.$attrs.file
       this.importComponent()
 
       this.observer = new IntersectionObserver((entries, observer) => {
