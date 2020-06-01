@@ -1,0 +1,45 @@
+name: Crowdin Downloads
+
+on:
+  release:
+    branches: [ master ]
+    types: [ created ]
+
+env:
+  GITHUB_TOKEN: ${{ secrets.ACTION_GH_TOKEN }}
+  CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+  CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+  CROWDIN_BRANCH: docs-next
+  LOCAL_BRANCH: docs/update-from-crowdin
+
+jobs:
+  download-from-crowdin:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Download eo
+      uses: crowdin/github-action@1.0.6
+      with:
+        config: crowdin.yml
+        upload_sources: false
+        download_translations: true
+        push_translations: false
+        export_only_approved: true
+        download_language: eo
+        localization_branch_name: ${{ env.LOCAL_BRANCH }}
+        crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
+
+    - name: Download sv-SE
+      uses: crowdin/github-action@1.0.6
+      with:
+        config: crowdin.yml
+        upload_sources: false
+        download_translations: true
+        export_only_approved: true
+        download_language: sv-SE
+        localization_branch_name: ${{ env.LOCAL_BRANCH }}
+        crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
