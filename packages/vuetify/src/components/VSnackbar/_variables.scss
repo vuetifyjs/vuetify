@@ -1,23 +1,42 @@
 @import '../../styles/styles.sass';
 
-$snackbar-background-color: #323232 !default;
+// Block
+
+$snackbar-action-margin: 8px !default;
+$snackbar-background-color: #333333 !default;
+$snackbar-body-font-size: map-deep-get($headings, 'body-2', 'size') !default;
+$snackbar-body-font-weight: map-deep-get($headings, 'body-2', 'weight') !default;
+$snackbar-body-font-weight: map-deep-get($headings, 'body-2', 'weight') !default;
+$snackbar-body-letter-spacing: map-deep-get($headings, 'body-2', 'letter-spacing') !default;
+$snackbar-body-line-height: map-deep-get($headings, 'body-2', 'line-height') !default;
+$snackbar-body-padding: 14px 16px !default;
+$snackbar-body-text-transform: map-deep-get($headings, 'body-2', 'text-transform') !default;
 $snackbar-border-radius: $border-radius-root !default;
-$snackbar-bottom: 8px !default;
-$snackbar-btn-margin-left: 24px !default;
-$snackbar-btn-margin-right: -8px !default;
-$snackbar-color: map-get($shades, 'white') !default;
-$snackbar-content-first-btn-margin: 42px !default;
+$snackbar-bottom: 0 !default;
+$snackbar-btn-padding: 0 8px !default;
+$snackbar-color: hsla(0, 0%, 100%, .87) !default;
+$snackbar-content-margin: 8px !default;
+$snackbar-content-max-width: 672px !default;
 $snackbar-content-min-height: 48px !default;
-$snackbar-content-padding: 8px 16px !default;
-$snackbar-corner-offset: 16px !default;
-$snackbar-font-size: map-deep-get($headings, 'subtitle-2', 'size') !default;
-$snackbar-left: 8px !default;
+$snackbar-content-min-width: 344px !default;
+$snackbar-content-padding: 0 !default;
+$snackbar-elevation: 6 !default;
+$snackbar-left: 0 !default;
 $snackbar-multi-line-content-min-height: 68px !default;
-$snackbar-right: 8px !default;
-$snackbar-top: 8px !default;
+$snackbar-right: 0 !default;
+$snackbar-shaped-border-radius: map-get($rounded, 'xl') $snackbar-border-radius !default;
+$snackbar-top: 0 !default;
 $snackbar-transition-wrapper-transform: .8 !default;
-$snackbar-vertical-content-btn-margin-top: 18px !default;
-$snackbar-vertical-content-padding: 16px 16px 8px !default;
-$snackbar-wrapper-elevation: 6 !default;
-$snackbar-wrapper-max-width: 672px !default;
-$snackbar-wrapper-min-width: 344px !default;
+$snackbar-vertical-action-margin-bottom: 8px !default;
+$snackbar-vertical-content-btn-margin-top: 0 !default;
+$snackbar-vertical-content-padding: initial !default;
+$snackbar-z-index: 1000 !default;
+
+// TODO: deprecate in v3
+$snackbar-font-size: $snackbar-body-font-size !default;
+$snackbar-btn-margin-left: 0 !default;
+$snackbar-btn-margin-right: 0 !default;
+$snackbar-content-first-btn-margin: 0 !default;
+$snackbar-corner-offset: 0 !default;
+$snackbar-wrapper-max-width: $snackbar-content-max-width !default;
+$snackbar-wrapper-min-width: $snackbar-content-min-width !default;

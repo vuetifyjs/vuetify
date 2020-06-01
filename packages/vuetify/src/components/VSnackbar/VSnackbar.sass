@@ -1,125 +1,131 @@
 @import './_variables.scss'
 
++theme(v-snack) using ($material)
+  &__content
+    color: map-deep-get($material, 'text', 'primary')
+
++sheet(v-snack__content, $snackbar-elevation, $snackbar-border-radius, $snackbar-shaped-border-radius)
+
 .v-snack
-  align-items: center
-  color: $snackbar-color
+  bottom: $snackbar-bottom
   display: flex
   font-size: $snackbar-font-size
+  justify-content: center
   left: $snackbar-left
   pointer-events: none
-  position: fixed
   right: $snackbar-right
-  transition-duration: .15s
-  transition-timing-function: map-get($transition, 'linear-out-slow-in')
-  z-index: 1000
+  top: $snackbar-top
+  width: 100%
+  z-index: $snackbar-z-index
 
-  +ltr()
-    text-align: left
+  &:not(.v-snack--absolute)
+    height: 100vh
+    position: fixed
 
-  +rtl()
-    text-align: right
-
-  &--absolute
-    position: absolute
-
-  &--top
-    top: $snackbar-top
-
-  &--bottom
-    bottom: $snackbar-bottom
-
-  &__wrapper
-    align-items: center
-    background-color: $snackbar-background-color
-    border-radius: $snackbar-border-radius
-    display: flex
-    margin: 0 auto
-    pointer-events: auto
-    transition: inherit
-    transition-property: opacity, transform
-    min-width: 100%
-    +elevation($snackbar-wrapper-elevation)
+  &:not(.v-snack--centered):not(.v-snack--top)
+    align-items: flex-end
 
   &__content
     align-items: center
+    // TODO: move this to sheet in v3
+    border-color: currentColor !important
     display: flex
+    margin: $snackbar-content-margin
+    max-width: $snackbar-wrapper-max-width
     min-height: $snackbar-content-min-height
-    justify-content: space-between
-    overflow: hidden
+    min-width: $snackbar-wrapper-min-width
     padding: $snackbar-content-padding
-    width: 100%
+    pointer-events: auto
+    position: relative
+    transition-duration: .15s
+    transition-property: opacity, transform
+    transition-timing-function: map-get($transition, 'linear-out-slow-in')
 
-    .v-btn
-      flex: 0 0 auto
-      height: auto
-      min-width: auto
-      padding: 8px
-      width: auto
+    &.theme--dark
+      background-color: $snackbar-background-color
+      color: $snackbar-color
 
-      &--text, &--icon, &--outlined
-        color: $snackbar-color
+  &__body
+    flex-grow: 1
+    font-size: $snackbar-body-font-size
+    font-weight: $snackbar-body-font-weight
+    letter-spacing: $snackbar-body-letter-spacing
+    line-height: $snackbar-body-line-height
+    margin-right: auto
+    padding: $snackbar-body-padding
+    text-align: initial
 
-      +ltr()
-        margin: 0 $snackbar-btn-margin-right 0 $snackbar-btn-margin-left
+  &__action
+    align-items: center
+    align-self: center
+    display: flex
 
-      +rtl()
-        margin: 0 $snackbar-btn-margin-left 0 $snackbar-btn-margin-right
+    // Snackbar actions shouldn't have ripples
+    .v-ripple__container
+      display: none
 
-      &__content
-        margin: -2px
+    +ltr()
+      margin-right: $snackbar-action-margin
+
+    +rtl()
+      margin-left: $snackbar-action-margin
+
+  &__btn
+    margin-left: $snackbar-btn-margin-left
+    margin-right: $snackbar-btn-margin-right
+    margin: $snackbar-content-first-btn-margin
+    min-width: auto
+    padding: $snackbar-btn-padding !important
+
+  &--absolute
+    height: 100%
+    position: absolute
+
+  &--centered
+    align-items: center
+
+  &--left
+    justify-content: flex-start
 
   &--multi-line &__content
-    height: auto
     min-height: $snackbar-multi-line-content-min-height
 
+  &--right
+    justify-content: flex-end
+
+  &:not(.v-snack--has-background) &__content
+    background: transparent !important
+    box-shadow: none !important
+
+
+  &--text &__content:before
+    background-color: currentColor
+    border-radius: inherit
+    bottom: 0
+    content: ''
+    left: 0
+    opacity: 0.12
+    pointer-events: none
+    position: absolute
+    right: 0
+    top: 0
+
+  &--top
+    align-items: flex-start
+
   &--vertical &__content
-    // https://stackoverflow.com/questions/35111090/text-in-a-flex-container-doesnt-wrap-in-ie11
-    align-items: stretch
     flex-direction: column
-    height: auto
-    padding: $snackbar-vertical-content-padding
 
-    .v-btn
-      &.v-btn // Higher specificity
-        align-self: flex-end
-        justify-self: flex-end
-        margin-top: $snackbar-vertical-content-btn-margin-top
-
-        +ltr()
-          margin-left: 0
-
-        +rtl()
-          margin-right: 0
-
-      &__content
-        flex: 0 0 auto
-        margin: 0
-
-@media #{map-get($display-breakpoints, 'sm-and-up')}
-  .v-snack
-    &__wrapper
-      min-width: $snackbar-wrapper-min-width
-      max-width: $snackbar-wrapper-max-width
-
-      .v-snack--left &
-        margin-left: 0
-
-      .v-snack--right &
-        margin-right: 0
-
-    &__content .v-btn:first-of-type
-      +ltr()
-        margin-left: $snackbar-content-first-btn-margin
-
-      +rtl()
-        margin-right: $snackbar-content-first-btn-margin
+    .v-snack__action
+      align-self: flex-end
+      margin-bottom: $snackbar-vertical-action-margin-bottom
 
 .v-snack-transition
   &-enter
-    .v-snack__wrapper
+    &.v-snack__content
       transform: scale($snackbar-transition-wrapper-transform)
 
   &-enter,
   &-leave-to
-    .v-snack__wrapper
+    &.v-snack__content
       opacity: 0

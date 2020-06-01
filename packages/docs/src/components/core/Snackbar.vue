@@ -1,56 +1,44 @@
 <template>
-  <v-theme-provider dark>
-    <v-snackbar
-      v-model="snack"
-      :color="snackbar.color"
-      :style="styles"
-      :timeout="0"
-      top
-    >
-      <v-row
-        align="center"
-        class="mx-0 flex-wrap flex-md-nowrap"
+  <v-snackbar
+    v-model="snack"
+    :color="snackbar.color"
+    :timeout="-1"
+    vertical
+  >
+    <div class="d-flex">
+      <span
+        v-if="snackbar.emoji"
+        class="mr-2"
+        v-text="snackbar.emoji"
+      />
+
+      <base-markdown
+        :code="snackbar.text"
+        class="snack-markdown"
+      />
+    </div>
+
+    <template v-slot:action="{ attrs }">
+      <v-btn
+        class="mr-2"
+        color="pink lighten-3"
+        text
+        v-bind="{ ...bind, ...attrs }"
+        @click="snack = false"
       >
-        <div class="d-flex align-center">
-          <span
-            v-if="snackbar.emoji"
-            class="mr-2"
-            v-text="snackbar.emoji"
-          />
+        {{ snackbar.action_text }}
+      </v-btn>
 
-          <base-markdown
-            :code="snackbar.text"
-            class="snack-markdown"
-          />
-        </div>
-
-        <v-btn
-          :ripple="false"
-          class="black--text mt-3 mt-sm-0 ml-auto ml-sm-4"
-          color="white"
-          depressed
-          v-bind="bind"
-          @click="snack = false"
-        >
-          {{ snackbar.action_text }}
-
-          <v-icon right>mdi-open-in-new</v-icon>
-        </v-btn>
-
-        <v-btn
-          :aria-label="$t('Vuetify.Snackbar.close')"
-          :ripple="false"
-          class="ml-8 mt-3 mt-sm-0"
-          color="white"
-          icon
-          x-small
-          @click="snack = false"
-        >
-          <v-icon>$vuetify.cancel</v-icon>
-        </v-btn>
-      </v-row>
-    </v-snackbar>
-  </v-theme-provider>
+      <v-btn
+        :aria-label="$t('Vuetify.Snackbar.close')"
+        color="white"
+        icon
+        @click="snack = false"
+      >
+        <v-icon small>$vuetify.close</v-icon>
+      </v-btn>
+    </template>
+  </v-snackbar>
 </template>
 
 <script>
@@ -73,11 +61,6 @@
           href: action,
           target: '_blank',
         }
-      },
-      styles () {
-        const { top, bar } = this.$vuetify.application
-
-        return { top: `${top + bar + 16}px` }
       },
     },
 

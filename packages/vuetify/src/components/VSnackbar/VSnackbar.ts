@@ -1,31 +1,56 @@
 // Styles
 import './VSnackbar.sass'
 
+// Components
+import VSheet from '../VSheet/VSheet'
+
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Themeable from '../../mixins/themeable'
 import Toggleable from '../../mixins/toggleable'
 import { factory as PositionableFactory } from '../../mixins/positionable'
 
-// Types
+// Utilities
 import mixins from '../../util/mixins'
-import { VNode } from 'vue'
-import { removed } from '../../util/console'
+import { convertToUnit, getSlot } from '../../util/helpers'
+import { removed, deprecate } from '../../util/console'
+
+// Types
+import { PropType, VNode } from 'vue'
 
 export default mixins(
+  VSheet,
   Colorable,
   Toggleable,
-  PositionableFactory(['absolute', 'top', 'bottom', 'left', 'right'])
+  PositionableFactory([
+    'absolute',
+    'bottom',
+    'left',
+    'right',
+    'top',
+  ])
 /* @vue/component */
 ).extend({
   name: 'v-snackbar',
 
   props: {
     app: Boolean,
+    centered: Boolean,
+    contentClass: {
+      type: String,
+      default: '',
+    },
     multiLine: Boolean,
+    text: Boolean,
     // TODO: change this to closeDelay to match other API in delayable.js
     timeout: {
-      type: Number,
-      default: 6000,
+      type: [Number, String],
+      default: 5000,
+    },
+    transition: {
+      type: [Boolean, String] as PropType<false | string>,
+      default: 'v-snack-transition',
+      validator: v => typeof v === 'string' || v === false,
     },
     vertical: Boolean,
   },
@@ -40,15 +65,33 @@ export default mixins(
         'v-snack--active': this.isActive,
         'v-snack--absolute': this.absolute,
         'v-snack--bottom': this.bottom || !this.top,
+        'v-snack--centered': this.centered,
         'v-snack--left': this.left,
         'v-snack--multi-line': this.multiLine && !this.vertical,
         'v-snack--right': this.right,
+        'v-snack--has-background': this.hasBackground,
+        'v-snack--text': this.text,
         'v-snack--top': this.top,
         'v-snack--vertical': this.vertical,
       }
     },
+    // Snackbar is dark by default
+    // override themeable logic.
+    isDark (): boolean {
+      return !this.outlined && !this.text
+        ? !this.light
+        : Themeable.options.computed.isDark.call(this)
+    },
+    hasBackground (): boolean {
+      return (
+        !this.text &&
+        !this.outlined
+      )
+    },
     styles (): object {
-      if (!this.app) return {}
+      // Styles are not needed when
+      // using the absolute prop.
+      if (this.absolute) return {}
 
       const {
         bar,
@@ -60,64 +103,111 @@ export default mixins(
         top,
       } = this.$vuetify.application
 
+      // Should always move for y-axis
+      // applicationable components.
       return {
-        paddingBottom: `${bottom + footer + insetFooter}px`,
-        paddingLeft: `${left}px`,
-        paddingRight: `${right}px`,
-        paddingTop: `${bar + top}px`,
+        paddingBottom: convertToUnit(bottom + footer + insetFooter),
+        paddingLeft: !this.app ? undefined : convertToUnit(left),
+        paddingRight: !this.app ? undefined : convertToUnit(right),
+        paddingTop: convertToUnit(bar + top),
       }
     },
   },
 
-  watch: {
-    isActive () {
-      this.setTimeout()
-    },
+  watch: { isActive: 'setTimeout' },
+
+  mounted () {
+    if (this.isActive) this.setTimeout()
   },
 
   created () {
+    /* istanbul ignore next */
     if (this.$attrs.hasOwnProperty('auto-height')) {
       removed('auto-height', this)
     }
-  },
 
-  mounted () {
-    this.setTimeout()
+    /* istanbul ignore next */
+    // eslint-disable-next-line eqeqeq
+    if (this.timeout == 0) {
+      deprecate('timeout="0"', '-1', this)
+    }
   },
 
   methods: {
+    genActions () {
+      return this.$createElement('div', {
+        staticClass: 'v-snack__action ',
+      }, [
+        getSlot(this, 'action', {
+          attrs: { class: 'v-snack__btn' },
+        }),
+      ])
+    },
+    genBody () {
+      return this.$createElement('div', {
+        staticClass: 'v-snack__body',
+        attrs: {
+          role: 'status',
+          'aria-live': 'polite',
+        },
+      }, [getSlot(this)])
+    },
+    genContent () {
+      const fn = this.hasBackground
+        ? this.setBackgroundColor
+        : this.setTextColor
+
+      const data = fn(this.color, {
+        staticClass: 'v-snack__content',
+        class: {
+          ...VSheet.options.computed.classes.call(this),
+          [this.contentClass]: true,
+        },
+        directives: [{
+          name: 'show',
+          value: this.isActive,
+        }],
+        ref: 'content',
+      })
+
+      return this.$createElement('div', data, [
+        this.genBody(),
+        this.genActions(),
+      ])
+    },
+    genTransition () {
+      return this.$createElement('transition', {
+        props: { name: this.transition },
+      }, [this.genContent()])
+    },
     setTimeout () {
       window.clearTimeout(this.activeTimeout)
 
-      if (this.isActive && this.timeout) {
-        this.activeTimeout = window.setTimeout(() => {
-          this.isActive = false
-        }, this.timeout)
+      const timeout = Number(this.timeout)
+
+      if (
+        !this.isActive ||
+        // TODO: remove 0 in v3
+        [0, -1].includes(timeout)
+      ) {
+        return
       }
+
+      this.activeTimeout = window.setTimeout(() => {
+        this.isActive = false
+      }, timeout)
     },
   },
 
   render (h): VNode {
-    return h('transition', {
-      attrs: { name: 'v-snack-transition' },
+    return h('div', {
+      staticClass: 'v-snack',
+      class: this.classes,
+      style: this.styles,
     }, [
-      this.isActive && h('div', {
-        staticClass: 'v-snack',
-        class: this.classes,
-        on: this.$listeners,
-        style: this.styles,
-      }, [
-        h('div', this.setBackgroundColor(this.color, {
-          staticClass: 'v-snack__wrapper',
-          attrs: {
-            role: 'alert',
-          },
-        }), [
-          h('div', {
-            staticClass: 'v-snack__content',
-          }, this.$slots.default),
-        ]),
-      ]),
+      this.transition !== false
+        ? this.genTransition()
+        : this.genContent(),
     ])
   },
 })
