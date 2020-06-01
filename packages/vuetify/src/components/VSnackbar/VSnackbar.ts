@@ -114,7 +114,10 @@ export default mixins(
     },
   },
 
-  watch: { isActive: 'setTimeout' },
+  watch: {
+    isActive: 'setTimeout',
+    timeout: 'setTimeout',
+  },
 
   mounted () {
     if (this.isActive) this.setTimeout()
