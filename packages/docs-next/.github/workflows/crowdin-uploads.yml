@@ -3,15 +3,16 @@ name: Crowdin Uploads
 on:
   push:
     branches: [ master ]
-    paths: 
-      - src/paths/**/*.md
-      - src/i18n/messages/en.json
+    paths:
+      - src/paths/en/**
+      - src/i18n/**/en.json
 
 env:
+  GITHUB_TOKEN: ${{ secrets.ACTION_GH_TOKEN }}
   CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
   CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
   CROWDIN_BRANCH: docs-next
-  
+
 jobs:
   upload-to-crowdin:
     runs-on: ubuntu-latest
