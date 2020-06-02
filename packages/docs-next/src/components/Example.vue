@@ -58,12 +58,6 @@
 
           <v-divider />
 
-          <pre
-            v-if="template"
-            aria-hidden="true"
-            v-html="template"
-          />
-
           <v-window v-model="selected">
             <template v-for="(section, i) in sections">
               <v-window-item
@@ -87,13 +81,14 @@
     </template>
 
     <v-fade-transition
-      v-if="component"
+      v-if="file"
       appear
     >
       <v-sheet class="pa-2">
-        <component
-          :is="component"
+        <vue-file
           class="mb-0"
+          :file="file"
+          @loaded="setContents"
         />
       </v-sheet>
     </v-fade-transition>
@@ -101,16 +96,11 @@
 </template>
 
 <script>
-  // Mixins
-  import codepen from '@/mixins/codepen'
-
   // Utilities
   import { getBranch } from '@/util/helpers'
 
   export default {
     name: 'Example',
-
-    mixins: [codepen],
 
     data: () => ({
       branch: 'master',
@@ -118,8 +108,8 @@
       expand: false,
       file: undefined,
       selected: 'template',
-      template: false,
       component: undefined,
+      pen: undefined,
     }),
 
     computed: {
@@ -131,29 +121,15 @@
     mounted () {
       this.branch = getBranch()
       this.file = this.$attrs.file
-      this.importComponent()
-      this.importTemplate()
     },
 
     methods: {
-      importComponent () {
-        return import(
-          /* webpackChunkName: "examples" */
-          /* webpackMode: "lazy-once" */
-          `../examples/${this.file}.vue`
-        )
-          .then(comp => (this.component = comp.default))
-      },
-      importTemplate () {
-        return import(
-          /* webpackChunkName: "examples-source" */
-          /* webpackMode: "lazy-once" */
-          `!raw-loader!../examples/${this.file}.vue`
-        )
-          .then(comp => this.boot(comp.default))
-      },
       sendToCodepen () {
         this.$refs.codepen.submit()
+      },
+      setContents (contents) {
+        this.pen = contents.pen
+        this.component = contents.component
       },
     },
   }
