@@ -6,7 +6,7 @@
   // TODO: Find a better home for these
   import 'markdown-it-prism'
   // causes issue with dark stylings - disabled temporarily
-  // import 'prismjs/themes/prism.css'
+  import 'prismjs/themes/prism.css'
   import 'prismjs/components/prism-bash'
   import 'prismjs/components/prism-css'
   import 'prismjs/components/prism-javascript'

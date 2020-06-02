@@ -247,4 +247,8 @@
 
       > *
         position: absolute
+
+    code[class*="language-"],
+    pre[class*="language-"]
+      text-shadow: none
 </style>
