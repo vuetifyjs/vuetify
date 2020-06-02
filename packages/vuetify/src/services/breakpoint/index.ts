@@ -41,7 +41,8 @@ export class Breakpoint extends Service implements IBreakpoint {
 
   public xlOnly = false
 
-  public name = ''
+  // Value is xs to match v2.x functionality
+  public name: IBreakpoint['name'] = 'xs'
 
   public height = 0
 
@@ -148,11 +149,24 @@ export class Breakpoint extends Service implements IBreakpoint {
         break
     }
 
-    // Check if value is a valid number
-    // or an explicit breakpoint name
-    this.mobile = !isNaN(parseInt(this.mobileBreakPoint))
-      ? width < parseInt(this.mobileBreakPoint, 10)
-      : this.name === this.mobileBreakPoint
+    if (typeof this.mobileBreakPoint === 'number') {
+      this.mobile = width < parseInt(this.mobileBreakPoint, 10)
+
+      return
+    }
+
+    const breakpoints = {
+      xs: 0,
+      sm: 1,
+      md: 2,
+      lg: 3,
+      xl: 4,
+    } as const
+
+    const current = breakpoints[this.name]
+    const max = breakpoints[this.mobileBreakPoint]
+
+    this.mobile = current <= max
   }
 
   // Cross-browser support as described in:

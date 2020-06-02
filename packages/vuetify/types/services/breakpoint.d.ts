@@ -12,7 +12,7 @@ export interface Breakpoint {
   mdAndDown: boolean
   mdAndUp: boolean
   mdOnly: boolean
-  name: string
+  name: BreakpointName
   sm: boolean
   smAndDown: boolean
   smAndUp: boolean

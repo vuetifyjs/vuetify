@@ -5,7 +5,7 @@ Vuetify.config.silent = true
 
 Vue.component('breakpoint', {
   created () {
-    const name: string = this.$vuetify.breakpoint.name
+    const name = this.$vuetify.breakpoint.name
     const numbers: number[] = [
       this.$vuetify.breakpoint.height,
       this.$vuetify.breakpoint.width,
