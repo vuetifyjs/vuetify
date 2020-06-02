@@ -42,7 +42,6 @@ export default mixins(
     },
     multiLine: Boolean,
     text: Boolean,
-    // TODO: change this to closeDelay to match other API in delayable.js
     timeout: {
       type: [Number, String],
       default: 5000,
@@ -75,6 +74,8 @@ export default mixins(
         'v-snack--vertical': this.vertical,
       }
     },
+    // Text and outlined styles both
+    // use transparent backgrounds
     hasBackground (): boolean {
       return (
         !this.text &&
