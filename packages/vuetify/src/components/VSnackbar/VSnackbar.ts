@@ -78,7 +78,7 @@ export default mixins(
     // Snackbar is dark by default
     // override themeable logic.
     isDark (): boolean {
-      return !this.outlined && !this.text
+      return !this.hasBackground
         ? !this.light
         : Themeable.options.computed.isDark.call(this)
     },

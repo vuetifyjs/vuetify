@@ -1,7 +1,5 @@
 @import '../../styles/styles.sass';
 
-// Block
-
 $snackbar-action-margin: 8px !default;
 $snackbar-background-color: #333333 !default;
 $snackbar-body-font-size: map-deep-get($headings, 'body-2', 'size') !default;
