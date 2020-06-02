@@ -13,7 +13,7 @@ import { factory as PositionableFactory } from '../../mixins/positionable'
 // Utilities
 import mixins from '../../util/mixins'
 import { convertToUnit, getSlot } from '../../util/helpers'
-import { removed, deprecate } from '../../util/console'
+import { deprecate, removed } from '../../util/console'
 
 // Types
 import { PropType, VNode } from 'vue'
