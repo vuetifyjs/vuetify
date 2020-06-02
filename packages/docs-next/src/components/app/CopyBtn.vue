@@ -25,7 +25,7 @@
 
     props: {
       target: {
-        type: null,
+        type: Function,
         required: true,
       },
     },
@@ -34,7 +34,7 @@
 
     methods: {
       async copy () {
-        const el = this.target
+        const el = this.target()
 
         el.setAttribute('contenteditable', 'true')
         el.focus()

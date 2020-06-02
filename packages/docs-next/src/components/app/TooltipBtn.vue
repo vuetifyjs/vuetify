@@ -6,6 +6,7 @@
     <template v-slot:activator="{ on }">
       <v-btn
         :aria-label="tooltip"
+        class="app-tooltip-btn"
         icon
         v-bind="$attrs"
         v-on="{
@@ -40,5 +41,7 @@
 </script>
 
 <style lang="sass">
-  // .v-btn--app
+  .app-tooltip-btn
+    ~ .app-tooltip-btn
+      margin-left: 8px
 </style>

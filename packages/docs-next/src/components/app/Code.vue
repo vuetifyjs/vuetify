@@ -1,13 +1,14 @@
 <template>
   <v-sheet
-    class="overflow-hidden app-code"
+    class="app-code overflow-hidden"
+    color="grey lighten-4"
     rounded
   >
     <slot />
 
     <app-copy-btn
       :target="target"
-      class="mr-n2 mt-n1"
+      class="mr-n2 mt-n2"
     />
   </v-sheet>
 </template>
@@ -16,12 +17,10 @@
   export default {
     name: 'AppCode',
 
-    inheritAttrs: false,
-
-    data: () => ({ target: null }),
-
-    mounted () {
-      this.target = this.$el.querySelector('pre')
+    methods: {
+      target () {
+        return this.$el.querySelector('pre')
+      },
     },
   }
 </script>
@@ -29,29 +28,41 @@
 <style lang="sass">
   .app-code
     position: relative
+    padding: 12px 16px
+    margin: 16px 0
+
+    pre, code
+      background: transparent
+      font-size: 1rem
+      font-weight: 300
+      margin: 0 !important
 
     > pre
       border-radius: inherit
 
-    code
-      padding-left: 0
-
     code[class*=language],
     pre[class*=language]
-      font-size: 1rem
-      font-weight: 500
-      position: relative
+      background: transparent
+      color: #000000DE
+      hyphens: none
+      padding: 0
+      tab-size: 4
+      text-align: left
+      white-space: pre
+      word-break: normal
+      word-spacing: normal
+      word-wrap: normal
 
     pre[class*=language]
       &::after
+        bottom: 0.5rem
         color: hsla(0, 0%, 19%, 0.5)
         font-family: inherit
         font-size: 0.7rem
         font-weight: 700
         position: absolute
-        right: 16px
+        right: 1rem
         text-transform: uppercase
-        bottom: 8px
 
     pre.language-bash::after
       content: 'sh'
