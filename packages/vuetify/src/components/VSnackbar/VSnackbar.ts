@@ -75,18 +75,18 @@ export default mixins(
         'v-snack--vertical': this.vertical,
       }
     },
-    // Snackbar is dark by default
-    // override themeable logic.
-    isDark (): boolean {
-      return !this.hasBackground
-        ? !this.light
-        : Themeable.options.computed.isDark.call(this)
-    },
     hasBackground (): boolean {
       return (
         !this.text &&
         !this.outlined
       )
+    },
+    // Snackbar is dark by default
+    // override themeable logic.
+    isDark (): boolean {
+      return this.hasBackground
+        ? !this.light
+        : Themeable.options.computed.isDark.call(this)
     },
     styles (): object {
       // Styles are not needed when
