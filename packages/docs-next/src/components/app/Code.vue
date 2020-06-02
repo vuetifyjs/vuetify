@@ -28,7 +28,7 @@
 <style lang="sass">
   .app-code
     position: relative
-    padding: 12px 16px
+    padding: 12px 50px 12px 16px
     margin: 16px 0
 
     pre, code
@@ -55,7 +55,7 @@
 
     pre[class*=language]
       &::after
-        bottom: 0.5rem
+        bottom: 0.75rem
         color: hsla(0, 0%, 19%, 0.5)
         font-family: inherit
         font-size: 0.7rem
