@@ -1,5 +1,6 @@
 @import '../../styles/styles.sass';
 
+$snackbar-absolute-z-index: 1 !default;
 $snackbar-action-margin: 8px !default;
 $snackbar-background-color: #333333 !default;
 $snackbar-border-radius: $border-radius-root !default;

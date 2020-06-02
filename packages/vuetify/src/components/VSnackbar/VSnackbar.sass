@@ -16,11 +16,11 @@
   right: $snackbar-right
   top: $snackbar-top
   width: 100%
-  z-index: $snackbar-z-index
 
   &:not(.v-snack--absolute)
     height: 100vh
     position: fixed
+    z-index: $snackbar-z-index
 
   &:not(.v-snack--centered):not(.v-snack--top)
     align-items: flex-end
@@ -84,6 +84,7 @@
   &--absolute
     height: 100%
     position: absolute
+    z-index: $snackbar-absolute-z-index
 
   &--centered
     align-items: center
