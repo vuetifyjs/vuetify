@@ -8,6 +8,7 @@
 import Vuetify from 'vuetify/lib/framework'
 
 import {
+  mdiAccount,
   mdiBeaker,
   mdiCodepen,
   mdiCodeTags,
@@ -18,11 +19,13 @@ import {
   mdiSpeedometer,
   mdiTranslate,
   mdiViewDashboard,
+  mdiVuetify,
 } from '@mdi/js'
 
 const icons = {
   iconfont: 'mdiSvg',
   values: {
+    mdiAccount,
     mdiBeaker,
     mdiCodepen,
     mdiCodeTags,
@@ -33,6 +36,7 @@ const icons = {
     mdiSpeedometer,
     mdiTranslate,
     mdiViewDashboard,
+    mdiVuetify,
   },
 }
 

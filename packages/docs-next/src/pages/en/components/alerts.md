@@ -12,7 +12,7 @@ The `v-alert` component is used to convey important information to the user thro
 ## Usage
 Alerts in their simplest form are a flat sheets of paper that display a message.
 
-<usage>v-alert</usage>
+<usage name="v-alert" />
 
 ## Sub-Components
 None

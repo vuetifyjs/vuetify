@@ -16,6 +16,8 @@
 
     mixins: [codepen],
 
+    inheritAttrs: false,
+
     props: {
       file: {
         type: String,
