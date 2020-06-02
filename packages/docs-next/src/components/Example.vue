@@ -84,7 +84,10 @@
       v-if="file"
       appear
     >
-      <v-sheet class="pa-2">
+      <v-sheet
+        class="pa-2"
+        :dark="dark"
+      >
         <vue-file
           class="mb-0"
           :file="file"
