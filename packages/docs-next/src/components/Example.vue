@@ -117,7 +117,6 @@
       dark: false,
       expand: false,
       file: undefined,
-      newIn: 'v3.0.0', // handle via store?
       selected: 'template',
       template: false,
       component: undefined,
@@ -152,7 +151,6 @@
           `!raw-loader!../examples/${this.file}.vue`
         )
           .then(comp => this.boot(comp.default))
-          .then(this.unobserve)
       },
       sendToCodepen () {
         this.$refs.codepen.submit()
