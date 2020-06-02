@@ -9,8 +9,12 @@ export default Vue.extend({
   props: {
     mobileBreakPoint: {
       type: [Number, String] as PropType<BreakpointName>,
-      default (): BreakpointName {
-        return this.$vuetify.breakpoint.mobileBreakPoint
+      default (): BreakpointName | undefined {
+        // Avoid destroying unit
+        // tests for users
+        return this.$vuetify
+          ? this.$vuetify.breakpoint.mobileBreakPoint
+          : undefined
       },
       validator: v => (
         !isNaN(Number(v)) ||
