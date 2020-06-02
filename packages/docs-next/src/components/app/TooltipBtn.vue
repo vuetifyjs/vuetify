@@ -1,8 +1,5 @@
 <template>
-  <v-tooltip
-    v-if="!$vuetify.theme.dark"
-    bottom
-  >
+  <v-tooltip bottom>
     <template v-slot:activator="{ on }">
       <v-btn
         :aria-label="tooltip"
@@ -25,7 +22,7 @@
   export default {
     name: 'AppTooltipBtn',
 
-    inheritAttrs: true,
+    inheritAttrs: false,
 
     props: {
       icon: {
