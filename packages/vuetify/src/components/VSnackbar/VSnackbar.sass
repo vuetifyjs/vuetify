@@ -1,10 +1,10 @@
 @import './_variables.scss'
 
 +theme(v-snack) using ($material)
-  &__content
+  &__wrapper
     color: map-deep-get($material, 'text', 'primary')
 
-+sheet(v-snack__content, $snackbar-elevation, $snackbar-border-radius, $snackbar-shaped-border-radius)
++sheet(v-snack__wrapper, $snackbar-elevation, $snackbar-border-radius, $snackbar-shaped-border-radius)
 
 .v-snack
   bottom: $snackbar-bottom
@@ -25,16 +25,16 @@
   &:not(.v-snack--centered):not(.v-snack--top)
     align-items: flex-end
 
-  &__content
+  &__wrapper
     align-items: center
     // TODO: move this to sheet in v3
     border-color: currentColor !important
     display: flex
-    margin: $snackbar-content-margin
+    margin: $snackbar-wrapper-margin
     max-width: $snackbar-wrapper-max-width
-    min-height: $snackbar-content-min-height
+    min-height: $snackbar-wrapper-min-height
     min-width: $snackbar-wrapper-min-width
-    padding: $snackbar-content-padding
+    padding: $snackbar-wrapper-padding
     pointer-events: auto
     position: relative
     transition-duration: .15s
@@ -45,14 +45,14 @@
       background-color: $snackbar-background-color
       color: $snackbar-color
 
-  &__body
+  &__content
     flex-grow: 1
-    font-size: $snackbar-body-font-size
-    font-weight: $snackbar-body-font-weight
-    letter-spacing: $snackbar-body-letter-spacing
-    line-height: $snackbar-body-line-height
+    font-size: $snackbar-content-font-size
+    font-weight: $snackbar-content-font-weight
+    letter-spacing: $snackbar-content-letter-spacing
+    line-height: $snackbar-content-line-height
     margin-right: auto
-    padding: $snackbar-body-padding
+    padding: $snackbar-content-padding
     text-align: initial
 
   &__action
@@ -70,12 +70,16 @@
     +rtl()
       margin-left: $snackbar-action-margin
 
+  // Increased specificity to change
+  // the default padding of .v-btn
+  &__action > .v-snack__btn.v-btn
+    padding: $snackbar-btn-padding
+
   &__btn
     margin-left: $snackbar-btn-margin-left
     margin-right: $snackbar-btn-margin-right
     margin: $snackbar-content-first-btn-margin
     min-width: auto
-    padding: $snackbar-btn-padding !important
 
   &--absolute
     height: 100%
@@ -87,18 +91,18 @@
   &--left
     justify-content: flex-start
 
-  &--multi-line &__content
-    min-height: $snackbar-multi-line-content-min-height
+  &--multi-line &__wrapper
+    min-height: $snackbar-multi-line-wrapper-min-height
 
   &--right
     justify-content: flex-end
 
-  &:not(.v-snack--has-background) &__content
+  &:not(.v-snack--has-background) &__wrapper
     background: transparent !important
     box-shadow: none !important
 
 
-  &--text &__content:before
+  &--text &__wrapper:before
     background-color: currentColor
     border-radius: inherit
     bottom: 0
@@ -113,7 +117,7 @@
   &--top
     align-items: flex-start
 
-  &--vertical &__content
+  &--vertical &__wrapper
     flex-direction: column
 
     .v-snack__action
@@ -122,10 +126,10 @@
 
 .v-snack-transition
   &-enter
-    &.v-snack__content
+    &.v-snack__wrapper
       transform: scale($snackbar-transition-wrapper-transform)
 
   &-enter,
   &-leave-to
-    &.v-snack__content
+    &.v-snack__wrapper
       opacity: 0

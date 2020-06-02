@@ -146,42 +146,41 @@ export default mixins(
         }),
       ])
     },
-    genBody () {
+    genContent () {
       return this.$createElement('div', {
-        staticClass: 'v-snack__body',
+        staticClass: 'v-snack__content',
+        class: {
+          [this.contentClass]: true,
+        },
         attrs: {
           role: 'status',
           'aria-live': 'polite',
         },
       }, [getSlot(this)])
     },
-    genContent () {
+    genWrapper () {
       const fn = this.hasBackground
         ? this.setBackgroundColor
         : this.setTextColor
 
       const data = fn(this.color, {
-        staticClass: 'v-snack__content',
-        class: {
-          ...VSheet.options.computed.classes.call(this),
-          [this.contentClass]: true,
-        },
+        staticClass: 'v-snack__wrapper',
+        class: VSheet.options.computed.classes.call(this),
         directives: [{
           name: 'show',
           value: this.isActive,
         }],
-        ref: 'content',
       })
 
       return this.$createElement('div', data, [
-        this.genBody(),
+        this.genContent(),
         this.genActions(),
       ])
     },
     genTransition () {
       return this.$createElement('transition', {
         props: { name: this.transition },
-      }, [this.genContent()])
+      }, [this.genWrapper()])
     },
     setTimeout () {
       window.clearTimeout(this.activeTimeout)
@@ -210,7 +209,7 @@ export default mixins(
     }, [
       this.transition !== false
         ? this.genTransition()
-        : this.genContent(),
+        : this.genWrapper(),
     ])
   },
 })
