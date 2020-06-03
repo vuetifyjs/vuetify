@@ -160,11 +160,11 @@ export default mixins(
       }, [getSlot(this)])
     },
     genWrapper () {
-      const fn = this.hasBackground
+      const setColor = this.hasBackground
         ? this.setBackgroundColor
         : this.setTextColor
 
-      const data = fn(this.color, {
+      const data = setColor(this.color, {
         staticClass: 'v-snack__wrapper',
         class: VSheet.options.computed.classes.call(this),
         directives: [{
