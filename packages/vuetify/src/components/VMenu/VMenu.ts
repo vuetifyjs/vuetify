@@ -201,6 +201,7 @@ export default baseMixins.extend({
       // Update coordinates and dimensions of menu
       // and its activator
       this.updateDimensions()
+      this.updateDimensions()
       // Start the transition
       requestAnimationFrame(() => {
         // Once transitioning, calculate scroll and top position

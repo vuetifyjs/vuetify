@@ -5,6 +5,7 @@
       :close-on-content-click="false"
       :nudge-width="200"
       offset-x
+      :left="true"
     >
       <template v-slot:activator="{ on }">
         <v-btn
