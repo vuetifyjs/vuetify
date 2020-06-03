@@ -23,19 +23,24 @@ None
 ## Examples
 Below is a collection of simple to complex examples.
 
-  ### Type
+  ### Props
+
+  #### Type
   Type Example
   <example file="v-alert/simple/type" />
 
-  ### Dense
+  #### Dense
   Dense Example
   <example file="v-alert/simple/dense" />
+
+  ### Events
+  ### Slots
 
 ## Accessibility
 By default, v-alert components are assigned the WAI-ARIA role of alert which denotes that the alert "is a live region with important and usually time-sensitive, information." When using the dismissible prop the close icon will receive a corresponding aria-label. This value can be modified by changing either the close-label prop or globally through customizing the Internationalization's default value for the close property.
 
 ## API
-  - [v-alert](../api/v-alert)
+  - [v-alert](../../api/v-alert)
 
 ## Up Next
 <up-next />
