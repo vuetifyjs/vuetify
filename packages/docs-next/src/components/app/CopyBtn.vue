@@ -3,6 +3,7 @@
     absolute
     icon
     right
+    style="background-color: inherit;"
     top
     @click="copy"
   >
