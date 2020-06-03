@@ -2,6 +2,8 @@
 
 ![Crowdin Downloads](https://github.com/vuetifyjs/docs-next/workflows/Crowdin%20Downloads/badge.svg)
 
+![Vercel Deploy](https://github.com/vuetifyjs/docs-next/workflows/Vercel%20Deploy/badge.svg)
+
 # docs-next
 
 ## Project setup
