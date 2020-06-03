@@ -9,56 +9,49 @@ const mockApiData = {
         type: 'string',
         default: 'undefined',
         source: 'v-alert',
-        description: 'a',
-      },
-      {
-        name: 'closeIcon',
-        type: 'string',
-        default: "'$cancel'",
-        source: 'v-alert',
-        description: 'b',
+        description: 'Puts a border on the alert. Accepts **top** | **right** | **bottom** | **left**.',
       },
       {
         name: 'closeLabel',
         type: 'string',
         default: "'$vuetify.close'",
         source: 'v-alert',
-        description: 'c',
+        description: 'Text used for *aria-label* on **dismissible** alerts. Can also be customizing globally in [Internationalization](/customization/internationalization).',
       },
       {
         name: 'color',
         type: 'string',
         default: 'undefined',
         source: 'colorable',
-        description: '',
+        description: 'Applies specified color to the control - it can be the name of material color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). You can find list of built in classes on the [colors page](/styles/colors#material-colors).',
       },
       {
         name: 'coloredBorder',
         type: 'boolean',
         default: 'false',
         source: 'v-alert',
-        description: '',
+        description: 'Applies the defined **color** to the alert\'s border.',
       },
       {
         name: 'dark',
         type: 'boolean',
         default: 'false',
         source: 'themeable',
-        description: '',
+        description: 'Applies the dark theme variant to the component. You can find more information on the Material Design documentation for [dark themes](https://material.io/design/color/dark-theme.html).',
       },
       {
         name: 'dense',
         type: 'boolean',
         default: 'false',
         source: 'v-alert',
-        description: '',
+        description: 'Hides the alert icon and decreases component\'s height.',
       },
       {
         name: 'dismissible',
         type: 'boolean',
         default: 'false',
         source: 'v-alert',
-        description: '',
+        description: 'Adds a close icon that can hide the alert.',
       },
       {
         name: 'elevation',
@@ -68,7 +61,7 @@ const mockApiData = {
         ],
         default: 'undefined',
         source: 'elevatable',
-        description: '',
+        description: 'Designates an elevation applied to the component between 0 and 24. You can find more information on the [elevation page](/styles/elevation).',
       },
       {
         name: 'height',
@@ -78,7 +71,7 @@ const mockApiData = {
         ],
         default: 'undefined',
         source: 'measurable',
-        description: '',
+        description: 'Sets the height for the component.',
       },
       {
         name: 'icon',
@@ -88,14 +81,14 @@ const mockApiData = {
         ],
         default: 'undefined',
         source: 'v-alert',
-        description: '',
+        description: 'Designates a specific icon.',
       },
       {
         name: 'light',
         type: 'boolean',
         default: 'false',
         source: 'themeable',
-        description: '',
+        description: 'Applies the light theme variant to the component.',
       },
       {
         name: 'maxHeight',
@@ -105,7 +98,7 @@ const mockApiData = {
         ],
         default: 'undefined',
         source: 'measurable',
-        description: '',
+        description: 'Sets the maximum height for the component.',
       },
       {
         name: 'maxWidth',
@@ -115,7 +108,7 @@ const mockApiData = {
         ],
         default: 'undefined',
         source: 'measurable',
-        description: '',
+        description: 'Sets the maximum width for the component.',
       },
       {
         name: 'minHeight',
@@ -125,7 +118,7 @@ const mockApiData = {
         ],
         default: 'undefined',
         source: 'measurable',
-        description: '',
+        description: 'Sets the minimum height for the component.',
       },
       {
         name: 'minWidth',
@@ -135,94 +128,77 @@ const mockApiData = {
         ],
         default: 'undefined',
         source: 'measurable',
-        description: '',
+        description: 'Sets the minimum width for the component.',
       },
       {
         name: 'mode',
         type: 'string',
         default: 'undefined',
         source: 'transitionable',
-        description: '',
+        description: 'Sets the transition mode (does not apply to transition-group). You can find more information on the Vue documentation [for transition modes](https://vuejs.org/v2/api/#transition).',
       },
       {
         name: 'origin',
         type: 'string',
         default: 'undefined',
         source: 'transitionable',
-        description: '',
+        description: 'Sets the transition origin on the element. You can find more information on the MDN documentation [for transition origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin).',
       },
       {
         name: 'outlined',
         type: 'boolean',
         default: 'false',
         source: 'v-sheet',
-        description: '',
+        description: 'Makes the background transparent and applies a thin border.',
       },
       {
         name: 'prominent',
         type: 'boolean',
         default: 'false',
         source: 'v-alert',
-        description: '',
-      },
-      {
-        name: 'rounded',
-        type: [
-          'boolean',
-          'string',
-        ],
-        default: 'undefined',
-        source: 'roundable',
-        description: '',
-      },
-      {
-        name: 'shaped',
-        type: 'boolean',
-        default: 'false',
-        source: 'v-sheet',
-        description: '',
+        description: 'Displays a larger vertically centered icon to draw more attention.',
       },
       {
         name: 'tag',
         type: 'string',
         default: "'div'",
         source: 'v-sheet',
-        description: '',
+        description: 'Specify a custom tag used on the root element.',
       },
       {
         name: 'text',
         type: 'boolean',
         default: 'false',
         source: 'v-alert',
-        description: '',
+        description: 'Applies the defined **color** to text and a low opacity background of the same.',
       },
       {
         name: 'tile',
         type: 'boolean',
         default: 'false',
         source: 'roundable',
-        description: '',
+        description: 'Removes the component\'s border-radius.',
       },
       {
         name: 'transition',
         type: 'string',
         default: 'undefined',
         source: 'transitionable',
-        description: '',
+        description: 'Sets the component transition. Can be one of the [built in transitions](/styles/transitions) or one your own.',
       },
       {
         name: 'type',
         type: 'string',
         default: 'undefined',
         source: 'v-alert',
-        description: '',
+        description: 'Specify a **success**, **info**, **warning** or **error** alert. Uses the contextual color and has a pre-defined icon.',
       },
       {
         name: 'value',
         type: 'boolean',
         default: 'true',
         source: 'toggleable',
-        description: '',
+        description: 'Controls whether the component is visible or hidden.',
       },
       {
         name: 'width',
@@ -232,7 +208,7 @@ const mockApiData = {
         ],
         default: 'undefined',
         source: 'measurable',
-        description: '',
+        description: 'Sets the width for the component.',
       },
     ],
     mixins: [
@@ -248,54 +224,111 @@ const mockApiData = {
     slots: [
       {
         name: 'append',
-        description: '',
+        description: 'Slot for icon at end of alert.',
       },
       {
         name: 'close',
         props: {
           toggle: 'Function',
         },
-        description: '',
+        description: 'Slot for icon used in **dismissible** prop.',
       },
       {
         name: 'prepend',
-        description: '',
+        description: 'Slot for icon at beginning of alert.',
       },
       {
         name: 'default',
-        description: '',
+        description: 'The default Vue slot.',
       },
     ],
     events: [
       {
         name: 'input',
         value: 'boolean',
-        description: '',
+        description: 'The updated bound model',
       },
     ],
     functions: [
       {
         name: 'toggle',
         signature: '(): void',
+        description: 'Toggles the alert\'s active state. Available in the close slot and used as the click action in **dismissible**.',
+      },
+    ],
+    sass: [
+      {
+        name: '$alert-border-opacity',
+        default: '0.26 !default;',
+        description: '',
+      },
+      {
+        name: '$alert-border-radius',
+        default: '$border-radius-root !default;',
+        description: '',
+      },
+      {
+        name: '$alert-border-width',
+        default: '4px !default;',
+        description: '',
+      },
+      {
+        name: '$alert-dense-border-width',
+        default: 'medium !default;',
+        description: '',
+      },
+      {
+        name: '$alert-font-size',
+        default: '16px !default;',
+        description: '',
+      },
+      {
+        name: '$alert-icon-size',
+        default: '24px !default;',
+        description: '',
+      },
+      {
+        name: '$alert-margin',
+        default: '16px !default;',
+        description: '',
+      },
+      {
+        name: '$alert-outline',
+        default: 'thin solid currentColor !default;',
+        description: '',
+      },
+      {
+        name: '$alert-padding',
+        default: '16px !default;',
+        description: '',
+      },
+      {
+        name: '$alert-prominent-icon-font-size',
+        default: '32px !default;',
+        description: '',
+      },
+      {
+        name: '$alert-prominent-icon-size',
+        default: '48px !default;',
         description: '',
       },
     ],
   },
 }
 
-const camelizeRE = /-(\w)/g
+/* const camelizeRE = /-(\w)/g
 const camelize = str => {
   return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : '')
-}
+} */
 
 const capitalize = str => {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
-const hyphenateRE = /\B([A-Z])/g
+/* const hyphenateRE = /\B([A-Z])/g
 function hyphenate (str) {
   return str.replace(hyphenateRE, '-$1').toLowerCase()
-}
+} */
 
 function genFrontMatter () {
   const fm = [
@@ -359,7 +392,7 @@ function genFooter () {
 
 function writeMdFile (file, data) {
   const root = './src/pages/en/api'
-  const stream = createWriteStream(`${root}/${file}Test.md`)
+  const stream = createWriteStream(`${root}/${file}.md`)
 
   // gen front-matter
   const frontMatter = genFrontMatter()
@@ -371,7 +404,9 @@ function writeMdFile (file, data) {
     stream.write(title)
     for (const [header, value] of Object.entries(data)) {
       if (header !== 'mixins') {
-        const headerLine = `## ${capitalize(header)}\n`
+        const headerLine = header === 'sass'
+          ? '## SASS Variables\n'
+          : `## ${capitalize(header)}\n`
         const table = genTable(value)
         stream.write(headerLine)
         stream.write(table)
@@ -385,8 +420,7 @@ function writeMdFile (file, data) {
 
 // generate md file
 for (const [comp, value] of Object.entries(mockApiData)) {
-  const file = capitalize(camelize(comp))
-  writeMdFile(file, value)
+  writeMdFile(comp, value)
 }
 
 console.log('finished')
