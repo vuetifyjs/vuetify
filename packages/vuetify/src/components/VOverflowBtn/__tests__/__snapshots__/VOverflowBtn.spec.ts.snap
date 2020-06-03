@@ -32,9 +32,7 @@ exports[`VOverflowBtn.js should use default autocomplete selections 1`] = `
                value="foo"
         >
       </div>
-      <div class="v-menu"
-           offsety="true"
-      >
+      <div class="v-menu">
       </div>
     </div>
     <div class="v-text-field__details">
@@ -82,9 +80,7 @@ exports[`VOverflowBtn.js should use default autocomplete selections 2`] = `
                value="foo"
         >
       </div>
-      <div class="v-menu"
-           offsety="true"
-      >
+      <div class="v-menu">
       </div>
     </div>
     <div class="v-text-field__details">

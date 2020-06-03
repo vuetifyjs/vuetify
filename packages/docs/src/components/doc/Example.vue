@@ -64,7 +64,7 @@
             target="_blank"
             v-on="on"
           >
-            <v-icon>mdi-github-circle</v-icon>
+            <v-icon>mdi-github</v-icon>
           </v-btn>
         </template>
 

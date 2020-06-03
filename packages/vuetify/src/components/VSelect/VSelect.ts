@@ -515,7 +515,7 @@ export default baseMixins.extend<options>().extend({
       }
 
       return this.$createElement(VMenu, {
-        attrs: { role: undefined, offsetY: true },
+        attrs: { role: undefined },
         props,
         on: {
           input: (val: boolean) => {

@@ -79,7 +79,7 @@
                     left
                     size="20"
                   >
-                    mdi-github-face
+                    mdi-github
                   </v-icon>
 
                   Github
