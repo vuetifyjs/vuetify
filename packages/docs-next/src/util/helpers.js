@@ -1,5 +1,11 @@
-export const wait = timeout => {
-  return new Promise(resolve => setTimeout(resolve, timeout))
+export function copyElementContent (el) {
+  el.setAttribute('contenteditable', 'true')
+  el.focus()
+
+  document.execCommand('selectAll', false, null)
+  document.execCommand('copy')
+
+  el.removeAttribute('contenteditable')
 }
 
 export function getBranch () {
@@ -10,12 +16,10 @@ export function getBranch () {
   return ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
 }
 
-export function copyElementContent (el) {
-  el.setAttribute('contenteditable', 'true')
-  el.focus()
+export function parseLink (text, link) {
+  return `<a href="${link}">${text}</a>`
+}
 
-  document.execCommand('selectAll', false, null)
-  document.execCommand('copy')
-
-  el.removeAttribute('contenteditable')
+export const wait = timeout => {
+  return new Promise(resolve => setTimeout(resolve, timeout))
 }
