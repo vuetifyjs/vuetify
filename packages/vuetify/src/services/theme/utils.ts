@@ -22,7 +22,7 @@ export function parse (
     if (value == null) continue
 
     if (!variations) {
-      parsedTheme[name] = { base: colorToInt(value) }
+      parsedTheme[name] = { base: intToHex(colorToInt(value)) }
     } else if (isItem) {
       /* istanbul ignore else */
       if (name === 'base' || name.startsWith('lighten') || name.startsWith('darken')) {

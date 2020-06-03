@@ -1697,62 +1697,62 @@ exports[`Theme.ts should minify theme 1`] = `
 `;
 
 exports[`Theme.ts should not generate variations 1`] = `
-".v-application a { color: 1668818; }
+".v-application a { color: #1976d2; }
 .v-application .primary {
-  background-color: 1668818 !important;
-  border-color: 1668818 !important;
+  background-color: #1976d2 !important;
+  border-color: #1976d2 !important;
 }
 .v-application .primary--text {
-  color: 1668818 !important;
-  caret-color: 1668818 !important;
+  color: #1976d2 !important;
+  caret-color: #1976d2 !important;
 }
 .v-application .secondary {
-  background-color: 4342338 !important;
-  border-color: 4342338 !important;
+  background-color: #424242 !important;
+  border-color: #424242 !important;
 }
 .v-application .secondary--text {
-  color: 4342338 !important;
-  caret-color: 4342338 !important;
+  color: #424242 !important;
+  caret-color: #424242 !important;
 }
 .v-application .accent {
-  background-color: 8565247 !important;
-  border-color: 8565247 !important;
+  background-color: #82b1ff !important;
+  border-color: #82b1ff !important;
 }
 .v-application .accent--text {
-  color: 8565247 !important;
-  caret-color: 8565247 !important;
+  color: #82b1ff !important;
+  caret-color: #82b1ff !important;
 }
 .v-application .error {
-  background-color: 16732754 !important;
-  border-color: 16732754 !important;
+  background-color: #ff5252 !important;
+  border-color: #ff5252 !important;
 }
 .v-application .error--text {
-  color: 16732754 !important;
-  caret-color: 16732754 !important;
+  color: #ff5252 !important;
+  caret-color: #ff5252 !important;
 }
 .v-application .info {
-  background-color: 2201331 !important;
-  border-color: 2201331 !important;
+  background-color: #2196f3 !important;
+  border-color: #2196f3 !important;
 }
 .v-application .info--text {
-  color: 2201331 !important;
-  caret-color: 2201331 !important;
+  color: #2196f3 !important;
+  caret-color: #2196f3 !important;
 }
 .v-application .success {
-  background-color: 5025616 !important;
-  border-color: 5025616 !important;
+  background-color: #4caf50 !important;
+  border-color: #4caf50 !important;
 }
 .v-application .success--text {
-  color: 5025616 !important;
-  caret-color: 5025616 !important;
+  color: #4caf50 !important;
+  caret-color: #4caf50 !important;
 }
 .v-application .warning {
-  background-color: 16761095 !important;
-  border-color: 16761095 !important;
+  background-color: #ffc107 !important;
+  border-color: #ffc107 !important;
 }
 .v-application .warning--text {
-  color: 16761095 !important;
-  caret-color: 16761095 !important;
+  color: #ffc107 !important;
+  caret-color: #ffc107 !important;
 }"
 `;
 
