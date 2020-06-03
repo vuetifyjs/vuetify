@@ -61,14 +61,14 @@ export default mixins(
   computed: {
     classes (): object {
       return {
-        'v-snack--active': this.isActive,
         'v-snack--absolute': this.absolute,
+        'v-snack--active': this.isActive,
         'v-snack--bottom': this.bottom || !this.top,
         'v-snack--centered': this.centered,
+        'v-snack--has-background': this.hasBackground,
         'v-snack--left': this.left,
         'v-snack--multi-line': this.multiLine && !this.vertical,
         'v-snack--right': this.right,
-        'v-snack--has-background': this.hasBackground,
         'v-snack--text': this.text,
         'v-snack--top': this.top,
         'v-snack--vertical': this.vertical,
