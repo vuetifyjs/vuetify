@@ -41,7 +41,7 @@
     "vue-i18n": "^8.12.0",
     "vue-no-ssr": "^1.1.1",
     "vue-router": "^3.0.7",
-    "vue-server-renderer": "^2.6.10",
+    "vue-server-renderer": "^2.6.11",
     "vuelidate": "^0.7.4",
     "vuetify": "^2.2.32",
     "vuex": "^3.1.1",

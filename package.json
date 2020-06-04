@@ -54,9 +54,9 @@
     "tslint": "^5.18.0",
     "typescript": "^3.5.3",
     "typestrict": "^1.0.2",
-    "vue": "^2.6.10",
+    "vue": "^2.6.11",
     "vue-loader": "^15.7.1",
-    "vue-template-compiler": "^2.6.10",
+    "vue-template-compiler": "^2.6.11",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6",
     "webpack-merge": "^4.2.1"
