@@ -1,12 +1,6 @@
-<template>
-  <v-container tag="section">
-    <component :is="page" />
-  </v-container>
-</template>
-
 <script>
-  // Utilities
-  import { genMetaData } from '@/util/metadata'
+  // Extensions
+  import Page from './Page'
 
   async function load (route) {
     const { locale, page } = route.params
@@ -18,44 +12,10 @@
   }
 
   export default {
-    name: 'ApiView',
+    name: 'Api',
 
-    metaInfo () {
-      if (!this.attributes) return {}
+    extends: Page,
 
-      const {
-        description,
-        keywords,
-        title,
-      } = this.attributes
-
-      return genMetaData(
-        title,
-        description,
-        keywords,
-      )
-    },
-
-    data: () => ({
-      attributes: undefined,
-      page: undefined,
-    }),
-
-    watch: {
-      '$route.params.locale': 'loadComponent',
-    },
-
-    created () {
-      this.loadComponent()
-    },
-
-    methods: {
-      async loadComponent () {
-        const { attributes, vue } = await load(this.$route)
-
-        this.attributes = attributes
-        this.page = vue.component
-      },
-    },
+    methods: { load },
   }
 </script>
