@@ -10,6 +10,14 @@ module.exports = {
   },
   chainWebpack: config => {
     config
+      .plugin('html')
+      .tap(args => {
+        args[0].title = 'Welcome to Vuetify | Vuetify.js'
+
+        return args
+      })
+
+    config
       .plugin('api-plugin')
       .use(path.resolve('./build/api-plugin.js'))
 

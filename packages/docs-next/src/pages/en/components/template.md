@@ -1,7 +1,8 @@
 ---
-layout: documentation
-description: Generic Description.
-keywords: template
+meta:
+  title: Generic Title
+  description: Generic Description.
+  keywords: template
 ---
 
 # Component Name

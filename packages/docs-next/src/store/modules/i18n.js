@@ -26,6 +26,7 @@ async function loadApi (locale) {
 }
 
 const state = {
+  frontmatter: {},
   tocs: {},
   pages: {},
 }
