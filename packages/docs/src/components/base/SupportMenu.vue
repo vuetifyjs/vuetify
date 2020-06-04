@@ -67,7 +67,7 @@
         },
         {
           href: 'https://github.com/vuetifyjs/vuetify/issues',
-          icon: 'mdi-github-face',
+          icon: 'mdi-github',
           text: vm.$t('Vuetify.AppToolbar.issues'),
         },
         {

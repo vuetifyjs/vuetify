@@ -20,7 +20,7 @@ WebFontLoader.load({
       'Font Awesome 5',
     ],
     urls: [
-      'https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css',
+      'https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css',
       'https://use.fontawesome.com/releases/v5.0.8/css/all.css',
     ],
   },

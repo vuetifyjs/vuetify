@@ -110,12 +110,12 @@
         {
           text: vm.$t('Vuetify.AppToolbar.github'),
           href: 'https://github.com/vuetifyjs/vuetify',
-          icon: 'mdi-github-box',
+          icon: 'mdi-github',
         },
         {
           text: vm.$t('Vuetify.AppToolbar.twitter'),
           href: 'https://twitter.com/vuetifyjs',
-          icon: 'mdi-twitter-box',
+          icon: 'mdi-twitter',
         },
       ],
     }),

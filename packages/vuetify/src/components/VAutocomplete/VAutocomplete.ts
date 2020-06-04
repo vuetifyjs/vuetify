@@ -7,7 +7,11 @@ import VTextField from '../VTextField/VTextField'
 
 // Utilities
 import mergeData from '../../util/mergeData'
-import { keyCodes, getObjectValueByPath } from '../../util/helpers'
+import {
+  getObjectValueByPath,
+  getPropertyFromItem,
+  keyCodes,
+} from '../../util/helpers'
 
 // Types
 import { PropType } from 'vue'
@@ -84,15 +88,10 @@ export default VSelect.extend({
       if (!this.isSearching || this.noFilter || this.internalSearch == null) return this.allItems
 
       return this.allItems.filter(item => {
-        const text = this.getText(item)
+        const value = getPropertyFromItem(item, this.itemText, undefined)
+        const text = value != null ? String(value) : ''
 
-        // Remove items without text to match
-        if (
-          text == null ||
-          typeof text === 'object'
-        ) return false
-
-        return this.filter(item, String(this.internalSearch), String(text))
+        return this.filter(item, String(this.internalSearch), text)
       })
     },
     internalSearch: {
