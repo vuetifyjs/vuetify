@@ -128,9 +128,10 @@ function generateFiles () {
 
     for (const component of components) {
       const data = generateAPI(component, locale)
+      const target = `/${locale}/api/${component}`
 
-      files[`node_modules/@docs/${locale}/api/${component}.md`] = createMdFile(component, data)
-      pages[`/${locale}/api/${component}/`] = component
+      files[`node_modules/@docs${target}.md`] = createMdFile(component, data)
+      pages[`${target}/`] = component
     }
 
     files[`node_modules/@docs/${locale}/api/pages.js`] = toJs(pages)
