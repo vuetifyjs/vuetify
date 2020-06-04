@@ -3,13 +3,14 @@
 </template>
 
 <script>
+  // Styles
   import '@/styles/overrides.sass'
 
   // Utilities
   import { get, call } from 'vuex-pathify'
 
   export default {
-    name: 'RootLayout',
+    name: 'LocaleLayout',
 
     computed: {
       translating: get('i18n/translating'),

@@ -19,7 +19,7 @@ export function createRouter () {
     routes: [
       {
         path: '/:locale',
-        component: () => import('@/layouts/root/Index'),
+        component: () => import('@/layouts/locale/Index'),
         children: [
           {
             path: 'api/:page',
