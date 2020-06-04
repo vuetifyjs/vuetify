@@ -22,6 +22,17 @@ export function createRouter () {
         component: () => import('@/layouts/root/Index'),
         children: [
           {
+            path: 'api/:page',
+            component: () => import('@/layouts/default/Index'),
+            children: [
+              {
+                path: '',
+                name: 'Api',
+                component: () => import('@/views/Api'),
+              },
+            ],
+          },
+          {
             path: ':category/:page',
             // Layouts allow you to define different
             // structures for different view

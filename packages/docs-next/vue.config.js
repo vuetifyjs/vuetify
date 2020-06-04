@@ -10,6 +10,10 @@ module.exports = {
   },
   chainWebpack: config => {
     config
+      .plugin('api-plugin')
+      .use(path.resolve('./build/api-plugin.js'))
+
+    config
       .plugin('pages-plugin')
       .use(path.resolve('./build/pages-plugin.js'))
 

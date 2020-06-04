@@ -18,6 +18,13 @@ async function loadPages (locale) {
   )
 }
 
+async function loadApi (locale) {
+  return import(
+    /* webpackChunkName: "api-items" */
+    `@docs/${locale}/api/pages`
+  )
+}
+
 const state = {
   tocs: {},
   pages: {},
@@ -29,7 +36,13 @@ const actions = {
   switch: async ({ commit }, { locale }) => {
     await loadLocale(locale)
     commit('tocs', (await loadHeadings(locale)).default)
-    commit('pages', (await loadPages(locale)).default)
+
+    const pages = {
+      ...(await loadPages(locale)).default,
+      ...(await loadApi(locale)).default,
+    }
+
+    commit('pages', pages)
   },
 }
 
