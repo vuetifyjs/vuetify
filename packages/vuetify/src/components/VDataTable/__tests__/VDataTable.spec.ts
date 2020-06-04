@@ -9,6 +9,7 @@ import ripple from '../../../directives/ripple/index'
 import Vue from 'vue'
 import { Lang } from '../../../services/lang'
 import { preset } from '../../../presets/default'
+import { resizeWindow } from '../../../../test'
 
 Vue.prototype.$vuetify = {
   rtl: false,
@@ -138,6 +139,8 @@ describe('VDataTable.ts', () => {
         ...options,
       })
     }
+
+    return resizeWindow(0)
   })
 
   it('should render', () => {

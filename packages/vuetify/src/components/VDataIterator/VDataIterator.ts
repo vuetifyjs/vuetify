@@ -38,7 +38,7 @@ export default mixins(
       default: () => [],
     },
     mobileBreakpoint: {
-      type: [Number, String],
+      ...Mobile.options.props.mobileBreakpoint,
       default: 600,
     },
     singleExpand: Boolean,

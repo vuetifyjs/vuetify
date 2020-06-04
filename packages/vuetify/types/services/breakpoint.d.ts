@@ -23,13 +23,13 @@ export interface Breakpoint {
   xs: boolean
   xsOnly: boolean
   mobile: boolean
-  mobileBreakPoint: BreakpointName
+  mobileBreakpoint: BreakpointName
   thresholds: BreakpointThresholds
   scrollBarWidth: number
 }
 
 export interface BreakpointOptions {
-  mobileBreakPoint?: BreakpointName
+  mobileBreakpoint?: BreakpointName
   scrollBarWidth?: number
   thresholds?: Partial<BreakpointThresholds>
 }

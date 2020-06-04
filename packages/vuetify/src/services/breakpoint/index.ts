@@ -52,7 +52,7 @@ export class Breakpoint extends Service implements IBreakpoint {
   // Value is true to match v2.x functionality
   public mobile = true
 
-  public mobileBreakPoint: IBreakpoint['mobileBreakPoint']
+  public mobileBreakpoint: IBreakpoint['mobileBreakpoint']
 
   public thresholds: IBreakpoint['thresholds']
 
@@ -64,12 +64,12 @@ export class Breakpoint extends Service implements IBreakpoint {
     super()
 
     const {
-      mobileBreakPoint,
+      mobileBreakpoint,
       scrollBarWidth,
       thresholds,
     } = preset[Breakpoint.property]
 
-    this.mobileBreakPoint = mobileBreakPoint
+    this.mobileBreakpoint = mobileBreakpoint
     this.scrollBarWidth = scrollBarWidth
     this.thresholds = thresholds
 
@@ -149,8 +149,8 @@ export class Breakpoint extends Service implements IBreakpoint {
         break
     }
 
-    if (typeof this.mobileBreakPoint === 'number') {
-      this.mobile = width < parseInt(this.mobileBreakPoint, 10)
+    if (typeof this.mobileBreakpoint === 'number') {
+      this.mobile = width < parseInt(this.mobileBreakpoint, 10)
 
       return
     }
@@ -164,7 +164,7 @@ export class Breakpoint extends Service implements IBreakpoint {
     } as const
 
     const current = breakpoints[this.name]
-    const max = breakpoints[this.mobileBreakPoint]
+    const max = breakpoints[this.mobileBreakpoint]
 
     this.mobile = current <= max
   }

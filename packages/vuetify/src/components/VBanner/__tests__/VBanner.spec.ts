@@ -30,7 +30,7 @@ describe('VBanner.ts', () => {
             },
             breakpoint: {
               mobile: true,
-              mobileBreakPoint: 1264,
+              mobileBreakpoint: 1264,
               width: 1000,
             },
           },

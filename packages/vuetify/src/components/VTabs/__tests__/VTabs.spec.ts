@@ -31,7 +31,7 @@ describe('VTabs.ts', () => {
         mocks: {
           $vuetify: {
             application: { left: 0, right: 0 },
-            breakpoint: { mobileBreakPoint: 1264 },
+            breakpoint: { mobileBreakpoint: 1264 },
             theme: { dark: false },
           },
         },

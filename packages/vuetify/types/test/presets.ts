@@ -19,7 +19,7 @@ new Vuetify({
 
 new Vuetify({
   breakpoint: {
-    mobileBreakPoint: 900,
+    mobileBreakpoint: 900,
   },
 })
 

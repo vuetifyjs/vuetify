@@ -38,14 +38,14 @@ describe('mobile.ts', () => {
   ])('should conditionally be mobile using a breakpoint of %s', async (...item) => {
     const [
       resizeTo,
-      mobileBreakPoint,
+      mobileBreakpoint,
       isMobile,
     ] = item
 
     await resizeWindow(resizeTo as number)
 
     const wrapper = mountFunction({
-      propsData: { mobileBreakPoint },
+      propsData: { mobileBreakpoint },
     })
 
     expect(wrapper.vm.isMobile).toBe(isMobile)

@@ -19,9 +19,9 @@
   lgAndUp: boolean
   xlOnly: boolean
 
-  // true if screen width < mobileBreakPoint
+  // true if screen width < mobileBreakpoint
   mobile: boolean
-  mobileBreakPoint: number
+  mobileBreakpoint: number
 
   // Current breakpoint name (e.g. 'md')
   name: string

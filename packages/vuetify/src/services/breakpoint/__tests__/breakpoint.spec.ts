@@ -285,8 +285,8 @@ describe('Breakpoint.ts', () => {
     expect(breakpoint.xs).toBe(true)
   })
 
-  it('should allow breakpoint strings for mobileBreakPoint', async () => {
-    breakpoint.mobileBreakPoint = 'lg'
+  it('should allow breakpoint strings for mobileBreakpoint', async () => {
+    breakpoint.mobileBreakpoint = 'lg'
     await resizeWindow(1920)
 
     expect(breakpoint.mobile).toBe(false)
