@@ -75,7 +75,7 @@ export default baseMixins.extend<options>().extend({
         'v-input--is-focused': this.isFocused,
         // <v-switch loading>.loading === '' so we can't just cast to boolean
         'v-input--is-loading': this.loading !== false && this.loading != null,
-        'v-input--is-readonly': this.readonly,
+        'v-input--is-readonly': this.isReadonly,
         'v-input--dense': this.dense,
         ...this.themeClasses,
       }

@@ -12,12 +12,14 @@ import mixins from '../../util/mixins'
 import { PropType } from 'vue'
 import { InputMessage, InputValidationRules } from 'vuetify/types'
 
-/* @vue/component */
-export default mixins(
+const baseMixins = mixins(
   Colorable,
   RegistrableInject<'form', any>('form'),
-  Themeable
-).extend({
+  Themeable,
+)
+
+/* @vue/component */
+export default baseMixins.extend({
   name: 'validatable',
 
   props: {
@@ -64,7 +66,7 @@ export default mixins(
 
   computed: {
     computedColor (): string | undefined {
-      if (this.disabled) return undefined
+      if (this.isDisabled) return undefined
       if (this.color) return this.color
       // It's assumed that if the input is on a
       // dark background, the user will want to
@@ -96,7 +98,7 @@ export default mixins(
       return this.validationTarget.length > 0
     },
     hasState (): boolean {
-      if (this.disabled) return false
+      if (this.isDisabled) return false
 
       return (
         this.hasSuccess ||
@@ -123,8 +125,19 @@ export default mixins(
       },
     },
     isDisabled (): boolean {
-      if (this.form && this.form.disabled) return true
-      return this.disabled || this.readonly
+      return this.disabled || (
+        !!this.form &&
+        this.form.disabled
+      )
+    },
+    isInteractive (): boolean {
+      return !this.isDisabled && !this.isReadonly
+    },
+    isReadonly (): boolean {
+      return this.readonly || (
+        !!this.form &&
+        this.form.readonly
+      )
     },
     shouldValidate (): boolean {
       if (this.externalError) return true
@@ -138,7 +151,7 @@ export default mixins(
       return this.validationTarget.slice(0, Number(this.errorCount))
     },
     validationState (): string | undefined {
-      if (this.disabled) return undefined
+      if (this.isDisabled) return undefined
       if (this.hasError && this.shouldValidate) return 'error'
       if (this.hasSuccess) return 'success'
       if (this.hasColor) return this.computedColor
@@ -176,7 +189,7 @@ export default mixins(
       // if disabled
       if (
         !val &&
-        !this.disabled
+        !this.isDisabled
       ) {
         this.hasFocused = true
         this.validateOnBlur && this.$nextTick(this.validate)

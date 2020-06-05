@@ -34,6 +34,7 @@ export default mixins(
   props: {
     disabled: Boolean,
     lazyValidation: Boolean,
+    readonly: Boolean,
     value: Boolean,
   },
 

@@ -256,7 +256,7 @@ export default VSelect.extend({
 
       // Do nothing if input or item is disabled
       if (
-        this.isDisabled ||
+        !this.isInteractive ||
         this.getDisabled(curItem)
       ) return
 
@@ -305,7 +305,7 @@ export default VSelect.extend({
         : []
     },
     onClick (e: MouseEvent) {
-      if (this.isDisabled) return
+      if (!this.isInteractive) return
 
       this.selectedIndex > -1
         ? (this.selectedIndex = -1)

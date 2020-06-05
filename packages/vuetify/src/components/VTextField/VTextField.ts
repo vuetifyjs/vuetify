@@ -388,7 +388,7 @@ export default baseMixins.extend<options>().extend({
           disabled: this.isDisabled,
           id: this.computedId,
           placeholder: this.placeholder,
-          readonly: this.readonly,
+          readonly: this.isReadonly,
           type: this.type,
         },
         on: Object.assign(listeners, {

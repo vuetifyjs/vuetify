@@ -251,7 +251,7 @@ export default mixins<options &
           'v-slider--focused': this.isFocused,
           'v-slider--active': this.isActive,
           'v-slider--disabled': this.isDisabled,
-          'v-slider--readonly': this.readonly,
+          'v-slider--readonly': this.isReadonly,
           ...this.themeClasses,
         },
         directives: [{
@@ -380,12 +380,12 @@ export default mixins<options &
         style: this.getThumbContainerStyles(valueWidth),
         attrs: {
           role: 'slider',
-          tabindex: this.isDisabled || this.readonly ? -1 : this.$attrs.tabindex ? this.$attrs.tabindex : 0,
+          tabindex: this.isDisabled ? -1 : this.$attrs.tabindex ? this.$attrs.tabindex : 0,
           'aria-label': this.label,
           'aria-valuemin': this.min,
           'aria-valuemax': this.max,
           'aria-valuenow': this.internalValue,
-          'aria-readonly': String(this.readonly),
+          'aria-readonly': String(this.isReadonly),
           'aria-orientation': this.vertical ? 'vertical' : 'horizontal',
           ...this.$attrs,
         },
@@ -486,7 +486,7 @@ export default mixins<options &
       this.internalValue = value
     },
     onKeyDown (e: KeyboardEvent) {
-      if (this.isDisabled || this.readonly) return
+      if (!this.isInteractive) return
 
       const value = this.parseKeyDown(e, this.internalValue)
 
@@ -542,7 +542,7 @@ export default mixins<options &
       return { value, isInsideTrack }
     },
     parseKeyDown (e: KeyboardEvent, value: number) {
-      if (this.isDisabled) return
+      if (!this.isInteractive) return
 
       const { pageup, pagedown, end, home, left, right, down, up } = keyCodes
 
