@@ -18,11 +18,12 @@
     > table
       > thead
         > tr
-          > &:last-child th
-            border-bottom: thin solid map-get($material, 'dividers')
-
           > th
             color: map-deep-get($material, 'text', 'secondary')
+
+          &:last-child
+            > th
+              border-bottom: thin solid map-get($material, 'dividers')
 
   > .v-data-table__wrapper
     > table
@@ -99,10 +100,11 @@
       > tbody,
       > thead,
       > tfoot
-        > td
-          height: $data-table-dense-row-height
-        > th
-          height: $data-table-dense-header-height
+        > tr
+          > td
+            height: $data-table-dense-row-height
+          > th
+            height: $data-table-dense-header-height
 
 .v-data-table--fixed-height
   .v-data-table__wrapper
@@ -114,11 +116,12 @@
 
     > table
       > thead
-        > th
-          border-bottom: 0px !important
-          position: sticky
-          top: 0
-          z-index: 2
+        > tr
+          > th
+            border-bottom: 0px !important
+            position: sticky
+            top: 0
+            z-index: 2
 
         > tr:nth-child(2)
           > th
