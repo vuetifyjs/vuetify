@@ -3,6 +3,7 @@
     <v-list
       dense
       nav
+      expand
     >
       <template v-for="(item, i) in items">
         <v-list-group
