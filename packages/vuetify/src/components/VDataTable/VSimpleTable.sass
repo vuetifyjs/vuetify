@@ -46,6 +46,8 @@
 
 // Block
 .v-data-table
+  // Do not inherit line-height
+  line-height: 1.5
   max-width: 100%
 
   > .v-data-table__wrapper
@@ -60,6 +62,7 @@
           > td,
           > th
             padding: 0 16px
+            transition: height $secondary-transition
 
           > th
             user-select: none
