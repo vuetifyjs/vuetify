@@ -1,8 +1,9 @@
 <template>
   <v-sheet
-    class="d-inline-block my-3"
-    outlined
+    :style="styles"
+    class="d-inline-block my-2"
     rounded
+    width="100%"
     v-bind="$attrs"
     v-on="$listeners"
   >
@@ -11,27 +12,27 @@
 </template>
 
 <script>
+  // Mixins
+  import Density from '@/mixins/density'
+
+  // Utilities
+  import { convertToUnit } from 'vuetify/lib/util/helpers'
+
   export default {
     name: 'AppAd',
 
-    props: {
-      comfortable: Boolean,
-      compact: Boolean,
-    },
-
-    data: () => ({
-      density: {
-        normal: [],
-      },
-    }),
+    mixins: [Density],
 
     computed: {
-      normal () {
-        return !this.comfortable && !this.compact
+      height () {
+        if (this.compact) return 48
+        if (this.comfortable) return 74
+
+        return 118
       },
       styles () {
         return {
-
+          height: convertToUnit(this.height),
         }
       },
     },

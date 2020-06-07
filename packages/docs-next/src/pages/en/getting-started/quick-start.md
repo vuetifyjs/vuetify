@@ -9,7 +9,7 @@ meta:
 
 Get started with Vuetify, the world’s most popular Vue.js framework for building feature rich, blazing fast application.
 
-<carbon-ad></carbon-ad>
+<entry-ad></entry-ad>
 
 ## Vue CLI Install
 

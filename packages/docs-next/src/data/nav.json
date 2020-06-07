@@ -18,5 +18,9 @@
   {
     "title": "api",
     "icon": "$mdiBeaker"
+  },
+  {
+    "title": "company",
+    "icon": "$mdiVuetify"
   }
 ]

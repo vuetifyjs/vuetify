@@ -1,36 +1,55 @@
 <template>
-  <app-ad width="100%">
-    <v-list
-      v-if="hasAvailableAds"
-      class="py-0"
-      color="transparent"
+  <app-ad
+    :color="bgColor"
+    v-bind="$props"
+  >
+    <v-list-item
+      v-if="current"
+      :color="bgColor"
+      class="pl-2 rounded"
+      v-bind="adAttrs"
     >
-      <v-list-item
-        v-bind="adAttrs"
-        class="text-decoration-none pl-2"
+      <v-list-item-avatar
+        v-if="metadata.src && !compact"
+        size="56"
+        tile
       >
-        <v-list-item-avatar
-          size="56"
-          tile
-        >
-          <v-img
-            :alt="`Link to ${activeTemplate.title}`"
-            :src="activeTemplate.metadata.src"
-            class="rounded-tl rounded-bl"
-          />
-        </v-list-item-avatar>
+        <v-img
+          :alt="`Link to ${current.title}`"
+          :src="metadata.src"
+          class="rounded-tl rounded-bl"
+        />
+      </v-list-item-avatar>
 
-        <v-list-item-content class="align-self-center">
-          <v-list-item-title v-text="activeTemplate.title" />
+      <v-icon
+        v-else-if="icon"
+        :class="[color]"
+        class="mr-3"
+        large
+        v-text="icon"
+      />
 
-          <v-list-item-subtitle v-text="activeTemplate.metadata.description" />
-        </v-list-item-content>
+      <v-list-item-content>
+        <v-list-item-title
+          v-if="!isSponsored"
+          class="font-weight-medium mb-1 subtitle-1"
+          v-text="current.title"
+        />
 
-        <v-list-item-action class="shrink">
-          <v-icon>$mdiOpenInNew</v-icon>
-        </v-list-item-action>
-      </v-list-item>
-    </v-list>
+        <v-list-item-subtitle
+          v-if="metadata.description"
+          :class="[color, isSponsored && 'body-2 font-weight-medium']"
+          v-text="metadata.description"
+        />
+      </v-list-item-content>
+
+      <v-list-item-action
+        v-if="!compact"
+        class="mb-n8 mr-n2"
+      >
+        <span class="overline text--secondary">ads via Vuetify</span>
+      </v-list-item-action>
+    </v-list-item>
   </app-ad>
 </template>
 
@@ -41,29 +60,64 @@
   export default {
     name: 'VuetifyAd',
 
-    computed: {
-      ads: get('ads/available'),
-      hasAvailableAds () {
-        return !!this.ads.length
-      },
-      activeTemplate () {
-        const length = this.ads.length
+    props: {
+      bgColor: String,
+      color: String,
+      comfortable: Boolean,
+      compact: Boolean,
+      discover: Boolean,
+      outlined: Boolean,
+      slug: String,
+    },
 
-        return this.ads[Math.floor(Math.random() * length)]
+    computed: {
+      all: get('ads/all'),
+      ads () {
+        if (!this.discover) return this.all
+
+        return this.all.filter(ad => ad.metadata.type === 'Discovery')
       },
       adAttrs () {
-        if (!this.activeTemplate) return null
+        if (!this.current) return undefined
 
-        const [url, query] = this.activeTemplate.metadata.url.split('?')
+        const [url, query] = this.metadata.url.split('?')
 
-        if (url.charAt(0) === '/') {
-          return { to: `/${this.lang}${url}` }
+        if (!url.startsWith('http')) {
+          return { to: `/${this.lang}${url}/` }
         }
 
         return {
-          target: '_blank',
           href: `${url}?ref=vuetifyjs.com${query ? `&${query}` : ''}`,
+          target: '_blank',
         }
+      },
+      icon () {
+        switch (this.metadata.type) {
+          case 'Video': return '$mdiPlayCircle'
+          default: return '$mdiVuetify'
+        }
+      },
+      isSponsored () {
+        return this.metadata.sponsored
+      },
+      current () {
+        const index = !this.slug
+          ? this.getRandomIndex()
+          : this.getSlugIndex()
+
+        return this.ads[index]
+      },
+      metadata () {
+        return this.current ? this.current.metadata : {}
+      },
+    },
+
+    methods: {
+      getSlugIndex () {
+        return this.ads.findIndex(ad => ad.slug === this.slug)
+      },
+      getRandomIndex () {
+        return Math.floor(Math.random() * this.ads.length)
       },
     },
   }

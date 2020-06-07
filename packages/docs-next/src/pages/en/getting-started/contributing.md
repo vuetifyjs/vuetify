@@ -7,7 +7,7 @@ meta:
 
 # Contributing
 
-<carbon-ad />
+<entry-ad />
 
 <up-next />
 

@@ -7,7 +7,7 @@ keywords: crwdns59268:0crwdne59268:0
 
 crwdns59272:0crwdne59272:0
 
-<carbon-ad></carbon-ad>
+<entry-ad></entry-ad>
 
 ## crwdns59274:0crwdne59274:0
 

@@ -5,7 +5,7 @@ import bucket from '@/plugins/cosmicjs'
 import { make } from 'vuex-pathify'
 
 const state = {
-  available: [],
+  all: [],
 }
 
 const mutations = make.mutations(state)
@@ -14,11 +14,11 @@ const actions = {
   fetch: async ({ commit }) => {
     const { objects } = await bucket.getObjects({
       type: 'ads',
-      props: 'metadata,title',
+      props: 'metadata,slug,title',
       status: 'published',
     })
 
-    commit('available', objects)
+    commit('all', objects)
   },
 }
 

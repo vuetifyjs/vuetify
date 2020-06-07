@@ -8,7 +8,7 @@ meta:
 # Component Name
 Component description
 
-<carbon-ad />
+<entry-ad />
 
 ## Usage
 Usage text
