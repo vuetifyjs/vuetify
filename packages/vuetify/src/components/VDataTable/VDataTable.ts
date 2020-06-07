@@ -22,17 +22,20 @@ import VBtn from '../VBtn'
 import VDataTableHeader from './VDataTableHeader'
 // import VVirtualTable from './VVirtualTable'
 import VIcon from '../VIcon'
-import VProgressLinear from '../VProgressLinear'
 import Row from './Row'
 import RowGroup from './RowGroup'
 import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'
 import VSimpleTable from './VSimpleTable'
 import MobileRow from './MobileRow'
 
+// Mixins
+import Loadable from '../../mixins/loadable'
+
 // Directives
 import ripple from '../../directives/ripple'
 
 // Helpers
+import mixins from '../../util/mixins'
 import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, defaultFilter, camelizeObjectKeys, getPropertyFromItem } from '../../util/helpers'
 import { breaking } from '../../util/console'
 import { mergeClasses } from '../../util/mergeData'
@@ -68,7 +71,10 @@ function searchTableItems (
 }
 
 /* @vue/component */
-export default VDataIterator.extend({
+export default mixins(
+  VDataIterator,
+  Loadable,
+).extend({
   name: 'v-data-table',
 
   // https://github.com/vuejs/vue/issues/6872
@@ -105,6 +111,10 @@ export default VDataIterator.extend({
     itemClass: {
       type: [String, Function] as PropType<RowClassFunction | string>,
       default: () => '',
+    },
+    loaderHeight: {
+      type: [Number, String],
+      default: 4,
     },
   },
 
@@ -233,18 +243,10 @@ export default VDataIterator.extend({
       }))
     },
     genLoading () {
-      const progress = this.$slots['progress'] ? this.$slots.progress : this.$createElement(VProgressLinear, {
-        props: {
-          color: this.loading === true ? 'primary' : this.loading,
-          height: 2,
-          indeterminate: true,
-        },
-      })
-
       const th = this.$createElement('th', {
         staticClass: 'column',
         attrs: this.colspanAttrs,
-      }, [progress])
+      }, [this.genProgress()])
 
       const tr = this.$createElement('tr', {
         staticClass: 'v-data-table__progress',
