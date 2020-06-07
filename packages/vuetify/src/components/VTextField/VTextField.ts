@@ -377,7 +377,7 @@ export default baseMixins.extend<options>().extend({
       return this.$createElement('input', {
         style: {},
         domProps: {
-          value: this.lazyValue,
+          value: (this.type === 'number' && Object.is(this.lazyValue, -0)) ? '-0' : this.lazyValue,
         },
         attrs: {
           ...this.attrs$,
