@@ -936,13 +936,13 @@ describe('VDataTable.ts', () => {
           { text: 'Fat (g)', value: 'fat' },
           { text: 'Carbs (g)', value: 'carbs' },
           { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' }
-        ]
-      }
-    });
+          { text: 'Iron (%)', value: 'iron' },
+        ],
+      },
+    })
 
-    wrapper.setProps({ search: 'EA' });
-    await wrapper.vm.$nextTick();
-    expect(wrapper.vm.internalCurrentItems).toHaveLength(1);
+    wrapper.setProps({ search: 'EA' })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalCurrentItems).toHaveLength(1)
   })
 })
