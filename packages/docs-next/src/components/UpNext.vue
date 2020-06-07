@@ -6,8 +6,11 @@
     <router-link
       v-if="prev"
       :to="prev.to"
+      class="text-decoration-none d-inline-flex align-center body-1"
     >
-      <span class="text--primary">←</span>
+      <v-icon color="primary">
+        $prev
+      </v-icon>
 
       {{ prev.title }}
     </router-link>
@@ -17,10 +20,13 @@
     <router-link
       v-if="next"
       :to="next.to"
+      class="text-decoration-none d-inline-flex align-center body-1"
     >
       {{ next.title }}
 
-      <span class="text--primary">→</span>
+      <v-icon color="primary">
+        $next
+      </v-icon>
     </router-link>
   </div>
 </template>
