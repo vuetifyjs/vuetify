@@ -926,22 +926,22 @@ describe('VDataTable.ts', () => {
     expect(wrapper.vm.internalCurrentItems).toHaveLength(1)
   })
 
-  it("should return results which match both search term and column filters if both specified", async () => {
+  it('should return results which match both search term and column filters if both specified', async () => {
     const wrapper = mountFunction({
       propsData: {
         items: testItems,
         headers: [
-          { text: "Dessert (100g serving)", align: "left", value: "name" },
-          { text: "Calories", value: "calories", filter: value => value < 300 },
-          { text: "Fat (g)", value: "fat" },
-          { text: "Carbs (g)", value: "carbs" },
-          { text: "Protein (g)", value: "protein" },
-          { text: "Iron (%)", value: "iron" }
+          { text: 'Dessert (100g serving)', align: 'left', value: 'name' },
+          { text: 'Calories', value: 'calories', filter: value => value < 300 },
+          { text: 'Fat (g)', value: 'fat' },
+          { text: 'Carbs (g)', value: 'carbs' },
+          { text: 'Protein (g)', value: 'protein' },
+          { text: 'Iron (%)', value: 'iron' }
         ]
       }
     });
 
-    wrapper.setProps({ search: "EA" });
+    wrapper.setProps({ search: 'EA' });
     await wrapper.vm.$nextTick();
     expect(wrapper.vm.internalCurrentItems).toHaveLength(1);
   })
