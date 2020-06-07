@@ -1,16 +1,17 @@
 <template>
-  <app-ad
-    v-if="!error"
-    max-width="360"
-    outlined
-  >
-    <ad-script
-      id="carbonads"
-      script-id="_carbonads_js"
-      src="//cdn.carbonads.com/carbon.js?serve=CKYI5KQY&placement=vuetifyjscom"
-      @script:error="error = true"
-    />
-  </app-ad>
+  <div v-if="!error">
+    <app-ad
+      max-width="360"
+      outlined
+    >
+      <ad-script
+        id="carbonads"
+        script-id="_carbonads_js"
+        src="//cdn.carbonads.com/carbon.js?serve=CKYI5KQY&placement=vuetifyjscom"
+        @script:error="error = true"
+      />
+    </app-ad>
+  </div>
 
   <random-ad v-else />
 </template>
