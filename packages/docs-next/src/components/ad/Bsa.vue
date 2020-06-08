@@ -39,7 +39,7 @@
     .native-box
       align-items: center
       display: flex
-      height: 46px
+      height: 52px
       padding: 0 8px
       text-decoration: none
 
