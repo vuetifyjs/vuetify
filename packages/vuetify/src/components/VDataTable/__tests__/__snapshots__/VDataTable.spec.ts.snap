@@ -11261,7 +11261,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 1`] = `
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <span class="sortable v-chip v-chip--no-color theme--light v-size--default">
+                        <span class="sortable v-chip v-chip--clickable v-chip--no-color theme--light v-size--default">
                           <span class="v-chip__content">
                             Calories
                             <div class="v-chip__close sortable active desc">
@@ -11669,7 +11669,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 2`] = `
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <span class="sortable v-chip v-chip--no-color theme--light v-size--default">
+                        <span class="sortable v-chip v-chip--clickable v-chip--no-color theme--light v-size--default">
                           <span class="v-chip__content">
                             Calories
                             <div class="v-chip__close sortable active desc">

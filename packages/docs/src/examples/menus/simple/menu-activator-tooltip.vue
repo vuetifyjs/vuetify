@@ -1,12 +1,13 @@
 <template>
   <div class="text-center">
     <v-menu>
-      <template v-slot:activator="{ on: menu }">
+      <template v-slot:activator="{ on: menu, attrs }">
         <v-tooltip bottom>
           <template v-slot:activator="{ on: tooltip }">
             <v-btn
               color="primary"
               dark
+              v-bind="attrs"
               v-on="{ ...tooltip, ...menu }"
             >Dropdown w/ Tooltip</v-btn>
           </template>

@@ -13,6 +13,7 @@ import { createItemTypeNativeListeners } from '../util'
 import isDateAllowed from '../util/isDateAllowed'
 import { mergeListeners } from '../../../util/mergeData'
 import mixins from '../../../util/mixins'
+import { throttle } from '../../../util/helpers'
 
 // Types
 import {
@@ -65,6 +66,7 @@ export default mixins(
 
   data: () => ({
     isReversing: false,
+    wheelThrottle: null as any,
   }),
 
   computed: {
@@ -83,6 +85,10 @@ export default mixins(
     tableDate (newVal: string, oldVal: string) {
       this.isReversing = newVal < oldVal
     },
+  },
+
+  mounted () {
+    this.wheelThrottle = throttle(this.wheel, 250)
   },
 
   methods: {
@@ -171,7 +177,6 @@ export default mixins(
       }, eventColors.map(color => this.$createElement('div', this.setBackgroundColor(color)))) : null
     },
     wheel (e: WheelEvent, calculateTableDate: CalculateTableDateFunction) {
-      e.preventDefault()
       this.$emit('update:table-date', calculateTableDate(e.deltaY))
     },
     touch (value: number, calculateTableDate: CalculateTableDateFunction) {
@@ -197,7 +202,10 @@ export default mixins(
           ...this.themeClasses,
         },
         on: (!this.disabled && this.scrollable) ? {
-          wheel: (e: WheelEvent) => this.wheel(e, calculateTableDate),
+          wheel: (e: WheelEvent) => {
+            e.preventDefault()
+            this.wheelThrottle(e, calculateTableDate)
+          },
         } : undefined,
         directives: [touchDirective],
       }, [transition])

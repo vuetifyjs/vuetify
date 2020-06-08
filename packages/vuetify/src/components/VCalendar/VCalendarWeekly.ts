@@ -203,7 +203,7 @@ export default CalendarBase.extend({
     return h('div', {
       staticClass: this.staticClass,
       class: this.classes,
-      nativeOn: {
+      on: {
         dragstart: (e: MouseEvent) => {
           e.preventDefault()
         },

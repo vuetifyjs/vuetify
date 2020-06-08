@@ -31,9 +31,10 @@
         bottom
         offset-y
       >
-        <template v-slot:activator="{ on }">
+        <template v-slot:activator="{ on, attrs }">
           <v-btn
             class="ma-2"
+            v-bind="attrs"
             v-on="on"
           >A Menu</v-btn>
         </template>
@@ -83,10 +84,11 @@
               right
               offset-y
             >
-              <template v-slot:activator="{ on }">
+              <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   dark
                   icon
+                  v-bind="attrs"
                   v-on="on"
                 >
                   <v-icon>mdi-dots-vertical</v-icon>
@@ -113,9 +115,10 @@
               Open Dialog 2
             </v-btn>
             <v-tooltip right>
-              <template v-slot:activator="{ on }">
+              <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   class="ma-2"
+                  v-bind="attrs"
                   v-on="on"
                 >Tool Tip Activator</v-btn>
               </template>
@@ -224,9 +227,10 @@
               bottom
               left
             >
-              <template v-slot:activator="{ on }">
+              <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   icon
+                  v-bind="attrs"
                   v-on="on"
                 >
                   <v-icon>mdi-dots-vertical</v-icon>

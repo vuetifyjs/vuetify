@@ -73,7 +73,7 @@
         min-width="290px"
         offset-y
       >
-        <template v-slot:activator="{ on }">
+        <template v-slot:activator="{ on, attrs }">
           <v-text-field
             v-model="start"
             class="mt-3"
@@ -83,6 +83,7 @@
             readonly
             outlined
             hide-details
+            v-bind="attrs"
             v-on="on"
           ></v-text-field>
         </template>
@@ -119,7 +120,7 @@
         min-width="290px"
         offset-y
       >
-        <template v-slot:activator="{ on }">
+        <template v-slot:activator="{ on, attrs }">
           <v-text-field
             v-model="end"
             class="mt-3"
@@ -129,6 +130,7 @@
             readonly
             outlined
             hide-details
+            v-bind="attrs"
             v-on="on"
           ></v-text-field>
         </template>
@@ -164,7 +166,7 @@
         min-width="290px"
         offset-y
       >
-        <template v-slot:activator="{ on }">
+        <template v-slot:activator="{ on, attrs }">
           <v-text-field
             v-model="now"
             class="mt-3"
@@ -174,6 +176,7 @@
             readonly
             outlined
             hide-details
+            v-bind="attrs"
             v-on="on"
           ></v-text-field>
         </template>

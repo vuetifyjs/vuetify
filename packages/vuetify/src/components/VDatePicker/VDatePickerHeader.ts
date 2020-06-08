@@ -87,7 +87,7 @@ export default mixins(
           icon: true,
           light: this.light,
         },
-        nativeOn: {
+        on: {
           click: (e: Event) => {
             e.stopPropagation()
             this.$emit('input', this.calculateChange(change))

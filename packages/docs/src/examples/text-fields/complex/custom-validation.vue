@@ -68,10 +68,11 @@
               v-if="formHasErrors"
               left
             >
-              <template v-slot:activator="{ on }">
+              <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   icon
                   class="my-0"
+                  v-bind="attrs"
                   @click="resetForm"
                   v-on="on"
                 >

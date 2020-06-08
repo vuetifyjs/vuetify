@@ -94,12 +94,13 @@
         <v-row class="mt-2" align="center" justify="center">
           <span class="grey--text">Items per page</span>
           <v-menu offset-y>
-            <template v-slot:activator="{ on }">
+            <template v-slot:activator="{ on, attrs }">
               <v-btn
                 dark
                 text
                 color="primary"
                 class="ml-2"
+                v-bind="attrs"
                 v-on="on"
               >
                 {{ itemsPerPage }}
