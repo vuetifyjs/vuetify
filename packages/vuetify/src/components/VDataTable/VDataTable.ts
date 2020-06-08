@@ -51,17 +51,16 @@ function searchTableItems (
 ) {
   search = typeof search === 'string' ? search.trim() : null
 
-  // If the `search` property is empty and there are no custom filters in use, there is nothing to do.
-  if (!(search && headersWithoutCustomFilters.length) && !headersWithCustomFilters.length) return items
-
   return items.filter(item => {
     // Headers with custom filters are evaluated whether or not a search term has been provided.
-    if (headersWithCustomFilters.length && headersWithCustomFilters.every(filterFn(item, search, defaultFilter))) {
-      return true
-    }
+    // We need to match every filter to be included in the results.
+    const matchesColumnFilters = headersWithCustomFilters.every(filterFn(item, search, defaultFilter))
 
-    // Otherwise, the `search` property is used to filter columns without a custom filter.
-    return (search && headersWithoutCustomFilters.some(filterFn(item, search, customFilter)))
+    // Headers without custom filters are only filtered by the `search` property if it is defined.
+    // We only need a single column to match the search term to be included in the results.
+    const matchesSearchTerm = !search || headersWithoutCustomFilters.some(filterFn(item, search, customFilter))
+
+    return matchesColumnFilters && matchesSearchTerm
   })
 }
 

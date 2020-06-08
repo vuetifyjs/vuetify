@@ -857,22 +857,13 @@ describe('VDataTable.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  // https://github.com/vuetifyjs/vuetify/issues/11179
-  it('should return rows from columns that exclusively match custom filters', async () => {
+  it('should return rows matching custom filters', async () => {
     const wrapper = mountFunction({
       propsData: {
         items: testItems,
         headers: [
-          {
-            text: 'Dessert (100g serving)',
-            align: 'left',
-            filter: (value, search) => {
-              if (!search) return true
-              return value === search
-            },
-            value: 'name',
-          },
-          { text: 'Calories', value: 'calories' },
+          { text: 'Dessert (100g serving)', align: 'left', value: 'name' },
+          { text: 'Calories', value: 'calories', filter: value => value === 159 },
           { text: 'Fat (g)', value: 'fat' },
           { text: 'Carbs (g)', value: 'carbs' },
           { text: 'Protein (g)', value: 'protein' },
@@ -881,11 +872,6 @@ describe('VDataTable.ts', () => {
       },
     })
 
-    wrapper.setProps({ search: 'eclair' })
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.internalCurrentItems).toHaveLength(0)
-
-    wrapper.setProps({ search: 'Eclair' })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalCurrentItems).toHaveLength(1)
   })
@@ -914,5 +900,49 @@ describe('VDataTable.ts', () => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should return rows matching search term if specified', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: testItems,
+        headers: [
+          { text: 'Dessert (100g serving)', align: 'left', value: 'name' },
+          { text: 'Calories', value: 'calories' },
+          { text: 'Fat (g)', value: 'fat' },
+          { text: 'Carbs (g)', value: 'carbs' },
+          { text: 'Protein (g)', value: 'protein' },
+          { text: 'Iron (%)', value: 'iron' },
+        ],
+      },
+    })
+
+    wrapper.setProps({ search: 'unknown-term' })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalCurrentItems).toHaveLength(0)
+
+    wrapper.setProps({ search: 'Eclair' })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalCurrentItems).toHaveLength(1)
+  })
+
+  it('should return results which match both search term and column filters if both specified', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: testItems,
+        headers: [
+          { text: 'Dessert (100g serving)', align: 'left', value: 'name' },
+          { text: 'Calories', value: 'calories', filter: value => value < 300 },
+          { text: 'Fat (g)', value: 'fat' },
+          { text: 'Carbs (g)', value: 'carbs' },
+          { text: 'Protein (g)', value: 'protein' },
+          { text: 'Iron (%)', value: 'iron' },
+        ],
+      },
+    })
+
+    wrapper.setProps({ search: 'EA' })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalCurrentItems).toHaveLength(1)
   })
 })
