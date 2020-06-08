@@ -75,9 +75,8 @@ By default, `v-alert` components are assigned the [WAI-ARIA](https://www.w3.org/
 ## API
   - [v-alert](../../api/v-alert)
 
-## Up Next
 <up-next />
 
-<vuetify-ad />
+---
 
 <contribute />

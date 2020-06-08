@@ -87,7 +87,8 @@ function genTable (tableData) {
 function genFooter () {
   const footer = [
     '<up-next />',
-    '<vuetify-ad />',
+    '---',
+    '<exit-ad />',
     '<contribute />',
   ]
 

@@ -10,6 +10,7 @@ import Vuetify from 'vuetify/lib/framework'
 import {
   mdiAccount,
   mdiBeaker,
+  mdiBookOpenPageVariant,
   mdiCodepen,
   mdiCodeTags,
   mdiContentCopy,
@@ -29,6 +30,7 @@ const icons = {
   values: {
     mdiAccount,
     mdiBeaker,
+    mdiBookOpenPageVariant,
     mdiCodepen,
     mdiCodeTags,
     mdiContentCopy,

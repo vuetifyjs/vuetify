@@ -11,6 +11,6 @@ meta:
 
 <up-next />
 
-<vuetify-ad />
+<exit-ad />
 
 <contribute />

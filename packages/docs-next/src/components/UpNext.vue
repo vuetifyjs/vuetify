@@ -1,7 +1,7 @@
 <template>
   <div
     id="up-next"
-    class="d-flex mt-8"
+    class="d-flex mt-6"
   >
     <router-link
       v-if="prev"

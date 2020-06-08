@@ -1,7 +1,7 @@
 <template>
   <v-sheet
     class="app-code overflow-hidden"
-    color="grey lighten-4"
+    color="grey lighten-5"
     rounded
   >
     <slot />

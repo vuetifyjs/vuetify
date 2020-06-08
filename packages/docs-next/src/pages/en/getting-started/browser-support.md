@@ -3,12 +3,15 @@ meta:
   title: Supported browsers
   description: Vuetify is a progressive framework that supports all evergreen browsers and IE11 / Safari with polyfill.
   keywords: vuetify browser support
+related:
+  - /getting-started/quick-start/
+  - /introduction/frequently-asked-questions/
+  - /customization/sass-variables/
 ---
 
 # Browser support
 
 Vuetify is a progressive framework that attempts to push web development to the next level. In order to best accomplish this task, some sacrifices had to be made in terms of support for older versions of Internet Explorer. This is not an exhaustive list of compatible browsers, but the main targeted ones.
-
 <entry-ad />
 
 ## IE11 & Safari 9 support
@@ -76,4 +79,9 @@ Due to Internet Explorer's limited support for `<template>` tags, you must send 
 
 ---
 
-<vuetify-ad />
+## Related pages
+Continue your learning with this related content:
+
+<related-pages />
+
+<contribute />

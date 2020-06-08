@@ -1,5 +1,7 @@
 <template>
-  <carbon-ad />
+  <div class="mb-8">
+    <carbon-ad />
+  </div>
 </template>
 
 <script>

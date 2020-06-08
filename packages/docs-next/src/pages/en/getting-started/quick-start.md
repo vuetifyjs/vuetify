@@ -3,13 +3,17 @@ meta:
   title: Get started with Vuetify
   description: Get started with Vue and Vuetify in no time. Support for Vue CLI, Webpack, Nuxt and more.
   keywords: quick start, vuetify templates, installing vuetify, install vuetify
+related:
+  - /components/alerts/
+  - /api/v-alert/
+  - /company/advertise-with-us/
 ---
 
 # Quick start
 
 Get started with Vuetify, the world’s most popular Vue.js framework for building feature rich, blazing fast application.
 
-<entry-ad></entry-ad>
+<entry-ad />
 
 ## Vue CLI Install
 
@@ -258,15 +262,13 @@ $ vue add @nklayman/capacitor
 $ yarn capacitor:serve
 ```
 
-[Looking for Web Developer jobs? Try Jooble](https://jooble.org/jobs-web-developer)
-
-## Related Topics
-<related-topics />
-
 <up-next />
 
 ---
 
-<exit-ad />
+## Related pages
+Continue your learning with this related content:
+
+<related-pages />
 
 <contribute />
