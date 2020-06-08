@@ -16,7 +16,7 @@
         offset-y
         min-width="290px"
       >
-        <template v-slot:activator="{ on }">
+        <template v-slot:activator="{ on, attrs }">
           <v-combobox
             v-model="dates"
             multiple
@@ -25,6 +25,7 @@
             label="Multiple picker in menu"
             prepend-icon="event"
             readonly
+            v-bind="attrs"
             v-on="on"
           ></v-combobox>
         </template>

@@ -5,10 +5,11 @@
       justify="center"
     >
       <v-bottom-sheet v-model="sheet" v-bind="attrs">
-        <template v-slot:activator="{ on }">
+        <template v-slot:activator="{ on, attrs: activatorAttrs }">
           <v-btn
             color="purple"
             dark
+            v-bind="activatorAttrs"
             v-on="on"
           >
             Open Playground

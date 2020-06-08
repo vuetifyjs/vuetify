@@ -2,10 +2,11 @@
   <div class="text-center">
     <v-switch v-model="closeOnClick" label="Close on click"></v-switch>
     <v-menu top :close-on-click="closeOnClick">
-      <template v-slot:activator="{ on }">
+      <template v-slot:activator="{ on, attrs }">
         <v-btn
           color="primary"
           dark
+          v-bind="attrs"
           v-on="on"
         >
           Dropdown

@@ -2,10 +2,11 @@
   <div class="text-center">
     <v-switch v-model="offset" label="Y offset"></v-switch>
     <v-menu top :offset-y="offset">
-      <template v-slot:activator="{ on }">
+      <template v-slot:activator="{ on, attrs }">
         <v-btn
           color="primary"
           dark
+          v-bind="attrs"
           v-on="on"
         >
           Dropdown

@@ -3,8 +3,13 @@
     justify="center"
   >
     <v-menu transition="slide-x-transition">
-      <template v-slot:activator="{ on }">
-        <v-btn color="primary" class="ma-2" v-on="on">
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          color="primary"
+          class="ma-2"
+          v-bind="attrs"
+          v-on="on"
+        >
           Slide X Transition
         </v-btn>
       </template>
@@ -18,8 +23,13 @@
     <div class="mx-4 hidden-sm-and-down"></div>
 
     <v-menu transition="slide-x-reverse-transition">
-      <template v-slot:activator="{ on }">
-        <v-btn color="secondary" class="ma-2" v-on="on">
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          color="secondary"
+          class="ma-2"
+          v-bind="attrs"
+          v-on="on"
+        >
           Slide X Reverse Transition
         </v-btn>
       </template>

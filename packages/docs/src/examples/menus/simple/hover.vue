@@ -1,10 +1,11 @@
 <template>
   <div class="text-center">
     <v-menu open-on-hover top offset-y>
-      <template v-slot:activator="{ on }">
+      <template v-slot:activator="{ on, attrs }">
         <v-btn
           color="primary"
           dark
+          v-bind="attrs"
           v-on="on"
         >
           Dropdown
