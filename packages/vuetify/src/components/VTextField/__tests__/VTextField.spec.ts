@@ -858,4 +858,13 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
 
     expect(wrapper.vm.computedColor).toBe('primary')
   })
+
+  it('should keep -0 in input when type is number', async () => {
+    const wrapper = mountFunction({
+      propsData: { type: 'number', value: -0 },
+    })
+
+    const input = wrapper.find('input')
+    expect(input.element.value).toBe('-0')
+  })
 })
