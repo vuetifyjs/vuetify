@@ -1,6 +1,11 @@
 <template>
   <v-container tag="section">
-    <component :is="component" />
+    <v-responsive
+      class="mx-auto"
+      max-width="768"
+    >
+      <component :is="component" />
+    </v-responsive>
   </v-container>
 </template>
 
