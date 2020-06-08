@@ -19,6 +19,12 @@ function addImageRules (md) {
   }
 }
 
+function addHrRules (md) {
+  md.renderer.rules.hr = function (tokens, idx, options, env, self) {
+    return '<app-divider />'
+  }
+}
+
 function addHeadingRules (md) {
   const map = {
     h1: 'text-h3',
@@ -53,6 +59,7 @@ function addTableRules (md) {
 module.exports = {
   addCodeRules,
   addHeadingRules,
+  addHrRules,
   addImageRules,
   addTableRules,
 }

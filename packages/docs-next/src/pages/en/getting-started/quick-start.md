@@ -265,6 +265,8 @@ $ yarn capacitor:serve
 
 <up-next />
 
-<vuetify-ad />
+---
+
+<exit-ad />
 
 <contribute />
