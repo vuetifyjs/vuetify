@@ -52,7 +52,7 @@
       temporary
     ></v-navigation-drawer>
 
-    <v-content>
+    <v-main>
       <v-container
         class="fill-height"
         fluid
@@ -79,7 +79,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
 
     <v-navigation-drawer
       v-model="right"

@@ -22,7 +22,7 @@
       <v-toolbar-title>Vuetify</v-toolbar-title>
     </v-app-bar>
 
-    <v-content>
+    <v-main>
       <v-container fluid>
         <v-row
           align="center"
@@ -101,7 +101,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
 
     <v-footer
       :inset="footer.inset"

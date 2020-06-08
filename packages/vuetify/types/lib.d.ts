@@ -99,6 +99,7 @@ declare module 'vuetify/lib' {
   const VListItemAvatar: VueConstructor
   const VListItemIcon: VueConstructor
   const VListItemGroup: VueConstructor
+  const VMain: VueConstructor
   const VMenu: VueConstructor
   const VMessages: VueConstructor
   const VNavigationDrawer: VueConstructor
@@ -268,6 +269,7 @@ declare module 'vuetify/lib' {
     VListItemAvatar,
     VListItemIcon,
     VListItemGroup,
+    VMain,
     VMenu,
     VMessages,
     VNavigationDrawer,

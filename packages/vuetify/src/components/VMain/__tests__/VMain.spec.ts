@@ -1,5 +1,5 @@
 // Components
-import VContent from '../VContent'
+import VMain from '../VMain'
 
 // Utilities
 import {
@@ -8,13 +8,13 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VContent.ts', () => {
-  type Instance = InstanceType<typeof VContent>
+describe('VMain.ts', () => {
+  type Instance = InstanceType<typeof VMain>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 
   beforeEach(() => {
     mountFunction = (options = {}) => {
-      return mount(VContent, {
+      return mount(VMain, {
         ...options,
         mocks: {
           $vuetify: {

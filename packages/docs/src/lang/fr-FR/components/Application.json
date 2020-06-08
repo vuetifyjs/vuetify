@@ -1,6 +1,6 @@
 {
   "markupHeader": "## Balisage par défaut de l'application",
-  "markupText2": "En utilisant [vue-router](https://router.vuejs.org/) il est recommandé de placer vos vues dans `v-content`.",
+  "markupText2": "En utilisant [vue-router](https://router.vuejs.org/) il est recommandé de placer vos vues dans `v-main`.",
   "componentHeader": "## Composants de l'application",
   "componentText1": "Voici une liste de tous les composants qui supportent le prop **app** et peuvent être utilisés comme éléments de mise en page dans votre application. Ils peuvent être mélangés et correspondants et seulement **un** de chaque composant particulier devrait exister à tout moment. Vous pouvez cependant les échanger et la mise en page sera adaptée. Pour certains exemples montrant comment vous pouvez construire diverses mises en page, cochez la page [Pré-mises en page](/get-started/pre-made-layouts).",
   "componentText2": [
@@ -18,13 +18,13 @@
     "**v-bottom-navigation:** Est toujours placé en bas d'une application avec une priorité supérieure à `v-footer`."
   ],
   "componentText5": "En résumé, cela signifie que `v-system-bar` est toujours au-dessus de `v-app-bar`, `v-navigation-drawer` peut occuper le côté gauche ou à droite et `v-footer` se trouve toujours en haut de `v-bottom-navigation`.",
-  "appText1": "Le **service d'application** est utilisé pour configurer votre disposition Vuetify. Il communique avec le composant `v-content` afin qu'il puisse correctement dimensionner le contenu de l'application. Il possède un certain nombre de propriétés qui peuvent être accessibles :",
+  "appText1": "Le **service d'application** est utilisé pour configurer votre disposition Vuetify. Il communique avec le composant `v-main` afin qu'il puisse correctement dimensionner le contenu de l'application. Il possède un certain nombre de propriétés qui peuvent être accessibles :",
   "appText2": "Ces valeurs sont automatiquement mises à jour lorsque vous ajoutez et supprimez des composants avec le prop **app** . Elles sont **PAS** modifiables et existent dans un état _READONLY_. Vous pouvez accéder à ces valeurs en référençant la propriété de l'application sur l'objet **$vuetify**.",
   "accessibility": {
-    "desc": "Par défaut, `v-content` est assignée au [TR](https://www.w3.org/TR/html51/) tag qui dénote que c'est la démontre zone de contenu principale du `body` d'un document ou d'une application."
+    "desc": "Par défaut, `v-main` est assignée au [TR](https://www.w3.org/TR/html51/) tag qui dénote que c'est la démontre zone de contenu principale du `body` d'un document ou d'une application."
   },
   "props": {
-    "v-content": {
+    "v-main": {
       "tag": "Components.Sheets.props.tag"
     }
   }
