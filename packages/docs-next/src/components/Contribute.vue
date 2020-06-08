@@ -1,44 +1,42 @@
 <template>
-  <div>
-    Caught a mistake or want to <strong v-html="contribute" /> to the documentation?
-    <template v-if="locale === 'en'">
-      Edit This Page on <strong v-html="gitHub" />!
-    </template>
+  <div class="mt-4">
+    Caught a mistake or want to
+
+    <router-link
+      :to="`/${locale}/getting-started/contributing/`"
+      v-text="'contribute'"
+    />
+
+    to the documentation?
+
+    Edit This Page on
+
+    <a
+      :href="gitHref"
+      rel="noopener noreferrer"
+      target="_blank"
+      v-text="'GitHub!'"
+    />
   </div>
 </template>
 
 <script>
   // Utilities
   import { get } from 'vuex-pathify'
-  import {
-    getBranch,
-    parseLink,
-  } from '@/util/helpers'
 
   export default {
     name: 'Contribute',
 
-    data: () => ({
-      branch: 'master',
-    }),
-
     computed: {
+      branch: get('app/branch'),
       ...get('route', [
         'params@category',
         'params@locale',
         'params@page',
       ]),
-      contribute () {
-        return parseLink('contribute', `../../../${this.locale}/getting-started/contributing`)
+      gitHref () {
+        return `https://github.com/vuetifyjs/docs-next/tree/${this.branch}/src/pages/en/${this.category}/${this.page}.md`
       },
-      gitHub () {
-        const link = `https://github.com/vuetifyjs/docs-next/tree/${this.branch}/src/pages/en/${this.category}/${this.page}.md`
-        return parseLink('GitHub', link)
-      },
-    },
-
-    mounted () {
-      this.branch = getBranch()
     },
   }
 </script>

@@ -7,6 +7,7 @@
       v-if="current"
       :color="bgColor"
       class="pl-2 rounded"
+      style="min-height: inherit;"
       v-bind="adAttrs"
     >
       <v-list-item-avatar
@@ -36,16 +37,20 @@
           v-text="current.title"
         />
 
-        <v-list-item-subtitle
+        <div
           v-if="metadata.description"
-          :class="[color, isSponsored && 'body-2 font-weight-medium']"
+          :class="{
+            [color || 'text--secondary']: true,
+            'body-1 font-weight-medium': isSponsored,
+            'caption': !isSponsored
+          }"
           v-text="metadata.description"
         />
       </v-list-item-content>
 
       <v-list-item-action
         v-if="!compact"
-        class="mb-n8 mr-n2"
+        class="mb-n9 mr-n2"
       >
         <span class="overline text--secondary">ads via Vuetify</span>
       </v-list-item-action>
@@ -72,6 +77,7 @@
 
     computed: {
       all: get('ads/all'),
+      locale: get('route/params@locale'),
       ads () {
         if (!this.discover) return this.all
 
@@ -83,7 +89,7 @@
         const [url, query] = this.metadata.url.split('?')
 
         if (!url.startsWith('http')) {
-          return { to: `/${this.lang}${url}/` }
+          return { to: `/${this.locale}${url}/` }
         }
 
         return {

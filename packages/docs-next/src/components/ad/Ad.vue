@@ -24,15 +24,15 @@
     mixins: [Density],
 
     computed: {
-      height () {
-        if (this.compact) return 48
+      minHeight () {
+        if (this.compact) return 52
         if (this.comfortable) return 74
 
         return 118
       },
       styles () {
         return {
-          height: convertToUnit(this.height),
+          minHeight: convertToUnit(this.minHeight),
         }
       },
     },

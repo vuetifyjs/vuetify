@@ -1,18 +1,15 @@
 <template>
   <div
     id="up-next"
-    class="d-flex"
+    class="d-flex my-8"
   >
     <router-link
       v-if="prev"
       :to="prev.to"
-      class="text-decoration-none d-inline-flex align-center body-1"
+      class="text-decoration-none body-1"
     >
-      <v-icon color="primary">
-        $prev
-      </v-icon>
-
-      {{ prev.title }}
+      <span class="text-h6 text--primary">←&nbsp;</span>
+      <span v-text="prev.title" />
     </router-link>
 
     <v-spacer />
@@ -20,13 +17,10 @@
     <router-link
       v-if="next"
       :to="next.to"
-      class="text-decoration-none d-inline-flex align-center body-1"
+      class="text-decoration-none body-1"
     >
-      {{ next.title }}
-
-      <v-icon color="primary">
-        $next
-      </v-icon>
+      <span v-text="next.title" />
+      <span class="text-h6 text--primary">&nbsp;→</span>
     </router-link>
   </div>
 </template>

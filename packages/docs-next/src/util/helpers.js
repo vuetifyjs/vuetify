@@ -16,10 +16,6 @@ export function getBranch () {
   return ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
 }
 
-export function parseLink (text, link) {
-  return `<a href="${link}">${text}</a>`
-}
-
 export const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout))
 }

@@ -5,13 +5,14 @@ import { make } from 'vuex-pathify'
 import { i18n } from '@/plugins/i18n'
 
 // Utilities
+import { getBranch } from '../../util/helpers'
 import { kebabCase } from 'lodash'
 import { ROOT_DISPATCH } from '@/store'
 
 // Data
 import nav from '@/data/nav'
 
-const state = {}
+const state = { branch: getBranch() }
 
 const mutations = make.mutations(state)
 
