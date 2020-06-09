@@ -4,6 +4,9 @@
     "icon": "$mdiSpeedometer",
     "items": [
       {
+        "title": "beginners-guide"
+      },
+      {
         "title": "quick-start"
       },
       {
