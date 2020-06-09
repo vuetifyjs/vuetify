@@ -35,6 +35,4 @@ Exit ads are placed at the end of pages.
 
 <up-next />
 
----
-
 <contribute />

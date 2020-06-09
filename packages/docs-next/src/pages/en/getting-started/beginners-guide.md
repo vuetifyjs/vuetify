@@ -20,3 +20,5 @@ We aim to accomplish this by having a broad variety of contributors creating con
  All content is reviewed by the Vuetify Core Team as well as Webdev beginners. We encourage feedback if further clarification, or a deeper dive into any and all concepts presented within this guide.
 
  If you would like to contribute to the Beginner's Guide, come chat with us in the [Discord Community](https://discord.com/invite/s93b7Fv).
+
+ <doc-footer />

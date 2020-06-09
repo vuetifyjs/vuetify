@@ -86,10 +86,7 @@ function genTable (tableData) {
 
 function genFooter () {
   const footer = [
-    '<up-next />',
-    '---',
-    '<exit-ad />',
-    '<contribute />',
+    '<doc-footer />',
   ]
 
   return `${footer.join('\n\n')}\n\n`

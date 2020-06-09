@@ -75,13 +75,4 @@ Due to Internet Explorer's limited support for `<template>` tags, you must send 
 </template>
 ```
 
-<up-next />
-
----
-
-## Related pages
-Continue your learning with this related content:
-
-<related-pages />
-
-<contribute />
+<doc-footer />

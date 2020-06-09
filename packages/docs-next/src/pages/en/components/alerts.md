@@ -75,8 +75,4 @@ By default, `v-alert` components are assigned the [WAI-ARIA](https://www.w3.org/
 ## API
   - [v-alert](../../api/v-alert)
 
-<up-next />
-
----
-
-<contribute />
+<doc-footer />

@@ -262,13 +262,4 @@ $ vue add @nklayman/capacitor
 $ yarn capacitor:serve
 ```
 
-<up-next />
-
----
-
-## Related pages
-Continue your learning with this related content:
-
-<related-pages />
-
-<contribute />
+<doc-footer />

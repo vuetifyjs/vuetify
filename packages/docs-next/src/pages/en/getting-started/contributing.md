@@ -7,10 +7,4 @@ meta:
 
 # Contributing
 
-<entry-ad />
-
-<up-next />
-
-<exit-ad />
-
-<contribute />
+<doc-footer />

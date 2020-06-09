@@ -34,9 +34,9 @@
 
     computed: {
       ...get('route', [
-        'params@category',
         'params@locale',
         'params@page',
+        'path',
       ]),
       nav: get('app/nav'),
       leafs () {
@@ -58,9 +58,7 @@
       currentIndex () {
         if (!this.leafs) return -1
 
-        const to = `/${this.locale}/${this.category}/${this.page}/`
-
-        return this.leafs.findIndex(item => item.to === to)
+        return this.leafs.findIndex(item => item.to === this.path)
       },
       prev () {
         return this.leafs[this.currentIndex - 1]
