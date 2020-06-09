@@ -59,10 +59,10 @@
     methods: {
       async load () { return {} },
       async update () {
-        const { attributes, vue = {} } = await this.load(this.$route)
+        const fm = await this.load(this.$route)
 
-        this.frontmatter = attributes
-        this.component = vue.component
+        this.component = fm.default.vue.component
+        this.frontmatter = fm.default.attributes
       },
     },
   }

@@ -4,15 +4,16 @@ import { registerPlugins } from './plugins'
 import { createVuetify } from './plugins/vuetify'
 import { createStore } from '@/store/index'
 import { createRouter } from '@/router/index'
-import { i18n } from '@/plugins/i18n'
+import { createI18n } from '@/i18n'
 import './registerServiceWorker'
 import { sync } from 'vuex-router-sync'
 
 Vue.config.productionTip = false
 
-const router = createRouter()
 const vuetify = createVuetify()
+const i18n = createI18n()
 const store = createStore()
+const router = createRouter(store, i18n)
 
 sync(store, router)
 

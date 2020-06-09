@@ -5,7 +5,7 @@
       nav
       expand
     >
-      <template v-for="(item, i) in items">
+      <template v-for="(item, i) in nav">
         <v-list-group
           v-if="item.items"
           :key="item.title"
@@ -54,14 +54,11 @@
 </template>
 
 <script>
-  // Utilities
-  import { get } from 'vuex-pathify'
+  import { sync } from 'vuex-pathify'
 
   export default {
     name: 'DefaultDrawer',
 
-    computed: {
-      items: get('app/nav'),
-    },
+    computed: { nav: sync('app/nav') },
   }
 </script>

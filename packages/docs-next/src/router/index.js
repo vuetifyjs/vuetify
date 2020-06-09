@@ -2,11 +2,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import VueGtag from 'vue-gtag'
-import { loadLocale } from '../plugins/i18n'
 
 Vue.use(Router)
 
-export function createRouter () {
+export function createRouter (store, i18n) {
+  const loadedLocales = ['en']
   const router = new Router({
     mode: 'history',
     base: process.env.BASE_URL,
@@ -46,12 +46,28 @@ export function createRouter () {
             ],
           },
         ],
-        beforeEnter: (to, _, next) => {
-          const locale = to.params.locale
-          loadLocale(locale).then(next)
-        },
       },
     ],
+  })
+
+  function loadLocale (locale) {
+    if (
+      i18n.locale === locale ||
+      loadedLocales.includes(locale)
+    ) return Promise.resolve()
+
+    return import(
+      /* webpackChunkName: "locale-[request]" */
+      `@/i18n/messages/${locale}.json`
+    ).then(messages => {
+      i18n.setLocaleMessage(locale, messages.default)
+      loadedLocales.push(locale)
+      i18n.locale = locale
+    })
+  }
+
+  router.beforeEach((to, _, next) => {
+    loadLocale(to.params.locale).then(() => next())
   })
 
   Vue.use(VueGtag, {

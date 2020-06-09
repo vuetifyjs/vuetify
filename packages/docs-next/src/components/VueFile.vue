@@ -2,6 +2,7 @@
   <component
     :is="component"
     v-if="component"
+    v-intersect.once="onIntersect"
     v-bind="$attrs"
     v-on="$listeners"
   />
@@ -31,7 +32,6 @@
 
     async mounted () {
       await this.importComponent()
-      await this.importTemplate()
       this.$emit('loaded', {
         component: this.component,
         pen: this.pen,
@@ -54,6 +54,11 @@
           `!raw-loader!../examples/${this.file}.vue`
         )
           .then(comp => this.boot(comp.default))
+      },
+      onIntersect (_, __, isIntersecting) {
+        if (!isIntersecting) return
+
+        this.importTemplate()
       },
     },
   }
