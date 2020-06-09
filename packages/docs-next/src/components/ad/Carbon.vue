@@ -1,5 +1,9 @@
 <template>
-  <div v-if="!error">
+  <!-- Without flex, causes jump during init -->
+  <div
+    v-if="!error"
+    class="d-flex"
+  >
     <app-ad
       max-width="360"
       outlined
