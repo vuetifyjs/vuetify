@@ -10,6 +10,7 @@ import { ROOT_DISPATCH } from '@/store'
 const state = {
   branch: getBranch(),
   nav: [],
+  version: null,
 }
 
 const mutations = make.mutations(state)
