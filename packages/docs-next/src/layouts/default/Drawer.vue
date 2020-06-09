@@ -1,5 +1,9 @@
 <template>
-  <v-navigation-drawer app>
+  <v-navigation-drawer
+    app
+    clipped
+    width="300"
+  >
     <v-list
       dense
       nav

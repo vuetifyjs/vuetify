@@ -1,9 +1,14 @@
 <template>
   <v-app-bar
+    id="default-app-bar"
     app
     clipped-right
+    flat
+    color="white"
+
+    clipped-left
   >
-    <v-toolbar-title>Application</v-toolbar-title>
+    <vuetify-logo />
 
     <v-spacer />
 
@@ -66,3 +71,17 @@
     },
   }
 </script>
+
+<style lang="sass">
+  .theme--light,
+  .theme--dark
+    #default-app-bar
+      border-width: 0 0 thin 0
+      border-style: solid
+
+      &.theme--light
+        border-bottom-color: #0000001F !important
+
+      &.theme--dark
+        border-bottom-color: #FFFFFF1F !important
+</style>
