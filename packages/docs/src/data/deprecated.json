@@ -74,6 +74,10 @@
     },
     "v-file-input": {
       "readonly": false
+    },
+    "v-tooltip": {
+      "dark": false,
+      "light": false
     }
   }
 }
