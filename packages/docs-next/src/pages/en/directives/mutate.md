@@ -1,11 +1,11 @@
 ---
 meta:
-  title: Generic Title
-  description: Generic Description.
-  keywords: template
+  title: Mutation observer directive
+  description: The mutation observer directive utilizes the Mutation observer API. It allows you to determine when elements are updated.
+  keywords: mutate, vuetify mutate directive, mutation observer directive
 ---
 
-# Component Name
+# Mutation observer directive
 Component description
 
 <entry-ad />
@@ -52,9 +52,4 @@ Accessibility text - omit if none
 ## API
   - [API Page Link]()
 
-## Up Next
-<up-next />
-
-<vuetify-ad />
-
-<contribute />
+<doc-footer />

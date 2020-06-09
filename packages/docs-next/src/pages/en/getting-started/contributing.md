@@ -1,8 +1,8 @@
 ---
 meta:
-  title: Working with Vuetify
-  description: How to contribute to Vuetify.
-  keywords: vuetify contribute
+  title: Contributing
+  description: Contributing to open source helps developers access amazing tools for free. Learn how you can help develop in the Vuetify framework.
+  keywords: contribute, contributing, feature request
 ---
 
 # Contributing

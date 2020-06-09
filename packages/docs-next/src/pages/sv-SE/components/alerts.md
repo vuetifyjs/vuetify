@@ -32,9 +32,4 @@ By default, v-alert components are assigned the WAI-ARIA role of alert which den
 ## API
   - [v-alert](../api/v-alert)
 
-## Up Next
-<up-next />
-
-<vuetify-ad />
-
-<contribute />
+<doc-footer />
