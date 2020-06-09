@@ -191,8 +191,11 @@ const installedComponents = Vue.options._base.options.components
 const installedDirectives = Vue.options._base.options.directives
 
 const componentNameRegex = /^(?:V[A-Z]|v-[a-z])/
+const excludes = ['VMessages', 'VLabel']
+
 for (const name in installedComponents) {
   if (!componentNameRegex.test(name)) continue
+  if (excludes.includes(name)) continue
 
   let component = installedComponents[name]
 
