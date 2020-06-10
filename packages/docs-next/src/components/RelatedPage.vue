@@ -45,7 +45,7 @@
         customization: 'red',
         directives: 'blue-grey',
         introduction: 'primary',
-        professional: 'amber darken-2',
+        'professional-support': 'amber darken-2',
         styles: 'deep-purple accent-4',
         themes: 'pink',
       },

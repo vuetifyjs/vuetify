@@ -1,5 +1,18 @@
 [
   {
+    "title": "introduction",
+    "icon": "$mdiBookOpenPageVariant",
+    "items": [
+      { "title": "why-vuetify" },
+      { "title": "frequently-asked-questions" },
+      { "title": "meet-the-team" },
+      { "title": "sponsors-and-backers" },
+      { "title": "roadmap" },
+      { "title": "long-term-support" },
+      { "title": "security-disclosure" }
+    ]
+  },
+  {
     "title": "getting-started",
     "icon": "$mdiSpeedometer",
     "items": [
@@ -26,14 +39,10 @@
   },
   {
     "title": "customization",
-    "icon": ""
+    "icon": "$mdiCogs"
   },
   {
     "title": "directives",
-    "icon": ""
-  },
-  {
-    "title": "introductions",
     "icon": ""
   },
   {
