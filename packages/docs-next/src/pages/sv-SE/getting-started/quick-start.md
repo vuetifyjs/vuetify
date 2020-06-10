@@ -189,9 +189,9 @@ To test using Vuetify.js without installing a template from Vue CLI, copy the co
 <body>
   <div id="app">
     <v-app>
-      <v-content>
+      <v-main>
         <v-container>Hello world</v-container>
-      </v-content>
+      </v-main>
     </v-app>
   </div>
 

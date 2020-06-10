@@ -1,12 +1,12 @@
 <template>
-  <v-content>
+  <v-main>
     <v-fade-transition mode="out-in">
       <router-view
         :key="$route.path"
         :name="name"
       />
     </v-fade-transition>
-  </v-content>
+  </v-main>
 </template>
 
 <script>

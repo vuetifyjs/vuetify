@@ -11,12 +11,12 @@
         <div :class="`d-flex ${headerColor}`">
           <v-slide-group
             multiple
-            show-arrows
+            show-arrows="mobile"
           >
             <v-slide-item
               v-for="(prop) in tabs"
               :key="prop"
-              v-slot:default="{ active, toggle }"
+              #default="{ active, toggle }"
             >
               <v-btn
                 :input-value="active"
