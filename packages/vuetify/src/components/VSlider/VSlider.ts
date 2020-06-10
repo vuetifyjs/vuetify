@@ -473,6 +473,7 @@ export default mixins<options &
       this.app.removeEventListener('touchmove', this.onMouseMove, mouseMoveOptions)
       this.app.removeEventListener('mousemove', this.onMouseMove, mouseMoveOptions)
 
+      this.$emit('mouseup', e)
       this.$emit('end', this.internalValue)
       if (!deepEqual(this.oldValue, this.internalValue)) {
         this.$emit('change', this.internalValue)
