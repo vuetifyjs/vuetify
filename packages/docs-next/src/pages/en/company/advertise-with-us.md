@@ -1,11 +1,12 @@
 ---
 meta:
-  title: Advertising with Vuetify
+  title: Advertise with Vuetify
   description: Description
   keywords: keywords
+nav: Advertising with us
 ---
 
-# Advertise with us
+# What are Vuetify Ads?
 Future information page about advertising with Vuetify.
 
 ## Entry Ad

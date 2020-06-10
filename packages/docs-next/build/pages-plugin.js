@@ -1,4 +1,4 @@
-const frontmatter = require('front-matter')
+const fm = require('front-matter')
 const fs = require('fs')
 const glob = require('glob')
 const path = require('path')
@@ -12,13 +12,23 @@ function readFile (filePath) {
 
 function getPages (files) {
   return files.reduce((pages, filePath) => {
-    const { body } = frontmatter(readFile(filePath))
+    const { body, attributes } = fm(readFile(filePath))
+    const { nav, meta = {} } = attributes
     const dir = filePath.replace(/^\.\/src\/pages/, '').replace(/\.\w+$/, '/')
-    const tokens = md.parse(body)
-    const firstIndex = tokens.findIndex(({ type }) => type === 'heading_open')
-    const text = tokens[firstIndex + 1].content
 
-    pages[dir] = text
+    let title = nav || meta.title
+
+    // If there is no provided title
+    // generate one from the first
+    // content found on the page
+    if (!title) {
+      const tokens = md.parse(body)
+      const firstIndex = tokens.findIndex(({ type }) => type === 'heading_open')
+
+      title = tokens[firstIndex + 1].content
+    }
+
+    pages[dir] = title
 
     return pages
   }, {})
@@ -27,7 +37,7 @@ function getPages (files) {
 function getHeadings (files) {
   return files.reduce((headings, filePath) => {
     const file = readFile(filePath)
-    const { body } = frontmatter(file)
+    const { body } = fm(file)
 
     const category = path.dirname(filePath.replace(/^\.\/src\/pages\/\w+(-\w+)?\//, ''))
     const page = kebabCase(path.basename(filePath, path.extname(filePath)))
