@@ -5,7 +5,7 @@ meta:
   keywords: images, vuetify image component, vue image component
 ---
 
-# Component Name
+# Images
 Component description
 
 <entry-ad />
