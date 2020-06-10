@@ -88,7 +88,7 @@ export default VSelect.extend({
       if (!this.isSearching || this.noFilter || this.internalSearch == null) return this.allItems
 
       return this.allItems.filter(item => {
-        const value = getPropertyFromItem(item, this.itemText, undefined)
+        const value = getPropertyFromItem(item, this.itemText)
         const text = value != null ? String(value) : ''
 
         return this.filter(item, String(this.internalSearch), text)
