@@ -61,7 +61,7 @@
   import { sync } from 'vuex-pathify'
 
   export default {
-    name: 'DefaultDrawer',
+    name: 'DocumentationDrawer',
 
     computed: { nav: sync('app/nav') },
   }

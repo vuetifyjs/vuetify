@@ -36,7 +36,7 @@
   import { get } from 'vuex-pathify'
 
   export default {
-    name: 'DefaultToc',
+    name: 'DocumentationToc',
 
     computed: {
       category: get('route/params@category'),

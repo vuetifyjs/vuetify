@@ -22,26 +22,18 @@ export function createRouter (store, i18n) {
         component: () => import('@/layouts/locale/Index'),
         children: [
           {
-            path: 'api/:page',
-            component: () => import('@/layouts/default/Index'),
-            children: [
-              {
-                path: '',
-                name: 'Api',
-                component: () => import('@/views/Api'),
-              },
-            ],
-          },
-          {
             path: ':category/:page',
             // Layouts allow you to define different
             // structures for different view
-            component: () => import('@/layouts/default/Index'),
+            component: () => import('@/layouts/documentation/Index'),
             children: [
               {
                 path: '',
                 name: 'Documentation',
-                component: () => import('@/views/Documentation'),
+                components: {
+                  default: () => import('@/views/Documentation'),
+                  api: () => import('@/views/Api'),
+                },
               },
             ],
           },
