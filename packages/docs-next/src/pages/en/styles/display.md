@@ -5,7 +5,7 @@ meta:
   keywords: display helper classes, display classes, vuetify display
 ---
 
-#   title: CSS Display helpers
+# CSS Display helpers
   description: Display helper classes allow you to control when elements should display based upon viewport.
   keywords: display helper classes, display classes, vuetify display
 Component description

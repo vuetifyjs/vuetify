@@ -1,11 +1,11 @@
 ---
 meta:
-  title: Generic Title
+  title: Scroll
   description: Generic Description.
   keywords: template
 ---
 
-# Component Name
+# Scroll
 Component description
 
 <entry-ad />

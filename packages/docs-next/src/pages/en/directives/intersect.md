@@ -5,7 +5,7 @@ meta:
   keywords: intersect, vuetify intersect directive, intersection observer directive
 ---
 
-# Component Name
+# Intersection observer
 Component description
 
 <entry-ad />
