@@ -23,5 +23,33 @@
   {
     "title": "company",
     "icon": "$mdiVuetify"
+  },
+  {
+    "title": "customization",
+    "icon": ""
+  },
+  {
+    "title": "directives",
+    "icon": ""
+  },
+  {
+    "title": "introductions",
+    "icon": ""
+  },
+  {
+    "title": "jobs",
+    "icon": ""
+  },
+  {
+    "title": "professional-support",
+    "icon": ""
+  },
+  {
+    "title": "styles",
+    "icon": ""
+  },
+  {
+    "title": "themes",
+    "icon": ""
   }
 ]
