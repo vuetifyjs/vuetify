@@ -116,7 +116,7 @@ export default mixins(
     },
     genButton (value: string, isFloating: boolean, mouseEventType: string, formatter: DatePickerFormatter) {
       const isAllowed = isDateAllowed(value, this.min, this.max, this.allowedDates)
-      const isSelected = this.isSelected(value)
+      const isSelected = this.isSelected(value) && isAllowed
       const isCurrent = value === this.current
       const setColor = isSelected ? this.setBackgroundColor : this.setTextColor
       const color = (isSelected || isCurrent) && (this.color || 'accent')
