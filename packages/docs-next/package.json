@@ -16,7 +16,7 @@
     "vue": "^2.6.11",
     "vue-i18n": "^8.17.7",
     "vue-router": "^3.1.6",
-    "vuetify": "^2.3.0-beta.6",
+    "vuetify": "^2.3.0-beta.9",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
