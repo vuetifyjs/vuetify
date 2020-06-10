@@ -678,4 +678,17 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     expect(input.mock.calls[1][0]).toEqual(expect.arrayContaining(['2019-01-06']))
     expect(change.mock.calls).toHaveLength(1)
   })
+
+  it('should not higlight not allowed dates in range', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        range: true,
+        value: ['2019-09-01', '2019-09-03'],
+        allowedDates: value => value.endsWith('1') || value.endsWith('3'),
+      },
+    })
+
+    const buttonOfDay02 = wrapper.findAll('.v-date-picker-table--date tbody button').at(1)
+    expect(buttonOfDay02.element.classList.contains('accent')).toBeFalsy()
+  })
 })
