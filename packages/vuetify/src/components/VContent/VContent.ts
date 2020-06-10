@@ -7,6 +7,6 @@ export default VMain.extend({
   name: 'v-main',
 
   created () {
-    deprecate('v-main', 'v-main', this)
+    deprecate('v-content', 'v-main', this)
   },
 })
