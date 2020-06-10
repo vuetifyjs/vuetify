@@ -3,15 +3,13 @@
     "title": "getting-started",
     "icon": "$mdiSpeedometer",
     "items": [
-      {
-        "title": "beginners-guide"
-      },
-      {
-        "title": "quick-start"
-      },
-      {
-        "title": "browser-support"
-      }
+      { "title": "beginners-guide" },
+      { "title": "quick-start" },
+      { "title": "pre-made-layouts" },
+      { "title": "browser-support" },
+      { "title": "unit-testing" },
+      { "title": "releases-and-migrations" },
+      { "title": "contributing" }
     ]
   },
   {
