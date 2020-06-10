@@ -49,6 +49,7 @@
     "markdown-it-header-sections": "^1.0.0",
     "markdown-it-prism": "^2.0.5",
     "marked": "^1.1.0",
+    "minify-css-string": "^1.0.0",
     "raw-loader": "^4.0.1",
     "sass": "^1.26.3",
     "sass-loader": "^8.0.2",

@@ -4,9 +4,9 @@ import Vuetify from 'vuetify'
 
 // Bootstrap
 import { registerPlugins } from './plugins'
-import { createVuetify } from './plugins/vuetify'
-import { createStore } from '@/store/index'
-import { createRouter } from '@/router/index'
+import { createVuetify } from '@/vuetify'
+import { createStore } from '@/store'
+import { createRouter } from '@/router'
 import { createI18n } from '@/i18n'
 import { sync } from 'vuex-router-sync'
 

@@ -1,12 +1,3 @@
-/**
- * plugins/vuetify.js
- *
- * Vuetify documentation: https://vuetifyjs.com/
- */
-
-// Imports
-import Vuetify from 'vuetify/lib/framework'
-
 import {
   mdiAccount,
   mdiBeaker,
@@ -25,7 +16,7 @@ import {
   mdiVuetify,
 } from '@mdi/js'
 
-const icons = {
+export const icons = {
   iconfont: 'mdiSvg',
   values: {
     mdiAccount,
@@ -44,12 +35,4 @@ const icons = {
     mdiViewDashboard,
     mdiVuetify,
   },
-}
-
-export function useVuetify (app) {
-  app.use(Vuetify)
-}
-
-export function createVuetify () {
-  return new Vuetify({ icons })
 }
