@@ -12,6 +12,7 @@ import {
   DataItemsPerPageOption,
   ItemGroup,
   RowClassFunction,
+  DataTableItemProps,
 } from 'vuetify/types'
 import { PropValidator } from 'vue/types/options'
 
@@ -222,7 +223,7 @@ export default mixins(
     customSortWithHeaders (items: any[], sortBy: string[], sortDesc: boolean[], locale: string) {
       return this.customSort(items, sortBy, sortDesc, locale, this.columnSorters)
     },
-    createItemProps (item: any) {
+    createItemProps (item: any): DataTableItemProps {
       const props = VDataIterator.options.methods.createItemProps.call(this, item)
 
       return Object.assign(props, { headers: this.computedHeaders })

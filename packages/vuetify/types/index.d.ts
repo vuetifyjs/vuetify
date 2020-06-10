@@ -114,6 +114,10 @@ export interface DataItemProps {
   isMobile: boolean
 }
 
+export interface DataTableItemProps extends DataItemProps {
+  headers: DataTableHeader[]
+}
+
 export interface DataScopeProps {
   originalItemsLength: number
   items: any[]
