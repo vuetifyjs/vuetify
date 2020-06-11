@@ -1,7 +1,13 @@
 {
-  "api": "API",
+  "api": "Component API",
   "components": "Components",
   "company": "Company",
+  "customization": "Customization",
+  "directives": "Directives",
   "getting-started": "Getting started",
-  "introduction": "Introduction"
+  "introduction": "Introduction",
+  "jobs": "Jobs for Vue",
+  "professional-support": "Professional support",
+  "styles": "Styles and animations",
+  "themes": "Premium themes"
 }

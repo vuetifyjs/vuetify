@@ -43,22 +43,22 @@
   },
   {
     "title": "directives",
-    "icon": ""
+    "icon": "$mdiFunction"
   },
   {
     "title": "jobs",
-    "icon": ""
+    "icon": "$mdiBriefcaseSearch"
   },
   {
     "title": "professional-support",
-    "icon": ""
+    "icon": "$mdiAtomVariant"
   },
   {
     "title": "styles",
-    "icon": ""
+    "icon": "$mdiPalette"
   },
   {
     "title": "themes",
-    "icon": ""
+    "icon": "$mdiVuetify"
   }
 ]
