@@ -1,13 +1,17 @@
 ---
-description: Vuetify is a progressive framework that supports all evergreen browsers and IE11 / Safari with polyfill.
-keywords: vuetify browser support
+meta:
+  title: Browser support
+  description: Vuetify is a progressive framework that supports all evergreen browsers and IE11 / Safari with polyfill.
+  keywords: vuetify browser support
+related:
+  - /getting-started/quick-start/
+  - /introduction/frequently-asked-questions/
+  - /customization/sass-variables/
 ---
 
 # Browser support
 
-Vuetify is a progressive framework that attempts to push web development to the next level. In order to best accomplish this task, some sacrifices had to be made in terms of support for older versions of Internet Explorer. This is not an exhaustive list of compatible browsers, but the main targeted ones.
-
-<entry-ad />
+Vuetify is a progressive framework that attempts to push web development to the next level. In order to best accomplish this task, some sacrifices had to be made in terms of support for older versions of Internet Explorer. This is not an exhaustive list of compatible browsers, but the main targeted ones. <entry-ad />
 
 ## IE11 & Safari 9 support
 Vuetify utilizes features of ES2015/2017 that require the need to use polyfills for **Internet Explorer 11** and **Safari 9/10**. If you are using Vue CLI, this is done automatically for you. Otherwise, in your project directory, you can install `babel-polyfill`:
@@ -70,8 +74,4 @@ Due to Internet Explorer's limited support for `<template>` tags, you must send 
 </template>
 ```
 
-<up-next />
-
----
-
-<vuetify-ad />
+<doc-footer />
