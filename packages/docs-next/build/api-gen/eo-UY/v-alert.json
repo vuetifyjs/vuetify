@@ -1,0 +1,55 @@
+{
+  "props": {
+    "border": "crwdns72724:0crwdne72724:0",
+    "closeLabel": "crwdns72726:0[Internationalization]crwdne72726:0",
+    "color": "crwdns72728:0crwdne72728:0",
+    "coloredBorder": "crwdns72730:0crwdne72730:0",
+    "dark": "crwdns72732:0crwdne72732:0",
+    "dense": "crwdns72734:0crwdne72734:0",
+    "dismissible": "crwdns72736:0crwdne72736:0",
+    "elevation": "crwdns72738:0crwdne72738:0",
+    "height": "crwdns72740:0crwdne72740:0",
+    "icon": "crwdns72742:0crwdne72742:0",
+    "light": "crwdns72744:0crwdne72744:0",
+    "maxHeight": "crwdns72746:0crwdne72746:0",
+    "maxWidth": "crwdns72748:0crwdne72748:0",
+    "minHeight": "crwdns72750:0crwdne72750:0",
+    "minWidth": "crwdns72752:0crwdne72752:0",
+    "mode": "crwdns72754:0crwdne72754:0",
+    "origin": "crwdns72756:0crwdne72756:0",
+    "outlined": "crwdns72758:0crwdne72758:0",
+    "prominent": "crwdns72760:0crwdne72760:0",
+    "tag": "crwdns72762:0crwdne72762:0",
+    "text": "crwdns72764:0crwdne72764:0",
+    "tile": "crwdns72766:0crwdne72766:0",
+    "transition": "crwdns72768:0crwdne72768:0",
+    "type": "crwdns72770:0crwdne72770:0",
+    "value": "crwdns72772:0crwdne72772:0",
+    "width": "crwdns72774:0crwdne72774:0"
+  },
+  "slots": {
+    "append": "crwdns72776:0crwdne72776:0",
+    "close": "crwdns72778:0crwdne72778:0",
+    "prepend": "crwdns72780:0crwdne72780:0",
+    "default": "crwdns72782:0crwdne72782:0"
+  },
+  "events": {
+    "input": "crwdns72784:0crwdne72784:0"
+  },
+  "functions": {
+    "toggle": "crwdns72786:0crwdne72786:0"
+  },
+  "sass": {
+    "$alert-border-opacity": "crwdns72788:0crwdne72788:0",
+    "$alert-border-radius": "crwdns72790:0crwdne72790:0",
+    "$alert-border-width": "crwdns72792:0crwdne72792:0",
+    "$alert-dense-border-width": "crwdns72794:0crwdne72794:0",
+    "$alert-font-size": "crwdns72796:0crwdne72796:0",
+    "$alert-icon-size": "crwdns72798:0crwdne72798:0",
+    "$alert-margin": "crwdns72800:0crwdne72800:0",
+    "$alert-outline": "crwdns72802:0crwdne72802:0",
+    "$alert-padding": "crwdns72804:0crwdne72804:0",
+    "$alert-prominent-icon-font-size": "crwdns72806:0crwdne72806:0",
+    "$alert-prominent-icon-size": "crwdns72808:0crwdne72808:0"
+  }
+}
