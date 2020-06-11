@@ -38,5 +38,18 @@
   },
   "functions": {
     "toggle": "Toggles the alert's active state. Available in the close slot and used as the click action in **dismissible**."
+  },
+  "sass": {
+    "$alert-border-opacity": "",
+    "$alert-border-radius": "",
+    "$alert-border-width": "",
+    "$alert-dense-border-width": "",
+    "$alert-font-size": "",
+    "$alert-icon-size": "",
+    "$alert-margin": "",
+    "$alert-outline": "",
+    "$alert-padding": "",
+    "$alert-prominent-icon-font-size": "",
+    "$alert-prominent-icon-size": ""
   }
 }

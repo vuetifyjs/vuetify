@@ -8,4 +8,4 @@ files:
   - source: src/i18n/messages/en.json
     translation: src/i18n/messages/%locale%.json
   - source: build/api-gen/locale/en/*.json
-    translation: build/api-gen/%locale%/%original_file_name%
+    translation: build/api-gen/locale/%locale%/%original_file_name%
