@@ -105,6 +105,19 @@ export interface DataPagination {
   itemsLength: number
 }
 
+export interface DataItemProps {
+  item: any
+  select: (v: boolean) => void
+  isSelected: boolean
+  expand: (v: boolean) => void
+  isExpanded: boolean
+  isMobile: boolean
+}
+
+export interface DataTableItemProps extends DataItemProps {
+  headers: DataTableHeader[]
+}
+
 export interface DataScopeProps {
   originalItemsLength: number
   items: any[]

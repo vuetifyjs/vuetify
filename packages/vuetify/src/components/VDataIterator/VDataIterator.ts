@@ -13,7 +13,7 @@ import { breaking, removed } from '../../util/console'
 
 // Types
 import { VNode, VNodeChildren, PropType } from 'vue'
-import { DataScopeProps } from 'vuetify/types'
+import { DataItemProps, DataScopeProps } from 'vuetify/types'
 
 /* @vue/component */
 export default mixins(
@@ -200,7 +200,7 @@ export default mixins(
       this.expansion = expansion
       this.$emit('item-expanded', { item, value })
     },
-    createItemProps (item: any) {
+    createItemProps (item: any): DataItemProps {
       return {
         item,
         select: (v: boolean) => this.select(item, v),
