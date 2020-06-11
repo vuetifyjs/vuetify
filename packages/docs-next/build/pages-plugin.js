@@ -58,8 +58,8 @@ function getModified (files) {
     const modified = file.mtime
 
     pages[dir] = {
-      birth: format(birth, 'PPPPpp'),
-      modified: format(modified, 'PPPPpp'),
+      birth: format(birth, 'P, pp'),
+      modified: format(modified, 'P, pp'),
       new: differenceInDays(now, birth) < 15,
       updated: differenceInDays(now, modified) < 30,
     }
