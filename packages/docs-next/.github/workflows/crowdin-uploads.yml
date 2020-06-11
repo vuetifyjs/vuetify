@@ -3,9 +3,6 @@ name: Crowdin Uploads
 on:
   push:
     branches: [ master ]
-    paths:
-      - src/paths/en/**
-      - src/i18n/**/en.json
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

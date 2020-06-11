@@ -1,6 +1,6 @@
 ---
 meta:
-  title: Beginner's Guide
+  title: Beginner's guide
   description: How to use Vuetify as a beginner.
   keywords: vuetify, beginner, vue, framework, guide, vuetify beginner, starting vuetify, vuetify guide
 ---
