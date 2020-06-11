@@ -31,6 +31,7 @@
     "@vuetify/vue-cli-plugin-base": "~0.3.5",
     "babel-eslint": "^10.1.0",
     "cosmicjs": "^3.2.43",
+    "date-fns": "^2.14.0",
     "eslint": "^6.7.2",
     "eslint-config-vuetify": "^0.6.1",
     "eslint-plugin-import": "^2.20.2",

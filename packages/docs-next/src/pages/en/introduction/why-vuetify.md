@@ -1,6 +1,6 @@
 ---
 meta:
-  title: Why Vuetify?
+  title: Why you should be using Vuetify
   description: Vuetify has an extremely active community, provides easy to use Material Design components and is consistently updated.
   keywords: why vuetify, why choose vuetify, best vue framework, best ui framework
 related:
@@ -9,7 +9,7 @@ related:
   - /introduction/meet-the-team/
 ---
 
-# What's the difference?
+# Why Vuetify?
 Vuetify is the #1 component library for Vue.js and has been in active development since 2016. The goal of the project is to provide users with everything that is needed to build rich and engaging web applications using the [Material Design specification](https://material.io/guidelines/). It accomplishes that with a consistent update cycle, Long-term Support **(LTS)** for previous versions, responsive community engagement, a vast ecosystem of resources and a dedication to quality components.
 
 <vuetify-comparison />

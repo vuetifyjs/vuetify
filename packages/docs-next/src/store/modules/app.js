@@ -9,6 +9,7 @@ import { ROOT_DISPATCH } from '@/store'
 
 const state = {
   branch: getBranch(),
+  modified: {},
   nav: [],
   version: null,
 }

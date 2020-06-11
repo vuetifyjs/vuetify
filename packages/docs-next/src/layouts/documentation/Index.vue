@@ -28,12 +28,17 @@
       DocumentationView: () => import('./View'),
     },
 
+    data: () => ({ orphans: [] }),
+
     computed: {
+      ...sync('app', [
+        'nav',
+        'modified',
+      ]),
       ...sync('i18n', [
         'pages',
         'tocs',
       ]),
-      nav: sync('app/nav'),
     },
 
     watch: {
@@ -46,15 +51,18 @@
     },
 
     methods: {
-      async init (val) {
-        const locale = this.$route.params.locale
+      async importDocsFor (locale) {
         const pending = [
           import(
-            /* webpackChunkName: "api-items" */
+            /* webpackChunkName: "api-pages" */
             `@docs/${locale}/api/pages`
           ),
           import(
-            /* webpackChunkName: "nav-items" */
+            /* webpackChunkName: "modified" */
+            `@docs/${locale}/modified`
+          ),
+          import(
+            /* webpackChunkName: "pages" */
             `@docs/${locale}/pages`
           ),
           import(
@@ -63,93 +71,101 @@
           ),
         ]
 
+        return Promise.resolve([...await Promise.all(pending)])
+      },
+      async init (locale) {
         const [
           api,
+          modified,
           pages,
-          toc,
-        ] = [...await Promise.all(pending)]
+          headings,
+        ] = await this.importDocsFor(locale)
 
+        this.modified = modified.default
         this.pages = { ...pages.default, ...api.default }
+        this.orphans = Object.keys(this.pages)
+        this.tocs = headings.default
         // Map provided nav groups using
         // the provided language, val
         this.nav = nav.map(item => {
           // Build group string used
           // for list groups
-          // e.g. /en/
-          const group = `/${val}/`
+          const group = `/${locale}/${item.title}/`
 
           return this.genItem(item, group)
         })
-        this.tocs = toc.default
       },
       findItems (group) {
         const pages = []
-
         // Iterate through the imported pages and
-        // map keys to the generated page routes
-        // e.g. /en/components/chip-groups/
+        // map keys to the generated page route
         for (const key in this.pages) {
-          // Skip if the key doesn't match
-          // e.g. !'/en/components/alerts'.startsWith('/en/')
+          // Skip if key doesn't match
           if (!key.startsWith(group)) continue
 
           // Create a new inferred page route
           // using the key/value from pages
           pages.push({
-            href: undefined,
-            icon: undefined,
-            items: undefined,
             title: this.pages[key],
             to: key,
           })
+
+          this.removeOrphan(key)
         }
 
         return pages.length ? pages : undefined
       },
-      genItems (item, ...args) {
-        const foundItems = this.findItems(...args)
+      genItem (item, group) {
+        const isGroup = !!item.icon || item.items
+        const items = isGroup ? this.genItems(item, group) : undefined
+        const { href, icon, title: path } = item
+        const page = `${group}${path}/`
+        const to = isGroup ? group : page
+
+        // Use language file if path exists
+        // Otherwise use the default page
+        const title = this.$i18n.te(path)
+          ? this.$i18n.t(path)
+          : this.pages[page] || path
+
+        return {
+          href,
+          icon,
+          items,
+          title,
+          to,
+        }
+      },
+      genItems (item, group) {
+        const foundItems = this.findItems(group)
 
         if (!item.items) return foundItems
 
-        const keys = []
         const items = []
 
         // Generate explicitly provided
         // items and their keys from src/data/nav.json
         for (const child of item.items) {
-          keys.push(child.title)
-          items.push(this.genItem(child, ...args))
+          items.push(this.genItem(child, group))
+
+          this.removeOrphan(`${group}${child.title}/`)
         }
 
         for (const found of foundItems) {
-          const title = kebabCase(found.title)
+          const path = `${group}${kebabCase(found.title)}/`
+          const index = this.orphans.indexOf(path)
 
           // Don't include found item
-          // if already provided
-          if (keys.includes(title)) continue
+          // if it already exists
+          if (index < 0) continue
 
-          keys.push(title)
-          items.push(found)
+          items.push(this.genItem(found, group))
         }
 
         return items.length ? items : undefined
       },
-      genItem (item, group) {
-        const path = kebabCase(item.to || item.title)
-        const to = `${group}${path}/`
-        const title = this.pages[to] || (
-          this.$i18n.te(item.title)
-            ? this.$i18n.t(item.title)
-            : item.title
-        )
-
-        return {
-          href: item.href || undefined,
-          icon: item.icon || undefined,
-          items: this.genItems(item, to),
-          title,
-          to,
-        }
+      removeOrphan (child) {
+        this.$delete(this.orphans, this.orphans.indexOf(child))
       },
     },
   }

@@ -1,10 +1,11 @@
+const { differenceInDays, format } = require('date-fns')
+const { kebabCase } = require('lodash')
+const { md } = require('./markdown-it')
 const fm = require('front-matter')
 const fs = require('fs')
 const glob = require('glob')
 const path = require('path')
-const { md } = require('./markdown-it')
 const VirtualModulesPlugin = require('webpack-virtual-modules')
-const { kebabCase } = require('lodash')
 
 function readFile (filePath) {
   return fs.readFileSync(filePath, 'utf8')
@@ -15,20 +16,17 @@ function getPages (files) {
     const { body, attributes } = fm(readFile(filePath))
     const { nav, meta = {} } = attributes
     const dir = filePath.replace(/^\.\/src\/pages/, '').replace(/\.\w+$/, '/')
-
-    let title = nav || meta.title
+    const tokens = md.parse(body)
+    const firstIndex = tokens.findIndex(({ type }) => type === 'heading_open')
 
     // If there is no provided title
     // generate one from the first
     // content found on the page
-    if (!title) {
-      const tokens = md.parse(body)
-      const firstIndex = tokens.findIndex(({ type }) => type === 'heading_open')
-
-      title = tokens[firstIndex + 1].content
-    }
-
-    pages[dir] = title
+    pages[dir] = (
+      nav ||
+      tokens[firstIndex + 1].content ||
+      meta.title
+    )
 
     return pages
   }, {})
@@ -46,6 +44,27 @@ function getHeadings (files) {
     headings[category][page] = getPageHeadings(body)
 
     return headings
+  }, {})
+}
+
+function getModified (files) {
+  return files.reduce((pages, filePath) => {
+    const file = fs.statSync(filePath)
+
+    // console.log(file)
+    const dir = filePath.replace(/^\.\/src\/pages/, '').replace(/\.\w+$/, '/')
+    const now = new Date()
+    const birth = file.birthtime
+    const modified = file.mtime
+
+    pages[dir] = {
+      birth: format(birth, 'PPPPpp'),
+      modified: format(modified, 'PPPPpp'),
+      new: differenceInDays(now, birth) < 15,
+      updated: differenceInDays(now, modified) < 30,
+    }
+
+    return pages
   }, {})
 }
 
@@ -82,6 +101,7 @@ function generateFiles () {
 
   const pages = files => `module.exports = ${JSON.stringify(getPages(files))};`
   const headings = files => `module.exports = ${JSON.stringify(getHeadings(files))};`
+  const modified = files => `module.exports = ${JSON.stringify(getModified(files))};`
 
   for (const langDir of langDirectories) {
     const files = glob.sync(`${langDir}/**/*.md`)
@@ -89,6 +109,7 @@ function generateFiles () {
 
     generatedFiles[`node_modules/@docs/${lang}/pages.js`] = pages(files)
     generatedFiles[`node_modules/@docs/${lang}/headings.js`] = headings(files)
+    generatedFiles[`node_modules/@docs/${lang}/modified.js`] = modified(files)
   }
 
   return generatedFiles
