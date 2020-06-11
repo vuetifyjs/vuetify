@@ -1,10 +1,11 @@
 project_id_env: CROWDIN_PROJECT_ID
 api_token_env: CROWDIN_PERSONAL_TOKEN
 project_identifier: vuetify
-base_path: src
 preserve_hierarchy: true
 files:
-  - source: pages/en/**/*.md
-    translation: pages/%locale%/**/%original_file_name%
-  - source: i18n/messages/en.json
-    translation: i18n/messages/%locale%.json
+  - source: src/pages/en/**/*.md
+    translation: src/pages/%locale%/**/%original_file_name%
+  - source: src/i18n/messages/en.json
+    translation: src/i18n/messages/%locale%.json
+  - source: build/api-gen/locale/en/*.json
+    translation: build/api-gen/%locale%/%original_file_name%
