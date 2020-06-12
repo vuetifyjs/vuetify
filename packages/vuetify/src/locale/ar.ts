@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} مختارة',
+    nextMonthAriaLabel: 'الشهر القادم',
+    nextYearAriaLabel: 'العام القادم',
+    prevMonthAriaLabel: 'الشهر الماضى',
+    prevYearAriaLabel: 'السنة الماضية',
   },
   noDataText: 'لا توجد بيانات متاحة',
   carousel: {
@@ -47,5 +51,14 @@ export default {
   timePicker: {
     am: 'صباحاً',
     pm: 'مساءً',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'ترقيم الصفحات الملاحة',
+      next: 'الصفحة التالية',
+      previous: 'الصفحة السابقة',
+      page: '{0} انتقل إلى صفحة',
+      currentPage: '{0} الصفحة الحالية ، الصفحة',
+    },
   },
 }

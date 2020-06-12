@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} επιλεγμένα',
+    nextMonthAriaLabel: 'Τον επόμενο μήνα',
+    nextYearAriaLabel: 'Του χρόνου',
+    prevMonthAriaLabel: 'Προηγούμενος μήνας',
+    prevYearAriaLabel: 'Προηγούμενο έτος',
   },
   noDataText: 'Χωρίς δεδομένα',
   carousel: {
@@ -47,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Πλοήγηση με προορισμούς',
+      next: 'Επόμενη σελίδα',
+      previous: 'Προηγούμενη σελίδα',
+      page: 'Πήγαινε στην σελίδα {0}',
+      currentPage: 'Τρέχουσα σελίδα, σελίδα {0}',
+    },
   },
 }

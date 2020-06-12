@@ -25,7 +25,7 @@
     }
   },
   "props": {
-    "app": "`v-content`の中で使用すると、アプリケーションの `v-toolbar` と `v-system-bar` に基づいてトップを計算します。",
+    "app": "`v-main`の中で使用すると、アプリケーションの `v-toolbar` と `v-system-bar` に基づいてトップを計算します。",
     "icon": "アイコンを指定します。",
     "iconColor": "アイコンの色を指定します。",
     "sticky": "**position: sticky** をコンポーネントに適用します（**Evergreenブラウザのみ**）。 [スティッキーポジションのMDNドキュメント](https://developer.mozilla.org/ja/docs/Web/CSS/position) で詳細を確認できます。"

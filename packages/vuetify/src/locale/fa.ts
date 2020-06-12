@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} انتخاب شده است',
+    nextMonthAriaLabel: 'ماه بعد',
+    nextYearAriaLabel: 'سال آینده',
+    prevMonthAriaLabel: 'ماه گذشته',
+    prevYearAriaLabel: 'پارسال',
   },
   noDataText: 'اطلاعاتی یافت نشد',
   carousel: {
@@ -47,5 +51,14 @@ export default {
   timePicker: {
     am: 'قبل از ظهر',
     pm: 'بعد از ظهر',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'جهت یابی صفحه',
+      next: 'صفحه بعد',
+      previous: 'صفحه قبلی',
+      page: '{0} صفحه بروید',
+      currentPage: '{0} صفحه فعلی ، صفحه',
+    },
   },
 }

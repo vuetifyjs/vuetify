@@ -34,7 +34,7 @@
     "centerActive": "Forces the selected component to be centered",
     "nextIcon": "The appended slot when arrows are shown",
     "prevIcon": "The prepended slot when arrows are shown",
-    "showArrows": "Always show pagination arrows"
+    "showArrows": "Controls the display of the previous and next arrows. By default, arrows will only display on desktop size screens when the container is overflowed. A value of `true` enables the display of arrows on mobile. A value of `desktop` forces arrows on desktop and a value of `always` forces arrows on both *mobile* and *desktop*."
   },
   "events": {
     "change": "Emitted when the component value is changed by user interaction",

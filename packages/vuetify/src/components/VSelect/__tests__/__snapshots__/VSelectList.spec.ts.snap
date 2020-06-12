@@ -3,7 +3,7 @@
 exports[`VSelectList.ts should display falsy items 1`] = `
 <div role="listbox"
      tabindex="-1"
-     class="v-list v-select-list v-sheet v-sheet--tile theme--light theme--light"
+     class="v-list v-select-list v-sheet theme--light theme--light"
 >
   <div tabindex="0"
        aria-selected="false"
@@ -70,7 +70,7 @@ exports[`VSelectList.ts should display falsy items 1`] = `
 exports[`VSelectList.ts should display no-data-text when item slot is provided 1`] = `
 <div role="listbox"
      tabindex="-1"
-     class="v-list v-select-list v-sheet v-sheet--tile theme--light theme--light"
+     class="v-list v-select-list v-sheet theme--light theme--light"
 >
   <div tabindex="-1"
        class="v-list-item theme--light"
@@ -87,7 +87,7 @@ exports[`VSelectList.ts should display no-data-text when item slot is provided 1
 exports[`VSelectList.ts should generate children 1`] = `
 <div role="listbox"
      tabindex="-1"
-     class="v-list v-select-list v-sheet v-sheet--tile theme--light theme--light"
+     class="v-list v-select-list v-sheet theme--light theme--light"
 >
   <div class="v-subheader theme--light">
     true

@@ -10,6 +10,7 @@ import VIcon from '../VIcon'
 import { VExpandTransition } from '../transitions'
 
 // Mixins
+import Mobile from '../../mixins/mobile'
 import Toggleable from '../../mixins/toggleable'
 
 // Utilities
@@ -20,11 +21,12 @@ import {
 } from '../../util/helpers'
 
 // Typeslint
-import { VNode, PropType } from 'vue'
+import { VNode } from 'vue'
 
 /* @vue/component */
 export default mixins(
   VSheet,
+  Mobile,
   Toggleable
 ).extend({
   name: 'v-banner',
@@ -35,16 +37,8 @@ export default mixins(
     app: Boolean,
     icon: String,
     iconColor: String,
-    mobileBreakPoint: {
-      type: [Number, String] as PropType<string | number>,
-      default: 960,
-    },
     singleLine: Boolean,
     sticky: Boolean,
-    tile: {
-      type: Boolean,
-      default: true,
-    },
     value: {
       type: Boolean,
       default: true,
@@ -63,9 +57,6 @@ export default mixins(
     },
     hasIcon (): boolean {
       return Boolean(this.icon || this.$slots.icon)
-    },
-    isMobile (): boolean {
-      return this.$vuetify.breakpoint.width < Number(this.mobileBreakPoint)
     },
     isSticky (): boolean {
       return this.sticky || this.app

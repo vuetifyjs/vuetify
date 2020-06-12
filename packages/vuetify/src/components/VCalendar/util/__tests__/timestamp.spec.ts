@@ -71,8 +71,8 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
     expect(validateTimestamp('not a timestamp')).toBe(false)
     expect(validateTimestamp([])).toBe(false)
     expect(validateTimestamp({})).toBe(false)
-    expect(validateTimestamp(new Date())).toBe(false)
-    expect(validateTimestamp(2345)).toBe(false)
+    expect(validateTimestamp(new Date())).toBe(true)
+    expect(validateTimestamp(2345)).toBe(true)
   })
 
   it('should parse timestamp', () => {
@@ -373,9 +373,9 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
   })
 
   it('should create interval list', () => {
-    expect(createIntervalList(parseTimestamp('2019-02-08'), 2, 15, 10)).toMatchSnapshot()
-    expect(createIntervalList(parseTimestamp('2019-02-08'), 1, 15, 10)).toMatchSnapshot()
-    expect(createIntervalList(parseTimestamp('2019-02-08'), 2, 5, 2)).toMatchSnapshot()
+    expect(createIntervalList(parseTimestamp('2019-02-08'), 30, 15, 10)).toMatchSnapshot()
+    expect(createIntervalList(parseTimestamp('2019-02-08'), 15, 15, 10)).toMatchSnapshot()
+    expect(createIntervalList(parseTimestamp('2019-02-08'), 10, 5, 2)).toMatchSnapshot()
   })
 
   // TODO Create a test that doesn't fail when

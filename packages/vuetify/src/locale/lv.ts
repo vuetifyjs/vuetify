@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} izvēlēts',
+    nextMonthAriaLabel: 'Nākammēnes',
+    nextYearAriaLabel: 'Nākamgad',
+    prevMonthAriaLabel: 'Iepriekšējais mēnesis',
+    prevYearAriaLabel: 'Iepriekšējais gads',
   },
   noDataText: 'Nav pieejamu datu',
   carousel: {
@@ -47,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Navigācija paginationā',
+      next: 'Nākamā lapa',
+      previous: 'Iepriekšējā lapa',
+      page: 'Iet uz lapu {0}',
+      currentPage: 'Pašreizējā lapa, lapa {0}',
+    },
   },
 }

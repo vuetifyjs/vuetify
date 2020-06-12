@@ -17,6 +17,7 @@
   "props": {
     "alt": "Attaches an alt property to the parallax image",
     "height": "Mixins.Measurable.props.height",
-    "src": "The image to parallax"
+    "src": "The image to parallax",
+    "srcset": "Components.Images.props.srcset"
   }
 }

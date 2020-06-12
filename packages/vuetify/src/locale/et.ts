@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} valitud',
+    nextMonthAriaLabel: 'Järgmine kuu',
+    nextYearAriaLabel: 'Järgmine aasta',
+    prevMonthAriaLabel: 'Eelmine kuu',
+    prevYearAriaLabel: 'Eelmine aasta',
   },
   noDataText: 'Andmed puuduvad',
   carousel: {
@@ -47,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Pagination Navigation',
+      next: 'Järgmine lehekülg',
+      previous: 'Eelmine lehekülg',
+      page: 'Mine lehele {0}',
+      currentPage: 'Praegune leht, leht {0}',
+    },
   },
 }

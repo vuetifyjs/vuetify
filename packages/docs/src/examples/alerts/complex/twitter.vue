@@ -3,6 +3,7 @@
     <v-alert
       v-model="alert"
       dismissible
+      close-icon="mdi-delete"
       color="cyan"
       border="left"
       elevation="2"

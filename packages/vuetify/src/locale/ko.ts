@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} 선택됨',
+    nextMonthAriaLabel: '다음 달',
+    nextYearAriaLabel: '내년',
+    prevMonthAriaLabel: '지난달',
+    prevYearAriaLabel: '전년도',
   },
   noDataText: '데이터가 없습니다.',
   carousel: {
@@ -47,5 +51,14 @@ export default {
   timePicker: {
     am: '오전',
     pm: '오후',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Pagination Navigation',
+      next: '다음 페이지',
+      previous: '이전 페이지',
+      page: '고토 페이지 {0}',
+      currentPage: '현재 페이지, 페이지 {0}',
+    },
   },
 }

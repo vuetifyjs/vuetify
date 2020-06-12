@@ -2,6 +2,8 @@
 
 $banner-actions-start-margin: 90px !default;
 $banner-actions-margin: 8px !default;
+$banner-border-radius: 0 !default;
+$banner-elevation: 0 !default;
 $banner-line-height: 20px !default;
 $banner-start-padding: 24px !default;
 $banner-end-padding: 8px !default;
@@ -14,3 +16,4 @@ $banner-mobile-start-padding: 16px !default;
 $banner-mobile-top-padding: 16px !default;
 $banner-mobile-actions-top-padding: 12px !default;
 $banner-mobile-singleline-padding: 36px !default;
+$banner-shaped-border-radius: map-get($rounded, 'xl') $banner-border-radius !default;

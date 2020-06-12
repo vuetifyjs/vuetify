@@ -13,13 +13,17 @@
       :multi-line="multiLine"
     >
       {{ text }}
-      <v-btn
-        color="red"
-        text
-        @click="snackbar = false"
-      >
-        Close
-      </v-btn>
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="red"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
     </v-snackbar>
   </div>
 </template>

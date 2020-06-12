@@ -72,7 +72,7 @@ export default mixins(
       return this.isActive
     },
     rippleState (): string | undefined {
-      return !this.disabled && !this.validationState
+      return !this.isDisabled && !this.validationState
         ? undefined
         : this.validationState
     },
@@ -130,7 +130,7 @@ export default mixins(
       this.isFocused = false
     },
     onChange () {
-      if (this.isDisabled) return
+      if (!this.isInteractive) return
 
       const value = this.value
       let input = this.internalValue

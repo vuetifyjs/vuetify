@@ -88,7 +88,7 @@ export default VSelect.extend({
       if (!this.isSearching || this.noFilter || this.internalSearch == null) return this.allItems
 
       return this.allItems.filter(item => {
-        const value = getPropertyFromItem(item, this.itemText, undefined)
+        const value = getPropertyFromItem(item, this.itemText)
         const text = value != null ? String(value) : ''
 
         return this.filter(item, String(this.internalSearch), text)
@@ -251,32 +251,28 @@ export default VSelect.extend({
       }
     },
     deleteCurrentItem () {
-      if (this.readonly) return
+      const curIndex = this.selectedIndex
+      const curItem = this.selectedItems[curIndex]
 
-      const index = this.selectedItems.length - 1
+      // Do nothing if input or item is disabled
+      if (
+        !this.isInteractive ||
+        this.getDisabled(curItem)
+      ) return
 
-      if (this.selectedIndex === -1 && index !== 0) {
-        this.selectedIndex = index
-        return
-      }
+      const length = this.selectedItems.length
+      const nextIndex = curIndex !== length - 1
+        ? curIndex
+        : curIndex - 1
+      const nextItem = this.selectedItems[nextIndex]
 
-      const currentItem = this.selectedItems[this.selectedIndex]
-
-      if (this.getDisabled(currentItem)) return
-
-      const newIndex = this.selectedIndex === index
-        ? this.selectedIndex - 1
-        : this.selectedItems[this.selectedIndex + 1]
-          ? this.selectedIndex
-          : -1
-
-      if (newIndex === -1) {
+      if (!nextItem) {
         this.setValue(this.multiple ? [] : undefined)
       } else {
-        this.selectItem(currentItem)
+        this.selectItem(curItem)
       }
 
-      this.selectedIndex = newIndex
+      this.selectedIndex = nextIndex
     },
     clearableCallback () {
       this.internalSearch = undefined
@@ -309,7 +305,7 @@ export default VSelect.extend({
         : []
     },
     onClick (e: MouseEvent) {
-      if (this.isDisabled) return
+      if (!this.isInteractive) return
 
       this.selectedIndex > -1
         ? (this.selectedIndex = -1)

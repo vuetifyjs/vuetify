@@ -105,13 +105,13 @@ describe('calendar-with-events.ts', () => {
     expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12', hour: 8, minute: 30, hasTime: true }, input: { Meetup: 'Meetup' } })).toBe('Meetup')
 
     wrapper.setProps({
-      eventName: 'Conference',
+      eventName: 'x',
     })
 
     expect(wrapper.vm.eventNameFunction).toBeDefined()
     expect(typeof wrapper.vm.eventNameFunction).toBe('function')
-    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12' }, input: { Conference: 'Conference' } })).toBe('Conference')
-    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12', hour: 8, minute: 30, hasTime: true }, input: { Conference: 'Conference' } })).toMatch(/^<strong>0?8:30( AM)?<\/strong> Conference$/) // will match 8:30 AM|| 08:30 AM || 8:30 || 08:30
+    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12' }, input: { x: 'Conference' } })).toBe('Conference')
+    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12', hour: 8, minute: 30, hasTime: true }, input: { x: 'Conference' } })).toMatch('Conference') // will match 8:30 AM|| 08:30 AM || 8:30 || 08:30
   })
 
   it('should format time', async () => {

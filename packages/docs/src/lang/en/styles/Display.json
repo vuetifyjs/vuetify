@@ -44,5 +44,11 @@
     "`.d-print-inline-flex`"
   ],
   "printText2": "Print utility classes can also be combined with none print display utilities.",
-  "exampleText": "Resize your screen to see the elements conditionally hide."
+  "exampleText": "Resize your screen to see the elements conditionally hide.",
+  "screenReaderHeader1": "## Screen Readers",
+  "screenReaderText": "Use the `d-sr` utility classes to conditionally hide content on all devices *except* screen readers.",
+  "screenReaderHelpers": [
+    "`d-sr-only` visually hides elements but will still announce to **screen readers**.",
+    "`d-sr-only-focusable` visually hides an element until it is focused. This is useful when implementing *skip links*."
+  ]
 }

@@ -26,6 +26,11 @@
       "desc": "Menu can be offset by the Y axis to make the activator visible.",
       "uninverted": true
     },
+    "rounded": {
+      "heading": "### Rounded",
+      "desc": "Menus can have their border-radius set by the `rounded` prop. Additional information about rounded classes is on the [Border Radius page](/styles/border-radius).",
+      "uninverted": true
+    },
     "close-on-click": {
       "heading": "### Close on click",
       "desc": "Menu can be closed when lost focus.",

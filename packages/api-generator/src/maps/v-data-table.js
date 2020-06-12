@@ -9,6 +9,7 @@ const TableHeader = {
   'align?': '\'start\' | \'center\' | \'end\'',
   'sortable?': 'boolean',
   'filterable?': 'boolean',
+  'groupable?': 'boolean',
   'divider?': 'boolean',
   'class?': 'string | string[]',
   'width?': 'string | number',
@@ -16,8 +17,31 @@ const TableHeader = {
   'sort?': '(a: any, b: any) => number',
 }
 
+const dataString = `{
+  expand: (value: boolean) => void,
+  headers: TableHeader[],
+  isExpanded: boolean,
+  isMobile: boolean,
+  isSelected: boolean,
+  item: any,
+  select: (value: boolean) => void
+}`
 const DataTableEvents = [
-  { name: 'click:row', source: 'v-data-table', value: 'any, { select: (value: boolean) => void, isSelected: boolean, expand: (value: boolean) => void, isExpanded: boolean }' },
+  {
+    name: 'click:row',
+    source: 'v-data-table',
+    value: `any, ${dataString}`,
+  },
+  {
+    name: 'contextmenu:row',
+    source: 'v-data-table',
+    value: `MouseEvent, ${dataString}`,
+  },
+  {
+    name: 'dblclick:row',
+    source: 'v-data-table',
+    value: `MouseEvent, ${dataString}`,
+  },
 ].concat(DataIteratorEvents)
 
 const DataTableHeaderScopedProps = {

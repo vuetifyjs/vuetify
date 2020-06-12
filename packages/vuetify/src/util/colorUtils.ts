@@ -1,6 +1,10 @@
+// Utilities
 import { consoleWarn } from './console'
 import { chunk, padEnd } from './helpers'
 import { toXYZ } from './color/transformSRGB'
+
+// Types
+import { VuetifyThemeVariant } from 'types/services/theme'
 
 export type ColorInt = number
 export type XYZ = [number, number, number]
@@ -14,6 +18,10 @@ export type HSLA = HSL & { a: number }
 export type Hex = string
 export type Hexa = string
 export type Color = string | number | {}
+
+export function isCssColor (color?: string | false): boolean {
+  return !!color && !!color.match(/^(#|var\(--|(rgb|hsl)a?\()/)
+}
 
 export function colorToInt (color: Color): ColorInt {
   let rgb
@@ -42,6 +50,28 @@ export function colorToInt (color: Color): ColorInt {
   }
 
   return rgb
+}
+
+export function classToHex (
+  color: string,
+  colors: Record<string, Record<string, string>>,
+  currentTheme: Partial<VuetifyThemeVariant>,
+): string {
+  const [colorName, colorModifier] = color
+    .toString().trim().replace('-', '').split(' ', 2) as (string | undefined)[]
+
+  let hexColor = ''
+  if (colorName && colorName in colors) {
+    if (colorModifier && colorModifier in colors[colorName]) {
+      hexColor = colors[colorName][colorModifier]
+    } else if ('base' in colors[colorName]) {
+      hexColor = colors[colorName].base
+    }
+  } else if (colorName && colorName in currentTheme) {
+    hexColor = currentTheme[colorName] as string
+  }
+
+  return hexColor
 }
 
 export function intToHex (color: ColorInt): string {
@@ -176,7 +206,7 @@ export function parseHex (hex: string): Hex {
 
   hex = hex.replace(/([^0-9a-f])/gi, 'F')
 
-  if (hex.length === 3) {
+  if (hex.length === 3 || hex.length === 4) {
     hex = hex.split('').map(x => x + x).join('')
   }
 
@@ -187,6 +217,18 @@ export function parseHex (hex: string): Hex {
   }
 
   return `#${hex}`.toUpperCase().substr(0, 9)
+}
+
+export function parseGradient (
+  gradient: string,
+  colors: Record<string, Record<string, string>>,
+  currentTheme: Partial<VuetifyThemeVariant>,
+) {
+  return gradient.replace(/([a-z]+(\s[a-z]+-[1-5])?)(?=$|,)/gi, x => {
+    return classToHex(x, colors, currentTheme) || x
+  }).replace(/(rgba\()#[0-9a-f]+(?=,)/gi, x => {
+    return 'rgba(' + Object.values(HexToRGBA(parseHex(x.replace(/rgba\(/, '')))).slice(0, 3).join(',')
+  })
 }
 
 export function RGBtoInt (rgba: RGBA): ColorInt {

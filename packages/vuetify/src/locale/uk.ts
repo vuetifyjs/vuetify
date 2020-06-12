@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} вибрано',
+    nextMonthAriaLabel: 'Наступного місяця',
+    nextYearAriaLabel: 'Наступного року',
+    prevMonthAriaLabel: 'Попередній місяць',
+    prevYearAriaLabel: 'Попередній рік',
   },
   noDataText: 'Немає даних для відображення',
   carousel: {
@@ -47,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Навігація по сторінках',
+      next: 'Наступна сторінка',
+      previous: 'Попередня сторінка',
+      page: 'Перейти на сторінку {0}',
+      currentPage: 'Поточна сторінка, Сторінка {0}',
+    },
   },
 }

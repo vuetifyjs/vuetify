@@ -102,9 +102,10 @@
 
           events.push({
             name: this.names[this.rnd(0, this.names.length - 1)],
-            start: this.formatDate(first, !allDay),
-            end: this.formatDate(second, !allDay),
+            start: first,
+            end: second,
             color: this.colors[this.rnd(0, this.colors.length - 1)],
+            timed: !allDay,
           })
         }
 
@@ -115,11 +116,6 @@
       },
       rnd (a, b) {
         return Math.floor((b - a + 1) * Math.random()) + a
-      },
-      formatDate (a, withTime) {
-        return withTime
-          ? `${a.getFullYear()}-${a.getMonth() + 1}-${a.getDate()} ${a.getHours()}:${a.getMinutes()}`
-          : `${a.getFullYear()}-${a.getMonth() + 1}-${a.getDate()}`
       },
     },
   }

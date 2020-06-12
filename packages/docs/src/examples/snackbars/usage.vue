@@ -5,13 +5,17 @@
       v-model="snackbar"
     >
       {{ text }}
-      <v-btn
-        color="pink"
-        text
-        @click="snackbar = false"
-      >
-        Close
-      </v-btn>
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="pink"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
     </v-snackbar>
   </div>
 </template>

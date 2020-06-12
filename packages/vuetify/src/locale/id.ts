@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} dipilih',
+    nextMonthAriaLabel: 'Bulan depan',
+    nextYearAriaLabel: 'Tahun depan',
+    prevMonthAriaLabel: 'Bulan sebelumnya',
+    prevYearAriaLabel: 'Tahun sebelumnya',
   },
   noDataText: 'Tidak ada data tersedia',
   carousel: {
@@ -47,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Navigasi Pagination',
+      next: 'Halaman selanjutnya',
+      previous: 'Halaman sebelumnya',
+      page: 'Buka halaman {0}',
+      currentPage: 'Halaman Saat Ini, Halaman {0}',
+    },
   },
 }
