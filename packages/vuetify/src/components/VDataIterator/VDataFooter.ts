@@ -50,6 +50,10 @@ export default Vue.extend({
       type: String,
       default: '$vuetify.dataFooter.itemsPerPageAll',
     },
+    itemsPerPageMenuProps: {
+      type: [String, Array, Object],
+      default: null,
+    },
     showFirstLastPage: Boolean,
     showCurrentPage: Boolean,
     disablePagination: Boolean,
@@ -107,6 +111,19 @@ export default Vue.extend({
 
       if (!computedIPPO.find(ippo => ippo.value === value)) value = computedIPPO[0]
 
+      const itemsPerPageSelectProps = {
+        disabled: this.disableItemsPerPage,
+        items: computedIPPO,
+        value,
+        hideDetails: true,
+        auto: true,
+        minWidth: '75px',
+      } as any
+
+      if (this.itemsPerPageMenuProps) {
+        itemsPerPageSelectProps.menuProps = this.itemsPerPageMenuProps
+      }
+
       return this.$createElement('div', {
         staticClass: 'v-data-footer__select',
       }, [
@@ -115,14 +132,7 @@ export default Vue.extend({
           attrs: {
             'aria-label': this.itemsPerPageText,
           },
-          props: {
-            disabled: this.disableItemsPerPage,
-            items: computedIPPO,
-            value,
-            hideDetails: true,
-            auto: true,
-            minWidth: '75px',
-          },
+          props: itemsPerPageSelectProps,
           on: {
             input: this.onChangeItemsPerPage,
           },

@@ -146,6 +146,22 @@
       "singleSelect": "Toggles rendering of select-all checkbox",
       "someItems": "Indicates if one or more items in table are selected",
       "sortIcon": "Icon used for sort button"
+    },
+    "v-data-footer": {
+      "disableItemsPerPage": "Disables items-per-page dropdown",
+      "disablePagination": "Disables pagination buttons",
+      "firstIcon": "First icon",
+      "itemsPerPageAllText": "Text for 'All' option in items-per-page dropdown",
+      "itemsPerPageOptions": "Array of options to show in the items-per-page dropdown",
+      "itemsPerPageText": "Text for items-per-page dropdown",
+      "itemsPerPageMenuProps": "Pass props through to the `v-menu` items per page component. Accepts either a string for boolean props `menu-props=\"auto, overflowY\"`, or an object `:menu-props=\"{ auto: true, overflowY: true }\"`",
+      "lastIcon": "Last icon",
+      "nextIcon": "Next icon",
+      "options": "DataOptions",
+      "pagination": "DataPagination",
+      "prevIcon": "Previous icon",
+      "showCurrentPage": "Show current page number between prev/next icons",
+      "showFirstLastPage": "Show first/last icons"
     }
   },
   "slots": {
