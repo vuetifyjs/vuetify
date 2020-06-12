@@ -40,16 +40,16 @@
     "toggle": "Toggles the alert's active state. Available in the close slot and used as the click action in **dismissible**."
   },
   "sass": {
-    "$alert-border-opacity": "",
-    "$alert-border-radius": "",
-    "$alert-border-width": "",
-    "$alert-dense-border-width": "",
-    "$alert-font-size": "",
-    "$alert-icon-size": "",
-    "$alert-margin": "",
-    "$alert-outline": "",
-    "$alert-padding": "",
-    "$alert-prominent-icon-font-size": "",
-    "$alert-prominent-icon-size": ""
+    "$alert-border-opacity": "border opacity",
+    "$alert-border-radius": "border radius",
+    "$alert-border-width": "border width",
+    "$alert-dense-border-width": "dense border width",
+    "$alert-font-size": "font size",
+    "$alert-icon-size": "icon size",
+    "$alert-margin": "margin",
+    "$alert-outline": "outline",
+    "$alert-padding": "padding",
+    "$alert-prominent-icon-font-size": "font size prominent",
+    "$alert-prominent-icon-size": "icon size prominent"
   }
 }

@@ -5,9 +5,10 @@ on:
     branches:
       - 'master'
     paths:
+    - 'build/api-gen/locale/en/**'
     - 'src/i18n/messages/en.json'
     - 'src/pages/en/**'
-    - '.github/workflows/**'
+    - '.github/workflows/crowdin-uploads.yml'
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
