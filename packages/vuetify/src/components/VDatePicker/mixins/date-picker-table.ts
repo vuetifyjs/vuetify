@@ -48,7 +48,7 @@ export default mixins(
     events: {
       type: [Array, Function, Object],
       default: () => null,
-    } as PropValidator<DatePickerEvents>,
+    } as PropValidator<DatePickerEvents | null>,
     eventColor: {
       type: [Array, Function, Object, String],
       default: () => 'warning',

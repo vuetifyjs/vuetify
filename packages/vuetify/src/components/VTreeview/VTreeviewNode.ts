@@ -104,7 +104,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
     item: {
       type: Object,
       default: () => null,
-    } as PropValidator<{}>,
+    } as PropValidator<Record<string, unknown> | null>,
     parentIsDisabled: Boolean,
     ...VTreeviewNodeProps,
   },
