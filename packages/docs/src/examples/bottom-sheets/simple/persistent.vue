@@ -14,7 +14,7 @@
       <v-sheet class="text-center" height="200px">
         <v-btn
           class="mt-6"
-          flat
+          text
           color="error"
           @click="sheet = !sheet"
         >close</v-btn>
