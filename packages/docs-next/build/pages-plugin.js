@@ -16,7 +16,7 @@ function getPages (files) {
     const { body, attributes } = fm(readFile(filePath))
     const { nav, meta = {} } = attributes
     const dir = filePath.replace(/^\.\/src\/pages/, '').replace(/\.\w+$/, '/')
-    const tokens = md.parse(body)
+    const tokens = md.parse(body, {})
     const firstIndex = tokens.findIndex(({ type }) => type === 'heading_open')
     const nextIndex = firstIndex + 1
     const heading = (tokens[nextIndex] || {}).content || ''
@@ -72,7 +72,7 @@ function getModified (files) {
 
 function getPageHeadings (page) {
   const headings = []
-  const tokens = md.parse(page)
+  const tokens = md.parse(page, {})
   const length = tokens.length
 
   for (let i = 0; i < length; i++) {
