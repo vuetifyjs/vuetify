@@ -18,13 +18,15 @@ function getPages (files) {
     const dir = filePath.replace(/^\.\/src\/pages/, '').replace(/\.\w+$/, '/')
     const tokens = md.parse(body)
     const firstIndex = tokens.findIndex(({ type }) => type === 'heading_open')
+    const nextIndex = firstIndex + 1
+    const heading = (tokens[nextIndex] || {}).content || ''
 
     // If there is no provided title
     // generate one from the first
     // content found on the page
     pages[dir] = (
       nav ||
-      tokens[firstIndex + 1].content ||
+      heading ||
       meta.title
     )
 
