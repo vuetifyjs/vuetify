@@ -191,8 +191,11 @@ const installedComponents = Vue.options._base.options.components
 const installedDirectives = Vue.options._base.options.directives
 
 const componentNameRegex = /^(?:V[A-Z]|v-[a-z])/
+const excludes = ['VMessages', 'VLabel']
+
 for (const name in installedComponents) {
   if (!componentNameRegex.test(name)) continue
+  if (excludes.includes(name)) continue
 
   let component = installedComponents[name]
 
@@ -210,10 +213,10 @@ for (const name in installedComponents) {
   components[kebabName] = options
 }
 
-for (const key of ['Mutate', 'Intersect', 'Ripple', 'Resize', 'Scroll', 'Touch']) {
+for (const key of ['Mutate', 'Intersect', 'Ripple', 'Resize', 'Scroll', 'Touch', 'ClickOutside']) {
   if (!installedDirectives[key]) continue
 
-  const lowerCaseVersion = key.toLowerCase()
+  const lowerCaseVersion = hyphenate(key).toLowerCase()
   const vKey = `v-${lowerCaseVersion}`
   const directive = map[vKey]
   directive.type = getPropDefault(directive.default, directive.type)

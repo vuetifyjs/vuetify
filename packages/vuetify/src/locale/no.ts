@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} valgt',
+    nextMonthAriaLabel: 'Neste måned',
+    nextYearAriaLabel: 'Neste år',
+    prevMonthAriaLabel: 'Forrige måned',
+    prevYearAriaLabel: 'Forrige år',
   },
   noDataText: 'Ingen data er tilgjengelig',
   carousel: {
@@ -47,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Paginasjonsnavigasjon',
+      next: 'Neste side',
+      previous: 'Forrige side',
+      page: 'Gå til side {0}',
+      currentPage: 'Gjeldende side, side {0}',
+    },
   },
 }

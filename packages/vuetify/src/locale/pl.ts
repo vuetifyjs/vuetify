@@ -20,7 +20,7 @@ export default {
   dataFooter: {
     itemsPerPageText: 'Pozycji na stronie:',
     itemsPerPageAll: 'Wszystkie',
-    nextPage: 'Nastęna strona',
+    nextPage: 'Następna strona',
     prevPage: 'Poprzednia strona',
     firstPage: 'Pierwsza strona',
     lastPage: 'Ostatnia strona',
@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} dat(y)',
+    nextMonthAriaLabel: 'Następny miesiąc',
+    nextYearAriaLabel: 'Następny rok',
+    prevMonthAriaLabel: 'Poprzedni miesiąc',
+    prevYearAriaLabel: 'Poprzedni rok',
   },
   noDataText: 'Brak danych',
   carousel: {
@@ -47,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Nawigacja paginacyjna',
+      next: 'Następna strona',
+      previous: 'Poprzednia strona',
+      page: 'Idź do strony {0}',
+      currentPage: 'Bieżąca strona, strona {0}',
+    },
   },
 }

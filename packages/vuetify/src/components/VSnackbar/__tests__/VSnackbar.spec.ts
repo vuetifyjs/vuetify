@@ -14,100 +14,133 @@ describe('VSnackbar.ts', () => {
 
   beforeEach(() => {
     mountFunction = (options = {} as MountOptions<Instance>) => {
-      return mount(VSnackbar, options)
+      return mount(VSnackbar, {
+        mocks: {
+          $vuetify: {
+            application: {
+              bar: 24,
+              bottom: 56,
+              footer: 48,
+              insetFooter: 32,
+              left: 256,
+              right: 256,
+              top: 64,
+            },
+          },
+        },
+        ...options,
+      })
     }
   })
 
-  it('should have a v-snack class', () => {
+  it.each([
+    [{}, true],
+    [{ text: true }, false],
+    [{ outlined: true }, false],
+    [{ light: true }, false],
+  ])('should be dark when using %s', (propsData, expected: boolean) => {
+    const wrapper = mountFunction({ propsData })
+
+    expect(wrapper.vm.isDark).toBe(expected)
+  })
+
+  it.each([
+    [undefined, undefined, undefined],
+    [false, undefined, undefined],
+    [true, '256px', '256px'],
+  ])('should have app padding on the x-axis using %s', (app, left, right) => {
     const wrapper = mountFunction({
-      propsData: {
-        value: true,
+      propsData: { app },
+    })
+
+    expect(wrapper.vm.styles).toHaveProperty('paddingLeft', left)
+    expect(wrapper.vm.styles).toHaveProperty('paddingRight', right)
+  })
+
+  it.each([
+    [undefined, true],
+    [false, true],
+    [true, false],
+  ])('should have app padding on the x-axis using %s', (absolute, expected: boolean) => {
+    const wrapper = mountFunction({
+      propsData: { absolute },
+    })
+
+    expect(Object.keys(wrapper.vm.styles).length > 0).toBe(expected)
+  })
+
+  it.each([
+    [undefined, false],
+    [false, false],
+    [true, true],
+  ])('should conditionally invoke setTimeout method using %s', (value, expected: boolean) => {
+    const setTimeout = jest.fn()
+
+    mountFunction({
+      propsData: { value },
+      methods: { setTimeout },
+    })
+
+    expect(setTimeout.mock.calls.length > 0).toBe(expected)
+  })
+
+  it.each([
+    [undefined, false],
+    [false, true],
+  ])('should conditionally render transition content using %s', (transition, expected: boolean) => {
+    const genContent = jest.fn()
+    const genTransition = jest.fn()
+
+    mountFunction({
+      propsData: { transition },
+      methods: {
+        genTransition,
+        genContent,
       },
     })
 
-    expect(wrapper.classes()).toContain('v-snack')
+    expect(genContent.mock.calls.length > 0).toBe(expected)
+    expect(genTransition.mock.calls.length > 0).toBe(!expected)
   })
 
-  it('should have a v-snack__wrapper with a color class', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        value: true,
-        color: 'orange lighten-2',
-      },
+  it.each([
+    [undefined, false],
+    [false, false],
+    [true, true],
+  ])('should conditionally invoke setTimeout method using %s', (value, expected) => {
+    const setTimeout = jest.fn()
+
+    mountFunction({
+      propsData: { value },
+      methods: { setTimeout },
     })
 
-    expect(wrapper.findAll('.v-snack__wrapper.orange')).toHaveLength(1)
-    expect(wrapper.findAll('.v-snack__wrapper.lighten-2')).toHaveLength(1)
+    expect(setTimeout.mock.calls.length > 0).toBe(expected)
   })
 
-  it('should have a v-snack__content class only when active', async () => {
-    const wrapper = mountFunction({
-      propsData: {
-        value: false,
-        timeout: 1000,
-      },
-    })
-
-    expect(wrapper.findAll('div .v-snack__content')).toHaveLength(0)
-
-    wrapper.setProps({ value: true })
-
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.findAll('div .v-snack__content')).toHaveLength(1)
-  })
-
-  it('should timeout correctly', async () => {
+  it.each([
+    [undefined, true],
+    [100, true],
+    [0, false],
+    [-1, false],
+  ])('should condtionally remove the snackbar when using a timeout value of %s', (timeout, expected) => {
     jest.useFakeTimers()
-    const wrapper = mountFunction({
+    const spy = jest.spyOn(window, 'setTimeout')
+
+    mountFunction({
       propsData: {
-        value: false,
-        timeout: 3141,
+        timeout,
+        value: true,
       },
     })
-
-    const value = jest.fn()
-
-    wrapper.vm.$on('input', value)
-    wrapper.setProps({ value: true })
-    // wrapper.update()
-
-    await wrapper.vm.$nextTick()
-
-    expect(setTimeout.mock.calls).toHaveLength(1)
-    expect(setTimeout.mock.calls[0][1]).toBe(3141)
 
     jest.runAllTimers()
 
-    await wrapper.vm.$nextTick()
+    expect(spy.mock.calls.length > 0).toBe(expected)
 
-    expect(wrapper.vm.isActive).toBe(false)
-    expect(value).toHaveBeenCalledWith(false)
-  })
-
-  it('should timeout correctly when initial value is true', async () => {
-    jest.useFakeTimers()
-    const wrapper = mountFunction({
-      propsData: {
-        value: true,
-        timeout: 3141,
-      },
-    })
-
-    const value = jest.fn()
-
-    wrapper.vm.$on('input', value)
-
-    await wrapper.vm.$nextTick()
-
-    expect(setTimeout.mock.calls).toHaveLength(1)
-    expect(setTimeout.mock.calls[0][1]).toBe(3141)
-
-    jest.runAllTimers()
-
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.isActive).toBe(false)
-    expect(value).toHaveBeenCalledWith(false)
+    // TODO: remove in v3
+    if (timeout === 0) {
+      expect(`[Vuetify] [UPGRADE] 'timeout="0"' is deprecated, use '-1' instead.`).toHaveBeenTipped()
+    }
   })
 })

@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} sélectionnés',
+    nextMonthAriaLabel: 'Le mois prochain',
+    nextYearAriaLabel: 'L\'année prochaine',
+    prevMonthAriaLabel: 'Le mois précédent',
+    prevYearAriaLabel: 'Année précédente',
   },
   noDataText: 'Aucune donnée disponible',
   carousel: {
@@ -47,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Navigation de pagination',
+      next: 'Page suivante',
+      previous: 'Page précédente',
+      page: 'Aller à la page {0}',
+      currentPage: 'Page actuelle, Page {0}',
+    },
   },
 }

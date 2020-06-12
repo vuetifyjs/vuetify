@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { VNode, VNodeDirective } from 'vue/types'
 import { VuetifyIcon } from 'vuetify/types/services/icons'
-import { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'types'
+import { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'vuetify/types'
 
 export function createSimpleFunctional (
   c: string,
@@ -362,6 +362,17 @@ export function debounce (fn: Function, delay: number) {
   return (...args: any[]) => {
     clearTimeout(timeoutId)
     timeoutId = setTimeout(() => fn(...args), delay)
+  }
+}
+
+export function throttle<T extends (...args: any[]) => any> (fn: T, limit: number) {
+  let throttling = false
+  return (...args: Parameters<T>): void | ReturnType<T> => {
+    if (!throttling) {
+      throttling = true
+      setTimeout(() => throttling = false, limit)
+      return fn(...args)
+    }
   }
 }
 

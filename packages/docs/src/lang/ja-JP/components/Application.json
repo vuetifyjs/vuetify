@@ -1,9 +1,9 @@
 {
   "heading": "# アプリケーション",
-  "headingText": "Vuetify では、 `v-app` コンポーネントや `v-navigation-drawer`, `v-app-bar`, `v-footer`などの**app**プロパティが、`<v-content>`周りで適切なサイズになる事でアプリケーション作成を手助けします。レイアウトのサイズを決める事に苦労することなく本当にユニークなUIを実現することができます。`v-app` コンポーネントはすべてのアプリケーションで**必要**です。 `v-app` コンポーネントは多くのVuetifyコンポーネントのマウントポイントであり、デフォルトアプリケーションの_variant_ (**dark/light**) を子コンポーネントに伝達します。そしてsafariなど多種ブラウザに対応しています。 `v-app` はアプリケーションで一度のみ使用されるべきです。",
+  "headingText": "Vuetify では、 `v-app` コンポーネントや `v-navigation-drawer`, `v-app-bar`, `v-footer`などの**app**プロパティが、`<v-main>`周りで適切なサイズになる事でアプリケーション作成を手助けします。レイアウトのサイズを決める事に苦労することなく本当にユニークなUIを実現することができます。`v-app` コンポーネントはすべてのアプリケーションで**必要**です。 `v-app` コンポーネントは多くのVuetifyコンポーネントのマウントポイントであり、デフォルトアプリケーションの_variant_ (**dark/light**) を子コンポーネントに伝達します。そしてsafariなど多種ブラウザに対応しています。 `v-app` はアプリケーションで一度のみ使用されるべきです。",
   "markupHeader": "## デフォルトのアプリケーションマークアップ",
-  "markupText": "これは Vuetify のデフォルトのアプリケーションマークアップの例です。**app** プロパティを適用する限り、レイアウト要素はどこにでも配置できます。このすべての主要なコンポーネントは`v-content`です。指定した**app**コンポーネントの構造に応じて、このサイズは動的に設定されます。`v-bottom-navigation`を含む上記のコンポーネントの一部またはすべての組み合わせを使用できます。",
-  "markupText2": "[vue-router](https://router.vuejs.org/ja/) を使用する場合は、ビューを`v-content`の中に配置することをお勧めします。",
+  "markupText": "これは Vuetify のデフォルトのアプリケーションマークアップの例です。**app** プロパティを適用する限り、レイアウト要素はどこにでも配置できます。このすべての主要なコンポーネントは`v-main`です。指定した**app**コンポーネントの構造に応じて、このサイズは動的に設定されます。`v-bottom-navigation`を含む上記のコンポーネントの一部またはすべての組み合わせを使用できます。",
+  "markupText2": "[vue-router](https://router.vuejs.org/ja/) を使用する場合は、ビューを`v-main`の中に配置することをお勧めします。",
   "alert1": "アプリケーションが適切に動作するために、**確実に** `v-app` コンポーネントでラップしてください。このコンポーネントがクロスブラウザ対応に必要です。Vuetifyは1ページでの複数の独立したVuetifyインスタンスをサポートしていません。'v-app'はアプリケーションの**どこにでも**配置できますが、1つであり、かつ**全て**のvuetifyコンポ―ネントの親でなくてはなりません。",
   "alert2": "**app** propを適用すると、レイアウト要素に position: **fixed** が自動的に適用されます。アプリケーションが _absolute_ 要素を呼び出す場合、**absolute** プロパティを使用して、この機能を上書きできます。",
   "componentHeader": "## Application コンポーネント",
@@ -26,13 +26,13 @@
   "componentText5": "簡単に言えば、`v-system-bar` は常に `v-app-bar` の上にあり、`v-navigation-drawer` は左右どちらにも配置でき、`v-footer` は常に `v-bottom-navigation` の上に配置されているということです。",
   "componentImg": "Vuetify Application",
   "appHeader": "## アプリケーション サービス",
-  "appText1": "**アプリケーションサービス**はVuetifyのレイアウトを設定するために使用されます。アプリケーションサービスは `v-content` コンポーネントと通信し、アプリケーションコンテンツのサイズを適切に調整します。アプリケーションサービスには、アクセス可能なプロパティがいくつかあります:",
+  "appText1": "**アプリケーションサービス**はVuetifyのレイアウトを設定するために使用されます。アプリケーションサービスは `v-main` コンポーネントと通信し、アプリケーションコンテンツのサイズを適切に調整します。アプリケーションサービスには、アクセス可能なプロパティがいくつかあります:",
   "appText2": "これらの値は、**app** propを使ってコンポーネントを追加したり削除したりしたときに自動的に更新されます。これらの値は編集**できず**、 _READONLY_ の状態で存在します。これらの値にアクセスするには、**$vuetify**オブジェクトのapplicationプロパティを参照します。",
   "accessibility": {
-    "desc": "デフォルトでは、`v-content` には [**main**](https://www.w3.org/TR/html51/grouping-content.html#the-main-element) の [TR](https://www.w3.org/TR/html51/) タグが割り当てられ、それがドキュメントやアプリケーションの `body` のメインコンテンツ領域であることを示します。"
+    "desc": "デフォルトでは、`v-main` には [**main**](https://www.w3.org/TR/html51/grouping-content.html#the-main-element) の [TR](https://www.w3.org/TR/html51/) タグが割り当てられ、それがドキュメントやアプリケーションの `body` のメインコンテンツ領域であることを示します。"
   },
   "props": {
-    "v-content": {
+    "v-main": {
       "tag": "Components.Sheets.props.tag"
     }
   }

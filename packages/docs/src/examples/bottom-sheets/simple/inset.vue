@@ -1,10 +1,11 @@
 <template>
   <div class="text-center">
     <v-bottom-sheet v-model="sheet" inset>
-      <template v-slot:activator="{ on }">
+      <template v-slot:activator="{ on, attrs }">
         <v-btn
           color="orange"
           dark
+          v-bind="attrs"
           v-on="on"
         >
           Open Inset

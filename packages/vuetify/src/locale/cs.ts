@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} vybráno',
+    nextMonthAriaLabel: 'Příští měsíc',
+    nextYearAriaLabel: 'Příští rok',
+    prevMonthAriaLabel: 'Předchozí měsíc',
+    prevYearAriaLabel: 'Předchozí rok',
   },
   noDataText: 'Nejsou dostupná žádná data',
   carousel: {
@@ -47,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Navigace stránkování',
+      next: 'Další strana',
+      previous: 'Předchozí strana',
+      page: 'Přejít na stránku {0}',
+      currentPage: 'Aktuální stránka, stránka {0}',
+    },
   },
 }

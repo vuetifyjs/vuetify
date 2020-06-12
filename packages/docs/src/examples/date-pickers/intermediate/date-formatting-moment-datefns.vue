@@ -7,12 +7,13 @@
           :close-on-content-click="false"
           max-width="290"
         >
-          <template v-slot:activator="{ on }">
+          <template v-slot:activator="{ on, attrs }">
             <v-text-field
               :value="computedDateFormattedMomentjs"
               clearable
               label="Formatted with Moment.js"
               readonly
+              v-bind="attrs"
               v-on="on"
               @click:clear="date = null"
             ></v-text-field>
@@ -30,12 +31,13 @@
           :close-on-content-click="false"
           max-width="290"
         >
-          <template v-slot:activator="{ on }">
+          <template v-slot:activator="{ on, attrs }">
             <v-text-field
               :value="computedDateFormattedDatefns"
               clearable
               label="Formatted with datefns"
               readonly
+              v-bind="attrs"
               v-on="on"
               @click:clear="date = null"
             ></v-text-field>

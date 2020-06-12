@@ -15,7 +15,7 @@
         </v-list-item>
         <v-list-item link>
           <v-list-item-action>
-            <v-icon>mdi-contact-mail</v-icon>
+            <v-icon>mdi-email</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Contact</v-list-item-title>
@@ -33,7 +33,7 @@
       <v-toolbar-title>Application</v-toolbar-title>
     </v-app-bar>
 
-    <v-content>
+    <v-main>
       <v-container
         class="fill-height"
         fluid
@@ -60,7 +60,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
     <v-footer
       color="indigo"
       app

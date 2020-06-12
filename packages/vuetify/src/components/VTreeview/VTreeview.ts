@@ -3,6 +3,8 @@ import './VTreeview.sass'
 
 // Types
 import { VNode, VNodeChildrenArrayContents, PropType } from 'vue'
+import { PropValidator } from 'vue/types/options'
+import { TreeviewItemFunction } from 'vuetify/types'
 
 // Components
 import VTreeviewNode, { VTreeviewNodeProps } from './VTreeviewNode'
@@ -23,8 +25,6 @@ import {
   filterTreeItems,
   filterTreeItem,
 } from './util/filterTreeItems'
-import { TreeviewItemFunction } from 'types'
-import { PropValidator } from 'vue/types/options'
 
 type VTreeviewNodeInstance = InstanceType<typeof VTreeviewNode>
 

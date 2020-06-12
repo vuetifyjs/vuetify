@@ -32,7 +32,7 @@
     "desc": "crwdns40748:0[TR]crwdne40748:0"
   },
   "props": {
-    "v-content": {
+    "v-main": {
       "tag": "crwdns40750:0crwdne40750:0"
     }
   }

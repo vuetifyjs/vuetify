@@ -4558,6 +4558,7 @@ Object {
   "past": false,
   "present": false,
   "time": "",
+  "timeDelta": [Function],
   "timeToY": [Function],
   "weekday": 5,
   "year": 2019,

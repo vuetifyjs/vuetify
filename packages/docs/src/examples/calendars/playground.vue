@@ -73,7 +73,7 @@
         min-width="290px"
         offset-y
       >
-        <template v-slot:activator="{ on }">
+        <template v-slot:activator="{ on, attrs }">
           <v-text-field
             v-model="start"
             class="mt-3"
@@ -83,6 +83,7 @@
             readonly
             outlined
             hide-details
+            v-bind="attrs"
             v-on="on"
           ></v-text-field>
         </template>
@@ -119,7 +120,7 @@
         min-width="290px"
         offset-y
       >
-        <template v-slot:activator="{ on }">
+        <template v-slot:activator="{ on, attrs }">
           <v-text-field
             v-model="end"
             class="mt-3"
@@ -129,6 +130,7 @@
             readonly
             outlined
             hide-details
+            v-bind="attrs"
             v-on="on"
           ></v-text-field>
         </template>
@@ -164,7 +166,7 @@
         min-width="290px"
         offset-y
       >
-        <template v-slot:activator="{ on }">
+        <template v-slot:activator="{ on, attrs }">
           <v-text-field
             v-model="now"
             class="mt-3"
@@ -174,6 +176,7 @@
             readonly
             outlined
             hide-details
+            v-bind="attrs"
             v-on="on"
           ></v-text-field>
         </template>
@@ -456,8 +459,9 @@
 
           events.push({
             name: this.names[this.rnd(0, this.names.length - 1)],
-            start: this.formatDate(first, !allDay),
-            end: this.formatDate(second, !allDay),
+            start: first,
+            end: second,
+            timed: !allDay,
             color: this.colors[this.rnd(0, this.colors.length - 1)],
           })
         }
@@ -466,11 +470,6 @@
       },
       rnd (a, b) {
         return Math.floor((b - a + 1) * Math.random()) + a
-      },
-      formatDate (a, withTime) {
-        return withTime
-          ? `${a.getFullYear()}-${a.getMonth() + 1}-${a.getDate()} ${a.getHours()}:${a.getMinutes()}`
-          : `${a.getFullYear()}-${a.getMonth() + 1}-${a.getDate()}`
       },
     },
   }

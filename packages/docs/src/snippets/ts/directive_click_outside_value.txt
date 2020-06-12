@@ -1,0 +1,5 @@
+interface ClickOutsideBindingArgs {
+  handler: (e: Event) => void
+  closeConditional?: (e: Event) => boolean
+  include?: () => HTMLElement[]
+}

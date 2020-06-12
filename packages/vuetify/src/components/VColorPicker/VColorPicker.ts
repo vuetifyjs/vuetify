@@ -12,12 +12,15 @@ import VColorPickerSwatches from './VColorPickerSwatches'
 import { VColorPickerColor, parseColor, fromRGBA, extractColor, hasAlpha } from './util'
 import mixins from '../../util/mixins'
 import { deepEqual } from '../../util/helpers'
+
+// Mixins
+import Elevatable from '../../mixins/elevatable'
 import Themeable from '../../mixins/themeable'
 
 // Types
 import { VNode, PropType } from 'vue'
 
-export default mixins(Themeable).extend({
+export default mixins(Elevatable, Themeable).extend({
   name: 'v-color-picker',
 
   props: {
@@ -156,6 +159,7 @@ export default mixins(Themeable).extend({
       class: {
         'v-color-picker--flat': this.flat,
         ...this.themeClasses,
+        ...this.elevationClasses,
       },
       props: {
         maxWidth: this.width,

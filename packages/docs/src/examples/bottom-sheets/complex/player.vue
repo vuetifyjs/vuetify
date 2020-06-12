@@ -1,10 +1,11 @@
 <template>
   <div class="text-center">
     <v-bottom-sheet inset>
-      <template v-slot:activator="{ on }">
+      <template v-slot:activator="{ on, attrs }">
         <v-btn
           color="red"
           dark
+          v-bind="attrs"
           v-on="on"
         >
           Open Player

@@ -4,14 +4,13 @@
     "text": "introduction",
     "icon": "mdi-book-open-page-variant",
     "children": [
-      { "text": "guide", "to": "guide" },
       { "text": "whyVuetify", "to": "why-vuetify" },
       { "text": "faq", "to": "frequently-asked-questions" },
       { "text": "meetTheTeam", "to": "meet-the-team" },
       { "text": "sponsorsAndBackers", "to": "sponsors-and-backers" },
       { "text": "roadmap", "to": "roadmap" },
       { "text": "lts", "to": "long-term-support" },
-      { "new": true, "text": "security", "to": "security-disclosure" }
+      { "text": "security", "to": "security-disclosure" }
     ]
   },
   {
@@ -19,6 +18,7 @@
     "text": "gettingStarted",
     "icon": "mdi-speedometer",
     "children": [
+      { "text": "guide", "to": "guide" },
       { "text": "quickStart", "to": "quick-start" },
       { "text": "preMadeLayouts", "to": "pre-made-layouts" },
       { "text": "browserSupport", "to": "browser-support" },
@@ -34,13 +34,14 @@
     "children": [
       { "text": "accessibility", "to": "accessibility" },
       { "text": "aLaCarte", "to": "a-la-carte" },
-      { "text": "breakpoints", "to": "breakpoints" },
+      { "updated": true, "text": "breakpoints", "to": "breakpoints" },
+      { "new": true, "text": "globalConfig", "to": "global-config" },
       { "text": "icons", "to": "icons" },
-      { "text": "i18n", "to": "internationalization" },
+      { "updated": true, "text": "i18n", "to": "internationalization" },
       { "text": "rtl", "to": "rtl" },
-      { "new": true, "text": "presets", "to": "presets" },
+      { "text": "presets", "to": "presets" },
       { "text": "sass-variables", "to": "sass-variables" },
-      { "text": "theme", "to": "theme" }
+      { "updated": true, "text": "theme", "to": "theme" }
     ]
   },
   {
@@ -49,15 +50,15 @@
     "icon": "mdi-palette",
     "children": [
       { "text": "cssReset", "to": "css-reset" },
+      { "new": true, "text": "borderRadius", "to": "border-radius" },
       { "text": "colors", "to": "colors" },
       { "text": "content", "to": "content" },
       { "text": "display", "to": "display" },
       { "text": "elevation", "to": "elevation" },
       { "text": "flex", "to": "flex" },
       { "text": "float", "to": "float" },
-      { "text": "spacing", "to": "spacing" },
-      { "text": "text", "to": "text" },
-      { "text": "typography", "to": "typography" },
+      { "updated": true, "text": "spacing", "to": "spacing" },
+      { "updated": true, "text": "text", "to": "text-and-typography" },
       { "text": "transitions", "to": "transitions" },
       { "text": "scroll", "to": "scroll" }
     ]
@@ -68,10 +69,10 @@
     "icon": "mdi-view-dashboard",
     "children": [
       { "text": "apiExplorer", "subtext": "browseAllComponents", "to": "api-explorer" },
-      { "text": "alerts", "to": "alerts" },
+      { "updated": true, "text": "alerts", "to": "alerts" },
       { "text": "application", "to": "application" },
       { "text": "aspectRatios", "to": "aspect-ratios" },
-      { "text": "avatars", "to": "avatars" },
+      { "updated": true, "text": "avatars", "to": "avatars" },
       { "text": "badges", "to": "badges" },
       { "text": "banners", "to": "banners" },
       {
@@ -88,7 +89,7 @@
       { "text": "breadcrumbs", "to": "breadcrumbs" },
       { "text": "buttons", "to": "buttons" },
       { "text": "fabs", "to": "floating-action-buttons" },
-      { "text": "calendars", "to": "calendars" },
+      { "new": true, "text": "calendars", "to": "calendars" },
       { "text": "cards", "to": "cards" },
       { "text": "carousels", "to": "carousels" },
       { "text": "chips", "to": "chips" },
@@ -102,8 +103,8 @@
         "children": [
           { "text": "autocompletes", "to": "autocompletes" },
           { "text": "combobox", "to": "combobox" },
-          { "text": "fileInputs", "to": "file-inputs" },
-          { "text": "forms", "to": "forms" },
+          { "updated": true, "text": "fileInputs", "to": "file-inputs" },
+          { "updated": true, "text": "forms", "to": "forms" },
           { "text": "inputs", "to": "inputs" },
           { "text": "overflowButtons", "to": "overflow-btns" },
           { "text": "selects", "to": "selects" },
@@ -128,20 +129,20 @@
       },
       { "text": "hover", "to": "hover" },
       { "text": "icons", "to": "icons" },
-      { "text": "images", "to": "images" },
-      { "new": true, "text": "lazy", "to": "lazy" },
+      { "updated": true, "text": "images", "to": "images" },
+      { "updated": true, "text": "lazy", "to": "lazy" },
       { "text": "lists", "to": "lists" },
-      { "text": "menus", "to": "menus" },
+      { "updated": true, "text": "menus", "to": "menus" },
       { "text": "navigationDrawers", "to": "navigation-drawers" },
       { "text": "overlays", "to": "overlays" },
-      { "text": "paginations", "to": "paginations" },
-      { "text": "parallax", "to": "parallax" },
+      { "updated": true, "text": "paginations", "to": "paginations" },
+      { "updated": true, "text": "parallax", "to": "parallax" },
       {
         "group": "components",
         "text": "pickers",
         "children": [
           { "text": "colorPickers", "to": "color-pickers" },
-          { "text": "datePickers", "to": "date-pickers" },
+          { "updated": true, "text": "datePickers", "to": "date-pickers" },
           { "text": "timePickers", "to": "time-pickers" }
         ]
       },
@@ -150,13 +151,13 @@
         "text": "progress",
         "children": [
           { "text": "progressCircular", "to": "progress-circular" },
-          { "text": "progressLinear", "to": "progress-linear" }
+          { "updated": true, "text": "progressLinear", "to": "progress-linear" }
         ]
       },
       { "text": "ratings", "to": "ratings" },
-      { "text": "sheets", "to": "sheets" },
-      { "new": true, "text": "skeletonLoaders", "to": "skeleton-loaders" },
-      { "text": "snackbars", "to": "snackbars" },
+      { "updated": true, "text": "sheets", "to": "sheets" },
+      { "text": "skeletonLoaders", "to": "skeleton-loaders" },
+      { "updated": true, "text": "snackbars", "to": "snackbars" },
       { "text": "sparklines", "to": "sparklines" },
       { "text": "steppers", "to": "steppers" },
       { "text": "subheaders", "to": "subheaders" },
@@ -164,15 +165,16 @@
         "group": "components",
         "text": "tables",
         "children": [
-          { "text": "dataIterators", "to": "data-iterators" },
-          { "text": "simpleTables", "to": "simple-tables" },
+          { "updated": true, "text": "dataIterators", "to": "data-iterators" },
+          { "updated": true, "text": "simpleTables", "to": "simple-tables" },
           { "updated": true, "text": "dataTables", "to": "data-tables" }
         ]
       },
       { "text": "tabs", "to": "tabs" },
       { "text": "timelines", "to": "timelines" },
       { "text": "tooltips", "to": "tooltips" },
-      { "text": "treeview", "to": "treeview" }
+      { "text": "treeview", "to": "treeview" },
+      { "new": true, "text": "virtualScroll", "to": "virtual-scrollers" }
     ]
   },
   {
@@ -180,11 +182,12 @@
     "text": "directives",
     "icon": "mdi-function",
     "children": [
-      { "new": true, "text": "intersect", "to": "intersect" },
-      { "new": true, "text": "mutate", "to": "mutate" },
+      { "new": true, "text": "clickOutside", "to": "click-outside" },
+      { "text": "intersect", "to": "intersect" },
+      { "text": "mutate", "to": "mutate" },
       { "text": "resizing", "to": "resizing" },
-      { "text": "ripples", "to": "ripples" },
-      { "text": "scrolling", "to": "scrolling" },
+      { "updated": true, "text": "ripples", "to": "ripples" },
+      { "updated": true, "text": "scrolling", "to": "scrolling" },
       { "text": "touchSupport", "to": "touch-support" }
     ]
   },
@@ -193,7 +196,7 @@
     "text": "support",
     "icon": "mdi-atom-variant",
     "children": [
-      { "text": "consulting", "to": "consulting" },
+      { "updated": true, "text": "consulting", "to": "consulting" },
       { "text": "business", "to": "business" },
       { "text": "enterprise", "to": "enterprise" }
     ]

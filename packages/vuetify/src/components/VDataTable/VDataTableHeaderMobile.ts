@@ -35,7 +35,7 @@ export default mixins(header).extend({
 
       return this.$createElement(VChip, {
         staticClass: 'sortable',
-        nativeOn: {
+        on: {
           click: (e: MouseEvent) => {
             e.stopPropagation()
             this.$emit('sort', props.item.value)

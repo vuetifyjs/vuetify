@@ -116,7 +116,7 @@
           ></v-img></v-avatar>
       </v-btn>
     </v-app-bar>
-    <v-content>
+    <v-main>
       <v-container
         class="fill-height"
         fluid
@@ -141,7 +141,7 @@
           </v-tooltip>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
     <v-btn
       bottom
       color="pink"
@@ -272,7 +272,7 @@
             { text: 'Other contacts' },
           ],
         },
-        { icon: 'mdi-settings', text: 'Settings' },
+        { icon: 'mdi-cog', text: 'Settings' },
         { icon: 'mdi-message', text: 'Send feedback' },
         { icon: 'mdi-help-circle', text: 'Help' },
         { icon: 'mdi-cellphone-link', text: 'App downloads' },

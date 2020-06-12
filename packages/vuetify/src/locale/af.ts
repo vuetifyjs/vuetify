@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} gekies',
+    nextMonthAriaLabel: 'Volgende maand',
+    nextYearAriaLabel: 'Volgende jaar',
+    prevMonthAriaLabel: 'Vorige maand',
+    prevYearAriaLabel: 'Vorige jaar',
   },
   noDataText: 'Geen data is beskikbaar nie',
   carousel: {
@@ -47,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Paginasie-navigasie',
+      next: 'Volgende bladsy',
+      previous: 'Vorige bladsy',
+      page: 'Gaan na bladsy {0}',
+      currentPage: 'Huidige bladsy, Bladsy {0}',
+    },
   },
 }

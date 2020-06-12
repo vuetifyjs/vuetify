@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '已選擇 {0}',
+    nextMonthAriaLabel: '下個月',
+    nextYearAriaLabel: '明年',
+    prevMonthAriaLabel: '前一個月',
+    prevYearAriaLabel: '前一年',
   },
   noDataText: '沒有資料',
   carousel: {
@@ -47,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: '分頁導航',
+      next: '下一頁',
+      previous: '上一頁',
+      page: '轉到頁面 {0}',
+      currentPage: '當前頁 {0}',
+    },
   },
 }

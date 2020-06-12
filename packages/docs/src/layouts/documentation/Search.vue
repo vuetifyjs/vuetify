@@ -87,7 +87,7 @@
     },
 
     methods: {
-      init ({ default: docsearch }) {
+      async init ({ default: docsearch }) {
         const vm = this
 
         this.docSearch = docsearch({
@@ -106,6 +106,20 @@
           indexName: 'vuetifyjs',
           inputSelector: '#doc-search',
         })
+
+        const { search } = this.$route.query
+
+        if (!search) return
+
+        this.search = search
+        this.$refs.search.focus()
+
+        await this.$nextTick()
+
+        // Dispatch an event to trigger agolia search menu
+        const event = new Event('input')
+
+        this.$refs.search.$refs.input.dispatchEvent(event)
       },
       onBlur () {
         this.resetSearch()

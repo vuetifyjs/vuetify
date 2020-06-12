@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-content>
+    <v-main>
       <v-container
         class="fill-height"
         fluid
@@ -42,7 +42,7 @@
                   <v-text-field
                     label="Login"
                     name="login"
-                    prepend-icon="person"
+                    prepend-icon="mdi-account"
                     type="text"
                   ></v-text-field>
 
@@ -50,7 +50,7 @@
                     id="password"
                     label="Password"
                     name="password"
-                    prepend-icon="lock"
+                    prepend-icon="mdi-lock"
                     type="password"
                   ></v-text-field>
                 </v-form>
@@ -63,7 +63,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 

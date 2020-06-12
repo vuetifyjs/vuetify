@@ -19,9 +19,12 @@ $calendar-weekly-day-label-size: 32px !default;
 $calendar-weekly-day-label-font-size: 12px !default;
 $calendar-weekly-day-label-margin: 4px 0 0 0 !default;
 $calendar-weekly-day-month-left: 36px !default;
+$calendar-weekly-weeknumber-flex-basis: 24px !default;
+$calendar-weekly-weeknumber-padding-top: 14.5px !default;
 
 $calendar-event-bottom-space: 1px !default;
 $calendar-event-border-width: 1px !default;
 $calendar-event-border-radius: $border-radius-root !default;
 $calendar-event-font-size: 12px !default;
+$calendar-event-line-height: 20px !default;
 $calendar-event-right-empty: 10px !default;

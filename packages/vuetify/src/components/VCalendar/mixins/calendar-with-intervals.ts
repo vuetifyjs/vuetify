@@ -12,8 +12,9 @@ import {
   createIntervalList,
   createNativeLocaleFormatter,
   VTime,
+  MINUTES_IN_DAY,
 } from '../util/timestamp'
-import { CalendarTimestamp, CalendarFormatter } from 'types'
+import { CalendarTimestamp, CalendarFormatter, CalendarDayBodySlotScope } from 'vuetify/types'
 
 /* @vue/component */
 export default CalendarBase.extend({
@@ -34,8 +35,15 @@ export default CalendarBase.extend({
     parsedIntervalHeight (): number {
       return parseFloat(this.intervalHeight)
     },
+    parsedFirstTime (): number | false {
+      return parseTime(this.firstTime)
+    },
     firstMinute (): number {
-      return this.parsedFirstInterval * this.parsedIntervalMinutes
+      const time = this.parsedFirstTime
+
+      return time !== false && time >= 0 && time <= MINUTES_IN_DAY
+        ? time
+        : this.parsedFirstInterval * this.parsedIntervalMinutes
     },
     bodyHeight (): number {
       return this.parsedIntervalCount * this.parsedIntervalHeight
@@ -51,7 +59,7 @@ export default CalendarBase.extend({
     },
     intervals (): CalendarTimestamp[][] {
       const days: CalendarTimestamp[] = this.days
-      const first: number = this.parsedFirstInterval
+      const first: number = this.firstMinute
       const minutes: number = this.parsedIntervalMinutes
       const count: number = this.parsedIntervalCount
       const now: CalendarTimestamp = this.times.now
@@ -97,9 +105,10 @@ export default CalendarBase.extend({
 
       return updateMinutes(timestamp, minutes, this.times.now)
     },
-    getSlotScope (timestamp: CalendarTimestamp): any {
+    getSlotScope (timestamp: CalendarTimestamp): CalendarDayBodySlotScope {
       const scope = copyTimestamp(timestamp) as any
       scope.timeToY = this.timeToY
+      scope.timeDelta = this.timeDelta
       scope.minutesToPixels = this.minutesToPixels
       scope.week = this.days
       return scope
@@ -120,6 +129,24 @@ export default CalendarBase.extend({
       return minutes / this.parsedIntervalMinutes * this.parsedIntervalHeight
     },
     timeToY (time: VTime, clamp = true): number | false {
+      let y = this.timeDelta(time)
+
+      if (y !== false) {
+        y *= this.bodyHeight
+
+        if (clamp) {
+          if (y < 0) {
+            y = 0
+          }
+          if (y > this.bodyHeight) {
+            y = this.bodyHeight
+          }
+        }
+      }
+
+      return y
+    },
+    timeDelta (time: VTime): number | false {
       const minutes = parseTime(time)
 
       if (minutes === false) {
@@ -128,19 +155,8 @@ export default CalendarBase.extend({
 
       const min: number = this.firstMinute
       const gap: number = this.parsedIntervalCount * this.parsedIntervalMinutes
-      const delta: number = (minutes - min) / gap
-      let y: number = delta * this.bodyHeight
 
-      if (clamp) {
-        if (y < 0) {
-          y = 0
-        }
-        if (y > this.bodyHeight) {
-          y = this.bodyHeight
-        }
-      }
-
-      return y
+      return (minutes - min) / gap
     },
   },
 })

@@ -41,6 +41,8 @@ declare global {
       circle?: boolean
       touched?: boolean
       isTouch?: boolean
+      showTimer?: number
+      showTimerCommit?: (() => void) | null
     }
     _observe?: {
       init: boolean
@@ -50,9 +52,9 @@ declare global {
       observer: MutationObserver
     }
     _onScroll?: {
-      callback: EventListenerOrEventListenerObject
+      handler: EventListenerOrEventListenerObject
       options: boolean | AddEventListenerOptions
-      target: EventTarget
+      target?: EventTarget
     }
     _touchHandlers?: {
       [_uid: number]: TouchStoredHandlers

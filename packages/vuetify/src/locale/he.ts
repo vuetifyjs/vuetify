@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} נבחרו',
+    nextMonthAriaLabel: 'חודש הבא',
+    nextYearAriaLabel: 'שנה הבאה',
+    prevMonthAriaLabel: 'חודש שעבר',
+    prevYearAriaLabel: 'שנה שעברה',
   },
   noDataText: 'אין נתונים זמינים',
   carousel: {
@@ -47,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'ניווט עימוד',
+      next: 'עמוד הבא',
+      previous: 'עמוד הקודם',
+      page: '{0} לך לעמוד',
+      currentPage: '{0} עמוד נוכחי, עמוד',
+    },
   },
 }

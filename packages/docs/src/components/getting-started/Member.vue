@@ -64,7 +64,7 @@
                   target="_blank"
                   rel="noopener"
                 >
-                  <v-icon>mdi-github-face</v-icon>
+                  <v-icon>mdi-github</v-icon>
                 </a>
                 <a
                   v-if="value.linkedin"

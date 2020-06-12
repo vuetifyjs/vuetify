@@ -29,11 +29,12 @@ const DataIteratorSlots = [
 ]
 
 const DataIteratorItemScopedProps = {
-  item: 'any',
-  select: '(v: boolean) => void',
-  isSelected: 'boolean',
   expand: '(v: boolean) => void',
+  item: 'any',
   isExpanded: 'boolean',
+  isMobile: 'boolean',
+  isSelected: 'boolean',
+  select: '(v: boolean) => void',
 }
 
 const DataIteratorScopedSlots = [
