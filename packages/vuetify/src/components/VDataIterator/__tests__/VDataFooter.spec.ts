@@ -59,6 +59,9 @@ describe('VDataFooter.ts', () => {
           pageCount: 10,
           itemsLength: 100,
         },
+        itemsPerPageMenuProps: {
+          contentClass: 'some-css-class',
+        },
       },
     })
 
