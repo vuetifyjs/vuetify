@@ -89,6 +89,7 @@ export default mixins(
     } as PropValidator<DataTableHeader[]>,
     showSelect: Boolean,
     showExpand: Boolean,
+    expandClick: Boolean,
     showGroupBy: Boolean,
     // TODO: Fix
     // virtualRows: Boolean,
@@ -472,7 +473,12 @@ export default mixins(
           // TODO: for click, the first argument should be the event, and the second argument should be data,
           // but this is a breaking change so it's for v3
           click: () => this.$emit('click:row', item, data),
-          contextmenu: (event: MouseEvent) => this.$emit('contextmenu:row', event, data),
+          contextmenu: (event: MouseEvent) => {
+              if (this.expandClick) {
+              data.expand(!data.isExpanded)
+              }
+             this.$emit('contextmenu:row', event, data)
+          },
           dblclick: (event: MouseEvent) => this.$emit('dblclick:row', event, data),
         },
       })
