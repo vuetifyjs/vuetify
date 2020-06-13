@@ -12,7 +12,7 @@
 
 <script>
   // Utilities
-  import { sync } from 'vuex-pathify'
+  import { get, sync } from 'vuex-pathify'
   import { kebabCase } from 'lodash'
 
   // Data
@@ -21,6 +21,10 @@
   export default {
     name: 'DocumentationLayout',
 
+    beforeRouteEnter (to, from, next) {
+      next(vm => vm.init())
+    },
+
     components: {
       DocumentationBar: () => import('./AppBar'),
       DocumentationDrawer: () => import('./Drawer'),
@@ -28,7 +32,7 @@
       DocumentationView: () => import('./View'),
     },
 
-    data: () => ({ orphans: [] }),
+    data: () => ({ unassigned: [] }),
 
     computed: {
       ...sync('app', [
@@ -39,85 +43,79 @@
         'pages',
         'tocs',
       ]),
-    },
-
-    watch: {
-      '$route.params.locale': {
-        immediate: true,
-        handler (val) {
-          !!val && this.init(val)
-        },
-      },
+      locale: get('route/params@locale'),
     },
 
     methods: {
-      async importDocsFor (locale) {
-        const pending = [
-          import(
-            /* webpackChunkName: "api-pages" */
-            `@docs/${locale}/api/pages`
-          ),
-          import(
-            /* webpackChunkName: "modified" */
-            `@docs/${locale}/modified`
-          ),
-          import(
-            /* webpackChunkName: "pages" */
-            `@docs/${locale}/pages`
-          ),
-          import(
-            /* webpackChunkName: "headings" */
-            `@docs/${locale}/headings`
-          ),
-        ]
+      async getHeadings () {
+        const { default: headings } = await import(
+          /* webpackChunkName: "headings" */
+          `@docs/${this.locale}/headings`
+        )
 
-        return Promise.resolve([...await Promise.all(pending)])
+        this.tocs = headings
       },
-      async init (locale) {
-        const [
-          api,
-          modified,
-          pages,
-          headings,
-        ] = await this.importDocsFor(locale)
-
-        this.modified = modified.default
-        this.pages = { ...pages.default, ...api.default }
-        this.orphans = Object.keys(this.pages)
-        this.tocs = headings.default
-        // Map provided nav groups using
-        // the provided language, val
-        this.nav = nav.map(item => {
-          // Build group string used
-          // for list groups
-          const group = `/${locale}/${item.title}/`
-
-          return this.genItem(item, group)
-        })
+      async init () {
+        this.getHeadings()
+        this.getModified()
+        this.getPages()
       },
-      findItems (group) {
+      async getModified () {
+        const { default: modified } = await import(
+          /* webpackChunkName: "api-pages" */
+          `@docs/${this.locale}/api/pages`
+        )
+
+        this.modified = modified
+      },
+      async getPages () {
+        const { default: api } = await import(
+          /* webpackChunkName: "api-pages" */
+          `@docs/${this.locale}/api/pages`
+        )
+        const { default: pages } = await import(
+          /* webpackChunkName: "pages" */
+          `@docs/${this.locale}/pages`
+        )
+
+        this.pages = { ...pages, ...api }
+        this.unassigned = Object.keys(this.pages)
+
+        this.genNav()
+      },
+      assign (child, group, items) {
+        const path = `${group}${kebabCase(child.title)}/`
+        const index = this.unassigned.indexOf(path)
+
+        if (index < 0) return
+
+        items.push(this.genChild(child, group))
+
+        this.remove(path)
+
+        return items
+      },
+      findChildren (group) {
         const pages = []
         // Iterate through the imported pages and
         // map keys to the generated page route
-        for (const key in this.pages) {
+        for (const orphan of this.unassigned) {
           // Skip if key doesn't match
-          if (!key.startsWith(group)) continue
+          if (!orphan.startsWith(group)) continue
 
           // Create a new inferred page route
           // using the key/value from pages
           pages.push({
-            title: this.pages[key],
-            to: key,
+            title: this.pages[orphan],
+            to: orphan,
           })
-
-          this.removeOrphan(key)
         }
 
         return pages.length ? pages : undefined
       },
-      genItem (item, group) {
-        const isGroup = !!item.icon || item.items
-        const items = isGroup ? this.genItems(item, group) : undefined
+      genChild (item, group) {
+        const isGroup = item.group
+        const items = isGroup ? this.getChildren(item, group) : undefined
         const { href, icon, title: path } = item
         const page = `${group}${path}/`
         const to = isGroup ? group : page
@@ -136,36 +134,41 @@
           to,
         }
       },
-      genItems (item, group) {
-        const foundItems = this.findItems(group)
+      genNav () {
+        // Map provided nav groups using
+        // the provided language, val
+        this.nav = nav.map(item => {
+          // Build group string used
+          // for list groups
+          const group = `/${this.locale}/${item.title}/`
 
-        if (!item.items) return foundItems
+          return this.genChild(item, group)
+        })
+      },
+      getChildren (item, group) {
+        const found = this.findChildren(group)
 
-        const items = []
+        if (!item.items) return found
+
+        const children = []
 
         // Generate explicitly provided
         // items and their keys from src/data/nav.json
         for (const child of item.items) {
-          items.push(this.genItem(child, group))
-
-          this.removeOrphan(`${group}${child.title}/`)
+          this.assign(child, group, children)
         }
 
-        for (const found of foundItems) {
-          const path = `${group}${kebabCase(found.title)}/`
-          const index = this.orphans.indexOf(path)
-
-          // Don't include found item
-          // if it already exists
-          if (index < 0) continue
-
-          items.push(this.genItem(found, group))
+        for (const child of found) {
+          this.assign(child, group, children)
         }
 
-        return items.length ? items : undefined
+        return children.length ? children : undefined
       },
-      removeOrphan (child) {
-        this.$delete(this.orphans, this.orphans.indexOf(child))
+      remove (child) {
+        this.$delete(
+          this.unassigned,
+          this.unassigned.indexOf(child),
+        )
       },
     },
   }

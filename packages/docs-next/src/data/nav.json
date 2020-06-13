@@ -2,6 +2,7 @@
   {
     "title": "introduction",
     "icon": "$mdiBookOpenPageVariant",
+    "group": true,
     "items": [
       { "title": "why-vuetify" },
       { "title": "frequently-asked-questions" },
@@ -15,6 +16,7 @@
   {
     "title": "getting-started",
     "icon": "$mdiSpeedometer",
+    "group": true,
     "items": [
       { "title": "beginners-guide" },
       { "title": "quick-start" },
@@ -26,39 +28,46 @@
     ]
   },
   {
+    "title": "customization",
+    "icon": "$mdiCogs",
+    "group": true
+  },
+  {
+    "title": "styles",
+    "icon": "$mdiPalette",
+    "group": true
+  },
+  {
     "title": "components",
-    "icon": "$mdiViewDashboard"
+    "icon": "$mdiViewDashboard",
+    "group": true
   },
   {
     "title": "api",
-    "icon": "$mdiBeaker"
-  },
-  {
-    "title": "company",
-    "icon": "$mdiVuetify"
-  },
-  {
-    "title": "customization",
-    "icon": "$mdiCogs"
+    "icon": "$mdiBeaker",
+    "group": true
   },
   {
     "title": "directives",
-    "icon": "$mdiFunction"
+    "icon": "$mdiFunction",
+    "group": true
+  },
+  {
+    "title": "professional-support",
+    "icon": "$mdiAtomVariant",
+    "group": true
+  },
+  {
+    "title": "themes",
+    "icon": "$mdiVuetify"
   },
   {
     "title": "jobs",
     "icon": "$mdiBriefcaseSearch"
   },
   {
-    "title": "professional-support",
-    "icon": "$mdiAtomVariant"
-  },
-  {
-    "title": "styles",
-    "icon": "$mdiPalette"
-  },
-  {
-    "title": "themes",
-    "icon": "$mdiVuetify"
+    "title": "company",
+    "icon": "$mdiVuetify",
+    "group": true
   }
 ]
