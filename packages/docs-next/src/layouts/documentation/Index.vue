@@ -117,7 +117,7 @@
         const isGroup = item.group
         const items = isGroup ? this.getChildren(item, group) : undefined
         const { href, icon, title: path } = item
-        const page = `${group}${path}/`
+        const page = `${group}${kebabCase(path)}/`
         const to = isGroup ? group : page
 
         // Use language file if path exists
