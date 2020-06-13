@@ -474,10 +474,10 @@ export default mixins(
           // but this is a breaking change so it's for v3
           click: () => this.$emit('click:row', item, data),
           contextmenu: (event: MouseEvent) => {
-              if (this.expandClick) {
+            if (this.expandClick) {
               data.expand(!data.isExpanded)
-              }
-             this.$emit('contextmenu:row', event, data)
+            }
+            this.$emit('contextmenu:row', event, data)
           },
           dblclick: (event: MouseEvent) => this.$emit('dblclick:row', event, data),
         },
