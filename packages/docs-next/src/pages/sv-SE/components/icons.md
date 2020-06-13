@@ -21,9 +21,11 @@ Usage text
 ## Sub-Components
 Omit if none
 
-  ### Sub Component 1 Sub component text
+### Sub Component 1
+Sub component text
 
-  ### Sub Component 2 Sub component text
+### Sub Component 2
+Sub component text
 
 ## Caveats
 Omit if none
@@ -35,18 +37,19 @@ Omit if none
 ## Examples
 Example text.
 
-  ### Props/Events/Slots/Misc
+### Props/Events/Slots/Misc
 
-  #### example Example description
+#### example
+Example description
 
-  `<example file="" />`
-  - **file**: `<component>/<type>-<propname>`
-  - eg: `<example file="v-alert/prop-colored-border" />`
+`<example file="" />`
+- **file**: `<component>/<type>-<propname>`
+- eg: `<example file="v-alert/prop-colored-border" />`
 
 ## Accessibility
 Accessibility text - omit if none
 
 ## API
-  - [API Page Link]()
+- [API Page Link]()
 
 <doc-footer />
