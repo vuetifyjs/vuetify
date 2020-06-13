@@ -38,7 +38,7 @@
       "itemsPerPageAllText": "Text for 'All' option in items-per-page dropdown",
       "itemsPerPageOptions": "Array of options to show in the items-per-page dropdown",
       "itemsPerPageText": "Text for items-per-page dropdown",
-      "itemsPerPageMenuProps": "Pass props through to the `v-menu` items per page component. Accepts either a string for boolean props `menu-props=\"auto, overflowY\"`, or an object `:menu-props=\"{ auto: true, overflowY: true }\"`",
+      "itemsPerPageMenuProps": "Pass props to the \"Items per page\" `v-menu` component. Accepts either a string for boolean props `items-per-page-menu-props=\"auto, overflowY\"`, or an object `:items-per-page-menu-props=\"{ auto: true, overflowY: true }\"`",
       "lastIcon": "Last icon",
       "nextIcon": "Next icon",
       "options": "DataOptions",
