@@ -92,8 +92,8 @@
     data: () => ({
       model: null,
       classes: [
-        ['h1', 'Heading 1', '6rem', '400', '-0.09375rem', -1],
-        ['h2', 'Heading 2', '3.75rem', '400', '-0.03125rem', 0],
+        ['h1', 'Heading 1', '6rem', '300', '-0.09375rem', -1],
+        ['h2', 'Heading 2', '3.75rem', '300', '-0.03125rem', 0],
         ['h3', 'Heading 3', '3rem', '400', 'normal', 1],
         ['h4', 'Heading 4', '2.125rem', '400', '0.015625rem', 2],
         ['h5', 'Heading 5', '1.5rem', '400', 'normal', 2],
