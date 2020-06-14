@@ -47,11 +47,14 @@ module.exports = {
     config.module
       .rule('markdown')
       .test(/\.md$/)
+      .use('toc-loader')
+        .loader(path.resolve('./build/toc-loader.js'))
+        .end()
       .use('frontmatter-markdown-loader')
         .loader('frontmatter-markdown-loader')
         .tap(() => ({
           markdown: body => md.render(body),
-          mode: [Mode.VUE_COMPONENT],
+          mode: [Mode.VUE_COMPONENT, Mode.BODY],
           vue: { root: 'markdown-body' },
         }))
   },

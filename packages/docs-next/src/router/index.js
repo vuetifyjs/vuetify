@@ -18,6 +18,7 @@ export function createRouter (store, i18n) {
     },
     routes: [
       {
+        name: 'Home',
         path: '/:locale',
         component: () => import('@/layouts/locale/Index'),
         children: [

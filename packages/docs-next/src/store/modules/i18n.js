@@ -7,7 +7,6 @@ import { make } from 'vuex-pathify'
 const state = {
   frontmatter: {},
   pages: {},
-  tocs: {},
 }
 
 const mutations = make.mutations(state)

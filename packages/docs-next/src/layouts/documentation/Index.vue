@@ -41,22 +41,12 @@
       ]),
       ...sync('i18n', [
         'pages',
-        'tocs',
       ]),
       locale: get('route/params@locale'),
     },
 
     methods: {
-      async getHeadings () {
-        const { default: headings } = await import(
-          /* webpackChunkName: "headings" */
-          `@docs/${this.locale}/headings`
-        )
-
-        this.tocs = headings
-      },
       async init () {
-        this.getHeadings()
         this.getModified()
         this.getPages()
       },

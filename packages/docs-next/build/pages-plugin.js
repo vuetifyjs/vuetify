@@ -1,5 +1,4 @@
 const { differenceInDays, format } = require('date-fns')
-const { kebabCase } = require('lodash')
 const { md } = require('./markdown-it')
 const fm = require('front-matter')
 const fs = require('fs')
@@ -34,21 +33,6 @@ function getPages (files) {
   }, {})
 }
 
-function getHeadings (files) {
-  return files.reduce((headings, filePath) => {
-    const file = readFile(filePath)
-    const { body } = fm(file)
-
-    const category = path.dirname(filePath.replace(/^\.\/src\/pages\/\w+(-\w+)?\//, ''))
-    const page = kebabCase(path.basename(filePath, path.extname(filePath)))
-
-    headings[category] = headings[category] || {}
-    headings[category][page] = getPageHeadings(body)
-
-    return headings
-  }, {})
-}
-
 function getModified (files) {
   return files.reduce((pages, filePath) => {
     const file = fs.statSync(filePath)
@@ -70,39 +54,11 @@ function getModified (files) {
   }, {})
 }
 
-function getPageHeadings (page) {
-  const headings = []
-  const tokens = md.parse(page, {})
-  const length = tokens.length
-
-  for (let i = 0; i < length; i++) {
-    const token = tokens[i]
-
-    if (token.type !== 'heading_open') continue
-
-    // heading level by hash length '###' === h3
-    const level = token.markup.length
-    const next = tokens[i + 1]
-    const link = next.children[0]
-    const text = next.content
-    const [, href] = link.attrs.find(([attr]) => attr === 'href')
-
-    headings.push({
-      text,
-      href,
-      level,
-    })
-  }
-
-  return headings
-}
-
 function generateFiles () {
   const generatedFiles = {}
   const langDirectories = glob.sync('./src/pages/*')
 
   const pages = files => `module.exports = ${JSON.stringify(getPages(files))};`
-  const headings = files => `module.exports = ${JSON.stringify(getHeadings(files))};`
   const modified = files => `module.exports = ${JSON.stringify(getModified(files))};`
 
   for (const langDir of langDirectories) {
@@ -110,7 +66,6 @@ function generateFiles () {
     const lang = path.basename(langDir)
 
     generatedFiles[`node_modules/@docs/${lang}/pages.js`] = pages(files)
-    generatedFiles[`node_modules/@docs/${lang}/headings.js`] = headings(files)
     generatedFiles[`node_modules/@docs/${lang}/modified.js`] = modified(files)
   }
 

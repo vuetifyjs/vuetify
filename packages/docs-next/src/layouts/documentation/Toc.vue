@@ -41,10 +41,7 @@
     computed: {
       category: get('route/params@category'),
       page: get('route/params@page'),
-      tocs: get('i18n/tocs'),
-      toc () {
-        return this.tocs && this.tocs[this.category] && this.tocs[this.category][this.page]
-      },
+      toc: get('page/toc'),
     },
   }
 </script>
