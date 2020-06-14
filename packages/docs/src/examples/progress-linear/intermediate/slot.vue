@@ -4,7 +4,6 @@
       v-model="power"
       color="amber"
       height="25"
-      reactive
     ></v-progress-linear>
 
     <br>
@@ -13,7 +12,6 @@
       v-model="skill"
       color="blue-grey"
       height="25"
-      reactive
     >
       <template v-slot="{ value }">
         <strong>{{ Math.ceil(value) }}%</strong>
@@ -25,7 +23,6 @@
     <v-progress-linear
       v-model="knowledge"
       height="25"
-      reactive
     >
       <strong>{{ Math.ceil(knowledge) }}%</strong>
     </v-progress-linear>
