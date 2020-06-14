@@ -1,4 +1,4 @@
 // src/plugins/vuetify.js
 import Vuetify from 'vuetify/lib'
 
-Vue.config.silent = true
+Vuetify.config.silent = true
