@@ -1,11 +1,9 @@
 <template>
   <v-main>
-    <keep-alive>
-      <router-view
-        :key="$route.path"
-        :name="name"
-      />
-    </keep-alive>
+    <router-view
+      :key="$route.path"
+      :name="name"
+    />
   </v-main>
 </template>
 
