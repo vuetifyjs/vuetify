@@ -7,7 +7,7 @@ const {
 } = require('./api-gen')
 
 // Globals
-const { IS_PROD } = require('./util/globals')
+const { IS_PROD } = require('../src/util/globals')
 
 /* const camelizeRE = /-(\w)/g
 const camelize = str => {
