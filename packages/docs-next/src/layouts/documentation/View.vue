@@ -1,10 +1,12 @@
 <template>
   <v-main>
     <v-fade-transition mode="out-in">
-      <router-view
-        :key="$route.path"
-        :name="name"
-      />
+      <keep-alive>
+        <router-view
+          :key="$route.path"
+          :name="name"
+        />
+      </keep-alive>
     </v-fade-transition>
   </v-main>
 </template>
