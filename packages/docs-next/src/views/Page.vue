@@ -1,7 +1,7 @@
 <template>
   <v-container tag="section">
     <v-responsive
-      class="mx-auto overflow-visible px-4"
+      class="mx-auto overflow-visible px-6"
       max-width="768"
     >
       <component :is="component" />

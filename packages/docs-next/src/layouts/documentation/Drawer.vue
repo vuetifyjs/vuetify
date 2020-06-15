@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer
+    v-model="drawer"
     app
     clipped
     width="300"
@@ -58,11 +59,15 @@
 </template>
 
 <script>
+  // Utilities
   import { sync } from 'vuex-pathify'
 
   export default {
     name: 'DocumentationDrawer',
 
-    computed: { nav: sync('app/nav') },
+    computed: {
+      drawer: sync('page/drawer'),
+      nav: sync('app/nav'),
+    },
   }
 </script>

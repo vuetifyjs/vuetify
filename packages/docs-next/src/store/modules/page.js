@@ -3,6 +3,7 @@ import { make } from 'vuex-pathify'
 
 // Data
 const state = {
+  drawer: null,
   toc: [],
 }
 

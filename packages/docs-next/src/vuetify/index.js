@@ -18,6 +18,7 @@ export function useVuetify (app) {
 
 export function createVuetify () {
   return new Vuetify({
+    breakpoint: { mobileBreakpoint: 'sm' },
     icons,
     theme: {
       options: {

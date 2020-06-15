@@ -2,12 +2,16 @@
   <v-app-bar
     id="default-app-bar"
     app
-    clipped-right
-    flat
-    color="white"
-
     clipped-left
+    clipped-right
+    color="white"
+    flat
   >
+    <v-app-bar-nav-icon
+      class="hidden-md-and-up"
+      @click="drawer = !drawer"
+    />
+
     <vuetify-logo />
 
     <v-spacer />
@@ -39,7 +43,7 @@
 
 <script>
   // Utilities
-  import { get } from 'vuex-pathify'
+  import { get, sync } from 'vuex-pathify'
 
   // Language
   import locales from '@/i18n/locales'
@@ -50,6 +54,7 @@
     data: () => ({ locales }),
 
     computed: {
+      drawer: sync('page/drawer'),
       translating: get('i18n/translating'),
     },
 

@@ -21,7 +21,3 @@
     },
   }
 </script>
-
-<style lang="sass">
-  // .v-btn--app
-</style>

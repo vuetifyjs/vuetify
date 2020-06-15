@@ -27,9 +27,9 @@
 
 <style lang="sass">
   .app-code
+    margin: 16px 0
     position: relative
     padding: 12px 50px 12px 16px
-    margin: 16px 0
 
     pre, code
       background: transparent

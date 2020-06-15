@@ -5,6 +5,7 @@
     class="pa-4"
     clipped
     right
+    width="192"
   >
     <h3 class="text-h6 font-weight-regular mb-4">
       Contents

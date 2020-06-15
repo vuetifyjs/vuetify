@@ -18,9 +18,14 @@ export default async function (vuetify, to, _, savedPosition) {
   // scroll-behavior is not called on
   // load handled in views/Page.vue
   return new Promise((resolve, reject) => {
+    // Options 1
+    const options = {}
+
+    if (!scrollTo) options.duration = 0
+
     window.requestAnimationFrame(async () => {
       vuetify.framework
-        .goTo(scrollTo)
+        .goTo(scrollTo, options)
         .catch(reject)
         .finally(resolve)
     })
