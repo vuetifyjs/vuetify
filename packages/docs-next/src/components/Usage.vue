@@ -8,8 +8,12 @@
         cols="12"
         md="8"
       >
-        <div :class="`d-flex ${headerColor}`">
+        <v-responsive
+          :class="`d-flex ${headerColor}`"
+          height="44"
+        >
           <v-slide-group
+            v-if="tabs.length"
             multiple
             show-arrows="mobile"
           >
@@ -31,15 +35,13 @@
               </v-btn>
             </v-slide-item>
           </v-slide-group>
-        </div>
+        </v-responsive>
 
         <v-divider />
 
-        <v-fade-transition
-          v-if="file"
-          appear
-        >
+        <v-fade-transition appear>
           <v-sheet
+            v-if="file"
             :dark="dark"
             class="d-inline-block"
             width="100%"
@@ -49,9 +51,11 @@
           >
             <div class="fill-height pa-6 d-flex align-center">
               <vue-file
+                ref="usage"
                 v-bind="{ ...usageProps }"
                 :file="file"
                 @loaded="setContents"
+                @error="hasError = true"
               />
             </div>
           </v-sheet>
@@ -72,6 +76,7 @@
             <app-tooltip-btn
               icon="$mdiInvertColors"
               tooltip="Invert example colors"
+              :disabled="hasError"
               @click="dark = !dark"
             />
           </div>
@@ -134,14 +139,21 @@
 </template>
 
 <script>
+  // Mixins
+  import Codepen from '@/mixins/codepen'
+
   export default {
     name: 'Usage',
 
+    mixins: [Codepen],
+
+    props: { name: String },
+
     data: () => ({
       booleans: undefined,
-      component: undefined,
       dark: false,
       file: undefined,
+      hasError: false,
       options: {},
       selects: undefined,
       sliders: undefined,
@@ -161,9 +173,11 @@
             attributeArray.push(`${key.trim()}="${value}"`)
           }
         }
+
         const indent = attributeArray.length ? '\r\t' : ''
-        const tail = `${attributeArray.length ? '\r' : ''}></${this.compName}>`
-        return `<${this.compName}${indent}${attributeArray.join('\r\t')}${tail}`
+        const tail = `${attributeArray.length ? '\r' : ''}></${this.name}>`
+
+        return `<${this.name}${indent}${attributeArray.join('\r\t')}${tail}`
       },
       headerColor () {
         return this.$vuetify.theme.dark ? 'grey darken-4' : 'grey lighten-3'
@@ -172,16 +186,18 @@
     },
 
     mounted () {
-      const name = this.$attrs.name
-      this.compName = name
-      this.file = `${name}/usage`
+      this.file = `${this.name}/usage`
     },
 
     methods: {
-      setContents (contents) {
-        const data = contents.component.data()
+      setContents (component) {
+        if (!component) return
+
+        const data = component.data()
+
         this.usageProps = Object.assign({}, data.defaults)
         this.tabs = data.tabs
+
         for (const [key, value] of Object.entries(data.options)) {
           this[key] = value
         }

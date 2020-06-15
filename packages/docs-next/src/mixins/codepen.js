@@ -4,6 +4,19 @@ export default {
   }),
 
   methods: {
+    async importTemplate () {
+      try {
+        const template = await import(
+          /* webpackChunkName: "examples-source" */
+          /* webpackMode: "lazy-once" */
+          `!raw-loader!../examples/${this.file}.vue`
+        )
+
+        this.boot(template.default)
+      } catch (err) {
+        console.log(err)
+      }
+    },
     boot (res) {
       const template = this.parseTemplate('template', res)
       const style = this.parseTemplate('style', res)
@@ -23,7 +36,13 @@ export default {
       const string = `(<${target}(.*)?>[\\w\\W]*<\\/${target}>)`
       const regex = new RegExp(string, 'g')
       const parsed = regex.exec(template) || []
+
       return parsed[1] || ''
+    },
+    sendToCodepen () {
+      if (this.$refs.codepen) {
+        this.$refs.codepen.submit()
+      }
     },
   },
 }

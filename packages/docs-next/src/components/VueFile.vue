@@ -2,20 +2,17 @@
   <component
     :is="component"
     v-if="component"
-    v-intersect.once="onIntersect"
-    v-bind="$attrs"
+    v-bind="{
+      ...$attrs,
+      ...$props,
+    }"
     v-on="$listeners"
   />
 </template>
 
 <script>
-  // Mixins
-  import codepen from '@/mixins/codepen'
-
   export default {
     name: 'VueFile',
-
-    mixins: [codepen],
 
     inheritAttrs: false,
 
@@ -30,36 +27,24 @@
       component: undefined,
     }),
 
-    async mounted () {
-      await this.importComponent()
-      this.$emit('loaded', {
-        component: this.component,
-        pen: this.pen,
-      })
-    },
+    async created () {
+      let component = {}
 
-    methods: {
-      importComponent () {
-        return import(
+      try {
+        component = await import(
           /* webpackChunkName: "examples" */
           /* webpackMode: "lazy-once" */
           `../examples/${this.file}.vue`
         )
-          .then(comp => (this.component = comp.default))
-      },
-      importTemplate () {
-        return import(
-          /* webpackChunkName: "examples-source" */
-          /* webpackMode: "lazy-once" */
-          `!raw-loader!../examples/${this.file}.vue`
-        )
-          .then(comp => this.boot(comp.default))
-      },
-      onIntersect (_, __, isIntersecting) {
-        if (!isIntersecting) return
 
-        this.importTemplate()
-      },
+        this.$emit('loaded', component.default)
+      } catch (err) {
+        component = await import('./ExampleMissing')
+
+        this.$emit('error', err)
+      }
+
+      this.component = component.default
     },
   }
 </script>

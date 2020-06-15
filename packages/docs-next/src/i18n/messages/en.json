@@ -7,6 +7,7 @@
   "getting-started": "Getting started",
   "introduction": "Introduction",
   "jobs": "Jobs for Vue",
+  "missing": "Could not load example `{file}`",
   "professional-support": "Professional support",
   "styles": "Styles and animations",
   "themes": "Premium themes"

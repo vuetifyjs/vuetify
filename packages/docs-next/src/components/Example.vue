@@ -6,24 +6,28 @@
     <v-lazy min-height="52">
       <v-sheet class="text-end pa-2">
         <app-tooltip-btn
+          :disabled="hasError"
           icon="$mdiInvertColors"
           tooltip="Invert example colors"
           @click="dark = !dark"
         />
 
         <app-tooltip-btn
+          :disabled="hasError"
           icon="$mdiCodepen"
           tooltip="Edit in Codepen"
           @click="sendToCodepen"
         />
 
         <app-tooltip-btn
+          :disabled="hasError"
+          :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/docs/src/examples/${file}.vue`"
           icon="$mdiGithub"
           tooltip="View on Github"
-          :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/docs/src/examples/${file}.vue`"
         />
 
         <app-tooltip-btn
+          :disabled="hasError"
           icon="$mdiCodeTags"
           tooltip="View Source"
           @click="expand = !expand"
@@ -31,14 +35,14 @@
       </v-sheet>
     </v-lazy>
 
-    <v-lazy>
-      <template v-if="pen">
+    <v-lazy v-if="pen">
+      <div>
         <v-expand-transition>
           <v-sheet v-show="expand">
             <v-item-group
               v-model="selected"
-              mandatory
               class="pa-2"
+              mandatory
             >
               <template v-for="(section, i) in sections">
                 <v-item
@@ -81,20 +85,20 @@
           ref="codepen"
           :pen="pen"
         />
-      </template>
+      </div>
     </v-lazy>
 
-    <v-fade-transition
-      v-if="file"
-      appear
-    >
+    <v-fade-transition appear>
       <v-sheet
-        class="pa-2"
+        v-if="file"
         :dark="dark"
+        class="pa-2"
+        @mouseenter.once="importTemplate"
       >
         <vue-file
-          class="mb-0"
           :file="file"
+          class="mb-0"
+          @error="hasError = true"
         />
       </v-sheet>
     </v-fade-transition>
@@ -102,40 +106,31 @@
 </template>
 
 <script>
+  // Mixins
+  import Codepen from '@/mixins/codepen'
+
   // Utilities
-  import { getBranch } from '@/util/helpers'
+  import { get } from 'vuex-pathify'
 
   export default {
     name: 'Example',
 
+    mixins: [Codepen],
+
+    props: { file: String },
+
     data: () => ({
-      branch: 'master',
       dark: false,
       expand: false,
-      file: undefined,
-      selected: 'template',
-      component: undefined,
+      hasError: false,
       pen: undefined,
+      selected: 'template',
     }),
 
     computed: {
+      branch: get('app/branch'),
       sections () {
         return ['template', 'script', 'style'].filter(section => this.pen[section])
-      },
-    },
-
-    mounted () {
-      this.branch = getBranch()
-      this.file = this.$attrs.file
-    },
-
-    methods: {
-      sendToCodepen () {
-        this.$refs.codepen.submit()
-      },
-      setContents (contents) {
-        this.pen = contents.pen
-        this.component = contents.component
       },
     },
   }
