@@ -16,11 +16,14 @@ import './registerServiceWorker'
 // Application
 import App from './App.vue'
 
+// Globals
+import { IS_PROD } from '@/util/globals'
+
 Vue.config.productionTip = false
 
 registerPlugins(Vue)
 
-Vue.config.performance = process.env.NODE_ENV === 'development'
+Vue.config.performance = !IS_PROD
 
 // Expose a factory function that creates a fresh set of store, router,
 // app instances on each call (which is called for each SSR request)
@@ -30,8 +33,8 @@ export async function createApp ({
   // create store and router instances
   const store = createStore()
   const i18n = createI18n()
-  const router = createRouter(store, i18n)
   const vuetify = createVuetify()
+  const router = createRouter(vuetify, store, i18n)
 
   store.state.app.version = Vuetify.version
 

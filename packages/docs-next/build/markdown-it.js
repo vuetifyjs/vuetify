@@ -10,7 +10,7 @@ const md = require('markdown-it')({
     permalink: true,
     permalinkSymbol: '#',
     permalinkBefore: true,
-    permalinkClass: 'text-decoration-none',
+    permalinkClass: 'text-decoration-none v-link',
   })
   .use(require('markdown-it-prism'))
   .use(require('markdown-it-header-sections'))

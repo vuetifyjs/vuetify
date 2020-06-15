@@ -1,21 +1,21 @@
 // Imports
-import Vue from 'vue'
 import Router from 'vue-router'
+import scrollBehavior from './scroll-behavior'
+import Vue from 'vue'
 import VueGtag from 'vue-gtag'
 
+// Globals
+import { IS_PROD } from '@/util/globals'
+
+// Setup
 Vue.use(Router)
 
-export function createRouter (store, i18n) {
+export function createRouter (vuetify, store, i18n) {
   const loadedLocales = ['en']
   const router = new Router({
     mode: 'history',
     base: process.env.BASE_URL,
-    scrollBehavior: (to, from, savedPosition) => {
-      if (to.hash) return { selector: to.hash }
-      if (savedPosition) return savedPosition
-
-      return { x: 0, y: 0 }
-    },
+    scrollBehavior: (...args) => scrollBehavior(vuetify, ...args),
     routes: [
       {
         name: 'Home',
@@ -64,7 +64,7 @@ export function createRouter (store, i18n) {
   })
 
   Vue.use(VueGtag, {
-    bootstrap: process.env.NODE_ENV === 'production',
+    bootstrap: IS_PROD,
     config: { id: process.env.VUE_APP_GOOGLE_ANALYTICS },
   }, router)
 

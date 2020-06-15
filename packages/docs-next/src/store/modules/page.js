@@ -8,11 +8,7 @@ const state = {
 
 const mutations = make.mutations(state)
 
-const actions = {
-  init: ({ commit }, { toc }) => {
-    commit('toc', toc)
-  },
-}
+const actions = {}
 
 const getters = {}
 

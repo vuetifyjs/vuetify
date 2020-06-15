@@ -1,8 +1,11 @@
 /* eslint-disable no-console */
-
+// Imports
 import { register } from 'register-service-worker'
 
-if (process.env.NODE_ENV === 'production') {
+// Globals
+import { IS_PROD } from './util/globals'
+
+if (IS_PROD) {
   register(`${process.env.BASE_URL}service-worker.js`, {
     ready () {
       console.log(

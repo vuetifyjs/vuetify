@@ -1,7 +1,7 @@
 <template>
   <v-container tag="section">
     <v-responsive
-      class="mx-auto"
+      class="mx-auto overflow-visible"
       max-width="768"
     >
       <component :is="component" />
@@ -12,7 +12,7 @@
 <script>
   // Utilities
   import { genMetaData } from '@/util/metadata'
-  import { sync, call } from 'vuex-pathify'
+  import { sync } from 'vuex-pathify'
 
   // This should only be extended by other pages
   export default {
@@ -46,6 +46,7 @@
 
     computed: {
       frontmatter: sync('i18n/frontmatter'),
+      toc: sync('page/toc'),
     },
 
     watch: {
@@ -57,15 +58,17 @@
     },
 
     methods: {
-      init: call('page/init'),
       async load () { return {} },
       async update () {
-        const fm = await this.load(this.$route)
+        const {
+          attributes = {},
+          toc = {},
+          vue = {},
+        } = await this.load(this.$route)
 
-        this.component = fm.default.vue.component
-        this.frontmatter = fm.default.attributes
-
-        this.init({ toc: fm.toc })
+        this.component = vue.component
+        this.frontmatter = attributes
+        this.toc = toc
       },
     },
   }

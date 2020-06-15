@@ -6,7 +6,8 @@ const {
   generateLocaleList,
 } = require('./api-gen')
 
-const isProduction = process.env.NODE_ENV === 'production'
+// Globals
+const { IS_PROD } = require('./util/globals')
 
 /* const camelizeRE = /-(\w)/g
 const camelize = str => {
@@ -51,7 +52,7 @@ function genTableRow (headers, row) {
   const headerRow = []
 
   for (const header of headers) {
-    if (header === 'source' && isProduction) continue
+    if (header === 'source' && IS_PROD) continue
 
     let value = row[header]
 

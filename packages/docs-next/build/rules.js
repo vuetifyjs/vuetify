@@ -26,17 +26,16 @@ function addHrRules (md) {
 }
 
 function addHeadingRules (md) {
-  const map = {
-    h1: 'text-h3',
-    h2: 'text-h4',
-    h3: 'text-h5',
-    h4: 'text-h6',
-  }
-
   md.renderer.rules.heading_open = (tokens, idx, options, env, self) => {
-    const token = tokens[idx]
+    const level = tokens[idx].markup.length
 
-    token.attrSet('class', map[token.tag])
+    tokens[idx].tag = 'app-heading'
+    tokens[idx].attrSet('level', level)
+
+    return self.renderToken(tokens, idx, options)
+  }
+  md.renderer.rules.heading_close = (tokens, idx, options, env, self) => {
+    tokens[idx].tag = 'app-heading'
 
     return self.renderToken(tokens, idx, options)
   }

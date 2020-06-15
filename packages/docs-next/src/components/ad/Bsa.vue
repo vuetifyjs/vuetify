@@ -17,6 +17,9 @@
 </template>
 
 <script>
+// Globals
+  import { IS_PROD } from '@/util/globals'
+
   export default {
     name: 'BsaAd',
 
@@ -25,7 +28,7 @@
     methods: {
       onLoad () {
         window._bsa.init('custom', 'CKYD6KQN', 'placement:vuetifyjscom', {
-          ignore: process.env.NODE_ENV === 'development' ? 'yes' : undefined,
+          ignore: !IS_PROD ? 'yes' : undefined,
           target: '#bsa-native',
           template: '<a class="native-box" href="##statlink##"><div class="native-sponsor">Sponsor</div><div class="native-text"><strong>##company##</strong> — ##description##</div></a>',
         })

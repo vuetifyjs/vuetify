@@ -1,10 +1,14 @@
+// Utilties
 import { createApp } from './main'
+
+// Globals
+import { IN_BROWSER } from '@/util/globals'
 
 createApp({
   start ({ app, router, store }) {
     // prime the store with server-initialized state.
     // the state is determined during SSR and inlined in the page markup.
-    if (typeof window !== 'undefined' && window.__INITIAL_STATE__) {
+    if (IN_BROWSER && window.__INITIAL_STATE__) {
       store.replaceState(window.__INITIAL_STATE__)
     }
 
