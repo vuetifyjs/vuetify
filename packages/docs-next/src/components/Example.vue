@@ -1,44 +1,30 @@
 <template>
-  <v-card
+  <v-sheet
     class="mb-9 v-example"
     outlined
+    rounded
   >
     <v-lazy min-height="52">
-      <v-sheet class="text-end pa-2">
+      <div class="text-end pa-2">
         <app-tooltip-btn
+          v-for="(tooltip, i) in tooltips"
+          :key="i"
           :disabled="hasError"
-          icon="$mdiInvertColors"
-          tooltip="Invert example colors"
-          @click="dark = !dark"
+          :href="tooltip.href ? tooltip.href : undefined"
+          :icon="tooltip.icon"
+          :path="tooltip.path"
+          :target="tooltip.href ? '_blank' : undefined"
+          @click="tooltip.onClick"
         />
-
-        <app-tooltip-btn
-          :disabled="hasError"
-          icon="$mdiCodepen"
-          tooltip="Edit in Codepen"
-          @click="sendToCodepen"
-        />
-
-        <app-tooltip-btn
-          :disabled="hasError"
-          :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/docs/src/examples/${file}.vue`"
-          icon="$mdiGithub"
-          tooltip="View on Github"
-        />
-
-        <app-tooltip-btn
-          :disabled="hasError"
-          icon="$mdiCodeTags"
-          tooltip="View Source"
-          @click="expand = !expand"
-        />
-      </v-sheet>
+      </div>
     </v-lazy>
+
+    <v-divider />
 
     <v-lazy v-if="pen">
       <div>
         <v-expand-transition>
-          <v-sheet v-show="expand">
+          <div v-show="expand">
             <v-item-group
               v-model="selected"
               class="pa-2"
@@ -65,12 +51,14 @@
 
             <v-divider />
 
-            <v-window v-model="selected">
+            <v-window
+              v-model="selected"
+              class="grey lighten-5"
+            >
               <template v-for="(section, i) in sections">
                 <v-window-item
                   :key="`window-${i}`"
                   :value="section"
-                  eager
                 >
                   <markup :code="pen[section]" />
                 </v-window-item>
@@ -78,7 +66,7 @@
             </v-window>
 
             <v-divider />
-          </v-sheet>
+          </div>
         </v-expand-transition>
 
         <codepen
@@ -92,7 +80,8 @@
       <v-sheet
         v-if="file"
         :dark="dark"
-        class="pa-2"
+        class="pa-4"
+        color="transparent"
         @mouseenter.once="importTemplate"
       >
         <vue-file
@@ -102,7 +91,7 @@
         />
       </v-sheet>
     </v-fade-transition>
-  </v-card>
+  </v-sheet>
 </template>
 
 <script>
@@ -132,6 +121,31 @@
       sections () {
         return ['template', 'script', 'style'].filter(section => this.pen[section])
       },
+      tooltips () {
+        return [
+          {
+            icon: '$mdiInvertColors',
+            path: 'invert-example-colors',
+            onClick: () => (this.dark = !this.dark),
+          },
+          {
+            icon: '$mdiCodepen',
+            path: 'edit-in-codepen',
+            onClick: this.sendToCodepen,
+          },
+          {
+            icon: '$mdiGithub',
+            path: 'view-in-github',
+            onClick: () => (this.dark = !this.dark),
+            href: `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/examples/${this.file}.vue`,
+          },
+          {
+            icon: '$mdiCodeTags',
+            path: 'view-source',
+            onClick: () => (this.expand = !this.expand),
+          },
+        ]
+      },
     },
   }
 </script>
@@ -141,4 +155,7 @@
     code[class*="language-"],
     pre[class*="language-"]
       text-shadow: none
+
+    pre.language-markup::after
+      content: 'vue'
 </style>

@@ -4,13 +4,17 @@
   "components": "Components",
   "customization": "Customization",
   "directives": "Directives",
+  "edit-in-codepen": "Edit in Codepen",
   "getting-started": "Getting started",
   "introduction": "Introduction",
+  "invert-example-colors": "Invert example colors",
   "jobs": "Jobs for Vue",
   "missing": "Could not load example `{file}`",
   "professional-support": "Professional support",
   "ready-text": "Continue your learning with related content selected by the [Core Team]({url}) or move between pages by using the navigation links below.",
   "ready": "Ready for more?",
   "styles": "Styles and animations",
-  "themes": "Premium themes"
+  "themes": "Premium themes",
+  "view-in-github": "View on GitHub",
+  "view-source": "View source"
 }

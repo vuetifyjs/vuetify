@@ -75,8 +75,8 @@
           <div class="pa-1">
             <app-tooltip-btn
               icon="$mdiInvertColors"
-              tooltip="Invert example colors"
               :disabled="hasError"
+              path="invert-example-colors"
               @click="dark = !dark"
             />
           </div>
