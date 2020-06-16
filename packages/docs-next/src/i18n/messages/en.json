@@ -1,7 +1,7 @@
 {
   "api": "Component API",
-  "components": "Components",
   "company": "Company",
+  "components": "Components",
   "customization": "Customization",
   "directives": "Directives",
   "getting-started": "Getting started",
@@ -9,6 +9,8 @@
   "jobs": "Jobs for Vue",
   "missing": "Could not load example `{file}`",
   "professional-support": "Professional support",
+  "ready-text": "Continue your learning with related content selected by the [Core Team]({url}) or move between pages by using the navigation links below.",
+  "ready": "Ready for more?",
   "styles": "Styles and animations",
   "themes": "Premium themes"
 }

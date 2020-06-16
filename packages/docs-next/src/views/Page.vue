@@ -62,7 +62,7 @@
       async update () {
         const {
           attributes = {},
-          toc = {},
+          toc = [],
           vue = {},
         } = await this.load(this.$route)
 
