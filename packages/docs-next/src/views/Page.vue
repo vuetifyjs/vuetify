@@ -2,7 +2,7 @@
   <v-container tag="section">
     <v-responsive
       class="mx-auto overflow-visible px-6"
-      max-width="768"
+      max-width="868"
     >
       <component :is="component" />
     </v-responsive>
