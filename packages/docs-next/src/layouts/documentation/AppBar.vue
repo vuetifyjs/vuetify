@@ -54,7 +54,7 @@
     data: () => ({ locales }),
 
     computed: {
-      drawer: sync('page/drawer'),
+      drawer: sync('app/drawer'),
       translating: get('i18n/translating'),
     },
 

@@ -12,6 +12,7 @@ const state = {
   modified: {},
   nav: [],
   version: null,
+  drawer: true,
 }
 
 const mutations = make.mutations(state)

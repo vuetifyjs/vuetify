@@ -66,7 +66,7 @@
     name: 'DocumentationDrawer',
 
     computed: {
-      drawer: sync('page/drawer'),
+      drawer: sync('app/drawer'),
       nav: sync('app/nav'),
     },
   }
