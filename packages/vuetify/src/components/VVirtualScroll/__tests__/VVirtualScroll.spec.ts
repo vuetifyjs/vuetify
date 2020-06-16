@@ -82,4 +82,22 @@ describe('VVirtualScroll.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should provide the correct item index', () => {
+    const helpers = require('../../../util/helpers')
+    const spy = jest.spyOn(helpers, 'getSlot')
+    const wrapper = mountFunction({
+      propsData,
+      computed: { firstToRender: () => 2 },
+    })
+
+    wrapper.setData({ first: 2 })
+
+    wrapper.vm.genChild(0, 1)
+
+    expect(spy.mock.calls[0][2]).toEqual({
+      item: 0,
+      index: 3,
+    })
+  })
 })
