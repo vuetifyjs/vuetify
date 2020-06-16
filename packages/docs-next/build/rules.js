@@ -25,6 +25,20 @@ function addHrRules (md) {
   }
 }
 
+function addUnderlineRules (md) {
+  function renderEm (tokens, idx, opts, env, self) {
+    const token = tokens[idx]
+    if (token.markup === '_') {
+      token.tag = 'span'
+      token.attrSet('style', 'text-decoration: underline;')
+    }
+    return self.renderToken(tokens, idx, opts)
+  }
+
+  md.renderer.rules.em_open = renderEm
+  md.renderer.rules.em_close = renderEm
+}
+
 function addHeadingRules (md) {
   md.renderer.rules.heading_open = (tokens, idx, options, env, self) => {
     const level = tokens[idx].markup.length
@@ -61,4 +75,5 @@ module.exports = {
   addHrRules,
   addImageRules,
   addTableRules,
+  addUnderlineRules,
 }
