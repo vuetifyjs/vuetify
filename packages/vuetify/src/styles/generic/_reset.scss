@@ -132,6 +132,7 @@ input {
   outline-offset: -2px; /* Correct the outline style in Safari */
 }
 
+[type="search"]::-webkit-search-cancel-button,
 [type="search"]::-webkit-search-decoration {
   -webkit-appearance: none; /* Remove the inner padding in Chrome and Safari on macOS */
 }
