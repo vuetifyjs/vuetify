@@ -1,0 +1,20 @@
+{
+  "heading": "# Border Radius",
+  "headingText": "ボーダーユーティリティを使用して、要素の角や辺の丸みを素早くスタイル化しましょう。",
+  "alertInfix": "**sm, lg, xl** はborder-radiusのサイズに相関し、ブレークポイントの影響は受けません。",
+  "roundedHeading": "## 角丸",
+  "roundedText1": "**rounded** は要素の角や辺の丸みを変更できるクラスです。 `.rounded-sm`, `.rounded`, `.rounded-lg`, `.rounded-xl` を使用すれば様々なサイズの丸みを加えられます。",
+  "pncHeading": "## 長丸・円",
+  "pncText1": "長丸を作成する場合は `.rounded-pill` 、円の場合は `.rounded-circle` クラスを付与します。",
+  "removingHeading": "## 角丸の削除",
+  "removingText1": "`.rounded-0` クラスを適用することで全ての角の丸みを取り除くことができます。また、次の例のように角や辺を指定して丸みを取り除くこともできます。 例: `.rounded-l-0`, `.rounded-tr-0`",
+  "sidesHeading": "## 指定の辺を丸める",
+  "sidesText1": "**t, r, b, l** の中置クラスを用いることで、辺の丸みを個別に設定できます。 例: `.rounded-br-xl`, `.rounded-tr`",
+  "cornersHeading": "## 指定の角を丸める",
+  "cornersText1": "**tl, tr, br, bl**の中置クラスを用いることで、角の丸みを個別に設定できます。 例: `.rounded-br-xl`, `.rounded-tr`",
+  "customizingHeading": "## カスタマイズ",
+  "customizingText1": "**rounded** クラスの変更や無効のための設定は以下にまとめられています。この設定には [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugins/tree/master/packages/vue-cli-plugin-vuetify) ライブラリと設定済みの `variables.s(c|a)ss` ファイルが必要になります。 変数の設定方法に関する情報は [SASS Variables](/customization/sass-variables) にあります。",
+  "customizingText2": "半径サイズは変数 `$border-radius-root` に基づいており、デフォルト値は **0.25rem** です。",
+  "overwriteHeading": "### 半径サイズのオーバーライド",
+  "overwriteText1": "プロジェクト内の `variables` ファイルに変数 `$rounded` を付け加えて、オーバーライドすることで丸みのサイズを変更できます。"
+}
