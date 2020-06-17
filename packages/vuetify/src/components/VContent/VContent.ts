@@ -17,6 +17,6 @@ export default VMain.extend({
     node.data!.staticClass += ' v-content'
     node.children![0]!.data!.staticClass += ' v-content__wrap'
 
-    return node
+    return h(node.tag, node.data, node.children)
   },
 })
