@@ -1,8 +1,8 @@
 <template>
   <v-sheet
+    class="mb-12 text-body-2"
     outlined
     rounded
-    class="mb-12 text-body-2"
   >
     <v-simple-table>
       <caption class="pa-4 text-h6">

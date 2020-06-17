@@ -8,7 +8,5 @@
 </template>
 
 <script>
-  export default {
-    name: 'ApiTable',
-  }
+  export default { name: 'ApiTable' }
 </script>

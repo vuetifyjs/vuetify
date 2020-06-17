@@ -1,7 +1,7 @@
 <template>
   <v-alert
-    text
     border="left"
+    text
     v-bind="$attrs"
     v-on="$listeners"
   >
@@ -10,7 +10,5 @@
 </template>
 
 <script>
-  export default {
-    name: 'Alert',
-  }
+  export default { name: 'Alert' }
 </script>

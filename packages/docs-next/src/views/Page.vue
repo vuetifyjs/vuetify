@@ -40,25 +40,23 @@
       )
     },
 
-    data: () => ({
-      component: undefined,
-    }),
+    data: () => ({ component: undefined }),
 
     computed: {
       frontmatter: sync('i18n/frontmatter'),
       toc: sync('page/toc'),
     },
 
-    watch: {
-      '$route.params.locale': 'update',
-    },
+    watch: { '$route.params.locale': 'update' },
 
     created () {
       this.update()
     },
 
     methods: {
-      async load () { return {} },
+      async load () {
+        console.error('Missing load method for Page.vue')
+      },
       async update () {
         const {
           attributes = {},

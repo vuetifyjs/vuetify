@@ -2,9 +2,7 @@
   <router-link
     :to="{
       name: 'Home',
-      params: {
-        lang: $route.params.lang
-      }
+      params: { locale }
     }"
     aria-label="Vuetify Home Page"
     class="d-none d-sm-flex align-center text--primary"
@@ -31,9 +29,14 @@
 </template>
 
 <script>
+  // Utilities
+  import { get } from 'vuex-pathify'
+
   export default {
     name: 'VuetifyLogo',
 
     inject: ['theme'],
+
+    computed: { locale: get('route/params@locale') },
   }
 </script>

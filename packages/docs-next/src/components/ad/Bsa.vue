@@ -17,7 +17,7 @@
 </template>
 
 <script>
-// Globals
+  // Globals
   import { IS_PROD } from '@/util/globals'
 
   export default {

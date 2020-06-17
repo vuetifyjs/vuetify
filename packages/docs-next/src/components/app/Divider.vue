@@ -3,7 +3,5 @@
 </template>
 
 <script>
-  export default {
-    name: 'AppDivider',
-  }
+  export default { name: 'AppDivider' }
 </script>
