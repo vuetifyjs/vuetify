@@ -66,12 +66,17 @@
       },
     },
 
-    created () {
-      this.findRelatedPage()
+    watch: {
+      nav: {
+        immediate: true,
+        handler (val) {
+          this.findRelatedPage(val)
+        },
+      },
     },
 
     methods: {
-      findRelatedPage (items = this.nav) {
+      findRelatedPage (items) {
         for (const item of items) {
           // If item is found, stop iterating
           if (this.item) break
