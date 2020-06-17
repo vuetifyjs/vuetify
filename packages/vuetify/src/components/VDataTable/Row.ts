@@ -36,10 +36,12 @@ export default Vue.extend({
       }
 
       const textAlign = `text-${header.align || 'start'}`
+      const colClass = '' + (Array.isArray(header.columnClass) ? header.columnClass.join(' ') : header.columnClass)
 
       return h('td', {
         class: {
           [textAlign]: true,
+          [colClass]: true,
           'v-data-table__divider': header.divider,
         },
       }, children)
