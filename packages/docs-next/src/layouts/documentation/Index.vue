@@ -52,8 +52,8 @@
       },
       async getModified () {
         const { default: modified } = await import(
-          /* webpackChunkName: "api-pages" */
-          `@docs/${this.locale}/api/pages`
+          /* webpackChunkName: "modified" */
+          `@docs/${this.locale}/modified`
         )
 
         this.modified = modified
