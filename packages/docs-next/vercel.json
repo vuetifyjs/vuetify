@@ -15,7 +15,7 @@
     },
     {
       "source": "/(.*)",
-      "destination": "/_fallback"
+      "destination": "/index"
     }
   ],
   "github": {
