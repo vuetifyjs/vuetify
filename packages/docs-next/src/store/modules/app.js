@@ -9,10 +9,17 @@ import { ROOT_DISPATCH } from '@/store'
 
 const state = {
   branch: getBranch(),
+  drawer: true,
   modified: {},
   nav: [],
+  snackbar: {
+    show: false,
+    action: false,
+    message: '',
+    type: '',
+    timeout: 3000,
+  },
   version: null,
-  drawer: true,
 }
 
 const mutations = make.mutations(state)
@@ -20,6 +27,9 @@ const mutations = make.mutations(state)
 const actions = {
   init: async ({ dispatch }) => {
     dispatch('ads/fetch', null, ROOT_DISPATCH)
+  },
+  showSnackbar ({ state }, data) {
+    state.snackbar = Object.assign(state.snackbar, data)
   },
 }
 

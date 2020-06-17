@@ -7,6 +7,8 @@
     <documentation-view />
 
     <documentation-toc />
+
+    <documentation-snackbar />
   </v-app>
 </template>
 
@@ -28,6 +30,7 @@
     components: {
       DocumentationBar: () => import('./AppBar'),
       DocumentationDrawer: () => import('./Drawer'),
+      DocumentationSnackbar: () => import('./Snackbar'),
       DocumentationToc: () => import('./Toc'),
       DocumentationView: () => import('./View'),
     },
