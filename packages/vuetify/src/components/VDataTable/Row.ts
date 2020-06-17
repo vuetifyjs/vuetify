@@ -41,7 +41,7 @@ export default Vue.extend({
       return h('td', {
         class: {
           [textAlign]: true,
-          [colClass]: true,
+          [colClass]: !!header.columnClass,
           'v-data-table__divider': header.divider,
         },
       }, children)
