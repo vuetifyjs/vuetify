@@ -12,7 +12,7 @@ export default VMain.extend({
   created () {
     deprecate('v-content', 'v-main', this)
   },
-  
+
   render (h): VNode {
     // Add the legacy class names
     const node = VMain.options.render.call(this, h)
