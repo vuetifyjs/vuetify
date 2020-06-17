@@ -248,11 +248,15 @@ export default baseMixins.extend<options>().extend({
       this.setSelectedItems()
     },
     menuIsBooted () {
-      window.setTimeout(() => {
-        if (this.getContent() && this.getContent().addEventListener) {
-          this.getContent().addEventListener('scroll', this.onScroll, false)
+      const handler = this.onScroll
+      const menu = this.$refs.menu
+      ;(function addListener () {
+        const content = menu.$refs.content
+        if (content && content.addEventListener) {
+          return content.addEventListener('scroll', handler, false)
         }
-      })
+        menu.$once('hook:updated', addListener)
+      })()
     },
     isMenuActive (val) {
       window.setTimeout(() => this.onMenuActiveChange(val))
