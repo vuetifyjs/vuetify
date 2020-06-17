@@ -260,6 +260,19 @@ export default VSelect.extend({
         this.getDisabled(curItem)
       ) return
 
+      const lastIndex = this.selectedItems.length - 1
+
+      // Select the last item if
+      // there is no selection
+      if (
+        this.selectedIndex === -1 &&
+        lastIndex !== 0
+      ) {
+        this.selectedIndex = lastIndex
+
+        return
+      }
+
       const length = this.selectedItems.length
       const nextIndex = curIndex !== length - 1
         ? curIndex
