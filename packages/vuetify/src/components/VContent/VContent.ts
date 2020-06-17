@@ -1,3 +1,6 @@
+// Types
+import { VNode } from 'vue'
+
 // Extensions
 import VMain from '../VMain/VMain'
 import { deprecate } from '../../util/console'
