@@ -250,14 +250,19 @@ export default baseMixins.extend<options>().extend({
     isMenuActive (val) {
       window.setTimeout(() => this.onMenuActiveChange(val))
 
-      if (!val) return
-
-      this.$nextTick(() => {
-        if (!this.menuIsBooted && this.getContent() && this.$refs.menu.isBooted) {
-          this.getContent().addEventListener('scroll', this.onScroll, false)
-          this.menuIsBooted = true
-        }
-      })
+      if (!this.menuIsBooted) {
+        const bootMenu = this.bootMenu
+        const handler = this.onScroll
+        const menu = this.$refs.menu
+        ;(function addListener () {
+          const content = menu.$refs.content
+          if (content && content.addEventListener) {
+            bootMenu()
+            return content.addEventListener('scroll', handler, false)
+          }
+          menu.$once('hook:updated', addListener)
+        })()
+      }
     },
     items: {
       immediate: true,
@@ -292,6 +297,9 @@ export default baseMixins.extend<options>().extend({
       ) return
 
       this.isMenuActive = true
+    },
+    bootMenu () {
+      this.menuIsBooted = true
     },
     clearableCallback () {
       this.setValue(this.multiple ? [] : undefined)
