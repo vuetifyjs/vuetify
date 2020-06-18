@@ -57,8 +57,8 @@ module.exports = {
   },
   pwa: {
     name: 'Vuetify-Docs',
-    themeColor: '#4DBA87',
-    msTileColor: '#000000',
+    themeColor: '#094A7F',
+    msTileColor: '#5CBBF6',
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black',
 
