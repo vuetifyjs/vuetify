@@ -9,6 +9,9 @@
       >
         New Content Available!
         <v-btn
+          class="ml-3"
+          outlined
+          small
           text
           @click="refreshContent"
         >
