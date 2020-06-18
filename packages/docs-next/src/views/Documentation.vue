@@ -6,7 +6,7 @@
     const { category, locale, page } = route.params
 
     return import(
-      /* webpackChunkName: "documentation-pages" */
+      /* webpackChunkName: "documentation-pages-[request]" */
       `@/pages/${locale}/${category}/${page}.md`
     )
   }

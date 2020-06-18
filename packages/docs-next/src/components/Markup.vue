@@ -23,7 +23,10 @@
     name: 'Markup',
 
     components: {
-      Prism: () => import('vue-prism-component'),
+      Prism: () => import(
+        /* webpackChunkName: "vue-prism-component" */
+        'vue-prism-component'
+      ),
     },
 
     props: { code: String },

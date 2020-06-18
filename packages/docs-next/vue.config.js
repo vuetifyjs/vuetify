@@ -55,6 +55,17 @@ module.exports = {
           vue: { root: 'markdown-body' },
         }))
   },
+  configureWebpack: {
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+        minSize: 30000,
+        maxSize: 100000,
+        maxAsyncRequests: 20,
+        maxInitialRequests: 5,
+      },
+    },
+  },
   pwa: {
     name: 'Vuetify-Docs',
     themeColor: '#094A7F',

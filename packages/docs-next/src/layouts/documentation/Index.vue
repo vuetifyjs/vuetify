@@ -28,11 +28,26 @@
     },
 
     components: {
-      DocumentationBar: () => import('./AppBar'),
-      DocumentationDrawer: () => import('./Drawer'),
-      DocumentationSnackbar: () => import('./Snackbar'),
-      DocumentationToc: () => import('./Toc'),
-      DocumentationView: () => import('./View'),
+      DocumentationBar: () => import(
+        /* webpackChunkName: "documentation-app-bar" */
+        './AppBar'
+      ),
+      DocumentationDrawer: () => import(
+        /* webpackChunkName: "documentation-drawer" */
+        './Drawer'
+      ),
+      DocumentationSnackbar: () => import(
+        /* webpackChunkName: "documentation-snackbar" */
+        './Snackbar'
+      ),
+      DocumentationToc: () => import(
+        /* webpackChunkName: "documentation-toc" */
+        './Toc'
+      ),
+      DocumentationView: () => import(
+        /* webpackChunkName: "documentation-view" */
+        './View'
+      ),
     },
 
     data: () => ({ unassigned: [] }),
@@ -55,7 +70,7 @@
       },
       async getModified () {
         const { default: modified } = await import(
-          /* webpackChunkName: "modified" */
+          /* webpackChunkName: "modified-[request]" */
           `@docs/${this.locale}/modified`
         )
 
@@ -63,11 +78,11 @@
       },
       async getPages () {
         const { default: api } = await import(
-          /* webpackChunkName: "api-pages" */
+          /* webpackChunkName: "api-pages-[request]" */
           `@docs/${this.locale}/api/pages`
         )
         const { default: pages } = await import(
-          /* webpackChunkName: "pages" */
+          /* webpackChunkName: "local-pages-[request]" */
           `@docs/${this.locale}/pages`
         )
 

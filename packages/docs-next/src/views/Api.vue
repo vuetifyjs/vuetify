@@ -6,7 +6,7 @@
     const { locale, page } = route.params
 
     return import(
-      /* webpackChunkName: "api-pages" */
+      /* webpackChunkName: "api-pages-[request]" */
       `@docs/${locale}/api/${page}.md`
     )
   }

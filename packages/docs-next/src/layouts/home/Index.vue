@@ -11,8 +11,14 @@
     name: 'HomeLayout',
 
     components: {
-      HomeBar: () => import('./AppBar'),
-      HomeView: () => import('./View'),
+      HomeBar: () => import(
+        /* webpackChunkName: "home-app-bar" */
+        './AppBar'
+      ),
+      HomeView: () => import(
+        /* webpackChunkName: "home-view" */
+        './View'
+      ),
     },
   }
 </script>

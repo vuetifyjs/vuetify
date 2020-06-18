@@ -11,8 +11,14 @@
     name: 'DefaultLayout',
 
     components: {
-      DefaultBar: () => import('./AppBar'),
-      DefaultView: () => import('./View'),
+      DefaultBar: () => import(
+        /* webpackChunkName: "default-app-bar" */
+        './AppBar'
+      ),
+      DefaultView: () => import(
+        /* webpackChunkName: "default-view" */
+        './View'
+      ),
     },
   }
 </script>

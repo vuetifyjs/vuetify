@@ -40,14 +40,23 @@ export function createRouter (vuetify, store, i18n) {
     routes: [
       {
         path: `/:locale(${languagePattern})`,
-        component: () => import('@/layouts/locale/Index'),
+        component: () => import(
+          /* webpackChunkName: "layouts-local" */
+          '@/layouts/locale/Index'
+        ),
         children: [
           {
             path: '',
-            component: () => import('@/layouts/home/Index'),
+            component: () => import(
+                /* webpackChunkName: "layouts-home" */
+                '@/layouts/home/Index'
+              ),
             children: [{
               path: '',
-              component: () => import('@/views/Home'),
+              component: () => import(
+                /* webpackChunkName: "views-home" */
+                '@/views/Home'
+              ),
               name: 'Home',
             }],
           },
@@ -55,14 +64,23 @@ export function createRouter (vuetify, store, i18n) {
             path: ':category/:page',
             // Layouts allow you to define different
             // structures for different view
-            component: () => import('@/layouts/documentation/Index'),
+            component: () => import(
+              /* webpackChunkName: "layouts-documentation" */
+              '@/layouts/documentation/Index'
+            ),
             children: [
               {
                 path: '',
                 name: 'Documentation',
                 components: {
-                  default: () => import('@/views/Documentation'),
-                  api: () => import('@/views/Api'),
+                  default: () => import(
+                    /* webpackChunkName: "views-documentation" */
+                    '@/views/Documentation'
+                  ),
+                  api: () => import(
+                    /* webpackChunkName: "views-api" */
+                    '@/views/Api'
+                  ),
                 },
               },
             ],
