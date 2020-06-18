@@ -67,6 +67,9 @@ module.exports = {
     workboxOptions: {
       // swSrc is required in InjectManifest mode.
       swSrc: 'src/service-worker.js',
+      exclude: [
+        /index\.html$/,
+      ],
       // ...other Workbox options...
     },
   },

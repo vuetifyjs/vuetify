@@ -8,7 +8,6 @@ const pwa = store => {
     store.dispatch('app/setPwaCanInstall', true, ROOT_DISPATCH)
   })
 
-  console.log('meow plugin')
   document.addEventListener('swUpdated', e => {
     store.dispatch('app/setPwaUpdateAvailable', true, ROOT_DISPATCH)
     store.dispatch('app/setPwaUpdateDetail', e.detail, ROOT_DISPATCH)
