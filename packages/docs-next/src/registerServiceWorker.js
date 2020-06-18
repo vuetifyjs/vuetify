@@ -13,8 +13,12 @@ if (IS_PROD) {
         'For more details, visit https://goo.gl/AFskqB',
       )
     },
-    registered () {
+    registered (registration) {
       console.log('Service worker has been registered.')
+      // Routinely check for app updates by testing for a new service worker.
+      setInterval(() => {
+        registration.update()
+      }, 1000 * 60 * 60) // hourly checks
     },
     cached () {
       console.log('Content has been cached for offline use.')
@@ -22,8 +26,11 @@ if (IS_PROD) {
     updatefound () {
       console.log('New content is downloading.')
     },
-    updated () {
+    updated (registration) {
       console.log('New content is available; please refresh.')
+      document.dispatchEvent(
+        new CustomEvent('swUpdated', { detail: registration }),
+      )
     },
     offline () {
       console.log('No internet connection found. App is running in offline mode.')
@@ -31,5 +38,12 @@ if (IS_PROD) {
     error (error) {
       console.error('Error during service worker registration:', error)
     },
+  })
+
+  var refreshing
+  navigator.serviceWorker.addEventListener('controllerchange', function () {
+    if (refreshing) return
+    window.location.reload()
+    refreshing = true
   })
 }

@@ -1,6 +1,40 @@
 <template>
   <v-container class="fill-height justify-center">
     <div class="text-center">
+      <v-alert
+        v-if="pwaUpdateAvailable"
+        class="mb-4"
+        dense
+        type="info"
+      >
+        New Content Available!
+        <v-btn
+          text
+          @click="refreshContent"
+        >
+          Refresh
+        </v-btn>
+      </v-alert>
+
+      <v-spacer />
+
+      <v-btn
+        v-if="pwaCanInstall"
+        class="mb-4"
+        color="primary"
+        outlined
+        x-large
+        @click="promptInstaller"
+      >
+        Install Docs
+
+        <v-icon right>
+          $mdiPlusCircle
+        </v-icon>
+      </v-btn>
+
+      <v-spacer />
+
       <v-btn
         class="mb-16"
         color="primary"
@@ -37,6 +71,7 @@
 <script>
   // Utilities
   import { genMetaData } from '@/util/metadata'
+  import { call, sync } from 'vuex-pathify'
 
   export default {
     name: 'Home',
@@ -46,5 +81,19 @@
       'Vuetify is a Material Design component framework for Vue.js. It aims to provide all the tools necessary to create beautiful content rich applications.',
       'vue, material design components, vue components, material design components, vuetify, vuetify.js, component framework',
     ),
+
+    computed: {
+      ...sync('app', [
+        'pwaCanInstall',
+        'pwaUpdateAvailable',
+      ]),
+    },
+
+    methods: {
+      ...call('app', [
+        'promptInstaller',
+        'refreshContent',
+      ]),
+    },
   }
 </script>

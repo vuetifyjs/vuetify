@@ -12,12 +12,16 @@ const state = {
   drawer: true,
   modified: {},
   nav: [],
+  pwaCanInstall: false,
+  pwaInstallPrompt: null,
+  pwaUpdateAvailable: false,
+  pwaUpdateDetail: null,
   snackbar: {
     show: false,
-    action: false,
+    refresh: false,
+    dismiss: false,
     message: '',
-    type: '',
-    timeout: 3000,
+    timeout: 4000,
   },
   version: null,
 }
@@ -25,11 +29,29 @@ const state = {
 const mutations = make.mutations(state)
 
 const actions = {
+  ...make.actions(state),
   init: async ({ dispatch }) => {
     dispatch('ads/fetch', null, ROOT_DISPATCH)
   },
   showSnackbar ({ state }, data) {
     state.snackbar = Object.assign(state.snackbar, data)
+  },
+  promptInstaller ({ commit, state }) {
+    commit('pwaCanInstall', false)
+    state.pwaInstallPrompt.prompt()
+    state.pwaInstallPrompt.userChoice.then(choice => {
+      if (choice.outcome === 'accepted') {
+        console.log('Installation Accepted')
+      } else {
+        console.log('Installation Denied')
+      }
+      commit('pwaInstallPrompt', null)
+    })
+  },
+  refreshContent ({ commit, state }) {
+    commit('pwaUpdateAvailable', false)
+    if (!state.pwaUpdateDetail || !state.pwaUpdateDetail.waiting) return
+    state.pwaUpdateDetail.waiting.postMessage('skipWaiting')
   },
 }
 
