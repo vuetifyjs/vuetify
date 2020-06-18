@@ -2,7 +2,7 @@
   <v-container class="fill-height justify-center">
     <div class="text-center">
       <v-alert
-        v-if="pwaUpdateAvailable"
+        v-if="updateAvailable"
         class="mb-4"
         dense
         type="info"
@@ -19,7 +19,7 @@
       <v-spacer />
 
       <v-btn
-        v-if="pwaCanInstall"
+        v-if="canInstall"
         class="mb-4"
         color="primary"
         outlined
@@ -83,14 +83,14 @@
     ),
 
     computed: {
-      ...sync('app', [
-        'pwaCanInstall',
-        'pwaUpdateAvailable',
+      ...sync('pwa', [
+        'canInstall',
+        'updateAvailable',
       ]),
     },
 
     methods: {
-      ...call('app', [
+      ...call('pwa', [
         'promptInstaller',
         'refreshContent',
       ]),

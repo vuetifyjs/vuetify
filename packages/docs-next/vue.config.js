@@ -59,6 +59,9 @@ module.exports = {
     name: 'Vuetify-Docs',
     themeColor: '#094A7F',
     msTileColor: '#5CBBF6',
+    manifestOptions: {
+      background_color: '#5CBBF6',
+    },
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black',
 
