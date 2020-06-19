@@ -212,7 +212,7 @@ export default mixins(Colorable, Themeable).extend({
       return this.parsedItems.indexOf(this.getValue(item)) > -1
     },
     needsTile (slot: VNode[] | undefined) {
-      return slot!.length !== 1 ||
+      return (slot !== undefined && slot.length !== 1) ||
         slot![0].componentOptions == null ||
         slot![0].componentOptions.Ctor.options.name !== 'v-list-item'
     },
