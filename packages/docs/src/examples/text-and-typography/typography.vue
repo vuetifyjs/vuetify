@@ -104,7 +104,7 @@
         ['body-2', 'Body 2', '0.875rem', '400', '0.015625rem', 4],
         ['button', 'Button', '0.875rem', '500', '0.078125rem', 4],
         ['caption', 'Caption', '0.75rem', '400', '0.025rem', 4],
-        ['overline', 'Overline', '0.625rem', '400', '0.09375rem', 4],
+        ['overline', 'Overline', '0.75rem', '500', '0.1666666667em', 4],
       ],
     }),
   }
