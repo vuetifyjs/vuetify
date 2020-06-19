@@ -4,7 +4,12 @@
     :class="['v-heading', map[level]]"
     @click="onClick"
   >
-    <slot />
+    <a
+      :href="href"
+      class="text-decoration-none"
+    >#</a>
+
+    {{ content }}
   </component>
 </template>
 
@@ -15,7 +20,11 @@
   export default {
     name: 'AppHeading',
 
-    props: { level: String },
+    props: {
+      content: String,
+      href: String,
+      level: String,
+    },
 
     data: () => ({
       map: {
@@ -32,12 +41,9 @@
       onClick (e) {
         e.preventDefault()
 
-        const link = this.$el.querySelector('.v-link')
-        const hash = `#${link.href.split('#').pop()}`
+        if (this.hash === this.href) return
 
-        if (this.hash === hash) return
-
-        this.$router.push(hash)
+        this.$router.push(this.href)
       },
     },
   }
@@ -48,12 +54,11 @@
     display: inline-block
     position: relative
 
-    > .v-link
+    > a
       bottom: 0
       display: inline-block
       left: 0
-      margin-left: -2rem
-      padding-right: 0.5rem
+      margin-left: -.7em
       position: absolute
       right: 0
       top: 0

@@ -8,9 +8,8 @@ const md = require('markdown-it')({
   .use(require('markdown-it-attrs'))
   .use(require('markdown-it-anchor'), {
     permalink: true,
-    permalinkSymbol: '#',
-    permalinkBefore: true,
-    permalinkClass: 'text-decoration-none v-link',
+    permalinkSymbol: '',
+    permalinkClass: '',
   })
   .use(require('markdown-it-prism'))
   .use(require('markdown-it-header-sections'))

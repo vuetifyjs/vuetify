@@ -1,33 +1,29 @@
 <template>
   <div class="mt-16">
     <div class="blue-grey--text text--darken-1 d-flex align-center justify-space-between">
-      <div class="font-weight-medium d-inline-flex align-baseline">
-        <span class="mr-1">
-          Edit This Page on
-        </span>
+      <div class="font-weight-medium d-flex align-baseline grow">
+        <i18n path="edit-page">
+          <template v-slot:url>
+            <app-link :href="href">
+              <span v-text="$t('github')" />
+            </app-link>
+          </template>
+        </i18n>
 
-        <a
-          :href="href"
-          class="mr-1"
-          rel="noopener"
-          target="_blank"
-        >
-          GitHub
-        </a>
+        <v-spacer />
 
-        <v-icon size="14">
-          $mdiOpenInNew
-        </v-icon>
-      </div>
+        <div class="text-body-2">
+          <i18n
+            tag="span"
+            class="font-weight-medium mr-1"
+            path="last-updated"
+          />
 
-      <div class="text-body-2">
-        <span class="font-weight-medium">
-          Last Updated:
-        </span>
-
-        <span class="text--secondary">
-          {{ at }}
-        </span>
+          <span
+            class="text--secondary"
+            v-text="at"
+          />
+        </div>
       </div>
     </div>
   </div>

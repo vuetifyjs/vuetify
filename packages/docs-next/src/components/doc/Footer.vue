@@ -1,19 +1,26 @@
 <template>
-  <section :id="id">
-    <app-heading level="2">
-      <a
-        :href="href"
-        class="text-decoration-none v-link"
-        v-text="'#'"
-      />
-
-      {{ text }}
-    </app-heading>
+  <section
+    :id="id"
+    class="mt-12"
+  >
+    <app-heading
+      :content="text"
+      :href="href"
+      level="2"
+    />
 
     <i18n
-      tag="app-md"
       path="ready-text"
-    />
+      tag="div"
+    >
+      <template v-slot:team>
+        <i18n
+          :href="url"
+          tag="app-link"
+          path="team"
+        />
+      </template>
+    </i18n>
 
     <related-pages />
 
@@ -29,7 +36,7 @@
 
 <script>
   // Utilities
-  import { sync } from 'vuex-pathify'
+  import { get, sync } from 'vuex-pathify'
 
   export default {
     name: 'DocFooter',
@@ -37,6 +44,7 @@
     data: () => ({ id: 'ready-for-more' }),
 
     computed: {
+      locale: get('route/params@locale'),
       toc: sync('page/toc'),
       href () {
         return `#${this.id}`

@@ -16,9 +16,10 @@ function getPageHeadings (page) {
     if (level <= 1) continue
 
     const next = tokens[i + 1]
-    const link = next.children[0]
+    const link = next.children.find(child => child.type === 'link_open')
     const text = next.content
-    const [, href] = link.attrs.find(([attr]) => attr === 'href')
+    const anchor = !link || link.attrs.find(([attr]) => attr === 'href')
+    const [, href] = anchor
 
     headings.push({
       text,
