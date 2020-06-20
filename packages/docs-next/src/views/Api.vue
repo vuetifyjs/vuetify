@@ -7,7 +7,7 @@
 
     return import(
       /* webpackChunkName: "api-pages-[request]" */
-      `@docs/${locale}/api/${page}.md`
+      `@/api/${locale}/${page}.md`
     )
   }
 

@@ -1,5 +1,6 @@
 // Imports
-const VirtualModulesPlugin = require('webpack-virtual-modules')
+const fs = require('fs')
+const { resolve } = require('path')
 const {
   generateAPI,
   generateCompList,
@@ -115,8 +116,6 @@ function createMdFile (component, data) {
   return str
 }
 
-const toJs = data => `module.exports = ${JSON.stringify(data)};`
-
 function generateFiles () {
   const components = generateCompList()
   const files = {}
@@ -127,13 +126,19 @@ function generateFiles () {
 
     for (const component of components) {
       const data = generateAPI(component, locale)
-      const target = `/${locale}/api/${component}`
+      const folder = `src/api/${locale}`
 
-      files[`node_modules/@docs${target}.md`] = createMdFile(component, data)
-      pages[`${target}/`] = component
+      if (!fs.existsSync(resolve(folder))) {
+        fs.mkdirSync(resolve(folder))
+      }
+
+      const file = `${folder}/${component}.md`
+
+      fs.writeFileSync(resolve(file), createMdFile(component, data))
+      pages[`/${locale}/api/${component}`] = component
     }
 
-    files[`node_modules/@docs/${locale}/api/pages.js`] = toJs(pages)
+    fs.writeFileSync(resolve(`src/api/${locale}/pages.json`), JSON.stringify(pages, null, 2))
   }
 
   return files
@@ -141,10 +146,7 @@ function generateFiles () {
 
 class ApiPlugin {
   apply (compiler) {
-    const files = generateFiles()
-    const virtualModules = new VirtualModulesPlugin(files)
-
-    virtualModules.apply(compiler)
+    generateFiles()
   }
 }
 

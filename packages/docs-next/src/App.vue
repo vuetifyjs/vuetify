@@ -7,7 +7,7 @@
 <script>
   // Utilities
   import { get, sync } from 'vuex-pathify'
-  import { wait, waitForReadystate } from '@/util/helpers'
+  import { waitForReadystate } from '@/util/helpers'
 
   export default {
     name: 'App',

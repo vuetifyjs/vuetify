@@ -79,7 +79,7 @@
       async getPages () {
         const { default: api } = await import(
           /* webpackChunkName: "api-pages-[request]" */
-          `@docs/${this.locale}/api/pages`
+          `@/api/${this.locale}/pages.json`
         )
         const { default: pages } = await import(
           /* webpackChunkName: "local-pages-[request]" */
