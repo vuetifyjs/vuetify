@@ -24,9 +24,10 @@ function generateAPI (comp, locale) {
   }
 
   try {
+    // make sure we're getting latest version of file
+    delete require.cache[resolve(`build/api-gen/maps/${comp}.js`)]
     const mapFile = require(`./maps/${comp}`)[comp]
     compMap = mapFile
-    console.log(comp)
   } catch (e) {
     console.log(`map: ${comp} not found`)
   }

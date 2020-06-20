@@ -116,6 +116,19 @@ function createMdFile (component, data) {
   return str
 }
 
+function writeFile (component, locale) {
+  const data = generateAPI(component, locale)
+  const folder = `src/api/${locale}`
+
+  if (!fs.existsSync(resolve(folder))) {
+    fs.mkdirSync(resolve(folder))
+  }
+
+  const file = `${folder}/${component}.md`
+
+  fs.writeFileSync(resolve(file), createMdFile(component, data))
+}
+
 function generateFiles () {
   const components = generateCompList()
   const files = {}
@@ -125,16 +138,8 @@ function generateFiles () {
     const pages = {}
 
     for (const component of components) {
-      const data = generateAPI(component, locale)
-      const folder = `src/api/${locale}`
+      writeFile(component, locale)
 
-      if (!fs.existsSync(resolve(folder))) {
-        fs.mkdirSync(resolve(folder))
-      }
-
-      const file = `${folder}/${component}.md`
-
-      fs.writeFileSync(resolve(file), createMdFile(component, data))
       pages[`/${locale}/api/${component}`] = component
     }
 
@@ -147,6 +152,41 @@ function generateFiles () {
 class ApiPlugin {
   apply (compiler) {
     generateFiles()
+
+    let changedFiles = []
+    const sourcePath = resolve('build/api-gen')
+
+    compiler.hooks.afterCompile.tap('ApiPlugin', compilation => {
+      compilation.contextDependencies.add(sourcePath)
+    })
+
+    compiler.hooks.watchRun.tap('ApiPlugin', async (comp) => {
+      const changedTimes = comp.watchFileSystem.watcher.mtimes
+
+      changedFiles = Object.keys(changedTimes).filter(filePath => filePath.startsWith(sourcePath))
+    })
+
+    compiler.hooks.compilation.tap('ApiPlugin', () => {
+      if (!changedFiles.length) return
+
+      for (const filePath of changedFiles) {
+        if (filePath.indexOf('maps') >= 0) {
+          // re-generate all locales
+          const matches = /[/\\]([-a-z]+)\.js$/i.exec(filePath)
+          const [_, component] = matches
+          for (const locale of generateLocaleList()) {
+            writeFile(component, locale)
+          }
+        } else if (filePath.indexOf('locale') >= 0) {
+          // re-generate only specific locale
+          const matches = /[/\\]([-a-z]+)[/\\]([-a-z]+)\.json$/i.exec(filePath)
+          const [_, locale, component] = matches
+          writeFile(component, locale)
+        }
+      }
+
+      changedFiles = []
+    })
   }
 }
 
