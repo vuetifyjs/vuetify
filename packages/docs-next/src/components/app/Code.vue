@@ -72,4 +72,7 @@
 
     pre.language-js::after
       content: 'js'
+
+    pre.language-json::after
+      content: 'json'
 </style>
