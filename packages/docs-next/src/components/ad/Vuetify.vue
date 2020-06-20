@@ -6,7 +6,7 @@
     <v-list-item
       v-if="current"
       :color="bgColor"
-      class="pl-2 rounded"
+      class="px-2 rounded"
       style="min-height: inherit;"
       v-bind="adAttrs"
     >
@@ -30,7 +30,7 @@
         v-text="icon"
       />
 
-      <v-list-item-content>
+      <v-list-item-content class="py-2">
         <v-list-item-title
           v-if="!isSponsored"
           class="font-weight-medium mb-1 subtitle-1"
@@ -48,12 +48,12 @@
         />
       </v-list-item-content>
 
-      <v-list-item-action
+      <i18n
         v-if="!compact"
-        class="mb-n9 mr-n2"
-      >
-        <span class="overline text--secondary">ads via Vuetify</span>
-      </v-list-item-action>
+        class="powered-by align-self-end my-2"
+        path="ads-via-vuetify"
+        tag="div"
+      />
     </v-list-item>
   </app-ad>
 </template>
@@ -128,3 +128,12 @@
     },
   }
 </script>
+
+<style lang="sass">
+  .powered-by
+    color: rgba(0, 0, 0, .6)
+    font-size: 0.625rem
+    font-weight: 400
+    letter-spacing: 0.09375rem
+    text-transform: uppercase
+</style>

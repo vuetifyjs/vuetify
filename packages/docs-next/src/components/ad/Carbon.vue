@@ -59,7 +59,7 @@
       bottom: 0.5rem
       color: rgba(0, 0, 0, .6)
       font-size: 0.625rem
-      font-weight: normal
+      font-weight: 400
       letter-spacing: 0.09375rem
       position: absolute
       right: 0.5rem
