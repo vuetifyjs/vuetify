@@ -122,7 +122,8 @@
       genChild (item, group) {
         const isGroup = item.group
         const items = isGroup ? this.getChildren(item, group) : undefined
-        const { href, icon, title: path } = item
+        const { href, icon } = item
+        const path = item.path || item.title
         const page = `${group}${kebabCase(path)}/`
         const to = isGroup ? group : page
 

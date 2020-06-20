@@ -60,11 +60,13 @@
   },
   {
     "title": "themes",
-    "icon": "$mdiVuetify"
+    "icon": "$mdiVuetify",
+    "path": "premium"
   },
   {
     "title": "jobs",
-    "icon": "$mdiBriefcaseSearch"
+    "icon": "$mdiBriefcaseSearch",
+    "path": "for-vue"
   },
   {
     "title": "company",

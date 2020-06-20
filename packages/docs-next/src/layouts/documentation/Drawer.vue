@@ -7,8 +7,8 @@
   >
     <v-list
       dense
-      nav
       expand
+      nav
     >
       <template v-for="(item, i) in nav">
         <v-list-group
@@ -40,10 +40,11 @@
         <v-list-item
           v-else
           :key="i"
-          :to="undefined"
           :href="item.href"
-          :target="item.href ? '_blank' : undefined"
           :rel="item.href ? 'nofollow' : undefined"
+          :target="item.href ? '_blank' : undefined"
+          :to="item.to"
+          color="primary"
         >
           <v-list-item-icon v-if="item.icon">
             <v-icon v-text="item.icon" />
