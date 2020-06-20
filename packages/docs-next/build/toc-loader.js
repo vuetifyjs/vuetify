@@ -19,11 +19,11 @@ function getPageHeadings (page) {
     const link = next.children.find(child => child.type === 'link_open')
     const text = next.content
     const anchor = !link || link.attrs.find(([attr]) => attr === 'href')
-    const [, href] = anchor
+    const [, to] = anchor
 
     headings.push({
       text,
-      href,
+      to,
       level,
     })
   }

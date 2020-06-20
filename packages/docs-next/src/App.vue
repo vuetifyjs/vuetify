@@ -6,7 +6,7 @@
 
 <script>
   // Utilities
-  import { get } from 'vuex-pathify'
+  import { get, sync } from 'vuex-pathify'
   import { wait, waitForReadystate } from '@/util/helpers'
 
   export default {
@@ -17,18 +17,32 @@
       titleTemplate: '%s | Vuetify.js',
     },
 
+    data: () => ({ unwatch: undefined }),
+
     computed: {
+      frontmatter: get('i18n/frontmatter'),
       hash: get('route/hash'),
+      initializing: sync('app/initializing'),
     },
-    async mounted () {
+
+    async created () {
       if (!this.hash) return
 
-      await this.$nextTick()
-      await waitForReadystate()
-      await wait(200)
+      this.initializing = true
 
-      // TODO: Handle fallback if not found / error
-      this.$vuetify.goTo(this.hash)
+      await waitForReadystate()
+
+      this.unwatch = this.$watch('frontmatter', async () => {
+        await this.$router.options.scrollBehavior({ hash: this.hash })
+
+        this.initializing = false
+
+        this.unwatch()
+      })
+    },
+
+    updated () {
+      this.initializing = false
     },
   }
 </script>

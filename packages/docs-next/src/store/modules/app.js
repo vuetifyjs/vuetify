@@ -2,7 +2,7 @@
 import { make } from 'vuex-pathify'
 
 // Utilities
-import { getBranch } from '../../util/helpers'
+import { getBranch } from '@/util/helpers'
 import { ROOT_DISPATCH } from '@/store'
 
 // Data
@@ -10,6 +10,7 @@ import { ROOT_DISPATCH } from '@/store'
 const state = {
   branch: getBranch(),
   drawer: true,
+  initializing: false,
   modified: {},
   nav: [],
   snackbar: {

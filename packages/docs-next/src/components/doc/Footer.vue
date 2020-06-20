@@ -5,7 +5,7 @@
   >
     <app-heading
       :content="text"
-      :href="href"
+      :to="to"
       level="2"
     />
 
@@ -46,7 +46,7 @@
     computed: {
       locale: get('route/params@locale'),
       toc: sync('page/toc'),
-      href () {
+      to () {
         return `#${this.id}`
       },
       text () {
@@ -57,10 +57,10 @@
       },
     },
 
-    mounted () {
-      if (!this.toc.find(t => t.href === this.href)) {
+    created () {
+      if (!this.toc.find(t => t.to === this.to)) {
         this.toc.push({
-          href: this.href,
+          to: this.to,
           level: '2',
           text: this.text,
         })

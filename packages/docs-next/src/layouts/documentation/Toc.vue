@@ -7,13 +7,15 @@
     right
     width="192"
   >
-    <h3 class="text-h6 font-weight-regular mb-4">
-      Contents
-    </h3>
+    <i18n
+      class="text-h6 font-weight-regular mb-4"
+      tag="h3"
+      path="contents"
+    />
 
     <ul class="pl-0">
       <li
-        v-for="({ href, level, text }, i) in toc"
+        v-for="({ to, level, text }, i) in toc"
         :key="i"
         :class="{
           'pl-3': level === 3,
@@ -21,11 +23,11 @@
         }"
         class="mt-2"
       >
-        <a
-          :href="href"
-          class="d-block text-body-2 font-weight-light text-decoration-none grey--text text--darken-1"
-          @click.stop.prevent="$vuetify.goTo(href)"
-          v-html="text"
+        <router-link
+          :to="to"
+          active-class="primary--text"
+          class="v-toc-link d-block text-body-2 font-weight-light text-decoration-none"
+          v-text="text"
         />
       </li>
     </ul>
@@ -51,4 +53,7 @@
   #default-toc
     ul
       list-style-type: none
+
+    .v-toc-link:not(.router-link-exact-active)
+      color: #757575 // grey.darken-1
 </style>
