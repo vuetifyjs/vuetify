@@ -42,8 +42,10 @@
     name: 'DocumentationToc',
 
     computed: {
-      category: get('route/params@category'),
-      page: get('route/params@page'),
+      ...get('route', [
+        'params@category',
+        'params@page',
+      ]),
       toc: get('pages/toc'),
     },
   }
