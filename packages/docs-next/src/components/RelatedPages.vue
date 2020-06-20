@@ -18,6 +18,6 @@
   export default {
     name: 'RelatedPages',
 
-    computed: { related: get('i18n/frontmatter@related') },
+    computed: { related: get('pages/frontmatter@related') },
   }
 </script>

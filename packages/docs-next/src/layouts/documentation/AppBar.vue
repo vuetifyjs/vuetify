@@ -55,7 +55,7 @@
 
     computed: {
       drawer: sync('app/drawer'),
-      translating: get('i18n/translating'),
+      translating: get('pages/translating'),
     },
 
     methods: {

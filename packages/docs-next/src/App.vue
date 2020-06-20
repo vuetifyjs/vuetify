@@ -20,7 +20,7 @@
     data: () => ({ unwatch: undefined }),
 
     computed: {
-      frontmatter: get('i18n/frontmatter'),
+      frontmatter: get('pages/frontmatter'),
       hash: get('route/hash'),
       initializing: sync('app/initializing'),
     },

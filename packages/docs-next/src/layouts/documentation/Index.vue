@@ -57,9 +57,7 @@
         'nav',
         'modified',
       ]),
-      ...sync('i18n', [
-        'pages',
-      ]),
+      pages: sync('pages/pages'),
       locale: get('route/params@locale'),
     },
 

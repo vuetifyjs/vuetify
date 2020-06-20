@@ -44,7 +44,7 @@
     computed: {
       category: get('route/params@category'),
       page: get('route/params@page'),
-      toc: get('page/toc'),
+      toc: get('pages/toc'),
     },
   }
 </script>

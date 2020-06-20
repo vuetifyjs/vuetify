@@ -43,8 +43,8 @@
     data: () => ({ component: undefined }),
 
     computed: {
-      frontmatter: sync('i18n/frontmatter'),
-      toc: sync('page/toc'),
+      frontmatter: sync('pages/frontmatter'),
+      toc: sync('pages/toc'),
     },
 
     watch: { '$route.params.locale': 'update' },

@@ -45,7 +45,7 @@
 
     computed: {
       locale: get('route/params@locale'),
-      toc: sync('page/toc'),
+      toc: sync('pages/toc'),
       to () {
         return `#${this.id}`
       },

@@ -54,10 +54,12 @@
     }),
 
     computed: {
+      ...get('pages', [
+        'pages',
+        'frontmatter@related',
+      ]),
       locale: get('route/params@locale'),
       nav: get('app/nav'),
-      pages: get('i18n/pages'),
-      related: get('i18n/frontmatter@related'),
       section () {
         return this.to.split('/')[1]
       },

@@ -12,7 +12,7 @@
   export default {
     name: 'LocaleLayout',
 
-    computed: { translating: get('i18n/translating') },
+    computed: { translating: get('pages/translating') },
 
     created () {
       if (!this.translating) return
