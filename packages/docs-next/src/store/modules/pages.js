@@ -1,9 +1,6 @@
 // Pathify
 import { make } from 'vuex-pathify'
 
-// Language
-// import { loadLocale } from '@/plugins/i18n'
-
 const state = {
   frontmatter: {},
   pages: {},
