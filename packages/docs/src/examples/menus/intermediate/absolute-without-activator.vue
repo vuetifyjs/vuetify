@@ -6,7 +6,7 @@
         class="portrait"
         img="https://cdn.vuetifyjs.com/images/cards/girl.jpg"
         height="300px"
-        @click="show"
+        @contextmenu="show"
       ></v-card>
     </v-row>
 
