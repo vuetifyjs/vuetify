@@ -12,7 +12,10 @@
 
         <v-spacer />
 
-        <div class="text-body-2">
+        <div
+          v-if="at"
+          class="text-body-2"
+        >
           <i18n
             tag="span"
             class="font-weight-medium mr-1"
