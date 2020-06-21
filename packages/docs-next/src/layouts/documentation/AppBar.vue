@@ -12,6 +12,13 @@
       @click="drawer = !drawer"
     />
 
+    <v-btn
+      icon
+      @click="advanced = !advanced"
+    >
+      <v-icon v-text="aicon" />
+    </v-btn>
+
     <vuetify-logo />
 
     <v-spacer />
@@ -54,8 +61,14 @@
     data: () => ({ locales }),
 
     computed: {
+      advanced: sync('user/drawer@advanced'),
       drawer: sync('app/drawer'),
       translating: get('pages/translating'),
+      aicon () {
+        const icon = this.advanced ? 'Bool' : 'Alphabetical'
+
+        return `$mdiOrder${icon}Ascending`
+      },
     },
 
     methods: {

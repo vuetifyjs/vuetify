@@ -5,70 +5,38 @@
     clipped
     width="300"
   >
-    <v-list
-      dense
-      expand
-      nav
-    >
-      <template v-for="(item, i) in nav">
-        <v-list-group
-          v-if="item.items"
-          :key="item.title"
-          :group="item.to"
-          :prepend-icon="item.icon"
-          no-action
-        >
-          <template v-slot:activator>
-            <v-list-item-content>
-              <v-list-item-title v-text="item.title" />
-            </v-list-item-content>
-          </template>
+    <v-fade-transition mode="out-in">
+      <keep-alive>
+        <documentation-list
+          v-if="advanced"
+          key="advanced"
+          :items="anav"
+        />
 
-          <template v-if="item.items">
-            <v-list-item
-              v-for="subItem in item.items"
-              :key="subItem.title"
-              :to="subItem.to"
-            >
-              <v-list-item-content>
-                <v-list-item-title v-text="subItem.title" />
-              </v-list-item-content>
-            </v-list-item>
-          </template>
-        </v-list-group>
-
-        <v-list-item
+        <documentation-list
           v-else
-          :key="i"
-          :href="item.href"
-          :rel="item.href ? 'nofollow' : undefined"
-          :target="item.href ? '_blank' : undefined"
-          :to="item.to"
-          color="primary"
-        >
-          <v-list-item-icon v-if="item.icon">
-            <v-icon v-text="item.icon" />
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </template>
-    </v-list>
+          key="simple"
+          :items="nav"
+        />
+      </keep-alive>
+    </v-fade-transition>
   </v-navigation-drawer>
 </template>
 
 <script>
   // Utilities
-  import { sync } from 'vuex-pathify'
+  import { get, sync } from 'vuex-pathify'
 
   export default {
     name: 'DocumentationDrawer',
 
+    components: { DocumentationList: () => import('./List') },
+
     computed: {
       drawer: sync('app/drawer'),
-      nav: sync('app/nav'),
+      advanced: get('user/drawer@advanced'),
+      anav: get('app/advanced'),
+      nav: get('app/nav'),
     },
   }
 </script>

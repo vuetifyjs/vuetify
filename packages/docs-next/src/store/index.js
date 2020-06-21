@@ -18,6 +18,12 @@ export function createStore () {
     ],
   })
 
+  store.subscribe(mutation => {
+    if (!mutation.type.startsWith('user/')) return
+
+    store.dispatch('user/update', mutation)
+  })
+
   store.dispatch('app/init')
 
   return store
