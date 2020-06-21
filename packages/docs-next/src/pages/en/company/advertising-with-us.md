@@ -14,6 +14,10 @@ Entry ads are placed at the front of pages after the introduction
 
 <entry-ad />
 
+Promoted ads replace the pages default entry ad
+
+<promoted-ad slug="vuemastery-getting-started" />
+
 ## Random Ad
 A random ad from all available
 

@@ -4,6 +4,7 @@
     bg-color="#1976D21F"
     color="light-blue--text text--darken-4"
     compact
+    max-width="512"
   />
 </template>
 

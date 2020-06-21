@@ -1,24 +1,30 @@
 <template>
   <app-ad
     :color="bgColor"
-    v-bind="$props"
+    class="v-vuetify-ad"
+    v-bind="{
+      ...$attrs,
+      ...$props,
+    }"
   >
     <v-list-item
       v-if="current"
+      :class="[entry ? 'px-0' : 'px-2']"
       :color="bgColor"
-      class="px-2 rounded"
+      class="rounded"
       style="min-height: inherit;"
       v-bind="adAttrs"
     >
       <v-list-item-avatar
-        v-if="metadata.src && !compact"
+        v-if="src"
         size="56"
         tile
       >
         <v-img
           :alt="`Link to ${current.title}`"
-          :src="metadata.src"
+          :src="src"
           class="rounded-tl rounded-bl"
+          contain
         />
       </v-list-item-avatar>
 
@@ -30,30 +36,41 @@
         v-text="icon"
       />
 
-      <v-list-item-content class="py-2">
-        <v-list-item-title
-          v-if="!isSponsored"
-          class="font-weight-medium mb-1 subtitle-1"
-          v-text="current.title"
-        />
+      <v-img
+        :src="metadata.bg"
+        class="v-vuetify-ad__bg"
+        max-height="56"
+      >
+        <v-list-item-content>
+          <v-list-item-title
+            v-if="!isSponsored"
+            class="font-weight-medium mb-1 subtitle-1"
+            v-text="current.title"
+          />
 
-        <div
-          v-if="metadata.description"
-          :class="{
-            [color || 'text--secondary']: true,
-            'body-1 font-weight-medium': isSponsored,
-            'caption': !isSponsored
-          }"
-          v-text="metadata.description"
-        />
-      </v-list-item-content>
+          <v-list-item-subtitle
+            :class="{
+              [color || 'text--secondary']: !entry,
+              'body-1 font-weight-medium': isSponsored,
+              'caption': !isSponsored,
+              'white--text': entry,
+            }"
+          >
+            <app-md
+              v-if="metadata.description"
 
-      <i18n
-        v-if="!compact"
-        class="powered-by align-self-end my-2"
-        path="ads-via-vuetify"
-        tag="div"
-      />
+              v-text="metadata.description"
+            />
+          </v-list-item-subtitle>
+        </v-list-item-content>
+
+        <i18n
+          v-if="!compact"
+          class="powered-by align-self-end justify-self-end pl-4 mt-2"
+          path="ads-via-vuetify"
+          tag="div"
+        />
+      </v-img>
     </v-list-item>
   </app-ad>
 </template>
@@ -70,6 +87,7 @@
       color: String,
       comfortable: Boolean,
       compact: Boolean,
+      entry: Boolean,
       discover: Boolean,
       outlined: Boolean,
       slug: String,
@@ -116,6 +134,12 @@
       metadata () {
         return this.current ? this.current.metadata : {}
       },
+      src () {
+        return this.entry || (
+          this.metadata.src &&
+          !this.compact
+        ) ? this.metadata.src : undefined
+      },
     },
 
     methods: {
@@ -130,10 +154,22 @@
 </script>
 
 <style lang="sass">
-  .powered-by
-    color: rgba(0, 0, 0, .6)
-    font-size: 0.625rem
-    font-weight: 400
-    letter-spacing: 0.09375rem
-    text-transform: uppercase
+  .v-vuetify-ad
+    .v-markdown p
+      margin-bottom: 0
+
+    .powered-by
+      color: rgba(0, 0, 0, .6)
+      font-size: 0.625rem
+      font-weight: 400
+      letter-spacing: 0.09375rem
+      text-transform: uppercase
+
+    &__bg.v-responsive
+      flex: 1 1 auto
+      flex-wrap: nowrap
+
+      .v-responsive__content
+        align-items: center
+        display: flex
 </style>
