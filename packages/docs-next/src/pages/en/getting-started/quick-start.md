@@ -17,7 +17,7 @@ Get started with Vuetify, the world’s most popular Vue.js framework for buildi
 
 ## Vue CLI Install
 
-<alert type="warning">For information on how to use Vue CLI, visit the [official documentation]().</alert>
+<alert type="warning">For information on how to use Vue CLI, visit the [official documentation](https://google.com).</alert>
 
 If you have not already created a new Vue.js project using **Vue CLI**, you can do so by typing:
 
