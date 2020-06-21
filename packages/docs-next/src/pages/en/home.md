@@ -26,12 +26,10 @@ Help us build the new documentation by porting over existing pages:
   ```
 4. Open both `vuetify` and `docs-next` in VSCode
 5. In the *Vuetify* repo, navigate to `vuetify/packages/docs` and open the following files:
-  1. **docs/src/lang/en/components/{Page}.json**—e.g. `Alerts.json`
-  2. **docs/src/data/pages/components/{Page}.pug**—e.g. `Alerts.pug`
-  3. **docs/src/lang/en/meta.json**
-7. In the *docs-next* repo, navigate to `src/pages/{folder}/{page}.md`—e.g. `src/pages/components/alerts.md`
-8. Move metadata from `meta.json` to the page's **frontmatter** (example below).
-9. Move the __up-next__ items from `{Page}.pug` to __related__ in the page's **frontmatter**:
+  - **docs/src/lang/en/components/{Page}.json**—e.g. `Alerts.json`
+  - **docs/src/data/pages/components/{Page}.pug**—e.g. `Alerts.pug`
+6. In the *docs-next* repo, navigate to `src/pages/{folder}/{page}.md`—e.g. `src/pages/components/alerts.md`
+7. Move the __up-next__ items from `{Page}.pug` to __related__ in the page's **frontmatter**:
 
 ```pug
   <!-- Alerts.pug -->
