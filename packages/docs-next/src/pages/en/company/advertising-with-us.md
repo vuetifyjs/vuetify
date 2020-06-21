@@ -6,7 +6,7 @@ meta:
 nav: Advertising with us
 ---
 
-# What are Vuetify Ads?
+# Vuetify Ads
 Future information page about advertising with Vuetify.
 
 ## Entry Ad
