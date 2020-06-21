@@ -77,10 +77,10 @@ export function route (name, component, path = '') {
 
   const components = {}
 
-  for (const key in component) {
+  for (const [key, value] of Object.entries(component)) {
     components[key] = () => import(
       /* webpackChunkName: "views-[request]" */
-      `@/views/${name}`
+      `@/views/${value}`
     )
   }
 
