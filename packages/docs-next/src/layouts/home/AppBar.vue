@@ -7,20 +7,22 @@
     <v-spacer />
 
     <v-btn
-      color="#7289DA"
-      dark
-      depressed
-      href="https://discord.gg/HJXwxMy"
-      large
-      target="_blank"
+      color="primary"
+      outlined
+      x-large
+      :to="{
+        name: 'Documentation',
+        params: {
+          category: 'getting-started',
+          page: 'quick-start'
+        }
+      }"
     >
-      <v-icon class="mr-3">
-        $mdiDiscord
-      </v-icon>
+      To Documentation
 
-      <div class="text-body-1">
-        Get Help
-      </div>
+      <v-icon right>
+        $mdiOpenInNew
+      </v-icon>
     </v-btn>
 
     <v-spacer />
