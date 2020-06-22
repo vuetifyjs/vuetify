@@ -34,7 +34,7 @@
         component = await import(
           /* webpackChunkName: "examples" */
           /* webpackMode: "lazy-once" */
-          `../examples/${this.file}.vue`
+          `../../examples/${this.file}.vue`
         )
 
         this.$emit('loaded', component.default)
