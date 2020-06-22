@@ -52,7 +52,7 @@ Help us build the new documentation by porting over existing pages:
     * **src/pages/en/\*\*** - This path contains the `.md` file you will be migrating data + structure to.
 
     <alert type="info">
-      I am working on the `Alerts` page so I will want to open the file: **`src/lang/en/`**`components/Alerts.md`
+      I am working on the `Alerts` page so I will want to open the file: `src/lang/en/components/Alerts.md`
     </alert>
 
 <alert type="info">
@@ -152,6 +152,25 @@ api(:value=`[
 - [v-alert](../../api/v-alert)
 ```
 
+### Caveats
+
+If you are working on a component page, You may come across the following while looking through the `.pug` file:
+
+```pug
+alert(value="warning") Components.Alerts.alert1
+```
+
+These alerts can be placed under the `Caveat` section of the `.md` page.
+
+1. Find the `.json` file that relates to the section at the end of the alert (in this case `Components.Alerts.alert1`). This is a path to the `.json` file in your local *Vuetify* repo. It can be found at `src/lang/en/components/Alerts.json` and the json property would be `alert1`.
+2. Create an alert in the `Caveat` section of your `.md` page with the following format:
+
+```md
+<alert type="warning">
+  This string found in the `.json` file from step 1. The `type` property is equal to the value provided in the `.pug` alert (in this case `warning`)
+</alert>
+```
+
 ### Examples
 
 If you are working on a component page, you will come across a section relating to examples. In the `.pug` file you will see a chunk of code that looks like this:
@@ -236,6 +255,9 @@ examples(:value=`[
 
     <example file="v-alert/prop-border" />
     ```
+<alert type="info">
+  Place examples for each section in alphabetical order.
+</alert>
 
 ### API Language Data
 
