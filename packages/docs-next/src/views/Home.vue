@@ -3,7 +3,11 @@
     class="fill-height justify-center"
     tag="section"
   >
-    <component :is="component" />
+    <v-row>
+      <v-col cols="12">
+        <component :is="component" />
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
