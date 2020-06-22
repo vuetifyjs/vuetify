@@ -1,5 +1,6 @@
 import {
   mdiAccount,
+  mdiAlertCircle,
   mdiAlphaA,
   mdiAlphaB,
   mdiAlphaC,
@@ -60,6 +61,7 @@ import {
 export const icons = {
   iconfont: 'mdiSvg',
   values: {
+
     mdiAccount,
     mdiAlphaA,
     mdiAlphaB,
@@ -116,5 +118,6 @@ export const icons = {
     mdiTranslate,
     mdiViewDashboard,
     mdiVuetify,
+    warning: mdiAlertCircle,
   },
 }

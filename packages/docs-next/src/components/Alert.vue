@@ -1,7 +1,8 @@
 <template>
   <v-alert
+    :class="$vuetify.theme.dark ? undefined : 'grey lighten-5'"
     border="left"
-    text
+    colored-border
     v-bind="$attrs"
     v-on="$listeners"
   >
