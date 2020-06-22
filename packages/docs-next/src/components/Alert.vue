@@ -7,7 +7,7 @@
     v-bind="$attrs"
     v-on="$listeners"
   >
-    <app-md><slot /></app-md>
+    <slot />
   </v-alert>
 </template>
 
