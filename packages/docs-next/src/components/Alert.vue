@@ -7,12 +7,24 @@
     v-bind="$attrs"
     v-on="$listeners"
   >
-    <app-md><slot /></app-md>
+    <component :is="component">
+      <slot />
+    </component>
   </v-alert>
 </template>
 
 <script>
-  export default { name: 'Alert' }
+  export default {
+    name: 'Alert',
+
+    computed: {
+      component () {
+        const length = this.$slots.default.length
+
+        return length > 1 ? 'div' : 'app-md'
+      },
+    },
+  }
 </script>
 
 <style lang="sass">
