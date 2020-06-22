@@ -48,7 +48,7 @@
             v-text="current.title"
           />
 
-          <v-list-item-subtitle
+          <div
             :class="{
               [color || 'text--secondary']: !entry,
               'body-1 font-weight-medium': isSponsored,
@@ -61,7 +61,7 @@
 
               v-text="metadata.description"
             />
-          </v-list-item-subtitle>
+          </div>
         </v-list-item-content>
 
         <i18n
