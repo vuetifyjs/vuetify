@@ -86,7 +86,7 @@
 
         <v-responsive
           max-height="300"
-          class="overflow-y-auto text-capitalize pa-3"
+          class="overflow-y-auto pa-3"
         >
           <v-switch
             v-for="prop in booleans"
