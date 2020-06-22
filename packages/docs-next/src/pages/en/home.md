@@ -37,19 +37,27 @@ Help us build the new documentation by porting over existing pages:
 
     * **src/lang/en/\*\*** - This path contains the `.json` file related to the page language and content.
 
-    <alert type="info">I am working on the `Alerts` page so I will want to open the file: `src/lang/en/components/Alerts.json`</alert>
+    <alert type="info">
+      I am working on the `Alerts` page so I will want to open the file: `src/lang/en/components/Alerts.json`
+    </alert>
 
     * **src/data/pages/\*\*** - This path contains the `.pug` file related to the page structure.
 
-    <alert type="info">I am working on the `Alerts` page so I will want to open the file: `src/data/pages/components/Alerts.pug`</alert>
+    <alert type="info">
+      I am working on the `Alerts` page so I will want to open the file: `src/data/pages/components/Alerts.pug`
+    </alert>
 
 7. In your local *docs-next* repo, following folder and open the file related to page you are converting:
 
     * **src/pages/en/\*\*** - This path contains the `.md` file you will be migrating data + structure to.
 
-    <alert type="info">I am working on the `Alerts` page so I will want to open the file: **`src/lang/en/`**`components/Alerts.md`</alert>
+    <alert type="info">
+      I am working on the `Alerts` page so I will want to open the file: **`src/lang/en/`**`components/Alerts.md`
+    </alert>
 
-<alert type="info">At this point you are ready to start migrating the data from the *Vuetify* repo to *docs-next*.</alert>
+<alert type="info">
+  At this point you are ready to start migrating the data from the *Vuetify* repo to *docs-next*.
+</alert>
 
 ## Converting the page
 
@@ -57,9 +65,13 @@ The following will cover various sections you will come across when convert a *V
 
 Each page in *doc-next* has been pre-filled with some dummy content. Component pages will contain a skeleton structure to put content in and some relevant information pertaining to the syntax of any available custom components.
 
-<alert type="error">If at any time you come across something that needs a custom component, make a note on notion board item and move on.</alert>
+<alert type="error">
+  If at any time you come across something that needs a custom component, make a note on notion board item and move on.
+</alert>
 
-<alert type="error">If at any time you have any questions or get stuck. Reach out to us in [Discord](https://discord.gg/HJXwxMy).</alert>
+<alert type="error">
+  If at any time you have any questions or get stuck. Reach out to us in [Discord](https://discord.gg/HJXwxMy).
+</alert>
 
 ### Frontmatter
 
@@ -118,7 +130,9 @@ Alerts in their simplest form are a flat [sheets of paper](/components/sheets) t
 <usage name="v-alert" />
 ```
 
-<alert type="info">If you are interested in learning how to convert usage examples, please reach out to us on [Discord](https://discord.gg/HJXwxMy)</alert>
+<alert type="info">
+  If you are interested in learning how to convert usage examples, please reach out to us on [Discord](https://discord.gg/HJXwxMy)
+</alert>
 
 ### API
 
@@ -160,13 +174,19 @@ examples(:value=`[
 
 1. If a page contains example files, create a folder in the *docs-next* repo under `src/examples/` labeled by component
 
-    <alert type="info">I am working on the `Alerts` page so I will want to create a folder: `src/examples/v-alert`</alert>
+    <alert type="info">
+      I am working on the `Alerts` page so I will want to create a folder: `src/examples/v-alert`
+    </alert>
 
-    <alert type="info">For non-component based pages you can simply use the page name.</alert>
+    <alert type="info">
+      For non-component based pages you can simply use the page name.
+    </alert>
 
 2. In your local *Vuetify* repo, navigate to `src/examples/` and find the folder pertaining to your component.
 
-    <alert type="info">I am working on the `Alerts` page so I will want to find the folder: `src/examples/Alerts`</alert>
+    <alert type="info">
+      I am working on the `Alerts` page so I will want to find the folder: `src/examples/Alerts`
+    </alert>
 
 3. Copy all **folders** (simple/intermediate/complex)  to the newly created examples folder in the *docs-next* repo.
 4. Move all files from each folder to the root of the example folder, and remove the folders. You should now have a single example folder containing `.vue` files that looks something like this:
@@ -225,7 +245,9 @@ Inside the `.json` files, you will likely notice a bunch of additional data rela
 
     * **build/api-gen/locale/en/\*\*** - This path contains the `.json` file related to the page language for component api.
 
-    <alert type="info">I am working on the `Alerts` page so I will want to open the file: `build/api-gen/locale/en/v-alert.json`</alert>
+    <alert type="info">
+      I am working on the `Alerts` page so I will want to open the file: `build/api-gen/locale/en/v-alert.json`
+    </alert>
 
 2. Move the data contained within the `props`/`events`/`slots`/`functions` properties in your *Vuetify*`.json` file, to the corresponding section of the *docs-next* `.json` file:
 
@@ -373,10 +395,18 @@ Sub component text
 
 Omit if none
 
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+<alert type="success">
+  Success Caveat
+</alert>
+<alert type="info">
+  Info Caveat
+</alert>
+<alert type="warning">
+  Warning Caveat
+</alert>
+<alert type="error">
+  Error Caveat
+</alert>
 
 ## Examples
 
