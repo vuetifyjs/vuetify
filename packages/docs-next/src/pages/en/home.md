@@ -215,7 +215,7 @@ Lorem ipsum dolor sit amet, ius elit fugit ut
 * Regular page example is [quick-start.md](https://github.com/vuetifyjs/docs-next/blob/master/src/pages/en/getting-started/quick-start.md)
 * Component page example is [alerts.md](https://github.com/vuetifyjs/docs-next/blob/master/src/pages/en/components/alerts.md)
 
-### A generic page template
+### Generic page template
 
 ```html
 ---
@@ -241,7 +241,7 @@ Lorem ipsum dolor sit amet, ius elit fugit ut.
 <doc-footer />
 ```
 
-### A generic component page template:
+### Generic component page template
 
 ```html
 ---
