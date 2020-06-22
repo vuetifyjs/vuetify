@@ -23,7 +23,63 @@
 
     <v-spacer />
 
-    <v-toolbar-items>
+    <v-btn
+      :to="{
+        name: 'Home',
+        params: { locale }
+      }"
+      class="mx-4"
+      color="primary"
+      outlined
+      min-width="212"
+      min-height="48"
+      x-large
+      exact
+    >
+      Contribute
+
+      <v-icon
+        size="24"
+        right
+      >
+        $mdiHomeCircleOutline
+      </v-icon>
+    </v-btn>
+
+    <v-spacer />
+
+    <div>
+      <v-btn
+        class="mx-3"
+        color="#7289DA"
+        href="https://discord.gg/HJXwxMy"
+        icon
+        rel="noopener"
+        small
+        target="_blank"
+      >
+        <v-icon>$mdiDiscord</v-icon>
+      </v-btn>
+
+      <v-btn
+        class="mx-3"
+        color="#24292E"
+        href="https://github.com/vuetifyjs/vuetify"
+        icon
+        rel="noopener"
+        small
+        target="_blank"
+      >
+        <v-icon>$mdiGithub</v-icon>
+      </v-btn>
+    </div>
+
+    <v-divider
+      class="mx-4"
+      vertical
+    />
+
+    <v-toolbar-items class="hidden-sm-and-down">
       <v-menu>
         <template v-slot:activator="{ on }">
           <v-btn
@@ -63,6 +119,7 @@
     computed: {
       advanced: sync('user/drawer@advanced'),
       drawer: sync('app/drawer'),
+      locale: get('route/params@locale'),
       translating: get('pages/translating'),
       aicon () {
         const icon = this.advanced ? 'Bool' : 'Alphabetical'
