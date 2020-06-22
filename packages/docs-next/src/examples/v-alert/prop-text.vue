@@ -12,7 +12,7 @@
       <v-divider
         class="my-4 info"
         style="opacity: 0.22"
-      />
+      ></v-divider>
 
       <v-row
         align="center"
@@ -21,7 +21,7 @@
         <v-col class="grow">
           Proin magna. Vivamus in erat ut urna cursus vestibulum. Etiam imperdiet imperdiet orci.
         </v-col>
-        <v-spacer />
+        <v-spacer></v-spacer>
         <v-col class="shrink">
           <v-btn
             color="info"

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 workbox.core.setCacheNameDetails({ prefix: 'docs-next' })
 
 self.addEventListener('message', (event) => {
