@@ -22,13 +22,13 @@ Help us build the new documentation by porting over existing pages:
 3. Clone the [vuetify](https://github.com/vuetifyjs/vuetify) and [docs-next](https://github.com/vuetifyjs/docs-next) repositories using **ssh** or **https**:
 
     ```bash
-      git clone git@github.com:vuetifyjs/vuetify.git &&
-      git clone git@github.com:vuetifyjs/docs-next.git
+    git clone git@github.com:vuetifyjs/vuetify.git &&
+    git clone git@github.com:vuetifyjs/docs-next.git
     ```
 
     ```bash
-      git clone https://github.com/vuetifyjs/vuetify.git && \
-      git clone https://github.com/vuetifyjs/docs-next.git
+    git clone https://github.com/vuetifyjs/vuetify.git && \
+    git clone https://github.com/vuetifyjs/docs-next.git
     ```
 
 4. Open both of your local `Vuetify` and `docs-next` repositories in VSCode.
@@ -53,7 +53,7 @@ Help us build the new documentation by porting over existing pages:
 
 ## Converting the page
 
-The following sections will cover various sections you will come across when convert an *Vuetify* page to *docs-next*
+The following will cover various sections you will come across when convert a *Vuetify* page to *docs-next*
 
 Each page in *doc-next* has been pre-filled with some dummy content. Component pages will contain a skeleton structure to put content in and some relevant information pertaining to the syntax of any available custom components.
 
@@ -65,29 +65,47 @@ Each page in *doc-next* has been pre-filled with some dummy content. Component p
 
 Frontmatter will always exist at the top of the page.
 
-1. Move the __up-next__ items from your pages `.pug` (eg: `Alerts.pug`) to __related__ section of the `.md` page's **frontmatter**:
+1. Move the __up-next__ items from your `.pug` page (`Alerts.pug`) to __related__ section of the **frontmatter** in your `.md` page (`alerts.md`):
 
 ```pug
-  <!-- Alerts.pug -->
-  up-next(:value=`[
-    'components/buttons',
-    'components/icons',
-    'components/snackbars'
-  ]`)
+<!-- Alerts.pug -->
+up-next(:value=`[
+  'components/buttons',
+  'components/icons',
+  'components/snackbars'
+]`)
 ```
 
 ```html
-  <!-- alerts.md -->
-  ---
-  meta:
-    title: ...
-    description: ...
-    keywords: ...
-  related:
-    - /components/buttons/
-    - /components/icons/
-    - /components/snackbars/
-  ---
+<!-- alerts.md -->
+---
+meta:
+  title: ...
+  description: ...
+  keywords: ...
+related:
+  - /components/buttons/
+  - /components/icons/
+  - /components/snackbars/
+---
+```
+
+### API
+
+1. Move the api items from your `.pug` page (`Alerts.pug`) to API section of the `.md` page (`alerts.md`). Format each component as a link:
+
+```pug
+<!-- Alerts.pug -->
+api(:value=`[
+  'v-alert'
+]`)
+```
+
+```html
+<!-- Alerts.md -->
+## API
+
+- [v-alert](../../api/v-alert)
 ```
 
 ### Examples
@@ -124,11 +142,11 @@ examples(:value=`[
 4. Move all files from each folder to the root of the example folder, and remove the folders. You should now have a single example folder containing `.vue` files that looks something like this:
 
   ```
-    - src
-      - examples
-        - v-alert
-          - example1.vue
-          - example2.vue
+  - src
+    - examples
+      - v-alert
+        - example1.vue
+        - example2.vue
   ```
 
 5. Prepend the following to each of the files based on the following structure:
@@ -144,28 +162,29 @@ examples(:value=`[
     - Provide the header and description text provided in the *Vuetify* `.json` language file using the following format:
 
     ```html
-      ### Props
+    ### Props
 
-      #### Example Header
+    #### Example Header
 
-      Example Description
+    Example Description
 
-      <example file="<component>/<filename>" />
+    <example file="<component>/<filename>" />
     ```
+
     A full example:
 
     ```html
-      ## Examples
+    ## Examples
 
-      Below is a collection of simple to complex examples.
+    Below is a collection of simple to complex examples.
 
-      ### Props
+    ### Props
 
-      #### Border
+    #### Border
 
-      The **border** prop adds a simple border to one of the 4 sides of the alert. This can be combined props like with **color**, **dark**, and **type** to provide unique accents to the alert.
+    The **border** prop adds a simple border to one of the 4 sides of the alert. This can be combined props like with **color**, **dark**, and **type** to provide unique accents to the alert.
 
-      <example file="v-alert/prop-border" />
+    <example file="v-alert/prop-border" />
     ```
 
 ## Finishing Up
