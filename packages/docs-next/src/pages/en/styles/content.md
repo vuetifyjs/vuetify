@@ -3,76 +3,37 @@ meta:
   title: Content styles
   description: Vuetify provides custom styling for various HTML elements.
   keywords: content, html, markup
+related:
+  - /styles/typography/
+  - /styles/alignment/
 ---
 
 # Content
-Component description
+
+Vuetify has custom styling for multiple standard elements.
 
 <entry-ad />
 
-## Usage
+## Block quote
 
-Usage text
+> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum maiores modi quidem veniam, expedita quis laboriosam, ullam facere adipisci, iusto, voluptate sapiente corrupti asperiores rem nemo numquam fuga ab at. {.blockquote}
 
-`<usage name="" />`
-- **name**: component name
-- eg: `<usage name="v-alert" />`
+## Paragraphs
 
-## API
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum maiores modi quidem veniam, expedita quis laboriosam, ullam facere adipisci, iusto, voluptate sapiente corrupti asperiores rem nemo numquam fuga ab at.
 
-- [API Page Link]()
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum maiores modi quidem veniam, expedita quis laboriosam, ullam facere adipisci, iusto, voluptate sapiente corrupti asperiores rem nemo numquam fuga ab at.
 
-## Sub-Components
+##  Code
 
-Omit if none
+Example of an inline `<code>` element.
 
-### Sub Component 1
+## Variables
 
-Sub component text
+<var>v</var> = <var>u</var> * <var>e</var>
 
-### Sub Component 2
+## User input
 
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
-
-## Examples
-
-Example text.
-
-### Props
-
-Omit if none
-
-### Events
-
-Omit if none
-
-### Slots
-
-Omit if none
-
-#### Misc
-
-Omit if none
-
-#### Example Header
-
-Example description
-
-`<example file="" />`
-- **file**: `<component>/<type>-<propname>`
-- eg: `<example file="v-alert/prop-colored-border" />`
-
-## Accessibility
-
-Accessibility text - omit if none
+To install Vuetify, type <kbd>npm install vuetify</kbd> into your console. Once complete, type <kbd>cd `<project name>`</kbd> and run <kbd>npm install</kbd>
 
 <doc-footer />
