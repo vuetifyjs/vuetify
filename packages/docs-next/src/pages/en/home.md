@@ -90,9 +90,39 @@ related:
 ---
 ```
 
+### Usage and Playground
+
+The first sub section of your `.md` file in component pages will be a `Usage` section. You may also come across a section in your `.pug` file that looks like one of the following:
+
+```pug
+<!-- playground -->
+playground(value="playground")
+<!-- usage-new -->
+usage-new(:value=`{
+  ...
+}`)
+<!-- usage -->
+usage(value="usage")
+```
+These are essentially the same thing: A single usage example. These will be completed at a different time. In the meantime you can still prep this `Usage` section by doing the following:
+
+1. Move the usage/playground description text from your `.json` file (`Alerts.json`) beneath the `Usage` section of the `.md` page (`alerts.md`)
+2. Add a custom usage component with the name of the component as its `name` attribute - eg: `<usage name="v-alert" />`
+
+Full Example
+```html
+## Usage
+
+Alerts in their simplest form are a flat [sheets of paper](/components/sheets) that display a message.
+
+<usage name="v-alert" />
+```
+
+<alert type="info">If you are interested in learning how to convert usage examples, please reach out to us on [Discord](https://discord.gg/HJXwxMy)</alert>
+
 ### API
 
-1. Move the api items from your `.pug` page (`Alerts.pug`) to API section of the `.md` page (`alerts.md`). Format each component as a link:
+1. Move the api items from your `.pug` file (`Alerts.pug`) to API section of the `.md` page (`alerts.md`). Format each component as a link:
 
 ```pug
 <!-- Alerts.pug -->
@@ -187,6 +217,40 @@ examples(:value=`[
     <example file="v-alert/prop-border" />
     ```
 
+### API Language Data
+
+Inside the `.json` files, you will likely notice a bunch of additional data related to `props`/`events`/`slots`/`functions` etc. This data needs to be moved to placeholder `.json` files within *docs-next* to be merged into our api-generator at a later time. To do so proceed with the following steps:
+
+1. Navigate to the following folder in your local *docs-next* repo and open the file related to page you are converting:
+
+    * **build/api-gen/locale/en/\*\*** - This path contains the `.json` file related to the page language for component api.
+
+    <alert type="info">I am working on the `Alerts` page so I will want to open the file: `build/api-gen/locale/en/v-alert.json`</alert>
+
+2. Move the data contained within the `props`/`events`/`slots`/`functions` properties in your *Vuetify*`.json` file, to the corresponding section of the *docs-next* `.json` file:
+
+```json
+// Vuetify .json file
+{
+  "props": {
+    "border": "Puts a border on the alert. Accepts **top** | **right** | **bottom** | **left**.",
+    ...
+  }
+}
+```
+
+```json
+// docs-next .json file
+{
+  "props": {
+    "empty": "",
+    // add prop lang here
+    "border": "Puts a border on the alert. Accepts **top** | **right** | **bottom** | **left**.",
+    ...
+  }
+}
+```
+
 ## Finishing Up
 
 Once your conversion is complete, [submit a pull request](https://github.com/vuetifyjs/docs-next/pulls).
@@ -196,7 +260,7 @@ Once your conversion is complete, [submit a pull request](https://github.com/vue
 * All skill levels encouraged, if you have questions, just ask us [on Discord](https://community.vuetifyjs.com/)
 * Ensure content is evenly spaced and uniform:
 
-```md
+```html
 <!-- Good -->
 # Heading 1
 
