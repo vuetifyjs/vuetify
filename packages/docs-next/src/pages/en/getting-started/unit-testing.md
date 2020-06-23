@@ -3,11 +3,69 @@ meta:
   title: Unit testing
   description: Learn how to create unit tests with vue-test-utils and Vuetify components in your Vue application.
   keywords: unit testing vuetify, testing vuetify, vuetify spec tests
+related:
+  - /introduction/long-term-support/
+  - /getting-started/contributing/
+  - /professional-support/consulting/
 ---
 
-# Unit testing
-Component description
+# Unit Testing
+
+Unit tests are an important (and sometimes ignored) part of developing applications. They help us secure our processes and work flows, ensuring that the most critical parts of our projects are protected from accidental mistakes or oversights in our development. Because of this, Vue has its own testing utility called [vue-test-utils](https://vue-test-utils.vuejs.org/). It provides useful features for interacting with Vue components and works with many popular test runners.
 
 <entry-ad />
+
+<alert type="warning">
+  Vuetify utilizes Typescript and currently must import and extend the Vue object. This has the potential in some applications to generate a warning **$attrs** or **$listeners** is read-only. There is currenty an on-going [Github discussion](https://github.com/vuetifyjs/vuetify/issues/4068) with potential work-arounds in a variety of use-cases. If you have additional questions please join us in our [online community](https://community.vuetifyjs.com) 
+</alert>
+
+## Test runner setup
+
+Information on how to setup a test runner with Vue CLI can be found on the [official documentation](https://vue-test-utils.vuejs.org/guides/getting-started.html). At a glance, Vue CLI has getting started repositories for the following test runners:
+
+* [Jest](https://cli.vuejs.org/core-plugins/unit-jest.html)
+* [Mocha](https://cli.vuejs.org/core-plugins/unit-mocha.html)
+* [tape](https://github.com/eddyerburgh/vue-test-utils-tape-example)
+* [AVA](https://github.com/eddyerburgh/vue-test-utils-ava-example)
+
+## Bootstrapping Vuetify
+
+In order to properly utilize Typescript, Vuetify components extend the Vue object. This has the potential to [cause issues](https://github.com/vuetifyjs/vuetify/issues/4068) as noted in the above alert. Instead of using a [localVue instance](https://vue-test-utils.vuejs.org/api/options.html#localvue) we must instead install Vuetify globally in the unit tests setup file.
+
+This can vary between test runners. Make sure to reference the appropriate documentation on setup files.
+
+If you are not using a `setup.js` file, you should add `Vue.use(Vuetify)` in the utilities section of your test.
+
+## Spec Tests
+
+Creating unit tests in Vuetify are similar to **vuex** and **vue-router** in that you will use the Vuetify object in a **localVue** instance and pass an instance to the mount functions options.
+Let's create an example test use-case that we might find in our application.
+In the example above we have created a custom component with a **title** prop and a `v-btn` that emits a custom event when clicked. We now want to create tests that ensure this behavior works correctly and continues to do so through future changes. The below examples are created with with the [Jest](https://jestjs.io/) test runner.
+If you are stuck and have additional questions about testing or need help in general, please join us in our [online community](https://community.vuetifyjs.com).
+
+### Testing efficiency
+
+When writing tests you will often find yourself repeating the same things over and over. In this case, it's beneficial to create helper functions to reduce the duplication for each individual test. Basically, [DRYing](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) up our code.
+
+One of the most common duplicated code written in unit tests are the mount functions. This can easily be compacted into a reusable function for each run.
+
+### Mocking Vuetify
+
+Many of Vuetify's components utilize the global `$vuetify` object to derive settings such as default text or breakpoint information. When testing these components, you will need to provide `vue-test-utils` with a mock object.
+Keep in mind, you **only need to stub** the services that are being used. such as **lang** or **application**. You can also import these services manually.
+
+A complete list of all services available are listed below:
+[application](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/application)
+[breakpoint](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/breakpoint)
+[goto](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/goto)
+[icons](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/icons)
+[lang](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/lang)
+[theme](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/theme)
+
+## E2E tests
+
+Vuetify passes the `data-*` attributes from components to the relevant HTML elements, which allows E2E test framework to locate them easily.
+
+For example, [Cypress](https://docs.cypress.io/guides/references/best-practices.html#How-It-Works) recommends to add `data-cy` attributes to make it easy to target elements.
 
 <doc-footer />
