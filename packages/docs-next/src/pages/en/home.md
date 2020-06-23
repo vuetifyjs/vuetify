@@ -19,21 +19,42 @@ Help us build the new documentation by porting over existing pages:
 
   <alert type="info">For this guide we will say we have selected to convert the `Alerts` page.</alert>
 
-3. Clone the [vuetify](https://github.com/vuetifyjs/vuetify) and [docs-next](https://github.com/vuetifyjs/docs-next) repositories using **ssh** or **https**:
+3. Clone the [vuetify](https://github.com/vuetifyjs/vuetify) repositories using **ssh** or **https**:
+
+    * **via ssh:**
 
     ```bash
-    git clone git@github.com:vuetifyjs/vuetify.git &&
-    git clone git@github.com:vuetifyjs/docs-next.git
+    git clone git@github.com:vuetifyjs/vuetify.git
     ```
+
+    * **via https:**
 
     ```bash
-    git clone https://github.com/vuetifyjs/vuetify.git && \
-    git clone https://github.com/vuetifyjs/docs-next.git
+    git clone https://github.com/vuetifyjs/vuetify.git
     ```
 
-4. Open both of your local `Vuetify` and `docs-next` repositories in VSCode.
-5. In your local *Vuetify* repo, navigate to `vuetify/packages/docs/src`.
-6. Navigate to the following folders and open the files related to page you are converting:
+4. Create a fork of the [docs-next](https://github.com/vuetifyjs/docs-next) repository by clicking the `Fork` button in the in upper right-hand corner of the repository page.
+5. Then clone it similarly to the above replacing `YOUR-GITHUB-USERNAME` with your github username:
+
+    * **via ssh:**
+
+    ```bash
+    git clone git@github.com:YOUR-GITHUB-USERNAME/docs-next.git
+    ```
+
+    * **via https:**
+
+    ```bash
+    git clone https://github.com/YOUR-GITHUB-USERNAME/docs-next.git
+    ```
+
+    <alert type="info">
+      More details on creating forks, keeping your branch up to date, and making pull requests can be found **[here](https://gist.github.com/Chaser324/ce0505fbed06b947d962)**.
+    </alert>
+
+6. Open both of your local `Vuetify` and `docs-next` repositories in VSCode.
+7. In your local *Vuetify* repo, navigate to `vuetify/packages/docs/src`.
+8. Navigate to the following folders and open the files related to page you are converting:
 
     * **src/lang/en/\*\*** - This path contains the `.json` file related to the page language and content.
 
@@ -47,7 +68,7 @@ Help us build the new documentation by porting over existing pages:
       I am working on the `Alerts` page so I will want to open the file: `src/data/pages/components/Alerts.pug`
     </alert>
 
-7. In your local *docs-next* repo, following folder and open the file related to page you are converting:
+9. In your local *docs-next* repo, following folder and open the file related to page you are converting:
 
     * **src/pages/en/\*\*** - This path contains the `.md` file you will be migrating data + structure to.
 
