@@ -50,4 +50,4 @@ crwdns72116:0crwdne72116:0 crwdns72118:0crwdne72118:0 crwdns72120:0crwdne72120:0
 crwdns72122:0{ props.item.name }crwdne72122:0
 ```
 
-<doc-footer />
+<endmatter />

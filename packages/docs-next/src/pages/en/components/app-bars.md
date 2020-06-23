@@ -110,4 +110,4 @@ You can easily extend the functionality of app bar by adding `VMenu` there. Clic
 
 <example file="v-app-bar/misc-menu" />
 
-<doc-footer />
+<endmatter />

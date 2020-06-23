@@ -39,4 +39,4 @@ Upgrading to v1.5? Check out the available upgrade guides:
 
 If you have any additional questions, please join our [Discord community](https://community.vuetifyjs.com).
 
-<doc-footer />
+<endmatter />

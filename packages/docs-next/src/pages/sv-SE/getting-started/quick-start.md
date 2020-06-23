@@ -262,4 +262,4 @@ $ vue add @nklayman/capacitor
 $ yarn capacitor:serve
 ```
 
-<doc-footer />
+<endmatter />

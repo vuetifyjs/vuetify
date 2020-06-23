@@ -16,7 +16,7 @@ Unit tests are an important (and sometimes ignored) part of developing applicati
 <entry-ad />
 
 <alert type="warning">
-  Vuetify utilizes Typescript and currently must import and extend the Vue object. This has the potential in some applications to generate a warning **$attrs** or **$listeners** is read-only. There is currenty an on-going [Github discussion](https://github.com/vuetifyjs/vuetify/issues/4068) with potential work-arounds in a variety of use-cases. If you have additional questions please join us in our [online community](https://community.vuetifyjs.com) 
+  Vuetify utilizes Typescript and currently must import and extend the Vue object. This has the potential in some applications to generate a warning **$attrs** or **$listeners** is read-only. There is currenty an on-going [Github discussion](https://github.com/vuetifyjs/vuetify/issues/4068) with potential work-arounds in a variety of use-cases. If you have additional questions please join us in our [online community](https://community.vuetifyjs.com)
 </alert>
 
 ## Test runner setup
@@ -68,4 +68,4 @@ Vuetify passes the `data-*` attributes from components to the relevant HTML elem
 
 For example, [Cypress](https://docs.cypress.io/guides/references/best-practices.html#How-It-Works) recommends to add `data-cy` attributes to make it easy to target elements.
 
-<doc-footer />
+<endmatter />

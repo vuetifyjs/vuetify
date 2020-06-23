@@ -365,7 +365,7 @@ Lorem ipsum dolor sit amet, ius elit fugit ut.
 
 <!-- Main Content Area -->
 
-<doc-footer />
+<endmatter />
 ```
 
 ### Generic component page template
@@ -462,5 +462,5 @@ Example description
 
 Accessibility text - omit if none
 
-<doc-footer />
+<endmatter />
 ```

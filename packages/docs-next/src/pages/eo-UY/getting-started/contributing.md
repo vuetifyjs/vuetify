@@ -7,4 +7,4 @@ meta:
 
 # crwdns72062:0crwdne72062:0
 
-<doc-footer />
+<endmatter />

@@ -49,4 +49,4 @@ Accessibility text - omit if none
 ## API
   - [API Page Link]()
 
-<doc-footer />
+<endmatter />

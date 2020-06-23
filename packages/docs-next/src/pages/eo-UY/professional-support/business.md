@@ -10,4 +10,4 @@ crwdns66478:0crwdne66478:0
 
 <entry-ad />
 
-<doc-footer />
+<endmatter />

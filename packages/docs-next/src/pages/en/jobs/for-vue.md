@@ -11,4 +11,4 @@ Component description
 
 <entry-ad />
 
-<doc-footer />
+<endmatter />

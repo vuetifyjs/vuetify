@@ -88,7 +88,7 @@ function genTable (tableData) {
 
 function genFooter () {
   const footer = [
-    '<doc-footer />',
+    '<endmatter />',
   ]
 
   return `${footer.join('\n\n')}\n\n`

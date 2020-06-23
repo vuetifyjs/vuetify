@@ -7,4 +7,4 @@ meta:
 
 # Contributing
 
-<doc-footer />
+<endmatter />

@@ -71,4 +71,4 @@ The `v-combobox` improves upon the added functionality from `v-select` and `v-au
 
 <example file="v-combobox/misc-advanced" />
 
-<doc-footer />
+<endmatter />

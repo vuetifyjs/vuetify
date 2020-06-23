@@ -77,4 +77,4 @@ Example description
 
 Accessibility text - omit if none
 
-<doc-footer />
+<endmatter />

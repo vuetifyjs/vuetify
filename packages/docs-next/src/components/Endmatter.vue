@@ -39,7 +39,7 @@
   import { get, sync } from 'vuex-pathify'
 
   export default {
-    name: 'DocFooter',
+    name: 'Endmatter',
 
     data: () => ({ id: 'ready-for-more' }),
 
