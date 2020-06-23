@@ -4,8 +4,8 @@
   "trailingSlash": true,
   "build": {
     "env": {
-      "COSMIC_BUCKET_SLUG": "@cosmic-bucket-slug",
-      "COSMIC_BUCKET_READ_KEY": "@cosmic-bucket-read-key"
+      "VUE_APP_COSMIC_BUCKET_SLUG": "@cosmic-bucket-slug",
+      "VUE_APP_COSMIC_BUCKET_READ_KEY": "@cosmic-bucket-read-key"
     }
   },
   "rewrites": [
