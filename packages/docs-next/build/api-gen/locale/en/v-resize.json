@@ -15,6 +15,11 @@
     "empty": ""
     // add function lang here
   },
+  "options": {
+    "empty": "",
+    "modifiers.quiet": "`v-resize.quiet=\"callback\"` Will **not** automatically invoke the provided callback on bind.",
+    "value": "`v-resize=\"callback\"` The function to invoke on window resize"
+  },
   "sass": {
     "empty": ""
     // add sass lang here
