@@ -15,6 +15,11 @@
     "empty": ""
     // add function lang here
   },
+  "options": {
+    "empty": "",
+    "class": "`v-ripple=\"{ \"class\": 'my-class' }\"` Applies a custom class to the ripple, used for changing color",
+    "center": "`v-ripple=\"{ \"center\": true }\"` Force ripple to originate from the center of the target"
+  },
   "sass": {
     "empty": ""
     // add sass lang here

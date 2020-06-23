@@ -3,76 +3,51 @@ meta:
   title: Ripple directive
   description: The ripple directive adds touch and click feedback to any element in the form of a water ripple.
   keywords: ripples, ink, vuetify ripple directive, vue ripple directive
+related:
+  - components/buttons
+  - components/expansion-panels
+  - styles/transitions
 ---
 
 # Ripple directive
-Component description
+
+The `v-ripple` directive is used to show action from a user. It can be applied to any block level element. Numerous components come with the ripple directive built in, such as the `v-btn`, `v-tabs-item` and many more.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+Basic ripple functionality can be enabled just by using `v-ripple` directive on a component or an HTML element
 
-`<usage name="" />`
-- **name**: component name
-- eg: `<usage name="v-alert" />`
+<example file="v-ripple/usage" />
 
 ## API
 
-- [API Page Link]()
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-ripple](../../api/v-ripple)
 
 ## Examples
 
-Example text.
+### Options
 
-### Props
+#### Center
 
-Omit if none
+When a `center` option is used ripple will always originate from the center of the target.
 
-### Events
+<example file="v-ripple/option-center" />
 
-Omit if none
+### Misc
 
-### Slots
+#### Custom color
 
-Omit if none
+Using a helper class, you can change the color of the ripple.
 
-#### Misc
+<example file="v-ripple/misc-custom-color" />
 
-Omit if none
 
-#### Example Header
+#### Ripple in components
 
-Example description
+Some components provide the `ripple` prop that allows you to control the ripple effect. You can turn it off or customize the behaviour by using `class` or `center` options.
 
-`<example file="" />`
-- **file**: `<component>/<type>-<propname>`
-- eg: `<example file="v-alert/prop-colored-border" />`
-
-## Accessibility
-
-Accessibility text - omit if none
+<example file="v-ripple/misc-ripple-in-components" />
 
 <endmatter />
