@@ -23,32 +23,21 @@
 
     <v-spacer />
 
-    <v-btn
-      :to="{
-        name: 'Home',
-        params: { locale }
-      }"
-      class="mx-4"
-      color="primary"
-      outlined
-      min-width="212"
-      min-height="48"
-      x-large
-      exact
-    >
-      Contribute
-
-      <v-icon
-        size="24"
-        right
+    <div class="hidden-xs-only">
+      <v-btn
+        class="mx-3"
+        color="secondary"
+        exact
+        :to="{
+          name: 'Home',
+          params: { locale }
+        }"
+        icon
+        small
       >
-        $mdiHomeCircleOutline
-      </v-icon>
-    </v-btn>
+        <v-icon>$mdiHomeCircle</v-icon>
+      </v-btn>
 
-    <v-spacer />
-
-    <div>
       <v-btn
         class="mx-3"
         color="#7289DA"

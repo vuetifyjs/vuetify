@@ -2,7 +2,8 @@
   <v-app-bar
     class="shrink"
     color="transparent"
-    elevate-on-scroll
+    flat
+    height="112"
   >
     <v-spacer />
 
