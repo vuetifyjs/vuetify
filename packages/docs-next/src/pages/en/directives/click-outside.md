@@ -27,12 +27,12 @@ The `v-click-outside` directive allows you to provide a handler to be invoked wh
 
 ## Examples
 
-### Props
+### Options
 
 #### Close on outside click
 
 Optionally provide a `closeOnOutsideClick` handler that returns `true` or `false`. This function determines whether the outside click function is invoked or not.
 
-<example file="v-click-outside/prop-close-on-outside-click" />
+<example file="v-click-outside/option-close-on-outside-click" />
 
 <endmatter />
