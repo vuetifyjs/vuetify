@@ -71,7 +71,7 @@ $material-light: map-deep-merge(
       'disabled': rgba(map-get($shades, 'black'), 0.26),
       'discrete': map-get($shades, 'black')
     ),
-    'skeleton': linear-gradient(90deg, transparent, rgba(255, 255, 255, .3), transparent),
+    'skeleton': linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .3), rgba(255, 255, 255, 0)),
     'states': (
       'hover': 0.04,
       'focus': 0.12,
