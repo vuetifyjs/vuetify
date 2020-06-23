@@ -15,6 +15,10 @@
     "empty": ""
     // add function lang here
   },
+  "options": {
+    "empty": "",
+    "value": "A callback or options object."
+  },
   "sass": {
     "empty": ""
     // add sass lang here
