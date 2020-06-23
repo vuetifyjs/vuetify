@@ -3,76 +3,56 @@ meta:
   title: Badge component
   description: The badge component is a small status descriptor for elements. This typically contains a small number or short set of characters.
   keywords: badges, vuetify badge component, vue badge component
+related:
+  - /components/avatars/'
+  - /components/icons/'
+  - /components/toolbars/'
 ---
 
 # Badges
-Component description
+
+The `v-badge` component superscripts or subscripts an avatar-like icon or text onto content to highlight information to a user or to just draw attention to a specific element. Content within the badge usually contains numbers or icons.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+Badges in their simplest form display to the upper right of the content that it wraps and requires the badge slot.
 
-`<usage name="" />`
-- **name**: component name
-- eg: `<usage name="v-alert" />`
+<usage name="v-badge" />
 
 ## API
 
-- [API Page Link]()
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-badge](../../api/v-badge)
 
 ## Examples
 
-Example text.
-
-### Props
-
-Omit if none
-
-### Events
-
-Omit if none
-
-### Slots
-
-Omit if none
+Below is a collection of simple to complex examples.
 
 ### Misc
 
-Omit if none
+#### Tabs
 
-#### Example Header
+Badges help convey information to the user in a variety of ways.
 
-Example description
+<example file="v-badge/misc-tabs" />
 
-`<example file="" />`
-- **file**: `<component>/<type>-<propname>`
-- eg: `<example file="v-alert/prop-colored-border" />`
+#### Show on hover
 
-## Accessibility
+You can do many things with visibility control, for example, show badge on hover.
 
-Accessibility text - omit if none
+<example file="v-badge/misc-hover" />
+
+#### Dynamic notifications
+
+You can incorporate badges with dynamic content to make things such as a notification system.
+
+<example file="v-badge/misc-dynamic" />
+
+#### Customization options
+
+The `v-badge` component is flexible and can be used in a variety of use-cases over numerous elements. Options to tweak the location are also available through the **offset-x** and **offset-y** props."
+
+<example file="v-badge/misc-customization" />
 
 <endmatter />

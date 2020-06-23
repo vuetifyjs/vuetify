@@ -1,11 +1,23 @@
  {
   "props": {
-    "empty": ""
-    // add prop lang here
+    "empty": "",
+    "avatar": "Removes badge padding for the use of the `v-avatar` in the **badge** slot.",
+    "bordered": "Applies a **2px** by default and **1.5px** border around the badge when using the **dot** property.",
+    "content": "Any content you want injected as text into the badge.",
+    "dot": "Reduce the size of the badge and hide its contents",
+    "icon": "Designates a specific icon used in the badge.",
+    "inline": "Moves the badge to be inline with the wrapping element. Supports the usage of the **left** prop.",
+    "label": "The **aria-label** used for the badge",
+    "offsetX": "Offset the badge on the x-axis.",
+    "offsetY": "Offset the badge on the y-axis.",
+    "bottom": "Mixins.Positionable.props.bottom",
+    "left": "Mixins.Positionable.props.left",
+    "overlap": "Overlaps the slotted content on top of the component.",
+    "transition": "Mixins.Transitionable.props.transition"
   },
   "slots": {
-    "empty": ""
-    // add slot lang here
+    "empty": "",
+    "badge": "The slot used for the badge's content."
   },
   "events": {
     "empty": ""
