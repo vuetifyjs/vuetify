@@ -491,7 +491,11 @@ export default mixins<options &
 
       const value = this.parseKeyDown(e, this.internalValue)
 
-      if (value == null) return
+      if (
+        value == null ||
+        value < this.minValue ||
+        value > this.maxValue
+      ) return
 
       this.internalValue = value
       this.$emit('change', value)
