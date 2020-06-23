@@ -1,7 +1,7 @@
 <template>
   <v-sheet
     :style="styles"
-    class="d-inline-block my-2"
+    class="v-app-ad d-inline-flex flex-child-1 grow-shrink-0 my-2"
     rounded
     width="100%"
     v-bind="$attrs"
@@ -23,6 +23,8 @@
 
     mixins: [Density],
 
+    inheritAttrs: false,
+
     computed: {
       minHeight () {
         if (this.compact) return 52
@@ -38,3 +40,12 @@
     },
   }
 </script>
+
+<style lang="sass">
+  .v-app-ad
+    a
+      text-decoration: none
+
+    .v-markdown p
+      margin-bottom: 0
+</style>

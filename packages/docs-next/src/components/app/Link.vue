@@ -1,7 +1,7 @@
 <template>
   <component
     :is="component"
-    class="text-decoration-none primary--text font-weight-medium d-inline-flex align-center"
+    class="app-link text-decoration-none primary--text font-weight-medium d-inline-flex align-center"
     v-bind="attrs"
   >
     <slot />
@@ -60,3 +60,9 @@
     },
   }
 </script>
+
+<style lang="sass">
+  .app-link
+    p
+      margin-bottom: 0
+</style>

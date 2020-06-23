@@ -14,6 +14,7 @@ Entry ads are placed at the front of pages after the introduction
 
 <entry-ad />
 
+## Promoted Ad
 Promoted ads replace the pages default entry ad
 
 <promoted-ad slug="vuemastery-getting-started" />
@@ -37,6 +38,11 @@ Sponsored ads by Vuetify & Affiliates
 Exit ads are placed at the end of pages.
 
 <exit-ad />
+
+## Inline Ads
+I am an inline ad. <inline-ad slug="scrimba-buttons" />
+
+---
 
 <up-next />
 

@@ -25,8 +25,10 @@
         : data.domProps ? data.domProps.textContent : ''
       const innerHTML = md.render(text, {})
 
+      data.staticClass = `v-markdown ${data.staticClass || ''}`.trim()
+
       return h(props.tag, {
-        staticClass: 'v-markdown',
+        ...data,
         domProps: { innerHTML },
       })
     },

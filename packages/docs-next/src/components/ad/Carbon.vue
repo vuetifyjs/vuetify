@@ -30,6 +30,8 @@
 
 <style lang="sass">
   #carbonads
+    width: 100%
+
     > span
       display: flex
       position: relative
