@@ -152,7 +152,7 @@ api(:value=`[
 - [v-alert](../../api/v-alert)
 ```
 
-### Caveats
+### Alerts and Caveats
 
 If you are working on a component page, You may come across the following while looking through the `.pug` file:
 
@@ -160,10 +160,13 @@ If you are working on a component page, You may come across the following while 
 alert(value="warning") Components.Alerts.alert1
 ```
 
-These alerts can be placed under the `Caveat` section of the `.md` page.
+If you are converting a component page these alerts can be placed under the `Caveat` section of the `.md` page. For non-component pages, place these in the same order provided in the `.pug` file.
 
-1. Find the `.json` file that relates to the section at the end of the alert (in this case `Components.Alerts.alert1`). This is a path to the `.json` file in your local *Vuetify* repo. It can be found at `src/lang/en/components/Alerts.json` and the json property would be `alert1`.
-2. Create an alert in the `Caveat` section of your `.md` page with the following format:
+1. Find the `.json` file that relates to the section at the end of the alert.
+    * This is a path to the `.json` file in your local *Vuetify* repo.
+    * To find file: start from `src/lang/en`.
+    * `Components.Alerts.alert1` => `Components/Alerts.json` and we want the `alert1` property within the file.
+2. Create an alert in your `.md` page with the following format:
 
 ```md
 <alert type="warning">
