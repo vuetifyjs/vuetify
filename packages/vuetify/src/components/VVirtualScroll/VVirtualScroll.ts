@@ -57,6 +57,11 @@ export default Measurable.extend({
     },
   },
 
+  watch: {
+    height: 'onScroll',
+    itemHeight: 'onScroll',
+  },
+
   created () {
     this.last = this.getLast(0)
   },
@@ -87,10 +92,8 @@ export default Measurable.extend({
 
       return first + Math.ceil(height / this.__itemHeight)
     },
-    onScroll (e: Event): void {
-      const target = e.currentTarget as HTMLElement
-
-      this.scrollTop = target.scrollTop
+    onScroll () {
+      this.scrollTop = this.$el.scrollTop
       this.first = this.getFirst()
       this.last = this.getLast(this.first)
     },
