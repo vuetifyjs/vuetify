@@ -3,76 +3,90 @@ meta:
   title: Overflow button component
   description: The overflow button component creates an interface for a select that contains additional features and functionality.
   keywords: overflow buttons, vuetify overflow button component, vue overflow button component
+related:
+  - /components/forms/
+  - /components/selection-controls/
+  - /components/selects/
 ---
 
 # Overflow buttons
-Component description
+
+`v-overflow-btn` is used to give the user the ability to select items from the list. It has 3 variations: `editable`, `overflow` and `segmented`
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+`v-overflow-btn` is used for creating selection lists
 
-`<usage name="" />`
-- **name**: component name
-- eg: `<usage name="v-alert" />`
+<usage name="v-overflow-btn" />
 
 ## API
 
-- [API Page Link]()
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-overflow-btn](../../api/v-overflow-btn)
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Counter
 
-### Events
+You can add a counter to `v-overflow-btn` to control the max char count
 
-Omit if none
+<example file="v-overflow-btn/prop-counter" />
 
-### Slots
+#### Disabled
 
-Omit if none
+`v-overflow-btn` can be disabled in order to prevent a user from interacting with it
 
-#### Misc
+<example file="v-overflow-btn/prop-disabled" />
 
-Omit if none
+#### Editable
 
-#### Example Header
+`editable` `v-overflow-btn` can be directly edited, just as `v-text-field`
 
-Example description
+<example file="v-overflow-btn/prop-editable" />
 
-`<example file="" />`
-- **file**: `<component>/<type>-<propname>`
-- eg: `<example file="v-alert/prop-colored-border" />`
+#### Filled
 
-## Accessibility
+Text fields can be used with an alternative box design. Append and prepend icon props are **not** supported in this mode.
 
-Accessibility text - omit if none
+<example file="v-overflow-btn/prop-filled" />
+
+#### Hint
+
+You can add a hint for the user using the `hint` property
+
+<example file="v-overflow-btn/prop-hint" />
+
+#### Loading
+
+`v-overflow-btn` can have `loading` state with a linear progress bar under them
+
+<example file="v-overflow-btn/prop-loading" />
+
+#### Menu props
+
+You can set underlying `v-menu` props using `menu-props` property
+
+<example file="v-overflow-btn/prop-menu-props" />
+
+#### Read-only
+
+`v-overflow-btn` can be put into `readonly` mode, it'll become inactive but won't change the color
+
+<example file="v-overflow-btn/prop-readonly" />
+
+#### Segmented
+
+`segmented` `v-overflow-btn` has and additional divider between the content and the icon
+
+<example file="v-overflow-btn/prop-segmented" />
+
+#### Dense
+
+You can use `dense` prop to reduce overflow button height and lower max height of list items.
+
+<example file="v-overflow-btn/prop-dense" />
 
 <endmatter />

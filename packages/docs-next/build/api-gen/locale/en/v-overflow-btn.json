@@ -1,7 +1,10 @@
  {
   "props": {
-    "empty": ""
-    // add prop lang here
+    "empty": "",
+    "dark": "Components.Inputs.props.dark",
+    "editable": "Creates an editable button",
+    "overflow": "Creates an overflow button",
+    "segmented": "Creates a segmented button"
   },
   "slots": {
     "empty": ""
