@@ -4,9 +4,9 @@ meta:
   description: The intersection observer directive utilizes the Intersection observer API. It allows you to determine when elements are visible on the screen.
   keywords: intersect, vuetify intersect directive, intersection observer directive
 related:
-  - components/cards
-  - components/images
-  - components/api-explorer
+  - /components/cards/
+  - /components/images/
+  - /components/api-explorer/
 ---
 
 # Intersection observer

@@ -4,9 +4,9 @@ meta:
   description: The mutation observer directive utilizes the Mutation observer API. It allows you to determine when elements are updated.
   keywords: mutate, vuetify mutate directive, mutation observer directive
 related:
-  - components/sheets
-  - components/images
-  - components/api-explorer
+  - /components/sheets/
+  - /components/images/
+  - /components/api-explorer/
 ---
 
 # Mutation observer
