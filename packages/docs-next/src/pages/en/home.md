@@ -195,6 +195,37 @@ If you are converting a component page these alerts can be placed under the `Cav
 </alert>
 ```
 
+### Snippets
+
+If you are working on a page, you will come across a section In the `.pug` file that looks like this:
+
+```pug
+code(lang="bash" src="vue_ui")
+```
+
+This little block is what was referred to as a snippet. To convert these do the following:
+
+1. In your local *Vuetify* repo, navigate to `src/snippets`
+2. Navigate into the folder provided by the lang property of the snippet.
+
+    * In this case, we will go into the `bash` folder as the snippet shows `lang="bash"`.
+
+3. Open the file provided by the src attribute of the snippet.
+
+    * In this case, we will open the file named `vue_ui` as the snippet shows `src="vue_ui"`
+
+4. Copy the contents of the file into your `.md` file surrounded by triple back-ticks. apply the lang to the code block like so:
+
+    ````html
+    ```bash
+    // ensure Vue CLI is >= 3.0
+    $ vue --version
+
+    // Then start the UI
+    $ vue ui
+    ```
+    ````
+
 ### Examples
 
 If you are working on a component page, you will come across a section relating to examples. In the `.pug` file you will see a chunk of code that looks like this:
