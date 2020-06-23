@@ -3,76 +3,42 @@ meta:
   title: Intersection observer directive
   description: The intersection observer directive utilizes the Intersection observer API. It allows you to determine when elements are visible on the screen.
   keywords: intersect, vuetify intersect directive, intersection observer directive
+related:
+  - components/cards
+  - components/images
+  - components/api-explorer
 ---
 
 # Intersection observer
-Component description
+
+The `v-intersect` directive utilizes the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). It provides an easy-to-use interface for detecting when elements are visible within the user's viewport. This is also used for the [v-lazy](/components/lazy) component.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+Scroll the window and watch the colored dot. Notice as the [v-card](/components/cards) comes into view that it changes from error to success.
 
-`<usage name="" />`
-- **name**: component name
-- eg: `<usage name="v-alert" />`
+<example file="v-intersect/usage" />
 
 ## API
 
-- [API Page Link]()
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
+- [v-intersect](../../api/v-intersect)
 
 ## Caveats
 
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+<alert type="info">
+  While the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) is not available in IE11 by default, it can be implemented using a [polyfill](https://github.com/w3c/IntersectionObserver)
+</alert>
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Options
 
-### Events
+The `v-intersect` directive accepts options. Available options can be found in the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). Below is an example using the `threshold` option.
 
-Omit if none
-
-### Slots
-
-Omit if none
-
-#### Misc
-
-Omit if none
-
-#### Example Header
-
-Example description
-
-`<example file="" />`
-- **file**: `<component>/<type>-<propname>`
-- eg: `<example file="v-alert/prop-colored-border" />`
-
-## Accessibility
-
-Accessibility text - omit if none
+<example file="v-intersect/prop-options" />
 
 <endmatter />

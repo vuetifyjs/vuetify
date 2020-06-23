@@ -20,9 +20,6 @@
   export default {
     data: () => ({
       active: false,
-      defaults: {},
-      options: {},
-      tabs: [],
     }),
 
     methods: {
