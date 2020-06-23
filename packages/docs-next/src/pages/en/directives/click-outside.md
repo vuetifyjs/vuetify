@@ -19,7 +19,7 @@ The `v-click-outside` directive calls a function when something outside of the t
 
 The `v-click-outside` directive allows you to provide a handler to be invoked when the user clicks outside of the target element.
 
-<usage name="v-click-outside" />
+<example file="v-click-outside/usage" />
 
 ## API
 

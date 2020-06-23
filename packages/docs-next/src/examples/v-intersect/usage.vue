@@ -38,9 +38,6 @@
   export default {
     data: () => ({
       isIntersecting: false,
-      defaults: {},
-      options: {},
-      tabs: [],
     }),
 
     methods: {
