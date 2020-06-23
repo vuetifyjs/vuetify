@@ -3,76 +3,36 @@ meta:
   title: Mutation observer directive
   description: The mutation observer directive utilizes the Mutation observer API. It allows you to determine when elements are updated.
   keywords: mutate, vuetify mutate directive, mutation observer directive
+related:
+  - components/sheets
+  - components/images
+  - components/api-explorer
 ---
 
-# Mutation observer directive
-Component description
+# Mutation observer
+
+The `v-mutate` directive utilizes the [Mutation Observer API](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver). It provides an easy to use interface for detecting when elements are updated.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+By default the `v-mutate` directive will enable all available options in the [Mutation Observer API](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver). This can be modified in one of two ways. You can either pass in object with keys for **handler** and **options** or use the `modifier` property of the directive, `v-mutate.attr.sub="onMutate"`
 
-`<usage name="" />`
-- **name**: component name
-- eg: `<usage name="v-alert" />`
+<example file="v-mutate/usage" />
 
 ## API
 
-- [API Page Link]()
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-mutate](../../api/v-mutate)
 
 ## Examples
 
-Example text.
+### Options
 
-### Props
+#### Modifiers
 
-Omit if none
+The `v-mutate` directive accepts modifiers for all of the available options in the [Mutation Observer API](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver). For brevity, abbreviations are used—**attr** (attributes), **child** (childList), **sub** (subtree) and **char** (characterData).
 
-### Events
-
-Omit if none
-
-### Slots
-
-Omit if none
-
-#### Misc
-
-Omit if none
-
-#### Example Header
-
-Example description
-
-`<example file="" />`
-- **file**: `<component>/<type>-<propname>`
-- eg: `<example file="v-alert/prop-colored-border" />`
-
-## Accessibility
-
-Accessibility text - omit if none
+<example file="v-mutate/option-modifiers" />
 
 <endmatter />
