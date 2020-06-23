@@ -79,4 +79,7 @@
       font-weight: 400
       letter-spacing: 0.09375rem
       text-transform: uppercase
+
+    &.theme--dark .powered-by
+      color: inherit
 </style>

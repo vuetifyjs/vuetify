@@ -5,10 +5,12 @@ import { make } from 'vuex-pathify'
 import { IN_BROWSER } from '@/util/globals'
 
 const state = {
+  dark: false,
   drawer: {
     advanced: false,
     mini: false,
   },
+  rtl: false,
 }
 
 const mutations = make.mutations(state)

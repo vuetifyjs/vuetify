@@ -1,7 +1,8 @@
 <template>
   <v-sheet
+    :color="dark ? '#1F1F1F' : 'grey lighten-5'"
     class="app-code overflow-hidden"
-    color="grey lighten-5"
+    outlined
     rounded
   >
     <slot />
@@ -14,8 +15,15 @@
 </template>
 
 <script>
+  // Utilities
+  import { get } from 'vuex-pathify'
+
   export default {
     name: 'AppCode',
+
+    computed: {
+      dark: get('user/dark'),
+    },
 
     methods: {
       target () {
@@ -42,12 +50,16 @@
 
     code[class*=language],
     pre[class*=language]
-      background: transparent
-      color: #000000DE
+      background: none
+      font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace
+      font-size: 1rem
       hyphens: none
+      line-height: 1.5
+      margin: 0
       padding: 0
       tab-size: 4
       text-align: left
+      text-shadow: none
       white-space: pre
       word-break: normal
       word-spacing: normal
@@ -75,4 +87,78 @@
 
     pre.language-json::after
       content: 'json'
+
+    &.theme--dark
+      code[class*=language],
+      pre[class*=language]
+        color: #ccc !important
+
+      pre[class*=language]
+        &::after
+          color: hsla(0, 0%, 50%, 1)
+
+      &.v-sheet--outlined
+        border: thin solid hsla(0,0%,100%,.12) !important
+
+      .token.comment,
+      .token.block-comment,
+      .token.prolog,
+      .token.doctype,
+      .token.cdata
+        color: #999
+
+      .token.punctuation
+        color: #ccc
+
+      .token.tag,
+      .token.attr-name,
+      .token.namespace,
+      .token.deleted
+        color: #e2777a
+
+      .token.function-name
+        color: #6196cc
+
+      .token.boolean,
+      .token.number,
+      .token.function
+        color: #f08d49
+
+      .token.property,
+      .token.class-name,
+      .token.constant,
+      .token.symbol
+        color: #f8c555
+
+      .token.selector,
+      .token.important,
+      .token.atrule,
+      .token.keyword,
+      .token.builtin
+        color: #cc99cd
+
+      .token.string,
+      .token.char,
+      .token.attr-value,
+      .token.regex,
+      .token.variable
+        color: #7ec699
+
+      .token.operator,
+      .token.entity,
+      .token.url
+        color: #67cdcc
+
+      .token.important,
+      .token.bold
+        font-weight: bold
+
+      .token.italic
+        font-style: italic
+
+      .token.entity
+        cursor: help
+
+      .token.inserted
+        color: green
 </style>

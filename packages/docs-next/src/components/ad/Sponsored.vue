@@ -12,6 +12,7 @@
             class="overflow-none position-relative d-flex px-4 py-2 align-center"
             color="transparent"
             rounded
+            width="512"
           >
             <v-overlay
               :color="color"

@@ -41,6 +41,7 @@
   #bsa-native
     .native-box
       align-items: center
+      color: inherit
       display: flex
       height: 52px
       padding: 0 8px
@@ -60,6 +61,5 @@
       text-transform: uppercase
 
     .native-text
-      color: rgba(0, 0, 0, .87)
       font-size: .9rem
 </style>

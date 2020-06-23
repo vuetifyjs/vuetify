@@ -16,11 +16,12 @@ export function useVuetify (app) {
   app.use(Vuetify)
 }
 
-export function createVuetify () {
+export function createVuetify (store) {
   return new Vuetify({
     breakpoint: { mobileBreakpoint: 'sm' },
     icons,
     theme: {
+      dark: store.state.user.dark,
       options: {
         themeCache: IN_BROWSER && IS_PROD ? {
           get: key => localStorage.getItem(key),
@@ -38,5 +39,6 @@ export function createVuetify () {
         },
       },
     },
+    rtl: store.state.user.rtl,
   })
 }

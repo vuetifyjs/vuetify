@@ -4,13 +4,17 @@
     app
     clipped-left
     clipped-right
-    color="white"
+    :color="dark ? undefined : 'white'"
     flat
   >
     <v-app-bar-nav-icon
       class="hidden-md-and-up"
       @click="drawer = !drawer"
     />
+
+    <vuetify-logo />
+
+    <v-spacer />
 
     <v-btn
       icon
@@ -19,77 +23,71 @@
       <v-icon v-text="aicon" />
     </v-btn>
 
-    <vuetify-logo />
+    <v-btn
+      icon
+      @click="dark = !dark"
+    >
+      <v-icon>
+        {{ `$mdiBrightness${dark ? '7' : '4'}` }}
+      </v-icon>
+    </v-btn>
 
-    <v-spacer />
+    <v-btn
+      icon
+      @click="rtl = !rtl"
+    >
+      <v-icon>
+        {{ `$mdiFormatTextdirection${!rtl ? 'RToL' : 'LToR'}` }}
+      </v-icon>
+    </v-btn>
 
-    <div class="hidden-xs-only">
-      <v-btn
-        class="mx-3"
-        color="secondary"
-        exact
-        :to="{
-          name: 'Home',
-          params: { locale }
-        }"
-        icon
-        small
-      >
-        <v-icon>$mdiHomeCircle</v-icon>
-      </v-btn>
+    <v-btn
+      href="https://discord.gg/HJXwxMy"
+      icon
+      rel="noopener"
+      target="_blank"
+    >
+      <v-icon>$mdiDiscord</v-icon>
+    </v-btn>
 
-      <v-btn
-        class="mx-3"
-        color="#7289DA"
-        href="https://discord.gg/HJXwxMy"
-        icon
-        rel="noopener"
-        small
-        target="_blank"
-      >
-        <v-icon>$mdiDiscord</v-icon>
-      </v-btn>
+    <v-btn
+      href="https://github.com/vuetifyjs/docs-next"
+      icon
+      rel="noopener"
+      target="_blank"
+    >
+      <v-icon>$mdiGithub</v-icon>
+    </v-btn>
 
-      <v-btn
-        class="mx-3"
-        color="#24292E"
-        href="https://github.com/vuetifyjs/vuetify"
-        icon
-        rel="noopener"
-        small
-        target="_blank"
-      >
-        <v-icon>$mdiGithub</v-icon>
-      </v-btn>
-    </div>
+    <v-menu
+      origin="top right"
+      transition="scale-transition"
+    >
+      <template v-slot:activator="{ on }">
+        <v-btn
+          class="text--secondary"
+          text
+          v-on="on"
+        >
+          <span
+            class="mr-2 hidden-sm-and-down"
+            v-text="current.name"
+          />
 
-    <v-divider
-      class="mx-4"
-      vertical
-    />
+          <v-icon>$mdiTranslate</v-icon>
+        </v-btn>
+      </template>
 
-    <v-toolbar-items class="hidden-sm-and-down">
-      <v-menu>
-        <template v-slot:activator="{ on }">
-          <v-btn
-            text
-            v-on="on"
-          >
-            <v-icon>$mdiTranslate</v-icon>
-          </v-btn>
-        </template>
-
-        <v-list>
-          <v-list-item
-            v-for="(item, index) in locales"
-            :key="index"
-            @click="switchLocale(item.locale)"
-          >
-            <v-list-item-title>{{ item.name }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-    </v-toolbar-items>
+      <v-list>
+        <v-list-item
+          v-for="(item, index) in locales"
+          :key="index"
+          @click="switchLocale(item.locale)"
+        >
+          <v-list-item-title>{{ item.name }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
   </v-app-bar>
 </template>
 
@@ -106,7 +104,11 @@
     data: () => ({ locales }),
 
     computed: {
-      advanced: sync('user/drawer@advanced'),
+      ...sync('user', [
+        'drawer@advanced',
+        'dark',
+        'rtl',
+      ]),
       drawer: sync('app/drawer'),
       locale: get('route/params@locale'),
       translating: get('pages/translating'),
@@ -114,6 +116,18 @@
         const icon = this.advanced ? 'Bool' : 'Alphabetical'
 
         return `$mdiOrder${icon}Ascending`
+      },
+      current () {
+        return this.locales.find(l => l.locale === this.locale) || {}
+      },
+    },
+
+    watch: {
+      dark (val) {
+        this.$vuetify.theme.dark = val
+      },
+      rtl (val) {
+        this.$vuetify.rtl = val
       },
     },
 

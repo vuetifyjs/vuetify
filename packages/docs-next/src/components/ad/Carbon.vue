@@ -53,17 +53,24 @@
         border-radius: 4px 0 0 4px
 
     .carbon-text
-      color: #000000DE
+      color: inherit
       font-size: 0.75rem
       padding: 0.475rem
 
     .carbon-poweredby
       bottom: 0.5rem
-      color: rgba(0, 0, 0, .6)
       font-size: 0.625rem
       font-weight: 400
       letter-spacing: 0.09375rem
       position: absolute
       right: 0.5rem
       text-transform: uppercase
+
+  .v-app-ad.theme--light
+    .carbon-poweredby
+      color: rgba(0, 0, 0, .6)
+
+  .v-app-ad.theme--dark
+    .carbon-poweredby
+      color: inherit
 </style>

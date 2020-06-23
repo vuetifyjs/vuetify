@@ -1,10 +1,11 @@
 <template>
   <v-navigation-drawer
     id="default-toc"
+    :color="dark ? '#272727' : undefined"
+    :right="!rtl"
     app
     class="pa-4"
     clipped
-    right
     width="192"
   >
     <i18n
@@ -42,6 +43,10 @@
     name: 'DocumentationToc',
 
     computed: {
+      ...get('user', [
+        'dark',
+        'rtl',
+      ]),
       ...get('route', [
         'params@category',
         'params@page',

@@ -33,7 +33,7 @@ export async function createApp ({
   // create store and router instances
   const store = createStore()
   const i18n = createI18n()
-  const vuetify = createVuetify()
+  const vuetify = createVuetify(store)
   const router = createRouter(vuetify, store, i18n)
 
   store.state.app.version = Vuetify.version

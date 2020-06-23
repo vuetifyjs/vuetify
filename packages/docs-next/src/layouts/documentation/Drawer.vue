@@ -1,6 +1,8 @@
 <template>
   <v-navigation-drawer
     v-model="drawer"
+    :color="dark ? '#272727' : undefined"
+    :right="rtl"
     app
     clipped
     width="300"
@@ -33,6 +35,11 @@
     components: { DocumentationList: () => import('./List') },
 
     computed: {
+      ...get('user', [
+        'drawer@advanced',
+        'dark',
+        'rtl',
+      ]),
       drawer: sync('app/drawer'),
       advanced: get('user/drawer@advanced'),
       anav: get('app/advanced'),

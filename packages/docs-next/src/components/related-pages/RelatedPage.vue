@@ -1,7 +1,7 @@
 <template>
   <v-sheet
+    :color="dark ? undefined : 'grey lighten-5'"
     class="overflow-hidden"
-    color="grey lighten-5"
     rounded
   >
     <v-list-item
@@ -58,6 +58,7 @@
         'pages',
         'frontmatter@related',
       ]),
+      dark: get('user/dark'),
       locale: get('route/params@locale'),
       nav: get('app/nav'),
       section () {
