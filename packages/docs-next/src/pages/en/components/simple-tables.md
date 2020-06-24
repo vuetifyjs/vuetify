@@ -6,6 +6,7 @@ meta:
 ---
 
 # Simple tables
+
 Component description
 
 <entry-ad />

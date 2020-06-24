@@ -6,6 +6,7 @@ meta:
 ---
 
 # Sparklines
+
 Component description
 
 <entry-ad />

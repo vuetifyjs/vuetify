@@ -6,6 +6,7 @@ meta:
 ---
 
 # Cards
+
 Component description
 
 <entry-ad />

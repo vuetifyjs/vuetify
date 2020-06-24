@@ -6,6 +6,7 @@ meta:
 ---
 
 # Windows
+
 Component description
 
 <entry-ad />

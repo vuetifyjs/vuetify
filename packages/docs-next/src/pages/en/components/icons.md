@@ -6,6 +6,7 @@ meta:
 ---
 
 # Icons
+
 Component description
 
 <entry-ad />

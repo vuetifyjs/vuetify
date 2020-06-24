@@ -6,6 +6,7 @@ meta:
 ---
 
 # Aspect ratios
+
 Component description
 
 <entry-ad />

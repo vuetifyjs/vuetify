@@ -6,6 +6,7 @@ meta:
 ---
 
 # Slide groups
+
 Component description
 
 <entry-ad />

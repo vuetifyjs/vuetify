@@ -6,6 +6,7 @@ meta:
 ---
 
 # Parallax
+
 Component description
 
 <entry-ad />

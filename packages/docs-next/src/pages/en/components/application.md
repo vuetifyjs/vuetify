@@ -6,6 +6,7 @@ meta:
 ---
 
 # Application
+
 Component description
 
 <entry-ad />

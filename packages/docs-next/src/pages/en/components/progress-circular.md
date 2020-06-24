@@ -6,6 +6,7 @@ meta:
 ---
 
 # Progress circular
+
 Component description
 
 <entry-ad />

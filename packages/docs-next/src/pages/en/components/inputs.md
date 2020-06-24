@@ -6,6 +6,7 @@ meta:
 ---
 
 # Inputs
+
 Component description
 
 <entry-ad />

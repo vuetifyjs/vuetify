@@ -6,6 +6,7 @@ meta:
 ---
 
 # Buttons: Floating Action Button
+
 Component description
 
 <entry-ad />

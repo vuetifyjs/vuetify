@@ -6,6 +6,7 @@ meta:
 ---
 
 # Color pickers
+
 Component description
 
 <entry-ad />

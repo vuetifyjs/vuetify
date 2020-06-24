@@ -6,6 +6,7 @@ meta:
 ---
 
 # Lazy loading
+
 Component description
 
 <entry-ad />

@@ -6,6 +6,7 @@ meta:
 ---
 
 # Pagination
+
 Component description
 
 <entry-ad />

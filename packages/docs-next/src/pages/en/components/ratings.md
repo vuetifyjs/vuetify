@@ -6,6 +6,7 @@ meta:
 ---
 
 # Ratings
+
 Component description
 
 <entry-ad />

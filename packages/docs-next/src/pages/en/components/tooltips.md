@@ -6,6 +6,7 @@ meta:
 ---
 
 # Tooltips
+
 Component description
 
 <entry-ad />

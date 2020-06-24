@@ -6,6 +6,7 @@ meta:
 ---
 
 # Hover
+
 Component description
 
 <entry-ad />

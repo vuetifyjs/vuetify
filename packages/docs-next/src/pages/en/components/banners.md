@@ -6,6 +6,7 @@ meta:
 ---
 
 # Banners
+
 Component description
 
 <entry-ad />

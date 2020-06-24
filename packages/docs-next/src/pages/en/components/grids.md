@@ -6,6 +6,7 @@ meta:
 ---
 
 # Grid system
+
 Component description
 
 <entry-ad />

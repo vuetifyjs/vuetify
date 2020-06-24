@@ -6,6 +6,7 @@ meta:
 ---
 
 # Tabs
+
 Component description
 
 <entry-ad />

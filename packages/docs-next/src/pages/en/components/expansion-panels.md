@@ -6,6 +6,7 @@ meta:
 ---
 
 # Expansion panels
+
 Component description
 
 <entry-ad />

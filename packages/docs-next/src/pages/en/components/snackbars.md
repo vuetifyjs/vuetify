@@ -6,6 +6,7 @@ meta:
 ---
 
 # Snackbars
+
 Component description
 
 <entry-ad />

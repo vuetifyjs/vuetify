@@ -6,6 +6,7 @@ meta:
 ---
 
 # Date pickers
+
 Component description
 
 <entry-ad />

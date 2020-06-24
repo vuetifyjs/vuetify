@@ -6,6 +6,7 @@ meta:
 ---
 
 # Sliders
+
 Component description
 
 <entry-ad />

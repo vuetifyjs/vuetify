@@ -6,6 +6,7 @@ meta:
 ---
 
 # System bars
+
 Component description
 
 <entry-ad />

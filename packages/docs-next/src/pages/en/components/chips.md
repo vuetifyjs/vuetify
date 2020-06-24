@@ -6,6 +6,7 @@ meta:
 ---
 
 # Chips
+
 Component description
 
 <entry-ad />

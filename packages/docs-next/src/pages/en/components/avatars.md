@@ -6,6 +6,7 @@ meta:
 ---
 
 # Avatars
+
 Component description
 
 <entry-ad />

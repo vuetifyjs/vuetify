@@ -6,6 +6,7 @@ meta:
 ---
 
 # Toolbars
+
 Component description
 
 <entry-ad />

@@ -6,6 +6,7 @@ meta:
 ---
 
 # Carousels
+
 Component description
 
 <entry-ad />

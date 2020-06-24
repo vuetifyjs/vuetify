@@ -6,6 +6,7 @@ meta:
 ---
 
 # Chip groups
+
 Component description
 
 <entry-ad />

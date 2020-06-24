@@ -6,6 +6,7 @@ meta:
 ---
 
 # Footers
+
 Component description
 
 <entry-ad />

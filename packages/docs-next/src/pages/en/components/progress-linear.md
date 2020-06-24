@@ -6,6 +6,7 @@ meta:
 ---
 
 # Progress linear
+
 Component description
 
 <entry-ad />

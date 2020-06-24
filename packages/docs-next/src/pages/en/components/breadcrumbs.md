@@ -6,6 +6,7 @@ meta:
 ---
 
 # Breadcrumbs
+
 Component description
 
 <entry-ad />

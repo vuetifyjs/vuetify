@@ -6,6 +6,7 @@ meta:
 ---
 
 # Bottom navigation
+
 Component description
 
 <entry-ad />
