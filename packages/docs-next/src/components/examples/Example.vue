@@ -80,6 +80,7 @@
       <v-sheet
         v-if="file"
         :dark="dark"
+        :light="!dark"
         class="pa-4"
         color="transparent"
         @mouseenter.once="importTemplate"
@@ -136,7 +137,6 @@
           {
             icon: '$mdiGithub',
             path: 'view-in-github',
-            onClick: () => (this.dark = !this.dark),
             href: `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/examples/${this.file}.vue`,
           },
           {

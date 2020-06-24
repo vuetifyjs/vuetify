@@ -43,6 +43,7 @@
           <v-sheet
             v-if="file"
             :dark="dark"
+            :light="!dark"
             class="d-inline-block"
             width="100%"
             height="300"
