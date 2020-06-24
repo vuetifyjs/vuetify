@@ -108,6 +108,7 @@
             :label="prop"
             :max="bounds[1]"
             :min="bounds[0]"
+            :step="bounds[2] || 1"
           />
 
           <v-select
