@@ -3,76 +3,61 @@ meta:
   title: CSS Reset
   description: Vuetify uses ress.min, a complete browser reset based off or normalize.css.
   keywords: ress.min, css reset, vuetify css reset
+related:
+  - /styles/colors/
+  - /styles/typography/
+  - /customization/sass-variables/
 ---
 
 # CSS Reset
-Component description
+Opinionated base styles for Vuetify projects.
 
 <entry-ad />
 
-## Usage
+## Bootstrapping
 
-Usage text
+ress is a modern CSS reset that applies a solid base for stylesheets. It is built on top of [normalize.css](https://github.com/necolas/normalize.css) and adds new features such as specifying `font-family: monospace` for `<code>` elements, removing all `outlines` from elements when hovering, and much much more. Additional information can be found on the [ress GitHub repository](https://github.com/filipelinhares/ress).
 
-`<usage name="" />`
-- **name**: component name
-- eg: `<usage name="v-alert" />`
+<alert type="warning"> The Vuetify style reset is applied globally and affects default elements such as `button` and `input`. This also includes anything located outside of the [v-app](/components/application) component.</alert>
 
-## API
+These styles are automatically imported within **src/styles/generic/_reset.scss** and bootstrapped as **Generic** styles within **src/styles/generic/_index.scss**:
 
-- [API Page Link]()
+```scss
+// styles/generic/_index.scss
 
-## Sub-Components
+// Generic styling for bare HTML elements (like H1, A, etc.).
+// These come with default styling from the browser so that
+// we can redefine them here.
+@import './reset.scss';
 
-Omit if none
+@import './animations.scss';
 
-### Sub Component 1
+@import './colors.scss';
 
-Sub component text
+@import './elevation.scss';
 
-### Sub Component 2
+@import './transitions.scss';
+```
 
-Sub component text
+## Reset Features
+Below is a list of additional *features* that ress provides over the default **normalize.css** functionality
 
-## Caveats
+* Apply `box-sizing: border-box;` in all elements.
+* Reset `padding` and `margin` in all elements.
+* Specify `background-repeat: no-repeat` in all elements and pseudo elements.
+* Inherit `text-decoration` and `vertical-align` to `::before` and `::after`.
+* Remove the `outline` when hovering in all browsers.
+* Specify `font-family: monospace` in code elements.
+* Reset `border-radius` in input elements.
+* Specify font inheritance of form elements.
+* Remove the default button styling in all browsers.
+* Specify textarea resizability to vertical.
+* Apply `cursor: pointer` to button elements.
+* Apply `tab-size: 4` in `html`.
+* Style `select` like a standard input.
+* Style `cursor` by aria attributes.
+* Hide content from screens but not screenreaders.
 
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
-
-## Examples
-
-Example text.
-
-### Props
-
-Omit if none
-
-### Events
-
-Omit if none
-
-### Slots
-
-Omit if none
-
-### Misc
-
-Omit if none
-
-#### Example Header
-
-Example description
-
-`<example file="" />`
-- **file**: `<component>/<type>-<propname>`
-- eg: `<example file="v-alert/prop-colored-border" />`
-
-## Accessibility
-
-Accessibility text - omit if none
+For a complete list of all applied styles, see the [ress css stylesheet](https://github.com/filipelinhares/ress/blob/master/ress.css).
 
 <backmatter />

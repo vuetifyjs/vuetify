@@ -88,6 +88,9 @@
     pre.language-json::after
       content: 'json'
 
+    pre.language-scss::after
+      content: 'scss'
+
     &.theme--dark
       code[class*=language],
       pre[class*=language]
