@@ -3,77 +3,68 @@ meta:
   title: Banner component
   description: The banner component displays an important and succint message for a user to address. It can also provide actions for user to take.
   keywords: banners, vuetify banner component, vue banner component
+related:
+  - /components/alerts/
+  - /components/icons/
+  - /components/snackbars/
 ---
 
 # Banners
 
-Component description
+The `v-banner` component is used as middle-interruptive message to user with 1-2 actions. It comes in 2 variations **single-line** and **multi-line** (implicit). These can have icons which you can use with your message and actions.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+Banners can have 1-2 lines of text, actions and icon.
 
-`<usage name="" />`
-- **name**: component name
-- eg: `<usage name="v-alert" />`
+<usage name="v-banner" />
 
 ## API
 
-- [API Page Link]()
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-banner](../../api/v-banner)
 
 ## Examples
 
-Example text.
+Below is a collection of simple to complex examples.
 
 ### Props
 
-Omit if none
+#### Single line
+
+**Single-line** VBanner is used for small amount of information and is recommended for **desktop** only implementations. You can optionally enable the **sticky** prop to ensure the content is pinned to the screen (note: does not work in IE11). You can find more information about [sticky positioning here](https://developer.mozilla.org/en-US/docs/Web/CSS/position).
+
+<example file="v-banner/prop-single-line" />
 
 ### Events
 
-Omit if none
+#### Icon click
+
+VBanner emits `click:icon` event on icon click, even with custom icon slot.
+
+<example file="v-banner/event-icon-click" />
 
 ### Slots
 
-Omit if none
+#### Actions
+
+The `actions` slot has `dismiss` function in its scope, you can use it to easily dismiss banner.
+
+<example file="v-banner/slot-actions" />
+
+#### Icon
+
+The icon slot allows you to to explicitly control the content and functionality within it.
+
+<example file="v-banner/slot-icon" />
 
 ### Misc
 
-Omit if none
+#### Two line
 
-#### Example Header
+**Two-line** VBanner can store larger amount of data, use it for big messages. This is recommend **mobile** implementations.
 
-Example description
-
-`<example file="" />`
-- **file**: `<component>/<type>-<propname>`
-- eg: `<example file="v-alert/prop-colored-border" />`
-
-## Accessibility
-
-Accessibility text - omit if none
+<example file="v-banner/misc-two-line" />
 
 <backmatter />
