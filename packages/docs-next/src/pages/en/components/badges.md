@@ -55,4 +55,4 @@ The `v-badge` component is flexible and can be used in a variety of use-cases ov
 
 <example file="v-badge/misc-customization" />
 
-<endmatter />
+<backmatter />

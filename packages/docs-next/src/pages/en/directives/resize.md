@@ -25,4 +25,4 @@ Resize your window and observe the values change..
 
 - [v-resize](../../api/v-resize)
 
-<endmatter />
+<backmatter />

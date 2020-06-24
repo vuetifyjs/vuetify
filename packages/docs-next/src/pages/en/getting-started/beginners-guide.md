@@ -24,4 +24,4 @@ All content is reviewed by the Vuetify Core Team as well as Webdev beginners. We
 
 If you would like to contribute to the Beginner's Guide, come chat with us in the [Discord Community](https://discord.com/invite/s93b7Fv).
 
-<endmatter />
+<backmatter />

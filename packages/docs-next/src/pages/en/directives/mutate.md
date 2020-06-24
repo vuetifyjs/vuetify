@@ -35,4 +35,4 @@ The `v-mutate` directive accepts modifiers for all of the available options in t
 
 <example file="v-mutate/option-modifiers" />
 
-<endmatter />
+<backmatter />

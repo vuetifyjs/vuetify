@@ -420,7 +420,7 @@ Lorem ipsum dolor sit amet, ius elit fugit ut.
 
 <!-- Main Content Area -->
 
-<endmatter />
+<backmatter />
 ```
 
 ### Generic component page template
@@ -517,5 +517,5 @@ Example description
 
 Accessibility text - omit if none
 
-<endmatter />
+<backmatter />
 ```

@@ -41,4 +41,4 @@ The `v-intersect` directive accepts options. Available options can be found in t
 
 <example file="v-intersect/prop-options" />
 
-<endmatter />
+<backmatter />

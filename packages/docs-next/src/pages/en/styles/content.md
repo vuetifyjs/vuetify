@@ -36,4 +36,4 @@ Example of an inline `<code>` element.
 
 To install Vuetify, type <kbd>npm install vuetify</kbd> into your console. Once complete, type <kbd>cd `<project name>`</kbd> and run <kbd>npm install</kbd>
 
-<endmatter />
+<backmatter />

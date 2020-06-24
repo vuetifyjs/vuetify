@@ -16,8 +16,8 @@
       <template v-slot:team>
         <i18n
           :href="url"
-          tag="app-link"
           path="team"
+          tag="app-link"
         />
       </template>
     </i18n>
@@ -39,7 +39,7 @@
   import { get, sync } from 'vuex-pathify'
 
   export default {
-    name: 'Endmatter',
+    name: 'Backmatter',
 
     data: () => ({ id: 'ready-for-more' }),
 

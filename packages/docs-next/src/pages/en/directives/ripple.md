@@ -50,4 +50,4 @@ Some components provide the `ripple` prop that allows you to control the ripple 
 
 <example file="v-ripple/misc-ripple-in-components" />
 
-<endmatter />
+<backmatter />

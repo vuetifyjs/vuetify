@@ -289,4 +289,4 @@ If you need help with an issue, please use one of our help channels:
 
 For additional inquiries, please reach out to [John Leider](mailto:john@vuetifyjs.com) or [Heather Leider](mailto:heather@vuetifyjs.com).
 
-<endmatter />
+<backmatter />

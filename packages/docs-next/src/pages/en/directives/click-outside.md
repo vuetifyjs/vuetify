@@ -35,4 +35,4 @@ Optionally provide a `closeOnOutsideClick` handler that returns `true` or `false
 
 <example file="v-click-outside/option-close-on-outside-click" />
 
-<endmatter />
+<backmatter />
