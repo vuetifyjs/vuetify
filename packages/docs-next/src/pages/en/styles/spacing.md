@@ -6,7 +6,7 @@ meta:
 ---
 
 # Spacing
-Component description
+Component description. <inline-ad slug="scrimba-spacing" />
 
 <entry-ad />
 

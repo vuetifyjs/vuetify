@@ -6,7 +6,7 @@ meta:
 ---
 
 # Typography
-Component description
+Component description. <inline-ad slug="scrimba-typography" />
 
 <entry-ad />
 

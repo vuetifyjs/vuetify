@@ -7,7 +7,7 @@ meta:
 
 # Cards
 
-Component description
+Component description. <inline-ad slug="scrimba-cards" />
 
 <entry-ad />
 
