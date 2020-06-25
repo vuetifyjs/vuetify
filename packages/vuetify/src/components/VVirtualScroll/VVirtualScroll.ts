@@ -62,7 +62,7 @@ export default Measurable.extend({
     itemHeight: 'onScroll',
   },
 
-  created () {
+  mounted () {
     this.last = this.getLast(0)
   },
 
