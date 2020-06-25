@@ -1,79 +1,52 @@
 ---
 meta:
   title: Sheet component
-  description: The sheet component is the default paper element in Vuetify and serves as the baseline for many Material Design implementations.
-  keywords: sheets, vuetify sheet component, vue sheet component
+  description: The sheet component is the baseline for many Material Design implementations used in Vuetify.
+  keywords: sheets, vuetify sheet component, vue sheet component, paper, material design paper, material design sheets
+related:
+  - /components/cards/
+  - /components/grids/
+  - /styles/elevation/
 ---
 
 # Sheets
 
-Component description
+The `v-sheet` component is the baseline for numerous components such as [v-card](/components/cards/), [v-toolbar](/components/toolbars/), and more. The available properties form the foundation of Material Design—the concept of paper and elevation (shadows).
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+The `v-sheet` component is a transformable piece of _paper_ that provides a basic foundation for Vuetify features. For example, properties such as **rounded** and **shaped** modify the `border-radius` property while **elevation** increase / decreases `box-shadow`.
 
-`<usage name="" />`
-- **name**: component name
-- eg: `<usage name="v-alert" />`
+<usage name="v-sheet" />
 
 ## API
 
-- [API Page Link]()
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-sheet](../../api/v-sheet)
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Elevation
 
-### Events
+The `v-sheet` component accepts a custom elevation between **0 and 24** (0 is default). The *elevation* property modifies the `box-shadow` property. More information is located in the MD [Elevation Design Specification](https://material.io/design/environment/elevation.html).
 
-Omit if none
+<example file="v-sheet/prop-elevation" />
 
-### Slots
+#### Rounded
 
-Omit if none
+The **rounded** prop adds a default `border-radius` of _4px_. By default, the `v-sheet` component has no border-radius. Customize the radius's size and location by providing a custom rounded value; e.g. a rounded value of *tr-xl l-pill* equates to *rounded-tr-xl rounded-l-pill*. Additional information is on the [Border Radius](/styles/border-radius/) page.
 
-### Misc
+<example file="v-sheet/prop-rounded" />
 
-Omit if none
+#### Color
 
-#### Example Header
+Sheets and components based on them can have different sizes and colors.
 
-Example description
+The `v-sheet` component accepts custom [Material Design Color](/styles/colors/) values such as `warning`, `amber darken-3`, and `deep-purple accent`—as well as *rgb, rgba, and hexidecimal* values.
 
-`<example file="" />`
-- **file**: `<component>/<type>-<propname>`
-- eg: `<example file="v-alert/prop-colored-border" />`
-
-## Accessibility
-
-Accessibility text - omit if none
+<example file="v-sheet/prop-color" />
 
 <backmatter />

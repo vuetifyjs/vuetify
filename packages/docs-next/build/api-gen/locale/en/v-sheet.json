@@ -1,7 +1,9 @@
  {
   "props": {
-    "empty": ""
-    // add prop lang here
+    "empty": "",
+    "outlined": "Removes elevation (box-shadow) and adds a *thin* border.",
+    "shaped": "Applies a large border radius on the top left and bottom right of the card.",
+    "tag": "Specify a custom tag used on the root element."
   },
   "slots": {
     "empty": ""
