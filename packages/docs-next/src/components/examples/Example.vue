@@ -138,6 +138,7 @@
             icon: '$mdiGithub',
             path: 'view-in-github',
             href: `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/examples/${this.file}.vue`,
+            onClick: () => {},
           },
           {
             icon: '$mdiCodeTags',
