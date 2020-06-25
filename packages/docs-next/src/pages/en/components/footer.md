@@ -3,77 +3,62 @@ meta:
   title: Footer component
   description: The footer component provides a container for displaying additional navigation information about a site.
   keywords: footers, vuetify footer component, vue footer component
+related:
+  - /components/grids/
+  - /components/buttons/
+  - /components/toolbars/
 ---
 
 # Footers
 
-Component description
+The `v-footer` component is used for displaying general information that a user might want to access from any page within your site.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+The `v-footer` component in its simplest form is a container.
 
-`<usage name="" />`
-- **name**: component name
-- eg: `<usage name="v-alert" />`
+<example file="v-footer/usage" />
 
 ## API
 
-- [API Page Link]()
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-footer](../../api/v-footer)
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Absolute Footer
 
-### Events
+The `absolute` prop positions footers absolutely at the bottom of their parent container.
 
-Omit if none
+<example file="v-footer/prop-absolute" />
 
-### Slots
+#### Padless Footer
 
-Omit if none
+The `padless` prop removes all default padding from the footer component.
+
+<example file="v-footer/prop-padless" />
 
 ### Misc
 
-Omit if none
+#### Company Footer
 
-#### Example Header
+The footer component as a basic company footer with links.
 
-Example description
+<example file="v-footer/misc-company-footer" />
 
-`<example file="" />`
-- **file**: `<component>/<type>-<propname>`
-- eg: `<example file="v-alert/prop-colored-border" />`
+#### Indigo Footer
 
-## Accessibility
+The footer component with Indigo background color and social media icons and button.
 
-Accessibility text - omit if none
+<example file="v-footer/misc-indigo-footer" />
+
+#### Teal Footer
+
+The footer component with a Teal color header and columns and rows of links.
+
+<example file="v-footer/misc-teal-footer" />
 
 <backmatter />
