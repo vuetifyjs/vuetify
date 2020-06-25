@@ -251,13 +251,12 @@ export default baseMixins.extend<options>().extend({
       window.setTimeout(() => this.onMenuActiveChange(val))
 
       if (!this.menuIsBooted) {
-        const bootMenu = this.bootMenu
+        this.menuIsBooted = true
         const handler = this.onScroll
         const menu = this.$refs.menu
         ;(function addListener () {
           const content = menu.$refs.content
           if (content && content.addEventListener) {
-            bootMenu()
             return content.addEventListener('scroll', handler, false)
           }
           menu.$once('hook:updated', addListener)
@@ -297,9 +296,6 @@ export default baseMixins.extend<options>().extend({
       ) return
 
       this.isMenuActive = true
-    },
-    bootMenu () {
-      this.menuIsBooted = true
     },
     clearableCallback () {
       this.setValue(this.multiple ? [] : undefined)
