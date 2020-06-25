@@ -5,43 +5,45 @@
     max-width="500"
   >
     <v-bottom-navigation
-      scroll-target="#scroll-area-1"
-      hide-on-scroll
       absolute
+      hide-on-scroll
       horizontal
+      scroll-target="#hide-on-scroll-example"
     >
       <v-btn
-        text
         color="deep-purple accent-4"
+        text
       >
         <span>Recents</span>
+
         <v-icon>mdi-history</v-icon>
       </v-btn>
 
       <v-btn
-        text
         color="deep-purple accent-4"
+        text
       >
         <span>Favorites</span>
+
         <v-icon>mdi-heart</v-icon>
       </v-btn>
 
       <v-btn
-        text
         color="deep-purple accent-4"
+        text
       >
         <span>Nearby</span>
+
         <v-icon>mdi-map-marker</v-icon>
       </v-btn>
     </v-bottom-navigation>
 
-    <v-sheet
-      id="scroll-area-1"
+    <v-responsive
+      id="hide-on-scroll-example"
       class="overflow-y-auto"
       max-height="600"
     >
-      <v-container style="height: 1500px;">
-      </v-container>
-    </v-sheet>
+      <v-responsive height="1500"></v-responsive>
+    </v-responsive>
   </v-card>
 </template>

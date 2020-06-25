@@ -11,13 +11,13 @@ related:
 
 # Bottom navigation
 
-The `v-bottom-navigation` is an alternative to the sidebar. It is primarily used on mobile and comes in two variants, icons and text, and shift.
+The `v-bottom-navigation` component is an alternative to the sidebar. It is primarily used for mobile applications and comes in three variants, **icons** and **text**, and **shift**.
 
 <entry-ad />
 
 ## Usage
 
-While the bottom nav is meant to be used with the `vue-router`, you can also programmatically control the active state of the buttons by using the `active.sync` prop. You can change a button's value by using its `value` attribute.
+While the bottom nav is meant to be used with the [vue-router](https://router.vuejs.org/), you can also programmatically control the active state of the buttons by using the **active** prop with the _sync_ modifier—e.g. `active.sync`. Modify the **value** property to designate the synced value. A button is given a default value of its _index_ with `v-bottom-navigation`.
 
 <example file="v-bottom-navigation/usage" />
 
@@ -33,13 +33,13 @@ Below is a collection of simple to complex examples.
 
 #### Color
 
-The `color` prop applies a color to the background the bottom navigation. It is recommended to use the `light` and `dark` props to properly contrast text color.
+The **color** prop applies a color to the background the bottom navigation. We recommend using the **light** and **dark** props to properly contrast text color.
 
 <example file="v-bottom-navigation/prop-color" />
 
 #### Grow
 
-If `v-bottom-navigation` has `grow` property, buttons within it grow to fill available space.
+Using the **grow** property forces [v-btn](/components/buttons/) components to _fill_ all available space. Buttons have a maximum width of **168px** per the [Bottom Navigation MD specification](https://material.io/components/bottom-navigation#specs).
 
 <example file="v-bottom-navigation/prop-grow" />
 
@@ -51,7 +51,7 @@ Hide-on-scroll hides `v-bottom-navigation` when target element is scrolled.
 
 #### Horizontal
 
-The `horizontal` prop, places nav text next to the icon as appose to beneath it.
+Adjust the style of buttons and icons by using the **horizontal** prop. This positions button text *inline* with the provided [v-icon](/components/icons/).
 
 <example file="v-bottom-navigation/prop-horizontal" />
 
@@ -63,14 +63,30 @@ The `horizontal` prop, places nav text next to the icon as appose to beneath it.
 
 #### Shift
 
-The `shift` prop will hide the button text until active. For this to work, `v-btn` text is required to be wrapped in a `<span>` tag.
+The **shift** prop hides button text when not active. This provides an alternative visual style to the `v-bottom-navigation` component.
+
+<alert type="info">
+  For this to work, `v-btn` text is **required** to be wrapped in a `span` tag.
+</alert>
 
 <example file="v-bottom-navigation/prop-shift" />
 
 #### Toggle
 
-The display state of `v-bottom-navigation` can be toggled using the `input-value` prop. You can also control the currently active button using `v-model`.
+The display state of `v-bottom-navigation` can be toggled using the **input-value** prop. You can also control the currently active button using **v-model**.
 
 <example file="v-bottom-navigation/prop-toggle" />
+
+#### Hide on scroll
+
+The `v-bottom-navigation` component hides when *scrolling up* when using the **hide-on-scroll** property. This is similar to the [scrolling techniques](https://material.io/archive/guidelines/patterns/scrolling-techniques.html) that are supported in [v-app-bar](/components/app-bars/). In the following example, scroll *up and down* to see this behavior.
+
+<example file="v-bottom-navigation/prop-hide-on-scroll" />
+
+#### Scroll threshold
+
+Modify the **scroll-threshold** property to increase the distance a user must *scroll* before the `v-bottom-navigation` is hidden.
+
+<example file="v-bottom-navigation/prop-scroll-threshold" />
 
 <backmatter />

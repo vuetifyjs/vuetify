@@ -1,32 +1,35 @@
 <template>
   <div class="overflow-hidden">
-    <div class="text-center mb-2">
+    <div class="text-center mb-8">
       <v-btn
-        text
         color="deep-purple"
-        @click="showNav = !showNav"
+        outlined
+        @click="active = !active"
       >
-        Toggle Nav
+        Toggle Navigation
       </v-btn>
     </div>
 
     <v-bottom-navigation
-      v-model="activeBtn"
-      :input-value="showNav"
+      v-model="value"
+      :input-value="active"
       color="indigo"
     >
       <v-btn>
         <span>Recents</span>
+
         <v-icon>mdi-history</v-icon>
       </v-btn>
 
       <v-btn>
         <span>Favorites</span>
+
         <v-icon>mdi-heart</v-icon>
       </v-btn>
 
       <v-btn>
         <span>Nearby</span>
+
         <v-icon>mdi-map-marker</v-icon>
       </v-btn>
     </v-bottom-navigation>
@@ -37,8 +40,8 @@
   export default {
     data () {
       return {
-        activeBtn: 1,
-        showNav: true,
+        value: 1,
+        active: true,
       }
     },
   }
