@@ -13,7 +13,7 @@ related:
 
 Get started with Vuetify, the world’s most popular Vue.js framework for building feature rich, blazing fast application.
 
-<entry-ad />
+<promoted-ad slug="vuemastery-getting-started" />
 
 ## Vue CLI Install
 

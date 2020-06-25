@@ -8,6 +8,6 @@ meta:
 # Theme
 Component description
 
-<entry-ad />
+<promoted-ad slug="vuemastery-themes" />
 
 <backmatter />

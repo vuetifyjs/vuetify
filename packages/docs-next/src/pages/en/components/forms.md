@@ -9,7 +9,7 @@ meta:
 
 Component description
 
-<entry-ad />
+<promoted-ad slug="vuemastery-forms" />
 
 ## Usage
 
