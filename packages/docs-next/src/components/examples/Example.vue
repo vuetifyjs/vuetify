@@ -76,22 +76,20 @@
       </div>
     </v-lazy>
 
-    <v-fade-transition appear>
-      <v-sheet
-        v-if="file"
-        :dark="dark"
-        :light="!dark"
-        class="pa-4"
-        color="transparent"
-        @mouseenter.once="importTemplate"
-      >
-        <vue-file
-          :file="file"
-          class="mb-0"
-          @error="hasError = true"
-        />
-      </v-sheet>
-    </v-fade-transition>
+    <v-theme-provider :dark="dark">
+      <v-fade-transition appear>
+        <v-sheet
+          v-if="file"
+          class="pa-4"
+          @mouseenter.once="importTemplate"
+        >
+          <vue-file
+            :file="file"
+            @error="hasError = true"
+          />
+        </v-sheet>
+      </v-fade-transition>
+    </v-theme-provider>
   </v-sheet>
 </template>
 
@@ -113,14 +111,17 @@
       dark: false,
       expand: false,
       hasError: false,
-      pen: undefined,
       selected: 'template',
     }),
 
     computed: {
       branch: get('app/branch'),
       sections () {
-        return ['template', 'script', 'style'].filter(section => this.pen[section])
+        return [
+          'template',
+          'script',
+          'style',
+        ].filter(section => this.pen[section])
       },
       tooltips () {
         return [

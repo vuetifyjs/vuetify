@@ -1,7 +1,7 @@
 export default {
-  data: () => ({
-    pen: null,
-  }),
+  name: 'Codepen',
+
+  data: () => ({ pen: undefined }),
 
   methods: {
     async importTemplate () {
@@ -40,9 +40,9 @@ export default {
       return parsed[1] || ''
     },
     sendToCodepen () {
-      if (this.$refs.codepen) {
-        this.$refs.codepen.submit()
-      }
+      if (!this.$refs.codepen) return
+
+      this.$refs.codepen.submit()
     },
   },
 }
