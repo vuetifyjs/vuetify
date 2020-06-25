@@ -123,6 +123,21 @@
             :items="items"
             :label="prop"
           />
+
+          <v-btn-toggle
+            v-for="(items, prop) in btnToggles"
+            :key="prop"
+            class="my-2"
+          >
+            <v-btn
+              v-for="(item, i) in items"
+              :key="`${prop}${i}`"
+              text
+              @click="() => usageProps[prop] = item"
+            >
+              {{ item }}
+            </v-btn>
+          </v-btn-toggle>
         </v-responsive>
       </v-col>
 
@@ -158,6 +173,7 @@
       hasError: false,
       options: {},
       selects: undefined,
+      btnToggles: undefined,
       sliders: undefined,
       tab: null,
       tabs: [],
