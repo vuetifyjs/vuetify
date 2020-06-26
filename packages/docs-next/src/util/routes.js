@@ -37,9 +37,11 @@ export function preferredLocale (locale = 'en') {
 
   if (!IN_BROWSER) return locale
 
+  const languages = navigator.languages.find(l => l.match(languageRegexp))
+
   return (
     window.localStorage.getItem('currentLanguage') ||
-    navigator.languages.find(l => l.match(languageRegexp)) ||
+    languages ||
     locale
   )
 }
