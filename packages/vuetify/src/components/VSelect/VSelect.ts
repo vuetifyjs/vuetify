@@ -254,13 +254,20 @@ export default baseMixins.extend<options>().extend({
         this.menuIsBooted = true
         const handler = this.onScroll
         const menu = this.$refs.menu
-        ;(function addListener () {
+        const addListener = () => {
           const content = menu.$refs.content
           if (content && content.addEventListener) {
-            return content.addEventListener('scroll', handler, false)
+            content.addEventListener('scroll', handler, false)
           }
-          menu.$once('hook:updated', addListener)
-        })()
+        }
+        this.$refs.menu.setOnContentReadyOnce(addListener)
+        // ;(function addListener () {
+        //   const content = menu.$refs.content
+        //   if (content && content.addEventListener) {
+        //     return content.addEventListener('scroll', handler, false)
+        //   }
+        //   menu.$once('hook:updated', addListener)
+        // })()
       }
     },
     items: {
