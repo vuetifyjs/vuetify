@@ -7,13 +7,11 @@
     top
     @click="copy"
   >
-    <v-fade-transition hide-on-leave>
-      <v-icon
-        :key="String(copied)"
-        color="grey"
-        v-text="copied ? '$complete' : '$mdiContentCopy'"
-      />
-    </v-fade-transition>
+    <transition-icon
+      :wait="wait"
+      from="$mdiContentCopy"
+      to="$complete"
+    />
   </v-btn>
 </template>
 
@@ -31,7 +29,10 @@
       },
     },
 
-    data: () => ({ copied: false }),
+    data: () => ({
+      copied: false,
+      wait: 2000,
+    }),
 
     methods: {
       async copy () {
@@ -47,7 +48,7 @@
 
         this.copied = true
 
-        await wait(2000)
+        await wait(this.wait)
 
         this.copied = false
       },
