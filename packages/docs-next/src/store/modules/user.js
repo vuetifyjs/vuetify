@@ -1,4 +1,5 @@
-// Pathify
+// Utilities
+import { differenceInDays } from 'date-fns'
 import { make } from 'vuex-pathify'
 
 // Globals
@@ -12,6 +13,7 @@ const state = {
   },
   notifications: [],
   rtl: false,
+  snackbar: Date.now(),
 }
 
 const mutations = make.mutations(state)
@@ -32,7 +34,15 @@ const actions = {
   },
 }
 
-const getters = {}
+const getters = {
+  hasRecentlyViewed: (_, __, rootState) => {
+    const last = rootState.user.snackbar
+
+    if (!last) return false
+
+    return differenceInDays(Date.now(), Number(last)) < 2
+  },
+}
 
 export default {
   namespaced: true,

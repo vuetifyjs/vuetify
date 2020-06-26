@@ -5,11 +5,13 @@
     content-class="overflow-hidden"
     max-height="380"
     max-width="320"
+    nudge-bottom="8"
+    rounded="lg"
     offset-y
-    origin="top left"
-    right
-    top
-    transition="scale-transition"
+    origin="top"
+    left
+    bottom
+    transition="slide-y-transition"
   >
     <template v-slot:activator="{ attrs, on }">
       <v-btn
@@ -40,6 +42,7 @@
       short
     >
       <v-btn
+        :disabled="archived ? unread.length < 1 : read.length < 1"
         class="px-2 ml-n1"
         small
         text
@@ -64,7 +67,7 @@
     </v-toolbar>
 
     <v-list
-      class="pt-0 overflow-y-scroll"
+      class="py-0 overflow-y-scroll"
       max-height="320"
     >
       <v-sheet
@@ -131,7 +134,6 @@
 
 <script>
   // Utilities
-  import bucket from '@/plugins/cosmicjs'
   import { formatDate } from '@/util/date.js'
   import { sync } from 'vuex-pathify'
 
@@ -144,12 +146,12 @@
         read: '$mdiEmailOpen',
         unread: '$mdiEmailMarkAsUnread',
       },
-      items: [],
       menu: false,
     }),
 
     computed: {
-      notifications: sync('user/notifications'),
+      notifications: sync('messages/notifications'),
+      unotifications: sync('user/notifications'),
       snack: sync('snackbar/value'),
       snackbar: sync('snackbar/snackbar'),
       done () {
@@ -170,11 +172,11 @@
       // Map items to contain a viewed
       // property and format the date
       mapped () {
-        return this.items.map(item => {
+        return this.notifications.map(item => {
           return {
             ...item,
             created_at: formatDate(new Date(item.created_at)),
-            viewed: this.notifications.includes(item.slug),
+            viewed: this.unotifications.includes(item.slug),
           }
         })
       },
@@ -186,27 +188,15 @@
       },
     },
 
-    async mounted () {
-      const { objects: items } = await bucket.getObjects({
-        type: 'notifications',
-        props: 'created_at,metadata,slug,title',
-        status: 'published',
-        limit: 10,
-        sort: '-created_at',
-      })
-
-      this.items = items
-    },
-
     methods: {
       toggle (slug) {
-        this.notifications = this.notifications.includes(slug)
-          ? this.notifications.filter(n => n !== slug)
-          : [...this.notifications, slug]
+        this.unotifications = this.unotifications.includes(slug)
+          ? this.unotifications.filter(n => n !== slug)
+          : [...this.unotifications, slug]
       },
       toggleAll () {
-        this.notifications = !this.archived
-          ? this.items.map(i => i.slug)
+        this.unotifications = !this.archived
+          ? this.notifications.map(i => i.slug)
           : []
       },
     },
