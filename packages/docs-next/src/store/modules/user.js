@@ -10,6 +10,7 @@ const state = {
     advanced: false,
     mini: false,
   },
+  notifications: [],
   rtl: false,
 }
 

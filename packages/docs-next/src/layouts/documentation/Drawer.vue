@@ -1,18 +1,22 @@
 <template>
   <v-navigation-drawer
+    id="documentation-drawer"
     v-model="drawer"
     :color="dark ? '#272727' : undefined"
     :right="rtl"
     app
-    clipped
     width="300"
   >
-    <v-fade-transition mode="out-in">
+    <template #prepend>
+      <documentation-control-panel />
+    </template>
+
+    <v-fade-transition hide-on-leave>
       <keep-alive>
         <documentation-list
           v-if="advanced"
           key="advanced"
-          :items="anav"
+          :items="advanced"
         />
 
         <documentation-list
@@ -22,6 +26,8 @@
         />
       </keep-alive>
     </v-fade-transition>
+
+    <div class="pt-12" />
   </v-navigation-drawer>
 </template>
 
@@ -32,18 +38,28 @@
   export default {
     name: 'DocumentationDrawer',
 
-    components: { DocumentationList: () => import('./List') },
+    components: {
+      DocumentationControlPanel: () => import(
+        /* webpackChunkName: "documentation-control-panel" */
+        './ControlPanel'
+      ),
+      DocumentationList: () => import(
+        /* webpackChunkName: "documentation-list" */
+        './List'
+      ),
+    },
 
     computed: {
+      drawer: sync('app/drawer'),
       ...get('user', [
         'drawer@advanced',
         'dark',
         'rtl',
       ]),
-      drawer: sync('app/drawer'),
-      advanced: get('user/drawer@advanced'),
-      anav: get('app/advanced'),
-      nav: get('app/nav'),
+      ...get('app', [
+        'advanced',
+        'nav',
+      ]),
     },
   }
 </script>

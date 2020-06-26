@@ -1,5 +1,5 @@
 <template>
-  <span class="v-app-tooltip-btn">
+  <span class="v-app-tooltip-btn d-inline-block">
     <v-tooltip
       bottom
       content-class="v-app-tooltip-btn__content"
