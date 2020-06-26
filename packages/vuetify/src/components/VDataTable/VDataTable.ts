@@ -466,6 +466,7 @@ export default mixins(
           headers: this.computedHeaders,
           item,
           rtl: this.$vuetify.rtl,
+          hideDefaultHeader: this.hideDefaultHeader,
         },
         scopedSlots,
         on: {

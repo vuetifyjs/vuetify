@@ -11,6 +11,7 @@ export default Vue.extend({
     headers: Array as PropType<DataTableHeader[]>,
     item: Object,
     rtl: Boolean,
+    hideDefaultHeader: Boolean,
   },
 
   render (h, { props, slots, data }): VNode {
@@ -42,7 +43,7 @@ export default Vue.extend({
         }, children),
       ]
 
-      if (header.value !== 'dataTableSelect') {
+      if (header.value !== 'dataTableSelect' && !props.hideDefaultHeader) {
         mobileRowChildren.unshift(
           h('div', {
             staticClass: 'v-data-table__mobile-row__header',
