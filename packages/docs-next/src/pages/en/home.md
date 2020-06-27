@@ -73,7 +73,7 @@ Help us build the new documentation by porting over existing pages:
     * **src/pages/en/\*\*** - This path contains the `.md` file you will be migrating data + structure to.
 
     <alert type="info">
-      I am working on the `Alerts` page so I will want to open the file: `src/lang/en/components/Alerts.md`
+      I am working on the `Alerts` page so I will want to open the file: `src/pages/en/components/Alerts.md`
     </alert>
 
 <alert type="info">
