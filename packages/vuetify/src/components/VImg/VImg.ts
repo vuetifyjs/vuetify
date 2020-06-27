@@ -99,7 +99,7 @@ export default mixins(
         }
     },
     __cachedImage (): VNode | [] {
-      if (!(this.normalisedSrc.src || this.normalisedSrc.lazySrc)) return []
+      if (!(this.normalisedSrc.src || this.normalisedSrc.lazySrc || this.gradient)) return []
 
       const backgroundImage: string[] = []
       const src = this.isLoading ? this.normalisedSrc.lazySrc : this.currentSrc
