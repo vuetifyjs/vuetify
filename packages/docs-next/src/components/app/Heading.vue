@@ -28,10 +28,10 @@
 
     data: () => ({
       map: {
-        1: 'text-h4 text-sm-h3 mb-4',
-        2: 'text-h5 text-sm-h4 mb-3',
-        3: 'text-h6 mb-2',
-        4: 'text-subtitle-1 mb-2',
+        1: 'text-h3 text-sm-h3 mb-4',
+        2: 'text-h4 text-sm-h4 mb-3',
+        3: 'text-h5 mb-2',
+        4: 'text-h6 mb-2',
       },
     }),
 

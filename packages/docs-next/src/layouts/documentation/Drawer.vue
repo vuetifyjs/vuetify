@@ -8,7 +8,7 @@
     width="300"
   >
     <template #prepend>
-      <documentation-control-panel />
+      <documentation-drawer-prepend />
     </template>
 
     <v-fade-transition hide-on-leave>
@@ -39,9 +39,9 @@
     name: 'DocumentationDrawer',
 
     components: {
-      DocumentationControlPanel: () => import(
-        /* webpackChunkName: "documentation-control-panel" */
-        './ControlPanel'
+      DocumentationDrawerPrepend: () => import(
+        /* webpackChunkName: "documentation-drawer-prepend" */
+        './DrawerPrepend'
       ),
       DocumentationList: () => import(
         /* webpackChunkName: "documentation-list" */

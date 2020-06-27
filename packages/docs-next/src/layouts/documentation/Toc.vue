@@ -8,9 +8,8 @@
     clipped
     width="192"
   >
-    <i18n
-      class="text-h6 font-weight-regular mb-4"
-      tag="h3"
+    <headline
+      class="mb-2"
       path="contents"
     />
 

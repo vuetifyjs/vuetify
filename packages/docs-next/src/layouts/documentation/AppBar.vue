@@ -16,13 +16,6 @@
 
     <v-btn
       icon
-      @click="advanced = !advanced"
-    >
-      <v-icon v-text="aicon" />
-    </v-btn>
-
-    <v-btn
-      icon
       @click="dark = !dark"
     >
       <v-icon>
@@ -103,18 +96,13 @@
 
     computed: {
       ...sync('user', [
-        'drawer@advanced',
         'dark',
         'rtl',
       ]),
       drawer: sync('app/drawer'),
       locale: get('route/params@locale'),
       translating: get('pages/translating'),
-      aicon () {
-        const icon = this.advanced ? 'Bool' : 'Alphabetical'
 
-        return `$mdiOrder${icon}Ascending`
-      },
       current () {
         return this.locales.find(l => l.locale === this.locale) || {}
       },

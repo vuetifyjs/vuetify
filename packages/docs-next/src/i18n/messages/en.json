@@ -27,5 +27,6 @@
   "themes": "Premium themes",
   "unread": "View Unread ({number})",
   "view-in-github": "View on @:github",
-  "view-source": "View source"
+  "view-source": "View source",
+  "vuetify": "Vuetify"
 }
