@@ -100,7 +100,6 @@ export default baseMixins.extend({
       resizeTimeout: 0,
       selectedIndex: null as null | number,
       tiles: [] as HTMLElement[],
-      onContentReadyOnce: () => {},
     }
   },
 
@@ -200,12 +199,6 @@ export default baseMixins.extend({
   },
 
   methods: {
-    setOnContentReadyOnce<T extends () => void>(onReady: T) {
-      this.onContentReadyOnce = () => {
-        this.$nextTick(onReady)
-        this.onContentReadyOnce = () => {}
-      }
-    },
     activate () {
       // Update coordinates and dimensions of menu
       // and its activator
@@ -302,7 +295,6 @@ export default baseMixins.extend({
     },
     genTransition (): VNode {
       const content = this.genContent()
-      this.onContentReadyOnce()
 
       if (!this.transition) return content
 
@@ -360,6 +352,11 @@ export default baseMixins.extend({
           keydown: this.onKeyDown,
         },
       } as VNodeData
+
+      if (this.$listeners.scroll) {
+        options.on = options.on || {}
+        options.on.scroll = this.$listeners.scroll
+      }
 
       if (!this.disabled && this.openOnHover) {
         options.on = options.on || {}

@@ -249,26 +249,6 @@ export default baseMixins.extend<options>().extend({
     },
     isMenuActive (val) {
       window.setTimeout(() => this.onMenuActiveChange(val))
-
-      if (!this.menuIsBooted) {
-        this.menuIsBooted = true
-        const handler = this.onScroll
-        const menu = this.$refs.menu
-        const addListener = () => {
-          const content = menu.$refs.content
-          if (content && content.addEventListener) {
-            content.addEventListener('scroll', handler, false)
-          }
-        }
-        this.$refs.menu.setOnContentReadyOnce(addListener)
-        // ;(function addListener () {
-        //   const content = menu.$refs.content
-        //   if (content && content.addEventListener) {
-        //     return content.addEventListener('scroll', handler, false)
-        //   }
-        //   menu.$once('hook:updated', addListener)
-        // })()
-      }
     },
     items: {
       immediate: true,
@@ -529,6 +509,7 @@ export default baseMixins.extend<options>().extend({
             this.isMenuActive = val
             this.isFocused = val
           },
+          scroll: this.onScroll,
         },
         ref: 'menu',
       }, [this.genList()])
