@@ -162,6 +162,7 @@ const VSelect = {
       example: {
         text: 'string | number | object',
         value: 'string | number | object',
+        disabled: 'boolean',
       },
       source: 'v-select',
     },
