@@ -163,6 +163,8 @@ const VSelect = {
         text: 'string | number | object',
         value: 'string | number | object',
         disabled: 'boolean',
+        divider: 'boolean',
+        header: 'string',
       },
       source: 'v-select',
     },
