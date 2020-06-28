@@ -3,6 +3,10 @@ meta:
   title: Button component
   description: The button component communicates actions that a user can take and are typically placed in dialogs, forms, cards and toolbars.
   keywords: buttons, vuetify button component, vue button component
+related:
+  - /components/button-groups/
+  - /components/icons/
+  - /components/floating-action-buttons/
 ---
 
 # Buttons
@@ -13,67 +17,91 @@ The `v-btn` component replaces the standard html button with a material design t
 
 ## Usage
 
-Usage text
+Buttons in their simplest form contain uppercase text, a slight elevation, hover effect, and a ripple effect on click.
 
-`<usage name="" />`
-- **name**: component name
-- eg: `<usage name="v-alert" />`
+<usage name="v-btn" />
 
 ## API
 
-- [API Page Link]()
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
+- [v-btn](../../api/v-btn)
+- [v-btn-toggle](../../api/v-btn-toggle)
 
 ## Caveats
 
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+<alert type="warning">
+  `v-btn` is the only component that behaves differently when using the **dark** prop. Normally components use the **dark** prop to denote that they have a dark colored background and need their text to be white. While this will work for `v-btn`, it is advised to only use the prop when the button **IS ON** a colored background due to the disabled state blending in with white backgrounds. If you need white text, simply add the **white--text** class.
+</alert>
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Block
 
-### Events
+Block buttons extend the full available width.
 
-Omit if none
+<example file="v-btn/prop-block" />
 
-### Slots
+#### Depressed
 
-Omit if none
+Depressed buttons still maintain their background color, but have no box shadow.
+
+<example file="v-btn/prop-depressed" />
+
+#### Floating
+
+Floating buttons are rounded and usually contain an icon.
+
+<example file="v-btn/prop-floating" />
+
+#### Icon
+
+Icons can be used for the primary content of a button.
+
+<example file="v-btn/prop-icon" />
+
+#### Loaders
+
+Using the loading prop, you can notify a user that there is processing taking place. The default behavior is to use a `v-progress-circular` component but this can be customized.
+
+<example file="v-btn/prop-loaders" />
+
+#### Outlined
+
+Outlined buttons inherit their borders from the current color applied.
+
+<example file="v-btn/prop-outlined" />
+
+#### Rounded
+
+Rounded buttons behave the same as regular buttons but have rounded edges.
+
+<example file="v-btn/prop-rounded" />
+
+#### Sizing
+
+Buttons can be given different sizing options to fit a multitude of scenarios.
+
+<example file="v-btn/prop-sizing" />
+
+#### Text
+
+Text buttons have no box shadow and no background. Only on hover is the container for the button shown.
+
+<example file="v-btn/prop-text" />
+
+#### Tile
+
+Tile buttons behave the same as regular buttons but have no border radius.
+
+<example file="v-btn/prop-tile" />
 
 ### Misc
 
-Omit if none
+#### Raised
 
-#### Example Header
+Raised buttons have a box shadow that increases when clicked. This is the default style.
 
-Example description
-
-`<example file="" />`
-- **file**: `<component>/<type>-<propname>`
-- eg: `<example file="v-alert/prop-colored-border" />`
-
-## Accessibility
-
-Accessibility text - omit if none
+<example file="v-btn/misc-raised" />
 
 <backmatter />
