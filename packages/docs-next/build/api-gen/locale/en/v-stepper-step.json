@@ -1,15 +1,15 @@
  {
   "props": {
-    "empty": ""
-    // add prop lang here
+    "empty": "",
+    "step": "Content to display inside step circle"
   },
   "slots": {
     "empty": ""
     // add slot lang here
   },
   "events": {
-    "empty": ""
-    // add event lang here
+    "empty": "",
+    "click": "Emitted when component is clicked"
   },
   "functions": {
     "empty": ""
