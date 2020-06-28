@@ -3,77 +3,86 @@ meta:
   title: Textarea component
   description: The textarea component is a text field that accepts lengthy textual input from users.
   keywords: textareas, vuetify textarea component, vue textarea component
+related:
+  - /components/forms/
+  - /components/selects/
+  - /components/text-fields/
 ---
 
 # Textareas
 
-Component description
+Textarea components are used for collecting large amounts of textual data.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+`v-textarea` in its simplest form is a multi-line text-field, useful for larger amounts of text.
 
-`<usage name="" />`
-- **name**: component name
-- eg: `<usage name="v-alert" />`
+<example file="v-textarea/usage" />
 
 ## API
 
-- [API Page Link]()
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-textarea](../../api/v-textarea)
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Auto grow
 
-### Events
+When using the `auto-grow` prop, textarea's will automatically increase in size when the contained text exceeds its size.
 
-Omit if none
+<example file="v-textarea/prop-auto-grow" />
 
-### Slots
+#### Background color
 
-Omit if none
+The `background-color` and `color` props give you more control over styling `v-textarea`'s.
+
+<example file="v-textarea/prop-background-color" />
+
+#### Browser autocomplete
+
+The `autocomplete` prop gives you the option to enable the browser to predict user input.
+
+<example file="v-textarea/prop-browser-autocomplete" />
+
+#### Clearable
+
+You can clear the text from a `v-textarea` by using the `clearable` prop, and customize the icon used with the `clearable-icon` prop.
+
+<example file="v-textarea/prop-clearable" />
+
+#### Counter
+
+The `counter` prop informs the user of a character limit for the `v-textarea`.
+
+<example file="v-textarea/prop-counter" />
+
+#### Icons
+
+The `append-icon` and `prepend-icon` props help add context to `v-textarea`.
+
+<example file="v-textarea/prop-icons" />
+
+#### No resize
+
+`v-textarea`'s have the option to remain the same size regardless of their content's size, using the `no-resize` prop.
+
+<example file="v-textarea/prop-no-resize" />
+
+#### Rows
+
+The `rows` prop allows you to define how many rows the textarea has, when combined with the `row-height` prop you can further customize your rows by defining their height.
+
+<example file="v-textarea/prop-rows" />
 
 ### Misc
 
-Omit if none
+#### Signup form
 
-#### Example Header
+Utilizing alternative input styles, you can create amazing interfaces that are easy to build and easy to use.
 
-Example description
-
-`<example file="" />`
-- **file**: `<component>/<type>-<propname>`
-- eg: `<example file="v-alert/prop-colored-border" />`
-
-## Accessibility
-
-Accessibility text - omit if none
+<example file="v-textarea/misc-signup-form" />
 
 <backmatter />
