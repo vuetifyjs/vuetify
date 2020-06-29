@@ -2,6 +2,7 @@
   <div class="mb-8">
     <a v-bind="adAttrs">
       <app-ad
+        v-if="current"
         v-bind="$attrs"
         class="v-vuetify-ad--promoted"
         compact
