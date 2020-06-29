@@ -5,6 +5,8 @@
       ...$attrs,
       ...$props,
     }"
+    comfortable
+    outlined
   >
     <v-list-item
       v-if="current"

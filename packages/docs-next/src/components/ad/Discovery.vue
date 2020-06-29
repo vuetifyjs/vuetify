@@ -1,9 +1,5 @@
 <template>
-  <vuetify-ad
-    comfortable
-    discover
-    outlined
-  />
+  <vuetify-ad discover />
 </template>
 
 <script>

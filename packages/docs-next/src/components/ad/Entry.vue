@@ -1,9 +1,18 @@
 <template>
   <div class="mb-8">
-    <carbon-ad />
+    <vuetify-ad
+      v-if="$attrs.slug"
+      :slug="$attrs.slug"
+    />
+
+    <carbon-ad v-else />
   </div>
 </template>
 
 <script>
-  export default { name: 'EntryAd' }
+  export default {
+    name: 'EntryAd',
+
+    inheritAttrs: false,
+  }
 </script>

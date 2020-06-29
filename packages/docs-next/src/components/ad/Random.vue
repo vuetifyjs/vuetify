@@ -1,8 +1,5 @@
 <template>
-  <vuetify-ad
-    comfortable
-    outlined
-  />
+  <vuetify-ad />
 </template>
 
 <script>
