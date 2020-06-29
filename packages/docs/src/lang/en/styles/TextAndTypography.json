@@ -3,7 +3,7 @@
   "headingText": "Control text size, alignment, wrapping, overflow, transforms and more.",
   "typographyHeader": "## Typography",
   "typographyText1": "Control the size and style of text using the Typography helper classes. These values are based upon the [Material Design type specification](https://material.io/design/typography/the-type-system.html).",
-  "typographyText2": "These classes can be applied to all breakpoints from `xs` to `xl`. When using a base class,`.text-{value}`, it is inferred to be `.text-${value}-xs`.",
+  "typographyText2": "These classes can be applied to all breakpoints from `xs` to `xl`. When using a base class,`.text-{value}`, it is inferred to be `.text-xs-${value}`.",
   "typographyFormats": [
     "`.text-{value}` for `xs`",
     "`.text-{breakpoint}-{value}` for `sm`, `md`, `lg` and `xl`"
