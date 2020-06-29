@@ -6,6 +6,7 @@ meta:
 ---
 
 # Vue and Vuetify jobs
+
 Component description
 
 <entry-ad />

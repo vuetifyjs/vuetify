@@ -22,6 +22,7 @@ The `v-app-bar` component is used for application-wide actions and information.
 <usage name="v-app-bar" />
 
 ## API
+
 - [v-app-bar](../../api/v-app-bar)
 - [v-app-bar-nav-icon](../../api/v-app-bar-nav-icon)
 
@@ -68,6 +69,7 @@ The background image of a `v-app-bar` can fade on scroll. Use the `fade-img-on-s
 <example file="v-app-bar/prop-img-fade" />
 
 #### Hiding on scroll
+
 `v-app-bar` can be hidden on scroll. Use the `hide-on-scroll` property for this.
 
 <example file="v-app-bar/prop-hide" />

@@ -6,6 +6,7 @@ meta:
 ---
 
 # Sponsors and backers
+
 Component description
 
 <entry-ad />

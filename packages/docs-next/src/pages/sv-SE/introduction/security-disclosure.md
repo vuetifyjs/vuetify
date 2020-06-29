@@ -7,6 +7,7 @@ nav: Security disclosure
 ---
 
 # Security disclosure procedures
+
 Component description
 
 <entry-ad />

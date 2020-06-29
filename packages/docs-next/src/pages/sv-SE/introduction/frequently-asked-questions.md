@@ -6,6 +6,7 @@ meta:
 ---
 
 # Frequently asked questions
+
 Component description
 
 <entry-ad />

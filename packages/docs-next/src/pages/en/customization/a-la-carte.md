@@ -86,7 +86,9 @@ When you import from `vuetify/lib` the baseline framework styles are pulled in a
 ```bash
 yarn add sass sass-loader fibers deepmerge -D
 ```
+
 OR
+
 ```bash
 npm install sass sass-loader fibers deepmerge -D
 ```

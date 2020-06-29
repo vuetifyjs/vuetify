@@ -6,6 +6,7 @@ meta:
 ---
 
 # Theme
+
 Component description
 
 <promoted-ad slug="vuemastery-themes" />

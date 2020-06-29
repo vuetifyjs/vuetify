@@ -6,6 +6,7 @@ meta:
 ---
 
 # Breakpoints
+
 Component description
 
 <entry-ad />

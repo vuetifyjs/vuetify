@@ -6,6 +6,7 @@ meta:
 ---
 
 # Internationalization (i18n)
+
 Component description
 
 <entry-ad />

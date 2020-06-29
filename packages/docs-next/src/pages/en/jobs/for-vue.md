@@ -7,6 +7,7 @@ nav: Jobs for Vue
 ---
 
 # Vue and Vuetify jobs
+
 Component description
 
 <entry-ad />

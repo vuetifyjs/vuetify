@@ -7,6 +7,7 @@ related:
 ---
 
 # Frequently asked questions
+
 Stuck on a particular problem? Check some of these common gotchas before creating a ticket. If you still cannot find what you are looking for, you can submit an [issue](https://issues.vuetifyjs.com/) on Github or ask the in our [community](https://community.vuetifyjs.com/).
 
 <entry-ad />
@@ -68,7 +69,6 @@ module.exports = {
 
 <br>
 
-
 * **Invalid CSS after @content: expected "}", was "($material-light);".**
 
   Ensure that you are using `sass` instead of `node-sass` in your **package.json**.
@@ -81,7 +81,7 @@ module.exports = {
 
 <br>
 
-* **I am receiving an err similar to the following:<br>**$attrs is readonly** and/or **$listeners is readonly** in the console.**
+* **I am receiving an err similar to the following:<br>`$attrs is readonly` and/or `$listeners is readonly` in the console.**
 
   Vuetify utilizes Typescript and currently must import and extend the Vue object. This has the potential in some applications to generate a warning messages. There is currenty an on-going [Github discussion](https://github.com/vuetifyjs/vuetify/issues/4068) with potential work-arounds in a variety of use-cases. If you have additional questions please join us in our [online community](https://community.vuetifyjs.com).
 
@@ -279,6 +279,7 @@ export default {
 ```
 
 ## I Need Help
+
 If you need help with an issue, please use one of our help channels:
 
 * [Vuetify Professional Support](/professional-support/consulting/)

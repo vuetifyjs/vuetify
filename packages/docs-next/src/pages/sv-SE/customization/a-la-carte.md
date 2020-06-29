@@ -6,6 +6,7 @@ meta:
 ---
 
 # A-la-carte (treeshaking)
+
 Component description
 
 <entry-ad />

@@ -6,6 +6,7 @@ meta:
 ---
 
 # Premium & free themes
+
 Component description
 
 <entry-ad />

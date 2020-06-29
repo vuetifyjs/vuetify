@@ -8,6 +8,8 @@
     "dev": "yarn serve",
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
+    "lint:md": "markdownlint --config .markdownlintrc src/pages/en",
+    "fix:md": "markdownlint --config .markdownlintrc src/pages/en --fix",
     "prod": "http-server dist --proxy http://localhost:8080/?"
   },
   "dependencies": {
@@ -50,6 +52,7 @@
     "markdown-it-attrs": "^3.0.2",
     "markdown-it-header-sections": "^1.0.0",
     "markdown-it-prism": "^2.0.5",
+    "markdownlint-cli": "^0.23.1",
     "marked": "^1.1.0",
     "minify-css-string": "^1.0.0",
     "raw-loader": "^4.0.1",

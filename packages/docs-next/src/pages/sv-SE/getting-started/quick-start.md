@@ -34,6 +34,7 @@ vue add vuetify
 ```
 
 ### Vue UI install
+
 Vuetify can also be installed using **Vue UI**, the new visual application for Vue CLI. Ensure that you have the latest version of Vue CLI installed, then from your terminal type:
 
 ```bash
@@ -49,6 +50,7 @@ This will start the Vue User Interface and open a [new window]() in your browser
 ![Install Vuetify Plugin](https://cdn.vuetifyjs.com/images/quick-start/vue_ui.png "Vue UI Vuetify Plugin")
 
 ## Nuxt install
+
 Vuetify can be added by installing the Nuxt Vuetify module.
 
 ```bash
@@ -58,7 +60,6 @@ npm install @nuxtjs/vuetify -D
 ```
 
 Once installed, update your nuxt.config.js file to include the Vuetify module in the build.
-
 
 ```js
 // nuxt.config.js
@@ -76,6 +77,7 @@ Once installed, update your nuxt.config.js file to include the Vuetify module in
 More information on installing Nuxt can be found on the official documentation.
 
 ## Webpack install
+
 To install Vuetify into a Webpack project you need to add a few dependencies:
 
 ```bash
@@ -91,7 +93,6 @@ npm install sass sass-loader fibers deepmerge -D
 ```
 
 Once installed, locate your webpack.config.js file and copy the snippet below into the rules array. If you have an existing sass rule configured, you may need to apply some or all of the changes below. If you are you looking to utilize the vuetify-loader for treeshaking, ensure that you are on version >=4 of Webpack. You can find more information on setting it up with webpack on the A-la-carte page.
-
 
 ```js
 // webpack.config.js
@@ -171,6 +172,7 @@ new Vue({
 ```
 
 ### Font installation
+
 Vuetify uses Google's Roboto font and Material Design Icons. The simplest way to install these are to include their CDN's in your main index.html.
 
 ```html
@@ -179,6 +181,7 @@ Vuetify uses Google's Roboto font and Material Design Icons. The simplest way to
 ```
 
 ## CDN usage
+
 To test using Vuetify.js without installing a template from Vue CLI, copy the code below into your index.html. This will pull the latest version of Vue and Vuetify, allowing you to start playing with components. You can also use the Vuetify starter on codepen. While not recommended, if you need to utilize the cdn packages in a production environment, it is recommended that you scope the versions of your assets. For more information on how to do this, navigate to the jsdelivr website.
 
 <alert type="info">In order for your application to work properly, you must wrap it in a v-app component. See the Application component page for more information.</alert>
@@ -214,6 +217,7 @@ To test using Vuetify.js without installing a template from Vue CLI, copy the co
 ```
 
 ## Usage with Electron
+
 To use Vuetify with Electron, add the electron-builder plugin via Vue CLI.
 
 ```bash
@@ -226,6 +230,7 @@ yarn electron:serve
 ```
 
 ## Usage with PWA
+
 If you are creating a new app with Vue CLI, you have the option to select Progressive Web App (PWA) Support in the first prompt after initiating vue create my-app. This package can also be installed into existing Vue CLI projects by entering the following command:
 
 ```bash
@@ -233,6 +238,7 @@ vue add pwa
 ```
 
 ## Usage with Cordova
+
 To use Vuetify with Cordova, add the Cordova plugin via Vue CLI:
 
 ```bash
@@ -252,6 +258,7 @@ yarn cordova-build-browser # Build Browser
 ```
 
 ## Usage with Capacitor
+
 To use Vuetify with **Capacitor**, add the [Capacitor]() plugin via Vue CLI:
 
 ```bash

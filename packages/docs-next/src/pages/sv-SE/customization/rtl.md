@@ -6,6 +6,7 @@ meta:
 ---
 
 # RTL (bidirectionality)
+
 Component description
 
 <entry-ad />

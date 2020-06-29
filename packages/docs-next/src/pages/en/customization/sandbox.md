@@ -6,6 +6,7 @@ meta:
 ---
 
 # Component Name
+
 Component description
 
 <entry-ad />

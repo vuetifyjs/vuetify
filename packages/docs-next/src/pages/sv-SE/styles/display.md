@@ -6,6 +6,7 @@ meta:
 ---
 
 # CSS Display helpers
+
   description: Display helper classes allow you to control when elements should display based upon viewport. keywords: display helper classes, display classes, vuetify display Component description
 
 <entry-ad />
@@ -15,6 +16,7 @@ meta:
 Usage text
 
 `<usage name="" />`
+
 - **name**: component name
 - eg: `<usage name="v-alert" />`
 
@@ -68,6 +70,7 @@ Omit if none
 Example description
 
 `<example file="" />`
+
 - **file**: `<component>/<type>-<propname>`
 - eg: `<example file="v-alert/prop-colored-border" />`
 

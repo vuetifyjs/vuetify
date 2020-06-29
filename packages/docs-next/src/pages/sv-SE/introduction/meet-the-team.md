@@ -6,6 +6,7 @@ meta:
 ---
 
 # Meet the team
+
 Component description
 
 <entry-ad />

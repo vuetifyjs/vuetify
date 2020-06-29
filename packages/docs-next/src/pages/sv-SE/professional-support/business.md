@@ -6,6 +6,7 @@ meta:
 ---
 
 # Vuetify for business
+
 Component description
 
 <entry-ad />

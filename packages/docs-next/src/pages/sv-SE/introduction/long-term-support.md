@@ -6,6 +6,7 @@ meta:
 ---
 
 # Long-term support
+
 Component description
 
 <entry-ad />

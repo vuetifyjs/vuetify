@@ -11,6 +11,7 @@ related:
 ---
 
 # Security disclosure procedures
+
 This document outlines security procedures and general policies for the Vuetify project.
 
 <entry-ad />

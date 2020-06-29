@@ -6,6 +6,7 @@ meta:
 ---
 
 # SASS variables
+
 Component description
 
 <entry-ad />

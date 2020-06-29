@@ -10,6 +10,7 @@ related:
 ---
 
 # CSS Reset
+
 Opinionated base styles for Vuetify projects.
 
 <entry-ad />
@@ -40,6 +41,7 @@ These styles are automatically imported within **src/styles/generic/_reset.scss*
 ```
 
 ## Reset Features
+
 Below is a list of additional *features* that ress provides over the default **normalize.css** functionality
 
 * Apply `box-sizing: border-box;` in all elements.

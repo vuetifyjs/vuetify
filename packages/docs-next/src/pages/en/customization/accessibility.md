@@ -6,6 +6,7 @@ meta:
 ---
 
 # Accessibility
+
 Component description
 
 <entry-ad />

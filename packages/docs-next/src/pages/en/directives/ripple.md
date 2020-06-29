@@ -43,7 +43,6 @@ Using a helper class, you can change the color of the ripple.
 
 <example file="v-ripple/misc-custom-color" />
 
-
 #### Ripple in components
 
 Some components provide the `ripple` prop that allows you to control the ripple effect. You can turn it off or customize the behaviour by using `class` or `center` options.

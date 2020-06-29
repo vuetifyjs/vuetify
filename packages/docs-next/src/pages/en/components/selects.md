@@ -16,12 +16,12 @@ Component description
 Usage text
 
 `<usage name="" />`
-- **name**: component name
-- eg: `<usage name="v-alert" />`
+**name**: component name
+eg: `<usage name="v-alert" />`
 
 ## API
 
-- [API Page Link]()
+- [API Page Link](../../api/v-component)
 
 ## Sub-Components
 
@@ -69,8 +69,8 @@ Omit if none
 Example description
 
 `<example file="" />`
-- **file**: `<component>/<type>-<propname>`
-- eg: `<example file="v-alert/prop-colored-border" />`
+**file**: `<component>/<type>-<propname>`
+eg: `<example file="v-alert/prop-colored-border" />`
 
 ## Accessibility
 

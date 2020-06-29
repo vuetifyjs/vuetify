@@ -6,6 +6,7 @@ meta:
 ---
 
 # Pre-made layouts
+
 Component description
 
 <entry-ad />
