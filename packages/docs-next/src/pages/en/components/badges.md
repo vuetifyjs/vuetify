@@ -31,17 +31,11 @@ Below is a collection of simple to complex examples.
 
 ### Misc
 
-#### Tabs
+#### Customization options
 
-Badges help convey information to the user in a variety of ways.
+The `v-badge` component is flexible and can be used in a variety of use-cases over numerous elements. Options to tweak the location are also available through the **offset-x** and **offset-y** props."
 
-<example file="v-badge/misc-tabs" />
-
-#### Show on hover
-
-You can do many things with visibility control, for example, show badge on hover.
-
-<example file="v-badge/misc-hover" />
+<example file="v-badge/misc-customization" />
 
 #### Dynamic notifications
 
@@ -49,10 +43,16 @@ You can incorporate badges with dynamic content to make things such as a notific
 
 <example file="v-badge/misc-dynamic" />
 
-#### Customization options
+#### Show on hover
 
-The `v-badge` component is flexible and can be used in a variety of use-cases over numerous elements. Options to tweak the location are also available through the **offset-x** and **offset-y** props."
+You can do many things with visibility control, for example, show badge on hover.
 
-<example file="v-badge/misc-customization" />
+<example file="v-badge/misc-hover" />
+
+#### Tabs
+
+Badges help convey information to the user in a variety of ways.
+
+<example file="v-badge/misc-tabs" />
 
 <backmatter />

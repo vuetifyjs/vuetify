@@ -45,17 +45,17 @@ Vertical dividers give you more tools for unique layouts.
 
 ### Misc
 
-#### Subheaders
-
-Dividers and subheaders can help break up content and can optionally line up with one another by using the same `inset` prop.
-
-<example file="v-divider/misc-subheaders" />
-
 #### Portrait View
 
 Create custom cards to fit any use-case.
 
 <example file="v-divider/misc-portrait-view" />
+
+#### Subheaders
+
+Dividers and subheaders can help break up content and can optionally line up with one another by using the same `inset` prop.
+
+<example file="v-divider/misc-subheaders" />
 
 ## Accessibility
 

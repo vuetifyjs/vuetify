@@ -33,29 +33,29 @@ The `v-img` component is packed with features to support rich media. Combined wi
 
 ### Props
 
-#### Contain and Cover
-
-If the provided aspect ratio doesn't match that of the actual image, the default behavior is to fill as much space as possible, clipping the sides of the image. Enabling the `contain` prop will prevent this, but will result in empty space at the sides.
-
-<example file="v-img/prop-contain" />
-
-#### Height
-
-`v-img` will automatically grow to the size of its `src`, preserving the correct aspect ratio. You can limit this with the `height` and `max-height` props.
-
-<example file="v-img/prop-max-height" />
-
-#### Fixed ratio
+#### Aspect ratio
 
 You can set a fixed aspect ratio if you want to change aspect ratio of the image.
 
 <example file="v-img/prop-aspect-ratio" />
+
+#### Contain
+
+If the provided aspect ratio doesn't match that of the actual image, the default behavior is to fill as much space as possible, clipping the sides of the image. Enabling the `contain` prop will prevent this, but will result in empty space at the sides.
+
+<example file="v-img/prop-contain" />
 
 #### Gradients
 
 The `gradient` prop can be used to apply a simple gradient overlay to the image. More complex gradients should be written as a class on the content slot instead.
 
 <example file="v-img/prop-gradient" />
+
+#### Height
+
+`v-img` will automatically grow to the size of its `src`, preserving the correct aspect ratio. You can limit this with the `height` and `max-height` props.
+
+<example file="v-img/prop-max-height" />
 
 ### Slots
 

@@ -35,6 +35,12 @@ You can add a counter to `v-overflow-btn` to control the max char count
 
 <example file="v-overflow-btn/prop-counter" />
 
+#### Dense
+
+You can use `dense` prop to reduce overflow button height and lower max height of list items.
+
+<example file="v-overflow-btn/prop-dense" />
+
 #### Disabled
 
 `v-overflow-btn` can be disabled in order to prevent a user from interacting with it
@@ -71,7 +77,7 @@ You can set underlying `v-menu` props using `menu-props` property
 
 <example file="v-overflow-btn/prop-menu-props" />
 
-#### Read-only
+#### Readonly
 
 `v-overflow-btn` can be put into `readonly` mode, it'll become inactive but won't change the color
 
@@ -82,11 +88,5 @@ You can set underlying `v-menu` props using `menu-props` property
 `segmented` `v-overflow-btn` has and additional divider between the content and the icon
 
 <example file="v-overflow-btn/prop-segmented" />
-
-#### Dense
-
-You can use `dense` prop to reduce overflow button height and lower max height of list items.
-
-<example file="v-overflow-btn/prop-dense" />
 
 <backmatter />

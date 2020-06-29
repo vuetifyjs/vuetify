@@ -85,18 +85,17 @@ The **transition** prop allows you to apply a transition to the alert which is v
 
 <example file="v-alert/prop-transition" />
 
-#### Type
-
-The **type** prop provides 4 default `v-alert` styles: **success**, **info**, **warning**, and **error**. Each of these styles provide a default icon and color. The default colors can be configured globally by customizing [Vuetify's theme](/customization/theme).
-
-<example file="v-alert/prop-type" />
-
-
 #### Twitter
 
 By combining **color**, **dismissible**, **border**, **elevation**, **icon**, and **colored-border** props you can create stylish custom alerts such as this twitter notification.
 
 <example file="v-alert/misc-twitter" />
+
+#### Type
+
+The **type** prop provides 4 default `v-alert` styles: **success**, **info**, **warning**, and **error**. Each of these styles provide a default icon and color. The default colors can be configured globally by customizing [Vuetify's theme](/customization/theme).
+
+<example file="v-alert/prop-type" />
 
 ## Accessibility
 

@@ -29,47 +29,23 @@ Time pickers have the light theme enabled by default.
 
 ### Props
 
-#### Colors
-
-Time picker colors can be set using the `color` and `header-color` props. If `header-color` prop is not provided  header will use the `color` prop value."
-
-<example file="v-time-picker/prop-color" />
-
-#### 24h format
-
-A time picker can be switched to 24hr format. Note that the `format` prop defines only the way the picker is displayed, picker's value (model) is always in 24hr format.
-
-<example file="v-time-picker/prop-format" />
-
 #### Allowed times
 
 You can specify allowed times using arrays, objects, and functions. You can also specify time step/precision/interval - e.g. 10 minutes.
 
 <example file="v-time-picker/prop-allowed-times" />
 
-#### Setting picker width
-
-You can specify allowed the picker's width or make it full width.
-
-<example file="v-time-picker/prop-width" />
-
-#### AM/PM switch in title
+#### AMPM in title
 
 You can move AM/PM switch to picker's title.
 
 <example file="v-time-picker/prop-ampm-in-title" />
 
-#### Picker's elevation
+#### Colors
 
-Emphasize the `v-time-picker` component by providing an **elevation** from 0 to 24. Elevation modifies the `box-shadow` css property.
+Time picker colors can be set using the `color` and `header-color` props. If `header-color` prop is not provided  header will use the `color` prop value."
 
-<example file="v-time-picker/prop-elevation" />
-
-#### No title
-
-You can remove picker's title.
-
-<example file="v-time-picker/prop-no-title" />
+<example file="v-time-picker/prop-color" />
 
 #### Disabled
 
@@ -77,23 +53,23 @@ You can't interact with disabled picker.
 
 <example file="v-time-picker/prop-disabled" />
 
-#### Read-only
+#### Elevation
 
-Read-only picker behaves same as disabled one, but looks like default one.
+Emphasize the `v-time-picker` component by providing an **elevation** from 0 to 24. Elevation modifies the `box-shadow` css property.
 
-<example file="v-time-picker/prop-readonly" />
+<example file="v-time-picker/prop-elevation" />
 
-#### With seconds
+#### Format
 
-Time picker can have seconds input.
+A time picker can be switched to 24hr format. Note that the `format` prop defines only the way the picker is displayed, picker's value (model) is always in 24hr format.
 
-<example file="v-time-picker/prop-use-seconds" />
+<example file="v-time-picker/prop-format" />
 
-#### Scrollable
+#### No title
 
-You can edit time picker's value using mouse wheel.
+You can remove picker's title.
 
-<example file="v-time-picker/prop-scrollable" />
+<example file="v-time-picker/prop-no-title" />
 
 #### Range
 
@@ -101,9 +77,33 @@ This is an example of joining pickers together using `min` and `max` prop.
 
 <example file="v-time-picker/prop-range" />
 
+#### Read-only
+
+Read-only picker behaves same as disabled one, but looks like default one.
+
+<example file="v-time-picker/prop-readonly" />
+
+#### Scrollable
+
+You can edit time picker's value using mouse wheel.
+
+<example file="v-time-picker/prop-scrollable" />
+
+#### Use seconds
+
+Time picker can have seconds input.
+
+<example file="v-time-picker/prop-use-seconds" />
+
+#### Width
+
+You can specify allowed the picker's width or make it full width.
+
+<example file="v-time-picker/prop-width" />
+
 ### Misc
 
-#### In dialog and menu
+#### Dialog and menu
 
 Due to the flexibility of pickers, you can really dial in the experience exactly how you want it.
 

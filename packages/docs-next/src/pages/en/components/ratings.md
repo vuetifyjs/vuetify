@@ -29,19 +29,13 @@ The `v-rating` component provides a simple interface for gathering user feedback
 
 ### Props
 
-#### Size variants
-
-Utilize the same sizing classes available in `v-icon` or provide your own with the **size** prop.
-
-<example file="v-rating/prop-size" />
-
 #### Color
 
 The `v-rating` component can be colored as you want, you can set both selected and not selected colors.
 
 <example file="v-rating/prop-color" />
 
-#### Custom length
+#### Length
 
 Sometimes an application will call for a customized implementation. Easily change length or displayed icons.
 
@@ -53,6 +47,12 @@ A rating can have 3 defined icons, **full-icon**, **half-icon** (with the **half
 
 <example file="v-rating/prop-half-increments" />
 
+#### Size
+
+Utilize the same sizing classes available in `v-icon` or provide your own with the **size** prop.
+
+<example file="v-rating/prop-size" />
+
 ### Slots
 
 #### Item slot
@@ -63,16 +63,16 @@ Slots are provided to give you even more freedom in how you display the rating.
 
 ### Misc
 
-#### Card ratings
-
-The rating component pairs well with products allowing you to gather and display customer feedback.
-
-<example file="v-rating/misc-card" />
-
 #### Advanced usage
 
 The `v-rating` component fits right in with existing components. Build truly complex examples with rich features and beautiful designs.
 
 <example file="v-rating/misc-advanced" />
+
+#### Card ratings
+
+The rating component pairs well with products allowing you to gather and display customer feedback.
+
+<example file="v-rating/misc-card" />
 
 <backmatter />

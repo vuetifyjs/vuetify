@@ -61,6 +61,12 @@ When using the **elevate-on-scroll** prop, the `v-app-bar` will rest at an eleva
 
 <example file="v-app-bar/prop-elevate-on-scroll" />
 
+#### Fade image on scroll
+
+The background image of a `v-app-bar` can fade on scroll. Use the `fade-img-on-scroll` property for this.
+
+<example file="v-app-bar/prop-img-fade" />
+
 #### Hiding on scroll
 `v-app-bar` can be hidden on scroll. Use the `hide-on-scroll` property for this.
 
@@ -71,12 +77,6 @@ When using the **elevate-on-scroll** prop, the `v-app-bar` will rest at an eleva
 `v-app-bar` can contain background images. You can set source via the `src` prop. If you need to customize the `v-img` properties, the app-bar provides you with an **img** slot.
 
 <example file="v-app-bar/prop-img" />
-
-#### Fade image on scroll
-
-The background image of a `v-app-bar` can fade on scroll. Use the `fade-img-on-scroll` property for this.
-
-<example file="v-app-bar/prop-img-fade" />
 
 #### Inverted scrolling
 
@@ -104,7 +104,7 @@ Using the functional component `v-app-bar-nav-icon` you can toggle the state of 
 
 <example file="v-app-bar/misc-app-bar-nav" />
 
-#### With menu
+#### Menu
 
 You can easily extend the functionality of app bar by adding `VMenu` there. Click on last icon to see it in action.
 
