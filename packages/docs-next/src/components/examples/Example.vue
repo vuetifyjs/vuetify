@@ -81,6 +81,7 @@
         <v-sheet
           v-if="file"
           class="pa-4"
+          rounded="b"
           @mouseenter.once="importTemplate"
         >
           <vue-file
