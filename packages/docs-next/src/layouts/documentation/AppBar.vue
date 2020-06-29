@@ -12,7 +12,7 @@
       @click="drawer = !drawer"
     />
 
-    <v-spacer />
+    <default-search />
 
     <v-btn
       icon
@@ -91,6 +91,10 @@
 
   export default {
     name: 'DocumentationBar',
+
+    components: {
+      DefaultSearch: () => import('@/layouts/default/Search'),
+    },
 
     data: () => ({ locales }),
 
