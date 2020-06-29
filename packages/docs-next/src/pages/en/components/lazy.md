@@ -3,77 +3,32 @@ meta:
   title: Lazy component
   description: The lazy component allows you to dynamically render content based upon the user's viewport.
   keywords: lazy loading
+related:
+  - /components/badges/
+  - /components/icons/
+  - /components/lists/
 ---
 
-# Lazy loading
+# Lazy
 
-Component description
+The `v-lazy` component is used to dynamically load components based upon an elements visibility.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+The `v-lazy` component by default will not render its contents until it has been intersected. Scroll down and watch the element render as you go past it.
 
-`<usage name="" />`
-- **name**: component name
-- eg: `<usage name="v-alert" />`
+<example file="v-lazy/usage" />
 
 ## API
 
-- [API Page Link]()
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
+- [v-lazy](../../api/v-lazy)
 
 ## Caveats
 
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
-
-## Examples
-
-Example text.
-
-### Props
-
-Omit if none
-
-### Events
-
-Omit if none
-
-### Slots
-
-Omit if none
-
-### Misc
-
-Omit if none
-
-#### Example Header
-
-Example description
-
-`<example file="" />`
-- **file**: `<component>/<type>-<propname>`
-- eg: `<example file="v-alert/prop-colored-border" />`
-
-## Accessibility
-
-Accessibility text - omit if none
+<alert type="info">
+  The `v-lazy` component uses the [v-intersect](/directives/intersect) directive which requires a [Polyfill](/directives/intersect#polyfill) in order to work on IE11 / Safari. It's possible on some iOS versions will also require the use of this polyfill.
+</alert>
 
 <backmatter />
