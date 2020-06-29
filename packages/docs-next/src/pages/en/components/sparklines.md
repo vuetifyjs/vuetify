@@ -3,77 +3,60 @@ meta:
   title: Sparkline component
   description: The sparkline component creates beautiful and expressive simple graphs for displaying numerical data.
   keywords: sparklines, vuetify sparkline component, vue sparkline component, sparkline, graph, chart, line
+related:
+  - /components/cards/
+  - /components/sheets/
+  - /components/expansion-panels/
 ---
 
 # Sparklines
 
-Component description
+The sparkline component can be used to create simple graphs, like GitHub's contribution chart.
+
+Any [SVG attribute](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute) may be used in addition to the ones listed below.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+A sparkline is a tiny chart that provides a visual representation of data.
 
-`<usage name="" />`
-- **name**: component name
-- eg: `<usage name="v-alert" />`
+The sparkline component comes in 2 variations, **trend**(default) and **bar**. Each support a multitude of options for customizing the look and feel of the sparkline.
+
+<example file="v-sparkline/usage" />
 
 ## API
 
-- [API Page Link]()
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-sparkline](../../api/v-sparkline)
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Fill
 
-### Events
+You can create a `v-sparkline` with fill using the `fill` property.
 
-Omit if none
-
-### Slots
-
-Omit if none
+<example file="v-sparkline/prop-fill" />
 
 ### Misc
 
-Omit if none
+#### Custom labels
 
-#### Example Header
+By providing a **label** slot, we are able to modify the displayed content adding a dollar sign ($). This slot is **_exclusively_** for text content. For more information on the svg `<text>` element, [navigate here](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text).
 
-Example description
+<example file="v-sparkline/misc-custom-labels" />
 
-`<example file="" />`
-- **file**: `<component>/<type>-<propname>`
-- eg: `<example file="v-alert/prop-colored-border" />`
+#### Dashboard card
 
-## Accessibility
+The `v-sparkline` component pairs nicely with `v-card` and `v-sheet` to create customized information cards, perfect for admin dashboards. Here we use custom labels to provide additional context for the sparkline.
 
-Accessibility text - omit if none
+<example file="v-sparkline/misc-dashboard-card" />
+
+#### Heart rate
+
+For concise information, a complete chart might be overkill. Using a trend line with gradient provides enough detail for the user without showing too much information.
+
+<example file="v-sparkline/misc-heart-rate" />
 
 <backmatter />
