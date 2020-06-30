@@ -1,7 +1,7 @@
 @import '../../styles/styles.sass';
 
 $color-picker-border-radius: $border-radius-root !default;
-$color-picker-checkerboard: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGElEQVQYlWNgYGCQwoKxgqGgcJA5h3yFAAs8BRWVSwooAAAAAElFTkSuQmCC) repeat;
+$color-picker-checkerboard: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGElEQVQYlWNgYGCQwoKxgqGgcJA5h3yFAAs8BRWVSwooAAAAAElFTkSuQmCC) repeat !default;
 $color-picker-swatch-color-width: 45px !default;
 $color-picker-swatch-color-height: 18px !default;
 $color-picker-swatch-color-margin: 2px 4px !default;
