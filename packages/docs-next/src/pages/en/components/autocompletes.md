@@ -3,77 +3,86 @@ meta:
   title: Autocomplete component
   description: The autocomplete component provides type-ahead autocomplete functionality and provides a list of available options.
   keywords: autocomplete, vuetify autocomplete component, vue autocomplete component
+related:
+  - /components/combobox/
+  - /components/forms/
+  - /components/selects/
 ---
 
 # Autocompletes
 
-Component description
+The `v-autocomplete` component offers simple and flexible type-ahead functionality. This is useful when searching large sets of data or even dynamically requesting information from an API.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+The autocomplete component extends `v-select` and adds the ability to filter items.
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<usage name="v-autocomplete" />
 
 ## API
 
-- [API Page Link](../../api/v-component)
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
+- [v-autocomplete](../../api/v-autocomplete)
 
 ## Caveats
 
-Omit if none
+<alert type="error">When using objects for the **items** prop, you must associate **item-text** and **item-value** with existing properties on your objects. These values are defaulted to **text** and **value** and can be changed.</alert>
 
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+<alert type="warning">The **auto** property of **menu-props** is only supported for the default input style.</alert>
+
+<alert type="info">Browser autocomplete is set to off by default, may vary by browser and may be ignored. [MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion)</alert>
 
 ## Examples
 
-Example text.
+Below is a collection of simple to complex examples.
 
 ### Props
 
-Omit if none
+#### Dense
 
-### Events
+You can use `dense` prop to reduce autocomplete height and lower max height of list items.
 
-Omit if none
+<example file="v-autocomplete/prop-dense" />
+
+#### Filter
+
+The `filter` prop can be used to filter each individual item with custom logic. In this example we filter items by name.
+
+<example file="v-autocomplete/prop-filter" />
 
 ### Slots
 
-Omit if none
+#### Item and selection
+
+With the power of slots, you can customize the visual output of the select. In this example we add a profile picture for both the chips and list items.
+
+<example file="v-autocomplete/slot-item-and-selection" />
 
 ### Misc
 
-Omit if none
+#### API search
 
-#### Example Header
+Easily hook up dynamic data and create a unique experience. The `v-autocomplete`'s expansive prop list makes it easy to fine tune every aspect of the input.
 
-Example description
+<example file="v-autocomplete/misc-api-search" />
 
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
+#### Asynchronous items
 
-## Accessibility
+Sometimes you need to load data externally based upon a search query. Use the `search-input` prop with the **.sync** modifier when using the `autocomplete` prop. We also make use of the new `cache-items` prop. This will keep a unique list of all items that have been passed to the `items` prop and is **REQUIRED** when using asynchronous items and the **multiple** prop.
 
-Accessibility text - omit if none
+<example file="v-autocomplete/misc-asynchronous-items" />
+
+#### Cryptocurrency selector
+
+The `v-autocomplete` component is extremely flexible and can fit in just about any use-case. Create custom displays for **no-data**, **item** and **selection** slots to provide a unique user experience. Using _slots_ enables you to easily customize the desired look for your application.
+
+<example file="v-autocomplete/misc-cryptocurrency-selector" />
+
+#### State selector
+
+Using a combination of `v-autocomplete` slots and transitions, you can create a stylish toggleable autocomplete field such as this state selector.
+
+<example file="v-autocomplete/misc-state-selector" />
 
 <backmatter />
