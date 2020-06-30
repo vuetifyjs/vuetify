@@ -27,8 +27,6 @@ Dividers in their simplest form display a horizontal line.
 
 ## Examples
 
-Below is a collection of simple to complex examples.
-
 ### Props
 
 #### Inset

@@ -40,8 +40,6 @@ A styled icon button component created specifically for use with [v-toolbar](/co
 
 ## Examples
 
-Below is a collection of examples.
-
 ### Props
 
 #### Collapsible bars

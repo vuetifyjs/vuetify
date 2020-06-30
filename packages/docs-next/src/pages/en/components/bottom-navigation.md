@@ -27,8 +27,6 @@ While the bottom nav is meant to be used with the [vue-router](https://router.vu
 
 ## Examples
 
-Below is a collection of simple to complex examples.
-
 ### Props
 
 #### Color

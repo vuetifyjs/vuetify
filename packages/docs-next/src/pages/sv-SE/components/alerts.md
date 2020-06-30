@@ -19,8 +19,6 @@ Alerts in their simplest form are a flat [sheets of paper](/components/sheets) t
 
 ## Examples
 
-Below is a collection of simple to complex examples.
-
 ### Props
 
 #### border

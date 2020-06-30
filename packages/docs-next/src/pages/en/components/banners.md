@@ -27,8 +27,6 @@ Banners can have 1-2 lines of text, actions and icon.
 
 ## Examples
 
-Below is a collection of simple to complex examples.
-
 ### Props
 
 #### Single line

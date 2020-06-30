@@ -27,8 +27,6 @@ Badges in their simplest form display to the upper right of the content that it 
 
 ## Examples
 
-Below is a collection of simple to complex examples.
-
 ### Misc
 
 #### Customization options
