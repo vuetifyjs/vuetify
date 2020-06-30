@@ -98,16 +98,16 @@ An `v-app-bar` with the `prominent` prop can opt to have its height shrunk as th
 
 ### Misc
 
-#### Toggle navigation drawers
-
-Using the functional component `v-app-bar-nav-icon` you can toggle the state of other components such as a [v-navigation-drawer](/components/navigation-drawers).
-
-<example file="v-app-bar/misc-app-bar-nav" />
-
 #### Menu
 
 You can easily extend the functionality of app bar by adding `VMenu` there. Click on last icon to see it in action.
 
 <example file="v-app-bar/misc-menu" />
+
+#### Toggle navigation drawers
+
+Using the functional component `v-app-bar-nav-icon` you can toggle the state of other components such as a [v-navigation-drawer](/components/navigation-drawers).
+
+<example file="v-app-bar/misc-app-bar-nav" />
 
 <backmatter />

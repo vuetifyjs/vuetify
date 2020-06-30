@@ -21,7 +21,6 @@
         color: null,
         dense: false,
         flat: false,
-        image: false,
         prominent: false,
       },
       options: {
@@ -29,7 +28,7 @@
           color: ['red', 'orange', 'yellow', 'green', 'blue', 'purple'],
         },
       },
-      tabs: ['dense', 'flat', 'image', 'prominent'],
+      tabs: ['dense', 'flat', 'prominent'],
     }),
   }
 </script>
