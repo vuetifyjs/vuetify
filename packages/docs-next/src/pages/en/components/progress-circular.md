@@ -3,77 +3,54 @@ meta:
   title: Progress circular component
   description: The progress circular component is useful for displaying a visual indicator of numerical data in a circle.
   keywords: progress circular, vuetify progress circular component, vue progress circular component, circular progress
+related:
+  - /components/cards/
+  - /components/progress-linear/
+  - /components/lists/
 ---
 
 # Progress circular
 
-Component description
+The `v-progress-circular` component is used to convey data circularly to users. It also can be put into an indeterminate state to portray loading.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+By default, progress circular uses the applications secondary color.
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<example file="v-progress-circular/usage" />
 
 ## API
 
-- [API Page Link](../../api/v-component)
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-progress-circular](../../api/v-progress-circular)
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Color
 
-### Events
+Alternate colors can be applied to `v-progress-circular` using the `color` prop.
 
-Omit if none
+<example file="v-progress-circular/prop-color" />
 
-### Slots
+#### Indeterminate
 
-Omit if none
+Using the `indeterminate` prop, a `v-progress-circular` continues to animate indefinitely.
 
-### Misc
+<example file="v-progress-circular/prop-indeterminate" />
 
-Omit if none
+#### Rotate
 
-#### Example Header
+The `rotate` prop gives you the ability to customize the `v-progress-circular`'s origin.
 
-Example description
+<example file="v-progress-circular/prop-rotate" />
 
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
+#### Size and Width
 
-## Accessibility
+The `size` and `width` props allow you to easily alter the size and width of the `v-progress-circular` component.
 
-Accessibility text - omit if none
+<example file="v-progress-circular/prop-size-and-width" />
 
 <backmatter />
