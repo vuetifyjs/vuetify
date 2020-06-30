@@ -1,7 +1,9 @@
  {
   "props": {
-    "empty": ""
-    // add prop lang here
+    "empty": "",
+    "height": "Mixins.Measurable.props.height",
+    "lightsOut": "Reduces the system bar opacity.",
+    "window": "Increases the system bar height to 32px (24px default)."
   },
   "slots": {
     "empty": ""

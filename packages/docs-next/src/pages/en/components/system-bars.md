@@ -3,77 +3,54 @@ meta:
   title: System bar component
   description: The system bar component creates an android style status bar that rests on the very top of your application.
   keywords: system bars, vuetify system bar component, vue system bar component, android status bar, status bar
+related:
+  - /components/buttons/
+  - /components/toolbars/
+  - /components/tabs/
 ---
 
 # System bars
 
-Component description
+The `v-system-bar` component can be used for displaying statuses to the user. It looks like the Android system bar and can contain icons, spacers, and some text.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+`v-system-bar` in its simplest form displays a small container with default theme.
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<usage name="v-system-bar" />
 
 ## API
 
-- [API Page Link](../../api/v-component)
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-system-bar](../../api/v-system-bar)
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Color
 
-### Events
+You can optionally change the color of the `v-system-bar` by using the `color` prop.
 
-Omit if none
+<example file="v-system-bar/prop-color" />
 
-### Slots
+#### Lights out
 
-Omit if none
+You can reduce `v-system-bar`'s opacity using `lights-out` property.
 
-### Misc
+<example file="v-system-bar/prop-lights-out" />
 
-Omit if none
+#### Themes
 
-#### Example Header
+Dark or light theme variants can be applied to `v-system-bar`.
 
-Example description
+<example file="v-system-bar/prop-themes" />
 
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
+#### Window
 
-## Accessibility
+A window bar with window controls and status info.
 
-Accessibility text - omit if none
+<example file="v-system-bar/prop-window" />
 
 <backmatter />
