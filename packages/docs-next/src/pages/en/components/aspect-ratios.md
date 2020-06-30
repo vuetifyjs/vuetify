@@ -3,77 +3,26 @@ meta:
   title: Aspect ratios
   description: The responsive component is used as a wrapper component to force custom aspect ratios for its children.
   keywords: ratio, responsive, aspect ratios
+related:
+  - /components/cards/
+  - /components/sheets/
+  - /components/images/
 ---
 
 # Aspect ratios
 
-Component description
+The `v-responsive` component can be used to fix any section to a specific aspect ratio
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+Specify a custom aspect-ratio
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<example file="v-responsive/usage" />
 
 ## API
 
-- [API Page Link](../../api/v-component)
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
-
-## Examples
-
-Example text.
-
-### Props
-
-Omit if none
-
-### Events
-
-Omit if none
-
-### Slots
-
-Omit if none
-
-### Misc
-
-Omit if none
-
-#### Example Header
-
-Example description
-
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
-
-## Accessibility
-
-Accessibility text - omit if none
+- [v-responsive](../../api/v-responsive)
 
 <backmatter />
