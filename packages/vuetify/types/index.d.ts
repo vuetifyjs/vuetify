@@ -273,6 +273,7 @@ export interface DataTableHeader<T extends any = any> {
   groupable?: boolean
   divider?: boolean
   class?: string | string[]
+  cellClass?: string | string[]
   width?: string | number
   filter?: (value: any, search: string | null, item: any) => boolean
   sort?: DataTableCompareFunction<T>
