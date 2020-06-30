@@ -55,7 +55,8 @@
       "transition": false
     },
     "v-checkbox": {
-      "height": false
+      "height": false,
+      "loading": false
     },
     "v-radio": {
       "height": false
