@@ -1,15 +1,41 @@
  {
   "props": {
-    "empty": ""
-    // add prop lang here
+    "empty": "",
+    "activeClass": "Mixins.BaseItemGroup.props.activeClass",
+    "continuous": "Determines whether carousel is continuous",
+    "cycle": "Determines if the carousel should cycle through images.",
+    "disabled": "Mixins.Groupable.props.disabled",
+    "delimiterIcon": "Sets icon for carousel delimiter",
+    "height": "Mixins.Measurable.props.height",
+    "hideControls": "Hides the navigation controls (left and right).",
+    "hideDelimiters": "Hides the carousel's bottom delimiters.",
+    "hideDelimiterBackground": "Hides the bottom delimiter background.",
+    "interval": "The duration between image cycles. Requires the **cycle** prop.",
+    "link": "Mixins.Routable.props.link",
+    "mandatory": "Mixins.BaseItemGroup.props.mandatory",
+    "multiple": "Mixins.BaseItemGroup.props.multiple",
+    "nextIcon": "The displayed icon for forcing pagination to the next item.",
+    "prevIcon": "The displayed icon for forcing pagination to the previous item.",
+    "progress": "Displays a carousel progress bar. Requires the **cycle** prop and **interval**.",
+    "progressColor": "Applies specified color to progress bar.",
+    "reverse": "Components.Windows.props.reverse",
+    "reverseTransition": "Components.Windows.props.reverseTransition",
+    "showArrows": "Displays arrows for next/previous navigation.",
+    "showArrowsOnHover": "Displays navigation arrows only when the carousel is hovered over.",
+    "src": "Components.Images.props.src",
+    "touch": "Components.Windows.props.touch",
+    "touchless": "Components.Windows.props.touchless",
+    "transition": "Mixins.Transitionable.props.transition",
+    "vertical": "Components.Windows.props.vertical",
+    "verticalDelimiters": "Displays carousel delimiters vertically."
   },
   "slots": {
     "empty": ""
     // add slot lang here
   },
   "events": {
-    "empty": ""
-    // add event lang here
+    "empty": "",
+    "change": "Emitted when the component value is changed by user interaction"
   },
   "functions": {
     "empty": ""

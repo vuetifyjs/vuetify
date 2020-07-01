@@ -1,7 +1,7 @@
  {
   "props": {
-    "empty": ""
-    // add prop lang here
+    "empty": "",
+    "value": "Mixins.Groupable.props.value"
   },
   "slots": {
     "empty": ""
