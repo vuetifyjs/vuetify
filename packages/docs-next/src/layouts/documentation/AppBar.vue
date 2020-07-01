@@ -14,14 +14,7 @@
 
     <default-search />
 
-    <v-btn
-      icon
-      @click="dark = !dark"
-    >
-      <v-icon>
-        {{ `$mdiBrightness${dark ? '7' : '4'}` }}
-      </v-icon>
-    </v-btn>
+    <theme-toggle />
 
     <v-btn
       icon
@@ -113,9 +106,6 @@
     },
 
     watch: {
-      dark (val) {
-        this.$vuetify.theme.dark = val
-      },
       rtl (val) {
         this.$vuetify.rtl = val
       },

@@ -1,6 +1,7 @@
 <template>
   <v-sheet
-    :color="dark ? '#1F1F1F' : 'grey lighten-5'"
+    :color="isDark ? '#1F1F1F' : 'grey lighten-5'"
+    :dark="isDark"
     class="app-code overflow-hidden"
     outlined
     rounded
@@ -22,7 +23,13 @@
     name: 'AppCode',
 
     computed: {
-      dark: get('user/dark'),
+      ...get('user', [
+        'dark',
+        'mixed',
+      ]),
+      isDark () {
+        return this.dark || this.mixed
+      },
     },
 
     methods: {

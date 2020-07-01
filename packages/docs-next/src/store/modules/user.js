@@ -11,6 +11,9 @@ const state = {
     advanced: false,
     mini: false,
   },
+  // Provides a 3rd state for the
+  // light theme w/ dark fences
+  mixed: false,
   notifications: [],
   rtl: false,
   snackbar: Date.now(),
