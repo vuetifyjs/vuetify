@@ -106,6 +106,9 @@
       &.v-sheet--outlined
         border: thin solid hsla(0,0%,100%,.12) !important
 
+      .token.operator
+        background: none
+
       .token.comment,
       .token.block-comment,
       .token.prolog,
