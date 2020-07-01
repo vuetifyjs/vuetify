@@ -29,7 +29,10 @@
 
 <style lang="sass">
   .v-alert--md .v-markdown
-    p:last-child
-      margin-bottom: 0
+    p
+      line-height: initial
+
+      &:last-child
+        margin-bottom: 0
 
 </style>
