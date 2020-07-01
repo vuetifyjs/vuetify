@@ -91,6 +91,9 @@
     pre.language-scss::after
       content: 'scss'
 
+    pre.language-ts::after
+      content: 'ts'
+
     &.theme--dark
       code[class*=language],
       pre[class*=language]
