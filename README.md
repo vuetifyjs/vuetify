@@ -60,7 +60,8 @@ Vuetify is a MIT licensed project that is developed and maintained full-time by 
   </li>
 </ul>
 
-### What's the difference between Patreon and OpenCollective?
+### What's the difference between Patreon and OpenCollective
+
 Funds donated via Patreon go directly to support John and Heather's full-time work on Vuetify. Funds donated via Open Collective are managed with transparent expenses and will be used for compensating work and expenses for Core team members. Your name/logo will receive proper recognition and exposure by donating on either platform.
 
 <h3 align="center"><b>Premiere Sponsors</b></h3>
@@ -155,15 +156,37 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
     <img src="https://opencollective.com/static/images/become_sponsor.svg" alt="Donate to OpenCollective">
   </a>
   <br>
-  <a href="https://opencollective.com/vuetify/sponsor/1/website" target="_blank">
-    <img src="https://opencollective.com/vuetify/sponsor/1/avatar.svg">
-  </a>
-  <a href="https://opencollective.com/vuetify/sponsor/2/website" target="_blank">
-    <img src="https://opencollective.com/vuetify/sponsor/2/avatar.svg">
-  </a>
-  <a href="https://opencollective.com/vuetify/sponsor/3/website" target="_blank">
-    <img src="https://opencollective.com/vuetify/sponsor/3/avatar.svg">
-  </a>
+</div>
+
+<!-- start bronze oc sponsors -->
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <a href="https://papersowl.com/write-my-paper-for-me">
+          <img src="https://logo.clearbit.com/papersowl.com" height="32">
+        </a>
+      </td>
+      <td>
+        <a href="https://edusson.com/write-my-essay-online">
+          <img src="https://logo.clearbit.com/edusson.com" height="40">
+        </a>
+      </td>
+      <td>
+        <a href="https://getform.io/">
+          <img src="https://opencollective-production.s3-us-west-1.amazonaws.com/2d3b7590-f25a-11e8-95fe-d7ea40ac9667.png" height="40">
+        </a>
+      </td>
+      <td>
+        <a href="https://volleyballlife.com/">
+          <img src="https://logo.clearbit.com/volleyballlife.com" height="40">
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- end bronze oc sponsors -->
+
 </div>
 
 <br>
@@ -428,12 +451,15 @@ To check out the [component api explorer](https://vuetifyjs.com/components/api-e
 For help and support questions, please use our [community chat](https://community.vuetifyjs.com). This issue list of this repo is **exclusively** for bug reports and feature requests.
 
 ### Issues
+
 Please make sure to read the [Important Information](https://github.com/vuetifyjs/vuetify/blob/master/.github/CONTRIBUTING.md#important-information) before opening an issue. Issues not confirming to the guidelines may be closed immediately.
 
 ### Changelog
+
 Detailed changes for each release are documented in the [release notes](https://github.com/vuetifyjs/vuetify/releases).
 
 ### Contributing
+
 Developers interested in contributing should read the [Code of Conduct](./CODE_OF_CONDUCT.md) and the [Contribution Guide](https://vuetifyjs.com/getting-started/contributing).
 
 > Please do **not** ask general questions in an issue. Issues are only to report bugs, suggest
@@ -465,6 +491,7 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 </a>
 
 ### 📑 License
+
 [MIT](http://opensource.org/licenses/MIT)
 
 Copyright (c) 2016-present Vuetify LLC
