@@ -1,5 +1,5 @@
 <template>
-  <sheet class="mb-12">
+  <sheet class="mb-12 overflow-hidden">
     <v-simple-table>
       <i18n
         class="pa-4"
