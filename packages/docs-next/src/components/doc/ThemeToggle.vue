@@ -20,9 +20,9 @@
         'mixed',
       ]),
       icon () {
-        if (this.mixed) return '$mdiThemeLightDark'
+        if (this.dark) return '$mdiThemeLightDark'
 
-        return `$mdiBrightness${this.dark ? '7' : '4'}`
+        return `$mdiBrightness${this.mixed ? '7' : '4'}`
       },
     },
 
