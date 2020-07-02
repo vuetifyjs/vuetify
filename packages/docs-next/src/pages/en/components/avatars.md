@@ -3,77 +3,62 @@ meta:
   title: Avatar component
   description: The avatar component is used to control the size and border radius of an image. It can be used with numerous components to provide better visual context.
   keywords: avatars, vuetify avatar component, vue avatar component
+related:
+  - /components/badges/
+  - /components/icons/
+  - /components/lists/
 ---
 
 # Avatars
 
-Component description
+"The `v-avatar` component is typically used to display circular user profile pictures. This component will allow you to dynamically size and add a border radius of responsive images, icons, and text. A **tile** variation is available for displaying an avatar without border radius.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+Avatars in their simplest form display content within a circular container.
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<usage name="v-avatar" />
 
 ## API
 
-- [API Page Link](../../api/v-component)
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
-
-## Examples
-
-Example text.
+- [v-avatar](../../api/v-avatar)
 
 ### Props
 
-Omit if none
+#### Size
 
-### Events
+The `size` prop allows you to define the height and width of `v-avatar`. This prop scales both evenly with an aspect ratio of 1. `height` and `width` props will override this prop.
 
-Omit if none
+<example file="v-avatar/prop-size" />
+
+#### Tile
+
+The `tile` prop removes the border radius from v-avatar leaving you with a simple square avatar.
+
+<example file="v-avatar/prop-tile" />
 
 ### Slots
 
-Omit if none
+#### Default
+
+The `v-avatar` default slot will accept the `v-icon` component, an image, or text. Mix and match these with other props to create something unique.
+
+<example file="v-avatar/slot-default" />
 
 ### Misc
 
-Omit if none
+#### Advanced usage
 
-#### Example Header
+Combining an avatar with other components allows you to build beautiful user interfaces right out of the box.
 
-Example description
+<example file="v-avatar/misc-advanced" />
 
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
+#### Profile Card
 
-## Accessibility
+Using the **tile** prop, we can create a sleek hard-lined profile card.
 
-Accessibility text - omit if none
+<example file="v-avatar/misc-profile-card" />
 
 <backmatter />

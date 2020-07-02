@@ -1,7 +1,8 @@
  {
   "props": {
-    "empty": ""
-    // add prop lang here
+    "empty": "",
+    "left": "Designates that the avatar is on the left side of a component. This is hooked into by components such as [v-chip](/components/chips) and [v-btn](/components/buttons).",
+    "right": "Designates that the avatar is on the right side of a component. This is hooked into by components such as [v-chip](/components/chips) and [v-btn](/components/buttons)."
   },
   "slots": {
     "empty": ""
