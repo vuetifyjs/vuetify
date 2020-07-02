@@ -9,7 +9,7 @@ import Colorable from '../../mixins/colorable'
 
 // Utils
 import mixins, { ExtractVue } from '../../util/mixins'
-import { getObjectValueByPath, createRange } from '../../util/helpers'
+import { getObjectValueByPath, createRange, keyCodes } from '../../util/helpers'
 
 // Types
 import { VNode, PropType } from 'vue'
@@ -114,15 +114,28 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
     isIndeterminate: false, // Node has at least one selected child
     isLoading: false,
     isOpen: false, // Node is open/expanded
-    isSelected: false, // Node is selected (checkbox)
+    isSelected: false, // Node is selected (checkbox),
+    tabindex: -1,
   }),
 
   computed: {
+    ariaControls (): string | null {
+      return this.children ? `${this.htmlId}-child` : null
+    },
+    ariaExpanded (): string | null {
+      return this.children ? String(this.isOpen) : null
+    },
+    ariaPopup (): string | null {
+      return this.children ? 'true' : null
+    },
     disabled (): boolean {
       return (
         getObjectValueByPath(this.item, this.itemDisabled) ||
         (this.parentIsDisabled && this.selectionType === 'leaf')
       )
+    },
+    htmlId (): string {
+      return `nodeitem-${this.key}`
     },
     key (): string {
       return getObjectValueByPath(this.item, this.itemKey)
@@ -150,6 +163,13 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
     },
     hasChildren (): boolean {
       return !!this.children && (!!this.children.length || !!this.loadChildren)
+    },
+  },
+  watch: {
+    tabindex (): void {
+      if (this.tabindex === 0) {
+        (this.$refs.treeviewnode as HTMLElement).focus()
+      }
     },
   },
 
@@ -213,6 +233,9 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
       ]
 
       return this.$createElement('div', {
+        attrs: {
+          id: `label-${this.htmlId}`,
+        },
         staticClass: 'v-treeview-node__content',
       }, children)
     },
@@ -223,6 +246,10 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
           'v-treeview-node__toggle--open': this.isOpen,
           'v-treeview-node__toggle--loading': this.isLoading,
         },
+        attrs: {
+          'aria-control': this.ariaControls,
+          'aria-expanded': String(this.isOpen),
+        },
         slot: 'prepend',
         on: {
           click: (e: MouseEvent) => {
@@ -230,7 +257,12 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
 
             if (this.isLoading) return
 
-            this.checkChildren().then(() => this.open())
+            this.checkChildren().then(() => {
+              this.open()
+              this.$nextTick(function () {
+                this.updateScroll(e.currentTarget)
+              })
+            })
           },
         },
       }, [this.isLoading ? this.loadingIcon : this.expandIcon])
@@ -285,10 +317,17 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
         class: {
           [this.activeClass]: this.isActive,
         },
+        attrs: {
+          'aria-control': this.ariaControls,
+          id: this.htmlId,
+        },
         on: {
-          click: () => {
+          click: (event: Event) => {
             if (this.openOnClick && this.hasChildren) {
               this.checkChildren().then(this.open)
+              this.$nextTick(function () {
+                this.updateScroll(event.currentTarget)
+              })
             } else if (this.activatable && !this.disabled) {
               this.isActive = !this.isActive
               this.treeview.updateActive(this.key, this.isActive)
@@ -334,12 +373,79 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
 
       const children = [this.children.map(c => this.genChild(c, this.disabled))]
 
-      return this.$createElement('div', {
+      return this.$createElement('div', { // ul
+        attrs: {
+          'aria-labeledby': this.htmlId,
+          id: this.ariaControls,
+          tabindex: -1,
+          role: 'group',
+        },
         staticClass: 'v-treeview-node__children',
       }, children)
     },
     genTransition () {
       return this.$createElement(VExpandTransition, [this.genChildrenWrapper()])
+    },
+    handleFocus (event: Event): void {
+      if (event.target) {
+        this.treeview.updateFocus(this.key, event.type === 'focus')
+      }
+    },
+    handkeKey (event: KeyboardEvent): void {
+      const moveDown = (event: KeyboardEvent) => {
+        this.treeview.keyMoveDown(this.key)
+        event.stopPropagation()
+      }
+      const moveUp = (event: KeyboardEvent) => {
+        this.treeview.keyMoveUp(this.key)
+        event.stopPropagation()
+      }
+      const moveLeft = (event: KeyboardEvent) => {
+        this.treeview.keyMoveLeft(this.key)
+        event.stopPropagation()
+        this.updateScroll(event.currentTarget)
+      }
+      const moveRight = (event: KeyboardEvent) => {
+        if (this.isOpen) {
+          this.treeview.keyMoveRight(this.key)
+        } else {
+          this.checkChildren().then(() => {
+            if (this.hasChildren) {
+              this.open()
+              this.$nextTick(function () {
+                this.updateScroll(event.currentTarget)
+              })
+            }
+          })
+        }
+        event.stopPropagation()
+      }
+      const toggleOpen = (event: KeyboardEvent) => {
+        if (this.hasChildren) {
+          this.checkChildren().then(this.open)
+          this.$nextTick(function () {
+            this.updateScroll(event.currentTarget)
+          })
+        }
+      }
+
+      const keyCode = event.keyCode
+      if ([keyCodes.down].includes(keyCode)) return moveDown.call(this, event)
+      if ([keyCodes.up].includes(keyCode)) return moveUp.call(this, event)
+      if ([keyCodes.left].includes(keyCode)) return moveLeft.call(this, event)
+      if ([keyCodes.right].includes(keyCode)) return moveRight.call(this, event)
+      if ([keyCodes.space].includes(keyCode)) return toggleOpen.call(this, event)
+    },
+    // Update window scrolling when we expand / collapse
+    updateScroll (targetElement: EventTarget | null): void {
+      if (!targetElement) {
+        return
+      }
+      const top = (this.treeview.$refs.treeview as HTMLElement).getBoundingClientRect().top +
+        (<HTMLElement>targetElement).getBoundingClientRect().top
+      this.$nextTick(function () {
+        (this.treeview.$refs.treeview as HTMLElement).scrollTop = top
+      })
     },
   },
 
@@ -349,7 +455,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
     if (this.transition) children.push(this.genTransition())
     else children.push(this.genChildrenWrapper())
 
-    return h('div', {
+    return h('div', { // li
       staticClass: 'v-treeview-node',
       class: {
         'v-treeview-node--leaf': !this.hasChildren,
@@ -361,8 +467,24 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
         'v-treeview-node--excluded': this.treeview.isExcluded(this.key),
       },
       attrs: {
-        'aria-expanded': String(this.isOpen),
+        'aria-expanded': this.ariaExpanded,
+        'aria-live': this.hasChildren ? 'polite' : null,
+        'aria-popup': this.ariaPopup,
+        role: 'treeitem',
+        tabindex: this.tabindex,
       },
+      on: {
+        blur: (event: Event) => {
+          event.preventDefault()
+          this.handleFocus(event)
+        },
+        focus: (event: Event) => {
+          event.preventDefault()
+          this.handleFocus(event)
+        },
+        keydown: (event: KeyboardEvent) => this.handkeKey(event),
+      },
+      ref: 'treeviewnode',
     }, children)
   },
 })

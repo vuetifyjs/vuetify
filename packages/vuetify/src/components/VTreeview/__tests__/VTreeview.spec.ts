@@ -868,4 +868,410 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
     expect(wrapper.html()).toMatchSnapshot()
     expect(open).toHaveBeenLastCalledWith([0])
   })
+
+  // keydown data
+  const threeSiblingNodes = [
+    { id: 'node1', name: 'node-1' },
+    { id: 'node2', name: 'node-2' },
+    { id: 'node3', name: 'node-3' },
+  ]
+  const nestedSiblingNodes = [
+    {
+      id: 'node1', // 0
+      name: 'node-1',
+      children: [
+        { id: 'node11', name: 'node-11' }, // 1
+        { id: 'node12', name: 'node-12' }, // 2
+        { id: 'node13', name: 'node-13' }, // 3
+      ],
+    },
+  ]
+  const nestedSiblingsFlatList = [
+    {
+      id: 'node1', // 0
+      name: 'node-1',
+      children: [
+        { id: 'node11', name: 'node-11' }, // 1
+        { id: 'node12', name: 'node-12' }, // 2
+        { id: 'node13', name: 'node-13' }, // 3
+      ],
+    },
+    {
+      id: 'node2', // 4
+      name: 'node-2',
+      children: [
+        { id: 'node21', name: 'node-21' }, // 5
+        { id: 'node22', name: 'node-22' }, // 6
+        { id: 'node23', name: 'node-23' }, // 7
+      ],
+    },
+  ]
+  const deepNestedSiblingsFlatList = [
+    {
+      id: 'node1', // 0
+      name: 'node-1',
+      children: [
+        { id: 'node11', name: 'node-11' }, // 1
+        { id: 'node12', name: 'node-12' }, // 2
+        {
+          id: 'node13', // 3
+          name: 'node-13',
+          children: [
+            { id: 'node131', name: 'node-131' }, // 4
+            { id: 'node132', name: 'node-132' }, // 5
+          ],
+        },
+      ],
+    },
+    {
+      id: 'node2', // 6
+      name: 'node-2',
+      children: [
+        { id: 'node21', name: 'node-21' }, // 7
+        { id: 'node22', name: 'node-22' }, // 8
+        {
+          id: 'node23', // 9
+          name: 'node-23',
+          children: [
+            { id: 'node231', name: 'node-231' }, // 10
+            { id: 'node232', name: 'node-232' }, // 11
+          ],
+        },
+      ],
+    },
+  ]
+
+  // keydown.down
+  it('focus moves down a node on keydown.down with siblings', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: threeSiblingNodes,
+      },
+    })
+    const nodes = wrapper.findAll('.v-treeview-node')
+
+    // move down one node
+    wrapper.vm.keyMoveDown('node1')
+    await wrapper.vm.$nextTick()
+
+    expect(nodes.at(1).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    // move down one node
+    wrapper.vm.keyMoveDown('node2')
+    await wrapper.vm.$nextTick()
+
+    expect(nodes.at(2).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    // move down one node
+    wrapper.vm.keyMoveDown('node3')
+    await wrapper.vm.$nextTick()
+
+    expect(nodes.at(2).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.destroy()
+  })
+
+  it('focus moves down on keydown.down with nested siblings', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: nestedSiblingNodes,
+        openAll: true,
+      },
+    })
+    await wrapper.vm.$nextTick()
+    const nodes = wrapper.findAll('.v-treeview-node')
+
+    // move down one node
+    wrapper.vm.keyMoveDown('node1')
+    await wrapper.vm.$nextTick()
+
+    expect(nodes.at(1).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    // move down one node
+    wrapper.vm.keyMoveDown('node11')
+    await wrapper.vm.$nextTick()
+
+    expect(nodes.at(2).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    // move down one node
+    wrapper.vm.keyMoveDown('node12')
+    await wrapper.vm.$nextTick()
+
+    expect(nodes.at(3).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    // move down one node
+    wrapper.vm.keyMoveDown('node13')
+    await wrapper.vm.$nextTick()
+
+    expect(nodes.at(3).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.destroy()
+  })
+
+  it('focus moves down on keydown.down keyboardTransverseFlatten with deep nested siblings', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        keyboardTransverseFlatten: true,
+        items: deepNestedSiblingsFlatList,
+        openAll: true,
+      },
+    })
+    await wrapper.vm.$nextTick()
+    const nodes = wrapper.findAll('.v-treeview-node')
+
+    // move down into first child node
+    wrapper.vm.keyMoveDown('node1')
+    await wrapper.vm.$nextTick()
+
+    expect(nodes.at(1).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    // move down into first nested child node
+    wrapper.vm.keyMoveDown('node13')
+    await wrapper.vm.$nextTick()
+
+    expect(nodes.at(4).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    // move down one node
+    wrapper.vm.keyMoveDown('node132')
+    await wrapper.vm.$nextTick()
+
+    expect(nodes.at(6).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    // cannot move down, end of nodes
+    wrapper.vm.keyMoveDown('node232')
+    await wrapper.vm.$nextTick()
+
+    expect(nodes.at(11).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.destroy()
+  })
+
+  // keydown.up
+  it('focus moves up on keydown.up with siblings', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: threeSiblingNodes,
+      },
+    })
+    const nodes = wrapper.findAll('.v-treeview-node')
+
+    // move up one node
+    wrapper.vm.keyMoveUp('node3')
+    await wrapper.vm.$nextTick()
+
+    expect(nodes.at(1).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    // move up one node
+    wrapper.vm.keyMoveUp('node2')
+    await wrapper.vm.$nextTick()
+
+    expect(nodes.at(0).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    // cannot move up, top of nodes
+    wrapper.vm.keyMoveUp('node1')
+    await wrapper.vm.$nextTick()
+
+    expect(nodes.at(0).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.destroy()
+  })
+
+  it('focus moves up on keydown.up with nested siblings', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: nestedSiblingNodes,
+        openAll: true,
+      },
+    })
+    await wrapper.vm.$nextTick()
+    const nodes = wrapper.findAll('.v-treeview-node')
+
+    // can move up one node
+    wrapper.vm.keyMoveUp('node13')
+    await wrapper.vm.$nextTick()
+
+    expect(nodes.at(2).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    // can move up one node
+    wrapper.vm.keyMoveUp('node12')
+    await wrapper.vm.$nextTick()
+
+    expect(nodes.at(1).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    // cannot move up, top of nested group
+    wrapper.vm.keyMoveUp('node11')
+    await wrapper.vm.$nextTick()
+
+    expect(nodes.at(0).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    // cannot move up, top of nodes
+    wrapper.vm.keyMoveUp('node1')
+    await wrapper.vm.$nextTick()
+
+    expect(nodes.at(0).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.destroy()
+  })
+
+  it('focus moves up on keydown.up keyboardTransverseFlatten with deep nested siblings', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: deepNestedSiblingsFlatList,
+        openAll: true,
+      },
+    })
+    await wrapper.vm.$nextTick()
+    const nodes = wrapper.findAll('.v-treeview-node')
+
+    // can move up to parent
+    wrapper.vm.keyMoveUp('node231')
+    await wrapper.vm.$nextTick()
+
+    expect(nodes.at(9).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    // can move up to parent
+    wrapper.vm.keyMoveUp('node21')
+    await wrapper.vm.$nextTick()
+
+    expect(nodes.at(6).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    // can move up to previous sibling last opened child node
+    wrapper.vm.keyMoveUp('node2')
+    await wrapper.vm.$nextTick()
+
+    expect(nodes.at(5).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    // cannot move up, top of nodes
+    wrapper.vm.keyMoveUp('node1')
+    await wrapper.vm.$nextTick()
+
+    expect(nodes.at(0).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.destroy()
+  })
+
+  // keydown.right
+  it('node does not expand on keydown.right when no children exists', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        keyboardTransverseFlatten: true,
+        items: threeSiblingNodes,
+      },
+    })
+
+    wrapper.vm.keyMoveRight('node1')
+    await wrapper.vm.$nextTick()
+
+    const nodes = wrapper.findAll('.v-treeview-node')
+    expect(nodes).toHaveLength(3)
+    expect(nodes.at(0).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.destroy()
+  })
+
+  it('node expands on keydown.right when children exists', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        keyboardTransverseFlatten: true,
+        items: nestedSiblingNodes,
+        openAll: true,
+      },
+    })
+    await wrapper.vm.$nextTick()
+
+    wrapper.vm.keyMoveRight('node1')
+    await wrapper.vm.$nextTick()
+
+    const nodes = wrapper.findAll('.v-treeview-node')
+    expect(nodes).toHaveLength(4)
+    expect(nodes.at(1).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.destroy()
+  })
+
+  // keydown.left
+  it('node does not collapse on keydown.left when no parent is available', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        keyboardTransverseFlatten: true,
+        items: threeSiblingNodes,
+      },
+    })
+
+    wrapper.vm.keyMoveLeft('node1')
+    await wrapper.vm.$nextTick()
+
+    const nodes = wrapper.findAll('.v-treeview-node')
+    expect(nodes).toHaveLength(3)
+    expect(nodes.at(0).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.destroy()
+  })
+
+  it('node goes to first node in group on keydown.left', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        keyboardTransverseFlatten: true,
+        items: nestedSiblingNodes,
+        openAll: true,
+      },
+    })
+    await wrapper.vm.$nextTick()
+
+    wrapper.vm.keyMoveLeft('node13')
+    await wrapper.vm.$nextTick()
+
+    const nodes = wrapper.findAll('.v-treeview-node')
+    expect(nodes).toHaveLength(4)
+    expect(nodes.at(0).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.destroy()
+  })
+
+  it('node collapse on keydown.left closes an expanded node', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        keyboardTransverseFlatten: true,
+        items: nestedSiblingNodes,
+        openAll: true,
+      },
+    })
+    await wrapper.vm.$nextTick()
+
+    wrapper.vm.keyMoveLeft('node1')
+    await wrapper.vm.$nextTick()
+
+    const nodes = wrapper.findAll('.v-treeview-node')
+    expect(nodes).toHaveLength(1)
+    expect(nodes.at(0).attributes('tabindex')).toBe('0')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.destroy()
+  })
 })

@@ -39,6 +39,7 @@ type NodeState = {
   isIndeterminate: boolean
   isOpen: boolean
   item: any
+  tabindex: number
 }
 
 export default mixins(
@@ -85,6 +86,7 @@ export default mixins(
   data: () => ({
     level: -1,
     activeCache: new Set() as NodeCache,
+    focusCache: undefined,
     nodes: {} as Record<string | number, NodeState>,
     openCache: new Set() as NodeCache,
     selectedCache: new Set() as NodeCache,
@@ -202,7 +204,7 @@ export default mixins(
         const key = getObjectValueByPath(item, this.itemKey)
         const children = getObjectValueByPath(item, this.itemChildren, [])
         const oldNode = this.nodes.hasOwnProperty(key) ? this.nodes[key] : {
-          isSelected: false, isIndeterminate: false, isActive: false, isOpen: false, vnode: null,
+          isSelected: false, isIndeterminate: false, isActive: false, isOpen: false, tabindex: -1, vnode: null,
         } as NodeState
 
         const node: any = {
@@ -224,6 +226,7 @@ export default mixins(
 
         node.isActive = oldNode.isActive
         node.isOpen = oldNode.isOpen
+        node.tabindex = oldNode.tabindex
 
         this.nodes[key] = node
 
@@ -238,6 +241,7 @@ export default mixins(
         if (this.nodes[key].isSelected && (this.selectionType === 'independent' || node.children.length === 0)) this.selectedCache.add(key)
         if (this.nodes[key].isActive) this.activeCache.add(key)
         if (this.nodes[key].isOpen) this.openCache.add(key)
+        if (this.nodes[key].tabindex === 0) this.focusCache = key
 
         this.updateVnodeState(key)
       }
@@ -303,6 +307,121 @@ export default mixins(
 
       return parents
     },
+    // keyboard support
+    keyMoveDown (key: string | number): void {
+      if (!key || !this.nodes.hasOwnProperty(key)) {
+        return
+      }
+      const node = this.nodes[key]
+      const parentSiblings = node.parent ? this.nodes[node.parent].children
+        : this.items.map((c: any) => getObjectValueByPath(c, this.itemKey))
+      const currentIndex = parentSiblings.indexOf(key)
+      // is there an index to go down 1
+      if (currentIndex < parentSiblings.length - 1) {
+        let nextNode = parentSiblings[currentIndex + 1]
+        // if node is open goto first child
+        if (node.isOpen && node.children.length > 0) {
+          nextNode = node.children[0]
+        }
+        this.updateFocus(nextNode, true)
+      // is at the end of an group index
+      } else if (currentIndex === parentSiblings.length - 1) {
+        let nextNode = key
+        // if node is open goto first child
+        if (node.isOpen && node.children.length > 0) {
+          nextNode = node.children[0]
+        } else {
+          // locate the top most parent of a node
+          const topParents = this.items.map((c: any) => getObjectValueByPath(c, this.itemKey))
+          const getNextTopNode = function (searchKey: string | number,
+            nodes: Record<string | number, NodeState>, parents: string|number[]): string | number {
+            const n = nodes[searchKey]
+            if (n.parent) {
+              return getNextTopNode(n.parent, nodes, parents)
+            } else {
+              return searchKey
+            }
+          }
+          const topParent = getNextTopNode(key, this.nodes, topParents)
+          const nextNodeIndex = topParents.indexOf(topParent)
+          // if top mode parent has an index to go down 1
+          if (nextNodeIndex > -1 && nextNodeIndex < topParents.length - 1) {
+            nextNode = topParents[nextNodeIndex + 1]
+          }
+        }
+        this.updateFocus(nextNode, true)
+      }
+    },
+    keyMoveLeft (key: string | number): void {
+      if (!key || !this.nodes.hasOwnProperty(key)) {
+        return
+      }
+
+      const node = this.nodes[key]
+      // closes current node
+      if (node.isOpen) {
+        this.updateOpen(key, false)
+        this.updateFocus(key, true)
+      // if parent, focus on parent
+      } else if (node.parent) {
+        this.updateFocus(node.parent, true)
+      } else {
+        if (this.focusCache !== key) {
+          this.updateFocus(key, true)
+        }
+      }
+    },
+    keyMoveRight (key: string | number): void {
+      if (!key || !this.nodes.hasOwnProperty(key)) {
+        return
+      }
+      const node = this.nodes[key]
+      if (node.isOpen && node.children.length > 0) {
+        this.updateFocus(node.children[0], true)
+      } else {
+        // reset focus to current index if needed
+        if (this.focusCache !== key) {
+          this.updateFocus(key, true)
+        }
+      }
+    },
+    keyMoveUp (key: string | number): void {
+      if (!key || !this.nodes.hasOwnProperty(key)) {
+        return
+      }
+
+      const node = this.nodes[key]
+      const parentSiblings = node.parent ? this.nodes[node.parent].children
+        : this.items.map((c: any) => getObjectValueByPath(c, this.itemKey))
+      const currentIndex = parentSiblings.indexOf(key)
+      // is there an index to go up 1
+      if (currentIndex > 0) {
+        let previousNode = parentSiblings[currentIndex - 1]
+        // locate a previous parentNode that is open and has children, goto last child
+        const getLastOpenedChildNode = (searchKey: string | number, nodes: Record<string | number, NodeState>): string | number => {
+          const n = nodes[searchKey]
+          if (n.isOpen && n.children && n.children.length > 0) {
+            return getLastOpenedChildNode(n.children[n.children.length - 1], nodes)
+          } else {
+            return searchKey
+          }
+        }
+        previousNode = getLastOpenedChildNode(previousNode, this.nodes)
+        this.updateFocus(previousNode, true)
+      // reset focus to current index if needed
+      } else if (currentIndex === 0) {
+        // if there is a parent, focus to it
+        if (node.parent) {
+          this.updateFocus(node.parent, true)
+        } else {
+          // reset focus to current index if needed
+          if (this.focusCache !== key) {
+            this.updateFocus(key, true)
+          }
+        }
+      }
+    },
+    // end of keyboard support
     register (node: VTreeviewNodeInstance) {
       const key = getObjectValueByPath(node.item, this.itemKey)
       this.nodes[key].vnode = node
@@ -336,6 +455,23 @@ export default mixins(
       node.isActive = isActive
 
       this.updateVnodeState(key)
+    },
+    updateFocus (this: any, key: string | number, hasFocus: boolean): void {
+      if (!key || !this.nodes.hasOwnProperty(key)) {
+        return
+      }
+      const oldFocus = this.focusCache
+
+      this.nodes[key].tabindex = hasFocus ? 0 : -1
+      this.updateVnodeFocusState(key)
+      this.focusCache = String(key)
+
+      if (oldFocus !== undefined && oldFocus !== key) {
+        if (this.nodes[oldFocus]) {
+          this.nodes[oldFocus].tabindex = -1
+          this.updateVnodeFocusState(oldFocus)
+        }
+      }
     },
     updateSelected (key: string | number, isSelected: boolean, isForced = false) {
       if (!this.nodes.hasOwnProperty(key)) return
@@ -376,7 +512,7 @@ export default mixins(
         value === true ? this.selectedCache.add(key) : this.selectedCache.delete(key)
       }
     },
-    updateOpen (key: string | number, isOpen: boolean) {
+    updateOpen (this: any, key: string | number, isOpen: boolean) {
       if (!this.nodes.hasOwnProperty(key)) return
 
       const node = this.nodes[key]
@@ -390,6 +526,12 @@ export default mixins(
         node.isOpen ? this.openCache.add(key) : this.openCache.delete(key)
 
         this.updateVnodeState(key)
+      }
+    },
+    updateVnodeFocusState (key: string | number): void {
+      const node = this.nodes[key]
+      if (node && node.vnode) {
+        node.vnode.tabindex = node.tabindex
       }
     },
     updateVnodeState (key: string | number) {
@@ -417,13 +559,18 @@ export default mixins(
       /* istanbul ignore next */
       : this.$slots.default! // TODO: remove type annotation with TS 3.2
 
-    return h('div', {
+    return h('div', { // ul
       staticClass: 'v-treeview',
       class: {
         'v-treeview--hoverable': this.hoverable,
         'v-treeview--dense': this.dense,
         ...this.themeClasses,
       },
+      attrs: {
+        role: 'tree',
+        tabindex: -1,
+      },
+      ref: 'treeview',
     }, children)
   },
 })

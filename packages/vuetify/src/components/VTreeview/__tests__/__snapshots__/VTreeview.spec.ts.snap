@@ -1,17 +1,4119 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VTreeView.ts should emit opened node when using open-on-click and load-children 1`] = `
-<div class="v-treeview theme--light">
-  <div aria-expanded="false"
-       class="v-treeview-node v-treeview-node--click"
+exports[`VTreeView.ts focus moves down a node on keydown.down with siblings 1`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node v-treeview-node--leaf"
   >
-    <div class="v-treeview-node__root">
+    <div id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+  </div>
+  <div role="treeitem"
+       tabindex="0"
+       class="v-treeview-node v-treeview-node--leaf"
+  >
+    <div id="nodeitem-node2"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node2"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-2
+        </div>
+      </div>
+    </div>
+  </div>
+  <div role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node v-treeview-node--leaf"
+  >
+    <div id="nodeitem-node3"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node3"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-3
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts focus moves down a node on keydown.down with siblings 2`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node v-treeview-node--leaf"
+  >
+    <div id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+  </div>
+  <div role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node v-treeview-node--leaf"
+  >
+    <div id="nodeitem-node2"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node2"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-2
+        </div>
+      </div>
+    </div>
+  </div>
+  <div role="treeitem"
+       tabindex="0"
+       class="v-treeview-node v-treeview-node--leaf"
+  >
+    <div id="nodeitem-node3"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node3"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-3
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts focus moves down a node on keydown.down with siblings 3`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node v-treeview-node--leaf"
+  >
+    <div id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+  </div>
+  <div role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node v-treeview-node--leaf"
+  >
+    <div id="nodeitem-node2"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node2"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-2
+        </div>
+      </div>
+    </div>
+  </div>
+  <div role="treeitem"
+       tabindex="0"
+       class="v-treeview-node v-treeview-node--leaf"
+  >
+    <div id="nodeitem-node3"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node3"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-3
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts focus moves down on keydown.down keyboardTransverseFlatten with deep nested siblings 1`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+     keyboardtransverseflatten="true"
+>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node1-child"
+         id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
       <button type="button"
+              aria-control="nodeitem-node1-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node1"
+         id="nodeitem-node1-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="0"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node11"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node11"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-11
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node12"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node12"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-12
+            </div>
+          </div>
+        </div>
+      </div>
+      <div aria-expanded="true"
+           aria-live="polite"
+           aria-popup="true"
+           role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node"
+      >
+        <div aria-control="nodeitem-node13-child"
+             id="nodeitem-node13"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <button type="button"
+                  aria-control="nodeitem-node13-child"
+                  aria-expanded="true"
+                  class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+          >
+            $subgroup
+          </button>
+          <div id="label-nodeitem-node13"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-13
+            </div>
+          </div>
+        </div>
+        <div aria-labeledby="nodeitem-node13"
+             id="nodeitem-node13-child"
+             tabindex="-1"
+             role="group"
+             class="v-treeview-node__children"
+        >
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node131"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node131"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-131
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node132"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node132"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-132
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node2-child"
+         id="nodeitem-node2"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node2-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node2"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-2
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node2"
+         id="nodeitem-node2-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node21"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node21"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-21
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node22"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node22"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-22
+            </div>
+          </div>
+        </div>
+      </div>
+      <div aria-expanded="true"
+           aria-live="polite"
+           aria-popup="true"
+           role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node"
+      >
+        <div aria-control="nodeitem-node23-child"
+             id="nodeitem-node23"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <button type="button"
+                  aria-control="nodeitem-node23-child"
+                  aria-expanded="true"
+                  class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+          >
+            $subgroup
+          </button>
+          <div id="label-nodeitem-node23"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-23
+            </div>
+          </div>
+        </div>
+        <div aria-labeledby="nodeitem-node23"
+             id="nodeitem-node23-child"
+             tabindex="-1"
+             role="group"
+             class="v-treeview-node__children"
+        >
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node231"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node231"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-231
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node232"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node232"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-232
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts focus moves down on keydown.down keyboardTransverseFlatten with deep nested siblings 2`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+     keyboardtransverseflatten="true"
+>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node1-child"
+         id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node1-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node1"
+         id="nodeitem-node1-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node11"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node11"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-11
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node12"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node12"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-12
+            </div>
+          </div>
+        </div>
+      </div>
+      <div aria-expanded="true"
+           aria-live="polite"
+           aria-popup="true"
+           role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node"
+      >
+        <div aria-control="nodeitem-node13-child"
+             id="nodeitem-node13"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <button type="button"
+                  aria-control="nodeitem-node13-child"
+                  aria-expanded="true"
+                  class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+          >
+            $subgroup
+          </button>
+          <div id="label-nodeitem-node13"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-13
+            </div>
+          </div>
+        </div>
+        <div aria-labeledby="nodeitem-node13"
+             id="nodeitem-node13-child"
+             tabindex="-1"
+             role="group"
+             class="v-treeview-node__children"
+        >
+          <div role="treeitem"
+               tabindex="0"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node131"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node131"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-131
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node132"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node132"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-132
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node2-child"
+         id="nodeitem-node2"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node2-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node2"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-2
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node2"
+         id="nodeitem-node2-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node21"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node21"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-21
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node22"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node22"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-22
+            </div>
+          </div>
+        </div>
+      </div>
+      <div aria-expanded="true"
+           aria-live="polite"
+           aria-popup="true"
+           role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node"
+      >
+        <div aria-control="nodeitem-node23-child"
+             id="nodeitem-node23"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <button type="button"
+                  aria-control="nodeitem-node23-child"
+                  aria-expanded="true"
+                  class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+          >
+            $subgroup
+          </button>
+          <div id="label-nodeitem-node23"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-23
+            </div>
+          </div>
+        </div>
+        <div aria-labeledby="nodeitem-node23"
+             id="nodeitem-node23-child"
+             tabindex="-1"
+             role="group"
+             class="v-treeview-node__children"
+        >
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node231"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node231"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-231
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node232"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node232"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-232
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts focus moves down on keydown.down keyboardTransverseFlatten with deep nested siblings 3`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+     keyboardtransverseflatten="true"
+>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node1-child"
+         id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node1-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node1"
+         id="nodeitem-node1-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node11"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node11"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-11
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node12"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node12"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-12
+            </div>
+          </div>
+        </div>
+      </div>
+      <div aria-expanded="true"
+           aria-live="polite"
+           aria-popup="true"
+           role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node"
+      >
+        <div aria-control="nodeitem-node13-child"
+             id="nodeitem-node13"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <button type="button"
+                  aria-control="nodeitem-node13-child"
+                  aria-expanded="true"
+                  class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+          >
+            $subgroup
+          </button>
+          <div id="label-nodeitem-node13"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-13
+            </div>
+          </div>
+        </div>
+        <div aria-labeledby="nodeitem-node13"
+             id="nodeitem-node13-child"
+             tabindex="-1"
+             role="group"
+             class="v-treeview-node__children"
+        >
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node131"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node131"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-131
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node132"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node132"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-132
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="0"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node2-child"
+         id="nodeitem-node2"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node2-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node2"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-2
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node2"
+         id="nodeitem-node2-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node21"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node21"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-21
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node22"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node22"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-22
+            </div>
+          </div>
+        </div>
+      </div>
+      <div aria-expanded="true"
+           aria-live="polite"
+           aria-popup="true"
+           role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node"
+      >
+        <div aria-control="nodeitem-node23-child"
+             id="nodeitem-node23"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <button type="button"
+                  aria-control="nodeitem-node23-child"
+                  aria-expanded="true"
+                  class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+          >
+            $subgroup
+          </button>
+          <div id="label-nodeitem-node23"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-23
+            </div>
+          </div>
+        </div>
+        <div aria-labeledby="nodeitem-node23"
+             id="nodeitem-node23-child"
+             tabindex="-1"
+             role="group"
+             class="v-treeview-node__children"
+        >
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node231"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node231"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-231
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node232"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node232"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-232
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts focus moves down on keydown.down keyboardTransverseFlatten with deep nested siblings 4`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+     keyboardtransverseflatten="true"
+>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node1-child"
+         id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node1-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node1"
+         id="nodeitem-node1-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node11"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node11"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-11
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node12"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node12"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-12
+            </div>
+          </div>
+        </div>
+      </div>
+      <div aria-expanded="true"
+           aria-live="polite"
+           aria-popup="true"
+           role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node"
+      >
+        <div aria-control="nodeitem-node13-child"
+             id="nodeitem-node13"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <button type="button"
+                  aria-control="nodeitem-node13-child"
+                  aria-expanded="true"
+                  class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+          >
+            $subgroup
+          </button>
+          <div id="label-nodeitem-node13"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-13
+            </div>
+          </div>
+        </div>
+        <div aria-labeledby="nodeitem-node13"
+             id="nodeitem-node13-child"
+             tabindex="-1"
+             role="group"
+             class="v-treeview-node__children"
+        >
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node131"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node131"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-131
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node132"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node132"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-132
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node2-child"
+         id="nodeitem-node2"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node2-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node2"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-2
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node2"
+         id="nodeitem-node2-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node21"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node21"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-21
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node22"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node22"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-22
+            </div>
+          </div>
+        </div>
+      </div>
+      <div aria-expanded="true"
+           aria-live="polite"
+           aria-popup="true"
+           role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node"
+      >
+        <div aria-control="nodeitem-node23-child"
+             id="nodeitem-node23"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <button type="button"
+                  aria-control="nodeitem-node23-child"
+                  aria-expanded="true"
+                  class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+          >
+            $subgroup
+          </button>
+          <div id="label-nodeitem-node23"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-23
+            </div>
+          </div>
+        </div>
+        <div aria-labeledby="nodeitem-node23"
+             id="nodeitem-node23-child"
+             tabindex="-1"
+             role="group"
+             class="v-treeview-node__children"
+        >
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node231"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node231"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-231
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="treeitem"
+               tabindex="0"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node232"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node232"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-232
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts focus moves down on keydown.down with nested siblings 1`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node1-child"
+         id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node1-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node1"
+         id="nodeitem-node1-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="0"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node11"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node11"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-11
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node12"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node12"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-12
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node13"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node13"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-13
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts focus moves down on keydown.down with nested siblings 2`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node1-child"
+         id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node1-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node1"
+         id="nodeitem-node1-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node11"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node11"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-11
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="0"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node12"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node12"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-12
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node13"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node13"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-13
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts focus moves down on keydown.down with nested siblings 3`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node1-child"
+         id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node1-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node1"
+         id="nodeitem-node1-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node11"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node11"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-11
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node12"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node12"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-12
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="0"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node13"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node13"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-13
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts focus moves down on keydown.down with nested siblings 4`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node1-child"
+         id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node1-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node1"
+         id="nodeitem-node1-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node11"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node11"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-11
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node12"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node12"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-12
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="0"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node13"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node13"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-13
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts focus moves up on keydown.up keyboardTransverseFlatten with deep nested siblings 1`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node1-child"
+         id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node1-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node1"
+         id="nodeitem-node1-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node11"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node11"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-11
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node12"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node12"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-12
+            </div>
+          </div>
+        </div>
+      </div>
+      <div aria-expanded="true"
+           aria-live="polite"
+           aria-popup="true"
+           role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node"
+      >
+        <div aria-control="nodeitem-node13-child"
+             id="nodeitem-node13"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <button type="button"
+                  aria-control="nodeitem-node13-child"
+                  aria-expanded="true"
+                  class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+          >
+            $subgroup
+          </button>
+          <div id="label-nodeitem-node13"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-13
+            </div>
+          </div>
+        </div>
+        <div aria-labeledby="nodeitem-node13"
+             id="nodeitem-node13-child"
+             tabindex="-1"
+             role="group"
+             class="v-treeview-node__children"
+        >
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node131"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node131"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-131
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node132"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node132"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-132
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node2-child"
+         id="nodeitem-node2"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node2-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node2"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-2
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node2"
+         id="nodeitem-node2-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node21"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node21"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-21
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node22"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node22"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-22
+            </div>
+          </div>
+        </div>
+      </div>
+      <div aria-expanded="true"
+           aria-live="polite"
+           aria-popup="true"
+           role="treeitem"
+           tabindex="0"
+           class="v-treeview-node"
+      >
+        <div aria-control="nodeitem-node23-child"
+             id="nodeitem-node23"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <button type="button"
+                  aria-control="nodeitem-node23-child"
+                  aria-expanded="true"
+                  class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+          >
+            $subgroup
+          </button>
+          <div id="label-nodeitem-node23"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-23
+            </div>
+          </div>
+        </div>
+        <div aria-labeledby="nodeitem-node23"
+             id="nodeitem-node23-child"
+             tabindex="-1"
+             role="group"
+             class="v-treeview-node__children"
+        >
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node231"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node231"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-231
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node232"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node232"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-232
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts focus moves up on keydown.up keyboardTransverseFlatten with deep nested siblings 2`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node1-child"
+         id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node1-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node1"
+         id="nodeitem-node1-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node11"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node11"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-11
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node12"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node12"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-12
+            </div>
+          </div>
+        </div>
+      </div>
+      <div aria-expanded="true"
+           aria-live="polite"
+           aria-popup="true"
+           role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node"
+      >
+        <div aria-control="nodeitem-node13-child"
+             id="nodeitem-node13"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <button type="button"
+                  aria-control="nodeitem-node13-child"
+                  aria-expanded="true"
+                  class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+          >
+            $subgroup
+          </button>
+          <div id="label-nodeitem-node13"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-13
+            </div>
+          </div>
+        </div>
+        <div aria-labeledby="nodeitem-node13"
+             id="nodeitem-node13-child"
+             tabindex="-1"
+             role="group"
+             class="v-treeview-node__children"
+        >
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node131"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node131"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-131
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node132"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node132"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-132
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="0"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node2-child"
+         id="nodeitem-node2"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node2-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node2"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-2
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node2"
+         id="nodeitem-node2-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node21"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node21"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-21
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node22"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node22"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-22
+            </div>
+          </div>
+        </div>
+      </div>
+      <div aria-expanded="true"
+           aria-live="polite"
+           aria-popup="true"
+           role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node"
+      >
+        <div aria-control="nodeitem-node23-child"
+             id="nodeitem-node23"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <button type="button"
+                  aria-control="nodeitem-node23-child"
+                  aria-expanded="true"
+                  class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+          >
+            $subgroup
+          </button>
+          <div id="label-nodeitem-node23"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-23
+            </div>
+          </div>
+        </div>
+        <div aria-labeledby="nodeitem-node23"
+             id="nodeitem-node23-child"
+             tabindex="-1"
+             role="group"
+             class="v-treeview-node__children"
+        >
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node231"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node231"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-231
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node232"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node232"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-232
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts focus moves up on keydown.up keyboardTransverseFlatten with deep nested siblings 3`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node1-child"
+         id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node1-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node1"
+         id="nodeitem-node1-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node11"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node11"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-11
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node12"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node12"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-12
+            </div>
+          </div>
+        </div>
+      </div>
+      <div aria-expanded="true"
+           aria-live="polite"
+           aria-popup="true"
+           role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node"
+      >
+        <div aria-control="nodeitem-node13-child"
+             id="nodeitem-node13"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <button type="button"
+                  aria-control="nodeitem-node13-child"
+                  aria-expanded="true"
+                  class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+          >
+            $subgroup
+          </button>
+          <div id="label-nodeitem-node13"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-13
+            </div>
+          </div>
+        </div>
+        <div aria-labeledby="nodeitem-node13"
+             id="nodeitem-node13-child"
+             tabindex="-1"
+             role="group"
+             class="v-treeview-node__children"
+        >
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node131"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node131"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-131
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="treeitem"
+               tabindex="0"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node132"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node132"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-132
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node2-child"
+         id="nodeitem-node2"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node2-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node2"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-2
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node2"
+         id="nodeitem-node2-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node21"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node21"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-21
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node22"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node22"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-22
+            </div>
+          </div>
+        </div>
+      </div>
+      <div aria-expanded="true"
+           aria-live="polite"
+           aria-popup="true"
+           role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node"
+      >
+        <div aria-control="nodeitem-node23-child"
+             id="nodeitem-node23"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <button type="button"
+                  aria-control="nodeitem-node23-child"
+                  aria-expanded="true"
+                  class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+          >
+            $subgroup
+          </button>
+          <div id="label-nodeitem-node23"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-23
+            </div>
+          </div>
+        </div>
+        <div aria-labeledby="nodeitem-node23"
+             id="nodeitem-node23-child"
+             tabindex="-1"
+             role="group"
+             class="v-treeview-node__children"
+        >
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node231"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node231"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-231
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node232"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node232"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-232
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts focus moves up on keydown.up keyboardTransverseFlatten with deep nested siblings 4`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="0"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node1-child"
+         id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node1-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node1"
+         id="nodeitem-node1-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node11"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node11"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-11
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node12"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node12"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-12
+            </div>
+          </div>
+        </div>
+      </div>
+      <div aria-expanded="true"
+           aria-live="polite"
+           aria-popup="true"
+           role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node"
+      >
+        <div aria-control="nodeitem-node13-child"
+             id="nodeitem-node13"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <button type="button"
+                  aria-control="nodeitem-node13-child"
+                  aria-expanded="true"
+                  class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+          >
+            $subgroup
+          </button>
+          <div id="label-nodeitem-node13"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-13
+            </div>
+          </div>
+        </div>
+        <div aria-labeledby="nodeitem-node13"
+             id="nodeitem-node13-child"
+             tabindex="-1"
+             role="group"
+             class="v-treeview-node__children"
+        >
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node131"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node131"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-131
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node132"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node132"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-132
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node2-child"
+         id="nodeitem-node2"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node2-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node2"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-2
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node2"
+         id="nodeitem-node2-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node21"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node21"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-21
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node22"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node22"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-22
+            </div>
+          </div>
+        </div>
+      </div>
+      <div aria-expanded="true"
+           aria-live="polite"
+           aria-popup="true"
+           role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node"
+      >
+        <div aria-control="nodeitem-node23-child"
+             id="nodeitem-node23"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <button type="button"
+                  aria-control="nodeitem-node23-child"
+                  aria-expanded="true"
+                  class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+          >
+            $subgroup
+          </button>
+          <div id="label-nodeitem-node23"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-23
+            </div>
+          </div>
+        </div>
+        <div aria-labeledby="nodeitem-node23"
+             id="nodeitem-node23-child"
+             tabindex="-1"
+             role="group"
+             class="v-treeview-node__children"
+        >
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node231"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node231"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-231
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="treeitem"
+               tabindex="-1"
+               class="v-treeview-node v-treeview-node--leaf"
+          >
+            <div id="nodeitem-node232"
+                 class="v-treeview-node__root"
+            >
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div class="v-treeview-node__level">
+              </div>
+              <div id="label-nodeitem-node232"
+                   class="v-treeview-node__content"
+              >
+                <div class="v-treeview-node__label">
+                  node-232
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts focus moves up on keydown.up with nested siblings 1`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node1-child"
+         id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node1-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node1"
+         id="nodeitem-node1-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node11"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node11"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-11
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="0"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node12"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node12"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-12
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node13"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node13"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-13
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts focus moves up on keydown.up with nested siblings 2`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node1-child"
+         id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node1-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node1"
+         id="nodeitem-node1-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="0"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node11"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node11"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-11
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node12"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node12"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-12
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node13"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node13"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-13
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts focus moves up on keydown.up with nested siblings 3`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="0"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node1-child"
+         id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node1-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node1"
+         id="nodeitem-node1-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node11"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node11"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-11
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node12"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node12"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-12
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node13"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node13"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-13
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts focus moves up on keydown.up with nested siblings 4`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="0"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node1-child"
+         id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node1-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node1"
+         id="nodeitem-node1-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node11"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node11"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-11
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node12"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node12"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-12
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node13"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node13"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-13
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts focus moves up on keydown.up with siblings 1`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node v-treeview-node--leaf"
+  >
+    <div id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+  </div>
+  <div role="treeitem"
+       tabindex="0"
+       class="v-treeview-node v-treeview-node--leaf"
+  >
+    <div id="nodeitem-node2"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node2"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-2
+        </div>
+      </div>
+    </div>
+  </div>
+  <div role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node v-treeview-node--leaf"
+  >
+    <div id="nodeitem-node3"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node3"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-3
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts focus moves up on keydown.up with siblings 2`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div role="treeitem"
+       tabindex="0"
+       class="v-treeview-node v-treeview-node--leaf"
+  >
+    <div id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+  </div>
+  <div role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node v-treeview-node--leaf"
+  >
+    <div id="nodeitem-node2"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node2"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-2
+        </div>
+      </div>
+    </div>
+  </div>
+  <div role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node v-treeview-node--leaf"
+  >
+    <div id="nodeitem-node3"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node3"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-3
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts focus moves up on keydown.up with siblings 3`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div role="treeitem"
+       tabindex="0"
+       class="v-treeview-node v-treeview-node--leaf"
+  >
+    <div id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+  </div>
+  <div role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node v-treeview-node--leaf"
+  >
+    <div id="nodeitem-node2"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node2"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-2
+        </div>
+      </div>
+    </div>
+  </div>
+  <div role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node v-treeview-node--leaf"
+  >
+    <div id="nodeitem-node3"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node3"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-3
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts node collapse on keydown.left closes an expanded node 1`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+     keyboardtransverseflatten="true"
+>
+  <div aria-expanded="false"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="0"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node1-child"
+         id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node1-child"
+              aria-expanded="false"
               class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
       >
         $subgroup
       </button>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts node does not collapse on keydown.left when no parent is available 1`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+     keyboardtransverseflatten="true"
+>
+  <div role="treeitem"
+       tabindex="0"
+       class="v-treeview-node v-treeview-node--leaf"
+  >
+    <div id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+  </div>
+  <div role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node v-treeview-node--leaf"
+  >
+    <div id="nodeitem-node2"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node2"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-2
+        </div>
+      </div>
+    </div>
+  </div>
+  <div role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node v-treeview-node--leaf"
+  >
+    <div id="nodeitem-node3"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node3"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-3
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts node does not expand on keydown.right when no children exists 1`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+     keyboardtransverseflatten="true"
+>
+  <div role="treeitem"
+       tabindex="0"
+       class="v-treeview-node v-treeview-node--leaf"
+  >
+    <div id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+  </div>
+  <div role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node v-treeview-node--leaf"
+  >
+    <div id="nodeitem-node2"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node2"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-2
+        </div>
+      </div>
+    </div>
+  </div>
+  <div role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node v-treeview-node--leaf"
+  >
+    <div id="nodeitem-node3"
+         class="v-treeview-node__root"
+    >
+      <div class="v-treeview-node__level">
+      </div>
+      <div id="label-nodeitem-node3"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-3
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts node expands on keydown.right when children exists 1`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+     keyboardtransverseflatten="true"
+>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node1-child"
+         id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node1-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node1"
+         id="nodeitem-node1-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="0"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node11"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node11"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-11
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node12"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node12"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-12
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node13"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node13"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-13
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts node goes to first node in group on keydown.left 1`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+     keyboardtransverseflatten="true"
+>
+  <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="0"
+       class="v-treeview-node"
+  >
+    <div aria-control="nodeitem-node1-child"
+         id="nodeitem-node1"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-node1-child"
+              aria-expanded="true"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-node1"
+           class="v-treeview-node__content"
+      >
+        <div class="v-treeview-node__label">
+          node-1
+        </div>
+      </div>
+    </div>
+    <div aria-labeledby="nodeitem-node1"
+         id="nodeitem-node1-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node11"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node11"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-11
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node12"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node12"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-12
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="treeitem"
+           tabindex="-1"
+           class="v-treeview-node v-treeview-node--leaf"
+      >
+        <div id="nodeitem-node13"
+             class="v-treeview-node__root"
+        >
+          <div class="v-treeview-node__level">
+          </div>
+          <div class="v-treeview-node__level">
+          </div>
+          <div id="label-nodeitem-node13"
+               class="v-treeview-node__content"
+          >
+            <div class="v-treeview-node__label">
+              node-13
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTreeView.ts should emit opened node when using open-on-click and load-children 1`] = `
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div aria-expanded="false"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
+       class="v-treeview-node v-treeview-node--click"
+  >
+    <div aria-control="nodeitem-0-child"
+         id="nodeitem-0"
+         class="v-treeview-node__root"
+    >
+      <button type="button"
+              aria-control="nodeitem-0-child"
+              aria-expanded="false"
+              class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
+      >
+        $subgroup
+      </button>
+      <div id="label-nodeitem-0"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           Root
         </div>
@@ -22,32 +4124,56 @@ exports[`VTreeView.ts should emit opened node when using open-on-click and load-
 `;
 
 exports[`VTreeView.ts should emit opened node when using open-on-click and load-children 2`] = `
-<div class="v-treeview theme--light">
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
   <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
        class="v-treeview-node v-treeview-node--click"
   >
-    <div class="v-treeview-node__root">
+    <div aria-control="nodeitem-0-child"
+         id="nodeitem-0"
+         class="v-treeview-node__root"
+    >
       <button type="button"
+              aria-control="nodeitem-0-child"
+              aria-expanded="true"
               class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
       >
         $subgroup
       </button>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-0"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           Root
         </div>
       </div>
     </div>
-    <div class="v-treeview-node__children">
-      <div aria-expanded="false"
+    <div aria-labeledby="nodeitem-0"
+         id="nodeitem-0-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
            class="v-treeview-node v-treeview-node--leaf v-treeview-node--click"
       >
-        <div class="v-treeview-node__root">
+        <div id="nodeitem-1"
+             class="v-treeview-node__root"
+        >
           <div class="v-treeview-node__level">
           </div>
           <div class="v-treeview-node__level">
           </div>
-          <div class="v-treeview-node__content">
+          <div id="label-nodeitem-1"
+               class="v-treeview-node__content"
+          >
             <div class="v-treeview-node__label">
               Child
             </div>
@@ -60,27 +4186,40 @@ exports[`VTreeView.ts should emit opened node when using open-on-click and load-
 `;
 
 exports[`VTreeView.ts should filter items 1`] = `
-<div class="v-treeview theme--light">
-  <div aria-expanded="false"
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div role="treeitem"
+       tabindex="-1"
        class="v-treeview-node v-treeview-node--leaf"
   >
-    <div class="v-treeview-node__root">
+    <div id="nodeitem-1"
+         class="v-treeview-node__root"
+    >
       <div class="v-treeview-node__level">
       </div>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-1"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           one
         </div>
       </div>
     </div>
   </div>
-  <div aria-expanded="false"
+  <div role="treeitem"
+       tabindex="-1"
        class="v-treeview-node v-treeview-node--leaf"
   >
-    <div class="v-treeview-node__root">
+    <div id="nodeitem-2"
+         class="v-treeview-node__root"
+    >
       <div class="v-treeview-node__level">
       </div>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-2"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           two
         </div>
@@ -91,27 +4230,40 @@ exports[`VTreeView.ts should filter items 1`] = `
 `;
 
 exports[`VTreeView.ts should filter items 2`] = `
-<div class="v-treeview theme--light">
-  <div aria-expanded="false"
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div role="treeitem"
+       tabindex="-1"
        class="v-treeview-node v-treeview-node--leaf v-treeview-node--excluded"
   >
-    <div class="v-treeview-node__root">
+    <div id="nodeitem-1"
+         class="v-treeview-node__root"
+    >
       <div class="v-treeview-node__level">
       </div>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-1"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           one
         </div>
       </div>
     </div>
   </div>
-  <div aria-expanded="false"
+  <div role="treeitem"
+       tabindex="-1"
        class="v-treeview-node v-treeview-node--leaf"
   >
-    <div class="v-treeview-node__root">
+    <div id="nodeitem-2"
+         class="v-treeview-node__root"
+    >
       <div class="v-treeview-node__level">
       </div>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-2"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           two
         </div>
@@ -122,27 +4274,40 @@ exports[`VTreeView.ts should filter items 2`] = `
 `;
 
 exports[`VTreeView.ts should filter items using custom item filter 1`] = `
-<div class="v-treeview theme--light">
-  <div aria-expanded="false"
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div role="treeitem"
+       tabindex="-1"
        class="v-treeview-node v-treeview-node--leaf v-treeview-node--excluded"
   >
-    <div class="v-treeview-node__root">
+    <div id="nodeitem-1"
+         class="v-treeview-node__root"
+    >
       <div class="v-treeview-node__level">
       </div>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-1"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           one
         </div>
       </div>
     </div>
   </div>
-  <div aria-expanded="false"
+  <div role="treeitem"
+       tabindex="-1"
        class="v-treeview-node v-treeview-node--leaf v-treeview-node--excluded"
   >
-    <div class="v-treeview-node__root">
+    <div id="nodeitem-2"
+         class="v-treeview-node__root"
+    >
       <div class="v-treeview-node__level">
       </div>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-2"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           two
         </div>
@@ -153,27 +4318,40 @@ exports[`VTreeView.ts should filter items using custom item filter 1`] = `
 `;
 
 exports[`VTreeView.ts should filter items using custom item filter 2`] = `
-<div class="v-treeview theme--light">
-  <div aria-expanded="false"
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div role="treeitem"
+       tabindex="-1"
        class="v-treeview-node v-treeview-node--leaf"
   >
-    <div class="v-treeview-node__root">
+    <div id="nodeitem-1"
+         class="v-treeview-node__root"
+    >
       <div class="v-treeview-node__level">
       </div>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-1"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           one
         </div>
       </div>
     </div>
   </div>
-  <div aria-expanded="false"
+  <div role="treeitem"
+       tabindex="-1"
        class="v-treeview-node v-treeview-node--leaf v-treeview-node--excluded"
   >
-    <div class="v-treeview-node__root">
+    <div id="nodeitem-2"
+         class="v-treeview-node__root"
+    >
       <div class="v-treeview-node__level">
       </div>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-2"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           two
         </div>
@@ -184,11 +4362,17 @@ exports[`VTreeView.ts should filter items using custom item filter 2`] = `
 `;
 
 exports[`VTreeView.ts should handle initial active/open/selected values when using return-object prop 1`] = `
-<div class="v-treeview theme--light">
-  <div aria-expanded="false"
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div role="treeitem"
+       tabindex="-1"
        class="v-treeview-node v-treeview-node--leaf v-treeview-node--selected"
   >
-    <div class="v-treeview-node__root">
+    <div id="nodeitem-1"
+         class="v-treeview-node__root"
+    >
       <div class="v-treeview-node__level">
       </div>
       <button type="button"
@@ -196,7 +4380,9 @@ exports[`VTreeView.ts should handle initial active/open/selected values when usi
       >
         $checkboxOn
       </button>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-1"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           One
         </div>
@@ -204,10 +4390,19 @@ exports[`VTreeView.ts should handle initial active/open/selected values when usi
     </div>
   </div>
   <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
        class="v-treeview-node"
   >
-    <div class="v-treeview-node__root">
+    <div aria-control="nodeitem-2-child"
+         id="nodeitem-2"
+         class="v-treeview-node__root"
+    >
       <button type="button"
+              aria-control="nodeitem-2-child"
+              aria-expanded="true"
               class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
       >
         $subgroup
@@ -217,17 +4412,27 @@ exports[`VTreeView.ts should handle initial active/open/selected values when usi
       >
         $checkboxOff
       </button>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-2"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           Two
         </div>
       </div>
     </div>
-    <div class="v-treeview-node__children">
-      <div aria-expanded="false"
+    <div aria-labeledby="nodeitem-2"
+         id="nodeitem-2-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
            class="v-treeview-node v-treeview-node--leaf"
       >
-        <div class="v-treeview-node__root v-treeview-node--active primary--text">
+        <div id="nodeitem-3"
+             class="v-treeview-node__root v-treeview-node--active primary--text"
+        >
           <div class="v-treeview-node__level">
           </div>
           <div class="v-treeview-node__level">
@@ -237,7 +4442,9 @@ exports[`VTreeView.ts should handle initial active/open/selected values when usi
           >
             $checkboxOff
           </button>
-          <div class="v-treeview-node__content">
+          <div id="label-nodeitem-3"
+               class="v-treeview-node__content"
+          >
             <div class="v-treeview-node__label">
               Three
             </div>
@@ -250,27 +4457,40 @@ exports[`VTreeView.ts should handle initial active/open/selected values when usi
 `;
 
 exports[`VTreeView.ts should handle replacing items with new array of equal length 1`] = `
-<div class="v-treeview theme--light">
-  <div aria-expanded="false"
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div role="treeitem"
+       tabindex="-1"
        class="v-treeview-node v-treeview-node--leaf"
   >
-    <div class="v-treeview-node__root">
+    <div id="nodeitem-1"
+         class="v-treeview-node__root"
+    >
       <div class="v-treeview-node__level">
       </div>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-1"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           one
         </div>
       </div>
     </div>
   </div>
-  <div aria-expanded="false"
+  <div role="treeitem"
+       tabindex="-1"
        class="v-treeview-node v-treeview-node--leaf"
   >
-    <div class="v-treeview-node__root">
+    <div id="nodeitem-2"
+         class="v-treeview-node__root"
+    >
       <div class="v-treeview-node__level">
       </div>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-2"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           two
         </div>
@@ -281,27 +4501,40 @@ exports[`VTreeView.ts should handle replacing items with new array of equal leng
 `;
 
 exports[`VTreeView.ts should handle replacing items with new array of equal length 2`] = `
-<div class="v-treeview theme--light">
-  <div aria-expanded="false"
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div role="treeitem"
+       tabindex="-1"
        class="v-treeview-node v-treeview-node--leaf"
   >
-    <div class="v-treeview-node__root">
+    <div id="nodeitem-1"
+         class="v-treeview-node__root"
+    >
       <div class="v-treeview-node__level">
       </div>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-1"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           one
         </div>
       </div>
     </div>
   </div>
-  <div aria-expanded="false"
+  <div role="treeitem"
+       tabindex="-1"
        class="v-treeview-node v-treeview-node--leaf"
   >
-    <div class="v-treeview-node__root">
+    <div id="nodeitem-3"
+         class="v-treeview-node__root"
+    >
       <div class="v-treeview-node__level">
       </div>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-3"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           three
         </div>
@@ -312,17 +4545,31 @@ exports[`VTreeView.ts should handle replacing items with new array of equal leng
 `;
 
 exports[`VTreeView.ts should load children when expanding 1`] = `
-<div class="v-treeview theme--light">
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
   <div aria-expanded="false"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
        class="v-treeview-node"
   >
-    <div class="v-treeview-node__root">
+    <div aria-control="nodeitem-0-child"
+         id="nodeitem-0"
+         class="v-treeview-node__root"
+    >
       <button type="button"
+              aria-control="nodeitem-0-child"
+              aria-expanded="false"
               class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
       >
         $subgroup
       </button>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-0"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           Root
         </div>
@@ -333,32 +4580,56 @@ exports[`VTreeView.ts should load children when expanding 1`] = `
 `;
 
 exports[`VTreeView.ts should load children when expanding 2`] = `
-<div class="v-treeview theme--light">
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
   <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
        class="v-treeview-node"
   >
-    <div class="v-treeview-node__root">
+    <div aria-control="nodeitem-0-child"
+         id="nodeitem-0"
+         class="v-treeview-node__root"
+    >
       <button type="button"
+              aria-control="nodeitem-0-child"
+              aria-expanded="true"
               class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
       >
         $subgroup
       </button>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-0"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           Root
         </div>
       </div>
     </div>
-    <div class="v-treeview-node__children">
-      <div aria-expanded="false"
+    <div aria-labeledby="nodeitem-0"
+         id="nodeitem-0-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
            class="v-treeview-node v-treeview-node--leaf"
       >
-        <div class="v-treeview-node__root">
+        <div id="nodeitem-1"
+             class="v-treeview-node__root"
+        >
           <div class="v-treeview-node__level">
           </div>
           <div class="v-treeview-node__level">
           </div>
-          <div class="v-treeview-node__content">
+          <div id="label-nodeitem-1"
+               class="v-treeview-node__content"
+          >
             <div class="v-treeview-node__label">
               Child
             </div>
@@ -371,12 +4642,24 @@ exports[`VTreeView.ts should load children when expanding 2`] = `
 `;
 
 exports[`VTreeView.ts should load children when selecting, but not render 1`] = `
-<div class="v-treeview theme--light">
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
   <div aria-expanded="false"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
        class="v-treeview-node"
   >
-    <div class="v-treeview-node__root">
+    <div aria-control="nodeitem-0-child"
+         id="nodeitem-0"
+         class="v-treeview-node__root"
+    >
       <button type="button"
+              aria-control="nodeitem-0-child"
+              aria-expanded="false"
               class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
       >
         $subgroup
@@ -386,7 +4669,9 @@ exports[`VTreeView.ts should load children when selecting, but not render 1`] = 
       >
         $checkboxOff
       </button>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-0"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           Root
         </div>
@@ -397,12 +4682,24 @@ exports[`VTreeView.ts should load children when selecting, but not render 1`] = 
 `;
 
 exports[`VTreeView.ts should load children when selecting, but not render 2`] = `
-<div class="v-treeview theme--light">
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
   <div aria-expanded="false"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
        class="v-treeview-node v-treeview-node--selected"
   >
-    <div class="v-treeview-node__root">
+    <div aria-control="nodeitem-0-child"
+         id="nodeitem-0"
+         class="v-treeview-node__root"
+    >
       <button type="button"
+              aria-control="nodeitem-0-child"
+              aria-expanded="false"
               class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
       >
         $subgroup
@@ -412,7 +4709,9 @@ exports[`VTreeView.ts should load children when selecting, but not render 2`] = 
       >
         $checkboxOn
       </button>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-0"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           Root
         </div>
@@ -423,14 +4722,25 @@ exports[`VTreeView.ts should load children when selecting, but not render 2`] = 
 `;
 
 exports[`VTreeView.ts should not show expand icon when children is empty 1`] = `
-<div class="v-treeview theme--light">
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
   <div aria-expanded="false"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
        class="v-treeview-node v-treeview-node--leaf"
   >
-    <div class="v-treeview-node__root">
+    <div aria-control="nodeitem-undefined-child"
+         id="nodeitem-undefined"
+         class="v-treeview-node__root"
+    >
       <div class="v-treeview-node__level">
       </div>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-undefined"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
         </div>
       </div>
@@ -440,52 +4750,92 @@ exports[`VTreeView.ts should not show expand icon when children is empty 1`] = `
 `;
 
 exports[`VTreeView.ts should open all children when using open-all prop 1`] = `
-<div class="v-treeview theme--light">
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
   <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
        class="v-treeview-node"
   >
-    <div class="v-treeview-node__root">
+    <div aria-control="nodeitem-0-child"
+         id="nodeitem-0"
+         class="v-treeview-node__root"
+    >
       <button type="button"
+              aria-control="nodeitem-0-child"
+              aria-expanded="true"
               class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
       >
         $subgroup
       </button>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-0"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           Root
         </div>
       </div>
     </div>
-    <div class="v-treeview-node__children">
+    <div aria-labeledby="nodeitem-0"
+         id="nodeitem-0-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
       <div aria-expanded="true"
+           aria-live="polite"
+           aria-popup="true"
+           role="treeitem"
+           tabindex="-1"
            class="v-treeview-node"
       >
-        <div class="v-treeview-node__root">
+        <div aria-control="nodeitem-1-child"
+             id="nodeitem-1"
+             class="v-treeview-node__root"
+        >
           <div class="v-treeview-node__level">
           </div>
           <button type="button"
+                  aria-control="nodeitem-1-child"
+                  aria-expanded="true"
                   class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
           >
             $subgroup
           </button>
-          <div class="v-treeview-node__content">
+          <div id="label-nodeitem-1"
+               class="v-treeview-node__content"
+          >
             <div class="v-treeview-node__label">
               Child
             </div>
           </div>
         </div>
-        <div class="v-treeview-node__children">
-          <div aria-expanded="false"
+        <div aria-labeledby="nodeitem-1"
+             id="nodeitem-1-child"
+             tabindex="-1"
+             role="group"
+             class="v-treeview-node__children"
+        >
+          <div role="treeitem"
+               tabindex="-1"
                class="v-treeview-node v-treeview-node--leaf"
           >
-            <div class="v-treeview-node__root">
+            <div id="nodeitem-2"
+                 class="v-treeview-node__root"
+            >
               <div class="v-treeview-node__level">
               </div>
               <div class="v-treeview-node__level">
               </div>
               <div class="v-treeview-node__level">
               </div>
-              <div class="v-treeview-node__content">
+              <div id="label-nodeitem-2"
+                   class="v-treeview-node__content"
+              >
                 <div class="v-treeview-node__label">
                   Grandchild
                 </div>
@@ -494,15 +4844,20 @@ exports[`VTreeView.ts should open all children when using open-all prop 1`] = `
           </div>
         </div>
       </div>
-      <div aria-expanded="false"
+      <div role="treeitem"
+           tabindex="-1"
            class="v-treeview-node v-treeview-node--leaf"
       >
-        <div class="v-treeview-node__root">
+        <div id="nodeitem-3"
+             class="v-treeview-node__root"
+        >
           <div class="v-treeview-node__level">
           </div>
           <div class="v-treeview-node__level">
           </div>
-          <div class="v-treeview-node__content">
+          <div id="label-nodeitem-3"
+               class="v-treeview-node__content"
+          >
             <div class="v-treeview-node__label">
               Child
             </div>
@@ -515,52 +4870,92 @@ exports[`VTreeView.ts should open all children when using open-all prop 1`] = `
 `;
 
 exports[`VTreeView.ts should react to open changes 1`] = `
-<div class="v-treeview theme--light">
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
   <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
        class="v-treeview-node"
   >
-    <div class="v-treeview-node__root">
+    <div aria-control="nodeitem-0-child"
+         id="nodeitem-0"
+         class="v-treeview-node__root"
+    >
       <button type="button"
+              aria-control="nodeitem-0-child"
+              aria-expanded="true"
               class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
       >
         $subgroup
       </button>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-0"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           Root
         </div>
       </div>
     </div>
-    <div class="v-treeview-node__children">
+    <div aria-labeledby="nodeitem-0"
+         id="nodeitem-0-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
       <div aria-expanded="true"
+           aria-live="polite"
+           aria-popup="true"
+           role="treeitem"
+           tabindex="-1"
            class="v-treeview-node"
       >
-        <div class="v-treeview-node__root">
+        <div aria-control="nodeitem-1-child"
+             id="nodeitem-1"
+             class="v-treeview-node__root"
+        >
           <div class="v-treeview-node__level">
           </div>
           <button type="button"
+                  aria-control="nodeitem-1-child"
+                  aria-expanded="true"
                   class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
           >
             $subgroup
           </button>
-          <div class="v-treeview-node__content">
+          <div id="label-nodeitem-1"
+               class="v-treeview-node__content"
+          >
             <div class="v-treeview-node__label">
               Child
             </div>
           </div>
         </div>
-        <div class="v-treeview-node__children">
-          <div aria-expanded="false"
+        <div aria-labeledby="nodeitem-1"
+             id="nodeitem-1-child"
+             tabindex="-1"
+             role="group"
+             class="v-treeview-node__children"
+        >
+          <div role="treeitem"
+               tabindex="-1"
                class="v-treeview-node v-treeview-node--leaf"
           >
-            <div class="v-treeview-node__root">
+            <div id="nodeitem-2"
+                 class="v-treeview-node__root"
+            >
               <div class="v-treeview-node__level">
               </div>
               <div class="v-treeview-node__level">
               </div>
               <div class="v-treeview-node__level">
               </div>
-              <div class="v-treeview-node__content">
+              <div id="label-nodeitem-2"
+                   class="v-treeview-node__content"
+              >
                 <div class="v-treeview-node__label">
                   Grandchild
                 </div>
@@ -569,15 +4964,20 @@ exports[`VTreeView.ts should react to open changes 1`] = `
           </div>
         </div>
       </div>
-      <div aria-expanded="false"
+      <div role="treeitem"
+           tabindex="-1"
            class="v-treeview-node v-treeview-node--leaf"
       >
-        <div class="v-treeview-node__root">
+        <div id="nodeitem-3"
+             class="v-treeview-node__root"
+        >
           <div class="v-treeview-node__level">
           </div>
           <div class="v-treeview-node__level">
           </div>
-          <div class="v-treeview-node__content">
+          <div id="label-nodeitem-3"
+               class="v-treeview-node__content"
+          >
             <div class="v-treeview-node__label">
               Child
             </div>
@@ -590,50 +4990,85 @@ exports[`VTreeView.ts should react to open changes 1`] = `
 `;
 
 exports[`VTreeView.ts should react to open changes 2`] = `
-<div class="v-treeview theme--light">
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
   <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
        class="v-treeview-node"
   >
-    <div class="v-treeview-node__root">
+    <div aria-control="nodeitem-0-child"
+         id="nodeitem-0"
+         class="v-treeview-node__root"
+    >
       <button type="button"
+              aria-control="nodeitem-0-child"
+              aria-expanded="true"
               class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
       >
         $subgroup
       </button>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-0"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           Root
         </div>
       </div>
     </div>
-    <div class="v-treeview-node__children">
+    <div aria-labeledby="nodeitem-0"
+         id="nodeitem-0-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
       <div aria-expanded="false"
+           aria-live="polite"
+           aria-popup="true"
+           role="treeitem"
+           tabindex="-1"
            class="v-treeview-node"
       >
-        <div class="v-treeview-node__root">
+        <div aria-control="nodeitem-1-child"
+             id="nodeitem-1"
+             class="v-treeview-node__root"
+        >
           <div class="v-treeview-node__level">
           </div>
           <button type="button"
+                  aria-control="nodeitem-1-child"
+                  aria-expanded="false"
                   class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
           >
             $subgroup
           </button>
-          <div class="v-treeview-node__content">
+          <div id="label-nodeitem-1"
+               class="v-treeview-node__content"
+          >
             <div class="v-treeview-node__label">
               Child
             </div>
           </div>
         </div>
       </div>
-      <div aria-expanded="false"
+      <div role="treeitem"
+           tabindex="-1"
            class="v-treeview-node v-treeview-node--leaf"
       >
-        <div class="v-treeview-node__root">
+        <div id="nodeitem-3"
+             class="v-treeview-node__root"
+        >
           <div class="v-treeview-node__level">
           </div>
           <div class="v-treeview-node__level">
           </div>
-          <div class="v-treeview-node__content">
+          <div id="label-nodeitem-3"
+               class="v-treeview-node__content"
+          >
             <div class="v-treeview-node__label">
               Child
             </div>
@@ -646,52 +5081,92 @@ exports[`VTreeView.ts should react to open changes 2`] = `
 `;
 
 exports[`VTreeView.ts should react to open changes 3`] = `
-<div class="v-treeview theme--light">
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
   <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
        class="v-treeview-node"
   >
-    <div class="v-treeview-node__root">
+    <div aria-control="nodeitem-0-child"
+         id="nodeitem-0"
+         class="v-treeview-node__root"
+    >
       <button type="button"
+              aria-control="nodeitem-0-child"
+              aria-expanded="true"
               class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
       >
         $subgroup
       </button>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-0"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           Root
         </div>
       </div>
     </div>
-    <div class="v-treeview-node__children">
+    <div aria-labeledby="nodeitem-0"
+         id="nodeitem-0-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
       <div aria-expanded="true"
+           aria-live="polite"
+           aria-popup="true"
+           role="treeitem"
+           tabindex="-1"
            class="v-treeview-node"
       >
-        <div class="v-treeview-node__root">
+        <div aria-control="nodeitem-1-child"
+             id="nodeitem-1"
+             class="v-treeview-node__root"
+        >
           <div class="v-treeview-node__level">
           </div>
           <button type="button"
+                  aria-control="nodeitem-1-child"
+                  aria-expanded="true"
                   class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
           >
             $subgroup
           </button>
-          <div class="v-treeview-node__content">
+          <div id="label-nodeitem-1"
+               class="v-treeview-node__content"
+          >
             <div class="v-treeview-node__label">
               Child
             </div>
           </div>
         </div>
-        <div class="v-treeview-node__children">
-          <div aria-expanded="false"
+        <div aria-labeledby="nodeitem-1"
+             id="nodeitem-1-child"
+             tabindex="-1"
+             role="group"
+             class="v-treeview-node__children"
+        >
+          <div role="treeitem"
+               tabindex="-1"
                class="v-treeview-node v-treeview-node--leaf"
           >
-            <div class="v-treeview-node__root">
+            <div id="nodeitem-2"
+                 class="v-treeview-node__root"
+            >
               <div class="v-treeview-node__level">
               </div>
               <div class="v-treeview-node__level">
               </div>
               <div class="v-treeview-node__level">
               </div>
-              <div class="v-treeview-node__content">
+              <div id="label-nodeitem-2"
+                   class="v-treeview-node__content"
+              >
                 <div class="v-treeview-node__label">
                   Grandchild
                 </div>
@@ -700,15 +5175,20 @@ exports[`VTreeView.ts should react to open changes 3`] = `
           </div>
         </div>
       </div>
-      <div aria-expanded="false"
+      <div role="treeitem"
+           tabindex="-1"
            class="v-treeview-node v-treeview-node--leaf"
       >
-        <div class="v-treeview-node__root">
+        <div id="nodeitem-3"
+             class="v-treeview-node__root"
+        >
           <div class="v-treeview-node__level">
           </div>
           <div class="v-treeview-node__level">
           </div>
-          <div class="v-treeview-node__content">
+          <div id="label-nodeitem-3"
+               class="v-treeview-node__content"
+          >
             <div class="v-treeview-node__label">
               Child
             </div>
@@ -721,17 +5201,31 @@ exports[`VTreeView.ts should react to open changes 3`] = `
 `;
 
 exports[`VTreeView.ts should react to open changes 4`] = `
-<div class="v-treeview theme--light">
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
   <div aria-expanded="false"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
        class="v-treeview-node"
   >
-    <div class="v-treeview-node__root">
+    <div aria-control="nodeitem-0-child"
+         id="nodeitem-0"
+         class="v-treeview-node__root"
+    >
       <button type="button"
+              aria-control="nodeitem-0-child"
+              aria-expanded="false"
               class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
       >
         $subgroup
       </button>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-0"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           Root
         </div>
@@ -742,32 +5236,56 @@ exports[`VTreeView.ts should react to open changes 4`] = `
 `;
 
 exports[`VTreeView.ts should recalculate tree when loading async children using custom key 1`] = `
-<div class="v-treeview theme--light">
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
   <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
        class="v-treeview-node"
   >
-    <div class="v-treeview-node__root">
+    <div aria-control="nodeitem-1-child"
+         id="nodeitem-1"
+         class="v-treeview-node__root"
+    >
       <button type="button"
+              aria-control="nodeitem-1-child"
+              aria-expanded="true"
               class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
       >
         $subgroup
       </button>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-1"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           One
         </div>
       </div>
     </div>
-    <div class="v-treeview-node__children">
-      <div aria-expanded="false"
+    <div aria-labeledby="nodeitem-1"
+         id="nodeitem-1-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
            class="v-treeview-node v-treeview-node--leaf"
       >
-        <div class="v-treeview-node__root">
+        <div id="nodeitem-2"
+             class="v-treeview-node__root"
+        >
           <div class="v-treeview-node__level">
           </div>
           <div class="v-treeview-node__level">
           </div>
-          <div class="v-treeview-node__content">
+          <div id="label-nodeitem-2"
+               class="v-treeview-node__content"
+          >
             <div class="v-treeview-node__label">
               Two
             </div>
@@ -780,27 +5298,40 @@ exports[`VTreeView.ts should recalculate tree when loading async children using 
 `;
 
 exports[`VTreeView.ts should remove old nodes 1`] = `
-<div class="v-treeview theme--light">
-  <div aria-expanded="false"
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div role="treeitem"
+       tabindex="-1"
        class="v-treeview-node v-treeview-node--leaf"
   >
-    <div class="v-treeview-node__root">
+    <div id="nodeitem-1"
+         class="v-treeview-node__root"
+    >
       <div class="v-treeview-node__level">
       </div>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-1"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           one
         </div>
       </div>
     </div>
   </div>
-  <div aria-expanded="false"
+  <div role="treeitem"
+       tabindex="-1"
        class="v-treeview-node v-treeview-node--leaf"
   >
-    <div class="v-treeview-node__root">
+    <div id="nodeitem-2"
+         class="v-treeview-node__root"
+    >
       <div class="v-treeview-node__level">
       </div>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-2"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           two
         </div>
@@ -811,14 +5342,22 @@ exports[`VTreeView.ts should remove old nodes 1`] = `
 `;
 
 exports[`VTreeView.ts should remove old nodes 2`] = `
-<div class="v-treeview theme--light">
-  <div aria-expanded="false"
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div role="treeitem"
+       tabindex="-1"
        class="v-treeview-node v-treeview-node--leaf"
   >
-    <div class="v-treeview-node__root">
+    <div id="nodeitem-1"
+         class="v-treeview-node__root"
+    >
       <div class="v-treeview-node__level">
       </div>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-1"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           one
         </div>
@@ -829,27 +5368,40 @@ exports[`VTreeView.ts should remove old nodes 2`] = `
 `;
 
 exports[`VTreeView.ts should remove old nodes 3`] = `
-<div class="v-treeview theme--light">
-  <div aria-expanded="false"
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
+  <div role="treeitem"
+       tabindex="-1"
        class="v-treeview-node v-treeview-node--leaf"
   >
-    <div class="v-treeview-node__root">
+    <div id="nodeitem-1"
+         class="v-treeview-node__root"
+    >
       <div class="v-treeview-node__level">
       </div>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-1"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           one
         </div>
       </div>
     </div>
   </div>
-  <div aria-expanded="false"
+  <div role="treeitem"
+       tabindex="-1"
        class="v-treeview-node v-treeview-node--leaf"
   >
-    <div class="v-treeview-node__root">
+    <div id="nodeitem-3"
+         class="v-treeview-node__root"
+    >
       <div class="v-treeview-node__level">
       </div>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-3"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           three
         </div>
@@ -860,17 +5412,31 @@ exports[`VTreeView.ts should remove old nodes 3`] = `
 `;
 
 exports[`VTreeView.ts should render items 1`] = `
-<div class="v-treeview theme--light">
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
   <div aria-expanded="false"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
        class="v-treeview-node"
   >
-    <div class="v-treeview-node__root">
+    <div aria-control="nodeitem-0-child"
+         id="nodeitem-0"
+         class="v-treeview-node__root"
+    >
       <button type="button"
+              aria-control="nodeitem-0-child"
+              aria-expanded="false"
               class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
       >
         $subgroup
       </button>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-0"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           Root
         </div>
@@ -881,17 +5447,31 @@ exports[`VTreeView.ts should render items 1`] = `
 `;
 
 exports[`VTreeView.ts should render items in dense mode 1`] = `
-<div class="v-treeview v-treeview--dense theme--light">
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview v-treeview--dense theme--light"
+>
   <div aria-expanded="false"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
        class="v-treeview-node"
   >
-    <div class="v-treeview-node__root">
+    <div aria-control="nodeitem-0-child"
+         id="nodeitem-0"
+         class="v-treeview-node__root"
+    >
       <button type="button"
+              aria-control="nodeitem-0-child"
+              aria-expanded="false"
               class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
       >
         $subgroup
       </button>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-0"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           Root
         </div>
@@ -1019,17 +5599,31 @@ exports[`VTreeView.ts should select only root node 1`] = `
 `;
 
 exports[`VTreeView.ts should show expand icon when children is empty and load-children prop used 1`] = `
-<div class="v-treeview theme--light">
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
   <div aria-expanded="false"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
        class="v-treeview-node"
   >
-    <div class="v-treeview-node__root">
+    <div aria-control="nodeitem-undefined-child"
+         id="nodeitem-undefined"
+         class="v-treeview-node__root"
+    >
       <button type="button"
+              aria-control="nodeitem-undefined-child"
+              aria-expanded="false"
               class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
       >
         $subgroup
       </button>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-undefined"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
         </div>
       </div>
@@ -1039,12 +5633,24 @@ exports[`VTreeView.ts should show expand icon when children is empty and load-ch
 `;
 
 exports[`VTreeView.ts should update selection when selected prop changes 1`] = `
-<div class="v-treeview theme--light">
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
   <div aria-expanded="false"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
        class="v-treeview-node"
   >
-    <div class="v-treeview-node__root">
+    <div aria-control="nodeitem-0-child"
+         id="nodeitem-0"
+         class="v-treeview-node__root"
+    >
       <button type="button"
+              aria-control="nodeitem-0-child"
+              aria-expanded="false"
               class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
       >
         $subgroup
@@ -1054,7 +5660,9 @@ exports[`VTreeView.ts should update selection when selected prop changes 1`] = `
       >
         $checkboxOff
       </button>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-0"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           Root
         </div>
@@ -1065,12 +5673,24 @@ exports[`VTreeView.ts should update selection when selected prop changes 1`] = `
 `;
 
 exports[`VTreeView.ts should update selection when selected prop changes 2`] = `
-<div class="v-treeview theme--light">
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
   <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
        class="v-treeview-node v-treeview-node--selected"
   >
-    <div class="v-treeview-node__root">
+    <div aria-control="nodeitem-0-child"
+         id="nodeitem-0"
+         class="v-treeview-node__root"
+    >
       <button type="button"
+              aria-control="nodeitem-0-child"
+              aria-expanded="true"
               class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
       >
         $subgroup
@@ -1080,17 +5700,27 @@ exports[`VTreeView.ts should update selection when selected prop changes 2`] = `
       >
         $checkboxOn
       </button>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-0"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           Root
         </div>
       </div>
     </div>
-    <div class="v-treeview-node__children">
-      <div aria-expanded="false"
+    <div aria-labeledby="nodeitem-0"
+         id="nodeitem-0-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
            class="v-treeview-node v-treeview-node--leaf v-treeview-node--selected"
       >
-        <div class="v-treeview-node__root">
+        <div id="nodeitem-1"
+             class="v-treeview-node__root"
+        >
           <div class="v-treeview-node__level">
           </div>
           <div class="v-treeview-node__level">
@@ -1100,7 +5730,9 @@ exports[`VTreeView.ts should update selection when selected prop changes 2`] = `
           >
             $checkboxOn
           </button>
-          <div class="v-treeview-node__content">
+          <div id="label-nodeitem-1"
+               class="v-treeview-node__content"
+          >
             <div class="v-treeview-node__label">
               Child
             </div>
@@ -1113,12 +5745,24 @@ exports[`VTreeView.ts should update selection when selected prop changes 2`] = `
 `;
 
 exports[`VTreeView.ts should update selection when selected prop changes 3`] = `
-<div class="v-treeview theme--light">
+<div role="tree"
+     tabindex="-1"
+     class="v-treeview theme--light"
+>
   <div aria-expanded="true"
+       aria-live="polite"
+       aria-popup="true"
+       role="treeitem"
+       tabindex="-1"
        class="v-treeview-node"
   >
-    <div class="v-treeview-node__root">
+    <div aria-control="nodeitem-0-child"
+         id="nodeitem-0"
+         class="v-treeview-node__root"
+    >
       <button type="button"
+              aria-control="nodeitem-0-child"
+              aria-expanded="true"
               class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
       >
         $subgroup
@@ -1128,17 +5772,27 @@ exports[`VTreeView.ts should update selection when selected prop changes 3`] = `
       >
         $checkboxOff
       </button>
-      <div class="v-treeview-node__content">
+      <div id="label-nodeitem-0"
+           class="v-treeview-node__content"
+      >
         <div class="v-treeview-node__label">
           Root
         </div>
       </div>
     </div>
-    <div class="v-treeview-node__children">
-      <div aria-expanded="false"
+    <div aria-labeledby="nodeitem-0"
+         id="nodeitem-0-child"
+         tabindex="-1"
+         role="group"
+         class="v-treeview-node__children"
+    >
+      <div role="treeitem"
+           tabindex="-1"
            class="v-treeview-node v-treeview-node--leaf"
       >
-        <div class="v-treeview-node__root">
+        <div id="nodeitem-1"
+             class="v-treeview-node__root"
+        >
           <div class="v-treeview-node__level">
           </div>
           <div class="v-treeview-node__level">
@@ -1148,7 +5802,9 @@ exports[`VTreeView.ts should update selection when selected prop changes 3`] = `
           >
             $checkboxOff
           </button>
-          <div class="v-treeview-node__content">
+          <div id="label-nodeitem-1"
+               class="v-treeview-node__content"
+          >
             <div class="v-treeview-node__label">
               Child
             </div>
