@@ -1,7 +1,7 @@
  {
   "props": {
-    "empty": ""
-    // add prop lang here
+    "empty": "",
+    "value": "Sets the value of the tab. If not provided, the index will be used."
   },
   "slots": {
     "empty": ""

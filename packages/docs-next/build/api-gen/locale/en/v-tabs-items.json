@@ -8,8 +8,8 @@
     // add slot lang here
   },
   "events": {
-    "empty": ""
-    // add event lang here
+    "empty": "",
+    "change": "Emitted when user swipes between tabs."
   },
   "functions": {
     "empty": ""

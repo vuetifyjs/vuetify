@@ -8,8 +8,10 @@
     // add slot lang here
   },
   "events": {
-    "empty": ""
-    // add event lang here
+    "empty": "",
+    "change": "Emitted when tab becomes active",
+    "click": "Emitted when the component is clicked",
+    "keydown": "Emitted when **enter** key is pressed"
   },
   "functions": {
     "empty": ""
