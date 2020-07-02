@@ -34,5 +34,5 @@
   "cordovaHeader": "## Cordovaでの利用",
   "cordovaText": "Vuetify を **Cordova** で使用するには、Vue CLIで [Cordova](https://github.com/m0dch3n/vue-cli-plugin-cordova) プラグインを追加します:",
   "capacitorHeader": "## Capacitorでの利用",
-  "capacitorText": "Vuetify を **Corodova** で使用するには、Vue CLIで [Capacitor](https://github.com/nklayman/vue-cli-plugin-capacitor) プラグインを追加します。"
+  "capacitorText": "Vuetify を **Cordova** で使用するには、Vue CLIで [Capacitor](https://github.com/nklayman/vue-cli-plugin-capacitor) プラグインを追加します。"
 }
