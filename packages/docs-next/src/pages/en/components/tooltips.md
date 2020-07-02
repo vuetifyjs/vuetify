@@ -3,77 +3,46 @@ meta:
   title: Tooltip component
   description: The tooltip component displays textual information regarding the element it is attached to.
   keywords: tooltips, vuetify tooltip component, vue tooltip component
+related:
+  - /components/badges/
+  - /components/icons/
+  - /components/menus/
 ---
 
 # Tooltips
 
-Component description
+The `v-tooltip` component is useful for conveying information when a user hovers over an element. You can also programmatically control the display of tooltips through a `v-model`. When activated, tooltips display a text label identifying an element, such as a description of its function.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+Tooltips can wrap any element.
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<example file="v-tooltip/usage" />
 
 ## API
 
-- [API Page Link](../../api/v-component)
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
+- [v-tooltip](../../api/v-tooltip)
 
 ## Caveats
 
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+<alert type="info">In order for `v-tooltip` to be positioned correctly a position prop ( `top` | `bottom` | `left` | `right` ) is required</alert>
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Alignment
 
-### Events
+A tooltip can be aligned to any of the four sides of the activator element.
 
-Omit if none
+<example file="v-tooltip/prop-alignment" />
 
-### Slots
+#### Visibility
 
-Omit if none
+Tooltip visibility can be programmatically changed using `v-model`.
 
-### Misc
-
-Omit if none
-
-#### Example Header
-
-Example description
-
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
-
-## Accessibility
-
-Accessibility text - omit if none
+<example file="v-tooltip/prop-visibility" />
 
 <backmatter />
