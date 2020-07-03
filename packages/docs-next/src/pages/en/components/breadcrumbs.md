@@ -3,77 +3,63 @@ meta:
   title: Breadcrumbs component
   description: The breadcrumbs component is a navigational helper for pages. It can accept a Material Icons icon or characters as a divider.
   keywords: breadcrumbs, vuetify breadcrumbs component, vue breadcrumbs component, v-breadcrumbs component
+related:
+  - /components/buttons/
+  - /components/navigation-drawers/
+  - /components/icons/
 ---
 
 # Breadcrumbs
 
-Component description
+The `v-breadcrumbs` component is a navigational helper for pages. It can accept a **Material Icons** icon or text characters as a divider. An array of objects can be passed to the **items** property of the component.  Additionally, slots exists for more control of the breadcrumbs, either utilizing `v-breadcrumbs-item` or other custom markup.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+By default, breadcrumbs use a text divider. This can be any string.
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<usage name="v-breadcrumbs" />
 
 ## API
 
-- [API Page Link](../../api/v-component)
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
+- [v-breadcrumbs](../../api/v-breadcrumbs)
+- [v-breadcrumbs-item](../../api/v-breadcrumbs-item)
 
 ## Caveats
 
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+<alert type="info">
+  By default `v-breadcrumbs` will disable all crumbs up to the current page in a nested paths. You can prevent this behavior by using `exact: true` on each applicable breadcrumb in the `items` array.
+</alert>
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Divider
 
-### Events
+Breadcrumbs separator can be set using `divider` property.
 
-Omit if none
+<example file="v-breadcrumbs/prop-divider" />
+
+#### Large
+
+Large breadcrumbs have larger font size.
+
+<example file="v-breadcrumbs/prop-large" />
 
 ### Slots
 
-Omit if none
+#### Icon Dividers
 
-### Misc
+For the icon variant, breadcrumbs can use any icon in Material Design Icons.
 
-Omit if none
+<example file="v-breadcrumbs/slot-icon-dividers" />
 
-#### Example Header
+#### Item
 
-Example description
+You can use the `item` slot to customize each breadcrumb.
 
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
-
-## Accessibility
-
-Accessibility text - omit if none
+<example file="v-breadcrumbs/slot-item" />
 
 <backmatter />
