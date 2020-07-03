@@ -1,15 +1,30 @@
  {
   "props": {
-    "empty": ""
-    // add prop lang here
+    "empty": "",
+    "dark": "Mixins.Themeable.props.dark",
+    "fullWidth": "Forces the dialog to expand 100% of available width.",
+    "fullscreen": "Changes layout for fullscreen display.",
+    "internalActivator": "Detaches the menu content inside of the component as opposed to the document.",
+    "eager": "Mixins.Bootable.props.eager",
+    "light": "Mixins.Themeable.props.light",
+    "maxWidth": "Mixins.Measurable.props.maxWidth",
+    "noClickAnimation": "Disables the bounce effect when clicking outside of a `v-dialog`'s content when using the **persistent** prop.",
+    "openOnHover": "Designates whether component should activate when its activator is hovered.",
+    "origin": "Mixins.Transitionable.props.origin",
+    "persistent": "Clicking outside of the element will not deactivate it.",
+    "retainFocus": "Tab focus will return to the first child of the dialog by default. Disable this when using external tools that require focus such as TinyMCE or vue-clipboard.",
+    "scrollable": "When set to true, expects a `v-card` and a `v-card-text` component with a designated height. For more information, check out the [scrollable example](/components/dialogs#scrollable).",
+    "transition": "Mixins.Transitionable.props.transition",
+    "width": "Mixins.Measurable.props.width"
   },
   "slots": {
     "empty": ""
     // add slot lang here
   },
   "events": {
-    "empty": ""
-    // add event lang here
+    "empty": "",
+    "click:outside": "Event that fires when clicking outside an active dialog.",
+    "keydown": "Event that fires when key is pressed. If dialog is active and not using the **persistent** prop, the **esc** key will deactivate it."
   },
   "functions": {
     "empty": ""

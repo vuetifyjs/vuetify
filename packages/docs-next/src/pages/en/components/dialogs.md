@@ -3,77 +3,80 @@ meta:
   title: Dialog component
   description: The dialog component informs a user about a specific task and may contain critical information or require the user to take a specific action.
   keywords: dialogs, vuetify dialog component, vue dialog component
+related:
+  - /components/buttons/
+  - /components/cards/
+  - /components/menus/
 ---
 
 # Dialogs
 
-Component description
+The `v-dialog` component inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks. Use dialogs sparingly because they are interruptive.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+A dialog contains two slots, one for its activator and one for its content (default). Good for Privacy Policies.
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<example file="v-dialog/usage" />
 
 ## API
 
-- [API Page Link](../../api/v-component)
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-dialog](../../api/v-dialog)
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Fullscreen
 
-### Events
+Due to limited space, full-screen dialogs may be more appropriate for mobile devices than dialogs used on devices with larger screens.
 
-Omit if none
+<example file="v-dialog/prop-fullscreen" />
 
-### Slots
+#### Modal
 
-Omit if none
+Similar to a Simple Dialog, except that it's not dismissed when touching outside.
+
+<example file="v-dialog/prop-modal" />
+
+#### Scrollable
+
+Example of a dialog with scrollable content.
+
+<example file="v-dialog/prop-scrollable" />
 
 ### Misc
 
-Omit if none
+#### Form
 
-#### Example Header
+Just a simple example of a form in a dialog.
 
-Example description
+<example file="v-dialog/misc-form" />
 
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
+#### Loader
 
-## Accessibility
+The `v-dialog` component makes it easy to create a customized loading experience for your application.
 
-Accessibility text - omit if none
+<example file="v-dialog/misc-loader" />
+
+#### Nesting
+
+Dialogs can be nested: you can open one dialog from another.
+
+<example file="v-dialog/misc-nesting" />
+
+#### Overflowed
+
+Modals that do not fit within the available window space will scroll the container.
+
+<example file="v-dialog/misc-overflowed" />
+
+#### Without activator
+
+If for some reason you are unable to use the activator slot, be sure to add the `.stop` modifier to the event that triggers the dialog.
+
+<example file="v-dialog/misc-without-activator" />
 
 <backmatter />
