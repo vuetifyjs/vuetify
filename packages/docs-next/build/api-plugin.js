@@ -6,6 +6,7 @@ const {
   generateCompList,
   generateLocaleList,
 } = require('./api-gen')
+const { EN_LOCALE_ONLY } = require('../src/util/globals')
 
 // Globals
 const { IS_PROD } = require('../src/util/globals')
@@ -135,6 +136,8 @@ function generateFiles () {
   const locales = generateLocaleList()
 
   for (const locale of locales) {
+    if (EN_LOCALE_ONLY && locale !== 'en') continue
+
     const pages = {}
 
     for (const component of components) {

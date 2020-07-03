@@ -1,6 +1,7 @@
 // Imports
 const { readFileSync, readdirSync } = require('fs')
 const { resolve } = require('path')
+const { IS_DEBUG } = require('../../src/util/globals')
 
 // pseudo code to mock api-gen
 function generateAPI (comp, locale) {
@@ -29,14 +30,14 @@ function generateAPI (comp, locale) {
     const mapFile = require(`./maps/${comp}`)[comp]
     compMap = mapFile
   } catch (e) {
-    console.log(`map: ${comp} not found`)
+    IS_DEBUG && console.log(`map: ${comp} not found`)
   }
   const localePath = resolve(__dirname, `./locale/${locale}/${comp}.json`)
   try {
     const localeFile = JSON.parse(readFileSync(localePath, 'utf8'))
     compLocale = localeFile
   } catch (e) {
-    console.log(`locale: ${locale} not found`)
+    IS_DEBUG && console.log(`locale: ${locale} not found`)
   }
 
   for (const [section, sValue] of Object.entries(compMap)) {

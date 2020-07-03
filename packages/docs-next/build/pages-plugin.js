@@ -5,6 +5,7 @@ const fs = require('fs')
 const glob = require('glob')
 const path = require('path')
 const VirtualModulesPlugin = require('webpack-virtual-modules')
+const { EN_LOCALE_ONLY } = require('../src/util/globals')
 
 function readFile (filePath) {
   return fs.readFileSync(filePath, 'utf8')
@@ -62,6 +63,8 @@ function generateFiles () {
   const modified = files => `module.exports = ${JSON.stringify(getModified(files))};`
 
   for (const langDir of langDirectories) {
+    if (EN_LOCALE_ONLY && !langDir.endsWith('/en')) continue
+
     const files = glob.sync(`${langDir}/**/*.md`)
     const lang = path.basename(langDir)
 

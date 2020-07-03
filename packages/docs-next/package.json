@@ -5,7 +5,8 @@
   "scripts": {
     "build": "vue-cli-service build",
     "build:api": "node build/api-gen.js",
-    "dev": "yarn serve",
+    "dev": "cross-env EN_LOCALE_ONLY=true yarn serve",
+    "dev:full": "cross-env EN_LOCALE_ONLY=false yarn serve",
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
     "lint:md": "markdownlint --config .markdownlintrc src/pages/en",
@@ -34,6 +35,7 @@
     "@vuetify/vue-cli-plugin-base": "~0.3.5",
     "babel-eslint": "^10.1.0",
     "cosmicjs": "^3.2.43",
+    "cross-env": "^7.0.2",
     "date-fns": "^2.14.0",
     "eslint": "^6.7.2",
     "eslint-config-vuetify": "^0.6.1",
@@ -68,6 +70,7 @@
     "vuex-pathify": "^1.4.1",
     "vuex-router-sync": "^5.0.0",
     "webfontloader": "^1.6.28",
+    "webpack-bundle-analyzer": "^3.8.0",
     "webpack-virtual-modules": "^0.2.2"
   }
 }
