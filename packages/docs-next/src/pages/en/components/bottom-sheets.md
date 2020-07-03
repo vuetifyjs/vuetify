@@ -3,77 +3,62 @@ meta:
   title: Bottom sheet component
   description: The bottom sheet component is used for elevating content above other elements in a dialog style fashion.
   keywords: bottom sheets, vuetify bottom sheet component, vue bottom sheet component
+related:
+  - /components/dialogs/
+  - /components/lists/
+  - /components/menus/
 ---
 
 # Bottom sheets
 
-Component description
+The bottom sheet is a modified `v-dialog` that slides from the bottom of the screen, similar to a `v-bottom-navigation`. Whereas a bottom navigation component is for buttons and specific application level actions, a bottom sheet can contain anything.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+Here we display an example list of actions that could be present in an application.
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<usage name="v-bottom-sheet" />
 
 ## API
 
-- [API Page Link](../../api/v-component)
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-bottom-sheet](../../api/v-bottom-sheet)
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Inset
 
-### Events
+Bottom sheets can be inset, reducing their maximum width on desktop to 70%. This can be further reduced manually using the **width** prop.
 
-Omit if none
+<example file="v-bottom-sheet/prop-inset" />
 
-### Slots
+#### Model
 
-Omit if none
+Bottom sheets can be controlled using **v-model**. You can use it to close them or if you can't use `activator` slot.
+
+<example file="v-bottom-sheet/prop-model" />
+
+#### Persistent
+
+Persistent bottom sheets can't be closed by clicking outside them.
+
+<example file="v-bottom-sheet/prop-persistent" />
 
 ### Misc
 
-Omit if none
+#### Music Player
 
-#### Example Header
+Using a inset bottom sheet, you can make practical components such as this simple music player.
 
-Example description
+<example file="v-bottom-sheet/misc-player" />
 
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
+#### Open In List
 
-## Accessibility
+By combining a functional list into a bottom sheet, you can create a simple 'open in' component.
 
-Accessibility text - omit if none
+<example file="v-bottom-sheet/misc-open-in-list" />
 
 <backmatter />
