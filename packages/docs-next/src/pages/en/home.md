@@ -276,6 +276,10 @@ examples(:value=`[
         - example2.vue
   ```
 
+<alert type="info">
+  If there are duplicated file names, figure out the reason. Delete/merge if necessary.
+</alert>
+
 5. Prepend the following to each of the files based on the following structure:
 
     * `prop-<filename>`: an example for a given prop
