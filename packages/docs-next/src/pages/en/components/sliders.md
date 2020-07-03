@@ -3,77 +3,129 @@ meta:
   title: Slider component
   description: The slider component is a better visualization of the number input. It is used for gathering numerical user data.
   keywords: sliders, vuetify slider component, vue slider component
+related:
+  - /components/forms/
+  - /components/selects/
+  - /components/text-fields/
 ---
 
 # Sliders
 
-Component description
+The `v-slider` component is a better visualization of the number input. It is used for gathering numerical user data.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+Sliders reflect a range of values along a bar, from which users may select a single value. They are ideal for adjusting settings such as volume, brightness, or applying image filters.
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<usage name="v-slider" />
 
 ## API
 
-- [API Page Link](../../api/v-component)
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-slider](../../api/v-slider)
+- [v-range-slider](../../api/v-range-slider)
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Colors
 
-### Events
+You can set the colors of the slider using the props **color**, **track-color** and **thumb-color**.
 
-Omit if none
+<example file="v-slider/prop-colors" />
+
+#### Disabled
+
+You cannot interact with **disabled** sliders.
+
+<example file="v-slider/prop-disabled" />
+
+#### Discrete
+
+Discrete sliders offer a thumb label that displays the exact current amount. Using the **step** prop you can disallow selecting values outside of steps.
+
+<example file="v-slider/prop-discrete" />
+
+#### Icons
+
+You can add icons to the slider with the **append-icon** and **prepend-icon** props. With `@click:append` and `@click:prepend` you can trigger a callback function when click the icon.
+
+<example file="v-slider/prop-icons" />
+
+#### Inverse label
+
+`v-slider` with **inverse-label** property displays label at the end of it.
+
+<example file="v-slider/prop-inverse-label" />
+
+#### Min and max
+
+You can set **min** and **max** values of sliders.
+
+<example file="v-slider/prop-min-and-max" />
+
+#### Range
+
+Range sliders.
+
+<example file="v-slider/prop-range" />
+
+#### Readonly
+
+You cannot interact with **readonly** sliders, but they look as ordinary ones.
+
+<example file="v-slider/prop-readonly" />
+
+#### Step
+
+`v-slider` can have steps other than 1. This can be helpful for some applications where you need to adjust values with more or less accuracy.
+
+<example file="v-slider/prop-step" />
+
+#### Thumb
+
+You can display a thumb label while sliding or always with the **thumb-label** prop . It can have a custom color by setting **thumb-color** prop and a custom size with the **thumb-size** prop. With the **always-dirty** prop its color will never change, even when on the **`min** value.
+
+<example file="v-slider/prop-thumb" />
+
+#### Ticks
+
+Tick marks represent predetermined values to which the user can move the slider.
+
+<example file="v-slider/prop-ticks" />
+
+#### Validation
+
+Vuetify includes simple validation through the **rules** prop. The prop accepts an array of callbacks. While validating rules, the current v-model value will be passed to the callback. This callback should return either `true` or a `String`, the error message.
+
+<example file="v-slider/prop-validation" />
+
+#### Vertical sliders
+
+You can use the **vertical** prop to switch sliders to a vertical orientation. If you need to change the height of the slider, use css.
+
+<example file="v-slider/prop-vertical" />
 
 ### Slots
 
-Omit if none
+#### Append and prepend
 
-### Misc
+Use slots such as `append` and `prepend` to easily customize the `v-slider` to fit any situation.
 
-Omit if none
+<example file="v-slider/slot-append-and-prepend" />
 
-#### Example Header
+#### Append text field
 
-Example description
+Sliders can be combined with other components in its `append` slot, such as `v-text-field`, to add additional functionality to the component.
 
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
+<example file="v-slider/slot-append-text-field" />
 
-## Accessibility
+#### Thumb label
 
-Accessibility text - omit if none
+Using the **tick-labels** prop along with the `thumb-label` slot, you can create a very customized solution.
+
+<example file="v-slider/slot-thumb-label" />
 
 <backmatter />
