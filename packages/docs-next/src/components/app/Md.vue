@@ -18,19 +18,26 @@
       },
     },
 
-    render (h, { data, props, slots }) {
-      const children = slots().default
-      const text = children && children.length
-        ? children[0].text
-        : data.domProps ? data.domProps.textContent : ''
-      const innerHTML = md.render(text, {})
+    render (h, { children: nodes = [], data, props, slots }) {
+      const children = []
+      const node = nodes[0] || {}
+
+      if (node.children) {
+        children.push(...node.children)
+      } else if (nodes.length > 1) {
+        children.push(nodes)
+      } else {
+        const text = node.text || data.domProps.textContent || ''
+
+        data.domProps = {
+          ...data.domProps,
+          innerHTML: md.render(text, {}),
+        }
+      }
 
       data.staticClass = `v-markdown ${data.staticClass || ''}`.trim()
 
-      return h(props.tag, {
-        ...data,
-        domProps: { innerHTML },
-      })
+      return h(props.tag, data, children)
     },
   }
 </script>
