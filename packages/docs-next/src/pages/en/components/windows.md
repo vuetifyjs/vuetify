@@ -3,77 +3,60 @@ meta:
   title: Window component
   description: The window component is a wrapper container that allows transitioning between content. It serves as the baseline for tabs and carousels.
   keywords: windows, vuetify window component, vue window component
+  related:
+    - /components/carousels
+    - /components/steppers
+    - /components/tabs
+
 ---
 
 # Windows
 
-Component description
+The `v-window` component provides the baseline functionality for transitioning content from 1 pane to another. Other components such as `v-tabs`, `v-carousel` and `v-stepper` utilize this component at their core.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+Designed to easily cycle through content, `v-window` provides a simple interface to create truly custom implementations.
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<example file="v-window/usage" />
 
 ## API
 
-- [API Page Link](../../api/v-component)
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-window](../../api/v-window)
+- [v-window-item](../../api/v-window-item)
 
 ## Examples
 
-Example text.
+Designed to easily cycle through content, `v-window` provides a simple interface to create truly custom implementations.
 
 ### Props
 
-Omit if none
+#### Reverse
 
-### Events
+Reverse `v-window` always displays reverse transition.
 
-Omit if none
+<example file="v-window/prop-reverse" />
 
-### Slots
+#### Vertical
 
-Omit if none
+`v-window` can be vertical. Vertical windows have Y axis transition instead of X axis transition.
+
+<example file="v-window/prop-vertical" />
 
 ### Misc
 
-Omit if none
+#### Account creation
 
-#### Example Header
+Create rich forms with smooth animations. `v-window` automatically tracks the current selection index to automatically change the transition direction. This can be manually controlled with the **reverse** prop.
 
-Example description
+<example file="v-window/misc-account-creation" />
 
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
+#### Onboarding
 
-## Accessibility
+`v-window` makes it easy to create custom components such as a different styled stepper.
 
-Accessibility text - omit if none
+<example file="v-window/misc-onboarding" />
 
 <backmatter />
