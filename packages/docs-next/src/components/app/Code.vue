@@ -95,11 +95,17 @@
     pre.language-json::after
       content: 'json'
 
+    pre.language-sass::after
+      content: 'sass'
+
     pre.language-scss::after
       content: 'scss'
 
     pre.language-ts::after
       content: 'ts'
+
+    pre.language-vue::after
+      content: 'vue'
 
     &.theme--dark
       code[class*=language],
@@ -113,7 +119,8 @@
       &.v-sheet--outlined
         border: thin solid hsla(0,0%,100%,.12) !important
 
-      .token.operator
+      .token.operator,
+      .token.string
         background: none
 
       .token.comment,
