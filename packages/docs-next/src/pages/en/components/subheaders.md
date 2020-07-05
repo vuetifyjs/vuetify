@@ -3,77 +3,56 @@ meta:
   title: Subheader component
   description: The subheader component is used to provide context of sections of content or filtering and sorting criteria.
   keywords: subheaders, vuetify subheader component, vue subheader component
+related:
+  - /components/cards/
+  - /components/grids/
+  - /components/lists/
 ---
 
 # Subheaders
 
-Component description
+The `v-subheader` component is used to separate sections of lists.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+Subheaders in their simplest form display a subheading with default theme.
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<example file="v-subheader/usage" />
 
 ## API
 
-- [API Page Link](../../api/v-component)
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-subheader](../../api/v-subheader)
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Inset
 
-### Events
+**inset** subheaders are moved 72px to the right. This gives you the option to line them up with list items and inset dividers.
 
-Omit if none
-
-### Slots
-
-Omit if none
+<example file="v-subheader/prop-inset" />
 
 ### Misc
 
-Omit if none
+#### Grid
 
-#### Example Header
+A subheader can add context to what a user is looking at.
 
-Example description
+<example file="v-subheader/misc-grid" />
 
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
+#### Menu
 
-## Accessibility
+Using a subheader can help separate different types of actions.
 
-Accessibility text - omit if none
+<example file="v-subheader/misc-menu" />
+
+#### Social media
+
+Using a subheader with social media interaction.
+
+<example file="v-subheader/misc-social-media" />
 
 <backmatter />
