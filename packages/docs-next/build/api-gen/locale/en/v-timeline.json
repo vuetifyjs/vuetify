@@ -1,7 +1,9 @@
  {
   "props": {
-    "empty": ""
-    // add prop lang here
+    "empty": "",
+    "alignTop": "Align caret and dot of timeline items to the top",
+    "dense": "Hide opposite slot content, and position all items to one side of timeline",
+    "reverse": "Reverse direction of timeline items"
   },
   "slots": {
     "empty": ""
