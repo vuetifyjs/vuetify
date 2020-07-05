@@ -3,77 +3,54 @@ meta:
   title: Snackbar component
   description: The snackbar component informs user of a process that your application has performed is will perform. It can be temporary and often contains actions.
   keywords: snackbars, vuetify snackbar component, vue snackbar component
+related:
+  - /components/buttons/
+  - /styles/colors/
+  - /components/forms/
 ---
 
 # Snackbars
 
-Component description
+The `v-snackbar` component is used to display a quick message to a user. Snackbars support positioning, removal delay, and callbacks.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+a `v-snackbar` in its simplest form displays a temporary and closable notification to the user.
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<example file="v-snackbar/usage" />
 
 ## API
 
-- [API Page Link](../../api/v-component)
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-snackbar](../../api/v-snackbar)
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Multi line
 
-### Events
+The **multi-line** property extends the height of the `v-snackbar` to give you a little more room for content.
 
-Omit if none
+<example file="v-snackbar/prop-multi-line" />
 
-### Slots
+#### Timeout
 
-Omit if none
+The **timeout** property lets you customize the delay before the `v-snackbar` is hidden.
 
-### Misc
+<example file="v-snackbar/prop-timeout" />
 
-Omit if none
+#### Variants
 
-#### Example Header
+Apply different styles to the snackbar using props such as **text**, **shaped**, **outlined**, and more.
 
-Example description
+<example file="v-snackbar/prop-variants" />
 
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
+#### Vertical
 
-## Accessibility
+The **vertical** property allows you to stack the content of your `v-snackbar`.
 
-Accessibility text - omit if none
+<example file="v-snackbar/prop-vertical" />
 
 <backmatter />
