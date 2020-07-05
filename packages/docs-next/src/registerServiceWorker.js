@@ -41,7 +41,7 @@ if (IS_PROD) {
   })
 
   var refreshing
-  navigator.serviceWorker.addEventListener('controllerchange', function () {
+  navigator.serviceWorker && navigator.serviceWorker.addEventListener('controllerchange', function () {
     if (refreshing) return
     window.location.reload()
     refreshing = true
