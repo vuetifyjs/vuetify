@@ -3,77 +3,56 @@ meta:
   title: Hover component
   description: The hover component makes it easy respond when the user hover events by wrapping selectable content.
   keywords: hover, vuetify hover component, vue hover component
+related:
+  - /components/cards/
+  - /components/images/
+  - /components/tooltips/
 ---
 
 # Hover
 
-Component description
+The `v-hover` component provides a clean interface for handling hover states for any component.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+The `v-hover` component is a wrapper that should contain only one child element, and can trigger an event when hovered over. In order for `v-hover` to work properly, either the **value** prop should be set to `true` or the wrapped element should contain `slot-scope="{ wrapper }"`.
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<usage name="v-hover" />
 
 ## API
 
-- [API Page Link](../../api/v-component)
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-hover](../../api/v-hover)
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Disabled
 
-### Events
+The **disabled** prop disables the hover functionality.
 
-Omit if none
+<example file="v-hover/prop-disabled" />
 
-### Slots
+#### Open and close delay
 
-Omit if none
+Delay `v-hover` events by using **open-delay** and **close-delay** props in combination or separately.
+
+<example file="v-hover/prop-open-and-close-delay" />
 
 ### Misc
 
-Omit if none
+#### Hover list
 
-#### Example Header
+`v-hover` can be used in combination with `v-for` to make a single item stand out when the user interacts with the list.
 
-Example description
+<example file="v-hover/misc-hover-list" />
 
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
+#### Transition
 
-## Accessibility
+Create highly customized components that respond to user interaction.
 
-Accessibility text - omit if none
+<example file="v-hover/misc-transition" />
 
 <backmatter />
