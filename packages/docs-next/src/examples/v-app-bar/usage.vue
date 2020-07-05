@@ -1,12 +1,10 @@
 <template>
-  <div style="width: 100%">
-    <v-app-bar
-      v-bind="$attrs"
-      v-on="$listeners"
-    >
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-    </v-app-bar>
-  </div>
+  <v-app-bar
+    v-bind="$attrs"
+    v-on="$listeners"
+  >
+    <v-app-bar-nav-icon></v-app-bar-nav-icon>
+  </v-app-bar>
 </template>
 
 <script>
