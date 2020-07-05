@@ -1,7 +1,22 @@
  {
   "props": {
-    "empty": ""
-    // add prop lang here
+    "empty": "",
+    "appendIcon": "Appends an icon to the component, uses the same syntax as `v-icon`",
+    "backgroundColor": "Changes the background-color of the input",
+    "dark": "Applies the dark theme variant to the component. This will default the components color to _white_ unless you've configured your [application theme](/customization/theme) to **dark** or if you are using the **color** prop on the component. You can find more information on the Material Design documentation for [dark themes](https://material.io/design/color/dark-theme.html).",
+    "hideDetails": "Hides hint and validation errors. When set to `auto` messages will be rendered only if there's a message (hint, error message, counter value etc) to display",
+    "dense": "Reduces the input height",
+    "height": "Sets the height of the input",
+    "hint": "Hint text",
+    "label": "Sets input label",
+    "loading": "Mixins.Loadable.props.loading",
+    "persistentHint": "Forces hint to always be visible",
+    "placeholder": "Sets the input's placeholder text",
+    "prependIcon": "Prepends an icon to the component, uses the same syntax as `v-icon`",
+    "required": "Designates the input as required; Adds an asterisk to the end of the label; Does not perform any validation.",
+    "tabindex": "Tab index of input",
+    "toggleKeys": "Array of key codes that will toggle the input (if it supports toggling)",
+    "value": "The input's value"
   },
   "slots": {
     "empty": ""
