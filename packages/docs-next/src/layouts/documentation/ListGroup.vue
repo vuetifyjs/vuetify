@@ -1,7 +1,8 @@
 <template>
   <v-list-group
-    :group="item.to"
+    :group="group"
     :prepend-icon="item.icon"
+    eager
     no-action
     v-bind="$attrs"
   >
@@ -43,6 +44,26 @@
       item: {
         type: Object,
         default: () => ({}),
+      },
+    },
+
+    computed: {
+      group () {
+        return this.genGroup(this.item.items)
+      },
+    },
+
+    methods: {
+      genGroup (items) {
+        return items.reduce((acc, cur) => {
+          acc.push(
+            cur.items
+              ? this.genGroup(cur.items)
+              : cur.to,
+          )
+
+          return acc
+        }, []).join('|')
       },
     },
   }

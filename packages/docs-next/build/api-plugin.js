@@ -143,7 +143,7 @@ function generateFiles () {
     for (const component of components) {
       writeFile(component, locale)
 
-      pages[`/${locale}/api/${component}`] = component
+      pages[`/${locale}/api/${component}/`] = component
     }
 
     fs.writeFileSync(resolve(`src/api/${locale}/pages.json`), JSON.stringify(pages, null, 2))

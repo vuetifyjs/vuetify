@@ -2,76 +2,208 @@
   {
     "title": "introduction",
     "icon": "$mdiBookOpenPageVariant",
-    "group": true,
     "items": [
-      { "title": "why-vuetify" },
-      { "title": "frequently-asked-questions" },
-      { "title": "meet-the-team" },
-      { "title": "sponsors-and-backers" },
-      { "title": "roadmap" },
-      { "title": "long-term-support" },
-      { "title": "security-disclosure" },
-      { "title": "code-of-conduct" },
-      { "title": "news" }
+      "why-vuetify",
+      "frequently-asked-questions",
+      "meet-the-team",
+      "sponsors-and-backers",
+      "roadmap",
+      "long-term-support",
+      "security-disclosure"
+    ]
+  },
+  {
+    "title": "beginners-guide",
+    "icon": "$mdiBookshelf",
+    "items": [
+      "pre-amble"
     ]
   },
   {
     "title": "getting-started",
     "icon": "$mdiSpeedometer",
-    "group": true,
     "items": [
-      { "title": "beginners-guide" },
-      { "title": "quick-start" },
-      { "title": "pre-made-layouts" },
-      { "title": "browser-support" },
-      { "title": "unit-testing" },
-      { "title": "releases-and-migrations" },
-      { "title": "contributing" }
+      "quick-start",
+      "pre-made-layouts",
+      "browser-support",
+      "unit-testing",
+      "releases-and-migrations",
+      "contributing"
     ]
   },
   {
     "title": "customization",
     "icon": "$mdiCogs",
-    "group": true
+    "items": [
+      "accessibility",
+      "a-la-carte",
+      "breakpoints",
+      "global-config",
+      "icons",
+      "internationalization",
+      "rtl",
+      "presets",
+      "sass-variables",
+      "theme"
+    ]
   },
   {
     "title": "styles",
     "icon": "$mdiPalette",
-    "group": true
+    "items": [
+      "css-reset",
+      "border-radius",
+      "colors",
+      "content",
+      "display",
+      "elevation",
+      "flex",
+      "float",
+      "spacing",
+      "text-and-typography",
+      "transitions",
+      "scroll"
+    ]
   },
   {
     "title": "components",
     "icon": "$mdiViewDashboard",
-    "group": true
+    "items": [
+      "alerts",
+      "application",
+      "aspect-ratios",
+      "avatars",
+      "badges",
+      "banners",
+      {
+        "title": "bars",
+        "group": "components",
+        "items": [
+          "app-bars",
+          "toolbars",
+          "system-bars"
+        ]
+      },
+      "bottom-navigation",
+      "bottom-sheets",
+      "breadcrumbs",
+      "buttons",
+      "floating-action-buttons",
+      "calendars",
+      "cards",
+      "carousels",
+      "chips",
+      "dialogs",
+      "dividers",
+      "dividers",
+      "expansion-panels",
+      "footer",
+      {
+        "title": "form-inputs-and-controls",
+        "group": "components",
+        "items": [
+          "autocompletes",
+          "combobox",
+          "file-inputs",
+          "forms",
+          "inputs",
+          "overflow-btns",
+          "selects",
+          "selection-controls",
+          "sliders",
+          "textareas",
+          "text-fields"
+        ]
+      },
+      "grids",
+      {
+        "title": "groups",
+        "group": "components",
+        "items": [
+          "button-groups",
+          "chip-groups",
+          "item-groups",
+          "list-item-groups",
+          "slide-groups",
+          "windows"
+        ]
+      },
+      "hover",
+      "icons",
+      "images",
+      "lazy",
+      "lists",
+      "menus",
+      "navigation-drawers",
+      "overlays",
+      "paginations",
+      "parallax",
+      {
+        "title": "pickers",
+        "group": "components",
+        "items": [
+          "color-pickers",
+          "date-pickers",
+          "date-pickers-month",
+          "time-pickers"
+        ]
+      },
+      {
+        "title": "progress",
+        "group": "components",
+        "items": [
+          "progress-circular",
+          "progress-linear"
+        ]
+      },
+      "ratings",
+      "sheets",
+      "skeleton-loaders",
+      "snackbars",
+      "sparklines",
+      "steppers",
+      "subheaders",
+      {
+        "title": "tables",
+        "group": "components",
+        "items": [
+          "data-iterators",
+          "simple-tables",
+          "data-tables"
+        ]
+      },
+      "tabs",
+      "timelines",
+      "tooltips",
+      "treeview",
+      "virtual-scrollers"
+    ]
   },
   {
-    "title": "api",
+    "title": "components-api",
     "icon": "$mdiBeaker",
-    "group": true
+    "group": "api"
   },
   {
     "title": "directives",
     "icon": "$mdiFunction",
-    "group": true
+    "items": [
+      "click-outside",
+      "intersect",
+      "mutation",
+      "resizing",
+      "ripples",
+      "scrolling",
+      "touch-support"
+    ]
   },
   {
     "title": "professional-support",
     "icon": "$mdiAtomVariant",
-    "group": true
-  },
-  {
-    "title": "themes",
-    "icon": "$mdiVuetify",
-    "path": "premium"
-  },
-  {
-    "title": "jobs",
-    "icon": "$mdiBriefcaseSearch",
-    "path": "for-vue"
-  },
-  {
-    "title": "company",
-    "icon": "$mdiVuetify",
-    "group": true
+    "items": [
+      "consulting",
+      "business",
+      "enterprise"
+    ]
   }
 ]

@@ -6,7 +6,6 @@ import { getBranch } from '@/util/helpers'
 import { ROOT_DISPATCH } from '@/store'
 
 // Data
-
 const state = {
   branch: getBranch(),
   drawer: null,
@@ -31,9 +30,7 @@ const actions = {
 }
 
 const getters = {
-  advanced: (state, _, rootState) => {
-    if (!rootState.user.drawer.advanced) return state.nav
-
+  advanced: (_, __, rootState) => {
     const advanced = {}
     const nav = []
     const pages = rootState.pages.pages
@@ -65,19 +62,16 @@ const getters = {
 
     for (const letter in advanced) {
       const group = advanced[letter]
+      const items = group.items.sort((a, b) => {
+        const atitle = a.title
+        const btitle = b.title
 
-      nav.push({
-        ...group,
-        items: group.items.sort((a, b) => {
-          const atitle = a.title
-          const btitle = b.title
-
-          return atitle > btitle
-            ? 1
-            : atitle < btitle ? -1 : 0
-        }),
-        to: group.to.join('|'),
+        return atitle > btitle
+          ? 1
+          : atitle < btitle ? -1 : 0
       })
+
+      nav.push({ ...group, items })
     }
 
     return nav

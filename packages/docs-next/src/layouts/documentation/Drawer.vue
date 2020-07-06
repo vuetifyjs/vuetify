@@ -11,21 +11,12 @@
       <documentation-drawer-prepend />
     </template>
 
-    <v-fade-transition hide-on-leave>
-      <keep-alive>
-        <documentation-list
-          v-if="advanced"
-          key="advanced"
-          :items="advanced"
-        />
-
-        <documentation-list
-          v-else
-          key="simple"
-          :items="nav"
-        />
-      </keep-alive>
-    </v-fade-transition>
+    <keep-alive>
+      <documentation-list
+        :key="key"
+        :items="items"
+      />
+    </keep-alive>
 
     <div class="pt-12" />
   </v-navigation-drawer>
@@ -50,16 +41,22 @@
     },
 
     computed: {
-      drawer: sync('app/drawer'),
       ...get('user', [
-        'drawer@advanced',
         'dark',
         'rtl',
       ]),
       ...get('app', [
-        'advanced',
         'nav',
+        'advanced',
       ]),
+      drawer: sync('app/drawer'),
+      uadvanced: get('user/drawer@advanced'),
+      key () {
+        return !this.uadvanced ? 'simple' : 'advanced'
+      },
+      items () {
+        return !this.uadvanced ? this.nav : this.advanced
+      },
     },
   }
 </script>

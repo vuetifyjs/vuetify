@@ -15,7 +15,6 @@
 <script>
   // Utilities
   import { get, sync } from 'vuex-pathify'
-  import { kebabCase } from 'lodash'
 
   // Data
   import nav from '@/data/nav'
@@ -54,8 +53,8 @@
 
     computed: {
       ...sync('app', [
-        'nav',
         'modified',
+        'nav',
       ]),
       pages: sync('pages/pages'),
       locale: get('route/params@locale'),
@@ -85,97 +84,78 @@
         )
 
         this.pages = { ...pages, ...api }
-        this.unassigned = Object.keys(this.pages)
-
         this.genNav()
       },
-      assign (child, group, items) {
-        const path = `${group}${kebabCase(child.title)}/`
-        const index = this.unassigned.indexOf(path)
+      findItems (group) {
+        const path = `/${this.locale}/${group}/`
 
-        if (index < 0) return
+        return Object.keys(this.pages).reduce((acc, cur) => {
+          if (cur.startsWith(path)) {
+            acc.push({
+              title: this.pages[cur],
+              to: cur,
+            })
+          }
 
-        items.push(this.genChild(child, group))
-
-        this.remove(path)
-
-        return items
+          return acc
+        }, [])
       },
-      findChildren (group) {
-        const pages = []
-        // Iterate through the imported pages and
-        // map keys to the generated page route
-        for (const orphan of this.unassigned) {
-          // Skip if key doesn't match
-          if (!orphan.startsWith(group)) continue
+      genItem (item, group) {
+        let to = item.to
+        const parent = (item.items || item.group)
+        const items = parent && this.genItems(item.items, group)
 
-          // Create a new inferred page route
-          // using the key/value from pages
-          pages.push({
-            title: this.pages[orphan],
-            to: orphan,
-          })
+        if (!to) {
+          const page = !items && item.title
+          const url = [
+            this.locale,
+            group,
+            page,
+          ].filter(v => v)
+
+          to = `/${url.join('/')}/`
         }
 
-        return pages.length ? pages : undefined
-      },
-      genChild (item, group) {
-        const isGroup = item.group
-        const items = isGroup ? this.getChildren(item, group) : undefined
-        const { href, icon } = item
-        const path = item.path || item.title
-        const page = `${group}${kebabCase(path)}/`
-        const to = isGroup ? group : page
+        const title = this.$i18n.te(item.title)
+          ? this.$i18n.t(item.title)
+          : this.pages[to] || item.title
 
-        // Use language file if path exists
-        // Otherwise use the default page
-        const title = this.$i18n.te(path)
-          ? this.$i18n.t(path)
-          : this.pages[page] || path
-
-        return {
-          href,
-          icon,
+        const created = {
+          ...item,
+          group: parent && group,
           items,
           title,
           to,
         }
-      },
-      genNav () {
-        // Map provided nav groups using
-        // the provided language, val
-        this.nav = nav.map(item => {
-          // Build group string used
-          // for list groups
-          const group = `/${this.locale}/${item.title}/`
 
-          return this.genChild(item, group)
+        for (const key in created) {
+          if (created[key]) continue
+
+          delete created[key]
+        }
+
+        return created
+      },
+      genItems (items, group) {
+        if (!items) return this.findItems(group)
+
+        return items.map(item => {
+          return this.genItem(
+            Object(item) === item
+              ? item
+              : { title: item },
+            group,
+          )
         })
       },
-      getChildren (item, group) {
-        const found = this.findChildren(group)
+      genNav () {
+        const items = []
 
-        if (!item.items) return found
-
-        const children = []
-
-        // Generate explicitly provided
-        // items and their keys from src/data/nav.json
-        for (const child of item.items) {
-          this.assign(child, group, children)
+        for (const item of nav) {
+          items.push(this.genItem(item, item.group || (item.items && item.title)))
         }
 
-        for (const child of found) {
-          this.assign(child, group, children)
-        }
-
-        return children.length ? children : undefined
-      },
-      remove (child) {
-        this.$delete(
-          this.unassigned,
-          this.unassigned.indexOf(child),
-        )
+        this.nav = items
       },
     },
   }
