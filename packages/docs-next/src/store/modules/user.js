@@ -29,6 +29,10 @@ const actions = {
     for (const key in user) {
       commit(key, user[key])
     }
+
+    if (user.dark === undefined) {
+      commit('dark', window.matchMedia('(prefers-color-scheme: dark)'))
+    }
   },
   update: ({ state }) => {
     if (!IN_BROWSER) return
