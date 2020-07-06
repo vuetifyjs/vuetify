@@ -3,77 +3,60 @@ meta:
   title: Pagination component
   description: The pagination component is used to separate long sets of data so that it is easier for a user to consume information.
   keywords: pagination, vuetify pagination component, vue pagination component
+related:
+  - /components/data-iterator/
+  - /components/data-tables/
+  - /components/lists/
 ---
 
 # Pagination
 
-Component description
+The `v-pagination` component is used to separate long sets of data so that it is easier for a user to consume information. Depending on the length provided, the pagination component will automatically scale. To maintain the current page, simply supply a **v-model** attribute.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+Pagination by default displays the number of pages based on the set **length** prop, with **prev** and **next** buttons surrounding to help you navigate.
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<example file="v-pagination/usage" />
 
 ## API
 
-- [API Page Link](../../api/v-component)
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-pagination](../../api/v-pagination)
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Circle
 
-### Events
+The **circle** prop gives you an alternate style for pagination buttons.
 
-Omit if none
+<example file="v-pagination/prop-circle" />
 
-### Slots
+#### Disabled
 
-Omit if none
+Pagination items can be manually deactivated using the **disabled** prop.
 
-### Misc
+<example file="v-pagination/prop-disabled" />
 
-Omit if none
+#### Icons
 
-#### Example Header
+Previous and next page icons can be customized with the **prev-icon** and **next-icon** props.
 
-Example description
+<example file="v-pagination/prop-icons" />
 
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
+#### Length
 
-## Accessibility
+Using the **length** prop you can set the length of `v-pagination`, if the number of page buttons exceeds the parent container, it will truncate the list.
 
-Accessibility text - omit if none
+<example file="v-pagination/prop-length" />
+
+#### Total visible
+
+You can also manually set the maximum number of visible page buttons with the **total-visible** prop.
+
+<example file="v-pagination/prop-total-visible" />
 
 <backmatter />
