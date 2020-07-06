@@ -5,6 +5,7 @@
     class="app-code overflow-hidden"
     outlined
     rounded
+    dir="ltr"
   >
     <slot />
 
