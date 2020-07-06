@@ -33,7 +33,7 @@ Coming soon. If you are interested in collaborating on this section, please reac
 
 ## Webpack install
 
-This section assumes you have already followed our Webpack guide on the [Quick start](/getting-started/quick-start#webpack-install) page. The option can vary depending upon the version of [sass-loader](https://github.com/webpack-contrib/sass-loader) you are use using. Ensure that you use the proper syntax when setting up the SASS/SCSS data options as they have different line endings. You can find more information about [prependData](https://github.com/webpack-contrib/sass-loader#prependdata) on sass-loader's Github page.
+This section assumes you have already followed our Webpack guide on the [Quick start](/getting-started/quick-start#webpack-install) page. The option can vary depending upon the version of [sass-loader](https://github.com/webpack-contrib/sass-loader) you are use using. Ensure that you use the proper syntax when setting up the SASS/SCSS data options as they have different line endings. You can find more information about [additionalData](https://github.com/webpack-contrib/sass-loader#additionaldata) or [prependData](https://github.com/webpack-contrib/sass-loader/tree/v8.0.0#prependdata) on sass-loader's Github page.
 
 ```js
 // webpack.config.js
@@ -60,6 +60,11 @@ module.exports = {
               // This is the path to your variables
               prependData: "@import '@/styles/variables.scss'"
             },
+            // Requires sass-loader@^9.0.0
+            options: {
+              // This is the path to your variables
+              additionalData: "@import '@/styles/variables.scss'"
+            },
           },
         ],
       },
@@ -81,6 +86,11 @@ module.exports = {
             options: {
               // This is the path to your variables
               prependData: "@import '@/styles/variables.scss';"
+            },
+            // Requires sass-loader@^9.0.0
+            options: {
+              // This is the path to your variables
+              additionalData: "@import '@/styles/variables.scss';"
             },
           },
         ],
