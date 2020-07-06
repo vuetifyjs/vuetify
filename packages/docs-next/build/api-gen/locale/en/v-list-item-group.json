@@ -1,15 +1,20 @@
  {
   "props": {
-    "empty": ""
-    // add prop lang here
+    "empty": "",
+    "activeClass": "Mixins.Routable.props.activeClass",
+    "appendIcon": "Components.Inputs.props.appendIcon",
+    "prependIcon": "Components.Inputs.props.prependIcon",
+    "ripple": "Mixins.Rippleable.props.ripple",
+    "value": "Expands / Collapse list group"
   },
   "slots": {
-    "empty": ""
-    // add slot lang here
+    "empty": "",
+    "appendIcon": "Components.Inputs.props.appendIcon",
+    "prependIcon": "Components.Inputs.props.prependIcon"
   },
   "events": {
-    "empty": ""
-    // add event lang here
+    "empty": "",
+    "click": "Emitted when component is clicked - Will trigger component to ripple when clicked unless the `.native` modifier is used"
   },
   "functions": {
     "empty": ""

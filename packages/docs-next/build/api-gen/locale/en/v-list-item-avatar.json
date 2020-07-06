@@ -1,7 +1,8 @@
  {
   "props": {
-    "empty": ""
-    // add prop lang here
+    "empty": "",
+    "color": "Mixins.Colorable.props.color",
+    "horizontal": "Uses an alternative horizontal style."
   },
   "slots": {
     "empty": ""
