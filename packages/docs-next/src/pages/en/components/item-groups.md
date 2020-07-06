@@ -26,6 +26,12 @@ The core usage of the `v-item-group` is to create groups of anything that should
 - [v-item](../../api/v-item)
 - [v-item-group](../../api/v-item-group)
 
+## Sub-Components
+
+### v-item
+
+v-item description
+
 ## Examples
 
 ### Props
