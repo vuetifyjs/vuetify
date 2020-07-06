@@ -1,15 +1,24 @@
  {
   "props": {
-    "empty": ""
-    // add prop lang here
+    "empty": "",
+    "color": "Mixins.Colorable.props.color",
+    "dark": "Mixins.Themeable.props.dark",
+    "disabled": "Disables simple checkbox.",
+    "indeterminate": "Sets an indeterminate state for the simple checkbox.",
+    "indeterminateIcon": "The icon used when in an indeterminate state.",
+    "light": "Mixins.Themeable.props.light",
+    "offIcon": "The icon used when inactive.",
+    "onIcon": "The icon used when active.",
+    "ripple": "Mixins.Rippleable.props.ripple",
+    "value": "A boolean value that represents whether the simple checkbox is checked."
   },
   "slots": {
     "empty": ""
     // add slot lang here
   },
   "events": {
-    "empty": ""
-    // add event lang here
+    "empty": "",
+    "click": "Event that is emitted when the component is clicked"
   },
   "functions": {
     "empty": ""
