@@ -29,7 +29,7 @@ The `v-tabs` component is a styled extension of [v-item-group](/components/item-
 - [v-tabs-items](../../api/v-tabs-items)
 - [v-tabs-slider](../../api/v-tabs-slider)
 
-## Sub-Components
+## Sub-components
 
 ### v-tab
 

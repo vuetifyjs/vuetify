@@ -26,7 +26,7 @@ The `v-app-bar` component is used for application-wide actions and information.
 - [v-app-bar](../../api/v-app-bar)
 - [v-app-bar-nav-icon](../../api/v-app-bar-nav-icon)
 
-## Sub-Components
+## Sub-components
 
 ### v-app-bar-nav-icon
 

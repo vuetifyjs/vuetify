@@ -464,7 +464,7 @@ Usage text
 
 - [API Page Link]()
 
-## Sub-Components
+## Sub-components
 
 Omit if none
 

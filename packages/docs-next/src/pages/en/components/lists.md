@@ -34,7 +34,7 @@ Lists come in three main variations. **single-line** (default), **two-line** and
 - [v-list-item-subtitle](../../api/v-list-item-subtitle)
 - [v-list-item-title](../../api/v-list-item-title)
 
-## Sub-Components
+## Sub-components
 
 ### v-list-item
 

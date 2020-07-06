@@ -23,7 +23,7 @@ eg: `<usage name="v-alert" />`
 
 - [API Page Link](../../api/v-component)
 
-## Sub-Components
+## Sub-components
 
 Omit if none
 
