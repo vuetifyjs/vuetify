@@ -1,12 +1,11 @@
-
 <template>
   <v-container>
     <v-row>
-      <v-slider
+      <v-range-slider
         v-model="value"
         vertical
-        label="Regular"
-      ></v-slider>
+        label="Range"
+      ></v-range-slider>
     </v-row>
   </v-container>
 </template>
@@ -15,7 +14,7 @@
   export default {
     data () {
       return {
-        value: 10,
+        value: [20, 40],
       }
     },
   }
