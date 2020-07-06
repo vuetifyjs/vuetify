@@ -3,77 +3,54 @@ meta:
   title: Simple table component
   description: The simple table component is a lightweight wrapper around the table element that provides a Material Design feel without all the baggage.
   keywords: simple table, vuetify simple table component, vue simple table component, table component
+related:
+  - /components/data-iterators/
+  - /components/data-tables/
+  - /components/lists/
 ---
 
 # Simple tables
 
-Component description
+The `v-simple-table` component is a simple wrapper component around the `<table>` element. Inside the component you can use all the regular table elements such as `<thead>`, `<tbody>`, `<tr>`, etc.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+The simple table is a wrapper component around the `<table>` element.
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<example file="v-simple-table/usage" />
 
 ## API
 
-- [API Page Link](../../api/v-component)
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-simple-table](../../api/v-simple-table)
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Dark
 
-### Events
+Use **dark** prop to switch table to the dark theme.
 
-Omit if none
+<example file="v-simple-table/prop-dark" />
 
-### Slots
+#### Dense
 
-Omit if none
+You can show a dense version of the table by using the **dense** prop.
 
-### Misc
+<example file="v-simple-table/prop-dense" />
 
-Omit if none
+#### Fixed header
 
-#### Example Header
+Use the **fixed-header** prop together with the **height** prop to fix the header to the top of the table.
 
-Example description
+<example file="v-simple-table/prop-fixed-header" />
 
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
+#### Height
 
-## Accessibility
+Use the **height** prop to set the height of the table.
 
-Accessibility text - omit if none
+<example file="v-simple-table/prop-height" />
 
 <backmatter />

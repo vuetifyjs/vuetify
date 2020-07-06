@@ -1,7 +1,9 @@
  {
   "props": {
-    "empty": ""
-    // add prop lang here
+    "empty": "",
+    "dense": "Decreases paddings to render a dense table",
+    "height": "Mixins.Measurable.props.height",
+    "fixedHeader": "Sets table header to fixed mode"
   },
   "slots": {
     "empty": ""
