@@ -3,77 +3,63 @@ meta:
   title: Item group component
   description: The item group components provides the ability to create a group of selectable items out of any component.
   keywords: item groups, vuetify item group component, vue item group component
+related:
+  - /components/button-groups/
+  - /components/carousels/
+  - /components/tabs/
 ---
 
 # Item groups
 
-Component description
+The `v-item-group` provides the ability to create a group of selectable items out of any component. This is the baseline functionality for components such as `v-tabs` and `v-carousel`.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+The core usage of the `v-item-group` is to create groups of anything that should be controlled by a **model**.
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<example file="v-item-group/usage" />
 
 ## API
 
-- [API Page Link](../../api/v-component)
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-item](../../api/v-item)
+- [v-item-group](../../api/v-item-group)
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Active class
 
-### Events
+The **active-class** property allows you to set custom CSS class on active items.
 
-Omit if none
+<example file="v-item-group/prop-active-class" />
 
-### Slots
+#### Mandatory
 
-Omit if none
+**mandatory** item groups must have at least 1 item selected.
+
+<example file="v-item-group/prop-mandatory" />
+
+#### Multiple
+
+Item groups can have **multiple** items selected.
+
+<example file="v-item-group/prop-multiple" />
 
 ### Misc
 
-Omit if none
+#### Chips
 
-#### Example Header
+Easily hook up a custom chip group.
 
-Example description
+<example file="v-item-group/misc-chips" />
 
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
+#### Selection
 
-## Accessibility
+Icons can be used as toggle buttons when they allow selection, or deselection, of a single choice, such as marking an item as a favorite.
 
-Accessibility text - omit if none
+<example file="v-item-group/misc-selection" />
 
 <backmatter />
