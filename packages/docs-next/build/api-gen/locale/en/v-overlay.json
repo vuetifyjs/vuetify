@@ -1,7 +1,9 @@
  {
   "props": {
-    "empty": ""
-    // add prop lang here
+    "empty": "",
+    "absolute": "Mixins.Positionable.props.absolute",
+    "opacity": "Sets the overlay opacity",
+    "zIndex": "Mixins.Menuable.props.zIndex"
   },
   "slots": {
     "empty": ""

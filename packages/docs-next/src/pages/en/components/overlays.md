@@ -3,77 +3,62 @@ meta:
   title: Overlay component
   description: The overlay component makes it easy to create a scrim or hovering effect over components or your entire application.
   keywords: overlays, vuetify overlay component, vue overlay component
+related:
+  - /components/cards/
+  - /components/sheets/
+  - /components/dialogs/
 ---
 
 # Overlays
 
-Component description
+The `v-overlay` component is used to provide emphasis on a particular element or parts of it. It signals to the user of a state change within the application and can be used for creating loaders, dialogs and more.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+In its simplest form, the `v-overlay` component will add a dimmed layer over your application.
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<example file="v-overlay/usage" />
 
 ## API
 
-- [API Page Link](../../api/v-component)
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-overlay](../../api/v-overlay)
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Absolute
 
-### Events
+**absolute** overlays are positioned absolutely and contained inside of their parent element.
 
-Omit if none
+<example file="v-overlay/prop-absolute" />
 
-### Slots
+#### Opacity
 
-Omit if none
+**opacity** allows you to customize the transparency of `v-overlay` components.
+
+<example file="v-overlay/prop-opacity" />
+
+#### Z index
+
+**z-index** gives you the ability to easily change the stack order of the `v-overlay` component.
+
+<example file="v-overlay/prop-z-index" />
 
 ### Misc
 
-Omit if none
+#### Advanced
 
-#### Example Header
+Using the [v-hover](/components/hover), we are able to add a nice scrim over the information card with additional actions the user can take.
 
-Example description
+<example file="v-overlay/misc-advanced" />
 
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
+#### Loader
 
-## Accessibility
+Using the `v-overlay` as a background, add a progress component to easily create a custom loader.
 
-Accessibility text - omit if none
+<example file="v-overlay/misc-loader" />
 
 <backmatter />
