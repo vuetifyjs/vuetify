@@ -3,77 +3,42 @@ meta:
   title: Parallax component
   description: The parallax component creates a 3d effect that makes an image appear to scroll slower than the window.
   keywords: parallax, vuetify parallax component, vue parallax component
+related:
+  - /components/aspect-ratios/
+  - /components/cards/
+  - /components/images/
 ---
 
 # Parallax
 
-Component description
+The `v-parallax` component creates a 3d effect that makes an image appear to scroll slower than the window.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+A parallax causes a shift in a background image when the user scrolls the page.
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<example file="v-parallax/usage" />
 
 ## API
 
-- [API Page Link](../../api/v-component)
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-parallax](../../api/v-parallax)
 
 ## Examples
 
-Example text.
-
-### Props
-
-Omit if none
-
-### Events
-
-Omit if none
-
-### Slots
-
-Omit if none
-
 ### Misc
 
-Omit if none
+#### Content
 
-#### Example Header
+You can also place any content inside of the parallax. This allows you to use the parallax as a hero image.
 
-Example description
+<example file="v-parallax/misc-content" />
 
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
+#### Custom height
 
-## Accessibility
+You can specify a custom height on a parallax. Keep in mind this can break the parallax if your image is not sized properly
 
-Accessibility text - omit if none
+<example file="v-parallax/misc-custom-height" />
 
 <backmatter />
