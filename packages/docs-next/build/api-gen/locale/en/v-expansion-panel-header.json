@@ -1,15 +1,18 @@
  {
   "props": {
-    "empty": ""
-    // add prop lang here
+    "empty": "",
+    "disableIconRotate": "Removes the icon rotation animation when expanding a panel",
+    "expandIcon": "Set the expand action icon",
+    "hideActions": "Hide the expand icon in the content header",
+    "ripple": "Mixins.Rippleable.props.ripple"
   },
   "slots": {
-    "empty": ""
-    // add slot lang here
+    "empty": "",
+    "actions": "Expansion header actions"
   },
   "events": {
-    "empty": ""
-    // add event lang here
+    "empty": "",
+    "click": "Mouse click event"
   },
   "functions": {
     "empty": ""
