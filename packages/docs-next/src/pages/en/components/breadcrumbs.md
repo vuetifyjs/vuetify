@@ -26,6 +26,12 @@ By default, breadcrumbs use a text divider. This can be any string.
 - [v-breadcrumbs](../../api/v-breadcrumbs)
 - [v-breadcrumbs-item](../../api/v-breadcrumbs-item)
 
+## Sub-Components
+
+### v-breadcrumbs-item
+
+v-breadcrumbs-item description
+
 ## Caveats
 
 <alert type="info">

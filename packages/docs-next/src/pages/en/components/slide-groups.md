@@ -26,6 +26,12 @@ Similar to the [v-window](/components/windows) component, `v-slide-group` lets i
 - [v-slide-group](../../api/v-slide-group)
 - [v-slide-item](../../api/v-slide-item)
 
+## Sub-Components
+
+### v-slide-item
+
+v-slide-item description
+
 ## Examples
 
 ### Props

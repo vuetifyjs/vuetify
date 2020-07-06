@@ -27,6 +27,12 @@ Designed to easily cycle through content, `v-window` provides a simple interface
 - [v-window](../../api/v-window)
 - [v-window-item](../../api/v-window-item)
 
+## Sub-Components
+
+### v-window-item
+
+v-window-item description
+
 ## Examples
 
 Designed to easily cycle through content, `v-window` provides a simple interface to create truly custom implementations.

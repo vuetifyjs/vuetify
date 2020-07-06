@@ -25,14 +25,44 @@ Lists come in three main variations. **single-line** (default), **two-line** and
 
 - [v-list](../../api/v-list)
 - [v-list-item](../../api/v-list-item)
-- [v-list-item-group](../../api/v-list-group)
 - [v-list-item-action](../../api/v-list-item-action)
+- [v-list-item-action-text](../../api/v-list-item-action-text)
 - [v-list-item-avatar](../../api/v-list-item-avatar)
 - [v-list-item-content](../../api/v-list-item-content)
+- [v-list-item-group](../../api/v-list-group)
 - [v-list-item-icon](../../api/v-list-item-icon)
-- [v-list-item-title](../../api/v-list-item-title)
 - [v-list-item-subtitle](../../api/v-list-item-subtitle)
-- [v-list-item-action-text](../../api/v-list-item-action-text)
+- [v-list-item-title](../../api/v-list-item-title)
+
+## Sub-Components
+
+### v-list-item
+
+v-list-item description
+
+### v-list-item-action
+
+v-list-item-action description
+
+### v-list-item-action-text
+
+v-list-item-action-text description
+
+### v-list-item-avatar
+
+v-list-item-avatar description
+
+### v-list-item-content
+
+v-list-item-content description
+
+### v-list-item-subtitle
+
+v-list-item-subtitle description
+
+### v-list-item-title
+
+v-list-item-title description
 
 ## Caveats
 

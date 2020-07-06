@@ -32,36 +32,6 @@ By default, the `v-list-item-group` operates similarly to `v-item-group`. If a *
 - [v-list-item-subtitle](../../api/v-list-item-subtitle)
 - [v-list-item-title](../../api/v-list-item-title)
 
-## Sub-Components
-
-### v-list-item
-
-v-list-item description
-
-### v-list-item-action
-
-v-list-item-action description
-
-### v-list-item-action-text
-
-v-list-item-action-text description
-
-### v-list-item-avatar
-
-v-list-item-avatar description
-
-### v-list-item-content
-
-v-list-item-content description
-
-### v-list-item-subtitle
-
-v-list-item-subtitle description
-
-### v-list-item-title
-
-v-list-item-title description
-
 ## Examples
 
 ### Props
