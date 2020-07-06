@@ -3,77 +3,99 @@ meta:
   title: List item group component
   description: The list item group component provides an interface for displaying a series of content using list items.
   keywords: list-groups, vuetify list item group component, vue list item group component
+related:
+  - /components/lists/
+  - /components/item-groups/
+  - /components/cards/
 ---
 
 # List item groups
 
-Component description
+The `v-list-item-group` provides the ability to create a group of selectable `v-list-item`s. The `v-list-item-group` component utilizes [v-item-group](/components/item-groups) at its core to provide a clean interface for interactive lists.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+By default, the `v-list-item-group` operates similarly to `v-item-group`. If a **value** is not provided, the group will provide a default based upon its index.
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<example file="v-list-item-group/usage" />
 
 ## API
 
-- [API Page Link](../../api/v-component)
+- [v-list-item-group](../../api/v-list-item-group)
+- [v-list-item](../../api/v-list-item)
+- [v-list-item-action](../../api/v-list-item-action)
+- [v-list-item-action-text](../../api/v-list-item-action-text)
+- [v-list-item-avatar](../../api/v-list-item-avatar)
+- [v-list-item-content](../../api/v-list-item-content)
+- [v-list-item-subtitle](../../api/v-list-item-subtitle)
+- [v-list-item-title](../../api/v-list-item-title)
 
 ## Sub-Components
 
-Omit if none
+### v-list-item
 
-### Sub Component 1
+v-list-item description
 
-Sub component text
+### v-list-item-action
 
-### Sub Component 2
+v-list-item-action description
 
-Sub component text
+### v-list-item-action-text
 
-## Caveats
+v-list-item-action-text description
 
-Omit if none
+### v-list-item-avatar
 
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+v-list-item-avatar description
+
+### v-list-item-content
+
+v-list-item-content description
+
+### v-list-item-subtitle
+
+v-list-item-subtitle description
+
+### v-list-item-title
+
+v-list-item-title description
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Active class
 
-### Events
+You can set a class which will be added when an item is selected.
 
-Omit if none
+<example file="v-list-item-group/prop-active-class" />
 
-### Slots
+#### Mandatory
 
-Omit if none
+At least one item must be selected.
+
+<example file="v-list-item-group/prop-mandatory" />
+
+#### Multiple
+
+You can select multiple items at one time.
+
+<example file="v-list-item-group/prop-multiple" />
 
 ### Misc
 
-Omit if none
+#### Flat list
 
-#### Example Header
+You can easily disable the default highlighting of selected `v-list-item`s. This creates a lower profile for a user's choices.
 
-Example description
+<example file="v-list-item-group/misc-flat-list" />
 
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
+#### Selection controls
 
-## Accessibility
+Using the default slot, you can access an items internal state and toggle it. Since the **active** property is a _boolean_, we use the **true-value** prop on the checkbox to link its state to the `v-list-item`.
 
-Accessibility text - omit if none
+<example file="v-list-item-group/misc-selection-controls" />
 
 <backmatter />

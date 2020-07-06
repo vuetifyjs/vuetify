@@ -14,7 +14,8 @@
   },
   "events": {
     "empty": "",
-    "click": "Emitted when component is clicked - Will trigger component to ripple when clicked unless the `.native` modifier is used"
+    "click": "Emitted when component is clicked - Will trigger component to ripple when clicked unless the `.native` modifier is used",
+    "change": "Emitted when the component value is changed by user interaction"
   },
   "functions": {
     "empty": ""
