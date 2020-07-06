@@ -78,6 +78,14 @@ module.exports = {
         maxInitialRequests: 5,
       },
     },
+    module: {
+      rules: [
+        {
+          resourceQuery: /blockType=codepen-resources/,
+          loader: 'json-loader',
+        },
+      ],
+    },
   },
   pwa: {
     name: 'Vuetify-Docs',

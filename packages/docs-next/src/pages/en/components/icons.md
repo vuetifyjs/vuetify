@@ -3,77 +3,70 @@ meta:
   title: Icon component
   description: The icon component is compatible with multiple common icon fonts such as Material Design Icons, Font Awesome and more.
   keywords: icons, vuetify icon component, vue icon component
+related:
+  - /customization/icons/
+  - /components/buttons/
+  - /components/cards/
 ---
 
 # Icons
 
-Component description
+The `v-icon` component provides a large set of glyphs to provide context to various aspects of your application. For a list of all available icons, visit the official [Material Design Icons](https://materialdesignicons.com/) page. To use any of these icons simply use the `mdi-` prefix followed by the icon name.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+Icons come in two themes (light and dark), and five different sizes (x-small, small, medium (default), large, and x-large).
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<usage name="v-icon" />
 
 ## API
 
-- [API Page Link](../../api/v-component)
-
-## Sub-Components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-icon](../../api/v-icon)
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Color
+
+Using color helpers you can change the color of an icon from the standard dark and light themes.
+
+<example file="v-icon/prop-color" />
 
 ### Events
 
-Omit if none
+#### Click
 
-### Slots
+Binding any click event to `v-icon` will automatically change the cursor to a pointer.
 
-Omit if none
+<example file="v-icon/event-click" />
 
 ### Misc
 
-Omit if none
+#### Buttons
 
-#### Example Header
+Icons can be used inside of buttons to add emphasis to the action.
 
-Example description
+<example file="v-icon/misc-buttons" />
 
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
+#### Font Awesome
 
-## Accessibility
+[Font Awesome](http://fontawesome.io/icons/) is also supported. Simply use the `fa-` prefixed icon name. Please note that you still need to include the Font Awesome icons in your project. For more information on how to install it, please navigate to the [installation page](/customization/icons#install-font-awesome-5-icons)
 
-Accessibility text - omit if none
+<example file="v-icon/misc-font-awesome" />
+
+#### Material Design
+
+[Material Design](https://material.io/tools/icons/?style=baseline) is also supported. For more information on how to install it please [navigate here](/customization/icons#install-material-icons)
+
+<example file="v-icon/misc-md" />
+
+#### MDI SVG
+
+You can manually import only the icons you use when using the [@mdi/js](https://www.npmjs.com/package/@mdi/js) package. If you want to use SVG icons with `VIcon` component, read about using them [here](/customization/icons#install-material-design-icons-js-svg).
+
+<example file="v-icon/misc-mdi-svg" />
 
 <backmatter />

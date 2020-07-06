@@ -81,11 +81,11 @@
   }
 </script>
 
-// <codepen-resources lang="json">
-//   {
-//     "js": [
-//       "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js",
-//       "https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.29.0/date_fns.min.js"
-//     ]
-//   }
-// </codepen-resources>
+<codepen-resources lang="json">
+  {
+    "js": [
+      "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.29.0/date_fns.min.js"
+    ]
+  }
+</codepen-resources>
