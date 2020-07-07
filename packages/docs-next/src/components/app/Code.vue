@@ -3,9 +3,9 @@
     :color="isDark ? '#1F1F1F' : 'grey lighten-5'"
     :dark="isDark"
     class="app-code overflow-hidden"
+    dir="ltr"
     outlined
     rounded
-    dir="ltr"
   >
     <slot />
 

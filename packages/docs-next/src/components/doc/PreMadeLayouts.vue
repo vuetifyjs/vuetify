@@ -4,8 +4,8 @@
     fluid
   >
     <v-row
-      class="fill-height"
       align="center"
+      class="fill-height"
       justify="center"
     >
       <v-col
@@ -18,15 +18,15 @@
         <v-card>
           <v-img
             :alt="layout.name"
-            :src="genSrc(layout.name)"
             :aspect-ratio="16/9"
+            :src="genSrc(layout.name)"
             width="100%"
           >
             <v-fade-transition>
               <v-overlay
                 absolute
-                opacity="0.7"
                 class="text-center"
+                opacity="0.7"
               >
                 <h2
                   class="title mb-6"

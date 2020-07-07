@@ -2,15 +2,15 @@
   <v-menu
     v-model="menu"
     :close-on-content-click="false"
+    bottom
     content-class="overflow-hidden"
+    left
     max-height="380"
     max-width="320"
     nudge-bottom="8"
-    rounded="lg"
     offset-y
     origin="top"
-    left
-    bottom
+    rounded="lg"
     transition="slide-y-transition"
   >
     <template v-slot:activator="{ attrs, on }">
@@ -22,8 +22,8 @@
         <v-badge
           :value="unread.length"
           color="red"
-          overlap
           left
+          overlap
         >
           <template v-slot:badge>
             {{ unread.length }}
@@ -151,23 +151,15 @@
 
     computed: {
       notifications: sync('messages/notifications'),
-      unotifications: sync('user/notifications'),
       snack: sync('snackbar/value'),
       snackbar: sync('snackbar/snackbar'),
+      unotifications: sync('user/notifications'),
       done () {
         return this.filtered.length === 0
       },
       // What is ultimately iterated
       filtered () {
         return this.archived ? this.read : this.unread
-      },
-      marked () {
-        const path = this.archived ? 'unread' : 'read'
-        const icon = this.icons[path]
-
-        if (!icon || !path) return null
-
-        return { icon, path }
       },
       // Map items to contain a viewed
       // property and format the date
@@ -179,6 +171,14 @@
             viewed: this.unotifications.includes(item.slug),
           }
         })
+      },
+      marked () {
+        const path = this.archived ? 'unread' : 'read'
+        const icon = this.icons[path]
+
+        if (!icon || !path) return null
+
+        return { icon, path }
       },
       read () {
         return this.mapped.filter(n => n.viewed)
