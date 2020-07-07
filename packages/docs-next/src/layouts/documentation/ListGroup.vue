@@ -2,7 +2,6 @@
   <v-list-group
     :group="group"
     :prepend-icon="item.icon"
-    eager
     no-action
     v-bind="$attrs"
   >
