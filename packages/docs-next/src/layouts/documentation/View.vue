@@ -1,7 +1,7 @@
 <template>
   <v-main>
     <router-view
-      :key="$route.path"
+      :key="name"
       :name="name"
     />
   </v-main>

@@ -1,13 +1,20 @@
 <template>
   <v-container
-    tag="section"
     class="px-4 px-sm-8 px-md-12"
+    tag="section"
   >
     <v-responsive
       class="mx-auto overflow-visible"
       max-width="868"
     >
-      <component :is="component" />
+      <skeleton-loader
+        v-if="!component"
+        key="loader"
+      />
+
+      <keep-alive max="3">
+        <component :is="component" />
+      </keep-alive>
     </v-responsive>
   </v-container>
 </template>
@@ -20,6 +27,21 @@
   // This should only be extended by other pages
   export default {
     name: 'Page',
+
+    beforeRouteEnter (to, from, next) {
+      next(vm => vm.update(to))
+    },
+
+    async beforeRouteUpdate (to, from, next) {
+      // Avoid turning on the loader immediately
+      const timeout = setTimeout(this.reset, 50)
+
+      await this.update(to)
+
+      clearTimeout(timeout)
+
+      next()
+    },
 
     metaInfo () {
       // Check it fm exists
@@ -52,24 +74,25 @@
 
     watch: { '$route.params.locale': 'update' },
 
-    beforeMount () {
-      this.update()
-    },
-
     methods: {
       async load () {
         console.error('Missing load method for Page.vue')
       },
-      async update () {
+      async update (route) {
         const {
           attributes = {},
           toc = [],
           vue = {},
-        } = await this.load(this.$route)
+        } = await this.load(route)
+
+        vue.component.name = route.params.page
 
         this.frontmatter = attributes
         this.toc = toc
         this.component = vue.component
+      },
+      async reset () {
+        this.component = undefined
       },
     },
   }
