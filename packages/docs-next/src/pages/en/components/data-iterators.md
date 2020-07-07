@@ -3,77 +3,51 @@ meta:
   title: Data iterator component
   description: The data iterator component is used for filter and displaying data including sorting, searching, pagination, and selection.
   keywords: data iterators, vuetify data iterator component, vue data iterator component
+related:
+  - /components/data-tables/
+  - /components/simple-tables/
+  - /components/toolbars/
 ---
 
 # Data iterators
 
-Component description
+The `v-data-iterator` component is used for displaying data, and shares a majority of its functionality with the `v-data-table` component. Features include sorting, searching, pagination, and selection.
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+The `v-data-iterator` allows you to customize exactly how to display your data. In this example we are using a grid with cards.
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<usage name="v-data-iterator" />
 
 ## API
 
-- [API Page Link](../../api/v-component)
-
-## Sub-components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-data-iterator](../../api/v-data-iterator)
+- [v-data-footer](../../api/v-data-footer)
 
 ## Examples
 
-Example text.
-
-### Props
-
-Omit if none
-
-### Events
-
-Omit if none
-
 ### Slots
 
-Omit if none
+#### Default
+
+The `v-data-iterator` has internal state for both selection and expansion, just like `v-data-table`. In this example we use the methods `isExpanded` and `expand` available on the default slot.
+
+<example file="v-data-iterator/slot-default" />
+
+#### Header and footer
+
+The `v-data-iterator` has both a header and footer slot for adding extra content.
+
+<example file="v-data-iterator/slot-header-and-footer" />
 
 ### Misc
 
-Omit if none
+#### Filter
 
-#### Example Header
+Order, filters and pagination can be controlled externally by using the individual props
 
-Example description
-
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
-
-## Accessibility
-
-Accessibility text - omit if none
+<example file="v-data-iterator/misc-filter" />
 
 <backmatter />
