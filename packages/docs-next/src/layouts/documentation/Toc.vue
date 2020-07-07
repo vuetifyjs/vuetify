@@ -46,10 +46,6 @@
         'dark',
         'rtl',
       ]),
-      ...get('route', [
-        'params@category',
-        'params@page',
-      ]),
       toc: get('pages/toc'),
     },
   }

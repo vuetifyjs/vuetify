@@ -54,13 +54,10 @@
     }),
 
     computed: {
-      ...get('pages', [
-        'pages',
-        'frontmatter@related',
-      ]),
       dark: get('user/dark'),
       locale: get('route/params@locale'),
       nav: get('app/nav'),
+      pages: get('pages/pages'),
       section () {
         return this.to.split('/')[1]
       },
