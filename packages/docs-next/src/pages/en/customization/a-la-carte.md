@@ -1,6 +1,6 @@
 ---
 meta:
-  title: A-la-carte (treeshaking)
+  title: A-la-carte - treeshaking
   description: A La Carte provides automatic treeshaking via the vuetify-loader. Use only the features that you need and drastically reduce your package bundle size.
   keywords: a la carte, a-la-carte, vuetify single import, vuetify import, component importing, reduce vuetify size
 related:
@@ -9,7 +9,7 @@ related:
   - /getting-started/beginners-guide/
 ---
 
-# A-la-carte (treeshaking)
+# A-la-carte - treeshaking
 
 Being a component framework, Vuetify will always grow horizontally. Depending on your project, a small **package size** may be a requirement. The A la carte system enables you to pick and choose which components to import, drastically _lowering_ your build size. New projects created with the [Vue CLI plugin](/getting-started/quick-start#vue-cli-install) have this enabled by default.
 
@@ -19,7 +19,7 @@ Being a component framework, Vuetify will always grow horizontally. Depending on
   Treeshaking will only work with Webpack 4 in **production mode**. This is automatic when using Vue CLI.
 </alert>
 
-## vuetify-loader
+## Vuetify-loader
 
 Keeping track of all the components you're using can be a real chore. The [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) alleviates this pain by automatically importing all the Vuetify components you use, where you use them. This will also make code-splitting more effective, as webpack will only load the components required for that chunk to be displayed.
 
@@ -45,7 +45,7 @@ export default new Vuetify(opts)
   The options object that you pass as the second argument to **Vue.use** can also include a components, directives and a transitions property.
 </alert>
 
-### vue.config.js installation
+### Vue config installation
 
 While it is not recommended, you can opt out of using the Vue CLI plugin and instead manually configure the loader via the [configure webpack](https://cli.vuejs.org/config/#configurewebpack) option from Vue CLI.
 
@@ -118,8 +118,8 @@ module.exports = {
          * components array, the second should be a corresponding import
          *
          * originalTag - the tag as it was originally used in the template
-         * kebabTag    - the tag normalised to kebab-case
-         * camelTag    - the tag normalised to PascalCase
+         * kebabTag    - the tag normalized to kebab-case
+         * camelTag    - the tag normalized to PascalCase
          * path        - a relative path to the current .vue file
          * component   - a parsed representation of the current component
          */
