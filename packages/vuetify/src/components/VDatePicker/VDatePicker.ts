@@ -279,7 +279,7 @@ export default mixins(
       this.activePicker = type.toUpperCase()
 
       if (this.value && this.value.length) {
-        const output = wrapInArray(this.value)
+        const output = this.multipleValue
           .map((val: string) => sanitizeDateString(val, type))
           .filter(this.isDateAllowed)
         this.$emit('input', this.isMultiple ? output : output[0])
