@@ -52,7 +52,7 @@
 
     watch: { '$route.params.locale': 'update' },
 
-    created () {
+    beforeMount () {
       this.update()
     },
 
@@ -67,9 +67,9 @@
           vue = {},
         } = await this.load(this.$route)
 
-        this.component = vue.component
         this.frontmatter = attributes
         this.toc = toc
+        this.component = vue.component
       },
     },
   }
