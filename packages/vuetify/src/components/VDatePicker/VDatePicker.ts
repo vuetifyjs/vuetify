@@ -151,7 +151,7 @@ export default mixins(
           return this.pickerDate
         }
 
-        const multipleValue = this.value ? wrapInArray(this.value) : []
+        const multipleValue = wrapInArray(this.value)
         const date = ((this.multiple || this.range) ? multipleValue[multipleValue.length - 1] : this.value) ||
           (typeof this.showCurrent === 'string' ? this.showCurrent : `${now.getFullYear()}-${now.getMonth() + 1}`)
         return sanitizeDateString(date as string, this.type === 'date' ? 'month' : 'year')
@@ -161,7 +161,7 @@ export default mixins(
 
   computed: {
     multipleValue (): string[] {
-      return this.value ? wrapInArray(this.value) : []
+      return wrapInArray(this.value)
     },
     isMultiple (): boolean {
       return this.multiple || this.range
