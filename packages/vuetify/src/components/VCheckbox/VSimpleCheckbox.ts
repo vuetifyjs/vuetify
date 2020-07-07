@@ -10,7 +10,7 @@ import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
 // Utilities
-import { mergeListeners } from '../../util/mergeData'
+import { mergeListeners, mergeClasses } from '../../util/mergeData'
 import { wrapInArray } from '../../util/helpers'
 
 export default Vue.extend({
@@ -80,7 +80,7 @@ export default Vue.extend({
 
     return h('div', {
       ...data,
-      class: classes,
+      class: mergeClasses(classes, data.class),
       on: mergeListeners({
         click: (e: MouseEvent) => {
           e.stopPropagation()
