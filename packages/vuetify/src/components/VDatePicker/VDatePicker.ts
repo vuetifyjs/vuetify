@@ -152,7 +152,7 @@ export default mixins(
         }
 
         const multipleValue = wrapInArray(this.value)
-        const date = ((this.multiple || this.range) ? multipleValue[multipleValue.length - 1] : this.value) ||
+        const date = multipleValue[multipleValue.length - 1] ||
           (typeof this.showCurrent === 'string' ? this.showCurrent : `${now.getFullYear()}-${now.getMonth() + 1}`)
         return sanitizeDateString(date as string, this.type === 'date' ? 'month' : 'year')
       })(),
