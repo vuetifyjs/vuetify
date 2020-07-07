@@ -19,7 +19,7 @@ With Vuetify you can control various aspects of your application based upon the 
 
 ## Breakpoint service
 
-The **breakpoint service** is a programmatic way of accessing viewport information within components. It exposes a number of properties on the `$vuetify` object that can be used to control aspets of your application based upon the viewport size. The `name` property correlates to the currently active breakpoint; e.g. *xs, sm, md, lg, xl*.
+The **breakpoint service** is a programmatic way of accessing viewport information within components. It exposes a number of properties on the `$vuetify` object that can be used to control aspects of your application based upon the viewport size. The `name` property correlates to the currently active breakpoint; e.g. *xs, sm, md, lg, xl*.
 
 In the following snippet, we use a switch statement and the current breakpoint name to modify the **height** property of the [v-card](/components/cards/) component:
 
@@ -51,7 +51,7 @@ In the following snippet, we use a switch statement and the current breakpoint n
 
 ## Usage
 
-Let's try a real world example with a `v-dialog` component. that you want to convert to a **full-screen** dialog on mobile devices. To track this we would need to dtermine the same of the screen relative to the value we are comparing to. In the following snippet we use the `mounted` and `beforeDestroy` lifecycle hooks to bind a _scroll_ listener to the `window`.
+Let's try a real world example with a `v-dialog` component. that you want to convert to a **full-screen** dialog on mobile devices. To track this we would need to determine the same of the screen relative to the value we are comparing to. In the following snippet we use the `mounted` and `beforeDestroy` lifecycle hooks to bind a _scroll_ listener to the `window`.
 
 ```html
 <!-- Vue Component -->
@@ -146,7 +146,7 @@ The following is the public signature for the breakpoint service:
 }
 ```
 
-Access these properties within Vue files by referencing `$vuetify.breakpoint.<property>`; where property coresponds to a value listed in the  [Breakpoint service](#breakpoint-service-object) object. In the following snippet we log the current viewport **width** to the console once the component fires the mounted lifecycle hook:
+Access these properties within Vue files by referencing `$vuetify.breakpoint.<property>`; where property corresponds to a value listed in the  [Breakpoint service](#breakpoint-service-object) object. In the following snippet we log the current viewport **width** to the console once the component fires the mounted lifecycle hook:
 
 ```html
 <!-- Vue Component -->
@@ -164,7 +164,7 @@ While the `$vuetify` object supports SSR (Server-Side Rendering) including platf
 
 ### Breakpoint conditionals
 
-The breakpoint and conditional values return a `boolean` that is derrived from the current viewport size. Additionally, the breakpoint service mimics the [Vuetify Grid](/components/grids) naming conventions and has access to properties such as `xlOnly`, `xsOnly`, `mdAndDown`, and others. In the following example we change the minimum height of `v-sheet` to **300** when on the _extra small_ breakpoint and only show rounded corners on extra small screens:
+The breakpoint and conditional values return a `boolean` that is derived from the current viewport size. Additionally, the breakpoint service mimics the [Vuetify Grid](/components/grids) naming conventions and has access to properties such as `xlOnly`, `xsOnly`, `mdAndDown`, and others. In the following example we change the minimum height of `v-sheet` to **300** when on the _extra small_ breakpoint and only show rounded corners on extra small screens:
 
 ```html
 <!-- Vue Component -->
@@ -243,7 +243,7 @@ export default new Vuetify({
 
 You may notice that there is no `xl` property on the **breakpoint service**; this is intentional. Viewport calculations always start at _0_ and work their way up. A value of _340_ for the `xs` threshold means that a window size of _0 to 340_ is considered to be an *extra small* screen.
 
-To propagate these changes to *css helper classes* we need to update the `$grid-breakpoints` SASS variable with our new values. On **large and extra-large** screens we *substract* width of the browser's scrollbar from the defined breakpoints.
+To propagate these changes to *css helper classes* we need to update the `$grid-breakpoints` SASS variable with our new values. On **large and extra-large** screens we *subtract* width of the browser's scrollbar from the defined breakpoints.
 
 ```scss
 // styles/variables.scss
