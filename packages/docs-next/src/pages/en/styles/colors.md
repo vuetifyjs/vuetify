@@ -3,77 +3,95 @@ meta:
   title: Material color palette
   description: Learn about the colors of Material Design. Consume the javascript color pack directly in your application.
   keywords: colors, material design colors, vuetify color pack, material color classes
+related:
+  - /customization/theme/
+  - /themes/premium/
+  - /getting-started/pre-made-layouts/
 ---
 
 # Colors
 
-Component description
+Out of the box you get access to all colors in the [Material Design spec](https://material.io/guidelines/style/color.html) through **sass** and **javascript**. These values can be used within your style sheets, your component files and on actual components via the **color class** system.
 
 <entry-ad />
 
-## Usage
+## Classes
 
-Usage text
+Each color from the spec gets converted to a **background** and **text** variant for styling within your application through a class, e.g. `<div class=\"red\">` or `<span class=\"red--text\">`. These class colors are defined [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_colors.scss).
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<example file="color/classes" />
 
-## API
+Text colors also support **darken** and **lighten** variants using `text--{lighten|darken}-{n}`
 
-- [API Page Link](../../../api/v-component)
+<example file="color/text-classes" />
 
-## Sub-components
+## Javascript color pack
 
-Omit if none
+Vuetify has an optional javascript color pack that you can import and use within your application. This can also be used to help define your application's theme.
 
-### Sub Component 1
+```js
+// src/plugins/vuetify.js
 
-Sub component text
+import Vue from 'vue'
+import Vuetify from 'vuetify/lib'
 
-### Sub Component 2
+import colors from 'vuetify/lib/util/colors'
 
-Sub component text
+Vue.use(Vuetify)
 
-## Caveats
+export default new Vuetify({
+  theme: {
+    themes: {
+      light: {
+        primary: colors.red.darken1, // #E53935
+        secondary: colors.red.lighten4, // #FFCDD2
+        accent: colors.indigo.base, // #3F51B5
+      },
+    },
+  },
+})
+```
 
-Omit if none
+## Sass color pack
 
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+While convenient, the color pack increases the CSS export size by ~30kb. Some projects may only require the default provided classes that are created at run-time from the Vuetify bootstrap. To disable this feature, you will have to _manually_ import and build the main **sass** file. This will require a [Sass loader](https://github.com/webpack-contrib/sass-loader) and a `.sass`/`.scss` file entry.
 
-## Examples
+```sass
+// src/sass/main.scss
 
-Example text.
+$color-pack: false;
 
-### Props
+@import '~vuetify/src/styles/main.sass';
+```
 
-Omit if none
+Your created `main.sass` file will then need to be included in your project.
 
-### Events
+```js
+// src/index.js
 
-Omit if none
+import './src/sass/main.scss'
+// OR
+require('./src/sass/main.scss')
+```
 
-### Slots
+<alert type="error">
+  You **must** configure your webpack setup to use `sass`. If you are using a [pre-made template](/getting-started/quick-start#vue-cli-install) this will already be done for you.
+</alert>
 
-Omit if none
+This can also be done within your main **App.vue** file. Keep in mind, depending on your project setup, this _will_ increase build times as every time your entry file is updated, the Sass files will be re-generated.
 
-### Misc
+```html
+<style lang="sass">
+  $color-pack: false;
 
-Omit if none
+  @import '~vuetify/src/styles/main.sass';
+</style>
+```
 
-#### Example Header
+## Material colors
 
-Example description
+Below is a list of the Material design color palette grouped by primary color
 
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
-
-## Accessibility
-
-Accessibility text - omit if none
+<color-palette />
 
 <backmatter />
