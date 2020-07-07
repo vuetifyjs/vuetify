@@ -9,6 +9,7 @@
   "MD033": {
     "allowed_elements": [
       "alert",
+      "app-img",
       "backmatter",
       "br",
       "breakpoints-table",

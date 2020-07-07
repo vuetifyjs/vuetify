@@ -5,7 +5,7 @@
       color="transparent"
     >
       <v-img
-        class="rounded"
+        class="rounded mx-auto"
         eager
         max-width="100%"
         v-bind="$attrs"
