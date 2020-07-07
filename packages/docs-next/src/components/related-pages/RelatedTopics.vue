@@ -7,7 +7,5 @@
 </template>
 
 <script>
-  export default {
-    name: 'RelatedTopics',
-  }
+  export default { name: 'RelatedTopics' }
 </script>

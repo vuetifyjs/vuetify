@@ -10,8 +10,8 @@
       :src="`https://cdn.vuetifyjs.com/images/logos/vuetify-logo-${theme.isDark ? 'dark' : 'light' }.png`"
       alt="Vuetify Logo"
       class="shrink"
-      width="32"
       transition="scale-transition"
+      width="32"
     />
   </router-link>
 </template>
