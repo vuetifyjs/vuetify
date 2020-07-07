@@ -28,7 +28,9 @@
 
     <app-divider />
 
-    <exit-ad />
+    <v-lazy>
+      <exit-ad />
+    </v-lazy>
 
     <contribute />
   </section>
