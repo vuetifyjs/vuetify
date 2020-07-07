@@ -4,6 +4,9 @@ meta:
   description: Stuck on a problem? Check out the most frequently asked questions by the Vuetify community.
   keywords: frequently asked questions, faq
 related:
+  - /getting-started/contributing/
+  - /professional-support/consulting/
+  - /customization/a-la-carte/
 ---
 
 # Frequently asked questions
