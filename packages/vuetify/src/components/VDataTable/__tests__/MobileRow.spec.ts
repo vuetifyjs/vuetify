@@ -121,11 +121,11 @@ describe('MobileRow', () => {
             { text: 'Petrol', value: 'petrol' },
             { text: 'Diesel', value: 'diesel' },
           ],
+          hideDefaultHeader: true,
           item: {
             petrol: 0.68,
             diesel: 0.65,
           },
-          hideDefaultHeader: true,
         },
       },
     })

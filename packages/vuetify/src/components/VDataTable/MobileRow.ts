@@ -9,9 +9,9 @@ export default Vue.extend({
 
   props: {
     headers: Array as PropType<DataTableHeader[]>,
+    hideDefaultHeader: Boolean,
     item: Object,
     rtl: Boolean,
-    hideDefaultHeader: Boolean,
   },
 
   render (h, { props, slots, data }): VNode {
