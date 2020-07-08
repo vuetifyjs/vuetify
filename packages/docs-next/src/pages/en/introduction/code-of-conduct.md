@@ -1,11 +1,11 @@
 ---
 meta:
-  title: Code of Conduct
+  title: Code of conduct
   description: Vuetify provides a safe, inclusive, and judgement free community for developers from all walks of life!
   keywords: vuetify code of conduct, vuetify coc, community conduct
 ---
 
-# Code of Conduct
+# Code of conduct
 
 For questions or concerns regarding our *Code of Conduct*, please reach out to us at [support@vuetifyjs.com](mailto:support@vuetifyjs.com).
 
