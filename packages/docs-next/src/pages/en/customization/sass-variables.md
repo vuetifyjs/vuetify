@@ -104,7 +104,9 @@ module.exports = {
 
 There are many SASS/SCSS variables that can be customized across the entire Vuetify framework. Below is an example of a custom **variables** file. You can find more information about available [variables](#variable-api) below:
 
-<alert type="error">**TODO:** Setup API section</alert>
+<alert type="error">
+  **TODO:** Setup API section
+</alert>
 
 ## Example variable file
 
