@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "vue-cli-service build",
-    "build:api": "node build/api-gen.js",
+    "build:api": "node build/api-gen",
     "dev": "cross-env EN_LOCALE_ONLY=true yarn serve",
     "dev:full": "cross-env EN_LOCALE_ONLY=false yarn serve",
     "serve": "vue-cli-service serve",
