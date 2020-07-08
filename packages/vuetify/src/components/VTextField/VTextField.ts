@@ -14,6 +14,7 @@ import Loadable from '../../mixins/loadable'
 import Validatable from '../../mixins/validatable'
 
 // Directives
+import resize from '../../directives/resize'
 import ripple from '../../directives/ripple'
 
 // Utilities
@@ -52,7 +53,7 @@ const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', '
 export default baseMixins.extend<options>().extend({
   name: 'v-text-field',
 
-  directives: { ripple },
+  directives: { resize, ripple },
 
   inheritAttrs: false,
 
@@ -396,6 +397,10 @@ export default baseMixins.extend<options>().extend({
           keydown: this.onKeyDown,
         }),
         ref: 'input',
+        directives: [{
+          name: 'resize',
+          value: this.onResize,
+        }],
       })
     },
     genMessages () {
@@ -510,6 +515,11 @@ export default baseMixins.extend<options>().extend({
       } else if (this.initialValue !== this.lazyValue) {
         this.$emit('change', this.lazyValue)
       }
+    },
+    onResize () {
+      this.setLabelWidth()
+      this.setPrefixWidth()
+      this.setPrependWidth()
     },
   },
 })
