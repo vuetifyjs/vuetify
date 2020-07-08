@@ -66,6 +66,56 @@ describe('VBottomNavigation.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should always be false when inputValue is false', async () => {
+    const wrapper = mountFunction({
+      propsData: { inputValue: false },
+      slots: {
+        default: [VBtn, VBtn]
+      },
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isActive).toBeFalsy
+
+    // Scrolling down
+    wrapper.vm.currentScroll = 1000
+    wrapper.vm.previousScroll = 900
+
+    expect(wrapper.vm.isActive).toBeFalsy()
+
+    // Scrolling up
+    wrapper.vm.currentScroll = 900
+    wrapper.vm.previousScroll = 1000
+
+    expect(wrapper.vm.isActive).toBeFalsy()
+  })
+
+  it('should always not be same as isScrollingUp when inputValue is true', async () => {
+    const wrapper = mountFunction({
+      propsData: { inputValue: true },
+      slots: {
+        default: [VBtn, VBtn]
+      },
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isActive).toBe(!wrapper.vm.isScrollingUp)
+
+    // Scrolling down
+    wrapper.vm.currentScroll = 1000
+    wrapper.vm.previousScroll = 900
+
+    expect(wrapper.vm.isActive).toBe(!wrapper.vm.isScrollingUp)
+
+    // Scrolling up
+    wrapper.vm.currentScroll = 900
+    wrapper.vm.previousScroll = 1000
+
+    expect(wrapper.vm.isActive).toBe(!wrapper.vm.isScrollingUp)
+  })
+
   it('should update application when height or inputValue changes', () => {
     const wrapper = mountFunction({
       propsData: {
