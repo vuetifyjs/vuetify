@@ -1,81 +1,101 @@
 ---
 meta:
   title: Card component
-  description: The card component provides an elevatable sheet of paper to display content and provide actions on a single topic.
-  keywords: cards, vuetify card component, vue card component
+  description: The v-card component is a versatile component that can be used for anything from a panel to a static image.
+  keywords: cards, vuetify card component, vue card component, v-card
+related:
+  - /components/buttons/
+  - /components/images/
+  - /styles/text-and-typography/
 ---
 
 # Cards
 
-Component description. <inline-ad slug="scrimba-cards" />
+The `v-card` component is a versatile component that can be used for anything from a panel to a static image. The **card** component has numerous helper components to make markup as easy as possible. Components that have no listed options use Vue's functional component option for faster rendering and serve as markup sugar to make building easier. <inline-ad slug="scrimba-cards" />
 
 <entry-ad />
 
 ## Usage
 
-Usage text
+A card has 4 basic components, `v-card-title`, `v-card-subtitle`, `v-card-text` and `v-card-actions`.
 
-`<usage name="" />`
+<usage name="v-card" />
 
-- **name**: component name
-- eg: `<usage name="v-alert" />`
+### Functional Components
+
+- `v-card-actions`: The container used for placing **actions** for a card, such as [v-btn](/components/buttons) or [v-menu](/components/menus). Also applies *special margin* to buttons so that they properly line up with other card content areas.
+- `v-card-subtitle`: Provides a default **font-size** and **padding** for card subtitles. Font-size can be overwritten with [typography classes](/styles/typography).
+- `v-card-text`: Primarily used for **text content** in a card. Applies padding for text, reduces its font-size to .875rem.
+- `v-card-title`: Provides a default **font-size** and **padding** for card titles. Font-size can be overwritten with [typography classes](/styes/typography).
 
 ## API
 
-- [API Page Link](../../api/v-component)
-
-## Sub-components
-
-Omit if none
-
-### Sub Component 1
-
-Sub component text
-
-### Sub Component 2
-
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
+- [v-card](../../api/v-card)
 
 ## Examples
 
-Example text.
-
 ### Props
 
-Omit if none
+#### Loading
 
-### Events
+Cards can be set to a loading state when processing a user action. This disables further actions and provides visual feedback with an indeterminate [v-progress-linear](/components/progress-linear).
 
-Omit if none
+<example file="v-card/prop-loading" />
 
-### Slots
+#### Outlined
 
-Omit if none
+An **outlined** card has 0 elevation and contains a soft border.
+
+<example file="v-card/prop-outlined" />
 
 ### Misc
 
-Omit if none
+#### Custom actions
 
-#### Example Header
+With a simple conditional, you can easily add supplementary text that is hidden until opened.
 
-Example description
+<example file="v-card/misc-custom-actions" />
 
-`<example file="" />`
+#### Grids
 
-- **file**: `<component>/<type>-<propname>`
-- eg: `<example file="v-alert/prop-colored-border" />`
+Using grids, you can create beautiful layouts.
 
-## Accessibility
+<example file="v-card/misc-grids" />
 
-Accessibility text - omit if none
+#### Horizontal cards
+
+Using `v-flex`, you can create customized horizontal cards. Use the `contain` property to shrink the `v-img` to fit inside the container, instead of covering.
+
+<example file="v-card/misc-horizontal-cards" />
+
+### Information card
+
+Cards are entry points to more detailed information. To keep things concise, ensure to limit the number of actions the user can take.
+
+<example file="v-card/misc-information-card" />
+
+### Content wrapping
+
+The `v-card` component is useful for wrapping content.
+
+<example file="v-card/misc-content-wrapping" />
+
+### Media with text
+
+Using the layout system, we can add custom text anywhere within the background.
+
+<example file="v-card/misc-media-with-text" />
+
+#### Twitter card
+
+The `v-card` component has multiple children components that help you build complex examples without having to worry about spacing. This example is comprised of the `v-card-title`, `v-card-text` and `v-card-actions` components.
+
+<example file="v-card/misc-twitter-card" />
+
+#### Weather card
+
+Using [v-list-items](/components/lists) and a [v-slider](/components/sliders), we are able to create a unique weather card. The list components ensure that we have consistent spacing and functionality while the slider component allows us to provide a useful interface of selection to the user.
+
+<example file="v-card/misc-weather-card" />
 
 <backmatter />
