@@ -7,73 +7,44 @@ meta:
 
 # Float
 
-Component description
+Applies a custom float across any breakpoint with responsive float utilities.
 
 <entry-ad />
 
-## Usage
+## Overview
 
-Usage text
+Float utility classes apply floating based upon the current viewport size using the [CSS float property](https://developer.mozilla.org/en-US/docs/Web/CSS/float).
 
-`<usage name="" />`
-**name**: component name
-eg: `<usage name="v-alert" />`
+<breakpoints-table />
 
-## API
+## Classes
 
-- [API Page Link](../../../api/v-component)
+Easily toggle a float with a class:
 
-## Sub-components
+<example file="float/classes" />
 
-Omit if none
+## Responsive
 
-### Sub Component 1
+Floats can also be applied on a per breakpoint (viewport) basis.
 
-Sub component text
+<example file="float/responsive" />
 
-### Sub Component 2
+Here is a list of all the available support classes:
 
-Sub component text
-
-## Caveats
-
-Omit if none
-
-<alert type="success">Success Caveat</alert>
-<alert type="info">Info Caveat</alert>
-<alert type="warning">Warning Caveat</alert>
-<alert type="error">Error Caveat</alert>
-
-## Examples
-
-Example text.
-
-### Props
-
-Omit if none
-
-### Events
-
-Omit if none
-
-### Slots
-
-Omit if none
-
-### Misc
-
-Omit if none
-
-#### Example Header
-
-Example description
-
-`<example file="" />`
-**file**: `<component>/<type>-<propname>`
-eg: `<example file="v-alert/prop-colored-border" />`
-
-## Accessibility
-
-Accessibility text - omit if none
+- **.float-left**
+- **.float-right**
+- **.float-none**
+- **.float-sm-left**
+- **.float-sm-right**
+- **.float-sm-none**
+- **.float-md-left**
+- **.float-md-right**
+- **.float-md-none**
+- **.float-lg-left**
+- **.float-lg-right**
+- **.float-lg-none**
+- **.float-xl-left**
+- **.float-xl-right**
+- **.float-xl-none**
 
 <backmatter />
