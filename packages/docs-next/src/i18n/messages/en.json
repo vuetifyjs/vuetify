@@ -68,5 +68,11 @@
   "view-in-github": "View on @:github",
   "view-source": "View source",
   "viewport": "Viewport",
-  "vuetify": "Vuetify"
+  "vuetify": "Vuetify",
+  "assistant": "### Jr.<br>UI Designer",
+  "cm": "### Community Manager",
+  "core": "### Core<br>Team",
+  "founder": "### Founder<br>CEO",
+  "keeper": "### Keeper of<br>the Grove",
+  "operations": "### Chief Operations Officer"
 }
