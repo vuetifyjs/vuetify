@@ -10,8 +10,8 @@ import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
 // Utilities
-import { mergeListeners, mergeClasses } from '../../util/mergeData'
 import { wrapInArray } from '../../util/helpers'
+import { mergeClasses, mergeListeners } from '../../util/mergeData'
 
 export default Vue.extend({
   name: 'v-simple-checkbox',
