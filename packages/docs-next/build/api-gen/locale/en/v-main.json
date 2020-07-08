@@ -1,6 +1,7 @@
  {
   "props": {
-    "empty": ""
+    "empty": "",
+    "tag": "Components.Sheets.props.tag"
     // add prop lang here
   },
   "slots": {
