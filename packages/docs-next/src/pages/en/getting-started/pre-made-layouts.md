@@ -13,12 +13,10 @@ related:
 
 The layout system is the heart of every application. Below are a just a few examples of the numerous possibilities you have when customizing the look and feel of your application.
 
-<alert type="info">
-  If you are looking for additional information on how these templates are structured, navigate to the [Application page](/components/application).
-</alert>
-
-<pre-made-layouts />
-
 <entry-ad />
+
+<alert type="info">If you are looking for additional information on how these templates are structured, navigate to the [Application page](/components/application/).</alert>
+
+<layout-examples />
 
 <backmatter />

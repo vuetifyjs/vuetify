@@ -73,7 +73,7 @@
   import { get } from 'vuex-pathify'
 
   export default {
-    name: 'PreMadeLayouts',
+    name: 'LayoutExamples',
 
     data: () => ({
       filePath: 'packages/docs/src/layouts/layouts/demos',
