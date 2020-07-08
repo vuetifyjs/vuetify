@@ -70,13 +70,13 @@ describe('VBottomNavigation.ts', () => {
     const wrapper = mountFunction({
       propsData: { inputValue: false },
       slots: {
-        default: [VBtn, VBtn]
+        default: [VBtn, VBtn],
       },
     })
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.isActive).toBeFalsy
+    expect(wrapper.vm.isActive).toBeFalsy()
 
     // Scrolling down
     wrapper.vm.currentScroll = 1000
@@ -95,7 +95,7 @@ describe('VBottomNavigation.ts', () => {
     const wrapper = mountFunction({
       propsData: { inputValue: true },
       slots: {
-        default: [VBtn, VBtn]
+        default: [VBtn, VBtn],
       },
     })
 
