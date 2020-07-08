@@ -22,9 +22,9 @@ Vuetify is a progressive framework that attempts to push web development to the 
 | Chromium (Chrome, Edge Insider) | Supported |
 | Edge | Supported |
 | Firefox | Supported |
+| Safari 10+ | Supported |
 | IE11/Safari 9 | Supported with polyfill |
 | IE9 / IE10 | Not supported |
-| Safari 10+ | Supported |
 
 ## IE11 and Safari 9 support
 

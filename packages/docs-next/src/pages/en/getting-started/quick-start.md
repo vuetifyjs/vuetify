@@ -17,7 +17,7 @@ Get started with Vuetify, the world’s most popular Vue.js framework for buildi
 
 ## Vue CLI Install
 
-<alert type="warning">For information on how to use Vue CLI, visit the [official documentation](https://google.com).</alert>
+<alert type="warning">For information on how to use Vue CLI, visit the [official documentation](https://cli.vuejs.org/).</alert>
 
 If you have not already created a new Vue.js project using **Vue CLI**, you can do so by typing:
 
@@ -27,7 +27,7 @@ vue create my-app
 cd my-app
 ```
 
-Now that you have an instantiated project, you can add the Vuetify [Vue CLI package](?) using the cli.
+Now that you have an instantiated project, you can add the Vuetify [Vue CLI package](https://github.com/vuetifyjs/vue-cli-plugins/tree/master/packages/vue-cli-plugin-vuetify-cli) using the cli.
 
 ```bash
 vue add vuetify
@@ -45,7 +45,7 @@ vue --version
 vue ui
 ```
 
-This will start the Vue User Interface and open a [new window](?) in your browser. On the left side of your screen, click on **Plugins**. Once navigated, search for Vuetify in the input field.
+This will start the Vue User Interface and open a new window in your browser. On the left side of your screen, click on **Plugins**. Once there, search for Vuetify in the input field and install the plugin.
 
 ![Install Vuetify Plugin](https://cdn.vuetifyjs.com/images/quick-start/vue_ui.png "Vue UI Vuetify Plugin")
 
@@ -92,42 +92,44 @@ yarn add sass sass-loader fibers deepmerge -D
 npm install sass sass-loader fibers deepmerge -D
 ```
 
-Once installed, locate your webpack.config.js file and copy the snippet below into the rules array. If you have an existing sass rule configured, you may need to apply some or all of the changes below. If you are you looking to utilize the vuetify-loader for treeshaking, ensure that you are on version >=4 of Webpack. You can find more information on setting it up with webpack on the A-la-carte page.
+Once installed, locate your `webpack.config.js` file and copy the snippet below into the rules array. If you have an existing sass rule configured, you may need to apply some or all of the changes below. If you are you looking to utilize the vuetify-loader for treeshaking, ensure that you are on version >=4 of Webpack. You can find more information on setting it up with webpack on the A-la-carte page.
 
 ```js
 // webpack.config.js
 
 module.exports = {
-  rules: [
-    {
-      test: /\.s(c|a)ss$/,
-      use: [
-        'vue-style-loader',
-        'css-loader',
-        {
-          loader: 'sass-loader',
-          // Requires sass-loader@^7.0.0
-          options: {
-            implementation: require('sass'),
-            fiber: require('fibers'),
-            indentedSyntax: true // optional
-          },
-          // Requires sass-loader@^8.0.0
-          options: {
-            implementation: require('sass'),
-            sassOptions: {
+  module: {
+    rules: [
+      {
+        test: /\.s(c|a)ss$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            // Requires sass-loader@^7.0.0
+            options: {
+              implementation: require('sass'),
               fiber: require('fibers'),
               indentedSyntax: true // optional
             },
+            // Requires sass-loader@^8.0.0
+            options: {
+              implementation: require('sass'),
+              sassOptions: {
+                fiber: require('fibers'),
+                indentedSyntax: true // optional
+              },
+            },
           },
-        },
-      ],
-    },
-  ],
+        ],
+      },
+    ],
+  }
 }
 ```
 
-Create a plugin file for Vuetify, src/plugins/vuetify.js with the below content:
+Create a plugin file for Vuetify, `src/plugins/vuetify.js` with the below content:
 
 ```js
 // src/plugins/vuetify.js
@@ -173,7 +175,7 @@ new Vue({
 
 ### Font installation
 
-Vuetify uses Google's Roboto font and Material Design Icons. The simplest way to install these are to include their CDN's in your main index.html.
+Vuetify uses Google's Roboto font and Material Design Icons. The simplest way to install these are to include their CDN's in your main `index.html` file.
 
 ```html
 <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
@@ -182,7 +184,7 @@ Vuetify uses Google's Roboto font and Material Design Icons. The simplest way to
 
 ## CDN usage
 
-To test using Vuetify.js without installing a template from Vue CLI, copy the code below into your index.html. This will pull the latest version of Vue and Vuetify, allowing you to start playing with components. You can also use the Vuetify starter on codepen. While not recommended, if you need to utilize the cdn packages in a production environment, it is recommended that you scope the versions of your assets. For more information on how to do this, navigate to the jsdelivr website.
+To test using Vuetify.js without installing a template from Vue CLI, copy the code below into your `index.html` file. This will pull the latest version of Vue and Vuetify, allowing you to start playing with components. You can also use the [Vuetify starter](https://template.vuetifyjs.com) on Codepen. While not recommended, if you need to utilize the CDN packages in a production environment, it is recommended that you scope the versions of your assets. For more information on how to do this, navigate to the jsdelivr website.
 
 <alert type="info">In order for your application to work properly, you must wrap it in a v-app component. See the Application component page for more information.</alert>
 

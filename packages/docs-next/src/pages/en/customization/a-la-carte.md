@@ -214,7 +214,7 @@ Functional components are inlined at runtime by vue, and cannot have a **compone
 
 ## Manually importing
 
-Components can be manually imported when not using the Vuetify loader. You will also want to do this when using dynamic components and the **vuetify-loader** as it only parses explicit usage. This commonly occurs when using the built in Vue `<component is=\"my-component\" />`. More information about dynamic components is in the official Vue [documentation](https://vuejs.org/v2/guide/components.html#Dynamic-Components).
+Components can be manually imported when not using the Vuetify loader. You will also want to do this when using dynamic components and the **vuetify-loader** as it only parses explicit usage. This commonly occurs when using the built in Vue `<component>`. More information about dynamic components can be found in the official Vue [documentation](https://vuejs.org/v2/guide/components.html#Dynamic-Components).
 
 ```js
 // src/plugins/vuetify.js

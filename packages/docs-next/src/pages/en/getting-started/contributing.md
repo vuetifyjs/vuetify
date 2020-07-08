@@ -26,9 +26,9 @@ These steps ensure that we have all of the information *necessary* to quickly tr
 
 ## Setting up your environment
 
-If you are making a [Pull Request](https://github.com/vuetifyjs/vuetify/pulls), please [fork the Vuetify repository](https://github.com/vuetifyjs/vuetify) before continuing; More information on forking repositories is located in the [Fork a Repo](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) documentation. Otherwise you can simply click the <kbd>Clone or download</kbd> option on the Vuetify repository page.
+If you are making a [pull request](https://github.com/vuetifyjs/vuetify/pulls), please [fork the Vuetify repository](https://github.com/vuetifyjs/vuetify) before continuing; More information on forking repositories can be found in the [GitHub documentation](https://help.github.com/en/github/getting-started-with-github/fork-a-repo).
 
-If you are new to the process of contributing to Open Source, it's recommended that you clone using **https**. More information on [Which remote URL](https://help.github.com/en/github/using-git/which-remote-url-should-i-use) to use can be found on the GitHub documentation page.
+If you are new to the process of contributing to Open Source, it's recommended that you clone using **https**. More information on [which remote URL](https://help.github.com/en/github/using-git/which-remote-url-should-i-use) to use can be found on the GitHub documentation page.
 
 ```bash
 # Example of cloning the Vuetify repository (non fork)
@@ -40,7 +40,7 @@ git clone https://github.com/vuetifyjs/vuetify.git
 git clone git@github.com:vuetifyjs/vuetify.git
 ```
 
-Once cloned, navigate to the folder by typing <kbd>cd vuetify</kbd> and then running the following commands:
+Once cloned, run the following commands:
 
 ```bash
 # Navigate to the vuetify folder
@@ -57,10 +57,11 @@ The build process compiles all of the Vuetify packages for development and may t
 
 ## Starting your environment
 
-There are a few ways to startup the dev environments in Vuetify mono-repo. If you are using our [PM2 guide](#process-manager-2-pm-2), you can skip this section.
+There are a few ways to start the development environments in the Vuetify mono-repo.
 
 ```bash
-# All run from root directory
+# All commands run from root directory
+
 # To start vuetify dev
 yarn dev
 
@@ -107,9 +108,9 @@ echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
 
 Congrats! Commitizen is installed! When you do commits, add your files like normal and replace `git commit -m "your message"` with `git cz` and follow the prompts.
 
-More information on [Commit Guidelines w/Commitizen](#commit-guidelines-w-commitizen) can be found below.
+See the next section for guidelines when writing commit messages
 
-## Commit Guidelines w/Commitizen
+## Commit Guidelines with Commitizen
 
 Commitizen provides a fluid interface for handling semantic versioning. This provides a great boilerplate making it easier to write patch notes.
 
@@ -156,6 +157,6 @@ Lastly, `git push` and open a pull request.
 ### Pull Requests For Docs - Language
 
 <alert type="info">
-  We do not accept PR's for any doc changes pertaining to language other than `en`. All changes for languages other than `en` are to be submitting through our Crowdin project. To get started simply select `Help Translate` in the language drop down of the docs. Languages will not be added until having more than 15% of their translations completed.
+  We do not accept PRs for any doc changes pertaining to languages other than `en`. All changes for languages other than `en` are to be submitting through our Crowdin project. To get started simply select `Help Translate` in the language drop down of the docs. Languages will not be added until they have at least 15% of their translations completed.
 </alert>
 <backmatter />
