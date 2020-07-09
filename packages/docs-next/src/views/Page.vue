@@ -79,17 +79,24 @@
         console.error('Missing load method for Page.vue')
       },
       async update (route) {
-        const {
-          attributes = {},
-          toc = [],
-          vue = {},
-        } = await this.load(route)
+        try {
+          const {
+            attributes = {},
+            toc = [],
+            vue = {},
+          } = await this.load(route)
 
-        vue.component.name = route.params.page
+          vue.component.name = route.params.page
 
-        this.frontmatter = attributes
-        this.toc = toc
-        this.component = vue.component
+          this.frontmatter = attributes
+          this.toc = toc
+          this.component = vue.component
+        } catch (e) {
+          this.component = (await import(
+            /* webpackChunkName: "404" */
+            './404'
+          )).default
+        }
       },
       async reset () {
         this.component = undefined

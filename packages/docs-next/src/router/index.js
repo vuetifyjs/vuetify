@@ -31,6 +31,17 @@ export function createRouter (vuetify, store, i18n) {
             api: 'Api',
           }),
         ], ':category/:page'),
+
+        layout('Documentation', [
+          {
+            name: 'NotFound',
+            path: '*',
+            component: () => import(
+              /* webpackChunkName: "404" */
+              '../views/404'
+            ),
+          },
+        ], '*'),
       ]),
 
       // Redirect for language fallback
