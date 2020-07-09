@@ -4,15 +4,15 @@
       name: 'Home',
       params: { locale }
     }"
-    aria-label="Vuetify Home Page"
+    :aria-label="$i18n.t('logo')"
     class="d-none d-sm-flex align-center text--primary"
     style="text-decoration: none;"
-    title="Vuetify Home Page"
+    :title="$i18n.t('logo')"
     @click.native="$vuetify.goTo(0)"
   >
     <v-img
       :src="`https://cdn.vuetifyjs.com/images/logos/vuetify-logo-${theme.isDark ? 'dark' : 'light' }.png`"
-      alt="Vuetify Logo"
+      :alt="$i18n.t('logo')"
       class="shrink mr-2"
       contain
       transition="scale-transition"

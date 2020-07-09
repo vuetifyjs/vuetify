@@ -1,6 +1,6 @@
 <template>
   <v-app-bar app>
-    <v-toolbar-title>Application</v-toolbar-title>
+    <v-toolbar-title>{{ $i18n.t('application') }}</v-toolbar-title>
   </v-app-bar>
 </template>
 

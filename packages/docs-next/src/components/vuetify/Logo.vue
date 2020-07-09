@@ -8,7 +8,7 @@
   >
     <v-img
       :src="`https://cdn.vuetifyjs.com/images/logos/vuetify-logo-${theme.isDark ? 'dark' : 'light' }.png`"
-      alt="Vuetify Logo"
+      :alt="$i18n.t('logo')"
       class="shrink"
       transition="scale-transition"
       width="32"

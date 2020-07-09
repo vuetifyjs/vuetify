@@ -4,7 +4,7 @@
       <v-autocomplete
         :items="items"
         clearable
-        label="Search for API"
+        :label="$i18n.t('api-search')"
         multiple
         prepend-inner-icon="$mdiDatabaseSearch"
         return-object
@@ -35,7 +35,7 @@
               :id="attrs['aria-labelledby']"
               v-text="item.text"
             />
-            <v-list-item-subtitle v-text="item.subtext" />
+            <v-list-item-subtitle v-text="$i18n.t(`api-type.${item.type}`)" />
           </v-list-item-content>
         </template>
       </v-autocomplete>
@@ -81,27 +81,12 @@
 
     data: () => ({
       apiItems: [],
-      itemTypes: {
-        component: {
-          subtext: 'Component',
-          icon: '$mdiViewDashboard',
-        },
-        directive: {
-          subtext: 'Directive',
-          icon: '$mdiFunction',
-        },
-        functional: {
-          subtext: 'Functional Component',
-          icon: '$mdiViewStream',
-        },
-        grid: {
-          subtext: 'Grid Component',
-          icon: '$mdiGrid',
-        },
-        transition: {
-          subtext: 'Transition',
-          icon: '$mdiClockFast',
-        },
+      icons: {
+        component: '$mdiViewDashboard',
+        directive: '$mdiFunction',
+        functional: '$mdiViewStream',
+        grid: '$mdiGrid',
+        transition: '$mdiClockFast',
       },
       pageTypes: {
         'v-app-bar-nav-icon': 'functional',
@@ -195,7 +180,8 @@
           text: page,
           value: `${lang}/${page}.md`,
           lang,
-          ...this.itemTypes[type],
+          type,
+          icon: this.icons[type],
         }
       },
       genTable,

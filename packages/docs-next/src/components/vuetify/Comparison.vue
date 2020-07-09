@@ -6,13 +6,17 @@
   >
     <v-simple-table>
       <caption class="pa-4 text-h6">
-        Vue Framework Comparison {{ (new Date()).getFullYear() }}
+        {{ $i18n.t('comparison-caption', { year: (new Date()).getFullYear() }) }}
       </caption>
 
       <thead>
         <tr>
           <th width="275px">
-            <strong class="text-body-1 font-weight-bold">Features</strong>
+            <i18n
+              tag="strong"
+              class="text-body-1 font-weight-bold"
+              path="features"
+            />
           </th>
 
           <th
@@ -37,12 +41,13 @@
 
       <tbody>
         <tr
-          v-for="(v, key, i) in features"
+          v-for="(key, i) in features"
           :key="i"
         >
-          <td
+          <i18n
+            tag="td"
             class="text--secondary text-left"
-            v-text="v"
+            :path="`comparison.${key}`"
           />
 
           <td
@@ -74,9 +79,10 @@
             colspan="7"
             class="text-caption font-italic text--disabled"
           >
-            <div>
-              **Based on average of all Major/Minor/Patch releases over the last 12 months.
-            </div>
+            <i18n
+              tag="div"
+              path="comparison-average"
+            />
           </td>
         </tr>
       </tfoot>
@@ -89,15 +95,15 @@
     name: 'VuetifyComparison',
 
     data: () => ({
-      features: {
-        a11y: 'Accessibility and Section 508 support',
-        enterprise: 'Business and Enterprise support',
-        lts: 'Long-term Support',
-        release: 'Release cadence**',
-        rtl: 'RTL support',
-        themes: 'Premium Themes',
-        tree: 'Treeshaking',
-      },
+      features: [
+        'a11y',
+        'enterprise',
+        'lts',
+        'release',
+        'rtl',
+        'themes',
+        'tree',
+      ],
       frameworks: [
         {
           name: 'Vuetify',

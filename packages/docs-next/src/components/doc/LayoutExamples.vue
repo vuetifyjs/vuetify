@@ -33,9 +33,9 @@
                   v-text="layout.name"
                 />
                 <v-btn
-                  :aria-label="`Link to layout for ${layout.name}`"
+                  :aria-label="$i18n.t('layout-link', { name: layout.name })"
                   :href="`/${locale}/examples/pre-made-layouts/${kebabCase(layout.name)}`"
-                  :title="`Link to layout for ${layout.name}`"
+                  :title="$i18n.t('layout-link', { name: layout.name })"
                   class="mx-2"
                   color="indigo"
                   depressed
@@ -46,9 +46,9 @@
                   <v-icon>$mdiOpenInNew</v-icon>
                 </v-btn>
                 <v-btn
-                  :aria-label="`Link to layout ${layout.name}`"
+                  :aria-label="$i18n.t('layout-link', { name: layout.name })"
                   :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/${filePath}/${layout.filename}.vue`"
-                  :title="`Link to code for ${layout.name}`"
+                  :title="$i18n.t('layout-link', { name: layout.name })"
                   class="mx-2"
                   color="indigo"
                   depressed
