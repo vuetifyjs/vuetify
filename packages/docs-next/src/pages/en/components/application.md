@@ -11,7 +11,7 @@ related:
 
 # Application
 
-In Vuetify, the `v-app` component and the **app** prop on components like `v-navigation-drawer`, `v-app-bar`, `v-footer` and more, help bootstrap your application with the proper sizing around `<v-main>` component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The `v-app` component is **REQUIRED** for all applications. This is the mount point for many of Vuetify's components and functionality and ensures that it propagates the default application _variant_ (**dark/light**) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. `v-app` should only be used within your application **ONCE**.
+In Vuetify, the `v-app` component and the **app** prop on components like `v-navigation-drawer`, `v-app-bar`, `v-footer` and more, help bootstrap your application with the proper sizing around `<v-main>` component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The `v-app` component is **REQUIRED** for all applications. This is the mount point for many of Vuetify's components and functionality and ensures that it propagates the default application _variant_ (**dark/light**) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. `v-app` should only be rendered within your application **ONCE**.
 
 <entry-ad />
 
@@ -22,6 +22,10 @@ In Vuetify, the `v-app` component and the **app** prop on components like `v-nav
 
 <alert type="error">
 In order for your application to work properly, you **must** wrap it in a `v-app` component. This component is required for ensuring proper **cross-browser compatibility**. Vuetify doesn't support multiple isolated Vuetify instances on a page. `v-app` can exist **anywhere** inside the body of your app, however, there should only be one and it must be the parent of **ALL** Vuetify components.
+</alert>
+
+<alert type="info">
+  If you are using multiple layouts in your application you will need to ensure each root layout file that will contain Vuetify components has a `v-app` at the root of its template.
 </alert>
 
 ## Default application markup
