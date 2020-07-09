@@ -464,6 +464,7 @@ export default mixins(
         ),
         props: {
           headers: this.computedHeaders,
+          hideDefaultHeader: this.hideDefaultHeader,
           item,
           rtl: this.$vuetify.rtl,
         },

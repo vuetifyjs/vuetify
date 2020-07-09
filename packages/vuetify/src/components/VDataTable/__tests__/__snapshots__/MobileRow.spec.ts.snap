@@ -102,6 +102,21 @@ exports[`MobileRow should render with scoped slots 1`] = `
 </tr>
 `;
 
+exports[`MobileRow should render without header when hideDefaultHeader: true 1`] = `
+<tr class="v-data-table__mobile-table-row">
+  <td class="v-data-table__mobile-row">
+    <div class="v-data-table__mobile-row__cell">
+      0.68
+    </div>
+  </td>
+  <td class="v-data-table__mobile-row">
+    <div class="v-data-table__mobile-row__cell">
+      0.65
+    </div>
+  </td>
+</tr>
+`;
+
 exports[`MobileRow should render without slots 1`] = `
 <tr class="v-data-table__mobile-table-row">
   <td class="v-data-table__mobile-row">
