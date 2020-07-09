@@ -65,7 +65,7 @@
   export default {
     data: () => ({
       // https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#string-arguments
-      date: parseISO(new Date().toISOString().substr(0, 10)),
+      date: format(parseISO(new Date().toISOString()), 'yyyy-MM-dd'),
       menu1: false,
       menu2: false,
     }),
