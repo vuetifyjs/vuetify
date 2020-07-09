@@ -73,5 +73,10 @@
   "core": "### Core<br>Team",
   "founder": "### Founder<br>CEO",
   "keeper": "### Keeper of<br>the Grove",
-  "operations": "### Chief Operations Officer"
+  "operations": "### Chief Operations Officer",
+  "jobs-search": "Search by keywords",
+  "jobs-via": "via {via}",
+  "jobs-apply": "Apply Now",
+  "jobs-not-found": "No Jobs Found",
+  "jobs-new": "#new"
 }

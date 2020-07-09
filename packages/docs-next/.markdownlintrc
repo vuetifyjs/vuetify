@@ -22,14 +22,15 @@
       "exit-ad",
       "inline-ad",
       "kbd",
-      "promoted-ad",
       "layout-examples",
+      "promoted-ad",
       "random-ad",
       "sponsored-ad",
       "team-members",
       "up-next",
       "usage",
       "var",
+      "vue-jobs",
       "vuetify-comparison"
     ]
   }

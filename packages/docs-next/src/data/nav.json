@@ -209,5 +209,13 @@
       "business",
       "enterprise"
     ]
+  },
+  {
+    "title": "jobs",
+    "icon": "$mdiBriefcaseSearch",
+    "items": [
+      "for-vue"
+    ]
   }
+
 ]
