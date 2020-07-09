@@ -32,6 +32,9 @@ function generateAPI (comp, locale) {
   } catch (e) {
     IS_DEBUG && console.log(`map: ${comp} not found`)
   }
+  // fs is not useable when accessing via component
+  // will need to find an alternative for the
+  // merging of lang, possibly change to js
   const localePath = resolve(__dirname, `./locale/${locale}/${comp}.json`)
   try {
     const localeFile = JSON.parse(readFileSync(localePath, 'utf8'))

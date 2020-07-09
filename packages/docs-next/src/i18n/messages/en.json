@@ -1,6 +1,5 @@
 {
   "ads-via-vuetify": "ads via Vuetify",
-  "api": "Component API",
   "bars": "Bars",
   "beginners-guide": "Beginner's Guide",
   "breakpoints-table": {
@@ -22,7 +21,7 @@
   "code": "Code",
   "company": "Company",
   "components": "UI Components",
-  "components-api": "UI Components API",
+  "components-api": "API",
   "contents": "Contents",
   "customization": "Customization",
   "desktop": "Desktop",

@@ -9,6 +9,7 @@
   "MD033": {
     "allowed_elements": [
       "alert",
+      "api-search",
       "app-img",
       "backmatter",
       "br",

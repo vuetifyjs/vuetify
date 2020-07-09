@@ -70,6 +70,7 @@
     "title": "components",
     "icon": "$mdiViewDashboard",
     "items": [
+      "api-explorer",
       "alerts",
       "application",
       "aspect-ratios",
