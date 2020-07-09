@@ -7150,10 +7150,15 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@4.17.15, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.3, lodash@^4.17.4:
+lodash@4.17.15, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.3, lodash@^4.17.4:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
+
+lodash@^4.17.15:
+  version "4.17.19"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
+  integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
 
 log-symbols@^2.2.0:
   version "2.2.0"
@@ -7289,11 +7294,11 @@ markdown-it-header-sections@^1.0.0:
   integrity sha512-GndZbs+iTo7NkNRf00VmT4mtFql7VoJNnSwB7hP5xkomGUTdQ78siVZIuRco4fbiWJd45JUemLxUS9vO8luPSA==
 
 markdown-it-prism@^2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/markdown-it-prism/-/markdown-it-prism-2.0.5.tgz#4bbf46be47878f227678dd83ed97f6c9b07a4094"
-  integrity sha512-u2jErcoLCnENIOUnEbS9w9RWUGiId8fjQovD0Gbo4iT8tZU0/Un4v72E8g8sj/NAzieSCvFVG6KtMwlurSBMnw==
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/markdown-it-prism/-/markdown-it-prism-2.1.0.tgz#10ef59d19598a9b6725615005cf2601aba011500"
+  integrity sha512-e6KlAV+tD/zW8HgEOkmkFGxLpyxIXB1vNk5bRLq1AEXNVWvNE4+DlqQghugRL4Cc9bxL9Q3hnHSYTIejtUCGvA==
   dependencies:
-    prismjs "1.19.0"
+    prismjs "1.20.0"
 
 markdown-it@10.0.0:
   version "10.0.0"
@@ -9013,10 +9018,10 @@ pretty-error@^2.0.2:
     renderkid "^2.0.1"
     utila "~0.4"
 
-prismjs@1.19.0:
-  version "1.19.0"
-  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.19.0.tgz#713afbd45c3baca4b321569f2df39e17e729d4dc"
-  integrity sha512-IVFtbW9mCWm9eOIaEkNyo2Vl4NnEifis2GQ7/MLRG5TQe6t+4Sj9J5QWI9i3v+SS43uZBlCAOn+zYTVYQcPXJw==
+prismjs@1.20.0:
+  version "1.20.0"
+  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.20.0.tgz#9b685fc480a3514ee7198eac6a3bf5024319ff03"
+  integrity sha512-AEDjSrVNkynnw6A+B1DsFkd6AVdTnp+/WoUixFRULlCLZVRZlVQMVWio/16jv7G1FscUxQxOQhWwApgbnxr6kQ==
   optionalDependencies:
     clipboard "^2.0.0"
 
@@ -9808,9 +9813,9 @@ sass-loader@^8.0.2:
     semver "^6.3.0"
 
 sass@^1.26.3:
-  version "1.26.9"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.26.9.tgz#73c10cbb88c12b22a9e0107725bfd62296f4978f"
-  integrity sha512-t8AkRVi+xvba4yZiLWkJdgJHBFCB3Dh4johniQkPy9ywkgFHNasXFEFP+RG/F6LhQ+aoE4aX+IorIWQjS0esVw==
+  version "1.26.10"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.26.10.tgz#851d126021cdc93decbf201d1eca2a20ee434760"
+  integrity sha512-bzN0uvmzfsTvjz0qwccN1sPm2HxxpNI/Xa+7PlUEMS+nQvbyuEK7Y0qFqxlPHhiNHb1Ze8WQJtU31olMObkAMw==
   dependencies:
     chokidar ">=2.0.0 <4.0.0"
 
@@ -11229,9 +11234,9 @@ vue-cli-plugin-vuetify@latest:
     shelljs "^0.8.3"
 
 vue-cookies@^1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/vue-cookies/-/vue-cookies-1.7.0.tgz#dd8f147ff1579e0cbd5f352dc5dff2696d8760b8"
-  integrity sha512-vuEUm6wYMMrFAHFCrkzIUAy8+MgPAbBGmYXnk2M6X6O2KHbMT1wuDD2izacmsSUp6ZM02e23MJRtPRobl88VMg==
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/vue-cookies/-/vue-cookies-1.7.1.tgz#331a0f11ae837b6b2da39944cd4dc438218f547a"
+  integrity sha512-4tBJE7AxMJJ1befgf54t87RgnZj0o3HI/9xu2IKPp/aO7w71Q1q8J7SFT0s+WPNBt1kQP+ze3lR4M687rb6uqA==
 
 vue-eslint-parser@^7.0.0:
   version "7.1.0"
