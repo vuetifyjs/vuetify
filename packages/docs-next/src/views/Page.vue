@@ -22,21 +22,16 @@
 <script>
   // Utilities
   import { genMetaData } from '@/util/metadata'
-  import { sync } from 'vuex-pathify'
+  import { get, sync } from 'vuex-pathify'
 
-  // This should only be extended by other pages
   export default {
-    name: 'Page',
+    name: 'PageView',
 
-    beforeRouteEnter (to, from, next) {
-      next(vm => vm.update(to))
-    },
-
-    async beforeRouteUpdate (to, from, next) {
+    async beforeRouteUpdate (to, _, next) {
       // Avoid turning on the loader immediately
       const timeout = setTimeout(this.reset, 50)
 
-      await this.update(to)
+      await this.update()
 
       clearTimeout(timeout)
 
@@ -68,25 +63,47 @@
     data: () => ({ component: undefined }),
 
     computed: {
-      frontmatter: sync('pages/frontmatter'),
-      toc: sync('pages/toc'),
+      ...sync('pages', [
+        'frontmatter',
+        'toc',
+      ]),
+      ...get('route', [
+        'params@category',
+        'params@locale',
+        'params@page',
+      ]),
     },
 
     watch: { '$route.params.locale': 'update' },
 
+    beforeMount () {
+      this.update(this.$route)
+    },
+
     methods: {
       async load () {
-        console.error('Missing load method for Page.vue')
+        const isApi = this.category === 'api'
+        const namespace = isApi ? 'api' : 'pages'
+        const path = [namespace, this.locale]
+
+        if (!isApi) path.push(this.category)
+
+        path.push(this.page)
+
+        return import(
+          /* webpackChunkName: "pages-[request]" */
+          `@/${path.join('/')}.md`
+        )
       },
-      async update (route) {
+      async update () {
         try {
           const {
             attributes = {},
             toc = [],
             vue = {},
-          } = await this.load(route)
+          } = await this.load()
 
-          vue.component.name = route.params.page
+          vue.component.name = this.page
 
           this.frontmatter = attributes
           this.toc = toc

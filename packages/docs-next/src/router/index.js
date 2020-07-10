@@ -26,10 +26,7 @@ export function createRouter (vuetify, store, i18n) {
         ]),
 
         layout('Documentation', [
-          route('Documentation', {
-            default: 'Documentation',
-            api: 'Api',
-          }),
+          route('Page'),
         ], ':category/:page'),
 
         layout('Documentation', [
