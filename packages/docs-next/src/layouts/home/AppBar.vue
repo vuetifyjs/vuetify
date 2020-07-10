@@ -12,16 +12,9 @@
       color="primary"
       outlined
       x-large
-      :to="{
-        name: 'Documentation',
-        params: {
-          category: 'getting-started',
-          page: 'quick-start'
-        }
-      }"
+      :to="`/${locale}/getting-started/quick-start`"
     >
       To Documentation
-
       <v-icon right>
         $mdiOpenInNew
       </v-icon>
@@ -61,13 +54,14 @@
 </template>
 
 <script>
-  import { call, sync } from 'vuex-pathify'
+  import { get, call, sync } from 'vuex-pathify'
 
   export default {
     name: 'HomeBar',
 
     computed: {
       ...sync('pwa', ['canInstall', 'updateAvailable']),
+      locale: get('route/params@locale'),
     },
 
     methods: {
