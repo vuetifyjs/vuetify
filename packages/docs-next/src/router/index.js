@@ -8,7 +8,13 @@ import VueGtag from 'vue-gtag'
 import { IS_PROD } from '@/util/globals'
 
 import { trailingSlash } from '@/util/helpers'
-import { locale, layout, route, redirect } from '@/util/routes'
+import {
+  abort,
+  locale,
+  layout,
+  route,
+  redirect,
+} from '@/util/routes'
 
 // Setup
 Vue.use(Router)
@@ -21,24 +27,13 @@ export function createRouter (vuetify, store, i18n) {
     scrollBehavior: (...args) => scrollBehavior(vuetify, ...args),
     routes: [
       locale([
-        layout('Home', [
-          route('Home'),
-        ]),
+        layout('Home', [route('Home')]),
 
-        layout('Documentation', [
-          route('Page'),
+        layout('Default', [
+          route('Documentation'),
         ], ':category/:page'),
 
-        layout('Documentation', [
-          {
-            name: 'NotFound',
-            path: '*',
-            component: () => import(
-              /* webpackChunkName: "404" */
-              '../views/404'
-            ),
-          },
-        ], '*'),
+        layout('Default', [abort()], '*'),
       ]),
 
       // Redirect for language fallback

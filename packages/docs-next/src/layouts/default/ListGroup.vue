@@ -15,13 +15,13 @@
     </template>
 
     <template v-for="(child, i) in item.items">
-      <documentation-list-sub-group
+      <default-list-sub-group
         v-if="child.items"
         :key="`sub-group-${i}`"
         :item="child"
       />
 
-      <documentation-list-item
+      <default-list-item
         v-else
         :key="`child-${i}`"
         :item="child"
@@ -32,11 +32,11 @@
 
 <script>
   export default {
-    name: 'DocumentationListGroup',
+    name: 'DefaultListGroup',
 
     components: {
-      DocumentationListItem: () => import('./ListItem'),
-      DocumentationListSubGroup: () => import('./ListSubGroup'),
+      DefaultListItem: () => import('./ListItem'),
+      DefaultListSubGroup: () => import('./ListSubGroup'),
     },
 
     props: {

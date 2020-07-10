@@ -39,7 +39,7 @@
   import { get } from 'vuex-pathify'
 
   export default {
-    name: 'DocumentationToc',
+    name: 'DefaultToc',
 
     computed: {
       ...get('user', [

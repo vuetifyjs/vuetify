@@ -22,6 +22,7 @@
 <script>
   // Utilities
   import { genMetaData } from '@/util/metadata'
+  import { error } from '@/util/routes'
   import { get, sync } from 'vuex-pathify'
 
   export default {
@@ -77,7 +78,7 @@
     watch: { '$route.params.locale': 'update' },
 
     beforeMount () {
-      this.update(this.$route)
+      this.update()
     },
 
     methods: {
@@ -91,29 +92,36 @@
         path.push(this.page)
 
         return import(
-          /* webpackChunkName: "pages-[request]" */
+          /* webpackChunkName: "documentation-[request]" */
           `@/${path.join('/')}.md`
         )
       },
       async update () {
+        let structure
+
         try {
-          const {
-            attributes = {},
-            toc = [],
-            vue = {},
-          } = await this.load()
-
-          vue.component.name = this.page
-
-          this.frontmatter = attributes
-          this.toc = toc
-          this.component = vue.component
+          structure = await this.load()
         } catch (e) {
-          this.component = (await import(
-            /* webpackChunkName: "404" */
-            './404'
-          )).default
+          console.log(e)
+
+          const component = await error()
+
+          this.component = component.default
+
+          return
         }
+
+        const {
+          attributes = {},
+          toc = [],
+          vue = {},
+        } = structure
+
+        vue.component.name = this.page
+
+        this.frontmatter = attributes
+        this.toc = toc
+        this.component = vue.component
       },
       async reset () {
         this.component = undefined

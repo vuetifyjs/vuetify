@@ -1,5 +1,5 @@
 <template>
-  <documentation-list-group
+  <default-list-group
     :item="item"
     sub-group
   />
@@ -7,10 +7,10 @@
 
 <script>
   export default {
-    name: 'DocumentationListSubGroup',
+    name: 'DefaultListSubGroup',
 
     components: {
-      DocumentationListGroup: () => import('./ListGroup'),
+      DefaultListGroup: () => import('./ListGroup'),
     },
 
     props: {

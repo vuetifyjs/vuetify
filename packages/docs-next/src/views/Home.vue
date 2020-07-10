@@ -13,22 +13,20 @@
 
 <script>
   // Extensions
-  import Page from './Page'
-
-  async function load (route) {
-    const { locale } = route.params
-
-    return import(
-      /* webpackChunkName: "home-page" */
-      `@/pages/${locale}/home.md`
-    )
-  }
+  import Documentation from './Documentation'
 
   export default {
-    name: 'Home',
+    name: 'HomeView',
 
-    extends: Page,
+    extends: Documentation,
 
-    methods: { load },
+    methods: {
+      async load () {
+        return import(
+          /* webpackChunkName: "home-page" */
+          `@/pages/${this.locale}/home.md`
+        )
+      },
+    },
   }
 </script>

@@ -23,7 +23,7 @@
       ),
       HomeToc: () => import(
         /* webpackChunkName: "home-toc" */
-        './../documentation/Toc'
+        '@/layouts/default/Toc'
       ),
     },
   }

@@ -18,7 +18,7 @@
 
 <script>
   export default {
-    name: 'DocumentationListItem',
+    name: 'DefaultListItem',
 
     props: {
       item: {

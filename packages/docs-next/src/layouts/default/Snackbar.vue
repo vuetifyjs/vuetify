@@ -47,7 +47,7 @@
   import { get, sync } from 'vuex-pathify'
 
   export default {
-    name: 'Snackbar',
+    name: 'DefaultSnackbar',
 
     computed: {
       last: sync('user/snackbar'),

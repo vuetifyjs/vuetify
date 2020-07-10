@@ -1,8 +1,6 @@
 <template>
   <v-main>
-    <v-fade-transition mode="out-in">
-      <router-view />
-    </v-fade-transition>
+    <router-view :key="$route.path" />
   </v-main>
 </template>
 

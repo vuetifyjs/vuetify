@@ -5,13 +5,13 @@
     nav
   >
     <template v-for="(item, i) in items">
-      <documentation-list-group
+      <default-list-group
         v-if="item.items"
         :key="`group-${i}`"
         :item="item"
       />
 
-      <documentation-list-item
+      <default-list-item
         v-else
         :key="`item-${i}`"
         :item="item"
@@ -22,11 +22,11 @@
 
 <script>
   export default {
-    name: 'DocumentationList',
+    name: 'DefaultList',
 
     components: {
-      DocumentationListGroup: () => import('./ListGroup'),
-      DocumentationListItem: () => import('./ListItem'),
+      DefaultListGroup: () => import('./ListGroup'),
+      DefaultListItem: () => import('./ListItem'),
     },
 
     props: {

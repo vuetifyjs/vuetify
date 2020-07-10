@@ -31,7 +31,7 @@
   // This behavior should be easier to do with solo fields
   // TODO: Review this for v3
   export default {
-    name: 'DocumentationSearch',
+    name: 'DefaultSearch',
 
     inject: ['theme'],
 

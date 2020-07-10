@@ -11,6 +11,21 @@ const genericLocaleRegexp = /[a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{
 const fallbackLocale = genericLocaleRegexp.source
 const languagePattern = languages.map(lang => lang.alternate || lang.locale).join('|')
 
+export function abort (code = 404) {
+  return {
+    name: 'FourOhFour',
+    path: '*',
+    component: () => error(code),
+  }
+}
+
+export function error (code = 404) {
+  return import(
+    /* webpackChunkName: "error-[request]" */
+    `@/views/errors/${code}.vue`
+  )
+}
+
 export function layout (layout = 'Default', children, path = '') {
   const dir = kebabCase(layout)
 

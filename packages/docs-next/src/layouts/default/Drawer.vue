@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    id="documentation-drawer"
+    id="default-drawer"
     v-model="drawer"
     :color="dark ? '#272727' : undefined"
     :right="rtl"
@@ -8,11 +8,11 @@
     width="300"
   >
     <template #prepend>
-      <documentation-drawer-prepend />
+      <default-drawer-prepend />
     </template>
 
     <keep-alive>
-      <documentation-list
+      <default-list
         :key="key"
         :items="items"
       />
@@ -27,15 +27,15 @@
   import { get, sync } from 'vuex-pathify'
 
   export default {
-    name: 'DocumentationDrawer',
+    name: 'DefaultDrawer',
 
     components: {
-      DocumentationDrawerPrepend: () => import(
-        /* webpackChunkName: "documentation-drawer-prepend" */
+      DefaultDrawerPrepend: () => import(
+        /* webpackChunkName: "default-drawer-prepend" */
         './DrawerPrepend'
       ),
-      DocumentationList: () => import(
-        /* webpackChunkName: "documentation-list" */
+      DefaultList: () => import(
+        /* webpackChunkName: "default-list" */
         './List'
       ),
     },

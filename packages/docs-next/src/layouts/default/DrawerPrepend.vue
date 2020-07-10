@@ -20,5 +20,5 @@
 </template>
 
 <script>
-  export default { name: 'DocumentationDrawerPrepend' }
+  export default { name: 'DefaultDrawerPrepend' }
 </script>
