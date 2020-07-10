@@ -10,8 +10,8 @@ import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
 // Utilities
+import mergeData from '../../util/mergeData'
 import { wrapInArray } from '../../util/helpers'
-import { mergeClasses, mergeListeners } from '../../util/mergeData'
 
 export default Vue.extend({
   name: 'v-simple-checkbox',
@@ -46,7 +46,7 @@ export default Vue.extend({
     },
   },
 
-  render (h, { props, data, listeners }): VNode {
+  render(h, { props, data, listeners }): VNode {
     const children = []
 
     if (props.ripple && !props.disabled) {
@@ -78,18 +78,18 @@ export default Vue.extend({
       'v-simple-checkbox--disabled': props.disabled,
     }
 
-    return h('div', {
-      ...data,
-      class: mergeClasses(classes, data.class),
-      on: mergeListeners({
-        click: (e: MouseEvent) => {
-          e.stopPropagation()
+    return h('div',
+      mergeData(data, {
+        class: classes,
+        on: {
+          click: (e: MouseEvent) => {
+            e.stopPropagation()
 
-          if (data.on && data.on.input && !props.disabled) {
-            wrapInArray(data.on.input).forEach(f => f(!props.value))
-          }
+            if (data.on && data.on.input && !props.disabled) {
+              wrapInArray(data.on.input).forEach(f => f(!props.value))
+            }
+          },
         },
-      }, listeners),
-    }, children)
+      }), children)
   },
 })
