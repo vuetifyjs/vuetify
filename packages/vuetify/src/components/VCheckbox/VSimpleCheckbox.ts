@@ -46,7 +46,7 @@ export default Vue.extend({
     },
   },
 
-  render(h, { props, data, listeners }): VNode {
+  render (h, { props, data, listeners }): VNode {
     const children = []
 
     if (props.ripple && !props.disabled) {
@@ -90,6 +90,7 @@ export default Vue.extend({
             }
           },
         },
-      }), children)
+      },
+      listeners), children)
   },
 })
