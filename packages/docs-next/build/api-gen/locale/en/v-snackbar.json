@@ -7,7 +7,7 @@
     "multiLine": "Gives the snackbar a larger minimum height.",
     "text": "Components.VAlert.props.text",
     "transition": "Mixins.Transitionable.props.transition",
-    "timeout": "Time (in milliseconds) to wait until snackbar is automatically hidden.  Use -1 to keep open indefinitely. It is recommended for this number to be between `4000` and `10000`. Changes to this property will reset the timeout.",
+    "timeout": "Time (in milliseconds) to wait until snackbar is automatically hidden.  Use `-1` to keep open indefinitely (`0` in version < 2.3 ). It is recommended for this number to be between `4000` and `10000`. Changes to this property will reset the timeout.",
     "vertical": "Stacks snackbar content on top of the actions (button)."
   },
   "slots": {
