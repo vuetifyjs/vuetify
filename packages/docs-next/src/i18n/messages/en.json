@@ -105,5 +105,9 @@
   "jobs-apply": "Apply Now",
   "jobs-not-found": "No Jobs Found",
   "jobs-new": "#new",
+  "tidelift": {
+    "more": "Learn more",
+    "demo": "Request a demo"
+  }
   "become-a-sponsor": "Become a sponsor"
 }
