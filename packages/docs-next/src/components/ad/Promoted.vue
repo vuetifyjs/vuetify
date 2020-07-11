@@ -54,18 +54,6 @@
     inheritAttrs: false,
 
     computed: {
-      // Originates from Ad mixin
-      current () {
-        const current = Ad.computed.current.call(this)
-
-        if (!current) return null
-
-        const { types } = current.metadata
-
-        return !types.includes('promoted')
-          ? null
-          : current
-      },
       // Promoted ads have less space
       // available for descriptions
       description () {
@@ -81,7 +69,11 @@
 
         // Fallback to description
         // with a reduced length
-        return description_short || description.slice(0, 58) + '...'
+        return description_short || (
+          description.length > 58
+            ? description.slice(0, 55) + '...'
+            : description
+        )
       },
     },
   }
