@@ -13,7 +13,7 @@ related:
 
 Stuck on a particular problem? Check some of these common gotchas before creating a ticket. If you still cannot find what you are looking for, you can submit an [issue](https://issues.vuetifyjs.com/) on Github or ask the in our [community](https://community.vuetifyjs.com/).
 
-<entry-ad />
+<promoted-ad slug="vuetify-discord" />
 
 ## Questions
 
