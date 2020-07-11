@@ -104,5 +104,6 @@
   "jobs-via": "via {via}",
   "jobs-apply": "Apply Now",
   "jobs-not-found": "No Jobs Found",
-  "jobs-new": "#new"
+  "jobs-new": "#new",
+  "become-a-sponsor": "Become a sponsor"
 }
