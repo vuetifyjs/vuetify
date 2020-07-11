@@ -1,5 +1,8 @@
 <template>
-  <div class="mb-8">
+  <div
+    v-if="current"
+    class="mb-8"
+  >
     <a v-bind="adAttrs">
       <app-ad
         v-if="current"
@@ -27,9 +30,9 @@
           max-height="56"
         >
           <app-md
-            v-if="current.metadata.description"
+            v-if="description"
             class="text-subtitle-2 text-sm-h6 font-weight-light"
-            v-text="current.metadata.description"
+            v-text="description"
           />
         </v-img>
       </app-ad>
@@ -38,6 +41,8 @@
 </template>
 
 <script>
+  /* eslint-disable camelcase */
+
   // Mixins
   import Ad from '@/mixins/ad'
 
@@ -47,11 +52,46 @@
     mixins: [Ad],
 
     inheritAttrs: false,
+
+    computed: {
+      // Originates from Ad mixin
+      current () {
+        const current = Ad.computed.current.call(this)
+
+        if (!current) return null
+
+        const { types } = current.metadata
+
+        return !types.includes('promoted')
+          ? null
+          : current
+      },
+      // Promoted ads have less space
+      // available for descriptions
+      description () {
+        // Originates from Ad mixin
+        const current = this.current
+
+        if (!current) return ''
+
+        const {
+          description,
+          description_short,
+        } = current.metadata
+
+        // Fallback to description
+        // with a reduced length
+        return description_short || description.slice(0, 58) + '...'
+      },
+    },
   }
 </script>
 
 <style lang="sass">
   .v-vuetify-ad--promoted
+    p
+      line-height: 1.1
+
     .v-markdown p strong
       font-weight: 700
 

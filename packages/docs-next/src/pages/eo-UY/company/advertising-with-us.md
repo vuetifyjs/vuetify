@@ -32,7 +32,7 @@ crwdns70974:0crwdne70974:0
 
 crwdns70978:0crwdne70978:0
 
-<sponsored-ad slug="freelancer-free" />
+<highlighted-ad slug="freelancer-free" />
 
 ## crwdns70980:0crwdne70980:0
 

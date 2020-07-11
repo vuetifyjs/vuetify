@@ -32,7 +32,7 @@ A random ad for information specific to the Vuetify ecosystem, such as our Reddi
 
 Sponsored ads by Vuetify & Affiliates
 
-<sponsored-ad slug="freelancer-free" />
+<highlighted-ad slug="freelancer-free" />
 
 ## Exit Ad
 

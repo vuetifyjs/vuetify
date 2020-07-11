@@ -34,11 +34,11 @@ A random ad for information specific to the Vuetify ecosystem, such as our Reddi
 
 <discovery-ad />
 
-## Sponsored Ad
+## Highlighted Ad
 
-Sponsored ads by Vuetify & Affiliates
+Highlighted ads by Vuetify & Affiliates
 
-<sponsored-ad slug="freelancer-free" />
+<highlighted-ad slug="freelancer-free" />
 
 ## Exit Ad
 

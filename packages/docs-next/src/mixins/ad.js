@@ -16,13 +16,18 @@ export default {
     all: get('ads/all'),
     locale: get('route/params@locale'),
     ads () {
-      if (!this.discover) return this.all
+      if (this.slug) return this.all
+
+      const type = this.discover
+        ? 'discovery'
+        : 'random'
 
       return this.all.filter(ad => {
-        return (
-          ad.metadata.type === 'Discovery' &&
-          !ad.metadata.sponsored
-        )
+        if (!ad.metadata.types) {
+          return false
+        }
+
+        return ad.metadata.types.includes(type)
       })
     },
     adAttrs () {
@@ -41,6 +46,11 @@ export default {
         : this.getSlugIndex()
 
       return this.ads[index]
+    },
+    description () {
+      return this.current
+        ? this.current.metadata.description
+        : ''
     },
     href () {
       if (!this.current) return undefined

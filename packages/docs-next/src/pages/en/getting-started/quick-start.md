@@ -74,7 +74,7 @@ Once installed, update your nuxt.config.js file to include the Vuetify module in
 }
 ```
 
-More information on installing Nuxt can be found on the official documentation.
+<highlighted-ad slug="nuxt-community-vuetify-module" />
 
 ## Webpack install
 

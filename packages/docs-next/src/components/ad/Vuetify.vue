@@ -36,9 +36,9 @@
 
         <div>
           <app-md
-            v-if="current.metadata.description"
+            v-if="description"
             class="caption text--secondary"
-            v-text="current.metadata.description"
+            v-text="description"
           />
         </div>
       </v-list-item-content>
