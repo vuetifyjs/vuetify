@@ -66,6 +66,7 @@ export default baseMixins.extend<options>().extend({
     },
     counter: [Boolean, Number, String],
     counterValue: Function as PropType<(value: any) => number>,
+    counterShowOnFocus: Boolean,
     filled: Boolean,
     flat: Boolean,
     fullWidth: Boolean,
@@ -308,6 +309,10 @@ export default baseMixins.extend<options>().extend({
     },
     genCounter () {
       if (!this.hasCounter) return null
+
+      if (this.counterShowOnFocus && !this.isFocused) {
+        return null
+      }
 
       const max = this.counter === true ? this.attrs$.maxlength : this.counter
 

@@ -867,4 +867,21 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     const input = wrapper.find('input')
     expect(input.element.value).toBe('-0')
   })
+
+  it('should hide counter if not focused when using the counter-show-on-focus prop', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        counter: true,
+        counterShowOnFocus: true,
+        value: 'text',
+      },
+    })
+    const input = wrapper.find('input')
+
+    await input.trigger('focus')
+    expect(wrapper.findAll('.v-counter').wrappers[0]).not.toBeUndefined()
+
+    await input.trigger('blur')
+    expect(wrapper.findAll('.v-counter').wrappers[0]).toBeUndefined()
+  })
 })
