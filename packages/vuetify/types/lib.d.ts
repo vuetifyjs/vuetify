@@ -1,4 +1,5 @@
 declare module 'vuetify/lib' {
+  // eslint-disable-next-line import/no-duplicates
   import { VueConstructor, DirectiveOptions } from 'vue'
   import { Vuetify } from 'vuetify'
   import { Colors } from 'vuetify/lib/util/colors'
@@ -28,6 +29,7 @@ declare module 'vuetify/lib' {
   const VBtn: VueConstructor
   const VBtnToggle: VueConstructor
   const VCalendar: VueConstructor
+  const VCalendarCategory: VueConstructor
   const VCalendarDaily: VueConstructor
   const VCalendarWeekly: VueConstructor
   const VCalendarMonthly: VueConstructor
@@ -97,6 +99,7 @@ declare module 'vuetify/lib' {
   const VListItemAvatar: VueConstructor
   const VListItemIcon: VueConstructor
   const VListItemGroup: VueConstructor
+  const VMain: VueConstructor
   const VMenu: VueConstructor
   const VMessages: VueConstructor
   const VNavigationDrawer: VueConstructor
@@ -196,6 +199,7 @@ declare module 'vuetify/lib' {
     VBtn,
     VBtnToggle,
     VCalendar,
+    VCalendarCategory,
     VCalendarDaily,
     VCalendarWeekly,
     VCalendarMonthly,
@@ -265,6 +269,7 @@ declare module 'vuetify/lib' {
     VListItemAvatar,
     VListItemIcon,
     VListItemGroup,
+    VMain,
     VMenu,
     VMessages,
     VNavigationDrawer,
@@ -341,6 +346,7 @@ declare module 'vuetify/lib' {
 }
 
 declare module 'vuetify/lib/directives' {
+  // eslint-disable-next-line import/no-duplicates
   import { DirectiveOptions } from 'vue'
 
   const ClickOutside: DirectiveOptions
@@ -358,6 +364,6 @@ declare module 'vuetify/lib/directives' {
     Ripple,
     Resize,
     Scroll,
-    Touch
+    Touch,
   }
 }

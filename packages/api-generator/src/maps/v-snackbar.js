@@ -6,5 +6,9 @@ module.exports = {
         value: 'boolean',
       },
     ],
+    slots: [{
+      name: 'action',
+      props: { attrs: 'object' },
+    }],
   },
 }

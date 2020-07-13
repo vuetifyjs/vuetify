@@ -3,6 +3,8 @@
 +theme('v-app-bar.v-toolbar.v-sheet') using ($material)
   background-color: map-get($material, 'app-bar')
 
++sheet('v-app-bar.v-toolbar', $app-bar-elevation, $app-bar-border-radius, $app-bar-shaped-border-radius)
+
 // Block
 .v-app-bar
   +bootable()
@@ -14,7 +16,9 @@
   z-index: 5
 
 .v-app-bar.v-app-bar--hide-shadow
-  +elevation(0)
+  // Workaround for cascaded elevation styles
+  // that persist when the bar is inactive.
+  +elevation(0, true)
 
 .v-app-bar--fade-img-on-scroll
   .v-toolbar__image .v-image__image

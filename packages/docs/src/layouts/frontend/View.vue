@@ -1,9 +1,9 @@
 <template>
-  <v-content>
+  <v-main>
     <v-responsive min-height="100vh">
       <router-view />
     </v-responsive>
-  </v-content>
+  </v-main>
 </template>
 
 <script>

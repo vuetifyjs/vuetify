@@ -21,6 +21,10 @@ export default class Vuetify {
 
   static version = __VUETIFY_VERSION__
 
+  static config = {
+    silent: false,
+  }
+
   public framework: Dictionary<VuetifyServiceContract> = {}
 
   public installed: string[] = []

@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} kiválaszta/-ott',
+    nextMonthAriaLabel: 'Következő hónap',
+    nextYearAriaLabel: 'Következő év',
+    prevMonthAriaLabel: 'Előző hónap',
+    prevYearAriaLabel: 'Előző év',
   },
   noDataText: 'Nincs elérhető adat',
   carousel: {
@@ -47,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Lapszámozásának navigáció',
+      next: 'Következő oldal',
+      previous: 'Előző oldal',
+      page: 'Menj az oldalra {0}',
+      currentPage: 'Aktuális oldal, oldal {0}',
+    },
   },
 }

@@ -3,6 +3,10 @@
 +theme('v-toolbar.v-sheet') using ($material)
   background-color: map-get($material, 'toolbar')
 
+
+// Sheet
++sheet(v-toolbar, $toolbar-elevation, $toolbar-border-radius, $toolbar-shaped-border-radius)
+
 // Block
 .v-toolbar
   contain: layout
@@ -132,8 +136,10 @@
     padding-top: 0
     padding-bottom: 0
 
+// @deprecated
+// TODO: Remove in v3
 .v-toolbar--flat
-  +elevation(0)
+  +elevation(0, true)
 
 .v-toolbar--floating
   display: inline-flex

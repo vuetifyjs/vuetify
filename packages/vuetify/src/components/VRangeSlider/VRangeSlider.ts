@@ -104,7 +104,7 @@ export default VSlider.extend({
     genTrackContainer () {
       const children = []
 
-      const padding = this.disabled ? 10 : 0
+      const padding = this.isDisabled ? 10 : 0
       const sections: { class: string, color: string | undefined, styles: [number, number, number, number] }[] = [
         {
           class: 'v-slider__track-background',
@@ -112,8 +112,8 @@ export default VSlider.extend({
           styles: [0, this.inputWidth[0], 0, -padding],
         },
         {
-          class: this.disabled ? 'v-slider__track-background' : 'v-slider__track-fill',
-          color: this.disabled ? this.computedTrackColor : this.computedColor,
+          class: this.isDisabled ? 'v-slider__track-background' : 'v-slider__track-fill',
+          color: this.isDisabled ? this.computedTrackColor : this.computedColor,
           styles: [this.inputWidth[0], Math.abs(this.inputWidth[1] - this.inputWidth[0]), padding, padding * -2],
         },
         {

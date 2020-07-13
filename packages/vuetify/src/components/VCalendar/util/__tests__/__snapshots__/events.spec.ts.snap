@@ -3,6 +3,7 @@
 exports[`events.ts should parse events 1`] = `
 Object {
   "allDay": true,
+  "category": false,
   "end": Object {
     "date": "2019-02-14",
     "day": 14,
@@ -48,6 +49,7 @@ Object {
 exports[`events.ts should parse events 2`] = `
 Object {
   "allDay": true,
+  "category": false,
   "end": Object {
     "date": "2019-02-14",
     "day": 14,
@@ -93,6 +95,7 @@ Object {
 exports[`events.ts should parse events 3`] = `
 Object {
   "allDay": true,
+  "category": false,
   "end": Object {
     "date": "2019-02-14",
     "day": 14,
@@ -138,6 +141,7 @@ Object {
 exports[`events.ts should parse events 4`] = `
 Object {
   "allDay": true,
+  "category": false,
   "end": Object {
     "date": "2019-02-14",
     "day": 14,
@@ -183,6 +187,7 @@ Object {
 exports[`events.ts should parse timed events 1`] = `
 Object {
   "allDay": false,
+  "category": false,
   "end": Object {
     "date": "2019-02-14",
     "day": 14,

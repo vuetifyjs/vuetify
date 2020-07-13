@@ -282,12 +282,12 @@ export default baseMixins.extend({
         directives: [
           {
             name: 'click-outside',
-            value: this.onClickOutside,
-            args: {
+            value: {
+              handler: this.onClickOutside,
               closeConditional: this.closeConditional,
               include: this.getOpenDependentElements,
             },
-          } as any,
+          },
           { name: 'show', value: this.isActive },
         ],
         style: {

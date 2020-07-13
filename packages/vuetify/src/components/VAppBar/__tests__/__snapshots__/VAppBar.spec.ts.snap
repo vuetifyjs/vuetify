@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AppBar.ts should render with background 1`] = `
-<header class="v-sheet v-sheet--tile theme--light v-toolbar v-app-bar"
+<header class="v-sheet theme--light v-toolbar v-app-bar"
         style="height: 64px; margin-top: 0px; transform: translateY(0px); left: 0px; right: 0px;"
 >
   <div class="v-toolbar__image">
-    <div class="v-responsive v-image"
+    <div class="v-image v-responsive theme--light"
          style="height: 64px;"
     >
       <div class="v-image__image v-image__image--preload v-image__image--cover"

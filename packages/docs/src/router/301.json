@@ -79,5 +79,7 @@
   "/getting-started/roadmap": "/introduction/roadmap",
   "/getting-started/long-term-support": "/introduction/long-term-support",
   "/getting-started/consulting-and-support": "/professional-support/consulting",
-  "/getting-started/support/enterprise": "/professional-support/enterprise"
+  "/getting-started/support/enterprise": "/professional-support/enterprise",
+  "/styles/typography": "/styles/text",
+  "/styles/text": "/styles/text-and-typography"
 }

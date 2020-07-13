@@ -19,7 +19,7 @@
     },
     "group": {
       "heading": "### Grouped rows",
-      "desc": "Using the `group-by` and `group-desc` props you can group rows on an item property. The `show-group-by` prop will show a group button in the default header."
+      "desc": "Using the `group-by` and `group-desc` props you can group rows on an item property. The `show-group-by` prop will show a group button in the default header. You can use the `groupable` property on header items to disable the group button."
     },
     "dense": {
       "heading": "### Dense",
@@ -117,6 +117,7 @@
       "headersLength": "Can be used in combination with `hide-default-header` to specify the number of columns in the table to allow expansion rows and loading bar to function properly",
       "height": "Set an explicit height of table",
       "hideDefaultHeader": "Hide the default headers",
+      "itemClass": "Property on supplied `items` that contains item's row class or function that takes an item as an argument and returns the class of corresponding row",
       "mobileBreakpoint": "Used to set when to toggle between regular table and mobile view",
       "showSelect": "Shows the select checkboxes in both the header and rows (if using default rows)",
       "showExpand": "Shows the expand toggle in default rows",
@@ -183,7 +184,9 @@
       "save": "Emits when edit-dialog save button is pressed"
     },
     "v-data-table": {
-      "click:row": "Emits when a table row is clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`."
+      "click:row": "Emits when a table row is clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
+      "contextmenu:row": "Emits when a table row is right-clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
+      "dblclick:row": "Emits when a table row is double-clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`."
     },
     "v-simple-checkbox": {
       "click": "Event that is emitted when the component is clicked"

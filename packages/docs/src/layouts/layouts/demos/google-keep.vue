@@ -73,7 +73,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-content>
+    <v-main>
       <v-container
         fluid
         class="grey lighten-4 fill-height"
@@ -100,7 +100,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 

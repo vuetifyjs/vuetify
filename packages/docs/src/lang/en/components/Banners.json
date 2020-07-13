@@ -25,7 +25,7 @@
     }
   },
   "props": {
-    "app": "When used inside of `v-content`, will calculate top based upon application `v-toolbar` and `v-system-bar`.",
+    "app": "When used inside of `v-main`, will calculate top based upon application `v-toolbar` and `v-system-bar`.",
     "icon": "Designates a specific icon.",
     "iconColor": "Designates a specific icon color.",
     "singleLine": "Forces the banner onto a single line.",

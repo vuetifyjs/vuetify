@@ -8,12 +8,16 @@ import { VFadeTransition } from '../transitions'
 // Extensions
 import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 
+// Mixins
+import Mobile from '../../mixins/mobile'
+
 // Directives
 import Resize from '../../directives/resize'
 import Touch from '../../directives/touch'
 
 // Utilities
 import mixins, { ExtractVue } from '../../util/mixins'
+import { deprecate } from '../../util/console'
 
 // Types
 import Vue, { VNode } from 'vue'
@@ -38,10 +42,14 @@ interface options extends Vue {
 
 export const BaseSlideGroup = mixins<options &
 /* eslint-disable indent */
-  ExtractVue<typeof BaseItemGroup>
+  ExtractVue<[
+    typeof BaseItemGroup,
+    typeof Mobile,
+  ]>
 /* eslint-enable indent */
 >(
-  BaseItemGroup
+  BaseItemGroup,
+  Mobile,
   /* @vue/component */
 ).extend({
   name: 'base-slide-group',
@@ -61,16 +69,21 @@ export const BaseSlideGroup = mixins<options &
       type: String,
       default: '$next',
     },
-    mobileBreakPoint: {
-      type: [Number, String],
-      default: 1264,
-      validator: (v: any) => !isNaN(parseInt(v)),
-    },
     prevIcon: {
       type: String,
       default: '$prev',
     },
-    showArrows: Boolean,
+    showArrows: {
+      type: [Boolean, String],
+      validator: v => (
+        // TODO: remove boolean in v3
+        typeof v === 'boolean' || [
+          'always',
+          'desktop',
+          'mobile',
+        ].includes(v)
+      ),
+    },
   },
 
   data: () => ({
@@ -101,10 +114,32 @@ export const BaseSlideGroup = mixins<options &
       }
     },
     hasAffixes (): Boolean {
-      return (
-        (this.showArrows || !this.isMobile) &&
-        this.isOverflowing
-      )
+      switch (this.showArrows) {
+        // Always show arrows on desktop & mobile
+        case 'always': return true
+
+        // Always show arrows on desktop
+        case 'desktop': return !this.isMobile
+
+        // TODO: remove in v3
+        case true: deprecate('true', 'mobile', this)
+
+        // Always show on mobile or
+        // when overflowed on desktop
+        // eslint-disable-next-line no-fallthrough
+        case 'mobile': return (
+          this.isMobile ||
+          this.isOverflowing
+        )
+
+        // https://material.io/components/tabs#scrollable-tabs
+        // Always show arrows when
+        // overflowed on desktop
+        default: return (
+          !this.isMobile &&
+          this.isOverflowing
+        )
+      }
     },
     hasNext (): boolean {
       if (!this.hasAffixes) return false
@@ -116,9 +151,6 @@ export const BaseSlideGroup = mixins<options &
     },
     hasPrev (): boolean {
       return this.hasAffixes && this.scrollOffset !== 0
-    },
-    isMobile (): boolean {
-      return this.$vuetify.breakpoint.width < this.mobileBreakPoint
     },
   },
 

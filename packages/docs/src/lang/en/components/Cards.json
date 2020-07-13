@@ -65,9 +65,7 @@
     "gradient": "Components.Images.props.gradient",
     "hover": "Will apply an elevation of 4dp when hovered (default 2dp). You can find more information on the [elevation page](/styles/elevation).",
     "img": "Specifies an image background for the card. For more advanced implementations, it is recommended that you use the [v-img](/components/images) component. You can find a [v-img example here](#media-with-text).",
-    "outlined": "Removes card elevation shadow and adds a thin border.",
-    "raised": "Specifies a higher default elevation (8dp). You can find more information on the [elevation page](/styles/elevation).",
-    "shaped": "Applies a large border radius on the top left and bottom right of the card."
+    "raised": "Specifies a higher default elevation (8dp). You can find more information on the [elevation page](/styles/elevation)."
   },
   "events": {
     "click": "Emitted when component is clicked - Will trigger component to ripple when clicked unless the `.native` modifier is used"

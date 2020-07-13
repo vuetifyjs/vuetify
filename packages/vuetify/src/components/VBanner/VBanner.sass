@@ -2,9 +2,13 @@
 @import './_variables.scss'
 
 // Theme
-+theme(v-banner) using ($material)
++theme('v-banner.v-sheet') using ($material)
+  background-color: transparent
+
   .v-banner__wrapper
-    border-bottom: 1px solid map-get($material, 'dividers')
+    border-bottom: thin solid map-get($material, 'dividers')
+
++sheet(v-banner, $banner-elevation, $banner-border-radius, $banner-shaped-border-radius)
 
 // Block
 .v-banner
@@ -40,7 +44,9 @@
   overflow: hidden
 
 .v-banner__text
+  flex: 1 1 auto
   line-height: $banner-line-height
+  max-width: 100%
 
 .v-banner__icon
   display: inline-flex

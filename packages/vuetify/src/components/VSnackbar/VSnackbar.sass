@@ -1,125 +1,136 @@
 @import './_variables.scss'
 
++theme(v-snack) using ($material)
+  &__wrapper
+    color: map-deep-get($material, 'text', 'primary')
+
++sheet(v-snack__wrapper, $snackbar-elevation, $snackbar-border-radius, $snackbar-shaped-border-radius)
+
 .v-snack
-  align-items: center
-  color: $snackbar-color
+  bottom: $snackbar-bottom
   display: flex
   font-size: $snackbar-font-size
+  justify-content: center
   left: $snackbar-left
   pointer-events: none
-  position: fixed
   right: $snackbar-right
-  transition-duration: .15s
-  transition-timing-function: map-get($transition, 'linear-out-slow-in')
-  z-index: 1000
+  top: $snackbar-top
+  width: 100%
 
-  +ltr()
-    text-align: left
+  &:not(.v-snack--absolute)
+    height: 100vh
+    position: fixed
+    z-index: $snackbar-z-index
 
-  +rtl()
-    text-align: right
-
-  &--absolute
-    position: absolute
-
-  &--top
-    top: $snackbar-top
-
-  &--bottom
-    bottom: $snackbar-bottom
+  &:not(.v-snack--centered):not(.v-snack--top)
+    align-items: flex-end
 
   &__wrapper
     align-items: center
-    background-color: $snackbar-background-color
-    border-radius: $snackbar-border-radius
+    // TODO: move this to sheet in v3
+    border-color: currentColor !important
     display: flex
-    margin: 0 auto
+    margin: $snackbar-wrapper-margin
+    max-width: $snackbar-wrapper-max-width
+    min-height: $snackbar-wrapper-min-height
+    min-width: $snackbar-wrapper-min-width
+    padding: $snackbar-wrapper-padding
     pointer-events: auto
-    transition: inherit
+    position: relative
+    transition-duration: .15s
     transition-property: opacity, transform
-    min-width: 100%
-    +elevation($snackbar-wrapper-elevation)
+    transition-timing-function: map-get($transition, 'linear-out-slow-in')
+
+    &.theme--dark
+      background-color: $snackbar-background-color
+      color: $snackbar-color
 
   &__content
-    align-items: center
-    display: flex
-    min-height: $snackbar-content-min-height
-    justify-content: space-between
-    overflow: hidden
+    flex-grow: 1
+    font-size: $snackbar-content-font-size
+    font-weight: $snackbar-content-font-weight
+    letter-spacing: $snackbar-content-letter-spacing
+    line-height: $snackbar-content-line-height
+    margin-right: auto
     padding: $snackbar-content-padding
-    width: 100%
+    text-align: initial
 
-    .v-btn
-      flex: 0 0 auto
-      height: auto
-      min-width: auto
-      padding: 8px
-      width: auto
+  &__action
+    align-items: center
+    align-self: center
+    display: flex
 
-      &--text, &--icon, &--outlined
-        color: $snackbar-color
+    // Snackbar actions shouldn't have ripples
+    .v-ripple__container
+      display: none
 
-      +ltr()
-        margin: 0 $snackbar-btn-margin-right 0 $snackbar-btn-margin-left
+    +ltr()
+      margin-right: $snackbar-action-margin
 
-      +rtl()
-        margin: 0 $snackbar-btn-margin-left 0 $snackbar-btn-margin-right
+    +rtl()
+      margin-left: $snackbar-action-margin
 
-      &__content
-        margin: -2px
+  // Increased specificity to change
+  // the default padding of .v-btn
+  &__action > .v-snack__btn.v-btn
+    padding: $snackbar-btn-padding
 
-  &--multi-line &__content
-    height: auto
-    min-height: $snackbar-multi-line-content-min-height
+  &__btn
+    margin-left: $snackbar-btn-margin-left
+    margin-right: $snackbar-btn-margin-right
+    margin: $snackbar-content-first-btn-margin
+    min-width: auto
 
-  &--vertical &__content
-    // https://stackoverflow.com/questions/35111090/text-in-a-flex-container-doesnt-wrap-in-ie11
-    align-items: stretch
+  &--absolute
+    height: 100%
+    position: absolute
+    z-index: $snackbar-absolute-z-index
+
+  &--centered
+    align-items: center
+
+  &--left
+    justify-content: flex-start
+
+  &--multi-line &__wrapper
+    min-height: $snackbar-multi-line-wrapper-min-height
+
+  &--right
+    justify-content: flex-end
+
+  &:not(.v-snack--has-background) &__wrapper
+    background: transparent !important
+    box-shadow: none !important
+
+
+  &--text &__wrapper:before
+    background-color: currentColor
+    border-radius: inherit
+    bottom: 0
+    content: ''
+    left: 0
+    opacity: 0.12
+    pointer-events: none
+    position: absolute
+    right: 0
+    top: 0
+
+  &--top
+    align-items: flex-start
+
+  &--vertical &__wrapper
     flex-direction: column
-    height: auto
-    padding: $snackbar-vertical-content-padding
 
-    .v-btn
-      &.v-btn // Higher specificity
-        align-self: flex-end
-        justify-self: flex-end
-        margin-top: $snackbar-vertical-content-btn-margin-top
-
-        +ltr()
-          margin-left: 0
-
-        +rtl()
-          margin-right: 0
-
-      &__content
-        flex: 0 0 auto
-        margin: 0
-
-@media #{map-get($display-breakpoints, 'sm-and-up')}
-  .v-snack
-    &__wrapper
-      min-width: $snackbar-wrapper-min-width
-      max-width: $snackbar-wrapper-max-width
-
-      .v-snack--left &
-        margin-left: 0
-
-      .v-snack--right &
-        margin-right: 0
-
-    &__content .v-btn:first-of-type
-      +ltr()
-        margin-left: $snackbar-content-first-btn-margin
-
-      +rtl()
-        margin-right: $snackbar-content-first-btn-margin
+    .v-snack__action
+      align-self: flex-end
+      margin-bottom: $snackbar-vertical-action-margin-bottom
 
 .v-snack-transition
   &-enter
-    .v-snack__wrapper
+    &.v-snack__wrapper
       transform: scale($snackbar-transition-wrapper-transform)
 
   &-enter,
   &-leave-to
-    .v-snack__wrapper
+    &.v-snack__wrapper
       opacity: 0

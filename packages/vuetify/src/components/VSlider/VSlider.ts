@@ -149,7 +149,7 @@ export default mixins<options &
 
       const start = this.$vuetify.rtl ? 'auto' : '0'
       const end = this.$vuetify.rtl ? '0' : 'auto'
-      const value = this.disabled ? `calc(${this.inputWidth}% - 10px)` : `${this.inputWidth}%`
+      const value = this.isDisabled ? `calc(${this.inputWidth}% - 10px)` : `${this.inputWidth}%`
 
       return {
         transition: this.trackTransition,
@@ -163,7 +163,7 @@ export default mixins<options &
       const endDir = this.vertical ? 'height' : 'width'
 
       const start = '0px'
-      const end = this.disabled ? `calc(${100 - this.inputWidth}% - 10px)` : `calc(${100 - this.inputWidth}%)`
+      const end = this.isDisabled ? `calc(${100 - this.inputWidth}% - 10px)` : `calc(${100 - this.inputWidth}%)`
 
       return {
         transition: this.trackTransition,
@@ -173,25 +173,25 @@ export default mixins<options &
     },
     showTicks (): boolean {
       return this.tickLabels.length > 0 ||
-        !!(!this.disabled && this.stepNumeric && this.ticks)
+        !!(!this.isDisabled && this.stepNumeric && this.ticks)
     },
     numTicks (): number {
       return Math.ceil((this.maxValue - this.minValue) / this.stepNumeric)
     },
     showThumbLabel (): boolean {
-      return !this.disabled && !!(
+      return !this.isDisabled && !!(
         this.thumbLabel ||
         this.$scopedSlots['thumb-label']
       )
     },
     computedTrackColor (): string | undefined {
-      if (this.disabled) return undefined
+      if (this.isDisabled) return undefined
       if (this.trackColor) return this.trackColor
       if (this.isDark) return this.validationState
       return this.validationState || 'primary lighten-3'
     },
     computedTrackFillColor (): string | undefined {
-      if (this.disabled) return undefined
+      if (this.isDisabled) return undefined
       if (this.trackFillColor) return this.trackFillColor
       return this.validationState || this.computedColor
     },
@@ -250,8 +250,8 @@ export default mixins<options &
           'v-slider--vertical': this.vertical,
           'v-slider--focused': this.isFocused,
           'v-slider--active': this.isActive,
-          'v-slider--disabled': this.disabled,
-          'v-slider--readonly': this.readonly,
+          'v-slider--disabled': this.isDisabled,
+          'v-slider--readonly': this.isReadonly,
           ...this.themeClasses,
         },
         directives: [{
@@ -284,7 +284,7 @@ export default mixins<options &
         attrs: {
           value: this.internalValue,
           id: this.computedId,
-          disabled: this.disabled,
+          disabled: this.isDisabled,
           readonly: true,
           tabindex: -1,
           ...this.$attrs,
@@ -380,12 +380,12 @@ export default mixins<options &
         style: this.getThumbContainerStyles(valueWidth),
         attrs: {
           role: 'slider',
-          tabindex: this.disabled || this.readonly ? -1 : this.$attrs.tabindex ? this.$attrs.tabindex : 0,
+          tabindex: this.isDisabled ? -1 : this.$attrs.tabindex ? this.$attrs.tabindex : 0,
           'aria-label': this.label,
           'aria-valuemin': this.min,
           'aria-valuemax': this.max,
           'aria-valuenow': this.internalValue,
-          'aria-readonly': String(this.readonly),
+          'aria-readonly': String(this.isReadonly),
           'aria-orientation': this.vertical ? 'vertical' : 'horizontal',
           ...this.$attrs,
         },
@@ -487,7 +487,7 @@ export default mixins<options &
       this.internalValue = value
     },
     onKeyDown (e: KeyboardEvent) {
-      if (this.disabled || this.readonly) return
+      if (!this.isInteractive) return
 
       const value = this.parseKeyDown(e, this.internalValue)
 
@@ -543,7 +543,7 @@ export default mixins<options &
       return { value, isInsideTrack }
     },
     parseKeyDown (e: KeyboardEvent, value: number) {
-      if (this.disabled) return
+      if (!this.isInteractive) return
 
       const { pageup, pagedown, end, home, left, right, down, up } = keyCodes
 

@@ -1,0 +1,20 @@
+{
+  "heading": "# Border Radius",
+  "headingText": "Use border utilities to quickly style the border-radius of any element.",
+  "alertInfix": "The infixes **sm, lg, and xl** correlate to the border radius *size* and are not affected by breakpoints.",
+  "roundedHeading": "## Rounded corners",
+  "roundedText1": "The **rounded** helper classes allow you to modify the *border radius* of an element. Use the `.rounded-sm`, `.rounded`, `.rounded-lg`, and `.rounded-xl` to add a border radius of varying size.",
+  "pncHeading": "## Pill and Circle",
+  "pncText1": "You can create pills with the `.rounded-pill` class and circles with the `.rounded-circle` class.",
+  "removingHeading": "## Removing Border Radius",
+  "removingText1": "Use the `.rounded-0` helper class to *remove* all of an elements radius or select by side or corner; e.g. `.rounded-l-0` and `.rounded-tr-0`.",
+  "sidesHeading": "## Rounding sides separately",
+  "sidesText1": "Border radius is configurable on a per side basis using the infix classes, **t, r, b, l**; e.g. `.rounded-br-xl` and `.rounded-tr`.",
+  "cornersHeading": "## Rounding corners separately",
+  "cornersText1": "Border radius is configurable on a per corner basis using the infix classes, **tl, tr, br, bl**; e.g. `.rounded-br-xl` and `.rounded-tr`.",
+  "customizingHeading": "## Customizing",
+  "customizingText1": "Configure or disable the border radius helper classes. Requires the use of the [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugins/tree/master/packages/vue-cli-plugin-vuetify) library and a configured `variables.s(c|a)ss` file. Additional information on how to configure variables is located on the [SASS Variables](/customization/sass-variables) documentation page.",
+  "customizingText2": "Rounded sizes are based off of the `$border-radius-root` variable which has a default value of **0.25rem**.",
+  "overwriteHeading": "### Overwriting Radiuses",
+  "overwriteText1": "You can change or add *border-radius* sizes by adding a list named `$rounded` in your project's `variables` file."
+}

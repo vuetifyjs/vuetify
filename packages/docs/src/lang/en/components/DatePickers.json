@@ -8,6 +8,10 @@
       "desc": "Starting with year picker by default, resticting dates range and closing the picker menu after selecting the day make the perfect birthday picker.",
       "heading": "### Date pickers - birthday picker"
     },
+    "elevation": {
+      "heading": "### Picker's elevation",
+      "desc": "The `v-date-picker` component supports elevation up to a maximum value of 24. For more information on elevations, visit the official [Material Design elevations](https://material.io/design/environment/elevation.html) page."
+    },
     "date-colorable": {
       "desc": "Date picker colors can be set using the `color` and `header-color` props. If `header-color` prop is not provided header will use the `color` prop value.",
       "heading": "### Date pickers - Colors"
@@ -15,6 +19,10 @@
     "date-current": {
       "desc": "By default the current date is displayed using outlined button - **show-current** prop allows you to remove the border or select different date to be displayed as the current one.",
       "heading": "### Date pickers - current date indicator"
+    },
+    "date-button-events": {
+      "desc": "Handle events such as `@click`, `@dblclick`, `@mouseenter`, and more when interacting with *date, month, and year* buttons.",
+      "heading": "### Date pickers - DOM events for year/month/date buttons"
     },
     "date-dialog-and-menu": {
       "desc": "When integrating a picker into a `v-text-field`, it is recommended to use the **readonly** prop. This will prevent mobile keyboards from triggering. To save vertical space, you can also hide the picker title.  \n\n  Pickers expose a slot that allow you to hook into save and cancel functionality. This will maintain an old value which can be replaced if the user cancels.",
@@ -118,6 +126,7 @@
     "eventColor": "Sets the color for event dot. It can be string (all events will have the same color) or `object` where attribute is the event date and value is boolean/color/array of colors for specified date or `function` taking date as a parameter and returning boolean/color/array of colors for that date",
     "events": "Array of dates or object defining events or colors or function returning boolean/color/array of colors",
     "firstDayOfWeek": "Sets the first day of the week, starting with 0 for Sunday.",
+    "flat": "Removes  elevation",
     "headerDateFormat": "Allows you to customize the format of the month string that appears in the header of the calendar. Called with date (ISO 8601 string) arguments.",
     "locale": "Sets the locale. Accepts a string with a BCP 47 language tag.",
     "localeFirstDayOfYear": "Sets the day that determines the first week of the year, starting with 0 for **Sunday**. For ISO 8601 this should be 4.",
@@ -145,10 +154,9 @@
   },
   "events": {
     "update:picker-date": "The `.sync` event for `picker-date` prop",
-    "click:date": "Emitted when the date button is clicked",
-    "dblclick:date": "Emitted when the date button is double clicked",
-    "click:month": "Emitted when the month button is clicked",
-    "dblclick:month": "Emitted when the month button is double clicked. Usable only for `month` pickers.",
+    "<domevent>:date": "Emitted when the specified DOM event occurs on the date button",
+    "<domevent>:month": "Emitted when the specified DOM event occurs on the month button",
+    "<domevent>:year": "Emitted when the specified DOM event occurs on the year button",
     "change": "Reactive date picker emits `input` even when any part of the date (year/month/day) changes, but `change` event is emitted only when the day (for date pickers) or month (for month pickers) changes. If `range` prop is set, date picker emits `change` when both [from, to] are selected."
   },
   "slots": {
