@@ -23,7 +23,7 @@ import {
   filterTreeItems,
   filterTreeItem,
 } from './util/filterTreeItems'
-import { TreeviewItemFunction } from 'types'
+import { TreeviewItemFunction } from 'vuetify/types'
 
 type VTreeviewNodeInstance = InstanceType<typeof VTreeviewNode>
 

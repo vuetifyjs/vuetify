@@ -26,7 +26,7 @@ import { consoleError } from '../../util/console'
 // Types
 import mixins from '../../util/mixins'
 import { VNode, VNodeDirective, PropType, VNodeData } from 'vue'
-import { SelectItemKey } from 'types'
+import { SelectItemKey } from 'vuetify/types'
 
 export const defaultMenuProps = {
   closeOnClick: false,
@@ -158,11 +158,11 @@ export default baseMixins.extend<options>().extend({
     directives (): VNodeDirective[] | undefined {
       return this.isFocused ? [{
         name: 'click-outside',
-        value: this.blur,
-        args: {
+        value: {
+          handler: this.blur,
           closeConditional: this.closeConditional,
         },
-      } as VNodeDirective] : undefined
+      }] : undefined
     },
     dynamicHeight () {
       return 'auto'
@@ -289,8 +289,7 @@ export default baseMixins.extend<options>().extend({
     /** @public */
     activateMenu () {
       if (
-        this.disabled ||
-        this.readonly ||
+        !this.isInteractive ||
         this.isMenuActive
       ) return
 
@@ -341,8 +340,7 @@ export default baseMixins.extend<options>().extend({
     },
     genChipSelection (item: object, index: number) {
       const isDisabled = (
-        this.disabled ||
-        this.readonly ||
+        !this.isInteractive ||
         this.getDisabled(item)
       )
 
@@ -371,7 +369,7 @@ export default baseMixins.extend<options>().extend({
     genCommaSelection (item: object, index: number, last: boolean) {
       const color = index === this.selectedIndex && this.computedColor
       const isDisabled = (
-        this.disabled ||
+        !this.isInteractive ||
         this.getDisabled(item)
       )
 
@@ -445,7 +443,7 @@ export default baseMixins.extend<options>().extend({
         attrs: {
           readonly: true,
           type: 'text',
-          'aria-readonly': String(this.readonly),
+          'aria-readonly': String(this.isReadonly),
           'aria-activedescendant': getObjectValueByPath(this.$refs.menu, 'activeTile.id'),
           autocomplete: getObjectValueByPath(input.data!, 'attrs.autocomplete', 'off'),
         },
@@ -564,7 +562,7 @@ export default baseMixins.extend<options>().extend({
           this.selectedIndex = index
         },
         selected: index === this.selectedIndex,
-        disabled: this.disabled || this.readonly,
+        disabled: !this.isInteractive,
       })
     },
     getMenuIndex () {
@@ -595,7 +593,7 @@ export default baseMixins.extend<options>().extend({
       this.selectedIndex = -1
     },
     onClick (e: MouseEvent) {
-      if (this.isDisabled) return
+      if (!this.isInteractive) return
 
       if (!this.isAppendInner(e.target)) {
         this.isMenuActive = true
@@ -618,7 +616,7 @@ export default baseMixins.extend<options>().extend({
     onKeyPress (e: KeyboardEvent) {
       if (
         this.multiple ||
-        this.readonly ||
+        !this.isInteractive ||
         this.disableLookup
       ) return
 
@@ -644,7 +642,7 @@ export default baseMixins.extend<options>().extend({
       }
     },
     onKeyDown (e: KeyboardEvent) {
-      if (this.readonly && e.keyCode !== keyCodes.tab) return
+      if (this.isReadonly && e.keyCode !== keyCodes.tab) return
 
       const keyCode = e.keyCode
       const menu = this.$refs.menu
@@ -711,7 +709,7 @@ export default baseMixins.extend<options>().extend({
       if (
         this.hasMouseDown &&
         e.which !== 3 &&
-        !this.isDisabled
+        this.isInteractive
       ) {
         // If append inner is present
         // and the target is itself

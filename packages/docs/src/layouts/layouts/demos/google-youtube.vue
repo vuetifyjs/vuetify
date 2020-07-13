@@ -86,7 +86,7 @@
       </v-row>
     </v-app-bar>
 
-    <v-content>
+    <v-main>
       <v-container class="fill-height">
         <v-row
           justify="center"
@@ -110,7 +110,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 

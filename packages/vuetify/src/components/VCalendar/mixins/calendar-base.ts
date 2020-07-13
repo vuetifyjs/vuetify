@@ -21,7 +21,7 @@ import {
   getEndOfWeek,
   getTimestampIdentifier,
 } from '../util/timestamp'
-import { CalendarTimestamp, CalendarFormatter } from 'types'
+import { CalendarTimestamp, CalendarFormatter } from 'vuetify/types'
 
 export default mixins(
   Colorable,

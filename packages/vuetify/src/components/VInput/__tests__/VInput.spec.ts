@@ -208,22 +208,22 @@ describe('VInput.ts', () => {
   it('should be disabled', () => {
     const wrapper = mountFunction()
 
-    expect(wrapper.vm.isDisabled).toBe(false)
+    expect(wrapper.vm.isInteractive).toBe(true)
 
     wrapper.setProps({ disabled: true })
 
-    expect(wrapper.vm.isDisabled).toBe(true)
+    expect(wrapper.vm.isInteractive).toBe(false)
 
     wrapper.setProps({
       disabled: false,
       readonly: true,
     })
 
-    expect(wrapper.vm.isDisabled).toBe(true)
+    expect(wrapper.vm.isInteractive).toBe(false)
 
     wrapper.setProps({ readonly: false })
 
-    expect(wrapper.vm.isDisabled).toBe(false)
+    expect(wrapper.vm.isInteractive).toBe(true)
   })
 
   it('should render a label', () => {

@@ -15,8 +15,8 @@ module.exports = {
       },
       {
         name: 'value',
-        default: '{}',
-        type: 'object',
+        default: 'undefined',
+        type: 'Function | { handler: Function, options?: IntersectionObserverInit }',
         snippet: 'html_directive_intersect',
       },
     ],

@@ -1,9 +1,11 @@
 // Styles
 import './VFooter.sass'
 
+// Components
+import VSheet from '../VSheet/VSheet'
+
 // Mixins
 import Applicationable from '../../mixins/applicationable'
-import VSheet from '../VSheet/VSheet'
 import SSRBootable from '../../mixins/ssr-bootable'
 
 // Utilities
@@ -31,10 +33,6 @@ export default mixins(
     },
     inset: Boolean,
     padless: Boolean,
-    tile: {
-      type: Boolean,
-      default: true,
-    },
   },
 
   computed: {

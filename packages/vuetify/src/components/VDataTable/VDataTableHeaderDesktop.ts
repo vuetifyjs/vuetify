@@ -3,7 +3,7 @@ import { VNode, VNodeData } from 'vue'
 import mixins from '../../util/mixins'
 import header from './mixins/header'
 import { wrapInArray, convertToUnit } from '../../util/helpers'
-import { DataTableHeader } from 'types'
+import { DataTableHeader } from 'vuetify/types'
 
 export default mixins(header).extend({
   name: 'v-data-table-header-desktop',
@@ -105,7 +105,7 @@ export default mixins(header).extend({
         }
       }
 
-      if (this.showGroupBy) children.push(this.genGroupByToggle(header))
+      if (this.showGroupBy && header.groupable !== false) children.push(this.genGroupByToggle(header))
 
       return this.$createElement('th', data, children)
     },

@@ -3,18 +3,23 @@ import { VData } from '../VData'
 import VDataFooter from './VDataFooter'
 
 // Mixins
+import Mobile from '../../mixins/mobile'
 import Themeable from '../../mixins/themeable'
 
 // Helpers
+import mixins from '../../util/mixins'
 import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, camelizeObjectKeys } from '../../util/helpers'
 import { breaking, removed } from '../../util/console'
 
 // Types
 import { VNode, VNodeChildren, PropType } from 'vue'
-import { DataScopeProps } from 'types'
+import { DataItemProps, DataScopeProps } from 'vuetify/types'
 
 /* @vue/component */
-export default Themeable.extend({
+export default mixins(
+  Mobile,
+  Themeable
+).extend({
   name: 'v-data-iterator',
 
   props: {
@@ -33,7 +38,7 @@ export default Themeable.extend({
       default: () => [],
     },
     mobileBreakpoint: {
-      type: [Number, String],
+      ...Mobile.options.props.mobileBreakpoint,
       default: 600,
     },
     singleExpand: Boolean,
@@ -76,13 +81,6 @@ export default Themeable.extend({
     },
     selectableItems (): any[] {
       return this.internalCurrentItems.filter(item => this.isSelectable(item))
-    },
-    isMobile (): boolean {
-      // Guard against SSR render
-      // https://github.com/vuetifyjs/vuetify/issues/7410
-      if (this.$vuetify.breakpoint.width === 0) return false
-
-      return this.$vuetify.breakpoint.width < parseInt(this.mobileBreakpoint, 10)
     },
   },
 
@@ -202,7 +200,7 @@ export default Themeable.extend({
       this.expansion = expansion
       this.$emit('item-expanded', { item, value })
     },
-    createItemProps (item: any) {
+    createItemProps (item: any): DataItemProps {
       return {
         item,
         select: (v: boolean) => this.select(item, v),

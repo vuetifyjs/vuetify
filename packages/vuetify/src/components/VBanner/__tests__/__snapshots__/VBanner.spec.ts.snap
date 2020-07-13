@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VBanner.ts should apply sticky when using the app prop 1`] = `
-<div class="v-banner v-sheet v-sheet--tile theme--light v-banner--sticky"
+<div class="v-banner v-sheet theme--light v-banner--is-mobile v-banner--sticky"
      style="top: 0px; position: sticky; z-index: 1;"
 >
   <div class="v-banner__wrapper">
@@ -14,7 +14,7 @@ exports[`VBanner.ts should apply sticky when using the app prop 1`] = `
 `;
 
 exports[`VBanner.ts should apply sticky when using the app prop 2`] = `
-<div class="v-banner v-sheet v-sheet--tile theme--light v-banner--sticky"
+<div class="v-banner v-sheet theme--light v-banner--is-mobile v-banner--sticky"
      style="top: 0px; position: sticky; z-index: 1;"
 >
   <div class="v-banner__wrapper">
@@ -27,7 +27,7 @@ exports[`VBanner.ts should apply sticky when using the app prop 2`] = `
 `;
 
 exports[`VBanner.ts should apply sticky when using the app prop 3`] = `
-<div class="v-banner v-sheet v-sheet--tile theme--light"
+<div class="v-banner v-sheet theme--light v-banner--is-mobile"
      style
 >
   <div class="v-banner__wrapper">
@@ -40,7 +40,7 @@ exports[`VBanner.ts should apply sticky when using the app prop 3`] = `
 `;
 
 exports[`VBanner.ts should render component with actions 1`] = `
-<div class="v-banner v-sheet v-sheet--tile theme--light">
+<div class="v-banner v-sheet theme--light v-banner--is-mobile">
   <div class="v-banner__wrapper">
     <div class="v-banner__content">
       <div class="v-banner__text">
@@ -62,7 +62,7 @@ exports[`VBanner.ts should render component with actions 1`] = `
 `;
 
 exports[`VBanner.ts should render component with content 1`] = `
-<div class="v-banner v-sheet v-sheet--tile theme--light">
+<div class="v-banner v-sheet theme--light v-banner--is-mobile">
   <div class="v-banner__wrapper">
     <div class="v-banner__content">
       <div class="v-banner__text">
@@ -74,7 +74,7 @@ exports[`VBanner.ts should render component with content 1`] = `
 `;
 
 exports[`VBanner.ts should render component with icon 1`] = `
-<div class="v-banner v-sheet v-sheet--tile theme--light v-banner--has-icon">
+<div class="v-banner v-sheet theme--light v-banner--has-icon v-banner--is-mobile">
   <div class="v-banner__wrapper">
     <div class="v-banner__content">
       <div class="v-avatar v-banner__icon"
@@ -95,7 +95,7 @@ exports[`VBanner.ts should render component with icon 1`] = `
 `;
 
 exports[`VBanner.ts should render component with icon slot 1`] = `
-<div class="v-banner v-sheet v-sheet--tile theme--light v-banner--has-icon">
+<div class="v-banner v-sheet theme--light v-banner--has-icon v-banner--is-mobile">
   <div class="v-banner__wrapper">
     <div class="v-banner__content">
       <div class="v-avatar v-banner__icon"
@@ -114,7 +114,7 @@ exports[`VBanner.ts should render component with icon slot 1`] = `
 `;
 
 exports[`VBanner.ts should render sinle-line component with content 1`] = `
-<div class="v-banner v-sheet v-sheet--tile theme--light">
+<div class="v-banner v-sheet theme--light v-banner--is-mobile">
   <div class="v-banner__wrapper">
     <div class="v-banner__content">
       <div class="v-banner__text">

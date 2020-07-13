@@ -21,12 +21,22 @@
   width: 100%
   z-index: 1
 
+.v-progress-linear--reverse
+  .v-progress-linear__buffer
+    left: auto
+    right: 0
+
 .v-progress-linear__background
   bottom: 0
   left: 0
   position: absolute
   top: 0
   transition: inherit
+
+.v-progress-linear--reverse
+  .v-progress-linear__background
+    left: auto
+    right: 0
 
 .v-progress-linear__content
   align-items: center
@@ -39,42 +49,75 @@
   width: 100%
   z-index: 2
 
+.v-progress-linear--reverse
+  .v-progress-linear__content
+    left: auto
+    right: 0
+
 .v-progress-linear__determinate
   height: inherit
+  left: 0
+  position: absolute
   transition: inherit
 
-.v-progress-linear__indeterminate
-  .long, .short
-    background-color: inherit
-    bottom: 0
-    height: inherit
-    left: 0
-    position: absolute
-    top: 0
-    width: auto
-    will-change: left, right
+.v-progress-linear--reverse
+  .v-progress-linear__determinate
+    left: auto
+    right: 0
 
-  &--active .long
-    animation: indeterminate
-    animation-duration: 2.2s
-    animation-iteration-count: infinite
+.v-progress-linear
+  .v-progress-linear__indeterminate
+    .long, .short
+      background-color: inherit
+      bottom: 0
+      height: inherit
+      left: 0
+      position: absolute
+      right: auto
+      top: 0
+      width: auto
+      will-change: left, right
 
-  &--active .short
-    animation: indeterminate-short
-    animation-duration: 2.2s
-    animation-iteration-count: infinite
+    &--active .long
+      animation-name: indeterminate-ltr
+      animation-duration: 2.2s
+      animation-iteration-count: infinite
+
+    &--active .short
+      animation-name: indeterminate-short-ltr
+      animation-duration: 2.2s
+      animation-iteration-count: infinite
+
+.v-progress-linear--reverse
+  .v-progress-linear__indeterminate
+    .long, .short
+      left: auto
+      right: 0
+
+    &--active .long
+      animation-name: indeterminate-rtl
+
+    &--active .short
+      animation-name: indeterminate-short-rtl
 
 .v-progress-linear__stream
-  animation: stream .25s infinite linear
+  animation: stream-ltr .25s infinite linear
   border-color: currentColor
   border-top: $progress-linear-stream-border-width dotted
   bottom: 0
+  left: auto
+  right: -8px
   opacity: $progress-linear-stream-opacity
   pointer-events: none
   position: absolute
-  right: -8px
   top: calc(50% - #{$progress-linear-stream-border-width / 2})
   transition: inherit
+
+.v-progress-linear--reverse
+  .v-progress-linear__stream
+    animation: stream-rtl .25s infinite linear
+    left: -8px
+    right: auto
 
 .v-progress-linear__wrapper
   overflow: hidden
@@ -107,18 +150,26 @@
     background-repeat: repeat
 
 .v-progress-linear--query
-  .v-progress-linear__indeterminate
-    &--active .long
-      animation: query
+  .v-progress-linear__indeterminate--active
+    .long
+      animation-name: query-ltr
       animation-duration: 2s
       animation-iteration-count: infinite
 
-    &--active .short
-      animation: query-short
+    .short
+      animation-name: query-short-ltr
       animation-duration: 2s
       animation-iteration-count: infinite
 
-@keyframes indeterminate
+  &.v-progress-linear--reverse
+    .v-progress-linear__indeterminate--active
+      .long
+        animation-name: query-rtl
+
+      .short
+        animation-name: query-short-rtl
+
+@keyframes indeterminate-ltr
   0%
     left: -90%
     right: 100%
@@ -129,7 +180,18 @@
     left: 100%
     right: -35%
 
-@keyframes indeterminate-short
+@keyframes indeterminate-rtl
+  0%
+    left: 100%
+    right: -90%
+  60%
+    left: 100%
+    right: -90%
+  100%
+    left: -35%
+    right: 100%
+
+@keyframes indeterminate-short-ltr
   0%
     left: -200%
     right: 100%
@@ -140,7 +202,18 @@
     left: 107%
     right: -8%
 
-@keyframes query
+@keyframes indeterminate-short-rtl
+  0%
+    left: 100%
+    right: -200%
+  60%
+    left: -8%
+    right: 107%
+  100%
+    left: -8%
+    right: 107%
+
+@keyframes query-ltr
   0%
     right: -90%
     left: 100%
@@ -151,7 +224,18 @@
     right: 100%
     left: -35%
 
-@keyframes query-short
+@keyframes query-rtl
+  0%
+    right: 100%
+    left: -90%
+  60%
+    right: 100%
+    left: -90%
+  100%
+    right: -35%
+    left: 100%
+
+@keyframes query-short-ltr
   0%
     right: -200%
     left: 100%
@@ -162,6 +246,21 @@
     right: 107%
     left: -8%
 
-@keyframes stream
+@keyframes query-short-rtl
+  0%
+    right: 100%
+    left: -200%
+  60%
+    right: -8%
+    left: 107%
+  100%
+    right: -8%
+    left: 107%
+
+@keyframes stream-ltr
   to
     transform: translateX(-8px)
+
+@keyframes stream-rtl
+  to
+    transform: translateX(8px)

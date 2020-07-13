@@ -1,0 +1,10 @@
+{
+  "heading": "# Global Configuration",
+  "headingText": "Vuetify.config is an object containing global configuration options that modify the bootstrapping of your project.",
+  "silentHeading": "## silent",
+  "silentText1": "This option suppresses *all* Vuetify logs and warnings.",
+  "silentText2": [
+    "**Type:** `boolean`",
+    "**Default:** `false`"
+  ]
+}
