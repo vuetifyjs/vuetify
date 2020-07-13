@@ -211,11 +211,17 @@
     ]
   },
   {
+    "title": "themes",
+    "icon": "$mdiVuetify",
+    "items": [
+      "premium"
+    ]
+  },
+  {
     "title": "jobs",
     "icon": "$mdiBriefcaseSearch",
     "items": [
       "for-vue"
     ]
   }
-
 ]

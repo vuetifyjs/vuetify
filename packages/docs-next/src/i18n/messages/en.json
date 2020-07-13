@@ -100,6 +100,25 @@
     "support": "Support",
     "support-caption": "Need a customized support plan? Vuetify's author, John Leider, provides consulting and support services to assist with any use-case you run into while building your application."
   },
+  "premium": "Premium themes",
+  "premium-themes": {
+    "buy": "Information and Demos",
+    "buy-now": "Buy Now",
+    "free": "Free",
+    "live": "Live Preview",
+    "premium": "Premium",
+    "download-now": "Download Now",
+    "view-demo": "View Demo",
+    "zero-pro": "Zero is a carefully crafted multi-purpose, responsive, and gorgeous theme that delivers a clean user experience.",
+    "dashboard-pro": "Vuetify Material Dashboard PRO is a beautiful theme built over Vuetify, Vuex and Vuejs.",
+    "material-kit": "A complete set of Material Inspired themes built with Vuetify on top of Vue CLI.",
+    "alpha-theme": "Complete theme experience including enhanced Vue CLI, full documentation, 5 custom components and much more!",
+    "zero-free": "The Free version of the Zero theme.",
+    "dashboard": "Vuetify Material Dashboard is a beautiful resource built over Vuetify, Vuex and Vue.js.",
+    "freelance": "A single page Material inspired theme for Freelancers.",
+    "parallax": "This beautiful single page parallax is a great home page for any application.",
+    "blog": "A simple template that features a clean interface for creating a blog or blog-like application."
+  },
   "professional-support": "Professional support",
   "progress": "Progress",
   "range": "Range",
@@ -111,7 +130,7 @@
   "tables": "Tables",
   "tablet": "Tablet",
   "team": "Team",
-  "themes": "Premium themes",
+  "themes": "Themes",
   "tidelift": {
     "demo": "Request a demo",
     "more": "Learn more"
