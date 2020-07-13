@@ -55,8 +55,15 @@ describe('VTreeViewNode.ts', () => {
       isExcluded: () => false,
       updateActive: () => {},
       emitActive: () => {},
-      updateOpen: () => {},
+      updateOpen: jest.fn(),
       emitOpen: () => {},
+      keyMoveDown: jest.fn(),
+      keyMoveUp: jest.fn(),
+      keyMoveLeft: jest.fn(),
+      keyMoveRight: jest.fn(),
+      // $refs: {
+      //   treeview: jest.fn(),
+      // },
     }
 
     mountFunction = (options?: MountOptions<Instance>) => {
@@ -185,5 +192,120 @@ describe('VTreeViewNode.ts', () => {
     expect(wrapper.vm.isActive).toBe(false)
 
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('shoud call treeview.keyMoveDown when down arrow key is pressed', () => {
+    const wrapper = mountFunction({
+      provide: { treeview },
+      propsData: {
+        item: singleRootWithEmptyChildrens,
+      },
+    })
+    wrapper.trigger('keydown.down')
+
+    expect(wrapper.vm.treeview.keyMoveDown).toHaveBeenCalled()
+  })
+
+  it('shoud call treeview.keyMoveUp when up arrow key is pressed', () => {
+    const wrapper = mountFunction({
+      provide: { treeview },
+      propsData: {
+        item: singleRootWithEmptyChildrens,
+      },
+    })
+    wrapper.trigger('keydown.up')
+
+    expect(wrapper.vm.treeview.keyMoveUp).toHaveBeenCalled()
+  })
+
+  it('shoud call treeview.keyMoveLeft when left arrow key is pressed', () => {
+    const wrapper = mountFunction({
+      provide: { treeview },
+      propsData: {
+        item: singleRootWithEmptyChildrens,
+      },
+    })
+    wrapper.setMethods({
+      updateScroll: jest.fn(),
+    })
+
+    wrapper.trigger('keydown.left')
+
+    expect(wrapper.vm.treeview.keyMoveLeft).toHaveBeenCalled()
+    expect(wrapper.vm.updateScroll).toHaveBeenCalled()
+  })
+
+  it('shoud not call treeview.keyMoveRight or treeview.updateOpen when right arrow key is pressed and no children', async () => {
+    const wrapper = mountFunction({
+      provide: { treeview },
+      propsData: {
+        item: singleRootWithEmptyChildrens,
+      },
+    })
+    wrapper.setMethods({
+      updateScroll: jest.fn(),
+    })
+
+    wrapper.trigger('keydown.right')
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.treeview.keyMoveRight).not.toHaveBeenCalled()
+    expect(wrapper.vm.treeview.updateOpen).not.toHaveBeenCalled()
+  })
+  it('shoud call treeview.updateOpen when right arrow key is pressed and has children', async () => {
+    const wrapper = mountFunction({
+      provide: { treeview },
+      propsData: {
+        item: singleRootTwoChildren,
+      },
+    })
+    wrapper.trigger('keydown.right')
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.treeview.keyMoveRight).not.toHaveBeenCalled()
+    expect(wrapper.vm.treeview.updateOpen).toHaveBeenCalled()
+  })
+
+  it('shoud call treeview.keyMoveRight when right arrow key is pressed has children and is opened', async () => {
+    const wrapper = mountFunction({
+      provide: { treeview },
+      propsData: {
+        item: singleRootTwoChildren,
+      },
+    })
+    wrapper.vm.open()
+
+    wrapper.trigger('keydown.right')
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.treeview.keyMoveRight).toHaveBeenCalled()
+    expect(wrapper.vm.treeview.updateOpen).toHaveBeenCalledTimes(1) // from wrapper.vm.open
+  })
+
+  it('shoud not call treeview.updateOpen when space key is pressed and no children', () => {
+    const wrapper = mountFunction({
+      provide: { treeview },
+      propsData: {
+        item: singleRootWithEmptyChildrens,
+      },
+    })
+
+    wrapper.trigger('keydown.space')
+
+    expect(wrapper.vm.treeview.updateOpen).not.toHaveBeenCalled()
+  })
+
+  it('shoud call treeview.updateOpen when space key is pressed with children', async () => {
+    const wrapper = mountFunction({
+      provide: { treeview },
+      propsData: {
+        item: singleRootTwoChildren,
+      },
+    })
+
+    wrapper.trigger('keydown.space')
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.treeview.updateOpen).toHaveBeenCalled()
   })
 })
