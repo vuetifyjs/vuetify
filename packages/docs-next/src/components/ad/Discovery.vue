@@ -1,7 +1,18 @@
-<template>
-  <vuetify-ad discover />
-</template>
-
 <script>
-  export default { name: 'DiscoveryAd' }
+  // Extensions
+  import VuetifyAd from '@/components/ad/Vuetify'
+
+  export default {
+    name: 'DiscoveryAd',
+
+    extends: VuetifyAd,
+
+    computed: {
+      ads () {
+        return this.all.filter(({ metadata }) => {
+          return metadata.discoverable
+        })
+      },
+    },
+  }
 </script>

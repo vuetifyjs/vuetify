@@ -5,35 +5,36 @@
   >
     <a v-bind="adAttrs">
       <app-ad
-        v-if="current"
         v-bind="$attrs"
         class="v-vuetify-ad--promoted"
         compact
-        entry
-        max-width="720"
+        color="transparent"
+        dark
+        max-width="640"
         outlined
       >
-        <v-img
-          v-if="current.metadata.src"
-          :alt="`Link to ${current.title}`"
-          :src="current.metadata.src"
-          class="mx-4"
-          contain
-          height="56"
-          max-width="56"
-        />
 
         <v-img
-          :src="current.metadata.bg"
-          class="flex-1-1-auto rounded-r px-3 px-sm-6 d-flex align-center"
-          dark
+          :src="bg"
+          class="flex-1-1-auto rounded"
           max-height="56"
         >
-          <app-md
-            v-if="description"
-            class="text-subtitle-2 text-sm-h6 font-weight-light"
-            v-text="description"
-          />
+          <div class="d-flex align-center fill-height">
+            <v-img
+              :alt="`Link to ${current.title}`"
+              :src="logo"
+              class="mr-6 ml-4"
+              contain
+              height="56"
+              max-width="56"
+            />
+
+            <app-md
+              v-if="description"
+              class="text-subtitle-2 text-sm-h6 font-weight-light"
+              v-text="description"
+            />
+          </div>
         </v-img>
       </app-ad>
     </a>
@@ -54,6 +55,9 @@
     inheritAttrs: false,
 
     computed: {
+      bg () {
+        return this.current.metadata.images.background.url
+      },
       // Promoted ads have less space
       // available for descriptions
       description () {
@@ -75,6 +79,11 @@
             : description
         )
       },
+      logo () {
+        const { logo, preview } = this.current.metadata.images
+
+        return (logo || preview).url
+      },
     },
   }
 </script>
@@ -86,8 +95,4 @@
 
     .v-markdown p strong
       font-weight: 700
-
-    .v-vuetify-ad__bg
-      border-bottom-right-radius: inherit
-      border-top-right-radius: inherit
 </style>

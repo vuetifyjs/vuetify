@@ -16,19 +16,7 @@ export default {
     all: get('ads/all'),
     locale: get('route/params@locale'),
     ads () {
-      if (this.slug) return this.all
-
-      const type = this.discover
-        ? 'discovery'
-        : 'random'
-
-      return this.all.filter(ad => {
-        if (!ad.metadata.types) {
-          return false
-        }
-
-        return ad.metadata.types.includes(type)
-      })
+      return this.all
     },
     adAttrs () {
       if (!this.current) return undefined
