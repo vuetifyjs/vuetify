@@ -42,7 +42,7 @@
                       <i18n
                         tag="app-md"
                         class="font-weight-medium mr-1"
-                        :path="member.title"
+                        :path="`titles.${member.title}`"
                       />
                     </v-col>
                     <v-col>

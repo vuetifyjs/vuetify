@@ -2,7 +2,7 @@
   <div class="mt-16">
     <div class="blue-grey--text text--darken-1 d-flex align-center justify-space-between">
       <div class="font-weight-medium d-flex align-baseline grow">
-        <i18n path="edit-page">
+        <i18n path="contribute.edit-page">
           <template v-slot:url>
             <app-link :href="href">
               <span v-text="$t('github')" />
@@ -19,7 +19,7 @@
           <i18n
             tag="span"
             class="font-weight-medium mr-1"
-            path="last-updated"
+            path="contribute.last-updated"
           />
 
           <span
