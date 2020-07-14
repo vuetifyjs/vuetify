@@ -11,8 +11,6 @@ John Leider, the creator of Vuetify, and other **Core Team** members are now off
 
 <entry-ad />
 
-<alert type="error">
-  **TODO** Add consulting calendar
-</alert>
+<consulting-calendar />
 
 <backmatter />
