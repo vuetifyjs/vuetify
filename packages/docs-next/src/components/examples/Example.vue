@@ -4,7 +4,10 @@
     outlined
     rounded
   >
-    <v-lazy min-height="52">
+    <v-lazy
+      min-height="52"
+      @mouseenter="importTemplate"
+    >
       <div class="text-end pa-2">
         <app-tooltip-btn
           v-for="(tooltip, i) in tooltips"
@@ -60,7 +63,10 @@
                   :key="`window-${i}`"
                   :value="section"
                 >
-                  <markup :code="pen[section]" />
+                  <markup
+                    :code="pen[section]"
+                    :rounded="false"
+                  />
                 </v-window-item>
               </template>
             </v-window>
@@ -76,21 +82,19 @@
       </div>
     </v-lazy>
 
-    <v-theme-provider :dark="dark">
-      <v-fade-transition appear>
+    <v-lazy :value="!file">
+      <v-theme-provider :dark="dark">
         <v-sheet
-          v-if="file"
           class="pa-4"
-          rounded="b"
-          @mouseenter.once="importTemplate"
+          rounded="t"
         >
           <vue-file
             :file="file"
             @error="hasError = true"
           />
         </v-sheet>
-      </v-fade-transition>
-    </v-theme-provider>
+      </v-theme-provider>
+    </v-lazy>
   </v-sheet>
 </template>
 

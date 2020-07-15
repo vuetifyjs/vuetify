@@ -8,11 +8,14 @@
       max-width="868"
     >
       <skeleton-loader
-        v-if="!component"
+        v-if="loading"
         key="loader"
       />
 
-      <keep-alive max="3">
+      <keep-alive
+        v-else
+        max="3"
+      >
         <component :is="component" />
       </keep-alive>
     </v-responsive>
@@ -27,19 +30,6 @@
 
   export default {
     name: 'PageView',
-
-    async beforeRouteUpdate (to, from, next) {
-      if (to.path !== from.path) {
-        // Avoid turning on the loader immediately
-        const timeout = setTimeout(this.reset, 50)
-
-        await this.update()
-
-        clearTimeout(timeout)
-      }
-
-      next()
-    },
 
     metaInfo () {
       // Check it fm exists
@@ -63,7 +53,10 @@
       )
     },
 
-    data: () => ({ component: undefined }),
+    data: () => ({
+      component: undefined,
+      loading: false,
+    }),
 
     computed: {
       ...sync('pages', [
@@ -77,10 +70,16 @@
       ]),
     },
 
-    watch: { '$route.params.locale': 'update' },
+    async created () {
+      const timeout = setTimeout(() => {
+        this.loading = true
+      }, 50)
 
-    beforeMount () {
-      this.update()
+      await this.init()
+
+      clearTimeout(timeout)
+
+      this.loading = false
     },
 
     methods: {
@@ -98,7 +97,7 @@
           `@/${path.join('/')}.md`
         )
       },
-      async update () {
+      async init () {
         let structure
 
         try {

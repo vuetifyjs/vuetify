@@ -1,166 +1,175 @@
 <template>
-  <v-card
-    class="mb-9"
-    outlined
+  <v-lazy
+    min-height="498"
   >
-    <v-row no-gutters>
-      <v-col
-        cols="12"
-        md="8"
-      >
-        <v-responsive
-          :class="`d-flex ${headerColor}`"
-          height="44"
+    <v-card
+      class="mb-12"
+      outlined
+    >
+      <v-row no-gutters>
+        <v-col
+          cols="12"
+          md="8"
         >
-          <v-slide-group
-            v-if="tabs.length"
-            multiple
-            show-arrows="mobile"
+          <v-responsive
+            :class="headerColor"
+            class="d-flex"
+            height="44"
           >
-            <v-slide-item
-              v-for="(prop) in tabs"
-              :key="prop"
-              #default="{ active, toggle }"
+            <v-slide-group
+              active-class="primary--text"
+              multiple
+              show-arrows="mobile"
             >
-              <v-btn
-                :input-value="active"
-                active-class="primary white--text"
-                tile
-                text
-                height="44"
-                depressed
-                @click="toggle(); usageProps[prop] = !active;"
+              <v-slide-item
+                v-for="(prop) in tabs"
+                :key="prop"
+                #default="{ active, toggle }"
               >
-                {{ prop }}
-              </v-btn>
-            </v-slide-item>
-          </v-slide-group>
-        </v-responsive>
+                <v-btn
+                  :input-value="active"
+                  depressed
+                  height="44"
+                  text
+                  tile
+                  @click="toggle(); usageProps[prop] = !active;"
+                >
+                  {{ prop }}
+                </v-btn>
+              </v-slide-item>
+            </v-slide-group>
+          </v-responsive>
 
-        <v-divider />
+          <v-divider />
 
-        <v-fade-transition appear>
-          <v-sheet
-            v-if="file"
-            :dark="dark"
-            :light="!dark"
-            class="d-inline-block"
-            width="100%"
-            height="300"
-            style="overflow-y: auto;"
-            tile
-          >
-            <div class="fill-height pa-6 d-flex align-center">
+          <v-theme-provider :dark="dark">
+            <v-sheet
+              v-if="file"
+              class="overflow-y-auto fill-height d-flex align-center justify-center pa-4"
+              min-height="400"
+              max-height="400"
+              rounded="t"
+            >
               <vue-file
                 ref="usage"
-                v-bind="{ ...usageProps }"
                 :file="file"
+                v-bind="{ ...usageProps }"
                 @loaded="setContents"
                 @error="hasError = true"
               />
-            </div>
-          </v-sheet>
-        </v-fade-transition>
-      </v-col>
+            </v-sheet>
+          </v-theme-provider>
+        </v-col>
 
-      <v-col
-        cols="12"
-        md="4"
-      >
-        <div :class="`d-flex ${headerColor}`">
-          <v-responsive
-            class="title font-weight-regular align-center px-3"
-          >
-            {{ $i18n.t('options') }}
-          </v-responsive>
-          <div class="pa-1">
-            <app-tooltip-btn
-              icon="$mdiInvertColors"
-              :disabled="hasError"
-              path="invert-example-colors"
-              @click="dark = !dark"
-            />
-          </div>
-        </div>
-
-        <v-divider />
-
-        <v-responsive
-          max-height="300"
-          class="overflow-y-auto pa-3"
+        <v-col
+          cols="12"
+          md="4"
         >
-          <v-switch
-            v-for="prop in booleans"
-            :key="prop"
-            v-model="usageProps[prop]"
-            dense
-            hide-details
-            class="mt-0 mb-2"
-            :label="prop"
-          />
-
-          <v-slider
-            v-for="(bounds, prop) in sliders"
-            :key="prop"
-            v-model="usageProps[prop]"
-            hide-details
-            class="my-2"
-            :label="prop"
-            :max="bounds[1]"
-            :min="bounds[0]"
-            :step="bounds[2] || 1"
-          />
-
-          <v-select
-            v-for="(items, prop) in selects"
-            :key="prop"
-            v-model="usageProps[prop]"
-            clearable
-            dense
-            filled
-            class="my-2"
-            hide-details
-            :items="items"
-            :label="prop"
-          />
-
-          <v-btn-toggle
-            v-for="(items, prop) in btnToggles"
-            :key="prop"
-            class="my-2"
+          <div
+            :class="headerColor"
+            class="d-flex align-center"
           >
-            <v-btn
-              v-for="(item, i) in items"
-              :key="`${prop}${i}`"
-              text
-              @click="() => usageProps[prop] = item"
+            <headline
+              class="px-3"
+              path="options"
+            />
+
+            <div class="pa-1 ms-auto">
+              <app-tooltip-btn
+                :disabled="hasError"
+                icon="$mdiInvertColors"
+                path="invert-example-colors"
+                @click="dark = !dark"
+              />
+            </div>
+          </div>
+
+          <v-divider />
+
+          <v-responsive
+            class="overflow-y-auto pa-3"
+            height="100%"
+            max-height="400"
+            min-height="400"
+          >
+            <v-switch
+              v-for="(prop, i) in booleans"
+              :key="prop"
+              v-model="usageProps[prop]"
+              :class="i === 0 && 'mt-0'"
+              :label="prop"
+              dense
+              hide-details
+            />
+
+            <v-slider
+              v-for="([min, max, step], prop) in sliders"
+              :key="prop"
+              v-model="usageProps[prop]"
+              :label="prop"
+              :max="max"
+              :min="min"
+              :step="step || 1"
+              class="my-2"
+              hide-details
+            />
+
+            <v-select
+              v-for="(items, prop) in selects"
+              :key="prop"
+              v-model="usageProps[prop]"
+              :items="items"
+              :label="prop"
+              class="my-2"
+              clearable
+              dense
+              filled
+              hide-details
+            />
+
+            <v-btn-toggle
+              v-for="(items, prop) in btnToggles"
+              :key="prop"
+              class="my-2"
             >
-              {{ item }}
-            </v-btn>
-          </v-btn-toggle>
-        </v-responsive>
-      </v-col>
+              <v-btn
+                v-for="(item, i) in items"
+                :key="`${prop}${i}`"
+                text
+                @click="() => usageProps[prop] = item"
+              >
+                {{ item }}
+              </v-btn>
+            </v-btn-toggle>
+          </v-responsive>
+        </v-col>
 
-      <v-col cols="12">
-        <v-divider />
-      </v-col>
+        <v-col cols="12">
+          <v-divider />
+        </v-col>
 
-      <v-col cols="12">
-        <h5 class="pa-1">
-          {{ $i18n.t('output') }}
-        </h5>
-        <markup :code="formatAttributes" />
-      </v-col>
-    </v-row>
-  </v-card>
+        <v-col cols="12">
+          <markup
+            :code="formatAttributes"
+            rounded="b"
+          />
+        </v-col>
+      </v-row>
+    </v-card>
+  </v-lazy>
 </template>
 
 <script>
   // Mixins
   import Codepen from '@/mixins/codepen'
 
+  // Utilities
+  import { get } from 'vuex-pathify'
+
   export default {
     name: 'Usage',
+
+    inject: ['theme'],
 
     mixins: [Codepen],
 
@@ -168,12 +177,12 @@
 
     data: () => ({
       booleans: undefined,
+      btnToggles: undefined,
       dark: false,
-      file: undefined,
       hasError: false,
       options: {},
+      file: null,
       selects: undefined,
-      btnToggles: undefined,
       sliders: undefined,
       tab: null,
       tabs: [],
@@ -181,6 +190,7 @@
     }),
 
     computed: {
+      initializing: get('app/initializing'),
       formatAttributes () {
         const attributeArray = []
         for (const [key, value] of Object.entries(this.usageProps)) {
@@ -198,13 +208,14 @@
         return `<${this.name}${indent}${attributeArray.join('\r\t')}${tail}`
       },
       headerColor () {
-        return this.$vuetify.theme.dark ? 'grey darken-4' : 'grey lighten-3'
+        return this.theme.isDark ? 'grey darken-4' : 'grey lighten-3'
       },
-
     },
 
     mounted () {
-      this.file = `${this.name}/usage`
+      setTimeout(() => {
+        this.file = `${this.name}/usage`
+      }, 1500)
     },
 
     methods: {
@@ -223,14 +234,3 @@
     },
   }
 </script>
-
-<style lang="sass">
-  .example-new
-    .v-tabs
-      border-bottom: thin solid rgba(0, 0, 0, 0.12) !important
-      border-bottom-left-radius: 0 !important
-      border-bottom-right-radius: 0 !important
-
-      &.theme--dark
-        border-bottom: thin solid rgba(255, 255, 255, 0.12) !important
-</style>
