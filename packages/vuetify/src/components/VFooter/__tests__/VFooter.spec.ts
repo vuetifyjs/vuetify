@@ -66,4 +66,14 @@ describe('VFooter.ts', () => {
 
     wrapper.setProps({ height: 48 })
   })
+
+  it('should create element with the prop tag if it is set', () => {
+    const wrapper = mountFunction()
+
+    expect(wrapper.find('.v-footer').is('footer')).toBe(true)
+
+    wrapper.setProps({ tag: 'div' })
+
+    expect(wrapper.find('.v-footer').is('div')).toBe(true)
+  })
 })
