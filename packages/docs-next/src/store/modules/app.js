@@ -12,6 +12,7 @@ const state = {
   initializing: false,
   modified: {},
   nav: [],
+  settings: false,
   version: null,
 }
 
@@ -30,8 +31,8 @@ const actions = {
 }
 
 const getters = {
-  advanced: (_, __, rootState) => {
-    const advanced = {}
+  alphabetical: (_, __, rootState) => {
+    const alphabetical = {}
     const nav = []
     const pages = rootState.pages.pages
 
@@ -44,24 +45,24 @@ const getters = {
       // if alpha
       if (!tstart.match(/[a-z]/)) continue
 
-      if (!advanced[tstart]) {
-        advanced[tstart] = {
+      if (!alphabetical[tstart]) {
+        alphabetical[tstart] = {
           to: [],
           items: [],
           icon: `$mdiAlpha${tstart.toUpperCase()}`,
         }
       }
 
-      advanced[tstart].items.push({
+      alphabetical[tstart].items.push({
         title: pages[key],
         to: key,
       })
 
-      advanced[tstart].to.push(key)
+      alphabetical[tstart].to.push(key)
     }
 
-    for (const letter in advanced) {
-      const group = advanced[letter]
+    for (const letter in alphabetical) {
+      const group = alphabetical[letter]
       const items = group.items.sort((a, b) => {
         const atitle = a.title
         const btitle = b.title

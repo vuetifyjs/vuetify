@@ -11,6 +11,8 @@
     <default-toc />
 
     <default-snackbar />
+
+    <default-settings />
   </v-app>
 </template>
 
@@ -44,6 +46,10 @@
       DefaultSnackbar: () => import(
         /* webpackChunkName: "default-snackbar" */
         './Snackbar'
+      ),
+      DefaultSettings: () => import(
+        /* webpackChunkName: "default-settings" */
+        './settings/Settings'
       ),
       DefaultToc: () => import(
         /* webpackChunkName: "default-toc" */

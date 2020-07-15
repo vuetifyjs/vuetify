@@ -4,8 +4,8 @@
     :color="dark ? undefined : 'white'"
     app
     class="v-bar--underline"
-    clipped-right
     flat
+    v-bind="{ [`clipped-${rtl ? 'left' : 'right'}`]: true }"
   >
     <v-app-bar-nav-icon
       class="hidden-md-and-up"
@@ -13,17 +13,6 @@
     />
 
     <default-search />
-
-    <theme-toggle />
-
-    <v-btn
-      icon
-      @click="rtl = !rtl"
-    >
-      <v-icon>
-        {{ `$mdiFormatTextdirection${!rtl ? 'RToL' : 'LToR'}` }}
-      </v-icon>
-    </v-btn>
 
     <v-btn
       href="https://discord.gg/HJXwxMy"
@@ -93,7 +82,7 @@
 
     computed: {
       ...sync('user', [
-        'dark',
+        'theme@dark',
         'rtl',
       ]),
       drawer: sync('app/drawer'),

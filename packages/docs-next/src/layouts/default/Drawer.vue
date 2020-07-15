@@ -42,20 +42,20 @@
 
     computed: {
       ...get('user', [
-        'dark',
         'rtl',
+        'theme@dark',
       ]),
       ...get('app', [
+        'alphabetical',
         'nav',
-        'advanced',
       ]),
       drawer: sync('app/drawer'),
-      uadvanced: get('user/drawer@advanced'),
+      ualphabetical: get('user/drawer@alphabetical'),
       key () {
-        return !this.uadvanced ? 'simple' : 'advanced'
+        return !this.ualphabetical ? 'simple' : 'alphabetical'
       },
       items () {
-        return !this.uadvanced ? this.nav : this.advanced
+        return !this.ualphabetical ? this.nav : this.alphabetical
       },
     },
   }

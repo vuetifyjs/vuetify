@@ -12,9 +12,9 @@
         <latest-release />
       </v-list-item-content>
 
-      <notifications />
+      <settings-toggle />
 
-      <advanced-toggle />
+      <notifications />
 
       <jobs-link />
     </v-list-item>

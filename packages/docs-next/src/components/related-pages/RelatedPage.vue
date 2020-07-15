@@ -54,7 +54,7 @@
     }),
 
     computed: {
-      dark: get('user/dark'),
+      dark: get('user/theme@dark'),
       locale: get('route/params@locale'),
       nav: get('app/nav'),
       pages: get('pages/pages'),

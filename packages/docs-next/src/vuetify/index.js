@@ -21,7 +21,7 @@ export function createVuetify (store) {
     breakpoint: { mobileBreakpoint: 'sm' },
     icons,
     theme: {
-      dark: store.state.user.dark,
+      dark: store.state.user.theme.dark,
       options: {
         themeCache: IN_BROWSER && IS_PROD ? {
           get: key => localStorage.getItem(key),

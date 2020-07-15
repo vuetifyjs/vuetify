@@ -7,7 +7,6 @@
         page: 'for-vue'
       }
     }"
-    active-class="primary--text"
     icon
   >
     <v-icon>$mdiBriefcaseSearch</v-icon>

@@ -32,8 +32,8 @@
 
     computed: {
       ...get('user', [
-        'dark',
-        'mixed',
+        'theme@dark',
+        'theme@mixed',
       ]),
       isDark () {
         return this.dark || this.mixed

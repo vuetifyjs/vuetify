@@ -60,8 +60,8 @@
 
     computed: {
       ...get('user', [
-        'dark',
         'rtl',
+        'theme@dark',
       ]),
       ...get('route', [
         'hash',
