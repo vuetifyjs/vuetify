@@ -6,7 +6,7 @@
   >
     <v-simple-table>
       <caption class="pa-4 text-h6">
-        {{ $i18n.t('comparison-caption', { year: (new Date()).getFullYear() }) }}
+        {{ $i18n.t('comparison.caption', { year: (new Date()).getFullYear() }) }}
       </caption>
 
       <thead>
@@ -81,7 +81,7 @@
           >
             <i18n
               tag="div"
-              path="comparison-average"
+              path="comparison.average"
             />
           </td>
         </tr>

@@ -4,7 +4,7 @@
       v-model="filter"
       clearable
       dense
-      :label="$i18n.t('jobs-for-vue.search')"
+      :label="$i18n.t('search-jobs')"
       outlined
       prepend-inner-icon="$mdiMagnify"
     >
@@ -73,7 +73,7 @@
                 depressed
                 small
               >
-                {{ $i18n.t('jobs-for-vue.apply') }}
+                {{ $i18n.t('apply') }}
 
                 <v-icon
                   right
@@ -99,7 +99,7 @@
                   label
                   x-small
                 >
-                  <span class="font-weight-bold">{{ $i18n.t('jobs-for-vue.new') }}</span>
+                  <span class="font-weight-bold">#{{ $i18n.t('new') }}</span>
                 </v-chip>
 
                 <v-chip
@@ -114,7 +114,7 @@
                 <v-spacer />
 
                 <div class="text-right caption text--secondary">
-                  {{ $i18n.t('jobs-for-vue.via', { via: job.via }) }}
+                  via {{ job.via }}
                 </div>
               </div>
             </v-card-text>
@@ -127,7 +127,7 @@
       v-else-if="isLoading != null"
       class="text-center title pa-4"
     >
-      {{ $i18n.t('jobs-for-vue.not-found') }}
+      {{ $i18n.t('not-found') }}
     </div>
   </div>
 </template>

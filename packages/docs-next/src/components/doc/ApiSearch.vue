@@ -4,7 +4,7 @@
       <v-autocomplete
         :items="items"
         clearable
-        :label="$i18n.t('api-search')"
+        :label="$i18n.t('search-api')"
         multiple
         prepend-inner-icon="$mdiDatabaseSearch"
         return-object
@@ -35,7 +35,7 @@
               :id="attrs['aria-labelledby']"
               v-text="item.text"
             />
-            <v-list-item-subtitle v-text="$i18n.t(`api-type.${item.type}`)" />
+            <v-list-item-subtitle v-text="$i18n.t(item.type)" />
           </v-list-item-content>
         </template>
       </v-autocomplete>

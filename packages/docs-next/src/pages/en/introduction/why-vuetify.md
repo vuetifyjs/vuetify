@@ -17,8 +17,6 @@ Vuetify is the #1 component library for Vue.js and has been in active developmen
 
 When you develop with Vuetify, you can expect a rich ecosystem of tooling and plugins, weekly releases, a massive community, professional services and long-term support.
 
-<why-vuetify-cards />
-
 ## Design specification
 
 Vuetify is developed exactly according to [Material Design specification](https://material.io/guidelines/). Every component is hand crafted to bring you the best possible UI tools to your next great app. The development doesn't stop at the core components outlined in Google's spec. Through the support of community members and our [sponsors](/introduction/sponsors-and-backers), we have added over 15 new components including [calendars](/components/calendars/), [color pickers](/components/color-pickers/), [treeview](/components/treeview/) and many more.

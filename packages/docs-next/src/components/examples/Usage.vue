@@ -71,7 +71,7 @@
           <v-responsive
             class="title font-weight-regular align-center px-3"
           >
-            {{ $i18n.t('usage.options') }}
+            {{ $i18n.t('options') }}
           </v-responsive>
           <div class="pa-1">
             <app-tooltip-btn
@@ -147,7 +147,7 @@
 
       <v-col cols="12">
         <h5 class="pa-1">
-          {{ $i18n.t('usage.output') }}
+          {{ $i18n.t('output') }}
         </h5>
         <markup :code="formatAttributes" />
       </v-col>

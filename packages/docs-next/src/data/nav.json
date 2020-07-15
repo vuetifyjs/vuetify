@@ -67,8 +67,9 @@
     ]
   },
   {
-    "title": "components",
+    "title": "ui-components",
     "icon": "$mdiViewDashboard",
+    "group": "components",
     "items": [
       "api-explorer",
       "alerts",
@@ -184,7 +185,7 @@
     ]
   },
   {
-    "title": "components-api",
+    "title": "api",
     "icon": "$mdiBeaker",
     "group": "api"
   },
