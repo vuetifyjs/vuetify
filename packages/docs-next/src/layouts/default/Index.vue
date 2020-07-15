@@ -4,6 +4,8 @@
 
     <default-drawer />
 
+    <default-fab-to-top />
+
     <default-view />
 
     <default-toc />
@@ -34,6 +36,10 @@
       DefaultDrawer: () => import(
         /* webpackChunkName: "default-drawer" */
         './Drawer'
+      ),
+      DefaultFabToTop: () => import(
+        /* webpackChunkName: "default-app-fab-to-top" */
+        './FabToTop'
       ),
       DefaultSnackbar: () => import(
         /* webpackChunkName: "default-snackbar" */
