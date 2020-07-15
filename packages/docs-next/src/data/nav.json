@@ -17,7 +17,7 @@
     "title": "beginners-guide",
     "icon": "$mdiBookshelf",
     "items": [
-      "pre-amble"
+      "guide"
     ]
   },
   {
@@ -194,11 +194,11 @@
     "items": [
       "click-outside",
       "intersect",
-      "mutation",
-      "resizing",
-      "ripples",
-      "scrolling",
-      "touch-support"
+      "mutate",
+      "resize",
+      "ripple",
+      "scroll",
+      "touch"
     ]
   },
   {
