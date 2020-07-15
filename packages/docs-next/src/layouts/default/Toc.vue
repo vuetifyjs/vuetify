@@ -8,6 +8,7 @@
     class="py-4 pr-3"
     clipped
     floating
+    mobile-breakpoint="md"
     width="256"
   >
     <headline
