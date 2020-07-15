@@ -2,10 +2,10 @@
   <v-sheet
     :color="isDark ? '#1F1F1F' : 'grey lighten-5'"
     :dark="isDark"
+    :rounded="rounded"
     class="app-code overflow-hidden"
     dir="ltr"
     outlined
-    rounded
   >
     <slot />
 
@@ -22,6 +22,13 @@
 
   export default {
     name: 'AppCode',
+
+    props: {
+      rounded: {
+        type: [Boolean, String],
+        default: true,
+      },
+    },
 
     computed: {
       ...get('user', [

@@ -1,5 +1,8 @@
 <template>
-  <app-code class="my-0">
+  <app-code
+    class="my-0"
+    v-bind="$attrs"
+  >
     <prism
       ref="code"
       :code="code"
