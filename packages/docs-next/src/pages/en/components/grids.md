@@ -55,6 +55,12 @@ v-spacer description
 </alert>
 
 <alert type="info">
+  Breakpoints based props on grid components work in an `andUp` fashion. With this in mind the **xs** breakpoint is assumed and has been removed from the props context. This applies to **offset**, **justify**, **align**, and single breakpoint props on `v-col`
+  - Props like **justify-sm** and **justify-md** exist, but **justify-xs** does not, it is simply **justify**
+  - The **xs** prop does not exist on `v-col`. The equivalent to this is the **cols** prop
+</alert>
+
+<alert type="info">
   When using the grid system with IE11 you will need to set an explicit `height` as `min-height` will not suffice and cause undesired results.
 </alert>
 
