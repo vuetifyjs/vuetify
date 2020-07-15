@@ -22,7 +22,7 @@
             <span>Extra small</span>
           </td>
           <td>
-            <strong>xs</strong>
+            <strong>cols</strong>
           </td>
           <td>small to large handset</td>
           <td>&lt; 600px</td>
