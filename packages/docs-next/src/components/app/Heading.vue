@@ -2,12 +2,14 @@
   <component
     :is="`h${level}`"
     :class="['v-heading', map[level]]"
-    @click="onClick"
   >
     <a
       :href="href"
       class="text-decoration-none"
-    >#</a>
+      @click="onClick"
+    >
+      #
+    </a>
 
     {{ content }}
   </component>
@@ -41,9 +43,12 @@
       onClick (e) {
         e.preventDefault()
 
-        if (this.hash === this.href) return
+        const hash = this.href
 
-        this.$router.push(this.href)
+        if (this.hash === hash) return
+
+        this.$router.push({ hash })
+        this.$vuetify.goTo(hash)
       },
     },
   }
