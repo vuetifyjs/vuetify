@@ -42,6 +42,8 @@
     },
 
     updated () {
+      if (!this.initializing) return
+
       this.initializing = false
     },
   }

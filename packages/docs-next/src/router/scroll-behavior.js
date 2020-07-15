@@ -19,7 +19,7 @@ export default async function (vuetify, to, from, savedPosition) {
     // Options 1
     const options = {}
 
-    if (!scrollTo) options.duration = 0
+    if (!scrollTo || to.hash) options.duration = 0
 
     window.requestAnimationFrame(async () => {
       vuetify.framework

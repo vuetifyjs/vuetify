@@ -28,13 +28,15 @@
   export default {
     name: 'PageView',
 
-    async beforeRouteUpdate (to, _, next) {
-      // Avoid turning on the loader immediately
-      const timeout = setTimeout(this.reset, 50)
+    async beforeRouteUpdate (to, from, next) {
+      if (to.path !== from.path) {
+        // Avoid turning on the loader immediately
+        const timeout = setTimeout(this.reset, 50)
 
-      await this.update()
+        await this.update()
 
-      clearTimeout(timeout)
+        clearTimeout(timeout)
+      }
 
       next()
     },
