@@ -18,6 +18,7 @@ Object {
     "time": "",
     "weekday": 4,
     "year": 2019,
+    "category": null
   },
   "endIdentifier": 20190214,
   "endTimestampIdentifier": 201902142359,
@@ -40,6 +41,7 @@ Object {
     "time": "",
     "weekday": 3,
     "year": 2019,
+    "category": null
   },
   "startIdentifier": 20190213,
   "startTimestampIdentifier": 201902130000,
@@ -64,6 +66,7 @@ Object {
     "time": "",
     "weekday": 4,
     "year": 2019,
+    "category": null
   },
   "endIdentifier": 20190214,
   "endTimestampIdentifier": 201902142359,
@@ -86,6 +89,7 @@ Object {
     "time": "",
     "weekday": 3,
     "year": 2019,
+    "category": null
   },
   "startIdentifier": 20190213,
   "startTimestampIdentifier": 201902130000,
@@ -110,6 +114,7 @@ Object {
     "time": "",
     "weekday": 4,
     "year": 2019,
+    "category": null
   },
   "endIdentifier": 20190214,
   "endTimestampIdentifier": 201902142359,
@@ -132,6 +137,7 @@ Object {
     "time": "",
     "weekday": 3,
     "year": 2019,
+    "category": null
   },
   "startIdentifier": 20190213,
   "startTimestampIdentifier": 201902130000,
@@ -156,6 +162,7 @@ Object {
     "time": "",
     "weekday": 4,
     "year": 2019,
+    "category": null
   },
   "endIdentifier": 20190214,
   "endTimestampIdentifier": 201902142359,
@@ -178,6 +185,7 @@ Object {
     "time": "",
     "weekday": 3,
     "year": 2019,
+    "category": null
   },
   "startIdentifier": 20190213,
   "startTimestampIdentifier": 201902130000,
@@ -202,6 +210,7 @@ Object {
     "time": "",
     "weekday": 4,
     "year": 2019,
+    "category": null
   },
   "endIdentifier": 20190214,
   "endTimestampIdentifier": 201902140000,
@@ -224,6 +233,7 @@ Object {
     "time": "08:30",
     "weekday": 3,
     "year": 2019,
+    "category": null
   },
   "startIdentifier": 20190213,
   "startTimestampIdentifier": 201902130830,

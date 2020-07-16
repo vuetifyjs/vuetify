@@ -336,7 +336,10 @@ export default CalendarWithEvents.extend({
           }
         }
 
-        // categories = Object.keys(categoryMap)
+        categories = categories.filter(v => {
+          const category = typeof v === 'string' ? v : v[this.categoryText]
+          return Object.keys(categoryMap).includes(category)
+        })
       }
       return categories
     },
