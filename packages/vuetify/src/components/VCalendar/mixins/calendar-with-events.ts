@@ -82,7 +82,8 @@ export default CalendarBase.extend({
 
   props: {
     ...props.events,
-    ...props.category,
+    ...props.calendar,
+    categoryText: props.category.categoryText,
   },
 
   computed: {
@@ -124,7 +125,7 @@ export default CalendarBase.extend({
       return this.parsedWeekdays
     },
     categoryMode (): boolean {
-      return !!this.categories
+      return this.type === 'category'
     },
   },
 
