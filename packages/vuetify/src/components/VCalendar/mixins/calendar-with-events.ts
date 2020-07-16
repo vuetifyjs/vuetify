@@ -92,11 +92,6 @@ export default CalendarBase.extend({
     parsedEventOverlapThreshold (): number {
       return parseInt(this.eventOverlapThreshold)
     },
-    eventColorFunction (): CalendarEventColorFunction {
-      return typeof this.eventColor === 'function'
-        ? this.eventColor
-        : () => (this.eventColor as string)
-    },
     eventTimedFunction (): CalendarEventTimedFunction {
       return typeof this.eventTimed === 'function'
         ? this.eventTimed
@@ -131,6 +126,12 @@ export default CalendarBase.extend({
   },
 
   methods: {
+    eventColorFunction (e: CalendarEvent): CalendarEventColorFunction {
+      return typeof this.eventColor === 'function'
+        ? this.eventColor(e)
+        : e.color ? e.color
+          : this.eventColor
+    },
     parseEvent (input: CalendarEvent, index = 0): CalendarEventParsed {
       return parseEvent(
         input,
@@ -292,6 +293,7 @@ export default CalendarBase.extend({
       const singline = diffMinutes(event.start, event.end) <= this.parsedEventOverlapThreshold
       const formatTime = this.formatTime
       const timeSummary = () => formatTime(event.start, overlapsNoon) + ' - ' + formatTime(event.end, true)
+      console.log(typeof background, background)
       const eventSummary = () => {
         const name = this.eventNameFunction(event, timedEvent)
 
@@ -396,9 +398,9 @@ export default CalendarBase.extend({
         event => isEventOverlapping(event, start, end)
       )
     },
-    isEventForCategory (event: CalendarEventParsed, category: string | undefined | null): boolean {
+    isEventForCategory (event: CalendarEventParsed, category: any): boolean {
       return !this.categoryMode ||
-        category === event.category ||
+        category.name === event.category ||
         (typeof event.category !== 'string' && category === null)
     },
     getEventsForDay (day: CalendarDaySlotScope): CalendarEventParsed[] {

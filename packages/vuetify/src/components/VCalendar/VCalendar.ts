@@ -43,7 +43,7 @@ interface VCalendarRenderProps {
   component: string | Component
   maxDays: number
   weekdays: number[]
-  categories: string[]
+  categories: any[]
 }
 
 /* @vue/component */
@@ -294,10 +294,10 @@ export default CalendarWithEvents.extend({
     timestampToDate (timestamp: CalendarTimestamp): Date {
       return timestampToDate(timestamp)
     },
-    getCategoryList (categories: string[]): string[] {
+    getCategoryList (categories: any[]): string[] {
       if (!this.noEvents) {
         const categoryMap = categories.reduce((map, category, index) => {
-          map[category] = { index, count: 0 }
+          map[category[this.categoryText]] = { index, count: 0 }
 
           return map
         }, Object.create(null))
@@ -335,9 +335,8 @@ export default CalendarWithEvents.extend({
           }
         }
 
-        categories = Object.keys(categoryMap)
+        // categories = Object.keys(categoryMap)
       }
-
       return categories
     },
   },

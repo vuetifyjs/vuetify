@@ -61,7 +61,7 @@ describe('calendar-with-events.ts', () => {
 
     expect(wrapper.vm.eventColorFunction).toBeDefined()
     expect(typeof wrapper.vm.eventColorFunction).toBe('function')
-    expect(wrapper.vm.eventColorFunction()).toBe('green')
+    expect(wrapper.vm.eventColorFunction({})).toBe('green')
 
     wrapper.setProps({
       eventColor: 'red',
@@ -69,7 +69,7 @@ describe('calendar-with-events.ts', () => {
 
     expect(wrapper.vm.eventColorFunction).toBeDefined()
     expect(typeof wrapper.vm.eventColorFunction).toBe('function')
-    expect(wrapper.vm.eventColorFunction()).toBe('red')
+    expect(wrapper.vm.eventColorFunction({})).toBe('red')
   })
 
   it('should work with event text colors', async () => {
@@ -81,7 +81,7 @@ describe('calendar-with-events.ts', () => {
 
     expect(wrapper.vm.eventTextColorFunction).toBeDefined()
     expect(typeof wrapper.vm.eventTextColorFunction).toBe('function')
-    expect(wrapper.vm.eventTextColorFunction()).toBe('green')
+    expect(wrapper.vm.eventTextColorFunction({})).toBe('green')
 
     wrapper.setProps({
       eventTextColor: 'red',
@@ -89,7 +89,7 @@ describe('calendar-with-events.ts', () => {
 
     expect(wrapper.vm.eventTextColorFunction).toBeDefined()
     expect(typeof wrapper.vm.eventTextColorFunction).toBe('function')
-    expect(wrapper.vm.eventTextColorFunction()).toBe('red')
+    expect(wrapper.vm.eventTextColorFunction({})).toBe('red')
   })
 
   it('should work with event names', async () => {

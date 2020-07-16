@@ -207,6 +207,7 @@ export interface CalendarTimestamp {
   past: boolean
   present: boolean
   future: boolean
+  category: any
 }
 
 export type CalendarFormatter = (timestamp: CalendarTimestamp, short: boolean) => string

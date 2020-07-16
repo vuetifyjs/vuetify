@@ -158,6 +158,7 @@ export function parseTimestamp (input: VTimestampInput, required = false, now?: 
     past: false,
     present: false,
     future: false,
+    category: null,
   }
 
   updateWeekday(timestamp)
@@ -185,6 +186,7 @@ export function parseDate (date: Date): CalendarTimestamp {
     past: false,
     present: true,
     future: false,
+    category: null,
   })
 }
 
@@ -282,9 +284,9 @@ export function daysInMonth (year: number, month: number) {
 }
 
 export function copyTimestamp (timestamp: CalendarTimestamp): CalendarTimestamp {
-  const { date, time, year, month, day, weekday, hour, minute, hasDay, hasTime, past, present, future } = timestamp
+  const { date, time, year, month, day, weekday, hour, minute, hasDay, hasTime, past, present, future, category } = timestamp
 
-  return { date, time, year, month, day, weekday, hour, minute, hasDay, hasTime, past, present, future }
+  return { date, time, year, month, day, weekday, hour, minute, hasDay, hasTime, past, present, future, category }
 }
 
 export function padNumber (x: number, length: number): string {
