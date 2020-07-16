@@ -297,7 +297,8 @@ export default CalendarWithEvents.extend({
     getCategoryList (categories: any[]): string[] {
       if (!this.noEvents) {
         const categoryMap = categories.reduce((map, category, index) => {
-          map[category[this.categoryText]] = { index, count: 0 }
+          category = typeof category === 'string' ? category : category[this.categoryText]
+          map[category] = { index, count: 0 }
 
           return map
         }, Object.create(null))

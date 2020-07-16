@@ -80,7 +80,10 @@ export default CalendarBase.extend({
     ripple,
   },
 
-  props: props.events,
+  props: {
+    ...props.events,
+    ...props.category,
+  },
 
   computed: {
     noEvents (): boolean {
@@ -121,7 +124,7 @@ export default CalendarBase.extend({
       return this.parsedWeekdays
     },
     categoryMode (): boolean {
-      return false
+      return !!this.categories
     },
   },
 
@@ -293,7 +296,6 @@ export default CalendarBase.extend({
       const singline = diffMinutes(event.start, event.end) <= this.parsedEventOverlapThreshold
       const formatTime = this.formatTime
       const timeSummary = () => formatTime(event.start, overlapsNoon) + ' - ' + formatTime(event.end, true)
-      console.log(typeof background, background)
       const eventSummary = () => {
         const name = this.eventNameFunction(event, timedEvent)
 
@@ -400,7 +402,8 @@ export default CalendarBase.extend({
     },
     isEventForCategory (event: CalendarEventParsed, category: any): boolean {
       return !this.categoryMode ||
-        category.name === event.category ||
+        (typeof category === 'string' && category === event.category) ||
+        category[this.categoryText] === event.category ||
         (typeof event.category !== 'string' && category === null)
     },
     getEventsForDay (day: CalendarDaySlotScope): CalendarEventParsed[] {
