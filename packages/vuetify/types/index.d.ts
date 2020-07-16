@@ -207,7 +207,7 @@ export interface CalendarTimestamp {
   past: boolean
   present: boolean
   future: boolean
-  category: any
+  category?: object | string | undefined | null
 }
 
 export type CalendarFormatter = (timestamp: CalendarTimestamp, short: boolean) => string
@@ -226,7 +226,7 @@ export interface CalendarEventParsed {
   endTimestampIdentifier: number
   allDay: boolean
   index: number
-  category: string | false
+  category: object | string | false
 }
 
 export interface CalendarEventVisual {
@@ -241,7 +241,7 @@ export interface CalendarDaySlotScope extends CalendarTimestamp {
   outside: boolean
   index: number
   week: CalendarTimestamp[]
-  category: string | undefined | null
+  category?: object | string | undefined | null
 }
 
 export type CalendarTimeToY = (time: CalendarTimestamp | number | string, clamp?: boolean) => number
