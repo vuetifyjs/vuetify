@@ -126,7 +126,7 @@ export default CalendarBase.extend({
   },
 
   methods: {
-    eventColorFunction (e: CalendarEvent): CalendarEventColorFunction {
+    eventColorFunction (e: CalendarEvent): string {
       return typeof this.eventColor === 'function'
         ? this.eventColor(e)
         : e.color ? e.color

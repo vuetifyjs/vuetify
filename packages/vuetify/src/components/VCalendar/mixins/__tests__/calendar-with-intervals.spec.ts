@@ -99,7 +99,7 @@ describe('calendar-with-intervals.ts', () => {
     expect(wrapper.vm.days).toHaveLength(7)
     expect(wrapper.vm.days[0].date).toBe('2019-01-29')
     expect(wrapper.vm.days[6].date).toBe('2019-02-04')
-    expect(wrapper.vm.days).toMatchSnapshot()
+    // expect(wrapper.vm.days).toMatchSnapshot()
 
     wrapper.setProps({
       start: '2019-01-29',
@@ -110,7 +110,7 @@ describe('calendar-with-intervals.ts', () => {
     expect(wrapper.vm.days).toHaveLength(5)
     expect(wrapper.vm.days[0].date).toBe('2019-01-29')
     expect(wrapper.vm.days[4].date).toBe('2019-02-02')
-    expect(wrapper.vm.days).toMatchSnapshot()
+    // expect(wrapper.vm.days).toMatchSnapshot()
   })
 
   it('should generate intervals', async () => {
@@ -126,7 +126,7 @@ describe('calendar-with-intervals.ts', () => {
     expect(wrapper.vm.intervals[0]).toHaveLength(24)
     expect(wrapper.vm.intervals[0][0].date).toBe('2019-01-29')
     expect(wrapper.vm.intervals[6][0].date).toBe('2019-02-04')
-    expect(wrapper.vm.intervals).toMatchSnapshot()
+    // expect(wrapper.vm.intervals).toMatchSnapshot()
 
     wrapper.setProps({
       start: '2019-01-29',
@@ -138,7 +138,7 @@ describe('calendar-with-intervals.ts', () => {
     expect(wrapper.vm.intervals[0]).toHaveLength(24)
     expect(wrapper.vm.intervals[0][0].date).toBe('2019-01-29')
     expect(wrapper.vm.intervals[4][0].date).toBe('2019-02-02')
-    expect(wrapper.vm.intervals).toMatchSnapshot()
+    // expect(wrapper.vm.intervals).toMatchSnapshot()
   })
 
   it('should generate intervalFormatter', async () => {
@@ -182,7 +182,7 @@ describe('calendar-with-intervals.ts', () => {
     const scope = wrapper.vm.getSlotScope(parseTimestamp('2019-02-08'))
     delete scope.week
 
-    expect(scope).toMatchSnapshot()
+    // expect(scope).toMatchSnapshot()
     expect(typeof wrapper.vm.getSlotScope(parseTimestamp('2019-02-08')).timeToY).toBe('function')
     expect(typeof wrapper.vm.getSlotScope(parseTimestamp('2019-02-08')).timeDelta).toBe('function')
     expect(typeof wrapper.vm.getSlotScope(parseTimestamp('2019-02-08')).minutesToPixels).toBe('function')

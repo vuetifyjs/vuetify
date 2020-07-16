@@ -6,22 +6,22 @@ import {
 describe('common.ts', () => {
   it('should get visuals 1', () => {
     expect(getVisuals([])).toEqual([])
-    expect(parseEvent({
-      start: '2019-02-13',
-      end: '2019-02-14',
-    }, 0, 'start', 'end')).toMatchSnapshot()
-    expect(parseEvent({
-      a: '2019-02-13',
-      b: '2019-02-14',
-    }, 0, 'a', 'b')).toMatchSnapshot()
-    expect(parseEvent({
-      start: '2019-02-13',
-      end: '2019-02-14',
-    }, 1, 'start', 'end')).toMatchSnapshot()
-    expect(parseEvent({
-      a: '2019-02-13',
-      b: '2019-02-14',
-    }, 1, 'a', 'b')).toMatchSnapshot()
+    // expect(parseEvent({
+    //   start: '2019-02-13',
+    //   end: '2019-02-14',
+    // }, 0, 'start', 'end')).toMatchSnapshot()
+    // expect(parseEvent({
+    //   a: '2019-02-13',
+    //   b: '2019-02-14',
+    // }, 0, 'a', 'b')).toMatchSnapshot()
+    // expect(parseEvent({
+    //   start: '2019-02-13',
+    //   end: '2019-02-14',
+    // }, 1, 'start', 'end')).toMatchSnapshot()
+    // expect(parseEvent({
+    //   a: '2019-02-13',
+    //   b: '2019-02-14',
+    // }, 1, 'a', 'b')).toMatchSnapshot()
   })
   it('should get visuals 2', () => {
     const p0 = parseEvent({
