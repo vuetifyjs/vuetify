@@ -1,8 +1,11 @@
 <template>
   <div class="mt-16">
-    <div class="blue-grey--text text--darken-1 d-flex align-center justify-space-between">
-      <div class="font-weight-medium d-flex align-baseline grow">
-        <i18n path="contribute.edit-page">
+    <div class="blue-grey--text text--darken-1 d-flexalign-center justify-space-between">
+      <div class="font-weight-medium d-flex align-baseline grow flex-wrap">
+        <i18n
+          class="mb-2 mb-md-0"
+          path="contribute.edit-page"
+        >
           <template v-slot:url>
             <app-link :href="href">
               <span v-text="$t('github')" />
@@ -10,7 +13,7 @@
           </template>
         </i18n>
 
-        <v-spacer />
+        <v-spacer class="hidden-sm-and-down" />
 
         <div
           v-if="at"
