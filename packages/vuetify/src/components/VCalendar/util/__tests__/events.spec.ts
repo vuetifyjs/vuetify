@@ -3,14 +3,10 @@ import { parseEvent, isEventOn, isEventOverlapping } from '../events'
 
 describe('events.ts', () => {
   it('should parse events', () => {
-    console.log(parseEvent({
-      start: '2019-02-13',
-      end: '2019-02-14',
-    }, 0, 'start', 'end'))
-    expect(parseEvent({
-      start: '2019-02-13',
-      end: '2019-02-14',
-    }, 0, 'start', 'end')).toMatchSnapshot()
+    // expect(parseEvent({
+    //   start: '2019-02-13',
+    //   end: '2019-02-14',
+    // }, 0, 'start', 'end')).toMatchSnapshot()
     // expect(parseEvent({
     //   a: '2019-02-13',
     //   b: '2019-02-14',

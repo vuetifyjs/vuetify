@@ -49,9 +49,10 @@ export default VCalendarDaily.extend({
       return [this.$createElement('div', data, children)]
     },
     getCategoryScope (scope: any, category: any) {
+      const categoryName = typeof category === 'string' ? category : category[this.categoryText]
       return {
         ...scope,
-        category: category === this.categoryForInvalid ? null : category,
+        category: categoryName === this.categoryForInvalid ? null : category,
       }
     },
     genDayHeaderCategory (day: CalendarTimestamp, scope: any): VNode {
