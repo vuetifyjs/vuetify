@@ -126,7 +126,7 @@ describe('calendar-with-intervals.ts', () => {
     expect(wrapper.vm.intervals[0]).toHaveLength(24)
     expect(wrapper.vm.intervals[0][0].date).toBe('2019-01-29')
     expect(wrapper.vm.intervals[6][0].date).toBe('2019-02-04')
-    // expect(wrapper.vm.intervals).toMatchSnapshot()
+    expect(wrapper.vm.intervals).toMatchSnapshot()
 
     wrapper.setProps({
       start: '2019-01-29',
