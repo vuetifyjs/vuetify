@@ -108,11 +108,11 @@
       },
       genItem (item, group) {
         let to = item.to
-        const parent = (item.items || item.group)
+        const parent = !!item.items
         const items = parent && this.genItems(item.items, group)
 
-        if (!to) {
-          const page = !items && item.title
+        if (!item.href) {
+          const page = to || (!items && item.title)
           const url = [
             this.locale,
             group,

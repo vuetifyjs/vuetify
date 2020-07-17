@@ -212,17 +212,17 @@
     ]
   },
   {
-    "title": "themes",
-    "icon": "$mdiVuetify",
+    "title": "resources",
+    "icon": "$mdiTeach",
     "items": [
-      "premium"
+      "vuetify-themes"
     ]
   },
   {
-    "title": "jobs",
-    "icon": "$mdiBriefcaseSearch",
+    "title": "company",
+    "icon": "$mdiVuetify",
     "items": [
-      "for-vue"
+      "advertising-with-us"
     ]
   }
 ]

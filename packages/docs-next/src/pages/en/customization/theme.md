@@ -1,6 +1,6 @@
 ---
 meta:
-  title: Theme
+  title: Premium Themes
   description: Setup your application's theme and supplemental colors in a flash.
   keywords: themes
 related:
@@ -9,7 +9,7 @@ related:
   - /getting-started/pre-made-layouts/
 ---
 
-# Theme
+# Premium Themes
 
 Easily change the colors of your application programmatically. Rebuild the default stylesheet and customize various aspects of the framework for your particular needs.
 

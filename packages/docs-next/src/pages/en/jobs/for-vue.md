@@ -14,8 +14,6 @@ nav: Jobs for Vue
 
 Find top Vue.js developers, ready to join your team; or browse available openings and land your next job!
 
-<entry-ad />
-
 <vue-jobs />
 
 <backmatter />

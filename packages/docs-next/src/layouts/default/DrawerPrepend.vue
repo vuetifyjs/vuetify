@@ -15,6 +15,8 @@
       <notifications />
 
       <advanced-toggle />
+
+      <jobs-link />
     </v-list-item>
   </v-toolbar>
 </template>
