@@ -177,6 +177,11 @@ export default CalendarWithEvents.extend({
           ? this.categories as string[]
           : []
     },
+    parsedCategoryText (): Function {
+      return typeof this.categoryText === 'string'
+        ? (category: any) => category[this.categoryText as string]
+        : this.categoryText
+    },
   },
 
   watch: {
@@ -193,6 +198,9 @@ export default CalendarWithEvents.extend({
   },
 
   methods: {
+    getCategoryName (category: any): string {
+      return typeof category === 'string' ? category : this.parsedCategoryText(category) as string
+    },
     checkChange (): void {
       const { lastStart, lastEnd } = this
       const { start, end } = this.renderProps
@@ -297,8 +305,8 @@ export default CalendarWithEvents.extend({
     getCategoryList (categories: any[]): string[] {
       if (!this.noEvents) {
         const categoryMap = categories.reduce((map, category, index) => {
-          category = typeof category === 'string' ? category : category[this.categoryText]
-          map[category] = { index, count: 0 }
+          const categoryName = this.getCategoryName(category)
+          map[categoryName] = { index, count: 0 }
 
           return map
         }, Object.create(null))
@@ -337,8 +345,8 @@ export default CalendarWithEvents.extend({
         }
 
         categories = categories.filter(v => {
-          const category = typeof v === 'string' ? v : v[this.categoryText]
-          return Object.keys(categoryMap).includes(category)
+          const categoryName = this.getCategoryName(v)
+          return Object.keys(categoryMap).includes(categoryName)
         })
       }
       return categories

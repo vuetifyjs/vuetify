@@ -83,7 +83,7 @@ export default CalendarBase.extend({
   props: {
     ...props.events,
     ...props.calendar,
-    categoryText: props.category.categoryText,
+    ...props.category,
   },
 
   computed: {
@@ -403,8 +403,7 @@ export default CalendarBase.extend({
     },
     isEventForCategory (event: CalendarEventParsed, category: any): boolean {
       return !this.categoryMode ||
-        (typeof category === 'string' && category === event.category) ||
-        category[this.categoryText] === event.category ||
+        category.categoryName === event.category ||
         (typeof event.category !== 'string' && category === null)
     },
     getEventsForDay (day: CalendarDaySlotScope): CalendarEventParsed[] {

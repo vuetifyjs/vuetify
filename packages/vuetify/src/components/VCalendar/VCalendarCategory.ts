@@ -33,9 +33,17 @@ export default VCalendarDaily.extend({
           ? this.categories as any[]
           : []
     },
+    parsedCategoryText (): Function {
+      return typeof this.categoryText === 'string'
+        ? (category: any) => category[this.categoryText as string]
+        : this.categoryText
+    },
   },
 
   methods: {
+    getCategoryName (category: any): string {
+      return typeof category === 'string' ? category : this.parsedCategoryText(category) as string
+    },
     genDayHeader (day: CalendarTimestamp, index: number): VNode[] {
       const data = {
         staticClass: 'v-calendar-category__columns',
@@ -44,33 +52,35 @@ export default VCalendarDaily.extend({
         week: this.days, ...day, index,
       }
 
-      const children = this.parsedCategories.map(category => this.genDayHeaderCategory(day, this.getCategoryScope(scope, category)))
+      const children = this.parsedCategories.map(category => {
+        const categoryName = this.getCategoryName(category)
+        category.categoryName = categoryName
+        return this.genDayHeaderCategory(day, this.getCategoryScope(scope, category))
+      })
 
       return [this.$createElement('div', data, children)]
     },
     getCategoryScope (scope: any, category: any) {
-      const categoryName = typeof category === 'string' ? category : category[this.categoryText]
       return {
         ...scope,
-        category: categoryName === this.categoryForInvalid ? null : category,
+        category: category.categoryName === this.categoryForInvalid ? null : category,
       }
     },
     genDayHeaderCategory (day: CalendarTimestamp, scope: any): VNode {
-      const category = typeof scope.category === 'string' ? scope.category : scope.category[this.categoryText]
       return this.$createElement('div', {
         staticClass: 'v-calendar-category__column-header',
         on: this.getDefaultMouseEventHandlers(':day-category', e => {
           return this.getCategoryScope(this.getSlotScope(day), scope.category)
         }),
       }, [
-        getSlot(this, 'category', scope) || this.genDayHeaderCategoryTitle(category),
+        getSlot(this, 'category', scope) || this.genDayHeaderCategoryTitle(scope.category.categoryName),
         getSlot(this, 'day-header', scope),
       ])
     },
-    genDayHeaderCategoryTitle (category: any) {
+    genDayHeaderCategoryTitle (categoryName: any) {
       return this.$createElement('div', {
         staticClass: 'v-calendar-category__category',
-      }, category === null ? this.categoryForInvalid : category)
+      }, categoryName === null ? this.categoryForInvalid : categoryName)
     },
     genDays (): VNode[] {
       const d = this.days[0]
