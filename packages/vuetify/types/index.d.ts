@@ -182,7 +182,7 @@ export interface TouchWrapper extends TouchHandlers {
   offsetY: number
 }
 
-export type CalendarCategory = (string | {
+export type CalendarCategory = (false | null | string | {
   name: string
 })
 

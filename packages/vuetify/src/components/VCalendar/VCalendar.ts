@@ -170,17 +170,17 @@ export default CalendarWithEvents.extend({
         timeZone: 'UTC', month: 'short',
       })
     },
-    parsedCategories (): string[] {
+    parsedCategories (): any[] {
       return typeof this.categories === 'string' && this.categories
         ? this.categories.split(/\s*,\s*/)
         : Array.isArray(this.categories)
-          ? this.categories as string[]
+          ? this.categories.map((v: any) => {
+            const categoryName = this.parsedCategoryText(v)
+            if (typeof v === 'string') v = { name: v }
+            v.categoryName = categoryName
+            return v
+          }) as any[]
           : []
-    },
-    parsedCategoryText (): Function {
-      return typeof this.categoryText === 'string'
-        ? (category: any) => category[this.categoryText as string]
-        : this.categoryText
     },
   },
 
@@ -198,8 +198,10 @@ export default CalendarWithEvents.extend({
   },
 
   methods: {
-    getCategoryName (category: any): string {
-      return typeof category === 'string' ? category : this.parsedCategoryText(category) as string
+    parsedCategoryText (category: any): string {
+      return typeof this.categoryText === 'string'
+        ? category[this.categoryText as string]
+        : this.categoryText(category) as string
     },
     checkChange (): void {
       const { lastStart, lastEnd } = this
@@ -305,8 +307,7 @@ export default CalendarWithEvents.extend({
     getCategoryList (categories: any[]): string[] {
       if (!this.noEvents) {
         const categoryMap = categories.reduce((map, category, index) => {
-          const categoryName = this.getCategoryName(category)
-          map[categoryName] = { index, count: 0 }
+          map[category.categoryName] = { index, count: 0 }
 
           return map
         }, Object.create(null))
@@ -345,8 +346,7 @@ export default CalendarWithEvents.extend({
         }
 
         categories = categories.filter(v => {
-          const categoryName = this.getCategoryName(v)
-          return Object.keys(categoryMap).includes(categoryName)
+          return Object.keys(categoryMap).includes(v.categoryName)
         })
       }
       return categories

@@ -36,6 +36,7 @@
   },
   "props": {
     "categories": "Specifies what categories to display in the `category` view. This controls the order of the categories as well. If the calendar uses events any categories specified in those events not specified in this value are dynamically rendered in the view unless `category-hide-dynamic` is true.",
+    "categoryText": "Set property of items's text value",
     "categoryHideDynamic": "Sets whether categories specified in an event should be hidden if it's not defined in `categories`.",
     "categoryShowAll": "Set whether the `category` view should show all defined `categories` even if there are no events for a category.",
     "categoryForInvalid": "The category to place events in that have invalid categories. A category is invalid when it is not a string. By default events without a category are not displayed until this value is specified.",
