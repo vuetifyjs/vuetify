@@ -82,6 +82,8 @@
             return !this.unotifications.includes(notification.slug)
           })
 
+          if (!snackbar) return
+
           this.snackbar = {
             slug: snackbar.slug,
             ...snackbar.metadata,
