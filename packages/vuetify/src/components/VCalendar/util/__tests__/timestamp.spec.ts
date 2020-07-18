@@ -381,7 +381,7 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
     expect(parseTimestamp('2019-03-01').weekday).toBe(5)
   })
 
-  it.skip('should create interval list', () => {
+  it('should create interval list', () => {
     expect(createIntervalList(parseTimestamp('2019-02-08'), 30, 15, 10)).toMatchSnapshot()
     expect(createIntervalList(parseTimestamp('2019-02-08'), 15, 15, 10)).toMatchSnapshot()
     expect(createIntervalList(parseTimestamp('2019-02-08'), 10, 5, 2)).toMatchSnapshot()

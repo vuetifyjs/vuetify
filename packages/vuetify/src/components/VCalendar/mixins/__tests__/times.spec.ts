@@ -28,7 +28,7 @@ describe('times.ts', () => {
     })
 
     expect(wrapper.vm.parsedNow).toBeDefined()
-    // expect(wrapper.vm.parsedNow).toMatchSnapshot()
+    expect(wrapper.vm.parsedNow).toMatchSnapshot()
   })
 
   it('should update day', async () => {

@@ -5,6 +5,7 @@ Object {
   "allDay": true,
   "category": false,
   "end": Object {
+    "category": null,
     "date": "2019-02-14",
     "day": 14,
     "future": false,
@@ -18,7 +19,6 @@ Object {
     "time": "",
     "weekday": 4,
     "year": 2019,
-    "category": null
   },
   "endIdentifier": 20190214,
   "endTimestampIdentifier": 201902142359,
@@ -28,6 +28,7 @@ Object {
     "start": "2019-02-13",
   },
   "start": Object {
+    "category": null,
     "date": "2019-02-13",
     "day": 13,
     "future": false,
@@ -41,7 +42,6 @@ Object {
     "time": "",
     "weekday": 3,
     "year": 2019,
-    "category": null
   },
   "startIdentifier": 20190213,
   "startTimestampIdentifier": 201902130000,
@@ -53,6 +53,7 @@ Object {
   "allDay": true,
   "category": false,
   "end": Object {
+    "category": null,
     "date": "2019-02-14",
     "day": 14,
     "future": false,
@@ -66,7 +67,6 @@ Object {
     "time": "",
     "weekday": 4,
     "year": 2019,
-    "category": null
   },
   "endIdentifier": 20190214,
   "endTimestampIdentifier": 201902142359,
@@ -76,6 +76,7 @@ Object {
     "b": "2019-02-14",
   },
   "start": Object {
+    "category": null,
     "date": "2019-02-13",
     "day": 13,
     "future": false,
@@ -89,7 +90,6 @@ Object {
     "time": "",
     "weekday": 3,
     "year": 2019,
-    "category": null
   },
   "startIdentifier": 20190213,
   "startTimestampIdentifier": 201902130000,
@@ -101,6 +101,7 @@ Object {
   "allDay": true,
   "category": false,
   "end": Object {
+    "category": null,
     "date": "2019-02-14",
     "day": 14,
     "future": false,
@@ -114,7 +115,6 @@ Object {
     "time": "",
     "weekday": 4,
     "year": 2019,
-    "category": null
   },
   "endIdentifier": 20190214,
   "endTimestampIdentifier": 201902142359,
@@ -124,6 +124,7 @@ Object {
     "start": "2019-02-13",
   },
   "start": Object {
+    "category": null,
     "date": "2019-02-13",
     "day": 13,
     "future": false,
@@ -137,7 +138,6 @@ Object {
     "time": "",
     "weekday": 3,
     "year": 2019,
-    "category": null
   },
   "startIdentifier": 20190213,
   "startTimestampIdentifier": 201902130000,
@@ -149,6 +149,7 @@ Object {
   "allDay": true,
   "category": false,
   "end": Object {
+    "category": null,
     "date": "2019-02-14",
     "day": 14,
     "future": false,
@@ -162,7 +163,6 @@ Object {
     "time": "",
     "weekday": 4,
     "year": 2019,
-    "category": null
   },
   "endIdentifier": 20190214,
   "endTimestampIdentifier": 201902142359,
@@ -172,6 +172,7 @@ Object {
     "b": "2019-02-14",
   },
   "start": Object {
+    "category": null,
     "date": "2019-02-13",
     "day": 13,
     "future": false,
@@ -185,7 +186,6 @@ Object {
     "time": "",
     "weekday": 3,
     "year": 2019,
-    "category": null
   },
   "startIdentifier": 20190213,
   "startTimestampIdentifier": 201902130000,
@@ -197,6 +197,7 @@ Object {
   "allDay": false,
   "category": false,
   "end": Object {
+    "category": null,
     "date": "2019-02-14",
     "day": 14,
     "future": false,
@@ -210,7 +211,6 @@ Object {
     "time": "",
     "weekday": 4,
     "year": 2019,
-    "category": null
   },
   "endIdentifier": 20190214,
   "endTimestampIdentifier": 201902140000,
@@ -220,6 +220,7 @@ Object {
     "start": "2019-02-13 8:30",
   },
   "start": Object {
+    "category": null,
     "date": "2019-02-13",
     "day": 13,
     "future": false,
@@ -233,7 +234,6 @@ Object {
     "time": "08:30",
     "weekday": 3,
     "year": 2019,
-    "category": null
   },
   "startIdentifier": 20190213,
   "startTimestampIdentifier": 201902130830,

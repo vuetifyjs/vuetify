@@ -5,6 +5,7 @@ Object {
   "allDay": true,
   "category": false,
   "end": Object {
+    "category": null,
     "date": "2019-02-14",
     "day": 14,
     "future": false,
@@ -27,6 +28,7 @@ Object {
     "start": "2019-02-13",
   },
   "start": Object {
+    "category": null,
     "date": "2019-02-13",
     "day": 13,
     "future": false,
@@ -51,6 +53,7 @@ Object {
   "allDay": true,
   "category": false,
   "end": Object {
+    "category": null,
     "date": "2019-02-14",
     "day": 14,
     "future": false,
@@ -73,6 +76,7 @@ Object {
     "b": "2019-02-14",
   },
   "start": Object {
+    "category": null,
     "date": "2019-02-13",
     "day": 13,
     "future": false,
@@ -97,6 +101,7 @@ Object {
   "allDay": true,
   "category": false,
   "end": Object {
+    "category": null,
     "date": "2019-02-14",
     "day": 14,
     "future": false,
@@ -119,6 +124,7 @@ Object {
     "start": "2019-02-13",
   },
   "start": Object {
+    "category": null,
     "date": "2019-02-13",
     "day": 13,
     "future": false,
@@ -143,6 +149,7 @@ Object {
   "allDay": true,
   "category": false,
   "end": Object {
+    "category": null,
     "date": "2019-02-14",
     "day": 14,
     "future": false,
@@ -165,6 +172,7 @@ Object {
     "b": "2019-02-14",
   },
   "start": Object {
+    "category": null,
     "date": "2019-02-13",
     "day": 13,
     "future": false,
