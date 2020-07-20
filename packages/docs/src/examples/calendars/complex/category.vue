@@ -42,7 +42,7 @@
       events: [],
       colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
       names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
-      categories: ['John Smith', 'Tori Walker'],
+      categories: ['John Smith', 'Tori Walker', 'Nate Quinn', 'Bob Dylan'],
     }),
     mounted () {
       this.$refs.calendar.checkChange()

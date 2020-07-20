@@ -32,6 +32,7 @@
         class="ma-2"
       ></v-select>
       <v-select
+        v-if="type !== 'category'"
         v-model="weekday"
         :items="weekdays"
         dense
@@ -56,6 +57,8 @@
         :weekdays="weekday"
         :type="type"
         :events="events"
+        :categories="categories"
+        :category-text="categoryText"
         :event-overlap-mode="mode"
         :event-overlap-threshold="30"
         :event-color="getEventColor"
@@ -69,8 +72,10 @@
   export default {
     data: () => ({
       type: 'month',
-      types: ['month', 'week', 'day', '4day'],
+      types: ['month', 'week', 'day', '4day', 'category'],
       mode: 'stack',
+      categories: ['John Smith', 'Tori Walker', 'Nate Quinn', 'Bob Dylan'],
+      categoryText: 'name',
       modes: ['stack', 'column'],
       weekday: [0, 1, 2, 3, 4, 5, 6],
       weekdays: [
@@ -91,7 +96,7 @@
         const min = new Date(`${start.date}T00:00:00`)
         const max = new Date(`${end.date}T23:59:59`)
         const days = (max.getTime() - min.getTime()) / 86400000
-        const eventCount = this.rnd(days, days + 20)
+        const eventCount = this.rnd(days, days + 50)
 
         for (let i = 0; i < eventCount; i++) {
           const allDay = this.rnd(0, 3) === 0
@@ -106,6 +111,7 @@
             end: second,
             color: this.colors[this.rnd(0, this.colors.length - 1)],
             timed: !allDay,
+            category: this.categories[this.rnd(0, this.categories.length - 1)],
           })
         }
 

@@ -54,6 +54,12 @@
         label="Short weekdays"
         hide-details
       ></v-checkbox>
+      <v-checkbox
+        v-if="type === 'category'"
+        v-model="categoryShowAll"
+        label="Category show all"
+        hide-details
+      ></v-checkbox>
       <v-select
         v-model="color"
         :items="colorOptions"
@@ -212,6 +218,7 @@
         label="Event Overlap Mode"
       ></v-select>
       <v-select
+        v-if="type !== 'category'"
         v-model="weekdays"
         :items="weekdaysOptions"
         dense
@@ -277,6 +284,8 @@
           :max-days="maxDays"
           :now="now"
           :dark="dark"
+          :categories="categories"
+          :category-show-all="categoryShowAll"
           :weekdays="weekdays"
           :first-interval="intervals.first"
           :interval-minutes="intervals.minutes"
@@ -347,6 +356,8 @@
       events: [],
       colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
       names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
+      categories: ['John Smith', 'Tori Walker', 'Nate Quinn', 'Bob Dylan'],
+      categoryShowAll: true,
       type: 'month',
       typeOptions: [
         { text: 'Day', value: 'day' },
@@ -355,6 +366,7 @@
         { text: 'Month', value: 'month' },
         { text: 'Custom Daily', value: 'custom-daily' },
         { text: 'Custom Weekly', value: 'custom-weekly' },
+        { text: 'Category', value: 'category' },
       ],
       mode: 'stack',
       modeOptions: [
@@ -463,6 +475,7 @@
             end: second,
             timed: !allDay,
             color: this.colors[this.rnd(0, this.colors.length - 1)],
+            category: this.categories[this.rnd(0, this.categories.length - 2)],
           })
         }
 

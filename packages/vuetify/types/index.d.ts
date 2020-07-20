@@ -182,6 +182,10 @@ export interface TouchWrapper extends TouchHandlers {
   offsetY: number
 }
 
+export type CalendarCategory = (false | null | string | {
+  name: string
+})
+
 export type TouchValue = TouchHandlers & {
   parent?: boolean
   options?: AddEventListenerOptions
@@ -207,6 +211,7 @@ export interface CalendarTimestamp {
   past: boolean
   present: boolean
   future: boolean
+  category?: CalendarCategory
 }
 
 export type CalendarFormatter = (timestamp: CalendarTimestamp, short: boolean) => string
@@ -214,6 +219,7 @@ export type CalendarFormatter = (timestamp: CalendarTimestamp, short: boolean) =
 export interface CalendarEvent {
   [prop: string]: any
 }
+
 
 export interface CalendarEventParsed {
   input: CalendarEvent
@@ -225,7 +231,7 @@ export interface CalendarEventParsed {
   endTimestampIdentifier: number
   allDay: boolean
   index: number
-  category: string | false
+  category?: CalendarCategory
 }
 
 export interface CalendarEventVisual {
@@ -240,7 +246,7 @@ export interface CalendarDaySlotScope extends CalendarTimestamp {
   outside: boolean
   index: number
   week: CalendarTimestamp[]
-  category: string | undefined | null
+  category?: CalendarCategory
 }
 
 export type CalendarTimeToY = (time: CalendarTimestamp | number | string, clamp?: boolean) => number
@@ -263,6 +269,8 @@ export type CalendarEventCategoryFunction = (event: CalendarEvent) => string
 export type CalendarEventNameFunction = (event: CalendarEventParsed, timedEvent: boolean) => string
 
 export type DataTableFilterFunction = (value: any, search: string | null, item: any) => boolean
+
+export type CalendarCategoryTextFunction = (category: CalendarCategory) => string
 
 export interface DataTableHeader<T extends any = any> {
   text: string
