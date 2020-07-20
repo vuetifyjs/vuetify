@@ -82,7 +82,7 @@ Columns will automatically take up an equal amount of space within their parent 
 
 #### Justify
 
-Change the horizontal alignment of flex items and their parents using the **justify** and **justify-self** properties.
+Change the horizontal alignment of flex items using the **justify** property.
 
 <example file="grid/prop-justify" />
 
