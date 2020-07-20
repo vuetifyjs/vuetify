@@ -7,7 +7,7 @@
   >
     <v-row justify="space-between">
       <v-col cols="8">
-        <v-card-title primary-title>
+        <v-card-title>
           <div>
             <div class="headline">
               Halycon Days
