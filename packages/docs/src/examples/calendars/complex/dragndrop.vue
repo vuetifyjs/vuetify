@@ -187,9 +187,12 @@
 
 <style scoped lang="scss">
 .v-event-draggable {
+  padding-left: 6px;
+}
+
+.v-event-timed {
   user-select: none;
   -webkit-user-select: none;
-  padding-left: 6px;
 }
 
 .v-event-drag-bottom {

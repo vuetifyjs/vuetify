@@ -247,19 +247,8 @@ export default baseMixins.extend<options>().extend({
       this.initialValue = val
       this.setSelectedItems()
     },
-    menuIsBooted () {
-      window.setTimeout(() => {
-        if (this.getContent() && this.getContent().addEventListener) {
-          this.getContent().addEventListener('scroll', this.onScroll, false)
-        }
-      })
-    },
     isMenuActive (val) {
       window.setTimeout(() => this.onMenuActiveChange(val))
-
-      if (!val) return
-
-      this.menuIsBooted = true
     },
     items: {
       immediate: true,
@@ -520,6 +509,7 @@ export default baseMixins.extend<options>().extend({
             this.isMenuActive = val
             this.isFocused = val
           },
+          scroll: this.onScroll,
         },
         ref: 'menu',
       }, [this.genList()])
@@ -729,7 +719,7 @@ export default baseMixins.extend<options>().extend({
       if (!this.isMenuActive) {
         requestAnimationFrame(() => (this.getContent().scrollTop = 0))
       } else {
-        if (this.lastItem >= this.computedItems.length) return
+        if (this.lastItem > this.computedItems.length) return
 
         const showMoreItems = (
           this.getContent().scrollHeight -

@@ -39,11 +39,12 @@ describe('VVirtualScroll.ts', () => {
     mock.mockRestore()
   })
 
-  it('should render component with scopedSlot and match snapshot', () => {
+  it('should render component with scopedSlot and match snapshot', async () => {
     const wrapper = mountFunction({
       propsData,
     })
 
+    await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -81,5 +82,23 @@ describe('VVirtualScroll.ts', () => {
     wrapper.trigger('scroll')
 
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should provide the correct item index', () => {
+    const helpers = require('../../../util/helpers')
+    const spy = jest.spyOn(helpers, 'getSlot')
+    const wrapper = mountFunction({
+      propsData,
+      computed: { firstToRender: () => 2 },
+    })
+
+    wrapper.setData({ first: 2 })
+
+    wrapper.vm.genChild(0, 1)
+
+    expect(spy.mock.calls[0][2]).toEqual({
+      item: 0,
+      index: 3,
+    })
   })
 })

@@ -9,7 +9,7 @@
     "description": "Whoops, looks like whatever you are looking for is not there!",
     "keywords": ""
   },
-  "introduction/guide": {
+  "getting-started/guide": {
     "title": "Beginner's Guide",
     "description": "Page in Development 🔨. Check back soon for more information.",
     "keywords": "guide, vuetify beginner, starting vuetify, vuetify guide"

@@ -138,7 +138,7 @@
       "complete": false,
       "title": "v2.3 Release **(Liberator)**",
       "caption": "June 2020",
-      "text": "The v2.3 release was dropped earlier in the year to focus on v3 development but was revived when COVID-19 showed up. This release is packed full of quality of life changes, new features such as the `v-virtual-scroller` component, responsive typography css classes, ",
+      "text": "The v2.3 release was dropped earlier in the year to focus on v3 development but was revived when COVID-19 showed up. This release is packed full of quality of life changes, new features such as the `v-virtual-scroll` component, responsive typography css classes, ",
       "features": {
         "#### Objectives": [
           "Add new css helper classes for `text-decoration`, `border-radius`, `typography`, and more.",

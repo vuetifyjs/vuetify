@@ -17,7 +17,6 @@ import Touch from '../../directives/touch'
 
 // Utilities
 import mixins, { ExtractVue } from '../../util/mixins'
-import { deprecate } from '../../util/console'
 
 // Types
 import Vue, { VNode } from 'vue'
@@ -76,7 +75,6 @@ export const BaseSlideGroup = mixins<options &
     showArrows: {
       type: [Boolean, String],
       validator: v => (
-        // TODO: remove boolean in v3
         typeof v === 'boolean' || [
           'always',
           'desktop',
@@ -121,12 +119,11 @@ export const BaseSlideGroup = mixins<options &
         // Always show arrows on desktop
         case 'desktop': return !this.isMobile
 
-        // TODO: remove in v3
-        case true: deprecate('true', 'mobile', this)
+        // Show arrows on mobile when overflowing.
+        // This matches the default 2.2 behavior
+        case true: return this.isOverflowing
 
-        // Always show on mobile or
-        // when overflowed on desktop
-        // eslint-disable-next-line no-fallthrough
+        // Always show on mobile
         case 'mobile': return (
           this.isMobile ||
           this.isOverflowing

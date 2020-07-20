@@ -10,6 +10,7 @@
 
 html {
   box-sizing: border-box;
+  overflow-y: scroll; /* All browsers without overlaying scrollbars */
   -webkit-text-size-adjust: 100%; /* Prevent adjustments of font size after orientation changes in iOS */
   word-break: normal;
   -moz-tab-size: 4;
@@ -132,6 +133,7 @@ input {
   outline-offset: -2px; /* Correct the outline style in Safari */
 }
 
+[type="search"]::-webkit-search-cancel-button,
 [type="search"]::-webkit-search-decoration {
   -webkit-appearance: none; /* Remove the inner padding in Chrome and Safari on macOS */
 }
@@ -278,6 +280,6 @@ svg:not([fill]) {
 }
 
 /* Specify the unstyled cursor of disabled, not-editable, or otherwise inoperable elements */
-[aria-disabled] {
+[aria-disabled="true"] {
   cursor: default;
 }
