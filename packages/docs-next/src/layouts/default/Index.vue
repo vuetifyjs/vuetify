@@ -108,7 +108,7 @@
       },
       genItem (item, group) {
         let to = item.to
-        const parent = !!item.items
+        const parent = !!item.items || item.group
         const items = parent && this.genItems(item.items, group)
 
         if (!item.href) {
