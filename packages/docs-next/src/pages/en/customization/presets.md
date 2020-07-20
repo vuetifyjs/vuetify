@@ -194,7 +194,7 @@ A Vuetify preset is a npm package that provides framework wide options and custo
 * provides **global overrides** for styling that is not coverable through variables
 * a _streamlined approach_ to modifying a Vuetify application's style and options
 
-```txt
+```cmd
 # Vuetify preset plugin structure
 .
 ├── generator.js        # generator (optional)
