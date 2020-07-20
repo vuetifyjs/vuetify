@@ -75,6 +75,8 @@ export class Breakpoint extends Service implements IBreakpoint {
   }
 
   public init () {
+    this.update()
+
     /* istanbul ignore if */
     if (typeof window === 'undefined') return
 
@@ -83,8 +85,6 @@ export class Breakpoint extends Service implements IBreakpoint {
       this.onResize.bind(this),
       { passive: true }
     )
-
-    this.update()
   }
 
   /* eslint-disable-next-line max-statements */
