@@ -4,7 +4,7 @@ const path = require('path')
 const Mode = require('frontmatter-markdown-loader/mode')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const { ContextReplacementPlugin } = require('webpack')
-const { EN_LOCALE_ONLY } = require('./src/util/globals')
+const { EN_LOCALE_ONLY, IS_PROD } = require('./src/util/globals')
 const { md } = require('./build/markdown-it')
 
 module.exports = {
@@ -61,6 +61,11 @@ module.exports = {
     if (EN_LOCALE_ONLY) {
       config.plugin('ContextReplacementPlugin')
         .use(ContextReplacementPlugin, [/@\/pages/, /^\.\/en\/.*\.md$/])
+    }
+
+    if (IS_PROD) {
+      config.plugin('sitemap')
+      .use(path.resolve('./build/sitemap.js'))
     }
 
     if (process.env.ANALYZE === 'true') {

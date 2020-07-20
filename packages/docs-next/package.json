@@ -62,6 +62,7 @@
     "raw-loader": "^4.0.1",
     "sass": "^1.26.3",
     "sass-loader": "^8.0.2",
+    "sitemap-webpack-plugin": "^0.8.1",
     "vee-validate": "^3.3.7",
     "vue-cli-plugin-vuetify": "latest",
     "vue-cookies": "^1.7.0",
