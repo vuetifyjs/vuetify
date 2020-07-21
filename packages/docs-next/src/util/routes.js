@@ -1,5 +1,5 @@
 // Imports
-import languages from '@/i18n/locales'
+import locales from '@/i18n/locales'
 import { kebabCase } from 'lodash'
 import { leadingSlash, trailingSlash } from '@/util/helpers'
 
@@ -9,7 +9,7 @@ import { IN_BROWSER } from '@/util/globals'
 // Regexp
 const genericLocaleRegexp = /[a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3}/
 const fallbackLocale = genericLocaleRegexp.source
-const languagePattern = languages.map(lang => lang.alternate || lang.locale).join('|')
+const languagePattern = locales.map(lang => lang.alternate || lang.locale).join('|')
 
 export function abort (code = 404) {
   return {
