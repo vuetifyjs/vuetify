@@ -1,6 +1,6 @@
 <template>
   <v-container
-    class="px-4 px-sm-8 px-md-12"
+    class="pa-4 pa-sm-6 pa-md-8"
     tag="section"
   >
     <v-responsive
