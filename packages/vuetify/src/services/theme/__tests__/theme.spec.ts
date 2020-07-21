@@ -45,13 +45,17 @@ describe('Theme.ts', () => {
   let instance: Vue
 
   beforeEach(() => {
-    mockTheme = (theme?: Partial<ThemeOptions>) => {
-      const options = { theme: theme || {} }
+    mockTheme = (themeOptions?: Partial<ThemeOptions>) => {
+      const options = { theme: themeOptions || {} }
+      const theme = new Theme(mergeDeep(rootFactory(), options))
+      instance = new Vue({
+        beforeCreate () {
+          theme.init(this)
+        },
+      })
 
-      return new Theme(mergeDeep(rootFactory(), options))
+      return theme
     }
-
-    instance = new Vue()
   })
 
   afterEach(() => {
@@ -62,8 +66,6 @@ describe('Theme.ts', () => {
 
   it('should disable theme colors', () => {
     const theme = mockTheme({ disable: true })
-
-    theme.init(instance)
 
     expect(theme.styleEl).toBeFalsy()
   })
@@ -78,8 +80,6 @@ describe('Theme.ts', () => {
         }),
       },
     })
-
-    theme.init(instance)
 
     const style = document.getElementById('vuetify-theme-stylesheet')
     const html = style!.innerHTML
@@ -100,8 +100,6 @@ describe('Theme.ts', () => {
         }),
       },
     })
-
-    theme.init(instance)
 
     const style = document.getElementById('vuetify-theme-stylesheet')
     const html = style!.innerHTML
@@ -128,11 +126,11 @@ describe('Theme.ts', () => {
   })
 
   it('should use themeCache', () => {
-    let cache: VuetifyParsedTheme | undefined
+    const cache = new Map()
     const themeCache = {
-      get: jest.fn(() => cache),
-      set: jest.fn((obj: VuetifyParsedTheme) => {
-        cache = obj
+      get: jest.fn(theme => cache.get(theme)),
+      set: jest.fn((theme: VuetifyParsedTheme, css: string) => {
+        cache.set(theme, css)
       }),
     }
 
@@ -141,12 +139,12 @@ describe('Theme.ts', () => {
     })
 
     expect(theme.generatedStyles).toMatchSnapshot()
-    expect(themeCache.set).toHaveBeenCalledTimes(1)
+    expect(themeCache.set).toHaveBeenCalledTimes(2)
 
     theme.applyTheme()
 
-    expect(themeCache.get).toHaveBeenCalledTimes(2)
-    expect(themeCache.set).toHaveBeenCalledTimes(1)
+    expect(themeCache.get).toHaveBeenCalledTimes(3)
+    expect(themeCache.set).toHaveBeenCalledTimes(3)
     expect(theme.generatedStyles).toMatchSnapshot()
   })
 
@@ -156,8 +154,6 @@ describe('Theme.ts', () => {
     const theme = mockTheme({
       options: { minifyTheme },
     })
-
-    theme.init(instance)
 
     const style = document.getElementById('vuetify-theme-stylesheet')
     const html = style!.innerHTML
@@ -171,8 +167,6 @@ describe('Theme.ts', () => {
     const theme = mockTheme({
       options: { cspNonce: 'foobar' },
     })
-
-    theme.init(instance)
 
     const style = document.getElementById('vuetify-theme-stylesheet')
 
@@ -231,9 +225,6 @@ describe('Theme.ts', () => {
   it('should react to theme changes', async () => {
     const theme = mockTheme()
     const spy = jest.spyOn(theme, 'applyTheme')
-    theme.init(instance)
-
-    expect(spy).toHaveBeenCalledTimes(1)
 
     theme.themes.light.primary = '#000000'
     await instance.$nextTick()
@@ -244,31 +235,29 @@ describe('Theme.ts', () => {
     theme.currentTheme.accent = '#000000'
     await instance.$nextTick()
 
-    expect(spy).toHaveBeenCalledTimes(4)
+    expect(spy).toHaveBeenCalledTimes(3)
   })
 
   it('should reset themes', async () => {
     const theme = mockTheme()
     const spy = jest.spyOn(theme, 'applyTheme')
-    theme.init(instance)
 
     expect(theme.generatedStyles).toMatchSnapshot()
     theme.resetThemes()
     expect(theme.generatedStyles).toMatchSnapshot()
-    expect(spy).toHaveBeenCalledTimes(2)
+    expect(spy).toHaveBeenCalledTimes(1)
   })
 
   it('should set theme', () => {
     const theme = mockTheme()
     const spy = jest.spyOn(theme, 'applyTheme')
-    theme.init(instance)
 
     expect(theme.generatedStyles).toMatchSnapshot()
     theme.setTheme('light', { accent: '#c0ffee' })
     expect(theme.generatedStyles).toMatchSnapshot()
     theme.setTheme('dark', { accent: '#c0ffee' })
     expect(theme.generatedStyles).toMatchSnapshot()
-    expect(spy).toHaveBeenCalledTimes(3)
+    expect(spy).toHaveBeenCalledTimes(2)
   })
 
   it('should use vue-meta@2.3 functionality', () => {
@@ -288,8 +277,6 @@ describe('Theme.ts', () => {
 
   it('should not generate variations', () => {
     const theme = mockTheme({ options: { variations: false } })
-
-    theme.init(instance)
 
     const style = document.getElementById('vuetify-theme-stylesheet')
     const html = style!.innerHTML
