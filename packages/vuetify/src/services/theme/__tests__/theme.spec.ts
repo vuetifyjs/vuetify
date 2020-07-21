@@ -125,12 +125,12 @@ describe('Theme.ts', () => {
     expect(spy).toHaveBeenCalledTimes(1)
   })
 
-  it.skip('should use themeCache', () => {
-    let cache: VuetifyParsedTheme | undefined
+  it('should use themeCache', () => {
+    const cache = new Map()
     const themeCache = {
-      get: jest.fn(() => cache),
-      set: jest.fn((obj: VuetifyParsedTheme) => {
-        cache = obj
+      get: jest.fn(theme => cache.get(theme)),
+      set: jest.fn((theme: VuetifyParsedTheme, css: string) => {
+        cache.set(theme, css)
       }),
     }
 
@@ -139,12 +139,12 @@ describe('Theme.ts', () => {
     })
 
     expect(theme.generatedStyles).toMatchSnapshot()
-    expect(themeCache.set).toHaveBeenCalledTimes(1)
+    expect(themeCache.set).toHaveBeenCalledTimes(2)
 
     theme.applyTheme()
 
-    expect(themeCache.get).toHaveBeenCalledTimes(2)
-    expect(themeCache.set).toHaveBeenCalledTimes(1)
+    expect(themeCache.get).toHaveBeenCalledTimes(3)
+    expect(themeCache.set).toHaveBeenCalledTimes(3)
     expect(theme.generatedStyles).toMatchSnapshot()
   })
 
