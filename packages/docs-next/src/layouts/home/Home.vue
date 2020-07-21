@@ -3,8 +3,6 @@
     <home-bar />
 
     <home-view />
-
-    <home-toc />
   </v-app>
 </template>
 
@@ -20,10 +18,6 @@
       HomeView: () => import(
         /* webpackChunkName: "home-view" */
         './View'
-      ),
-      HomeToc: () => import(
-        /* webpackChunkName: "home-toc" */
-        '@/layouts/default/Toc'
       ),
     },
   }

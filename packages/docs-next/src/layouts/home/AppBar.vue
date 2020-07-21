@@ -1,38 +1,17 @@
 <template>
   <v-app-bar
+    absolute
     class="shrink"
     color="transparent"
     flat
-    height="112"
   >
     <v-spacer />
-
-    <v-btn
-      class="mx-1"
-      color="primary"
-      outlined
-      x-large
-      :to="{
-        name: 'Documentation',
-        params: {
-          category: 'getting-started',
-          page: 'quick-start'
-        }
-      }"
-    >
-      To Documentation
-
-      <v-icon right>
-        $mdiOpenInNew
-      </v-icon>
-    </v-btn>
 
     <v-btn
       v-if="canInstall"
       class="mx-1"
       color="primary"
       outlined
-      x-large
       @click="promptInstaller"
     >
       Install
@@ -47,7 +26,6 @@
       class="mx-1"
       color="primary"
       outlined
-      x-large
       @click="refreshContent"
     >
       Refresh Content
