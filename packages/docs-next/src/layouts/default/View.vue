@@ -1,6 +1,8 @@
 <template>
   <v-main>
-    <router-view :key="$route.path" />
+    <v-fade-transition hide-on-leave="">
+      <router-view :key="$route.path" />
+    </v-fade-transition>
   </v-main>
 </template>
 
