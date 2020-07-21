@@ -335,7 +335,7 @@ export function defaultFilter (value: any, search: string | null, item: any) {
     value.toString().toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) !== -1
 }
 
-export function searchItems<T extends any = any> (items: T[], search: string): T[] {
+export function searchItems<T extends object = object> (items: T[], search: string): T[] {
   if (!search) return items
   search = search.toString().toLowerCase()
   if (search.trim() === '') return items
