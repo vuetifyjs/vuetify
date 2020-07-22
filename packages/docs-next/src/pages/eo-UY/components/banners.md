@@ -1,60 +1,68 @@
 ---
 meta:
-  title: crwdns70814:0crwdne70814:0
-  description: crwdns70816:0crwdne70816:0 crwdns70818:0crwdne70818:0
-  keywords: crwdns70820:0crwdne70820:0
+  title: crwdns117842:0crwdne117842:0
+  description: crwdns117844:0crwdne117844:0 crwdns117846:0crwdne117846:0
+  keywords: crwdns117848:0crwdne117848:0
+related:
+  - crwdns117850:0crwdne117850:0
+  - crwdns117852:0crwdne117852:0
+  - crwdns117854:0crwdne117854:0
 ---
 
-# crwdns70822:0crwdne70822:0
+# crwdns117856:0crwdne117856:0
 
-crwdns70824:0crwdne70824:0
+crwdns117858:0crwdne117858:0 crwdns117860:0crwdne117860:0 crwdns117862:0crwdne117862:0
 
 <entry-ad />
 
-## crwdns70826:0crwdne70826:0
+## crwdns117864:0crwdne117864:0
 
-crwdns70828:0crwdne70828:0
+crwdns117866:0crwdne117866:0
 
-`crwdns70830:0crwdne70830:0`
+<usage name="v-banner" />
 
-- crwdns70832:0crwdne70832:0
-- crwdns70834:0crwdne70834:0
+## crwdns117868:0crwdne117868:0
 
-## crwdns70836:0crwdne70836:0
+- [crwdns117872:0crwdne117872:0](crwdns117870:0crwdne117870:0)
 
-crwdns70838:0crwdne70838:0
+## crwdns117874:0crwdne117874:0
 
-  crwdns70840:0crwdne70840:0
+### crwdns117876:0crwdne117876:0
 
-  crwdns70842:0crwdne70842:0
+#### crwdns117878:0crwdne117878:0
 
-## crwdns70844:0crwdne70844:0
+crwdns117880:0crwdne117880:0 crwdns117882:0crwdne117882:0 crwdns117884:0crwdne117884:0
 
-crwdns70846:0crwdne70846:0
-<alert type="success">crwdns70848:0crwdne70848:0</alert>
-<alert type="info">crwdns70850:0crwdne70850:0</alert>
-<alert type="warning">crwdns70852:0crwdne70852:0</alert>
-<alert type="error">crwdns70854:0crwdne70854:0</alert>
+<example file="v-banner/prop-single-line" />
 
-## crwdns70856:0crwdne70856:0
+### crwdns117886:0crwdne117886:0
 
-crwdns70858:0crwdne70858:0
+#### crwdns117888:0crwdne117888:0
 
-  crwdns70860:0crwdne70860:0
+crwdns117890:0crwdne117890:0
 
-  crwdns70862:0crwdne70862:0
+<example file="v-banner/event-icon-click" />
 
-  `crwdns70864:0crwdne70864:0`
+### crwdns117892:0crwdne117892:0
 
-- crwdns70866:0crwdne70866:0
-- crwdns70868:0crwdne70868:0
+#### crwdns117894:0crwdne117894:0
 
-## crwdns70870:0crwdne70870:0
+crwdns117896:0crwdne117896:0
 
-crwdns70872:0crwdne70872:0
+<example file="v-banner/slot-actions" />
 
-## crwdns70874:0crwdne70874:0
+#### crwdns117898:0crwdne117898:0
 
-- [crwdns70876:0crwdne70876:0]()
+crwdns117900:0crwdne117900:0
+
+<example file="v-banner/slot-icon" />
+
+### crwdns117902:0crwdne117902:0
+
+#### crwdns117904:0crwdne117904:0
+
+crwdns117906:0crwdne117906:0 crwdns117908:0crwdne117908:0
+
+<example file="v-banner/misc-two-line" />
 
 <backmatter />

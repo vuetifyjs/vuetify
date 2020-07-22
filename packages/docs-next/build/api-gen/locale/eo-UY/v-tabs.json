@@ -1,0 +1,40 @@
+{
+  "props": {
+    "empty": "crwdns105570:0crwdne105570:0",
+    "activeClass": "crwdns105572:0crwdne105572:0",
+    "alignWithTitle": "crwdns105574:0crwdne105574:0",
+    "backgroundColor": "crwdns105576:0crwdne105576:0",
+    "centerActive": "crwdns105578:0crwdne105578:0",
+    "cycle": "crwdns105580:0crwdne105580:0",
+    "dark": "crwdns105582:0crwdne105582:0",
+    "height": "crwdns105584:0crwdne105584:0",
+    "grow": "crwdns105586:0crwdne105586:0",
+    "hideSlider": "crwdns105588:0crwdne105588:0",
+    "iconsAndText": "crwdns105590:0crwdne105590:0",
+    "light": "crwdns105592:0crwdne105592:0",
+    "optional": "crwdns105594:0crwdne105594:0",
+    "prevIcon": "crwdns105596:0crwdne105596:0",
+    "nextIcon": "crwdns105598:0crwdne105598:0",
+    "reverseTransition": "crwdns105600:0crwdne105600:0",
+    "right": "crwdns105602:0crwdne105602:0",
+    "showArrows": "crwdns105604:0crwdne105604:0",
+    "sliderColor": "crwdns105606:0crwdne105606:0",
+    "sliderSize": "crwdns105608:0crwdne105608:0",
+    "touchless": "crwdns105610:0crwdne105610:0",
+    "transition": "crwdns105612:0crwdne105612:0",
+    "vertical": "crwdns105614:0crwdne105614:0"
+  },
+  "slots": {
+    "empty": "crwdns105616:0crwdne105616:0"
+  },
+  "events": {
+    "empty": "crwdns105618:0crwdne105618:0",
+    "change": "crwdns105620:0crwdne105620:0"
+  },
+  "functions": {
+    "empty": "crwdns105622:0crwdne105622:0"
+  },
+  "sass": {
+    "empty": "crwdns105624:0crwdne105624:0"
+  }
+}

@@ -1,60 +1,96 @@
 ---
 meta:
-  title: crwdns69614:0crwdne69614:0
-  description: crwdns69618:0crwdne69618:0
-  keywords: crwdns69622:0crwdne69622:0
+  title: crwdns116728:0crwdne116728:0
+  description: crwdns116730:0crwdne116730:0
+  keywords: crwdns116732:0crwdne116732:0
+related:
+  - crwdns116734:0crwdne116734:0
+  - crwdns116736:0crwdne116736:0
+  - crwdns116738:0crwdne116738:0
 ---
 
-# crwdns69626:0crwdne69626:0
+# crwdns116740:0crwdne116740:0
 
-crwdns69630:0crwdne69630:0
+crwdns116742:0crwdne116742:0 crwdns116744:0crwdne116744:0
 
 <entry-ad />
 
-## crwdns69634:0crwdne69634:0
+## crwdns116746:0crwdne116746:0
 
-crwdns69638:0crwdne69638:0
+crwdns116748:0crwdne116748:0
 
-`crwdns69642:0crwdne69642:0`
+<usage name="v-file-input" />
 
-- crwdns69646:0crwdne69646:0
-- crwdns69650:0crwdne69650:0
+## crwdns116750:0crwdne116750:0
 
-## crwdns69654:0crwdne69654:0
+- [crwdns116754:0crwdne116754:0](crwdns116752:0crwdne116752:0)
 
-crwdns69658:0crwdne69658:0
+## crwdns116756:0crwdne116756:0
 
-  crwdns69662:0crwdne69662:0
+### crwdns116758:0crwdne116758:0
 
-  crwdns69666:0crwdne69666:0
+#### crwdns116760:0crwdne116760:0
 
-## crwdns69670:0crwdne69670:0
+crwdns116762:0crwdne116762:0 crwdns116764:0crwdne116764:0
 
-crwdns69674:0crwdne69674:0
-<alert type="success">crwdns69678:0crwdne69678:0</alert>
-<alert type="info">crwdns69682:0crwdne69682:0</alert>
-<alert type="warning">crwdns69686:0crwdne69686:0</alert>
-<alert type="error">crwdns69690:0crwdne69690:0</alert>
+<example file="v-file-input/prop-accept" />
 
-## crwdns69694:0crwdne69694:0
+#### crwdns116766:0crwdne116766:0
 
-crwdns69698:0crwdne69698:0
+crwdns116768:0crwdne116768:0 crwdns116770:0crwdne116770:0
 
-  crwdns69700:0crwdne69700:0
+<example file="v-file-input/prop-chips" />
 
-  crwdns69702:0crwdne69702:0
+#### crwdns116772:0crwdne116772:0
 
-  `crwdns69704:0crwdne69704:0`
+crwdns116774:0crwdne116774:0
 
-- crwdns69706:0crwdne69706:0
-- crwdns69708:0crwdne69708:0
+<example file="v-file-input/prop-counter" />
 
-## crwdns69710:0crwdne69710:0
+#### crwdns116776:0crwdne116776:0
 
-crwdns69712:0crwdne69712:0
+crwdns116778:0crwdne116778:0
 
-## crwdns69714:0crwdne69714:0
+<example file="v-file-input/prop-dense" />
 
-- [crwdns69716:0crwdne69716:0]()
+#### crwdns116780:0crwdne116780:0
+
+crwdns116782:0crwdne116782:0
+
+<example file="v-file-input/prop-multiple" />
+
+#### crwdns116784:0crwdne116784:0
+
+crwdns116786:0crwdne116786:0 crwdns116788:0crwdne116788:0
+
+<example file="v-file-input/prop-prepend-icon" />
+
+#### crwdns116790:0crwdne116790:0
+
+crwdns116792:0crwdne116792:0 crwdns116794:0crwdne116794:0
+
+<example file="v-file-input/prop-show-size" />
+
+#### crwdns116796:0crwdne116796:0
+
+crwdns116798:0crwdne116798:0
+
+<example file="v-file-input/prop-validation" />
+
+### crwdns116800:0crwdne116800:0
+
+#### crwdns116802:0crwdne116802:0
+
+crwdns116804:0crwdne116804:0 crwdns116806:0crwdne116806:0
+
+<example file="v-file-input/slot-selection" />
+
+### crwdns116808:0crwdne116808:0
+
+#### crwdns116810:0crwdne116810:0
+
+crwdns116812:0crwdne116812:0 crwdns116814:0crwdne116814:0
+
+<example file="v-file-input/misc-complex-selection" />
 
 <backmatter />

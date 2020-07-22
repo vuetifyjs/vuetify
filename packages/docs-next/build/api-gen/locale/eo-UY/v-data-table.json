@@ -1,0 +1,57 @@
+{
+  "props": {
+    "empty": "crwdns105454:0crwdne105454:0",
+    "calculateWidths": "crwdns105456:0crwdne105456:0",
+    "caption": "crwdns105458:0crwdne105458:0",
+    "dense": "crwdns105460:0crwdne105460:0",
+    "expandIcon": "crwdns105462:0crwdne105462:0",
+    "fixedHeader": "crwdns105464:0crwdne105464:0",
+    "headerProps": "crwdns105466:0crwdne105466:0",
+    "headers": "crwdns105468:0crwdne105468:0",
+    "headersLength": "crwdns105470:0crwdne105470:0",
+    "height": "crwdns105472:0crwdne105472:0",
+    "hideDefaultHeader": "crwdns105474:0crwdne105474:0",
+    "itemClass": "crwdns105476:0crwdne105476:0",
+    "mobileBreakpoint": "crwdns105478:0crwdne105478:0",
+    "showSelect": "crwdns105480:0crwdne105480:0",
+    "showExpand": "crwdns105482:0crwdne105482:0",
+    "showGroupBy": "crwdns105484:0crwdne105484:0",
+    "virtualRows": "crwdns105486:0crwdne105486:0"
+  },
+  "slots": {
+    "empty": "crwdns105488:0crwdne105488:0",
+    "body": "crwdns105490:0crwdne105490:0",
+    "body.append": "crwdns105492:0crwdne105492:0",
+    "body.prepend": "crwdns105494:0crwdne105494:0",
+    "expanded-item": "crwdns105496:0crwdne105496:0",
+    "footer": "crwdns105498:0crwdne105498:0",
+    "footer.page-text": "crwdns105500:0crwdne105500:0",
+    "group": "crwdns105502:0crwdne105502:0",
+    "group.header": "crwdns105504:0crwdne105504:0",
+    "group.summary": "crwdns105506:0crwdne105506:0",
+    "heading": "crwdns105508:0crwdne105508:0",
+    "header.<name>": "crwdns105510:0crwdne105510:0",
+    "header.data-table-select": "crwdns105512:0crwdne105512:0",
+    "item": "crwdns105514:0crwdne105514:0",
+    "item.data-table-select": "crwdns105516:0crwdne105516:0",
+    "item.data-table-expand": "crwdns105518:0crwdne105518:0",
+    "item.<name>": "crwdns105520:0crwdne105520:0",
+    "loading": "crwdns105522:0crwdne105522:0",
+    "no-data": "crwdns105524:0crwdne105524:0",
+    "no-results": "crwdns105526:0crwdne105526:0",
+    "progress": "crwdns105528:0crwdne105528:0",
+    "top": "crwdns105530:0crwdne105530:0"
+  },
+  "events": {
+    "empty": "crwdns105532:0crwdne105532:0",
+    "click:row": "crwdns105534:0crwdne105534:0",
+    "contextmenu:row": "crwdns105536:0crwdne105536:0",
+    "dblclick:row": "crwdns105538:0crwdne105538:0"
+  },
+  "functions": {
+    "empty": "crwdns105540:0crwdne105540:0"
+  },
+  "sass": {
+    "empty": "crwdns105542:0crwdne105542:0"
+  }
+}

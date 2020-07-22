@@ -1,148 +1,148 @@
 ---
 meta:
-  title: crwdns72170:0crwdne72170:0
-  description: crwdns72172:0crwdne72172:0 crwdns72174:0crwdne72174:0
-  keywords: crwdns72176:0crwdne72176:0
+  title: crwdns119932:0crwdne119932:0
+  description: crwdns119934:0crwdne119934:0 crwdns119936:0crwdne119936:0
+  keywords: crwdns119938:0crwdne119938:0
 related:
-  - crwdns72178:0crwdne72178:0
-  - crwdns72180:0crwdne72180:0
-  - crwdns72182:0crwdne72182:0
+  - crwdns119940:0crwdne119940:0
+  - crwdns119942:0crwdne119942:0
+  - crwdns119944:0crwdne119944:0
 ---
 
-# crwdns72184:0crwdne72184:0
+# crwdns119946:0crwdne119946:0
 
-crwdns72186:0crwdne72186:0
+crwdns119948:0crwdne119948:0
 
-<entry-ad />
+<promoted-ad slug="vuemastery-getting-started" />
 
-## crwdns72188:0crwdne72188:0
+## crwdns119950:0crwdne119950:0
 
-<alert type="warning">crwdns72190:0crwdne72190:0</alert>
+<alert type="warning">crwdns119952:0crwdne119952:0</alert>
 
-crwdns72192:0crwdne72192:0
-
-```bash
-crwdns72194:0crwdne72194:0
-```
-
-crwdns72196:0crwdne72196:0
+crwdns119954:0crwdne119954:0
 
 ```bash
-crwdns72198:0crwdne72198:0
+crwdns119956:0crwdne119956:0
 ```
 
-### crwdns72200:0crwdne72200:0
-
-crwdns72202:0crwdne72202:0 crwdns72204:0crwdne72204:0
+crwdns119958:0crwdne119958:0
 
 ```bash
-crwdns72206:0crwdne72206:0
+crwdns119960:0crwdne119960:0
 ```
 
-crwdns72208:0crwdne72208:0 crwdns72210:0crwdne72210:0 crwdns72212:0crwdne72212:0
+### crwdns119962:0crwdne119962:0
 
-![crwdns72216:0crwdne72216:0](crwdns72214:0crwdne72214:0 "crwdns72218:0crwdne72218:0")
-
-## crwdns72220:0crwdne72220:0
-
-crwdns72222:0crwdne72222:0
+crwdns119964:0crwdne119964:0 crwdns119966:0crwdne119966:0
 
 ```bash
-crwdns72224:0crwdne72224:0
+crwdns119968:0crwdne119968:0
 ```
 
-crwdns72226:0crwdne72226:0
+crwdns119970:0crwdne119970:0 crwdns119972:0crwdne119972:0 crwdns119974:0crwdne119974:0
+
+![crwdns119978:0crwdne119978:0](crwdns119976:0crwdne119976:0 "crwdns119980:0crwdne119980:0")
+
+## crwdns119982:0crwdne119982:0
+
+crwdns119984:0crwdne119984:0
+
+```bash
+crwdns119986:0crwdne119986:0
+```
+
+crwdns119988:0crwdne119988:0
 
 ```js
-crwdns72228:0crwdne72228:0
+crwdns119990:0crwdne119990:0
 ```
 
-crwdns72230:0crwdne72230:0
+<highlighted-ad slug="nuxt-community-vuetify-module" />
 
-## crwdns72232:0crwdne72232:0
+## crwdns119992:0crwdne119992:0
 
-crwdns72234:0crwdne72234:0
+crwdns119994:0crwdne119994:0
 
 ```bash
-crwdns72236:0crwdne72236:0
+crwdns119996:0crwdne119996:0
 ```
 
 ```bash
-crwdns72238:0crwdne72238:0
+crwdns119998:0crwdne119998:0
 ```
 
-crwdns72240:0crwdne72240:0 crwdns72242:0crwdne72242:0 crwdns72244:0crwdne72244:0 crwdns72246:0crwdne72246:0
+crwdns120000:0crwdne120000:0 crwdns120002:0crwdne120002:0 crwdns120004:0crwdne120004:0 crwdns120006:0crwdne120006:0
 
 ```js
-crwdns72248:0crwdne72248:0
+crwdns120008:0crwdne120008:0
 ```
 
-crwdns72250:0crwdne72250:0
+crwdns120010:0crwdne120010:0
 
 ```js
-crwdns72252:0crwdne72252:0
+crwdns120012:0crwdne120012:0
 ```
 
-crwdns72254:0crwdne72254:0
+crwdns120014:0crwdne120014:0
 
 ```js
-crwdns72256:0crwdne72256:0
+crwdns120016:0crwdne120016:0
 ```
 
-crwdns72258:0crwdne72258:0
+crwdns120018:0crwdne120018:0
 
 ```js
-crwdns72260:0$mountcrwdne72260:0
+crwdns120020:0$mountcrwdne120020:0
 ```
 
-### crwdns72262:0crwdne72262:0
+### crwdns120022:0crwdne120022:0
 
-crwdns72264:0crwdne72264:0 crwdns72266:0crwdne72266:0
+crwdns120024:0crwdne120024:0 crwdns120026:0crwdne120026:0
 
 ```html
-crwdns72268:0crwdne72268:0
+crwdns120028:0crwdne120028:0
 ```
 
-## crwdns72270:0crwdne72270:0
+## crwdns120030:0crwdne120030:0
 
-crwdns72272:0crwdne72272:0 crwdns72274:0crwdne72274:0 crwdns72276:0crwdne72276:0 crwdns72278:0crwdne72278:0 crwdns72280:0crwdne72280:0
+crwdns120032:0crwdne120032:0 crwdns120034:0crwdne120034:0 crwdns120036:0crwdne120036:0 crwdns120038:0crwdne120038:0 crwdns120040:0crwdne120040:0
 
-<alert type="info">crwdns72282:0crwdne72282:0 crwdns72284:0crwdne72284:0</alert>
+<alert type="info">crwdns120042:0crwdne120042:0 crwdns120044:0crwdne120044:0</alert>
 
 ```html
-crwdns72286:0crwdne72286:0
+crwdns120046:0crwdne120046:0
 ```
 
-## crwdns72288:0crwdne72288:0
+## crwdns120048:0crwdne120048:0
 
-crwdns72290:0crwdne72290:0
+crwdns120050:0crwdne120050:0
 
 ```bash
-crwdns72292:0crwdne72292:0
+crwdns120052:0crwdne120052:0
 ```
 
-## crwdns72294:0crwdne72294:0
+## crwdns120054:0crwdne120054:0
 
-crwdns72296:0crwdne72296:0 crwdns72298:0crwdne72298:0
+crwdns120056:0crwdne120056:0 crwdns120058:0crwdne120058:0
 
 ```bash
-crwdns72300:0crwdne72300:0
+crwdns120060:0crwdne120060:0
 ```
 
-## crwdns72302:0crwdne72302:0
+## crwdns120062:0crwdne120062:0
 
-crwdns72304:0crwdne72304:0
+crwdns120064:0crwdne120064:0
 
 ```bash
-crwdns72306:0crwdne72306:0
+crwdns120066:0crwdne120066:0
 ```
 
-## crwdns72308:0crwdne72308:0
+## crwdns120068:0crwdne120068:0
 
-crwdns72310:0crwdne72310:0
+crwdns120070:0crwdne120070:0
 
 ```bash
-crwdns72312:0crwdne72312:0
+crwdns120072:0crwdne120072:0
 ```
 
 <backmatter />

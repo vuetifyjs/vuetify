@@ -1,60 +1,44 @@
 ---
 meta:
-  title: crwdns72438:0crwdne72438:0
-  description: crwdns72440:0crwdne72440:0 crwdns72442:0crwdne72442:0
-  keywords: crwdns72444:0crwdne72444:0
+  title: crwdns108112:0crwdne108112:0
+  description: crwdns108114:0crwdne108114:0 crwdns108116:0crwdne108116:0
+  keywords: crwdns108118:0crwdne108118:0
+related:
+  - crwdns108120:0crwdne108120:0
+  - crwdns108122:0crwdne108122:0
+  - crwdns108124:0crwdne108124:0
 ---
 
-# crwdns72446:0crwdne72446:0
+# crwdns108126:0crwdne108126:0
 
-crwdns72448:0crwdne72448:0
+crwdns108128:0crwdne108128:0 crwdns108130:0crwdne108130:0 crwdns108132:0crwdne108132:0
 
 <entry-ad />
 
-## crwdns72450:0crwdne72450:0
+## crwdns108134:0crwdne108134:0
 
-crwdns72452:0crwdne72452:0
+crwdns108136:0crwdne108136:0 crwdns108138:0crwdne108138:0
 
-`crwdns72454:0crwdne72454:0`
+<example file="v-intersect/usage" />
 
-- crwdns72456:0crwdne72456:0
-- crwdns72458:0crwdne72458:0
+## crwdns108140:0crwdne108140:0
 
-## crwdns72460:0crwdne72460:0
+- [crwdns108144:0crwdne108144:0](crwdns108142:0crwdne108142:0)
 
-crwdns72462:0crwdne72462:0
+## crwdns108146:0crwdne108146:0
 
-  crwdns72464:0crwdne72464:0
+<alert type="info">
+  crwdns108148:0[polyfill]crwdne108148:0
+</alert>
 
-  crwdns72466:0crwdne72466:0
+## crwdns108150:0crwdne108150:0
 
-## crwdns72468:0crwdne72468:0
+### crwdns108152:0crwdne108152:0
 
-crwdns72470:0crwdne72470:0
-<alert type="success">crwdns72472:0crwdne72472:0</alert>
-<alert type="info">crwdns72474:0crwdne72474:0</alert>
-<alert type="warning">crwdns72476:0crwdne72476:0</alert>
-<alert type="error">crwdns72478:0crwdne72478:0</alert>
+#### crwdns108154:0crwdne108154:0
 
-## crwdns72480:0crwdne72480:0
+crwdns108156:0crwdne108156:0 crwdns108158:0crwdne108158:0 crwdns108160:0crwdne108160:0
 
-crwdns72482:0crwdne72482:0
-
-  crwdns72484:0crwdne72484:0
-
-  crwdns72486:0crwdne72486:0
-
-  `crwdns72488:0crwdne72488:0`
-
-- crwdns72490:0crwdne72490:0
-- crwdns72492:0crwdne72492:0
-
-## crwdns72494:0crwdne72494:0
-
-crwdns72496:0crwdne72496:0
-
-## crwdns72498:0crwdne72498:0
-
-- [crwdns72500:0crwdne72500:0]()
+<example file="v-intersect/prop-options" />
 
 <backmatter />

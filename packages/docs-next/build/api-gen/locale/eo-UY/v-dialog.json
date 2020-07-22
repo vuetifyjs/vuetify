@@ -1,0 +1,34 @@
+{
+  "props": {
+    "empty": "crwdns104328:0crwdne104328:0",
+    "dark": "crwdns104330:0crwdne104330:0",
+    "fullWidth": "crwdns104332:0crwdne104332:0",
+    "fullscreen": "crwdns104334:0crwdne104334:0",
+    "internalActivator": "crwdns104336:0crwdne104336:0",
+    "eager": "crwdns104338:0crwdne104338:0",
+    "light": "crwdns104340:0crwdne104340:0",
+    "maxWidth": "crwdns104342:0crwdne104342:0",
+    "noClickAnimation": "crwdns104344:0crwdne104344:0",
+    "openOnHover": "crwdns104346:0crwdne104346:0",
+    "origin": "crwdns104348:0crwdne104348:0",
+    "persistent": "crwdns104350:0crwdne104350:0",
+    "retainFocus": "crwdns104352:0crwdne104352:0",
+    "scrollable": "crwdns104354:0crwdne104354:0",
+    "transition": "crwdns104356:0crwdne104356:0",
+    "width": "crwdns104358:0crwdne104358:0"
+  },
+  "slots": {
+    "empty": "crwdns104360:0crwdne104360:0"
+  },
+  "events": {
+    "empty": "crwdns104362:0crwdne104362:0",
+    "click:outside": "crwdns104364:0crwdne104364:0",
+    "keydown": "crwdns104366:0crwdne104366:0"
+  },
+  "functions": {
+    "empty": "crwdns104368:0crwdne104368:0"
+  },
+  "sass": {
+    "empty": "crwdns104370:0crwdne104370:0"
+  }
+}

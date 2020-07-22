@@ -1,60 +1,52 @@
 ---
 meta:
-  title: crwdns72502:0crwdne72502:0
-  description: crwdns72504:0crwdne72504:0
-  keywords: crwdns72506:0crwdne72506:0
+  title: crwdns107986:0crwdne107986:0
+  description: crwdns107988:0crwdne107988:0
+  keywords: crwdns107990:0crwdne107990:0
+related:
+  - crwdns107992:0crwdne107992:0
+  - crwdns107994:0crwdne107994:0
+  - crwdns107996:0crwdne107996:0
 ---
 
-# crwdns72508:0crwdne72508:0
+# crwdns107998:0crwdne107998:0
 
-crwdns72510:0crwdne72510:0
+crwdns108000:0crwdne108000:0 crwdns108002:0crwdne108002:0 crwdns108004:0crwdne108004:0
 
 <entry-ad />
 
-## crwdns72512:0crwdne72512:0
+## crwdns108006:0crwdne108006:0
 
-crwdns72514:0crwdne72514:0
+crwdns108008:0crwdne108008:0
 
-`crwdns72516:0crwdne72516:0`
+<example file="v-ripple/usage" />
 
-- crwdns72518:0crwdne72518:0
-- crwdns72520:0crwdne72520:0
+## crwdns108010:0crwdne108010:0
 
-## crwdns72522:0crwdne72522:0
+- [crwdns108014:0crwdne108014:0](crwdns108012:0crwdne108012:0)
 
-crwdns72524:0crwdne72524:0
+## crwdns108016:0crwdne108016:0
 
-  crwdns72526:0crwdne72526:0
+### crwdns108018:0crwdne108018:0
 
-  crwdns72528:0crwdne72528:0
+#### crwdns108020:0crwdne108020:0
 
-## crwdns72530:0crwdne72530:0
+crwdns108022:0crwdne108022:0
 
-crwdns72532:0crwdne72532:0
-<alert type="success">crwdns72534:0crwdne72534:0</alert>
-<alert type="info">crwdns72536:0crwdne72536:0</alert>
-<alert type="warning">crwdns72538:0crwdne72538:0</alert>
-<alert type="error">crwdns72540:0crwdne72540:0</alert>
+<example file="v-ripple/option-center" />
 
-## crwdns72542:0crwdne72542:0
+### crwdns108024:0crwdne108024:0
 
-crwdns72544:0crwdne72544:0
+#### crwdns108026:0crwdne108026:0
 
-  crwdns72546:0crwdne72546:0
+crwdns108028:0crwdne108028:0
 
-  crwdns72548:0crwdne72548:0
+<example file="v-ripple/misc-custom-color" />
 
-  `crwdns72550:0crwdne72550:0`
+#### crwdns108030:0crwdne108030:0
 
-- crwdns72552:0crwdne72552:0
-- crwdns72554:0crwdne72554:0
+crwdns108032:0crwdne108032:0 crwdns108034:0crwdne108034:0
 
-## crwdns72556:0crwdne72556:0
-
-crwdns72558:0crwdne72558:0
-
-## crwdns72560:0crwdne72560:0
-
-- [crwdns72562:0crwdne72562:0]()
+<example file="v-ripple/misc-ripple-in-components" />
 
 <backmatter />

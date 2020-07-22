@@ -1,60 +1,94 @@
 ---
 meta:
-  title: crwdns70502:0crwdne70502:0
-  description: crwdns70504:0crwdne70504:0
-  keywords: crwdns70506:0crwdne70506:0
+  title: crwdns114030:0crwdne114030:0
+  description: crwdns114032:0crwdne114032:0
+  keywords: crwdns114034:0crwdne114034:0
+related:
+  - crwdns114036:0crwdne114036:0
+  - crwdns114038:0crwdne114038:0
+  - crwdns114040:0crwdne114040:0
 ---
 
-# crwdns70508:0crwdne70508:0
+# crwdns114042:0crwdne114042:0
 
-crwdns70510:0crwdne70510:0
+crwdns114044:0crwdne114044:0 crwdns114046:0crwdne114046:0 crwdns114048:0crwdne114048:0 crwdns114050:0crwdne114050:0
 
 <entry-ad />
 
-## crwdns70512:0crwdne70512:0
+## crwdns114052:0crwdne114052:0
 
-crwdns70514:0crwdne70514:0
+crwdns114054:0crwdne114054:0 crwdns114056:0crwdne114056:0 crwdns114058:0crwdne114058:0
 
-`crwdns70516:0crwdne70516:0`
+<example file="v-navigation-drawer/usage" />
 
-- crwdns70518:0crwdne70518:0
-- crwdns70520:0crwdne70520:0
+## crwdns114060:0crwdne114060:0
 
-## crwdns70522:0crwdne70522:0
+- [crwdns114064:0crwdne114064:0](crwdns114062:0crwdne114062:0)
 
-crwdns70524:0crwdne70524:0
+## crwdns114066:0crwdne114066:0
 
-  crwdns70526:0crwdne70526:0
+<alert type="error">
+  crwdns114068:0crwdne114068:0
+</alert>
 
-  crwdns70528:0crwdne70528:0
+## crwdns114070:0crwdne114070:0
 
-## crwdns70530:0crwdne70530:0
+### crwdns114072:0crwdne114072:0
 
-crwdns70532:0crwdne70532:0
-<alert type="success">crwdns70534:0crwdne70534:0</alert>
-<alert type="info">crwdns70536:0crwdne70536:0</alert>
-<alert type="warning">crwdns70538:0crwdne70538:0</alert>
-<alert type="error">crwdns70540:0crwdne70540:0</alert>
+#### crwdns114074:0crwdne114074:0
 
-## crwdns70542:0crwdne70542:0
+crwdns114076:0crwdne114076:0 crwdns114078:0crwdne114078:0
 
-crwdns70544:0crwdne70544:0
+<example file="v-navigation-drawer/prop-bottom-drawer" />
 
-  crwdns70546:0crwdne70546:0
+#### crwdns114080:0crwdne114080:0
 
-  crwdns70548:0crwdne70548:0
+crwdns114082:0crwdne114082:0 crwdns114084:0crwdne114084:0 crwdns114086:0crwdne114086:0
 
-  `crwdns70550:0crwdne70550:0`
+<example file="v-navigation-drawer/prop-expand-on-hover" />
 
-- crwdns70552:0crwdne70552:0
-- crwdns70554:0crwdne70554:0
+#### crwdns114088:0crwdne114088:0
 
-## crwdns70556:0crwdne70556:0
+crwdns114090:0crwdne114090:0 crwdns114092:0crwdne114092:0
 
-crwdns70558:0crwdne70558:0
+<example file="v-navigation-drawer/prop-images" />
 
-## crwdns70560:0crwdne70560:0
+#### crwdns114094:0crwdne114094:0
 
-- [crwdns70562:0crwdne70562:0]()
+crwdns114096:0crwdne114096:0 crwdns114098:0crwdne114098:0
+
+<example file="v-navigation-drawer/prop-mini-variant" />
+
+#### crwdns114100:0crwdne114100:0
+
+crwdns114102:0crwdne114102:0 crwdns114104:0crwdne114104:0 crwdns114106:0crwdne114106:0
+
+<example file="v-navigation-drawer/prop-permanent-and-floating" />
+
+#### crwdns114108:0crwdne114108:0
+
+crwdns114110:0crwdne114110:0 crwdns114112:0crwdne114112:0 crwdns114114:0crwdne114114:0
+
+<example file="v-navigation-drawer/prop-right" />
+
+#### crwdns114116:0crwdne114116:0
+
+crwdns114118:0crwdne114118:0 crwdns114120:0crwdne114120:0 crwdns114122:0crwdne114122:0
+
+<example file="v-navigation-drawer/prop-temporary" />
+
+### crwdns114124:0crwdne114124:0
+
+#### crwdns114126:0crwdne114126:0
+
+crwdns114128:0crwdne114128:0 crwdns114130:0crwdne114130:0
+
+<example file="v-navigation-drawer/misc-colored" />
+
+#### crwdns114132:0crwdne114132:0
+
+crwdns114134:0crwdne114134:0 crwdns114136:0crwdne114136:0
+
+<example file="v-navigation-drawer/misc-combined" />
 
 <backmatter />

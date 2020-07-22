@@ -1,60 +1,56 @@
 ---
 meta:
-  title: crwdns69160:0crwdne69160:0
-  description: crwdns69162:0crwdne69162:0
-  keywords: crwdns69164:0crwdne69164:0
+  title: crwdns112712:0crwdne112712:0
+  description: crwdns112714:0crwdne112714:0
+  keywords: crwdns112716:0crwdne112716:0
+related:
+  - crwdns112718:0crwdne112718:0
+  - crwdns112720:0crwdne112720:0
+  - crwdns112722:0crwdne112722:0
 ---
 
-# crwdns69166:0crwdne69166:0
+# crwdns112724:0crwdne112724:0
 
-crwdns69168:0crwdne69168:0
+crwdns112726:0crwdne112726:0 crwdns112728:0crwdne112728:0
 
 <entry-ad />
 
-## crwdns69170:0crwdne69170:0
+## crwdns112730:0crwdne112730:0
 
-crwdns69172:0crwdne69172:0
+crwdns112732:0crwdne112732:0
 
-`crwdns69174:0crwdne69174:0`
+<usage name="v-system-bar" />
 
-- crwdns69176:0crwdne69176:0
-- crwdns69178:0crwdne69178:0
+## crwdns112734:0crwdne112734:0
 
-## crwdns69180:0crwdne69180:0
+- [crwdns112738:0crwdne112738:0](crwdns112736:0crwdne112736:0)
 
-crwdns69182:0crwdne69182:0
+## crwdns112740:0crwdne112740:0
 
-  crwdns69184:0crwdne69184:0
+### crwdns112742:0crwdne112742:0
 
-  crwdns69186:0crwdne69186:0
+#### crwdns112744:0crwdne112744:0
 
-## crwdns69188:0crwdne69188:0
+crwdns112746:0crwdne112746:0
 
-crwdns69190:0crwdne69190:0
-<alert type="success">crwdns69192:0crwdne69192:0</alert>
-<alert type="info">crwdns69194:0crwdne69194:0</alert>
-<alert type="warning">crwdns69196:0crwdne69196:0</alert>
-<alert type="error">crwdns69198:0crwdne69198:0</alert>
+<example file="v-system-bar/prop-color" />
 
-## crwdns69200:0crwdne69200:0
+#### crwdns112748:0crwdne112748:0
 
-crwdns69202:0crwdne69202:0
+crwdns112750:0crwdne112750:0
 
-  crwdns69204:0crwdne69204:0
+<example file="v-system-bar/prop-lights-out" />
 
-  crwdns69206:0crwdne69206:0
+#### crwdns112752:0crwdne112752:0
 
-  `crwdns69208:0crwdne69208:0`
+crwdns112754:0crwdne112754:0
 
-- crwdns69210:0crwdne69210:0
-- crwdns69212:0crwdne69212:0
+<example file="v-system-bar/prop-themes" />
 
-## crwdns69214:0crwdne69214:0
+#### crwdns112756:0crwdne112756:0
 
-crwdns69216:0crwdne69216:0
+crwdns112758:0crwdne112758:0
 
-## crwdns69218:0crwdne69218:0
-
-- [crwdns69220:0crwdne69220:0]()
+<example file="v-system-bar/prop-window" />
 
 <backmatter />

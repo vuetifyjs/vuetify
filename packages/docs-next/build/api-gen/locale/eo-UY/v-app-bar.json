@@ -1,0 +1,29 @@
+{
+  "props": {
+    "empty": "crwdns107224:0crwdne107224:0",
+    "clippedLeft": "crwdns107226:0crwdne107226:0",
+    "clippedRight": "crwdns107228:0crwdne107228:0",
+    "collapseOnScroll": "crwdns107230:0crwdne107230:0",
+    "elevateOnScroll": "crwdns107232:0crwdne107232:0",
+    "fadeImgOnScroll": "crwdns107234:0crwdne107234:0",
+    "hideOnScroll": "crwdns107236:0crwdne107236:0",
+    "invertedScroll": "crwdns107238:0crwdne107238:0",
+    "scrollOffScreen": "crwdns107240:0crwdne107240:0",
+    "shrinkOnScroll": "crwdns107242:0crwdne107242:0",
+    "src": "crwdns107244:0crwdne107244:0"
+  },
+  "slots": {
+    "empty": "crwdns107246:0crwdne107246:0",
+    "extension": "crwdns107248:0crwdne107248:0",
+    "img": "crwdns107250:0[v-img]crwdne107250:0"
+  },
+  "events": {
+    "empty": "crwdns107252:0crwdne107252:0"
+  },
+  "functions": {
+    "empty": "crwdns107254:0crwdne107254:0"
+  },
+  "sass": {
+    "empty": "crwdns107256:0crwdne107256:0"
+  }
+}

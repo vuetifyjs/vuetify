@@ -1,60 +1,66 @@
 ---
 meta:
-  title: crwdns71294:0crwdne71294:0
-  description: crwdns71296:0crwdne71296:0 crwdns71298:0crwdne71298:0
-  keywords: crwdns71300:0crwdne71300:0
+  title: crwdns109022:0crwdne109022:0
+  description: crwdns109024:0crwdne109024:0 crwdns109026:0crwdne109026:0
+  keywords: crwdns109028:0crwdne109028:0
+related:
+  - crwdns109030:0crwdne109030:0
+  - crwdns109032:0crwdne109032:0
+  - crwdns109034:0crwdne109034:0
 ---
 
-# crwdns71302:0crwdne71302:0
+# crwdns109036:0crwdne109036:0
 
-crwdns71304:0crwdne71304:0
+crwdns109038:0crwdne109038:0 crwdns109040:0crwdne109040:0
 
 <entry-ad />
 
-## crwdns71306:0crwdne71306:0
+## crwdns109042:0crwdne109042:0
 
-crwdns71308:0crwdne71308:0
+crwdns109044:0crwdne109044:0 crwdns109046:0crwdne109046:0
 
-`crwdns71310:0crwdne71310:0`
+<example file="color/classes" />
 
-- crwdns71312:0crwdne71312:0
-- crwdns71314:0crwdne71314:0
+crwdns109048:0{lighten|darken}crwdnd109048:0{n}crwdne109048:0
 
-## crwdns71316:0crwdne71316:0
+<example file="color/text-classes" />
 
-crwdns71318:0crwdne71318:0
+## crwdns109050:0crwdne109050:0
 
-  crwdns71320:0crwdne71320:0
+crwdns109052:0crwdne109052:0 crwdns109054:0crwdne109054:0
 
-  crwdns71322:0crwdne71322:0
+```js
+crwdns109056:0crwdne109056:0
+```
 
-## crwdns71324:0crwdne71324:0
+## crwdns109058:0crwdne109058:0
 
-crwdns71326:0crwdne71326:0
-<alert type="success">crwdns71328:0crwdne71328:0</alert>
-<alert type="info">crwdns71330:0crwdne71330:0</alert>
-<alert type="warning">crwdns71332:0crwdne71332:0</alert>
-<alert type="error">crwdns71334:0crwdne71334:0</alert>
+crwdns109060:0crwdne109060:0 crwdns109062:0crwdne109062:0 crwdns109064:0crwdne109064:0 crwdns109066:0crwdne109066:0
 
-## crwdns71336:0crwdne71336:0
+```sass
+crwdns109068:0$colorcrwdne109068:0
+```
 
-crwdns71338:0crwdne71338:0
+crwdns109070:0crwdne109070:0
 
-  crwdns71340:0crwdne71340:0
+```js
+crwdns109072:0crwdne109072:0
+```
 
-  crwdns71342:0crwdne71342:0
+<alert type="error">
+  crwdns109074:0crwdne109074:0 crwdns109076:0crwdne109076:0
+</alert>
 
-  `crwdns71344:0crwdne71344:0`
+crwdns109078:0crwdne109078:0 crwdns109080:0crwdne109080:0
 
-- crwdns71346:0crwdne71346:0
-- crwdns71348:0crwdne71348:0
+```html
+crwdns109082:0$colorcrwdne109082:0
+```
 
-## crwdns71350:0crwdne71350:0
+## crwdns109084:0crwdne109084:0
 
-crwdns71352:0crwdne71352:0
+crwdns109086:0crwdne109086:0
 
-## crwdns71354:0crwdne71354:0
-
-- [crwdns71356:0crwdne71356:0]()
+<color-palette />
 
 <backmatter />

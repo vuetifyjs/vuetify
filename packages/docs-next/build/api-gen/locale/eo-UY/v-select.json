@@ -1,0 +1,58 @@
+{
+  "props": {
+    "empty": "crwdns106616:0crwdne106616:0",
+    "attach": "crwdns106618:0crwdne106618:0",
+    "autocomplete": "crwdns106620:0crwdne106620:0",
+    "cacheItems": "crwdns106622:0crwdne106622:0",
+    "chips": "crwdns106624:0crwdne106624:0",
+    "combobox": "crwdns106626:0crwdne106626:0",
+    "contentClass": "crwdns106628:0crwdne106628:0",
+    "dark": "crwdns106630:0crwdne106630:0",
+    "debounceSearch": "crwdns106632:0crwdne106632:0",
+    "deletableChips": "crwdns106634:0crwdne106634:0",
+    "disabled": "crwdns106636:0crwdne106636:0",
+    "disableLookup": "crwdns106638:0crwdne106638:0",
+    "eager": "crwdns106640:0crwdne106640:0",
+    "editable": "crwdns106642:0[spec]crwdne106642:0",
+    "filter": "crwdns106644:0crwdne106644:0",
+    "hideSelected": "crwdns106646:0crwdne106646:0",
+    "itemColor": "crwdns106648:0crwdne106648:0",
+    "itemDisabled": "crwdns106650:0crwdne106650:0",
+    "items": "crwdns106652:0crwdne106652:0",
+    "itemText": "crwdns106654:0crwdne106654:0",
+    "itemValue": "crwdns106656:0crwdne106656:0",
+    "menuProps": "crwdns106658:0{ auto: true, overflowY: true }crwdne106658:0",
+    "minWidth": "crwdns106660:0crwdne106660:0",
+    "multiple": "crwdns106662:0crwdne106662:0",
+    "multiLine": "crwdns106664:0crwdne106664:0",
+    "noDataText": "crwdns106666:0crwdne106666:0",
+    "openOnClear": "crwdns106668:0crwdne106668:0",
+    "overflow": "crwdns106670:0[spec]crwdne106670:0",
+    "returnObject": "crwdns106672:0crwdne106672:0",
+    "searchInput": "crwdns106674:0crwdne106674:0",
+    "segmented": "crwdns106676:0[spec]crwdne106676:0",
+    "smallChips": "crwdns106678:0crwdne106678:0",
+    "tags": "crwdns106680:0crwdne106680:0",
+    "valueComparator": "crwdns106682:0crwdne106682:0",
+    "value": "crwdns106684:0crwdne106684:0"
+  },
+  "slots": {
+    "empty": "crwdns106686:0crwdne106686:0",
+    "append-item": "crwdns106688:0crwdne106688:0",
+    "item": "crwdns106690:0crwdne106690:0",
+    "no-data": "crwdns106692:0crwdne106692:0",
+    "prepend-item": "crwdns106694:0crwdne106694:0",
+    "selection": "crwdns106696:0crwdne106696:0"
+  },
+  "events": {
+    "empty": "crwdns106698:0crwdne106698:0",
+    "update:list-index": "crwdns106700:0crwdne106700:0",
+    "update:search-input": "crwdns106702:0crwdne106702:0"
+  },
+  "functions": {
+    "empty": "crwdns106704:0crwdne106704:0"
+  },
+  "sass": {
+    "empty": "crwdns106706:0crwdne106706:0"
+  }
+}

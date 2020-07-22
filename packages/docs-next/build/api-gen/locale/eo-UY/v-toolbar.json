@@ -1,0 +1,31 @@
+{
+  "props": {
+    "empty": "crwdns107468:0crwdne107468:0",
+    "absolute": "crwdns107470:0crwdne107470:0",
+    "bottom": "crwdns107472:0crwdne107472:0",
+    "collapse": "crwdns107474:0crwdne107474:0",
+    "dense": "crwdns107476:0crwdne107476:0",
+    "extended": "crwdns107478:0crwdne107478:0",
+    "extensionHeight": "crwdns107480:0crwdne107480:0",
+    "flat": "crwdns107482:0crwdne107482:0",
+    "floating": "crwdns107484:0crwdne107484:0",
+    "height": "crwdns107486:0crwdne107486:0",
+    "prominent": "crwdns107488:0crwdne107488:0",
+    "short": "crwdns107490:0crwdne107490:0",
+    "src": "crwdns107492:0[v-img]crwdne107492:0"
+  },
+  "slots": {
+    "empty": "crwdns107494:0crwdne107494:0",
+    "extension": "crwdns107496:0crwdne107496:0",
+    "img": "crwdns107498:0[v-img]crwdne107498:0"
+  },
+  "events": {
+    "empty": "crwdns107500:0crwdne107500:0"
+  },
+  "functions": {
+    "empty": "crwdns107502:0crwdne107502:0"
+  },
+  "sass": {
+    "empty": "crwdns107504:0crwdne107504:0"
+  }
+}

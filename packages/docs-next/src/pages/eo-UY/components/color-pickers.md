@@ -1,60 +1,60 @@
 ---
 meta:
-  title: crwdns68662:0crwdne68662:0
-  description: crwdns68664:0crwdne68664:0
-  keyword: crwdns68666:0crwdne68666:0
+  title: crwdns115218:0crwdne115218:0
+  description: crwdns115220:0crwdne115220:0
+  keyword: crwdns115222:0crwdne115222:0
+related:
+  - crwdns115224:0crwdne115224:0
+  - crwdns115226:0crwdne115226:0
+  - crwdns115228:0crwdne115228:0
 ---
 
-# crwdns68668:0crwdne68668:0
+# crwdns115230:0crwdne115230:0
 
-crwdns68670:0crwdne68670:0
+crwdns115232:0crwdne115232:0
 
 <entry-ad />
 
-## crwdns68672:0crwdne68672:0
+## crwdns115234:0crwdne115234:0
 
-crwdns68674:0crwdne68674:0
+<usage name="v-color-picker" />
 
-`crwdns68676:0crwdne68676:0`
+## crwdns115236:0crwdne115236:0
 
-- crwdns68678:0crwdne68678:0
-- crwdns68680:0crwdne68680:0
+- [crwdns115240:0crwdne115240:0](crwdns115238:0crwdne115238:0)
 
-## crwdns68682:0crwdne68682:0
+## crwdns115242:0crwdne115242:0
 
-crwdns68684:0crwdne68684:0
+### crwdns115244:0crwdne115244:0
 
-  crwdns68686:0crwdne68686:0
+#### crwdns115246:0crwdne115246:0
 
-  crwdns68688:0crwdne68688:0
+crwdns115248:0crwdne115248:0 crwdns115250:0crwdne115250:0
 
-## crwdns68690:0crwdne68690:0
+<example file="v-color-picker/prop-canvas" />
 
-crwdns68692:0crwdne68692:0
-<alert type="success">crwdns68694:0crwdne68694:0</alert>
-<alert type="info">crwdns68696:0crwdne68696:0</alert>
-<alert type="warning">crwdns68698:0crwdne68698:0</alert>
-<alert type="error">crwdns68700:0crwdne68700:0</alert>
+#### crwdns115252:0crwdne115252:0
 
-## crwdns68702:0crwdne68702:0
+crwdns115254:0crwdne115254:0 crwdns115256:0crwdne115256:0
 
-crwdns68704:0crwdne68704:0
+<example file="v-color-picker/prop-elevation" />
 
-  crwdns68706:0crwdne68706:0
+#### crwdns115258:0crwdne115258:0
 
-  crwdns68708:0crwdne68708:0
+crwdns115260:0crwdne115260:0 crwdns115262:0crwdne115262:0 crwdns115264:0crwdne115264:0
 
-  `crwdns68710:0crwdne68710:0`
+<example file="v-color-picker/prop-inputs" />
 
-- crwdns68712:0crwdne68712:0
-- crwdns68714:0crwdne68714:0
+#### crwdns115266:0crwdne115266:0
 
-## crwdns68716:0crwdne68716:0
+crwdns115268:0crwdne115268:0 crwdns115270:0crwdne115270:0
 
-crwdns68718:0crwdne68718:0
+<example file="v-color-picker/prop-model" />
 
-## crwdns68720:0crwdne68720:0
+#### crwdns115272:0crwdne115272:0
 
-- [crwdns68722:0crwdne68722:0]()
+crwdns115274:0crwdne115274:0 crwdns115276:0crwdne115276:0 crwdns115278:0crwdne115278:0 crwdns115280:0crwdne115280:0
+
+<example file="v-color-picker/prop-swatches" />
 
 <backmatter />
