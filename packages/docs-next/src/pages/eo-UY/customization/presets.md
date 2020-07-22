@@ -88,7 +88,7 @@ crwdns110238:0crwdne110238:0 crwdns110240:0crwdne110240:0 crwdns110242:0crwdne11
 * crwdns110250:0crwdne110250:0
 * crwdns110252:0crwdne110252:0
 
-```cmd
+```bash
 crwdns110254:0crwdne110254:0
 crwdns110256:0crwdne110256:0
 ```
