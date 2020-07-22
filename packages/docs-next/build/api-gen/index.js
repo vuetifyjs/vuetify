@@ -75,7 +75,7 @@ function generateCompList () {
 }
 
 function generateLocaleList () {
-  return ['en', 'de-DE', 'fr-FR', 'ru-RU', 'zh-CN', 'ko-KR', 'ja-JP', 'eo-UY']
+  return ['en', /* 'de-DE', 'fr-FR', 'ru-RU', 'zh-CN', 'ko-KR', 'ja-JP', */ 'eo-UY']
 }
 
 module.exports = {
