@@ -52,7 +52,7 @@
     "shelljs": "^0.8.3",
     "ts-jest": "^24.1.0",
     "tslint": "^5.20.1",
-    "typescript": "^3.9.5",
+    "typescript": "^3.9.7",
     "typestrict": "^1.0.2",
     "vue": "^2.6.11",
     "vue-loader": "^15.7.1",
