@@ -32,12 +32,22 @@
     padding: $btn-toggle-btn-padding
 
     &:first-child
-      border-top-left-radius: inherit
-      border-bottom-left-radius: inherit
+      +ltr()
+        border-top-left-radius: inherit
+        border-bottom-left-radius: inherit
+
+      +rtl()
+        border-top-right-radius: inherit
+        border-bottom-right-radius: inherit
 
     &:last-child
-      border-top-right-radius: inherit
-      border-bottom-right-radius: inherit
+      +ltr()
+        border-top-right-radius: inherit
+        border-bottom-right-radius: inherit
+
+      +rtl()
+        border-top-left-radius: inherit
+        border-bottom-left-radius: inherit
 
     &--active
       color: inherit
@@ -46,8 +56,13 @@
     &:after
       display: none
 
-    &:not(:first-child)
-      border-left-width: 0
+    +ltr()
+      &:not(:first-child)
+        border-left-width: 0
+
+    +rtl()
+      &:not(:last-child)
+        border-left-width: 0
 
   &:not(.v-btn-toggle--dense)
     .v-btn.v-btn.v-size--default

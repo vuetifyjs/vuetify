@@ -204,6 +204,10 @@ export default VSelect.extend({
     this.setSearch()
   },
 
+  destroyed () {
+    document.removeEventListener('copy', this.onCopy)
+  },
+
   methods: {
     onFilteredItemsChanged (val: never[], oldVal: never[]) {
       // TODO: How is the watcher triggered

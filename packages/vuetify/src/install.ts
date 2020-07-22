@@ -49,5 +49,23 @@ export function install (Vue: VueConstructor, args: VuetifyUseOptions = {}) {
         this.$vuetify = (options.parent && options.parent.$vuetify) || this
       }
     },
+    beforeMount () {
+      // @ts-ignore
+      if (this.$options.vuetify && this.$el && this.$el.hasAttribute('data-server-rendered')) {
+        // @ts-ignore
+        this.$vuetify.isHydrating = true
+        // @ts-ignore
+        this.$vuetify.breakpoint.update(true)
+      }
+    },
+    mounted () {
+      // @ts-ignore
+      if (this.$options.vuetify && this.$vuetify.isHydrating) {
+        // @ts-ignore
+        this.$vuetify.isHydrating = false
+        // @ts-ignore
+        this.$vuetify.breakpoint.update()
+      }
+    },
   })
 }

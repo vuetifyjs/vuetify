@@ -7,7 +7,7 @@
           aspect-ratio="2.75"
         ></v-img>
 
-        <v-card-title primary-title>
+        <v-card-title>
           <div>
             <h3 class="headline mb-0">Kangaroo Valley Safari</h3>
             <div> {{ card_text }} </div>
