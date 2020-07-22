@@ -247,7 +247,7 @@ export default baseMixins.extend<options>().extend({
       })
     },
     clearableCallback () {
-      this.$refs.input && this.$refs.input.focus()
+      this.$refs.input && this.$refs.input.click()
       this.$nextTick(() => this.internalValue = null)
     },
     genAppendSlot () {
