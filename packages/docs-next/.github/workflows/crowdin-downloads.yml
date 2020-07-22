@@ -21,8 +21,8 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Download eo
-      uses: crowdin/github-action@1.0.6
+    - name: Download eo-UY
+      uses: crowdin/github-action@1.0.9
       with:
         config: crowdin.yml
         upload_sources: false
@@ -33,13 +33,68 @@ jobs:
         localization_branch_name: ${{ env.LOCAL_BRANCH }}
         crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
 
-    - name: Download sv-SE
-      uses: crowdin/github-action@1.0.6
+    - name: Download de-DE
+      uses: crowdin/github-action@1.0.9
       with:
         config: crowdin.yml
         upload_sources: false
         download_translations: true
         export_only_approved: true
-        download_language: sv-SE
+        download_language: de-DE
+        localization_branch_name: ${{ env.LOCAL_BRANCH }}
+        crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
+
+    - name: Download fr-FR
+      uses: crowdin/github-action@1.0.9
+      with:
+        config: crowdin.yml
+        upload_sources: false
+        download_translations: true
+        export_only_approved: true
+        download_language: fr-FR
+        localization_branch_name: ${{ env.LOCAL_BRANCH }}
+        crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
+
+    - name: Download ru-RU
+      uses: crowdin/github-action@1.0.9
+      with:
+        config: crowdin.yml
+        upload_sources: false
+        download_translations: true
+        export_only_approved: true
+        download_language: ru-RU
+        localization_branch_name: ${{ env.LOCAL_BRANCH }}
+        crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
+
+    - name: Download zh-CN
+      uses: crowdin/github-action@1.0.9
+      with:
+        config: crowdin.yml
+        upload_sources: false
+        download_translations: true
+        export_only_approved: true
+        download_language: zh-CN
+        localization_branch_name: ${{ env.LOCAL_BRANCH }}
+        crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
+
+    - name: Download ko-KR
+      uses: crowdin/github-action@1.0.9
+      with:
+        config: crowdin.yml
+        upload_sources: false
+        download_translations: true
+        export_only_approved: true
+        download_language: ko-KR
+        localization_branch_name: ${{ env.LOCAL_BRANCH }}
+        crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
+
+    - name: Download ja-JP
+      uses: crowdin/github-action@1.0.9
+      with:
+        config: crowdin.yml
+        upload_sources: false
+        download_translations: true
+        export_only_approved: true
+        download_language: ja-JP
         localization_branch_name: ${{ env.LOCAL_BRANCH }}
         crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
