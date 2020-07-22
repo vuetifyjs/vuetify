@@ -51,7 +51,7 @@ export function install (Vue: VueConstructor, args: VuetifyUseOptions = {}) {
     },
     beforeMount () {
       // @ts-ignore
-      if (this.$options.vuetify && this.$el.hasAttribute('data-server-rendered')) {
+      if (this.$options.vuetify && this.$el && this.$el.hasAttribute('data-server-rendered')) {
         // @ts-ignore
         this.$vuetify.isHydrating = true
         // @ts-ignore
