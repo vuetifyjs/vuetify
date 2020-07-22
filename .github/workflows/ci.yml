@@ -1,0 +1,164 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '12'
+      - uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+      - run: yarn --frozen-lockfile --non-interactive
+      - run: yarn run build:lib
+        working-directory: ./packages/vuetify
+      - run: |
+          mkdir .artifact
+          git status --ignored --porcelain | \
+          grep -oP '(?!.*node_modules\/.*)\!\! \K.*' | \
+          while read -r line; do \
+            mkdir -p "./.artifact/$(dirname "$line")"; \
+            mv "$line" $_; \
+          done
+      - run: tar -cf ../.artifact.tar .
+        working-directory: ./.artifact
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build-result
+          path: .artifact.tar
+
+  lint:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: ls -lah packages/vuetify
+      - uses: actions/download-artifact@v2
+        with:
+          name: build-result
+      - run: tar -xf .artifact.tar
+      - uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+      - run: yarn run lint
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: build-result
+      - run: tar -xf .artifact.tar
+      - uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+      - run: yarn lerna run test:coverage
+      - uses: codecov/codecov-action@v1
+
+  deploy:
+    needs: [lint, test]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+      - run: yarn lerna run build --scope vuetify
+      - run: rm -rf release
+      - run: mkdir -p release
+      - run: |
+          for file in ./packages/vuetify/dist/*; do \
+            cp "$file" "${file/packages\/vuetify\/dist\/vuetify/release/vuetify-${{ github.ref }}}"; \
+          done
+      - run: zip -jr "release/vuetify-${{ github.ref }}.zip" release/*
+      - name: NPM Release
+        run: bash scripts/deploy.sh
+        env:
+          NPM_API_KEY: ${{ secrets.NPM_TOKEN }}
+          TAG_NAME: ${{ github.ref }}
+      - name: GitHub release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: release/vuetify-${{ github.ref }}.zip
+          asset_name: vuetify-${{ github.ref }}.zip
+          asset_content_type: application/zip
+
+  publish-docs-live:
+    needs: [lint, test]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+      - run: yarn global add now
+      - run: node scripts/deploy-and-alias.js vuetifyjs.com
+        env:
+          NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
+
+  publish-docs-dev:
+    needs: [lint, test]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+      - run: yarn global add now
+      - run: node scripts/deploy-and-alias.js dev.vuetifyjs.com
+        env:
+          NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
+
+  publish-docs-next:
+    needs: [lint, test]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/next'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+      - run: yarn global add now
+      - run: node scripts/deploy-and-alias.js next.vuetifyjs.com
+        env:
+          NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
