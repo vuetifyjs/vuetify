@@ -345,7 +345,6 @@ Inside the `.json` files, you will likely notice a bunch of additional data rela
 {
   "props": {
     "empty": "",
-    // add prop lang here
     "border": "Puts a border on the alert. Accepts **top** | **right** | **bottom** | **left**.",
     ...
   }

@@ -13,23 +13,18 @@
     "touchless": "Disable touch support.",
     "transition": "The transition used when the component progressing through items. Can be one of the [built in transitions](/styles/transitions) or one your own.",
     "vertical": "Uses a vertical transition when changing windows."
-    // add prop lang here
   },
   "slots": {
     "empty": ""
-    // add slot lang here
   },
   "events": {
     "empty": "",
     "change": "Emitted when the component value is changed by user interaction"
-    // add event lang here
   },
   "functions": {
     "empty": ""
-    // add function lang here
   },
   "sass": {
     "empty": ""
-    // add sass lang here
   }
 }

@@ -6,22 +6,17 @@
     "leaveAbsolute": "Absolutely positions the leaving element (useful for [FLIP](https://aerotwist.com/blog/flip-your-animations/))",
     "mode": "Mixins.Transitionable.props.mode",
     "origin": "Mixins.Transitionable.props.origin"
-    // add prop lang here
   },
   "slots": {
     "empty": ""
-    // add slot lang here
   },
   "events": {
     "empty": ""
-    // add event lang here
   },
   "functions": {
     "empty": ""
-    // add function lang here
   },
   "sass": {
     "empty": ""
-    // add sass lang here
   }
 }

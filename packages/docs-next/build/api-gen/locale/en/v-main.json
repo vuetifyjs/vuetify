@@ -2,22 +2,17 @@
   "props": {
     "empty": "",
     "tag": "Components.Sheets.props.tag"
-    // add prop lang here
   },
   "slots": {
     "empty": ""
-    // add slot lang here
   },
   "events": {
     "empty": ""
-    // add event lang here
   },
   "functions": {
     "empty": ""
-    // add function lang here
   },
   "sass": {
     "empty": ""
-    // add sass lang here
   }
 }

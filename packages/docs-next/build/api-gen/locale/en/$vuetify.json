@@ -1,15 +1,12 @@
 {
   "props": {
     "empty": ""
-    // add prop lang here
   },
   "slots": {
     "empty": ""
-    // add slot lang here
   },
   "events": {
     "empty": ""
-    // add event lang here
   },
   "functions": {
     "empty": "",
@@ -17,6 +14,5 @@
   },
   "sass": {
     "empty": ""
-    // add sass lang here
   }
 }

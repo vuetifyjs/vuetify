@@ -30,10 +30,8 @@
   },
   "functions": {
     "empty": ""
-    // add function lang here
   },
   "sass": {
     "empty": ""
-    // add sass lang here
   }
 }
