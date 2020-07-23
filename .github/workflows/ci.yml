@@ -46,34 +46,32 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn --frozen-lockfile --non-interactive
       - run: yarn lerna run build --scope vuetify
+      - run: echo ::set-env name=RELEASE_TAG::${GITHUB_REF#refs/tags/}
       - run: rm -rf release
-      - run: mkdir -p release
-      - run: |
-          for file in ./packages/vuetify/dist/*; do \
-            cp "$file" "${file/packages\/vuetify\/dist\/vuetify/release/vuetify-${{ github.ref }}}"; \
-          done
-      - run: zip -jr "release/vuetify-${{ github.ref }}.zip" release/*
+      - run: cp -r ./packages/vuetify/dist release
+      - run: for file in ./release/*.*; do mv "$file" "${file/release\/vuetify/release/vuetify-${RELEASE_TAG}}"; done
+      - run: zip -jr "release/vuetify-${RELEASE_TAG}.zip" release/*
       - name: NPM Release
         run: bash scripts/deploy.sh
         env:
           NPM_API_KEY: ${{ secrets.NPM_TOKEN }}
-          TAG_NAME: ${{ github.ref }}
+          TAG_NAME: ${{ env.RELEASE_TAG }}
       - name: GitHub release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
+          tag_name: ${{ env.RELEASE_TAG }}
+          release_name: ${{ env.RELEASE_TAG }}
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: release/vuetify-${{ github.ref }}.zip
-          asset_name: vuetify-${{ github.ref }}.zip
+          asset_path: release/vuetify-${{ env.RELEASE_TAG }}.zip
+          asset_name: vuetify-${{ env.RELEASE_TAG }}.zip
           asset_content_type: application/zip
 
   publish-docs:
