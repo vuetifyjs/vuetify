@@ -67,6 +67,7 @@ export default mixins(
     selection: {} as Record<string, any>,
     expansion: {} as Record<string, boolean>,
     internalCurrentItems: [] as any[],
+    shiftKeyDown: false as boolean,
   }),
 
   computed: {
@@ -147,7 +148,24 @@ export default mixins(
     })
   },
 
+  mounted () {
+    window.addEventListener('keydown', this.onKeyDown)
+    window.addEventListener('keyup', this.onKeyUp)
+  },
+  beforeDestroy () {
+    window.removeEventListener('keydown', this.onKeyDown)
+    window.removeEventListener('keyup', this.onKeyUp)
+  },
+
   methods: {
+    onKeyDown (e: KeyboardEvent): void {
+      if (e.keyCode !== 16) return
+      this.shiftKeyDown = true
+    },
+    onKeyUp (e: KeyboardEvent): void {
+      if (e.keyCode !== 16) return
+      this.shiftKeyDown = false
+    },
     toggleSelectAll (value: boolean): void {
       const selection = Object.assign({}, this.selection)
 
@@ -178,6 +196,18 @@ export default mixins(
 
       if (value) selection[key] = item
       else delete selection[key]
+
+      if (this.shiftKeyDown && !this.singleSelect) {
+        const index = this.selectableItems.findIndex(x => x.name === item.name)
+        for (let i = index - 1; i >= 0; i--) {
+          const currentItem = this.selectableItems[i]
+          if (this.isSelected(currentItem) === value) break
+          const key = getObjectValueByPath(currentItem, this.itemKey)
+          if (value) selection[key] = currentItem
+          else delete selection[key]
+          emit && this.$emit('item-selected', { currentItem, value })
+        }
+      }
 
       if (this.singleSelect && emit) {
         const keys = Object.keys(this.selection)
