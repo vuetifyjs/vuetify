@@ -2,13 +2,10 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2-beta
-        with:
-          node-version: '12'
       - uses: actions/cache@v2
         with:
           path: |
@@ -18,61 +15,27 @@ jobs:
       - run: yarn --frozen-lockfile --non-interactive
       - run: yarn run build:lib
         working-directory: ./packages/vuetify
-      - run: |
-          mkdir .artifact
-          git status --ignored --porcelain | \
-          grep -oP '(?!.*node_modules\/.*)\!\! \K.*' | \
-          while read -r line; do \
-            mkdir -p "./.artifact/$(dirname "$line")"; \
-            mv "$line" $_; \
-          done
-      - run: tar -cf ../.artifact.tar .
-        working-directory: ./.artifact
-      - uses: actions/upload-artifact@v2
-        with:
-          name: build-result
-          path: .artifact.tar
-
-  lint:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - run: ls -lah packages/vuetify
-      - uses: actions/download-artifact@v2
-        with:
-          name: build-result
-      - run: tar -xf .artifact.tar
-      - uses: actions/cache@v2
-        with:
-          path: |
-            node_modules
-            **/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn run lint
 
   test:
-    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v2
-        with:
-          name: build-result
-      - run: tar -xf .artifact.tar
       - uses: actions/cache@v2
         with:
           path: |
             node_modules
             **/node_modules
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+
+      - run: yarn --frozen-lockfile --non-interactive
       - run: yarn lerna run test:coverage
       - uses: codecov/codecov-action@v1
 
   deploy:
     needs: [lint, test]
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    if: github.event_name == 'push' && startswith(github.ref, 'refs/tags/v')
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
@@ -81,6 +44,7 @@ jobs:
             node_modules
             **/node_modules
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+      - run: yarn --frozen-lockfile --non-interactive
       - run: yarn lerna run build --scope vuetify
       - run: rm -rf release
       - run: mkdir -p release
