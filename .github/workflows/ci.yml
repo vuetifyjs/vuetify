@@ -76,10 +76,10 @@ jobs:
           asset_name: vuetify-${{ github.ref }}.zip
           asset_content_type: application/zip
 
-  publish-docs-live:
+  publish-docs:
     needs: [lint, test]
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
@@ -89,40 +89,6 @@ jobs:
             **/node_modules
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn global add now
-      - run: node scripts/deploy-and-alias.js vuetifyjs.com
-        env:
-          NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
-
-  publish-docs-dev:
-    needs: [lint, test]
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        with:
-          path: |
-            node_modules
-            **/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
-      - run: yarn global add now
-      - run: node scripts/deploy-and-alias.js dev.vuetifyjs.com
-        env:
-          NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
-
-  publish-docs-next:
-    needs: [lint, test]
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/next'
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        with:
-          path: |
-            node_modules
-            **/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
-      - run: yarn global add now
-      - run: node scripts/deploy-and-alias.js next.vuetifyjs.com
+      - run: node scripts/deploy-and-alias.js ${{ github.ref }}
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
