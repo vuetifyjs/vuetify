@@ -62,13 +62,13 @@ export default mixins(
     dayFormat: Function as PropType<DatePickerAllowedDatesFunction | undefined>,
     disabled: Boolean,
     events: {
-      type: [Array, Function, Object],
+      type: [Array, Function, Object] as PropType<DatePickerEvents>,
       default: () => null,
-    } as PropValidator<DatePickerEvents | null>,
+    },
     eventColor: {
-      type: [Array, Function, Object, String],
+      type: [Array, Function, Object, String] as PropType<DatePickerEventColors>,
       default: () => 'warning',
-    } as PropValidator<DatePickerEventColors>,
+    },
     firstDayOfWeek: {
       type: [String, Number],
       default: 0,
@@ -328,7 +328,7 @@ export default mixins(
         consoleWarn(`Value must be ${this.isMultiple ? 'an' : 'a'} ${expected}, got ${valueType}`, this)
       }
     },
-    isDateAllowed (value: string): boolean {
+    isDateAllowed (value: string) {
       return isDateAllowed(value, this.min, this.max, this.allowedDates)
     },
     yearClick (value: number) {
@@ -366,7 +366,7 @@ export default mixins(
       this.inputDay = parseInt(value.split('-')[2], 10)
       this.emitInput(this.inputDate)
     },
-    genPickerTitle (): VNode {
+    genPickerTitle () {
       return this.$createElement(VDatePickerTitle, {
         props: {
           date: this.value ? (this.formatters.titleDate as (value: any) => string)(this.isMultiple ? this.multipleValue : this.value) : '',
@@ -383,7 +383,7 @@ export default mixins(
         },
       })
     },
-    genTableHeader (): VNode {
+    genTableHeader () {
       return this.$createElement(VDatePickerHeader, {
         props: {
           nextIcon: this.nextIcon,
@@ -407,7 +407,7 @@ export default mixins(
         },
       })
     },
-    genDateTable (): VNode {
+    genDateTable () {
       return this.$createElement(VDatePickerDateTable, {
         props: {
           allowedDates: this.allowedDates,
@@ -440,7 +440,7 @@ export default mixins(
         },
       })
     },
-    genMonthTable (): VNode {
+    genMonthTable () {
       return this.$createElement(VDatePickerMonthTable, {
         props: {
           allowedDates: this.type === 'month' ? this.allowedDates : null,
@@ -469,7 +469,7 @@ export default mixins(
         },
       })
     },
-    genYears (): VNode {
+    genYears () {
       return this.$createElement(VDatePickerYears, {
         props: {
           color: this.color,
@@ -485,7 +485,7 @@ export default mixins(
         },
       })
     },
-    genPickerBody (): VNode {
+    genPickerBody () {
       const children = this.activePicker === 'YEAR' ? [
         this.genYears(),
       ] : [

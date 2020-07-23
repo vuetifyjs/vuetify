@@ -62,7 +62,7 @@
     "date-fns": "^2.12.0",
     "deepmerge": "^4.0.0",
     "docsearch.js": "^2.6.3",
-    "eslint": "^6.6.0",
+    "eslint": "^6.1.0",
     "eslint-plugin-json": "^1.4.0",
     "eslint-plugin-vuetify": "^1.0.0-beta.4",
     "fibers": "^4.0.1",

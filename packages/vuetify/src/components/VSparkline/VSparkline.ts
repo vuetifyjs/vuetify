@@ -8,7 +8,7 @@ import { genPath } from './helpers/path'
 
 // Types
 import Vue, { VNode } from 'vue'
-import { Prop, PropValidator } from 'vue/types/options'
+import { Prop } from 'vue/types/options'
 
 export type SparklineItem = number | { value: number }
 
@@ -79,9 +79,9 @@ export default mixins<options &
       default: false,
     },
     gradient: {
-      type: Array,
+      type: Array as Prop<string[]>,
       default: () => ([]),
-    } as PropValidator<string[]>,
+    },
     gradientDirection: {
       type: String as Prop<'top' | 'bottom' | 'left' | 'right'>,
       validator: (val: string) => ['top', 'bottom', 'left', 'right'].includes(val),
@@ -92,9 +92,9 @@ export default mixins<options &
       default: 75,
     },
     labels: {
-      type: Array,
+      type: Array as Prop<SparklineItem[]>,
       default: () => ([]),
-    } as PropValidator<SparklineItem[]>,
+    },
     labelSize: {
       type: [Number, String],
       default: 7,
@@ -118,9 +118,9 @@ export default mixins<options &
       validator: (val: string) => ['trend', 'bar'].includes(val),
     },
     value: {
-      type: Array,
+      type: Array as Prop<SparklineItem[]>,
       default: () => ([]),
-    } as PropValidator<SparklineItem[]>,
+    },
     width: {
       type: [Number, String],
       default: 300,

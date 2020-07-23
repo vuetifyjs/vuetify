@@ -15,7 +15,6 @@ import {
 
 // Types
 import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
 
 export default Measurable.extend({
   name: 'v-virtual-scroll',
@@ -34,7 +33,7 @@ export default Measurable.extend({
     items: {
       type: Array,
       default: () => [],
-    } as PropValidator<any[]>,
+    },
   },
 
   data: () => ({

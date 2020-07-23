@@ -20,7 +20,6 @@ import {
   PropType,
   VNodeChildren,
 } from 'vue'
-import { PropValidator } from 'vue/types/options'
 import {
   DatePickerAllowedDatesFunction,
   DatePickerEventColors,
@@ -46,13 +45,13 @@ export default mixins(
     disabled: Boolean,
     format: Function as PropType<DatePickerFormatter | undefined>,
     events: {
-      type: [Array, Function, Object],
+      type: [Array, Function, Object] as PropType<DatePickerEvents>,
       default: () => null,
-    } as PropValidator<DatePickerEvents | null>,
+    },
     eventColor: {
-      type: [Array, Function, Object, String],
+      type: [Array, Function, Object, String] as PropType<DatePickerEventColors>,
       default: () => 'warning',
-    } as PropValidator<DatePickerEventColors>,
+    },
     min: String,
     max: String,
     range: Boolean,

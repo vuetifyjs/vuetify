@@ -22,7 +22,6 @@
 
     // Handled by tsc
     "no-unused-variable": false,
-    "no-use-before-declare": false,
 
     // Useless with vue
     "no-invalid-this": false,

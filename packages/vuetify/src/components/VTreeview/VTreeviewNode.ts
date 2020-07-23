@@ -12,8 +12,7 @@ import mixins, { ExtractVue } from '../../util/mixins'
 import { getObjectValueByPath, createRange } from '../../util/helpers'
 
 // Types
-import { VNode, VNodeChildren, PropType } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { VNode, PropType } from 'vue'
 
 type VTreeViewInstance = InstanceType<typeof VTreeview>
 
@@ -104,7 +103,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
     item: {
       type: Object,
       default: () => null,
-    } as PropValidator<Record<string, unknown> | null>,
+    },
     parentIsDisabled: Boolean,
     ...VTreeviewNodeProps,
   },
@@ -268,7 +267,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
         staticClass: 'v-treeview-node__level',
       }))
     },
-    genNode () {
+    genNode (): VNode {
       const children = [this.genContent()]
 
       if (this.selectable) children.unshift(this.genCheckbox())
@@ -299,7 +298,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
         },
       }), children)
     },
-    genChild (item: any, parentIsDisabled: boolean) {
+    genChild (item: any, parentIsDisabled: boolean): VNode {
       return this.$createElement(VTreeviewNode, {
         key: getObjectValueByPath(item, this.itemKey),
         props: {
@@ -330,7 +329,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
         scopedSlots: this.$scopedSlots,
       })
     },
-    genChildrenWrapper () {
+    genChildrenWrapper (): any {
       if (!this.isOpen || !this.children) return null
 
       const children = [this.children.map(c => this.genChild(c, this.disabled))]
@@ -345,7 +344,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
   },
 
   render (h): VNode {
-    const children: VNodeChildren = [this.genNode()]
+    const children = [this.genNode()]
 
     if (this.transition) children.push(this.genTransition())
     else children.push(this.genChildrenWrapper())

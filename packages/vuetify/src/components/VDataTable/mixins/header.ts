@@ -3,8 +3,7 @@ import VIcon from '../../VIcon'
 import VSimpleCheckbox from '../../VCheckbox/VSimpleCheckbox'
 import ripple from '../../../directives/ripple'
 
-import Vue from 'vue'
-import { PropValidator } from 'vue/types/options'
+import Vue, { PropType } from 'vue'
 import mixins from '../../../util/mixins'
 import { DataOptions, DataTableHeader } from 'vuetify/types'
 
@@ -22,11 +21,11 @@ export default mixins<options>().extend({
 
   props: {
     headers: {
-      type: Array,
+      type: Array as PropType<DataTableHeader[]>,
       default: () => ([]),
-    } as PropValidator<DataTableHeader[]>,
+    },
     options: {
-      type: Object,
+      type: Object as PropType<DataOptions>,
       default: () => ({
         page: 1,
         itemsPerPage: 10,
@@ -37,7 +36,7 @@ export default mixins<options>().extend({
         multiSort: false,
         mustSort: false,
       }),
-    } as PropValidator<DataOptions>,
+    },
     sortIcon: {
       type: String,
       default: '$sort',

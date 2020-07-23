@@ -29,13 +29,7 @@ module.exports = {
     }],
     'max-statements': ['error', 24],
     'no-console': 'off',
-    'comma-dangle': ['error', {
-      arrays: 'always-multiline',
-      objects: 'always-multiline',
-      imports: 'always-multiline',
-      exports: 'always-multiline',
-      functions: 'only-multiline'
-    }],
+    'comma-dangle': ['error', 'always-multiline'],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-return-assign': 'off',

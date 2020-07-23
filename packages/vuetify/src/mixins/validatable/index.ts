@@ -9,7 +9,7 @@ import { consoleError } from '../../util/console'
 import mixins from '../../util/mixins'
 
 // Types
-import { PropValidator } from 'vue/types/options'
+import { PropType } from 'vue'
 import { InputMessage, InputValidationRules } from 'vuetify/types'
 
 const baseMixins = mixins(
@@ -30,23 +30,23 @@ export default baseMixins.extend({
       default: 1,
     },
     errorMessages: {
-      type: [String, Array],
+      type: [String, Array] as PropType<InputMessage>,
       default: () => [],
-    } as PropValidator<InputMessage>,
+    },
     messages: {
-      type: [String, Array],
+      type: [String, Array] as PropType<InputMessage>,
       default: () => [],
-    } as PropValidator<InputMessage>,
+    },
     readonly: Boolean,
     rules: {
-      type: Array,
+      type: Array as PropType<InputValidationRules>,
       default: () => [],
-    } as PropValidator<InputValidationRules>,
+    },
     success: Boolean,
     successMessages: {
-      type: [String, Array],
+      type: [String, Array] as PropType<InputMessage>,
       default: () => [],
-    } as PropValidator<InputMessage>,
+    },
     validateOnBlur: Boolean,
     value: { required: false },
   },

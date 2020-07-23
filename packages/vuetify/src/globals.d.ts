@@ -65,10 +65,6 @@ declare global {
     path?: EventTarget[]
   }
 
-  interface UIEvent {
-    initUIEvent (typeArg: string, canBubbleArg: boolean, cancelableArg: boolean, viewArg: Window, detailArg: number): void
-  }
-
   function parseInt(s: string | number, radix?: number): number
   function parseFloat(string: string | number): number
 
@@ -101,8 +97,8 @@ declare module 'vue/types/vue' {
   >
 
   export interface Vue {
-    readonly _uid: number
-    readonly _isDestroyed: boolean
+    _uid: number
+    _isDestroyed: boolean
 
     /** bindObjectProps */
     _b (

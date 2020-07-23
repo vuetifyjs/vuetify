@@ -117,8 +117,7 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  // TODO: fails with TS 3.9
-  it.skip('should load children when expanding', async () => {
+  it('should load children when expanding', async () => {
     const loadChildren = item => {
       item.children.push({ id: 1, name: 'Child' })
     }
@@ -208,8 +207,7 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
     expect(fn).toHaveBeenLastCalledWith([0, 1])
   })
 
-  // TODO: fails with TS 3.9
-  it.skip('should update selection when selected prop changes', async () => {
+  it('should update selection when selected prop changes', async () => {
     const wrapper = mountFunction({
       propsData: {
         items: [{ id: 0, name: 'Root', children: [{ id: 1, name: 'Child' }] }],
@@ -580,8 +578,7 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
     expect(wrapper.findAll('.v-treeview-node--excluded')).toHaveLength(1)
   })
 
-  // TODO: fails with TS 3.9
-  it.skip('should emit objects when return-object prop is used', async () => {
+  it('should emit objects when return-object prop is used', async () => {
     const items = [{ id: 0, name: 'Root', children: [{ id: 1, name: 'Child' }] }]
 
     const wrapper = mountFunction({
@@ -754,8 +751,7 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/8244
-  // TODO: fails with TS 3.9
-  it.skip('should not touch disabled items when selecting', async () => {
+  it('should not touch disabled items when selecting', async () => {
     const items = [{
       id: 1,
       name: 'Foo',
@@ -807,8 +803,7 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
 
   // https://github.com/vuetifyjs/vuetify/issues/10990
   // https://github.com/vuetifyjs/vuetify/issues/10770
-  // TODO: fails with TS 3.9
-  it.skip('should not disable children of disabled parent when in independent mode', async () => {
+  it('should not disable children of disabled parent when in independent mode', async () => {
     const items = [{
       id: 1,
       name: 'Foo',
@@ -849,8 +844,7 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/9693
-  // TODO: fails with TS 3.9
-  it.skip('should emit opened node when using open-on-click and load-children', async () => {
+  it('should emit opened node when using open-on-click and load-children', async () => {
     const open = jest.fn()
 
     const wrapper = mountFunction({

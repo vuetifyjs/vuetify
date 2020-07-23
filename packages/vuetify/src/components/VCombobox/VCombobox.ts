@@ -9,7 +9,7 @@ import VAutocomplete from '../VAutocomplete/VAutocomplete'
 import { keyCodes } from '../../util/helpers'
 
 // Types
-import { PropValidator } from 'vue/types/options'
+import { PropType } from 'vue'
 
 /* @vue/component */
 export default VAutocomplete.extend({
@@ -17,9 +17,9 @@ export default VAutocomplete.extend({
 
   props: {
     delimiters: {
-      type: Array,
+      type: Array as PropType<string[]>,
       default: () => ([]),
-    } as PropValidator<string[]>,
+    },
     returnObject: {
       type: Boolean,
       default: true,
@@ -166,7 +166,7 @@ export default VAutocomplete.extend({
       }
     },
     setValue (value?: any) {
-      VSelect.options.methods.setValue.call(this, value ?? this.internalSearch)
+      VSelect.options.methods.setValue.call(this, value != null ? value : this.internalSearch)
     },
     updateEditing () {
       const value = this.internalValue.slice()

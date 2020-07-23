@@ -118,8 +118,7 @@ describe('VCombobox.ts', () => {
     expect(event).not.toHaveBeenCalled()
   })
 
-  // TODO: fails with TS 3.9
-  it.skip('should clear value', async () => {
+  it('should clear value', async () => {
     const wrapper = mountFunction({
       attachToDocument: true,
     })
