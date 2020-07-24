@@ -162,7 +162,7 @@ export default baseMixins.extend({
         return this.internalErrorMessages
       } else if (this.successMessages.length > 0) {
         return this.internalSuccessMessages
-      } else if (this.messages.length > 0) {
+      } else if (this.messages && this.messages.length > 0) {
         return this.internalMessages
       } else if (this.shouldValidate) {
         return this.errorBucket
