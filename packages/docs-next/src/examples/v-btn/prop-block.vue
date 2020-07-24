@@ -1,9 +1,5 @@
 <template>
-  <v-btn
-    block
-    color="secondary"
-    dark
-  >
+  <v-btn block>
     Block Button
   </v-btn>
 </template>
