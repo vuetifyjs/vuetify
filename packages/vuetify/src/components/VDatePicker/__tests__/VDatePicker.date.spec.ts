@@ -213,7 +213,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     expect(cb.mock.calls[0][0]).toHaveLength(3)
     expect(cb.mock.calls[0][0][2]).toBe('2013-05-05')
     expect(cb.mock.calls[0][0]).toEqual(
-      expect.arrayContaining(['2013-05-07', '2013-05-08', '2013-05-05'])
+      expect.arrayContaining(['2013-05-07', '2013-05-08', '2013-05-05']),
     )
   })
 
@@ -714,5 +714,16 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
 
     const buttonOfDay02 = wrapper.findAll('.v-date-picker-table--date tbody button').at(1)
     expect(buttonOfDay02.element.classList.contains('accent')).toBeFalsy()
+  })
+
+  it('should handle date range picker with null value', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        range: true,
+        value: null,
+      },
+    })
+
+    expect(wrapper.find('.v-date-picker-title__date').html()).toMatchSnapshot()
   })
 })

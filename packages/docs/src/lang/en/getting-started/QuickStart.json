@@ -17,7 +17,7 @@
   "nuxtText3": "More information on installing Nuxt can be found on the [official documentation](https://nuxtjs.org/).",
   "webpackHeader": "## Webpack install",
   "webpackText1": "To install Vuetify into a Webpack project you need to add a few dependencies:",
-  "webpackText2": "Once installed, locate your `webpack.config.js` file and copy the snippet below into the **rules** array. If you have an existing **sass** rule configured, you may need to apply some or all of the changes below. If you are you looking to utilize the **vuetify-loader** for treeshaking, ensure that you are on version `>=4` of Webpack. You can find more information on setting it up with webpack on the [A-la-carte](/customization/a-la-carte#vueconfigjs-installation) page.",
+  "webpackText2": "Once installed, locate your `webpack.config.js` file and copy the snippet below into the **rules** array. If you have an existing **sass** rule configured, you may need to apply some or all of the changes below. If you are looking to utilize the **vuetify-loader** for treeshaking, ensure that you are on version `>=4` of Webpack. You can find more information on setting it up with webpack on the [A-la-carte](/customization/a-la-carte#vueconfigjs-installation) page.",
   "webpackText3": "Create a plugin file for Vuetify, `src/plugins/vuetify.js` with the below content:",
   "webpackText4": "If using `vuetify-loader` use the content below:",
   "webpackText5": "Navigate to your main entry point where you instantiate your Vue instance and pass the Vuetify object in as an option.",

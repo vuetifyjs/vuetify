@@ -249,15 +249,6 @@ export default baseMixins.extend<options>().extend({
     },
     isMenuActive (val) {
       window.setTimeout(() => this.onMenuActiveChange(val))
-
-      if (!val) return
-
-      this.$nextTick(() => {
-        if (!this.menuIsBooted && this.getContent() && this.$refs.menu.isBooted) {
-          this.getContent().addEventListener('scroll', this.onScroll, false)
-          this.menuIsBooted = true
-        }
-      })
     },
     items: {
       immediate: true,
@@ -518,6 +509,7 @@ export default baseMixins.extend<options>().extend({
             this.isMenuActive = val
             this.isFocused = val
           },
+          scroll: this.onScroll,
         },
         ref: 'menu',
       }, [this.genList()])

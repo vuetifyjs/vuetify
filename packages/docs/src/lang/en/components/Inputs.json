@@ -27,7 +27,7 @@
       "desc": "You can add custom validation rules to `v-input`, add them as functions returning `true`/error message. Note: `v-text-field` is used just for example."
     },
     "hide-details": {
-      "header": "### Auto hiding details",
+      "heading": "### Auto hiding details",
       "desc": "When `hide-details` is set to `auto` messages will be rendered only if there's a message (hint, error message etc) to display."
     },
     "slot-events": {
