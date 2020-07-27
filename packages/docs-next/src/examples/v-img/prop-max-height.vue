@@ -5,10 +5,7 @@
     style="min-height: 434px"
   >
     <v-fade-transition mode="out-in">
-      <v-row
-        v-if="show"
-        key="0"
-      >
+      <v-row>
         <v-col cols="6">
           <v-card>
             <v-img
@@ -63,27 +60,6 @@
           </v-card>
         </v-col>
       </v-row>
-
-      <v-row
-        v-else
-        key="1"
-        justify="center"
-      >
-        <v-btn
-          text
-          @click="show = true"
-        >
-          Load images
-        </v-btn>
-      </v-row>
     </v-fade-transition>
   </v-container>
 </template>
-
-<script>
-  export default {
-    data: () => ({
-      show: false,
-    }),
-  }
-</script>
