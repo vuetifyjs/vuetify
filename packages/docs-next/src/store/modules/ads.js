@@ -18,7 +18,7 @@ const actions = {
       status: 'published',
     })
 
-    commit('all', objects)
+    commit('all', objects || [])
   },
 }
 

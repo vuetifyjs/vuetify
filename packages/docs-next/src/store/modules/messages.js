@@ -19,7 +19,7 @@ const actions = {
       sort: '-created_at',
     })
 
-    commit('notifications', notifications)
+    commit('notifications', notifications || [])
   },
 }
 
