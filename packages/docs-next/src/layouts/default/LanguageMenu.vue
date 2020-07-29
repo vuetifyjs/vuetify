@@ -3,10 +3,12 @@
     origin="top right"
     transition="scale-transition"
   >
-    <template v-slot:activator="{ on }">
+    <template #activator="{ attrs, on }">
       <v-btn
-        class="text--secondary mr-n2"
+        :icon="$vuetify.breakpoint.smAndDown"
+        class="text--secondary mr-n2 px-0 px-md-2"
         text
+        v-bind="attrs"
         v-on="on"
       >
         <span

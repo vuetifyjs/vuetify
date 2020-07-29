@@ -7,11 +7,11 @@
     class="d-inline-block"
   >
     <v-img
-      :src="`https://cdn.vuetifyjs.com/images/logos/vuetify-logo-${theme.isDark ? 'dark' : 'light' }.png`"
+      :src="`https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-${theme.isDark ? 'dark' : 'light' }-text.svg`"
       :alt="$i18n.t('logo')"
       class="shrink"
+      max-width="128"
       transition="scale-transition"
-      width="32"
     />
   </router-link>
 </template>

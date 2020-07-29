@@ -17,6 +17,7 @@
       <v-tooltip
         bottom
         content-class="v-app-tooltip-btn__content"
+        open-delay="200"
       >
         <template #activator="{ attrs: tattrs, on: ton }">
           <v-btn

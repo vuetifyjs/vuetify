@@ -20,6 +20,8 @@
 
     <github-link />
 
+    <latest-release />
+
     <v-divider
       class="mx-2"
       inset

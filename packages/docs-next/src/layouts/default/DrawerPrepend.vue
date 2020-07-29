@@ -4,13 +4,9 @@
     flat
   >
     <v-list-item class="pa-0 mx-n1">
-      <vuetify-logo class="mr-4" />
+      <vuetify-logo />
 
-      <v-list-item-content>
-        <headline path="vuetify" />
-
-        <latest-release />
-      </v-list-item-content>
+      <v-spacer />
 
       <settings-toggle />
 
