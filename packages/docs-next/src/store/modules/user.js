@@ -1,5 +1,4 @@
 // Utilities
-import { differenceInDays } from 'date-fns'
 import { make } from 'vuex-pathify'
 
 // Globals
@@ -10,9 +9,9 @@ const state = {
     alphabetical: false,
     mini: false,
   },
+  last: null,
   notifications: [],
   rtl: false,
-  snackbar: Date.now(),
   theme: {
     dark: false,
     system: false,
@@ -40,15 +39,7 @@ const actions = {
   },
 }
 
-const getters = {
-  hasRecentlyViewed: (_, __, rootState) => {
-    const last = rootState.user.snackbar
-
-    if (!last) return false
-
-    return differenceInDays(Date.now(), Number(last)) < 2
-  },
-}
+const getters = {}
 
 export default {
   namespaced: true,

@@ -44,18 +44,18 @@
 <script>
   // Utilities
   import { wait } from '@/util/helpers'
+  import { differenceInDays } from 'date-fns'
   import { get, sync } from 'vuex-pathify'
 
   export default {
     name: 'DefaultSnackbar',
 
     computed: {
-      last: sync('user/snackbar'),
+      last: sync('user/last'),
       notifications: sync('messages/notifications'),
       snack: sync('snackbar/value'),
       snackbar: sync('snackbar/snackbar'),
       unotifications: sync('user/notifications'),
-      hasRecentlyViewed: get('user/hasRecentlyViewed'),
       initializing: get('app/initializing'),
       locale: get('route/params@locale'),
       bind () {
@@ -64,6 +64,11 @@
         return href.startsWith('http')
           ? { href, target: '_blank', rel: 'noopener' }
           : { to: `/${this.locale}${href}` }
+      },
+      hasRecentlyViewed () {
+        if (!this.last) return false
+
+        return differenceInDays(Date.now(), Number(this.last)) < 1
       },
     },
 
