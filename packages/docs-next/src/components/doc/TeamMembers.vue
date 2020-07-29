@@ -1,118 +1,163 @@
 <template>
-  <v-container>
-    <v-row
-      justify="center"
-    >
-      <v-col
-        v-for="(member, i) in team"
-        :key="i"
-        cols="12"
-        sm="6"
-        lg="4"
-      >
-        <div class="mb-4 text-center member">
-          <v-avatar
-            size="164"
-            class="elevation-4"
-            color="#DDF0FE"
-          >
-            <v-hover>
-              <v-img
-                slot-scope="{ hover }"
-                :src="`https://avataaars.io/?${member.avatar}`"
-              >
-                <v-sheet
-                  :color="hover ? 'rgba(0, 0, 0, .72)' : 'transparent'"
-                  class="transition-fast-in-fast-out"
-                  dark
-                  height="100%"
-                  style="position: absolute; top: 0; left: 0;"
-                  width="100%"
+  <v-container id="team-members">
+    <v-row>
+      <template v-for="(member, i) in team">
+        <v-col
+          :key="i"
+          cols="12"
+        >
+          <div class="d-flex">
+            <v-avatar size="72">
+              <v-img :src="member.avatar" />
+            </v-avatar>
+
+            <div class="pl-6 font-weight-medium">
+              <div class="text-h5 mb-1 font-weight-bold d-flex align-center">
+                <span
+                  class="mr-3"
+                  v-text="member.name"
+                />
+
+                <a
+                  v-if="member.twitter"
+                  :href="`https://twitter.com/${member.twitter}`"
+                  class="d-inline-flex text-decoration-none mr-1"
+                  rel="noopener"
+                  target="_blank"
                 >
-                  <v-row
-                    v-show="hover"
-                    class="fill-height ma-0"
-                    align="center"
-                    justify="center"
+                  <v-icon color="#40BBF4">
+                    $mdiTwitter
+                  </v-icon>
+                </a>
+
+                <a
+                  v-if="member.github"
+                  :href="`https://github.com/${member.github}`"
+                  class="d-inline-flex text-decoration-none mr-1"
+                  rel="noopener"
+                  target="_blank"
+                >
+                  <v-icon color="#24292E">
+                    $mdiGithub
+                  </v-icon>
+                </a>
+
+                <a
+                  v-if="member.linkedin"
+                  :href="`https://linkedin.com/in/${member.linkedin}`"
+                  class="d-inline-flex text-decoration-none mr-1"
+                  rel="noopener"
+                  target="_blank"
+                >
+                  <v-icon color="#0077B5">
+                    $mdiLinkedin
+                  </v-icon>
+                </a>
+              </div>
+
+              <div
+                v-if="member.focus"
+                class="d-flex align-center flex-wrap"
+              >
+                <i18n
+                  class="text-uppercase caption font-weight-regular"
+                  path="focus"
+                  tag="h3"
+                />
+
+                <div class="mx-2">
+                  &nbsp;—&nbsp;
+                </div>
+
+                <template v-for="(focus, k) in member.focus">
+                  <app-md
+                    :key="k"
+                    v-text="focus"
+                  />
+
+                  <span
+                    v-if="k < member.focus.length - 1"
+                    :key="`span-${k}`"
+                    class="mx-2"
                   >
-                    <v-col
-                      class="pb-0"
-                      cols="12"
-                    >
-                      <i18n
-                        tag="app-md"
-                        class="font-weight-medium mr-1"
-                        :path="`titles.${member.title}`"
+                    •
+                  </span>
+                </template>
+              </div>
+
+              <div
+                v-if="member.funding"
+                class="d-flex align-center flex-wrap mt-1"
+              >
+                <i18n
+                  class="text-uppercase caption font-weight-regular"
+                  path="funding"
+                  tag="h3"
+                />
+
+                <div class="mx-2">
+                  &nbsp;—&nbsp;
+                </div>
+
+                <template v-for="(funding, k) in member.funding">
+                  <app-md
+                    :key="k"
+                    v-text="funding"
+                  />
+
+                  <span
+                    v-if="k < member.funding.length - 1"
+                    :key="`span-${k}`"
+                    class="mx-2"
+                  >
+                    •
+                  </span>
+                </template>
+              </div>
+
+              <template v-for="field in ['work', 'location', 'languages']">
+                <div
+                  v-if="member[field]"
+                  :key="field"
+                  class="text-subtitle d-flex align-center my-2"
+                >
+                  <v-icon
+                    left
+                    v-text="icons[field]"
+                  />
+
+                  <template v-if="Array.isArray(member[field])">
+                    <template v-for="(focus, j) in member[field]">
+                      <app-md
+                        :key="j"
+                        v-text="focus"
                       />
-                    </v-col>
-                    <v-col>
-                      <a
-                        v-if="member.email"
-                        :aria-label="`${member.name}'s Email`"
-                        :href="`mailto:${member.email}`"
-                        :title="`${member.name}'s Email`"
-                        class="text-decoration-none mx-2"
-                        target="_blank"
-                        rel="noopener"
+
+                      <span
+                        v-if="j < member[field].length - 1"
+                        :key="`span-${j}`"
+                        class="mx-2"
                       >
-                        <v-icon>$mdiEmail</v-icon>
-                      </a>
-                      <a
-                        v-if="member.twitter"
-                        :aria-label="`${member.name}'s Twitter Profile`"
-                        :href="`https://twitter.com/${member.twitter}`"
-                        :title="`${member.name}'s Twitter Profile`"
-                        class="text-decoration-none mx-2"
-                        target="_blank"
-                        rel="noopener"
-                      >
-                        <v-icon>$mdiTwitter</v-icon>
-                      </a>
-                      <a
-                        v-if="member.github"
-                        :aria-label="`${member.name}'s Github Profile`"
-                        :href="`https://github.com/${member.github}`"
-                        :title="`${member.name}'s Github Profile`"
-                        class="text-decoration-none mx-2"
-                        target="_blank"
-                        rel="noopener"
-                      >
-                        <v-icon>$mdiGithub</v-icon>
-                      </a>
-                      <a
-                        v-if="member.linkedin"
-                        :aria-label="`${member.name}'s LinkedIn Profile`"
-                        :href="`https://linkedin.com/in/${member.linkedin}`"
-                        :title="`${member.name}'s LinkedIn Profile`"
-                        class="text-decoration-none mx-2"
-                        target="_blank"
-                        rel="noopener"
-                      >
-                        <v-icon>$mdiLinkedin</v-icon>
-                      </a>
-                      <a
-                        v-if="member.patreon"
-                        :aria-label="`${member.name}'s Patreon`"
-                        :href="`https://patreon.com/${member.github}`"
-                        :title="`${member.name}'s Patreon`"
-                        class="text-decoration-none mx-2"
-                        target="_blank"
-                        rel="noopener"
-                      >
-                        <v-icon>$mdiPatreon</v-icon>
-                      </a>
-                    </v-col>
-                  </v-row>
-                </v-sheet>
-              </v-img>
-            </v-hover>
-          </v-avatar>
-          <div
-            class="font-weight-light headline"
-            v-text="member.name"
-          />
-        </div>
-      </v-col>
+                        •
+                      </span>
+                    </template>
+                  </template>
+
+                  <template v-else>
+                    {{ member[field] }}
+                  </template>
+                </div>
+              </template>
+            </div>
+          </div>
+        </v-col>
+
+        <v-divider
+          v-if="i < team.length - 1"
+          :key="`divider-${i}`"
+          class="mb-1 flex-1-1-100"
+        />
+      </template>
     </v-row>
   </v-container>
 </template>
@@ -122,92 +167,142 @@
     name: 'TeamMembers',
 
     data: () => ({
-      team: [
-        {
-          title: 'founder',
+      core: {
+        johnleider: {
+          focus: ['[vuetifyjs/*](https://github.com/vuetifyjs)'],
+          funding: [
+            '[GitHub Sponsors](https://github.com/sponsors/johnleider)',
+            '[Patreon](https://patreon.com/vuetify)',
+          ],
+          languages: ['English'],
+          linkedin: 'john-leider-626183a2',
+          location: 'Fort Worth, TX, USA',
           name: 'John Leider',
-          email: 'john@vuetifyjs.com',
-          github: 'johnleider',
-          twitter: '@zeroskillz',
-          avatar: 'avatarStyle=Transparent&topType=ShortHairShortFlat&accessoriesType=Blank&hairColor=Blonde&facialHairType=Blank&clotheType=Hoodie&clotheColor=Heather&eyeType=Side&eyebrowType=DefaultNatural&mouthType=Smile&skinColor=Light',
+          twitter: 'zeroskillz',
+          work: 'CEO @ Vuetify',
         },
-        {
-          title: 'operations',
+        heatherleider: {
+          focus: ['[vuetifyjs/*](https://github.com/vuetifyjs)'],
+          languages: ['English'],
+          location: 'Fort Worth, TX, USA',
           name: 'Heather Leider',
-          email: 'heather@vuetifyjs.com',
-          avatar: 'avatarStyle=Transparent&topType=LongHairStraight2&accessoriesType=Blank&hairColor=Brown&facialHairType=Blank&clotheType=ShirtVNeck&clotheColor=Pink&eyeType=Hearts&eyebrowType=Default&mouthType=Tongue&skinColor=Light',
+          twitter: 'grneyedgrl01',
+          work: 'COO @ Vuetify',
         },
-        {
-          title: 'keeper',
+        KaelWD: {
+          focus: [
+            '[vuetifyjs/*](https://github.com/vuetifyjs)',
+            '[vuetify-loader](https://github.com/vuetifyjs/vuetify-loader)',
+            '[eslint-plugin-vuetify](https://github.com/vuetifyjs/eslint-plugin-vuetify)',
+          ],
+          funding: [
+            '[GitHub Sponsors](https://github.com/sponsors/kaelwd)',
+            '[Patreon](https://patreon.com/kaelwd)',
+          ],
+          languages: ['English'],
+          location: 'Melbourne, Australia',
           name: 'Kael Watts-Deuchar',
-          github: 'kaelwd',
-          patreon: 'kaelwd',
-          twitter: '@kaelwd',
-          avatar: 'avatarStyle=Transparent&topType=ShortHairShaggyMullet&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=ShirtCrewNeck&clotheColor=Heather&eyeType=Squint&eyebrowType=SadConcernedNatural&mouthType=Concerned&skinColor=Pale',
+          twitter: 'kaelwd',
         },
-        {
-          title: 'core',
+        nekosaur: {
+          focus: ['[vuetifyjs](https://github.com/vuetifyjs)'],
+          languages: ['Swedish', 'English'],
+          location: 'Malmö, Sweden',
           name: 'Albert Kaaman',
-          github: 'nekosaur',
-          avatar: 'avatarStyle=Transparent&topType=ShortHairShortFlat&accessoriesType=Prescription02&hairColor=Auburn&facialHairType=MoustacheMagnum&facialHairColor=Auburn&clotheType=Hoodie&clotheColor=Black&eyeType=Surprised&eyebrowType=RaisedExcited&mouthType=Tongue&skinColor=Pale',
         },
-        {
-          title: 'core',
+        jacekkarczmarczyk: {
+          focus: ['[vuetifyjs](https://github.com/vuetifyjs)'],
+          languages: ['Polish', 'English'],
+          location: 'Warsaw, Poland',
           name: 'Jacek Karczmarczyk',
-          github: 'jacekkarczmarczyk',
-          avatar: 'accessoriesType=Prescription02&avatarStyle=Transparent&clotheColor=Red&clotheType=ShirtCrewNeck&eyeType=EyeRoll&eyebrowType=AngryNatural&facialHairType=Blank&mouthType=Concerned&skinColor=Yellow&topType=ShortHairShortRound',
         },
-        {
-          title: 'core',
-          name: 'Andrew Henry',
-          github: 'MajesticPotatoe',
+        MajesticPotatoe: {
+          focus: ['[vuetifyjs/docs](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)'],
+          funding: [
+            '[GitHub Sponsors](https://github.com/sponsors/majesticpotatoe)',
+            '[Open Collective](https://opencollective.com/vuetify)',
+          ],
+          languages: ['English'],
           linkedin: 'andrew-henry-01049830',
-          avatar: 'avatarStyle=Transparent&topType=ShortHairShortRound&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=Hoodie&clotheColor=Heather&eyeType=Dizzy&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light',
+          location: 'Rochester, NY, USA',
+          name: 'Andrew Henry',
+          twitter: 'SeeMWhyK',
         },
-        {
-          title: 'cm',
+        bdeo: {
+          focus: ['**vuetifyjs/issue-helper**'],
+          languages: ['English'],
+          funding: ['[GitHub Sponsors](https://github.com/sponsors/bdeo)'],
+          linkedin: 'andrew-henry-01049830',
+          location: 'Philadelphia, PA, USA',
           name: 'Brandon Deo',
-          github: 'bdeo',
-          linkedin: 'brandondeo',
-          avatar: 'avatarStyle=Transparent&clotheColor=Heather&clotheType=ShirtCrewNeck&eyeType=Default&eyebrowType=Default&facialHairColor=Black&facialHairType=Blank&hairColor=Blonde&mouthType=Default&skinColor=Pale&topType=ShortHairShortRound',
         },
-        {
-          title: 'core',
+        sh7dm: {
+          focus: ['[vuetifyjs](https://github.com/vuetifyjs)'],
+          languages: ['Russian', 'English'],
+          location: 'Russian Federation',
           name: 'Dmitry Sharshakov',
-          github: 'sh7dm',
-          avatar: 'accessoriesType=Blank&avatarStyle=Transparent&clotheColor=Heather&clotheType=Hoodie&eyeType=Default&eyebrowType=Default&facialHairType=Blank&graphicType=Bear&hairColor=BrownDark&mouthType=Smile&skinColor=Pale&topType=ShortHairShortFlat',
         },
-        {
-          title: 'core',
-          name: 'Sean Kimball',
-          github: 'chewy94',
+        chewy94: {
+          languages: ['English'],
           linkedin: 'sean-kimball-b50922126',
-          avatar: 'avatarStyle=Transparent&clotheColor=Heather&clotheType=ShirtVNeck&eyeType=Happy&eyebrowType=FlatNatural&facialHairColor=Black&facialHairType=BeardLight&hairColor=Black&mouthType=Smile&skinColor=Pale&topType=ShortHairShortFlat',
+          location: 'Goodyear, Arizona, USA',
+          name: 'Sean Kimball',
         },
-        {
-          title: 'core',
+        johannaRlee: {
+          languages: ['English'],
+          linkedin: 'sean-kimball-b50922126',
+          location: 'Dallas, TX, USA',
           name: 'Johanna Lee',
-          email: 'johannarlee@gmail.com',
-          github: 'johannaRlee',
           twitter: 'johannaRlee',
-          avatar: 'avatarStyle=Transparent&topType=LongHairBob&accessoriesType=Blank&hairColor=Brown&facialHairType=Blank&clotheType=CollarSweater&clotheColor=Black&eyeType=Squint&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light',
         },
-        {
-          title: 'core',
-          name: 'Vanessa Alvarez',
-          email: 'vanessalvarez8a@gmail.com',
+        vanessalvarez8a: {
+          languages: ['English'],
           linkedin: 'vanessaalvarez',
+          location: 'Dallas, TX, USA',
+          name: 'Vanessa Alvarez',
           twitter: 'vanessalvarez8a',
-          avatar: 'avatarStyle=Transparent&topType=LongHairStraight&accessoriesType=Blank&hairColor=Brown&facialHairType=Blank&clotheType=ShirtVNeck&clotheColor=Red&eyeType=Side&eyebrowType=DefaultNatural&mouthType=Smile&skinColor=Pale',
         },
-      ],
+      },
+      contributors: {},
+      icons: {
+        languages: '$mdiTranslate',
+        location: '$mdiMapMarkerOutline',
+        work: '$mdiBriefcaseVariantOutline',
+      },
+      team: [],
     }),
+
+    async mounted () {
+      const org = await fetch('https://api.github.com/orgs/vuetifyjs/members', {
+        method: 'get',
+        headers: { 'Content-Type': 'application/json' },
+      }).then(res => res.json())
+
+      const team = []
+
+      for (const key of Object.keys(this.core)) {
+        const member = org.find(u => u.login === key)
+
+        if (!member) continue
+
+        team.push({
+          ...this.core[key],
+          avatar: member.avatar_url,
+          github: key,
+        })
+      }
+
+      this.team = team
+    },
   }
 </script>
 
-<style>
-  .member h3 {
-    font-size: 24px;
-    font-weight: 500;
-  }
+<style lang="sass">
+  #team-members
+    .v-markdown
+      > p
+        margin: 0
+
+      a
+        text-decoration: none
 </style>
