@@ -54,6 +54,9 @@
     position: relative
     padding: 12px 50px 12px 16px
 
+    &:not(:hover) .v-btn--copy .v-icon
+      opacity: .4
+
     pre, code
       background: transparent
       font-size: 1rem

@@ -1,6 +1,7 @@
 <template>
   <v-btn
     absolute
+    class="v-btn--copy"
     icon
     right
     style="background-color: inherit;"
