@@ -6,7 +6,10 @@
   >
     <v-hover>
       <template v-slot="{ hover }">
-        <a v-bind="adAttrs">
+        <a
+          v-bind="adAttrs"
+          class="flex-1-1-auto"
+        >
           <v-sheet
             class="overflow-none position-relative d-flex px-4 py-2 align-center"
             color="transparent"

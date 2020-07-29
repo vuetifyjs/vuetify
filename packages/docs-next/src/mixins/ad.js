@@ -24,8 +24,8 @@ export default {
       return {
         class: 'text-decoration-none',
         href: this.href,
+        rel: `noopener${this.isSponsored ? ' sponsored' : ''}`,
         target: '_blank',
-        rel: 'noopener' + this.isSponsored ? ' sponsored' : '',
       }
     },
     current () {
