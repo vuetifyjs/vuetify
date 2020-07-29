@@ -38,19 +38,19 @@
 
     components: {
       DefaultSettingsDrawerGrouping: () => import(
-        /* webpackChunkName: "default-settings" */
+        /* webpackChunkName: "default-settings-drawer-grouping" */
         './DrawerGrouping'
       ),
       DefaultSettingsDrawerPrepend: () => import(
-        /* webpackChunkName: "default-settings" */
+        /* webpackChunkName: "default-settings-drawer-prepend" */
         './DrawerPrepend'
       ),
       DefaultSettingsTheme: () => import(
-        /* webpackChunkName: "default-settings" */
+        /* webpackChunkName: "default-settings-theme" */
         './Theme'
       ),
       DefaultSettingsRtl: () => import(
-        /* webpackChunkName: "default-settings" */
+        /* webpackChunkName: "default-settings-rtl" */
         './Rtl'
       ),
     },
