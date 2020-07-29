@@ -13,25 +13,39 @@
     rounded="lg"
     transition="slide-y-transition"
   >
-    <template v-slot:activator="{ attrs, on }">
-      <v-btn
-        icon
-        v-bind="attrs"
-        v-on="on"
+    <template #activator="{ attrs, on }">
+      <v-tooltip
+        bottom
+        content-class="v-app-tooltip-btn__content"
       >
-        <v-badge
-          :value="unread.length"
-          color="red"
-          left
-          overlap
-        >
-          <template v-slot:badge>
-            {{ unread.length }}
-          </template>
+        <template #activator="{ attrs: tattrs, on: ton }">
+          <v-btn
+            icon
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-badge
+              :value="unread.length"
+              color="red"
+              left
+              overlap
+            >
+              <template #badge>
+                {{ unread.length }}
+              </template>
 
-          <v-icon>$mdiBell</v-icon>
-        </v-badge>
-      </v-btn>
+              <v-icon
+                v-bind="tattrs"
+                v-on="ton"
+              >
+                $mdiBell
+              </v-icon>
+            </v-badge>
+          </v-btn>
+        </template>
+
+        <i18n path="notifications" />
+      </v-tooltip>
     </template>
 
     <v-toolbar

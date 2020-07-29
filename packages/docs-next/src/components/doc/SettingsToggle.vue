@@ -1,11 +1,10 @@
 <template>
-  <v-btn
+  <app-tooltip-btn
     :input-value="settings"
-    icon
+    icon="$mdiCog"
+    path="settings"
     @click="settings = !settings"
-  >
-    <v-icon>$mdiCog</v-icon>
-  </v-btn>
+  />
 </template>
 
 <script>

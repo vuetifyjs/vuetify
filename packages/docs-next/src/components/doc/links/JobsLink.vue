@@ -1,5 +1,5 @@
 <template>
-  <v-btn
+  <app-tooltip-btn
     :to="{
       name: 'Documentation',
       params: {
@@ -7,14 +7,11 @@
         page: 'for-vue'
       }
     }"
-    icon
-  >
-    <v-icon>$mdiBriefcaseSearch</v-icon>
-  </v-btn>
+    icon="$mdiBriefcaseSearch"
+    path="jobs"
+  />
 </template>
 
 <script>
-  export default {
-    name: 'JobsLink',
-  }
+  export default { name: 'JobsLink' }
 </script>

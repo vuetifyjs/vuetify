@@ -4,7 +4,7 @@
       bottom
       content-class="v-app-tooltip-btn__content"
     >
-      <template v-slot:activator="{ on }">
+      <template #activator="{ on }">
         <v-btn
           :aria-label="path"
           icon
@@ -43,10 +43,6 @@
 </script>
 
 <style lang="sass">
-  .v-app-tooltip-btn
-    ~ .v-app-tooltip-btn
-      margin-left: 8px
-
   .v-app-tooltip-btn__content p
     margin: 0
 </style>
