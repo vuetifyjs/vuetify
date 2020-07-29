@@ -17,6 +17,8 @@ Vuetify is the #1 component library for Vue.js and has been in active developmen
 
 When you develop with Vuetify, you can expect a rich ecosystem of tooling and plugins, weekly releases, a massive community, professional services and long-term support.
 
+<vuetify-comparison />
+
 ## Design specification
 
 Vuetify is developed exactly according to [Material Design specification](https://material.io/guidelines/). Every component is hand crafted to bring you the best possible UI tools to your next great app. The development doesn't stop at the core components outlined in Google's spec. Through the support of community members and our [sponsors](/introduction/sponsors-and-backers), we have added over 15 new components including [calendars](/components/calendars/), [color pickers](/components/color-pickers/), [treeview](/components/treeview/) and many more.
@@ -28,7 +30,5 @@ Developing with Vuetify means you will never be alone. Get help immediately from
 ## Comparison to other Frameworks
 
 Since it's initial release in 2014, [Vue.js](https://vuejs.org/) has grown to be one of the most popular JavaScript frameworks in the world. One of the reasons for this popularity is the wide use of components which enable developers to create concise modules to be used and re-used throughout their application. UI Libraries are collections of these components that implement a specific style guideline and provide the necessary tools to build rich web applications. Below is a condensed list of the best component libraries for Vue in 2020:
-
-<vuetify-comparison />
 
 <backmatter />
