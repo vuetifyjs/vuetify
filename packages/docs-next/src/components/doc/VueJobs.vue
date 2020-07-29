@@ -35,7 +35,7 @@
           <v-card
             :elevation="hover ? 12 : undefined"
             :href="job.url"
-            class="mb-4"
+            class="mb-4 transition-swing"
             outlined
             rel="sponsored"
             target="_blank"
