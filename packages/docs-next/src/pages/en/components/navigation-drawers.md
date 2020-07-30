@@ -31,6 +31,10 @@ The navigation drawer is primarily used to house links to the pages in your appl
   If you are using `v-navigation-drawer` with **app** property enabled, you don't need to use **absolute** prop as in examples.
 </alert>
 
+<alert type="info">
+  The **expand-on-hover** prop does not alter the content area of **v-main**. To have content area respond to **expand-on-hover**, bind **mini-variant.sync** to a data prop.
+</alert>
+
 ## Examples
 
 ### Props
@@ -43,7 +47,7 @@ Using the **bottom** prop, we are able to relocate our drawer on mobile devices 
 
 #### Expand on hover
 
-Places the component in **mini-variant** mode and expands once hovered. Does not alter the content area. Width can be controlled with the **mini-variant-width** property.
+Places the component in **mini-variant** mode and expands once hovered. This **does not** alter the content area of **v-main**. The width can be controlled with the **mini-variant-width** property.
 
 <example file="v-navigation-drawer/prop-expand-on-hover" />
 
