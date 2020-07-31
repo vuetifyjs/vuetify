@@ -275,7 +275,7 @@ export function groupItems<T extends any = any> (
     if (current !== val) {
       current = val
       groups.push({
-        name: val || '',
+        name: val ?? '',
         items: [],
       })
     }
