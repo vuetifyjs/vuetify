@@ -81,7 +81,7 @@ export type TreeviewItemFunction = (item: object, search: string, textKey: strin
 export type SelectItemKey = string | (string | number)[] | ((item: object, fallback?: any) => any)
 
 export interface ItemGroup<T> {
-  name: string | null
+  name: string
   items: T[]
 }
 
