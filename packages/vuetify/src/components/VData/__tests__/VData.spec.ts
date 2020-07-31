@@ -123,7 +123,7 @@ describe('VData.ts', () => {
     expect(render).toHaveBeenCalledWith(expect.objectContaining({
       groupedItems: [
         {
-          name: null,
+          name: '',
           items: [items[0], items[2]],
         },
         {
