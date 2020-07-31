@@ -32,11 +32,11 @@ export default baseMixins.extend({
     errorMessages: {
       type: [String, Array],
       default: () => [],
-    } as PropValidator<InputMessage>,
+    } as PropValidator<InputMessage | null>,
     messages: {
       type: [String, Array],
       default: () => [],
-    } as PropValidator<InputMessage>,
+    } as PropValidator<InputMessage | null>,
     readonly: Boolean,
     rules: {
       type: Array,
@@ -46,7 +46,7 @@ export default baseMixins.extend({
     successMessages: {
       type: [String, Array],
       default: () => [],
-    } as PropValidator<InputMessage>,
+    } as PropValidator<InputMessage | null>,
     validateOnBlur: Boolean,
     value: { required: false },
   },
@@ -160,9 +160,9 @@ export default baseMixins.extend({
     validationTarget (): InputValidationRules {
       if (this.internalErrorMessages.length > 0) {
         return this.internalErrorMessages
-      } else if (this.successMessages.length > 0) {
+      } else if (this.successMessages && this.successMessages.length > 0) {
         return this.internalSuccessMessages
-      } else if (this.messages.length > 0) {
+      } else if (this.messages && this.messages.length > 0) {
         return this.internalMessages
       } else if (this.shouldValidate) {
         return this.errorBucket
@@ -226,7 +226,7 @@ export default baseMixins.extend({
   },
 
   methods: {
-    genInternalMessages (messages: InputMessage): InputValidationRules {
+    genInternalMessages (messages: InputMessage | null): InputValidationRules {
       if (!messages) return []
       else if (Array.isArray(messages)) return messages
       else return [messages]
