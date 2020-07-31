@@ -10,8 +10,9 @@ import Themeable from '../../mixins/themeable'
 import mixins from '../../util/mixins'
 
 // Types
-import { VNode, PropType } from 'vue'
+import { VNode } from 'vue'
 import { getSlot } from '../../util/helpers'
+import { PropValidator } from 'vue/types/options'
 
 export interface HTMLSkeletonLoaderElement extends HTMLElement {
   _initialStyle?: {
@@ -35,9 +36,9 @@ export default mixins(
     transition: String,
     type: String,
     types: {
-      type: Object as PropType<Record<string, string>>,
+      type: Object,
       default: () => ({}),
-    },
+    } as PropValidator<Record<string, string>>,
   },
 
   computed: {

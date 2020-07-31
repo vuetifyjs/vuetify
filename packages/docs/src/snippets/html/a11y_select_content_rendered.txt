@@ -17,6 +17,7 @@
     >
       Foo
     </div>
+  </div>
   <div
     aria-labelledby="bar-list-item-13"
     aria-selected="false"

@@ -39,7 +39,7 @@
     },
     "expand-on-hover": {
       "heading": "### Expand on hover",
-      "desc": "Places the component in **mini-variant** mode and expands once hovered. Does not alter the content area. Width can be controlled with the **mini-variant-width** property."
+      "desc": "Places the component in **mini-variant** mode and expands once hovered. Does not alter the content area. To have content area respond to **expand-on-hover** bind **mini-variant.sync** to a boolean. Width can be controlled with the **mini-variant-width** property."
     }
   },
   "props": {

@@ -340,7 +340,7 @@ export function searchItems<T extends any = any> (items: T[], search: string): T
   search = search.toString().toLowerCase()
   if (search.trim() === '') return items
 
-  return items.filter(item => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search, item)))
+  return items.filter((item: any) => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search, item)))
 }
 
 /**
