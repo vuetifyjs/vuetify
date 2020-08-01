@@ -45,7 +45,7 @@ exports[`VDataTable/header.ts should generate select 3`] = `
 exports[`VDataTable/header.ts should generate select scoped slot 1`] = `
 <div>
   <div class="test">
-    {"props":{"value":false,"indeterminate":false},"on":{}}
+    {"props":{"value":false,"indeterminate":false,"color":""},"on":{}}
   </div>
 </div>
 `;
@@ -53,7 +53,7 @@ exports[`VDataTable/header.ts should generate select scoped slot 1`] = `
 exports[`VDataTable/header.ts should generate select scoped slot 2`] = `
 <div>
   <div class="test">
-    {"props":{"value":true,"indeterminate":false},"on":{}}
+    {"props":{"value":true,"indeterminate":false,"color":""},"on":{}}
   </div>
 </div>
 `;
@@ -61,7 +61,7 @@ exports[`VDataTable/header.ts should generate select scoped slot 2`] = `
 exports[`VDataTable/header.ts should generate select scoped slot 3`] = `
 <div>
   <div class="test">
-    {"props":{"value":false,"indeterminate":true},"on":{}}
+    {"props":{"value":false,"indeterminate":true,"color":""},"on":{}}
   </div>
 </div>
 `;
