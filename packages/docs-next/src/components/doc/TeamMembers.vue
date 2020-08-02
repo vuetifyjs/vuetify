@@ -217,7 +217,7 @@
           name: 'Jacek Karczmarczyk',
         },
         MajesticPotatoe: {
-          focus: ['[vuetifyjs/docs](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)'],
+          focus: ['[vuetifyjs](https://github.com/vuetifyjs)', '[vuetifyjs/docs](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)'],
           funding: [
             '[GitHub Sponsors](https://github.com/sponsors/majesticpotatoe)',
             '[Open Collective](https://opencollective.com/vuetify)',
@@ -243,7 +243,7 @@
           name: 'Dmitry Sharshakov',
         },
         johannaRlee: {
-          focus: ['[vuetifyjs beginners guide](www.github.com/vuetifyjs)'],
+          focus: ['[vuetifyjs beginners guide](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)'],
           languages: ['English'],
           linkedin: 'johannaklay',
           location: 'DFW, TX, USA',
