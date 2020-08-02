@@ -242,7 +242,7 @@
           location: 'Russian Federation',
           name: 'Dmitry Sharshakov',
         },
-          johannaRlee: {
+        johannaRlee: {
           focus: ['[vuetifyjs beginners guide](www.github.com/vuetifyjs)'],
           languages: ['English'],
           linkedin: 'johannaklay',
@@ -257,7 +257,7 @@
           name: 'Sean Kimball',
         },
         vanessalvarez8a: {
-          languages: ['English','Spanish'],
+          languages: ['English', 'Spanish'],
           linkedin: 'vanessaalvarez',
           location: 'Dallas, TX, USA',
           name: 'Vanessa Alvarez',
