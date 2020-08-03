@@ -4,7 +4,6 @@ const { resolve } = require('path')
 const {
   generateAPI,
   generateCompList,
-  generateLocaleList,
 } = require('./api-gen')
 const genTable = require('../src/util/tables')
 const { EN_LOCALE_ONLY } = require('../src/util/globals')
@@ -75,6 +74,8 @@ function writeFile (component, locale) {
 
   fs.writeFileSync(resolve(file), createMdFile(component, data))
 }
+
+const generateLocaleList = () => fs.readdirSync(resolve('./src/pages'))
 
 function generateFiles () {
   const components = generateCompList()

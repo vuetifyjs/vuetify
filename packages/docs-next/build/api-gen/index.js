@@ -38,7 +38,10 @@ function generateAPI (comp, locale) {
   const localePath = resolve(__dirname, `./locale/${locale}/${comp}.json`)
   try {
     const localeFile = JSON.parse(readFileSync(localePath, 'utf8'))
-    compLocale = localeFile
+
+    if (Object.keys(localeFile).length > 0) {
+      compLocale = localeFile
+    }
   } catch (e) {
     IS_DEBUG && console.log(`locale: ${locale} not found`)
   }
@@ -74,12 +77,7 @@ function generateCompList () {
   return compList
 }
 
-function generateLocaleList () {
-  return ['en', /* 'de-DE', 'fr-FR', 'ru-RU', 'zh-CN', 'ko-KR', 'ja-JP', */ 'eo-UY']
-}
-
 module.exports = {
   generateAPI,
   generateCompList,
-  generateLocaleList,
 }
