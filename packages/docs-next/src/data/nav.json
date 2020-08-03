@@ -1,10 +1,5 @@
 [
   {
-    "title": "Contribute to the Beta",
-    "icon": "$mdiWrench",
-    "to": "docs/beta"
-  },
-  {
     "title": "introduction",
     "icon": "$mdiBookOpenPageVariant",
     "items": [
