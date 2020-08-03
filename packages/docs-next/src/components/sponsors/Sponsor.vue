@@ -6,16 +6,18 @@
     class="pa-2 d-inline-block"
     color="transparent"
     flat
+    max-height="72"
     rel="noopener"
+    rounded
     target="_blank"
   >
     <v-img
       :alt="value.metadata.name"
       :src="src"
       :width="width"
-      class="flex-shrink-1"
+      class="d-inline-block"
       contain
-      max-height="78"
+      max-height="72"
     />
   </v-card>
 </template>
@@ -33,10 +35,8 @@
     mixins: [Density],
 
     props: {
-      slug: {
-        type: String,
-        required: true,
-      },
+      slug: String,
+      sponsor: Object,
     },
 
     computed: {
@@ -56,16 +56,16 @@
 
         return `${cdn}${logo}`
       },
-      value () {
-        return this.sponsors.find(sponsor => {
-          return sponsor.slug === this.slug
-        })
-      },
       width () {
         if (this.compact) return 115
         if (this.comfortable) return 135
 
         return 155
+      },
+      value () {
+        return this.sponsor || this.sponsors.find(sponsor => {
+          return sponsor.slug === this.slug
+        })
       },
     },
   }

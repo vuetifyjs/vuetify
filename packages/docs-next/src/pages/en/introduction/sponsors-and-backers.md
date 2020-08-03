@@ -27,48 +27,36 @@ Recurring pledges come with **exclusive** perks such as priority GitHub issues, 
 
 ## Current Project Sponsors
 
+We thank all of our project sponsors for their continued support of Vuetify. If you have questions about sponsorship please email [sponsor@vuetifyjs.com](sponsor@vuetifyjs.com) for more information.
+
 ### Premier
 
-<alert type="error">
-  **TODO** Add sponsor logos
-</alert>
+<sponsors tier="1" />
 
 ### Diamond
 
-<alert type="error">
-  **TODO** Add sponsor logos
-</alert>
+<sponsors tier="2" />
 
 ### Platinum
 
-<alert type="error">
-  **TODO** Add sponsor logos
-</alert>
+<sponsors tier="3" />
 
 ### Gold
 
-<alert type="error">
-  **TODO** Add sponsor logos
-</alert>
+<sponsors tier="4" />
 
 ### Affiliate
 
-<alert type="error">
-  **TODO** Add sponsor logos
-</alert>
+<sponsors tier="5" />
 
 ### Service
 
-<alert type="error">
-  **TODO** Add sponsor logos
-</alert>
+<sponsors tier="6" />
 
 ## Cursory
 
 If you run a business and are using Vuetify in a revenue-generating product, it makes business sense to sponsor Vuetify development: *it ensures the project that your product relies on stays healthy and actively maintained*. Vuetify is a **full-time** job for John and Heather; your sponsorship and contributions help support them.
 
-If you have any questions, please reach out to [John](mailto:john@vuetifyjs.com) or [Heather](mailto:heather@vuetifyjs.com).
-
-<entry-ad />
+If you have any questions not answered from this page, please reach out to [sponsor@vuetifyjs.com](sponsor@vuetifyjs.com).
 
 <backmatter />

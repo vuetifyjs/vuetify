@@ -16,7 +16,6 @@ const actions = {
       type: 'sponsors',
       props: 'slug,title,metadata',
       sort: 'created_at',
-      'metadata[status]': true,
     })
 
     commit('all', items)
