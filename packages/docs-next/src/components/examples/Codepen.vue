@@ -14,22 +14,8 @@
 </template>
 
 <script>
-  // TODO: remove this and use store
-  import { version } from 'vuetify'
-
-  // Data
-  const title = 'Vuetify Example Pen'
-  const cssResources = [
-    'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900',
-    'https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css',
-    'https://fonts.googleapis.com/css?family=Material+Icons',
-    `https://cdn.jsdelivr.net/npm/vuetify@${version}/dist/vuetify.min.css`,
-  ]
-  const jsResources = [
-    'https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js',
-    'https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js',
-    `https://cdn.jsdelivr.net/npm/vuetify@${version}/dist/vuetify.min.js`,
-  ]
+  // Utilities
+  import { get } from 'vuex-pathify'
 
   export default {
     name: 'Codepen',
@@ -41,19 +27,15 @@
       },
       title: {
         type: String,
-        default: title,
+        default: 'Vuetify Example Pen',
       },
     },
 
-    computed: {
-      additionalScript () {
-        const additional = this.pen.codepenAdditional || ''
+    data: (vm) => ({
 
-        return additional
-          .replace(/(<codepen-additional.*?>|<\/codepen-additional>$)/g, '')
-          .replace(/\n {2}/g, '\n')
-          .trim() + (additional ? '\n\n' : '')
-      },
+    }),
+
+    computed: {
       additionalResources () {
         const resources = this.pen.codepenResources || '{}'
 
@@ -63,6 +45,36 @@
             resources.replace(/(<codepen-resources.*?>|<\/codepen-resources>$)/g, ''),
           ),
         )
+      },
+      additionalScript () {
+        const additional = this.pen.codepenAdditional || ''
+
+        return additional
+          .replace(/(<codepen-additional.*?>|<\/codepen-additional>$)/g, '')
+          .replace(/\n {2}/g, '\n')
+          .trim() + (additional ? '\n\n' : '')
+      },
+      cssResources () {
+        return [
+          'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900',
+          'https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css',
+          'https://fonts.googleapis.com/css?family=Material+Icons',
+          `https://cdn.jsdelivr.net/npm/vuetify@${this.version}/dist/vuetify.min.css`,
+        ]
+      },
+      editors () {
+        const html = this.template && 0b100
+        const css = this.style.content && 0b010
+        const js = this.script && 0b001
+
+        return (html | css | js).toString(2)
+      },
+      jsResources () {
+        return [
+          'https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js',
+          'https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js',
+          `https://cdn.jsdelivr.net/npm/vuetify@${this.version}/dist/vuetify.min.js`,
+        ]
       },
       script () {
         const imports = /(import*) ([^'\n]*) from ([^\n]*)/g
@@ -102,13 +114,6 @@
           .replace(/\n/g, '\n  ')
           .trim()
       },
-      editors () {
-        const html = this.template && 0b100
-        const css = this.style.content && 0b010
-        const js = this.script && 0b001
-
-        return (html | css | js).toString(2)
-      },
       value () {
         const data = {
           title: this.title,
@@ -120,15 +125,16 @@
 </div>`,
           css: this.style.content,
           css_pre_processor: this.style.language ? this.style.language[1] : 'none',
-          css_external: [...this.additionalResources.css, ...cssResources].join(';'),
+          css_external: [...this.additionalResources.css, ...this.cssResources].join(';'),
           js: this.script,
           js_pre_processor: 'babel',
-          js_external: [...this.additionalResources.js, ...jsResources].join(';'),
+          js_external: [...this.additionalResources.js, ...this.jsResources].join(';'),
           editors: this.editors,
         }
 
         return JSON.stringify(data)
       },
+      version: get('app/version'),
     },
 
     methods: {

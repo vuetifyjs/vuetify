@@ -32,7 +32,6 @@
     name: 'ReleasesMenu',
 
     computed: {
-      version: get('app/version'),
       items () {
         return [
           {
@@ -45,6 +44,7 @@
           },
         ]
       },
+      version: get('app/version'),
     },
   }
 </script>

@@ -59,10 +59,8 @@
 
 <script>
   // Utilities
+  import { get } from 'vuex-pathify'
   import { sortBy } from 'lodash'
-
-  // TODO: remove this and use store
-  import { version } from 'vuetify'
 
   export default {
     name: 'ReleaseNotes',
@@ -71,7 +69,6 @@
       branch: undefined,
       githubReleases: [],
       releaseNotes: undefined,
-      currentVersion: version,
     }),
 
     computed: {
@@ -92,6 +89,7 @@
         }
         return v2.concat(v1) || []
       },
+      version: get('app/version'),
     },
 
     mounted () {
@@ -102,7 +100,7 @@
         .then(res => res.json())
         .then(res => {
           this.githubReleases = res
-          this.releaseNotes = res.find(release => release.name === `v${this.currentVersion}`)
+          this.releaseNotes = res.find(release => release.name === `v${this.version}`)
         })
         .catch(err => console.log(err))
     },
