@@ -1,5 +1,6 @@
 <template>
   <v-menu
+    key="language-menu"
     content-class="elevation-0 rounded"
     max-height="500"
     offset-y

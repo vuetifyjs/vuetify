@@ -7,58 +7,89 @@
     flat
     v-bind="{ [`clipped-${rtl ? 'left' : 'right'}`]: true }"
   >
-    <v-app-bar-nav-icon
-      class="hidden-md-and-up"
-      @click="drawer = !drawer"
-    />
+    <v-expand-x-transition>
+      <div
+        v-if="!search"
+        class="transition-swing"
+      >
+        <v-app-bar-nav-icon
+          class="hidden-md-and-up"
+          @click="drawer = !drawer"
+        />
+      </div>
+    </v-expand-x-transition>
 
-    <default-search />
+    <template v-if="$vuetify.breakpoint.mobile">
+      <search-toggle />
 
-    <v-spacer />
+      <v-spacer />
+    </template>
 
-    <guide-link />
+    <default-search v-if="!$vuetify.breakpoint.mobile || search" />
 
-    <div class="mx-3" />
+    <template v-if="!search">
+      <template v-if="!$vuetify.breakpoint.mobile">
+        <v-spacer />
 
-    <store-link />
+        <guide-link />
 
-    <jobs-link />
+        <app-bar-divider />
 
-    <settings-toggle />
+        <store-link />
 
-    <notifications-menu />
+        <jobs-link />
+      </template>
 
-    <v-divider
-      class="mx-2 my-auto"
-      inset
-      vertical
-      style="max-height: 12px;"
-    />
+      <settings-toggle />
 
-    <language-menu />
+      <notifications-menu />
+
+      <app-bar-divider v-show="!$vuetify.breakpoint.mobile" />
+
+      <language-menu />
+    </template>
   </v-app-bar>
 </template>
 
 <script>
+  // Components
+  import VDivider from 'vuetify/lib/components/VDivider'
+
   // Utilities
   import { sync } from 'vuex-pathify'
 
   export default {
     name: 'DefaultBar',
 
-    components: { DefaultSearch: () => import('@/layouts/default/Search') },
+    components: {
+      AppBarDivider: {
+        functional: true,
+
+        render (h) {
+          return h(VDivider, {
+            staticClass: 'mx-2 my-auto',
+            props: { inset: true, vertical: true },
+            style: { maxHeight: '16px' },
+          })
+        },
+      },
+      DefaultSearch: () => import(
+        /* webpackChunkName: "default-search" */
+        '@/layouts/default/Search'
+      ),
+    },
 
     computed: {
+      ...sync('app', [
+        'drawer',
+        'search',
+      ]),
       ...sync('user', [
         'theme@dark',
         'rtl',
       ]),
-      drawer: sync('app/drawer'),
-    },
-
-    watch: {
-      rtl (val) {
-        this.$vuetify.rtl = val
+      show () {
+        return !this.$vuetify.breakpoint.mobile || this.search
       },
     },
   }

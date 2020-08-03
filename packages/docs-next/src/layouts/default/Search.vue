@@ -7,7 +7,7 @@
     :class="isSearching ? 'rounded-b-0' : ''"
     :flat="!isFocused && !isSearching"
     :placeholder="placeholder"
-    class="doc-search mx-auto mx-md-4"
+    class="doc-search mx-2 mx-md-4"
     dense
     hide-details
     solo
@@ -17,7 +17,10 @@
     @focus="onFocus"
     @keydown.esc="onEsc"
   >
-    <template #prepend-inner>
+    <template
+      v-if="!$vuetify.breakpoint.mobile"
+      #prepend-inner
+    >
       <v-icon
         :color="!isFocused ? 'grey' : undefined"
         class="mr-2"
@@ -46,9 +49,15 @@
 
     computed: {
       placeholder () {
-        return !this.isFocused
-          ? 'Search Vuetify (press \'/\' to focus)'
-          : ''
+        if (this.isFocused) return ''
+
+        let placeholder = 'Search Vuetify'
+
+        if (!this.$vuetify.breakpoint.mobile) {
+          placeholder += ' (press \'/\' to focus)'
+        }
+
+        return placeholder
       },
     },
 

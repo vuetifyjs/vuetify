@@ -1,11 +1,12 @@
 <template>
   <app-menu
+    key="notifications-menu"
     v-model="menu"
     :close-on-content-click="false"
+    :max-width="maxWidth"
     bottom
     content-class="overflow-hidden"
     left
-    max-width="320"
   >
     <template #activator="{ attrs, on }">
       <app-tooltip-btn
@@ -32,10 +33,10 @@
     </template>
 
     <v-toolbar
+      :width="maxWidth"
       class="pr-5"
       flat
       short
-      width="320"
     >
       <v-btn
         :disabled="archived ? unread.length < 1 : read.length < 1"
@@ -171,6 +172,9 @@
         if (!icon || !path) return null
 
         return { icon, path }
+      },
+      maxWidth () {
+        return this.$vuetify.breakpoint.mobile ? 296 : 320
       },
       read () {
         return this.mapped.filter(n => n.viewed)

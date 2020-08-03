@@ -12,6 +12,7 @@ const state = {
   initializing: false,
   modified: {},
   nav: [],
+  search: false,
   settings: false,
   version: null,
 }
