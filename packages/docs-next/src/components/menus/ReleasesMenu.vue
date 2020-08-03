@@ -16,6 +16,7 @@
       v-for="(item, index) in items"
       :key="index"
       :href="item.href"
+      dense
       rel="noopener"
       target="_blank"
     >

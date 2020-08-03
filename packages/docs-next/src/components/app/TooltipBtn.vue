@@ -42,10 +42,7 @@
     inheritAttrs: false,
 
     props: {
-      icon: {
-        type: String,
-        required: true,
-      },
+      icon: String,
       path: String,
     },
   }

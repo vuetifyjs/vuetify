@@ -1,11 +1,5 @@
 <template>
-  <v-menu
-    key="language-menu"
-    content-class="elevation-0 rounded"
-    max-height="500"
-    offset-y
-    open-on-hover
-  >
+  <app-menu key="language-menu">
     <template #activator="{ attrs, on }">
       <v-btn
         :icon="$vuetify.breakpoint.smAndDown"
@@ -20,20 +14,15 @@
       </v-btn>
     </template>
 
-    <v-list
-      class="rounded"
+    <v-list-item
+      v-for="(item, index) in locales"
+      :key="index"
       dense
-      outlined
+      @click="switchLocale(item.locale)"
     >
-      <v-list-item
-        v-for="(item, index) in locales"
-        :key="index"
-        @click="switchLocale(item.locale)"
-      >
-        <v-list-item-title>{{ item.name }}</v-list-item-title>
-      </v-list-item>
-    </v-list>
-  </v-menu>
+      <v-list-item-title v-text="item.name" />
+    </v-list-item>
+  </app-menu>
 </template>
 
 <script>
