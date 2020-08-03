@@ -271,4 +271,37 @@ $ vue add @nklayman/capacitor
 $ yarn capacitor:serve
 ```
 
+## Usage with Vuepress
+
+There are 2 ways we can use Vuetify with default **vuepress** theme. Either by  registering vuetify as a plugin in [vuepress](https://vuepress.vuejs.org/) `.vuepress/enhanceApp.js` file (code sample below), or by using vuetify directly from CDN:
+
+```js
+// register vuetify as a global plugin with vuepress
+// .vuepress/enhanceApp.js
+import Vuetify from 'vuetify'
+
+export default ({
+  Vue,      // the version of Vue being used in the VuePress app
+  options,  // the options for the root Vue instance
+  router,   // the router instance for the app
+  siteData  // site metadata
+}) => {
+  Vue.use(Vuetify)
+}
+
+// Alternatively, use vuetify directly from CDN.
+// Update head section in .vuepress/config.js as follows
+module.exports = {
+  head: [
+    ['link', {
+      rel: 'stylesheet',
+      href: `https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css`
+
+    }],
+    ['script', { src: `https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js` }],
+    ['script', { src: `https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js` }],
+  ]
+}
+```
+
 <backmatter />
