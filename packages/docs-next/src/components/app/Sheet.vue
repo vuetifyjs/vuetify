@@ -1,5 +1,6 @@
 <template>
   <v-sheet
+    class="overflow-hidden"
     outlined
     rounded
   >
@@ -8,5 +9,5 @@
 </template>
 
 <script>
-  export default { name: 'Sheet' }
+  export default { name: 'AppSheet' }
 </script>

@@ -8,11 +8,7 @@
 
       <v-spacer />
 
-      <settings-toggle />
-
-      <notifications />
-
-      <jobs-link />
+      <releases-menu />
     </v-list-item>
   </v-toolbar>
 </template>

@@ -14,21 +14,28 @@
 
     <default-search />
 
+    <v-spacer />
+
+    <guide-link />
+
+    <div class="mx-3" />
+
     <store-link />
 
-    <discord-link />
+    <jobs-link />
 
-    <github-link />
+    <settings-toggle />
 
-    <latest-release />
+    <notifications-menu />
 
     <v-divider
-      class="mx-2"
+      class="mx-2 my-auto"
       inset
       vertical
+      style="max-height: 12px;"
     />
 
-    <default-language-menu />
+    <language-menu />
   </v-app-bar>
 </template>
 
@@ -39,10 +46,7 @@
   export default {
     name: 'DefaultBar',
 
-    components: {
-      DefaultLanguageMenu: () => import('@/layouts/default/LanguageMenu'),
-      DefaultSearch: () => import('@/layouts/default/Search'),
-    },
+    components: { DefaultSearch: () => import('@/layouts/default/Search') },
 
     computed: {
       ...sync('user', [
@@ -59,3 +63,10 @@
     },
   }
 </script>
+
+<style lang="sass">
+  #default-app-bar
+    .v-btn--active.v-btn--app:not(:hover):not(:focus)
+      &::before
+        opacity: 0
+</style>

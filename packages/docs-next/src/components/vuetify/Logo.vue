@@ -10,7 +10,7 @@
       :src="`https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-${theme.isDark ? 'dark' : 'light' }-text.svg`"
       :alt="$i18n.t('logo')"
       class="shrink"
-      max-width="128"
+      max-width="164"
       transition="scale-transition"
     />
   </router-link>

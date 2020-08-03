@@ -1,60 +1,41 @@
 <template>
-  <v-menu
+  <app-menu
     v-model="menu"
     :close-on-content-click="false"
     bottom
     content-class="overflow-hidden"
     left
-    max-height="380"
     max-width="320"
-    nudge-bottom="8"
-    offset-y
-    origin="top"
-    rounded="lg"
-    transition="slide-y-transition"
   >
     <template #activator="{ attrs, on }">
-      <v-tooltip
-        bottom
-        content-class="v-app-tooltip-btn__content"
-        open-delay="200"
+      <app-tooltip-btn
+        icon="$mdiBell"
+        path="notifications"
+        v-bind="attrs"
+        v-on="on"
       >
-        <template #activator="{ attrs: tattrs, on: ton }">
-          <v-btn
-            icon
-            v-bind="attrs"
-            v-on="on"
+        <template #icon>
+          <v-badge
+            :value="unread.length"
+            color="red"
+            left
+            overlap
           >
-            <v-badge
-              :value="unread.length"
-              color="red"
-              left
-              overlap
-            >
-              <template #badge>
-                {{ unread.length }}
-              </template>
+            <template #badge>
+              {{ unread.length }}
+            </template>
 
-              <v-icon
-                v-bind="tattrs"
-                v-on="ton"
-              >
-                $mdiBell
-              </v-icon>
-            </v-badge>
-          </v-btn>
+            <v-icon v-text="'$mdiBell'" />
+          </v-badge>
         </template>
-
-        <i18n path="notifications" />
-      </v-tooltip>
+      </app-tooltip-btn>
     </template>
 
     <v-toolbar
       class="pr-5"
-      color="primary"
-      dark
       flat
       short
+      width="320"
     >
       <v-btn
         :disabled="archived ? unread.length < 1 : read.length < 1"
@@ -69,6 +50,7 @@
           </template>
         </i18n>
       </v-btn>
+
       <v-spacer />
 
       <app-tooltip-btn
@@ -81,70 +63,63 @@
       />
     </v-toolbar>
 
-    <v-list
-      class="py-0 overflow-y-scroll"
+    <v-divider />
+
+    <v-responsive
+      class="overflow-y-scroll"
       max-height="320"
     >
-      <v-sheet
+      <div
         v-if="done"
-        class="pa-8 d-flex align-center justify-center subtitle-1"
-        width="303"
+        class="py-8 text-center text-subtitle-1"
       >
-        <div class="text-center">
-          <i18n
-            path="done"
-            tag="p"
-          />
+        <i18n
+          path="done"
+          tag="p"
+        />
 
-          <v-icon
-            color="grey lighten-2"
-            size="64"
-          >
-            $mdiVuetify
-          </v-icon>
-        </div>
-      </v-sheet>
+        <v-icon
+          color="grey lighten-2"
+          size="96"
+        >
+          $mdiVuetify
+        </v-icon>
+      </div>
 
       <template v-else>
-        <template v-for="({ created_at, metadata, slug, title, viewed }, i) in filtered">
-          <v-list-item
-            :key="slug"
-            :href="metadata.action"
-            :ripple="false"
-            target="_blank"
-            @click="toggle(slug)"
-          >
-            <v-list-item-content>
-              <div
-                class="grey--text text--darken-1 caption font-weight-light caption text-uppercase"
-                v-text="created_at"
-              />
+        <v-list-item
+          v-for="({ created_at, metadata, slug, title }) in filtered"
+          :key="slug"
+          :href="metadata.action"
+          :ripple="false"
+          target="_blank"
+          @click="toggle(slug)"
+        >
+          <v-list-item-content>
+            <div
+              class="grey--text text--darken-1 text-caption font-weight-light text-uppercase"
+              v-text="created_at"
+            />
 
-              <v-list-item-title
-                class="text-subtitle-1"
-                v-text="`${metadata.emoji} ${title}`"
-              />
-            </v-list-item-content>
+            <v-list-item-title
+              class="text-subtitle-1"
+              v-text="`${metadata.emoji} ${title}`"
+            />
+          </v-list-item-content>
 
-            <v-list-item-action>
-              <v-btn
-                :ripple="false"
-                icon
-                @click.stop.prevent="toggle(slug)"
-              >
-                <v-icon v-text="marked.icon" />
-              </v-btn>
-            </v-list-item-action>
-          </v-list-item>
-
-          <v-divider
-            v-if="i + 1 !== filtered.length"
-            :key="`dv-${i}`"
-          />
-        </template>
+          <v-list-item-action>
+            <v-btn
+              :ripple="false"
+              icon
+              @click.stop.prevent="toggle(slug)"
+            >
+              <v-icon v-text="marked.icon" />
+            </v-btn>
+          </v-list-item-action>
+        </v-list-item>
       </template>
-    </v-list>
-  </v-menu>
+    </v-responsive>
+  </app-menu>
 </template>
 
 <script>
@@ -153,7 +128,9 @@
   import { sync } from 'vuex-pathify'
 
   export default {
-    name: 'Notifications',
+    name: 'NotificationsMenu',
+
+    inject: ['theme'],
 
     data: () => ({
       archived: false,

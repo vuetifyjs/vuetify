@@ -1,26 +1,29 @@
 <template>
   <v-menu
-    origin="top right"
-    transition="scale-transition"
+    content-class="elevation-0 rounded"
+    max-height="500"
+    offset-y
+    open-on-hover
   >
     <template #activator="{ attrs, on }">
       <v-btn
         :icon="$vuetify.breakpoint.smAndDown"
-        class="text--secondary mr-n2 px-0 px-md-2"
+        class="text--secondary px-0 px-md-2"
         text
         v-bind="attrs"
         v-on="on"
       >
-        <span
-          class="mr-2 hidden-sm-and-down"
-          v-text="current.name"
-        />
-
         <v-icon>$mdiTranslate</v-icon>
+
+        <app-chevron-down />
       </v-btn>
     </template>
 
-    <v-list>
+    <v-list
+      class="rounded"
+      dense
+      outlined
+    >
       <v-list-item
         v-for="(item, index) in locales"
         :key="index"
@@ -40,7 +43,7 @@
   import locales from '@/i18n/locales'
 
   export default {
-    name: 'DefaultLanguageMenu',
+    name: 'LanguageMenu',
 
     data: () => ({ locales }),
 

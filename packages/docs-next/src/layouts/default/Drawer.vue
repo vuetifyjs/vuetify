@@ -5,6 +5,7 @@
     :color="dark ? '#272727' : undefined"
     :right="rtl"
     app
+    floating
     width="300"
   >
     <template #prepend>

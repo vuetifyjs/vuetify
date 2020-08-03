@@ -11,6 +11,7 @@
     dense
     hide-details
     solo
+    style="max-width: 450px;"
     @blur="onBlur"
     @clear="resetSearch"
     @focus="onFocus"
@@ -21,7 +22,7 @@
         :color="!isFocused ? 'grey' : undefined"
         class="mr-2"
       >
-        $mdiVuetify
+        $mdiMagnify
       </v-icon>
     </template>
   </v-text-field>
@@ -180,13 +181,13 @@
       .ds-dropdown-menu
         clip-path: inset(0px -12px -12px -12px) !important
         box-shadow: 0px 1px 4px 0px rgba(32, 33, 36, 0.28) !important
-        border-radius: 0 0 16px 16px
+        border-radius: 0 0 8px 8px
         left: -48px !important
         top: 0px !important
         min-width: calc(100% + 60px)
 
         [class^=ds-dataset-]
-          border-radius: 0 0 16px 16px
+          border-radius: 0 0 8px 8px
           border-color: transparent
 
         &:before
@@ -195,7 +196,7 @@
       a
         text-decoration: none !important
     .doc-search
-      border-radius: 16px
+      border-radius: 8px
 
     &.theme--dark
       color: white
