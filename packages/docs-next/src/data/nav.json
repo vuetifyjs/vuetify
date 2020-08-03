@@ -42,7 +42,7 @@
     "icon": "$mdiCogs",
     "items": [
       "accessibility",
-      "a-la-carte",
+      "treeshaking",
       "breakpoints",
       "global-config",
       "icons",

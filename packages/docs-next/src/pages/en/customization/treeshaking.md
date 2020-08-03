@@ -1,15 +1,15 @@
 ---
 meta:
-  title: A-la-carte - treeshaking
-  description: A La Carte provides automatic treeshaking via the vuetify-loader. Use only the features that you need and drastically reduce your package bundle size.
-  keywords: a la carte, a-la-carte, vuetify single import, vuetify import, component importing, reduce vuetify size
+  title: Treeshaking
+  description: Vuetify provides automatic treeshaking via the vuetify-loader. Use only the features that you need and drastically reduce your package bundle size.
+  keywords: a la carte, a-la-carte, vuetify single import, vuetify import, component importing, reduce vuetify size, treeshaking, tree shaking
 related:
   - /getting-started/unit-testing/
   - /customization/presets/
   - /getting-started/beginners-guide/
 ---
 
-# A-la-carte - treeshaking
+# Treeshaking
 
 Being a component framework, Vuetify will always grow horizontally. Depending on your project, a small **package size** may be a requirement. The A la carte system enables you to pick and choose which components to import, drastically _lowering_ your build size. New projects created with the [Vue CLI plugin](/getting-started/quick-start#vue-cli-install) have this enabled by default.
 
@@ -25,7 +25,7 @@ Keeping track of all the components you're using can be a real chore. The [vueti
 
 ### Importing from lib
 
-In order to take advantage of a-la-carte components, you must import Vuetify from **vuetify/lib**.
+In order to use treeshaking, you must import Vuetify from **vuetify/lib**.
 
 ```js
 // You still need to register Vuetify itself
