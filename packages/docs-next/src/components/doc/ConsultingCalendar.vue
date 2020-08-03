@@ -1,46 +1,24 @@
 <template>
-  <v-row
-    id="consulting"
-    justify="space-between"
-  >
+  <v-row id="consulting-calendar">
     <v-col cols="12">
       <v-lazy>
         <iframe
+          frameBorder="0"
+          height="1000"
           src="https://app.acuityscheduling.com/schedule.php?owner=19002891"
           width="100%"
-          height="1000"
-          frameBorder="0"
         />
       </v-lazy>
     </v-col>
+
+    <ad-script
+      id="acuity"
+      script-id="_acuity"
+      src="//embed.acuityscheduling.com/js/embed.js"
+    />
   </v-row>
 </template>
 
 <script>
-  export default {
-    name: 'ConsultingCalendar',
-
-    mounted () {
-      this.attachScript()
-    },
-
-    methods: {
-      attachScript () {
-        const script = document.createElement('script')
-        script.type = 'text/javascript'
-        script.src = '//embed.acuityscheduling.com/js/embed.js'
-
-        this.$el.append(script)
-      },
-    },
-  }
+  export default { name: 'ConsultingCalendar' }
 </script>
-
-<style lang="sass">
-#consulting
-  .v-list-item
-    height: 32px !important
-
-.booking-container.booking-wrapper
-  width: 100% !important
-</style>

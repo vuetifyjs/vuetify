@@ -1,7 +1,9 @@
 <template>
   <v-menu
+    bottom
     close-delay="100"
     content-class="elevation-0 rounded"
+    left
     max-height="500"
     offset-y
     open-delay="100"

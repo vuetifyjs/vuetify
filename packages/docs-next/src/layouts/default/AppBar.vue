@@ -33,6 +33,8 @@
 
         <guide-link />
 
+        <support-menu />
+
         <app-bar-divider />
 
         <store-link />
