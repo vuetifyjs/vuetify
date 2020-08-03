@@ -12,6 +12,8 @@
       <default-drawer-prepend />
     </template>
 
+    <default-become-a-sponsor />
+
     <keep-alive>
       <default-list
         :key="key"
@@ -31,6 +33,10 @@
     name: 'DefaultDrawer',
 
     components: {
+      DefaultBecomeASponsor: () => import(
+        /* webpackChunkName: "default-become-a-sponsor" */
+        './BecomeASponsor'
+      ),
       DefaultDrawerPrepend: () => import(
         /* webpackChunkName: "default-drawer-prepend" */
         './DrawerPrepend'
