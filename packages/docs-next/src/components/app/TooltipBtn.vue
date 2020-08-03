@@ -15,7 +15,15 @@
             ...$listeners
           }"
         >
-          <v-icon v-text="icon" />
+          <slot
+            v-if="$slots.icon"
+            name="icon"
+          />
+
+          <v-icon
+            v-else
+            v-text="icon"
+          />
         </v-btn>
       </template>
 

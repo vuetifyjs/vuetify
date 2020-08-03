@@ -10,7 +10,6 @@
   >
     <template #activator="{ attrs, on }">
       <app-tooltip-btn
-        icon="$mdiBell"
         path="notifications"
         v-bind="attrs"
         v-on="on"
