@@ -13,7 +13,7 @@ related:
 
 As a component framework, we understand that many projects that utilize Vuetify have development cycles that prevent upgrading to the latest version. In order to provide developers and business peace of mind, we offer **Long-term Support** for the latest _minor_ of the last _major_ release. This means with each _major_ release you can have peace of mind in knowing that for **12 months** after a new major release, your existing version will be updated for critical bugs and security vulnerabilities.
 
-<entry-ad />
+<promoted-ad slug="business-support" />
 
 ## Vuetify 2.0
 
