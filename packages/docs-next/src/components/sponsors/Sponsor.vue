@@ -1,5 +1,6 @@
 <template>
   <v-card
+    v-if="value"
     :aria-label="value.metadata.name"
     :href="value.metadata.href"
     :ripple="false"

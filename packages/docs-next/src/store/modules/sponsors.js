@@ -11,19 +11,19 @@ const state = {
 const mutations = make.mutations(state)
 
 const actions = {
-  fetch: async ({ commit, state }) => {
+  fetch: async ({ commit }) => {
     const { objects: items } = await bucket.getObjects({
       type: 'sponsors',
       props: 'slug,title,metadata',
       sort: 'created_at',
     })
 
-    commit('all', items)
+    commit('all', items || [])
   },
 }
 
 const getters = {
-  byTier: (state, getters) => {
+  byTier: (state) => {
     const tiers = {}
 
     for (const sponsor of state.all) {
