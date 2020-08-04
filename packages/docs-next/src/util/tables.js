@@ -10,6 +10,8 @@ function genTableHeader (headers) {
   const dividerLine = []
 
   for (const header of headers) {
+    if (header === 'source' && IS_PROD) continue
+
     headerLine.push(`${capitalize(header)}`)
     dividerLine.push('---')
   }
