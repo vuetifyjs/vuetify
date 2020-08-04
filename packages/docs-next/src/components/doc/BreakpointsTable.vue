@@ -1,5 +1,5 @@
 <template>
-  <sheet class="mb-12 overflow-hidden">
+  <app-sheet class="mb-12 overflow-hidden">
     <v-simple-table>
       <i18n
         class="pa-4"
@@ -92,7 +92,7 @@
         </tr>
       </tfoot>
     </v-simple-table>
-  </sheet>
+  </app-sheet>
 </template>
 
 <script>
